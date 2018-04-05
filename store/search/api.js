@@ -1,0 +1,3 @@
+const getSearchResultsApi = () => {}
+
+export { getSearchResultsApi };

@@ -1,0 +1,20 @@
+import Head from './head'
+import Link from 'next/link'
+
+
+const Nav = () => (
+  <nav>
+    <ul>
+      <li>
+        <Link prefetch href="/">
+          <a>Home</a>
+        </Link>
+      </li>
+      <ul>
+        {/*add links*/}
+      </ul>
+    </ul>
+  </nav>
+)
+
+export default Nav
