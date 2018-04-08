@@ -25,7 +25,7 @@ export default class Error extends React.Component {
     }
 
     const statusCode = (res && res.statusCode) || (xhr && xhr.status) || null;
-    return { statusCode, res };
+    return { statusCode };
   }
 
   static propTypes = {

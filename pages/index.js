@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import withRedux from 'next-redux-wrapper';
 import makeStore from '../store';
-import { getSearchResults } from '../store/search/actions';
+import { actionCreaters }  from '../store/search';
 
 class Page extends Component {
   static async getInitialProps({ store }) {
-    await store.dispatch(getSearchResults());
+    await store.dispatch(actionCreaters.getSearchResults());
   }
   
   render() {
@@ -28,7 +28,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      getSearchResults: getSearchResults,
+      getSearchResults: actionCreaters.getSearchResults,
     },
     dispatch,
   );

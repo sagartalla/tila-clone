@@ -1,10 +1,16 @@
 import { getSearchResultsApi } from './api';
 
+const actions = {
+  GET_SEARCH_RESULTS: 'GET_SEARCH_RESULTS',
+};
 
-export const GET_SEARCH_RESULTS = 'GET_SEARCH_RESULTS';
+const actionCreaters = {
+  getSearchResults: params => ({
+    type: actions.GET_SEARCH_RESULTS,
+    payload: getSearchResultsApi(params),
+  })
+};
 
-export const getSearchResults = params => ({
-  type: GET_SEARCH_RESULTS,
-  payload: getSearchResultsApi(params),
-});
+
+export { actions, actionCreaters };
 
