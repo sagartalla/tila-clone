@@ -3,6 +3,8 @@ import { bindActionCreators } from 'redux';
 import withRedux from 'next-redux-wrapper';
 import makeStore from '../store';
 import { actionCreaters }  from '../store/search';
+import Layout from '../layout/main';
+import Search from '../components/Search';
 
 class Page extends Component {
   static async getInitialProps({ store }) {
@@ -12,8 +14,9 @@ class Page extends Component {
   render() {
     return (
       <div>
-        <div>Prop from Redux</div>
-        <div>Prop from getInitialProps {this.props.custom}</div>
+        <Layout>
+          <Search />
+        </Layout>
       </div>
     );
   }
@@ -21,7 +24,7 @@ class Page extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    allState: state
+    allState: state,
   };
 };
 
