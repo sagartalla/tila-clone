@@ -1,29 +1,43 @@
 .header-container {
-    display block
-    height 50px
-    padding-top: 10px;
+  display block
+  height 50px
+  padding-top 10px
 }
 
 .search-input
-    height 50px
-    width 100%
-    background #eee
-    border-radius 25px
+  height 50px
+  width 100%
+  background #eee
+  border-radius 25px
+  outline none
+  padding 10px 20px
+  font-size 20px
+  &[contenteditable=true]
+    color #ccc
+    white-space: nowrap;
+    overflow: hidden;
+    &:empty:before
+      content attr(placeholder)
+      display block /* For Firefox */
+  br
+    display:none;
+  *
+    display:inline;
+    white-space:nowrap;
 
 .actionbar-wrapper
-    .action-item 
-        width 50px
-        height 50px
-        border-radius 50%
-        display inline-block
-        box-shadow 0 0 3px 1px
-        margin 0 5px
+  .action-item 
+    width 50px
+    height 50px
+    border-radius 50%
+    display inline-block
+    box-shadow 0 0 3px 1px
+    margin 0 5px
 
 nav 
-    ul
-        padding: 0;
-        li
-            float left
-            margin 10px
-            list-style none
-
+  ul
+    padding 0
+    li
+      float left
+      margin 10px
+      list-style none

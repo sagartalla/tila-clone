@@ -1,6 +1,6 @@
 import { Grid } from 'react-bootstrap';
 import HeaderBar from '../HeaderBar/index';
-import './search.styl';
+import styles from './search.styl';
 import CategoriesAndFacets from './CategoriesAndFacets';
 import SearchResults from "./SearchResults";
 
@@ -8,12 +8,12 @@ const Search = () => (
     <div>
         <HeaderBar />
         <Grid>
-            <div>
+            <div className={styles['filter-panel']}>
                 <div>
                     <CategoriesAndFacets />
                 </div>
             </div>
-            <div>
+            <div className={styles['search-results']}>
                 <div>
                     <SearchResults />
                 </div>

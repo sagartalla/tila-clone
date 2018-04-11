@@ -2,15 +2,23 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import withRedux from 'next-redux-wrapper';
 import makeStore from '../store';
-import { actionCreaters }  from '../store/search';
+import { actionCreaters } from '../store/search';
 import Layout from '../layout/main';
 import Search from '../components/Search';
 
 class Page extends Component {
   static async getInitialProps({ store }) {
-    await store.dispatch(actionCreaters.getSearchResults());
+    await store.dispatch(actionCreaters.getSearchResults({
+      categoryId: 2,
+      country: 'UAE',
+      pageSize: 100,
+      query: 'mobile',
+      language: 'en',
+      customFilters: {},
+      pageNum: 1,
+    }));
   }
-  
+
   render() {
     return (
       <div>

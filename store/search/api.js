@@ -1,16 +1,23 @@
 import { searchServiceInstance } from '../helper/services';
 
-const getSearchResultsApi = () =>
-  searchServiceInstance.post('/search', {
+const getSearchResultsApi = ({categoryId, country, pageSize, query, language, customFilters, pageNum}) => {
+  const data = {
     "categoryFilter": {
-      "id": 2
+      "id": categoryId
     },
-    "country": "UAE",
-    "customFilters": {},
-    "language": "en",
-    "pageNum": 1,
-    "pageSize": 100,
-    "query": "mobile"
+    country,
+    customFilters,
+    language,
+    pageNum,
+    pageSize,
+    query,
+  };
+  return searchServiceInstance.post('/search', data).then(({data}) => {
+    data.paginationDetails = {
+      pageSize,
+      pageNum,
+    }
+    return { data };
   })
-
+}
 export { getSearchResultsApi };
