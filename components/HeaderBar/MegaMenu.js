@@ -17,7 +17,7 @@ const MegaMenu = () => (
       <ul>
         {
           ['Electronics', 'Fashion', 'Home & Living', 'Beauty & Fragrance', 'Baby Products', 'Books & More'].map((item) => (
-            <li>
+            <li key={item}>
               <Link prefetch href="/">
                 <a className={styles['level-1-item']}>{item}</a>
               </Link>

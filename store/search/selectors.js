@@ -59,4 +59,8 @@ const getPaginationDetails = (store) => {
   };
 }
 
-export { getSearchFilters, getSearchResutls, getPaginationDetails };
+const getUIState = (store) => {
+  return store.searchReducer.ui;
+}
+
+export { getSearchFilters, getSearchResutls, getPaginationDetails, getUIState };

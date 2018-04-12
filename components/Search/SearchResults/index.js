@@ -1,53 +1,68 @@
+import React, { Component } from "react";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import InfiniteScroll from 'react-infinite-scroller';
+import _ from 'lodash'
 import { selectors } from '../../../store/search';
 import Product from "./Product";
+import { actionCreaters } from '../../../store/search';
 import styles from '../search.styl';
 
-const SearchReuslts = ({ pagiantionDetails, results }) => {
-  const items = results.items.map((item) => {
-    return <Product key={item.id} {...item} />;
-  });
-
-  const loadMore = () => {
-    console.log('loadMore', arguments);
+class SearchReuslts extends Component {
+  
+  constructor(props) {
+    super(props);
+    this.loadMore = this.loadMore.bind(this);
   }
 
-  const hasMore = () => {
-    const { pageSize, pageNum } = pagiantionDetails;
-    const { items, totalCount } = results;
-    return ((pageNum - 1) * pageSize + items.length) !== totalCount
+  async loadMore(){
+    if (!this.props.pagiantionDetails.hasMore){
+      return;
+    }
+    const { pageNum } = this.props.pagiantionDetails;
+    const loadMore = true;
+    await this.props.getSearchResults({
+      pageNum: pageNum + 1
+    }, loadMore);
   }
 
-  return (
-    <div>
-      <div className={styles['meta-info']}>{results.totalCount} no of items found</div>
-      <InfiniteScroll
-        pageStart={0}
-        loadMore={() => {
-          console.log('load more');
-        }}
-        hasMore={hasMore()}
-        loader={<div className={styles['loader']} key={0}>Loading ...</div>}
-        className={styles['grid-cont']}
-      >
-        {items}
-      </InfiniteScroll>
-    </div>
-  )
+  shouldComponentUpdate(nextProps) {
+    return !nextProps.ui.loading
+  }
 
+  render() {
+    const { results, pagiantionDetails } = this.props;
+    console.log('render');
+    return (
+      <div>
+        <div className={styles['meta-info']}>{results.totalCount} no of items found</div>
+        <InfiniteScroll
+          initialLoad={false}
+          pageStart={0}
+          loadMore={this.loadMore}
+          hasMore={pagiantionDetails.hasMore}
+          loader={<div className={styles['loader']} key={0}>Loading ...</div>}
+          className={styles['grid-cont']}
+        >
+          {results.items.map((item) => <Product key={item.id} {...item} />)}
+        </InfiniteScroll>
+      </div>
+    );
+  }
 }
 
 
 const mapStateToProps = (store) => ({
   results: selectors.getSearchResutls(store),
   pagiantionDetails: selectors.getPaginationDetails(store),
+  ui: selectors.getUIState(store)
 });
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
-    {},
+    {
+      getSearchResults: actionCreaters.getSearchResults,
+    },
     dispatch,
   );
 
