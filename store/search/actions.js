@@ -10,6 +10,9 @@ const actionCreaters = {
       type: actions.GET_SEARCH_RESULTS,
       payload: getSearchResultsApi(params),
     });
+  },
+  getSearchResultsFromQuery: params => (dispatch, getState) => {
+    debugger
   }
 };  
 

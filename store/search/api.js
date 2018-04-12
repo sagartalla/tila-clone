@@ -16,7 +16,16 @@ const getSearchResultsApi = ({categoryId, country, pageSize, query, language, cu
     data.paginationDetails = {
       pageSize,
       pageNum,
-    }
+    };
+    data.searchDetails = {
+      query,
+      country,
+      language,
+      customFilters,
+      categoryFilter: {
+        "id": categoryId
+      },
+    };
     return { data };
   })
 }

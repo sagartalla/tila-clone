@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import React, { Component } from 'react';
 import styles from './header.styl';
-
+import { actionCreaters } from '../../store/search';
 
 class Search extends Component {
 
@@ -11,10 +11,13 @@ class Search extends Component {
     this.state = {};
     this.submitQuery = this.submitQuery.bind(this);
     this.onChangeSearchInput = this.onChangeSearchInput.bind(this)
+    debugger;
   }
 
   submitQuery() {
-    
+    this.props.getSearchResultsFromQuery({
+      query: this.state.query
+    });
   }
 
   onChangeSearchInput(e) {
@@ -23,17 +26,19 @@ class Search extends Component {
     });
   }
 
+
   render() {
     return (
       <div className={styles['search-wrapper']}>
-        <div
+        <input
           className={styles['search-input']}
-          contentEditable
+          // contentEditable
           placeholder="Search your fav item..."
           onChange={this.onChangeSearchInput}
           value={this.state.query}
-        ></div>
-        <span className={styles['search-btn']} onClick={this.submitQuery}>Search</span>
+        />
+        {/* <button className={styles['search-btn']} onClick={this.submitQuery}>Search</button> */}
+        <button className={styles['search-btn']} onClick={this.submitQuery}>Search</button>
       </div>
     )
   }
@@ -46,7 +51,9 @@ const mapStateToProps = (store) => ({
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
-    {},
+    {
+      getSearchResultsFromQuery: actionCreaters.getSearchResultsFromQuery,
+    },
     dispatch,
   );
 

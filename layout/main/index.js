@@ -1,9 +1,9 @@
 import styles from './main.styl';
 
-const Page = ({children}) => (
+const Layout = ({children}) => (
     <div>
         {children}
     </div>
 );
 
-export default Page;
+export default Layout;

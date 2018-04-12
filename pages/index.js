@@ -7,7 +7,7 @@ import Layout from '../layout/main';
 import Search from '../components/Search';
 
 class Page extends Component {
-  static async getInitialProps({ store }) {
+  static async getInitialProps({ store, isServer }) {
     await store.dispatch(actionCreaters.getSearchResults({
       categoryId: 2,
       country: 'UAE',
@@ -17,6 +17,7 @@ class Page extends Component {
       customFilters: {},
       pageNum: 1,
     }));
+    return { isServer };
   }
 
   render() {
