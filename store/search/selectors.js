@@ -5,15 +5,16 @@ const getSearchFilters = (store) => {
   if (store.searchReducer.data.categoryFilter) {
     filters = store.searchReducer.data.categoryFilter.parentCategories.reduce((filters, item) => {
       return filters.concat({
-        name: 'Category',
-        id: 'category',
-        children: [{
           name: item.name,
           id: item.id,
           children: item.childCategories,
-        }]
-      })
+        })
     }, filters);
+    filters = [{
+      name: 'Category',
+      id: 'category',
+      children: filters,
+    }];
   }
   if (store.searchReducer.data.facetResponse){
     filters = store.searchReducer.data.facetResponse.facets.reduce((filters, item) => {
