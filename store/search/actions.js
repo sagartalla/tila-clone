@@ -5,12 +5,13 @@ const actions = {
 };
 
 const actionCreaters = {
-  getSearchResults: params => ({
-    type: actions.GET_SEARCH_RESULTS,
-    payload: getSearchResultsApi(params),
-  })
-};
-
+  getSearchResults: params => (dispatch, getState) => {
+    return dispatch({
+      type: actions.GET_SEARCH_RESULTS,
+      payload: getSearchResultsApi(params),
+    });
+  }
+};  
 
 export { actions, actionCreaters };
 

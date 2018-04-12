@@ -3,27 +3,40 @@
   height 50px
   padding-top 10px
 }
+.search-wrapper
+  position relative
+  .search-input
+    height 50px
+    width 100%
+    background #eee
+    border-radius 25px
+    outline none
+    padding 10px 20px
+    font-size 20px
+    &[contenteditable=true]
+      color #ccc
+      white-space: nowrap;
+      overflow: hidden;
+      &:empty:before
+        content attr(placeholder)
+        display block /* For Firefox */
+    br
+      display:none;
+    *
+      display:inline;
+      white-space:nowrap;
 
-.search-input
-  height 50px
-  width 100%
-  background #eee
-  border-radius 25px
-  outline none
-  padding 10px 20px
-  font-size 20px
-  &[contenteditable=true]
-    color #ccc
-    white-space: nowrap;
-    overflow: hidden;
-    &:empty:before
-      content attr(placeholder)
-      display block /* For Firefox */
-  br
-    display:none;
-  *
-    display:inline;
-    white-space:nowrap;
+  .search-btn
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: #bbb;
+    display: block;
+    height: 50px;
+    border-radius: 25px;
+    padding: 11px 15px;
+    font-size: 20px;
+    cursor: pointer;
 
 .actionbar-wrapper
   .action-item 

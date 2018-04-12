@@ -33,22 +33,30 @@ const getSearchFilters = (store) => {
 };
 
 const getSearchResutls = (store) => {
-  const resutls = {};
-  resutls.totalCount = store.searchReducer.data.productResponse.noOfProducts;
-  resutls.items = store.searchReducer.data.productResponse.products.map((product) => {
-    return {
-      id: product.id,
-      media: product.attributes.media_unrestricted_images,
-      productId: product.attributes.productId,
-      displayName: product.attributes.calculated_display_name,
-      variants: product.variants
-    };
-  });
+  const resutls = {
+    totalCount: 0,
+    items: [],
+  };
+  if (store.searchReducer.data.productResponse) {
+    resutls.totalCount = store.searchReducer.data.productResponse.noOfProducts;
+    resutls.items = store.searchReducer.data.productResponse.products.map((product) => {
+      return {
+        id: product.id,
+        media: product.attributes.media_unrestricted_images,
+        productId: product.attributes.productId,
+        displayName: product.attributes.calculated_display_name,
+        variants: product.variants
+      };
+    });
+  }
   return resutls;
 }
 
 const getPaginationDetails = (store) => {
-  return store.searchReducer.data.paginationDetails
+  return store.searchReducer.data.paginationDetails || {
+    pageSize:0,
+    pageNum: 0,
+  };
 }
 
 export { getSearchFilters, getSearchResutls, getPaginationDetails };
