@@ -5,10 +5,14 @@ const initialState = {
   ui: {
     loading: false,
   },
-  data: {},
+  data: {
+    data: {
+      searchDetails: {},
+      paginationDetails: {}
+    }
+  },
   error: {},
 };
-
 const searchReducer = typeToReducer({
   [actions.GET_SEARCH_RESULTS]: {
     PENDING: state => Object.assign({}, state, { ui: { loading: true }}),

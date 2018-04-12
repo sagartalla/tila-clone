@@ -10,12 +10,12 @@ class Search extends Component {
     super(props);
     this.state = {};
     this.submitQuery = this.submitQuery.bind(this);
-    this.onChangeSearchInput = this.onChangeSearchInput.bind(this)
-    debugger;
+    this.onChangeSearchInput = this.onChangeSearchInput.bind(this);
   }
 
-  submitQuery() {
-    this.props.getSearchResultsFromQuery({
+  submitQuery(e) {
+    e.preventDefault();
+    this.props.getSearchResults({
       query: this.state.query
     });
   }
@@ -30,15 +30,15 @@ class Search extends Component {
   render() {
     return (
       <div className={styles['search-wrapper']}>
-        <input
-          className={styles['search-input']}
-          // contentEditable
-          placeholder="Search your fav item..."
-          onChange={this.onChangeSearchInput}
-          value={this.state.query}
-        />
-        {/* <button className={styles['search-btn']} onClick={this.submitQuery}>Search</button> */}
-        <button className={styles['search-btn']} onClick={this.submitQuery}>Search</button>
+        <form onSubmit={this.submitQuery}>
+          <input
+            className={styles['search-input']}
+            placeholder="Search your fav item..."
+            onChange={this.onChangeSearchInput}
+            value={this.state.query}
+          />
+          <button type="submit" className={styles['search-btn']}>Search</button>
+        </form>
       </div>
     )
   }
@@ -52,7 +52,7 @@ const mapStateToProps = (store) => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      getSearchResultsFromQuery: actionCreaters.getSearchResultsFromQuery,
+      getSearchResults: actionCreaters.getSearchResults,
     },
     dispatch,
   );
