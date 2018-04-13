@@ -1,10 +1,8 @@
 import { searchServiceInstance } from '../helper/services';
 
-const getSearchResultsApi = ({categoryId, country, pageSize, query, language, customFilters, pageNum}) => {
+const getSearchResultsApi = ({ categoryFilter, country, pageSize, query, language, customFilters, pageNum }) => {
   const data = {
-    "categoryFilter": {
-      "id": categoryId
-    },
+    categoryFilter,
     country,
     customFilters,
     language,
@@ -26,9 +24,7 @@ const getSearchResultsApi = ({categoryId, country, pageSize, query, language, cu
       country,
       language,
       customFilters,
-      categoryFilter: {
-        "id": categoryId
-      },
+      categoryFilter,
     };
     return { data };
   })

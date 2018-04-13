@@ -9,7 +9,7 @@ import Search from '../components/Search';
 class Page extends Component {
   static async getInitialProps({ store, isServer }) {
     await store.dispatch(actionCreaters.getSearchResults({
-      categoryId: 2,
+      categoryFilter: {},
       country: 'UAE',
       pageSize: 100,
       query: 'mobile',
