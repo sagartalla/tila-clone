@@ -1,0 +1,7 @@
+{
+    "uid": "store-front",
+    "append": true,
+    "watch": true,
+    "script": "server.js",
+    "sourceDir": "/Users/sagar/Desktop/fp-tech/repos/store-front"
+}

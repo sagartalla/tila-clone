@@ -1,19 +1,20 @@
+import { Link } from '../../../routes';
 const LinkFacet = ({ filter }) => {
-  console.log(filter);
   return (
     <li>
       <div>{filter.name}</div>
       <ul>
         {
           filter.children.map((category) => {
+            console.log(category);
             return (<li key={category.id}>
-              <a>{category.name}</a>
+              <Link route=''>{category.name}</Link>
               <ul>
                 {
                   category.children.map((subcategory) => {
                     return (
                       <li key={subcategory.id}>
-                        <a>{subcategory.name}</a>
+                        <Link route=''>{subcategory.name}</Link>
                       </li>
                     )
                   })

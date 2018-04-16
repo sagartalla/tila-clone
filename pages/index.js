@@ -7,7 +7,8 @@ import Layout from '../layout/main';
 import Search from '../components/Search';
 
 class Page extends Component {
-  static async getInitialProps({ store, isServer }) {
+  static async getInitialProps({ store, isServer, query }) {
+    console.log(query);
     await store.dispatch(actionCreaters.getSearchResults({
       categoryFilter: {},
       country: 'UAE',
@@ -24,7 +25,7 @@ class Page extends Component {
     return (
       <div>
         <Layout>
-          <Search />
+          <Search query={this.props.url.query}/>
         </Layout>
       </div>
     );
