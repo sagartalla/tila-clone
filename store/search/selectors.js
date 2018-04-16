@@ -1,4 +1,5 @@
 import shortid from 'shortid';
+import _ from 'lodash';
 
 const getSearchFilters = (store) => {
   const filters = {
@@ -66,4 +67,14 @@ const getUIState = (store) => {
   return store.searchReducer.ui;
 }
 
-export { getSearchFilters, getSearchResutls, getPaginationDetails, getUIState };
+const getCategoryId = (store, query) => {
+  const state = store.getState();
+  const category = _.find(state.searchReducer.data.categoryFilter.parentCategories, { canonicalId: query.category })
+  if (query.subCategory){
+    const subCategory = _.find(category.childCategories, {canonicalId: query.subCategory})
+    return subCategory.id;
+  }
+  return category.id;
+}
+
+export { getSearchFilters, getSearchResutls, getPaginationDetails, getUIState, getCategoryId };
