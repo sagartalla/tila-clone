@@ -1,12 +1,14 @@
 import shortid from 'shortid';
 
 const getSearchFilters = (store) => {
-  const filters = {};
+  const filters = {
+    category: [],
+    facets: [],
+  };
   if (store.searchReducer.data.categoryFilter) {
     let categoryFilter = store.searchReducer.data.categoryFilter.parentCategories.reduce((filters, item) => {
       return filters.concat({
-          name: item.name,
-          id: item.id,
+          ...item,
           children: item.childCategories,
         })
     }, []);

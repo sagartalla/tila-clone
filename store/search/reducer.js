@@ -40,7 +40,7 @@ const searchReducer = typeToReducer({
       return newState;
     },
     REJECTED: (state, action) => {
-      Object.assign({}, state, { error: action.payload.message, ui: { loading: false } })
+      return Object.assign({}, state, { error: action.payload.message, ui: { loading: false } })
     },
   },
   [actions.GET_SEARCH_RESULTS]: {

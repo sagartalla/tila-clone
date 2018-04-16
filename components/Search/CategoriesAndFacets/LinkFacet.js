@@ -6,15 +6,14 @@ const LinkFacet = ({ filter }) => {
       <ul>
         {
           filter.children.map((category) => {
-            console.log(category);
             return (<li key={category.id}>
-              <Link route=''>{category.name}</Link>
+              <Link route={`/${category.canonicalId}`}>{category.name}</Link>
               <ul>
                 {
                   category.children.map((subcategory) => {
                     return (
                       <li key={subcategory.id}>
-                        <Link route=''>{subcategory.name}</Link>
+                        <Link route={`/${category.canonicalId}/${subcategory.canonicalId}`}>{subcategory.name}</Link>
                       </li>
                     )
                   })

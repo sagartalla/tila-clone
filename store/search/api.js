@@ -1,4 +1,6 @@
+import _ from 'lodash';
 import { searchServiceInstance } from '../helper/services';
+
 
 const getSearchResultsApi = ({ categoryFilter, country, pageSize, query, language, customFilters, pageNum }) => {
   const data = {
@@ -11,6 +13,14 @@ const getSearchResultsApi = ({ categoryFilter, country, pageSize, query, languag
     query,
   };
   return searchServiceInstance.post('/search', data).then(({data}) => {
+    if(data.categoryFilter){
+      data.categoryFilter.parentCategories.forEach((parentCategory) => {
+        parentCategory.canonicalId = _.kebabCase(parentCategory.name);
+        parentCategory.childCategories.forEach((childCategory) => {
+          childCategory.canonicalId = _.kebabCase(childCategory.name)
+        });
+      });
+    }
     const { products, noOfProducts } = data.productResponse;
     const hasMore = ((pageNum - 1) * pageSize + products.length) !== noOfProducts;
 
