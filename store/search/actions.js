@@ -12,7 +12,6 @@ const actionCreaters = {
     const data = Object.assign({}, state.searchReducer.data.searchDetails, state.searchReducer.data.paginationDetails, loadMore ? {} : { pageNum: 1 }, params);
     return dispatch({
       type: loadMore ? actions.GET_MORE_RESULTS : actions.GET_SEARCH_RESULTS,
-      // type: actions.GET_SEARCH_RESULTS,
       payload: getSearchResultsApi(data),
     });
   }

@@ -1,23 +1,23 @@
 import shortid from 'shortid';
 
 const getSearchFilters = (store) => {
-  let filters = [];
+  const filters = {};
   if (store.searchReducer.data.categoryFilter) {
-    filters = store.searchReducer.data.categoryFilter.parentCategories.reduce((filters, item) => {
+    let categoryFilter = store.searchReducer.data.categoryFilter.parentCategories.reduce((filters, item) => {
       return filters.concat({
           name: item.name,
           id: item.id,
           children: item.childCategories,
         })
-    }, filters);
-    filters = [{
+    }, []);
+    filters.category = [{
       name: 'Category',
       id: 'category',
-      children: filters,
+      children: categoryFilter,
     }];
   }
   if (store.searchReducer.data.facetResponse){
-    filters = store.searchReducer.data.facetResponse.facets.reduce((filters, item) => {
+    filters.facets = store.searchReducer.data.facetResponse.facets.reduce((filters, item) => {
       return filters.concat({
         name: item.attributeDisplayName,
         id: item.Id,
@@ -28,7 +28,7 @@ const getSearchFilters = (store) => {
           param: value.Param,
         })),
       })
-    }, filters);
+    }, []);
   }
   return filters;
 };

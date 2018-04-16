@@ -1,12 +1,23 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { selectors } from '../../../store/search'
-import GenericFilterItem from "./GenericFilterItem";
+import CheckboxFacet from './CheckboxFacet';
+import LinkFacet from './LinkFacet';
 
-const CategoriesAndFacets = ({filters}) => {
-  return filters.map((filter) => {
-    return <GenericFilterItem filter={filter} key={filter.id}/>
-  });
+
+const CategoriesAndFacets = ({ filters }) => {
+  return (<ul>
+    {
+      filters.category.map((filter) => {
+        return <LinkFacet filter={filter} key={filter.id} />
+      })
+    }
+    {
+      filters.facets.map((filter) => {
+        return <CheckboxFacet filter={filter} key={filter.id} />
+      })
+    }
+  </ul>);
 };
 
 const mapStateToProps = (store) => ({
