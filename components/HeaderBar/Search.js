@@ -15,9 +15,10 @@ class Search extends Component {
 
   submitQuery(e) {
     e.preventDefault();
+    const flushFilters = true;
     this.props.getSearchResults({
       query: this.state.query
-    });
+    }, null, flushFilters);
   }
 
   onChangeSearchInput(e) {
