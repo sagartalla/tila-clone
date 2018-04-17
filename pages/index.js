@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import withRedux from 'next-redux-wrapper';
+import { configureUrlQuery } from 'react-url-query';
+import createHistory from 'history/createBrowserHistory';
 import makeStore from '../store';
 import { actionCreaters } from '../store/search';
 import Layout from '../layout/main';
 import Search from '../components/Search';
 import { selectors } from '../store/search/index';
 
-
 class Page extends Component {
   static async getInitialProps({ store, isServer, query }) {
+    debugger;
     const categoryFilter = {};
     if(query.category) {
       /* redundant call to facets */
@@ -28,12 +30,18 @@ class Page extends Component {
       categoryFilter,
       country: 'UAE',
       pageSize: 100,
-      query: 'mobile',
+      query: query.search,
       language: 'en',
       customFilters: {},
       pageNum: 1,
     }));
     return { isServer };
+  }
+
+  componentDidMount() {
+    const history = createHistory();
+    configureUrlQuery({ history });
+    history.listen(() => this.forceUpdate());
   }
 
   render() {

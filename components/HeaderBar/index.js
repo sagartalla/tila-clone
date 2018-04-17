@@ -1,4 +1,5 @@
 import { Grid, Row, Col} from 'react-bootstrap';
+import NoSSR from 'react-no-ssr';
 
 import Logo from './Logo';
 import Search from './Search';
@@ -13,7 +14,9 @@ const HeaderBar = (props) => (
                 <Logo />
             </Col>
             <Col md={7}>
-                <Search />
+                <NoSSR>
+                    <Search />
+                </NoSSR>
             </Col>
             <Col md={3}>
                 <ActionBar />

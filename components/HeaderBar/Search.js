@@ -1,14 +1,23 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { addUrlProps, UrlQueryParamTypes } from 'react-url-query';
 import styles from './header.styl';
 import { actionCreaters } from '../../store/search';
+import { selectors } from '../../store/search';
+
+const urlPropsQueryConfig = {
+  searchText: { type: UrlQueryParamTypes.string, queryParam: 'search' }
+};
 
 class Search extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      query: props.query
+    };
     this.submitQuery = this.submitQuery.bind(this);
     this.onChangeSearchInput = this.onChangeSearchInput.bind(this);
   }
@@ -16,6 +25,7 @@ class Search extends Component {
   submitQuery(e) {
     e.preventDefault();
     const flushFilters = true;
+    this.props.onChangeSearchText(this.state.query);
     this.props.getSearchResults({
       query: this.state.query
     }, null, flushFilters);
@@ -26,7 +36,6 @@ class Search extends Component {
       query: e.target.value
     });
   }
-
 
   render() {
     return (
@@ -45,9 +54,15 @@ class Search extends Component {
   }
 }
 
+Search.propTypes = {
+  getSearchResults: PropTypes.func,
+  searchText: PropTypes.string,
+  onChangeSearchText: PropTypes.func,
+}
+
   
 const mapStateToProps = (store) => ({
-    // get query from somewhere.
+    query: selectors.getQuery(store)
 });
 
 const mapDispatchToProps = dispatch =>
@@ -58,4 +73,5 @@ const mapDispatchToProps = dispatch =>
     dispatch,
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(Search);
+export default addUrlProps({ urlPropsQueryConfig })(connect(mapStateToProps, mapDispatchToProps)(Search));
+// export default connect(mapStateToProps, mapDispatchToProps)(Search);

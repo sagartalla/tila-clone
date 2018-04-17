@@ -32,7 +32,6 @@ class SearchReuslts extends Component {
 
   render() {
     const { results, pagiantionDetails } = this.props;
-    console.log('render');
     return (
       <div>
         <div className={styles['meta-info']}>{results.totalCount} no of items found</div>

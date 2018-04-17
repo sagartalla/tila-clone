@@ -77,4 +77,8 @@ const getCategoryId = (store, query) => {
   return category.id;
 }
 
-export { getSearchFilters, getSearchResutls, getPaginationDetails, getUIState, getCategoryId };
+const getQuery = (store) => {
+  return store.searchReducer.data.searchDetails.query
+}
+
+export { getSearchFilters, getSearchResutls, getPaginationDetails, getUIState, getCategoryId, getQuery };

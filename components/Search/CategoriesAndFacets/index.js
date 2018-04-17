@@ -14,7 +14,7 @@ const CategoriesAndFacets = ({ filters }) => {
     }
     {
       filters.facets.map((filter) => {
-        return <CheckboxFacet filter={filter} key={filter.id} />
+        return <CheckboxFacet filter={filter} key={filter.id}/>
       })
     }
   </ul>);
