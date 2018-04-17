@@ -27,7 +27,7 @@ const getSearchFilters = (store) => {
         children: item.Values.map((value) => ({
           name: value.attributeValue,
           id: shortid.generate(),
-          count: value.count,
+          count: value.Count,
           param: value.Param,
         })),
       })

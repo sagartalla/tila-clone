@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import withRedux from 'next-redux-wrapper';
-import ReduxQuerySync from 'redux-query-sync';
 import makeStore from '../store';
 import { actionCreaters } from '../store/search';
 import Layout from '../layout/main';

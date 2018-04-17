@@ -1,7 +1,6 @@
 import { Checkbox } from "react-bootstrap";
 
 const CheckboxFacet = ({ filter }) => {
-  console.log(filter);
   return (
     <li>
       <div>{filter.name}</div>
@@ -9,11 +8,11 @@ const CheckboxFacet = ({ filter }) => {
         {
           filter.children.map((childFitler) => {
             return (
-            <Checkbox>
-              <li key={childFitler.id}>
-                {childFitler.name}
-              </li>
-            </Checkbox>
+              <Checkbox key={childFitler.id}>
+                <li>
+                  {childFitler.name}&nbsp;({childFitler.count})
+                </li>
+              </Checkbox>
             );
           })
         }
