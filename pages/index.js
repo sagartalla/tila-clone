@@ -11,7 +11,6 @@ import { selectors } from '../store/search/index';
 
 class Page extends Component {
   static async getInitialProps({ store, isServer, query }) {
-    debugger;
     const categoryFilter = {};
     if(query.category) {
       /* redundant call to facets */
@@ -19,7 +18,7 @@ class Page extends Component {
         categoryFilter,
         country: 'UAE',
         pageSize: 100,
-        query: 'mobile',
+        query: query.search,
         language: 'en',
         customFilters: {},
         pageNum: 1,
