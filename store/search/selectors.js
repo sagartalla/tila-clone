@@ -49,7 +49,7 @@ const getSearchResutls = (store) => {
         media: product.attributes.media_unrestricted_images,
         productId: product.attributes.productId,
         displayName: product.attributes.calculated_display_name,
-        variants: product.variants
+        variants: product.variantListingAdapters
       };
     });
   }
