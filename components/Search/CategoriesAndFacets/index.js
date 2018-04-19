@@ -28,6 +28,7 @@ class CategoriesAndFacets extends Component {
         params[facetName].push(value);
       } else {
         params[facetName].splice(params[facetName].indexOf(value), 1);
+        if (!params[facetName].length) { delete params[facetName]; }
       }
       this.props.onChangeFacets(params);
       this.submitQuery();
