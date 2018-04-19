@@ -12,7 +12,8 @@ import { selectors } from '../store/search/index';
 class Page extends Component {
   static async getInitialProps({ store, isServer, query }) {
     const categoryFilter = {};
-    if(query.category) {
+    let facetFilters = {};
+    if (query.category || query.facets) {
       /* redundant call to facets */
       await store.dispatch(actionCreaters.getSearchResults({
         categoryFilter,
@@ -20,10 +21,12 @@ class Page extends Component {
         pageSize: 100,
         query: query.search,
         language: 'en',
-        customFilters: {},
+        facetFilters: {},
         pageNum: 1,
       }));
-      categoryFilter.id = selectors.getCategoryId(store, query);
+      categoryFilter.id = selectors.getCategoryId(store.getState(), query);
+      facetFilters = selectors.getFacetfilters(store.getState())(JSON.parse(query.facets||'{}'));
+      console.log(facetFilters);
     }
     await store.dispatch(actionCreaters.getSearchResults({
       categoryFilter,
@@ -31,7 +34,7 @@ class Page extends Component {
       pageSize: 100,
       query: query.search,
       language: 'en',
-      customFilters: {},
+      facetFilters,
       pageNum: 1,
     }));
     return { isServer };

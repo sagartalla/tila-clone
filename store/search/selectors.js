@@ -25,6 +25,7 @@ const getSearchFilters = (store) => {
         name: item.attributeDisplayName,
         id: item.Id,
         queryParamName: _.camelCase(item.attributeDisplayName),
+        attributeName: item.attributeName,
         children: item.Values.map((value) => ({
           name: value.attributeValue,
           id: shortid.generate(),
@@ -68,8 +69,7 @@ const getUIState = (store) => {
   return store.searchReducer.ui;
 }
 
-const getCategoryId = (store, query) => {
-  const state = store.getState();
+const getCategoryId = (state, query) => {
   const category = _.find(state.searchReducer.data.categoryFilter.parentCategories, { canonicalId: query.category })
   if (query.subCategory){
     const subCategory = _.find(category.childCategories, {canonicalId: query.subCategory})
@@ -82,4 +82,26 @@ const getQuery = (store) => {
   return store.searchReducer.data.searchDetails.query
 }
 
-export { getSearchFilters, getSearchResutls, getPaginationDetails, getUIState, getCategoryId, getQuery };
+const getFacetfilters = (store) => (queryObject) => {
+  // const facetFilters = {};
+  // console.log(store, queryObject);
+  // const facetFilters = _.reduce(queryObject, (facetFilters, fitlerTypeValues, fitlerTypeKey) => {
+  //   facetFilters = facetFilters.concat(fitlerTypeValues.map((fitlerTypeValue) => {
+  //     const param = _.find(_.find(store.searchReducer.data.facetResponse.facets, { attributeName: fitlerTypeKey }).Values, { attributeValue: fitlerTypeValue }).Param;
+  //     const [key, value] = param.split(':')
+  //     return { [key]: value.trim().replace(/\"/g, '')};
+  //   }));
+  //   return facetFilters
+  // }, []);
+
+  const facetFilters = _.reduce(queryObject, (facetFilters, fitlerTypeValues, fitlerTypeKey) => {
+    facetFilters[fitlerTypeKey] = fitlerTypeValues.map((fitlerTypeValue) => {
+      return _.find(_.find(store.searchReducer.data.facetResponse.facets, { attributeName: fitlerTypeKey }).Values, { attributeValue: fitlerTypeValue }).Param
+    });
+    return facetFilters;
+  }, {});
+  return facetFilters;
+}
+
+
+export { getSearchFilters, getSearchResutls, getPaginationDetails, getUIState, getCategoryId, getQuery, getFacetfilters };
