@@ -15,9 +15,9 @@ class CheckboxFacet extends Component {
     return (e) => {
       let newSelectedItem = [...this.state.selectedItems];
       if(e.target.checked) { 
-        newSelectedItem.push(value); 
+        newSelectedItem.push(value.name); 
       } else { 
-        newSelectedItem.splice(newSelectedItem.indexOf(value), 1) 
+        newSelectedItem.splice(newSelectedItem.indexOf(value.name), 1) 
       };
       this.setState({
         selectedItems: newSelectedItem
@@ -36,7 +36,7 @@ class CheckboxFacet extends Component {
           {
             filter.children.map((childFitler) => {
               return (
-                <Checkbox key={childFitler.id} onChange={this.onChangeItem(childFitler.name)} checked={selectedItems.indexOf(childFitler.name) != -1}>
+                <Checkbox key={childFitler.id} onChange={this.onChangeItem({name: childFitler.name, param: childFitler.param})} checked={selectedItems.indexOf(childFitler.name) != -1}>
                   <li>
                     {childFitler.name}&nbsp;({childFitler.count})
                   </li>

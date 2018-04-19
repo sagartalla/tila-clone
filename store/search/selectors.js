@@ -70,6 +70,7 @@ const getUIState = (store) => {
 }
 
 const getCategoryId = (state, query) => {
+  //not used for now. May be required when we have a different service for facets.
   const category = _.find(state.searchReducer.data.categoryFilter.parentCategories, { canonicalId: query.category })
   if (query.subCategory){
     const subCategory = _.find(category.childCategories, {canonicalId: query.subCategory})
@@ -83,20 +84,10 @@ const getQuery = (store) => {
 }
 
 const getFacetfilters = (store) => (queryObject) => {
-  // const facetFilters = {};
-  // console.log(store, queryObject);
-  // const facetFilters = _.reduce(queryObject, (facetFilters, fitlerTypeValues, fitlerTypeKey) => {
-  //   facetFilters = facetFilters.concat(fitlerTypeValues.map((fitlerTypeValue) => {
-  //     const param = _.find(_.find(store.searchReducer.data.facetResponse.facets, { attributeName: fitlerTypeKey }).Values, { attributeValue: fitlerTypeValue }).Param;
-  //     const [key, value] = param.split(':')
-  //     return { [key]: value.trim().replace(/\"/g, '')};
-  //   }));
-  //   return facetFilters
-  // }, []);
-
   const facetFilters = _.reduce(queryObject, (facetFilters, fitlerTypeValues, fitlerTypeKey) => {
     facetFilters[fitlerTypeKey] = fitlerTypeValues.map((fitlerTypeValue) => {
-      return _.find(_.find(store.searchReducer.data.facetResponse.facets, { attributeName: fitlerTypeKey }).Values, { attributeValue: fitlerTypeValue }).Param
+      // return _.find(_.find(store.searchReducer.data.facetResponse.facets, { attributeName: fitlerTypeKey }).Values, { attributeValue: fitlerTypeValue }).Param
+      return fitlerTypeValue.param
     });
     return facetFilters;
   }, {});
