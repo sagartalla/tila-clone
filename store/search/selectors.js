@@ -24,6 +24,7 @@ const getSearchFilters = (store) => {
       return filters.concat({
         name: item.attributeDisplayName,
         id: item.Id,
+        queryParamName: _.camelCase(item.attributeDisplayName),
         children: item.Values.map((value) => ({
           name: value.attributeValue,
           id: shortid.generate(),

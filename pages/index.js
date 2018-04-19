@@ -40,7 +40,6 @@ class Page extends Component {
   componentDidMount() {
     const history = createHistory();
     configureUrlQuery({ history });
-    history.listen(() => this.forceUpdate());
   }
 
   render() {

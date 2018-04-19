@@ -16,7 +16,7 @@ class Search extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      query: props.query
+      query: props.query || ''
     };
     this.submitQuery = this.submitQuery.bind(this);
     this.onChangeSearchInput = this.onChangeSearchInput.bind(this);
@@ -46,7 +46,7 @@ class Search extends Component {
             placeholder="Search your fav item..."
             onChange={this.onChangeSearchInput}
             value={this.state.query}
-          />
+           />
           <button type="submit" className={styles['search-btn']}>Search</button>
         </form>
       </div>
@@ -74,4 +74,3 @@ const mapDispatchToProps = dispatch =>
   );
 
 export default addUrlProps({ urlPropsQueryConfig })(connect(mapStateToProps, mapDispatchToProps)(Search));
-// export default connect(mapStateToProps, mapDispatchToProps)(Search);
