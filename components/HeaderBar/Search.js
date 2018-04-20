@@ -6,6 +6,7 @@ import { addUrlProps, UrlQueryParamTypes } from 'react-url-query';
 import styles from './header.styl';
 import { actionCreaters } from '../../store/search';
 import { selectors } from '../../store/search';
+import { Router } from '../../routes';
 
 const urlPropsQueryConfig = {
   searchText: { type: UrlQueryParamTypes.string, queryParam: 'search' }
@@ -25,7 +26,11 @@ class Search extends Component {
   submitQuery(e) {
     e.preventDefault();
     const flushFilters = true;
-    this.props.onChangeSearchText(this.state.query);
+    Router.pushRoute('/');
+    //handle this withoud settimeout SF-9
+    setTimeout(() => {
+      this.props.onChangeSearchText(this.state.query);  
+    }, 300);
     this.props.getSearchResults({
       query: this.state.query
     }, null, flushFilters);

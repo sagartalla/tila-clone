@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Checkbox } from "react-bootstrap";
+import _ from 'lodash';
 
 class CheckboxFacet extends Component {
   constructor(props){
@@ -36,7 +37,7 @@ class CheckboxFacet extends Component {
           {
             filter.children.map((childFitler) => {
               return (
-                <Checkbox key={childFitler.id} onChange={this.onChangeItem({name: childFitler.name, param: childFitler.param})} checked={selectedItems.indexOf(childFitler.name) != -1}>
+                <Checkbox key={childFitler.id} onChange={this.onChangeItem({ name: childFitler.name, param: childFitler.param })} checked={_.find(selectedItems, { name: childFitler.name})}>
                   <li>
                     {childFitler.name}&nbsp;({childFitler.count})
                   </li>
