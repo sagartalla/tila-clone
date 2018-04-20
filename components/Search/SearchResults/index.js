@@ -3,9 +3,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import InfiniteScroll from 'react-infinite-scroller';
 import _ from 'lodash'
-import { selectors } from '../../../store/search';
 import Product from "./Product";
-import { actionCreaters } from '../../../store/search';
+import { actionCreaters, selectors } from '../../../store/search';
 import styles from '../search.styl';
 
 class SearchReuslts extends Component {

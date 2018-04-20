@@ -4,8 +4,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { addUrlProps, UrlQueryParamTypes } from 'react-url-query';
 import styles from './header.styl';
-import { actionCreaters } from '../../store/search';
-import { selectors } from '../../store/search';
+import { actionCreaters, selectors } from '../../store/search';
 import { Router } from '../../routes';
 
 const urlPropsQueryConfig = {

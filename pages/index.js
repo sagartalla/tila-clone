@@ -4,10 +4,9 @@ import withRedux from 'next-redux-wrapper';
 import { configureUrlQuery } from 'react-url-query';
 import createHistory from 'history/createBrowserHistory';
 import makeStore from '../store';
-import { actionCreaters } from '../store/search';
+import { actionCreaters, selectors } from '../store/search';
 import Layout from '../layout/main';
 import Search from '../components/Search';
-import { selectors } from '../store/search/index';
 
 class Page extends Component {
   static async getInitialProps({ store, isServer, query }) {
@@ -23,6 +22,7 @@ class Page extends Component {
       language: 'en',
       facetFilters,
       pageNum: 1,
+      fl: '*',
     }));
     return { isServer };
   }

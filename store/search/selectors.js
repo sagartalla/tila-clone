@@ -7,12 +7,17 @@ const getSearchFilters = (store) => {
     facets: [],
   };
   if (store.searchReducer.data.categoryFilter) {
-    let categoryFilter = store.searchReducer.data.categoryFilter.parentCategories.reduce((filters, item) => {
-      return filters.concat({
-          ...item,
-          children: item.childCategories,
-        })
-    }, []);
+    const categoryFilter = store
+      .searchReducer
+      .data
+      .categoryFilter
+      .parentCategories
+      .reduce((filters, item) => {
+        return filters.concat({
+            ...item,
+            children: item.childCategories,
+          })
+      }, []);
     filters.category = [{
       name: 'Category',
       id: 'category',

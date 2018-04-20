@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import _ from 'lodash';
 import { decode, encode, addUrlProps, UrlQueryParamTypes, replaceInUrlQuery } from 'react-url-query';
-import { selectors } from '../../../store/search';
-import { actionCreaters } from '../../../store/search';
+import { actionCreaters, selectors } from '../../../store/search';
 
 import CheckboxFacet from './CheckboxFacet';
 import LinkFacet from './LinkFacet';

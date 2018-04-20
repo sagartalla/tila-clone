@@ -1,27 +1,27 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Checkbox } from "react-bootstrap";
+import { Checkbox } from 'react-bootstrap';
 import _ from 'lodash';
 
 class CheckboxFacet extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
-      selectedItems: props.selectedFilters || []
+      selectedItems: props.selectedFilters || [],
     };
     this.onChangeItem = this.onChangeItem.bind(this);
   }
 
   onChangeItem(value) {
     return (e) => {
-      let newSelectedItem = [...this.state.selectedItems];
-      if(e.target.checked) { 
-        newSelectedItem.push(value.name); 
-      } else { 
-        newSelectedItem.splice(newSelectedItem.indexOf(value.name), 1) 
-      };
+      const newSelectedItem = [...this.state.selectedItems];
+      if (e.target.checked) {
+        newSelectedItem.push(value.name);
+      } else {
+        newSelectedItem.splice(newSelectedItem.indexOf(value.name), 1);
+      }
       this.setState({
-        selectedItems: newSelectedItem
+        selectedItems: newSelectedItem,
       });
       this.props.onChangeHandle(value, e);
     };
@@ -35,15 +35,17 @@ class CheckboxFacet extends Component {
         <div>{filter.name}</div>
         <ul>
           {
-            filter.children.map((childFitler) => {
-              return (
-                <Checkbox key={childFitler.id} onChange={this.onChangeItem({ name: childFitler.name, param: childFitler.param })} checked={_.find(selectedItems, { name: childFitler.name})}>
-                  <li>
-                    {childFitler.name}&nbsp;({childFitler.count})
-                  </li>
-                </Checkbox>
-              );
-            })
+            filter.children.map((childFitler) => (
+              <Checkbox
+                key={childFitler.id}
+                onChange={this.onChangeItem({ name: childFitler.name, param: childFitler.param })}
+                checked={selectedItems.indexOf(childFitler.name) != -1}
+              >
+                <li>
+                  {childFitler.name}&nbsp;({childFitler.count})
+                </li>
+              </Checkbox>
+            ))
           }
         </ul>
       </li>
@@ -52,11 +54,13 @@ class CheckboxFacet extends Component {
 }
 
 CheckboxFacet.propTypes = {
-  selectedFilters: PropTypes.array
-}
+  selectedFilters: PropTypes.array,
+  onChangeHandle: PropTypes.func.isRequired,
+  filter: PropTypes.object.isRequired,
+};
 
 CheckboxFacet.defaultProps = {
   selectedFilters: []
-}
+};
 
 export default CheckboxFacet;
