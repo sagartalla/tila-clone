@@ -29,7 +29,7 @@ class Search extends Component {
     //handle this withoud settimeout SF-9
     setTimeout(() => {
       this.props.onChangeSearchText(this.state.query);  
-    }, 300);
+    }, 500);
     this.props.getSearchResults({
       query: this.state.query
     }, null, flushFilters);
