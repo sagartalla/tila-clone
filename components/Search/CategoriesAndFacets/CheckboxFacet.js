@@ -39,8 +39,7 @@ class CheckboxFacet extends Component {
               <Checkbox
                 key={childFitler.id}
                 onChange={this.onChangeItem({ name: childFitler.name, param: childFitler.param })}
-                // checked={selectedItems.indexOf(childFitler.name) != -1}
-                checked={_.find(selectedItems, { name: childFitler.name })}
+                checked={selectedItems.indexOf(childFitler.name) != -1}
               >
                 <li>
                   {childFitler.name}&nbsp;({childFitler.count})

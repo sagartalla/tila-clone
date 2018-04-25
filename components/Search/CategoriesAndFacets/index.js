@@ -45,7 +45,9 @@ class CategoriesAndFacets extends Component {
       }
       {
         filters.facets.map((filter) => {
-          return <CheckboxFacet filter={filter} key={filter.id} onChangeHandle={this.onChangeHandle(filter.attributeName)} selectedFilters={facets[filter.attributeName] || []}/>
+          let selectedFilters = facets[filter.attributeName];
+          selectedFilters = selectedFilters ? selectedFilters.map((item) => item.name) : [];
+          return <CheckboxFacet filter={filter} key={filter.id} onChangeHandle={this.onChangeHandle(filter.attributeName)} selectedFilters={selectedFilters}/>
         })
       }
     </ul>);
