@@ -13,7 +13,7 @@ const Search = ({query}) => {
       <Grid>
         <div className={styles['filter-panel']}>
           <NoSSR>
-            <CategoriesAndFacets query={query}/>
+            <CategoriesAndFacets />
           </NoSSR>
         </div>
         <div className={styles['search-results']}>

@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { addUrlProps, UrlQueryParamTypes } from 'react-url-query';
+import { addUrlProps, UrlQueryParamTypes, pushInUrlQuery } from 'react-url-query';
 import styles from './header.styl';
 import { actionCreaters, selectors } from '../../store/search';
 import { Router } from '../../routes';
@@ -25,11 +25,12 @@ class Search extends Component {
   submitQuery(e) {
     e.preventDefault();
     const flushFilters = true;
-    Router.pushRoute('/');
+    // Router.pushRoute('/');
     //handle this withoud settimeout SF-9
-    setTimeout(() => {
-      this.props.onChangeSearchText(this.state.query);  
-    }, 500);
+    // setTimeout(() => {
+    //   this.props.onChangeSearchText(this.state.query);  
+    // }, 500);
+    pushInUrlQuery('search', this.state.query, { url: "/", as: "/", options: {} });
     this.props.getSearchResults({
       query: this.state.query
     }, null, flushFilters);
