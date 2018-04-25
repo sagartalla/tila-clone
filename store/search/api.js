@@ -36,6 +36,7 @@ const getSearchResultsApi = ({ categoryFilter, country, pageSize, query, languag
       language,
       facetFilters,
       categoryFilter,
+      fl,
     };
     return { data };
   })

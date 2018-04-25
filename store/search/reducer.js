@@ -1,6 +1,6 @@
 import typeToReducer from 'type-to-reducer';
 import { actions } from './actions';
-import {actionCreaters} from './index';
+import { actionCreaters } from './index';
 
 const initialState = {
   ui: {
