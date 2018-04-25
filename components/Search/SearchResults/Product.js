@@ -13,7 +13,12 @@ const Product = ({ media=[], productId, displayName, variants }) => {
       </div>
       <div className={styles['desc-cont']}>
         <div className={styles['prdt-name']}>{displayName}</div>
-        <div className={styles['prdt-name-count']}> {variants.length}</div>
+        <div className={styles['prdt-name-count']}> {variants.length} Variants Found </div>
+        <div className={styles['variant-info']}>
+          {
+            variants.map((variant) => <div key={variant.id}>{JSON.stringify(variant.attributes)}</div>)
+          }
+        </div>
       </div>
     </div>
   );

@@ -51,12 +51,25 @@ const getSearchResutls = (store) => {
   if (store.searchReducer.data.productResponse) {
     resutls.totalCount = store.searchReducer.data.productResponse.noOfProducts;
     resutls.items = store.searchReducer.data.productResponse.products.map((product) => {
+      const variantInfo = product.variantListingAdapters.map(v => {
+        const attributesData = {...v.attributes};
+        delete attributesData.type;
+        delete attributesData.variantId;
+        return {
+          ...v,
+          attributes: {
+            ...attributesData
+          }
+        }
+      });
+      delete variantInfo.type;
+      delete variantInfo.variantId;
       return {
         id: product.id,
         media: product.attributes.media_unrestricted_images,
         productId: product.attributes.productId,
         displayName: product.attributes.calculated_display_name,
-        variants: product.variantListingAdapters
+        variants: variantInfo
       };
     });
   }
