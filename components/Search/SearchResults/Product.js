@@ -1,6 +1,8 @@
 // params: { columnIndex, key, rowIndex, style }
+import _ from 'lodash';
 import styles from '../search.styl';
 import { mediaDomain } from '../../../constants';
+
 
 const Product = ({ media=[], productId, displayName, variants }) => {
   const style = {
@@ -13,10 +15,9 @@ const Product = ({ media=[], productId, displayName, variants }) => {
       </div>
       <div className={styles['desc-cont']}>
         <div className={styles['prdt-name']}>{displayName}</div>
-        <div className={styles['prdt-name-count']}> {variants.length} Variants Found </div>
         <div className={styles['variant-info']}>
           {
-            variants.map((variant) => <div key={variant.id}>{JSON.stringify(variant.attributes)}</div>)
+            _.map(variants, (variantValues, key) => <div key={key}>{`${key} : ${variantValues.join(', ')}`}</div>)
           }
         </div>
       </div>

@@ -51,19 +51,23 @@ const getSearchResutls = (store) => {
   if (store.searchReducer.data.productResponse) {
     resutls.totalCount = store.searchReducer.data.productResponse.noOfProducts;
     resutls.items = store.searchReducer.data.productResponse.products.map((product) => {
-      const variantInfo = product.variantListingAdapters.map(v => {
+      const variantInfo = product.variantListingAdapters.reduce((modifiedVaraints, v) => {
         const attributesData = {...v.attributes};
         delete attributesData.type;
         delete attributesData.variantId;
-        return {
-          ...v,
-          attributes: {
-            ...attributesData
-          }
-        }
-      });
-      delete variantInfo.type;
-      delete variantInfo.variantId;
+        // return {
+        //   ...v,
+        //   attributes: {
+        //     ...attributesData
+        //   }
+        // }
+        let modifiedVaraintsCopy = Object.assign(modifiedVaraints);
+        _.forEach(attributesData, (val, key) => {
+          modifiedVaraintsCopy[key] = modifiedVaraintsCopy[key] || [];
+          modifiedVaraintsCopy[key] = modifiedVaraintsCopy[key].concat(val);
+        });
+        return modifiedVaraintsCopy;
+      }, {});
       return {
         id: product.id,
         media: product.attributes.media_unrestricted_images,

@@ -18,7 +18,7 @@ class Page extends Component {
       categoryFilter,
       country: 'UAE',
       pageSize: 100,
-      query: query.search || 'mobile',
+      query: query.search,
       language: 'en',
       facetFilters,
       pageNum: 1,
