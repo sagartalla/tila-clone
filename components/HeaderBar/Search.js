@@ -25,11 +25,6 @@ class Search extends Component {
   submitQuery(e) {
     e.preventDefault();
     const flushFilters = true;
-    // Router.pushRoute('/');
-    //handle this withoud settimeout SF-9
-    // setTimeout(() => {
-    //   this.props.onChangeSearchText(this.state.query);  
-    // }, 500);
     pushInUrlQuery('search', this.state.query, { url: "/", as: "/", options: {} });
     this.props.getSearchResults({
       query: this.state.query
