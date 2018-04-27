@@ -4,9 +4,9 @@ import NoSSR from 'react-no-ssr';
 import HeaderBar from '../HeaderBar/index';
 import styles from './search.styl';
 import CategoriesAndFacets from './CategoriesAndFacets';
-import SearchResults from "./SearchResults";
+import SearchResults from './SearchResults';
 
-const Search = ({query}) => {
+const Search = () => {
   return (
     <div>
       <HeaderBar />
@@ -22,6 +22,6 @@ const Search = ({query}) => {
       </Grid>
     </div>
   );
-}
+};
 
 export default Search;

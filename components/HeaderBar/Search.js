@@ -5,7 +5,6 @@ import React, { Component } from 'react';
 import { addUrlProps, UrlQueryParamTypes, pushInUrlQuery } from 'react-url-query';
 import styles from './header.styl';
 import { actionCreaters, selectors } from '../../store/search';
-import { Router } from '../../routes';
 
 const urlPropsQueryConfig = {
   searchText: { type: UrlQueryParamTypes.string, queryParam: 'search' }
