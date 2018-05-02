@@ -7,7 +7,7 @@ import ActionBar from './ActionBar';
 import MegaMenu from './MegaMenu';
 import styles from './header.styl'
 
-const HeaderBar = (props) => (
+const HeaderBar = props => (
     <Grid className={styles['header-container']}>
         <Row>
             <Col md={2}>
@@ -31,4 +31,3 @@ const HeaderBar = (props) => (
 );
 
 export default HeaderBar;
-

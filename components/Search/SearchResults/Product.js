@@ -32,8 +32,8 @@ const Product = ({
 
 Product.propTypes = {
   media: PropTypes.array.isRequired,
-  displayName: PropTypes.string.isRequired,
-  variants: PropTypes.array.isRequired, 
+  displayName: PropTypes.array.isRequired,
+  variants: PropTypes.object.isRequired, 
 }
 
 

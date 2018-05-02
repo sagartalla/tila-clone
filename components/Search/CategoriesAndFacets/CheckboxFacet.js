@@ -34,11 +34,11 @@ class CheckboxFacet extends Component {
         <div>{filter.name}</div>
         <ul>
           {
-            filter.children.map((childFitler) => (
+            filter.children.map(childFitler => (
               <Checkbox
                 key={childFitler.id}
                 onChange={this.onChangeItem({ name: childFitler.name, param: childFitler.param })}
-                checked={selectedItems.indexOf(childFitler.name) != -1}
+                checked={selectedItems.indexOf(childFitler.name) !== -1}
               >
                 <li>
                   {childFitler.name}&nbsp;({childFitler.count})
@@ -59,7 +59,7 @@ CheckboxFacet.propTypes = {
 };
 
 CheckboxFacet.defaultProps = {
-  selectedFilters: []
+  selectedFilters: [],
 };
 
 export default CheckboxFacet;

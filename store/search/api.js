@@ -12,7 +12,7 @@ const getSearchResultsApi = ({
   pageNum,
   fl,
 }) => {
-  const data = {
+  const options = {
     categoryFilter,
     country,
     facetFilters,
@@ -22,17 +22,17 @@ const getSearchResultsApi = ({
     query,
     fl,
   };
-  return searchServiceInstance.post('/search', data).then(({data}) => {
-    if(data.categoryFilter){
+  return searchServiceInstance.post('/search', options).then(({ data }) => {
+    if (data.categoryFilter) {
       data.categoryFilter.parentCategories.forEach((parentCategory) => {
         parentCategory.canonicalId = _.kebabCase(parentCategory.name);
         parentCategory.childCategories.forEach((childCategory) => {
-          childCategory.canonicalId = _.kebabCase(childCategory.name)
+          childCategory.canonicalId = _.kebabCase(childCategory.name);
         });
       });
     }
     const { products, noOfProducts } = data.productResponse;
-    const hasMore = ((pageNum - 1) * pageSize + products.length) !== noOfProducts;
+    const hasMore = (((pageNum - 1) * pageSize) + products.length) !== noOfProducts;
 
     data.paginationDetails = {
       pageSize,
@@ -48,6 +48,6 @@ const getSearchResultsApi = ({
       fl,
     };
     return { data };
-  })
-}
-export { getSearchResultsApi };
+  });
+};
+export default { getSearchResultsApi };

@@ -1,6 +1,5 @@
 import typeToReducer from 'type-to-reducer';
 import { actions } from './actions';
-import { actionCreaters } from './index';
 
 const initialState = {
   ui: {
@@ -10,7 +9,7 @@ const initialState = {
     searchDetails: {},
     paginationDetails: {},
     productResponse: {
-      products:[]
+      products: []
     }
   },
   error: {},
