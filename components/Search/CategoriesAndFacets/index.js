@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import _ from 'lodash';
-import { decode, encode, addUrlProps, UrlQueryParamTypes, replaceInUrlQuery } from 'react-url-query';
+import { decode, encode, addUrlProps, replaceInUrlQuery } from 'react-url-query';
 import { actionCreaters, selectors } from '../../../store/search';
 
 import CheckboxFacet from './CheckboxFacet';
@@ -13,10 +13,6 @@ class CategoriesAndFacets extends Component {
     super(props);
     this.onChangeHandle = this.onChangeHandle.bind(this);
     this.submitQuery = _.debounce(this.submitQuery.bind(this), 300);
-  }
-
-  submitQuery() {
-    this.props.getSearchResults({ facetFilters: this.props.getFacetfilters(this.props.facets) });
   }
 
   onChangeHandle(facetName) {
@@ -33,6 +29,10 @@ class CategoriesAndFacets extends Component {
       this.submitQuery();
     }
     return curryHandler;
+  }
+
+  submitQuery() {
+    this.props.getSearchResults({ facetFilters: this.props.getFacetfilters(this.props.facets) });
   }
 
   render() {

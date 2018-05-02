@@ -1,3 +1,4 @@
+import React from 'react';
 import { Grid } from 'react-bootstrap';
 import NoSSR from 'react-no-ssr';
 

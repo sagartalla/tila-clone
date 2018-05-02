@@ -1,12 +1,17 @@
 // params: { columnIndex, key, rowIndex, style }
+import React from 'react';
+import PropTypes from 'prop-types';
 import _ from 'lodash';
 import styles from '../search.styl';
-import { mediaDomain } from '../../../constants';
+import constants from '../../../constants';
 
-
-const Product = ({ media=[], productId, displayName, variants }) => {
+const Product = ({
+  media = [],
+  displayName,
+  variants 
+}) => {
   const style = {
-    backgroundImage: `url(${mediaDomain}/${media[0]})`
+    backgroundImage: `url(${constants.mediaDomain}/${media[0]})`
   };
   return (
     <div className={styles['product-item']}>
@@ -24,5 +29,12 @@ const Product = ({ media=[], productId, displayName, variants }) => {
     </div>
   );
 };
+
+Product.propTypes = {
+  media: PropTypes.array.isRequired,
+  displayName: PropTypes.string.isRequired,
+  variants: PropTypes.array.isRequired, 
+}
+
 
 export default Product;

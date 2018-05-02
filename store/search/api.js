@@ -2,7 +2,16 @@ import _ from 'lodash';
 import { searchServiceInstance } from '../helper/services';
 
 
-const getSearchResultsApi = ({ categoryFilter, country, pageSize, query, language, facetFilters, pageNum, fl }) => {
+const getSearchResultsApi = ({
+  categoryFilter,
+  country,
+  pageSize,
+  query,
+  language,
+  facetFilters,
+  pageNum,
+  fl,
+}) => {
   const data = {
     categoryFilter,
     country,

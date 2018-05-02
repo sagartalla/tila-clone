@@ -7,7 +7,7 @@ import styles from './header.styl';
 import { actionCreaters, selectors } from '../../store/search';
 
 const urlPropsQueryConfig = {
-  searchText: { type: UrlQueryParamTypes.string, queryParam: 'search' }
+  searchText: { type: UrlQueryParamTypes.string, queryParam: 'search', }
 };
 
 class Search extends Component {
