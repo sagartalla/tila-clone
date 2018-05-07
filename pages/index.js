@@ -8,7 +8,7 @@ import { actionCreaters, selectors } from '../store/search';
 import Layout from '../layout/main';
 import Search from '../components/Search';
 
-class Page extends Component {
+class SearchPage extends Component {
   static async getInitialProps({ store, isServer, query }) {
     const categoryFilter = {
       id: query.subCategory ? query.subCategory.match(/(\d*)$/)[0] : query.category ? query.category.match(/(\d*)$/)[0] : null
@@ -57,4 +57,4 @@ const mapDispatchToProps = dispatch =>
     dispatch,
   );
 
-export default withRedux(makeStore, mapStateToProps, mapDispatchToProps)(Page);
+export default withRedux(makeStore, mapStateToProps, mapDispatchToProps)(SearchPage);

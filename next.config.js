@@ -1,10 +1,10 @@
 const eslintFormatter = require('react-dev-utils/eslintFormatter');
 const withStylus = require('@zeit/next-stylus');
-// const poststylus = require('poststylus');
-// const postCssPlugins = require('./postcss.config').plugins;
+const withCSS = require('@zeit/next-css');
+const commonsChunkConfig = require('@zeit/next-css/commons-chunk-config');
 const path = require('path');
 
-module.exports = withStylus({
+module.exports = withStylus(withCSS({
   cssModules: true,
   cssLoaderOptions: {
     importLoaders: 1,
@@ -32,6 +32,7 @@ module.exports = withStylus({
     //       path.resolve('./')
     //     ]
     // }
+    config = commonsChunkConfig(config, /\.(styl|css)$/);
     return config
   }
-});
+}));
