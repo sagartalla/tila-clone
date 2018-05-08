@@ -15,11 +15,13 @@ import Catalog from './Catalog';
 import styles from './product.styl';
 
 const getProductComponent = (isPreview) => {
-  const Product = ({ productData, isPreview }) => {
+  const Product = ({ productData }) => {
     const { catalog, titleInfo, keyfeatures, imgUrls } = productData;
     return (
       <div>
-        <HeaderBar />
+        {
+          isPreview ? null : <HeaderBar />
+        }
         <Grid>
           <Row>
             <Col xs={12} md={5}>
