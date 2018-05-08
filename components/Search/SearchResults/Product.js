@@ -1,4 +1,5 @@
 // params: { columnIndex, key, rowIndex, style }
+import { Link } from '../../../routes';
 import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
@@ -14,19 +15,21 @@ const Product = ({
     backgroundImage: `url(${constants.mediaDomain}/${media[0]})`
   };
   return (
-    <div className={styles['product-item']}>
-      <div className={styles['img-cont']}>
-        <div style={style} className={styles['image-div']}/>
-      </div>
-      <div className={styles['desc-cont']}>
-        <div className={styles['prdt-name']}>{displayName}</div>
-        <div className={styles['variant-info']}>
-          {
-            _.map(variants, (variantValues, key) => <div key={key}>{`${key} : ${variantValues.join(', ')}`}</div>)
-          }
+    <Link route="/product">
+      <div className={styles['product-item']}>
+        <div className={styles['img-cont']}>
+          <div style={style} className={styles['image-div']}/>
+        </div>
+        <div className={styles['desc-cont']}>
+          <div className={styles['prdt-name']}>{displayName}</div>
+          <div className={styles['variant-info']}>
+            {
+              _.map(variants, (variantValues, key) => <div key={key}>{`${key} : ${variantValues.join(', ')}`}</div>)
+            }
+          </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
