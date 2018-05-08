@@ -9,13 +9,14 @@ import constants from '../../../constants';
 const Product = ({
   media = [],
   displayName,
-  variants 
+  variants,
+  productId
 }) => {
   const style = {
     backgroundImage: `url(${constants.mediaDomain}/${media[0]})`
   };
   return (
-    <Link route="/product">
+    <Link route={`/product?productId=${productId}`}>
       <div className={styles['product-item']}>
         <div className={styles['img-cont']}>
           <div style={style} className={styles['image-div']}/>
