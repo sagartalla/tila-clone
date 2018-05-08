@@ -26,7 +26,7 @@ class ProductPage extends Component {
           "include_related_products": true,
           "shipping": true
         },
-        "language": "en",
+        "language": query.language || "en",
         "product_ids": [
           query.productId
         ],
