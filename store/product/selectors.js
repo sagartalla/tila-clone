@@ -70,10 +70,11 @@ const getVariants = (store) => {
 };
 
 const getPreview = (store) => {
+  debugger;
   const { attributes, products } = store.productReducer.data.pimData;
   const { catalogData } = store.productReducer.data;
   const titleInfo = {
-    brand: attributes.brand.attributeValues[0].value,
+    brand: attributes.brand.attributeValues.length ? attributes.brand.attributeValues[0].value : 'Brand not found',
     title: attributes.display_title.attributeValues.length ? attributes.display_title.attributeValues[0].value : 'Title Not Found',
     rating: {
       rating: "! 4",
@@ -87,13 +88,14 @@ const getPreview = (store) => {
     discountPercent: "! -60%"
   };
   const keyfeatures = _.map(attributes.highlights.attributeValues, (kf) => kf.value);
-  const imgUrls = products[Object.keys(products)[0]].media.galleryMedia.map((item) => ({
+  const productKeys = Object.keys(products)
+  const imgUrls = productKeys.length ?  products[productKeys[0]].media.galleryMedia.map((item) => ({
     type: item.mediaType,
     url: item.url,
     caption: item.caption,
     order: item.order,
     restricted: item.isRestricted,
-  }));
+  })) : [];
   const catalog = _.reduce(attributes, (acc, attrVal, attrKey) => {
     const groupName = _.find(catalogData, { attributeName: attrKey }).attributeCategoryName;
     acc[groupName] = acc[groupName] || [];
