@@ -55,12 +55,6 @@ const getSearchResutls = (store) => {
         const attributesData = {...v.attributes};
         delete attributesData.type;
         delete attributesData.variantId;
-        // return {
-        //   ...v,
-        //   attributes: {
-        //     ...attributesData
-        //   }
-        // }
         let modifiedVaraintsCopy = Object.assign(modifiedVaraints);
         _.forEach(attributesData, (val, key) => {
           modifiedVaraintsCopy[key] = modifiedVaraintsCopy[key] || [];
@@ -68,12 +62,22 @@ const getSearchResutls = (store) => {
         });
         return modifiedVaraintsCopy;
       }, {});
+      const priceInfo = product.variantListingAdapters.map((vla) => vla.attributes.sellingPrice);
+      let priceRange = '';
+      if (priceInfo.length > 2) {
+        priceRange = [Math.min.apply(null, priceInfo), Math.max.apply(null, priceInfo)].join(' - ');
+      }else if (priceInfo.length > 1) {
+        priceRange = priceInfo.sort().join(' - ')
+      } else {
+        priceRange = priceInfo[0] || 'No price info';
+      }
       return {
         id: product.id,
         media: product.attributes.media_unrestricted_images,
         productId: product.attributes.productId,
         displayName: product.attributes.calculated_display_name,
-        variants: variantInfo
+        variants: variantInfo,
+        priceRange,
       };
     });
   }

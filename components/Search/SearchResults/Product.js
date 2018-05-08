@@ -10,7 +10,8 @@ const Product = ({
   media = [],
   displayName,
   variants,
-  productId
+  productId,
+  priceRange,
 }) => {
   const style = {
     backgroundImage: `url(${constants.mediaDomain}/${media[0]})`
@@ -23,6 +24,7 @@ const Product = ({
         </div>
         <div className={styles['desc-cont']}>
           <div className={styles['prdt-name']}>{displayName}</div>
+          <div> Price:  { priceRange } </div>
           <div className={styles['variant-info']}>
             {
               _.map(variants, (variantValues, key) => <div key={key}>{`${key} : ${variantValues.join(', ')}`}</div>)
