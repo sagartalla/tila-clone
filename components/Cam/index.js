@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 import HeaderBar from '../HeaderBar/index';
 import Sidebar from './Sidebar';
-import UserInfo from './UserInfo';
+import UserInfo from './PersonelDetails';
 
 import styles from './cam.styl';
 

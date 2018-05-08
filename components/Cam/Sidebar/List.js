@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import styles from "./cam.styl";
+import styles from "../cam.styl";
 
 const List = props => {
   return props.data.map((val, id) => (
