@@ -42,13 +42,13 @@ class LinkFacet extends Component {
                         )
                       })
                     }
-                    {
-                      this.state.isMoreButtonRequired ?  <li onClick={this.toggleMore}><a>{this.state.maxRows === filter.children.length ? '- show less' : ' + show more'}</a></li> : null
-                    }
                   </ul>
                 </li>
               );
             })
+          }
+          {
+            this.state.isMoreButtonRequired ? <li onClick={this.toggleMore}><a>{this.state.maxRows === filter.children.length ? '- show less' : ' + show more'}</a></li> : null
           }
         </ul>
       </li>
