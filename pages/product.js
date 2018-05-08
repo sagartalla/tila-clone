@@ -28,7 +28,7 @@ class ProductPage extends Component {
         },
         "language": "en",
         "product_ids": [
-          "PMOBH2OXUVSUSTKUCP"
+          query.productId
         ],
         "size": "LARGE"
       }));

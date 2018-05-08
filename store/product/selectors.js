@@ -2,8 +2,8 @@ import _ from 'lodash';
 
 const getProduct = (store, variantId) => {
   const { product_details, variant_preferred_listings } = store.productReducer.data[0];
-  const computedVariantId = variantId || Object.keys(variant_preferred_listings)[0]
-  const priceInfo = variant_preferred_listings[computedVariantId][0];
+  const computedVariantId = variantId || Object.keys(variant_preferred_listings || {})[0]
+  const priceInfo = computedVariantId ? variant_preferred_listings[computedVariantId][0] : null;
   const titleInfo = {
     brand: product_details.catalog_details.attribute_map.brand.attribute_values[0].value,
     title: product_details.product_details_vo.cached_product_details.attribute_map.calculated_display_name.attribute_values[0].value,
@@ -14,7 +14,7 @@ const getProduct = (store, variantId) => {
     reviews: {
       count: '! 25'
     },
-    price: priceInfo.selling_price + ' ' + priceInfo.selling_price_currency,
+    price: priceInfo ? priceInfo.selling_price + ' ' + priceInfo.selling_price_currency : 'No listing',
     originalPrice: '! 1949.00 SAR',
     discountPercent: '! -60%',
   };
