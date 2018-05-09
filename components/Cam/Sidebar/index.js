@@ -1,22 +1,20 @@
-import React, { Component } from "react";
+import React from 'react';
 
-import UserProfile from "./UserProfile";
-import List from "./List";
+import UserProfile from './UserProfile';
+import List from './List';
 
 import data from '../list.json';
-import styles from "../cam.styl";
+import styles from '../cam.styl';
 
-const Sidebar = () => {
-  return (
-    <div className={styles["sidebar-container"]}>
-      <div>
-        <UserProfile />
-      </div>
-      <div>
-        <List data={data} />
-      </div>
+const Sidebar = () => (
+  <div className={styles['sidebar-container']}>
+    <div>
+      <UserProfile />
     </div>
-  );
-};
+    <div>
+      <List data={data} />
+    </div>
+  </div>
+);
 
 export default Sidebar;

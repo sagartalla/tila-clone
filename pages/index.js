@@ -7,7 +7,6 @@ import makeStore from '../store';
 import { actionCreaters, selectors } from '../store/search';
 import Layout from '../layout/main';
 import Search from '../components/Search';
-import Cam from './cam';
 
 class SearchPage extends Component {
   static async getInitialProps({ store, isServer, query }) {
@@ -37,7 +36,7 @@ class SearchPage extends Component {
     return (
       <div>
         <Layout>
-          <Cam />
+          <Search query={this.props.url.query} />
         </Layout>
       </div>
     );
