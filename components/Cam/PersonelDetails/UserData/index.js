@@ -13,7 +13,9 @@ const UserData = () => (
       <PersonalInfo />
       <ContactInfo />
     </Col>
-    <Col xs={12} md={6} className={styles['update-info']} />
+    <Col xs={12} md={6}>
+      <div className={styles['update-info']} />
+    </Col>
   </Row>
 );
 
