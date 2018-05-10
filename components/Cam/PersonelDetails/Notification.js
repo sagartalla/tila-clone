@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Col, Button } from 'react-bootstrap';
 
-import styles from '../cam.styl';
+import styles from './user.styl';
 
 const Notification = () => (
   <div>

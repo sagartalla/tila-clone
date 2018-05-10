@@ -1,6 +1,6 @@
 import React from 'react';
 
-import styles from '../cam.styl';
+import styles from './sidebar.styl';
 
 const List = props => props.data.map((val, id) => (
   <div className={styles['list-container']} key={id.toString()}>

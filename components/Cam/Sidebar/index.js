@@ -4,7 +4,7 @@ import UserProfile from './UserProfile';
 import List from './List';
 
 import data from '../list.json';
-import styles from '../cam.styl';
+import styles from './sidebar.styl';
 
 const Sidebar = () => (
   <div className={styles['sidebar-container']}>

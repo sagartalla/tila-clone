@@ -5,11 +5,9 @@ import HeaderBar from '../HeaderBar/index';
 import Sidebar from './Sidebar';
 import UserInfo from './PersonelDetails';
 
-import styles from './cam.styl';
-
 
 const Cam = () => (
-  <div className={styles['cam-container']}>
+  <div>
     <HeaderBar />
     <Grid>
       <Row>

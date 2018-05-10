@@ -1,0 +1,73 @@
+.right-layout-container
+  .user-info-container
+    border: 1px solid #5555;
+    padding: 10px;
+    display: block;
+    padding-top: 10px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    box-shadow: 0 0 12px 0 rgba(0,0,0,0.1);
+    height auto
+    font-size 12px
+
+.common-sub-container
+  height 125px
+  background-color #fff
+  box-shadow 0 0 12px 0 rgba(0,0,0,0.1)
+  padding 10px
+  font-size 12px
+  margin 10px 0px  
+
+.personel-data-container
+ padding 10px  
+
+.row-space
+ height 5px 
+  
+.edit-icon
+ float right
+
+.row-paddding
+ padding-top 5px 
+
+.update-info
+ background #e0edff
+ height 350px
+ paddding 5px 
+
+.switch
+ position relative
+ display inline-block
+ width 45px
+ height 20px
+ margin 0
+ input
+  display none
+ .slider
+  position absolute
+  cursor pointer
+  top 0
+  left 0
+  right 0
+  bottom 0
+  background-color #ccc
+  transition .4s
+  &:before
+   position absolute
+   content ""
+   height 15px
+   width 15px
+   left 4px
+   bottom 3px
+   background-color white
+   transition .4s
+ input:checked + .slider 
+   background-color #2196F3
+ input:focus + .slider 
+   box-shadow 0 0 1px #2196F3
+ input:checked + .slider:before 
+  transform translateX(26px)
+ .slider
+   border-radius 25px
+ .slider:before 
+   border-radius 50% 

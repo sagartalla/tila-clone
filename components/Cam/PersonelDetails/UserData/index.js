@@ -4,7 +4,7 @@ import { Row, Col } from 'react-bootstrap';
 import PersonalInfo from './PersonalInfo';
 import ContactInfo from './ContactInfo';
 
-import styles from '../../cam.styl';
+import styles from '../user.styl';
 
 
 const UserData = () => (

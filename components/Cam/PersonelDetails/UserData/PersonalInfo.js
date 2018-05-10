@@ -3,7 +3,7 @@ import { Row, Col } from 'react-bootstrap';
 
 import Input from '../../Common/Input';
 
-import styles from '../../cam.styl';
+import styles from '../user.styl';
 
 const PersonalInfo = () => (
   <div className={styles['personel-data-container']}>
@@ -48,34 +48,6 @@ const PersonalInfo = () => (
         </Col>
       </Col>
     </Row>
-
-    {/* <form>
-        <FormGroup>
-          <Input placeholder="Name" />
-        </FormGroup>
-        <FormGroup>
-          <Input placeholder="Date of birth" />
-        </FormGroup>
-        <FormGroup>
-          <div className={styles['display-width']}>
-            <labe>Gender</labe>
-          </div>
-          <div className={styles['display-width']}>
-            <div className={styles['gender-content']}>
-              <span>Male</span>
-            </div>
-            <div className={styles['gender-content']}>
-              <label className={styles.switch}>
-              <input type="checkbox" />
-              <span className={styles.slider} />
-            </label>
-            </div>
-            <div className={styles['gender-content']}>
-              <span>Female</span>
-            </div>
-          </div>
-        </FormGroup>
-      </form> */}
   </div>
 );
 
