@@ -1,0 +1,68 @@
+[{
+	"data": [{
+			"icon": "icon",
+			"display": "My Orders",
+			"count": "1"
+		}, {
+			"icon": "icon",
+			"display": "Orders shared with me",
+			"count": "1"
+		},
+		{
+			"icon": "icon",
+			"display": "Wishlist",
+			"count": "1"
+		}
+	]
+}, {
+	"data": [{
+		"icon": "icon",
+		"display": "Shipping Address",
+		"count": "1"
+	}, {
+		"icon": "icon",
+		"display": "Credit Cards,Vouchers and Reward Points",
+		"count": "1"
+	}, {
+		"icon": "icon",
+		"display": "Messages",
+		"count": "1"
+	}, {
+		"icon": "icon",
+		"display": "Notification",
+		"count": "12"
+	}]
+}, {
+	"data": [{
+		"icon": "icon",
+		"display": "My reviews and Ratings",
+		"count": "1"
+	}, {
+		"icon": "icon",
+		"display": "Gift Registry",
+		"count": "1"
+	}, {
+		"icon": "icon",
+		"display": "My Coupons",
+		"count": "1"
+	}, {
+		"icon": "icon",
+		"display": "Subscriptions",
+		"count": "12"
+	}]
+},{
+ "data": [{
+		"icon": "icon",
+		"display": "Preferences",
+		"count": "1"
+	}, {
+		"icon": "icon",
+		"display": "Refer/Invite Friends",
+		"count": "1"
+	}, {
+		"icon": "icon",
+		"display": "Help and Support",
+		"count": "1"
+	}]
+}
+]

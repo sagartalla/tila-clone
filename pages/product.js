@@ -7,7 +7,7 @@ import makeStore from '../store';
 import { actionCreaters, selectors } from '../store/product';
 import Layout from '../layout/main';
 import { getProduct } from '../store/product/api';
-import Product from '../components/Product'
+import Product from '../components/Product';
 
 class ProductPage extends Component {
   static async getInitialProps({ store, isServer }) {

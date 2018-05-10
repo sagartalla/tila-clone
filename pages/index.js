@@ -11,9 +11,9 @@ import Search from '../components/Search';
 class SearchPage extends Component {
   static async getInitialProps({ store, isServer, query }) {
     const categoryFilter = {
-      id: query.subCategory ? query.subCategory.match(/(\d*)$/)[0] : query.category ? query.category.match(/(\d*)$/)[0] : null
+      id: query.subCategory ? query.subCategory.match(/(\d*)$/)[0] : query.category ? query.category.match(/(\d*)$/)[0] : null,
     };
-    let facetFilters = selectors.getFacetfilters(store.getState())(JSON.parse(query.facets || '{}'));
+    const facetFilters = selectors.getFacetfilters(store.getState())(JSON.parse(query.facets || '{}'));
     await store.dispatch(actionCreaters.getSearchResults({
       categoryFilter,
       country: 'UAE',
@@ -36,18 +36,16 @@ class SearchPage extends Component {
     return (
       <div>
         <Layout>
-          <Search query={this.props.url.query}/>
+          <Search query={this.props.url.query} />
         </Layout>
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    allState: state,
-  };
-};
+const mapStateToProps = state => ({
+  allState: state,
+});
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
