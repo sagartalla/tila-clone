@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 import styles from './header.styl';
-import {getCookie} from '../../components/Overlay/Login/CookieMethods';
-import {showOverlayScreen} from '../../components/Overlay/OverlayActions';
+import { getCookie } from '../../components/Overlay/Login/CookieMethods';
+import { showOverlayScreen } from '../../components/Overlay/OverlayActions';
 
-const ActionBar = (props) => (
+const ActionBar = props => (
     <div className={styles['actionbar-wrapper']}>
         {getCookie('access_token') ? 
             <div className={styles['action-item']}>Logged In</div>

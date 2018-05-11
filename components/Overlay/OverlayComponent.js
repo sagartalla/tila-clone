@@ -1,24 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import {overlayContainer, overlayCard} from './overlayStyles';
+import style from './overlay.styl';
 import {hideOverlayScreen} from './OverlayActions';
 import Login from './Login';
 
 class Overlay extends React.Component{
 
-  static propTypes = {
-    showOverlay: PropTypes.bool.isRequired,
-    hideOverlayScreen: PropTypes.func.isRequired
-  }
   constructor(props){
     super(props);
   }
 
   render(){
     return(
-      <div  onClick={() => {this.props.hideOverlayScreen()}} style={{...overlayContainer, display: this.props.showOverlay ? 'flex' : 'none'}}>
-          <div onClick={(e) => e.stopPropagation()}style={overlayCard}>
+      <div  onClick={() => {this.props.hideOverlayScreen()}} className={style['overlayContainer']} style={{display: this.props.showOverlay ? 'flex' : 'none'}}>
+          <div onClick={(e) => e.stopPropagation()} className={style['overlayCard']}>
             <Login hideOverlayScreen={this.props.hideOverlayScreen} />
           </div>
       </div>
@@ -26,4 +22,9 @@ class Overlay extends React.Component{
   }
 }
 
-export default connect(() => ({}), {hideOverlayScreen})(Overlay)
+Overlay.propTypes = {
+  showOverlay: PropTypes.bool.isRequired,
+  hideOverlayScreen: PropTypes.func.isRequired,
+}
+
+export default connect(() => ({}), { hideOverlayScreen })(Overlay)
