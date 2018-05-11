@@ -7,7 +7,7 @@ import makeStore from '../store';
 import { actionCreaters, selectors } from '../store/search';
 import Layout from '../layout/main';
 import Search from '../components/Search';
-import Overlay from './Overlay';
+import Overlay from '../components/Overlay';
 
 class SearchPage extends Component {
   static async getInitialProps({ store, isServer, query }) {

@@ -4,10 +4,6 @@ import { setCookie } from './CookieMethods';
 
 export default class Login extends React.Component{
 
-  static propTypes = {
-    hideOverlayScreen: PropTypes.func.isRequired
-  }
-
   constructor(props){
     super(props);
     this.state = {
@@ -70,8 +66,6 @@ export default class Login extends React.Component{
     this.props.hideOverlayScreen();
   }
   
-  
-
   render(){
     return(
       <form style={loginContainer} onSubmit={this.handleLogin}>
@@ -98,6 +92,10 @@ export default class Login extends React.Component{
     )
   }
 }
+
+Login.propTypes = {
+  hideOverlayScreen: PropTypes.func.isRequired,
+};
 
 const loginContainer = {
   display: 'flex',

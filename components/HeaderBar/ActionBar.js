@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import styles from './header.styl';
-import {getCookie} from '../../pages/Overlay/Login/CookieMethods';
-import {showOverlayScreen} from '../../pages/Overlay/OverlayActions';
+import {getCookie} from '../../components/Overlay/Login/CookieMethods';
+import {showOverlayScreen} from '../../components/Overlay/OverlayActions';
 
 const ActionBar = (props) => (
     <div className={styles['actionbar-wrapper']}>

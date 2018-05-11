@@ -1,6 +1,5 @@
 import { Grid, Row, Col} from 'react-bootstrap';
 import NoSSR from 'react-no-ssr';
-
 import Logo from './Logo';
 import Search from './Search';
 import ActionBar from './ActionBar';
