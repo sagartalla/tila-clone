@@ -7,9 +7,9 @@ import styles from './search.styl';
 import CategoriesAndFacets from './CategoriesAndFacets';
 import SearchResults from './SearchResults';
 
-const Search = () => (
+const Search = (props) => (
   <div>
-    <HeaderBar />
+    <HeaderBar showOverlayScreen={props.showOverlayScreen} />
     <Grid>
       <div className={styles['filter-panel']}>
         <NoSSR>

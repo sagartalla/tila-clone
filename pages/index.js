@@ -5,8 +5,10 @@ import { configureUrlQuery } from 'react-url-query';
 import createHistory from 'history/createBrowserHistory';
 import makeStore from '../store';
 import { actionCreaters, selectors } from '../store/search';
+import { showOverlayScreen } from './Overlay/OverlayActions';
 import Layout from '../layout/main';
 import Search from '../components/Search';
+import Overlay from './Overlay';
 
 class SearchPage extends Component {
   static async getInitialProps({ store, isServer, query }) {
@@ -35,8 +37,9 @@ class SearchPage extends Component {
   render() {
     return (
       <div>
-        <Layout>
-          <Search query={this.props.url.query}/>
+        <Layout>      
+          <Overlay />
+          <Search query={this.props.url.query} showOverlayScreen={this.props.showOverlayScreen}/>
         </Layout>
       </div>
     );
@@ -53,6 +56,7 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       getSearchResults: actionCreaters.getSearchResults,
+      showOverlayScreen,
     },
     dispatch,
   );

@@ -19,7 +19,7 @@ const HeaderBar = props => (
                 </NoSSR>
             </Col>
             <Col md={3}>
-                <ActionBar />
+                <ActionBar showOverlayScreen={props.showOverlayScreen}/>
             </Col>
         </Row>
         <Row>
