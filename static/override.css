@@ -1,0 +1,23 @@
+.modal-backdrop{
+ width: 90%;
+ margin: 0 auto;
+}
+
+.modal-custom-modal{
+ float: right;
+ margin: 0;
+ margin-right: 5%;
+ font-size: 12px;
+}
+
+ .modal-content{
+  border: none;
+  border-radius: 0;
+  height: 800px;
+ }
+ .modal-open .modal{
+  overflow-y: scroll;
+ }
+.modal-header{
+ border: none;
+}

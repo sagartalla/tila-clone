@@ -5,7 +5,6 @@ import HeaderBar from '../HeaderBar/index';
 import Sidebar from './Sidebar';
 import UserInfo from './PersonelDetails';
 
-
 const Cam = () => (
   <div>
     <HeaderBar />
