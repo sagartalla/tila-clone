@@ -1,12 +1,19 @@
-import styles from './header.styl'
+import { connect } from 'react-redux';
+import styles from './header.styl';
+import {getCookie} from '../../pages/Overlay/Login/CookieMethods';
+import {showOverlayScreen} from '../../pages/Overlay/OverlayActions';
 
 const ActionBar = (props) => (
     <div className={styles['actionbar-wrapper']}>
-        <div className={styles['action-item']} onClick={() => props.showOverlayScreen()}>Login</div>
+        {getCookie('access_token') ? 
+            <div className={styles['action-item']}>Logged In</div>
+            :
+            <div className={styles['action-item']} onClick={() => props.showOverlayScreen()}>Log In</div>
+        }
         <div className={styles['action-item']}></div>
         <div className={styles['action-item']}></div>
         <div className={styles['action-item']}></div>
     </div>
 );
 
-export default ActionBar;
+export default connect((state) => ({showOverlay: state.OverlayReducer.showOverlay}), {showOverlayScreen})(ActionBar);

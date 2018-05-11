@@ -9,7 +9,7 @@ import SearchResults from './SearchResults';
 
 const Search = (props) => (
   <div>
-    <HeaderBar showOverlayScreen={props.showOverlayScreen} />
+    <HeaderBar />
     <Grid>
       <div className={styles['filter-panel']}>
         <NoSSR>

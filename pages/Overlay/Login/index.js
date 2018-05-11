@@ -74,7 +74,7 @@ export default class Login extends React.Component{
 
   render(){
     return(
-      <div style={loginContainer}>
+      <form style={loginContainer} onSubmit={this.handleLogin}>
         <div style={headingContainer}>
           <h1 style={{margin: '10px 0px'}}>lite.com</h1>
           <h3 style={{margin: '10px 0px'}}>Where Saudi Shops Online</h3>
@@ -89,12 +89,12 @@ export default class Login extends React.Component{
           <input type='password' name="password" onChange={this.handleChange} value={this.state.password} style={inputStyle} />
         </div>
         <div style={inputContainer}>
-          <button style={{...loginButton, opacity: this.state.loading ? '0.75' : '1'}} disabled={this.state.loading} onClick={this.handleLogin}>Sign In</button>
+          <input type='submit' style={{...loginButton, opacity: this.state.loading ? '0.75' : '1'}} disabled={this.state.loading} onClick={this.handleLogin} value='Sign In' />
         </div>
         <div style={errorStyle}>
           {this.state.errorMsg}
         </div>
-      </div>
+      </form>
     )
   }
 }
