@@ -19,7 +19,7 @@ class SearchPage extends Component {
       country: 'UAE',
       pageSize: 100,
       query: query.search,
-      language: 'en',
+      language: query.language || 'en',
       facetFilters,
       pageNum: 1,
       fl: '*',
