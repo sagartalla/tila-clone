@@ -8,6 +8,7 @@ export default class MyDocument extends Document {
         <Head>
           {/* TODO: SF-1 */}
           <link rel="stylesheet" href="/static/vendor/css/bootstrap.min.css" />
+          <link rel="stylesheet" href="/static/vendor/css/react-router-modal.css" />
           {/* END TODO: SF-1 */}
           <link rel="stylesheet" href="/_next/static/style.css" />
           <Meta />

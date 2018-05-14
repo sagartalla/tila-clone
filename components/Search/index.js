@@ -7,7 +7,7 @@ import styles from './search.styl';
 import CategoriesAndFacets from './CategoriesAndFacets';
 import SearchResults from './SearchResults';
 
-const Search = () => (
+const Search = (props) => (
   <div>
     <HeaderBar />
     <Grid>

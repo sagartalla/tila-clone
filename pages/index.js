@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import withRedux from 'next-redux-wrapper';
 import { configureUrlQuery } from 'react-url-query';
 import createHistory from 'history/createBrowserHistory';
+import { ModalContainer } from 'react-router-modal';
 import makeStore from '../store';
 import { actionCreaters, selectors } from '../store/search';
 import Layout from '../layout/main';
@@ -35,8 +36,9 @@ class SearchPage extends Component {
   render() {
     return (
       <div>
-        <Layout>
-          <Search query={this.props.url.query}/>
+        <Layout>      
+          <ModalContainer />
+          <Search query={this.props.url.query} />
         </Layout>
       </div>
     );
