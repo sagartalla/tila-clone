@@ -20,4 +20,7 @@ const getCookie = (cname) => {
   return "";
 }
 
-export {setCookie, getCookie}
+const deleteCookie = (cname) => document.cookie = cname + '=;path=/;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+
+
+export {setCookie, getCookie, deleteCookie}
