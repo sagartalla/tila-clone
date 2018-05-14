@@ -3,11 +3,11 @@ import { bindActionCreators } from 'redux';
 import withRedux from 'next-redux-wrapper';
 import { configureUrlQuery } from 'react-url-query';
 import createHistory from 'history/createBrowserHistory';
+import { ModalContainer } from 'react-router-modal';
 import makeStore from '../store';
 import { actionCreaters, selectors } from '../store/search';
 import Layout from '../layout/main';
 import Search from '../components/Search';
-import Overlay from '../components/Overlay';
 
 class SearchPage extends Component {
   static async getInitialProps({ store, isServer, query }) {
@@ -37,7 +37,7 @@ class SearchPage extends Component {
     return (
       <div>
         <Layout>      
-          <Overlay />
+          <ModalContainer />
           <Search query={this.props.url.query} />
         </Layout>
       </div>

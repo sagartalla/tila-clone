@@ -63,7 +63,7 @@ export default class Login extends React.Component {
 
   handlePostLogin = (res) => {
     this.setCookieWithRes(res);
-    this.props.hideOverlayScreen();
+    this.props.postLogin();
   }
 
   render() {
@@ -94,5 +94,5 @@ export default class Login extends React.Component {
 }
 
 Login.propTypes = {
-  hideOverlayScreen: PropTypes.func.isRequired,
+  postLogin: PropTypes.func.isRequired,
 };
