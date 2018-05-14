@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { Modal } from "react-router-modal";
 import styles from "./header.styl";
-import { getCookie } from "../../components/Overlay/Login/CookieMethods";
+import { getCookie, deleteCookie } from "../../components/Login/CookieMethods";
 import Login from "../Login";
 
 export default class ActionBar extends React.Component {
@@ -22,11 +22,17 @@ export default class ActionBar extends React.Component {
     this.toggleLoginModal(null, false);
   };
 
+  handleLogout = () => {
+    deleteCookie("refresh_token");
+    deleteCookie("access_token");
+    this.toggleLoginModal(null, false);
+  }
+
   render() {
     return (
       <div className={styles["actionbar-wrapper"]}>
         {getCookie("access_token") ? (
-          <div className={styles["action-item"]}>Logged In</div>
+          <div className={styles["action-item"]} onClick={() => this.handleLogout()}>LogOut</div>
         ) : (
           <div
             className={styles["action-item"]}
