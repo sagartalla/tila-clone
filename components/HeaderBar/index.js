@@ -8,7 +8,8 @@ import MegaMenu from './MegaMenu';
 import styles from './header.styl'
 
 const HeaderBar = props => (
-    <Grid className={styles['header-container']}>
+    <div className={styles['header-container']}>
+      <Grid>
         <Row>
             <Col md={2}>
                 <Logo />
@@ -27,7 +28,8 @@ const HeaderBar = props => (
                 <MegaMenu />
             </Col>
         </Row>
-    </Grid>
+      </Grid>
+    </div>
 );
 
 export default HeaderBar;

@@ -10,6 +10,7 @@ const Input = props => (
     value=""
     placeholder={props.placeholder}
     className={styles.input}
+    onChange={props.onChange}
   />
 );
 
