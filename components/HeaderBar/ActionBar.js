@@ -29,7 +29,7 @@ export default class ActionBar extends React.Component {
                 {getCookie('access_token') ? 
                     <div className={styles['action-item']}>Logged In</div>
                 :
-                    <div className={styles['action-item']} onClick={(e) => this.toggleLoginModal(e, true)}>Login</div>
+                    <div className={styles['action-item']} onClick={(e) => this.toggleLoginModal(e, true)}>Log In</div>
                 }
                 <div className={styles['action-item']}></div>
                 <div className={styles['action-item']}></div>
