@@ -8,5 +8,5 @@ const handler = routes.getRequestHandler(app, ({ req, res, route, query }) => {
 });
 
 app.prepare().then(() => {
-    express().use(handler).listen(process.env.NODE_ENV || 3000);
+    express().use(handler).listen(process.env.PORT || 3000);
 });
