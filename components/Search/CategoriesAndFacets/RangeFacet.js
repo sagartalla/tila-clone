@@ -11,15 +11,16 @@ class RangeFitler extends Component {
 
   constructor(props) {
     super(props);
-    const { filter } = props;
+    const { filter, selectedFilters } = props;
+    const [min, max] = selectedFilters ? selectedFilters[0].param.match(/\[(.*)\]/)[1].split(' TO ').map((val) => parseInt(val)): [ null, null ];
     this.state = {
       static: {
         min: Math.min.apply(null, filter.children[0].values),
         max: Math.max.apply(null, filter.children[0].values),
       },
       value: { 
-        min: Math.min.apply(null, filter.children[0].values),
-        max: Math.max.apply(null, filter.children[0].values),
+        min: min || Math.min.apply(null, filter.children[0].values),
+        max: max || Math.max.apply(null, filter.children[0].values),
       },
     };
     this.minChange = this.minChange.bind(this);
@@ -31,8 +32,8 @@ class RangeFitler extends Component {
   getParam() {
     const { filter } = this.props;
     let { param } = filter.children[0];
-    param = param.replace('start', this.state.value.min);
-    param = param.replace('end', this.state.value.max);
+    param = param.replace('{start}', this.state.value.min);
+    param = param.replace('{end}', this.state.value.max);
     return param;
   }
 
@@ -40,16 +41,18 @@ class RangeFitler extends Component {
     const { filter } = this.props;
     this.setState({
       value: Object.assign({}, this.state.value, { min: parseInt(e.target.value) })
+    }, () => {
+      this.props.onChangeHandle({ name: filter.name, param: this.getParam() }, e);
     });
-    this.props.onChangeHandle({ name: filter.name, param: this.getParam() }, e);
   }
 
   maxChange(e) {
     const { filter } = this.props;
     this.setState({
       value: Object.assign({}, this.state.value, { max: parseInt(e.target.value) })
+    }, () => {
+      this.props.onChangeHandle({ name: filter.name, param: this.getParam() }, e);
     });
-    this.props.onChangeHandle({ name: filter.name, param: this.getParam() }, e);
   }
 
   onChangeRange(value) {
@@ -60,11 +63,13 @@ class RangeFitler extends Component {
     };
     this.setState({
       value: closest
+    }, () => {
+      this.props.onChangeHandle({ name: filter.name, param: this.getParam()});
     });
   }
 
   render () {
-    const { filter, selectedFilters } = this.props;
+    const { filter } = this.props;
     return (
       <li>
         <div>{filter.name}</div>
