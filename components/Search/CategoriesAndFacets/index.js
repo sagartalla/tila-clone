@@ -40,14 +40,14 @@ class CategoriesAndFacets extends Component {
     return (<ul>
       {
         filters.category.map((filter) => {
-          return <LinkFacet filter={filter} key={filter.id} />
+          return filter.children.length ? <LinkFacet filter={filter} key={filter.id} /> : null;
         })
       }
       {
         filters.facets.map((filter) => {
           let selectedFilters = facets[filter.attributeName];
           selectedFilters = selectedFilters ? selectedFilters.map((item) => item.name) : [];
-          return <CheckboxFacet filter={filter} key={filter.id} onChangeHandle={this.onChangeHandle(filter.attributeName)} selectedFilters={selectedFilters}/>
+          return filter.children.length ? <CheckboxFacet filter={filter} key={filter.id} onChangeHandle={this.onChangeHandle(filter.attributeName)} selectedFilters={selectedFilters}/> : null;
         })
       }
     </ul>);
