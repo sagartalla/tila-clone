@@ -7,6 +7,7 @@ import { actionCreaters, selectors } from '../../../store/search';
 
 import CheckboxFacet from './CheckboxFacet';
 import LinkFacet from './LinkFacet';
+import RangeFitler from './RangeFacet';
 
 class CategoriesAndFacets extends Component {
   constructor(props) {
@@ -15,15 +16,19 @@ class CategoriesAndFacets extends Component {
     this.submitQuery = _.debounce(this.submitQuery.bind(this), 300);
   }
 
-  onChangeHandle(facetName) {
+  onChangeHandle(facetName, facetType) {
     const curryHandler = (value, e) => {
       const params = this.props.facets || {};
       params[facetName] = params[facetName] || [];
-      if(e.target.checked){
-        params[facetName].push(value);
+      if (facetType === 'PERCENTILE') {
+        params[facetName] = [value];
       } else {
-        params[facetName].splice(params[facetName].indexOf(value), 1);
-        if (!params[facetName].length) { delete params[facetName]; }
+        if (e.target.checked) {
+          params[facetName].push(value);
+        } else {
+          params[facetName].splice(params[facetName].indexOf(value), 1);
+          if (!params[facetName].length) { delete params[facetName]; }
+        }  
       }
       this.props.onChangeFacets(params);
       this.submitQuery();
@@ -45,9 +50,13 @@ class CategoriesAndFacets extends Component {
       }
       {
         filters.facets.map((filter) => {
+          if (filter.type === 'PERCENTILE') {
+            let selectedFilters = facets[filter.attributeName];
+            return filter.children.length ? <RangeFitler filter={filter} key={filter.id} onChangeHandle={this.onChangeHandle(filter.attributeName, filter.type)} selectedFilters={selectedFilters}/> : null;
+          }
           let selectedFilters = facets[filter.attributeName];
           selectedFilters = selectedFilters ? selectedFilters.map((item) => item.name) : [];
-          return filter.children.length ? <CheckboxFacet filter={filter} key={filter.id} onChangeHandle={this.onChangeHandle(filter.attributeName)} selectedFilters={selectedFilters}/> : null;
+          return filter.children.length ? <CheckboxFacet filter={filter} key={filter.id} onChangeHandle={this.onChangeHandle(filter.attributeName, filter.type)} selectedFilters={selectedFilters}/> : null;
         })
       }
     </ul>);

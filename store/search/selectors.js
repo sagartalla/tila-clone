@@ -31,13 +31,21 @@ const getSearchFilters = (store) => {
         id: item.Id,
         queryParamName: _.camelCase(item.attributeDisplayName),
         attributeName: item.attributeName,
-        children: item.Values.map((value) => ({
-          name: value.attributeValue,
-          id: shortid.generate(),
-          count: value.Count,
-          param: value.Param,
-        })),
-      })
+        type: item.Type,
+        children: item.Values.map((value) => {
+          const attrObj = {
+            id: shortid.generate(),
+            count: value.Count,
+            param: value.Param,
+          }
+          if (item.Type === 'PERCENTILE') {
+            attrObj.values = value.attributeValue;
+          } else {
+            attrObj.name = value.attributeValue;
+          }
+          return attrObj;
+        }),
+      });
     }, []);
   }
   return filters;
@@ -112,7 +120,6 @@ const getQuery = (store) => {
 const getFacetfilters = (store) => (queryObject) => {
   const facetFilters = _.reduce(queryObject, (facetFilters, fitlerTypeValues, fitlerTypeKey) => {
     facetFilters[fitlerTypeKey] = fitlerTypeValues.map((fitlerTypeValue) => {
-      // return _.find(_.find(store.searchReducer.data.facetResponse.facets, { attributeName: fitlerTypeKey }).Values, { attributeValue: fitlerTypeValue }).Param
       return fitlerTypeValue.param
     });
     return facetFilters;

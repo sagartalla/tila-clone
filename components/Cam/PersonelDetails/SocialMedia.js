@@ -7,17 +7,17 @@ import styles from './user.styl';
 const SocialMedia = () => (
   <div>
     <Row>
-      <Col xs={12} md={12} className={styles['col-base-margin']}>
+      <Col xs={12} md={12} className={styles['user-info-margin']}>
         <span>Link to Social Media</span>
       </Col>
     </Row>
     <Row>
-      <Col xs={12} md={12} className={styles['col-base-margin']}>
+      <Col xs={12} md={12} className={styles['user-info-margin']}>
         <span>Easy one clicklogin when using your Social Media Accounts</span>
       </Col>
     </Row>
     <Row>
-      <Col xs={12} md={12} className={styles['col-base-margin']} >
+      <Col xs={12} md={12} className={styles['user-info-margin']} >
         <Col xs={4} md={4}>
           <span>Icon</span>
         </Col>
@@ -30,7 +30,7 @@ const SocialMedia = () => (
       </Col>
     </Row>
     <Row>
-      <Col xs={12} md={12} className={styles['col-base-margin']}>
+      <Col xs={12} md={12} className={styles['user-info-margin']}>
         <span>Your facebook account has been linked with abcd.com<span>(</span><a href="#">Unlink Now</a><span>)</span></span>
       </Col>
     </Row>

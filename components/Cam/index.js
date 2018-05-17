@@ -4,18 +4,25 @@ import { Grid, Row, Col } from 'react-bootstrap';
 import HeaderBar from '../HeaderBar/index';
 import Sidebar from './Sidebar';
 import UserInfo from './PersonelDetails';
-import Orders from './Orders';
+import ShippingAddress from './ShippingAddress';
+import Orders from './Orders'
+
+import styles from './cam.styl';
 
 const Cam = () => (
-  <div>
+  <div className={styles['bg-color']}>
     <HeaderBar />
     <Grid>
       <Row>
         <Col xs={12} md={3}>
-          <Sidebar />
+          <Row>
+            <Sidebar />
+          </Row>
         </Col>
         <Col xs={12} md={9}>
-          <Orders />
+          <Row>
+            <Orders />
+          </Row>
         </Col>
       </Row>
     </Grid>
@@ -23,3 +30,5 @@ const Cam = () => (
 );
 
 export default Cam;
+
+// removed, add it while merging with Sulochana --------- <UserInfo />
