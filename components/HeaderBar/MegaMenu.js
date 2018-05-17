@@ -7,12 +7,12 @@ const MegaMenu = () => (
     <ul>
       <li>
         <Link prefetch href="/">
-          <a className={styles['level-1-item']}>Offer Zone</a>
+          <a className={styles['level-1-item']}>Offer Zone | </a>
         </Link>
       </li>
       <li>
         <Link prefetch href="/">
-          <a className={styles['level-1-item']}>All categories</a>
+          <a className={styles['level-1-item']}>All categories | </a>
         </Link>
       </li>
       <ul>

@@ -12,6 +12,14 @@ export const listingServiceInstance = axios.create({
   timeout: 3000,
 });
 
+// TODO SF-26
+// Below function headers hardcoded. remove it and get it values from user session.
+export const addressServiceInstance = axios.create({
+  baseURL: constants.CMS_API_URL,
+  timeout: 3000,
+  headers: { "x-country-code": "IND", "x-auth-user": "100002" },
+})
+
 export const pimServiceInstance = axios.create({
   baseURL: constants.PIM_API_URL,
   timeout: 30000,
@@ -41,6 +49,5 @@ pimServiceInstance.interceptors.request.use(
     return Promise.reject(error);
   },
 );
-
 
 export default {};

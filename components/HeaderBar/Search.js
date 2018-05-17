@@ -46,7 +46,7 @@ class Search extends Component {
             onChange={this.onChangeSearchInput}
             value={this.state.query}
            />
-          <button type="submit" className={styles['search-btn']}>Search</button>
+          <button type="submit" className={styles['search-btn']}><i className="fa fa-search"></i></button>
         </form>
       </div>
     )
