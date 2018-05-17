@@ -41,12 +41,16 @@ const getSearchResultsApi = ({
     };
     data.searchDetails = {
       query,
-      country,
-      language,
       facetFilters,
       categoryFilter,
-      fl,
     };
+    data.geoDetails = {
+      country,
+      language,
+    }
+    data.hardCodedValues = {
+      fl,
+    }
     return { data };
   });
 };
