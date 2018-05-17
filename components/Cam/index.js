@@ -4,7 +4,7 @@ import { Grid, Row, Col } from 'react-bootstrap';
 import HeaderBar from '../HeaderBar/index';
 import Sidebar from './Sidebar';
 import UserInfo from './PersonelDetails';
-
+import Orders from './Orders';
 
 const Cam = () => (
   <div>
@@ -15,7 +15,7 @@ const Cam = () => (
           <Sidebar />
         </Col>
         <Col xs={12} md={9}>
-          <UserInfo />
+          <Orders />
         </Col>
       </Row>
     </Grid>

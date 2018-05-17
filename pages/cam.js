@@ -5,11 +5,14 @@ import withRedux from 'next-redux-wrapper';
 import makeStore from '../store';
 
 import Cam from '../components/Cam';
+import Layout from '../layout/main';
 
 const CamPage = () => (
-  <NoSSR>
-    <Cam />
-  </NoSSR>
+  <Layout>
+    <NoSSR>
+      <Cam />
+    </NoSSR>
+  </Layout>
 );
 
 export default withRedux(makeStore, null, null)(CamPage);
