@@ -6,6 +6,7 @@ import makeStore from '../store';
 
 import Cam from '../components/Cam';
 
+
 const CamPage = () => (
   <NoSSR>
     <Cam />
