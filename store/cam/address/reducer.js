@@ -37,6 +37,30 @@ const shippingAddrReducer = typeToReducer({
         });
     },
   },
+  [actions.EDIT_ADDR_DETAILS]: {
+    PENDING: state => {
+      return Object.assign({}, state, { ui: { loading: true } });
+    },
+    REJECTED: (state, action) => {
+      return Object.assign({}, state, { error: action.payload.message, ui: { loading: false } })
+    },
+    FULFILLED: (state, action) => {
+      const temp_data = state.data.map( (obj, index) => {
+        if(obj.address_id === action.payload.options.address_id){
+          obj = action.payload.options
+        }
+        return obj;
+      })
+
+      return Object.assign(
+        {},
+        state,
+        {
+          data: _.values(temp_data),
+          ui: { loading: true }
+        });
+    },
+  },
   [actions.DELETE_ADDRESS]: {
     PENDING: state => {
       return Object.assign({}, state, { ui: { loading: true } });

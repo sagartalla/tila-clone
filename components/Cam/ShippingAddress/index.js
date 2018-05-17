@@ -10,28 +10,28 @@ import AddressBody from './includes/AddressBody';
 import AddressNew from './includes/AddressNew';
 
 import styles from './address.styl';
-
+const initialAddrObj = {
+  address_id: 0,
+  first_name: '',
+  last_name: '',
+  city: '',
+  address_line_1: '',
+  address_line_2: '',
+  mobile_no: '',
+  mobile_country_code: '',
+  latitude: 0,
+  longitude: 0,
+  default: true,
+  address_type: 'home',
+  postal_code: "",
+  shipping_country_code: "IND",
+  state: ""
+}
 class ShippingAddress extends Component {
 
   constructor(props) {
     super(props);
-    const initialAddrObj = {
-      address_id: 0,
-      first_name: '',
-      last_name: '',
-      city: '',
-      address_line_1: '',
-      address_line_2: '',
-      mobile_no: '',
-      mobile_country_code: '',
-      latitude: 0,
-      longitude: 0,
-      default: true,
-      address_type: 'home',
-      postal_code: "",
-      shipping_country_code: "IND",
-      state: ""
-    }
+    
     this.state = {
       addr: initialAddrObj,
       showNewAddr: false,
@@ -83,7 +83,12 @@ class ShippingAddress extends Component {
 
   //TODO if adding service fail, we should not clearuser added data. SF-25
   saveBtnClickHandler() {
-    this.props.sendNewAddressDetails(this.state.addr);
+    if(this.state.addr !== 0){
+      this.props.editAddressDetails(this.state.addr);
+    } else {
+      this.props.sendNewAddressDetails(this.state.addr);
+    }
+    
     this.setState({ addr: initialAddrObj });
     this.showAddAdrressForm();
   }
@@ -160,6 +165,7 @@ const mapDispatchToProps = (dispatch) =>
     {
       getShippingAddressResults: actionCreaters.getShippingAddressResults,
       sendNewAddressDetails: actionCreaters.sendNewAddressDetails,
+      editAddressDetails: actionCreaters.editAddressDetails,
       deleteAddress: actionCreaters.deleteAddress,
       makeDefaultAddress: actionCreaters.makeDefaultAddress,
     },

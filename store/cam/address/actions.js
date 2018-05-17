@@ -5,6 +5,7 @@ const actions = {
   SEND_NEW_ADDR_DETAILS: 'SEND_NEW_ADDR_DETAILS',
   DELETE_ADDRESS: 'DELETE_ADDRESS',
   MAKE_DEFAULT_ADDR: 'MAKE_DEFAULT_ADDR',
+  EDIT_ADDR_DETAILS: 'EDIT_ADDR_DETAILS',
 };
 
 const actionCreaters = {
@@ -19,6 +20,13 @@ const actionCreaters = {
     return dispatch({
       type: actions.SEND_NEW_ADDR_DETAILS,
       payload: apis.sendNewAddressDetailsApi(addressDetails)
+    })
+  },
+
+  editAddressDetails: (addressDetails) => (dispatch, getState) => {
+    return dispatch({
+      type: actions.EDIT_ADDR_DETAILS,
+      payload: apis.editAddressDetailsApi(addressDetails)
     })
   },
 
@@ -37,5 +45,5 @@ const actionCreaters = {
   }
 };
 
-export { actions, actionCreaters, deleteAddress, makeDefaultAddress };
+export { actions, actionCreaters };
 

@@ -19,6 +19,12 @@ const sendNewAddressDetailsApi = (options) => {
   });
 }
 
+const editAddressDetailsApi = (options) => {
+  return sendNewAddressDetailsApiInstance.post('/api/v1/addresses/edit', options).then(({ data }) => {
+    return { data, options };
+  });
+}
+
 const deleteAddressApi = (addrId) => {
   return deleteAddressInstance.delete('/api/v1/addresses/' + addrId).then(({ data }) => {
     return { data, addrId }
@@ -31,4 +37,4 @@ const makeDefaultAddressApi = (addrId) => {
   });
 }
 
-export default { getAllShippingAddressApi, sendNewAddressDetailsApi, deleteAddressApi, makeDefaultAddressApi };
+export default { getAllShippingAddressApi, sendNewAddressDetailsApi, editAddressDetailsApi, deleteAddressApi, makeDefaultAddressApi };
