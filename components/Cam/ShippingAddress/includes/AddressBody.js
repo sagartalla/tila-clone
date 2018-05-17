@@ -1,46 +1,49 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
 
 import styles from '../address.styl';
 
 const AddressBody = (props) => {
 
-  //TODO clicking on <i> tag, id wont be available.
   const deleteAddr = (e) => {
-    props.deleteAddr(e.target.id)
+    props.deleteAddr(e.target.id || e.target.parentNode.id)
   }
 
-  //TODO clicking on <i> tag, id wont be available.
   const editAddress = (e) => {
-    props.editAddress(e.target.id)
+    props.editAddress(e.target.id || e.target.parentNode.id);
   }
 
-  return(
+  const makeDefaultAddress = (e) => {
+    props.makeDefaultAddress(e.target.id);
+  }
+
+  return (
     <div className={styles['address-body']}>
       <Row>
         {
-          props.data.map((val, id) => {
+          props.data && props.data.map((val, id) => {
             return (
               <Col md={4} sm={12} xs={12} key={id}>
                 <div className={styles['address-card']}>
                   <div className={styles['address-card-head']}>
                     {
-                      val.default ? 
-                      <span>
-                        <input name="addr_checkbox" type="radio"/> Default Address
-                      </span> : 
-                      <span>
-                        <input name="addr_checkbox" type="radio" /> Make as Default
+                      val.default ?
+                        <span>
+                          <input id={val.address_id} name="addr_checkbox" type="radio" defaultChecked={val.default} /> Default Address
+                      </span> :
+                        <span>
+                          <input id={val.address_id} name="addr_checkbox" type="radio" onClick={makeDefaultAddress} /> Make as Default
                       </span>
                     }
                   </div>
                   <div className={styles['address-card-body']}>
-                    <h5> {val.contact_name} </h5>
+                    <h5> {val.first_name + ' ' + val.last_name} </h5>
                     <address>
-                      {val.address_line_1 +', '+ val.address_line_2 +', '+val.city+', '+val.state}
+                      {val.address_line_1 + ', ' + val.address_line_2 + ', ' + val.city + ', ' + val.state}
                     </address>
                     <p className={styles['address-card-phone']}>
-                      {val.mobile_country_code+' '+val.mobile_no}
+                      {val.mobile_country_code + ' ' + val.mobile_no}
                     </p>
                   </div>
                   <div className={styles['address-card-actions']}>
@@ -74,5 +77,16 @@ const AddressBody = (props) => {
     </div>
   );
 }
+
+AddressBody.propTypes = {
+  deleteAddr: PropTypes.func.isRequired,
+  editAddress: PropTypes.func.isRequired,
+  makeDefaultAddress: PropTypes.func.isRequired,
+  data: PropTypes.array
+};
+
+AddressBody.defaultProps = {
+  data: []
+};
 
 export default AddressBody;

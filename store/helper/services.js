@@ -12,25 +12,31 @@ export const listingServiceInstance = axios.create({
   timeout: 3000,
 });
 
-// TODO
+// TODO SF-26
 // Below functions headers hardcoded. remove it and get it values from user session.
 
 export const getAllShippingAddressInstance = axios.create({
   baseURL: constants.CMS_API_URL,
   timeout: 3000,
-  headers: {"x-country-code": "IND", "x-auth-user": "100002"},
+  headers: { "x-country-code": "IND", "x-auth-user": "100002" },
 })
 
 export const sendNewAddressDetailsApiInstance = axios.create({
   baseURL: constants.CMS_API_URL,
   timeout: 3000,
-  headers: {"x-country-code": "IND", "x-auth-user": "100002"},
+  headers: { "x-country-code": "IND", "x-auth-user": "100002" },
 })
 
 export const deleteAddressInstance = axios.create({
   baseURL: constants.CMS_API_URL,
   timeout: 3000,
-  headers: {"x-country-code": "IND", "x-auth-user": "100002"},
+  headers: { "x-country-code": "IND", "x-auth-user": "100002" },
+})
+
+export const makeDefaultInstance = axios.create({
+  baseURL: constants.CMS_API_URL,
+  timeout: 3000,
+  headers: { "x-country-code": "IND", "x-auth-user": "100002" },
 })
 
 export default {};

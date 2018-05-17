@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { Row, Col } from 'react-bootstrap';
 
 import { connect } from 'react-redux';
@@ -11,86 +11,138 @@ import AddressNew from './includes/AddressNew';
 
 import styles from './address.styl';
 
-
 class ShippingAddress extends Component {
-  
+
   constructor(props) {
     super(props);
-    this.state={
-        fName: 'Mehraj',
-        lName: '',
-        city: '',
-        colony:'',
-        street_name: '',
-        flat: '',
-        mob: '',
-        showNewAddr: false,
-        homeButton: true,
-        editAddrId: ''
+    const initialAddrObj = {
+      address_id: 0,
+      first_name: '',
+      last_name: '',
+      city: '',
+      address_line_1: '',
+      address_line_2: '',
+      mobile_no: '',
+      mobile_country_code: '',
+      latitude: 0,
+      longitude: 0,
+      default: true,
+      address_type: 'home',
+      postal_code: "",
+      shipping_country_code: "IND",
+      state: ""
+    }
+    this.state = {
+      addr: initialAddrObj,
+      showNewAddr: false,
+      homeButton: true,
+      editAddrId: ''
     }
     this.inputOnChange = this.inputOnChange.bind(this);
     this.saveBtnClickHandler = this.saveBtnClickHandler.bind(this);
     this.showAddAdrressForm = this.showAddAdrressForm.bind(this);
     this.deleteAddr = this.deleteAddr.bind(this);
     this.editAddress = this.editAddress.bind(this);
+    this.makeDefaultAddress = this.makeDefaultAddress.bind(this);
+    this.updateAddressFromGoogleMap = this.updateAddressFromGoogleMap.bind(this);
+    this.setAsDefaultLocation = this.setAsDefaultLocation.bind(this);
+    this.addrTypeHandler = this.addrTypeHandler.bind(this);
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.props.getShippingAddressResults();
   }
-  
+
   shouldComponentUpdate(nextProps) {
     return true;
   }
 
-  inputOnChange(e){
-    this.setState({ [e.target.name] :  e.target.value })
+  inputOnChange(e) {
+    const addr = { ...this.state.addr };
+    addr[e.target.name] = e.target.value;
+    this.setState({ addr });
   }
 
-  deleteAddr(addrId){
+  deleteAddr(addrId) {
     this.props.deleteAddress(addrId);
   }
 
-  editAddress(addrId){
-    this.setState({editAddrId: addrId})
-    //console.log(this.props.getAddrById(addrId));
+  editAddress(addrId) {
+    this.setState({ editAddrId: addrId });
+    this.setState({ addr: this.props.getAddrById(addrId)[0] });
+    this.setState({ showNewAddr: true })
   }
 
-  showAddAdrressForm(e){
-    this.setState({showNewAddr : !this.state.showNewAddr})
+  makeDefaultAddress(addrId) {
+    this.props.makeDefaultAddress(addrId)
   }
 
-  saveBtnClickHandler(){
-    this.props.sendNewAddressDetails(this.state)
+  showAddAdrressForm(e) {
+    this.setState({ showNewAddr: !this.state.showNewAddr })
   }
 
-  render(){
-    const {results} = this.props;
-    const {showNewAddr} = this.state;
+  //TODO if adding service fail, we should not clearuser added data. SF-25
+  saveBtnClickHandler() {
+    this.props.sendNewAddressDetails(this.state.addr);
+    this.setState({ addr: initialAddrObj });
+    this.showAddAdrressForm();
+  }
+
+  setAsDefaultLocation(e) {
+    const addr = { ...this.state.addr };
+    addr['default'] = e.target.checked;
+    this.setState({ addr });
+  }
+
+  updateAddressFromGoogleMap(json) {
+    let { lat, lng, address } = json;
+    const addr = { ...this.state.addr };
+
+    addr['latitude'] = lat;
+    addr['longitude'] = lng;
+    addr['address_line_1'] = address;
+
+    this.setState({ addr });
+  }
+
+  addrTypeHandler(e) {
+    const addr = { ...this.state.addr };
+    addr['address_type'] = e.target.name;
+    this.setState({ addr });
+  }
+
+  render() {
+    const { results } = this.props;
+    let { showNewAddr, addr } = this.state;
+
     return (
       <div className={styles['address-container']}>
         <AddressHeader />
         <Row>
           <Col md={12} sm={12} xs={12}>
-            {
-              results.length > 0 ? 
-                <AddressBody 
-                  data = {results}
-                  showAddAdrressForm = {this.showAddAdrressForm}
-                  deleteAddr = {this.deleteAddr}
-                  editAddress = {this.editAddress}
-                />
-              : ''
-            }
+            <AddressBody
+              data={results}
+              showAddAdrressForm={this.showAddAdrressForm}
+              deleteAddr={this.deleteAddr}
+              editAddress={this.editAddress}
+              makeDefaultAddress={this.makeDefaultAddress}
+            />
           </Col>
           <Col md={12} sm={12} xs={12}>
-            <AddressNew 
-              inputOnChange={this.inputOnChange}
-              saveBtnClickHandler={this.saveBtnClickHandler}
-              data={this.state}
-              showNewAddr={showNewAddr}
-              homeButton={this.homeButton}
-            />
+            {
+              showNewAddr ?
+                <AddressNew
+                  inputOnChange={this.inputOnChange}
+                  saveBtnClickHandler={this.saveBtnClickHandler}
+                  data={addr}
+                  showNewAddr={showNewAddr}
+                  homeButton={this.homeButton}
+                  updateAddressFromGoogleMap={this.updateAddressFromGoogleMap}
+                  setAsDefaultLocation={this.setAsDefaultLocation}
+                  addrTypeHandler={this.addrTypeHandler}
+                  showAddAdrressForm={this.showAddAdrressForm}
+                /> : ''
+            }
           </Col>
         </Row>
       </div>
@@ -98,10 +150,9 @@ class ShippingAddress extends Component {
   }
 }
 
-/// ---- WHY DEFAULT HAS TO TAKE - TODO.
 const mapStateToProps = (store) => ({
-  results: selectors.default.getShippingAddressResults(store),
-  getAddrById: selectors.default.getAddrById(store)
+  results: selectors.getShippingAddressResults(store),
+  getAddrById: selectors.getAddrById(store)
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -110,9 +161,10 @@ const mapDispatchToProps = (dispatch) =>
       getShippingAddressResults: actionCreaters.getShippingAddressResults,
       sendNewAddressDetails: actionCreaters.sendNewAddressDetails,
       deleteAddress: actionCreaters.deleteAddress,
+      makeDefaultAddress: actionCreaters.makeDefaultAddress,
     },
     dispatch,
   );
-  
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShippingAddress);
