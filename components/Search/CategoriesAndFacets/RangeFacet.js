@@ -57,9 +57,10 @@ class RangeFitler extends Component {
 
   onChangeRange(value) {
     const { filter } = this.props;
+    const values = filter.children[0].values;
     const closest = {
-      min: RangeFitler.getClosest(filter.children[0].values, value.min),
-      max: RangeFitler.getClosest(filter.children[0].values, value.max),
+      min: RangeFitler.getClosest(values, value.min),
+      max: RangeFitler.getClosest(values, value.max),
     };
     this.setState({
       value: closest
@@ -70,6 +71,7 @@ class RangeFitler extends Component {
 
   render () {
     const { filter } = this.props;
+    const { min, max } = this.state.static;
     return (
       <li>
         <div>{filter.name}</div>
@@ -83,8 +85,8 @@ class RangeFitler extends Component {
         </FormControl>
         <div className={styles['range-fitler-wrap']}>
           <InputRange
-            maxValue={this.state.static.max}
-            minValue={this.state.static.min}
+            maxValue={max}
+            minValue={min}
             value={this.state.value}
             onChange={value => this.onChangeRange(value)}
           />
