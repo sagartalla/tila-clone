@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import OrderItem from './includes/OrderItem';
+import Order from './includes/Order';
 
 import { selectors } from '../../../store/cam/orders';
 
 import styles from './orders.styl';
 
 const Orders = ({ ordersData }) => (
-  ordersData.map((orderItem) => <OrderItem orderItem={orderItem} />)
+  ordersData.map((order) => <Order order={order} />)
 );
 
 const mapStateToProps = (store) => ({

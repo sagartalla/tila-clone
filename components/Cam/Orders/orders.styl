@@ -1,5 +1,28 @@
+@import '../../../layout/common/common.styl'
+
+$shipment-wrap-border-color = #D8D8D8
+
 .order-item-wrap 
   background #fff
-  box-shadow 0 3px 9px 0 rgba(0,0,0,0.07)
-  padding 20px 30px
-  
+
+.product-item
+  display flex
+
+.order-item-img
+  height 50px;
+
+.shipment-wrap
+  border: 1px solid $shipment-wrap-border-color;
+  border-radius: 6px;
+  .products-wrap 
+    border-right: 1px solid $shipment-wrap-border-color;
+    .product-item
+      height 70px
+      &:only-of-type
+      height 140px
+      .img-wrap, .text-wrap
+        position relative
+      .img-wrap
+        flex-grow 1
+      .text-wrap
+        flex-grow: 4
