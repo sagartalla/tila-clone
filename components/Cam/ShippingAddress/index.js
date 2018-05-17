@@ -83,7 +83,7 @@ class ShippingAddress extends Component {
 
   //TODO if adding service fail, we should not clearuser added data. SF-25
   saveBtnClickHandler() {
-    if(this.state.addr !== 0){
+    if(this.state.addr.address_id !== 0){
       this.props.editAddressDetails(this.state.addr);
     } else {
       this.props.sendNewAddressDetails(this.state.addr);
