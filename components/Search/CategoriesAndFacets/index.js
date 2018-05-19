@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import _ from 'lodash';
 import { decode, encode, addUrlProps, replaceInUrlQuery } from 'react-url-query';
-import { actionCreaters, selectors } from '../../../store/search';
+import { actionCreators, selectors } from '../../../store/search';
 
 import CheckboxFacet from './CheckboxFacet';
 import LinkFacet from './LinkFacet';
@@ -71,7 +71,7 @@ const mapStateToProps = (store) => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      getSearchResults: actionCreaters.getSearchResults
+      getSearchResults: actionCreators.getSearchResults
     },
     dispatch,
   );

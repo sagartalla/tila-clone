@@ -70,7 +70,6 @@ const getVariants = (store) => {
 };
 
 const getPreview = (store) => {
-  debugger;
   const { attributes, products } = store.productReducer.data.pimData;
   const { catalogData } = store.productReducer.data;
   const titleInfo = {

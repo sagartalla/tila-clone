@@ -4,17 +4,18 @@ import withRedux from 'next-redux-wrapper';
 import { configureUrlQuery } from 'react-url-query';
 import createHistory from 'history/createBrowserHistory';
 import makeStore from '../store';
-import { actionCreaters, selectors } from '../store/search';
+import { actionCreators, selectors } from '../store/search';
 import Layout from '../layout/main';
 import Search from '../components/Search';
 
 class SearchPage extends Component {
   static async getInitialProps({ store, isServer, query }) {
+    debugger;
     const categoryFilter = {
       id: query.subCategory ? query.subCategory.match(/(\d*)$/)[0] : query.category ? query.category.match(/(\d*)$/)[0] : null,
     };
     const facetFilters = selectors.getFacetfilters(store.getState())(JSON.parse(query.facets || '{}'));
-    await store.dispatch(actionCreaters.getSearchResults({
+    await store.dispatch(actionCreators.getSearchResults({
       categoryFilter,
       country: 'UAE',
       pageSize: 100,
@@ -50,7 +51,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      getSearchResults: actionCreaters.getSearchResults,
+      getSearchResults: actionCreators.getSearchResults,
     },
     dispatch,
   );

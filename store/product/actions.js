@@ -5,7 +5,7 @@ const actions = {
   GET_PREVIEW: 'GET_PREVIEW',
 };
 
-const actionCreaters = {
+const actionCreators = {
   getProduct: (params) => {
     return ({
       type: actions.GET_PRODUCT,
@@ -20,5 +20,5 @@ const actionCreaters = {
   }
 };
 
-export { actions, actionCreaters };
+export { actions, actionCreators };
 

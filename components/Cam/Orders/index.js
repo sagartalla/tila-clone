@@ -5,13 +5,32 @@ import { bindActionCreators } from 'redux';
 
 import Order from './includes/Order';
 
-import { selectors } from '../../../store/cam/orders';
+import { selectors, actionCreators } from '../../../store/cam/orders';
 
 import styles from './orders.styl';
 
-const Orders = ({ ordersData }) => (
-  ordersData.map((order) => <Order order={order} />)
-);
+class Orders extends Component {
+  componentDidMount() {
+    this.props.getOrderHistory();
+  }
+
+  render() {
+    const { ordersData, tabDetails } = this.props;
+    const [tab, ...queryParams] = tabDetails;
+    const camComponent = ((tabName) => {
+      switch(tabName) {
+        case 'orders':
+          return 
+      }
+    })(tab)
+
+    return (
+      <div className={styles['orders-container']}>
+        {ordersData.map((order) => <Order key={order.id} order={order} />)}
+      </div>
+    );
+  }
+}
 
 const mapStateToProps = (store) => ({
   ordersData: selectors.getOrdersData(store)
@@ -19,7 +38,7 @@ const mapStateToProps = (store) => ({
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
-    {},
+    { getOrderHistory: actionCreators.getOrderHistory },
     dispatch,
   );
 

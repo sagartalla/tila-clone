@@ -5,12 +5,11 @@ import makeStore from '../store';
 
 import Layout from '../layout/main';
 import Cam from '../components/Cam';
-import Layout from '../layout/main';
 
-const CamPage = () => (
+const CamPage = (props) => (
   <Layout>
     <NoSSR>
-      <Cam />
+      <Cam tabDetails={props.url.query.tabDetails}/>
     </NoSSR>
   </Layout>
 );
