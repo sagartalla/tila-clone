@@ -56,4 +56,19 @@ pimServiceInstance.interceptors.request.use(
   },
 );
 
+export const orderInstance = axios.create({
+  baseURL: constants.ORDERS_API_URL,
+  timeout: 3000,
+})
+
+export const transacationRedirectUrlInstance = axios.create({
+  baseURL: '',
+  timeout: 3000,
+})
+
+export const paymentInstance = axios.create({
+  baseURL: constants.TRANSACTIONS_API_URL,
+  timeout: 3000,
+})
+
 export default {};

@@ -43,5 +43,3 @@ const Cam = ({tabDetails}) => {
 };
 
 export default Cam;
-
-// removed, add it while merging with Sulochana --------- <UserInfo />
