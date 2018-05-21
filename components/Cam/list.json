@@ -2,7 +2,8 @@
 	"data": [{
 			"icon": "icon",
 			"display": "My Orders",
-			"count": "1"
+			"count": "1",
+			"href": "/cam/orders"
 		}, {
 			"icon": "icon",
 			"display": "Orders shared with me",
@@ -18,7 +19,8 @@
 	"data": [{
 		"icon": "icon",
 		"display": "Shipping Address",
-		"count": "1"
+		"count": "1",
+		"href": "/cam/address"
 	}, {
 		"icon": "icon",
 		"display": "Credit Cards,Vouchers and Reward Points",

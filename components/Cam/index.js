@@ -15,6 +15,10 @@ const Cam = ({tabDetails}) => {
     switch (tabName) {
       case 'orders':
         return <Orders />;
+      case 'address':
+        return <ShippingAddress />;
+      case 'profile':
+        return <UserInfo />; 
     }
   })(tab)
   return (
