@@ -2,9 +2,9 @@ import moment from 'moment';
 import fp, * as _ from 'lodash/fp';
 
 const getOrdersData = (store) => {
-  const { data } = store.ordersReducer
-  if (data.length) {
-    return data.map((order) => {
+  const { orders } = store.ordersReducer.data
+  if (orders && orders.length) {
+    return orders.map((order) => {
       const { 
         order_id, 
         customer_account_id, 
@@ -21,7 +21,6 @@ const getOrdersData = (store) => {
         _.groupBy((i) => i.item_tracking_id),
         _.map((i) => ({ id: i.order_item_id, img: i.variant_info.image_url, name: i.variant_info.title, item_tracking_id: i.item_tracking_id }))
       )(order_items);
-      
       return {
         id: order_id,
         shippingTo: {

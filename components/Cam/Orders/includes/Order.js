@@ -39,7 +39,9 @@ const Order = ({order}) => {
               </div>
             </Col>
             <Col md={4}>
-              <Button>Track Order</Button>
+              <a href={`/cam/orders/${order.id}`}>
+                <Button>Track Order</Button>
+              </a>
             </Col>
           </Row>
         </Col>
@@ -49,7 +51,7 @@ const Order = ({order}) => {
           {order.orderItems.map((orderItem) => <OrderItem key={orderItem.id} orderItem={orderItem} />)}
         </Col>
       </Row>
-      <Row>
+      <Row> 
         <div className={styles['m-10']}>
           <Col md={7}>
             <div className={styles['f-14']}>

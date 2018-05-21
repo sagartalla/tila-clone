@@ -9,25 +9,34 @@ import Orders from './Orders'
 
 import styles from './cam.styl';
 
-const Cam = () => (
-  <div className={styles['bg-color']}>
-    <HeaderBar />
-    <Grid>
-      <Row>
-        <Col xs={12} md={3}>
-          <Row>
-            <Sidebar />
-          </Row>
-        </Col>
-        <Col xs={12} md={9}>
-          <Row>
-            <Orders />
-          </Row>
-        </Col>
-      </Row>
-    </Grid>
-  </div>
-);
+const Cam = ({tabDetails}) => {
+  const [tab, ...queryParams] = tabDetails.split('/');
+  const camComponent = ((tabName) => {
+    switch (tabName) {
+      case 'orders':
+        return <Orders />;
+    }
+  })(tab)
+  return (
+    <div className={styles['bg-color']}>
+      <HeaderBar />
+      <Grid>
+        <Row>
+          <Col xs={12} md={3}>
+            <Row>
+              <Sidebar />
+            </Row>
+          </Col>
+          <Col xs={12} md={9}>
+            <Row>
+              { camComponent }
+            </Row>
+          </Col>
+        </Row>
+      </Grid>
+    </div>
+  )
+};
 
 export default Cam;
 

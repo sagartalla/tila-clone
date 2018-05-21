@@ -13,17 +13,9 @@ class Orders extends Component {
   componentDidMount() {
     this.props.getOrderHistory();
   }
-
+  
   render() {
-    const { ordersData, tabDetails } = this.props;
-    const [tab, ...queryParams] = tabDetails;
-    const camComponent = ((tabName) => {
-      switch(tabName) {
-        case 'orders':
-          return 
-      }
-    })(tab)
-
+    const { ordersData } = this.props;
     return (
       <div className={styles['orders-container']}>
         {ordersData.map((order) => <Order key={order.id} order={order} />)}

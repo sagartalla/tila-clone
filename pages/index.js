@@ -10,7 +10,6 @@ import Search from '../components/Search';
 
 class SearchPage extends Component {
   static async getInitialProps({ store, isServer, query }) {
-    debugger;
     const categoryFilter = {
       id: query.subCategory ? query.subCategory.match(/(\d*)$/)[0] : query.category ? query.category.match(/(\d*)$/)[0] : null,
     };
