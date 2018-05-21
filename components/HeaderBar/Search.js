@@ -25,7 +25,7 @@ class Search extends Component {
   submitQuery(e) {
     e.preventDefault();
     const flushFilters = true;
-    Router.pushRoute(`/search=${this.state.query}`);
+    Router.pushRoute(`/?search=${this.state.query}`);
     // pushInUrlQuery('search', this.state.query, { url: "/", as: "/", options: {} });
     this.props.getSearchResults({
       query: this.state.query

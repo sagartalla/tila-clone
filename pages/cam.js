@@ -6,24 +6,11 @@ import createHistory from 'history/createBrowserHistory';
 
 import makeStore from '../store';
 
+import Base from './base';
 import Layout from '../layout/main';
 import Cam from '../components/Cam';
 
-// const CamPage = (props) => (
-//   <Layout>
-//     <NoSSR>
-//       <Cam tabDetails={props.url.query.tabDetails}/>
-//     </NoSSR>
-//   </Layout>
-// );
-
-class CamPage extends Component {
-  
-  componentDidMount() {
-    const history = createHistory();
-    configureUrlQuery({ history });
-  }
-
+class CamPage extends Base {
   render(){
    return (
     <Layout>
