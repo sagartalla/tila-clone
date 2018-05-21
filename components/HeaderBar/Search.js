@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { addUrlProps, UrlQueryParamTypes, pushInUrlQuery } from 'react-url-query';
 import styles from './header.styl';
-import { actionCreaters, selectors } from '../../store/search';
+import { actionCreators, selectors } from '../../store/search';
 
 const urlPropsQueryConfig = {
   searchText: { type: UrlQueryParamTypes.string, queryParam: 'search', }
@@ -67,7 +67,7 @@ const mapStateToProps = (store) => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      getSearchResults: actionCreaters.getSearchResults,
+      getSearchResults: actionCreators.getSearchResults,
     },
     dispatch,
   );

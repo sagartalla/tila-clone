@@ -8,7 +8,7 @@ const actions = {
   EDIT_ADDR_DETAILS: 'EDIT_ADDR_DETAILS',
 };
 
-const actionCreaters = {
+const actionCreators = {
   getShippingAddressResults: () => (dispatch, getState) => {
     return dispatch({
       type: actions.GET_SHIPPING_ADDR_RESULTS,
@@ -45,5 +45,5 @@ const actionCreaters = {
   }
 };
 
-export { actions, actionCreaters };
+export { actions, actionCreators };
 

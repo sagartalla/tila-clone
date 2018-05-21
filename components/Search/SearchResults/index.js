@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import InfiniteScroll from 'react-infinite-scroller';
 import _ from 'lodash'
 import Product from "./Product";
-import { actionCreaters, selectors } from '../../../store/search';
+import { actionCreators, selectors } from '../../../store/search';
 import styles from '../search.styl';
 
 class SearchReuslts extends Component {
@@ -59,7 +59,7 @@ const mapStateToProps = (store) => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      getSearchResults: actionCreaters.getSearchResults,
+      getSearchResults: actionCreators.getSearchResults,
     },
     dispatch,
   );

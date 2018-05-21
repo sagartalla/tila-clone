@@ -5,7 +5,7 @@ const actions = {
   GET_MORE_RESULTS: 'GET_MORE_RESULTS',
 };
 
-const actionCreaters = {
+const actionCreators = {
   getSearchResults: (params, loadMore, flushFilters) => (dispatch, getState) => {
     const state = getState();
     const { searchReducer } = state
@@ -17,5 +17,5 @@ const actionCreaters = {
   },
 };
 
-export { actions, actionCreaters };
+export { actions, actionCreators };
 

@@ -4,14 +4,14 @@ import withRedux from 'next-redux-wrapper';
 import makeStore from '../store';
 
 import Layout from '../layout/main';
-import Cam from '../components/Cam';
+import Order from '../components/Order';
 
-const CamPage = (props) => (
+const OrderPage = ({url}) => (
   <Layout>
     <NoSSR>
-      <Cam tabDetails={props.url.query.tabDetails}/>
+      <Order query={url.query} />
     </NoSSR>
   </Layout>
 );
 
-export default withRedux(makeStore, null, null)(CamPage);
+export default withRedux(makeStore, null, null)(OrderPage);

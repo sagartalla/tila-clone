@@ -3,7 +3,7 @@ import { Row, Col } from 'react-bootstrap';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { actionCreaters, selectors } from '../../../store/cam/address';
+import { actionCreators, selectors } from '../../../store/cam/address';
 
 import AddressHeader from './includes/AddressHeader';
 import AddressBody from './includes/AddressBody';
@@ -163,11 +163,11 @@ const mapStateToProps = (store) => ({
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      getShippingAddressResults: actionCreaters.getShippingAddressResults,
-      sendNewAddressDetails: actionCreaters.sendNewAddressDetails,
-      editAddressDetails: actionCreaters.editAddressDetails,
-      deleteAddress: actionCreaters.deleteAddress,
-      makeDefaultAddress: actionCreaters.makeDefaultAddress,
+      getShippingAddressResults: actionCreators.getShippingAddressResults,
+      sendNewAddressDetails: actionCreators.sendNewAddressDetails,
+      editAddressDetails: actionCreators.editAddressDetails,
+      deleteAddress: actionCreators.deleteAddress,
+      makeDefaultAddress: actionCreators.makeDefaultAddress,
     },
     dispatch,
   );

@@ -4,7 +4,7 @@ import withRedux from 'next-redux-wrapper';
 import { configureUrlQuery } from 'react-url-query';
 import createHistory from 'history/createBrowserHistory';
 import makeStore from '../store';
-import { actionCreaters, selectors } from '../store/product';
+import { actionCreators, selectors } from '../store/product';
 import Layout from '../layout/main';
 import { getProduct } from '../store/product/api';
 import getProductComponent from '../components/Product'
@@ -12,12 +12,12 @@ import getProductComponent from '../components/Product'
 class ProductPage extends Component {
   static async getInitialProps({ store, query, isServer }) {
     if (query.isPreview){
-      await store.dispatch(actionCreaters.getPreview({
+      await store.dispatch(actionCreators.getPreview({
         taskCode: query.taskCode,
         itemType: query.itemType,
       }));      
     } else {
-      await store.dispatch(actionCreaters.getProduct({
+      await store.dispatch(actionCreators.getProduct({
         "city": "string",
         "country_code": "SAE",
         "flags": {
@@ -57,8 +57,8 @@ const mapStatetoProps = (state) => {
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      getProduct: actionCreaters.getProduct,
-      getPreview: actionCreaters.getPreview,
+      getProduct: actionCreators.getProduct,
+      getPreview: actionCreators.getPreview,
     },
     dispatch,
   )

@@ -1,7 +1,7 @@
 import styles from './main.styl';
 
 const Layout = ({children}) => (
-    <div>
+    <div className={styles['main-layout']}>
         {children}
     </div>
 );

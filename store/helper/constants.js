@@ -4,4 +4,5 @@ export default {
   LISTING_API_URL   :   'http://listing-dev.fptechscience.com',
   CMS_API_URL       :   'http://cms-dev.fptechscience.com',
   PIM_API_URL: 'http://pimapis-dev.fptechscience.com/pim',
+  ORDER_API_URL: 'http://order-dev.fptechscience.com',
 };
