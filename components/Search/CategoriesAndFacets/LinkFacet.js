@@ -21,6 +21,13 @@ class LinkFacet extends Component {
     });
   }
 
+  componentWillReceiveProps() {
+    const { filter } = this.props;
+    this.setState({
+      isMoreButtonRequired: filter.children.length > MaxItems,
+    });
+  }
+
   render() {
     const { filter } = this.props;
     return (

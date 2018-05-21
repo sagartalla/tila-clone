@@ -39,6 +39,13 @@ class CheckboxFacet extends Component {
     });
   }
 
+  componentWillReceiveProps() {
+    const { filter } = this.props;
+    this.setState({
+      isMoreButtonRequired: filter.children.length > MaxItems,
+    });
+  }
+ 
   render() {
     const { filter } = this.props;
     const { selectedItems } = this.state;
