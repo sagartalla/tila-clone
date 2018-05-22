@@ -4,19 +4,46 @@ import { Grid, Row, Col } from 'react-bootstrap';
 import styles from '../payment.styl';
 
 const SignIn = props => (
-  <div className={styles['box']}>
-    <h3>Sign in</h3>
-    <Row>
+  <div className={`${styles['p-24']} ${styles['box']} ${styles['mb-20']}`}>
+    <Row className={`${props.configJson.done ? '' : 'hide'}`}>
+      <Col md={8} sm={12} xs={12}>
+        <h3 className={styles['m-0']}>Sign in</h3>
+      </Col>
+      <Col md={4} sm={12} xs={12}>
+        {
+          props.login.user_name
+        }
+      </Col>
+      <Col md={2} sm={12} xs={12} className={'hide'}>
+        <button className={`${styles['fp-btn']} ${styles['fp-btn-default']}`}>
+          Edit
+        </button>
+      </Col>
+    </Row>
+    <Row className={`${props.configJson.progress ? '' : 'hide'}`}>
       <Col md={12} sm={12} xs={12}>
-        <input placeholder="Email/username*" name="user_name" onChange={props.inputOnChange} value={props.login.user_name} className={styles.input} />
+        <h3 className={styles['m-0']}>Sign in</h3>
       </Col>
       <Col md={12} sm={12} xs={12}>
-        <div><input type="checkbox" /> Checkout as Guest</div>
-        <div><input type="checkbox" /> send me updates on the latest offers and deals</div>
-        <div><input type="checkbox" /> I agree to the <a>T&C</a> and <a>Privacy Policy</a></div>
+        <div className={`${styles['mb-10']} ${styles['mt-10']}`}>
+          <input type="text" placeholder="Email / Username*" name="user_name" onChange={props.inputOnChange} value={props.login.user_name} className={styles.input} />
+        </div>
       </Col>
       <Col md={12} sm={12} xs={12}>
-        <button className="btn btn-primary">Continue</button>
+        <div className={`${styles['mb-10']} ${styles['mt-10']}`}>
+          <input type="password" placeholder="Password" name="password" onChange={props.inputOnChange} value={props.login.password} className={styles.input} />
+        </div>
+      </Col>
+      <Col md={12} sm={12} xs={12}>
+        <div className={styles['mt-10']}>
+          <input type="checkbox" /> Send me updates on the latest offers and deals
+        </div>
+        <div className={styles['mt-10']}>
+          <input type="checkbox" defaultChecked="true"/> I agree to the <a>T&C</a> and <a>Privacy Policy</a>
+        </div>
+      </Col>
+      <Col md={12} sm={12} xs={12} className={styles['mt-10']}>
+        <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']}`} onClick={props.showAddress}>Continue</button>
       </Col>
     </Row>
   </div>

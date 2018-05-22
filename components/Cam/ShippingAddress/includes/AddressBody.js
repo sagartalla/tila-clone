@@ -67,9 +67,13 @@ const AddressBody = (props) => {
         <Col md={4} sm={12} xs={12}>
           <div className={` ${styles['address-card']} ${styles['address-card-new']}`} onClick={props.showAddAdrressForm}>
             <div className={`${styles['flex-center']} ${styles['flex-wrap']}`}>
-              <p>Add New Address</p>
+              <h5 className={`${styles['m-0 mb-10']}`}><a>Add New Address</a></h5>
               <p>Add a new network or home address where you want the orders to be delivered.</p>
-              <p>Add New</p>
+              <p>
+                <button className={`${styles['fp-btn']} ${styles['fp-btn-default']}`}>
+                  Add New
+                </button>
+                </p>
             </div>
           </div>
         </Col>

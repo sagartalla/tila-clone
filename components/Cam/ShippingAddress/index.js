@@ -123,7 +123,7 @@ class ShippingAddress extends Component {
     let { showNewAddr, addr } = this.state;
 
     return (
-      <div className={`${styles['address-container']} ${styles['box']} `}>
+      <div className={`${styles['address-container']} ${standalone !== true ? '' : styles['box']} `}>
         {
           standalone === true ?
             <AddressHeader /> :
@@ -158,7 +158,7 @@ class ShippingAddress extends Component {
           {
             standalone !== true ?
               <Col md={12} sm={12} xs={12}>
-                <button className="btn btn-primary" onClick={handleShippingAddressContinue}>Continue</button>
+                <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']}`} onClick={handleShippingAddressContinue}>Continue</button>
               </Col>
               : null
           }

@@ -19,7 +19,8 @@ class Payments extends React.Component {
     super(props);
     this.state = {
       login: {
-        user_name: ''
+        user_name: '',
+        password: ''
       },
       paymentJson: {
         "payment_details": [
@@ -31,6 +32,23 @@ class Payments extends React.Component {
         ],
         "transaction_id": "string"
       },
+      paymentConfigJson: {
+        signIn: {
+          basic: false,
+          progress: true,
+          done: false
+        },
+        address: {
+          basic: true,
+          progress: false,
+          done: false
+        },
+        payment: {
+          basic: true,
+          progress: false,
+          done: false
+        }
+      },
       showTab: 0,// to show payment tabs
       paymentOptions: {} // which payment options to show.
     }
@@ -38,6 +56,8 @@ class Payments extends React.Component {
     this.inputOnChange = this.inputOnChange.bind(this);
     this.showPaymentType = this.showPaymentType.bind(this);
     this.makePayment = this.makePayment.bind(this);
+    this.showAddress = this.showAddress.bind(this);
+    this.editAddress = this.editAddress.bind(this);
     this.handleShippingAddressContinue = this.handleShippingAddressContinue.bind(this);
   }
 
@@ -45,11 +65,6 @@ class Payments extends React.Component {
     const { login } = this.state;
     login[e.target.name] = e.target.value;
     this.setState({ login });
-  }
-
-  //send params
-  handleShippingAddressContinue(e) {
-    this.props.createOrder()
   }
 
   // onclick payment method tabs.
@@ -62,9 +77,33 @@ class Payments extends React.Component {
     this.props.doPayment(this.state.paymentJson);
   }
 
+  // TODO Send params with cart info.
+  // TODO payment page should show after AJAX call is with success.
+  handleShippingAddressContinue(e) {
+    this.props.createOrder()
+
+    const paymentConfigJson = {...this.state.paymentConfigJson};
+    paymentConfigJson['address'] = { basic: false,progress: false, done: true};
+    paymentConfigJson['payment'] = { basic: false,progress: true, done: false};
+    this.setState({ paymentConfigJson });
+  }
+
+  showAddress(){
+    const paymentConfigJson = {...this.state.paymentConfigJson};
+    paymentConfigJson['signIn'] = { basic: false,progress: false, done: true};
+    paymentConfigJson['address'] = { basic: false,progress: true, done: false};
+    this.setState({ paymentConfigJson });
+  }
+
+  editAddress(){
+    const paymentConfigJson = {...this.state.paymentConfigJson};
+    paymentConfigJson['address'] = { basic: false,progress: true, done: false};
+    this.setState({ paymentConfigJson });
+  }
+
   render() {
-    const { login, showTab } = this.state;
-    const {paymentOptions} = this.props;
+    const { login, showTab, paymentConfigJson } = this.state;
+    const {paymentOptions, defaultAddress} = this.props;
     return (
       <div className={styles['payment']}>
         <PaymentHeader />
@@ -79,19 +118,24 @@ class Payments extends React.Component {
               <SignIn
                 login={login}
                 inputOnChange={this.inputOnChange}
+                configJson={paymentConfigJson.signIn}
+                showAddress={this.showAddress}
               />
               <DeliveryAddress
                 handleShippingAddressContinue={this.handleShippingAddressContinue}
+                configJson={paymentConfigJson.address}
+                defaultAddress={defaultAddress}
+                editAddress={this.editAddress}
               />
-              {paymentOptions && paymentOptions.data ? 
-                <PaymentMode
-                  data = {paymentOptions}
-                  showTab={showTab}
-                  showPaymentType={this.showPaymentType}
-                  makePayment= {this.makePayment}
-                />
-                : null
-              }
+              
+              <PaymentMode
+                data = {paymentOptions}
+                showTab={showTab}
+                showPaymentType={this.showPaymentType}
+                makePayment= {this.makePayment}
+                configJson={paymentConfigJson.payment}
+              />
+               
             </Col>
             <Col md={3} xs={12} sm={12}>
               <Row>
@@ -106,7 +150,8 @@ class Payments extends React.Component {
 }
 
 const mapStateToprops = (store) => ({
-  paymentOptions: selectors.getPaymentOptions(store)
+  paymentOptions: selectors.getPaymentOptions(store),
+  defaultAddress: selectors.getDefaultAddress(store)
 })
 
 const mapDispatchToProps = (dispatch) =>
