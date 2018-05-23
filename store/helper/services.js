@@ -36,6 +36,11 @@ export const orderServiceInstance = axios.create({
   headers: { "x-country-code": "QWE", "x-auth-user": "100002" },
 })
 
+export const authServiceInstance = axios.create({
+  baseURL: constants.AUTH_API_URL,
+  timeout: 3000,
+})
+
 pimServiceInstance.interceptors.request.use(
   (config) => {
     const tenantId = '5ab0f832a206e8419416f74f';
