@@ -36,6 +36,13 @@ export const orderServiceInstance = axios.create({
   headers: { "x-country-code": "QWE", "x-auth-user": "100002" },
 })
 
+export const cartServiceInstance = axios.create({
+  baseURL: constants.CART_API_URL,
+  timeout: 3000,
+  headers: { "x-country-code": "SAE", "x-auth-user": "100002", "x-language": "en", "x-session-id": "asdfg" },
+})
+
+
 pimServiceInstance.interceptors.request.use(
   (config) => {
     const tenantId = '5ab0f832a206e8419416f74f';
