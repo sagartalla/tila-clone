@@ -12,7 +12,8 @@ import Login from '../Login';
 class ActionBar extends Component {
   constructor(props) {
     super(props);
-    this.logout = this.logout.bind(this);
+    this.logoutClick = this.logoutClick.bind(this);
+    this.loginClick = this.loginClick.bind(this);
   }
 
   state = { show: false }
@@ -28,12 +29,16 @@ class ActionBar extends Component {
     });
   }
 
-  logout() {
+  logoutClick() {
     this.setState({
       logoutClicked: true,
     },() => {
       this.props.logout();
     })
+  }
+
+  loginClick() {
+    this.setState({ show: true });
   }
   
   render() {
@@ -48,9 +53,9 @@ class ActionBar extends Component {
             {
               isLoggedIn
               ?
-              <span onClick={this.logout}>logout</span>
+              <span onClick={this.logoutClick}>logout</span>
               : 
-              <span onClick={() => this.setState({ show: true })}>login</span>
+                <span onClick={this.loginClick}>login</span>
             }
           </span>
           <ModalContainer />
