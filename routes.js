@@ -7,5 +7,6 @@ routes
   .add({ name: 'product', pattern: '/product', page: 'product' })
   .add({ name: 'Cart', pattern: '/cart', page: 'cart' })
   .add({ name: 'search', pattern: '/:category?/:subCategory?', page: 'index' });
-  
+
 module.exports = routes
+

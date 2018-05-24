@@ -42,6 +42,10 @@ export const cartServiceInstance = axios.create({
   headers: { "x-country-code": "SAE", "x-auth-user": "100002", "x-language": "en", "x-session-id": "asdfg" },
 })
 
+export const authServiceInstance = axios.create({
+  baseURL: constants.AUTH_API_URL,
+  timeout: 3000,
+})
 
 pimServiceInstance.interceptors.request.use(
   (config) => {
