@@ -128,7 +128,7 @@ paymentInstance.interceptors.request.use(
 
 cartServiceInstance.interceptors.request.use(
   (config) => {
-    config.headers = { "x-country-code": "SAE", "x-session-id": "asdasd", "x-access-token": authToken() };
+    config.headers = { "x-country-code": "SAE", "x-session-id": "asdasd", "x-access-token": authToken(), "x-language": 'en' };
     return config;
   },
   (error) => {
