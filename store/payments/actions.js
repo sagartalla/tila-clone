@@ -5,7 +5,7 @@ const actions = {
   DO_PAYMENT: 'DO_PAYMENT'
 };
 
-const actionCreaters = {
+const actionCreators = {
   createOrder: (params) => (dispatch, getState) => {
     const temp_params = {
       "country_code": "IND",
@@ -40,5 +40,5 @@ const actionCreaters = {
   },
 };
 
-export { actions, actionCreaters };
+export { actions, actionCreators };
 

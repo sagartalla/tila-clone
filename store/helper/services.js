@@ -2,6 +2,20 @@ import axios from 'axios';
 import shajs from 'sha.js';
 import constants from './constants';
 
+
+export const authToken = () => {
+  try {
+    if (localStorage) {
+      const auth = localStorage.auth
+      return JSON.parse(auth).access_token;
+    } else {
+      return false;
+    }
+  } catch (e) {
+
+  }
+}
+
 export const searchServiceInstance = axios.create({
   baseURL: constants.SEARCH_API_URL,
   timeout: 3000,
@@ -17,7 +31,6 @@ export const listingServiceInstance = axios.create({
 export const addressServiceInstance = axios.create({
   baseURL: constants.CMS_API_URL,
   timeout: 3000,
-  headers: { "x-country-code": "IND", "x-auth-user": "100002" },
 })
 
 export const pimServiceInstance = axios.create({
@@ -75,5 +88,37 @@ export const paymentInstance = axios.create({
   baseURL: constants.TRANSACTIONS_API_URL,
   timeout: 3000,
 })
+
+// TODO make all interceptors common function later.
+
+addressServiceInstance.interceptors.request.use(
+  (config) => {
+    config.headers = { "x-access-token": authToken(), "x-country-code": "SAE"  };
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  },
+);
+
+orderInstance.interceptors.request.use(
+  (config) => {
+    config.headers = { "x-access-token": authToken(), "x-country-code": "SAE"  };
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  },
+);
+
+paymentInstance.interceptors.request.use(
+  (config) => {
+    config.headers = { "x-access-token": authToken(), "x-country-code": "SAE"  };
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  },
+);
 
 export default {};

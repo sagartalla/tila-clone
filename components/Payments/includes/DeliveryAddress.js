@@ -35,12 +35,16 @@ const DeliveryAddress = props => (
           </button>
         </Col>
       </Row>
-      <div className={`${props.configJson.progress ? '' : 'hide'}`}>
-        <h3 className={`${styles['m-0']} ${styles['pl-24']}`}>Delivery Address</h3>
-        <ShippingAddress 
-          handleShippingAddressContinue = {props.handleShippingAddressContinue}
-        />
-      </div>
+      {
+        props.configJson.progress ? 
+        <div>
+          <h3 className={`${styles['m-0']} ${styles['pl-24']}`}>Delivery Address</h3>
+          <ShippingAddress 
+            handleShippingAddressContinue = {props.handleShippingAddressContinue}
+          />
+        </div>
+        : null
+      }
     </div>
   
 );
