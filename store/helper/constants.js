@@ -6,4 +6,5 @@ export default {
   PIM_API_URL           :   'http://pimapis-dev.fptechscience.com/pim',
   ORDERS_API_URL        :   'http://order-dev.fptechscience.com',
   TRANSACTIONS_API_URL  :   'http://transactions-dev.fptechscience.com',
+  AUTH_API_URL          :   'http://gateway-dev.fptechscience.com/auth-service',
 };
