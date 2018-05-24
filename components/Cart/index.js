@@ -22,11 +22,14 @@ class Cart extends Component {
 
   render() {
     const {results} = this.props;
+    console.log(results)
     return (
       <div>
         <HeaderBar />
         <Grid>
-          <CartBody />
+          <CartBody 
+            data={results}
+          />
         </Grid>
       </div>
     )

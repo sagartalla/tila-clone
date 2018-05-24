@@ -7,4 +7,5 @@ export default {
   ORDERS_API_URL        :   'http://gateway-dev.fptechscience.com/order',
   TRANSACTIONS_API_URL  :   'http://gateway-dev.fptechscience.com/transactions',
   AUTH_API_URL          :   'http://gateway-dev.fptechscience.com/auth-service',
+  CART_API_URL          :   'http://gateway-dev.fptechscience.com/cart',
 };

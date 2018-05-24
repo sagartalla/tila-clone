@@ -15,7 +15,7 @@ class Offers extends Component {
   addToCart() {
     const { listingId } = this.props.offerInfo
     this.props.addToCart({
-      listingId: listingId
+      listing_id: listingId
     });
   }
 
@@ -68,7 +68,8 @@ class Offers extends Component {
 
 const mapStateToProps = (store) => {
   return ({
-    isLoading: selectors.getLoadingStatus(store)
+    isLoading: selectors.getLoadingStatus(store),
+    addToCartError: selectors.getAddToCartError(store) 
   })
 };
 
