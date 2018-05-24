@@ -45,8 +45,8 @@ const shippingAddrReducer = typeToReducer({
       return Object.assign({}, state, { error: action.payload.message, ui: { loading: false } })
     },
     FULFILLED: (state, action) => {
-      const temp_data = state.data.map( (obj, index) => {
-        if(obj.address_id === action.payload.options.address_id){
+      const temp_data = state.data.map((obj, index) => {
+        if (obj.address_id === action.payload.options.address_id) {
           obj = action.payload.options
         }
         return obj;
