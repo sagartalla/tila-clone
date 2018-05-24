@@ -24,6 +24,7 @@ class SearchPage extends Base {
       facetFilters,
       pageNum: 1,
       fl: '*',
+      isListed: true
     }));
     return { isServer };
   }

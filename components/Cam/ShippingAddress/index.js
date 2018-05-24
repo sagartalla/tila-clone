@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Row, Col } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -31,7 +32,7 @@ class ShippingAddress extends Component {
 
   constructor(props) {
     super(props);
-    
+
     this.state = {
       addr: initialAddrObj,
       showNewAddr: false,
@@ -83,12 +84,12 @@ class ShippingAddress extends Component {
 
   //TODO if adding service fail, we should not clearuser added data. SF-25
   saveBtnClickHandler() {
-    if(this.state.addr.address_id !== 0){
+    if (this.state.addr.address_id !== 0) {
       this.props.editAddressDetails(this.state.addr);
     } else {
       this.props.sendNewAddressDetails(this.state.addr);
     }
-    
+
     this.setState({ addr: initialAddrObj });
     this.showAddAdrressForm();
   }
@@ -117,12 +118,17 @@ class ShippingAddress extends Component {
   }
 
   render() {
-    const { results } = this.props;
+    // if standalone is true, it is stand alone address page else from payment page or any other pages.
+    const { results, standalone, handleShippingAddressContinue } = this.props;
     let { showNewAddr, addr } = this.state;
 
     return (
-      <div className={styles['address-container']}>
-        <AddressHeader />
+      <div className={`${styles['address-container']} ${standalone !== true ? '' : styles['box']} `}>
+        {
+          standalone === true ?
+            <AddressHeader /> :
+            null
+        }
         <Row>
           <Col md={12} sm={12} xs={12}>
             <AddressBody
@@ -149,6 +155,13 @@ class ShippingAddress extends Component {
                 /> : ''
             }
           </Col>
+          {
+            standalone !== true ?
+              <Col md={12} sm={12} xs={12}>
+                <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']}`} onClick={handleShippingAddressContinue}>Continue</button>
+              </Col>
+              : null
+          }
         </Row>
       </div>
     )
@@ -172,5 +185,15 @@ const mapDispatchToProps = (dispatch) =>
     dispatch,
   );
 
+ShippingAddress.propTypes = {
+  standalone: PropTypes.bool,
+
+  //from payment page
+  handleShippingAddressContinue: PropTypes.func
+};
+
+ShippingAddress.defaultProps = {
+  standalone: false
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShippingAddress);

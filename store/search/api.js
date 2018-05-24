@@ -11,6 +11,7 @@ const getSearchResultsApi = ({
   facetFilters,
   pageNum,
   fl,
+  isListed
 }) => {
   const options = {
     categoryFilter,
@@ -21,6 +22,7 @@ const getSearchResultsApi = ({
     pageSize,
     query,
     fl,
+    isListed,
   };
   return searchServiceInstance.post('/search', options).then(({ data }) => {
     if (data.categoryFilter) {
@@ -50,6 +52,7 @@ const getSearchResultsApi = ({
     }
     data.hardCodedValues = {
       fl,
+      isListed,
     }
     return { data };
   });

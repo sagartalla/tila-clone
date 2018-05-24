@@ -2,7 +2,19 @@ import axios from 'axios';
 import shajs from 'sha.js';
 import constants from './constants';
 
-const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImlzcyI6ImZwdHMiLCJleHAiOjE1MjcxNTM1NjIsInR5cGUiOiJBVCIsImlhdCI6MTUyNzE0OTk2MiwidXNlcklkIjoiMTAwMDA4IiwidmVyc2lvbiI6IlYxIiwianRpIjoiZDVlYzQ5ZmNhZDZmNDNhMjk4M2ZjYTQ5MDUzYTBjMzMifQ.lyqvuc5apFuFKCU2r4Hiy590GV6qdPGxWVnKeoaynrCjL_bHwS6u8LJ3oMTyltWjZA9HVPwwCHjV6Hl82e851w";
+
+export const authToken = () => {
+  try {
+    if (localStorage) {
+      const auth = localStorage.auth
+      return JSON.parse(auth).access_token;
+    } else {
+      return false;
+    }
+  } catch (e) {
+
+  }
+}
 
 export const searchServiceInstance = axios.create({
   baseURL: constants.SEARCH_API_URL,
@@ -19,7 +31,6 @@ export const listingServiceInstance = axios.create({
 export const addressServiceInstance = axios.create({
   baseURL: constants.CMS_API_URL,
   timeout: 3000,
-  headers: { "x-country-code": "IND", "x-auth-user": "100002" },
 })
 
 export const pimServiceInstance = axios.create({
@@ -41,7 +52,6 @@ export const orderServiceInstance = axios.create({
 export const cartServiceInstance = axios.create({
   baseURL: constants.CART_API_URL,
   timeout: 3000,
-  headers: { "x-country-code": "SAE", "x-session-id": "asdfh", "x-access-token": token },
 })
 
 export const authServiceInstance = axios.create({
@@ -65,6 +75,63 @@ pimServiceInstance.interceptors.request.use(
   },
   (error) => {
     console.log(error);
+    return Promise.reject(error);
+  },
+);
+
+export const orderInstance = axios.create({
+  baseURL: constants.ORDERS_API_URL,
+  timeout: 3000,
+})
+
+export const transacationRedirectUrlInstance = axios.create({
+  baseURL: '',
+  timeout: 3000,
+})
+
+export const paymentInstance = axios.create({
+  baseURL: constants.TRANSACTIONS_API_URL,
+  timeout: 3000,
+})
+
+// TODO make all interceptors common function later.
+
+addressServiceInstance.interceptors.request.use(
+  (config) => {
+    config.headers = { "x-access-token": authToken(), "x-session-id": "asdasd", "x-country-code": "SAE" };
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  },
+);
+
+orderInstance.interceptors.request.use(
+  (config) => {
+    config.headers = { "x-access-token": authToken(), "x-session-id": "asdasd", "x-country-code": "SAE" };
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  },
+);
+
+paymentInstance.interceptors.request.use(
+  (config) => {
+    config.headers = { "x-access-token": authToken(), "x-session-id": "asdasd", "x-country-code": "SAE" };
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  },
+);
+
+cartServiceInstance.interceptors.request.use(
+  (config) => {
+    config.headers = { "x-country-code": "SAE", "x-session-id": "asdasd", "x-access-token": authToken() };
+    return config;
+  },
+  (error) => {
     return Promise.reject(error);
   },
 );
