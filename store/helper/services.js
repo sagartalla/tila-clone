@@ -41,7 +41,7 @@ export const orderServiceInstance = axios.create({
 export const cartServiceInstance = axios.create({
   baseURL: constants.CART_API_URL,
   timeout: 3000,
-  headers: { "x-country-code": "SAE", "x-session-id": "asdfh", "x-access-token": token },
+  headers: { "x-country-code": "SAE", "x-session-id": "asdasd", "x-access-token": token,"x-language": 'en' },
 })
 
 export const authServiceInstance = axios.create({

@@ -15,7 +15,7 @@ const actionCreators = {
   getCartResults: (params) => {
     return ({
       type: actions.GET_CART_DETAILS,
-      payload: api.getOrderDetailsApi(params)
+      payload: api.getCartDetailsApi(params)
     })
   }
 };
