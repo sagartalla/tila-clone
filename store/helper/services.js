@@ -2,6 +2,8 @@ import axios from 'axios';
 import shajs from 'sha.js';
 import constants from './constants';
 
+const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImlzcyI6ImZwdHMiLCJleHAiOjE1MjcxNTM1NjIsInR5cGUiOiJBVCIsImlhdCI6MTUyNzE0OTk2MiwidXNlcklkIjoiMTAwMDA4IiwidmVyc2lvbiI6IlYxIiwianRpIjoiZDVlYzQ5ZmNhZDZmNDNhMjk4M2ZjYTQ5MDUzYTBjMzMifQ.lyqvuc5apFuFKCU2r4Hiy590GV6qdPGxWVnKeoaynrCjL_bHwS6u8LJ3oMTyltWjZA9HVPwwCHjV6Hl82e851w";
+
 export const searchServiceInstance = axios.create({
   baseURL: constants.SEARCH_API_URL,
   timeout: 3000,
@@ -9,7 +11,7 @@ export const searchServiceInstance = axios.create({
 
 export const listingServiceInstance = axios.create({
   baseURL: constants.LISTING_API_URL,
-  timeout: 3000,
+  timeout: 30000,
 });
 
 // TODO SF-26
@@ -39,7 +41,7 @@ export const orderServiceInstance = axios.create({
 export const cartServiceInstance = axios.create({
   baseURL: constants.CART_API_URL,
   timeout: 3000,
-  headers: { "x-country-code": "SAE", "x-auth-user": "100002", "x-language": "en", "x-session-id": "asdfg" },
+  headers: { "x-country-code": "SAE", "x-session-id": "asdfh", "x-access-token": token },
 })
 
 export const authServiceInstance = axios.create({

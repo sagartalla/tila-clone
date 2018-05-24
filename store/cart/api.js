@@ -1,10 +1,14 @@
 import _ from 'lodash';
 import { cartServiceInstance } from '../helper/services';
 
-const getOrderDetailsApi = () => {
+const getCartDetailsApi = () => {
   return cartServiceInstance.put('/api/v1/cart/view', {}).then(({ data }) => {
     return { data };
   });
 };
 
-export default { getOrderDetailsApi };
+const addToCart = (params) => {
+  return cartServiceInstance.post('/api/v1/cart/add', params)
+}
+
+export default { getCartDetailsApi, addToCart };

@@ -17,7 +17,7 @@ class SearchPage extends Base {
     const facetFilters = selectors.getFacetfilters(store.getState())(JSON.parse(query.facets || '{}'));
     await store.dispatch(actionCreators.getSearchResults({
       categoryFilter,
-      country: 'UAE',
+      country: 'SAE',
       pageSize: 100,
       query: query.search,
       language: query.language || 'en',

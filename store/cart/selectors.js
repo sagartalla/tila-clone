@@ -4,4 +4,8 @@ const getCartResults = (store)=>{
   return [];
 }
 
-export { getCartResults }
+const getLoadingStatus = (store) => {
+  return store.cartReducer.ui.loading;
+}
+
+export { getCartResults, getLoadingStatus }
