@@ -51,7 +51,7 @@ class Offers extends Component {
               </li>
             </ul>
           </Col>
-          <Col md={6}>
+        <Col md={6}>
             <ul>
               <li>
                 <h3>EMI Not Available</h3>
@@ -68,8 +68,7 @@ class Offers extends Component {
 
 const mapStateToProps = (store) => {
   return ({
-    isLoading: selectors.getLoadingStatus(store),
-    addToCartError: selectors.getAddToCartError(store) 
+    isLoading: selectors.getLoadingStatus(store)
   })
 };
 
