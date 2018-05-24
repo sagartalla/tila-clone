@@ -19,7 +19,7 @@ const actionCreaters = {
           "listing_id": "string",
           "product_id": "string",
           "seller_id": "string",
-          "selling_price": 0,
+          "selling_price": 100,
           "title": "string",
           "variant_id": "string"
         }
@@ -33,7 +33,6 @@ const actionCreaters = {
   },
 
   doPayment: (params) => (dispatch, getState) => {
-
     return dispatch({
       type: actions.DO_PAYMENT,
       payload: apis.doPaymentApi(params)

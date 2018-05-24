@@ -3,9 +3,27 @@ import PropTypes from 'prop-types';
 import { Grid, Row, Col } from 'react-bootstrap';
 import ShippingAddress from '../../Cam/ShippingAddress';
 
+import Voucher from './paymentpages/Voucher';
+import RewardPoints from './paymentpages/RewardPoints';
+import PayOnline from './paymentpages/PayOnline';
+
 import styles from '../payment.styl';
 
 const PaymentMode = props => {
+
+  //NOTE: For every new payment type, 
+  //      we need to create one page under "paymentpages" folder and add one key vale pair here.
+  const paymentPageConfig = {
+    "VOUCHER": Voucher,
+    "REWARD_POINTS": RewardPoints,
+    "PAY_ONLINE": PayOnline
+  }
+
+  const paymentTypeNames = {
+    "VOUCHER": "Voucher",
+    "REWARD_POINTS": "Reward Points",
+    "PAY_ONLINE": "Pay Online"
+  }
 
   const showPaymentType = (e) => {
     props.showPaymentType(e.target.id);
@@ -26,54 +44,53 @@ const PaymentMode = props => {
         </Col>
       </Row>
       {
-         props.data && props.data.orderRes ? 
+        props.data && props.data.orderRes ?
           <div>
             <h3>Make Payment</h3>
-              <Row>
-                <Col md={3} sm={12} xs={12}>
-                  <ul className={` ${styles['pay-menu']} ${styles['m-0']} ${styles['p-5']} ${styles['pr-0']}`}>
-                    {
-                      props.data.data.paymentOptionsAvailable.map( (val, index) => {
-                        return (
-                          <li id={index} key={index} onClick={showPaymentType} className={`${ index == props.showTab ? styles['active']: ''}`}>{val.type}</li>
-                        )
-                      })
-                    }
-                  </ul>
-                </Col>
-                <Col md={9} sm={12} xs={12}>
+            <Row>
+              <Col md={3} sm={12} xs={12}>
+                <ul className={` ${styles['pay-menu']} ${styles['m-0']} ${styles['p-5']} ${styles['pr-0']}`}>
                   {
-                    props.data.data.paymentOptionsAvailable.map( (val, index) => {
+                    props.data.data.payment_options_available.map((val, index) => {
                       return (
-                        <div key={index} className={`${props.showTab == index ? '': 'hide' }`}>
-                          <span>{val.type + ' - ' +val.balance}</span>
-                        </div>
+                        <li id={index} key={index} onClick={showPaymentType} className={`${index == props.showTab ? styles['active'] : ''}`}>{paymentTypeNames[val.type]}</li>
                       )
                     })
                   }
-                </Col>
-              </Row>
-              <Row>
-                <Col md={12} sm={12} xs={12}>
-                  <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']}`} onClick={makePayment}>Pay 2200 AED</button>
-                </Col>
-              </Row>
+                </ul>
+              </Col>
+              <Col md={9} sm={12} xs={12}>
+                {
+                  props.data.data.payment_options_available.map((val, index) => {
+                    const Page = paymentPageConfig[val.type];
+                    return (
+                      <div key={index} className={`${props.showTab == index ? '' : 'hide'}`}>
+                        <Page
+                          makePayment={makePayment}
+                          orderRes={props.data}
+                        />
+                      </div>
+                    )
+                  })
+                }
+              </Col>
+            </Row>
           </div>
-         : null
+          : null
       }
-
     </div>
   );
 };
 
 PaymentMode.propTypes = {
-  data: PropTypes.object.isRequired
+  data: PropTypes.object.isRequired,
+  showPaymentType: PropTypes.func.isRequired,
+  // showTab: PropTypes.string
 }
 
 PaymentMode.defaultProps = {
   data: {}
 }
-
 
 export default PaymentMode;
 

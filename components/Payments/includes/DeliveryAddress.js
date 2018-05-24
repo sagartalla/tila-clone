@@ -1,5 +1,5 @@
 import React from 'react';
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { Grid, Row, Col } from 'react-bootstrap';
 import ShippingAddress from '../../Cam/ShippingAddress';
 
@@ -46,10 +46,10 @@ const DeliveryAddress = props => (
 );
 
 DeliveryAddress.propTypes = {
-  handleShippingAddressContinue: propTypes.func.isRequired,
-  editAddress: propTypes.func.isRequired,
-  configJson: propTypes.object.isRequired,
-  defaultAddress: propTypes.array
+  handleShippingAddressContinue: PropTypes.func.isRequired,
+  editAddress: PropTypes.func.isRequired,
+  configJson: PropTypes.object.isRequired,
+  // defaultAddress: propTypes.object
 }
 
 DeliveryAddress.defaultProps = {

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Grid, Row, Col } from 'react-bootstrap';
 
 import { connect } from 'react-redux';
@@ -21,16 +22,6 @@ class Payments extends React.Component {
       login: {
         user_name: '',
         password: ''
-      },
-      paymentJson: {
-        "payment_details": [
-          {
-            "amount": 0,
-            "currency": "string",
-            "payment_mode": "CREDIT_CARD"
-          }
-        ],
-        "transaction_id": "string"
       },
       paymentConfigJson: {
         signIn: {
@@ -61,6 +52,13 @@ class Payments extends React.Component {
     this.handleShippingAddressContinue = this.handleShippingAddressContinue.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    // Clicking on pay button and after getting response, we will redirect to given URL.
+    if (nextProps && nextProps.makePaymentOptions && nextProps.makePaymentOptions.redirect_url) {
+      location.href = nextProps.makePaymentOptions.redirect_url;
+    }
+  }
+
   inputOnChange(e) {
     const { login } = this.state;
     login[e.target.name] = e.target.value;
@@ -68,13 +66,29 @@ class Payments extends React.Component {
   }
 
   // onclick payment method tabs.
-  showPaymentType(value){
-    this.setState({showTab: value});
+  showPaymentType(value) {
+    this.setState({ showTab: value });
   }
 
   // Clicking on pay button
-  makePayment(){
-    this.props.doPayment(this.state.paymentJson);
+  // TODO make paymentjson manipulation as util
+  makePayment() {
+    const { paymentOptions } = this.props;
+    const paymentjson = {
+      "payment_details": [
+        {
+          "amount": 0,
+          "currency": "",
+          "payment_mode": ""
+        }
+      ],
+      "transaction_id": "string"
+    }
+    paymentjson.payment_details[0].amount = paymentOptions.data.amount;
+    paymentjson.payment_details[0].currency = paymentOptions.data.currency;
+    paymentjson.payment_details[0].payment_mode = 'PAY_ONLINE';
+    paymentjson.transaction_id = paymentOptions.data.transaction_id;
+    this.props.doPayment(paymentjson);
   }
 
   // TODO Send params with cart info.
@@ -82,28 +96,28 @@ class Payments extends React.Component {
   handleShippingAddressContinue(e) {
     this.props.createOrder()
 
-    const paymentConfigJson = {...this.state.paymentConfigJson};
-    paymentConfigJson['address'] = { basic: false,progress: false, done: true};
-    paymentConfigJson['payment'] = { basic: false,progress: true, done: false};
+    const paymentConfigJson = { ...this.state.paymentConfigJson };
+    paymentConfigJson['address'] = { basic: false, progress: false, done: true };
+    paymentConfigJson['payment'] = { basic: false, progress: true, done: false };
     this.setState({ paymentConfigJson });
   }
 
-  showAddress(){
-    const paymentConfigJson = {...this.state.paymentConfigJson};
-    paymentConfigJson['signIn'] = { basic: false,progress: false, done: true};
-    paymentConfigJson['address'] = { basic: false,progress: true, done: false};
+  showAddress() {
+    const paymentConfigJson = { ...this.state.paymentConfigJson };
+    paymentConfigJson['signIn'] = { basic: false, progress: false, done: true };
+    paymentConfigJson['address'] = { basic: false, progress: true, done: false };
     this.setState({ paymentConfigJson });
   }
 
-  editAddress(){
-    const paymentConfigJson = {...this.state.paymentConfigJson};
-    paymentConfigJson['address'] = { basic: false,progress: true, done: false};
+  editAddress() {
+    const paymentConfigJson = { ...this.state.paymentConfigJson };
+    paymentConfigJson['address'] = { basic: false, progress: true, done: false };
     this.setState({ paymentConfigJson });
   }
 
   render() {
     const { login, showTab, paymentConfigJson } = this.state;
-    const {paymentOptions, defaultAddress} = this.props;
+    const { paymentOptions, defaultAddress } = this.props;
     return (
       <div className={styles['payment']}>
         <PaymentHeader />
@@ -127,15 +141,13 @@ class Payments extends React.Component {
                 defaultAddress={defaultAddress}
                 editAddress={this.editAddress}
               />
-              
               <PaymentMode
-                data = {paymentOptions}
+                data={paymentOptions}
                 showTab={showTab}
                 showPaymentType={this.showPaymentType}
-                makePayment= {this.makePayment}
+                makePayment={this.makePayment}
                 configJson={paymentConfigJson.payment}
               />
-               
             </Col>
             <Col md={3} xs={12} sm={12}>
               <Row>
@@ -151,6 +163,7 @@ class Payments extends React.Component {
 
 const mapStateToprops = (store) => ({
   paymentOptions: selectors.getPaymentOptions(store),
+  makePaymentOptions: selectors.getPaymentUrl(store),
   defaultAddress: selectors.getDefaultAddress(store)
 })
 
@@ -163,6 +176,14 @@ const mapDispatchToProps = (dispatch) =>
     dispatch,
   );
 
+Payments.propTypes = {
+  paymentOptions: PropTypes.object,
+  // defaultAddress: PropTypes.array
+};
+
+Payments.defaultProps = {
+  
+};
 
 export default connect(mapStateToprops, mapDispatchToProps)(Payments);
 

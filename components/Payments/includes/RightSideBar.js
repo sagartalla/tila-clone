@@ -12,7 +12,7 @@ const RightSidebar = () => (
       Buy 50AED more and get 10% off on your total purchase.
     </div>
     <div className={`${styles['box']} ${styles['box-space']}`}>
-      
+
       <div>
         <ul className={`${styles['m-0']} ${styles['p-0']}`}>
           <li><b>Order Summary</b></li>
@@ -22,13 +22,13 @@ const RightSidebar = () => (
           <li>Taxes <span>90 AED</span></li>
 
           <li className={styles['mt-10']}><b>Total Amount <span>2400.00 AED</span></b></li>
-          
+
           <li><small> you saved 500 AED</small></li>
         </ul>
 
       </div>
     </div>
-    </div>
+  </div>
 );
 
 export default RightSidebar;

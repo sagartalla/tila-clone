@@ -23,8 +23,20 @@ const paymentsReducer = typeToReducer({
       return Object.assign({}, state, { error: action.payload.message, ui: { loading: false } })
     },
     FULFILLED: (state, action) => {
-      console.log(state, action);
-      //return Object.assign({}, state, { data: action.payload, ui: { loading: true } });
+      const payRes = {'payRes': action.payload.data}
+      const newState = {
+        ...state,
+        data: {
+          ...state.data,
+          ...payRes,
+        },
+        ui: {
+          loading: true
+        }
+      }
+      return newState;
+
+      // return Object.assign({}, state, { data: action.payload, ui: { loading: true } });
     },
   },
 
