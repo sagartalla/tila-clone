@@ -8,6 +8,21 @@ import Summary from './includes/Summary';
 import styles from './thankyou.styl';
 
 class Thankyou extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      orderState: "",
+      orderDetails: "",
+      orderId: ""
+    };
+  }
+
+  componentDidMount() {
+    debugger;
+    const urlParams = this.props.tabDetails.split('/');
+
+  }
+
   render() {
     return (
       <div className={styles['thankyou']}>
@@ -19,5 +34,18 @@ class Thankyou extends Component {
     )
   }
 }
+
+// const Thankyou = ({tabDetails}) => {
+//   debugger;
+//   const x = tabDetails.split('/');
+//   return (
+//           <div className={styles['thankyou']}>
+//             <Grid>
+//               <PaymentStatus />
+//               <Summary />
+//             </Grid>
+//           </div>
+//         )
+// };
 
 export default Thankyou;

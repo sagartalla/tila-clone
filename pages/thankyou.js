@@ -6,10 +6,10 @@ import makeStore from '../store';
 import Layout from '../layout/main';
 import Thankyou from '../components/Thankyou';
 
-const ThankyouPage = () => (
+const ThankyouPage = (props) => (
   <NoSSR>
     <Layout>
-      <Thankyou />
+      <Thankyou props={props.url.query.tabDetails} />
     </Layout>
   </NoSSR>
 );
