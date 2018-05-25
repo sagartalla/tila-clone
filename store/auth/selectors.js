@@ -1,5 +1,3 @@
-import fp, * as _ from 'lodash/fp';
-
 const getErrorMessege = (store) => {
   return store.authReducer.error;
 }

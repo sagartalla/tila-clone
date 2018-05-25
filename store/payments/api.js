@@ -1,4 +1,4 @@
-import { orderInstance, transacationRedirectUrlInstance, paymentInstance } from '../helper/services';
+import { orderServiceInstance, transacationRedirectUrlInstance, paymentInstance } from '../helper/services';
 
 
 const transactionApi = (orderRes) => {
@@ -8,7 +8,7 @@ const transactionApi = (orderRes) => {
 };
 
 const createOrderApi = (params) => {
-  return orderInstance.post('/api/v1/order/test/create', params).then(({ data }) => {
+  return orderServiceInstance.post('/api/v1/order/test/create', params).then(({ data }) => {
     return transactionApi(data);
   });
 };
