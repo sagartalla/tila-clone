@@ -25,7 +25,7 @@ class ProductPage extends Base {
     } else {
       await store.dispatch(actionCreators.getProduct({
         "city": "string",
-        "country_code": "SAE",
+        "country_code": "ksa",
         "flags": {
           "catalog_details": true,
           "include_all_pref_listings": true,

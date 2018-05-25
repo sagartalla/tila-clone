@@ -98,4 +98,13 @@ paymentInstance.interceptors.request.use(_.compose(
 ));
 paymentInstance.interceptors.response.use(_.compose(resInterceptor('PAYMENT')))
 
+cartServiceInstance.interceptors.request.use(_.compose(
+    reqInterceptor('CART'),
+    (config) => {
+        config.headers = { "x-country-code": "ksa", "x-session-id": "asdasd", "x-access-token": authToken(), "x-language": 'en' };
+        return config;
+    }
+));
+cartServiceInstance.interceptors.response.use(_.compose(resInterceptor('PAYMENT')))
+
 export default {};
