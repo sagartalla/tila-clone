@@ -8,6 +8,7 @@ import Layout from '../layout/main';
 import Order from '../components/Order';
 
 class OrderPage extends Base {
+  pageName = 'ORDER';
   render() {
     const { url } = this.props;
     return (

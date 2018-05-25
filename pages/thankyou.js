@@ -5,13 +5,19 @@ import makeStore from '../store';
 
 import Layout from '../layout/main';
 import Thankyou from '../components/Thankyou';
+import Base from './base';
 
-const ThankyouPage = () => (
-  <NoSSR>
-    <Layout>
-      <Thankyou />
-    </Layout>
-  </NoSSR>
-);
+class ThankyouPage extends Base {
+  pageName = 'THANK YOU';
+  render() {
+    return (
+      <NoSSR>
+        <Layout>
+          <Thankyou />
+        </Layout>
+      </NoSSR>
+    );
+  }
+}
 
 export default withRedux(makeStore, null, null)(ThankyouPage);
