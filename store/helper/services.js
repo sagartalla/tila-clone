@@ -98,7 +98,7 @@ export const paymentInstance = axios.create({
 
 addressServiceInstance.interceptors.request.use(
   (config) => {
-    config.headers = { "x-access-token": authToken(), "x-session-id": "asdasd", "x-country-code": "SAE" };
+    config.headers = { "x-access-token": authToken(), "x-session-id": "asdasd", "x-country-code": "ksa" };
     return config;
   },
   (error) => {
@@ -108,7 +108,7 @@ addressServiceInstance.interceptors.request.use(
 
 orderInstance.interceptors.request.use(
   (config) => {
-    config.headers = { "x-access-token": authToken(), "x-session-id": "asdasd", "x-country-code": "SAE" };
+    config.headers = { "x-access-token": authToken(), "x-session-id": "asdasd", "x-country-code": "ksa" };
     return config;
   },
   (error) => {
@@ -118,7 +118,7 @@ orderInstance.interceptors.request.use(
 
 paymentInstance.interceptors.request.use(
   (config) => {
-    config.headers = { "x-access-token": authToken(), "x-session-id": "asdasd", "x-country-code": "SAE" };
+    config.headers = { "x-access-token": authToken(), "x-session-id": "asdasd", "x-country-code": "ksa" };
     return config;
   },
   (error) => {
@@ -128,7 +128,7 @@ paymentInstance.interceptors.request.use(
 
 cartServiceInstance.interceptors.request.use(
   (config) => {
-    config.headers = { "x-country-code": "SAE", "x-session-id": "asdasd", "x-access-token": authToken(), "x-language": 'en' };
+    config.headers = { "x-country-code": "ksa", "x-session-id": "asdasd", "x-access-token": authToken(), "x-language": 'en' };
     return config;
   },
   (error) => {
