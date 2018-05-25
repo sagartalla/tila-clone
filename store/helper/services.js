@@ -9,7 +9,7 @@ export const searchServiceInstance = axios.create({
 
 export const listingServiceInstance = axios.create({
   baseURL: constants.LISTING_API_URL,
-  timeout: 3000,
+  timeout: 30000,
 });
 
 export const addressServiceInstance = axios.create({
@@ -32,6 +32,11 @@ export const orderServiceInstance = axios.create({
   timeout: 3000,
   headers: { "x-country-code": "QWE", "x-auth-user": "100002" },
 });
+
+export const cartServiceInstance = axios.create({
+  baseURL: constants.CART_API_URL,
+  timeout: 3000,
+})
 
 export const authServiceInstance = axios.create({
   baseURL: constants.AUTH_API_URL,
