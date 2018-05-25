@@ -10,7 +10,7 @@ import Orders from './Orders'
 import styles from './cam.styl';
 
 const Cam = ({tabDetails}) => {
-  const [tab, ...queryParams] = tabDetails.split('/');
+  const [tab, ...queryParams] = tabDetails ? tabDetails.split('/') : [];
   const camComponent = ((tabName) => {
     switch (tabName) {
       case 'orders':
@@ -18,6 +18,8 @@ const Cam = ({tabDetails}) => {
       case 'address':
         return <ShippingAddress />;
       case 'profile':
+        return <UserInfo />; 
+      default:
         return <UserInfo />; 
     }
   })(tab)

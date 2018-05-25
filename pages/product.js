@@ -3,13 +3,15 @@ import { bindActionCreators } from 'redux';
 import withRedux from 'next-redux-wrapper';
 import { configureUrlQuery } from 'react-url-query';
 import createHistory from 'history/createBrowserHistory';
+
+import Base from './base';
 import makeStore from '../store';
 import { actionCreators, selectors } from '../store/product';
 import Layout from '../layout/main';
 import { getProduct } from '../store/product/api';
 import getProductComponent from '../components/Product'
 
-class ProductPage extends Component {
+class ProductPage extends Base {
   static async getInitialProps({ store, query, isServer }) {
     if (query.isPreview){
       await store.dispatch(actionCreators.getPreview({

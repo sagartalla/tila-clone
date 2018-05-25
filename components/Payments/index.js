@@ -4,7 +4,9 @@ import { Grid, Row, Col } from 'react-bootstrap';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { actionCreaters, selectors } from '../../store/payments';
+import { actionCreators, selectors } from '../../store/payments';
+
+import { actionCreators as authActionCreators, selectors as authSelectors } from '../../store/auth';
 
 import PaymentHeader from './includes/PaymentHeader';
 import RightSideBar from './includes/RightSideBar';
@@ -20,7 +22,7 @@ class Payments extends React.Component {
     super(props);
     this.state = {
       login: {
-        user_name: '',
+        username: '',
         password: ''
       },
       paymentConfigJson: {
@@ -41,7 +43,8 @@ class Payments extends React.Component {
         }
       },
       showTab: 0,// to show payment tabs
-      paymentOptions: {} // which payment options to show.
+      paymentOptions: {}, // which payment options to show.
+      loggedInFlag: false
     }
 
     this.inputOnChange = this.inputOnChange.bind(this);
@@ -53,10 +56,31 @@ class Payments extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    const {loggedInFlag} = this.state;
     // Clicking on pay button and after getting response, we will redirect to given URL.
     if (nextProps && nextProps.makePaymentOptions && nextProps.makePaymentOptions.redirect_url) {
       location.href = nextProps.makePaymentOptions.redirect_url;
     }
+
+    if(nextProps.isLoggedIn && !loggedInFlag){
+      // console.log(localStorage)
+      const login = nextProps.userCreds || this.state.login;
+      const paymentConfigJson = { ...this.state.paymentConfigJson };
+
+      paymentConfigJson['signIn'] = { basic: false, progress: false, done: true };
+      paymentConfigJson['address'] = { basic: false, progress: true, done: false };
+      this.setState({ paymentConfigJson, login, loggedInFlag: true });
+    }
+  }
+
+  componentDidMount() {
+    // TODO move it to base component later after discussion on login.
+    this.props.getLoginInfo();
+  }
+
+  //TODO Show loader on clicking on login button.
+  showAddress() {
+    this.props.userLogin(this.state.login);
   }
 
   inputOnChange(e) {
@@ -102,13 +126,6 @@ class Payments extends React.Component {
     this.setState({ paymentConfigJson });
   }
 
-  showAddress() {
-    const paymentConfigJson = { ...this.state.paymentConfigJson };
-    paymentConfigJson['signIn'] = { basic: false, progress: false, done: true };
-    paymentConfigJson['address'] = { basic: false, progress: true, done: false };
-    this.setState({ paymentConfigJson });
-  }
-
   editAddress() {
     const paymentConfigJson = { ...this.state.paymentConfigJson };
     paymentConfigJson['address'] = { basic: false, progress: true, done: false };
@@ -117,7 +134,9 @@ class Payments extends React.Component {
 
   render() {
     const { login, showTab, paymentConfigJson } = this.state;
-    const { paymentOptions, defaultAddress } = this.props;
+    const { paymentOptions, defaultAddress, isLoggedIn } = this.props;
+
+    // console.log("LoggedIn",isLoggedIn)
     return (
       <div className={styles['payment']}>
         <PaymentHeader />
@@ -164,14 +183,18 @@ class Payments extends React.Component {
 const mapStateToprops = (store) => ({
   paymentOptions: selectors.getPaymentOptions(store),
   makePaymentOptions: selectors.getPaymentUrl(store),
-  defaultAddress: selectors.getDefaultAddress(store)
+  defaultAddress: selectors.getDefaultAddress(store),
+  isLoggedIn: authSelectors.getLoggedInStatus(store),
+  userCreds: authSelectors.getUserCreds(store),
 })
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      createOrder: actionCreaters.createOrder,
-      doPayment: actionCreaters.doPayment,
+      createOrder: actionCreators.createOrder,
+      doPayment: actionCreators.doPayment,
+      userLogin: authActionCreators.userLogin,
+      getLoginInfo: authActionCreators.getLoginInfo,
     },
     dispatch,
   );
@@ -182,7 +205,7 @@ Payments.propTypes = {
 };
 
 Payments.defaultProps = {
-  
+
 };
 
 export default connect(mapStateToprops, mapDispatchToProps)(Payments);

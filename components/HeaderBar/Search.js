@@ -1,10 +1,11 @@
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
 import { addUrlProps, UrlQueryParamTypes, pushInUrlQuery } from 'react-url-query';
 import styles from './header.styl';
 import { actionCreators, selectors } from '../../store/search';
+import { Router } from '../../routes';
 
 const urlPropsQueryConfig = {
   searchText: { type: UrlQueryParamTypes.string, queryParam: 'search', }
@@ -24,7 +25,8 @@ class Search extends Component {
   submitQuery(e) {
     e.preventDefault();
     const flushFilters = true;
-    pushInUrlQuery('search', this.state.query, { url: "/", as: "/", options: {} });
+    Router.pushRoute(`/?search=${this.state.query}`);
+    // pushInUrlQuery('search', this.state.query, { url: "/", as: "/", options: {} });
     this.props.getSearchResults({
       query: this.state.query
     }, null, flushFilters);

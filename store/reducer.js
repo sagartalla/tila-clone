@@ -5,6 +5,7 @@ import { reducer as shippingAddrReducer } from './cam/address';
 import { reducer as ordersReducer } from './cam/orders';
 import { reducer as singleOrderReducer } from "./order";
 import { reducer as paymentsReducer } from './payments';
+import { reducer as authReducer } from './auth';
 
 export default combineReducers({
   searchReducer,
@@ -13,4 +14,5 @@ export default combineReducers({
   ordersReducer,
   singleOrderReducer,
   paymentsReducer,
+  authReducer,
 });

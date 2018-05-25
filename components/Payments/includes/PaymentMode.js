@@ -43,6 +43,7 @@ const PaymentMode = props => {
           </p>
         </Col>
       </Row>
+      <div className={`${props.configJson.progress ? '' : 'hide'}`}>
       {
         props.data && props.data.orderRes ?
           <div>
@@ -76,8 +77,9 @@ const PaymentMode = props => {
               </Col>
             </Row>
           </div>
-          : null
-      }
+          : <div>Loading...</div>
+        }
+      </div>
     </div>
   );
 };

@@ -10,7 +10,7 @@ const SignIn = props => (
         <h3 className={styles['m-0']}>Sign in</h3>
       </Col>
       <Col md={4} sm={12} xs={12}>
-        {props.login.user_name}
+        {props.login.username}
       </Col>
       <Col md={2} sm={12} xs={12} className={'hide'}>
         <button className={`${styles['fp-btn']} ${styles['fp-btn-default']}`}>
@@ -25,7 +25,7 @@ const SignIn = props => (
       </Col>
       <Col md={12} sm={12} xs={12}>
         <div className={`${styles['mb-10']} ${styles['mt-10']}`}>
-          <input type="text" placeholder="Email / Username*" name="user_name" onChange={props.inputOnChange} value={props.login.user_name} className={styles.input} />
+          <input type="text" placeholder="Email / Username*" name="username" onChange={props.inputOnChange} value={props.login.username} className={styles.input} />
         </div>
       </Col>
       <Col md={12} sm={12} xs={12}>
