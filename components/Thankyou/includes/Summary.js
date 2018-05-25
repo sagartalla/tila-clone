@@ -3,7 +3,9 @@ import { Grid, Row, Col } from 'react-bootstrap';
 
 import styles from '../thankyou.styl';
 
-const PaymentStatus = props => (
+const PaymentStatus = props => {
+  const orderDetails=props.order;
+  return(
   <div className={styles['box']}>
     <Row>
       <Col md={12} xs={12} sm={12}>
@@ -97,5 +99,6 @@ const PaymentStatus = props => (
     </Row>
   </div>
 )
+}
 
 export default PaymentStatus;

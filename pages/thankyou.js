@@ -6,12 +6,15 @@ import makeStore from '../store';
 import Layout from '../layout/main';
 import Thankyou from '../components/Thankyou';
 
-const ThankyouPage = (props) => (
+const ThankyouPage = (props) => {
+  const urlParams= { transId: props.url.query.transId, status: props.url.query.status }; 
+  return (
   <NoSSR>
     <Layout>
-      <Thankyou props={props.url.query.tabDetails} />
+      <Thankyou { ...urlParams} />
     </Layout>
   </NoSSR>
-);
+)
+};
 
 export default withRedux(makeStore, null, null)(ThankyouPage);

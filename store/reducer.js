@@ -6,6 +6,7 @@ import { reducer as ordersReducer } from './cam/orders';
 import { reducer as singleOrderReducer } from "./order";
 import { reducer as paymentsReducer } from './payments';
 import { reducer as authReducer } from './auth';
+import { reducer as thankyouReducer } from './thankyou';
 
 export default combineReducers({
   searchReducer,
@@ -15,4 +16,5 @@ export default combineReducers({
   singleOrderReducer,
   paymentsReducer,
   authReducer,
+  thankyouReducer,
 });
