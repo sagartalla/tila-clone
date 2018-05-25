@@ -21,7 +21,7 @@ const getProductComponent = (isPreview) => {
     return (
       <div>
         {
-          // isPreview ? null : <HeaderBar />
+          isPreview ? null : <HeaderBar />
         }
         <Grid>
           <Row>
