@@ -58,13 +58,12 @@ class ActionBar extends Component {
                 <span onClick={this.loginClick}>login</span>
             }
           </span>
-          <ModalContainer />
         </div>
         {
           (this.state.show) 
           ?
           (
-            <Modal onBackdropClick={() => this.setState({ show: false })}>
+            <Modal className={`react-router-modal__modal ${styles['login-reg-modal']} ${styles['p-20']}`} onBackdropClick={() => this.setState({ show: false })}>
               <Login />
             </Modal>
           )

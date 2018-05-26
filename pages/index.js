@@ -29,6 +29,8 @@ class SearchPage extends Base {
     return { isServer };
   }
 
+  pageName = 'SEAERCH';
+  
   render() {
     return (
       <div>

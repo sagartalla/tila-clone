@@ -42,6 +42,8 @@ class ProductPage extends Base {
     return { isServer };
   }
 
+  pageName = 'PRODUCT';
+
   render() {
     const Product = this.product;
     return (

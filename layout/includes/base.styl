@@ -1,3 +1,5 @@
+* { box-sizing:border-box; }
+
 html
   font-size base-font-size
   font-family ProximaNova
@@ -19,22 +21,32 @@ h2
 h3 
   font-size font-size-24
 
-input[type=text],input[type=password]
+input[type=text],input[type=password], input[type=email]
   border 0
-  border-bottom 1px solid generic-gray-color
+  border-bottom 1px solid generic-gray-color !important
   padding px-5 0
-  outline none
-  min-width 300px
+  outline none !important
+  min-width 200px
+  box-shadow none !important
+  border-radius 0 !important
 
 
-//font
+/* font sizes */
+.fs-12
+  font-size font-size-12
+
 .f-14
   font-size font-size-14
+
+.fs-30
+  font-size font-size-30 
+/* font sizes end */
+
 
 // margins 
 .m-0 
   margin 0
-.mt-0
+.mt-0 
   margin-top 0
 .mb-0
   margin-bottom 0
@@ -131,6 +143,17 @@ input[type=text],input[type=password]
   padding-left px-24
 .pr-24
   padding-right px-24
+
+.p-32
+  padding px-32
+.pt-32
+  padding-top px-32
+.pb-32
+  padding-top px-32
+.pl-32
+  padding-left px-32
+.pr-32
+  padding-right px-32
 
 //mostly we use for over rides so keeping at bottom
 .p-0 

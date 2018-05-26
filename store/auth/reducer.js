@@ -20,7 +20,13 @@ const productReducer = typeToReducer({
       }, { ui: { loading: true } });
     },
     FULFILLED: (state, action) => {
-      return Object.assign({}, state, { data: action.payload.data, ui: { loading: false } });
+      return Object.assign({}, state, { 
+        data: {
+          ...state.data,
+          ...action.payload.data
+        }, 
+        ui: { loading: false }
+      });
     },
     REJECTED: (state, action) => {
       return Object.assign({}, state, {
@@ -29,6 +35,28 @@ const productReducer = typeToReducer({
           ...state.data,
           isLoggedIn: false
         },
+        ui: { loading: false }
+      });
+    },
+  },
+  [actions.USER_REGISTER]: {
+    PENDING: state => {
+      return Object.assign({}, state, {
+        error: '',
+      }, { ui: { loading: true } });
+    },
+    FULFILLED: (state, action) => {
+      return Object.assign({}, state, { 
+        data: {
+          ...state.data,
+          registrationDetails: action.payload.data
+        }, 
+        ui: { loading: false } 
+      });
+    },
+    REJECTED: (state, action) => {
+      return Object.assign({}, state, {
+        error: action.payload.response ? action.payload.response.data.message : action.payload.message,
         ui: { loading: false }
       });
     },
