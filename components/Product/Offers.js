@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import {Row, Col, Button} from 'react-bootstrap';
 
 import { selectors, actionCreators } from '../../store/cart';
-// import { Link } from '../../routes';
+import { Link } from '../../routes';
 
 import styles from './product.styl';
 
@@ -44,7 +44,8 @@ class Offers extends Component {
               isAddedToCart
               ?
               <Button>
-                <a href='/cart'>Go To Cart</a>
+                {/* <a href='/cart'>Go To Cart</a> */}
+                  <Link route="/cart">Go To Cart</Link>
               </Button>
               :
               null
