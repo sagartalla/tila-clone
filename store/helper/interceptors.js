@@ -42,6 +42,19 @@ export const authToken = () => {
   }
 }
 
+export const country = () => {
+  try {
+    if (localStorage) {
+      const country = localStorage.country
+      return country || 'ksa'
+    } else {
+      return 'ksa';
+    }
+  } catch (e) {
+    console.log(e);
+  }
+}
+
 const apmReqInterceptor = (serviceName) => (config) => {
   config.transaction = apm.startTransaction(`${serviceName} Service`, 'custom')
   config.httpSpan = config.transaction ? config.transaction.startSpan(`FETCH ${JSON.stringify(config)}`, 'http') : null;
@@ -109,7 +122,7 @@ pimServiceInstance.interceptors.response.use(_.compose(apmResInterceptor('PIM'))
 addressServiceInstance.interceptors.request.use(_.compose(
   apmReqInterceptor('ADDRESS'),
   (config) => {
-    config.headers = { "x-access-token": authToken(), "x-country-code": "ksa" };
+    config.headers = { "x-access-token": authToken(), "x-country-code": country() };
     return config;
   }
 ));
@@ -118,7 +131,7 @@ addressServiceInstance.interceptors.response.use(_.compose(apmResInterceptor('AD
 orderServiceInstance.interceptors.request.use(_.compose(
   apmReqInterceptor('ORDER'),
   (config) => {
-    config.headers = { "x-access-token": authToken(), "x-country-code": "ksa" };
+    config.headers = { "x-access-token": authToken(), "x-country-code": country() };
     return config;
   }
 ));
@@ -127,7 +140,7 @@ orderServiceInstance.interceptors.response.use(_.compose(apmResInterceptor('ORDE
 paymentInstance.interceptors.request.use(_.compose(
   apmReqInterceptor('PAYMENT'),
   (config) => {
-    config.headers = { "x-access-token": authToken(), "x-country-code": "ksa" };
+    config.headers = { "x-access-token": authToken(), "x-country-code": country() };
     return config;
   }
 ));
@@ -136,7 +149,7 @@ paymentInstance.interceptors.response.use(_.compose(apmResInterceptor('PAYMENT')
 cartServiceInstance.interceptors.request.use(_.compose(
   apmReqInterceptor('CART'),
   (config) => {
-    config.headers = { "x-country-code": "ksa", "x-session-id": "asdasd", "x-access-token": authToken(), "x-language": 'en' };
+    config.headers = { "x-country-code": country(), "x-session-id": "asdasd", "x-access-token": authToken(), "x-language": 'en' };
     return config;
   }
 ));
@@ -145,7 +158,7 @@ cartServiceInstance.interceptors.response.use(_.compose(apmResInterceptor('CART'
 camServiceInstance.interceptors.request.use(_.compose(
   apmReqInterceptor('CAM'),
   (config) => {
-    config.headers = { "x-access-token": authToken(), "x-country-code": "ksa" };
+    config.headers = { "x-access-token": authToken(), "x-country-code": country() };
     return config;
   }
 ));

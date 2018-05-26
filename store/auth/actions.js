@@ -5,6 +5,7 @@ const actions = {
   USER_REGISTER: 'USER_REGISTER',
   USER_LOGOUT: 'USER_LOGOUT',
   USER_LOGIN_INFO: 'USER_LOGIN_INFO',
+  SET_COUNTRY: 'SET_COUNTRY',
 };
 
 const actionCreators = {
@@ -45,6 +46,12 @@ const actionCreators = {
     return {
       type: actions.USER_LOGIN_INFO,
       payload: api.getLoginInfo()
+    }
+  },
+  setCountry: (country) => {
+    return {
+      type: actions.SET_COUNTRY,
+      payload: country
     }
   }
 };
