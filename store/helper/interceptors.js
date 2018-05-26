@@ -109,7 +109,7 @@ pimServiceInstance.interceptors.response.use(_.compose(apmResInterceptor('PIM'))
 addressServiceInstance.interceptors.request.use(_.compose(
   apmReqInterceptor('ADDRESS'),
   (config) => {
-    config.headers = { "x-access-token": authToken(), "x-country-code": "SAE" };
+    config.headers = { "x-access-token": authToken(), "x-country-code": "ksa" };
     return config;
   }
 ));
@@ -118,7 +118,7 @@ addressServiceInstance.interceptors.response.use(_.compose(apmResInterceptor('AD
 orderServiceInstance.interceptors.request.use(_.compose(
   apmReqInterceptor('ORDER'),
   (config) => {
-    config.headers = { "x-access-token": authToken(), "x-country-code": "SAE" };
+    config.headers = { "x-access-token": authToken(), "x-country-code": "ksa" };
     return config;
   }
 ));
@@ -127,7 +127,7 @@ orderServiceInstance.interceptors.response.use(_.compose(apmResInterceptor('ORDE
 paymentInstance.interceptors.request.use(_.compose(
   apmReqInterceptor('PAYMENT'),
   (config) => {
-    config.headers = { "x-access-token": authToken(), "x-country-code": "SAE" };
+    config.headers = { "x-access-token": authToken(), "x-country-code": "ksa" };
     return config;
   }
 ));
@@ -145,7 +145,7 @@ cartServiceInstance.interceptors.response.use(_.compose(apmResInterceptor('CART'
 camServiceInstance.interceptors.request.use(_.compose(
   apmReqInterceptor('CAM'),
   (config) => {
-    config.headers = { "x-access-token": authToken(), "x-country-code": "SAE" };
+    config.headers = { "x-access-token": authToken(), "x-country-code": "ksa" };
     return config;
   }
 ));
