@@ -3,7 +3,19 @@ import { init as initApm } from 'elastic-apm-js-base';
 import fp, * as _ from 'lodash/fp';
 import axios from 'axios';
 
-import { searchServiceInstance, listingServiceInstance, addressServiceInstance, pimServiceInstance, catalogServiceInstance, authServiceInstance, paymentInstance, transacationRedirectUrlInstance, orderServiceInstance, cartServiceInstance, camServiceInstance } from './services';
+import { 
+  searchServiceInstance, 
+  listingServiceInstance, 
+  addressServiceInstance,
+  pimServiceInstance,
+  catalogServiceInstance,
+  authServiceInstance,
+  paymentInstance,
+  transacationRedirectUrlInstance,
+  orderServiceInstance,
+  cartServiceInstance,
+  camServiceInstance 
+} from './services';
 
 import apmConfig from '../../apm.config';
 import constants from './constants';

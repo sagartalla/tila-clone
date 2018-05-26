@@ -2,19 +2,6 @@ import axios from 'axios';
 import shajs from 'sha.js';
 import constants from './constants';
 
-export const authToken = () => {
-  try {
-    if (localStorage) {
-      const auth = localStorage.auth
-      return JSON.parse(auth).access_token;
-    } else {
-      return false;
-    }
-  } catch (e) {
-    return '';
-  }
-}
-
 export const searchServiceInstance = axios.create({
   baseURL: constants.SEARCH_API_URL,
   timeout: 3000,
@@ -70,15 +57,5 @@ export const paymentInstance = axios.create({
   baseURL: constants.TRANSACTIONS_API_URL,
   timeout: 3000,
 });
-
-// axios.post('http://gateway-dev.fptechscience.com/cart/api/v1/cart/add')
-
-// axios.interceptors.response.use((res) => {
-//   debugger;
-//   return res;
-// }, (err) => {
-//   debugger;
-//   return err
-// });
 
 export default {};

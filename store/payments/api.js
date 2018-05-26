@@ -1,5 +1,5 @@
 
-import { orderInstance, transacationRedirectUrlInstance, paymentInstance, cartServiceInstance } from '../helper/services';
+import { orderServiceInstance, transacationRedirectUrlInstance, paymentInstance, cartServiceInstance } from '../helper/services';
 
 
 //Create Order Third step.
@@ -9,10 +9,9 @@ const transactionApi = (orderRes) => {
   })
 };
 
-
 //Create Order Second step.
 const createOrder = () => {
-  return orderInstance.post('/api/v1/order/purchase').then(({ data }) => {
+  return orderServiceInstance.post('/api/v1/order/purchase').then(({ data }) => {
     return transactionApi(data);
   });
 };
