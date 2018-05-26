@@ -22,6 +22,7 @@ class Login extends Component {
     };
     this.login = this.login.bind(this);
     this.onChangeField = this.onChangeField.bind(this);
+    this.toggleLoginSignUp = this.toggleLoginSignUp.bind(this);
   }
 
   login() {
@@ -60,6 +61,13 @@ class Login extends Component {
       ...this.state,
       [e.target.name]: e.target.value
     })
+  }
+
+  toggleLoginSignUp() {
+    this.setState({
+      ...this.state,
+      mode: this.state.mode === 'login' ? 'register' : 'login'
+    });
   }
 
   render() {
@@ -158,12 +166,12 @@ class Login extends Component {
             ?
               <h4 className={styles['ff-b']}>
                 <span>Already have an Accout &nbsp;</span>
-                <span className={styles['link-text']}>Sign in</span>
+                <span className={styles['link-text']} onClick={this.toggleLoginSignUp}>Sign in</span>
               </h4>
             :
             <h4 className={styles['ff-b']}>
               <span>Don't have an Accout &nbsp;</span>
-              <span className={styles['link-text']}>Sign up</span>
+              <span className={styles['link-text']} onClick={this.toggleLoginSignUp}>Sign up</span>
             </h4>
           }
           </div>
