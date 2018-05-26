@@ -12,7 +12,7 @@ export const authToken = () => {
       return false;
     }
   } catch (e) {
-
+    return '';
   }
 }
 
