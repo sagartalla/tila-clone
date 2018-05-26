@@ -3,7 +3,7 @@ import { init as initApm } from 'elastic-apm-js-base';
 import fp, * as _ from 'lodash/fp';
 import axios from 'axios';
 
-import { searchServiceInstance, listingServiceInstance, addressServiceInstance, pimServiceInstance, catalogServiceInstance, authServiceInstance, paymentInstance, transacationRedirectUrlInstance, orderServiceInstance, cartServiceInstance } from './services';
+import { searchServiceInstance, listingServiceInstance, addressServiceInstance, pimServiceInstance, catalogServiceInstance, authServiceInstance, paymentInstance, transacationRedirectUrlInstance, orderServiceInstance, cartServiceInstance, camServiceInstance } from './services';
 
 import apmConfig from '../../apm.config';
 import constants from './constants';
@@ -17,7 +17,11 @@ export const authToken = () => {
   try {
     if (localStorage) {
       const auth = localStorage.auth
-      return JSON.parse(auth).access_token;
+      if (auth) {
+        return JSON.parse(auth).access_token;
+      } else {
+        return false;
+      }
     } else {
       return false;
     }
@@ -25,7 +29,6 @@ export const authToken = () => {
     console.log(e);
   }
 }
-
 
 const apmReqInterceptor = (serviceName) => (config) => {
   config.transaction = apm.startTransaction(`${serviceName} Service`, 'custom')
@@ -126,5 +129,15 @@ cartServiceInstance.interceptors.request.use(_.compose(
   }
 ));
 cartServiceInstance.interceptors.response.use(_.compose(apmResInterceptor('CART')), _.compose(errorInterceptor))
+
+camServiceInstance.interceptors.request.use(_.compose(
+  apmReqInterceptor('CAM'),
+  (config) => {
+    config.headers = { "x-access-token": authToken(), "x-country-code": "SAE" };
+    return config;
+  }
+));
+camServiceInstance.interceptors.response.use(_.compose(apmResInterceptor('CAM')), _.compose(errorInterceptor))
+
 
 export default {};

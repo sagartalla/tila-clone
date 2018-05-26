@@ -17,6 +17,11 @@ export const addressServiceInstance = axios.create({
   timeout: 3000,
 });
 
+export const camServiceInstance = axios.create({
+  baseURL: constants.CMS_API_URL,
+  timeout: 3000,
+});
+
 export const pimServiceInstance = axios.create({
   baseURL: constants.PIM_API_URL,
   timeout: 30000,
@@ -52,5 +57,15 @@ export const paymentInstance = axios.create({
   baseURL: constants.TRANSACTIONS_API_URL,
   timeout: 3000,
 });
+
+// axios.post('http://gateway-dev.fptechscience.com/cart/api/v1/cart/add')
+
+// axios.interceptors.response.use((res) => {
+//   debugger;
+//   return res;
+// }, (err) => {
+//   debugger;
+//   return err
+// });
 
 export default {};
