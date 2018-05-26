@@ -70,7 +70,7 @@ const errorInterceptor = (err) => {
   } catch (e) {
     console.log(e);
   }
-  return err;
+  return Promise.reject(err);
 }
 
 searchServiceInstance.interceptors.request.use(_.compose(apmReqInterceptor('SEARCH')));
