@@ -32,10 +32,10 @@ export const authToken = () => {
       if (auth) {
         return JSON.parse(auth).access_token;
       } else {
-        return false;
+        return '';
       }
     } else {
-      return false;
+      return '';
     }
   } catch (e) {
     console.log(e);
