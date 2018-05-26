@@ -46,7 +46,6 @@ const productReducer = typeToReducer({
       }, { ui: { loading: true } });
     },
     FULFILLED: (state, action) => {
-      debugger;
       return Object.assign({}, state, { 
         data: {
           ...state.data,
@@ -56,7 +55,6 @@ const productReducer = typeToReducer({
       });
     },
     REJECTED: (state, action) => {
-      debugger;
       return Object.assign({}, state, {
         error: action.payload.response ? action.payload.response.data.message : action.payload.message,
         ui: { loading: false }

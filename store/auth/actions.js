@@ -18,7 +18,6 @@ const actionCreators = {
     return dispatch({
       type: actions.USER_REGISTER,
       payload: api.userRegister(params).then((res) => {
-        debugger;
         const { email, password } = params;
         if (res.status === 200) {
           const { email, password } = params;
