@@ -12,6 +12,10 @@ import { getProduct } from '../store/product/api';
 import getProductComponent from '../components/Product'
 
 class ProductPage extends Base {
+  constructor(props){
+    super(props);
+    this.product = getProductComponent(this.props.url.query.isPreview);
+  }
   static async getInitialProps({ store, query, isServer }) {
     if (query.isPreview){
       await store.dispatch(actionCreators.getPreview({
@@ -21,7 +25,7 @@ class ProductPage extends Base {
     } else {
       await store.dispatch(actionCreators.getProduct({
         "city": "string",
-        "country_code": "SAE",
+        "country_code": "ksa",
         "flags": {
           "catalog_details": true,
           "include_all_pref_listings": true,
@@ -39,7 +43,7 @@ class ProductPage extends Base {
   }
 
   render() {
-    const Product = getProductComponent(this.props.url.query.isPreview);
+    const Product = this.product;
     return (
       <div>
         <Layout>

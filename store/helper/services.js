@@ -12,7 +12,7 @@ export const authToken = () => {
       return false;
     }
   } catch (e) {
-
+    return '';
   }
 }
 
@@ -23,7 +23,7 @@ export const searchServiceInstance = axios.create({
 
 export const listingServiceInstance = axios.create({
   baseURL: constants.LISTING_API_URL,
-  timeout: 3000,
+  timeout: 30000,
 });
 
 // TODO SF-26
@@ -47,6 +47,11 @@ export const orderServiceInstance = axios.create({
   baseURL: constants.ORDER_API_URL,
   timeout: 3000,
   headers: { "x-country-code": "QWE", "x-auth-user": "100002" },
+})
+
+export const cartServiceInstance = axios.create({
+  baseURL: constants.CART_API_URL,
+  timeout: 3000,
 })
 
 export const authServiceInstance = axios.create({
@@ -93,7 +98,7 @@ export const paymentInstance = axios.create({
 
 addressServiceInstance.interceptors.request.use(
   (config) => {
-    config.headers = { "x-access-token": authToken(), "x-country-code": "SAE"  };
+    config.headers = { "x-access-token": authToken(), "x-session-id": "asdasd", "x-country-code": "ksa" };
     return config;
   },
   (error) => {
@@ -103,7 +108,7 @@ addressServiceInstance.interceptors.request.use(
 
 orderInstance.interceptors.request.use(
   (config) => {
-    config.headers = { "x-access-token": authToken(), "x-country-code": "SAE"  };
+    config.headers = { "x-access-token": authToken(), "x-session-id": "asdasd", "x-country-code": "ksa" };
     return config;
   },
   (error) => {
@@ -113,7 +118,17 @@ orderInstance.interceptors.request.use(
 
 paymentInstance.interceptors.request.use(
   (config) => {
-    config.headers = { "x-access-token": authToken(), "x-country-code": "SAE"  };
+    config.headers = { "x-access-token": authToken(), "x-session-id": "asdasd", "x-country-code": "ksa" };
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  },
+);
+
+cartServiceInstance.interceptors.request.use(
+  (config) => {
+    config.headers = { "x-country-code": "ksa", "x-session-id": "asdasd", "x-access-token": authToken(), "x-language": 'en' };
     return config;
   },
   (error) => {

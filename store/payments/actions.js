@@ -6,29 +6,32 @@ const actions = {
 };
 
 const actionCreators = {
-  createOrder: (params) => (dispatch, getState) => {
-    const temp_params = {
-      "country_code": "IND",
-      "currency_code": "INR",
-      "customer_account_id": "100002",
-      "items": [
-        {
-          "catalog_id": "2",
-          "inventory_location_id": "1",
-          "item_type": "string",
-          "listing_id": "string",
-          "product_id": "string",
-          "seller_id": "string",
-          "selling_price": 100,
-          "title": "string",
-          "variant_id": "string"
-        }
-      ]
-    }
+  createOrder: (defaultAddrId) => (dispatch, getState) => {
+
+    // const temp_params = JSON.parse(localStorage.getItem('cartJson') || '{}')
+
+    // const temp_params = {
+    //   "country_code": "IND",
+    //   "currency_code": "INR",
+    //   "customer_account_id": "100002",
+    //   "items": [
+    //     {
+    //       "catalog_id": "2",
+    //       "inventory_location_id": "1",
+    //       "item_type": "string",
+    //       "listing_id": "string",
+    //       "product_id": "string",
+    //       "seller_id": "string",
+    //       "selling_price": 100,
+    //       "title": "string",
+    //       "variant_id": "string"
+    //     }
+    //   ]
+    // }
 
     return dispatch({
       type: actions.CREATE_ORDER,
-      payload: apis.createOrderApi(temp_params),
+      payload: apis.createOrderApi(defaultAddrId),
     });
   },
 
