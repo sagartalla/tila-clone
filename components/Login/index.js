@@ -16,7 +16,7 @@ class Login extends Component {
       error: '',
       email: '',
       password: '',
-      mode: 'register',
+      mode: 'login',
       country: '',
       phone: '',
     };
