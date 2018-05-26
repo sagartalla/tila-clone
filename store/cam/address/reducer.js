@@ -27,12 +27,15 @@ const shippingAddrReducer = typeToReducer({
       // updating user added params/options to store.
       const addr_id_add = Object.assign({}, action.payload.options, { 'address_id': action.payload.data.address_id });
       const tempState = state.data ? state.data : state;
-
+      const newData = tempState.map((val, index) => {
+        val.default = false;
+        return val;
+      });
       return Object.assign(
         {},
         state,
         {
-          data: _.values(Object.assign({}, tempState, { [Object.keys(tempState).length + 1]: addr_id_add })),
+          data: _.values(Object.assign({}, newData, { [Object.keys(tempState).length + 1]: addr_id_add })),
           ui: { loading: true }
         });
     },

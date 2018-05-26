@@ -2,6 +2,19 @@ import axios from 'axios';
 import shajs from 'sha.js';
 import constants from './constants';
 
+export const authToken = () => {
+  try {
+    if (localStorage) {
+      const auth = localStorage.auth
+      return JSON.parse(auth).access_token;
+    } else {
+      return false;
+    }
+  } catch (e) {
+    return '';
+  }
+}
+
 export const searchServiceInstance = axios.create({
   baseURL: constants.SEARCH_API_URL,
   timeout: 3000,

@@ -157,7 +157,7 @@ class ShippingAddress extends Component {
           </Col>
           {
             standalone !== true ?
-              <Col md={12} sm={12} xs={12}>
+              <Col md={12} sm={12} xs={12} className={`${styles['pl-24']}`}>
                 <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']}`} onClick={handleShippingAddressContinue}>Continue</button>
               </Col>
               : null
