@@ -5,7 +5,7 @@ import styles from './header.styl';
 const MegaMenu = () => (
   <nav className={styles['megamenu-wrapper']}>
     <ul>
-      <li>
+      <li className={styles['ml-0']}>
         <Link prefetch href="/">
           <a className={styles['level-1-item']}>Offer Zone | </a>
         </Link>

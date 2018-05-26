@@ -37,9 +37,9 @@ const PaymentMode = props => {
     <div className={`${styles['p-24']} ${styles['box']} ${styles['mb-20']}`}>
       <Row className={`${props.configJson.basic ? '' : 'hide'}`}>
         <Col md={12} sm={12} xs={12}>
-          <h3 className={styles['m-0']}>Make Payment</h3>
+          <h4 className={styles['m-0']}>Make Payment</h4>
           <p>
-            Net banking, credit card, vouchers and etc..
+            <small>Net banking, credit card, vouchers and etc....</small>
           </p>
         </Col>
       </Row>
@@ -47,7 +47,7 @@ const PaymentMode = props => {
       {
         props.data && props.data.orderRes ?
           <div>
-            <h3>Make Payment</h3>
+            <h4 className={`${styles['m-0']} ${styles['mb-10']}`}>Make Payment</h4>
             <Row>
               <Col md={3} sm={12} xs={12}>
                 <ul className={` ${styles['pay-menu']} ${styles['m-0']} ${styles['p-5']} ${styles['pr-0']}`}>

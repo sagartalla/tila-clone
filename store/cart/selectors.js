@@ -1,53 +1,24 @@
-const temp_params = {
-  "country_code": "IND",
-  "currency_code": "INR",
-  "customer_account_id": "100002",
-  "items": [
-    {
-      "catalog_id": "2",
-      "inventory_location_id": "1",
-      "item_type": "string",
-      "listing_id": "string",
-      "product_id": "string",
-      "seller_id": "string",
-      "selling_price": 100,
-      "title": "string",
-      "variant_id": "string"
-    }
-  ]
-}
-
-
-const getCartResults = (store)=>{
+const getCartResults = (store) => {
   if (store.cartReducer.data) {
     const data = store.cartReducer.data;
-    const newData = [];
-    const cartJson= {
-      items:[]
-    }
+    const img_url = 'https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/';
+    const newData = { items: [], total_price: 0 };
     
+    //TODO temp data modifier..
+    if (data.items) {
+      newData.total_price = data.total_price;
+      newData.currency = data.items[0].listing_info.selling_price_currency;
 
-    data.items && data.items.map((item, index) => {
-      const name = item.product_details.product_details_vo.cached_product_details.attribute_map.calculated_display_name.attribute_values[0].value;
-      const price= item.listing_info.selling_price;
-      const cur  = item.listing_info.selling_price_currency;
+      data.items.map((item, index) => {
+        const name = item.product_details.product_details_vo.cached_product_details.attribute_map.calculated_display_name.attribute_values[0].value;
+        const price = item.listing_info.selling_price;
+        const cur = item.listing_info.selling_price_currency;
+        const img = img_url + item.product_details.product_details_vo.cached_product_details.media.gallery_media[0].url
 
-      newData[index] = {name, price, cur}
-
-      cartJson.items.push({
-        "catalog_id": item.product_details.catalog_details.catalog_id,
-        "inventory_location_id": item.listing_info.inventory_list[0].inventory_id,
-        "item_type": item.product_details.catalog_details.item_type_name,
-        "listing_id": item.listing_info.listing_id,
-        "product_id": item.listing_info.product_id,
-        "seller_id": item.listing_info.merchant_id,
-        "selling_price": item.listing_info.selling_price,
-        "title": name,
-        "variant_id": item.listing_info.variant_id
+        newData.items[index] = { name, price, cur, img }
       })
-    })
+    }
 
-    localStorage.setItem('cartJson', JSON.stringify(cartJson));
     return newData;
   }
   return {};

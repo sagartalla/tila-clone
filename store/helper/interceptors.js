@@ -2,7 +2,18 @@ import shajs from 'sha.js';
 import { init as initApm } from 'elastic-apm-js-base';
 import fp, * as _ from 'lodash/fp';
 
-import { searchServiceInstance, listingServiceInstance, addressServiceInstance, pimServiceInstance, catalogServiceInstance, authServiceInstance, paymentInstance, transacationRedirectUrlInstance, orderServiceInstance } from './services';
+import { 
+  searchServiceInstance, 
+  listingServiceInstance, 
+  addressServiceInstance, 
+  pimServiceInstance, 
+  catalogServiceInstance, 
+  authServiceInstance, 
+  paymentInstance, 
+  transacationRedirectUrlInstance, 
+  orderServiceInstance,
+  cartServiceInstance
+} from './services';
 
 import apmConfig from '../../apm.config';
 
