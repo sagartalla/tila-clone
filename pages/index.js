@@ -6,26 +6,30 @@ import createHistory from 'history/createBrowserHistory';
 import Base from './base';
 import makeStore from '../store';
 import { actionCreators, selectors } from '../store/search';
+import { actionCreators as megamenuActionCreators } from '../store/megamenu';
 import Layout from '../layout/main';
 import Search from '../components/Search';
 
 class SearchPage extends Base {
   static async getInitialProps({ store, isServer, query }) {
+    const { language, search, facets, category, subCategory } = query
+    const categoryTree = category === 'category'; //TODO need better way to identify category tree 
     const categoryFilter = {
-      id: query.subCategory ? query.subCategory.match(/(\d*)$/)[0] : query.category ? query.category.match(/(\d*)$/)[0] : null,
+      id: subCategory ? subCategory.match(/(\d*)$/)[0] : category ? category.match(/(\d*)$/)[0] : null,
     };
-    const facetFilters = selectors.getFacetfilters(store.getState())(JSON.parse(query.facets || '{}'));
+    const facetFilters = selectors.getFacetfilters(store.getState())(JSON.parse(facets || '{}'));
     await store.dispatch(actionCreators.getSearchResults({
       categoryFilter,
       country: 'ksa',
       pageSize: 100,
-      query: query.search,
-      language: query.language || 'en',
+      query: search,
+      language: language || 'en',
       facetFilters,
       pageNum: 1,
       fl: '*',
-      isListed: true
-    }));
+      isListed: true,
+      categoryTree,
+    }))
     return { isServer };
   }
 

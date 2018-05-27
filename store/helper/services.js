@@ -53,9 +53,13 @@ export const transacationRedirectUrlInstance = axios.create({
   timeout: 3000,
 });
 
-export const paymentInstance = axios.create({
+export const paymentServiceInstance = axios.create({
   baseURL: constants.TRANSACTIONS_API_URL,
   timeout: 3000,
 });
 
+export const categoryServiceInstance = axios.create({
+  baseURL: constants.CATEGORYTREE_API_URL,
+  timeout: 3000,
+})
 export default {};
