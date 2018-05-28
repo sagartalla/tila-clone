@@ -111,7 +111,7 @@ const apmResInterceptor = (serviceName) => (response) => {
 
 const errorInterceptor = (err) => {
   try {
-    if (err.response && err.response.status === '401') {
+    if (err.response && err.response.status == '401') {
       const auth = JSON.parse(localStorage.getItem('auth'));
       axios.post(`${constants.AUTH_API_URL}/api/v1/refresh`, {
         'auth_version': 'V1',
