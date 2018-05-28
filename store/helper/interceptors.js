@@ -2,6 +2,9 @@ import shajs from 'sha.js';
 import { init as initApm } from 'elastic-apm-js-base';
 import fp, * as _ from 'lodash/fp';
 import axios from 'axios';
+import getConfig from 'next/config'
+const config = getConfig()
+const env = config.publicRuntimeConfig.env;
 
 import { 
   searchServiceInstance, 
@@ -57,12 +60,16 @@ export const country = () => {
 }
 
 const apmReqInterceptor = (serviceName) => (config) => {
+  return config;
+  if(env === 'local') return config;
   config.transaction = apm.startTransaction(`${serviceName} Service`, 'custom')
   config.httpSpan = config.transaction ? config.transaction.startSpan(`FETCH ${JSON.stringify(config)}`, 'http') : null;
   return config;
 }
 
 const apmResInterceptor = (serviceName) => (response) => {
+  return config;
+  if(env === 'local') return config;
   const { httpSpan, transaction } = response.config;
   httpSpan && httpSpan.end();
   transaction && transaction.end();
