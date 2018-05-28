@@ -17,16 +17,14 @@ class Country extends Component {
 	}
 
 	componentDidMount() {
-    const country = localStorage.getItem('country')
-		this.setState({
-      country: country
-    });
-    this.props.setCountry(country);
+		const country = localStorage.getItem('country') || this.state.country;
+		this.setState({ country });
+		this.props.setCountry(country);
 	}
 
 	storeCountry(country) {
 		localStorage.setItem('country', country);
-    this.props.setCountry(country);
+		this.props.setCountry(country);
 		location.reload();
 	}
 
@@ -39,7 +37,7 @@ class Country extends Component {
 		})
 	}
 
-	render() { 
+	render() {
 		return (
 			<input onChange={this.changeCountry} value={this.state.country} />
 		);
