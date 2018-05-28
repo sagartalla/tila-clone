@@ -52,6 +52,7 @@ export const country = () => {
     }
   } catch (e) {
     console.log(e);
+    return 'ksa';
   }
 }
 
