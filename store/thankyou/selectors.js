@@ -1,5 +1,5 @@
-const getFinalOrderDetails = (store)  => {
-  if (store.thankyouReducer.data && store.thankyouReducer.data.length > 0) {
+const getFinalOrderDetails = (store) => {
+  if (store.thankyouReducer.data) {
     return store.thankyouReducer.data;
   }
   return {};

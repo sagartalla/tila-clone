@@ -14,11 +14,11 @@ const thankyouReducer = typeToReducer({
     PENDING: state => {
       return Object.assign({}, state, { ui: { loading: true } });
     },
+    FULFILLED: (state, action) => {
+      return Object.assign({}, state, { data: action.payload.data, ui: { loading: false } });
+    },
     REJECTED: (state, action) => {
       return Object.assign({}, state, { error: action.payload.message, ui: { loading: false } })
-    },
-    FULFILLED: (state, action) => {
-      return Object.assign({}, state, { data: action.payload, ui: { loading: false } });
     },
   }
 

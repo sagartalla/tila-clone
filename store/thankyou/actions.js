@@ -5,7 +5,7 @@ const actions = {
 };
 
 const actionCreators = {
-  getOrderStatusDetails: (params) => (dispatch, getState) => {
+  getOrderStatusDetails: (params) => {
     return ({
       type: actions.GET_ORDER_STATUS_DETAILS,
       payload: apis.getOrderStatusDetails(params),

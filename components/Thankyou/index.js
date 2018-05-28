@@ -22,25 +22,22 @@ class Thankyou extends Component {
   }
 
   componentDidMount() {
-    debugger;
+    const { orderId } = this.props;
     this.setState({
-      orderState:this.props.status,
-      orderId:this.props.transId
+      orderState: this.props.status,
+      orderId: this.props.orderId
     });
-    if(this.props.status=="SUCCESSFUL")
-     this.props.getOrderStatusDetails(this.props.transId);
-  }
-
-  componentWillReceiveProps(nextProps, nextState) {
-    
+    if (this.props.status == "SUCCESSFUL")
+      this.props.getOrderStatusDetails(orderId);
   }
 
   render() {
-    const summary= this.state.orderState=="SUCCESSFUl"? (<Summary orderId={this.state.orderId}/>): "";
+    const { orderDetails } = this.props;
+    const summary = this.state.orderState == "SUCCESSFUL" ? (<Summary orderId={this.state.orderId} orderDetails={orderDetails} />) : "";
     return (
       <div className={styles['thankyou']}>
         <Grid>
-          <PaymentStatus status={this.state.orderState}/>
+          <PaymentStatus status={this.state.orderState} />
           {summary}
         </Grid>
       </div>
@@ -49,7 +46,7 @@ class Thankyou extends Component {
 }
 
 const mapStateToProps = (store) => ({
-  order: selectors.getFinalOrderDetails(store)
+  orderDetails: selectors.getFinalOrderDetails(store)
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -60,4 +57,4 @@ const mapDispatchToProps = (dispatch) =>
     dispatch,
   );
 
-export default connect(mapStateToProps,mapDispatchToProps)(Thankyou);
+export default connect(mapStateToProps, mapDispatchToProps)(Thankyou);
