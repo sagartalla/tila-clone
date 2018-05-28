@@ -2,6 +2,9 @@ import shajs from 'sha.js';
 import { init as initApm } from 'elastic-apm-js-base';
 import fp, * as _ from 'lodash/fp';
 import axios from 'axios';
+import getConfig from 'next/config'
+const config = getConfig()
+const env = config.publicRuntimeConfig.env;
 
 import { 
   searchServiceInstance, 
@@ -10,7 +13,7 @@ import {
   pimServiceInstance,
   catalogServiceInstance,
   authServiceInstance,
-  paymentInstance,
+  paymentServiceInstance,
   transacationRedirectUrlInstance,
   orderServiceInstance,
   cartServiceInstance,
@@ -42,13 +45,31 @@ export const authToken = () => {
   }
 }
 
+export const country = () => {
+  try {
+    if (localStorage) {
+      const country = localStorage.country
+      return country || 'ksa'
+    } else {
+      return 'ksa';
+    }
+  } catch (e) {
+    console.log(e);
+    return 'ksa';
+  }
+}
+
 const apmReqInterceptor = (serviceName) => (config) => {
+  return config;
+  if(env === 'local') return config;
   config.transaction = apm.startTransaction(`${serviceName} Service`, 'custom')
   config.httpSpan = config.transaction ? config.transaction.startSpan(`FETCH ${JSON.stringify(config)}`, 'http') : null;
   return config;
 }
 
 const apmResInterceptor = (serviceName) => (response) => {
+  return response;
+  if(env === 'local') return config;
   const { httpSpan, transaction } = response.config;
   httpSpan && httpSpan.end();
   transaction && transaction.end();
@@ -57,7 +78,7 @@ const apmResInterceptor = (serviceName) => (response) => {
 
 const errorInterceptor = (err) => {
   try {
-    if (err.response.status) {
+    if (err.response && err.response.status === '401') {
       const auth = JSON.parse(localStorage.getItem('auth'));
       axios.post(`${constants.AUTH_API_URL}/api/v1/refresh`, {
         'auth_version': 'V1',
@@ -70,7 +91,7 @@ const errorInterceptor = (err) => {
   } catch (e) {
     console.log(e);
   }
-  return err;
+  return Promise.reject(err);
 }
 
 searchServiceInstance.interceptors.request.use(_.compose(apmReqInterceptor('SEARCH')));
@@ -109,7 +130,7 @@ pimServiceInstance.interceptors.response.use(_.compose(apmResInterceptor('PIM'))
 addressServiceInstance.interceptors.request.use(_.compose(
   apmReqInterceptor('ADDRESS'),
   (config) => {
-    config.headers = { "x-access-token": authToken(), "x-country-code": "ksa" };
+    config.headers = { "x-access-token": authToken(), "x-country-code": country() };
     return config;
   }
 ));
@@ -118,25 +139,25 @@ addressServiceInstance.interceptors.response.use(_.compose(apmResInterceptor('AD
 orderServiceInstance.interceptors.request.use(_.compose(
   apmReqInterceptor('ORDER'),
   (config) => {
-    config.headers = { "x-access-token": authToken(), "x-country-code": "ksa" };
+    config.headers = { "x-access-token": authToken(), "x-country-code": country() };
     return config;
   }
 ));
 orderServiceInstance.interceptors.response.use(_.compose(apmResInterceptor('ORDER')), _.compose(errorInterceptor))
 
-paymentInstance.interceptors.request.use(_.compose(
+paymentServiceInstance.interceptors.request.use(_.compose(
   apmReqInterceptor('PAYMENT'),
   (config) => {
-    config.headers = { "x-access-token": authToken(), "x-country-code": "ksa" };
+    config.headers = { "x-access-token": authToken(), "x-country-code": country() };
     return config;
   }
 ));
-paymentInstance.interceptors.response.use(_.compose(apmResInterceptor('PAYMENT')), _.compose(errorInterceptor))
+paymentServiceInstance.interceptors.response.use(_.compose(apmResInterceptor('PAYMENT')), _.compose(errorInterceptor))
 
 cartServiceInstance.interceptors.request.use(_.compose(
   apmReqInterceptor('CART'),
   (config) => {
-    config.headers = { "x-country-code": "ksa", "x-session-id": "asdasd", "x-access-token": authToken(), "x-language": 'en' };
+    config.headers = { "x-country-code": country(), "x-session-id": "asdasd", "x-access-token": authToken(), "x-language": 'en' };
     return config;
   }
 ));
@@ -145,7 +166,7 @@ cartServiceInstance.interceptors.response.use(_.compose(apmResInterceptor('CART'
 camServiceInstance.interceptors.request.use(_.compose(
   apmReqInterceptor('CAM'),
   (config) => {
-    config.headers = { "x-access-token": authToken(), "x-country-code": "ksa" };
+    config.headers = { "x-access-token": authToken(), "x-country-code": country() };
     return config;
   }
 ));

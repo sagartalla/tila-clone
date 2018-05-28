@@ -8,7 +8,7 @@ const getCartDetailsApi = () => {
 };
 
 const addToCart = (params) => {
-  return cartServiceInstance.post('/api/v1/cart/add', params)
+  return cartServiceInstance.post('/api/v1/cart/add', params);
 }
 
 export default { getCartDetailsApi, addToCart };
