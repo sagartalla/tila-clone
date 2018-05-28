@@ -1,5 +1,5 @@
 
-import { orderServiceInstance, transacationRedirectUrlInstance, paymentInstance, cartServiceInstance } from '../helper/services';
+import { orderServiceInstance, transacationRedirectUrlInstance, paymentServiceInstance, cartServiceInstance } from '../helper/services';
 
 
 //Create Order Third step.
@@ -24,7 +24,7 @@ const createOrderApi = (defaultAddrId) => {
 };
 
 const doPaymentApi = (params) => {
-  return paymentInstance.post('/fpts/transaction/process', params).then(({ data }) => {
+  return paymentServiceInstance.post('/fpts/transaction/process', params).then(({ data }) => {
     return { data }
   });
 }

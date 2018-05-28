@@ -10,7 +10,7 @@ import {
   pimServiceInstance,
   catalogServiceInstance,
   authServiceInstance,
-  paymentInstance,
+  paymentServiceInstance,
   transacationRedirectUrlInstance,
   orderServiceInstance,
   cartServiceInstance,
@@ -138,14 +138,14 @@ orderServiceInstance.interceptors.request.use(_.compose(
 ));
 orderServiceInstance.interceptors.response.use(_.compose(apmResInterceptor('ORDER')), _.compose(errorInterceptor))
 
-paymentInstance.interceptors.request.use(_.compose(
+paymentServiceInstance.interceptors.request.use(_.compose(
   apmReqInterceptor('PAYMENT'),
   (config) => {
     config.headers = { "x-access-token": authToken(), "x-country-code": country() };
     return config;
   }
 ));
-paymentInstance.interceptors.response.use(_.compose(apmResInterceptor('PAYMENT')), _.compose(errorInterceptor))
+paymentServiceInstance.interceptors.response.use(_.compose(apmResInterceptor('PAYMENT')), _.compose(errorInterceptor))
 
 cartServiceInstance.interceptors.request.use(_.compose(
   apmReqInterceptor('CART'),

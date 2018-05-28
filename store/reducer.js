@@ -7,6 +7,7 @@ import { reducer as singleOrderReducer } from "./order";
 import { reducer as cartReducer } from "./cart";
 import { reducer as paymentsReducer } from './payments';
 import { reducer as authReducer } from './auth';
+import { reducer as megamenuReducer } from './megamenu';
 
 export default combineReducers({
   searchReducer,
@@ -17,4 +18,5 @@ export default combineReducers({
   cartReducer,
   paymentsReducer,
   authReducer,
+  megamenuReducer,
 });
