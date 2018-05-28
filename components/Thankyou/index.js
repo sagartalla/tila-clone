@@ -22,22 +22,23 @@ class Thankyou extends Component {
   }
 
   componentDidMount() {
-    const { orderId } = this.props;
+    const { orderId, status } = this.props;
     this.setState({
-      orderState: this.props.status,
-      orderId: this.props.orderId
+      orderState: status,
+      orderId: orderId
     });
-    if (this.props.status == "SUCCESSFUL")
+    if (status == "SUCCESSFUL")
       this.props.getOrderStatusDetails(orderId);
   }
 
   render() {
     const { orderDetails } = this.props;
-    const summary = this.state.orderState == "SUCCESSFUL" ? (<Summary orderId={this.state.orderId} orderDetails={orderDetails} />) : "";
+    const { orderState, orderId } = this.state;
+    const summary = orderState == "SUCCESSFUL" ? (<Summary orderId={orderId} orderDetails={orderDetails} />) : "";
     return (
       <div className={styles['thankyou']}>
         <Grid>
-          <PaymentStatus status={this.state.orderState} />
+          <PaymentStatus status={orderState} />
           {summary}
         </Grid>
       </div>
@@ -56,5 +57,9 @@ const mapDispatchToProps = (dispatch) =>
     },
     dispatch,
   );
+
+Thankyou.propTypes = {
+  orderDetails: PropTypes.object,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Thankyou);
