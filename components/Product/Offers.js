@@ -5,6 +5,9 @@ import { bindActionCreators } from 'redux';
 import {Row, Col, Button} from 'react-bootstrap';
 
 import { selectors, actionCreators } from '../../store/cart';
+import { Link } from '../../routes';
+
+import styles from './product.styl';
 
 class Offers extends Component {
   constructor(props){
@@ -21,19 +24,48 @@ class Offers extends Component {
 
   render() {
     const { price, listingAvailable, listingId } = this.props.offerInfo;
-    const { isLoading } = this.props;
+    const { isLoading, error, isAddedToCart } = this.props;
     return (
       listingAvailable
       ? 
       <div>
         <Row>
           <Col md={6}>
-            <Button onClick={this.addToCart} disabled={isLoading}>BUY FOR {price}</Button>
+              <Button className={styles[`${isAddedToCart ? 'added-to-cart' : ''}`]} onClick={this.addToCart} disabled={isLoading || isAddedToCart}>
+                {
+                  isAddedToCart
+                  ?
+                  'Added to Cart'
+                  :
+                  `BUY FOR ${price}`
+                }
+              </Button>
+              {
+              isAddedToCart
+              ?
+              <Button>
+                {/* <a href='/cart'>Go To Cart</a> */}
+                  <Link route="/cart">Go To Cart</Link>
+              </Button>
+              :
+              null
+            }
           </Col>
           <Col md={6}>
             <Button>Like</Button>
           </Col>
         </Row>
+        {
+          error
+          ?
+          <Row>
+            <Col md={12}>
+              <span className={styles['error-msg']}>{error}</span>
+            </Col>
+          </Row>
+          :
+          null
+        }
         <Row>
           <Col md={6}>
             <ul>
@@ -68,7 +100,9 @@ class Offers extends Component {
 
 const mapStateToProps = (store) => {
   return ({
-    isLoading: selectors.getLoadingStatus(store)
+    isLoading: selectors.getLoadingStatus(store),
+    error: selectors.getErrorMessege(store),
+    isAddedToCart: selectors.isAddedToCart(store)
   })
 };
 

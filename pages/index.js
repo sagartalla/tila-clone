@@ -14,13 +14,16 @@ class SearchPage extends Base {
   static async getInitialProps({ store, isServer, query }) {
     const { language, search, facets, category, subCategory } = query
     const categoryTree = category === 'category'; //TODO need better way to identify category tree 
+    //TODO SF-37 better handling of country
+    const state = store.getState();
+    const country = state.authReducer.data.country;
     const categoryFilter = {
       id: subCategory ? subCategory.match(/(\d*)$/)[0] : category ? category.match(/(\d*)$/)[0] : null,
     };
     const facetFilters = selectors.getFacetfilters(store.getState())(JSON.parse(facets || '{}'));
     await store.dispatch(actionCreators.getSearchResults({
       categoryFilter,
-      country: 'ksa',
+      country: country || 'ksa',
       pageSize: 100,
       query: search,
       language: language || 'en',

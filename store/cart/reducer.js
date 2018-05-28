@@ -6,13 +6,13 @@ const initialState = {
       loading: false,
   },
   data: {},
-  error: {},
+  error: '',
 };
 
 const cartReducer = typeToReducer({
     [actions.GET_CART_DETAILS]: {
         PENDING: state => {
-          return Object.assign({}, state, { ui: { loading: true } });
+          return Object.assign({}, state, { error: '', ui: { loading: true } });
         },
         FULFILLED: (state, action) => {
           // console.log(state, actions)
@@ -25,13 +25,18 @@ const cartReducer = typeToReducer({
     },
     [actions.ADD_TO_CART]: {
         PENDING: state => {
-          return Object.assign({}, state, { ui: { loading: true } });
+          return Object.assign({}, state, { error: '', ui: { loading: true } });
         },
         FULFILLED: (state, action) => {
           return Object.assign({}, state, { data: action.payload.data, ui: { loading: false } });
         },
         REJECTED: (state, action) => {
-          return Object.assign({}, state, { error: action.payload.message, ui: { loading: false } })
+          return Object.assign({}, state, { 
+            error: action.payload.response ? action.payload.response.data.message : action.payload.message, 
+            ui: { 
+              loading: false 
+            } 
+          });
         },
     }
 }, initialState);
