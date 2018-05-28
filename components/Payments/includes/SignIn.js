@@ -31,6 +31,10 @@ const SignIn = props => (
       </Col>
       <Col md={12} sm={12} xs={12} className={styles['mt-10']}>
         <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']}`} onClick={props.showAddress}>Continue</button>
+        {
+          props.signInLoader ? <span> Please wait...</span> : null
+        }
+        
       </Col>
     </Row>
   </div>
