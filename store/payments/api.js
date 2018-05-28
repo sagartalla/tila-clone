@@ -1,6 +1,4 @@
-
 import { orderServiceInstance, transacationRedirectUrlInstance, paymentServiceInstance, cartServiceInstance } from '../helper/services';
-
 
 //Create Order Third step.
 const transactionApi = (orderRes) => {
