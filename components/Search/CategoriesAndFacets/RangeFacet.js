@@ -12,7 +12,7 @@ class RangeFitler extends Component {
   constructor(props) {
     super(props);
     const { filter, selectedFilters } = props;
-    const [min, max] = selectedFilters ? selectedFilters[0].param.match(/\[(.*)\]/)[1].split(' TO ').map((val) => parseInt(val)): [ null, null ];
+    const [min, max] = selectedFilters.length ? selectedFilters[0].param.match(/\[(.*)\]/)[1].split(' TO ').map((val) => parseInt(val)): [ null, null ];
     this.state = {
       static: {
         min: Math.min.apply(null, filter.children[0].values),

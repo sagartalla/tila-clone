@@ -26,10 +26,6 @@ class Search extends Component {
     e.preventDefault();
     const flushFilters = true;
     Router.pushRoute(`/?search=${this.state.query}`);
-    // pushInUrlQuery('search', this.state.query, { url: "/", as: "/", options: {} });
-    this.props.getSearchResults({
-      query: this.state.query
-    }, null, flushFilters);
   }
 
   onChangeSearchInput(e) {
@@ -48,7 +44,7 @@ class Search extends Component {
             onChange={this.onChangeSearchInput}
             value={this.state.query}
            />
-          <button type="submit" className={styles['search-btn']}><i className="fa fa-search"></i></button>
+          <button type="submit" className={styles['search-btn']}>search</button>
         </form>
       </div>
     )

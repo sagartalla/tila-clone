@@ -44,14 +44,14 @@ const AddressNew = props => (
       <Col md={6} sm={12} xs={12}>
         <input placeholder="Colony/Street/Locality" name="address_line_2" onChange={props.inputOnChange} value={props.data.address_line_2} className={styles.input} />
       </Col>
-      <Col md={6} sm={12} xs={12}>
+      <Col md={2} sm={12} xs={12}>
         <input placeholder="Postal code" name="postal_code" onChange={props.inputOnChange} value={props.data.postal_code} className={styles.input} />
       </Col>
 
       <Col md={2} sm={4} xs={4}>
         <input placeholder="Country code" name="mobile_country_code" onChange={props.inputOnChange} value={props.data.mobile_country_code} className={styles.input} />
       </Col>
-      <Col md={4} sm={8} xs={8}>
+      <Col md={2} sm={8} xs={8}>
         <input placeholder="Mobile Number" name="mobile_no" onChange={props.inputOnChange} value={props.data.mobile_no} className={styles.input} />
       </Col>
       <Col md={6} sm={12} xs={12}>

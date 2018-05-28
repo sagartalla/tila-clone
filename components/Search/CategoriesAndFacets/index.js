@@ -52,7 +52,7 @@ class CategoriesAndFacets extends Component {
         filters.facets.map((filter) => {
           if (filter.type === 'PERCENTILE') {
             let selectedFilters = facets[filter.attributeName];
-            return filter.children.length ? <RangeFitler filter={filter} key={filter.id} onChangeHandle={this.onChangeHandle(filter.attributeName, filter.type)} selectedFilters={selectedFilters}/> : null;
+            return filter.children.length ? <RangeFitler filter={filter} key={filter.id} onChangeHandle={this.onChangeHandle(filter.attributeName, filter.type)} selectedFilters={selectedFilters || []}/> : null;
           }
           let selectedFilters = facets[filter.attributeName];
           selectedFilters = selectedFilters ? selectedFilters.map((item) => item.name) : [];

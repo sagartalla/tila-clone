@@ -7,7 +7,7 @@ const PaymentHeader = props => (
       <Row>
         <Col md={12}>
           LOGO
-          </Col>
+        </Col>
       </Row>
     </Grid>
   </div>

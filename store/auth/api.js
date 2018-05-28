@@ -1,7 +1,7 @@
 import _ from 'lodash';
-import { authServiceInstance  } from '../helper/services';
+import { authServiceInstance, camServiceInstance } from '../helper/services';
 
-const login = (params) => {
+const userLogin = (params) => {
   return authServiceInstance.post(`/api/v1/login/basic`, Object.assign({}, params, {
     type: 'CUSTOMER',
     authVersion: 'V1'
@@ -23,7 +23,9 @@ const login = (params) => {
   });
 }
 
-const logout = () => {
+const userRegister = (params) =>  camServiceInstance.post('/api/v1/user/register', params);
+
+const userLogout = () => {
   localStorage.removeItem('auth');
 }
 
@@ -34,4 +36,4 @@ const getLoginInfo = () => {
   };
 } 
 
-export default { login, logout, getLoginInfo };
+export default { userLogin, userRegister, userLogout, getLoginInfo };

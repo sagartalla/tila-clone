@@ -4,20 +4,20 @@ import withRedux from 'next-redux-wrapper';
 import makeStore from '../store';
 
 import Layout from '../layout/main';
-import Payments from '../components/Payments';
+import Cart from '../components/Cart';
 import Base from './base';
 
-class PaymentPage extends Base {
-  pageName = 'PAYMENT';
+class CartPage extends Base {
+  pageName = 'CART'
   render() {
     return (
       <NoSSR>
         <Layout>
-          <Payments />
+          <Cart />
         </Layout>
       </NoSSR>
     );
   }
-} 
+}
 
-export default withRedux(makeStore, null, null)(PaymentPage);
+export default withRedux(makeStore, null, null)(CartPage);

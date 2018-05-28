@@ -1,16 +1,26 @@
-import { orderInstance, transacationRedirectUrlInstance, paymentInstance } from '../helper/services';
+
+import { orderServiceInstance, transacationRedirectUrlInstance, paymentInstance, cartServiceInstance } from '../helper/services';
 
 
+//Create Order Third step.
 const transactionApi = (orderRes) => {
   return transacationRedirectUrlInstance.get(orderRes.redirect_url).then(({ data }) => {
     return { orderRes, data }
   })
 };
 
-const createOrderApi = (params) => {
-  return orderInstance.post('/api/v1/order/test/create', params).then(({ data }) => {
+//Create Order Second step.
+const createOrder = () => {
+  return orderServiceInstance.post('/api/v1/order/purchase').then(({ data }) => {
     return transactionApi(data);
   });
+};
+
+//Create Order First step.
+const createOrderApi = (defaultAddrId) => {
+  return cartServiceInstance.put('/api/v1/cart/view', {'address_id': defaultAddrId }).then(({ data }) => {
+    return createOrder(data);
+  });  
 };
 
 const doPaymentApi = (params) => {

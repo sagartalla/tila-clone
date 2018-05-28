@@ -5,8 +5,10 @@ import makeStore from '../store';
 
 import Layout from '../layout/main';
 import Thankyou from '../components/Thankyou';
+import Base from './base';
 
 const ThankyouPage = (props) => {
+  pageName = 'THANK YOU';
   const urlParams= { transId: props.url.query.transId, status: props.url.query.status }; 
   return (
   <NoSSR>

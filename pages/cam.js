@@ -11,6 +11,7 @@ import Layout from '../layout/main';
 import Cam from '../components/Cam';
 
 class CamPage extends Base {
+  pageName = 'CAM';
   render(){
    return (
     <Layout>

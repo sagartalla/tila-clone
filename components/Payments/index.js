@@ -7,9 +7,12 @@ import { bindActionCreators } from 'redux';
 import { actionCreators, selectors } from '../../store/payments';
 
 import { actionCreators as authActionCreators, selectors as authSelectors } from '../../store/auth';
+import { actionCreators as cartActionCreators, selectors as cartSelectors } from '../../store/cart';
 
 import PaymentHeader from './includes/PaymentHeader';
-import RightSideBar from './includes/RightSideBar';
+// import RightSideBar from './includes/RightSideBar';
+
+import RightSideBar from '../common/CartAndPaymentRightBar';
 
 import SignIn from './includes/SignIn';
 import DeliveryAddress from './includes/DeliveryAddress';
@@ -56,13 +59,13 @@ class Payments extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const {loggedInFlag} = this.state;
+    const { loggedInFlag } = this.state;
     // Clicking on pay button and after getting response, we will redirect to given URL.
     if (nextProps && nextProps.makePaymentOptions && nextProps.makePaymentOptions.redirect_url) {
       location.href = nextProps.makePaymentOptions.redirect_url;
     }
 
-    if(nextProps.isLoggedIn && !loggedInFlag){
+    if (nextProps.isLoggedIn && !loggedInFlag) {
       // console.log(localStorage)
       const login = nextProps.userCreds || this.state.login;
       const paymentConfigJson = { ...this.state.paymentConfigJson };
@@ -76,6 +79,7 @@ class Payments extends React.Component {
   componentDidMount() {
     // TODO move it to base component later after discussion on login.
     this.props.getLoginInfo();
+    this.props.getCartResults();
   }
 
   //TODO Show loader on clicking on login button.
@@ -118,7 +122,8 @@ class Payments extends React.Component {
   // TODO Send params with cart info.
   // TODO payment page should show after AJAX call is with success.
   handleShippingAddressContinue(e) {
-    this.props.createOrder()
+    const defaultAddrId = this.props.defaultAddress[0].address_id;
+    this.props.createOrder(defaultAddrId)
 
     const paymentConfigJson = { ...this.state.paymentConfigJson };
     paymentConfigJson['address'] = { basic: false, progress: false, done: true };
@@ -134,16 +139,15 @@ class Payments extends React.Component {
 
   render() {
     const { login, showTab, paymentConfigJson } = this.state;
-    const { paymentOptions, defaultAddress, isLoggedIn } = this.props;
+    const { paymentOptions, defaultAddress, isLoggedIn, cartResults } = this.props;
 
-    // console.log("LoggedIn",isLoggedIn)
     return (
       <div className={styles['payment']}>
         <PaymentHeader />
         <Grid>
           <Row>
             <Col xs={12} md={12} sm={12}>
-              <h2>Secure Checkout </h2>
+              <h4 className={`${styles['mt-32']} ${styles['mb-20']}`}>Secure Checkout</h4>
             </Col>
           </Row>
           <Row>
@@ -170,7 +174,15 @@ class Payments extends React.Component {
             </Col>
             <Col md={3} xs={12} sm={12}>
               <Row>
-                <RightSideBar />
+                {
+                  cartResults && cartResults.total_price ?
+                    <div className={`${styles['box']} ${styles['box-space']}`}>
+                      <RightSideBar
+                        data={cartResults}
+                      />
+                    </div>
+                    : null
+                }
               </Row>
             </Col>
           </Row>
@@ -186,6 +198,7 @@ const mapStateToprops = (store) => ({
   defaultAddress: selectors.getDefaultAddress(store),
   isLoggedIn: authSelectors.getLoggedInStatus(store),
   userCreds: authSelectors.getUserCreds(store),
+  cartResults: cartSelectors.getCartResults(store),
 })
 
 const mapDispatchToProps = (dispatch) =>
@@ -195,6 +208,7 @@ const mapDispatchToProps = (dispatch) =>
       doPayment: actionCreators.doPayment,
       userLogin: authActionCreators.userLogin,
       getLoginInfo: authActionCreators.getLoginInfo,
+      getCartResults: cartActionCreators.getCartResults,
     },
     dispatch,
   );

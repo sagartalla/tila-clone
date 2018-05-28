@@ -11,12 +11,13 @@ import TitleInfo from './TitleInfo';
 import KeyFeatures from './KeyFeatures';
 import Variants from './Variants';
 import Catalog from './Catalog';
+import Offers from './Offers';
 
 import styles from './product.styl';
 
 const getProductComponent = (isPreview) => {
   const Product = ({ productData }) => {
-    const { catalog, titleInfo, keyfeatures, imgUrls } = productData;
+    const { catalog, titleInfo, keyfeatures, imgUrls, offerInfo } = productData;
     return (
       <div>
         {
@@ -33,6 +34,9 @@ const getProductComponent = (isPreview) => {
               {/* <NoSSR>
                 <Variants />
               </NoSSR> */}
+              {
+                isPreview ? null : <Offers offerInfo={offerInfo}/>
+              }
             </Col>
           </Row>
           <Row>

@@ -17,17 +17,20 @@ class SearchPage extends Base {
     const facetFilters = selectors.getFacetfilters(store.getState())(JSON.parse(query.facets || '{}'));
     await store.dispatch(actionCreators.getSearchResults({
       categoryFilter,
-      country: 'UAE',
+      country: 'ksa',
       pageSize: 100,
       query: query.search,
       language: query.language || 'en',
       facetFilters,
       pageNum: 1,
       fl: '*',
+      isListed: true
     }));
     return { isServer };
   }
 
+  pageName = 'SEAERCH';
+  
   render() {
     return (
       <div>

@@ -8,22 +8,28 @@ const getProduct = (store, variantId) => {
     brand: product_details.catalog_details.attribute_map.brand.attribute_values[0].value,
     title: product_details.product_details_vo.cached_product_details.attribute_map.calculated_display_name.attribute_values[0].value,
     rating: {
-      rating: '! 4',
-      count: '! 187'
+      rating: '',
+      count: ''
     },
     reviews: {
-      count: '! 25'
+      count: ''
     },
     price: priceInfo ? priceInfo.selling_price + ' ' + priceInfo.selling_price_currency : 'No listing',
-    originalPrice: '! 1949.00 SAR',
-    discountPercent: '! -60%',
+    originalPrice: '',
+    discountPercent: '',
   };
+  const offerInfo = {
+    price: priceInfo ? priceInfo.selling_price + ' ' + priceInfo.selling_price_currency : 'No listing',
+    listingId: priceInfo ? priceInfo.listing_id : 'No Listing',
+    listingAvailable: !!priceInfo
+  }
   const keyfeatures = _.map(product_details.product_details_vo.cached_product_details.attribute_map.calculated_highlights.attribute_values, (kf) => kf.value);
   const imgUrls = product_details.product_details_vo.cached_product_details.media.gallery_media;
   return {
     titleInfo,
     keyfeatures,
     imgUrls,
+    offerInfo,
     catalog: _.groupBy(product_details.catalog_details.attribute_map, (attrMap) => attrMap.attribute_category_name)
   };
 };
@@ -76,15 +82,15 @@ const getPreview = (store) => {
     brand: attributes.brand.attributeValues.length ? attributes.brand.attributeValues[0].value : 'Brand not found',
     title: attributes.display_title.attributeValues.length ? attributes.display_title.attributeValues[0].value : 'Title Not Found',
     rating: {
-      rating: "! 4",
-      count: "! 187"
+      rating: '',
+      count: '',
     },
     reviews: {
-      count: "! 25"
+      count: '',
     },
     price: 'No price Info',
-    originalPrice: "! 1949.00 SAR",
-    discountPercent: "! -60%"
+    originalPrice: '',
+    discountPercent: '',
   };
   const keyfeatures = _.map(attributes.highlights.attributeValues, (kf) => kf.value);
   const productKeys = Object.keys(products)
