@@ -6,12 +6,14 @@ import styles from '../thankyou.styl';
 /** TODO : order page link is required **/
 const PaymentStatus = props => {
   const message = (props.status == "SUCCESSFUL") ? "YOUR ORDER HAS BEEN PLACED SUCCESSFULLY" : "ORDER FAILURE";
+  // TODO: Need to have a util for static messeges
   const successMessage = (<span>Your order has been placed and is being processed. You will receive an email with details once the item(s) are shipped. You can track your
     &nbsp;<a>Orders page</a>&nbsp;in your account</span>);
   const subMessage = (props.status == "SUCCESSFUL") ? successMessage : "Please try again";
   return (
     <div>
       <Row>
+        {/* TODO SF-44: Common layout needed for non header pages */}
         <Col md={2} xs={2} sm={2}>
           <span className={styles['ml-32']}>
             <div className={styles['m-10']}>

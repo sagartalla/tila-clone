@@ -27,14 +27,15 @@ class Thankyou extends Component {
       orderState: status,
       orderId: orderId
     });
-    if (status == "SUCCESSFUL")
+    if (status == "SUCCESSFUL") {
       this.props.getOrderStatusDetails(orderId);
+    }
   }
 
   render() {
     const { orderDetails } = this.props;
     const { orderState, orderId } = this.state;
-    const summary = orderState == "SUCCESSFUL" ? (<Summary orderId={orderId} orderDetails={orderDetails} />) : "";
+    const summary = orderState == "SUCCESSFUL" ? (<Summary orderId={orderId} orderDetails={orderDetails} />) : null;
     return (
       <div className={styles['thankyou']}>
         <Grid>
@@ -59,7 +60,10 @@ const mapDispatchToProps = (dispatch) =>
   );
 
 Thankyou.propTypes = {
-  orderDetails: PropTypes.object,
+  orderDetails: PropTypes.object.isRequired,
+  orderId: PropTypes.string.isRequired,
+  status: PropTypes.string.isRequired,
+  getOrderStatusDetails: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Thankyou);

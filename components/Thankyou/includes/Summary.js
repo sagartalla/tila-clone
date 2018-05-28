@@ -81,7 +81,7 @@ const PaymentStatus = props => {
                 <Row className={`${styles['ht-100']} ${styles['mt-10']}`}>
                   <Col md={6} xs={6} sm={6} className={`${styles['sub-label']} ${styles['fs-12']}`}>
                     <p>
-                      <img src="http://via.placeholder.com/25x15" alt="gift" />
+                      <div className={styles['img-placehlder-25x15']}></div>
                       <span className={styles['ml-10']}>Gift Card</span>
                     </p>
                     <p>Visa<span className={`${styles['ml-10']} ${styles['card']}`}>**** **** ****</span></p>
