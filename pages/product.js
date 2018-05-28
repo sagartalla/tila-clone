@@ -17,6 +17,10 @@ class ProductPage extends Base {
     this.product = getProductComponent(this.props.url.query.isPreview);
   }
   static async getInitialProps({ store, query, isServer }) {
+    //TODO SF-37 better handling of country
+    const state = store.getState();
+    const country = state.authReducer.data.country;
+    
     if (query.isPreview){
       await store.dispatch(actionCreators.getPreview({
         taskCode: query.taskCode,
@@ -25,7 +29,7 @@ class ProductPage extends Base {
     } else {
       await store.dispatch(actionCreators.getProduct({
         "city": "string",
-        "country_code": "ksa",
+        "country_code": country || "ksa",
         "flags": {
           "catalog_details": true,
           "include_all_pref_listings": true,

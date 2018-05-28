@@ -11,13 +11,16 @@ import Search from '../components/Search';
 
 class SearchPage extends Base {
   static async getInitialProps({ store, isServer, query }) {
+    //TODO SF-37 better handling of country
+    const state = store.getState();
+    const country = state.authReducer.data.country;
     const categoryFilter = {
       id: query.subCategory ? query.subCategory.match(/(\d*)$/)[0] : query.category ? query.category.match(/(\d*)$/)[0] : null,
     };
     const facetFilters = selectors.getFacetfilters(store.getState())(JSON.parse(query.facets || '{}'));
     await store.dispatch(actionCreators.getSearchResults({
       categoryFilter,
-      country: 'ksa',
+      country: country || 'ksa',
       pageSize: 100,
       query: query.search,
       language: query.language || 'en',

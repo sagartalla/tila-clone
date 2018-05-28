@@ -79,6 +79,15 @@ const productReducer = typeToReducer({
         userCreds: action.payload.userCreds,
       }
     }
+  },
+  [actions.SET_COUNTRY]: (state, action) => {
+    return {
+      ...state,
+      data: {
+        ...state.data,
+        country: action.payload
+      }
+    }
   }
   
 }, initialState);
