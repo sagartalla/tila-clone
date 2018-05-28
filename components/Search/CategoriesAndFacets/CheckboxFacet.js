@@ -55,9 +55,8 @@ class CheckboxFacet extends Component {
         <ul>
           {
             filter.children.slice(0, this.state.maxRows).map(childFitler => (
-              <li>
+              <li key={childFitler.id}>
                 <Checkbox
-                  key={childFitler.id}
                   onChange={this.onChangeItem({ name: childFitler.name, param: childFitler.param })}
                   checked={selectedItems.indexOf(childFitler.name) !== -1}
                 >

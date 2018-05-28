@@ -28,4 +28,12 @@ const getLoadingStatus = (store) => {
   return store.cartReducer.ui.loading;
 }
 
-export { getCartResults, getLoadingStatus }
+const getErrorMessege = (store) => {
+  return store.cartReducer.error;
+}
+
+const isAddedToCart = (store) => {
+  return store.cartReducer.data.item_status === 'ADDED';
+}
+
+export { getCartResults, getLoadingStatus, getErrorMessege, isAddedToCart }

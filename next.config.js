@@ -18,17 +18,17 @@ module.exports = withStylus(withCSS({
     config.node = {
       fs: 'empty'
     }
-    if (dev) {
-      config.module.rules.push({
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'eslint-loader',
-        options: {
-          formatter: eslintFormatter,
-          emitWarning: dev
-        }
-      });
-    }
+    // if (dev) {
+    //   config.module.rules.push({
+    //     test: /\.js$/,
+    //     exclude: /node_modules/,
+    //     loader: 'eslint-loader',
+    //     options: {
+    //       formatter: eslintFormatter,
+    //       emitWarning: dev
+    //     }
+    //   });
+    // }
     // config.resolve = {
     //   extensions: ['', '.js'],
     //     root: [

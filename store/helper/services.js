@@ -17,6 +17,11 @@ export const addressServiceInstance = axios.create({
   timeout: 3000,
 });
 
+export const camServiceInstance = axios.create({
+  baseURL: constants.CMS_API_URL,
+  timeout: 3000,
+});
+
 export const pimServiceInstance = axios.create({
   baseURL: constants.PIM_API_URL,
   timeout: 30000,
@@ -48,9 +53,13 @@ export const transacationRedirectUrlInstance = axios.create({
   timeout: 3000,
 });
 
-export const paymentInstance = axios.create({
+export const paymentServiceInstance = axios.create({
   baseURL: constants.TRANSACTIONS_API_URL,
   timeout: 3000,
 });
 
+export const categoryServiceInstance = axios.create({
+  baseURL: constants.CATEGORYTREE_API_URL,
+  timeout: 3000,
+})
 export default {};

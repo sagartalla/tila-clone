@@ -11,7 +11,8 @@ const getSearchResultsApi = ({
   facetFilters,
   pageNum,
   fl,
-  isListed
+  isListed,
+  categoryTree
 }) => {
   const options = {
     categoryFilter,
@@ -24,7 +25,7 @@ const getSearchResultsApi = ({
     fl,
     isListed,
   };
-  return searchServiceInstance.post('/search', options).then(({ data }) => {
+  return searchServiceInstance.post(`/search${categoryTree ? '/browseByCatId/': ''}`, options).then(({ data }) => {
     if (data.categoryFilter) {
       data.categoryFilter.parentCategories.forEach((parentCategory) => {
         parentCategory.canonicalId = _.kebabCase(parentCategory.name);

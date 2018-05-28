@@ -1,0 +1,62 @@
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import _ from 'lodash';
+
+import { actionCreators } from '../../store/auth'
+
+class Country extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			country: 'ksa'
+		}
+		this.storeCountry = _.debounce(this.storeCountry.bind(this), 300);
+		this.changeCountry = this.changeCountry.bind(this);
+	}
+
+	componentDidMount() {
+    const country = localStorage.getItem('country')
+		this.setState({
+      country: country
+    });
+    this.props.setCountry(country);
+	}
+
+	storeCountry(country) {
+		localStorage.setItem('country', country);
+    this.props.setCountry(country);
+		location.reload();
+	}
+
+	changeCountry(e) {
+		const country = e.target.value;
+		this.setState({
+			country,
+		}, () => {
+			this.storeCountry(country);
+		})
+	}
+
+	render() { 
+		return (
+			<input onChange={this.changeCountry} value={this.state.country} />
+		);
+	}
+}
+
+Country.propTypes = {
+	setCountry: PropTypes.func.isRequired
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return bindActionCreators(
+		{
+			setCountry: actionCreators.setCountry
+		},
+		dispatch,
+	);
+}
+
+export default connect(null, mapDispatchToProps)(Country);
