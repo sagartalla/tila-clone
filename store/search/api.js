@@ -15,7 +15,6 @@ const getSearchResultsApi = ({
   categoryTree
 }) => {
   const options = {
-    categoryFilter,
     country,
     facetFilters,
     language,
@@ -25,6 +24,11 @@ const getSearchResultsApi = ({
     fl,
     isListed,
   };
+  if (categoryTree) {
+    options.categoryId = categoryFilter.id;
+  } else {
+    options.categoryFilter = categoryFilter;
+  }
   return searchServiceInstance.post(`/search${categoryTree ? '/browseByCatId/': ''}`, options).then(({ data }) => {
     if (data.categoryFilter) {
       data.categoryFilter.parentCategories.forEach((parentCategory) => {
