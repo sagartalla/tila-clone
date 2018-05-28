@@ -47,7 +47,8 @@ class Payments extends React.Component {
       },
       showTab: 0,// to show payment tabs
       paymentOptions: {}, // which payment options to show.
-      loggedInFlag: false
+      loggedInFlag: false,
+      signInLoader: false,
     }
 
     this.inputOnChange = this.inputOnChange.bind(this);
@@ -72,7 +73,7 @@ class Payments extends React.Component {
 
       paymentConfigJson['signIn'] = { basic: false, progress: false, done: true };
       paymentConfigJson['address'] = { basic: false, progress: true, done: false };
-      this.setState({ paymentConfigJson, login, loggedInFlag: true });
+      this.setState({ paymentConfigJson, login, loggedInFlag: true, signInLoader: false });
     }
   }
 
@@ -84,6 +85,7 @@ class Payments extends React.Component {
 
   //TODO Show loader on clicking on login button.
   showAddress() {
+    this.setState({ signInLoader: true });
     this.props.userLogin(this.state.login);
   }
 
@@ -119,7 +121,6 @@ class Payments extends React.Component {
     this.props.doPayment(paymentjson);
   }
 
-  // TODO Send params with cart info.
   // TODO payment page should show after AJAX call is with success.
   handleShippingAddressContinue(e) {
     const defaultAddrId = this.props.defaultAddress[0].address_id;
@@ -138,7 +139,7 @@ class Payments extends React.Component {
   }
 
   render() {
-    const { login, showTab, paymentConfigJson } = this.state;
+    const { login, showTab, paymentConfigJson, signInLoader } = this.state;
     const { paymentOptions, defaultAddress, isLoggedIn, cartResults } = this.props;
 
     return (
@@ -157,6 +158,7 @@ class Payments extends React.Component {
                 inputOnChange={this.inputOnChange}
                 configJson={paymentConfigJson.signIn}
                 showAddress={this.showAddress}
+                signInLoader={signInLoader}
               />
               <DeliveryAddress
                 handleShippingAddressContinue={this.handleShippingAddressContinue}
