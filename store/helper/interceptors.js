@@ -102,7 +102,7 @@ const apmReqInterceptor = (serviceName) => (config) => {
 
 const apmResInterceptor = (serviceName) => (response) => {
   // return response;
-  if(env === 'local') return config;
+  if (env === 'local') return response;
   const { httpSpan, transaction } = response.config;
   httpSpan && httpSpan.end();
   transaction && transaction.end();
