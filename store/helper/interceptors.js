@@ -6,9 +6,9 @@ import getConfig from 'next/config'
 const config = getConfig()
 const env = config.publicRuntimeConfig.env;
 
-import { 
-  searchServiceInstance, 
-  listingServiceInstance, 
+import {
+  searchServiceInstance,
+  listingServiceInstance,
   addressServiceInstance,
   pimServiceInstance,
   catalogServiceInstance,
@@ -17,7 +17,7 @@ import {
   transacationRedirectUrlInstance,
   orderServiceInstance,
   cartServiceInstance,
-  camServiceInstance 
+  camServiceInstance
 } from './services';
 
 import apmConfig from '../../apm.config';
@@ -27,6 +27,39 @@ const apm = initApm({
   serviceName: apmConfig.serviceName,
   serverUrl: apmConfig.serverUrl,
 });
+
+const configModifer = () => (config) => {
+  config.headers = { "x-country-code": country(), "x-session-id": sessionId(), "x-access-token": authToken(), "x-language": 'en' };
+  return config;
+}
+
+// Generate UUID/random number
+// Code taken from https://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript
+export const uuidv4 = () => {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+}
+
+export const sessionId = () => {
+  try {
+    if (localStorage) {
+      const id = localStorage.session_id;
+      if (id) {
+        return id;
+      } else {
+        const uuid = uuidv4();
+        localStorage.setItem('session_id', uuid);
+        return uuid;
+      }
+    } else {
+      return uuidv4();
+    }
+  } catch (e) {
+    return uuidv4();
+  }
+}
 
 export const authToken = () => {
   try {
@@ -60,7 +93,7 @@ export const country = () => {
 }
 
 const apmReqInterceptor = (serviceName) => (config) => {
-  return config;
+  // return config;
   if(env === 'local') return config;
   config.transaction = apm.startTransaction(`${serviceName} Service`, 'custom')
   config.httpSpan = config.transaction ? config.transaction.startSpan(`FETCH ${JSON.stringify(config)}`, 'http') : null;
@@ -68,8 +101,8 @@ const apmReqInterceptor = (serviceName) => (config) => {
 }
 
 const apmResInterceptor = (serviceName) => (response) => {
-  return response;
-  if(env === 'local') return config;
+  // return response;
+  if (env === 'local') return response;
   const { httpSpan, transaction } = response.config;
   httpSpan && httpSpan.end();
   transaction && transaction.end();
@@ -78,7 +111,7 @@ const apmResInterceptor = (serviceName) => (response) => {
 
 const errorInterceptor = (err) => {
   try {
-    if (err.response && err.response.status === '401') {
+    if (err.response && err.response.status == '401') {
       const auth = JSON.parse(localStorage.getItem('auth'));
       axios.post(`${constants.AUTH_API_URL}/api/v1/refresh`, {
         'auth_version': 'V1',
@@ -128,47 +161,27 @@ pimServiceInstance.interceptors.request.use(_.compose(
 pimServiceInstance.interceptors.response.use(_.compose(apmResInterceptor('PIM'))), _.compose(errorInterceptor);
 
 addressServiceInstance.interceptors.request.use(_.compose(
-  apmReqInterceptor('ADDRESS'),
-  (config) => {
-    config.headers = { "x-access-token": authToken(), "x-country-code": country() };
-    return config;
-  }
+  apmReqInterceptor('ADDRESS'), configModifer()
 ));
 addressServiceInstance.interceptors.response.use(_.compose(apmResInterceptor('ADDRESS')), _.compose(errorInterceptor))
 
 orderServiceInstance.interceptors.request.use(_.compose(
-  apmReqInterceptor('ORDER'),
-  (config) => {
-    config.headers = { "x-access-token": authToken(), "x-country-code": country() };
-    return config;
-  }
+  apmReqInterceptor('ORDER'), configModifer()
 ));
 orderServiceInstance.interceptors.response.use(_.compose(apmResInterceptor('ORDER')), _.compose(errorInterceptor))
 
 paymentServiceInstance.interceptors.request.use(_.compose(
-  apmReqInterceptor('PAYMENT'),
-  (config) => {
-    config.headers = { "x-access-token": authToken(), "x-country-code": country() };
-    return config;
-  }
+  apmReqInterceptor('PAYMENT'), configModifer()
 ));
 paymentServiceInstance.interceptors.response.use(_.compose(apmResInterceptor('PAYMENT')), _.compose(errorInterceptor))
 
 cartServiceInstance.interceptors.request.use(_.compose(
-  apmReqInterceptor('CART'),
-  (config) => {
-    config.headers = { "x-country-code": country(), "x-session-id": "asdasd", "x-access-token": authToken(), "x-language": 'en' };
-    return config;
-  }
+  apmReqInterceptor('CART'), configModifer()
 ));
 cartServiceInstance.interceptors.response.use(_.compose(apmResInterceptor('CART')), _.compose(errorInterceptor))
 
 camServiceInstance.interceptors.request.use(_.compose(
-  apmReqInterceptor('CAM'),
-  (config) => {
-    config.headers = { "x-access-token": authToken(), "x-country-code": country() };
-    return config;
-  }
+  apmReqInterceptor('CAM'), configModifer()
 ));
 camServiceInstance.interceptors.response.use(_.compose(apmResInterceptor('CAM')), _.compose(errorInterceptor))
 

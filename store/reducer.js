@@ -7,6 +7,7 @@ import { reducer as singleOrderReducer } from "./order";
 import { reducer as cartReducer } from "./cart";
 import { reducer as paymentsReducer } from './payments';
 import { reducer as authReducer } from './auth';
+import { reducer as thankyouReducer } from './thankyou';
 import { reducer as megamenuReducer } from './megamenu';
 
 export default combineReducers({
@@ -18,5 +19,6 @@ export default combineReducers({
   cartReducer,
   paymentsReducer,
   authReducer,
+  thankyouReducer,
   megamenuReducer,
 });
