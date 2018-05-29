@@ -93,7 +93,7 @@ export const country = () => {
 }
 
 const apmReqInterceptor = (serviceName) => (config) => {
-  return config;
+  // return config;
   if(env === 'local') return config;
   config.transaction = apm.startTransaction(`${serviceName} Service`, 'custom')
   config.httpSpan = config.transaction ? config.transaction.startSpan(`FETCH ${JSON.stringify(config)}`, 'http') : null;
@@ -101,7 +101,7 @@ const apmReqInterceptor = (serviceName) => (config) => {
 }
 
 const apmResInterceptor = (serviceName) => (response) => {
-  return response;
+  // return response;
   if(env === 'local') return config;
   const { httpSpan, transaction } = response.config;
   httpSpan && httpSpan.end();

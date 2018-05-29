@@ -11,7 +11,7 @@ module.exports = withStylus(withCSS({
     localIdentName: "[local]___[hash:base64:5]",
   },
   publicRuntimeConfig: {
-      env: process.env.ENV
+      env: 'dev' //process.env.ENV
   },
   webpack: (config, { dev }) => {
     // Fixes npm packages that depend on `fs` module
