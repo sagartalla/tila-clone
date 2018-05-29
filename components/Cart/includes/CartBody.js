@@ -65,6 +65,7 @@ const CartBody = props => {
 
 CartBody.propTypes = {
   checkoutBtnHandler: PropTypes.func.isRequired,
+  removeCartItem: PropTypes.func.isRequired,
   // defaultAddress: PropTypes.array
 };
 
