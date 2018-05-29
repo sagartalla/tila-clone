@@ -1,7 +1,7 @@
 .input-range__slider {
   appearance: none;
-  background: #3f51b5;
-  border: 1px solid #3f51b5;
+  background: #9acc35;
+  border: 1px solid #9acc35;
   border-radius: 100%;
   cursor: pointer;
   display: block;
@@ -46,7 +46,8 @@
 
 .input-range__label--value {
   position: absolute;
-  top: -1.8rem; }
+  top: -1.8rem;
+}
 
 .input-range__label-container {
   left: -50%;
@@ -55,7 +56,7 @@
     left: 50%; }
 
 .input-range__track {
-  background: #eeeeee;
+  background: #cccccc;
   border-radius: 0.3rem;
   cursor: pointer;
   display: block;
@@ -73,7 +74,7 @@
   top: 50%; }
 
 .input-range__track--active {
-  background: #3f51b5; }
+  background: #9acc35; }
 
 .input-range {
   height: 1rem;
@@ -81,3 +82,6 @@
   width: 100%; }
 
 /*# sourceMappingURL=index.css.map */
+
+
+

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from '../../../routes';
+import styles from '../search.styl';
 
 const MaxItems = 3;
 
@@ -31,19 +32,19 @@ class LinkFacet extends Component {
   render() {
     const { filter } = this.props;
     return (
-      <li>
-        <div>{filter.name}</div>
-        <ul>
+      <li className={`${styles['category-list']} ${styles['lne-height2']}`}>
+        <div className={`${styles['category-list-title']} ${styles['black-color']} ${styles['fontW600']} ${styles['pl-10']}`}>{filter.name}</div>
+        <ul className={styles['category-sub-list']}>
           {
             filter.children.slice(0, this.state.maxRows).map((category) => {
               return (
                 <li key={category.id}>
                   <Link route={`/${category.canonicalId}-${category.id}/${window.location.search}`}>{category.name}</Link>
-                  <ul>
+                  <ul className={`${styles['category-sub-order-list']} ${styles['pl-15']}`}>
                     {
                       category.children.map((subcategory) => {
                         return (
-                          <li key={subcategory.id}>
+                          <li key={subcategory.id} className={styles['category-sub-list-inn']}>
                             <Link route={`/${category.canonicalId}-${category.id}/${subcategory.canonicalId}-${subcategory.id}/${window.location.search}`}>{subcategory.name}</Link>
                           </li>
                         )

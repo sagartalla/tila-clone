@@ -1,11 +1,13 @@
 @import '/static/vendor/css/react-input-range.css';
+@import '/static/vendor/css/react-input-range-override.css';
+@import '../../layout/main/main.styl';
 
 .filter-panel
   float left
   width 20%
   margin-right 20px
-  ul
-    padding 0 20px
+  // ul
+  //   padding 0 20px
   li 
     list-style none
   a
@@ -16,8 +18,9 @@
   width calc(80% - 20px)
 
 .img-cont 
-  width 180px
-  height 240px
+  // width 180px
+  height 285px
+  store-bgwhite-radius-shadow(#fff, 4px, 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 1px -2px rgba(0,0,0,0.12))
   .image-div
     width 100%
     height 100%
@@ -51,3 +54,36 @@
 
 .range-fitler-wrap
   margin 15px 0
+
+.category-list .category-list-title 
+  border-bottom 1px solid light-gray
+
+.category-sub-list
+  padding: 10px 0 0 10px
+
+.category-sub-list-inn a
+  color-fontsize-fontW(black,12px,300)
+  &:hover
+    font-weight 600
+
+.range-select-part 
+  display flex
+  justify-content space-between
+  align-items center
+
+.price-select-list
+  width 50%
+  border 0
+  background transparent
+  border-bottom 1px solid #ccc
+  border-radius 0
+  -webkit-appearance none
+  &:focus
+    outline none
+// .checkbox
+//   margin 0
+
+// .checkbox label
+//   padding-left 0
+//   display flex
+//   align-items center
