@@ -11,4 +11,12 @@ const addToCart = (params) => {
   return cartServiceInstance.post('/api/v1/cart/add', params);
 }
 
-export default { getCartDetailsApi, addToCart };
+const removeCartItemApi = (params) => {
+  return cartServiceInstance.put('api/v1/cart/delete', params).then(({ data }) => {
+    
+    //calling this function because to get cart details again.
+    return getCartDetailsApi();
+  })
+}
+
+export default { getCartDetailsApi, addToCart, removeCartItemApi };
