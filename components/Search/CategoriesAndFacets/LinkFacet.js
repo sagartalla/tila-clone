@@ -32,7 +32,7 @@ class LinkFacet extends Component {
   render() {
     const { filter } = this.props;
     return (
-      <li className={`${styles['category-list']} ${styles['lne-height2']}`}>
+      <li className={`${styles['category-list']} ${styles['lne-ht2']}`}>
         <div className={`${styles['category-list-title']} ${styles['black-color']} ${styles['fontW600']} ${styles['pl-10']}`}>{filter.name}</div>
         <ul className={styles['category-sub-list']}>
           {

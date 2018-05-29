@@ -75,7 +75,7 @@ class RangeFitler extends Component {
     return (
       <li>
         <div className={`${styles['category-list-title']} ${styles['black-color']} ${styles['fontW600']} ${styles['pl-10']} ${styles['pb-10']}`}>{filter.name}</div>
-        <div className={`${styles['range-select-part']} ${styles['pl-10']}`}>
+        <div className={`${styles['flx-spacebw-alignc']} ${styles['pl-10']}`}>
           <select className={styles['price-select-list']} componentClass="select" placeholder="select" onChange={this.minChange} value={this.state.value.min}>
             <option value="select">select (minimum)</option>
             {filter.children[0].values.map((value) => <option value={value} key={value}>{value}</option>)}

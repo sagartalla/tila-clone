@@ -40,7 +40,7 @@ class SearchReuslts extends Component {
           loadMore={this.loadMore}
           hasMore={pagiantionDetails.hasMore}
           loader={<div className={styles['loader']} key={0}>Loading ...</div>}
-          className={`${styles['grid-cont']} ${styles['stote-flex']}  ${styles['store-wrap']}`}
+          className={`${styles['grid-cont']} ${styles['flex']} ${styles['flex-wrp']}`}
         >
           {results.items.map((item) => <Product key={item.id} {...item} />)}
         </InfiniteScroll>

@@ -17,6 +17,13 @@
   float left
   width calc(80% - 20px)
 
+.product-items
+  .variant-info
+    display none
+  &:hover
+    .variant-info
+      display block
+
 .img-cont 
   // width 180px
   height 285px
@@ -55,8 +62,9 @@
 .range-fitler-wrap
   margin 15px 0
 
-.category-list .category-list-title 
-  border-bottom 1px solid light-gray
+.category-list 
+  .category-list-title 
+    border-bottom 1px solid light-gray
 
 .category-sub-list
   padding: 10px 0 0 10px
@@ -75,9 +83,10 @@
   width 50%
   border 0
   background transparent
-  border-bottom 1px solid #ccc
+  border-bottom 1px solid light-gray
   border-radius 0
   -webkit-appearance none
+  -moz-appearance none
   &:focus
     outline none
 // .checkbox
