@@ -5,12 +5,13 @@ import RightBar from '../../common/CartAndPaymentRightBar';
 import styles from '../cart.styl';
 
 const CartBody = props => {
-  const flag = props.data && props.data.items && props.data.items.length
+  const cnt = props.data.items.length;
+  const flag = props.data && props.data.items && cnt
   return (
     <div className={styles['cart-container']}>
       <Row>
         <Col md={12} sm={12} xs={12}>
-          <h4>{flag > 0 ? <span>{props.data.items.length} items in cart</span> : <span>0 items in Cart</span>}</h4>
+          <h4>{flag > 0 ? <span>{cnt} item{cnt > 1 ? 's' : ''} in cart</span> : <span>0 items in cart</span>}</h4>
         </Col>
       </Row>
       {
@@ -20,19 +21,23 @@ const CartBody = props => {
               <div>
                 {
                   props.data.items.map((item, index) => {
+                    const { item_id, img, name, price, cur } = item;
                     return (
                       <div key={index} className={`${styles['cart-box']} ${styles['box']} ${styles['box-space']} ${styles['m-10']} ${styles['p-10']}`}>
                         <Row>
                           <Col md={2}>
-                            <img className={styles['img']} src={item.img} />
+                            <img className={styles['img']} src={img} />
                           </Col>
                           <Col md={8}>
-                            <h4>{item.name}</h4>
+                            <h4>{name}</h4>
                           </Col>
                           <Col md={2} className={styles['t-rt']}>
-                            {item.price + ' ' + item.cur}
+                            {price + ' ' + cur}
                           </Col>
                         </Row>
+                        <div>
+                          <span id={item_id} onClick={props.removeCartItem}>Remove</span>
+                        </div>
                       </div>
                     )
                   })
@@ -44,7 +49,6 @@ const CartBody = props => {
                 <div className={styles['t-c']}>
                   <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']}`} onClick={props.checkoutBtnHandler}>Secure Checkout</button>
                 </div>
-
                 <div>
                   <RightBar
                     data={props.data}
