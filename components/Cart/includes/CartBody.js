@@ -5,8 +5,8 @@ import RightBar from '../../common/CartAndPaymentRightBar';
 import styles from '../cart.styl';
 
 const CartBody = props => {
-  const cnt = props.data.items.length;
-  const flag = props.data && props.data.items && cnt
+  const flag = props.data && props.data.items && props.data.items.length;
+  const cnt = flag > 0 ? props.data.items.length : 0;
   return (
     <div className={styles['cart-container']}>
       <Row>
