@@ -12,7 +12,7 @@ const StatusWidget = ({ currentStatus }) => {
     <div className={`${styles['widget-cont']} ${styles['pt-5']}`}>
       <Row className={styles['m-0']}>
         {statuses.map((status, index) => (
-          <Col key={status} md={3} className={`${styles['item-cont']} ${(currentStausIndex >= index) ? (currentStausIndex === index) ? 'current' : 'done' : ''}`}>
+          <Col key={status} md={3} className={`${styles['item-cont']} ${(currentStausIndex >= index) ? (currentStausIndex === index) ? styles['current'] : styles['done'] : ''}`}>
             <div className={`${styles['pt-10']} ${styles['item']}` }>
               <span>{status}</span>
             </div>
