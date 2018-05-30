@@ -74,17 +74,21 @@ class RangeFitler extends Component {
     const { min, max } = this.state.static;
     return (
       <li>
-        <div>{filter.name}</div>
-        <FormControl componentClass="select" placeholder="select" onChange={this.minChange} value={this.state.value.min}>
-          <option value="select">select (minimum)</option>
-          {filter.children[0].values.map((value) => <option value={value} key={value}>{value}</option>)}
-        </FormControl>
-        <FormControl componentClass="select" placeholder="select" onChange={this.maxChange} value={this.state.value.max}>
-          <option value="select">select (maximum)</option>
-          {filter.children[0].values.map((value) => <option value={value} key={value}>{value}</option>)}
-        </FormControl>
-        <div className={styles['range-fitler-wrap']}>
+        <div className={`${styles['category-list-title']} ${styles['black-color']} ${styles['fontW600']} ${styles['pl-10']} ${styles['pb-10']}`}>{filter.name}</div>
+        <div className={`${styles['flx-spacebw-alignc']} ${styles['pl-10']}`}>
+          <select className={styles['price-select-list']} componentClass="select" placeholder="select" onChange={this.minChange} value={this.state.value.min}>
+            <option value="select">select (minimum)</option>
+            {filter.children[0].values.map((value) => <option value={value} key={value}>{value}</option>)}
+          </select>
+          <span className={`${styles['pl-10']} ${styles['pr-10']}`}>to</span>
+          <select className={styles['price-select-list']} componentClass="select" placeholder="select" onChange={this.maxChange} value={this.state.value.max}>
+            <option value="select">select (maximum)</option>
+            {filter.children[0].values.map((value) => <option value={value} key={value}>{value}</option>)}
+          </select>
+        </div>
+        <div className={`${styles['range-fitler-wrap']} ${styles['pl-10']}`}>
           <InputRange
+            // formatLabel={value => ''}
             maxValue={max}
             minValue={min}
             value={this.state.value}

@@ -1,0 +1,18 @@
+/* custom rules */
+.input-range__label--value {
+    display: none;
+}
+
+.input-range__slider {
+    background: #9acc35;
+    border: 1px solid #9acc35;
+}
+
+.input-range__track {
+    background: #cccccc;
+}
+
+.input-range__track--active {
+    background: #9acc35;
+}
+/* custom rules end */
