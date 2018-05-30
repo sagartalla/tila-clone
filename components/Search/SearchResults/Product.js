@@ -26,10 +26,10 @@ const Product = ({
         </div>
         <div className={styles['desc-cont']}>
           <div className={`${styles['prdt-name']} ${styles['fs-12']} ${styles['pt-15']} ${styles['pb-5']}`}><a href="#">{displayName}</a></div>
-          <div> { priceRange }</div>
+          <div> { priceRange } SAR</div>
           <div className={styles['variant-info']}>
           {
-          _.map(variants, (variantValues, key) => <div key={key}>{`${key} : ${variantValues.join(', ')}`}</div>)
+            _.map(variants, (variantValues, key) => <div key={key}>{`${key} : ${variantValues.join(', ')}`}</div>)
           }
           </div>
         </div>
