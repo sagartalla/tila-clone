@@ -11,7 +11,9 @@ const CartBody = props => {
     <div className={styles['cart-container']}>
       <Row>
         <Col md={12} sm={12} xs={12}>
-          <h4>{flag > 0 ? <span>{cnt} item{cnt > 1 ? 's' : ''} in cart</span> : <span>0 items in cart</span>}</h4>
+          <h4 className={`${styles['mt-20']} ${styles['mb-20']} ${styles['fontW300']}}`}>
+            {flag > 0 ? <span>{cnt} item{cnt > 1 ? 's' : ''} in cart</span> : <span>0 items in cart</span>}
+          </h4>
         </Col>
       </Row>
       {
@@ -23,19 +25,26 @@ const CartBody = props => {
                   props.data.items.map((item, index) => {
                     const { item_id, img, name, price, cur } = item;
                     return (
-                      <div key={index} className={`${styles['cart-box']} ${styles['box']} ${styles['box-space']} ${styles['m-10']} ${styles['p-10']}`}>
-                        <Row>
-                          <Col md={2}>
-                            <img className={styles['img']} src={img} />
-                          </Col>
-                          <Col md={8}>
-                            <h4>{name}</h4>
-                          </Col>
-                          <Col md={2} className={styles['t-rt']}>
-                            {price + ' ' + cur}
-                          </Col>
-                        </Row>
-                        <div>
+                      <div key={index}>
+                        <div className={`${styles['cart-box']} ${styles['box']} ${styles['box-space']} ${styles['p-10']}`}>
+                          <Row>
+                            <Col md={2}>
+                              <img className={styles['img']} src={img} />
+                            </Col>
+                            <Col md={10}>
+                              <Row>
+                                <Col md={9}>
+                                  <h5>Brand Name</h5>
+                                  <h5>{name}</h5>
+                                </Col>
+                                <Col md={3}>
+                                  <h5 className={`${styles['fontW600']} ${styles['mt-20']}`}>{price + ' ' + cur}</h5>
+                                </Col>
+                              </Row>
+                            </Col>
+                          </Row>
+                        </div>
+                        <div className={`${styles['cart-box-btm']} ${styles['box']} ${styles['p-10']} ${styles['mb-20']}`}>
                           <span id={item_id} onClick={props.removeCartItem}>Remove</span>
                         </div>
                       </div>
@@ -45,7 +54,7 @@ const CartBody = props => {
               </div>
             </Col>
             <Col md={3} sm={12} xs={12}>
-              <div className={`${styles['box']} ${styles['box-space']} ${styles['m-10']} ${styles['p-10']}`}>
+              <div className={`${styles['box']} ${styles['box-space']} ${styles['p-10']}`}>
                 <div className={styles['t-c']}>
                   <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']}`} onClick={props.checkoutBtnHandler}>Secure Checkout</button>
                 </div>

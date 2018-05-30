@@ -8,7 +8,7 @@ const CartAndPaymentRightBar = props => {
     <div className={`${styles['right-bar']}`}>
       <div>
         <ul className={`${styles['m-0']} ${styles['p-0']}`}>
-          <li><h4 className={styles['mb-20']}>Order Summary</h4></li>
+          <li><h5 className={styles['mb-20']}>Order Summary</h5></li>
           <li>Price ({item_cnt} item{item_cnt > 1 ? 's' : ''})<span> {total_price + ' ' + currency}</span></li>
           <li>Delivery Charges <span>{total_shipping} {currency}</span></li>
           <li>Discount <span>{total_discount} {currency}</span></li>
