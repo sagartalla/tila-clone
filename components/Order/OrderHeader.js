@@ -24,7 +24,7 @@ const OrderHeader = ({orderDetails}) => {
                 </address>
                 <div>
                   <span>Phone: </span>
-                  <span>{phone}</span>
+                    <span>{phone}</span>
                   </div>
               </div>         
             </div>) 
