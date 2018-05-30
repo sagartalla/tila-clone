@@ -20,7 +20,7 @@ const Cam = ({tabDetails}) => {
       case 'profile':
         return <UserInfo />; 
       default:
-        return <UserInfo />; 
+        return <Orders />; 
     }
   })(tab)
   return (
