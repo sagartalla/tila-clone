@@ -19,7 +19,7 @@ const AddressBody = (props) => {
   }
 
   return (
-    <div className={styles['address-body']}>
+    <div className={`${styles['address-body']} ${props.standalone === true ? styles['p-20'] : ''}`}>
       <Row>
         {
           props.data && props.data.map((val, id) => {
@@ -38,11 +38,11 @@ const AddressBody = (props) => {
                     }
                   </div>
                   <div className={styles['address-card-body']}>
-                    <h5> {val.first_name + ' ' + val.last_name} </h5>
+                    <h5 className={`${styles['ff-b']} ${styles['m-0']} ${styles['mb-10']}`}> {val.first_name + ' ' + val.last_name} </h5>
                     <address>
                       {val.address_line_1 + ', ' + val.address_line_2 + ', ' + val.city + ', ' + val.state}
                     </address>
-                    <p className={styles['address-card-phone']}>
+                    <p className={`${styles['address-card-phone']} ${styles['ff-b']} ${styles['black-color']}`}>
                       {val.mobile_country_code + ' ' + val.mobile_no}
                     </p>
                   </div>
