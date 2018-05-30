@@ -29,64 +29,66 @@ class Offers extends Component {
       listingAvailable
       ? 
       <div>
-        <Row>
-          <Col md={6}>
-              <Button className={styles[`${isAddedToCart ? 'added-to-cart' : ''}`]} onClick={this.addToCart} disabled={isLoading || isAddedToCart}>
-                {
-                  isAddedToCart
-                  ?
-                  'Added to Cart'
-                  :
-                  `BUY FOR ${price}`
-                }
-              </Button>
-              {
-              isAddedToCart
-              ?
-              <Button>
-                {/* <a href='/cart'>Go To Cart</a> */}
-                  <Link route="/cart">Go To Cart</Link>
-              </Button>
-              :
-              null
-            }
-          </Col>
-          <Col md={6}>
-            <Button>Like</Button>
-          </Col>
-        </Row>
-        {
-          error
-          ?
+        <div className={`${styles['pb-20']} ${styles['pt-20']}`}>
           <Row>
-            <Col md={12}>
-              <span className={styles['error-msg']}>{error}</span>
+            <Col md={6}>
+                <Button className={`${styles[`${isAddedToCart ? 'added-to-cart' : ''}`]} ${styles['blue-btn']}`} onClick={this.addToCart} disabled={isLoading || isAddedToCart}>
+                  {
+                    isAddedToCart
+                    ?
+                    'Added to Cart'
+                    :
+                    `BUY FOR ${price}`
+                  }
+                </Button>
+                {
+                isAddedToCart
+                ?
+                <Button>
+                  {/* <a href='/cart'>Go To Cart</a> */}
+                    <Link route="/cart">Go To Cart</Link>
+                </Button>
+                :
+                null
+              }
+            </Col>
+            <Col md={6}>
+              <Button>Like</Button>
             </Col>
           </Row>
-          :
-          null
-        }
+          {
+            error
+            ?
+            <Row>
+              <Col md={12}>
+                <span className={styles['error-msg']}>{error}</span>
+              </Col>
+            </Row>
+            :
+            null
+          }
+        </div>
         <Row>
-          <Col md={6}>
-            <ul>
+          <Col md={6} className={styles['border-rt']}>
+            <ul className={`${styles['pl-0']} ${styles['no-list-blt']}`}>
               <li>
-                <h3>Offers</h3>
-                <ul>
+                <h5 className={`${styles['ff-b']} ${styles['black-color']}`}>Offers</h5>
+                <ul className={`${styles['pl-15']} ${styles['no-list-blt']}`}>
                   <li>No offers </li>
                 </ul>
               </li>
               <li>
-                <h3>Warrenty</h3>
-                <ul>
+                <h5 className={`${styles['ff-b']} ${styles['black-color']}`}>Warrenty</h5>
+                <ul className={`${styles['pl-15']} ${styles['no-list-blt']}`}>
                   <li>No warranty</li>
                 </ul>
               </li>
             </ul>
           </Col>
-        <Col md={6}>
-            <ul>
+          <Col md={6}>
+            <ul className={`${styles['pl-0']} ${styles['no-list-blt']}`}>
               <li>
-                <h3>EMI Not Available</h3>
+                <h5 className={`${styles['ff-b']} ${styles['black-color']}`}>EMI Not Available</h5>
               </li>
             </ul>
           </Col>
