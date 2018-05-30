@@ -6,6 +6,11 @@
   margin-bottom 50px
 .carousel-item-wrap 
   height 100px
+  width: 100%;
+  display: inline-block;
+  border: 1px solid light-gray;
+  padding: 14px;
+  border-radius 4px
   img
     height 100%
     margin 0 auto
@@ -19,9 +24,11 @@
   display block
   margin 10px 0
   &:nth-child(even)
-    background #ddd
+    background generic-gray-color
 
-.added-to-cart{
-  background: #20bd99
-  color #fff  
-}
+.added-to-cart
+  background #20bd99
+  color white  
+
+.slick-slide
+  width: 128px;
