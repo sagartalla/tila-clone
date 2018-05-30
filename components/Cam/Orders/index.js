@@ -18,7 +18,13 @@ class Orders extends Component {
     const { ordersData } = this.props;
     return (
       <div className={styles['orders-container']}>
-        {ordersData.map((order) => <Order key={order.id} order={order} />)}
+        {
+          ordersData.length 
+          ?
+          ordersData.map((order) => <Order key={order.id} order={order} />)
+          :
+          <div className={`${styles['order-item-wrap']} ${styles['box-shadow']} ${styles['mt-20']} ${styles['mb-20']} ${styles['p-20']}`}>No order history</div>
+        }
       </div>
     );
   }
