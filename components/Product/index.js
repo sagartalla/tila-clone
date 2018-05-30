@@ -23,12 +23,12 @@ const getProductComponent = (isPreview) => {
         {
           isPreview ? null : <HeaderBar />
         }
-        <Grid>
+        <Grid className={`${styles['pb-32']} ${styles['pt-32']}`}>
           <Row>
-            <Col xs={12} md={5}>
+            <Col xs={12} md={6}>
               <Dispalay imgs={imgUrls} />
             </Col>
-            <Col xs={12} md={7}>
+            <Col xs={12} md={6}>
               <TitleInfo {...titleInfo} />
               <KeyFeatures features={keyfeatures} />
               {/* <NoSSR>
@@ -39,11 +39,17 @@ const getProductComponent = (isPreview) => {
               }
             </Col>
           </Row>
-          <Row>
-            <Col xs={12}>
-              <Catalog catalog={catalog} />
-            </Col>
-          </Row>
+        </Grid>
+        <div className={`${styles['border-b']} ${styles['border-t']} ${styles['pb-32']} ${styles['pt-32']}`}>
+          <Grid>
+            <Row>
+              <Col xs={12}>
+                <Catalog catalog={catalog} />
+              </Col>
+            </Row>
+          </Grid>
+        </div>
+        <Grid>
           <Row>
             <Col xs={12}>
               <div><b>Compare</b></div>
