@@ -6,47 +6,57 @@ import  styles from './order.styl';
 import OrderItem from '../Cam/Orders/includes/OrderItem';
 
 const OrderHeader = ({orderDetails}) => {
-  const { name, address, phone, orderId, orderDate, itemsTotal, orderTotal, shippingTotal, paymentDetals } = orderDetails;
+  const { name, address, orderId, orderDate, itemsTotal, orderTotal, shippingTotal, paymentDetals } = orderDetails;
+  console.log(orderDetails);
   return (
     <div className={`${styles['box']} ${styles['p-20']}`}>
       <Row>
         <Col md={4}>
-          <div>
-            <div>Address Details</div>
-            <div>
-              <div>{name}</div>
-              <address>
-                {address}
-              </address>
+          {
+            address 
+            ? 
+            (<div>
+              <div>Address Details</div>
               <div>
-                <span>Phone: </span>
-                <span>{phone}</span>
-                </div>
-            </div>         
-          </div>
+                <div>{name}</div>
+                <address>
+                  {JSON.stringify(address)}
+                </address>
+                <div>
+                  <span>Phone: </span>
+                  <span>{address.mobile_country_code} {address.mobile_no}</span>
+                  </div>
+              </div>         
+            </div>) 
+          : 
+          null 
+        }
         </Col>
         <Col md={4}>
           <table>
-            <tr>
-              <th>ORDER SUMMARY</th>
-              <th>{orderId}</th>
-            </tr>
-            <tr>
-              <td>Order Date</td> 
-              <td>{itemsTotal}</td>
-            </tr>
-            <tr>
-              <td>Item(s) Subtotals</td>
-              <td>{orderTotal}</td>
-            </tr>
-            <tr>
-              <td>Shipping</td>
-              <td>{shippingTotal}</td>
-            </tr>
+            <tbody>
+              <tr>
+                <th>ORDER SUMMARY</th>
+                <th>{orderId}</th>
+              </tr>
+              <tr>
+                <td>Order Date</td> 
+                <td>{itemsTotal}</td>
+              </tr>
+              <tr>
+                <td>Item(s) Subtotals</td>
+                <td>{orderTotal}</td>
+              </tr>
+              <tr>
+                <td>Shipping</td>
+                <td>{shippingTotal}</td>
+              </tr>
+            </tbody>
           </table>
         </Col>
         <Col md={4}>
           <table>
+            <tbody>
             <tr>
               <th>PAYMENT METHOD</th>
             </tr>
@@ -57,6 +67,7 @@ const OrderHeader = ({orderDetails}) => {
                 <td>{i.amount}</td>
               </tr>
             ))}
+            </tbody>
           </table>
         </Col>
       </Row>
@@ -66,10 +77,12 @@ const OrderHeader = ({orderDetails}) => {
         </Col>
         <Col md={4}>
           <table>
-            <tr>
-              <td>Grand Total</td>
-              <td>{orderTotal}</td>
-            </tr>
+            <tbody>
+              <tr>
+                <td>Grand Total</td>
+                <td>{orderTotal}</td>
+              </tr>
+            </tbody>
           </table>
         </Col>
         <Col md={4}>
