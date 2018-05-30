@@ -6,7 +6,7 @@ import  styles from './order.styl';
 import OrderItem from '../Cam/Orders/includes/OrderItem';
 
 const OrderHeader = ({orderDetails}) => {
-  const { name, address, orderId, orderDate, itemsTotal, orderTotal, shippingTotal, paymentDetals } = orderDetails;
+  const { name, address, phone, orderId, orderDate, itemsTotal, orderTotal, shippingTotal, paymentDetals } = orderDetails;
   console.log(orderDetails);
   return (
     <div className={`${styles['box']} ${styles['p-20']}`}>
@@ -24,7 +24,7 @@ const OrderHeader = ({orderDetails}) => {
                 </address>
                 <div>
                   <span>Phone: </span>
-                  <span>{address.mobile_country_code} {address.mobile_no}</span>
+                  <span>{phone}</span>
                   </div>
               </div>         
             </div>) 
