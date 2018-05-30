@@ -9,7 +9,7 @@ const KeyFeatures = ({ features }) => {
       <div className={`${styles['kf-title']} ${styles['pb-5']}`}>
         <span className={`${styles['ff-b']} ${styles['black-color']}`}>Key Features</span>
       </div>
-      <ul className={`${styles['kf-list']} ${styles['flx-spacebw']} ${styles['flex-wrp']} ${styles['fs-12']} ${styles['mb-0']} ${styles['pl-0']}`}>
+      <ul className={`${styles['kf-list']} ${styles['flx-space-bw']} ${styles['flex-wrp']} ${styles['fs-12']} ${styles['mb-0']} ${styles['pl-0']}`}>
         {
           features.map((feature) =>  <li key={feature} className={`${styles['no-lst']} ${styles['width33']}`}>{feature}</li>)
         }
