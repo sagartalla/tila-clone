@@ -38,7 +38,7 @@ const DeliveryAddress = props => (
       {
         props.configJson.progress ? 
         <div>
-          <h4 className={`${styles['m-0']} ${styles['pl-24']}`}>Delivery Address</h4>
+          <h4 className={`${styles['mb-20']}`}>Delivery Address</h4>
           <ShippingAddress 
             handleShippingAddressContinue = {props.handleShippingAddressContinue}
           />
