@@ -16,6 +16,7 @@ class Cart extends Component {
   constructor(props) {
     super(props);
     this.checkoutBtnHandler = this.checkoutBtnHandler.bind(this);
+    this.removeCartItem = this.removeCartItem.bind(this);
   }
 
   componentDidMount() {
@@ -24,6 +25,10 @@ class Cart extends Component {
 
   checkoutBtnHandler() {
     Router.pushRoute('/payment');
+  }
+
+  removeCartItem(e) {
+    this.props.removeCartItem(e.target.id);
   }
 
   render() {
@@ -35,6 +40,7 @@ class Cart extends Component {
           <CartBody
             data={results}
             checkoutBtnHandler={this.checkoutBtnHandler}
+            removeCartItem={this.removeCartItem}
           />
         </Grid>
       </div>
@@ -49,7 +55,8 @@ const mapStateToProps = (store) => ({
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      getCartResults: actionCreators.getCartResults
+      getCartResults: actionCreators.getCartResults,
+      removeCartItem: actionCreators.removeCartItem,
     },
     dispatch,
   );
