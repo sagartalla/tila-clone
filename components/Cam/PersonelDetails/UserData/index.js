@@ -5,16 +5,18 @@ import PersonalInfo from './PersonalInfo';
 import ContactInfo from './ContactInfo';
 import UpdateInfoComponent from './UpdateInfo';
 
-const UserData = () => (
+const UserData = props => {
+  const { contactInfo, personalInfo } = props;
+  return(
   <Row>
     <Col xs={12} md={6}>
-      <PersonalInfo />
-      <ContactInfo />
+      <PersonalInfo personalInfo={personalInfo}/>
+      <ContactInfo contactInfo={contactInfo}/>
     </Col>
     <Col xs={12} md={6}>
       <UpdateInfoComponent />
     </Col>
   </Row>
 );
-
+}
 export default UserData;

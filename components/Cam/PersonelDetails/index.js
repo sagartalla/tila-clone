@@ -9,12 +9,13 @@ import Notification from './Notification';
 import styles from './user.styl';
 import commonStyles from '../cam.styl';
 
-const UserInfo = () => (
+const UserInfo = (props) => {
+  return(
   <div className={styles['right-layout-container']}>
     <Row >
       <Col md={12} xs={12}>
         <div className={`${styles['user-info-container']} ${commonStyles['box-shadow']}`}>
-          <UserData />
+          <UserData {...props}/>
         </div>
       </Col>
     </Row>
@@ -33,5 +34,6 @@ const UserInfo = () => (
 
   </div>
 );
+}
 
 export default UserInfo;
