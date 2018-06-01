@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col, Button, OverlayTrigger, Popover } from 'react-bootstrap';
 
-import OrderItem from './OrderItem';
+import OrderItem from '../../../Order/includes/OrderItem';
 
 import styles from '../orders.styl';
 

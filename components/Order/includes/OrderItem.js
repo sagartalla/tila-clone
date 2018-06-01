@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
 
 import StatusWidget from './widget/StatusWidget';
-import constants from '../../../../constants';
+import constants from '../../../constants';
 
-import styles from '../orders.styl';
+import styles from '../order.styl';
 
 const OrderItem = ({ orderItem }) => {
   const { products } = orderItem;

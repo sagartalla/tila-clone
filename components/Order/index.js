@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 
 import HeaderBar from '../HeaderBar/index';
 import OrderHeader from './OrderHeader';
-import OrderItem from "../Cam/Orders/includes/OrderItem"; //TODO move to common
+import OrderItem from "./includes/OrderItem";
 
 import { selectors, actionCreators } from '../../store/order';
 
