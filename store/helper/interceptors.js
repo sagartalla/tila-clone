@@ -23,10 +23,14 @@ import {
 import apmConfig from '../../apm.config';
 import constants from './constants';
 
-const apm = initApm({
-  serviceName: apmConfig.serviceName,
-  serverUrl: apmConfig.serverUrl,
-});
+let apm;
+if (env !== 'local'){
+  apm = initApm({
+    serviceName: apmConfig.serviceName,
+    serverUrl: apmConfig.serverUrl,
+  });
+}
+
 
 const configModifer = () => (config) => {
   config.headers = { "x-country-code": country(), "x-session-id": sessionId(), "x-access-token": authToken(), "x-language": 'en' };
