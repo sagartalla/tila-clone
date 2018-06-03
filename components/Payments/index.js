@@ -10,7 +10,6 @@ import { actionCreators as authActionCreators, selectors as authSelectors } from
 import { actionCreators as cartActionCreators, selectors as cartSelectors } from '../../store/cart';
 
 import PaymentHeader from './includes/PaymentHeader';
-// import RightSideBar from './includes/RightSideBar';
 
 import RightSideBar from '../common/CartAndPaymentRightBar';
 
