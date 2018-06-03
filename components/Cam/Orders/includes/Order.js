@@ -15,7 +15,7 @@ const Order = ({order}) => {
     </Popover>
   );
   return (
-    <div className={`${styles['order-item-wrap']} ${styles['box-shadow']} ${styles['mt-20']} ${styles['mb-20']} ${styles['p-20']}`}>
+    <div className={`${styles['box']} ${styles['mt-20']} ${styles['mb-20']} ${styles['p-20']}`}>
       <Row>
         <Col md={6}>
           <div>

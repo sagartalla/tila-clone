@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Row, Col, Button } from 'react-bootstrap';
 
 import  styles from './order.styl';
-import OrderItem from '../Cam/Orders/includes/OrderItem';
 
 const OrderHeader = ({orderDetails}) => {
   const { name, address, phone, orderId, orderDate, itemsTotal, orderTotal, shippingTotal, paymentDetals } = orderDetails;
