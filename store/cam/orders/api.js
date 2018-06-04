@@ -1,5 +1,6 @@
-import { orderServiceInstance } from '../../helper/services';
+import axios from 'axios';
+import constants from '../../helper/constants';
 
-const getOrderHistory = () => orderServiceInstance.get('/api/v1/customer/order/history');
+const getOrderHistory = () => axios.get(`${constants.ORDERS_API_URL}/api/v1/customer/order/history`);
 
 export default { getOrderHistory };

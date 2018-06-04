@@ -1,7 +1,7 @@
 export default {
-  SEARCH_API_URL        :   'http://search-dev.fptechscience.com',
+  SEARCH_API_URL        :   'http://gateway-dev.fptechscience.com/search',
   CATALOG_API_URL       :   'http://catalogapis-dev.fptechscience.com',
-  LISTING_API_URL       :   'http://listing-dev.fptechscience.com',
+  LISTING_API_URL       :   'http://gateway-dev.fptechscience.com/listing',
   PIM_API_URL           :   'http://pimapis-dev.fptechscience.com/pim',
   CMS_API_URL           :   'http://gateway-dev.fptechscience.com/cms',
   ORDERS_API_URL        :   'http://gateway-dev.fptechscience.com/order',
