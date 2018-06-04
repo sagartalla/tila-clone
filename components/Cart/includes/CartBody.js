@@ -23,13 +23,27 @@ const CartBody = props => {
               <div>
                 {
                   props.data.items.map((item, index) => {
-                    const { item_id, img, name, price, cur } = item;
+                    const { item_id, img, name, price, cur, quantity, max_limit, inventory } = item;
                     return (
                       <div key={index}>
                         <div className={`${styles['cart-box']} ${styles['box']} ${styles['box-space']} ${styles['p-10']}`}>
                           <Row>
+                            <Col md={12}>
+                              <span className={styles['error-msg']}>{props.data.error ? props.data.error : ''}</span>
+                            </Col>
                             <Col md={2}>
-                              <img className={styles['img']} src={img} />
+                              <div><img className={styles['img']} src={img} /></div>
+                              {
+                                quantity == 1 ?
+                                <span> -- </span>
+                                : <span data-id={item_id} onClick={props.decreaseItemCnt}> - </span>
+                              }
+                              <span>{quantity}</span>
+                              {
+                                max_limit == quantity ? 
+                                  <span> X </span>
+                                : <span data-id={item_id} onClick={props.increaseItemCnt}>  + </span>
+                              }
                             </Col>
                             <Col md={10}>
                               <Row>
@@ -45,6 +59,11 @@ const CartBody = props => {
                           </Row>
                         </div>
                         <div className={`${styles['cart-box-btm']} ${styles['box']} ${styles['p-10']} ${styles['mb-20']}`}>
+                          {
+                            inventory <= 5 ?
+                              <span>Only {inventory} units left</span>
+                              : ''
+                          }
                           <span id={item_id} onClick={props.removeCartItem}>Remove</span>
                         </div>
                       </div>

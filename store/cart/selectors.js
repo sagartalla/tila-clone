@@ -4,7 +4,6 @@ const getCartResults = (store) => {
     const img_url = 'https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/';
     const newData = { items: [], total_price: 0 };
 
-    //TODO temp data modifier..
     if (data.items) {
       newData.total_price = data.total_price;
       newData.total_offer_price = data.total_offer_price;
@@ -19,12 +18,16 @@ const getCartResults = (store) => {
         const name = item.product_details.product_details_vo.cached_product_details.attribute_map.calculated_display_name.attribute_values[0].value;
         const price = item.listing_info.selling_price;
         const cur = item.listing_info.selling_price_currency;
-        const img = img_url + item.product_details.product_details_vo.cached_product_details.media.gallery_media[0].url
+        const img = img_url + item.product_details.product_details_vo.cached_product_details.media.gallery_media[0].url;
+        const quantity = item.quantity;
+        const inventory = item.listing_info.total_inventory_count;
+        const max_limit = item.listing_info.max_limit_per_user;
 
-        newData.items[index] = { item_id, name, price, cur, img }
+        newData.items[index] = { item_id, name, price, cur, img, quantity, max_limit, inventory }
       })
     }
 
+    newData.items = newData.items.reverse();
     return newData;
   }
   return {};

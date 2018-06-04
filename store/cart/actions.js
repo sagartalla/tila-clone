@@ -4,6 +4,8 @@ const actions = {
   GET_CART_DETAILS: 'GET_CART_DETAILS',
   ADD_TO_CART: 'ADD_TO_CART',
   REMOVE_CART_ITEM: 'REMOVE_CART_ITEM',
+  INCREASE_ITEM_CNT: 'INCREASE_ITEM_CNT',
+  DECREASE_ITEM_CNT: 'DECREASE_ITEM_CNT'
 };
 
 const actionCreators = {
@@ -26,6 +28,24 @@ const actionCreators = {
     return ({
       type: actions.REMOVE_CART_ITEM,
       payload: api.removeCartItemApi(params)
+    })
+  },
+  increaseItemCnt: (cartId) => {
+    const params = {
+      "cart_item_id": cartId
+    }
+    return ({
+      type: actions.INCREASE_ITEM_CNT,
+      payload: api.increaseItemCntApi(params)
+    })
+  },
+  decreaseItemCnt: (cartId) => {
+    const params = {
+      "cart_item_id": cartId
+    }
+    return ({
+      type: actions.DECREASE_ITEM_CNT,
+      payload: api.decreaseItemCntApi(params)
     })
   },
 };
