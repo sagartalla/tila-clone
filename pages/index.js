@@ -30,7 +30,7 @@ class SearchPage extends Base {
       facetFilters,
       pageNum: 1,
       fl: '*',
-      isListed: isListed,
+      isListed: isListed === 'true',
       categoryTree,
     }))
     return { isServer };

@@ -119,9 +119,9 @@ const getQuery = (store) => {
 
 const optionParams = (store) => {
   let isListed = store.searchReducer.data;
-  isListed = isListed ?  false : isListed.hardCodedValues;
-  isListed = isListed ?  false : isListed.isListed;
-  isListed = isListed ?  false : false;
+  isListed = isListed ? isListed.hardCodedValues : false;
+  isListed = isListed ? isListed.isListed : false;
+  isListed = isListed ? isListed : false;
   return {
     language: store.searchReducer.data.geoDetails ? store.searchReducer.data.geoDetails.language : 'en',
     isListed,
