@@ -9,7 +9,7 @@ const List = props => props.data.map((val, id) => (
       return (
         <a href={itemVal.href} key={itemVal.display}> 
           {/* TODO can be next client side routes */ }
-          <div className={styles['list-items-container']} key={itemIndex.toString()}>
+          <div className={`${styles['list-items-container']} ${styles['flx-space-bw']}`} key={itemIndex.toString()}>
             <div className={`${styles['list-item-left']} ${styles['ml-20']} ${styles['mr-20']}`}>
               <SVGComponent src={itemVal.icon} />
             </div>
