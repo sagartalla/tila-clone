@@ -1,3 +1,5 @@
+@import '../../../layout/main/main.styl';
+
 .sidebar-container
   width 100%
   height auto
@@ -31,19 +33,22 @@
    color #666
   .list-items-container
     padding 10px
+    display flex
+    justify-content space-between
   .list-items
     width 68%;
-    font-size 12px
     display inline-block
   .list-item-left
-    width 12%
     display inline-block
+    width 17px
+    height 17px
   .list-common
     width 10%
     display inline-block
-    font-size 12px
-    color #3873C3
-    border 1px solid #3873C3
-    border-radius 4px
     text-align center
     margin: 0 10px
+    .count-container
+      width: 30px;
+      height: 20px;
+      border-radius: 4px;
+      border: solid 1px #0654ba;
