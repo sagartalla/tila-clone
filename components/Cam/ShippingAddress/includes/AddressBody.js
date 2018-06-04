@@ -72,7 +72,7 @@ const AddressBody = (props) => {
               <h5 className={`${styles['m-0']} ${styles['mb-10']} ${styles['thick-blue']} ${styles['fontW600']}`}>Add New Address</h5>
               <p>Add a new network or home address where you want the orders to be delivered.</p>
               <p>
-                <button className={`${styles['fp-btn']} ${styles['border-blue-btn']}  ${styles['fs-12']}`}>
+                <button className={`${styles['fp-btn']} ${styles['fp-btn-default']}  ${styles['fs-12']}`}>
                   Add New
                 </button>
                 </p>

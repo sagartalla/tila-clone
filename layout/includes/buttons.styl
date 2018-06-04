@@ -12,10 +12,21 @@
         background-color dark-blue
         color @color
 
-.border-blue-btn
-    @extends .common-btn-style
+.fp-btn
+  padding 5px 0
+  color white
+  border 0
+  border-radius 2px
+
+  &.fp-btn-primary
+    background-color $btn-color
+    min-width 200px
+  &.fp-btn-default
     color thick-blue
-    border-radius 2px
-    border 1px solid @color
+    font-weight 600
+    border 1px solid @thick-blue
+    // @extends .common-btn-style
+    padding 6px 25px
+  
 
    
