@@ -25,7 +25,7 @@ class Search extends Component {
   submitQuery(e) {
     e.preventDefault();
     const flushFilters = true;
-    Router.pushRoute(`/?search=${this.state.query}`);
+    Router.pushRoute(`/?search=${this.state.query}&${Object.entries(this.props.optionalParams).map(([key, val]) => `${key}=${val}`).join('&')}`);
   }
 
   onChangeSearchInput(e) {
@@ -59,7 +59,8 @@ Search.propTypes = {
 
   
 const mapStateToProps = (store) => ({
-    query: selectors.getQuery(store)
+    query: selectors.getQuery(store),
+    optionalParams: selectors.optionParams(store)
 });
 
 const mapDispatchToProps = dispatch =>

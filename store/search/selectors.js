@@ -114,7 +114,18 @@ const getCategoryId = (state, query) => {
 }
 
 const getQuery = (store) => {
-  return store.searchReducer.data.searchDetails.query
+  return store.searchReducer.data.searchDetails.query;
+}
+
+const optionParams = (store) => {
+  let isListed = store.searchReducer.data;
+  isListed = isListed ?  false : isListed.hardCodedValues;
+  isListed = isListed ?  false : isListed.isListed;
+  isListed = isListed ?  false : false;
+  return {
+    language: store.searchReducer.data.geoDetails ? store.searchReducer.data.geoDetails.language : 'en',
+    isListed,
+  }
 }
 
 const getFacetfilters = (store) => (queryObject) => {
@@ -128,4 +139,4 @@ const getFacetfilters = (store) => (queryObject) => {
 }
 
 
-export { getSearchFilters, getSearchResutls, getPaginationDetails, getUIState, getCategoryId, getQuery, getFacetfilters };
+export { getSearchFilters, getSearchResutls, getPaginationDetails, getUIState, getCategoryId, getQuery, getFacetfilters, optionParams };
