@@ -120,12 +120,17 @@ const errorInterceptor = (err) => {
   try {
     if (err.response && err.response.status == '401') {
       const auth = JSON.parse(localStorage.getItem('auth'));
-      axios.post(`${constants.AUTH_API_URL}/api/v1/refresh`, {
+      return axios.post(`${constants.AUTH_API_URL}/api/v1/refresh`, {
         'auth_version': 'V1',
         'refresh_token': auth.refresh_token
       }).then((res) => {
         auth.access_token = res.data.access_token
         localStorage.setItem('auth', JSON.stringify(auth));
+        return axios(err.config);
+      }).catch((err) => {
+        alert('You are logged out, Login and try again');
+        localStorage.removeItem('auth');
+        location.reload();
       });
     }
   } catch (e) {
