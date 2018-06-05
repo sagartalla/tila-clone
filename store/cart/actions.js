@@ -4,6 +4,8 @@ const actions = {
   GET_CART_DETAILS: 'GET_CART_DETAILS',
   ADD_TO_CART: 'ADD_TO_CART',
   REMOVE_CART_ITEM: 'REMOVE_CART_ITEM',
+  CART_ITEM_COUNT: 'CART_ITEM_COUNT',
+
 };
 
 const actionCreators = {
@@ -26,6 +28,15 @@ const actionCreators = {
     return ({
       type: actions.REMOVE_CART_ITEM,
       payload: api.removeCartItemApi(params)
+    })
+  },
+  cartItemCount: (cartId, typ) => {
+    const params = {
+      "cart_item_id": cartId
+    }
+    return ({
+      type: actions.CART_ITEM_COUNT,
+      payload: api.cartItemCountApi(params, typ)
     })
   },
 };

@@ -1,14 +1,21 @@
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
 import RightBar from '../../common/CartAndPaymentRightBar';
+import Blocker from '../../common/Blocker';
 
 import styles from '../cart.styl';
 
 const CartBody = props => {
-  const flag = props.data && props.data.items && props.data.items.length;
-  const cnt = flag > 0 ? props.data.items.length : 0;
+  const { showBlocker, increaseItemCnt, decreaseItemCnt, data, removeCartItem, checkoutBtnHandler } = props;
+  const { items, error } = data;
+  const flag = data && items && items.length;
+  const cnt = flag > 0 ? items.length : 0;
   return (
     <div className={styles['cart-container']}>
+      {
+        showBlocker ? <Blocker /> : ''
+      }
       <Row>
         <Col md={12} sm={12} xs={12}>
           <h4 className={`${styles['mt-20']} ${styles['mb-20']} ${styles['fontW300']}}`}>
@@ -22,19 +29,33 @@ const CartBody = props => {
             <Col md={9} sm={12} xs={12}>
               <div>
                 {
-                  props.data.items.map((item, index) => {
-                    const { item_id, img, name, price, cur } = item;
+                  items.map((item, index) => {
+                    const { item_id, img, name, price, cur, quantity, max_limit, inventory, brand_name } = item;
                     return (
                       <div key={index}>
                         <div className={`${styles['cart-box']} ${styles['box']} ${styles['box-space']} ${styles['p-10']}`}>
                           <Row>
+                            <Col md={12}>
+                              <span className={styles['error-msg']}>{error ? error : ''}</span>
+                            </Col>
                             <Col md={2}>
-                              <img className={styles['img']} src={img} />
+                              <div><img className={styles['img']} src={img} /></div>
+                              {
+                                quantity == 1 ?
+                                  <span> -- </span>
+                                  : <span data-id={item_id} onClick={decreaseItemCnt}> - </span>
+                              }
+                              <span>{quantity}</span>
+                              {
+                                max_limit == quantity ?
+                                  <Fragment><span> X </span> <span>Max per order quantity of this item reached</span></Fragment>
+                                  : <span data-id={item_id} onClick={increaseItemCnt}>  + </span>
+                              }
                             </Col>
                             <Col md={10}>
                               <Row>
                                 <Col md={9}>
-                                  <h5>Brand Name</h5>
+                                  <h5>{brand_name}</h5>
                                   <h5>{name}</h5>
                                 </Col>
                                 <Col md={3}>
@@ -45,7 +66,12 @@ const CartBody = props => {
                           </Row>
                         </div>
                         <div className={`${styles['cart-box-btm']} ${styles['box']} ${styles['p-10']} ${styles['mb-20']}`}>
-                          <span id={item_id} onClick={props.removeCartItem}>Remove</span>
+                          {
+                            inventory <= 5 ?
+                              <span>Only {inventory} units left</span>
+                              : ''
+                          }
+                          <span id={item_id} onClick={removeCartItem}>Remove</span>
                         </div>
                       </div>
                     )
@@ -56,11 +82,11 @@ const CartBody = props => {
             <Col md={3} sm={12} xs={12}>
               <div className={`${styles['box']} ${styles['box-space']} ${styles['p-10']}`}>
                 <div className={styles['t-c']}>
-                  <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']}`} onClick={props.checkoutBtnHandler}>Secure Checkout</button>
+                  <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']}`} onClick={checkoutBtnHandler}>Secure Checkout</button>
                 </div>
                 <div>
                   <RightBar
-                    data={props.data}
+                    data={data}
                   />
                 </div>
               </div>
@@ -75,7 +101,10 @@ const CartBody = props => {
 CartBody.propTypes = {
   checkoutBtnHandler: PropTypes.func.isRequired,
   removeCartItem: PropTypes.func.isRequired,
-  // defaultAddress: PropTypes.array
+  decreaseItemCnt: PropTypes.func.isRequired,
+  increaseItemCnt: PropTypes.func.isRequired,
+  showBlocker: PropTypes.bool.isRequired,
+  data: PropTypes.object.isRequired,
 };
 
 CartBody.defaultProps = {
