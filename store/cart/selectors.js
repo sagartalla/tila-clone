@@ -1,10 +1,10 @@
 const getCartResults = (store) => {
   if (store.cartReducer.data) {
     const data = store.cartReducer.data;
+    const ui = store.cartReducer.ui
     const img_url = 'https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/';
-    const newData = { items: [], total_price: 0 };
+    const newData = { items: [], total_price: 0, ui };
 
-    //TODO temp data modifier..
     if (data.items) {
       newData.total_price = data.total_price;
       newData.total_offer_price = data.total_offer_price;
@@ -13,18 +13,23 @@ const getCartResults = (store) => {
       newData.tax = 0;
       newData.item_cnt = data.items.length;
       newData.currency = data.items[0].listing_info.selling_price_currency;
-
+      
       data.items.map((item, index) => {
         const item_id = item.cart_item_id;
         const name = item.product_details.product_details_vo.cached_product_details.attribute_map.calculated_display_name.attribute_values[0].value;
         const price = item.listing_info.selling_price;
         const cur = item.listing_info.selling_price_currency;
-        const img = img_url + item.product_details.product_details_vo.cached_product_details.media.gallery_media[0].url
+        const img = img_url + item.product_details.product_details_vo.cached_product_details.media.gallery_media[0].url;
+        const quantity = item.quantity;
+        const inventory = item.listing_info.total_inventory_count;
+        const max_limit = item.listing_info.max_limit_per_user;
+        const brand_name = item.product_details.catalog_details.attribute_map.brand.display_string;
 
-        newData.items[index] = { item_id, name, price, cur, img }
+        newData.items[index] = { item_id, name, price, cur, img, quantity, max_limit, inventory, brand_name }
       })
     }
 
+    newData.items = newData.items.reverse();
     return newData;
   }
   return {};
