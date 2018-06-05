@@ -3,59 +3,27 @@ import { actions } from './actions';
 
 const initialState = {
   ui: {
-      loading: false,
+    loading: false,
   },
   data: {},
   error: '',
 };
 
 const cartReducer = typeToReducer({
-    [actions.GET_CART_DETAILS]: {
-        PENDING: state => {
-          return Object.assign({}, state, { error: '', ui: { loading: true } });
-        },
-        FULFILLED: (state, action) => {
-          // console.log(state, actions)
-          return Object.assign({}, state, { data: action.payload.data, ui: { loading: false } });
-        },
-        REJECTED: (state, action) => {
+  [actions.GET_CART_DETAILS]: {
+    PENDING: state => {
+      return Object.assign({}, state, { error: '', ui: { loading: true } });
+    },
+    FULFILLED: (state, action) => {
+      // console.log(state, actions)
+      return Object.assign({}, state, { data: action.payload.data, ui: { loading: false } });
+    },
+    REJECTED: (state, action) => {
 
-          return Object.assign({}, state, { error: action.payload.message, ui: { loading: false } })
-        },
+      return Object.assign({}, state, { error: action.payload.message, ui: { loading: false } })
     },
-    [actions.ADD_TO_CART]: {
-        PENDING: state => {
-          return Object.assign({}, state, { error: '', ui: { loading: true } });
-        },
-        FULFILLED: (state, action) => {
-          return Object.assign({}, state, { data: action.payload.data, ui: { loading: false } });
-        },
-        REJECTED: (state, action) => {
-          return Object.assign({}, state, { 
-            error: action.payload.response ? action.payload.response.data.message : action.payload.message, 
-            ui: { 
-              loading: false 
-            } 
-          });
-        },
-    },
-    [actions.REMOVE_CART_ITEM]: {
-      PENDING: state => {
-        return Object.assign({}, state, { error: '', ui: { loading: true } });
-      },
-      FULFILLED: (state, action) => {
-        return Object.assign({}, state, { data: action.payload.data, ui: { loading: false } });
-      },
-      REJECTED: (state, action) => {
-        return Object.assign({}, state, {
-          error: action.payload.response ? action.payload.response.data.message : action.payload.message, 
-          ui: { 
-            loading: false 
-          } 
-        });
-      },
   },
-  [actions.INCREASE_ITEM_CNT]: {
+  [actions.ADD_TO_CART]: {
     PENDING: state => {
       return Object.assign({}, state, { error: '', ui: { loading: true } });
     },
@@ -64,11 +32,43 @@ const cartReducer = typeToReducer({
     },
     REJECTED: (state, action) => {
       return Object.assign({}, state, {
+        error: action.payload.response ? action.payload.response.data.message : action.payload.message,
+        ui: {
+          loading: false
+        }
+      });
+    },
+  },
+  [actions.REMOVE_CART_ITEM]: {
+    PENDING: state => {
+      return Object.assign({}, state, { error: '', ui: { loading: true } });
+    },
+    FULFILLED: (state, action) => {
+      return Object.assign({}, state, { data: action.payload.data, ui: { loading: false } });
+    },
+    REJECTED: (state, action) => {
+      return Object.assign({}, state, {
+        error: action.payload.response ? action.payload.response.data.message : action.payload.message,
+        ui: {
+          loading: false
+        }
+      });
+    },
+  },
+  [actions.INCREASE_ITEM_CNT]: {
+    PENDING: state => {
+      return Object.assign({}, state, { error: '', ui: { loading: true } });
+    },
+    FULFILLED: (state, action) => {
+      return Object.assign({}, state, { data: action.payload.data, ui: { loading: false, loader: 'hide' } });
+    },
+    REJECTED: (state, action) => {
+      return Object.assign({}, state, {
         data: state.data,
-        error: action.payload.response ? action.payload.response.data.message : action.payload.message, 
-        ui: { 
-          loading: false 
-        } 
+        error: action.payload.response ? action.payload.response.data.message : action.payload.message,
+        ui: {
+          loading: false
+        }
       });
     },
   },
@@ -77,14 +77,14 @@ const cartReducer = typeToReducer({
       return Object.assign({}, state, { error: '', ui: { loading: true } });
     },
     FULFILLED: (state, action) => {
-      return Object.assign({}, state, { data: action.payload.data, ui: { loading: false } });
+      return Object.assign({}, state, { data: action.payload.data, ui: { loading: false, loader: 'hide' } });
     },
     REJECTED: (state, action) => {
       return Object.assign({}, state, {
-        error: action.payload.response ? action.payload.response.data.message : action.payload.message, 
-        ui: { 
-          loading: false 
-        } 
+        error: action.payload.response ? action.payload.response.data.message : action.payload.message,
+        ui: {
+          loading: false
+        }
       });
     },
   }

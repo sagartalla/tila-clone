@@ -15,10 +15,21 @@ class Cart extends Component {
 
   constructor(props) {
     super(props);
+
+    this.state = {
+      showBlocker: false
+    }
+
     this.checkoutBtnHandler = this.checkoutBtnHandler.bind(this);
     this.removeCartItem = this.removeCartItem.bind(this);
     this.increaseItemCnt = this.increaseItemCnt.bind(this);
     this.decreaseItemCnt = this.decreaseItemCnt.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.results.ui.loader && nextProps.results.ui.loader == 'hide') {
+      this.setState({ showBlocker: false });
+    }
   }
 
   componentDidMount() {
@@ -34,14 +45,17 @@ class Cart extends Component {
   }
 
   increaseItemCnt(e) {
+    this.setState({ showBlocker: true })
     this.props.increaseItemCnt(e.target.getAttribute('data-id'));
   }
 
   decreaseItemCnt(e) {
+    this.setState({ showBlocker: true })
     this.props.decreaseItemCnt(e.target.getAttribute('data-id'));
   }
 
   render() {
+    const { showBlocker } = this.state;
     const { results } = this.props;
     return (
       <div>
@@ -49,6 +63,7 @@ class Cart extends Component {
         <Grid>
           <CartBody
             data={results}
+            showBlocker={showBlocker}
             checkoutBtnHandler={this.checkoutBtnHandler}
             removeCartItem={this.removeCartItem}
             increaseItemCnt={this.increaseItemCnt}

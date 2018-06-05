@@ -1,14 +1,20 @@
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
 import RightBar from '../../common/CartAndPaymentRightBar';
+import Blocker from '../../common/Blocker';
 
 import styles from '../cart.styl';
 
 const CartBody = props => {
+  const { showBlocker } = props;
   const flag = props.data && props.data.items && props.data.items.length;
   const cnt = flag > 0 ? props.data.items.length : 0;
   return (
     <div className={styles['cart-container']}>
+      {
+        showBlocker ? <Blocker /> : ''
+      }
       <Row>
         <Col md={12} sm={12} xs={12}>
           <h4 className={`${styles['mt-20']} ${styles['mb-20']} ${styles['fontW300']}}`}>
@@ -35,14 +41,14 @@ const CartBody = props => {
                               <div><img className={styles['img']} src={img} /></div>
                               {
                                 quantity == 1 ?
-                                <span> -- </span>
-                                : <span data-id={item_id} onClick={props.decreaseItemCnt}> - </span>
+                                  <span> -- </span>
+                                  : <span data-id={item_id} onClick={props.decreaseItemCnt}> - </span>
                               }
                               <span>{quantity}</span>
                               {
-                                max_limit == quantity ? 
-                                  <span> X </span>
-                                : <span data-id={item_id} onClick={props.increaseItemCnt}>  + </span>
+                                max_limit == quantity ?
+                                  <Fragment><span> X </span> <span>Max per order quantity of this item reached</span></Fragment>
+                                  : <span data-id={item_id} onClick={props.increaseItemCnt}>  + </span>
                               }
                             </Col>
                             <Col md={10}>
@@ -94,7 +100,8 @@ const CartBody = props => {
 CartBody.propTypes = {
   checkoutBtnHandler: PropTypes.func.isRequired,
   removeCartItem: PropTypes.func.isRequired,
-  // defaultAddress: PropTypes.array
+  decreaseItemCnt: PropTypes.func.isRequired,
+  increaseItemCnt: PropTypes.func.isRequired,
 };
 
 CartBody.defaultProps = {
