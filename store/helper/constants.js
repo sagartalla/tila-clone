@@ -9,4 +9,5 @@ export default {
   AUTH_API_URL          :   'http://gateway-dev.fptechscience.com/auth-service',
   CART_API_URL          :   'http://gateway-dev.fptechscience.com/cart',
   CATEGORYTREE_API_URL  :   'http://category-dev.fptechscience.com',
+  WISHLIST_API_URL      :   'http://gateway-dev.fptechscience.com/wl',
 };

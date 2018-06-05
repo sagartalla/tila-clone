@@ -6,6 +6,7 @@ import Sidebar from './Sidebar';
 import UserInfo from './PersonelDetails';
 import ShippingAddress from './ShippingAddress';
 import Orders from './Orders'
+import Wishlist from './Wishlist';
 
 import styles from './cam.styl';
 
@@ -19,6 +20,8 @@ const Cam = ({tabDetails}) => {
         return <ShippingAddress standalone={true}/>;
       case 'profile':
         return <UserInfo />; 
+        case 'wishlist':
+        return <Wishlist />; 
       default:
         return <Orders />; 
     }
