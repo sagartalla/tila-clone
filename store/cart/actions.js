@@ -39,24 +39,6 @@ const actionCreators = {
       payload: api.cartItemCountApi(params, typ)
     })
   },
-  // increaseItemCnt: (cartId) => {
-  //   const params = {
-  //     "cart_item_id": cartId
-  //   }
-  //   return ({
-  //     type: actions.INCREASE_ITEM_CNT,
-  //     payload: api.increaseItemCntApi(params)
-  //   })
-  // },
-  // decreaseItemCnt: (cartId) => {
-  //   const params = {
-  //     "cart_item_id": cartId
-  //   }
-  //   return ({
-  //     type: actions.DECREASE_ITEM_CNT,
-  //     payload: api.decreaseItemCntApi(params)
-  //   })
-  // },
 };
 
 export { actions, actionCreators };
