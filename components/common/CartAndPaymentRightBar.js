@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Grid, Row, Col } from 'react-bootstrap';
 
 import styles from './rightBar.styl';
@@ -21,6 +22,20 @@ const CartAndPaymentRightBar = props => {
       </div>
     </div>
   )
+};
+
+CartAndPaymentRightBar.propTypes = {
+  total_price: PropTypes.number,
+  total_offer_price: PropTypes.number,
+  total_discount: PropTypes.number,
+  total_shipping: PropTypes.number,
+  tax: PropTypes.number,
+  item_cnt: PropTypes.number,
+  currency: PropTypes.string,
+};
+
+CartAndPaymentRightBar.defaultProps = {
+  
 };
 
 export default CartAndPaymentRightBar;

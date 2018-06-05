@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Row, Col, Grid } from 'react-bootstrap';
 import { Router } from '../../routes';
 
@@ -91,5 +92,13 @@ const mapDispatchToProps = (dispatch) =>
     },
     dispatch,
   );
+
+Cart.propTypes = {
+  results: PropTypes.object,
+};
+
+Cart.defaultProps = {
+  
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);
