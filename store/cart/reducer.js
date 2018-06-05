@@ -16,7 +16,7 @@ const cartReducer = typeToReducer({
     },
     FULFILLED: (state, action) => {
       // console.log(state, actions)
-      return Object.assign({}, state, { data: action.payload.data, ui: { loading: false } });
+      return Object.assign({}, state, { data: action.payload.data, ui: { loaded: true } });
     },
     REJECTED: (state, action) => {
 
