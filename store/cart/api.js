@@ -22,7 +22,7 @@ const removeCartItemApi = (params) => {
 }
 
 const cartItemCountApi = (params, typ) => {
-  return axios.put(`${constants.CART_API_URL}/api/v1/cart/quantity/${typ == 'add' ? 'add' : 'remove'}`, params).then(({ data }) => {
+  return axios.put(`${constants.CART_API_URL}/api/v1/cart/quantity/${typ}`, params).then(({ data }) => {
 
     // calling this function because to get cart details again.
     return getCartDetailsApi();

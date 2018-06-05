@@ -7,9 +7,10 @@ import Blocker from '../../common/Blocker';
 import styles from '../cart.styl';
 
 const CartBody = props => {
-  const { showBlocker } = props;
-  const flag = props.data && props.data.items && props.data.items.length;
-  const cnt = flag > 0 ? props.data.items.length : 0;
+  const { showBlocker, increaseItemCnt, decreaseItemCnt, data, removeCartItem, checkoutBtnHandler } = props;
+  const { items, error } = data;
+  const flag = data && items && items.length;
+  const cnt = flag > 0 ? items.length : 0;
   return (
     <div className={styles['cart-container']}>
       {
@@ -28,27 +29,27 @@ const CartBody = props => {
             <Col md={9} sm={12} xs={12}>
               <div>
                 {
-                  props.data.items.map((item, index) => {
+                  items.map((item, index) => {
                     const { item_id, img, name, price, cur, quantity, max_limit, inventory } = item;
                     return (
                       <div key={index}>
                         <div className={`${styles['cart-box']} ${styles['box']} ${styles['box-space']} ${styles['p-10']}`}>
                           <Row>
                             <Col md={12}>
-                              <span className={styles['error-msg']}>{props.data.error ? props.data.error : ''}</span>
+                              <span className={styles['error-msg']}>{error ? error : ''}</span>
                             </Col>
                             <Col md={2}>
                               <div><img className={styles['img']} src={img} /></div>
                               {
                                 quantity == 1 ?
                                   <span> -- </span>
-                                  : <span data-id={item_id} onClick={props.decreaseItemCnt}> - </span>
+                                  : <span data-id={item_id} onClick={decreaseItemCnt}> - </span>
                               }
                               <span>{quantity}</span>
                               {
                                 max_limit == quantity ?
                                   <Fragment><span> X </span> <span>Max per order quantity of this item reached</span></Fragment>
-                                  : <span data-id={item_id} onClick={props.increaseItemCnt}>  + </span>
+                                  : <span data-id={item_id} onClick={increaseItemCnt}>  + </span>
                               }
                             </Col>
                             <Col md={10}>
@@ -70,7 +71,7 @@ const CartBody = props => {
                               <span>Only {inventory} units left</span>
                               : ''
                           }
-                          <span id={item_id} onClick={props.removeCartItem}>Remove</span>
+                          <span id={item_id} onClick={removeCartItem}>Remove</span>
                         </div>
                       </div>
                     )
@@ -81,11 +82,11 @@ const CartBody = props => {
             <Col md={3} sm={12} xs={12}>
               <div className={`${styles['box']} ${styles['box-space']} ${styles['p-10']}`}>
                 <div className={styles['t-c']}>
-                  <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']}`} onClick={props.checkoutBtnHandler}>Secure Checkout</button>
+                  <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']}`} onClick={checkoutBtnHandler}>Secure Checkout</button>
                 </div>
                 <div>
                   <RightBar
-                    data={props.data}
+                    data={data}
                   />
                 </div>
               </div>
@@ -102,6 +103,8 @@ CartBody.propTypes = {
   removeCartItem: PropTypes.func.isRequired,
   decreaseItemCnt: PropTypes.func.isRequired,
   increaseItemCnt: PropTypes.func.isRequired,
+  showBlocker: PropTypes.bool.isRequired,
+  data: PropTypes.object.isRequired,
 };
 
 CartBody.defaultProps = {
