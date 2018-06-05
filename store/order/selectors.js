@@ -2,7 +2,7 @@ import fp, * as _ from 'lodash/fp';
 import shortid from 'shortid';
 
 const getOrderDetails = (store) => {
-  const { created_by, customer_account_id, address, order_id, created_at, order_items, total_amount, total_shipping } = store.singleOrderReducer.data;
+  const { created_by, customer_account_id, address, order_id, created_at, order_items, total_amount, total_shipping } = store.singleOrderReducer.data.orderDetails;
   if(order_id){
     return {
       name: address ? `${address.first_name} ${address.last_name}` : 'No Name',

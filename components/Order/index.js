@@ -46,7 +46,7 @@ class Order extends Component {
           <Row>
             <Col md={12}>
               <div className={`${styles['box']} ${styles['pl-20']} ${styles['pr-20']} ${styles['mt-20']}`}>
-              <OrderItem orderItem={orderData.orderItem}/>
+                <OrderItem orderItem={orderData.orderItem}/>
               </div>
             </Col>
           </Row>

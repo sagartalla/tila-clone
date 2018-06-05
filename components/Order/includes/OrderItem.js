@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
 
-import StatusWidget from './widget/StatusWidget';
+import StatusWidget from './StatusWidget';
 import constants from '../../../constants';
 
 import styles from '../order.styl';
