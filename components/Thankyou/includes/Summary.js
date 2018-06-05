@@ -15,7 +15,7 @@ const PaymentStatus = props => {
           <div className={`${styles['box']} ${styles['p-5']}`}>
             <Row className={`${styles['ml-0']} ${styles['mr-0']}`}>
               <Col md={4} xs={12} sm={12} className={styles['pt-15']}>
-                <Row className={`${styles['col-header']} ${styles['f-14']}`}>
+                <Row className={`${styles['col-header']} ${styles['fs-14']}`}>
                   <Col md={6} xs={6} sm={6}>
                     <h5>ADDRESS DETAILS</h5>
                   </Col>
