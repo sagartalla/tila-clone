@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22">
+    <g fill="none" fill-rule="evenodd">
+        <path d="M-5-5h33.6v33.6H-5z"/>
+        <g transform="translate(1 1)">
+            <ellipse cx="10.08" cy="10.137" stroke="#2C2F33" stroke-width=".84" rx="10.08" ry="10.137"/>
+            <text fill="#2C2F33" font-family="ProximaNova-Regular, Proxima Nova" font-size="13.44" letter-spacing=".336">
+                <tspan x="7.2" y="14.461">?</tspan>
+            </text>
+        </g>
+    </g>
+</svg>
