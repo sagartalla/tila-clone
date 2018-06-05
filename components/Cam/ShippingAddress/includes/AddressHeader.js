@@ -10,7 +10,7 @@ const AddressHeader = () => (
         <i className="fa fa-address-card"></i>
       </Col>
       <Col md={10} sm={9} xs={9}>
-        <h1>Manage Shipping Address</h1>
+        <h1 className={`${styles['black-color']} ${styles['m-0']} ${styles['f-16']}`}>Manage Shipping Address</h1>
         <small>select a delivery address or create a new address</small>
       </Col>
     </Row>

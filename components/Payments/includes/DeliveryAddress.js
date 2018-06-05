@@ -7,7 +7,7 @@ import styles from '../payment.styl';
 
 const DeliveryAddress = props => (
   
-    <div className={`${styles['pt-24']} ${styles['pb-24']} ${styles['box']} ${styles['mb-20']}`}>
+    <div className={`${styles['p-24']} ${styles['box']} ${styles['mb-20']}`}>
       <Row className={`${props.configJson.basic || props.configJson.done ? '' : 'hide'}`}>
         <Col md={6} sm={12} xs={12}>
           <h4 className={styles['m-0']}>Delivery Address</h4>
@@ -38,7 +38,7 @@ const DeliveryAddress = props => (
       {
         props.configJson.progress ? 
         <div>
-          <h4 className={`${styles['mb-20']}`}>Delivery Address</h4>
+          <h4 className={`${styles['mb-20']} ${styles['mt-0']}`}>Delivery Address</h4>
           <ShippingAddress 
             handleShippingAddressContinue = {props.handleShippingAddressContinue}
           />
