@@ -45,13 +45,16 @@ class Cart extends Component {
   }
 
   increaseItemCnt(e) {
-    this.setState({ showBlocker: true })
-    this.props.increaseItemCnt(e.target.getAttribute('data-id'));
+    this.cartItemCount(e.target.getAttribute('data-id'), 'add');
   }
 
   decreaseItemCnt(e) {
+    this.cartItemCount(e.target.getAttribute('data-id'), 'remove');
+  }
+
+  cartItemCount(id, typ) {
     this.setState({ showBlocker: true })
-    this.props.decreaseItemCnt(e.target.getAttribute('data-id'));
+    this.props.cartItemCount(id, typ);
   }
 
   render() {
@@ -84,8 +87,7 @@ const mapDispatchToProps = (dispatch) =>
     {
       getCartResults: actionCreators.getCartResults,
       removeCartItem: actionCreators.removeCartItem,
-      increaseItemCnt: actionCreators.increaseItemCnt,
-      decreaseItemCnt: actionCreators.decreaseItemCnt,
+      cartItemCount: actionCreators.cartItemCount,
     },
     dispatch,
   );

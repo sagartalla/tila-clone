@@ -21,20 +21,12 @@ const removeCartItemApi = (params) => {
   })
 }
 
-const increaseItemCntApi = (params) => {
-  return axios.put(`${constants.CART_API_URL}/api/v1/cart/quantity/add`, params).then(({ data }) => {
+const cartItemCountApi = (params, typ) => {
+  return axios.put(`${constants.CART_API_URL}/api/v1/cart/quantity/${typ == 'add' ? 'add' : 'remove'}`, params).then(({ data }) => {
 
     // calling this function because to get cart details again.
     return getCartDetailsApi();
   });
 }
 
-const decreaseItemCntApi = (params) => {
-  return axios.put(`${constants.CART_API_URL}/api/v1/cart/quantity/remove`, params).then(({ data }) => {
-
-    // calling this function because to get cart details again.
-    return getCartDetailsApi();
-  });
-}
-
-export default { getCartDetailsApi, addToCart, removeCartItemApi, increaseItemCntApi, decreaseItemCntApi };
+export default { getCartDetailsApi, addToCart, removeCartItemApi, cartItemCountApi };
