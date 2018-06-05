@@ -30,7 +30,7 @@ const CartBody = props => {
               <div>
                 {
                   items.map((item, index) => {
-                    const { item_id, img, name, price, cur, quantity, max_limit, inventory } = item;
+                    const { item_id, img, name, price, cur, quantity, max_limit, inventory, brand_name } = item;
                     return (
                       <div key={index}>
                         <div className={`${styles['cart-box']} ${styles['box']} ${styles['box-space']} ${styles['p-10']}`}>
@@ -55,7 +55,7 @@ const CartBody = props => {
                             <Col md={10}>
                               <Row>
                                 <Col md={9}>
-                                  <h5>Brand Name</h5>
+                                  <h5>{brand_name}</h5>
                                   <h5>{name}</h5>
                                 </Col>
                                 <Col md={3}>

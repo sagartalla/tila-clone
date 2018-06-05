@@ -13,7 +13,7 @@ const getCartResults = (store) => {
       newData.tax = 0;
       newData.item_cnt = data.items.length;
       newData.currency = data.items[0].listing_info.selling_price_currency;
-
+      
       data.items.map((item, index) => {
         const item_id = item.cart_item_id;
         const name = item.product_details.product_details_vo.cached_product_details.attribute_map.calculated_display_name.attribute_values[0].value;
@@ -23,8 +23,9 @@ const getCartResults = (store) => {
         const quantity = item.quantity;
         const inventory = item.listing_info.total_inventory_count;
         const max_limit = item.listing_info.max_limit_per_user;
+        const brand_name = item.product_details.catalog_details.attribute_map.brand.display_string;
 
-        newData.items[index] = { item_id, name, price, cur, img, quantity, max_limit, inventory }
+        newData.items[index] = { item_id, name, price, cur, img, quantity, max_limit, inventory, brand_name }
       })
     }
 
