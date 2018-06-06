@@ -6,7 +6,6 @@ import  styles from './order.styl';
 
 const OrderHeader = ({orderDetails}) => {
   const { name, address, phone, orderId, orderDate, itemsTotal, orderTotal, shippingTotal, paymentDetals } = orderDetails;
-  console.log(orderDetails);
   return (
     <div className={`${styles['box']} ${styles['p-20']}`}>
       <Row>

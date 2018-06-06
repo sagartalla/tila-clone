@@ -1,14 +1,26 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import StatusWidget from './StatusWidget';
 import constants from '../../../constants';
 
+import { actionCreators }   from '../../../store/order';
+
 import styles from '../order.styl';
 
-const OrderItem = ({ orderItem }) => {
+const OrderItem = ({ orderItem, raiseOrderIssue }) => {
   const { products } = orderItem;
+  
+  const cancelOrder = () => {
+    raiseOrderIssue({
+      issueType: 'cancel',
+      items: products
+    });
+  };
+  
   return (
     <div className={`${styles['shipment-wrap']} ${styles['mb-32']} ${styles['mt-32']}`}>
       <Row>
@@ -35,7 +47,7 @@ const OrderItem = ({ orderItem }) => {
               <div className={`${styles['ff-t']} ${styles['fs-30']}`}>21, Monday</div>
             </div>
             <div className={styles['cancel-btn']}>
-              <span className={`${styles['link-text']} ${styles['fs-12']}`}>Cancel</span>
+              <span className={`${styles['link-text']} ${styles['fs-12']}`} onClick={cancelOrder}>Cancel</span>
             </div>
             <div className={styles['widget-wrap']}>
               {
@@ -54,4 +66,11 @@ const OrderItem = ({ orderItem }) => {
   )
 };
 
-export default OrderItem;
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    { raiseOrderIssue: actionCreators.raiseOrderIssue },
+    dispatch,
+  );
+}
+
+export default connect(null, mapDispatchToProps)(OrderItem);

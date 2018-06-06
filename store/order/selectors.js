@@ -15,19 +15,23 @@ const getOrderDetails = (store) => {
       shippingTotal: total_shipping,
       paymentDetals: [],
       //move compose to common util
-      orderItem: _.compose(
-        _.reduce((acc, val, key) => acc.concat({ id: key, products: val, status: val[0].status }), []),
+      orderItems: _.compose(
+        _.reduce.convert({ 'cap': false })((acc, val, key) => {
+          return acc.concat({ id: key, products: val, status: val[0].status });
+        }, []),
         _.groupBy((i) => i.item_tracking_id),
         _.map((i) => ({ id: i.order_item_id, img: i.variant_info.image_url, name: i.variant_info.title, item_tracking_id: i.item_tracking_id || shortid.generate(), status: i.status }))
-      )(order_items)[0]
+       )(order_items)
     };
   }
   return {
     paymentDetals: [], 
-    orderItem:{
-      products: []
-    }
+    orderItems:[]
   };
 };
 
-export { getOrderDetails };
+const getOrderIssue = (store) => {
+  return store.singleOrderReducer.data.orderIssue;
+}
+
+export { getOrderDetails, getOrderIssue };

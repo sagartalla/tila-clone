@@ -6,8 +6,8 @@ const initialState = {
         loading: false,
     },
     data: {
-      orderDetails: {},
-      cancelReturnExchangeDetails: {},
+			orderDetails: {},
+			orderIssue: {},
     },
     error: {},
 };
@@ -42,6 +42,44 @@ const productReducer = typeToReducer({
           ...state.data.orderIssue,
           ...action.payload.data
         }
+      }
+    }
+  },
+  [actions.GO_TO_NEXT_STEP]: (state, action) => {
+    let orderIssue = {};
+    const step = action.payload.data.step;
+    if (step !== null) {
+      orderIssue = {
+        ...state.data.orderIssue,
+      }
+    }
+    orderIssue.step = step;
+    return {
+      ...state,
+      data: {
+        ...state.data,
+        orderIssue,
+      }
+    }
+  },
+  [actions.SET_SELECTED_ITEM]: (state, action) => {
+    return {
+      ...state,
+      data: {
+        ...state.data,
+        orderIssue: {
+          ...state.data.orderIssue,
+          selectedItem: action.payload.data.selectedItem
+        }
+      }
+    }
+  },
+  [actions.RESET_ORDER_ISSUE]: (state, action) => {
+    return {
+      ...state,
+      data: {
+        ...state.data,
+        orderIssue: initialState.data.orderIssue
       }
     }
   }

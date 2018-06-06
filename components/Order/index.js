@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 import HeaderBar from '../HeaderBar/index';
 import OrderHeader from './OrderHeader';
 import OrderItem from "./includes/OrderItem";
+import OrderIssueWidget from './includes/OrderIssueWidget';
 
 import { selectors, actionCreators } from '../../store/order';
 
@@ -46,11 +47,14 @@ class Order extends Component {
           <Row>
             <Col md={12}>
               <div className={`${styles['box']} ${styles['pl-20']} ${styles['pr-20']} ${styles['mt-20']}`}>
-                <OrderItem orderItem={orderData.orderItem}/>
+                {
+                  orderData.orderItems.map((item) => <OrderItem  key={item.id} orderItem={item}/>)
+                }
               </div>
             </Col>
           </Row>
         </Grid>
+        <OrderIssueWidget />
       </div>
     );
   }
@@ -70,5 +74,3 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Order);
-
-// removed, add it while merging with Sulochana --------- <UserInfo />

@@ -16,7 +16,7 @@ const getOrdersData = (store) => {
         order_items,
       } = order;
       const orderItems = _.compose(
-        _.reduce((acc, val, key) => acc.concat({ id: key, products: val, status: val[0].status }), []),
+        _.reduce.convert((acc, val, key) => acc.concat({ id: key, products: val, status: val[0].status }), []),
         _.groupBy((i) => i.item_tracking_id || i.id),
         _.map((i) => ({ id: i.order_item_id, img: i.variant_info.image_url, name: i.variant_info.title, item_tracking_id: i.item_tracking_id || shortid.generate(), status: i.status }))
       )(order_items);
