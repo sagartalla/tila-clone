@@ -201,7 +201,7 @@ class ContactInfo extends React.Component {
         <Row>
           <Col xs={12} md={12}><a>Deactivate account</a></Col>
         </Row>
-        <div className={ show ? `${commonStyle['modalContainer']} ${commonStyle['show']}` : `${commonStyle['modalContainer']} ${commonStyle['hide']}`}>
+        <div className={ show ? `${commonStyle['modalContainer']} ${commonStyle['showDiv']}` : `${commonStyle['modalContainer']} ${commonStyle['hideDiv']}`}>
           <div className={ `${commonStyle['disabled']}`}>
           </div>
           <div className={ `${commonStyle['modal']}`}>

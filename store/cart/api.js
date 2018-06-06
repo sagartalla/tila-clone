@@ -1,14 +1,32 @@
 import _ from 'lodash';
-import { cartServiceInstance } from '../helper/services';
+import axios from 'axios';
+
+import constants from '../helper/constants';
 
 const getCartDetailsApi = () => {
-  return cartServiceInstance.put('/api/v1/cart/view', {}).then(({ data }) => {
+  return axios.put(`${constants.CART_API_URL}/api/v1/cart/view`, {}).then(({ data }) => {
     return { data };
   });
 };
 
 const addToCart = (params) => {
-  return cartServiceInstance.post('/api/v1/cart/add', params);
+  return axios.post(`${constants.CART_API_URL}/api/v1/cart/add`, params);
 }
 
-export default { getCartDetailsApi, addToCart };
+const removeCartItemApi = (params) => {
+  return axios.put(`${constants.CART_API_URL}/api/v1/cart/delete`, params).then(({ data }) => {
+
+    // calling this function because to get cart details again.
+    return getCartDetailsApi();
+  })
+}
+
+const cartItemCountApi = (params, typ) => {
+  return axios.put(`${constants.CART_API_URL}/api/v1/cart/quantity/${typ}`, params).then(({ data }) => {
+
+    // calling this function because to get cart details again.
+    return getCartDetailsApi();
+  });
+}
+
+export default { getCartDetailsApi, addToCart, removeCartItemApi, cartItemCountApi };

@@ -1,6 +1,6 @@
 import _ from 'lodash';
-import { searchServiceInstance } from '../helper/services';
-
+import axios from 'axios';
+import constants from '../helper/constants';
 
 const getSearchResultsApi = ({
   categoryFilter,
@@ -29,7 +29,7 @@ const getSearchResultsApi = ({
   } else {
     options.categoryFilter = categoryFilter;
   }
-  return searchServiceInstance.post(`/search${categoryTree ? '/browseByCatId/': ''}`, options).then(({ data }) => {
+  return axios.post(`${constants.SEARCH_API_URL}/search${categoryTree ? '/browseByCatId/': ''}`, options).then(({ data }) => {
     if (data.categoryFilter) {
       data.categoryFilter.parentCategories.forEach((parentCategory) => {
         parentCategory.canonicalId = _.kebabCase(parentCategory.name);

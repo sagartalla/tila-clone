@@ -134,7 +134,7 @@ const UpdateContactInfo = props => {
 
   return (
     <div>
-      <div show={show} className={commonStyle['editProfileModal']}>
+      <div className={commonStyle['editProfileModal']}>
         <Row>
           <Col xs={11} md={11}>
           <h3>{title}</h3>

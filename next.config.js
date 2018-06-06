@@ -29,12 +29,17 @@ module.exports = withStylus(withCSS({
     //     }
     //   });
     // }
-    // config.resolve = {
-    //   extensions: ['', '.js'],
-    //     root: [
-    //       path.resolve('./')
-    //     ]
-    // }
+    config.resolve = {
+      extensions: ['.js', '.json', '.svg', '.css'],
+      modules: [
+        path.resolve('./'),
+        path.resolve('./node_modules')
+      ]
+    }
+    config.module.rules.push({
+      test: /\.svg$/,
+      loader: 'svg-inline-loader'
+    });
     config = commonsChunkConfig(config, /\.(styl|css)$/);
     return config
   }

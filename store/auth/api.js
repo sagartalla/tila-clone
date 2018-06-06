@@ -1,8 +1,9 @@
 import _ from 'lodash';
-import { authServiceInstance, camServiceInstance } from '../helper/services';
+import axios from 'axios';
+import constants from '../helper/constants';
 
 const userLogin = (params) => {
-  return authServiceInstance.post(`/api/v1/login/basic`, Object.assign({}, params, {
+  return axios.post(`${constants.AUTH_API_URL}/api/v1/login/basic`, Object.assign({}, params, {
     type: 'CUSTOMER',
     authVersion: 'V1'
   })).then(({data, status}) => {
@@ -23,7 +24,7 @@ const userLogin = (params) => {
   });
 }
 
-const userRegister = (params) =>  camServiceInstance.post('/api/v1/user/register', params);
+const userRegister = (params) => axios.post(`${constants.CMS_API_URL}/api/v1/user/register`, params);
 
 const userLogout = () => {
   localStorage.removeItem('auth');

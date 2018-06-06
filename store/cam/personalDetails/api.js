@@ -1,9 +1,11 @@
-import { camServiceInstance } from '../../helper/services';
+import axios from 'axios';
+import constants from '../../helper/constants';
 
 const getUserProfileInfo = () => {
+  debugger;
   return Promise.all([
-    camServiceInstance.get('/api/v1/user/account/details'),
-    camServiceInstance.post('/api/v1/user/info')
+    axios.get(`${constants.CMS_API_URL}/api/v1/user/account/details`),
+    axios.post(`${constants.CMS_API_URL}/api/v1/user/info`)
   ]).then(([data1, data2]) => {
     return {
       personalInfo: data1.data,
@@ -13,14 +15,14 @@ const getUserProfileInfo = () => {
 };
 
 const changePassword = (body) => {
-  return camServiceInstance.put('/api/v1/user/password/set', body).then(({ data }) => {
+  return axios.put(`${constants.CMS_API_URL}/api/v1/user/password/set`, body).then(({ data }) => {
     return { data };
   })
 };
 
 const editPersonalInfo = (body) => {
-  return camServiceInstance.put('/api/v1/user/account/edit', body).then(({ data }) => {
-    return camServiceInstance.get('/api/v1/user/account/details').then(userInfoResult=> [data,userInfoResult]);
+  return axios.put(`${constants.CMS_API_URL}/api/v1/user/account/edit`, body).then(({ data }) => {
+    return axios.get(`${constants.CMS_API_URL}/api/v1/user/account/details`).then(userInfoResult=> [data,userInfoResult]);
   }).then(([personalInfoStatus, userInfoResult]) =>{
     return {
       personalInfo:userInfoResult.data,

@@ -54,7 +54,7 @@ const Order = ({order}) => {
       <Row> 
         <div className={styles['m-10']}>
           <Col md={7}>
-            <div className={styles['f-14']}>
+            <div className={styles['fs-14']}>
               <span>
                 Orderd on&nbsp;
               </span>
@@ -64,7 +64,7 @@ const Order = ({order}) => {
             </div>
           </Col>
           <Col md={5}>
-            <div className={`${styles['f-14']} ${styles['float-r']}`}>
+            <div className={`${styles['fs-14']} ${styles['float-r']}`}>
               <span>
                 <span className={styles['link-text']}>Request Invoice&nbsp;</span>
                 <span>v</span>

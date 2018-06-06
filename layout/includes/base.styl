@@ -13,6 +13,9 @@ body
     opacity: 1; /* Firefox */
 }
 
+a:hover
+  text-decoration none
+
 // heading tags
 h1
   font-size font-size-32
@@ -35,19 +38,13 @@ input[type=text],input[type=password], input[type=email]
 
 
 /* font sizes */
-.fs-12
-  font-size font-size-12
 
-.f-14
-  font-size font-size-14
 
-.fs-30
-  font-size font-size-30 
-
-.fs-15
-  font-size font-size-15 
-/* font sizes end */
-
+// it will generate fonts from fs-10, fs-12, fs-14, ...., to fs-40.
+for i in range(10px, 40px, 2)
+  .fs-{i}
+    font-size i 
+  
 
 // margins 
 .m-0 
@@ -179,7 +176,7 @@ input[type=text],input[type=password], input[type=email]
 .pt-32
   padding-top px-32
 .pb-32
-  padding-top px-32
+  padding-bottom px-32
 .pl-32
   padding-left px-32
 .pr-32
@@ -197,8 +194,26 @@ input[type=text],input[type=password], input[type=email]
 .pr-0
   padding-right 0
 
+.p-10-20
+  padding 10px 20px
+
+.p-14-22
+  padding 14px 22px
+
+.p-10-22
+  padding 10px 22px
+
 .p-10-24
   padding 10px 24px
+
+.pl-14
+  padding-left 14px
+
+.p-10
+  padding 10px
+
+.p-22
+  padding 22px
 
 //height
 .ht-100
@@ -229,7 +244,62 @@ body
 .t-c
   text-align center
 
-//Border styles
+//line height part
+.lne-ht2
+  line-height 2
+
+
+//colors
+.black-color
+  color black
+
+.lgt-blue
+  color light-blue
+
+.lgt-black
+  color light-black
+
+.thick-blue
+  color thick-blue
+
+.light-gray
+  color light-gray
+
+.light-gry-clr
+  color light-gray-clr
+
+.thick-red
+  color thick-red
+//font-weight
+.fontW300
+  font-weight 300
+  
+.fontW600
+  font-weight 600
+
+//width list
+.width100
+  width 100%
+
+.width63
+  width 63%
+
+.width33
+  width 33%
+
+//border
+.border-t
+  border-top 1px solid light-gray
+
+.border-b
+  border-bottom 1px solid light-gray
+
+.border-rt
+  border-right 1px solid light-gray
+
+.thick-border-btm
+  border-bottom 1px solid light-gray-color
+
 .bb-dashed
   border-bottom 1px dashed label-light-grey
   margin-left 0
@@ -238,4 +308,26 @@ body
   border-radius 5px 
 
 .bg-mauve
-  background mauve-light   
+  background mauve-light     
+//list style
+.no-lst
+  list-style-type none
+
+.no-list-blt li
+  @extends .no-lst
+
+//border-radius
+.border-radius2
+  border-radius 2px
+
+//box-shadow
+.default-shadow
+  box-shadow 0 2px 4px 0 rgba(0,0,0,0.11)
+
+//cursor
+.pointer
+  cursor pointer
+
+//tooltip color
+.alrt-message-bg
+  background-color thin-yellow

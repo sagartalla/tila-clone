@@ -14,7 +14,6 @@ import Orders from './Orders'
 
 import styles from './cam.styl';
 
-
 class Cam extends Component {
   constructor(props) {
     super(props);

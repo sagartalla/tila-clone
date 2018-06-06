@@ -99,7 +99,7 @@ class Login extends Component {
                   <input onChange={this.onChangeField} name="email" type="email" value={this.state.email} required />
                   <span className={styles['highlight']}></span>
                   <span className={styles['bar']}></span>
-                  <label>Name</label>
+                  <label>Email</label>
                 </div>
               </Col>
             </FormGroup>

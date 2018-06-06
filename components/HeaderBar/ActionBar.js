@@ -7,6 +7,7 @@ import { ModalContainer } from 'react-router-modal';
 
 import { selectors, actionCreators } from '../../store/auth';
 import Login from '../Login';
+import { Link } from '../../routes';
 
 
 class ActionBar extends Component {
@@ -46,8 +47,16 @@ class ActionBar extends Component {
     return (
       <div className={styles['actionbar-wrapper']}>
         <div className={styles['action-item']}></div>
-        <div className={styles['action-item']}></div>
-        <div className={styles['action-item']}></div>
+        <div className={styles['action-item']}>
+          <span className={`${styles['center']} ${styles['middle']}`}>
+            <Link route="/cart">cart</Link>
+          </span>
+        </div>
+        <div className={styles['action-item']}>
+          <span className={`${styles['center']} ${styles['middle']}`}>
+            <Link route="/cam">cam</Link>
+          </span>
+        </div>
         <div className={styles['action-item']}>
           <span className={`${styles['center']} ${styles['middle']}`}>
             {

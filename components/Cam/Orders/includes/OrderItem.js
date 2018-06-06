@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
 
 import StatusWidget from './widget/StatusWidget';
+import constants from '../../../../constants';
 
 import styles from '../orders.styl';
 
@@ -17,7 +18,7 @@ const OrderItem = ({ orderItem }) => {
               orderItem.products.map((product) => (
                 <div key={product.id} className={styles['product-item']}>
                   <div className={styles['img-wrap']}>
-                    <img className={`${styles['order-item-img']} ${styles['center']} ${styles['middle']}`} src={product.img} alt={product.img} />
+                    <img className={`${styles['order-item-img']} ${styles['center']} ${styles['middle']}`} src={`${constants.mediaDomain}/${product.img}`} alt={product.img} />
                   </div>
                   <div className={styles['text-wrap']}>
                     <span className={`${styles['middle']}`} >{product.name}</span>
@@ -39,7 +40,7 @@ const OrderItem = ({ orderItem }) => {
             <div className={styles['widget-wrap']}>
               {
                 orderItem.status === 'DELIVERED' 
-                ? 
+                ?
                   null
                 :
                   <StatusWidget currentStatus={orderItem.status} />

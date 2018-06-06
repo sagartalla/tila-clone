@@ -123,7 +123,7 @@ class ShippingAddress extends Component {
     let { showNewAddr, addr } = this.state;
 
     return (
-      <div className={`${styles['address-container']} ${standalone !== true ? '' : styles['box']} `}>
+      <div className={`${styles['address-container']} ${standalone !== true ? '' : `${styles['box']} ${styles['ml-20']}`} `}>
         {
           standalone === true ?
             <AddressHeader /> :
@@ -137,6 +137,7 @@ class ShippingAddress extends Component {
               deleteAddr={this.deleteAddr}
               editAddress={this.editAddress}
               makeDefaultAddress={this.makeDefaultAddress}
+              standalone={standalone}
             />
           </Col>
           <Col md={12} sm={12} xs={12}>
@@ -157,7 +158,7 @@ class ShippingAddress extends Component {
           </Col>
           {
             standalone !== true ?
-              <Col md={12} sm={12} xs={12} className={`${styles['pl-24']}`}>
+              <Col md={12} sm={12} xs={12} className={`${styles['pl-15']}`}>
                 <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']}`} onClick={handleShippingAddressContinue}>Continue</button>
               </Col>
               : null

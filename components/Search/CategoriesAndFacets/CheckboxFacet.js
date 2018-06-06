@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Checkbox } from 'react-bootstrap';
+import styles from '../search.styl';
 
 const MaxItems = 3;
 
@@ -50,17 +51,17 @@ class CheckboxFacet extends Component {
     const { filter } = this.props;
     const { selectedItems } = this.state;
     return (
-      <li>
-        <div>{filter.name}</div>
-        <ul>
+      <li className={`${styles['category-list']} ${styles['pt-10']} ${styles['pb-10']}`}>
+        <div className={`${styles['category-list-title']} ${styles['black-color']} ${styles['fontW600']} ${styles['pl-10']}`}>{filter.name}</div>
+        <ul className={styles['category-sub-list']}>
           {
             filter.children.slice(0, this.state.maxRows).map(childFitler => (
-              <li key={childFitler.id}>
+              <li key={childFitler.id} className={styles['category-sub-list-inn']}>
                 <Checkbox
                   onChange={this.onChangeItem({ name: childFitler.name, param: childFitler.param })}
                   checked={selectedItems.indexOf(childFitler.name) !== -1}
                 >
-                  {childFitler.name}&nbsp;({childFitler.count})
+                  <span><span>{childFitler.name}</span><span>({childFitler.count})</span></span>
                 </Checkbox>
               </li>
             ))

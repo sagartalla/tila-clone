@@ -1,33 +1,35 @@
-import { addressServiceInstance } from '../../helper/services';
+import axios from 'axios';
+import constants from '../../helper/constants';
+
 
 
 const getAllShippingAddressApi = () => {
-  return addressServiceInstance.get('/api/v1/addresses/all').then(({ data }) => {
+  return axios.get(`${constants.CMS_API_URL}/api/v1/addresses/all`).then(({ data }) => {
     return { data };
   });
 };
 
 //sending given options/params back for adding in store to existing shipping address.
 const sendNewAddressDetailsApi = (options) => {
-  return addressServiceInstance.post('/api/v1/addresses/create', options).then(({ data }) => {
+  return axios.post(`${constants.CMS_API_URL}/api/v1/addresses/create`, options).then(({ data }) => {
     return { data, options };
   });
 }
 
 const editAddressDetailsApi = (options) => {
-  return addressServiceInstance.post('/api/v1/addresses/edit', options).then(({ data }) => {
+  return axios.post(`${constants.CMS_API_URL}/api/v1/addresses/edit`, options).then(({ data }) => {
     return { data, options };
   });
 }
 
 const deleteAddressApi = (addrId) => {
-  return addressServiceInstance.delete('/api/v1/addresses/' + addrId).then(({ data }) => {
+  return axios.delete(`${constants.CMS_API_URL}/api/v1/addresses/` + addrId).then(({ data }) => {
     return { data, addrId }
   });
 }
 
 const makeDefaultAddressApi = (addrId) => {
-  return addressServiceInstance.put('/api/v1/addresses/default/' + addrId).then(({ data }) => {
+  return axios.put(`${constants.CMS_API_URL}/api/v1/addresses/default/` + addrId).then(({ data }) => {
     return { data, addrId }
   });
 }

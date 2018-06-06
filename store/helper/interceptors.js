@@ -3,34 +3,35 @@ import { init as initApm } from 'elastic-apm-js-base';
 import fp, * as _ from 'lodash/fp';
 import axios from 'axios';
 import getConfig from 'next/config'
+import apmConfig from '../../apm.config';
+import constants from './constants';
+import { pimServiceInstance } from './services';
+
 const config = getConfig()
 const env = config.publicRuntimeConfig.env;
 
-import {
-  searchServiceInstance,
-  listingServiceInstance,
-  addressServiceInstance,
-  pimServiceInstance,
-  catalogServiceInstance,
-  authServiceInstance,
-  paymentServiceInstance,
-  transacationRedirectUrlInstance,
-  orderServiceInstance,
-  cartServiceInstance,
-  camServiceInstance
-} from './services';
+let apm;
+if (env !== 'local'){
+  apm = initApm({
+    serviceName: apmConfig.serviceName,
+    serverUrl: apmConfig.serverUrl,
+  });
+}
 
-import apmConfig from '../../apm.config';
-import constants from './constants';
-
-const apm = initApm({
-  serviceName: apmConfig.serviceName,
-  serverUrl: apmConfig.serverUrl,
-});
-
-const configModifer = () => (config) => {
-  config.headers = { "x-country-code": country(), "x-session-id": sessionId(), "x-access-token": authToken(), "x-language": 'en' };
-  return config;
+const configModifer = (config) => {
+  const newheaders = _.reduce.convert({ 'cap': false })((acc, value, key) => { 
+    if(value) {
+      acc[key] = value;
+    }
+    return acc;
+  }, {}, { "x-country-code": country(), "x-session-id": sessionId(), "x-access-token": authToken(), "x-language": 'en' });
+  return {
+    ...config,
+    headers: {
+      ...config.headers,
+      ...newheaders
+    }
+  };
 }
 
 // Generate UUID/random number
@@ -92,17 +93,23 @@ export const country = () => {
   }
 }
 
-const apmReqInterceptor = (serviceName) => (config) => {
-  return config;
+const getServiceName = (url) => {
+  return Object.keys(constants)[_.findIndex((serviceUrl) => {
+    return url.includes(serviceUrl);
+  }, Object.values(constants))];
+}
+
+const apmReqInterceptor = (config) => {
+  const serviceName = getServiceName(config.url);
   if(env === 'local') return config;
   config.transaction = apm.startTransaction(`${serviceName} Service`, 'custom')
   config.httpSpan = config.transaction ? config.transaction.startSpan(`FETCH ${JSON.stringify(config)}`, 'http') : null;
   return config;
 }
 
-const apmResInterceptor = (serviceName) => (response) => {
-  return response;
-  if(env === 'local') return config;
+const apmResInterceptor = (response) => {
+  const serviceName = getServiceName(response.config.url);
+  if (env === 'local') return response;
   const { httpSpan, transaction } = response.config;
   httpSpan && httpSpan.end();
   transaction && transaction.end();
@@ -113,12 +120,17 @@ const errorInterceptor = (err) => {
   try {
     if (err.response && err.response.status == '401') {
       const auth = JSON.parse(localStorage.getItem('auth'));
-      axios.post(`${constants.AUTH_API_URL}/api/v1/refresh`, {
+      return axios.post(`${constants.AUTH_API_URL}/api/v1/refresh`, {
         'auth_version': 'V1',
         'refresh_token': auth.refresh_token
       }).then((res) => {
         auth.access_token = res.data.access_token
         localStorage.setItem('auth', JSON.stringify(auth));
+        return axios(err.config);
+      }).catch((err) => {
+        alert('You are logged out, Login and try again');
+        localStorage.removeItem('auth');
+        location.reload();
       });
     }
   } catch (e) {
@@ -127,23 +139,10 @@ const errorInterceptor = (err) => {
   return Promise.reject(err);
 }
 
-searchServiceInstance.interceptors.request.use(_.compose(apmReqInterceptor('SEARCH')));
-searchServiceInstance.interceptors.response.use(_.compose(apmResInterceptor('SEARCH')), _.compose(errorInterceptor));
-
-listingServiceInstance.interceptors.request.use(_.compose(apmReqInterceptor('LISTING')));
-listingServiceInstance.interceptors.response.use(_.compose(apmResInterceptor('LISTING')), _.compose(errorInterceptor));
-
-catalogServiceInstance.interceptors.request.use(_.compose(apmReqInterceptor('CATALOG')));
-catalogServiceInstance.interceptors.response.use(_.compose(apmResInterceptor('CATALOG')), _.compose(errorInterceptor));
-
-authServiceInstance.interceptors.request.use(_.compose(apmReqInterceptor('AUTH')));
-authServiceInstance.interceptors.response.use(_.compose(apmResInterceptor('AUTH')), _.compose(errorInterceptor));
-
-transacationRedirectUrlInstance.interceptors.request.use(_.compose(apmReqInterceptor('AUTH')));
-transacationRedirectUrlInstance.interceptors.response.use(_.compose(apmResInterceptor('AUTH')), _.compose(errorInterceptor));
+axios.interceptors.request.use(_.compose(apmReqInterceptor, configModifer));
+axios.interceptors.response.use(_.compose(apmResInterceptor), _.compose(errorInterceptor));
 
 pimServiceInstance.interceptors.request.use(_.compose(
-  apmReqInterceptor('PIM'),
   (config) => {
     const tenantId = '5ab0f832a206e8419416f74f';
     const key = 'lcjkxcjzlxcko45';
@@ -158,32 +157,5 @@ pimServiceInstance.interceptors.request.use(_.compose(
     return copyConfig;
   }
 ));
-pimServiceInstance.interceptors.response.use(_.compose(apmResInterceptor('PIM'))), _.compose(errorInterceptor);
-
-addressServiceInstance.interceptors.request.use(_.compose(
-  apmReqInterceptor('ADDRESS'), configModifer()
-));
-addressServiceInstance.interceptors.response.use(_.compose(apmResInterceptor('ADDRESS')), _.compose(errorInterceptor))
-
-orderServiceInstance.interceptors.request.use(_.compose(
-  apmReqInterceptor('ORDER'), configModifer()
-));
-orderServiceInstance.interceptors.response.use(_.compose(apmResInterceptor('ORDER')), _.compose(errorInterceptor))
-
-paymentServiceInstance.interceptors.request.use(_.compose(
-  apmReqInterceptor('PAYMENT'), configModifer()
-));
-paymentServiceInstance.interceptors.response.use(_.compose(apmResInterceptor('PAYMENT')), _.compose(errorInterceptor))
-
-cartServiceInstance.interceptors.request.use(_.compose(
-  apmReqInterceptor('CART'), configModifer()
-));
-cartServiceInstance.interceptors.response.use(_.compose(apmResInterceptor('CART')), _.compose(errorInterceptor))
-
-camServiceInstance.interceptors.request.use(_.compose(
-  apmReqInterceptor('CAM'), configModifer()
-));
-camServiceInstance.interceptors.response.use(_.compose(apmResInterceptor('CAM')), _.compose(errorInterceptor))
-
 
 export default {};

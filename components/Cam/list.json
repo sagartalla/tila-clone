@@ -1,70 +1,70 @@
 [{
 	"data": [{
-			"icon": "icon",
-			"display": "My Orders",
-			"count": "1",
-			"href": "/cam/orders"
-		}, {
-			"icon": "icon",
-			"display": "Orders shared with me",
-			"count": "1"
-		},
-		{
-			"icon": "icon",
-			"display": "Wishlist",
-			"count": "1"
-		}
-	]
-}, {
-	"data": [{
-		"icon": "icon",
-		"display": "Shipping Address",
+		"icon": "icons/my-orders",
+		"display": "My Orders",
 		"count": "1",
-		"href": "/cam/address"
+		"href": "/cam/orders"
 	}, {
-		"icon": "icon",
-		"display": "Credit Cards,Vouchers and Reward Points",
-		"count": "1"
+		"icon": "icons/orders-shared",
+		"display": "Orders shared with me",
+		"count": "1",
+		"href": "/cam/orders"
 	}, {
-		"icon": "icon",
-		"display": "Messages",
-		"count": "1"
-	}, {
-		"icon": "icon",
-		"display": "Notification",
-		"count": "12"
+		"icon": "icons/my-wishlist",
+		"display": "Wishlist",
+		"count": "1",
+		"href": "#"
 	}]
 }, {
 	"data": [{
-		"icon": "icon",
-		"display": "My reviews and Ratings",
-		"count": "1"
-	}, {
-		"icon": "icon",
+		"icon": "icons/shipping",
+		"display": "Shipping Address",
+		"href": "/cam/address"
+	},{
+		"icon": "icons/creditcards",
+		"display": "Credit Cards, Vouchers & Reward points",
+		"href": "#"
+	},{
+		"icon": "icons/messages",
+		"display": "Messages",
+		"count": "13",
+		"href": "#"
+	},{
+		"icon": "icons/notifications",
+		"display": "Notifications",
+		"href": "#"
+	}]
+}, {
+	"data": [{
+		"icon": "icons/my-reviews",
+		"display": "My reviews & ratings",
+		"href": "#"
+	},{
+		"icon": "icons/gift-registry",
 		"display": "Gift Registry",
-		"count": "1"
-	}, {
-		"icon": "icon",
+		"href": "#"
+	},{
+		"icon": "icons/my-coupons",
 		"display": "My Coupons",
-		"count": "1"
-	}, {
-		"icon": "icon",
+		"count": "13",
+		"href": "#"
+	},{
+		"icon": "icons/subscriptions",
 		"display": "Subscriptions",
-		"count": "12"
+		"href": "#"
 	}]
-},{
- "data": [{
-		"icon": "icon",
+}, {
+	"data": [{
+		"icon": "icons/preferences",
 		"display": "Preferences",
-		"count": "1"
-	}, {
-		"icon": "icon",
+		"href": "#"
+	},{
+		"icon": "icons/refer",
 		"display": "Refer/Invite Friends",
-		"count": "1"
-	}, {
-		"icon": "icon",
-		"display": "Help and Support",
-		"count": "1"
+		"href": "#"
+	},{
+		"icon": "icons/help",
+		"display": "Help & Support",
+		"href": "#"
 	}]
-}
-]
+}]
