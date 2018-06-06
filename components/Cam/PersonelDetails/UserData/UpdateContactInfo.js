@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Modal, Row, Col } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 
 import Btn from '../../../common/Button';
 import Input from '../../../common/Input';
@@ -22,7 +22,7 @@ const UpdateContactInfo = props => {
   if (element == "email") {
     title = "Change Email Address";
     modalComponent = (
-      <Modal.Body>
+      <div>
         <Row>
           <Col xs={4} md={4} />
           <Col xs={4} md={4}>
@@ -53,13 +53,13 @@ const UpdateContactInfo = props => {
             <Btn btnWidth="95%" backGround="#034e94" color="#fff" btnText="Save Email Id" BtnClickHandler={handleAction} />
           </Col>
         </Row>
-      </Modal.Body>
+      </div>
     );
   }
   else if (element == "password") {
     title = "Change Password";
     modalComponent = (
-      <Modal.Body>
+      <div>
         <Row>
           <Col xs={4} md={4} />
           <Col xs={4} md={4}>
@@ -91,13 +91,13 @@ const UpdateContactInfo = props => {
             <Btn btnWidth="95%" backGround="#034e94" color="#fff" btnText="Change Password" BtnClickHandler={handleAction} />
           </Col>
         </Row>
-      </Modal.Body>
+      </div>
     );
   }
   else if (element == "phone") {
     title = "Edit Phone Number";
     modalComponent = (
-      <Modal.Body>
+      <div>
         <Row>
           <Col xs={4} md={4} />
           <Col xs={4} md={4}>
@@ -127,19 +127,24 @@ const UpdateContactInfo = props => {
             <Btn btnWidth="95%" backGround="#034e94" color="#fff" btnText="Verify Mobile Number" BtnClickHandler={handleAction} />
           </Col>
         </Row>
-      </Modal.Body>
+      </div>
     );
   }
   
 
   return (
-    <div className="hello">
-      <Modal show={show} onHide={handleClose} className={commonStyle['editProfileModal']}>
-        <Modal.Header closeButton>
-          <Modal.Title>{title}</Modal.Title>
-        </Modal.Header>
+    <div>
+      <div show={show} className={commonStyle['editProfileModal']}>
+        <Row>
+          <Col xs={11} md={11}>
+          <h3>{title}</h3>
+          </Col>
+          <Col xs={1} md={1} onClick={handleClose}><a>
+          X</a>
+          </Col>
+        </Row>
         {modalComponent}
-      </Modal>
+      </div>
     </div>
   );
 

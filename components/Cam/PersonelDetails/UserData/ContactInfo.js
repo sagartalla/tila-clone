@@ -197,9 +197,14 @@ class ContactInfo extends React.Component {
           </Col>
 
         </Row>
+       
         <Row>
-          <Col md={8} />
-          <Col md={4} xs={12}>
+          <Col xs={12} md={12}><a>Deactivate account</a></Col>
+        </Row>
+        <div className={ show ? `${commonStyle['modalContainer']} ${commonStyle['show']}` : `${commonStyle['modalContainer']} ${commonStyle['hide']}`}>
+          <div className={ `${commonStyle['disabled']}`}>
+          </div>
+          <div className={ `${commonStyle['modal']}`}>
             <UpdateContactInfo
               show={show}
               handleClose={this.handleClose}
@@ -216,11 +221,8 @@ class ContactInfo extends React.Component {
               handleResendOtp={this.handleResendOtp}
               handleRePasswordBlur= {this.handleRePasswordBlur}
             />
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={12} md={12}><a>Deactivate account</a></Col>
-        </Row>
+          </div>  
+        </div>
       </div>
     );
   }
