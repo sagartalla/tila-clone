@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
 import RightBar from '../../common/CartAndPaymentRightBar';
@@ -13,9 +13,8 @@ const CartBody = props => {
   const cnt = flag > 0 ? items.length : 0;
   return (
     <div className={styles['cart-container']}>
-      {
-        showBlocker ? <Blocker /> : ''
-      }
+      
+       <Blocker /> 
       <Row>
         <Col md={12} sm={12} xs={12}>
           <h4 className={`${styles['mt-20']} ${styles['mb-20']} ${styles['fontW300']}}`}>
@@ -33,11 +32,13 @@ const CartBody = props => {
                     const { item_id, img, name, price, cur, quantity, max_limit, inventory, brand_name } = item;
                     return (
                       <div key={index} className={`${styles['mb-20']} ${styles['box']}`}>
+                         {
+                            max_limit == quantity ?
+                              <div className={`${styles['p-10-22']} ${styles['alrt-message-bg']} ${styles['light-gry-clr']} ${styles['alrt-message-part']} ${styles['thick-border-btm']}`}><span >Max per order quantity of this item reached</span></div>
+                            : ""
+                          }
                         <div className={`${styles['cart-box']} ${styles['p-22']}`}>
                           <Row>
-                            <Col md={12}>
-                              <span className={styles['error-msg']}>{error ? error : ''}</span>
-                            </Col>
                             <Col md={2}>
                               <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles['pb-15']}`}><img className={styles['img']} src={img} /></div>
                               <div className={`${styles['flex-center']} ${styles['justify-center']}`}>
@@ -49,7 +50,7 @@ const CartBody = props => {
                                 <span className={`${styles['quantity-title']} ${styles['border-radius2']}`}>{quantity}</span>
                                 {
                                   max_limit == quantity ?
-                                    <Fragment><span> X </span> <span>Max per order quantity of this item reached</span></Fragment>
+                                    <span className={`${styles['minus-disable']} ${styles['fs-20']} ${styles['flex-center']} ${styles['justify-center']}`}> + </span>
                                     : <span data-id={item_id} onClick={increaseItemCnt} className={`${styles['plus']} ${styles['flex-center']} ${styles['justify-center']} ${styles['default-shadow']} ${styles['fs-18']} ${styles['pointer']}`}>  + </span>
                                 }
                               </div>
