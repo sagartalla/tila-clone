@@ -19,9 +19,18 @@ class Cam extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tab: "profile"
+      tab: "profile",
+      userInfo:{}
     };
   }
+
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.userInfo){
+   this.setState({
+    userInfo: nextProps.userInfo
+   })
+  }
+}
 
   componentDidMount() {
     const { tabDetails } = this.props;
@@ -34,8 +43,7 @@ class Cam extends Component {
   }
 
   render() {
-    const { tab } = this.state;
-    let userInfo = {};
+    const { tab, userInfo } = this.state;
     const camComponent = ((tabName) => {
       switch (tabName) {
         case 'orders':
@@ -43,10 +51,8 @@ class Cam extends Component {
         case 'address':
           return <ShippingAddress />;
         case 'profile':
-        userInfo = this.props.userInfo;
       return (<UserInfo {...userInfo}/>);
        default:
-       userInfo = this.props.userInfo;
       return (<UserInfo {...userInfo}/>);
       }
     })(tab);

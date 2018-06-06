@@ -3,6 +3,18 @@ const getUserInfo = (store) => {
     let contactInfo = {};
     if (store.personalDetailsReducer.data.contactInfo != "" && store.personalDetailsReducer.data.contactInfo) {
       contactInfo = store.personalDetailsReducer.data.contactInfo;
+      if(contactInfo.email)
+      {
+        let email= contactInfo.email;
+        email= (email.split("@")[0]).substring(0,1) + ((email.split("@")[0]).substring(1)).replace(/./g, "x")+"@"+(((email.split("@")[1]).split(".")[0]).substring(0,1))+(((email.split("@")[1]).split(".")[0]).substring(1)).replace(/./g, "x")+"."+((email.split("@")[1]).split(".")[1]) ;
+        contactInfo.mailId=email;
+      }
+      if(contactInfo.mobile_no)
+      {
+        let phoneNum=contactInfo.mobile_no;
+        phoneNum= phoneNum.substring(0,2)+ (phoneNum.substring(2, phoneNum.length-2)).replace(/./g, "x")+ phoneNum.slice(-2);
+        contactInfo.phoneNum=phoneNum;
+      }
       if (contactInfo.pwd_updated_at) {
         const lastUpdated = contactInfo.pwd_updated_at.split('T')[0];
         const today = new Date();
@@ -22,10 +34,10 @@ const getUserInfo = (store) => {
           diff = (diff == 365) ? "1" : Math.ceil(timeDiff / (1000 * 3600 * 24 * 30 * 365));
           msg = (diff == 365) ? " year back" : " years back";;
         }
-        contactInfo.lastUpdated = diff + msg;
+        contactInfo.lastUpdated = "Last updated "+ diff + msg;
       }
       else
-        contactInfo.lastUpdated = 'not available';
+        contactInfo.lastUpdated = 'Not Available';
 
     }
     const personalInfo = store.personalDetailsReducer.data.personalInfo != "" ? store.personalDetailsReducer.data.personalInfo : {};
@@ -41,8 +53,15 @@ const getPasswordResetStatus = (store) => {
   return {};
 }
 
+const getEditPersonalInfoStatus = (store) => {
+  if (store.personalDetailsReducer.data.personalInfoStatus) {
+    return store.personalDetailsReducer.data.personalInfoStatus;
+  }
+  return {};
+}
+
 const getErrorMessege = (store) => {
   return store.personalDetailsReducer.error ? store.personalDetailsReducer.error : "";
 }
 
-export { getUserInfo, getPasswordResetStatus, getErrorMessege };
+export { getUserInfo, getPasswordResetStatus, getErrorMessege, getEditPersonalInfoStatus };

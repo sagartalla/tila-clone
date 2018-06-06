@@ -18,5 +18,16 @@ const changePassword = (body) => {
   })
 };
 
+const editPersonalInfo = (body) => {
+  return camServiceInstance.put('/api/v1/user/account/edit', body).then(({ data }) => {
+    return camServiceInstance.get('/api/v1/user/account/details').then(userInfoResult=> [data,userInfoResult]);
+  }).then(([personalInfoStatus, userInfoResult]) =>{
+    return {
+      personalInfo:userInfoResult.data,
+      personalInfoStatus}
+  });
+}
 
-export default { getUserProfileInfo, changePassword };
+
+
+export default { getUserProfileInfo, changePassword , editPersonalInfo};

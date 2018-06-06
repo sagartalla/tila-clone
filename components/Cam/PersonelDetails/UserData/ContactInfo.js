@@ -7,9 +7,7 @@ import { bindActionCreators } from 'redux';
 import { actionCreators, selectors } from '../../../../store/cam/personalDetails';
 
 import UpdateContactInfo from './UpdateContactInfo';
-import Input from '../../Common/Input';
-
-import CommonStyle from '../../cam.styl';
+import commonStyle from '../../cam.styl';
 
 
 class ContactInfo extends React.Component {
@@ -144,55 +142,55 @@ class ContactInfo extends React.Component {
   }
 
   render() {
-    const { email, mobile_no, lastUpdated } = this.props.contactInfo ? this.props.contactInfo : { email: "", mobile_no: "", lastUpdated: "not available" };
+    const { mailId, email, mobile_no, lastUpdated, phoneNum } = this.props.contactInfo ? this.props.contactInfo : { email: "", mobile_no: "", lastUpdated: "not available" };
     const { element, value, show, authValue, rePassword, error } = this.state;
     return (
-      <div className={CommonStyle['base-padding']}>
+      <div className={`${commonStyle['ml-15']} ${commonStyle['mt-1o']} ${commonStyle['mb-10']}`}>
         <Row>
           <Col xs={12} md={12}>
             <h6>Contact Information</h6>
           </Col>
         </Row>
-        <Row className={`${CommonStyle['bb-dashed']} ${CommonStyle['pb-5']} ${CommonStyle['pt-5']}`}>
-          <Col xs={12} md={3} className={`${CommonStyle['pl-15']} ${CommonStyle['pr-0']} ${CommonStyle['m-5']}`}>
+        <Row className={`${commonStyle['bb-dashed']} ${commonStyle['pb-5']} ${commonStyle['pt-5']}`}>
+          <Col xs={12} md={3} className={`${commonStyle['pl-0']} ${commonStyle['pr-0']} ${commonStyle['m-5']}`}>
             <span>Email</span>
           </Col>
-          <Col xs={12} md={8} className={`${CommonStyle['p-0']} ${CommonStyle['m-5']}`}>
+          <Col xs={12} md={8} className={`${commonStyle['p-0']} ${commonStyle['m-5']}`}>
             <Col xs={6} md={9}>
-              <span>{email}</span>
+              <span>{mailId}</span>
             </Col>
             <Col xs={6} md={3}>
-              <span className={`${CommonStyle['float-right']} ${CommonStyle['p-0']} ${CommonStyle['ml-5']}`}>
+              <span className={`${commonStyle['float-r']} ${commonStyle['p-0']} ${commonStyle['ml-5']}`}>
                 <a onClick={() => { this.handleShow(`email`, email) }}>Edit</a>
               </span>
             </Col>
           </Col>
         </Row>
-        <Row className={`${CommonStyle['bb-dashed']} ${CommonStyle['pb-5']} ${CommonStyle['pt-5']}`}>
-          <Col xs={12} md={3} className={`${CommonStyle['pl-15']} ${CommonStyle['pr-0']} ${CommonStyle['m-5']}`}>
+        <Row className={`${commonStyle['bb-dashed']} ${commonStyle['pb-5']} ${commonStyle['pt-5']}`}>
+          <Col xs={12} md={3} className={`${commonStyle['pl-0']} ${commonStyle['pr-0']} ${commonStyle['m-5']}`}>
             <span>Password</span>
           </Col>
-          <Col xs={12} md={8} className={`${CommonStyle['p-0']} ${CommonStyle['m-5']}`}>
+          <Col xs={12} md={8} className={`${commonStyle['p-0']} ${commonStyle['m-5']}`}>
             <Col xs={6} md={9}>
-              <span>Last updated {lastUpdated}</span>
+              <span> {lastUpdated}</span>
             </Col>
             <Col xs={6} md={3}>
-              <span className={`${CommonStyle['float-right']} ${CommonStyle['p-0']} ${CommonStyle['ml-5']}`}>
+              <span className={`${commonStyle['float-r']} ${commonStyle['p-0']} ${commonStyle['ml-5']}`}>
                 <a onClick={() => { this.handleShow(`password`, ``) }}>Edit</a>
               </span>
             </Col>
           </Col>
         </Row>
-        <Row className={`${CommonStyle['bb-dashed']} ${CommonStyle['pb-5']} ${CommonStyle['pt-5']}`}>
-          <Col xs={12} md={3} className={`${CommonStyle['pl-15']} ${CommonStyle['pr-0']} ${CommonStyle['m-5']}`}>
+        <Row className={`${commonStyle['bb-dashed']} ${commonStyle['pb-5']} ${commonStyle['pt-5']}`}>
+          <Col xs={12} md={3} className={`${commonStyle['pl-0']} ${commonStyle['pr-0']} ${commonStyle['m-5']}`}>
             <span>Phone Number</span>
           </Col>
-          <Col xs={12} md={8} className={`${CommonStyle['p-0']} ${CommonStyle['m-5']}`}>
+          <Col xs={12} md={8} className={`${commonStyle['p-0']} ${commonStyle['m-5']}`}>
             <Col xs={6} md={9}>
-              <span>{mobile_no}</span>
+              <span>{phoneNum}</span>
             </Col>
             <Col xs={6} md={3}>
-              <span className={`${CommonStyle['float-right']} ${CommonStyle['p-0']} ${CommonStyle['ml-5']}`}>
+              <span className={`${commonStyle['float-r']} ${commonStyle['p-0']} ${commonStyle['ml-5']}`}>
                 <a onClick={() => { this.handleShow(`phone`, mobile_no) }}>Edit</a>
               </span>
             </Col>
@@ -221,7 +219,7 @@ class ContactInfo extends React.Component {
           </Col>
         </Row>
         <Row>
-          <Col xs={12} md={12} className={CommonStyle['base-margin']}><a>Deactivate account</a></Col>
+          <Col xs={12} md={12}><a>Deactivate account</a></Col>
         </Row>
       </div>
     );
@@ -244,8 +242,8 @@ const mapDispatchToProps = (dispatch) =>
 ContactInfo.propTypes = {
   contactInfo: PropTypes.object,
   passwordResetStatus: PropTypes.object,
-  getUserProfileInfo: PropTypes.func,
-  errorMessege: PropTypes.string
+  errorMessege: PropTypes.string,
+  changePassword: PropTypes.func
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactInfo);

@@ -29,12 +29,38 @@ const personalDetailsReducer = typeToReducer({
       return Object.assign({}, state, { ui: { loading: true } });
     },
     FULFILLED: (state, action) => {
-      const passResetStatus = {'passResetStatus': action.payload.data}
+      const passResetStatus = {'passResetStatus': action.payload.editResult}
       const newState = {
         ...state,
         data: {
           ...state.data,
           ...passResetStatus,
+        },
+        ui: {
+          loading: true
+        }
+      }
+      return newState;
+    },
+    REJECTED: (state, action) => {
+      return Object.assign({}, state, { 
+        error: action.payload.response.data.message, 
+        data: {
+        ...state.data
+        },
+        ui: { loading: false } })
+    }
+  },
+  [actions.EDIT_PERSONAL_INFO]: {
+    PENDING: state => {
+      return Object.assign({}, state, { ui: { loading: true } });
+    },
+    FULFILLED: (state, action) => {
+      const newState = {
+        ...state,
+        data: {
+          ...state.data,
+          ...action.payload,
         },
         ui: {
           loading: true

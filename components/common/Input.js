@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormControl } from 'react-bootstrap';
 
-import styles from './common.styl';
+import styles from './rightBar.styl';
 
 
 const Input = props => {
