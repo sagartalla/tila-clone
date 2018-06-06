@@ -22,7 +22,7 @@ const TitleInfo = ({ brand, title, rating, reviews, price, originalPrice, discou
   return (
     <div className={`${styles['pt-15']} ${styles['pb-10']} ${styles['border-b']}`}>
       <div className={`${styles['fontW600']} ${styles['lgt-blue']}`}>{brand}</div>
-      <div className={`${styles['f-20']} ${styles['fontW600']} ${styles['black-color']}`}>{title}</div>
+      <div className={`${styles['fs-20']} ${styles['fontW600']} ${styles['black-color']}`}>{title}</div>
       <div className={`${styles['flex']} ${styles['fs-12']} ${styles['lgt-blue']}`}>
         <div className={`${styles['ti-rating-wrap']} ${styles['pr-5']}`}>
           ({rating.rating}) {rating.count}
@@ -31,7 +31,7 @@ const TitleInfo = ({ brand, title, rating, reviews, price, originalPrice, discou
           {reviews.count} Reviews
         </div>
       </div>
-      <div className={`${styles['f-18']} ${styles['fontW600']} ${styles['black-color']}`}>
+      <div className={`${styles['fs-18']} ${styles['fontW600']} ${styles['black-color']}`}>
         <div className={styles['ti-current-price']}>{price}</div>
         <div className={styles['ti-original-price']}>{originalPrice}</div>
         <div className={styles['ti-discount-percent']}>{discountPercent}</div>

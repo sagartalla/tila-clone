@@ -6,90 +6,84 @@
 
   .input
     border none
-    border-bottom: 1px solid #f1f1f1
+    border-bottom 1px solid light-gray-color
     box-shadow none
     border-radius 0
     padding-left 0
     margin-bottom 10px
     width 100%
     height 32px
-    outline: none 
-  
-
-  .flex-center
-    display flex
-    align-items center
+    outline none 
 
   .flex-wrap
     flex-wrap wrap
 
   .address-card-new
-    padding: 20px 10px
+    padding 20px 10px
     min-height 130px
     cursor pointer
   
   .addr-header
-    border-bottom 1px solid #f1f1f1
+    border-bottom 1px solid light-gray-color
     padding 25px 30px
     i
       font-size 4rem
-      color #ccc
-    h1
-      font-size 16px
-      margin 0
+      color light-gray
     small 
-      color #999
+      color dark-gray
   
   .address-body
     .address-card
-      border 1px solid #f1f1f1
+      border 1px solid light-gray-color
       margin-bottom 20px
       border-radius 4px
-      color #666
+      color base-font
       font-size 11px
+      transition-timing-function ease-in-out;
+      &:hover
+        box-shadow 0 0 12px 0 rgba(0,0,0,0.1)
       .address-card-head
-        border-bottom 1px dashed #f1f1f1
-        padding 5px 10px
-        input
-          display inline
-          width 25px
+        border-bottom 1px dashed light-gray-color
+        padding 9px 10px
       .address-card-body
-        padding 10px
+        padding 14px
         address
-          color #999
+          color dark-gray
           margin-bottom 10px
         .address-card-phone
           margin 0
           font-weight 500
       .address-card-actions
-        border-top: 1px solid #f1f1f1
-        padding 5px 10px
+        border-top 1px solid light-gray-color
+        padding 9px 10px
         cursor pointer
+      &.address-selected
+        border 1px solid parrot-color
 
   .addr-new-container
-    border-top 2px dashed #f1f1f1
-    padding: 10px 25px
+    border-top 2px dashed light-gray-color
+    padding 10px 25px
     h1
       font-size 16px
       margin-bottom 20px
 
     .map
       height 200px
-      background-color #222
+      background-color base-font
       margin-bottom 20px
       .map-input        
-        box-sizing: border-box
-        border: 1px solid transparent
-        width: 400px
-        height: 32px
-        margin: 10px
-        padding: 0 12px
-        border-radius: 3px
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3)
-        font-size: 14px
-        outline: none
-        text-overflow:  ellipses
+        box-sizing border-box
+        border 1px solid transparent
+        width 400px
+        height 32px
+        margin 10px
+        padding 0 12px
+        border-radius 3px
+        box-shadow 0 2px 6px rgba(0, 0, 0, 0.3)
+        font-size 14px
+        outline none
+        text-overflow  ellipses
             
 
     .pref-loc
-      padding: 10px 0
+      padding 10px 0

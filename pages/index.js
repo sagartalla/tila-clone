@@ -12,7 +12,7 @@ import Search from '../components/Search';
 
 class SearchPage extends Base {
   static async getInitialProps({ store, isServer, query }) {
-    const { language, search, facets, category, subCategory } = query
+    const { language, search, facets, category, subCategory, isListed } = query
     const categoryTree = category === 'category'; //TODO need better way to identify category tree 
     //TODO SF-37 better handling of country
     const state = store.getState();
@@ -30,7 +30,7 @@ class SearchPage extends Base {
       facetFilters,
       pageNum: 1,
       fl: '*',
-      isListed: true,
+      isListed: isListed === 'true',
       categoryTree,
     }))
     return { isServer };
