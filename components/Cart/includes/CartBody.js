@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {GENERAL, MESSAGES} from '../../../lang/en/';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
 import RightBar from '../../common/CartAndPaymentRightBar';
@@ -11,6 +12,7 @@ const CartBody = props => {
   const { items, error } = data;
   const flag = data && items && items.length;
   const cnt = flag > 0 ? items.length : 0;
+  const {CART_PAGE} = GENERAL;
   return (
     <div className={styles['cart-container']}>
       {
@@ -77,7 +79,7 @@ const CartBody = props => {
                               <span className={`${styles['fontW600']} ${styles['thick-red']} ${styles['pr-20']}`}>Only {inventory} units left</span>
                               : ''
                           }
-                          <span id={item_id} onClick={removeCartItem}>Remove</span>
+                          <span id={item_id} onClick={removeCartItem}>{CART_PAGE.REMOVE}</span>
                         </div>
                       </div>
                     )
@@ -88,7 +90,7 @@ const CartBody = props => {
             <Col md={3} sm={12} xs={12}>
               <div className={`${styles['box']} ${styles['p-22']}`}>
                 <div className={styles['t-c']}>
-                  <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles['fs-18']}`} onClick={checkoutBtnHandler}>Secure Checkout</button>
+                  <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles['fs-18']}`} onClick={checkoutBtnHandler}>{CART_PAGE.SECURE_CHECKOUT}</button>
                 </div>
                 <div>
                   <RightBar
