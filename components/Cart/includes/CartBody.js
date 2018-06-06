@@ -13,8 +13,9 @@ const CartBody = props => {
   const cnt = flag > 0 ? items.length : 0;
   return (
     <div className={styles['cart-container']}>
-      
-       <Blocker /> 
+      {
+        showBlocker ? <Blocker /> : ''
+      }
       <Row>
         <Col md={12} sm={12} xs={12}>
           <h4 className={`${styles['mt-20']} ${styles['mb-20']} ${styles['fontW300']}}`}>
