@@ -10,7 +10,7 @@ const Voucher = props => {
       <Grid>
         <Row>
           <Col md={12}>
-            {PAYMENT_PAGE}
+            {PAYMENT_PAGE.VOUCHER}
           </Col>
         </Row>
         <Row>
