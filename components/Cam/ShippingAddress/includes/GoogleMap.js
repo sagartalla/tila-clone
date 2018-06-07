@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { languageDefinations } from '../../../../utils/lang/';
 import _ from 'lodash';
 
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps";
@@ -8,6 +9,7 @@ import { SearchBox } from "react-google-maps/lib/components/places/SearchBox";
 import styles from '../address.styl';
 
 const MyGoogleMap = withScriptjs(withGoogleMap((props) => {
+  const { DELIVERY_ADDR_PAGE } = languageDefinations();
   return (
     <GoogleMap
       ref={props.onMapMounted}
@@ -24,7 +26,7 @@ const MyGoogleMap = withScriptjs(withGoogleMap((props) => {
       >
         <input
           type="text"
-          placeholder="Enter a location"
+          placeholder={DELIVERY_ADDR_PAGE.ENTER_LOC}
           className={styles['map-input']}
         />
       </SearchBox>

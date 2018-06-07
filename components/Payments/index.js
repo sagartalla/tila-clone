@@ -1,4 +1,5 @@
 import React from 'react';
+import { languageDefinations } from '../../utils/lang/';
 import Router from 'next/router';
 import PropTypes from 'prop-types';
 import { Grid, Row, Col } from 'react-bootstrap';
@@ -145,6 +146,7 @@ class Payments extends React.Component {
   render() {
     const { login, showTab, paymentConfigJson, signInLoader } = this.state;
     const { paymentOptions, defaultAddress, isLoggedIn, cartResults } = this.props;
+    const { PAYMENT_PAGE } = languageDefinations();
 
     return (
       <div className={styles['payment']}>
@@ -152,7 +154,7 @@ class Payments extends React.Component {
         <Grid>
           <Row>
             <Col xs={12} md={12} sm={12}>
-              <h4 className={`${styles['mt-32']} ${styles['mb-20']}`}>Secure Checkout</h4>
+              <h4 className={`${styles['mt-32']} ${styles['mb-20']}`}>{PAYMENT_PAGE.SECURE_CHECKOUT}</h4>
             </Col>
           </Row>
           <Row>
