@@ -1,21 +1,23 @@
 import React from 'react';
+import SVGCompoent from '../../common/SVGComponet';
 import { Grid, Row, Col } from 'react-bootstrap';
 
 import styles from '../payment.styl';
 
 const SignIn = props => (
-  <div className={`${styles['pb-20']} ${styles['pt-20']} ${styles['pl-40']} ${styles['pr-40']} ${styles['box']} ${styles['mb-20']}`}>
-    <Row className={`${props.configJson.done ? '' : 'hide'}`}>
+  <div className={`${styles['pb-15']} ${styles['pt-15']} ${styles['pl-34']} ${styles['pr-34']} ${styles['box']} ${styles['mb-20']} ${styles['relative']} ${styles['payment-signup']}`}>
+    <SVGCompoent clsName={`${styles['profile']}`} src="icons/profile/profile" />
+    <Row className={`${props.configJson.done ? '' : 'hide'} ${styles['flex-center']}`}>
       <Col md={8} sm={12} xs={12}>
         <h4 className={styles['m-0']}>Sign in</h4>
         <small>Sign in or sign up to continue</small>
       </Col>
       <Col md={4} sm={12} xs={12} className={styles['t-rt']}>
-        {props.login.username}
+        <span className={`${styles['light-gry-clr']} ${styles['fontW600']}`}>{props.login.username}</span>
       </Col>
     </Row>
 
-    <Row className={`${props.configJson.progress ? '' : 'hide'}`}>
+    <Row className={`${props.configJson.progress ? '' : 'hide'} ${styles['pb-5']} ${styles['pt-5']}`}>
       <Col md={4} sm={12} xs={12}>
         <h4 className={`${styles['mb-20']} ${styles['mt-0']} ${styles['light-gry-clr']}`}>Register</h4>
         <div className={`${styles['thin-border-right']} ${styles['social-icons-list']}`}>

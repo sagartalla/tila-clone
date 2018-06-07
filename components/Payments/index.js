@@ -180,18 +180,18 @@ class Payments extends React.Component {
                 configJson={paymentConfigJson.payment}
               />
             </Col>
-            <Col md={3} xs={12} sm={12}>
-              <Row>
+            <Col md={3} xs={12} sm={12} className={`${styles['pl-5']}`}>
+              <div>
                 {
                   cartResults && cartResults.total_price ?
-                    <div className={`${styles['box']} ${styles['box-space']}`}>
+                    <div className={`${styles['box']} ${styles['p-20']} ${styles['payment-summary']}`}>
                       <RightSideBar
                         data={cartResults}
                       />
                     </div>
                     : null
                 }
-              </Row>
+              </div>
             </Col>
           </Row>
         </Grid>
