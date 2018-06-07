@@ -13,13 +13,14 @@ const readURLParams = (name, url) => {
 
 export const languageDefinations = (() => {
   let obj = {};
-  if (readURLParams('language') == 'ar') {
-    const val = require('./ar');
-    obj = val.AR_KEYWORDS;
-  }
-  else {
-    const val = require('./en');
-    obj = val.EN_KEYWORDS;
+  switch (readURLParams('language')) {
+    case 'ar':
+      const ar = require('./ar');
+      obj = ar.AR_KEYWORDS;
+      break;
+    default:
+      const en = require('./en');
+      obj = en.EN_KEYWORDS;
   }
 
   return () => {
