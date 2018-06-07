@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {GENERAL, MESSAGES} from '../../../lang/en/';
+import { languageDefinations } from '../../../utils/lang/';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
 import RightBar from '../../common/CartAndPaymentRightBar';
@@ -12,7 +12,7 @@ const CartBody = props => {
   const { items, error } = data;
   const flag = data && items && items.length;
   const cnt = flag > 0 ? items.length : 0;
-  const {CART_PAGE} = GENERAL;
+  const { CART_PAGE } = languageDefinations();
   return (
     <div className={styles['cart-container']}>
       {
@@ -21,7 +21,8 @@ const CartBody = props => {
       <Row>
         <Col md={12} sm={12} xs={12}>
           <h4 className={`${styles['mt-20']} ${styles['mb-20']} ${styles['fontW300']}}`}>
-            {flag > 0 ? <span>{cnt} item{cnt > 1 ? 's' : ''} in cart</span> : <span>0 items in cart</span>}
+            {/* {flag > 0 ? <span>{cnt} item{cnt > 1 ? 's' : ''} in cart</span> : <span>0 {CART_PAGE.ITEMS_IN_CART}</span>} */}
+            <span>{cnt + ' ' + CART_PAGE.ITEMS_IN_CART}</span>
           </h4>
         </Col>
       </Row>
@@ -35,11 +36,11 @@ const CartBody = props => {
                     const { item_id, img, name, price, cur, quantity, max_limit, inventory, brand_name } = item;
                     return (
                       <div key={index} className={`${styles['mb-20']} ${styles['box']}`}>
-                         {
-                            max_limit == quantity ?
-                              <div className={`${styles['p-10-22']} ${styles['alrt-message-bg']} ${styles['light-gry-clr']} ${styles['alrt-message-part']} ${styles['thick-border-btm']}`}><span >Max per order quantity of this item reached</span></div>
+                        {
+                          max_limit == quantity ?
+                            <div className={`${styles['p-10-22']} ${styles['alrt-message-bg']} ${styles['light-gry-clr']} ${styles['alrt-message-part']} ${styles['thick-border-btm']}`}><span>{CART_PAGE.MAX_PER_ORDER}</span></div>
                             : ""
-                          }
+                        }
                         <div className={`${styles['cart-box']} ${styles['p-22']}`}>
                           <Row>
                             <Col md={2}>
@@ -76,7 +77,7 @@ const CartBody = props => {
                         <div className={`${styles['cart-box-btm']} ${styles['']} ${styles['p-14-22']}`}>
                           {
                             inventory <= 5 ?
-                              <span className={`${styles['fontW600']} ${styles['thick-red']} ${styles['pr-20']}`}>Only {inventory} units left</span>
+                              <span className={`${styles['fontW600']} ${styles['thick-red']} ${styles['pr-20']}`}>{CART_PAGE.ONLY + ' ' + inventory + ' ' + CART_PAGE.UNITS_LEFT} </span>
                               : ''
                           }
                           <span id={item_id} onClick={removeCartItem}>{CART_PAGE.REMOVE}</span>
