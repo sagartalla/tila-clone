@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import Order from './includes/Order';
-
+import OrderIssueWidget from '../../Order/includes/OrderIssueWidget';
 import { selectors, actionCreators } from '../../../store/cam/orders';
 
 import styles from './orders.styl';
@@ -17,7 +17,8 @@ class Orders extends Component {
   render() {
     const { ordersData } = this.props;
     return (
-      <div className={styles['orders-container']}>
+      <div>
+        <div className={styles['orders-container']}>
         {
           ordersData.length 
           ?
@@ -25,6 +26,8 @@ class Orders extends Component {
           :
           <div className={`${styles['box']} ${styles['mt-20']} ${styles['mb-20']} ${styles['p-20']}`}>No order history</div>
         }
+        </div>
+        <OrderIssueWidget />
       </div>
     );
   }

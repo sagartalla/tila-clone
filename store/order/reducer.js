@@ -7,9 +7,12 @@ const initialState = {
     },
     data: {
 			orderDetails: {},
-			orderIssue: {},
+			orderIssue: {
+        reasons: [],
+        cancelStatus: {},
+      },
     },
-    error: {},
+    error: '',
 };
 
 const productReducer = typeToReducer({
@@ -26,7 +29,7 @@ const productReducer = typeToReducer({
             ...action.payload.data
           }
         }, 
-        ui: { loading: true } 
+        ui: { loading: false } 
       });
     },
     REJECTED: (state, action) => {
@@ -82,6 +85,60 @@ const productReducer = typeToReducer({
         orderIssue: initialState.data.orderIssue
       }
     }
+  },
+  [actions.GET_REASONS]: {
+    PENDING: state => {
+      return Object.assign({}, state, { ui: { loading: true } });
+    },
+    FULFILLED: (state, action) => {
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          orderIssue: {
+            ...state.data.orderIssue,
+            reasons: action.payload.data,
+          }
+        },
+        ui: { loading: false } 
+      };
+    },
+    REJECTED: (state, action) => {
+      return Object.assign({}, state, { error: action.payload.message, ui: { loading: false } })
+    },
+  },
+  [actions.SET_REASON]: (state, action) => {
+    return {
+      ...state,
+      data: {
+        ...state.data,
+        orderIssue: {
+          ...state.data.orderIssue,
+          selectedReasons: action.payload.data,
+        }
+      }
+    }
+  },
+  [actions.SUBMIT_CANCEL_REQUEST]: {
+    PENDING: state => {
+      return Object.assign({}, state, { ui: { loading: true } });
+    },
+    FULFILLED: (state, action) => {
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          orderIssue: {
+            ...state.data.orderIssue,
+            cancelStatus: action.payload.data
+          }
+        },
+        ui: { loading: false } 
+      };
+    },
+    REJECTED: (state, action) => {
+      return Object.assign({}, state, { error: action.payload.message, ui: { loading: false } })
+    },
   }
 }, initialState);
 

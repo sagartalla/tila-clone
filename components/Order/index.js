@@ -46,7 +46,7 @@ class Order extends Component {
           </Row>
           <Row>
             <Col md={12}>
-              <div className={`${styles['box']} ${styles['pl-20']} ${styles['pr-20']} ${styles['mt-20']}`}>
+              <div className={`${styles['box']} ${styles['p-20']} ${styles['mt-20']}`}>
                 {
                   orderData.orderItems.map((item) => <OrderItem  key={item.id} orderItem={item}/>)
                 }

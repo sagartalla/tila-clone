@@ -5,9 +5,11 @@ import { bindActionCreators } from 'redux';
 
 import List from './List';
 import Reason from './Reason';
+import CancelComplete from './CancelComplete';
+
 import { selectors, actionCreators } from '../../../../store/order';
 
-import styles from './orderIssue.styl'
+import styles from './orderIssue.styl';
 
 const STEPS = {
   list: 'list',
@@ -32,6 +34,9 @@ class OrderIssueWidget extends Component {
         return <Reason goToNextStep={this.goToNextStep} />;
         break
       }
+      case STEPS.cancelSuccess: {
+        return <CancelComplete goToNextStep={this.goToNextStep} />
+      }
       default: {
         return <List items={items} />;
         break;
@@ -40,7 +45,8 @@ class OrderIssueWidget extends Component {
   }
 
   goToNextStep() {
-    const { step: currentStep } = this.props.orderIssue;
+    const { goToNextStep, resetOrderIssue, orderIssue } = this.props;
+    const { step: currentStep } = orderIssue;
     let nextStep = 'list'
     switch (currentStep) {
       case STEPS.list: {
@@ -56,9 +62,7 @@ class OrderIssueWidget extends Component {
         break;
       }
     }
-    this.props.goToNextStep({
-      nextStep,
-    });
+    nextStep ? goToNextStep({ nextStep, }) : resetOrderIssue();
   }
 
   closePopup() {
@@ -83,6 +87,10 @@ class OrderIssueWidget extends Component {
         return 'Choose a reason';
         break;
       }
+      case STEPS.cancelSuccess: {
+        return 'Cancellation Status';
+        break;
+      }
     }
   }
 
@@ -95,7 +103,7 @@ class OrderIssueWidget extends Component {
         step
         ?
         <div className={styles['back-drop']}>
-          <div className={`${styles['widget-cont']} ${styles['box']} ${styles['p-0']}`}>
+          <div className={`${styles['widget-cont']} ${styles['box']} ${styles['p-0']} ${styles['middle']} ${styles['center']}`}>
             <div className={`${styles['widget-head']} ${styles['flx-space-bw']} ${styles['p-20']} ${styles['fs-16']}`}>
               <div>{this.getTitle(step)}</div> 
               <div onClick={this.closePopup}>X</div>

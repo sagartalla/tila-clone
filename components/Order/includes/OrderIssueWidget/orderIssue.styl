@@ -2,6 +2,12 @@
 
 .order-issue-wrap
   display block
+  .img-cont
+    width 70px
+    height 45px
+    img
+      width 100%
+      height 100%
   .widget-cont
     display block
     width 450px
@@ -13,23 +19,25 @@
       background-color popup-header
     .widget-body
       .item-cont
-        .img-cont
-          width 70.19px
-          height 46.45px
-          img
-            width 100%
-            height 100%
+        color inherit 
+      .reasons-item-wrap
+        margin-bottom 0
+        border-bottom 1px solid generic-gray-color
+      .reason-cont
+        .instruction-txt
+          color: generic-gray-color
     .widget-footer
-      height: 95px;
-      position: absolute;
-      bottom: 0;
-      width: 100%;
+      height 95px
+      position absolute
+      bottom 0
+      width 100%
       button
-        height: 50px;
-        width: 395px;
-        border-radius: 4px;
-        background-color: blue;
-        color: white;
-        text-transform: uppercase;
+        height 50px
+        display block
+        width 395px
+        border-radius 4px
+        background-color blue
+        color white
+        text-transform uppercase
         &:disabled
           background-color generic-gray-color          

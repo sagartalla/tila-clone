@@ -14,12 +14,12 @@ const getOrderDetails = (store) => {
       orderTotal: total_amount,
       shippingTotal: total_shipping,
       paymentDetals: [],
-      //move compose to common util
+      //TODO move compose to common util
       orderItems: _.compose(
         _.reduce.convert({ 'cap': false })((acc, val, key) => {
           return acc.concat({ id: key, products: val, status: val[0].status });
         }, []),
-        _.groupBy((i) => i.item_tracking_id),
+        _.groupBy((i) => i.item_tracking_id || i.id),
         _.map((i) => ({ id: i.order_item_id, img: i.variant_info.image_url, name: i.variant_info.title, item_tracking_id: i.item_tracking_id || shortid.generate(), status: i.status }))
        )(order_items)
     };
@@ -34,4 +34,16 @@ const getOrderIssue = (store) => {
   return store.singleOrderReducer.data.orderIssue;
 }
 
-export { getOrderDetails, getOrderIssue };
+const getCancelStatus = (store) => {
+  return store.singleOrderReducer.data.orderIssue.cancelStatus;
+}
+
+const getErrorMessege = (store) => {
+  return store.singleOrderReducer.error;
+}
+
+const getLoadingStatus = (store) => {
+  return store.singleOrderReducer.ui.loading;
+}
+
+export { getOrderDetails, getOrderIssue, getCancelStatus, getErrorMessege, getLoadingStatus };
