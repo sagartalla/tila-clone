@@ -1,4 +1,5 @@
 import React from 'react';
+import Router from 'next/router';
 import PropTypes from 'prop-types';
 import { Grid, Row, Col } from 'react-bootstrap';
 
@@ -59,6 +60,11 @@ class Payments extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    // if cart is empty redirect to cart page.
+    // if user hits payment url directly and no cart items, this condition will execute.
+    if (nextProps.cartResults.items.length === 0 && nextProps.cartResults.ui.loaded) {
+      Router.push('/cart');
+    }
     const { loggedInFlag } = this.state;
     // Clicking on pay button and after getting response, we will redirect to given URL.
     if (nextProps && nextProps.makePaymentOptions && nextProps.makePaymentOptions.redirect_url) {
@@ -66,7 +72,6 @@ class Payments extends React.Component {
     }
 
     if (nextProps.isLoggedIn && !loggedInFlag) {
-      // console.log(localStorage)
       const login = nextProps.userCreds || this.state.login;
       const paymentConfigJson = { ...this.state.paymentConfigJson };
 

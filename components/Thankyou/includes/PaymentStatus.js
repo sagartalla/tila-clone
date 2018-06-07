@@ -21,7 +21,7 @@ const PaymentStatus = props => {
             </div>
           </span>
         </Col>
-          <Col md={8} xs={9} sm={9} className={styles['fs-15']}>
+          <Col md={8} xs={9} sm={9} className={styles['fs-14']}>
             <h3>{message}</h3>
             <p className={styles['col-header']}>
               {subMessage}

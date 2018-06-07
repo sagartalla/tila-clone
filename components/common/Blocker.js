@@ -7,8 +7,7 @@ import styles from './blocker.styl';
 const Blocker = props => {
   return (
     <div className={`${styles['blocker-container']}`}>
-      <div className={styles['blocker']}></div>
-      <div className={`${styles['content']} ${styles['flx-spacebw-alignc']}`}>
+      <div className={`${styles['content']} ${styles['flex-center']} ${styles['justify-center']}`}>
         {props.content ? props.content : 'updating...'}
       </div>
     </div>
