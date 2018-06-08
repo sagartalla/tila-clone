@@ -6,6 +6,7 @@ import { addUrlProps, UrlQueryParamTypes, pushInUrlQuery } from 'react-url-query
 import styles from './header.styl';
 import { actionCreators, selectors } from '../../store/search';
 import { Router } from '../../routes';
+import SVGCompoent from '../common/SVGComponet';
 
 const urlPropsQueryConfig = {
   searchText: { type: UrlQueryParamTypes.string, queryParam: 'search', }
@@ -44,7 +45,7 @@ class Search extends Component {
             onChange={this.onChangeSearchInput}
             value={this.state.query}
            />
-          <button type="submit" className={styles['search-btn']}>search</button>
+          <SVGCompoent clsName={`${styles['searching-icon']}`} src="icons/search/search-icon" />
         </form>
       </div>
     )

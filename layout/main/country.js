@@ -38,8 +38,16 @@ class Country extends Component {
 	}
 
 	render() {
+		// TEMP STYLES
+		const styles={
+			position: 'fixed',
+			bottom: 0,
+			right: 0,
+			width: '80px',
+
+		}
 		return (
-			<input onChange={this.changeCountry} value={this.state.country} />
+			<input style={styles} onChange={this.changeCountry} value={this.state.country} />
 		);
 	}
 }
