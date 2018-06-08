@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { Grid, Row, Col } from 'react-bootstrap';
-
+import SVGCompoent from '../../common/SVGComponet';
 import styles from '../thankyou.styl';
 
 /** TODO : order page link is required **/
@@ -12,18 +12,16 @@ const PaymentStatus = props => {
   const subMessage = (props.status == "SUCCESSFUL") ? successMessage : "Please try again";
   return (
     <div>
-      <Row>
+      <Row className={styles['flex-center']}>
         {/* TODO SF-44: Common layout needed for non header pages */}
         <Col md={2} xs={2} sm={2}>
-          <span className={styles['ml-32']}>
-            <div className={styles['m-10']}>
-            LOGO
-            </div>
-          </span>
+          <div className={styles['pb-24']}>
+            <SVGCompoent clsName={`${styles['gift-card']}`} src="icons/gift-icon/gift-icon" />
+          </div>
         </Col>
-          <Col md={8} xs={9} sm={9} className={styles['fs-14']}>
-            <h3>{message}</h3>
-            <p className={styles['col-header']}>
+          <Col md={8} xs={9} sm={9}>
+            <h3 className={`${styles['mt-0']} ${styles['light-gry-clr']} ${styles['fontW600']}`}>{message}</h3>
+            <p className={`${styles['col-header']} ${styles['lgt-black']}`}>
               {subMessage}
             </p>
           </Col>
