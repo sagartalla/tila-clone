@@ -57,7 +57,7 @@ const mapDispatchToProps = (dispatch) =>
   );
 
 Wishlist.propTypes = {
-
+  results: PropTypes.array,
 };
 
 Wishlist.defaultProps = {

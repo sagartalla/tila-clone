@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Row, Col } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 
 import styles from '../wishlist.styl';
 
@@ -47,8 +48,9 @@ const WishlistBody = props => {
 }
 
 WishlistBody.propTypes = {
-  // data.PropTypes
-  // data.deleteItem
+  data: PropTypes.Array,
+  deleteItem: PropTypes.func.isRequired,
+  addToCart: PropTypes.func.isRequired,
 };
 
 WishlistBody.defaultProps = {
