@@ -45,7 +45,7 @@ class Search extends Component {
             onChange={this.onChangeSearchInput}
             value={this.state.query}
            />
-          <SVGCompoent clsName={`${styles['searching-icon']}`} src="icons/search/search-icon" />
+          <button type="submit" className={styles['search-btn']}><SVGCompoent clsName={`${styles['searching-icon']}`} src="icons/search/search-icon" /></button>
         </form>
       </div>
     )
