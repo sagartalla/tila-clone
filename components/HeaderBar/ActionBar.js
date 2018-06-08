@@ -51,12 +51,16 @@ class ActionBar extends Component {
         </div>
         <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']}`}>
           <Link route="/cart">
-            <SVGCompoent clsName={`${styles['cart-icon']}`} src="icons/cart/cart-icon" />
+            <span className={`${styles['flex-center']} ${styles['justify-center']}`}>
+              <SVGCompoent clsName={`${styles['cart-icon']}`} src="icons/cart/cart-icon" />
+            </span>
           </Link>
         </div>
         <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']}`}>
           <Link route="/cam">
-            <SVGCompoent clsName={`${styles['cam-icon']}`} src="icons/cam/cam-icon" />
+            <span className={`${styles['flex-center']} ${styles['justify-center']}`}>
+              <SVGCompoent clsName={`${styles['cam-icon']}`} src="icons/cam/cam-icon" />
+            </span>
           </Link>
         </div>
         <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']}`}>
