@@ -8,12 +8,14 @@ import { actionCreators, selectors } from '../../../store/cam/wishlist';
 import WishlistBody from './includes/WishlistBody';
 
 import styles from './wishlist.styl';
+import { isAddedToCart } from '../../../store/cart/selectors';
 
 class Wishlist extends Component {
 
   constructor(props) {
     super(props);
     this.deleteItem = this.deleteItem.bind(this);
+    this.addToCart = this.addToCart.bind(this);
   }
 
   componentDidMount() {
@@ -24,6 +26,10 @@ class Wishlist extends Component {
 
   }
 
+  addToCart(e) {
+    console.log(e.target.id)
+  }
+
   render() {
     const { results } = this.props;
     return (
@@ -31,6 +37,7 @@ class Wishlist extends Component {
         <WishlistBody
           data={results}
           deleteItem={this.deleteItem}
+          addToCart={this.addToCart}
         />
       </div>
     )
