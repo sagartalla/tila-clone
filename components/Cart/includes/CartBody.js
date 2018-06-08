@@ -8,7 +8,7 @@ import Blocker from '../../common/Blocker';
 import styles from '../cart.styl';
 
 const CartBody = props => {
-  const { showBlocker, increaseItemCnt, decreaseItemCnt, data, removeCartItem, checkoutBtnHandler } = props;
+  const { showBlocker, increaseItemCnt, decreaseItemCnt, data, removeCartItem, checkoutBtnHandler, addToWishlist } = props;
   const { items, error } = data;
   const flag = data && items && items.length;
   const cnt = flag > 0 ? items.length : 0;
@@ -80,6 +80,7 @@ const CartBody = props => {
                               <span className={`${styles['fontW600']} ${styles['thick-red']} ${styles['pr-20']}`}>{CART_PAGE.ONLY + ' ' + inventory + ' ' + CART_PAGE.UNITS_LEFT} </span>
                               : ''
                           }
+                          <span data-id={item_id} onClick={addToWishlist}>Move to Wishlist &nbsp;&nbsp;</span>
                           <span id={item_id} onClick={removeCartItem}>{CART_PAGE.REMOVE}</span>
                         </div>
                       </div>
@@ -113,6 +114,7 @@ CartBody.propTypes = {
   decreaseItemCnt: PropTypes.func.isRequired,
   increaseItemCnt: PropTypes.func.isRequired,
   showBlocker: PropTypes.bool.isRequired,
+  addToWishlist: PropTypes.func.isRequired,
   data: PropTypes.object.isRequired,
 };
 
