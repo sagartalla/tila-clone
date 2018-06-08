@@ -4,7 +4,7 @@ const getWishListResults = (store) => {
     const img_url = 'https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/';
     const newData = [];
 
-    console.log(data)
+    // console.log(data)
 
     data.map((item) => {
       const variant = Object.keys(item.product_details.product_details_vo.cached_variant)[0];

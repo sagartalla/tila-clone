@@ -10,7 +10,7 @@ const WishlistBody = props => {
   return (
     <div className={`${styles['box']}`}>
       {
-        data.length && data.map((item, index) => {
+        data.length > 0 && data.map((item, index) => {
           const { listing_id, brand_name, name, img, price, cur } = item;
           return (
             <div key={index} className={`${styles['thick-border-btm']} ${styles['p-20']}`}>
@@ -48,7 +48,7 @@ const WishlistBody = props => {
 }
 
 WishlistBody.propTypes = {
-  data: PropTypes.Array,
+  data: PropTypes.array,
   deleteItem: PropTypes.func.isRequired,
   addToCart: PropTypes.func.isRequired,
 };
