@@ -8,6 +8,6 @@ export default {
   TRANSACTIONS_API_URL  :   'http://gateway-dev.fptechscience.com/transactions',
   AUTH_API_URL          :   'http://gateway-dev.fptechscience.com/auth-service',
   CART_API_URL          :   'http://gateway-dev.fptechscience.com/cart',
-  CATEGORYTREE_API_URL  :   'http://category-dev.fptechscience.com',
+  CATEGORYTREE_API_URL  :   'http://gateway-dev.fptechscience.com/category-tree',
   WISHLIST_API_URL      :   'http://gateway-dev.fptechscience.com/wl',
 };

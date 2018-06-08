@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { languageDefinations } from '../../../../utils/lang/';
 import { Row, Col } from 'react-bootstrap';
 
 import styles from '../address.styl';
@@ -18,6 +19,8 @@ const AddressBody = (props) => {
     props.makeDefaultAddress(e.target.id);
   }
 
+  const { DELIVERY_ADDR_PAGE } = languageDefinations();
+
   return (
     <div className={`${styles['address-body']} ${props.standalone === true ? styles['p-32'] : ''}`}>
       <Row>
@@ -30,13 +33,13 @@ const AddressBody = (props) => {
                     {
                       val.default ?
                         <span>
-                          <input id={val.address_id} name="addr_checkbox" type="radio" defaultChecked={val.default} className={styles['radio-btn']} /> 
-                          <span className={`${styles['lgt-black']} ${styles['fs-12']} ${styles['fontW600']} ${styles['pl-5']}`}>Default Address</span>
-                      </span> :
+                          <input id={val.address_id} name="addr_checkbox" type="radio" defaultChecked={val.default} className={styles['radio-btn']} />
+                          <span className={`${styles['lgt-black']} ${styles['fs-12']} ${styles['fontW600']} ${styles['pl-5']}`}>{DELIVERY_ADDR_PAGE.DEFAULT_ADDR}</span>
+                        </span> :
                         <span>
                           <input id={val.address_id} name="addr_checkbox" type="radio" onClick={makeDefaultAddress} className={styles['radio-btn']} />
-                          <span className={`${styles['black']} ${styles['fs-12']} ${styles['fontW600']} ${styles['pl-5']}`}>Make as Default</span>
-                      </span>
+                          <span className={`${styles['black']} ${styles['fs-12']} ${styles['fontW600']} ${styles['pl-5']}`}>{DELIVERY_ADDR_PAGE.MAKE_DEFAULT}</span>
+                        </span>
                     }
                   </div>
                   <div className={styles['address-card-body']}>
@@ -51,12 +54,12 @@ const AddressBody = (props) => {
                   <div className={styles['address-card-actions']}>
                     <Row>
                       <Col md={4} sm={4} xs={4}>
-                        <span id={val.address_id} onClick={deleteAddr}><i className="fa fa-trash"></i> Delete</span>
+                        <span id={val.address_id} onClick={deleteAddr}><i className="fa fa-trash"></i> {DELIVERY_ADDR_PAGE.DELETE} </span>
                       </Col>
                       <Col xs={1}> | </Col>
                       <Col md={6} sm={6} xs={6}>
                         <span id={val.address_id} onClick={editAddress}>
-                          <i className="fa fa-pencil"></i> Edit Address
+                          <i className="fa fa-pencil"></i> {DELIVERY_ADDR_PAGE.EDIT_ADDR}
                         </span>
                       </Col>
                     </Row>
@@ -69,13 +72,13 @@ const AddressBody = (props) => {
         <Col md={4} sm={12} xs={12}>
           <div className={` ${styles['address-card']} ${styles['address-card-new']}`} onClick={props.showAddAdrressForm}>
             <div className={`${styles['flex-center']} ${styles['flex-wrap']}`}>
-              <h5 className={`${styles['m-0']} ${styles['mb-10']} ${styles['thick-blue']} ${styles['fontW600']}`}>Add New Address</h5>
-              <p>Add a new network or home address where you want the orders to be delivered.</p>
+              <h5 className={`${styles['m-0']} ${styles['mb-10']} ${styles['thick-blue']} ${styles['fontW600']}`}>{DELIVERY_ADDR_PAGE.ADD_NEW_ADDR}</h5>
+              <p>{DELIVERY_ADDR_PAGE.ADD_NEW_ADDR_TAG}</p>
               <p>
                 <button className={`${styles['fp-btn']} ${styles['fp-btn-default']}  ${styles['fs-12']}`}>
-                  Add New
+                  {DELIVERY_ADDR_PAGE.ADD_NEW_BTN}
                 </button>
-                </p>
+              </p>
             </div>
           </div>
         </Col>
