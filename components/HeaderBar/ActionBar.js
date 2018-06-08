@@ -4,7 +4,7 @@ import { Modal } from "react-router-modal";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ModalContainer } from 'react-router-modal';
-
+import SVGCompoent from '../common/SVGComponet';
 import { selectors, actionCreators } from '../../store/auth';
 import Login from '../Login';
 import { Link } from '../../routes';
@@ -46,27 +46,27 @@ class ActionBar extends Component {
     const { isLoggedIn } = this.props;
     return (
       <div className={styles['actionbar-wrapper']}>
-        <div className={styles['action-item']}></div>
-        <div className={styles['action-item']}>
-          <span className={`${styles['center']} ${styles['middle']}`}>
-            <Link route="/cart">cart</Link>
-          </span>
+        <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']}`}>
+          <SVGCompoent clsName={`${styles['wish-list-icon']}`} src="icons/wish-list/wish-list-icon" />
         </div>
-        <div className={styles['action-item']}>
-          <span className={`${styles['center']} ${styles['middle']}`}>
-            <Link route="/cam">cam</Link>
-          </span>
+        <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']}`}>
+          <Link route="/cart">
+            <SVGCompoent clsName={`${styles['cart-icon']}`} src="icons/cart/cart-icon" />
+          </Link>
         </div>
-        <div className={styles['action-item']}>
-          <span className={`${styles['center']} ${styles['middle']}`}>
-            {
-              isLoggedIn
-              ?
-              <span onClick={this.logoutClick}>logout</span>
-              : 
-                <span onClick={this.loginClick}>login</span>
-            }
-          </span>
+        <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']}`}>
+          <Link route="/cam">
+            <SVGCompoent clsName={`${styles['cam-icon']}`} src="icons/cam/cam-icon" />
+          </Link>
+        </div>
+        <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']}`}>
+          {
+            isLoggedIn
+            ?
+            <span onClick={this.logoutClick}>logout</span>
+            : 
+              <span onClick={this.loginClick}>login</span>
+          }
         </div>
         {
           (this.state.show) 
