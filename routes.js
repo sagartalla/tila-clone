@@ -2,6 +2,7 @@ const routes = require('next-routes')();
 
 routes
   .add({ name: 'CAM', pattern: '/cam', page: 'cam' })
+  .add({ name: 'ORDER ISSUE', pattern: '/cam/orders/:orderId/issue/:returnExchangeType/item/:orderItemId', page: 'order' })
   .add({ name: 'ORDER', pattern: '/cam/orders/:orderId', page: 'order' })
   .add({ name: 'CAM tabs', pattern: '/cam/:tabDetails+', page: 'cam' })
   .add({ name: 'product', pattern: '/product', page: 'product' })

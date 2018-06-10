@@ -7,27 +7,28 @@ import { selectors, actionCreators } from '../../../../store/order';
 
 import styles from './orderIssue.styl';
 
-class CancelComplete extends Component {
+class ReturnComplete extends Component {
 
   componentDidMount() {
-    const { orderIssue, submitCancelRequest } = this.props;
+    const { orderIssue, submitReturnRequest } = this.props;
     const { selectedItem, selectedReasons } = orderIssue;
-    submitCancelRequest({
+    submitReturnRequest({
       orderItemId: selectedItem.id,
       reason: selectedReasons.reason,
       comment: selectedReasons.comment,
+      addressId: orderIssue.returnExchangeAddressId,
     });
   }
 
   render() {
-    const { orderIssue, loadingStatus, cancelStatus, errorMessege, goToNextStep } = this.props;
+    const { orderIssue, loadingStatus, returnStatus, errorMessege, goToNextStep } = this.props;
     const { selectedItem } = orderIssue;
     return (
       <div>
       {
         loadingStatus
         ?
-        'loading'
+        'loading...'
         :
         <div>
           <div>
@@ -42,10 +43,10 @@ class CancelComplete extends Component {
                   <span>Your order {selectedItem.name}</span>
                 </div>
                 <div>
-                  <span>has been Cancelled Successfully</span>
+                  <span>has been Requested for Return Successfully</span>
                 </div>
                 <div>
-                  <span>Sorry that you had to cancel, we will work on reason for your cancellation</span>
+                  <span>Sorry that you had to Return, we will work on reason for your Return</span>
                 </div>
               </div>
             }
@@ -63,7 +64,7 @@ class CancelComplete extends Component {
 
 const mapStateToProps = (store) => {
   return ({
-    cancelStatus: selectors.getCancelStatus(store),
+    returnStatus: selectors.getReturnStatus(store),
     errorMessege: selectors.getErrorMessege(store),
     loadingStatus: selectors.getLoadingStatus(store),
     orderIssue: selectors.getOrderIssue(store),
@@ -73,10 +74,10 @@ const mapStateToProps = (store) => {
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
-      submitCancelRequest: actionCreators.submitCancelRequest
+      submitReturnRequest: actionCreators.submitReturnRequest
     },
     dispatch,
   );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CancelComplete);
+export default connect(mapStateToProps, mapDispatchToProps)(ReturnComplete);

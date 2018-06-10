@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col, Button } from 'react-bootstrap';
 
-import  styles from './order.styl';
+import  styles from '../../order.styl';
 
 const OrderHeader = ({orderDetails}) => {
   const { name, address, phone, orderId, orderDate, itemsTotal, orderTotal, shippingTotal, paymentDetals } = orderDetails;
@@ -24,7 +24,7 @@ const OrderHeader = ({orderDetails}) => {
                   <span>Phone: </span>
                     <span>{phone}</span>
                   </div>
-              </div>         
+              </div>
             </div>) 
           : 
           null 

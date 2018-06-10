@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col, Button, OverlayTrigger, Popover } from 'react-bootstrap';
 
-import OrderItem from '../../../Order/includes/OrderItem';
+import OrderItem from '../../../Order/includes/OrderDetails/OrderItem';
 
 import styles from '../orders.styl';
 
@@ -48,10 +48,10 @@ const Order = ({order}) => {
       </Row>
       <Row>
         <Col md={12}>
-          {order.orderItems.map((orderItem) => <OrderItem key={orderItem.id} orderItem={orderItem} />)}
+          {order.orderItems.map((orderItem) => <OrderItem key={orderItem.id} orderItem={orderItem} orderId={order.id}/>)}
         </Col>
       </Row>
-      <Row> 
+      <Row>
         <div className={styles['m-10']}>
           <Col md={7}>
             <div className={styles['fs-14']}>

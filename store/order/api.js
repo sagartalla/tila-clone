@@ -11,8 +11,14 @@ const getReasons = () => axios.get(`${constants.ORDERS_API_URL}/api/v1/return/re
 const submitCancelRequest = (params) => axios.post(`${constants.ORDERS_API_URL}/api/v1/order_item/delivery/${params.orderItemId}/request_cancel`, {
   reason: params.reason,
   comment: params.comment
-}, {
-  'X-USER-NAME': 'sdfg'
 });
 
-export default { getOrderDetails, getReasons, submitCancelRequest };
+const submitReturnRequest = (params) => axios.post(`${constants.ORDERS_API_URL}api/v1/order/return`, {
+  address_id: params.addressId,
+  order_item_id: params.orderItemId,
+  reason: params.reason,
+  comment: selectedReasons.comment,
+});
+
+
+export default { getOrderDetails, getReasons, submitCancelRequest, submitReturnRequest };

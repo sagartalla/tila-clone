@@ -4,23 +4,35 @@ import { Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import StatusWidget from './StatusWidget';
-import constants from '../../../constants';
+import StatusWidget from '../StatusWidget';
+import constants from '../../../../constants';
+import { ORDER_ISSUE_TYPES, ORDER_ISSUE_STEPS } from '../../constants';
 
-import { actionCreators }   from '../../../store/order';
+import { actionCreators }   from '../../../../store/order';
 
-import styles from '../order.styl';
+import styles from '../../order.styl';
 
-const OrderItem = ({ orderItem, raiseOrderIssue }) => {
+const OrderItem = ({ orderItem, raiseOrderIssue, orderId }) => {
   const { products } = orderItem;
-  
+
   const cancelOrder = () => {
     raiseOrderIssue({
-      issueType: 'cancel',
-      items: products
+      issueType: ORDER_ISSUE_TYPES.CANCEL,
+      items: products,
+      defaultStep: ORDER_ISSUE_STEPS.LIST,
+      orderId,
     });
   };
-  
+
+  const exchangeReturnOrder = () => {
+    raiseOrderIssue({
+      issueType: null,
+      items: products,
+      defaultStep: ORDER_ISSUE_STEPS.LIST,
+      orderId,
+    });
+  };
+
   return (
     <div className={`${styles['shipment-wrap']} ${styles['mb-32']} ${styles['mt-32']}`}>
       <Row>
@@ -51,13 +63,13 @@ const OrderItem = ({ orderItem, raiseOrderIssue }) => {
             </div>
             <div className={styles['widget-wrap']}>
               {
-                orderItem.status === 'DELIVERED' 
+                orderItem.status === 'DELIVERED'
                 ?
                   null
                 :
                   <StatusWidget currentStatus={orderItem.status} />
               }
-              
+
             </div>
           </div>
         </Col>

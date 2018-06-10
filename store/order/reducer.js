@@ -8,6 +8,7 @@ const initialState = {
     data: {
 			orderDetails: {},
 			orderIssue: {
+        items: [],
         reasons: [],
         cancelStatus: {},
       },
@@ -21,15 +22,15 @@ const productReducer = typeToReducer({
       return Object.assign({}, state, { ui: { loading: true } });
     },
     FULFILLED: (state, action) => {
-      return Object.assign({}, state, { 
+      return Object.assign({}, state, {
         data: {
           ...state.data,
           orderDetails: {
             ...state.data.orderDetails,
             ...action.payload.data
           }
-        }, 
-        ui: { loading: false } 
+        },
+        ui: { loading: false }
       });
     },
     REJECTED: (state, action) => {
@@ -84,7 +85,19 @@ const productReducer = typeToReducer({
         ...state.data,
         orderIssue: initialState.data.orderIssue
       }
-    }
+    };
+  },
+  [actions.SET_RETURN_EXCHANGE_TYPE]: (state, action) => {
+    return {
+      ...state,
+      data: {
+        ...state.data,
+        orderIssue: {
+          ...state.data.orderIssue,
+          returnExchangeType: action.payload.data.returnExchangeType
+        }
+      }
+    };
   },
   [actions.GET_REASONS]: {
     PENDING: state => {
@@ -100,7 +113,7 @@ const productReducer = typeToReducer({
             reasons: action.payload.data,
           }
         },
-        ui: { loading: false } 
+        ui: { loading: false }
       };
     },
     REJECTED: (state, action) => {
@@ -133,7 +146,52 @@ const productReducer = typeToReducer({
             cancelStatus: action.payload.data
           }
         },
-        ui: { loading: false } 
+        ui: { loading: false }
+      };
+    },
+    REJECTED: (state, action) => {
+      return Object.assign({}, state, { error: action.payload.message, ui: { loading: false } })
+    },
+  },
+  [actions.SET_ORDER_ISSUE_DATA]: (state, action) => {
+    return {
+      ...state,
+      data: {
+        ...state.data,
+        orderIssue: {
+          ...state.data.orderIssue,
+          ...action.payload.data,
+        }
+      }
+    }
+  },
+  [actions.SET_RETURN_EXCHANGE_ADDRESS]: (state, action) => {
+    return {
+      ...state,
+      data: {
+        ...state.data,
+        orderIssue: {
+          ...state.data.orderIssue,
+          returnExchangeAddressId: action.payload.data.addressId,
+        }
+      }
+    }
+  },
+  [actions.SUBMIT_RETURN_REQUEST]: {
+    PENDING: state => {
+      return Object.assign({}, state, { ui: { loading: true } });
+    },
+    FULFILLED: (state, action) => {
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          orderIssue: {
+            ...state.data.orderIssue,
+            returnStatus: action.payload.data
+          }
+        },
+        ui: { loading: false }
       };
     },
     REJECTED: (state, action) => {

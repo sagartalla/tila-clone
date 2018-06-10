@@ -9,6 +9,10 @@ const actions = {
   GET_REASONS: 'GET_REASONS',
   SET_REASON: 'SET_REASON',
   SUBMIT_CANCEL_REQUEST: 'SUBMIT_CANCEL_REQUEST',
+  SET_RETURN_EXCHANGE_TYPE: 'SET_RETURN_EXCHANGE_TYPE',
+  SET_ORDER_ISSUE_DATA: 'SET_ORDER_ISSUE_DATA',
+  SET_RETURN_EXCHANGE_ADDRESS: 'SET_RETURN_EXCHANGE_ADDRESS',
+  SUBMIT_RETURN_REQUEST: 'SUBMIT_RETURN_REQUEST',
 };
 
 const actionCreators = {
@@ -19,14 +23,15 @@ const actionCreators = {
     })
   },
   raiseOrderIssue: (params) => {
-    const {issueType, items} = params;
+    const {issueType, items, defaultStep, orderId} = params;
     return ({
       type: actions.RAISE_ORDER_ISSUE,
       payload: {
         data: {
           issueType,
           items,
-          step: 'list',
+          step: defaultStep,
+          orderId,
         }
       }
     });
@@ -79,9 +84,48 @@ const actionCreators = {
       type: actions.SUBMIT_CANCEL_REQUEST,
       payload: api.submitCancelRequest(params)
     });
+  },
+  setReturnExchangeType: (params) => {
+    return ({
+      type: actions.SET_RETURN_EXCHANGE_TYPE,
+      payload: {
+        data: {
+          returnExchangeType: params.returnExchangeType
+        }
+      }
+    });
+  },
+  setOrderIssueData: (params) => {
+    return ({
+      type: actions.SET_ORDER_ISSUE_DATA,
+      payload: {
+        data: {
+          ...params,
+        }
+      }
+    });
+  },
+  selectAddressForReturnExchange: (params) => {
+    return ({
+      type: actions.SET_RETURN_EXCHANGE_ADDRESS,
+      payload: {
+        data: {
+          addressId: params.addressId,
+        }
+      }
+    });
+  },
+  submitReturnRequest: (params) => {
+    return ({
+      type: actions.SUBMIT_RETURN_REQUEST,
+      payload: {
+        data: {
+          ...params,
+        }
+      }
+    })
   }
 };
 
 
 export { actions, actionCreators };
-

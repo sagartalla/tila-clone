@@ -25,7 +25,7 @@ const getOrderDetails = (store) => {
     };
   }
   return {
-    paymentDetals: [], 
+    paymentDetals: [],
     orderItems:[]
   };
 };
@@ -46,4 +46,13 @@ const getLoadingStatus = (store) => {
   return store.singleOrderReducer.ui.loading;
 }
 
-export { getOrderDetails, getOrderIssue, getCancelStatus, getErrorMessege, getLoadingStatus };
+const getSelectedOrder = (store) => (orderItemId) => {
+  const item = _.find({ order_item_id: orderItemId }, store.singleOrderReducer.data.orderDetails.order_items);
+  return { id: item.order_item_id, img: item.variant_info.image_url, name: item.variant_info.title, item_tracking_id: item.item_tracking_id || shortid.generate(), status: item.status }
+}
+
+const getReturnStatus = (store) => {
+  return store.singleOrderReducer.data.orderIssue.returnStatus;
+}
+
+export { getOrderDetails, getOrderIssue, getCancelStatus, getErrorMessege, getLoadingStatus, getSelectedOrder, getReturnStatus };

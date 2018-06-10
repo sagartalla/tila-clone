@@ -13,14 +13,14 @@ class Orders extends Component {
   componentDidMount() {
     this.props.getOrderHistory();
   }
-  
+
   render() {
     const { ordersData } = this.props;
     return (
       <div>
         <div className={styles['orders-container']}>
         {
-          ordersData.length 
+          ordersData.length
           ?
           ordersData.map((order) => <Order key={order.id} order={order} />)
           :

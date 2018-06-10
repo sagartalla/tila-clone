@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
-import { Grid, Row, Col } from 'react-bootstrap';
+
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import HeaderBar from '../HeaderBar/index';
-import OrderHeader from './OrderHeader';
-import OrderItem from "./includes/OrderItem";
-import OrderIssueWidget from './includes/OrderIssueWidget';
+import OrderDetails from './includes/OrderDetails';
+import OrderReturnExchange from './includes/OrderReturnExchange';
 
 import { selectors, actionCreators } from '../../store/order';
 
 import styles from './order.styl';
 
 class Order extends Component {
-
   componentDidMount() {
     const { query, getOrderDetails } = this.props;
     getOrderDetails({ orderId: query.orderId });
@@ -24,37 +22,19 @@ class Order extends Component {
     return (
       <div className={styles['bg-color']}>
         <HeaderBar />
-        <Grid>
-          <Row>
-            <Col md={12}>
-              <div>
-                {/* TODO Breadcrums */}
-                <span>My account</span>
-                <span>></span>
-                <span>Orders</span>
-                <span>></span>
-                <span>{query.orderId}</span>
-              </div>
-            </Col>
-          </Row>
-          <Row>
-            <Col md={12}>
-              <div>
-                <OrderHeader orderDetails={orderData} />
-              </div>
-            </Col>
-          </Row>
-          <Row>
-            <Col md={12}>
-              <div className={`${styles['box']} ${styles['p-20']} ${styles['mt-20']}`}>
-                {
-                  orderData.orderItems.map((item) => <OrderItem  key={item.id} orderItem={item}/>)
-                }
-              </div>
-            </Col>
-          </Row>
-        </Grid>
-        <OrderIssueWidget />
+        {
+          orderData.orderItems.length
+          ?
+          (
+            query.returnExchangeType
+            ?
+            <OrderReturnExchange query={query} orderData={orderData} />
+            :
+            <OrderDetails query={query} orderData={orderData} />)
+          :
+          'loading...'
+        }
+
       </div>
     );
   }
