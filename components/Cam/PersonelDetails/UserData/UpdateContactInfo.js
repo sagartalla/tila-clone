@@ -37,7 +37,6 @@ class UpdateContactInfo extends React.Component {
       this.setState({
         error: nextProps.errorMessege
       });
-      this.props.resetPasswordInfoStore();
     } 
     if (nextProps.passwordResetStatus != {} && nextProps.passwordResetStatus.hasOwnProperty('Response') && this.state.show == true) {
       if (nextProps.passwordResetStatus.Response == "SUCCESS") {
@@ -45,7 +44,6 @@ class UpdateContactInfo extends React.Component {
         this.handleClose();
         alert("Your password is changed successfully!!");
       }
-      this.props.resetPasswordInfoStore();
     }
 
   }
@@ -59,7 +57,8 @@ class UpdateContactInfo extends React.Component {
       rePassword: "",
       error: ""
     });
-    this.props.handleShow(false, '')();
+    this.props.resetPasswordInfoStore();
+    this.props.handleShow(false, '')();  
   }
 
   handleValueChange = () => (e) => {
@@ -120,6 +119,7 @@ class UpdateContactInfo extends React.Component {
     if (this.state.element == 'email') {
       /**TODO : Change Email API call**/
     } else if (this.state.element == 'password') {
+      this.props.resetPasswordInfoStore();
       if (this.state.authValue == this.state.rePassword && this.state.authValue.length > 0 && this.state.value.length > 0) {
         this.props.changePassword({
           "current_password": this.state.value,

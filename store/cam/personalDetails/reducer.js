@@ -77,31 +77,21 @@ const personalDetailsReducer = typeToReducer({
         ui: { loading: false } })
     }
   },
-  [actions.RESET_PASSWORD_INFO_STORE]:{
-    PENDING: state => {
-      return Object.assign({}, state, { ui: { loading: true } });
+  [actions.RESET_PASSWORD_INFO_STORE]: (state, action) => {
+    const error=""
+    const passResetStatus = {'passResetStatus': {}} 
+   const newState={
+    ...state,
+    error,
+    data: {
+      ...state.data,
+      ...passResetStatus,
     },
-    FULFILLED: (state, action) => {
-      const newState = {
-        ...state,
-        data: {
-          ...state.data,
-          ...action.payload,
-        },
-        ui: {
-          loading: true
-        }
-      }
-      return newState;
-    },
-    REJECTED: (state, action) => {
-      return Object.assign({}, state, { 
-        error: action.payload.response.data.message, 
-        data: {
-        ...state.data
-        },
-        ui: { loading: false } })
+    ui: {
+      loading: true
     }
+   }
+   return newState;
   }
 
 }, initialState);

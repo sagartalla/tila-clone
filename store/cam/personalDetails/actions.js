@@ -26,7 +26,7 @@ const actionCreators = {
       payload: apis.editPersonalInfo(body),
     });
   },
-  resetPasswordInfoStore: () =>{
+  resetPasswordInfoStore: () => {
     return ({
       type: actions.RESET_PASSWORD_INFO_STORE,
       payload: {},
