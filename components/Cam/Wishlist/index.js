@@ -22,12 +22,14 @@ class Wishlist extends Component {
     this.props.getWishlist();
   }
 
-  deleteItem() {
-
+  deleteItem(e) {
+    this.props.deleteWishlist(e.target.id)
   }
 
   addToCart(e) {
-    console.log(e.target.id)
+    this.props.addToCart({
+      listing_id: e.target.id
+    });
   }
 
   render() {
@@ -52,6 +54,8 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       getWishlist: actionCreators.getWishlist,
+      deleteWishlist: actionCreators.deleteWishlist,
+      addToCart: actionCreators.addToCart,
     },
     dispatch,
   );
