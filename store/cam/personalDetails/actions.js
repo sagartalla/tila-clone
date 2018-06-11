@@ -3,7 +3,8 @@ import apis from './api';
 const actions = {
   GET_USER_PROFILE_INFO: 'GET_USER_PROFILE_INFO',
   CHANGE_PASSWORD: 'CHANGE_PASSWORD',
-  EDIT_PERSONAL_INFO: 'EDIT_PERSONAL_INFO'
+  EDIT_PERSONAL_INFO: 'EDIT_PERSONAL_INFO',
+  RESET_PASSWORD_INFO_STORE: 'RESET_PASSWORD_INFO_STORE'
 };
 
 const actionCreators = {
@@ -23,6 +24,12 @@ const actionCreators = {
     return ({
       type: actions.EDIT_PERSONAL_INFO,
       payload: apis.editPersonalInfo(body),
+    });
+  },
+  resetPasswordInfoStore: () =>{
+    return ({
+      type: actions.RESET_PASSWORD_INFO_STORE,
+      payload: {},
     });
   }
 };

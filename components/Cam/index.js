@@ -31,6 +31,17 @@ class Cam extends Component {
   }
 }
 
+shouldComponentUpdate(nextProps, nextState) {
+  if (
+    JSON.stringify(nextProps.userInfo) !== JSON.stringify(this.props.userInfo) ||
+    JSON.stringify(nextProps.userInfo) !== JSON.stringify(this.state.userInfo) ||
+    JSON.stringify(nextProps.userInfo) !== JSON.stringify(nextState.userInfo) 
+  ) {
+    return true;
+  }
+  return false;
+}
+
   componentDidMount() {
     const { tabDetails } = this.props;
     let [tab, ...queryParams] = tabDetails ? tabDetails.split('/') : [];
@@ -42,7 +53,7 @@ class Cam extends Component {
   }
 
   render() {
-    const { tab, userInfo } = this.state;
+    const { tab , userInfo} = this.state;
     const camComponent = ((tabName) => {
       switch (tabName) {
         case 'orders':

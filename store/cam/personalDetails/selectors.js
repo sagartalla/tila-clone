@@ -64,4 +64,8 @@ const getErrorMessege = (store) => {
   return store.personalDetailsReducer.error ? store.personalDetailsReducer.error : "";
 }
 
-export { getUserInfo, getPasswordResetStatus, getErrorMessege, getEditPersonalInfoStatus };
+const resetPasswordStatus =(store) => {
+return store.personalDetailsReducer;
+}
+
+export { getUserInfo, getPasswordResetStatus, getErrorMessege, getEditPersonalInfoStatus ,resetPasswordStatus};

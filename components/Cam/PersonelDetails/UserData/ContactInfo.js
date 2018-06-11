@@ -2,148 +2,35 @@ import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { actionCreators, selectors } from '../../../../store/cam/personalDetails';
-
 import UpdateContactInfo from './UpdateContactInfo';
 import commonStyle from '../../cam.styl';
 
 
 class ContactInfo extends React.Component {
-  constructor() {
-    super();
-    this.handleShow = this.handleShow.bind(this);
-    this.handleClose = this.handleClose.bind(this);
-    this.handleValueChange = this.handleValueChange.bind(this);
-    this.handleAuthValueChange = this.handleAuthValueChange.bind(this);
-    this.handleRePasswordChange = this.handleRePasswordChange.bind(this);
-    this.handleAction = this.handleAction.bind(this);
-    this.handleForgotPassword = this.handleForgotPassword.bind(this);
-    this.handleResendOtp = this.handleResendOtp.bind(this);
-    this.handleRePasswordBlur = this.handleRePasswordBlur.bind(this);
-    this.state = {
-      show: false,
-      element: "",
-      value: "",
-      authValue: "",
-      rePassword: "",
-      error: ""
-    };
-  }
+  state = {
+    show: false,
+    element: "",
+    contactInfo: {}
+  };
 
   componentWillReceiveProps(nextProps) {
-    if (this.state.show == true && nextProps.errorMessege != this.state.error) {
+    if (nextProps.contactInfo) {
       this.setState({
-        error: nextProps.errorMessege
+        contactInfo: nextProps.contactInfo
       });
-    }
-    if (nextProps.passwordResetStatus != {} && nextProps.passwordResetStatus.hasOwnProperty('Response') && this.state.show == true) {
-      if (nextProps.passwordResetStatus.Response == "SUCCESS") {
-        this.setState({ error: "" });
-        this.handleClose();
-        alert("Your password is changed successfully!!");
-      }
     }
   }
 
-  handleClose() {
+  handleShow = (showVal, elem) => (e) => {
     this.setState({
-      show: false,
-      element: "",
-      value: "",
-      authValue: "",
-      rePassword: "",
-      error: ""
+      show: showVal,
+      element: elem
     });
-  }
-
-  handleShow(elem, val) {
-    this.setState({
-      element: elem,
-      value: val,
-      show: true
-    });
-  }
-
-  handleValueChange(val) {
-    this.setState({ value: val });
-    if (this.state.element == "password") {
-      this.setState({ error: "" });
-    }
-  }
-
-  handleRePasswordBlur(val){
-    if (val != this.state.authValue) {
-      this.setState({ error: "Passwords must match" });
-    }
-    else if(val == this.state.authValue){
-      this.setState({ error: "" });
-    }
-  }
-
-  handleAuthValueChange(val) {
-    if (this.state.element == "password") {
-      if (val != this.state.rePassword && this.state.rePassword.length > 0) {
-        this.setState({
-          error: "Passwords must match",
-          authValue: val
-        });
-      }
-      else if (this.state.rePassword.length > 0 && val.length == 0) {
-        this.setState({
-          error: "Passwords must match",
-          authValue: val
-        });
-      }
-      else 
-      {
-      this.setState({ error: "",
-      authValue: val });
-      }
-    } else if (this.state.element == "email" || this.state.element == "phone")
-      this.setState({ authValue: val });
-  }
-
-  handleRePasswordChange(val) {
-      this.setState({
-        rePassword: val
-      });
-  }
-
-  handleForgotPassword() {
-    console.log('handleForgotPassword');
-  }
-
-  handleResendOtp() {
-    console.log('handleResendOtp');
-  }
-
-  handleAction() {
-    if (this.state.element == 'email') {
-      /**TODO : Change Email API call**/
-    } else if (this.state.element == 'password') {
-      if(this.state.authValue == this.state.rePassword && this.state.authValue.length>0 && this.state.value.length>0)
-      {
-      this.props.changePassword({
-        "current_password": this.state.value,
-        "new_password": this.state.authValue
-      });
-    }else {
-      if(this.state.authValue.length==0 || this.state.value.length==0 || this.state.rePassword.length==0)
-      this.setState({ error: "Password cannot be empty" });
-      else
-      this.setState({ error: "Passwords must match" });
-    }
-    } else if (this.state.element == 'phone') {
-      /**TODO : Change Phone number API call**/
-    }
-    /**TODO : Refresh the profile page once the data is changed**/
   }
 
   render() {
     const { mailId, email, mobile_no, lastUpdated, phoneNum } = this.props.contactInfo ? this.props.contactInfo : { email: "", mobile_no: "", lastUpdated: "not available" };
-    const { element, value, show, authValue, rePassword, error } = this.state;
+    const { element, show, contactInfo } = this.state;
     return (
       <div className={`${commonStyle['ml-15']} ${commonStyle['mt-1o']} ${commonStyle['mb-10']}`}>
         <Row>
@@ -160,9 +47,9 @@ class ContactInfo extends React.Component {
               <span>{mailId}</span>
             </Col>
             <Col xs={6} md={3}>
-              <span className={`${commonStyle['float-r']} ${commonStyle['p-0']} ${commonStyle['ml-5']}`}>
-                <a onClick={() => { this.handleShow(`email`, email) }}>Edit</a>
-              </span>
+              {/* <span className={`${commonStyle['float-r']} ${commonStyle['p-0']} ${commonStyle['ml-5']}`}>
+                <a onClick={this.handleShow(true, `email`)}>Edit</a>
+              </span> */}
             </Col>
           </Col>
         </Row>
@@ -176,7 +63,7 @@ class ContactInfo extends React.Component {
             </Col>
             <Col xs={6} md={3}>
               <span className={`${commonStyle['float-r']} ${commonStyle['p-0']} ${commonStyle['ml-5']}`}>
-                <a onClick={() => { this.handleShow(`password`, ``) }}>Edit</a>
+                <a onClick={this.handleShow(true, `password`)}>Edit</a>
               </span>
             </Col>
           </Col>
@@ -190,62 +77,37 @@ class ContactInfo extends React.Component {
               <span>{phoneNum}</span>
             </Col>
             <Col xs={6} md={3}>
-              <span className={`${commonStyle['float-r']} ${commonStyle['p-0']} ${commonStyle['ml-5']}`}>
-                <a onClick={() => { this.handleShow(`phone`, mobile_no) }}>Edit</a>
-              </span>
+              {/* <span className={`${commonStyle['float-r']} ${commonStyle['p-0']} ${commonStyle['ml-5']}`}>
+                <a onClick={this.handleShow(true, `phone`)}>Edit</a>
+              </span> */}
             </Col>
           </Col>
 
         </Row>
-       
+
         <Row>
           <Col xs={12} md={12}><a>Deactivate account</a></Col>
         </Row>
-        <div className={ show ? `${commonStyle['modalContainer']} ${commonStyle['showDiv']}` : `${commonStyle['modalContainer']} ${commonStyle['hideDiv']}`}>
-          <div className={ `${commonStyle['disabled']}`}>
+        <div className={show ? `${commonStyle['modalContainer']} ${commonStyle['showDiv']}` : `${commonStyle['modalContainer']} ${commonStyle['hideDiv']}`}>
+          <div className={`${commonStyle['disabled']}`}>
           </div>
-          <div className={ `${commonStyle['modal']}`}>
-            <UpdateContactInfo
-              show={show}
-              handleClose={this.handleClose}
-              element={element}
-              value={value}
-              authValue={authValue}
-              rePassword={rePassword}
-              error={error}
-              handleValueChange={this.handleValueChange}
-              handleAuthValueChange={this.handleAuthValueChange}
-              handleRePasswordChange={this.handleRePasswordChange}
-              handleAction={this.handleAction}
-              handleForgotPassword={this.handleForgotPassword}
-              handleResendOtp={this.handleResendOtp}
-              handleRePasswordBlur= {this.handleRePasswordBlur}
-            />
-          </div>  
+        </div>
+        <div className={show ? `${commonStyle['openModal']}` : `${commonStyle['closeModal']}`}>
+          <UpdateContactInfo
+            contactInfo={contactInfo}
+            handleShow={this.handleShow}
+            show={show}
+            element={element}
+          />
         </div>
       </div>
     );
   }
 }
 
-const mapStateToProps = (store) => ({
-  passwordResetStatus: selectors.getPasswordResetStatus(store),
-  errorMessege: selectors.getErrorMessege(store)
-});
-
-const mapDispatchToProps = (dispatch) =>
-  bindActionCreators(
-    {
-      changePassword: actionCreators.changePassword
-    },
-    dispatch,
-  );
 
 ContactInfo.propTypes = {
-  contactInfo: PropTypes.object,
-  passwordResetStatus: PropTypes.object,
-  errorMessege: PropTypes.string,
-  changePassword: PropTypes.func
+  contactInfo: PropTypes.object
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ContactInfo);
+export default ContactInfo;

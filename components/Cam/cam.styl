@@ -42,14 +42,37 @@
     z-index 2000
     background-color grey
     opacity 0.8
-  .modal
-    height 100%
-    width 40%
-    position fixed
-    top 0
-    right 0
-    z-index 2001
-    background-color white
+.openModal
+  height 100%
+  width 40%
+  position fixed
+  top 0
+  right -500px
+  z-index 2001
+  background-color white
+  animation-name slideOpen
+  animation-duration 0.5s  
+  animation-fill-mode both
+.closeModal
+  height 100%
+  width 40%
+  position fixed
+  top 0
+  right 0px
+  z-index 2001
+  background-color white
+  animation-name slideClose
+  animation-duration 0.2s  
+  animation-fill-mode both   
+
+@keyframes slideOpen {
+  from {right: -500px;}
+  to {right: 0;}
+  }
+@keyframes slideClose {
+  from {right: 0px;}
+  to {right: -600px;}
+  }
 
 .showDiv
   display block
