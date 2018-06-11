@@ -11,6 +11,7 @@ import Sidebar from './Sidebar';
 import UserInfo from './PersonelDetails';
 import ShippingAddress from './ShippingAddress';
 import Orders from './Orders'
+import Wishlist from './Wishlist';
 
 import styles from './cam.styl';
 

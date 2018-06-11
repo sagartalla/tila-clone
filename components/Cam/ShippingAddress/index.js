@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import PropTypes from 'prop-types';
+import { languageDefinations } from '../../../utils/lang/';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -121,6 +122,7 @@ class ShippingAddress extends Component {
     // if standalone is true, it is stand alone address page else from payment page or any other pages.
     const { results, standalone, handleShippingAddressContinue } = this.props;
     let { showNewAddr, addr } = this.state;
+    const { DELIVERY_ADDR_PAGE } = languageDefinations();
 
     return (
       <div className={`${styles['address-container']} ${standalone !== true ? '' : `${styles['box']} ${styles['ml-20']}`} `}>
@@ -159,7 +161,7 @@ class ShippingAddress extends Component {
           {
             standalone !== true ?
               <Col md={12} sm={12} xs={12} className={`${styles['pl-15']}`}>
-                <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']}`} onClick={handleShippingAddressContinue}>Continue</button>
+                <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']}`} onClick={handleShippingAddressContinue}>{DELIVERY_ADDR_PAGE.CONTINUE}</button>
               </Col>
               : null
           }

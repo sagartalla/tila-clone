@@ -17,7 +17,7 @@ export default {
     env: 'stage'
   },
   production: {
-    serviceName: 'store-f;ont',
+    serviceName: 'store-front',
     serverUrl: 'http://apm-dev.fptechscience.com',
     env: 'prod',
   }

@@ -15,9 +15,9 @@ const UserData = props => {
         <PersonalInfo personalInfo={personalInfo} />
         <ContactInfo contactInfo={contactInfo} />
       </Col>
-      <Col xs={12} md={6}>
+      {/* <Col xs={12} md={6}>
         <UpdateInfoComponent personalInfo={personalInfo} />
-      </Col>
+      </Col> */}
     </Row>
   );
 }
