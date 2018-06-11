@@ -12,7 +12,7 @@ const DeliveryAddress = props => {
   const { DELIVERY_ADDR_PAGE } = languageDefinations();
   return (
     <div className={`${styles['pb-15']} ${styles['pt-15']} ${styles['pl-34']} ${styles['pr-34']} ${styles['box']} ${styles['mb-20']} ${styles['relative']}`}>
-      <SVGCompoent clsName={`${styles['map-address']} ${props.configJson.basic || props.configJson.done ? 'done' : ''}`} src="icons/map/address" />
+      <SVGCompoent clsName={`${styles['map-address']} ${configJson.done ? 'done' : ''} ${configJson.progress ? 'payment-active' : ''}`} src="icons/map/address" />
       <Row className={`${configJson.basic || configJson.done ? '' : 'hide'}`}>
         <Col md={6} sm={12} xs={12}>
           <h4 className={styles['m-0']}>{DELIVERY_ADDR_PAGE.DELIVERY_ADDR}</h4>
