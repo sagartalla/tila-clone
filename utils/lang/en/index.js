@@ -17,6 +17,7 @@ export const EN_KEYWORDS = {
     'TOTAL_AMOUNT': 'Total Amount',
     'ONLY': 'Only',
     'UNITS_LEFT': 'units left',
+    'OUT_OF_STOCK': 'Out of stock',
     'MAX_PER_ORDER': 'Max per order quantity of this item reached.'
   },
   PAYMENT_PAGE: {
