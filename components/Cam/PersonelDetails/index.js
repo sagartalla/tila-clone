@@ -8,13 +8,13 @@ import Notification from './Notification';
 
 import commonStyles from '../cam.styl';
 
-const UserInfo = (props) => {
+const UserInfo = () => {
   return (
     <div>
       <Row className={commonStyles['ml-10']}>
         <Col md={12} xs={12} className={commonStyles['pl-0']}>
           <div className={`${commonStyles['ht-auto']} ${commonStyles['fs-12']} ${commonStyles['box']}`}>
-            <UserData {...props} />
+            <UserData />
           </div>
         </Col>
       </Row>

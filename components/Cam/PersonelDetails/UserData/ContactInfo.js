@@ -2,6 +2,10 @@ import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { actionCreators, selectors } from '../../../../store/cam/personalDetails';
+
 import UpdateContactInfo from './UpdateContactInfo';
 import commonStyle from '../../cam.styl';
 
@@ -14,9 +18,9 @@ class ContactInfo extends React.Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.contactInfo) {
+    if (nextProps.userInfo.contactInfo) {
       this.setState({
-        contactInfo: nextProps.contactInfo
+        contactInfo: nextProps.userInfo.contactInfo
       });
     }
   }
@@ -29,8 +33,8 @@ class ContactInfo extends React.Component {
   }
 
   render() {
-    const { mailId, email, mobile_no, lastUpdated, phoneNum, email_verified } = this.props.contactInfo ? this.props.contactInfo : { email: "", mobile_no: "", lastUpdated: "not available" };
-    const { element, show, contactInfo } = this.state;
+    const { mailId, email, mobile_no, lastUpdated, phoneNum, email_verified } = this.state.contactInfo ? this.state.contactInfo : { mailId: "", email: "", mobile_no: "", lastUpdated: "not available", phoneNum: "", email_verified: "" };
+    const { element, show } = this.state;
     return (
       <div className={`${commonStyle['ml-15']} ${commonStyle['mt-1o']} ${commonStyle['mb-10']}`}>
         <Row>
@@ -98,7 +102,6 @@ class ContactInfo extends React.Component {
         </div>
         <div className={show ? `${commonStyle['openModal']}` : `${commonStyle['closeModal']}`}>
           <UpdateContactInfo
-            contactInfo={contactInfo}
             handleShow={this.handleShow}
             show={show}
             element={element}
@@ -111,7 +114,13 @@ class ContactInfo extends React.Component {
 
 
 ContactInfo.propTypes = {
-  contactInfo: PropTypes.object
+  userInfo: PropTypes.object
 };
 
-export default ContactInfo;
+
+const mapStateToProps = (store) => ({
+  userInfo: selectors.getUserInfo(store)
+});
+
+
+export default connect(mapStateToProps)(ContactInfo);

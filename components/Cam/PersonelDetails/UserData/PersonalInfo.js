@@ -3,6 +3,10 @@ import { Row, Col } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { actionCreators, selectors } from '../../../../store/cam/personalDetails';
+
 import UpdateModal from './UpdateModal';
 import commonStyle from '../../cam.styl';
 
@@ -15,18 +19,18 @@ class PersonalInfo extends React.Component {
 
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.personalInfo) {
+    if (nextProps.userInfo.personalInfo) {
       this.setState({
-        personalInfo: nextProps.personalInfo
+        personalInfo: nextProps.userInfo.personalInfo
       });
     }
   }
 
   shouldComponentUpdate(nextProps, nextState) {
     if (
-      JSON.stringify(nextProps.personalInfo) !== JSON.stringify(this.props.personalInfo) ||
-      JSON.stringify(nextProps.personalInfo) !== JSON.stringify(this.state.personalInfo) ||
-      JSON.stringify(nextProps.personalInfo) !== JSON.stringify(nextState.personalInfo) ||
+      JSON.stringify(nextProps.userInfo.personalInfo) !== JSON.stringify(this.props.userInfo.personalInfo) ||
+      JSON.stringify(nextProps.userInfo.personalInfo) !== JSON.stringify(this.state.personalInfo) ||
+      JSON.stringify(nextProps.userInfo.personalInfo) !== JSON.stringify(nextState.personalInfo) ||
       (this.state.show) !== (nextState.show)
     ) {
       return true;
@@ -39,8 +43,8 @@ class PersonalInfo extends React.Component {
   }
 
   render() {
-    const { show, personalInfo } = this.state;
-    const { first_name, last_name, dob, gender } = personalInfo ? personalInfo : { first_name: "", last_name: "", dob: "", gender: "" };
+    const { show } = this.state;
+    const { first_name, last_name, dob, gender } = this.state.personalInfo ? this.state.personalInfo : { first_name: "", last_name: "", dob: "", gender: "" };
     return (
       <div className={`${commonStyle['ml-15']} ${commonStyle['mt-10']}`}>
         <Row>
@@ -83,7 +87,6 @@ class PersonalInfo extends React.Component {
         </div>
         <div className={show ? `${commonStyle['openModal']}` : `${commonStyle['closeModal']}`}>
           <UpdateModal
-            personalInfo={personalInfo}
             handleShow={this.handleShow}
             show={show}
           />
@@ -93,8 +96,14 @@ class PersonalInfo extends React.Component {
   }
 }
 
+
+const mapStateToProps = (store) => ({
+  userInfo: selectors.getUserInfo(store)
+});
+
+
 PersonalInfo.propTypes = {
-  personalInfo: PropTypes.object
+  userInfo: PropTypes.object
 };
 
-export default PersonalInfo;
+export default connect(mapStateToProps)(PersonalInfo);

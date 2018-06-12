@@ -7,24 +7,18 @@ import ContactInfo from './ContactInfo';
 import UpdateInfoComponent from './UpdateInfo';
 
 
-const UserData = props => {
-  const { contactInfo, personalInfo } = props;
+const UserData = () => {
   return (
     <Row>
       <Col xs={12} md={6}>
-        <PersonalInfo personalInfo={personalInfo} />
-        <ContactInfo contactInfo={contactInfo} />
+        <PersonalInfo />
+        <ContactInfo />
       </Col>
       {/* <Col xs={12} md={6}>
-        <UpdateInfoComponent personalInfo={personalInfo} />
+        <UpdateInfoComponent />
       </Col> */}
     </Row>
   );
-}
-
-UserData.propTypes = {
-  personalInfo: PropTypes.object,
-  contactInfo: PropTypes.object
 }
 
 export default UserData;

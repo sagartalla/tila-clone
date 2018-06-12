@@ -18,28 +18,29 @@ class UpdateModal extends React.Component {
   state = {
     user_name: "",
     user_gender: "",
-    user_dob: this.props.personalInfo.dob != "" && this.props.personalInfo.dob ? moment(new Date(this.props.personalInfo.dob)) : moment(new Date()),
+    user_dob: moment(new Date()),
     show: this.props.show,
     responseState: false
   };
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.personalInfo && Object.keys(nextProps.personalInfo).length > 0 && this.state.user_name == "" && this.state.user_gender == "") {
+    if (nextProps.userInfo.personalInfo && Object.keys(nextProps.userInfo.personalInfo).length > 0 && this.state.user_name == "" && this.state.user_gender == "") {
       this.setState({
-        user_name: nextProps.personalInfo.first_name + " " + nextProps.personalInfo.last_name,
-        user_gender: nextProps.personalInfo.gender,
-        user_dob: nextProps.personalInfo.dob != "" && nextProps.personalInfo.dob ? moment(new Date(nextProps.personalInfo.dob)) : moment(new Date()),
+        user_name: nextProps.userInfo.personalInfo.first_name + " " + nextProps.userInfo.personalInfo.last_name,
+        user_gender: nextProps.userInfo.personalInfo.gender,
+        user_dob: nextProps.userInfo.personalInfo.dob != "" && nextProps.userInfo.personalInfo.dob ? moment(new Date(nextProps.userInfo.personalInfo.dob)) : moment(new Date()),
         show: nextProps.show
       })
     }
-    if (nextProps.getEditPersonalInfoStatus && nextProps.getEditPersonalInfoStatus.Response == "SUCCESS" && nextProps.personalInfo && !this.state.responseState) {
+    if (nextProps.getEditPersonalInfoStatus && nextProps.getEditPersonalInfoStatus.Response == "SUCCESS" && nextProps.userInfo.personalInfo && !this.state.responseState) {
       this.setState({
-        user_name: nextProps.personalInfo.first_name + " " + nextProps.personalInfo.last_name,
-        user_gender: nextProps.personalInfo.gender,
-        user_dob: nextProps.personalInfo.dob != "" && nextProps.personalInfo.dob ? moment(new Date(nextProps.personalInfo.dob)) : moment(new Date()),
+        user_name: nextProps.userInfo.personalInfo.first_name + " " + nextProps.userInfo.personalInfo.last_name,
+        user_gender: nextProps.userInfo.personalInfo.gender,
+        user_dob: nextProps.userInfo.personalInfo.dob != "" && nextProps.userInfo.personalInfo.dob ? moment(new Date(nextProps.userInfo.personalInfo.dob)) : moment(new Date()),
         show: nextProps.show,
         responseState: true
       })
+      alert("Details updated successfully!!");
       this.handleClose();
     }
   }
@@ -166,7 +167,8 @@ class UpdateModal extends React.Component {
 
 const mapStateToProps = (store) => ({
   getEditPersonalInfoStatus: selectors.getEditPersonalInfoStatus(store),
-  errorMessege: selectors.getErrorMessege(store)
+  errorMessege: selectors.getErrorMessege(store),
+  userInfo: selectors.getUserInfo(store)
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -180,7 +182,7 @@ const mapDispatchToProps = (dispatch) =>
 UpdateModal.propTypes = {
   show: PropTypes.bool,
   handleShow: PropTypes.func.isRequired,
-  personalInfo: PropTypes.object,
+  userInfo: PropTypes.object,
   getEditPersonalInfoStatus: PropTypes.object,
   errorMessege: PropTypes.string,
   EditPersonalInfo: PropTypes.func

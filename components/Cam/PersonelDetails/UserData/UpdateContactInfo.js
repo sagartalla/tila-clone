@@ -25,10 +25,10 @@ class UpdateContactInfo extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.contactInfo && Object.keys(nextProps.contactInfo).length > 0 && nextProps.element && this.state.element == "" && this.state.value == "") {
+    if (nextProps.userInfo.contactInfo && Object.keys(nextProps.userInfo.contactInfo).length > 0 && nextProps.element && this.state.element == "" && this.state.value == "") {
       this.setState({
         element: nextProps.element,
-        value: nextProps.element == "email" ? nextProps.contactInfo.email : nextProps.element == "phone" ? nextProps.contactInfo.mobile_no : "",
+        value: nextProps.element == "email" ? nextProps.userInfo.contactInfo.email : nextProps.element == "phone" ? nextProps.userInfo.contactInfo.mobile_no : "",
         authValue: "",
         show: nextProps.show
       })
@@ -37,7 +37,7 @@ class UpdateContactInfo extends React.Component {
       this.setState({
         error: nextProps.errorMessege
       });
-    } 
+    }
     if (nextProps.passwordResetStatus != {} && nextProps.passwordResetStatus.hasOwnProperty('Response') && this.state.show == true) {
       if (nextProps.passwordResetStatus.Response == "SUCCESS") {
         this.setState({ error: "" });
@@ -58,7 +58,7 @@ class UpdateContactInfo extends React.Component {
       error: ""
     });
     this.props.resetPasswordInfoStore();
-    this.props.handleShow(false, '')();  
+    this.props.handleShow(false, '')();
   }
 
   handleValueChange = () => (e) => {
@@ -283,7 +283,8 @@ class UpdateContactInfo extends React.Component {
 const mapStateToProps = (store) => ({
   passwordResetStatus: selectors.getPasswordResetStatus(store),
   errorMessege: selectors.getErrorMessege(store),
-  resetPasswordStatus: selectors.resetPasswordStatus(store)
+  resetPasswordStatus: selectors.resetPasswordStatus(store),
+  userInfo: selectors.getUserInfo(store)
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -298,12 +299,12 @@ const mapDispatchToProps = (dispatch) =>
 UpdateContactInfo.propTypes = {
   show: PropTypes.bool,
   handleShow: PropTypes.func.isRequired,
-  contactInfo: PropTypes.object,
   element: PropTypes.string,
   passwordResetStatus: PropTypes.object,
   errorMessege: PropTypes.string,
   changePassword: PropTypes.func,
-  resetPasswordInfoStore: PropTypes.func
+  resetPasswordInfoStore: PropTypes.func,
+  userInfo: PropTypes.object
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(UpdateContactInfo);

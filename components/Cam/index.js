@@ -19,29 +19,10 @@ class Cam extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tab: "profile",
-      userInfo:{}
+      tab: "profile"
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    if(nextProps.userInfo){
-   this.setState({
-    userInfo: nextProps.userInfo
-   })
-  }
-}
-
-shouldComponentUpdate(nextProps, nextState) {
-  if (
-    JSON.stringify(nextProps.userInfo) !== JSON.stringify(this.props.userInfo) ||
-    JSON.stringify(nextProps.userInfo) !== JSON.stringify(this.state.userInfo) ||
-    JSON.stringify(nextProps.userInfo) !== JSON.stringify(nextState.userInfo) 
-  ) {
-    return true;
-  }
-  return false;
-}
 
   componentDidMount() {
     const { tabDetails } = this.props;
@@ -54,7 +35,7 @@ shouldComponentUpdate(nextProps, nextState) {
   }
 
   render() {
-    const { tab , userInfo} = this.state;
+    const { tab } = this.state;
     const camComponent = ((tabName) => {
       switch (tabName) {
         case 'orders':
@@ -62,9 +43,9 @@ shouldComponentUpdate(nextProps, nextState) {
         case 'address':
           return <ShippingAddress />;
         case 'profile':
-      return (<UserInfo {...userInfo}/>);
-       default:
-      return (<UserInfo {...userInfo}/>);
+          return (<UserInfo />);
+        default:
+          return (<UserInfo />);
       }
     })(tab);
     return (
@@ -108,4 +89,4 @@ Cam.propTypes = {
   getUserProfileInfo: PropTypes.func
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Cam);
+export default connect( mapStateToProps,mapDispatchToProps)(Cam);
