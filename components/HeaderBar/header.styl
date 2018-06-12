@@ -10,13 +10,13 @@
 .search-wrapper
   position relative
   .search-input
-    height 50px
+    height 45px
     width 100%
     background #eee
-    border-radius 4px
+    border-radius 25px
     outline none
     padding 10px 20px
-    font-size 20px
+    font-size 16px
     border none
     &[contenteditable=true]
       color #ccc
@@ -32,29 +32,26 @@
       white-space:nowrap;
 
   .search-btn
-    position: absolute;
-    right: 0;
-    top: 0;
-    background: #666
-    display: block;
-    height: 50px;
-    padding: 11px 15px;
-    font-size: 20px;
-    cursor: pointer;
-    color: #fff
-    border-radius: 4px
-    text-transform uppercase
+    position absolute
+    right 14px
+    top 10px
+    .searching-icon
+      position absolute
+      right -14px
+      width 45px
+      top -11px
 
 .actionbar-wrapper
   .action-item 
-    width 50px
-    height 50px
+    width 46px
+    height 46px
     border-radius 50%
     float left
-    box-shadow 0 0 3px 1px
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.1);
     margin 0 5px
     position relative
     cursor pointer
+    border 1px solid generic-gray-color
   
 .login-reg-modal
   width 760px
@@ -80,3 +77,13 @@ nav
       a
         color inherit 
         font-weight 500
+
+.action-item
+  .wish-list-icon
+  .cam-icon
+    width 24px
+    height 18px
+
+  .cart-icon
+    width 22px
+    height 24px

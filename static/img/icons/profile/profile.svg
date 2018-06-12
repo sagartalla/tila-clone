@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="57" height="57" viewBox="0 0 57 57">
+    <defs>
+        <rect id="b" width="39" height="39" rx="4"/>
+        <filter id="a" width="176.9%" height="176.9%" x="-38.5%" y="-30.8%" filterUnits="objectBoundingBox">
+            <feOffset dy="3" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="4.5"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.072435462 0"/>
+        </filter>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g transform="translate(9 6)">
+            <use fill="#000" filter="url(#a)" xlink:href="#b"/>
+            <use class="icon-bg-fill" fill="#0654BA" xlink:href="#b"/>
+        </g>
+        <g fill="#FFF" fill-rule="nonzero">
+            <path class="icon-fill" d="M16.882 35h20.236c.27 0 .522-.115.692-.315a.797.797 0 0 0 .184-.62c-.475-3.845-2.748-7.049-5.86-8.757-1.316 1.368-3.132 2.215-5.134 2.215-2.002 0-3.818-.847-5.134-2.215-3.112 1.708-5.386 4.912-5.86 8.758a.798.798 0 0 0 .184.62c.17.2.422.314.692.314z"/>
+            <path class="icon-fill" d="M22.45 24.907c.118.127.241.248.368.366A6.158 6.158 0 0 0 27 26.923c1.606 0 3.07-.628 4.182-1.65a6.521 6.521 0 0 0 .707-.759 6.542 6.542 0 0 0 1.397-4.052C33.286 16.898 30.466 14 27 14c-3.466 0-6.286 2.899-6.286 6.462 0 1.534.525 2.943 1.397 4.052.107.136.221.266.34.393z"/>
+        </g>
+    </g>
+</svg>
+<style>
+.done .icon-bg-fill {
+    fill: #99CC33
+}
+
+.done .icon-fill {
+    fill: #fff
+}
+
+.payment-active .icon-bg-fill {
+    fill: #0654BA;
+}
+
+.payment-active .icon-fill {
+    fill: #fff
+}
+   
+</style>

@@ -6,6 +6,7 @@ import { Router } from '../../routes';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators, selectors } from '../../store/cart';
+import { actionCreators as wishlistActionCreators, selectors as wishlistSelectors } from '../../store/cam/wishlist';
 
 import HeaderBar from '../HeaderBar/index';
 import CartBody from './includes/CartBody';
@@ -25,6 +26,7 @@ class Cart extends Component {
     this.removeCartItem = this.removeCartItem.bind(this);
     this.increaseItemCnt = this.increaseItemCnt.bind(this);
     this.decreaseItemCnt = this.decreaseItemCnt.bind(this);
+    this.addToWishlist = this.addToWishlist.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -58,6 +60,18 @@ class Cart extends Component {
     this.props.cartItemCount(id, typ);
   }
 
+  //TODO after add to cart, discuss with backend team whether to call cart item or not.
+  addToWishlist(e) {
+    const { results } = this.props;
+    const listing_id = e.target.getAttribute('data-id');
+    const item = results.items.filter(_item => listing_id == _item.item_id)[0];
+    this.props.addToWishlist({
+      "catalog_id": item.item_id,
+      "product_id": item.product_id,
+      "variant_id": item.variant_id
+    });
+  }
+
   render() {
     const { showBlocker } = this.state;
     const { results } = this.props;
@@ -72,6 +86,7 @@ class Cart extends Component {
             removeCartItem={this.removeCartItem}
             increaseItemCnt={this.increaseItemCnt}
             decreaseItemCnt={this.decreaseItemCnt}
+            addToWishlist={this.addToWishlist}
           />
         </Grid>
       </div>
@@ -89,6 +104,7 @@ const mapDispatchToProps = (dispatch) =>
       getCartResults: actionCreators.getCartResults,
       removeCartItem: actionCreators.removeCartItem,
       cartItemCount: actionCreators.cartItemCount,
+      addToWishlist: wishlistActionCreators.addToWishlist,
     },
     dispatch,
   );
@@ -98,7 +114,7 @@ Cart.propTypes = {
 };
 
 Cart.defaultProps = {
-  
+
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="57" height="57" viewBox="0 0 57 57">
+    <defs>
+        <rect id="b" width="39" height="39" rx="4"/>
+        <filter id="a" width="176.9%" height="176.9%" x="-38.5%" y="-30.8%" filterUnits="objectBoundingBox">
+            <feOffset dy="3" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="4.5"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.072435462 0"/>
+        </filter>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g transform="translate(9 6)">
+            <use fill="#000" filter="url(#a)" xlink:href="#b"/>
+            <use class="icon-bg-fill" fill="#FFF" xlink:href="#b"/>
+        </g>
+        <g fill="#333" fill-rule="nonzero">
+            <path class="icon-fill"  d="M26.063 20v-1.5h-8.625c-.793 0-1.438.673-1.438 1.5v3h10.366c-.2-.917-.303-1.904-.303-3zM38.941 26c-.98 1.576-2.475 2.917-4.617 4.201-.33.197-.7.299-1.074.299-.374 0-.745-.102-1.07-.296-2.141-1.287-3.636-2.63-4.618-4.204H16v7.5c0 .828.645 1.5 1.437 1.5h20.125c.794 0 1.438-.672 1.438-1.5V26h-.059zM22.47 30.5h-2.875c-.397 0-.719-.336-.719-.75s.322-.75.719-.75h2.875c.396 0 .718.336.718.75s-.322.75-.718.75z"/>
+            <path class="icon-fill" d="M38.564 16.311l-5.03-2.25a.694.694 0 0 0-.569 0l-5.03 2.25A.75.75 0 0 0 27.5 17v3c0 4.126 1.462 6.538 5.392 8.9a.698.698 0 0 0 .716 0C37.538 26.545 39 24.133 39 20v-3c0-.3-.171-.572-.436-.689zm-2.596 3.408l-2.875 3.75a.715.715 0 0 1-.562.28h-.03a.715.715 0 0 1-.568-.332l-1.437-2.25a.77.77 0 0 1 .2-1.04.7.7 0 0 1 .996.209l.892 1.396 2.26-2.949a.702.702 0 0 1 1.01-.117c.311.257.36.73.114 1.053z"/>
+        </g>
+    </g>
+</svg>
+<style>
+.payment-active .icon-bg-fill {
+    fill: #0654BA;
+}
+
+.payment-active .icon-fill {
+    fill: #fff
+}
+</style>
