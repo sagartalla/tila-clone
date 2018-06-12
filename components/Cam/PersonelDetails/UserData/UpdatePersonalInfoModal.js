@@ -14,7 +14,7 @@ import { actionCreators, selectors } from '../../../../store/cam/personalDetails
 
 import styles from '../../cam.styl';
 
-class UpdateModal extends React.Component {
+class UpdatePersonalInfoModal extends React.Component {
   state = {
     user_name: "",
     user_gender: "",
@@ -26,7 +26,7 @@ class UpdateModal extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.userInfo.personalInfo && Object.keys(nextProps.userInfo.personalInfo).length > 0 && this.state.user_name == "" && this.state.user_gender == "") {
       this.setState({
-        user_name: nextProps.userInfo.personalInfo.first_name + " " + nextProps.userInfo.personalInfo.last_name,
+        user_name: nextProps.userInfo.personalInfo.user_name,
         user_gender: nextProps.userInfo.personalInfo.gender,
         user_dob: nextProps.userInfo.personalInfo.dob != "" && nextProps.userInfo.personalInfo.dob ? moment(new Date(nextProps.userInfo.personalInfo.dob)) : moment(new Date()),
         show: nextProps.show
@@ -34,7 +34,7 @@ class UpdateModal extends React.Component {
     }
     if (nextProps.getEditPersonalInfoStatus && nextProps.getEditPersonalInfoStatus.Response == "SUCCESS" && nextProps.userInfo.personalInfo && !this.state.responseState) {
       this.setState({
-        user_name: nextProps.userInfo.personalInfo.first_name + " " + nextProps.userInfo.personalInfo.last_name,
+        user_name: nextProps.userInfo.personalInfo.user_name,
         user_gender: nextProps.userInfo.personalInfo.gender,
         user_dob: nextProps.userInfo.personalInfo.dob != "" && nextProps.userInfo.personalInfo.dob ? moment(new Date(nextProps.userInfo.personalInfo.dob)) : moment(new Date()),
         show: nextProps.show,
@@ -55,7 +55,7 @@ class UpdateModal extends React.Component {
     this.props.handleShow(false)();
   }
 
-  handleNameChange = () => (e) => {
+  handleNameChange = (e) => {
     this.setState({
       user_name: e.target.value
     });
@@ -130,7 +130,7 @@ class UpdateModal extends React.Component {
             <Row className={`${styles['m-5']} ${styles['mt-20']}`}>
               <Col xs={12} md={12}>
                 <div>Name</div>
-                <Input placeholder="Enter Name" val={user_name} onChange={this.handleNameChange()} />
+                <Input placeholder="Enter Name" val={user_name} onChange={this.handleNameChange} />
               </Col>
             </Row>
             <Row className={`${styles['m-5']} ${styles['mt-20']}`}>
@@ -179,7 +179,7 @@ const mapDispatchToProps = (dispatch) =>
     dispatch,
   );
 
-UpdateModal.propTypes = {
+  UpdatePersonalInfoModal.propTypes = {
   show: PropTypes.bool,
   handleShow: PropTypes.func.isRequired,
   userInfo: PropTypes.object,
@@ -188,4 +188,4 @@ UpdateModal.propTypes = {
   EditPersonalInfo: PropTypes.func
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UpdateModal);
+export default connect(mapStateToProps, mapDispatchToProps)(UpdatePersonalInfoModal);

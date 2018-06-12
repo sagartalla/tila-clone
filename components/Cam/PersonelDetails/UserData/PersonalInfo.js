@@ -7,8 +7,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators, selectors } from '../../../../store/cam/personalDetails';
 
-import UpdateModal from './UpdateModal';
-import commonStyle from '../../cam.styl';
+import UpdatePersonalInfoModal from './UpdatePersonalInfoModal';
+import styles from '../../cam.styl';
 
 class PersonalInfo extends React.Component {
 
@@ -46,47 +46,47 @@ class PersonalInfo extends React.Component {
     const { show } = this.state;
     const { first_name, last_name, dob, gender } = this.state.personalInfo ? this.state.personalInfo : { first_name: "", last_name: "", dob: "", gender: "" };
     return (
-      <div className={`${commonStyle['ml-15']} ${commonStyle['mt-10']}`}>
+      <div className={`${styles['ml-15']} ${styles['mt-10']}`}>
         <Row>
           <Col xs={6} md={6}>
             <h6>Personel Information</h6>
           </Col>
           <Col xs={6} md={6}>
-            <span className={`${commonStyle['float-r']} ${commonStyle['p-0']} ${commonStyle['m-5']}`}>
+            <span className={`${styles['float-r']} ${styles['p-0']} ${styles['m-5']}`}>
               <a onClick={this.handleShow(true)}>Edit</a>
             </span>
           </Col>
         </Row>
-        <Row className={`${commonStyle['bb-dashed']} ${commonStyle['pb-5']} ${commonStyle['pt-5']}`}>
-          <Col xs={12} md={3} className={`${commonStyle['pl-0']} ${commonStyle['pr-0']} ${commonStyle['m-5']}`}>
+        <Row className={`${styles['bb-dashed']} ${styles['pb-5']} ${styles['pt-5']}`}>
+          <Col xs={12} md={3} className={`${styles['pl-0']} ${styles['pr-0']} ${styles['m-5']}`}>
             <span>Name</span>
           </Col>
-          <Col xs={12} md={8} className={`${commonStyle['p-0']} ${commonStyle['m-5']}`}>
-            <span className={commonStyle['pl-15']}>{first_name} {last_name}</span>
+          <Col xs={12} md={8} className={`${styles['p-0']} ${styles['m-5']}`}>
+            <span className={styles['pl-15']}>{first_name} {last_name}</span>
           </Col>
         </Row>
-        <Row className={`${commonStyle['bb-dashed']} ${commonStyle['pb-5']} ${commonStyle['pt-5']}`}>
-          <Col xs={12} md={3} className={`${commonStyle['pl-0']} ${commonStyle['pr-0']} ${commonStyle['m-5']}`}>
+        <Row className={`${styles['bb-dashed']} ${styles['pb-5']} ${styles['pt-5']}`}>
+          <Col xs={12} md={3} className={`${styles['pl-0']} ${styles['pr-0']} ${styles['m-5']}`}>
             <span>Date Of Birth</span>
           </Col>
-          <Col xs={12} md={8} className={`${commonStyle['p-0']} ${commonStyle['m-5']}`}>
-            <span className={commonStyle['pl-15']}>{dob}</span>
+          <Col xs={12} md={8} className={`${styles['p-0']} ${styles['m-5']}`}>
+            <span className={styles['pl-15']}>{dob}</span>
           </Col>
         </Row>
-        <Row className={`${commonStyle['pt-5']} ${commonStyle['ml-0']}`}>
-          <Col xs={12} md={3} className={`${commonStyle['pl-0']} ${commonStyle['pr-0']} ${commonStyle['m-5']}`}>
+        <Row className={`${styles['pt-5']} ${styles['ml-0']}`}>
+          <Col xs={12} md={3} className={`${styles['pl-0']} ${styles['pr-0']} ${styles['m-5']}`}>
             <span>Gender</span>
           </Col>
-          <Col xs={12} md={8} className={`${commonStyle['p-0']} ${commonStyle['m-5']}`}>
-            <span className={commonStyle['pl-15']}>{gender == 'F' ? "Female" : gender == "M" ? "Male" : ""}</span>
+          <Col xs={12} md={8} className={`${styles['p-0']} ${styles['m-5']}`}>
+            <span className={styles['pl-15']}>{gender == 'F' ? "Female" : gender == "M" ? "Male" : ""}</span>
           </Col>
         </Row>
-        <div className={show ? `${commonStyle['modalContainer']} ${commonStyle['showDiv']}` : `${commonStyle['modalContainer']} ${commonStyle['hideDiv']}`}>
-          <div className={`${commonStyle['disabled']}`}>
+        <div className={show ? `${styles['modalContainer']} ${styles['showDiv']}` : `${styles['modalContainer']} ${styles['hideDiv']}`}>
+          <div className={`${styles['disabled']}`}>
           </div>
         </div>
-        <div className={show ? `${commonStyle['openModal']}` : `${commonStyle['closeModal']}`}>
-          <UpdateModal
+        <div className={show ? `${styles['openModal']}` : `${styles['closeModal']}`}>
+          <UpdatePersonalInfoModal
             handleShow={this.handleShow}
             show={show}
           />

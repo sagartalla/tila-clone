@@ -6,26 +6,26 @@ import UserData from './UserData';
 import SocialMedia from './SocialMedia';
 import Notification from './Notification';
 
-import commonStyles from '../cam.styl';
+import styles from '../cam.styl';
 
 const UserInfo = () => {
   return (
     <div>
-      <Row className={commonStyles['ml-10']}>
-        <Col md={12} xs={12} className={commonStyles['pl-0']}>
-          <div className={`${commonStyles['ht-auto']} ${commonStyles['fs-12']} ${commonStyles['box']}`}>
+      <Row className={styles['ml-10']}>
+        <Col md={12} xs={12} className={styles['pl-0']}>
+          <div className={`${styles['ht-auto']} ${styles['fs-12']} ${styles['box']}`}>
             <UserData />
           </div>
         </Col>
       </Row>
-      <Row className={`${commonStyles['ml-10']} ${commonStyles['mt-10']}`}>
-        <Col xs={12} md={6} className={commonStyles['pl-0']}>
-          <div className={`${commonStyles['fs-12']} ${commonStyles['ht-170']} ${commonStyles['box']} `}>
+      <Row className={`${styles['ml-10']} ${styles['mt-10']}`}>
+        <Col xs={12} md={6} className={styles['pl-0']}>
+          <div className={`${styles['fs-12']} ${styles['ht-170']} ${styles['box']} `}>
             <SocialMedia />
           </div>
         </Col>
-        <Col xs={12} md={6} className={commonStyles['pl-0']}>
-          <div className={`${commonStyles['fs-12']} ${commonStyles['ht-170']} ${commonStyles['box']} `}>
+        <Col xs={12} md={6} className={styles['pl-0']}>
+          <div className={`${styles['fs-12']} ${styles['ht-170']} ${styles['box']} `}>
             <Notification />
           </div>
         </Col>

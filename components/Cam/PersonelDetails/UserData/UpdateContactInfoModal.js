@@ -5,7 +5,7 @@ import { Row, Col } from 'react-bootstrap';
 import Btn from '../../../common/Button';
 import Input from '../../../common/Input';
 
-import commonStyle from '../../cam.styl';
+import styles from '../../cam.styl';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -13,7 +13,7 @@ import { actionCreators, selectors } from '../../../../store/cam/personalDetails
 
 
 
-class UpdateContactInfo extends React.Component {
+class UpdateContactInfoModal extends React.Component {
 
   state = {
     element: "",
@@ -61,14 +61,14 @@ class UpdateContactInfo extends React.Component {
     this.props.handleShow(false, '')();
   }
 
-  handleValueChange = () => (e) => {
+  handleValueChange = (e) => {
     this.setState({ value: e.target.value });
     if (this.state.element == "password") {
       this.setState({ error: "" });
     }
   }
 
-  handleRePasswordBlur = () => (e) => {
+  handleRePasswordBlur = (e) => {
     if (e.target.value != this.state.authValue) {
       this.setState({ error: "Passwords must match" });
     }
@@ -77,7 +77,7 @@ class UpdateContactInfo extends React.Component {
     }
   }
 
-  handleAuthValueChange = () => (e) => {
+  handleAuthValueChange = (e) => {
     if (this.state.element == "password") {
       if (e.target.value != this.state.rePassword && this.state.rePassword.length > 0) {
         this.setState({
@@ -101,7 +101,7 @@ class UpdateContactInfo extends React.Component {
       this.setState({ authValue: e.target.value });
   }
 
-  handleRePasswordChange = () => (e) => {
+  handleRePasswordChange = (e) => {
     this.setState({
       rePassword: e.target.value
     });
@@ -144,7 +144,7 @@ class UpdateContactInfo extends React.Component {
     let errorComponent = null;
     if (error) {
       errorComponent = (
-        <div className={`${commonStyle['text-center']} ${commonStyle['error-msg']}`}>
+        <div className={`${styles['text-center']} ${styles['error-msg']}`}>
           <span>{error}</span>
         </div>);
     }
@@ -160,16 +160,16 @@ class UpdateContactInfo extends React.Component {
             <Col xs={4} md={4} />
           </Row>
 
-          <Row className={`${commonStyle['m-5']} ${commonStyle['mt-20']}`}>
-            <Col xs={12} md={12} className={`${commonStyle['box']}`}>
+          <Row className={`${styles['m-5']} ${styles['mt-20']}`}>
+            <Col xs={12} md={12} className={`${styles['box']}`}>
               <div>Email ID</div>
-              <Input placeholder="Enter Email Id" type="email" val={value} onChange={this.handleValueChange()} />
+              <Input placeholder="Enter Email Id" type="email" val={value} onChange={this.handleValueChange} />
             </Col>
-            <Col xs={12} md={12} className={`${commonStyle['box']}`}>
+            <Col xs={12} md={12} className={`${styles['box']}`}>
               <div>Account Password</div>
               <Row>
                 <Col xs={8} md={8}>
-                  <Input placeholder="Enter Password" type="password" val={authValue} onChange={this.handleAuthValueChange()} />
+                  <Input placeholder="Enter Password" type="password" val={authValue} onChange={this.handleAuthValueChange} />
                 </Col>
                 <Col xs={4} md={4}>
                   <span><a onClick={this.handleForgotPassword}>Forgot Password?</a></span>
@@ -178,7 +178,7 @@ class UpdateContactInfo extends React.Component {
             </Col>
           </Row>
           <Row>
-            <Col xs={12} md={12} className={`${commonStyle['t-c']}`}>
+            <Col xs={12} md={12} className={`${styles['t-c']}`}>
               <Btn btnWidth="95%" backGround="#034e94" color="#fff" btnText="Save Email Id" BtnClickHandler={this.handleAction} />
             </Col>
           </Row>
@@ -199,24 +199,24 @@ class UpdateContactInfo extends React.Component {
           <Row>
             {errorComponent}
           </Row>
-          <Row className={`${commonStyle['m-5']} ${commonStyle['mt-20']}`}>
-            <Col xs={12} md={12} className={commonStyle['box']}>
+          <Row className={`${styles['m-5']} ${styles['mt-20']}`}>
+            <Col xs={12} md={12} className={styles['box']}>
               <div>Enter Old Password</div>
-              <Input placeholder="Enter Old Password" type="password" val={value} onChange={this.handleValueChange()} />
+              <Input placeholder="Enter Old Password" type="password" val={value} onChange={this.handleValueChange} />
             </Col>
-            <Col xs={12} md={12} className={commonStyle['box']}>
-              <Col xs={6} md={6} className={commonStyle['pl-0']}>
+            <Col xs={12} md={12} className={styles['box']}>
+              <Col xs={6} md={6} className={styles['pl-0']}>
                 <div>Enter New Password</div>
-                <Input placeholder="Enter New Password" type="password" val={authValue} onChange={this.handleAuthValueChange()} />
+                <Input placeholder="Enter New Password" type="password" val={authValue} onChange={this.handleAuthValueChange} />
               </Col>
-              <Col xs={6} md={6} className={commonStyle['pl-0']}>
+              <Col xs={6} md={6} className={styles['pl-0']}>
                 <div>Re-enter New Password</div>
-                <Input placeholder="Re enter Password" type="password" val={rePassword} onChange={this.handleRePasswordChange()} onBlur={this.handleRePasswordBlur()} />
+                <Input placeholder="Re enter Password" type="password" val={rePassword} onChange={this.handleRePasswordChange} onBlur={this.handleRePasswordBlur} />
               </Col>
             </Col>
           </Row>
           <Row>
-            <Col xs={12} md={12} className={`${commonStyle['t-c']}`}>
+            <Col xs={12} md={12} className={`${styles['t-c']}`}>
               <Btn btnWidth="95%" backGround="#034e94" color="#fff" btnText="Change Password" BtnClickHandler={this.handleAction} />
             </Col>
           </Row>
@@ -230,20 +230,20 @@ class UpdateContactInfo extends React.Component {
           <Row>
             <Col xs={4} md={4} />
             <Col xs={4} md={4}>
-              <div className={commonStyle['image-block-style']} />
+              <div className={styles['image-block-style']} />
             </Col>
             <Col xs={4} md={4} />
           </Row>
-          <Row className={`${commonStyle['m-5']} ${commonStyle['mt-20']}`}>
-            <Col xs={12} md={12} className={commonStyle['box']}>
+          <Row className={`${styles['m-5']} ${styles['mt-20']}`}>
+            <Col xs={12} md={12} className={styles['box']}>
               <div>Phone Number</div>
-              <Input placeholder="Enter phone number" type="number" val={value} onChange={this.handleValueChange()} />
+              <Input placeholder="Enter phone number" type="number" val={value} onChange={this.handleValueChange} />
             </Col>
-            <Col xs={12} md={12} className={commonStyle['box']}>
+            <Col xs={12} md={12} className={styles['box']}>
               <div>Enter OTP</div>
               <Row>
                 <Col xs={8} md={8}>
-                  <Input placeholder="Enter OTP" val={authValue} onChange={this.handleAuthValueChange()} />
+                  <Input placeholder="Enter OTP" val={authValue} onChange={this.handleAuthValueChange} />
                 </Col>
                 <Col xs={4} md={4}>
                   <span><a onClick={this.handleResendOtp}>Resend OTP</a></span>
@@ -252,7 +252,7 @@ class UpdateContactInfo extends React.Component {
             </Col>
           </Row>
           <Row>
-            <Col xs={12} md={12} className={`${commonStyle['t-c']}`}>
+            <Col xs={12} md={12} className={`${styles['t-c']}`}>
               <Btn btnWidth="95%" backGround="#034e94" color="#fff" btnText="Verify Mobile Number" BtnClickHandler={this.handleAction} />
             </Col>
           </Row>
@@ -263,7 +263,7 @@ class UpdateContactInfo extends React.Component {
 
     return (
       <div>
-        <div className={commonStyle['editProfileModal']}>
+        <div className={styles['editProfileModal']}>
           <Row>
             <Col xs={11} md={11}>
               <h3>{title}</h3>
@@ -296,7 +296,7 @@ const mapDispatchToProps = (dispatch) =>
     dispatch,
   );
 
-UpdateContactInfo.propTypes = {
+  UpdateContactInfoModal.propTypes = {
   show: PropTypes.bool,
   handleShow: PropTypes.func.isRequired,
   element: PropTypes.string,
@@ -307,5 +307,5 @@ UpdateContactInfo.propTypes = {
   userInfo: PropTypes.object
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UpdateContactInfo);
+export default connect(mapStateToProps, mapDispatchToProps)(UpdateContactInfoModal);
 

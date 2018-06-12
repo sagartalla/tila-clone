@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import PersonalInfo from './PersonalInfo';
 import ContactInfo from './ContactInfo';
-import UpdateInfoComponent from './UpdateInfo';
+import UpdateTimelineComponent from './UpdateTimelineComponent';
 
 
 const UserData = () => {
@@ -15,7 +15,7 @@ const UserData = () => {
         <ContactInfo />
       </Col>
       {/* <Col xs={12} md={6}>
-        <UpdateInfoComponent />
+        <UpdateTimelineComponent />
       </Col> */}
     </Row>
   );

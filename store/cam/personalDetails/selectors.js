@@ -40,7 +40,12 @@ const getUserInfo = (store) => {
         contactInfo.lastUpdated = 'Not Available';
 
     }
-    const personalInfo = store.personalDetailsReducer.data.personalInfo != "" ? store.personalDetailsReducer.data.personalInfo : {};
+    let personalInfo = {}
+    if(store.personalDetailsReducer.data.personalInfo != "" && store.personalDetailsReducer.data.personalInfo && Object.keys(store.personalDetailsReducer.data.personalInfo).length > 0) 
+    {
+      personalInfo=store.personalDetailsReducer.data.personalInfo;
+      personalInfo.user_name=personalInfo.first_name+" "+personalInfo.last_name;
+    }
     return { contactInfo, personalInfo };
   }
   return {};

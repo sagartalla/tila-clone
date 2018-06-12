@@ -7,13 +7,13 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators, selectors } from '../../../../store/cam/personalDetails';
 
-import UpdateModal from './UpdateModal';
+import UpdatePersonalInfoModal from './UpdatePersonalInfoModal';
 import Btn from '../../../common/Button';
 
 import styles from '../../cam.styl';
 
 
-class UpdateInfoComponent extends React.Component {
+class UpdateTimelineComponent extends React.Component {
 
   state = {
     show: false,
@@ -84,7 +84,7 @@ class UpdateInfoComponent extends React.Component {
           </div>
         </div>
         <div className={show ? `${styles['openModal']}` : `${styles['closeModal']}`}>
-          <UpdateModal
+          <UpdatePersonalInfoModal
             handleShow={this.handleShow}
             show={show}
           />
@@ -100,10 +100,10 @@ const mapStateToProps = (store) => ({
 });
 
 
-UpdateInfoComponent.propTypes = {
+UpdateTimelineComponent.propTypes = {
   userInfo: PropTypes.object,
   handleShow: PropTypes.func
 };
 
-export default connect(mapStateToProps)(UpdateInfoComponent);
+export default connect(mapStateToProps)(UpdateTimelineComponent);
 
