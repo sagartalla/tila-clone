@@ -27,10 +27,10 @@ class PersonalInfo extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
+    const personalInfo= JSON.stringify(nextProps.userInfo.personalInfo);
     if (
-      JSON.stringify(nextProps.userInfo.personalInfo) !== JSON.stringify(this.props.userInfo.personalInfo) ||
-      JSON.stringify(nextProps.userInfo.personalInfo) !== JSON.stringify(this.state.personalInfo) ||
-      JSON.stringify(nextProps.userInfo.personalInfo) !== JSON.stringify(nextState.personalInfo) ||
+      personalInfo !== JSON.stringify(this.props.userInfo.personalInfo) ||
+      personalInfo !== JSON.stringify(this.state.personalInfo)  ||
       (this.state.show) !== (nextState.show)
     ) {
       return true;

@@ -3,6 +3,10 @@ import { Row, Col } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { actionCreators, selectors } from '../../../../store/cam/personalDetails';
+
 import UpdateModal from './UpdateModal';
 import Btn from '../../../common/Button';
 
@@ -17,18 +21,18 @@ class UpdateInfoComponent extends React.Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.personalInfo) {
+    if (nextProps.userInfo.personalInfo) {
       this.setState({
-        personalInfo: nextProps.personalInfo
+        personalInfo: nextProps.userInfo.personalInfo
       });
     }
   }
 
   shouldComponentUpdate(nextProps, nextState) {
+    const personalInfo= JSON.stringify(nextProps.userInfo.personalInfo);
     if (
-      JSON.stringify(nextProps.personalInfo) !== JSON.stringify(this.props.personalInfo) ||
-      JSON.stringify(nextProps.personalInfo) !== JSON.stringify(this.state.personalInfo) ||
-      JSON.stringify(nextProps.personalInfo) !== JSON.stringify(nextState.personalInfo) ||
+      personalInfo !== JSON.stringify(this.props.userInfo.personalInfo) ||
+      personalInfo !== JSON.stringify(this.state.personalInfo)  ||
       (this.state.show) !== (nextState.show)
     ) {
       return true;
@@ -81,7 +85,6 @@ class UpdateInfoComponent extends React.Component {
         </div>
         <div className={show ? `${styles['openModal']}` : `${styles['closeModal']}`}>
           <UpdateModal
-            personalInfo={personalInfo}
             handleShow={this.handleShow}
             show={show}
           />
@@ -92,9 +95,15 @@ class UpdateInfoComponent extends React.Component {
   }
 }
 
+const mapStateToProps = (store) => ({
+  userInfo: selectors.getUserInfo(store)
+});
+
+
 UpdateInfoComponent.propTypes = {
-  personalInfo: PropTypes.object,
+  userInfo: PropTypes.object,
   handleShow: PropTypes.func
 };
 
-export default UpdateInfoComponent;
+export default connect(mapStateToProps)(UpdateInfoComponent);
+
