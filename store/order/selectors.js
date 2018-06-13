@@ -55,4 +55,22 @@ const getReturnStatus = (store) => {
   return store.singleOrderReducer.data.orderIssue.returnStatus;
 }
 
-export { getOrderDetails, getOrderIssue, getCancelStatus, getErrorMessege, getLoadingStatus, getSelectedOrder, getReturnStatus };
+const getVariants = (store) => {
+  // return store.singleOrderReducer.data.orderIssue.exchangeVariants.variant_details.size.attribute_values;
+  /*{
+    "comment": "string",
+    "country_code": "string",
+    "inventory_location_id": "string",
+    "new_listing_id": "string",
+    "order_item_id": "string",
+    "reason": "string",
+    "seller_id": "string",
+    "sub_reason": "string",
+    "user_id": "string",
+    "variant_id": "string"
+  }*/
+  return store.singleOrderReducer.data.orderIssue.exchangeVariants;
+  store.singleOrderReducer.data.orderIssue.exchangeVariants.map()
+}
+
+export { getOrderDetails, getOrderIssue, getCancelStatus, getErrorMessege, getLoadingStatus, getSelectedOrder, getReturnStatus, getVariants };

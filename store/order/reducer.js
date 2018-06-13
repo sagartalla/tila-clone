@@ -11,6 +11,7 @@ const initialState = {
         items: [],
         reasons: [],
         cancelStatus: {},
+        exchangeVariants: {},
       },
     },
     error: '',
@@ -189,6 +190,27 @@ const productReducer = typeToReducer({
           orderIssue: {
             ...state.data.orderIssue,
             returnStatus: action.payload.data
+          }
+        },
+        ui: { loading: false }
+      };
+    },
+    REJECTED: (state, action) => {
+      return Object.assign({}, state, { error: action.payload.message, ui: { loading: false } })
+    },
+  },
+  [actions.GET_EXCHANGE_VARIANTS]: {
+    PENDING: state => {
+      return Object.assign({}, state, { ui: { loading: true } });
+    },
+    FULFILLED: (state, action) => {
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          orderIssue: {
+            ...state.data.orderIssue,
+            exchangeVariants: action.payload.data
           }
         },
         ui: { loading: false }
