@@ -45,16 +45,6 @@ const WishlistBody = props => {
                         <h4 className={`${styles['fontW600']} ${styles['light-gry-clr']} ${styles['mt-24']} ${styles['t-c']}`}><span className={styles['fs-30']}>{price}</span> <span clsName={styles['fs-18']}> {cur}</span></h4>
                       </div>
                     </Col>
-
-                    {/* <Col md={10}>
-                      <h4 className={`${styles['fontW600']} ${styles['light-gry-clr']}`}>{name}</h4>
-                      <div className={styles['mt-20']}>
-                        <button id={listing_id}  className={`${styles['fp-btn']} ${styles['fp-btn-primary']}`} onClick={addToCart}>{WISH_LIST_PAGE.ADD_TO_CART_BTN}</button>
-                      </div>
-                    </Col> */}
-                    {/* <Col md={2}>
-                      <h4 className={`${styles['fontW600']} ${styles['light-gry-clr']} ${styles['mt-15']} ${styles['t-c']}`}>{price + ' ' + cur}</h4>
-                    </Col> */}
                   </Col>
                 </Row>
               </div>
