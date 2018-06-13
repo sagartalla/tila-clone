@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col, Button, OverlayTrigger, Popover } from 'react-bootstrap';
-
+import SVGCompoent from '../../../common/SVGComponet';
 import OrderItem from './OrderItem';
 
 import styles from '../orders.styl';
@@ -16,66 +16,58 @@ const Order = ({order}) => {
   );
   return (
     <div className={`${styles['order-item-wrap']} ${styles['box-shadow']} ${styles['mt-20']} ${styles['mb-20']} ${styles['p-20']}`}>
-      <Row>
-        <Col md={6}>
-          <div>
-            <span>Order Id #</span>
-          </div>
+      <div className={`${styles['flx-spacebw-alignc']}`}>
+        <div>
+          <span>Order Id #</span>
           <div>
             <span className={styles['link-text']}>{order.id}</span>
           </div>
-        </Col>
-        <Col md={6}>
-          <Row>
-            <Col md={8}>
-              <div>
-                <span>Shipping to</span>
-              </div>
-              <div>
-                <span className={styles['link-text']}>{order.shippingTo.name}</span>
-                <OverlayTrigger trigger="click" placement="bottom" overlay={popover}>
-                  <span className={styles['ml-10']}>v</span>
-                </OverlayTrigger>
-              </div>
-            </Col>
-            <Col md={4}>
-              <a href={`/cam/orders/${order.id}`}>
-                <Button>Track Order</Button>
-              </a>
-            </Col>
-          </Row>
-        </Col>
-      </Row>
+        </div>
+        <div>
+          <span>Shipping to</span>
+          <div className={`${styles['flex']}`}>
+            <span className={styles['link-text']}>{order.shippingTo.name}</span>
+            <OverlayTrigger trigger="click" placement="bottom" overlay={popover}>
+              <span className={styles['ml-10']}>
+                <SVGCompoent clsName={`${styles['down-arrow']}`} src="icons/down-arrow/down-arrow" />
+              </span>
+            </OverlayTrigger>
+          </div>
+        </div>
+        <div>
+          <a href={`/cam/orders/${order.id}`} className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['text-uppercase']}`}>
+            Track Order
+          </a>
+        </div>
+      </div>
       <Row>
         <Col md={12}>
           {order.orderItems.map((orderItem) => <OrderItem key={orderItem.id} orderItem={orderItem} />)}
         </Col>
       </Row>
       <Row> 
-        <div className={styles['m-10']}>
-          <Col md={7}>
-            <div className={styles['fs-14']}>
+        <Col md={7}>
+          <div>
+            <span>
+              Orderd on 
+            </span> <span className={`${styles['fontW600']} ${styles['light-gry-clr']}`}>
+              {order.orderDate}
+            </span>
+          </div>
+        </Col>
+        <Col md={5} className={styles['pl-0']}>
+          <div className={`${styles['flx-space-bw']}`}>
+            <span className={`${styles['flex']}`}>
+              <span className={styles['link-text']}>Request Invoice&nbsp;</span>
               <span>
-                Orderd on&nbsp;
+                <SVGCompoent clsName={`${styles['down-arrow']}`} src="icons/down-arrow/down-arrow" />
               </span>
-              <span className={styles['bold-font']}>
-                {order.orderDate}
-              </span>
-            </div>
-          </Col>
-          <Col md={5}>
-            <div className={`${styles['fs-14']} ${styles['float-r']}`}>
-              <span>
-                <span className={styles['link-text']}>Request Invoice&nbsp;</span>
-                <span>v</span>
-              </span>
-              <span className={styles['ml-10']}>
-                <span>Order Total:&nbsp;</span>
-                <span>{order.orderTotal}</span>
-              </span>
-            </div>
-          </Col>
-        </div>
+            </span>
+            <span className={`${styles['ml-10']} ${styles['fs-16']}`}>
+              <span>Order Total:</span> <span className={`${styles['fontW600']} ${styles['light-gry-clr']}`}>{order.orderTotal}</span>
+            </span>
+          </div>
+        </Col>
       </Row>
     </div>
   );
