@@ -16,7 +16,10 @@ const personalDetailsReducer = typeToReducer({
     },
     FULFILLED: (state, action) => {
       return Object.assign({}, state, {
-        data: action.payload,
+        data: {
+          ...state.data,
+          ...action.payload
+       },
         ui: { loading: false }
       });
     },
@@ -45,9 +48,6 @@ const personalDetailsReducer = typeToReducer({
     REJECTED: (state, action) => {
       return Object.assign({}, state, { 
         error: action.payload.response.data.message, 
-        data: {
-        ...state.data
-        },
         ui: { loading: false } })
     }
   },
@@ -71,9 +71,6 @@ const personalDetailsReducer = typeToReducer({
     REJECTED: (state, action) => {
       return Object.assign({}, state, { 
         error: action.payload.response.data.message, 
-        data: {
-        ...state.data
-        },
         ui: { loading: false } })
     }
   },

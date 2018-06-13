@@ -17,9 +17,7 @@ const getUserInfo = (store) => {
       }
       if (contactInfo.pwd_updated_at) {
         const lastUpdated = contactInfo.pwd_updated_at.split('T')[0];
-        const today = new Date();
-        const last = new Date(lastUpdated);
-        const timeDiff = Math.abs(today.getTime() - last.getTime());
+        const timeDiff = Math.abs((new Date()).getTime() - (new Date(lastUpdated)).getTime());
         let diff = Math.ceil(timeDiff / (1000 * 3600 * 24));
         let msg = "";
         if (diff < 1) {

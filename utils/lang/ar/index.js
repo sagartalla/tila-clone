@@ -17,6 +17,7 @@ export const AR_KEYWORDS = {
     'TOTAL_AMOUNT': 'Total Amount',
     'ONLY': 'Only',
     'UNITS_LEFT': 'units left',
+    'OUT_OF_STOCK': 'Out of stock',
     'MAX_PER_ORDER': 'Max per order quantity of this item reached.'
   },
   PAYMENT_PAGE: {
@@ -45,5 +46,10 @@ export const AR_KEYWORDS = {
     'SAVE_DELIVER_BTN': 'Save and Deliver here',
     'ENTER_LOC': 'Enter a location',
     'ADD_NEW_ADDR_TAG': 'Add a new network or home address where you want the orders to be delivered.'
+  },
+  WISH_LIST_PAGE: {
+    'WISHLIST_HEADER': 'items in wishlist',
+    'DELETE': 'Delete',
+    'ADD_TO_CART_BTN': 'ADD TO CART',
   }
 };

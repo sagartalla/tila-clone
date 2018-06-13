@@ -45,19 +45,23 @@ const CartBody = props => {
                           <Row>
                             <Col md={2}>
                               <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles['pb-15']}`}><img className={styles['img']} src={img} /></div>
-                              <div className={`${styles['flex-center']} ${styles['justify-center']}`}>
-                                {
-                                  quantity == 1 ?
-                                    <span className={`${styles['minus-disable']} ${styles['fs-20']} ${styles['flex-center']} ${styles['justify-center']}`}> - </span>
-                                    : <span data-id={item_id} onClick={decreaseItemCnt} className={`${styles['minus']} ${styles['fs-20']} ${styles['flex-center']} ${styles['justify-center']} ${styles['pointer']}`}> - </span>
-                                }
-                                <span className={`${styles['quantity-title']} ${styles['border-radius2']}`}>{quantity}</span>
-                                {
-                                  max_limit == quantity ?
-                                    <span className={`${styles['minus-disable']} ${styles['fs-20']} ${styles['flex-center']} ${styles['justify-center']}`}> + </span>
-                                    : <span data-id={item_id} onClick={increaseItemCnt} className={`${styles['plus']} ${styles['flex-center']} ${styles['justify-center']} ${styles['default-shadow']} ${styles['fs-18']} ${styles['pointer']}`}>  + </span>
-                                }
-                              </div>
+                              {
+                               inventory > 0 ?
+                                <div className={`${styles['flex-center']} ${styles['justify-center']}`}>
+                                  {
+                                    quantity == 1 ?
+                                      <span className={`${styles['minus-disable']} ${styles['fs-20']} ${styles['flex-center']} ${styles['justify-center']}`}> - </span>
+                                      : <span data-id={item_id} onClick={decreaseItemCnt} className={`${styles['minus']} ${styles['fs-20']} ${styles['flex-center']} ${styles['justify-center']} ${styles['pointer']}`}> - </span>
+                                  }
+                                  <span className={`${styles['quantity-title']} ${styles['border-radius2']}`}>{quantity}</span>
+                                  {
+                                    max_limit == quantity ?
+                                      <span className={`${styles['minus-disable']} ${styles['fs-20']} ${styles['flex-center']} ${styles['justify-center']}`}> + </span>
+                                      : <span data-id={item_id} onClick={increaseItemCnt} className={`${styles['plus']} ${styles['flex-center']} ${styles['justify-center']} ${styles['default-shadow']} ${styles['fs-18']} ${styles['pointer']}`}>  + </span>
+                                  }
+                                </div>
+                              : '' 
+                             }
                             </Col>
                             <Col md={10}>
                               <Row>
@@ -76,8 +80,13 @@ const CartBody = props => {
                         </div>
                         <div className={`${styles['cart-box-btm']} ${styles['']} ${styles['p-14-22']}`}>
                           {
-                            inventory <= 5 ?
+                            inventory <= 10 && inventory != 0 ?
                               <span className={`${styles['fontW600']} ${styles['thick-red']} ${styles['pr-20']}`}>{CART_PAGE.ONLY + ' ' + inventory + ' ' + CART_PAGE.UNITS_LEFT} </span>
+                              : ''
+                          }
+                          {
+                            inventory == 0 ?
+                              <span className={`${styles['fontW600']} ${styles['thick-red']} ${styles['pr-20']}`}>{CART_PAGE.OUT_OF_STOCK} </span>
                               : ''
                           }
                           <span data-id={item_id} onClick={addToWishlist}>Move to Wishlist &nbsp;&nbsp;</span>
