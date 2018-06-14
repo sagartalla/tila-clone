@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 const getUserInfo = (store) => {
   if (store.personalDetailsReducer.data) {
     let contactInfo = {};
@@ -17,22 +19,8 @@ const getUserInfo = (store) => {
       }
       if (contactInfo.pwd_updated_at) {
         const lastUpdated = contactInfo.pwd_updated_at.split('T')[0];
-        const timeDiff = Math.abs((new Date()).getTime() - (new Date(lastUpdated)).getTime());
-        let diff = Math.ceil(timeDiff / (1000 * 3600 * 24));
-        let msg = "";
-        if (diff < 1) {
-          diff = Math.ceil(timeDiff / (1000 * 3600));
-          msg = (diff > 1) ? " hours back" : " hour back";
-        } else if (diff >= 1) {
-          msg = (diff == 1) ? " day back" : " days back"
-        } else if (diff >= 30) {
-          diff = (diff == 30) ? "1" : Math.ceil(timeDiff / (1000 * 3600 * 24 * 30));
-          msg = diff == 30 ? " month back" : " months back";
-        } else if (diff >= 365) {
-          diff = (diff == 365) ? "1" : Math.ceil(timeDiff / (1000 * 3600 * 24 * 30 * 365));
-          msg = (diff == 365) ? " year back" : " years back";;
-        }
-        contactInfo.lastUpdated = "Last updated "+ diff + msg;
+        let msg = moment(new Date(lastUpdated)).fromNow();
+        contactInfo.lastUpdated = "Last updated "+ msg;
       }
       else
         contactInfo.lastUpdated = 'Not Available';
