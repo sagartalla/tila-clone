@@ -19,7 +19,8 @@ import SignIn from './includes/SignIn';
 import DeliveryAddress from './includes/DeliveryAddress';
 import PaymentMode from './includes/PaymentMode';
 
-import styles from './payment.styl';
+import { mergeCss } from '../../utils/cssUtil';
+const styles = mergeCss('components/Payments/payment');
 
 class Payments extends React.Component {
   constructor(props) {

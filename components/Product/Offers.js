@@ -7,7 +7,8 @@ import {Row, Col, Button} from 'react-bootstrap';
 import { selectors, actionCreators } from '../../store/cart';
 import { Link } from '../../routes';
 
-import styles from './product.styl';
+import { mergeCss } from '../../utils/cssUtil';
+const styles = mergeCss('components/Product/product');
 
 class Offers extends Component {
   constructor(props){

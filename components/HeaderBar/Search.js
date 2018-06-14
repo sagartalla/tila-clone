@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { addUrlProps, UrlQueryParamTypes, pushInUrlQuery } from 'react-url-query';
-import styles from './header.styl';
 import { actionCreators, selectors } from '../../store/search';
 import { Router } from '../../routes';
 import SVGCompoent from '../common/SVGComponet';
+
+import { mergeCss } from '../../utils/cssUtil';
+const styles = mergeCss('components/HeaderBar/header');
 
 const urlPropsQueryConfig = {
   searchText: { type: UrlQueryParamTypes.string, queryParam: 'search', }

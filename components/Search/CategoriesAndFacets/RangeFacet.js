@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import InputRange from 'react-input-range';
-import styles from '../search.styl';
 import {FormControl} from 'react-bootstrap';
+
+import { mergeCss } from '../../../utils/cssUtil';
+const styles = mergeCss('components/Search/search');
 
 class RangeFitler extends Component {
   static getClosest(values, goal) {

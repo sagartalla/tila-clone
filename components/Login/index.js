@@ -7,7 +7,8 @@ import { selectors, actionCreators } from '../../store/auth';
 
 import { Row, FormGroup, Col, Button, ControlLabel, Checkbox } from 'react-bootstrap';
 
-import styles from './login.styl';
+import { mergeCss } from '../../utils/cssUtil';
+const styles = mergeCss('components/Login/login');
 
 class Login extends Component {
   constructor(props) {

@@ -3,9 +3,11 @@ import { Link } from '../../../routes';
 import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import styles from '../search.styl';
 import constants from '../../../constants';
 import { Grid, Row, Col } from 'react-bootstrap';
+
+import { mergeCss } from '../../../utils/cssUtil';
+const styles = mergeCss('components/Search/search');
 
 const Product = ({
   media = [],

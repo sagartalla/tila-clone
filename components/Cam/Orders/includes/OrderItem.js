@@ -5,7 +5,8 @@ import { Row, Col } from 'react-bootstrap';
 import StatusWidget from './widget/StatusWidget';
 import constants from '../../../../constants';
 
-import styles from '../orders.styl';
+import { mergeCss } from '../../../../utils/cssUtil';
+const styles = mergeCss('components/Cam/Orders/orders');
 
 const OrderItem = ({ orderItem }) => {
   const { products } = orderItem;
@@ -39,13 +40,13 @@ const OrderItem = ({ orderItem }) => {
             </div>
             <div className={styles['widget-wrap']}>
               {
-                orderItem.status === 'DELIVERED' 
+                orderItem.status === 'DELIVERED'
                 ?
                   null
                 :
                   <StatusWidget currentStatus={orderItem.status} />
               }
-              
+
             </div>
           </div>
         </Col>

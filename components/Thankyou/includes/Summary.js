@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types';
 import { Grid, Row, Col } from 'react-bootstrap';
 import SVGCompoent from '../../common/SVGComponet';
-import styles from '../thankyou.styl';
+import { mergeCss } from '../../../utils/cssUtil';
+const styles = mergeCss('components/Thankyou/thankyou');
+
 
 /** TODO : Change Address, Request Invoice, Pin Address, Share with friends link is required **/
 /** TODO : Address, Shipping cost & Payment details to be added **/

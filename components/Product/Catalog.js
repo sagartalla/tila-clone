@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import _ from 'lodash';
 import {Grid, Row, Col} from 'react-bootstrap';
 
-import styles from './product.styl';
+import { mergeCss } from '../../utils/cssUtil';
+const styles = mergeCss('components/Product/product');
 
 const Catalog = ({ catalog }) => {
   return (

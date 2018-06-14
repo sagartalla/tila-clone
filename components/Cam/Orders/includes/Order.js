@@ -4,7 +4,8 @@ import { Row, Col, Button, OverlayTrigger, Popover } from 'react-bootstrap';
 
 import OrderItem from './OrderItem';
 
-import styles from '../orders.styl';
+import { mergeCss } from '../../../../utils/cssUtil';
+const styles = mergeCss('components/Cam/Orders/orders');
 
 const Order = ({order}) => {
   const popover = (
@@ -51,7 +52,7 @@ const Order = ({order}) => {
           {order.orderItems.map((orderItem) => <OrderItem key={orderItem.id} orderItem={orderItem} />)}
         </Col>
       </Row>
-      <Row> 
+      <Row>
         <div className={styles['m-10']}>
           <Col md={7}>
             <div className={styles['fs-14']}>

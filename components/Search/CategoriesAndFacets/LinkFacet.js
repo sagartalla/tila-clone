@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from '../../../routes';
-import styles from '../search.styl';
+import { mergeCss } from '../../../utils/cssUtil';
+const styles = mergeCss('components/Search/search');
 
 const MaxItems = 3;
 

@@ -9,7 +9,8 @@ import OrderItem from "../Cam/Orders/includes/OrderItem"; //TODO move to common
 
 import { selectors, actionCreators } from '../../store/order';
 
-import styles from './order.styl';
+import { mergeCss } from '../../utils/cssUtil';
+const styles = mergeCss('components/Order/order');
 
 class Order extends Component {
 

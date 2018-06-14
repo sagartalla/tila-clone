@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { languageDefinations } from '../../../../utils/lang/';
-import styles from '../../payment.styl';
+import { mergeCss } from '../../../../utils/cssUtil';
+const styles = mergeCss('components/Payments/payment');
 
 const PayOnline = props => {
   const { PAYMENT_PAGE } = languageDefinations();

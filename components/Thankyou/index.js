@@ -9,8 +9,8 @@ import { actionCreators, selectors } from '../../store/thankyou';
 import PaymentStatus from './includes/PaymentStatus';
 import Summary from './includes/Summary';
 
-
-import styles from './thankyou.styl';
+import { mergeCss } from '../../utils/cssUtil';
+const styles = mergeCss('components/Thankyou/thankyou');
 
 class Thankyou extends Component {
   constructor(props) {

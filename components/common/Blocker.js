@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Grid, Row, Col } from 'react-bootstrap';
 
-import styles from './blocker.styl';
+import { mergeCss } from '../../utils/cssUtil';
+const styles = mergeCss('components/common/blocker');
 
 const Blocker = props => {
   return (

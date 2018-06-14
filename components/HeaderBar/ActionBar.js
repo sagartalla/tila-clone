@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import styles from './header.styl'
 import { Modal } from "react-router-modal";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -8,6 +7,9 @@ import SVGCompoent from '../common/SVGComponet';
 import { selectors, actionCreators } from '../../store/auth';
 import Login from '../Login';
 import { Link } from '../../routes';
+
+import { mergeCss } from '../../utils/cssUtil';
+const styles = mergeCss('components/HeaderBar/header');
 
 
 class ActionBar extends Component {
@@ -18,11 +20,11 @@ class ActionBar extends Component {
   }
 
   state = { show: false }
-  
+
   componentDidMount() {
     this.props.getLoginInfo();
   }
-  
+
   componentWillReceiveProps(nextProps) {
     this.setState({
       show: !nextProps.isLoggedIn && !this.state.logoutClicked,
@@ -33,7 +35,7 @@ class ActionBar extends Component {
   logoutClick() {
     this.setState({
       logoutClicked: true,
-    },() => {
+    }, () => {
       this.props.logout();
     })
   }
@@ -41,7 +43,7 @@ class ActionBar extends Component {
   loginClick() {
     this.setState({ show: true });
   }
-  
+
   render() {
     const { isLoggedIn } = this.props;
     return (
@@ -66,22 +68,22 @@ class ActionBar extends Component {
         <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']}`}>
           {
             isLoggedIn
-            ?
-            <span onClick={this.logoutClick}>logout</span>
-            : 
+              ?
+              <span onClick={this.logoutClick}>logout</span>
+              :
               <span onClick={this.loginClick}>login</span>
           }
         </div>
         {
-          (this.state.show) 
-          ?
-          (
-            <Modal className={`react-router-modal__modal ${styles['login-reg-modal']} ${styles['p-20']}`} onBackdropClick={() => this.setState({ show: false })}>
-              <Login />
-            </Modal>
-          )
-          : 
-          null}
+          (this.state.show)
+            ?
+            (
+              <Modal className={`react-router-modal__modal ${styles['login-reg-modal']} ${styles['p-20']}`} onBackdropClick={() => this.setState({ show: false })}>
+                <Login />
+              </Modal>
+            )
+            :
+            null}
       </div>
     );
   }

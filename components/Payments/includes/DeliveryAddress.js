@@ -5,7 +5,8 @@ import { Grid, Row, Col } from 'react-bootstrap';
 import SVGCompoent from '../../common/SVGComponet';
 import ShippingAddress from '../../Cam/ShippingAddress';
 
-import styles from '../payment.styl';
+import { mergeCss } from '../../../utils/cssUtil';
+const styles = mergeCss('components/Payments/payment');
 
 const DeliveryAddress = props => {
   const { configJson, defaultAddress, handleShippingAddressContinue, editAddress } = props;
