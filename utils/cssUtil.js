@@ -3,7 +3,7 @@ export const mergeCss = (() => {
   const commonStyles = require('../layout/main/main.styl');
 
   return (componentStyles) => {
-    const componentStylesPath = require(`../${componentStyles}.styl`);
+    const componentStylesPath = componentStyles ? require(`../${componentStyles}.styl`): {};
     return {
       ...commonStyles,
       ...componentStylesPath
