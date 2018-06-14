@@ -45,14 +45,15 @@ class ChooseAddress extends Component {
   }
 
   render() {
-    const { addresses } = this.props
+    const { addresses } = this.props;
+    const { choosenAddress } = this.state;
     return (
       <div>
       <div>Please Choose Address for Pick Up</div>
       {
         addresses.map((address) => (
           <div key={address.id} className={styles['generic-radio']}>
-            <input onChange={this.chooseAddress} id="return-item" name="exch-retrn-add" type="radio" value={address.id} checked={this.state.choosenAddress === address.id}/>
+            <input onChange={this.chooseAddress} id="return-item" name="exch-retrn-add" type="radio" value={address.id} checked={choosenAddress === address.id}/>
             <label for="return-item">
               <div>
                 <div>{address.name}</div>
