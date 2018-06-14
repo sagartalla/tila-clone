@@ -36,6 +36,12 @@ class ChooseVariant extends Component {
   }
 }
 
+ChooseVariant.propTypes = {
+  orderIssue: PropTypes.object.isRequired,
+  getExchangeVariants: PropTypes.func.isRequired,
+  variants: PropTypes.array.isRequired,
+}
+
 const mapStateToProps = (store) => {
 	return ({
     variants: selectors.getVariants(store),

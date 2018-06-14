@@ -61,6 +61,11 @@ const OrderIssueWidget = ({orderIssue, resetOrderIssue}) => {
   )
 }
 
+OrderIssueWidget.propTypes = {
+  orderIssue: PropTypes.object.isRequired,
+  resetOrderIssue: PropTypes.func.isRequired,
+}
+
 const mapStateToProps = (store) => {
   return ({
     orderIssue: selectors.getOrderIssue(store)

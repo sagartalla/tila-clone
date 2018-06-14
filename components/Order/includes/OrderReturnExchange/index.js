@@ -14,7 +14,7 @@ import styles from '../../order.styl';
 
 class OrderReturnExchange extends Component {
   componentDidMount(){
-    const { query, orderIssue, getSelectedOrder } = this.props;
+    const { query, orderIssue, getSelectedOrder, setOrderIssueData } = this.props;
     const { orderId, orderItemId, returnExchangeType } = query;
     const params = {
       orderId: orderId,
@@ -25,7 +25,7 @@ class OrderReturnExchange extends Component {
     if(!orderIssue.selectedItem) {
       params.selectedItem = getSelectedOrder(query.orderItemId);
     }
-    this.props.setOrderIssueData(params);
+    setOrderIssueData(params);
   }
 
   render() {
@@ -59,6 +59,13 @@ class OrderReturnExchange extends Component {
       </div>
     );
   }
+}
+
+OrderReturnExchange.propTypes = {
+  query: PropTypes.object.isRequired,
+  orderIssue: PropTypes.object.isRequired,
+  setOrderIssueData: PropTypes.func.isRequired,
+  getSelectedOrder: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (store) => {

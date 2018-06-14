@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Prototype from 'prop-types';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -20,7 +20,7 @@ class CancelComplete extends Component {
   }
 
   render() {
-    const { orderIssue, loadingStatus, cancelStatus, errorMessege, goToNextStep } = this.props;
+    const { orderIssue, loadingStatus, errorMessege, goToNextStep } = this.props;
     const { selectedItem } = orderIssue;
     return (
       <div>
@@ -59,6 +59,13 @@ class CancelComplete extends Component {
     );
   }
 
+}
+
+CancelComplete.propTypes = {
+  orderIssue: PropTypes.object.isRequired,
+  loadingStatus: PropTypes.bool.isRequired,
+  errorMessege: PropTypes.string.isRequired,
+  goToNextStep: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (store) => {

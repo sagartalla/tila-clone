@@ -44,6 +44,11 @@ const List = ({ orderIssue, goToNextStep, setSelectedItem }) => {
   );
 };
 
+List.propTypes = {
+  orderIssue: PropTypes.object.isRequired,
+  goToNextStep: PropTypes.func.isRequired,
+  setSelectedItem: PropTypes.func.isRequired,
+}
 
 const mapStateToProps = (store) => {
   return ({

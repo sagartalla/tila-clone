@@ -11,8 +11,8 @@ const OrderHeader = ({orderDetails}) => {
       <Row>
         <Col md={4}>
           {
-            address 
-            ? 
+            address
+            ?
             (<div>
               <div>Address Details</div>
               <div>
@@ -25,9 +25,9 @@ const OrderHeader = ({orderDetails}) => {
                     <span>{phone}</span>
                   </div>
               </div>
-            </div>) 
-          : 
-          null 
+            </div>)
+          :
+          null
         }
         </Col>
         <Col md={4}>
@@ -38,7 +38,7 @@ const OrderHeader = ({orderDetails}) => {
                 <th>{orderId}</th>
               </tr>
               <tr>
-                <td>Order Date</td> 
+                <td>Order Date</td>
                 <td>{itemsTotal}</td>
               </tr>
               <tr>
@@ -89,6 +89,10 @@ const OrderHeader = ({orderDetails}) => {
       </Row>
     </div>
   )
+}
+
+OrderHeader.propTypes = {
+  orderDetails: PropTypes.object.isRequired
 }
 
 export default OrderHeader;

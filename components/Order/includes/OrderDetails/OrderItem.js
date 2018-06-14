@@ -75,7 +75,7 @@ const OrderItem = ({ orderItem, raiseOrderIssue, orderId }) => {
         </Col>
       </Row>
     </div>
-  )
+    )
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -83,6 +83,12 @@ const mapDispatchToProps = (dispatch) => {
     { raiseOrderIssue: actionCreators.raiseOrderIssue },
     dispatch,
   );
+}
+
+OrderItem.propTypes = {
+  orderItem: PropTypes.object.isRequired,
+  raiseOrderIssue: PropTypes.func.isRequired,
+  orderId: PropTypes.string.isRequired,
 }
 
 export default connect(null, mapDispatchToProps)(OrderItem);

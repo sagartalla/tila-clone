@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropType from 'prop-types';
+import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -97,6 +97,12 @@ class Reason extends Component {
 	}
 }
 
+Reason.propTypes = {
+	orderIssue: PropTypes.object.isRequired,
+	goToNextStep: PropTypes.func.isRequired,
+	loadingStatus: PropTypes.bool.isRequired,
+	setReason: PropTypes.func.isRequired,
+}
 
 const mapStateToProps = (store) => {
 	return ({

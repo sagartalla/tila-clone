@@ -128,4 +128,10 @@ const mapDispatchToProps = (dispatch) => {
   );
 }
 
+Body.propTypes = {
+  goToNextStep: PropTypes.func.isRequired,
+  resetOrderIssue: PropTypes.func.isRequired,
+  orderIssue: PropTypes.object.isRequired,
+}
+
 export default connect(mapStateToProps, mapDispatchToProps)(Body);

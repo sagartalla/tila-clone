@@ -23,7 +23,7 @@ class ReturnExchange extends Component {
     const { orderIssue, goToNextStep } = this.props;
     const { selectedItem: itemData, reasons, returnExchangeType } = orderIssue;
     const { img, name } = itemData;
-    
+
     return (
       <div>
         <div className={`${styles['flx-spacebw-alignc']} ${styles['m-20']} ${styles['pb-20']} ${styles['reasons-item-wrap']}`}>
@@ -63,6 +63,11 @@ class ReturnExchange extends Component {
   }
 }
 
+ReturnExchange.propTypes = {
+  orderIssue: PropTypes.object.isRequired,
+  goToNextStep: PropTypes.func.isRequired,
+  setReturnExchangeType: PropTypes.func.isRequired,
+}
 
 const mapStateToProps = (store) => {
   return ({
