@@ -22,13 +22,12 @@ const actionCreators = {
         const { email, password } = params;
         if (res.status === 200) {
           const { email, password } = params;
-          dispatch({
-            type: actions.USER_LOGIN,
-            payload: api.userLogin({
+          dispatch(
+            actionCreators.userLogin({
               username: email,
               password,
             })
-          });
+          );
           return res;
         } else {
           return Promise.reject(res);
@@ -36,7 +35,7 @@ const actionCreators = {
       })
     });
   },
-  userLogout:() => {
+  userLogout: () => {
     api.userLogout();
     return ({
       type: actions.USER_LOGOUT,

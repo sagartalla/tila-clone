@@ -42,7 +42,7 @@ export const uuidv4 = () => {
     return v.toString(16);
   });
 }
-
+//TODO SF-49
 export const sessionId = () => {
   try {
     if (localStorage) {
