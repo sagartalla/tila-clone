@@ -18,8 +18,6 @@ const Cam = ({ tabDetails }) => {
         return <Orders />;
       case 'address':
         return <ShippingAddress standalone={true} />;
-      case 'profile':
-        return <UserInfo />;
       case 'wishlist':
         return <Wishlist />;
       case 'profile':
