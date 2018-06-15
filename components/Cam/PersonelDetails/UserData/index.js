@@ -4,10 +4,14 @@ import PropTypes from 'prop-types';
 
 import PersonalInfo from './PersonalInfo';
 import ContactInfo from './ContactInfo';
-import UpdateTimelineComponent from './UpdateTimelineComponent';
+
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { actionCreators } from '../../../../store/cam/personalDetails';
 
 
-const UserData = () => {
+const UserData = ({getUserProfileInfo}) => {
+  getUserProfileInfo();
   return (
     <Row>
       <Col xs={12} md={6}>
@@ -21,4 +25,16 @@ const UserData = () => {
   );
 }
 
-export default UserData;
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      getUserProfileInfo: actionCreators.getUserProfileInfo
+    },
+    dispatch,
+  );
+
+  UserData.propTypes = {
+    getUserProfileInfo: PropTypes.func
+  };
+  
+  export default connect(null, mapDispatchToProps)(UserData);

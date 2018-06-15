@@ -3,8 +3,7 @@ import { Row, Col } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { actionCreators, selectors } from '../../../../store/cam/personalDetails';
+import { selectors } from '../../../../store/cam/personalDetails';
 
 import UpdateContactInfoModal from './UpdateContactInfoModal';
 import styles from '../../cam.styl';
@@ -121,6 +120,7 @@ ContactInfo.propTypes = {
 const mapStateToProps = (store) => ({
   userInfo: selectors.getUserInfo(store)
 });
+
 
 
 export default connect(mapStateToProps)(ContactInfo);

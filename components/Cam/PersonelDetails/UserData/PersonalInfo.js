@@ -1,11 +1,9 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import moment from 'moment';
 
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { actionCreators, selectors } from '../../../../store/cam/personalDetails';
+import { selectors } from '../../../../store/cam/personalDetails';
 
 import UpdatePersonalInfoModal from './UpdatePersonalInfoModal';
 import styles from '../../cam.styl';
