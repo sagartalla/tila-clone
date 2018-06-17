@@ -2,12 +2,27 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import _ from 'lodash';
 
 import { selectors, actionCreators } from '../../../../store/order';
 
 class ChooseVariant extends Component {
-  selectVariant() {
-    debugger;
+  constructor(props) {
+    super(props)
+    this.selectVariant = this.selectVariant.bind(this);
+  }
+
+  selectVariant(e) {
+    const variantAttrKey = e.target.id;
+    const variantAttrValue = e.target.value;
+    const { exchangeOptions: computedExchangeOptions } = this.props;
+    if(variantAttrValue  !== '') {
+      this.props.setVariantOption({
+        variantAttrKey,
+        variantAttrValue,
+        computedExchangeOptions,
+      });
+    }
   }
 
   componentDidMount() {
@@ -15,24 +30,31 @@ class ChooseVariant extends Component {
     const { selectedItem } = orderIssue;
     getExchangeVariants({
       orderItemId: selectedItem.id
-    })
+    });
   }
 
   render() {
-    const { variants } = this.props;
+    const { exchangeOptions } = this.props;
+    const { listingDetails, variantDetails } = exchangeOptions;
     return (
       <div>
         <div>Select Variant to Exchange</div>
         {
-          <select onChange={this.selectVariant}>
-            <option>Select Variant</option>
-            {
-              variants.map((variant) => <option value={variant}>{variant}</option>)
-            }
-          </select>
+          _.map(variantDetails, (value, key) => (
+            <div>
+              <label for={key}>{value.name}</label>
+              <select id={key} key={key} onChange={this.selectVariant}>
+                <option value={''}>Select Variant</option>
+                {
+                  value.attrValues.map((value, index) => <option key={value} value={value}>{value}</option>)
+                }
+              </select>
+            </div>
+          ))
         }
       </div>
     );
+    return null;
   }
 }
 
@@ -44,7 +66,7 @@ ChooseVariant.propTypes = {
 
 const mapStateToProps = (store) => {
 	return ({
-    variants: selectors.getVariants(store),
+    exchangeOptions: selectors.getExchangeOptions(store),
     orderIssue: selectors.getOrderIssue(store),
   })
 };
@@ -52,7 +74,8 @@ const mapStateToProps = (store) => {
 const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators(
 		{
-      getExchangeVariants: actionCreators.getExchangeVariants
+      getExchangeVariants: actionCreators.getExchangeVariants,
+      setVariantOption: actionCreators.setVariantOption
     },
 		dispatch,
 	);
