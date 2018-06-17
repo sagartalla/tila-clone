@@ -55,22 +55,68 @@ const getReturnStatus = (store) => {
   return store.singleOrderReducer.data.orderIssue.returnStatus;
 }
 
-const getVariants = (store) => {
-  // return store.singleOrderReducer.data.orderIssue.exchangeVariants.variant_details.size.attribute_values;
-  /*{
-    "comment": "string",
-    "country_code": "string",
-    "inventory_location_id": "string",
-    "new_listing_id": "string",
-    "order_item_id": "string",
-    "reason": "string",
-    "seller_id": "string",
-    "sub_reason": "string",
-    "user_id": "string",
-    "variant_id": "string"
-  }*/
-  return store.singleOrderReducer.data.orderIssue.exchangeVariants;
-  store.singleOrderReducer.data.orderIssue.exchangeVariants.map()
+const getExchangeOptions = (store) => {
+  const orderData = store.singleOrderReducer.data.orderIssue;
+  const { exchangeVariants: data, selectedVariant, computedExchangeOptions } = orderData;
+  const { variantAttrValue, variantAttrKey } = selectedVariant || {};
+  let { listingDetails, variantDetails } = computedExchangeOptions || {};
+
+  listingDetails = listingDetails || data.map((ol, index) => {
+    const { listing } = variantInfo;
+    const { listing_id: listingId, merchant_id: sellerId } = listing;
+    const { inventory_id: inventoryLocationId } = listing.inventory_list[0];
+    return {
+      listingId,
+      inventoryLocationId,
+      sellerId,
+    };
+  });
+
+  variantDetails = variantDetails || data.reduce((acc, variantInfo, index) => {
+    const { variant_details } = variantInfo;
+    const { attribute_map: attributeMap } = variant_details;
+    _.forEach.convert({ 'cap': false })((value, key) => {
+      const { attribute_group_name: attributeGroupName, attribute_values: attributeValues, display_string: displayString } = value;
+      if(attributeGroupName !== 'IDENTITY') return;
+      let newValues = [];
+      if(acc[key]){
+        newValues = newValues.concat(acc[key].attrValues);
+      }
+      newValues[index] = attributeValues[0].value;
+      acc = {
+        ...acc,
+        [key]: {
+          name: displayString,
+          attrValues: newValues,
+        }
+      }
+    }, attributeMap);
+    return acc;
+  }, {});
+
+  if(selectedVariant) {
+    let indices = [];
+    var array = variantDetails[variantAttrKey].attrValues;
+    var element = variantAttrValue;
+    var idx = array.indexOf(element);
+    while (idx != -1) {
+      indices.push(idx);
+      idx = array.indexOf(element, idx + 1);
+    }
+    listingDetails = listingDetails.filter((item, index) => indices.indexOf(index) !== -1);
+    variantDetails = _.convert({ 'cap': false })((acc, val, key) => ({
+      ...acc,
+      [key]: {
+        ...acc[key],
+        attrValues: acc[key].attrValues.filter((item, index) => indices.indexOf(index) !== -1)
+      }
+    }), {}, variantDetails);
+  }
+
+  return {
+    listingDetails,
+    variantDetails,
+  };
 }
 
-export { getOrderDetails, getOrderIssue, getCancelStatus, getErrorMessege, getLoadingStatus, getSelectedOrder, getReturnStatus, getVariants };
+export { getOrderDetails, getOrderIssue, getCancelStatus, getErrorMessege, getLoadingStatus, getSelectedOrder, getReturnStatus, getExchangeOptions };

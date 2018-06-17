@@ -14,6 +14,7 @@ const actions = {
   SET_RETURN_EXCHANGE_ADDRESS: 'SET_RETURN_EXCHANGE_ADDRESS',
   SUBMIT_RETURN_REQUEST: 'SUBMIT_RETURN_REQUEST',
   GET_EXCHANGE_VARIANTS: 'GET_EXCHANGE_VARIANTS',
+  SET_VARIANT_OPTION: 'SET_VARIANT_OPTION',
 };
 
 const actionCreators = {
@@ -129,10 +130,18 @@ const actionCreators = {
   getExchangeVariants: (params) => {
     return ({
       type: actions.GET_EXCHANGE_VARIANTS,
-      payload: {
-        data: api.getExchangeVariants(params)
-      }
+      payload: api.getExchangeVariants(params),
     });
+  },
+  setVariantOption: (params) => {
+    return ({
+      type:actions.SET_VARIANT_OPTION,
+      payload: {
+        data: {
+          ...params
+        }
+      }
+    })
   }
 };
 
