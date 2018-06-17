@@ -8,8 +8,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators, selectors } from '../../../../store/cam/personalDetails';
 
-import styles from '../../cam.styl';
-
+import { mergeCss } from '../../../../utils/cssUtil';
+const styles = mergeCss('components/Cam/cam');
 
 class EditPhone  extends React.Component {
   state = {
@@ -53,7 +53,7 @@ class EditPhone  extends React.Component {
   }
 
   handleResendOtp = () => {
-    // TODO: handle action for OTP 
+    // TODO: handle action for OTP
     console.log('handleResendOtp');
   }
 
@@ -63,7 +63,7 @@ class EditPhone  extends React.Component {
   }
 
   render(){
-  const {phoneNumber, error, otp} = this.state;  
+  const {phoneNumber, error, otp} = this.state;
   return (
     <div className={styles['editProfileModal']}>
     <Row>

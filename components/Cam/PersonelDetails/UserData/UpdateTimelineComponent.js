@@ -10,8 +10,8 @@ import { actionCreators, selectors } from '../../../../store/cam/personalDetails
 import UpdatePersonalInfoModal from './UpdatePersonalInfoModal';
 import Btn from '../../../common/Button';
 
-import styles from '../../cam.styl';
-
+import { mergeCss } from '../../../../utils/cssUtil';
+const styles = mergeCss('components/Cam/cam');
 
 class UpdateTimelineComponent extends React.Component {
 
@@ -106,4 +106,3 @@ UpdateTimelineComponent.propTypes = {
 };
 
 export default connect(mapStateToProps)(UpdateTimelineComponent);
-

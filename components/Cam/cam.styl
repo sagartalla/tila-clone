@@ -1,14 +1,14 @@
-@import '../../layout/main/main.styl';
+@import '../../layout/main/executables.styl';
 @import '/static/vendor/css/rc-calendar.css';
 
 .cam-container
   .bg-color
     background-color #ddd; 
-    
+
 .editProfileModal
   .image-block-style
     height 100px
-    border 1px solid #555555 
+    border 1px solid #555555
 
   .dp-flex
     display flex
@@ -17,16 +17,16 @@
     flex: 1
 
   .gender-select>img
-    border 1px solid link-highlight  
+    border 1px solid link-highlight
 
   .gender-select>span
-    color link-highlight 
+    color link-highlight
 
   .gender-unselect>img
-    border-width 0px  
+    border-width 0px
 
   .gender-unselect>span
-    color base-font  
+    color base-font
 
 .modalContainer
   height 100%
@@ -51,7 +51,7 @@
   z-index 2001
   background-color white
   animation-name slideOpen
-  animation-duration 0.5s  
+  animation-duration 0.5s
   animation-fill-mode both
 .closeModal
   height 100%
@@ -62,8 +62,8 @@
   z-index 2001
   background-color white
   animation-name slideClose
-  animation-duration 0.2s  
-  animation-fill-mode both   
+  animation-duration 0.2s
+  animation-fill-mode both
 
 @keyframes slideOpen {
   from {right: -800px;}
@@ -79,6 +79,3 @@
 
 .hideDiv
   display none
-
-  
-
