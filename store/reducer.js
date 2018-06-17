@@ -9,7 +9,9 @@ import { reducer as paymentsReducer } from './payments';
 import { reducer as authReducer } from './auth';
 import { reducer as thankyouReducer } from './thankyou';
 import { reducer as megamenuReducer } from './megamenu';
+import { reducer as personalDetailsReducer } from './cam/personalDetails';
 import { reducer as wishlistReducer } from './cam/wishlist';
+
 
 export default combineReducers({
   searchReducer,
@@ -22,5 +24,6 @@ export default combineReducers({
   authReducer,
   thankyouReducer,
   megamenuReducer,
+  personalDetailsReducer,
   wishlistReducer,
 });

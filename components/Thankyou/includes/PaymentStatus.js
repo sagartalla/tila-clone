@@ -7,11 +7,11 @@ const styles = mergeCss('components/Thankyou/thankyou');
 
 /** TODO : order page link is required **/
 const PaymentStatus = props => {
-  const message = (props.status == "SUCCESSFUL") ? "YOUR ORDER HAS BEEN PLACED SUCCESSFULLY" : "ORDER FAILURE";
+  const message = (props.status == "SUCCESSFUL") ? "YOUR ORDER HAS BEEN PLACED SUCCESSFULLY" : (props.status == "FAILURE")? "ORDER FAILURE" : null;
   // TODO: Need to have a util for static messeges
   const successMessage = (<span>Your order has been placed and is being processed. You will receive an email with details once the item(s) are shipped. You can track your
     &nbsp;<a>Orders page</a>&nbsp;in your account</span>);
-  const subMessage = (props.status == "SUCCESSFUL") ? successMessage : "Please try again";
+  const subMessage = (props.status == "SUCCESSFUL") ? successMessage : (props.status == "FAILURE")? "Please try again" : null;
   return (
     <div>
       <Row className={styles['flex-center']}>
