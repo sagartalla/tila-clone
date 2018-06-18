@@ -10,7 +10,7 @@ class Country extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			country: 'ksa'
+			country: undefined
 		}
 		this.storeCountry = _.debounce(this.storeCountry.bind(this), 300);
 		this.changeCountry = this.changeCountry.bind(this);

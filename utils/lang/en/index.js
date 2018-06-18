@@ -49,7 +49,6 @@ export const EN_KEYWORDS = {
   },
   WISH_LIST_PAGE: {
     'WISHLIST_HEADER': 'items in wishlist',
-    'DELETE': 'Delete',
     'ADD_TO_CART_BTN': 'ADD TO CART',
   }
 };

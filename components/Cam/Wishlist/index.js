@@ -37,7 +37,7 @@ class Wishlist extends Component {
   render() {
     const { results } = this.props;
     return (
-      <div className={`${styles['wishlist']} ${styles['pl-20']}`}>
+      <div className={`${styles['wishlist']} ${styles['pl-5']}`}>
         <WishlistBody
           data={results}
           deleteItem={this.deleteItem}

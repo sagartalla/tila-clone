@@ -19,7 +19,7 @@ if (env !== 'local'){
 }
 
 const configModifer = (config) => {
-  const newheaders = _.reduce.convert({ 'cap': false })((acc, value, key) => { 
+  const newheaders = _.reduce.convert({ 'cap': false })((acc, value, key) => {
     if(value) {
       acc[key] = value;
     }
@@ -83,12 +83,12 @@ export const country = () => {
   try {
     if (localStorage) {
       const country = localStorage.country
-      return country || 'ksa'
+      return country || undefined
     } else {
-      return 'ksa';
+      return undefined;
     }
   } catch (e) {
-    return 'ksa';
+    return undefined;
   }
 }
 

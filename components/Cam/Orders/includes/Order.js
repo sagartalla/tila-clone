@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col, Button, OverlayTrigger, Popover } from 'react-bootstrap';
 
-import OrderItem from './OrderItem';
+import OrderItem from '../../../Order/includes/OrderDetails/OrderItem';
 
 import { mergeCss } from '../../../../utils/cssUtil';
 const styles = mergeCss('components/Cam/Orders/orders');
@@ -16,7 +16,7 @@ const Order = ({order}) => {
     </Popover>
   );
   return (
-    <div className={`${styles['order-item-wrap']} ${styles['box-shadow']} ${styles['mt-20']} ${styles['mb-20']} ${styles['p-20']}`}>
+    <div className={`${styles['box']} ${styles['mt-20']} ${styles['mb-20']} ${styles['p-20']}`}>
       <Row>
         <Col md={6}>
           <div>
@@ -49,7 +49,7 @@ const Order = ({order}) => {
       </Row>
       <Row>
         <Col md={12}>
-          {order.orderItems.map((orderItem) => <OrderItem key={orderItem.id} orderItem={orderItem} />)}
+          {order.orderItems.map((orderItem) => <OrderItem key={orderItem.id} orderItem={orderItem} orderId={order.id}/>)}
         </Col>
       </Row>
       <Row>

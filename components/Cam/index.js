@@ -39,9 +39,7 @@ const Cam = ({ tabDetails }) => {
             </Row>
           </Col>
           <Col xs={12} md={9}>
-            <Row>
-              {camComponent}
-            </Row>
+            { camComponent }
           </Col>
         </Row>
       </Grid>
