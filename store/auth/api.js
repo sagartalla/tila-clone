@@ -8,6 +8,8 @@ const userLogin = (params) => {
     authVersion: 'V1'
   })).then(({data, status}) => {
     let isLoggedIn = false;
+    // cart merge
+    axios.put(`${constants.CART_API_URL}/api/v1/cart/merge`);
     if(status === 200) {
       localStorage.setItem('userCreds', JSON.stringify(params));
       localStorage.setItem('auth', JSON.stringify(data));

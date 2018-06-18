@@ -10,20 +10,20 @@ import Wishlist from './Wishlist';
 
 import styles from './cam.styl';
 
-const Cam = ({tabDetails}) => {
+const Cam = ({ tabDetails }) => {
   const [tab, ...queryParams] = tabDetails ? tabDetails.split('/') : [];
   const camComponent = ((tabName) => {
     switch (tabName) {
       case 'orders':
         return <Orders />;
       case 'address':
-        return <ShippingAddress standalone={true}/>;
+        return <ShippingAddress standalone={true} />;
+      case 'wishlist':
+        return <Wishlist />;
       case 'profile':
-        return <UserInfo />; 
-        case 'wishlist':
-        return <Wishlist />; 
+        return <UserInfo />;
       default:
-        return <Orders />; 
+        return <UserInfo />;
     }
   })(tab)
   return (

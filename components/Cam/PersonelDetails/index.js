@@ -6,32 +6,33 @@ import UserData from './UserData';
 import SocialMedia from './SocialMedia';
 import Notification from './Notification';
 
-import styles from './user.styl';
-import commonStyles from '../cam.styl';
+import styles from '../cam.styl';
 
-const UserInfo = () => (
-  <div className={styles['right-layout-container']}>
-    <Row >
-      <Col md={12} xs={12}>
-        <div className={`${styles['user-info-container']} ${commonStyles['box-shadow']}`}>
-          <UserData />
-        </div>
-      </Col>
-    </Row>
-    <Row>
-      <Col xs={12} md={6} >
-        <div className={`${styles['common-sub-container']} ${commonStyles['box-shadow']} ${commonStyles['base-margin']}`}>
-          <SocialMedia />
-        </div>
-      </Col>
-      <Col xs={12} md={6}>
-        <div className={`${styles['common-sub-container']} ${commonStyles['box-shadow']} ${commonStyles['base-margin']}`}>
-          <Notification />
-        </div>
-      </Col>
-    </Row>
+const UserInfo = () => {
+  return (
+    <div>
+      <Row className={styles['ml-10']}>
+        <Col md={12} xs={12} className={styles['pl-0']}>
+          <div className={`${styles['ht-auto']} ${styles['fs-12']} ${styles['box']}`}>
+            <UserData />
+          </div>
+        </Col>
+      </Row>
+      <Row className={`${styles['ml-10']} ${styles['mt-10']}`}>
+        <Col xs={12} md={6} className={styles['pl-0']}>
+          <div className={`${styles['fs-12']} ${styles['ht-170']} ${styles['box']} `}>
+            <SocialMedia />
+          </div>
+        </Col>
+        <Col xs={12} md={6} className={styles['pl-0']}>
+          <div className={`${styles['fs-12']} ${styles['ht-170']} ${styles['box']} `}>
+            <Notification />
+          </div>
+        </Col>
+      </Row>
 
-  </div>
-);
+    </div>
+  );
+}
 
 export default UserInfo;
