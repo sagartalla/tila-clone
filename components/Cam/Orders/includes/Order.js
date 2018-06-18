@@ -4,7 +4,8 @@ import { Row, Col, Button, OverlayTrigger, Popover } from 'react-bootstrap';
 
 import OrderItem from '../../../Order/includes/OrderDetails/OrderItem';
 
-import styles from '../orders.styl';
+import { mergeCss } from '../../../../utils/cssUtil';
+const styles = mergeCss('components/Cam/Orders/orders');
 
 const Order = ({order}) => {
   const popover = (

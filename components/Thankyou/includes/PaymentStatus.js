@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types';
 import { Grid, Row, Col } from 'react-bootstrap';
 import SVGCompoent from '../../common/SVGComponet';
-import styles from '../thankyou.styl';
+import { mergeCss } from '../../../utils/cssUtil';
+const styles = mergeCss('components/Thankyou/thankyou');
+
 
 /** TODO : order page link is required **/
 const PaymentStatus = props => {

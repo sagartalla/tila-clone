@@ -7,7 +7,8 @@ import Order from './includes/Order';
 import OrderIssueWidget from '../../Order/includes/OrderIssueWidget';
 import { selectors, actionCreators } from '../../../store/cam/orders';
 
-import styles from './orders.styl';
+import { mergeCss } from '../../../utils/cssUtil';
+const styles = mergeCss('components/Cam/Orders/orders');
 
 class Orders extends Component {
   componentDidMount() {

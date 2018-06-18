@@ -7,8 +7,10 @@ import { bindActionCreators } from 'redux';
 import StatusWidget from '../StatusWidget';
 import constants from '../../../../constants';
 import { ORDER_ISSUE_TYPES, ORDER_ISSUE_STEPS } from '../../constants';
-
 import { actionCreators }   from '../../../../store/order';
+
+import { mergeCss } from '../../../../utils/cssUtil';
+const styles = mergeCss('components/Cam/Orders/orders');
 
 import styles from '../../order.styl';
 
@@ -78,6 +80,9 @@ const OrderItem = ({ orderItem, raiseOrderIssue, orderId }) => {
     )
 };
 
+<<<<<<< HEAD:components/Cam/Orders/includes/OrderItem.js
+export default OrderItem;
+=======
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     { raiseOrderIssue: actionCreators.raiseOrderIssue },
@@ -92,3 +97,4 @@ OrderItem.propTypes = {
 }
 
 export default connect(null, mapDispatchToProps)(OrderItem);
+>>>>>>> origin/develop:components/Order/includes/OrderDetails/OrderItem.js

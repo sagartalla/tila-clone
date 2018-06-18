@@ -4,7 +4,8 @@ import UserProfile from './UserProfile';
 import List from './List';
 
 import data from '../list.json';
-import styles from './sidebar.styl';
+import { mergeCss } from '../../../utils/cssUtil';
+const styles = mergeCss('components/Cam/Sidebar/sidebar');
 
 const Sidebar = () => (
   <div className={styles['sidebar-container']}>

@@ -6,7 +6,8 @@ import UserData from './UserData';
 import SocialMedia from './SocialMedia';
 import Notification from './Notification';
 
-import styles from '../cam.styl';
+import { mergeCss } from '../../../utils/cssUtil';
+const styles = mergeCss('components/Cam/cam');
 
 const UserInfo = () => {
   return (

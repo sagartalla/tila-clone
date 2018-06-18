@@ -1,6 +1,7 @@
 import React from 'react';
 
-import styles from './sidebar.styl';
+import { mergeCss } from '../../../utils/cssUtil';
+const styles = mergeCss('components/Cam/Sidebar/sidebar');
 
 const UserProfile = () => (
   <a href="/cam/profile">

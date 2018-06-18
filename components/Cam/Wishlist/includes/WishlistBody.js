@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 import SVGCompoent from '../../../common/SVGComponet';
 import { languageDefinations } from '../../../../utils/lang/';
 
-import styles from '../wishlist.styl';
+import { mergeCss } from '../../../../utils/cssUtil';
+const styles = mergeCss('components/Cam/Wishlist/wishlist');
 
 const WishlistBody = props => {
   const { data, deleteItem, addToCart } = props;

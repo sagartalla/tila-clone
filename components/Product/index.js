@@ -13,7 +13,8 @@ import Variants from './Variants';
 import Catalog from './Catalog';
 import Offers from './Offers';
 
-import styles from './product.styl';
+import { mergeCss } from '../../utils/cssUtil';
+const styles = mergeCss('components/Product/product');
 
 const getProductComponent = (isPreview) => {
   const Product = ({ productData }) => {

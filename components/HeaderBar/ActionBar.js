@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import styles from './header.styl'
 import { Modal } from "react-router-modal";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -8,6 +7,9 @@ import SVGCompoent from '../common/SVGComponet';
 import { selectors, actionCreators } from '../../store/auth';
 import Login from '../Login';
 import { Link } from '../../routes';
+
+import { mergeCss } from '../../utils/cssUtil';
+const styles = mergeCss('components/HeaderBar/header');
 
 
 class ActionBar extends Component {
@@ -33,7 +35,7 @@ class ActionBar extends Component {
   logoutClick() {
     this.setState({
       logoutClicked: true,
-    },() => {
+    }, () => {
       this.props.logout();
     })
   }

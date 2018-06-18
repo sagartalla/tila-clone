@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col, Button } from 'react-bootstrap';
 
-import  styles from '../../order.styl';
+// import  styles from './order.styl';
+import OrderItem from '../Cam/Orders/includes/OrderItem';
+
+import { mergeCss } from '../../utils/cssUtil';
+const styles = mergeCss('components/Order/order');
 
 const OrderHeader = ({orderDetails}) => {
   const { name, address, phone, orderId, orderDate, itemsTotal, orderTotal, shippingTotal, paymentDetals } = orderDetails;

@@ -6,7 +6,9 @@ import { connect } from 'react-redux';
 import { selectors } from '../../../../store/cam/personalDetails';
 
 import UpdatePersonalInfoModal from './UpdatePersonalInfoModal';
-import styles from '../../cam.styl';
+
+import { mergeCss } from '../../../../utils/cssUtil';
+const styles = mergeCss('components/Cam/cam');
 
 class PersonalInfo extends React.Component {
 

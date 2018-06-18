@@ -7,8 +7,10 @@ import { bindActionCreators } from 'redux';
 import { actionCreators, selectors } from '../../../store/cam/wishlist';
 import WishlistBody from './includes/WishlistBody';
 
-import styles from './wishlist.styl';
 import { isAddedToCart } from '../../../store/cart/selectors';
+
+import { mergeCss } from '../../../utils/cssUtil';
+const styles = mergeCss('components/Cam/Wishlist/wishlist');
 
 class Wishlist extends Component {
 

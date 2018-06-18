@@ -11,7 +11,9 @@ import AddressHeader from './includes/AddressHeader';
 import AddressBody from './includes/AddressBody';
 import AddressNew from './includes/AddressNew';
 
-import styles from './address.styl';
+import { mergeCss } from '../../../utils/cssUtil';
+const styles = mergeCss('components/Cam/ShippingAddress/address');
+
 const initialAddrObj = {
   address_id: 0,
   first_name: '',

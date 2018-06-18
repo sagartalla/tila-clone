@@ -8,7 +8,9 @@ import ShippingAddress from './ShippingAddress';
 import Orders from './Orders'
 import Wishlist from './Wishlist';
 
-import styles from './cam.styl';
+
+import { mergeCss } from '../../utils/cssUtil';
+const styles = mergeCss('components/Cam/cam');
 
 const Cam = ({ tabDetails }) => {
   const [tab, ...queryParams] = tabDetails ? tabDetails.split('/') : [];

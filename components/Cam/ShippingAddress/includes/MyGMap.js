@@ -5,7 +5,8 @@ import { Row, Col } from 'react-bootstrap';
 
 import MyGoogleMap from './GoogleMap';
 
-import styles from '../address.styl';
+import { mergeCss } from '../../../../utils/cssUtil';
+const styles = mergeCss('components/Cam/ShippingAddress/address');
 
 const refs = {};
 class MyGMap extends React.Component {
@@ -118,7 +119,7 @@ class MyGMap extends React.Component {
     let { refs, bounds, center, markers } = this.state;
     return (
       <div>
-       
+
         <MyGoogleMap
           refs={refs}
           bounds={bounds}

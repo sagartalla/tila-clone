@@ -5,7 +5,10 @@ import { Row, Col } from 'react-bootstrap';
 import RightBar from '../../common/CartAndPaymentRightBar';
 import Blocker from '../../common/Blocker';
 
-import styles from '../cart.styl';
+// import styles from '../cart.styl';
+
+import { mergeCss } from '../../../utils/cssUtil';
+const styles = mergeCss('components/Cart/cart');
 
 const CartBody = props => {
   const { showBlocker, increaseItemCnt, decreaseItemCnt, data, removeCartItem, checkoutBtnHandler, addToWishlist } = props;

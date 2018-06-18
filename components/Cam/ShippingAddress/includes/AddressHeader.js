@@ -2,7 +2,8 @@ import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { languageDefinations } from '../../../../utils/lang/';
 
-import styles from '../address.styl';
+import { mergeCss } from '../../../../utils/cssUtil';
+const styles = mergeCss('components/Cam/ShippingAddress/address');
 
 const AddressHeader = () => {
   const {DELIVERY_ADDR_PAGE} = languageDefinations();

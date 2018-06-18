@@ -8,8 +8,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators, selectors } from '../../../../store/cam/personalDetails';
 
-import styles from '../../cam.styl';
-
+import { mergeCss } from '../../../../utils/cssUtil';
+const styles = mergeCss('components/Cam/cam');
 
 class EditPassword extends React.Component {
 

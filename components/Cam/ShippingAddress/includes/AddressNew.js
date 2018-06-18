@@ -4,7 +4,8 @@ import { languageDefinations } from '../../../../utils/lang/';
 import { Row, Col, Button } from 'react-bootstrap';
 
 import MyGMap from './MyGMap';
-import styles from '../address.styl';
+import { mergeCss } from '../../../../utils/cssUtil';
+const styles = mergeCss('components/Cam/ShippingAddress/address');
 
 //TODO validations is pending. SF-28
 //TODO country dropdown. SF-25

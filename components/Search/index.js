@@ -3,9 +3,11 @@ import { Grid } from 'react-bootstrap';
 import NoSSR from 'react-no-ssr';
 
 import HeaderBar from '../HeaderBar/index';
-import styles from './search.styl';
 import CategoriesAndFacets from './CategoriesAndFacets';
 import SearchResults from './SearchResults';
+
+import { mergeCss } from '../../utils/cssUtil';
+const styles = mergeCss('components/Search/search');
 
 const Search = () => (
   <div>

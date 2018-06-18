@@ -7,7 +7,8 @@ import Voucher from './paymentpages/Voucher';
 import RewardPoints from './paymentpages/RewardPoints';
 import PayOnline from './paymentpages/PayOnline';
 
-import styles from '../payment.styl';
+import { mergeCss } from '../../../utils/cssUtil';
+const styles = mergeCss('components/Payments/payment');
 
 const PaymentMode = props => {
 

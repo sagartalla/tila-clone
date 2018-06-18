@@ -2,7 +2,8 @@ import React from 'react';
 import SVGCompoent from '../../common/SVGComponet';
 import { Grid, Row, Col } from 'react-bootstrap';
 
-import styles from '../payment.styl';
+import { mergeCss } from '../../../utils/cssUtil';
+const styles = mergeCss('components/Payments/payment');
 
 const SignIn = props => (
   <div className={`${styles['pb-15']} ${styles['pt-15']} ${styles['pl-34']} ${styles['pr-34']} ${styles['box']} ${styles['mb-20']} ${styles['relative']} ${styles['payment-signup']}`}>

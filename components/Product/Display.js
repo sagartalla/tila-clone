@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Slider from "react-slick";
 
-import styles from './product.styl';
 import constants from '../../constants';
+
+import { mergeCss } from '../../utils/cssUtil';
+const styles = mergeCss('components/Product/product');
 
 class Display extends Component {
   constructor(props) {

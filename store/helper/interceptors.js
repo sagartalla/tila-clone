@@ -75,7 +75,7 @@ export const authToken = () => {
       return '';
     }
   } catch (e) {
-    console.log(e);
+
   }
 }
 
@@ -88,7 +88,6 @@ export const country = () => {
       return undefined;
     }
   } catch (e) {
-    console.log(e);
     return undefined;
   }
 }
