@@ -18,11 +18,11 @@ class ActionBar extends Component {
   }
 
   state = { show: false }
-  
+
   componentDidMount() {
     this.props.getLoginInfo();
   }
-  
+
   componentWillReceiveProps(nextProps) {
     this.setState({
       show: !nextProps.isLoggedIn && !this.state.logoutClicked,
@@ -41,13 +41,17 @@ class ActionBar extends Component {
   loginClick() {
     this.setState({ show: true });
   }
-  
+
   render() {
     const { isLoggedIn } = this.props;
     return (
       <div className={styles['actionbar-wrapper']}>
         <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']}`}>
-          <SVGCompoent clsName={`${styles['wish-list-icon']}`} src="icons/wish-list/wish-list-icon" />
+          <Link route="/cam/wishlist">
+            <span className={`${styles['flex-center']} ${styles['justify-center']}`}>
+              <SVGCompoent clsName={`${styles['wish-list-icon']}`} src="icons/wish-list/wish-list-icon" />
+            </span>
+        </Link>
         </div>
         <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']}`}>
           <Link route="/cart">
@@ -68,19 +72,19 @@ class ActionBar extends Component {
             isLoggedIn
             ?
             <span onClick={this.logoutClick}>logout</span>
-            : 
+            :
               <span onClick={this.loginClick}>login</span>
           }
         </div>
         {
-          (this.state.show) 
+          (this.state.show)
           ?
           (
             <Modal className={`react-router-modal__modal ${styles['login-reg-modal']} ${styles['p-20']}`} onBackdropClick={() => this.setState({ show: false })}>
               <Login />
             </Modal>
           )
-          : 
+          :
           null}
       </div>
     );

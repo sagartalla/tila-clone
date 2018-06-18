@@ -5,22 +5,235 @@ const initialState = {
     ui: {
         loading: false,
     },
-    data: {},
-    error: {},
+    data: {
+			orderDetails: {},
+			orderIssue: {
+        items: [],
+        reasons: [],
+        cancelStatus: {},
+        exchangeVariants: [],
+      },
+    },
+    error: '',
 };
 
 const productReducer = typeToReducer({
-    [actions.GET_ORDER_DETAILS]: {
-        PENDING: state => {
-            return Object.assign({}, state, { ui: { loading: true } });
-        },
-        FULFILLED: (state, action) => {
-            return Object.assign({}, state, { data: action.payload.data, ui: { loading: true } });
-        },
-        REJECTED: (state, action) => {
-            return Object.assign({}, state, { error: action.payload.message, ui: { loading: false } })
-        },
+  [actions.GET_ORDER_DETAILS]: {
+    PENDING: state => {
+      return Object.assign({}, state, { ui: { loading: true } });
     },
+    FULFILLED: (state, action) => {
+      return Object.assign({}, state, {
+        data: {
+          ...state.data,
+          orderDetails: {
+            ...state.data.orderDetails,
+            ...action.payload.data
+          }
+        },
+        ui: { loading: false }
+      });
+    },
+    REJECTED: (state, action) => {
+      return Object.assign({}, state, { error: action.payload.message, ui: { loading: false } })
+    },
+  },
+  [actions.RAISE_ORDER_ISSUE]: (state, action) => {
+    return {
+      ...state,
+      data: {
+        ...state.data,
+        orderIssue: {
+          ...state.data.orderIssue,
+          ...action.payload.data
+        }
+      }
+    }
+  },
+  [actions.GO_TO_NEXT_STEP]: (state, action) => {
+    let orderIssue = {};
+    const step = action.payload.data.step;
+    if (step !== null) {
+      orderIssue = {
+        ...state.data.orderIssue,
+      }
+    }
+    orderIssue.step = step;
+    return {
+      ...state,
+      data: {
+        ...state.data,
+        orderIssue,
+      }
+    }
+  },
+  [actions.SET_SELECTED_ITEM]: (state, action) => {
+    return {
+      ...state,
+      data: {
+        ...state.data,
+        orderIssue: {
+          ...state.data.orderIssue,
+          selectedItem: action.payload.data.selectedItem
+        }
+      }
+    }
+  },
+  [actions.RESET_ORDER_ISSUE]: (state, action) => {
+    return {
+      ...state,
+      data: {
+        ...state.data,
+        orderIssue: initialState.data.orderIssue
+      }
+    };
+  },
+  [actions.SET_RETURN_EXCHANGE_TYPE]: (state, action) => {
+    return {
+      ...state,
+      data: {
+        ...state.data,
+        orderIssue: {
+          ...state.data.orderIssue,
+          returnExchangeType: action.payload.data.returnExchangeType
+        }
+      }
+    };
+  },
+  [actions.GET_REASONS]: {
+    PENDING: state => {
+      return Object.assign({}, state, { ui: { loading: true } });
+    },
+    FULFILLED: (state, action) => {
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          orderIssue: {
+            ...state.data.orderIssue,
+            reasons: action.payload.data,
+          }
+        },
+        ui: { loading: false }
+      };
+    },
+    REJECTED: (state, action) => {
+      return Object.assign({}, state, { error: action.payload.message, ui: { loading: false } })
+    },
+  },
+  [actions.SET_REASON]: (state, action) => {
+    return {
+      ...state,
+      data: {
+        ...state.data,
+        orderIssue: {
+          ...state.data.orderIssue,
+          selectedReasons: action.payload.data,
+        }
+      }
+    }
+  },
+  [actions.SUBMIT_CANCEL_REQUEST]: {
+    PENDING: state => {
+      return Object.assign({}, state, { ui: { loading: true } });
+    },
+    FULFILLED: (state, action) => {
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          orderIssue: {
+            ...state.data.orderIssue,
+            cancelStatus: action.payload.data
+          }
+        },
+        ui: { loading: false }
+      };
+    },
+    REJECTED: (state, action) => {
+      return Object.assign({}, state, { error: action.payload.message, ui: { loading: false } })
+    },
+  },
+  [actions.SET_ORDER_ISSUE_DATA]: (state, action) => {
+    return {
+      ...state,
+      data: {
+        ...state.data,
+        orderIssue: {
+          ...state.data.orderIssue,
+          ...action.payload.data,
+        }
+      }
+    }
+  },
+  [actions.SET_RETURN_EXCHANGE_ADDRESS]: (state, action) => {
+    return {
+      ...state,
+      data: {
+        ...state.data,
+        orderIssue: {
+          ...state.data.orderIssue,
+          returnExchangeAddressId: action.payload.data.addressId,
+        }
+      }
+    }
+  },
+  [actions.SUBMIT_RETURN_REQUEST]: {
+    PENDING: state => {
+      return Object.assign({}, state, { ui: { loading: true } });
+    },
+    FULFILLED: (state, action) => {
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          orderIssue: {
+            ...state.data.orderIssue,
+            returnStatus: action.payload.data
+          }
+        },
+        ui: { loading: false }
+      };
+    },
+    REJECTED: (state, action) => {
+      return Object.assign({}, state, { error: action.payload.message, ui: { loading: false } })
+    },
+  },
+  [actions.GET_EXCHANGE_VARIANTS]: {
+    PENDING: state => {
+      return Object.assign({}, state, { ui: { loading: true } });
+    },
+    FULFILLED: (state, action) => {
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          orderIssue: {
+            ...state.data.orderIssue,
+            exchangeVariants: action.payload.data
+          }
+        },
+        ui: { loading: false }
+      };
+    },
+    REJECTED: (state, action) => {
+      return Object.assign({}, state, { error: action.payload.message, ui: { loading: false } })
+    },
+  },
+  [actions.SET_VARIANT_OPTION]: (state, action) => {
+    return {
+      ...state,
+      data: {
+        ...state.data,
+        orderIssue: {
+          ...state.data.orderIssue,
+          selectedVariant: {
+            ...action.payload.data
+          }
+        }
+      }
+    };
+  }
 }, initialState);
 
 export default productReducer;

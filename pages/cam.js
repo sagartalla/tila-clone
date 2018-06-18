@@ -21,7 +21,7 @@ class CamPage extends Base {
     </Layout>
    );
   }
-  
+
 }
 
 export default withRedux(makeStore, null, null)(CamPage);
