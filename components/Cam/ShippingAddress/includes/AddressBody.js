@@ -23,7 +23,7 @@ const AddressBody = (props) => {
   const { DELIVERY_ADDR_PAGE } = languageDefinations();
 
   return (
-    <div className={`${styles['address-body']} ${props.standalone === true ? styles['p-32'] : ''}`}>
+    <div className={`${styles['address-body']} ${props.standalone === true ? styles['p-30'] : ''}`}>
       <Row>
         {
           props.data && props.data.map((val, id) => {

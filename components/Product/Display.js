@@ -27,7 +27,7 @@ class Display extends Component {
     const { imgs } = this.props;
     return (
       <div className={`${styles['box']}`}>
-        <div className={`${styles['display-item-wrap']} ${styles['pt-24']}`}>
+        <div className={`${styles['display-item-wrap']} ${styles['pt-25']}`}>
           <Slider
             asNavFor={this.state.nav2}
             ref={slider => (this.slider1 = slider)}
