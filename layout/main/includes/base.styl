@@ -9,6 +9,8 @@ html
 body
   font-size base-font-size
   font-family ProximaNova
+  background body-color
+  color base-font
 
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: #ddd;
@@ -44,6 +46,7 @@ for i in range(10px, 40px, 2)
   .fs-{i}
     font-size (i/base-px)rem 
 
+/* Paddings and Margins*/
 // it will generate margin from m-5, m-10, m-15, ...., to m-40.
 mrgpad(types=margin padding margin-left margin-right margin-top margin-bottom  padding-left padding-right padding-top padding-bottom, n)
   padding unit(n/base-px, rem) if padding in types
@@ -103,12 +106,6 @@ for x in range(0px, 40px, 5)
 .p-30-20
   padding 30px 20px
 
-.pl-14
-  padding-left 14px
-
-.p-22
-  padding 22px
-
 //height
 .ht-100
   height 100px
@@ -121,11 +118,6 @@ for x in range(0px, 40px, 5)
 
 .ht-290
   height 290px
-
-//for specific target
-body
-  background body-color
-  color base-font
 
 .main-layout 
   min-height 100vh
@@ -141,7 +133,6 @@ body
 //line height part
 .lne-ht2
   line-height 2
-
 
 //colors
 .black-color
@@ -170,6 +161,7 @@ body
   
 .thck-gry-rt-border
   border-right 1px solid thck-gry-clr
+
 //font-weight
 .fontW300
   font-weight 300
@@ -251,19 +243,3 @@ body
 
 .absolute
   position absolute
-
-.done .icon-bg-fill {
-    fill: #99CC33
-}
-
-.done .icon-fill {
-    fill: #fff
-}
-
-.payment-active .icon-bg-fill {
-    fill: #0654BA;
-}
-
-.payment-active .icon-fill {
-    fill: #fff
-}
