@@ -6,7 +6,7 @@ import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Payments/payment');
 
 const SignIn = props => (
-  <div className={`${styles['pb-15']} ${styles['pt-15']} ${styles['pl-34']} ${styles['pr-34']} ${styles['box']} ${styles['mb-20']} ${styles['relative']} ${styles['payment-signup']}`}>
+  <div className={`${styles['pb-15']} ${styles['pt-15']} ${styles['pl-35']} ${styles['pr-35']} ${styles['box']} ${styles['mb-20']} ${styles['relative']} ${styles['payment-signup']}`}>
     <SVGCompoent clsName={`${styles['profile']} ${props.configJson.done ? 'done' : ''} ${props.configJson.progress ? 'payment-active' : ''}`} src="icons/profile/profile" />
     <Row className={`${props.configJson.done ? '' : 'hide'} ${styles['flex-center']}`}>
       <Col md={8} sm={12} xs={12}>
