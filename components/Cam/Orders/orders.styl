@@ -4,7 +4,7 @@ $shipment-wrap-border-color = #D8D8D8
 
 .orders-container
   display block
-  margin-left 10px
+  padding-left 5px
   margin-top -(px-20)
 
 .order-item-wrap
@@ -19,13 +19,13 @@ $shipment-wrap-border-color = #D8D8D8
 .shipment-wrap
   border 1px solid $shipment-wrap-border-color
   border-radius 6px
-  .products-wrap
-    border-right 1px solid $shipment-wrap-border-color
+  .products-wrap 
+    // border-right 1px solid $shipment-wrap-border-color
     display table
     width 100%
     .product-item
-      height 70px
-      display table-row
+      // height 70px
+      // display table-row
       // &:after // TODO Add border between products
       //   content: '';
       //   display: block;
@@ -35,23 +35,29 @@ $shipment-wrap-border-color = #D8D8D8
       //   left: 10%;
       //   top: 50%;
       &:only-of-type
-        height 140px
+        min-height 120px
         // &:after
         //   display none
-      .img-wrap, .text-wrap
-        position relative
-        display table-cell
+      // .img-wrap, .text-wrap
+      //   position relative
+      //   display table-cell
       .img-wrap
-        flex-grow 1
-        width 25%
+        width 20%
+        height 80px
+
+        .order-item-img
+          height 100%
       .text-wrap
         flex-grow 4
         width 75%
-        vertical-align middle
   .date-cont
     float left
   .cancel-btn
     float right
   .widget-wrap
     clear both
-    padding-top 20px
+  
+.down-arrow
+  display: block;
+  width: 10px;
+  height: 10px;

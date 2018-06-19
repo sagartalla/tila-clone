@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
 
-import styles from './statusWidget.styl';
+import { mergeCss } from '../../../../utils/cssUtil';
+const styles = mergeCss('components/Order/includes/StatusWidget/statusWidget');
 
 const statuses = ['APPROVED', 'PACKED', 'SHIPPED', 'DELIVERED'];
 

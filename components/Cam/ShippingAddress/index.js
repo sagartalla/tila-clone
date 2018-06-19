@@ -127,7 +127,7 @@ class ShippingAddress extends Component {
     const { DELIVERY_ADDR_PAGE } = languageDefinations();
 
     return (
-      <div className={`${styles['address-container']} ${standalone !== true ? '' : `${styles['box']} ${styles['ml-20']}`} `}>
+      <div className={`${styles['address-container']} ${standalone !== true ? '' : `${styles['box']} ${styles['ml-5']}`} `}>
         {
           standalone === true ?
             <AddressHeader /> :

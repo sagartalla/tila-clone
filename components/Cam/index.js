@@ -32,7 +32,7 @@ const Cam = ({ tabDetails }) => {
     <div className={styles['bg-color']}>
       <HeaderBar />
       <Grid>
-        <Row>
+        <Row className={styles['pt-32']}>
           <Col xs={12} md={3}>
             <Row>
               <Sidebar />
