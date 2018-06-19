@@ -64,7 +64,7 @@ class ChooseAddress extends Component {
           </div>
         ))
       }
-      <div className={`${styles['widget-footer']} ${styles['box']} ${styles['pt-24']}`}>
+      <div className={`${styles['widget-footer']} ${styles['box']} ${styles['pt-25']}`}>
         <button onClick={this.saveAndgoToNextStep} className={`${styles['m-0-auto']} ${styles['fs-16']}`} >Continue</button>
       </div>
       </div>
