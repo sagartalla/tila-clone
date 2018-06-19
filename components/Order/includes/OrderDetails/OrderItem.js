@@ -34,7 +34,7 @@ const OrderItem = ({ orderItem, raiseOrderIssue, orderId }) => {
   };
 
   return (
-    <div className={`${styles['shipment-wrap']} ${styles['mb-32']} ${styles['mt-32']}`}>
+    <div className={`${styles['shipment-wrap']} ${styles['mb-30']} ${styles['mt-30']}`}>
       <Row>
         <Col md={7}>
           <div className={styles['products-wrap']}>

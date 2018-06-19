@@ -27,7 +27,7 @@ class Display extends Component {
     const { imgs } = this.props;
     return (
       <div className={`${styles['box']}`}>
-        <div className={`${styles['display-item-wrap']} ${styles['pt-24']}`}>
+        <div className={`${styles['display-item-wrap']} ${styles['pt-25']}`}>
           <Slider
             asNavFor={this.state.nav2}
             ref={slider => (this.slider1 = slider)}
@@ -45,16 +45,21 @@ class Display extends Component {
         <Slider
           asNavFor={this.state.nav1}
           ref={slider => (this.slider2 = slider)}
-          slidesToShow={4}
+          slidesToShow={imgs.length > 4 ? 4 : imgs.length}
           swipeToSlide={true}
           focusOnSelect={true}
           lazyLoad={true}
         >
-          {imgs.map(({url}) => (
-            <div className={styles['carousel-item-wrap']} key={url}>
-              <img src={`${constants.mediaDomain}/${url}`} />
-            </div>
-         ))}
+          {
+            imgs.map(({url}, index) => {
+              console.log('Display', url, index);
+              return (
+                <div className={styles['carousel-item-wrap']} key={url}>
+                  <img src={`${constants.mediaDomain}/${url}`} />
+                </div>
+              );
+            })
+          }
         </Slider>
       </div>
     );

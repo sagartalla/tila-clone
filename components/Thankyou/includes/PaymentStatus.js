@@ -17,7 +17,7 @@ const PaymentStatus = props => {
       <Row className={styles['flex-center']}>
         {/* TODO SF-44: Common layout needed for non header pages */}
         <Col md={2} xs={2} sm={2}>
-          <div className={styles['pb-24']}>
+          <div className={styles['pb-25']}>
             <SVGCompoent clsName={`${styles['gift-card']}`} src="icons/gift-icon/gift-icon" />
           </div>
         </Col>

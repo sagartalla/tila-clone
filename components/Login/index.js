@@ -93,7 +93,7 @@ class Login extends Component {
               <h4 className={styles['ff-b']}>Sign up for great offers & deals</h4>
             </div>
           </div>
-          <form className={`${styles['login-form']}  ${styles['pt-32']}`}>
+          <form className={`${styles['login-form']}  ${styles['pt-30']}`}>
             <FormGroup controlId="formHorizontalEmail">
               <Col md={12}>
                 <div className={styles['group']}>
