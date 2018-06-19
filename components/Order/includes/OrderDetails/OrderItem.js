@@ -12,7 +12,6 @@ import { actionCreators }   from '../../../../store/order';
 import { mergeCss } from '../../../../utils/cssUtil';
 const styles = mergeCss('components/Cam/Orders/orders');
 
-
 const OrderItem = ({ orderItem, raiseOrderIssue, orderId }) => {
   const { products } = orderItem;
 
