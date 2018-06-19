@@ -28,199 +28,82 @@ h3
 
 input[type=text],input[type=password], input[type=email]
   border 0
-  border-bottom 1px solid generic-gray-color
+  border-bottom 1px solid generic-gray-color !important
   padding px-5 0
   outline none !important
   min-width 200px
   box-shadow none !important
   border-radius 0 !important
 
- a
-  cursor pointer 
-
-
 /* font sizes */
-
-
 // it will generate fonts from fs-10, fs-12, fs-14, ...., to fs-40.
 for i in range(10px, 40px, 2)
   .fs-{i}
     font-size i 
-  
 
-// margins 
-.m-0 
-  margin 0
-.mt-0 
-  margin-top 0
-.mb-0
-  margin-bottom 0
-.ml-0
-  margin-left 0
-.mr-0
-  margin-right 0
-.m-auto
-  margin auto
+// it will generate margin from m-5, m-10, m-15, ...., to m-40.
+base-px = 14px 
+mrgpad(types=margin padding margin-left margin-right margin-top margin-bottom  padding-left padding-right padding-top padding-bottom, n)
+  if padding in types
+    padding (n/base-px)rem
 
-.m-5 
-  margin px-5
-.mt-5
-  margin-top px-5
-.mb-5
-  margin-bottom px-5
-.ml-5
-  margin-left px-5
-.mr-5
-  margin-right px-5 
+  else if padding-left in types
+    padding-left (n/base-px)rem
 
-.m-10 
-  margin px-10
-.mt-10
-  margin-top px-10
-.mb-10
-  margin-bottom px-10
-.ml-10
-  margin-left px-10
-.mr-10
-  margin-right px-10
+  else if padding-right in types
+    padding-right (n/base-px)rem
 
-.m-15 
-  margin px-15
-.mt-15
-  margin-top px-15
-.mb-15
-  margin-bottom px-15
-.ml-15
-  margin-left px-15
-.mr-15
-  margin-right px-15  
+  else if padding-top in types
+    padding-top (n/base-px)rem
 
-.m-20 
-  margin px-20
-.mt-20
-  margin-top px-20
-.mb-20
-  margin-bottom px-20
-.ml-20
-  margin-left px-20
-.mr-20
-  margin-right px-20
+  else if padding-bottom in types
+    padding-bottom (n/base-px)rem
 
-.m-24 
-  margin px-24
-.mt-24
-  margin-top px-24
-.mb-24
-  margin-bottom px-24
-.ml-24
-  margin-left px-24
-.mr-24
-  margin-right px-24
+  else if margin-left in types
+    margin-left (n/base-px)rem
 
-.m-32 
-  margin px-32
-.mt-32
-  margin-top px-32
-.mb-32
-  margin-bottom px-32
-.ml-32
-  margin-left px-32
-.mr-32
-  margin-right px-32
+  else if margin-right in types
+    margin-right (n/base-px)rem
 
-.m-0-auto
-  margin 0 auto
+  else if margin-top in types
+    margin-top (n/base-px)rem
 
-// paddings
-.p-5 
-  padding px-5
-.pt-5
-  padding-top px-5
-.pb-5
-  padding-bottom px-5
-.pl-5
-  padding-left px-5
-.pr-5
-  padding-right px-5
+  else if margin-bottom in types
+    margin-bottom (n/base-px)rem
 
-.p-10 
-  padding px-10
-.pt-10
-  padding-top px-10
-.pb-10
-  padding-bottom px-10
-.pl-10
-  padding-left px-10
-.pr-10
-  padding-right px-10
+  else
+    margin (n/base-px)rem
 
-.p-15
-  padding px-15
-.pt-15
-  padding-top px-15
-.pb-15
-  padding-bottom px-15
-.pl-15
-  padding-left px-15
-.pr-15
-  padding-right px-15
+for x in range(0px, 40px, 5)
+  .m-{x} 
+    mrgpad(margin, x)
 
-.p-20
-  padding px-20
-.pt-20
-  padding-top px-20
-.pb-20
-  padding-bottom px-20
-.pl-20
-  padding-left px-20
-.pr-20
-  padding-right px-20
+  .ml-{x} 
+    mrgpad(margin-left, x)
 
-.p-24
-  padding px-24
-.pt-24
-  padding-top px-24
-.pb-24
-  padding-bottom px-24
-.pl-24
-  padding-left px-24
-.pr-24
-  padding-right px-24
+  .mr-{x} 
+    mrgpad(margin-right, x)
 
-.p-32
-  padding px-32
-.pt-32
-  padding-top px-32
-.pb-32
-  padding-bottom px-32
-.pl-32
-  padding-left px-32
-.pr-32
-  padding-right px-32
+  .mt-{x} 
+    mrgpad(margin-top, x)
 
-.pl-34
-  padding-left 34px
+  .mb-{x} 
+    mrgpad(margin-bottom, x)
 
-.pr-34
-  padding-right 34px
+  .p-{x} 
+    mrgpad(padding, x)
 
-.pl-40
-  padding-left 40px
+  .pl-{x} 
+    mrgpad(padding-left, x)
 
-.pr-40
-  padding-right 40px
+  .pr-{x} 
+    mrgpad(padding-right, x)
 
-//mostly we use for over rides so keeping at bottom
-.p-0 
-  padding 0
-.pt-0
-  padding-top 0
-.pb-0
-  padding-bottom 0
-.pl-0
-  padding-left 0
-.pr-0
-  padding-right 0
+  .pt-{x} 
+    mrgpad(padding-top, x)
+
+  .pb-{x} 
+    mrgpad(padding-bottom, x)
 
 .p-10-20
   padding 10px 20px
@@ -240,24 +123,12 @@ for i in range(10px, 40px, 2)
 .pl-14
   padding-left 14px
 
-.p-10
-  padding 10px
-
 .p-22
   padding 22px
 
 //height
 .ht-100
   height 100px  
-
-.ht-auto
-  height auto 
-
-.ht-170
-  height 170px 
-
-.ht-290
-  height 290px 
 
 //for specific target
 body
@@ -304,6 +175,9 @@ body
 
 .lgt-gry-clr
   color lgt-gry
+  
+.thck-gry-rt-border
+  border-right 1px solid thck-gry-clr
 //font-weight
 .fontW300
   font-weight 300
@@ -325,9 +199,6 @@ body
 .border-t
   border-top 1px solid light-gray
 
-.border-lg
-  border 1px solid light-gray
-
 .border-b
   border-bottom 1px solid light-gray
 
@@ -337,23 +208,11 @@ body
 .thick-border-btm
   border-bottom 1px solid light-gray-color
 
-
-.bb-dashed
-  border-bottom 1px dashed label-light-grey
-  margin-left 0
-
-.br-5
-  border-radius 5px 
-
-.bg-mauve
-  background mauve-light     
-
 .thin-border-right
   border-right 1px solid generic-gray-color
 
 .border-btm-dottes
   border-bottom 1px dotted generic-gray-color
-
 //list style
 .no-lst
   list-style-type none
@@ -364,9 +223,6 @@ body
 //border-radius
 .border-radius2
   border-radius 2px
-
-.br-r15
-  border-radius 15px
 
 //box-shadow
 .default-shadow
@@ -393,9 +249,6 @@ body
 
 .absolute
   position absolute
-
-.icon-bg-fill
-  fill red
 
 .done .icon-bg-fill {
     fill: #99CC33

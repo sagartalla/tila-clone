@@ -22,7 +22,7 @@ const Product = ({
   return (
 
     <Link route={`/product?productId=${productId}`}>
-      <Col md={3} xs={12} className={`${styles['pr-0']} ${styles['pb-24']} ${styles['product-items']}`}>
+      <Col md={3} xs={12} className={`${styles['pr-0']} ${styles['pb-25']} ${styles['product-items']}`}>
         <div className={`${styles['img-cont']} ${styles['p-20']}`}>
           <div style={style} className={styles['image-div']} />
         </div>

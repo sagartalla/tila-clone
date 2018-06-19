@@ -24,7 +24,7 @@ const getProductComponent = (isPreview) => {
         {
           isPreview ? null : <HeaderBar />
         }
-        <Grid className={`${styles['pb-32']} ${styles['pt-32']}`}>
+        <Grid className={`${styles['pb-30']} ${styles['pt-30']}`}>
           <Row>
             <Col xs={12} md={6}>
               <Dispalay imgs={imgUrls} />
@@ -41,7 +41,7 @@ const getProductComponent = (isPreview) => {
             </Col>
           </Row>
         </Grid>
-        <div className={`${styles['border-b']} ${styles['border-t']} ${styles['pb-32']} ${styles['pt-32']}`}>
+        <div className={`${styles['border-b']} ${styles['border-t']} ${styles['pb-30']} ${styles['pt-30']}`}>
           <Grid>
             <Row>
               <Col xs={12}>

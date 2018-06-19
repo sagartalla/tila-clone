@@ -155,7 +155,7 @@ class Payments extends React.Component {
         <Grid>
           <Row>
             <Col xs={12} md={12} sm={12}>
-              <h4 className={`${styles['mt-32']} ${styles['mb-20']} ${styles['light-gry-clr']}`}>{PAYMENT_PAGE.SECURE_CHECKOUT}</h4>
+              <h4 className={`${styles['mt-30']} ${styles['mb-20']} ${styles['light-gry-clr']}`}>{PAYMENT_PAGE.SECURE_CHECKOUT}</h4>
             </Col>
           </Row>
           <Row>

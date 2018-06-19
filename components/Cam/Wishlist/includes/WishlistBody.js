@@ -34,7 +34,7 @@ const WishlistBody = props => {
                     <Col md={8} className={styles['pl-0']}>
                       <h5 className={`${styles['mt-0']} ${styles['mb-0']} ${styles['thick-blue']}`}>{brand_name}</h5>
                       <h5 className={`${styles['lgt-gry-clr']} ${styles['light-gry-clr']}`}>{name}</h5>
-                      <div className={styles['mt-32']}>
+                      <div className={styles['mt-30']}>
                         <button id={listing_id}  className={`${styles['fp-btn']} ${styles['fp-btn-primary']}`} onClick={addToCart}>{WISH_LIST_PAGE.ADD_TO_CART_BTN}</button>
                       </div>
                     </Col>
@@ -43,7 +43,7 @@ const WishlistBody = props => {
                         <span id={wishlist_id} className={`${styles['absolute']} ${styles['delete-icon-part']}`} onClick={deleteItem}>
                           <SVGCompoent clsName={`${styles['delete-icon']}`} src="icons/delete-icon/delete-icon" />
                         </span>
-                        <h4 className={`${styles['fontW600']} ${styles['light-gry-clr']} ${styles['mt-24']} ${styles['t-c']}`}><span className={styles['fs-30']}>{price}</span> <span clsName={styles['fs-18']}> {cur}</span></h4>
+                        <h4 className={`${styles['fontW600']} ${styles['light-gry-clr']} ${styles['mt-25']} ${styles['t-c']}`}><span className={styles['fs-30']}>{price}</span> <span clsName={styles['fs-18']}> {cur}</span></h4>
                       </div>
                     </Col>
                   </Col>

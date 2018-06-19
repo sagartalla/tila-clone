@@ -12,7 +12,6 @@ import { actionCreators }   from '../../../../store/order';
 import { mergeCss } from '../../../../utils/cssUtil';
 const styles = mergeCss('components/Cam/Orders/orders');
 
-import styles from '../../order.styl';
 
 const OrderItem = ({ orderItem, raiseOrderIssue, orderId }) => {
   const { products } = orderItem;
@@ -36,7 +35,7 @@ const OrderItem = ({ orderItem, raiseOrderIssue, orderId }) => {
   };
 
   return (
-    <div className={`${styles['shipment-wrap']} ${styles['mb-32']} ${styles['mt-32']}`}>
+    <div className={`${styles['shipment-wrap']} ${styles['mb-30']} ${styles['mt-30']}`}>
       <Row>
         <Col md={7}>
           <div className={styles['products-wrap']}>
@@ -80,9 +79,6 @@ const OrderItem = ({ orderItem, raiseOrderIssue, orderId }) => {
     )
 };
 
-<<<<<<< HEAD:components/Cam/Orders/includes/OrderItem.js
-export default OrderItem;
-=======
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     { raiseOrderIssue: actionCreators.raiseOrderIssue },
@@ -97,4 +93,3 @@ OrderItem.propTypes = {
 }
 
 export default connect(null, mapDispatchToProps)(OrderItem);
->>>>>>> origin/develop:components/Order/includes/OrderDetails/OrderItem.js

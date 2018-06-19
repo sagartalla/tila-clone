@@ -11,7 +11,7 @@ const Catalog = ({ catalog }) => {
     <div>
       {
         _.map(catalog, (group, groupName) => <div key={groupName} className={`${styles['c-group-countainer']} ${styles['p-10']}`}>
-          <div className={`${styles['c-grp-title']} ${styles['fs-18']} ${styles['fontW600']} ${styles['pl-14']} ${styles['black-color']}`}>{groupName}</div>
+          <div className={`${styles['c-grp-title']} ${styles['fs-18']} ${styles['fontW600']} ${styles['pl-15']} ${styles['black-color']}`}>{groupName}</div>
           <Grid className={`${styles['c-grp-details']} ${styles['pt-5']} ${styles['pb-10']} ${styles['lne-ht2']}`}>
             {
               group.map((attributes) => {
