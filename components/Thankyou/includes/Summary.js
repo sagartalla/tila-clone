@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types';
 import { Grid, Row, Col } from 'react-bootstrap';
 import SVGCompoent from '../../common/SVGComponet';
-import styles from '../thankyou.styl';
+import { mergeCss } from '../../../utils/cssUtil';
+const styles = mergeCss('components/Thankyou/thankyou');
+
 
 /** TODO : Change Address, Request Invoice, Pin Address, Share with friends link is required **/
 /** TODO : Address, Shipping cost & Payment details to be added **/
@@ -13,7 +15,7 @@ const PaymentStatus = props => {
       <Row>
         <Col md={12} xs={12} sm={12}>
           <Col md={12} xs={12} sm={12} className={`${styles['border-btm-dottes']}`}>
-            <div className={`${styles['pb-24']} ${styles['pt-24']} ${styles['flex']}`}>
+            <div className={`${styles['pb-25']} ${styles['pt-25']} ${styles['flex']}`}>
               <Col md={4} xs={6} sm={6}>
                 <div className={styles['flx-space-bw']}>
                   <h5 className={`${styles['mt-0']} ${styles['fs-16']} ${styles['light-gry-clr']} ${styles['fontW600']} ${styles['mb-20']}`}>ADDRESS DETAILS</h5>

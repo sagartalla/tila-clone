@@ -19,7 +19,7 @@ if (env !== 'local'){
 }
 
 const configModifer = (config) => {
-  const newheaders = _.reduce.convert({ 'cap': false })((acc, value, key) => { 
+  const newheaders = _.reduce.convert({ 'cap': false })((acc, value, key) => {
     if(value) {
       acc[key] = value;
     }
@@ -42,7 +42,7 @@ export const uuidv4 = () => {
     return v.toString(16);
   });
 }
-
+//TODO SF-49
 export const sessionId = () => {
   try {
     if (localStorage) {
@@ -75,7 +75,7 @@ export const authToken = () => {
       return '';
     }
   } catch (e) {
-    console.log(e);
+
   }
 }
 
@@ -83,13 +83,12 @@ export const country = () => {
   try {
     if (localStorage) {
       const country = localStorage.country
-      return country || 'ksa'
+      return country || undefined
     } else {
-      return 'ksa';
+      return undefined;
     }
   } catch (e) {
-    console.log(e);
-    return 'ksa';
+    return undefined;
   }
 }
 

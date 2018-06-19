@@ -5,13 +5,14 @@ import { Grid, Row, Col } from 'react-bootstrap';
 import SVGCompoent from '../../common/SVGComponet';
 import ShippingAddress from '../../Cam/ShippingAddress';
 
-import styles from '../payment.styl';
+import { mergeCss } from '../../../utils/cssUtil';
+const styles = mergeCss('components/Payments/payment');
 
 const DeliveryAddress = props => {
   const { configJson, defaultAddress, handleShippingAddressContinue, editAddress } = props;
   const { DELIVERY_ADDR_PAGE } = languageDefinations();
   return (
-    <div className={`${styles['pb-15']} ${styles['pt-15']} ${styles['pl-34']} ${styles['pr-34']} ${styles['box']} ${styles['mb-20']} ${styles['relative']}`}>
+    <div className={`${styles['pb-15']} ${styles['pt-15']} ${styles['pl-35']} ${styles['pr-35']} ${styles['box']} ${styles['mb-20']} ${styles['relative']}`}>
       <SVGCompoent clsName={`${styles['map-address']} ${configJson.done ? 'done' : ''} ${configJson.progress ? 'payment-active' : ''}`} src="icons/map/address" />
       <Row className={`${configJson.basic || configJson.done ? '' : 'hide'}`}>
         <Col md={6} sm={12} xs={12}>

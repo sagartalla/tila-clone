@@ -1,3 +1,5 @@
+@import '../executables.styl';
+
 * { box-sizing:border-box; }
 
 html
@@ -7,11 +9,16 @@ html
 body
   font-size base-font-size
   font-family ProximaNova
+  background body-color
+  color base-font
 
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: #ddd;
     opacity: 1; /* Firefox */
 }
+
+a
+  cursor pointer 
 
 a:hover
   text-decoration none
@@ -33,173 +40,56 @@ input[type=text],input[type=password], input[type=email]
   box-shadow none !important
   border-radius 0 !important
 
-
 /* font sizes */
-
-
 // it will generate fonts from fs-10, fs-12, fs-14, ...., to fs-40.
 for i in range(10px, 40px, 2)
   .fs-{i}
-    font-size i 
+    font-size (i/base-px)rem 
+
+/* Paddings and Margins*/
+// it will generate margin from m-5, m-10, m-15, ...., to m-40.
+mrgpad(types=margin padding margin-left margin-right margin-top margin-bottom  padding-left padding-right padding-top padding-bottom, n)
+  padding unit(n/base-px, rem) if padding in types
+  padding-left unit(n/base-px, rem) if padding-left in types
+  padding-right unit(n/base-px, rem) if padding-right in types
+  padding-top unit(n/base-px, rem) if padding-top in types
+  padding-bottom unit(n/base-px, rem) if padding-bottom in types
+  margin unit(n/base-px, rem) if margin in types
+  margin-left unit(n/base-px, rem) if margin-left in types
+  margin-right unit(n/base-px, rem) if margin-right in types
+  margin-top unit(n/base-px, rem) if margin-top in types
+  margin-bottom unit(n/base-px, rem) if margin-bottom in types
   
+for x in range(0px, 40px, 5)
+  .m-{x} 
+    mrgpad(margin, x)
 
-// margins 
-.m-0 
-  margin 0
-.mt-0 
-  margin-top 0
-.mb-0
-  margin-bottom 0
-.ml-0
-  margin-left 0
-.mr-0
-  margin-right 0
+  .ml-{x} 
+    mrgpad(margin-left, x)
 
-.m-5 
-  margin px-5
-.mt-5
-  margin-top px-5
-.mb-5
-  margin-bottom px-5
-.ml-5
-  margin-left px-5
-.mr-5
-  margin-right px-5 
+  .mr-{x} 
+    mrgpad(margin-right, x)
 
-.m-10 
-  margin px-10
-.mt-10
-  margin-top px-10
-.mb-10
-  margin-bottom px-10
-.ml-10
-  margin-left px-10
-.mr-10
-  margin-right px-10
+  .mt-{x} 
+    mrgpad(margin-top, x)
 
-.m-15 
-  margin px-15
-.mt-15
-  margin-top px-15
-.mb-15
-  margin-bottom px-15
-.ml-15
-  margin-left px-15
-.mr-15
-  margin-right px-15
+  .mb-{x} 
+    mrgpad(margin-bottom, x)
 
-.m-20 
-  margin px-20
-.mt-20
-  margin-top px-20
-.mb-20
-  margin-bottom px-20
-.ml-20
-  margin-left px-20
-.mr-20
-  margin-right px-20
+  .p-{x} 
+    mrgpad(padding, x)
 
-.m-32 
-  margin px-32
-.mt-32
-  margin-top px-32
-.mb-32
-  margin-bottom px-32
-.ml-32
-  margin-left px-32
-.mr-32
-  margin-right px-32
+  .pl-{x} 
+    mrgpad(padding-left, x)
 
-// paddings
-.p-5 
-  padding px-5
-.pt-5
-  padding-top px-5
-.pb-5
-  padding-bottom px-5
-.pl-5
-  padding-left px-5
-.pr-5
-  padding-right px-5
+  .pr-{x} 
+    mrgpad(padding-right, x)
 
-.p-10 
-  padding px-10
-.pt-10
-  padding-top px-10
-.pb-10
-  padding-bottom px-10
-.pl-10
-  padding-left px-10
-.pr-10
-  padding-right px-10
+  .pt-{x} 
+    mrgpad(padding-top, x)
 
-.p-15
-  padding px-15
-.pt-15
-  padding-top px-15
-.pb-15
-  padding-bottom px-15
-.pl-15
-  padding-left px-15
-.pr-15
-  padding-right px-15
-
-.p-20
-  padding px-20
-.pt-20
-  padding-top px-20
-.pb-20
-  padding-bottom px-20
-.pl-20
-  padding-left px-20
-.pr-20
-  padding-right px-20
-
-.p-24
-  padding px-24
-.pt-24
-  padding-top px-24
-.pb-24
-  padding-bottom px-24
-.pl-24
-  padding-left px-24
-.pr-24
-  padding-right px-24
-
-.p-32
-  padding px-32
-.pt-32
-  padding-top px-32
-.pb-32
-  padding-bottom px-32
-.pl-32
-  padding-left px-32
-.pr-32
-  padding-right px-32
-
-.pl-34
-  padding-left 34px
-
-.pr-34
-  padding-right 34px
-
-.pl-40
-  padding-left 40px
-
-.pr-40
-  padding-right 40px
-
-//mostly we use for over rides so keeping at bottom
-.p-0 
-  padding 0
-.pt-0
-  padding-top 0
-.pb-0
-  padding-bottom 0
-.pl-0
-  padding-left 0
-.pr-0
-  padding-right 0
+  .pb-{x} 
+    mrgpad(padding-bottom, x)
 
 .p-10-20
   padding 10px 20px
@@ -213,23 +103,21 @@ for i in range(10px, 40px, 2)
 .p-10-24
   padding 10px 24px
 
-.pl-14
-  padding-left 14px
-
-.p-10
-  padding 10px
-
-.p-22
-  padding 22px
+.p-30-20
+  padding 30px 20px
 
 //height
 .ht-100
-  height 100px  
+  height 100px
+  
+.ht-auto
+  height auto 
 
-//for specific target
-body
-  background body-color
-  color base-font
+.ht-170
+  height 170px 
+
+.ht-290
+  height 290px
 
 .main-layout 
   min-height 100vh
@@ -245,7 +133,6 @@ body
 //line height part
 .lne-ht2
   line-height 2
-
 
 //colors
 .black-color
@@ -271,6 +158,13 @@ body
 
 .thck-gry-rt-border
   border-right 1px solid thck-gry-clr
+
+.lgt-gry-clr
+  color lgt-gry
+  
+.thck-gry-rt-border
+  border-right 1px solid thck-gry-clr
+
 //font-weight
 .fontW300
   font-weight 300
@@ -295,6 +189,9 @@ body
 .border-b
   border-bottom 1px solid light-gray
 
+.border-lg
+  border 1px solid light-gray
+
 .border-rt
   border-right 1px solid light-gray
 
@@ -306,6 +203,13 @@ body
 
 .border-btm-dottes
   border-bottom 1px dotted generic-gray-color
+
+.bb-dashed
+  border-bottom 1px dashed label-light-grey
+  
+.bg-mauve
+  background mauve-light
+
 //list style
 .no-lst
   list-style-type none
@@ -342,19 +246,3 @@ body
 
 .absolute
   position absolute
-
-.done .icon-bg-fill {
-    fill: #99CC33
-}
-
-.done .icon-fill {
-    fill: #fff
-}
-
-.payment-active .icon-bg-fill {
-    fill: #0654BA;
-}
-
-.payment-active .icon-fill {
-    fill: #fff
-}

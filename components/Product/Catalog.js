@@ -3,14 +3,15 @@ import PropTypes from "prop-types";
 import _ from 'lodash';
 import {Grid, Row, Col} from 'react-bootstrap';
 
-import styles from './product.styl';
+import { mergeCss } from '../../utils/cssUtil';
+const styles = mergeCss('components/Product/product');
 
 const Catalog = ({ catalog }) => {
   return (
     <div>
       {
         _.map(catalog, (group, groupName) => <div key={groupName} className={`${styles['c-group-countainer']} ${styles['p-10']}`}>
-          <div className={`${styles['c-grp-title']} ${styles['fs-18']} ${styles['fontW600']} ${styles['pl-14']} ${styles['black-color']}`}>{groupName}</div>
+          <div className={`${styles['c-grp-title']} ${styles['fs-18']} ${styles['fontW600']} ${styles['pl-15']} ${styles['black-color']}`}>{groupName}</div>
           <Grid className={`${styles['c-grp-details']} ${styles['pt-5']} ${styles['pb-10']} ${styles['lne-ht2']}`}>
             {
               group.map((attributes) => {

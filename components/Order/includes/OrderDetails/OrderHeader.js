@@ -2,19 +2,21 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col, Button } from 'react-bootstrap';
 
-import  styles from './order.styl';
+// import  styles from './order.styl';
 import OrderItem from '../Cam/Orders/includes/OrderItem';
+
+import { mergeCss } from '../../utils/cssUtil';
+const styles = mergeCss('components/Order/order');
 
 const OrderHeader = ({orderDetails}) => {
   const { name, address, phone, orderId, orderDate, itemsTotal, orderTotal, shippingTotal, paymentDetals } = orderDetails;
-  console.log(orderDetails);
   return (
     <div className={`${styles['box']} ${styles['p-20']}`}>
       <Row>
         <Col md={4}>
           {
-            address 
-            ? 
+            address
+            ?
             (<div>
               <div>Address Details</div>
               <div>
@@ -26,10 +28,10 @@ const OrderHeader = ({orderDetails}) => {
                   <span>Phone: </span>
                     <span>{phone}</span>
                   </div>
-              </div>         
-            </div>) 
-          : 
-          null 
+              </div>
+            </div>)
+          :
+          null
         }
         </Col>
         <Col md={4}>
@@ -40,7 +42,7 @@ const OrderHeader = ({orderDetails}) => {
                 <th>{orderId}</th>
               </tr>
               <tr>
-                <td>Order Date</td> 
+                <td>Order Date</td>
                 <td>{itemsTotal}</td>
               </tr>
               <tr>
@@ -91,6 +93,10 @@ const OrderHeader = ({orderDetails}) => {
       </Row>
     </div>
   )
+}
+
+OrderHeader.propTypes = {
+  orderDetails: PropTypes.object.isRequired
 }
 
 export default OrderHeader;

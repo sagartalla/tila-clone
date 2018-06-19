@@ -8,9 +8,11 @@ import { actionCreators, selectors } from '../../store/thankyou';
 
 import PaymentStatus from './includes/PaymentStatus';
 import Summary from './includes/Summary';
+import OrderList from './includes/OrderList';
 
+import { mergeCss } from '../../utils/cssUtil';
+const styles = mergeCss('components/Thankyou/thankyou');
 
-import styles from './thankyou.styl';
 
 class Thankyou extends Component {
   constructor(props) {
@@ -22,20 +24,26 @@ class Thankyou extends Component {
   }
 
   componentDidMount() {
-    const { orderId, status } = this.props;
+    const { orderId, status, getOrderStatusDetails } = this.props;
     this.setState({
       orderState: status,
       orderId: orderId
     });
     if (status == "SUCCESSFUL") {
-      this.props.getOrderStatusDetails(orderId);
+      getOrderStatusDetails(orderId);
     }
   }
 
   render() {
     const { orderDetails } = this.props;
     const { orderState, orderId } = this.state;
-    const summary = orderState == "SUCCESSFUL" ? (<Summary orderId={orderId} orderDetails={orderDetails} />) : null;
+    const summary = orderState == "SUCCESSFUL" ?
+      (
+        <div>
+          <Summary orderId={orderId} orderDetails={orderDetails} />
+          <OrderList orderDetails={orderDetails} />
+        </div>
+      ) : null;
     return (
       <div className={styles['thankyou']}>
         <Grid>
@@ -46,6 +54,7 @@ class Thankyou extends Component {
     )
   }
 }
+
 
 const mapStateToProps = (store) => ({
   orderDetails: selectors.getFinalOrderDetails(store)

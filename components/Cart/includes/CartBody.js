@@ -5,7 +5,10 @@ import { Row, Col } from 'react-bootstrap';
 import RightBar from '../../common/CartAndPaymentRightBar';
 import Blocker from '../../common/Blocker';
 
-import styles from '../cart.styl';
+// import styles from '../cart.styl';
+
+import { mergeCss } from '../../../utils/cssUtil';
+const styles = mergeCss('components/Cart/cart');
 
 const CartBody = props => {
   const { showBlocker, increaseItemCnt, decreaseItemCnt, data, removeCartItem, checkoutBtnHandler, addToWishlist } = props;
@@ -41,7 +44,7 @@ const CartBody = props => {
                             <div className={`${styles['p-10-22']} ${styles['alrt-message-bg']} ${styles['light-gry-clr']} ${styles['alrt-message-part']} ${styles['thick-border-btm']}`}><span>{CART_PAGE.MAX_PER_ORDER}</span></div>
                             : ""
                         }
-                        <div className={`${styles['cart-box']} ${styles['p-22']}`}>
+                        <div className={`${styles['cart-box']} ${styles['p-20']}`}>
                           <Row>
                             <Col md={2}>
                               <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles['pb-15']}`}><img className={styles['img']} src={img} /></div>
@@ -99,7 +102,7 @@ const CartBody = props => {
               </div>
             </Col>
             <Col md={3} sm={12} xs={12}>
-              <div className={`${styles['box']} ${styles['p-22']}`}>
+              <div className={`${styles['box']} ${styles['p-20']}`}>
                 <div className={styles['t-c']}>
                   <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles['fs-18']}`} onClick={checkoutBtnHandler}>{CART_PAGE.SECURE_CHECKOUT}</button>
                 </div>

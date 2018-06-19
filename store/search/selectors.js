@@ -59,7 +59,7 @@ const getSearchResutls = (store) => {
   if (store.searchReducer.data.productResponse) {
     resutls.totalCount = store.searchReducer.data.productResponse.noOfProducts;
     resutls.items = store.searchReducer.data.productResponse.products.map((product) => {
-      const variantInfo = product.variantAdapters.reduce((modifiedVaraints, v) => {
+      const variantInfo = product.variantListingAdapters.reduce((modifiedVaraints, v) => {
         const attributesData = {...v.attributes};
         delete attributesData.type;
         delete attributesData.variantId;

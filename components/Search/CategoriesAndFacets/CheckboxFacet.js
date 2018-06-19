@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Checkbox } from 'react-bootstrap';
-import styles from '../search.styl';
+import { mergeCss } from '../../../utils/cssUtil';
+const styles = mergeCss('components/Search/search');
 
 const MaxItems = 3;
 

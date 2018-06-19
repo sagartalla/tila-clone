@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col, Button, OverlayTrigger, Popover } from 'react-bootstrap';
 import SVGCompoent from '../../../common/SVGComponet';
-import OrderItem from './OrderItem';
+import OrderItem from '../../../Order/includes/OrderDetails/OrderItem';
 
-import styles from '../orders.styl';
+import { mergeCss } from '../../../../utils/cssUtil';
+const styles = mergeCss('components/Cam/Orders/orders');
 
 const Order = ({order}) => {
   const popover = (
@@ -42,7 +43,7 @@ const Order = ({order}) => {
       </div>
       <Row>
         <Col md={12}>
-          {order.orderItems.map((orderItem) => <OrderItem key={orderItem.id} orderItem={orderItem} />)}
+          {order.orderItems.map((orderItem) => <OrderItem key={orderItem.id} orderItem={orderItem} orderId={order.id}/>)}
         </Col>
       </Row>
       <Row> 

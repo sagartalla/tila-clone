@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Slider from "react-slick";
 
-import styles from './product.styl';
 import constants from '../../constants';
+
+import { mergeCss } from '../../utils/cssUtil';
+const styles = mergeCss('components/Product/product');
 
 class Display extends Component {
   constructor(props) {
@@ -25,7 +27,7 @@ class Display extends Component {
     const { imgs } = this.props;
     return (
       <div className={`${styles['box']}`}>
-        <div className={`${styles['display-item-wrap']} ${styles['pt-24']}`}>
+        <div className={`${styles['display-item-wrap']} ${styles['pt-25']}`}>
           <Slider
             asNavFor={this.state.nav2}
             ref={slider => (this.slider1 = slider)}

@@ -13,7 +13,7 @@ import Search from '../components/Search';
 class SearchPage extends Base {
   static async getInitialProps({ store, isServer, query }) {
     const { language, search, facets, category, subCategory, isListed } = query
-    const categoryTree = category === 'category'; //TODO need better way to identify category tree 
+    const categoryTree = category === 'category'; //TODO need better way to identify category tree
     //TODO SF-37 better handling of country
     const state = store.getState();
     const country = state.authReducer.data.country;
@@ -23,7 +23,7 @@ class SearchPage extends Base {
     const facetFilters = selectors.getFacetfilters(store.getState())(JSON.parse(facets || '{}'));
     await store.dispatch(actionCreators.getSearchResults({
       categoryFilter,
-      country: country || 'ksa',
+      country: country || undefined,
       pageSize: 100,
       query: search,
       language: language || 'en',
@@ -37,7 +37,7 @@ class SearchPage extends Base {
   }
 
   pageName = 'SEAERCH';
-  
+
   render() {
     return (
       <div>

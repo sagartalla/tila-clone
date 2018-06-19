@@ -1,5 +1,6 @@
 import { Grid, Row, Col } from 'react-bootstrap';
-import styles from '../payment.styl';
+import { mergeCss } from '../../../utils/cssUtil';
+const styles = mergeCss('components/Payments/payment');
 
 const PaymentHeader = props => (
   <div className={`${styles['payment-header']} ${styles['p-10']} `}>

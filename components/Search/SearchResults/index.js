@@ -5,7 +5,8 @@ import InfiniteScroll from 'react-infinite-scroller';
 import _ from 'lodash'
 import Product from "./Product";
 import { actionCreators, selectors } from '../../../store/search';
-import styles from '../search.styl';
+import { mergeCss } from '../../../utils/cssUtil';
+const styles = mergeCss('components/Search/search');
 
 class SearchReuslts extends Component {
   

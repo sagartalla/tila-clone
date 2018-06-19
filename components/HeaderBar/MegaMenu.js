@@ -6,7 +6,8 @@ import _ from 'lodash';
 import { Link } from '../../routes';
 import { selectors, actionCreators } from '../../store/megamenu';
 
-import styles from './header.styl';
+import { mergeCss } from '../../utils/cssUtil';
+const styles = mergeCss('components/HeaderBar/header');
 
 //TODO make it SEO friendly
 

@@ -39,7 +39,7 @@ const getVariants = (store) => {
   const identityAttr = _.filter(product_details.product_details_vo.cached_product_details.attribute_map, { attribute_group_name: 'IDENTITY' }).map((attr) => attr.name);
   let variants = similar_products.map((product) => {
     const obj = identityAttr.reduce((acc, attrName) => {
-      return { 
+      return {
         ...acc,
         [attrName]: product.product_details_vo.cached_product_details.attribute_map[attrName].attribute_values[0].value,
       }
@@ -48,7 +48,7 @@ const getVariants = (store) => {
     return obj;
   });
   const obj = identityAttr.reduce((acc, attrName) => {
-    return { 
+    return {
       ...acc,
       [attrName]: product_details.product_details_vo.cached_product_details.attribute_map[attrName].attribute_values[0].value,
     }
