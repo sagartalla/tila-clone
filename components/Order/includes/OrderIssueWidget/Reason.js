@@ -11,7 +11,8 @@ import ChooseVariant from './ChooseVariant';
 
 import { ORDER_ISSUE_TYPES, ORDER_ISSUE_STEPS as STEPS} from '../../constants';
 
-import styles from './orderIssue.styl';
+import { mergeCss } from '../../../../utils/cssUtil';
+const styles = mergeCss('components/Order/includes/OrderIssueWidget/orderIssue');
 
 class Reason extends Component {
 	constructor(props) {

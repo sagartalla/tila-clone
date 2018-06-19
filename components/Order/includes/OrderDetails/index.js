@@ -5,7 +5,9 @@ import OrderHeader from './OrderHeader';
 import OrderItem from './OrderItem';
 import OrderIssueWidget from '../OrderIssueWidget';
 
-import styles from '../../order.styl';
+// import styles from '../order.styl';
+import { mergeCss } from '../../../../utils/cssUtil';
+const styles = mergeCss('components/Order/order');
 
 const OrderDetails = ({ query, orderData }) => {
   return (

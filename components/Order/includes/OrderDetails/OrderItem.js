@@ -9,8 +9,9 @@ import constants from '../../../../constants';
 import { ORDER_ISSUE_TYPES, ORDER_ISSUE_STEPS } from '../../constants';
 import { actionCreators }   from '../../../../store/order';
 
+// import  styles from '../order.styl';
 import { mergeCss } from '../../../../utils/cssUtil';
-const styles = mergeCss('components/Cam/Orders/orders');
+const styles = mergeCss('components/Order/order');
 
 const OrderItem = ({ orderItem, raiseOrderIssue, orderId }) => {
   const { products } = orderItem;

@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col, Button } from 'react-bootstrap';
 
-// import  styles from './order.styl';
-import OrderItem from '../Cam/Orders/includes/OrderItem';
+// import  styles from '../order.styl';
+import OrderItem from './OrderItem';
 
-import { mergeCss } from '../../utils/cssUtil';
+import { mergeCss } from '../../../../utils/cssUtil';
 const styles = mergeCss('components/Order/order');
 
 const OrderHeader = ({orderDetails}) => {

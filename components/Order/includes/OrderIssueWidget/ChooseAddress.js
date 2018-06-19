@@ -7,8 +7,8 @@ import _ from 'lodash';
 import { selectors, actionCreators } from '../../../../store/order';
 import { selectors as addressSelectors, actionCreators as addressActionCreators } from '../../../../store/cam/address';
 
-import styles from './orderIssue.styl';
-
+import { mergeCss } from '../../../../utils/cssUtil';
+const styles = mergeCss('components/Order/includes/OrderIssueWidget/orderIssue');
 class ChooseAddress extends Component {
   constructor(props){
     super(props)

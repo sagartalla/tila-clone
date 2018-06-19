@@ -7,7 +7,8 @@ import { selectors, actionCreators } from '../../../../store/order';
 import constants from '../../../../constants';
 import { ORDER_ISSUE_TYPES } from '../../constants';
 
-import styles from './orderIssue.styl';
+import { mergeCss } from '../../../../utils/cssUtil';
+const styles = mergeCss('components/Order/includes/OrderIssueWidget/orderIssue');
 
 class ReturnExchange extends Component {
   constructor(props) {
