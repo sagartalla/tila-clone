@@ -65,8 +65,8 @@ const AddressNew = props => {
 
         <Col md={12} sm={12} xs={12}>
           <div className={`${styles['checkbox-material']}`}>
-            <input id="preper-loaction" type="checkbox" onClick={setAsDefaultLocation} defaultChecked={data.default} /> 
-            <label for="preper-loaction">{DELIVERY_ADDR_PAGE.PREF_LOC}</label>
+            <input id="prefer-loaction" type="checkbox" onClick={setAsDefaultLocation} defaultChecked={data.default} /> 
+            <label for="prefer-loaction">{DELIVERY_ADDR_PAGE.PREF_LOC}</label>
           </div>
         </Col>
 
