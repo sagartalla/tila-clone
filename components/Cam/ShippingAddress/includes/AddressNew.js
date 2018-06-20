@@ -28,7 +28,12 @@ const AddressNew = props => {
         </Col>
 
         <Col md={6} sm={12} xs={12}>
-          <input placeholder="First name" name="first_name" onChange={inputOnChange} value={data.first_name} className={styles.input} />
+          {/* <div className={`${styles['fp-input']}`}> */}
+            <input placeholder="First name" name="first_name" onChange={inputOnChange} value={data.first_name} className={styles.input} required />
+            {/* <span className={styles['highlight']}></span>
+            <span className={styles['bar']}></span>
+            <label>First Name</label>
+          </div> */}
         </Col>
         <Col md={6} sm={12} xs={12}>
           <input placeholder="Last name" name="last_name" onChange={inputOnChange} value={data.last_name} className={styles.input} />
