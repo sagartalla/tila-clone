@@ -28,7 +28,7 @@ const AddressNew = props => {
         </Col>
 
         <Col md={6} sm={12} xs={12}>
-          <div className={styles['fp-input']}>
+          <div className={`${styles['fp-input']} ${styles['errormain']}`}>
             <input name="first_name" onChange={inputOnChange} value={data.first_name} className={styles.input} required />
             <span className={styles['highlight']}></span>
             <span className={styles['bar']}></span>

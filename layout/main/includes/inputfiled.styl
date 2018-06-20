@@ -2,7 +2,7 @@
 
 .fp-input
   position:relative; 
-  margin-bottom:45px; 
+  margin-bottom:45px;
 
   input
     padding 10px 10px 2px 5px
@@ -49,6 +49,9 @@
   .bar::after
     right 50%
 
+  .error
+    color error-color
+
   /* active state */
   input:focus ~ .bar:before, input:focus ~ .bar:after
     width 50%
@@ -82,3 +85,13 @@
     from { background:#5264AE; }
     to 	{ width:0; background:transparent; }
   }
+
+.errormain
+  label, input:focus ~ label, input:valid ~ label 
+    color error-color
+
+  .bar::before, .bar::after 
+    background error-color
+
+  input
+    border-bottom 1px solid error-color
