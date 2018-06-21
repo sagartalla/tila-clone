@@ -10,7 +10,8 @@ import OrderIssueBody from '../OrderIssueWidget/body';
 import constants from '../../../../constants';
 import { ORDER_ISSUE_STEPS as STEPS } from '../../constants';
 
-import styles from '../../order.styl';
+import { mergeCss } from '../../../../utils/cssUtil';
+const styles = mergeCss('components/Order/order');
 
 class OrderReturnExchange extends Component {
   componentDidMount(){

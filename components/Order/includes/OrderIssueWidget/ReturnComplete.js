@@ -5,7 +5,8 @@ import { bindActionCreators } from 'redux';
 
 import { selectors, actionCreators } from '../../../../store/order';
 
-import styles from './orderIssue.styl';
+import { mergeCss } from '../../../../utils/cssUtil';
+const styles = mergeCss('components/Order/includes/OrderIssueWidget/orderIssue');
 
 class ReturnComplete extends Component {
 

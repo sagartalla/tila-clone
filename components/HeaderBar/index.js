@@ -5,12 +5,13 @@ import Logo from './Logo';
 import Search from './Search';
 import ActionBar from './ActionBar';
 import MegaMenu from './MegaMenu';
-import styles from './header.styl'
+import { mergeCss } from '../../utils/cssUtil';
+const styles = mergeCss('components/HeaderBar/header');
 
 const HeaderBar = props => (
     <div className={styles['header-container']}>
       <Grid>
-        <Row>
+        <Row className={`${styles['flex-center']}`}>
             <Col md={2}>
                 <Logo />
             </Col>

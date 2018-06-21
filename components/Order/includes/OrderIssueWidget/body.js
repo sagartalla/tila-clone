@@ -15,7 +15,8 @@ import { ORDER_ISSUE_STEPS as STEPS, ORDER_ISSUE_TYPES } from '../../constants';
 
 import { selectors, actionCreators } from '../../../../store/order';
 
-import styles from './orderIssue.styl';
+import { mergeCss } from '../../../../utils/cssUtil';
+const styles = mergeCss('components/Order/includes/OrderIssueWidget/orderIssue');
 
 class Body extends Component {
   constructor(props) {
