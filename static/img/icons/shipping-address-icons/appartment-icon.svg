@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="34" viewBox="0 0 32 34">
+    <defs>
+        <filter id="a" width="106.8%" height="108.9%" x="-3.4%" y="-3.9%" filterUnits="objectBoundingBox">
+            <feOffset in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="2.5"/>
+            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"/>
+            <feColorMatrix in="shadowBlurOuter1" result="shadowMatrixOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.0571501359 0"/>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+    <g fill="none" fill-rule="nonzero" filter="url(#a)" opacity=".406" transform="translate(-261 -2)">
+        <g fill="#DBD3D0">
+            <path d="M284.774 9.945l-9.54.8-3.52 6.952 3.52 3.824 6.147.8 6.805-.8V10.745z"/>
+            <path d="M281.38 22.32l-6.145.8-2.18 3.25 2.18 3.932h12.951v-7.181z"/>
+        </g>
+        <g fill="#9C3">
+            <path d="M272.819 21.46h15.376v1.635h-15.376zM272.819 8.812h15.376v1.635h-15.376z"/>
+        </g>
+        <path fill="#000" d="M271.7 8.8h4.4v22h-4.4z" opacity=".1"/>
+        <path fill="#9C3" d="M270.6 6.6c-2.43 0-4.4 2.158-4.4 4.82v.68h8.8v-.68c0-2.662-1.97-4.82-4.4-4.82z"/>
+        <path fill="#000" d="M271.7 6.724a4.205 4.205 0 0 0-1.014-.124c-2.477 0-4.486 2.158-4.486 4.82v.68h2.027v-.68c0-2.287 1.483-4.203 3.473-4.696z" opacity=".1"/>
+        <path fill="#DBD3D0" d="M270.6 12.1l-4.4.8v16.8h1.449L270.6 27l2.951 2.7H275V12.9z"/>
+        <g fill="#757575">
+            <path d="M270.503 14.301c-1.144 0-2.07.738-2.07 1.647v1.391h4.14v-1.391c0-.91-.927-1.647-2.07-1.647zM282.752 14.537h-2.194c-1.162 0-2.105.75-2.105 1.675v1.363h6.404v-1.363c0-.925-.942-1.675-2.105-1.675z"/>
+        </g>
+        <path fill="#9C3" d="M268.4 17.6h4.4v1.1h-4.4zM277.2 17.6h6.6v1.1h-6.6z"/>
+        <g fill="#757575">
+            <path d="M277.225 12.106h1.455v1.416h-1.455zM280.324 12.106h1.455v1.416h-1.455zM283.423 12.106h1.455v1.416h-1.455zM277.225 24.968h1.455v1.416h-1.455zM280.324 24.968h1.455v1.416h-1.455zM283.423 24.968h1.455v1.416h-1.455z"/>
+        </g>
+        <path fill="#BCAAA3" d="M267.3 20.9v8.8h1.376l1.374-1.398 1.374 1.398h1.376v-8.8z"/>
+        <path fill="#757575" d="M270.05 23.1c-.911 0-1.65.589-1.65 1.315V29.7h3.3v-5.285c0-.726-.739-1.315-1.65-1.315z"/>
+        <path fill="#9C3" d="M265.1 19.8h9.9v1.1h-9.9z"/>
+        <path fill="#000" d="M265.1 19.8h2.2v1.1h-2.2z" opacity=".1"/>
+        <path fill="#9C3" d="M265.1 12.1h9.9v1.1h-9.9z"/>
+        <path fill="#000" d="M265.1 12.1h2.2v1.1h-2.2z" opacity=".1"/>
+    </g>
+</svg>

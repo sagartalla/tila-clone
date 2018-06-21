@@ -19,6 +19,8 @@
   color white
   border 0
   border-radius 4px
+  &:focus
+    outline none
 
   &.fp-btn-primary
     background-color navy-blue
@@ -27,17 +29,22 @@
     &:hover
       background-color light-navy-blue
       color @color
+    &:focus
+      color white
 
   &.fp-btn-large
-    min-width 100%
-    padding 10px 0
+    // min-width 100%
+    padding 10px 50px
 
   &.fp-btn-default
     color navy-blue
     font-weight 600
     border 1px solid navy-blue
     // @extends .common-btn-style
-    padding 6px 25px
+    padding 10px 25px
+
+  &.small-btn
+    padding 6px 20px
 
   &.fp-btn-danger
     background-color danger-color

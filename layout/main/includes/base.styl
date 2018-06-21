@@ -17,6 +17,10 @@ body
     opacity: 1; /* Firefox */
 }
 
+button:focus
+  outline none
+
+
 a
   cursor pointer 
 
@@ -33,11 +37,11 @@ h3
 
 input[type=text],input[type=password], input[type=email]
   border 0
-  border-bottom 1px solid generic-gray-color !important
+  // border-bottom 1px solid generic-gray-color !important
   padding px-5 0
   outline none !important
-  min-width 200px
-  box-shadow none !important
+  width 100%
+  // box-shadow none !important
   border-radius 0 !important
 
 /* font sizes */
@@ -138,8 +142,11 @@ for x in range(0px, 40px, 5)
 .black-color
   color black
 
+.thick-gry-clr
+  color base-font
+
 .lgt-blue
-  color light-blue
+  color navy-blue
 
 .lgt-black
   color light-black
@@ -157,10 +164,13 @@ for x in range(0px, 40px, 5)
   color thick-red
 
 .thck-gry-rt-border
-  border-right 1px solid thck-gry-clr
+  border-right 1px solid dottes-gry-clr
 
 .lgt-gry-clr
   color lgt-gry
+
+.label-gry-clr
+  color label-light
   
 .thck-gry-rt-border
   border-right 1px solid thck-gry-clr
@@ -220,6 +230,17 @@ for x in range(0px, 40px, 5)
 //border-radius
 .border-radius2
   border-radius 2px
+
+.border-radius4
+  border-radius 4px
+
+.border-rt-rb-0
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+
+.border-lt-lb-0
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
 
 //box-shadow
 .default-shadow
