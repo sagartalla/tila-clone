@@ -5,7 +5,9 @@ const initialState = {
   ui: {
     loading: false,
   },
-  data: {},
+  data: {
+    userReviews: []
+  },
   error: {},
 };
 const ratingReviewReducer = typeToReducer({

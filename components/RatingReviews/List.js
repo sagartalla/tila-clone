@@ -8,7 +8,8 @@ import { selectors, actionCreators } from '../../store/ratingReviews';
 
 import { TABS } from './constants';
 
-import styles from './ReviewRatings.styl'
+import { mergeCss } from '../../utils/cssUtil';
+const styles = mergeCss('components/RatingReviews/ratingReviews');
 
 class List extends Component {
   constructor(props) {
@@ -17,21 +18,23 @@ class List extends Component {
   }
 
   componentDidMount() {
-
+    const { getRatingsAndReviews } = this.props;
+    getRatingsAndReviews();
   }
 
   render() {
     const { activeTab } = this.state;
     const { isLoading, userReviews } = this.props;
+    console.log('tabs', TABS, userReviews);
     return (
       isLoading
       ?
       'Loading Reviews...'
       :
-      <div>
+      <div className={styles['rating-review-cont']}>
         <div className={styles['tabs-container']}>
           {
-            TABS.map(tab => <div className={`${styles['tab-item']} ${tab.id === activeTab ? styles['active'] : ''}`}>tab.label</div> )
+            TABS.map(tab => <div key={tab.label} className={`${styles['tab-item']} ${styles['p-10']} ${tab.id === activeTab ? styles['active'] : ''}`}>{tab.label}</div> )
           }
         </div>
         <div className={styles['reviews-content']}>
@@ -39,7 +42,7 @@ class List extends Component {
             {
               userReviews.map((userReview) => {
                 return (
-                  <Row>
+                  <Row key={userReview.uniqId}>
                     <Col md={2}>
                       <div>{userReview.reviewerName}</div>
                       <div>{userReview.rating}</div>
