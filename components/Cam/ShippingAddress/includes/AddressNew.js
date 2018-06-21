@@ -123,7 +123,7 @@ const AddressNew = props => {
             </div>
           </Col>
           <Col md={12} sm={12} xs={12}>
-            <Button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles['text-uppercase']}`} onClick={saveBtnClickHandler} > {DELIVERY_ADDR_PAGE.SAVE_DELIVER_BTN} </Button>
+            <Button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-x-large']} ${styles['text-uppercase']}`} onClick={saveBtnClickHandler} > {DELIVERY_ADDR_PAGE.SAVE_DELIVER_BTN} </Button>
             <Button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']} ${styles['ml-10']} `} onClick={showAddAdrressForm}>{DELIVERY_ADDR_PAGE.CANCEL}</Button>
           </Col>
         </Row>
