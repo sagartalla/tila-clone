@@ -10,5 +10,5 @@ export default {
   CART_API_URL          :   'http://gateway-dev.fptechscience.com/cart',
   CATEGORYTREE_API_URL  :   'http://gateway-dev.fptechscience.com/category-tree',
   WISHLIST_API_URL      :   'http://gateway-dev.fptechscience.com/wl',
-  REVIEWS_API_URL       :   'http://reviews-dev.fptechscience.com',
+  REVIEWS_API_URL       :   'http://gateway-dev.fptechscience.com/reviews',
 };

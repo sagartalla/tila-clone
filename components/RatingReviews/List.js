@@ -15,11 +15,17 @@ class List extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+    this.onTabClick = this.onTabClick.bind(this);
   }
 
   componentDidMount() {
     const { getRatingsAndReviews } = this.props;
     getRatingsAndReviews();
+  }
+
+  onTabClick(e) {
+    const { getRatingsAndReviews } = this.props;
+    getRatingsAndReviews(e.target['data-id'])
   }
 
   render() {
@@ -32,14 +38,26 @@ class List extends Component {
       'Loading Reviews...'
       :
       <div className={styles['rating-review-cont']}>
-        <div className={styles['tabs-container']}>
-          {
-            TABS.map(tab => <div key={tab.label} className={`${styles['tab-item']} ${styles['p-10']} ${tab.id === activeTab ? styles['active'] : ''}`}>{tab.label}</div> )
-          }
+        <div className={styles['header-bar']}>
+          <div className={styles['tabs-container']}>
+            {
+              TABS.map(tab => <div data-id={tab.id} key={tab.label} onClick={this.onTabClick} className={`${styles['tab-item']} ${styles['p-10']} ${tab.id === activeTab ? styles['active'] : ''}`}>{tab.label}</div> )
+            }
+          </div>
+          <div>
+            <label for="rating-filter" >Filter By</label>
+            <select id="rating-filter">
+
+            </select>
+          </div>
         </div>
         <div className={styles['reviews-content']}>
           <Grid>
             {
+              userReviews.length
+              ?
+              'No Reviews'
+              :
               userReviews.map((userReview) => {
                 return (
                   <Row key={userReview.uniqId}>

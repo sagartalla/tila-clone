@@ -1,10 +1,12 @@
 import api from './api';
 import _ from 'lodash';
 
-const actions = {};
+const actions = {
+  GET_REVIEW_RATING: 'GET_REVIEW_RATING'
+};
 
 const actionCreators = {
-  getRatingsAndReviews: ()  =>  (dispatch, getState) => {
+  getRatingsAndReviews: (params = {})  =>  (dispatch, getState) => {
     const store = getState();
     const { productReducer } = store;
     const productDetails = _.get(store, 'productReducer.data[0].product_details', {});
@@ -12,14 +14,15 @@ const actionCreators = {
     const options = {
       catalog_id: catalogDetails.catalog_id,
       item_type: catalogDetails.item_type_name,
-      most_recent: true,
-      most_relevant: true,
+      most_recent: params.mostRecent || true,
+      most_relevant: params.mostRelevant || true,
       page_no: 0,
       product_id,
+      ratings: params.ratings || undefined
     };
 
     return dispatch({
-      type: actions.GET_PRODUCT,
+      type: actions.GET_REVIEW_RATING,
       payload: api.getReviewsRatings(options),
     })
   }
