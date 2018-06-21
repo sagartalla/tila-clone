@@ -12,6 +12,7 @@ import KeyFeatures from './KeyFeatures';
 import Variants from './Variants';
 import Catalog from './Catalog';
 import Offers from './Offers';
+import ReviewRatingList from '../RatingReviews/List';
 
 import { mergeCss } from '../../utils/cssUtil';
 const styles = mergeCss('components/Product/product');
@@ -69,6 +70,11 @@ const getProductComponent = (isPreview) => {
           <Row>
             <Col xs={12}>
               <div><b>Rating and Reviews</b></div>
+              <div>
+                <NoSSR>
+                  <ReviewRatingList />
+                </NoSSR>
+              </div>
             </Col>
           </Row>
         </Grid>
