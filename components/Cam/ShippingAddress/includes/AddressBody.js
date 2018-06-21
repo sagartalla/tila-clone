@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { languageDefinations } from '../../../../utils/lang/';
 import { Row, Col } from 'react-bootstrap';
-
+import SVGComponent from '../../../common/SVGComponet';
 import { mergeCss } from '../../../../utils/cssUtil';
 const styles = mergeCss('components/Cam/ShippingAddress/address');
 
@@ -24,7 +24,7 @@ const AddressBody = (props) => {
 
   return (
     <div className={`${styles['address-body']} ${props.standalone === true ? styles['p-30'] : ''}`}>
-      <Row>
+      <Row className={`${styles['flex']} ${styles['flex-wrp']}`}>
         {
           props.data && props.data.map((val, id) => {
             return (
@@ -35,32 +35,37 @@ const AddressBody = (props) => {
                       val.default ?
                         <span>
                           <input id={val.address_id} name="addr_checkbox" type="radio" defaultChecked={val.default} className={styles['radio-btn']} />
-                          <span className={`${styles['lgt-black']} ${styles['fs-12']} ${styles['fontW600']} ${styles['pl-5']}`}>{DELIVERY_ADDR_PAGE.DEFAULT_ADDR}</span>
+                          <span className={`${styles['fontW600']} ${styles['pl-10']}`}>{DELIVERY_ADDR_PAGE.DEFAULT_ADDR}</span>
+                          <span className={`${styles['default-address-icon']} ${styles['float-r']}`}><SVGComponent clsName={`${styles['default-address-icon-inn']}`} src="icons/shipping-address-icons/home-icon" /></span>
                         </span> :
                         <span>
                           <input id={val.address_id} name="addr_checkbox" type="radio" onClick={makeDefaultAddress} className={styles['radio-btn']} />
-                          <span className={`${styles['black']} ${styles['fs-12']} ${styles['fontW600']} ${styles['pl-5']}`}>{DELIVERY_ADDR_PAGE.MAKE_DEFAULT}</span>
+                          <span className={`${styles['fontW600']} ${styles['pl-10']}`}>{DELIVERY_ADDR_PAGE.MAKE_DEFAULT}</span>
+                          <span className={`${styles['default-address-icon']} ${styles['float-r']}`}><SVGComponent clsName={`${styles['default-address-icon-inn']}`} src="icons/shipping-address-icons/appartment-icon" /></span>
                         </span>
                     }
                   </div>
                   <div className={styles['address-card-body']}>
-                    <h6 className={`${styles['fontW600']} ${styles['m-0']} ${styles['mb-10']} ${styles['black-color']}`}> {val.first_name + ' ' + val.last_name} </h6>
-                    <address>
+                    <h5 className={`${styles['fontW600']} ${styles['m-0']} ${styles['mb-10']} ${styles['lgt-blue']}`}> {val.first_name + ' ' + val.last_name} </h5>
+                    <address className={`${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['full-address-details']}`}>
                       {val.address_line_1 + ', ' + val.address_line_2 + ', ' + val.city + ', ' + val.state}
                     </address>
-                    <p className={`${styles['address-card-phone']} ${styles['fontW600']} ${styles['black-color']}`}>
+                    <span className={`${styles['address-card-phone']} ${styles['fontW600']} ${styles['lgt-blue']}`}>
                       {val.mobile_country_code + ' ' + val.mobile_no}
-                    </p>
+                    </span>
                   </div>
                   <div className={styles['address-card-actions']}>
                     <Row>
-                      <Col md={4} sm={4} xs={4}>
-                        <span id={val.address_id} onClick={deleteAddr}><i className="fa fa-trash"></i> {DELIVERY_ADDR_PAGE.DELETE} </span>
+                      <Col md={6} sm={6} xs={6} className={`${styles['thck-gry-rt-border']} ${styles['flex']} ${styles['justify-center']}`}>
+                        <span id={val.address_id} onClick={deleteAddr} className={`${styles['delete-icon']} ${styles['flex-center']}`}>
+                          <SVGComponent clsName={`${styles['delete-icon-inn']}`} src="icons/delete-icon/delete-icon" />
+                          <span className={styles['pl-5']}>{DELIVERY_ADDR_PAGE.DELETE}</span>
+                        </span>
                       </Col>
-                      <Col xs={1}> | </Col>
-                      <Col md={6} sm={6} xs={6}>
-                        <span id={val.address_id} onClick={editAddress}>
-                          <i className="fa fa-pencil"></i> {DELIVERY_ADDR_PAGE.EDIT_ADDR}
+                      <Col md={6} sm={6} xs={6} className={`${styles['pl-0']} ${styles['flex']} ${styles['justify-center']}`}>
+                        <span id={val.address_id} onClick={editAddress} className={styles['edit-icon']}>
+                          <SVGComponent clsName={`${styles['edit-icon-inn']}`} src="icons/common-icon/edit-icon" />
+                          {DELIVERY_ADDR_PAGE.EDIT_ADDR}
                         </span>
                       </Col>
                     </Row>
@@ -71,12 +76,15 @@ const AddressBody = (props) => {
           })
         }
         <Col md={4} sm={12} xs={12}>
-          <div className={` ${styles['address-card']} ${styles['address-card-new']}`} onClick={props.showAddAdrressForm}>
+          <div className={`${styles['address-card']} ${styles['address-card-new']} ${styles['p-20']}`} onClick={props.showAddAdrressForm}>
             <div className={`${styles['flex-center']} ${styles['flex-wrap']}`}>
-              <h5 className={`${styles['m-0']} ${styles['mb-10']} ${styles['thick-blue']} ${styles['fontW600']}`}>{DELIVERY_ADDR_PAGE.ADD_NEW_ADDR}</h5>
-              <p>{DELIVERY_ADDR_PAGE.ADD_NEW_ADDR_TAG}</p>
+              <h5 className={`${styles['m-0']} ${styles['mb-10']} ${styles['thick-blue']} ${styles['fontW600']} ${styles['flex']}`}>
+                <SVGComponent clsName={`${styles['pls-icon']}`} src="icons/common-icon/plus-icon" />
+                <span className={styles['pl-10']}>{DELIVERY_ADDR_PAGE.ADD_NEW_ADDR}</span>
+              </h5>
+              <p className={`${styles['fs-12']} ${styles['thick-gry-clr']}`}>{DELIVERY_ADDR_PAGE.ADD_NEW_ADDR_TAG}</p>
               <p>
-                <button className={`${styles['fp-btn']} ${styles['fp-btn-default']}  ${styles['fs-12']}`}>
+                <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']} ${styles['small-btn']}`}>
                   {DELIVERY_ADDR_PAGE.ADD_NEW_BTN}
                 </button>
               </p>
