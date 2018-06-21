@@ -8,17 +8,17 @@ export default {
   },
   dev: {
     serviceName: 'store-front',
-    serverUrl: 'http://apm.fptechscience.com/',
+    serverUrl: 'https://apm.fptechscience.com/',
     env: 'dev'
   },
   staging: {
     serviceName: 'store-front',
-    serverUrl: 'http://apm.fptechscience.com/',
+    serverUrl: 'https://apm.fptechscience.com/',
     env: 'stage'
   },
   production: {
     serviceName: 'store-front',
-    serverUrl: 'http://apm.fptechscience.com/',
+    serverUrl: 'https://apm.fptechscience.com/',
     env: 'prod',
   }
 }[config.publicRuntimeConfig.env || 'dev'];
