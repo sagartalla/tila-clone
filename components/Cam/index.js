@@ -24,7 +24,7 @@ const Cam = ({ tabDetails }) => {
         return <Wishlist />;
       case 'profile':
         return <UserInfo />;
-        case 'uservalut':
+        case 'uservault':
           return <UserVault />;
       default:
         return <UserInfo />;
