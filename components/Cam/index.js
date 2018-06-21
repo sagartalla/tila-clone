@@ -7,7 +7,7 @@ import UserInfo from './PersonelDetails';
 import ShippingAddress from './ShippingAddress';
 import Orders from './Orders'
 import Wishlist from './Wishlist';
-
+import UserVault from './UserVault';
 
 import { mergeCss } from '../../utils/cssUtil';
 const styles = mergeCss('components/Cam/cam');
@@ -24,6 +24,8 @@ const Cam = ({ tabDetails }) => {
         return <Wishlist />;
       case 'profile':
         return <UserInfo />;
+        case 'uservalut':
+          return <UserVault />;
       default:
         return <UserInfo />;
     }

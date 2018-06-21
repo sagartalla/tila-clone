@@ -50,5 +50,24 @@ export const EN_KEYWORDS = {
   WISH_LIST_PAGE: {
     'WISHLIST_HEADER': 'items in wishlist',
     'ADD_TO_CART_BTN': 'ADD TO CART',
-  }
+  },
+  VAULT_PAGE: {
+    'MANAGE_VAULT_HDR': 'Manage Cards, Vouchers and More',
+    'SUB_TAG': 'Select a default card or add new card.',
+    'SAVED_CARDS': 'Saved Cards',
+    'VOUCHER': 'Vouchers',
+    'REWARD_POINTS': 'Reward Points',
+    'MANAGE_SAVED_CARDS': 'Manage Saved Cards',
+    'MAKE_DEFAULT': 'Make Default',
+    'DEFAULT': 'DEFAULT',
+    'NAME': 'Name',
+    'EXPIRY': 'Expiry',
+    'ADD_NEW_CARD': 'Add New Credit / Debit Card',
+    'ADD_NEW_SUB_TXT': 'Add a new debit or credit card to enable express checkout.',
+    'ADD_NEW_BTN': 'ADD NEW',
+    'SAVE_CARD_MSG': 'Save this card for faster payments. CVV will not be stored.',
+    'ADD_NEW_CARD': 'ADD NEW CARD',
+    'CANCEL': 'CANCEL',
+    'ADD_NEW_CARD_HEADER': 'Credit - Debit - ATM Card'
+  },
 };
