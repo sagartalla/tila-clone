@@ -3,7 +3,9 @@ import { languageDefinations } from '../../utils/lang/';
 import PropTypes from 'prop-types';
 import { Grid, Row, Col } from 'react-bootstrap';
 
-import styles from './rightBar.styl';
+// import styles from './rightBar.styl';
+import { mergeCss } from '../../utils/cssUtil';
+const styles = mergeCss('components/common/rightBar');
 
 const CartAndPaymentRightBar = props => {
   const { total_price, total_offer_price, total_discount, total_shipping, tax, item_cnt, currency } = props.data;
@@ -11,7 +13,7 @@ const CartAndPaymentRightBar = props => {
   return (
     <div className={`${styles['right-bar']}`}>
       <div>
-        <ul className={`${styles['m-0']} ${styles['p-0']}`}>
+        <ul className={`${styles['m-0']} ${styles['p-0']} ${styles['fs-12']}`}>
           <li><h5 className={`${styles['mb-15']} ${styles['mt-15']} ${styles['fs-16']} ${styles['fontW600']} ${styles['light-gry-clr']}`}>{CART_PAGE.ORDER_SUMMARY}</h5></li>
           {/* <li>Price ({item_cnt} item{item_cnt > 1 ? 's' : ''})<span> {total_price + ' ' + currency}</span></li> */}
           <li>{CART_PAGE.PRICE} ({item_cnt + ' ' + CART_PAGE.ITEMS})<span> {total_price + ' ' + currency}</span></li>

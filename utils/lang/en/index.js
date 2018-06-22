@@ -18,6 +18,7 @@ export const EN_KEYWORDS = {
     'ONLY': 'Only',
     'UNITS_LEFT': 'units left',
     'OUT_OF_STOCK': 'Out of stock',
+    'MOVE_TO_WISHLIST': 'Move to Wishlist',
     'MAX_PER_ORDER': 'Max per order quantity of this item reached.'
   },
   PAYMENT_PAGE: {
