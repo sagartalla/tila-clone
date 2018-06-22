@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import _ from 'lodash';
 
 import { selectors, actionCreators } from '../../store/ratingReviews';
 
@@ -25,13 +26,22 @@ class List extends Component {
 
   onTabClick(e) {
     const { getRatingsAndReviews } = this.props;
-    getRatingsAndReviews(e.target['data-id'])
+    getRatingsAndReviews({
+      []
+    })
+  }
+
+  selectRating(e) {
+    const { getRatingsAndReviews } = this.props;
+    e.target['data-id']
+    getRatingsAndReviews({
+      ratings: e.target.value
+    });
   }
 
   render() {
     const { activeTab } = this.state;
     const { isLoading, userReviews } = this.props;
-    console.log('tabs', TABS, userReviews);
     return (
       isLoading
       ?
@@ -39,16 +49,21 @@ class List extends Component {
       :
       <div className={styles['rating-review-cont']}>
         <div className={styles['header-bar']}>
-          <div className={styles['tabs-container']}>
+          <div className={`${styles['tabs-container']} ${styles['float-l']}`}>
             {
-              TABS.map(tab => <div data-id={tab.id} key={tab.label} onClick={this.onTabClick} className={`${styles['tab-item']} ${styles['p-10']} ${tab.id === activeTab ? styles['active'] : ''}`}>{tab.label}</div> )
+              _.map(TABS, (tab, key) => <div data-id={key} key={tab.label} onClick={this.onTabClick} className={`${styles['tab-item']} ${styles['p-10']} ${tab.id === activeTab ? styles['active'] : ''}`}>{tab.label}</div> )
             }
           </div>
-          <div>
-            <label for="rating-filter" >Filter By</label>
-            <select id="rating-filter">
-
-            </select>
+          <div className={styles['float-r']}>
+            <div className={styles['p-10']}>
+              <label for="rating-filter" >Filter By</label>
+              <select id="rating-filter" onChange={this.selectRating}>
+                <option>All Starts</option>
+                {
+                  [1, 2, 3, 4, 5].map((n) => <option value={n}> {n} Start</option>)
+                }
+              </select>
+            </div>
           </div>
         </div>
         <div className={styles['reviews-content']}>
