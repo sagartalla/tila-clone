@@ -96,7 +96,7 @@ const CartBody = props => {
                           </span>
                           <span data-id={item_id} onClick={addToWishlist} className={`${styles['flex-center']} ${styles['mve-to-wishlist']} ${styles['pr-20']} ${styles['pointer']}`}>
                             <SVGCompoent clsName={`${styles['wish-list-icon']}`} src="icons/wish-list/wish-list-icon" />
-                            <span className={styles['pl-10']}>Move to Wishlist</span>
+                            <span className={styles['pl-10']}>{CART_PAGE.MOVE_TO_WISHLIST}</span>
                           </span>
                           <span id={item_id} onClick={removeCartItem} className={`${styles['flex-center']} ${styles['cart-remove-icon']} ${styles['pl-20']} ${styles['pointer']}`}>
                             <SVGCompoent clsName={`${styles['delete-icon']}`} src="icons/delete-icon/delete-icon" />
