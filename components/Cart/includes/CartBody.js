@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
 import RightBar from '../../common/CartAndPaymentRightBar';
 import Blocker from '../../common/Blocker';
-
+import SVGCompoent from '../../common/SVGComponet';
 // import styles from '../cart.styl';
 
 import { mergeCss } from '../../../utils/cssUtil';
@@ -23,7 +23,7 @@ const CartBody = props => {
       }
       <Row>
         <Col md={12} sm={12} xs={12}>
-          <h4 className={`${styles['mt-20']} ${styles['mb-20']} ${styles['fontW300']}}`}>
+          <h4 className={`${styles['mt-20']} ${styles['mb-20']} ${styles['fontW300']} ${styles['fs-20']} ${styles['light-gry-clr']} ${styles['text-capitalize']}`}>
             {/* {flag > 0 ? <span>{cnt} item{cnt > 1 ? 's' : ''} in cart</span> : <span>0 {CART_PAGE.ITEMS_IN_CART}</span>} */}
             <span>{cnt + ' ' + CART_PAGE.ITEMS_IN_CART}</span>
           </h4>
@@ -81,19 +81,27 @@ const CartBody = props => {
                             </Col>
                           </Row>
                         </div>
-                        <div className={`${styles['cart-box-btm']} ${styles['']} ${styles['p-14-22']}`}>
-                          {
-                            inventory <= 10 && inventory != 0 ?
-                              <span className={`${styles['fontW600']} ${styles['thick-red']} ${styles['pr-20']}`}>{CART_PAGE.ONLY + ' ' + inventory + ' ' + CART_PAGE.UNITS_LEFT} </span>
-                              : ''
-                          }
-                          {
-                            inventory == 0 ?
-                              <span className={`${styles['fontW600']} ${styles['thick-red']} ${styles['pr-20']}`}>{CART_PAGE.OUT_OF_STOCK} </span>
-                              : ''
-                          }
-                          <span data-id={item_id} onClick={addToWishlist}>Move to Wishlist &nbsp;&nbsp;</span>
-                          <span id={item_id} onClick={removeCartItem}>{CART_PAGE.REMOVE}</span>
+                        <div className={`${styles['cart-box-btm']} ${styles['flex']} ${styles['p-14-22']}`}>
+                          <span className={styles['width16']}>
+                            {
+                              inventory <= 10 && inventory != 0 ?
+                                <span className={`${styles['fontW600']} ${styles['thick-red']} ${styles['pr-20']}`}>{CART_PAGE.ONLY + ' ' + inventory + ' ' + CART_PAGE.UNITS_LEFT} </span>
+                                : ''
+                            }
+                            {
+                              inventory == 0 ?
+                                <span className={`${styles['fontW600']} ${styles['thick-red']} ${styles['pr-20']}`}>{CART_PAGE.OUT_OF_STOCK} </span>
+                                : ''
+                            }
+                          </span>
+                          <span data-id={item_id} onClick={addToWishlist} className={`${styles['flex-center']} ${styles['mve-to-wishlist']} ${styles['pr-20']} ${styles['pointer']}`}>
+                            <SVGCompoent clsName={`${styles['wish-list-icon']}`} src="icons/wish-list/wish-list-icon" />
+                            <span className={styles['pl-10']}>Move to Wishlist</span>
+                          </span>
+                          <span id={item_id} onClick={removeCartItem} className={`${styles['flex-center']} ${styles['cart-remove-icon']} ${styles['pl-20']} ${styles['pointer']}`}>
+                            <SVGCompoent clsName={`${styles['delete-icon']}`} src="icons/delete-icon/delete-icon" />
+                            <span className={styles['pl-10']}>{CART_PAGE.REMOVE}</span>
+                          </span>
                         </div>
                       </div>
                     )
