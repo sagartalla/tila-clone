@@ -17,6 +17,7 @@ class List extends Component {
     super(props);
     this.state = {};
     this.onTabClick = this.onTabClick.bind(this);
+    this.selectRating = this.selectRating.bind(this);
   }
 
   componentDidMount() {
@@ -27,13 +28,12 @@ class List extends Component {
   onTabClick(e) {
     const { getRatingsAndReviews } = this.props;
     getRatingsAndReviews({
-      []
+      [TABS[e.target['data-id']].param]: true
     })
   }
 
   selectRating(e) {
     const { getRatingsAndReviews } = this.props;
-    e.target['data-id']
     getRatingsAndReviews({
       ratings: e.target.value
     });

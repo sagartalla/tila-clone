@@ -1,4 +1,4 @@
-const TABS = [
+const TABS = {
   ALL: {
     label: 'All Reviews',
     id: 'ALL',
@@ -19,6 +19,6 @@ const TABS = [
     id: 'MOST_RECENT',
     param: 'mostRecent',
   }
-]
+}
 
 export { TABS };
