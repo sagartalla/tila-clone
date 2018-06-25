@@ -29,4 +29,5 @@ export default combineReducers({
   personalDetailsReducer,
   wishlistReducer,
   vaultReducer,
+  reviewRatingReducer,
 });

@@ -111,8 +111,8 @@ class List extends Component {
 
 List.propTypes = {
   isLoading: PropTypes.bool.isRequired,
-  userReviews: PropsTypes.array.isRequired,
-  getRatingsAndReviews: PropsTypes.func.isRequired,
+  userReviews: PropTypes.array.isRequired,
+  getRatingsAndReviews: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (store) => {

@@ -10,14 +10,14 @@ const actionCreators = {
     const store = getState();
     const { productReducer } = store;
     const productDetails = _.get(store, 'productReducer.data[0].product_details', {});
-    const { catalog_details: catalogDetails,  product_id} = productDetails;
+    const { catalog_details: catalogDetails,  product_id: productId} = productDetails;
     const options = {
       catalog_id: catalogDetails ? catalogDetails.catalog_id : params.catalogId,
-      item_type: catalogDetails ? catalogDetails.item_type_name : params.itemtype,
+      item_type: catalogDetails ? catalogDetails.item_type_name : params.itemType,
       most_recent: params.mostRecent || true,
       most_relevant: params.mostRelevant || true,
       page_no: 0,
-      product_id,
+      product_id: productId || params.productId,
       ratings: params.ratings || undefined
     };
 
