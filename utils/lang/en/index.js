@@ -18,6 +18,7 @@ export const EN_KEYWORDS = {
     'ONLY': 'Only',
     'UNITS_LEFT': 'units left',
     'OUT_OF_STOCK': 'Out of stock',
+    'MOVE_TO_WISHLIST': 'Move to Wishlist',
     'MAX_PER_ORDER': 'Max per order quantity of this item reached.'
   },
   PAYMENT_PAGE: {
@@ -61,5 +62,24 @@ export const EN_KEYWORDS = {
     'CERTIFIED_BUYER': 'Certified Buyer',
     'LIKE': 'like',
     'DISLIKE': 'dislike',
-  }
+  },
+  VAULT_PAGE: {
+    'MANAGE_VAULT_HDR': 'Manage Cards, Vouchers and More',
+    'SUB_TAG': 'Select a default card or add new card.',
+    'SAVED_CARDS': 'Saved Cards',
+    'VOUCHER': 'Vouchers',
+    'REWARD_POINTS': 'Reward Points',
+    'MANAGE_SAVED_CARDS': 'Manage Saved Cards',
+    'MAKE_DEFAULT': 'Make Default',
+    'DEFAULT': 'DEFAULT',
+    'NAME': 'Name',
+    'EXPIRY': 'Expiry',
+    'ADD_NEW_CARD': 'Add New Credit / Debit Card',
+    'ADD_NEW_SUB_TXT': 'Add a new debit or credit card to enable express checkout.',
+    'ADD_NEW_BTN': 'ADD NEW',
+    'SAVE_CARD_MSG': 'Save this card for faster payments. CVV will not be stored.',
+    'ADD_NEW_CARD': 'ADD NEW CARD',
+    'CANCEL': 'CANCEL',
+    'ADD_NEW_CARD_HEADER': 'Credit - Debit - ATM Card'
+  },
 };

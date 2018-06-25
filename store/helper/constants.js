@@ -11,4 +11,5 @@ export default {
   CATEGORYTREE_API_URL  :   'http://gateway-dev.fptechscience.com/category-tree',
   WISHLIST_API_URL      :   'http://gateway-dev.fptechscience.com/wl',
   REVIEWS_API_URL       :   'http://gateway-dev.fptechscience.com/reviews',
+  VAULT_API_URL         :   'http://gateway-dev.fptechscience.com/vault',
 };

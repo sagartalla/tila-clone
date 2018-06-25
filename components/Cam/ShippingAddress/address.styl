@@ -6,11 +6,11 @@
 
   .input
     border none
-    border-bottom 1px solid light-gray-color
+    border-bottom 1px solid light-border
     box-shadow none
     border-radius 0
     padding-left 0
-    margin-bottom 10px
+    // margin-bottom 10px
     width 100%
     height 32px
     outline none
@@ -19,71 +19,102 @@
     flex-wrap wrap
 
   .address-card-new
-    padding 20px 10px
     min-height 130px
     cursor pointer
+    .pls-icon
+      width 16px
 
   .addr-header
     border-bottom 1px solid light-gray-color
     padding 25px 30px
-    i
-      font-size 4rem
-      color light-gray
-    small
-      color dark-gray
 
   .address-body
+    padding-bottom 0 !important
     .address-card
-      border 1px solid light-gray-color
-      margin-bottom 20px
+      // border 1px solid light-gray-color
+      border: solid 0.5px light-border;
+      margin-bottom 30px
       border-radius 4px
-      color base-font
-      font-size 11px
       transition-timing-function ease-in-out;
       &:hover
         box-shadow 0 0 12px 0 rgba(0,0,0,0.1)
+        border 0.5px solid transparent
+        .address-card-head span 
+          font-weight 300
       .address-card-head
-        border-bottom 1px dashed light-gray-color
-        padding 9px 10px
+        border-bottom 1px dashed rgba(151, 151, 151, 0.2)
+        padding 9px 15px
+        .default-address-icon
+          display inline-flex
+          .default-address-icon-inn
+            width 28px
       .address-card-body
-        padding 14px
-        address
-          color dark-gray
-          margin-bottom 10px
-        .address-card-phone
-          margin 0
-          font-weight 500
+        padding 12px 20px
+        min-height 114px
+        .full-address-details 
+          overflow: hidden;
+          position: relative;
+          line-height: 1.2em;
+          max-height: 2em;
+          text-align: justify; 
+          margin-right: -1em;
+          padding-right: 1em;
+          &:before
+            content: '...';
+            position: absolute;
+            right: 0;
+            bottom: -3px;
+          &:after
+            content: '';
+            position: absolute;
+            right: 0;
+            width: 1em;
+            height: 1em;
+            margin-top: 0.2em;
+            background: white;
+        // address
+        //   margin-bottom 10px
       .address-card-actions
         border-top 1px solid light-gray-color
         padding 9px 10px
+        .delete-icon, .edit-icon
+          display inline-flex
+          .delete-icon-inn
+            width 14px
+            height 16px
+          .edit-icon-inn
+            width 20px
+            height 16px
         cursor pointer
       &.address-selected
-        border 1px solid parrot-color
+        border 0.5px solid parrot-color
 
   .addr-new-container
-    border-top 2px dashed light-gray-color
-    padding 10px 25px
-    h1
-      font-size 16px
-      margin-bottom 20px
+    .new-addr-inn
+      border-top 1px dashed rgba(151,151,151,0.2)
+      .map
+        height 200px
+        background-color base-font
+        margin-bottom 30px
+        .map-input
+          box-sizing border-box
+          border 1px solid transparent
+          width-height-radius(350px, 40px, 4px)
+          margin 10px
+          padding 0 12px
+          box-shadow 0 2px 10px rgba(0, 0, 0, 0.3)
+          outline none
+          text-overflow  ellipses
 
-    .map
-      height 200px
-      background-color base-font
-      margin-bottom 20px
-      .map-input
-        box-sizing border-box
-        border 1px solid transparent
-        width 400px
-        height 32px
-        margin 10px
-        padding 0 12px
-        border-radius 3px
-        box-shadow 0 2px 6px rgba(0, 0, 0, 0.3)
-        font-size 14px
-        outline none
-        text-overflow  ellipses
-
-
-    .pref-loc
-      padding 10px 0
+      .pref-loc
+        padding 10px 0
+      
+      .home-work-btns
+        button
+          padding 10px 20px
+          .home-icon
+            width: 22px;
+            height: 21px;
+          .work-icon
+            width: 22px;
+            height: 19px;
