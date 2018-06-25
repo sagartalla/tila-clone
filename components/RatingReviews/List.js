@@ -59,11 +59,11 @@ class List extends Component {
           </div>
           <div className={styles['float-r']}>
             <div className={styles['p-10']}>
-              <label for="rating-filter" >Filter By</label>
+              <label for="rating-filter" >{PDP.FILTER_BY}</label>
               <select id="rating-filter" onChange={this.selectRating}>
-                <option>All Starts</option>
+                <option>{PDP.ALL_STARTS}</option>
                 {
-                  [1, 2, 3, 4, 5].map((n) => <option value={n}> {n} Star</option>)
+                  [1, 2, 3, 4, 5].map((n) => <option value={n}> {n} PDP.STAR</option>)
                 }
               </select>
             </div>
@@ -74,7 +74,7 @@ class List extends Component {
             {
               userReviews.length
               ?
-              'No Reviews'
+              PDP.NO_REVIEWS
               :
               userReviews.map((userReview) => {
                 return (
