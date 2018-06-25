@@ -7,7 +7,7 @@ import UserInfo from './PersonelDetails';
 import ShippingAddress from './ShippingAddress';
 import Orders from './Orders'
 import Wishlist from './Wishlist';
-
+import Notifications from './Notifications';
 
 import { mergeCss } from '../../utils/cssUtil';
 const styles = mergeCss('components/Cam/cam');
@@ -24,6 +24,8 @@ const Cam = ({ tabDetails }) => {
         return <Wishlist />;
       case 'profile':
         return <UserInfo />;
+      case 'notifications':
+        return <Notifications />;
       default:
         return <UserInfo />;
     }
@@ -37,7 +39,7 @@ const Cam = ({ tabDetails }) => {
             <Sidebar />
           </Col>
           <Col xs={12} md={9}>
-            { camComponent }
+            {camComponent}
           </Col>
         </Row>
       </Grid>
