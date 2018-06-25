@@ -83,6 +83,8 @@ const getSearchResutls = (store) => {
         id: product.id,
         media: product.attributes.media_unrestricted_images,
         productId: product.attributes.productId,
+        catalogId: product.attributes.catalogId,
+        itemtype: product.attributes.itemType,
         displayName: product.attributes.calculated_display_name,
         variants: variantInfo,
         priceRange,
