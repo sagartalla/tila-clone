@@ -6,10 +6,10 @@ const actions = {
 
 const actionCreators = {
   getNotifications: () => {
-    return ({
+    return {
       type: actions.GET_NOTIFICATIONS,
       payload: api.getNotificationsApi()
-    });    
+    };
   }
 }
 
