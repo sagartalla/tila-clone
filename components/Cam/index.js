@@ -8,6 +8,7 @@ import ShippingAddress from './ShippingAddress';
 import Orders from './Orders'
 import Wishlist from './Wishlist';
 import UserVault from './UserVault';
+import Messages from './Messages';
 
 import { mergeCss } from '../../utils/cssUtil';
 const styles = mergeCss('components/Cam/cam');
@@ -24,8 +25,10 @@ const Cam = ({ tabDetails }) => {
         return <Wishlist />;
       case 'profile':
         return <UserInfo />;
-        case 'uservault':
-          return <UserVault />;
+      case 'uservault':
+        return <UserVault />;
+        case 'messages':
+        return <Messages />;
       default:
         return <UserInfo />;
     }
@@ -39,7 +42,7 @@ const Cam = ({ tabDetails }) => {
             <Sidebar />
           </Col>
           <Col xs={12} md={9}>
-            { camComponent }
+            {camComponent}
           </Col>
         </Row>
       </Grid>

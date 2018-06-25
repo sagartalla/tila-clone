@@ -12,7 +12,7 @@ import { reducer as megamenuReducer } from './megamenu';
 import { reducer as personalDetailsReducer } from './cam/personalDetails';
 import { reducer as wishlistReducer } from './cam/wishlist';
 import { reducer as vaultReducer } from './cam/userVault';
-
+import { reducer as messagesReducer } from './cam/messages';
 
 export default combineReducers({
   searchReducer,
@@ -28,4 +28,5 @@ export default combineReducers({
   personalDetailsReducer,
   wishlistReducer,
   vaultReducer,
+  messagesReducer
 });
