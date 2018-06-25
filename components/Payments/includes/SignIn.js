@@ -31,12 +31,24 @@ const SignIn = props => (
       <Col md={8} sm={12} xs={12}>
         <h4 className={`${styles['mb-20']} ${styles['mt-0']} ${styles['light-gry-clr']}`}>Sign in</h4>
         <div className={styles['sign-part']}>
-          <div className={`${styles['mb-20']} ${styles['mt-10']}`}>
+          <div className={`${styles['fp-input']}`}> 
+            <input type="text" name="username" onChange={props.inputOnChange} value={props.login.username} className={styles.input} required />
+            <span className={styles['highlight']}></span>
+            <span className={styles['bar']}></span>
+            <label>Email / Username*</label>
+          </div> 
+          {/* <div className={`${styles['mb-20']} ${styles['mt-10']}`}>
             <input type="text" placeholder="Email / Username*" name="username" onChange={props.inputOnChange} value={props.login.username} className={styles.input} />
-          </div>
-          <div className={`${styles['mb-20']} ${styles['mt-10']}`}>
-            <input type="password" placeholder="Password" name="password" onChange={props.inputOnChange} value={props.login.password} className={styles.input} />
-          </div>
+          </div> */}
+          {/* <div className={`${styles['mb-20']} ${styles['mt-10']}`}> */}
+          <div className={`${styles['fp-input']}`}> 
+            <input type="password" name="password" onChange={props.inputOnChange} value={props.login.password} className={styles.input} required/>
+            <span className={styles['highlight']}></span>
+            <span className={styles['bar']}></span>
+            <label>Password</label>
+          </div> 
+            
+          {/* </div> */}
           <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles['fontW600']} ${styles['text-uppercase']}`} onClick={props.showAddress}>Continue</button>
           {
             props.signInLoader ? <span> Please wait...</span> : null
