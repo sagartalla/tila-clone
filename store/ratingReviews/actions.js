@@ -12,8 +12,8 @@ const actionCreators = {
     const productDetails = _.get(store, 'productReducer.data[0].product_details', {});
     const { catalog_details: catalogDetails,  product_id} = productDetails;
     const options = {
-      catalog_id: catalogDetails.catalog_id,
-      item_type: catalogDetails.item_type_name,
+      catalog_id: catalogDetails ? catalogDetails.catalog_id : params.catalogId,
+      item_type: catalogDetails ? catalogDetails.item_type_name : params.itemtype,
       most_recent: params.mostRecent || true,
       most_relevant: params.mostRelevant || true,
       page_no: 0,

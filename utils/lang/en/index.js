@@ -50,5 +50,16 @@ export const EN_KEYWORDS = {
   WISH_LIST_PAGE: {
     'WISHLIST_HEADER': 'items in wishlist',
     'ADD_TO_CART_BTN': 'ADD TO CART',
+  },
+  PDP: {
+    'LOADING_REVIEWS': 'Loading Reviews...',
+    'REVIEW_ALL_TAB': 'All Reviews',
+    'REVIEW_EXPERT_TAB': 'Expert Reviews',
+    'REVIEW_MOST_HELPFUL_TAB': 'Most Helpful',
+    'REVIEW_MOST_RECENT_TAB': 'Most Recent',
+    'STAR': 'star',
+    'CERTIFIED_BUYER': 'Certified Buyer',
+    'LIKE': 'like',
+    'DISLIKE': 'dislike',
   }
 };

@@ -71,9 +71,7 @@ const getProductComponent = (isPreview) => {
             <Col xs={12}>
               <div><b>Rating and Reviews</b></div>
               <div>
-                <NoSSR>
-                  <ReviewRatingList />
-                </NoSSR>
+                <ReviewRatingList />
               </div>
             </Col>
           </Row>

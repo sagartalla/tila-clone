@@ -8,9 +8,11 @@ import _ from 'lodash';
 import { selectors, actionCreators } from '../../store/ratingReviews';
 
 import { TABS } from './constants';
+import { languageDefinations } from '../../utils/lang';
 
 import { mergeCss } from '../../utils/cssUtil';
 const styles = mergeCss('components/RatingReviews/ratingReviews');
+const { PDP } = languageDefinations();
 
 class List extends Component {
   constructor(props) {
@@ -21,6 +23,7 @@ class List extends Component {
   }
 
   componentDidMount() {
+    //TODO  SF-96
     const { getRatingsAndReviews } = this.props;
     getRatingsAndReviews();
   }
@@ -29,7 +32,7 @@ class List extends Component {
     const { getRatingsAndReviews } = this.props;
     getRatingsAndReviews({
       [TABS[e.target['data-id']].param]: true
-    })
+    });
   }
 
   selectRating(e) {
@@ -45,7 +48,7 @@ class List extends Component {
     return (
       isLoading
       ?
-      'Loading Reviews...'
+      PDP.LOADING_REVIEWS
       :
       <div className={styles['rating-review-cont']}>
         <div className={styles['header-bar']}>
@@ -60,7 +63,7 @@ class List extends Component {
               <select id="rating-filter" onChange={this.selectRating}>
                 <option>All Starts</option>
                 {
-                  [1, 2, 3, 4, 5].map((n) => <option value={n}> {n} Start</option>)
+                  [1, 2, 3, 4, 5].map((n) => <option value={n}> {n} Star</option>)
                 }
               </select>
             </div>
@@ -82,7 +85,7 @@ class List extends Component {
                       {
                         userReview.certifiedBuyer
                         ?
-                        <div>Certified Buyer</div>
+                        <div>PDP.CERTIFIED_BUYER</div>
                         :
                         null
                       }
@@ -92,8 +95,8 @@ class List extends Component {
                       <div>{userReview.comment}</div>
                     </Col>
                     <Col md={2}>
-                      <div>{userReview.likes} like</div>
-                      <div>{userReview.dislikes} dislike</div>
+                      <div>{userReview.likes} PDP.LIKE</div>
+                      <div>{userReview.dislikes} PDP.DISLIKE</div>
                     </Col>
                   </Row>
                 )
@@ -106,8 +109,13 @@ class List extends Component {
   }
 }
 
+List.propTypes = {
+  isLoading: PropTypes.bool.isRequired,
+  userReviews: PropsTypes.array.isRequired,
+  getRatingsAndReviews: PropsTypes.func.isRequired,
+}
+
 const mapStateToProps = (store) => {
-  console.log(selectors);
   return ({
     userReviews: selectors.getReviewsRatings(store),
     isLoading: selectors.isLoading(store),
