@@ -20,7 +20,7 @@ if (env !== 'local'){
 
 const configModifer = (config) => {
   //SF-89
-  const tempHeaders = (/vault/.test(config.url))  ?  {"x-auth-tenant-key": "1275edea-cf49-4adb-ad0d-4e9b255f893f" ,"x-auth-tenant-secret": "VTQVTO9QJW2DTINOD1AE" ,'x-auth-ip': '196.128.1.1'} : ''
+  const tempHeaders = (/vault/.test(config.url))  ?  {"x-auth-tenant-key": "1275edea-cf49-4adb-ad0d-4e9b255f893f" ,"x-auth-tenant-secret": "VTQVTO9QJW2DTINOD1AE" ,'x-auth-ip': '196.128.1.1'} : {}
   
   const newheaders = _.reduce.convert({ 'cap': false })((acc, value, key) => {
     if(value) {

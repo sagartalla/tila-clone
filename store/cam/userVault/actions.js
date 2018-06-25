@@ -9,28 +9,28 @@ const actions = {
 
 const actionCreators = {
   getCardResults: () => (dispatch, getState) => {
-    return dispatch({
+    return {
       type: actions.GET_CARD_RESULTS,
       payload: apis.getCardResultsApi(),
-    });
+    };
   },
   addCard: (params) => (dispatch, getState) => {
-    return dispatch({
+    return {
       type: actions.ADD_CARD_DETAILS,
       payload: apis.addCardDetailsApi(params),
-    });
+    };
   },
   makeCardDefault: (card_token) => (dispatch, getState) => {
-    return dispatch({
+    return {
       type: actions.MAKE_CARD_DEFAULT,
       payload: apis.makeCardDefaultApi(card_token),
-    });
+    };
   },
   deleteCard: (card_token) => (dispatch, getState) => {
-    return dispatch({
+    return {
       type: actions.DELETE_CARD,
       payload: apis.deleteCardApi(card_token),
-    });
+    };
   }
 };
 
