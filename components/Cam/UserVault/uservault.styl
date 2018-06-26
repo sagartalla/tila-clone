@@ -6,32 +6,57 @@
 
   .vault-card-header
     border-bottom 1px solid light-gray-color
-    padding 25px 30px
-    i
-      font-size 4rem
-      color light-gray
-    small
-      color dark-gray
+    .cards-vocher
+      width 95px
+      height 75px
+      .card-items-list
+        .active
+          border-bottom 4px solid yellow-color
+          font-weight 600
+
 
   .vault-card-item
-    background-color #8ce0c7
-    color white
-    .delete-icon
-      svg
-        height 20px
-        width 20px
-        position: absolute;
-        top: 10px;
-        right: 20px;
+    background-color light-card-green
+    color label-light
+    position relative
+    .vault-card
+      width-height-radius(40px, 20px, 4px)
+    .vault-card-delete-icon
+      position: absolute;
+      background-color white
+      width-height-radius(20px, 20px, 50%)
+      right 15px
+      i
+        width-height-radius(14px, 14px, 0)
   .make-default
     position: absolute;
-    bottom: 10px;
-    right: 15px;
-    background: #fff;
+    bottom: -10px;
+    right: 0;
+    background: white;
     padding-left: 10px;
     border-radius: 10px 0 0;
 
   .vault-card-item-new
-    padding 20px 10px
     cursor pointer
     background-color white
+    .pls-icon
+      width-height-radius(15px, 15px, 0)
+
+  .active-card
+    background-color thick-card-green
+    color black
+    box-shadow 0 2px 4px 0 rgba(0,0,0,0.11)
+    .make-default
+      box-shadow 0 2px 4px 0 rgba(0,0,0,0.11)
+
+  .vault-add-card-new
+    .credit-debit-card-details
+      border-top 1px dashed rgba(151, 151, 151, 0.2)
+    
+    .card-list-items
+      padding-left 20%
+      .bg-card
+        width-height-radius(45px, 25px, 4px)
+
+    .fp-add-new-card
+      padding 10px 20%

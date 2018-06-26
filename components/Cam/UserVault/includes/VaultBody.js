@@ -18,50 +18,76 @@ class VaultBody extends Component {
     this.props.deleteCard(token);
   }
 
+  paymentCardIcon(provider_type) {
+    console.log(provider_type);
+    switch(provider_type ){
+      case 'VISA':
+        return "icons/cards-icons-list/visa-icon-no-bg";
+      case 'MASTER':
+        return "icons/cards-icons-list/bg-master-icon";
+      case 'MASTRO':
+        return "icons/cards-icons-list/bg-mastro-icon";
+    }
+  }
+
   render() {
     const { VAULT_PAGE } = languageDefinations();
     const { data, toggleAddCardBlock } = this.props;
-
     return (
-      <div className={`${styles['vault-card-body']} ${styles['p-30']}`}>
-        <h4>{VAULT_PAGE.MANAGE_SAVED_CARDS}</h4>
-        <Row>
+      <div className={`${styles['vault-card-body']} ${styles['p-20-40']}`}>
+        <h4 className={`${styles['pb-5']} ${styles['fontW300']} ${styles['lgt-blue']}`}>{VAULT_PAGE.MANAGE_SAVED_CARDS}</h4>
+        <Row className={styles['mr-0']}>
           {
             data.length > 0 && data.map((card, index) => {
               const { card_token, bank_name, masked_number, holder_name, expiry_month, expiry_year } = card;
               return (
-                <Col md={4} key={index}>
-                  <div className={`${styles['vault-card-item']} ${styles['mb-20']} ${styles['p-20']} ${styles['border-radius2']}`}>
-                    <span onClick={this.deleteCard.bind(this, card_token)}>
+                <Col md={4} key={index} className={styles['pr-0']}>
+                  <div className={`${styles['vault-card-item']} ${styles['mb-25']} ${styles['p-15']} ${styles['border-radius4']} ${card.default ? styles['active-card'] : ''}`}>
+                    <span  className={`${styles['vault-card-delete-icon']} ${styles['flex-center']} ${styles['justify-center']}`} onClick={this.deleteCard.bind(this, card_token)}>
                       <SVGComponent clsName={`${styles['delete-icon']}`} src="icons/delete-icon/delete-icon" />
                     </span>
-                    {bank_name}<br />
-                    {masked_number}<br />
-                    {VAULT_PAGE.NAME}: {holder_name} <br />
-                    {VAULT_PAGE.EXPIRY} : {expiry_month}/{expiry_year}
-                  </div>
-                  <div className={styles['make-default']}>
+                    <div className={`${styles['flex']} ${styles['flex-colum']} ${styles['vault-card-item-inn']}`}>
+                      <span>{bank_name}</span>
+                      <span className={`${styles['pt-25']} ${styles['pb-25']} ${styles['fs-18']}`}>{masked_number}</span>
+                      <div className={`${styles['flx-space-bw']}`}>
+                        <span className={`${styles['flex']} ${styles['flex-colum']}`}>
+                          <span className={`${styles['fs-12']}`}>{VAULT_PAGE.NAME}: {holder_name}</span>
+                          <span className={`${styles['fs-12']}`}>{VAULT_PAGE.EXPIRY} : {expiry_month}/{expiry_year}</span>
+                        </span>
+                        <span className={`${styles['flex']}`}>
+                          <SVGComponent clsName={`${styles['vault-card']}`} src={this.paymentCardIcon(card.provider_type)} />
+                        </span>
+                      </div>
+                    </div>
+                    <div className={styles['make-default']}>
                     {
                       card.default ?
-                        <span>
-                          <input type="radio" name="make-default" checked="checked" onClick={this.makeCardDefault.bind(this, card_token)} /> {VAULT_PAGE.DEFAULT}
-                        </span>
+                        <div>
+                          <label className={`${styles['fs-12']} ${styles['pr-5']}`}> {VAULT_PAGE.DEFAULT} </label>
+                          <input type="radio" className={styles['radio-btn']} name="make-default" checked="checked" onClick={this.makeCardDefault.bind(this, card_token)} /> 
+                        </div>
                         :
                         <span>
-                          <input type="radio" name="make-default" onClick={this.makeCardDefault.bind(this, card_token)} /> {VAULT_PAGE.MAKE_DEFAULT}
+                          <label className={`${styles['fs-12']} ${styles['fontW600']} ${styles['pr-5']}`}> {VAULT_PAGE.MAKE_DEFAULT} </label>
+                          <input type="radio" className={styles['radio-btn']} name="make-default" onClick={this.makeCardDefault.bind(this, card_token)} /> 
                         </span>
                     }
+                    </div>
                   </div>
+                  
                 </Col>
               )
             })
           }
 
-          <Col md={4} sm={12} xs={12}>
-            <div className={` ${styles['vault-card-item']} ${styles['vault-card-item-new']} ${styles['border-lg']} ${styles['border-radius2']}`} onClick={toggleAddCardBlock}>
+          <Col md={4} sm={12} xs={12} className={styles['pr-0']}>
+            <div className={` ${styles['vault-card-item']} ${styles['vault-card-item-new']} ${styles['border-lg']} ${styles['border-radius4']} ${styles['p-15']}`} onClick={toggleAddCardBlock}>
               <div className={`${styles['flex-center']} ${styles['flex-wrap']}`}>
-                <h5 className={`${styles['m-0']} ${styles['mb-10']} ${styles['thick-blue']} ${styles['fontW600']}`}>{VAULT_PAGE.ADD_NEW_CARD}</h5>
-                <p>{VAULT_PAGE.ADD_NEW_SUB_TXT}</p>
+                <h5 className={`${styles['m-0']} ${styles['mb-10']} ${styles['fontW600']} ${styles['flex-center']}`}>
+                  <SVGComponent clsName={`${styles['pls-icon']}`} src="icons/common-icon/plus-icon" />
+                  <span className={`${styles['pl-10']} ${styles['black-color']}`}>{VAULT_PAGE.ADD_NEW_CARD}</span>
+                </h5>
+                <p className={`${styles['thick-gry-clr']} ${styles['fs-12']}`}>{VAULT_PAGE.ADD_NEW_SUB_TXT}</p>
                 <p>
                   <button className={`${styles['fp-btn']} ${styles['fp-btn-default']}  ${styles['fs-12']}`}>
                     {VAULT_PAGE.ADD_NEW_BTN}
@@ -70,7 +96,6 @@ class VaultBody extends Component {
               </div>
             </div>
           </Col>
-
         </Row>
       </div>
     )
