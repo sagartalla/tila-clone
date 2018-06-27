@@ -91,7 +91,7 @@ export const AR_KEYWORDS = {
     'ADD_NEW_CARD': 'Add New Credit / Debit Card',
     'ADD_NEW_SUB_TXT': 'Add a new debit or credit card to enable express checkout.',
     'ADD_NEW_BTN': 'ADD NEW',
-    'SAVE_CARD_MSG': 'Save this card for faster payments. CVV will not be stored.',
+    'SAVE_CARD_MSG': 'Save this card for faster payments.',
     'ADD_NEW_CARD': 'ADD NEW CARD',
     'CANCEL': 'CANCEL',
     'ADD_NEW_CARD_HEADER': 'Credit - Debit - ATM Card'
