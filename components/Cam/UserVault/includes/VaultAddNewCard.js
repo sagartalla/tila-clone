@@ -7,13 +7,12 @@ import { languageDefinations } from '../../../../utils/lang/';
 import { mergeCss } from '../../../../utils/cssUtil';
 const styles = mergeCss('components/Cam/UserVault/uservault');
 
-const dateoptions = [1,2,3,4,5,6,7,8,9,10,11,12].map((number) =>
-  <option>{number}</option>
+const dateoptions = [...Array(13)].map((number,index) =>
+  <option>{index}</option>
 );
 
-const yearptions = [2018,2019,2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030].map((number) =>
-  <option>{number}</option>
-);
+const yearptions = [...Array(13)].map((item, index) => <option>{(new Date()).getFullYear() + index}</option> )
+
 //TODO SF-88
 const VaultAddNewCard = (props) => {
   const { VAULT_PAGE } = languageDefinations();
