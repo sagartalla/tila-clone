@@ -6,9 +6,12 @@ import { languageDefinations } from '../../../../utils/lang/';
 
 import { mergeCss } from '../../../../utils/cssUtil';
 const styles = mergeCss('components/Cam/UserVault/uservault');
-const numbers = [1,2,3,4,5,6,7,8,9,10,11,12];
 
-const dateoptions = numbers.map((number) =>
+const dateoptions = [1,2,3,4,5,6,7,8,9,10,11,12].map((number) =>
+  <option>{number}</option>
+);
+
+const yearptions = [2018,2019,2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030].map((number) =>
   <option>{number}</option>
 );
 //TODO SF-88
@@ -60,13 +63,7 @@ const VaultAddNewCard = (props) => {
                 <div className={styles['select']}>
                   <select name="exp_yr" className={styles['select-text']} onChange={inputChange}  required>
                     <option>Expiry Year</option>
-                    <option>2018</option>
-                    <option>2019</option>
-                    <option>2020</option>
-                    <option>2021</option>
-                    <option>2022</option>
-                    <option>2023</option>
-                    <option>2024</option>
+                    {yearptions}
                   </select>
                   <span className={styles['select-highlight']}></span>
                   <span className={styles['select-bar']}></span>

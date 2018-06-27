@@ -64,7 +64,6 @@ class VaultBody extends Component {
                         <div>
                           <label className={`${styles['fs-12']} ${styles['pr-5']}`}> {VAULT_PAGE.DEFAULT} </label>
                           <input type="radio" className={`${styles['tickmark-radio']}`} name="make-default" checked="checked" onClick={this.makeCardDefault.bind(this, card_token)}/>
-                          {/* <input type="radio" className={styles['radio-btn']} name="make-default"  />  */}
                         </div>
                         :
                         <span>
