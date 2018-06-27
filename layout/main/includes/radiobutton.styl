@@ -65,3 +65,42 @@
 
 input[type=file]:focus, input[type=checkbox]:focus, input[type=radio]:focus
   outline none
+
+// tick mark radio button
+// <label>
+//   <input type="radio" class="tickmark-radio" name="example" />
+//   Radio option
+// </label>
+.tickmark-radio
+  -webkit-appearance none
+  -moz-appearance none
+  -ms-appearance none
+  -o-appearance none
+  appearance none
+  position relative
+  top 4px
+  right 0
+  bottom 0
+  left 0
+  width-height-radius(16px, 16px, 50%)
+  transition all 0.15s ease-out 0s
+  color white
+  cursor pointer
+  outline none
+  border 1px solid light-border
+  margin-top 0 !important
+  // z-index 1000
+  &:checked
+    background #2ac497
+    border none
+  &:after
+    border-radius 50%
+
+.tickmark-radio:checked::before
+  width-height-radius(16px, 16px, 0)
+  position absolute
+  content '✓'
+  display inline-block
+  font-size 14px
+  text-align center
+

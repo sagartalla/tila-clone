@@ -6,11 +6,16 @@ import { languageDefinations } from '../../../../utils/lang/';
 
 import { mergeCss } from '../../../../utils/cssUtil';
 const styles = mergeCss('components/Cam/UserVault/uservault');
+const numbers = [1,2,3,4,5,6,7,8,9,10,11,12];
 
+const dateoptions = numbers.map((number) =>
+  <option>{number}</option>
+);
 //TODO SF-88
 const VaultAddNewCard = (props) => {
   const { VAULT_PAGE } = languageDefinations();
   const { checked, inputChange, addBtnClickHandler, setAsDefaultCard, toggleAddCardBlock } = props;
+  
   return (
     <div className={`${styles['vault-add-card-new']} ${styles['pl-30']} ${styles['pr-30']}`}>
       <div className={`${styles['credit-debit-card-details']} ${styles['pt-30']} ${styles['pb-30']}`} >
@@ -42,23 +47,33 @@ const VaultAddNewCard = (props) => {
                 </div>
               </Col>
               <Col md={6} sm={12} xs={12} className={styles['pl-0']}>
-                <div className={`${styles['fp-input']}`}> 
-                  <input type="text" name="exp_mm" onChange={inputChange} required />
-                  <span className={styles['highlight']}></span>
-                  <span className={styles['bar']}></span>
-                  <label>Expiry Month</label>
+                <div className={styles['select']}>
+                  <select name="exp_mm" className={styles['select-text']} onChange={inputChange}  required>
+                    <option>Expiry Month</option>
+                    {dateoptions}
+                  </select>
+                  <span className={styles['select-highlight']}></span>
+                  <span className={styles['select-bar']}></span>
                 </div>
               </Col>
               <Col md={6} sm={12} xs={12} className={styles['pl-0']}>
-                <div className={`${styles['fp-input']}`}> 
-                  <input type="text" name="exp_yr" onChange={inputChange} required />
-                  <span className={styles['highlight']}></span>
-                  <span className={styles['bar']}></span>
-                  <label>Expiry Year</label>
+                <div className={styles['select']}>
+                  <select name="exp_yr" className={styles['select-text']} onChange={inputChange}  required>
+                    <option>Expiry Year</option>
+                    <option>2018</option>
+                    <option>2019</option>
+                    <option>2020</option>
+                    <option>2021</option>
+                    <option>2022</option>
+                    <option>2023</option>
+                    <option>2024</option>
+                  </select>
+                  <span className={styles['select-highlight']}></span>
+                  <span className={styles['select-bar']}></span>
                 </div>
               </Col>
               <Col md={12} className={styles['pl-0']}>
-                <div className={`${styles['checkbox-material']} ${styles['flex-center']} ${styles['pb-30']}`}>
+                <div className={`${styles['checkbox-material']} ${styles['flex-center']} ${styles['pb-30']} ${styles['mt-30']}`}>
                   <input id="card-check" type="checkbox" onClick={setAsDefaultCard} defaultChecked={checked} /> 
                   <label for="card-check" className={styles['fs-12']}> {VAULT_PAGE.SAVE_CARD_MSG}</label>
                 </div>

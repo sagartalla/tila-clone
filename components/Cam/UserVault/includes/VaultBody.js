@@ -19,7 +19,6 @@ class VaultBody extends Component {
   }
 
   paymentCardIcon(provider_type) {
-    console.log(provider_type);
     switch(provider_type ){
       case 'VISA':
         return "icons/cards-icons-list/visa-icon-no-bg";
@@ -48,7 +47,7 @@ class VaultBody extends Component {
                     </span>
                     <div className={`${styles['flex']} ${styles['flex-colum']} ${styles['vault-card-item-inn']}`}>
                       <span>{bank_name}</span>
-                      <span className={`${styles['pt-25']} ${styles['pb-25']} ${styles['fs-18']}`}>{masked_number}</span>
+                      <span className={`${styles['pt-25']} ${styles['pb-25']} ${styles['fs-18']}`}>{masked_number.replace(/(.{4})/g, '$1 ')}</span>
                       <div className={`${styles['flx-space-bw']}`}>
                         <span className={`${styles['flex']} ${styles['flex-colum']}`}>
                           <span className={`${styles['fs-12']}`}>{VAULT_PAGE.NAME}: {holder_name}</span>
@@ -59,17 +58,18 @@ class VaultBody extends Component {
                         </span>
                       </div>
                     </div>
-                    <div className={styles['make-default']}>
+                    <div className={`${styles['make-default']} ${styles['pr-5']}`}>
                     {
                       card.default ?
                         <div>
                           <label className={`${styles['fs-12']} ${styles['pr-5']}`}> {VAULT_PAGE.DEFAULT} </label>
-                          <input type="radio" className={styles['radio-btn']} name="make-default" checked="checked" onClick={this.makeCardDefault.bind(this, card_token)} /> 
+                          <input type="radio" className={`${styles['tickmark-radio']}`} name="make-default" checked="checked" onClick={this.makeCardDefault.bind(this, card_token)}/>
+                          {/* <input type="radio" className={styles['radio-btn']} name="make-default"  />  */}
                         </div>
                         :
                         <span>
                           <label className={`${styles['fs-12']} ${styles['fontW600']} ${styles['pr-5']}`}> {VAULT_PAGE.MAKE_DEFAULT} </label>
-                          <input type="radio" className={styles['radio-btn']} name="make-default" onClick={this.makeCardDefault.bind(this, card_token)} /> 
+                          <input type="radio" className={styles['tickmark-radio']} name="make-default" onClick={this.makeCardDefault.bind(this, card_token)} /> 
                         </span>
                     }
                     </div>
