@@ -22,7 +22,7 @@ const StatusWidget = ({ currentStatus }) => {
                 barLen = pivot * k;
               }
               return (
-                <div className={`${styles['point']} ${completed ? styles['active'] : ''} `} style={{ left: `${k == 0 ? '0' : (pivot * k)}%` }}>
+                <div className={`${styles['point']} ${completed ? (i == 'CANCELLED' ? styles['cancelled'] : styles['active']) : ''} `} style={{ left: `${k == 0 ? '0' : (pivot * k)}%` }}>
                   <span>{i}</span>
                 </div>
               )
