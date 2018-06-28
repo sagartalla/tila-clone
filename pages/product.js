@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import withRedux from 'next-redux-wrapper';
 import { configureUrlQuery } from 'react-url-query';
-import createHistory from 'history/createBrowserHistory';
 
 import Base from './base';
 import makeStore from '../store';

@@ -11,6 +11,7 @@
     "@zeit/next-css": "^0.1.5",
     "@zeit/next-stylus": "0.0.1",
     "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
     "elastic-apm-js-base": "^0.8.0",
     "elastic-apm-node": "^1.5.4",
     "express": "^4.16.3",
@@ -42,7 +43,9 @@
     "shortid": "^2.2.8",
     "slick-carousel": "^1.8.1",
     "stylus": "^0.54.5",
-    "type-to-reducer": "^1.1.0"
+    "type-to-reducer": "^1.1.0",
+    "universal-cookie": "^2.2.0",
+    "universal-cookie-express": "^2.2.0"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.2",

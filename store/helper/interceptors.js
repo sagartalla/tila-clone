@@ -6,9 +6,11 @@ import getConfig from 'next/config'
 import apmConfig from '../../apm.config';
 import constants from './constants';
 import { pimServiceInstance } from './services';
+import Cookie from 'universal-cookie';
 
 const config = getConfig()
 const env = config.publicRuntimeConfig.env;
+const cookies = new Cookie();
 
 let apm;
 if (env !== 'local'){
@@ -21,7 +23,7 @@ if (env !== 'local'){
 const configModifer = (config) => {
   //SF-89
   const tempHeaders = (/vault/.test(config.url))  ?  {"x-auth-tenant-key": "1275edea-cf49-4adb-ad0d-4e9b255f893f" ,"x-auth-tenant-secret": "VTQVTO9QJW2DTINOD1AE" ,'x-auth-ip': '196.128.1.1'} : {}
-  
+
   const newheaders = _.reduce.convert({ 'cap': false })((acc, value, key) => {
     if(value) {
       acc[key] = value;
@@ -37,62 +39,18 @@ const configModifer = (config) => {
   };
 }
 
-// Generate UUID/random number
-// Code taken from https://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript
-export const uuidv4 = () => {
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-    return v.toString(16);
-  });
-}
 //TODO SF-49
 export const sessionId = () => {
-  try {
-    if (localStorage) {
-      const id = localStorage.session_id;
-      if (id) {
-        return id;
-      } else {
-        const uuid = uuidv4();
-        localStorage.setItem('session_id', uuid);
-        return uuid;
-      }
-    } else {
-      return uuidv4();
-    }
-  } catch (e) {
-    return uuidv4();
-  }
+  cookies.get('sessionId');
 }
 
 export const authToken = () => {
-  try {
-    if (localStorage) {
-      const auth = localStorage.auth
-      if (auth) {
-        return JSON.parse(auth).access_token;
-      } else {
-        return '';
-      }
-    } else {
-      return '';
-    }
-  } catch (e) {
-
-  }
+  const auth =  cookies.get('auth');
+  return auth ? auth.access_token : undefined;
 }
 
 export const country = () => {
-  try {
-    if (localStorage) {
-      const country = localStorage.country
-      return country || undefined
-    } else {
-      return undefined;
-    }
-  } catch (e) {
-    return undefined;
-  }
+  return cookies.get('country');
 }
 
 const getServiceName = (url) => {
@@ -121,19 +79,18 @@ const apmResInterceptor = (response) => {
 const errorInterceptor = (err) => {
   try {
     if (err.response && err.response.status == '401') {
-      const auth = JSON.parse(localStorage.getItem('auth'));
-      return axios.post(`${constants.AUTH_API_URL}/api/v1/refresh`, {
-        'auth_version': 'V1',
-        'refresh_token': auth.refresh_token
-      }).then((res) => {
-        auth.access_token = res.data.access_token
-        localStorage.setItem('auth', JSON.stringify(auth));
-        return axios(err.config);
-      }).catch((err) => {
-        alert('You are logged out, Login and try again');
-        localStorage.removeItem('auth');
-        location.reload();
-      });
+      const { refresh_token } =  cookies.get('auth') || {};
+      if(refresh_token) {
+        return axios.post(`/api/refresh`, {
+          'auth_version': 'V1',
+          'refresh_token': refresh_token
+        }).then((res) => {
+          return axios(err.config);
+        }).catch((err) => {
+          alert('You are logged out, Login and try again');
+          location.reload();
+        });
+      }
     }
   } catch (e) {
     console.log(e);
