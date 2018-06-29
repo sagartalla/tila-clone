@@ -2,8 +2,9 @@ import React from 'react';
 import NoSSR from 'react-no-ssr';
 import withRedux from 'next-redux-wrapper';
 import makeStore from '../store';
+import { bindActionCreators } from 'redux';
 
-import Base from './base';
+import Base, { baseActions } from './base';
 import Layout from '../layout/main';
 import Order from '../components/Order';
 
@@ -21,5 +22,12 @@ class OrderPage extends Base {
   }
 }
 
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      ...baseActions,
+    },
+    dispatch,
+  )
 
-export default withRedux(makeStore, null, null)(OrderPage);
+export default withRedux(makeStore, null, mapDispatchToProps)(OrderPage);

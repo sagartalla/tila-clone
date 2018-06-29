@@ -2,6 +2,7 @@ import _ from 'lodash';
 import axios from 'axios';
 import constants from '../helper/constants';
 import Cookies from 'universal-cookie';
+import moment from 'moment';
 
 const cookies = new Cookies();
 

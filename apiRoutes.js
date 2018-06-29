@@ -53,10 +53,18 @@ apiRoutes
     return res.json({});
   })
   .post('/setCookie', (req, res) => {
-    const {data, options} = req.body;
+    let {data, options} = req.body;
+    let cookieOption = {
+      path: '/',
+    }
+    options = options || {};
+    if(options.expires){
+      cookieOption.expires = new Date(options.expires);
+    }
     _.forEach(data, (val, key) => {
-      req.universalCookies.set('key', val, { path: '/', ...options });
+      req.universalCookies.set(key, val, cookieOption);
     });
+    return res.json({});
   })
   .post('/deleteCookie', () => {
     const params = req.body;

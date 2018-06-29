@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { configureUrlQuery } from 'react-url-query';
 import createHistory from 'history/createBrowserHistory';
-import { bindActionCreators } from 'redux';
-import withRedux from 'next-redux-wrapper';
+// import { bindActionCreators } from 'redux';
+//import { connect } from 'react-redux';
 import Cookies from 'universal-cookie';
 
 import { uuidv4 } from '../store/helper/util';
@@ -22,18 +22,8 @@ class Base extends Component {
   }
 }
 
-const mapStatetoProps = (state) => {
-  return {
-    allState: state,
-  }
+export default Base;
+
+export const baseActions = {
+  setSessionID: actionCreators.setSessionID,
 }
-
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(
-    {
-      setSessionID: actionCreators.setSessionID,
-    },
-    dispatch,
-  )
-
-export default withRedux(makeStore, mapStatetoProps, mapDispatchToProps)(Base);

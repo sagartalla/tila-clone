@@ -41,7 +41,7 @@ const configModifer = (config) => {
 
 //TODO SF-49
 export const sessionId = () => {
-  cookies.get('sessionId');
+  return cookies.get('sessionId');
 }
 
 export const authToken = () => {
