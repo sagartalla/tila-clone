@@ -15,7 +15,7 @@ const SocialMedia = () => (
         <span className={`${styles['fs-12']} ${styles['label-gry-clr']}`}>{LINK_TO_SOCIAL_MEDIA.SUB_TITTLE}</span>
       </span>
     </div>
-    <div className={`${styles['pt-15']} ${styles['pb-15']} ${styles['pr-30']} ${styles['pl-30']} ${styles['bg-light-gray']}`}>
+    <div className={`${styles['social-media-main']}  ${styles['bg-light-gray']}`}>
       <div className={`${styles['flx-space-bw']} ${styles['social-media-part']} ${styles['pb-10']}`}>
         <a className={`${styles['flex-center']} ${styles['social-facebook']} ${styles['facebook-blue-color']} ${styles['border-radius4']}`}>
           <span className={`${styles['flex']} ${styles['pr-10']} ${styles['social-facebook-inn']}`}>
