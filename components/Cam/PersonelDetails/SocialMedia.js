@@ -1,17 +1,18 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import SVGCompoent from '../../common/SVGComponet';
+import { languageDefinations } from '../../../utils/lang/';
 import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Cam/PersonelDetails/profile');
-
+const { LINK_TO_SOCIAL_MEDIA } = languageDefinations();
 const SocialMedia = () => (
   <div className={`${styles['box']}`}>
     <div className={`${styles['flex']} ${styles['p-30']}`}>
       <span>
       </span>
       <span>
-        <h4 className={`${styles['fontW300']} ${styles['mt-0']} ${styles['mb-0']}`}>Link to Social Media</h4>
-        <span className={`${styles['fs-12']} ${styles['label-gry-clr']}`}>Easy one clicklogin when using your Social Media Accounts</span>
+        <h4 className={`${styles['fontW300']} ${styles['mt-0']} ${styles['mb-0']}`}>{LINK_TO_SOCIAL_MEDIA.HEADING}</h4>
+        <span className={`${styles['fs-12']} ${styles['label-gry-clr']}`}>{LINK_TO_SOCIAL_MEDIA.SUB_TITTLE}</span>
       </span>
     </div>
     <div className={`${styles['pt-15']} ${styles['pb-15']} ${styles['pr-30']} ${styles['pl-30']} ${styles['bg-light-gray']}`}>
@@ -21,7 +22,7 @@ const SocialMedia = () => (
             <SVGCompoent clsName={`${styles['facebook-icon']}`} src="icons/social-icons/facebook" />
           </span>
           <span className={`${styles['fs-12']} ${styles['facebook-blue-lt-color']} ${styles['title']} ${styles['facebook-clr']} ${styles['fontW600']}`}>
-            Facebook
+            {LINK_TO_SOCIAL_MEDIA.FACEBOOK}
           </span>
         </a>
         <a className={`${styles['flex-center']} ${styles['social-google']} ${styles['border-radius4']}`}>
@@ -29,7 +30,7 @@ const SocialMedia = () => (
             <SVGCompoent clsName={`${styles['google-icon']}`} src="icons/social-icons/gmail" />
           </span>
           <span className={`${styles['fs-12']} ${styles['title']} ${styles['google-clr']} ${styles['fontW600']}`}>
-            Google
+            {LINK_TO_SOCIAL_MEDIA.GOOGLE}
           </span>
         </a>
         <a className={`${styles['flex-center']} ${styles['social-twitter']} ${styles['border-radius4']}`}>
@@ -37,11 +38,11 @@ const SocialMedia = () => (
             <SVGCompoent clsName={`${styles['twitter-icon']}`} src="icons/social-icons/twitter" />
           </span>
           <span className={`${styles['fs-12']} ${styles['title']} ${styles['twitter-clr']} ${styles['fontW600']}`}>
-            Twitter
+            {LINK_TO_SOCIAL_MEDIA.TWITTER}
           </span>
         </a>
       </div>
-      <span className={`${styles['fs-10']}`}>Your facebook account has been linked with abcd.com <a href="#">(Unlink Now)</a></span>
+      <span className={`${styles['fs-10']}`}>{LINK_TO_SOCIAL_MEDIA.NOTE} <a href="#">(Unlink Now)</a></span>
     </div>
   </div>
 );

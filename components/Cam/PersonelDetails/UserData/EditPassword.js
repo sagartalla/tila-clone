@@ -3,7 +3,7 @@ import { Row, Col } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import Btn from '../../../common/Button';
 import Input from '../../../common/Input';
-
+import { languageDefinations } from '../../../../utils/lang/';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators, selectors } from '../../../../store/cam/personalDetails';
@@ -22,6 +22,7 @@ class EditPassword extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    const { EDIT_PASSWORD_MODAL } = languageDefinations();
     if (nextProps.show) {
       this.setState({
         show: nextProps.show
@@ -36,7 +37,7 @@ class EditPassword extends React.Component {
       if (nextProps.passwordResetStatus.Response == "SUCCESS") {
         this.setState({ error: "" });
         this.handleClose();
-        alert("Your password is changed successfully!!");
+        alert(EDIT_PASSWORD_MODAL.PASSWORD_SUCCESS_MESSAGE);
       }
     }
 
@@ -60,24 +61,26 @@ class EditPassword extends React.Component {
   }
 
   handleNewPasswordChange = (e) => {
-      if (e.target.value != this.state.rePassword && this.state.rePassword.length > 0) {
-        this.setState({
-          error: "Passwords must match",
-          newPassword: e.target.value
-        });
-      }
-      else if (this.state.rePassword.length > 0 && e.target.value.length == 0) {
-        this.setState({
-          error: "Passwords must match",
-          newPassword: e.target.value
-        });
-      }
-      else {
-        this.setState({
-          error: "",
-          newPassword: e.target.value
-        });
-      }
+    const { EDIT_PASSWORD_MODAL } = languageDefinations();
+    if (e.target.value != this.state.rePassword && this.state.rePassword.length > 0) {
+      this.setState({
+        error: EDIT_PASSWORD_MODAL.MATCH_ERROR_MESSAGE,
+        newPassword: e.target.value
+      });
+    }
+    else if (this.state.rePassword.length > 0 && e.target.value.length == 0) {
+      this.setState({
+        error: EDIT_PASSWORD_MODAL.MATCH_ERROR_MESSAGE,
+        newPassword: e.target.value
+      });
+    }
+    else {
+      this.setState({
+        error: "",
+        newPassword: e.target.value
+      });
+    }
+
   }
 
   handleRePasswordBlur = (e) => {
@@ -117,6 +120,7 @@ class EditPassword extends React.Component {
   render() {
     let { oldPassword, rePassword, newPassword, error } = this.state;
     let errorComponent = null;
+    const { EDIT_PASSWORD_MODAL } = languageDefinations();
     if (error) {
       errorComponent = (
         <div className={`${styles['text-center']} ${styles['error-msg']}`}>
@@ -127,7 +131,7 @@ class EditPassword extends React.Component {
       <div className={styles['editProfileModal']}>
         <Row>
           <Col xs={11} md={11}>
-            <h3>Change Password</h3>
+            <h3>{EDIT_PASSWORD_MODAL.HEADING}</h3>
           </Col>
           <Col xs={1} md={1} onClick={this.handleClose}><a>
             X</a>
@@ -146,23 +150,23 @@ class EditPassword extends React.Component {
           </Row>
           <Row className={`${styles['m-5']} ${styles['mt-20']}`}>
             <Col xs={12} md={12} className={styles['box']}>
-              <div>Enter Old Password</div>
-              <Input placeholder="Enter Old Password" type="password" val={oldPassword} onChange={this.handleOldPasswordChange} />
+              <div>{EDIT_PASSWORD_MODAL.ENTER_PASSWORD_MESSAGE}</div>
+              <Input placeholder={EDIT_PASSWORD_MODAL.ENTER_PASSWORD_MESSAGE} type="password" val={oldPassword} onChange={this.handleOldPasswordChange} />
             </Col>
             <Col xs={12} md={12} className={styles['box']}>
               <Col xs={6} md={6} className={styles['pl-0']}>
-                <div>Enter New Password</div>
-                <Input placeholder="Enter New Password" type="password" val={newPassword} onChange={this.handleNewPasswordChange} />
+                <div>{EDIT_PASSWORD_MODAL.ENTER_NEW_PASSWORD_MESSAGE}</div>
+                <Input placeholder={EDIT_PASSWORD_MODAL.ENTER_NEW_PASSWORD_MESSAGE} type="password" val={newPassword} onChange={this.handleNewPasswordChange} />
               </Col>
               <Col xs={6} md={6} className={styles['pl-0']}>
-                <div>Re-enter New Password</div>
-                <Input placeholder="Re enter Password" type="password" val={rePassword} onChange={this.handleRePasswordChange} onBlur={this.handleRePasswordBlur} />
+                <div>{EDIT_PASSWORD_MODAL.RE_ENTER_PASSWORD_MESSAGE}</div>
+                <Input placeholder={EDIT_PASSWORD_MODAL.RE_ENTER_PASSWORD_MESSAGE} type="password" val={rePassword} onChange={this.handleRePasswordChange} onBlur={this.handleRePasswordBlur} />
               </Col>
             </Col>
           </Row>
           <Row>
             <Col xs={12} md={12} className={`${styles['t-c']}`}>
-              <Btn btnWidth="95%" backGround="#034e94" color="#fff" btnText="Change Password" BtnClickHandler={this.handleSubmit} />
+              <Btn btnWidth="95%" backGround="#034e94" color="#fff" btnText={EDIT_PASSWORD_MODAL.SUBMIT_BUTTON} BtnClickHandler={this.handleSubmit} />
             </Col>
           </Row>
         </div>

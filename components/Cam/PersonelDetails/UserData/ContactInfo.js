@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 import { selectors } from '../../../../store/cam/personalDetails';
-
+import { languageDefinations } from '../../../../utils/lang/';
 import UpdateContactInfoModal from './UpdateContactInfoModal';
 import SVGCompoent from '../../../common/SVGComponet';
 import { mergeCss } from '../../../../utils/cssUtil';
@@ -36,12 +36,13 @@ class ContactInfo extends React.Component {
   render() {
     const { mailId, email, mobile_no, lastUpdated, phoneNum, email_verified } = this.state.contactInfo ? this.state.contactInfo : { mailId: "", email: "", mobile_no: "", lastUpdated: "not available", phoneNum: "", email_verified: "" };
     const { element, show } = this.state;
+    const { CONTACT_INFO_MODAL } = languageDefinations();
     return (
       <div className={`${styles['mb-10']}`}>
-        <h4 className={styles['fontW600']}>Contact Information</h4>
+        <h4 className={styles['fontW600']}>{CONTACT_INFO_MODAL.HEADING}</h4>
         <div className={`${styles['bb-dashed']} ${styles['flex-center']} ${styles['pt-10']} ${styles['pb-10']}`}>
           <Col xs={12} md={3} className={`${styles['pl-0']} ${styles['pr-0']}`}>
-            <span>Email</span>
+            <span>{CONTACT_INFO_MODAL.EMAIL}</span>
           </Col>
           <Col xs={6} md={8} className={`${styles['flex-center']} ${styles['tickmark-part']}`}>
             <span className={styles['pr-20']}>{mailId}</span>
@@ -57,7 +58,7 @@ class ContactInfo extends React.Component {
         </div>
         <div className={`${styles['flex-center']} ${styles['bb-dashed']} ${styles['pt-10']} ${styles['pb-10']}`}>
           <Col xs={12} md={3} className={`${styles['pl-0']} ${styles['pr-0']}`}>
-            <span>Password</span>
+            <span>{CONTACT_INFO_MODAL.PASSWORD}</span>
           </Col>
           <Col xs={6} md={8}>
             <span> {lastUpdated}</span>
@@ -70,7 +71,7 @@ class ContactInfo extends React.Component {
         </div>
         <div className={`${styles['flex-center']} ${styles['pt-10']} ${styles['pb-10']}`}>
           <Col xs={12} md={3} className={`${styles['pl-0']} ${styles['pr-0']}`}>
-            <span>Phone Number</span>
+            <span>{CONTACT_INFO_MODAL.PHONE_NUMBER}</span>
           </Col>
           <Col xs={6} md={8}>
             <span>{phoneNum}</span>

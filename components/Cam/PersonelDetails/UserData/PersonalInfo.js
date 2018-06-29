@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 import { selectors } from '../../../../store/cam/personalDetails';
-
+import { languageDefinations } from '../../../../utils/lang/';
 import UpdatePersonalInfoModal from './UpdatePersonalInfoModal';
 import SVGCompoent from '../../../common/SVGComponet';
 import { mergeCss } from '../../../../utils/cssUtil';
@@ -45,17 +45,18 @@ class PersonalInfo extends React.Component {
   render() {
     const { show } = this.state;
     const { first_name, last_name, dob, gender } = this.state.personalInfo ? this.state.personalInfo : { first_name: "", last_name: "", dob: "", gender: "" };
+    const { PERSONAL_INFO_MODAL } = languageDefinations();
     return (
       <div>
         <h4 className={`${styles['flx-space-bw']} ${styles['information-title']} ${styles['fontW600']} ${styles['mt-0']}`}>
-          <span>Personel Information</span> 
+          <span>{PERSONAL_INFO_MODAL.HEADING}</span> 
           <a className={`${styles['flex']}`} onClick={this.handleShow(true)}>
             <SVGCompoent clsName={`${styles['edit-icon']}`} src="icons/common-icon/edit-icon" />
           </a>
         </h4>
         <div className={`${styles['flex-center']} ${styles['bb-dashed']} ${styles['pt-10']} ${styles['pb-10']}`}>
           <Col xs={12} md={3} className={`${styles['pl-0']} ${styles['pr-0']}`}>
-            <span>Name</span>
+            <span>{PERSONAL_INFO_MODAL.NAME}</span>
           </Col>
           <Col xs={12} md={8} className={`${styles['p-0']}`}>
             <span className={styles['pl-15']}>{first_name} {last_name}</span>
@@ -63,7 +64,7 @@ class PersonalInfo extends React.Component {
         </div>
         <div className={`${styles['flex-center']} ${styles['bb-dashed']} ${styles['pt-10']} ${styles['pb-10']}`}>
           <Col xs={12} md={3} className={`${styles['pl-0']} ${styles['pr-0']}`}>
-            <span>Date Of Birth</span>
+            <span>{PERSONAL_INFO_MODAL.DOB}</span>
           </Col>
           <Col xs={12} md={8} className={`${styles['p-0']}`}>
             <span className={styles['pl-15']}>{dob}</span>
@@ -71,7 +72,7 @@ class PersonalInfo extends React.Component {
         </div>
         <div className={`${styles['flex-center']} ${styles['pt-10']} ${styles['pb-10']}`}>
           <Col xs={12} md={3} className={`${styles['pl-0']} ${styles['pr-0']}`}>
-            <span>Gender</span>
+            <span>{PERSONAL_INFO_MODAL.GENDER}</span>
           </Col>
           <Col xs={12} md={8} className={`${styles['p-0']}`}>
             <span className={styles['pl-15']}>{gender == 'F' ? "Female" : gender == "M" ? "Male" : ""}</span>
