@@ -1,0 +1,121 @@
+@import '../../../layout/main/executables.styl';
+.profile-main-part
+
+  .deactive-account-lable
+    border-top 1px solid rgba(215, 215, 215, 0.3)
+
+  .edit-icon
+    width-height-radius(20px, 24px, 0)
+
+  .tickmark-part
+    .tickmark-icon
+      width-height-radius(16px, 16px, 0)
+
+  .social-media-part
+    .social-facebook, .social-google, .social-twitter
+      padding 3px
+      .social-facebook-inn, .social-google-inn
+        padding-left 7px
+      .title
+        padding: 5px 10px;
+
+      .facebook-icon
+        width-height-radius(10px, 18px, 0)
+    .social-google
+      border 1px solid google-red
+      .title
+        border-left 1px solid google-red
+      .google-icon
+        width-height-radius(16px, 16px, 0)
+
+    .social-twitter
+      border 1px solid twitter-color
+      .title
+        border-left 1px solid twitter-color
+        letter-spacing 1px
+      .social-twitter-inn
+        padding-left 3px
+        .twitter-icon
+          width-height-radius(24px, 24px, 0)
+
+  .notification-main
+    .notification-icon
+      width-height-radius(55px, 48px, 0)
+    .notification-label
+      text-align justify
+      line-height 1.22
+    
+.editProfileModal
+  .image-block-style
+    height 100px
+    border 1px solid #555555
+
+  .dp-flex>div
+    flex: 1
+
+  .gender-select>img
+    border 1px solid link-highlight
+
+  .gender-select>span
+    color link-highlight
+
+  .gender-unselect>img
+    border-width 0px
+
+  .gender-unselect>span
+    color base-font
+
+.modalContainer
+  height 100%
+  width 100%
+  top 0
+  left 0
+  .disabled
+    height 100%
+    width 100%
+    position fixed
+    top 0
+    left 0
+    z-index 2000
+    background-color grey
+    opacity 0.8
+
+.openModal
+  height 100%
+  width 40%
+  position fixed
+  top 0
+  right -800px
+  z-index 2001
+  background-color white
+  animation-name slideOpen
+  animation-duration 0.5s
+  animation-fill-mode both
+
+.closeModal
+  height 100%
+  width 40%
+  position fixed
+  top 0
+  right 0px
+  z-index 2001
+  background-color white
+  animation-name slideClose
+  animation-duration 0.2s
+  animation-fill-mode both
+
+
+@keyframes slideOpen {
+  from {right: -800px;}
+  to {right: 0;}
+  }
+@keyframes slideClose {
+  from {right: 0px;}
+  to {right: -800px;}
+  }
+
+.showDiv
+  display block
+
+.hideDiv
+  display none

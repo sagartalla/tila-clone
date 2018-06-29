@@ -7,31 +7,18 @@ import SocialMedia from './SocialMedia';
 import Notification from './Notification';
 
 import { mergeCss } from '../../../utils/cssUtil';
-const styles = mergeCss('components/Cam/cam');
+const styles = mergeCss('components/Cam/PersonelDetails/profile');
 
 const UserInfo = () => {
   return (
-    <div>
-      <Row className={styles['ml-10']}>
-        <Col md={12} xs={12} className={styles['pl-0']}>
-          <div className={`${styles['ht-auto']} ${styles['fs-12']} ${styles['box']}`}>
-            <UserData />
-          </div>
-        </Col>
-      </Row>
-      <Row className={`${styles['ml-10']} ${styles['mt-10']}`}>
-        <Col xs={12} md={6} className={styles['pl-0']}>
-          <div className={`${styles['fs-12']} ${styles['ht-170']} ${styles['box']} `}>
-            <SocialMedia />
-          </div>
-        </Col>
-        <Col xs={12} md={6} className={styles['pl-0']}>
-          <div className={`${styles['fs-12']} ${styles['ht-170']} ${styles['box']} `}>
-            <Notification />
-          </div>
-        </Col>
-      </Row>
-
+    <div className={`${styles['profile-main-part']} ${styles['pl-5']}`}>
+      <UserData />
+      <Col xs={12} md={6} className={styles['pl-0']}>
+        <SocialMedia />
+      </Col>
+      <Col xs={12} md={6} className={`${styles['pl-5']} ${styles['pr-0']}`}>
+        <Notification />
+      </Col>
     </div>
   );
 }

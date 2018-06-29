@@ -6,9 +6,9 @@ import { connect } from 'react-redux';
 import { selectors } from '../../../../store/cam/personalDetails';
 
 import UpdatePersonalInfoModal from './UpdatePersonalInfoModal';
-
+import SVGCompoent from '../../../common/SVGComponet';
 import { mergeCss } from '../../../../utils/cssUtil';
-const styles = mergeCss('components/Cam/cam');
+const styles = mergeCss('components/Cam/PersonelDetails/profile');
 
 class PersonalInfo extends React.Component {
 
@@ -46,41 +46,37 @@ class PersonalInfo extends React.Component {
     const { show } = this.state;
     const { first_name, last_name, dob, gender } = this.state.personalInfo ? this.state.personalInfo : { first_name: "", last_name: "", dob: "", gender: "" };
     return (
-      <div className={`${styles['ml-15']} ${styles['mt-10']}`}>
-        <Row>
-          <Col xs={6} md={6}>
-            <h6>Personel Information</h6>
-          </Col>
-          <Col xs={6} md={6}>
-            <span className={`${styles['float-r']} ${styles['p-0']} ${styles['m-5']}`}>
-              <a onClick={this.handleShow(true)}>Edit</a>
-            </span>
-          </Col>
-        </Row>
-        <Row className={`${styles['bb-dashed']} ${styles['pb-5']} ${styles['pt-5']}`}>
-          <Col xs={12} md={3} className={`${styles['pl-0']} ${styles['pr-0']} ${styles['m-5']}`}>
+      <div>
+        <h4 className={`${styles['flx-space-bw']} ${styles['information-title']} ${styles['fontW600']} ${styles['mt-0']}`}>
+          <span>Personel Information</span> 
+          <a className={`${styles['flex']}`} onClick={this.handleShow(true)}>
+            <SVGCompoent clsName={`${styles['edit-icon']}`} src="icons/common-icon/edit-icon" />
+          </a>
+        </h4>
+        <div className={`${styles['flex-center']} ${styles['bb-dashed']} ${styles['pt-10']} ${styles['pb-10']}`}>
+          <Col xs={12} md={3} className={`${styles['pl-0']} ${styles['pr-0']}`}>
             <span>Name</span>
           </Col>
-          <Col xs={12} md={8} className={`${styles['p-0']} ${styles['m-5']}`}>
+          <Col xs={12} md={8} className={`${styles['p-0']}`}>
             <span className={styles['pl-15']}>{first_name} {last_name}</span>
           </Col>
-        </Row>
-        <Row className={`${styles['bb-dashed']} ${styles['pb-5']} ${styles['pt-5']}`}>
-          <Col xs={12} md={3} className={`${styles['pl-0']} ${styles['pr-0']} ${styles['m-5']}`}>
+        </div>
+        <div className={`${styles['flex-center']} ${styles['bb-dashed']} ${styles['pt-10']} ${styles['pb-10']}`}>
+          <Col xs={12} md={3} className={`${styles['pl-0']} ${styles['pr-0']}`}>
             <span>Date Of Birth</span>
           </Col>
-          <Col xs={12} md={8} className={`${styles['p-0']} ${styles['m-5']}`}>
+          <Col xs={12} md={8} className={`${styles['p-0']}`}>
             <span className={styles['pl-15']}>{dob}</span>
           </Col>
-        </Row>
-        <Row className={`${styles['pt-5']} ${styles['ml-0']}`}>
-          <Col xs={12} md={3} className={`${styles['pl-0']} ${styles['pr-0']} ${styles['m-5']}`}>
+        </div>
+        <div className={`${styles['flex-center']} ${styles['pt-10']} ${styles['pb-10']}`}>
+          <Col xs={12} md={3} className={`${styles['pl-0']} ${styles['pr-0']}`}>
             <span>Gender</span>
           </Col>
-          <Col xs={12} md={8} className={`${styles['p-0']} ${styles['m-5']}`}>
+          <Col xs={12} md={8} className={`${styles['p-0']}`}>
             <span className={styles['pl-15']}>{gender == 'F' ? "Female" : gender == "M" ? "Male" : ""}</span>
           </Col>
-        </Row>
+        </div>
         <div className={show ? `${styles['modalContainer']} ${styles['showDiv']}` : `${styles['modalContainer']} ${styles['hideDiv']}`}>
           <div className={`${styles['disabled']}`}>
           </div>
