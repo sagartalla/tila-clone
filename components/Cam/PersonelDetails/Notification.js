@@ -20,26 +20,6 @@ const Notification = () => (
       <Col md={7} className={`${styles['pl-0']} ${styles['notification-label']}`}><span className={`${styles['fs-12']} ${styles['label-gry-clr']}`}>Are you overloaded with notifications? Manage messages, emails and notifications the way you want</span></Col>
       <Col md={5} className={`${styles['pl-5']} ${styles['pr-0']} ${styles['flex']}`}><a className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['fs-12']} ${styles['default-small']}`}>EDIT NOTIFICATIONS</a></Col>
     </div>
-    {/* <Row>
-      <Col xs={12} md={12}>
-        <span>02</span>
-      </Col>
-    </Row>
-    <Row>
-      <Col xs={12} md={12}>
-        <span>New Notifications</span>
-      </Col>
-    </Row>
-    <Row>
-      <Col xs={12} md={6} >
-        <span>Are you overloaded with notifications? Manage messages,
-          emails and notifications the way you want
-        </span>
-      </Col>
-      <Col xs={12} md={6} >
-        <Btn btnText="Edit Notifications" />
-      </Col>
-    </Row> */}
   </div>
 );
 
