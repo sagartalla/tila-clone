@@ -50,22 +50,22 @@ const CartBody = props => {
                             <Col md={2}>
                               <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles['pb-15']}`}><img className={styles['img']} src={img} /></div>
                               {
-                               inventory > 0 ?
-                                <div className={`${styles['flex-center']} ${styles['justify-center']}`}>
-                                  {
-                                    quantity == 1 ?
-                                      <span className={`${styles['minus-disable']} ${styles['fs-20']} ${styles['flex-center']} ${styles['justify-center']}`}> - </span>
-                                      : <span data-id={item_id} onClick={decreaseItemCnt} className={`${styles['minus']} ${styles['fs-20']} ${styles['flex-center']} ${styles['justify-center']} ${styles['pointer']}`}> - </span>
-                                  }
-                                  <span className={`${styles['quantity-title']} ${styles['border-radius2']}`}>{quantity}</span>
-                                  {
-                                    max_limit == quantity ?
-                                      <span className={`${styles['minus-disable']} ${styles['fs-20']} ${styles['flex-center']} ${styles['justify-center']}`}> + </span>
-                                      : <span data-id={item_id} onClick={increaseItemCnt} className={`${styles['plus']} ${styles['flex-center']} ${styles['justify-center']} ${styles['default-shadow']} ${styles['fs-18']} ${styles['pointer']}`}>  + </span>
-                                  }
-                                </div>
-                              : '' 
-                             }
+                                inventory > 0 ?
+                                  <div className={`${styles['flex-center']} ${styles['justify-center']}`}>
+                                    {
+                                      quantity == 1 ?
+                                        <span className={`${styles['minus-disable']} ${styles['fs-20']} ${styles['flex-center']} ${styles['justify-center']}`}> - </span>
+                                        : <span data-id={item_id} onClick={decreaseItemCnt} className={`${styles['minus']} ${styles['fs-20']} ${styles['flex-center']} ${styles['justify-center']} ${styles['pointer']}`}> - </span>
+                                    }
+                                    <span className={`${styles['quantity-title']} ${styles['border-radius2']}`}>{quantity}</span>
+                                    {
+                                      max_limit == quantity ?
+                                        <span className={`${styles['minus-disable']} ${styles['fs-20']} ${styles['flex-center']} ${styles['justify-center']}`}> + </span>
+                                        : <span data-id={item_id} onClick={increaseItemCnt} className={`${styles['plus']} ${styles['flex-center']} ${styles['justify-center']} ${styles['default-shadow']} ${styles['fs-18']} ${styles['pointer']}`}>  + </span>
+                                    }
+                                  </div>
+                                  : ''
+                              }
                             </Col>
                             <Col md={10}>
                               <Row>
@@ -79,7 +79,7 @@ const CartBody = props => {
                                     <p className={`${styles['mb-0']} ${styles['fs-12']}`}><span>Shipping : </span><span className={`${styles['pl-10']} ${styles['pr-10']}`}>Fast Shipping  (5.00 AED) - <span className={`${styles['fs-12']} ${styles['base-font']}`}>Estimated Delivery by 28th Nov, 17</span> </span><a href="" className={`${styles['fontW600']}`}>View More</a></p>
                                   </div>
                                   <div className={`${styles['checkbox-material']} ${styles['mt-15']}`}>
-                                    <input id="send-gift" type="checkbox" /> 
+                                    <input id="send-gift" type="checkbox" />
                                     <label for="send-gift"> Send this as a gift (5.00 AED) </label>
                                   </div>
                                 </Col>
@@ -119,7 +119,7 @@ const CartBody = props => {
                             <span>Total : </span><span className={`${styles['fs-16']} ${styles['fontW600']}`}>{price + ' ' + cur}</span>
                           </Col>
                         </div>
-                     
+
                       </div>
                     )
                   })
@@ -129,18 +129,20 @@ const CartBody = props => {
                     <span className={styles['fs-12']}>10 out of 8 Items on your wishlist are available now to purchase. <a> 3 items are on Offers</a></span>
                   </Col>
                   <Col md={6}>
-                    <span className={`${styles['wishlist-img']} ${styles['mr-15']}`}><img src={wishlistImgPath} /></span>
-                    <span className={`${styles['wishlist-img']} ${styles['mr-15']}`}><img src={wishlistImgPath} /></span>
-                    <span className={`${styles['wishlist-img']} ${styles['mr-15']}`}><img src={wishlistImgPath} /></span>
-                    <span className={`${styles['wishlist-img']} ${styles['mr-15']}`}><img src={wishlistImgPath} /></span>
-                    <span className={`${styles['wishlist-img']} ${styles['mr-15']}`}><img src={wishlistImgPath} /></span>
+                    {
+                      [...Array(6).keys()].map(() => {
+                        return (
+                          <span className={`${styles['wishlist-img']} ${styles['mr-15']}`}><img src={wishlistImgPath} /></span>
+                        )
+                      })
+                    }
                   </Col>
                   <Col md={2} className={`${styles['pl-0']} ${styles['pr-0']} ${styles['flex']} ${styles['view-btn-list']}`}>
                     <a className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']} ${styles['default-small']}`}>View Wishlist</a>
                   </Col>
                 </div>
               </div>
-              
+
             </Col>
             <Col md={3} sm={12} xs={12} className={styles['pr-0']}>
               <div className={`${styles['box']}`}>
