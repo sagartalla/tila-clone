@@ -45,6 +45,8 @@ class UserVault extends Component {
       ...this.state,
       [e.target.name]: e.target.value
     });
+
+    // console.log(this.state);
   }
 
   makeDefault(card_token) {
