@@ -13,7 +13,7 @@ import { bindActionCreators } from 'redux';
 import { actionCreators, selectors } from '../../../../store/cam/personalDetails';
 
 import { mergeCss } from '../../../../utils/cssUtil';
-const styles = mergeCss('components/Cam/cam');
+const styles = mergeCss('components/Cam/PersonelDetails/profile');
 
 class UpdatePersonalInfoModal extends React.Component {
   state = {
