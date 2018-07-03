@@ -13,7 +13,7 @@ import { actionCreators }   from '../../../../store/order';
 import { mergeCss } from '../../../../utils/cssUtil';
 const styles = mergeCss('components/Order/order');
 
-const OrderItem = ({ orderItem, raiseOrderIssue, orderId }) => {
+const OrderItem = ({ orderItem, raiseOrderIssue, orderId, showWidget }) => {
   const { products } = orderItem;
 
   const cancelOrder = () => {
@@ -61,13 +61,13 @@ const OrderItem = ({ orderItem, raiseOrderIssue, orderId }) => {
           <div className={styles['cancel-btn']}>
             <span className={`${styles['link-text']} ${styles['fs-12']}`} onClick={cancelOrder} >Cancel</span>
           </div>
-          <div className={`${styles['widget-wrap']} ${styles['pt-10']}`}>
+          <div className={`${styles['widget-wrap']} ${styles['pt-10']} ${styles['pb-10']}`}>
             {
-              orderItem.status === 'DELIVERED' 
+              orderItem.status === 'DELIVERED' || !showWidget
               ?
                 null
               :
-                <StatusWidget currentStatus={orderItem.status} />
+                <StatusWidget currentStatus={orderItem.products} />
             }
             
           </div>

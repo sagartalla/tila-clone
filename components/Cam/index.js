@@ -7,6 +7,7 @@ import UserInfo from './PersonelDetails';
 import ShippingAddress from './ShippingAddress';
 import Orders from './Orders'
 import Wishlist from './Wishlist';
+import Notifications from './Notifications';
 import UserVault from './UserVault';
 import Messages from './Messages';
 
@@ -25,10 +26,12 @@ const Cam = ({ tabDetails }) => {
         return <Wishlist />;
       case 'profile':
         return <UserInfo />;
+      case 'messages':
+        return <Messages />;
+      case 'notifications':
+        return <Notifications />;
       case 'uservault':
         return <UserVault />;
-        case 'messages':
-        return <Messages />;
       default:
         return <UserInfo />;
     }

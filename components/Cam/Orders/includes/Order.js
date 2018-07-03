@@ -43,7 +43,7 @@ const Order = ({order}) => {
       </div>
       <Row>
         <Col md={12}>
-          {order.orderItems.map((orderItem) => <OrderItem key={orderItem.id} orderItem={orderItem} orderId={order.id}/>)}
+          {order.orderItems.map((orderItem) => <OrderItem key={orderItem.id} orderItem={orderItem} orderId={order.id} showWidget={false}/>)}
         </Col>
       </Row>
       <Row> 

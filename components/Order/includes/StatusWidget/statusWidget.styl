@@ -1,39 +1,25 @@
 @import '../../../../layout/main/executables.styl';
-.widget-cont
-  font-size px-12
-  .item
-    &:before
-      content ''
-      height 10px
-      width 10px
-      display block
-      background generic-gray-color
-      margin 0 auto
-      border-radius 50%
-      position absolute
-      top -5px
-      left 50%
-      transform translatex(-50%)
-  .item-cont
+
+.status-widget
+  .gray-line
     border-top 1px solid generic-gray-color
-    padding 0
-    text-align center
-    &.current
-      ::before
-        background: generic-green-color
-    &.done
-      border-top 1px solid generic-green-color
-      ::before
-        background: generic-green-color
-    &:first-of-type
-      text-align left
-      .item::before
-        margin initial
-        left 0
-    &:last-of-type
-      text-align right
-      .item::before
-        margin initial
-        right 0
-        left initial
-        transform initial
+    .point
+      background-color generic-gray-color
+      height: 10px;
+      width: 10px;
+      border-radius: 50%;
+      position: absolute;
+      top: 1px;
+      z-index: 2;
+      &.active
+        background-color generic-green-color
+      &.cancelled
+        background-color danger-color
+      span
+        position relative
+        top 10px
+        left -30px
+  .green-line
+    height 2px
+    background-color generic-green-color;
+    top -2px
