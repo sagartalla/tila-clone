@@ -64,7 +64,7 @@ class Cart extends Component {
   //TODO after add to cart, discuss with backend team whether to call cart item or not.
   addToWishlist(e) {
     const { results } = this.props;
-    const listing_id = e.target.getAttribute('data-id');
+    const listing_id = e.currentTarget.getAttribute('data-id');
     const item = results.items.filter(_item => listing_id == _item.item_id)[0];
     this.props.addToWishlist({
       "catalog_id": item.item_id,
