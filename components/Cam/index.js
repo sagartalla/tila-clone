@@ -9,6 +9,7 @@ import Orders from './Orders'
 import Wishlist from './Wishlist';
 import Notifications from './Notifications';
 import UserVault from './UserVault';
+import Messages from './Messages';
 
 import { mergeCss } from '../../utils/cssUtil';
 const styles = mergeCss('components/Cam/cam');
@@ -25,10 +26,12 @@ const Cam = ({ tabDetails }) => {
         return <Wishlist />;
       case 'profile':
         return <UserInfo />;
+      case 'messages':
+        return <Messages />;
       case 'notifications':
         return <Notifications />;
-        case 'uservault':
-          return <UserVault />;
+      case 'uservault':
+        return <UserVault />;
       default:
         return <UserInfo />;
     }
