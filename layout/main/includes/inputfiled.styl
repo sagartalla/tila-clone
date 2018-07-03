@@ -3,18 +3,19 @@
 
     USAGE:
 
-    <div className={`${styles['fp-input']}`}> 
+    <div className={styles['fp-input']}> 
       <input type="text" required />
       <span className={styles['highlight']}></span>
       <span className={styles['bar']}></span>
-      <label>Your lable</label>
+      <label>Your label</label>
+      <span className={styles['error']}>error message</span>
     </div> 
 **/
 @import '../executables.styl';
 
 .fp-input
   position:relative; 
-  margin-bottom:30px;
+  margin-bottom:15px;
 
   input
     padding 10px 10px 2px 5px

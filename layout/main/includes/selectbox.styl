@@ -9,7 +9,9 @@
         <option value="2">Option 2</option>
         <option value="3">Option 3</option>
       </select>
-      <label class="select-label">Our Label</label>
+      <span className={styles['select-highlight']}></span>
+      <span className={styles['select-bar']}></span>
+      <span className={styles['error']}>error message</span>
     </div>
   **/
   
@@ -29,6 +31,9 @@
     border-right 6px solid transparent
     border-top 6px solid rgba(0, 0, 0, 0.12)
     pointer-events none
+
+  .error
+    color error-color
 
 
   .select-text 

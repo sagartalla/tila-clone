@@ -94,7 +94,11 @@ export const AR_KEYWORDS = {
     'SAVE_CARD_MSG': 'Save this card for faster payments.',
     'ADD_NEW_CARD': 'ADD NEW CARD',
     'CANCEL': 'CANCEL',
-    'ADD_NEW_CARD_HEADER': 'Credit - Debit - ATM Card'
+    'ADD_NEW_CARD_HEADER': 'Credit - Debit - ATM Card',
+    'CARD_ERROR': 'Not valid card',
+    'NAME_ERROR': 'Not valid name',
+    'EXP_MN_ERROR': 'Invalid month',
+    'EXP_YR_ERROR': 'Invalid year',
   },
   CONTACT_INFO_MODAL: {
     'HEADING': 'Contact Information',
