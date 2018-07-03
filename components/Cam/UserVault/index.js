@@ -45,6 +45,8 @@ class UserVault extends Component {
       ...this.state,
       [e.target.name]: e.target.value
     });
+
+    // console.log(this.state);
   }
 
   makeDefault(card_token) {
@@ -89,7 +91,7 @@ class UserVault extends Component {
     const { results } = this.props;
     const { addNewCardBlock } = this.state;
     return (
-      <div className={`${styles['vault-container']} ${styles['box']} ${styles['ml-20']}`}>
+      <div className={`${styles['vault-container']} ${styles['box']} ${styles['ml-5']}`}>
         <VaultHeader />
         <VaultBody
           data={results}

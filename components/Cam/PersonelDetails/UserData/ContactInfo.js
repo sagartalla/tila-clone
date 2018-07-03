@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 import { selectors } from '../../../../store/cam/personalDetails';
-
+import { languageDefinations } from '../../../../utils/lang/';
 import UpdateContactInfoModal from './UpdateContactInfoModal';
-
+import SVGCompoent from '../../../common/SVGComponet';
 import { mergeCss } from '../../../../utils/cssUtil';
-const styles = mergeCss('components/Cam/cam');
+const styles = mergeCss('components/Cam/PersonelDetails/profile');
 
 
 class ContactInfo extends React.Component {
@@ -36,67 +36,52 @@ class ContactInfo extends React.Component {
   render() {
     const { mailId, email, mobile_no, lastUpdated, phoneNum, email_verified } = this.state.contactInfo ? this.state.contactInfo : { mailId: "", email: "", mobile_no: "", lastUpdated: "not available", phoneNum: "", email_verified: "" };
     const { element, show } = this.state;
+    const { CONTACT_INFO_MODAL } = languageDefinations();
     return (
-      <div className={`${styles['ml-15']} ${styles['mt-1o']} ${styles['mb-10']}`}>
-        <Row>
-          <Col xs={12} md={12}>
-            <h6>Contact Information</h6>
+      <div className={`${styles['mb-10']}`}>
+        <h4 className={styles['fontW600']}>{CONTACT_INFO_MODAL.HEADING}</h4>
+        <div className={`${styles['bb-dashed']} ${styles['flex-center']} ${styles['pt-10']} ${styles['pb-10']}`}>
+          <Col xs={12} md={3} className={`${styles['pl-0']} ${styles['pr-0']}`}>
+            <span>{CONTACT_INFO_MODAL.EMAIL}</span>
           </Col>
-        </Row>
-        <Row className={`${styles['bb-dashed']} ${styles['pb-5']} ${styles['pt-5']}`}>
-          <Col xs={12} md={3} className={`${styles['pl-0']} ${styles['pr-0']} ${styles['m-5']}`}>
-            <span>Email</span>
+          <Col xs={6} md={8} className={`${styles['flex-center']} ${styles['tickmark-part']}`}>
+            <span className={styles['pr-20']}>{mailId}</span>
+            <span className={email_verified == 'NV' ? `${styles['showDiv']}` : `${styles['hideDiv']}`}>
+              <span className={styles['flex']}><SVGCompoent clsName={`${styles['tickmark-icon']}`} src="icons/common-icon/bg-tick-mark" /></span>
+            </span>
           </Col>
-          <Col xs={12} md={8} className={`${styles['p-0']} ${styles['m-5']}`}>
-            <Col xs={6} md={8}>
-              <span>{mailId}</span>
-            </Col>
-            <Col xs={3} md={2}>
-              {/* Add Not verified Image here*/}
-              <a><span className={email_verified == 'NV' ? `${styles['showDiv']}` : `${styles['hideDiv']}`}>!!</span></a>
-            </Col>
-            <Col xs={3} md={2}>
-              {/* <span className={`${styles['float-r']} ${styles['p-0']} ${styles['ml-5']}`}>
-                <a onClick={this.handleShow(true, `email`)}>Edit</a>
-              </span> */}
-            </Col>
+          <Col xs={3} md={1} className={styles['pr-0']}>
+            {/* <span className={`${styles['float-r']} ${styles['p-0']} ${styles['ml-5']}`}>
+              <a onClick={this.handleShow(true, `email`)}>Edit</a>
+            </span> */}
           </Col>
-        </Row>
-        <Row className={`${styles['bb-dashed']} ${styles['pb-5']} ${styles['pt-5']}`}>
-          <Col xs={12} md={3} className={`${styles['pl-0']} ${styles['pr-0']} ${styles['m-5']}`}>
-            <span>Password</span>
+        </div>
+        <div className={`${styles['flex-center']} ${styles['bb-dashed']} ${styles['pt-10']} ${styles['pb-10']}`}>
+          <Col xs={12} md={3} className={`${styles['pl-0']} ${styles['pr-0']}`}>
+            <span>{CONTACT_INFO_MODAL.PASSWORD}</span>
           </Col>
-          <Col xs={12} md={8} className={`${styles['p-0']} ${styles['m-5']}`}>
-            <Col xs={6} md={9}>
-              <span> {lastUpdated}</span>
-            </Col>
-            <Col xs={6} md={3}>
-              <span className={`${styles['float-r']} ${styles['p-0']} ${styles['ml-5']}`}>
-                <a onClick={this.handleShow(true, `password`)}>Edit</a>
-              </span>
-            </Col>
+          <Col xs={6} md={8}>
+            <span> {lastUpdated}</span>
           </Col>
-        </Row>
-        <Row className={`${styles['bb-dashed']} ${styles['pb-5']} ${styles['pt-5']}`}>
-          <Col xs={12} md={3} className={`${styles['pl-0']} ${styles['pr-0']} ${styles['m-5']}`}>
-            <span>Phone Number</span>
+          <Col xs={6} md={1} className={styles['pr-0']}>
+            <span onClick={this.handleShow(true, `password`)} className={`${styles['float-r']} ${styles['flex']} ${styles['p-0']} ${styles['ml-5']}`}>
+              <SVGCompoent clsName={`${styles['edit-icon']}`} src="icons/common-icon/edit-icon" />
+            </span>
           </Col>
-          <Col xs={12} md={8} className={`${styles['p-0']} ${styles['m-5']}`}>
-            <Col xs={6} md={9}>
-              <span>{phoneNum}</span>
-            </Col>
-            <Col xs={6} md={3}>
-              {/* <span className={`${styles['float-r']} ${styles['p-0']} ${styles['ml-5']}`}>
-                <a onClick={this.handleShow(true, `phone`)}>Edit</a>
-              </span> */}
-            </Col>
+        </div>
+        <div className={`${styles['flex-center']} ${styles['pt-10']} ${styles['pb-10']}`}>
+          <Col xs={12} md={3} className={`${styles['pl-0']} ${styles['pr-0']}`}>
+            <span>{CONTACT_INFO_MODAL.PHONE_NUMBER}</span>
           </Col>
-
-        </Row>
-
-        <Row>
-          <Col xs={12} md={12}><a>Deactivate account</a></Col>
-        </Row>
+          <Col xs={6} md={8}>
+            <span>{phoneNum}</span>
+          </Col>
+          <Col xs={6} md={1} className={styles['pr-0']}>
+            {/* <span className={`${styles['float-r']} ${styles['p-0']} ${styles['ml-5']}`}>
+              <a onClick={this.handleShow(true, `phone`)}>Edit</a>
+            </span> */}
+          </Col>
+        </div>
         <div className={show ? `${styles['modalContainer']} ${styles['showDiv']}` : `${styles['modalContainer']} ${styles['hideDiv']}`}>
           <div className={`${styles['disabled']}`}>
           </div>

@@ -13,6 +13,8 @@ import { reducer as personalDetailsReducer } from './cam/personalDetails';
 import { reducer as wishlistReducer } from './cam/wishlist';
 import { reducer as vaultReducer } from './cam/userVault';
 import { reducer as messagesReducer } from './cam/messages';
+import { reducer as reviewRatingReducer } from './ratingReviews';
+
 
 export default combineReducers({
   searchReducer,
@@ -28,5 +30,6 @@ export default combineReducers({
   personalDetailsReducer,
   wishlistReducer,
   vaultReducer,
-  messagesReducer
+  messagesReducer,
+  reviewRatingReducer,
 });

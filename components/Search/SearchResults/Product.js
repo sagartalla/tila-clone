@@ -14,14 +14,15 @@ const Product = ({
   displayName,
   variants,
   productId,
+  catalogId,
+  itemtype,
   priceRange,
 }) => {
   const style = {
     backgroundImage: `url(${constants.mediaDomain}/${media[0]})`
   };
   return (
-
-    <Link route={`/product?productId=${productId}`}>
+    <Link route={`/product?productId=${productId}&catalogId=${catalogId}&itemType=${itemtype}`}>
       <Col md={3} xs={12} className={`${styles['pr-0']} ${styles['pb-25']} ${styles['product-items']}`}>
         <div className={`${styles['img-cont']} ${styles['p-20']}`}>
           <div style={style} className={styles['image-div']} />
@@ -36,21 +37,6 @@ const Product = ({
           </div>
         </div>
       </Col>
-
-      {/*<div className={styles['product-item']}>
-        <div className={styles['img-cont']}>
-          <div style={style} className={styles['image-div']}/>
-        </div>
-        <div className={styles['desc-cont']}>
-          <div className={styles['prdt-name']}>{displayName}</div>
-          <div> Price:  { priceRange } </div>
-          <div className={styles['variant-info']}>
-            {
-              _.map(variants, (variantValues, key) => <div key={key}>{`${key} : ${variantValues.join(', ')}`}</div>)
-            }
-          </div>
-        </div>
-          </div>*/}
     </Link>
   );
 };
