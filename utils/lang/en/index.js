@@ -96,4 +96,43 @@ export const EN_KEYWORDS = {
     'CANCEL': 'CANCEL',
     'ADD_NEW_CARD_HEADER': 'Credit - Debit - ATM Card'
   },
+  CONTACT_INFO_MODAL: {
+    'HEADING': 'Contact Information',
+    'EMAIL': 'Email',
+    'PASSWORD': 'Password',
+    'EDIT': 'Edit',
+    'PHONE_NUMBER': 'Phone Number',
+    'DEACTIVATE_ACCOUNT': 'Deactivate account'
+  },
+  EDIT_PASSWORD_MODAL: {
+    'PASSWORD_SUCCESS_MESSAGE': 'Your password is changed successfully!!',
+    'MATCH_ERROR_MESSAGE': 'Passwords must match',
+    'EMPTY_ERROR_MESSAGE': 'Password cannot be empty',
+    'HEADING': 'Change Password',
+    'ENTER_PASSWORD_MESSAGE': 'Enter Old Password',
+    'ENTER_NEW_PASSWORD_MESSAGE': 'Enter New Password',
+    'RE_ENTER_PASSWORD_MESSAGE': 'Re-enter New Password',
+    'SUBMIT_BUTTON': 'Change Password'
+  },
+  PERSONAL_INFO_MODAL: {
+    'HEADING': 'Personel Information',
+    'EDIT': 'Edit',
+    'NAME': 'Name',
+    'DOB': 'Date Of Birth',
+    'GENDER': 'Gender'
+  },
+  NOTITICATION_INFO: {
+    'HEADING': 'New Notifications',
+    'DECRYPTION': 'Are you overloaded with notifications? Manage messages, emails and notifications the way you want',
+    'BUTTON_LABEL': 'EDIT NOTIFICATIONS'
+  },
+  LINK_TO_SOCIAL_MEDIA: {
+    'HEADING': 'Link to Social Media',
+    'SUB_TITTLE': 'Easy one clicklogin when using your Social Media Accounts',
+    'FACEBOOK': 'Facebook',
+    'GOOGLE': 'Google',
+    'TWITTER': 'Twitter',
+    'NOTE': 'Your facebook account has been linked with Tila.com '
+  },
 };
+
