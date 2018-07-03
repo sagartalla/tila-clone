@@ -36,7 +36,7 @@ const OrderDetails = ({ query, orderData }) => {
           <Col md={12}>
             <div className={`${styles['box']} ${styles['p-20']} ${styles['mt-20']}`}>
               {
-                orderData.orderItems.map((item) => <OrderItem key={item.id} orderItem={item} orderId={orderData.orderId} />)
+                orderData.orderItems.map((item) => <OrderItem key={item.id} orderItem={item} orderId={orderData.orderId} showWidget={true} />)
               }
             </div>
           </Col>
