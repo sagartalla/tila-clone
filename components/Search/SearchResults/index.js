@@ -9,7 +9,7 @@ import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Search/search');
 
 class SearchReuslts extends Component {
-  
+
   constructor(props) {
     super(props);
     this.loadMore = this.loadMore.bind(this);

@@ -11,7 +11,7 @@ import UpdatePersonalInfoModal from './UpdatePersonalInfoModal';
 import Btn from '../../../common/Button';
 
 import { mergeCss } from '../../../../utils/cssUtil';
-const styles = mergeCss('components/Cam/cam');
+const styles = mergeCss('components/Cam/PersonelDetails/profile');
 
 class UpdateTimelineComponent extends React.Component {
 

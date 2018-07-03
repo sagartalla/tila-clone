@@ -26,6 +26,17 @@ export const AR_KEYWORDS = {
     'VOUCHER': 'Voucher',
     'REWARD_POINTS': 'Reward Points',
     'PAY_ONLINE': 'Pay Online',
+    'EMAIL_OR_USERNAME': 'Email / Username*',
+    'PASSWORD': 'Password',
+    'SIGN_IN': 'Sign in',
+    'REGISTER': 'Register',
+    'SIGN_IN_SIGN_UP_TO_CONTINUE': 'Sign in or sign up to continue',
+    'REGISTER_WITH_US': 'Register with us',
+    'SIGN_IN_WITH_FACEBOOK': 'Sign in with Facebook',
+    'SIGN_IN_WITH_GOOGLE': 'Sign in with Google',
+    'OR': 'OR',
+    'PLEASE_WAIT': 'Please wait',
+    'CONTINUE': 'Continue',
   },
   DELIVERY_ADDR_PAGE: {
     'DELIVERY_ADDR': 'Delivery Address',
@@ -52,6 +63,20 @@ export const AR_KEYWORDS = {
     'WISHLIST_HEADER': 'items in wishlist',
     'ADD_TO_CART_BTN': 'ADD TO CART',
   },
+  PDP: {
+    'LOADING_REVIEWS': 'Loading Reviews...',
+    'REVIEW_ALL_TAB': 'All Reviews',
+    'REVIEW_EXPERT_TAB': 'Expert Reviews',
+    'REVIEW_MOST_HELPFUL_TAB': 'Most Helpful',
+    'REVIEW_MOST_RECENT_TAB': 'Most Recent',
+    'STAR': 'star',
+    'CERTIFIED_BUYER': 'Certified Buyer',
+    'LIKE': 'like',
+    'DISLIKE': 'dislike',
+    'ALL_STARTS': 'All Starts',
+    'FILTER_BY': 'Filter By',
+    'NO_REVIEWS': 'No Reviews',
+  },
   VAULT_PAGE: {
     'MANAGE_VAULT_HDR': 'Manage Cards, Vouchers and More',
     'SUB_TAG': 'Select a default card or add new card.',
@@ -66,9 +91,51 @@ export const AR_KEYWORDS = {
     'ADD_NEW_CARD': 'Add New Credit / Debit Card',
     'ADD_NEW_SUB_TXT': 'Add a new debit or credit card to enable express checkout.',
     'ADD_NEW_BTN': 'ADD NEW',
-    'SAVE_CARD_MSG': 'Save this card for faster payments. CVV will not be stored.',
+    'SAVE_CARD_MSG': 'Save this card for faster payments.',
     'ADD_NEW_CARD': 'ADD NEW CARD',
     'CANCEL': 'CANCEL',
-    'ADD_NEW_CARD_HEADER': 'Credit - Debit - ATM Card'
+    'ADD_NEW_CARD_HEADER': 'Credit - Debit - ATM Card',
+    'CARD_ERROR': 'Not valid card',
+    'NAME_ERROR': 'Not valid name',
+    'EXP_MN_ERROR': 'Invalid month',
+    'EXP_YR_ERROR': 'Invalid year',
+  },
+  CONTACT_INFO_MODAL: {
+    'HEADING': 'Contact Information',
+    'EMAIL': 'Email',
+    'PASSWORD': 'Password',
+    'EDIT': 'Edit',
+    'PHONE_NUMBER': 'Phone Number',
+    'DEACTIVATE_ACCOUNT': 'Deactivate account'
+  },
+  EDIT_PASSWORD_MODAL: {
+    'PASSWORD_SUCCESS_MESSAGE': 'Your password is changed successfully!!',
+    'MATCH_ERROR_MESSAGE': 'Passwords must match',
+    'EMPTY_ERROR_MESSAGE': 'Password cannot be empty',
+    'HEADING': 'Change Password',
+    'ENTER_PASSWORD_MESSAGE': 'Enter Old Password',
+    'ENTER_NEW_PASSWORD_MESSAGE': 'Enter New Password',
+    'RE_ENTER_PASSWORD_MESSAGE': 'Re-enter New Password',
+    'SUBMIT_BUTTON': 'Change Password'
+  },
+  PERSONAL_INFO_MODAL: {
+    'HEADING': 'Personel Information',
+    'EDIT': 'Edit',
+    'NAME': 'Name',
+    'DOB': 'Date Of Birth',
+    'GENDER': 'Gender'
+  },
+  NOTITICATION_INFO: {
+    'HEADING': 'New Notifications',
+    'DECRYPTION': 'Are you overloaded with notifications? Manage messages, emails and notifications the way you want',
+    'BUTTON_LABEL': 'EDIT NOTIFICATIONS'
+  },
+  LINK_TO_SOCIAL_MEDIA: {
+    'HEADING': 'Link to Social Media',
+    'SUB_TITTLE': 'Easy one clicklogin when using your Social Media Accounts',
+    'FACEBOOK': 'Facebook',
+    'GOOGLE': 'Google',
+    'TWITTER': 'Twitter',
+    'NOTE': 'Your facebook account has been linked with Tila.com '
   },
 };
