@@ -16,6 +16,7 @@ const CartBody = props => {
   const flag = data && items && items.length;
   const cnt = flag > 0 ? items.length : 0;
   const { CART_PAGE } = languageDefinations();
+  const wishlistImgPath = "https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/catalog/mobile/PMOBNTDOUQWWQOLDLP/GALLERY/MEDIA3STP9XJBH3D2W7EQD2TQKU/apple-iphone-6s-na-original-imaebymaz5exfapw.jpeg"
   return (
     <div className={styles['cart-container']}>
       {
@@ -49,72 +50,122 @@ const CartBody = props => {
                             <Col md={2}>
                               <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles['pb-15']}`}><img className={styles['img']} src={img} /></div>
                               {
-                               inventory > 0 ?
-                                <div className={`${styles['flex-center']} ${styles['justify-center']}`}>
-                                  {
-                                    quantity == 1 ?
-                                      <span className={`${styles['minus-disable']} ${styles['fs-20']} ${styles['flex-center']} ${styles['justify-center']}`}> - </span>
-                                      : <span data-id={item_id} onClick={decreaseItemCnt} className={`${styles['minus']} ${styles['fs-20']} ${styles['flex-center']} ${styles['justify-center']} ${styles['pointer']}`}> - </span>
-                                  }
-                                  <span className={`${styles['quantity-title']} ${styles['border-radius2']}`}>{quantity}</span>
-                                  {
-                                    max_limit == quantity ?
-                                      <span className={`${styles['minus-disable']} ${styles['fs-20']} ${styles['flex-center']} ${styles['justify-center']}`}> + </span>
-                                      : <span data-id={item_id} onClick={increaseItemCnt} className={`${styles['plus']} ${styles['flex-center']} ${styles['justify-center']} ${styles['default-shadow']} ${styles['fs-18']} ${styles['pointer']}`}>  + </span>
-                                  }
-                                </div>
-                              : '' 
-                             }
+                                inventory > 0 ?
+                                  <div className={`${styles['flex-center']} ${styles['justify-center']}`}>
+                                    {
+                                      quantity == 1 ?
+                                        <span className={`${styles['minus-disable']} ${styles['fs-20']} ${styles['flex-center']} ${styles['justify-center']}`}> - </span>
+                                        : <span data-id={item_id} onClick={decreaseItemCnt} className={`${styles['minus']} ${styles['fs-20']} ${styles['flex-center']} ${styles['justify-center']} ${styles['pointer']}`}> - </span>
+                                    }
+                                    <span className={`${styles['quantity-title']} ${styles['border-radius2']}`}>{quantity}</span>
+                                    {
+                                      max_limit == quantity ?
+                                        <span className={`${styles['minus-disable']} ${styles['fs-20']} ${styles['flex-center']} ${styles['justify-center']}`}> + </span>
+                                        : <span data-id={item_id} onClick={increaseItemCnt} className={`${styles['plus']} ${styles['flex-center']} ${styles['justify-center']} ${styles['default-shadow']} ${styles['fs-18']} ${styles['pointer']}`}>  + </span>
+                                    }
+                                  </div>
+                                  : ''
+                              }
                             </Col>
                             <Col md={10}>
                               <Row>
                                 <Col md={12}>
                                   <h5 className={`${styles['mt-0']} ${styles['mb-0']}`}>{brand_name}</h5>
                                 </Col>
-                                <Col md={9}>
+                                <Col md={10}>
                                   <h4 className={`${styles['fontW600']} ${styles['light-gry-clr']}`}>{name}</h4>
+                                  <div className={`${styles['warranty-part']} ${styles['p-10']} ${styles['light-gry-clr']}`}>
+                                    <p className={`${styles['fs-12']}`}><span>Warranty : </span><span className={`${styles['pl-10']} ${styles['pr-10']}`}>+18 Month Extended Manufacturer Warranty </span><a href="" className={`${styles['fontW600']}`}>View More</a></p>
+                                    <p className={`${styles['mb-0']} ${styles['fs-12']}`}><span>Shipping : </span><span className={`${styles['pl-10']} ${styles['pr-10']}`}>Fast Shipping  (5.00 AED) - <span className={`${styles['fs-12']} ${styles['base-font']}`}>Estimated Delivery by 28th Nov, 17</span> </span><a href="" className={`${styles['fontW600']}`}>View More</a></p>
+                                  </div>
+                                  <div className={`${styles['checkbox-material']} ${styles['mt-15']}`}>
+                                    <input id="send-gift" type="checkbox" />
+                                    <label for="send-gift"> Send this as a gift (5.00 AED) </label>
+                                  </div>
                                 </Col>
-                                <Col md={3}>
-                                  <h4 className={`${styles['fontW600']} ${styles['light-gry-clr']} ${styles['mt-15']} ${styles['t-c']}`}>{price + ' ' + cur}</h4>
+                                <Col md={2} className={`${styles['pl-0']}`}>
+                                  <h4 className={`${styles['fontW600']} ${styles['light-gry-clr']} ${styles['mt-15']} ${styles['t-rt']}`}>{price + ' ' + cur}</h4>
+                                  <p className={`${styles['t-rt']}`}>0.00 <span className={`${styles['fs-12']}`}>SAR</span></p>
+                                  <p className={`${styles['t-rt']}`}>0.00 <span className={`${styles['fs-12']}`}>SAR</span></p>
                                 </Col>
                               </Row>
                             </Col>
                           </Row>
                         </div>
                         <div className={`${styles['cart-box-btm']} ${styles['flex']} ${styles['p-14-22']}`}>
-                          <span className={styles['width16']}>
-                            {
-                              inventory <= 10 && inventory != 0 ?
-                                <span className={`${styles['fontW600']} ${styles['thick-red']} ${styles['pr-20']}`}>{CART_PAGE.ONLY + ' ' + inventory + ' ' + CART_PAGE.UNITS_LEFT} </span>
-                                : ''
-                            }
-                            {
-                              inventory == 0 ?
-                                <span className={`${styles['fontW600']} ${styles['thick-red']} ${styles['pr-20']}`}>{CART_PAGE.OUT_OF_STOCK} </span>
-                                : ''
-                            }
-                          </span>
-                          <span data-id={item_id} onClick={addToWishlist} className={`${styles['flex-center']} ${styles['move-to-wishlist']} ${styles['pr-20']} ${styles['pointer']}`}>
-                            <SVGCompoent clsName={`${styles['wish-list-icon']}`} src="icons/wish-list/wish-list-icon" />
-                            <span className={styles['pl-10']}>{CART_PAGE.MOVE_TO_WISHLIST}</span>
-                          </span>
-                          <span id={item_id} onClick={removeCartItem} className={`${styles['flex-center']} ${styles['cart-remove-icon']} ${styles['pl-20']} ${styles['pointer']}`}>
-                            <SVGCompoent clsName={`${styles['delete-icon']}`} src="icons/delete-icon/delete-icon" />
-                            <span className={styles['pl-10']}>{CART_PAGE.REMOVE}</span>
-                          </span>
+                          <Col md={9} className={styles['flex']}>
+                            <span className={styles['width21']}>
+                              {
+                                inventory <= 10 && inventory != 0 ?
+                                  <span className={`${styles['fontW600']} ${styles['thick-red']} ${styles['pr-20']}`}>{CART_PAGE.ONLY + ' ' + inventory + ' ' + CART_PAGE.UNITS_LEFT} </span>
+                                  : ''
+                              }
+                              {
+                                inventory == 0 ?
+                                  <span className={`${styles['fontW600']} ${styles['thick-red']} ${styles['pr-20']}`}>{CART_PAGE.OUT_OF_STOCK} </span>
+                                  : ''
+                              }
+                            </span>
+                            <span data-id={item_id} onClick={addToWishlist} className={`${styles['flex-center']} ${styles['move-to-wishlist']} ${styles['pr-20']} ${styles['pointer']}`}>
+                              <SVGCompoent clsName={`${styles['wish-list-icon']}`} src="icons/wish-list/wish-list-icon" />
+                              <span className={styles['pl-10']}>{CART_PAGE.MOVE_TO_WISHLIST}</span>
+                            </span>
+                            <span id={item_id} onClick={removeCartItem} className={`${styles['flex-center']} ${styles['cart-remove-icon']} ${styles['pl-20']} ${styles['pointer']}`}>
+                              <SVGCompoent clsName={`${styles['delete-icon']}`} src="icons/delete-icon/delete-icon" />
+                              <span className={styles['pl-10']}>{CART_PAGE.REMOVE}</span>
+                            </span>
+                          </Col>
+                          <Col md={3} className={`${styles['t-rt']} ${styles['pr-0']}`}>
+                            <span>Total : </span><span className={`${styles['fs-16']} ${styles['fontW600']}`}>{price + ' ' + cur}</span>
+                          </Col>
                         </div>
+
                       </div>
                     )
                   })
                 }
-              </div>
-            </Col>
-            <Col md={3} sm={12} xs={12}>
-              <div className={`${styles['box']} ${styles['p-20']}`}>
-                <div className={styles['t-c']}>
-                  <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles['fs-18']}`} onClick={checkoutBtnHandler}>{CART_PAGE.SECURE_CHECKOUT}</button>
+                <div className={`${styles['view-wishlist-main']} ${styles['box']} ${styles['p-20']} ${styles['flex-center']}`}>
+                  <Col md={4}>
+                    <span className={styles['fs-12']}>10 out of 8 Items on your wishlist are available now to purchase. <a> 3 items are on Offers</a></span>
+                  </Col>
+                  <Col md={6}>
+                    {
+                      [...Array(6).keys()].map(() => {
+                        return (
+                          <span className={`${styles['wishlist-img']} ${styles['mr-15']}`}><img src={wishlistImgPath} /></span>
+                        )
+                      })
+                    }
+                  </Col>
+                  <Col md={2} className={`${styles['pl-0']} ${styles['pr-0']} ${styles['flex']} ${styles['view-btn-list']}`}>
+                    <a className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']} ${styles['default-small']}`}>View Wishlist</a>
+                  </Col>
                 </div>
-                <div>
+              </div>
+
+            </Col>
+            <Col md={3} sm={12} xs={12} className={styles['pr-0']}>
+              <div className={`${styles['box']}`}>
+                <div className={`${styles['copon-code']} ${styles['pb-10']}`}>
+                  <h4 className={`${styles['fs-16']} ${styles['fontW600']} ${styles['m-0']} ${styles['p-10']} ${styles['flex']} ${styles['justify-center']} ${styles['white-color']}`}>
+                    <SVGCompoent clsName={`${styles['buy-coupon-code']}`} src="icons/common-icon/buy-coupon" />
+                    <span className={styles['pl-5']}>Buy & Earn 300 Reward Points</span>
+                  </h4>
+                  <span className={`${styles['flex-center']} ${styles['justify-center']} ${styles['p-10']} ${styles['m-20']} ${styles['apply-coupon']}`}>
+                    <SVGCompoent clsName={`${styles['coupon-code']}`} src="icons/common-icon/coupon-code" />
+                    <span className={`${styles['text-uppercase']} ${styles['pl-5']}`}>Apply Coupon Code</span>
+                  </span>
+                </div>
+                <div className={`${styles['p-10-20']}`}>
+                  <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles['fs-18']} ${styles['flex-center']} ${styles['justify-center']}`} onClick={checkoutBtnHandler}>
+                    <SVGCompoent clsName={`${styles['secure-checkout']}`} src="icons/common-icon/secure-checkout" />
+                    <span className={styles['pl-5']}>{CART_PAGE.SECURE_CHECKOUT}</span>
+                  </button>
+                </div>
+                <div className={`${styles['view-r-wishlist']} ${styles['p-10']} ${styles['border-radius4']} ${styles['border-radius4']}`}>
+                  <span className={`${styles['fs-12']}`}>Buy for 500 AED more and get 10% Off on your total purchase. <a className={styles['fs-14']}>View your wishlist</a></span>
+                </div>
+                <div className={styles['p-20']}>
                   <RightBar
                     data={data}
                   />
