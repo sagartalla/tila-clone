@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { selectors } from '../../../../store/cam/personalDetails';
 import { languageDefinations } from '../../../../utils/lang/';
 import UpdatePersonalInfoModal from './UpdatePersonalInfoModal';
-import SVGCompoent from '../../../common/SVGComponet';
+import SVGComponent from '../../../common/SVGComponet';
 import { mergeCss } from '../../../../utils/cssUtil';
 const styles = mergeCss('components/Cam/PersonelDetails/profile');
 
@@ -51,7 +51,7 @@ class PersonalInfo extends React.Component {
         <h4 className={`${styles['flx-space-bw']} ${styles['information-title']} ${styles['fontW600']} ${styles['mt-0']}`}>
           <span>{PERSONAL_INFO_MODAL.HEADING}</span> 
           <a className={`${styles['flex']}`} onClick={this.handleShow(true)}>
-            <SVGCompoent clsName={`${styles['edit-icon']}`} src="icons/common-icon/edit-icon" />
+            <SVGComponent clsName={`${styles['edit-icon']}`} src="icons/common-icon/edit-icon" />
           </a>
         </h4>
         <div className={`${styles['flex-center']} ${styles['bb-dashed']} ${styles['pt-10']} ${styles['pb-10']}`}>

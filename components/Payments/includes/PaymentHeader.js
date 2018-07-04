@@ -1,5 +1,5 @@
 import { Grid, Row, Col } from 'react-bootstrap';
-import SVGCompoent from '../../common/SVGComponet';
+import SVGComponent from '../../common/SVGComponet';
 import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Payments/payment');
 
@@ -9,7 +9,7 @@ const PaymentHeader = props => (
       <Row>
         <Col md={12} className={`${styles['pl-0']}`}>
           <div className={`${styles['flex-center']} ${styles['logos-part']}`}>
-            <SVGCompoent clsName={`${styles['default-logo']}`} src="icons/logos/logo" />
+            <SVGComponent clsName={`${styles['default-logo']}`} src="icons/logos/logo" />
           </div>
         </Col>
       </Row>

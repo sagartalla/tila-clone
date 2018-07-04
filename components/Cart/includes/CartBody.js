@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
 import RightBar from '../../common/CartAndPaymentRightBar';
 import Blocker from '../../common/Blocker';
-import SVGCompoent from '../../common/SVGComponet';
+import SVGComponent from '../../common/SVGComponet';
 // import styles from '../cart.styl';
 
 import { mergeCss } from '../../../utils/cssUtil';
@@ -107,11 +107,11 @@ const CartBody = props => {
                               }
                             </span>
                             <span data-id={item_id} onClick={addToWishlist} className={`${styles['flex-center']} ${styles['move-to-wishlist']} ${styles['pr-20']} ${styles['pointer']}`}>
-                              <SVGCompoent clsName={`${styles['wish-list-icon']}`} src="icons/wish-list/wish-list-icon" />
+                              <SVGComponent clsName={`${styles['wish-list-icon']}`} src="icons/wish-list/wish-list-icon" />
                               <span className={styles['pl-10']}>{CART_PAGE.MOVE_TO_WISHLIST}</span>
                             </span>
                             <span id={item_id} onClick={removeCartItem} className={`${styles['flex-center']} ${styles['cart-remove-icon']} ${styles['pl-20']} ${styles['pointer']}`}>
-                              <SVGCompoent clsName={`${styles['delete-icon']}`} src="icons/delete-icon/delete-icon" />
+                              <SVGComponent clsName={`${styles['delete-icon']}`} src="icons/delete-icon/delete-icon" />
                               <span className={styles['pl-10']}>{CART_PAGE.REMOVE}</span>
                             </span>
                           </Col>
@@ -148,17 +148,17 @@ const CartBody = props => {
               <div className={`${styles['box']}`}>
                 <div className={`${styles['copon-code']} ${styles['pb-10']}`}>
                   <h4 className={`${styles['fs-16']} ${styles['fontW600']} ${styles['m-0']} ${styles['p-10']} ${styles['flex']} ${styles['justify-center']} ${styles['white-color']}`}>
-                    <SVGCompoent clsName={`${styles['buy-coupon-code']}`} src="icons/common-icon/buy-coupon" />
+                    <SVGComponent clsName={`${styles['buy-coupon-code']}`} src="icons/common-icon/buy-coupon" />
                     <span className={styles['pl-5']}>Buy & Earn 300 Reward Points</span>
                   </h4>
                   <span className={`${styles['flex-center']} ${styles['justify-center']} ${styles['p-10']} ${styles['m-20']} ${styles['apply-coupon']}`}>
-                    <SVGCompoent clsName={`${styles['coupon-code']}`} src="icons/common-icon/coupon-code" />
+                    <SVGComponent clsName={`${styles['coupon-code']}`} src="icons/common-icon/coupon-code" />
                     <span className={`${styles['text-uppercase']} ${styles['pl-5']}`}>Apply Coupon Code</span>
                   </span>
                 </div>
                 <div className={`${styles['p-10-20']}`}>
                   <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles['fs-18']} ${styles['flex-center']} ${styles['justify-center']}`} onClick={checkoutBtnHandler}>
-                    <SVGCompoent clsName={`${styles['secure-checkout']}`} src="icons/common-icon/secure-checkout" />
+                    <SVGComponent clsName={`${styles['secure-checkout']}`} src="icons/common-icon/secure-checkout" />
                     <span className={styles['pl-5']}>{CART_PAGE.SECURE_CHECKOUT}</span>
                   </button>
                 </div>

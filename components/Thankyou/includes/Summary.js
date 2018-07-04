@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { Grid, Row, Col } from 'react-bootstrap';
-import SVGCompoent from '../../common/SVGComponet';
+import SVGComponent from '../../common/SVGComponet';
 import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Thankyou/thankyou');
 
@@ -21,7 +21,7 @@ const PaymentStatus = props => {
                   <h5 className={`${styles['mt-0']} ${styles['fs-16']} ${styles['light-gry-clr']} ${styles['fontW600']} ${styles['mb-20']}`}>ADDRESS DETAILS</h5>
                   <h5 className={`${styles['mt-0']} ${styles['flex']}`}>
                     <a className={`${styles['pr-10']} ${styles['thick-blue']}`}>Pin Address</a>
-                    <SVGCompoent clsName={`${styles['pin-map-icon']}`} src="icons/small-map-icon/small-map" />
+                    <SVGComponent clsName={`${styles['pin-map-icon']}`} src="icons/small-map-icon/small-map" />
                   </h5>
                 </div>
                 <div>{orderAddress}</div>
@@ -48,11 +48,11 @@ const PaymentStatus = props => {
                 <h5 className={`${styles['mt-0']} ${styles['fs-16']} ${styles['light-gry-clr']} ${styles['fontW600']} ${styles['mb-20']}`}>PAYMENT METHOD</h5>
                 <div>
                   <p className={`${styles['flex']} ${styles['fs-12']}`}>
-                    <SVGCompoent clsName={`${styles['gift-card-icon']}`} src="icons/small-giftcard/small-gift" />
+                    <SVGComponent clsName={`${styles['gift-card-icon']}`} src="icons/small-giftcard/small-gift" />
                     <span className={styles['ml-10']}>Gift Card</span>
                   </p>
                     <p className={`${styles['flex-center']} ${styles['fs-12']}`}>
-                      <SVGCompoent clsName={`${styles['visa-card-icon']}`} src="icons/visa-icon/visa-icon" />
+                      <SVGComponent clsName={`${styles['visa-card-icon']}`} src="icons/visa-icon/visa-icon" />
                       <span className={`${styles['ml-10']} ${styles['border-radius2']} ${styles['p-5']} ${styles['card']}`}>4357</span></p>
                 </div>
 
@@ -78,7 +78,7 @@ const PaymentStatus = props => {
             </Col>
             <Col md={4} xs={6} sm={6}>
               <span className={`${styles['flex-center']}`}>
-                <SVGCompoent clsName={`${styles['share-icon']}`} src="icons/share-icon/share-icon" />
+                <SVGComponent clsName={`${styles['share-icon']}`} src="icons/share-icon/share-icon" />
                 <span className={`${styles['fontW600']} ${styles['pl-10']}`}>Share with friends</span>
               </span>
             </Col>

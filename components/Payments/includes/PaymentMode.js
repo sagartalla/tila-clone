@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Grid, Row, Col } from 'react-bootstrap';
 import ShippingAddress from '../../Cam/ShippingAddress';
-import SVGCompoent from '../../common/SVGComponet';
+import SVGComponent from '../../common/SVGComponet';
 import Voucher from './paymentpages/Voucher';
 import RewardPoints from './paymentpages/RewardPoints';
 import PayOnline from './paymentpages/PayOnline';
@@ -36,7 +36,7 @@ const PaymentMode = props => {
 
   return (
     <div className={`${styles['pb-15']} ${styles['pt-15']} ${styles['pl-35']} ${styles['pr-35']} ${styles['box']} ${styles['mb-20']} ${styles['relative']}`}>
-      <SVGCompoent clsName={`${styles['payment-icon']} ${props.configJson.progress ? 'payment-active' : ''}`} src="icons/payment-icon/payment-icon" />
+      <SVGComponent clsName={`${styles['payment-icon']} ${props.configJson.progress ? 'payment-active' : ''}`} src="icons/payment-icon/payment-icon" />
       <Row className={`${props.configJson.basic ? '' : 'hide'}`}>
         <Col md={12} sm={12} xs={12}>
           <h4 className={styles['m-0']}>Make Payment</h4>

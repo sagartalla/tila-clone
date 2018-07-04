@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { Grid, Row, Col } from 'react-bootstrap';
-import SVGCompoent from '../../common/SVGComponet';
+import SVGComponent from '../../common/SVGComponet';
 import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Thankyou/thankyou');
 
@@ -18,7 +18,7 @@ const PaymentStatus = props => {
         {/* TODO SF-44: Common layout needed for non header pages */}
         <Col md={2} xs={2} sm={2}>
           <div className={styles['pb-25']}>
-            <SVGCompoent clsName={`${styles['gift-card']}`} src="icons/gift-icon/gift-icon" />
+            <SVGComponent clsName={`${styles['gift-card']}`} src="icons/gift-icon/gift-icon" />
           </div>
         </Col>
           <Col md={8} xs={9} sm={9}>
