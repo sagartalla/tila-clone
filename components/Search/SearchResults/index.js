@@ -34,7 +34,6 @@ class SearchReuslts extends Component {
     const { results, pagiantionDetails } = this.props;
     return (
       <div>
-        <div className={styles['meta-info']}>{results.totalCount} no of items found</div>
         <InfiniteScroll
           initialLoad={false}
           pageStart={0}

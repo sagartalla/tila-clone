@@ -10,4 +10,8 @@ const getUserCreds = (store) => {
   return store.authReducer.data.userCreds
 }
 
-export { getErrorMessege, getLoggedInStatus, getUserCreds };
+const getCity = (store) => {
+  return store.authReducer.data.geoDetails.city;
+}
+
+export { getErrorMessege, getLoggedInStatus, getUserCreds, getCity };

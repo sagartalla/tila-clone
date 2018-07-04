@@ -28,7 +28,7 @@ class CategoriesAndFacets extends Component {
         } else {
           params[facetName].splice(params[facetName].indexOf(value), 1);
           if (!params[facetName].length) { delete params[facetName]; }
-        }  
+        }
       }
       this.props.onChangeFacets(params);
       this.submitQuery();
@@ -93,5 +93,3 @@ const mapUrlChangeHandlersToProps = (props) => {
 }
 
 export default addUrlProps({ mapUrlToProps, mapUrlChangeHandlersToProps })(connect(mapStateToProps, mapDispatchToProps)(CategoriesAndFacets));
-
-

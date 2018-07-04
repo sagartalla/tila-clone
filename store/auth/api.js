@@ -18,7 +18,7 @@ const userLogin = (params) => {
       localStorage.removeItem('auth');
       isLoggedIn = false;
     }
-    return { 
+    return {
         data: {
           isLoggedIn,
         }
@@ -35,8 +35,16 @@ const userLogout = () => {
 const getLoginInfo = () => {
   return {
     userCreds: JSON.parse(localStorage.getItem('userCreds') || '{}'),
-    isLoggedIn: !!localStorage.getItem('auth') 
+    isLoggedIn: !!localStorage.getItem('auth')
   };
-} 
+}
 
-export default { userLogin, userRegister, userLogout, getLoginInfo };
+const deriveCity = (params) => {
+  return axios
+    .get(`https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyDrVNKZshUspEprFsNnQD-sos6tvgFdijg&latlng=${params.latitude},${params.longitude}&sensor=true`)
+    .then(({results}) => {
+      return results.length ? null : _.filter(results[0].address_components, (ac) => { return ac.type.indexOf('administrative_area_level_2') !== -1 })
+    })
+}
+
+export default { userLogin, userRegister, userLogout, getLoginInfo, deriveCity };

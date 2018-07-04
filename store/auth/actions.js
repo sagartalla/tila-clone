@@ -6,6 +6,7 @@ const actions = {
   USER_LOGOUT: 'USER_LOGOUT',
   USER_LOGIN_INFO: 'USER_LOGIN_INFO',
   SET_COUNTRY: 'SET_COUNTRY',
+  DERIVE_CITY: 'DERIVE_CITY',
 };
 
 const actionCreators = {
@@ -51,6 +52,18 @@ const actionCreators = {
     return {
       type: actions.SET_COUNTRY,
       payload: country
+    }
+  },
+  deriveCity: (params) => {
+    return {
+      type: actions.DERIVE_CITY,
+      payload: api.deriveCity(params),
+    }
+  },
+  setCity: (params) => {
+    return {
+      type: actions.SET_CITY,
+      payload: params.city
     }
   }
 };

@@ -4,6 +4,7 @@ import NoSSR from 'react-no-ssr';
 
 import HeaderBar from '../HeaderBar/index';
 import CategoriesAndFacets from './CategoriesAndFacets';
+import SearchDetailsBar from './SearchDetailsBar';
 import SearchResults from './SearchResults';
 
 import { mergeCss } from '../../utils/cssUtil';
@@ -19,6 +20,7 @@ const Search = () => (
         </NoSSR>
       </div>
       <div className={styles['search-results']}>
+        <SearchDetailsBar />
         <SearchResults />
       </div>
     </Grid>

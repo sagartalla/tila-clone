@@ -8,6 +8,7 @@ const initialState = {
   data: {
     isLoggedIn: false,
     userCreds: {},
+    geoDetails: {},
   },
   error: '',
 };
@@ -20,18 +21,18 @@ const productReducer = typeToReducer({
       }, { ui: { loading: true } });
     },
     FULFILLED: (state, action) => {
-      return Object.assign({}, state, { 
+      return Object.assign({}, state, {
         data: {
           ...state.data,
           ...action.payload.data
-        }, 
+        },
         ui: { loading: false }
       });
     },
     REJECTED: (state, action) => {
       return Object.assign({}, state, {
-        error: action.payload.response.data.message, 
-        data: { 
+        error: action.payload.response.data.message,
+        data: {
           ...state.data,
           isLoggedIn: false
         },
@@ -46,12 +47,12 @@ const productReducer = typeToReducer({
       }, { ui: { loading: true } });
     },
     FULFILLED: (state, action) => {
-      return Object.assign({}, state, { 
+      return Object.assign({}, state, {
         data: {
           ...state.data,
           registrationDetails: action.payload.data
-        }, 
-        ui: { loading: false } 
+        },
+        ui: { loading: false }
       });
     },
     REJECTED: (state, action) => {
@@ -88,8 +89,30 @@ const productReducer = typeToReducer({
         country: action.payload
       }
     }
-  }
-  
+  },
+  [actions.SET_COUNTRY]: (state, action) => {
+    return {
+      ...state,
+      data: {
+        ...state.data,
+        geoDetails: {
+          ...state.data.geoDetails,
+          city: action.payload,
+        }
+      }
+    }
+  },
+  [actions.DERIVE_CITY]: (state, actions) => {
+    return {
+      ...state,
+      data: {
+        ...state.data,
+        geoDetails: {
+          city: action.payload
+        }
+      }
+    }
+  },
 }, initialState);
 
 export default productReducer;
