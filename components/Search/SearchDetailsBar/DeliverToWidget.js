@@ -3,10 +3,19 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+import { actionCreators, selectors } from '../../../store/auth';
+
 class DeliverToWidget extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {}
+    this.deriveCity = this.deriveCity.bind(this);
+    this.onChangeCity = this.onChangeCity.bind(this);
+  }
+
   componentDidMount() {
     if(navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(deriveCity);
+      navigator.geolocation.getCurrentPosition(this.deriveCity);
     }
   }
 
