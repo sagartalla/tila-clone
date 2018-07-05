@@ -34,22 +34,24 @@ class Login extends Component {
         password: password,
         mobile_no: phone,
         mobile_country_code: country,
+        rememberMe: true,
       });
     } else {
       this.props.userLogin({
         username: email,
-        password: password
+        password: password,
+        rememberMe: true,
       });
     }
   }
-  
+
   componentDidMount() {
     this.props.getLoginInfo();
   }
 
   componentWillReceiveProps(nextProps) {
     let { userCreds } = nextProps;
-    userCreds = userCreds || this.props.userCreds 
+    userCreds = userCreds || this.props.userCreds
     this.setState({
       error: nextProps.error,
       email: userCreds.username,
@@ -158,7 +160,7 @@ class Login extends Component {
                 <span>{JSON.stringify(this.state.error)}</span>
               </div>
               :
-              null 
+              null
             }
           </form>
           <div className={styles['text-center']}>
@@ -191,7 +193,7 @@ const mapStateToProps = (store) => {
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
-    { 
+    {
       userLogin: actionCreators.userLogin,
       userRegister: actionCreators.userRegister,
       getLoginInfo: actionCreators.getLoginInfo,

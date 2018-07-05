@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import withRedux from 'next-redux-wrapper';
 import { configureUrlQuery } from 'react-url-query';
-import createHistory from 'history/createBrowserHistory';
 
-import Base from './base';
+import Base, { baseActions } from './base';
 import makeStore from '../store';
 import { actionCreators, selectors } from '../store/product';
 import { actionCreators as reviewRatingActionCreators } from '../store/ratingReviews';
@@ -78,6 +77,7 @@ const mapStatetoProps = (state) => {
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
+      ...baseActions,
       getProduct: actionCreators.getProduct,
       getPreview: actionCreators.getPreview,
     },

@@ -24,30 +24,29 @@ class Offers extends Component {
   }
 
   render() {
-    const { price, listingAvailable, listingId } = this.props.offerInfo;
+    const { price, listingAvailable, listingId, stockError, availabilityError } = this.props.offerInfo;
     const { isLoading, error, isAddedToCart } = this.props;
     return (
       listingAvailable
-      ? 
+      ?
       <div>
         <div className={`${styles['pb-20']} ${styles['pt-20']}`}>
           <Row>
             <Col md={6}>
-                <Button className={`${styles[`${isAddedToCart ? 'added-to-cart' : ''}`]} ${styles['blue-btn']}`} onClick={this.addToCart} disabled={isLoading || isAddedToCart}>
-                  {
-                    isAddedToCart
-                    ?
-                    'Added to Cart'
-                    :
-                    `BUY FOR ${price}`
-                  }
-                </Button>
+              <Button className={`${styles[`${isAddedToCart ? 'added-to-cart' : ''}`]} ${styles['blue-btn']}`} onClick={this.addToCart} disabled={isLoading || isAddedToCart}>
                 {
+                  isAddedToCart
+                  ?
+                  'Added to Cart'
+                  :
+                  `BUY FOR ${price}`
+                }
+              </Button>
+              {
                 isAddedToCart
                 ?
                 <Button>
-                  {/* <a href='/cart'>Go To Cart</a> */}
-                    <Link route="/cart">Go To Cart</Link>
+                  <Link route="/cart">Go To Cart</Link>
                 </Button>
                 :
                 null
@@ -96,7 +95,19 @@ class Offers extends Component {
         </Row>
       </div>
       :
-      <h2>Listing not available</h2>
+      <h2>
+        {
+          availabilityError
+          ?
+            'Product not available in your country'
+          :
+            stockError
+            ?
+              'Product out of stock'
+            :
+              null
+        }
+      </h2>
     );
   }
 }
