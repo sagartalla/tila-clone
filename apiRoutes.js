@@ -21,7 +21,6 @@ apiRoutes
         }
         req.universalCookies.set('auth', data, { path: '/' });
         req.universalCookies.set('userCreds', { username: params.username }, { path: '/' });
-        userCreds
         isLoggedIn = true;
       } else {
         req.universalCookies.remove('auth');
