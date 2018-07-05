@@ -79,9 +79,11 @@ apiRoutes
       .get(`${GOOGLE_MAPS_URL}${api}?key=AIzaSyDrVNKZshUspEprFsNnQD-sos6tvgFdijg&latlng=${latitude},${longitude}&sensor=true`)
       .then(({data}) => {
         const { results } = data;
-        res.json(results.length ? _.filter(results[0].address_components, (ac) => {
+        const city = results.length ? _.filter(results[0].address_components, (ac) => {
           return ac.types.indexOf('administrative_area_level_2') !== -1
-        })[0].long_name : null);
+        })[0].long_name : null;
+        req.universalCookies.set('city', city, { path: '/' });
+        res.json(city);
       });
   });
 
