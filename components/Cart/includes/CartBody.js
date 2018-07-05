@@ -32,7 +32,7 @@ const CartBody = props => {
       </Row>
       {
         flag > 0 ?
-          <Row>
+          <Row className={styles['mr-0']}>
             <Col md={9} sm={12} xs={12} className={styles['pr-5']}>
               <div>
                 {
