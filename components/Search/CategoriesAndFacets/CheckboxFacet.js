@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Checkbox } from 'react-bootstrap';
+import SVGCompoent from '../../common/SVGComponet';
 import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Search/search');
 
@@ -52,18 +53,25 @@ class CheckboxFacet extends Component {
     const { filter } = this.props;
     const { selectedItems } = this.state;
     return (
-      <li className={`${styles['category-list']} ${styles['pt-10']} ${styles['pb-10']}`}>
-        <div className={`${styles['category-list-title']} ${styles['black-color']} ${styles['fontW600']} ${styles['pl-10']}`}>{filter.name}</div>
-        <ul className={styles['category-sub-list']}>
+      <li className={`${styles['category-list']}`}>
+        <div className={`${styles['category-list-title']} ${styles['black-color']} ${styles['fontW600']} ${styles['p-10-20']} ${styles['flx-spacebw-alignc']}`}>
+          {filter.name}
+          <SVGCompoent clsName={`${styles['expand-icon']}`} src="icons/common-icon/down-arrow-circle" />
+        </div>
+        <ul className={`${styles['category-sub-list']}`}>
           {
             filter.children.slice(0, this.state.maxRows).map(childFitler => (
               <li key={childFitler.id} className={styles['category-sub-list-inn']}>
-                <Checkbox
+                {/* <Checkbox
                   onChange={this.onChangeItem({ name: childFitler.name, param: childFitler.param })}
                   checked={selectedItems.indexOf(childFitler.name) !== -1}
                 >
                   <span><span>{childFitler.name}</span><span>({childFitler.count})</span></span>
-                </Checkbox>
+                </Checkbox> */}
+                <div className={styles['checkbox-material']}>
+                  <input id={childFitler.name} type="checkbox" onChange={this.onChangeItem({ name: childFitler.name, param: childFitler.param })} checked={selectedItems.indexOf(childFitler.name) !== -1}/> 
+                  <label for={childFitler.name} className={styles['fs-12']}> {childFitler.name} <span>({childFitler.count})</span> </label>
+                </div>
               </li>
             ))
           }

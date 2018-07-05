@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import InfiniteScroll from 'react-infinite-scroller';
 import _ from 'lodash'
 import Product from "./Product";
+import SVGCompoent from '../../common/SVGComponet';
 import { actionCreators, selectors } from '../../../store/search';
 import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Search/search');

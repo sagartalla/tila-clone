@@ -14,7 +14,7 @@ const Search = () => (
   <div>
     <HeaderBar />
     <Grid>
-      <div className={styles['filter-panel']}>
+      <div className={`${styles['filter-panel']} ${styles['border-radius4']} ${styles['bg-white']}`}>
         <NoSSR>
           <CategoriesAndFacets />
         </NoSSR>

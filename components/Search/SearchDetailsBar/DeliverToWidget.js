@@ -4,6 +4,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { actionCreators, selectors } from '../../../store/auth';
+import SVGCompoent from '../../common/SVGComponet';
+
+import { mergeCss } from '../../../utils/cssUtil';
+const styles = mergeCss('components/Search/search');
 
 class DeliverToWidget extends Component {
   constructor(props) {
@@ -26,7 +30,7 @@ class DeliverToWidget extends Component {
   }
 
   onChangeCity(e) {
-    this.props.setCity(e.target.value);
+    this.props.setCity({city: e.target.value});
   }
 
   deriveCity(position) {
@@ -41,8 +45,11 @@ class DeliverToWidget extends Component {
   render() {
     const { city } = this.state;
     return (
-      <div>
-        <label> Deliver to: </label>
+      <div className={`${styles['flex-center']} ${styles['delovery-inn']}`}>
+        <span className={`${styles['flex-center']} ${styles['delivery-part']}`}>
+          <SVGCompoent clsName={`${styles['map-icon']}`} src="icons/common-icon/black-map-location" />
+          <span className={`${styles['fontW600']} ${styles['pl-5']} ${styles['pr-10']}`}>Deliver to :</span>
+        </span>
         <input type="text" value={city} onChange={this.onChangeCity}/>
       </div>
     )

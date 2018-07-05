@@ -8,6 +8,8 @@ import { actionCreators, selectors } from '../../../store/search';
 import CheckboxFacet from './CheckboxFacet';
 import LinkFacet from './LinkFacet';
 import RangeFitler from './RangeFacet';
+import { mergeCss } from '../../../utils/cssUtil';
+const styles = mergeCss('components/Search/search');
 
 class CategoriesAndFacets extends Component {
   constructor(props) {
@@ -42,7 +44,7 @@ class CategoriesAndFacets extends Component {
 
   render() {
     const { filters, facets } = this.props;
-    return (<ul>
+    return (<ul className={`${styles['pl-0']} ${styles['mb-0']}`}>
       {
         filters.category.map((filter) => {
           return filter.children.length ? <LinkFacet filter={filter} key={filter.id} /> : null;

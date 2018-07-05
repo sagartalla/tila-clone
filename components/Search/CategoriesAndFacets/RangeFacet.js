@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import InputRange from 'react-input-range';
 import {FormControl} from 'react-bootstrap';
-
+import SVGCompoent from '../../common/SVGComponet';
 import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Search/search');
 
@@ -76,8 +76,11 @@ class RangeFitler extends Component {
     const { min, max } = this.state.static;
     return (
       <li>
-        <div className={`${styles['category-list-title']} ${styles['black-color']} ${styles['fontW600']} ${styles['pl-10']} ${styles['pb-10']}`}>{filter.name}</div>
-        <div className={`${styles['flx-spacebw-alignc']} ${styles['pl-10']}`}>
+        <div className={`${styles['category-list-title']} ${styles['black-color']} ${styles['fontW600']} ${styles['p-10-20']} ${styles['flx-spacebw-alignc']}`}>
+          {filter.name}
+          <SVGCompoent clsName={`${styles['expand-icon']}`} src="icons/common-icon/down-arrow-circle" />
+        </div>
+        <div className={`${styles['flx-spacebw-alignc']} ${styles['p-10-20']}`}>
           <select className={styles['price-select-list']} componentClass="select" placeholder="select" onChange={this.minChange} value={this.state.value.min}>
             <option value="select">select (minimum)</option>
             {filter.children[0].values.map((value) => <option value={value} key={value}>{value}</option>)}
@@ -88,7 +91,7 @@ class RangeFitler extends Component {
             {filter.children[0].values.map((value) => <option value={value} key={value}>{value}</option>)}
           </select>
         </div>
-        <div className={`${styles['range-fitler-wrap']} ${styles['pl-10']}`}>
+        <div className={`${styles['range-fitler-wrap']} ${styles['p-20']}`}>
           <InputRange
             // formatLabel={value => ''}
             maxValue={max}
