@@ -3,10 +3,10 @@ import { bindActionCreators } from 'redux';
 import withRedux from 'next-redux-wrapper';
 import { configureUrlQuery } from 'react-url-query';
 import createHistory from 'history/createBrowserHistory';
-import Base from './base';
+import Base, { baseActions } from './base';
 import makeStore from '../store';
 import { actionCreators, selectors } from '../store/search';
-import { actionCreators as megamenuActionCreators } from '../store/megamenu';
+import { actionCreators as authActionsCreators } from '../store/auth';
 import Layout from '../layout/main';
 import Search from '../components/Search';
 
@@ -56,7 +56,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
+      ...baseActions,
       getSearchResults: actionCreators.getSearchResults,
+      // setSessionID: authActionsCreators.setSessionID,
     },
     dispatch,
   );

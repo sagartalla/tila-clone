@@ -6,6 +6,7 @@ const actions = {
   USER_LOGOUT: 'USER_LOGOUT',
   USER_LOGIN_INFO: 'USER_LOGIN_INFO',
   SET_COUNTRY: 'SET_COUNTRY',
+  SET_SESSION_ID: 'SET_SESSION_ID',
 };
 
 const actionCreators = {
@@ -50,7 +51,13 @@ const actionCreators = {
   setCountry: (country) => {
     return {
       type: actions.SET_COUNTRY,
-      payload: country
+      payload: api.setCountry(country)
+    }
+  },
+  setSessionID: (sessionId) => {
+    return {
+      type: actions.SET_SESSION_ID,
+      payload: api.setSessionID(sessionId)
     }
   }
 };
