@@ -20,9 +20,9 @@ class DeliverToWidget extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.state = {
-      ...nextProps
-    }
+    this.setState({
+      city: nextProps.city
+    });
   }
 
   onChangeCity(e) {
@@ -30,8 +30,10 @@ class DeliverToWidget extends Component {
   }
 
   deriveCity(position) {
+    const { longitude, latitude } = position.coords;
     this.props.deriveCity({
-      ...position.coords,
+      longitude,
+      latitude,
       api: '/geocode/json',
     });
   }

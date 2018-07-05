@@ -22,7 +22,6 @@ apiRoutes
         }
         req.universalCookies.set('auth', data, { path: '/' });
         req.universalCookies.set('userCreds', { username: params.username }, { path: '/' });
-        userCreds
         isLoggedIn = true;
       } else {
         req.universalCookies.remove('auth');
@@ -36,11 +35,11 @@ apiRoutes
     });
   })
   .post('/refresh', (req, res) => {
-    return axios.post(`${constants.AUTH_API_URL}/api/v1/refresh`, {
+    const auth = req.universalCookies.get('auth');
+    return axios.post(`${AUTH_API_URL}/api/v1/refresh`, {
         'auth_version': 'V1',
         'refresh_token': auth.refresh_token
       }).then((res) => {
-        const auth = req.universalCookies.get('auth');
         auth.access_token = res.data.access_token
         req.universalCookies.set('auth', auth, { path: '/' });
         return res.json({});
@@ -76,11 +75,14 @@ apiRoutes
   })
   .get('/googleApi', (req, res) => {
     const {api, latitude, longitude} = req.query;
-    return axioss
-      .get(`${GOOGLE_MAPS_URL}/${api}?key=AIzaSyDrVNKZshUspEprFsNnQD-sos6tvgFdijg&latlng=${latitude},${longitude}&sensor=true`)
-      .then(({results}) => {
-        return results.length ? null : _.filter(results[0].address_components, (ac) => { return ac.type.indexOf('administrative_area_level_2') !== -1 })
-      })
+    return axios
+      .get(`${GOOGLE_MAPS_URL}${api}?key=AIzaSyDrVNKZshUspEprFsNnQD-sos6tvgFdijg&latlng=${latitude},${longitude}&sensor=true`)
+      .then(({data}) => {
+        const { results } = data;
+        res.json(results.length ? _.filter(results[0].address_components, (ac) => {
+          return ac.types.indexOf('administrative_area_level_2') !== -1
+        })[0].long_name : null);
+      });
   });
 
 

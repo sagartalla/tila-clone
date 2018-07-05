@@ -102,16 +102,29 @@ const productReducer = typeToReducer({
       }
     }
   },
-  [actions.DERIVE_CITY]: (state, actions) => {
-    return {
-      ...state,
-      data: {
-        ...state.data,
-        geoDetails: {
-          city: action.payload
+  [actions.DERIVE_CITY]: {
+    PENDING: state => {
+      return Object.assign({}, state, {
+        error: '',
+      }, { ui: { loading: true } });
+    },
+    FULFILLED: (state, action) => {
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          geoDetails: {
+            city: action.payload
+          }
         }
       }
-    }
+    },
+    REJECTED: (state, action) => {
+      return Object.assign({}, state, {
+        error: action.payload.response ? action.payload.response.data.message : action.payload.message,
+        ui: { loading: false }
+      });
+    },
   },
 }, initialState);
 

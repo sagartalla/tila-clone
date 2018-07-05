@@ -53,7 +53,7 @@ const setSessionID = (sessionId) => {
 }
 
 const deriveCity = (params) => {
-  return axios.get(`/api/googleApi?api=${params.api}&latitude=${params.latitude}&longitude=${params.longitude}`)
+  return axios.get(`/api/googleApi?api=${params.api}&latitude=${params.latitude}&longitude=${params.longitude}`).then(({data}) => data);
 }
 
 export default { userLogin, userRegister, userLogout, getLoginInfo, setCountry, setSessionID, deriveCity };
