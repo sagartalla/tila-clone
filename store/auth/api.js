@@ -53,11 +53,7 @@ const setSessionID = (sessionId) => {
 }
 
 const deriveCity = (params) => {
-  return axios
-    .get(`https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyDrVNKZshUspEprFsNnQD-sos6tvgFdijg&latlng=${params.latitude},${params.longitude}&sensor=true`)
-    .then(({results}) => {
-      return results.length ? null : _.filter(results[0].address_components, (ac) => { return ac.type.indexOf('administrative_area_level_2') !== -1 })
-    })
+  return axios.get(`/api/googleApi?api=${params.api}&latitude=${params.latitude}&longitude=${params.longitude}`)
 }
 
 export default { userLogin, userRegister, userLogout, getLoginInfo, setCountry, setSessionID, deriveCity };

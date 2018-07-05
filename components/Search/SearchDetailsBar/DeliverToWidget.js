@@ -30,7 +30,10 @@ class DeliverToWidget extends Component {
   }
 
   deriveCity(position) {
-    this.props.deriveCity(position.coords);
+    this.props.deriveCity({
+      ...position.coords,
+      api: '/geocode/json',
+    });
   }
 
   render() {

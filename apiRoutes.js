@@ -6,6 +6,7 @@ const _ = require('lodash');
 
 //TODO SF-101 //remove constants from here
 const AUTH_API_URL = 'http://gateway-dev.fptechscience.com/auth-service';
+const GOOGLE_MAPS_URL = 'https://maps.googleapis.com/maps/api';
 
 apiRoutes
   .post('/login', (req, res) => {
@@ -72,6 +73,14 @@ apiRoutes
       req.universalCookies.remove('key');
     });
     res.json({});
+  })
+  .get('/googleApi', (req, res) => {
+    const {api, latitude, longitude} = req.query;
+    return axioss
+      .get(`${GOOGLE_MAPS_URL}/${api}?key=AIzaSyDrVNKZshUspEprFsNnQD-sos6tvgFdijg&latlng=${latitude},${longitude}&sensor=true`)
+      .then(({results}) => {
+        return results.length ? null : _.filter(results[0].address_components, (ac) => { return ac.type.indexOf('administrative_area_level_2') !== -1 })
+      })
   });
 
 
