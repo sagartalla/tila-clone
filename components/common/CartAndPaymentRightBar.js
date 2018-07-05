@@ -44,11 +44,16 @@ const CartAndPaymentRightBar = props => {
           {/* <li>Price ({item_cnt} item{item_cnt > 1 ? 's' : ''})<span> {total_price + ' ' + currency}</span></li> */}
           <li>{CART_PAGE.PRICE} ({item_cnt + ' ' + CART_PAGE.ITEMS})<span> {total_price + ' ' + currency}</span></li>
           <li>{CART_PAGE.DELIVERY_CHARGES} <span>{total_shipping} {currency}</span></li>
-          <li>{CART_PAGE.DISCOUNT} <span>{total_discount} {currency}</span></li>
+          {/* <li>{CART_PAGE.DISCOUNT} <span>{total_discount} {currency}</span></li> */}
           {
             tax != 0 ? <li>{CART_PAGE.TAXES} <span>{currency}</span></li> : null
           }
-          <li className={`${styles['mt-20']} ${styles['fs-16']} ${styles['light-gry-clr']}`}><b>{CART_PAGE.TOTAL_AMOUNT} <span>{total_offer_price + ' ' + currency}</span></b></li>
+          <li className={`${styles['mt-20']} ${styles['fs-16']} ${styles['light-gry-clr']}`}><b>{CART_PAGE.TOTAL_AMOUNT} <span>{total_offer_price + ' ' + currency}</span></b>
+            {
+              total_discount > 0 ? <span className={`${styles['fs-12']} ${styles['thick-red']}`}>You saved {total_discount} {currency}</span> : null
+            }
+          </li>
+
         </ul>
       </div>
     </div>
