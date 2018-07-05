@@ -1,42 +1,55 @@
 import _ from 'lodash';
 import axios from 'axios';
 import constants from '../helper/constants';
+import Cookies from 'universal-cookie';
+import moment from 'moment';
+
+const cookies = new Cookies();
 
 const userLogin = (params) => {
-  return axios.post(`${constants.AUTH_API_URL}/api/v1/login/basic`, Object.assign({}, params, {
+  return axios.post(`/api/login`, Object.assign({}, params, {
     type: 'CUSTOMER',
     authVersion: 'V1'
   })).then(({data, status}) => {
-    let isLoggedIn = false;
     // cart merge
-    axios.put(`${constants.CART_API_URL}/api/v1/cart/merge`);
     if(status === 200) {
-      localStorage.setItem('userCreds', JSON.stringify(params));
-      localStorage.setItem('auth', JSON.stringify(data));
-      isLoggedIn = true;
-    } else {
-      localStorage.removeItem('auth');
-      isLoggedIn = false;
+      axios.put(`${constants.CART_API_URL}/api/v1/cart/merge`);
     }
-    return {
-        data: {
-          isLoggedIn,
-        }
-      }
+    return data;
   });
 }
 
 const userRegister = (params) => axios.post(`${constants.CMS_API_URL}/api/v1/user/register`, params);
 
 const userLogout = () => {
-  localStorage.removeItem('auth');
+  axios.post('/api/logout');
 }
 
 const getLoginInfo = () => {
+  const userCreds = cookies.get('userCreds');
   return {
-    userCreds: JSON.parse(localStorage.getItem('userCreds') || '{}'),
-    isLoggedIn: !!localStorage.getItem('auth')
+    userCreds: userCreds ? userCreds.username : '',
+    isLoggedIn: !!cookies.get('auth'),
   };
+}
+
+const setCountry = (country) => {
+  return axios.post('/api/setCookie', {
+    data: {
+      country,
+    }
+  }).then(() => country);
+}
+
+const setSessionID = (sessionId) => {
+  return axios.post('/api/setCookie', {
+    data: {
+      sessionId,
+    },
+    options: {
+      expires: moment().add(3, 'months').format()
+    },
+  }).then(() => sessionId);
 }
 
 const deriveCity = (params) => {
@@ -47,4 +60,4 @@ const deriveCity = (params) => {
     })
 }
 
-export default { userLogin, userRegister, userLogout, getLoginInfo, deriveCity };
+export default { userLogin, userRegister, userLogout, getLoginInfo, setCountry, setSessionID, deriveCity };

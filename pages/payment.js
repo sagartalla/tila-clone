@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import NoSSR from 'react-no-ssr';
 import withRedux from 'next-redux-wrapper';
+import { bindActionCreators } from 'redux';
+
 import makeStore from '../store';
 
 import Layout from '../layout/main';
 import Payments from '../components/Payments';
-import Base from './base';
+import Base, { baseActions } from './base';
 
 class PaymentPage extends Base {
   pageName = 'PAYMENT';
@@ -18,6 +20,14 @@ class PaymentPage extends Base {
       </NoSSR>
     );
   }
-} 
+}
 
-export default withRedux(makeStore, null, null)(PaymentPage);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      ...baseActions,
+    },
+    dispatch,
+  )
+
+export default withRedux(makeStore, null, mapDispatchToProps)(PaymentPage);

@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import _ from 'lodash';
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 
 import { actionCreators } from '../../store/auth'
 
@@ -17,13 +20,12 @@ class Country extends Component {
 	}
 
 	componentDidMount() {
-		const country = localStorage.getItem('country') || this.state.country;
+		const country = cookies.get('country') || this.state.country;
 		this.setState({ country });
 		this.props.setCountry(country);
 	}
 
 	storeCountry(country) {
-		localStorage.setItem('country', country);
 		this.props.setCountry(country);
 		location.reload();
 	}

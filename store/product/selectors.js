@@ -3,7 +3,20 @@ import _ from 'lodash';
 const getProduct = (store, variantId) => {
   const { product_details, variant_preferred_listings } = store.productReducer.data[0];
   const computedVariantId = variantId || Object.keys(variant_preferred_listings || {})[0]
-  const priceInfo = computedVariantId ? variant_preferred_listings[computedVariantId][0] : null;
+  const listings = computedVariantId ? variant_preferred_listings[computedVariantId] : null;
+  let activeCount = 0, listingInventryCount = 0;
+  let priceInfo = listings ? listings.filter((listing) => {
+    if(listing.total_inventory_count <=0 ) {
+      listingInventryCount++;
+    }
+    if(!listing.active) {
+      activeCount++;
+    }
+    return listing.total_inventory_count > 0 && listing.active
+  }) : [];
+  priceInfo = priceInfo.length ? priceInfo[0] : null;
+  const availabilityError = activeCount === listings.length;
+  const stockError = listingInventryCount === listings.length;
   const titleInfo = {
     brand: product_details.catalog_details.attribute_map.brand.attribute_values[0].value,
     title: product_details.product_details_vo.cached_product_details.attribute_map.calculated_display_name.attribute_values[0].value,
@@ -14,14 +27,16 @@ const getProduct = (store, variantId) => {
     reviews: {
       count: ''
     },
-    price: priceInfo ? priceInfo.selling_price + ' ' + priceInfo.selling_price_currency : 'No listing',
+    price: priceInfo ? priceInfo.selling_price + ' ' + priceInfo.selling_price_currency : 'Price Not available',
     originalPrice: '',
     discountPercent: '',
   };
   const offerInfo = {
     price: priceInfo ? priceInfo.selling_price + ' ' + priceInfo.selling_price_currency : 'No listing',
     listingId: priceInfo ? priceInfo.listing_id : 'No Listing',
-    listingAvailable: !!priceInfo
+    listingAvailable: !!priceInfo,
+    availabilityError,
+    stockError,
   }
   const keyfeatures = _.map(product_details.product_details_vo.cached_product_details.attribute_map.calculated_highlights.attribute_values, (kf) => kf.value);
   const imgUrls = product_details.product_details_vo.cached_product_details.media.gallery_media;
