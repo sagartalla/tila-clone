@@ -3,7 +3,7 @@ import _ from 'lodash';
 const getProduct = (store, variantId) => {
   const { product_details, variant_preferred_listings } = store.productReducer.data[0];
   const computedVariantId = variantId || Object.keys(variant_preferred_listings || {})[0]
-  const listings = computedVariantId ? variant_preferred_listings[computedVariantId] : null;
+  const listings = computedVariantId ? variant_preferred_listings[computedVariantId] : [];
   let activeCount = 0, listingInventryCount = 0;
   let priceInfo = listings ? listings.filter((listing) => {
     if(listing.total_inventory_count <=0 ) {
