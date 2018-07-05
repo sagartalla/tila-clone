@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col, Grid } from 'react-bootstrap';
 import { Router } from '../../routes';
@@ -10,6 +10,7 @@ import { actionCreators as wishlistActionCreators, selectors as wishlistSelector
 
 import HeaderBar from '../HeaderBar/index';
 import CartBody from './includes/CartBody';
+import MiniCartBody from './includes/MiniCartBody';
 
 import { mergeCss } from '../../utils/cssUtil';
 const styles = mergeCss('components/Cart/cart');
@@ -31,13 +32,14 @@ class Cart extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.results.ui.loader && nextProps.results.ui.loader == 'hide') {
+    if (nextProps.cartData.ui.loader && nextProps.cartData.ui.loader == 'hide') {
       this.setState({ showBlocker: false });
     }
   }
 
   componentDidMount() {
-    this.props.getCartResults();
+    if (!this.props.paymentPageInclude)
+      this.props.getCartResults();
   }
 
   checkoutBtnHandler() {
@@ -45,7 +47,7 @@ class Cart extends Component {
   }
 
   removeCartItem(e) {
-    this.props.removeCartItem(e.target.id);
+    this.props.removeCartItem(e.currentTarget.id);
   }
 
   increaseItemCnt(e) {
@@ -75,28 +77,46 @@ class Cart extends Component {
 
   render() {
     const { showBlocker } = this.state;
-    const { results } = this.props;
+    const { cartData, editCartDetails } = this.props;
     return (
       <div>
-        <HeaderBar />
-        <Grid>
-          <CartBody
-            data={results}
-            showBlocker={showBlocker}
-            checkoutBtnHandler={this.checkoutBtnHandler}
-            removeCartItem={this.removeCartItem}
-            increaseItemCnt={this.increaseItemCnt}
-            decreaseItemCnt={this.decreaseItemCnt}
-            addToWishlist={this.addToWishlist}
-          />
-        </Grid>
+        {
+          this.props.paymentPageInclude
+            ?
+            <div>
+              <MiniCartBody
+                data={cartData}
+                showBlocker={showBlocker}
+                removeCartItem={this.removeCartItem}
+                increaseItemCnt={this.increaseItemCnt}
+                decreaseItemCnt={this.decreaseItemCnt}
+                editCartDetails={editCartDetails}
+              />
+            </div>
+            :
+            <Fragment>
+              <HeaderBar />
+              <Grid>
+                <CartBody
+                  data={cartData}
+                  showBlocker={showBlocker}
+                  checkoutBtnHandler={this.checkoutBtnHandler}
+                  removeCartItem={this.removeCartItem}
+                  increaseItemCnt={this.increaseItemCnt}
+                  decreaseItemCnt={this.decreaseItemCnt}
+                  addToWishlist={this.addToWishlist}
+                />
+              </Grid>
+            </Fragment>
+        }
+
       </div>
     )
   }
 }
 
 const mapStateToProps = (store) => ({
-  results: selectors.getCartResults(store),
+  cartData: selectors.getCartResults(store),
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -111,7 +131,7 @@ const mapDispatchToProps = (dispatch) =>
   );
 
 Cart.propTypes = {
-  results: PropTypes.object,
+  cartData: PropTypes.object,
 };
 
 Cart.defaultProps = {

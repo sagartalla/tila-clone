@@ -146,30 +146,11 @@ const CartBody = props => {
             </Col>
             <Col md={3} sm={12} xs={12} className={styles['pr-0']}>
               <div className={`${styles['box']}`}>
-                <div className={`${styles['copon-code']} ${styles['pb-10']}`}>
-                  <h4 className={`${styles['fs-16']} ${styles['fontW600']} ${styles['m-0']} ${styles['p-10']} ${styles['flex']} ${styles['justify-center']} ${styles['white-color']}`}>
-                    <SVGComponent clsName={`${styles['buy-coupon-code']}`} src="icons/common-icon/buy-coupon" />
-                    <span className={styles['pl-5']}>Buy & Earn 300 Reward Points</span>
-                  </h4>
-                  <span className={`${styles['flex-center']} ${styles['justify-center']} ${styles['p-10']} ${styles['m-20']} ${styles['apply-coupon']}`}>
-                    <SVGComponent clsName={`${styles['coupon-code']}`} src="icons/common-icon/coupon-code" />
-                    <span className={`${styles['text-uppercase']} ${styles['pl-5']}`}>Apply Coupon Code</span>
-                  </span>
-                </div>
-                <div className={`${styles['p-10-20']}`}>
-                  <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles['fs-18']} ${styles['flex-center']} ${styles['justify-center']}`} onClick={checkoutBtnHandler}>
-                    <SVGComponent clsName={`${styles['secure-checkout']}`} src="icons/common-icon/secure-checkout" />
-                    <span className={styles['pl-5']}>{CART_PAGE.SECURE_CHECKOUT}</span>
-                  </button>
-                </div>
-                <div className={`${styles['view-r-wishlist']} ${styles['p-10']} ${styles['border-radius4']} ${styles['border-radius4']}`}>
-                  <span className={`${styles['fs-12']}`}>Buy for 500 AED more and get 10% Off on your total purchase. <a className={styles['fs-14']}>View your wishlist</a></span>
-                </div>
-                <div className={styles['p-20']}>
-                  <RightBar
-                    data={data}
-                  />
-                </div>
+                <RightBar
+                  data={data}
+                  showCheckoutBtn = {true}
+                  checkoutBtnHandler={checkoutBtnHandler}
+                />
               </div>
             </Col>
           </Row>
