@@ -34,7 +34,7 @@ apiRoutes
     });
   })
   .post('/refresh', (req, res) => {
-    return axios.post(`${constants.AUTH_API_URL}/api/v1/refresh`, {
+    return axios.post(`${AUTH_API_URL}/api/v1/refresh`, {
         'auth_version': 'V1',
         'refresh_token': auth.refresh_token
       }).then((res) => {
