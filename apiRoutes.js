@@ -80,12 +80,39 @@ apiRoutes
       .then(({data}) => {
         const { results } = data;
         const city = results.length ? _.filter(results[0].address_components, (ac) => {
-          return ac.types.indexOf('administrative_area_level_2') !== -1
+          return ac.types.indexOf('administrative_area_level_2') !== -1 || ac.types.indexOf('locality') !== -1
+        })[0].long_name : null;
+        const country = results.length ? _.filter(results[0].address_components, (ac) => {
+          return ac.types.indexOf('country') !== -1;
         })[0].long_name : null;
         req.universalCookies.set('city', city, { path: '/' });
-        res.json(city);
+        res.json({
+          country,
+          city,
+          displayCity: `${city}, ${country}`,
+        });
       });
+  })
+  .get('/autoCompleteCity', (req, res) => {
+    const { api, input } = req.query;
+    return axios
+      .get(`${GOOGLE_MAPS_URL}${api}?key=AIzaSyDrVNKZshUspEprFsNnQD-sos6tvgFdijg&type=(cities)&input=${input}`)
+      .then((data) => {
+        res.json(data.data.predictions.map((prediction) => {
+          const terms = prediction.terms;
+          return {
+            displayCity: prediction.description,
+            city: terms[0].value,
+            country: terms[terms.length - 1].value,
+          };
+        }));
+      })
+      .catch((e) => {
+        res.json(e);
+      })
   });
+
+
 
 
 module.exports = apiRoutes;

@@ -8,6 +8,9 @@ const actions = {
   SET_COUNTRY: 'SET_COUNTRY',
   SET_SESSION_ID: 'SET_SESSION_ID',
   DERIVE_CITY: 'DERIVE_CITY',
+  SET_CITY: 'SET_CITY',
+  AUTOCOMPLETE_CITY: 'AUTOCOMPLETE_CITY',
+  RESET_AUTOCOMPLETE_CITY: 'RESET_AUTOCOMPLETE_CITY',
 };
 
 const actionCreators = {
@@ -70,7 +73,18 @@ const actionCreators = {
   setCity: (params) => {
     return {
       type: actions.SET_CITY,
-      payload: params.city
+      payload: params
+    }
+  },
+  autoCompleteCity: (params) => {
+    return {
+      type: actions.AUTOCOMPLETE_CITY,
+      payload: api.autoCompleteCity(params),
+    }
+  },
+  resetAutoCompleteData: () => {
+    return {
+      type: actions.RESET_AUTOCOMPLETE_CITY,
     }
   }
 };

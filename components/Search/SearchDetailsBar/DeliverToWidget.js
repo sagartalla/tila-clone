@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import _ from 'lodash';
 
 import { actionCreators, selectors } from '../../../store/auth';
 import SVGCompoent from '../../common/SVGComponet';
@@ -12,9 +13,13 @@ const styles = mergeCss('components/Search/search');
 class DeliverToWidget extends Component {
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {
+      ...props.geoShippingData
+    }
     this.deriveCity = this.deriveCity.bind(this);
     this.onChangeCity = this.onChangeCity.bind(this);
+    this.autoCompleteCity = _.debounce(this.autoCompleteCity.bind(this), 300);
+    this.selectCityFromSuggesstions = this.selectCityFromSuggesstions.bind(this);
   }
 
   componentDidMount() {
@@ -24,13 +29,31 @@ class DeliverToWidget extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({
-      city: nextProps.city
-    });
+    // this.setState({
+    //   ...nextProps.geoShippingData
+    // })
   }
 
   onChangeCity(e) {
-    this.props.setCity({city: e.target.value});
+    const displayCity = e.target.value;
+    this.setState({
+      displayCity
+    });
+    this.autoCompleteCity(displayCity);
+  }
+
+  autoCompleteCity(city) {
+    this.props.autoCompleteCity({
+      input: city
+    });
+  }
+
+  setCity(city, country, displayCity) {
+    this.props.setCity({
+      city,
+      country,
+      displayCity,
+    });
   }
 
   deriveCity(position) {
@@ -42,29 +65,52 @@ class DeliverToWidget extends Component {
     });
   }
 
+  selectCityFromSuggesstions(e) {
+    const { autoCompleteCityData, resetAutoCompleteData } = this.props;
+    const selectedCity = _.find(autoCompleteCityData, { displayCity: e.target.getAttribute('data-id') });
+    const { city, country, displayCity } = selectedCity;
+    resetAutoCompleteData();
+    this.setState({
+      displayCity: selectedCity.displayCity
+    });
+    this.setCity(city, country, displayCity);
+  }
+
   render() {
-    const { city } = this.state;
+    const { autoCompleteCityData, geoShippingData } = this.props;
+    const { displayCity } = geoShippingData;
+    const { displayCity: stateDisplayCity } = this.state;
     return (
       <div className={`${styles['flex-center']} ${styles['delovery-inn']}`}>
         <span className={`${styles['flex-center']} ${styles['delivery-part']}`}>
           <SVGCompoent clsName={`${styles['map-icon']}`} src="icons/common-icon/black-map-location" />
           <span className={`${styles['fontW600']} ${styles['pl-5']} ${styles['pr-10']}`}>Deliver to :</span>
         </span>
-        <input type="text" value={city} onChange={this.onChangeCity}/>
+        <div className={styles['auto-suggestions-wrap']}>
+          <input type="text" value={stateDisplayCity || displayCity} onChange={this.onChangeCity} onFocus={this.onFocusCity}/>
+          <div className={styles['auto-suggestions']}>
+            {
+              autoCompleteCityData.map((result) => <div key={result.displayCity} data-id={result.displayCity} onClick={this.selectCityFromSuggesstions} className={styles['item']}>{result.displayCity}</div>)
+            }
+          </div>
+        </div>
       </div>
     )
   }
 }
 
 const mapStateToProps = (store) => ({
-  city: selectors.getCity(store)
+  geoShippingData: selectors.getCity(store),
+  autoCompleteCityData: selectors.getAutoCompleteCityData(store)
 });
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       deriveCity: actionCreators.deriveCity,
-      setCity: actionCreators.setCity
+      setCity: actionCreators.setCity,
+      autoCompleteCity: actionCreators.autoCompleteCity,
+      resetAutoCompleteData: actionCreators.resetAutoCompleteData,
     },
     dispatch,
   );

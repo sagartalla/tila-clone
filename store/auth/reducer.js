@@ -8,12 +8,13 @@ const initialState = {
   data: {
     isLoggedIn: false,
     userCreds: {},
-    geoDetails: {},
+    geoShippingDetails: {},
+    autoCompleteCity: [],
   },
   error: '',
 };
 
-const productReducer = typeToReducer({
+const authReducer = typeToReducer({
   [actions.USER_LOGIN]: {
     PENDING: state => {
       return Object.assign({}, state, {
@@ -90,14 +91,17 @@ const productReducer = typeToReducer({
       }
     }
   },
-  [actions.SET_COUNTRY]: (state, action) => {
+  [actions.SET_CITY]: (state, action) => {
+    const { city, country, displayCity } = action.payload
     return {
       ...state,
       data: {
         ...state.data,
-        geoDetails: {
-          ...state.data.geoDetails,
-          city: action.payload,
+        geoShippingDetails: {
+          ...state.data.geoShippingDetails,
+          city,
+          country,
+          displayCity,
         }
       }
     }
@@ -109,12 +113,15 @@ const productReducer = typeToReducer({
       }, { ui: { loading: true } });
     },
     FULFILLED: (state, action) => {
+      const { city, country, displayCity } = action.payload;
       return {
         ...state,
         data: {
           ...state.data,
-          geoDetails: {
-            city: action.payload
+          geoShippingDetails: {
+            city,
+            country,
+            displayCity,
           }
         }
       }
@@ -126,6 +133,37 @@ const productReducer = typeToReducer({
       });
     },
   },
+  [actions.RESET_AUTOCOMPLETE_CITY]: (state, action) => {
+    return {
+      ...state,
+      data: {
+        ...state.data,
+        autoCompleteCity: []
+      }
+    }
+  },
+  [actions.AUTOCOMPLETE_CITY]: {
+    PENDING: state => {
+      return Object.assign({}, state, {
+        error: '',
+      }, { ui: { loading: true } });
+    },
+    FULFILLED: (state, action) => {
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          autoCompleteCity: action.payload,
+        }
+      }
+    },
+    REJECTED: (state, action) => {
+      return Object.assign({}, state, {
+        error: action.payload.response ? action.payload.response.data.message : action.payload.message,
+        ui: { loading: false }
+      });
+    },
+  }
 }, initialState);
 
-export default productReducer;
+export default authReducer;

@@ -11,7 +11,11 @@ const getUserCreds = (store) => {
 }
 
 const getCity = (store) => {
-  return store.authReducer.data.geoDetails.city;
+  return store.authReducer.data.geoShippingDetails;
 }
 
-export { getErrorMessege, getLoggedInStatus, getUserCreds, getCity };
+const getAutoCompleteCityData = (store) => {
+  return store.authReducer.data.autoCompleteCity;
+}
+
+export { getErrorMessege, getLoggedInStatus, getUserCreds, getCity, getAutoCompleteCityData };
