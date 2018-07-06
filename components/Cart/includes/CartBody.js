@@ -66,9 +66,9 @@ const CartBody = props => {
                                     <p className={`${styles['fs-12']}`}><span>Warranty : </span><span className={`${styles['pl-10']} ${styles['pr-10']}`}>+18 Month Extended Manufacturer Warranty </span><a href="" className={`${styles['fontW600']}`}>View More</a></p>
                                     <p className={`${styles['mb-0']} ${styles['fs-12']}`}><span>Shipping : </span><span className={`${styles['pl-10']} ${styles['pr-10']}`}>Fast Shipping  (5.00 AED) - <span className={`${styles['fs-12']} ${styles['base-font']}`}>Estimated Delivery by 28th Nov, 17</span> </span><a href="" className={`${styles['fontW600']}`}>View More</a></p>
                                   </div>
-                                  <div data-id={item_id} className={`${styles['checkbox-material']} ${styles['mt-15']}`} onChange={addOrRemoveGift}>
-                                    <input id="send-gift" type="checkbox" checked={gift_info ? true : false} />
-                                    <label for="send-gift"> {CART_PAGE.SEND_GIFT} {gift_info ? "(" + gift_info.gift_rate + " " + cur + ")" : ''} </label>
+                                  <div data-id={item_id} className={`${styles['checkbox-material']} ${styles['mt-15']}`} onClick={addOrRemoveGift}>
+                                    <input id={"gift" + item_id} type="checkbox" checked={gift_info ? true : false} />
+                                    <label for={"gift" + item_id}> {CART_PAGE.SEND_GIFT} {gift_info ? "(" + gift_info.gift_rate + " " + cur + ")" : ''} </label>
                                   </div>
                                 </Col>
                                 <Col md={2} className={`${styles['pl-0']}`}>
