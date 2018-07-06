@@ -27,6 +27,7 @@ const getCartResults = (store) => {
           inventory: item.listing_info.total_inventory_count,
           max_limit: item.listing_info.max_limit_per_user,
           brand_name: item.product_details.catalog_details.attribute_map.brand.attribute_values[0].value,
+          gift_info: item.gift_info,
         }
       })
     }

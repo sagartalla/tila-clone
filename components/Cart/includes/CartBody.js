@@ -11,7 +11,7 @@ import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Cart/cart');
 
 const CartBody = props => {
-  const { showBlocker, increaseItemCnt, decreaseItemCnt, data, removeCartItem, checkoutBtnHandler, addToWishlist } = props;
+  const { showBlocker, increaseItemCnt, decreaseItemCnt, data, removeCartItem, checkoutBtnHandler, addToWishlist, addOrRemoveGift } = props;
   const { items, error } = data;
   const flag = data && items && items.length;
   const cnt = flag > 0 ? items.length : 0;
@@ -37,7 +37,7 @@ const CartBody = props => {
               <div>
                 {
                   items.map((item, index) => {
-                    const { item_id, img, name, price, cur, quantity, max_limit, inventory, brand_name } = item;
+                    const { item_id, img, name, price, cur, quantity, max_limit, inventory, brand_name, gift_info } = item;
                     return (
                       <div key={item_id} className={`${styles['mb-20']} ${styles['box']}`}>
                         {
@@ -66,9 +66,9 @@ const CartBody = props => {
                                     <p className={`${styles['fs-12']}`}><span>Warranty : </span><span className={`${styles['pl-10']} ${styles['pr-10']}`}>+18 Month Extended Manufacturer Warranty </span><a href="" className={`${styles['fontW600']}`}>View More</a></p>
                                     <p className={`${styles['mb-0']} ${styles['fs-12']}`}><span>Shipping : </span><span className={`${styles['pl-10']} ${styles['pr-10']}`}>Fast Shipping  (5.00 AED) - <span className={`${styles['fs-12']} ${styles['base-font']}`}>Estimated Delivery by 28th Nov, 17</span> </span><a href="" className={`${styles['fontW600']}`}>View More</a></p>
                                   </div>
-                                  <div className={`${styles['checkbox-material']} ${styles['mt-15']}`}>
-                                    <input id="send-gift" type="checkbox" />
-                                    <label for="send-gift"> Send this as a gift (5.00 AED) </label>
+                                  <div data-id={item_id} className={`${styles['checkbox-material']} ${styles['mt-15']}`} onChange={addOrRemoveGift}>
+                                    <input id="send-gift" type="checkbox" checked={gift_info ? true : false} />
+                                    <label for="send-gift"> {CART_PAGE.SEND_GIFT} {gift_info ? "(" + gift_info.gift_rate + " " + cur + ")" : ''} </label>
                                   </div>
                                 </Col>
                                 <Col md={2} className={`${styles['pl-0']}`}>

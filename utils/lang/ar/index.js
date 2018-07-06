@@ -19,6 +19,7 @@ export const AR_KEYWORDS = {
     'UNITS_LEFT': 'units left',
     'OUT_OF_STOCK': 'Out of stock',
     'MOVE_TO_WISHLIST': 'Move to Wishlist',
+    'SEND_GIFT' : 'Send this as a gift',
     'MAX_PER_ORDER': 'Max per order quantity of this item reached.'
   },
   PAYMENT_PAGE: {
