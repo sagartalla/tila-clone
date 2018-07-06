@@ -15,6 +15,9 @@ const paymentsReducer = typeToReducer({
       return Object.assign({}, state, { data: action.payload, ui: { loading: true } });
     },
   },
+  [actions.EMPTY_PAYMENT_PAYLOAD]: (state, action) => {
+    return Object.assign({}, state, { data: action.payload, ui: { loading: true } });
+  },
   [actions.DO_PAYMENT]: {
     PENDING: state => {
       return Object.assign({}, state, { ui: { loading: true } });

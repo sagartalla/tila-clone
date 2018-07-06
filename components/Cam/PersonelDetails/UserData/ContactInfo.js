@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { selectors } from '../../../../store/cam/personalDetails';
 import { languageDefinations } from '../../../../utils/lang/';
 import UpdateContactInfoModal from './UpdateContactInfoModal';
-import SVGCompoent from '../../../common/SVGComponet';
+import SVGComponent from '../../../common/SVGComponet';
 import { mergeCss } from '../../../../utils/cssUtil';
 const styles = mergeCss('components/Cam/PersonelDetails/profile');
 
@@ -47,7 +47,7 @@ class ContactInfo extends React.Component {
           <Col xs={6} md={8} className={`${styles['flex-center']} ${styles['tickmark-part']}`}>
             <span className={styles['pr-20']}>{mailId}</span>
             <span className={email_verified == 'NV' ? `${styles['showDiv']}` : `${styles['hideDiv']}`}>
-              <span className={styles['flex']}><SVGCompoent clsName={`${styles['tickmark-icon']}`} src="icons/common-icon/bg-tick-mark" /></span>
+              <span className={styles['flex']}><SVGComponent clsName={`${styles['tickmark-icon']}`} src="icons/common-icon/bg-tick-mark" /></span>
             </span>
           </Col>
           <Col xs={3} md={1} className={styles['pr-0']}>
@@ -65,7 +65,7 @@ class ContactInfo extends React.Component {
           </Col>
           <Col xs={6} md={1} className={styles['pr-0']}>
             <span onClick={this.handleShow(true, `password`)} className={`${styles['float-r']} ${styles['flex']} ${styles['p-0']} ${styles['ml-5']}`}>
-              <SVGCompoent clsName={`${styles['edit-icon']}`} src="icons/common-icon/edit-icon" />
+              <SVGComponent clsName={`${styles['edit-icon']}`} src="icons/common-icon/edit-icon" />
             </span>
           </Col>
         </div>

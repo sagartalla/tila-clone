@@ -1,5 +1,5 @@
 import React from 'react';
-import SVGCompoent from '../../common/SVGComponet';
+import SVGComponent from '../../common/SVGComponet';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { languageDefinations } from '../../../utils/lang/';
 import { mergeCss } from '../../../utils/cssUtil';
@@ -8,7 +8,7 @@ const { PAYMENT_PAGE } = languageDefinations();
 
 const SignIn = props => (
   <div className={`${styles['pb-15']} ${styles['pt-15']} ${styles['pl-35']} ${styles['pr-35']} ${styles['box']} ${styles['mb-20']} ${styles['relative']} ${styles['payment-signup']}`}>
-    <SVGCompoent clsName={`${styles['profile']} ${props.configJson.done ? 'done' : ''} ${props.configJson.progress ? 'payment-active' : ''}`} src="icons/profile/profile" />
+    <SVGComponent clsName={`${styles['profile']} ${props.configJson.done ? 'done' : ''} ${props.configJson.progress ? 'payment-active' : ''}`} src="icons/profile/profile" />
     <Row className={`${props.configJson.done ? '' : 'hide'} ${styles['flex-center']}`}>
       <Col md={8} sm={12} xs={12}>
         <h4 className={styles['m-0']}>{PAYMENT_PAGE.SIGN_IN}</h4>

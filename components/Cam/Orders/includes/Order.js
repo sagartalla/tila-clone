@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col, Button, OverlayTrigger, Popover } from 'react-bootstrap';
-import SVGCompoent from '../../../common/SVGComponet';
+import SVGComponent from '../../../common/SVGComponet';
 import OrderItem from '../../../Order/includes/OrderDetails/OrderItem';
 
 import { mergeCss } from '../../../../utils/cssUtil';
@@ -30,7 +30,7 @@ const Order = ({order}) => {
             <span className={styles['link-text']}>{order.shippingTo.name}</span>
             <OverlayTrigger trigger="click" placement="bottom" overlay={popover}>
               <span className={styles['ml-10']}>
-                <SVGCompoent clsName={`${styles['down-arrow']}`} src="icons/down-arrow/down-arrow" />
+                <SVGComponent clsName={`${styles['down-arrow']}`} src="icons/down-arrow/down-arrow" />
               </span>
             </OverlayTrigger>
           </div>
@@ -61,7 +61,7 @@ const Order = ({order}) => {
             <span className={`${styles['flex']}`}>
               <span className={styles['link-text']}>Request Invoice&nbsp;</span>
               <span>
-                <SVGCompoent clsName={`${styles['down-arrow']}`} src="icons/down-arrow/down-arrow" />
+                <SVGComponent clsName={`${styles['down-arrow']}`} src="icons/down-arrow/down-arrow" />
               </span>
             </span>
             <span className={`${styles['ml-10']} ${styles['fs-16']}`}>

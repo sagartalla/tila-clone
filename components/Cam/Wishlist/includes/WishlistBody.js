@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import SVGCompoent from '../../../common/SVGComponet';
+import SVGComponent from '../../../common/SVGComponet';
 import { languageDefinations } from '../../../../utils/lang/';
 
 import { mergeCss } from '../../../../utils/cssUtil';
@@ -41,7 +41,7 @@ const WishlistBody = props => {
                     <Col md={4}>
                       <div className={`${styles['relative']} ${styles['flex']}`}>
                         <span id={wishlist_id} className={`${styles['absolute']} ${styles['delete-icon-part']}`} onClick={deleteItem}>
-                          <SVGCompoent clsName={`${styles['delete-icon']}`} src="icons/delete-icon/delete-icon" />
+                          <SVGComponent clsName={`${styles['delete-icon']}`} src="icons/delete-icon/delete-icon" />
                         </span>
                         <h4 className={`${styles['fontW600']} ${styles['light-gry-clr']} ${styles['mt-25']} ${styles['t-c']}`}><span className={styles['fs-30']}>{price}</span> <span clsName={styles['fs-18']}> {cur}</span></h4>
                       </div>

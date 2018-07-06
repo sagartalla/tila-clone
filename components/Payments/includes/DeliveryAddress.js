@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { languageDefinations } from '../../../utils/lang/';
 import { Grid, Row, Col } from 'react-bootstrap';
-import SVGCompoent from '../../common/SVGComponet';
+import SVGComponent from '../../common/SVGComponet';
 import ShippingAddress from '../../Cam/ShippingAddress';
 
 import { mergeCss } from '../../../utils/cssUtil';
@@ -13,7 +13,7 @@ const DeliveryAddress = props => {
   const { DELIVERY_ADDR_PAGE } = languageDefinations();
   return (
     <div className={`${styles['pb-15']} ${styles['pt-15']} ${styles['pl-35']} ${styles['pr-35']} ${styles['box']} ${styles['mb-20']} ${styles['relative']}`}>
-      <SVGCompoent clsName={`${styles['map-address']} ${configJson.done ? 'done' : ''} ${configJson.progress ? 'payment-active' : ''}`} src="icons/map/address" />
+      <SVGComponent clsName={`${styles['map-address']} ${configJson.done ? 'done' : ''} ${configJson.progress ? 'payment-active' : ''}`} src="icons/map/address" />
       <Row className={`${configJson.basic || configJson.done ? '' : 'hide'}`}>
         <Col md={6} sm={12} xs={12}>
           <h4 className={styles['m-0']}>{DELIVERY_ADDR_PAGE.DELIVERY_ADDR}</h4>

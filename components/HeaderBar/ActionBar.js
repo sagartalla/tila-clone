@@ -3,7 +3,7 @@ import { Modal } from "react-router-modal";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ModalContainer } from 'react-router-modal';
-import SVGCompoent from '../common/SVGComponet';
+import SVGComponent from '../common/SVGComponet';
 import { selectors, actionCreators } from '../../store/auth';
 import Login from '../Login';
 import { Link } from '../../routes';
@@ -51,21 +51,21 @@ class ActionBar extends Component {
         <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']}`}>
           <Link route="/cam/wishlist">
             <span className={`${styles['flex-center']} ${styles['justify-center']}`}>
-              <SVGCompoent clsName={`${styles['wish-list-icon']}`} src="icons/wish-list/wish-list-icon" />
+              <SVGComponent clsName={`${styles['wish-list-icon']}`} src="icons/wish-list/wish-list-icon" />
             </span>
         </Link>
         </div>
         <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']}`}>
           <Link route="/cart">
             <span className={`${styles['flex-center']} ${styles['justify-center']}`}>
-              <SVGCompoent clsName={`${styles['cart-icon']}`} src="icons/cart/cart-icon" />
+              <SVGComponent clsName={`${styles['cart-icon']}`} src="icons/cart/cart-icon" />
             </span>
           </Link>
         </div>
         <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']}`}>
           <Link route="/cam">
             <span className={`${styles['flex-center']} ${styles['justify-center']}`}>
-              <SVGCompoent clsName={`${styles['cam-icon']}`} src="icons/cam/cam-icon" />
+              <SVGComponent clsName={`${styles['cam-icon']}`} src="icons/cam/cam-icon" />
             </span>
           </Link>
         </div>

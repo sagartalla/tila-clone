@@ -19,6 +19,8 @@ import SignIn from './includes/SignIn';
 import DeliveryAddress from './includes/DeliveryAddress';
 import PaymentMode from './includes/PaymentMode';
 
+import Cart from '../Cart';
+
 import { mergeCss } from '../../utils/cssUtil';
 const styles = mergeCss('components/Payments/payment');
 
@@ -51,6 +53,7 @@ class Payments extends React.Component {
       paymentOptions: {}, // which payment options to show.
       loggedInFlag: false,
       signInLoader: false,
+      editCartDetails: true,
     }
 
     this.inputOnChange = this.inputOnChange.bind(this);
@@ -127,25 +130,30 @@ class Payments extends React.Component {
     this.props.doPayment(paymentjson);
   }
 
-  // TODO payment page should show after AJAX call is with success.
   handleShippingAddressContinue(e) {
+    const { editCartDetails } = this.state;
     const defaultAddrId = this.props.defaultAddress[0].address_id;
     this.props.createOrder(defaultAddrId)
 
     const paymentConfigJson = { ...this.state.paymentConfigJson };
     paymentConfigJson['address'] = { basic: false, progress: false, done: true };
     paymentConfigJson['payment'] = { basic: false, progress: true, done: false };
-    this.setState({ paymentConfigJson });
+    this.setState({ paymentConfigJson, editCartDetails: !editCartDetails });
   }
 
   editAddress() {
+    const { editCartDetails } = this.state;
     const paymentConfigJson = { ...this.state.paymentConfigJson };
     paymentConfigJson['address'] = { basic: false, progress: true, done: false };
-    this.setState({ paymentConfigJson });
+    paymentConfigJson['payment'] = { basic: true, progress: false, done: false };
+    this.setState({ paymentConfigJson, editCartDetails: !editCartDetails });
+
+    //clearing payment reducer on address edit button.
+    this.props.emptyPaymentPaylod();
   }
 
   render() {
-    const { login, showTab, paymentConfigJson, signInLoader } = this.state;
+    const { login, showTab, paymentConfigJson, signInLoader, editCartDetails } = this.state;
     const { paymentOptions, defaultAddress, isLoggedIn, cartResults } = this.props;
     const { PAYMENT_PAGE } = languageDefinations();
 
@@ -185,9 +193,14 @@ class Payments extends React.Component {
               <div>
                 {
                   cartResults && cartResults.total_price ?
-                    <div className={`${styles['box']} ${styles['p-20']} ${styles['payment-summary']}`}>
+                    <div className={`${styles['box']} ${styles['payment-summary']}`}>
                       <RightSideBar
                         data={cartResults}
+                      />
+                      <Cart
+                        paymentPageInclude={true}
+                        cartData={cartResults}
+                        editCartDetails={editCartDetails}
                       />
                     </div>
                     : null
@@ -215,6 +228,7 @@ const mapDispatchToProps = (dispatch) =>
     {
       createOrder: actionCreators.createOrder,
       doPayment: actionCreators.doPayment,
+      emptyPaymentPaylod: actionCreators.emptyPaymentPaylod,
       userLogin: authActionCreators.userLogin,
       getLoginInfo: authActionCreators.getLoginInfo,
       getCartResults: cartActionCreators.getCartResults,

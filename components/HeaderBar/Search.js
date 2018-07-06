@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { addUrlProps, UrlQueryParamTypes, pushInUrlQuery } from 'react-url-query';
 import { actionCreators, selectors } from '../../store/search';
 import { Router } from '../../routes';
-import SVGCompoent from '../common/SVGComponet';
+import SVGComponent from '../common/SVGComponet';
 
 import { mergeCss } from '../../utils/cssUtil';
 const styles = mergeCss('components/HeaderBar/header');
@@ -47,7 +47,7 @@ class Search extends Component {
             onChange={this.onChangeSearchInput}
             value={this.state.query}
            />
-          <button type="submit" className={styles['search-btn']}><SVGCompoent clsName={`${styles['searching-icon']}`} src="icons/search/search-icon" /></button>
+          <button type="submit" className={styles['search-btn']}><SVGComponent clsName={`${styles['searching-icon']}`} src="icons/search/search-icon" /></button>
         </form>
       </div>
     )

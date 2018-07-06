@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
 import RightBar from '../../common/CartAndPaymentRightBar';
 import Blocker from '../../common/Blocker';
-import SVGCompoent from '../../common/SVGComponet';
-// import styles from '../cart.styl';
+import SVGComponent from '../../common/SVGComponet';
+import CartStepper from './CartStepper';
 
 import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Cart/cart');
@@ -39,7 +39,7 @@ const CartBody = props => {
                   items.map((item, index) => {
                     const { item_id, img, name, price, cur, quantity, max_limit, inventory, brand_name } = item;
                     return (
-                      <div key={index} className={`${styles['mb-20']} ${styles['box']}`}>
+                      <div key={item_id} className={`${styles['mb-20']} ${styles['box']}`}>
                         {
                           max_limit == quantity ?
                             <div className={`${styles['p-10-22']} ${styles['alrt-message-bg']} ${styles['light-gry-clr']} ${styles['alrt-message-part']} ${styles['thick-border-btm']}`}><span>{CART_PAGE.MAX_PER_ORDER}</span></div>
@@ -49,23 +49,11 @@ const CartBody = props => {
                           <Row>
                             <Col md={2}>
                               <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles['pb-15']}`}><img className={styles['img']} src={img} /></div>
-                              {
-                                inventory > 0 ?
-                                  <div className={`${styles['flex-center']} ${styles['justify-center']}`}>
-                                    {
-                                      quantity == 1 ?
-                                        <span className={`${styles['minus-disable']} ${styles['fs-20']} ${styles['flex-center']} ${styles['justify-center']}`}> - </span>
-                                        : <span data-id={item_id} onClick={decreaseItemCnt} className={`${styles['minus']} ${styles['fs-20']} ${styles['flex-center']} ${styles['justify-center']} ${styles['pointer']}`}> - </span>
-                                    }
-                                    <span className={`${styles['quantity-title']} ${styles['border-radius2']}`}>{quantity}</span>
-                                    {
-                                      max_limit == quantity ?
-                                        <span className={`${styles['minus-disable']} ${styles['fs-20']} ${styles['flex-center']} ${styles['justify-center']}`}> + </span>
-                                        : <span data-id={item_id} onClick={increaseItemCnt} className={`${styles['plus']} ${styles['flex-center']} ${styles['justify-center']} ${styles['default-shadow']} ${styles['fs-18']} ${styles['pointer']}`}>  + </span>
-                                    }
-                                  </div>
-                                  : ''
-                              }
+                              <CartStepper
+                                item={item}
+                                decreaseItemCnt={decreaseItemCnt}
+                                increaseItemCnt={increaseItemCnt}
+                              />
                             </Col>
                             <Col md={10}>
                               <Row>
@@ -107,11 +95,11 @@ const CartBody = props => {
                               }
                             </span>
                             <span data-id={item_id} onClick={addToWishlist} className={`${styles['flex-center']} ${styles['move-to-wishlist']} ${styles['pr-20']} ${styles['pointer']}`}>
-                              <SVGCompoent clsName={`${styles['wish-list-icon']}`} src="icons/wish-list/wish-list-icon" />
+                              <SVGComponent clsName={`${styles['wish-list-icon']}`} src="icons/wish-list/wish-list-icon" />
                               <span className={styles['pl-10']}>{CART_PAGE.MOVE_TO_WISHLIST}</span>
                             </span>
                             <span id={item_id} onClick={removeCartItem} className={`${styles['flex-center']} ${styles['cart-remove-icon']} ${styles['pl-20']} ${styles['pointer']}`}>
-                              <SVGCompoent clsName={`${styles['delete-icon']}`} src="icons/delete-icon/delete-icon" />
+                              <SVGComponent clsName={`${styles['delete-icon']}`} src="icons/delete-icon/delete-icon" />
                               <span className={styles['pl-10']}>{CART_PAGE.REMOVE}</span>
                             </span>
                           </Col>
@@ -146,30 +134,11 @@ const CartBody = props => {
             </Col>
             <Col md={3} sm={12} xs={12} className={styles['pr-0']}>
               <div className={`${styles['box']}`}>
-                <div className={`${styles['copon-code']} ${styles['pb-10']}`}>
-                  <h4 className={`${styles['fs-16']} ${styles['fontW600']} ${styles['m-0']} ${styles['p-10']} ${styles['flex']} ${styles['justify-center']} ${styles['white-color']}`}>
-                    <SVGCompoent clsName={`${styles['buy-coupon-code']}`} src="icons/common-icon/buy-coupon" />
-                    <span className={styles['pl-5']}>Buy & Earn 300 Reward Points</span>
-                  </h4>
-                  <span className={`${styles['flex-center']} ${styles['justify-center']} ${styles['p-10']} ${styles['m-20']} ${styles['apply-coupon']}`}>
-                    <SVGCompoent clsName={`${styles['coupon-code']}`} src="icons/common-icon/coupon-code" />
-                    <span className={`${styles['text-uppercase']} ${styles['pl-5']}`}>Apply Coupon Code</span>
-                  </span>
-                </div>
-                <div className={`${styles['p-10-20']}`}>
-                  <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles['fs-18']} ${styles['flex-center']} ${styles['justify-center']}`} onClick={checkoutBtnHandler}>
-                    <SVGCompoent clsName={`${styles['secure-checkout']}`} src="icons/common-icon/secure-checkout" />
-                    <span className={styles['pl-5']}>{CART_PAGE.SECURE_CHECKOUT}</span>
-                  </button>
-                </div>
-                <div className={`${styles['view-r-wishlist']} ${styles['p-10']} ${styles['border-radius4']} ${styles['border-radius4']}`}>
-                  <span className={`${styles['fs-12']}`}>Buy for 500 AED more and get 10% Off on your total purchase. <a className={styles['fs-14']}>View your wishlist</a></span>
-                </div>
-                <div className={styles['p-20']}>
-                  <RightBar
-                    data={data}
-                  />
-                </div>
+                <RightBar
+                  data={data}
+                  showCheckoutBtn={true}
+                  checkoutBtnHandler={checkoutBtnHandler}
+                />
               </div>
             </Col>
           </Row>

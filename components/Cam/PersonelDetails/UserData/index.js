@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import PersonalInfo from './PersonalInfo';
 import ContactInfo from './ContactInfo';
-import SVGCompoent from '../../../common/SVGComponet';
+import SVGComponent from '../../../common/SVGComponet';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators } from '../../../../store/cam/personalDetails';

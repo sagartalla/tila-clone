@@ -1,6 +1,6 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
-import SVGCompoent from '../../common/SVGComponet';
+import SVGComponent from '../../common/SVGComponet';
 import Btn from '../../common/Button';
 import { mergeCss } from '../../../utils/cssUtil';
 import { languageDefinations } from '../../../utils/lang/';
@@ -10,7 +10,7 @@ const Notification = () => (
   <div className={`${styles['box']} ${styles['notification-main']} ${styles['flex']} ${styles['flex-colum']}`}>
     <div className={`${styles['flex']} ${styles['notification-main-inn']}`}>
       <span className={styles['flex']}>
-        <SVGCompoent clsName={`${styles['notification-icon']}`} src="icons/profile-icons/bell-notification" />
+        <SVGComponent clsName={`${styles['notification-icon']}`} src="icons/profile-icons/bell-notification" />
       </span>
       <span className={`${styles['pl-5']} ${styles['lne-ht1']}`}>
         <h2 className={`${styles['fontW300']} ${styles['mt-0']} ${styles['mb-0']}`}>02</h2>
