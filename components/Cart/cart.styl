@@ -1,11 +1,33 @@
 @import '../../layout/main/executables.styl';
 
 .cart-container
+  .cart-container-img
+    width: 100%;
+    height: 50px;
+    img 
+      max-width 100%
+      max-height 100%
+
+  .card-details-labels
+    .card-details-name
+      width 90%
+
+    .delete-icon  
+      width 14px
+      height 14px
+  .card-details-name
+    width 70%
   .cart-box
     margin-bottom 0;
     border-radius 4px 4px 0 0
-    .img
-      height 120px
+    .card-box-inn-img
+      width: 100%;
+      height: 130px;
+      display flex
+      justify-content clear
+      .img
+        max-height 100%
+        max-width 100%
     .quantity-title
       margin 0 8px
       border 0.5px solid generic-green-color
@@ -13,14 +35,23 @@
       background-color generic-green-color
       color white
 
-    .minus-disable
-      background-color rgba(214, 214, 214, 0.3)
+    // .minus-disable
+    //   background-color rgba(214, 214, 214, 0.3)
 
-    .plus
-    .minus
-    .minus-disable
-      width-height-radius(26px, 26px, 50%)
-      border 0.25px solid generic-gray-color
+    // .plus
+    // .minus
+    // .minus-disable
+    //   width-height-radius(26px, 26px, 50%)
+    //   border 0.25px solid generic-gray-color
+
+  .secure-img
+    display: flex;
+    padding: 20px 40px;
+    box-sizing: border-box;
+    width: 100%;
+    height: 80px;
+    img 
+      width 100%
 
   .cart-box-btm
     border-radius 0 0 4px 4px
@@ -54,26 +85,19 @@
   height 300px
   overflow-y scroll
 
-  // .coupon-code
-  //   background: url(/static/img/bg-img/arrow-bg.png) no-repeat bottom left;
-  //   h4
-  //     background coupon-bg-lgt-black
-  //     border-top-left-radius 4px
-  //     border-top-right-radius 4px
-  //     .buy-coupon-code
-  //       height 17px
-  //       width 20px
+.cart-stepper
+  .minus-disable
+    background-color rgba(214, 214, 214, 0.3)
 
-  //   .apply-coupon
-  //     border 0.5px dashed light-gray-clr
-  //     box-shadow 0 1px 1px 0 rgba(0, 0, 0, 0.16)
-  //     .coupon-code
-  //       width 24px
-  //       height 24px
-  // .secure-checkout
-  //   width 20px
-  //   height 20px
+  .plus
+  .minus
+  .minus-disable
+    width-height-radius(26px, 26px, 50%)
+    border 0.25px solid generic-gray-color
 
-  // .view-r-wishlist
-  //   margin 20px 20px 0 20px
-  //   border: 0.5px dashed thick-blue;
+  .quantity-title
+    margin 0 8px
+    border 0.5px solid generic-green-color
+    padding 2px 12px
+    background-color generic-green-color
+    color white
