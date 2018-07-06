@@ -31,7 +31,7 @@ const MiniCartBody = props => {
           items.map((item, index) => {
             const { item_id, img, name, price, cur, quantity, max_limit, inventory, brand_name } = item;
             return (
-              <Row key={index}>
+              <Row key={item_id}>
                 <Col md={2}>
                   <img style={{ height: '50px' }} className={styles['img']} src={img} />
                 </Col>

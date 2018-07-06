@@ -39,7 +39,7 @@ const CartBody = props => {
                   items.map((item, index) => {
                     const { item_id, img, name, price, cur, quantity, max_limit, inventory, brand_name } = item;
                     return (
-                      <div key={index} className={`${styles['mb-20']} ${styles['box']}`}>
+                      <div key={item_id} className={`${styles['mb-20']} ${styles['box']}`}>
                         {
                           max_limit == quantity ?
                             <div className={`${styles['p-10-22']} ${styles['alrt-message-bg']} ${styles['light-gry-clr']} ${styles['alrt-message-part']} ${styles['thick-border-btm']}`}><span>{CART_PAGE.MAX_PER_ORDER}</span></div>
