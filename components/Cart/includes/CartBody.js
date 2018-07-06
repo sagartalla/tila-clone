@@ -68,7 +68,7 @@ const CartBody = props => {
                                   </div>
                                   <div data-id={item_id} className={`${styles['checkbox-material']} ${styles['mt-15']}`} onClick={addOrRemoveGift}>
                                     <input id={"gift" + item_id} type="checkbox" checked={gift_info ? true : false} />
-                                    <label for={"gift" + item_id}> {CART_PAGE.SEND_GIFT} {gift_info ? "(" + gift_info.gift_rate + " " + cur + ")" : ''} </label>
+                                    <label htmlFor={"gift" + item_id}> {CART_PAGE.SEND_GIFT} {gift_info ? "(" + gift_info.gift_rate + " " + cur + ")" : ''} </label>
                                   </div>
                                 </Col>
                                 <Col md={2} className={`${styles['pl-0']}`}>
