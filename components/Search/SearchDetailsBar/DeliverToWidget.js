@@ -87,7 +87,7 @@ class DeliverToWidget extends Component {
           <span className={`${styles['fontW600']} ${styles['pl-5']} ${styles['pr-10']}`}>Deliver to :</span>
         </span>
         <div className={styles['auto-suggestions-wrap']}>
-          <input type="text" value={stateDisplayCity || displayCity} onChange={this.onChangeCity} onFocus={this.onFocusCity}/>
+          <input type="text" value={stateDisplayCity  || stateDisplayCity === '' ? stateDisplayCity : displayCity} onChange={this.onChangeCity} onFocus={this.onFocusCity}/>
           <div className={styles['auto-suggestions']}>
             {
               autoCompleteCityData.map((result) => <div key={result.displayCity} data-id={result.displayCity} onClick={this.selectCityFromSuggesstions} className={styles['item']}>{result.displayCity}</div>)
@@ -100,7 +100,7 @@ class DeliverToWidget extends Component {
 }
 
 const mapStateToProps = (store) => ({
-  geoShippingData: selectors.getCity(store),
+  geoShippingData: selectors.getDeliveryCity(store),
   autoCompleteCityData: selectors.getAutoCompleteCityData(store)
 });
 
