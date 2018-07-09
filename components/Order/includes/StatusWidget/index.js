@@ -14,7 +14,7 @@ const StatusWidget = ({ currentStatus }) => {
   return (
     <div className={`${styles['status-widget']} ${styles['pt-5']} ${styles['relative']}`}>
       <Row className={styles['m-0']}>
-        <div className={`${styles['gray-line']}`}>
+        <div className={`${styles['gray-line']} ${styles['flx-space-bw']}`}>
           {
             Object.keys(currentStatus[0].state_times).map((i, k, index) => {
               const { completed } = currentStatus[0].state_times[i];
@@ -22,14 +22,15 @@ const StatusWidget = ({ currentStatus }) => {
                 barLen = pivot * k;
               }
               return (
-                <div className={`${styles['point']} ${completed ? (i == 'CANCELLED' ? styles['cancelled'] : styles['active']) : ''} `} style={{ left: `${k == 0 ? '0' : (pivot * k)}%` }}>
-                  <span>{i}</span>
+                <div className={`${styles['relative']}`}>
+                  <span className={`${styles['point']} ${completed ? (i == 'CANCELLED' ? styles['cancelled'] : styles['active']) : ''} `} style={{ left: `${k == 0 ? '0' : (pivot * k)}%` }}></span>
+                  <span className={`${styles['pt-10']} ${styles['pb-10']} ${styles['flex']} ${styles['fs-12']}`}>{i}</span>
                 </div>
               )
             })
           }
         </div>
-        <div style={{ width: `${barLen}%` }} className={`${styles['green-line']} ${styles['relative']}`}></div>
+        <div style={{ width: `${barLen}%` }} className={`${styles['green-line']} ${styles['absolute']}`}></div>
       </Row>
     </div >
   )
