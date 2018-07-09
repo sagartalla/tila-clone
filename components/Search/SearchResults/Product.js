@@ -44,9 +44,9 @@ class Product extends Component {
                   <img src={this.state.src} />
                 </Waypoint>
               </div>
-              <span className={`${styles['tag-main']} ${styles['absolute']}`}></span>
-              <span className={`${styles['variants-main']} ${styles['absolute']}`}></span>
-              <span className={`${styles['fullfill-main']} ${styles['absolute']}`}></span>
+              <span className={`${styles['tag-main']}`}></span>
+              <span className={`${styles['variants-main']}`}></span>
+              <span className={`${styles['fullfill-main']}`}></span>
             </div>
             <div className={styles['desc-cont']}>
               <div className={`${styles['pb-20']} ${styles['pl-20']}`}>
