@@ -7,6 +7,10 @@ const actions = {
   USER_LOGIN_INFO: 'USER_LOGIN_INFO',
   SET_COUNTRY: 'SET_COUNTRY',
   SET_SESSION_ID: 'SET_SESSION_ID',
+  DERIVE_CITY: 'DERIVE_CITY',
+  SET_CITY: 'SET_CITY',
+  AUTOCOMPLETE_CITY: 'AUTOCOMPLETE_CITY',
+  RESET_AUTOCOMPLETE_CITY: 'RESET_AUTOCOMPLETE_CITY',
 };
 
 const actionCreators = {
@@ -58,6 +62,29 @@ const actionCreators = {
     return {
       type: actions.SET_SESSION_ID,
       payload: api.setSessionID(sessionId)
+    }
+  },
+  deriveCity: (params) => {
+    return {
+      type: actions.DERIVE_CITY,
+      payload: api.deriveCity(params),
+    }
+  },
+  setCity: (params) => {
+    return {
+      type: actions.SET_CITY,
+      payload: params
+    }
+  },
+  autoCompleteCity: (params) => {
+    return {
+      type: actions.AUTOCOMPLETE_CITY,
+      payload: api.autoCompleteCity(params),
+    }
+  },
+  resetAutoCompleteData: () => {
+    return {
+      type: actions.RESET_AUTOCOMPLETE_CITY,
     }
   }
 };
