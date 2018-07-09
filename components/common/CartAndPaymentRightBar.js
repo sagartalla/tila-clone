@@ -14,7 +14,7 @@ const CartAndPaymentRightBar = props => {
   const { CART_PAGE } = languageDefinations();
   return (
     <div className={`${styles['right-bar']}`}>
-      <div className={`${styles['coupon-code']} ${styles['pb-10']}`}>
+      <div className={`${styles['coupon-code-main']} ${styles['pb-10']}`}>
         <h4 className={`${styles['fs-16']} ${styles['fontW600']} ${styles['m-0']} ${styles['p-10']} ${styles['flex']} ${styles['justify-center']} ${styles['white-color']}`}>
           <SVGComponent clsName={`${styles['buy-coupon-code']}`} src="icons/common-icon/buy-coupon" />
           <span className={styles['pl-5']}>Buy & Earn 300 Reward Points</span>
@@ -40,7 +40,7 @@ const CartAndPaymentRightBar = props => {
       </div>
       <div className={styles['p-20']}>
         <ul className={`${styles['m-0']} ${styles['p-0']} ${styles['fs-12']}`}>
-          <li><h5 className={`${styles['mb-15']} ${styles['mt-15']} ${styles['fs-16']} ${styles['fontW600']} ${styles['light-gry-clr']}`}>{CART_PAGE.ORDER_SUMMARY}</h5></li>
+          <li><h5 className={`${styles['mb-15']} ${styles['mt-5']} ${styles['fs-16']} ${styles['fontW600']} ${styles['light-gry-clr']}`}>{CART_PAGE.ORDER_SUMMARY}</h5></li>
           {/* <li>Price ({item_cnt} item{item_cnt > 1 ? 's' : ''})<span> {total_price + ' ' + currency}</span></li> */}
           <li>{CART_PAGE.PRICE} ({item_cnt + ' ' + CART_PAGE.ITEMS})<span> {total_price + ' ' + currency}</span></li>
           <li>{CART_PAGE.DELIVERY_CHARGES} <span>{total_shipping} {currency}</span></li>

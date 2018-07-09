@@ -52,4 +52,12 @@ const setSessionID = (sessionId) => {
   }).then(() => sessionId);
 }
 
-export default { userLogin, userRegister, userLogout, getLoginInfo, setCountry, setSessionID };
+const deriveCity = (params) => {
+  return axios.get(`/api/googleApi?api=${params.api}&latitude=${params.latitude}&longitude=${params.longitude}`).then(({data}) => data);
+}
+
+const autoCompleteCity = (params) => {
+    return axios.get(`/api/autoCompleteCity?api=${'/place/autocomplete/json'}&input=${params.input}`).then(({data}) => data);
+}
+
+export default { userLogin, userRegister, userLogout, getLoginInfo, setCountry, setSessionID, deriveCity, autoCompleteCity };

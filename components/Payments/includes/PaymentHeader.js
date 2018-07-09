@@ -4,10 +4,10 @@ import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Payments/payment');
 
 const PaymentHeader = props => (
-  <div className={`${styles['payment-header']} ${styles['p-20']} ${styles['bg-white']} ${styles['default-shadow']}`}>
+  <div className={`${styles['payment-header']} ${styles['pt-20']} ${styles['pb-20']} ${styles['bg-white']} ${styles['default-shadow']}`}>
     <Grid>
       <Row>
-        <Col md={12} className={`${styles['pl-0']}`}>
+        <Col md={12}>
           <div className={`${styles['flex-center']} ${styles['logos-part']}`}>
             <SVGComponent clsName={`${styles['default-logo']}`} src="icons/logos/logo" />
           </div>

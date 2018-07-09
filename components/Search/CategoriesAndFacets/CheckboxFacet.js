@@ -48,7 +48,7 @@ class CheckboxFacet extends Component {
       isMoreButtonRequired: filter.children.length > MaxItems,
     });
   }
- 
+
   render() {
     const { filter } = this.props;
     const { selectedItems } = this.state;
@@ -70,7 +70,7 @@ class CheckboxFacet extends Component {
                 </Checkbox> */}
                 <div className={styles['checkbox-material']}>
                   <input id={childFitler.name} type="checkbox" onChange={this.onChangeItem({ name: childFitler.name, param: childFitler.param })} checked={selectedItems.indexOf(childFitler.name) !== -1}/> 
-                  <label for={childFitler.name} className={styles['fs-12']}> {childFitler.name} <span>({childFitler.count})</span> </label>
+                  <label htmlFor={childFitler.name} className={styles['fs-12']}> {childFitler.name} <span>({childFitler.count})</span> </label>
                 </div>
               </li>
             ))

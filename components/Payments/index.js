@@ -167,7 +167,7 @@ class Payments extends React.Component {
             </Col>
           </Row>
           <Row>
-            <Col md={9} xs={12} sm={12}>
+            <Col md={9} xs={12} sm={12} className={`${styles['pl-30']}`}>
               <SignIn
                 login={login}
                 inputOnChange={this.inputOnChange}
@@ -205,6 +205,9 @@ class Payments extends React.Component {
                     </div>
                     : null
                 }
+                <div className={styles['secure-img']}>
+                  <img className={styles['']} src={"/static/img/bg-img/group-cards.png"}/>
+                </div>
               </div>
             </Col>
           </Row>
