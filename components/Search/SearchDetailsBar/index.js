@@ -13,8 +13,6 @@ const styles = mergeCss('components/Search/search');
 
 const { SEARCH_PAGE } = languageDefinations();
 
-console.log('SEARCH_PAGE', SEARCH_PAGE);
-
 class SearchDetailsBar extends Component {
   render() {
     const { results } = this.props;
