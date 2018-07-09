@@ -12,7 +12,8 @@ const getSearchResultsApi = ({
   pageNum,
   fl,
   isListed,
-  categoryTree
+  categoryTree,
+  shippingDetails
 }) => {
   const options = {
     country,
@@ -23,6 +24,7 @@ const getSearchResultsApi = ({
     query,
     fl,
     isListed,
+    shippingDetails,
   };
   if (categoryTree) {
     options.categoryId = categoryFilter.id;
@@ -50,6 +52,7 @@ const getSearchResultsApi = ({
       query,
       facetFilters,
       categoryFilter,
+      shippingDetails,
     };
     data.geoDetails = {
       country,

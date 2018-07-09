@@ -6,6 +6,8 @@ const _ = require('lodash');
 
 //TODO SF-101 //remove constants from here
 const AUTH_API_URL = 'http://gateway-dev.fptechscience.com/auth-service';
+const GOOGLE_MAPS_URL = 'https://maps.googleapis.com/maps/api';
+const GOOGLE_KEY = 'AIzaSyDrVNKZshUspEprFsNnQD-sos6tvgFdijg';
 
 apiRoutes
   .post('/login', (req, res) => {
@@ -71,7 +73,47 @@ apiRoutes
       req.universalCookies.remove('key');
     });
     res.json({});
+  })
+  .get('/googleApi', (req, res) => {
+    const {api, latitude, longitude} = req.query;
+    return axios
+      .get(`${GOOGLE_MAPS_URL}${api}?key=${GOOGLE_KEY}&latlng=${latitude},${longitude}&sensor=true`)
+      .then(({data}) => {
+        const { results } = data;
+        const city = results.length ? _.filter(results[0].address_components, (ac) => {
+          return ac.types.indexOf('administrative_area_level_2') !== -1 || ac.types.indexOf('locality') !== -1
+        })[0].long_name : null;
+        const country = results.length ? _.filter(results[0].address_components, (ac) => {
+          return ac.types.indexOf('country') !== -1;
+        })[0].long_name : null;
+        req.universalCookies.set('city', city, { path: '/' });
+        res.json({
+          country,
+          city,
+          displayCity: `${city}, ${country}`,
+        });
+      });
+  })
+  .get('/autoCompleteCity', (req, res) => {
+    const { api, input } = req.query;
+    return axios
+      .get(`${GOOGLE_MAPS_URL}${api}?key=${GOOGLE_KEY}&type=(cities)&input=${input}`)
+      .then((data) => {
+        res.json(data.data.predictions.map((prediction) => {
+          const terms = prediction.terms;
+          return {
+            displayCity: prediction.description,
+            city: terms[0].value,
+            country: terms[terms.length - 1].value,
+          };
+        }));
+      })
+      .catch((e) => {
+        res.json(e);
+      })
   });
+
+
 
 
 module.exports = apiRoutes;

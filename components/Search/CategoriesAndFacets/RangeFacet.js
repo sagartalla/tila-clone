@@ -20,7 +20,7 @@ class RangeFitler extends Component {
         min: Math.min.apply(null, filter.children[0].values),
         max: Math.max.apply(null, filter.children[0].values),
       },
-      value: { 
+      value: {
         min: min || Math.min.apply(null, filter.children[0].values),
         max: max || Math.max.apply(null, filter.children[0].values),
       },
@@ -93,7 +93,6 @@ class RangeFitler extends Component {
         </div>
         <div className={`${styles['range-fitler-wrap']} ${styles['p-20']}`}>
           <InputRange
-            // formatLabel={value => ''}
             maxValue={max}
             minValue={min}
             value={this.state.value}

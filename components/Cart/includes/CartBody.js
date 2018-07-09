@@ -48,7 +48,7 @@ const CartBody = props => {
                         <div className={`${styles['cart-box']} ${styles['p-20']}`}>
                           <Row>
                             <Col md={2}>
-                              <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles['pb-15']}`}><img className={styles['img']} src={img} /></div>
+                              <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles['pb-15']} ${styles['card-box-inn-img']}`}><img className={styles['img']} src={img} /></div>
                               <CartStepper
                                 item={item}
                                 decreaseItemCnt={decreaseItemCnt}
@@ -143,6 +143,9 @@ const CartBody = props => {
                   showCheckoutBtn={true}
                   checkoutBtnHandler={checkoutBtnHandler}
                 />
+              </div>
+              <div className={styles['secure-img']}>
+                <img className={styles['']} src={"/static/img/bg-img/group-cards.png"}/>
               </div>
             </Col>
           </Row>

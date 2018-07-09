@@ -11,7 +11,7 @@
 
   // ul
   //   padding 0 20px
-  li 
+  li
     list-style none
 
 .search-results
@@ -19,14 +19,16 @@
   width calc(80% - 20px)
 
   .hover-show-date
-    // transition: all 2s ease;
-    // transition-duration: 2s
     display none
     z-index 9
     background-color white
+    left 0
+    bottom -19%
     .quick-view
       background-color label-light
       padding 10px 0
+      width 98%
+      margin 0 auto
       a
         color white
         width 50%
@@ -35,7 +37,7 @@
           border-right 1px solid white
     .brand-price-details
       padding 0 20px
-    
+
     .wish-list-part
       padding 10px 15px
       .wish-list
@@ -71,38 +73,40 @@
 
   .applied-tags
     .applied-tags-inn
-      background: linear-gradient(to left, gray-light, white);
-      border-radius: 15px;
+      background: linear-gradient(to left, gray-light, white)
+      border-radius: 15px
       border: 0.5px solid rgba(192, 192, 192, 0.3)
       .title
-        padding: 0px 10px;
+        padding: 0px 10px
       .close-part
-        padding: 2px 10px;
-        box-sizing: border-box;
+        padding: 2px 10px
+        box-sizing: border-box
         border-left: 0.5px solid rgba(192, 192, 192, 0.3)
 
 .product-items
-  // -webkit-transition: all 2s ease;
-  // -moz-transition: all 2s ease;
-  // -ms-transition: all 2s ease;
-  // transition: all 2s ease;
+  transform: scale(1)
+  transition: all .3s ease
+  height 100%
   .desc-cont
     .prdt-name
       width 100%
-  // .variant-info
-  //   display none
   &:hover
     z-index 9
-    border-radius 4px
-    // border 2px solid white
-    // transform-origin: top right;
-    // transform: translateY(-20px);
-    // height 580px
+    transform scale(1.1)
+    padding 0 4px
+    border-top-left-radius 12px
+    border-top-right-radius 12px
+    background-color white
+    box-shadow 0 0 34px 0 #c0c0c0
+    z-index 9
+    .image-div
+      border-top-left-radius 12px
+      border-top-right-radius 12px
     .desc-cont
       display none
     .hover-show-date
       display block
-      // transform: translateY(-20px);
+     
 
 .loader
   position absolute
@@ -119,12 +123,11 @@
   background-color white
 
   .img-cont 
-  // width 180px
     height 397.36px
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
+    display flex
+    align-items center
+    justify-content center
+    width 100%
     .tag-main
       width 18px
       height 18px
@@ -134,8 +137,8 @@
       width-height-radius(35px, 35px, 50%)
       bottom 10px
       left 10px
-      background: rgba(255, 255, 255, 0.5);
-      padding: 8px;
+      background rgba(255, 255, 255, 0.5)
+      padding 8px
     .fullfill-main
       top 20px
       right 20px
@@ -144,26 +147,26 @@
     .image-div
       width 100%
       height 100%
-      overflow: hidden
+      overflow hidden
       display flex
       justify-content center
       img
-        max-height: 100%;
-        max-width: 100%;
-        object-fit: scale-down;
+        max-height 100%
+        max-width 100%
+        object-fit scale-down
 
-.category-list 
+.category-list
   border-bottom 1px solid border-gray
   padding-bottom 10px
 
-  .category-list-title 
+  .category-list-title
     border-bottom 1px solid border-gray
     .expand-icon
       width 16px
       height 16px
 
 .category-sub-list
-  padding: 10px 0 0 20px
+  padding 10px 0 0 20px
 
   .main-sub-list > a
     color black
@@ -175,7 +178,7 @@
   &:hover
     font-weight 600
 
-.range-select-part 
+.range-select-part
   display flex
   justify-content space-between
   align-items center
@@ -194,44 +197,42 @@
 // toogle switch css start
 
 .switch 
-  position: relative;
-  display: inline-block;
-  width: 60px;
+  position relative
+  display inline-block
+  width 60px
   height 15px
   .slider
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: swich-bg-color;
-    border: solid 1px swich-color;
-    -webkit-transition: .4s;
-    transition: .4s;
-    height: 15px
-    border-radius: 7px;
+    position absolute
+    cursor pointer
+    top 0
+    left 0
+    right 0
+    bottom 0
+    background-color swich-bg-color
+    border solid 1px swich-color
+    -webkit-transition .4s
+    transition .4s
+    height 15px
+    border-radius 7px
     &:before
-      position: absolute;
-      content: "";
-      height: 30px;
-      width: 30px;
-      left: 0;
-      top: -9px;
-      -webkit-transition: .4s;
-      transition: .4s;
+      position absolute
+      content ""
+      width-height-radius(30px, 30px, 50%)
+      left 0
+      top -9px
+      -webkit-transition .4s
+      transition .4s
       border:1px solid thck-gry-clr
-      border-radius: 50%;
 
 .all-deals-part .switch .slider:before
-  background: white url(/static/img/bg-img/tag-icon.png) no-repeat;
-  background-position: 4px 6px;
-  background-size: 16px 16px;
+  background white url(/static/img/bg-img/tag-icon.png) no-repeat
+  background-position 4px 6px
+  background-size 16px 16px
 
 .fullfill-part .switch .slider:before
-  background: white url(/static/img/bg-img/icon-fulfilled.png) no-repeat;
-  background-position: 4px 6px;
-  background-size: 16px 16px;
+  background white url(/static/img/bg-img/icon-fulfilled.png) no-repeat
+  background-position 4px 6px
+  background-size 16px 16px
 
 .switch .switch-check {display:none;}
 
@@ -241,3 +242,13 @@
   transform: translateX(26px);
 }
 
+.auto-suggestions-wrap
+  position relative
+  .auto-suggestions
+    position absolute
+    z-index 1
+    cursor pointer
+    .item
+      display block
+      background rgba(0,0,0,0.1)
+      border-bottom 1px solid

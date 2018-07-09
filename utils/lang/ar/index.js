@@ -145,4 +145,16 @@ export const AR_KEYWORDS = {
     'TWITTER': 'Twitter',
     'NOTE': 'Your facebook account has been linked with Tila.com '
   },
+  SEARCH_PAGE: {
+    'DELIVER_TO': 'Deliver to',
+    'NO_OF_ITEMS_FOUND': 'no of items found',
+    'SORT_BY': 'Sort by',
+    'BEST_MATCH': 'Best Match',
+    'BEST_OFFERS': 'Best Offers',
+    'SUGGESTED_TAGS': 'Suggested Tags',
+    'FULFILLED_BY_TILA': 'Fulfilled by Tila',
+    'ALL_DEALS': 'All Deals',
+    'APPLIED_FILTERS_TAGS': 'Applied Filters / Tags',
+    'CLEAR_ALL': 'CLEAR ALL',
+  },
 };

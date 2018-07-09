@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { languageDefinations } from '../../../utils/lang/';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
-
+import SVGComponent from '../../common/SVGComponet';
 import Blocker from '../../common/Blocker';
 import CartStepper from './CartStepper';
 
@@ -22,7 +22,7 @@ const MiniCartBody = props => {
         showBlocker ? <Blocker /> : ''
       }
       <div>
-        <h5>
+        <h5 className={`${styles['mt-0']} ${styles['fontW600']} ${styles['thick-gry-clr']} ${styles['mb-0']}`}>
           <span>{cnt + ' Items'}</span>
         </h5>
       </div>
@@ -31,21 +31,29 @@ const MiniCartBody = props => {
           items.map((item, index) => {
             const { item_id, img, name, price, cur, quantity, max_limit, inventory, brand_name } = item;
             return (
-              <Row key={item_id}>
-                <Col md={2}>
-                  <img style={{ height: '50px' }} className={styles['img']} src={img} />
+              <div key={item_id} className={`${styles['flex']} ${styles['pt-15']} ${styles['pb-15']} ${styles['border-b']}`}>
+                <Col md={2} className={`${styles['pl-0']} ${styles['pr-0']}`}>
+                  <div className={`${styles['cart-container-img']} ${styles['flex']} ${styles['justify-center']}`}>
+                    <img className={styles['img']} src={img} />
+                  </div>
                 </Col>
-                <Col md={10}>
-                  <h6 className={`${styles['m-0']}`}>{name}</h6>
-                  {
-                    editCartDetails
-                      ?
-                      <div id={item_id} onClick={removeCartItem}><a className={styles['fs-12']}>Remove</a></div>
-                      : null
-                  }
+                <Col md={10} className={`${styles['pr-0']} ${styles['card-details-labels']}`}>
                   <div className={`${styles['flx-space-bw']}`}>
-                    <div>{price + ' ' + cur}</div>
-                    <div>
+                    <h6 className={`${styles['m-0']} ${styles['card-details-name']}`}>{name}</h6>
+                    {
+                      editCartDetails
+                        ?
+                        <span id={item_id} onClick={removeCartItem} className={styles['flex']}>
+                          <a className={styles['flex']}>
+                            <SVGComponent clsName={`${styles['delete-icon']}`} src="icons/delete-icon/delete-icon" />
+                          </a>
+                        </span>
+                        : null
+                    }
+                  </div>
+                  <div className={`${styles['flx-space-bw']} ${styles['pt-10']}`}>
+                    <span className={styles['fontW600']}>{price + ' ' + cur}</span>
+                    <span>
                       {
                         editCartDetails ?
                           <CartStepper
@@ -55,10 +63,10 @@ const MiniCartBody = props => {
                           />
                           : ''
                       }
-                    </div>
+                    </span>
                   </div>
                 </Col>
-              </Row>
+              </div>
             )
           })
         }
