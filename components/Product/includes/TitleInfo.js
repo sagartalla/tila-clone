@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { mergeCss } from '../../utils/cssUtil';
+import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Product/product');
 
 /*
@@ -29,14 +29,18 @@ const TitleInfo = ({ brand, title, rating, reviews, price, originalPrice, discou
           ({rating.rating}) {rating.count}
         </div>
         <div className={styles['ti-reviews-wrap']}>
-          {reviews.count} Reviews
+          <span>{reviews.count} Reviews</span>
+          &nbsp;|&nbsp;
+          <span>Custoomer Review</span>
+          &nbsp;|&nbsp;
+          <span>Ask Question</span>
         </div>
       </div>
-      <div className={`${styles['fs-18']} ${styles['fontW600']} ${styles['black-color']}`}>
+      {/*<div className={`${styles['fs-18']} ${styles['fontW600']} ${styles['black-color']}`}>
         <div className={styles['ti-current-price']}>{price}</div>
         <div className={styles['ti-original-price']}>{originalPrice}</div>
         <div className={styles['ti-discount-percent']}>{discountPercent}</div>
-      </div>
+      </div>*/}
     </div>
   )
 };

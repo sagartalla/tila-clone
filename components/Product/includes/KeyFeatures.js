@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { mergeCss } from '../../utils/cssUtil';
+import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Product/product');
 
 const KeyFeatures = ({ features }) => {
@@ -24,4 +24,3 @@ KeyFeatures.propTypes = {
 }
 
 export default KeyFeatures;
-

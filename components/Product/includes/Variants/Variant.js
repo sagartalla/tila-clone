@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { mergeCss } from '../../../utils/cssUtil';
-const styles = mergeCss('components/Product/Variants/variants');
+import { mergeCss } from '../../../../utils/cssUtil';
+const styles = mergeCss('components/Product/includes/Variants/variants');
 
 const Variant = ({ title, options, onSelectVariant }) => {
   return (

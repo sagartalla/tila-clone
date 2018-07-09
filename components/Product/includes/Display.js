@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Slider from "react-slick";
 
-import constants from '../../constants';
+import constants from '../../../constants';
 
-import { mergeCss } from '../../utils/cssUtil';
+import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Product/product');
 
 class Display extends Component {
@@ -15,7 +15,7 @@ class Display extends Component {
       nav2: null
     };
   }
-  
+
   componentDidMount() {
     this.setState({
       nav1: this.slider1,

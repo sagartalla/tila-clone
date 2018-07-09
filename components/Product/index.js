@@ -6,12 +6,13 @@ import PropTypes from 'prop-types';
 
 import selectors from '../../store/product/selectors'
 import HeaderBar from '../HeaderBar/index';
-import Dispalay from './Display';
-import TitleInfo from './TitleInfo';
-import KeyFeatures from './KeyFeatures';
-import Variants from './Variants';
-import Catalog from './Catalog';
-import Offers from './Offers';
+import Dispalay from './includes/Display';
+import TitleInfo from './includes/TitleInfo';
+import KeyFeatures from './includes/KeyFeatures';
+import Variants from './includes/Variants';
+import Catalog from './includes/Catalog';
+import Offers from './includes/Offers';
+import Shipping from './includes/Shipping';
 import ReviewRatingList from '../RatingReviews/List';
 
 import { mergeCss } from '../../utils/cssUtil';
@@ -33,6 +34,7 @@ const getProductComponent = (isPreview) => {
             <Col xs={12} md={6}>
               <TitleInfo {...titleInfo} />
               <KeyFeatures features={keyfeatures} />
+              <Shipping />
               {/* <NoSSR>
                 <Variants />
               </NoSSR> */}
