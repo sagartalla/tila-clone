@@ -7,7 +7,6 @@ import makeStore from '../store';
 import Base, { baseActions } from './base';
 import Layout from '../layout/main';
 import Thankyou from '../components/Thankyou';
-import Base from './base';
 
 class ThankyouPage extends Base {
   pageName = 'THANK YOU';
