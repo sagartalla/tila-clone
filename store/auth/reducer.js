@@ -8,11 +8,13 @@ const initialState = {
   data: {
     isLoggedIn: false,
     userCreds: {},
+    geoShippingDetails: {},
+    autoCompleteCity: [],
   },
   error: '',
 };
 
-const productReducer = typeToReducer({
+const authReducer = typeToReducer({
   [actions.USER_LOGIN]: {
     PENDING: state => {
       return Object.assign({}, state, {
@@ -20,18 +22,18 @@ const productReducer = typeToReducer({
       }, { ui: { loading: true } });
     },
     FULFILLED: (state, action) => {
-      return Object.assign({}, state, { 
+      return Object.assign({}, state, {
         data: {
           ...state.data,
           ...action.payload.data
-        }, 
+        },
         ui: { loading: false }
       });
     },
     REJECTED: (state, action) => {
       return Object.assign({}, state, {
-        error: action.payload.response.data.message, 
-        data: { 
+        error: action.payload.response.data.message,
+        data: {
           ...state.data,
           isLoggedIn: false
         },
@@ -46,12 +48,12 @@ const productReducer = typeToReducer({
       }, { ui: { loading: true } });
     },
     FULFILLED: (state, action) => {
-      return Object.assign({}, state, { 
+      return Object.assign({}, state, {
         data: {
           ...state.data,
           registrationDetails: action.payload.data
-        }, 
-        ui: { loading: false } 
+        },
+        ui: { loading: false }
       });
     },
     REJECTED: (state, action) => {
@@ -88,8 +90,80 @@ const productReducer = typeToReducer({
         country: action.payload
       }
     }
+  },
+  [actions.SET_CITY]: (state, action) => {
+    const { city, country, displayCity } = action.payload
+    return {
+      ...state,
+      data: {
+        ...state.data,
+        geoShippingDetails: {
+          ...state.data.geoShippingDetails,
+          city,
+          country,
+          displayCity,
+        }
+      }
+    }
+  },
+  [actions.DERIVE_CITY]: {
+    PENDING: state => {
+      return Object.assign({}, state, {
+        error: '',
+      }, { ui: { loading: true } });
+    },
+    FULFILLED: (state, action) => {
+      const { city, country, displayCity } = action.payload;
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          geoShippingDetails: {
+            city,
+            country,
+            displayCity,
+          }
+        }
+      }
+    },
+    REJECTED: (state, action) => {
+      return Object.assign({}, state, {
+        error: action.payload.response ? action.payload.response.data.message : action.payload.message,
+        ui: { loading: false }
+      });
+    },
+  },
+  [actions.RESET_AUTOCOMPLETE_CITY]: (state, action) => {
+    return {
+      ...state,
+      data: {
+        ...state.data,
+        autoCompleteCity: []
+      }
+    }
+  },
+  [actions.AUTOCOMPLETE_CITY]: {
+    PENDING: state => {
+      return Object.assign({}, state, {
+        error: '',
+      }, { ui: { loading: true } });
+    },
+    FULFILLED: (state, action) => {
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          autoCompleteCity: action.payload,
+        }
+      }
+    },
+    REJECTED: (state, action) => {
+      return Object.assign({}, state, {
+        error: action.payload.response ? action.payload.response.data.message : action.payload.message,
+        ui: { loading: false }
+      });
+    },
   }
-  
 }, initialState);
 
-export default productReducer;
+export default authReducer;
