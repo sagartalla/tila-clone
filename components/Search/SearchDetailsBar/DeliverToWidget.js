@@ -6,9 +6,12 @@ import _ from 'lodash';
 
 import { actionCreators, selectors } from '../../../store/auth';
 import SVGCompoent from '../../common/SVGComponet';
+import { languageDefinations } from '../../../utils/lang';
 
 import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Search/search');
+
+const { SEARCH_PAGE } = languageDefinations();
 
 class DeliverToWidget extends Component {
   constructor(props) {
@@ -84,7 +87,7 @@ class DeliverToWidget extends Component {
       <div className={`${styles['flex-center']} ${styles['delovery-inn']}`}>
         <span className={`${styles['flex-center']} ${styles['delivery-part']}`}>
           <SVGCompoent clsName={`${styles['map-icon']}`} src="icons/common-icon/black-map-location" />
-          <span className={`${styles['fontW600']} ${styles['pl-5']} ${styles['pr-10']}`}>Deliver to :</span>
+          <span className={`${styles['fontW600']} ${styles['pl-5']} ${styles['pr-10']}`}>{SEARCH_PAGE.DELIVER_TO} :</span>
         </span>
         <div className={styles['auto-suggestions-wrap']}>
           <input type="text" value={stateDisplayCity  || stateDisplayCity === '' ? stateDisplayCity : displayCity} onChange={this.onChangeCity} onFocus={this.onFocusCity}/>
