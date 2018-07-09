@@ -19,7 +19,13 @@ export const AR_KEYWORDS = {
     'UNITS_LEFT': 'units left',
     'OUT_OF_STOCK': 'Out of stock',
     'MOVE_TO_WISHLIST': 'Move to Wishlist',
-    'SEND_GIFT' : 'Send this as a gift',
+    'SEND_GIFT': 'Send this as a gift',
+    'SHIPPING': 'Shipping',
+    'WARRENTY': 'Warrenty',
+    'WARRENTY_TXT': 'Months Extended Manufacturer Warranty',
+    'ETA_DELIVERY_BY': 'Estimated Delivery by',
+    'REGULAR_SHIPPING': 'Regular Shipping',
+    'VIEW_MORE': 'View More',
     'MAX_PER_ORDER': 'Max per order quantity of this item reached.'
   },
   PAYMENT_PAGE: {
