@@ -11,7 +11,7 @@ const CartStepper = props => {
   const { CART_PAGE } = languageDefinations();
 
   return (
-    <div>
+    <div className={styles['cart-stepper']}>
       {
         inventory > 0 ?
           <div className={`${styles['flex-center']} ${styles['justify-center']}`}>

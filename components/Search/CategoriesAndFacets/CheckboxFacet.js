@@ -69,7 +69,7 @@ class CheckboxFacet extends Component {
                   <span><span>{childFitler.name}</span><span>({childFitler.count})</span></span>
                 </Checkbox> */}
                 <div className={styles['checkbox-material']}>
-                  <input id={childFitler.name} type="checkbox" onChange={this.onChangeItem({ name: childFitler.name, param: childFitler.param })} checked={selectedItems.indexOf(childFitler.name) !== -1}/>
+                  <input id={childFitler.name} type="checkbox" onChange={this.onChangeItem({ name: childFitler.name, param: childFitler.param })} checked={selectedItems.indexOf(childFitler.name) !== -1}/> 
                   <label htmlFor={childFitler.name} className={styles['fs-12']}> {childFitler.name} <span>({childFitler.count})</span> </label>
                 </div>
               </li>
