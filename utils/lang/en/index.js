@@ -76,6 +76,9 @@ export const EN_KEYWORDS = {
     'ALL_STARTS': 'All Starts',
     'FILTER_BY': 'Filter By',
     'NO REVIEWS': 'No Reviews',
+    'SELECT_CITY': 'SELECT CITY',
+    'FREE_DELIVERY': 'Free delivery',
+    'DAYS': 'Days',
   },
   VAULT_PAGE: {
     'MANAGE_VAULT_HDR': 'Manage Cards, Vouchers and More',
@@ -139,4 +142,3 @@ export const EN_KEYWORDS = {
     'NOTE': 'Your facebook account has been linked with Tila.com '
   },
 };
-
