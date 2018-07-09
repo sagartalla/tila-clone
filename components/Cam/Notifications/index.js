@@ -24,23 +24,25 @@ class Notifications extends Component {
     const { results } = this.props;
 
     return (
-      <div className={`${styles['notifications-container']} ${styles['ml-20']}`}>
-        <h3>All Notifications</h3>
-        <h6>Today</h6>
+      <div className={`${styles['notifications-container']} ${styles['ml-5']}`}>
+        <h4 className={`${styles['mt-0']} ${styles['fontW600']} ${styles['mb-30']}`}>All Notifications</h4>
+        <div className={`${styles['notification-inn']}`}>
+          <span className={`${styles['white-color']} ${styles['notification-data']} ${styles['mb-15']}`}>Today</span>
 
-        {
-          results.length > 0 && results.map((res, index) => {
-            const { } = res;
-            return (
-              <div key={index} className={`${styles['box']} ${styles['p-20']} ${styles['mb-20']}`}>
-                <Row>
-                  <Col md={1}>{res.time}</Col>
-                  <Col md={11}>{res.content}</Col>
-                </Row>
-              </div>
-            )
-          })
-        }
+          {
+            results.length > 0 && results.map((res, index) => {
+              const { } = res;
+              return (
+                <div key={index} className={`${styles['box']} ${styles['p-20']} ${styles['mb-20']}`}>
+                  <Row>
+                    <Col md={1}>{res.time}</Col>
+                    <Col md={11}>{res.content}</Col>
+                  </Row>
+                </div>
+              )
+            })
+          }
+        </div>
       </div>
     )
   }
