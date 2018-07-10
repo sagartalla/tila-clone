@@ -25,7 +25,7 @@ class Wishlist extends Component {
   }
 
   deleteItem(e) {
-    this.props.deleteWishlist(e.target.id)
+    this.props.deleteWishlist(e.currentTarget.id)
   }
 
   addToCart(e) {
