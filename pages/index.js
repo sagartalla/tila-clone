@@ -25,7 +25,7 @@ class SearchPage extends Base {
       id: subCategory ? subCategory.match(/(\d*)$/)[0] : category ? category.match(/(\d*)$/)[0] : null,
     };
     const facetFilters = selectors.getFacetfilters(store.getState())(JSON.parse(facets || '{}'));
-    const shippingData = authSelectors.getDeliveryCity(state);
+    const shippingData = req ? req.universalCookies.get('shippingInfo') : cookies.get('shippingInfo');;
     const { city: shippingCity, country: shippingCountry } = shippingData;
     await store.dispatch(actionCreators.getSearchResults({
       categoryFilter,

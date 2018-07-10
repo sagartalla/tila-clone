@@ -17,11 +17,11 @@ class ProductPage extends Base {
     super(props);
     this.product = getProductComponent(this.props.url.query.isPreview);
   }
-  static async getInitialProps({ store, query, isServer }) {
-    //TODO SF-37 better handling of country
+  static async getInitialProps({ store, query, isServer, req }) {
     const state = store.getState();
-    const country = state.authReducer.data.country;
-
+    const country = req ? req.universalCookies.get('country') : cookies.get('country');
+    const shippingData = req ?  req.universalCookies.get('shippingInfo') : cookies.get('shippingInfo');;
+    const { city: shippingCity, country: shippingCountry } = shippingData;
     if (query.isPreview){
       await store.dispatch(actionCreators.getPreview({
         taskCode: query.taskCode,
@@ -30,7 +30,7 @@ class ProductPage extends Base {
     } else {
       await Promise.all([
         store.dispatch(actionCreators.getProduct({
-          "city": "string",
+          "city": shippingCity,
           "country_code": country || "ksa",
           "flags": {
             "catalog_details": true,
