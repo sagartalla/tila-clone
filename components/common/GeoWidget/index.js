@@ -35,6 +35,13 @@ class GeoWidget extends Component {
     // this.setState({
     //   ...nextProps.geoShippingData
     // })
+    const { geoShippingData } = nextProps;
+    if(this.state.displayCity == '' && geoShippingData) {
+      this.setState({
+        displayCity: geoShippingData.displayCity
+      })
+    }
+    // stateDisplayCity  || stateDisplayCity === '' ? stateDisplayCity : displayCity
   }
 
   onChangeCity(e) {
@@ -81,8 +88,8 @@ class GeoWidget extends Component {
 
   render() {
     const { autoCompleteCityData, geoShippingData } = this.props;
-    const { displayCity } = geoShippingData;
-    const { displayCity: stateDisplayCity } = this.state;
+    // const { displayCity } = geoShippingData;
+    // const { displayCity: stateDisplayCity } = this.state;
     return (
       <div className={`${styles['flex-center']} ${styles['delovery-inn']}`}>
         <span className={`${styles['flex-center']} ${styles['delivery-part']}`}>
@@ -90,7 +97,7 @@ class GeoWidget extends Component {
           <span className={`${styles['fontW600']} ${styles['pl-5']} ${styles['pr-10']}`}>{SEARCH_PAGE.DELIVER_TO} :</span>
         </span>
         <div className={styles['auto-suggestions-wrap']}>
-          <input type="text" value={stateDisplayCity  || stateDisplayCity === '' ? stateDisplayCity : displayCity} onChange={this.onChangeCity} onFocus={this.onFocusCity}/>
+          <input type="text" value={this.state.displayCity} onChange={this.onChangeCity} onFocus={this.onFocusCity}/>
           <div className={styles['auto-suggestions']}>
             {
               autoCompleteCityData.map((result) => <div key={result.displayCity} data-id={result.displayCity} onClick={this.selectCityFromSuggesstions} className={styles['item']}>{result.displayCity}</div>)
