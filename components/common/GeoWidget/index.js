@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import _ from 'lodash';
+import Cookie from 'universal-cookie';
 
 import { actionCreators, selectors } from '../../../store/auth';
 import SVGCompoent from '../SVGComponet';
@@ -12,12 +13,15 @@ import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/common/GeoWidget/geoWidget');
 
 const { SEARCH_PAGE } = languageDefinations();
+const cookies = new Cookie();
 
 class GeoWidget extends Component {
   constructor(props) {
+    const shippingInfo = cookies.get('shippingInfo');
     super(props);
     this.state = {
-      ...props.geoShippingData
+      ...props.geoShippingData,
+      ...shippingInfo,
     }
     this.deriveCity = this.deriveCity.bind(this);
     this.onChangeCity = this.onChangeCity.bind(this);
@@ -26,22 +30,19 @@ class GeoWidget extends Component {
   }
 
   componentDidMount() {
-    if(navigator.geolocation) {
+    const shippingInfo = cookies.get('shippingInfo')
+    if(navigator.geolocation && !shippingInfo) {
       navigator.geolocation.getCurrentPosition(this.deriveCity);
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    // this.setState({
-    //   ...nextProps.geoShippingData
-    // })
     const { geoShippingData } = nextProps;
     if(this.state.displayCity == '' && geoShippingData) {
       this.setState({
         displayCity: geoShippingData.displayCity
       })
     }
-    // stateDisplayCity  || stateDisplayCity === '' ? stateDisplayCity : displayCity
   }
 
   onChangeCity(e) {
