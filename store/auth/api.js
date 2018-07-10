@@ -60,4 +60,14 @@ const autoCompleteCity = (params) => {
     return axios.get(`/api/autoCompleteCity?api=${'/place/autocomplete/json'}&input=${params.input}`).then(({data}) => data);
 }
 
-export default { userLogin, userRegister, userLogout, getLoginInfo, setCountry, setSessionID, deriveCity, autoCompleteCity };
+const setCity = (params) => {
+  return axios.post('/api/setCookie', {
+    data: {
+      shippingInfo: {
+        ...params
+      }
+    }
+  }).then(() => params);
+}
+
+export default { userLogin, userRegister, userLogout, getLoginInfo, setCountry, setSessionID, deriveCity, autoCompleteCity, setCity };

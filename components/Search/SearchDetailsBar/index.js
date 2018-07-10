@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import DeliverToWidget from './DeliverToWidget';
+import GeoWidget from '../../common/GeoWidget';
 
 import { actionCreators, selectors } from '../../../store/search';
 import { languageDefinations } from '../../../utils/lang';
@@ -28,7 +28,7 @@ class SearchDetailsBar extends Component {
               </span>
               <span>Riyadh</span>
             </div>*/}
-            <DeliverToWidget />
+            <GeoWidget />
             <div className={`${styles['flex-center']} ${styles['sort-part-inn']}`}>
               <label className={`${styles['mb-0']} ${styles['fontW600']}`}>{SEARCH_PAGE.SORT_BY} : </label>
               <div className={styles['select']}>
