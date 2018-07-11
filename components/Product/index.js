@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Grid, Row, Col } from 'react-bootstrap';
+import { Grid, Row, Col, Tabs, Tab } from 'react-bootstrap';
 import NoSSR from 'react-no-ssr';
 import PropTypes from 'prop-types';
 
@@ -12,6 +12,9 @@ import KeyFeatures from './KeyFeatures';
 import Variants from './Variants';
 import Catalog from './Catalog';
 import Offers from './Offers';
+import ProductPrice from './ProductPrice';
+import AddToCart from './BuyNow';
+import ProductDetails from './ProductDetails';
 import ReviewRatingList from '../RatingReviews/List';
 
 import { mergeCss } from '../../utils/cssUtil';
@@ -19,29 +22,37 @@ const styles = mergeCss('components/Product/product');
 
 const getProductComponent = (isPreview) => {
   const Product = ({ productData }) => {
-    const { catalog, titleInfo, keyfeatures, imgUrls, offerInfo } = productData;
+    const { catalog, titleInfo, keyfeatures, imgUrls, offerInfo, details, pricedetails } = productData;
     return (
       <div>
         {
           isPreview ? null : <HeaderBar />
         }
-        <Grid className={`${styles['pb-30']} ${styles['pt-30']}`}>
-          <Row>
-            <Col xs={12} md={6}>
+        <div className={`${styles['pb-30']} ${styles['page-details-slider']}`}>
+          <Row className={styles['m-0']}>
+            <Col xs={12} md={8} className={styles['pl-0']}>
               <Dispalay imgs={imgUrls} />
             </Col>
-            <Col xs={12} md={6}>
-              <TitleInfo {...titleInfo} />
-              <KeyFeatures features={keyfeatures} />
-              {/* <NoSSR>
-                <Variants />
-              </NoSSR> */}
-              {
-                isPreview ? null : <Offers offerInfo={offerInfo}/>
-              }
-            </Col>
+            {/* <Col xs={12} md={4}> */}
+              <div className={`${styles['details-right-part']}`}>
+                <div className={`${styles['details-right-part-inn']}`}>
+                  <TitleInfo {...titleInfo} />
+                  <ProductDetails produdetils= {details} />
+                  <KeyFeatures features={keyfeatures} />
+                  <ProductPrice price= {pricedetails} />
+                  {/* <NoSSR>
+                    <Variants />
+                  </NoSSR> */}
+                  {/* {
+                    isPreview ? null : <Offers offerInfo={offerInfo}/>
+                  } */}
+                  
+                </div>
+                <AddToCart />
+              </div>
+            {/* </Col> */}
           </Row>
-        </Grid>
+        </div>
         <div className={`${styles['border-b']} ${styles['border-t']} ${styles['pb-30']} ${styles['pt-30']}`}>
           <Grid>
             <Row>
@@ -51,7 +62,7 @@ const getProductComponent = (isPreview) => {
             </Row>
           </Grid>
         </div>
-        <Grid>
+        {/* <Grid>
           <Row>
             <Col xs={12}>
               <div><b>Compare</b></div>
@@ -75,7 +86,15 @@ const getProductComponent = (isPreview) => {
               </div>
             </Col>
           </Row>
-        </Grid>
+        </Grid> */}
+        {/* <Tabs defaultActiveKey={2} id="uncontrolled-tab-example">
+          <Tab eventKey={1} title="Tab 1">
+           Tab 1 content
+          </Tab>
+          <Tab eventKey={2} title="Tab 2">
+            Tab 2 content
+          </Tab>
+        </Tabs> */}
       </div>
     );
   };

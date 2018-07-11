@@ -3,3 +3,7 @@
     width: 1440px;
     }
 }
+
+.slick-slider.sub-slider .slick-slide {
+    width: 70px !important;
+}
