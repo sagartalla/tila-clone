@@ -48,7 +48,7 @@ class ShippingAddress extends Component {
     this.deleteAddr = this.deleteAddr.bind(this);
     this.editAddress = this.editAddress.bind(this);
     this.makeDefaultAddress = this.makeDefaultAddress.bind(this);
-    this.updateAddressFromGoogleMap = this.updateAddressFromGoogleMap.bind(this);
+    this.getDataFromMap = this.getDataFromMap.bind(this);
     this.setAsDefaultLocation = this.setAsDefaultLocation.bind(this);
     this.addrTypeHandler = this.addrTypeHandler.bind(this);
   }
@@ -103,7 +103,7 @@ class ShippingAddress extends Component {
     this.setState({ addr });
   }
 
-  updateAddressFromGoogleMap(json) {
+  getDataFromMap(json) {
     let { lat, lng, address } = json;
     const addr = { ...this.state.addr };
 
@@ -153,7 +153,7 @@ class ShippingAddress extends Component {
                   data={addr}
                   showNewAddr={showNewAddr}
                   homeButton={this.homeButton}
-                  updateAddressFromGoogleMap={this.updateAddressFromGoogleMap}
+                  getDataFromMap={this.getDataFromMap}
                   setAsDefaultLocation={this.setAsDefaultLocation}
                   addrTypeHandler={this.addrTypeHandler}
                   showAddAdrressForm={this.showAddAdrressForm}

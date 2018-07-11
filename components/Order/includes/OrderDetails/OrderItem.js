@@ -13,7 +13,7 @@ import { actionCreators }   from '../../../../store/order';
 import { mergeCss } from '../../../../utils/cssUtil';
 const styles = mergeCss('components/Order/order');
 
-const OrderItem = ({ orderItem, raiseOrderIssue, orderId, showWidget }) => {
+const OrderItem = ({ orderItem, raiseOrderIssue, orderId, showWidget, thankyouPage }) => {
   const { products } = orderItem;
 
   const cancelOrder = () => {
@@ -67,7 +67,7 @@ const OrderItem = ({ orderItem, raiseOrderIssue, orderId, showWidget }) => {
                         </div>
                       </Col>
                       <Col md={3}>
-                        <span className={`${styles['fs-16']} ${styles['fontW600']}`}>2,770 SAR</span>
+                        <span className={`${styles['fs-16']} ${styles['fontW600']}`}>{product.price} {product.currency_code}</span>
                       </Col>
                     </div>
                   </div>
@@ -90,7 +90,7 @@ const OrderItem = ({ orderItem, raiseOrderIssue, orderId, showWidget }) => {
           </div>
           <div className={`${styles['widget-wrap']} ${styles['pt-10']} ${styles['pb-10']}`}>
             {
-              orderItem.status === 'DELIVERED' || !showWidget
+              orderItem.status === 'DELIVERED' || !showWidget || thankyouPage
               ?
                 null
               :
