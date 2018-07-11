@@ -21,26 +21,33 @@ const styles = mergeCss('components/Product/product');
 
 const TitleInfo = ({ brand, title, rating, reviews, price, originalPrice, discountPercent }) => {
   return (
-    <div className={`${styles['pt-15']} ${styles['pb-10']} ${styles['border-b']}`}>
-      <div className={`${styles['fontW600']} ${styles['lgt-blue']}`}>{brand}</div>
-      <div className={`${styles['fs-20']} ${styles['fontW600']} ${styles['black-color']}`}>{title}</div>
-      <div className={`${styles['flex']} ${styles['fs-12']} ${styles['lgt-blue']}`}>
+    <div className={styles['pb-15']}>
+      <div className={`${styles['fontW300']} ${styles['lgt-blue']}`}>{brand}</div>
+      <div className={`${styles['fs-26']} ${styles['fontW300']} ${styles['black-color']}`}>{title}</div>
+      <div className={`${styles['flex']} ${styles['fs-12']} ${styles['pt-5']}`}>
         <div className={`${styles['ti-rating-wrap']} ${styles['pr-5']}`}>
-          ({rating.rating}) {rating.count}
+          {rating.rating} {rating.count}
         </div>
-        <div className={styles['ti-reviews-wrap']}>
-          <span>{reviews.count} Reviews</span>
-          &nbsp;|&nbsp;
-          <span>Custoomer Review</span>
-          &nbsp;|&nbsp;
-          <span>Ask Question</span>
+        <div className={`${styles['ti-reviews-wrap']} ${styles['fs-12']}`}>
+          <span className={`${styles['pr-5']} ${styles['pl-5']}`}>Read Expert Review</span>
+          <span className={`${styles['pr-5']} ${styles['pl-5']}`}>Customer Review</span>
+          <span className={`${styles['pr-5']} ${styles['pl-5']}`}>Ask Question</span>
         </div>
       </div>
-      {/*<div className={`${styles['fs-18']} ${styles['fontW600']} ${styles['black-color']}`}>
+      <div className={`${styles['flex-center']} ${styles['checkout-instantly']} ${styles['pt-15']}`}>
+        <div className={`${styles['flex']}`}>
+          <a className={`${styles['fp-btn']} ${styles['fp-btn-default']}`}>Checkout Instantly </a>
+        </div>
+        <div>
+          <span className={`${styles['flex']} ${styles['fs-12']} ${styles['google-clr']} ${styles['fontW600']}`}>Only 2 left in stock!</span>
+          <span className={`${styles['flex']} ${styles['fs-12']}`}>COD available</span>
+        </div>
+      </div>
+      {/* <div className={`${styles['fs-18']} ${styles['fontW600']} ${styles['black-color']}`}>
         <div className={styles['ti-current-price']}>{price}</div>
         <div className={styles['ti-original-price']}>{originalPrice}</div>
         <div className={styles['ti-discount-percent']}>{discountPercent}</div>
-      </div>*/}
+      </div> */}
     </div>
   )
 };
