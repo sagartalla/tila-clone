@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import SVGCompoent from '../common/SVGComponet';
-import { mergeCss } from '../../utils/cssUtil';
+import SVGCompoent from '../../common/SVGComponet';
+import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Product/product');
 
 const ProductDetails =({details}) => {

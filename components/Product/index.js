@@ -6,15 +6,15 @@ import PropTypes from 'prop-types';
 
 import selectors from '../../store/product/selectors'
 import HeaderBar from '../HeaderBar/index';
-import Dispalay from './Display';
-import TitleInfo from './TitleInfo';
-import KeyFeatures from './KeyFeatures';
-import Variants from './Variants';
-import Catalog from './Catalog';
-import Offers from './Offers';
-import ProductPrice from './ProductPrice';
-import AddToCart from './BuyNow';
-import ProductDetails from './ProductDetails';
+import Dispalay from './includes/Display';
+import TitleInfo from './includes/TitleInfo';
+import KeyFeatures from './includes/KeyFeatures';
+import Variants from './includes/Variants';
+import Catalog from './includes/Catalog';
+import Offers from './includes/Offers';
+import ProductPrice from './includes/ProductPrice';
+import AddToCart from './includes/BuyNow';
+import ProductDetails from './includes/ProductDetails';
 import ReviewRatingList from '../RatingReviews/List';
 
 import { mergeCss } from '../../utils/cssUtil';
@@ -46,7 +46,7 @@ const getProductComponent = (isPreview) => {
                   {/* {
                     isPreview ? null : <Offers offerInfo={offerInfo}/>
                   } */}
-                  
+
                 </div>
                 <AddToCart />
               </div>
