@@ -31,7 +31,7 @@ const getSearchResultsApi = ({
   } else {
     options.categoryFilter = categoryFilter;
   }
-  return axios.post(`${constants.SEARCH_API_URL}/search${categoryTree ? '/browseByCatId/': ''}`, options).then(({ data }) => {
+  return axios.get(`${constants.SEARCH_API_URL}/search${categoryTree ? '/browseByCatId/': ''}?query=${escape(JSON.stringify(options))}`).then(({ data }) => {
     if (data.categoryFilter) {
       data.categoryFilter.parentCategories.forEach((parentCategory) => {
         parentCategory.canonicalId = _.kebabCase(parentCategory.name);

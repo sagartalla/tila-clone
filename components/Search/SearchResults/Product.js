@@ -30,12 +30,13 @@ class Product extends Component {
       displayName,
       variants,
       productId,
+      variantId,
       catalogId,
       itemtype,
       priceRange,
     } = this.props;
     return (
-      <Link route={`/product?productId=${productId}&catalogId=${catalogId}&itemType=${itemtype}`}>
+      <Link route={`/product?productId=${productId}&variantId=${variantId}&catalogId=${catalogId}&itemType=${itemtype}`}>
         <Col md={3} xs={6} className={`${styles['pr-0']} ${styles['pl-0']}`}>
           <div className={`${styles['product-items']} ${styles['relative']}`}>
             <div className={`${styles['img-cont']} ${styles['border-radius4']} ${styles['relative']}`}>

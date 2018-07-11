@@ -34,10 +34,10 @@ const getProductComponent = (isPreview) => {
             <Col xs={12} md={6}>
               <TitleInfo {...titleInfo} />
               <KeyFeatures features={keyfeatures} />
-              <Shipping />
-              {/* <NoSSR>
+              <NoSSR>
                 <Variants />
-              </NoSSR> */}
+              </NoSSR>
+              <Shipping />
               {
                 isPreview ? null : <Offers offerInfo={offerInfo}/>
               }
@@ -69,6 +69,7 @@ const getProductComponent = (isPreview) => {
               <div><b>Frequently Bought Together</b></div>
             </Col>
           </Row>
+
           <Row>
             <Col xs={12}>
               <div><b>Rating and Reviews</b></div>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import withRedux from 'next-redux-wrapper';
 import { configureUrlQuery } from 'react-url-query';
+import Cookies from 'universal-cookie';
 
 import Base, { baseActions } from './base';
 import makeStore from '../store';
@@ -11,6 +12,8 @@ import { actionCreators as reviewRatingActionCreators } from '../store/ratingRev
 import Layout from '../layout/main';
 import { getProduct } from '../store/product/api';
 import getProductComponent from '../components/Product'
+
+const cookies = new Cookies();
 
 class ProductPage extends Base {
   constructor(props){
@@ -28,22 +31,30 @@ class ProductPage extends Base {
         itemType: query.itemType,
       }));
     } else {
+      const options = {
+        "city": shippingCity,
+        "country_code": country || "ksa",
+        "flags": {
+          "catalog_details": true,
+          "include_all_pref_listings": true,
+          "include_related_products": true,
+          "shipping": true
+        },
+        "language": query.language || "en",
+        "product_ids": [
+          query.productId
+        ],
+        "size": "LARGE"
+      };
+
+      if(query.variantId) {
+        options.variant_ids = [
+          query.variantId
+        ];
+      }
+
       await Promise.all([
-        store.dispatch(actionCreators.getProduct({
-          "city": shippingCity,
-          "country_code": country || "ksa",
-          "flags": {
-            "catalog_details": true,
-            "include_all_pref_listings": true,
-            "include_related_products": true,
-            "shipping": true
-          },
-          "language": query.language || "en",
-          "product_ids": [
-            query.productId
-          ],
-          "size": "LARGE"
-        })),
+        store.dispatch(actionCreators.getProduct(options)),
         //TODO  SF-96
         // await store.dispatch(reviewRatingActionCreators.getRatingsAndReviews({
         //   itemType: query.itemType,

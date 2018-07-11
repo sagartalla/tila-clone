@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import { mergeCss } from '../../../../utils/cssUtil';
 const styles = mergeCss('components/Product/includes/Variants/variants');
 
-const Variant = ({ title, options, onSelectVariant }) => {
+const Variant = ({ title, options, onSelectVariant, id }) => {
   return (
     <div>
       <div className={styles['v-title']}>{title}</div>
-      <select onChange={onSelectVariant}>
+      <select onChange={onSelectVariant} data-key={id}>
         {
           options.map((option) => <option key={option} value={option}>{option}</option> )
         }

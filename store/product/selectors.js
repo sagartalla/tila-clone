@@ -51,7 +51,9 @@ const getProduct = (store, variantId) => {
 
 const getVariants = (store) => {
   const { similar_products, product_details } = store.productReducer.data[0];
-  const identityAttr = _.filter(product_details.product_details_vo.cached_product_details.attribute_map, { attribute_group_name: 'IDENTITY' }).map((attr) => attr.name);
+  const { product_details_vo } = product_details;
+  const { cached_product_details } = product_details_vo;
+  const identityAttr = _.filter(cached_product_details.attribute_map, { attribute_group_name: 'IDENTITY' }).map((attr) => attr.name);
   let variants = similar_products.map((product) => {
     const obj = identityAttr.reduce((acc, attrName) => {
       return {
@@ -60,6 +62,7 @@ const getVariants = (store) => {
       }
     }, obj);
     obj.pId = product.product_details_vo.cached_product_details.product_id;
+    obj.vId = product.listing.variant_id;
     return obj;
   });
   const obj = identityAttr.reduce((acc, attrName) => {
@@ -69,6 +72,7 @@ const getVariants = (store) => {
     }
   }, obj);
   obj.pId = product_details.product_details_vo.cached_product_details.product_id;
+  obj.vId = Object.keys(product_details.product_details_vo.cached_variant)[0];
   variants = [...variants, obj];
 
   const displayTitle = identityAttr.reduce((acc, attrName) => {
@@ -81,6 +85,7 @@ const getVariants = (store) => {
   const variantsForDisplay = identityAttr.reduce((acc, attrName) => {
     return acc.concat({
       title: displayTitle[attrName],
+      id: attrName,
       options: _.uniq(variants.map((variant) => variant[attrName])),
     });
   }, []);
@@ -134,4 +139,12 @@ const getPreview = (store) => {
   };
 };
 
-export default { getProduct, getVariants, getPreview };
+const getSelectedVariantId = (store) => (options) => {
+  const selectedVariant = _.filter(options.variants, options.selectedVariantData)[0];
+  return {
+    pId: selectedVariant.pId,
+    vId: selectedVariant.vId,
+  }
+}
+
+export default { getProduct, getVariants, getPreview, getSelectedVariantId };
