@@ -6,7 +6,7 @@ const getProduct = (store, variantId) => {
   const listings = computedVariantId ? variant_preferred_listings[computedVariantId] : [];
   let activeCount = 0, listingInventryCount = 0;
   let priceInfo = listings ? listings.filter((listing) => {
-    if(listing.total_inventory_count <=0 ) {
+    if(listing.total_inventory_count <= 0 ) {
       listingInventryCount++;
     }
     if(!listing.active) {
@@ -31,6 +31,11 @@ const getProduct = (store, variantId) => {
     originalPrice: '',
     discountPercent: '',
   };
+  const shippingInfo = priceInfo ? priceInfo.shipping : {}
+  const returnInfo = {
+    acceptsReturns: priceInfo ? priceInfo.accepts_returns : false,
+    maxDaysToReturn: priceInfo ? priceInfo.max_days_to_return : 0
+  }
   const offerInfo = {
     price: priceInfo ? priceInfo.selling_price + ' ' + priceInfo.selling_price_currency : 'No listing',
     listingId: priceInfo ? priceInfo.listing_id : 'No Listing',
@@ -45,6 +50,8 @@ const getProduct = (store, variantId) => {
     keyfeatures,
     imgUrls,
     offerInfo,
+    shippingInfo,
+    returnInfo,
     catalog: _.groupBy(product_details.catalog_details.attribute_map, (attrMap) => attrMap.attribute_category_name)
   };
 };
@@ -70,7 +77,7 @@ const getVariants = (store) => {
       ...acc,
       [attrName]: product_details.product_details_vo.cached_product_details.attribute_map[attrName].attribute_values[0].value,
     }
-  }, obj);
+  }, {});
   obj.pId = product_details.product_details_vo.cached_product_details.product_id;
   obj.vId = Object.keys(product_details.product_details_vo.cached_variant)[0];
   variants = [...variants, obj];

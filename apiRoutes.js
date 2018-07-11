@@ -40,8 +40,8 @@ apiRoutes
     return axios.post(`${AUTH_API_URL}/api/v1/refresh`, {
         'auth_version': 'V1',
         'refresh_token': auth.refresh_token
-      }).then((res) => {
-        auth.access_token = res.data.access_token
+      }).then((data) => {
+        auth.access_token = data.data.access_token
         req.universalCookies.set('auth', auth, { path: '/' });
         return res.json({});
       }).catch((err) => {

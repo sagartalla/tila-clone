@@ -20,7 +20,7 @@ const styles = mergeCss('components/Product/product');
 
 const getProductComponent = (isPreview) => {
   const Product = ({ productData }) => {
-    const { catalog, titleInfo, keyfeatures, imgUrls, offerInfo } = productData;
+    const { catalog, titleInfo, keyfeatures, imgUrls, offerInfo, shippingInfo, returnInfo } = productData;
     return (
       <div>
         {
@@ -37,7 +37,9 @@ const getProductComponent = (isPreview) => {
               <NoSSR>
                 <Variants />
               </NoSSR>
-              <Shipping />
+              {
+                isPreview ? null : <Shipping {...shippingInfo} {...returnInfo}/>
+              }
               {
                 isPreview ? null : <Offers offerInfo={offerInfo}/>
               }

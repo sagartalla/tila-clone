@@ -39,8 +39,8 @@ class SearchPage extends Base {
       isListed: isListed === 'true',
       categoryTree,
       shippingDetails: {
-        shippingCity,
-        shippingCountry: country || 'uae'
+        shippingCity: shippingCity.toUpperCase(),
+        shippingCountry: (country || 'uae').toUpperCase(),
       }
     }))
     return { isServer };

@@ -52,7 +52,6 @@ class Display extends Component {
         >
           {
             imgs.map(({url}, index) => {
-              console.log('Display', url, index);
               return (
                 <div className={styles['carousel-item-wrap']} key={url}>
                   <img src={`${constants.mediaDomain}/${url}`} />
