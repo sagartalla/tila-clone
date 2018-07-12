@@ -61,11 +61,17 @@ class Product extends Component {
                 </Waypoint>
               </div>
               {
-                offers.length > 1 && (offers[0] <= 10 && offers[0] > 0)
+                (offers.length > 0)
                 ?
-                <span className={`${styles['tag-main']}`}></span>
+                (
+                  offers.length > 1 && (offers[0] <= 10 && offers[0] > 0)
+                  ?
+                  <span className={`${styles['tag-main']}`}></span>
+                  :
+                  <span className={`${styles['offer-tag']} ${styles[this.getOfferClassName(offers[0])]}`}>{offers[0]} OFF</span>
+                )
                 :
-                <span className={`${styles['offer-tag']} ${styles[this.getOfferClassName(offers[0])]}`}>{offers[0]} OFF</span>
+                null
               }
               <span className={`${styles['variants-main']}`}></span>
               <span className={`${styles['fullfill-main']}`}></span>
