@@ -35,12 +35,12 @@ class Thankyou extends Component {
   }
 
   render() {
-    const { query, orderData } = this.props;
+    const { orderId, query, orderData } = this.props;
     const { status } = this.state;
 
     return (
       <div className={styles['thankyou']}>
-        <PaymentHeader />
+        <PaymentHeader orderId={orderId}/>
         <Grid>
           <PaymentStatus status={status} />
           {
