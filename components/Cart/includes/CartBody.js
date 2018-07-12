@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { languageDefinations } from '../../../utils/lang/';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
-import RightBar from '../../common/CartAndPaymentRightBar';
+import RightBar from '../../common/CartPaymentSideBar';
 import Blocker from '../../common/Blocker';
 import SVGComponent from '../../common/SVGComponet';
 import CartStepper from './CartStepper';
@@ -68,7 +68,7 @@ const CartBody = props => {
                                   </div>
                                   <div className={`${styles['checkbox-material']} ${styles['mt-15']}`}>
                                     <input id="send-gift" type="checkbox" />
-                                    <label for="send-gift"> Send this as a gift (5.00 AED) </label>
+                                    <label htmlFor="send-gift"> Send this as a gift (5.00 AED) </label>
                                   </div>
                                 </Col>
                                 <Col md={2} className={`${styles['pl-0']}`}>
@@ -118,9 +118,9 @@ const CartBody = props => {
                   </Col>
                   <Col md={6}>
                     {
-                      [...Array(6).keys()].map(() => {
+                      [...Array(6).keys()].map((i) => {
                         return (
-                          <span className={`${styles['wishlist-img']} ${styles['mr-15']}`}><img src={wishlistImgPath} /></span>
+                          <span key={i} className={`${styles['wishlist-img']} ${styles['mr-15']}`}><img src={wishlistImgPath} /></span>
                         )
                       })
                     }
