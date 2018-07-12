@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { mergeCss } from '../../utils/cssUtil';
+import { mergeCss } from '../../../utils/cssUtil';
 import { Grid, Row, Col, Tabs, Tab, ProgressBar } from 'react-bootstrap';
-import SVGCompoent from '../common/SVGComponet';
+import SVGCompoent from '../../common/SVGComponet';
 const styles = mergeCss('components/Product/product');
 
 const Review = ({reviews}) => {

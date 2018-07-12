@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Grid, Row, Col, Tabs, Tab } from 'react-bootstrap';
-import constants from '../../constants';
+import constants from '../../../constants';
 
-import { mergeCss } from '../../utils/cssUtil';
+import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Product/product');
 
 const RecentView = ({imgs}) => {

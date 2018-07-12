@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { mergeCss } from '../../utils/cssUtil';
+import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Product/product');
 
 const AddToCart = ({addtocart}) => {
@@ -11,5 +11,5 @@ const AddToCart = ({addtocart}) => {
     </div>
   );
 }
-   
+
 export default AddToCart;
