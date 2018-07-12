@@ -52,6 +52,10 @@ class SortByWidget extends Component {
   }
 }
 
+SortByWidget.propTypes = {
+  getSearchResults: PropTypes.func.isRequired,
+}
+
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
