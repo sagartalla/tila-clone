@@ -36,6 +36,11 @@ const styles = mergeCss('components/Product/product');
 // }
 
 class Variant extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+    this.onSelectVariant = this.onSelectVariant.bind(this);
+  }
   onSelectVariant(e) {
     this.setState({
       [e.currentTarget.getAttribute('data-key')]: e.currentTarget.value
