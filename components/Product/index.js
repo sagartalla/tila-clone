@@ -4,7 +4,7 @@ import { Grid, Row, Col, Tabs, Tab } from 'react-bootstrap';
 import NoSSR from 'react-no-ssr';
 import PropTypes from 'prop-types';
 
-import selectors from '../../store/product/selectors'
+import { selectors } from '../../store/product';
 import HeaderBar from '../HeaderBar/index';
 import Dispalay from './includes/Display';
 import TitleInfo from './includes/TitleInfo';
@@ -24,6 +24,7 @@ const styles = mergeCss('components/Product/product');
 const getProductComponent = (isPreview) => {
   const Product = ({ productData }) => {
     const { catalog, titleInfo, keyfeatures, imgUrls, offerInfo, shippingInfo, returnInfo, details, pricedetails } = productData;
+    console.log('productData', productData);
     return (
       <div>
         {
@@ -51,12 +52,12 @@ const getProductComponent = (isPreview) => {
               <div className={`${styles['details-right-part']}`}>
                 <div className={`${styles['details-right-part-inn']}`}>
                   <TitleInfo {...titleInfo} />
-                  <ProductDetails produdetils= {details} />
+                  <ProductDetails details={details} />
                   <KeyFeatures features={keyfeatures} />
                   <ProductPrice price= {pricedetails} />
-                  {/* <NoSSR>
+                  <NoSSR>
                     <Variants />
-                  </NoSSR> */}
+                  </NoSSR>
                   {/* {
                     isPreview ? null : <Offers offerInfo={offerInfo}/>
                   } */}

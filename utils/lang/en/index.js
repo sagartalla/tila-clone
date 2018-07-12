@@ -79,6 +79,7 @@ export const EN_KEYWORDS = {
     'SELECT_CITY': 'SELECT CITY',
     'FREE_DELIVERY': 'Free delivery',
     'DAYS': 'Days',
+    'PRODUCT_DETAILS': 'PRODUCT DETAILS'
   },
   VAULT_PAGE: {
     'MANAGE_VAULT_HDR': 'Manage Cards, Vouchers and More',

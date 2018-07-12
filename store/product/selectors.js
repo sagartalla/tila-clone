@@ -4,6 +4,9 @@ const getProduct = (store, variantId) => {
   const { product_details, variant_preferred_listings } = store.productReducer.data[0];
   const computedVariantId = variantId || Object.keys(variant_preferred_listings || {})[0]
   const listings = computedVariantId ? variant_preferred_listings[computedVariantId] : [];
+  const catalogAttributeMap = product_details.catalog_details.attribute_map;
+  const productAttributeMap = product_details.product_details_vo.cached_product_details.attribute_map
+
   let activeCount = 0, listingInventryCount = 0;
   let priceInfo = listings ? listings.filter((listing) => {
     if(listing.total_inventory_count <= 0 ) {
@@ -19,7 +22,7 @@ const getProduct = (store, variantId) => {
   const stockError = listingInventryCount === listings.length;
   const titleInfo = {
     brand: product_details.catalog_details.attribute_map.brand.attribute_values[0].value,
-    title: product_details.product_details_vo.cached_product_details.attribute_map.calculated_display_name.attribute_values[0].value,
+    title: productAttributeMap.calculated_display_name.attribute_values[0].value,
     rating: {
       rating: '',
       count: ''
@@ -43,16 +46,18 @@ const getProduct = (store, variantId) => {
     availabilityError,
     stockError,
   }
-  const keyfeatures = _.map(product_details.product_details_vo.cached_product_details.attribute_map.calculated_highlights.attribute_values, (kf) => kf.value);
+  const keyfeatures = _.map(productAttributeMap.calculated_highlights.attribute_values, (kf) => kf.value);
+  const details = catalogAttributeMap.description ? catalogAttributeMap.description.attribute_values.map((d) => d.value).join(', ') : null;
   const imgUrls = product_details.product_details_vo.cached_product_details.media.gallery_media;
   return {
     titleInfo,
+    details,
     keyfeatures,
     imgUrls,
     offerInfo,
     shippingInfo,
     returnInfo,
-    catalog: _.groupBy(product_details.catalog_details.attribute_map, (attrMap) => attrMap.attribute_category_name)
+    catalog: _.groupBy(catalogAttributeMap, (attrMap) => attrMap.attribute_category_name)
   };
 };
 
@@ -154,4 +159,4 @@ const getSelectedVariantId = (store) => (options) => {
   }
 }
 
-export default { getProduct, getVariants, getPreview, getSelectedVariantId };
+export { getProduct, getVariants, getPreview, getSelectedVariantId };
