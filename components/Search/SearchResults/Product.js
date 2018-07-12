@@ -33,6 +33,7 @@ class Product extends Component {
       catalogId,
       itemtype,
       priceRange,
+      offers,
     } = this.props;
     return (
       <Link route={`/product?productId=${productId}&catalogId=${catalogId}&itemType=${itemtype}`}>
@@ -44,7 +45,13 @@ class Product extends Component {
                   <img src={this.state.src} />
                 </Waypoint>
               </div>
-              <span className={`${styles['tag-main']}`}></span>
+              {
+                offers.length > 1 && (offers[0] <= 10 && offers[0] > 0)
+                ?
+                <span className={`${styles['tag-main']}`}></span>
+                :
+                <span className={styles['offer-tag']}>{offers[0]} OFF</span>
+              }
               <span className={`${styles['variants-main']}`}></span>
               <span className={`${styles['fullfill-main']}`}></span>
             </div>
@@ -53,7 +60,19 @@ class Product extends Component {
                 <h5 className={`${styles['prdt-name']} ${styles['fontW600']} ${styles['pt-15']} ${styles['pb-5']}  ${styles['m-0']} ${styles['ellips']}`}>
                   {displayName}
                 </h5>
-                <span className={`${styles['offers-label-color']} ${styles['fontW600']} ${styles['fs-12']}`}>8% OFF  +  3 Offers</span>
+                <span className={`${styles['offers-label-color']} ${styles['fontW600']} ${styles['fs-12']}`}>
+                  {
+                    offers.length > 1
+                    ?
+                    `${offers} Offers`
+                    :
+                    offers.length > 0 && (offers[0] <= 10 && offers[0] > 0)
+                    ?
+                    `${offers[0]} OFF`
+                    :
+                    null
+                  }
+                </span>
               </div>
               {/* <div className={styles['variant-info']}>
                 {
