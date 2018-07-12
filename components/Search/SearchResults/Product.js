@@ -24,6 +24,21 @@ class Product extends Component {
     });
   }
 
+  getOfferClassName(offer) {
+    if(offer > 10 && offer < 20) {
+      return 'green'
+    }
+    if(offer > 20 && offer < 40){
+      return 'yellow'
+    }
+    if(offer > 40 && offer < 60){
+      return 'orange';
+    }
+    if(offer > 60){
+      return 'red';
+    }
+  }
+
   render() {
     const {
       media = [],
@@ -50,7 +65,7 @@ class Product extends Component {
                 ?
                 <span className={`${styles['tag-main']}`}></span>
                 :
-                <span className={styles['offer-tag']}>{offers[0]} OFF</span>
+                <span className={`${styles['offer-tag']} ${styles[this.getOfferClassName(offers[0])]}`}>{offers[0]} OFF</span>
               }
               <span className={`${styles['variants-main']}`}></span>
               <span className={`${styles['fullfill-main']}`}></span>
