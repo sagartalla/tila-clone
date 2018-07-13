@@ -28,7 +28,8 @@ const getOrderDetails = (store) => {
           status: i.status,
           state_times: i.state_times,
           price: i.price.offer_price,
-          currency_code: currency_code
+          currency_code: currency_code,
+          promisedDeliveryDate: i.promised_delivery_date
         }))
       )(order_items)
     };
