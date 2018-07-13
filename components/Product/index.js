@@ -17,6 +17,7 @@ import AddToCart from './includes/BuyNow';
 import RecentView from './includes/RecentView';
 import Review from './includes/Reviews';
 import ReviewsTab from './includes/ReviewTab';
+import ElectronicsTab from './includes/ElectronicsTab';
 import ProductDetails from './includes/ProductDetails';
 import ReviewRatingList from '../RatingReviews/List';
 
@@ -64,6 +65,9 @@ const getProductComponent = (isPreview) => {
               </Col>
               <Col md={8}>
                 <ReviewsTab />
+              </Col>
+              <Col md={8}>
+                <ElectronicsTab/>
               </Col>
             </Row>
           </Grid>

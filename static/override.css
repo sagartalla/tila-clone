@@ -53,3 +53,7 @@
 .nav-tabs>li.active>a {
     font-weight: 600;
 }
+
+.img-responsive {
+    max-height: 100%
+}
