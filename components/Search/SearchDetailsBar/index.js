@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import DeliverToWidget from './DeliverToWidget';
+import SortByWidget from './SortByWidget';
 
 import { actionCreators, selectors } from '../../../store/search';
 import { languageDefinations } from '../../../utils/lang';
@@ -29,18 +30,7 @@ class SearchDetailsBar extends Component {
               <span>Riyadh</span>
             </div>*/}
             <DeliverToWidget />
-            <div className={`${styles['flex-center']} ${styles['sort-part-inn']}`}>
-              <label className={`${styles['mb-0']} ${styles['fontW600']}`}>{SEARCH_PAGE.SORT_BY} : </label>
-              <div className={styles['select']}>
-                <select className={styles['select-text']} required>
-                  <option value="1">{SEARCH_PAGE.BEST_MATCH}</option>
-                  <option value="2">{SEARCH_PAGE.BEST_OFFERS}</option>
-                </select>
-                <span className={styles['select-highlight']}></span>
-                <span className={styles['select-bar']}></span>
-                {/* <span className={styles['error']}>error message</span> */}
-              </div>
-            </div>
+            <SortByWidget />
           </div>
         </div>
         <div className={`${styles['suggested-tags-main']} ${styles['bg-white']} ${styles['border-radius4']} ${styles['mb-20']} ${styles['flex-center']} ${styles['p-15']}`}>
