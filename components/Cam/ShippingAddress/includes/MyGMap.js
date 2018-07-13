@@ -20,10 +20,12 @@ class MyGMap extends React.Component {
       },
       markers: []
     }
+
     this.onMapMounted = this.onMapMounted.bind(this);
+    this.markerLatlng = this.markerLatlng.bind(this);
+    this.onPlacesChanged = this.onPlacesChanged.bind(this);
     this.onBoundsChanged = this.onBoundsChanged.bind(this);
     this.onSearchBoxMounted = this.onSearchBoxMounted.bind(this);
-    this.onPlacesChanged = this.onPlacesChanged.bind(this);
   }
 
   // TODO locate me is pending SF-27
@@ -85,7 +87,7 @@ class MyGMap extends React.Component {
 
   onPlacesChanged() {
     const { center } = this.state;
-    const { updateAddressFromGoogleMap } = this.props;
+    const { getDataFromMap } = this.props;
 
     const places = refs.searchBox.getPlaces();
     const _bounds = new google.maps.LatLngBounds();
@@ -94,7 +96,7 @@ class MyGMap extends React.Component {
     const lng = places[0].geometry.location.lng()
     const address = places[0].formatted_address;
 
-    updateAddressFromGoogleMap({ lat, lng, address });
+    getDataFromMap({ lat, lng, address });
 
     places.forEach(place => {
       if (place.geometry.viewport) {
@@ -114,9 +116,21 @@ class MyGMap extends React.Component {
     });
   }
 
+  markerLatlng(marker) {
+    const { getDataFromMap } = this.props;
+
+    const lat = marker.latLng.lat();
+    const lng = marker.latLng.lng();
+    const places = refs.searchBox.getPlaces();
+    const address = places[0].formatted_address;
+
+    getDataFromMap({ lat, lng, address });
+  }
+
   // <button onClick={this.onGetLocation.bind(this)}>LOCATE ME</button>
   render() {
     let { refs, bounds, center, markers } = this.state;
+    const { clsName } = this.props;
     return (
       <div>
 
@@ -129,11 +143,12 @@ class MyGMap extends React.Component {
           onBoundsChanged={this.onBoundsChanged}
           onSearchBoxMounted={this.onSearchBoxMounted}
           onPlacesChanged={this.onPlacesChanged}
+          markerLatlng={this.markerLatlng}
 
           isMarkerShown
           googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDrVNKZshUspEprFsNnQD-sos6tvgFdijg&v=3.exp&libraries=geometry,drawing,places"
           loadingElement={<div style={{ height: `100%` }} />}
-          containerElement={<div className={styles['map']} />}
+          containerElement={<div className={`${styles[clsName]}`} />}
           mapElement={<div style={{ height: `100%` }} />}
         />
       </div>

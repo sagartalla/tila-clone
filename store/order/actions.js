@@ -15,6 +15,7 @@ const actions = {
   SUBMIT_RETURN_REQUEST: 'SUBMIT_RETURN_REQUEST',
   GET_EXCHANGE_VARIANTS: 'GET_EXCHANGE_VARIANTS',
   SET_VARIANT_OPTION: 'SET_VARIANT_OPTION',
+  SEND_MAP_DATA: 'SEND_MAP_DATA',
 };
 
 const actionCreators = {
@@ -25,7 +26,7 @@ const actionCreators = {
     })
   },
   raiseOrderIssue: (params) => {
-    const {issueType, items, defaultStep, orderId} = params;
+    const { issueType, items, defaultStep, orderId } = params;
     return ({
       type: actions.RAISE_ORDER_ISSUE,
       payload: {
@@ -135,13 +136,19 @@ const actionCreators = {
   },
   setVariantOption: (params) => {
     return ({
-      type:actions.SET_VARIANT_OPTION,
+      type: actions.SET_VARIANT_OPTION,
       payload: {
         data: {
           ...params
         }
       }
     })
+  },
+  sendMapData: (order_id, params) => {
+    return {
+      type: actions.SEND_MAP_DATA,
+      payload: api.sendMapDataApi(order_id, params)
+    }
   }
 };
 
