@@ -15,6 +15,10 @@ import Offers from './includes/Offers';
 import Shipping from './includes/Shipping';
 import ProductPrice from './includes/ProductPrice';
 import AddToCart from './includes/BuyNow';
+import RecentView from './includes/RecentView';
+import Review from './includes/Reviews';
+import ReviewsTab from './includes/ReviewTab';
+import ElectronicsTab from './includes/ElectronicsTab';
 import ProductDetails from './includes/ProductDetails';
 import ReviewRatingList from '../RatingReviews/List';
 
@@ -30,7 +34,7 @@ const getProductComponent = (isPreview) => {
         {
           isPreview ? null : <HeaderBar />
         }
-        <div className={`${styles['pb-30']} ${styles['page-details-slider']}`}>
+        <div className={`${styles['page-details-slider']}`}>
           <Row className={styles['m-0']}>
             <Col xs={12} md={8} className={styles['pl-0']}>
               <Dispalay imgs={imgUrls} />
@@ -67,6 +71,21 @@ const getProductComponent = (isPreview) => {
               </div>
             {/* </Col> */}
           </Row>
+        </div>
+        <div className={styles['bg-white']}>
+          <Grid>
+            <Row>
+              <Col md={8}>
+                <RecentView />
+              </Col>
+              <Col md={8}>
+                <ReviewsTab />
+              </Col>
+              <Col md={8}>
+                <ElectronicsTab/>
+              </Col>
+            </Row>
+          </Grid>
         </div>
         <div className={`${styles['border-b']} ${styles['border-t']} ${styles['pb-30']} ${styles['pt-30']}`}>
         <Grid>

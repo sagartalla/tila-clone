@@ -7,3 +7,53 @@
 .slick-slider.sub-slider .slick-slide {
     width: 70px !important;
 }
+
+.progress {
+    display: flex;
+    width: 65%;
+    margin-bottom: 0;
+    height: 4px;
+}
+
+.progress .progress-bar {
+    width: 80%;
+    line-height: 2px;
+}
+
+.progress .progress-bar-danger {
+    background-color: #E40A80;
+}
+
+.nav-tabs {
+    background: rgba(216, 216, 216, 0.1);
+    border: 0;
+}
+
+.nav-tabs>li.active {
+    border-bottom: 4px solid #e40a80;
+}
+
+.nav-tabs>li a {
+    font-size: 16px;
+    color: #666;
+}
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+    color: #000;
+    border: 0;
+    background-color: transparent;
+    outline: none;
+}
+
+.nav-tabs>li>a:focus, .nav-tabs>li>a:hover {
+    background-color: transparent;
+    outline: none;
+    border: 1px solid transparent;
+}
+
+.nav-tabs>li.active>a {
+    font-weight: 600;
+}
+
+.img-responsive {
+    max-height: 100%
+}
