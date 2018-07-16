@@ -3,6 +3,7 @@ import { Grid } from 'react-bootstrap';
 import NoSSR from 'react-no-ssr';
 
 import HeaderBar from '../HeaderBar/index';
+import FooterBar from '../Footer/index';
 import CategoriesAndFacets from './CategoriesAndFacets';
 import SearchDetailsBar from './SearchDetailsBar';
 import SearchResults from './SearchResults';
@@ -24,6 +25,7 @@ const Search = () => (
         <SearchResults />
       </div>
     </Grid>
+    <FooterBar />
   </div>
 );
 
