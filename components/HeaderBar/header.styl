@@ -2,22 +2,39 @@
   
 .header-container 
   display block
-  padding-top 10px
   margin-bottom 10px
-  background-color #fff
   box-shadow 0 0 12px 0 rgba(0,0,0,.1)
+  .header-container-inn
+    background-color white
+  .header-megamenu
+    box-shadow 0 3px 4px 0 rgba(0, 0, 0, 0.09)
+    position relative
+    .header-megamenu-inn
+      box-shadow 0 3px 4px 0 rgba(0, 0, 0, 0.09)
+      position absolute
+      left 0
+      right 0
+      top 0
+      bottom 0
+      background-size cover
+      z-index 1
+      background-color rgba(247, 245, 245, 0.8)
+      filter blur(3px)
+    .header-meganenu-sub
+      position relative
+      z-index 2
 
 .search-wrapper
   position relative
   .search-input
-    height 45px
+    height 40px
     width 100%
-    background #eee
-    border-radius 25px
+    // background #eee
+    border-radius 4px
     outline none
     padding 10px 20px
     font-size 16px
-    border none
+    border 0.5px solid border-gray
     &[contenteditable=true]
       color #ccc
       white-space: nowrap;
@@ -35,23 +52,51 @@
     position absolute
     right 14px
     top 10px
+    border 0
     .searching-icon
       position absolute
-      right -14px
-      width 45px
-      top -11px
+      right 0
+      width 18px
+      top 0
 
 .actionbar-wrapper
+  display flex
+  justify-content flex-end
   .action-item 
-    width 46px
-    height 46px
-    border-radius 50%
+    // width 46px
+    // height 46px
+    // border-radius 50%
     float left
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.1);
-    margin 0 5px
+    // box-shadow: 0 2px 4px 0 rgba(0,0,0,0.1);
+    // margin 0 5px
     position relative
+    padding 0 15px
     cursor pointer
-    border 1px solid generic-gray-color
+    border-right 0.5px solid border-gray
+    &:last-child
+      border-right 0
+
+    .profile-edit
+      position absolute
+      top 25px
+      z-index 9
+      border-radius 2px
+      box-shadow 0 2px 4px 0 rgba(0,0,0,0.11)
+      border solid 0.3px lht-bdr
+      &:before
+        content ''
+        position absolute
+        width 0
+        height 0
+        border-left 9px solid transparent
+        border-right 9px solid transparent
+        border-bottom 12px solid white
+        top -10px
+
+  .profile-icon-main
+    .profile-icon
+      width 16px
+      height 20px
   
 .login-reg-modal
   width 760px
@@ -66,6 +111,19 @@
   position absolute
   left 0
   z-index 1
+  .megamenu-sub-drop-down
+    width 100%
+    >.megamenu-sub-list
+      width 20%
+      float left
+      >span a
+        color pink-color
+        font-size 16px
+      .megamenu-sub-child-list
+        line-height 1.5
+        font-size 12px
+        a
+          color light-gray-clr  
 
 nav 
   ul
@@ -81,14 +139,18 @@ nav
 .action-item
   .wish-list-icon
   .cam-icon
-    width 24px
+    width 20px
     height 18px
 
   .cart-icon
-    width 22px
-    height 24px
+    width 20px
+    height 20px
 
 .logos-part
   .default-logo
     width: 74px;
     height: 34px;
+
+.megamenu-icon
+  width 20px
+  height 20px
