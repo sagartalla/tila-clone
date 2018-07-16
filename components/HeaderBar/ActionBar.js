@@ -85,8 +85,6 @@ class ActionBar extends Component {
             <SVGComponent clsName={`${styles['profile-icon']}`} src="icons/profile-icons/edit-profile-icon" />
           </span>
           {!isHidden &&
-            // isLoggedIn
-            // ?
             <div className={`${styles['profile-edit']} ${styles['bg-white']} ${styles['p-10']}`}>
               {isLoggedIn
                 ?
@@ -95,8 +93,6 @@ class ActionBar extends Component {
                 <span onClick={this.loginClick}>login</span>
               }
             </div>
-            // :
-            // <span onClick={this.loginClick}>login</span>
           }
         </div>
         {
