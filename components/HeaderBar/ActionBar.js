@@ -15,7 +15,7 @@ const styles = mergeCss('components/HeaderBar/header');
 class ActionBar extends Component {
   constructor(props) {
     super(props);
-
+    this.toggleHidden = this.toggleHidden.bind(this);
     this.logoutClick = this.logoutClick.bind(this);
     this.loginClick = this.loginClick.bind(this);
   }
@@ -81,7 +81,7 @@ class ActionBar extends Component {
           </Link>
         </div>
         <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']} ${styles['relative']}`}>
-          <span onClick={this.toggleHidden.bind(this)} className={`${styles['flex-center']} ${styles['justify-center']} ${styles['profile-icon-main']}`}>
+          <span onClick={this.toggleHidden} className={`${styles['flex-center']} ${styles['justify-center']} ${styles['profile-icon-main']}`}>
             <SVGComponent clsName={`${styles['profile-icon']}`} src="icons/profile-icons/edit-profile-icon" />
           </span>
           {!isHidden &&
