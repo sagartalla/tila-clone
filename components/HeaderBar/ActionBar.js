@@ -74,7 +74,7 @@ class ActionBar extends Component {
           </span>
           {!isCountryToggle &&
             <span className={`${styles['flex']} ${styles['main-toggle-part']}`}>
-              ksa
+              <img src="static/img/bg-img/ksa.png"/>
             </span>
           }
         </div>
