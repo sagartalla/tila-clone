@@ -11,7 +11,7 @@ import { actionCreators as wishlistActionCreators, selectors as wishlistSelector
 import HeaderBar from '../HeaderBar/index';
 import CartBody from './includes/CartBody';
 import MiniCartBody from './includes/MiniCartBody';
-
+import FooterBar from '../Footer/index';
 import { mergeCss } from '../../utils/cssUtil';
 const styles = mergeCss('components/Cart/cart');
 
@@ -107,6 +107,7 @@ class Cart extends Component {
                   addToWishlist={this.addToWishlist}
                 />
               </Grid>
+              <FooterBar />
             </Fragment>
         }
 

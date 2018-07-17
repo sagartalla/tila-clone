@@ -10,7 +10,7 @@ import Wishlist from './Wishlist';
 import Notifications from './Notifications';
 import UserVault from './UserVault';
 import Messages from './Messages';
-
+import FooterBar from '../Footer/index';
 import { mergeCss } from '../../utils/cssUtil';
 const styles = mergeCss('components/Cam/cam');
 
@@ -49,6 +49,7 @@ const Cam = ({ tabDetails }) => {
           </Col>
         </Row>
       </Grid>
+      <FooterBar />
     </div>
   )
 };

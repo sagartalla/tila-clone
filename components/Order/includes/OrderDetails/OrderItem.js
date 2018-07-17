@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import moment from 'moment';
 
 import StatusWidget from '../StatusWidget';
 import constants from '../../../../constants';
@@ -82,7 +83,7 @@ const OrderItem = ({ orderItem, raiseOrderIssue, orderId, showWidget, thankyouPa
           <div className={`${styles['date-cont']} ${styles['flx-spacebw-alignc']}`}>
             <div>
               <div className={styles['fs-12']}>Delivery by</div>
-              <div className={`${styles['ff-t']} ${styles['fs-26']}`}>21, Monday</div>
+              <div className={`${styles['ff-t']} ${styles['fs-26']}`}>{moment(orderItem.products[0].promisedDeliveryDate).format('Do, dddd')}</div>
             </div>
             <div className={styles['cancel-btn']}>
               <span className={`${styles['link-text']} ${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']} ${styles['fs-12']}`} onClick={cancelOrder} >Cancel</span>

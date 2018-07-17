@@ -1,4 +1,4 @@
-import { Grid, Row, Col} from 'react-bootstrap';
+import { Grid, Row, Col } from 'react-bootstrap';
 import NoSSR from 'react-no-ssr';
 
 import Logo from './Logo';
@@ -10,9 +10,10 @@ import publicUrls from '../../constants';
 const styles = mergeCss('components/HeaderBar/header');
 
 const HeaderBar = props => (
-    <div className={styles['header-container']}>
+  <div className={styles['header-container']}>
+    <div className={styles['header-container-inn']}>
       <Grid>
-        <Row>
+        {/* <Row>
           <Col md={12}>
             <div className={styles['float-r']}>
               <span className={`${styles['pl-5']} ${styles['pr-5']}`}>
@@ -24,27 +25,33 @@ const HeaderBar = props => (
               </span>
             </div>
           </Col>
-        </Row>
-        <Row className={`${styles['flex-center']}`}>
-          <Col md={2}>
-              <Logo />
+        </Row> */}
+        <Row className={`${styles['flex-center']} ${styles['pb-10']} ${styles['pt-10']} ${styles['border-b']}`}>
+          <Col md={1}>
+            <Logo />
           </Col>
           <Col md={7}>
-              <NoSSR>
-                  <Search />
-              </NoSSR>
+            <NoSSR>
+              <Search />
+            </NoSSR>
           </Col>
-          <Col md={3}>
-              <ActionBar />
-          </Col>
-        </Row>
-        <Row>
-          <Col md={12}>
-              <MegaMenu />
+          <Col md={4}>
+            <ActionBar />
           </Col>
         </Row>
       </Grid>
     </div>
+    <div className={styles['header-megamenu']}>
+      <div className={styles['header-megamenu-inn']}></div>
+      <Grid className={styles['header-meganenu-sub']}>
+        <Row>
+          <Col md={12}>
+            <MegaMenu />
+          </Col>
+        </Row>
+      </Grid>
+    </div>
+  </div>
 );
 
 export default HeaderBar;

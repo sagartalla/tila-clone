@@ -23,7 +23,7 @@ const PaymentStatus = props => {
         <Col md={8} xs={9} sm={9}>
           <div className={`${styles['flx-space-bw']}`}>
             <h3 className={`${styles['mt-0']} ${styles['light-gry-clr']} ${styles['fontW600']}`}>{message}</h3>
-            <button className={`${styles['fp-btn']} ${styles['fp-btn-default']}`}> TRACK ORDERS </button>
+            <a href="/cam/orders" ><button className={`${styles['fp-btn']} ${styles['fp-btn-default']}`}> TRACK ORDERS </button></a>
           </div>
           <p className={`${styles['col-header']} ${styles['lgt-black']}`}>
             {subMessage}

@@ -13,6 +13,7 @@ import Variants from './Variants';
 import Catalog from './Catalog';
 import Offers from './Offers';
 import ReviewRatingList from '../RatingReviews/List';
+import FooterBar from '../Footer/index';
 
 import { mergeCss } from '../../utils/cssUtil';
 const styles = mergeCss('components/Product/product');
@@ -76,6 +77,9 @@ const getProductComponent = (isPreview) => {
             </Col>
           </Row>
         </Grid>
+        {
+          isPreview ? null : <FooterBar />
+        }
       </div>
     );
   };

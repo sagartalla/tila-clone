@@ -38,10 +38,10 @@ class SearchPage extends Base {
       fl: '*',
       isListed: isListed === 'true',
       categoryTree,
-      shippingDetails: {
-        shippingCity,
-        shippingCountry: country || 'uae'
-      }
+      // shippingDetails: {
+      //   shippingCity,
+      //   shippingCountry: country || 'uae'
+      // }
     }))
     return { isServer };
   }

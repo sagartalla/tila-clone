@@ -40,9 +40,9 @@ class Thankyou extends Component {
 
     return (
       <div className={styles['thankyou']}>
-        <PaymentHeader orderId={orderId}/>
+        <PaymentHeader />
         <Grid>
-          <PaymentStatus status={status} />
+          <PaymentStatus status={status} orderId={orderId} />
           {
             status == 'SUCCESSFUL' && orderData.orderItems.length ?
               <OrderDetails query={query} orderData={orderData} thankyouPage={true} />
