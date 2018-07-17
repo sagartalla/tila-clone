@@ -21,6 +21,7 @@ const styles = mergeCss('components/Product/product');
 class AddToCart extends Component {
   constructor(props){
     super(props);
+    this.state = {};
     this.addToCart = this.addToCart.bind(this);
     this.buyNow = this.buyNow.bind(this);
   }
@@ -33,11 +34,15 @@ class AddToCart extends Component {
   }
 
   buyNow() {
-    this.addToCart();
+    this.setState({
+      buyNow: true
+    }, () => {
+      this.addToCart();
+    });
   }
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.isAddedToCart && !this.props.isAddedToCart){
+    if(this.state.buyNow == true && (nextProps.isAddedToCart && !this.props.isAddedToCart)){
        Router.pushRoute('/cart');
     }
   }
@@ -48,7 +53,7 @@ class AddToCart extends Component {
     return(
       <div className={`${styles['pt-25']} ${styles['flx-space-bw']} ${styles['addto-cart']} ${styles['border-t']}`}>
         <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['fp-btn-x-large']}`} onClick={this.addToCart} disabled={isLoading || isAddedToCart} >ADD TO CART</button>
-        <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-x-large']}`} onClick={this.buyNow}>BUY NOW</button>
+        <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-x-large']}`} onClick={this.buyNow} disabled={isLoading || isAddedToCart} >BUY NOW</button>
       </div>
     );
   }
