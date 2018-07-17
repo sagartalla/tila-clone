@@ -68,7 +68,7 @@ class Product extends Component {
                   ?
                   <span className={`${styles['tag-main']}`}></span>
                   :
-                  <span className={`${styles['offer-tag']} ${styles[this.getOfferClassName(offers[0])]}`}>{offers[0]} OFF</span>
+                  <span className={`${styles['offer-tag']} ${styles['fontW600']}`}><span className={`${styles['down-arrow']} ${styles[this.getOfferClassName(offers[0])]}`}></span>{offers[0]} OFF</span>
                 )
                 :
                 null

@@ -137,16 +137,24 @@
       position absolute
     .offer-tag
       position: absolute;
-      top: 20px;
+      top: 15px;
       left: 20px;
-      &.green
-        color green;
-      &.yellow
-        color yellow;
-      &.orange
-        color orange;
-      &.red
-        color red;
+      .down-arrow
+        width 0
+        height 0
+        border-left 10px solid transparent
+        border-right 10px solid transparent
+        // border-top: 10px solid red;
+        position absolute
+        top -16px
+        &.green
+          border-top: 10px solid generic-green-color
+        &.yellow
+          border-top: 10px solid yellow-color
+        &.orange
+          border-top: 10px solid orange
+        &.red
+          border-top: 10px solid thick-red-arrow
     .variants-main
       width-height-radius(35px, 35px, 50%)
       bottom 10px

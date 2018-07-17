@@ -15,6 +15,7 @@ const styles = mergeCss('components/HeaderBar/header');
 class ActionBar extends Component {
   constructor(props) {
     super(props);
+    this.toggleCountry = this.toggleCountry.bind(this)
     this.toggleHidden = this.toggleHidden.bind(this);
     this.logoutClick = this.logoutClick.bind(this);
     this.loginClick = this.loginClick.bind(this);
@@ -22,7 +23,8 @@ class ActionBar extends Component {
 
   state = {
     show: false,
-    isHidden: true
+    isHidden: true,
+    isCountryToggle: true
   }
 
   componentDidMount() {
@@ -54,11 +56,28 @@ class ActionBar extends Component {
     })
   }
 
+  toggleCountry(){
+    this.setState({
+      isCountryToggle: !this.state.isCountryToggle
+    })
+  }
+
   render() {
     const { isLoggedIn } = this.props;
     const { isHidden } = this.state;
+    const {isCountryToggle} = this.state;
     return (
       <div className={styles['actionbar-wrapper']}>
+        <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']} ${styles['country-code']}`}>
+          <span onClick={this.toggleCountry} className={`${styles['flex-center']} ${styles['justify-center']}`}>
+            <img src="static/img/bg-img/Uae-flag.png"/>
+          </span>
+          {!isCountryToggle &&
+            <span className={`${styles['flex']} ${styles['main-toggle-part']}`}>
+              <img src="static/img/bg-img/saudi.png"/>
+            </span>
+          }
+        </div>
         <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']}`}>
           <Link route="/cam/wishlist">
             <span className={`${styles['flex-center']} ${styles['justify-center']}`}>
