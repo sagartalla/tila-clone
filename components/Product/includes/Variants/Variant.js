@@ -53,7 +53,7 @@ class Variant extends Component {
       <div className={`${styles['pt-10']} ${styles['pb-10']} ${styles['border-b']}`}>
         <div className={`${styles['flex-center']}`}>
           <span className={`${styles['fs-12']} ${styles['fontW600']} ${styles['pr-20']}`}>{title}</span>
-          <div className={`${styles['flex-center']} ${styles['color-btn-main']}`}>
+          <div className={`${styles['flex-center']} ${styles['size-btn-main']}`}>
             {
               options.map((option) => (
                 <span className={styles['mr-5']}>

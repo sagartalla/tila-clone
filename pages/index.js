@@ -26,8 +26,8 @@ class SearchPage extends Base {
     };
     const facetFilters = selectors.getFacetfilters(store.getState())(JSON.parse(facets || '{}'));
     const shippingData = req ? req.universalCookies.get('shippingInfo') : cookies.get('shippingInfo');;
-    const { city: shippingCity, country: shippingCountry } = shippingData;
-    await store.dispatch(actionCreators.getSearchResults({
+    const { city: shippingCity, country: shippingCountry } = shippingData || {};
+    const searchOptions = {
       categoryFilter,
       country: country || undefined,
       pageSize: 100,
@@ -38,11 +38,14 @@ class SearchPage extends Base {
       fl: '*',
       isListed: isListed === 'true',
       categoryTree,
-      shippingDetails: {
+    };
+    if(shippingCity) {
+      searchOptions.shippingDetails = {
         shippingCity: shippingCity.toUpperCase(),
         shippingCountry: (country || 'uae').toUpperCase(),
       }
-    }))
+    }
+    await store.dispatch(actionCreators.getSearchResults(searchOptions))
     return { isServer };
   }
 

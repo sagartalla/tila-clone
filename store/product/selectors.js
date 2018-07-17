@@ -33,6 +33,7 @@ const getProduct = (store, variantId) => {
     price: priceInfo ? priceInfo.selling_price + ' ' + priceInfo.selling_price_currency : 'Price Not available',
     originalPrice: '',
     discountPercent: '',
+    totalInventoryCount: priceInfo ? priceInfo.total_inventory_count : 0,
   };
   const shippingInfo = priceInfo ? priceInfo.shipping : {}
   const returnInfo = {
