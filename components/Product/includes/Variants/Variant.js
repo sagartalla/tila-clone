@@ -56,9 +56,9 @@ class Variant extends Component {
           <div className={`${styles['flex-center']} ${styles['size-btn-main']}`}>
             {
               options.map((option) => (
-                <span className={styles['mr-5']}>
-                  <input type="radio" name="radio-btn" className={styles['size-btn']} value={option} checked={this.state[id] === option} onChange={this.onSelectVariant} data-key={id}/>
-                  <label className={`${styles['fs-12']} ${styles['fontW600']} ${styles['flex-center']} ${styles['justify-center']}`} htmlFor="medium">{option}</label>
+                <span key={option} className={styles['mr-5']}>
+                  <input id={option} type="radio" name="radio-btn" className={styles['size-btn']} value={option} checked={this.state[id] === option} onChange={this.onSelectVariant} data-key={id}/>
+                  <label className={`${styles['fs-12']} ${styles['fontW600']} ${styles['flex-center']} ${styles['justify-center']}`} htmlFor={option}>{option}</label>
                 </span>
               ))
             }
