@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import moment from 'moment';
 
 import StatusWidget from '../StatusWidget';
 import constants from '../../../../constants';
@@ -13,7 +14,7 @@ import { actionCreators }   from '../../../../store/order';
 import { mergeCss } from '../../../../utils/cssUtil';
 const styles = mergeCss('components/Order/order');
 
-const OrderItem = ({ orderItem, raiseOrderIssue, orderId, showWidget }) => {
+const OrderItem = ({ orderItem, raiseOrderIssue, orderId, showWidget, thankyouPage }) => {
   const { products } = orderItem;
 
   const cancelOrder = () => {
@@ -67,7 +68,7 @@ const OrderItem = ({ orderItem, raiseOrderIssue, orderId, showWidget }) => {
                         </div>
                       </Col>
                       <Col md={3}>
-                        <span className={`${styles['fs-16']} ${styles['fontW600']}`}>2,770 SAR</span>
+                        <span className={`${styles['fs-16']} ${styles['fontW600']}`}>{product.price} {product.currency_code}</span>
                       </Col>
                     </div>
                   </div>
@@ -82,7 +83,7 @@ const OrderItem = ({ orderItem, raiseOrderIssue, orderId, showWidget }) => {
           <div className={`${styles['date-cont']} ${styles['flx-spacebw-alignc']}`}>
             <div>
               <div className={styles['fs-12']}>Delivery by</div>
-              <div className={`${styles['ff-t']} ${styles['fs-26']}`}>21, Monday</div>
+              <div className={`${styles['ff-t']} ${styles['fs-26']}`}>{moment(orderItem.products[0].promisedDeliveryDate).format('Do, dddd')}</div>
             </div>
             <div className={styles['cancel-btn']}>
               <span className={`${styles['link-text']} ${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']} ${styles['fs-12']}`} onClick={cancelOrder} >Cancel</span>
@@ -90,7 +91,7 @@ const OrderItem = ({ orderItem, raiseOrderIssue, orderId, showWidget }) => {
           </div>
           <div className={`${styles['widget-wrap']} ${styles['pt-10']} ${styles['pb-10']}`}>
             {
-              orderItem.status === 'DELIVERED' || !showWidget
+              orderItem.status === 'DELIVERED' || !showWidget || thankyouPage
               ?
                 null
               :

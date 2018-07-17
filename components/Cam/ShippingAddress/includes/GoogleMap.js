@@ -32,7 +32,7 @@ const MyGoogleMap = withScriptjs(withGoogleMap((props) => {
         />
       </SearchBox>
       {props.markers.map((marker, index) =>
-        <Marker key={index} position={marker.position} />
+        <Marker key={index} position={marker.position} defaultDraggable={true} onMouseUp={props.markerLatlng} />
       )}
     </GoogleMap>
   )

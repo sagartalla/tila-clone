@@ -153,5 +153,7 @@ export const EN_KEYWORDS = {
     'ALL_DEALS': 'All Deals',
     'APPLIED_FILTERS_TAGS': 'Applied Filters / Tags',
     'CLEAR_ALL': 'CLEAR ALL',
+    'PRICE_LOW_TO_HIGH': 'price low to high',
+    'PRICE_HIGH_TO_LOW': 'price high to low',
   },
 };
