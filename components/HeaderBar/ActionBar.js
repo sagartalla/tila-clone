@@ -3,6 +3,9 @@ import { Modal } from "react-router-modal";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ModalContainer } from 'react-router-modal';
+import { Dropdown, MenuItem } from "react-bootstrap";
+
+import Country from './includes/Country';
 import SVGComponent from '../common/SVGComponet';
 import { selectors, actionCreators } from '../../store/auth';
 import Login from '../Login';
@@ -15,6 +18,7 @@ const styles = mergeCss('components/HeaderBar/header');
 class ActionBar extends Component {
   constructor(props) {
     super(props);
+    this.toggleCountry = this.toggleCountry.bind(this)
     this.toggleHidden = this.toggleHidden.bind(this);
     this.logoutClick = this.logoutClick.bind(this);
     this.loginClick = this.loginClick.bind(this);
@@ -22,7 +26,8 @@ class ActionBar extends Component {
 
   state = {
     show: false,
-    isHidden: true
+    isHidden: true,
+    isCountryToggle: true
   }
 
   componentDidMount() {
@@ -54,11 +59,20 @@ class ActionBar extends Component {
     })
   }
 
+  toggleCountry() {
+    this.setState({
+      isCountryToggle: !this.state.isCountryToggle
+    })
+  }
+
   render() {
     const { isLoggedIn } = this.props;
-    const { isHidden } = this.state;
+    const { isHidden, isCountryToggle } = this.state;
     return (
       <div className={styles['actionbar-wrapper']}>
+        <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']} ${styles['country-code']}`}>
+          <Country />
+        </div>
         <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']}`}>
           <Link route="/cam/wishlist">
             <span className={`${styles['flex-center']} ${styles['justify-center']}`}>

@@ -111,13 +111,13 @@ const FooterBar = props => (
             </ul>
           </Col>
           <Col md={2}>
-            <h4 className={`${styles['fontW600']} ${styles['fs-16']}`}>Selling on Tila.com</h4>
+            <h4 className={`${styles['fontW600']} ${styles['fs-16']}`}>Selling on TiLa.com</h4>
             <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
-              <li>Sell on souq.com</li>
+              <li>Sell on TiLa.com</li>
               <li>How It Works</li>
               <li>Selling Policies</li>
               <li>Seller Terms and Conditions</li>
-              <li>Fulfilled by Souq</li>
+              <li>Fulfilled by TiLa</li>
               <li>FAQs</li>
             </ul>
           </Col>
@@ -174,11 +174,18 @@ const FooterBar = props => (
     <div className={`${styles['footer-download-app']} ${styles['pt-20']} ${styles['pb-20']} ${styles['bg-white']}`}>
       <Grid>
         <div className={`${styles['flx-space-bw']}`}>
-          <div>
-            <span>Download the app</span>
+          <div className={styles['flex-center']}>
+            <span className={`${styles['text-uppercase']} ${styles['mr-15']}`}>Download the app</span>
+            <span className={`${styles['flex']} ${styles['mr-15']} ${styles['download-icons']}`}>
+              <img src="static/img/bg-img/app-strore.jpg"/>
+            </span>
+            <span className={`${styles['flex']} ${styles['download-icons']}`}>
+              <img src="static/img/bg-img/google.jpg"/>
+            </span>
+            <span></span>
           </div>
           <div>
-            <span>© 2018 www.tila.com. All rights reserved</span>
+            <span>&copy; 2018 www.tila.com. All rights reserved</span>
           </div>
         </div>
       </Grid>
