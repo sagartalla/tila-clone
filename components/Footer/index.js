@@ -111,13 +111,13 @@ const FooterBar = props => (
             </ul>
           </Col>
           <Col md={2}>
-            <h4 className={`${styles['fontW600']} ${styles['fs-16']}`}>Selling on Tila.com</h4>
+            <h4 className={`${styles['fontW600']} ${styles['fs-16']}`}>Selling on TiLa.com</h4>
             <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
-              <li>Sell on Tila.com</li>
+              <li>Sell on TiLa.com</li>
               <li>How It Works</li>
               <li>Selling Policies</li>
               <li>Seller Terms and Conditions</li>
-              <li>Fulfilled by Souq</li>
+              <li>Fulfilled by TiLa</li>
               <li>FAQs</li>
             </ul>
           </Col>
