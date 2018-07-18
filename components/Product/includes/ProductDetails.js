@@ -31,16 +31,18 @@ const ProductDetails =({details, keyfeatures}) => {
       <NoSSR>
         <Variants />
       </NoSSR>
-      <div className={`${styles['flex']} ${styles['pt-10']} ${styles['pb-10']} ${styles['border-b']}`}>
-        <span className={`${styles['fontW600']} ${styles['pr-20']}`}>
-          <span>Body type : </span>
-          <span> Hourglass</span>
-        </span>
-        <span>
-          <span>Know your </span>
-          <span className={`${styles['fontW600']} ${styles['lgt-blue']}`}>body type</span>
-        </span>
-      </div>
+      {/*
+        <div className={`${styles['flex']} ${styles['pt-10']} ${styles['pb-10']} ${styles['border-b']}`}>
+          <span className={`${styles['fontW600']} ${styles['pr-20']}`}>
+            <span>Body type : </span>
+            <span> Hourglass</span>
+          </span>
+          <span>
+            <span>Know your </span>
+            <span className={`${styles['fontW600']} ${styles['lgt-blue']}`}>body type</span>
+          </span>
+        </div>
+      */}
       <div className={styles['pt-10']}>
         <Accordian
           head={

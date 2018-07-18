@@ -5,9 +5,12 @@ import { bindActionCreators } from 'redux';
 
 import { selectors, actionCreators } from '../../../store/cart';
 import { Router } from '../../../routes';
+import { languageDefinations } from '../../../utils/lang';
 
 import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Product/product');
+
+const { PDP } = languageDefinations();
 //
 // const AddToCart = ({addtocart}) => {
 //   return(
@@ -52,8 +55,8 @@ class AddToCart extends Component {
     const { price, listingAvailable, listingId, stockError, availabilityError } = offerInfo;
     return(
       <div className={`${styles['pt-25']} ${styles['flx-space-bw']} ${styles['addto-cart']} ${styles['border-t']}`}>
-        <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['fp-btn-x-large']}`} onClick={this.addToCart} disabled={isLoading || isAddedToCart} >ADD TO CART</button>
-        <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-x-large']}`} onClick={this.buyNow} disabled={isLoading || isAddedToCart} >BUY NOW</button>
+        <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['fp-btn-x-large']}`} onClick={this.addToCart} disabled={isLoading || isAddedToCart} >{PDP.ADD_TO_CART}</button>
+        <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-x-large']}`} onClick={this.buyNow} disabled={isLoading || isAddedToCart} >{PDP.BUY_NOW}</button>
       </div>
     );
   }
