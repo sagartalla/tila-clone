@@ -37,7 +37,7 @@ class Variants extends Component {
         variants: variantsData.variants,
         selectedVariantData,
       });
-      Router.pushRoute(`/product?productId=${pId}&variantId=${vId}&catalogId=CMOBU8FKGUCHLBAH2V&itemType=mobile`);
+      Router.pushRoute(`/product?productId=${pId}&catalogId=CMOBU8FKGUCHLBAH2V&itemType=mobile`);
     });
   }
 
