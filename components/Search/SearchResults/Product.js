@@ -66,9 +66,9 @@ class Product extends Component {
                 (
                   offers.length > 1 && (offers[0] <= 10 && offers[0] > 0)
                   ?
-                  <span className={`${styles['tag-main']}`}></span>
+                  <span className={`${styles['tag-main']} ${styles['absolute']}`}></span>
                   :
-                  <span className={`${styles['offer-tag']} ${styles['fontW600']}`}><span className={`${styles['down-arrow']} ${styles[this.getOfferClassName(offers[0])]}`}></span>{offers[0]} OFF</span>
+                  <span className={`${styles['offer-tag']} ${styles['fontW600']} ${styles['absolute']}`}><span className={`${styles['down-arrow']} ${styles['absolute']} ${styles[this.getOfferClassName(offers[0])]}`}></span>{offers[0]} OFF</span>
                 )
                 :
                 null

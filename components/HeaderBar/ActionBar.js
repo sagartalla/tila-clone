@@ -68,12 +68,12 @@ class ActionBar extends Component {
     const {isCountryToggle} = this.state;
     return (
       <div className={styles['actionbar-wrapper']}>
-        <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']} ${styles['country-code']}`}>
+        <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']} ${styles['country-code']} ${styles['relative']}`}>
           <span onClick={this.toggleCountry} className={`${styles['flex-center']} ${styles['justify-center']}`}>
-            <img src="static/img/bg-img/Uae-flag.png"/>
+            <img src="/static/img/bg-img/uae-flag.png"/>
           </span>
           {!isCountryToggle &&
-            <span className={`${styles['flex']} ${styles['main-toggle-part']}`}>
+            <span className={`${styles['flex']} ${styles['main-toggle-part']} ${styles['absolute']} ${styles['bg-white']} ${styles['p-10']}`}>
               <img src="static/img/bg-img/ksa.png"/>
             </span>
           }
