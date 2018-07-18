@@ -59,7 +59,7 @@ class ActionBar extends Component {
     })
   }
 
-  toggleCountry(){
+  toggleCountry() {
     this.setState({
       isCountryToggle: !this.state.isCountryToggle
     })
@@ -67,8 +67,7 @@ class ActionBar extends Component {
 
   render() {
     const { isLoggedIn } = this.props;
-    const { isHidden } = this.state;
-    const {isCountryToggle} = this.state;
+    const { isHidden, isCountryToggle } = this.state;
     return (
       <div className={styles['actionbar-wrapper']}>
         <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']} ${styles['country-code']}`}>
