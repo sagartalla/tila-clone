@@ -185,7 +185,7 @@ const FooterBar = props => (
             <span></span>
           </div>
           <div>
-            <span>© 2018 www.tila.com. All rights reserved</span>
+            <span>&copy; 2018 www.tila.com. All rights reserved</span>
           </div>
         </div>
       </Grid>
