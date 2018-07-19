@@ -1,3 +1,5 @@
+// File not in use but the logic here is usefull
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';

@@ -8,26 +8,25 @@ import { selectors } from '../../store/product';
 import HeaderBar from '../HeaderBar/index';
 import Dispalay from './includes/Display';
 import TitleInfo from './includes/TitleInfo';
-import KeyFeatures from './includes/KeyFeatures';
-import Variants from './includes/Variants';
 import Catalog from './includes/Catalog';
 import Offers from './includes/Offers';
 import Shipping from './includes/Shipping';
 import ProductPrice from './includes/ProductPrice';
-import AddToCart from './includes/BuyNow';
+import AddToCart from './includes/AddToCart';
 import RecentView from './includes/RecentView';
 import Review from './includes/Reviews';
 import ReviewsTab from './includes/ReviewTab';
 import ElectronicsTab from './includes/ElectronicsTab';
 import ProductDetails from './includes/ProductDetails';
 import ReviewRatingList from '../RatingReviews/List';
+import FooterBar from '../Footer/index';
 
 import { mergeCss } from '../../utils/cssUtil';
 const styles = mergeCss('components/Product/product');
 
 const getProductComponent = (isPreview) => {
   const Product = ({ productData }) => {
-    const { catalog, titleInfo, keyfeatures, imgUrls, offerInfo, shippingInfo, returnInfo, details, pricedetails } = productData;
+    const { catalog, titleInfo, keyfeatures, imgUrls, offerInfo, shippingInfo, returnInfo, details } = productData;
     console.log('productData', productData);
     return (
       <div>
@@ -39,37 +38,15 @@ const getProductComponent = (isPreview) => {
             <Col xs={12} md={8} className={styles['pl-0']}>
               <Dispalay imgs={imgUrls} />
             </Col>
-            {/*<Col xs={12} md={6}>
-              <TitleInfo {...titleInfo} />
-              <KeyFeatures features={keyfeatures} />
-              <NoSSR>
-                <Variants />
-              </NoSSR>
-              {
-                isPreview ? null : <Shipping {...shippingInfo} {...returnInfo}/>
-              }
-              {
-                isPreview ? null : <Offers offerInfo={offerInfo}/>
-              }
-            </Col>/*}
-            {/* <Col xs={12} md={4}> */}
               <div className={`${styles['details-right-part']}`}>
                 <div className={`${styles['details-right-part-inn']}`}>
                   <TitleInfo {...titleInfo} />
-                  <ProductDetails details={details} />
-                  <KeyFeatures features={keyfeatures} />
-                  <ProductPrice price= {pricedetails} />
-                  <NoSSR>
-                    <Variants />
-                  </NoSSR>
-                  {/* {
-                    isPreview ? null : <Offers offerInfo={offerInfo}/>
-                  } */}
-
+                  <ProductDetails details={details} keyfeatures={keyfeatures} />
+                  <Shipping />
+                  <ProductPrice offerInfo={offerInfo} />
                 </div>
-                <AddToCart />
+                <AddToCart offerInfo={offerInfo} />
               </div>
-            {/* </Col> */}
           </Row>
         </div>
         <div className={styles['bg-white']}>
@@ -95,6 +72,9 @@ const getProductComponent = (isPreview) => {
             </Col>
           </Row>
         </Grid>
+        {
+          isPreview ? null : <FooterBar />
+        }
       </div>
       </div>
     );

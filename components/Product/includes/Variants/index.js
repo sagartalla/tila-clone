@@ -9,13 +9,16 @@ import { Router } from '../../../../routes';
 class Variants extends Component {
   constructor(props){
     super(props);
-    const { variantsData } = props;
+    this.onSelectVariant = this.onSelectVariant.bind(this);
+  }
+
+  componentDidMount() {
+    const { variantsData } = this.props;
     const { variantsForDisplay } = variantsData;
     const selectedVariantData = variantsForDisplay.reduce((acc, opt) => ({ ...acc, [opt.id]: opt.options[0] }), {})
-    this.state = {
+    this.setState({
       selectedVariantData,
-    };
-    this.onSelectVariant = this.onSelectVariant.bind(this);
+    });
   }
 
   onSelectVariant(e) {
@@ -34,7 +37,7 @@ class Variants extends Component {
         variants: variantsData.variants,
         selectedVariantData,
       });
-      Router.pushRoute(`/product?productId=${pId}&variantId=${vId}&catalogId=CMOBU8FKGUCHLBAH2V&itemType=mobile`);
+      Router.pushRoute(`/product?productId=${pId}&catalogId=CMOBU8FKGUCHLBAH2V&itemType=mobile`);
     });
   }
 
@@ -55,10 +58,10 @@ Variants.propTypes = {
   variantsData: PropTypes.object.isRequired,
 }
 
-const mapStateToProps = (store) => {({
+const mapStateToProps = (store) => ({
   variantsData: selectors.getVariants(store),
   getSelectedVariantId: selectors.getSelectedVariantId(store)
-})};
+});
 
 
 export default connect(mapStateToProps, null)(Variants);

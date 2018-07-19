@@ -10,7 +10,7 @@ const styles = mergeCss('components/Cam/ShippingAddress/address');
 //TODO validations is pending. SF-28
 //TODO country dropdown. SF-25
 const AddressNew = props => {
-  const { data, inputOnChange, addrTypeHandler, setAsDefaultLocation, saveBtnClickHandler, showAddAdrressForm, updateAddressFromGoogleMap } = props;
+  const { data, inputOnChange, addrTypeHandler, setAsDefaultLocation, saveBtnClickHandler, showAddAdrressForm, getDataFromMap } = props;
   const { DELIVERY_ADDR_PAGE } = languageDefinations();
   return (
     <div className={`${styles['addr-new-container']} ${styles['pb-30']} ${styles['pr-30']} ${styles['pl-30']}`}>
@@ -23,7 +23,8 @@ const AddressNew = props => {
           <Col md={12} sm={12} xs={12}>
             <div>
               <MyGMap
-                updateAddressFromGoogleMap={updateAddressFromGoogleMap}
+                getDataFromMap={getDataFromMap}
+                clsName='addr-map'
               />
             </div>
           </Col>
@@ -136,7 +137,7 @@ AddressNew.propTypes = {
   saveBtnClickHandler: PropTypes.func.isRequired,
   setAsDefaultLocation: PropTypes.func.isRequired,
   addrTypeHandler: PropTypes.func.isRequired,
-  updateAddressFromGoogleMap: PropTypes.func.isRequired,
+  getDataFromMap: PropTypes.func.isRequired,
   inputOnChange: PropTypes.func.isRequired,
   data: PropTypes.object
 };

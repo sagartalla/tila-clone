@@ -12,10 +12,10 @@ const ReviewsTab = ({ tabs }) => {
   return (
     <div>
       <Tabs defaultActiveKey={1}>
-        <Tab eventKey={1} title="All Reviews">
+        <Tab eventKey={1} id="All Reviews" title="All Reviews">
           <Review />
         </Tab>
-        <Tab eventKey={2} title="Expert Reviews">
+        <Tab eventKey={2} id="Expert Reviews" title="Expert Reviews">
           <Review />
         </Tab>
       </Tabs>

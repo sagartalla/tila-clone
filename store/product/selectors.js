@@ -33,6 +33,7 @@ const getProduct = (store, variantId) => {
     price: priceInfo ? priceInfo.selling_price + ' ' + priceInfo.selling_price_currency : 'Price Not available',
     originalPrice: '',
     discountPercent: '',
+    totalInventoryCount: priceInfo ? priceInfo.total_inventory_count : 0,
   };
   const shippingInfo = priceInfo ? priceInfo.shipping : {}
   const returnInfo = {
@@ -66,7 +67,7 @@ const getVariants = (store) => {
   const { product_details_vo } = product_details;
   const { cached_product_details } = product_details_vo;
   const identityAttr = _.filter(cached_product_details.attribute_map, { attribute_group_name: 'IDENTITY' }).map((attr) => attr.name);
-  let variants = similar_products.map((product) => {
+  let variants = (similar_products || []).map((product) => {
     const obj = identityAttr.reduce((acc, attrName) => {
       return {
         ...acc,

@@ -19,7 +19,7 @@ const styles = mergeCss('components/Product/product');
   discountPercent: '-60%',
 */
 
-const TitleInfo = ({ brand, title, rating, reviews, price, originalPrice, discountPercent }) => {
+const TitleInfo = ({ brand, title, rating, reviews, price, originalPrice, discountPercent, totalInventoryCount }) => {
   return (
     <div className={styles['pb-15']}>
       <div className={`${styles['fontW300']} ${styles['lgt-blue']}`}>{brand}</div>
@@ -39,7 +39,14 @@ const TitleInfo = ({ brand, title, rating, reviews, price, originalPrice, discou
           <a className={`${styles['fp-btn']} ${styles['fp-btn-default']}`}>Checkout Instantly </a>
         </div>
         <div>
-          <span className={`${styles['flex']} ${styles['fs-12']} ${styles['google-clr']} ${styles['fontW600']}`}>Only 2 left in stock!</span>
+          {
+            totalInventoryCount < 5
+            ?
+            <span className={`${styles['flex']} ${styles['fs-12']} ${styles['google-clr']} ${styles['fontW600']}`}>Only {totalInventoryCount} left in stock!</span>
+            :
+            null
+          }
+
           <span className={`${styles['flex']} ${styles['fs-12']}`}>COD available</span>
         </div>
       </div>
