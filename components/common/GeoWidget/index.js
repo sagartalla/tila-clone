@@ -88,7 +88,6 @@ class GeoWidget extends Component {
   }
 
   render() {
-    console.log('geoState', this.state);
     const { autoCompleteCityData, geoShippingData } = this.props;
     // const { displayCity } = geoShippingData;
     // const { displayCity: stateDisplayCity } = this.state;

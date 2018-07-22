@@ -23,8 +23,8 @@ class ProductPage extends Base {
   static async getInitialProps({ store, query, isServer, req }) {
     const state = store.getState();
     const country = req ? req.universalCookies.get('country') : cookies.get('country');
-    const shippingData = req ?  req.universalCookies.get('shippingInfo') : cookies.get('shippingInfo');;
-    const { city: shippingCity, country: shippingCountry } = shippingData;
+    const shippingData = req ?  req.universalCookies.get('shippingInfo') : cookies.get('shippingInfo');
+    const { city: shippingCity, country: shippingCountry } = shippingData || {};
     if (query.isPreview){
       await store.dispatch(actionCreators.getPreview({
         taskCode: query.taskCode,
