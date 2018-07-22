@@ -25,9 +25,9 @@ class SearchPage extends Base {
       id: subCategory ? subCategory.match(/(\d*)$/)[0] : category ? category.match(/(\d*)$/)[0] : null,
     };
     const facetFilters = selectors.getFacetfilters(store.getState())(JSON.parse(facets || '{}'));
-    const shippingData = authSelectors.getDeliveryCity(state);
-    const { city: shippingCity, country: shippingCountry } = shippingData;
-    await store.dispatch(actionCreators.getSearchResults({
+    const shippingData = req ? req.universalCookies.get('shippingInfo') : cookies.get('shippingInfo');;
+    const { city: shippingCity, country: shippingCountry } = shippingData || {};
+    const searchOptions = {
       categoryFilter,
       country: country || undefined,
       pageSize: 100,
@@ -38,11 +38,14 @@ class SearchPage extends Base {
       fl: '*',
       isListed: isListed === 'true',
       categoryTree,
-      // shippingDetails: {
-      //   shippingCity,
-      //   shippingCountry: country || 'uae'
-      // }
-    }))
+    };
+    if(shippingCity) {
+      searchOptions.shippingDetails = {
+        shippingCity: shippingCity.toUpperCase(),
+        shippingCountry: (country || 'uae').toUpperCase(),
+      }
+    }
+    await store.dispatch(actionCreators.getSearchResults(searchOptions))
     return { isServer };
   }
 

@@ -1,13 +1,15 @@
+// File not in use but the logic here is usefull
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {Row, Col, Button} from 'react-bootstrap';
 
-import { selectors, actionCreators } from '../../store/cart';
-import { Link } from '../../routes';
+import { selectors, actionCreators } from '../../../store/cart';
+import { Link } from '../../../routes';
 
-import { mergeCss } from '../../utils/cssUtil';
+import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Product/product');
 
 class Offers extends Component {

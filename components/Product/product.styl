@@ -2,21 +2,48 @@
 @import '/static/vendor/css/slick-theme.min.css';
 @import '../../layout/main/executables.styl';
 
+.page-details-slider
+  background-color #F1F2F4
+  .details-right-part
+    background-color rgba(255, 255, 255, 0.7)
+    box-shadow 0 0 7px 0 rgba(225,225,225,0.5)
+    position absolute
+    // z-index 99
+    width 35%
+    right 0
+    .details-right-part-inn
+      padding 35px 20px
+      .ti-reviews-wrap
+        span
+          &:nth-child(2)
+            border-right 1px solid dottes-gry-clr
+            border-left 1px solid dottes-gry-clr
+
+      .checkout-instantly
+        div
+          flex 1
+    .addto-cart
+      background-color white
+      padding 35px 20px
+    .buy-coupon
+      width 16px
+      height 16px
+
 .display-item-wrap
-  margin-bottom 50px
-.carousel-item-wrap 
-  height 100px
+  // margin-bottom 50px
+.carousel-item-wrap
+  height 70px
   width: 100%;
   display: inline-block;
-  border: 1px solid light-gray;
-  padding: 14px;
   border-radius 4px
   img
-    height 100%
+    max-height 100%
+    max-width 100%
     margin 0 auto
+    border-radius 4px
 .selected-item-wrap
   display block
-  height 500px;
+  height 730px;
   img
     height 100%
     margin 0 auto
@@ -28,7 +55,129 @@
 
 .added-to-cart
   background #20bd99
-  color white  
+  color white
 
 .slick-slide
   width: 128px;
+
+.product-details-main
+  // background-color white
+  // box-shadow: 0 0 4px 0 rgba(212,212,212,0.5)
+  .expand-icon
+    width 16px
+    height 16px
+  .sub-decryption
+    overflow: hidden;
+    line-height: 1.5em;
+    max-height: 3em;
+
+  .size-btn-main
+    .size-btn
+      display none
+    label
+      cursor pointer;
+      border 1px solid transparent;
+      width-height-radius(30px, 30px, 50%)
+      margin 0
+
+  .size-btn-main input:checked + label {
+    box-shadow: 0 0 3px 0 rgba(164,164,164,0.5);
+  }
+
+  .color-btn-main
+    .color-btn
+      display none
+    label
+      cursor pointer
+      width-height-radius(20px, 20px, 50%)
+      margin 0
+
+    .pink
+      background-color #cd4594
+
+    .blue
+      background-color #405CB3
+
+    .green
+      background-color #136B21
+
+    .gray
+      background-color lgt-gray
+
+.bottom-slider
+  background-color white
+  padding 17px 0
+  .copon-code
+    border-left 5px solid  border-gry-color
+
+.review-main
+  .review-no
+    font-size 90px
+    background: url(/static/img/bg-img/groupstar.png) no-repeat;
+    background-size contain
+  .review-start
+    .star-icon
+      width 20px
+      height 20px
+      margin-right 5px
+  .wrt-btn
+    float left
+
+.profile-img
+  span
+    width-height-radius(50px, 50px, 50%)
+    background-color base-font
+
+.review-start-inn
+  .star-icon
+    width 15px
+    height 15px
+    margin-right 5px
+
+.recentview-main
+  float left
+  .recent-title
+    background: rgba(216, 216, 216, 0.1);
+    span
+      border-left 4px solid border-pink
+
+.elt-overview-main
+  .overview-inn
+    align-items flex-end
+
+.elt-Specification-main
+  .specification-icon
+    width 30px
+    height 45px
+
+  .camera-icon
+    width: 40px;
+    height: 45px;
+
+  .processor-icon
+    width: 36px;
+    height: 45px;
+
+  .specification-review
+    float left
+
+.compare-main
+  .compare-dtls
+    .compare-dtls-img
+      height 150px
+
+.compare-main-items
+  .compare-product-spficication
+    height 74px
+    .dispy-screen
+      .screen-icon
+        height 34px
+        width 22px
+      .camera-icon, .processor-icon
+        width 30px
+        height 30px
+      .battery-icon
+        height 35px
+        width 24px
+    &:nth-child(odd)
+      background-color compare-bg-greay
