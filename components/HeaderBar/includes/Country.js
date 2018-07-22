@@ -15,12 +15,12 @@ const cookies = new Cookies();
 
 const countriesData = {
   ksa: {
-    img: 'static/img/bg-img/ksa.png',
+    img: '/static/img/bg-img/ksa.png',
     name: 'ksa',
     id: 'ksa',
   },
   uae: {
-    img: 'static/img/bg-img/uae.png',
+    img: '/static/img/bg-img/uae.png',
     name: 'uae',
     id: 'uae',
   }
@@ -37,11 +37,13 @@ class Country extends Component {
   }
 
   componentDidMount() {
-		const country = cookies.get('country') || this.state.country;
-		this.setState({
-      selectedItem: country
-    });
-		this.props.setCountry(country);
+	const country = cookies.get('country') || this.state.country;
+	if(country){
+	  this.setState({
+        selectedItem: country
+      });    
+	}
+	this.props.setCountry(country);
 	}
 
   changeCountry(e) {
