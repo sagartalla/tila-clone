@@ -14,7 +14,7 @@ import { reducer as notificationsReducer } from './cam/notifications';
 import { reducer as vaultReducer } from './cam/userVault';
 import { reducer as messagesReducer } from './cam/messages';
 import { reducer as reviewRatingReducer } from './ratingReviews';
-
+import { reducer as compareReducer } from './compare';
 
 export default combineReducers({
   searchReducer,
@@ -32,4 +32,5 @@ export default combineReducers({
   vaultReducer,
   messagesReducer,
   reviewRatingReducer,
+  compareReducer,
 });

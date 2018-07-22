@@ -26,6 +26,7 @@ const Search = () => (
       </div>
     </Grid>
     <FooterBar />
+    <CompareWidget/>
   </div>
 );
 

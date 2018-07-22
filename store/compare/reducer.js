@@ -5,28 +5,29 @@ const initialState = {
   ui: {
     loading: false,
   },
-  data: {},
-  error: '',
+  data: {
+    compareItemsCount: 0
+  },
+  error: null,
 };
 
-const megamenuReducer = typeToReducer({  
-  [actions.GET_MEGAMENU]: {
+const compareReducer = typeToReducer({
+  [actions.ADD_TO_COMPARE]: {
     PENDING: state => {
       return Object.assign({}, state, { ui: { loading: true } });
     },
     FULFILLED: (state, action) => {
       return Object.assign({}, state, {
         data: {
-          ...state.data,
-          ...action.payload.data,
+          compareItemsCount: action.payload.count
         },
         ui: { loading: false }
       });
     },
     REJECTED: (state, action) => {
-      return Object.assign({}, state, { error: action.payload.message, ui: { loading: false } })
+      return Object.assign({}, state, { error: action.payload.error, ui: { loading: false } })
     },
   }
 }, initialState);
 
-export default megamenuReducer;
+export default compareReducer;

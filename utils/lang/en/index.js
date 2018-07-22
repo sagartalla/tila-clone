@@ -163,6 +163,7 @@ export const EN_KEYWORDS = {
     'TILA_COMPARE_1': 'Tila Comparing (',
     'TILA_COMPARE_2': 'items) for you',
     'FEATUERS': 'Features',
-    'CLEAR_ALL': 'Clear All'
+    'CLEAR_ALL': 'Clear All',
+    'COMPARE': 'COMPARE',
   }
 };

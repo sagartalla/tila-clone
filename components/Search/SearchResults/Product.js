@@ -39,6 +39,14 @@ class Product extends Component {
     }
   }
 
+  addToCompare(e) {
+    const { itemType, productId } = e.currentTarget;
+    this.props.addToCompare({
+      itemType,
+      productId,
+    });
+  }
+
   render() {
     const {
       media = [],
@@ -96,11 +104,6 @@ class Product extends Component {
                   }
                 </span>
               </div>
-              {/* <div className={styles['variant-info']}>
-                {
-                  _.map(variants, (variantValues, key) => <div key={key}>{`${key} : ${variantValues.join(', ')}`}</div>)
-                }
-              </div> */}
             </div>
             <div className={`${styles['hover-show-date']} ${styles['pb-10']} ${styles['pb-10']} ${styles['absolute']}`}>
               <div className={`${styles['flex']} ${styles['justify-around']} ${styles['quick-view']} ${styles['border-radius4']}`}>
@@ -115,7 +118,7 @@ class Product extends Component {
                   </a>
                 </span>
                 <span className={styles['flex']}>
-                  <a className={styles['flex-center']}>
+                  <a className={styles['flex-center']} onClick={this.addToCompare}>
                     <SVGCompoent clsName={`${styles['wish-list']}`} src="icons/cam/cam-icon" />
                     <span className={styles['pl-5']}>Add to Compare</span>
                   </a>
