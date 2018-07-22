@@ -39,12 +39,12 @@ class SearchPage extends Base {
       isListed: isListed === 'true',
       categoryTree,
     };
-    if(shippingCity) {
-      searchOptions.shippingDetails = {
-        shippingCity: shippingCity.toUpperCase(),
-        shippingCountry: (country || 'uae').toUpperCase(),
-      }
-    }
+    // if(shippingCity) {
+    //   searchOptions.shippingDetails = {
+    //     shippingCity: shippingCity.toUpperCase(),
+    //     shippingCountry: (country || 'uae').toUpperCase(),
+    //   }
+    // }
     await store.dispatch(actionCreators.getSearchResults(searchOptions))
     return { isServer };
   }

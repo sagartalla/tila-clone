@@ -159,4 +159,10 @@ export const EN_KEYWORDS = {
     'PRICE_LOW_TO_HIGH': 'price low to high',
     'PRICE_HIGH_TO_LOW': 'price high to low',
   },
+  COMPARE: {
+    'TILA_COMPARE_1': 'Tila Comparing (',
+    'TILA_COMPARE_2': 'items) for you',
+    'FEATUERS': 'Features',
+    'CLEAR_ALL': 'Clear All'
+  }
 };
