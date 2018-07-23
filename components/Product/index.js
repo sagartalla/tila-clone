@@ -55,21 +55,27 @@ const getProductComponent = (isPreview, taskCode) => {
               </div>
           </Row>
         </div>
-        <div className={styles['bg-white']}>
-          <Grid>
-            <Row>
-              <Col md={8}>
-                <RecentView />
-              </Col>
-              <Col md={8}>
-                <ReviewsTab />
-              </Col>
-              <Col md={8}>
-                <ElectronicsTab/>
-              </Col>
-            </Row>
-          </Grid>
-        </div>
+        {
+          isPreview
+          ?
+          null
+          :
+          <div className={styles['bg-white']}>
+            <Grid>
+              <Row>
+                <Col md={8}>
+                  <RecentView />
+                </Col>
+                <Col md={8}>
+                  <ReviewsTab />
+                </Col>
+                <Col md={8}>
+                  <ElectronicsTab/>
+                </Col>
+              </Row>
+            </Grid>
+          </div>
+        }
         <div className={`${styles['border-b']} ${styles['border-t']} ${styles['pb-30']} ${styles['pt-30']}`}>
         <Grid>
           <Row>
@@ -87,7 +93,7 @@ const getProductComponent = (isPreview, taskCode) => {
   };
 
   const mapStateToProps = (store) => ({
-    productData: isPreview ? selectors.getPreview(store) : selectors.getProduct(store)
+    productData: taskCode ? selectors.getPreview(store) : selectors.getProduct(store)
   });
 
   Product.propTypes = {
