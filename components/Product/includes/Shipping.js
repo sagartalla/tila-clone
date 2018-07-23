@@ -24,14 +24,14 @@ class Shipping extends Component {
               <GeoWidget />
             </div>
             {
-               true
+               shippable
                ?
                <span className={`${styles['fs-12']} ${styles['lgt-blue']}`}>Free deliver in <span className={styles['fontW600']}>{shipping_days}</span> Days</span>: ''
             }
 
           </div>
           {
-            true
+            shippable
             ?
             <div>
               <div className={`${styles['flex']} ${styles['justify-center']} ${styles['pt-15']} ${styles['pb-15']}`}>

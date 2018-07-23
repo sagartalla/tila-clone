@@ -54,19 +54,18 @@ const getProductComponent = (isPreview, taskCode) => {
               </div>
           </Row>
         </div>
-        {
-          isPreview
-          ?
-          null
-          :
-          <div className={styles['bg-white']}>
+         <div className={styles['bg-white']}>
             <Grid>
               <Row>
                 <Col md={8}>
-                  <RecentView />
+                {
+                  isPreview ? null : <RecentView />
+                }
                 </Col>
                 <Col md={8}>
-                  <ReviewsTab />
+                {
+                  isPreview ? null : <ReviewsTab />
+                } 
                 </Col>
                 <Col md={8}>
                   <ElectronicsTab catalog={catalog}/>
@@ -74,7 +73,6 @@ const getProductComponent = (isPreview, taskCode) => {
               </Row>
             </Grid>
           </div>
-        }
         <div className={`${styles['border-b']} ${styles['border-t']} ${styles['pb-30']} ${styles['pt-30']}`}>
         {
           isPreview ? null : <FooterBar />
