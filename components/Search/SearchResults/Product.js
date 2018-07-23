@@ -78,7 +78,7 @@ class Product extends Component {
               <span className={`${styles['fullfill-main']}`}></span>
             </div>
             <div className={styles['desc-cont']}>
-              <div className={`${styles['pb-20']} ${styles['pl-20']}`}>
+              <div className={`${styles['pb-20']} ${styles['pl-20']} ${styles['flex']} ${styles['flex-colum']}`}>
                 <h5 className={`${styles['prdt-name']} ${styles['fontW600']} ${styles['pt-15']} ${styles['pb-5']}  ${styles['m-0']} ${styles['ellips']}`}>
                   {displayName}
                 </h5>
