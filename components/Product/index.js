@@ -8,7 +8,6 @@ import { selectors } from '../../store/product';
 import HeaderBar from '../HeaderBar/index';
 import Dispalay from './includes/Display';
 import TitleInfo from './includes/TitleInfo';
-// import Catalog from './includes/Catalog';
 import Offers from './includes/Offers';
 import Shipping from './includes/Shipping';
 import ProductPrice from './includes/ProductPrice';
@@ -71,13 +70,6 @@ const getProductComponent = (isPreview, taskCode) => {
           </Grid>
         </div>
         <div className={`${styles['border-b']} ${styles['border-t']} ${styles['pb-30']} ${styles['pt-30']}`}>
-        {/* <Grid>
-          <Row>
-            <Col xs={12}>
-              <Catalog catalog={catalog} />
-            </Col>
-          </Row>
-        </Grid> */}
         {
           isPreview ? null : <FooterBar />
         }
