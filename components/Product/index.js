@@ -8,7 +8,6 @@ import { selectors } from '../../store/product';
 import HeaderBar from '../HeaderBar/index';
 import Dispalay from './includes/Display';
 import TitleInfo from './includes/TitleInfo';
-import Catalog from './includes/Catalog';
 import Offers from './includes/Offers';
 import Shipping from './includes/Shipping';
 import ProductPrice from './includes/ProductPrice';
@@ -34,11 +33,11 @@ const getProductComponent = (isPreview, taskCode) => {
           isPreview ? null : <HeaderBar />
         }
         <div className={`${styles['page-details-slider']}`}>
-          <Row className={styles['m-0']}>
+          <Row className={`${styles['m-0']} ${styles['relative']}`}>
             <Col xs={12} md={8} className={styles['pl-0']}>
               <Dispalay imgs={imgUrls} />
             </Col>
-              <div className={`${styles['details-right-part']}`}>
+              <div className={`${styles['details-right-part']} ${styles['absolute']}`}>
                 <div className={`${styles['details-right-part-inn']}`}>
                   <TitleInfo {...titleInfo} isPreview={isPreview}/>
                   <ProductDetails details={details} keyfeatures={keyfeatures} isPreview={isPreview}/>
@@ -55,35 +54,26 @@ const getProductComponent = (isPreview, taskCode) => {
               </div>
           </Row>
         </div>
-        {
-          isPreview
-          ?
-          null
-          :
-          <div className={styles['bg-white']}>
+         <div className={styles['bg-white']}>
             <Grid>
               <Row>
                 <Col md={8}>
-                  <RecentView />
+                {
+                  isPreview ? null : <RecentView />
+                }
                 </Col>
                 <Col md={8}>
-                  <ReviewsTab />
+                {
+                  isPreview ? null : <ReviewsTab />
+                } 
                 </Col>
                 <Col md={8}>
-                  <ElectronicsTab/>
+                  <ElectronicsTab catalog={catalog}/>
                 </Col>
               </Row>
             </Grid>
           </div>
-        }
         <div className={`${styles['border-b']} ${styles['border-t']} ${styles['pb-30']} ${styles['pt-30']}`}>
-        <Grid>
-          <Row>
-            <Col xs={12}>
-              <Catalog catalog={catalog} />
-            </Col>
-          </Row>
-        </Grid>
         {
           isPreview ? null : <FooterBar />
         }
