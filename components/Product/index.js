@@ -39,7 +39,7 @@ const getProductComponent = (isPreview, taskCode) => {
             </Col>
               <div className={`${styles['details-right-part']} ${styles['absolute']}`}>
                 <div className={`${styles['details-right-part-inn']}`}>
-                  <TitleInfo {...titleInfo} />
+                  <TitleInfo {...titleInfo} isPreview={isPreview}/>
                   <ProductDetails details={details} keyfeatures={keyfeatures} isPreview={isPreview}/>
                   {
                     isPreview ? null :<Shipping />
@@ -54,21 +54,27 @@ const getProductComponent = (isPreview, taskCode) => {
               </div>
           </Row>
         </div>
-        <div className={styles['bg-white']}>
-          <Grid>
-            <Row>
-              <Col md={8}>
-                <RecentView />
-              </Col>
-              <Col md={8}>
-                <ReviewsTab />
-              </Col>
-              <Col md={8}>
-                <ElectronicsTab catalog={catalog}/>
-              </Col>
-            </Row>
-          </Grid>
-        </div>
+        {
+          isPreview
+          ?
+          null
+          :
+          <div className={styles['bg-white']}>
+            <Grid>
+              <Row>
+                <Col md={8}>
+                  <RecentView />
+                </Col>
+                <Col md={8}>
+                  <ReviewsTab />
+                </Col>
+                <Col md={8}>
+                  <ElectronicsTab catalog={catalog}/>
+                </Col>
+              </Row>
+            </Grid>
+          </div>
+        }
         <div className={`${styles['border-b']} ${styles['border-t']} ${styles['pb-30']} ${styles['pt-30']}`}>
         {
           isPreview ? null : <FooterBar />
@@ -79,7 +85,7 @@ const getProductComponent = (isPreview, taskCode) => {
   };
 
   const mapStateToProps = (store) => ({
-    productData: isPreview ? selectors.getPreview(store) : selectors.getProduct(store)
+    productData: taskCode ? selectors.getPreview(store) : selectors.getProduct(store)
   });
 
   Product.propTypes = {
