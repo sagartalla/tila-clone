@@ -40,7 +40,7 @@ const getProductComponent = (isPreview, taskCode) => {
             </Col>
               <div className={`${styles['details-right-part']}`}>
                 <div className={`${styles['details-right-part-inn']}`}>
-                  <TitleInfo {...titleInfo} />
+                  <TitleInfo {...titleInfo} isPreview={isPreview}/>
                   <ProductDetails details={details} keyfeatures={keyfeatures} isPreview={isPreview}/>
                   {
                     isPreview ? null :<Shipping />
