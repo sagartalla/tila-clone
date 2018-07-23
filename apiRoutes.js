@@ -86,12 +86,13 @@ apiRoutes
         const country = results.length ? _.filter(results[0].address_components, (ac) => {
           return ac.types.indexOf('country') !== -1;
         })[0].long_name : null;
-        req.universalCookies.set('city', city, { path: '/' });
-        res.json({
+        const returnData = {
           country,
           city,
           displayCity: `${city}, ${country}`,
-        });
+        };
+        req.universalCookies.set('shippingInfo', returnData);
+        res.json(returnData);
       });
   })
   .get('/autoCompleteCity', (req, res) => {

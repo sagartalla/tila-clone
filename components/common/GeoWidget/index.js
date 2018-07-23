@@ -3,21 +3,25 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import _ from 'lodash';
+import Cookie from 'universal-cookie';
 
 import { actionCreators, selectors } from '../../../store/auth';
-import SVGCompoent from '../../common/SVGComponet';
+import SVGCompoent from '../SVGComponet';
 import { languageDefinations } from '../../../utils/lang';
 
 import { mergeCss } from '../../../utils/cssUtil';
-const styles = mergeCss('components/Search/search');
+const styles = mergeCss('components/common/GeoWidget/geoWidget');
 
 const { SEARCH_PAGE } = languageDefinations();
+const cookies = new Cookie();
 
-class DeliverToWidget extends Component {
+class GeoWidget extends Component {
   constructor(props) {
+    const shippingInfo = cookies.get('shippingInfo');
     super(props);
     this.state = {
-      ...props.geoShippingData
+      ...props.geoShippingData,
+      ...shippingInfo,
     }
     this.deriveCity = this.deriveCity.bind(this);
     this.onChangeCity = this.onChangeCity.bind(this);
@@ -26,15 +30,19 @@ class DeliverToWidget extends Component {
   }
 
   componentDidMount() {
-    if(navigator.geolocation) {
+    const shippingInfo = cookies.get('shippingInfo')
+    if(navigator.geolocation && !shippingInfo) {
       navigator.geolocation.getCurrentPosition(this.deriveCity);
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    // this.setState({
-    //   ...nextProps.geoShippingData
-    // })
+    const { geoShippingData } = nextProps;
+    if(!this.state.displayCity && geoShippingData) {
+      this.setState({
+        displayCity: geoShippingData.displayCity
+      })
+    }
   }
 
   onChangeCity(e) {
@@ -81,8 +89,8 @@ class DeliverToWidget extends Component {
 
   render() {
     const { autoCompleteCityData, geoShippingData } = this.props;
-    const { displayCity } = geoShippingData;
-    const { displayCity: stateDisplayCity } = this.state;
+    // const { displayCity } = geoShippingData;
+    // const { displayCity: stateDisplayCity } = this.state;
     return (
       <div className={`${styles['flex-center']} ${styles['delovery-inn']}`}>
         <span className={`${styles['flex-center']} ${styles['delivery-part']}`}>
@@ -90,7 +98,7 @@ class DeliverToWidget extends Component {
           <span className={`${styles['fontW600']} ${styles['pl-5']} ${styles['pr-10']}`}>{SEARCH_PAGE.DELIVER_TO} :</span>
         </span>
         <div className={styles['auto-suggestions-wrap']}>
-          <input type="text" value={stateDisplayCity  || stateDisplayCity === '' ? stateDisplayCity : displayCity} onChange={this.onChangeCity} onFocus={this.onFocusCity}/>
+          <input type="text" value={this.state.displayCity} onChange={this.onChangeCity} onFocus={this.onFocusCity}/>
           <div className={styles['auto-suggestions']}>
             {
               autoCompleteCityData.map((result) => <div key={result.displayCity} data-id={result.displayCity} onClick={this.selectCityFromSuggesstions} className={styles['item']}>{result.displayCity}</div>)
@@ -118,4 +126,4 @@ const mapDispatchToProps = dispatch =>
     dispatch,
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(DeliverToWidget);
+export default connect(mapStateToProps, mapDispatchToProps)(GeoWidget);

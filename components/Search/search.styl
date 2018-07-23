@@ -47,7 +47,7 @@
   .items-list-show
     align-items flex-end
     .deliver-to-main
-      width 42%
+      width 50%
       .delovery-inn
         width 60%
       .sort-part-inn
@@ -134,19 +134,27 @@
       height 22px
       top 20px
       left 20px
-      position absolute
+      // position absolute
     .offer-tag
-      position: absolute;
-      top: 20px;
+      // position: absolute;
+      top: 15px;
       left: 20px;
-      &.green
-        color green;
-      &.yellow
-        color yellow;
-      &.orange
-        color orange;
-      &.red
-        color red;
+      .down-arrow
+        width 0
+        height 0
+        border-left 10px solid transparent
+        border-right 10px solid transparent
+        // border-top: 10px solid red;
+        // position absolute
+        top -16px
+        &.green
+          border-top: 10px solid generic-green-color
+        &.yellow
+          border-top: 10px solid yellow-color
+        &.orange
+          border-top: 10px solid orange
+        &.red
+          border-top: 10px solid thick-red-arrow
     .variants-main
       width-height-radius(35px, 35px, 50%)
       bottom 10px
@@ -258,16 +266,3 @@
   -ms-transform: translateX(26px);
   transform: translateX(26px);
 }
-
-.auto-suggestions-wrap
-  position relative
-  input
-    background transparent
-  .auto-suggestions
-    position absolute
-    z-index 1
-    cursor pointer
-    .item
-      display block
-      background rgba(0,0,0,0.1)
-      border-bottom 1px solid

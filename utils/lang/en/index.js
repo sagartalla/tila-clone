@@ -76,6 +76,13 @@ export const EN_KEYWORDS = {
     'ALL_STARTS': 'All Starts',
     'FILTER_BY': 'Filter By',
     'NO REVIEWS': 'No Reviews',
+    'SELECT_CITY': 'SELECT CITY',
+    'FREE_DELIVERY': 'Free delivery',
+    'DAYS': 'Days',
+    'PRODUCT_DETAILS': 'PRODUCT DETAILS',
+    'ADD_TO_CART': 'ADD TO CART',
+    'BUY_NOW': 'BUY NOW',
+
   },
   VAULT_PAGE: {
     'MANAGE_VAULT_HDR': 'Manage Cards, Vouchers and More',

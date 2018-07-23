@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import DeliverToWidget from './DeliverToWidget';
+import GeoWidget from '../../common/GeoWidget';
 import SortByWidget from './SortByWidget';
 
 import { actionCreators, selectors } from '../../../store/search';
@@ -22,14 +22,7 @@ class SearchDetailsBar extends Component {
         <div className={`${styles['flx-space-bw']} ${styles['pb-10']} ${styles['items-list-show']}`}>
           <h4 className={`${styles['meta-info']} ${styles['mt-0']} ${styles['mb-0']} ${styles['fontW300']}`}>{results.totalCount} {SEARCH_PAGE.NO_OF_ITEMS_FOUND}</h4>
           <div className={`${styles['flex-center']} ${styles['deliver-to-main']}`}>
-            {/*<div className={`${styles['flex-center']} ${styles['delovery-inn']}`}>
-              <span className={`${styles['flex-center']} ${styles['delivery-part']}`}>
-                <SVGCompoent clsName={`${styles['map-icon']}`} src="icons/common-icon/black-map-location" />
-                <span className={`${styles['fontW600']} ${styles['pl-5']} ${styles['pr-10']}`}>Deliver to :</span>
-              </span>
-              <span>Riyadh</span>
-            </div>*/}
-            <DeliverToWidget />
+            <GeoWidget />
             <SortByWidget />
           </div>
         </div>

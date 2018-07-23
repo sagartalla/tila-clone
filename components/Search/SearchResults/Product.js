@@ -45,13 +45,14 @@ class Product extends Component {
       displayName,
       variants,
       productId,
+      variantId,
       catalogId,
       itemtype,
       priceRange,
       offers,
     } = this.props;
     return (
-      <Link route={`/product?productId=${productId}&catalogId=${catalogId}&itemType=${itemtype}`}>
+      <Link route={`/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemtype}`}>
         <Col md={3} xs={6} className={`${styles['pr-0']} ${styles['pl-0']}`}>
           <div className={`${styles['product-items']} ${styles['relative']}`}>
             <div className={`${styles['img-cont']} ${styles['border-radius4']} ${styles['relative']}`}>
@@ -66,9 +67,9 @@ class Product extends Component {
                 (
                   offers.length > 1 && (offers[0] <= 10 && offers[0] > 0)
                   ?
-                  <span className={`${styles['tag-main']}`}></span>
+                  <span className={`${styles['tag-main']} ${styles['absolute']}`}></span>
                   :
-                  <span className={`${styles['offer-tag']} ${styles[this.getOfferClassName(offers[0])]}`}>{offers[0]} OFF</span>
+                  <span className={`${styles['offer-tag']} ${styles['fontW600']} ${styles['absolute']}`}><span className={`${styles['down-arrow']} ${styles['absolute']} ${styles[this.getOfferClassName(offers[0])]}`}></span>{offers[0]} OFF</span>
                 )
                 :
                 null
