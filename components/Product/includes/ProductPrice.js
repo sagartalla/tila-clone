@@ -14,11 +14,11 @@ const ProductPrice = ({offerInfo}) => {
       <Fragment>
         <div className={styles['flex']}>
           <span className={`${styles['fs-30']} ${styles['fontW600']} ${styles['pr-5']}`}>{offerInfo.price}</span>
-          <span>AED</span>
+          {/* <span>AED</span> */}
         </div>
         <div className={styles['flex']}>
           <SVGCompoent clsName={`${styles['buy-coupon']}`} src="icons/common-icon/bg-tick-mark" />
-          <span className={styles['fs-12']}>Buy & Earn 300 Reward Points</span>
+          <span className={`${styles['fs-12']} ${styles['pl-10']}`}>Buy & Earn 300 Reward Points</span>
         </div>
       </Fragment>
       :
