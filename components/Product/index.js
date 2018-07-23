@@ -24,7 +24,7 @@ import FooterBar from '../Footer/index';
 import { mergeCss } from '../../utils/cssUtil';
 const styles = mergeCss('components/Product/product');
 
-const getProductComponent = (isPreview) => {
+const getProductComponent = (isPreview, taskCode) => {
   const Product = ({ productData }) => {
     const { catalog, titleInfo, keyfeatures, imgUrls, offerInfo, shippingInfo, returnInfo, details } = productData;
     console.log('productData', productData);
@@ -41,11 +41,17 @@ const getProductComponent = (isPreview) => {
               <div className={`${styles['details-right-part']}`}>
                 <div className={`${styles['details-right-part-inn']}`}>
                   <TitleInfo {...titleInfo} />
-                  <ProductDetails details={details} keyfeatures={keyfeatures} />
-                  <Shipping />
-                  <ProductPrice offerInfo={offerInfo} />
+                  <ProductDetails details={details} keyfeatures={keyfeatures} isPreview={isPreview}/>
+                  {
+                    isPreview ? null :<Shipping />
+                  }
+                  {
+                    isPreview ? null : <ProductPrice offerInfo={offerInfo} />
+                  }
                 </div>
-                <AddToCart offerInfo={offerInfo} />
+                {
+                  isPreview ? null : <AddToCart offerInfo={offerInfo} />
+                }
               </div>
           </Row>
         </div>
