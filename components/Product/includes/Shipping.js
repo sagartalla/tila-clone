@@ -56,7 +56,7 @@ class Shipping extends Component {
               </div>
             </div>
             :
-            <p>Not shipping to your city.</p>
+            <p className={`${styles['flex']} ${styles['pt-15']} ${styles['justify-center']}`}>Not shipping to your city.</p>
 
           }
         </div>
