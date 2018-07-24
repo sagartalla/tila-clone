@@ -38,7 +38,7 @@ class MegaMenu extends Component {
             :
             null
           } */}
-          <Link route={`/category/${childItem.displayName}-${childItem.id}?isListed=true`}>
+          <Link route={`/${childItem.displayName}-${childItem.id}?categoryTree=true&isListed=true`}>
             <a className={`${styles['level-1-item']}`}>{childItem.displayName}</a>
           </Link>
         </span>
@@ -84,7 +84,7 @@ class MegaMenu extends Component {
               _.map(megamenu, (item) => (
                 <li key={item.id} onMouseOver={this.onHoverCurry(item.id)}>
                   <div>
-                    <Link route={`/category/${item.displayName}-${item.id}?isListed=true`}>
+                    <Link route={`/category/${item.displayName}-${item.id}?categoryTree=true&isListed=true`}>
                       <a className={styles['level-1-item']}>{item.displayName}</a>
                     </Link>
                   </div>
