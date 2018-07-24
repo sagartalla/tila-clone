@@ -24,11 +24,12 @@ class Cart extends Component {
       showBlocker: false
     }
 
-    this.checkoutBtnHandler = this.checkoutBtnHandler.bind(this);
+    this.addToWishlist = this.addToWishlist.bind(this);
     this.removeCartItem = this.removeCartItem.bind(this);
     this.increaseItemCnt = this.increaseItemCnt.bind(this);
     this.decreaseItemCnt = this.decreaseItemCnt.bind(this);
-    this.addToWishlist = this.addToWishlist.bind(this);
+    this.addOrRemoveGift = this.addOrRemoveGift.bind(this);
+    this.checkoutBtnHandler = this.checkoutBtnHandler.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -65,14 +66,18 @@ class Cart extends Component {
 
   //TODO after add to cart, discuss with backend team whether to call cart item or not.
   addToWishlist(e) {
-    const { results } = this.props;
+    const { cartData } = this.props;
     const listing_id = e.currentTarget.getAttribute('data-id');
-    const item = results.items.filter(_item => listing_id == _item.item_id)[0];
+    const item = cartData.items.filter(_item => listing_id == _item.item_id)[0];
     this.props.addToWishlist({
       "catalog_id": item.item_id,
       "product_id": item.product_id,
       "variant_id": item.variant_id
     });
+  }
+
+  addOrRemoveGift(e) {
+    this.props.addOrRemoveGift(e.currentTarget.getAttribute('data-id'), e.currentTarget.checked ? 'add' : 'remove');
   }
 
   render() {
@@ -87,10 +92,10 @@ class Cart extends Component {
               <MiniCartBody
                 data={cartData}
                 showBlocker={showBlocker}
+                editCartDetails={editCartDetails}
                 removeCartItem={this.removeCartItem}
                 increaseItemCnt={this.increaseItemCnt}
                 decreaseItemCnt={this.decreaseItemCnt}
-                editCartDetails={editCartDetails}
               />
             </div>
             :
@@ -100,17 +105,17 @@ class Cart extends Component {
                 <CartBody
                   data={cartData}
                   showBlocker={showBlocker}
-                  checkoutBtnHandler={this.checkoutBtnHandler}
+                  addToWishlist={this.addToWishlist}
                   removeCartItem={this.removeCartItem}
                   increaseItemCnt={this.increaseItemCnt}
                   decreaseItemCnt={this.decreaseItemCnt}
-                  addToWishlist={this.addToWishlist}
+                  addOrRemoveGift={this.addOrRemoveGift}
+                  checkoutBtnHandler={this.checkoutBtnHandler}
                 />
               </Grid>
               <FooterBar />
             </Fragment>
         }
-
       </div>
     )
   }
@@ -126,6 +131,7 @@ const mapDispatchToProps = (dispatch) =>
       getCartResults: actionCreators.getCartResults,
       removeCartItem: actionCreators.removeCartItem,
       cartItemCount: actionCreators.cartItemCount,
+      addOrRemoveGift: actionCreators.addOrRemoveGift,
       addToWishlist: wishlistActionCreators.addToWishlist,
     },
     dispatch,

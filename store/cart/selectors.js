@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 const getCartResults = (store) => {
   if (store.cartReducer.data) {
     const data = store.cartReducer.data;
@@ -13,7 +15,6 @@ const getCartResults = (store) => {
       newData.tax = 0;
       newData.item_cnt = data.items.length;
       newData.currency = data.items[0].listing_info.selling_price_currency;
-
       data.items.map((item, index) => {
         newData.items[index] = {
           item_id: item.cart_item_id,
@@ -27,6 +28,9 @@ const getCartResults = (store) => {
           inventory: item.listing_info.total_inventory_count,
           max_limit: item.listing_info.max_limit_per_user,
           brand_name: item.product_details.catalog_details.attribute_map.brand.attribute_values[0].value,
+          gift_info: item.gift_info,
+          shipping: item.listing_info.shipping,
+          warranty: _.groupBy(item.listing_info.warranty_details, 'type')['MANUFACTURER'],
         }
       })
     }
