@@ -40,8 +40,8 @@ apiRoutes
     return axios.post(`${AUTH_API_URL}/api/v1/refresh`, {
         'auth_version': 'V1',
         'refresh_token': auth.refresh_token
-      }).then((res) => {
-        auth.access_token = res.data.access_token
+      }).then((data) => {
+        auth.access_token = data.data.access_token
         req.universalCookies.set('auth', auth, { path: '/' });
         return res.json({});
       }).catch((err) => {
@@ -86,12 +86,13 @@ apiRoutes
         const country = results.length ? _.filter(results[0].address_components, (ac) => {
           return ac.types.indexOf('country') !== -1;
         })[0].long_name : null;
-        req.universalCookies.set('city', city, { path: '/' });
-        res.json({
+        const returnData = {
           country,
           city,
           displayCity: `${city}, ${country}`,
-        });
+        };
+        req.universalCookies.set('shippingInfo', returnData);
+        res.json(returnData);
       });
   })
   .get('/autoCompleteCity', (req, res) => {

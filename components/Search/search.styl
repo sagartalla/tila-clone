@@ -47,7 +47,7 @@
   .items-list-show
     align-items flex-end
     .deliver-to-main
-      width 42%
+      width 50%
       .delovery-inn
         width 60%
       .sort-part-inn
@@ -106,7 +106,7 @@
       display none
     .hover-show-date
       display block
-     
+
 
 .loader
   position absolute
@@ -122,28 +122,53 @@
   box-shadow 0 2px 7px 0 rgba(0,0,0,0.03)
   background-color white
 
-  .img-cont 
+  .img-cont
     height 397.36px
     display flex
     align-items center
     justify-content center
     width 100%
     .tag-main
-      width 18px
-      height 18px
+      background url(/static/img/icons/common-icon/tag-icon.svg) no-repeat
+      width 22px
+      height 22px
       top 20px
       left 20px
+      // position absolute
+    .offer-tag
+      // position: absolute;
+      top: 15px;
+      left: 20px;
+      .down-arrow
+        width 0
+        height 0
+        border-left 10px solid transparent
+        border-right 10px solid transparent
+        // border-top: 10px solid red;
+        // position absolute
+        top -16px
+        &.green
+          border-top: 10px solid generic-green-color
+        &.yellow
+          border-top: 10px solid yellow-color
+        &.orange
+          border-top: 10px solid orange
+        &.red
+          border-top: 10px solid thick-red-arrow
     .variants-main
       width-height-radius(35px, 35px, 50%)
       bottom 10px
       left 10px
-      background rgba(255, 255, 255, 0.5)
       padding 8px
+      position absolute
+      background rgba(255, 255, 255, 0.5) url(/static/img/icons/common-icon/variants.svg) no-repeat center
     .fullfill-main
+      background url(/static/img/icons/common-icon/icon-fullfilled.svg) no-repeat
       top 20px
       right 20px
-      width 20px
+      width 24px
       height 20px
+      position absolute
     .image-div
       width 100%
       height 100%
@@ -156,17 +181,22 @@
         object-fit scale-down
 
 .category-list
-  border-bottom 1px solid border-gray
-  padding-bottom 10px
+  border-bottom 0.5px solid border-gray
+  // padding-bottom 10px
 
   .category-list-title
-    border-bottom 1px solid border-gray
-    .expand-icon
-      width 16px
-      height 16px
+    border-bottom 0.5px solid border-gray
+    a
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      align-items: center;
+      .expand-icon
+        width 16px
+        height 16px
 
 .category-sub-list
-  padding 10px 0 0 20px
+  // padding 10px 0 0 20px
 
   .main-sub-list > a
     color black
@@ -196,7 +226,7 @@
 
 // toogle switch css start
 
-.switch 
+.switch
   position relative
   display inline-block
   width 60px
@@ -241,14 +271,3 @@
   -ms-transform: translateX(26px);
   transform: translateX(26px);
 }
-
-.auto-suggestions-wrap
-  position relative
-  .auto-suggestions
-    position absolute
-    z-index 1
-    cursor pointer
-    .item
-      display block
-      background rgba(0,0,0,0.1)
-      border-bottom 1px solid

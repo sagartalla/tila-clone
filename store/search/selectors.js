@@ -71,6 +71,7 @@ const getSearchResutls = (store) => {
         return modifiedVaraintsCopy;
       }, {});
       const priceInfo = product.variantListingAdapters.map((vla) => vla.attributes.sellingPrice);
+      const offers = product.variantListingAdapters.map((vla) => vla.attributes.discount);
       let priceRange = '';
       if (priceInfo.length > 2) {
         priceRange = [Math.min.apply(null, priceInfo), Math.max.apply(null, priceInfo)].join(' - ');
@@ -88,6 +89,7 @@ const getSearchResutls = (store) => {
         displayName: product.attributes.calculated_display_name,
         variants: variantInfo,
         priceRange,
+        offers: offers,
       };
     });
   }

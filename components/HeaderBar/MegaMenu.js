@@ -1,11 +1,11 @@
-import React, { Component } from 'react'; 
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import _ from 'lodash';
-
+import publicUrls from '../../constants';
 import { Link } from '../../routes';
 import { selectors, actionCreators } from '../../store/megamenu';
-
+import SVGComponent from '../common/SVGComponet';
 import { mergeCss } from '../../utils/cssUtil';
 const styles = mergeCss('components/HeaderBar/header');
 
@@ -26,16 +26,25 @@ class MegaMenu extends Component {
     //TODO: should be fetched on the server side
     this.props.getMegamenu();
   }
-  
-  getTree(childCategory) {
+
+  getTree(childCategory, isFirst) {
     return _.map(childCategory ? childCategory.childCategories : {}, (childItem) => (
-      <li key={childItem.id} onClick={this.onLinkClick}>
-        <Link route={`/category/${childItem.displayName}-${childItem.id}`}>
-          <a className={styles['level-1-item']}>{childItem.displayName}</a>
-        </Link>
-        <ul>
+      <li className={`${styles['megamenu-sub-list']}`} key={childItem.id} onClick={this.onLinkClick}>
+        <span className={styles['flex']}>
+          {/* {
+            isFirst
+            ?
+            <SVGComponent clsName={`${styles['flex']} ${styles['megamenu-icon']}`} src={childCategory.icon}/>
+            :
+            null
+          } */}
+          <Link route={`/category/${childItem.displayName}-${childItem.id}?isListed=true`}>
+            <a className={`${styles['level-1-item']}`}>{childItem.displayName}</a>
+          </Link>
+        </span>
+        <ul className={`${styles['megamenu-sub-child-list']} ${styles['pl-0']}`}>
           {
-            childItem.isLeaf ? null : this.getTree(childItem)
+            childItem.isLeaf ? null : this.getTree(childItem, false)
           }
         </ul>
       </li>
@@ -69,13 +78,13 @@ class MegaMenu extends Component {
     const selectedCategoryTree = _.find(megamenu, { id: selectedCategory });
     return (
       <div>
-        <nav className={styles['megamenu-wrapper']}>
-          <ul>
+        <nav className={`${styles['megamenu-wrapper']} ${styles['flx-spacebw-alignc']}`}>
+          <ul className={styles['mb-0']}>
             {
               _.map(megamenu, (item) => (
                 <li key={item.id} onMouseOver={this.onHoverCurry(item.id)}>
                   <div>
-                    <Link route={`/category/${item.displayName}-${item.id}`}>
+                    <Link route={`/category/${item.displayName}-${item.id}?isListed=true`}>
                       <a className={styles['level-1-item']}>{item.displayName}</a>
                     </Link>
                   </div>
@@ -83,20 +92,30 @@ class MegaMenu extends Component {
               ))
             }
           </ul>
+          <div className={`${styles['float-r']} ${styles['fs-12']}`}>
+            <span className={`${styles['pl-5']} ${styles['pr-5']}`}>
+              <a href={publicUrls.sellerPlatform} target="_blank" className={styles['black-color']}>Sell with Tila</a>
+            </span>
+            <span className={`${styles['pl-5']} ${styles['pr-5']}`}>|</span>
+            <span className={`${styles['pl-5']} ${styles['pr-5']}`}>
+              <a href={publicUrls.customerHelp} target="_blank" className={styles['black-color']}>Customer Care</a>
+            </span>
+          </div>
         </nav>
         {
           selectedCategoryTree
-          ?
+            ?
             <div onMouseLeave={this.onHoverOut} className={`${styles['megamenu-dropdown']} ${styles['box']} ${styles['box-space']}`}>
-              <ul>
+              <ul className={styles['megamenu-sub-drop-down']}>
                 {
-                  this.getTree(selectedCategoryTree)
+                  this.getTree(selectedCategoryTree, true)
                 }
               </ul>
             </div>
-          :
-          null
+            :
+            null
         }
+
       </div>
     );
   }

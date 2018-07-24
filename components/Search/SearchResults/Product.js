@@ -24,18 +24,35 @@ class Product extends Component {
     });
   }
 
+  getOfferClassName(offer) {
+    if(offer > 10 && offer < 20) {
+      return 'green'
+    }
+    if(offer > 20 && offer < 40){
+      return 'yellow'
+    }
+    if(offer > 40 && offer < 60){
+      return 'orange';
+    }
+    if(offer > 60){
+      return 'red';
+    }
+  }
+
   render() {
     const {
       media = [],
       displayName,
       variants,
       productId,
+      variantId,
       catalogId,
       itemtype,
       priceRange,
+      offers,
     } = this.props;
     return (
-      <Link route={`/product?productId=${productId}&catalogId=${catalogId}&itemType=${itemtype}`}>
+      <Link route={`/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemtype}`}>
         <Col md={3} xs={6} className={`${styles['pr-0']} ${styles['pl-0']}`}>
           <div className={`${styles['product-items']} ${styles['relative']}`}>
             <div className={`${styles['img-cont']} ${styles['border-radius4']} ${styles['relative']}`}>
@@ -44,16 +61,40 @@ class Product extends Component {
                   <img src={this.state.src} />
                 </Waypoint>
               </div>
-              <span className={`${styles['tag-main']} ${styles['absolute']}`}><SVGCompoent clsName={`${styles['tag-icon']}`} src="icons/common-icon/tag-icon" /></span>
-              <span className={`${styles['variants-main']} ${styles['absolute']}`}><SVGCompoent clsName={`${styles['variant-icon']}`} src="icons/common-icon/variants" /></span>
-              <span className={`${styles['fullfill-main']} ${styles['absolute']}`}><SVGCompoent clsName={`${styles['fullfill-icon']}`} src="icons/common-icon/icon-fullfilled" /></span>
+              {
+                (offers.length > 0)
+                ?
+                (
+                  offers.length > 1 && (offers[0] <= 10 && offers[0] > 0)
+                  ?
+                  <span className={`${styles['tag-main']} ${styles['absolute']}`}></span>
+                  :
+                  <span className={`${styles['offer-tag']} ${styles['fontW600']} ${styles['absolute']}`}><span className={`${styles['down-arrow']} ${styles['absolute']} ${styles[this.getOfferClassName(offers[0])]}`}></span>{offers[0]} OFF</span>
+                )
+                :
+                null
+              }
+              <span className={`${styles['variants-main']}`}></span>
+              <span className={`${styles['fullfill-main']}`}></span>
             </div>
             <div className={styles['desc-cont']}>
-              <div className={`${styles['pb-20']} ${styles['pl-20']}`}>
+              <div className={`${styles['pb-20']} ${styles['pl-20']} ${styles['flex']} ${styles['flex-colum']}`}>
                 <h5 className={`${styles['prdt-name']} ${styles['fontW600']} ${styles['pt-15']} ${styles['pb-5']}  ${styles['m-0']} ${styles['ellips']}`}>
                   {displayName}
                 </h5>
-                <span className={`${styles['offers-label-color']} ${styles['fontW600']} ${styles['fs-12']}`}>8% OFF  +  3 Offers</span>
+                <span className={`${styles['offers-label-color']} ${styles['fontW600']} ${styles['fs-12']}`}>
+                  {
+                    offers.length > 1
+                    ?
+                    `${offers} Offers`
+                    :
+                    offers.length > 0 && (offers[0] <= 10 && offers[0] > 0)
+                    ?
+                    `${offers[0]} OFF`
+                    :
+                    null
+                  }
+                </span>
               </div>
               {/* <div className={styles['variant-info']}>
                 {

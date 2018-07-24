@@ -83,6 +83,13 @@ export const EN_KEYWORDS = {
     'ALL_STARTS': 'All Starts',
     'FILTER_BY': 'Filter By',
     'NO REVIEWS': 'No Reviews',
+    'SELECT_CITY': 'SELECT CITY',
+    'FREE_DELIVERY': 'Free delivery',
+    'DAYS': 'Days',
+    'PRODUCT_DETAILS': 'PRODUCT DETAILS',
+    'ADD_TO_CART': 'ADD TO CART',
+    'BUY_NOW': 'BUY NOW',
+
   },
   VAULT_PAGE: {
     'MANAGE_VAULT_HDR': 'Manage Cards, Vouchers and More',
@@ -156,5 +163,7 @@ export const EN_KEYWORDS = {
     'ALL_DEALS': 'All Deals',
     'APPLIED_FILTERS_TAGS': 'Applied Filters / Tags',
     'CLEAR_ALL': 'CLEAR ALL',
+    'PRICE_LOW_TO_HIGH': 'price low to high',
+    'PRICE_HIGH_TO_LOW': 'price high to low',
   },
 };

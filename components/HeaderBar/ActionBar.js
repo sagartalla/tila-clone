@@ -3,6 +3,9 @@ import { Modal } from "react-router-modal";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ModalContainer } from 'react-router-modal';
+import { Dropdown, MenuItem } from "react-bootstrap";
+
+import Country from './includes/Country';
 import SVGComponent from '../common/SVGComponet';
 import { selectors, actionCreators } from '../../store/auth';
 import Login from '../Login';
@@ -15,11 +18,17 @@ const styles = mergeCss('components/HeaderBar/header');
 class ActionBar extends Component {
   constructor(props) {
     super(props);
+    this.toggleCountry = this.toggleCountry.bind(this)
+    this.toggleHidden = this.toggleHidden.bind(this);
     this.logoutClick = this.logoutClick.bind(this);
     this.loginClick = this.loginClick.bind(this);
   }
 
-  state = { show: false }
+  state = {
+    show: false,
+    isHidden: true,
+    isCountryToggle: true
+  }
 
   componentDidMount() {
     this.props.getLoginInfo();
@@ -44,16 +53,32 @@ class ActionBar extends Component {
     this.setState({ show: true });
   }
 
+  toggleHidden() {
+    this.setState({
+      isHidden: !this.state.isHidden
+    })
+  }
+
+  toggleCountry() {
+    this.setState({
+      isCountryToggle: !this.state.isCountryToggle
+    })
+  }
+
   render() {
     const { isLoggedIn } = this.props;
+    const { isHidden, isCountryToggle } = this.state;
     return (
       <div className={styles['actionbar-wrapper']}>
+        <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']} ${styles['country-code']}`}>
+          <Country />
+        </div>
         <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']}`}>
           <Link route="/cam/wishlist">
             <span className={`${styles['flex-center']} ${styles['justify-center']}`}>
               <SVGComponent clsName={`${styles['wish-list-icon']}`} src="icons/wish-list/wish-list-icon" />
             </span>
-        </Link>
+          </Link>
         </div>
         <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']}`}>
           <Link route="/cart">
@@ -69,25 +94,31 @@ class ActionBar extends Component {
             </span>
           </Link>
         </div>
-        <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']}`}>
-          {
-            isLoggedIn
-            ?
-            <span onClick={this.logoutClick}>logout</span>
-            :
-              <span onClick={this.loginClick}>login</span>
+        <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']} ${styles['relative']}`}>
+          <span onClick={this.toggleHidden} className={`${styles['flex-center']} ${styles['justify-center']} ${styles['profile-icon-main']}`}>
+            <SVGComponent clsName={`${styles['profile-icon']}`} src="icons/profile-icons/edit-profile-icon" />
+          </span>
+          {!isHidden &&
+            <div className={`${styles['profile-edit']} ${styles['bg-white']} ${styles['p-10']}`}>
+              {isLoggedIn
+                ?
+                <span onClick={this.logoutClick}>logout</span>
+                :
+                <span onClick={this.loginClick}>login</span>
+              }
+            </div>
           }
         </div>
         {
           (this.state.show)
-          ?
-          (
-            <Modal className={`react-router-modal__modal ${styles['login-reg-modal']} ${styles['p-20']}`} onBackdropClick={() => this.setState({ show: false })}>
-              <Login />
-            </Modal>
-          )
-          :
-          null}
+            ?
+            (
+              <Modal className={`react-router-modal__modal ${styles['login-reg-modal']} ${styles['p-20']}`} onBackdropClick={() => this.setState({ show: false })}>
+                <Login />
+              </Modal>
+            )
+            :
+            null}
       </div>
     );
   }

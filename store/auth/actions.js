@@ -73,7 +73,7 @@ const actionCreators = {
   setCity: (params) => {
     return {
       type: actions.SET_CITY,
-      payload: params
+      payload: api.setCity(params),
     }
   },
   autoCompleteCity: (params) => {

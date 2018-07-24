@@ -13,7 +13,8 @@ const getSearchResultsApi = ({
   fl,
   isListed,
   categoryTree,
-  shippingDetails
+  shippingDetails,
+  sort
 }) => {
   const options = {
     country,
@@ -25,13 +26,14 @@ const getSearchResultsApi = ({
     fl,
     isListed,
     shippingDetails,
+    sort,
   };
   if (categoryTree) {
     options.categoryId = categoryFilter.id;
   } else {
     options.categoryFilter = categoryFilter;
   }
-  return axios.post(`${constants.SEARCH_API_URL}/search${categoryTree ? '/browseByCatId/': ''}`, options).then(({ data }) => {
+  return axios.get(`${constants.SEARCH_API_URL}/search${categoryTree ? '/browseByCatId/': ''}?query=${escape(JSON.stringify(options))}`).then(({ data }) => {
     if (data.categoryFilter) {
       data.categoryFilter.parentCategories.forEach((parentCategory) => {
         parentCategory.canonicalId = _.kebabCase(parentCategory.name);
@@ -53,6 +55,7 @@ const getSearchResultsApi = ({
       facetFilters,
       categoryFilter,
       shippingDetails,
+      sort,
     };
     data.geoDetails = {
       country,
