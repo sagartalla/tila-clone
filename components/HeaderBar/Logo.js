@@ -5,7 +5,7 @@ const styles = mergeCss('components/HeaderBar/header');
 
 const Logo = () => (
   <div className={`${styles['flex-center']} ${styles['logos-part']}`}>
-    <SVGComponent clsName={`${styles['default-logo']}`} src="icons/logos/logo" />
+    <a href="/" className={styles['flex']}><SVGComponent clsName={`${styles['default-logo']}`} src="icons/logos/logo" /></a>
   </div>
 );
 
