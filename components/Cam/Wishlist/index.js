@@ -31,7 +31,7 @@ class Wishlist extends Component {
   addToCart(e) {
     this.props.addToCart({
       listing_id: e.target.id
-    });
+    }, e.target.getAttribute('data-wish-id'));
   }
 
   render() {
