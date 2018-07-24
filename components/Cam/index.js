@@ -1,8 +1,7 @@
 import React from 'react';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { selectors } from '../../store/cam/personalDetails';
-import { actionCreators } from '../../store/cam/personalDetails';
+import { selectors, actionCreators } from '../../store/cam/personalDetails';
 import { bindActionCreators } from 'redux';
 
 import HeaderBar from '../HeaderBar/index';
