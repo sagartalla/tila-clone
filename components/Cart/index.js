@@ -77,8 +77,7 @@ class Cart extends Component {
   }
 
   addOrRemoveGift(e) {
-    if (e.target.tagName != 'LABEL')
-      this.props.addOrRemoveGift(e.currentTarget.getAttribute('data-id'), e.currentTarget.children[0].checked ? 'add' : 'remove');
+    this.props.addOrRemoveGift(e.currentTarget.getAttribute('data-id'), e.currentTarget.checked ? 'add' : 'remove');
   }
 
   render() {

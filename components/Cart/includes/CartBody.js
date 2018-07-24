@@ -70,8 +70,8 @@ const CartBody = props => {
                                       </span><a href="" className={`${styles['fontW600']}`}> {CART_PAGE.VIEW_MORE}</a>
                                     </p>
                                   </div>
-                                  <div data-id={item_id} className={`${styles['checkbox-material']} ${styles['mt-15']}`} onClick={addOrRemoveGift}>
-                                    <input id={"gift" + item_id} type="checkbox" checked={gift_info ? true : false} />
+                                  <div data-id={item_id} className={`${styles['checkbox-material']} ${styles['mt-15']}`}>
+                                    <input data-id={item_id} id={"gift" + item_id} type="checkbox" checked={gift_info ? true : false} onClick={addOrRemoveGift} />
                                     <label htmlFor={"gift" + item_id}> {CART_PAGE.SEND_GIFT} {gift_info ? "(" + gift_info.gift_rate + " " + cur + ")" : ''} </label>
                                   </div>
                                 </Col>
