@@ -74,6 +74,7 @@ class Cart extends Component {
       "product_id": item.product_id,
       "variant_id": item.variant_id
     });
+    this.cartItemCount(listing_id, 'remove');
   }
 
   addOrRemoveGift(e) {
