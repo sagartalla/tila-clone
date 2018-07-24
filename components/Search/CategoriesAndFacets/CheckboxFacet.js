@@ -10,9 +10,6 @@ const MaxItems = 3;
 class CheckboxFacet extends Component {
   constructor(props) {
     super(props);
-    // this.state = {
-    //   list: [2,3,4,5]
-    // }
     const { filter } = props;
     this.state = {
       selectedItems: props.selectedFilters || [],
@@ -50,17 +47,11 @@ class CheckboxFacet extends Component {
     this.setState({
       isMoreButtonRequired: filter.children.length > MaxItems,
     });
-    // this.setState({
-    //   list
-    // })
   }
 
   render() {
     const { filter, index } = this.props;
     const { selectedItems } = this.state;
-    console.log(filter.id)
-    // const listItems = selectedItems.list.map((number) =>  number );
-    // console.log(listItems)
     return (
       <Panel eventKey={`${index + 'c'}`} key={filter.id}>
         <div className={`${styles['category-list']}`}>
