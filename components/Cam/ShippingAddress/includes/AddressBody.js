@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { languageDefinations } from '../../../../utils/lang/';
 import { Row, Col } from 'react-bootstrap';
+
 import SVGComponent from '../../../common/SVGComponet';
+import { languageDefinations } from '../../../../utils/lang/';
+
 import { mergeCss } from '../../../../utils/cssUtil';
 const styles = mergeCss('components/Cam/ShippingAddress/address');
 

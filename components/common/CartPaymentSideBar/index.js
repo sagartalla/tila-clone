@@ -4,12 +4,14 @@ import PropTypes from 'prop-types';
 import SVGComponent from '../SVGComponet';
 import { languageDefinations } from '../../../utils/lang/';
 
+import InstantCheckout from '../InstantCheckout';
+
 import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/common/CartPaymentSideBar/sideBar');
 
 const CartAndPaymentSideBar = props => {
   const { total_price, total_offer_price, total_discount, total_shipping, tax, item_cnt, currency } = props.data;
-  const { checkoutBtnHandler, showCheckoutBtn } = props;
+  const { checkoutBtnHandler, showCheckoutBtn, showInstant } = props;
   const { CART_PAGE } = languageDefinations();
   return (
     <div className={`${styles['right-bar']}`}>
@@ -23,6 +25,15 @@ const CartAndPaymentSideBar = props => {
           <span className={`${styles['text-uppercase']} ${styles['pl-5']}`}>Apply Coupon Code</span>
         </span>
       </div>
+
+      {
+        showInstant ?
+          <div className={`${styles['p-10-20']}`}>
+            <InstantCheckout />
+          </div>
+          : null
+      }
+
       {
         showCheckoutBtn ?
           <div className={`${styles['p-10-20']}`}>
@@ -62,7 +73,8 @@ CartAndPaymentSideBar.propTypes = {
 };
 
 CartAndPaymentSideBar.defaultProps = {
-  data: {}
+  data: {},
+  showInstant: true
 };
 
 export default CartAndPaymentSideBar;
