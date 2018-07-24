@@ -69,45 +69,6 @@ class Cam extends React.Component {
     )
   }
 }
-// const Cam = ({ tabDetails }) => {
-//   const [tab, ...queryParams] = tabDetails ? tabDetails.split('/') : [];
-//   const camComponent = ((tabName) => {
-//     switch (tabName) {
-//       case 'orders':
-//         return <Orders />;
-//       case 'address':
-//         return <ShippingAddress standalone={true} />;
-//       case 'wishlist':
-//         return <Wishlist />;
-//       case 'profile':
-//         return <UserInfo />;
-//       case 'messages':
-//         return <Messages />;
-//       case 'notifications':
-//         return <Notifications />;
-//       case 'uservault':
-//         return <UserVault />;
-//       default:
-//         return <UserInfo />;
-//     }
-//   })(tab)
-  // return (
-  //   <div className={styles['bg-color']}>
-  //     <HeaderBar />
-  //     <Grid>
-  //       <Row className={styles['pt-30']}>
-  //         <Col xs={12} md={3} className={styles['pr-0']}>
-  //           <Sidebar />
-  //         </Col>
-  //         <Col xs={12} md={9}>
-  //           {camComponent}
-  //         </Col>
-  //       </Row>
-  //     </Grid>
-  //     <FooterBar />
-  //   </div>
-  // )
-// };
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
