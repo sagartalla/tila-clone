@@ -35,10 +35,10 @@ class MegaMenu extends Component {
             isFirst
             ?
             <SVGComponent clsName={`${styles['flex']} ${styles['megamenu-icon']}`} src={childCategory.icon}/>
-            : 
+            :
             null
           } */}
-          <Link route={`/category/${childItem.displayName}-${childItem.id}`}>
+          <Link route={`/category/${childItem.displayName}-${childItem.id}?isListed=true`}>
             <a className={`${styles['level-1-item']}`}>{childItem.displayName}</a>
           </Link>
         </span>
@@ -84,7 +84,7 @@ class MegaMenu extends Component {
               _.map(megamenu, (item) => (
                 <li key={item.id} onMouseOver={this.onHoverCurry(item.id)}>
                   <div>
-                    <Link route={`/category/${item.displayName}-${item.id}`}>
+                    <Link route={`/category/${item.displayName}-${item.id}?isListed=true`}>
                       <a className={styles['level-1-item']}>{item.displayName}</a>
                     </Link>
                   </div>

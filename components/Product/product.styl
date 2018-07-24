@@ -7,10 +7,11 @@
   .details-right-part
     background-color rgba(255, 255, 255, 0.7)
     box-shadow 0 0 7px 0 rgba(225,225,225,0.5)
-    position absolute
     // z-index 99
     width 35%
     right 0
+    bottom 0
+    top 0
     .details-right-part-inn
       padding 35px 20px
       .ti-reviews-wrap
@@ -25,9 +26,28 @@
     .addto-cart
       background-color white
       padding 35px 20px
+      position absolute
+      bottom 0
+      left 0
+      right 0
     .buy-coupon
       width 16px
       height 16px
+
+    .warrenty-part
+      color rgba(0, 0, 0, 0.5)
+      .return-icon
+        width 20px
+      .secure-icon
+        width 13px
+        height 15px
+
+    .pdp-deliver-list
+      width 60%
+      .auto-suggestions-wrap
+        width 60%
+        input
+          font-size 12px
 
 .display-item-wrap
   // margin-bottom 50px
@@ -50,8 +70,6 @@
 .c-group-countainer
   display block
   margin 10px 0
-  &:nth-child(even)
-    background generic-gray-color
 
 .added-to-cart
   background #20bd99

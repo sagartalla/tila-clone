@@ -98,7 +98,7 @@ class GeoWidget extends Component {
           <span className={`${styles['fontW600']} ${styles['pl-5']} ${styles['pr-10']}`}>{SEARCH_PAGE.DELIVER_TO} :</span>
         </span>
         <div className={styles['auto-suggestions-wrap']}>
-          <input type="text" value={this.state.displayCity} onChange={this.onChangeCity} onFocus={this.onFocusCity}/>
+          <input type="text" value={this.state.displayCity} className={styles['fs-12']} onChange={this.onChangeCity} onFocus={this.onFocusCity}/>
           <div className={styles['auto-suggestions']}>
             {
               autoCompleteCityData.map((result) => <div key={result.displayCity} data-id={result.displayCity} onClick={this.selectCityFromSuggesstions} className={styles['item']}>{result.displayCity}</div>)

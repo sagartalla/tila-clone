@@ -18,17 +18,18 @@ const cookies = new Cookies();
 class ProductPage extends Base {
   constructor(props){
     super(props);
-    this.product = getProductComponent(this.props.url.query.isPreview);
+    this.product = getProductComponent(this.props.url.query.isPreview, this.props.url.query.taskCode);
   }
   static async getInitialProps({ store, query, isServer, req }) {
     const state = store.getState();
     const country = req ? req.universalCookies.get('country') : cookies.get('country');
     const shippingData = req ?  req.universalCookies.get('shippingInfo') : cookies.get('shippingInfo');
     const { city: shippingCity, country: shippingCountry } = shippingData || {};
-    if (query.isPreview){
+    const { isPreview, taskCode, itemType, productId, variantId, language } = query;
+    if (taskCode){
       await store.dispatch(actionCreators.getPreview({
-        taskCode: query.taskCode,
-        itemType: query.itemType,
+        taskCode: taskCode,
+        itemType: itemType,
       }));
     } else {
       const options = {
@@ -40,16 +41,16 @@ class ProductPage extends Base {
           "include_related_products": true,
           "shipping": true
         },
-        "language": query.language || "en",
+        "language": language || "en",
         "product_ids": [
-          query.productId
+          productId
         ],
         "size": "LARGE"
       };
 
-      if(query.variantId) {
+      if(variantId) {
         options.variant_ids = [
-          query.variantId
+          variantId
         ];
       }
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import { Grid, Row, Col } from 'react-bootstrap';
-
+import Catalog from './Catalog';
 import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Product/product');
 
@@ -46,6 +46,7 @@ const OverView = ({ catalog }) => {
 					</Col>
 				</div>
       </div>
+			<Catalog catalog={catalog} />
     </div>
   );
 }

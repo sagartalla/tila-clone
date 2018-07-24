@@ -181,17 +181,22 @@
         object-fit scale-down
 
 .category-list
-  border-bottom 1px solid border-gray
-  padding-bottom 10px
+  border-bottom 0.5px solid border-gray
+  // padding-bottom 10px
 
   .category-list-title
-    border-bottom 1px solid border-gray
-    .expand-icon
-      width 16px
-      height 16px
+    border-bottom 0.5px solid border-gray
+    a
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      align-items: center;
+      .expand-icon
+        width 16px
+        height 16px
 
 .category-sub-list
-  padding 10px 0 0 20px
+  // padding 10px 0 0 20px
 
   .main-sub-list > a
     color black
