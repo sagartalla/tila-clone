@@ -17,7 +17,7 @@ class Login extends Component {
       error: '',
       email: '',
       password: '',
-      mode: 'login',
+      mode: props.mode || 'login',
       country: '',
       phone: '',
     };
@@ -150,7 +150,7 @@ class Login extends Component {
             }
             <FormGroup>
               <Col md={12}>
-                <Button className={styles['sign-in-btn']} onClick={this.login}>Sign in</Button>
+                <Button className={styles['sign-in-btn']} onClick={this.login}>{this.state.mode === 'register' ? 'Sign Up' : 'Sign In'}</Button>
               </Col>
             </FormGroup>
             {
