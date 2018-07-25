@@ -4,7 +4,24 @@ import constants from '../helper/constants';
 //Create Order Third step.
 const transactionApi = (orderRes) => {
   return axios.get(orderRes.redirect_url).then(({ data }) => {
-    return { orderRes, data }
+    // return { orderRes, data }
+
+    const params = {
+      "payment_details": [
+        {
+          "amount": data.amount,
+          "currency":data.currency,
+          "payment_mode": "PAY_ONLINE"
+        }
+      ],
+      "transaction_id": data.transaction_id
+    }
+    
+    
+    return axios.post(`${constants.TRANSACTIONS_API_URL}/fpts/transaction/process`, params).then(({ data: payData }) => {
+      
+      return { orderRes, data, payData }
+    });
   })
 };
 
