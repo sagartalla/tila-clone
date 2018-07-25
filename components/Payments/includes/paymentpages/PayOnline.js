@@ -9,14 +9,17 @@ const PayOnline = props => {
   return (
     <div className={`${styles['pay-online']} ${styles['p-10']} `}>
       <Grid>
-        <Row>
+        {/* <Row>
           <Col md={12}>
             {PAYMENT_PAGE.PAY_ONLINE}
           </Col>
-        </Row>
+        </Row> */}
         <Row>
           <Col md={12} sm={12} xs={12}>
-            <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']}`} onClick={props.makePayment}>Pay {props.orderRes.data.amount} {props.orderRes.data.currency}</button>
+            {/* <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']}`} onClick={props.makePayment}>Pay {props.orderRes.data.amount} {props.orderRes.data.currency}</button> */}
+            <iframe src={props.orderRes.payData.iframe_url} style={{ height: '550px', width: '600px', border: '0' }}>
+
+            </iframe>
           </Col>
         </Row>
       </Grid>

@@ -71,10 +71,14 @@ class Payments extends React.Component {
       Router.push('/cart');
     }
     const { loggedInFlag } = this.state;
+    
+    // Dont remove
     // Clicking on pay button and after getting response, we will redirect to given URL.
-    if (nextProps && nextProps.makePaymentOptions && nextProps.makePaymentOptions.redirect_url) {
-      location.href = nextProps.makePaymentOptions.redirect_url;
-    }
+    // if (nextProps && nextProps.makePaymentOptions && nextProps.makePaymentOptions.redirect_url) {
+    //   location.href = nextProps.makePaymentOptions.redirect_url;
+    // }
+
+    // console.log(nextProps)
 
     if (nextProps.isLoggedIn && !loggedInFlag) {
       const login = nextProps.userCreds || this.state.login;
