@@ -6,7 +6,6 @@ const styles = mergeCss('components/Payments/payment');
 
 const PayOnline = props => {
   const { PAYMENT_PAGE } = languageDefinations();
-  console.log(props)
   return (
     <div className={`${styles['pay-online']} ${styles['p-10']} `}>
       <Grid>
