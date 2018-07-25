@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
 
@@ -106,10 +106,19 @@ class InstantCheckout extends Component {
         <div className={`${styles['border']} ${styles['border-radius2']} ${styles['bg-white']} ${styles['mt-10']}`}>
           {
             defaultAddr.length > 0 ?
-              <AddrCard
-                defaultAddr={defaultAddr}
-                toggleMiniAddress={this.toggleMiniAddress}
-              />
+              <Fragment>
+                <AddrCard
+                  defaultAddr={defaultAddr}
+                  toggleMiniAddress={this.toggleMiniAddress}
+                />
+                {
+                  showMiniAddress ?
+                    <ShippingAddress
+                      miniAddress={true}
+                    />
+                    : null
+                }
+              </Fragment>
               : null
           }
           {
@@ -144,7 +153,7 @@ class InstantCheckout extends Component {
           <button className={`${styles['fp-btn']} ${styles['fp-btn-default']}`} style={{ width: '300px' }} onClick={this.doInstantCheckout}>INSTANT CHECKOUT</button>
         </div>
 
-        {
+        {/* {
           showMiniAddress ?
             <Modal>
               <div>
@@ -155,7 +164,7 @@ class InstantCheckout extends Component {
               </div>
             </Modal>
             : null
-        }
+        } */}
 
         {
           showMiniValut ?
