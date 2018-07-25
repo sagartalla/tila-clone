@@ -13,7 +13,7 @@ const OrderDetails = ({ query, orderData, thankyouPage }) => {
   return (
     <div>
       <Grid>
-        <Row>
+        <Row className={styles['m-0']}>
           <Col md={12}>
             <div className={`${styles['mb-20']}`}>
               {
@@ -31,14 +31,14 @@ const OrderDetails = ({ query, orderData, thankyouPage }) => {
             </div>
           </Col>
         </Row>
-        <Row>
+        <Row className={styles['m-0']}>
           <Col md={12}>
             <div>
               <OrderHeader orderDetails={orderData} />
             </div>
           </Col>
         </Row>
-        <Row>
+        <Row className={styles['m-0']}>
           <Col md={12}>
             <div className={`${styles['box']} ${styles['p-20']} ${styles['mt-20']}`}>
               {
