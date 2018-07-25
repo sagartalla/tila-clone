@@ -18,8 +18,6 @@ const styles = mergeCss('components/HeaderBar/header');
 class ActionBar extends Component {
   constructor(props) {
     super(props);
-    this.toggleCountry = this.toggleCountry.bind(this)
-    this.toggleHidden = this.toggleHidden.bind(this);
     this.logoutClick = this.logoutClick.bind(this);
     this.loginClick = this.loginClick.bind(this);
   }
@@ -49,25 +47,19 @@ class ActionBar extends Component {
     })
   }
 
-  loginClick() {
-    this.setState({ show: true });
-  }
-
-  toggleHidden() {
-    this.setState({
-      isHidden: !this.state.isHidden
-    })
-  }
-
-  toggleCountry() {
-    this.setState({
-      isCountryToggle: !this.state.isCountryToggle
-    })
+  loginClick(e) {
+    const state = {};
+    if (e.currentTarget.getAttribute('data-mode') === 'sign-up') {
+      state.mode = 'register';
+    } else {
+      state.mode = 'login';
+    }
+    state.show = true;
+    this.setState(state);
   }
 
   render() {
     const { isLoggedIn } = this.props;
-    const { isHidden, isCountryToggle } = this.state;
     return (
       <div className={styles['actionbar-wrapper']}>
         <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']} ${styles['country-code']}`}>
@@ -94,11 +86,38 @@ class ActionBar extends Component {
             </span>
           </Link>
         </div>
-        <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']} ${styles['relative']}`}>
-          <span onClick={this.toggleHidden} className={`${styles['flex-center']} ${styles['justify-center']} ${styles['profile-icon-main']}`}>
-            <SVGComponent clsName={`${styles['profile-icon']}`} src="icons/profile-icons/edit-profile-icon" />
-          </span>
-          {!isHidden &&
+        <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']} ${styles['relative']} ${styles['profile-login']}`}>
+          <Dropdown id="profile-login" className={styles['profile-login-inn']}>
+            <Dropdown.Toggle>
+            <span className={`${styles['flex-center']} ${styles['justify-center']} ${styles['profile-icon-main']}`}>
+              <SVGComponent clsName={`${styles['profile-icon']}`} src="icons/profile-icons/edit-profile-icon" />
+            </span>
+            </Dropdown.Toggle>
+            <Dropdown.Menu className={`${styles['item']} ${styles['p-20']}`}>
+              <h4 className={`${styles['fs-16']} ${styles['fontW600']} ${styles['mt-0']}`}>Your Account</h4>
+              <p className={styles['fs-12']}>Access account and manage orders</p>
+              <div className={styles['flx-spacebw-alignc']}>
+                <span onClick={this.loginClick} data-mode="sign-up" className={`${styles['flex-center']} ${styles['login-details-inn']} ${styles['border-radius2']}`}>
+                  <SVGComponent clsName={`${styles['logout-icon']}`} src="icons/common-icon/icon-signup" />
+                  <span className={`${styles['pl-10']} ${styles['fontW700']} ${styles['lgt-blue']} `}>SIGN UP</span>
+                </span>
+                {isLoggedIn
+                  ?
+                  <span onClick={this.logoutClick} className={`${styles['flex-center']} ${styles['login-details-inn']} ${styles['border-radius2']}`}>
+                    <SVGComponent clsName={`${styles['logout-icon']}`} src="icons/common-icon/icon-logout" />
+                    <span className={`${styles['pl-10']} ${styles['fontW700']} ${styles['lgt-blue']} `}>LOGOUT</span>
+                  </span>
+                  :
+                  <span onClick={this.loginClick} className={`${styles['flex-center']} ${styles['login-details-inn']} ${styles['border-radius2']}`}>
+                    <SVGComponent clsName={`${styles['login-icon']}`} src="icons/common-icon/icon-login" />
+                    <span className={`${styles['pl-10']} ${styles['fontW700']} ${styles['lgt-blue']}`}>LOGIN</span>
+                  </span>
+                }
+              </div>
+            </Dropdown.Menu>
+          </Dropdown>
+   
+          {/* {!isHidden &&
             <div className={`${styles['profile-edit']} ${styles['bg-white']} ${styles['p-10']}`}>
               {isLoggedIn
                 ?
@@ -107,14 +126,14 @@ class ActionBar extends Component {
                 <span onClick={this.loginClick}>login</span>
               }
             </div>
-          }
+          } */}
         </div>
         {
           (this.state.show)
             ?
             (
               <Modal className={`react-router-modal__modal ${styles['login-reg-modal']} ${styles['p-20']}`} onBackdropClick={() => this.setState({ show: false })}>
-                <Login />
+                <Login mode={this.state.mode}/>
               </Modal>
             )
             :
