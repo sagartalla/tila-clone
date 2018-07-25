@@ -42,7 +42,7 @@ const getProductComponent = (isPreview, taskCode) => {
                   <TitleInfo {...titleInfo} isPreview={isPreview}/>
                   <ProductDetails details={details} keyfeatures={keyfeatures} isPreview={isPreview}/>
                   {
-                    isPreview ? null :<Shipping />
+                    isPreview ? null : <Shipping shippingInfo={shippingInfo} />
                   }
                   {
                     isPreview ? null : <ProductPrice offerInfo={offerInfo} />
@@ -65,7 +65,7 @@ const getProductComponent = (isPreview, taskCode) => {
                 <Col md={8}>
                 {
                   isPreview ? null : <ReviewsTab />
-                } 
+                }
                 </Col>
                 <Col md={8}>
                   <ElectronicsTab catalog={catalog}/>

@@ -35,11 +35,11 @@ const getProduct = (store, variantId) => {
     discountPercent: '',
     totalInventoryCount: priceInfo ? priceInfo.total_inventory_count : 0,
   };
-  const shippingInfo = priceInfo ? priceInfo.shipping : {}
   const returnInfo = {
     acceptsReturns: priceInfo ? priceInfo.accepts_returns : false,
     maxDaysToReturn: priceInfo ? priceInfo.max_days_to_return : 0
   }
+  const shippingInfo = priceInfo ? {...priceInfo.shipping, ...returnInfo} : {}
   const offerInfo = {
     price: priceInfo ? priceInfo.selling_price + ' ' + priceInfo.selling_price_currency : 'No listing',
     listingId: priceInfo ? priceInfo.listing_id : 'No Listing',
