@@ -44,7 +44,13 @@ class Cart extends Component {
   }
 
   checkoutBtnHandler() {
-    Router.pushRoute('/payment');
+    const { cartData } = this.props;
+    const newRes = cartData.items.filter(data => data.inventory == 0);
+
+    if (newRes.length) {
+      alert('There is some issue with cart items.');
+    } else
+      Router.pushRoute('/payment');
   }
 
   removeCartItem(e) {
@@ -64,7 +70,6 @@ class Cart extends Component {
     this.props.cartItemCount(id, typ);
   }
 
-  //TODO after add to cart, discuss with backend team whether to call cart item or not.
   addToWishlist(e) {
     const { cartData } = this.props;
     const listing_id = e.currentTarget.getAttribute('data-id');

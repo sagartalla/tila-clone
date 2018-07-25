@@ -25,7 +25,7 @@ const getCartResults = (store) => {
           cur: item.listing_info.selling_price_currency,
           img: img_url + item.product_details.product_details_vo.cached_product_details.media.gallery_media[0].url,
           quantity: item.quantity,
-          inventory: item.listing_info.total_inventory_count,
+          inventory: 0,//item.listing_info.total_inventory_count,
           max_limit: item.listing_info.max_limit_per_user,
           brand_name: item.product_details.catalog_details.attribute_map.brand.attribute_values[0].value,
           gift_info: item.gift_info,

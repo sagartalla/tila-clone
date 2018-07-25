@@ -46,6 +46,17 @@ const CartBody = props => {
                             : ""
                         }
                         <div className={`${styles['cart-box']} ${styles['p-20']}`}>
+                          {
+                            inventory == 0 ?
+                              <div className={`${styles['out-of-stock']} ${styles['text-center']} ${styles['absolute']} ${styles['bg-white']}`}>
+                                <h3>uh-oh!</h3>
+                                <p>
+                                  This product is out of stock,Please remove this item or <br /> move it to wishlist to continue.
+                                </p>
+                              </div>
+                              : null
+                          }
+
                           <Row>
                             <Col md={2}>
                               <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles['pb-15']} ${styles['card-box-inn-img']}`}><img className={styles['img']} src={img} /></div>
@@ -145,7 +156,7 @@ const CartBody = props => {
                 />
               </div>
               <div className={styles['secure-img']}>
-                <img className={styles['']} src={"/static/img/bg-img/group-cards.png"}/>
+                <img className={styles['']} src={"/static/img/bg-img/group-cards.png"} />
               </div>
             </Col>
           </Row>
