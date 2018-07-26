@@ -14,9 +14,9 @@ const VaultCard = props => {
           {defaultCard[0].holder_name}<br />
           {defaultCard[0].expiry_month}/{defaultCard[0].expiry_year}
         </div>
-        <div>
+        {/* <div>
           <input type="password" placeholder="Enter CVV" onChange={updateCVV} style={{ width: '100px' }} />
-        </div>
+        </div> */}
       </div>
     </div>
   )

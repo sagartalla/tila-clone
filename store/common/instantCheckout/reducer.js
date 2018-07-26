@@ -21,7 +21,6 @@ const instantCheckoutReducer = typeToReducer({
       return Object.assign({}, state, { error: action.payload.message, ui: { loading: false } })
     },
   }
-
 }, initialState);
 
 export default instantCheckoutReducer;
