@@ -19,7 +19,7 @@ class VaultBody extends Component {
   }
 
   paymentCardIcon(provider_type) {
-    switch(provider_type ){
+    switch (provider_type) {
       case 'VISA':
         return "icons/cards-icons-list/visa-icon-no-bg";
       case 'MASTER':
@@ -42,7 +42,7 @@ class VaultBody extends Component {
               return (
                 <Col md={4} key={index} className={styles['pr-0']}>
                   <div className={`${styles['vault-card-item']} ${styles['mb-25']} ${styles['p-15']} ${styles['border-radius4']} ${card.default ? styles['active-card'] : ''}`}>
-                    <span  className={`${styles['vault-card-delete-icon']} ${styles['flex-center']} ${styles['justify-center']}`} onClick={this.deleteCard.bind(this, card_token)}>
+                    <span className={`${styles['vault-card-delete-icon']} ${styles['flex-center']} ${styles['justify-center']}`} onClick={this.deleteCard.bind(this, card_token)}>
                       <SVGComponent clsName={`${styles['delete-icon']}`} src="icons/delete-icon/delete-icon" />
                     </span>
                     <div className={`${styles['flex']} ${styles['flex-colum']} ${styles['vault-card-item-inn']}`}>
@@ -59,27 +59,31 @@ class VaultBody extends Component {
                       </div>
                     </div>
                     <div className={`${styles['make-default']} ${styles['pr-5']}`}>
-                    {
-                      card.default ?
-                        <div>
-                          <label className={`${styles['fs-12']} ${styles['pr-5']}`}> {VAULT_PAGE.DEFAULT} </label>
-                          <input type="radio" className={`${styles['tickmark-radio']}`} name="make-default" checked="checked" onClick={this.makeCardDefault.bind(this, card_token)}/>
-                        </div>
-                        :
-                        <span>
-                          <label className={`${styles['fs-12']} ${styles['fontW600']} ${styles['pr-5']}`}> {VAULT_PAGE.MAKE_DEFAULT} </label>
-                          <input type="radio" className={styles['tickmark-radio']} name="make-default" onClick={this.makeCardDefault.bind(this, card_token)} /> 
-                        </span>
-                    }
+                      {
+                        card.default ?
+                          <div>
+                            <label className={`${styles['fs-12']} ${styles['pr-5']}`}> {VAULT_PAGE.DEFAULT} </label>
+                            <input type="radio" className={`${styles['tickmark-radio']}`} name="make-default" checked="checked" onClick={this.makeCardDefault.bind(this, card_token)} />
+                          </div>
+                          :
+                          <span>
+                            <label className={`${styles['fs-12']} ${styles['fontW600']} ${styles['pr-5']}`}> {VAULT_PAGE.MAKE_DEFAULT} </label>
+                            <input type="radio" className={styles['tickmark-radio']} name="make-default" onClick={this.makeCardDefault.bind(this, card_token)} />
+                          </span>
+                      }
                     </div>
                   </div>
-                  
+
                 </Col>
               )
             })
           }
 
-          <Col md={4} sm={12} xs={12} className={styles['pr-0']}>
+          {/* 
+            **
+            DON'T REMOVE THIS CODE - Add new card button. Enable this coded when we do PCD-IS
+            **
+            <Col md={4} sm={12} xs={12} className={styles['pr-0']}>
             <div className={` ${styles['vault-card-item']} ${styles['vault-card-item-new']} ${styles['border-lg']} ${styles['border-radius4']} ${styles['p-15']}`} onClick={toggleAddCardBlock}>
               <div className={`${styles['flex-center']} ${styles['flex-wrap']}`}>
                 <h5 className={`${styles['m-0']} ${styles['mb-10']} ${styles['fontW600']} ${styles['flex-center']}`}>
@@ -94,7 +98,8 @@ class VaultBody extends Component {
                 </p>
               </div>
             </div>
-          </Col>
+          </Col> 
+          */}
         </Row>
       </div>
     )

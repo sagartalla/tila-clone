@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
-import { languageDefinations } from '../../utils/lang/';
 import PropTypes from 'prop-types';
-// import { Grid, Row, Col } from 'react-bootstrap';
-import SVGComponent from './SVGComponet';
 
-// import styles from './rightBar.styl';
-import { mergeCss } from '../../utils/cssUtil';
-const styles = mergeCss('components/common/rightBar');
+import SVGComponent from '../SVGComponet';
+import { languageDefinations } from '../../../utils/lang/';
 
-const CartAndPaymentRightBar = props => {
+import InstantCheckout from '../InstantCheckout';
+
+import { mergeCss } from '../../../utils/cssUtil';
+const styles = mergeCss('components/common/CartPaymentSideBar/sideBar');
+
+const CartAndPaymentSideBar = props => {
   const { total_price, total_offer_price, total_discount, total_shipping, tax, item_cnt, currency } = props.data;
-  const { checkoutBtnHandler, showCheckoutBtn } = props;
+  const { checkoutBtnHandler, showCheckoutBtn, showInstant } = props;
   const { CART_PAGE } = languageDefinations();
   return (
     <div className={`${styles['right-bar']}`}>
@@ -24,6 +25,15 @@ const CartAndPaymentRightBar = props => {
           <span className={`${styles['text-uppercase']} ${styles['pl-5']}`}>Apply Coupon Code</span>
         </span>
       </div>
+
+      {
+        showInstant ?
+          <div className={`${styles['p-10-20']}`}>
+            <InstantCheckout />
+          </div>
+          : null
+      }
+
       {
         showCheckoutBtn ?
           <div className={`${styles['p-10-20']}`}>
@@ -41,10 +51,8 @@ const CartAndPaymentRightBar = props => {
       <div className={styles['p-20']}>
         <ul className={`${styles['m-0']} ${styles['p-0']} ${styles['fs-12']}`}>
           <li><h5 className={`${styles['mb-15']} ${styles['mt-5']} ${styles['fs-16']} ${styles['fontW600']} ${styles['light-gry-clr']}`}>{CART_PAGE.ORDER_SUMMARY}</h5></li>
-          {/* <li>Price ({item_cnt} item{item_cnt > 1 ? 's' : ''})<span> {total_price + ' ' + currency}</span></li> */}
           <li>{CART_PAGE.PRICE} ({item_cnt + ' ' + CART_PAGE.ITEMS})<span> {total_price + ' ' + currency}</span></li>
           <li>{CART_PAGE.DELIVERY_CHARGES} <span>{total_shipping} {currency}</span></li>
-          {/* <li>{CART_PAGE.DISCOUNT} <span>{total_discount} {currency}</span></li> */}
           {
             tax != 0 ? <li>{CART_PAGE.TAXES} <span>{currency}</span></li> : null
           }
@@ -60,13 +68,13 @@ const CartAndPaymentRightBar = props => {
   )
 };
 
-CartAndPaymentRightBar.propTypes = {
+CartAndPaymentSideBar.propTypes = {
   data: PropTypes.object,
 };
 
-CartAndPaymentRightBar.defaultProps = {
+CartAndPaymentSideBar.defaultProps = {
   data: {}
 };
 
-export default CartAndPaymentRightBar;
+export default CartAndPaymentSideBar;
 
