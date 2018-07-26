@@ -73,3 +73,24 @@
 .panel-group .panel-heading+.panel-collapse>.list-group, .panel-group .panel-heading+.panel-collapse>.panel-body {
     border-top: 0;
 }
+
+.panel-group {
+    margin-bottom: 0;
+}
+
+#profile-login .caret, #country-dd .caret {
+    margin-left: 10px;
+}
+
+#profile-login {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    border: 0;
+    /* background: transparent; */
+}
+
+.btn-default.active.focus, .btn-default.active:focus, .btn-default.active:hover, .btn-default:active.focus, .btn-default:active:focus, .btn-default:active:hover, .open>.dropdown-toggle.btn-default.focus, .open>.dropdown-toggle.btn-default:focus, .open>.dropdown-toggle.btn-default:hover {
+    background-color: transparent;
+    box-shadow: none;
+}

@@ -27,10 +27,12 @@ class MegaMenu extends Component {
     this.props.getMegamenu();
   }
 
-  getTree(childCategory, isFirst) {
+  getTree(childCategory, isFirst, depth=0) {
+    console.log('depth', depth);
+    ++depth;
     return _.map(childCategory ? childCategory.childCategories : {}, (childItem) => (
-      <li className={`${styles['megamenu-sub-list']}`} key={childItem.id} onClick={this.onLinkClick}>
-        <span className={styles['flex']}>
+      <li className={`${styles['megamenu-sub-list']} ${depth === 4 ? styles['pl-10'] : {}}`} key={childItem.id} onClick={this.onLinkClick}>
+        <span className={`${styles['flex']}`}>
           {/* {
             isFirst
             ?
@@ -38,13 +40,13 @@ class MegaMenu extends Component {
             :
             null
           } */}
-          <Link route={`/category/${childItem.displayName}-${childItem.id}?isListed=true`}>
-            <a className={`${styles['level-1-item']}`}>{childItem.displayName}</a>
+          <Link route={`/${childItem.displayName}-${childItem.id}?categoryTree=true&isListed=true`}>
+            <a className={`${styles['level-1-item']} ${depth === 2 ? styles['fontW600'] : {}}`}>{childItem.displayName}</a>
           </Link>
         </span>
         <ul className={`${styles['megamenu-sub-child-list']} ${styles['pl-0']}`}>
           {
-            childItem.isLeaf ? null : this.getTree(childItem, false)
+            childItem.isLeaf ? null : this.getTree(childItem, false, depth)
           }
         </ul>
       </li>
@@ -84,7 +86,7 @@ class MegaMenu extends Component {
               _.map(megamenu, (item) => (
                 <li key={item.id} onMouseOver={this.onHoverCurry(item.id)}>
                   <div>
-                    <Link route={`/category/${item.displayName}-${item.id}?isListed=true`}>
+                    <Link route={`/category/${item.displayName}-${item.id}?categoryTree=true&isListed=true`}>
                       <a className={styles['level-1-item']}>{item.displayName}</a>
                     </Link>
                   </div>

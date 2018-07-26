@@ -72,9 +72,41 @@
     position relative
     padding 0 15px
     cursor pointer
-    border-right 0.5px solid border-gray
+    border-right 1px solid border-gray
     &:last-child
       border-right 0
+
+  .profile-login
+    .item
+      min-width auto
+      right -5%
+      border 0
+      width 275px
+      left auto
+      top 32px
+      border: 1px solid border-gray;
+      &:before
+        content ''
+        background-color: white;
+        height: 15px;
+        width: 15px;
+        position: absolute;
+        right: 7%;
+        top: -8px;
+        transform: rotate(45deg);
+        border: 1px solid border-gray;
+        border-bottom: 0;
+        border-right: 0;
+        border-left: 1px solid border-gray;
+        border-top: 1px solid border-gray;
+
+      .login-details-inn
+        border: 1px solid border-gray;
+        padding: 7px 15px;
+
+      .logout-icon, .login-icon
+        width 13px
+        height 16px
 
     .profile-edit
       position absolute
@@ -116,6 +148,15 @@
 
 .megamenu-wrapper
   overflow hidden
+  ul li
+    border-bottom: 4px solid transparent
+    margin 0 5px
+    padding 10px
+    &:hover
+      border-bottom: 4px solid border-pink
+      div a
+        font-weight 600
+
 
 .megamenu-dropdown
   width 100%

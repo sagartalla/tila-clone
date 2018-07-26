@@ -1,5 +1,5 @@
 import apis from './api';
-import { actionCreators  as cartActionCreators } from '../../cart/actions';
+import { actionCreators as cartActionCreators } from '../../cart/actions';
 
 const actions = {
   GET_WISHLIST: 'GET_WISHLIST',
@@ -27,9 +27,9 @@ const actionCreators = {
       payload: apis.deleteWishlistApi(wishlist_id),
     });
   },
-  addToCart: (params) => (dispatch, getState) => {
+  addToCart: (params, wishlist_id) => (dispatch, getState) => {
     return dispatch(cartActionCreators.addToCart(params)).then(() => {
-      dispatch(actionCreators.getWishlist())
+      dispatch(actionCreators.deleteWishlist(wishlist_id));
     })
   }
 };

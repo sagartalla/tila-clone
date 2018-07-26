@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import PropTypes from 'prop-types';
-import { Row, Col } from 'react-bootstrap';
+import {Grid, Row, Col } from 'react-bootstrap';
 
 import SVGComponent from '../../common/SVGComponet';
 
@@ -13,24 +13,24 @@ const PaymentStatus = props => {
   const subMessage = (props.status == "SUCCESSFUL") ? successMessage : (props.status == "FAILURE") ? "Please try again" : null;
 
   return (
-    <div>
-      <Row className={styles['flex-center']}>
+    <Grid>
+      <Row className={`${styles['flex-center']} ${styles['m-0']}`}>
         <Col md={2} xs={2} sm={2}>
           <div className={styles['pb-25']}>
             <SVGComponent clsName={`${styles['gift-card']}`} src="icons/gift-icon/gift-icon" />
           </div>
         </Col>
-        <Col md={8} xs={9} sm={9}>
-          <div className={`${styles['flx-space-bw']}`}>
+        <Col md={10} xs={9} sm={9}>
+          <div className={`${styles['flx-spacebw-alignc']}`}>
             <h3 className={`${styles['mt-0']} ${styles['light-gry-clr']} ${styles['fontW600']}`}>{message}</h3>
-            <a href="/cam/orders" ><button className={`${styles['fp-btn']} ${styles['fp-btn-default']}`}> TRACK ORDERS </button></a>
+            <a href="/cam/orders"   className={styles['mb-20']}><button className={`${styles['fp-btn']} ${styles['fp-btn-default']}`}> TRACK ORDERS </button></a>
           </div>
           <p className={`${styles['col-header']} ${styles['lgt-black']}`}>
             {subMessage}
           </p>
         </Col>
       </Row>
-    </div>
+    </Grid>
   );
 }
 

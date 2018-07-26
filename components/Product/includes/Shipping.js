@@ -15,7 +15,8 @@ const { PDP_PAGE } = languageDefinations();
 
 class Shipping extends Component {
   render(){
-    const { shipping_fees, shipping_days, shippable, acceptsReturns, maxDaysToReturn } = this.props;
+    const { shippingInfo } = this.props;
+    const { shipping_fees, shipping_days, shippable, acceptsReturns, maxDaysToReturn } = shippingInfo;
     return (
       <div className={`${styles['box']} ${styles['p-15']} ${styles['border-radius4']} ${styles['mt-15']} ${styles['mb-15']}`}>
         <div>
