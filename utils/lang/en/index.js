@@ -89,7 +89,7 @@ export const EN_KEYWORDS = {
     'PRODUCT_DETAILS': 'PRODUCT DETAILS',
     'ADD_TO_CART': 'ADD TO CART',
     'BUY_NOW': 'BUY NOW',
-
+    'ADDED_TO_CART': 'ADDED TO CART'
   },
   VAULT_PAGE: {
     'MANAGE_VAULT_HDR': 'Manage Cards, Vouchers and More',

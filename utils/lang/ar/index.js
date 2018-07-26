@@ -83,6 +83,7 @@ export const AR_KEYWORDS = {
     'ALL_STARTS': 'All Starts',
     'FILTER_BY': 'Filter By',
     'NO_REVIEWS': 'No Reviews',
+    'ADDED_TO_CART': 'ADDED TO CART',
   },
   VAULT_PAGE: {
     'MANAGE_VAULT_HDR': 'Manage Cards, Vouchers and More',
