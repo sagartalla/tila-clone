@@ -37,13 +37,13 @@ class Country extends Component {
   }
 
   componentDidMount() {
-	const country = cookies.get('country') || this.state.country;
-	if(country){
-	  this.setState({
+  	const country = cookies.get('country') || this.state.selectedItem;
+  	if(country){
+  	  this.setState({
         selectedItem: country
-      });    
-	}
-	this.props.setCountry(country);
+      });
+  	}
+  	this.props.setCountry(country);
 	}
 
   changeCountry(e) {

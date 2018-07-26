@@ -50,6 +50,10 @@ class AddToCart extends Component {
     }
   }
 
+  componentDidMount() {
+    this.props.resetAddtoCart();
+  }
+
   render () {
     const { isLoading, error, isAddedToCart, offerInfo } = this.props;
     const { price, listingAvailable, listingId, stockError, availabilityError } = offerInfo;
@@ -59,7 +63,7 @@ class AddToCart extends Component {
     :
     (
       <div className={`${styles['pt-25']} ${styles['flx-space-bw']} ${styles['addto-cart']} ${styles['border-t']}`}>
-        <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['fp-btn-x-large']}`} onClick={this.addToCart} disabled={isLoading || isAddedToCart} >{PDP.ADD_TO_CART}</button>
+        <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['fp-btn-x-large']}`} onClick={this.addToCart} disabled={isLoading || isAddedToCart} >{isAddedToCart ? PDP.ADDED_TO_CART : PDP.ADD_TO_CART}</button>
         <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-x-large']}`} onClick={this.buyNow} disabled={isLoading || isAddedToCart} >{PDP.BUY_NOW}</button>
       </div>
     );
@@ -76,7 +80,10 @@ const mapStateToProps = (store) => {
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
-    { addToCart: actionCreators.addToCart },
+    {
+      addToCart: actionCreators.addToCart,
+      resetAddtoCart: actionCreators.resetAddtoCart,
+    },
     dispatch,
   );
 }

@@ -50,7 +50,7 @@ const getErrorMessege = (store) => {
 }
 
 const isAddedToCart = (store) => {
-  return store.cartReducer.data.item_status === 'ADDED';
+  return store.cartReducer.data.addToCart.item_status === 'ADDED';
 }
 
 export { getCartResults, getLoadingStatus, getErrorMessege, isAddedToCart }
