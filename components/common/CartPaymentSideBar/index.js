@@ -73,8 +73,7 @@ CartAndPaymentSideBar.propTypes = {
 };
 
 CartAndPaymentSideBar.defaultProps = {
-  data: {},
-  showInstant: true
+  data: {}
 };
 
 export default CartAndPaymentSideBar;

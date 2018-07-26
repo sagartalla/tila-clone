@@ -141,6 +141,7 @@ const CartBody = props => {
               <div className={`${styles['box']}`}>
                 <RightBar
                   data={data}
+                  showInstant={true}
                   showCheckoutBtn={true}
                   checkoutBtnHandler={checkoutBtnHandler}
                 />

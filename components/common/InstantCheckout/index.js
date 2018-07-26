@@ -97,11 +97,11 @@ class InstantCheckout extends Component {
     const { showMiniAddress, showMiniValut, creditDebitCard, cod } = this.state;
     return (
       <div className={`${styles['instant-checkout']} ${styles['p-10']}`}>
-        <h4>Checkout with 1 click ?</h4>
-        <p><small>With your preffered payment and delivery address</small></p>
-        <div className={`${styles['flex']} ${styles['flx-space-bw']}`}>
-          <span><input type="radio" name="pay_type" className={styles['radio-btn']} checked={creditDebitCard} onChange={this.creditCardClickHandler} /> Credit/ Debit Card</span>
-          <span><input type="radio" name="pay_type" className={styles['radio-btn']} checked={cod} onChange={this.codClickHandler} /> COD</span>
+        <h4 className={`${styles['fontW600']} ${styles['mb-0']} ${styles['flex']}`}>Checkout with 1 click <span className={`${styles['checkout-quat']} ${styles['fs-12']} ${styles['flex-center']} ${styles['justify-around']}`}>?</span></h4>
+        <p className={`${styles['fs-12']} ${styles['thick-gry-clr']}`}>With your preffered payment and delivery address</p>
+        <div className={`${styles['flex']}`}>
+          <span className={`${styles['fs-12']} ${styles['pr-30']}`}><input type="radio" name="pay_type" className={styles['radio-btn']} checked={creditDebitCard} onChange={this.creditCardClickHandler} /> Credit/ Debit Card</span>
+          <span className={styles['fs-12']}><input type="radio" name="pay_type" className={styles['radio-btn']} checked={cod} onChange={this.codClickHandler} /> COD</span>
         </div>
         <div className={`${styles['border']} ${styles['border-radius2']} ${styles['bg-white']} ${styles['mt-10']}`}>
           {
@@ -146,11 +146,14 @@ class InstantCheckout extends Component {
           }
 
           <div className={`${styles['p-10-20']}`}>
-            <input type="checkbox" /> Don't call before delivery
+            <div className={styles['checkbox-material']}>
+            <input id="checkout-label" type="checkbox" /> 
+            <label for="checkout-label" className={`${styles['thick-gry-clr']} ${styles['fontW300']}`}> Don't call before delivery </label>
+            </div>
           </div>
         </div>
         <div className={`${styles['flex']} ${styles['justify-center']}`}>
-          <button className={`${styles['fp-btn']} ${styles['fp-btn-default']}`} style={{ width: '300px' }} onClick={this.doInstantCheckout}>INSTANT CHECKOUT</button>
+          <button className={`${styles['fp-btn']} ${styles['fp-btn-sucess']} ${styles['fontW600']} ${styles['instant-btn']}`} onClick={this.doInstantCheckout}>INSTANT CHECKOUT</button>
         </div>
 
         {/* {

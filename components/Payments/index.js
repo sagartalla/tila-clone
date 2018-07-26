@@ -200,6 +200,7 @@ class Payments extends React.Component {
                     <div className={`${styles['box']} ${styles['payment-summary']}`}>
                       <RightSideBar
                         data={cartResults}
+                        showInstant={false}
                       />
                       <Cart
                         paymentPageInclude={true}
