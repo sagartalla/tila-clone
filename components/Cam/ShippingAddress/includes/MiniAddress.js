@@ -5,9 +5,9 @@ import { languageDefinations } from '../../../../utils/lang/';
 
 import { mergeCss } from '../../../../utils/cssUtil';
 const styles = mergeCss('components/Cam/ShippingAddress/address');
+const { DELIVERY_ADDR_PAGE } = languageDefinations();
 
 const MiniAddress = (props) => {
-  const { DELIVERY_ADDR_PAGE } = languageDefinations();
   const { data, showAddAdrressForm } = props;
   const makeDefaultAddress = (e) => {
     props.makeDefaultAddress(e.target.id);
