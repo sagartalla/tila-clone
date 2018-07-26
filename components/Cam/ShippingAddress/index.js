@@ -16,6 +16,7 @@ import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Cam/ShippingAddress/address');
 
 const cookies = new Cookie();
+//TODO: better handling of cookie
 const initialAddrObj = {
   address_id: 0,
   first_name: '',
