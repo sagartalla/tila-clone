@@ -17,6 +17,7 @@ class CancelComplete extends Component {
       orderItemId: selectedItem.id,
       reason: selectedReasons.reason,
       comment: selectedReasons.comment,
+      subReason: selectReasons.subReason,
     });
   }
 

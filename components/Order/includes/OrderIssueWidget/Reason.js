@@ -30,12 +30,20 @@ class Reason extends Component {
 	}
 
 	componentDidMount() {
-		this.props.getReasons();
+		this.props.getReasons({
+			orderItemId: this.props.orderIssue.selectedItem.id
+		});
 	}
 
 	selectReason(e) {
 		this.setState({
 			reason: e.target.value
+		})
+	}
+
+	selectSubReason(e) {
+		this.setState({
+			subReason: e.target.value
 		})
 	}
 
@@ -75,9 +83,22 @@ class Reason extends Component {
 						<select onChange={this.selectReason}>
 							<option>{loadingStatus ? 'loading...' : 'Select a Reason'}</option>
 							{
-								_.map(reasons, (reason, key) => <option key={key} value={key}>{key}</option>)
+								// _.map(reasons, (reason, key) => <option key={key} value={key}>{key}</option>)
+								reasons.map((reason) => <option key={reason.id} value={reason.name}>{reason.name}</option>)
 							}
 						</select>
+						{
+							this.state.reason
+							?
+							<select onChange={this.selectSubReason}>
+								<option>{loadingStatus ? 'loading...' : 'Select a Sub Reason'}</option>
+								{
+									_.map(reasons.filter((reason) => reason.name === this.state.reason)[0].sub_reasons, (subReason, key) => <option key={subReason.id} value={subReason.name}>{subReason.name}</option>)
+								}
+							</select>
+							:
+							null
+						}
 					</div>
 					{
 						returnExchangeType === ORDER_ISSUE_TYPES.EXCHANGE
