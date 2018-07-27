@@ -59,9 +59,12 @@ const FooterBar = props => (
     <div className={`${styles['footer-menu-items']} ${styles['pt-30']} ${styles['pb-30']} ${styles['bg-white']}`}>
       <Grid>
         <Row>
-          <Col md={2}>
-            <h4 className={`${styles['fontW600']} ${styles['fs-16']}`}>Fashion</h4>
-            <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
+          <Col md={3}>
+            <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['flex-center']}`}>
+              <SVGComponent clsName={`${styles['footer-list-icon']} ${styles['mr-10']}`} src="icons/footers-icons/fashion" />
+              Fashion
+            </h4>
+            <ul className={`${styles['pl-30']} ${styles['lne-ht2']}`}>
               <li>Women’s fashion</li>
               <li>Men’s fashion</li>
               <li>Gir’s Fashion</li>
@@ -72,9 +75,12 @@ const FooterBar = props => (
               <li>Men’s eyewear</li>
             </ul>
           </Col>
-          <Col md={2}>
-            <h4 className={`${styles['fontW600']} ${styles['fs-16']}`}>Electronics</h4>
-            <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
+          <Col md={3}>
+            <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['flex-center']}`}>
+              <SVGComponent clsName={`${styles['footer-list-icon']} ${styles['mr-10']}`} src="icons/common-icon/processor-icon" />
+              Electronics
+            </h4>
+            <ul className={`${styles['pl-30']} ${styles['lne-ht2']}`}>
               <li>Mobiles</li>
               <li>Tablets</li>
               <li>Laptops</li>
@@ -86,8 +92,10 @@ const FooterBar = props => (
             </ul>
           </Col>
           <Col md={2}>
-            <h4 className={`${styles['fontW600']} ${styles['fs-16']}`}>Lifestyle</h4>
-            <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
+            <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['flex-center']}`}>
+              <SVGComponent clsName={`${styles['footer-list-icon']} ${styles['mr-10']}`} src="icons/footers-icons/life-style" />
+              Lifestyle</h4>
+            <ul className={`${styles['pl-30']} ${styles['lne-ht2']}`}>
               <li> Home Decor</li>
               <li>Kitchen & Dining</li>
               <li>Bath</li>
@@ -99,8 +107,10 @@ const FooterBar = props => (
             </ul>
           </Col>
           <Col md={2}>
-            <h4 className={`${styles['fontW600']} ${styles['fs-16']}`}>Beauty & Makeup</h4>
-            <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
+            <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['flex-center']}`}>
+              <SVGComponent clsName={`${styles['footer-list-icon']} ${styles['mr-10']}`} src="icons/footers-icons/beauty-makeup" />
+              Beauty & Makeup</h4>
+            <ul className={`${styles['pl-30']} ${styles['lne-ht2']}`}>
               <li>Fragrance</li>
               <li>Make-Up</li>
               <li>Haircare</li>
@@ -110,84 +120,266 @@ const FooterBar = props => (
               <li>Men’s grooming</li>
             </ul>
           </Col>
-          <Col md={2}>
-            <h4 className={`${styles['fontW600']} ${styles['fs-16']}`}>Selling on TiLa.com</h4>
-            <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
-              <li>Sell on TiLa.com</li>
-              <li>How It Works</li>
-              <li>Selling Policies</li>
-              <li>Seller Terms and Conditions</li>
-              <li>Fulfilled by TiLa</li>
-              <li>FAQs</li>
-            </ul>
-          </Col>
+
           <Col md={2}>
             <h4 className={`${styles['fontW600']} ${styles['fs-16']}`}>Top Brands</h4>
-            <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
-              <li>Apple</li>
-              <li>Nike</li>
-              <li>Samsung</li>
-              <li>Tefal</li>
-              <li>L'Oreal Paris</li>
-              <li>Televisions</li>
-              <li>Skechers</li>
-              <li>Silsal</li>
+            <ul className={`${styles['pl-0']} ${styles['lne-ht2']} ${styles['top-brands']}`}>
+              <li className={`${styles['flex']} ${styles['mb-20']} ${styles['brand-icon']}`}>
+                <img src="/static/img/bg-img/samsung-img.jpg" className={styles['img-responsive']} />
+              </li>
+              <li className={`${styles['flex']} ${styles['mb-20']} ${styles['apple-icon']}`}><img src="/static/img/bg-img/apple.jpg" className={styles['img-responsive']} /></li>
+              <li className={`${styles['flex']} ${styles['mb-20']} ${styles['sony-icon']}`}><img src="/static/img/bg-img/sony.jpg" className={styles['img-responsive']} /></li>
+              <li className={`${styles['flex']} ${styles['mb-20']} ${styles['brand-icon']}`}><img src="/static/img/bg-img/philips.jpg" className={styles['img-responsive']} /></li>
+              <li className={`${styles['flex']} ${styles['mb-20']} ${styles['brand-icon']}`}><img src="/static/img/bg-img/microsoft.jpg" className={styles['img-responsive']} /></li>
             </ul>
           </Col>
         </Row>
       </Grid>
     </div>
-    <div className={`${styles['footer-social-main']} ${styles['pt-15']} ${styles['pb-15']} ${styles['bg-white']}`}>
+    {/* social part start */}
+    <div className={`${styles['footer-social-list-main']} ${styles['pt-40']} ${styles['pb-40']} ${styles['bg-white']}`}>
       <Grid>
-        <Row className={styles['flex-center']}>
-          <Col md={6}>
-            <div className={styles['fs-12']}>
-              <span className={`${styles['pr-10']} ${styles['fontW600']}`}>POLICY INFO : </span>
-              <span className={styles['pr-10']} >Privacy Policy </span>
-              <span className={styles['pr-10']}>Terms of Sale  </span>
-              <span className={styles['pr-10']}>Terms of Use </span>
-              <span className={styles['pr-10']}>Report Abuse Takedown Policy </span>
+        <Row>
+          <Col md={3} className={styles['pr-0']}>
+            <h4 className={styles['flex-center']}>
+              <span className={`${styles['footer-social-title']} ${styles['mr-10']}`}><img src="/static/img/bg-img/bitmap-social-fb.jpg" className={styles['img-responsive']} /></span>
+              <span className={`${styles['lgt-blue']} ${styles['fontW600']}`}>On Facebook</span>
+              <span className={`${styles['follow-fb-btn']} ${styles['fs-10']} ${styles['lne-ht2']} ${styles['white-color']} ${styles['ml-10']} ${styles['pl-15']} ${styles['pr-15']}`}>Follow</span>
+            </h4>
+            <div className={`${styles['footer-social-list-main-inn']} ${styles['pr-10']}`}>
+              <div className={`${styles['sc-part']} ${styles['pt-15']} ${styles['pb-15']} ${styles['flex']}`}>
+                <Col md={4} className={styles['p-0']}>
+                  <div className={styles['footer-sc-img']}>
+                    <img src="/static/img/bg-img/bitmapf8.jpg" className={styles['img-responsive']} />
+                  </div>
+                </Col>
+                <Col md={8} className={styles['pr-0']}>
+                  <span className={styles['flex-center']}>
+                    <span className={styles['footer-sc-logo']}>
+                      <img src="/static/img/bg-img/bitmap-logo.jpg" className={styles['img-responsive']} />
+                    </span>
+                    <span className={`${styles['fs-12']} ${styles['lgt-blue']} ${styles['pl-10']}`}>H&M</span>
+                  </span>
+                  <p className={`${styles['thick-gry-clr']} ${styles['m-0']} ${styles['pt-5']}`}>Get flawless & even-toned skin with Max Factor Panstik</p>
+                  <span className={`${styles['fs-12']} ${styles['footer-time']}`}>2 hours ago</span>
+                </Col>
+              </div>
+              <div className={`${styles['sc-part']} ${styles['pt-15']} ${styles['pb-15']} ${styles['flex']}`}>
+                <Col md={4} className={styles['p-0']}>
+                  <div className={styles['footer-sc-img']}>
+                    <img src="/static/img/bg-img/bitmap.jpg" className={styles['img-responsive']} />
+                  </div>
+                </Col>
+                <Col md={8} className={styles['pr-0']}>
+                  <span className={styles['flex-center']}>
+                    <span className={styles['footer-sc-logo']}>
+                      <img src="/static/img/bg-img/levis.jpg" className={styles['img-responsive']} />
+                    </span>
+                    <span className={`${styles['fs-12']} ${styles['lgt-blue']} ${styles['pl-10']}`}>Levis</span>
+                  </span>
+                  <p className={`${styles['thick-gry-clr']} ${styles['m-0']} ${styles['pt-5']}`}>Looks great. Feels great. It's called perfect for a reason.</p>
+                  <span className={`${styles['fs-12']} ${styles['footer-time']}`}>2 hours ago</span>
+                </Col>
+              </div>
             </div>
           </Col>
-          <Col md={4}>
-            <div className={styles['fs-12']}>
-              <span className={`${styles['pr-10']} ${styles['fontW600']}`}>COMPANY : </span>
-              <span className={styles['pr-10']}>About Us </span>
-              <span className={styles['pr-10']}>Core Values  </span>
-              <span className={styles['pr-10']}>Careers </span>
-              <span className={styles['pr-10']}>Contact us </span>
+          <Col md={3} className={styles['pr-0']}>
+            <h4 className={styles['flex-center']}>
+              <span className={`${styles['footer-social-title']} ${styles['mr-10']}`}><img src="/static/img/bg-img/bitmap-instgram.jpg" className={styles['img-responsive']} /></span>
+              <span className={`${styles['fontW600']}`}> On Instagram</span>
+              <span className={`${styles['follow-inst-btn']} ${styles['fs-10']} ${styles['lne-ht2']} ${styles['white-color']} ${styles['ml-10']} ${styles['pl-15']} ${styles['pr-15']}`}>Follow</span>
+            </h4>
+            <div className={`${styles['footer-social-list-main-inn']} ${styles['pr-10']}`}>
+              <div className={`${styles['sc-part']} ${styles['pt-15']} ${styles['pb-15']} ${styles['flex']}`}>
+                <Col md={4} className={styles['p-0']}>
+                  <div className={styles['footer-sc-img']}>
+                    <img src="/static/img/bg-img/bitmapf1.jpg" className={styles['img-responsive']} />
+                  </div>
+                </Col>
+                <Col md={8} className={styles['pr-0']}>
+                  <span className={styles['flex-center']}>
+                    <span className={styles['footer-sc-logo']}>
+                      <img src="/static/img/bg-img/sony-bg.jpg" className={styles['img-responsive']} />
+                    </span>
+                    <span className={`${styles['fs-12']} ${styles['lgt-blue']} ${styles['pl-10']}`}>Sony India</span>
+                  </span>
+                  <p className={`${styles['thick-gry-clr']} ${styles['m-0']} ${styles['pt-5']}`}>Get flawless & even-toned skin with Max Factor Panstik</p>
+                  <span className={`${styles['fs-12']} ${styles['footer-time']}`}>2 hours ago</span>
+                </Col>
+              </div>
+              <div className={`${styles['sc-part']} ${styles['pt-15']} ${styles['pb-15']} ${styles['flex']}`}>
+                <Col md={4} className={styles['p-0']}>
+                  <div className={styles['footer-sc-img']}>
+                    <img src="/static/img/bg-img/bitmapf2.jpg" className={styles['img-responsive']} />
+                  </div>
+                </Col>
+                <Col md={8} className={styles['pr-0']}>
+                  <span className={styles['flex-center']}>
+                    <span className={styles['footer-sc-logo']}>
+                      <img src="/static/img/bg-img/levis.jpg" className={styles['img-responsive']} />
+                    </span>
+                    <span className={`${styles['fs-12']} ${styles['lgt-blue']} ${styles['pl-10']}`}>Levis</span>
+                  </span>
+                  <p className={`${styles['thick-gry-clr']} ${styles['m-0']} ${styles['pt-5']}`}>Get flawless & even-toned skin with Max Factor Panstik</p>
+                  <span className={`${styles['fs-12']} ${styles['footer-time']}`}>2 hours ago</span>
+                </Col>
+              </div>
             </div>
           </Col>
-          <Col md={2}>
-            <div className={`${styles['flx-space-bw']} ${styles['footer-social-icons']}`}>
-              <SVGComponent clsName={`${styles['social-icons']}`} src="icons/common-icon/link-icon" />
-              <SVGComponent clsName={`${styles['social-icons']}`} src="icons/common-icon/email" />
-              <SVGComponent clsName={`${styles['social-icons']}`} src="icons/common-icon/bg-fb" />
-              <SVGComponent clsName={`${styles['social-icons']}`} src="icons/common-icon/twitter" />
-              <SVGComponent clsName={`${styles['social-icons']}`} src="icons/common-icon/instagram" />
-              <SVGComponent clsName={`${styles['social-icons']}`} src="icons/common-icon/gmail" />
+          <Col md={3} className={styles['pr-0']}>
+            <h4 className={styles['flex-center']}>
+              <span className={`${styles['footer-social-title']} ${styles['mr-10']}`}><img src="/static/img/bg-img/bitmap-twitter.jpg" className={styles['img-responsive']} /></span>
+              <span className={`${styles['twitter-clr']} ${styles['fontW600']}`}>On Twitter</span>
+              <span className={`${styles['follow-twi-btn']} ${styles['fs-10']} ${styles['lne-ht2']} ${styles['white-color']} ${styles['ml-10']} ${styles['pl-15']} ${styles['pr-15']}`}>Follow</span>
+            </h4>
+            <div className={`${styles['footer-social-list-main-inn']} ${styles['pr-10']}`}>
+              <div className={`${styles['sc-part']} ${styles['pt-15']} ${styles['pb-15']} ${styles['flex']}`}>
+                <Col md={4} className={styles['p-0']}>
+                  <div className={styles['footer-sc-img']}>
+                    <img src="/static/img/bg-img/bitmapf3.jpg" className={styles['img-responsive']} />
+                  </div>
+                </Col>
+                <Col md={8} className={styles['pr-0']}>
+                  <span className={styles['flex-center']}>
+                    <span className={styles['footer-sc-logo']}>
+                      <img src="/static/img/bg-img/puma.jpg" className={styles['img-responsive']} />
+                    </span>
+                    <span className={`${styles['fs-12']} ${styles['lgt-blue']} ${styles['pl-10']}`}>Puma</span>
+                  </span>
+                  <p className={`${styles['thick-gry-clr']} ${styles['m-0']} ${styles['pt-5']}`}>Get flawless & even-toned skin with Max Factor Panstik</p>
+                  <span className={`${styles['fs-12']} ${styles['footer-time']}`}>2 hours ago</span>
+                </Col>
+              </div>
+              <div className={`${styles['sc-part']} ${styles['pt-15']} ${styles['pb-15']} ${styles['flex']}`}>
+                <Col md={4} className={styles['p-0']}>
+                  <div className={styles['footer-sc-img']}>
+                    <img src="/static/img/bg-img/bitmapf5.jpg" className={styles['img-responsive']} />
+                  </div>
+                </Col>
+                <Col md={8} className={styles['pr-0']}>
+                  <span className={styles['flex-center']}>
+                    <span className={styles['footer-sc-logo']}>
+                      <img src="/static/img/bg-img/nike.jpg" className={styles['img-responsive']} />
+                    </span>
+                    <span className={`${styles['fs-12']} ${styles['lgt-blue']} ${styles['pl-10']}`}>Nike</span>
+                  </span>
+                  <p className={`${styles['thick-gry-clr']} ${styles['m-0']} ${styles['pt-5']}`}>Get flawless & even-toned skin with Max Factor Panstik</p>
+                  <span className={`${styles['fs-12']} ${styles['footer-time']}`}>2 hours ago</span>
+                </Col>
+              </div>
+            </div>
+          </Col>
+          <Col md={3}>
+            <h4 className={styles['flex-center']}>
+              <span className={`${styles['footer-social-title']} ${styles['mr-10']}`}><img src="/static/img/bg-img/bitmap-instgram.jpg" className={styles['img-responsive']} /></span>
+              <span className={`${styles['fontW600']}`}>On Snapchat</span>
+              <span className={`${styles['follow-sc-btn']} ${styles['fs-10']} ${styles['lne-ht2']}  ${styles['ml-10']} ${styles['pl-15']} ${styles['pr-15']}`}>Follow</span>
+            </h4>
+            <div className={`${styles['footer-social-list-main-inn']} ${styles['pr-10']}`}>
+              <div className={`${styles['sc-part']} ${styles['pt-15']} ${styles['pb-15']} ${styles['flex']}`}>
+                <Col md={4} className={styles['p-0']}>
+                  <div className={styles['footer-sc-img']}>
+                    <img src="/static/img/bg-img/bitmapf4.jpg" className={styles['img-responsive']} />
+                  </div>
+                </Col>
+                <Col md={8} className={styles['pr-0']}>
+                  <span className={styles['flex-center']}>
+                    <span className={styles['footer-sc-logo']}>
+                      <img src="/static/img/bg-img/venesa.jpg" className={styles['img-responsive']} />
+                    </span>
+                    <span className={`${styles['fs-12']} ${styles['lgt-blue']} ${styles['pl-10']}`}>Venessa</span>
+                  </span>
+                  <p className={`${styles['thick-gry-clr']} ${styles['m-0']} ${styles['pt-5']}`}>Get flawless & even-toned skin with Max Factor Panstik</p>
+                  <span className={`${styles['fs-12']} ${styles['footer-time']}`}>2 hours ago</span>
+                </Col>
+              </div>
+              <div className={`${styles['sc-part']} ${styles['pt-15']} ${styles['pb-15']} ${styles['flex']}`}>
+                <Col md={4} className={styles['p-0']}>
+                  <div className={styles['footer-sc-img']}>
+                    <img src="/static/img/bg-img/bitmapf6.jpg" className={styles['img-responsive']} />
+                  </div>
+                </Col>
+                <Col md={8} className={styles['pr-0']}>
+                  <span className={styles['flex-center']}>
+                    <span className={styles['footer-sc-logo']}>
+                      <img src="/static/img/bg-img/toy.jpg" className={styles['img-responsive']} />
+                    </span>
+                    <span className={`${styles['fs-12']} ${styles['lgt-blue']} ${styles['pl-10']}`}>Priyanka</span>
+                  </span>
+                  <p className={`${styles['thick-gry-clr']} ${styles['m-0']} ${styles['pt-5']}`}>Get flawless & even-toned skin with Max Factor Panstik</p>
+                  <span className={`${styles['fs-12']} ${styles['footer-time']}`}>2 hours ago</span>
+                </Col>
+              </div>
             </div>
           </Col>
         </Row>
       </Grid>
     </div>
-    <div className={`${styles['footer-download-app']} ${styles['pt-20']} ${styles['pb-20']} ${styles['bg-white']}`}>
+    {/* footer componay policy part start */}
+    <div className={`${styles['footer-social-main']} ${styles['pt-30']} ${styles['pb-30']} ${styles['bg-white']}`}>
       <Grid>
-        <div className={`${styles['flx-space-bw']}`}>
-          <div className={styles['flex-center']}>
-            <span className={`${styles['text-uppercase']} ${styles['mr-15']}`}>Download the app</span>
-            <span className={`${styles['flex']} ${styles['mr-15']} ${styles['download-icons']}`}>
-              <img src="static/img/bg-img/app-strore.jpg"/>
-            </span>
-            <span className={`${styles['flex']} ${styles['download-icons']}`}>
-              <img src="static/img/bg-img/google.jpg"/>
-            </span>
-            <span></span>
-          </div>
-          <div>
-            <span>&copy; 2018 www.tila.com. All rights reserved</span>
-          </div>
-        </div>
+        <Row>
+          <Col md={3}>
+            <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['black-color']}`}>Company</h4>
+            <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
+              <li>About Us </li>
+              <li>Core Values  </li>
+              <li>Mission </li>
+              <li>In news </li>
+              <li>Careers </li>
+              <li>Contact Us </li>
+            </ul>
+          </Col>
+          <Col md={3}>
+            <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['black-color']}`}>POLICY</h4>
+            <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
+              <li>Terms and conditions </li>
+              <li>Privacy Policy  </li>
+              <li>Cookie Policy </li>
+            </ul>
+          </Col>
+          <Col md={2}>
+            <div>
+              <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['black-color']}`}>Selling on TiLa.com</h4>
+              <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
+                <li>Selling on TiLa.com</li>
+                <li>How It Works </li>
+                <li>Selling Policies </li>
+                <li>Seller Terms and Conditions </li>
+                <li>Fulfilled by TiLa </li>
+                <li>FAQs </li>
+              </ul>
+            </div>
+          </Col>
+          <Col md={2}>
+            <div>
+              <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['black-color']}`}>Customer Services</h4>
+              <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
+                <li>Delivery</li>
+                <li>Size Guide </li>
+                <li>Payment Methods</li>
+                <li>Returns </li>
+                <li>Consumer Rights</li>
+              </ul>
+            </div>
+          </Col>
+          <Col md={2}>
+            <div className={`${styles['fs-12']} ${styles['footer-download-app']}`}>
+              <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['black-color']}`}>Download the app</h4>
+              <div>
+                <span className={`${styles['flex']} ${styles['mt-10']} ${styles['mb-15']} ${styles['download-icons']}`}>
+                  <img src="static/img/bg-img/app-strore.jpg" />
+                </span>
+                <span className={`${styles['flex']} ${styles['download-icons']}`}>
+                  <img src="static/img/bg-img/google.jpg" />
+                </span>
+              </div>
+              <div className={styles['pt-30']}>
+                <span className={styles['fs-10']}>&copy; 2018 www.tila.com. All rights reserved</span>
+              </div>
+            </div>
+          </Col>
+        </Row>
       </Grid>
     </div>
   </div>
