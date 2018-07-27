@@ -142,66 +142,23 @@ const FooterBar = props => (
         <Row>
           <Col md={3} className={styles['pr-0']}>
             <h4 className={styles['flex-center']}>
-              <span className={`${styles['footer-social-title']} ${styles['mr-10']}`}><img src="/static/img/bg-img/bitmap-social-fb.jpg" className={styles['img-responsive']} /></span>
-              <span className={`${styles['lgt-blue']} ${styles['fontW600']}`}>On Facebook</span>
-              <span className={`${styles['follow-fb-btn']} ${styles['fs-10']} ${styles['lne-ht2']} ${styles['white-color']} ${styles['ml-10']} ${styles['pl-15']} ${styles['pr-15']}`}>Follow</span>
-            </h4>
-            <div className={`${styles['footer-social-list-main-inn']} ${styles['pr-10']}`}>
-              <div className={`${styles['sc-part']} ${styles['pt-15']} ${styles['pb-15']} ${styles['flex']}`}>
-                <Col md={4} className={styles['p-0']}>
-                  <div className={styles['footer-sc-img']}>
-                    <img src="/static/img/bg-img/bitmapf8.jpg" className={styles['img-responsive']} />
-                  </div>
-                </Col>
-                <Col md={8} className={styles['pr-0']}>
-                  <span className={styles['flex-center']}>
-                    <span className={styles['footer-sc-logo']}>
-                      <img src="/static/img/bg-img/bitmap-logo.jpg" className={styles['img-responsive']} />
-                    </span>
-                    <span className={`${styles['fs-12']} ${styles['lgt-blue']} ${styles['pl-10']}`}>H&M</span>
-                  </span>
-                  <p className={`${styles['thick-gry-clr']} ${styles['m-0']} ${styles['pt-5']}`}>Get flawless & even-toned skin with Max Factor Panstik</p>
-                  <span className={`${styles['fs-12']} ${styles['footer-time']}`}>2 hours ago</span>
-                </Col>
-              </div>
-              <div className={`${styles['sc-part']} ${styles['pt-15']} ${styles['pb-15']} ${styles['flex']}`}>
-                <Col md={4} className={styles['p-0']}>
-                  <div className={styles['footer-sc-img']}>
-                    <img src="/static/img/bg-img/bitmap.jpg" className={styles['img-responsive']} />
-                  </div>
-                </Col>
-                <Col md={8} className={styles['pr-0']}>
-                  <span className={styles['flex-center']}>
-                    <span className={styles['footer-sc-logo']}>
-                      <img src="/static/img/bg-img/levis.jpg" className={styles['img-responsive']} />
-                    </span>
-                    <span className={`${styles['fs-12']} ${styles['lgt-blue']} ${styles['pl-10']}`}>Levis</span>
-                  </span>
-                  <p className={`${styles['thick-gry-clr']} ${styles['m-0']} ${styles['pt-5']}`}>Looks great. Feels great. It's called perfect for a reason.</p>
-                  <span className={`${styles['fs-12']} ${styles['footer-time']}`}>2 hours ago</span>
-                </Col>
-              </div>
-            </div>
-          </Col>
-          <Col md={3} className={styles['pr-0']}>
-            <h4 className={styles['flex-center']}>
               <span className={`${styles['footer-social-title']} ${styles['mr-10']}`}><img src="/static/img/bg-img/bitmap-instgram.jpg" className={styles['img-responsive']} /></span>
-              <span className={`${styles['fontW600']}`}> On Instagram</span>
-              <span className={`${styles['follow-inst-btn']} ${styles['fs-10']} ${styles['lne-ht2']} ${styles['white-color']} ${styles['ml-10']} ${styles['pl-15']} ${styles['pr-15']}`}>Follow</span>
+              <span className={`${styles['fontW600']}`}>On Snapchat</span>
+              <span className={`${styles['follow-sc-btn']} ${styles['fs-10']} ${styles['lne-ht2']}  ${styles['ml-10']} ${styles['pl-15']} ${styles['pr-15']}`}>Follow</span>
             </h4>
             <div className={`${styles['footer-social-list-main-inn']} ${styles['pr-10']}`}>
               <div className={`${styles['sc-part']} ${styles['pt-15']} ${styles['pb-15']} ${styles['flex']}`}>
                 <Col md={4} className={styles['p-0']}>
                   <div className={styles['footer-sc-img']}>
-                    <img src="/static/img/bg-img/bitmapf1.jpg" className={styles['img-responsive']} />
+                    <img src="/static/img/bg-img/bitmapf4.jpg" className={styles['img-responsive']} />
                   </div>
                 </Col>
                 <Col md={8} className={styles['pr-0']}>
                   <span className={styles['flex-center']}>
                     <span className={styles['footer-sc-logo']}>
-                      <img src="/static/img/bg-img/sony-bg.jpg" className={styles['img-responsive']} />
+                      <img src="/static/img/bg-img/venesa.jpg" className={styles['img-responsive']} />
                     </span>
-                    <span className={`${styles['fs-12']} ${styles['lgt-blue']} ${styles['pl-10']}`}>Sony India</span>
+                    <span className={`${styles['fs-12']} ${styles['lgt-blue']} ${styles['pl-10']}`}>Venessa</span>
                   </span>
                   <p className={`${styles['thick-gry-clr']} ${styles['m-0']} ${styles['pt-5']}`}>Get flawless & even-toned skin with Max Factor Panstik</p>
                   <span className={`${styles['fs-12']} ${styles['footer-time']}`}>2 hours ago</span>
@@ -210,15 +167,15 @@ const FooterBar = props => (
               <div className={`${styles['sc-part']} ${styles['pt-15']} ${styles['pb-15']} ${styles['flex']}`}>
                 <Col md={4} className={styles['p-0']}>
                   <div className={styles['footer-sc-img']}>
-                    <img src="/static/img/bg-img/bitmapf2.jpg" className={styles['img-responsive']} />
+                    <img src="/static/img/bg-img/bitmapf6.jpg" className={styles['img-responsive']} />
                   </div>
                 </Col>
                 <Col md={8} className={styles['pr-0']}>
                   <span className={styles['flex-center']}>
                     <span className={styles['footer-sc-logo']}>
-                      <img src="/static/img/bg-img/levis.jpg" className={styles['img-responsive']} />
+                      <img src="/static/img/bg-img/toy.jpg" className={styles['img-responsive']} />
                     </span>
-                    <span className={`${styles['fs-12']} ${styles['lgt-blue']} ${styles['pl-10']}`}>Levis</span>
+                    <span className={`${styles['fs-12']} ${styles['lgt-blue']} ${styles['pl-10']}`}>Priyanka</span>
                   </span>
                   <p className={`${styles['thick-gry-clr']} ${styles['m-0']} ${styles['pt-5']}`}>Get flawless & even-toned skin with Max Factor Panstik</p>
                   <span className={`${styles['fs-12']} ${styles['footer-time']}`}>2 hours ago</span>
@@ -269,25 +226,25 @@ const FooterBar = props => (
               </div>
             </div>
           </Col>
-          <Col md={3}>
+          <Col md={3} className={styles['pr-0']}>
             <h4 className={styles['flex-center']}>
               <span className={`${styles['footer-social-title']} ${styles['mr-10']}`}><img src="/static/img/bg-img/bitmap-instgram.jpg" className={styles['img-responsive']} /></span>
-              <span className={`${styles['fontW600']}`}>On Snapchat</span>
-              <span className={`${styles['follow-sc-btn']} ${styles['fs-10']} ${styles['lne-ht2']}  ${styles['ml-10']} ${styles['pl-15']} ${styles['pr-15']}`}>Follow</span>
+              <span className={`${styles['fontW600']}`}> On Instagram</span>
+              <span className={`${styles['follow-inst-btn']} ${styles['fs-10']} ${styles['lne-ht2']} ${styles['white-color']} ${styles['ml-10']} ${styles['pl-15']} ${styles['pr-15']}`}>Follow</span>
             </h4>
             <div className={`${styles['footer-social-list-main-inn']} ${styles['pr-10']}`}>
               <div className={`${styles['sc-part']} ${styles['pt-15']} ${styles['pb-15']} ${styles['flex']}`}>
                 <Col md={4} className={styles['p-0']}>
                   <div className={styles['footer-sc-img']}>
-                    <img src="/static/img/bg-img/bitmapf4.jpg" className={styles['img-responsive']} />
+                    <img src="/static/img/bg-img/bitmapf1.jpg" className={styles['img-responsive']} />
                   </div>
                 </Col>
                 <Col md={8} className={styles['pr-0']}>
                   <span className={styles['flex-center']}>
                     <span className={styles['footer-sc-logo']}>
-                      <img src="/static/img/bg-img/venesa.jpg" className={styles['img-responsive']} />
+                      <img src="/static/img/bg-img/sony-bg.jpg" className={styles['img-responsive']} />
                     </span>
-                    <span className={`${styles['fs-12']} ${styles['lgt-blue']} ${styles['pl-10']}`}>Venessa</span>
+                    <span className={`${styles['fs-12']} ${styles['lgt-blue']} ${styles['pl-10']}`}>Sony India</span>
                   </span>
                   <p className={`${styles['thick-gry-clr']} ${styles['m-0']} ${styles['pt-5']}`}>Get flawless & even-toned skin with Max Factor Panstik</p>
                   <span className={`${styles['fs-12']} ${styles['footer-time']}`}>2 hours ago</span>
@@ -296,17 +253,60 @@ const FooterBar = props => (
               <div className={`${styles['sc-part']} ${styles['pt-15']} ${styles['pb-15']} ${styles['flex']}`}>
                 <Col md={4} className={styles['p-0']}>
                   <div className={styles['footer-sc-img']}>
-                    <img src="/static/img/bg-img/bitmapf6.jpg" className={styles['img-responsive']} />
+                    <img src="/static/img/bg-img/bitmapf2.jpg" className={styles['img-responsive']} />
                   </div>
                 </Col>
                 <Col md={8} className={styles['pr-0']}>
                   <span className={styles['flex-center']}>
                     <span className={styles['footer-sc-logo']}>
-                      <img src="/static/img/bg-img/toy.jpg" className={styles['img-responsive']} />
+                      <img src="/static/img/bg-img/levis.jpg" className={styles['img-responsive']} />
                     </span>
-                    <span className={`${styles['fs-12']} ${styles['lgt-blue']} ${styles['pl-10']}`}>Priyanka</span>
+                    <span className={`${styles['fs-12']} ${styles['lgt-blue']} ${styles['pl-10']}`}>Levis</span>
                   </span>
                   <p className={`${styles['thick-gry-clr']} ${styles['m-0']} ${styles['pt-5']}`}>Get flawless & even-toned skin with Max Factor Panstik</p>
+                  <span className={`${styles['fs-12']} ${styles['footer-time']}`}>2 hours ago</span>
+                </Col>
+              </div>
+            </div>
+          </Col>
+          <Col md={3}>
+            <h4 className={styles['flex-center']}>
+              <span className={`${styles['footer-social-title']} ${styles['mr-10']}`}><img src="/static/img/bg-img/bitmap-social-fb.jpg" className={styles['img-responsive']} /></span>
+              <span className={`${styles['lgt-blue']} ${styles['fontW600']}`}>On Facebook</span>
+              <span className={`${styles['follow-fb-btn']} ${styles['fs-10']} ${styles['lne-ht2']} ${styles['white-color']} ${styles['ml-10']} ${styles['pl-15']} ${styles['pr-15']}`}>Follow</span>
+            </h4>
+            <div className={`${styles['footer-social-list-main-inn']} ${styles['pr-10']}`}>
+              <div className={`${styles['sc-part']} ${styles['pt-15']} ${styles['pb-15']} ${styles['flex']}`}>
+                <Col md={4} className={styles['p-0']}>
+                  <div className={styles['footer-sc-img']}>
+                    <img src="/static/img/bg-img/bitmapf8.jpg" className={styles['img-responsive']} />
+                  </div>
+                </Col>
+                <Col md={8} className={styles['pr-0']}>
+                  <span className={styles['flex-center']}>
+                    <span className={styles['footer-sc-logo']}>
+                      <img src="/static/img/bg-img/bitmap-logo.jpg" className={styles['img-responsive']} />
+                    </span>
+                    <span className={`${styles['fs-12']} ${styles['lgt-blue']} ${styles['pl-10']}`}>H&M</span>
+                  </span>
+                  <p className={`${styles['thick-gry-clr']} ${styles['m-0']} ${styles['pt-5']}`}>Get flawless & even-toned skin with Max Factor Panstik</p>
+                  <span className={`${styles['fs-12']} ${styles['footer-time']}`}>2 hours ago</span>
+                </Col>
+              </div>
+              <div className={`${styles['sc-part']} ${styles['pt-15']} ${styles['pb-15']} ${styles['flex']}`}>
+                <Col md={4} className={styles['p-0']}>
+                  <div className={styles['footer-sc-img']}>
+                    <img src="/static/img/bg-img/bitmap.jpg" className={styles['img-responsive']} />
+                  </div>
+                </Col>
+                <Col md={8} className={styles['pr-0']}>
+                  <span className={styles['flex-center']}>
+                    <span className={styles['footer-sc-logo']}>
+                      <img src="/static/img/bg-img/levis.jpg" className={styles['img-responsive']} />
+                    </span>
+                    <span className={`${styles['fs-12']} ${styles['lgt-blue']} ${styles['pl-10']}`}>Levis</span>
+                  </span>
+                  <p className={`${styles['thick-gry-clr']} ${styles['m-0']} ${styles['pt-5']}`}>Looks great. Feels great. It's called perfect for a reason.</p>
                   <span className={`${styles['fs-12']} ${styles['footer-time']}`}>2 hours ago</span>
                 </Col>
               </div>
