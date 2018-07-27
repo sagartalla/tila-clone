@@ -28,7 +28,6 @@ class MegaMenu extends Component {
   }
 
   getTree(childCategory, isFirst, depth=0) {
-    console.log('depth', depth);
     ++depth;
     return _.map(childCategory ? childCategory.childCategories : {}, (childItem) => (
       <li className={`${styles['megamenu-sub-list']} ${depth === 4 ? styles['pl-10'] : {}}`} key={childItem.id} onClick={this.onLinkClick}>

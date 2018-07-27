@@ -2,9 +2,12 @@
 import { Link } from '../../../routes';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import _ from 'lodash';
 import Waypoint from 'react-waypoint';
 import constants from '../../../constants';
+import { actionCreators } from '../../../store/cam/wishlist';
 import { Grid, Row, Col } from 'react-bootstrap';
 import SVGCompoent from '../../common/SVGComponet';
 import { mergeCss } from '../../../utils/cssUtil';
@@ -15,12 +18,22 @@ class Product extends Component {
     super(props);
     this.state = {};
     this.setImg = this.setImg.bind(this);
+    this.addToWishlist = this.addToWishlist.bind(this);
   }
 
   setImg() {
     const { media = []} = this.props;
     this.setState({
       src: `${constants.mediaDomain}/${media[0]}`
+    });
+  }
+
+  addToWishlist(e) {
+    e.stopPropagation();
+    const {productId: product_id, catalogId: catalog_id} = this.props;
+    this.props.addToWishlist({
+      catalog_id,
+      product_id,
     });
   }
 
@@ -109,7 +122,7 @@ class Product extends Component {
               </div>
               <div className={`${styles['wish-list-part']} ${styles['flx-space-bw']}`}>
                 <span className={styles['flex']}>
-                  <a className={styles['flex-center']}>
+                  <a className={styles['flex-center']} onClick={this.addToWishlist}>
                     <SVGCompoent clsName={`${styles['wish-list']}`} src="icons/wish-list/wish-list-icon" />
                     <span className={styles['pl-5']}>Add to Wishlist</span>
                   </a>
@@ -148,13 +161,21 @@ class Product extends Component {
       </Link>
     );
   }
-}
+};
 
 Product.propTypes = {
   media: PropTypes.array.isRequired,
   displayName: PropTypes.array.isRequired,
   variants: PropTypes.object.isRequired,
-}
+};
 
+const mapDispatchToProps = (dispatch) => {
+	return bindActionCreators(
+		{
+			addToWishlist: actionCreators.addToWishlist
+		},
+		dispatch,
+	);
+};
 
-export default Product;
+export default connect(null, mapDispatchToProps)(Product);
