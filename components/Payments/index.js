@@ -13,7 +13,7 @@ import { actionCreators as cartActionCreators, selectors as cartSelectors } from
 
 import PaymentHeader from './includes/PaymentHeader';
 
-import RightSideBar from '../common/CartAndPaymentRightBar';
+import RightSideBar from '../common/CartPaymentSideBar';
 
 import SignIn from './includes/SignIn';
 import DeliveryAddress from './includes/DeliveryAddress';
@@ -200,6 +200,7 @@ class Payments extends React.Component {
                     <div className={`${styles['box']} ${styles['payment-summary']}`}>
                       <RightSideBar
                         data={cartResults}
+                        showInstant={false}
                       />
                       <Cart
                         paymentPageInclude={true}

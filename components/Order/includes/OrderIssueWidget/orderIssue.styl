@@ -6,23 +6,33 @@
     width 70px
     height 45px
     img
-      width 100%
-      height 100%
+      max-width 100%
+      max-height 100%
   .widget-cont
     display block
     width 450px
     height 522px
     padding 0
-    position relative
+    position absolute
     .widget-head
       height 64px
-      background-color popup-header
+      background-color head-gray
     .widget-body
+      max-height: 370px;
+      overflow-y: scroll;
       .item-cont
         color inherit 
-      .reasons-item-wrap
-        margin-bottom 0
-        border-bottom 1px solid generic-gray-color
+        .title-cont
+          width 77%
+    .reasons-item-wrap
+      border-bottom 1px solid generic-gray-color
+      .title-cont
+        width 77%
+      .back-btn
+        .down-arrow-icon
+          width: 18px;
+          transform: rotate(90deg);
+          height: 20px;
       .reason-cont
         .instruction-txt
           color: generic-gray-color
@@ -35,9 +45,25 @@
         height 50px
         display block
         width 395px
-        border-radius 4px
-        background-color blue
         color white
         text-transform uppercase
         &:disabled
-          background-color generic-gray-color          
+          background-color navy-blue
+          
+  .reason-item-main
+    .comment-cont
+      textarea
+        border 1px solid generic-gray-color
+
+  .cancel-success-inn
+    flex-direction column
+    .cancel-success-img
+      width: 218px;
+      height: 195px;
+      .img-responsive
+        max-width 100%
+        max-height 100%
+    .cancel-success-label
+      width 84%
+  .cancel-success-text
+    background-color head-gray

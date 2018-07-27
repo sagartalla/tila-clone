@@ -78,7 +78,6 @@ class RangeFitler extends Component {
       <li>
         <div className={`${styles['category-list-title']} ${styles['black-color']} ${styles['fontW600']} ${styles['p-10-20']} ${styles['flx-spacebw-alignc']}`}>
           {filter.name}
-          <SVGCompoent clsName={`${styles['expand-icon']}`} src="icons/common-icon/down-arrow-circle" />
         </div>
         <div className={`${styles['flx-spacebw-alignc']} ${styles['p-10-20']}`}>
           <select className={styles['price-select-list']} componentclass="select" placeholder="select" onChange={this.minChange} value={this.state.value.min}>

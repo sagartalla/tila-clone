@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import PropTypes from 'prop-types';
-import {Grid, Row, Col } from 'react-bootstrap';
+import { Grid, Row, Col } from 'react-bootstrap';
 
 import SVGComponent from '../../common/SVGComponet';
 
@@ -8,9 +8,9 @@ import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Thankyou/thankyou');
 
 const PaymentStatus = props => {
-  const message = (props.status == "SUCCESSFUL") ? "YOUR ORDER HAS BEEN PLACED SUCCESSFULLY" : (props.status == "FAILURE") ? "ORDER FAILURE" : null;
-  const successMessage = <span>Your order has been placed and is being processed. You will receive an email with details once the item(s) are shipped. You can track your &nbsp;<a className={styles['fontW600']} href={"/cam/orders/"+props.orderId}>Orders page</a>&nbsp;in your account</span>;
-  const subMessage = (props.status == "SUCCESSFUL") ? successMessage : (props.status == "FAILURE") ? "Please try again" : null;
+  const message = (props.status == "SUCCESSFUL") ? "YOUR ORDER HAS BEEN PLACED SUCCESSFULLY" : (props.status == "FAILED") ? "Sorry! We couldn't process your order successfully" : null;
+  const successMessage = <span>Your order has been placed and is being processed. You will receive an email with details once the item(s) are shipped. You can track your &nbsp;<a className={styles['fontW600']} href={"/cam/orders/" + props.orderId}>Orders page</a>&nbsp;in your account</span>;
+  const subMessage = (props.status == "SUCCESSFUL") ? successMessage : (props.status == "FAILED") ? "There was a problem processing your order. If the paid amount is deducted we will refund it to the same mode of payment in 4 working days. If you have any queries please feel free to Contact us any time" : null;
 
   return (
     <Grid>
@@ -23,7 +23,11 @@ const PaymentStatus = props => {
         <Col md={10} xs={9} sm={9}>
           <div className={`${styles['flx-spacebw-alignc']}`}>
             <h3 className={`${styles['mt-0']} ${styles['light-gry-clr']} ${styles['fontW600']}`}>{message}</h3>
-            <a href="/cam/orders"   className={styles['mb-20']}><button className={`${styles['fp-btn']} ${styles['fp-btn-default']}`}> TRACK ORDERS </button></a>
+            {
+              props.status == "SUCCESSFUL" ?
+                <a href="/cam/orders" className={styles['mb-20']}><button className={`${styles['fp-btn']} ${styles['fp-btn-default']}`}> TRACK ORDERS </button></a>
+                : null
+            }
           </div>
           <p className={`${styles['col-header']} ${styles['lgt-black']}`}>
             {subMessage}
