@@ -46,7 +46,7 @@ class AddToCart extends Component {
 
   componentWillReceiveProps(nextProps) {
     if(this.state.buyNow == true && (nextProps.isAddedToCart && !this.props.isAddedToCart)){
-       Router.pushRoute('/cart');
+       Router.pushRoute('/payment');
     }
   }
 
