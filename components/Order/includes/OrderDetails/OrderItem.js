@@ -35,6 +35,18 @@ const OrderItem = ({ orderItem, raiseOrderIssue, orderId, showWidget, thankyouPa
     });
   };
 
+  const btnType = (() => {
+    if(['DELIVERED', 'PLACED', 'PROCESSING'].indexOf(orderItem.status) !== -1) {
+      return 'cancel';
+    }
+    if(orderItem.status === 'SHIPPED') {
+      return 'return-exchange';
+    }
+    if(orderItem.status === 'CANCELLED') {
+      return null;
+    }
+  })();
+
   return (
     <div className={`${styles['shipment-wrap']} ${styles['mb-20']} ${styles['mt-20']} ${styles['flex']}`}>
       <Col md={7} className={`${styles['pl-0']} ${styles['pr-0']}`}>
@@ -85,9 +97,16 @@ const OrderItem = ({ orderItem, raiseOrderIssue, orderId, showWidget, thankyouPa
               <div className={styles['fs-12']}>Delivery by</div>
               <div className={`${styles['ff-t']} ${styles['fs-26']}`}>{moment(orderItem.products[0].promisedDeliveryDate).format('Do, dddd')}</div>
             </div>
-            <div className={styles['cancel-btn']}>
-              <span className={`${styles['link-text']} ${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']} ${styles['fs-12']}`} onClick={cancelOrder} >Cancel</span>
-            </div>
+            {
+              btnType ?
+                <div className={styles['cancel-btn']}>
+                  <span
+                    className={`${styles['link-text']} ${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']} ${styles['fs-12']}`}
+                    onClick={btnType === 'cancel' ? cancelOrder : exchangeReturnOrder}> { btnType === 'cancel' ? 'Cancel' : 'Return/Exchange'}</span>
+                </div>
+                :
+                null
+            }
           </div>
           <div className={`${styles['widget-wrap']} ${styles['pt-10']} ${styles['pb-10']}`}>
             {
@@ -97,7 +116,7 @@ const OrderItem = ({ orderItem, raiseOrderIssue, orderId, showWidget, thankyouPa
               :
                 <StatusWidget currentStatus={orderItem.products} />
             }
-            
+
           </div>
         </div>
       </Col>
