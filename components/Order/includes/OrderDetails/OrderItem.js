@@ -94,8 +94,8 @@ const OrderItem = ({ orderItem, raiseOrderIssue, orderId, showWidget, thankyouPa
         <div className={`${styles['p-15']}`}>
           <div className={`${styles['date-cont']} ${styles['flx-spacebw-alignc']}`}>
             <div>
-              <div className={styles['fs-12']}>Delivery by</div>
-              <div className={`${styles['ff-t']} ${styles['fs-26']}`}>{moment(orderItem.products[0].promisedDeliveryDate).format('Do, dddd')}</div>
+              <div className={styles['fs-12']}>{ btnType === 'cancel' ? 'Delivery by' : showWidget ? 'Canceled on' : 'Canceled'}</div>
+              <div className={`${styles['ff-t']} ${styles['fs-26']}`}>{btnType === 'cancel' ? moment(orderItem.products[0].promisedDeliveryDate).format('Do, dddd') : showWidget ? moment(orderItem.products[0].state_times.CANCELLED.time).format('Do, dddd') : null}</div>
             </div>
             {
               btnType ?
