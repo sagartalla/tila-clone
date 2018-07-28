@@ -269,7 +269,7 @@ const FooterBar = props => (
               </div>
             </div>
           </Col>
-          <Col md={3}>
+          <Col md={3} className={styles['pr-0']}>
             <h4 className={styles['flex-center']}>
               <span className={`${styles['footer-social-title']} ${styles['mr-10']}`}><img src="/static/img/bg-img/bitmap-social-fb.jpg" className={styles['img-responsive']} /></span>
               <span className={`${styles['lgt-blue']} ${styles['fontW600']}`}>On Facebook</span>

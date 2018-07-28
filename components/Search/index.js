@@ -14,7 +14,7 @@ const styles = mergeCss('components/Search/search');
 const Search = () => (
   <div>
     <HeaderBar />
-    <Grid>
+    <Grid className={styles['pt-20']}>
       <div className={`${styles['filter-panel']} ${styles['border-radius4']} ${styles['bg-white']}`}>
         <NoSSR>
           <CategoriesAndFacets />
