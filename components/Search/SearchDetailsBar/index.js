@@ -18,7 +18,7 @@ class SearchDetailsBar extends Component {
   render() {
     const { results } = this.props;
     return (
-      <div>
+      <div className={styles['search-results-wrap']}>
         {
           results.totalCount > 0 ?
             <Fragment>

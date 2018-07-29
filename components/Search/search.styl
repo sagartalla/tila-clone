@@ -8,7 +8,8 @@
   margin-right 20px
   border 1px solid border-gray
   box-shadow 0 2px 7px 0 rgba(0,0,0,0.03)
-
+  position sticky
+  top 65px;
   // ul
   //   padding 0 20px
   li
@@ -18,7 +19,13 @@
   float left
   width calc(80% - 20px)
 
-  .no-results 
+  .search-results-wrap
+    position sticky
+    top 61px
+    background #f9f9f9
+    z-index 7
+    box-shadow 0 7px 4px -4px rgba(0,0,0,0.09)
+  .no-results
     height 400px
 
   .hover-show-date
@@ -101,7 +108,7 @@
     border-top-right-radius 12px
     background-color white
     box-shadow 0 0 34px 0 #c0c0c0
-    z-index 9
+    z-index 11
     .image-div
       border-top-left-radius 12px
       border-top-right-radius 12px

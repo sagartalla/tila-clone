@@ -34,7 +34,7 @@ class SearchReuslts extends Component {
   render() {
     const { results, pagiantionDetails } = this.props;
     return (
-      <div>
+      <div> 
         <InfiniteScroll
           initialLoad={false}
           pageStart={0}
