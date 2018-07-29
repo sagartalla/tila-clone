@@ -280,7 +280,7 @@ const Fashion = () => (
         <h3 className={`${styles['flex-center']} ${styles['what-title']} ${styles['justify-center']} ${styles['relative']} ${styles['lobster-family']} ${styles['pt-40']} ${styles['pb-20']}`}><span className={`${styles['fs-36']} ${styles['lable']} ${styles['pl-10']} ${styles['pr-10']}`}>Top Brands</span> <span className={`${styles['absolute']} ${styles['border']}`}></span></h3>
         <div className={styles['flex']}>
           <Col md={2} className={`${styles['pl-0']} ${styles['pr-10']}`}>
-            <div className={`   ${styles['flex-colum']} ${styles['bg-white']} ${styles['top-brand-part-inn']} ${styles['border-radius4']}`}>
+            <div className={` ${styles['flex-center']}  ${styles['flex-colum']} ${styles['bg-white']} ${styles['top-brand-part-inn']} ${styles['border-radius4']}`}>
               <div className={`${styles['adidas-logo']} ${styles['flex-center']}`}>
                 <img src="/static/img/landing-page-fashion/top-brands.jpg" className={styles['img-responsive']} />
               </div>
