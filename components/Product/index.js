@@ -33,8 +33,8 @@ const getProductComponent = (isPreview, taskCode) => {
           isPreview ? null : <HeaderBar />
         }
         <div className={`${styles['page-details-slider']}`}>
-          <Row className={`${styles['m-0']} ${styles['relative']}`}>
-            <Col xs={12} md={8} className={styles['pl-0']}>
+          <Row className={`${styles['m-0']} ${styles['relative']} ${styles['ht-100per']}`}>
+            <Col xs={12} md={8} className={`${styles['pl-0']} ${styles['ht-100per']}`}>
               <Dispalay imgs={imgUrls} />
             </Col>
               <div className={`${styles['details-right-part']} ${styles['absolute']}`}>
