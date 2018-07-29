@@ -6,7 +6,7 @@ const styles = mergeCss('components/Landing/includes/Fashion/fashion');
 
 const Fashion = () => (
   <div className={styles['fashion-main-part']}>
-    <Grid fluid={true} className={styles['p-0']}>
+    <Grid className={styles['p-0']}>
       <div className={`${styles['flex']} ${styles['fashion-banner-main']} ${styles['relative']}`}>
         <img src="/static/img/landing-page-fashion/fashion-banner.png" className={styles['img-responsive']} />
         <div className={`${styles['absolute']} ${styles['flex']} ${styles['flex-colum']} ${styles['banner-label']}`}>
