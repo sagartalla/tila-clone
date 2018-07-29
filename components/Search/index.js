@@ -37,7 +37,7 @@ class Search extends Component {
     return (
       <div>
         <HeaderBar />
-        <Grid>
+        <Grid className={styles['pt-20']}>
           <div onClick={onClickMenuHandle} className={`${styles['filter-panel']} ${styles['border-radius4']} ${styles['bg-white']}`}>
             <NoSSR>
               <CategoriesAndFacets />

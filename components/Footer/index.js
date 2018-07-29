@@ -269,7 +269,7 @@ const FooterBar = props => (
               </div>
             </div>
           </Col>
-          <Col md={3}>
+          <Col md={3} className={styles['pr-0']}>
             <h4 className={styles['flex-center']}>
               <span className={`${styles['footer-social-title']} ${styles['mr-10']}`}><img src="/static/img/bg-img/bitmap-social-fb.jpg" className={styles['img-responsive']} /></span>
               <span className={`${styles['lgt-blue']} ${styles['fontW600']}`}>On Facebook</span>
@@ -368,10 +368,10 @@ const FooterBar = props => (
               <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['black-color']}`}>Download the app</h4>
               <div>
                 <span className={`${styles['flex']} ${styles['mt-10']} ${styles['mb-15']} ${styles['download-icons']}`}>
-                  <img src="static/img/bg-img/app-strore.jpg" />
+                  <img src="/static/img/bg-img/app-strore.jpg" />
                 </span>
                 <span className={`${styles['flex']} ${styles['download-icons']}`}>
-                  <img src="static/img/bg-img/google.jpg" />
+                  <img src="/static/img/bg-img/google.jpg" />
                 </span>
               </div>
               <div className={styles['pt-30']}>
