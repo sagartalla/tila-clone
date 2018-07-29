@@ -4,6 +4,7 @@ import { actions } from './actions';
 const initialState = {
   ui: {
     loading: false,
+    showFilters: false,
   },
   data: {
     searchDetails: {},
@@ -49,6 +50,15 @@ const searchReducer = typeToReducer({
     },
     REJECTED: (state, action) => Object.assign({}, state, { error: action.payload.message, ui: { loading: false } }),
   },
+  [actions.SEARCHBAR_FITLERS]: (state, action) => {
+    return {
+      ...state,
+      ui: {
+        ...state.ui,
+        showFilters: action.payload.show,
+      }
+    }
+  }
 }, initialState);
 
 export default searchReducer;

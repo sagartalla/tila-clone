@@ -8,7 +8,8 @@
   margin-right 20px
   border 1px solid border-gray
   box-shadow 0 2px 7px 0 rgba(0,0,0,0.03)
-
+  position sticky
+  top 65px;
   // ul
   //   padding 0 20px
   li
@@ -18,7 +19,13 @@
   float left
   width calc(82% - 20px)
 
-  .no-results 
+  /*.search-results-wrap
+    position sticky
+    top 61px
+    background #f9f9f9
+    z-index 7
+    box-shadow 0 7px 4px -4px rgba(0,0,0,0.09)*/
+  .no-results
     height 400px
 
   .hover-show-date
@@ -101,7 +108,7 @@
     border-top-right-radius 12px
     background-color white
     box-shadow 0 0 34px 0 #c0c0c0
-    z-index 9
+    z-index 11
     .image-div
       border-top-left-radius 12px
       border-top-right-radius 12px
@@ -226,51 +233,3 @@
   -moz-appearance none
   &:focus
     outline none
-
-// toogle switch css start
-
-.switch
-  position relative
-  display inline-block
-  width 60px
-  height 15px
-  .slider
-    position absolute
-    cursor pointer
-    top 0
-    left 0
-    right 0
-    bottom 0
-    background-color swich-bg-color
-    border solid 1px swich-color
-    -webkit-transition .4s
-    transition .4s
-    height 15px
-    border-radius 7px
-    &:before
-      position absolute
-      content ""
-      width-height-radius(30px, 30px, 50%)
-      left 0
-      top -9px
-      -webkit-transition .4s
-      transition .4s
-      border:1px solid thck-gry-clr
-
-.all-deals-part .switch .slider:before
-  background white url(/static/img/bg-img/tag-icon.png) no-repeat
-  background-position 4px 6px
-  background-size 16px 16px
-
-.fullfill-part .switch .slider:before
-  background white url(/static/img/bg-img/icon-fulfilled.png) no-repeat
-  background-position 4px 6px
-  background-size 16px 16px
-
-.switch .switch-check {display:none;}
-
-.switch input[type="checkbox"]:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
