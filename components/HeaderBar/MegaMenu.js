@@ -73,6 +73,18 @@ class MegaMenu extends Component {
     });
   }
 
+  getLandingPageLink(name) {
+    if(name === 'Electronics') {
+      return '/landing/electronics';
+    }
+    if(name === 'Fashion') {
+      return '/landing/fashion';
+    }
+    if(name === 'Lifestyle') {
+      return '/landing/Lifestyle';
+    }
+  }
+
   render() {
     const { megamenu } = this.props;
     const { selectedCategory } = this.state;
@@ -85,7 +97,8 @@ class MegaMenu extends Component {
               _.map(megamenu, (item) => (
                 <li key={item.id} onMouseOver={this.onHoverCurry(item.id)}>
                   <div>
-                    <Link route={`/category/${item.displayName}-${item.id}?categoryTree=true&isListed=true`}>
+                    {/* <Link route={`/category/${item.displayName}-${item.id}?categoryTree=true&isListed=true`}> */}
+                    <Link route={this.getLandingPageLink(item.displayName)}>
                       <a className={styles['level-1-item']}>{item.displayName}</a>
                     </Link>
                   </div>

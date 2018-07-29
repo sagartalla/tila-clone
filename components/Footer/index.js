@@ -368,10 +368,10 @@ const FooterBar = props => (
               <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['black-color']}`}>Download the app</h4>
               <div>
                 <span className={`${styles['flex']} ${styles['mt-10']} ${styles['mb-15']} ${styles['download-icons']}`}>
-                  <img src="static/img/bg-img/app-strore.jpg" />
+                  <img src="/static/img/bg-img/app-strore.jpg" />
                 </span>
                 <span className={`${styles['flex']} ${styles['download-icons']}`}>
-                  <img src="static/img/bg-img/google.jpg" />
+                  <img src="/static/img/bg-img/google.jpg" />
                 </span>
               </div>
               <div className={styles['pt-30']}>
