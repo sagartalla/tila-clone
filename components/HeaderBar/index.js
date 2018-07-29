@@ -15,7 +15,7 @@ const styles = mergeCss('components/HeaderBar/header');
 
 const HeaderBar = props => (
   <div className={styles['header-container']}>
-    <div className={styles['header-container-inn']}>
+    <div className={`${styles['header-container-inn']} ${ props.showFitlers ? styles['faded'] : {} }`}>
       <Grid>
         <Row className={`${styles['flex-center']} ${styles['pb-10']} ${styles['pt-10']} ${styles['border-b']}`}>
           <Col md={1}>
