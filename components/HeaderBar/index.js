@@ -1,12 +1,16 @@
 import { Grid, Row, Col } from 'react-bootstrap';
 import NoSSR from 'react-no-ssr';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import Logo from './Logo';
 import Search from './Search';
 import ActionBar from './ActionBar';
 import MegaMenu from './MegaMenu';
+import SearchFilters from '../common/SearchFilters';
 import { mergeCss } from '../../utils/cssUtil';
 import publicUrls from '../../constants';
+import { actionCreators, selectors } from '../../store/search';
 const styles = mergeCss('components/HeaderBar/header');
 
 const HeaderBar = props => (
@@ -17,12 +21,23 @@ const HeaderBar = props => (
           <Col md={1}>
             <Logo />
           </Col>
-          <Col md={7}>
+          <Col md={props.showFitlers ? 6 : 7}>
             <NoSSR>
               <Search />
             </NoSSR>
           </Col>
-          <Col md={4}>
+          {
+            props.showFitlers
+            ?
+            <Col md={4}>
+              <div className={`${styles['flex-center']}`}>
+                <SearchFilters />
+              </div>
+            </Col>
+            :
+            null
+          }
+          <Col md={props.showFitlers ? 3 : 4 }>
             <ActionBar />
           </Col>
         </Row>
@@ -41,4 +56,7 @@ const HeaderBar = props => (
   </div>
 );
 
-export default HeaderBar;
+const mapStateToProps = (store) => ({
+  showFitlers: selectors.getSearchBarFilterState(store)
+});
+export default connect(mapStateToProps, null)(HeaderBar);

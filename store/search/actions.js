@@ -3,6 +3,7 @@ import apis from './api';
 const actions = {
   GET_SEARCH_RESULTS: 'GET_SEARCH_RESULTS',
   GET_MORE_RESULTS: 'GET_MORE_RESULTS',
+  SEARCHBAR_FITLERS: 'SEARCHBAR_FITLERS',
 };
 
 const actionCreators = {
@@ -15,6 +16,22 @@ const actionCreators = {
       payload: apis.getSearchResultsApi(data),
     });
   },
+  hideSearchBarFitlers: () => {
+    return ({
+      type: actions.SEARCHBAR_FITLERS,
+      payload: {
+        show: false
+      }
+    })
+  },
+  showSearchBarFilters: () => {
+    return ({
+      type: actions.SEARCHBAR_FITLERS,
+      payload: {
+        show: true
+      }
+    })
+  }
 };
 
 export { actions, actionCreators };

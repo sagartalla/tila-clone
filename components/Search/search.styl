@@ -19,12 +19,12 @@
   float left
   width calc(80% - 20px)
 
-  .search-results-wrap
+  /*.search-results-wrap
     position sticky
     top 61px
     background #f9f9f9
     z-index 7
-    box-shadow 0 7px 4px -4px rgba(0,0,0,0.09)
+    box-shadow 0 7px 4px -4px rgba(0,0,0,0.09)*/
   .no-results
     height 400px
 
@@ -233,51 +233,3 @@
   -moz-appearance none
   &:focus
     outline none
-
-// toogle switch css start
-
-.switch
-  position relative
-  display inline-block
-  width 60px
-  height 15px
-  .slider
-    position absolute
-    cursor pointer
-    top 0
-    left 0
-    right 0
-    bottom 0
-    background-color swich-bg-color
-    border solid 1px swich-color
-    -webkit-transition .4s
-    transition .4s
-    height 15px
-    border-radius 7px
-    &:before
-      position absolute
-      content ""
-      width-height-radius(30px, 30px, 50%)
-      left 0
-      top -9px
-      -webkit-transition .4s
-      transition .4s
-      border:1px solid thck-gry-clr
-
-.all-deals-part .switch .slider:before
-  background white url(/static/img/bg-img/tag-icon.png) no-repeat
-  background-position 4px 6px
-  background-size 16px 16px
-
-.fullfill-part .switch .slider:before
-  background white url(/static/img/bg-img/icon-fulfilled.png) no-repeat
-  background-position 4px 6px
-  background-size 16px 16px
-
-.switch .switch-check {display:none;}
-
-.switch input[type="checkbox"]:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}

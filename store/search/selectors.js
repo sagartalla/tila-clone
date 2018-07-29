@@ -142,5 +142,9 @@ const getFacetfilters = (store) => (queryObject) => {
   return facetFilters;
 }
 
+const getSearchBarFilterState = (state) => {
+  return state.searchReducer.ui.showFilters;
+}
 
-export { getSearchFilters, getSearchResutls, getPaginationDetails, getUIState, getCategoryId, getQuery, getFacetfilters, optionParams };
+
+export { getSearchFilters, getSearchResutls, getPaginationDetails, getUIState, getCategoryId, getQuery, getFacetfilters, optionParams, getSearchBarFilterState };
