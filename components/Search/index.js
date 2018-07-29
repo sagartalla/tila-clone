@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Grid } from 'react-bootstrap';
 import NoSSR from 'react-no-ssr';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { actionCreators } from '../../store/search';
 
 import HeaderBar from '../HeaderBar/index';
 import FooterBar from '../Footer/index';
@@ -24,22 +27,40 @@ const onClickMenuHandle = (e) => {
   },500);
 }
 
-const Search = () => (
-  <div>
-    <HeaderBar />
-    <Grid>
-      <div onClick={onClickMenuHandle} className={`${styles['filter-panel']} ${styles['border-radius4']} ${styles['bg-white']}`}>
-        <NoSSR>
-          <CategoriesAndFacets />
-        </NoSSR>
-      </div>
-      <div className={styles['search-results']}>
-        <SearchDetailsBar />
-        <SearchResults />
-      </div>
-    </Grid>
-    <FooterBar />
-  </div>
-);
+class Search extends Component {
 
-export default Search;
+  componentWillUnmount() {
+    this.props.hideSearchBarFitlers();
+  }
+
+  render() {
+    return (
+      <div>
+        <HeaderBar />
+        <Grid>
+          <div onClick={onClickMenuHandle} className={`${styles['filter-panel']} ${styles['border-radius4']} ${styles['bg-white']}`}>
+            <NoSSR>
+              <CategoriesAndFacets />
+            </NoSSR>
+          </div>
+          <div className={styles['search-results']}>
+            <SearchDetailsBar />
+            <SearchResults />
+          </div>
+        </Grid>
+        <FooterBar />
+      </div>
+    )
+  }
+};
+
+const mapDispatchToProps = (dispatch) => {
+	return bindActionCreators(
+		{
+			hideSearchBarFitlers: actionCreators.hideSearchBarFitlers
+		},
+		dispatch,
+	);
+};
+
+export default connect(null, mapDispatchToProps)(Search);
