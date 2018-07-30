@@ -10,9 +10,18 @@
     }
 }
 
+.slick-list, .slick-track {
+    height: 100%;
+}
+
+.slick-slide div {
+  height: 100%;
+}
+
 .slick-slider.sub-slider .slick-slide {
     width: 70px !important;
 }
+
 
 .progress {
     display: flex;
