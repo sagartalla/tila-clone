@@ -97,13 +97,6 @@ class ActionBar extends Component {
             </Dropdown.Menu>
           </Dropdown>
         </div>
-        {/* <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']}`}>
-          <Link route="/cam">
-            <span className={`${styles['flex-center']} ${styles['justify-center']}`}>
-              <SVGComponent clsName={`${styles['cam-icon']}`} src="icons/cam/cam-icon" />
-            </span>
-          </Link>
-        </div> */}
         <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']} ${styles['relative']} ${styles['profile-login']}`}>
           <Dropdown id="profile-login" className={styles['profile-login-inn']}>
             <Dropdown.Toggle>
@@ -153,37 +146,9 @@ class ActionBar extends Component {
                 </ul>
 
               </div>
-              {/* <div className={styles['flx-spacebw-alignc']}>
-                <span onClick={this.loginClick} data-mode="sign-up" className={`${styles['flex-center']} ${styles['login-details-inn']} ${styles['border-radius2']}`}>
-                  <SVGComponent clsName={`${styles['logout-icon']}`} src="icons/common-icon/icon-signup" />
-                  <span className={`${styles['pl-10']} ${styles['fontW700']} ${styles['lgt-blue']} `}>SIGN UP</span>
-                </span>
-                {isLoggedIn
-                  ?
-                  <span onClick={this.logoutClick} className={`${styles['flex-center']} ${styles['login-details-inn']} ${styles['border-radius2']}`}>
-                    <SVGComponent clsName={`${styles['logout-icon']}`} src="icons/common-icon/icon-logout" />
-                    <span className={`${styles['pl-10']} ${styles['fontW700']} ${styles['lgt-blue']} `}>LOGOUT</span>
-                  </span>
-                  :
-                  <span onClick={this.loginClick} className={`${styles['flex-center']} ${styles['login-details-inn']} ${styles['border-radius2']}`}>
-                    <SVGComponent clsName={`${styles['login-icon']}`} src="icons/common-icon/icon-login" />
-                    <span className={`${styles['pl-10']} ${styles['fontW700']} ${styles['lgt-blue']}`}>LOGIN</span>
-                  </span>
-                }
-              </div> */}
             </Dropdown.Menu>
           </Dropdown>
 
-          {/* {!isHidden &&
-            <div className={`${styles['profile-edit']} ${styles['bg-white']} ${styles['p-10']}`}>
-              {isLoggedIn
-                ?
-                <span onClick={this.logoutClick}>logout</span>
-                :
-                <span onClick={this.loginClick}>login</span>
-              }
-            </div>
-          } */}
         </div>
         {
           (this.state.show)
