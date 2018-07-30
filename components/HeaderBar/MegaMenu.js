@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import _ from 'lodash';
+import routes from '../../routes';
 import publicUrls from '../../constants';
 import { Link } from '../../routes';
 import { selectors, actionCreators } from '../../store/megamenu';
@@ -29,34 +30,38 @@ class MegaMenu extends Component {
 
   getTree(childCategory, isFirst, depth=0) {
     ++depth;
-    return _.map(childCategory ? childCategory.childCategories : {}, (childItem) => (
-      <li className={`${styles['megamenu-sub-list']} ${depth === 4 ? styles['pl-10'] : {}}`} key={childItem.id} onClick={this.onLinkClick}>
-        <span className={`${styles['flex']}`}>
-          {/* {
-            isFirst
-            ?
-            <SVGComponent clsName={`${styles['flex']} ${styles['megamenu-icon']}`} src={childCategory.icon}/>
-            :
-            null
-          } */}
-          <Link route={`/${childItem.displayName}-${childItem.id}?categoryTree=true&isListed=true`}>
-            <a className={`${styles['level-1-item']} ${depth === 2 ? styles['fontW600'] : {}}`}>{childItem.displayName}</a>
-          </Link>
-        </span>
-        <ul className={`${styles['megamenu-sub-child-list']} ${styles['pl-0']}`}>
-          {
-            childItem.isLeaf ? null : this.getTree(childItem, false, depth)
-          }
-        </ul>
-      </li>
-    ))
+    return _.map(childCategory ? childCategory.childCategories : {}, (childItem) => {
+      isFirst && console.log('asasd', childItem.displayName);
+      return (
+        <li className={`${styles['megamenu-sub-list']} ${depth === 2 ? styles['pl-20'] : null}`} key={childItem.id} onClick={this.onLinkClick}>
+          <span className={`${styles['flex']}`}>
+            {
+              isFirst
+              ?
+              <SVGComponent clsName={`${styles['flex']} ${styles['megamenu-icon']}`} src="icons/messages"/>
+              :
+              null
+            }
+            <Link route={`/${childItem.displayName}-${childItem.id}?categoryTree=true&isListed=true`}>
+              <a className={`${styles['level-1-item']} ${depth === 1 ? styles['fontW600'] : {}}`}>{childItem.displayName}</a>
+            </Link>
+          </span>
+          <ul className={`${styles['megamenu-sub-child-list']} ${styles['pl-20']}`}>
+            {
+              childItem.isLeaf ? null : this.getTree(childItem, false, depth)
+            }
+          </ul>
+        </li>
+      )
+    })
   }
 
-  onHoverCurry(id) {
+  onHoverCurry(item) {
     return () => {
       this.setState({
         ...this.state,
-        selectedCategory: id
+        selectedCategory: item.id,
+        colorScheme: (item.displayName || '').split(' ').join('').toLowerCase().replace('&', '-'),
       });
     }
   }
@@ -80,30 +85,32 @@ class MegaMenu extends Component {
     if(name === 'Fashion') {
       return '/landing/fashion';
     }
-    if(name === 'Lifestyle') {
+    if(name === 'Lifestyle' || name === 'Home & Living') {
       return '/landing/Lifestyle';
     }
   }
 
   render() {
-    const { megamenu } = this.props;
+    const { megamenu, selectedLandingPage } = this.props;
     const { selectedCategory } = this.state;
     const selectedCategoryTree = _.find(megamenu, { id: selectedCategory });
     return (
       <div>
-        <nav className={`${styles['megamenu-wrapper']} ${styles['flx-spacebw-alignc']}`}>
+        <nav className={`${styles['megamenu-wrapper']} ${styles['flx-spacebw-alignc']} ${styles[this.state.colorScheme]}`}>
           <ul className={styles['mb-0']}>
             {
-              _.map(megamenu, (item) => (
-                <li key={item.id} onMouseOver={this.onHoverCurry(item.id)}>
-                  <div>
-                    {/* <Link route={`/category/${item.displayName}-${item.id}?categoryTree=true&isListed=true`}> */}
-                    <Link route={this.getLandingPageLink(item.displayName)}>
-                      <a className={styles['level-1-item']}>{item.displayName}</a>
-                    </Link>
-                  </div>
-                </li>
-              ))
+              _.map(megamenu, (item) => {
+                return (
+                  <li key={item.id} onMouseOver={this.onHoverCurry(item)} className={`${item.id === selectedLandingPage ? styles['active-menu-item'] : {}}`}>
+                    <div>
+                      {/* <Link route={`/category/${item.displayName}-${item.id}?categoryTree=true&isListed=true`}> */}
+                      <Link route={this.getLandingPageLink(item.displayName)}>
+                        <a>{item.displayName}</a>
+                      </Link>
+                    </div>
+                  </li>
+                );
+              })
             }
           </ul>
           <div className={`${styles['float-r']} ${styles['fs-12']}`}>
@@ -119,7 +126,57 @@ class MegaMenu extends Component {
         {
           selectedCategoryTree
             ?
-            <div onMouseLeave={this.onHoverOut} className={`${styles['megamenu-dropdown']} ${styles['box']} ${styles['box-space']}`}>
+            <div onMouseLeave={this.onHoverOut} className={`${styles['pt-40']} ${styles['megamenu-dropdown']} ${styles['box']} ${styles['box-space']} ${styles[this.state.colorScheme]}`}>
+              <div className={styles['top-brands-trending-wrap']}>
+                <ul className={`${styles['top-brands-wrap']} ${styles['megamenu-sub-drop-down']}`}>
+                  <li className={`${styles['megamenu-sub-list']}`}>
+                    <span className={`${styles['flex']}`}>
+                      <a className={`${styles['level-1-item']} ${styles['fontW600']}`}>Top Brands</a>
+                    </span>
+                    <ul className={`${styles['megamenu-sub-child-list']}`}>
+                      <li className={`${styles['flex']} ${styles['mb-20']} ${styles['brand-icon']}`}>
+                        <img src="/static/img/bg-img/samsung-img.jpg" className={`${styles['img-responsive']}`} />
+                      </li>
+                      <li className={`${styles['flex']} ${styles['mb-20']} ${styles['brand-icon']}`}>
+                        <img src="/static/img/bg-img/apple.jpg" className={`${styles['img-responsive']}`} />
+                        </li>
+                      <li className={`${styles['flex']} ${styles['mb-20']} ${styles['brand-icon']}`}>
+                        <img src="/static/img/bg-img/sony.jpg" className={`${styles['img-responsive']}`} />
+                        </li>
+                      <li className={`${styles['flex']} ${styles['mb-20']} ${styles['brand-icon']}`}>
+                        <img src="/static/img/bg-img/philips.jpg" className={`${styles['img-responsive']}`} />
+                        </li>
+                      <li className={`${styles['flex']} ${styles['mb-20']} ${styles['brand-icon']}`}>
+                        <img src="/static/img/bg-img/microsoft.jpg" className={`${styles['img-responsive']}`} />
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+                <ul className={`${styles['top-brands-wrap']} ${styles['megamenu-sub-drop-down']}`}>
+                  <li className={`${styles['megamenu-sub-list']}`}>
+                    <span className={`${styles['flex']}`}>
+                      <a className={`${styles['level-1-item']} ${styles['fontW600']}`}>Trending</a>
+                    </span>
+                    <ul className={`${styles['megamenu-sub-child-list']}`}>
+                      <li className={`${styles['flex']} ${styles['mb-20']} ${styles['brand-icon']}`}>
+                        <img src="/static/img/bg-img/samsung-img.jpg" className={`${styles['img-responsive']}`} />
+                      </li>
+                      <li className={`${styles['flex']} ${styles['mb-20']} ${styles['brand-icon']}`}>
+                        <img src="/static/img/bg-img/apple.jpg" className={`${styles['img-responsive']}`} />
+                        </li>
+                      <li className={`${styles['flex']} ${styles['mb-20']} ${styles['brand-icon']}`}>
+                        <img src="/static/img/bg-img/sony.jpg" className={`${styles['img-responsive']}`} />
+                        </li>
+                      <li className={`${styles['flex']} ${styles['mb-20']} ${styles['brand-icon']}`}>
+                        <img src="/static/img/bg-img/philips.jpg" className={`${styles['img-responsive']}`} />
+                        </li>
+                      <li className={`${styles['flex']} ${styles['mb-20']} ${styles['brand-icon']}`}>
+                        <img src="/static/img/bg-img/microsoft.jpg" className={`${styles['img-responsive']}`} />
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
               <ul className={styles['megamenu-sub-drop-down']}>
                 {
                   this.getTree(selectedCategoryTree, true)
@@ -138,13 +195,15 @@ class MegaMenu extends Component {
 
 const mapStateToProps = (store) => {
   return ({
-    megamenu: selectors.getMegamenu(store)
+    megamenu: selectors.getMegamenu(store),
   })
 };
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
-    { getMegamenu: actionCreators.getMegamenu },
+    {
+      getMegamenu: actionCreators.getMegamenu,
+    },
     dispatch,
   );
 }
