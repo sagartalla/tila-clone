@@ -1,9 +1,9 @@
 import _ from 'lodash';
 
-const getCartResults = (store) => {
-  if (store.cartReducer.data) {
-    const data = store.cartReducer.data;
-    const ui = store.cartReducer.ui
+const getListingCartResults = (store) => {
+  if (store.listingCartReducer.data) {
+    const data = store.listingCartReducer.data;
+    const ui = store.listingCartReducer.ui
     const img_url = 'https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/';
     const newData = { items: [], total_price: 0, ui };
 
@@ -43,26 +43,6 @@ const getCartResults = (store) => {
   return {};
 }
 
-const getLoadingStatus = (store) => {
-  return store.cartReducer.ui.loading;
-}
 
-const getErrorMessege = (store) => {
-  return store.cartReducer.error;
-}
 
-// const getCartItemIdFromListingId = (store) => (cartData, listingId) => {
-//   const val = cartData.items.filter(item => item.listing_id == listingId)
-//   return val.length > 0 ? val[0].cart_item_id : ''
-// }
-
-const isAddedToCart = (store) => {
-  try {
-    return store.cartReducer.data.addToCart.item_status === 'ADDED';
-  } catch (e) {
-
-  }
-
-}
-
-export { getCartResults, getLoadingStatus, getErrorMessege, isAddedToCart }
+export { getListingCartResults }

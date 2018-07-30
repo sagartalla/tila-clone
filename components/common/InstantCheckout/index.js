@@ -67,10 +67,10 @@ class InstantCheckout extends Component {
 
   doInstantCheckout() {
     const { creditDebitCard, cvv, cntryCode, phoneNumber } = this.state;
-    const { defaultCard } = this.props;
+    const { defaultCard, insnt_item_listing_id } = this.props;
 
     this.props.doInstantCheckout({
-      "listing_ids": [],
+      "listing_ids": insnt_item_listing_id ? [insnt_item_listing_id] : [],
       "payment_mode": creditDebitCard ? "SAVED_CARD" : 'COD',
       "card_token": defaultCard[0].card_token,
       "cvv": cvv,
@@ -154,12 +154,12 @@ class InstantCheckout extends Component {
                     </div> : null
                 }
 
-                <div className={`${styles['p-10-20']}`}>
+                {/* <div className={`${styles['p-10-20']}`}>
                   <div className={styles['checkbox-material']}>
                     <input id="checkout-label" type="checkbox" />
                     <label for="checkout-label" className={`${styles['thick-gry-clr']} ${styles['fontW300']}`}> Don't call before delivery </label>
                   </div>
-                </div>
+                </div> */}
               </div>
               <div className={`${styles['flex']} ${styles['justify-center']}`}>
                 <button className={`${styles['fp-btn']} ${styles['fp-btn-sucess']} ${styles['fontW600']} ${styles['instant-btn']}`} onClick={this.doInstantCheckout}>INSTANT CHECKOUT</button>
