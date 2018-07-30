@@ -48,7 +48,7 @@ const HeaderBar = props => (
       <Grid className={styles['header-meganenu-sub']}>
         <Row>
           <Col md={12}>
-            <MegaMenu />
+            <MegaMenu query={props.query} />
           </Col>
         </Row>
       </Grid>

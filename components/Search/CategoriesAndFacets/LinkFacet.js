@@ -48,13 +48,13 @@ class LinkFacet extends Component {
               filter.children.slice(0, this.state.maxRows).map((category) => {
                 return (
                   <li key={category.id} className={styles['main-sub-list']}>
-                    <Link route={`/${category.canonicalId}-${category.id}/${window.location.search}`}>{category.name}</Link>
+                    <Link route={`/srp/${category.canonicalId}-${category.id}/${window.location.search}`}>{category.name}</Link>
                     <ul className={`${styles['category-sub-order-list']} ${styles['pl-15']}`}>
                       {
                         category.children.map((subcategory) => {
                           return (
                             <li key={subcategory.id} className={styles['category-sub-list-inn']}>
-                              <Link route={`/${category.canonicalId}-${category.id}/${subcategory.canonicalId}-${subcategory.id}/${window.location.search}`}>{subcategory.name}</Link>
+                              <Link route={`/srp/${category.canonicalId}-${category.id}/${subcategory.canonicalId}-${subcategory.id}/${window.location.search}`}>{subcategory.name}</Link>
                             </li>
                           )
                         })
