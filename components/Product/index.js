@@ -121,11 +121,11 @@ const getProductComponent = (isPreview, taskCode) => {
                     isPreview ? null : <RecentView />
                   }
                   </Col>
-                  <Col md={8}>
+                  {/*<Col md={8}>
                   {
                     isPreview ? null : <ReviewsTab />
                   }
-                  </Col>
+                  </Col>*/}
                   <Col md={8}>
                     <ElectronicsTab catalog={catalog}/>
                   </Col>
