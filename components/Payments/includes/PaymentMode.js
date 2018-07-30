@@ -6,6 +6,9 @@ import SVGComponent from '../../common/SVGComponet';
 import Voucher from './paymentpages/Voucher';
 import RewardPoints from './paymentpages/RewardPoints';
 import PayOnline from './paymentpages/PayOnline';
+import GiftCard from './paymentpages/GiftCard';
+import NetBanking from './paymentpages/NetBanking';
+import CashOnDelivery from './paymentpages/CashOnDelivery';
 
 import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Payments/payment');
@@ -17,14 +20,20 @@ const PaymentMode = props => {
   const paymentPageConfig = {
     "VOUCHER": Voucher,
     "REWARD_POINTS": RewardPoints,
-    "PAY_ONLINE": PayOnline
+    "PAY_ONLINE": PayOnline,
+    "GIFT_CARD": GiftCard,
+    "NET_BANKING": NetBanking,
+    "CASH_ON_DELIVERY":CashOnDelivery
   }
 
-  const paymentTypeNames = {
-    "VOUCHER": "Voucher",
-    "REWARD_POINTS": "Reward Points",
-    "PAY_ONLINE": "Pay Online"
-  }
+  // const paymentTypeNames = {
+  //   "VOUCHER": "Voucher",
+  //   "REWARD_POINTS": "Reward Points",
+  //   "PAY_ONLINE": "Pay Online",
+  //   "GIFT_CARD": GiftCard,
+  //   "NET_BANKING": NetBanking,
+  //   "CASH_ON_DELIVERY":Cod
+  // }
 
   const showPaymentType = (e) => {
     props.showPaymentType(e.target.id);
@@ -56,7 +65,7 @@ const PaymentMode = props => {
                   {
                     props.data.data.payment_options_available.map((val, index) => {
                       return (
-                        <li id={index} key={index} onClick={showPaymentType} className={`${index == props.showTab ? styles['active'] : ''}`}>{paymentTypeNames[val.type]}</li>
+                        <li id={index} key={index} onClick={showPaymentType} className={`${index == props.showTab ? styles['active'] : ''}`}>{val.display_name}</li>
                       )
                     })
                   }
