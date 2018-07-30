@@ -91,7 +91,8 @@ class MegaMenu extends Component {
   }
 
   render() {
-    const { megamenu, selectedLandingPage } = this.props;
+    const { megamenu, query={} } = this.props;
+    const { category } = query;
     const { selectedCategory } = this.state;
     const selectedCategoryTree = _.find(megamenu, { id: selectedCategory });
     return (
@@ -101,7 +102,7 @@ class MegaMenu extends Component {
             {
               _.map(megamenu, (item) => {
                 return (
-                  <li key={item.id} onMouseOver={this.onHoverCurry(item)} className={`${item.id === selectedLandingPage ? styles['active-menu-item'] : {}}`}>
+                  <li key={item.id} onMouseOver={this.onHoverCurry(item)} className={`${styles[`${(item.displayName || '').split(' ').join('').toLowerCase().replace('&', '-')}-item`]} ${(!selectedCategoryTree && this.getLandingPageLink(item.displayName)) === `/landing/${category}` ? styles['active-menu-item']: {}}`}>
                     <div>
                       {/* <Link route={`/category/${item.displayName}-${item.id}?categoryTree=true&isListed=true`}> */}
                       <Link route={this.getLandingPageLink(item.displayName)}>

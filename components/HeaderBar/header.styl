@@ -158,17 +158,21 @@
 
 .megamenu-wrapper
   overflow hidden
-  .active-menu-item
-    background #000
   &.electronics
+    .active-menu-item
+      border-bottom: 4px solid electronics-color
     ul li
       &:hover
         border-bottom: 4px solid electronics-color
   &.fashion
+    .active-menu-item
+      border-bottom: 4px solid fashion-color
     ul li
       &:hover
         border-bottom: 4px solid fashion-color
   &.home-living
+    .active-menu-item
+      border-bottom: 4px solid lifestyle-color
     ul li
       &:hover
         border-bottom: 4px solid lifestyle-color
@@ -179,6 +183,17 @@
     &:hover
       div a
         font-weight 600
+        text-decoration: none;
+    &:active, &:focus
+      text-decoration: none;
+      color inherit
+
+  .electronics-item.active-menu-item
+    border-bottom: 4px solid electronics-color
+  .fashion-item.active-menu-item
+    border-bottom: 4px solid fashion-color
+  .home-living-item.active-menu-item
+    border-bottom: 4px solid lifestyle-color
 
 
 .megamenu-dropdown

@@ -8,10 +8,10 @@ import Electronics from './includes/Electronics';
 import Lifestyle from './includes/Lifestyle';
 
 const Landing = ({query}) => {
-  const { category,  } = query;
+  const { category } = query;
   return (
     <Fragment>
-      <HeaderBar />
+      <HeaderBar query={query} />
       {
         {
           'fashion': (<Fashion />),
