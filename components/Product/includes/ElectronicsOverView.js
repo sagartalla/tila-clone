@@ -12,10 +12,7 @@ const OverView = ({ catalog }) => {
 				<h4><span className={`${styles['think-pink-bdr-rgt']} ${styles['pl-15']} ${styles['fontW600']} ${styles['fs-20']}`}>Product Description</span></h4>
 				<p className={styles['pl-15']}>Tailoring is part of the Stella McCartney DNA and for SS18 classics are twisted using vivid colours and contrasting volumes. Pair jackets with casual trousers and sporty shoes for a relaxed look. Tailoring is part of the Stella McCartney DNA and for SS18 classics are twisted using vivid colours and contrasting volumes. Pair jackets with casual trousers and sporty shoes for a relaxed look. </p>
       </div>
-			<div className={`${styles['prod-description']} ${styles['pb-20']}`}>
-				<h4><span className={`${styles['think-pink-bdr-rgt']} ${styles['pl-15']} ${styles['fontW600']} ${styles['fs-20']}`}>Product Description</span></h4>
-				<p className={styles['pl-15']}>Tailoring is part of the Stella McCartney DNA and for SS18 classics are twisted using vivid colours and contrasting volumes. Pair jackets with casual trousers and sporty shoes for a relaxed look. Tailoring is part of the Stella McCartney DNA and for SS18 classics are twisted using vivid colours and contrasting volumes. Pair jackets with casual trousers and sporty shoes for a relaxed look. </p>
-      </div>
+	
 			<div className={styles['prod-specification']}>
 				<h4><span className={`${styles['think-pink-bdr-rgt']} ${styles['pl-15']} ${styles['fontW600']} ${styles['fs-20']}`}>Camera & Video</span></h4>
 				<div className={`${styles['flex']} ${styles['overview-inn']}`}>

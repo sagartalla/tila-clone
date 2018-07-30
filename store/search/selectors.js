@@ -78,7 +78,7 @@ const getSearchResutls = (store) => {
       }else if (priceInfo.length > 1) {
         priceRange = priceInfo.sort().join(' - ')
       } else {
-        priceRange = priceInfo[0] || 'No price info';
+        priceRange = priceInfo[0] || '';
       }
       return {
         id: product.id,

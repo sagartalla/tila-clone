@@ -110,10 +110,10 @@ class MegaMenu extends Component {
             <span className={`${styles['pl-5']} ${styles['pr-5']}`}>
               <a href={publicUrls.sellerPlatform} target="_blank" className={styles['black-color']}>Sell with Tila</a>
             </span>
-            <span className={`${styles['pl-5']} ${styles['pr-5']}`}>|</span>
+            {/* <span className={`${styles['pl-5']} ${styles['pr-5']}`}>|</span>
             <span className={`${styles['pl-5']} ${styles['pr-5']}`}>
               <a href={publicUrls.customerHelp} target="_blank" className={styles['black-color']}>Customer Care</a>
-            </span>
+            </span> */}
           </div>
         </nav>
         {

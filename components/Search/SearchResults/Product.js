@@ -22,7 +22,7 @@ class Product extends Component {
   }
 
   setImg() {
-    const { media = []} = this.props;
+    const { media = [] } = this.props;
     this.setState({
       src: `${constants.mediaDomain}/${media[0]}`
     });
@@ -30,7 +30,7 @@ class Product extends Component {
 
   addToWishlist(e) {
     e.stopPropagation();
-    const {productId: product_id, catalogId: catalog_id} = this.props;
+    const { productId: product_id, catalogId: catalog_id } = this.props;
     this.props.addToWishlist({
       catalog_id,
       product_id,
@@ -38,16 +38,16 @@ class Product extends Component {
   }
 
   getOfferClassName(offer) {
-    if(offer > 10 && offer < 20) {
+    if (offer > 10 && offer < 20) {
       return 'green'
     }
-    if(offer > 20 && offer < 40){
+    if (offer > 20 && offer < 40) {
       return 'yellow'
     }
-    if(offer > 40 && offer < 60){
+    if (offer > 40 && offer < 60) {
       return 'orange';
     }
-    if(offer > 60){
+    if (offer > 60) {
       return 'red';
     }
   }
@@ -67,7 +67,7 @@ class Product extends Component {
     return (
       <Link route={`/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemtype}`}>
         <Col md={3} xs={6} className={`${styles['pr-0']} ${styles['pl-0']}`}>
-          <div className={`${styles['product-items']} ${styles['relative']}`}>
+          <div className={`${styles['product-items']}`}>
             <div className={`${styles['img-cont']} ${styles['border-radius4']} ${styles['relative']}`}>
               <div className={styles['image-div']}>
                 <Waypoint onEnter={this.setImg}>
@@ -76,37 +76,40 @@ class Product extends Component {
               </div>
               {
                 (offers.length > 0)
-                ?
-                (
-                  offers.length > 1 && (offers[0] <= 10 && offers[0] > 0)
                   ?
-                  <span className={`${styles['tag-main']} ${styles['absolute']}`}></span>
+                  (
+                    offers.length > 1 && (offers[0] <= 10 && offers[0] > 0)
+                      ?
+                      <span className={`${styles['tag-main']} ${styles['absolute']}`}></span>
+                      :
+                      <span className={`${styles['offer-tag']} ${styles['white-color']} ${styles['fs-12']} ${styles['absolute']} ${styles[this.getOfferClassName(offers[0])]}`}>{offers[0]} OFF</span>
+                  )
                   :
-                  <span className={`${styles['offer-tag']} ${styles['fontW600']} ${styles['absolute']}`}><span className={`${styles['down-arrow']} ${styles['absolute']} ${styles[this.getOfferClassName(offers[0])]}`}></span>{offers[0]} OFF</span>
-                )
-                :
-                null
+                  null
               }
               <span className={`${styles['variants-main']}`}></span>
-              <span className={`${styles['fullfill-main']}`}></span>
+              <span className={`${styles['fullfill-main']}`}><span className={`${styles['fs-12']} ${styles['fontW600']} ${styles['pl-30']}`}>Fulfilled by Tila</span></span>
             </div>
             <div className={styles['desc-cont']}>
               <div className={`${styles['pb-20']} ${styles['pl-20']} ${styles['flex']} ${styles['flex-colum']}`}>
                 <h5 className={`${styles['prdt-name']} ${styles['fontW600']} ${styles['pt-15']} ${styles['pb-5']}  ${styles['m-0']} ${styles['ellips']}`}>
                   {displayName}
                 </h5>
-                <span className={`${styles['offers-label-color']} ${styles['fontW600']} ${styles['fs-12']}`}>
-                  {
-                    offers.length > 1
-                    ?
-                    `${offers} Offers`
-                    :
-                    offers.length > 0 && (offers[0] <= 10 && offers[0] > 0)
-                    ?
-                    `${offers[0]} OFF`
-                    :
-                    null
-                  }
+                <span>
+                  <span className={`${styles['pr-10']} ${styles['fs-16']} ${styles['fontW600']}`}>{priceRange}</span>
+                  <span className={`${styles['offers-label-color']} ${styles['fontW600']} ${styles['fs-12']}`}>
+                    {
+                      offers.length > 1
+                        ?
+                        `${offers} Offers`
+                        :
+                        offers.length > 0 && (offers[0] <= 10 && offers[0] > 0)
+                          ?
+                          `${offers[0]} OFF`
+                          :
+                          null
+                    }
+                  </span>
                 </span>
               </div>
               {/* <div className={styles['variant-info']}>
@@ -115,10 +118,16 @@ class Product extends Component {
                 }
               </div> */}
             </div>
-            <div className={`${styles['hover-show-date']} ${styles['pb-10']} ${styles['pb-10']} ${styles['absolute']}`}>
+            <div className={`${styles['hover-show-date']} ${styles['pb-10']} ${styles['pb-10']} ${styles['relative']}`}>
               <div className={`${styles['flex']} ${styles['justify-around']} ${styles['quick-view']} ${styles['border-radius4']}`}>
-                <a>Quick View</a>
-                <a>Full View</a>
+                <a className={`${styles['flex']} ${styles['add-to-crt']} ${styles['justify-center']}`}>
+                  <SVGCompoent clsName={`${styles['cart-list']}`} src="icons/cart/blue-cart-icon" />
+                  <span className={styles['pl-5']}>Add to Cart</span>
+                </a>
+                <a className={`${styles['flex']} ${styles['buy-now-btn']} ${styles['justify-center']}`}>
+                  <SVGCompoent clsName={`${styles['cart-list']}`} src="icons/cart/buy-icon" />
+                  <span className={styles['pl-5']}>Buy Now</span>
+                </a>
               </div>
               <div className={`${styles['wish-list-part']} ${styles['flx-space-bw']}`}>
                 <span className={styles['flex']}>
@@ -142,8 +151,15 @@ class Product extends Component {
                   <span className={`${styles['fs-12']} ${styles['label-gry-clr']}`}>Denim shirt with baseball shirt stiff collar and formal tie</span>
                 </div>
                 <span>{priceRange}</span>
-                <div>
-                  <span className={`${styles['label-gry-clr']}`}>153 ratings </span>
+                <div className={styles['flex']}>
+                  <span className={styles['flex']}>
+                    <SVGCompoent clsName={`${styles['star-raing']}`} src="icons/common-icon/star-full-yellow" />
+                    <SVGCompoent clsName={`${styles['star-raing']}`} src="icons/common-icon/star-full-yellow" />
+                    <SVGCompoent clsName={`${styles['star-raing']}`} src="icons/common-icon/star-full-yellow" />
+                    <SVGCompoent clsName={`${styles['star-raing']}`} src="icons/common-icon/star-full-yellow" />
+                    <SVGCompoent clsName={`${styles['star-raing']}`} src="icons/common-icon/star-full-yellow" />
+                  </span>
+                  <span className={`${styles['label-gry-clr']} ${styles['pl-5']}`}>(153) </span>
                 </div>
               </div>
               <div className={styles['desc-cont']}>
@@ -170,12 +186,12 @@ Product.propTypes = {
 };
 
 const mapDispatchToProps = (dispatch) => {
-	return bindActionCreators(
-		{
-			addToWishlist: actionCreators.addToWishlist
-		},
-		dispatch,
-	);
+  return bindActionCreators(
+    {
+      addToWishlist: actionCreators.addToWishlist
+    },
+    dispatch,
+  );
 };
 
 export default connect(null, mapDispatchToProps)(Product);

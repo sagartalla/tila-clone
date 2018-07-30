@@ -32,6 +32,11 @@ const TitleInfo = ({ brand, title, rating, reviews, price, originalPrice, discou
         <div className={`${styles['flex']} ${styles['fs-12']} ${styles['pt-5']}`}>
           <div className={`${styles['ti-rating-wrap']} ${styles['pr-5']}`}>
             {rating.rating} {rating.count}
+            {/* <SVGCompoent clsName={`${styles['star-icon']}`} src="icons/common-icon/pink-star" />
+            <SVGCompoent clsName={`${styles['star-icon']}`} src="icons/common-icon/pink-star" />
+            <SVGCompoent clsName={`${styles['star-icon']}`} src="icons/common-icon/pink-star" />
+            <SVGCompoent clsName={`${styles['star-icon']}`} src="icons/common-icon/pink-star" />
+            <SVGCompoent clsName={`${styles['star-icon']}`} src="icons/common-icon/pink-star" /> */}
           </div>
           <div className={`${styles['ti-reviews-wrap']} ${styles['fs-12']}`}>
             <span className={`${styles['pr-5']} ${styles['pl-5']}`}>Read Expert Review</span>

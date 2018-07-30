@@ -203,7 +203,7 @@ class Payments extends React.Component {
                         showInstant={false}
                       />
                       <Cart
-                        paymentPageInclude={true}
+                        showMiniCart={true}
                         cartData={cartResults}
                         editCartDetails={editCartDetails}
                       />

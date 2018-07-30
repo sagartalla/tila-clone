@@ -12,6 +12,37 @@
     top 0
     &.faded
       background-color rgba(255,255,255, 0.95)
+  
+  .profile-part
+    .ple-icon
+      padding: 10px 20px;
+      border-bottom: 1px solid #efeff4
+      .icon
+        width 40px
+        height 40px
+        background-color thck-gry-clr
+        border-radius 40px
+    .profile-inn
+      line-height 3
+      background-color rgba(187, 210, 241, 0.09)
+      li
+        border-bottom: 1px solid #efeff4
+        border-left 2px solid transparent
+        &:hover
+          background-color white
+          font-weight bold
+          border-left 2px solid thick-red-arrow
+        a span 
+          color #000
+      .profile-icon
+        width 16px
+        height 30px
+      .support
+        span 
+          width: 20px
+          height: 20px
+          border-radius: 20px
+          border: solid 0.8px #2c2f33
   .header-megamenu
     box-shadow 0 3px 4px 0 rgba(0, 0, 0, 0.09)
     position relative
@@ -42,7 +73,7 @@
     padding 10px 20px
     font-size 16px
     border 0.5px solid border-gray
-    background light-gray-color
+    // background light-gray-color
     &[contenteditable=true]
       color #ccc
       white-space nowrap
@@ -58,14 +89,22 @@
 
   .search-btn
     position absolute
-    right 14px
-    top 10px
+    right 4px
+    width 30px
+    top 4px
+    border-radius 4px
+    display flex
+    align-items center
+    justify-content center
+    background suggest-label-gray
     border 0
+    bottom 4px
     .searching-icon
       position absolute
-      right 0
-      width 18px
-      top 0
+      // right 0
+      width 16px
+      height 16px
+      // top 0
 
 .actionbar-wrapper
   display flex
@@ -78,18 +117,57 @@
     // box-shadow 0 2px 4px 0 rgba(0,0,0,0.1)
     // margin 0 5px
     position relative
-    padding 0 15px
-    cursor pointer
-    border-right 1px solid border-gray
+    // padding 0 15px
+    // cursor pointer
+    // border-right 1px solid border-gray
     &:last-child
       border-right 0
+      padding-left 15px
+
+    > span
+      padding 0 15px
+      border-right 1px solid border-gray
+    
+    .cart-count
+      right -12px
+      top -8px
+      background pink-color
+      padding 0 4px
+      border-radius 4px
+
+  .cart-inn
+    .cart-item
+      padding: 0;
+      box-shadow: 0 0 7px 1px rgba(0,0,0,0.07);
+      right: -5%;
+      border: 0;
+      width: 340px;
+      left: auto;
+      top: 32px;
+      margin: 0;
+      &:before
+        content ''
+        background-color: white;
+        height: 15px;
+        width: 15px;
+        position: absolute;
+        right: 7%;
+        top: -8px;
+        transform: rotate(45deg);
+        border: 1px solid border-gray;
+        border-bottom: 0;
+        border-right: 0;
+        border-left: 1px solid border-gray;
+        border-top: 1px solid border-gray;
 
   .profile-login
     .item
+      padding: 0;
+      box-shadow: 0 0 7px 1px rgba(0, 0, 0, 0.07);
       min-width auto
       right -5%
       border 0
-      width 275px
+      width 230px
       left auto
       top 32px
       border: 1px solid border-gray;
@@ -108,13 +186,13 @@
         border-left: 1px solid border-gray;
         border-top: 1px solid border-gray;
 
-      .login-details-inn
-        border: 1px solid border-gray;
-        padding: 7px 15px;
+      // .login-details-inn
+      //   border: 1px solid border-gray;
+      //   padding: 7px 15px;
 
       .logout-icon, .login-icon
-        width 13px
-        height 16px
+        width 16px
+        height 34px
 
     .profile-edit
       position absolute
@@ -202,11 +280,11 @@ nav
 .action-item
   .wish-list-icon
   .cam-icon
-    width 20px
-    height 18px
+    width 17px
+    height 16px
 
   .cart-icon
-    width 20px
+    width 16px
     height 20px
 
 .logos-part
@@ -226,3 +304,6 @@ nav
     min-width auto
     &>li>a
       padding 3px 15px
+
+.mini-cart
+  height: auto;
