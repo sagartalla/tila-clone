@@ -80,7 +80,6 @@ const getProductComponent = (isPreview, taskCode) => {
       }
     }
 
-
     render() {
       const { productData } = this.props;
       const { catalog, titleInfo, keyfeatures, imgUrls, offerInfo, shippingInfo, returnInfo, details } = productData;

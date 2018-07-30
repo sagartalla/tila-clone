@@ -3,8 +3,8 @@ import axios from 'axios';
 
 import constants from '../helper/constants';
 
-const getCartDetailsApi = () => {
-  return axios.put(`${constants.CART_API_URL}/api/v1/cart/view`, {}).then(({ data }) => {
+const getCartDetailsApi = (params) => {
+  return axios.put(`${constants.CART_API_URL}/api/v1/cart/view`, (params ? params : {})).then(({ data }) => {
     return { data };
   });
 };
