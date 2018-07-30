@@ -17,7 +17,7 @@ const Landing = ({query}) => {
           'fashion': (<Fashion />),
           'electronics': (<Electronics />),
           'lifestyle': (<Lifestyle />),
-        }[category]
+        }[category || 'electronics']
       }
       <FooterBar />
     </Fragment>

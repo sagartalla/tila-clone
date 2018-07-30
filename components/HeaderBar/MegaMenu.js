@@ -42,7 +42,7 @@ class MegaMenu extends Component {
               :
               null
             }
-            <Link route={`/${childItem.displayName}-${childItem.id}?categoryTree=true&isListed=true`}>
+            <Link route={`/srp/${childItem.displayName}-${childItem.id}?categoryTree=true&isListed=true`}>
               <a className={`${styles['level-1-item']} ${depth === 1 ? styles['fontW600'] : {}}`}>{childItem.displayName}</a>
             </Link>
           </span>
