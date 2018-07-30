@@ -239,14 +239,42 @@
 
 .megamenu-wrapper
   overflow hidden
+  &.electronics
+    .active-menu-item
+      border-bottom: 4px solid electronics-color
+    ul li
+      &:hover
+        border-bottom: 4px solid electronics-color
+  &.fashion
+    .active-menu-item
+      border-bottom: 4px solid fashion-color
+    ul li
+      &:hover
+        border-bottom: 4px solid fashion-color
+  &.home-living
+    .active-menu-item
+      border-bottom: 4px solid lifestyle-color
+    ul li
+      &:hover
+        border-bottom: 4px solid lifestyle-color
   ul li
     border-bottom: 4px solid transparent
     margin 0 5px
     padding 10px
     &:hover
-      border-bottom: 4px solid border-pink
       div a
         font-weight 600
+        text-decoration: none;
+    &:active, &:focus
+      text-decoration: none;
+      color inherit
+
+  .electronics-item.active-menu-item
+    border-bottom: 4px solid electronics-color
+  .fashion-item.active-menu-item
+    border-bottom: 4px solid fashion-color
+  .home-living-item.active-menu-item
+    border-bottom: 4px solid lifestyle-color
 
 
 .megamenu-dropdown
@@ -255,19 +283,47 @@
   position absolute
   left 0
   z-index 1
+  display flex
+  &.electronics
+    .megamenu-sub-drop-down
+      >.megamenu-sub-list
+        >span a
+          color electronics-color
+  &.fashion
   .megamenu-sub-drop-down
-    width 100%
     >.megamenu-sub-list
-      width 20%
+      >span a
+        color fashion-color
+  &.home-living
+    .megamenu-sub-drop-down
+      >.megamenu-sub-list
+        >span a
+          color lifestyle-color
+  .megamenu-sub-drop-down
+    display flex
+    flex-wrap wrap
+    align-content flex-start
+    width 80%
+    >.megamenu-sub-list
+      width 25%
       float left
       >span a
-        color pink-color
         font-size 16px
       .megamenu-sub-child-list
         line-height 1.5
         font-size 12px
+        padding 5px
         a
           color light-gray-clr
+  .top-brands-trending-wrap
+    width 20%
+    .top-brands-wrap
+      width 100%
+      .megamenu-sub-list
+        width 100%
+        img
+          width 75px
+          height 25px
 
 nav
   ul
@@ -298,6 +354,11 @@ nav
 .megamenu-icon
   width 20px
   height 20px
+  position relative
+  left -10px
+  svg
+    width 100%
+    height 100%
 
 .country-dd
   button
