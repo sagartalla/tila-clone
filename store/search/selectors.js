@@ -107,14 +107,16 @@ const getUIState = (store) => {
   return store.searchReducer.ui;
 }
 
-const getCategoryId = (state, query) => {
+const getCategoryId = (store) => {
+  // DO NOT remove
   //not used for now. May be required when we have a different service for facets.
-  const category = _.find(state.searchReducer.data.categoryFilter.parentCategories, { canonicalId: query.category })
-  if (query.subCategory){
-    const subCategory = _.find(category.childCategories, {canonicalId: query.subCategory})
-    return subCategory.id;
-  }
-  return category.id;
+  // const category = _.find(state.searchReducer.data.categoryFilter.parentCategories, { canonicalId: query.category })
+  // if (query.subCategory){
+  //   const subCategory = _.find(category.childCategories, {canonicalId: query.subCategory})
+  //   return subCategory.id;
+  // }
+  // return category.id;
+  return store.searchReducer.data.searchDetails.categoryFilter.id;
 }
 
 const getQuery = (store) => {

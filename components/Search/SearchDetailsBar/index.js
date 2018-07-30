@@ -32,12 +32,12 @@ class SearchDetailsBar extends Component {
   }
 
   render() {
-    const { results } = this.props;
+    const { results, query, categoryId } = this.props;
     return (
       <Waypoint onEnter={this.handleWaypointEnter} onLeave={this.handleWaypointLeave}>
         <div className={styles['search-results-wrap']}>
           {
-            results.totalCount > 0 ?
+            (results.totalCount > 0 || query || categoryId) ?
               <Fragment>
                 <div className={`${styles['flx-space-bw']} ${styles['pb-10']} ${styles['items-list-show']}`}>
                   <h4 className={`${styles['meta-info']} ${styles['mt-0']} ${styles['mb-0']} ${styles['fontW300']}`}>{results.totalCount} {SEARCH_PAGE.NO_OF_ITEMS_FOUND}</h4>
@@ -80,6 +80,8 @@ class SearchDetailsBar extends Component {
 
 
 const mapStateToProps = (store) => ({
+  categoryId: selectors.getCategoryId(store),
+  query: selectors.getQuery(store),
   results: selectors.getSearchResutls(store),
   ui: selectors.getUIState(store),
 });
