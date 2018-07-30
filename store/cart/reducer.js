@@ -18,7 +18,11 @@ const cartReducer = typeToReducer({
     },
     FULFILLED: (state, action) => {
       // console.log(state, actions)
-      return Object.assign({}, state, { data: action.payload.data, ui: { loaded: true } });
+      return Object.assign({}, state, { 
+        data: {
+          ...state.data,
+          ...action.payload.data
+        }, ui: { loaded: true } });
     },
     REJECTED: (state, action) => {
 
@@ -50,7 +54,12 @@ const cartReducer = typeToReducer({
       return Object.assign({}, state, { error: '', ui: { loading: true } });
     },
     FULFILLED: (state, action) => {
-      return Object.assign({}, state, { data: action.payload.data, ui: { loading: false } });
+      return Object.assign({}, state, { 
+        data: { 
+          ...state.data,
+          ...action.payload.data
+        },
+        ui: { loading: false } });
     },
     REJECTED: (state, action) => {
       return Object.assign({}, state, {
@@ -66,7 +75,7 @@ const cartReducer = typeToReducer({
       return Object.assign({}, state, { error: '', ui: { loading: true } });
     },
     FULFILLED: (state, action) => {
-      return Object.assign({}, state, { data: action.payload.data, ui: { loading: false, loader: 'hide' } });
+      return Object.assign({}, state, { data: {...state.data, ...action.payload.data}, ui: { loading: false, loader: 'hide' } });
     },
     REJECTED: (state, action) => {
       return Object.assign({}, state, {
@@ -83,7 +92,7 @@ const cartReducer = typeToReducer({
       return Object.assign({}, state, { error: '', ui: { loading: true } });
     },
     FULFILLED: (state, action) => {
-      return Object.assign({}, state, { data: action.payload.data, ui: { loading: false } });
+      return Object.assign({}, state, { data: {...state.data, ...action.payload.data}, ui: { loading: false } });
     },
     REJECTED: (state, action) => {
       return Object.assign({}, state, {
