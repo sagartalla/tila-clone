@@ -54,7 +54,11 @@ class VaultBody extends Component {
                           <span className={`${styles['fs-12']}`}>{VAULT_PAGE.EXPIRY} : {expiry_month}/{expiry_year}</span>
                         </span>
                         <span className={`${styles['flex']}`}>
-                          <SVGComponent clsName={`${styles['vault-card']}`} src={this.paymentCardIcon(card.provider_type)} />
+                          {
+                            this.paymentCardIcon(card.provider_type) ?
+                              <SVGComponent clsName={`${styles['vault-card']}`} src={this.paymentCardIcon(card.provider_type)} />
+                              : ''
+                          }
                         </span>
                       </div>
                     </div>
