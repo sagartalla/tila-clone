@@ -38,7 +38,7 @@ class SearchResults extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(this.state.buyNow == true && (nextProps.isAddedToCart && !this.props.isAddedToCart)){
+    if(this.state.buyNow == true && (nextProps.isAddedToCart)){
        Router.pushRoute('/payment');
     }
   }
