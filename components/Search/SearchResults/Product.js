@@ -19,6 +19,8 @@ class Product extends Component {
     this.state = {};
     this.setImg = this.setImg.bind(this);
     this.addToWishlist = this.addToWishlist.bind(this);
+    this.addToCart = this.addToCart.bind(this);
+    this.buyNow = this.buyNow.bind(this);
   }
 
   setImg() {
@@ -30,11 +32,23 @@ class Product extends Component {
 
   addToWishlist(e) {
     e.stopPropagation();
-    const { productId: product_id, catalogId: catalog_id } = this.props;
+    const { productId: product_id, catalogId: catalog_id, variants } = this.props;
     this.props.addToWishlist({
       catalog_id,
       product_id,
     });
+  }
+
+  buyNow(e) {
+    e.stopPropagation();
+    const { variants } = this.props;
+    this.props.buyNow(variants.listingId[0]);
+  }
+
+  addToCart(e) {
+    e.stopPropagation();
+    const { variants } = this.props;
+    this.props.addToCart(variants.listingId[0]);
   }
 
   getOfferClassName(offer) {
@@ -120,11 +134,11 @@ class Product extends Component {
             </div>
             <div className={`${styles['hover-show-date']} ${styles['pb-10']} ${styles['pb-10']} ${styles['relative']}`}>
               <div className={`${styles['flex']} ${styles['justify-around']} ${styles['quick-view']} ${styles['border-radius4']}`}>
-                <a className={`${styles['flex']} ${styles['add-to-crt']} ${styles['justify-center']}`}>
+                <a className={`${styles['flex']} ${styles['add-to-crt']} ${styles['justify-center']}`} onClick={this.addToCart}>
                   <SVGCompoent clsName={`${styles['cart-list']}`} src="icons/cart/blue-cart-icon" />
                   <span className={styles['pl-5']}>Add to Cart</span>
                 </a>
-                <a className={`${styles['flex']} ${styles['buy-now-btn']} ${styles['justify-center']}`}>
+                <a className={`${styles['flex']} ${styles['buy-now-btn']} ${styles['justify-center']}`} onClick={this.buyNow}>
                   <SVGCompoent clsName={`${styles['cart-list']}`} src="icons/cart/buy-icon" />
                   <span className={styles['pl-5']}>Buy Now</span>
                 </a>
@@ -188,7 +202,7 @@ Product.propTypes = {
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
-      addToWishlist: actionCreators.addToWishlist
+      addToWishlist: actionCreators.addToWishlist,
     },
     dispatch,
   );
