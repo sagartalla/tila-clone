@@ -48,7 +48,13 @@ const actionCreators = {
   },
   resetAddtoCart: () => ({
     type: actions.RESET_ADD_TO_CART
-  })
+  }),
+
+  addToCartAndFetch: (params) => (dispatch, getState) => {
+    return dispatch(actionCreators.addToCart(params)).then(() => {
+      dispatch(actionCreators.getCartResults());
+    })
+  }
 };
 
 export { actions, actionCreators };

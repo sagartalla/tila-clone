@@ -50,7 +50,6 @@ const getProductComponent = (isPreview, taskCode) => {
       let scrollTop = event.currentTarget.pageYOffset;
       let detailsRect = this.detailsRef.current.getBoundingClientRect();
       let bottomRefRect = this.bottomRef.current.getBoundingClientRect();
-      console.log('asdsad', detailsRect.top, bottomRefRect.top);
       if(bottomRefRect.top <= window.innerHeight && this.state.stickyElements.details !== 'stateBottom'){
         this.setState({
           stickyElements: {

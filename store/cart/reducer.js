@@ -6,7 +6,8 @@ const initialState = {
     loading: false,
   },
   data: {
-    addToCart: {}
+    addToCart: {},
+    items: []
   },
   error: '',
 };
@@ -18,7 +19,7 @@ const cartReducer = typeToReducer({
     },
     FULFILLED: (state, action) => {
       // console.log(state, actions)
-      return Object.assign({}, state, { 
+      return Object.assign({}, state, {
         data: {
           ...state.data,
           ...action.payload.data
@@ -54,8 +55,8 @@ const cartReducer = typeToReducer({
       return Object.assign({}, state, { error: '', ui: { loading: true } });
     },
     FULFILLED: (state, action) => {
-      return Object.assign({}, state, { 
-        data: { 
+      return Object.assign({}, state, {
+        data: {
           ...state.data,
           ...action.payload.data
         },
