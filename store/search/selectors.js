@@ -1,6 +1,34 @@
 import shortid from 'shortid';
 import _ from 'lodash';
 
+const addCartAndWishlistDetails = (store, results) => {
+  const { items=[] } =  store.cartReducer.data;
+  const { data=[] } = store.wishlistReducer;
+
+  if(items === null){
+    return results;
+  }
+  // if(items && items.length){
+  //   return results;
+  // }
+  // if(data && data.length) {
+  //   return resutls;
+  // }
+
+  const cartListingIds = items.map((i) =>  i.listing_id) || [];
+  const wishListProductIds = store.wishlistReducer.data.map((w) => w.product_id) || [];
+  return {
+    ...results,
+    items: results.items.map((i) => {
+      return ({
+        ...i,
+        addedToCart: cartListingIds.indexOf(i.variants.listingId[0]) !== -1,
+        addedToWishlist: wishListProductIds.indexOf(i.productId) !== -1,
+      });
+    }),
+  };
+};
+
 const getSearchFilters = (store) => {
   const filters = {
     category: [],
@@ -93,7 +121,7 @@ const getSearchResutls = (store) => {
       };
     });
   }
-  return resutls;
+  return addCartAndWishlistDetails(store, resutls);
 }
 
 const getPaginationDetails = (store) => {
@@ -148,5 +176,4 @@ const getSearchBarFilterState = (state) => {
   return state.searchReducer.ui.showFilters;
 }
 
-
-export { getSearchFilters, getSearchResutls, getPaginationDetails, getUIState, getCategoryId, getQuery, getFacetfilters, optionParams, getSearchBarFilterState };
+export { getSearchFilters, getSearchResutls, getPaginationDetails, getUIState, getCategoryId, getQuery, getFacetfilters, optionParams, getSearchBarFilterState, addCartAndWishlistDetails };

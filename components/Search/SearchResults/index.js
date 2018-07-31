@@ -7,11 +7,12 @@ import Product from "./Product";
 import SVGCompoent from '../../common/SVGComponet';
 import { actionCreators, selectors } from '../../../store/search';
 import { actionCreators as cartActionCreators, selectors as cartSelector } from '../../../store/cart'
+import { actionCreators as wishlistActionCreators } from '../../../store/cam/wishlist'
 import { mergeCss } from '../../../utils/cssUtil';
 import { Router } from '../../../routes';
 const styles = mergeCss('components/Search/search');
 
-class SearchReuslts extends Component {
+class SearchResults extends Component {
 
   constructor(props) {
     super(props);
@@ -44,6 +45,7 @@ class SearchReuslts extends Component {
 
   componentDidMount(){
     this.props.resetAddtoCart();
+    this.props.getWishlist();
   }
 
   buyNow(listingId) {
@@ -55,7 +57,7 @@ class SearchReuslts extends Component {
   }
 
   addToCart(listingId) {
-    this.props.addToCart({
+    this.props.addToCartAndFetch({
       listing_id: listingId
     });
   }
@@ -91,17 +93,18 @@ const mapStateToProps = (store) => ({
   results: selectors.getSearchResutls(store),
   pagiantionDetails: selectors.getPaginationDetails(store),
   ui: selectors.getUIState(store),
-  isAddedToCart: cartSelector.isAddedToCart(store)
+  isAddedToCart: cartSelector.isAddedToCart(store),
 });
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       getSearchResults: actionCreators.getSearchResults,
-      addToCart: cartActionCreators.addToCart,
+      addToCartAndFetch: cartActionCreators.addToCartAndFetch,
       resetAddtoCart: cartActionCreators.resetAddtoCart,
+      getWishlist: wishlistActionCreators.getWishlist,
     },
     dispatch,
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchReuslts);
+export default connect(mapStateToProps, mapDispatchToProps)(SearchResults);

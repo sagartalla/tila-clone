@@ -85,7 +85,7 @@ class RangeFitler extends Component {
             {filter.children[0].values.map((value) => <option value={value} key={value}>{value}</option>)}
           </select>
           <span className={`${styles['pl-10']} ${styles['pr-10']}`}>to</span>
-          <select className={styles['price-select-list']} componentClass="select" placeholder="select" onChange={this.maxChange} value={this.state.value.max}>
+          <select className={styles['price-select-list']} componentclass="select" placeholder="select" onChange={this.maxChange} value={this.state.value.max}>
             <option value="select">select (maximum)</option>
             {filter.children[0].values.map((value) => <option value={value} key={value}>{value}</option>)}
           </select>
