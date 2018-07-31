@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Grid, Row, Col } from 'react-bootstrap';
-import ShippingAddress from '../../Cam/ShippingAddress';
-import SVGComponent from '../../common/SVGComponet';
+import { Row, Col } from 'react-bootstrap';
+
 import Voucher from './paymentpages/Voucher';
-import RewardPoints from './paymentpages/RewardPoints';
-import PayOnline from './paymentpages/PayOnline';
 import GiftCard from './paymentpages/GiftCard';
+import SVGComponent from '../../common/SVGComponet';
+import PayOnline from './paymentpages/PayOnline';
 import NetBanking from './paymentpages/NetBanking';
+import RewardPoints from './paymentpages/RewardPoints';
 import CashOnDelivery from './paymentpages/CashOnDelivery';
 
 import { mergeCss } from '../../../utils/cssUtil';
