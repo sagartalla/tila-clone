@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="47" height="43" viewBox="0 0 47 43">
+    <defs>
+        <path id="a" d="M4 0h39a4 4 0 0 1 4 4v35a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V4a4 4 0 0 1 4-4z"/>
+        <mask id="b" width="47" height="43" x="0" y="0" fill="#fff">
+            <use xlink:href="#a"/>
+        </mask>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <path fill="#fff" d="M-875-873h1920V324H-875z"/>
+        <g opacity=".7">
+            <use stroke="#979797" stroke-dasharray="3,1" stroke-width="2" mask="url(#b)" opacity=".4" xlink:href="#a"/>
+            <path d="M4 2h40v40H4z"/>
+            <g fill="#000" fill-rule="nonzero" opacity=".7">
+                <path d="M30.95 21.782V8.122c0-.618-.517-1.122-1.153-1.122H18.203c-.636 0-1.153.504-1.153 1.123v13.659h13.9zM33 25.711v-1.56c0-.618-.517-1.122-1.153-1.122H16.153c-.636 0-1.153.504-1.153 1.123v1.559c0 .619.517 1.123 1.153 1.123h15.694c.636 0 1.153-.504 1.153-1.123zM16.601 28.081v8.295c0 .345.287.624.641.624.354 0 .64-.28.64-.624v-8.295h-1.28zM30.117 28.081v8.295c0 .345.287.624.641.624.354 0 .64-.28.64-.624v-8.295h-1.28z"/>
+            </g>
+        </g>
+    </g>
+</svg>
