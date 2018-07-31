@@ -18,6 +18,7 @@ import RightSideBar from '../common/CartPaymentSideBar';
 import SignIn from './includes/SignIn';
 import DeliveryAddress from './includes/DeliveryAddress';
 import PaymentMode from './includes/PaymentMode';
+import Loyalty from './includes/Loyalty';
 
 import Cart from '../Cart';
 
@@ -185,6 +186,8 @@ class Payments extends React.Component {
                 defaultAddress={defaultAddress}
                 editAddress={this.editAddress}
               />
+              <Loyalty />
+
               <PaymentMode
                 data={paymentOptions}
                 showTab={showTab}

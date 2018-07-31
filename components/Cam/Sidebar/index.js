@@ -7,13 +7,13 @@ import data from '../list.json';
 import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Cam/Sidebar/sidebar');
 
-const Sidebar = () => (
+const Sidebar = ({query}) => (
   <div className={styles['sidebar-container']}>
     <div>
-      <UserProfile />
+      <UserProfile query={query} />
     </div>
     <div>
-      <List data={data} />
+      <List query={query}  data={data} />
     </div>
   </div>
 );
