@@ -10,7 +10,8 @@ const { COMPARE } = languageDefinations();
 
 class CompareWidget extends Component {
   render() {
-    (
+    const { compareCount } = this.props;
+    return (
       <div>
         <div>{COMPARE.COMPARE} {compareCount}</div>
       </div>

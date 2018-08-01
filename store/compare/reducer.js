@@ -6,7 +6,8 @@ const initialState = {
     loading: false,
   },
   data: {
-    compareItemsCount: 0
+    compareItemsCount: 0,
+    compareInfo: []
   },
   error: null,
 };
@@ -19,6 +20,7 @@ const compareReducer = typeToReducer({
     FULFILLED: (state, action) => {
       return Object.assign({}, state, {
         data: {
+          ...state.data,
           compareItemsCount: action.payload.count
         },
         ui: { loading: false }
@@ -27,6 +29,22 @@ const compareReducer = typeToReducer({
     REJECTED: (state, action) => {
       return Object.assign({}, state, { error: action.payload.error, ui: { loading: false } })
     },
+  },
+  [actions.GET_COMPARE_ITEM_DATA]: {
+    PENDING: state => {
+      return Object.assign({}, state, { ui: { loading: true } });
+    },
+    FULFILLED: (state, action) => ({
+      ...state,
+      data: {
+        ...state.data,
+        compareInfo: action.payload.data,
+      },
+      ui: { loading: false }
+    }),
+    REJECTED: (state, action) => {
+      return Object.assign({}, state, { error: action.payload.error, ui: { loading: false } })
+    }
   }
 }, initialState);
 

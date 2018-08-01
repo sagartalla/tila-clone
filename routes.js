@@ -9,6 +9,7 @@ routes
   .add({ name: 'Cart', pattern: '/cart', page: 'cart' })
   .add({ name: 'payment', pattern: '/payment', page: 'payment' })
   .add({ name: 'thankyou', pattern: '/thankyou/:orderId/:status(SUCCESSFUL|FAILURE)', page: 'thankyou' })
+  .add({ name: 'compare', pattern: '/compare', page: 'compare' })
   .add({ name: 'search', pattern: '/:category?/:subCategory?', page: 'index' })
   ;
 

@@ -7,6 +7,7 @@ import FooterBar from '../Footer/index';
 import CategoriesAndFacets from './CategoriesAndFacets';
 import SearchDetailsBar from './SearchDetailsBar';
 import SearchResults from './SearchResults';
+import CompareWidget from '../common/CompareWidget';
 
 import { mergeCss } from '../../utils/cssUtil';
 const styles = mergeCss('components/Search/search');
@@ -26,7 +27,6 @@ const Search = () => (
       </div>
     </Grid>
     <FooterBar />
-    <CompareWidget/>
   </div>
 );
 
