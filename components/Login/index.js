@@ -50,10 +50,15 @@ class Login extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    let { userCreds } = nextProps;
+    let { userCreds, error } = nextProps;
     userCreds = userCreds || this.props.userCreds
+    if(error){
+      this.setState({
+        error
+      });
+      return;
+    }
     this.setState({
-      error: nextProps.error,
       email: userCreds.username,
       password: userCreds.password,
     });
@@ -116,14 +121,14 @@ class Login extends Component {
             {
               this.state.mode === 'register'
               ?
-              
+
                   <div className={styles['group']}>
                     <input onChange={this.onChangeField} name="country" type="text" value={this.state.country} required />
                     <span className={styles['highlight']}></span>
                     <span className={styles['bar']}></span>
                     <label>+91</label>
                   </div>
-           
+
               :
               null
             }
@@ -131,7 +136,7 @@ class Login extends Component {
             {
               this.state.mode === 'register'
               ?
-                
+
                   <Col md={9} xs={10} mdOffset={1}>
                     <div className={styles['group']}>
                       <input onChange={this.onChangeField} name="phone" type="text" value={this.state.phone} required />
@@ -140,7 +145,7 @@ class Login extends Component {
                       <label>Phone</label>
                     </div>
                   </Col>
-               
+
               :
               null
             }
@@ -184,7 +189,7 @@ class Login extends Component {
             </h4>
           }
           </div>
-      
+
         </Col>
       </Row>
     );
