@@ -14,13 +14,14 @@ import Cam from '../components/Cam';
 class CamPage extends Base {
   pageName = 'CAM';
   render(){
-   return (
-    <Layout>
-      <NoSSR>
-        <Cam tabDetails={this.props.url.query.tabDetails}/>
-      </NoSSR>
-    </Layout>
-   );
+    const { url } = this.props;
+    return (
+      <Layout>
+        <NoSSR>
+          <Cam tabDetails={url.query.tabDetails} query={url.query}/>
+        </NoSSR>
+      </Layout>
+    );
   }
 }
 

@@ -7,7 +7,7 @@ const getCartResults = (store) => {
     const img_url = 'https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/';
     const newData = { items: [], total_price: 0, ui };
 
-    if (data.items) {
+    if (data.items !== null && data.items.length) {
       newData.total_price = data.total_price;
       newData.total_offer_price = data.total_offer_price;
       newData.total_discount = data.total_discount;

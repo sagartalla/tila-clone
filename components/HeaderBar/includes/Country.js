@@ -70,7 +70,7 @@ class Country extends Component {
         <Dropdown.Menu className={styles['item']}>
           {
             _.map(countriesData, (country) => (
-              <MenuItem eventKey="1" onClick={this.changeCountry} data-id={country.id}>
+              <MenuItem key={country.name} eventKey="1" onClick={this.changeCountry} data-id={country.id}>
                 <img src={country.img} title={country.name}/>
               </MenuItem>
             ))

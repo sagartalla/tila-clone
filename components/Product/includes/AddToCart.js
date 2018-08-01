@@ -31,7 +31,7 @@ class AddToCart extends Component {
 
   addToCart() {
     const { listingId } = this.props.offerInfo
-    this.props.addToCart({
+    this.props.addToCartAndFetch({
       listing_id: listingId
     });
   }
@@ -45,7 +45,7 @@ class AddToCart extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(this.state.buyNow == true && (nextProps.isAddedToCart && !this.props.isAddedToCart)){
+    if(this.state.buyNow == true && nextProps.isAddedToCart){
        Router.pushRoute('/payment');
     }
   }
@@ -64,7 +64,7 @@ class AddToCart extends Component {
     (
       <div className={`${styles['pt-25']} ${styles['flx-space-bw']} ${styles['addto-cart']} ${styles['border-t']}`}>
         <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['fp-btn-x-large']}`} onClick={this.addToCart} disabled={isLoading || isAddedToCart} >{isAddedToCart ? PDP.ADDED_TO_CART : PDP.ADD_TO_CART}</button>
-        <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-x-large']}`} onClick={this.buyNow} disabled={isLoading || isAddedToCart} >{PDP.BUY_NOW}</button>
+        <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-x-large']}`} onClick={this.buyNow}>{PDP.BUY_NOW}</button>
       </div>
     );
   }
@@ -81,7 +81,7 @@ const mapStateToProps = (store) => {
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
-      addToCart: actionCreators.addToCart,
+      addToCartAndFetch: actionCreators.addToCartAndFetch,
       resetAddtoCart: actionCreators.resetAddtoCart,
     },
     dispatch,

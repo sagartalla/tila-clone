@@ -26,7 +26,7 @@ class Cam extends React.Component {
   }
 
   render() {
-    const {tabDetails} = this.props;
+    const {tabDetails, query} = this.props;
     const [tab, ...queryParams] = tabDetails ? tabDetails.split('/') : [];
     const camComponent = ((tabName) => {
       switch (tabName) {
@@ -55,7 +55,7 @@ class Cam extends React.Component {
           <Grid>
             <Row className={styles['pt-30']}>
               <Col xs={12} md={3} className={styles['pr-0']}>
-                <Sidebar />
+                <Sidebar query={query} />
               </Col>
               <Col xs={12} md={9}>
                 {camComponent}
