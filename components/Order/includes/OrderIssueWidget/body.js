@@ -106,7 +106,7 @@ class Body extends Component {
     const { orderIssue } = this.props;
     const { step } = orderIssue;
     return (
-      <div className={styles['widget-body']}>
+      <div>
         {this.getBody(step)}
       </div>
     )

@@ -78,7 +78,6 @@ class RangeFitler extends Component {
       <li>
         <div className={`${styles['category-list-title']} ${styles['black-color']} ${styles['fontW600']} ${styles['p-10-20']} ${styles['flx-spacebw-alignc']}`}>
           {filter.name}
-          <SVGCompoent clsName={`${styles['expand-icon']}`} src="icons/common-icon/down-arrow-circle" />
         </div>
         <div className={`${styles['flx-spacebw-alignc']} ${styles['p-10-20']}`}>
           <select className={styles['price-select-list']} componentclass="select" placeholder="select" onChange={this.minChange} value={this.state.value.min}>
@@ -86,7 +85,7 @@ class RangeFitler extends Component {
             {filter.children[0].values.map((value) => <option value={value} key={value}>{value}</option>)}
           </select>
           <span className={`${styles['pl-10']} ${styles['pr-10']}`}>to</span>
-          <select className={styles['price-select-list']} componentClass="select" placeholder="select" onChange={this.maxChange} value={this.state.value.max}>
+          <select className={styles['price-select-list']} componentclass="select" placeholder="select" onChange={this.maxChange} value={this.state.value.max}>
             <option value="select">select (maximum)</option>
             {filter.children[0].values.map((value) => <option value={value} key={value}>{value}</option>)}
           </select>

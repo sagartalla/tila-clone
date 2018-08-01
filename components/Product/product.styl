@@ -2,17 +2,46 @@
 @import '/static/vendor/css/slick-theme.min.css';
 @import '../../layout/main/executables.styl';
 
+.pdp-wrap
+  .pdp-bottom-ref-pixel
+    position absolute
+    width 0
+    height 0
+    bottom 0
+    right 0
+    position absolute
 .page-details-slider
   background-color #F1F2F4
+  height calc(100vh - 105px)
+  .details-pixel
+    width 0
+    height 0
+    top 0
+    right 0
+    position absolute
   .details-right-part
     background-color rgba(255, 255, 255, 0.7)
     box-shadow 0 0 7px 0 rgba(225,225,225,0.5)
-    position absolute
     // z-index 99
     width 35%
     right 0
+    bottom 0
+    top 0
+    height calc(100vh - 103px)
+    &.stateTop
+      position absolute
+      top 0
+    &.stateMiddle
+      position fixed
+      top 61px
+      z-index 1
+    &.stateBottom
+      position absolute
+      bottom 0
+      top auto
     .details-right-part-inn
       padding 35px 20px
+
       .ti-reviews-wrap
         span
           &:nth-child(2)
@@ -25,14 +54,33 @@
     .addto-cart
       background-color white
       padding 35px 20px
+      position absolute
+      bottom 0
+      left 0
+      right 0
     .buy-coupon
       width 16px
       height 16px
 
-.display-item-wrap
-  // margin-bottom 50px
+    .warrenty-part
+      color rgba(0, 0, 0, 0.5)
+      .return-icon
+        width 20px
+      .secure-icon
+        width 13px
+        height 15px
+
+    .pdp-deliver-list
+      width 60%
+      .auto-suggestions-wrap
+        width 60%
+        input
+          font-size 12px
+  .display-item-wrap
+    height calc(100% - 111px)
+
 .carousel-item-wrap
-  height 70px
+  height 70px !important
   width: 100%;
   display: inline-block;
   border-radius 4px
@@ -43,19 +91,17 @@
     border-radius 4px
 .selected-item-wrap
   display block
-  height 730px;
   img
     height 100%
     margin 0 auto
 .c-group-countainer
   display block
   margin 10px 0
-  &:nth-child(even)
-    background generic-gray-color
 
 .added-to-cart
   background #20bd99
   color white
+
 
 .slick-slide
   width: 128px;
@@ -77,7 +123,7 @@
     label
       cursor pointer;
       border 1px solid transparent;
-      width-height-radius(30px, 30px, 50%)
+      // width-height-radius(30px, 30px, 50%)
       margin 0
 
   .size-btn-main input:checked + label {

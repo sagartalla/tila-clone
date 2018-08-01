@@ -1,28 +1,43 @@
 import { Grid, Row, Col } from 'react-bootstrap';
 import NoSSR from 'react-no-ssr';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import Logo from './Logo';
 import Search from './Search';
 import ActionBar from './ActionBar';
 import MegaMenu from './MegaMenu';
+import SearchFilters from '../common/SearchFilters';
 import { mergeCss } from '../../utils/cssUtil';
 import publicUrls from '../../constants';
+import { actionCreators, selectors } from '../../store/search';
 const styles = mergeCss('components/HeaderBar/header');
 
 const HeaderBar = props => (
   <div className={styles['header-container']}>
-    <div className={styles['header-container-inn']}>
+    <div className={`${styles['header-container-inn']} ${ props.showFitlers ? styles['faded'] : {} }`}>
       <Grid>
         <Row className={`${styles['flex-center']} ${styles['pb-10']} ${styles['pt-10']} ${styles['border-b']}`}>
           <Col md={1}>
             <Logo />
           </Col>
-          <Col md={7}>
+          <Col md={props.showFitlers ? 6 : 7}>
             <NoSSR>
               <Search />
             </NoSSR>
           </Col>
-          <Col md={4}>
+          {
+            props.showFitlers
+            ?
+            <Col md={4}>
+              <div className={`${styles['flex-center']}`}>
+                <SearchFilters />
+              </div>
+            </Col>
+            :
+            null
+          }
+          <Col md={props.showFitlers ? 3 : 4 }>
             <ActionBar />
           </Col>
         </Row>
@@ -33,7 +48,7 @@ const HeaderBar = props => (
       <Grid className={styles['header-meganenu-sub']}>
         <Row>
           <Col md={12}>
-            <MegaMenu />
+            <MegaMenu query={props.query} />
           </Col>
         </Row>
       </Grid>
@@ -41,4 +56,7 @@ const HeaderBar = props => (
   </div>
 );
 
-export default HeaderBar;
+const mapStateToProps = (store) => ({
+  showFitlers: selectors.getSearchBarFilterState(store)
+});
+export default connect(mapStateToProps, null)(HeaderBar);

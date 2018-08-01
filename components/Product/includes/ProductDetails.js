@@ -12,7 +12,7 @@ import { languageDefinations } from '../../../utils/lang';
 const styles = mergeCss('components/Product/product');
 const { PDP } = languageDefinations();
 
-const ProductDetails =({details, keyfeatures}) => {
+const ProductDetails =({details, keyfeatures, isPreview}) => {
   return (
     <div className={`${styles['product-details-main']} ${styles['p-15']} ${styles['border-radius4']} ${styles['box']}`}>
       {
@@ -29,7 +29,9 @@ const ProductDetails =({details, keyfeatures}) => {
           null
       }
       <NoSSR>
-        <Variants />
+        {
+          isPreview ? null : <Variants />
+        }
       </NoSSR>
       {/*
         <div className={`${styles['flex']} ${styles['pt-10']} ${styles['pb-10']} ${styles['border-b']}`}>

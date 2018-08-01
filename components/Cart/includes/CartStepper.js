@@ -9,7 +9,7 @@ const CartStepper = props => {
   const { item, decreaseItemCnt, increaseItemCnt } = props;
   const { item_id, quantity, max_limit, inventory } = item;
   const { CART_PAGE } = languageDefinations();
-
+  
   return (
     <div className={styles['cart-stepper']}>
       {

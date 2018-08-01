@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
-import { languageDefinations } from '../../../utils/lang/';
+import moment from 'moment';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
-import RightBar from '../../common/CartAndPaymentRightBar';
+
+import CartStepper from './CartStepper';
 import Blocker from '../../common/Blocker';
 import SVGComponent from '../../common/SVGComponet';
-import CartStepper from './CartStepper';
+import RightBar from '../../common/CartPaymentSideBar';
+import { languageDefinations } from '../../../utils/lang/';
 
 import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Cart/cart');
 
 const CartBody = props => {
-  const { showBlocker, increaseItemCnt, decreaseItemCnt, data, removeCartItem, checkoutBtnHandler, addToWishlist } = props;
+  const { showBlocker, increaseItemCnt, decreaseItemCnt, data, removeCartItem, checkoutBtnHandler, addToWishlist, addOrRemoveGift } = props;
   const { items, error } = data;
   const flag = data && items && items.length;
   const cnt = flag > 0 ? items.length : 0;
@@ -25,7 +27,6 @@ const CartBody = props => {
       <Row>
         <Col md={12} sm={12} xs={12}>
           <h4 className={`${styles['mt-20']} ${styles['mb-20']} ${styles['fontW300']} ${styles['fs-20']} ${styles['light-gry-clr']} ${styles['text-capitalize']}`}>
-            {/* {flag > 0 ? <span>{cnt} item{cnt > 1 ? 's' : ''} in cart</span> : <span>0 {CART_PAGE.ITEMS_IN_CART}</span>} */}
             <span>{cnt + ' ' + CART_PAGE.ITEMS_IN_CART}</span>
           </h4>
         </Col>
@@ -37,7 +38,7 @@ const CartBody = props => {
               <div>
                 {
                   items.map((item, index) => {
-                    const { item_id, img, name, price, cur, quantity, max_limit, inventory, brand_name } = item;
+                    const { item_id, img, name, price, cur, quantity, max_limit, inventory, brand_name, gift_info, shipping, warranty } = item;
                     return (
                       <div key={item_id} className={`${styles['mb-20']} ${styles['box']}`}>
                         {
@@ -63,18 +64,22 @@ const CartBody = props => {
                                 <Col md={10}>
                                   <h4 className={`${styles['fontW600']} ${styles['light-gry-clr']}`}>{name}</h4>
                                   <div className={`${styles['warranty-part']} ${styles['p-10']} ${styles['light-gry-clr']}`}>
-                                    <p className={`${styles['fs-12']}`}><span>Warranty : </span><span className={`${styles['pl-10']} ${styles['pr-10']}`}>+18 Month Extended Manufacturer Warranty </span><a href="" className={`${styles['fontW600']}`}>View More</a></p>
-                                    <p className={`${styles['mb-0']} ${styles['fs-12']}`}><span>Shipping : </span><span className={`${styles['pl-10']} ${styles['pr-10']}`}>Fast Shipping  (5.00 AED) - <span className={`${styles['fs-12']} ${styles['base-font']}`}>Estimated Delivery by 28th Nov, 17</span> </span><a href="" className={`${styles['fontW600']}`}>View More</a></p>
+                                    <p className={`${styles['fs-12']}`}><span>{CART_PAGE.WARRENTY} : </span><span className={`${styles['pl-10']} ${styles['pr-10']}`}>{warranty[0].duration} {CART_PAGE.WARRENTY_TXT} </span><a href="" className={`${styles['fontW600']}`}>{CART_PAGE.VIEW_MORE}</a></p>
+                                    <p className={`${styles['mb-0']} ${styles['fs-12']}`}>
+                                      <span>{CART_PAGE.SHIPPING} : </span>
+                                      <span className={`${styles['pl-10']} ${styles['pr-10']}`}>{CART_PAGE.REGULAR_SHIPPING}  ({shipping.shipping_fees + ' ' + cur}) - <span className={`${styles['fs-12']} ${styles['base-font']}`}>{CART_PAGE.ETA_DELIVERY_BY} {moment().add(shipping.shipping_days, 'days').format('LL')}</span>
+                                      </span><a href="" className={`${styles['fontW600']}`}> {CART_PAGE.VIEW_MORE}</a>
+                                    </p>
                                   </div>
-                                  <div className={`${styles['checkbox-material']} ${styles['mt-15']}`}>
-                                    <input id="send-gift" type="checkbox" />
-                                    <label for="send-gift"> Send this as a gift (5.00 AED) </label>
+                                  <div data-id={item_id} className={`${styles['checkbox-material']} ${styles['mt-15']}`}>
+                                    <input data-id={item_id} id={"gift" + item_id} type="checkbox" checked={gift_info ? true : false} onClick={addOrRemoveGift} />
+                                    <label htmlFor={"gift" + item_id}> {CART_PAGE.SEND_GIFT} {gift_info ? "(" + gift_info.gift_rate + " " + cur + ")" : ''} </label>
                                   </div>
                                 </Col>
                                 <Col md={2} className={`${styles['pl-0']}`}>
                                   <h4 className={`${styles['fontW600']} ${styles['light-gry-clr']} ${styles['mt-15']} ${styles['t-rt']}`}>{price + ' ' + cur}</h4>
                                   <p className={`${styles['t-rt']}`}>0.00 <span className={`${styles['fs-12']}`}>SAR</span></p>
-                                  <p className={`${styles['t-rt']}`}>0.00 <span className={`${styles['fs-12']}`}>SAR</span></p>
+                                  <p className={`${styles['t-rt']}`}>{shipping.shipping_fees} <span className={`${styles['fs-12']}`}>{cur}</span></p>
                                 </Col>
                               </Row>
                             </Col>
@@ -118,9 +123,9 @@ const CartBody = props => {
                   </Col>
                   <Col md={6}>
                     {
-                      [...Array(6).keys()].map(() => {
+                      [...Array(6).keys()].map((i) => {
                         return (
-                          <span className={`${styles['wishlist-img']} ${styles['mr-15']}`}><img src={wishlistImgPath} /></span>
+                          <span key={i} className={`${styles['wishlist-img']} ${styles['mr-15']}`}><img src={wishlistImgPath} /></span>
                         )
                       })
                     }
@@ -136,12 +141,13 @@ const CartBody = props => {
               <div className={`${styles['box']}`}>
                 <RightBar
                   data={data}
+                  showInstant={true}
                   showCheckoutBtn={true}
                   checkoutBtnHandler={checkoutBtnHandler}
                 />
               </div>
               <div className={styles['secure-img']}>
-                <img className={styles['']} src={"/static/img/bg-img/group-cards.png"}/>
+                <img className={styles['']} src={"/static/img/bg-img/group-cards.png"} />
               </div>
             </Col>
           </Row>

@@ -75,7 +75,7 @@ class SignIn extends Component {
               <div className={`${styles['mt-10']} ${styles['mb-10']}`}>
                 <input type="checkbox" defaultChecked="true" /> I agree to the <a onClick={this.tcToggle}>T&C</a> and <a onClick={this.privacyToggle}>Privacy Policy</a>
               </div>
-              <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles['fontW600']} ${styles['text-uppercase']}`} onClick={props.showAddress}>{PAYMENT_PAGE.CONTINUE}</button>
+              <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles['fontW600']} ${styles['text-uppercase']}`} onClick={props.showAddressTab}>{PAYMENT_PAGE.CONTINUE}</button>
               {
                 props.signInLoader ? <span> {PAYMENT_PAGE.PLEASE_WAIT}...</span> : null
               }

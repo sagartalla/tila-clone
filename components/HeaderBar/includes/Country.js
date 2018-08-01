@@ -37,11 +37,13 @@ class Country extends Component {
   }
 
   componentDidMount() {
-		const country = cookies.get('country') || this.state.country;
-		this.setState({
-      selectedItem: country
-    });
-		this.props.setCountry(country);
+  	const country = cookies.get('country') || this.state.selectedItem;
+  	if(country){
+  	  this.setState({
+        selectedItem: country
+      });
+  	}
+  	this.props.setCountry(country);
 	}
 
   changeCountry(e) {
@@ -68,7 +70,7 @@ class Country extends Component {
         <Dropdown.Menu className={styles['item']}>
           {
             _.map(countriesData, (country) => (
-              <MenuItem eventKey="1" onClick={this.changeCountry} data-id={country.id}>
+              <MenuItem key={country.name} eventKey="1" onClick={this.changeCountry} data-id={country.id}>
                 <img src={country.img} title={country.name}/>
               </MenuItem>
             ))

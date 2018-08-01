@@ -29,8 +29,8 @@ class Messages extends Component {
   render() {
     const { results } = this.props;
     return (
-      <div className={`${styles['ml-20']}`}>
-        <h3>Messages</h3>
+      <div className={`${styles['ml-5']}`}>
+        <h3 className={styles['mt-0']}>Messages</h3>
         <h6>Today</h6>
 
         {

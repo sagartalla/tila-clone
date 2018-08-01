@@ -56,6 +56,7 @@ const getSearchResultsApi = ({
       categoryFilter,
       shippingDetails,
       sort,
+      categoryTree,
     };
     data.geoDetails = {
       country,

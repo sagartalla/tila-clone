@@ -19,6 +19,13 @@ export const EN_KEYWORDS = {
     'UNITS_LEFT': 'units left',
     'OUT_OF_STOCK': 'Out of stock',
     'MOVE_TO_WISHLIST': 'Move to Wishlist',
+    'SEND_GIFT': 'Send this as a gift',
+    'SHIPPING': 'Shipping',
+    'WARRENTY': 'Warrenty',
+    'WARRENTY_TXT': 'Months Extended Manufacturer Warranty',
+    'ETA_DELIVERY_BY': 'Estimated Delivery by',
+    'REGULAR_SHIPPING': 'Regular Shipping',
+    'VIEW_MORE': 'View More',
     'MAX_PER_ORDER': 'Max per order quantity of this item reached.'
   },
   PAYMENT_PAGE: {
@@ -82,7 +89,7 @@ export const EN_KEYWORDS = {
     'PRODUCT_DETAILS': 'PRODUCT DETAILS',
     'ADD_TO_CART': 'ADD TO CART',
     'BUY_NOW': 'BUY NOW',
-
+    'ADDED_TO_CART': 'ADDED TO CART'
   },
   VAULT_PAGE: {
     'MANAGE_VAULT_HDR': 'Manage Cards, Vouchers and More',

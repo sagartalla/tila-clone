@@ -6,11 +6,12 @@ const getOrderDetails = ({ orderId }) => {
   return axios.get(`${constants.ORDERS_API_URL}/api/v1/customer/order/details/${orderId}?include_state_times=true&include_payments=true`)
 }
 
-const getReasons = () => axios.get(`${constants.ORDERS_API_URL}/api/v1/return/reasons`);
+const getReasons = (params) => axios.get(`${constants.ORDERS_API_URL}/api/v1/return/reasons?order_item_id=${params.orderItemId}`);
 
 const submitCancelRequest = (params) => axios.post(`${constants.ORDERS_API_URL}/api/v1/order_item/delivery/${params.orderItemId}/request_cancel`, {
   reason: params.reason,
-  comment: params.comment
+  comment: params.comment,
+  sub_reasons: params.subReason,
 });
 
 const submitReturnRequest = (params) => axios.post(`${constants.ORDERS_API_URL}/api/v1/order/return`, {

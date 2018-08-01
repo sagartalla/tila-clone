@@ -24,4 +24,11 @@ const getAddrById = (store) => (addrId) => {
   return false;
 }
 
-export { getShippingAddressResults, getAddrById, getAddressWithNameAndPhone };
+const getDefaultAddress = (store) => {
+  if (store.shippingAddrReducer.data && store.shippingAddrReducer.data.length > 0) {
+    return _.filter(store.shippingAddrReducer.data, function (value, key) { return value.default; });
+  }
+  return false;
+}
+
+export { getShippingAddressResults, getAddrById, getAddressWithNameAndPhone, getDefaultAddress };

@@ -35,7 +35,7 @@ const WishlistBody = props => {
                       <h5 className={`${styles['mt-0']} ${styles['mb-0']} ${styles['thick-blue']}`}>{brand_name}</h5>
                       <h5 className={`${styles['lgt-gry-clr']} ${styles['light-gry-clr']}`}>{name}</h5>
                       <div className={styles['mt-30']}>
-                        <button id={listing_id}  className={`${styles['fp-btn']} ${styles['fp-btn-primary']}`} onClick={addToCart}>{WISH_LIST_PAGE.ADD_TO_CART_BTN}</button>
+                        <button id={listing_id} data-wish-id={wishlist_id}  className={`${styles['fp-btn']} ${styles['fp-btn-primary']}`} onClick={addToCart}>{WISH_LIST_PAGE.ADD_TO_CART_BTN}</button>
                       </div>
                     </Col>
                     <Col md={4}>
