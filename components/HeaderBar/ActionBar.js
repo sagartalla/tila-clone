@@ -37,9 +37,12 @@ class ActionBar extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    const show = (!nextProps.isLoggedIn && (nextProps.isLoggedIn != this.props.isLoggedIn) && !this.state.logoutClicked) || this.state.loginClicked;
+    console.log('show:',show,'nextProps.isLoggedIn', nextProps.isLoggedIn, 'this.props.isLoggedIn', this.props.isLoggedIn, 'this.state.logoutClicked', this.state.logoutClicked);
     this.setState({
-      show: !nextProps.isLoggedIn && !this.state.logoutClicked,
-      logoutClicked: false
+      show: show,
+      logoutClicked: false,
+      loginClicked: false
     });
   }
 
@@ -53,6 +56,7 @@ class ActionBar extends Component {
 
   loginClick(e) {
     const state = {};
+    state.loginClicked = true;
     if (e.currentTarget.getAttribute('data-mode') === 'sign-up') {
       state.mode = 'register';
     } else {
