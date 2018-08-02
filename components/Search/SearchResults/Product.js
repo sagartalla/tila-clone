@@ -112,7 +112,7 @@ class Product extends Component {
                   null
               }
               <span className={`${styles['variants-main']}`}></span>
-              <span className={`${styles['fullfill-main']}`}><span className={`${styles['fs-12']} ${styles['fontW600']} ${styles['pl-30']}`}>Fulfilled by Tila</span></span>
+              <span className={`${styles['fullfill-main']} ${styles['flex-center']}`}><span className={styles['fulfill-img']}></span><span className={`${styles['fs-12']} ${styles['fontW600']} ${styles['pl-10']} ${styles['fullfilled-label']}`}>Fulfilled by Tila</span></span>
             </div>
             <div className={styles['desc-cont']}>
               <div className={`${styles['pb-20']} ${styles['pl-20']} ${styles['flex']} ${styles['flex-colum']}`}>
