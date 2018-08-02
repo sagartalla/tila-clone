@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import _ from 'lodash';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Row, Col } from 'react-bootstrap';
@@ -76,7 +77,7 @@ class Compare extends Component {
           </Row>
           <div className={styles['compare-main-items']}>
             {
-              productsFeatures.map((productFeature) => {
+              _.map(productsFeatures, (productFeature) => {
                 return (
                   <div key={productFeature.name}>
                     <Row>
