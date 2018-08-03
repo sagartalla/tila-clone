@@ -17,7 +17,31 @@ const getCompareInfo = (store) => {
       productsFeatures: [],
     };
   }
-  return {
+
+  const b = _.uniq(compareInfo.reduce((acc, map) => {
+      return [...acc, ...Object.keys((map.product_details.catalog_details.attribute_map))];
+    }, [])).map((attrName) => {
+      let attributeCategoryName = '';
+      for(let index in compareInfo) {
+        const { attribute_category_name } = compareInfo[index].product_details.catalog_details.attribute_map[attrName] || {}
+        if(attribute_category_name){
+          attributeCategoryName = attribute_category_name || ''
+          break;
+        }
+      }
+      return {
+        name: attrName,
+        items: compareInfo.map((map) => {
+          const { attribute_values, name} = map.product_details.catalog_details.attribute_map[attrName] || {};
+          return ({
+            id: (name || '')  + shortid.generate(),
+            value: attribute_values || [{value: 'N/A'}]
+          });
+        }),
+        attribute_category_name: attributeCategoryName
+      };
+    });
+  const a = {
     compareCount: compareInfo.length,
     features: _.uniqBy(_.map(compareInfo[0].product_details.catalog_details.attribute_map, (attr, key) => ({
       key,
@@ -33,26 +57,16 @@ const getCompareInfo = (store) => {
       name: product.product_details.product_details_vo.cached_product_details.attribute_map.calculated_display_name.attribute_values[0].value
     })),
     productsFeatures: fp.compose(
-      _.map((productFeature, key) => ({
-        name: key,
-        attributes: productFeature
+      fp.map.convert({'cap': false })((productFeature, key) => {
+        return ({
+          name: key,
+          attributes: productFeature
+        });
       }),
-      _.groupBy((attrMap) => attrMap.attribute_category_name)),
-    )(
-      _.uniq(compareInfo.reduce((acc, map) => {
-          return [...acc, Object.keys((map.product_details.catalog_details.attribute_map))];
-        }, [])).map((attrName) => {
-          const { attribute_map } = map.product_details.catalog_details;
-          return {
-            name: attrName,
-            items: compareInfo.map((map) => ({
-              value: map.product_details.catalog_details.attribute_map[attrName].attribute_values
-            })),
-            attribute_category_name: map.product_details.catalog_details.attribute_map[attrName].attribute_category_name
-          };
-        })
-    ),
-  }
+      fp.groupBy((attrMap) => attrMap.attribute_category_name)
+    )(b),
+  };
+  return a;
 }
 
 export { getCompareCount, getCompareInfo };

@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Row, Col } from 'react-bootstrap';
 
+import constants from '../../constants'
 import HeaderBar from '../HeaderBar';
 import FooterBar from '../Footer';
 import { actionCreators, selectors } from '../../store/compare';
@@ -56,11 +57,11 @@ class Compare extends Component {
               </div>
             </Col>
             {
-              products.map((product) => {
+              products.map((product) => (
                 <Col md={3} key={product.id}>
                   <div className={styles['compare-dtls']}>
                     <div className={`${styles['compare-dtls-img']} ${styles['flex']} ${styles['justify-center']}`}>
-                      <img src={product.imgSrc} className="img-responsive" />
+                      <img src={`${constants.mediaDomain}/${product.imgSrc}`} className="img-responsive" />
                     </div>
                     <div className={`${styles['compare-dtls-inn']} ${styles['pt-20']} ${styles['t-c']}`}>
                       <span className={`${styles['fs-12']} ${styles['lgt-blue']}`}>{product.brand}</span>
@@ -72,12 +73,12 @@ class Compare extends Component {
                     </div>
                   </div>
                 </Col>
-              })
+              ))
             }
           </Row>
           <div className={styles['compare-main-items']}>
             {
-              _.map(productsFeatures, (productFeature) => {
+              productsFeatures.map((productFeature) => {
                 return (
                   <div key={productFeature.name}>
                     <Row>
@@ -99,7 +100,7 @@ class Compare extends Component {
                               return (
                                 <Col key={item.id} md={3}>
                                   <div className={`${styles['compare-product-spficication-inn']} ${styles['flex-center']} ${styles['flex-colum']} ${styles['fs-12']} ${styles['fontW600']}`}>
-                                    <span>{item.value}</span>
+                                    <span>{item.value.map((i) => i.value).join(' ')}</span>
                                   </div>
                                 </Col>
                               )
