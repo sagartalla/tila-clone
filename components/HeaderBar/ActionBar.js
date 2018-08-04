@@ -38,7 +38,6 @@ class ActionBar extends Component {
 
   componentWillReceiveProps(nextProps) {
     const show = (!nextProps.isLoggedIn && (nextProps.isLoggedIn != this.props.isLoggedIn) && !this.state.logoutClicked) || this.state.loginClicked;
-    console.log('show:',show,'nextProps.isLoggedIn', nextProps.isLoggedIn, 'this.props.isLoggedIn', this.props.isLoggedIn, 'this.state.logoutClicked', this.state.logoutClicked);
     this.setState({
       show: show,
       logoutClicked: false,

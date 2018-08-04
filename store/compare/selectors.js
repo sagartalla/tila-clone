@@ -44,7 +44,7 @@ const getCompareInfo = (store) => {
   const a = {
     compareCount: compareInfo.length,
     features: _.uniqBy(_.map(compareInfo[0].product_details.catalog_details.attribute_map, (attr, key) => ({
-      key,
+      key: attr.attribute_category_name.split(' ').join('_').toLowerCase(),
       value: attr.attribute_category_name
     })), 'value'),
     products: _.map(compareInfo, (product) => ({
@@ -59,6 +59,7 @@ const getCompareInfo = (store) => {
     productsFeatures: fp.compose(
       fp.map.convert({'cap': false })((productFeature, key) => {
         return ({
+          key: key.split(' ').join('_').toLowerCase(),
           name: key,
           attributes: productFeature
         });

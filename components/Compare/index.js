@@ -23,10 +23,39 @@ const ICONS = {
 }
 
 class Compare extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedGroups: {}  /*props.features.reduce((acc, a) => ({...acc, [a.key]: true}), {})*/
+    };
+    this.selectGroup = this.selectGroup.bind(this);
+  }
 
   componentDidMount() {
     //read from local store productIds
     this.props.getCompareItemsData();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { compareInfo } = nextProps;
+    if(!this.state.init && compareInfo.features && compareInfo.features.length) {
+      debugger;
+      this.setState({
+        selectedGroups: compareInfo.features.reduce((acc, a) => ({...acc, [a.key]: true}), {}),
+        init: true
+      });
+    }
+  }
+
+  selectGroup(e) {
+    const id = e.currentTarget.getAttribute('id');
+    const checked = e.currentTarget.checked;
+    this.setState({
+      selectedGroups: {
+        ...this.state.selectedGroups,
+        [id]: checked,
+      }
+    })
   }
 
   render() {
@@ -48,8 +77,8 @@ class Compare extends Component {
                   {
                     features.map((feature) => (
                       <div key={feature.key} className={styles['checkbox-material']}>
-                        <input id="camera" type="checkbox" />
-                        <label htmlFor="camera"> {feature.value} </label>
+                        <input id={feature.key} type="checkbox" onClick={this.selectGroup} checked={this.state.selectedGroups[feature.key]}/>
+                        <label htmlFor={feature.key}>{feature.value} </label>
                       </div>
                     ))
                   }
@@ -79,8 +108,8 @@ class Compare extends Component {
           <div className={styles['compare-main-items']}>
             {
               productsFeatures.map((productFeature) => {
-                return (
-                  <div key={productFeature.name}>
+                return this.state.selectedGroups[productFeature.key] ? (
+                  <div id={productFeature.key} key={productFeature.key}>
                     <Row>
                       <Col md={12}>
                         <span>{productFeature.name}</span>
@@ -110,7 +139,7 @@ class Compare extends Component {
                       ))
                     }
                 </div>
-                );
+                ) : null;
               })
             }
           </div>
