@@ -21,6 +21,8 @@ class MegaMenu extends Component {
     this.onHoverCurry = this.onHoverCurry.bind(this);
     this.onHoverOut = this.onHoverOut.bind(this);
     this.onLinkClick = this.onLinkClick.bind(this);
+    this.onHoverOutDelayed = this.onHoverOutDelayed.bind(this);
+    this.onExpandedHover = this.onExpandedHover.bind(this);
   }
 
   componentDidMount() {
@@ -65,15 +67,31 @@ class MegaMenu extends Component {
     }
   }
 
+  onExpandedHover() {
+    this.expandedHover = true;
+  }
+
   onLinkClick() {
     this.setState({
       selectedCategory: null
     });
+    this.expandedHover = false;
   }
 
   onHoverOut() {
     this.setState({
       selectedCategory: null
+    });
+    this.expandedHover = false;
+  }
+
+  onHoverOutDelayed() {
+    setTimeout(() => {
+      if(!this.expandedHover){
+        this.setState({
+          selectedCategory: null
+        })
+      }
     });
   }
 
@@ -101,7 +119,7 @@ class MegaMenu extends Component {
             {
               _.map(megamenu, (item) => {
                 return (
-                  <li key={item.id} onMouseOver={this.onHoverCurry(item)} className={`${styles[`${(item.displayName || '').split(' ').join('').toLowerCase().replace('&', '-')}-item`]} ${(!selectedCategoryTree && this.getLandingPageLink(item.displayName)) === `/landing/${category}` ? styles['active-menu-item']: {}}`}>
+                  <li key={item.id} onMouseOver={this.onHoverCurry(item)} onMouseLeave={this.onHoverOutDelayed} className={`${styles[`${(item.displayName || '').split(' ').join('').toLowerCase().replace('&', '-')}-item`]} ${(!selectedCategoryTree && this.getLandingPageLink(item.displayName)) === `/landing/${category}` ? styles['active-menu-item']: {}}`}>
                     <div>
                       {/* <Link route={`/category/${item.displayName}-${item.id}?categoryTree=true&isListed=true`}> */}
                       <Link route={this.getLandingPageLink(item.displayName)}>
@@ -126,7 +144,7 @@ class MegaMenu extends Component {
         {
           selectedCategoryTree
             ?
-            <div onMouseLeave={this.onHoverOut} className={`${styles['pt-40']} ${styles['megamenu-dropdown']} ${styles['box']} ${styles['box-space']} ${styles[this.state.colorScheme]}`}>
+            <div onMouseOver={this.onExpandedHover} onMouseLeave={this.onHoverOut}  className={`${styles['pt-40']} ${styles['megamenu-dropdown']} ${styles['box']} ${styles['box-space']} ${styles[this.state.colorScheme]}`}>
               <div className={styles['top-brands-trending-wrap']}>
                 <ul className={`${styles['top-brands-wrap']} ${styles['megamenu-sub-drop-down']}`}>
                   <li className={`${styles['megamenu-sub-list']}`}>
