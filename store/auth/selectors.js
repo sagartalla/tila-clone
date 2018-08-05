@@ -3,7 +3,7 @@ const getErrorMessege = (store) => {
 }
 
 const getLoginProgressStatus = (store) => {
-  return store.authReducer.ui.loading;
+  return store.authReducer.ui.loginLoading;
 }
 
 const getCountry = (store) => {
