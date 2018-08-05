@@ -31,8 +31,9 @@ const authReducer = typeToReducer({
       });
     },
     REJECTED: (state, action) => {
+      const messege = ({403: 'username/password did not match'}[action.payload.response.status]);
       return Object.assign({}, state, {
-        error: action.payload.response.data.message,
+        error: messege,
         data: {
           ...state.data,
           isLoggedIn: false

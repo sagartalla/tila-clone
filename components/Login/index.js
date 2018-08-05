@@ -95,6 +95,15 @@ class Login extends Component {
               </div>
             </h3>
           </div>
+          {
+            this.state.error
+            ?
+            <div className={`${styles['text-center']} ${styles['error-msg']}`}>
+              <span>{JSON.stringify(this.state.error)}</span>
+            </div>
+            :
+            null
+          }
           <form className={`${styles['login-form']}  ${styles['pt-30']}`}>
             <FormGroup controlId="formHorizontalEmail">
               <Col md={12}>
@@ -155,15 +164,6 @@ class Login extends Component {
                 <Button className={`${styles['sign-in-btn']} ${styles['fontW600']} ${styles['border-radius4']}`} onClick={this.login}>{this.state.mode === 'register' ? 'Sign Up' : 'Sign In'}</Button>
               </Col>
             </FormGroup>
-            {
-              this.state.error
-              ?
-              <div className={`${styles['text-center']} ${styles['error-msg']}`}>
-                <span>{JSON.stringify(this.state.error)}</span>
-              </div>
-              :
-              null
-            }
             <div className={`${styles['login-social-icon']} ${styles['pl-15']}`}>
               <span className={`${styles['thick-gry-clr']} ${styles['pt-20']} ${styles['pb-10']} ${styles['flex']}`}>Or Sign up with</span>
               <div className={styles['flex']}>
