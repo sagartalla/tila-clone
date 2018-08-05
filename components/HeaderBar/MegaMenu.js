@@ -56,13 +56,15 @@ class MegaMenu extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedCategory: null
+      selectedCategory: null,
+      viewAllMenu: false
     }
     this.onHoverCurry = this.onHoverCurry.bind(this);
     this.onHoverOut = this.onHoverOut.bind(this);
     this.onLinkClick = this.onLinkClick.bind(this);
     this.onHoverOutDelayed = this.onHoverOutDelayed.bind(this);
     this.onExpandedHover = this.onExpandedHover.bind(this);
+    this.viewAllMenu = this.viewAllMenu.bind(this);
   }
 
   componentDidMount() {
@@ -153,6 +155,12 @@ class MegaMenu extends Component {
     }
   }
 
+  viewAllMenu() {
+    this.setState({
+      viewAllMenu: !this.state.viewAllMenu
+    })
+  }
+
   render() {
     const { megamenu, query={} } = this.props;
     const { category } = query;
@@ -191,7 +199,11 @@ class MegaMenu extends Component {
         {
           selectedCategoryTree
             ?
-            <div onMouseOver={this.onExpandedHover} onMouseLeave={this.onHoverOut}  className={`${styles['pt-40']} ${styles['megamenu-dropdown']} ${styles['box']} ${styles['box-space']} ${styles[this.state.colorScheme]}`}>
+            <div
+              onMouseOver={this.onExpandedHover}
+              onMouseLeave={this.onHoverOut}
+              className={`${styles['pt-40']} ${styles['megamenu-dropdown']} ${styles['box']} ${styles['box-space']} ${styles[this.state.colorScheme]} ${this.state.viewAllMenu ? {} : styles['max-height']}`}
+              >
               <div className={styles['top-brands-trending-wrap']}>
                 <ul className={`${styles['top-brands-wrap']} ${styles['megamenu-sub-drop-down']}`}>
                   <li className={`${styles['megamenu-sub-list']}`}>
@@ -247,6 +259,7 @@ class MegaMenu extends Component {
                   this.getTree(selectedCategoryTree, true)
                 }
               </ul>
+              <div className={styles['view-all-menu']} onClick={this.viewAllMenu}>{this.state.viewAllMenu ? 'View Less' : 'View All'}</div>
             </div>
             :
             null

@@ -284,6 +284,9 @@
   left 0
   z-index 1
   display flex
+  &.max-height
+    max-height 500px
+    overflow hidden
   &.electronics
     .megamenu-sub-drop-down
       >.megamenu-sub-list
@@ -325,6 +328,12 @@
         img
           width 75px
           height 25px
+  .view-all-menu
+    position absolute
+    bottom 5px
+    right 40px
+    cursor pointer
+
 
 nav
   ul
