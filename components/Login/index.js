@@ -43,6 +43,7 @@ class Login extends Component {
         rememberMe: true,
       });
     }
+    this.props.resetLoginError();
   }
 
   componentDidMount() {
@@ -209,6 +210,7 @@ const mapDispatchToProps = (dispatch) => {
       userLogin: actionCreators.userLogin,
       userRegister: actionCreators.userRegister,
       getLoginInfo: actionCreators.getLoginInfo,
+      resetLoginError: actionCreators.resetLoginError,
     },
     dispatch,
   );

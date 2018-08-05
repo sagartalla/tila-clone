@@ -42,6 +42,12 @@ const authReducer = typeToReducer({
       });
     },
   },
+  [actions.RESET_LOGIN_ERROR]: (state) => {
+    return {
+      ...state,
+      error: '',
+    }
+  },
   [actions.USER_REGISTER]: {
     PENDING: state => {
       return Object.assign({}, state, {

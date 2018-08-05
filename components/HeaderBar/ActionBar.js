@@ -23,6 +23,7 @@ class ActionBar extends Component {
     super(props);
     this.logoutClick = this.logoutClick.bind(this);
     this.loginClick = this.loginClick.bind(this);
+    this.onBackdropClick = this.onBackdropClick.bind(this);
   }
 
   state = {
@@ -38,7 +39,7 @@ class ActionBar extends Component {
 
   componentWillReceiveProps(nextProps) {
     const show = (!nextProps.isLoggedIn && (nextProps.isLoggedIn != this.props.isLoggedIn) && !this.state.logoutClicked) || this.state.loginClicked || !!nextProps.error || nextProps.loginInProgress;
-    // console.log('show:',show,'nextProps.isLoggedIn', nextProps.isLoggedIn, 'this.props.isLoggedIn', this.props.isLoggedIn, 'this.state.logoutClicked', this.state.logoutClicked);
+    // console.log('show:',show,'nextProps.isLoggedIn', nextProps.isLoggedIn, 'this.props.isLoggedIn', this.props.isLoggedIn, 'this.state.logoutClicked', this.state.logoutClicked, 'nextProps.error', nextProps.error, 'nextProps.loginInProgress', nextProps.loginInProgress);
     this.setState({
       show: show,
       logoutClicked: false,
@@ -64,6 +65,11 @@ class ActionBar extends Component {
     }
     state.show = true;
     this.setState(state);
+  }
+
+  onBackdropClick() {
+    this.setState({ show: false });
+    this.props.resetLoginError();
   }
 
   render() {
@@ -162,7 +168,7 @@ class ActionBar extends Component {
           (this.state.show)
             ?
             (
-              <Modal className={`react-router-modal__modal ${styles['login-reg-modal']} ${styles['p-20']}`} onBackdropClick={() => this.setState({ show: false })}>
+              <Modal className={`react-router-modal__modal ${styles['login-reg-modal']} ${styles['p-20']}`} onBackdropClick={this.onBackdropClick}>
                 <Login mode={this.state.mode} />
               </Modal>
             )
@@ -189,6 +195,7 @@ const mapDispatchToProps = (dispatch) => {
       getLoginInfo: actionCreators.getLoginInfo,
       logout: actionCreators.userLogout,
       getCartResults: cartActionCreators.getCartResults,
+      resetLoginError: actionCreators.resetLoginError,
     },
     dispatch,
   );
