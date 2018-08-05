@@ -121,14 +121,16 @@ class MegaMenu extends Component {
 
   onLinkClick() {
     this.setState({
-      selectedCategory: null
+      selectedCategory: null,
+      viewAllMenu: false
     });
     this.expandedHover = false;
   }
 
   onHoverOut() {
     this.setState({
-      selectedCategory: null
+      selectedCategory: null,
+      viewAllMenu: false
     });
     this.expandedHover = false;
   }
@@ -137,7 +139,8 @@ class MegaMenu extends Component {
     setTimeout(() => {
       if(!this.expandedHover){
         this.setState({
-          selectedCategory: null
+          selectedCategory: null,
+          viewAllMenu: false
         })
       }
     });
