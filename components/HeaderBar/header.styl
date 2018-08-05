@@ -12,7 +12,7 @@
     top 0
     &.faded
       background-color rgba(255,255,255, 0.95)
-  
+
   .profile-part
     .ple-icon
       padding: 10px 20px;
@@ -32,13 +32,13 @@
           background-color white
           font-weight bold
           border-left 2px solid thick-red-arrow
-        a span 
+        a span
           color #000
       .profile-icon
         width 16px
         height 30px
       .support
-        span 
+        span
           width: 20px
           height: 20px
           border-radius: 20px
@@ -127,7 +127,7 @@
     > span
       padding 0 15px
       border-right 1px solid border-gray
-    
+
     .cart-count
       right -12px
       top -8px
@@ -284,6 +284,9 @@
   left 0
   z-index 1
   display flex
+  &.max-height
+    max-height 500px
+    overflow hidden
   &.electronics
     .megamenu-sub-drop-down
       >.megamenu-sub-list
@@ -312,18 +315,25 @@
       .megamenu-sub-child-list
         line-height 1.5
         font-size 12px
-        padding 5px
+        min-height 250px
         a
           color light-gray-clr
   .top-brands-trending-wrap
     width 20%
     .top-brands-wrap
+      height 260px
       width 100%
       .megamenu-sub-list
         width 100%
         img
           width 75px
           height 25px
+  .view-all-menu
+    position absolute
+    bottom 5px
+    right 40px
+    cursor pointer
+
 
 nav
   ul

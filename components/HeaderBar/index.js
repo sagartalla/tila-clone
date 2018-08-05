@@ -45,13 +45,13 @@ const HeaderBar = props => (
     </div>
     <div className={styles['header-megamenu']}>
       <div className={styles['header-megamenu-inn']}></div>
-      <Grid className={styles['header-meganenu-sub']}>
+      <div className={styles['header-meganenu-sub']}>
         <Row>
           <Col md={12}>
             <MegaMenu query={props.query} />
           </Col>
         </Row>
-      </Grid>
+      </div>
     </div>
   </div>
 );

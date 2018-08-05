@@ -11,6 +11,7 @@ const actions = {
   SET_CITY: 'SET_CITY',
   AUTOCOMPLETE_CITY: 'AUTOCOMPLETE_CITY',
   RESET_AUTOCOMPLETE_CITY: 'RESET_AUTOCOMPLETE_CITY',
+  RESET_LOGIN_ERROR: 'RESET_LOGIN_ERROR',
 };
 
 const actionCreators = {
@@ -85,6 +86,11 @@ const actionCreators = {
   resetAutoCompleteData: () => {
     return {
       type: actions.RESET_AUTOCOMPLETE_CITY,
+    }
+  },
+  resetLoginError: () => {
+    return {
+      type: actions.RESET_LOGIN_ERROR,
     }
   }
 };
