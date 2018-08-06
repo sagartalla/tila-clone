@@ -18,8 +18,8 @@ const MiniAddress = (props) => {
       {
         data && data.map((val, id) => {
           return (
-            <div key={id} className={styles['address-card-body']}>
-              <Col md={1}>
+            <div key={id} className={styles['flex']}>
+              <div>
                 {
                   val.default ?
                     <span>
@@ -29,20 +29,20 @@ const MiniAddress = (props) => {
                       <input id={val.address_id} name="addr_checkbox" type="radio" onClick={makeDefaultAddress} className={styles['radio-btn']} />
                     </span>
                 }
-              </Col>
-              <Col md={11}>
+              </div>
+              <div>
                 <h5 className={`${styles['fontW600']} ${styles['m-0']} ${styles['mb-10']} ${styles['lgt-blue']}`}> {val.first_name + ' ' + val.last_name} </h5>
                 <address className={`${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['full-address-details']}`}>
                   {val.address_line_1 + ', ' + val.address_line_2 + ', ' + val.city + ', ' + val.state}
                 </address>
-              </Col>
+              </div>
             </div>
           )
         })
       }
-      {/* <Col md={12}>
+      <Col md={12}>
         <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']}`} onClick={showAddAdrressForm}> {DELIVERY_ADDR_PAGE.ADD_NEW_BTN} </button>
-      </Col> */}
+      </Col>
     </div>
   )
 }

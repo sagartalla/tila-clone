@@ -127,7 +127,7 @@ class TitleInfo extends Component {
               </div>
 
               {showCheckoutModal ?
-                <Modal onBackdropClick={this.checkoutInstantHandler}>
+                <Modal className={`react-router-modal__modal ${styles['right-side-modal']}`} onBackdropClick={this.checkoutInstantHandler}>
                   <RightSideBar
                     data={listingCartData}
                     hideUpSell={true}

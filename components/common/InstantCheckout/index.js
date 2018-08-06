@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
 
-import { Modal } from "react-router-modal";
+// import { Modal } from "react-router-modal";
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -28,7 +28,7 @@ class InstantCheckout extends Component {
 
     this.state = {
       showMiniAddress: false,
-      showMiniValut: false,
+      showMiniVault: false,
       creditDebitCard: true,
       cod: false,
       cvv: '',
@@ -62,7 +62,7 @@ class InstantCheckout extends Component {
   }
 
   toggleMiniVault() {
-    this.setState({ showMiniValut: !this.state.showMiniValut });
+    this.setState({ showMiniVault: !this.state.showMiniVault });
   }
 
   doInstantCheckout() {
@@ -100,7 +100,7 @@ class InstantCheckout extends Component {
 
   render() {
     const { addressResults, defaultAddr, vaultResults, defaultCard } = this.props;
-    const { showMiniAddress, showMiniValut, creditDebitCard, cod } = this.state;
+    const { showMiniAddress, showMiniVault, creditDebitCard, cod } = this.state;
     return (
       <div>
         {
@@ -122,9 +122,11 @@ class InstantCheckout extends Component {
                       />
                       {
                         showMiniAddress ?
-                          <ShippingAddress
-                            miniAddress={true}
-                          />
+                          <div md={12}>
+                            <ShippingAddress
+                              miniAddress={true}
+                            />
+                          </div>
                           : null
                       }
                     </Fragment>
@@ -132,11 +134,22 @@ class InstantCheckout extends Component {
                 }
                 {
                   defaultCard.length && creditDebitCard > 0 ?
-                    <VaultCard
-                      defaultCard={defaultCard}
-                      updateCVV={this.updateCVV}
-                      toggleMiniVault={this.toggleMiniVault}
-                    />
+                    <Fragment>
+                      <VaultCard
+                        defaultCard={defaultCard}
+                        updateCVV={this.updateCVV}
+                        toggleMiniVault={this.toggleMiniVault}
+                      />
+                      {
+                        showMiniVault ?
+                          <div>
+                            <UserVault
+                              miniVault={true}
+                            />
+                          </div>
+                          : null
+                      }
+                    </Fragment>
                     : null
                 }
                 {
@@ -164,34 +177,7 @@ class InstantCheckout extends Component {
               <div className={`${styles['flex']} ${styles['justify-center']}`}>
                 <button className={`${styles['fp-btn']} ${styles['fp-btn-sucess']} ${styles['fontW600']} ${styles['instant-btn']}`} onClick={this.doInstantCheckout}>INSTANT CHECKOUT</button>
               </div>
-
-              {/* {
-            showMiniAddress ?
-              <Modal>
-                <div>
-                  <a onClick={this.toggleMiniAddress}>X</a>
-                  <ShippingAddress
-                    miniAddress={true}
-                  />
-                </div>
-              </Modal>
-              : null
-          } */}
-
-              {/* {
-            showMiniValut ?
-              <Modal>
-                <div>
-                  <a onClick={this.toggleMiniVault}>X</a>
-                  <UserVault
-                    miniVault={true}
-                  />
-                </div>
-              </Modal>
-              : null
-          } */}
-
-            </div >
+            </div>
             : null
         }
       </div>
