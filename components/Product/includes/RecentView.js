@@ -15,19 +15,17 @@ const RecentView = props => {
         {
           recentlyViewed.map((item) => {
             return (
-              item.id != shippingInfo.listing_id ?
-                <Col md={2} className={`${styles['pl-0']} ${styles['mr-30']}`}>
-                  <a href={item.uri}>
+              <Col md={2} className={`${styles['pl-0']} ${styles['mr-30']}`}>
+                <a href={item.uri}>
+                  <div>
+                    <img src={"https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/" + item.im} className="img-responsive" />
                     <div>
-                      <img src={"https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/" + item.im} className="img-responsive" />
-                      <div>
-                        <h6 className={`${styles['fs-10']} ${styles['mb-0']} ${styles['thick-gry-clr']} ${styles['elipsis']}`}>{item.nm}</h6>
-                        <span className={`${styles['fs-12']} ${styles['thick-gry-clr']}`}><span className={styles['fontW600']}>{item.pr} </span><span>{item.cd}</span></span>
-                      </div>
+                      <h6 className={`${styles['fs-10']} ${styles['mb-0']} ${styles['thick-gry-clr']} ${styles['elipsis']}`}>{item.nm}</h6>
+                      <span className={`${styles['fs-12']} ${styles['thick-gry-clr']}`}><span className={styles['fontW600']}>{item.pr} </span><span>{item.cd}</span></span>
                     </div>
-                  </a>
-                </Col>
-                : null
+                  </div>
+                </a>
+              </Col>
             )
           })
         }
