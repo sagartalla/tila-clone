@@ -28,11 +28,20 @@ apiRoutes
         req.universalCookies.remove('auth');
         isLoggedIn = false;
       }
+      res.status(status);
       res.json({
         data: {
           isLoggedIn,
         }
       });
+    }).catch(({response}) => {
+      res.status(response.status)
+      res.json({
+        data: {
+          isLoggedIn: false
+        }
+      })
+
     });
   })
   .post('/refresh', (req, res) => {

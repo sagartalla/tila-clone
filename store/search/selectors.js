@@ -20,9 +20,10 @@ const addCartAndWishlistDetails = (store, results) => {
   return {
     ...results,
     items: results.items.map((i) => {
+      const { listingId } = i.variants;
       return ({
         ...i,
-        addedToCart: cartListingIds.indexOf(i.variants.listingId[0]) !== -1,
+        addedToCart: listingId ? cartListingIds.indexOf(i.variants.listingId[0]) !== -1 : false,
         addedToWishlist: wishListProductIds.indexOf(i.productId) !== -1,
       });
     }),
