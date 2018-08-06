@@ -152,7 +152,7 @@ const getProductComponent = (isPreview, taskCode) => {
                 <Row>
                   <Col md={8}>
                     {
-                      isPreview ? null : <NoSSR> <RecentView recentlyViewed={recentlyViewed} /> </NoSSR>
+                      isPreview ? null : <NoSSR> <RecentView recentlyViewed={recentlyViewed} shippingInfo={shippingInfo} /> </NoSSR>
                     }
                   </Col>
                   {/*<Col md={8}>
