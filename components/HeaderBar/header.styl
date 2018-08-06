@@ -61,6 +61,13 @@
     .header-meganenu-sub
       position relative
       z-index 8
+      .submenu-head
+        overflow: hidden;
+        margin-bottom: 0;
+        background: #4a4a4a;
+        color: #fff;
+        li
+          cursor pointer
 
 .search-wrapper
   position relative
@@ -251,7 +258,7 @@
     ul li
       &:hover
         border-bottom: 4px solid fashion-color
-  &.home-living
+  &.home-living, &.lifestyle
     .active-menu-item
       border-bottom: 4px solid lifestyle-color
     ul li
@@ -273,9 +280,15 @@
     border-bottom: 4px solid electronics-color
   .fashion-item.active-menu-item
     border-bottom: 4px solid fashion-color
-  .home-living-item.active-menu-item
+  .home-living-item.active-menu-item, .lifestyle-item.active-menu-item
     border-bottom: 4px solid lifestyle-color
 
+.megamenu-event-wrapper
+  height 500px
+  overflow hidden
+  position absolute
+  left 0
+  width 100%
 
 .megamenu-dropdown
   width 100%
@@ -297,7 +310,7 @@
     >.megamenu-sub-list
       >span a
         color fashion-color
-  &.home-living
+  &.home-living, &.lifestyle
     .megamenu-sub-drop-down
       >.megamenu-sub-list
         >span a
@@ -310,12 +323,12 @@
     >.megamenu-sub-list
       width 25%
       float left
+      min-height 250px
       >span a
         font-size 16px
       .megamenu-sub-child-list
         line-height 1.5
         font-size 12px
-        min-height 250px
         a
           color light-gray-clr
   .top-brands-trending-wrap
