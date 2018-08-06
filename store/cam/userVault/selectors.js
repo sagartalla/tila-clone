@@ -5,4 +5,11 @@ const getCardResults = (store) => {
   return [];
 }
 
-export { getCardResults };
+const getDefaultCard = (store) => {
+  if (store.vaultReducer.data && store.vaultReducer.data.length > 0) {
+    return _.filter(store.vaultReducer.data, function (value, key) { return value.default; });
+  }
+  return [];
+}
+
+export { getCardResults, getDefaultCard };

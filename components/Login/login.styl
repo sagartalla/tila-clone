@@ -3,24 +3,35 @@
 .image-placeholder
   height: 510px;
   background: #ccc;
+  .img-responsive
+    max-height 100%
+    max-width 100%
 
 .login-form
   overflow hidden
-  height 370px
+  height 384px
   .sign-in-btn
-    background #2265BD
+    background navy-blue
     width 100%
-    border-radius 17px
-    color #fff
+    color white
+    border 0
+    height 40px
+    text-transform uppercase
+
+  .login-social-icon
+    clear both
+    .bg-social-icon
+      width 58px
+      height 58px
 
   /* form starting stylings ------------------------------- */
   .group { 
     position:relative; 
-    margin-bottom:45px; 
+    margin-bottom:33px; 
   }
 
   input 				{
-    font-size:18px;
+    font-size:14px;
     padding:10px 10px 10px 5px;
     display:block;
     width:300px;
@@ -32,11 +43,11 @@
   /* LABEL ======================================= */
   label 				 {
     color:#999; 
-    font-size:18px;
+    font-size:14px;
     font-weight:normal;
     position:absolute;
     pointer-events:none;
-    left:5px;
+    left:0;
     top:10px;
     transition:0.2s ease all; 
     -moz-transition:0.2s ease all; 
@@ -51,12 +62,12 @@
   }
 
   /* BOTTOM BARS ================================= */
-  .bar 	{ position:relative; display:block; width:300px; }
+  .bar 	{ position:relative; display:block; width: 100%; }
   .bar:before, .bar:after 	{
     content:'';
     height:2px; 
     width:0;
-    bottom:1px; 
+    bottom:0; 
     position:absolute;
     background:#5264AE; 
     transition:0.2s ease all; 
@@ -79,7 +90,7 @@
   .highlight {
     position:absolute;
     height:60%; 
-    width:100px; 
+    width:100%; 
     top:25%; 
     left:0;
     pointer-events:none;

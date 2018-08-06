@@ -48,9 +48,9 @@ const OrderIssueWidget = ({orderIssue, resetOrderIssue}) => {
       ?
       <div className={styles['back-drop']}>
         <div className={`${styles['widget-cont']} ${styles['box']} ${styles['p-0']} ${styles['middle']} ${styles['center']}`}>
-          <div className={`${styles['widget-head']} ${styles['flx-space-bw']} ${styles['p-20']} ${styles['fs-16']}`}>
-            <div>{getTitle(step)}</div>
-            <div onClick={closePopup}>X</div>
+          <div className={`${styles['widget-head']} ${styles['flx-space-bw']} ${styles['p-20']} ${styles['fontW600']}`}>
+            <span>{getTitle(step)}</span>
+            <span onClick={closePopup}>X</span>
           </div>
           <Body />
         </div>

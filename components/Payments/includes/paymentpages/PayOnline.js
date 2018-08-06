@@ -1,29 +1,31 @@
 import PropTypes from 'prop-types';
 import { Grid, Row, Col } from 'react-bootstrap';
+
 import { languageDefinations } from '../../../../utils/lang/';
+
 import { mergeCss } from '../../../../utils/cssUtil';
 const styles = mergeCss('components/Payments/payment');
+const { PAYMENT_PAGE } = languageDefinations();
 
-const PayOnline = props => {
-  const { PAYMENT_PAGE } = languageDefinations();
-  return (
-    <div className={`${styles['pay-online']} ${styles['p-10']} `}>
-      <Grid>
-        <Row>
+const PayOnline = props => (
+  <div className={`${styles['pay-online']} ${styles['p-10']} `}>
+    <Grid>
+      {/* <Row>
           <Col md={12}>
             {PAYMENT_PAGE.PAY_ONLINE}
           </Col>
-        </Row>
-        <Row>
-          <Col md={12} sm={12} xs={12}>
-            <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']}`} onClick={props.makePayment}>Pay {props.orderRes.data.amount} {props.orderRes.data.currency}</button>
-          </Col>
-        </Row>
-      </Grid>
-    </div>
-  );
-}
+        </Row> */}
+      <Row>
+        <Col md={12} sm={12} xs={12}>
+          {/* <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']}`} onClick={props.makePayment}>Pay {props.orderRes.data.amount} {props.orderRes.data.currency}</button> */}
+          <iframe src={props.orderRes.payData.iframe_url} style={{ height: '406px', width: '600px', border: '0' }}>
 
+          </iframe>
+        </Col>
+      </Row>
+    </Grid>
+  </div>
+);
 
 PayOnline.propTypes = {
   makePayment: PropTypes.func.isRequired,

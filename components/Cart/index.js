@@ -39,7 +39,7 @@ class Cart extends Component {
   }
 
   componentDidMount() {
-    if (!this.props.paymentPageInclude)
+    if (!this.props.showMiniCart)
       this.props.getCartResults();
   }
 
@@ -92,7 +92,7 @@ class Cart extends Component {
     return (
       <div>
         {
-          this.props.paymentPageInclude
+          this.props.showMiniCart
             ?
             <div>
               <MiniCartBody

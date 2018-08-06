@@ -1,5 +1,7 @@
+import React from 'react';
 import { Grid, Row, Col } from 'react-bootstrap';
 import SVGComponent from '../../common/SVGComponet';
+
 import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Payments/payment');
 
@@ -9,7 +11,7 @@ const PaymentHeader = props => (
       <Row>
         <Col md={12}>
           <div className={`${styles['flex-center']} ${styles['logos-part']}`}>
-            <SVGComponent clsName={`${styles['default-logo']}`} src="icons/logos/logo" />
+            <a href="/" className={styles['flex']}><SVGComponent clsName={`${styles['default-logo']}`} src="icons/logos/logo" /></a>
           </div>
         </Col>
       </Row>

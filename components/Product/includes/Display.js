@@ -26,12 +26,13 @@ class Display extends Component {
   render() {
     const { imgs } = this.props;
     return (
-      <div className={`${styles['']}`}>
+      <div className={`${styles['ht-100per']}`}>
         <div className={`${styles['display-item-wrap']}`}>
           <Slider
             asNavFor={this.state.nav2}
             ref={slider => (this.slider1 = slider)}
             lazyLoad={true}
+            className={styles['ht-100per']}
           >
             {imgs.map(({url}) => {
               return (

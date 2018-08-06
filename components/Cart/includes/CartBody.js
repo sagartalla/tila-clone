@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import { languageDefinations } from '../../../utils/lang/';
+import moment from 'moment';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
-import moment from 'moment';
-import RightBar from '../../common/CartAndPaymentRightBar';
+
+import CartStepper from './CartStepper';
 import Blocker from '../../common/Blocker';
 import SVGComponent from '../../common/SVGComponet';
-import CartStepper from './CartStepper';
+import RightBar from '../../common/CartPaymentSideBar';
+import { languageDefinations } from '../../../utils/lang/';
 
 import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Cart/cart');
@@ -133,9 +134,9 @@ const CartBody = props => {
                   </Col>
                   <Col md={6}>
                     {
-                      [...Array(6).keys()].map(() => {
+                      [...Array(6).keys()].map((i) => {
                         return (
-                          <span className={`${styles['wishlist-img']} ${styles['mr-15']}`}><img src={wishlistImgPath} /></span>
+                          <span key={i} className={`${styles['wishlist-img']} ${styles['mr-15']}`}><img src={wishlistImgPath} /></span>
                         )
                       })
                     }
@@ -151,6 +152,7 @@ const CartBody = props => {
               <div className={`${styles['box']}`}>
                 <RightBar
                   data={data}
+                  showInstant={true}
                   showCheckoutBtn={true}
                   checkoutBtnHandler={checkoutBtnHandler}
                 />

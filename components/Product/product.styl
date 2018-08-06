@@ -2,8 +2,23 @@
 @import '/static/vendor/css/slick-theme.min.css';
 @import '../../layout/main/executables.styl';
 
+.pdp-wrap
+  .pdp-bottom-ref-pixel
+    position absolute
+    width 0
+    height 0
+    bottom 0
+    right 0
+    position absolute
 .page-details-slider
   background-color #F1F2F4
+  height calc(100vh - 105px)
+  .details-pixel
+    width 0
+    height 0
+    top 0
+    right 0
+    position absolute
   .details-right-part
     background-color rgba(255, 255, 255, 0.7)
     box-shadow 0 0 7px 0 rgba(225,225,225,0.5)
@@ -12,8 +27,21 @@
     right 0
     bottom 0
     top 0
+    height calc(100vh - 103px)
+    &.stateTop
+      position absolute
+      top 0
+    &.stateMiddle
+      position fixed
+      top 61px
+      z-index 1
+    &.stateBottom
+      position absolute
+      bottom 0
+      top auto
     .details-right-part-inn
       padding 35px 20px
+
       .ti-reviews-wrap
         span
           &:nth-child(2)
@@ -48,11 +76,11 @@
         width 60%
         input
           font-size 12px
+  .display-item-wrap
+    height calc(100% - 111px)
 
-.display-item-wrap
-  // margin-bottom 50px
 .carousel-item-wrap
-  height 70px
+  height 70px !important
   width: 100%;
   display: inline-block;
   border-radius 4px
@@ -63,7 +91,6 @@
     border-radius 4px
 .selected-item-wrap
   display block
-  height 730px;
   img
     height 100%
     margin 0 auto
@@ -74,6 +101,7 @@
 .added-to-cart
   background #20bd99
   color white
+
 
 .slick-slide
   width: 128px;
@@ -95,7 +123,7 @@
     label
       cursor pointer;
       border 1px solid transparent;
-      width-height-radius(30px, 30px, 50%)
+      // width-height-radius(30px, 30px, 50%)
       margin 0
 
   .size-btn-main input:checked + label {

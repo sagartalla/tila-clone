@@ -67,6 +67,7 @@ const actionCreators = {
         data: {
           reason: params.reason,
           comment: params.comment,
+          sub_reasons: params.subReason,
         }
       }
     };
@@ -76,10 +77,10 @@ const actionCreators = {
       type: actions.RESET_ORDER_ISSUE,
     }
   },
-  getReasons: () => {
+  getReasons: (params) => {
     return ({
       type: actions.GET_REASONS,
-      payload: api.getReasons()
+      payload: api.getReasons(params)
     })
   },
   submitCancelRequest: (params) => {

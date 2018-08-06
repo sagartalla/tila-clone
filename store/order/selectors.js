@@ -25,7 +25,7 @@ const getOrderDetails = (store) => {
           img: i.variant_info.image_url,
           name: i.variant_info.title,
           item_tracking_id: i.item_tracking_id || shortid.generate(),
-          status: i.status,
+          status: i.external_status,
           state_times: i.state_times,
           price: i.price.offer_price,
           currency_code: currency_code,
@@ -58,7 +58,7 @@ const getLoadingStatus = (store) => {
 
 const getSelectedOrder = (store) => (orderItemId) => {
   const item = _.find({ order_item_id: orderItemId }, store.singleOrderReducer.data.orderDetails.order_items);
-  return { id: item.order_item_id, img: item.variant_info.image_url, name: item.variant_info.title, item_tracking_id: item.item_tracking_id || shortid.generate(), status: item.status }
+  return { id: item.order_item_id, img: item.variant_info.image_url, name: item.variant_info.title, item_tracking_id: item.item_tracking_id || shortid.generate(), status: item.external_status }
 }
 
 const getReturnStatus = (store) => {

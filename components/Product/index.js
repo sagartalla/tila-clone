@@ -24,62 +24,123 @@ import { mergeCss } from '../../utils/cssUtil';
 const styles = mergeCss('components/Product/product');
 
 const getProductComponent = (isPreview, taskCode) => {
-  const Product = ({ productData }) => {
-    const { catalog, titleInfo, keyfeatures, imgUrls, offerInfo, shippingInfo, returnInfo, details } = productData;
-    console.log('productData', productData);
-    return (
-      <div>
-        {
-          isPreview ? null : <HeaderBar />
+  class Product extends Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        stickyElements: {
+          details: 'stateTop',
+          slidebar: 'stateTop',
         }
-        <div className={`${styles['page-details-slider']}`}>
-          <Row className={`${styles['m-0']} ${styles['relative']}`}>
-            <Col xs={12} md={8} className={styles['pl-0']}>
-              <Dispalay imgs={imgUrls} />
-            </Col>
-              <div className={`${styles['details-right-part']} ${styles['absolute']}`}>
-                <div className={`${styles['details-right-part-inn']}`}>
-                  <TitleInfo {...titleInfo} isPreview={isPreview}/>
-                  <ProductDetails details={details} keyfeatures={keyfeatures} isPreview={isPreview}/>
+      }
+      this.detailsRef = React.createRef();
+      this.bottomRef = React.createRef();
+      this.handleScroll = this.handleScroll.bind(this);
+    }
+
+    componentDidMount() {
+      window.addEventListener('scroll', this.handleScroll);
+    }
+
+    componentWillUnmount() {
+      window.removeEventListener('scroll', this.handleScroll);
+    }
+
+    handleScroll(event) {
+      let scrollTop = event.currentTarget.pageYOffset;
+      let detailsRect = this.detailsRef.current.getBoundingClientRect();
+      let bottomRefRect = this.bottomRef.current.getBoundingClientRect();
+      if(bottomRefRect.top <= window.innerHeight && this.state.stickyElements.details !== 'stateBottom'){
+        this.setState({
+          stickyElements: {
+            ...this.state.stickyElements,
+            details: 'stateBottom',
+          }
+        });
+        return;
+      }
+      if(bottomRefRect.top > window.innerHeight && detailsRect.top <= 61 && this.state.stickyElements.details !== 'stateMiddle') {
+        this.setState({
+          stickyElements: {
+            ...this.state.stickyElements,
+            details: 'stateMiddle',
+          }
+        });
+        return;
+      }
+      if(detailsRect.top > 61) {
+        this.setState({
+          stickyElements: {
+            ...this.state.stickyElements,
+            details: 'stateTop',
+          }
+        });
+        return;
+      }
+    }
+
+    render() {
+      const { productData } = this.props;
+      const { catalog, titleInfo, keyfeatures, imgUrls, offerInfo, shippingInfo, returnInfo, details } = productData;
+      const { stickyElements } = this.state;
+      return (
+        <div className={styles['pdp-wrap']}>
+          {
+            isPreview ? null : <HeaderBar />
+          }
+          <div className={`${styles['relative']}`}>
+            <div className={`${styles['page-details-slider']}`}>
+              <Row className={`${styles['m-0']} ${styles['ht-100per']}`}>
+                <Col xs={12} md={8} className={`${styles['pl-0']} ${styles['ht-100per']}`}>
+                  <Dispalay imgs={imgUrls} />
+                </Col>
+                <div className={styles['details-pixel']} ref={this.detailsRef}></div>
+                <div className={`${styles['details-right-part']} ${styles[stickyElements.details]}` }>
+                  <div className={`${styles['details-right-part-inn']}`}>
+                    <TitleInfo {...titleInfo} isPreview={isPreview}/>
+                    <ProductDetails details={details} keyfeatures={keyfeatures} isPreview={isPreview}/>
+                    {
+                      isPreview ? null : <Shipping shippingInfo={shippingInfo} />
+                    }
+                    {
+                      isPreview ? null : <ProductPrice offerInfo={offerInfo} />
+                    }
+                  </div>
                   {
-                    isPreview ? null : <Shipping shippingInfo={shippingInfo} />
-                  }
-                  {
-                    isPreview ? null : <ProductPrice offerInfo={offerInfo} />
+                    isPreview ? null : <AddToCart offerInfo={offerInfo} />
                   }
                 </div>
-                {
-                  isPreview ? null : <AddToCart offerInfo={offerInfo} />
-                }
-              </div>
-          </Row>
-        </div>
-         <div className={styles['bg-white']}>
-            <Grid>
-              <Row>
-                <Col md={8}>
-                {
-                  isPreview ? null : <RecentView />
-                }
-                </Col>
-                <Col md={8}>
-                {
-                  isPreview ? null : <ReviewsTab />
-                }
-                </Col>
-                <Col md={8}>
-                  <ElectronicsTab catalog={catalog}/>
-                </Col>
               </Row>
-            </Grid>
+            </div>
+            <div className={styles['bg-white']}>
+              <Grid>
+                <Row>
+                  <Col md={8}>
+                  {
+                    isPreview ? null : <RecentView />
+                  }
+                  </Col>
+                  {/*<Col md={8}>
+                  {
+                    isPreview ? null : <ReviewsTab />
+                  }
+                  </Col>*/}
+                  <Col md={8}>
+                    <ElectronicsTab catalog={catalog}/>
+                  </Col>
+                </Row>
+              </Grid>
+            </div>
+            <div className={styles['pdp-bottom-ref']} ref={this.bottomRef}></div>
           </div>
-        <div className={`${styles['border-b']} ${styles['border-t']} ${styles['pb-30']} ${styles['pt-30']}`}>
-        {
-          isPreview ? null : <FooterBar />
-        }
-      </div>
-      </div>
-    );
+          <div className={`${styles['border-b']} ${styles['border-t']} ${styles['pb-30']} ${styles['pt-30']}`}>
+          {
+            isPreview ? null : <FooterBar />
+          }
+          </div>
+        </div>
+      );
+    }
   };
 
   const mapStateToProps = (store) => ({

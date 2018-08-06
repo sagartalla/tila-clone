@@ -7,7 +7,7 @@ const getCartResults = (store) => {
     const img_url = 'https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/';
     const newData = { items: [], total_price: 0, ui };
 
-    if (data.items) {
+    if (data.items !== null && data.items.length) {
       newData.total_price = data.total_price;
       newData.total_offer_price = data.total_offer_price;
       newData.total_discount = data.total_discount;
@@ -20,6 +20,8 @@ const getCartResults = (store) => {
           item_id: item.cart_item_id,
           product_id: item.listing_info.product_id,
           variant_id: item.listing_info.variant_id,
+          listing_id: item.listing_info.listing_id,
+          cart_item_id: item.cart_item_id,
           name: item.product_details.product_details_vo.cached_product_details.attribute_map.calculated_display_name.attribute_values[0].value,
           price: item.listing_info.selling_price,
           cur: item.listing_info.selling_price_currency,
@@ -49,8 +51,18 @@ const getErrorMessege = (store) => {
   return store.cartReducer.error;
 }
 
+// const getCartItemIdFromListingId = (store) => (cartData, listingId) => {
+//   const val = cartData.items.filter(item => item.listing_id == listingId)
+//   return val.length > 0 ? val[0].cart_item_id : ''
+// }
+
 const isAddedToCart = (store) => {
-  return store.cartReducer.data.item_status === 'ADDED';
+  try {
+    return store.cartReducer.data.addToCart.item_status === 'ADDED';
+  } catch (e) {
+
+  }
+
 }
 
 export { getCartResults, getLoadingStatus, getErrorMessege, isAddedToCart }

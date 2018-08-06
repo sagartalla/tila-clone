@@ -6,6 +6,7 @@ const actions = {
   REMOVE_CART_ITEM: 'REMOVE_CART_ITEM',
   CART_ITEM_COUNT: 'CART_ITEM_COUNT',
   ADD_REMOVE_GIFT: 'ADD_REMOVE_GIFT',
+  RESET_ADD_TO_CART: 'RESET_ADD_TO_CART'
 };
 
 const actionCreators = {
@@ -45,7 +46,15 @@ const actionCreators = {
       payload: api.giftApi(cartItemId, typ)
     }
   },
+  resetAddtoCart: () => ({
+    type: actions.RESET_ADD_TO_CART
+  }),
+
+  addToCartAndFetch: (params) => (dispatch, getState) => {
+    return dispatch(actionCreators.addToCart(params)).then(() => {
+      dispatch(actionCreators.getCartResults());
+    })
+  }
 };
 
 export { actions, actionCreators };
-

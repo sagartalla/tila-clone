@@ -31,8 +31,12 @@ const actionCreators = {
     return dispatch(cartActionCreators.addToCart(params)).then(() => {
       dispatch(actionCreators.deleteWishlist(wishlist_id));
     })
+  },
+  addToWishlistAndFetch: (params) => (dispatch, getState) => {
+    return dispatch(actionCreators.addToWishlist(params)).then(() => {
+      dispatch(actionCreators.getWishlist());
+    })
   }
 };
 
 export { actions, actionCreators };
-

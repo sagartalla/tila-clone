@@ -19,7 +19,7 @@ const authReducer = typeToReducer({
     PENDING: state => {
       return Object.assign({}, state, {
         error: '',
-      }, { ui: { loading: true } });
+      }, { ui: { loginLoading: true } });
     },
     FULFILLED: (state, action) => {
       return Object.assign({}, state, {
@@ -27,25 +27,32 @@ const authReducer = typeToReducer({
           ...state.data,
           ...action.payload.data
         },
-        ui: { loading: false }
+        ui: { loginLoading: false }
       });
     },
     REJECTED: (state, action) => {
+      const messege = ({403: 'username/password did not match'}[action.payload.response.status]);
       return Object.assign({}, state, {
-        error: action.payload.response.data.message,
+        error: messege,
         data: {
           ...state.data,
           isLoggedIn: false
         },
-        ui: { loading: false }
+        ui: { loginLoading: false }
       });
     },
+  },
+  [actions.RESET_LOGIN_ERROR]: (state) => {
+    return {
+      ...state,
+      error: '',
+    }
   },
   [actions.USER_REGISTER]: {
     PENDING: state => {
       return Object.assign({}, state, {
         error: '',
-      }, { ui: { loading: true } });
+      }, { ui: { loginLoading: true } });
     },
     FULFILLED: (state, action) => {
       return Object.assign({}, state, {
@@ -53,13 +60,13 @@ const authReducer = typeToReducer({
           ...state.data,
           registrationDetails: action.payload.data
         },
-        ui: { loading: false }
+        ui: { loginLoading: false }
       });
     },
     REJECTED: (state, action) => {
       return Object.assign({}, state, {
         error: action.payload.response ? action.payload.response.data.message : action.payload.message,
-        ui: { loading: false }
+        ui: { loginLoading: false }
       });
     },
   },

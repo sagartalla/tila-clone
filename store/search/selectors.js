@@ -1,6 +1,35 @@
 import shortid from 'shortid';
 import _ from 'lodash';
 
+const addCartAndWishlistDetails = (store, results) => {
+  const { items=[] } =  store.cartReducer.data;
+  const { data=[] } = store.wishlistReducer;
+
+  if(items === null){
+    return results;
+  }
+  // if(items && items.length){
+  //   return results;
+  // }
+  // if(data && data.length) {
+  //   return resutls;
+  // }
+
+  const cartListingIds = items.map((i) =>  i.listing_id) || [];
+  const wishListProductIds = store.wishlistReducer.data.map((w) => w.product_id) || [];
+  return {
+    ...results,
+    items: results.items.map((i) => {
+      const { listingId } = i.variants;
+      return ({
+        ...i,
+        addedToCart: listingId ? cartListingIds.indexOf(i.variants.listingId[0]) !== -1 : false,
+        addedToWishlist: wishListProductIds.indexOf(i.productId) !== -1,
+      });
+    }),
+  };
+};
+
 const getSearchFilters = (store) => {
   const filters = {
     category: [],
@@ -78,7 +107,7 @@ const getSearchResutls = (store) => {
       }else if (priceInfo.length > 1) {
         priceRange = priceInfo.sort().join(' - ')
       } else {
-        priceRange = priceInfo[0] || 'No price info';
+        priceRange = priceInfo[0] || '';
       }
       return {
         id: product.id,
@@ -93,7 +122,7 @@ const getSearchResutls = (store) => {
       };
     });
   }
-  return resutls;
+  return addCartAndWishlistDetails(store, resutls);
 }
 
 const getPaginationDetails = (store) => {
@@ -107,14 +136,16 @@ const getUIState = (store) => {
   return store.searchReducer.ui;
 }
 
-const getCategoryId = (state, query) => {
+const getCategoryId = (store) => {
+  // DO NOT remove
   //not used for now. May be required when we have a different service for facets.
-  const category = _.find(state.searchReducer.data.categoryFilter.parentCategories, { canonicalId: query.category })
-  if (query.subCategory){
-    const subCategory = _.find(category.childCategories, {canonicalId: query.subCategory})
-    return subCategory.id;
-  }
-  return category.id;
+  // const category = _.find(state.searchReducer.data.categoryFilter.parentCategories, { canonicalId: query.category })
+  // if (query.subCategory){
+  //   const subCategory = _.find(category.childCategories, {canonicalId: query.subCategory})
+  //   return subCategory.id;
+  // }
+  // return category.id;
+  return store.searchReducer.data.searchDetails.categoryFilter.id;
 }
 
 const getQuery = (store) => {
@@ -142,5 +173,8 @@ const getFacetfilters = (store) => (queryObject) => {
   return facetFilters;
 }
 
+const getSearchBarFilterState = (state) => {
+  return state.searchReducer.ui.showFilters;
+}
 
-export { getSearchFilters, getSearchResutls, getPaginationDetails, getUIState, getCategoryId, getQuery, getFacetfilters, optionParams };
+export { getSearchFilters, getSearchResutls, getPaginationDetails, getUIState, getCategoryId, getQuery, getFacetfilters, optionParams, getSearchBarFilterState, addCartAndWishlistDetails };
