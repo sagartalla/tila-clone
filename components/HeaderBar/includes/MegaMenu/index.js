@@ -89,8 +89,8 @@ class MegaMenu extends Component {
   render() {
     const { megamenu, query={} } = this.props;
     const { category } = query;
-    // const { selectedCategory } = this.state;
-    const selectedCategory = 3245;
+    const { selectedCategory } = this.state;
+    // const selectedCategory = 3245;
     // const selectedCategory = 3234;
     const selectedCategoryTree = _.find(megamenu, { id: selectedCategory });
     return (
