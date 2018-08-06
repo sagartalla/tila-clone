@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import Logo from './Logo';
 import Search from './Search';
 import ActionBar from './ActionBar';
-import MegaMenu from './MegaMenu';
+import MegaMenu from './includes/MegaMenu';
 import SearchFilters from '../common/SearchFilters';
 import { mergeCss } from '../../utils/cssUtil';
 import publicUrls from '../../constants';
