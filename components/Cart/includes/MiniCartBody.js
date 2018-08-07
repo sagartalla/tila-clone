@@ -23,7 +23,7 @@ const MiniCartBody = props => {
           showBlocker ? <Blocker /> : ''
         }
         <div>
-          <h5 className={`${styles['mt-0']} ${styles['fontW600']} ${styles['thick-gry-clr']} ${styles['mb-0']}`}>
+          <h5 className={`${styles['mt-0']} ${styles['pb-15']} ${styles['fontW600']} ${styles['thick-gry-clr']} ${styles['mb-0']}`}>
             <span>{cnt + ' Items'}</span>
           </h5>
         </div>
@@ -75,7 +75,7 @@ const MiniCartBody = props => {
         </div>
       </div>
       {
-        showCheckOutBtn ?
+        cnt > 0 && showCheckOutBtn ?
           <div className={`${styles['p-20']} ${styles['instant-checkout-btn-part']}`}>
             <div className={`${styles['flx-spacebw-alignc']} ${styles['pb-10']}`}>
               <span className={styles['fontW600']}>Total Amount :</span><span className={`${styles['fs-16']} ${styles['fontW600']}`}> {total_offer_price + ' ' + currency}</span>
