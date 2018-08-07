@@ -64,6 +64,7 @@ class Payments extends React.Component {
       editCartDetails: true,
     }
 
+    this.saveCard = this.saveCard.bind(this);
     this.makePayment = this.makePayment.bind(this);
     this.inputOnChange = this.inputOnChange.bind(this);
     this.editAddressTab = this.editAddressTab.bind(this);
@@ -196,6 +197,14 @@ class Payments extends React.Component {
     this.props.emptyPaymentPaylod();
   }
 
+  saveCard(e) {
+    this.props.saveCard({
+      "save_card": e.target.checked,
+      "transaction_id": "string",
+      "user_id": "string"
+    });
+  }
+
   render() {
     const { login, showTab, paymentConfigJson, signInLoader, editCartDetails } = this.state;
     const { paymentOptions, defaultAddress, isLoggedIn, cartResults } = this.props;
@@ -237,6 +246,7 @@ class Payments extends React.Component {
               <PaymentMode
                 showTab={showTab}
                 data={paymentOptions}
+                saveCard={this.saveCard}
                 makePayment={this.makePayment}
                 showPaymentType={this.showPaymentType}
                 configJson={paymentConfigJson.payment}
@@ -272,23 +282,24 @@ class Payments extends React.Component {
 }
 
 const mapStateToprops = (store) => ({
+  userCreds: authSelectors.getUserCreds(store),
+  cartResults: cartSelectors.getCartResults(store),
   paymentOptions: selectors.getPaymentOptions(store),
   makePaymentOptions: selectors.getPaymentUrl(store),
   defaultAddress: selectors.getDefaultAddress(store),
   isLoggedIn: authSelectors.getLoggedInStatus(store),
-  userCreds: authSelectors.getUserCreds(store),
-  cartResults: cartSelectors.getCartResults(store),
 })
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      createOrder: actionCreators.createOrder,
+      saveCard: actionCreators.saveCard,
       doPayment: actionCreators.doPayment,
-      emptyPaymentPaylod: actionCreators.emptyPaymentPaylod,
       userLogin: authActionCreators.userLogin,
+      createOrder: actionCreators.createOrder,
       getLoginInfo: authActionCreators.getLoginInfo,
       getCartResults: cartActionCreators.getCartResults,
+      emptyPaymentPaylod: actionCreators.emptyPaymentPaylod,
     },
     dispatch,
   );

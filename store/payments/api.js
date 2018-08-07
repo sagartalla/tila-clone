@@ -10,16 +10,16 @@ const transactionApi = (orderRes) => {
       "payment_details": [
         {
           "amount": data.amount,
-          "currency":data.currency,
+          "currency": data.currency,
           "payment_mode": "PAY_ONLINE"
         }
       ],
       "transaction_id": data.transaction_id
     }
-    
-    
+
+
     return axios.post(`${constants.TRANSACTIONS_API_URL}/fpts/transaction/process`, params).then(({ data: payData }) => {
-      
+
       return { orderRes, data, payData }
     });
   })
@@ -34,7 +34,7 @@ const createOrder = () => {
 
 //Create Order First step.
 const createOrderApi = (defaultAddrId) => {
-  return axios.put(`${constants.CART_API_URL}/api/v1/cart/view`, {'address_id': defaultAddrId }).then(({ data }) => {
+  return axios.put(`${constants.CART_API_URL}/api/v1/cart/view`, { 'address_id': defaultAddrId }).then(({ data }) => {
     return createOrder(data);
   });
 };
@@ -45,4 +45,10 @@ const doPaymentApi = (params) => {
   });
 }
 
-export default { createOrderApi, doPaymentApi };
+const saveCardApi = (params) => {
+  return axios.post(`${constants.TRANSACTIONS_API_URL}/fpts/transaction/save_card`, params).then(({ data }) => {
+    return { data }
+  });
+}
+
+export default { createOrderApi, doPaymentApi, saveCardApi };
