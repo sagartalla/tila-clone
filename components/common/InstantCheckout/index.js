@@ -104,7 +104,7 @@ class InstantCheckout extends Component {
     return (
       <div>
         {
-          addressResults.length > 0 && vaultResults.length > 0 ?
+          defaultAddr.length > 0 && defaultCard.length > 0 ?
             <div className={`${styles['instant-checkout']} ${styles['p-10']}`}>
               <h4 className={`${styles['fontW600']} ${styles['mb-0']} ${styles['flex']}`}>Checkout with 1 click <span className={`${styles['checkout-quat']} ${styles['fs-12']} ${styles['flex-center']} ${styles['justify-around']}`}>?</span></h4>
               <p className={`${styles['fs-12']} ${styles['thick-gry-clr']}`}>With your preffered payment and delivery address</p>
