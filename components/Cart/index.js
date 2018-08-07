@@ -88,7 +88,7 @@ class Cart extends Component {
 
   render() {
     const { showBlocker } = this.state;
-    const { cartData, editCartDetails } = this.props;
+    const { cartData, editCartDetails, showCheckOutBtn } = this.props;
     return (
       <div>
         {
@@ -99,9 +99,11 @@ class Cart extends Component {
                 data={cartData}
                 showBlocker={showBlocker}
                 editCartDetails={editCartDetails}
+                showCheckOutBtn={showCheckOutBtn}
                 removeCartItem={this.removeCartItem}
                 increaseItemCnt={this.increaseItemCnt}
                 decreaseItemCnt={this.decreaseItemCnt}
+                checkoutBtnHandler={this.checkoutBtnHandler}
               />
             </div>
             :
