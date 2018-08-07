@@ -20,7 +20,7 @@ const List = props => props.data.map((val, id) => {
               <SVGComponent src={itemVal.icon} />
             </div>
             <div className={`${styles['list-items']} ${styles['fs-14']}`}>{itemVal.display}</div>
-            {
+            {/* {
               itemVal.count
               ?
               <div className={`${styles['list-common']} ${styles['flex']} ${styles['justify-center']} ${styles['align-center']}`}>
@@ -28,7 +28,7 @@ const List = props => props.data.map((val, id) => {
               </div>
               :
             null
-            }
+            } */}
 
           </div>
         </Link>
