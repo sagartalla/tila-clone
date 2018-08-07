@@ -61,13 +61,18 @@
     .header-meganenu-sub
       position relative
       z-index 8
-      .submenu-head
-        overflow: hidden;
-        margin-bottom: 0;
+      .submenu-head-wrap
         background: #4a4a4a;
-        color: #fff;
-        li
-          cursor pointer
+        .submenu-head
+          overflow: hidden;
+          margin-bottom: 0;
+          color: #fff;
+          li
+            cursor pointer
+            height 40px
+            &:hover
+              border-bottom 5px solid #fff
+              box-sizing border-box
 
 .search-wrapper
   position relative
@@ -284,17 +289,13 @@
     border-bottom: 4px solid lifestyle-color
 
 .megamenu-event-wrapper
-  height 500px
   overflow hidden
   position absolute
   left 0
   width 100%
+  background #fff
 
 .megamenu-dropdown
-  width 100%
-  background #fff
-  position absolute
-  left 0
   z-index 1
   display flex
   &.max-height
