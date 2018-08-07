@@ -152,6 +152,10 @@ const getQuery = (store) => {
   return store.searchReducer.data.searchDetails.query;
 }
 
+const autoCompleteData = (store) => {
+  return store.searchReducer.autoSuggestion
+}
+
 const optionParams = (store) => {
   let isListed = store.searchReducer.data;
   isListed = isListed ? isListed.hardCodedValues : true;
@@ -177,4 +181,4 @@ const getSearchBarFilterState = (state) => {
   return state.searchReducer.ui.showFilters;
 }
 
-export { getSearchFilters, getSearchResutls, getPaginationDetails, getUIState, getCategoryId, getQuery, getFacetfilters, optionParams, getSearchBarFilterState, addCartAndWishlistDetails };
+export { getSearchFilters, getSearchResutls, getPaginationDetails, getUIState, getCategoryId, getQuery, getFacetfilters, optionParams, getSearchBarFilterState, addCartAndWishlistDetails,autoCompleteData };

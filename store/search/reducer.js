@@ -14,6 +14,7 @@ const initialState = {
     }
   },
   error: {},
+  autoSuggestion:[]
 };
 const searchReducer = typeToReducer({
   [actions.GET_MORE_RESULTS]: {
@@ -63,6 +64,12 @@ const searchReducer = typeToReducer({
         ...state.ui,
         showFilters: action.payload.show,
       }
+    }
+  },
+  [actions.AUTO_SUGGESTIONS]: (state,action) => {
+    return {
+      ...state,
+      autoSuggestion:action.payload
     }
   }
 }, initialState);
