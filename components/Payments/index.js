@@ -202,7 +202,7 @@ class Payments extends React.Component {
     this.props.saveCard({
       "save_card": e.target.checked,
       "transaction_id": paymentOptions.data.transaction_id,
-      "user_id": "string"
+      "user_id": ""
     });
   }
 
