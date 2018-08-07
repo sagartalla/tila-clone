@@ -18,7 +18,7 @@ const RecentView = props => {
               <Col md={2} className={`${styles['pl-0']}`}>
                 <a href={item.uri}>
                   <div className={`${styles['recentview-main-inn']} ${styles['flex']} ${styles['flex-colum']}`}>
-                    <img src={"https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/" + item.im} className="img-responsive" />
+                    <div className={styles['recentview-main-inn-img']}><img src={"https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/" + item.im} className="img-responsive" /></div>
                     <div>
                       <h6 className={`${styles['fs-10']} ${styles['mb-0']} ${styles['thick-gry-clr']} ${styles['elipsis']}`}>{item.nm}</h6>
                       <span className={`${styles['fs-12']} ${styles['thick-gry-clr']}`}><span className={styles['fontW600']}>{item.pr} </span><span>{item.cd}</span></span>
