@@ -10,8 +10,8 @@ import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Cart/cart');
 
 const MiniCartBody = props => {
-  const { showBlocker, increaseItemCnt, decreaseItemCnt, data, removeCartItem, editCartDetails } = props;
-  const { items, error } = data;
+  const { showBlocker, increaseItemCnt, decreaseItemCnt, data, removeCartItem, editCartDetails, showCheckOutBtn, checkoutBtnHandler } = props;
+  const { items, error, total_offer_price, currency } = data;
   const flag = data && items && items.length;
   const cnt = flag > 0 ? items.length : 0;
   const { CART_PAGE } = languageDefinations();
@@ -70,6 +70,19 @@ const MiniCartBody = props => {
             )
           })
         }
+        {
+          showCheckOutBtn ?
+            <div>
+              <div>
+                Total Amount : {total_offer_price + ' ' + currency}
+              </div>
+              <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles['fs-18']} ${styles['flex-center']} ${styles['justify-center']}`} onClick={checkoutBtnHandler}>
+                <SVGComponent clsName={`${styles['secure-checkout']}`} src="icons/common-icon/secure-checkout" />
+                <span className={styles['pl-5']}>{CART_PAGE.SECURE_CHECKOUT}</span>
+              </button>
+            </div>
+            : null
+        }
       </div>
     </div>
   );
@@ -84,7 +97,7 @@ MiniCartBody.propTypes = {
 };
 
 MiniCartBody.defaultProps = {
-
+  showCheckOutBtn: false
 };
 
 export default MiniCartBody;
