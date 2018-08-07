@@ -10,7 +10,7 @@ import Dispalay from './includes/Display';
 import TitleInfo from './includes/TitleInfo';
 import Offers from './includes/Offers';
 import Shipping from './includes/Shipping';
-import ProductPrice from './includes/ProductPrice';
+
 import AddToCart from './includes/AddToCart';
 import RecentView from './includes/RecentView';
 import Review from './includes/Reviews';
@@ -100,11 +100,9 @@ const getProductComponent = (isPreview, taskCode) => {
                     <TitleInfo {...titleInfo} isPreview={isPreview}/>
                     <ProductDetails details={details} keyfeatures={keyfeatures} isPreview={isPreview}/>
                     {
-                      isPreview ? null : <Shipping shippingInfo={shippingInfo} />
+                      isPreview ? null : <Shipping shippingInfo={shippingInfo} offerInfo={offerInfo} />
                     }
-                    {
-                      isPreview ? null : <ProductPrice offerInfo={offerInfo} />
-                    }
+                  
                   </div>
                   {
                     isPreview ? null : <AddToCart offerInfo={offerInfo} />
