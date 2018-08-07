@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Grid, Row, Col, Tabs, Tab } from 'react-bootstrap';
 import NoSSR from 'react-no-ssr';
 import PropTypes from 'prop-types';
+import _ from 'lodash';
 
 import { selectors } from '../../store/product';
 import HeaderBar from '../HeaderBar/index';
@@ -31,7 +32,8 @@ const getProductComponent = (isPreview, taskCode) => {
         stickyElements: {
           details: 'stateTop',
           slidebar: 'stateTop',
-        }
+        },
+        recentlyViewed: [],
       }
       this.detailsRef = React.createRef();
       this.bottomRef = React.createRef();
@@ -39,6 +41,39 @@ const getProductComponent = (isPreview, taskCode) => {
     }
 
     componentDidMount() {
+      if (window.localStorage) {
+        const { productData } = this.props;
+        const { offerInfo, titleInfo, imgUrls, shippingInfo } = productData;
+
+        if (offerInfo.price) {
+          const pr = offerInfo.price.split(' ');
+          const recentData = localStorage.getItem('rv');
+          let arr = recentData ? JSON.parse(recentData) : [];
+          let index = _.findIndex(arr, function (o) { return o.id == shippingInfo.listing_id; })
+
+
+          // if (index > -1 && arr.length <= 5) {
+          //   arr = arr.slice(index, 1);
+          // } else
+          if (arr.length == 5) {
+            arr.pop()
+          }
+
+          if (index == -1) {
+            arr.unshift({
+              'nm': titleInfo.title,
+              'im': imgUrls[0].url,
+              'pr': pr[0],
+              'cd': pr[1],
+              'uri': location.href,
+              'id': shippingInfo.listing_id
+            });
+            localStorage.setItem('rv', JSON.stringify(arr));
+          }
+          this.setState({ recentlyViewed: arr })
+        }
+      }
+
       window.addEventListener('scroll', this.handleScroll);
     }
 
@@ -50,7 +85,7 @@ const getProductComponent = (isPreview, taskCode) => {
       let scrollTop = event.currentTarget.pageYOffset;
       let detailsRect = this.detailsRef.current.getBoundingClientRect();
       let bottomRefRect = this.bottomRef.current.getBoundingClientRect();
-      if(bottomRefRect.top <= window.innerHeight && this.state.stickyElements.details !== 'stateBottom'){
+      if (bottomRefRect.top <= window.innerHeight && this.state.stickyElements.details !== 'stateBottom') {
         this.setState({
           stickyElements: {
             ...this.state.stickyElements,
@@ -59,7 +94,7 @@ const getProductComponent = (isPreview, taskCode) => {
         });
         return;
       }
-      if(bottomRefRect.top > window.innerHeight && detailsRect.top <= 61 && this.state.stickyElements.details !== 'stateMiddle') {
+      if (bottomRefRect.top > window.innerHeight && detailsRect.top <= 61 && this.state.stickyElements.details !== 'stateMiddle') {
         this.setState({
           stickyElements: {
             ...this.state.stickyElements,
@@ -68,7 +103,7 @@ const getProductComponent = (isPreview, taskCode) => {
         });
         return;
       }
-      if(detailsRect.top > 61) {
+      if (detailsRect.top > 61) {
         this.setState({
           stickyElements: {
             ...this.state.stickyElements,
@@ -82,7 +117,7 @@ const getProductComponent = (isPreview, taskCode) => {
     render() {
       const { productData } = this.props;
       const { catalog, titleInfo, keyfeatures, imgUrls, offerInfo, shippingInfo, returnInfo, details } = productData;
-      const { stickyElements } = this.state;
+      const { stickyElements, recentlyViewed } = this.state;
       return (
         <div className={styles['pdp-wrap']}>
           {
@@ -95,10 +130,10 @@ const getProductComponent = (isPreview, taskCode) => {
                   <Dispalay imgs={imgUrls} />
                 </Col>
                 <div className={styles['details-pixel']} ref={this.detailsRef}></div>
-                <div className={`${styles['details-right-part']} ${styles[stickyElements.details]}` }>
+                <div className={`${styles['details-right-part']} ${styles[stickyElements.details]}`}>
                   <div className={`${styles['details-right-part-inn']}`}>
-                    <TitleInfo {...titleInfo} isPreview={isPreview}/>
-                    <ProductDetails details={details} keyfeatures={keyfeatures} isPreview={isPreview}/>
+                    <TitleInfo {...titleInfo} isPreview={isPreview} />
+                    <ProductDetails details={details} keyfeatures={keyfeatures} isPreview={isPreview} />
                     {
                       isPreview ? null : <Shipping shippingInfo={shippingInfo} offerInfo={offerInfo} />
                     }
@@ -114,9 +149,9 @@ const getProductComponent = (isPreview, taskCode) => {
               <Grid>
                 <Row>
                   <Col md={8}>
-                  {
-                    isPreview ? null : <RecentView />
-                  }
+                    {
+                      isPreview ? null : <NoSSR> <RecentView recentlyViewed={recentlyViewed} shippingInfo={shippingInfo} /> </NoSSR>
+                    }
                   </Col>
                   {/*<Col md={8}>
                   {
@@ -124,7 +159,7 @@ const getProductComponent = (isPreview, taskCode) => {
                   }
                   </Col>*/}
                   <Col md={8}>
-                    <ElectronicsTab catalog={catalog}/>
+                    <ElectronicsTab catalog={catalog} />
                   </Col>
                 </Row>
               </Grid>
@@ -132,9 +167,9 @@ const getProductComponent = (isPreview, taskCode) => {
             <div className={styles['pdp-bottom-ref']} ref={this.bottomRef}></div>
           </div>
           <div className={`${styles['border-b']} ${styles['border-t']} ${styles['pb-30']} ${styles['pt-30']}`}>
-          {
-            isPreview ? null : <FooterBar />
-          }
+            {
+              isPreview ? null : <FooterBar />
+            }
           </div>
         </div>
       );
