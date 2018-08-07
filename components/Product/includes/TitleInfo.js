@@ -86,7 +86,7 @@ class TitleInfo extends Component {
     const { brand, title, rating, reviews, price, originalPrice, discountPercent, totalInventoryCount, isPreview, listingId, listingCartData } = this.props;
     const { showCheckoutModal } = this.state;
     return (
-      <div className={styles['pb-15']}>
+      <div className={styles['pb-10']}>
         <div className={`${styles['fontW300']} ${styles['lgt-blue']}`}>{brand}</div>
         <div className={`${styles['fs-26']} ${styles['fontW300']} ${styles['black-color']}`}>{title}</div>
         {
@@ -112,7 +112,7 @@ class TitleInfo extends Component {
             :
             <div className={`${styles['flex-center']} ${styles['checkout-instantly']} ${styles['pt-15']}`}>
               <div className={`${styles['flex']}`}>
-                <a className={`${styles['fp-btn']} ${styles['fp-btn-default']}`} onClick={this.checkoutInstantHandler}>Checkout Instantly </a>
+                <a className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['small-btn']}`} onClick={this.checkoutInstantHandler}>Checkout Instantly </a>
               </div>
               <div>
                 {

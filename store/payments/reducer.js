@@ -26,7 +26,7 @@ const paymentsReducer = typeToReducer({
       return Object.assign({}, state, { error: action.payload.message, ui: { loading: false } })
     },
     FULFILLED: (state, action) => {
-      const payRes = {'payRes': action.payload.data}
+      const payRes = { 'payRes': action.payload.data }
       const newState = {
         ...state,
         data: {
@@ -38,8 +38,18 @@ const paymentsReducer = typeToReducer({
         }
       }
       return newState;
-
-      // return Object.assign({}, state, { data: action.payload, ui: { loading: true } });
+    },
+  },
+  [actions.SAVE_CARD]: {
+    PENDING: state => {
+      return Object.assign({}, state, { ui: { loading: true } });
+    },
+    REJECTED: (state, action) => {
+      return Object.assign({}, state, { error: action.payload.message, ui: { loading: false } })
+    },
+    FULFILLED: (state, action) => {
+      // Not over writing with return data. Because we dont need to save ajax call return data.
+      return Object.assign({}, state, { data: { ...state.data }, ui: { loading: true } });
     },
   },
 

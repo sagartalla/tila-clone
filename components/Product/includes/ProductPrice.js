@@ -7,7 +7,7 @@ const styles = mergeCss('components/Product/product');
 const ProductPrice = ({offerInfo}) => {
   const { price, listingAvailable, listingId, stockError, availabilityError } = offerInfo;
  return(
-  <div className={`${styles['box']} ${styles['p-15']} ${styles['border-radius4']}`}>
+  <div className={`${styles['p-15']} ${styles['product-price-bg']} ${styles['border-radius4']}`}>
     {
       listingAvailable
       ?
