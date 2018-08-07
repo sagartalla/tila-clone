@@ -118,7 +118,8 @@ const getSearchResutls = (store) => {
         displayName: product.attributes.calculated_display_name,
         variants: variantInfo,
         priceRange,
-        offers: offers,
+        currency: product.variantListingAdapters[0].attributes.currency,
+        offers: Math.max.apply(null, offers),
       };
     });
   }
