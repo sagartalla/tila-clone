@@ -198,10 +198,11 @@ class Payments extends React.Component {
   }
 
   saveCard(e) {
+    const { paymentOptions } = this.props;
     this.props.saveCard({
       "save_card": e.target.checked,
-      "transaction_id": "string",
-      "user_id": "string"
+      "transaction_id": paymentOptions.data.transaction_id,
+      "user_id": ""
     });
   }
 

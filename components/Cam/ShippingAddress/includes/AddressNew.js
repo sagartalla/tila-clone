@@ -47,10 +47,10 @@ const AddressNew = props => {
           </Col>
           <Col md={6} sm={12} xs={12}>
             <div className={`${styles['fp-input']}`}>
-              <input type="text" name="state" onChange={inputOnChange} value={data.state} className={styles.input} required />
+              <input type="text" name="country_name" onChange={inputOnChange} value={data.state} className={styles.input} required />
               <span className={styles['highlight']}></span>
               <span className={styles['bar']}></span>
-              <label>State</label>
+              <label>Country</label>
             </div>
           </Col>
           <Col md={6} sm={12} xs={12}>
@@ -74,15 +74,15 @@ const AddressNew = props => {
               <input type="text" name="address_line_2" onChange={inputOnChange} value={data.address_line_2} className={styles.input} required />
               <span className={styles['highlight']}></span>
               <span className={styles['bar']}></span>
-              <label>Colony/Street/Locality</label>
+              <label>Landmark</label>
             </div>
           </Col>
           <Col md={2} sm={12} xs={12}>
             <div className={`${styles['fp-input']}`}>
-              <input type="text" name="postal_code" onChange={inputOnChange} value={data.postal_code} className={styles.input} required />
+              <input type="text" name="po_box" onChange={inputOnChange} value={data.postal_code} className={styles.input} required />
               <span className={styles['highlight']}></span>
               <span className={styles['bar']}></span>
-              <label>Postal code</label>
+              <label>PO box</label>
             </div>
           </Col>
           <Col md={1} sm={4} xs={4} className={`${styles['pl-0']} ${styles['pr-0']}`}>
