@@ -93,6 +93,7 @@ const PaymentMode = props => {
                           <Page
                             makePayment={makePayment}
                             orderRes={props.data}
+                            saveCard={props.saveCard}
                           />
                         </div>
                       )
