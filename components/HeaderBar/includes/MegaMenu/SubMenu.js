@@ -5,13 +5,11 @@ import Menu from './Menu';
 import { mergeCss } from '../../../../utils/cssUtil';
 const styles = mergeCss('components/HeaderBar/header');
 
-const DEFAULT_SUBMNU = 3365;
-
 class SubMenu extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedSubCategory: DEFAULT_SUBMNU
+      selectedSubCategory: props.subMenuItems[0].id
     };
     this.onHover = this.onHover.bind(this);
   }
