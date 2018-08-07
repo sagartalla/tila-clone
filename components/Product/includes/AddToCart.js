@@ -63,8 +63,8 @@ class AddToCart extends Component {
     :
     (
       <div className={`${styles['pt-25']} ${styles['flx-space-bw']} ${styles['addto-cart']} ${styles['border-t']}`}>
-        <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['fp-btn-x-large']}`} onClick={this.addToCart} disabled={isLoading || isAddedToCart} >{isAddedToCart ? PDP.ADDED_TO_CART : PDP.ADD_TO_CART}</button>
-        <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-x-large']}`} onClick={this.buyNow}>{PDP.BUY_NOW}</button>
+        <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['fs-18']} ${styles['add-to-card-btn']}`} onClick={this.addToCart} disabled={isLoading || isAddedToCart} >{isAddedToCart ? PDP.ADDED_TO_CART : PDP.ADD_TO_CART}</button>
+        <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fs-18']} ${styles['buy-now-btn']}`} onClick={this.buyNow}>{PDP.BUY_NOW}</button>
       </div>
     );
   }
