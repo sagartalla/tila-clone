@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Grid } from 'react-bootstrap';
 import _ from 'lodash';
 import routes, { Link } from '../../../../routes';
 import publicUrls from '../../../../constants';
@@ -95,6 +96,7 @@ class MegaMenu extends Component {
     const selectedCategoryTree = _.find(megamenu, { id: selectedCategory });
     return (
       <div>
+        <Grid>
         <nav className={`${styles['megamenu-wrapper']} ${styles['flx-spacebw-alignc']} ${styles[this.state.colorScheme]}`}>
           <ul className={styles['mb-0']}>
             {
@@ -118,11 +120,12 @@ class MegaMenu extends Component {
             </span>
           </div>
         </nav>
+      </Grid>
         {
           selectedCategoryTree
             ?
             <div
-              className={styles['megamenu-event-wrapper']}
+              className={`${styles['megamenu-event-wrapper']} ${styles['pb-40']}`}
               onMouseOver={this.onExpandedHover}
               onMouseLeave={this.onHoverOut}
             >
@@ -134,11 +137,13 @@ class MegaMenu extends Component {
                   onLinkClick={this.onLinkClick}
                 />
                 :
-                <Menu
-                  selectedCategoryTree={selectedCategoryTree}
-                  colorScheme={this.state.colorScheme}
-                  onLinkClick={this.onLinkClick}
-                />
+                <Grid>
+                  <Menu
+                    selectedCategoryTree={selectedCategoryTree}
+                    colorScheme={this.state.colorScheme}
+                    onLinkClick={this.onLinkClick}
+                  />
+                </Grid>
             }
             </div>
             :
