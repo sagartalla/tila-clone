@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import { selectors } from '../../../../store/product';
 import Variant from './Variant';
 import { Router } from '../../../../routes';
+import { mergeCss } from '../../../../utils/cssUtil';
+const styles = mergeCss('components/Product/product');
 
 class Variants extends Component {
   constructor(props){
@@ -45,7 +47,7 @@ class Variants extends Component {
     const { variantsData } = this.props;
     const { variantsForDisplay } = variantsData;
     return (
-      <div>
+      <div className={`${styles['flex-center']} ${styles['border-b']}`}>
         {
           variantsForDisplay.map((variant) => <Variant onSelectVariant={this.onSelectVariant} key={variant.title} {...variant} />)
         }
