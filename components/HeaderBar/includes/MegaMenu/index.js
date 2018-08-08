@@ -83,7 +83,7 @@ class MegaMenu extends Component {
       return '/landing/fashion';
     }
     if(name === 'Lifestyle' || name === 'Home & Living') {
-      return '/landing/Lifestyle';
+      return '/landing/lifestyle';
     }
   }
 
