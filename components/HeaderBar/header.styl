@@ -13,36 +13,6 @@
     &.faded
       background-color rgba(255,255,255, 0.95)
 
-  .profile-part
-    .ple-icon
-      padding: 10px 20px;
-      border-bottom: 1px solid #efeff4
-      .icon
-        width 40px
-        height 40px
-        background-color thck-gry-clr
-        border-radius 40px
-    .profile-inn
-      line-height 3
-      background-color rgba(187, 210, 241, 0.09)
-      li
-        border-bottom: 1px solid #efeff4
-        border-left 2px solid transparent
-        &:hover
-          background-color white
-          font-weight bold
-          border-left 2px solid thick-red-arrow
-        a span
-          color #000
-      .profile-icon
-        width 16px
-        height 30px
-      .support
-        span
-          width: 20px
-          height: 20px
-          border-radius: 20px
-          border: solid 0.8px #2c2f33
   .header-megamenu
     box-shadow 0 3px 4px 0 rgba(0, 0, 0, 0.09)
     position relative
@@ -61,13 +31,49 @@
     .header-meganenu-sub
       position relative
       z-index 8
-      .submenu-head
-        overflow: hidden;
-        margin-bottom: 0;
+      .submenu-head-wrap
         background: #4a4a4a;
-        color: #fff;
-        li
-          cursor pointer
+        .submenu-head
+          overflow: hidden;
+          margin-bottom: 0;
+          color: #fff;
+          li
+            cursor pointer
+            height 40px
+            &:hover
+              border-bottom 5px solid #fff
+              box-sizing border-box
+
+.profile-part
+  .ple-icon
+    padding: 10px 20px;
+    border-bottom: 1px solid #efeff4
+    .icon
+      width 40px
+      height 40px
+      background-color thck-gry-clr
+      border-radius 40px
+  .profile-inn
+    line-height 3
+    background-color rgba(187, 210, 241, 0.09)
+    li
+      border-bottom: 1px solid #efeff4
+      border-left 2px solid transparent
+      &:hover
+        background-color white
+        font-weight bold
+        border-left 2px solid thick-red-arrow
+      a span
+        color #000
+    .profile-icon
+      width 16px
+      height 30px
+    .support
+      span
+        width: 20px
+        height: 20px
+        border-radius: 20px
+        border: solid 0.8px #2c2f33
 
 .search-wrapper
   position relative
@@ -284,17 +290,13 @@
     border-bottom: 4px solid lifestyle-color
 
 .megamenu-event-wrapper
-  height 500px
   overflow hidden
   position absolute
   left 0
   width 100%
+  background #fff
 
 .megamenu-dropdown
-  width 100%
-  background #fff
-  position absolute
-  left 0
   z-index 1
   display flex
   &.max-height

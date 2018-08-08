@@ -100,6 +100,7 @@ class ActionBar extends Component {
               <span>
                 <Cart
                   showMiniCart={true}
+                  showCheckOutBtn={true}
                   cartData={cartResults}
                   editCartDetails={true}
                 />

@@ -90,6 +90,8 @@ const errorInterceptor = (err) => {
           alert('You are logged out, Login and try again');
           location.reload();
         });
+      } else {
+        cookies.remove('auth');
       }
     }
   } catch (e) {

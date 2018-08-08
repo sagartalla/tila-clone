@@ -33,7 +33,7 @@ const MiniAddress = (props) => {
               <Col md={11}>
                 <h5 className={`${styles['fontW600']} ${styles['m-0']} ${styles['mb-10']} ${styles['lgt-blue']}`}> {val.first_name + ' ' + val.last_name} </h5>
                 <address className={`${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['full-address-details']}`}>
-                  {val.address_line_1 + ', ' + val.address_line_2 + ', ' + val.city + ', ' + val.state}
+                  {val.address_line_1 + ', ' + val.address_line_2 + ', ' + val.city + ', ' + val.country_name}
                 </address>
               </Col>
             </div>

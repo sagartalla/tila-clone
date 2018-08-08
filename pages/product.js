@@ -37,7 +37,7 @@ class ProductPage extends Base {
         "country_code": country || "ksa",
         "flags": {
           "catalog_details": true,
-          "include_all_pref_listings": true,
+          // "include_all_pref_listings": true,
           "include_related_products": true,
           "shipping": true
         },

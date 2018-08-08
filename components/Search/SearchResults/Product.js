@@ -76,6 +76,7 @@ class Product extends Component {
       catalogId,
       itemtype,
       priceRange,
+      currency,
       offers,
       addedToCart,
       addedToWishlist,
@@ -112,7 +113,8 @@ class Product extends Component {
                   {displayName}
                 </h5>
                 <span>
-                  <span className={`${styles['pr-10']} ${styles['fs-16']} ${styles['fontW600']}`}>{priceRange}</span>
+                  <span className={`${styles['pr-5']} ${styles['fs-12']} ${styles['fontW600']}`}>{currency}</span>
+                  <span className={`${styles['fs-16']} ${styles['fontW600']}`}>{priceRange}</span>
                   <span className={`${styles['offers-label-color']} ${styles['fontW600']} ${styles['fs-12']}`}>
                     {
                       offers.length > 1
@@ -166,7 +168,8 @@ class Product extends Component {
                   </h5>
                   <span className={`${styles['fs-12']} ${styles['label-gry-clr']}`}>Denim shirt with baseball shirt stiff collar and formal tie</span>
                 </div>
-                <span>{priceRange}</span>
+                <span className={`${styles['pr-5']} ${styles['fs-12']} ${styles['fontW600']}`}>{currency}</span>
+                <span className={`${styles['fs-16']} ${styles['fontW600']}`}>{priceRange}</span>
                 <div className={styles['flex']}>
                   <span className={styles['flex']}>
                     <SVGCompoent clsName={`${styles['star-raing']}`} src="icons/common-icon/star-full-yellow" />
@@ -178,7 +181,7 @@ class Product extends Component {
                   <span className={`${styles['label-gry-clr']} ${styles['pl-5']}`}>(153) </span>
                 </div>
               </div>
-              <div className={styles['desc-cont']}>
+              {/*<div className={styles['desc-cont']}>
                 <div className={`${styles['prdt-name']} ${styles['fs-12']} ${styles['pt-15']} ${styles['pb-5']}`}><a href="#">{displayName}</a></div>
                 <div>{priceRange}</div>
                 <div className={styles['variant-info']}>
@@ -186,7 +189,7 @@ class Product extends Component {
                     _.map(variants, (variantValues, key) => <div key={key}>{`${key} : ${variantValues.join(', ')}`}</div>)
                   }
                 </div>
-              </div>
+              </div>*/}
             </div>
           </div>
         </Col>

@@ -19,20 +19,20 @@ const cookies = new Cookie();
 //TODO: better handling of cookie
 const initialAddrObj = {
   address_id: 0,
-  first_name: '',
-  last_name: '',
-  city: '',
+  address_type: 'home',
   address_line_1: '',
   address_line_2: '',
-  mobile_no: '',
-  mobile_country_code: '',
+  city: '',
+  default: true,
+  country_name: "",
+  first_name: '',
+  last_name: '',
   latitude: 0,
   longitude: 0,
-  default: true,
-  address_type: 'home',
-  postal_code: "",
-  shipping_country_code: cookies.get('country'),
-  state: ""
+  mobile_country_code: '',
+  mobile_no: '',
+  po_box: "",
+  shipping_country_code: '',
 }
 
 class ShippingAddress extends Component {
