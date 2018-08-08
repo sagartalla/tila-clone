@@ -133,6 +133,7 @@ class TitleInfo extends Component {
                     hideUpSell={true}
                     showInstant={true}
                     showStepper={true} // only for PDP
+                    isPdp={true}
                     hideCouponCode={true}
                     insnt_item_listing_id={listingCartData.items.length > 0 ? listingCartData.items[0].listing_id : ''}
                     increaseItemCnt={this.increaseItemCnt}

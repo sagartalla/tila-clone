@@ -26,14 +26,6 @@ class MiniVault extends Component {
               return (
                 <div className={styles['flex']} onClick={this.makeCardDefault.bind(this, card_token)}>
                   <div>
-                    {
-                      card.default ?
-                        <input type="radio" className={`${styles['tickmark-radio']}`} name="make-default" checked="checked"/>
-                        :
-                        <input type="radio" className={styles['tickmark-radio']} name="make-default"/>
-                    }
-                  </div>
-                  <div>
                     <span>{bank_name}</span>
                     <h6 className={` ${styles['fs-18']}`}>{masked_number.replace(/(.{4})/g, '$1 ')}</h6>
                     <div className={`${styles['flx-space-bw']}`}>

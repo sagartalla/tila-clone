@@ -99,7 +99,7 @@ class InstantCheckout extends Component {
   }
 
   render() {
-    const { addressResults, defaultAddr, vaultResults, defaultCard } = this.props;
+    const { addressResults, defaultAddr, vaultResults, defaultCard, isPdp } = this.props;
     const { showMiniAddress, showMiniVault, creditDebitCard, cod } = this.state;
     return (
       <div>
@@ -124,6 +124,7 @@ class InstantCheckout extends Component {
                         showMiniAddress ?
                           <ShippingAddress
                             miniAddress={true}
+                            isPdp={isPdp}
                           />
                           : null
                       }
