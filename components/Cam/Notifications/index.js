@@ -1,0 +1,68 @@
+import React, { Component } from 'react';
+import { Row, Col } from 'react-bootstrap';
+import PropTypes from 'prop-types';
+// import { languageDefinations } from '../../../utils/lang/';
+
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { actionCreators, selectors } from '../../../store/cam/notifications';
+
+import { mergeCss } from '../../../utils/cssUtil';
+const styles = mergeCss('components/Cam/Notifications/notifications');
+
+class Notifications extends Component {
+
+  constructor(props) {
+    super(props);
+  }
+
+  componentDidMount() {
+    this.props.getNotifications();
+  }
+
+  render() {
+    const { results } = this.props;
+
+    return (
+      <div className={`${styles['notifications-container']} ${styles['ml-5']}`}>
+        <h4 className={`${styles['mt-0']} ${styles['fontW600']} ${styles['mb-30']}`}>All Notifications</h4>
+        <div className={`${styles['notification-inn']}`}>
+          <span className={`${styles['white-color']} ${styles['notification-data']} ${styles['mb-15']}`}>Today</span>
+
+          {
+            results.length > 0 && results.map((res, index) => {
+              const { } = res;
+              return (
+                <div key={index} className={`${styles['box']} ${styles['p-20']} ${styles['mb-20']}`}>
+                  <Row>
+                    <Col md={1}>{res.time}</Col>
+                    <Col md={11}>{res.content}</Col>
+                  </Row>
+                </div>
+              )
+            })
+          }
+        </div>
+      </div>
+    )
+  }
+}
+
+const mapStateToProps = (store) => ({
+  results: selectors.getNotifications(store),
+});
+
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators({
+    getNotifications: actionCreators.getNotifications
+  }, dispatch);
+
+Notifications.propTypes = {
+
+};
+
+Notifications.defaultProps = {
+
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Notifications);

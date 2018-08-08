@@ -1,0 +1,106 @@
+/**
+    Custom Radio box
+
+    USAGE:
+
+    <div>
+      <input type="radio" class="radio-btn"/> 
+      <label> your label </label>
+    </div>
+**/
+@import '../executables.styl';
+
+.radio-btn-common-style
+  -webkit-transition all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms
+  -moz-transition all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms
+  -o-transition all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms
+  transition all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms
+  -webkit-appearance none
+  outline none
+
+.radio-btn
+  @extends .radio-btn-common-style
+  -webkit-appearance none
+  border 2px solid parrot-color
+  border-radius 100%
+  cursor pointer
+  display inline-block
+  height 16px
+  position relative
+  width 16px
+  vertical-align text-bottom
+
+.radio-btn:after
+  @extends .radio-btn-common-style
+  background-color white
+  border-radius 50%
+  content ''
+  height 16px
+  left -2px
+  position absolute
+  pointer-events none
+  top -2px
+  -webkit-transform scale(0)
+  -moz-transform scale(0)
+  -ms-transform scale(0)
+  -o-transform scale(0)
+  transform scale(0)
+  -webkit-transform-origin 50% 50%
+  -moz-transform-origin 50% 50%
+  -ms-transform-origin 50% 50%
+  -o-transform-origin 50% 50%
+  transform-origin 50% 50%
+  overflow hidden
+  width 16px
+
+.radio-btn:checked:after
+  @extends .radio-btn-common-style
+  background-color parrot-color
+  border-color parrot-color
+  -webkit-transform scale(0.5)
+  -moz-transform scale(0.5)
+  -ms-transform scale(0.5)
+  -o-transform scale(0.5)
+  transform scale(0.5)
+
+input[type=file]:focus, input[type=checkbox]:focus, input[type=radio]:focus
+  outline none
+
+// tick mark radio button
+// <label>
+//   <input type="radio" class="tickmark-radio" name="example" />
+//   Radio option
+// </label>
+.tickmark-radio
+  -webkit-appearance none
+  -moz-appearance none
+  -ms-appearance none
+  -o-appearance none
+  appearance none
+  position relative
+  top 4px
+  right 0
+  bottom 0
+  left 0
+  width-height-radius(16px, 16px, 50%)
+  transition all 0.15s ease-out 0s
+  color white
+  cursor pointer
+  outline none
+  border 1px solid light-border
+  margin-top 0 !important
+  // z-index 1000
+  &:checked
+    background tick-radio-green
+    border none
+  &:after
+    border-radius 50%
+
+.tickmark-radio:checked::before
+  width-height-radius(16px, 16px, 0)
+  position absolute
+  content '✓'
+  display inline-block
+  font-size 14px
+  text-align center
+

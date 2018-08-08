@@ -3,10 +3,13 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import _ from 'lodash';
 import { decode, encode, addUrlProps, replaceInUrlQuery } from 'react-url-query';
-import { actionCreaters, selectors } from '../../../store/search';
-
+import { actionCreators, selectors } from '../../../store/search';
+import { PanelGroup, Panel } from 'react-bootstrap';
 import CheckboxFacet from './CheckboxFacet';
 import LinkFacet from './LinkFacet';
+import RangeFitler from './RangeFacet';
+import { mergeCss } from '../../../utils/cssUtil';
+const styles = mergeCss('components/Search/search');
 
 class CategoriesAndFacets extends Component {
   constructor(props) {
@@ -15,15 +18,19 @@ class CategoriesAndFacets extends Component {
     this.submitQuery = _.debounce(this.submitQuery.bind(this), 300);
   }
 
-  onChangeHandle(facetName) {
+  onChangeHandle(facetName, facetType) {
     const curryHandler = (value, e) => {
       const params = this.props.facets || {};
       params[facetName] = params[facetName] || [];
-      if(e.target.checked){
-        params[facetName].push(value);
+      if (facetType === 'PERCENTILE') {
+        params[facetName] = [value];
       } else {
-        params[facetName].splice(params[facetName].indexOf(value), 1);
-        if (!params[facetName].length) { delete params[facetName]; }
+        if (e.target.checked) {
+          params[facetName].push(value);
+        } else {
+          params[facetName].splice(params[facetName].indexOf(value), 1);
+          if (!params[facetName].length) { delete params[facetName]; }
+        }
       }
       this.props.onChangeFacets(params);
       this.submitQuery();
@@ -37,20 +44,26 @@ class CategoriesAndFacets extends Component {
 
   render() {
     const { filters, facets } = this.props;
-    return (<ul>
+    return (
+      <PanelGroup accordion>
       {
-        filters.category.map((filter) => {
-          return filter.children.length ? <LinkFacet filter={filter} key={filter.id} /> : null;
+        filters.category.map((filter, index) => {
+          return filter.children.length ? <Panel eventKey={`${index + 'l'}`} key={filter.id}><LinkFacet filter={filter} /></Panel> : null;
         })
       }
       {
-        filters.facets.map((filter) => {
+        filters.facets.map((filter, index) => {
+          if (filter.type === 'PERCENTILE') {
+            let selectedFilters = facets[filter.attributeName];
+            return filter.children.length ? <RangeFitler filter={filter} key={filter.id} onChangeHandle={this.onChangeHandle(filter.attributeName, filter.type)} selectedFilters={selectedFilters || []}/> : null;
+          }
           let selectedFilters = facets[filter.attributeName];
           selectedFilters = selectedFilters ? selectedFilters.map((item) => item.name) : [];
-          return filter.children.length ? <CheckboxFacet filter={filter} key={filter.id} onChangeHandle={this.onChangeHandle(filter.attributeName)} selectedFilters={selectedFilters}/> : null;
+          return filter.children.length ? <CheckboxFacet filter={filter} onChangeHandle={this.onChangeHandle(filter.attributeName, filter.type)} selectedFilters={selectedFilters} index={index}/> : null;
         })
       }
-    </ul>);
+      </PanelGroup>
+    );
   }
 }
 
@@ -62,7 +75,7 @@ const mapStateToProps = (store) => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      getSearchResults: actionCreaters.getSearchResults
+      getSearchResults: actionCreators.getSearchResults
     },
     dispatch,
   );
@@ -84,5 +97,3 @@ const mapUrlChangeHandlersToProps = (props) => {
 }
 
 export default addUrlProps({ mapUrlToProps, mapUrlChangeHandlersToProps })(connect(mapStateToProps, mapDispatchToProps)(CategoriesAndFacets));
-
-

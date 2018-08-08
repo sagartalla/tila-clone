@@ -1,6 +1,35 @@
 import shortid from 'shortid';
 import _ from 'lodash';
 
+const addCartAndWishlistDetails = (store, results) => {
+  const { items=[] } =  store.cartReducer.data;
+  const { data=[] } = store.wishlistReducer;
+
+  if(items === null){
+    return results;
+  }
+  // if(items && items.length){
+  //   return results;
+  // }
+  // if(data && data.length) {
+  //   return resutls;
+  // }
+
+  const cartListingIds = items.map((i) =>  i.listing_id) || [];
+  const wishListProductIds = store.wishlistReducer.data.map((w) => w.product_id) || [];
+  return {
+    ...results,
+    items: results.items.map((i) => {
+      const { listingId } = i.variants;
+      return ({
+        ...i,
+        addedToCart: listingId ? cartListingIds.indexOf(i.variants.listingId[0]) !== -1 : false,
+        addedToWishlist: wishListProductIds.indexOf(i.productId) !== -1,
+      });
+    }),
+  };
+};
+
 const getSearchFilters = (store) => {
   const filters = {
     category: [],
@@ -31,13 +60,21 @@ const getSearchFilters = (store) => {
         id: item.Id,
         queryParamName: _.camelCase(item.attributeDisplayName),
         attributeName: item.attributeName,
-        children: item.Values.map((value) => ({
-          name: value.attributeValue,
-          id: shortid.generate(),
-          count: value.Count,
-          param: value.Param,
-        })),
-      })
+        type: item.Type,
+        children: item.Values.map((value) => {
+          const attrObj = {
+            id: shortid.generate(),
+            count: value.Count,
+            param: value.Param,
+          }
+          if (item.Type === 'PERCENTILE') {
+            attrObj.values = value.attributeValue;
+          } else {
+            attrObj.name = value.attributeValue;
+          }
+          return attrObj;
+        }),
+      });
     }, []);
   }
   return filters;
@@ -51,7 +88,7 @@ const getSearchResutls = (store) => {
   if (store.searchReducer.data.productResponse) {
     resutls.totalCount = store.searchReducer.data.productResponse.noOfProducts;
     resutls.items = store.searchReducer.data.productResponse.products.map((product) => {
-      const variantInfo = product.variantAdapters.reduce((modifiedVaraints, v) => {
+      const variantInfo = product.variantListingAdapters.reduce((modifiedVaraints, v) => {
         const attributesData = {...v.attributes};
         delete attributesData.type;
         delete attributesData.variantId;
@@ -63,25 +100,30 @@ const getSearchResutls = (store) => {
         return modifiedVaraintsCopy;
       }, {});
       const priceInfo = product.variantListingAdapters.map((vla) => vla.attributes.sellingPrice);
+      const offers = product.variantListingAdapters.map((vla) => vla.attributes.discount);
       let priceRange = '';
       if (priceInfo.length > 2) {
         priceRange = [Math.min.apply(null, priceInfo), Math.max.apply(null, priceInfo)].join(' - ');
       }else if (priceInfo.length > 1) {
         priceRange = priceInfo.sort().join(' - ')
       } else {
-        priceRange = priceInfo[0] || 'No price info';
+        priceRange = priceInfo[0] || '';
       }
       return {
         id: product.id,
         media: product.attributes.media_unrestricted_images,
         productId: product.attributes.productId,
+        catalogId: product.attributes.catalogId,
+        itemtype: product.attributes.itemType,
         displayName: product.attributes.calculated_display_name,
         variants: variantInfo,
         priceRange,
+        currency: product.variantListingAdapters[0].attributes.currency,
+        offers: Math.max.apply(null, offers),
       };
     });
   }
-  return resutls;
+  return addCartAndWishlistDetails(store, resutls);
 }
 
 const getPaginationDetails = (store) => {
@@ -95,24 +137,36 @@ const getUIState = (store) => {
   return store.searchReducer.ui;
 }
 
-const getCategoryId = (state, query) => {
+const getCategoryId = (store) => {
+  // DO NOT remove
   //not used for now. May be required when we have a different service for facets.
-  const category = _.find(state.searchReducer.data.categoryFilter.parentCategories, { canonicalId: query.category })
-  if (query.subCategory){
-    const subCategory = _.find(category.childCategories, {canonicalId: query.subCategory})
-    return subCategory.id;
-  }
-  return category.id;
+  // const category = _.find(state.searchReducer.data.categoryFilter.parentCategories, { canonicalId: query.category })
+  // if (query.subCategory){
+  //   const subCategory = _.find(category.childCategories, {canonicalId: query.subCategory})
+  //   return subCategory.id;
+  // }
+  // return category.id;
+  return store.searchReducer.data.searchDetails.categoryFilter.id;
 }
 
 const getQuery = (store) => {
-  return store.searchReducer.data.searchDetails.query
+  return store.searchReducer.data.searchDetails.query;
+}
+
+const optionParams = (store) => {
+  let isListed = store.searchReducer.data;
+  isListed = isListed ? isListed.hardCodedValues : true;
+  isListed = isListed ? isListed.isListed : true;
+  isListed = isListed ? isListed : true;
+  return {
+    language: store.searchReducer.data.geoDetails ? store.searchReducer.data.geoDetails.language : 'en',
+    isListed,
+  }
 }
 
 const getFacetfilters = (store) => (queryObject) => {
   const facetFilters = _.reduce(queryObject, (facetFilters, fitlerTypeValues, fitlerTypeKey) => {
     facetFilters[fitlerTypeKey] = fitlerTypeValues.map((fitlerTypeValue) => {
-      // return _.find(_.find(store.searchReducer.data.facetResponse.facets, { attributeName: fitlerTypeKey }).Values, { attributeValue: fitlerTypeValue }).Param
       return fitlerTypeValue.param
     });
     return facetFilters;
@@ -120,5 +174,8 @@ const getFacetfilters = (store) => (queryObject) => {
   return facetFilters;
 }
 
+const getSearchBarFilterState = (state) => {
+  return state.searchReducer.ui.showFilters;
+}
 
-export { getSearchFilters, getSearchResutls, getPaginationDetails, getUIState, getCategoryId, getQuery, getFacetfilters };
+export { getSearchFilters, getSearchResutls, getPaginationDetails, getUIState, getCategoryId, getQuery, getFacetfilters, optionParams, getSearchBarFilterState, addCartAndWishlistDetails };

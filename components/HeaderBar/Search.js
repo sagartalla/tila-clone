@@ -1,10 +1,14 @@
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
 import { addUrlProps, UrlQueryParamTypes, pushInUrlQuery } from 'react-url-query';
-import styles from './header.styl';
-import { actionCreaters, selectors } from '../../store/search';
+import { actionCreators, selectors } from '../../store/search';
+import { Router } from '../../routes';
+import SVGComponent from '../common/SVGComponet';
+
+import { mergeCss } from '../../utils/cssUtil';
+const styles = mergeCss('components/HeaderBar/header');
 
 const urlPropsQueryConfig = {
   searchText: { type: UrlQueryParamTypes.string, queryParam: 'search', }
@@ -24,10 +28,7 @@ class Search extends Component {
   submitQuery(e) {
     e.preventDefault();
     const flushFilters = true;
-    pushInUrlQuery('search', this.state.query, { url: "/", as: "/", options: {} });
-    this.props.getSearchResults({
-      query: this.state.query
-    }, null, flushFilters);
+    Router.pushRoute(`/srp?search=${this.state.query}&${Object.entries(this.props.optionalParams).map(([key, val]) => `${key}=${val}`).join('&')}`);
   }
 
   onChangeSearchInput(e) {
@@ -46,7 +47,7 @@ class Search extends Component {
             onChange={this.onChangeSearchInput}
             value={this.state.query}
            />
-          <button type="submit" className={styles['search-btn']}>Search</button>
+          <button type="submit" className={styles['search-btn']}><SVGComponent clsName={`${styles['searching-icon']}`} src="icons/search/search-white-icon" /></button>
         </form>
       </div>
     )
@@ -59,15 +60,16 @@ Search.propTypes = {
   onChangeSearchText: PropTypes.func,
 }
 
-  
+
 const mapStateToProps = (store) => ({
-    query: selectors.getQuery(store)
+    query: selectors.getQuery(store),
+    optionalParams: selectors.optionParams(store)
 });
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      getSearchResults: actionCreaters.getSearchResults,
+      getSearchResults: actionCreators.getSearchResults,
     },
     dispatch,
   );

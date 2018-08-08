@@ -1,0 +1,119 @@
+@import '../executables.styl';
+  
+.box
+  background-color white
+  box-shadow 0 0 12px 0 rgba(0,0,0,0.1)
+  border-radius 4px
+  // padding 16px
+  &.box-space
+    padding px-10
+    margin-bottom px-14
+
+.middle
+  top 50%
+  transform translateY(-50%)
+
+.center
+  left 50%
+  transform translateX(-50%)
+
+.center.middle
+  position absolute
+  transform translate3d(-50%, -50%, 0)
+
+.link-text
+  color link-text
+  cursor pointer
+
+.flex
+  display flex
+
+.flex-colum
+  flex-direction column
+
+.flex-wrp
+  flex-wrap wrap
+
+.justify-center
+  justify-content center
+
+.justify-around
+  justify-content space-around
+
+.align-center
+  align-items center
+
+.flex-center
+  @extends .flex
+  @extends .align-center
+/* font families */
+
+.ff-b
+  font-family ProximaNova-Bold
+
+.ff-sb
+  font-family ProximaNova-SBold
+
+.ff-l
+  font-family ProximaNova-Light
+
+.ff-t
+  font-family ProximaNova-Thin
+
+/* font families end */
+
+
+.text-center
+  text-align center
+
+.error-msg
+  color #f00
+
+.float-r
+  float right
+
+.float-l
+  float left
+
+.clear-l
+  clear left 
+
+.clear-r
+  clear right 
+
+.clear-b
+  clear both
+
+//commom color font size and font weight
+.color-size-weight
+  color-fontsize-fontW(black,14px,600)
+
+// text wrap
+.ellips
+  white-space nowrap
+  overflow hidden
+  o-text-overflow ellipsis
+  text-overflow ellipsis
+  float left
+
+.flx-space-bw
+  @extends .flex
+  justify-content space-between
+  
+.flx-spacebw-alignc
+  @extends .flx-space-bw
+  align-items center
+
+.back-drop
+  position fixed
+  width 100vw
+  height 100vh
+  background rgba(0,0,0,0.5)
+  top 0
+  left 0
+  z-index 99
+
+.elipsis
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;

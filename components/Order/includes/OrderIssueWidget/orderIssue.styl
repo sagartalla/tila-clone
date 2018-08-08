@@ -1,0 +1,69 @@
+@import '../../../../layout/main/executables.styl';
+
+.order-issue-wrap
+  display block
+  .img-cont
+    width 70px
+    height 45px
+    img
+      max-width 100%
+      max-height 100%
+  .widget-cont
+    display block
+    width 450px
+    height 522px
+    padding 0
+    position absolute
+    .widget-head
+      height 64px
+      background-color head-gray
+    .widget-body
+      max-height: 370px;
+      overflow-y: scroll;
+      .item-cont
+        color inherit 
+        .title-cont
+          width 77%
+    .reasons-item-wrap
+      border-bottom 1px solid generic-gray-color
+      .title-cont
+        width 77%
+      .back-btn
+        .down-arrow-icon
+          width: 18px;
+          transform: rotate(90deg);
+          height: 20px;
+      .reason-cont
+        .instruction-txt
+          color: generic-gray-color
+    .widget-footer
+      height 95px
+      position absolute
+      bottom 0
+      width 100%
+      button
+        height 50px
+        display block
+        width 395px
+        color white
+        text-transform uppercase
+        &:disabled
+          background-color navy-blue
+          
+  .reason-item-main
+    .comment-cont
+      textarea
+        border 1px solid generic-gray-color
+
+  .cancel-success-inn
+    flex-direction column
+    .cancel-success-img
+      width: 218px;
+      height: 195px;
+      .img-responsive
+        max-width 100%
+        max-height 100%
+    .cancel-success-label
+      width 84%
+  .cancel-success-text
+    background-color head-gray

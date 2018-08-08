@@ -1,0 +1,64 @@
+@import '../../../layout/main/executables.styl';
+
+.sidebar-container
+  width 100%
+  height auto
+  background-color white
+  box-shadow 0 0 5px 0 rgba(0, 0, 0, 0.06), 0 5px 5px 0 rgba(0, 0, 0, 0.05)
+
+ .user-profile
+    border-bottom 1px solid cam-border-gray
+    cursor pointer
+    border-left 5px solid transparent
+  &.active
+    width 100%
+    border-left 5px solid navy-blue
+    background head-gray
+  .profile-pic
+    display inline-block
+   .img-style
+    height 50px
+    width 50px
+    background-color label-light-grey
+    border-radius 50%
+    margin 0 auto
+  .profile-details
+    display inline-block
+
+ .list-container
+   width 100%
+   height auto
+   border-bottom 1px solid cam-border-gray
+   color navy-blue
+  .list-items
+    width 80%;
+    display inline-block
+  .list-item-left
+    display inline-block
+    width 26px
+    height 18px
+  .list-common
+    width 10%
+    font-size 12px
+    color navy-blue
+    border 1px solid cam-border-gray
+    border-radius 4px
+    height 20px
+    margin: 0 10px
+    .count-container
+      border-radius: 4px;
+
+  .list-items-container
+    cursor pointer
+    padding 15px 20px
+    border-left 5px solid transparent
+    &.active
+      display flex
+      border-left 5px solid navy-blue
+      background head-gray
+      .list-common
+        background-color navy-blue
+        color white
+        border 0
+      .list-items
+        color navy-blue

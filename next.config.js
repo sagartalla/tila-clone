@@ -10,28 +10,36 @@ module.exports = withStylus(withCSS({
     importLoaders: 1,
     localIdentName: "[local]___[hash:base64:5]",
   },
+  publicRuntimeConfig: {
+      env: process.env.ENV
+  },
   webpack: (config, { dev }) => {
     // Fixes npm packages that depend on `fs` module
     config.node = {
       fs: 'empty'
     }
-    if (dev) {
-      config.module.rules.push({
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'eslint-loader',
-        options: {
-          formatter: eslintFormatter,
-          emitWarning: dev
-        }
-      });
-    }
-    // config.resolve = {
-    //   extensions: ['', '.js'],
-    //     root: [
-    //       path.resolve('./')
-    //     ]
+    // if (dev) {
+    //   config.module.rules.push({
+    //     test: /\.js$/,
+    //     exclude: /node_modules/,
+    //     loader: 'eslint-loader',
+    //     options: {
+    //       formatter: eslintFormatter,
+    //       emitWarning: dev
+    //     }
+    //   });
     // }
+    config.resolve = {
+      extensions: ['.js', '.json', '.svg', '.css'],
+      modules: [
+        path.resolve('./'),
+        path.resolve('./node_modules')
+      ]
+    }
+    config.module.rules.push({
+      test: /\.svg$/,
+      loader: 'svg-inline-loader'
+    });
     config = commonsChunkConfig(config, /\.(styl|css)$/);
     return config
   }

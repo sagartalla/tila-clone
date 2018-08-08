@@ -6,7 +6,7 @@
 /* container that contains all modals and backdrops */
 .react-router-modal__container {
   position: fixed;
-  z-index: 1000;
+  z-index: 1000
 }
 
 /* backdrop shown behind each modal */
@@ -28,9 +28,7 @@
   transform: translate(-50%, -50%);
   background-color: white;
   border-radius: 5px;
-  border: 1px solid #777;
-  padding: 0px 40px;
-  box-shadow: 1px 1px 15px 1px #444;
+  border: 1px solid #777
 }
 
 /* mobile devices, particularly iOS, have some quirks to work around */

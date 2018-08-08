@@ -1,0 +1,63 @@
+@import '../../../layout/main/executables.styl';
+
+$shipment-wrap-border-color = #D8D8D8
+
+.orders-container
+  display block
+  padding-left 5px
+  margin-top -(px-20)
+
+.order-item-wrap
+  background #fff
+
+.product-item
+  display flex
+
+.order-item-img
+  height 50px
+
+.shipment-wrap
+  border 1px solid $shipment-wrap-border-color
+  border-radius 6px
+  .products-wrap 
+    // border-right 1px solid $shipment-wrap-border-color
+    display table
+    width 100%
+    .product-item
+      // height 70px
+      // display table-row
+      // &:after // TODO Add border between products
+      //   content: '';
+      //   display: block;
+      //   border-bottom: 1px solid #979797;
+      //   padding-left: 80%;
+      //   position: absolute;
+      //   left: 10%;
+      //   top: 50%;
+      &:only-of-type
+        min-height 120px
+        // &:after
+        //   display none
+      // .img-wrap, .text-wrap
+      //   position relative
+      //   display table-cell
+      .img-wrap
+        width 20%
+        height 80px
+
+        .order-item-img
+          height 100%
+      .text-wrap
+        flex-grow 4
+        width 75%
+  .date-cont
+    float left
+  .cancel-btn
+    float right
+  .widget-wrap
+    clear both
+  
+.down-arrow
+  display: block;
+  width: 10px;
+  height: 10px;

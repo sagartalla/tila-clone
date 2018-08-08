@@ -1,6 +1,6 @@
 import _ from 'lodash';
-import { searchServiceInstance } from '../helper/services';
-
+import axios from 'axios';
+import constants from '../helper/constants';
 
 const getSearchResultsApi = ({
   categoryFilter,
@@ -11,9 +11,12 @@ const getSearchResultsApi = ({
   facetFilters,
   pageNum,
   fl,
+  isListed,
+  categoryTree,
+  shippingDetails,
+  sort
 }) => {
   const options = {
-    categoryFilter,
     country,
     facetFilters,
     language,
@@ -21,8 +24,16 @@ const getSearchResultsApi = ({
     pageSize,
     query,
     fl,
+    isListed,
+    shippingDetails,
+    sort,
   };
-  return searchServiceInstance.post('/search', options).then(({ data }) => {
+  if (categoryTree) {
+    options.categoryId = categoryFilter.id;
+  } else {
+    options.categoryFilter = categoryFilter;
+  }
+  return axios.get(`${constants.SEARCH_API_URL}/search${categoryTree ? '/browseByCatId/': ''}?query=${escape(JSON.stringify(options))}`).then(({ data }) => {
     if (data.categoryFilter) {
       data.categoryFilter.parentCategories.forEach((parentCategory) => {
         parentCategory.canonicalId = _.kebabCase(parentCategory.name);
@@ -43,6 +54,9 @@ const getSearchResultsApi = ({
       query,
       facetFilters,
       categoryFilter,
+      shippingDetails,
+      sort,
+      categoryTree,
     };
     data.geoDetails = {
       country,
@@ -50,6 +64,7 @@ const getSearchResultsApi = ({
     }
     data.hardCodedValues = {
       fl,
+      isListed,
     }
     return { data };
   });

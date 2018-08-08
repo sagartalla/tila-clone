@@ -1,0 +1,27 @@
+@import '../../../../layout/main/executables.styl';
+
+.status-widget
+  .gray-line
+    border-top 1px solid generic-gray-color
+    .point
+      background-color generic-gray-color
+      width-height-radius(10px, 10px, 50%)
+      // height: 10px;
+      // width: 10px;
+      // border-radius: 50%;
+      position: absolute;
+      top: -6px;
+      z-index: 2;
+      &:before
+      &.active
+        background-color generic-green-color
+      &.cancelled
+        background-color danger-color
+      span
+        position relative
+        top 10px
+        left -30px
+  .green-line
+    height 2px
+    background-color generic-green-color;
+    top 4px
