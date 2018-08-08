@@ -112,7 +112,7 @@ class InstantCheckout extends Component {
                 <span className={`${styles['fs-12']} ${styles['pr-30']}`}><input type="radio" name="pay_type" className={styles['radio-btn']} checked={creditDebitCard} onChange={this.creditCardClickHandler} /> Credit/ Debit Card</span>
                 <span className={styles['fs-12']}><input type="radio" name="pay_type" className={styles['radio-btn']} checked={cod} onChange={this.codClickHandler} /> COD</span>
               </div>
-              <div className={`${styles['border']} ${styles['border-radius2']} ${styles['bg-white']} ${styles['mt-10']}`}>
+              <div className={`${styles['border']} ${styles['border-radius2']} ${styles['bg-white']} ${styles['relative']} ${styles['mt-10']}`}>
                 {
                   defaultAddr.length > 0 ?
                     <Fragment>
@@ -122,11 +122,9 @@ class InstantCheckout extends Component {
                       />
                       {
                         showMiniAddress ?
-                          <div md={12}>
-                            <ShippingAddress
-                              miniAddress={true}
-                            />
-                          </div>
+                          <ShippingAddress
+                            miniAddress={true}
+                          />
                           : null
                       }
                     </Fragment>
