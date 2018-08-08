@@ -88,7 +88,7 @@ class TitleInfo extends Component {
     return (
       <div className={styles['pb-10']}>
         <div className={`${styles['fontW300']} ${styles['lgt-blue']}`}>{brand}</div>
-        <div className={`${styles['fs-26']} ${styles['fontW300']} ${styles['black-color']}`}>{title}</div>
+        <div className={`${styles['fs-20']} ${styles['fontW300']} ${styles['black-color']}`}>{title}</div>
         {
           isPreview
             ?
@@ -110,7 +110,7 @@ class TitleInfo extends Component {
             ?
             null
             :
-            <div className={`${styles['flex-center']} ${styles['checkout-instantly']} ${styles['pt-15']}`}>
+            <div className={`${styles['flex-center']} ${styles['checkout-instantly']} ${styles['pt-10']}`}>
               <div className={`${styles['flex']}`}>
                 <a className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['small-btn']}`} onClick={this.checkoutInstantHandler}>Checkout Instantly </a>
               </div>

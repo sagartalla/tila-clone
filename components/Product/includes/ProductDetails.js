@@ -49,7 +49,7 @@ const ProductDetails =({details, keyfeatures, isPreview}) => {
         <Accordian
           head={
             <h4 className={`${styles['fs-12']} ${styles['fontW600']} ${styles['mb-5']} ${styles['mt-0']} ${styles['flx-space-bw']}`}>
-              <span>SPECIFICATIONS</span>
+              <span>Key features</span>
               <SVGCompoent clsName={`${styles['expand-icon']}`} src="icons/common-icon/down-arrow-circle" />
             </h4>
           }
