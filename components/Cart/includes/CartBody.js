@@ -48,7 +48,7 @@ const CartBody = props => {
                         }
                         <div className={`${styles['cart-box']} ${styles['p-20']}`}>
                           {
-                            inventory == 0 ?
+                            inventory <= 0 ?
                               <div className={`${styles['out-of-stock']} ${styles['text-center']} ${styles['absolute']} ${styles['bg-white']}`}>
                                 <h3>uh-oh!</h3>
                                 <p>
@@ -105,7 +105,7 @@ const CartBody = props => {
                                   : ''
                               }
                               {
-                                inventory == 0 ?
+                                inventory <= 0 ?
                                   <span className={`${styles['fontW600']} ${styles['thick-red']} ${styles['pr-20']}`}>{CART_PAGE.OUT_OF_STOCK} </span>
                                   : ''
                               }

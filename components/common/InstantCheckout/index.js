@@ -135,6 +135,7 @@ class InstantCheckout extends Component {
                           <ShippingAddress
                             miniAddress={true}
                             isPdp={isPdp}
+                            toggleMiniAddress={this.toggleMiniAddress}
                           />
                           : null
                       }
@@ -154,6 +155,7 @@ class InstantCheckout extends Component {
                           <div>
                             <UserVault
                               miniVault={true}
+                              toggleMiniVault={this.toggleMiniVault}
                             />
                           </div>
                           : null
