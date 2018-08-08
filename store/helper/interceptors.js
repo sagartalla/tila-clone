@@ -1,9 +1,8 @@
 import shajs from 'sha.js';
-import { init as initApm } from 'elastic-apm-js-base';
 import fp, * as _ from 'lodash/fp';
 import axios from 'axios';
 import getConfig from 'next/config'
-import apmConfig from '../../apm.config';
+import apm from './apmInstance';
 import constants from './constants';
 import { pimServiceInstance } from './services';
 import Cookie from 'universal-cookie';
@@ -11,14 +10,6 @@ import Cookie from 'universal-cookie';
 const config = getConfig()
 const env = config.publicRuntimeConfig.env;
 const cookies = new Cookie();
-
-let apm;
-if (env !== 'local'){
-  apm = initApm({
-    serviceName: apmConfig.serviceName,
-    serverUrl: apmConfig.serverUrl,
-  });
-}
 
 const configModifer = (config) => {
   //SF-89
@@ -78,6 +69,18 @@ const apmResInterceptor = (response) => {
 
 const errorInterceptor = (err) => {
   try {
+    apm.setCustomContext({
+      response: {
+        status: err.response.status,
+        data: err.response.data,
+        headers: err.response.headers,
+      },
+      request: {
+        url: err.config.url,
+        headers: err.config.headers,
+      }
+    });
+    apm.captureError(err)
     if (err.response && err.response.status == '401') {
       const { refresh_token } =  cookies.get('auth') || {};
       if(refresh_token) {

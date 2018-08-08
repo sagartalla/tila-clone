@@ -3,7 +3,7 @@ const config = getConfig()
 export default {
   local: {
     serviceName: 'store-front',
-    serverUrl: 'http://localhost:8200',
+    serverUrl: 'http://apm.fptechscience.com',
     env: 'local'
   },
   dev: {
