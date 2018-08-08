@@ -59,11 +59,11 @@ class InstantCheckout extends Component {
   }
 
   toggleMiniAddress() {
-    this.setState({ showMiniAddress: !this.state.showMiniAddress });
+    this.setState({ showMiniAddress: !this.state.showMiniAddress, showMiniVault: false });
   }
 
   toggleMiniVault() {
-    this.setState({ showMiniVault: !this.state.showMiniVault });
+    this.setState({ showMiniVault: !this.state.showMiniVault, showMiniAddress: false });
   }
 
   doInstantCheckout() {
