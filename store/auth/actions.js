@@ -25,13 +25,13 @@ const actionCreators = {
     return dispatch({
       type: actions.USER_REGISTER,
       payload: api.userRegister(params).then((res) => {
-        const { email, password } = params;
         if (res.status === 200) {
-          const { email, password } = params;
+          const { email, password, rememberMe } = params;
           dispatch(
             actionCreators.userLogin({
               username: email,
               password,
+              rememberMe,
             })
           );
           return res;

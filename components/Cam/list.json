@@ -5,11 +5,6 @@
 		"count": "1",
 		"href": "/cam/orders"
 	}, {
-		"icon": "icons/orders-shared",
-		"display": "Orders shared with me",
-		"count": "1",
-		"href": "/cam/orders"
-	}, {
 		"icon": "icons/my-wishlist",
 		"display": "Wishlist",
 		"count": "1",
@@ -61,10 +56,6 @@
 	},{
 		"icon": "icons/refer",
 		"display": "Refer/Invite Friends",
-		"href": "#"
-	},{
-		"icon": "icons/help",
-		"display": "Help & Support",
 		"href": "#"
 	}]
 }]

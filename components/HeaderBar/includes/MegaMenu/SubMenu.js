@@ -1,13 +1,16 @@
 import React, { Component, Fragment } from 'react';
-import Menu from './Menu';
+import { Grid } from 'react-bootstrap';
 
+import Menu from './Menu';
 import { mergeCss } from '../../../../utils/cssUtil';
 const styles = mergeCss('components/HeaderBar/header');
 
 class SubMenu extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      selectedSubCategory: props.subMenuItems[0].id
+    };
     this.onHover = this.onHover.bind(this);
   }
 
@@ -25,25 +28,31 @@ class SubMenu extends Component {
     const selectedSubCategoryTree = _.find(subMenuItems, { id: parseInt(selectedSubCategory) });
     return (
       <Fragment>
-        <ul className={styles['submenu-head']} >
-          {
-            subMenuItems.map((subMenuItem) => (
-              <li key={subMenuItem.id} data-id={subMenuItem.id} onMouseOver={this.onHover} className={`${styles['float-l']} ${styles['ml-5']} ${styles['mr-5']} ${styles['p-10']}`}>{subMenuItem.displayName}</li>
-            ))
-          }
-        </ul>
+        <div className={styles['submenu-head-wrap']}>
+          <Grid>
+            <ul className={styles['submenu-head']} >
+              {
+                subMenuItems.map((subMenuItem) => (
+                  <li key={subMenuItem.id} data-id={subMenuItem.id} onMouseOver={this.onHover} className={`${styles['float-l']} ${styles['ml-5']} ${styles['mr-5']} ${styles['p-10']}`}>{subMenuItem.displayName}</li>
+                ))
+              }
+            </ul>
+          </Grid>
+        </div>
         {
           selectedSubCategoryTree
             ?
-              <Menu
-                selectedCategoryTree={selectedSubCategoryTree}
-                colorScheme=""
-                onLinkClick={onLinkClick}
-              />
+              <Grid>
+                <Menu
+                  selectedCategoryTree={selectedSubCategoryTree}
+                  colorScheme=""
+                  onLinkClick={onLinkClick}
+                />
+              </Grid>
             :
              null
         }
-    </Fragment>
+      </Fragment>
     );
   }
 }
