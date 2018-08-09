@@ -5,11 +5,12 @@ const getWishListResults = (store) => {
     const img_url = constants.mediaDomain;
     const newData = [];
 
-    // console.log(data)
-
     data.map((item) => {
-      const variant = Object.keys(item.product_details.product_details_vo.cached_variant)[0];
-      const variant_info = item.variant_preferred_listings[variant][0];
+      // const variant = Object.keys(item.product_details.product_details_vo.cached_variant)[0];
+      // const variant_info = item.variant_preferred_listings[variant][0];
+
+      const variant = Object.keys(item.variant_preferred_listings)[0];
+      const variant_info = item.variant_preferred_listings[variant];
 
       newData.push({
         wishlist_id: item.wishlist_id,
@@ -24,7 +25,6 @@ const getWishListResults = (store) => {
       })
     })
 
-    // console.log('data', newData);
     return newData.reverse();
   }
   return [];
