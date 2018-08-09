@@ -69,18 +69,20 @@ const apmResInterceptor = (response) => {
 
 const errorInterceptor = (err) => {
   try {
-    apm.setCustomContext({
-      response: {
-        status: err.response.status,
-        data: err.response.data,
-        headers: err.response.headers,
-      },
-      request: {
-        url: err.config.url,
-        headers: err.config.headers,
-      }
-    });
-    apm.captureError(err)
+    if(env !== 'local') {
+      apm.setCustomContext({
+        response: {
+          status: err.response.status,
+          data: err.response.data,
+          headers: err.response.headers,
+        },
+        request: {
+          url: err.config.url,
+          headers: err.config.headers,
+        }
+      });
+      apm.captureError(err)
+    }
     if (err.response && err.response.status == '401') {
       const { refresh_token } =  cookies.get('auth') || {};
       if(refresh_token) {

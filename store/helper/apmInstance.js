@@ -1,6 +1,6 @@
 import { init as initApm } from 'elastic-apm-js-base';
 import getConfig from 'next/config';
-import apmConfig from '../../apm.config';
+const apmConfig = require('../../apm.config');
 
 const config = getConfig()
 const env = config.publicRuntimeConfig.env;

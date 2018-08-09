@@ -4,8 +4,9 @@ const withCSS = require('@zeit/next-css');
 const commonsChunkConfig = require('@zeit/next-css/commons-chunk-config');
 const path = require('path');
 const git = require('git-rev-sync');
+const withSourceMaps = require('@zeit/next-source-maps')
 
-module.exports = withStylus(withCSS({
+module.exports = withSourceMaps(withStylus(withCSS({
   cssModules: true,
   cssLoaderOptions: {
     importLoaders: 1,
@@ -50,4 +51,4 @@ module.exports = withStylus(withCSS({
     config = commonsChunkConfig(config, /\.(styl|css)$/);
     return config
   }
-}));
+})));
