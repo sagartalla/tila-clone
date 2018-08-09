@@ -62,7 +62,7 @@ class CheckboxFacet extends Component {
             </Panel.Title>
           </Panel.Heading>
           <Panel.Body collapsible>
-            <ul className={`${styles['category-sub-list']} ${styles['pl-0']}`}>
+            <ul className={`${styles['category-sub-list']} ${styles['pl-20']} ${styles['pt-15']}`}>
               {
                 filter.children.slice(0, this.state.maxRows).map(childFitler => (
                   <li key={childFitler.id} className={styles['category-sub-list-inn']}>
