@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import SVGComponent from '../common/SVGComponet';
 import { selectors, actionCreators } from '../../store/auth';
-
+import constants from '../../constants';
 import { Row, FormGroup, Col, Button, ControlLabel, Checkbox } from 'react-bootstrap';
 
 import { mergeCss } from '../../utils/cssUtil';
@@ -85,7 +85,7 @@ class Login extends Component {
       <Row className={`${styles['bg-white']} ${styles['m-0']}`}>
         <Col md={6} xs={6} className={styles['pl-0']}>
           <div className={styles['image-placeholder']}>
-            <img className={styles['img-responsive']} src="https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/catalog/t_shirt/PTSHC8EXEUJADVLVCX/GALLERY/MEDIAX4Q4MVJ5DCLIHWGUGDW14Z/1-web-desktop-product.jpg"/>
+            <img className={styles['img-responsive']} src={`${constants.mediaDomain}/catalog/t_shirt/PTSHC8EXEUJADVLVCX/GALLERY/MEDIAX4Q4MVJ5DCLIHWGUGDW14Z/1-web-desktop-product.jpg`}/>
           </div>
         </Col>
         <Col md={6} xs={6}>

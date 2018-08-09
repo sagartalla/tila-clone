@@ -43,7 +43,7 @@ class LinkFacet extends Component {
           </Panel.Title>
         </Panel.Heading>
         <Panel.Body collapsible>
-          <ul className={`${styles['category-sub-list']} ${styles['pl-5']} ${styles['lne-ht2']}`}>
+          <ul className={`${styles['category-sub-list']} ${styles['pl-20']} ${styles['lne-ht2']}`}>
             {
               filter.children.slice(0, this.state.maxRows).map((category) => {
                 return (

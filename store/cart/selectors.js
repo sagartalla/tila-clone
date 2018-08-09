@@ -1,10 +1,11 @@
 import _ from 'lodash';
+import constants from '../../constants';
 
 const getCartResults = (store) => {
   if (store.cartReducer.data) {
     const data = store.cartReducer.data;
     const ui = store.cartReducer.ui
-    const img_url = 'https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/';
+    const img_url = constants.mediaDomain;
     const newData = { items: [], total_price: 0, ui };
 
     if (data.items !== null && data.items.length) {
@@ -25,7 +26,7 @@ const getCartResults = (store) => {
           name: item.product_details.product_details_vo.cached_product_details.attribute_map.calculated_display_name.attribute_values[0].value,
           price: item.listing_info.selling_price,
           cur: item.listing_info.selling_price_currency,
-          img: img_url + item.product_details.product_details_vo.cached_product_details.media.gallery_media[0].url,
+          img: img_url + '/' + item.product_details.product_details_vo.cached_product_details.media.gallery_media[0].url,
           quantity: item.quantity,
           inventory: item.listing_info.total_inventory_count,
           max_limit: item.listing_info.max_limit_per_user,

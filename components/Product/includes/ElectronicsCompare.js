@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import { Grid, Row, Col } from 'react-bootstrap';
+import constants from '../../../constants';
 import SVGCompoent from '../../common/SVGComponet';
 import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Product/product');
@@ -32,7 +33,7 @@ const Compare = ({ catalog }) => {
         <Col md={3}>
           <div className={styles['compare-dtls']}>
             <div className={`${styles['compare-dtls-img']} ${styles['flex']} ${styles['justify-center']}`}>
-              <img src="https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/catalog/mobile/PMOB02S4O3EWO5P4MX/GALLERY/MEDIASEV9NQV42NB3W1GRWT1LUF/apple-iphone-6s-plus-na-original-imaeby6wkfpmcsym.jpeg" className="img-responsive" />
+              <img src={`${constants.mediaDomain}/catalog/mobile/PMOB02S4O3EWO5P4MX/GALLERY/MEDIASEV9NQV42NB3W1GRWT1LUF/apple-iphone-6s-plus-na-original-imaeby6wkfpmcsym.jpeg`} className="img-responsive" />
             </div>
             <div className={`${styles['compare-dtls-inn']} ${styles['pt-20']} ${styles['t-c']}`}>
               <span className={`${styles['fs-12']} ${styles['lgt-blue']}`}>Apple</span>
@@ -44,7 +45,7 @@ const Compare = ({ catalog }) => {
         <Col md={3}>
           <div className={styles['compare-dtls']}>
             <div className={`${styles['compare-dtls-img']} ${styles['flex']} ${styles['justify-center']}`}>
-              <img src="https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/catalog/mobile/PMOBBIXF5GLMPQFBLY/GALLERY/MEDIAOYU1JZY4GKWPQJPZQW5KH8/item_XL_30719633_112682072.jpg" className="img-responsive" />
+              <img src={`${constants.mediaDomain}/catalog/mobile/PMOBBIXF5GLMPQFBLY/GALLERY/MEDIAOYU1JZY4GKWPQJPZQW5KH8/item_XL_30719633_112682072.jpg`} className="img-responsive" />
             </div>
             <div className={`${styles['compare-dtls-inn']} ${styles['pt-20']} ${styles['t-c']}`}>
               <span className={`${styles['fs-12']} ${styles['lgt-blue']}`}>Samsung</span>
@@ -56,7 +57,7 @@ const Compare = ({ catalog }) => {
         <Col md={3}>
           <div className={styles['compare-dtls']}>
             <div className={`${styles['compare-dtls-img']} ${styles['flex']} ${styles['justify-center']}`}>
-              <img src="https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/catalog/mobile/PMOBLWN3JQQ9G3SIE2/GALLERY/MEDIAWYM2HU91Y8RU6KXI3OAZFY/item_XXL_11725389_16973934.jpg" className="img-responsive" />
+              <img src={`${constants.mediaDomain}/catalog/mobile/PMOBLWN3JQQ9G3SIE2/GALLERY/MEDIAWYM2HU91Y8RU6KXI3OAZFY/item_XXL_11725389_16973934.jpg`} className="img-responsive" />
             </div>
             <div className={`${styles['compare-dtls-inn']} ${styles['pt-20']} ${styles['t-c']}`}>
               <span className={`${styles['fs-12']} ${styles['lgt-blue']}`}>LG</span>
