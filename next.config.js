@@ -3,6 +3,7 @@ const withStylus = require('@zeit/next-stylus');
 const withCSS = require('@zeit/next-css');
 const commonsChunkConfig = require('@zeit/next-css/commons-chunk-config');
 const path = require('path');
+const git = require('git-rev-sync');
 
 module.exports = withStylus(withCSS({
   cssModules: true,
@@ -13,11 +14,17 @@ module.exports = withStylus(withCSS({
   publicRuntimeConfig: {
       env: process.env.ENV
   },
+  generateBuildId: async () => {
+    return git.short();
+  },
   webpack: (config, { dev }) => {
     // Fixes npm packages that depend on `fs` module
     config.node = {
       fs: 'empty'
     }
+    // if(!dev) {
+    //   config.devtool = 'source-map'
+    // }
     // if (dev) {
     //   config.module.rules.push({
     //     test: /\.js$/,

@@ -5,10 +5,14 @@ import apm from '../store/helper/apmInstance';
 
 export default class MyDocument extends Document {
   render() {
+    const {buildManifest, pathname} = this.props;
+    const {css} = buildManifest;
     return (
       <html>
         <Head>
-          <link rel="stylesheet" href="/_next/static/style.css" />
+          {css.map((file) => {
+            return <link rel="stylesheet" href={`/_next/${file}`} key={file} />
+          })}
           <Meta />
         </Head>
         <body>
