@@ -6,7 +6,7 @@ import constants from '../../../constants';
 import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Product/product');
 import {languageDefinations} from '../../../utils/lang'
-
+const {PDP_PAGE} = languageDefinations()
 const RecentView = props => {
   const { recentlyViewed, shippingInfo } = props;
   return (
