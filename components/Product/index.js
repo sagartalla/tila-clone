@@ -41,7 +41,7 @@ const getProductComponent = (isPreview, taskCode) => {
     }
 
     componentDidMount() {
-      if (window.localStorage) {
+      if (window.localStorage && !isPreview) {
         const { productData } = this.props;
         const { offerInfo, titleInfo, imgUrls, shippingInfo } = productData;
 

@@ -8,7 +8,7 @@ import Blocker from '../../common/Blocker';
 import SVGComponent from '../../common/SVGComponet';
 import RightBar from '../../common/CartPaymentSideBar';
 import { languageDefinations } from '../../../utils/lang/';
-
+import constants from '../../../constants';
 import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Cart/cart');
 
@@ -18,7 +18,7 @@ const CartBody = props => {
   const flag = data && items && items.length;
   const cnt = flag > 0 ? items.length : 0;
   const { CART_PAGE } = languageDefinations();
-  const wishlistImgPath = "https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/catalog/mobile/PMOBNTDOUQWWQOLDLP/GALLERY/MEDIA3STP9XJBH3D2W7EQD2TQKU/apple-iphone-6s-na-original-imaebymaz5exfapw.jpeg"
+  const wishlistImgPath = `${constants.mediaDomain}/catalog/mobile/PMOBNTDOUQWWQOLDLP/GALLERY/MEDIA3STP9XJBH3D2W7EQD2TQKU/apple-iphone-6s-na-original-imaebymaz5exfapw.jpeg`
   return (
     <div className={styles['cart-container']}>
       {
@@ -48,7 +48,7 @@ const CartBody = props => {
                         }
                         <div className={`${styles['cart-box']} ${styles['p-20']}`}>
                           {
-                            inventory == 0 ?
+                            inventory <= 0 ?
                               <div className={`${styles['out-of-stock']} ${styles['text-center']} ${styles['absolute']} ${styles['bg-white']}`}>
                                 <h3>uh-oh!</h3>
                                 <p>
@@ -105,7 +105,7 @@ const CartBody = props => {
                                   : ''
                               }
                               {
-                                inventory == 0 ?
+                                inventory <= 0 ?
                                   <span className={`${styles['fontW600']} ${styles['thick-red']} ${styles['pr-20']}`}>{CART_PAGE.OUT_OF_STOCK} </span>
                                   : ''
                               }

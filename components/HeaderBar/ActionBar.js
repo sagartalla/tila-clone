@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ModalContainer } from 'react-router-modal';
 import { Dropdown, MenuItem } from "react-bootstrap";
-
+import { selectors as personalSelectors } from '../../store/cam/personalDetails';
 import Cart from '../Cart';
 import Login from '../Login';
 import { Link } from '../../routes';
@@ -73,7 +73,7 @@ class ActionBar extends Component {
   }
 
   render() {
-    const { isLoggedIn, cartResults } = this.props;
+    const { isLoggedIn, cartResults, userInfo } = this.props;
     return (
       <div className={styles['actionbar-wrapper']}>
         <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']} ${styles['country-code']}`}>
@@ -119,7 +119,7 @@ class ActionBar extends Component {
               <div className={styles['profile-part']}>
                 <div className={`${styles['flex-center']} ${styles['ple-icon']}`}>
                   <span className={styles['icon']}></span>
-                  <span className={styles['pl-15']}>Hello Guest</span>
+                  <span className={styles['pl-15']}>Hello {userInfo.personalInfo.first_name || 'Tila Customer' }</span>
                 </div>
                 <ul className={`${styles['pl-0']} ${styles['profile-inn']}`}>
                   <li className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']}`}>
@@ -187,6 +187,7 @@ const mapStateToProps = (store) => {
     isLoggedIn: selectors.getLoggedInStatus(store),
     cartResults: cartSelectors.getCartResults(store),
     loginInProgress: selectors.getLoginProgressStatus(store),
+    userInfo: personalSelectors.getUserInfo(store)
   })
 };
 
@@ -201,5 +202,6 @@ const mapDispatchToProps = (dispatch) => {
     dispatch,
   );
 }
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(ActionBar);

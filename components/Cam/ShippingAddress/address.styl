@@ -1,8 +1,26 @@
 @import '../../../layout/main/executables.styl';
 
 .address-container
+  .common-input-mb
+    margin-bottom 25px
+
   .hide
     display none
+
+  .min-address-part
+    box-shadow 0 0 7px 1px rgba(0,0,0,.07)
+    left 0
+    right 0
+    z-index 9
+    .min-address-list
+      max-height 200px
+      overflow scroll
+    .min-address-part-inn
+      border-bottom: 1px dashed border-light-gray
+      .address-radio-btn
+        visibility hidden
+      .add-new-addres
+        box-shadow 0 -4px 4px 0 rgba(0, 0, 0, 0.07)
 
   .input
     border none
