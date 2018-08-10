@@ -9,8 +9,9 @@ import { bindActionCreators } from 'redux';
 import { actionCreators, selectors } from '../../../../store/cam/personalDetails';
 
 import { mergeCss } from '../../../../utils/cssUtil';
+import {languageDefinations} from '../../../../utils/lang';
 const styles = mergeCss('components/Cam/PersonelDetails/profile');
-
+const {CONTACT_INFO_MODAL} = languageDefinations();
 class EditPhone  extends React.Component {
   state = {
     phoneNumber: "",
@@ -68,7 +69,7 @@ class EditPhone  extends React.Component {
     <div className={styles['editProfileModal']}>
     <Row>
       <Col xs={11} md={11}>
-        <h3>Edit Phone Number</h3>
+        <h3>{CONTACT_INFO_MODAL.EDIT_PHONE_NUMBER}</h3>
       </Col>
       <Col xs={1} md={1} onClick={this.handleClose}><a>
         X</a>
@@ -84,17 +85,17 @@ class EditPhone  extends React.Component {
     </Row>
     <Row className={`${styles['m-5']} ${styles['mt-20']}`}>
       <Col xs={12} md={12} className={styles['box']}>
-        <div>Phone Number</div>
+        <div>{CONTACT_INFO_MODAL.PHONE_NUMBER}</div>
         <Input placeholder="Enter phone number" type="number" val={phoneNumber} onChange={this.handlePhoneNumberChange} />
       </Col>
       <Col xs={12} md={12} className={styles['box']}>
-        <div>Enter OTP</div>
+        <div>{CONTACT_INFO_MODAL.ENTER} OTP</div>
         <Row>
           <Col xs={8} md={8}>
             <Input placeholder="Enter OTP" val={otp} onChange={this.handleOTPChange} />
           </Col>
           <Col xs={4} md={4}>
-            <span><a onClick={this.handleResendOtp}>Resend OTP</a></span>
+            <span><a onClick={this.handleResendOtp}>{CONTACT_INFO_MODAL.RESEND} OTP</a></span>
           </Col>
         </Row>
       </Col>

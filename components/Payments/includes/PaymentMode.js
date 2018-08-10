@@ -9,13 +9,13 @@ import PayOnline from './paymentpages/PayOnline';
 import NetBanking from './paymentpages/NetBanking';
 import RewardPoints from './paymentpages/RewardPoints';
 import CashOnDelivery from './paymentpages/CashOnDelivery';
-
+import {languageDefinations} from '../../../utils/lang'
 import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Payments/payment');
-
+const {PAYMENT_PAGE} = languageDefinations();
 const PaymentMode = props => {
 
-  //NOTE: For every new payment type, 
+  //NOTE: For every new payment type,
   //      we need to create one page under "paymentpages" folder and add one key vale pair here.
   const paymentPageConfig = {
     "VOUCHER": Voucher,
@@ -57,7 +57,7 @@ const PaymentMode = props => {
       <SVGComponent clsName={`${styles['payment-icon']} ${props.configJson.progress ? 'payment-active' : ''}`} src="icons/payment-icon/payment-icon" />
       <Row className={`${props.configJson.basic ? '' : 'hide'}`}>
         <Col md={12} sm={12} xs={12}>
-          <h4 className={styles['m-0']}>Make Payment</h4>
+          <h4 className={styles['m-0']}>{PAYMENT_PAGE.MAKE_PAYMENT}</h4>
           <p className={styles['mb-0']}>
             <small>Net banking, credit card, vouchers and etc....</small>
           </p>
@@ -67,7 +67,7 @@ const PaymentMode = props => {
         {
           props.data && props.data.orderRes ?
             <div>
-              <h4 className={`${styles['m-0']} ${styles['mb-10']}`}>Make Payment</h4>
+              <h4 className={`${styles['m-0']} ${styles['mb-10']}`}>{PAYMENT_PAGE.MAKE_PAYMENT}</h4>
               <Row>
                 <Col md={3} sm={12} xs={12}>
                   <ul className={` ${styles['pay-menu']} ${styles['m-0']} ${styles['pl-5']} ${styles['pt-5']}`}>
@@ -102,7 +102,7 @@ const PaymentMode = props => {
                 </Col>
               </Row>
             </div>
-            : <div>Loading...</div>
+            : <div>{PAYMENT_PAGE.LOADING}</div>
         }
       </div>
     </div>
@@ -120,4 +120,3 @@ PaymentMode.defaultProps = {
 }
 
 export default PaymentMode;
-
