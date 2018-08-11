@@ -16,9 +16,9 @@ class OffersAndDiscounts extends Component {
   render() {
     const { configJson, handleOffersDiscountsTab } = this.props;
     return (
-      <div className={`${styles['pb-15']} ${styles['pt-15']}  ${styles['box']} ${styles['mb-20']} ${styles['relative']} ${styles['pay-offers-discounts']}`}>
+      <div className={`${styles['box']} ${styles['mb-20']} ${styles['relative']} ${styles['pay-offers-discounts']}`}>
         <SVGComponent clsName={`${styles['payment-icon']} ${configJson.done ? 'done' : ''} ${configJson.progress ? 'payment-active' : ''}`} src="icons/common-icon/offers-copons" />
-        <div className={`${configJson.basic || configJson.done ? '' : 'hide'} ${styles['flex-center']}  ${styles['pl-35']} ${styles['pr-35']}`}>
+        <div className={`${configJson.basic || configJson.done ? '' : 'hide'} ${styles['flex-center']}`}>
           <Col md={12} sm={12} xs={12} className={styles['pl-0']}>
             <h4 className={styles['m-0']}>Offers & Discunts</h4>
             <small>offers & discounts</small>

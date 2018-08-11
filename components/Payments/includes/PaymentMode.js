@@ -53,7 +53,7 @@ const PaymentMode = props => {
   }
 
   return (
-    <div className={`${styles['pb-15']} ${styles['pt-15']} ${styles['pl-35']} ${styles['pr-35']} ${styles['box']} ${styles['mb-20']} ${styles['relative']}`}>
+    <div className={`${styles['payment-mode-prt']} ${styles['box']} ${styles['mb-20']} ${styles['relative']}`}>
       <SVGComponent clsName={`${styles['payment-icon']} ${props.configJson.progress ? 'payment-active' : ''}`} src="icons/payment-icon/payment-icon" />
       <Row className={`${props.configJson.basic ? '' : 'hide'}`}>
         <Col md={12} sm={12} xs={12}>
