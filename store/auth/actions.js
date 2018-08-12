@@ -1,4 +1,6 @@
 import api from './api';
+import loginReq from '../helper/loginReq';
+import refStore from '../refHandler';
 
 const actions = {
   USER_LOGIN: 'USER_LOGIN',
@@ -12,13 +14,24 @@ const actions = {
   AUTOCOMPLETE_CITY: 'AUTOCOMPLETE_CITY',
   RESET_AUTOCOMPLETE_CITY: 'RESET_AUTOCOMPLETE_CITY',
   RESET_LOGIN_ERROR: 'RESET_LOGIN_ERROR',
+  SHOW_LOGIN: 'SHOW_LOGIN',
+  RESET_SHOW_LOGIN: 'RESET_SHOW_LOGIN',
+  STORE_POST_LOGIN_ACTION_INFO: 'STORE_POST_LOGIN_ACTION_INFO',
+  DELETE_POST_LOGIN_ACTION_INFO: 'DELETE_POST_LOGIN_ACTION_INFO'
 };
 
 const actionCreators = {
-  userLogin: (params) => {
-    return ({
+  userLogin: (params) => (dispatch, getState) => {
+    return dispatch({
       type: actions.USER_LOGIN,
       payload: api.userLogin(params)
+    }).then(() => {
+      if(typeof refStore.postLoginRef === 'function') {
+        refStore.postLoginRef(dispatch, getState)
+      } else {
+        dispatch(refStore.postLoginRef);
+        dispatch(actions.DELETE_POST_LOGIN_ACTION_INFO);
+      }
     });
   },
   userRegister: (params) => (dispatch, getState) => {
@@ -92,7 +105,26 @@ const actionCreators = {
     return {
       type: actions.RESET_LOGIN_ERROR,
     }
-  }
+  },
+  showLogin: () => {
+    return {
+      type: actions.SHOW_LOGIN
+    }
+  },
+  storePostLoginActionInfo: (ret) => {
+    return {
+      type: actions.STORE_POST_LOGIN_ACTION_INFO,
+      payload: {
+        ref: ret
+      }
+    }
+  },
+  deletePostLoginActionInfo: () => ({
+    type: actions.DELETE_POST_LOGIN_ACTION_INFO
+  }),
+  resetShowLogin: () => ({
+    type: actions.RESET_SHOW_LOGIN
+  })
 };
 
 export { actions, actionCreators };

@@ -4,6 +4,8 @@ import { actions } from './actions';
 const initialState = {
   ui: {
     loading: false,
+    loginLoading: false,
+    showLogin: false,
   },
   data: {
     isLoggedIn: false,
@@ -25,7 +27,8 @@ const authReducer = typeToReducer({
       return Object.assign({}, state, {
         data: {
           ...state.data,
-          ...action.payload.data
+          ...action.payload.data,
+          showLogin: false,
         },
         ui: { loginLoading: false }
       });
@@ -170,6 +173,24 @@ const authReducer = typeToReducer({
         ui: { loading: false }
       });
     },
+  },
+  [actions.SHOW_LOGIN]: (state, action) => {
+    return {
+      ...state,
+      ui: {
+        ...state.ui,
+        showLogin: true,
+      }
+    }
+  },
+  [actions.RESET_SHOW_LOGIN]: (state) => {
+    return {
+      ...state,
+      ui: {
+        ...state.ui,
+        showLogin: false,
+      }
+    }
   }
 }, initialState);
 
