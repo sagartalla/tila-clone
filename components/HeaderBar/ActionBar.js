@@ -38,7 +38,7 @@ class ActionBar extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const show = (!nextProps.isLoggedIn && (nextProps.isLoggedIn != this.props.isLoggedIn) && !this.state.logoutClicked) || this.state.loginClicked || !!nextProps.error || nextProps.loginInProgress;
+    const show = (!nextProps.isLoggedIn && (nextProps.isLoggedIn != this.props.isLoggedIn) && !this.state.logoutClicked) || this.state.loginClicked || !!nextProps.error || nextProps.loginInProgress || (!nextProps.isLoggedIn && nextProps.showLogin);
     // console.log('show:',show,'nextProps.isLoggedIn', nextProps.isLoggedIn, 'this.props.isLoggedIn', this.props.isLoggedIn, 'this.state.logoutClicked', this.state.logoutClicked, 'nextProps.error', nextProps.error, 'nextProps.loginInProgress', nextProps.loginInProgress);
     this.setState({
       show: show,
@@ -70,6 +70,7 @@ class ActionBar extends Component {
   onBackdropClick() {
     this.setState({ show: false });
     this.props.resetLoginError();
+    this.props.resetShowLogin();
   }
 
   render() {
@@ -187,7 +188,8 @@ const mapStateToProps = (store) => {
     isLoggedIn: selectors.getLoggedInStatus(store),
     cartResults: cartSelectors.getCartResults(store),
     loginInProgress: selectors.getLoginProgressStatus(store),
-    userInfo: personalSelectors.getUserInfo(store)
+    userInfo: personalSelectors.getUserInfo(store),
+    showLogin: selectors.getShowLogin(store),
   })
 };
 
@@ -198,6 +200,7 @@ const mapDispatchToProps = (dispatch) => {
       logout: actionCreators.userLogout,
       getCartResults: cartActionCreators.getCartResults,
       resetLoginError: actionCreators.resetLoginError,
+      resetShowLogin: actionCreators.resetShowLogin,
     },
     dispatch,
   );
