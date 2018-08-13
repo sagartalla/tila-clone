@@ -12,9 +12,10 @@ var basePath = {
   server: '.next/server'
 };
 
-_.map(buildManifest, function(val, key) {
-  console.log('uploading ' + val[0]);
-  if(val[0]) {
+_.map([buildManifest['bundles/pages/_error.js']], function(val, key) {
+  debugger;
+  if(val && val[0]) {
+    console.log('uploading ' + val[0]);
     var filepath = basePath.client + val[0] + '.map';
     var formData = new FormData();
     formData.append('sourcemap', fs.createReadStream(filepath));

@@ -5,7 +5,7 @@ const commonsChunkConfig = require('@zeit/next-css/commons-chunk-config');
 const path = require('path');
 const git = require('git-rev-sync');
 const withSourceMaps = require('@zeit/next-source-maps')
-
+const version = git.short();
 module.exports = withSourceMaps(withStylus(withCSS({
   cssModules: true,
   cssLoaderOptions: {
@@ -13,10 +13,11 @@ module.exports = withSourceMaps(withStylus(withCSS({
     localIdentName: "[local]___[hash:base64:5]",
   },
   publicRuntimeConfig: {
-      env: process.env.ENV
+      env: process.env.ENV,
+      version: version
   },
   generateBuildId: async () => {
-    return git.short();
+    return version;
   },
   webpack: (config, { dev }) => {
     // Fixes npm packages that depend on `fs` module

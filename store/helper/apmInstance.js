@@ -4,12 +4,13 @@ const apmConfig = require('../../apm.config');
 
 const config = getConfig()
 const env = config.publicRuntimeConfig.env;
-
+const version = config.publicRuntimeConfig.version;
 let apm;
 // if (env !== 'local'){
 apm = initApm({
   serviceName: apmConfig.serviceName,
   serverUrl: apmConfig.serverUrl,
+  serviceVersion: version,
 });
 // }
 
