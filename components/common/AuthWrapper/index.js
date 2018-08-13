@@ -27,7 +27,7 @@ class AuthWrapper extends Component {
 }
 
 const mapStateToProps = (store) => ({
-  isLoggedIn: getLoggedInStatus(store);
+  isLoggedIn: selectors.getLoggedInStatus(store)
 });
 
 const mapDispatchToProps = dispatch =>
