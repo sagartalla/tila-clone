@@ -12,6 +12,9 @@ module.exports = withSourceMaps(withStylus(withCSS({
     importLoaders: 1,
     localIdentName: "[local]___[hash:base64:5]",
   },
+  serverRuntimeConfig: {
+    isServer: true
+  },
   publicRuntimeConfig: {
       env: process.env.ENV,
       version: version

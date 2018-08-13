@@ -3,7 +3,7 @@ import getConfig from 'next/config';
 const apmConfig = require('../../apm.config');
 
 const config = getConfig()
-const env = config.publicRuntimeConfig.env;
+const isServer = config.serverRuntimeConfig.isServer;
 const version = config.publicRuntimeConfig.version;
 let apm;
 // if (env !== 'local'){
