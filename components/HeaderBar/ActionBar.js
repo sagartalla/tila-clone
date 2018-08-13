@@ -141,7 +141,7 @@ class ActionBar extends Component {
                     </a>
                   </li>
                   <li className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']}`}>
-                    <a href={publicUrls.customerHelp} target="_blank" className={styles['flex-center']}><span className={styles['support']}><span className={`${styles['flex-center']} ${styles['justify-center']}`}>?</span></span>
+                    <a href={"http://omc-dev.fptechscience.com/login?p_next_page=faq%2Ffaq"} target="_blank" className={styles['flex-center']}><span className={styles['support']}><span className={`${styles['flex-center']} ${styles['justify-center']}`}>?</span></span>
                       <span className={styles['pl-20']}>Help & Support</span></a>
                   </li>
                   <li className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']}`}>
