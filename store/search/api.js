@@ -13,6 +13,7 @@ const getSearchResultsApi = ({
   fl,
   isListed,
   categoryTree,
+  choosenCategoryName,
   shippingDetails,
   sort
 }) => {
@@ -57,6 +58,7 @@ const getSearchResultsApi = ({
       shippingDetails,
       sort,
       categoryTree,
+      choosenCategoryName,
     };
     data.geoDetails = {
       country,
