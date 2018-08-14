@@ -27,10 +27,15 @@ const actionCreators = {
       type: actions.DELETE_TO_WISHLIST,
       payload: apis.deleteWishlistApi(wishlist_id),
     });
-  }),
-  addToCart: loginReq((params, wishlist_id) => (dispatch, getState) => {
+  },
+  addToCart: (params, wishlist_id, getCartData) => (dispatch, getState) => {
     return dispatch(cartActionCreators.addToCart(params)).then(() => {
-      dispatch(actionCreators.deleteWishlist(wishlist_id));
+      if (getCartData) {
+        dispatch(actionCreators.deleteWishlist(wishlist_id)).then(() => {
+          dispatch(cartActionCreators.getCartResults({}));
+        });
+      } else
+        dispatch(actionCreators.deleteWishlist(wishlist_id));
     })
   }),
   addToWishlistAndFetch: loginReq((params) => (dispatch, getState) => {
