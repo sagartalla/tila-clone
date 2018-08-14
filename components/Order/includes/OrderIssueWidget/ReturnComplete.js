@@ -31,7 +31,7 @@ class ReturnComplete extends Component {
       {
         loadingStatus
         ?
-        {ORDER_PAGE.LOADING}
+        ORDER_PAGE.LOADING
         :
         <div>
           <div>
