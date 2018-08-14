@@ -118,7 +118,8 @@ const getSearchResutls = (store) => {
         productId: product.attributes.productId,
         catalogId: product.attributes.catalogId,
         itemtype: product.attributes.itemType,
-        displayName: product.attributes.calculated_display_name,
+        displayName: product.attributes.calculated_display_name.join(','),
+        brand: product.attributes.brand[0],
         variants: variantInfo,
         priceRange,
         currency,
@@ -156,10 +157,6 @@ const getQuery = (store) => {
   return store.searchReducer.data.searchDetails.query;
 }
 
-const autoCompleteData = (store) => {
-  return store.searchReducer.autoSuggestion
-}
-
 const optionParams = (store) => {
   let isListed = store.searchReducer.data;
   isListed = isListed ? isListed.hardCodedValues : true;
@@ -185,4 +182,12 @@ const getSearchBarFilterState = (state) => {
   return state.searchReducer.ui.showFilters;
 }
 
-export { getSearchFilters, getSearchResutls, getPaginationDetails, getUIState, getCategoryId, getQuery, getFacetfilters, optionParams, getSearchBarFilterState, addCartAndWishlistDetails,autoCompleteData };
+const getIsCategoryTree = (store) => {
+  return store.searchReducer.data.searchDetails.categoryTree;
+}
+
+const getChoosenCategoryName = (store) => {
+  return store.searchReducer.data.searchDetails.choosenCategoryName;
+}
+
+export { getSearchFilters, getSearchResutls, getPaginationDetails, getUIState, getCategoryId, getQuery, getFacetfilters, optionParams, getSearchBarFilterState, addCartAndWishlistDetails, getIsCategoryTree, getChoosenCategoryName };

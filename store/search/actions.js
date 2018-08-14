@@ -4,7 +4,6 @@ const actions = {
   GET_SEARCH_RESULTS: 'GET_SEARCH_RESULTS',
   GET_MORE_RESULTS: 'GET_MORE_RESULTS',
   SEARCHBAR_FITLERS: 'SEARCHBAR_FITLERS',
-  AUTO_SUGGESTIONS:'AUTO_SUGGESTIONS',
 };
 
 const actionCreators = {
@@ -15,12 +14,6 @@ const actionCreators = {
     return dispatch({
       type: loadMore ? actions.GET_MORE_RESULTS : actions.GET_SEARCH_RESULTS,
       payload: apis.getSearchResultsApi(data),
-    });
-  },
-  autoCompleteSuggestion:(data) => (dispatch,getState) => {
-    return dispatch({
-      type:actions.AUTO_SUGGESTIONS,
-      payload:apis.getAutoSuggestions(data)
     });
   },
   hideSearchBarFitlers: () => {
