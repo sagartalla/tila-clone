@@ -30,6 +30,7 @@ class Cart extends Component {
     this.decreaseItemCnt = this.decreaseItemCnt.bind(this);
     this.addOrRemoveGift = this.addOrRemoveGift.bind(this);
     this.checkoutBtnHandler = this.checkoutBtnHandler.bind(this);
+    this.cartStepperInputHandler = this.cartStepperInputHandler.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -41,6 +42,10 @@ class Cart extends Component {
   componentDidMount() {
     if (!this.props.showMiniCart)
       this.props.getCartResults();
+  }
+
+  cartStepperInputHandler() {
+    
   }
 
   checkoutBtnHandler() {

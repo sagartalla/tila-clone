@@ -38,7 +38,7 @@ const CartBody = props => {
               <div>
                 {
                   items.map((item, index) => {
-                    const { item_id, img, name, price, cur, quantity, max_limit, inventory, brand_name, gift_info, shipping, warranty } = item;
+                    const { item_id, img, name, price, cur, quantity, max_limit, inventory, brand_name, gift_info, shipping, warranty,total_amount } = item;
                     return (
                       <div key={item_id} className={`${styles['mb-20']} ${styles['box']}`}>
                         {
@@ -89,7 +89,7 @@ const CartBody = props => {
                                 </Col>
                                 <Col md={2} className={`${styles['pl-0']}`}>
                                   <h4 className={`${styles['fontW600']} ${styles['light-gry-clr']} ${styles['mt-15']} ${styles['t-rt']}`}>{price + ' ' + cur}</h4>
-                                  <p className={`${styles['t-rt']}`}>0.00 <span className={`${styles['fs-12']}`}>SAR</span></p>
+                                  <p className={`${styles['t-rt']}`}>0.00 <span className={`${styles['fs-12']}`}>{cur}</span></p>
                                   <p className={`${styles['t-rt']}`}>{shipping.shipping_fees} <span className={`${styles['fs-12']}`}>{cur}</span></p>
                                 </Col>
                               </Row>
@@ -120,7 +120,7 @@ const CartBody = props => {
                             </span>
                           </Col>
                           <Col md={3} className={`${styles['t-rt']} ${styles['pr-0']}`}>
-                            <span>Total : </span><span className={`${styles['fs-16']} ${styles['fontW600']}`}>{price + ' ' + cur}</span>
+                            <span>Total : </span><span className={`${styles['fs-16']} ${styles['fontW600']}`}>{total_amount + ' ' + cur}</span>
                           </Col>
                         </div>
 

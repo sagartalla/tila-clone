@@ -25,6 +25,7 @@ const getCartResults = (store) => {
           cart_item_id: item.cart_item_id,
           name: item.product_details.product_details_vo.cached_product_details.attribute_map.calculated_display_name.attribute_values[0].value,
           price: item.listing_info.selling_price,
+          total_amount: item.total_amount,
           cur: item.listing_info.selling_price_currency,
           img: img_url + '/' + item.product_details.product_details_vo.cached_product_details.media.gallery_media[0].url,
           quantity: item.quantity,
