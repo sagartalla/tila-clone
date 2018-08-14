@@ -8,12 +8,13 @@ import { selectors, actionCreators } from '../../../../store/order';
 import constants from '../../../../constants';
 
 import ChooseVariant from './ChooseVariant';
+import {languageDefinations} from '../../../../utils/lang'
 
 import { ORDER_ISSUE_TYPES, ORDER_ISSUE_STEPS as STEPS } from '../../constants';
 
 import { mergeCss } from '../../../../utils/cssUtil';
 const styles = mergeCss('components/Order/includes/OrderIssueWidget/orderIssue');
-
+const {ORDER_PAGE} = languageDefinations();
 class Reason extends Component {
   constructor(props) {
     super(props)
@@ -80,12 +81,12 @@ class Reason extends Component {
 				}
 				<div className={`${styles['reason-cont']} ${styles['p-20']}`}>
           <div className={`${styles['instruction-txt']} ${styles['pb-15']}`}>
-            <span className={styles['fs-12']}>Please select a reason fro your cancellation and we'll take care of it!</span>
+            <span className={styles['fs-12']}>{ORDER_PAGE.SELECT_CANCEL_REASON}</span>
           </div>
 					<div className={`${styles['dd-cont']} ${styles['pb-15']}`}>
             <div className={styles['select']}>
               <select className={styles['select-text']} required onChange={this.selectReason}>
-                <option>{loadingStatus ? 'loading...' : 'Select a Reason'}</option>
+                <option>{loadingStatus ? ORDER_PAGE.LOADING : ORDER_PAGE.SELECT_REASON}</option>
                 {
                   reasons.map((reason) => <option key={reason.id} value={reason.name}>{reason.name}</option>)
                 }
@@ -98,7 +99,7 @@ class Reason extends Component {
               ?
               <div className={`${styles['select']} ${styles['mt-20']} ${styles['mb-10']}`}>
 							<select className={styles['select-text']} onChange={this.selectSubReason}>
-								<option>{loadingStatus ? 'loading...' : 'Select a Sub Reason'}</option>
+								<option>{loadingStatus ? ORDER_PAGE.LOADING : ORDER_PAGE.SELECT_SUB_REASON}</option>
 								{
 									_.map(reasons.filter((reason) => reason.name === this.state.reason)[0].sub_reasons, (subReason, key) => <option key={subReason.id} value={subReason.name}>{subReason.name}</option>)
 								}
@@ -120,7 +121,7 @@ class Reason extends Component {
           </div>
 				</div>
 				<div className={`${styles['widget-footer']} ${styles['flex-center']} ${styles['justify-center']} ${styles['box']}`}>
-          <button onClick={this.saveAndGoNext} className={`${styles['fp-btn']} ${styles['fp-btn-primary']}`} disabled={loadingStatus || !this.state.reason}>Continue</button>
+          <button onClick={this.saveAndGoNext} className={`${styles['fp-btn']} ${styles['fp-btn-primary']}`} disabled={loadingStatus || !this.state.reason}>{ORDER_PAGE.CONTINUE}</button>
         </div>
 			</div>
 		);

@@ -3,7 +3,8 @@ import routes, { Link } from '../../../../routes';
 import { selectors, actionCreators } from '../../../../store/megamenu';
 import { mergeCss } from '../../../../utils/cssUtil';
 const styles = mergeCss('components/HeaderBar/header');
-
+import {languageDefinations} from '../../../../utils/lang'
+const {HEADER_PAGE}=languageDefinations()
 const MaxItems = 5;
 
 class Leaves extends Component {
@@ -34,7 +35,7 @@ class Leaves extends Component {
           ?
           <li>
             <Link route={`/srp/${parent.displayName}-${parent.id}?categoryTree=true&isListed=true`}>
-              <a className={`${styles['level-1-item']}`}>View All</a>
+              <a className={`${styles['level-1-item']}`}>{HEADER_PAGE.VIEW_ALL}</a>
             </Link>
           </li>
           :
