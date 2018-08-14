@@ -34,22 +34,41 @@ const getSearchFilters = (store) => {
     category: [],
     facets: [],
   };
-  if (store.searchReducer.data.categoryFilter) {
-    const categoryFilter = store
-      .searchReducer
-      .data
-      .categoryFilter
-      .parentCategories
-      .reduce((filters, item) => {
-        return filters.concat({
-            ...item,
-            children: item.childCategories,
-          })
-      }, []);
+  const categoryFilter = store.searchReducer.data.categoryFilter;
+  if (categoryFilter) {
+    const { nodes } = categoryFilter;
     filters.category = [{
       name: 'Category',
       id: 'category',
-      children: categoryFilter,
+      children: _.reduce(nodes, (acc, value, key) => {
+        return [
+          ...acc,
+          {
+            canonicalId: _.kebabCase(key),
+            children: _.reduce(value.child, (acc, value, key) => {
+              return [
+                ...acc,
+                {
+                  canonicalId: _.kebabCase(key),
+                  id: value.id,
+                  name: key,
+                  children: _.reduce(value.child, (acc, value, key) => {
+                    return [
+                      ...acc,
+                      {
+                        canonicalId: _.kebabCase(key),
+                        id: value.id,
+                        name: key,
+                      }
+                    ];
+                  }, []),
+                }];
+              }, []),
+            id: value.id,
+            name: key,
+          }
+        ];
+      }, []),
     }];
   }
   if (store.searchReducer.data.facetResponse){

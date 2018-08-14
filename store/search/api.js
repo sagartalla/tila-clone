@@ -35,14 +35,6 @@ const getSearchResultsApi = ({
     options.categoryFilter = categoryFilter;
   }
   return axios.get(`${constants.SEARCH_API_URL}/search${categoryTree ? '/browseByCatId/': ''}?query=${escape(JSON.stringify(options))}`).then(({ data }) => {
-    if (data.categoryFilter) {
-      data.categoryFilter.parentCategories.forEach((parentCategory) => {
-        parentCategory.canonicalId = _.kebabCase(parentCategory.name);
-        parentCategory.childCategories.forEach((childCategory) => {
-          childCategory.canonicalId = _.kebabCase(childCategory.name);
-        });
-      });
-    }
     const { products, noOfProducts } = data.productResponse;
     const hasMore = (((pageNum - 1) * pageSize) + products.length) !== noOfProducts;
 
