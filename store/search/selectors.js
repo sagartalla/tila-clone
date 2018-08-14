@@ -181,4 +181,12 @@ const getSearchBarFilterState = (state) => {
   return state.searchReducer.ui.showFilters;
 }
 
-export { getSearchFilters, getSearchResutls, getPaginationDetails, getUIState, getCategoryId, getQuery, getFacetfilters, optionParams, getSearchBarFilterState, addCartAndWishlistDetails };
+const getIsCategoryTree = (store) => {
+  return store.searchReducer.data.searchDetails.categoryTree;
+}
+
+const getChoosenCategoryName = (store) => {
+  return store.searchReducer.data.searchDetails.choosenCategoryName;
+}
+
+export { getSearchFilters, getSearchResutls, getPaginationDetails, getUIState, getCategoryId, getQuery, getFacetfilters, optionParams, getSearchBarFilterState, addCartAndWishlistDetails, getIsCategoryTree, getChoosenCategoryName };
