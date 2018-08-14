@@ -6,13 +6,13 @@ const loginReq = (fn) => {
     const ret = fn(...args);
     if(state.authReducer.data.isLoggedIn){
       if(typeof ret === 'function') {
-        ret(dispatch, getState);
+        return ret(dispatch, getState);
       } else {
-        dispatch(ret);
+        return dispatch(ret);
       }
     } else {
       dispatch(actionCreators.storePostLoginActionInfo(ret));
-      dispatch(actionCreators.showLogin());
+      return dispatch(actionCreators.showLogin());
     }
   };
 };
