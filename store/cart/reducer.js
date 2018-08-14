@@ -60,7 +60,7 @@ const cartReducer = typeToReducer({
           ...state.data,
           ...action.payload.data
         },
-        ui: { loading: false } });
+        ui: { loading: false, loaded: true } });
     },
     REJECTED: (state, action) => {
       return Object.assign({}, state, {
