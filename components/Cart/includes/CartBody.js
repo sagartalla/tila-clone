@@ -7,6 +7,7 @@ import CartStepper from './CartStepper';
 import Blocker from '../../common/Blocker';
 import SVGComponent from '../../common/SVGComponet';
 import RightBar from '../../common/CartPaymentSideBar';
+import Wishlist from '../../Cam/Wishlist/';
 import { languageDefinations } from '../../../utils/lang/';
 import constants from '../../../constants';
 import { mergeCss } from '../../../utils/cssUtil';
@@ -18,7 +19,7 @@ const CartBody = props => {
   const flag = data && items && items.length;
   const cnt = flag > 0 ? items.length : 0;
   const { CART_PAGE } = languageDefinations();
-  const wishlistImgPath = `${constants.mediaDomain}/catalog/mobile/PMOBNTDOUQWWQOLDLP/GALLERY/MEDIA3STP9XJBH3D2W7EQD2TQKU/apple-iphone-6s-na-original-imaebymaz5exfapw.jpeg`
+  
   return (
     <div className={styles['cart-container']}>
       {
@@ -128,23 +129,8 @@ const CartBody = props => {
                     )
                   })
                 }
-                <div className={`${styles['view-wishlist-main']} ${styles['box']} ${styles['p-20']} ${styles['flex-center']}`}>
-                  <Col md={4}>
-                    <span className={styles['fs-12']}>{`10 ${CART_PAGE.OUT_OF} 8 ${CART_PAGE.ITEMS_WISHLIST_PURCHASE}` }<a> 3 {CART_PAGE.ITEMS_OFFERS}</a></span>
-                  </Col>
-                  <Col md={6}>
-                    {
-                      [...Array(6).keys()].map((i) => {
-                        return (
-                          <span key={i} className={`${styles['wishlist-img']} ${styles['mr-15']}`}><img src={wishlistImgPath} /></span>
-                        )
-                      })
-                    }
-                  </Col>
-                  <Col md={2} className={`${styles['pl-0']} ${styles['pr-0']} ${styles['flex']} ${styles['view-btn-list']}`}>
-                    <a className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']} ${styles['default-small']}`}>{CART_PAGE.VIEW_WISHLIST}</a>
-                  </Col>
-                </div>
+
+                <Wishlist cartMiniWishList={true} />
               </div>
 
             </Col>
