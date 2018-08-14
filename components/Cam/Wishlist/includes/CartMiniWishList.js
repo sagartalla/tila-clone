@@ -7,7 +7,7 @@ import { languageDefinations } from '../../../../utils/lang/';
 import { mergeCss } from '../../../../utils/cssUtil';
 const styles = mergeCss('components/Cart/cart');
 
-const { WISH_LIST_PAGE } = languageDefinations();
+const { CART_PAGE } = languageDefinations();
 
 class CartMiniWishList extends Component {
   constructor(props) {
@@ -27,7 +27,7 @@ class CartMiniWishList extends Component {
     return (
       <div className={`${styles['view-wishlist-main']} ${styles['box']} ${styles['p-20']} ${styles['flex-center']}`}>
         <Col md={4}>
-          <span className={styles['fs-12']}>{tempData.length} out of {tempData.length} Items on your wishlist are available now to purchase.</span>
+          <span className={styles['fs-12']}>{tempData.length} out of {tempData.length} {CART_PAGE.ITEMS_WISHLIST_PURCHASE}</span>
         </Col>
         <Col md={6}>
           {
@@ -49,10 +49,10 @@ class CartMiniWishList extends Component {
 }
 
 CartMiniWishList.propTypes = {
-  
+
 }
 
-  
+
 CartMiniWishList.defaultProps = {
 
 };
