@@ -27,7 +27,7 @@ class CartMiniWishList extends Component {
     return (
       <div className={`${styles['view-wishlist-main']} ${styles['box']} ${styles['p-20']} ${styles['flex-center']}`}>
         <Col md={4}>
-          <span className={styles['fs-12']}>{tempData.length} out of {tempData.length} {CART_PAGE.ITEMS_WISHLIST_PURCHASE}</span>
+          <span className={styles['fs-12']}>{tempData.length} {CART_PAGE.OUT_OF} {tempData.length} {CART_PAGE.ITEMS_WISHLIST_PURCHASE}</span>
         </Col>
         <Col md={6}>
           {
