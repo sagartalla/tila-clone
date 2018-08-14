@@ -86,16 +86,16 @@ class EditPhone  extends React.Component {
     <Row className={`${styles['m-5']} ${styles['mt-20']}`}>
       <Col xs={12} md={12} className={styles['box']}>
         <div>{CONTACT_INFO_MODAL.PHONE_NUMBER}</div>
-        <Input placeholder="Enter phone number" type="number" val={phoneNumber} onChange={this.handlePhoneNumberChange} />
+        <Input placeholder={`${CONTACT_INFO_MODAL.ENTER} ${CONTACT_INFO_MODAL.PHONE_NUMBER}`} type="number" val={phoneNumber} onChange={this.handlePhoneNumberChange} />
       </Col>
       <Col xs={12} md={12} className={styles['box']}>
-        <div>{CONTACT_INFO_MODAL.ENTER} OTP</div>
+        <div>{CONTACT_INFO_MODAL.ENTER} {CONTACT_INFO_MODAL.OTP}</div>
         <Row>
           <Col xs={8} md={8}>
-            <Input placeholder="Enter OTP" val={otp} onChange={this.handleOTPChange} />
+            <Input placeholder={`${CONTACT_INFO_MODAL.ENTER} ${CONTACT_INFO_MODAL.OTP}`}  val={otp} onChange={this.handleOTPChange} />
           </Col>
           <Col xs={4} md={4}>
-            <span><a onClick={this.handleResendOtp}>{CONTACT_INFO_MODAL.RESEND} OTP</a></span>
+            <span><a onClick={this.handleResendOtp}>{CONTACT_INFO_MODAL.RESEND} {CONTACT_INFO_MODAL.OTP}</a></span>
           </Col>
         </Row>
       </Col>

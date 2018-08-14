@@ -67,7 +67,12 @@ export const EN_KEYWORDS = {
     'TC':'T & C',
     'PRIVACY_POLICY':'Privacy Policy',
     'AGREE_TO':'I agree to the',
-    'CLOSE':'CLOSE'
+    'CLOSE':'CLOSE',
+    'VISA':'VISA',
+    'MASTER':'MASTER',
+    'EMI':'EMI',
+    'CREDIT_CARD':'Credit Card',
+    'CREDIT_CARDS':'Credit Cards'
   },
   DELIVERY_ADDR_PAGE: {
     'DELIVERY_ADDR': 'Delivery Address',
@@ -155,7 +160,8 @@ export const EN_KEYWORDS = {
     'ADD_TO_WISHLIST':'Add to Wishlist',
     'FULLFILLED_BY_TILA':'Fulfilled by Tila',
     'ADD_TO_COMPARE':'Add to compare',
-    'OFF':'OFF'
+    'OFF':'OFF',
+    'EMI':'EMI'
   },
   VAULT_PAGE: {
     'MANAGE_VAULT_HDR': 'Manage Cards, Vouchers and More',
@@ -209,7 +215,9 @@ export const EN_KEYWORDS = {
     'PROFILE_CREATION_SUCCESS_MESSAGE':'Your profile is complete. You can edit or change any details at anytime you want',
     'THANK_YOU':'Thank You',
     'MALE':'Male',
-    'FEMALE':'Female'
+    'FEMALE':'Female',
+    'OTP':'OTP',
+    'ENTER':'Enter'
   },
   EDIT_PASSWORD_MODAL: {
     'PASSWORD_SUCCESS_MESSAGE': 'Your password is changed successfully!!',
@@ -367,7 +375,9 @@ export const EN_KEYWORDS = {
     'VIEW_ALL':'View All',
     'TOP_BRANDS':'Top Brands',
     'TRENDING':'Trending',
-    'TILA_CUSTOMER':'Tila Customer'
+    'TILA_CUSTOMER':'Tila Customer',
+    'MATCHING_ITEM':'MATCHING ITEM',
+    'MATCHING_PRODUCTS':'MATCHING PRODUCTS'
   },
   LOGIN_PAGE: {
     'SIGN_UP':'Sign Up',
@@ -408,7 +418,7 @@ export const EN_KEYWORDS = {
     'ADDRESS_PICKUP':'Please Choose Address for Pick Up',
     'SELECT_VARIANT':'Select Variant',
     'SELECT_TYPE_EXCHANGE':'Select Variant to Exchange',
-    'SELECT_CANCEL_REASON':'Please select a reason fro your cancellation and we\'ll take care of it!',
+    'SELECT_CANCEL_REASON':'Please select a reason for your cancellation and we\'ll take care of it!',
     'SELECT_REASON':'Select a Reason',
     'SELECT_SUB_REASON':'Select a Sub Reason',
     'RETURN_MESSAGE': 'Sorry that you had to Return, we will work on reason for your Return',

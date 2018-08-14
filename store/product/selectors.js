@@ -59,7 +59,7 @@ const getProduct = (store, variantId) => {
     offerInfo,
     shippingInfo,
     returnInfo,
-    catalog: _.groupBy(catalogAttributeMap, (attrMap) => attrMap.attribute_category_name)
+    catalog: _.groupBy(_.filter(catalogAttributeMap, (val) => val.visible), (attrMap) => attrMap.attribute_category_name)
   };
 };
 
@@ -135,13 +135,18 @@ const getPreview = (store) => {
     order: item.order,
     restricted: item.isRestricted,
   })) : [];
+  debugger;
   const catalog = _.reduce(attributes, (acc, attrVal, attrKey) => {
-    const groupName = _.find(catalogData, { attributeName: attrKey }).attributeCategoryName;
-    acc[groupName] = acc[groupName] || [];
-    acc[groupName].push({
-      display_string: attrKey,
-      attribute_values: attrVal.attributeValues,
-    })
+    const cItem = _.find(catalogData, { attributeName: attrKey });
+    const groupName = cItem.attributeCategoryName;
+    const isVisible = cItem.isVisible;
+    if(isVisible) {
+      acc[groupName] = acc[groupName] || [];
+      acc[groupName].push({
+        display_string: attrKey,
+        attribute_values: attrVal.attributeValues,
+      });
+    }
     return acc;
   }, {});
 

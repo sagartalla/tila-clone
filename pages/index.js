@@ -8,6 +8,8 @@ import Landing from '../components/Landing';
 import Base, { baseActions } from './base';
 
 class LandingPage extends Base {
+  pageName = 'LANDING';
+
   render() {
     const { url } = this.props;
     return (

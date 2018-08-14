@@ -92,7 +92,7 @@ class Offers extends Component {
           <Col md={6}>
             <ul className={`${styles['pl-0']} ${styles['no-list-blt']}`}>
               <li>
-                <h5 className={`${styles['ff-b']} ${styles['black-color']}`}>EMI {PDP_PAGE.NOT_AVAIALBLE}</h5>
+                <h5 className={`${styles['ff-b']} ${styles['black-color']}`}>{PDP_PAGE.EMI}{PDP_PAGE.NOT_AVAIALBLE}</h5>
               </li>
             </ul>
           </Col>

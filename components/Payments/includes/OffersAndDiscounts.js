@@ -28,7 +28,7 @@ class OffersAndDiscounts extends Component {
         <div className={`${configJson.progress ? '' : 'hide'} ${styles['pb-5']} ${styles['pt-5']} ${styles['offers-show-part']}  ${styles['pl-35']} ${styles['pr-35']}`}>
           <h4 className={`${styles['mt-0']} ${styles['mb-0']}  ${styles['pb-20']} ${styles['title']}`}>{PAYMENT_PAGE.OFFERS_DISCOUNTS}</h4>
           <div className={`${styles['visa-master-part']}`}>
-            <h4 className={`${styles['m-0']} ${styles['pb-20']} ${styles['pt-20']} ${styles['lgt-blue']}`}>{`${PAYMENT_PAGE.OFFERS_ON} VISA, Master & ${PAYMENT_PAGE.OTHER_CARDS}`}</h4>
+            <h4 className={`${styles['m-0']} ${styles['pb-20']} ${styles['pt-20']} ${styles['lgt-blue']}`}>{`${PAYMENT_PAGE.OFFERS_ON} ${PAYMENT_PAGE.VISA},${PAYMENT_PAGE.MASTER}  & ${PAYMENT_PAGE.OTHER_CARDS}`}</h4>
             <div className={`${styles['debit-cards-list']} ${styles['relative']} ${styles['pt-20']} ${styles['flex-center']} ${styles['justify-center']} ${styles['pb-30']}`}>
               <Col md={4} className={styles['pl-0']}>
                 <div className={styles['flex']}>
@@ -52,7 +52,7 @@ class OffersAndDiscounts extends Component {
             </div>
           </div>
           <div>
-            <h4 className={`${styles['m-0']} ${styles['pb-20']} ${styles['pt-20']} ${styles['lgt-blue']}`}>Credit Cards</h4>
+            <h4 className={`${styles['m-0']} ${styles['pb-20']} ${styles['pt-20']} ${styles['lgt-blue']}`}>{PAYMENT_PAGE.CREDIT_CARDS}</h4>
             <div className={`${styles['debit-cards-list']} ${styles['credit-cards-list']} ${styles['relative']} ${styles['pt-20']} ${styles['flex-center']} ${styles['pb-30']}`}>
               <Col md={4} className={styles['pl-0']}>
                 <div className={styles['flex']}>
@@ -70,12 +70,12 @@ class OffersAndDiscounts extends Component {
             </div>
           </div>
           <div className={`${styles['flex']} ${styles['flex-colum']} ${styles['pb-20']}`}>
-            <h4 className={`${styles['m-0']} ${styles['pb-20']} ${styles['pt-20']} ${styles['lgt-blue']}`}>EMI - Credit Card</h4>
+            <h4 className={`${styles['m-0']} ${styles['pb-20']} ${styles['pt-20']} ${styles['lgt-blue']}`}>{`${PAYMENT_PAGE.EMI}-${PAYMENT_PAGE.CREDIT_CARD}`}</h4>
             <Col md={12} className={`${styles['pl-0']} ${styles['pr-0']}`}>
               <table style={{ width: '100%' }}>
                 <tbody>
                   <tr>
-                    <th>Credit Cards</th>
+                    <th>{PAYMENT_PAGE.CREDIT_CARDS}</th>
                     <th>3 Months</th>
                     <th>6 Months</th>
                     <th>9 Months</th>
