@@ -11,8 +11,9 @@ import { actionCreators } from '../../../store/cam/wishlist';
 import { Grid, Row, Col } from 'react-bootstrap';
 import SVGCompoent from '../../common/SVGComponet';
 import { mergeCss } from '../../../utils/cssUtil';
+import {languageDefinations} from '../../../utils/lang'
 const styles = mergeCss('components/Search/search');
-
+const {PDP_PAGE} = languageDefinations()
 class Product extends Component {
   constructor(props) {
     super(props);
@@ -99,13 +100,13 @@ class Product extends Component {
                       ?
                       <span className={`${styles['tag-main']} ${styles['absolute']}`}></span>
                       :
-                      <span className={`${styles['offer-tag']} ${styles['white-color']} ${styles['fs-12']} ${styles['absolute']} ${styles[this.getOfferClassName(offers[0])]}`}>{offers[0]} OFF</span>
+                      <span className={`${styles['offer-tag']} ${styles['white-color']} ${styles['fs-12']} ${styles['absolute']} ${styles[this.getOfferClassName(offers[0])]}`}>{offers[0]} {PDP_PAGE.OFF}</span>
                   )
                   :
                   null
               }
               <span className={`${styles['variants-main']}`}></span>
-              <span className={`${styles['fullfill-main']} ${styles['flex-center']}`}><span className={styles['fulfill-img']}></span><span className={`${styles['fs-12']} ${styles['fontW600']} ${styles['pl-10']} ${styles['fullfilled-label']}`}>Fulfilled by Tila</span></span>
+              <span className={`${styles['fullfill-main']} ${styles['flex-center']}`}><span className={styles['fulfill-img']}></span><span className={`${styles['fs-12']} ${styles['fontW600']} ${styles['pl-10']} ${styles['fullfilled-label']}`}>{PDP_PAGE.FULLFILLED_BY_TILA}</span></span>
             </div>
             <div className={styles['desc-cont']}>
               <div className={`${styles['pb-20']} ${styles['pl-20']} ${styles['flex']} ${styles['flex-colum']}`}>
@@ -140,24 +141,24 @@ class Product extends Component {
               <div className={`${styles['flex']} ${styles['justify-around']} ${styles['quick-view']} ${styles['border-radius4']}`}>
                 <a className={`${styles['flex']} ${styles['add-to-crt']} ${styles['justify-center']}`} onClick={this.addToCart}>
                   <SVGCompoent clsName={`${styles['cart-list']}`} src="icons/cart/blue-cart-icon" />
-                  <span className={styles['pl-5']} disabled={addedToCart}>{ addedToCart ? 'Added to Cart' : 'Add to Cart'}</span>
+                  <span className={styles['pl-5']} disabled={addedToCart}>{ addedToCart ? `${PDP_PAGE.ADDED_TO_CART}` : `${PDP_PAGE.ADD_TO_CART}`}</span>
                 </a>
                 <a className={`${styles['flex']} ${styles['buy-now-btn']} ${styles['justify-center']}`} onClick={this.buyNow}>
                   <SVGCompoent clsName={`${styles['cart-list']}`} src="icons/cart/buy-icon" />
-                  <span className={styles['pl-5']}>Buy Now</span>
+                  <span className={styles['pl-5']}>{PDP_PAGE.BUY_NOW}</span>
                 </a>
               </div>
               <div className={`${styles['wish-list-part']} ${styles['flx-space-bw']}`}>
                 <span className={styles['flex']}>
                   <a className={styles['flex-center']} onClick={this.addToWishlist}>
                     <SVGCompoent clsName={`${styles['wish-list']}`} src={addedToWishlist ? "icons/wish-list/wish-list-icon-red" : "icons/wish-list/wish-list-icon"} />
-                    <span className={styles['pl-5']} disabled={addedToWishlist}>{addedToWishlist ? 'Added to Wishlist': 'Add to Wishlist'}</span>
+                    <span className={styles['pl-5']} disabled={addedToWishlist}>{addedToWishlist ? `${PDP_PAGE.ADDED_TO_WISHLIST}`: `${PDP_PAGE.ADD_TO_WISHLIST}`}</span>
                   </a>
                 </span>
                 <span className={styles['flex']}>
                   <a className={styles['flex-center']}>
                     <SVGCompoent clsName={`${styles['wish-list']}`} src="icons/cam/cam-icon" />
-                    <span className={styles['pl-5']}>Add to Compare</span>
+                    <span className={styles['pl-5']}>{PDP_PAGE.ADD_TO_COMPARE}</span>
                   </a>
                 </span>
               </div>

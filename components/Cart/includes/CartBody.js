@@ -52,7 +52,7 @@ const CartBody = props => {
                               <div className={`${styles['out-of-stock']} ${styles['text-center']} ${styles['absolute']} ${styles['bg-white']}`}>
                                 <h3>uh-oh!</h3>
                                 <p>
-                                  This product is out of stock,Please remove this item or <br /> move it to wishlist to continue.
+                                  {CART_PAGE.ITEM_OUT_OF_STOCK_MESSAGE} <br /> {CART_PAGE.CONTINUE_TO_WISHLIST}
                                 </p>
                               </div>
                               : null
@@ -130,7 +130,7 @@ const CartBody = props => {
                 }
                 <div className={`${styles['view-wishlist-main']} ${styles['box']} ${styles['p-20']} ${styles['flex-center']}`}>
                   <Col md={4}>
-                    <span className={styles['fs-12']}>10 out of 8 Items on your wishlist are available now to purchase. <a> 3 items are on Offers</a></span>
+                    <span className={styles['fs-12']}>{`10 ${CART_PAGE.OUT_OF} 8 ${CART_PAGE.ITEMS_WISHLIST_PURCHASE}` }<a> 3 {CART_PAGE.ITEMS_OFFERS}</a></span>
                   </Col>
                   <Col md={6}>
                     {
@@ -142,7 +142,7 @@ const CartBody = props => {
                     }
                   </Col>
                   <Col md={2} className={`${styles['pl-0']} ${styles['pr-0']} ${styles['flex']} ${styles['view-btn-list']}`}>
-                    <a className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']} ${styles['default-small']}`}>View Wishlist</a>
+                    <a className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']} ${styles['default-small']}`}>{CART_PAGE.VIEW_WISHLIST}</a>
                   </Col>
                 </div>
               </div>
@@ -178,8 +178,4 @@ CartBody.propTypes = {
   data: PropTypes.object.isRequired,
 };
 
-CartBody.defaultProps = {
-
-};
-
-export default CartBody;
+export default CartBody

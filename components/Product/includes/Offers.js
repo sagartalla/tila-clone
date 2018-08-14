@@ -10,6 +10,8 @@ import { selectors, actionCreators } from '../../../store/cart';
 import { Link } from '../../../routes';
 
 import { mergeCss } from '../../../utils/cssUtil';
+import {languageDefinations} from '../../../utils/lang'
+const {PDP_PAGE} = languageDefinations()
 const styles = mergeCss('components/Product/product');
 
 class Offers extends Component {
@@ -39,23 +41,23 @@ class Offers extends Component {
                 {
                   isAddedToCart
                   ?
-                  'Added to Cart'
+                  `${PDP_PAGE.ADDED_TO_CART}`
                   :
-                  `BUY FOR ${price}`
+                  `${PDP_PAGE.BUY_FOR} ${price}`
                 }
               </Button>
               {
                 isAddedToCart
                 ?
                 <Button>
-                  <Link route="/cart">Go To Cart</Link>
+                  <Link route="/cart">{PDP_PAGE.GO_TO_CART}</Link>
                 </Button>
                 :
                 null
               }
             </Col>
             <Col md={6}>
-              <Button>Like</Button>
+              <Button>{PDP_PAGE.LIKE}</Button>
             </Col>
           </Row>
           {
@@ -74,15 +76,15 @@ class Offers extends Component {
           <Col md={6} className={styles['border-rt']}>
             <ul className={`${styles['pl-0']} ${styles['no-list-blt']}`}>
               <li>
-                <h5 className={`${styles['ff-b']} ${styles['black-color']}`}>Offers</h5>
+                <h5 className={`${styles['ff-b']} ${styles['black-color']}`}>{PDP_PAGE.OFFERS}</h5>
                 <ul className={`${styles['pl-15']} ${styles['no-list-blt']}`}>
                   <li>No offers </li>
                 </ul>
               </li>
               <li>
-                <h5 className={`${styles['ff-b']} ${styles['black-color']}`}>Warrenty</h5>
+                <h5 className={`${styles['ff-b']} ${styles['black-color']}`}>{PDP_PAGE.WARRANTY}</h5>
                 <ul className={`${styles['pl-15']} ${styles['no-list-blt']}`}>
-                  <li>No warranty</li>
+                  <li>{PDP_PAGE.NO_WARRANTY}</li>
                 </ul>
               </li>
             </ul>
@@ -90,7 +92,7 @@ class Offers extends Component {
           <Col md={6}>
             <ul className={`${styles['pl-0']} ${styles['no-list-blt']}`}>
               <li>
-                <h5 className={`${styles['ff-b']} ${styles['black-color']}`}>EMI Not Available</h5>
+                <h5 className={`${styles['ff-b']} ${styles['black-color']}`}>{PDP_PAGE.EMI}{PDP_PAGE.NOT_AVAIALBLE}</h5>
               </li>
             </ul>
           </Col>
@@ -101,11 +103,11 @@ class Offers extends Component {
         {
           availabilityError
           ?
-            'Product not available in your country'
+            `${PDP_PAGE.PRODUCT_NOT_AVAILABLE}`
           :
             stockError
             ?
-              'Product out of stock'
+              `${PDP_PAGE.PRODUCT_OUT_OF_STOCK}`
             :
               null
         }

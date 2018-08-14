@@ -27,7 +27,7 @@ class Shipping extends Component {
             {
               shippable
                 ?
-                <span className={`${styles['fs-12']} ${styles['lgt-blue']}`}>Free deliver in <span className={styles['fontW600']}>{shipping_days}</span> Days</span> : ''
+                <span className={`${styles['fs-12']} ${styles['lgt-blue']}`}>{PDP_PAGE.FREE_DELIVERY_IN}<span className={styles['fontW600']}>{shipping_days}</span>{PDP_PAGE.DAYS}</span> : ''
             }
 
           </div>
@@ -36,7 +36,7 @@ class Shipping extends Component {
               ?
               <div>
                 <div className={`${styles['flex']} ${styles['justify-center']} ${styles['pt-15']} ${styles['pb-15']}`}>
-                  <span className={styles['fs-12']}>FREE Delivery by {moment().add(shipping_days, 'days').format("ddd, hA")}</span>
+                  <span className={styles['fs-12']}>{PDP_PAGE.FREE_DELIVERY_BY}{moment().add(shipping_days, 'days').format("ddd, hA")}</span>
                 </div>
                 <div className={`${styles['flex-center']} ${styles['fontW600']} ${styles['p-5']} ${styles['fs-12']} ${styles['warrenty-part']}`}>
                   <div className={styles['flex-center']}>
@@ -44,20 +44,20 @@ class Shipping extends Component {
                     {
                       acceptsReturns
                         ?
-                        <span>{maxDaysToReturn} Day easy return</span>
+                        <span>{maxDaysToReturn} {PDP_PAGE.DAY} {PDP_PAGE.EASY_RETURN}</span>
                         :
-                        'Non returnable'
+                        `${PDP_PAGE.NON_RETURNABLE}`
                     }
                   </div>
                   <span>|</span>
                   <div className={styles['flex-center']}>
                     <SVGCompoent clsName={`${styles['secure-icon']} ${styles['mr-10']}`} src="icons/common-icon/trust-secure" />
-                    <span>1 year warrenty</span>
+                    <span>1 {PDP_PAGE.YEAR} {PDP_PAGE.WARRANTY}</span>
                   </div>
                 </div>
               </div>
               :
-              <p className={`${styles['flex']} ${styles['pt-15']} ${styles['justify-center']}`}>Not shipping to your city.</p>
+              <p className={`${styles['flex']} ${styles['pt-15']} ${styles['justify-center']}`}>{PDP_PAGE.NO_SHIPPING_CITY}</p>
 
           }
         </div>
