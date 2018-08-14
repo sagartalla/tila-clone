@@ -30,7 +30,7 @@ const AddressNew = props => {
           </Col>
 
           <Col md={6} sm={12} xs={12}>
-            <div className={`${styles['fp-input']}`}>
+            <div className={`${styles['fp-input']} ${styles['common-input-mb']}`}>
               <input type="text" name="first_name" onChange={inputOnChange} value={data.first_name} className={styles.input} required />
               <span className={styles['highlight']}></span>
               <span className={styles['bar']}></span>
@@ -38,7 +38,7 @@ const AddressNew = props => {
             </div>
           </Col>
           <Col md={6} sm={12} xs={12}>
-            <div className={`${styles['fp-input']}`}>
+            <div className={`${styles['fp-input']} ${styles['common-input-mb']}`}>
               <input type="text" name="last_name" onChange={inputOnChange} value={data.last_name} className={styles.input} required />
               <span className={styles['highlight']}></span>
               <span className={styles['bar']}></span>
@@ -46,7 +46,7 @@ const AddressNew = props => {
             </div>
           </Col>
           <Col md={6} sm={12} xs={12}>
-            <div className={`${styles['fp-input']}`}>
+            <div className={`${styles['fp-input']} ${styles['common-input-mb']}`}>
               <input type="text" name="country_name" onChange={inputOnChange} value={data.state} className={styles.input} required />
               <span className={styles['highlight']}></span>
               <span className={styles['bar']}></span>
@@ -54,15 +54,15 @@ const AddressNew = props => {
             </div>
           </Col>
           <Col md={6} sm={12} xs={12}>
-            <div className={`${styles['fp-input']}`}>
+            <div className={`${styles['fp-input']} ${styles['common-input-mb']}`}>
               <input type="text" name="city" onChange={inputOnChange} value={data.city} className={styles.input} required />
               <span className={styles['highlight']}></span>
               <span className={styles['bar']}></span>
               <label>City</label>
             </div>
           </Col>
-          <Col md={6} sm={12} xs={12}>
-            <div className={`${styles['fp-input']}`}>
+          <Col md={12} sm={12} xs={12}>
+            <div className={`${styles['fp-input']} ${styles['common-input-mb']}`}>
               <input type="text"name="address_line_1" onChange={inputOnChange} value={data.address_line_1} className={styles.input} required />
               <span className={styles['highlight']}></span>
               <span className={styles['bar']}></span>
@@ -70,31 +70,31 @@ const AddressNew = props => {
             </div>
           </Col>
           <Col md={6} sm={12} xs={12}>
-            <div className={`${styles['fp-input']}`}>
+            <div className={`${styles['fp-input']} ${styles['common-input-mb']}`}>
               <input type="text" name="address_line_2" onChange={inputOnChange} value={data.address_line_2} className={styles.input} required />
               <span className={styles['highlight']}></span>
               <span className={styles['bar']}></span>
               <label>Landmark</label>
             </div>
           </Col>
-          <Col md={2} sm={12} xs={12}>
-            <div className={`${styles['fp-input']}`}>
+          <Col md={6} sm={12} xs={12}>
+            <div className={`${styles['fp-input']} ${styles['common-input-mb']}`}>
               <input type="text" name="po_box" onChange={inputOnChange} value={data.postal_code} className={styles.input} required />
               <span className={styles['highlight']}></span>
               <span className={styles['bar']}></span>
               <label>PO box</label>
             </div>
           </Col>
-          <Col md={1} sm={4} xs={4} className={`${styles['pl-0']} ${styles['pr-0']}`}>
-            <div className={`${styles['fp-input']}`}>
+          <Col md={2} sm={4} xs={4} className={`${styles['pr-0']}`}>
+            <div className={`${styles['fp-input']} ${styles['common-input-mb']}`}>
               <input type="text" name="mobile_country_code" onChange={inputOnChange} value={data.mobile_country_code} className={styles.input} required />
               <span className={styles['highlight']}></span>
               <span className={styles['bar']}></span>
               <label>Code</label>
             </div>
           </Col>
-          <Col md={3} sm={8} xs={8}>
-            <div className={`${styles['fp-input']}`}>
+          <Col md={4} sm={8} xs={8}>
+            <div className={`${styles['fp-input']} ${styles['common-input-mb']}`}>
               <input type="text" name="mobile_no" onChange={inputOnChange} value={data.mobile_no} className={styles.input} required />
               <span className={styles['highlight']}></span>
               <span className={styles['bar']}></span>

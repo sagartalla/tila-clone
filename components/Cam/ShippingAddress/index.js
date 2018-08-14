@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Cookie from 'universal-cookie';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Modal } from "react-router-modal";
 
 import AddressNew from './includes/AddressNew';
 import AddressBody from './includes/AddressBody';
@@ -83,6 +84,8 @@ class ShippingAddress extends Component {
   }
 
   makeDefaultAddress(addrId) {
+    const { toggleMiniAddress } = this.props;
+    if(toggleMiniAddress) toggleMiniAddress();
     this.props.makeDefaultAddress(addrId)
   }
 
@@ -127,7 +130,7 @@ class ShippingAddress extends Component {
 
   render() {
     // if standalone is true, it is stand alone address page else from payment page or any other pages.
-    const { results, standalone, handleShippingAddressContinue, miniAddress } = this.props;
+    const { results, standalone, handleShippingAddressContinue, miniAddress, isPdp } = this.props;
     let { showNewAddr, addr } = this.state;
     const { DELIVERY_ADDR_PAGE } = languageDefinations();
 
@@ -139,7 +142,41 @@ class ShippingAddress extends Component {
               <MiniAddress
                 data={results}
                 makeDefaultAddress={this.makeDefaultAddress}
+                showAddAdrressForm={this.showAddAdrressForm}
               />
+              {
+                showNewAddr
+                  ?
+                  isPdp ?
+                    <div style={{ position: 'absolute', 'top': '-155px', 'background': '#fff', 'width': '488px', 'left': '-31px' }}>
+                      <AddressNew
+                        inputOnChange={this.inputOnChange}
+                        saveBtnClickHandler={this.saveBtnClickHandler}
+                        data={addr}
+                        showNewAddr={showNewAddr}
+                        homeButton={this.homeButton}
+                        getDataFromMap={this.getDataFromMap}
+                        setAsDefaultLocation={this.setAsDefaultLocation}
+                        addrTypeHandler={this.addrTypeHandler}
+                        showAddAdrressForm={this.showAddAdrressForm}
+                      />
+                    </div>
+                    :
+                    <Modal className={`react-router-modal__modal ${styles['right-side-modal']}`}>
+                      <AddressNew
+                        inputOnChange={this.inputOnChange}
+                        saveBtnClickHandler={this.saveBtnClickHandler}
+                        data={addr}
+                        showNewAddr={showNewAddr}
+                        homeButton={this.homeButton}
+                        getDataFromMap={this.getDataFromMap}
+                        setAsDefaultLocation={this.setAsDefaultLocation}
+                        addrTypeHandler={this.addrTypeHandler}
+                        showAddAdrressForm={this.showAddAdrressForm}
+                      />
+                    </Modal>
+                  : ''
+              }
             </Fragment>
             :
             <Fragment>

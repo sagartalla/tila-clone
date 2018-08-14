@@ -8,19 +8,19 @@ import SVGCompoent from '../../common/SVGComponet';
 import Accordian from '../../common/Accordian';
 import { mergeCss } from '../../../utils/cssUtil';
 import { languageDefinations } from '../../../utils/lang';
-
+import { PanelGroup,Panel, Heading, Body, Title } from 'react-bootstrap';
 const styles = mergeCss('components/Product/product');
-const { PDP } = languageDefinations();
+const { PDP_PAGE } = languageDefinations();
 
-const ProductDetails =({details, keyfeatures, isPreview}) => {
+const ProductDetails = ({ details, keyfeatures, isPreview }) => {
   return (
-    <div className={`${styles['product-details-main']} ${styles['p-15']} ${styles['border-radius4']} ${styles['box']}`}>
+    <div className={`${styles['product-details-main']} ${styles['border-radius4']} ${styles['mb-10']} ${styles['box']}`}>
       {
-          details
+        details
           ?
           <div className={styles['border-b']}>
             <h4 className={`${styles['fs-12']} ${styles['fontW600']} ${styles['mb-5']} ${styles['mt-0']} ${styles['flx-space-bw']}`}>
-              <span>{PDP.PRODUCT_DETAILS}</span>
+              <span>{PDP_PAGE.PRODUCT_DETAILS}</span>
               <SVGCompoent clsName={`${styles['expand-icon']}`} src="icons/common-icon/down-arrow-circle" />
             </h4>
             <p className={`${styles['fs-12']} ${styles['fontW300']} ${styles['sub-decryption']}`}>{details}</p>
@@ -46,17 +46,31 @@ const ProductDetails =({details, keyfeatures, isPreview}) => {
         </div>
       */}
       <div className={styles['pt-10']}>
-        <Accordian
+        <PanelGroup accordion defaultActiveKey="2">
+          <Panel eventKey="1">
+            <Panel.Heading>
+              <Panel.Title toggle>
+                <h4 className={`${styles['fs-12']} ${styles['fontW600']} ${styles['mb-5']} ${styles['mt-0']} ${styles['flx-space-bw']}`}>
+                  <span>Key features</span>
+                  <SVGCompoent clsName={`${styles['expand-icon']}`} src="icons/common-icon/down-arrow-circle" />
+                </h4>
+              </Panel.Title>
+            </Panel.Heading>
+            <Panel.Body collapsible><KeyFeatures features={keyfeatures} /></Panel.Body>
+          </Panel>
+
+        </PanelGroup>
+        {/* <Accordian
           head={
             <h4 className={`${styles['fs-12']} ${styles['fontW600']} ${styles['mb-5']} ${styles['mt-0']} ${styles['flx-space-bw']}`}>
-              <span>SPECIFICATIONS</span>
+              <span>Key features</span>
               <SVGCompoent clsName={`${styles['expand-icon']}`} src="icons/common-icon/down-arrow-circle" />
             </h4>
           }
           body={
-            <KeyFeatures features={keyfeatures} />
+
           }
-        />
+        /> */}
       </div>
     </div>
   );

@@ -12,7 +12,7 @@ const styles = mergeCss('components/common/CartPaymentSideBar/sideBar');
 
 const { CART_PAGE } = languageDefinations();
 const CartAndPaymentSideBar = props => {
-  const { checkoutBtnHandler, showCheckoutBtn, showInstant, hideCouponCode, hideUpSell, showStepper, increaseItemCnt, decreaseItemCnt, insnt_item_listing_id } = props;
+  const { checkoutBtnHandler, showCheckoutBtn, showInstant, hideCouponCode, hideUpSell, showStepper, increaseItemCnt, decreaseItemCnt, insnt_item_listing_id, isPdp } = props;
   const { items, total_price, total_offer_price, total_discount, total_shipping, tax, item_cnt, currency } = props.data;
   return (
     <div className={`${styles['right-bar']}`}>
@@ -34,7 +34,10 @@ const CartAndPaymentSideBar = props => {
       {
         showInstant ?
           <div className={`${styles['p-10-20']}`}>
-            <InstantCheckout insnt_item_listing_id={insnt_item_listing_id} />
+            <InstantCheckout
+              insnt_item_listing_id={insnt_item_listing_id}
+              isPdp={isPdp}
+            />
           </div>
           : null
       }

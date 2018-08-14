@@ -48,6 +48,12 @@
     border-bottom: 4px solid #e40a80;
 }
 
+.panel-default>.panel-heading {
+    background-color: #FFF;
+    border-color: #FFF;
+}
+
+
 .nav-tabs>li a {
     font-size: 16px;
     color: #666;
@@ -89,6 +95,11 @@
     border-top: 0;
 }
 
+.panel-body {
+    padding: 0
+}
+
+
 .panel-group {
     margin-bottom: 0;
 }
@@ -127,4 +138,18 @@
 .btn-default.active, .btn-default:active, .open>.dropdown-toggle.btn-default {
     background-color: transparent;
     box-shadow: none;
+}
+
+.slick-prev:before {
+    content: '';
+    background: url(/static/img/icons/common-icon/long-Left-arrow.svg) no-repeat;
+    background-size: contain;
+    color: transparent !important;
+}
+
+.slick-next:before {
+    content: '';
+    background: url(/static/img/icons/common-icon/long-right-arrow.svg) no-repeat;
+    background-size: contain;
+    color: transparent !important;
 }

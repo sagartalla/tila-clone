@@ -6,10 +6,10 @@ const styles = mergeCss('components/Product/product');
 
 const KeyFeatures = ({ features }) => {
   return (
-    <div className={`${styles['pt-15']} ${styles['pb-15']} ${styles['border-b']}`}>
-      <ul className={`${styles['kf-list']} ${styles['flx-space-bw']} ${styles['flex-wrp']} ${styles['fs-12']} ${styles['mb-0']} ${styles['pl-0']}`}>
+    <div className={`${styles['pt-0']} ${styles['pb-15']} ${styles['border-b']}`}>
+      <ul className={`${styles['kf-list']} ${styles['flex']} ${styles['flex-wrp']} ${styles['fs-12']} ${styles['mb-0']} ${styles['pl-0']}`}>
         {
-          features.map((feature) =>  <li key={feature} className={`${styles['no-lst']} ${styles['width33']}`}>{feature}</li>)
+          features.map((feature) =>  <li key={feature} className={`${styles['no-lst']} ${styles['pr-20']}`}>{feature}</li>)
         }
       </ul>
     </div>

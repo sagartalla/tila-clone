@@ -12,7 +12,20 @@
     position absolute
 .page-details-slider
   background-color #F1F2F4
-  height calc(100vh - 105px)
+  height calc(100vh - 125px)
+
+  .varient-select-part
+    border: 1px solid rgba(0, 0, 0, 0.5)
+    background-color: white
+    border-radius: 4px
+    -webkit-appearance: none
+    -moz-appearance: none
+    appearance: none
+    padding: 5px 14px 5px 8px
+    position relative
+    &:focus
+      outline none
+
   .details-pixel
     width 0
     height 0
@@ -40,7 +53,7 @@
       bottom 0
       top auto
     .details-right-part-inn
-      padding 15px 20px
+      padding 10px 20px
 
       .product-price-bg
         border-radius 5px
@@ -57,7 +70,7 @@
           flex 1
     .addto-cart
       background-color white
-      padding 35px 20px
+      padding 10px 20px
       position absolute
       bottom 0
       left 0
@@ -89,7 +102,7 @@
         input
           font-size 12px
   .display-item-wrap
-    height calc(100% - 111px)
+    height calc(100% - 45px)
 
 .carousel-item-wrap
   height 70px !important
@@ -121,15 +134,25 @@
 .product-details-main
   // background-color white
   // box-shadow: 0 0 4px 0 rgba(212,212,212,0.5)
+  padding 10px 15px
   .expand-icon
     width 16px
     height 16px
   .sub-decryption
-    overflow: hidden;
-    line-height: 1.5em;
-    max-height: 3em;
+    overflow hidden
+    line-height 1.5em
+    max-height 3em
 
   .size-btn-main
+    position relative
+    &:after
+      content ''
+      position absolute
+      background url(/static/img/icons/down-arrow/down-arrow.svg) no-repeat
+      height 7px
+      width 10px
+      right 3px
+
     .size-btn
       display none
     label
@@ -138,9 +161,9 @@
       // width-height-radius(30px, 30px, 50%)
       margin 0
 
-  .size-btn-main input:checked + label {
-    box-shadow: 0 0 3px 0 rgba(164,164,164,0.5);
-  }
+  // .size-btn-main input:checked + label {
+  //   box-shadow: 0 0 3px 0 rgba(164,164,164,0.5);
+  // }
 
   .color-btn-main
     .color-btn
@@ -164,7 +187,8 @@
 
 .bottom-slider
   background-color white
-  padding 17px 0
+  padding 8px 0
+  align-items center
   .copon-code
     border-left 5px solid  border-gry-color
 

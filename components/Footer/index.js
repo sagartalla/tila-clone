@@ -3,6 +3,8 @@ import SVGComponent from '../common/SVGComponet';
 import { mergeCss } from '../../utils/cssUtil';
 import publicUrls from '../../constants';
 const styles = mergeCss('components/Footer/footer');
+import { languageDefinations } from '../../utils/lang';
+const {FOOTER_PAGE} = languageDefinations();
 
 const FooterBar = props => (
   <div className={`${styles['footer-container']} ${styles['mt-25']}`}>
@@ -15,8 +17,8 @@ const FooterBar = props => (
                 <SVGComponent clsName={`${styles['quation-bar-inn']}`} src="icons/common-icon/quation" />
               </span>
               <div className={`${styles['flex']} ${styles['flex-colum']} ${styles['pl-20']}`}>
-                <span className={`${styles['fontW600']} ${styles['text-uppercase']}`}>Got a question? </span>
-                <span className={styles['footer-suport-title']}>wecare@tila.com | 900-66666</span>
+                <span className={`${styles['fontW600']} ${styles['text-uppercase']}`}>{FOOTER_PAGE.GOT_QUESTION}</span>
+                <span className={styles['footer-suport-title']}>{`${FOOTER_PAGE.WE_CARE_TILA} | 900-66666`}</span>
               </div>
             </div>
           </Col>
@@ -26,8 +28,8 @@ const FooterBar = props => (
                 <SVGComponent clsName={`${styles['quation-bar-inn']}`} src="icons/common-icon/guarantee" />
               </span>
               <div className={`${styles['flex']} ${styles['flex-colum']} ${styles['pl-20']}`}>
-                <span className={`${styles['fontW600']} ${styles['text-uppercase']}`}>100% ORIGINAL  </span>
-                <span className={styles['footer-suport-title']}>guarantee for all products at tila.com</span>
+                <span className={`${styles['fontW600']} ${styles['text-uppercase']}`}>{`100% ${FOOTER_PAGE.ORIGINAL}`}</span>
+                <span className={styles['footer-suport-title']}>{FOOTER_PAGE.GURANTEE_PRODUCTS_AT_TILA}</span>
               </div>
             </div>
           </Col>
@@ -37,8 +39,8 @@ const FooterBar = props => (
                 <SVGComponent clsName={`${styles['quation-bar-inn']}`} src="icons/common-icon/return" />
               </span>
               <div className={`${styles['flex']} ${styles['flex-colum']} ${styles['pl-20']}`}>
-                <span className={`${styles['fontW600']} ${styles['text-uppercase']}`}>Return within 30days </span>
-                <span className={styles['footer-suport-title']}>placing your order</span>
+                <span className={`${styles['fontW600']} ${styles['text-uppercase']}`}>{`${FOOTER_PAGE.RETURN_WITHIN} 30 ${FOOTER_PAGE.DAYS}`}</span>
+                <span className={styles['footer-suport-title']}>{FOOTER_PAGE.PLACING_ORDER}</span>
               </div>
             </div>
           </Col>
@@ -48,8 +50,8 @@ const FooterBar = props => (
                 <SVGComponent clsName={`${styles['quation-bar-inn']}`} src="icons/common-icon/trust-secure" />
               </span>
               <div className={`${styles['flex']} ${styles['flex-colum']} ${styles['pl-20']}`}>
-                <span className={`${styles['fontW600']} ${styles['text-uppercase']}`}>Trust pay  </span>
-                <span className={styles['footer-suport-title']}>100% secure payments with tila</span>
+                <span className={`${styles['fontW600']} ${styles['text-uppercase']}`}>{FOOTER_PAGE.TRUST_PAY}</span>
+                <span className={styles['footer-suport-title']}>{`100% ${FOOTER_PAGE.SECURE_PAYMENTS_TILA}`}</span>
               </div>
             </div>
           </Col>
@@ -65,30 +67,30 @@ const FooterBar = props => (
               Fashion
             </h4>
             <ul className={`${styles['pl-30']} ${styles['lne-ht2']}`}>
-              <li>Women’s fashion</li>
-              <li>Men’s fashion</li>
-              <li>Gir’s Fashion</li>
-              <li>Boy’s Fashion</li>
-              <li>Watches</li>
-              <li>Jewellery</li>
-              <li>Women’s Handbags</li>
-              <li>Men’s eyewear</li>
+              <li>{`${FOOTER_PAGE.WOMENS} ${FOOTER_PAGE.FASHION}`}</li>
+              <li>{`${FOOTER_PAGE.MENS} ${FOOTER_PAGE.FASHION}`}</li>
+              <li>{`${FOOTER_PAGE.GIRLS} ${FOOTER_PAGE.FASHION}`}</li>
+              <li>{`${FOOTER_PAGE.BOYS} ${FOOTER_PAGE.FASHION}`}</li>
+              <li>{FOOTER_PAGE.WATCHES}</li>
+              <li>{FOOTER_PAGE.JEWELLERY}</li>
+              <li>{`${FOOTER_PAGE.WOMENS} ${FOOTER_PAGE.HANDGBAGS}`}</li>
+              <li>{`${FOOTER_PAGE.MENS} ${FOOTER_PAGE.EYEWEAR}`}</li>
             </ul>
           </Col>
           <Col md={3}>
             <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['flex-center']}`}>
               <SVGComponent clsName={`${styles['footer-list-icon']} ${styles['mr-10']}`} src="icons/common-icon/processor-icon" />
-              Electronics
+              {FOOTER_PAGE.ELECTRONICS}
             </h4>
             <ul className={`${styles['pl-30']} ${styles['lne-ht2']}`}>
-              <li>Mobiles</li>
-              <li>Tablets</li>
-              <li>Laptops</li>
-              <li>Home appliances</li>
-              <li>Camera, Photo & Video</li>
-              <li>Televisions</li>
-              <li>Headphones</li>
-              <li>Video Games</li>
+              <li>{FOOTER_PAGE.MOBILES}</li>
+              <li>{FOOTER_PAGE.TABLETS}</li>
+              <li>{FOOTER_PAGE.LAPTOPS}</li>
+              <li>{FOOTER_PAGE.HOME_APLLIANCES}</li>
+              <li>{`${FOOTER_PAGE.CAMERA},${FOOTER_PAGE.PHOTO} & ${FOOTER_PAGE.VIDEO}`}</li>
+              <li>{FOOTER_PAGE.TELEVISIONS}</li>
+              <li>{FOOTER_PAGE.HEADPHONES}</li>
+              <li>{FOOTER_PAGE.VIDEO_GAMES}</li>
             </ul>
           </Col>
           <Col md={2}>
@@ -96,33 +98,33 @@ const FooterBar = props => (
               <SVGComponent clsName={`${styles['footer-list-icon']} ${styles['mr-10']}`} src="icons/footers-icons/life-style" />
               Lifestyle</h4>
             <ul className={`${styles['pl-30']} ${styles['lne-ht2']}`}>
-              <li> Home Decor</li>
-              <li>Kitchen & Dining</li>
-              <li>Bath</li>
-              <li>Home appliances</li>
-              <li>Tools & Home improvement</li>
-              <li>Audio & Video</li>
-              <li>Furniture</li>
-              <li>Patio, Lawn & Garden</li>
+              <li>{FOOTER_PAGE.HOME_DECOR}</li>
+              <li>{`${FOOTER_PAGE.KITCHEN} & ${FOOTER_PAGE.DINING}`}</li>
+              <li>{FOOTER_PAGE.BATH}</li>
+              <li>{FOOTER_PAGE.HOME_APLLIANCES}</li>
+              <li>{`${FOOTER_PAGE.TOOLS} & ${FOOTER_PAGE.HOME_IMPROVE}`}</li>
+              <li>{`${FOOTER_PAGE.AUDIO} & ${FOOTER_PAGE.VIDEO}`}</li>
+              <li>{FOOTER_PAGE.FURNITURE}</li>
+              <li>{`${FOOTER_PAGE.PATIO}, ${FOOTER_PAGE.LAWN} & ${FOOTER_PAGE.GARDEN}`}</li>
             </ul>
           </Col>
           <Col md={2}>
             <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['flex-center']}`}>
               <SVGComponent clsName={`${styles['footer-list-icon']} ${styles['mr-10']}`} src="icons/footers-icons/beauty-makeup" />
-              Beauty & Makeup</h4>
+              {`${FOOTER_PAGE.BEAUTY} & ${FOOTER_PAGE.MAKEUP}`}</h4>
             <ul className={`${styles['pl-30']} ${styles['lne-ht2']}`}>
-              <li>Fragrance</li>
-              <li>Make-Up</li>
-              <li>Haircare</li>
-              <li>SkincareAudio & Video</li>
-              <li>Personal Care</li>
-              <li>Tools & Accessories</li>
-              <li>Men’s grooming</li>
+              <li>{FOOTER_PAGE.FRAGRANCE}</li>
+              <li>{FOOTER_PAGE.MAKEUP}</li>
+              <li>{FOOTER_PAGE.HAIRCARE}</li>
+              <li>{`${FOOTER_PAGE.SKINCARE}${FOOTER_PAGE.AUDIO} & ${FOOTER_PAGE.VIDEO}`}</li>
+              <li>{FOOTER_PAGE.PERSONAL_CARE}</li>
+              <li>{`${FOOTER_PAGE.TOOLS} & ${FOOTER_PAGE.ACCESSORIES}`}</li>
+              <li>{`${FOOTER_PAGE.MENS} ${FOOTER_PAGE.GROOMING}`}</li>
             </ul>
           </Col>
 
           <Col md={2}>
-            <h4 className={`${styles['fontW600']} ${styles['fs-16']}`}>Top Brands</h4>
+            <h4 className={`${styles['fontW600']} ${styles['fs-16']}`}>{FOOTER_PAGE.TOP_BRAND}</h4>
             <ul className={`${styles['pl-0']} ${styles['lne-ht2']} ${styles['top-brands']}`}>
               <li className={`${styles['flex']} ${styles['mb-20']} ${styles['brand-icon']}`}>
                 <img src="/static/img/bg-img/samsung-img.jpg" className={styles['img-responsive']} />
@@ -143,8 +145,8 @@ const FooterBar = props => (
           <Col md={3} className={styles['pr-0']}>
             <h4 className={styles['flex-center']}>
               <span className={`${styles['footer-social-title']} ${styles['mr-10']}`}><img src="/static/img/bg-img/bitmap-instgram.jpg" className={styles['img-responsive']} /></span>
-              <span className={`${styles['fontW600']}`}>On Snapchat</span>
-              <span className={`${styles['follow-sc-btn']} ${styles['fs-10']} ${styles['lne-ht2']}  ${styles['ml-10']} ${styles['pl-15']} ${styles['pr-15']}`}>Follow</span>
+              <span className={`${styles['fontW600']}`}>{FOOTER_PAGE.ON_SNAP}</span>
+              <span className={`${styles['follow-sc-btn']} ${styles['fs-10']} ${styles['lne-ht2']}  ${styles['ml-10']} ${styles['pl-15']} ${styles['pr-15']}`}>{FOOTER_PAGE.FOLLOW}</span>
             </h4>
             <div className={`${styles['footer-social-list-main-inn']} ${styles['pr-10']}`}>
               <div className={`${styles['sc-part']} ${styles['pt-15']} ${styles['pb-15']} ${styles['flex']}`}>
@@ -158,10 +160,10 @@ const FooterBar = props => (
                     <span className={styles['footer-sc-logo']}>
                       <img src="/static/img/bg-img/venesa.jpg" className={styles['img-responsive']} />
                     </span>
-                    <span className={`${styles['fs-12']} ${styles['lgt-blue']} ${styles['pl-10']}`}>Venessa</span>
+                    <span className={`${styles['fs-12']} ${styles['lgt-blue']} ${styles['pl-10']}`}>{FOOTER_PAGE.VENESSA}</span>
                   </span>
-                  <p className={`${styles['thick-gry-clr']} ${styles['m-0']} ${styles['pt-5']}`}>Get flawless & even-toned skin with Max Factor Panstik</p>
-                  <span className={`${styles['fs-12']} ${styles['footer-time']}`}>2 hours ago</span>
+                  <p className={`${styles['thick-gry-clr']} ${styles['m-0']} ${styles['pt-5']}`}>${FOOTER_PAGE.PANSTICK_SKIN_ADD}</p>
+                  <span className={`${styles['fs-12']} ${styles['footer-time']}`}>2 {FOOTER_PAGE.HOUR_AGO}</span>
                 </Col>
               </div>
               <div className={`${styles['sc-part']} ${styles['pt-15']} ${styles['pb-15']} ${styles['flex']}`}>
@@ -175,10 +177,10 @@ const FooterBar = props => (
                     <span className={styles['footer-sc-logo']}>
                       <img src="/static/img/bg-img/toy.jpg" className={styles['img-responsive']} />
                     </span>
-                    <span className={`${styles['fs-12']} ${styles['lgt-blue']} ${styles['pl-10']}`}>Priyanka</span>
+                    <span className={`${styles['fs-12']} ${styles['lgt-blue']} ${styles['pl-10']}`}>{FOOTER_PAGE.PRIYANKA}</span>
                   </span>
-                  <p className={`${styles['thick-gry-clr']} ${styles['m-0']} ${styles['pt-5']}`}>Get flawless & even-toned skin with Max Factor Panstik</p>
-                  <span className={`${styles['fs-12']} ${styles['footer-time']}`}>2 hours ago</span>
+                  <p className={`${styles['thick-gry-clr']} ${styles['m-0']} ${styles['pt-5']}`}>{FOOTER_PAGE.PANSTICK_SKIN_ADD}</p>
+                  <span className={`${styles['fs-12']} ${styles['footer-time']}`}>2 {FOOTER_PAGE.HOUR_AGO}</span>
                 </Col>
               </div>
             </div>
@@ -186,8 +188,8 @@ const FooterBar = props => (
           <Col md={3} className={styles['pr-0']}>
             <h4 className={styles['flex-center']}>
               <span className={`${styles['footer-social-title']} ${styles['mr-10']}`}><img src="/static/img/bg-img/bitmap-twitter.jpg" className={styles['img-responsive']} /></span>
-              <span className={`${styles['twitter-clr']} ${styles['fontW600']}`}>On Twitter</span>
-              <span className={`${styles['follow-twi-btn']} ${styles['fs-10']} ${styles['lne-ht2']} ${styles['white-color']} ${styles['ml-10']} ${styles['pl-15']} ${styles['pr-15']}`}>Follow</span>
+              <span className={`${styles['twitter-clr']} ${styles['fontW600']}`}>{FOOTER_PAGE.ON_TWITTER}</span>
+              <span className={`${styles['follow-twi-btn']} ${styles['fs-10']} ${styles['lne-ht2']} ${styles['white-color']} ${styles['ml-10']} ${styles['pl-15']} ${styles['pr-15']}`}>{FOOTER_PAGE.FOLLOW}</span>
             </h4>
             <div className={`${styles['footer-social-list-main-inn']} ${styles['pr-10']}`}>
               <div className={`${styles['sc-part']} ${styles['pt-15']} ${styles['pb-15']} ${styles['flex']}`}>
@@ -201,10 +203,10 @@ const FooterBar = props => (
                     <span className={styles['footer-sc-logo']}>
                       <img src="/static/img/bg-img/puma.jpg" className={styles['img-responsive']} />
                     </span>
-                    <span className={`${styles['fs-12']} ${styles['lgt-blue']} ${styles['pl-10']}`}>Puma</span>
+                    <span className={`${styles['fs-12']} ${styles['lgt-blue']} ${styles['pl-10']}`}>{FOOTER_PAGE.PUMA}</span>
                   </span>
-                  <p className={`${styles['thick-gry-clr']} ${styles['m-0']} ${styles['pt-5']}`}>Get flawless & even-toned skin with Max Factor Panstik</p>
-                  <span className={`${styles['fs-12']} ${styles['footer-time']}`}>2 hours ago</span>
+                  <p className={`${styles['thick-gry-clr']} ${styles['m-0']} ${styles['pt-5']}`}>{FOOTER_PAGE.PANSTICK_SKIN_ADD}</p>
+                  <span className={`${styles['fs-12']} ${styles['footer-time']}`}>2 {FOOTER_PAGE.HOUR_AGO}</span>
                 </Col>
               </div>
               <div className={`${styles['sc-part']} ${styles['pt-15']} ${styles['pb-15']} ${styles['flex']}`}>
@@ -218,10 +220,10 @@ const FooterBar = props => (
                     <span className={styles['footer-sc-logo']}>
                       <img src="/static/img/bg-img/nike.jpg" className={styles['img-responsive']} />
                     </span>
-                    <span className={`${styles['fs-12']} ${styles['lgt-blue']} ${styles['pl-10']}`}>Nike</span>
+                    <span className={`${styles['fs-12']} ${styles['lgt-blue']} ${styles['pl-10']}`}>{FOOTER_PAGE.NIKE}</span>
                   </span>
-                  <p className={`${styles['thick-gry-clr']} ${styles['m-0']} ${styles['pt-5']}`}>Get flawless & even-toned skin with Max Factor Panstik</p>
-                  <span className={`${styles['fs-12']} ${styles['footer-time']}`}>2 hours ago</span>
+                  <p className={`${styles['thick-gry-clr']} ${styles['m-0']} ${styles['pt-5']}`}>{FOOTER_PAGE.PANSTICK_SKIN_ADD}</p>
+                  <span className={`${styles['fs-12']} ${styles['footer-time']}`}>2 {FOOTER_PAGE.HOUR_AGO}</span>
                 </Col>
               </div>
             </div>
@@ -229,8 +231,8 @@ const FooterBar = props => (
           <Col md={3} className={styles['pr-0']}>
             <h4 className={styles['flex-center']}>
               <span className={`${styles['footer-social-title']} ${styles['mr-10']}`}><img src="/static/img/bg-img/bitmap-instgram.jpg" className={styles['img-responsive']} /></span>
-              <span className={`${styles['fontW600']}`}> On Instagram</span>
-              <span className={`${styles['follow-inst-btn']} ${styles['fs-10']} ${styles['lne-ht2']} ${styles['white-color']} ${styles['ml-10']} ${styles['pl-15']} ${styles['pr-15']}`}>Follow</span>
+              <span className={`${styles['fontW600']}`}>{FOOTER_PAGE.ON_INSTAGRAM}</span>
+              <span className={`${styles['follow-inst-btn']} ${styles['fs-10']} ${styles['lne-ht2']} ${styles['white-color']} ${styles['ml-10']} ${styles['pl-15']} ${styles['pr-15']}`}>{FOOTER_PAGE.FOLLOW}</span>
             </h4>
             <div className={`${styles['footer-social-list-main-inn']} ${styles['pr-10']}`}>
               <div className={`${styles['sc-part']} ${styles['pt-15']} ${styles['pb-15']} ${styles['flex']}`}>
@@ -244,10 +246,10 @@ const FooterBar = props => (
                     <span className={styles['footer-sc-logo']}>
                       <img src="/static/img/bg-img/sony-bg.jpg" className={styles['img-responsive']} />
                     </span>
-                    <span className={`${styles['fs-12']} ${styles['lgt-blue']} ${styles['pl-10']}`}>Sony India</span>
+                    <span className={`${styles['fs-12']} ${styles['lgt-blue']} ${styles['pl-10']}`}>{FOOTER_PAGE.SONY_INDIA}</span>
                   </span>
-                  <p className={`${styles['thick-gry-clr']} ${styles['m-0']} ${styles['pt-5']}`}>Get flawless & even-toned skin with Max Factor Panstik</p>
-                  <span className={`${styles['fs-12']} ${styles['footer-time']}`}>2 hours ago</span>
+                  <p className={`${styles['thick-gry-clr']} ${styles['m-0']} ${styles['pt-5']}`}>{FOOTER_PAGE.PANSTICK_SKIN_ADD}</p>
+                  <span className={`${styles['fs-12']} ${styles['footer-time']}`}>2 {FOOTER_PAGE.HOUR_AGO}</span>
                 </Col>
               </div>
               <div className={`${styles['sc-part']} ${styles['pt-15']} ${styles['pb-15']} ${styles['flex']}`}>
@@ -261,10 +263,10 @@ const FooterBar = props => (
                     <span className={styles['footer-sc-logo']}>
                       <img src="/static/img/bg-img/levis.jpg" className={styles['img-responsive']} />
                     </span>
-                    <span className={`${styles['fs-12']} ${styles['lgt-blue']} ${styles['pl-10']}`}>Levis</span>
+                    <span className={`${styles['fs-12']} ${styles['lgt-blue']} ${styles['pl-10']}`}>{FOOTER_PAGE.LEVIS}</span>
                   </span>
-                  <p className={`${styles['thick-gry-clr']} ${styles['m-0']} ${styles['pt-5']}`}>Get flawless & even-toned skin with Max Factor Panstik</p>
-                  <span className={`${styles['fs-12']} ${styles['footer-time']}`}>2 hours ago</span>
+                  <p className={`${styles['thick-gry-clr']} ${styles['m-0']} ${styles['pt-5']}`}>{FOOTER_PAGE.PANSTICK_SKIN_ADD}</p>
+                  <span className={`${styles['fs-12']} ${styles['footer-time']}`}>2 {FOOTER_PAGE.HOUR_AGO}</span>
                 </Col>
               </div>
             </div>
@@ -272,8 +274,8 @@ const FooterBar = props => (
           <Col md={3} className={styles['pr-0']}>
             <h4 className={styles['flex-center']}>
               <span className={`${styles['footer-social-title']} ${styles['mr-10']}`}><img src="/static/img/bg-img/bitmap-social-fb.jpg" className={styles['img-responsive']} /></span>
-              <span className={`${styles['lgt-blue']} ${styles['fontW600']}`}>On Facebook</span>
-              <span className={`${styles['follow-fb-btn']} ${styles['fs-10']} ${styles['lne-ht2']} ${styles['white-color']} ${styles['ml-10']} ${styles['pl-15']} ${styles['pr-15']}`}>Follow</span>
+              <span className={`${styles['lgt-blue']} ${styles['fontW600']}`}>{FOOTER_PAGE.ON_FACEBOOK}</span>
+              <span className={`${styles['follow-fb-btn']} ${styles['fs-10']} ${styles['lne-ht2']} ${styles['white-color']} ${styles['ml-10']} ${styles['pl-15']} ${styles['pr-15']}`}>{FOOTER_PAGE.FOLLOW}</span>
             </h4>
             <div className={`${styles['footer-social-list-main-inn']} ${styles['pr-10']}`}>
               <div className={`${styles['sc-part']} ${styles['pt-15']} ${styles['pb-15']} ${styles['flex']}`}>
@@ -287,10 +289,10 @@ const FooterBar = props => (
                     <span className={styles['footer-sc-logo']}>
                       <img src="/static/img/bg-img/bitmap-logo.jpg" className={styles['img-responsive']} />
                     </span>
-                    <span className={`${styles['fs-12']} ${styles['lgt-blue']} ${styles['pl-10']}`}>H&M</span>
+                    <span className={`${styles['fs-12']} ${styles['lgt-blue']} ${styles['pl-10']}`}>{FOOTER_PAGE.H_M}</span>
                   </span>
-                  <p className={`${styles['thick-gry-clr']} ${styles['m-0']} ${styles['pt-5']}`}>Get flawless & even-toned skin with Max Factor Panstik</p>
-                  <span className={`${styles['fs-12']} ${styles['footer-time']}`}>2 hours ago</span>
+                  <p className={`${styles['thick-gry-clr']} ${styles['m-0']} ${styles['pt-5']}`}>{FOOTER_PAGE.PANSTICK_SKIN_ADD}</p>
+                  <span className={`${styles['fs-12']} ${styles['footer-time']}`}>2 {FOOTER_PAGE.HOUR_AGO}</span>
                 </Col>
               </div>
               <div className={`${styles['sc-part']} ${styles['pt-15']} ${styles['pb-15']} ${styles['flex']}`}>
@@ -304,10 +306,10 @@ const FooterBar = props => (
                     <span className={styles['footer-sc-logo']}>
                       <img src="/static/img/bg-img/levis.jpg" className={styles['img-responsive']} />
                     </span>
-                    <span className={`${styles['fs-12']} ${styles['lgt-blue']} ${styles['pl-10']}`}>Levis</span>
+                    <span className={`${styles['fs-12']} ${styles['lgt-blue']} ${styles['pl-10']}`}>{FOOTER_PAGE.LEVIS}</span>
                   </span>
-                  <p className={`${styles['thick-gry-clr']} ${styles['m-0']} ${styles['pt-5']}`}>Looks great. Feels great. It's called perfect for a reason.</p>
-                  <span className={`${styles['fs-12']} ${styles['footer-time']}`}>2 hours ago</span>
+                  <p className={`${styles['thick-gry-clr']} ${styles['m-0']} ${styles['pt-5']}`}>{FOOTER_PAGE.LOOK_FEEL}</p>
+                  <span className={`${styles['fs-12']} ${styles['footer-time']}`}>2 {FOOTER_PAGE.HOUR_AGO}</span>
                 </Col>
               </div>
             </div>
@@ -320,52 +322,52 @@ const FooterBar = props => (
       <Grid>
         <Row>
           <Col md={3}>
-            <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['black-color']}`}>Company</h4>
+            <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['black-color']}`}>{FOOTER_PAGE.COMPANY}</h4>
             <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
-              <li>About Us </li>
-              <li>Core Values  </li>
-              <li>Mission </li>
-              <li>In news </li>
-              <li>Careers </li>
-              <li>Contact Us </li>
+              <li>{FOOTER_PAGE.ABOUT_US}</li>
+              <li>{FOOTER_PAGE.CORE_VALUES}</li>
+              <li>{FOOTER_PAGE.MISSION}</li>
+              <li>{FOOTER_PAGE.IN_NEWS}</li>
+              <li>{FOOTER_PAGE.CAREERS}</li>
+              <li>{FOOTER_PAGE.CONTACT_US}</li>
             </ul>
           </Col>
           <Col md={3}>
-            <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['black-color']}`}>POLICY</h4>
+            <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['black-color']}`}>{FOOTER_PAGE.POLICY}</h4>
             <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
-              <li>Terms and conditions </li>
-              <li>Privacy Policy  </li>
-              <li>Cookie Policy </li>
+              <li>{FOOTER_PAGE.TERMS_CONDITION}</li>
+              <li>{FOOTER_PAGE.PRIVACY_POLICY}</li>
+              <li>{FOOTER_PAGE.COOKIE_POLICY}</li>
             </ul>
           </Col>
           <Col md={2}>
             <div>
-              <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['black-color']}`}>Selling on TiLa.com</h4>
+              <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['black-color']}`}>{FOOTER_PAGE.SELL_ON_TILA}</h4>
               <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
-                <li>Selling on TiLa.com</li>
-                <li>How It Works </li>
-                <li>Selling Policies </li>
-                <li>Seller Terms and Conditions </li>
-                <li>Fulfilled by TiLa </li>
-                <li>FAQs </li>
+                <li>{FOOTER_PAGE.SELL_ON_TILA}</li>
+                <li>{FOOTER_PAGE.HOW_WORKS}</li>
+                <li>{FOOTER_PAGE.SELL_POLICY}</li>
+                <li>{`${FOOTER_PAGE.SELLER} ${FOOTER_PAGE.TERMS_CONDITION}`}</li>
+                <li>{FOOTER_PAGE.FULFILL_TILA}</li>
+                <li>{FOOTER_PAGE.FAQS}</li>
               </ul>
             </div>
           </Col>
           <Col md={2}>
             <div>
-              <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['black-color']}`}>Customer Services</h4>
+              <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['black-color']}`}>{FOOTER_PAGE.CUSTOMER_SERVICE}</h4>
               <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
-                <li>Delivery</li>
-                <li>Size Guide </li>
-                <li>Payment Methods</li>
-                <li>Returns </li>
-                <li>Consumer Rights</li>
+                <li>{FOOTER_PAGE.DELIVERY}</li>
+                <li>{FOOTER_PAGE.SIZE_GUIDE}</li>
+                <li>{FOOTER_PAGE.PAY_METHOD}</li>
+                <li>{FOOTER_PAGE.RETURN}</li>
+                <li>{FOOTER_PAGE.CONSUMER_RIGHT}</li>
               </ul>
             </div>
           </Col>
           <Col md={2}>
             <div className={`${styles['fs-12']} ${styles['footer-download-app']}`}>
-              <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['black-color']}`}>Download the app</h4>
+              <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['black-color']}`}>{FOOTER_PAGE.DOWNLOAD_APP}</h4>
               <div>
                 <span className={`${styles['flex']} ${styles['mt-10']} ${styles['mb-15']} ${styles['download-icons']}`}>
                   <img src="/static/img/bg-img/app-strore.jpg" />
@@ -375,7 +377,7 @@ const FooterBar = props => (
                 </span>
               </div>
               <div className={styles['pt-30']}>
-                <span className={styles['fs-10']}>&copy; 2018 www.tila.com. All rights reserved</span>
+                <span className={styles['fs-10']}>{FOOTER_PAGE.TILA_RIGHTS}</span>
               </div>
             </div>
           </Col>

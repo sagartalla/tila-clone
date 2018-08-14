@@ -1,10 +1,14 @@
 const next = require('next');
 const express = require('express');
-const routes = require('./routes');
-const apiRoutes = require('./apiRoutes');
-const server = express();
 const bodyParser = require('body-parser');
 const cookiesMiddleware = require('universal-cookie-express');
+const routes = require('./routes');
+const apiRoutes = require('./apiRoutes');
+
+require('./utils/error-handle');
+
+const server = express();
+
 
 const app = next({ dev: process.env.NODE_ENV !== 'production' })
 

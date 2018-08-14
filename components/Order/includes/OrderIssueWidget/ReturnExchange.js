@@ -9,6 +9,8 @@ import { ORDER_ISSUE_TYPES } from '../../constants';
 
 import { mergeCss } from '../../../../utils/cssUtil';
 const styles = mergeCss('components/Order/includes/OrderIssueWidget/orderIssue');
+import {languageDefinations} from '../../../../utils/lang'
+const {ORDER_PAGE} = languageDefinations()
 
 class ReturnExchange extends Component {
   constructor(props) {
@@ -41,7 +43,7 @@ class ReturnExchange extends Component {
           <label for="return-item">
             {/* insert image here */}
             <div>
-              <span>Return</span>
+              <span>{ORDER_PAGE.RETURN}</span>
             </div>
             <p></p>
           </label>
@@ -51,13 +53,13 @@ class ReturnExchange extends Component {
           <label for="exch-item">
             {/* insert image here */}
             <div>
-              <span>Exchange</span>
+              <span>{ORDER_PAGE.EXCHANGE}</span>
             </div>
             <p></p>
           </label>
         </div>
         <div className={`${styles['widget-footer']} ${styles['box']} ${styles['pt-24']}`}>
-          <button onClick={goToNextStep} className={`${styles['m-0-auto']} ${styles['fs-16']}`} disabled={!orderIssue.returnExchangeType}>Continue</button>
+          <button onClick={goToNextStep} className={`${styles['m-0-auto']} ${styles['fs-16']}`} disabled={!orderIssue.returnExchangeType}>{ORDER_PAGE.CONTINUE}</button>
         </div>
       </div>
     );

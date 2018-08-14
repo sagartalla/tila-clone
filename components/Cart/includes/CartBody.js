@@ -7,8 +7,9 @@ import CartStepper from './CartStepper';
 import Blocker from '../../common/Blocker';
 import SVGComponent from '../../common/SVGComponet';
 import RightBar from '../../common/CartPaymentSideBar';
+import Wishlist from '../../Cam/Wishlist/';
 import { languageDefinations } from '../../../utils/lang/';
-
+import constants from '../../../constants';
 import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Cart/cart');
 
@@ -18,7 +19,7 @@ const CartBody = props => {
   const flag = data && items && items.length;
   const cnt = flag > 0 ? items.length : 0;
   const { CART_PAGE } = languageDefinations();
-  const wishlistImgPath = "https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/catalog/mobile/PMOBNTDOUQWWQOLDLP/GALLERY/MEDIA3STP9XJBH3D2W7EQD2TQKU/apple-iphone-6s-na-original-imaebymaz5exfapw.jpeg"
+  
   return (
     <div className={styles['cart-container']}>
       {
@@ -48,11 +49,11 @@ const CartBody = props => {
                         }
                         <div className={`${styles['cart-box']} ${styles['p-20']}`}>
                           {
-                            inventory == 0 ?
+                            inventory <= 0 ?
                               <div className={`${styles['out-of-stock']} ${styles['text-center']} ${styles['absolute']} ${styles['bg-white']}`}>
                                 <h3>uh-oh!</h3>
                                 <p>
-                                  This product is out of stock,Please remove this item or <br /> move it to wishlist to continue.
+                                  {CART_PAGE.ITEM_OUT_OF_STOCK_MESSAGE} <br /> {CART_PAGE.CONTINUE_TO_WISHLIST}
                                 </p>
                               </div>
                               : null
@@ -105,7 +106,7 @@ const CartBody = props => {
                                   : ''
                               }
                               {
-                                inventory == 0 ?
+                                inventory <= 0 ?
                                   <span className={`${styles['fontW600']} ${styles['thick-red']} ${styles['pr-20']}`}>{CART_PAGE.OUT_OF_STOCK} </span>
                                   : ''
                               }
@@ -128,23 +129,8 @@ const CartBody = props => {
                     )
                   })
                 }
-                <div className={`${styles['view-wishlist-main']} ${styles['box']} ${styles['p-20']} ${styles['flex-center']}`}>
-                  <Col md={4}>
-                    <span className={styles['fs-12']}>10 out of 8 Items on your wishlist are available now to purchase. <a> 3 items are on Offers</a></span>
-                  </Col>
-                  <Col md={6}>
-                    {
-                      [...Array(6).keys()].map((i) => {
-                        return (
-                          <span key={i} className={`${styles['wishlist-img']} ${styles['mr-15']}`}><img src={wishlistImgPath} /></span>
-                        )
-                      })
-                    }
-                  </Col>
-                  <Col md={2} className={`${styles['pl-0']} ${styles['pr-0']} ${styles['flex']} ${styles['view-btn-list']}`}>
-                    <a className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']} ${styles['default-small']}`}>View Wishlist</a>
-                  </Col>
-                </div>
+
+                <Wishlist cartMiniWishList={true} />
               </div>
 
             </Col>
@@ -178,8 +164,4 @@ CartBody.propTypes = {
   data: PropTypes.object.isRequired,
 };
 
-CartBody.defaultProps = {
-
-};
-
-export default CartBody;
+export default CartBody

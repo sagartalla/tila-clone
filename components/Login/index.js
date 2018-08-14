@@ -4,11 +4,13 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import SVGComponent from '../common/SVGComponet';
 import { selectors, actionCreators } from '../../store/auth';
-
+import constants from '../../constants';
 import { Row, FormGroup, Col, Button, ControlLabel, Checkbox } from 'react-bootstrap';
 
 import { mergeCss } from '../../utils/cssUtil';
 const styles = mergeCss('components/Login/login');
+import {languageDefinations} from '../../utils/lang';
+const {LOGIN_PAGE} = languageDefinations()
 
 class Login extends Component {
   constructor(props) {
@@ -85,14 +87,14 @@ class Login extends Component {
       <Row className={`${styles['bg-white']} ${styles['m-0']}`}>
         <Col md={6} xs={6} className={styles['pl-0']}>
           <div className={styles['image-placeholder']}>
-            <img className={styles['img-responsive']} src="https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/catalog/t_shirt/PTSHC8EXEUJADVLVCX/GALLERY/MEDIAX4Q4MVJ5DCLIHWGUGDW14Z/1-web-desktop-product.jpg"/>
+            <img className={styles['img-responsive']} src={`${constants.mediaDomain}/catalog/t_shirt/PTSHC8EXEUJADVLVCX/GALLERY/MEDIAX4Q4MVJ5DCLIHWGUGDW14Z/1-web-desktop-product.jpg`}/>
           </div>
         </Col>
         <Col md={6} xs={6}>
           <div>
             <h3 className={styles['fs-40']}>
               <div>
-                <span className={`${styles['ff-b']} ${styles['pl-15']}`}>TiLa.com</span>
+                <span className={`${styles['ff-b']} ${styles['pl-15']}`}>{LOGIN_PAGE.TILA_COM}</span>
               </div>
             </h3>
           </div>
@@ -112,7 +114,7 @@ class Login extends Component {
                   <input onChange={this.onChangeField} name="email" type="email" value={this.state.email} required />
                   <span className={styles['highlight']}></span>
                   <span className={styles['bar']}></span>
-                  <label>Email</label>
+                  <label>{LOGIN_PAGE.EMAIL}</label>
                 </div>
               </Col>
             </FormGroup>
@@ -122,7 +124,7 @@ class Login extends Component {
                   <input onChange={this.onChangeField} name="password" type="password" value={this.state.password} required />
                   <span className={styles['highlight']}></span>
                   <span className={styles['bar']}></span>
-                  <label>Password</label>
+                  <label>{LOGIN_PAGE.PASSWORD}</label>
                 </div>
               </Col>
             </FormGroup>
@@ -152,7 +154,7 @@ class Login extends Component {
                       <input onChange={this.onChangeField} name="phone" type="text" value={this.state.phone} required />
                       <span className={styles['highlight']}></span>
                       <span className={styles['bar']}></span>
-                      <label>Phone</label>
+                      <label>{LOGIN_PAGE.PHONE}</label>
                     </div>
                   </Col>
 
@@ -162,11 +164,11 @@ class Login extends Component {
              </FormGroup>
             <FormGroup>
               <Col md={12}>
-                <Button className={`${styles['sign-in-btn']} ${styles['fontW600']} ${styles['border-radius4']}`} onClick={this.login}>{this.state.mode === 'register' ? 'Sign Up' : 'Sign In'}</Button>
+                <Button className={`${styles['sign-in-btn']} ${styles['fontW600']} ${styles['border-radius4']}`} onClick={this.login}>{this.state.mode === 'register' ? `${LOGIN_PAGE.SIGN_UP}` : `${LOGIN_PAGE.SIGN_IN}`}</Button>
               </Col>
             </FormGroup>
             <div className={`${styles['login-social-icon']} ${styles['pl-15']}`}>
-              <span className={`${styles['thick-gry-clr']} ${styles['pt-20']} ${styles['pb-10']} ${styles['flex']}`}>Or Sign up with</span>
+              <span className={`${styles['thick-gry-clr']} ${styles['pt-20']} ${styles['pb-10']} ${styles['flex']}`}>{LOGIN_PAGE.SIGN_UP_WITH}</span>
               <div className={styles['flex']}>
                 <a className={styles['flex']}><SVGComponent clsName={`${styles['bg-social-icon']} ${styles['mr-10']}`} src="icons/social-icons/bg-facebook"/></a>
                 <a className={styles['flex']}><SVGComponent clsName={`${styles['bg-social-icon']} ${styles['mr-10']}`} src="icons/social-icons/bg-google"/></a>
@@ -180,13 +182,13 @@ class Login extends Component {
             this.state.mode === 'register'
             ?
               <h4 className={styles['ff-b']}>
-                <span>Already have an Accout &nbsp;</span>
-                <span className={styles['link-text']} onClick={this.toggleLoginSignUp}>Sign in</span>
+                <span>{LOGIN_PAGE.HAVE_ACCOUNT}&nbsp;</span>
+                <span className={styles['link-text']} onClick={this.toggleLoginSignUp}>{LOGIN_PAGE.SIGN_IN}</span>
               </h4>
             :
             <h4 className={styles['ff-b']}>
-              <span>Don't have an Accout &nbsp;</span>
-              <span className={styles['link-text']} onClick={this.toggleLoginSignUp}>Sign up</span>
+              <span>{LOGIN_PAGE.NO_ACCOUNT} &nbsp;</span>
+              <span className={styles['link-text']} onClick={this.toggleLoginSignUp}>{LOGIN_PAGE.SIGN_UP}</span>
             </h4>
           }
           </div>

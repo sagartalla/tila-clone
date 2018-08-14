@@ -4,7 +4,8 @@ import { Checkbox, Panel, Heading, Body, Title } from 'react-bootstrap';
 import SVGCompoent from '../../common/SVGComponet';
 import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Search/search');
-
+import {languageDefinations} from '../../../utils/lang';
+const {SEARCH_PAGE} = languageDefinations()
 const MaxItems = 3;
 
 class CheckboxFacet extends Component {
@@ -62,7 +63,7 @@ class CheckboxFacet extends Component {
             </Panel.Title>
           </Panel.Heading>
           <Panel.Body collapsible>
-            <ul className={`${styles['category-sub-list']} ${styles['pl-0']}`}>
+            <ul className={`${styles['category-sub-list']} ${styles['pl-20']} ${styles['pt-15']}`}>
               {
                 filter.children.slice(0, this.state.maxRows).map(childFitler => (
                   <li key={childFitler.id} className={styles['category-sub-list-inn']}>
@@ -80,7 +81,7 @@ class CheckboxFacet extends Component {
                 ))
               }
               {
-                this.state.isMoreButtonRequired ? <li onClick={this.toggleMore}><a>{this.state.maxRows === filter.children.length ? '- show less' : ' + show more'}</a></li> : null
+                this.state.isMoreButtonRequired ? <li onClick={this.toggleMore}><a>{this.state.maxRows === filter.children.length ? `-${SEARCH_PAGE.SHOW_LESS}` : `+ ${SEARCH_PAGE.SHOW_MORE}`}</a></li> : null
               }
             </ul>
           </Panel.Body>

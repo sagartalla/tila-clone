@@ -50,6 +50,8 @@ class UserVault extends Component {
   }
 
   makeDefault(card_token) {
+    const { toggleMiniVault } = this.props;
+    if (toggleMiniVault) toggleMiniVault();
     this.props.makeCardDefault(card_token);
   }
 

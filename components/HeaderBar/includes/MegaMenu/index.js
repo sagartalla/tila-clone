@@ -10,9 +10,10 @@ import SVGComponent from '../../../common/SVGComponet';
 import Menu from './Menu';
 import SubMenu from './SubMenu';
 import { mergeCss } from '../../../../utils/cssUtil';
+import {languageDefinations} from '../../../../utils/lang';
 const styles = mergeCss('components/HeaderBar/header');
 
-
+const {HEADER_PAGE} = languageDefinations()
 //TODO make it SEO friendly
 
 class MegaMenu extends Component {
@@ -83,7 +84,7 @@ class MegaMenu extends Component {
       return '/landing/fashion';
     }
     if(name === 'Lifestyle' || name === 'Home & Living') {
-      return '/landing/Lifestyle';
+      return '/landing/lifestyle';
     }
   }
 
@@ -116,7 +117,7 @@ class MegaMenu extends Component {
           </ul>
           <div className={`${styles['float-r']} ${styles['fs-12']}`}>
             <span className={`${styles['pl-5']} ${styles['pr-5']}`}>
-              <a href={publicUrls.sellerPlatform} target="_blank" className={styles['black-color']}>Sell with Tila</a>
+              <a href={publicUrls.sellerPlatform} target="_blank" className={styles['black-color']}>{HEADER_PAGE.SELL_WITH_TILA}</a>
             </span>
           </div>
         </nav>
