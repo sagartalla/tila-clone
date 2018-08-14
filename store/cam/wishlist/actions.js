@@ -27,7 +27,7 @@ const actionCreators = {
       type: actions.DELETE_TO_WISHLIST,
       payload: apis.deleteWishlistApi(wishlist_id),
     });
-  },
+  }),
   addToCart: (params, wishlist_id, getCartData) => (dispatch, getState) => {
     return dispatch(cartActionCreators.addToCart(params)).then(() => {
       if (getCartData) {
@@ -37,7 +37,7 @@ const actionCreators = {
       } else
         dispatch(actionCreators.deleteWishlist(wishlist_id));
     })
-  }),
+  },
   addToWishlistAndFetch: loginReq((params) => (dispatch, getState) => {
     return dispatch(actionCreators.addToWishlist(params)).then(() => {
       dispatch(actionCreators.getWishlist());
