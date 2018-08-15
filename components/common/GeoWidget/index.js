@@ -117,10 +117,9 @@ class GeoWidget extends Component {
               <div onClick={this.deleteCity} className={styles['delete-btn']}>x</div>
               :
               <div onClick={this.locateMe} className={styles['delete-btn']}>
-                <SVGCompoent clsName={`${styles['map-icon']}`} src="icons/common-icon/black-map-location" />
+                <SVGCompoent clsName={`${styles['map-icon']}`} src="icons/locate-me" />
               </div>
           }
-
         </div>
       </div>
     )
