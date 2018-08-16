@@ -41,6 +41,7 @@ class SortByWidget extends Component {
           <select className={styles['select-text']} required value={this.state.value} onChange={this.sortSelect}>
             {/*<option value="1">{SEARCH_PAGE.BEST_MATCH}</option>
           <option value="2">{SEARCH_PAGE.BEST_OFFERS}</option>*/}
+            <option value="best_match">{SEARCH_PAGE.BEST_MATCH}</option>
             <option value="selling_price_hi_to_lo">{SEARCH_PAGE.PRICE_LOW_TO_HIGH}</option>
             <option value="selling_price_lo_to_hi">{SEARCH_PAGE.PRICE_HIGH_TO_LOW}</option>
           </select>
