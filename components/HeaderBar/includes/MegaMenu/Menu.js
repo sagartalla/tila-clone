@@ -6,6 +6,8 @@ import SVGComponent from '../../../common/SVGComponet';
 import routes, { Link } from '../../../../routes';
 import { mergeCss } from '../../../../utils/cssUtil';
 const styles = mergeCss('components/HeaderBar/header');
+import {languageDefinations} from '../../../../utils/lang';
+const{HEADER_PAGE} = languageDefinations()
 
 class Menu extends Component {
   constructor(props){
@@ -64,7 +66,7 @@ class Menu extends Component {
           <ul className={`${styles['top-brands-wrap']} ${styles['megamenu-sub-drop-down']}`}>
             <li className={`${styles['megamenu-sub-list']}`}>
               <span className={`${styles['flex']} ${styles['mb-10']}`}>
-                <a className={`${styles['level-1-item']} ${styles['fontW600']}`}>Top Brands</a>
+                <a className={`${styles['level-1-item']} ${styles['fontW600']}`}>{HEADER_PAGE.TOP_BRANDS}</a>
               </span>
               <ul className={`${styles['megamenu-sub-child-list']}`}>
                 <li className={`${styles['flex']} ${styles['mb-10']} ${styles['brand-icon']}`}>
@@ -88,7 +90,7 @@ class Menu extends Component {
           <ul className={`${styles['top-brands-wrap']} ${styles['megamenu-sub-drop-down']}`}>
             <li className={`${styles['megamenu-sub-list']}`}>
               <span className={`${styles['flex']} ${styles['mb-10']}`}>
-                <a className={`${styles['level-1-item']} ${styles['fontW600']}`}>Trending</a>
+                <a className={`${styles['level-1-item']} ${styles['fontW600']}`}>{HEADER_PAGE.TRENDING}</a>
               </span>
               <ul className={`${styles['megamenu-sub-child-list']}`}>
                 <li className={`${styles['flex']} ${styles['mb-10']} ${styles['brand-icon']}`}>

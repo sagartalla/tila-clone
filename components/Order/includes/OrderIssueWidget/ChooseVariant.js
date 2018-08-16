@@ -5,6 +5,9 @@ import { bindActionCreators } from 'redux';
 import _ from 'lodash';
 
 import { selectors, actionCreators } from '../../../../store/order';
+import {languageDefinations} from '../../../../utils/lang'
+
+const {ORDER_PAGE}=languageDefinations()
 
 class ChooseVariant extends Component {
   constructor(props) {
@@ -38,13 +41,13 @@ class ChooseVariant extends Component {
     const { listingDetails, variantDetails } = exchangeOptions;
     return (
       <div>
-        <div>Select Variant to Exchange</div>
+        <div>{ORDER_PAGE.SELECT_TYPE_EXCHANGE}</div>
         {
           _.map(variantDetails, (value, key) => (
             <div>
               <label for={key}>{value.name}</label>
               <select id={key} key={key} onChange={this.selectVariant}>
-                <option value={''}>Select Variant</option>
+                <option value={''}>{ORDER_PAGE.SELECT_VARIANT}</option>
                 {
                   value.attrValues.map((value, index) => <option key={value} value={value}>{value}</option>)
                 }

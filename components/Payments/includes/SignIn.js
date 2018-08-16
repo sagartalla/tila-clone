@@ -73,7 +73,7 @@ class SignIn extends Component {
                 <label>{PAYMENT_PAGE.PASSWORD}</label>
               </div>
               <div className={`${styles['mt-10']} ${styles['mb-10']}`}>
-                <input type="checkbox" defaultChecked="true" /> I agree to the <a onClick={this.tcToggle}>T&C</a> and <a onClick={this.privacyToggle}>Privacy Policy</a>
+                <input type="checkbox" defaultChecked="true" />{PAYMENT_PAGE.AGREE_TO} <a onClick={this.tcToggle}>{PAYMENT_PAGE.TC}</a>{PAYMENT_PAGE.AND}<a onClick={this.privacyToggle}>{PAYMENT_PAGE.PRIVACY_POLICY}</a>
               </div>
               <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles['fontW600']} ${styles['text-uppercase']}`} onClick={props.showAddressTab}>{PAYMENT_PAGE.CONTINUE}</button>
               {
@@ -88,7 +88,7 @@ class SignIn extends Component {
             <div>
               <Modal className={`react-router-modal__modal ${styles['p-20']}`} onBackdropClick={this.tcToggle}>
                 <Terms />
-                <button className={`${styles['fp-btn']} ${styles['fp-btn-default']}`} onClick={this.tcToggle}>CLOSE</button>
+                <button className={`${styles['fp-btn']} ${styles['fp-btn-default']}`} onClick={this.tcToggle}>{PAYMENT_PAGE.CLOSE}</button>
               </Modal>
             </div> : null
         }
@@ -98,7 +98,7 @@ class SignIn extends Component {
             <div>
               <Modal className={`react-router-modal__modal ${styles['p-20']}`} onBackdropClick={this.privacyToggle}>
                 <Privacy />
-                <button className={`${styles['fp-btn']} ${styles['fp-btn-default']}`} onClick={this.privacyToggle}>CLOSE</button>
+                <button className={`${styles['fp-btn']} ${styles['fp-btn-default']}`} onClick={this.privacyToggle}>{PAYMENT_PAGE.CLOSE}</button>
               </Modal>
             </div>
             : null

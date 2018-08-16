@@ -1,13 +1,14 @@
 import Document, { Head, Main, NextScript } from 'next/document';
-import Meta from '../components/Meta';
+import Meta from '../components/helpers/Meta';
+import Script from '../components/helpers/Script';
 
 export default class MyDocument extends Document {
   render() {
-    const props = this.props;
+    const {buildManifest, pathname} = this.props;
+    const {css} = buildManifest;
     return (
       <html>
         <Head>
-          <link rel="stylesheet" href="/_next/static/style.css" />
           {
             props.__NEXT_DATA__.query.language === 'ar'
               ?
@@ -15,7 +16,9 @@ export default class MyDocument extends Document {
               :
               null
           }
-
+          {css.map((file) => {
+            return <link rel="stylesheet" href={`/_next/${file}`} key={file} />
+          })}
           <Meta />
         </Head>
         <body>

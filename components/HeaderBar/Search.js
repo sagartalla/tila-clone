@@ -18,8 +18,9 @@ class Search extends Component {
 
   constructor(props) {
     super(props);
+    const { query, isCategoryTree, choosenCategoryName } = props;
     this.state = {
-      query: props.query || ''
+      query: query ? query : isCategoryTree ? choosenCategoryName : ''
     };
     this.submitQuery = this.submitQuery.bind(this);
     this.onChangeSearchInput = this.onChangeSearchInput.bind(this);
@@ -33,7 +34,17 @@ class Search extends Component {
 
   onChangeSearchInput(e) {
     this.setState({
-      query: e.target.value
+      query: e.target.value,
+      searchInput: true
+    });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { isCategoryTree, choosenCategoryName } = nextProps;
+    const { query, searchInput } = this.state;
+    this.setState({
+      query: searchInput ? query : isCategoryTree ? choosenCategoryName : query,
+      searchInput: false
     });
   }
 
@@ -63,6 +74,8 @@ Search.propTypes = {
 
 const mapStateToProps = (store) => ({
     query: selectors.getQuery(store),
+    isCategoryTree: selectors.getIsCategoryTree(store),
+    choosenCategoryName: selectors.getChoosenCategoryName(store),
     optionalParams: selectors.optionParams(store)
 });
 

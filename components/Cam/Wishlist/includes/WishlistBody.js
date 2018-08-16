@@ -43,7 +43,7 @@ const WishlistBody = props => {
                         <span id={wishlist_id} className={`${styles['absolute']} ${styles['delete-icon-part']}`} onClick={deleteItem}>
                           <SVGComponent clsName={`${styles['delete-icon']}`} src="icons/delete-icon/delete-icon" />
                         </span>
-                        <h4 className={`${styles['fontW600']} ${styles['light-gry-clr']} ${styles['mt-25']} ${styles['t-c']}`}><span className={styles['fs-30']}>{price}</span> <span clsName={styles['fs-18']}> {cur}</span></h4>
+                        <h4 className={`${styles['fontW600']} ${styles['light-gry-clr']} ${styles['mt-25']} ${styles['t-c']}`}><span className={styles['fs-30']}>{price}</span> <span className={styles['fs-18']}> {cur}</span></h4>
                       </div>
                     </Col>
                   </Col>
