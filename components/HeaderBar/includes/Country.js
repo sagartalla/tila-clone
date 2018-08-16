@@ -10,21 +10,10 @@ import { actionCreators } from '../../../store/auth';
 
 import { mergeCss } from '../../../utils/cssUtil';
 
+import countriesData from '../../../constants/countries';
+
 const styles = mergeCss('components/HeaderBar/header');
 const cookies = new Cookies();
-
-const countriesData = {
-  ksa: {
-    img: '/static/img/bg-img/ksa.png',
-    name: 'ksa',
-    id: 'ksa',
-  },
-  uae: {
-    img: '/static/img/bg-img/uae.png',
-    name: 'uae',
-    id: 'uae',
-  }
-};
 
 class Country extends Component {
   constructor(props) {
