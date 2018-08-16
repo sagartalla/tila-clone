@@ -139,3 +139,17 @@
     background-color: transparent;
     box-shadow: none;
 }
+
+.slick-prev:before {
+    content: '';
+    background: url(/static/img/icons/common-icon/long-Left-arrow.svg) no-repeat;
+    background-size: contain;
+    color: transparent !important;
+}
+
+.slick-next:before {
+    content: '';
+    background: url(/static/img/icons/common-icon/long-right-arrow.svg) no-repeat;
+    background-size: contain;
+    color: transparent !important;
+}

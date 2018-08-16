@@ -34,22 +34,41 @@ const getSearchFilters = (store) => {
     category: [],
     facets: [],
   };
-  if (store.searchReducer.data.categoryFilter) {
-    const categoryFilter = store
-      .searchReducer
-      .data
-      .categoryFilter
-      .parentCategories
-      .reduce((filters, item) => {
-        return filters.concat({
-            ...item,
-            children: item.childCategories,
-          })
-      }, []);
+  const categoryFilter = store.searchReducer.data.categoryFilter;
+  if (categoryFilter) {
+    const { nodes } = categoryFilter;
     filters.category = [{
       name: 'Category',
       id: 'category',
-      children: categoryFilter,
+      children: _.reduce(nodes, (acc, value, key) => {
+        return [
+          ...acc,
+          {
+            canonicalId: _.kebabCase(key),
+            children: _.reduce(value.child, (acc, value, key) => {
+              return [
+                ...acc,
+                {
+                  canonicalId: _.kebabCase(key),
+                  id: value.id,
+                  name: key,
+                  children: _.reduce(value.child, (acc, value, key) => {
+                    return [
+                      ...acc,
+                      {
+                        canonicalId: _.kebabCase(key),
+                        id: value.id,
+                        name: key,
+                      }
+                    ];
+                  }, []),
+                }];
+              }, []),
+            id: value.id,
+            name: key,
+          }
+        ];
+      }, []),
     }];
   }
   if (store.searchReducer.data.facetResponse){
@@ -118,7 +137,8 @@ const getSearchResutls = (store) => {
         productId: product.attributes.productId,
         catalogId: product.attributes.catalogId,
         itemtype: product.attributes.itemType,
-        displayName: product.attributes.calculated_display_name,
+        displayName: product.attributes.calculated_display_name.join(','),
+        brand: product.attributes.brand[0],
         variants: variantInfo,
         priceRange,
         currency,
@@ -181,4 +201,12 @@ const getSearchBarFilterState = (state) => {
   return state.searchReducer.ui.showFilters;
 }
 
-export { getSearchFilters, getSearchResutls, getPaginationDetails, getUIState, getCategoryId, getQuery, getFacetfilters, optionParams, getSearchBarFilterState, addCartAndWishlistDetails };
+const getIsCategoryTree = (store) => {
+  return store.searchReducer.data.searchDetails.categoryTree;
+}
+
+const getChoosenCategoryName = (store) => {
+  return store.searchReducer.data.searchDetails.choosenCategoryName;
+}
+
+export { getSearchFilters, getSearchResutls, getPaginationDetails, getUIState, getCategoryId, getQuery, getFacetfilters, optionParams, getSearchBarFilterState, addCartAndWishlistDetails, getIsCategoryTree, getChoosenCategoryName };

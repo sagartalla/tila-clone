@@ -7,6 +7,8 @@ import { selectors, actionCreators } from '../../../../store/order';
 
 import { mergeCss } from '../../../../utils/cssUtil';
 const styles = mergeCss('components/Order/includes/OrderIssueWidget/orderIssue');
+import {languageDefinations} from '../../../../utils/lang';
+const {ORDER_PAGE} = languageDefinations();
 
 class ReturnComplete extends Component {
 
@@ -29,7 +31,7 @@ class ReturnComplete extends Component {
       {
         loadingStatus
         ?
-        'loading...'
+        ORDER_PAGE.LOADING
         :
         <div>
           <div>
@@ -41,13 +43,13 @@ class ReturnComplete extends Component {
               <div>
                 {/* insert image here */}
                 <div>
-                  <span>Your order {selectedItem.name}</span>
+                  <span>{ORDER_PAGE.YOUR_ORDER}{selectedItem.name}</span>
                 </div>
                 <div>
-                  <span>has been Requested for Return Successfully</span>
+                  <span>{ORDER_PAGE.REQ_RETURN_SUCCESS}</span>
                 </div>
                 <div>
-                  <span>Sorry that you had to Return, we will work on reason for your Return</span>
+                  <span>{ORDER_PAGE.RETURN_MESSAGE}</span>
                 </div>
               </div>
             }
@@ -55,7 +57,7 @@ class ReturnComplete extends Component {
         </div>
       }
       <div className={`${styles['widget-footer']} ${styles['box']} ${styles['pt-24']}`}>
-        <button onClick={goToNextStep} className={`${styles['m-0-auto']} ${styles['fs-16']}`} disabled={loadingStatus}>Done</button>
+        <button onClick={goToNextStep} className={`${styles['m-0-auto']} ${styles['fs-16']}`} disabled={loadingStatus}>{ORDER_PAGE.DONE}</button>
       </div>
       </div>
     );

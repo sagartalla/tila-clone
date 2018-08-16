@@ -8,9 +8,10 @@ import { Modal } from "react-router-modal";
 import RightSideBar from '../../common/CartPaymentSideBar';
 
 import { actionCreators as cartActionCreators, selectors as cartSelectors } from '../../../store/listingCart';
-
+import {languageDefinations} from '../../../utils/lang';
 import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Product/product');
+const {PDP_PAGE} = languageDefinations()
 
 /*
   -- DON'T REMOVE
@@ -99,9 +100,9 @@ class TitleInfo extends Component {
                 {rating.rating} {rating.count}
               </div>
               <div className={`${styles['ti-reviews-wrap']} ${styles['fs-12']}`}>
-                <span className={`${styles['pr-5']} ${styles['pl-5']}`}>Read Expert Review</span>
-                <span className={`${styles['pr-5']} ${styles['pl-5']}`}>Customer Review</span>
-                <span className={`${styles['pr-5']} ${styles['pl-5']}`}>Ask Question</span>
+                <span className={`${styles['pr-5']} ${styles['pl-5']}`}>{PDP_PAGE.READ_EXPERT_REVIEW}</span>
+                <span className={`${styles['pr-5']} ${styles['pl-5']}`}>{PDP_PAGE.CUSTOMER_REVIEW}</span>
+                <span className={`${styles['pr-5']} ${styles['pl-5']}`}>{PDP_PAGE.ASK_QUESTION}</span>
               </div>
             </div>
         }
@@ -112,18 +113,18 @@ class TitleInfo extends Component {
             :
             <div className={`${styles['flex-center']} ${styles['checkout-instantly']} ${styles['pt-10']}`}>
               <div className={`${styles['flex']}`}>
-                <a className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['small-btn']}`} onClick={this.checkoutInstantHandler}>Checkout Instantly </a>
+                <a className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['small-btn']}`} onClick={this.checkoutInstantHandler}>{PDP_PAGE.CHECKOUT_INSTANT}</a>
               </div>
               <div>
                 {
                   totalInventoryCount < 5
                     ?
-                    <span className={`${styles['flex']} ${styles['fs-12']} ${styles['google-clr']} ${styles['fontW600']}`}>Only {totalInventoryCount} left in stock!</span>
+                    <span className={`${styles['flex']} ${styles['fs-12']} ${styles['google-clr']} ${styles['fontW600']}`}>{PDP_PAGE.ONLY} {totalInventoryCount}{PDP_PAGE.LEFT_IN_STOCK}</span>
                     :
                     null
                 }
 
-                <span className={`${styles['flex']} ${styles['fs-12']}`}>COD available</span>
+                <span className={`${styles['flex']} ${styles['fs-12']}`}>{PDP_PAGE.COD_AVAILABLE}</span>
               </div>
 
               {showCheckoutModal ?

@@ -49,7 +49,7 @@ class PersonalInfo extends React.Component {
     return (
       <div>
         <h4 className={`${styles['flx-space-bw']} ${styles['information-title']} ${styles['fontW600']} ${styles['mt-0']}`}>
-          <span>{PERSONAL_INFO_MODAL.HEADING}</span> 
+          <span>{PERSONAL_INFO_MODAL.HEADING}</span>
           <a className={`${styles['flex']}`} onClick={this.handleShow(true)}>
             <SVGComponent clsName={`${styles['edit-icon']}`} src="icons/common-icon/edit-icon" />
           </a>
@@ -75,7 +75,7 @@ class PersonalInfo extends React.Component {
             <span>{PERSONAL_INFO_MODAL.GENDER}</span>
           </Col>
           <Col xs={12} md={8} className={`${styles['p-0']}`}>
-            <span className={styles['pl-15']}>{gender == 'F' ? "Female" : gender == "M" ? "Male" : ""}</span>
+            <span className={styles['pl-15']}>{gender == 'F' ? `${CONTACT_INFO_MODAL.FEMALE}` : gender == "M" ? `${CONTACT_INFO_MODAL.MALE}` : ""}</span>
           </Col>
         </div>
         <div className={show ? `${styles['modalContainer']} ${styles['showDiv']}` : `${styles['modalContainer']} ${styles['hideDiv']}`}>
