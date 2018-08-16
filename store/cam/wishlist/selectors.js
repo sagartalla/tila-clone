@@ -10,7 +10,7 @@ const getWishListResults = (store) => {
       // const variant_info = item.variant_preferred_listings[variant][0];
 
       const variant = Object.keys(item.variant_preferred_listings)[0];
-      const variant_info = item.variant_preferred_listings[variant];
+      const variant_info = item.variant_preferred_listings[variant][0];
 
       newData.push({
         wishlist_id: item.wishlist_id,

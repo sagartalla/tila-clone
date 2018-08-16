@@ -79,7 +79,7 @@ class Cart extends Component {
     const { cartData } = this.props;
     const listing_id = e.currentTarget.getAttribute('data-id');
     const item = cartData.items.filter(_item => listing_id == _item.item_id)[0];
-    this.props.addToWishlist({
+    this.props.addToWishlistAndFetch({
       "catalog_id": item.item_id,
       "product_id": item.product_id,
       "variant_id": item.variant_id
@@ -145,7 +145,7 @@ const mapDispatchToProps = (dispatch) =>
       removeCartItem: actionCreators.removeCartItem,
       cartItemCount: actionCreators.cartItemCount,
       addOrRemoveGift: actionCreators.addOrRemoveGift,
-      addToWishlist: wishlistActionCreators.addToWishlist,
+      addToWishlistAndFetch: wishlistActionCreators.addToWishlistAndFetch,
     },
     dispatch,
   );
