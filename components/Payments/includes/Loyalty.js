@@ -11,7 +11,7 @@ const styles = mergeCss('components/Payments/payment');
 const Loyalty = props => {
   const { configJson } = props;
   return (
-    <div className={`${styles['pb-15']} ${styles['pt-15']} ${styles['pl-35']} ${styles['pr-35']} ${styles['box']} ${styles['mb-20']} ${styles['pay-loyalty-main']} ${styles['relative']}`}>
+    <div className={`${styles['box']} ${styles['mb-20']} ${styles['pay-loyalty-main']} ${styles['relative']}`}>
       <SVGComponent clsName={`${styles['map-address']}`} src="icons/map/address" />
       <h4 className={`${styles['mb-20']} ${styles['mt-0']}`}>Pay with Loyalty Points</h4>
       <Row>

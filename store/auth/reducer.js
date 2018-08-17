@@ -230,7 +230,16 @@ const authReducer = typeToReducer({
         showLogin: false,
       }
     }
-  }
+  },
+  [actions.SET_LANGUAGE]: (state, action) => {
+    return {
+      ...state,
+      data: {
+        ...state.data,
+        language: action.payload
+      }
+    }
+  },
 }, initialState);
 
 export default authReducer;

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Modal } from "react-router-modal";
+import NoSSR from 'react-no-ssr';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ModalContainer } from 'react-router-modal';
@@ -9,6 +10,7 @@ import Cart from '../Cart';
 import Login from '../Login';
 import { Link } from '../../routes';
 import Country from './includes/Country';
+import Language from './includes/Language';
 import publicUrls from '../../constants';
 import SVGComponent from '../common/SVGComponet';
 
@@ -78,6 +80,11 @@ class ActionBar extends Component {
     const { isLoggedIn, cartResults, userInfo } = this.props;
     return (
       <div className={styles['actionbar-wrapper']}>
+        <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']} ${styles['country-code']}`}>
+          <NoSSR>
+            <Language />
+          </NoSSR>
+        </div>
         <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']} ${styles['country-code']}`}>
           <Country />
         </div>

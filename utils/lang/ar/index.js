@@ -111,6 +111,13 @@ export const AR_KEYWORDS = {
     'ALL_STARTS': 'كل شيء يبدأ',
     'FILTER_BY': 'صنِّف',
     'NO_REVIEWS': 'لم يتم تقديم المنتج',
+    'SELECT_CITY': 'SELECT CITY',
+    'FREE_DELIVERY': 'Free delivery',
+    'DAYS': 'Days',
+    'PRODUCT_DETAILS': 'PRODUCT DETAILS',
+    'ADD_TO_CART': 'ADD TO CART',
+    'BUY_NOW': 'BUY NOW',
+    'BUY_FOR': 'BUY FOR',
     'ADDED_TO_CART': 'أضف إلى سلة المشتريات',
     // //New keys
     'GO_TO_CART': 'Go To Cart',

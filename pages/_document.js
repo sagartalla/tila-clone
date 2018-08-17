@@ -4,14 +4,22 @@ import Script from '../components/helpers/Script';
 
 export default class MyDocument extends Document {
   render() {
-    const {buildManifest, pathname} = this.props;
-    const {css} = buildManifest;
+    const { props } = this;
+    const { buildManifest, pathname } = props;
+    const { css } = buildManifest;
     return (
       <html>
         <Head>
           {css.map((file) => {
             return <link rel="stylesheet" href={`/_next/${file}`} key={file} />
           })}
+          {
+            props.__NEXT_DATA__.query.language === 'ar'
+              ?
+              <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-rtl/3.4.0/css/bootstrap-rtl.css" />
+              :
+              null
+          }
           <Meta />
         </Head>
         <body>

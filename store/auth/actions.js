@@ -18,7 +18,8 @@ const actions = {
   SHOW_LOGIN: 'SHOW_LOGIN',
   RESET_SHOW_LOGIN: 'RESET_SHOW_LOGIN',
   STORE_POST_LOGIN_ACTION_INFO: 'STORE_POST_LOGIN_ACTION_INFO',
-  DELETE_POST_LOGIN_ACTION_INFO: 'DELETE_POST_LOGIN_ACTION_INFO'
+  DELETE_POST_LOGIN_ACTION_INFO: 'DELETE_POST_LOGIN_ACTION_INFO',
+  SET_LANGUAGE: 'SET_LANGUAGE',
 };
 
 const actionCreators = {
@@ -131,6 +132,10 @@ const actionCreators = {
   }),
   resetShowLogin: () => ({
     type: actions.RESET_SHOW_LOGIN
+  }),
+  setLanguage: (language) => ({
+    type: actions.SET_LANGUAGE,
+    payload: api.setLanguage(language),
   })
 };
 
