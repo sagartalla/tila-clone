@@ -11,7 +11,7 @@ export const mergeCss = (() => {
   return (componentStyles) => {
     let componentStylesPath = {};
     let arOverrideCss = {};
-    if (languageData[cookies.get('language') || 'en'].id === 'ar') {
+    if (languageData[cookies.get('language') || global.APP_LANGUAGE || 'en'].id === 'ar') {
       try {
         componentStylesPath = componentStyles ? require(`../${componentStyles}_ar.styl`) : {};
       } catch (e) {
