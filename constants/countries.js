@@ -1,13 +1,13 @@
 const countriesData = {
-  ksa: {
+  SAU: {
     img: '/static/img/bg-img/ksa.png',
-    name: 'ksa',
-    id: 'ksa',
+    name: 'SAU',
+    id: 'SAU',
   },
-  uae: {
+  ARE: {
     img: '/static/img/bg-img/uae.png',
-    name: 'uae',
-    id: 'uae',
+    name: 'ARE',
+    id: 'ARE',
   }
 };
 

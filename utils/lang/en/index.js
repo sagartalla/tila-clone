@@ -234,7 +234,10 @@ export const EN_KEYWORDS = {
     'EDIT': 'Edit',
     'NAME': 'Name',
     'DOB': 'Date Of Birth',
-    'GENDER': 'Gender'
+    'GENDER': 'Gender',
+    //new keys
+    'MALE': 'Male',
+    'FEMALE': 'Female',
   },
   NOTITICATION_INFO: {
     'HEADING': 'New Notifications',
@@ -260,6 +263,7 @@ export const EN_KEYWORDS = {
     'ALL_DEALS': 'All Deals',
     'APPLIED_FILTERS_TAGS': 'Applied Filters / Tags',
     'CLEAR_ALL': 'CLEAR ALL',
+    'BEST_MATCH': 'best match',
     'PRICE_LOW_TO_HIGH': 'price low to high',
     'PRICE_HIGH_TO_LOW': 'price high to low',
     //New comments

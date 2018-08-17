@@ -15,8 +15,6 @@ import languageData from '../../../constants/languages';
 const styles = mergeCss('components/HeaderBar/header');
 const cookies = new Cookies();
 
-
-
 class Language extends Component {
   constructor(props) {
     super(props);

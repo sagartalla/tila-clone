@@ -11,6 +11,7 @@ const actions = {
   SET_SESSION_ID: 'SET_SESSION_ID',
   DERIVE_CITY: 'DERIVE_CITY',
   SET_CITY: 'SET_CITY',
+  REMOVE_CITY: 'REMOVE_CITY',
   AUTOCOMPLETE_CITY: 'AUTOCOMPLETE_CITY',
   RESET_AUTOCOMPLETE_CITY: 'RESET_AUTOCOMPLETE_CITY',
   RESET_LOGIN_ERROR: 'RESET_LOGIN_ERROR',
@@ -89,6 +90,12 @@ const actionCreators = {
     return {
       type: actions.SET_CITY,
       payload: api.setCity(params),
+    }
+  },
+  removeCity: () => {
+    return {
+      type: actions.REMOVE_CITY,
+      payload: api.removeCity(),
     }
   },
   autoCompleteCity: (params) => {

@@ -19,7 +19,7 @@ class Country extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedItem: 'ksa'
+      selectedItem: 'SAU'
     };
     this.changeCountry = this.changeCountry.bind(this);
     this.storeCountry = this.storeCountry.bind(this);

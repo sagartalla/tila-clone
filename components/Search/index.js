@@ -38,12 +38,12 @@ class Search extends Component {
       <div>
         <HeaderBar />
         <Grid className={styles['pt-20']}>
-          <Col md={2} onClick={onClickMenuHandle} className={`${styles['filter-panel']} ${styles['border-radius4']} ${styles['bg-white']}`}>
+          <Col md={2} onClick={onClickMenuHandle} className={`${styles['filter-panel']} ${styles['border-radius4']} ${styles['bg-white']} ${styles['p-0']}`}>
             <NoSSR>
               <CategoriesAndFacets />
             </NoSSR>
           </Col>
-          <Col md={10} className={styles['search-results']}>
+          <Col md={10} className={`${styles['search-results']} ${styles['p-0']}`}>
             <SearchDetailsBar />
             <SearchResults />
           </Col>

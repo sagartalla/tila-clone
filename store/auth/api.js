@@ -78,4 +78,10 @@ const setLanguage = (language) => {
   }).then(() => language);
 }
 
-export default { userLogin, userRegister, userLogout, getLoginInfo, setCountry, setSessionID, deriveCity, autoCompleteCity, setCity, setLanguage };
+const removeCity = () => {
+  return axios.post('/api/deleteCookie', {
+    keys: ['shippingInfo']
+  });
+}
+
+export default { userLogin, userRegister, userLogout, getLoginInfo, setCountry, setSessionID, deriveCity, autoCompleteCity, setCity, removeCity, setLanguage };
