@@ -116,7 +116,7 @@ const getSearchResutls = (store) => {
           modifiedVaraintsCopy[key] = modifiedVaraintsCopy[key].concat(val);
         });
         return modifiedVaraintsCopy;
-      }, {});
+    }, {});
       const priceInfo = product.variantListingAdapters.map((vla) => vla.attributes.sellingPrice);
       const offers = product.variantListingAdapters.map((vla) => vla.attributes.discount);
       let currency = product.variantListingAdapters || '';
@@ -131,6 +131,7 @@ const getSearchResutls = (store) => {
       } else {
         priceRange = priceInfo[0] || '';
       }
+      const brand = product.attributes.brand;
       return {
         id: product.id,
         media: product.attributes.media_unrestricted_images,
@@ -138,7 +139,7 @@ const getSearchResutls = (store) => {
         catalogId: product.attributes.catalogId,
         itemtype: product.attributes.itemType,
         displayName: product.attributes.calculated_display_name.join(','),
-        brand: product.attributes.brand[0],
+        brand: brand ? brand[0] : '',
         variants: variantInfo,
         priceRange,
         currency,

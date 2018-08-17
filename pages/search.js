@@ -34,12 +34,11 @@ class SearchPage extends Base {
     const searchOptions = {
       categoryFilter,
       country: country || undefined,
-      pageSize: 100,
+      pageSize: 25,
       query: search,
       language: language || 'en',
       facetFilters,
       pageNum: 1,
-      fl: '*',
       isListed: isListed === 'true',
       categoryTree,
       choosenCategoryName: categoryName || subCategoryName,
