@@ -14,15 +14,15 @@ const styles = mergeCss('components/HeaderBar/header');
 const cookies = new Cookies();
 
 const countriesData = {
-  ksa: {
-    img: '/static/img/bg-img/ksa.png',
-    name: 'ksa',
-    id: 'ksa',
+  SAU: {
+    img: '/static/img/bg-img/SAU.png',
+    name: 'SAU',
+    id: 'SAU',
   },
-  uae: {
-    img: '/static/img/bg-img/uae.png',
-    name: 'uae',
-    id: 'uae',
+  ARE: {
+    img: '/static/img/bg-img/ARE.png',
+    name: 'ARE',
+    id: 'ARE',
   }
 };
 
@@ -30,7 +30,7 @@ class Country extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedItem: 'ksa'
+      selectedItem: 'SAU'
     };
     this.changeCountry = this.changeCountry.bind(this);
     this.storeCountry = this.storeCountry.bind(this);

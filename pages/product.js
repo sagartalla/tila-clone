@@ -34,7 +34,7 @@ class ProductPage extends Base {
     } else {
       const options = {
         "city": shippingCity,
-        "country_code": country || "ksa",
+        "country_code": country || "SAU",
         "flags": {
           "catalog_details": true,
           // "include_all_pref_listings": true,

@@ -47,7 +47,7 @@ class SearchPage extends Base {
     if(shippingCity) {
       searchOptions.shippingDetails = {
         shippingCity: shippingCity.toUpperCase(),
-        shippingCountry: (country || 'uae').toUpperCase(),
+        shippingCountry: (country || 'ARE').toUpperCase(),
       }
     }
     await store.dispatch(actionCreators.getSearchResults(searchOptions))
