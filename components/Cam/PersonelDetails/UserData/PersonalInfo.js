@@ -75,7 +75,7 @@ class PersonalInfo extends React.Component {
             <span>{PERSONAL_INFO_MODAL.GENDER}</span>
           </Col>
           <Col xs={12} md={8} className={`${styles['p-0']}`}>
-            <span className={styles['pl-15']}>{gender == 'F' ? `${CONTACT_INFO_MODAL.FEMALE}` : gender == "M" ? `${CONTACT_INFO_MODAL.MALE}` : ""}</span>
+            <span className={styles['pl-15']}>{gender == 'F' ? `${PERSONAL_INFO_MODAL.FEMALE}` : gender == "M" ? `${PERSONAL_INFO_MODAL.MALE}` : ""}</span>
           </Col>
         </div>
         <div className={show ? `${styles['modalContainer']} ${styles['showDiv']}` : `${styles['modalContainer']} ${styles['hideDiv']}`}>
