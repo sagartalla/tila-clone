@@ -234,7 +234,10 @@ export const EN_KEYWORDS = {
     'EDIT': 'Edit',
     'NAME': 'Name',
     'DOB': 'Date Of Birth',
-    'GENDER': 'Gender'
+    'GENDER': 'Gender',
+    //new keys
+    'MALE': 'Male',
+    'FEMALE': 'Female',
   },
   NOTITICATION_INFO: {
     'HEADING': 'New Notifications',
