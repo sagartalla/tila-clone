@@ -14,12 +14,12 @@ import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Cart/cart');
 
 const CartBody = props => {
-  const { showBlocker, increaseItemCnt, decreaseItemCnt, data, removeCartItem, checkoutBtnHandler, addToWishlist, addOrRemoveGift } = props;
+  const { showBlocker, increaseItemCnt, decreaseItemCnt, data, removeCartItem, checkoutBtnHandler, addToWishlist, addOrRemoveGift, cartStepperInputHandler, count } = props;
   const { items, error } = data;
   const flag = data && items && items.length;
   const cnt = flag > 0 ? items.length : 0;
   const { CART_PAGE } = languageDefinations();
-  
+
   return (
     <div className={styles['cart-container']}>
       {
@@ -39,7 +39,7 @@ const CartBody = props => {
               <div>
                 {
                   items.map((item, index) => {
-                    const { item_id, img, name, price, cur, quantity, max_limit, inventory, brand_name, gift_info, shipping, warranty,total_amount } = item;
+                    const { item_id, img, name, price, cur, quantity, max_limit, inventory, brand_name, gift_info, shipping, warranty, total_amount } = item;
                     return (
                       <div key={item_id} className={`${styles['mb-20']} ${styles['box']}`}>
                         {
@@ -63,9 +63,11 @@ const CartBody = props => {
                             <Col md={2}>
                               <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles['pb-15']} ${styles['card-box-inn-img']}`}><img className={styles['img']} src={img} /></div>
                               <CartStepper
+                                count={count}
                                 item={item}
                                 decreaseItemCnt={decreaseItemCnt}
                                 increaseItemCnt={increaseItemCnt}
+                                cartStepperInputHandler={cartStepperInputHandler}
                               />
                             </Col>
                             <Col md={10}>
@@ -161,6 +163,7 @@ CartBody.propTypes = {
   increaseItemCnt: PropTypes.func.isRequired,
   showBlocker: PropTypes.bool.isRequired,
   addToWishlist: PropTypes.func.isRequired,
+  cartStepperInputHandler: PropTypes.func.isRequired,
   data: PropTypes.object.isRequired,
 };
 

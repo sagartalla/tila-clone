@@ -21,7 +21,8 @@ class Cart extends Component {
     super(props);
 
     this.state = {
-      showBlocker: false
+      showBlocker: false,
+      count: ''
     }
 
     this.addToWishlist = this.addToWishlist.bind(this);
@@ -44,8 +45,11 @@ class Cart extends Component {
       this.props.getCartResults();
   }
 
-  cartStepperInputHandler() {
-    
+  cartStepperInputHandler(e) {
+    // console.log(e.target.value);
+
+    this.setState({ count: e.target.value })
+    this.props.cartItemInputCount(e.target.getAttribute('data-id'), 'add', e.target.value);
   }
 
   checkoutBtnHandler() {
@@ -92,7 +96,7 @@ class Cart extends Component {
   }
 
   render() {
-    const { showBlocker } = this.state;
+    const { showBlocker, count } = this.state;
     const { cartData, editCartDetails, showCheckOutBtn } = this.props;
     return (
       <div>
@@ -116,6 +120,7 @@ class Cart extends Component {
               <HeaderBar />
               <Grid>
                 <CartBody
+                  count={count}
                   data={cartData}
                   showBlocker={showBlocker}
                   addToWishlist={this.addToWishlist}
@@ -124,6 +129,7 @@ class Cart extends Component {
                   decreaseItemCnt={this.decreaseItemCnt}
                   addOrRemoveGift={this.addOrRemoveGift}
                   checkoutBtnHandler={this.checkoutBtnHandler}
+                  cartStepperInputHandler={this.cartStepperInputHandler}
                 />
               </Grid>
               <FooterBar />
@@ -145,6 +151,7 @@ const mapDispatchToProps = (dispatch) =>
       removeCartItem: actionCreators.removeCartItem,
       cartItemCount: actionCreators.cartItemCount,
       addOrRemoveGift: actionCreators.addOrRemoveGift,
+      cartItemInputCount: actionCreators.cartItemInputCount,
       addToWishlistAndFetch: wishlistActionCreators.addToWishlistAndFetch,
     },
     dispatch,

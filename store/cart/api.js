@@ -22,6 +22,8 @@ const removeCartItemApi = (params) => {
 const cartItemCountApi = (params, typ) => {
   return axios.put(`${constants.CART_API_URL}/api/v1/cart/quantity/${typ}`, params).then(({ data }) => {
     return getCartDetailsApi();
+  }).catch(function (error) {
+    return getCartDetailsApi();
   });
 }
 
