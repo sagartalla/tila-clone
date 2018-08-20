@@ -46,10 +46,13 @@ class Cart extends Component {
   }
 
   cartStepperInputHandler(e) {
-    // console.log(e.target.value);
+    const { cartData } = this.props;
+    const id = e.target.getAttribute('data-id');
+    const count = e.target.value
+    const selelecItem = cartData.items.filter(item => item.item_id == id)[0];
 
-    this.setState({ count: e.target.value })
-    this.props.cartItemInputCount(e.target.getAttribute('data-id'), 'add', e.target.value);
+    this.setState({ count: selelecItem.max_limit < count ? selelecItem.max_limit : count })
+    this.props.cartItemInputCount(id, 'add', selelecItem.max_limit < count ? selelecItem.max_limit : count);
   }
 
   checkoutBtnHandler() {
