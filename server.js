@@ -9,7 +9,6 @@ require('./utils/error-handle');
 
 const server = express();
 
-
 const app = next({ dev: process.env.NODE_ENV !== 'production' })
 
 const handler = routes.getRequestHandler(app, ({ req, res, route, query }) => {

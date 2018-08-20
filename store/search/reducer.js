@@ -7,7 +7,9 @@ const initialState = {
     showFilters: false,
   },
   data: {
-    searchDetails: {},
+    searchDetails: {
+      facetFilters: {}
+    },
     paginationDetails: {},
     productResponse: {
       products: []
@@ -64,6 +66,38 @@ const searchReducer = typeToReducer({
         showFilters: action.payload.show,
       }
     }
+  },
+  [actions.REMOVE_FILTERS]: (state, action) => {
+    const params = action.payload;
+    const ff = state.data.searchDetails.facetFilters;
+    const fArray = [...ff[params.parentKey]];
+    fArray.splice(fArray.indexOf(action.key), 1);
+    return {
+      ...state,
+      data: {
+        ...state.data,
+        searchDetails: {
+          ...state.data.searchDetails,
+          facetFilters: {
+            ...state.data.searchDetails.facetFilters,
+            [params.parentKey]: fArray,
+          }
+        }
+      }
+    };
+    // return {
+    //   ...state,
+    //   data: {
+    //     ...state.data,
+    //     searchDetails: {
+    //       ...state.data.searchDetails,
+    //       facetFilters: {
+    //         ...state.data.searchDetails.facetFilters,
+    //         [param.parentKey]: fArray,
+    //       }
+    //     }
+    //   }
+    // }
   }
 }, initialState);
 
