@@ -138,7 +138,7 @@ class EditPassword extends React.Component {
             <div className={`${styles['personal-info-img']} ${styles['flex']} ${styles['justify-center']}`}>
               <SVGComponent clsName={`${styles['personal-info-img-icon']}`} src="icons/common-icon/password-lock-icon" />
             </div>
-            <p className={`${styles['thick-gry-clr']} ${styles['fs-12']} ${styles['t-c']}`}>Be at least 8 characters in length Not be same as your current password</p>
+            <p className={`${styles['thick-gry-clr']} ${styles['fs-12']} ${styles['t-c']}`}>{EDIT_PASSWORD_MODAL.PASSWORD_LENGTH_MESSAGE}</p>
           </div>
           <Row>
             {errorComponent}

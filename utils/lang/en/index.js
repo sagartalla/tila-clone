@@ -227,7 +227,9 @@ export const EN_KEYWORDS = {
     'ENTER_PASSWORD_MESSAGE': 'Enter Old Password',
     'ENTER_NEW_PASSWORD_MESSAGE': 'Enter New Password',
     'RE_ENTER_PASSWORD_MESSAGE': 'Re-enter New Password',
-    'SUBMIT_BUTTON': 'Change Password'
+    'SUBMIT_BUTTON': 'Change Password',
+    'PASSWORD_LENGTH_MESSAGE': 'Be at least 8 characters in length Not be same as your current password'
+
   },
   PERSONAL_INFO_MODAL: {
     'HEADING': 'Personel Information',
