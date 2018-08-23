@@ -20,6 +20,7 @@ import ElectronicsTab from './includes/ElectronicsTab';
 import ProductDetails from './includes/ProductDetails';
 import ReviewRatingList from '../RatingReviews/List';
 import FooterBar from '../Footer/index';
+import Theme from '../helpers/context/theme';
 
 import { mergeCss } from '../../utils/cssUtil';
 const styles = mergeCss('components/Product/product');
@@ -116,62 +117,64 @@ const getProductComponent = (isPreview, taskCode) => {
 
     render() {
       const { productData } = this.props;
-      const { catalog, titleInfo, keyfeatures, imgUrls, offerInfo, shippingInfo, returnInfo, details } = productData;
+      const { catalog, titleInfo, keyfeatures, imgUrls, offerInfo, shippingInfo, returnInfo, details, categoryType='' } = productData;
       const { stickyElements, recentlyViewed } = this.state;
       return (
-        <div className={styles['pdp-wrap']}>
-          {
-            isPreview ? null : <HeaderBar />
-          }
-          <div className={`${styles['relative']}`}>
-            <div className={`${styles['page-details-slider']}`}>
-              <Row className={`${styles['m-0']} ${styles['ht-100per']}`}>
-                <Col xs={12} md={8} className={`${styles['pl-0']} ${styles['ht-100per']}`}>
-                  <Dispalay imgs={imgUrls} />
-                </Col>
-                <div className={styles['details-pixel']} ref={this.detailsRef}></div>
-                <div className={`${styles['details-right-part']} ${styles[stickyElements.details]}`}>
-                  <div className={`${styles['details-right-part-inn']}`}>
-                    <TitleInfo {...titleInfo} isPreview={isPreview} />
-                    <ProductDetails details={details} keyfeatures={keyfeatures} isPreview={isPreview} />
-                    {
-                      isPreview ? null : <Shipping shippingInfo={shippingInfo} offerInfo={offerInfo} />
-                    }
-                  
-                  </div>
-                  {
-                    isPreview ? null : <AddToCart offerInfo={offerInfo} />
-                  }
-                </div>
-              </Row>
-            </div>
-            <div className={styles['bg-white']}>
-              <Grid>
-                <Row>
-                  <Col md={8}>
-                    {
-                      isPreview ? null : <NoSSR> <RecentView recentlyViewed={recentlyViewed} shippingInfo={shippingInfo} /> </NoSSR>
-                    }
-                  </Col>
-                  {/*<Col md={8}>
-                  {
-                    isPreview ? null : <ReviewsTab />
-                  }
-                  </Col>*/}
-                  <Col md={8}>
-                    <ElectronicsTab catalog={catalog} />
-                  </Col>
-                </Row>
-              </Grid>
-            </div>
-            <div className={styles['pdp-bottom-ref']} ref={this.bottomRef}></div>
-          </div>
-          <div className={`${styles['border-b']} ${styles['border-t']} ${styles['pb-30']} ${styles['pt-30']}`}>
+        <Theme.Provider value={categoryType}>
+          <div className={`${styles['pdp-wrap']} ${categoryType.toLowerCase()} ${styles[categoryType.toLowerCase()]}`}>
             {
-              isPreview ? null : <FooterBar />
+              isPreview ? null : <HeaderBar />
             }
+            <div className={`${styles['relative']}`}>
+              <div className={`${styles['page-details-slider']}`}>
+                <Row className={`${styles['m-0']} ${styles['ht-100per']}`}>
+                  <Col xs={12} md={8} className={`${styles['pl-0']} ${styles['ht-100per']}`}>
+                    <Dispalay imgs={imgUrls} />
+                  </Col>
+                  <div className={styles['details-pixel']} ref={this.detailsRef}></div>
+                  <div className={`${styles['details-right-part']} ${styles[stickyElements.details]}`}>
+                    <div className={`${styles['details-right-part-inn']}`}>
+                      <TitleInfo {...titleInfo} isPreview={isPreview} />
+                      <ProductDetails details={details} keyfeatures={keyfeatures} isPreview={isPreview} />
+                      {
+                        isPreview ? null : <Shipping shippingInfo={shippingInfo} offerInfo={offerInfo} />
+                      }
+
+                    </div>
+                    {
+                      isPreview ? null : <AddToCart offerInfo={offerInfo} />
+                    }
+                  </div>
+                </Row>
+              </div>
+              <div className={styles['bg-white']}>
+                <Grid>
+                  <Row>
+                    <Col md={8}>
+                      {
+                        isPreview ? null : <NoSSR> <RecentView recentlyViewed={recentlyViewed} shippingInfo={shippingInfo} /> </NoSSR>
+                      }
+                    </Col>
+                    {/*<Col md={8}>
+                    {
+                      isPreview ? null : <ReviewsTab />
+                    }
+                    </Col>*/}
+                    <Col md={8}>
+                      <ElectronicsTab catalog={catalog} />
+                    </Col>
+                  </Row>
+                </Grid>
+              </div>
+              <div className={styles['pdp-bottom-ref']} ref={this.bottomRef}></div>
+            </div>
+            <div className={`${styles['border-b']} ${styles['border-t']} ${styles['pb-30']} ${styles['pt-30']}`}>
+              {
+                isPreview ? null : <FooterBar />
+              }
+            </div>
           </div>
-        </div>
+        </Theme.Provider>
       );
     }
   };

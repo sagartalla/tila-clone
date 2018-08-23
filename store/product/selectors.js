@@ -1,12 +1,11 @@
 import _ from 'lodash';
 
 const getProduct = (store, variantId) => {
-  const { product_details, variant_preferred_listings } = store.productReducer.data[0];
+  const { product_details, variant_preferred_listings, tree } = store.productReducer.data[0];
   const computedVariantId = variantId || Object.keys(variant_preferred_listings || {})[0]
   const listings = computedVariantId ? variant_preferred_listings[computedVariantId] : [];
   const catalogAttributeMap = product_details.catalog_details.attribute_map;
   const productAttributeMap = product_details.product_details_vo.cached_product_details.attribute_map
-
   let activeCount = 0, listingInventryCount = 0;
   let priceInfo = listings ? listings.filter((listing) => {
     if(listing.total_inventory_count <= 0 ) {
@@ -59,6 +58,8 @@ const getProduct = (store, variantId) => {
     offerInfo,
     shippingInfo,
     returnInfo,
+    breadcrums: tree.breadcrumb,
+    categoryType: tree.finance[0].display_name_en,
     catalog: _.groupBy(_.filter(catalogAttributeMap, (val) => val.visible), (attrMap) => attrMap.attribute_category_name)
   };
 };
@@ -135,7 +136,6 @@ const getPreview = (store) => {
     order: item.order,
     restricted: item.isRestricted,
   })) : [];
-  debugger;
   const catalog = _.reduce(attributes, (acc, attrVal, attrKey) => {
     const cItem = _.find(catalogData, { attributeName: attrKey });
     const groupName = cItem.attributeCategoryName;

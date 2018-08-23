@@ -38,6 +38,8 @@ class ProductPage extends Base {
         "flags": {
           "catalog_details": true,
           // "include_all_pref_listings": true,
+          "category_tree_bread_crumb": true,
+          "category_tree_finance": true,
           "include_related_products": true,
           "shipping": true
         },
