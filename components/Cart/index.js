@@ -21,7 +21,8 @@ class Cart extends Component {
     super(props);
 
     this.state = {
-      showBlocker: false
+      showBlocker: false,
+      count: ''
     }
 
     this.addToWishlist = this.addToWishlist.bind(this);
@@ -30,6 +31,7 @@ class Cart extends Component {
     this.decreaseItemCnt = this.decreaseItemCnt.bind(this);
     this.addOrRemoveGift = this.addOrRemoveGift.bind(this);
     this.checkoutBtnHandler = this.checkoutBtnHandler.bind(this);
+    this.cartStepperInputHandler = this.cartStepperInputHandler.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -41,6 +43,16 @@ class Cart extends Component {
   componentDidMount() {
     if (!this.props.showMiniCart)
       this.props.getCartResults();
+  }
+
+  cartStepperInputHandler(e) {
+    const { cartData } = this.props;
+    const id = e.target.getAttribute('data-id');
+    const count = e.target.value
+    const selelecItem = cartData.items.filter(item => item.item_id == id)[0];
+
+    this.setState({ count: selelecItem.max_limit < count ? selelecItem.max_limit : count })
+    this.props.cartItemInputCount(id, 'add', selelecItem.max_limit < count ? selelecItem.max_limit : count);
   }
 
   checkoutBtnHandler() {
@@ -87,7 +99,7 @@ class Cart extends Component {
   }
 
   render() {
-    const { showBlocker } = this.state;
+    const { showBlocker, count } = this.state;
     const { cartData, editCartDetails, showCheckOutBtn } = this.props;
     return (
       <div>
@@ -111,6 +123,7 @@ class Cart extends Component {
               <HeaderBar />
               <Grid>
                 <CartBody
+                  count={count}
                   data={cartData}
                   showBlocker={showBlocker}
                   addToWishlist={this.addToWishlist}
@@ -119,6 +132,7 @@ class Cart extends Component {
                   decreaseItemCnt={this.decreaseItemCnt}
                   addOrRemoveGift={this.addOrRemoveGift}
                   checkoutBtnHandler={this.checkoutBtnHandler}
+                  cartStepperInputHandler={this.cartStepperInputHandler}
                 />
               </Grid>
               <FooterBar />
@@ -140,6 +154,7 @@ const mapDispatchToProps = (dispatch) =>
       removeCartItem: actionCreators.removeCartItem,
       cartItemCount: actionCreators.cartItemCount,
       addOrRemoveGift: actionCreators.addOrRemoveGift,
+      cartItemInputCount: actionCreators.cartItemInputCount,
       addToWishlistAndFetch: wishlistActionCreators.addToWishlistAndFetch,
     },
     dispatch,

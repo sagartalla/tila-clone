@@ -150,15 +150,20 @@ class Payments extends React.Component {
 
   handleShippingAddressContinue(e) {
     const { editCartDetails } = this.state;
-    const defaultAddrId = this.props.defaultAddress[0].address_id;
-    this.props.createOrder(defaultAddrId)
+    if (this.props.defaultAddress[0]) {
+      const defaultAddrId = this.props.defaultAddress[0].address_id;
+      this.props.createOrder(defaultAddrId)
 
-    const paymentConfigJson = { ...this.state.paymentConfigJson };
-    paymentConfigJson['address'] = { basic: false, progress: false, done: true };
-    paymentConfigJson['loyaltyPoints'] = { basic: false, progress: true, done: false };
-    paymentConfigJson['offersDiscounts'] = { basic: true, progress: false, done: false };
-    paymentConfigJson['payment'] = { basic: true, progress: false, done: false };
-    this.setState({ paymentConfigJson, editCartDetails: !editCartDetails });
+      const paymentConfigJson = { ...this.state.paymentConfigJson };
+      paymentConfigJson['address'] = { basic: false, progress: false, done: true };
+      paymentConfigJson['loyaltyPoints'] = { basic: false, progress: true, done: false };
+      paymentConfigJson['offersDiscounts'] = { basic: true, progress: false, done: false };
+      paymentConfigJson['payment'] = { basic: true, progress: false, done: false };
+      this.setState({ paymentConfigJson, editCartDetails: !editCartDetails });
+    } else {
+      alert('Please add a delivery address.');
+    }
+
   }
 
   handleLoyaltyBtn() {
