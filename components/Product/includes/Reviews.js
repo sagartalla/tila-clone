@@ -51,11 +51,11 @@ const Review = ({reviews}) => {
                </Col>
                <Col md={6}>
                  <div className={`${styles['flex']} ${styles['review-start']} ${styles['pb-10']}`}>
-                   <SVGCompoent clsName={`${styles['star-icon']}`} src={`icons/common-icon/star/${categoryType.toLowerCase()}-star`} />
-                   <SVGCompoent clsName={`${styles['star-icon']}`} src={`icons/common-icon/star/${categoryType.toLowerCase()}-star`} />
-                   <SVGCompoent clsName={`${styles['star-icon']}`} src={`icons/common-icon/star/${categoryType.toLowerCase()}-star`} />
-                   <SVGCompoent clsName={`${styles['star-icon']}`} src={`icons/common-icon/star/${categoryType.toLowerCase()}-star`} />
-                   <SVGCompoent clsName={`${styles['star-icon']}`} src={`icons/common-icon/star/${categoryType.toLowerCase()}-star`} />
+                   <SVGCompoent clsName={`${styles['star-icon']}`} src={`icons/common-icon/star/${categoryType}-star`} />
+                   <SVGCompoent clsName={`${styles['star-icon']}`} src={`icons/common-icon/star/${categoryType}-star`} />
+                   <SVGCompoent clsName={`${styles['star-icon']}`} src={`icons/common-icon/star/${categoryType}-star`} />
+                   <SVGCompoent clsName={`${styles['star-icon']}`} src={`icons/common-icon/star/${categoryType}-star`} />
+                   <SVGCompoent clsName={`${styles['star-icon']}`} src={`icons/common-icon/star/${categoryType}-star`} />
                  </div>
                  <a className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['wrt-btn']} ${styles['small-btn']}`}>{PDP_PAGE.WRITE_REVIEW}</a>
                </Col>
@@ -72,11 +72,11 @@ const Review = ({reviews}) => {
                      <h5 className={`${styles['mb-0']} ${styles['fontW600']}`}>Huda Beauty</h5>
                      <span className={`${styles['fs-12']}`}>{PDP_PAGE.SOCIAL_INFLUENCER}</span>
                      <div className={`${styles['flex']} ${styles['review-start-inn']} ${styles['pb-10']}`}>
-                       <SVGCompoent clsName={`${styles['star-icon']}`} src={`icons/common-icon/star/${categoryType.toLowerCase()}-star`} />
-                       <SVGCompoent clsName={`${styles['star-icon']}`} src={`icons/common-icon/star/${categoryType.toLowerCase()}-star`} />
-                       <SVGCompoent clsName={`${styles['star-icon']}`} src={`icons/common-icon/star/${categoryType.toLowerCase()}-star`} />
-                       <SVGCompoent clsName={`${styles['star-icon']}`} src={`icons/common-icon/star/${categoryType.toLowerCase()}-star`} />
-                       <SVGCompoent clsName={`${styles['star-icon']}`} src={`icons/common-icon/star/${categoryType.toLowerCase()}-star`} />
+                       <SVGCompoent clsName={`${styles['star-icon']}`} src={`icons/common-icon/star/${categoryType}-star`} />
+                       <SVGCompoent clsName={`${styles['star-icon']}`} src={`icons/common-icon/star/${categoryType}-star`} />
+                       <SVGCompoent clsName={`${styles['star-icon']}`} src={`icons/common-icon/star/${categoryType}-star`} />
+                       <SVGCompoent clsName={`${styles['star-icon']}`} src={`icons/common-icon/star/${categoryType}-star`} />
+                       <SVGCompoent clsName={`${styles['star-icon']}`} src={`icons/common-icon/star/${categoryType}-star`} />
                      </div>
                    </div>
                  </div>
@@ -96,11 +96,11 @@ const Review = ({reviews}) => {
                      <h5 className={`${styles['mb-0']} ${styles['fontW600']}`}>Huda Beauty</h5>
                      <span className={`${styles['fs-12']}`}>{PDP_PAGE.SOCIAL_INFLUENCER}</span>
                      <div className={`${styles['flex']} ${styles['review-start-inn']} ${styles['pb-10']}`}>
-                       <SVGCompoent clsName={`${styles['star-icon']}`} src={`icons/common-icon/star/${categoryType.toLowerCase()}-star`} />
-                     <SVGCompoent clsName={`${styles['star-icon']}`} src={`icons/common-icon/star/${categoryType.toLowerCase()}-star`} />
-                   <SVGCompoent clsName={`${styles['star-icon']}`} src={`icons/common-icon/star/${categoryType.toLowerCase()}-star`} />
-                 <SVGCompoent clsName={`${styles['star-icon']}`} src={`icons/common-icon/star/${categoryType.toLowerCase()}-star`} />
-               <SVGCompoent clsName={`${styles['star-icon']}`} src={`icons/common-icon/star/${categoryType.toLowerCase()}-star`} />
+                       <SVGCompoent clsName={`${styles['star-icon']}`} src={`icons/common-icon/star/${categoryType}-star`} />
+                       <SVGCompoent clsName={`${styles['star-icon']}`} src={`icons/common-icon/star/${categoryType}-star`} />
+                       <SVGCompoent clsName={`${styles['star-icon']}`} src={`icons/common-icon/star/${categoryType}-star`} />
+                       <SVGCompoent clsName={`${styles['star-icon']}`} src={`icons/common-icon/star/${categoryType}-star`} />
+                       <SVGCompoent clsName={`${styles['star-icon']}`} src={`icons/common-icon/star/${categoryType}-star`} />
                      </div>
                    </div>
                  </div>
@@ -120,11 +120,11 @@ const Review = ({reviews}) => {
                      <h5 className={`${styles['mb-0']} ${styles['fontW600']}`}>Huda Beauty</h5>
                      <span className={`${styles['fs-12']}`}>{PDP_PAGE.SOCIAL_INFLUENCER}</span>
                      <div className={`${styles['flex']} ${styles['review-start-inn']} ${styles['pb-10']}`}>
-                       <SVGCompoent clsName={`${styles['star-icon']}`} src={`icons/common-icon/star/${categoryType.toLowerCase()}-star`} />
-                       <SVGCompoent clsName={`${styles['star-icon']}`} src={`icons/common-icon/star/${categoryType.toLowerCase()}-star`} />
-                       <SVGCompoent clsName={`${styles['star-icon']}`} src={`icons/common-icon/star/${categoryType.toLowerCase()}-star`} />
-                       <SVGCompoent clsName={`${styles['star-icon']}`} src={`icons/common-icon/star/${categoryType.toLowerCase()}-star`} />
-                       <SVGCompoent clsName={`${styles['star-icon']}`} src={`icons/common-icon/star/${categoryType.toLowerCase()}-star`} />
+                       <SVGCompoent clsName={`${styles['star-icon']}`} src={`icons/common-icon/star/${categoryType}-star`} />
+                       <SVGCompoent clsName={`${styles['star-icon']}`} src={`icons/common-icon/star/${categoryType}-star`} />
+                       <SVGCompoent clsName={`${styles['star-icon']}`} src={`icons/common-icon/star/${categoryType}-star`} />
+                       <SVGCompoent clsName={`${styles['star-icon']}`} src={`icons/common-icon/star/${categoryType}-star`} />
+                       <SVGCompoent clsName={`${styles['star-icon']}`} src={`icons/common-icon/star/${categoryType}-star`} />
                      </div>
                    </div>
                  </div>

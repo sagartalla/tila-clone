@@ -2,8 +2,10 @@ import _ from 'lodash';
 
 const getProduct = (store, variantId) => {
   const { product_details, variant_preferred_listings, tree } = store.productReducer.data[0];
-  const computedVariantId = variantId || Object.keys(variant_preferred_listings || {})[0]
-  const listings = computedVariantId ? variant_preferred_listings[computedVariantId] : [];
+  const computedVariantId = variantId;
+  const listings = computedVariantId ? variant_preferred_listings[computedVariantId] : _.reduce(variant_preferred_listings, (acc, val, key) => {
+    return [...acc, ...val];
+  }, []);
   const catalogAttributeMap = product_details.catalog_details.attribute_map;
   const productAttributeMap = product_details.product_details_vo.cached_product_details.attribute_map
   let activeCount = 0, listingInventryCount = 0;
@@ -59,7 +61,7 @@ const getProduct = (store, variantId) => {
     shippingInfo,
     returnInfo,
     breadcrums: tree.breadcrumb,
-    categoryType: tree.finance[0].display_name_en,
+    categoryType: tree.finance ? tree.finance[0].display_name_en : '',
     catalog: _.groupBy(_.filter(catalogAttributeMap, (val) => val.visible), (attrMap) => attrMap.attribute_category_name)
   };
 };

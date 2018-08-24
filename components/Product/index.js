@@ -120,7 +120,7 @@ const getProductComponent = (isPreview, taskCode) => {
       const { catalog, titleInfo, keyfeatures, imgUrls, offerInfo, shippingInfo, returnInfo, details, categoryType='' } = productData;
       const { stickyElements, recentlyViewed } = this.state;
       return (
-        <Theme.Provider value={categoryType}>
+        <Theme.Provider value={categoryType.toLowerCase()}>
           <div className={`${styles['pdp-wrap']} ${categoryType.toLowerCase()} ${styles[categoryType.toLowerCase()]}`}>
             {
               isPreview ? null : <HeaderBar />
