@@ -39,13 +39,37 @@
     background-color: #E40A80;
 }
 
+.nav-tabs>li.active {
+    border-bottom: 4px solid #e40a80;
+}
+
+.lifestyle .progress .progress-bar-danger {
+    background-color: #f26b6b;
+}
+
+.lifestyle .nav-tabs>li.active {
+    border-color: #f26b6b;
+}
+
+.electronics .nav-tabs>li.active {
+    border-color: #2ac497;
+}
+
+.electronics .progress .progress-bar-danger {
+    background-color: #2ac497;
+}
+
+.fashion .nav-tabs>li.active {
+    border-color: #939393;
+}
+
+.fashion .progress .progress-bar-danger {
+    background-color: #939393;
+}
+
 .nav-tabs {
     background: rgba(216, 216, 216, 0.1);
     border: 0;
-}
-
-.nav-tabs>li.active {
-    border-bottom: 4px solid #e40a80;
 }
 
 .panel-default>.panel-heading {
@@ -53,11 +77,11 @@
     border-color: #FFF;
 }
 
-
 .nav-tabs>li a {
     font-size: 16px;
     color: #666;
 }
+
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
     color: #000;
     border: 0;
