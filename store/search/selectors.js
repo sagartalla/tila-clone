@@ -210,4 +210,11 @@ const getChoosenCategoryName = (store) => {
   return store.searchReducer.data.searchDetails.choosenCategoryName;
 }
 
-export { getSearchFilters, getSearchResutls, getPaginationDetails, getUIState, getCategoryId, getQuery, getFacetfilters, optionParams, getSearchBarFilterState, addCartAndWishlistDetails, getIsCategoryTree, getChoosenCategoryName };
+const getAppliedFitlers = (store) => {
+  const facetFilters =  store.searchReducer.data.searchDetails.facetFilters || {};
+  return _.reduce(facetFilters, (acc, ff, parentKey) => {
+    return [...acc, ...ff.map((f) => ({ displayName: f.split(': ')[1].match(/\"(.*)\"/)[1], parentKey, key: f, }))];
+  }, []);
+}
+
+export { getSearchFilters, getSearchResutls, getPaginationDetails, getUIState, getCategoryId, getQuery, getFacetfilters, optionParams, getSearchBarFilterState, addCartAndWishlistDetails, getIsCategoryTree, getChoosenCategoryName, getAppliedFitlers };

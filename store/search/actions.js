@@ -4,6 +4,7 @@ const actions = {
   GET_SEARCH_RESULTS: 'GET_SEARCH_RESULTS',
   GET_MORE_RESULTS: 'GET_MORE_RESULTS',
   SEARCHBAR_FITLERS: 'SEARCHBAR_FITLERS',
+  REMOVE_FILTERS: 'REMOVE_FILTERS',
 };
 
 const actionCreators = {
@@ -31,6 +32,13 @@ const actionCreators = {
         show: true
       }
     })
+  },
+  removeFilter: (params) => (dispatch, getState) => {
+    dispatch({
+      type: actions.REMOVE_FILTERS,
+      payload: params
+    });
+    dispatch(actionCreators.getSearchResults({}));
   }
 };
 

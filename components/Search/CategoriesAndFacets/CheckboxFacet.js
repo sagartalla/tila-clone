@@ -43,15 +43,17 @@ class CheckboxFacet extends Component {
     });
   }
 
-  componentWillReceiveProps() {
-    const { filter } = this.props;
+  componentWillReceiveProps(nextProps) {
+    const { filter, attributeName } = this.props;
+    const facets = JSON.parse(decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent('facets').replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1")) || '{}');
     this.setState({
       isMoreButtonRequired: filter.children.length > MaxItems,
+      selectedItems: (facets[attributeName] || []).map((f) => f.name),
     });
   }
 
   render() {
-    const { filter, index } = this.props;
+    const { filter, index, facets } = this.props;
     const { selectedItems } = this.state;
     return (
       <Panel eventKey={`${index + 'c'}`} key={filter.id}>
@@ -67,12 +69,6 @@ class CheckboxFacet extends Component {
               {
                 filter.children.slice(0, this.state.maxRows).map(childFitler => (
                   <li key={childFitler.id} className={styles['category-sub-list-inn']}>
-                    {/* <Checkbox
-                      onChange={this.onChangeItem({ name: childFitler.name, param: childFitler.param })}
-                      checked={selectedItems.indexOf(childFitler.name) !== -1}
-                    >
-                      <span><span>{childFitler.name}</span><span>({childFitler.count})</span></span>
-                    </Checkbox> */}
                     <div className={styles['checkbox-material']}>
                       <input id={childFitler.name} type="checkbox" onChange={this.onChangeItem({ name: childFitler.name, param: childFitler.param })} checked={selectedItems.indexOf(childFitler.name) !== -1} />
                       <label htmlFor={childFitler.name} className={styles['fs-12']}> {childFitler.name} <span>({childFitler.count})</span> </label>
