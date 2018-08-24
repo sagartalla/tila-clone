@@ -7,7 +7,7 @@ import { languageDefinations } from '../../utils/lang';
 const {FOOTER_PAGE} = languageDefinations();
 
 const FooterBar = props => (
-  <div className={`${styles['footer-container']} ${styles['mt-25']}`}>
+  <div className={`${styles['footer-container']} ${styles['mt-25']} hidden-xs`}>
     <div className={`${styles['footer-container-inn']} ${styles['pt-40']} ${styles['pb-40']}`}>
       <Grid>
         <Row>

@@ -8,7 +8,7 @@ import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Cam/Sidebar/sidebar');
 
 const Sidebar = ({query}) => (
-  <div className={styles['sidebar-container']}>
+  <div className={`{styles['sidebar-container'] hidden-xs`}>
     <div>
       <UserProfile query={query} />
     </div>
