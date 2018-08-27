@@ -28,7 +28,7 @@ class SearchPage extends Base {
     const categoryFilter = {
       id: subCategoryId || categoryId,
     };
-    const facetFilters = selectors.getFacetfilters(store.getState())(JSON.parse(facets || '{}'));
+    const { facetFilters, facetFiltersCopyWithNames } = selectors.getFacetfilters(store.getState())(JSON.parse(facets || '{}'));
     const shippingData = req ? req.universalCookies.get('shippingInfo') : cookies.get('shippingInfo');;
     const { city: shippingCity, country: shippingCountry } = shippingData || {};
     const searchOptions = {
@@ -38,6 +38,7 @@ class SearchPage extends Base {
       query: search,
       language: language || 'en',
       facetFilters,
+      facetFiltersCopyWithNames,
       pageNum: 1,
       isListed: isListed === 'true',
       categoryTree,

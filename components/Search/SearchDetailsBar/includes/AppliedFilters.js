@@ -35,7 +35,7 @@ class AppliedFilters extends Component {
   }
 
   submitQuery(params) {
-    this.props.getSearchResults({ facetFilters: this.props.getFacetfilters(params) });
+    this.props.getSearchResults(this.props.getFacetfilters(params));
   }
 
   clearAll() {

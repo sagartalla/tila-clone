@@ -9,6 +9,7 @@ const getSearchResultsApi = ({
   query,
   language,
   facetFilters,
+  facetFiltersCopyWithNames,
   pageNum,
   fl,
   isListed,
@@ -46,6 +47,7 @@ const getSearchResultsApi = ({
     data.searchDetails = {
       query,
       facetFilters,
+      facetFiltersCopyWithNames,
       categoryFilter,
       shippingDetails,
       sort,

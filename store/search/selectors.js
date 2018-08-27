@@ -195,7 +195,11 @@ const getFacetfilters = (store) => (queryObject) => {
     });
     return facetFilters;
   }, {});
-  return facetFilters;
+  const facetFiltersCopyWithNames = _.reduce(queryObject, (facetFilters, fitlerTypeValues, fitlerTypeKey) => {
+    facetFilters[fitlerTypeKey] = fitlerTypeValues;
+    return facetFilters;
+  }, {});
+  return {facetFilters, facetFiltersCopyWithNames};
 }
 
 const getSearchBarFilterState = (state) => {
@@ -211,9 +215,9 @@ const getChoosenCategoryName = (store) => {
 }
 
 const getAppliedFitlers = (store) => {
-  const facetFilters =  store.searchReducer.data.searchDetails.facetFilters || {};
-  return _.reduce(facetFilters, (acc, ff, parentKey) => {
-    return [...acc, ...ff.map((f) => ({ displayName: f.split(': ')[1].match(/\"(.*)\"/)[1], parentKey, key: f, }))];
+  const { facetFiltersCopyWithNames={} } =  store.searchReducer.data.searchDetails;
+  return _.reduce(facetFiltersCopyWithNames, (acc, ff, parentKey) => {
+    return [...acc, ...ff.map((f) => ({ displayName: f.name, parentKey, key: f.param, }))];
   }, []);
 }
 
