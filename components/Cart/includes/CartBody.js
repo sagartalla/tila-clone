@@ -1,23 +1,25 @@
 import React, { Component } from 'react';
-import { languageDefinations } from '../../../utils/lang/';
+import moment from 'moment';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
-import moment from 'moment';
-import RightBar from '../../common/CartAndPaymentRightBar';
+
+import CartStepper from './CartStepper';
 import Blocker from '../../common/Blocker';
 import SVGComponent from '../../common/SVGComponet';
-import CartStepper from './CartStepper';
-
+import RightBar from '../../common/CartPaymentSideBar';
+import Wishlist from '../../Cam/Wishlist/';
+import { languageDefinations } from '../../../utils/lang/';
+import constants from '../../../constants';
 import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Cart/cart');
 
 const CartBody = props => {
-  const { showBlocker, increaseItemCnt, decreaseItemCnt, data, removeCartItem, checkoutBtnHandler, addToWishlist, addOrRemoveGift } = props;
+  const { showBlocker, increaseItemCnt, decreaseItemCnt, data, removeCartItem, checkoutBtnHandler, addToWishlist, addOrRemoveGift, cartStepperInputHandler, count } = props;
   const { items, error } = data;
   const flag = data && items && items.length;
   const cnt = flag > 0 ? items.length : 0;
   const { CART_PAGE } = languageDefinations();
-  const wishlistImgPath = "https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/catalog/mobile/PMOBNTDOUQWWQOLDLP/GALLERY/MEDIA3STP9XJBH3D2W7EQD2TQKU/apple-iphone-6s-na-original-imaebymaz5exfapw.jpeg"
+
   return (
     <div className={styles['cart-container']}>
       {
@@ -37,7 +39,7 @@ const CartBody = props => {
               <div>
                 {
                   items.map((item, index) => {
-                    const { item_id, img, name, price, cur, quantity, max_limit, inventory, brand_name, gift_info, shipping, warranty } = item;
+                    const { item_id, img, name, price, cur, quantity, max_limit, inventory, brand_name, gift_info, shipping, warranty, total_amount } = item;
                     return (
                       <div key={item_id} className={`${styles['mb-20']} ${styles['box']}`}>
                         {
@@ -46,13 +48,26 @@ const CartBody = props => {
                             : ""
                         }
                         <div className={`${styles['cart-box']} ${styles['p-20']}`}>
+                          {
+                            inventory <= 0 ?
+                              <div className={`${styles['out-of-stock']} ${styles['text-center']} ${styles['absolute']} ${styles['bg-white']}`}>
+                                <h3>uh-oh!</h3>
+                                <p>
+                                  {CART_PAGE.ITEM_OUT_OF_STOCK_MESSAGE} <br /> {CART_PAGE.CONTINUE_TO_WISHLIST}
+                                </p>
+                              </div>
+                              : null
+                          }
+
                           <Row>
                             <Col md={2}>
                               <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles['pb-15']} ${styles['card-box-inn-img']}`}><img className={styles['img']} src={img} /></div>
                               <CartStepper
+                                count={count}
                                 item={item}
                                 decreaseItemCnt={decreaseItemCnt}
                                 increaseItemCnt={increaseItemCnt}
+                                cartStepperInputHandler={cartStepperInputHandler}
                               />
                             </Col>
                             <Col md={10}>
@@ -77,7 +92,7 @@ const CartBody = props => {
                                 </Col>
                                 <Col md={2} className={`${styles['pl-0']}`}>
                                   <h4 className={`${styles['fontW600']} ${styles['light-gry-clr']} ${styles['mt-15']} ${styles['t-rt']}`}>{price + ' ' + cur}</h4>
-                                  <p className={`${styles['t-rt']}`}>0.00 <span className={`${styles['fs-12']}`}>SAR</span></p>
+                                  <p className={`${styles['t-rt']}`}>0.00 <span className={`${styles['fs-12']}`}>{cur}</span></p>
                                   <p className={`${styles['t-rt']}`}>{shipping.shipping_fees} <span className={`${styles['fs-12']}`}>{cur}</span></p>
                                 </Col>
                               </Row>
@@ -93,7 +108,7 @@ const CartBody = props => {
                                   : ''
                               }
                               {
-                                inventory == 0 ?
+                                inventory <= 0 ?
                                   <span className={`${styles['fontW600']} ${styles['thick-red']} ${styles['pr-20']}`}>{CART_PAGE.OUT_OF_STOCK} </span>
                                   : ''
                               }
@@ -108,7 +123,7 @@ const CartBody = props => {
                             </span>
                           </Col>
                           <Col md={3} className={`${styles['t-rt']} ${styles['pr-0']}`}>
-                            <span>Total : </span><span className={`${styles['fs-16']} ${styles['fontW600']}`}>{price + ' ' + cur}</span>
+                            <span>Total : </span><span className={`${styles['fs-16']} ${styles['fontW600']}`}>{total_amount + ' ' + cur}</span>
                           </Col>
                         </div>
 
@@ -116,23 +131,8 @@ const CartBody = props => {
                     )
                   })
                 }
-                <div className={`${styles['view-wishlist-main']} ${styles['box']} ${styles['p-20']} ${styles['flex-center']}`}>
-                  <Col md={4}>
-                    <span className={styles['fs-12']}>10 out of 8 Items on your wishlist are available now to purchase. <a> 3 items are on Offers</a></span>
-                  </Col>
-                  <Col md={6}>
-                    {
-                      [...Array(6).keys()].map(() => {
-                        return (
-                          <span className={`${styles['wishlist-img']} ${styles['mr-15']}`}><img src={wishlistImgPath} /></span>
-                        )
-                      })
-                    }
-                  </Col>
-                  <Col md={2} className={`${styles['pl-0']} ${styles['pr-0']} ${styles['flex']} ${styles['view-btn-list']}`}>
-                    <a className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']} ${styles['default-small']}`}>View Wishlist</a>
-                  </Col>
-                </div>
+
+                <Wishlist cartMiniWishList={true} />
               </div>
 
             </Col>
@@ -140,12 +140,13 @@ const CartBody = props => {
               <div className={`${styles['box']}`}>
                 <RightBar
                   data={data}
+                  showInstant={true}
                   showCheckoutBtn={true}
                   checkoutBtnHandler={checkoutBtnHandler}
                 />
               </div>
               <div className={styles['secure-img']}>
-                <img className={styles['']} src={"/static/img/bg-img/group-cards.png"}/>
+                <img className={styles['']} src={"/static/img/bg-img/group-cards.png"} />
               </div>
             </Col>
           </Row>
@@ -162,11 +163,8 @@ CartBody.propTypes = {
   increaseItemCnt: PropTypes.func.isRequired,
   showBlocker: PropTypes.bool.isRequired,
   addToWishlist: PropTypes.func.isRequired,
+  cartStepperInputHandler: PropTypes.func.isRequired,
   data: PropTypes.object.isRequired,
 };
 
-CartBody.defaultProps = {
-
-};
-
-export default CartBody;
+export default CartBody

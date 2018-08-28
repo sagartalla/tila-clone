@@ -29,6 +29,7 @@ class Thankyou extends Component {
 
   componentDidMount() {
     const { orderId, getOrderDetails, status } = this.props;
+    this.setState({ status })
     if (status == 'SUCCESSFUL') {
       getOrderDetails({ orderId: orderId });
     }
@@ -41,14 +42,14 @@ class Thankyou extends Component {
     return (
       <div className={styles['thankyou']}>
         <PaymentHeader />
-        <Grid>
-          <PaymentStatus status={status} orderId={orderId} />
-          {
-            status == 'SUCCESSFUL' && orderData.orderItems.length ?
-              <OrderDetails query={query} orderData={orderData} thankyouPage={true} />
-              : null
-          }
-        </Grid>
+        {/* <Grid> */}
+        <PaymentStatus status={status} orderId={orderId} />
+        {
+          status == 'SUCCESSFUL' && orderData.orderItems.length ?
+            <OrderDetails query={query} orderData={orderData} thankyouPage={true} />
+            : null
+        }
+        {/* </Grid> */}
       </div>
     )
   }

@@ -1,18 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { languageDefinations } from '../../../utils/lang/';
-import { Grid, Row, Col } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
+
 import SVGComponent from '../../common/SVGComponet';
 import ShippingAddress from '../../Cam/ShippingAddress';
+import { languageDefinations } from '../../../utils/lang/';
 
 import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Payments/payment');
+const { DELIVERY_ADDR_PAGE } = languageDefinations();
 
 const DeliveryAddress = props => {
-  const { configJson, defaultAddress, handleShippingAddressContinue, editAddress } = props;
-  const { DELIVERY_ADDR_PAGE } = languageDefinations();
+  const { configJson, defaultAddress, handleShippingAddressContinue, editAddressTab } = props;
+  
   return (
-    <div className={`${styles['pb-15']} ${styles['pt-15']} ${styles['pl-35']} ${styles['pr-35']} ${styles['box']} ${styles['mb-20']} ${styles['relative']}`}>
+    <div className={`${styles['delivery-adress-prt']} ${styles['box']} ${styles['mb-20']} ${styles['relative']}`}>
       <SVGComponent clsName={`${styles['map-address']} ${configJson.done ? 'done' : ''} ${configJson.progress ? 'payment-active' : ''}`} src="icons/map/address" />
       <Row className={`${configJson.basic || configJson.done ? '' : 'hide'}`}>
         <Col md={6} sm={12} xs={12}>
@@ -34,7 +36,7 @@ const DeliveryAddress = props => {
           }
         </Col>
         <Col md={2} sm={12} xs={12} className={`${configJson.done ? '' : 'hide'} ${styles['t-rt']} ${styles['pl-0']}`}>
-          <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']}`} onClick={editAddress}>
+          <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']}`} onClick={editAddressTab}>
             {DELIVERY_ADDR_PAGE.EDIT}
           </button>
         </Col>
@@ -56,7 +58,7 @@ const DeliveryAddress = props => {
 
 DeliveryAddress.propTypes = {
   handleShippingAddressContinue: PropTypes.func.isRequired,
-  editAddress: PropTypes.func.isRequired,
+  editAddressTab: PropTypes.func.isRequired,
   configJson: PropTypes.object.isRequired,
   // defaultAddress: propTypes.object
 }

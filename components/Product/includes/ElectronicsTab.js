@@ -18,12 +18,12 @@ const ElectronicsTab = ({ catalog }) => {
         <Tab eventKey={1} title="Overview">
           <OverView   catalog={catalog}/>
         </Tab>
-        <Tab eventKey={2} title="Description">
+        {/*<Tab eventKey={2} title="Description">
           <Description />
         </Tab>
         <Tab eventKey={3} title="Specifications">
           <Specification />
-        </Tab>
+        </Tab>*/}
         <Tab eventKey={4} title="Reviews">
           <Review />
         </Tab>

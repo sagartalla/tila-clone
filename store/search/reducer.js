@@ -4,9 +4,12 @@ import { actions } from './actions';
 const initialState = {
   ui: {
     loading: false,
+    showFilters: false,
   },
   data: {
-    searchDetails: {},
+    searchDetails: {
+      facetFilters: {}
+    },
     paginationDetails: {},
     productResponse: {
       products: []
@@ -45,10 +48,57 @@ const searchReducer = typeToReducer({
   [actions.GET_SEARCH_RESULTS]: {
     PENDING: state => Object.assign({}, state, { ui: { loading: true } }),
     FULFILLED: (state, action) => {
-      return Object.assign({}, state, { data: action.payload.data, ui: { loading: false } })
+      return Object.assign({}, state, {
+        ...state,
+        data: {
+          ...state.data,
+          ...action.payload.data
+        },
+        ui: { loading: false } })
     },
     REJECTED: (state, action) => Object.assign({}, state, { error: action.payload.message, ui: { loading: false } }),
   },
+  [actions.SEARCHBAR_FITLERS]: (state, action) => {
+    return {
+      ...state,
+      ui: {
+        ...state.ui,
+        showFilters: action.payload.show,
+      }
+    }
+  },
+  [actions.REMOVE_FILTERS]: (state, action) => {
+    const params = action.payload;
+    const ff = state.data.searchDetails.facetFilters;
+    const fArray = [...ff[params.parentKey]];
+    fArray.splice(fArray.indexOf(action.key), 1);
+    return {
+      ...state,
+      data: {
+        ...state.data,
+        searchDetails: {
+          ...state.data.searchDetails,
+          facetFilters: {
+            ...state.data.searchDetails.facetFilters,
+            [params.parentKey]: fArray,
+          }
+        }
+      }
+    };
+    // return {
+    //   ...state,
+    //   data: {
+    //     ...state.data,
+    //     searchDetails: {
+    //       ...state.data.searchDetails,
+    //       facetFilters: {
+    //         ...state.data.searchDetails.facetFilters,
+    //         [param.parentKey]: fArray,
+    //       }
+    //     }
+    //   }
+    // }
+  }
 }, initialState);
 
 export default searchReducer;

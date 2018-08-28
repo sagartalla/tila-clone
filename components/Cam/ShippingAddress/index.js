@@ -1,36 +1,41 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import { languageDefinations } from '../../../utils/lang/';
-
+import Cookie from 'universal-cookie';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { actionCreators, selectors } from '../../../store/cam/address';
+import { Modal } from "react-router-modal";
 
-import AddressHeader from './includes/AddressHeader';
-import AddressBody from './includes/AddressBody';
 import AddressNew from './includes/AddressNew';
+import AddressBody from './includes/AddressBody';
+import MiniAddress from './includes/MiniAddress';
+import AddressHeader from './includes/AddressHeader';
+import { languageDefinations } from '../../../utils/lang/';
+import { actionCreators, selectors } from '../../../store/cam/address';
 
 import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Cam/ShippingAddress/address');
 
+const cookies = new Cookie();
+//TODO: better handling of cookie
 const initialAddrObj = {
   address_id: 0,
-  first_name: '',
-  last_name: '',
-  city: '',
+  address_type: 'home',
   address_line_1: '',
   address_line_2: '',
-  mobile_no: '',
-  mobile_country_code: '',
+  city: '',
+  default: true,
+  country_name: "",
+  first_name: '',
+  last_name: '',
   latitude: 0,
   longitude: 0,
-  default: true,
-  address_type: 'home',
-  postal_code: "",
-  shipping_country_code: "IND",
-  state: ""
+  mobile_country_code: '',
+  mobile_no: '',
+  po_box: "",
+  shipping_country_code: '',
 }
+
 class ShippingAddress extends Component {
 
   constructor(props) {
@@ -54,7 +59,8 @@ class ShippingAddress extends Component {
   }
 
   componentDidMount() {
-    this.props.getShippingAddressResults();
+    if (!this.props.miniAddress)
+      this.props.getShippingAddressResults();
   }
 
   shouldComponentUpdate(nextProps) {
@@ -78,6 +84,8 @@ class ShippingAddress extends Component {
   }
 
   makeDefaultAddress(addrId) {
+    const { toggleMiniAddress } = this.props;
+    if(toggleMiniAddress) toggleMiniAddress();
     this.props.makeDefaultAddress(addrId)
   }
 
@@ -122,52 +130,98 @@ class ShippingAddress extends Component {
 
   render() {
     // if standalone is true, it is stand alone address page else from payment page or any other pages.
-    const { results, standalone, handleShippingAddressContinue } = this.props;
+    const { results, standalone, handleShippingAddressContinue, miniAddress, isPdp } = this.props;
     let { showNewAddr, addr } = this.state;
     const { DELIVERY_ADDR_PAGE } = languageDefinations();
 
     return (
       <div className={`${styles['address-container']} ${standalone !== true ? '' : `${styles['box']} ${styles['ml-5']}`} `}>
         {
-          standalone === true ?
-            <AddressHeader /> :
-            null
+          miniAddress ?
+            <Fragment>
+              <MiniAddress
+                data={results}
+                makeDefaultAddress={this.makeDefaultAddress}
+                showAddAdrressForm={this.showAddAdrressForm}
+              />
+              {
+                showNewAddr
+                  ?
+                  isPdp ?
+                    <div style={{ position: 'absolute', 'top': '-155px', 'background': '#fff', 'width': '488px', 'left': '-31px' }}>
+                      <AddressNew
+                        inputOnChange={this.inputOnChange}
+                        saveBtnClickHandler={this.saveBtnClickHandler}
+                        data={addr}
+                        showNewAddr={showNewAddr}
+                        homeButton={this.homeButton}
+                        getDataFromMap={this.getDataFromMap}
+                        setAsDefaultLocation={this.setAsDefaultLocation}
+                        addrTypeHandler={this.addrTypeHandler}
+                        showAddAdrressForm={this.showAddAdrressForm}
+                      />
+                    </div>
+                    :
+                    <Modal className={`react-router-modal__modal ${styles['right-side-modal']}`}>
+                      <AddressNew
+                        inputOnChange={this.inputOnChange}
+                        saveBtnClickHandler={this.saveBtnClickHandler}
+                        data={addr}
+                        showNewAddr={showNewAddr}
+                        homeButton={this.homeButton}
+                        getDataFromMap={this.getDataFromMap}
+                        setAsDefaultLocation={this.setAsDefaultLocation}
+                        addrTypeHandler={this.addrTypeHandler}
+                        showAddAdrressForm={this.showAddAdrressForm}
+                      />
+                    </Modal>
+                  : ''
+              }
+            </Fragment>
+            :
+            <Fragment>
+              {
+                standalone === true ?
+                  <AddressHeader /> :
+                  null
+              }
+              <Row>
+                <Col md={12} sm={12} xs={12}>
+                  <AddressBody
+                    data={results}
+                    showAddAdrressForm={this.showAddAdrressForm}
+                    deleteAddr={this.deleteAddr}
+                    editAddress={this.editAddress}
+                    makeDefaultAddress={this.makeDefaultAddress}
+                    standalone={standalone}
+                  />
+                </Col>
+                <Col md={12} sm={12} xs={12}>
+                  {
+                    showNewAddr ?
+                      <AddressNew
+                        inputOnChange={this.inputOnChange}
+                        saveBtnClickHandler={this.saveBtnClickHandler}
+                        data={addr}
+                        showNewAddr={showNewAddr}
+                        homeButton={this.homeButton}
+                        getDataFromMap={this.getDataFromMap}
+                        setAsDefaultLocation={this.setAsDefaultLocation}
+                        addrTypeHandler={this.addrTypeHandler}
+                        showAddAdrressForm={this.showAddAdrressForm}
+                      /> : ''
+                  }
+                </Col>
+                {
+                  standalone !== true ?
+                    <Col md={12} sm={12} xs={12} className={`${styles['pl-15']}`}>
+                      <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']}`} onClick={handleShippingAddressContinue}>{DELIVERY_ADDR_PAGE.CONTINUE}</button>
+                    </Col>
+                    : null
+                }
+              </Row>
+            </Fragment>
         }
-        <Row>
-          <Col md={12} sm={12} xs={12}>
-            <AddressBody
-              data={results}
-              showAddAdrressForm={this.showAddAdrressForm}
-              deleteAddr={this.deleteAddr}
-              editAddress={this.editAddress}
-              makeDefaultAddress={this.makeDefaultAddress}
-              standalone={standalone}
-            />
-          </Col>
-          <Col md={12} sm={12} xs={12}>
-            {
-              showNewAddr ?
-                <AddressNew
-                  inputOnChange={this.inputOnChange}
-                  saveBtnClickHandler={this.saveBtnClickHandler}
-                  data={addr}
-                  showNewAddr={showNewAddr}
-                  homeButton={this.homeButton}
-                  getDataFromMap={this.getDataFromMap}
-                  setAsDefaultLocation={this.setAsDefaultLocation}
-                  addrTypeHandler={this.addrTypeHandler}
-                  showAddAdrressForm={this.showAddAdrressForm}
-                /> : ''
-            }
-          </Col>
-          {
-            standalone !== true ?
-              <Col md={12} sm={12} xs={12} className={`${styles['pl-15']}`}>
-                <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']}`} onClick={handleShippingAddressContinue}>{DELIVERY_ADDR_PAGE.CONTINUE}</button>
-              </Col>
-              : null
-          }
-        </Row>
       </div>
     )
   }

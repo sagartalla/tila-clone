@@ -10,7 +10,7 @@ import { languageDefinations } from '../../../utils/lang';
 import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Product/product');
 
-const { PDP } = languageDefinations();
+const { PDP_PAGE } = languageDefinations();
 //
 // const AddToCart = ({addtocart}) => {
 //   return(
@@ -31,7 +31,7 @@ class AddToCart extends Component {
 
   addToCart() {
     const { listingId } = this.props.offerInfo
-    this.props.addToCart({
+    this.props.addToCartAndFetch({
       listing_id: listingId
     });
   }
@@ -45,18 +45,26 @@ class AddToCart extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(this.state.buyNow == true && (nextProps.isAddedToCart && !this.props.isAddedToCart)){
-       Router.pushRoute('/cart');
+    if(this.state.buyNow == true && nextProps.isAddedToCart){
+       Router.pushRoute('/payment');
     }
+  }
+
+  componentDidMount() {
+    this.props.resetAddtoCart();
   }
 
   render () {
     const { isLoading, error, isAddedToCart, offerInfo } = this.props;
     const { price, listingAvailable, listingId, stockError, availabilityError } = offerInfo;
-    return(
+    return (availabilityError || stockError)
+    ?
+    null
+    :
+    (
       <div className={`${styles['pt-25']} ${styles['flx-space-bw']} ${styles['addto-cart']} ${styles['border-t']}`}>
-        <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['fp-btn-x-large']}`} onClick={this.addToCart} disabled={isLoading || isAddedToCart} >{PDP.ADD_TO_CART}</button>
-        <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-x-large']}`} onClick={this.buyNow} disabled={isLoading || isAddedToCart} >{PDP.BUY_NOW}</button>
+        <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['fs-18']} ${styles['add-to-card-btn']}`} onClick={this.addToCart} disabled={isLoading || isAddedToCart} >{isAddedToCart ? PDP_PAGE.ADDED_TO_CART : PDP_PAGE.ADD_TO_CART}</button>
+        <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fs-18']} ${styles['buy-now-btn']}`} onClick={this.buyNow}>{PDP_PAGE.BUY_NOW}</button>
       </div>
     );
   }
@@ -72,7 +80,10 @@ const mapStateToProps = (store) => {
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
-    { addToCart: actionCreators.addToCart },
+    {
+      addToCartAndFetch: actionCreators.addToCartAndFetch,
+      resetAddtoCart: actionCreators.resetAddtoCart,
+    },
     dispatch,
   );
 }

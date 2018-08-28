@@ -1,14 +1,13 @@
-import React, { Component } from 'react';
-// import { Row, Col } from 'react-bootstrap';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-// import { languageDefinations } from '../../../utils/lang/';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators, selectors } from '../../../store/cam/userVault';
 
-import VaultHeader from './includes/VaultHeader';
+import MiniVault from './includes/MiniVault';
 import VaultBody from './includes/VaultBody';
+import VaultHeader from './includes/VaultHeader';
 import VaultAddNewCard from './includes/VaultAddNewCard';
 
 import { mergeCss } from '../../../utils/cssUtil';
@@ -37,7 +36,8 @@ class UserVault extends Component {
   }
 
   componentDidMount() {
-    this.props.getCardResults();
+    if (!this.props.miniVault)
+      this.props.getCardResults();
   }
 
   inputChange(e) {
@@ -50,6 +50,8 @@ class UserVault extends Component {
   }
 
   makeDefault(card_token) {
+    const { toggleMiniVault } = this.props;
+    if (toggleMiniVault) toggleMiniVault();
     this.props.makeCardDefault(card_token);
   }
 
@@ -88,28 +90,38 @@ class UserVault extends Component {
   }
 
   render() {
-    const { results } = this.props;
+    const { results, miniVault } = this.props;
     const { addNewCardBlock } = this.state;
     return (
-      <div className={`${styles['vault-container']} ${styles['box']} ${styles['ml-5']}`}>
-        <VaultHeader />
-        <VaultBody
-          data={results}
-          makeDefault={this.makeDefault}
-          deleteCard={this.deleteCard}
-          toggleAddCardBlock={this.toggleAddCardBlock}
-        />
+      <div className={`${styles['vault-container']}`}>
         {
-          addNewCardBlock ?
-            <VaultAddNewCard
-              checked={this.state.default}
-              inputChange={this.inputChange}
-              addBtnClickHandler={this.addBtnClickHandler}
-              setAsDefaultCard={this.setAsDefaultCard}
+          miniVault ?
+            <MiniVault
+              data={results}
+              makeDefault={this.makeDefault}
               toggleAddCardBlock={this.toggleAddCardBlock}
-            /> : null
+            />
+            :
+            <div className={`${styles['box']} ${styles['ml-5']}`}>
+              <VaultHeader />
+              <VaultBody
+                data={results}
+                makeDefault={this.makeDefault}
+                deleteCard={this.deleteCard}
+                toggleAddCardBlock={this.toggleAddCardBlock}
+              />
+              {
+                addNewCardBlock ?
+                  <VaultAddNewCard
+                    checked={this.state.default}
+                    inputChange={this.inputChange}
+                    addBtnClickHandler={this.addBtnClickHandler}
+                    setAsDefaultCard={this.setAsDefaultCard}
+                    toggleAddCardBlock={this.toggleAddCardBlock}
+                  /> : null
+              }
+            </div>
         }
-
       </div>
     )
   }

@@ -1,12 +1,13 @@
 import _ from 'lodash';
 
 const getProduct = (store, variantId) => {
-  const { product_details, variant_preferred_listings } = store.productReducer.data[0];
-  const computedVariantId = variantId || Object.keys(variant_preferred_listings || {})[0]
-  const listings = computedVariantId ? variant_preferred_listings[computedVariantId] : [];
+  const { product_details, variant_preferred_listings, tree } = store.productReducer.data[0];
+  const computedVariantId = variantId;
+  const listings = computedVariantId ? variant_preferred_listings[computedVariantId] : _.reduce(variant_preferred_listings, (acc, val, key) => {
+    return [...acc, ...val];
+  }, []);
   const catalogAttributeMap = product_details.catalog_details.attribute_map;
   const productAttributeMap = product_details.product_details_vo.cached_product_details.attribute_map
-
   let activeCount = 0, listingInventryCount = 0;
   let priceInfo = listings ? listings.filter((listing) => {
     if(listing.total_inventory_count <= 0 ) {
@@ -33,13 +34,14 @@ const getProduct = (store, variantId) => {
     price: priceInfo ? priceInfo.selling_price + ' ' + priceInfo.selling_price_currency : 'Price Not available',
     originalPrice: '',
     discountPercent: '',
+    listingId: priceInfo ? priceInfo.listing_id : 'No Listing',
     totalInventoryCount: priceInfo ? priceInfo.total_inventory_count : 0,
   };
-  const shippingInfo = priceInfo ? priceInfo.shipping : {}
   const returnInfo = {
     acceptsReturns: priceInfo ? priceInfo.accepts_returns : false,
     maxDaysToReturn: priceInfo ? priceInfo.max_days_to_return : 0
   }
+  const shippingInfo = priceInfo ? {...priceInfo.shipping, ...returnInfo} : {}
   const offerInfo = {
     price: priceInfo ? priceInfo.selling_price + ' ' + priceInfo.selling_price_currency : 'No listing',
     listingId: priceInfo ? priceInfo.listing_id : 'No Listing',
@@ -58,7 +60,9 @@ const getProduct = (store, variantId) => {
     offerInfo,
     shippingInfo,
     returnInfo,
-    catalog: _.groupBy(catalogAttributeMap, (attrMap) => attrMap.attribute_category_name)
+    breadcrums: tree.breadcrumb,
+    categoryType: tree.finance ? tree.finance[0].display_name_en : '',
+    catalog: _.groupBy(_.filter(catalogAttributeMap, (val) => val.visible), (attrMap) => attrMap.attribute_category_name)
   };
 };
 
@@ -135,12 +139,16 @@ const getPreview = (store) => {
     restricted: item.isRestricted,
   })) : [];
   const catalog = _.reduce(attributes, (acc, attrVal, attrKey) => {
-    const groupName = _.find(catalogData, { attributeName: attrKey }).attributeCategoryName;
-    acc[groupName] = acc[groupName] || [];
-    acc[groupName].push({
-      display_string: attrKey,
-      attribute_values: attrVal.attributeValues,
-    })
+    const cItem = _.find(catalogData, { attributeName: attrKey });
+    const groupName = cItem.attributeCategoryName;
+    const isVisible = cItem.isVisible;
+    if(isVisible) {
+      acc[groupName] = acc[groupName] || [];
+      acc[groupName].push({
+        display_string: attrKey,
+        attribute_values: attrVal.attributeValues,
+      });
+    }
     return acc;
   }, {});
 

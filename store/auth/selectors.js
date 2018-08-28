@@ -2,8 +2,12 @@ const getErrorMessege = (store) => {
   return store.authReducer.error;
 }
 
+const getLoginProgressStatus = (store) => {
+  return store.authReducer.ui.loginLoading;
+}
+
 const getCountry = (store) => {
-  store.authReducer.data.country
+  return store.authReducer.data.country
 }
 
 const getLoggedInStatus = (store) => {
@@ -22,4 +26,8 @@ const getAutoCompleteCityData = (store) => {
   return store.authReducer.data.autoCompleteCity;
 }
 
-export { getErrorMessege, getCountry, getLoggedInStatus, getUserCreds, getDeliveryCity, getAutoCompleteCityData };
+const getShowLogin = (store) => {
+  return store.authReducer.ui.showLogin;
+}
+
+export { getErrorMessege, getCountry, getLoggedInStatus, getUserCreds, getDeliveryCity, getAutoCompleteCityData, getLoginProgressStatus, getShowLogin };

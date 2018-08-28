@@ -1,79 +1,34 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import withRedux from 'next-redux-wrapper';
-import { configureUrlQuery } from 'react-url-query';
-import Cookies from 'universal-cookie';
-import createHistory from 'history/createBrowserHistory';
-import Base, { baseActions } from './base';
 import makeStore from '../store';
-import { actionCreators, selectors } from '../store/search';
-import { actionCreators as authActionsCreators, selectors as authSelectors } from '../store/auth';
-import Layout from '../layout/main';
-import Search from '../components/Search';
+import Layout from '../layout/main'
+import Landing from '../components/Landing';
+import Base, { baseActions } from './base';
 
-const cookies = new Cookies();
-
-class SearchPage extends Base {
-  static async getInitialProps({ store, isServer, query, req }) {
-    const { language, search, facets, category, subCategory, isListed } = query
-    const categoryTree = query.categoryTree === 'true'; //TODO need better way to identify category tree
-    //TODO SF-37 better handling of country
-    const state = store.getState();
-    // const country = authSelectors.getCountry(state);
-    const country = req ? req.universalCookies.get('country') : cookies.get('country');
-    const categoryFilter = {
-      id: subCategory ? subCategory.match(/(\d*)$/)[0] : category ? category.match(/(\d*)$/)[0] : null,
-    };
-    const facetFilters = selectors.getFacetfilters(store.getState())(JSON.parse(facets || '{}'));
-    const shippingData = req ? req.universalCookies.get('shippingInfo') : cookies.get('shippingInfo');;
-    const { city: shippingCity, country: shippingCountry } = shippingData || {};
-    const searchOptions = {
-      categoryFilter,
-      country: country || undefined,
-      pageSize: 100,
-      query: search,
-      language: language || 'en',
-      facetFilters,
-      pageNum: 1,
-      fl: '*',
-      isListed: isListed === 'true',
-      categoryTree,
-    };
-    if(shippingCity) {
-      searchOptions.shippingDetails = {
-        shippingCity: shippingCity.toUpperCase(),
-        shippingCountry: (country || 'uae').toUpperCase(),
-      }
-    }
-    await store.dispatch(actionCreators.getSearchResults(searchOptions))
-    return { isServer };
-  }
-
-  pageName = 'SEAERCH';
+class LandingPage extends Base {
+  pageName = 'LANDING';
 
   render() {
+    const { url } = this.props;
     return (
       <div>
         <Layout>
-          <Search query={this.props.url.query} />
+          <Landing query={url.query} />
         </Layout>
       </div>
-    );
+    )
   }
-}
-
-const mapStateToProps = state => ({
-  allState: state,
-});
+};
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       ...baseActions,
-      getSearchResults: actionCreators.getSearchResults,
-      // setSessionID: authActionsCreators.setSessionID,
     },
     dispatch,
   );
 
-export default withRedux(makeStore, mapStateToProps, mapDispatchToProps)(SearchPage);
+
+export default withRedux(makeStore, null, mapDispatchToProps)(LandingPage);

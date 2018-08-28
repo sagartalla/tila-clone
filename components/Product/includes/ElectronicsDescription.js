@@ -8,7 +8,7 @@ const styles = mergeCss('components/Product/product');
 const Description = ({ catalog }) => {
   return (
     <div className={`${styles['elt-description-main']} ${styles['pt-30']} ${styles['pb-30']}`}>
-      <h4><span className={`${styles['think-pink-bdr-rgt']} ${styles['pl-15']} ${styles['fontW600']} ${styles['fs-20']}`}>Screen size & Dimensions</span></h4>
+      <h4><span className={`${styles['thick-bdr-rgt']} ${styles['pl-15']} ${styles['fontW600']} ${styles['fs-20']}`}>Screen size & Dimensions</span></h4>
       <div className={styles['flex']}>
         <Col md={4}>
           <div>
@@ -34,12 +34,12 @@ const Description = ({ catalog }) => {
 
         </Col>
       </div>
-      <div className={`${styles['prod-description']} ${styles['pb-20']}`}>
-        <h4><span className={`${styles['think-pink-bdr-rgt']} ${styles['pl-15']} ${styles['fontW600']} ${styles['fs-20']}`}>Product Description</span></h4>
+      {/*<div className={`${styles['prod-description']} ${styles['pb-20']}`}>
+        <h4><span className={`${styles['thick-bdr-rgt']} ${styles['pl-15']} ${styles['fontW600']} ${styles['fs-20']}`}>Product Description</span></h4>
         <p className={styles['pl-15']}>Tailoring is part of the Stella McCartney DNA and for SS18 classics are twisted using vivid colours and contrasting volumes. Pair jackets with casual trousers and sporty shoes for a relaxed look. Tailoring is part of the Stella McCartney DNA and for SS18 classics are twisted using vivid colours and contrasting volumes. Pair jackets with casual trousers and sporty shoes for a relaxed look. </p>
-      </div>
+      </div>*/}
       <div className={styles['prod-specification']}>
-        <h4><span className={`${styles['think-pink-bdr-rgt']} ${styles['pl-15']} ${styles['fontW600']} ${styles['fs-20']}`}>Camera & Video</span></h4>
+        <h4><span className={`${styles['thick-bdr-rgt']} ${styles['pl-15']} ${styles['fontW600']} ${styles['fs-20']}`}>Camera & Video</span></h4>
         <div className={`${styles['flex']} ${styles['overview-inn']}`}>
           <Col md={4}>
             <h4 className={styles['fontW600']}>Dual Camera</h4>

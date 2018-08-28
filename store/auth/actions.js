@@ -1,4 +1,6 @@
 import api from './api';
+import loginReq from '../helper/loginReq';
+import refStore from '../refHandler';
 
 const actions = {
   USER_LOGIN: 'USER_LOGIN',
@@ -9,28 +11,42 @@ const actions = {
   SET_SESSION_ID: 'SET_SESSION_ID',
   DERIVE_CITY: 'DERIVE_CITY',
   SET_CITY: 'SET_CITY',
+  REMOVE_CITY: 'REMOVE_CITY',
   AUTOCOMPLETE_CITY: 'AUTOCOMPLETE_CITY',
   RESET_AUTOCOMPLETE_CITY: 'RESET_AUTOCOMPLETE_CITY',
+  RESET_LOGIN_ERROR: 'RESET_LOGIN_ERROR',
+  SHOW_LOGIN: 'SHOW_LOGIN',
+  RESET_SHOW_LOGIN: 'RESET_SHOW_LOGIN',
+  STORE_POST_LOGIN_ACTION_INFO: 'STORE_POST_LOGIN_ACTION_INFO',
+  DELETE_POST_LOGIN_ACTION_INFO: 'DELETE_POST_LOGIN_ACTION_INFO',
+  SET_LANGUAGE: 'SET_LANGUAGE',
 };
 
 const actionCreators = {
-  userLogin: (params) => {
-    return ({
+  userLogin: (params) => (dispatch, getState) => {
+    return dispatch({
       type: actions.USER_LOGIN,
       payload: api.userLogin(params)
+    }).then(() => {
+      if(typeof refStore.postLoginRef === 'function') {
+        refStore.postLoginRef(dispatch, getState)
+      } else {
+        dispatch(refStore.postLoginRef);
+        dispatch(actions.DELETE_POST_LOGIN_ACTION_INFO);
+      }
     });
   },
   userRegister: (params) => (dispatch, getState) => {
     return dispatch({
       type: actions.USER_REGISTER,
       payload: api.userRegister(params).then((res) => {
-        const { email, password } = params;
         if (res.status === 200) {
-          const { email, password } = params;
+          const { email, password, rememberMe } = params;
           dispatch(
             actionCreators.userLogin({
               username: email,
               password,
+              rememberMe,
             })
           );
           return res;
@@ -76,6 +92,12 @@ const actionCreators = {
       payload: api.setCity(params),
     }
   },
+  removeCity: () => {
+    return {
+      type: actions.REMOVE_CITY,
+      payload: api.removeCity(),
+    }
+  },
   autoCompleteCity: (params) => {
     return {
       type: actions.AUTOCOMPLETE_CITY,
@@ -86,7 +108,35 @@ const actionCreators = {
     return {
       type: actions.RESET_AUTOCOMPLETE_CITY,
     }
-  }
+  },
+  resetLoginError: () => {
+    return {
+      type: actions.RESET_LOGIN_ERROR,
+    }
+  },
+  showLogin: () => {
+    return {
+      type: actions.SHOW_LOGIN
+    }
+  },
+  storePostLoginActionInfo: (ret) => {
+    return {
+      type: actions.STORE_POST_LOGIN_ACTION_INFO,
+      payload: {
+        ref: ret
+      }
+    }
+  },
+  deletePostLoginActionInfo: () => ({
+    type: actions.DELETE_POST_LOGIN_ACTION_INFO
+  }),
+  resetShowLogin: () => ({
+    type: actions.RESET_SHOW_LOGIN
+  }),
+  setLanguage: (language) => ({
+    type: actions.SET_LANGUAGE,
+    payload: api.setLanguage(language),
+  })
 };
 
 export { actions, actionCreators };

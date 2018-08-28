@@ -6,10 +6,11 @@ import { bindActionCreators } from 'redux';
 
 import { selectors, actionCreators } from '../../../../store/order';
 import constants from '../../../../constants'
+import {languageDefinations} from '../../../../utils/lang'
 
 import { mergeCss } from '../../../../utils/cssUtil';
 const styles = mergeCss('components/Order/includes/OrderIssueWidget/orderIssue');
-
+const {ORDER_PAGE} = languageDefinations()
 const List = ({ orderIssue, goToNextStep, setSelectedItem }) => {
   const { items } = orderIssue
 
@@ -21,14 +22,15 @@ const List = ({ orderIssue, goToNextStep, setSelectedItem }) => {
 
   return (
     <div>
+      <div className={styles['widget-body']}>
       {
         items.map((item) => {
           return (
-            <div key={item.id} className={`${styles['item-cont']} ${styles['flx-spacebw-alignc']} ${styles['p-20']}`}>
+            <div key={item.id} className={`${styles['item-cont']} ${styles['flex-center']} ${styles['p-20']}`}>
               <div className={styles['radio-cont']}>
-                <input name="orderissueitem" onChange={selectItem} type='radio' value={item.id}  />
+                <input type="radio" className={styles['radio-btn']} name="orderissueitem" onChange={selectItem} value={item.id}/>
               </div>
-              <div className={styles['img-cont']}>
+              <div className={`${styles['img-cont']} ${styles['flex-center']} ${styles['justify-center']}`}>
                 <img src={`${constants.mediaDomain}/${item.img}`} />
               </div>
               <div className={styles['title-cont']}>
@@ -38,8 +40,9 @@ const List = ({ orderIssue, goToNextStep, setSelectedItem }) => {
           );
         })
       }
-      <div className={`${styles['widget-footer']} ${styles['box']} ${styles['pt-24']}`}>
-        <button onClick={goToNextStep} className={`${styles['m-0-auto']} ${styles['fs-16']}`} disabled={!orderIssue.selectedItem}>Continue</button>
+      </div>
+      <div className={`${styles['widget-footer']} ${styles['box']} ${styles['flex-center']} ${styles['justify-center']}`}>
+        <button onClick={goToNextStep} className={`${styles['fp-btn']} ${styles['fp-btn-primary']}`} disabled={!orderIssue.selectedItem}>{ORDER_PAGE.CONTINUE}</button>
       </div>
     </div>
   );

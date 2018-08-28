@@ -12,7 +12,7 @@ import { languageDefinations } from '../../utils/lang';
 
 import { mergeCss } from '../../utils/cssUtil';
 const styles = mergeCss('components/RatingReviews/ratingReviews');
-const { PDP } = languageDefinations();
+const { PDP_PAGE } = languageDefinations();
 
 class List extends Component {
   constructor(props) {
@@ -48,7 +48,7 @@ class List extends Component {
     return (
       isLoading
       ?
-      PDP.LOADING_REVIEWS
+      PDP_PAGE.LOADING_REVIEWS
       :
       <div className={styles['rating-review-cont']}>
         <div className={styles['header-bar']}>
@@ -59,11 +59,11 @@ class List extends Component {
           </div>
           <div className={styles['float-r']}>
             <div className={styles['p-10']}>
-              <label for="rating-filter" >{PDP.FILTER_BY}</label>
+              <label for="rating-filter" >{PDP_PAGE.FILTER_BY}</label>
               <select id="rating-filter" onChange={this.selectRating}>
-                <option>{PDP.ALL_STARTS}</option>
+                <option>{PDP_PAGE.ALL_STARTS}</option>
                 {
-                  [1, 2, 3, 4, 5].map((n) => <option value={n}> {n} PDP.STAR</option>)
+                  [1, 2, 3, 4, 5].map((n) => <option value={n}> {n} PDP_PAGE.STAR</option>)
                 }
               </select>
             </div>
@@ -74,7 +74,7 @@ class List extends Component {
             {
               userReviews.length
               ?
-              PDP.NO_REVIEWS
+              PDP_PAGE.NO_REVIEWS
               :
               userReviews.map((userReview) => {
                 return (
@@ -85,7 +85,7 @@ class List extends Component {
                       {
                         userReview.certifiedBuyer
                         ?
-                        <div>PDP.CERTIFIED_BUYER</div>
+                        <div>PDP_PAGE.CERTIFIED_BUYER</div>
                         :
                         null
                       }
@@ -95,8 +95,8 @@ class List extends Component {
                       <div>{userReview.comment}</div>
                     </Col>
                     <Col md={2}>
-                      <div>{userReview.likes} PDP.LIKE</div>
-                      <div>{userReview.dislikes} PDP.DISLIKE</div>
+                      <div>{userReview.likes} PDP_PAGE.LIKE</div>
+                      <div>{userReview.dislikes} PDP_PAGE.DISLIKE</div>
                     </Col>
                   </Row>
                 )

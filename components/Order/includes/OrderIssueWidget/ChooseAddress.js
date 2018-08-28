@@ -6,9 +6,10 @@ import _ from 'lodash';
 
 import { selectors, actionCreators } from '../../../../store/order';
 import { selectors as addressSelectors, actionCreators as addressActionCreators } from '../../../../store/cam/address';
-
+import {languageDefinations} from '../../../../utils/lang'
 import { mergeCss } from '../../../../utils/cssUtil';
 const styles = mergeCss('components/Order/includes/OrderIssueWidget/orderIssue');
+const {ORDER_PAGE} = languageDefinations()
 class ChooseAddress extends Component {
   constructor(props){
     super(props)
@@ -49,7 +50,7 @@ class ChooseAddress extends Component {
     const { choosenAddress } = this.state;
     return (
       <div>
-      <div>Please Choose Address for Pick Up</div>
+      <div>{ORDER_PAGE.ADDRESS_PICKUP}</div>
       {
         addresses.map((address) => (
           <div key={address.id} className={styles['generic-radio']}>
@@ -65,7 +66,7 @@ class ChooseAddress extends Component {
         ))
       }
       <div className={`${styles['widget-footer']} ${styles['box']} ${styles['pt-25']}`}>
-        <button onClick={this.saveAndgoToNextStep} className={`${styles['m-0-auto']} ${styles['fs-16']}`} >Continue</button>
+        <button onClick={this.saveAndgoToNextStep} className={`${styles['m-0-auto']} ${styles['fs-16']}`} >{ORDER_PAGE.CONTINUE}</button>
       </div>
       </div>
     );

@@ -15,6 +15,7 @@ import UserVault from './UserVault';
 import Messages from './Messages';
 import FooterBar from '../Footer/index';
 import { mergeCss } from '../../utils/cssUtil';
+import AuthWrapper from '../common/AuthWrapper';
 const styles = mergeCss('components/Cam/cam');
 
 class Cam extends React.Component {
@@ -26,7 +27,7 @@ class Cam extends React.Component {
   }
 
   render() {
-    const {tabDetails} = this.props;
+    const {tabDetails, query} = this.props;
     const [tab, ...queryParams] = tabDetails ? tabDetails.split('/') : [];
     const camComponent = ((tabName) => {
       switch (tabName) {
@@ -52,16 +53,18 @@ class Cam extends React.Component {
       <div>
         <div className={styles['bg-color']}>
           <HeaderBar />
-          <Grid>
-            <Row className={styles['pt-30']}>
-              <Col xs={12} md={3} className={styles['pr-0']}>
-                <Sidebar />
-              </Col>
-              <Col xs={12} md={9}>
-                {camComponent}
-              </Col>
-            </Row>
-          </Grid>
+          <AuthWrapper>
+            <Grid>
+              <Row className={styles['pt-30']}>
+                <Col xs={12} md={3} className={styles['pr-0']}>
+                  <Sidebar query={query} />
+                </Col>
+                <Col xs={12} md={9}>
+                  {camComponent}
+                </Col>
+              </Row>
+            </Grid>
+          </AuthWrapper>
           <FooterBar />
         </div>
       </div>

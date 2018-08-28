@@ -1,27 +1,74 @@
 import shortid from 'shortid';
 import _ from 'lodash';
 
+const addCartAndWishlistDetails = (store, results) => {
+  const { items=[] } =  store.cartReducer.data;
+  const { data=[] } = store.wishlistReducer;
+
+  if(items === null){
+    return results;
+  }
+  // if(items && items.length){
+  //   return results;
+  // }
+  // if(data && data.length) {
+  //   return resutls;
+  // }
+  const cartListingIds = items.map((i) =>  i.listing_id) || [];
+  const wishListProductIds = store.wishlistReducer.data.map((w) => w.product_id) || [];
+  return {
+    ...results,
+    items: results.items.map((i) => {
+      const { listingId } = i.variants;
+      return ({
+        ...i,
+        addedToCart: listingId ? cartListingIds.indexOf(i.variants.listingId[0]) !== -1 : false,
+        addedToWishlist: wishListProductIds.indexOf(i.productId) !== -1,
+      });
+    }),
+  };
+};
+
 const getSearchFilters = (store) => {
   const filters = {
     category: [],
     facets: [],
   };
-  if (store.searchReducer.data.categoryFilter) {
-    const categoryFilter = store
-      .searchReducer
-      .data
-      .categoryFilter
-      .parentCategories
-      .reduce((filters, item) => {
-        return filters.concat({
-            ...item,
-            children: item.childCategories,
-          })
-      }, []);
+  const categoryFilter = store.searchReducer.data.categoryFilter;
+  if (categoryFilter) {
+    const { nodes } = categoryFilter;
     filters.category = [{
       name: 'Category',
       id: 'category',
-      children: categoryFilter,
+      children: _.reduce(nodes, (acc, value, key) => {
+        return [
+          ...acc,
+          {
+            canonicalId: _.kebabCase(key),
+            children: _.reduce(value.child, (acc, value, key) => {
+              return [
+                ...acc,
+                {
+                  canonicalId: _.kebabCase(key),
+                  id: value.id,
+                  name: key,
+                  children: _.reduce(value.child, (acc, value, key) => {
+                    return [
+                      ...acc,
+                      {
+                        canonicalId: _.kebabCase(key),
+                        id: value.id,
+                        name: key,
+                      }
+                    ];
+                  }, []),
+                }];
+              }, []),
+            id: value.id,
+            name: key,
+          }
+        ];
+      }, []),
     }];
   }
   if (store.searchReducer.data.facetResponse){
@@ -69,31 +116,38 @@ const getSearchResutls = (store) => {
           modifiedVaraintsCopy[key] = modifiedVaraintsCopy[key].concat(val);
         });
         return modifiedVaraintsCopy;
-      }, {});
+    }, {});
       const priceInfo = product.variantListingAdapters.map((vla) => vla.attributes.sellingPrice);
       const offers = product.variantListingAdapters.map((vla) => vla.attributes.discount);
+      let currency = product.variantListingAdapters || '';
+      currency = currency[0] || '';
+      currency = currency.attributes || '';
+      currency = currency.currency || ''
       let priceRange = '';
       if (priceInfo.length > 2) {
         priceRange = [Math.min.apply(null, priceInfo), Math.max.apply(null, priceInfo)].join(' - ');
       }else if (priceInfo.length > 1) {
         priceRange = priceInfo.sort().join(' - ')
       } else {
-        priceRange = priceInfo[0] || 'No price info';
+        priceRange = priceInfo[0] || '';
       }
+      const brand = product.attributes.brand;
       return {
         id: product.id,
         media: product.attributes.media_unrestricted_images,
         productId: product.attributes.productId,
         catalogId: product.attributes.catalogId,
         itemtype: product.attributes.itemType,
-        displayName: product.attributes.calculated_display_name,
+        displayName: product.attributes.calculated_display_name.join(','),
+        brand: brand ? brand[0] : '',
         variants: variantInfo,
         priceRange,
-        offers: offers,
+        currency,
+        offers: Math.max.apply(null, offers),
       };
     });
   }
-  return resutls;
+  return addCartAndWishlistDetails(store, resutls);
 }
 
 const getPaginationDetails = (store) => {
@@ -107,14 +161,16 @@ const getUIState = (store) => {
   return store.searchReducer.ui;
 }
 
-const getCategoryId = (state, query) => {
+const getCategoryId = (store) => {
+  // DO NOT remove
   //not used for now. May be required when we have a different service for facets.
-  const category = _.find(state.searchReducer.data.categoryFilter.parentCategories, { canonicalId: query.category })
-  if (query.subCategory){
-    const subCategory = _.find(category.childCategories, {canonicalId: query.subCategory})
-    return subCategory.id;
-  }
-  return category.id;
+  // const category = _.find(state.searchReducer.data.categoryFilter.parentCategories, { canonicalId: query.category })
+  // if (query.subCategory){
+  //   const subCategory = _.find(category.childCategories, {canonicalId: query.subCategory})
+  //   return subCategory.id;
+  // }
+  // return category.id;
+  return store.searchReducer.data.searchDetails.categoryFilter.id;
 }
 
 const getQuery = (store) => {
@@ -139,8 +195,30 @@ const getFacetfilters = (store) => (queryObject) => {
     });
     return facetFilters;
   }, {});
-  return facetFilters;
+  const facetFiltersCopyWithNames = _.reduce(queryObject, (facetFilters, fitlerTypeValues, fitlerTypeKey) => {
+    facetFilters[fitlerTypeKey] = fitlerTypeValues;
+    return facetFilters;
+  }, {});
+  return {facetFilters, facetFiltersCopyWithNames};
 }
 
+const getSearchBarFilterState = (state) => {
+  return state.searchReducer.ui.showFilters;
+}
 
-export { getSearchFilters, getSearchResutls, getPaginationDetails, getUIState, getCategoryId, getQuery, getFacetfilters, optionParams };
+const getIsCategoryTree = (store) => {
+  return store.searchReducer.data.searchDetails.categoryTree;
+}
+
+const getChoosenCategoryName = (store) => {
+  return store.searchReducer.data.searchDetails.choosenCategoryName;
+}
+
+const getAppliedFitlers = (store) => {
+  const { facetFiltersCopyWithNames={} } =  store.searchReducer.data.searchDetails;
+  return _.reduce(facetFiltersCopyWithNames, (acc, ff, parentKey) => {
+    return [...acc, ...ff.map((f) => ({ displayName: f.name, parentKey, key: f.param, }))];
+  }, []);
+}
+
+export { getSearchFilters, getSearchResutls, getPaginationDetails, getUIState, getCategoryId, getQuery, getFacetfilters, optionParams, getSearchBarFilterState, addCartAndWishlistDetails, getIsCategoryTree, getChoosenCategoryName, getAppliedFitlers };

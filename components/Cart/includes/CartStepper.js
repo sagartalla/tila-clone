@@ -6,7 +6,7 @@ import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Cart/cart');
 
 const CartStepper = props => {
-  const { item, decreaseItemCnt, increaseItemCnt } = props;
+  const { item, decreaseItemCnt, increaseItemCnt, cartStepperInputHandler, count } = props;
   const { item_id, quantity, max_limit, inventory } = item;
   const { CART_PAGE } = languageDefinations();
 
@@ -20,7 +20,8 @@ const CartStepper = props => {
                 <span className={`${styles['minus-disable']} ${styles['fs-20']} ${styles['flex-center']} ${styles['justify-center']}`}> - </span>
                 : <span data-id={item_id} onClick={decreaseItemCnt} className={`${styles['minus']} ${styles['fs-20']} ${styles['flex-center']} ${styles['justify-center']} ${styles['pointer']}`}> - </span>
             }
-            <span className={`${styles['quantity-title']} ${styles['border-radius2']}`}>{quantity}</span>
+            {/* <span className={`${styles['quantity-title']} ${styles['border-radius2']}`}>{quantity}</span> */}
+            <input type="text" data-id={item_id} className={`${styles['quantity-title']} ${styles['border-radius2']} ${styles['text-center']}`} value={count || quantity} onChange={cartStepperInputHandler} />
             {
               max_limit == quantity ?
                 <span className={`${styles['minus-disable']} ${styles['fs-20']} ${styles['flex-center']} ${styles['justify-center']}`}> + </span>

@@ -28,11 +28,20 @@ apiRoutes
         req.universalCookies.remove('auth');
         isLoggedIn = false;
       }
+      res.status(status);
       res.json({
         data: {
           isLoggedIn,
         }
       });
+    }).catch(({response}) => {
+      res.status(response.status)
+      res.json({
+        data: {
+          isLoggedIn: false
+        }
+      })
+
     });
   })
   .post('/refresh', (req, res) => {
@@ -67,10 +76,10 @@ apiRoutes
     });
     return res.json({});
   })
-  .post('/deleteCookie', () => {
-    const params = req.body;
-    params.forEach((key) => {
-      req.universalCookies.remove('key');
+  .post('/deleteCookie', (req, res) => {
+    const { keys } = req.body;
+    keys.forEach((key) => {
+      req.universalCookies.remove(key);
     });
     res.json({});
   })

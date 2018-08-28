@@ -3,11 +3,11 @@
 * { box-sizing:border-box; }
 
 html
-  font-size base-font-size
+  font-size 14px
   font-family ProximaNova
 
 body
-  font-size base-font-size
+  font-size 1rem
   font-family ProximaNova
   background light-gray-color
   color black
@@ -29,7 +29,7 @@ ul li
   // display inline-block
 
 a
-  cursor pointer 
+  cursor pointer
   color navy-blue
 
 a:hover
@@ -40,7 +40,7 @@ h1
   font-size font-size-32
 h2
   font-size font-size-30
-h3 
+h3
   font-size font-size-24
 
 input[type=text],input[type=password], input[type=email]
@@ -55,9 +55,9 @@ input[type=text],input[type=password], input[type=email]
 
 /* font sizes */
 // it will generate fonts from fs-10, fs-12, fs-14, ...., to fs-40.
-for i in range(10px, 40px, 2)
+for i in range(10px, 46px, 2)
   .fs-{i}
-    font-size (i/base-px)rem 
+    font-size (i/base-px)rem
 
 /* Paddings and Margins*/
 // it will generate margin from m-5, m-10, m-15, ...., to m-40.
@@ -72,36 +72,36 @@ mrgpad(types=margin padding margin-left margin-right margin-top margin-bottom  p
   margin-right unit(n/base-px, rem) if margin-right in types
   margin-top unit(n/base-px, rem) if margin-top in types
   margin-bottom unit(n/base-px, rem) if margin-bottom in types
-  
+
 for x in range(0px, 40px, 5)
-  .m-{x} 
+  .m-{x}
     mrgpad(margin, x)
 
-  .ml-{x} 
+  .ml-{x}
     mrgpad(margin-left, x)
 
-  .mr-{x} 
+  .mr-{x}
     mrgpad(margin-right, x)
 
-  .mt-{x} 
+  .mt-{x}
     mrgpad(margin-top, x)
 
-  .mb-{x} 
+  .mb-{x}
     mrgpad(margin-bottom, x)
 
-  .p-{x} 
+  .p-{x}
     mrgpad(padding, x)
 
-  .pl-{x} 
+  .pl-{x}
     mrgpad(padding-left, x)
 
-  .pr-{x} 
+  .pr-{x}
     mrgpad(padding-right, x)
 
-  .pt-{x} 
+  .pt-{x}
     mrgpad(padding-top, x)
 
-  .pb-{x} 
+  .pb-{x}
     mrgpad(padding-bottom, x)
 
 .p-10-20
@@ -128,22 +128,25 @@ for x in range(0px, 40px, 5)
 //height
 .ht-100
   height 100px
-  
+
 .ht-auto
-  height auto 
+  height auto
 
 .ht-170
-  height 170px 
+  height 170px
 
 .ht-290
   height 290px
 
-.main-layout 
+.ht-100per
+  height 100%
+
+.main-layout
   min-height 100vh
   height 100px
 
 .t-rt
-  text-align right 
+  text-align right
 .t-lt
   text-align left
 .t-c
@@ -207,14 +210,17 @@ for x in range(0px, 40px, 5)
 
 .twitter-clr
   color twitter-color
-  
+
 .thck-gry-rt-border
   border-right 1px solid thck-gry-clr
 
 //font-weight
 .fontW300
   font-family ProximaNova-Light
-  
+
+.fontW700
+  font-weight 700
+
 .fontW600
   font-family ProximaNova-Bold
 
@@ -232,6 +238,9 @@ for x in range(0px, 40px, 5)
   width 21%
 
 //border
+.border
+  border 1px solid border-light-gray
+
 .border-t
   border-top 1px solid border-light-gray
 
@@ -250,7 +259,7 @@ for x in range(0px, 40px, 5)
 .thick-border-left
   border-left 1px solid thck-gry-clr
 
-.think-pink-bdr-rgt
+.thick-bdr-rgt
   border-left 4px solid border-pink
 
 .thin-border-right
@@ -261,7 +270,7 @@ for x in range(0px, 40px, 5)
 
 .bb-dashed
   border-bottom 1px dashed generic-gray-color
-  
+
 .bg-mauve
   background mauve-light
 
@@ -273,6 +282,9 @@ for x in range(0px, 40px, 5)
 
 .facebook-blue-lt-color
   border-left 1px solid facebook-color
+
+.bdr-btm-green-color
+  border-bottom 3px solid elct-green-color
 
 //list style
 .no-lst
@@ -324,3 +336,18 @@ for x in range(0px, 40px, 5)
 
 .absolute
   position absolute
+
+.fixed
+  position fixed
+
+.electronics
+  .thick-bdr-rgt
+    border-color electronics-color
+
+.fashion
+  .thick-bdr-rgt
+    border-color fashion-color
+
+.lifestyle
+  .thick-bdr-rgt
+    border-color lifestyle-color

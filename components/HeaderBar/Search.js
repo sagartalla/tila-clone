@@ -18,8 +18,9 @@ class Search extends Component {
 
   constructor(props) {
     super(props);
+    const { query, isCategoryTree, choosenCategoryName } = props;
     this.state = {
-      query: props.query || ''
+      query: query ? query : isCategoryTree ? choosenCategoryName : ''
     };
     this.submitQuery = this.submitQuery.bind(this);
     this.onChangeSearchInput = this.onChangeSearchInput.bind(this);
@@ -28,12 +29,22 @@ class Search extends Component {
   submitQuery(e) {
     e.preventDefault();
     const flushFilters = true;
-    Router.pushRoute(`/?search=${this.state.query}&${Object.entries(this.props.optionalParams).map(([key, val]) => `${key}=${val}`).join('&')}`);
+    Router.pushRoute(`/srp?search=${this.state.query}&${Object.entries(this.props.optionalParams).map(([key, val]) => `${key}=${val}`).join('&')}`);
   }
 
   onChangeSearchInput(e) {
     this.setState({
-      query: e.target.value
+      query: e.target.value,
+      searchInput: true
+    });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { isCategoryTree, choosenCategoryName } = nextProps;
+    const { query, searchInput } = this.state;
+    this.setState({
+      query: searchInput ? query : isCategoryTree ? choosenCategoryName : query,
+      searchInput: false
     });
   }
 
@@ -47,7 +58,7 @@ class Search extends Component {
             onChange={this.onChangeSearchInput}
             value={this.state.query}
            />
-          <button type="submit" className={styles['search-btn']}><SVGComponent clsName={`${styles['searching-icon']}`} src="icons/search/search-icon" /></button>
+          <button type="submit" className={styles['search-btn']}><SVGComponent clsName={`${styles['searching-icon']}`} src="icons/search/search-white-icon" /></button>
         </form>
       </div>
     )
@@ -60,9 +71,11 @@ Search.propTypes = {
   onChangeSearchText: PropTypes.func,
 }
 
-  
+
 const mapStateToProps = (store) => ({
     query: selectors.getQuery(store),
+    isCategoryTree: selectors.getIsCategoryTree(store),
+    choosenCategoryName: selectors.getChoosenCategoryName(store),
     optionalParams: selectors.optionParams(store)
 });
 

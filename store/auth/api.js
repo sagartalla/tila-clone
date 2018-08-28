@@ -70,4 +70,18 @@ const setCity = (params) => {
   }).then(() => params);
 }
 
-export default { userLogin, userRegister, userLogout, getLoginInfo, setCountry, setSessionID, deriveCity, autoCompleteCity, setCity };
+const setLanguage = (language) => {
+  return axios.post('/api/setCookie', {
+    data: {
+      language,
+    }
+  }).then(() => language);
+}
+
+const removeCity = () => {
+  return axios.post('/api/deleteCookie', {
+    keys: ['shippingInfo']
+  });
+}
+
+export default { userLogin, userRegister, userLogout, getLoginInfo, setCountry, setSessionID, deriveCity, autoCompleteCity, setCity, removeCity, setLanguage };

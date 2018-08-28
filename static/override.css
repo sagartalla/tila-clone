@@ -1,12 +1,27 @@
-@media (min-width: 1200px){
+/* @media (min-width: 1350px){
     .container {
-    width: 1440px;
+        width: 1320px;
     }
+} */
+
+@media (min-width: 1440px){
+    .container {
+        width: 1410px;
+    }
+}
+
+.slick-list, .slick-track {
+    height: 100%;
+}
+
+.slick-slide div {
+  height: 100%;
 }
 
 .slick-slider.sub-slider .slick-slide {
     width: 70px !important;
 }
+
 
 .progress {
     display: flex;
@@ -24,19 +39,49 @@
     background-color: #E40A80;
 }
 
+.nav-tabs>li.active {
+    border-bottom: 4px solid #e40a80;
+}
+
+.lifestyle .progress .progress-bar-danger {
+    background-color: #f26b6b;
+}
+
+.lifestyle .nav-tabs>li.active {
+    border-color: #f26b6b;
+}
+
+.electronics .nav-tabs>li.active {
+    border-color: #2ac497;
+}
+
+.electronics .progress .progress-bar-danger {
+    background-color: #2ac497;
+}
+
+.fashion .nav-tabs>li.active {
+    border-color: #939393;
+}
+
+.fashion .progress .progress-bar-danger {
+    background-color: #939393;
+}
+
 .nav-tabs {
     background: rgba(216, 216, 216, 0.1);
     border: 0;
 }
 
-.nav-tabs>li.active {
-    border-bottom: 4px solid #e40a80;
+.panel-default>.panel-heading {
+    background-color: #FFF;
+    border-color: #FFF;
 }
 
 .nav-tabs>li a {
     font-size: 16px;
     color: #666;
 }
+
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
     color: #000;
     border: 0;
@@ -74,6 +119,61 @@
     border-top: 0;
 }
 
+.panel-body {
+    padding: 0
+}
+
+
 .panel-group {
     margin-bottom: 0;
+}
+
+#profile-login .caret, #country-dd .caret , #cart-toggle .caret {
+    margin-left: 10px;
+}
+
+#profile-login, #cart-toggle {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    border: 0;
+    /* background: transparent; */
+}
+
+#cart-toggle {
+    padding: 0 20px;
+    border-right: 1px solid #e5e5e5;
+    border-radius: 0;
+}
+
+#cart-toggle .caret {
+    display: none;
+}
+
+.btn-default.active.focus, .btn-default.active:focus, .btn-default.active:hover, .btn-default:active.focus, .btn-default:active:focus, .btn-default:active:hover, .open>.dropdown-toggle.btn-default.focus, .open>.dropdown-toggle.btn-default:focus, .open>.dropdown-toggle.btn-default:hover {
+    background-color: transparent;
+    box-shadow: none;
+}
+
+.btn-default:hover{
+    background-color: transparent;
+}
+
+.btn-default.active, .btn-default:active, .open>.dropdown-toggle.btn-default {
+    background-color: transparent;
+    box-shadow: none;
+}
+
+.slick-prev:before {
+    content: '';
+    background: url(/static/img/icons/common-icon/long-Left-arrow.svg) no-repeat;
+    background-size: contain;
+    color: transparent !important;
+}
+
+.slick-next:before {
+    content: '';
+    background: url(/static/img/icons/common-icon/long-right-arrow.svg) no-repeat;
+    background-size: contain;
+    color: transparent !important;
 }

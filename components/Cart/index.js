@@ -21,7 +21,8 @@ class Cart extends Component {
     super(props);
 
     this.state = {
-      showBlocker: false
+      showBlocker: false,
+      count: ''
     }
 
     this.addToWishlist = this.addToWishlist.bind(this);
@@ -30,6 +31,7 @@ class Cart extends Component {
     this.decreaseItemCnt = this.decreaseItemCnt.bind(this);
     this.addOrRemoveGift = this.addOrRemoveGift.bind(this);
     this.checkoutBtnHandler = this.checkoutBtnHandler.bind(this);
+    this.cartStepperInputHandler = this.cartStepperInputHandler.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -39,12 +41,28 @@ class Cart extends Component {
   }
 
   componentDidMount() {
-    if (!this.props.paymentPageInclude)
+    if (!this.props.showMiniCart)
       this.props.getCartResults();
   }
 
+  cartStepperInputHandler(e) {
+    const { cartData } = this.props;
+    const id = e.target.getAttribute('data-id');
+    const count = e.target.value
+    const selelecItem = cartData.items.filter(item => item.item_id == id)[0];
+
+    this.setState({ count: selelecItem.max_limit < count ? selelecItem.max_limit : count })
+    this.props.cartItemInputCount(id, 'add', selelecItem.max_limit < count ? selelecItem.max_limit : count);
+  }
+
   checkoutBtnHandler() {
-    Router.pushRoute('/payment');
+    const { cartData } = this.props;
+    const newRes = cartData.items.filter(data => data.inventory == 0);
+
+    if (newRes.length) {
+      alert('There is some issue with cart items.');
+    } else
+      Router.pushRoute('/payment');
   }
 
   removeCartItem(e) {
@@ -64,12 +82,11 @@ class Cart extends Component {
     this.props.cartItemCount(id, typ);
   }
 
-  //TODO after add to cart, discuss with backend team whether to call cart item or not.
   addToWishlist(e) {
     const { cartData } = this.props;
     const listing_id = e.currentTarget.getAttribute('data-id');
     const item = cartData.items.filter(_item => listing_id == _item.item_id)[0];
-    this.props.addToWishlist({
+    this.props.addToWishlistAndFetch({
       "catalog_id": item.item_id,
       "product_id": item.product_id,
       "variant_id": item.variant_id
@@ -82,21 +99,23 @@ class Cart extends Component {
   }
 
   render() {
-    const { showBlocker } = this.state;
-    const { cartData, editCartDetails } = this.props;
+    const { showBlocker, count } = this.state;
+    const { cartData, editCartDetails, showCheckOutBtn } = this.props;
     return (
       <div>
         {
-          this.props.paymentPageInclude
+          this.props.showMiniCart
             ?
             <div>
               <MiniCartBody
                 data={cartData}
                 showBlocker={showBlocker}
                 editCartDetails={editCartDetails}
+                showCheckOutBtn={showCheckOutBtn}
                 removeCartItem={this.removeCartItem}
                 increaseItemCnt={this.increaseItemCnt}
                 decreaseItemCnt={this.decreaseItemCnt}
+                checkoutBtnHandler={this.checkoutBtnHandler}
               />
             </div>
             :
@@ -104,6 +123,7 @@ class Cart extends Component {
               <HeaderBar />
               <Grid>
                 <CartBody
+                  count={count}
                   data={cartData}
                   showBlocker={showBlocker}
                   addToWishlist={this.addToWishlist}
@@ -112,6 +132,7 @@ class Cart extends Component {
                   decreaseItemCnt={this.decreaseItemCnt}
                   addOrRemoveGift={this.addOrRemoveGift}
                   checkoutBtnHandler={this.checkoutBtnHandler}
+                  cartStepperInputHandler={this.cartStepperInputHandler}
                 />
               </Grid>
               <FooterBar />
@@ -133,7 +154,8 @@ const mapDispatchToProps = (dispatch) =>
       removeCartItem: actionCreators.removeCartItem,
       cartItemCount: actionCreators.cartItemCount,
       addOrRemoveGift: actionCreators.addOrRemoveGift,
-      addToWishlist: wishlistActionCreators.addToWishlist,
+      cartItemInputCount: actionCreators.cartItemInputCount,
+      addToWishlistAndFetch: wishlistActionCreators.addToWishlistAndFetch,
     },
     dispatch,
   );

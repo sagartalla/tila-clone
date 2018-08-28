@@ -11,7 +11,7 @@ const Catalog = ({ catalog }) => {
     <div>
       {
         _.map(catalog, (group, groupName) => <div key={groupName} className={`${styles['c-group-countainer']}`}>
-          <h4 className={`${styles['c-grp-title']}`}><span className={`${styles['think-pink-bdr-rgt']} ${styles['pl-15']} ${styles['fontW600']} ${styles['fs-20']}`}>{groupName}</span></h4>
+          <h4 className={`${styles['c-grp-title']}`}><span className={`${styles['thick-bdr-rgt']} ${styles['pl-15']} ${styles['fontW600']} ${styles['fs-20']}`}>{groupName}</span></h4>
           <div className={`${styles['c-grp-details']} ${styles['pt-5']} ${styles['pb-10']} ${styles['lne-ht2']} ${styles['pl-20']}`}>
             {
               group.map((attributes) => {
