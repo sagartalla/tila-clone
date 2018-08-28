@@ -20,7 +20,7 @@ const configModifer = (config) => {
       acc[key] = value;
     }
     return acc;
-  }, {}, { "x-country-code": country(), "x-session-id": sessionId(), "x-access-token": authToken(), "x-language": 'ar', ...tempHeaders });
+  }, {}, { "x-country-code": country(), "x-session-id": sessionId(), "x-access-token": authToken(), "x-language": cookies.get('language'), ...tempHeaders });
   return {
     ...config,
     headers: {
