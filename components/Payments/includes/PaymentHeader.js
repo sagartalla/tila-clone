@@ -12,7 +12,7 @@ const PaymentHeader = props => (
       <Row>
         <Col md={8}>
           <div className={`${styles['flex-center']} ${styles['logos-part']}`}>
-            <a href="/" className={styles['flex']}><SVGComponent clsName={`${styles['default-logo']}`} src="icons/logos/logo" /></a>
+            <a href="/" className={styles['flex']}><SVGComponent clsName={`${styles['default-logo']}`} src="icons/logos/-logo" /></a>
           </div>
         </Col>
         <Col md={4}>
