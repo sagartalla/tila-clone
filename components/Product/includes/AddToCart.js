@@ -62,9 +62,9 @@ class AddToCart extends Component {
     null
     :
     (
-      <div className={`${styles['pt-25']} ${styles['flx-space-bw']} ${styles['addto-cart']} ${styles['border-t']}`}>
-        <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['fs-18']} ${styles['add-to-card-btn']}`} onClick={this.addToCart} disabled={isLoading || isAddedToCart} >{isAddedToCart ? PDP_PAGE.ADDED_TO_CART : PDP_PAGE.ADD_TO_CART}</button>
-        <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fs-18']} ${styles['buy-now-btn']}`} onClick={this.buyNow}>{PDP_PAGE.BUY_NOW}</button>
+      <div className={`${styles['pt-25']} ${styles['flx-space-bw']} ${styles['addto-cart']} ${styles['ipad-p-0']} ${styles['border-t']}`}>
+        <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['fs-18']} ${styles['ipad-fs-14']} ${styles['add-to-card-btn']}`} onClick={this.addToCart} disabled={isLoading || isAddedToCart} >{isAddedToCart ? PDP_PAGE.ADDED_TO_CART : PDP_PAGE.ADD_TO_CART}</button>
+        <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fs-18']} ${styles['ipad-fs-14']} ${styles['buy-now-btn']}`} onClick={this.buyNow}>{PDP_PAGE.BUY_NOW}</button>
       </div>
     );
   }

@@ -18,7 +18,7 @@ class Shipping extends Component {
     const { shippingInfo, offerInfo } = this.props;
     const { shipping_fees, shipping_days, shippable, acceptsReturns, maxDaysToReturn, isPreview } = shippingInfo;
     return (
-      <div className={`${styles['box']} ${styles['border-radius4']} ${styles['mt-5']} ${styles['mb-10']}`}>
+      <div className={`${styles['box']} ${styles['border-radius4']} ${styles['mt-5']} ${styles['mb-10']} ${styles['ipad-delivery-address-part']}`}>
         <div className={`${styles['p-15']}`}>
           <div className={styles['flx-spacebw-alignc']}>
             <div className={styles['pdp-deliver-list']}>

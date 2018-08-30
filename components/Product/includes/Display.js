@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import Slider from "react-slick";
 import { Grid, Row, Col } from 'react-bootstrap';
 import constants from '../../../constants';
-
+// import userAgent from '../../../utils/user-agent';
 import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Product/product');
+// const maxImages = userAgent.isiPad ? 3 : 4;
 
 class Display extends Component {
   constructor(props) {

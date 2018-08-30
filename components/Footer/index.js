@@ -61,7 +61,7 @@ const FooterBar = props => (
     <div className={`${styles['footer-menu-items']} ${styles['pt-30']} ${styles['pb-30']} ${styles['bg-white']}`}>
       <Grid>
         <Row>
-          <Col md={3}>
+          <Col md={3} sm={3} className={styles['ipad-pr-0']}>
             <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['flex-center']}`}>
               <SVGComponent clsName={`${styles['footer-list-icon']} ${styles['mr-10']}`} src="icons/footers-icons/fashion" />
               Fashion
@@ -77,7 +77,7 @@ const FooterBar = props => (
               <li>{`${FOOTER_PAGE.MENS} ${FOOTER_PAGE.EYEWEAR}`}</li>
             </ul>
           </Col>
-          <Col md={3}>
+          <Col md={3} sm={3} className={styles['ipad-pr-0']}>
             <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['flex-center']}`}>
               <SVGComponent clsName={`${styles['footer-list-icon']} ${styles['mr-10']}`} src="icons/common-icon/processor-icon" />
               {FOOTER_PAGE.ELECTRONICS}
@@ -93,7 +93,7 @@ const FooterBar = props => (
               <li>{FOOTER_PAGE.VIDEO_GAMES}</li>
             </ul>
           </Col>
-          <Col md={2}>
+          <Col md={2} sm={2} className={styles['ipad-pr-0']}>
             <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['flex-center']}`}>
               <SVGComponent clsName={`${styles['footer-list-icon']} ${styles['mr-10']}`} src="icons/footers-icons/life-style" />
               Lifestyle</h4>
@@ -108,7 +108,7 @@ const FooterBar = props => (
               <li>{`${FOOTER_PAGE.PATIO}, ${FOOTER_PAGE.LAWN} & ${FOOTER_PAGE.GARDEN}`}</li>
             </ul>
           </Col>
-          <Col md={2}>
+          <Col md={2} sm={2} className={styles['ipad-pr-0']}>
             <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['flex-center']}`}>
               <SVGComponent clsName={`${styles['footer-list-icon']} ${styles['mr-10']}`} src="icons/footers-icons/beauty-makeup" />
               {`${FOOTER_PAGE.BEAUTY} & ${FOOTER_PAGE.MAKEUP}`}</h4>
@@ -123,7 +123,7 @@ const FooterBar = props => (
             </ul>
           </Col>
 
-          <Col md={2}>
+          <Col md={2} sm={2} className={styles['ipad-pr-0']}>
             <h4 className={`${styles['fontW600']} ${styles['fs-16']}`}>{FOOTER_PAGE.TOP_BRAND}</h4>
             <ul className={`${styles['pl-0']} ${styles['lne-ht2']} ${styles['top-brands']}`}>
               <li className={`${styles['flex']} ${styles['mb-20']} ${styles['brand-icon']}`}>
@@ -142,7 +142,7 @@ const FooterBar = props => (
     <div className={`${styles['footer-social-list-main']} ${styles['pt-40']} ${styles['pb-40']} ${styles['bg-white']}`}>
       <Grid>
         <Row>
-          <Col md={3} className={styles['pr-0']}>
+          <Col md={3} sm={6} className={styles['pr-0']}>
             <h4 className={styles['flex-center']}>
               <span className={`${styles['footer-social-title']} ${styles['mr-10']}`}><img src="/static/img/bg-img/bitmap-instgram.jpg" className={styles['img-responsive']} /></span>
               <span className={`${styles['fontW600']}`}>{FOOTER_PAGE.ON_SNAP}</span>
@@ -185,13 +185,13 @@ const FooterBar = props => (
               </div>
             </div>
           </Col>
-          <Col md={3} className={styles['pr-0']}>
+          <Col md={3} sm={6} className={styles['pr-0']}>
             <h4 className={styles['flex-center']}>
               <span className={`${styles['footer-social-title']} ${styles['mr-10']}`}><img src="/static/img/bg-img/bitmap-twitter.jpg" className={styles['img-responsive']} /></span>
               <span className={`${styles['twitter-clr']} ${styles['fontW600']}`}>{FOOTER_PAGE.ON_TWITTER}</span>
               <span className={`${styles['follow-twi-btn']} ${styles['fs-10']} ${styles['lne-ht2']} ${styles['white-color']} ${styles['ml-10']} ${styles['pl-15']} ${styles['pr-15']}`}>{FOOTER_PAGE.FOLLOW}</span>
             </h4>
-            <div className={`${styles['footer-social-list-main-inn']} ${styles['pr-10']}`}>
+            <div className={`${styles['footer-social-list-main-inn']} ${styles['ipad-br-0']} ${styles['pr-10']}`}>
               <div className={`${styles['sc-part']} ${styles['pt-15']} ${styles['pb-15']} ${styles['flex']}`}>
                 <Col md={4} className={styles['p-0']}>
                   <div className={styles['footer-sc-img']}>
@@ -228,7 +228,7 @@ const FooterBar = props => (
               </div>
             </div>
           </Col>
-          <Col md={3} className={styles['pr-0']}>
+          <Col md={3} sm={6} className={styles['pr-0']}>
             <h4 className={styles['flex-center']}>
               <span className={`${styles['footer-social-title']} ${styles['mr-10']}`}><img src="/static/img/bg-img/bitmap-instgram.jpg" className={styles['img-responsive']} /></span>
               <span className={`${styles['fontW600']}`}>{FOOTER_PAGE.ON_INSTAGRAM}</span>
@@ -271,13 +271,13 @@ const FooterBar = props => (
               </div>
             </div>
           </Col>
-          <Col md={3} className={styles['pr-0']}>
+          <Col md={3} sm={6} className={styles['pr-0']}>
             <h4 className={styles['flex-center']}>
               <span className={`${styles['footer-social-title']} ${styles['mr-10']}`}><img src="/static/img/bg-img/bitmap-social-fb.jpg" className={styles['img-responsive']} /></span>
               <span className={`${styles['lgt-blue']} ${styles['fontW600']}`}>{FOOTER_PAGE.ON_FACEBOOK}</span>
               <span className={`${styles['follow-fb-btn']} ${styles['fs-10']} ${styles['lne-ht2']} ${styles['white-color']} ${styles['ml-10']} ${styles['pl-15']} ${styles['pr-15']}`}>{FOOTER_PAGE.FOLLOW}</span>
             </h4>
-            <div className={`${styles['footer-social-list-main-inn']} ${styles['pr-10']}`}>
+            <div className={`${styles['footer-social-list-main-inn']} ${styles['ipad-br-0']} ${styles['pr-10']}`}>
               <div className={`${styles['sc-part']} ${styles['pt-15']} ${styles['pb-15']} ${styles['flex']}`}>
                 <Col md={4} className={styles['p-0']}>
                   <div className={styles['footer-sc-img']}>
@@ -321,7 +321,7 @@ const FooterBar = props => (
     <div className={`${styles['footer-social-main']} ${styles['pt-30']} ${styles['pb-30']} ${styles['bg-white']}`}>
       <Grid>
         <Row>
-          <Col md={3}>
+          <Col md={3} sm={2} className={styles['ipad-pr-0']}>
             <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['black-color']}`}>{FOOTER_PAGE.COMPANY}</h4>
             <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
               <li>{FOOTER_PAGE.ABOUT_US}</li>
@@ -332,7 +332,7 @@ const FooterBar = props => (
               <li>{FOOTER_PAGE.CONTACT_US}</li>
             </ul>
           </Col>
-          <Col md={3}>
+          <Col md={3} sm={3} className={styles['ipad-pr-0']}>
             <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['black-color']}`}>{FOOTER_PAGE.POLICY}</h4>
             <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
               <li>{FOOTER_PAGE.TERMS_CONDITION}</li>
@@ -340,7 +340,7 @@ const FooterBar = props => (
               <li>{FOOTER_PAGE.COOKIE_POLICY}</li>
             </ul>
           </Col>
-          <Col md={2}>
+          <Col md={2} sm={2} className={styles['ipad-pr-0']}>
             <div>
               <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['black-color']}`}>{FOOTER_PAGE.SELL_ON_TILA}</h4>
               <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
@@ -353,7 +353,7 @@ const FooterBar = props => (
               </ul>
             </div>
           </Col>
-          <Col md={2}>
+          <Col md={2} sm={2} className={styles['ipad-pr-0']}>
             <div>
               <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['black-color']}`}>{FOOTER_PAGE.CUSTOMER_SERVICE}</h4>
               <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
@@ -365,7 +365,7 @@ const FooterBar = props => (
               </ul>
             </div>
           </Col>
-          <Col md={2}>
+          <Col md={2} sm={3} className={styles['ipad-pr-0']}>
             <div className={`${styles['fs-12']} ${styles['footer-download-app']}`}>
               <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['black-color']}`}>{FOOTER_PAGE.DOWNLOAD_APP}</h4>
               <div>
