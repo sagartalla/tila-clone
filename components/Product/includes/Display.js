@@ -45,7 +45,7 @@ class Display extends Component {
           </Slider>
         </div>
         <div className={`${styles['bottom-slider']} ${styles['flex']} ${styles['border-t']}`}>
-          <Col md={4}>
+          <Col md={4} sm={4}>
             <Slider
               asNavFor={this.state.nav1}
               ref={slider => (this.slider2 = slider)}
@@ -53,7 +53,7 @@ class Display extends Component {
               swipeToSlide={true}
               focusOnSelect={true}
               lazyLoad={true}
-              className="sub-slider"
+              className={styles['sub-slider']}
             >
               {
                 imgs.map(({url}, index) => {
@@ -66,13 +66,13 @@ class Display extends Component {
               }
             </Slider>
           </Col>
-          <Col md={4}>
+          <Col md={4} sm={4}>
             <div className={`${styles['thick-gry-clr']} ${styles['copon-code']} ${styles['pl-15']}`}>
               <h5 className={`${styles['mb-5']} ${styles['fontW600']}`}>10% EXTRA DISCOUNT</h5>
               <span className={styles['fs-12']}>Buy fashion for AED 1000/- and get 10% Extra Discount</span>
             </div>
           </Col>
-          <Col md={4}>
+          <Col md={4} sm={4}>
             <div className={`${styles['thick-gry-clr']} ${styles['copon-code']} ${styles['pl-15']}`}>
               <h5 className={`${styles['mb-5']} ${styles['fontW600']}`}>10% EXTRA DISCOUNT</h5>
               <span className={styles['fs-12']}>Buy fashion for AED 1000/- and get 10% Extra Discount</span>
