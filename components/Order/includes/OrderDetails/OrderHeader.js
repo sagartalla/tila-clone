@@ -73,6 +73,7 @@ class OrderHeader extends Component {
   render() {
     const { showToolTip, showModal } = this.state;
     const { name, address, phone, orderId, orderDate, price, shippingTotal, payments, currency_code } = this.props.orderDetails;
+
     return (
       <div className={styles['box']}>
         <Row className={styles['m-0']}>
@@ -185,7 +186,7 @@ class OrderHeader extends Component {
               <Col md={4} xs={6} sm={6}>
                 <span className={`${styles['flex-center']}`}>
                   <SVGComponent clsName={`${styles['share-icon']}`} src="icons/share-icon/share-icon" />
-                  <span className={`${styles['pl-10']}`}><a>{ORDER_PAGE.SOCIALIZE}</a></span>
+                  <span className={`${styles['pl-10']}`}><a>{ payments[0].transaction_status == "FAILED" ? ORDER_PAGE.PAYMENT_FAILED:  ORDER_PAGE.SOCIALIZE }</a></span>
                 </span>
               </Col>
             </Col>
@@ -193,13 +194,12 @@ class OrderHeader extends Component {
         </Row >
         {
           showModal ?
-            <Modal className={`react-router-modal__modal ${styles['p-20']}`
-            } onBackdropClick={this.closeModal} >
+            <Modal className={`react-router-modal__modal ${styles['p-20']}`} onBackdropClick={this.closeModal}>
               <MyGMap
                 getDataFromMap={this.getDataFromMap}
                 clsName='order-map'
               />
-              <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']}`} onClick={this.submitLatLng}>ORDER_PAGE.SUBMIT}</button>
+              <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']}`} onClick={this.submitLatLng}>{ORDER_PAGE.SUBMIT}</button>
               <button className={`${styles['fp-btn']} ${styles['fp-btn-default']}`} onClick={this.closeModal}>{ORDER_PAGE.CANCEL}</button>
             </Modal>
             : null

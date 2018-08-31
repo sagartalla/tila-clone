@@ -432,7 +432,7 @@ export const EN_KEYWORDS = {
     'EXCHANGE': 'Exchange',
     'RETURN': 'Return',
     'MY_ACCOUNT': 'My account',
-    'ORDERS': 'Orders'
-
+    'ORDERS': 'Orders',
+    'PAYMENT_FAILED': 'Payment Failed',
   }
 };

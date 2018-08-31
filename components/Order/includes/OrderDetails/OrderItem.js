@@ -8,13 +8,13 @@ import moment from 'moment';
 import StatusWidget from '../StatusWidget';
 import constants from '../../../../constants';
 import { ORDER_ISSUE_TYPES, ORDER_ISSUE_STEPS } from '../../constants';
-import { actionCreators }   from '../../../../store/order';
+import { actionCreators } from '../../../../store/order';
 
 // import  styles from '../order.styl';
 import { mergeCss } from '../../../../utils/cssUtil';
 const styles = mergeCss('components/Order/order');
 
-const OrderItem = ({ orderItem, raiseOrderIssue, orderId, showWidget, thankyouPage }) => {
+const OrderItem = ({ payments, orderItem, raiseOrderIssue, orderId, showWidget, thankyouPage }) => {
   const { products } = orderItem;
 
   const cancelOrder = () => {
@@ -36,13 +36,13 @@ const OrderItem = ({ orderItem, raiseOrderIssue, orderId, showWidget, thankyouPa
   };
 
   const btnType = (() => {
-    if(['DELIVERED', 'PLACED', 'PROCESSING'].indexOf(orderItem.status) !== -1) {
+    if (['DELIVERED', 'PLACED', 'PROCESSING'].indexOf(orderItem.status) !== -1) {
       return 'cancel';
     }
-    if(orderItem.status === 'SHIPPED') {
+    if (orderItem.status === 'SHIPPED') {
       return 'return-exchange';
     }
-    if(orderItem.status === 'CANCELLED') {
+    if (orderItem.status === 'CANCELLED') {
       return null;
     }
   })();
@@ -91,37 +91,42 @@ const OrderItem = ({ orderItem, raiseOrderIssue, orderId, showWidget, thankyouPa
         </div>
       </Col>
       <Col md={5} className={styles['thick-border-left']}>
-        <div className={`${styles['p-15']}`}>
-          <div className={`${styles['date-cont']} ${styles['flx-spacebw-alignc']}`}>
-            <div>
-              <div className={styles['fs-12']}>{ btnType === 'cancel' ? 'Delivery by' : showWidget ? 'Canceled on' : 'Canceled'}</div>
-              <div className={`${styles['ff-t']} ${styles['fs-26']}`}>{btnType === 'cancel' ? moment(orderItem.products[0].promisedDeliveryDate).format('Do, dddd') : showWidget ? moment(orderItem.products[0].state_times.CANCELLED.time).format('Do, dddd') : null}</div>
-            </div>
-            {
-              btnType ?
-                <div className={styles['cancel-btn']}>
-                  <span
-                    className={`${styles['link-text']} ${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']} ${styles['fs-12']}`}
-                    onClick={btnType === 'cancel' ? cancelOrder : exchangeReturnOrder}> { btnType === 'cancel' ? 'Cancel' : 'Return/Exchange'}</span>
+        {
+          payments[0].transaction_status == 'FAILED' ?
+            <div>Order Unsuccessful</div>
+            :
+            <div className={`${styles['p-15']}`}>
+              <div className={`${styles['date-cont']} ${styles['flx-spacebw-alignc']}`}>
+                <div>
+                  <div className={styles['fs-12']}>{btnType === 'cancel' ? 'Delivery by' : showWidget && !thankyouPage ? 'Canceled on' : 'Canceled'}</div>
+                  <div className={`${styles['ff-t']} ${styles['fs-26']}`}>{btnType === 'cancel' ? moment(orderItem.products[0].promisedDeliveryDate).format('Do, dddd') : showWidget && !thankyouPage ? moment(orderItem.products[0].state_times.CANCELLED.time).format('Do, dddd') : null}</div>
                 </div>
-                :
-                null
-            }
-          </div>
-          <div className={`${styles['widget-wrap']} ${styles['pt-10']} ${styles['pb-10']}`}>
-            {
-              orderItem.status === 'DELIVERED' || !showWidget || thankyouPage
-              ?
-                null
-              :
-                <StatusWidget currentStatus={orderItem.products} />
-            }
+                {
+                  btnType ?
+                    <div className={styles['cancel-btn']}>
+                      <span
+                        className={`${styles['link-text']} ${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']} ${styles['fs-12']}`}
+                        onClick={btnType === 'cancel' ? cancelOrder : exchangeReturnOrder}> {btnType === 'cancel' ? 'Cancel' : 'Return/Exchange'}</span>
+                    </div>
+                    :
+                    null
+                }
+              </div>
+              <div className={`${styles['widget-wrap']} ${styles['pt-10']} ${styles['pb-10']}`}>
+                {
+                  orderItem.status === 'DELIVERED' || !showWidget || thankyouPage
+                    ?
+                    null
+                    :
+                    <StatusWidget currentStatus={orderItem.products} />
+                }
 
-          </div>
-        </div>
+              </div>
+            </div>
+        }
       </Col>
     </div>
-    )
+  )
 };
 
 const mapDispatchToProps = (dispatch) => {
