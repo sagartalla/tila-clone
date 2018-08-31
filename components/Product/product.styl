@@ -273,3 +273,60 @@
         width 24px
     &:nth-child(odd)
       background-color compare-bg-greay
+
+@media screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation : portrait){
+  .details-right-part {
+    position relative !important
+    top auto !important
+    width 100% !important
+    right auto
+    bottom auto
+    height auto !important
+    display flex
+    background-color white !important
+
+    .addto-cart {
+      position relative !important
+    }
+
+    .ipad-details {
+      width 50%
+      float left
+    }
+  }
+
+  .page-details-slider {
+    height auto
+  }
+
+  .pdp-img-prt {
+    padding-right 0
+
+    .bottom-slider {
+      background-color light-gray-color
+
+      .sub-slider {
+        height 70px
+      }
+    }
+  }
+
+  .ipad-delivery-address-part {
+    margin-left 2px
+    margin-top 2px
+  }
+
+  .footer-social-list-main-inn {
+    border-right 0
+  }
+
+  .product-details-main, .ipad-delivery-address-part {
+    border solid 0.2px #979797
+    box-shadow none
+    padding-bottom 1px
+  }
+
+  .pdp-img-prt {
+    height auto
+  }
+}
