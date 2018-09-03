@@ -13,6 +13,7 @@ import Country from './includes/Country';
 import Language from './includes/Language';
 import publicUrls from '../../constants';
 import SVGComponent from '../common/SVGComponet';
+import { Router } from '../../routes';
 
 import { selectors, actionCreators } from '../../store/auth';
 import { actionCreators as cartActionCreators, selectors as cartSelectors } from '../../store/cart';
@@ -48,6 +49,9 @@ class ActionBar extends Component {
       logoutClicked: false,
       loginClicked: false
     });
+    if(nextProps.isLoggedIn && Router.router.pathname === '/login') {
+      window.location.replace(`${publicUrls.custhelpDomain}/ci/pta/login/redirect/${Router.router.query.p_next_page}/p_li/${nextProps.ptaToken}`);
+    }
   }
 
   logoutClick() {
@@ -150,7 +154,7 @@ class ActionBar extends Component {
                     </a>
                   </li>
                   <li className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']}`}>
-                    <a href={"http://omc-dev.fptechscience.com/login?p_next_page=faq%2Ffaq"} target="_blank" className={styles['flex-center']}><span className={styles['support']}><span className={`${styles['flex-center']} ${styles['justify-center']}`}>?</span></span>
+                    <a href={publicUrls.customerHelp} target="_blank" className={styles['flex-center']}><span className={styles['support']}><span className={`${styles['flex-center']} ${styles['justify-center']}`}>?</span></span>
                       <span className={styles['pl-20']}>{HEADER_PAGE.HELP_SUPPORT}</span></a>
                   </li>
                   <li className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']}`}>
@@ -198,6 +202,7 @@ const mapStateToProps = (store) => {
     loginInProgress: selectors.getLoginProgressStatus(store),
     userInfo: personalSelectors.getUserInfo(store),
     showLogin: selectors.getShowLogin(store),
+    ptaToken: selectors.getPTAToken(store),
   })
 };
 

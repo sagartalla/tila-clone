@@ -13,9 +13,26 @@ const userLogin = (params) => {
   })).then(({data, status}) => {
     // cart merge
     if(status === 200) {
+      const { username } = params;
+      const PTA_PARAMS = {
+        'p_userid': username,
+        'p_email.addr': username,
+        'p_ccf_14': 7,
+        'p_ccf_15': 9
+      };
       axios.put(`${constants.CART_API_URL}/api/v1/cart/merge`);
+      return axios.post(`${constants.AUTH_API_URL}/api/v1/encrypt/`,
+        {
+          input: _.reduce(PTA_PARAMS, (acc, val, key) => {
+            return `${acc}&${encodeURI(key)}=${encodeURI(val)}`;
+          }, '')
+        }
+      ).then((ptaData) => {
+        const { output } = ptaData.data;
+        data.data.ptaToken = output.replace('+', '_').replace('/','~').replace('=','*');
+        return data;
+      });
     }
-    return data;
   });
 }
 
