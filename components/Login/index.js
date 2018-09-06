@@ -87,7 +87,7 @@ class Login extends Component {
       <Row className={`${styles['bg-white']} ${styles['m-0']}`}>
         <Col md={6} xs={6} className={styles['pl-0']}>
           <div className={styles['image-placeholder']}>
-            <img className={styles['img-responsive']} src={`${constants.mediaDomain}/catalog/t_shirt/PTSHC8EXEUJADVLVCX/GALLERY/MEDIAX4Q4MVJ5DCLIHWGUGDW14Z/1-web-desktop-product.jpg`}/>
+            <img className={styles['img-responsive']} src={`${constants.mediaDomain}/pim/15f45930-fecf-4f7b-a3d6-613d41196c20/workbench/image/a1ccb74a-1858-42dd-8c38-cfb103e85bb2/login-screen.jpeg`}/>
           </div>
         </Col>
         <Col md={6} xs={6}>
@@ -107,7 +107,7 @@ class Login extends Component {
             :
             null
           }
-          <form className={`${styles['login-form']}  ${styles['pt-30']}`}>
+          <form className={`${styles['login-form']}`}>
             <FormGroup controlId="formHorizontalEmail">
               <Col md={12}>
                 <div className={styles['group']}>
