@@ -49,10 +49,11 @@ const ProductDetails = ({ details, keyfeatures, isPreview }) => {
         <PanelGroup accordion defaultActiveKey="2">
           <Panel eventKey="1">
             <Panel.Heading>
-              <Panel.Title toggle>
+              <Panel.Title toggle className={styles['key-feature-inn']}>
                 <h4 className={`${styles['fs-12']} ${styles['fontW600']} ${styles['mb-5']} ${styles['mt-0']} ${styles['flx-space-bw']}`}>
                   <span>Key features</span>
-                  <SVGCompoent clsName={`${styles['expand-icon']}`} src="icons/common-icon/down-arrow-circle" />
+                  {/* <SVGCompoent clsName={`${styles['expand-icon']}`} src="icons/common-icon/down-arrow-circle" /> */}
+                  {/* <span className={styles['fs-16']}>+</span> */}
                 </h4>
               </Panel.Title>
             </Panel.Heading>
