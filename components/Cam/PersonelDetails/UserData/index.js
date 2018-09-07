@@ -16,7 +16,7 @@ const {CONTACT_INFO_MODAL} = languageDefinations();
 const UserData = ({getUserProfileInfo}) => {
   getUserProfileInfo();
   return (
-    <div className={`${styles['box']} ${styles['mb-20']}`}>
+    <div className={`${styles['box']} ${styles['mb-20']} ${styles['ipad-mb-15']}`}>
       <Row className={`${styles['p-30']} ${styles['m-0']}`}>
         <Col xs={12} md={7}>
           <PersonalInfo />
