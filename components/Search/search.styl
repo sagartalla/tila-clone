@@ -301,3 +301,25 @@
   -moz-appearance none
   &:focus
     outline none
+
+@media screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation : portrait){
+  .filter-panel {
+    width 24%
+  }
+
+  .search-results {
+    width calc(76% - 20px)
+
+    .product-items-main {
+      width 250px
+    }
+
+    .items-list-show {
+      align-items flex-start
+    }
+
+    .deliver-to-main {
+      width 100% !important
+    }
+  }
+}

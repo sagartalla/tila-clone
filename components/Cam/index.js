@@ -56,10 +56,10 @@ class Cam extends React.Component {
           <AuthWrapper>
             <Grid>
               <Row className={styles['pt-30']}>
-                <Col xs={12} md={3} className={styles['pr-0']}>
+                <Col xs={12} md={3} sm={3} className={styles['pr-0']}>
                   <Sidebar query={query} />
                 </Col>
-                <Col xs={12} md={9}>
+                <Col xs={12} md={9} sm={9}>
                   {camComponent}
                 </Col>
               </Row>

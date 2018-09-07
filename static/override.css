@@ -177,3 +177,10 @@
     background-size: contain;
     color: transparent !important;
 }
+
+@media screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation : portrait){
+    .slick-next, .slick-prev {
+        display: none !important;
+    }
+}
+

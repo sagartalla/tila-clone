@@ -73,13 +73,14 @@ class OrderHeader extends Component {
   render() {
     const { showToolTip, showModal } = this.state;
     const { name, address, phone, orderId, orderDate, price, shippingTotal, payments, currency_code } = this.props.orderDetails;
+
     return (
       <div className={styles['box']}>
         <Row className={styles['m-0']}>
           {/* <Col md={12} xs={12} sm={12}> */}
             <Col md={12} xs={12} sm={12} className={`${styles['border-btm-dottes']}`}>
               <div className={`${styles['pb-25']} ${styles['pt-25']} ${styles['flex']}`}>
-                <Col md={3} xs={6} sm={6}>
+                <Col md={3} xs={6} sm={3}>
                   <div className={styles['flx-space-bw']}>
                     <h5 className={`${styles['mt-0']} ${styles['fs-16']} ${styles['light-gry-clr']} ${styles['mb-20']}`}>{ORDER_PAGE.ADDRESS_DETAILS}</h5>
                     <h5 className={`${styles['mt-0']} ${styles['flex']}`}>
@@ -89,36 +90,36 @@ class OrderHeader extends Component {
                   </div>
                   <div>{address}</div>
                 </Col>
-                <Col md={5} xs={6} sm={6}>
+                <Col md={5} xs={6} sm={5} className={`${styles['ipad-p-0']}`}>
                   <div>
                     <h5 className={`${styles['mt-0']} ${styles['fs-16']} ${styles['flex-center']} ${styles['light-gry-clr']}  ${styles['mb-20']}`}>
-                      <Col md={6}>{ORDER_PAGE.ORDER_SUMMARY}</Col>
-                      <Col md={6}>{ORDER_PAGE.ORDER} # {orderId}</Col>
+                      <Col md={6} sm={6}>{ORDER_PAGE.ORDER_SUMMARY}</Col>
+                      <Col md={6} sm={6}>{ORDER_PAGE.ORDER} # {orderId}</Col>
                     </h5>
                   </div>
                   <div>
                     <p className={`${styles['flex-center']}`}>
-                      <Col md={6}>{ORDER_PAGE.ORDER_DATE}</Col>
-                      <Col md={6}>{moment(orderDate).format('MMMM DD, YYYY')}</Col>
+                      <Col md={6} sm={6}>{ORDER_PAGE.ORDER_DATE}</Col>
+                      <Col md={6} sm={6}>{moment(orderDate).format('MMMM DD, YYYY')}</Col>
                     </p>
                     <p className={`${styles['flex-center']}`}>
-                      <Col md={6}>{ORDER_PAGE.ITEM_TOTAL}</Col>
-                      <Col md={6}><span>{price.total_offer_price}</span> <span>{currency_code}</span></Col>
+                      <Col md={6} sm={6}>{ORDER_PAGE.ITEM_TOTAL}</Col>
+                      <Col md={6} sm={6}><span>{price.total_offer_price}</span> <span>{currency_code}</span></Col>
                     </p>
                     <p className={`${styles['flex-center']}`}>
-                      <Col md={6}>{ORDER_PAGE.SHIPPING}</Col>
-                      <Col md={6}><span>{price.total_shipping}</span> <span>{currency_code}</span></Col>
+                      <Col md={6} sm={6}>{ORDER_PAGE.SHIPPING}</Col>
+                      <Col md={6} ms={6}><span>{price.total_shipping}</span> <span>{currency_code}</span></Col>
                     </p>
                   </div>
                 </Col>
-                <Col md={4} xs={6} sm={6}>
-                  <Col md={12} xs={6} sm={6}>
+                <Col md={4} xs={6} sm={4}>
+                  <Col md={12} xs={6} sm={12}>
                     <h5 className={`${styles['mt-0']} ${styles['fs-16']} ${styles['light-gry-clr']} ${styles['flex-center']}  ${styles['mb-20']}`}>
-                    <Col md={6}><span>{ORDER_PAGE.PAY_METHOD}</span></Col>
-                    <Col md={6}><a>{ORDER_PAGE.REQ_INVOICE}</a></Col>
+                    <Col md={6} sm={6} className={`${styles['ipad-pl-0']}`}><span>{ORDER_PAGE.PAY_METHOD}</span></Col>
+                    <Col md={6} sm={6} className={`${styles['ipad-pr-0']}`}><a>{ORDER_PAGE.REQ_INVOICE}</a></Col>
                     </h5>
                   </Col>
-                  <Col md={12}>
+                  <Col md={12} sm={12}>
                     {
                       payments.map((p) => {
                         return (
@@ -160,12 +161,12 @@ class OrderHeader extends Component {
               </div>
             </Col>
             <Col md={12} xs={12} sm={12} className={styles['p-15']}>
-              <Col md={3} xs={6} sm={6}>
+              <Col md={3} xs={6} sm={3}>
                 <a>{ORDER_PAGE.CHANGE_ADDRESS}</a>
               </Col>
-              <Col md={5} xs={6} sm={6}>
-                <Col md={6}><span className={`${styles['light-gry-clr']}`}>{ORDER_PAGE.GRAND_TOTAL}</span></Col>
-                <Col md={6}>
+              <Col md={5} xs={6} sm={5}>
+                <Col md={6} sm={6}><span className={`${styles['light-gry-clr']}`}>{ORDER_PAGE.GRAND_TOTAL}</span></Col>
+                <Col md={6} sm={6}>
                 <span className={`${styles['fontW600']} ${styles['light-gry-clr']}`}>{price.total_offer_price}&nbsp;{currency_code} <a onMouseOver={this.showToolTip} onMouseLeave={this.hideToolTip}>?</a></span>
                 {
                   showToolTip ?
@@ -182,10 +183,10 @@ class OrderHeader extends Component {
                 }
                 </Col>
               </Col>
-              <Col md={4} xs={6} sm={6}>
+              <Col md={4} xs={6} sm={4}>
                 <span className={`${styles['flex-center']}`}>
                   <SVGComponent clsName={`${styles['share-icon']}`} src="icons/share-icon/share-icon" />
-                  <span className={`${styles['pl-10']}`}><a>{ORDER_PAGE.SOCIALIZE}</a></span>
+                  <span className={`${styles['pl-10']}`}><a>{ payments[0].transaction_status == "FAILED" ? ORDER_PAGE.PAYMENT_FAILED:  ORDER_PAGE.SOCIALIZE }</a></span>
                 </span>
               </Col>
             </Col>
@@ -193,13 +194,12 @@ class OrderHeader extends Component {
         </Row >
         {
           showModal ?
-            <Modal className={`react-router-modal__modal ${styles['p-20']}`
-            } onBackdropClick={this.closeModal} >
+            <Modal className={`react-router-modal__modal ${styles['p-20']}`} onBackdropClick={this.closeModal}>
               <MyGMap
                 getDataFromMap={this.getDataFromMap}
                 clsName='order-map'
               />
-              <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']}`} onClick={this.submitLatLng}>ORDER_PAGE.SUBMIT}</button>
+              <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']}`} onClick={this.submitLatLng}>{ORDER_PAGE.SUBMIT}</button>
               <button className={`${styles['fp-btn']} ${styles['fp-btn-default']}`} onClick={this.closeModal}>{ORDER_PAGE.CANCEL}</button>
             </Modal>
             : null

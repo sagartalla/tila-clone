@@ -117,7 +117,7 @@ const getProductComponent = (isPreview, taskCode) => {
 
     render() {
       const { productData } = this.props;
-      const { catalog, titleInfo, keyfeatures, imgUrls, offerInfo, shippingInfo, returnInfo, details, categoryType='' } = productData;
+      const { catalog, titleInfo, keyfeatures, imgUrls, offerInfo, shippingInfo, returnInfo, details, categoryType = '' } = productData;
       const { stickyElements, recentlyViewed } = this.state;
       return (
         <Theme.Provider value={categoryType.toLowerCase()}>
@@ -128,23 +128,29 @@ const getProductComponent = (isPreview, taskCode) => {
             <div className={`${styles['relative']}`}>
               <div className={`${styles['page-details-slider']}`}>
                 <Row className={`${styles['m-0']} ${styles['ht-100per']}`}>
-                  <Col xs={12} md={8} className={`${styles['pl-0']} ${styles['ht-100per']}`}>
-                    <Dispalay imgs={imgUrls} />
+                  <Col xs={12} md={8} sm={12} className={`${styles['pl-0']} ${styles['ht-100per']} ${styles['pdp-img-prt']}`}>
+                    <NoSSR>
+                      <Dispalay imgs={imgUrls} />
+                    </NoSSR>
                   </Col>
                   <div className={styles['details-pixel']} ref={this.detailsRef}></div>
-                  <div className={`${styles['details-right-part']} ${styles[stickyElements.details]}`}>
+                  <Col sm={12} className={`${styles['details-right-part']} ${styles[stickyElements.details]}`}>
                     <div className={`${styles['details-right-part-inn']}`}>
-                      <TitleInfo {...titleInfo} isPreview={isPreview} />
-                      <ProductDetails details={details} keyfeatures={keyfeatures} isPreview={isPreview} />
-                      {
-                        isPreview ? null : <Shipping shippingInfo={shippingInfo} offerInfo={offerInfo} />
-                      }
-
+                      <div className={`${styles['ipad-details']} ${styles['ipad-pr-15']}`}>
+                        <TitleInfo {...titleInfo} isPreview={isPreview} />
+                        <ProductDetails details={details} keyfeatures={keyfeatures} isPreview={isPreview} />
+                      </div>
+                      <div className={`${styles['ipad-details']} ${styles['bdr-lt']} ${styles['ipad-pl-15']}`}>
+                        {
+                          isPreview ? null : <Shipping shippingInfo={shippingInfo} offerInfo={offerInfo} />
+                        }
+                        {
+                          isPreview ? null : <AddToCart offerInfo={offerInfo} />
+                        }
+                      </div>
                     </div>
-                    {
-                      isPreview ? null : <AddToCart offerInfo={offerInfo} />
-                    }
-                  </div>
+
+                  </Col>
                 </Row>
               </div>
               <div className={styles['bg-white']}>
