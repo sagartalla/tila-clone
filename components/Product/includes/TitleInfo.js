@@ -89,7 +89,7 @@ class TitleInfo extends Component {
     return (
       <div className={styles['pb-10']}>
         <div className={`${styles['fontW300']} ${styles['lgt-blue']}`}>{brand}</div>
-        <div className={`${styles['fs-20']} ${styles['fontW300']} ${styles['black-color']}`}>{title}</div>
+        <div className={`${styles['fs-20']} ${styles['fontW700']} ${styles['black-color']}`}>{title}</div>
         {
           isPreview
             ?
