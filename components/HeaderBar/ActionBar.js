@@ -50,7 +50,7 @@ class ActionBar extends Component {
       loginClicked: false
     });
     if(nextProps.isLoggedIn && Router.router.pathname === '/login') {
-      window.location.replace(`${publicUrls.custhelpDomain}/ci/pta/login/redirect/${Router.router.query.p_next_page}/p_li/${nextProps.ptaToken}`);
+      window.location.replace(`${publicUrls.custhelpDomain}/ci/pta/login/redirect/${unescape(Router.router.query.p_next_page)}/p_li/${nextProps.ptaToken}`);
     }
   }
 
@@ -155,7 +155,8 @@ class ActionBar extends Component {
                   </li>
                   <li className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']}`}>
                     <a href={publicUrls.customerHelp} target="_blank" className={styles['flex-center']}><span className={styles['support']}><span className={`${styles['flex-center']} ${styles['justify-center']}`}>?</span></span>
-                      <span className={styles['pl-20']}>{HEADER_PAGE.HELP_SUPPORT}</span></a>
+                      <span className={styles['pl-20']}>{HEADER_PAGE.HELP_SUPPORT}</span>
+                    </a>
                   </li>
                   <li className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']}`}>
                     {isLoggedIn
