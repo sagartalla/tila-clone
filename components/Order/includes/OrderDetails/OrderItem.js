@@ -49,7 +49,7 @@ const OrderItem = ({ payments, orderItem, raiseOrderIssue, orderId, showWidget, 
 
   return (
     <div className={`${styles['shipment-wrap']} ${styles['mb-20']} ${styles['mt-20']} ${styles['flex']}`}>
-      <Col md={7} className={`${styles['pl-0']} ${styles['pr-0']}`}>
+      <Col md={7} sm={7} className={`${styles['pl-0']} ${styles['pr-0']}`}>
         <div className={`${styles['products-wrap']} ${styles['flex']} ${styles['p-15']}`}>
           {
             orderItem.products.map((product) => (
@@ -59,12 +59,12 @@ const OrderItem = ({ payments, orderItem, raiseOrderIssue, orderId, showWidget, 
                     <img className={`${styles['order-item-img']}`} src={`${constants.mediaDomain}/${product.img}`} alt={product.img} />
                   </div>
                 </Col>
-                <Col md={10}>
+                <Col md={10} className={styles['ipad-pr-0']}>
                   <div className={`${styles['text-wrap']}`}>
                     <span className={`${styles['fontW600']}`}>{product.name}</span>
                     <div className={`${styles['flex-center']} ${styles['prod-sub-content']}`}>
-                      <Col md={9} className={styles['p-0']}>
-                        <div className={`${styles['flex']} ${styles['pt-15']} ${styles['pb-15']} ${styles['fs-12']} ${styles['thick-gry-clr']}`}>
+                      <Col md={9} sm={9} className={styles['p-0']}>
+                        <div className={`${styles['flex']} ${styles['pt-15']} ${styles['pb-15']} ${styles['ipad-tp-5']} ${styles['ipad-tb-5']} ${styles['fs-12']} ${styles['thick-gry-clr']}`}>
                           <span className={styles['pr-20']}>
                             <span>Storage : </span>
                             <span>32GB</span>
@@ -76,10 +76,10 @@ const OrderItem = ({ payments, orderItem, raiseOrderIssue, orderId, showWidget, 
                         </div>
                         <div className={styles['prod-sub-content-inn']}>
                           <span className={`${styles['coupon-code']} ${styles['fs-12']}`}>XYGFCKPNG</span>
-                          <span className={`${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pl-15']} ${styles['promo-code-label']}`}>Promo code used, you saved 200 SAR  as discount</span>
+                          <span className={`${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pl-15']} ${styles['promo-code-label']} ${styles['ipad-tp-5']} ${styles['ipad-pl-0']}`}>Promo code used, you saved 200 SAR  as discount</span>
                         </div>
                       </Col>
-                      <Col md={3}>
+                      <Col md={3} sm={3} className={styles['ipad-pr-0']}>
                         <span className={`${styles['fs-16']} ${styles['fontW600']}`}>{product.price} {product.currency_code}</span>
                       </Col>
                     </div>
@@ -90,39 +90,42 @@ const OrderItem = ({ payments, orderItem, raiseOrderIssue, orderId, showWidget, 
           }
         </div>
       </Col>
-      <Col md={5} className={styles['thick-border-left']}>
+      <Col md={5} sm={5} className={styles['thick-border-left']}>
         {
-          payments[0].transaction_status == 'FAILED' ?
-            <div>Order Unsuccessful</div>
-            :
-            <div className={`${styles['p-15']}`}>
-              <div className={`${styles['date-cont']} ${styles['flx-spacebw-alignc']}`}>
-                <div>
-                  <div className={styles['fs-12']}>{btnType === 'cancel' ? 'Delivery by' : showWidget && !thankyouPage ? 'Canceled on' : 'Canceled'}</div>
-                  <div className={`${styles['ff-t']} ${styles['fs-26']}`}>{btnType === 'cancel' ? moment(orderItem.products[0].promisedDeliveryDate).format('Do, dddd') : showWidget && !thankyouPage ? moment(orderItem.products[0].state_times.CANCELLED.time).format('Do, dddd') : null}</div>
+          payments ?
+            payments[0].transaction_status == 'FAILED' ?
+              <div>Order Unsuccessful</div>
+              :
+              <div className={`${styles['p-15']} ${styles['ipad-pl-0']} ${styles['ipad-pr-0']}`}>
+                <div className={`${styles['date-cont']} ${styles['flx-spacebw-alignc']}`}>
+                  <div>
+                    <div className={styles['fs-12']}>{btnType === 'cancel' ? 'Delivery by' : showWidget && !thankyouPage ? 'Canceled on' : 'Canceled'}</div>
+                    <div className={`${styles['ff-t']} ${styles['fs-26']} ${styles['ipad-fs-20']}`}>{btnType === 'cancel' ? moment(orderItem.products[0].promisedDeliveryDate).format('Do, dddd') : showWidget && !thankyouPage ? moment(orderItem.products[0].state_times.CANCELLED.time).format('Do, dddd') : null}</div>
+                  </div>
+                  {
+                    btnType ?
+                      <div className={styles['cancel-btn']}>
+                        <span
+                          className={`${styles['link-text']} ${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']} ${styles['fs-12']}`}
+                          onClick={btnType === 'cancel' ? cancelOrder : exchangeReturnOrder}> {btnType === 'cancel' ? 'Cancel' : 'Return/Exchange'}</span>
+                      </div>
+                      :
+                      null
+                  }
                 </div>
-                {
-                  btnType ?
-                    <div className={styles['cancel-btn']}>
-                      <span
-                        className={`${styles['link-text']} ${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']} ${styles['fs-12']}`}
-                        onClick={btnType === 'cancel' ? cancelOrder : exchangeReturnOrder}> {btnType === 'cancel' ? 'Cancel' : 'Return/Exchange'}</span>
-                    </div>
-                    :
-                    null
-                }
-              </div>
-              <div className={`${styles['widget-wrap']} ${styles['pt-10']} ${styles['pb-10']}`}>
-                {
-                  orderItem.status === 'DELIVERED' || !showWidget || thankyouPage
-                    ?
-                    null
-                    :
-                    <StatusWidget currentStatus={orderItem.products} />
-                }
+                <div className={`${styles['widget-wrap']} ${styles['pt-10']} ${styles['pb-10']}`}>
+                  {
+                    orderItem.status === 'DELIVERED' || !showWidget || thankyouPage
+                      ?
+                      null
+                      :
+                      <StatusWidget currentStatus={orderItem.products} />
+                  }
 
+                </div>
               </div>
-            </div>
+          :
+          null
         }
       </Col>
     </div>

@@ -123,6 +123,31 @@
     padding: 0
 }
 
+.panel-group .panel-heading a {
+    position: relative;
+    display: block;
+}
+
+.panel-group .panel-heading a[aria-expanded="true"]::after {
+    content: '\2212';
+    position: absolute;
+    right: 0;
+    top: -4px;
+    font-size: 18px;
+    font-weight: 300;
+    color: #939393;
+}
+
+.panel-group .panel-heading a[aria-expanded="false"]::after {
+    right: 0;
+    top: -4px;
+    content: '\002b';
+    position: absolute;
+    font-size: 18px;
+    font-weight: 300;
+    color: #939393;
+}
+
 
 .panel-group {
     margin-bottom: 0;
