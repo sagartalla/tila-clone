@@ -2,7 +2,7 @@
   "name": "store-front",
   "scripts": {
     "dev": "ENV=local node --inspect-brk server.js",
-    "build": "version=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7) next build",
+    "build": "version=$version next build",
     "start": "NODE_ENV=production ENV=dev node server.js",
     "start:stage": "NODE_ENV=production ENV=staging node server.js",
     "start:prod": "NODE_ENV=production ENV=production node server.js"
