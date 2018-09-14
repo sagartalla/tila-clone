@@ -5,7 +5,7 @@ const commonsChunkConfig = require('@zeit/next-css/commons-chunk-config');
 const path = require('path');
 const git = require('git-rev-sync');
 const withSourceMaps = require('@zeit/next-source-maps')
-const version = git.short();
+const version = process.env.version || git.short();
 module.exports = withSourceMaps(withStylus(withCSS({
   cssModules: true,
   cssLoaderOptions: {
@@ -17,7 +17,7 @@ module.exports = withSourceMaps(withStylus(withCSS({
   },
   publicRuntimeConfig: {
       env: process.env.ENV,
-      version: version
+      version: version,
   },
   generateBuildId: async () => {
     return version;

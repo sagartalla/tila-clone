@@ -13,7 +13,6 @@ var basePath = {
 };
 
 _.map([buildManifest['bundles/pages/_error.js']], function(val, key) {
-  debugger;
   if(val && val[0]) {
     console.log('uploading ' + val[0]);
     var filepath = basePath.client + val[0] + '.map';

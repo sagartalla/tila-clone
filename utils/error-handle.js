@@ -7,7 +7,7 @@ if (process.env.ENV !== 'local') {
   var apm = require('elastic-apm-node').start({
       serviceName: apmConfig.serviceName,
       serverUrl: apmConfig.serverUrl,
-      serviceVersion: git.short(),
+      serviceVersion: process.env.version,
   });
 
   reactGuard(React, function (err, componentInfo) {

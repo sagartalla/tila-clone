@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 const cookiesMiddleware = require('universal-cookie-express');
 const routes = require('./routes');
 const apiRoutes = require('./apiRoutes');
-
 require('./utils/error-handle');
 
 const server = express();
