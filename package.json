@@ -4,7 +4,7 @@
     "dev": "ENV=local node --inspect-brk server.js",
     "build": "version=$version next build",
     "start": "NODE_ENV=production ENV=dev node server.js",
-    "start:stage": "NODE_ENV=production ENV=staging node server.js",
+    "start:stage": "PORT=3002 NODE_ENV=production ENV=staging node server.js",
     "start:prod": "NODE_ENV=production ENV=production node server.js"
   },
   "dependencies": {

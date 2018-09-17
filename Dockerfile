@@ -10,4 +10,4 @@ RUN echo $version
 RUN version=$version npm run build
 
 EXPOSE 3002
-CMD ["npm", "start"]
+CMD ["npm", "run", "start:stage"]
