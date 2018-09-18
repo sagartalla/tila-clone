@@ -101,4 +101,12 @@ const removeCity = () => {
   });
 }
 
-export default { userLogin, userRegister, userLogout, getLoginInfo, setCountry, setSessionID, deriveCity, autoCompleteCity, setCity, removeCity, setLanguage };
+const savePtaToken = (ptaToken) => {
+  return axios.post('/api/setCookie', {
+    data: {
+      ptaToken,
+    }
+  }).then(() => ptaToken);
+}
+
+export default { userLogin, userRegister, userLogout, getLoginInfo, setCountry, setSessionID, deriveCity, autoCompleteCity, setCity, removeCity, setLanguage, savePtaToken, savePtaToken };

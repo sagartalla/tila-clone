@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ModalContainer } from 'react-router-modal';
 import { Dropdown, MenuItem } from "react-bootstrap";
+import Cookie from 'universal-cookie';
 import { selectors as personalSelectors } from '../../store/cam/personalDetails';
 import Cart from '../Cart';
 import Login from '../Login';
@@ -21,6 +22,7 @@ import { languageDefinations } from '../../utils/lang'
 import { mergeCss } from '../../utils/cssUtil';
 const styles = mergeCss('components/HeaderBar/header');
 const {HEADER_PAGE} = languageDefinations();
+const cookies = new Cookie();
 
 class ActionBar extends Component {
   constructor(props) {
@@ -49,8 +51,17 @@ class ActionBar extends Component {
       logoutClicked: false,
       loginClicked: false
     });
-    if(nextProps.isLoggedIn && Router.router.pathname === '/login') {
-      window.location.replace(`${publicUrls.custhelpDomain}/ci/pta/login/redirect/${unescape(Router.router.query.p_next_page)}/p_li/${nextProps.ptaToken}`);
+    if(nextProps.isLoggedIn) {
+      if(nextProps.ptaToken){
+        this.props.savePtaToken(nextProps.ptaToken);
+        if(Router.router.pathname === '/login') {
+            window.location.replace(`${publicUrls.custhelpDomain}/ci/pta/login/redirect/${unescape(Router.router.query.p_next_page)}/p_li/${nextProps.ptaToken}`);
+        }
+      } else {
+        if(Router.router.pathname === '/login') {
+            window.location.replace(`${publicUrls.custhelpDomain}/ci/pta/login/redirect/${unescape(Router.router.query.p_next_page)}/p_li/${cookies.get('ptaToken')}`);
+        }
+      }
     }
   }
 
@@ -215,6 +226,7 @@ const mapDispatchToProps = (dispatch) => {
       getCartResults: cartActionCreators.getCartResults,
       resetLoginError: actionCreators.resetLoginError,
       resetShowLogin: actionCreators.resetShowLogin,
+      savePtaToken: actionCreators.savePtaToken,
     },
     dispatch,
   );

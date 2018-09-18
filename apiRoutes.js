@@ -60,6 +60,7 @@ apiRoutes
   })
   .post('/logout', (req, res) => {
     req.universalCookies.remove('auth');
+    req.universalCookies.remove('ptaToken');
     return res.json({});
   })
   .post('/setCookie', (req, res) => {
@@ -122,8 +123,6 @@ apiRoutes
         res.json(e);
       })
   });
-
-
 
 
 module.exports = apiRoutes;

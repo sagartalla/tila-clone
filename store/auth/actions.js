@@ -20,6 +20,7 @@ const actions = {
   STORE_POST_LOGIN_ACTION_INFO: 'STORE_POST_LOGIN_ACTION_INFO',
   DELETE_POST_LOGIN_ACTION_INFO: 'DELETE_POST_LOGIN_ACTION_INFO',
   SET_LANGUAGE: 'SET_LANGUAGE',
+  SAVE_PTA: 'SAVE_PTA',
 };
 
 const actionCreators = {
@@ -138,6 +139,10 @@ const actionCreators = {
   setLanguage: (language) => ({
     type: actions.SET_LANGUAGE,
     payload: api.setLanguage(language),
+  }),
+  savePtaToken: (ptaToken) => ({
+    type: action.SAVE_PTA,
+    payload: api.savePtaToken(ptaToken),
   })
 };
 
