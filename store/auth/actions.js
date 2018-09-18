@@ -31,8 +31,10 @@ const actionCreators = {
       if(typeof refStore.postLoginRef === 'function') {
         refStore.postLoginRef(dispatch, getState)
       } else {
-        dispatch(refStore.postLoginRef);
-        dispatch(actions.DELETE_POST_LOGIN_ACTION_INFO);
+        if(refStore.postLoginRef){
+          dispatch(refStore.postLoginRef);
+          dispatch(actions.DELETE_POST_LOGIN_ACTION_INFO);
+        }
       }
     });
   },

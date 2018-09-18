@@ -18,7 +18,7 @@ class AuthWrapper extends Component {
     if(isLoggedIn){
       return (
         <Fragment>
-          {children}
+          {children ? children : null}
         </Fragment>
       );
     }
