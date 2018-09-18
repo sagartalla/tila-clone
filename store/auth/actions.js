@@ -141,7 +141,7 @@ const actionCreators = {
     payload: api.setLanguage(language),
   }),
   savePtaToken: (ptaToken) => ({
-    type: action.SAVE_PTA,
+    type: actions.SAVE_PTA,
     payload: api.savePtaToken(ptaToken),
   })
 };
