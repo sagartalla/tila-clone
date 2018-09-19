@@ -119,3 +119,43 @@
   border-top 1px solid border-light-gray
   button
     border-bottom-right-radius 20px
+
+@media screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation : portrait){ 
+  .cart-container .cart-box .quantity-title {
+    margin: 0px 5px;
+    padding: 2px 5px;
+  }
+
+  .cart-stepper .plus, .cart-stepper .minus, .cart-stepper .minus-disable {
+    width: 24px;
+    height: 24px;
+  }
+
+  .cart-container .secure-img {
+    height: 110px;
+  }
+}
+
+@media screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation : landscape){
+  .price-stepper-part {
+    flex-direction column
+
+    .cart-stepper > div {
+      justify-content start
+    }
+  }
+
+  .cart-container {
+    padding 20px 0
+  }
+
+  .cart-box {
+    .landscape-cart-details {
+      width 80%
+    }
+    .landscape-cart-price {
+      width 20%
+    }
+  }
+
+ }

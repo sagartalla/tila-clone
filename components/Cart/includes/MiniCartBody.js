@@ -33,12 +33,12 @@ const MiniCartBody = props => {
               const { item_id, img, name, price, cur, quantity, max_limit, inventory, brand_name } = item;
               return (
                 <div key={item_id} className={`${styles['flex']} ${styles['pt-15']} ${styles['pb-15']} ${styles['border-b']} ${styles['min-items-list']}`}>
-                  <Col md={2} className={`${styles['pl-0']} ${styles['pr-0']}`}>
+                  <Col md={2} sm={2} className={`${styles['pl-0']} ${styles['pr-0']}`}>
                     <div className={`${styles['cart-container-img']} ${styles['flex']} ${styles['justify-center']}`}>
                       <img className={styles['img']} src={img} />
                     </div>
                   </Col>
-                  <Col md={10} className={`${styles['pr-0']} ${styles['card-details-labels']}`}>
+                  <Col md={10} sm={10} className={`${styles['pr-0']} ${styles['card-details-labels']}`}>
                     <div className={`${styles['flx-space-bw']}`}>
                       <h6 className={`${styles['m-0']} ${styles['card-details-name']}`}>{name}</h6>
                       {
@@ -52,7 +52,7 @@ const MiniCartBody = props => {
                           : null
                       }
                     </div>
-                    <div className={`${styles['flx-space-bw']} ${styles['pt-10']}`}>
+                    <div className={`${styles['flx-space-bw']} ${styles['pt-10']} ${styles['price-stepper-part']}`}>
                       <span className={styles['fontW600']}>{price + ' ' + cur}</span>
                       <span>
                         {

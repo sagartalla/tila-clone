@@ -47,7 +47,7 @@ class Variants extends Component {
     const { variantsData } = this.props;
     const { variantsForDisplay } = variantsData;
     return (
-      <div className={`${styles['flex-center']} ${styles['border-b']}`}>
+      <div className={`${styles['flex-center']} ${styles['border-b']} ${styles['ipad-flex-wrp']}`}>
         {
           variantsForDisplay.map((variant) => <Variant onSelectVariant={this.onSelectVariant} key={variant.title} {...variant} />)
         }
