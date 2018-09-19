@@ -60,7 +60,7 @@ const CartBody = props => {
                           }
 
                           <Row>
-                            <Col md={2}>
+                            <Col md={2} sm={2} className={styles['ipad-pr-0']}>
                               <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles['pb-15']} ${styles['card-box-inn-img']}`}><img className={styles['img']} src={img} /></div>
                               <CartStepper
                                 count={count}
@@ -70,12 +70,12 @@ const CartBody = props => {
                                 cartStepperInputHandler={cartStepperInputHandler}
                               />
                             </Col>
-                            <Col md={10}>
+                            <Col md={10} sm={10}>
                               <Row>
                                 <Col md={12}>
                                   <h5 className={`${styles['mt-0']} ${styles['mb-0']}`}>{brand_name}</h5>
                                 </Col>
-                                <Col md={10}>
+                                <Col md={10} sm={10} className={styles['landscape-cart-details']}>
                                   <h4 className={`${styles['fontW600']} ${styles['light-gry-clr']}`}>{name}</h4>
                                   <div className={`${styles['warranty-part']} ${styles['p-10']} ${styles['light-gry-clr']}`}>
                                     <p className={`${styles['fs-12']}`}><span>{CART_PAGE.WARRENTY} : </span><span className={`${styles['pl-10']} ${styles['pr-10']}`}>{warranty[0].duration} {CART_PAGE.WARRENTY_TXT} </span><a href="" className={`${styles['fontW600']}`}>{CART_PAGE.VIEW_MORE}</a></p>
@@ -90,7 +90,7 @@ const CartBody = props => {
                                     <label htmlFor={"gift" + item_id}> {CART_PAGE.SEND_GIFT} {gift_info ? "(" + gift_info.gift_rate + " " + cur + ")" : ''} </label>
                                   </div>
                                 </Col>
-                                <Col md={2} className={`${styles['pl-0']}`}>
+                                <Col md={2} sm={2} className={`${styles['pl-0']} ${styles['landscape-cart-price']}`}>
                                   <h4 className={`${styles['fontW600']} ${styles['light-gry-clr']} ${styles['mt-15']} ${styles['t-rt']}`}>{price + ' ' + cur}</h4>
                                   <p className={`${styles['t-rt']}`}>0.00 <span className={`${styles['fs-12']}`}>{cur}</span></p>
                                   <p className={`${styles['t-rt']}`}>{shipping.shipping_fees} <span className={`${styles['fs-12']}`}>{cur}</span></p>
@@ -100,7 +100,7 @@ const CartBody = props => {
                           </Row>
                         </div>
                         <div className={`${styles['cart-box-btm']} ${styles['flex']} ${styles['p-14-22']}`}>
-                          <Col md={9} className={styles['flex']}>
+                          <Col md={9} sm={9} className={styles['flex']}>
                             <span className={styles['width21']}>
                               {
                                 inventory <= 10 && inventory != 0 ?
@@ -122,7 +122,7 @@ const CartBody = props => {
                               <span className={styles['pl-10']}>{CART_PAGE.REMOVE}</span>
                             </span>
                           </Col>
-                          <Col md={3} className={`${styles['t-rt']} ${styles['pr-0']}`}>
+                          <Col md={3} sm={3} className={`${styles['t-rt']} ${styles['pr-0']}`}>
                             <span>Total : </span><span className={`${styles['fs-16']} ${styles['fontW600']}`}>{total_amount + ' ' + cur}</span>
                           </Col>
                         </div>

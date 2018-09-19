@@ -258,7 +258,7 @@ class Payments extends React.Component {
                 configJson={paymentConfigJson.payment}
               />
             </Col>
-            <Col md={3} xs={12} sm={12} className={`${styles['pl-5']}`}>
+            <Col md={3} xs={12} sm={12} className={`${styles['pl-5']} ${styles['landscape-pr-0']}`}>
               <div>
                 {
                   cartResults && cartResults.total_price ?

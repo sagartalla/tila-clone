@@ -138,7 +138,7 @@ class MegaMenu extends Component {
                   onLinkClick={this.onLinkClick}
                 />
                 :
-                <Grid>
+                <Grid className={styles['megamenu-event-container']}>
                   <Menu
                     selectedCategoryTree={selectedCategoryTree}
                     colorScheme={this.state.colorScheme}

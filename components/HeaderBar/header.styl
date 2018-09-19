@@ -340,9 +340,11 @@
       width 100%
       .megamenu-sub-list
         width 100%
-        img
-          width 75px
-          height 25px
+        .megamenu-sub-child-list
+          padding-left 0
+          img
+            width 75px
+            height 25px
   .view-all-menu
     position absolute
     bottom 5px
@@ -396,3 +398,28 @@ nav
 
 .mini-cart
   height: auto;
+
+@media screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation : portrait){
+  .megamenu-sub-drop-down .top-brands-trending-wrap .megamenu-sub-child-list {
+    padding-left 0
+  }
+
+  .megamenu-event-wrapper {
+    .megamenu-dropdown {
+      overflow scroll
+
+      .megamenu-sub-list {
+        width 33%
+
+        .megamenu-icon {
+          margin-right 5px
+          left auto
+        }
+      }
+    }
+    .megamenu-event-container {
+      width 100%
+      padding 0
+    }
+  }
+}
