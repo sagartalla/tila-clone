@@ -141,8 +141,11 @@ class Product extends Component {
             <div className={`${styles['hover-show-date']} ${styles['pb-10']} ${styles['pb-10']} ${styles['relative']}`}>
               <div className={`${styles['flex']} ${styles['justify-around']} ${styles['quick-view']} ${styles['border-radius4']}`}>
                 <a className={`${styles['flex']} ${styles['add-to-crt']} ${styles['justify-center']}`} onClick={this.addToCart}>
-                  <SVGCompoent clsName={`${styles['cart-list']}`} src="icons/cart/blue-cart-icon" />
-                  <span className={styles['pl-5']} disabled={addedToCart}>{ addedToCart ? `${PDP_PAGE.ADDED_TO_CART}` : `${PDP_PAGE.ADD_TO_CART}`}</span>
+                  {/* <SVGCompoent clsName={`${styles['cart-list']}`} src="icons/cart/blue-cart-icon" /> */}
+                  <span disabled={addedToCart}>
+                  { 
+                    addedToCart ? <span className={styles['flex']}><SVGCompoent clsName={styles['cart-list']} src="icons/cart/added-cart-icon" />{PDP_PAGE.ADDED_TO_CART}</span> :
+                    <span className={styles['flex']}><SVGCompoent clsName={styles['cart-list']} src="icons/cart/blue-cart-icon" />{PDP_PAGE.ADD_TO_CART}</span>}</span>
                 </a>
                 <a className={`${styles['flex']} ${styles['buy-now-btn']} ${styles['justify-center']}`} onClick={this.buyNow}>
                   <SVGCompoent clsName={`${styles['cart-list']}`} src="icons/cart/buy-icon" />
