@@ -87,7 +87,7 @@
         border-radius 0
         border-bottom-right-radius 20px
         padding 10px 55px
-        
+
     .buy-coupon
       width 16px
       height 16px
@@ -285,6 +285,26 @@
         width 24px
     &:nth-child(odd)
       background-color compare-bg-greay
+
+.product-details-main .panel-group .panel-heading a[aria-expanded="false"]::after {
+  right: 0;
+  top: -4px;
+  content: '\002b';
+  position: absolute;
+  font-size: 18px;
+  font-weight: 300;
+  color: #939393;
+}
+
+.product-details-main .panel-group .panel-heading a[aria-expanded="true"]::after {
+  content: '\2212';
+  position: absolute;
+  right: 0;
+  top: -4px;
+  font-size: 18px;
+  font-weight: 300;
+  color: #939393;
+}
 
 @media screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation : portrait){
   .details-right-part {
