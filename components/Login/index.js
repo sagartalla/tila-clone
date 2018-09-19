@@ -205,7 +205,7 @@ class Login extends Component {
                 {
                   this.state.mode === 'register'
                   ?
-                  <p className={`${styles['fs-12']} ${styles['termes-label']} ${styles['pt-10']}`}>Registration with us means you agree with Tila&apos;s <a>T&amp;C, Privacy Policy &amp; Cookie Policy</a></p>
+                  <p className={`${styles['fs-12']} ${styles['termes-label']} ${styles['pt-10']}`}>Registration with us means you agree with Tila&apos;s <a href="/terms" target="_blank">T&amp;C, Privacy Policy &amp; Cookie Policy</a></p>
                   :
                   null
                 }
