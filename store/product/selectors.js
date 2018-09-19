@@ -73,9 +73,15 @@ const getVariants = (store) => {
   const identityAttr = _.filter(cached_product_details.attribute_map, { attribute_group_name: 'IDENTITY' }).map((attr) => attr.name);
   let variants = (similar_products || []).map((product) => {
     const obj = identityAttr.reduce((acc, attrName) => {
+      const aMap = product_details.product_details_vo.cached_product_details.attribute_map;
+      if(aMap[attrName]) {
+        return {
+          ...acc,
+          [attrName]: product_details.product_details_vo.cached_product_details.attribute_map[attrName].attribute_values[0].value,
+        }
+      }
       return {
-        ...acc,
-        [attrName]: product.product_details_vo.cached_product_details.attribute_map[attrName].attribute_values[0].value,
+        ...acc
       }
     }, obj);
     obj.pId = product.product_details_vo.cached_product_details.product_id;
@@ -83,9 +89,15 @@ const getVariants = (store) => {
     return obj;
   });
   const obj = identityAttr.reduce((acc, attrName) => {
+    const aMap = product_details.product_details_vo.cached_product_details.attribute_map;
+    if(aMap[attrName]) {
+      return {
+        ...acc,
+        [attrName]: product_details.product_details_vo.cached_product_details.attribute_map[attrName].attribute_values[0].value,
+      }
+    }
     return {
-      ...acc,
-      [attrName]: product_details.product_details_vo.cached_product_details.attribute_map[attrName].attribute_values[0].value,
+      ...acc
     }
   }, {});
   obj.pId = product_details.product_details_vo.cached_product_details.product_id;
