@@ -128,7 +128,7 @@
     display: block;
 }
 
-/* .panel-group .panel-heading a[aria-expanded="true"]::after {
+.panel-group .panel-heading a[aria-expanded="true"]::after {
     content: '\2212';
     position: absolute;
     right: 0;
@@ -146,7 +146,7 @@
     font-size: 18px;
     font-weight: 300;
     color: #939393;
-} */
+}
 
 
 .panel-group {
@@ -208,3 +208,4 @@
         display: none !important;
     }
 }
+
