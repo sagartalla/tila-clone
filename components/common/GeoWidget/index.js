@@ -33,14 +33,14 @@ class GeoWidget extends Component {
 
   locateMe() {
     const shippingInfo = cookies.get('shippingInfo')
-    if(navigator.geolocation && !shippingInfo) {
+    if (navigator.geolocation && !shippingInfo) {
       navigator.geolocation.getCurrentPosition(this.deriveCity);
     }
   }
 
   componentWillReceiveProps(nextProps) {
     const { geoShippingData } = nextProps;
-    if(!this.state.displayCity && geoShippingData) {
+    if (!this.state.displayCity && geoShippingData) {
       this.setState({
         displayCity: geoShippingData.displayCity
       })
@@ -97,19 +97,26 @@ class GeoWidget extends Component {
   }
 
   render() {
-    const { autoCompleteCityData, geoShippingData } = this.props;
+    const { autoCompleteCityData, geoShippingData, hideLabel } = this.props;
     // const { displayCity } = geoShippingData;
     // const { displayCity: stateDisplayCity } = this.state;
     return (
       <div className={`${styles['flex-center']} ${styles['delovery-inn']}`}>
-        <span className={`${styles['flex-center']} ${styles['delivery-part']}`}>
-          <SVGCompoent clsName={`${styles['map-icon']}`} src="icons/common-icon/black-map-location" />
-          <span className={`${styles['fontW600']} ${styles['pl-5']} ${styles['pr-10']}`}>{SEARCH_PAGE.DELIVER_TO} :</span>
-        </span>
+        {
+          (!hideLabel)
+            ?
+            <span className={`${styles['flex-center']} ${styles['delivery-part']}`}>
+              <SVGCompoent clsName={`${styles['map-icon']}`} src="icons/common-icon/black-map-location" />
+              <span className={`${styles['fontW600']} ${styles['pl-5']} ${styles['pr-10']}`}>{SEARCH_PAGE.DELIVER_TO} :</span>
+
+            </span>
+            :
+            null
+        }
         <div className={styles['auto-suggestions-wrap']}>
           <input type="text" value={this.state.displayCity} className={styles['fs-12']} onChange={this.onChangeCity} />
           {
-            autoCompleteCityData.map((result) =>  <div key={result.displayCity} className={`${styles['auto-suggestions']} ${styles['p-10']} ${styles['bg-white']}`}><div data-id={result.displayCity} onClick={this.selectCityFromSuggesstions} className={`${styles['item']} ${styles['fs-12']}`}>{result.displayCity}</div></div>)
+            autoCompleteCityData.map((result) => <div key={result.displayCity} className={`${styles['auto-suggestions']} ${styles['p-10']} ${styles['bg-white']}`}><div data-id={result.displayCity} onClick={this.selectCityFromSuggesstions} className={`${styles['item']} ${styles['fs-12']}`}>{result.displayCity}</div></div>)
           }
           {
             this.state.displayCity
