@@ -19,9 +19,9 @@ class Variant extends Component {
   render() {
     const { title, options, onSelectVariant, id, selectedOptions } = this.props;
     return (
-      <div className={`${styles['pt-10']} ${styles['pb-10']} ${styles['pr-20']}`}>
+      <div className={`${styles['pt-10']} ${styles['pb-10']} ${styles['pr-15']}`}>
         <div className={`${styles['flex-center']}`}>
-          <span className={`${styles['fs-12']} ${styles['fontW600']} ${styles['pr-20']}`}>{title}</span>
+          <span className={`${styles['fs-12']} ${styles['fontW600']} ${styles['pr-15']}`}>{title}</span>
           <div className={`${styles['flex-center']} ${styles['size-btn-main']}`}>
           <select id={id} data-key={id} onChange={this.onSelectVariant} className={`${styles['varient-select-part']} ${styles['fs-12']} ${styles['p-5']}`}>
           {
