@@ -5,14 +5,9 @@ import Script from '../components/helpers/Script';
 export default class MyDocument extends Document {
   render() {
     const { props } = this;
-    const { buildManifest, pathname } = props;
-    const { css } = buildManifest;
     return (
       <html>
         <Head>
-          {css.map((file) => {
-            return <link rel="stylesheet" href={`/_next/${file}`} key={file} />
-          })}
           {
             props.__NEXT_DATA__.query.language === 'ar'
               ?

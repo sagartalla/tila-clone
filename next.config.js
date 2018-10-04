@@ -1,7 +1,7 @@
 const eslintFormatter = require('react-dev-utils/eslintFormatter');
 const withStylus = require('@zeit/next-stylus');
 const withCSS = require('@zeit/next-css');
-const commonsChunkConfig = require('@zeit/next-css/commons-chunk-config');
+// const commonsChunkConfig = require('@zeit/next-css/commons-chunk-config');
 const path = require('path');
 const git = require('git-rev-sync');
 const withSourceMaps = require('@zeit/next-source-maps')
@@ -52,7 +52,7 @@ module.exports = withSourceMaps(withStylus(withCSS({
       test: /\.svg$/,
       loader: 'svg-inline-loader'
     });
-    config = commonsChunkConfig(config, /\.(styl|css)$/);
+    // config = commonsChunkConfig(config, /\.(styl|css)$/);
     return config
   }
 })));
