@@ -101,7 +101,9 @@ class ActionBar extends Component {
           </NoSSR>
         </div>
         <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']} ${styles['country-code']}`}>
-          <Country />
+          <NoSSR>
+            <Country />
+          </NoSSR>
         </div>
         <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']}`}>
           <Link route="/cam/wishlist">
