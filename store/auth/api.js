@@ -29,7 +29,7 @@ const userLogin = (params) => {
         }
       ).then((ptaData) => {
         const { output } = ptaData.data;
-        data.data.ptaToken = output.replace('+', '_').replace('/','~').replace('=','*');
+        data.data.ptaToken = output.replace(/\+/g, '_').replace('/\//g','~').replace('/\=/g','*');
         return data;
       });
     }
