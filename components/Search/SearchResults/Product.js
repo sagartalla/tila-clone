@@ -11,9 +11,9 @@ import { actionCreators } from '../../../store/cam/wishlist';
 import { Grid, Row, Col } from 'react-bootstrap';
 import SVGCompoent from '../../common/SVGComponet';
 import { mergeCss } from '../../../utils/cssUtil';
-import {languageDefinations} from '../../../utils/lang'
+import { languageDefinations } from '../../../utils/lang'
 const styles = mergeCss('components/Search/search');
-const {PDP_PAGE} = languageDefinations()
+const { PDP_PAGE } = languageDefinations()
 class Product extends Component {
   constructor(props) {
     super(props);
@@ -107,7 +107,13 @@ class Product extends Component {
                   null
               }
               <span className={`${styles['variants-main']}`}></span>
-              <span className={`${styles['fullfill-main']} ${styles['flex-center']}`}><span className={styles['fulfill-img']}></span><span className={`${styles['fs-12']} ${styles['fontW600']} ${styles['pl-10']} ${styles['fullfilled-label']}`}>{PDP_PAGE.FULLFILLED_BY_TILA}</span></span>
+              <span className={styles['full-and-globe-main']}>
+                <span className={`${styles['fullfill-main']} ${styles['flex-center']}`}>
+                  <span className={styles['fulfill-img']}></span>
+                  <span className={`${styles['fs-12']} ${styles['fontW600']} ${styles['pl-10']} ${styles['fullfilled-label']}`}>{PDP_PAGE.FULLFILLED_BY_TILA}</span>
+                </span>
+              </span>
+
             </div>
             <div className={styles['desc-cont']}>
               <div className={`${styles['pb-20']} ${styles['pl-20']} ${styles['flex']} ${styles['flex-colum']}`}>
@@ -140,14 +146,14 @@ class Product extends Component {
             </div>
             <div className={`${styles['hover-show-date']} ${styles['pb-10']} ${styles['pb-10']} ${styles['relative']}`}>
               <div className={`${styles['flex']} ${styles['justify-around']} ${styles['quick-view']} ${styles['border-radius4']}`}>
-                <a className={`${styles['flex']} ${styles['add-to-crt']} ${styles['justify-center']}`} onClick={this.addToCart}>
+                <a className={`${styles['flex']} ${styles['add-to-crt']}`} onClick={this.addToCart}>
                   {/* <SVGCompoent clsName={`${styles['cart-list']}`} src="icons/cart/blue-cart-icon" /> */}
                   <span disabled={addedToCart}>
-                  { 
-                    addedToCart ? <span className={styles['flex']}><SVGCompoent clsName={styles['cart-list']} src="icons/cart/added-cart-icon" />{PDP_PAGE.ADDED_TO_CART}</span> :
-                    <span className={styles['flex']}><SVGCompoent clsName={styles['cart-list']} src="icons/cart/blue-cart-icon" />{PDP_PAGE.ADD_TO_CART}</span>}</span>
+                    {
+                      addedToCart ? <span className={styles['flex']}><SVGCompoent clsName={styles['cart-list']} src="icons/cart/added-cart-icon" />{PDP_PAGE.ADDED_TO_CART}</span> :
+                        <span className={styles['flex']}><SVGCompoent clsName={styles['cart-list']} src="icons/cart/blue-cart-icon" />{PDP_PAGE.ADD_TO_CART}</span>}</span>
                 </a>
-                <a className={`${styles['flex']} ${styles['buy-now-btn']} ${styles['justify-center']}`} onClick={this.buyNow}>
+                <a className={`${styles['flex-center']} ${styles['buy-now-btn']}`} onClick={this.buyNow}>
                   <SVGCompoent clsName={`${styles['cart-list']}`} src="icons/cart/buy-icon" />
                   <span className={styles['pl-5']}>{PDP_PAGE.BUY_NOW}</span>
                 </a>
@@ -156,7 +162,7 @@ class Product extends Component {
                 <span className={styles['flex']}>
                   <a className={styles['flex-center']} onClick={this.addToWishlist}>
                     <SVGCompoent clsName={`${styles['wish-list']}`} src={addedToWishlist ? "icons/wish-list/wish-list-icon-red" : "icons/wish-list/wish-list-icon"} />
-                    <span className={`${styles['pl-5']} ${styles['fs-12']}`} disabled={addedToWishlist}>{addedToWishlist ? `${PDP_PAGE.ADDED_TO_WISHLIST}`: `${PDP_PAGE.ADD_TO_WISHLIST}`}</span>
+                    <span className={`${styles['pl-5']} ${styles['fs-12']}`} disabled={addedToWishlist}>{addedToWishlist ? `${PDP_PAGE.ADDED_TO_WISHLIST}` : `${PDP_PAGE.ADD_TO_WISHLIST}`}</span>
                   </a>
                 </span>
                 <span className={styles['flex']}>
@@ -167,12 +173,12 @@ class Product extends Component {
                 </span>
               </div>
               <div className={styles['brand-price-details']}>
-                <div>
-                  <h5 className={`${styles['prdt-name']}  ${styles['pb-5']} ${styles['m-0']}`}>
+                {/* <div> */}
+                  {/* <h5 className={`${styles['prdt-name']}  ${styles['pb-5']} ${styles['m-0']}`}>
                     <span className={`${styles['fontW600']}`}>{brand}</span> <span className={`${styles['thick-gry-clr']} ${styles['fontW300']}`}>{displayName.replace(brand, '').trim()}</span>
-                  </h5>
+                  </h5> */}
                   {/* <span className={`${styles['fs-12']} ${styles['label-gry-clr']}`}>Denim shirt with baseball shirt stiff collar and formal tie</span> */}
-                </div>
+                {/* </div> */}
                 <span className={`${styles['pr-5']} ${styles['fs-12']} ${styles['fontW600']}`}>{currency}</span>
                 <span className={`${styles['fs-16']} ${styles['fontW700']}`}>{priceRange}</span>
                 <div className={`${styles['flex']} ${styles['pt-5']}`}>

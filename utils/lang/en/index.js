@@ -116,10 +116,10 @@ export const EN_KEYWORDS = {
     'FREE_DELIVERY': 'Free delivery',
     'DAYS': 'Days',
     'PRODUCT_DETAILS': 'PRODUCT DETAILS',
-    'ADD_TO_CART': 'ADD TO CART',
-    'BUY_NOW': 'BUY NOW',
+    'ADD_TO_CART': 'Add To Cart',
+    'BUY_NOW': 'Buy Now',
     'BUY_FOR': 'BUY FOR',
-    'ADDED_TO_CART': 'IN CART',
+    'ADDED_TO_CART': 'In Cart',
     // //New keys
     'GO_TO_CART': 'Go To Cart',
     'LIKE': 'Like',
