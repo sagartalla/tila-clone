@@ -54,6 +54,8 @@
         border: 1px solid navy-blue
         border-bottom-left-radius: 16px
         color navy-blue
+        .cart-list
+          margin-right 8px
       .buy-now-btn
         background-color navy-blue
         border-bottom-right-radius 16px
@@ -61,15 +63,15 @@
         .cart-list
           height 20px
           width 20px
+          margin-right 5px
       a
         // color white
         width 50%
         text-align center
-        padding 6px 0
+        padding 6px 0 6px 15px
         .cart-list
           width 15px
           height 16px
-          margin-right 8px
         // &:first-child
         //   border-right 1px solid white
     .brand-price-details
@@ -84,8 +86,8 @@
 
     .wish-list-part
       margin 10px 15px
-      border-bottom: 1px solid cam-border-gray
-      padding-bottom: 10px;
+      // border-bottom: 1px solid cam-border-gray
+      // padding-bottom: 10px;
       .wish-list
         width 15px
         height 15px
@@ -144,13 +146,20 @@
   .fullfilled-label
       display none
 
-  .fullfill-main
+  .full-and-globe-main
     position absolute
-    top 5px
-    right 10px
+    top 0
+    right 0
+  .fullfill-main
+    // position absolute
+    // top 5px
+    // right 10px
     padding: 6px 10px;
     border-bottom-left-radius 20px
-    border-top-right-radius 12px
+    // border-top-right-radius 12px
+    &:hover
+      .fullfilled-label
+        display block
 
     .fulfill-img
       background url(/static/img/icons/common-icon/icon-fullfilled.svg) no-repeat
@@ -163,26 +172,25 @@
 
   &:hover
     z-index 9
-    transform scale(1.1)
+    // transform scale(1.1)
     // padding 4px
-    border-radius 12px
+    border-bottom-left-radius 10px
+    border-bottom-right-radius: 10px
     background-color white
-    box-shadow 0 0 34px 0 #c0c0c0
+    box-shadow 0 2px 10px 0 rgba(0, 0, 0, 0.1)
     z-index 11
     position absolute
     width 276px
 
     .fullfill-main
       background-color: rgba(216, 216, 216, 0.8)
-      top 0
-      right 0
-    .fullfilled-label
-      display block
+    // .fullfilled-label
+    //   display block
     .image-div
       border-top-left-radius 12px
       border-top-right-radius 12px
       border-radius 10px
-      border solid 1px border-light-gray
+      // border solid 1px border-light-gray
     .desc-cont
       display none
     .hover-show-date
@@ -202,6 +210,7 @@
   border 1px solid border-gray
   box-shadow 0 2px 7px 0 rgba(0,0,0,0.03)
   background-color white
+  border-radius 10px
 
   .img-cont
     height 398px
