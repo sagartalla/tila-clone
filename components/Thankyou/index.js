@@ -47,7 +47,7 @@ class Thankyou extends Component {
             : null
         }
       </div>
-    )
+    );
   }
 }
 
