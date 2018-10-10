@@ -80,9 +80,9 @@ const CartAndPaymentSideBar = props => {
           {
             tax != 0 ? <li>{CART_PAGE.TAXES} <span>{currency}</span></li> : null
           }
-          <li className={`${styles['mt-20']} ${styles['fs-16']} ${styles['light-gry-clr']}`}><b>{CART_PAGE.TOTAL_AMOUNT} <span>{total_offer_price + ' ' + currency}</span></b>
+          <li className={`${styles['mt-20']} ${styles['fs-16']} ${styles['light-gry-clr']} ${styles['flex']} ${styles['flex-colum']}`}><b>{CART_PAGE.TOTAL_AMOUNT} <span>{total_offer_price + ' ' + currency}</span></b>
             {
-              total_discount > 0 ? <span className={`${styles['fs-12']} ${styles['thick-red']}`}>You saved {total_discount} {currency}</span> : null
+              total_discount > 0 ? <span className={`${styles['fs-12']} ${styles['thick-red']} ${styles['t-rt']}`}>You saved {total_discount} {currency}</span> : null
             }
           </li>
 
