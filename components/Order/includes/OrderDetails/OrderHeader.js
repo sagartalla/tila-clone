@@ -14,7 +14,7 @@ import MyGMap from '../../../Cam/ShippingAddress/includes/MyGMap';
 import SVGComponent from '../../../common/SVGComponet';
 
 import { mergeCss } from '../../../../utils/cssUtil';
-import {languageDefinations} from '../../../../utils/lang';
+import { languageDefinations } from '../../../../utils/lang';
 const {ORDER_PAGE,CART_PAGE} = languageDefinations();
 
 const styles = mergeCss('components/Order/order');
@@ -75,7 +75,7 @@ class OrderHeader extends Component {
     const { name, address, phone, orderId, orderDate, price, shippingTotal, payments, currency_code } = this.props.orderDetails;
 
     return (
-      <div className={styles['box']}>
+      <div className={`${styles['box']} ${styles['addres-dtls']}`}>
         <Row className={styles['m-0']}>
           {/* <Col md={12} xs={12} sm={12}> */}
             <Col md={12} xs={12} sm={12} className={`${styles['border-btm-dottes']}`}>
@@ -184,7 +184,7 @@ class OrderHeader extends Component {
                 </Col>
               </Col>
               <Col md={4} xs={6} sm={4}>
-                <span className={`${styles['flex-center']}`}>
+                <span className={`${styles['flex-center']} ${styles['share-cont']}`}>
                   <SVGComponent clsName={`${styles['share-icon']}`} src="icons/share-icon/share-icon" />
                   <span className={`${styles['pl-10']}`}><a>{ payments[0].transaction_status == "FAILED" ? ORDER_PAGE.PAYMENT_FAILED:  ORDER_PAGE.SOCIALIZE }</a></span>
                 </span>

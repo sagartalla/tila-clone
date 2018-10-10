@@ -4,7 +4,7 @@ import { Grid, Row, Col } from 'react-bootstrap';
 import SVGComponent from '../../common/SVGComponet';
 
 import { mergeCss } from '../../../utils/cssUtil';
-import {languageDefinations} from '../../../utils/lang';
+import { languageDefinations } from '../../../utils/lang';
 const styles = mergeCss('components/Thankyou/thankyou');
 const {THANK_YOU_PAGE} = languageDefinations();
 const PaymentStatus = props => {
