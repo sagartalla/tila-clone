@@ -14,7 +14,7 @@ import { actionCreators } from '../../../../store/order';
 import { mergeCss } from '../../../../utils/cssUtil';
 const styles = mergeCss('components/Order/order');
 
-const OrderItem = ({ payments, orderItem, raiseOrderIssue, orderId, showWidget, thankyouPage }) => {
+const OrderItem = ({ payments=[{}], orderItem, raiseOrderIssue, orderId, showWidget, thankyouPage }) => {
   const { products } = orderItem;
 
   const cancelOrder = () => {
