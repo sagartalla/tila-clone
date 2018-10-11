@@ -42,7 +42,7 @@ module.exports = {
   },
   staging: {
     SEARCH_API_URL        :   'https://api-gateway-stage.fptechscience.com/search',
-    CATALOG_API_URL       :   'https://catalogapi-stage.fptsinternal.com/',
+    CATALOG_API_URL       :   'https://api-gateway-internal-stage.fptsinternal.com/',
     LISTING_API_URL       :   'https://api-gateway-stage.fptechscience.com/listing',
     PIM_API_URL           :   'https://pimapis-dev.fptechscience.com/pim',
     CMS_API_URL           :   'https://api-gateway-stage.fptechscience.com/cms',
@@ -58,7 +58,7 @@ module.exports = {
   },
   production: {
     SEARCH_API_URL        :   'http://gateway-dev.fptechscience.com/search',
-    CATALOG_API_URL       :   'http://catalogapis-dev.fptechscience.com',
+    CATALOG_API_URL       :   'http://api-gateway-internal-stage.fptsinternal.com',
     LISTING_API_URL       :   'http://gateway-dev.fptechscience.com/listing',
     PIM_API_URL           :   'http://pimapis-dev.fptechscience.com/pim',
     CMS_API_URL           :   'http://gateway-dev.fptechscience.com/cms',
