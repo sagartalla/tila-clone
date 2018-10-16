@@ -42,9 +42,9 @@ module.exports = {
   },
   staging: {
     SEARCH_API_URL        :   'https://api-gateway-stage.fptechscience.com/search',
-    CATALOG_API_URL       :   'https://api-gateway-internal-stage.fptsinternal.com/',
+    CATALOG_API_URL       :   'http://api-gateway-internal-stage.fptsinternal.com/catalogapi',
     LISTING_API_URL       :   'https://api-gateway-stage.fptechscience.com/listing',
-    PIM_API_URL           :   'https://pimapis-dev.fptechscience.com/pim',
+    PIM_API_URL           :   'http://api-gateway-internal-stage.fptsinternal.com/pim-service/pim',
     CMS_API_URL           :   'https://api-gateway-stage.fptechscience.com/cms',
     ORDERS_API_URL        :   'https://api-gateway-stage.fptechscience.com/order',
     TRANSACTIONS_API_URL  :   'https://api-gateway-stage.fptechscience.com/transactions',
