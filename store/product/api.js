@@ -9,7 +9,7 @@ const getProduct = (options) => {
 
 const getPreview = (options) => {
   return Promise.all([
-    pimServiceInstance.get(`/catalog/preview/${options.taskCode}`),
+    pimServiceInstance.get(`/catalog/preview/${options.taskCode}`, { accessToken: options.accessToken }),
     axios.get(`${constants.CATALOG_API_URL}/item_type_attribute/${options.itemType}/attributes?request_id=1234567890123456&display_name=true&closed_list_values=true`),
   ]).then(([pimData, catalogData]) => {
     return {

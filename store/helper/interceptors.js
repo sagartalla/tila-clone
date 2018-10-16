@@ -119,6 +119,7 @@ pimServiceInstance.interceptors.request.use(_.compose(
       tenantId,
       'Request-Id': requestId,
       Hash: shajs('sha256').update(`${key}${stringifiedData}${requestId}`).digest('hex'),
+      'x-access-token': config.accessToken,
     };
     return copyConfig;
   }

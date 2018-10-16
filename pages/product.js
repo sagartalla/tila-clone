@@ -30,6 +30,7 @@ class ProductPage extends Base {
       await store.dispatch(actionCreators.getPreview({
         taskCode: taskCode,
         itemType: itemType,
+        accessToken: req.universalCookies.get('accessToken'),
       }));
     } else {
       const options = {
