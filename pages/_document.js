@@ -15,6 +15,7 @@ export default class MyDocument extends Document {
               :
               null
           }
+          <script type='text/javascript' src='//service.maxymiser.net/api/eu/fptechscience.com/3a077f/mmapi.js'> </script>
           <Meta />
         </Head>
         <body>
