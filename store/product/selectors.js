@@ -152,14 +152,16 @@ const getPreview = (store) => {
   })) : [];
   const catalog = _.reduce(attributes, (acc, attrVal, attrKey) => {
     const cItem = _.find(catalogData, { attributeName: attrKey });
-    const groupName = cItem.attributeCategoryName;
-    const isVisible = cItem.isVisible;
-    if(isVisible) {
-      acc[groupName] = acc[groupName] || [];
-      acc[groupName].push({
-        display_string: attrKey,
-        attribute_values: attrVal.attributeValues,
-      });
+    if(cItem){
+      const groupName = cItem.attributeCategoryName;
+      const isVisible = cItem.isVisible;
+      if(isVisible) {
+        acc[groupName] = acc[groupName] || [];
+        acc[groupName].push({
+          display_string: attrKey,
+          attribute_values: attrVal.attributeValues,
+        });
+      }
     }
     return acc;
   }, {});
