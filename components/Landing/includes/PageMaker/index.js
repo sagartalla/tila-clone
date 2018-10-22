@@ -25,7 +25,8 @@ class PageMaker extends Component {
                                 switch (widgetType) {
                                   case 'singleImage':
                                   case 'multiImage':
-                                    return <ImagesWidget ...content[r+c] />
+                                    const props = content[r+c];
+                                    return <ImagesWidget />
                                     break;
                                 }
                               })
@@ -37,7 +38,7 @@ class PageMaker extends Component {
                   }
                 </Row>
               )
-            });
+            })
           }
         </Grid>
       </div>

@@ -16,6 +16,7 @@ import { reducer as messagesReducer } from './cam/messages';
 import { reducer as reviewRatingReducer } from './ratingReviews';
 import { reducer as instantCheckoutReducer } from './common/instantCheckout';
 import { reducer as listingCartReducer } from './listingCart';
+import { reducer as landingReducer } from './landing';
 
 export default combineReducers({
   searchReducer,
@@ -35,4 +36,5 @@ export default combineReducers({
   reviewRatingReducer,
   instantCheckoutReducer,
   listingCartReducer,
+  landingReducer,
 });
