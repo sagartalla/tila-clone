@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Grid, Row, Col } from 'react-bootstrap';
 import _ from 'lodash';
 
+import ImagesWidget from './ImagesWidget';
+
 class PageMaker extends Component {
   render() {
     const { data } = this.props;
@@ -10,30 +12,22 @@ class PageMaker extends Component {
         <Grid>
           {
             data.map(({row=1, col=1, content}) => {
-
               return (
                 <Row>
                   {
-                    _.times(row=1, () => {
+                    _.times(row, (r) => {
                       return (
                         <Col md={12}>
                           <Row>
                             {
-                              _.times(col=1, () => {
-                                const { type, fileURLdesktop, redirectionUrl } = content[row+col];
-                                return (
-                                  <div>
-                                    {
-                                      type === 'image'
-                                      ?
-                                      <a href={redirectionUrl}>
-                                        <img src={fileURLdesktop} />
-                                      </a>
-                                      :
-                                      null
-                                    }
-                                  </div>
-                                );
+                              _.times(col, (c) => {
+                                const { type: widgetType, title, content: innerContnet, col: widgetCol, row: widgetRow } = content[r+c];
+                                switch (widgetType) {
+                                  case 'singleImage':
+                                  case 'multiImage':
+                                    return <ImagesWidget ...content[r+c] />
+                                    break;
+                                }
                               })
                             }
                           </Row>
