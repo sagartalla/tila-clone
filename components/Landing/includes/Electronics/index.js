@@ -5,17 +5,19 @@ import SVGComponent from '../../../common/SVGComponet';
 
 import PageMaker from '../PageMaker';
 
-import { selectors } from '';
+import { selectors } from '../../../../store/landing';
 
 import { mergeCss } from '../../../../utils/cssUtil';
 const styles = mergeCss('components/Landing/includes/Electronics/electronics');
 
-const Electronics = () => {
-  return 'hi';
+const Electronics = (props) => {
+  return (
+    <PageMaker data={props.pageData}/>
+  );
 };
 
 const mapStateToProps = (store) => ({
-  productData: taskCode ? selectors.getPreview(store) : selectors.getProduct(store)
+  pageData: selectors.getPages(store)
 });
 
 export default connect(mapStateToProps, null)(Electronics);

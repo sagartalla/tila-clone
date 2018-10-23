@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 const getPages = (store) => {
-  return store.landingReducer.content[0];
+  return JSON.parse(store.landingReducer.data.content[0].json);
 }
 
 export { getPages };

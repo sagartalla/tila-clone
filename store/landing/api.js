@@ -12,7 +12,6 @@ const getPages = () => {
     },
     url: constants.TRANSFORMER_API_URL,
   };
-
   return axios(options);
 };
 

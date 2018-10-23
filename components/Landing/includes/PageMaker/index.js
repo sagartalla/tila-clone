@@ -26,7 +26,11 @@ class PageMaker extends Component {
                                   case 'singleImage':
                                   case 'multiImage':
                                     const props = content[r+c];
-                                    return <ImagesWidget />
+                                    return (
+                                      <Col md={Math.floor(12/col)}>
+                                        <ImagesWidget {...props} />
+                                      </Col>
+                                    );
                                     break;
                                 }
                               })
@@ -45,3 +49,5 @@ class PageMaker extends Component {
     );
   }
 }
+
+export default PageMaker;
