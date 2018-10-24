@@ -1,7 +1,7 @@
 {
   "name": "store-front",
   "scripts": {
-    "dev": "ENV=staging node --inspect server.js",
+    "dev": "ENV=staging node --inspect-brk server.js",
     "build": "version=$version next build",
     "start": "NODE_ENV=production ENV=dev node server.js",
     "start:stage": "PORT=3000 NODE_ENV=production ENV=staging node server.js",
