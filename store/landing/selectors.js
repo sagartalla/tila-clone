@@ -4,4 +4,8 @@ const getPages = (store) => {
   return JSON.parse(store.landingReducer.data.content[0].json);
 }
 
+const getElectronicsPage = (store) => {
+  return _.find(store.landingReducer.data.content, { page_type_value: 'Electronics' }).json;
+}
+
 export { getPages };

@@ -6,12 +6,16 @@ const ImageWidget = (props) => {
   const { type: widgetType, title, content: innerContnet, col: widgetCol, row: widgetRow } = props;
   return _.times(widgetRow, (wr) => {
     return (
-        <Row>
+        <div>
           {
             _.times(widgetCol, (wc) => {
               const { type, redirectUrl, 'fileURL-desktop': fileURLDesktop } = innerContnet[wr+wc]
+              const inlineStyle = {
+                width:  `${100/widgetCol}%`,
+                display: 'inline-block'
+              }
               return (
-                <Col md={Math.floor(12/widgetCol)}>
+                <div style={inlineStyle}>
                   <div>
                     {
                       type === 'image'
@@ -23,13 +27,14 @@ const ImageWidget = (props) => {
                       null
                     }
                   </div>
-                </Col>
+                </div>
               )
             })
           }
-        </Row>
+        </div>
     )
   });
 }
 
 export default ImageWidget
+  // {/*<div md={Math.floor(12/widgetCol)} className={`${`width-${100/widgetCol}`}`} >*/}

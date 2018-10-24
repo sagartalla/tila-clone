@@ -12,12 +12,14 @@ const styles = mergeCss('components/Landing/includes/Electronics/electronics');
 
 const Electronics = (props) => {
   return (
-    <PageMaker data={props.pageData}/>
+    <div className={styles['electronics']}>
+      <PageMaker data={props.pageData}/>
+    </div>
   );
 };
 
 const mapStateToProps = (store) => ({
-  pageData: selectors.getPages(store)
+  pageData: selectors.getElectronicsPage(store)
 });
 
 export default connect(mapStateToProps, null)(Electronics);
