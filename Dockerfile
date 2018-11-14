@@ -25,7 +25,7 @@ RUN version=$version npm run build
 
 COPY deploy/nginx-default /etc/nginx/sites-enabled/default
 RUN htpasswd -bc /etc/nginx/.htpasswd admin fpts@1234
-RUN htpasswd -bc /etc/nginx/.htpasswd oracle test@oracle
+RUN htpasswd -b /etc/nginx/.htpasswd oracle test@oracle
 
 EXPOSE 3002
 
