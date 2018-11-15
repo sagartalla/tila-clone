@@ -8,4 +8,8 @@ const getElectronicsPage = (store) => {
   return JSON.parse(_.find(store.landingReducer.data.content, { page_type_value: 'Electronics' }).json);
 }
 
-export { getPages, getElectronicsPage };
+const getFashionPage = (store) => {
+  return JSON.parse(_.find(store.landingReducer.data.content, {page_type_value: 'Fashion'}).json);
+}
+
+export { getPages, getElectronicsPage, getFashionPage };
