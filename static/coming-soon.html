@@ -252,7 +252,7 @@ Example.sprites = function(w, h) {
      Bodies.rectangle(w, h/2, 10, h + 2 * offset, options),
   ]);
 
-  var stack = Composites.stack(-150, -1000, 160, 7, 50, 50, function(x, y, ix, iy) {
+  var stack = Composites.stack(-150, -1000, 160, 7, 50, 90, function(x, y, ix, iy) {
     var img = images[(ix+(iy+1)*10)%93];
     // console.log('img', ix, iy, ix+(iy+1)*10, (ix+(iy+1)*10)%93);
     return Bodies.rectangle(x, y, img.width, img.height, {
@@ -272,7 +272,7 @@ Example.sprites = function(w, h) {
       mouseConstraint = MouseConstraint.create(engine, {
           mouse: mouse,
           constraint: {
-              stiffness: 0.2,
+              stiffness: 0.5,
               render: {
                   visible: false
               }
