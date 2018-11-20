@@ -215,6 +215,8 @@ Example.sprites = function(w, h) {
   var engine = Engine.create(),
       world = engine.world;
 
+  world.gravity.y = 0.7;
+
   // create renderer
   var render = Render.create({
       element: document.body,
