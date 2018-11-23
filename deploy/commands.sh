@@ -1,2 +1,3 @@
+
 service nginx start
-npm run start:stage
+npm run start:ecs
