@@ -59,7 +59,24 @@ module.exports = {
     VAULT_API_URL         :   'https://api-gateway-stage.fptechscience.com/vault',
     TRANSFORMER_API_URL   :   'http://transformers-mgmt.fptsinternal.com/fpts/page-config/get-all-pages'
   },
-  production: {
+  preprod: {
+    SEARCH_API_URL        :   'https://apigateway-preprod.tila.com/search',
+    CATALOG_API_URL       :   'http://api-gateway-internal-stage.fptsinternal.com/catalogapi',
+    LISTING_API_URL       :   'https://apigateway-preprod.tila.com/listing',
+    PIM_API_URL           :   'http://apigatewayinternal-preprod.fptsinternal.com/pim-service/pim',
+    CMS_API_URL           :   'https://apigateway-preprod.tila.com/cms',
+    ORDERS_API_URL        :   'https://apigateway-preprod.tila.com/order',
+    TRANSACTIONS_API_URL  :   'https://apigateway-preprod.tila.com/transactions',
+    AUTH_API_URL          :   'https://apigateway-preprod.tila.com/auth-service',
+    CART_API_URL          :   'https://apigateway-preprod.tila.com/cart',
+    CATEGORYTREE_API_URL  :   'https://apigateway-preprod.tila.com/category-tree',
+    WISHLIST_API_URL      :   'https://apigateway-preprod.tila.com/wl',
+    FCM_API_URL           :   'https://apigateway-preprod.tila.com/fcm',
+    REVIEWS_API_URL       :   'https://apigateway-preprod.tila.com/reviews',
+    VAULT_API_URL         :   'https://apigateway-preprod.tila.com/vault',
+    TRANSFORMER_API_URL   :   'http://transformers-mgmt.fptsinternal.com/fpts/page-config/get-all-pages'
+  }
+  prod: {
     SEARCH_API_URL        :   'http://gateway-dev.fptechscience.com/search',
     CATALOG_API_URL       :   'http://api-gateway-internal-stage.fptsinternal.com',
     LISTING_API_URL       :   'http://gateway-dev.fptechscience.com/listing',
