@@ -75,7 +75,7 @@ module.exports = {
     REVIEWS_API_URL       :   'https://apigateway-preprod.tila.com/reviews',
     VAULT_API_URL         :   'https://apigateway-preprod.tila.com/vault',
     TRANSFORMER_API_URL   :   'http://transformers-mgmt.fptsinternal.com/fpts/page-config/get-all-pages'
-  }
+  },
   prod: {
     SEARCH_API_URL        :   'http://gateway-dev.fptechscience.com/search',
     CATALOG_API_URL       :   'http://api-gateway-internal-stage.fptsinternal.com',

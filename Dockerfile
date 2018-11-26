@@ -30,8 +30,6 @@ RUN htpasswd -b /etc/nginx/.htpasswd oracle test@oracle
 EXPOSE 3002
 
 ENV version $version
-ENV Environment $Environment
 CMD ["export version=${version}"]
-CMD ["export ENV=${Environment}"]
 CMD ["export PORT=3000"]
 CMD sh ./deploy/commands.sh
