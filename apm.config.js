@@ -27,5 +27,10 @@ module.exports = {
     serviceName: 'store-front-prod',
     serverUrl: 'http://apm.fptechscience.com',
     env: 'prod',
+  },
+  preprod: {
+    serviceName: 'store-front-stage',
+    serverUrl: 'http://apm.fptechscience.com',
+    env: 'stage'
   }
 }[ env || 'dev' ];

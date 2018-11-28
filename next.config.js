@@ -16,7 +16,7 @@ module.exports = withSourceMaps(withStylus(withCSS({
     isServer: true
   },
   publicRuntimeConfig: {
-      env: process.env.ENV,
+      env: process.env.ENV || 'preprod',
       version: version,
   },
   generateBuildId: async () => {
