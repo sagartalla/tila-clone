@@ -93,4 +93,4 @@ module.exports = {
     VAULT_API_URL         :   'http://gateway-dev.fptechscience.com/vault',
     TRANSFORMER_API_URL   :   'http://transformers-mgmt.fptsinternal.com/fpts/page-config/get-all-pages'
   }
-}[env || 'dev'];
+}[env || 'preprod'];
