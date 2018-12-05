@@ -32,4 +32,4 @@ export default {
     customerHelp: 'https://fptsuae.custhelp.com/app/faq/faq',
     custhelpDomain: 'https://fptsuae.custhelp.com'
   }
-}[config.publicRuntimeConfig.env || 'preprod'];
+}[config.publicRuntimeConfig.env || 'dev'];
