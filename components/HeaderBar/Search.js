@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { addUrlProps, UrlQueryParamTypes, pushInUrlQuery } from 'react-url-query';
+import _ from 'lodash';
 import { actionCreators, selectors } from '../../store/search';
 import { Router } from '../../routes';
 import SVGComponent from '../common/SVGComponet';
@@ -24,6 +25,8 @@ class Search extends Component {
     };
     this.submitQuery = this.submitQuery.bind(this);
     this.onChangeSearchInput = this.onChangeSearchInput.bind(this);
+    this.setSearchText = this.setSearchText.bind(this);
+    this.fetchSuggestions = _.debounce(this.fetchSuggestions.bind(this), 300);
   }
 
   submitQuery(e) {
@@ -36,7 +39,13 @@ class Search extends Component {
     this.setState({
       query: e.target.value,
       searchInput: true
+    }, () => {
+      this.fetchSuggestions();
     });
+  }
+
+  fetchSuggestions(e) {
+    this.props.fetchSuggestions({key: this.state.query});
   }
 
   componentWillReceiveProps(nextProps) {
@@ -44,11 +53,22 @@ class Search extends Component {
     const { query, searchInput } = this.state;
     this.setState({
       query: searchInput ? query : isCategoryTree ? choosenCategoryName : query,
-      searchInput: false
+      searchInput: false,
+      suggestions: nextProps.suggestions
+    });
+  }
+
+  setSearchText(e) {
+    this.setState({
+      query: e.target.textContent,
+      suggestions: null
+    }, () => {
+      this.submitQuery(e);
     });
   }
 
   render() {
+    const { suggestions } = this.state;
     return (
       <div className={styles['search-wrapper']}>
         <form onSubmit={this.submitQuery}>
@@ -59,6 +79,17 @@ class Search extends Component {
             value={this.state.query}
            />
           <button type="submit" className={styles['search-btn']}><SVGComponent clsName={`${styles['searching-icon']}`} src="icons/search/search-white-icon" /></button>
+          <ul className={styles['search-suggestions']}>
+            {
+              suggestions
+                ?
+                suggestions.map((s) => {
+                  return <li onClick={this.setSearchText} key={s.data_edgengram}>{s.data_edgengram}</li>
+                })
+                :
+                null
+            }
+          </ul>
         </form>
       </div>
     )
@@ -76,13 +107,15 @@ const mapStateToProps = (store) => ({
     query: selectors.getQuery(store),
     isCategoryTree: selectors.getIsCategoryTree(store),
     choosenCategoryName: selectors.getChoosenCategoryName(store),
-    optionalParams: selectors.optionParams(store)
+    optionalParams: selectors.optionParams(store),
+    suggestions: selectors.getSuggestions(store)
 });
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       getSearchResults: actionCreators.getSearchResults,
+      fetchSuggestions: actionCreators.fetchSuggestions,
     },
     dispatch,
   );

@@ -1,6 +1,8 @@
 import _ from 'lodash';
 import axios from 'axios';
 import constants from '../helper/constants';
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
 
 const getSearchResultsApi = ({
   categoryFilter,
@@ -65,4 +67,8 @@ const getSearchResultsApi = ({
     return { data };
   });
 };
-export default { getSearchResultsApi };
+
+const fetchSuggestions = ({key}) => {
+  return axios.get(`${constants.SUGGESSIONS_URL}?queryString=mob&lang=${cookies.get('language')}`)
+}
+export default { getSearchResultsApi, fetchSuggestions };

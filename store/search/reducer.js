@@ -52,7 +52,8 @@ const searchReducer = typeToReducer({
         ...state,
         data: {
           ...state.data,
-          ...action.payload.data
+          ...action.payload.data,
+          suggestions: null
         },
         ui: { loading: false } })
     },
@@ -85,19 +86,19 @@ const searchReducer = typeToReducer({
         }
       }
     };
-    // return {
-    //   ...state,
-    //   data: {
-    //     ...state.data,
-    //     searchDetails: {
-    //       ...state.data.searchDetails,
-    //       facetFilters: {
-    //         ...state.data.searchDetails.facetFilters,
-    //         [param.parentKey]: fArray,
-    //       }
-    //     }
-    //   }
-    // }
+  },
+  [actions.FETCH_SUGGESTIONS]: {
+    PENDING: state => Object.assign({}, state, { ui: { loading: true } }),
+    FULFILLED: (state, action) => {
+      return Object.assign({}, state, {
+        ...state,
+        data: {
+          ...state.data,
+          suggestions: action.payload.data
+        },
+        ui: { loading: false } })
+    },
+    REJECTED: (state, action) => Object.assign({}, state, { error: action.payload.message, ui: { loading: false } }),
   }
 }, initialState);
 

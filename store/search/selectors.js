@@ -221,4 +221,8 @@ const getAppliedFitlers = (store) => {
   }, []);
 }
 
-export { getSearchFilters, getSearchResutls, getPaginationDetails, getUIState, getCategoryId, getQuery, getFacetfilters, optionParams, getSearchBarFilterState, addCartAndWishlistDetails, getIsCategoryTree, getChoosenCategoryName, getAppliedFitlers };
+const getSuggestions = (store) => {
+  return store.searchReducer.data.suggestions;
+}
+
+export { getSearchFilters, getSearchResutls, getPaginationDetails, getUIState, getCategoryId, getQuery, getFacetfilters, optionParams, getSearchBarFilterState, addCartAndWishlistDetails, getIsCategoryTree, getChoosenCategoryName, getAppliedFitlers, getSuggestions };

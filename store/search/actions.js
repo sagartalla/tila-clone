@@ -5,6 +5,7 @@ const actions = {
   GET_MORE_RESULTS: 'GET_MORE_RESULTS',
   SEARCHBAR_FITLERS: 'SEARCHBAR_FITLERS',
   REMOVE_FILTERS: 'REMOVE_FILTERS',
+  FETCH_SUGGESTIONS: 'FETCH_SUGGESTIONS',
 };
 
 const actionCreators = {
@@ -39,6 +40,12 @@ const actionCreators = {
       payload: params
     });
     dispatch(actionCreators.getSearchResults({}));
+  },
+  fetchSuggestions:(params) => {
+    return ({
+      type: actions.FETCH_SUGGESTIONS,
+      payload: apis.fetchSuggestions(params)
+    })
   }
 };
 
