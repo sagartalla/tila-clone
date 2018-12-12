@@ -18,6 +18,9 @@ export default class MyDocument extends Document {
           <script type='text/javascript' src='//service.maxymiser.net/api/eu/fptechscience.com/3a077f/mmapi.js'> </script>
           <script type='text/javascript' src='/static/fb.js'></script>
           <Meta />
+          <script src="/static/scripts/test.js"></script>
+          
+          <script src="//assets.adobedtm.com/launch-ENf3bacf30d8974e6a81eeec612ff12c02-development.min.js" async></script>
         </Head>
         <body>
           <Main />

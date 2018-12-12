@@ -30,7 +30,7 @@ const MiniCartBody = props => {
         <div>
           {
             items.map((item, index) => {
-              const { item_id, img, name, price, cur, quantity, max_limit, inventory, brand_name } = item;
+              const { item_id, img,product_id, name, price, cur, quantity, max_limit, inventory, brand_name } = item;
               return (
                 <div key={item_id} className={`${styles['flex']} ${styles['pt-15']} ${styles['pb-15']} ${styles['border-b']} ${styles['min-items-list']}`}>
                   <Col md={2} sm={2} className={`${styles['pl-0']} ${styles['pr-0']}`}>
@@ -44,7 +44,7 @@ const MiniCartBody = props => {
                       {
                         editCartDetails
                           ?
-                          <span id={item_id} onClick={removeCartItem} className={`${styles['flex']} ${styles['min-delete-icon']}`}>
+                          <span id={item_id} data-productId ={product_id} onClick={removeCartItem} className={`${styles['flex']} ${styles['min-delete-icon']}`}>
                             <a className={styles['flex']}>
                               <SVGComponent clsName={`${styles['delete-icon']}`} src="icons/delete-icon/delete-icon" />
                             </a>

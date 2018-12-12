@@ -74,6 +74,8 @@ class ActionBar extends Component {
   }
 
   loginClick(e) {
+    digitalData.page.pageInfo[ 'pageType' ]= 'Login Page';
+    digitalData.page.pageInfo.pageName = 'Login Page';
     const state = {};
     state.loginClicked = true;
     if (e.currentTarget.getAttribute('data-mode') === 'sign-up') {
