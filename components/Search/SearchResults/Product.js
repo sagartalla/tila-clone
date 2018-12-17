@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import _ from 'lodash';
+import Router from 'next/router'
 import Waypoint from 'react-waypoint';
 import constants from '../../../constants';
 import { actionCreators } from '../../../store/cam/wishlist';
@@ -47,8 +48,32 @@ class Product extends Component {
   }
 
   addToCart(e) {
-    e.stopPropagation();
-    const { variants } = this.props;
+    e.stopPropagation(); 
+    const {
+      productId,
+      productName,
+      brand,
+      media,
+      variants,
+      itemtype,
+      currency     
+    } = this.props;    
+    digitalData.cart.item.push({
+      productInfo:{
+        productID:productId,
+        productName:productName,
+        manufacturer:brand,
+        productImage:media[0]
+      },
+      category:{
+        primaryCategory:itemtype
+      },
+      price:{
+        basePrice:variants.sellingPrice[0],
+        currency
+      },
+      quantity:1
+    })
     this.props.addToCart(variants.listingId[0]);
   }
 
@@ -66,6 +91,19 @@ class Product extends Component {
       return 'red';
     }
   }
+  itemNumberClick = (index,pageNum) => {
+    let productInfo = {
+      pageFragmentation:pageNum,
+      itemPosition:index
+    }
+    digitalData.product.push(productInfo)
+    var event = new CustomEvent('event-pageItem-click');
+    document.dispatchEvent(event);   
+  }
+  routeChange(productId,variantId,catalogId,itemtype,index,pageNum) {
+    this.itemNumberClick(index,pageNum)
+    Router.push(`/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemtype}`)
+  }
 
   render() {
     const {
@@ -82,9 +120,12 @@ class Product extends Component {
       addedToCart,
       addedToWishlist,
       brand,
-    } = this.props;
+      index,
+      pageNum
+    } = this.props;   
+    //route={`/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemtype}`}
     return (
-      <Link route={`/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemtype}`}>
+      <div onClick = {() => this.routeChange(productId,variantId,catalogId,itemtype,index,pageNum)} >        
         <div className={`${styles['product-items-main']}`}>
           <div className={`${styles['product-items']}`}>
             <div className={`${styles['img-cont']} ${styles['border-radius4']} ${styles['relative']}`}>
@@ -204,7 +245,7 @@ class Product extends Component {
             </div>
           </div>
         </div>
-      </Link>
+      </div>
     );
   }
 };

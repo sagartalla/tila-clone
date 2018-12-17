@@ -16,11 +16,15 @@ class SortByWidget extends Component {
     this.state = {};
     this.sortSelect = this.sortSelect.bind(this);
   }
-
+  fireAnalyticEvent = (value) => {
+    digitalData.filter['sortBy'] = `sort:${value}`
+    var event = new CustomEvent('event-sort-click');
+    document.dispatchEvent(event);
+  }
   sortSelect(e) {
     this.setState({
       value: e.target.value
-    });
+    },() => this.fireAnalyticEvent(this.state.value));
     this.props.getSearchResults({
       sort: this.getSortParam(e.target.value)
     });

@@ -66,14 +66,33 @@ class Cart extends Component {
   }
 
   removeCartItem(e) {
+    debugger;    
+    let productId = e.currentTarget.getAttribute('data-productId')
+    digitalData.cart.item = digitalData.cart.item.filter((item) => {
+      return item.productInfo.productID !== productId
+    })
     this.props.removeCartItem(e.currentTarget.id);
   }
 
   increaseItemCnt(e) {
+    let productId =  e.target.getAttribute('data-productId')
+    digitalData.cart.item = digitalData.cart.item.map((item) => {
+      if(item.productInfo.productID === productId) {
+        item.quantity++
+      } 
+
+      return item;
+    })
     this.cartItemCount(e.target.getAttribute('data-id'), 'add');
   }
 
   decreaseItemCnt(e) {
+    let productId =  e.target.getAttribute('data-productId')
+    digitalData.cart.item.forEach((item) => {
+      if(item.productInfo.productID === productId) {
+        item.quantity--;
+      } 
+    })
     this.cartItemCount(e.target.getAttribute('data-id'), 'remove');
   }
 

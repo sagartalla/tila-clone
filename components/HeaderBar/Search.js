@@ -31,11 +31,14 @@ class Search extends Component {
 
   submitQuery(e) {
     e.preventDefault();
+    digitalData.page.pageInfo['onsiteSearchTerm'] = this.state.query
+    this.fireCustomEventClick(); 
     const flushFilters = true;
     Router.pushRoute(`/srp?search=${this.state.query}&${Object.entries(this.props.optionalParams).map(([key, val]) => `${key}=${val}`).join('&')}`);
   }
 
-  onChangeSearchInput(e) {
+  onChangeSearchInput(e) {       
+    
     this.setState({
       query: e.target.value,
       searchInput: true
@@ -48,6 +51,10 @@ class Search extends Component {
     this.props.fetchSuggestions({key: this.state.query});
   }
 
+  fireCustomEventClick() {
+    var event = new CustomEvent('event-internalSearch-click');
+    document.dispatchEvent(event);
+  }
   componentWillReceiveProps(nextProps) {
     const { isCategoryTree, choosenCategoryName } = nextProps;
     const { query, searchInput } = this.state;
