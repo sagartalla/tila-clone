@@ -24,6 +24,7 @@ RUN echo $version
 RUN version=$version npm run build
 
 COPY deploy/nginx-default /etc/nginx/sites-enabled/default
+COPY deploy/static/apple-app-site-association /var/www/ios/apple-app-site-association
 RUN htpasswd -bc /etc/nginx/.htpasswd admin fpts@1234
 RUN htpasswd -b /etc/nginx/.htpasswd oracle test@oracle
 

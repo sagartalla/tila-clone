@@ -39,4 +39,10 @@ server {
     auth_basic "Access restricted";
   }
 
+	location /apple-app-site-association {
+		root /var/www/ios;
+		index apple-app-site-association;
+		default_type application/json;
+	}
+
 }
