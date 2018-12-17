@@ -45,7 +45,11 @@ const getProductComponent = (isPreview, taskCode) => {
       if (window.localStorage && !isPreview) {
         const { productData } = this.props;
         const { offerInfo, titleInfo, imgUrls, shippingInfo } = productData;
-
+        digitalData.page.pageInfo.pageName = titleInfo.title
+        digitalData.page.category = {primaryCategory:productData.categoryType}
+        digitalData.page.pageInfo.breadCrumbs = productData.breadcrums.map((item) => {
+          return item.display_name_en
+        })
         if (offerInfo.price) {
           const pr = offerInfo.price.split(' ');
           const recentData = localStorage.getItem('rv');

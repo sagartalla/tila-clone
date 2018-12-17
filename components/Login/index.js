@@ -26,10 +26,19 @@ class Login extends Component {
     this.login = this.login.bind(this);
     this.onChangeField = this.onChangeField.bind(this);
     this.toggleLoginSignUp = this.toggleLoginSignUp.bind(this);
-  }
-
+  }  
   login() {
     const { email, password, phone, country } = this.state;
+    if(email === '') {
+      this.fireCustomEventClick('emptylogin')
+    }
+    if(password === '') {
+      this.fireCustomEventClick('emptypassword')
+    }
+    if(email && password === '') {
+      this.fireCustomEventClick('forgotpassword')
+    }  
+
     if(this.state.mode === 'register') {
       this.props.userRegister({
         email,
@@ -73,12 +82,17 @@ class Login extends Component {
       [e.target.name]: e.target.value
     })
   }
+  fireCustomEventClick(type) {   
+    digitalData.login[type] = type; 
+    // var event = new CustomEvent('event-view-click');
+    // document.dispatchEvent(event);
+  }
 
-  toggleLoginSignUp() {
+  toggleLoginSignUp() {    
     this.setState({
       ...this.state,
       mode: this.state.mode === 'login' ? 'register' : 'login'
-    });
+    },() => this.fireCustomEventClick(this.state.mode));
   }
 
   render() {
