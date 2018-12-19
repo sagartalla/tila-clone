@@ -5,7 +5,7 @@ const withCSS = require('@zeit/next-css');
 const path = require('path');
 const git = require('git-rev-sync');
 const withSourceMaps = require('@zeit/next-source-maps')
-require('./deploy/env');
+// require('./deploy/env');
 
 const version = process.env.version || git.short();
 module.exports = withSourceMaps(withStylus(withCSS({

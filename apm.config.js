@@ -1,5 +1,4 @@
 var getConfig = require('next/config');
-require('./deploy/env');
 var config = getConfig.default();
 
 var env = config || '';

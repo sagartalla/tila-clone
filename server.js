@@ -5,6 +5,7 @@ const cookiesMiddleware = require('universal-cookie-express');
 const routes = require('./routes');
 const apiRoutes = require('./apiRoutes');
 require('./utils/error-handle');
+require('./deploy/env');
 
 const server = express();
 
