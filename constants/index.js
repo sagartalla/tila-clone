@@ -20,6 +20,12 @@ export default {
     customerHelp: 'https://fptsuae.custhelp.com/app/faq/faq',
     custhelpDomain: 'https://fptsuae.custhelp.com'
   },
+  stage: {
+    mediaDomain: 'https://static-dev.tila.com',
+    sellerPlatform: 'http://sellermarket-stage.fptechscience.com/',
+    customerHelp: 'https://fptsuae.custhelp.com/app/faq/faq',
+    custhelpDomain: 'https://fptsuae.custhelp.com'
+  },
   production: {
     mediaDomain: 'https://static-dev.tila.com',
     sellerPlatform: 'http://sellermarket-dev.fptechscience.com/',
