@@ -10,8 +10,7 @@ if(!process.env.ENV) {
     console.log('2', process.env.ENV);
   } catch (e) {
     console.log('ERROR reading FILE');
-    process.env.ENV = 'stage';
+    process.env.ENV = 'preprod';
   }
-
 }
 module.exports = {};
