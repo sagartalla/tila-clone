@@ -7,6 +7,8 @@ env = env.env || '';
 
 env = env || process.env.ENV;
 
+console.log('constants.js', env, process.env.ENV);
+
 module.exports = {
   local: {
     SEARCH_API_URL        :   'http://gateway-dev.fptechscience.com/search',
