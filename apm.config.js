@@ -6,7 +6,7 @@ env = env.publicRuntimeConfig || '';
 env = env.env || '';
 
 env = env || process.env.ENV;
-console.log('apmConfig.js', env, process.env.ENV);
+// console.log('apmConfig.js', env, process.env.ENV);
 
 module.exports = {
   local: {

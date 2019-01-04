@@ -2,7 +2,7 @@ import shajs from 'sha.js';
 import fp, * as _ from 'lodash/fp';
 import axios from 'axios';
 import getConfig from 'next/config'
-import apm from './apmInstance';
+// import apm from './apmInstance';
 import constants from './constants';
 import { pimServiceInstance } from './services';
 import Cookie from 'universal-cookie';
@@ -53,17 +53,17 @@ const getServiceName = (url) => {
 const apmReqInterceptor = (config) => {
   const serviceName = getServiceName(config.url);
   if(env === 'local') return config;
-  config.transaction = apm.startTransaction(`${serviceName} Service`, 'custom')
-  config.httpSpan = config.transaction ? config.transaction.startSpan(`FETCH ${JSON.stringify(config)}`, 'http') : null;
+  // config.transaction = apm.startTransaction(`${serviceName} Service`, 'custom')
+  // config.httpSpan = config.transaction ? config.transaction.startSpan(`FETCH ${JSON.stringify(config)}`, 'http') : null;
   return config;
 }
 
 const apmResInterceptor = (response) => {
   const serviceName = getServiceName(response.config.url);
-  if (env === 'local') return response;
-  const { httpSpan, transaction } = response.config;
-  httpSpan && httpSpan.end();
-  transaction && transaction.end();
+  // if (env === 'local') return response;
+  // const { httpSpan, transaction } = response.config;
+  // httpSpan && httpSpan.end();
+  // transaction && transaction.end();
   return response;
 }
 
@@ -105,8 +105,8 @@ const errorInterceptor = (err) => {
   return Promise.reject(err);
 }
 
-axios.interceptors.request.use(_.compose(apmReqInterceptor, configModifer));
-axios.interceptors.response.use(_.compose(apmResInterceptor), _.compose(errorInterceptor));
+// axios.interceptors.request.use(_.compose(apmReqInterceptor, configModifer));
+// axios.interceptors.response.use(_.compose(apmResInterceptor), _.compose(errorInterceptor));
 
 pimServiceInstance.interceptors.request.use(_.compose(
   (config) => {
