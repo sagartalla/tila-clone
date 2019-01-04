@@ -1,2 +1,2 @@
 service nginx start
-npm run start:preprod
+npm run start:stage
