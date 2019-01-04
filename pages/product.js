@@ -23,6 +23,7 @@ class ProductPage extends Base {
   static async getInitialProps({ store, query, isServer, req }) {
     const state = store.getState();
     const country = req ? req.universalCookies.get('country') : cookies.get('country');
+    // const language = req ? req.universalCookies.get('language') : cookies.get('language');
     const shippingData = req ?  req.universalCookies.get('shippingInfo') : cookies.get('shippingInfo');
     const { city: shippingCity, country: shippingCountry } = shippingData || {};
     const { isPreview, taskCode, itemType, productId, variantId, language } = query;
@@ -44,7 +45,7 @@ class ProductPage extends Base {
           "include_related_products": true,
           "shipping": true
         },
-        "language": language || "en",
+        "language": language,
         "product_ids": [
           productId
         ],
