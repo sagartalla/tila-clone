@@ -1,3 +1,5 @@
+require('./deploy/env');
+
 const next = require('next');
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -5,7 +7,7 @@ const cookiesMiddleware = require('universal-cookie-express');
 const routes = require('./routes');
 const apiRoutes = require('./apiRoutes');
 require('./utils/error-handle');
-require('./deploy/env');
+
 
 const server = express();
 
