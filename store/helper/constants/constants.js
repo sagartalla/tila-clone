@@ -9,7 +9,7 @@ env = env || process.env.ENV;
 
 console.log('constants.js', env, process.env.ENV);
 
-module.exports = {
+const a =  {
   local: {
     SEARCH_API_URL        :   'http://gateway-dev.fptechscience.com/search',
     CATALOG_API_URL       :   'http://catalogapis-dev.fptechscience.com',
@@ -119,3 +119,5 @@ module.exports = {
     SUGGESSIONS_URL       :   'https://api-gateway-stage.fptechscience.com/auto-suggest/suggest/suggestions'
   }
 }[env || 'preprod'];
+
+module.exports = a;
