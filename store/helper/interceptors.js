@@ -105,7 +105,7 @@ const errorInterceptor = (err) => {
   return Promise.reject(err);
 }
 
-// axios.interceptors.request.use(_.compose(apmReqInterceptor, configModifer));
+axios.interceptors.request.use(_.compose(configModifer));
 // axios.interceptors.response.use(_.compose(apmResInterceptor), _.compose(errorInterceptor));
 
 pimServiceInstance.interceptors.request.use(_.compose(
