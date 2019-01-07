@@ -69,6 +69,6 @@ const getSearchResultsApi = ({
 };
 
 const fetchSuggestions = ({key}) => {
-  return axios.get(`${constants.SUGGESSIONS_URL}?queryString=mob&lang=${cookies.get('language')}`)
+  return axios.get(`${constants.SUGGESSIONS_URL}?queryString=${key}&lang=${cookies.get('language')}`)
 }
 export default { getSearchResultsApi, fetchSuggestions };
