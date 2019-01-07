@@ -119,9 +119,10 @@ const a = {
     SUGGESSIONS_URL       :   'https://api-gateway-stage.fptechscience.com/auto-suggest/suggest/suggestions'
   }
 };
+console.log('constants.js 2', a);
 
 var b = a[env || 'preprod'];
 
-console.log('constants.js 2', b);
+console.log('constants.js 3', b);
 
 module.exports = b;
