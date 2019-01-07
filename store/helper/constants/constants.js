@@ -118,8 +118,10 @@ const a = {
     TRANSFORMER_API_URL   :   'http://transformers-mgmt.fptsinternal.com/fpts/page-config/get-all-pages',
     SUGGESSIONS_URL       :   'https://api-gateway-stage.fptechscience.com/auto-suggest/suggest/suggestions'
   }
-}[env || 'preprod'];
+};
 
-console.log('constants.js 2', a);
+var b = a[env || 'preprod'];
 
-module.exports = a;
+console.log('constants.js 2', b);
+
+module.exports = b;
