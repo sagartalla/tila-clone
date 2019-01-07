@@ -29,6 +29,9 @@ const editPersonalInfo = (body) => {
   });
 }
 
+const deactivateUserProfile = () =>
+  axios.put(`${constants.CMS_API_URL}/api/v1/user/deactivate/`);
 
-
-export default { getUserProfileInfo, changePassword , editPersonalInfo};
+export default {
+  getUserProfileInfo, changePassword , editPersonalInfo, deactivateUserProfile,
+};
