@@ -120,8 +120,9 @@ const a = {
   }
 };
 // console.log('constants.js 2', a);
-var b = a[env || 'preprod'];
+var b = env || 'preprod';
+var c = a[b];
 
-console.log('constants.js 3', b);
+console.log('constants.js 3', c);
 
-module.exports = b;
+module.exports = c;
