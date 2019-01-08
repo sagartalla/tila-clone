@@ -6,6 +6,7 @@ env = env.publicRuntimeConfig || '';
 env = env.env || '';
 
 env = env || process.env.ENV;
+env = env.trim();
 
 console.log('constants.js', env, process.env.ENV);
 
