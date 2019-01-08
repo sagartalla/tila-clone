@@ -6,7 +6,7 @@ if(!process.env.ENV) {
     var temp = data.toString();
     var arr = temp.split("=");
     var env = arr[1]
-    process.env.ENV = env;
+    process.env.ENV = env.trim();
     console.log('2', process.env.ENV);
   } catch (e) {
     console.log('ERROR reading FILE');
