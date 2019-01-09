@@ -3,23 +3,39 @@ const config = getConfig()
 
 export default {
   local: {
-    mediaDomain: 'https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com',
+    mediaDomain: 'https://static-dev.tila.com',
     sellerPlatform: 'http://sellermarket-dev.fptechscience.com/',
-    customerHelp: 'https://fptsuae--tst1.custhelp.com/'
+    customerHelp: 'https://fptsuae.custhelp.com/app/faq/faq',
+    custhelpDomain: 'https://fptsuae.custhelp.com'
   },
   dev: {
-    mediaDomain: 'https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com',
+    mediaDomain: 'https://static-dev.tila.com',
     sellerPlatform: 'http://sellermarket-dev.fptechscience.com/',
-    customerHelp: 'https://fptsuae--tst1.custhelp.com/'
+    customerHelp: 'https://fptsuae.custhelp.com/app/faq/faq',
+    custhelpDomain: 'https://fptsuae.custhelp.com'
   },
   staging: {
-    mediaDomain: 'https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com',
-    sellerPlatform: 'http://sellermarket-dev.fptechscience.com/',
-    customerHelp: 'https://fptsuae--tst1.custhelp.com/'
+    mediaDomain: 'https://static-dev.tila.com',
+    sellerPlatform: 'http://sellermarket-stage.fptechscience.com/',
+    customerHelp: 'https://fptsuae.custhelp.com/app/faq/faq',
+    custhelpDomain: 'https://fptsuae.custhelp.com'
+  },
+  stage: {
+    mediaDomain: 'https://static-dev.tila.com',
+    sellerPlatform: 'http://sellermarket-stage.fptechscience.com/',
+    customerHelp: 'https://fptsuae.custhelp.com/app/faq/faq',
+    custhelpDomain: 'https://fptsuae.custhelp.com'
   },
   production: {
-    mediaDomain: 'https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com',
+    mediaDomain: 'https://static-dev.tila.com',
     sellerPlatform: 'http://sellermarket-dev.fptechscience.com/',
-    customerHelp: 'https://fptsuae--tst1.custhelp.com/'
+    customerHelp: 'https://fptsuae.custhelp.com/app/faq/faqs',
+    custhelpDomain: 'https://fptsuae.custhelp.com'
+  },
+  preprod: {
+    mediaDomain: 'https://static-dev.tila.com',
+    sellerPlatform: 'http://sellermarket-stage.fptechscience.com/',
+    customerHelp: 'https://fptsuae.custhelp.com/app/faq/faq',
+    custhelpDomain: 'https://fptsuae.custhelp.com'
   }
-}[config.publicRuntimeConfig.env || 'dev'];
+}[config.publicRuntimeConfig.env || 'preprod'];

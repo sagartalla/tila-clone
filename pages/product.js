@@ -23,25 +23,30 @@ class ProductPage extends Base {
   static async getInitialProps({ store, query, isServer, req }) {
     const state = store.getState();
     const country = req ? req.universalCookies.get('country') : cookies.get('country');
+    let language = req ? req.universalCookies.get('language') : cookies.get('language');
     const shippingData = req ?  req.universalCookies.get('shippingInfo') : cookies.get('shippingInfo');
     const { city: shippingCity, country: shippingCountry } = shippingData || {};
-    const { isPreview, taskCode, itemType, productId, variantId, language } = query;
+    const { isPreview, taskCode, itemType, productId, variantId } = query;
+    debugger;
     if (taskCode){
       await store.dispatch(actionCreators.getPreview({
         taskCode: taskCode,
         itemType: itemType,
+        accessToken: req.universalCookies.get('accessToken'),
       }));
     } else {
       const options = {
         "city": shippingCity,
-        "country_code": country || "ksa",
+        "country_code": country || "SAU",
         "flags": {
           "catalog_details": true,
-          "include_all_pref_listings": true,
+          // "include_all_pref_listings": true,
+          "category_tree_bread_crumb": true,
+          "category_tree_finance": true,
           "include_related_products": true,
           "shipping": true
         },
-        "language": language || "en",
+        "language": language,
         "product_ids": [
           productId
         ],

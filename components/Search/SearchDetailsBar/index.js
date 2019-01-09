@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Waypoint from 'react-waypoint';
-
+import NoSSR from 'react-no-ssr';
 import GeoWidget from '../../common/GeoWidget';
 import SortByWidget from './SortByWidget';
 import SearchFilters from '../../common/SearchFilters';
+import AppliedFilters from './includes/AppliedFilters';
 
 import { actionCreators, selectors } from '../../../store/search';
 import { languageDefinations } from '../../../utils/lang';
@@ -39,7 +40,7 @@ class SearchDetailsBar extends Component {
           {
             (results.totalCount > 0 || query || categoryId) ?
               <Fragment>
-                <div className={`${styles['flx-space-bw']} ${styles['pb-10']} ${styles['items-list-show']}`}>
+                <div className={`${styles['flx-space-bw']} ${styles['pb-10']} ${styles['items-list-show']} ${styles['ipad-flex-clm']}`}>
                   <h4 className={`${styles['meta-info']} ${styles['mt-0']} ${styles['mb-0']} ${styles['fontW300']}`}>{results.totalCount} {SEARCH_PAGE.NO_OF_ITEMS_FOUND}</h4>
                   <div className={`${styles['flx-spacebw-alignc']} ${styles['deliver-to-main']}`}>
                     <GeoWidget />
@@ -56,16 +57,9 @@ class SearchDetailsBar extends Component {
                     </span>
                   </span>
                 </div>
-                <div className={`${styles['applied-tags']} ${styles['flex-center']} ${styles['pb-20']}`}>
-                  <span>{SEARCH_PAGE.APPLIED_FILTERS_TAGS} : </span>
-                  <div className={styles['flex']}>
-                    <div className={`${styles['flex-center']} ${styles['applied-tags-inn']} ${styles['ml-10']}`}><span className={`${styles['title']} ${styles['fs-12']}`}>Adidas </span><span className={`${styles['close-part']}`}>x</span></div>
-                    <div className={`${styles['flex-center']} ${styles['applied-tags-inn']} ${styles['ml-10']}`}><span className={`${styles['title']} ${styles['fs-12']}`}>United Colors of Benetton </span><span className={`${styles['close-part']}`}>x</span></div>
-                    <div className={`${styles['flex-center']} ${styles['applied-tags-inn']} ${styles['ml-10']}`}><span className={`${styles['title']} ${styles['fs-12']}`}>Mufti </span><span className={`${styles['close-part']}`}>x</span></div>
-                    <div className={`${styles['flex-center']} ${styles['applied-tags-inn']} ${styles['ml-10']}`}><span className={`${styles['title']} ${styles['fs-12']}`}>Puma </span><span className={`${styles['close-part']}`}>x</span></div>
-                  </div>
-                  <a href="#" className={`${styles['fs-12']} ${styles['pl-20']}`}>{SEARCH_PAGE.CLEAR_ALL}</a>
-                </div>
+                <NoSSR>
+                  <AppliedFilters />
+                </NoSSR>
               </Fragment>
               :
               <div className={`${styles['no-results']} ${styles['fs-40']} ${styles['flex-center']} ${styles['justify-center']}`}>

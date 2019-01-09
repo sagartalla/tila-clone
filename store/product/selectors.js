@@ -1,12 +1,13 @@
 import _ from 'lodash';
 
 const getProduct = (store, variantId) => {
-  const { product_details, variant_preferred_listings } = store.productReducer.data[0];
-  const computedVariantId = variantId || Object.keys(variant_preferred_listings || {})[0]
-  const listings = computedVariantId ? variant_preferred_listings[computedVariantId] : [];
+  const { product_details, variant_preferred_listings, tree } = store.productReducer.data[0];
+  const computedVariantId = variantId;
+  const listings = computedVariantId ? variant_preferred_listings[computedVariantId] : _.reduce(variant_preferred_listings, (acc, val, key) => {
+    return [...acc, ...val];
+  }, []);
   const catalogAttributeMap = product_details.catalog_details.attribute_map;
   const productAttributeMap = product_details.product_details_vo.cached_product_details.attribute_map
-
   let activeCount = 0, listingInventryCount = 0;
   let priceInfo = listings ? listings.filter((listing) => {
     if(listing.total_inventory_count <= 0 ) {
@@ -59,7 +60,9 @@ const getProduct = (store, variantId) => {
     offerInfo,
     shippingInfo,
     returnInfo,
-    catalog: _.groupBy(catalogAttributeMap, (attrMap) => attrMap.attribute_category_name)
+    breadcrums: tree.breadcrumb,
+    categoryType: tree.finance ? tree.finance[0].display_name_en : '',
+    catalog: _.groupBy(_.filter(catalogAttributeMap, (val) => val.visible), (attrMap) => attrMap.attribute_category_name)
   };
 };
 
@@ -70,9 +73,15 @@ const getVariants = (store) => {
   const identityAttr = _.filter(cached_product_details.attribute_map, { attribute_group_name: 'IDENTITY' }).map((attr) => attr.name);
   let variants = (similar_products || []).map((product) => {
     const obj = identityAttr.reduce((acc, attrName) => {
+      const aMap = product_details.product_details_vo.cached_product_details.attribute_map;
+      if(aMap[attrName]) {
+        return {
+          ...acc,
+          [attrName]: product_details.product_details_vo.cached_product_details.attribute_map[attrName].attribute_values[0].value,
+        }
+      }
       return {
-        ...acc,
-        [attrName]: product.product_details_vo.cached_product_details.attribute_map[attrName].attribute_values[0].value,
+        ...acc
       }
     }, obj);
     obj.pId = product.product_details_vo.cached_product_details.product_id;
@@ -80,9 +89,15 @@ const getVariants = (store) => {
     return obj;
   });
   const obj = identityAttr.reduce((acc, attrName) => {
+    const aMap = product_details.product_details_vo.cached_product_details.attribute_map;
+    if(aMap[attrName]) {
+      return {
+        ...acc,
+        [attrName]: product_details.product_details_vo.cached_product_details.attribute_map[attrName].attribute_values[0].value,
+      }
+    }
     return {
-      ...acc,
-      [attrName]: product_details.product_details_vo.cached_product_details.attribute_map[attrName].attribute_values[0].value,
+      ...acc
     }
   }, {});
   obj.pId = product_details.product_details_vo.cached_product_details.product_id;
@@ -136,12 +151,18 @@ const getPreview = (store) => {
     restricted: item.isRestricted,
   })) : [];
   const catalog = _.reduce(attributes, (acc, attrVal, attrKey) => {
-    const groupName = _.find(catalogData, { attributeName: attrKey }).attributeCategoryName;
-    acc[groupName] = acc[groupName] || [];
-    acc[groupName].push({
-      display_string: attrKey,
-      attribute_values: attrVal.attributeValues,
-    })
+    const cItem = _.find(catalogData, { attributeName: attrKey });
+    if(cItem){
+      const groupName = cItem.attributeCategoryName;
+      const isVisible = cItem.isVisible;
+      if(isVisible) {
+        acc[groupName] = acc[groupName] || [];
+        acc[groupName].push({
+          display_string: attrKey,
+          attribute_values: attrVal.attributeValues,
+        });
+      }
+    }
     return acc;
   }, {});
 

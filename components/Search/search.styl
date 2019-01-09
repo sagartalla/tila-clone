@@ -19,6 +19,16 @@
   float left
   width calc(82% - 20px)
 
+  .grid-cont
+    // max-width 1112px
+    justify-content space-between
+
+  .product-items-main
+    width 276px
+    padding-bottom 20px
+    // margin-right 10px
+    // &:nth-child(4n)
+    //   margin-right 0
   /*.search-results-wrap
     position sticky
     top 61px
@@ -33,40 +43,52 @@
     z-index 9
     background-color white
     left 0
+    border-radius 12px
     // bottom -20%
     .quick-view
       // background-color label-light
       // padding 10px 0
-      width 88%
+      width 92%
       margin 0 auto
       .add-to-crt
         border: 1px solid navy-blue
         border-bottom-left-radius: 16px
         color navy-blue
+        .cart-list
+          margin-right 8px
       .buy-now-btn
         background-color navy-blue
         border-bottom-right-radius 16px
         color white
+        padding-left 14px
+        .cart-list
+          height 20px
+          width 20px
+          margin-right 5px
       a
         // color white
         width 50%
         text-align center
-        padding 6px 0
+        padding 6px 0 6px 15px
         .cart-list
-          width 16px
+          width 15px
           height 16px
         // &:first-child
         //   border-right 1px solid white
     .brand-price-details
-      padding 0 20px
+      padding 0 15px
+
+      .prdt-name
+        line-height 19px
       .star-raing
         width 17px
         height 16px
+        margin-right 2px
 
     .wish-list-part
       margin 10px 15px
-      border-bottom: 1px solid footer-bdr
-      padding-bottom: 10px;
+      // border-bottom: 1px solid cam-border-gray
+      // padding-bottom: 10px;
       .wish-list
         width 15px
         height 15px
@@ -106,38 +128,70 @@
       .title
         padding: 0px 10px
       .close-part
+        cursor pointer
         padding: 2px 10px
         box-sizing: border-box
         border-left: 0.5px solid rgba(192, 192, 192, 0.3)
 
 .product-items
-  transform: scale(1)
-  transition: all .3s ease
+  // transform: scale(1)
+  transition: all .5s ease
   position relative
-  padding 4px
-  // height 470px
+  // padding 4px
+  // width 100%
+  // transition: width 2s;
   .desc-cont
     .prdt-name
       width 100%
 
   .fullfilled-label
       display none
+
+  .full-and-globe-main
+    position absolute
+    top 0
+    right 0
+  .fullfill-main
+    // position absolute
+    // top 5px
+    // right 10px
+    padding: 6px 10px;
+    border-bottom-left-radius 20px
+    // border-top-right-radius 12px
+    &:hover
+      .fullfilled-label
+        display block
+
+    .fulfill-img
+      background url(/static/img/icons/common-icon/icon-fullfilled.svg) no-repeat
+      width 24px
+      height 20px
+      display inline-flex
+        // position absolute
+    .fullfilled-label
+      color rgba(0, 0, 0, 0.5)
+
   &:hover
     z-index 9
-    transform scale(1.1)
-    padding 4px
-    border-radius 12px
+    // transform scale(1.1)
+    // padding 4px
+    border-bottom-left-radius 10px
+    border-bottom-right-radius: 10px
     background-color white
-    box-shadow 0 0 34px 0 #c0c0c0
+    box-shadow 0 2px 10px 0 rgba(0, 0, 0, 0.1)
     z-index 11
     position absolute
-    .fullfilled-label
-      display block
+    width 276px
+
+    .fullfill-main
+      background-color: rgba(216, 216, 216, 0.8)
+    // .fullfilled-label
+    //   display block
     .image-div
       border-top-left-radius 12px
       border-top-right-radius 12px
       border-radius 10px
-      border solid 1px border-light-gray
+      // border solid 1px border-light-gray
     .desc-cont
       display none
     .hover-show-date
@@ -157,9 +211,10 @@
   border 1px solid border-gray
   box-shadow 0 2px 7px 0 rgba(0,0,0,0.03)
   background-color white
+  border-radius 10px
 
   .img-cont
-    height 397.36px
+    height 398px
     display flex
     align-items center
     justify-content center
@@ -201,29 +256,14 @@
       padding 8px
       position absolute
       background rgba(255, 255, 255, 0.5) url(/static/img/icons/common-icon/variants.svg) no-repeat center
-    .fullfill-main
-      position absolute
-      top 0
-      right 0
-      padding: 6px 10px;
-      border-bottom-left-radius: 20px;
-      border-top-right-radius: 12px;
-      background-color: rgba(216, 216, 216, 0.8)
-  
-      .fulfill-img
-        background url(/static/img/icons/common-icon/icon-fullfilled.svg) no-repeat
-        width 24px
-        height 20px
-        display inline-flex
-        // position absolute
-      .fullfilled-label
-        color rgba(0, 0, 0, 0.5)
+
     .image-div
       width 100%
       height 100%
       overflow hidden
       display flex
       justify-content center
+      align-items center
       img
         max-height 100%
         max-width 100%
@@ -272,3 +312,36 @@
   -moz-appearance none
   &:focus
     outline none
+
+@media screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation : portrait){
+  .filter-panel {
+    width 24%
+  }
+
+  .search-results {
+    width calc(76% - 20px)
+
+    .product-items-main {
+      width 250px
+    }
+
+    .items-list-show {
+      align-items flex-start
+    }
+
+    .deliver-to-main {
+      width 100% !important
+    }
+
+    .product-items:hover {
+      width 265px
+    }
+
+  }
+}
+
+@media screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation : landscape){
+  .search-results .product-items-main {
+    width 245px
+  }
+}

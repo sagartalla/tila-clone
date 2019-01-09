@@ -1,22 +1,28 @@
 import React, { Component } from 'react';
 import { Modal } from "react-router-modal";
+import NoSSR from 'react-no-ssr';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ModalContainer } from 'react-router-modal';
 import { Dropdown, MenuItem } from "react-bootstrap";
-
+import Cookie from 'universal-cookie';
+import { selectors as personalSelectors } from '../../store/cam/personalDetails';
 import Cart from '../Cart';
 import Login from '../Login';
 import { Link } from '../../routes';
 import Country from './includes/Country';
+import Language from './includes/Language';
 import publicUrls from '../../constants';
 import SVGComponent from '../common/SVGComponet';
+import { Router } from '../../routes';
 
 import { selectors, actionCreators } from '../../store/auth';
 import { actionCreators as cartActionCreators, selectors as cartSelectors } from '../../store/cart';
-
+import { languageDefinations } from '../../utils/lang'
 import { mergeCss } from '../../utils/cssUtil';
 const styles = mergeCss('components/HeaderBar/header');
+const {HEADER_PAGE} = languageDefinations();
+const cookies = new Cookie();
 
 class ActionBar extends Component {
   constructor(props) {
@@ -38,13 +44,25 @@ class ActionBar extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const show = (!nextProps.isLoggedIn && (nextProps.isLoggedIn != this.props.isLoggedIn) && !this.state.logoutClicked) || this.state.loginClicked || !!nextProps.error || nextProps.loginInProgress;
+    const show = (!nextProps.isLoggedIn && (nextProps.isLoggedIn != this.props.isLoggedIn) && !this.state.logoutClicked) || this.state.loginClicked || !!nextProps.error || nextProps.loginInProgress || (!nextProps.isLoggedIn && nextProps.showLogin);
     // console.log('show:',show,'nextProps.isLoggedIn', nextProps.isLoggedIn, 'this.props.isLoggedIn', this.props.isLoggedIn, 'this.state.logoutClicked', this.state.logoutClicked, 'nextProps.error', nextProps.error, 'nextProps.loginInProgress', nextProps.loginInProgress);
     this.setState({
       show: show,
       logoutClicked: false,
       loginClicked: false
     });
+    if(nextProps.isLoggedIn) {
+      if(nextProps.ptaToken){
+        this.props.savePtaToken(nextProps.ptaToken);
+        if(Router.router.pathname === '/login') {
+            window.location.replace(`${publicUrls.custhelpDomain}/ci/pta/login/redirect/${unescape(Router.router.query.p_next_page)}/p_li/${nextProps.ptaToken}`);
+        }
+      } else {
+        if(Router.router.pathname === '/login') {
+            window.location.replace(`${publicUrls.custhelpDomain}/ci/pta/login/redirect/${unescape(Router.router.query.p_next_page)}/p_li/${cookies.get('ptaToken')}`);
+        }
+      }
+    }
   }
 
   logoutClick() {
@@ -56,6 +74,8 @@ class ActionBar extends Component {
   }
 
   loginClick(e) {
+    digitalData.page.pageInfo[ 'pageType' ]= 'Login Page';
+    digitalData.page.pageInfo.pageName = 'Login Page';
     const state = {};
     state.loginClicked = true;
     if (e.currentTarget.getAttribute('data-mode') === 'sign-up') {
@@ -70,14 +90,22 @@ class ActionBar extends Component {
   onBackdropClick() {
     this.setState({ show: false });
     this.props.resetLoginError();
+    this.props.resetShowLogin();
   }
 
   render() {
-    const { isLoggedIn, cartResults } = this.props;
+    const { isLoggedIn, cartResults, userInfo } = this.props;
     return (
       <div className={styles['actionbar-wrapper']}>
         <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']} ${styles['country-code']}`}>
-          <Country />
+          <NoSSR>
+            <Language />
+          </NoSSR>
+        </div>
+        <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']} ${styles['country-code']}`}>
+          <NoSSR>
+            <Country />
+          </NoSSR>
         </div>
         <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']}`}>
           <Link route="/cam/wishlist">
@@ -100,6 +128,7 @@ class ActionBar extends Component {
               <span>
                 <Cart
                   showMiniCart={true}
+                  showCheckOutBtn={true}
                   cartData={cartResults}
                   editCartDetails={true}
                 />
@@ -118,42 +147,43 @@ class ActionBar extends Component {
               <div className={styles['profile-part']}>
                 <div className={`${styles['flex-center']} ${styles['ple-icon']}`}>
                   <span className={styles['icon']}></span>
-                  <span className={styles['pl-15']}>Hello Guest</span>
+                  <span className={styles['pl-15']}>Hello {userInfo.personalInfo.first_name || `${HEADER_PAGE.TILA_CUSTOMER}` }</span>
                 </div>
                 <ul className={`${styles['pl-0']} ${styles['profile-inn']}`}>
                   <li className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']}`}>
                     <a href="/cam" className={styles['flex-center']}>
                     <SVGComponent clsName={`${styles['profile-icon']}`} src="icons/profile-icons/round-profile" />
-                    <span className={styles['pl-20']}>My Account</span>
+                    <span className={styles['pl-20']}>{HEADER_PAGE.MY_ACCOUNT}</span>
                     </a>
                   </li>
                   <li className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']}`}>
                     <a href="/cam/orders" className={styles['flex-center']}>
                       <SVGComponent clsName={`${styles['profile-icon']}`} src="icons/my-orders" />
-                      <span className={styles['pl-20']}>My Orders </span>
+                      <span className={styles['pl-20']}>{HEADER_PAGE.MY_ORDERS}</span>
                     </a>
                   </li>
                   <li className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']}`}>
                   <a href="/cam/notifications" className={styles['flex-center']}>
                     <SVGComponent clsName={`${styles['profile-icon']}`} src="icons/notifications" />
-                    <span className={styles['pl-20']}>Notification </span>
+                    <span className={styles['pl-20']}>{HEADER_PAGE.NOTIFICATIONS}</span>
                     </a>
                   </li>
                   <li className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']}`}>
                     <a href={publicUrls.customerHelp} target="_blank" className={styles['flex-center']}><span className={styles['support']}><span className={`${styles['flex-center']} ${styles['justify-center']}`}>?</span></span>
-                      <span className={styles['pl-20']}>Help & Support</span></a>
+                      <span className={styles['pl-20']}>{HEADER_PAGE.HELP_SUPPORT}</span>
+                    </a>
                   </li>
                   <li className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']}`}>
                     {isLoggedIn
                       ?
                       <span onClick={this.logoutClick} className={`${styles['flex-center']} ${styles['login-details-inn']} ${styles['pointer']}`}>
                         <SVGComponent clsName={`${styles['logout-icon']}`} src="icons/common-icon/icon-logout" />
-                        <span className={`${styles['pl-20']} `}>Logout</span>
+                        <span className={`${styles['pl-20']} `}>{HEADER_PAGE.LOGOUT}</span>
                       </span>
                       :
                       <span onClick={this.loginClick} className={`${styles['flex-center']} ${styles['login-details-inn']} ${styles['pointer']}`}>
                         <SVGComponent clsName={`${styles['login-icon']}`} src="icons/common-icon/icon-login" />
-                        <span className={`${styles['pl-20']}`}>Login</span>
+                        <span className={`${styles['pl-20']}`}>{HEADER_PAGE.LOGIN}</span>
                       </span>
                     }
                   </li>
@@ -186,6 +216,9 @@ const mapStateToProps = (store) => {
     isLoggedIn: selectors.getLoggedInStatus(store),
     cartResults: cartSelectors.getCartResults(store),
     loginInProgress: selectors.getLoginProgressStatus(store),
+    userInfo: personalSelectors.getUserInfo(store),
+    showLogin: selectors.getShowLogin(store),
+    ptaToken: selectors.getPTAToken(store),
   })
 };
 
@@ -196,9 +229,12 @@ const mapDispatchToProps = (dispatch) => {
       logout: actionCreators.userLogout,
       getCartResults: cartActionCreators.getCartResults,
       resetLoginError: actionCreators.resetLoginError,
+      resetShowLogin: actionCreators.resetShowLogin,
+      savePtaToken: actionCreators.savePtaToken,
     },
     dispatch,
   );
 }
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(ActionBar);

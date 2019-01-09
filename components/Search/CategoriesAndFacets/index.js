@@ -20,8 +20,9 @@ class CategoriesAndFacets extends Component {
 
   onChangeHandle(facetName, facetType) {
     const curryHandler = (value, e) => {
-      const params = this.props.facets || {};
+      const params = JSON.parse(decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent('facets').replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1")) || '{}');      
       params[facetName] = params[facetName] || [];
+      digitalData.filter['leftnavfilters'] = `${facetName}:${value.name}`
       if (facetType === 'PERCENTILE') {
         params[facetName] = [value];
       } else {
@@ -33,13 +34,13 @@ class CategoriesAndFacets extends Component {
         }
       }
       this.props.onChangeFacets(params);
-      this.submitQuery();
+      this.submitQuery(params);
     }
     return curryHandler;
   }
 
-  submitQuery() {
-    this.props.getSearchResults({ facetFilters: this.props.getFacetfilters(this.props.facets) });
+  submitQuery(params) {
+    this.props.getSearchResults(this.props.getFacetfilters(params));
   }
 
   render() {
@@ -59,7 +60,7 @@ class CategoriesAndFacets extends Component {
           }
           let selectedFilters = facets[filter.attributeName];
           selectedFilters = selectedFilters ? selectedFilters.map((item) => item.name) : [];
-          return filter.children.length ? <CheckboxFacet filter={filter} onChangeHandle={this.onChangeHandle(filter.attributeName, filter.type)} selectedFilters={selectedFilters} index={index}/> : null;
+          return filter.children.length ? <CheckboxFacet attributeName={filter.attributeName} facets={facets} filter={filter} onChangeHandle={this.onChangeHandle(filter.attributeName, filter.type)} selectedFilters={selectedFilters} index={index}/> : null;
         })
       }
       </PanelGroup>

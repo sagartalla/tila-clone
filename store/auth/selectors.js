@@ -26,4 +26,12 @@ const getAutoCompleteCityData = (store) => {
   return store.authReducer.data.autoCompleteCity;
 }
 
-export { getErrorMessege, getCountry, getLoggedInStatus, getUserCreds, getDeliveryCity, getAutoCompleteCityData, getLoginProgressStatus };
+const getPTAToken = (store) => {
+  return store.authReducer.data.ptaToken;
+}
+
+const getShowLogin = (store) => {
+  return store.authReducer.ui.showLogin;
+}
+
+export { getErrorMessege, getCountry, getLoggedInStatus, getUserCreds, getDeliveryCity, getAutoCompleteCityData, getLoginProgressStatus, getShowLogin, getPTAToken};

@@ -1,5 +1,6 @@
 import apis from './api';
 import { actionCreators as cartActionCreators } from '../../cart/actions';
+import loginReq from '../../helper/loginReq';
 
 const actions = {
   GET_WISHLIST: 'GET_WISHLIST',
@@ -9,34 +10,39 @@ const actions = {
 };
 
 const actionCreators = {
-  getWishlist: () => (dispatch, getState) => {
+  getWishlist: loginReq(() => (dispatch, getState) => {
     return dispatch({
       type: actions.GET_WISHLIST,
       payload: apis.getWishlistApi(),
     });
-  },
-  addToWishlist: (params) => (dispatch, getState) => {
-    return dispatch({
+  }),
+  addToWishlist: loginReq((params) => {
+    return ({
       type: actions.ADD_TO_WISHLIST,
       payload: apis.addToWishlistApi(params),
     });
-  },
-  deleteWishlist: (wishlist_id) => (dispatch, getState) => {
-    return dispatch({
+  }),
+  deleteWishlist: loginReq((wishlist_id) => {
+    return ({
       type: actions.DELETE_TO_WISHLIST,
       payload: apis.deleteWishlistApi(wishlist_id),
     });
-  },
-  addToCart: (params, wishlist_id) => (dispatch, getState) => {
+  }),
+  addToCart: (params, wishlist_id, getCartData) => (dispatch, getState) => {
     return dispatch(cartActionCreators.addToCart(params)).then(() => {
-      dispatch(actionCreators.deleteWishlist(wishlist_id));
+      if (getCartData) {
+        dispatch(actionCreators.deleteWishlist(wishlist_id)).then(() => {
+          dispatch(cartActionCreators.getCartResults({}));
+        });
+      } else
+        dispatch(actionCreators.deleteWishlist(wishlist_id));
     })
   },
-  addToWishlistAndFetch: (params) => (dispatch, getState) => {
+  addToWishlistAndFetch: loginReq((params) => (dispatch, getState) => {
     return dispatch(actionCreators.addToWishlist(params)).then(() => {
       dispatch(actionCreators.getWishlist());
     })
-  }
+  })
 };
 
 export { actions, actionCreators };

@@ -5,14 +5,16 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import _ from 'lodash';
+import Router from 'next/router'
 import Waypoint from 'react-waypoint';
 import constants from '../../../constants';
 import { actionCreators } from '../../../store/cam/wishlist';
 import { Grid, Row, Col } from 'react-bootstrap';
 import SVGCompoent from '../../common/SVGComponet';
 import { mergeCss } from '../../../utils/cssUtil';
+import { languageDefinations } from '../../../utils/lang'
 const styles = mergeCss('components/Search/search');
-
+const { PDP_PAGE } = languageDefinations()
 class Product extends Component {
   constructor(props) {
     super(props);
@@ -46,8 +48,32 @@ class Product extends Component {
   }
 
   addToCart(e) {
-    e.stopPropagation();
-    const { variants } = this.props;
+    e.stopPropagation(); 
+    const {
+      productId,
+      productName,
+      brand,
+      media,
+      variants,
+      itemtype,
+      currency     
+    } = this.props;    
+    digitalData.cart.item.push({
+      productInfo:{
+        productID:productId,
+        productName:productName,
+        manufacturer:brand,
+        productImage:media[0]
+      },
+      category:{
+        primaryCategory:itemtype
+      },
+      price:{
+        basePrice:variants.sellingPrice[0],
+        currency
+      },
+      quantity:1
+    })
     this.props.addToCart(variants.listingId[0]);
   }
 
@@ -64,6 +90,19 @@ class Product extends Component {
     if (offer > 60) {
       return 'red';
     }
+  }
+  itemNumberClick = (index,pageNum) => {
+    let productInfo = {
+      pageFragmentation:pageNum,
+      itemPosition:index
+    }
+    digitalData.product.push(productInfo)
+    var event = new CustomEvent('event-pageItem-click');
+    document.dispatchEvent(event);   
+  }
+  routeChange(productId,variantId,catalogId,itemtype,index,pageNum) {
+    this.itemNumberClick(index,pageNum)
+    Router.push(`/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemtype}`)
   }
 
   addToCompare(e) {
@@ -84,13 +123,18 @@ class Product extends Component {
       catalogId,
       itemtype,
       priceRange,
+      currency,
       offers,
       addedToCart,
       addedToWishlist,
-    } = this.props;
+      brand,
+      index,
+      pageNum
+    } = this.props;   
+    //route={`/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemtype}`}
     return (
-      <Link route={`/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemtype}`}>
-        <Col md={3} xs={6} className={`${styles['pr-0']} ${styles['pl-0']}`}>
+      <div onClick = {() => this.routeChange(productId,variantId,catalogId,itemtype,index,pageNum)} >        
+        <div className={`${styles['product-items-main']}`}>
           <div className={`${styles['product-items']}`}>
             <div className={`${styles['img-cont']} ${styles['border-radius4']} ${styles['relative']}`}>
               <div className={styles['image-div']}>
@@ -106,21 +150,28 @@ class Product extends Component {
                       ?
                       <span className={`${styles['tag-main']} ${styles['absolute']}`}></span>
                       :
-                      <span className={`${styles['offer-tag']} ${styles['white-color']} ${styles['fs-12']} ${styles['absolute']} ${styles[this.getOfferClassName(offers[0])]}`}>{offers[0]} OFF</span>
+                      <span className={`${styles['offer-tag']} ${styles['white-color']} ${styles['fs-12']} ${styles['absolute']} ${styles[this.getOfferClassName(offers[0])]}`}>{offers[0]} {PDP_PAGE.OFF}</span>
                   )
                   :
                   null
               }
               <span className={`${styles['variants-main']}`}></span>
-              <span className={`${styles['fullfill-main']} ${styles['flex-center']}`}><span className={styles['fulfill-img']}></span><span className={`${styles['fs-12']} ${styles['fontW600']} ${styles['pl-10']} ${styles['fullfilled-label']}`}>Fulfilled by Tila</span></span>
+              <span className={styles['full-and-globe-main']}>
+                <span className={`${styles['fullfill-main']} ${styles['flex-center']}`}>
+                  <span className={styles['fulfill-img']}></span>
+                  <span className={`${styles['fs-12']} ${styles['fontW600']} ${styles['pl-10']} ${styles['fullfilled-label']}`}>{PDP_PAGE.FULLFILLED_BY_TILA}</span>
+                </span>
+              </span>
+
             </div>
             <div className={styles['desc-cont']}>
               <div className={`${styles['pb-20']} ${styles['pl-20']} ${styles['flex']} ${styles['flex-colum']}`}>
-                <h5 className={`${styles['prdt-name']} ${styles['fontW600']} ${styles['pt-15']} ${styles['pb-5']}  ${styles['m-0']} ${styles['ellips']}`}>
-                  {displayName}
+                <h5 className={`${styles['prdt-name']} ${styles['pt-15']} ${styles['pb-5']}  ${styles['m-0']} ${styles['ellips']}`}>
+                  <span className={`${styles['fontW600']}`}>{brand}</span> <span className={`${styles['thick-gry-clr']} ${styles['fontW300']}`}>{displayName.replace(brand, '').trim()}</span>
                 </h5>
                 <span>
-                  <span className={`${styles['pr-10']} ${styles['fs-16']} ${styles['fontW600']}`}>{priceRange}</span>
+                  <span className={`${styles['pr-5']} ${styles['fs-12']} ${styles['fontW600']}`}>{currency}</span>
+                  <span className={`${styles['fs-16']} ${styles['fontW700']}`}>{priceRange}</span>
                   <span className={`${styles['offers-label-color']} ${styles['fontW600']} ${styles['fs-12']}`}>
                     {
                       offers.length > 1
@@ -139,38 +190,42 @@ class Product extends Component {
             </div>
             <div className={`${styles['hover-show-date']} ${styles['pb-10']} ${styles['pb-10']} ${styles['relative']}`}>
               <div className={`${styles['flex']} ${styles['justify-around']} ${styles['quick-view']} ${styles['border-radius4']}`}>
-                <a className={`${styles['flex']} ${styles['add-to-crt']} ${styles['justify-center']}`} onClick={this.addToCart}>
-                  <SVGCompoent clsName={`${styles['cart-list']}`} src="icons/cart/blue-cart-icon" />
-                  <span className={styles['pl-5']} disabled={addedToCart}>{ addedToCart ? 'Added to Cart' : 'Add to Cart'}</span>
+                <a className={`${styles['flex']} ${styles['add-to-crt']}`} onClick={this.addToCart}>
+                  {/* <SVGCompoent clsName={`${styles['cart-list']}`} src="icons/cart/blue-cart-icon" /> */}
+                  <span disabled={addedToCart}>
+                    {
+                      addedToCart ? <span className={styles['flex']}><SVGCompoent clsName={styles['cart-list']} src="icons/cart/added-cart-icon" />{PDP_PAGE.ADDED_TO_CART}</span> :
+                        <span className={styles['flex']}><SVGCompoent clsName={styles['cart-list']} src="icons/cart/blue-cart-icon" />{PDP_PAGE.ADD_TO_CART}</span>}</span>
                 </a>
-                <a className={`${styles['flex']} ${styles['buy-now-btn']} ${styles['justify-center']}`} onClick={this.buyNow}>
+                <a className={`${styles['flex-center']} ${styles['buy-now-btn']}`} onClick={this.buyNow}>
                   <SVGCompoent clsName={`${styles['cart-list']}`} src="icons/cart/buy-icon" />
-                  <span className={styles['pl-5']}>Buy Now</span>
+                  <span className={styles['pl-5']}>{PDP_PAGE.BUY_NOW}</span>
                 </a>
               </div>
               <div className={`${styles['wish-list-part']} ${styles['flx-space-bw']}`}>
                 <span className={styles['flex']}>
                   <a className={styles['flex-center']} onClick={this.addToWishlist}>
                     <SVGCompoent clsName={`${styles['wish-list']}`} src={addedToWishlist ? "icons/wish-list/wish-list-icon-red" : "icons/wish-list/wish-list-icon"} />
-                    <span className={styles['pl-5']} disabled={addedToWishlist}>{addedToWishlist ? 'Added to Wishlist': 'Add to Wishlist'}</span>
+                    <span className={`${styles['pl-5']} ${styles['fs-12']}`} disabled={addedToWishlist}>{addedToWishlist ? `${PDP_PAGE.ADDED_TO_WISHLIST}` : `${PDP_PAGE.ADD_TO_WISHLIST}`}</span>
                   </a>
                 </span>
                 <span className={styles['flex']}>
                   <a className={styles['flex-center']} onClick={this.addToCompare}>
                     <SVGCompoent clsName={`${styles['wish-list']}`} src="icons/cam/cam-icon" />
-                    <span className={styles['pl-5']}>Add to Compare</span>
+                    <span className={`${styles['pl-5']} ${styles['fs-12']}`}>{PDP_PAGE.ADD_TO_COMPARE}</span>
                   </a>
                 </span>
               </div>
               <div className={styles['brand-price-details']}>
-                <div>
-                  <h5 className={`${styles['prdt-name']} ${styles['fontW600']} ${styles['pb-5']}  ${styles['m-0']}`}>
-                    {displayName}
-                  </h5>
-                  <span className={`${styles['fs-12']} ${styles['label-gry-clr']}`}>Denim shirt with baseball shirt stiff collar and formal tie</span>
-                </div>
-                <span>{priceRange}</span>
-                <div className={styles['flex']}>
+                {/* <div> */}
+                  {/* <h5 className={`${styles['prdt-name']}  ${styles['pb-5']} ${styles['m-0']}`}>
+                    <span className={`${styles['fontW600']}`}>{brand}</span> <span className={`${styles['thick-gry-clr']} ${styles['fontW300']}`}>{displayName.replace(brand, '').trim()}</span>
+                  </h5> */}
+                  {/* <span className={`${styles['fs-12']} ${styles['label-gry-clr']}`}>Denim shirt with baseball shirt stiff collar and formal tie</span> */}
+                {/* </div> */}
+                <span className={`${styles['pr-5']} ${styles['fs-12']} ${styles['fontW600']}`}>{currency}</span>
+                <span className={`${styles['fs-16']} ${styles['fontW700']}`}>{priceRange}</span>
+                <div className={`${styles['flex']} ${styles['pt-5']}`}>
                   <span className={styles['flex']}>
                     <SVGCompoent clsName={`${styles['star-raing']}`} src="icons/common-icon/star-full-yellow" />
                     <SVGCompoent clsName={`${styles['star-raing']}`} src="icons/common-icon/star-full-yellow" />
@@ -181,7 +236,7 @@ class Product extends Component {
                   <span className={`${styles['label-gry-clr']} ${styles['pl-5']}`}>(153) </span>
                 </div>
               </div>
-              <div className={styles['desc-cont']}>
+              {/*<div className={styles['desc-cont']}>
                 <div className={`${styles['prdt-name']} ${styles['fs-12']} ${styles['pt-15']} ${styles['pb-5']}`}><a href="#">{displayName}</a></div>
                 <div>{priceRange}</div>
                 <div className={styles['variant-info']}>
@@ -189,18 +244,18 @@ class Product extends Component {
                     _.map(variants, (variantValues, key) => <div key={key}>{`${key} : ${variantValues.join(', ')}`}</div>)
                   }
                 </div>
-              </div>
+              </div>*/}
             </div>
           </div>
-        </Col>
-      </Link>
+        </div>
+      </div>
     );
   }
 };
 
 Product.propTypes = {
   media: PropTypes.array.isRequired,
-  displayName: PropTypes.array.isRequired,
+  displayName: PropTypes.string.isRequired,
   variants: PropTypes.object.isRequired,
 };
 

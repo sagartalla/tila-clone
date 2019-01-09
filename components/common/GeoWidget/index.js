@@ -27,18 +27,20 @@ class GeoWidget extends Component {
     this.onChangeCity = this.onChangeCity.bind(this);
     this.autoCompleteCity = _.debounce(this.autoCompleteCity.bind(this), 300);
     this.selectCityFromSuggesstions = this.selectCityFromSuggesstions.bind(this);
+    this.deleteCity = this.deleteCity.bind(this);
+    this.locateMe = this.locateMe.bind(this);
   }
 
-  componentDidMount() {
+  locateMe() {
     const shippingInfo = cookies.get('shippingInfo')
-    if(navigator.geolocation && !shippingInfo) {
+    if (navigator.geolocation && !shippingInfo) {
       navigator.geolocation.getCurrentPosition(this.deriveCity);
     }
   }
 
   componentWillReceiveProps(nextProps) {
     const { geoShippingData } = nextProps;
-    if(!this.state.displayCity && geoShippingData) {
+    if (!this.state.displayCity && geoShippingData) {
       this.setState({
         displayCity: geoShippingData.displayCity
       })
@@ -87,21 +89,44 @@ class GeoWidget extends Component {
     this.setCity(city, country, displayCity);
   }
 
+  deleteCity() {
+    this.setState({
+      displayCity: null
+    });
+    this.props.removeCity();
+  }
+
   render() {
-    const { autoCompleteCityData, geoShippingData } = this.props;
+    const { autoCompleteCityData, geoShippingData, hideLabel } = this.props;
     // const { displayCity } = geoShippingData;
     // const { displayCity: stateDisplayCity } = this.state;
     return (
       <div className={`${styles['flex-center']} ${styles['delovery-inn']}`}>
-        <span className={`${styles['flex-center']} ${styles['delivery-part']}`}>
-          <SVGCompoent clsName={`${styles['map-icon']}`} src="icons/common-icon/black-map-location" />
-          <span className={`${styles['fontW600']} ${styles['pl-5']} ${styles['pr-10']}`}>{SEARCH_PAGE.DELIVER_TO} :</span>
-        </span>
+        {
+          (!hideLabel)
+            ?
+            <span className={`${styles['flex-center']} ${styles['delivery-part']}`}>
+              <SVGCompoent clsName={`${styles['map-icon']}`} src="icons/common-icon/black-map-location" />
+              <span className={`${styles['fontW600']} ${styles['pl-5']} ${styles['pr-10']}`}>{SEARCH_PAGE.DELIVER_TO} :</span>
+
+            </span>
+            :
+            null
+        }
         <div className={styles['auto-suggestions-wrap']}>
-          <input type="text" value={this.state.displayCity} className={styles['fs-12']} onChange={this.onChangeCity} onFocus={this.onFocusCity}/>
-            {
-              autoCompleteCityData.map((result) =>  <div className={`${styles['auto-suggestions']} ${styles['p-10']} ${styles['bg-white']}`}><div key={result.displayCity} data-id={result.displayCity} onClick={this.selectCityFromSuggesstions} className={`${styles['item']} ${styles['fs-12']}`}>{result.displayCity}</div></div>)
-            }
+          <input type="text" value={this.state.displayCity} className={styles['fs-12']} onChange={this.onChangeCity} />
+          {
+            autoCompleteCityData.map((result) => <div key={result.displayCity} className={`${styles['auto-suggestions']} ${styles['p-10']} ${styles['bg-white']}`}><div data-id={result.displayCity} onClick={this.selectCityFromSuggesstions} className={`${styles['item']} ${styles['fs-12']}`}>{result.displayCity}</div></div>)
+          }
+          {
+            this.state.displayCity
+              ?
+              <div onClick={this.deleteCity} className={styles['delete-btn']}>x</div>
+              :
+              <div onClick={this.locateMe} className={styles['delete-btn']}>
+                <SVGCompoent clsName={`${styles['map-icon']}`} src="icons/locate-me" />
+              </div>
+          }
         </div>
       </div>
     )
@@ -120,6 +145,7 @@ const mapDispatchToProps = dispatch =>
       setCity: actionCreators.setCity,
       autoCompleteCity: actionCreators.autoCompleteCity,
       resetAutoCompleteData: actionCreators.resetAutoCompleteData,
+      removeCity: actionCreators.removeCity,
     },
     dispatch,
   );

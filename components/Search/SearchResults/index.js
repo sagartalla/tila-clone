@@ -64,6 +64,7 @@ class SearchResults extends Component {
 
   render() {
     const { results, pagiantionDetails } = this.props;
+    const { pageNum } = this.props.pagiantionDetails;
     return (
       <div>
         <InfiniteScroll
@@ -75,12 +76,14 @@ class SearchResults extends Component {
           className={`${styles['grid-cont']} ${styles['flex']} ${styles['flex-wrp']}`}
 
         >
-          {results.items.map((item) => (
+          {results.items.map((item,index) => (
             <Product
               key={item.id}
               {...item}
               buyNow={this.buyNow}
               addToCart={this.addToCart}
+              index={`${item.id}_${index}`}
+              pageNum={pageNum}
             />
           ))}
         </InfiniteScroll>

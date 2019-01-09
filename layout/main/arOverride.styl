@@ -1,0 +1,40 @@
+@import './executables.styl';
+
+mrgpad(types=margin padding margin-left margin-right margin-top margin-bottom  padding-left padding-right padding-top padding-bottom, n)
+  padding unit(n/base-px, rem) if padding in types
+  padding-left unit(n/base-px, rem) if padding-left in types
+  padding-right unit(n/base-px, rem) if padding-right in types
+  padding-top unit(n/base-px, rem) if padding-top in types
+  padding-bottom unit(n/base-px, rem) if padding-bottom in types
+  margin unit(n/base-px, rem) if margin in types
+  margin-left unit(n/base-px, rem) if margin-left in types
+  margin-right unit(n/base-px, rem) if margin-right in types
+  margin-top unit(n/base-px, rem) if margin-top in types
+  margin-bottom unit(n/base-px, rem) if margin-bottom in types
+
+for x in range(0px, 40px, 5)
+
+  .ml-{x}
+    mrgpad(margin-right, x)
+    mrgpad(margin-left, 0)
+
+  .mr-{x}
+    mrgpad(margin-left, x)
+    mrgpad(margin-right, 0)
+
+  .pl-{x}
+    mrgpad(padding-right, x)
+    mrgpad(padding-left, 0)
+
+  .pr-{x}
+    mrgpad(padding-left, x)
+    mrgpad(padding-right, 0)
+
+.thick-bdr-rgt
+  border-right 4px solid border-pink
+
+.thck-gry-rt-border
+  border-left 1px solid dottes-gry-clr
+
+.thin-border-right
+  border-left 1px solid generic-gray-color

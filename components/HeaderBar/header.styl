@@ -13,36 +13,6 @@
     &.faded
       background-color rgba(255,255,255, 0.95)
 
-  .profile-part
-    .ple-icon
-      padding: 10px 20px;
-      border-bottom: 1px solid #efeff4
-      .icon
-        width 40px
-        height 40px
-        background-color thck-gry-clr
-        border-radius 40px
-    .profile-inn
-      line-height 3
-      background-color rgba(187, 210, 241, 0.09)
-      li
-        border-bottom: 1px solid #efeff4
-        border-left 2px solid transparent
-        &:hover
-          background-color white
-          font-weight bold
-          border-left 2px solid thick-red-arrow
-        a span
-          color #000
-      .profile-icon
-        width 16px
-        height 30px
-      .support
-        span
-          width: 20px
-          height: 20px
-          border-radius: 20px
-          border: solid 0.8px #2c2f33
   .header-megamenu
     box-shadow 0 3px 4px 0 rgba(0, 0, 0, 0.09)
     position relative
@@ -61,6 +31,49 @@
     .header-meganenu-sub
       position relative
       z-index 8
+      .submenu-head-wrap
+        background: #4a4a4a;
+        .submenu-head
+          overflow: hidden;
+          margin-bottom: 0;
+          color: #fff;
+          li
+            cursor pointer
+            height 40px
+            &:hover
+              border-bottom 5px solid #fff
+              box-sizing border-box
+
+.profile-part
+  .ple-icon
+    padding: 10px 20px;
+    border-bottom: 1px solid #efeff4
+    .icon
+      width 40px
+      height 40px
+      background-color thck-gry-clr
+      border-radius 40px
+  .profile-inn
+    line-height 3
+    background-color rgba(187, 210, 241, 0.09)
+    li
+      border-bottom: 1px solid #efeff4
+      border-left 2px solid transparent
+      &:hover
+        background-color white
+        font-weight bold
+        border-left 2px solid thick-red-arrow
+      a span
+        color #000
+    .profile-icon
+      width 16px
+      height 30px
+    .support
+      span
+        width: 20px
+        height: 20px
+        border-radius: 20px
+        border: solid 0.8px #2c2f33
 
 .search-wrapper
   position relative
@@ -91,6 +104,7 @@
     position absolute
     right 4px
     width 30px
+    height: 30px;
     top 4px
     border-radius 4px
     display flex
@@ -251,7 +265,7 @@
     ul li
       &:hover
         border-bottom: 4px solid fashion-color
-  &.home-living
+  &.home-living, &.lifestyle
     .active-menu-item
       border-bottom: 4px solid lifestyle-color
     ul li
@@ -273,15 +287,18 @@
     border-bottom: 4px solid electronics-color
   .fashion-item.active-menu-item
     border-bottom: 4px solid fashion-color
-  .home-living-item.active-menu-item
+  .home-living-item.active-menu-item, .lifestyle-item.active-menu-item
     border-bottom: 4px solid lifestyle-color
 
-
-.megamenu-dropdown
-  width 100%
-  background #fff
+.megamenu-event-wrapper
+  overflow hidden
   position absolute
   left 0
+  width 100%
+  background #fff
+  box-shadow 0 2px 4px 0 rgba(0,0,0,0.11)
+
+.megamenu-dropdown
   z-index 1
   display flex
   &.max-height
@@ -293,11 +310,11 @@
         >span a
           color electronics-color
   &.fashion
-    .megamenu-sub-drop-down
-      >.megamenu-sub-list
-        >span a
-          color fashion-color
-  &.home-living
+  .megamenu-sub-drop-down
+    >.megamenu-sub-list
+      >span a
+        color fashion-color
+  &.home-living, &.lifestyle
     .megamenu-sub-drop-down
       >.megamenu-sub-list
         >span a
@@ -310,12 +327,12 @@
     >.megamenu-sub-list
       width 25%
       float left
+      min-height 250px
       >span a
         font-size 16px
       .megamenu-sub-child-list
         line-height 1.5
         font-size 12px
-        min-height 250px
         a
           color light-gray-clr
   .top-brands-trending-wrap
@@ -325,9 +342,11 @@
       width 100%
       .megamenu-sub-list
         width 100%
-        img
-          width 75px
-          height 25px
+        .megamenu-sub-child-list
+          padding-left 0
+          img
+            width 75px
+            height 25px
   .view-all-menu
     position absolute
     bottom 5px
@@ -370,7 +389,7 @@ nav
     width 100%
     height 100%
 
-.country-dd
+.country-dd, .language-dd
   button
     border 0
   .item
@@ -381,3 +400,33 @@ nav
 
 .mini-cart
   height: auto;
+
+.search-suggestions
+  position absolute
+  width 100%
+  background #fff
+
+@media screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation : portrait){
+  .megamenu-sub-drop-down .top-brands-trending-wrap .megamenu-sub-child-list {
+    padding-left 0
+  }
+
+  .megamenu-event-wrapper {
+    .megamenu-dropdown {
+      overflow scroll
+
+      .megamenu-sub-list {
+        width 33%
+
+        .megamenu-icon {
+          margin-right 5px
+          left auto
+        }
+      }
+    }
+    .megamenu-event-container {
+      width 100%
+      padding 0
+    }
+  }
+}

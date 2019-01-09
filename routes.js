@@ -1,6 +1,7 @@
 const routes = require('next-routes')();
 
 routes
+  .add({ name: 'login', pattern: '/login', page: 'login'})
   .add({ name: 'CAM', pattern: '/cam', page: 'cam' })
   .add({ name: 'ORDER ISSUE', pattern: '/cam/orders/:orderId/issue/:returnExchangeType/item/:orderItemId', page: 'order' })
   .add({ name: 'ORDER', pattern: '/cam/orders/:orderId', page: 'order' })

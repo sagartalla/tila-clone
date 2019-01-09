@@ -35,7 +35,7 @@ class SignIn extends Component {
     const { props } = this;
     const { showTerms, showPrivacy } = this.state;
     return (
-      <div className={`${styles['pb-15']} ${styles['pt-15']} ${styles['pl-35']} ${styles['pr-35']} ${styles['box']} ${styles['mb-20']} ${styles['relative']} ${styles['payment-signup']}`}>
+      <div className={`${styles['box']} ${styles['mb-20']} ${styles['relative']} ${styles['payment-signup']}`}>
         <SVGComponent clsName={`${styles['profile']} ${props.configJson.done ? 'done' : ''} ${props.configJson.progress ? 'payment-active' : ''}`} src="icons/profile/profile" />
         <Row className={`${props.configJson.done ? '' : 'hide'} ${styles['flex-center']}`}>
           <Col md={8} sm={12} xs={12}>
@@ -48,7 +48,7 @@ class SignIn extends Component {
         </Row>
 
         <Row className={`${props.configJson.progress ? '' : 'hide'} ${styles['pb-5']} ${styles['pt-5']}`}>
-          <Col md={3} sm={12} xs={12}>
+          <Col md={3} sm={5} xs={12} className={styles['landscape-socail-part']}>
             <h4 className={`${styles['mb-20']} ${styles['mt-0']} ${styles['light-gry-clr']}`}>{PAYMENT_PAGE.REGISTER}</h4>
             <div className={`${styles['thin-border-right']} ${styles['social-icons-list']}`}>
               <span className={`${styles['sub-title']} ${styles['fs-10']} ${styles['p-5']} ${styles['bg-white']}`}>{PAYMENT_PAGE.OR}</span>
@@ -57,7 +57,7 @@ class SignIn extends Component {
               <button className={`${styles['fp-btn']} ${styles['fp-btn-sucess']}`}>{PAYMENT_PAGE.REGISTER_WITH_US}</button>
             </div>
           </Col>
-          <Col md={8} sm={12} xs={12} className={styles['ml-30']}>
+          <Col md={8} sm={6} xs={12} className={`${styles['ml-30']} ${styles['landscape-login-part']}`}>
             <h4 className={`${styles['mb-20']} ${styles['mt-0']} ${styles['light-gry-clr']}`}>{PAYMENT_PAGE.SIGN_IN}</h4>
             <div className={styles['sign-part']}>
               <div className={`${styles['fp-input']}`}>
@@ -73,7 +73,7 @@ class SignIn extends Component {
                 <label>{PAYMENT_PAGE.PASSWORD}</label>
               </div>
               <div className={`${styles['mt-10']} ${styles['mb-10']}`}>
-                <input type="checkbox" defaultChecked="true" /> I agree to the <a onClick={this.tcToggle}>T&C</a> and <a onClick={this.privacyToggle}>Privacy Policy</a>
+                <input type="checkbox" defaultChecked="true" />{PAYMENT_PAGE.AGREE_TO} <a onClick={this.tcToggle}>{PAYMENT_PAGE.TC}</a>{PAYMENT_PAGE.AND}<a onClick={this.privacyToggle}>{PAYMENT_PAGE.PRIVACY_POLICY}</a>
               </div>
               <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles['fontW600']} ${styles['text-uppercase']}`} onClick={props.showAddressTab}>{PAYMENT_PAGE.CONTINUE}</button>
               {
@@ -88,7 +88,7 @@ class SignIn extends Component {
             <div>
               <Modal className={`react-router-modal__modal ${styles['p-20']}`} onBackdropClick={this.tcToggle}>
                 <Terms />
-                <button className={`${styles['fp-btn']} ${styles['fp-btn-default']}`} onClick={this.tcToggle}>CLOSE</button>
+                <button className={`${styles['fp-btn']} ${styles['fp-btn-default']}`} onClick={this.tcToggle}>{PAYMENT_PAGE.CLOSE}</button>
               </Modal>
             </div> : null
         }
@@ -98,7 +98,7 @@ class SignIn extends Component {
             <div>
               <Modal className={`react-router-modal__modal ${styles['p-20']}`} onBackdropClick={this.privacyToggle}>
                 <Privacy />
-                <button className={`${styles['fp-btn']} ${styles['fp-btn-default']}`} onClick={this.privacyToggle}>CLOSE</button>
+                <button className={`${styles['fp-btn']} ${styles['fp-btn-default']}`} onClick={this.privacyToggle}>{PAYMENT_PAGE.CLOSE}</button>
               </Modal>
             </div>
             : null

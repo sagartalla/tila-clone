@@ -14,7 +14,7 @@ const DeliveryAddress = props => {
   const { configJson, defaultAddress, handleShippingAddressContinue, editAddressTab } = props;
   
   return (
-    <div className={`${styles['pb-15']} ${styles['pt-15']} ${styles['pl-35']} ${styles['pr-35']} ${styles['box']} ${styles['mb-20']} ${styles['relative']}`}>
+    <div className={`${styles['delivery-adress-prt']} ${styles['box']} ${styles['mb-20']} ${styles['relative']}`}>
       <SVGComponent clsName={`${styles['map-address']} ${configJson.done ? 'done' : ''} ${configJson.progress ? 'payment-active' : ''}`} src="icons/map/address" />
       <Row className={`${configJson.basic || configJson.done ? '' : 'hide'}`}>
         <Col md={6} sm={12} xs={12}>

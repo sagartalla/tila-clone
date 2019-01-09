@@ -40,6 +40,16 @@ const actionCreators = {
       payload: api.cartItemCountApi(params, typ)
     })
   },
+  cartItemInputCount: (cartId, typ, val) => {
+    const params = {
+      "cart_item_id": cartId,
+      "count": val
+    }
+    return ({
+      type: actions.CART_ITEM_COUNT,
+      payload: api.cartItemCountApi(params, typ)
+    })
+  },
   addOrRemoveGift: (cartItemId, typ) => {
     return {
       type: actions.ADD_REMOVE_GIFT,

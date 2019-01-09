@@ -21,35 +21,40 @@ class SearchPage extends Base {
     const state = store.getState();
     // const country = authSelectors.getCountry(state);
     const country = req ? req.universalCookies.get('country') : cookies.get('country');
+    let [categoryId, ...categoryName] = category ? category.split('-').reverse() : [null, null];
+    let [subCategoryId, ...subCategoryName] = subCategory ? subCategory.split('-').reverse() : [null, null];
+    categoryName = categoryName ? categoryName.join(' ') : null;
+    subCategoryName = subCategoryName ? subCategoryName.join(' ') : null;
     const categoryFilter = {
-      id: subCategory ? subCategory.match(/(\d*)$/)[0] : category ? category.match(/(\d*)$/)[0] : null,
+      id: subCategoryId || categoryId,
     };
-    const facetFilters = selectors.getFacetfilters(store.getState())(JSON.parse(facets || '{}'));
+    const { facetFilters, facetFiltersCopyWithNames } = selectors.getFacetfilters(store.getState())(JSON.parse(facets || '{}'));
     const shippingData = req ? req.universalCookies.get('shippingInfo') : cookies.get('shippingInfo');;
     const { city: shippingCity, country: shippingCountry } = shippingData || {};
     const searchOptions = {
       categoryFilter,
       country: country || undefined,
-      pageSize: 100,
+      pageSize: 25,
       query: search,
       language: language || 'en',
       facetFilters,
+      facetFiltersCopyWithNames,
       pageNum: 1,
-      fl: '*',
       isListed: isListed === 'true',
       categoryTree,
+      choosenCategoryName: categoryName || subCategoryName,
     };
     if(shippingCity) {
       searchOptions.shippingDetails = {
         shippingCity: shippingCity.toUpperCase(),
-        shippingCountry: (country || 'uae').toUpperCase(),
+        shippingCountry: (country || 'ARE').toUpperCase(),
       }
     }
     await store.dispatch(actionCreators.getSearchResults(searchOptions))
     return { isServer };
   }
 
-  pageName = 'SEAERCH';
+  pageName = 'SEARCH';
 
   render() {
     return (

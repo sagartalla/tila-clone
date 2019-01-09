@@ -6,11 +6,11 @@ import { bindActionCreators } from 'redux';
 import { selectors, actionCreators } from '../../../store/cart';
 import { Router } from '../../../routes';
 import { languageDefinations } from '../../../utils/lang';
-
+import SVGCompoent from '../../common/SVGComponet';
 import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Product/product');
 
-const { PDP } = languageDefinations();
+const { PDP_PAGE } = languageDefinations();
 //
 // const AddToCart = ({addtocart}) => {
 //   return(
@@ -62,9 +62,9 @@ class AddToCart extends Component {
     null
     :
     (
-      <div className={`${styles['pt-25']} ${styles['flx-space-bw']} ${styles['addto-cart']} ${styles['border-t']}`}>
-        <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['fp-btn-x-large']}`} onClick={this.addToCart} disabled={isLoading || isAddedToCart} >{isAddedToCart ? PDP.ADDED_TO_CART : PDP.ADD_TO_CART}</button>
-        <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-x-large']}`} onClick={this.buyNow}>{PDP.BUY_NOW}</button>
+      <div className={`${styles['pt-25']} ${styles['flx-space-bw']} ${styles['addto-cart']} ${styles['ipad-p-0']} ${styles['border-t']}`}>
+        <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['fs-16']} ${styles['ipad-fs-14']} ${styles['add-to-card-btn']} ${styles['flex']}`} onClick={this.addToCart} disabled={isLoading || isAddedToCart} >{isAddedToCart ? <SVGCompoent clsName={`${styles['added-cart-icon']}`} src="icons/cart/added-cart-icon" /> : PDP_PAGE.ADD_TO_CART}</button>
+        <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fs-16']} ${styles['ipad-fs-14']} ${styles['buy-now-btn']}`} onClick={this.buyNow}>{PDP_PAGE.BUY_NOW}</button>
       </div>
     );
   }

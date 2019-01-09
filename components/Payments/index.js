@@ -64,6 +64,7 @@ class Payments extends React.Component {
       editCartDetails: true,
     }
 
+    this.saveCard = this.saveCard.bind(this);
     this.makePayment = this.makePayment.bind(this);
     this.inputOnChange = this.inputOnChange.bind(this);
     this.editAddressTab = this.editAddressTab.bind(this);
@@ -149,15 +150,20 @@ class Payments extends React.Component {
 
   handleShippingAddressContinue(e) {
     const { editCartDetails } = this.state;
-    const defaultAddrId = this.props.defaultAddress[0].address_id;
-    this.props.createOrder(defaultAddrId)
+    if (this.props.defaultAddress[0]) {
+      const defaultAddrId = this.props.defaultAddress[0].address_id;
+      this.props.createOrder(defaultAddrId)
 
-    const paymentConfigJson = { ...this.state.paymentConfigJson };
-    paymentConfigJson['address'] = { basic: false, progress: false, done: true };
-    paymentConfigJson['loyaltyPoints'] = { basic: false, progress: true, done: false };
-    paymentConfigJson['offersDiscounts'] = { basic: true, progress: false, done: false };
-    paymentConfigJson['payment'] = { basic: true, progress: false, done: false };
-    this.setState({ paymentConfigJson, editCartDetails: !editCartDetails });
+      const paymentConfigJson = { ...this.state.paymentConfigJson };
+      paymentConfigJson['address'] = { basic: false, progress: false, done: true };
+      paymentConfigJson['loyaltyPoints'] = { basic: false, progress: true, done: false };
+      paymentConfigJson['offersDiscounts'] = { basic: true, progress: false, done: false };
+      paymentConfigJson['payment'] = { basic: true, progress: false, done: false };
+      this.setState({ paymentConfigJson, editCartDetails: !editCartDetails });
+    } else {
+      alert('Please add a delivery address.');
+    }
+
   }
 
   handleLoyaltyBtn() {
@@ -194,6 +200,15 @@ class Payments extends React.Component {
 
     //clearing payment reducer on address edit button.
     this.props.emptyPaymentPaylod();
+  }
+
+  saveCard(e) {
+    const { paymentOptions } = this.props;
+    this.props.saveCard({
+      "save_card": e.target.checked,
+      "transaction_id": paymentOptions.data.transaction_id,
+      "user_id": ""
+    });
   }
 
   render() {
@@ -237,12 +252,13 @@ class Payments extends React.Component {
               <PaymentMode
                 showTab={showTab}
                 data={paymentOptions}
+                saveCard={this.saveCard}
                 makePayment={this.makePayment}
                 showPaymentType={this.showPaymentType}
                 configJson={paymentConfigJson.payment}
               />
             </Col>
-            <Col md={3} xs={12} sm={12} className={`${styles['pl-5']}`}>
+            <Col md={3} xs={12} sm={12} className={`${styles['pl-5']} ${styles['landscape-pr-0']}`}>
               <div>
                 {
                   cartResults && cartResults.total_price ?
@@ -272,23 +288,24 @@ class Payments extends React.Component {
 }
 
 const mapStateToprops = (store) => ({
+  userCreds: authSelectors.getUserCreds(store),
+  cartResults: cartSelectors.getCartResults(store),
   paymentOptions: selectors.getPaymentOptions(store),
   makePaymentOptions: selectors.getPaymentUrl(store),
   defaultAddress: selectors.getDefaultAddress(store),
   isLoggedIn: authSelectors.getLoggedInStatus(store),
-  userCreds: authSelectors.getUserCreds(store),
-  cartResults: cartSelectors.getCartResults(store),
 })
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      createOrder: actionCreators.createOrder,
+      saveCard: actionCreators.saveCard,
       doPayment: actionCreators.doPayment,
-      emptyPaymentPaylod: actionCreators.emptyPaymentPaylod,
       userLogin: authActionCreators.userLogin,
+      createOrder: actionCreators.createOrder,
       getLoginInfo: authActionCreators.getLoginInfo,
       getCartResults: cartActionCreators.getCartResults,
+      emptyPaymentPaylod: actionCreators.emptyPaymentPaylod,
     },
     dispatch,
   );

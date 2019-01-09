@@ -12,6 +12,8 @@ import { ORDER_ISSUE_STEPS as STEPS } from '../../constants';
 
 import { mergeCss } from '../../../../utils/cssUtil';
 const styles = mergeCss('components/Order/order');
+import {languageDefinations} from '../../../../utils/lang'
+const {ORDER_PAGE} = languageDefinations()
 
 class OrderReturnExchange extends Component {
   componentDidMount(){
@@ -36,9 +38,9 @@ class OrderReturnExchange extends Component {
     return (
       <div className={styles['ret-exch-wrap']}>
         <div className={styles['Breadcrums']}>
-          <span>My account</span>
+          <span>{ORDER_PAGE.MY_ACCOUNT}</span>
           <span>></span>
-          <span>Orders</span>
+          <span>{ORDER_PAGE.ORDERS}</span>
           <span>></span>
           <span>{orderId}</span>
         </div>
