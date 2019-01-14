@@ -3,13 +3,14 @@ import { Grid, Col } from 'react-bootstrap';
 import NoSSR from 'react-no-ssr';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { actionCreators } from '../../store/search';
+import { actionCreators,selectors } from '../../store/search';
 
 import HeaderBar from '../HeaderBar/index';
 import FooterBar from '../Footer/index';
 import CategoriesAndFacets from './CategoriesAndFacets';
 import SearchDetailsBar from './SearchDetailsBar';
 import SearchResults from './SearchResults';
+import { Router } from '../../routes';
 
 import { mergeCss } from '../../utils/cssUtil';
 const styles = mergeCss('components/Search/search');
@@ -28,15 +29,25 @@ const onClickMenuHandle = (e) => {
 }
 
 class Search extends Component {
-
+  constructor(props) {
+    super(props)
+    this.querySearch = this.querySearch.bind(this)
+  }
   componentWillUnmount() {
     this.props.hideSearchBarFitlers();
   }
-
+  querySearch(e) {
+    let dataSearchQuery = e.target.dataset.querysearch;
+    Router.pushRoute(`/srp?search=${dataSearchQuery}&${Object.entries(this.props.optionalParams).map(([key, val]) => `${key}=${val}`).join('&')}`);
+  }
   render() {
+    console.log(this.props)
     return (
       <div>
         <HeaderBar />
+        {
+          this.props.spellCheckResp && <div><b>Did you Mean</b><span onClick={this.querySearch} data-querysearch={this.props.spellCheckResp[this.props.query.search]}>{this.props.spellCheckResp[this.props.query.search]}</span></div>
+        }
         <Grid className={styles['pt-20']}>
           <Col md={2} onClick={onClickMenuHandle} className={`${styles['filter-panel']} ${styles['border-radius4']} ${styles['bg-white']} ${styles['p-0']}`}>
             <NoSSR>
@@ -53,7 +64,10 @@ class Search extends Component {
     )
   }
 };
-
+const mapStateToProps = (store) => ({
+  spellCheckResp:selectors.getSpellCheckResponse(store),
+  optionalParams: selectors.optionParams(store)
+});
 const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators(
 		{
@@ -63,4 +77,4 @@ const mapDispatchToProps = (dispatch) => {
 	);
 };
 
-export default connect(null, mapDispatchToProps)(Search);
+export default connect(mapStateToProps, mapDispatchToProps)(Search);

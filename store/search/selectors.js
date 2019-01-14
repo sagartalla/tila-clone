@@ -149,7 +149,9 @@ const getSearchResutls = (store) => {
   }
   return addCartAndWishlistDetails(store, resutls);
 }
-
+const getSpellCheckResponse = (store) => {
+  return store.searchReducer.data.spellCheckResponse || null;
+}
 const getPaginationDetails = (store) => {
   return store.searchReducer.data.paginationDetails || {
     pageSize:0,
@@ -225,4 +227,4 @@ const getSuggestions = (store) => {
   return store.searchReducer.data.suggestions;
 }
 
-export { getSearchFilters, getSearchResutls, getPaginationDetails, getUIState, getCategoryId, getQuery, getFacetfilters, optionParams, getSearchBarFilterState, addCartAndWishlistDetails, getIsCategoryTree, getChoosenCategoryName, getAppliedFitlers, getSuggestions };
+export { getSearchFilters, getSearchResutls, getPaginationDetails, getUIState, getCategoryId, getQuery, getFacetfilters, optionParams, getSearchBarFilterState, addCartAndWishlistDetails, getIsCategoryTree, getChoosenCategoryName, getAppliedFitlers, getSuggestions,getSpellCheckResponse };

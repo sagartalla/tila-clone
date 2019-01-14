@@ -9,6 +9,8 @@ import { Router } from '../../routes';
 import SVGComponent from '../common/SVGComponet';
 
 import { mergeCss } from '../../utils/cssUtil';
+import {Modal} from 'react-bootstrap';
+import DragDropUpload from '../common/DragDropUpload';
 const styles = mergeCss('components/HeaderBar/header');
 
 const urlPropsQueryConfig = {
@@ -19,24 +21,41 @@ class Search extends Component {
 
   constructor(props) {
     super(props);
-    const { query, isCategoryTree, choosenCategoryName } = props;
+    const { query, isCategoryTree, choosenCategoryName,searchText } = props;
     this.state = {
-      query: query ? query : isCategoryTree ? choosenCategoryName : ''
+      query: query ? query : isCategoryTree ? choosenCategoryName : '',
+      openImagesearch: false
     };
     this.submitQuery = this.submitQuery.bind(this);
     this.onChangeSearchInput = this.onChangeSearchInput.bind(this);
     this.setSearchText = this.setSearchText.bind(this);
+    this.handleHide = this.handleHide.bind(this);
+    this.imageSearch = this.imageSearch.bind(this)
+    this.handleUploadImage = this.handleUploadImage.bind(this)
     this.fetchSuggestions = _.debounce(this.fetchSuggestions.bind(this), 300);
   }
 
   submitQuery(e) {
     e.preventDefault();
+    // const { isCategoryTree } = this.props;
     digitalData.page.pageInfo['onsiteSearchTerm'] = this.state.query
     this.fireCustomEventClick(); 
     const flushFilters = true;
+    this.setState({
+      searchInput: false
+    });
     Router.pushRoute(`/srp?search=${this.state.query}&${Object.entries(this.props.optionalParams).map(([key, val]) => `${key}=${val}`).join('&')}`);
   }
-
+  imageSearch() {
+    this.setState({openImagesearch:true})
+  }
+  handleHide() {
+    this.setState({openImagesearch:false})
+  }
+  handleUploadImage(file) {
+    this.props.fetchImageSearchData(file)
+    Router.pushRoute(`/srp`);
+  }
   onChangeSearchInput(e) {       
     
     this.setState({
@@ -55,12 +74,12 @@ class Search extends Component {
     var event = new CustomEvent('event-internalSearch-click');
     document.dispatchEvent(event);
   }
-  componentWillReceiveProps(nextProps) {
-    const { isCategoryTree, choosenCategoryName } = nextProps;
+  componentWillReceiveProps(nextProps) { 
+    const { isCategoryTree, choosenCategoryName, query: queryProp } = nextProps;
     const { query, searchInput } = this.state;
     this.setState({
-      query: searchInput ? query : isCategoryTree ? choosenCategoryName : query,
-      searchInput: false,
+      query: searchInput ? query : isCategoryTree ? choosenCategoryName : queryProp,
+      //query: isCategoryTree ? choosenCategoryName : searchInput ? query : queryProp,
       suggestions: nextProps.suggestions
     });
   }
@@ -75,7 +94,7 @@ class Search extends Component {
   }
 
   render() {
-    const { suggestions } = this.state;
+    const { suggestions,openImagesearch } = this.state;
     return (
       <div className={styles['search-wrapper']}>
         <form onSubmit={this.submitQuery}>
@@ -85,6 +104,7 @@ class Search extends Component {
             onChange={this.onChangeSearchInput}
             value={this.state.query}
            />
+          <div onClick={this.imageSearch}>IMG</div>
           <button type="submit" className={styles['search-btn']}><SVGComponent clsName={`${styles['searching-icon']}`} src="icons/search/search-white-icon" /></button>
           <ul className={styles['search-suggestions']}>
             {
@@ -98,6 +118,22 @@ class Search extends Component {
             }
           </ul>
         </form>
+        
+        
+          <Modal
+            {...this.props}
+            show={openImagesearch}
+            onHide={this.handleHide}
+            dialogClassName="custom-modal"
+        >
+         <Modal.Body>
+           <DragDropUpload
+            uploadCallback = {this.handleUploadImage}
+           />
+         </Modal.Body>
+        </Modal>
+        
+        
       </div>
     )
   }
@@ -123,6 +159,7 @@ const mapDispatchToProps = dispatch =>
     {
       getSearchResults: actionCreators.getSearchResults,
       fetchSuggestions: actionCreators.fetchSuggestions,
+      fetchImageSearchData:actionCreators.fetchImageSearchData
     },
     dispatch,
   );

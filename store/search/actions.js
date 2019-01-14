@@ -6,6 +6,7 @@ const actions = {
   SEARCHBAR_FITLERS: 'SEARCHBAR_FITLERS',
   REMOVE_FILTERS: 'REMOVE_FILTERS',
   FETCH_SUGGESTIONS: 'FETCH_SUGGESTIONS',
+  FETCH_IMAGESEARCHDATA: 'FETCH_IMAGESEARCHDATA' ,
 };
 
 const actionCreators = {
@@ -46,6 +47,12 @@ const actionCreators = {
       type: actions.FETCH_SUGGESTIONS,
       payload: apis.fetchSuggestions(params)
     })
+  },
+  fetchImageSearchData:(params) => {
+    return ({
+      type:actions.GET_SEARCH_RESULTS,
+      payload:apis.fetchImageSearchApi(params)
+    }) 
   }
 };
 
