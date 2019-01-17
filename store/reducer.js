@@ -17,6 +17,7 @@ import { reducer as reviewRatingReducer } from './ratingReviews';
 import { reducer as instantCheckoutReducer } from './common/instantCheckout';
 import { reducer as listingCartReducer } from './listingCart';
 import { reducer as landingReducer } from './landing';
+import { reducer as captchaReducer } from './captcha'; 
 
 export default combineReducers({
   searchReducer,
@@ -37,4 +38,5 @@ export default combineReducers({
   instantCheckoutReducer,
   listingCartReducer,
   landingReducer,
+  captchaReducer,
 });

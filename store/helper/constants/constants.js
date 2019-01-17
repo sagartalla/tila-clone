@@ -27,7 +27,8 @@ const a = {
     REVIEWS_API_URL       :   'http://gateway-dev.fptechscience.com/reviews',
     VAULT_API_URL         :   'http://gateway-dev.fptechscience.com/vault',
     TRANSFORMER_API_URL   :   'http://transformers-mgmt.fptsinternal.com/fpts/page-config/get-all-pages',
-    SUGGESSIONS_URL       :   'https://api-gateway-stage.fptechscience.com/auto-suggest/suggest/suggestions'
+    SUGGESSIONS_URL       :   'https://api-gateway-stage.fptechscience.com/auto-suggest/suggest/suggestions',
+    CAPTCHA_URL           :   'https://api-gateway-stage.fptechscience.com/transformers/api/v1/captcha',
   },
   dev: {
     SEARCH_API_URL        :   'http://gateway-dev.fptechscience.com/search',
@@ -45,7 +46,8 @@ const a = {
     REVIEWS_API_URL       :   'http://gateway-dev.fptechscience.com/reviews',
     VAULT_API_URL         :   'http://gateway-dev.fptechscience.com/vault',
     TRANSFORMER_API_URL   :   'http://transformers-mgmt.fptsinternal.com/fpts/page-config/get-all-pages',
-    SUGGESSIONS_URL       :   'https://api-gateway-stage.fptechscience.com/auto-suggest/suggest/suggestions'
+    SUGGESSIONS_URL       :   'https://api-gateway-stage.fptechscience.com/auto-suggest/suggest/suggestions',
+    CAPTCHA_URL           :   'https://api-gateway-stage.fptechscience.com/transformers/api/v1/captcha',
   },
   staging: {
     SEARCH_API_URL        :   'https://api-gateway-stage.fptechscience.com/search',
@@ -63,7 +65,8 @@ const a = {
     REVIEWS_API_URL       :   'https://api-gateway-stage.fptechscience.com/reviews',
     VAULT_API_URL         :   'https://api-gateway-stage.fptechscience.com/vault',
     TRANSFORMER_API_URL   :   'http://transformers-mgmt.fptsinternal.com/fpts/page-config/get-all-pages',
-    SUGGESSIONS_URL       :   'https://api-gateway-stage.fptechscience.com/auto-suggest/suggest/suggestions'
+    SUGGESSIONS_URL       :   'https://api-gateway-stage.fptechscience.com/auto-suggest/suggest/suggestions',
+    CAPTCHA_URL           :   'https://api-gateway-stage.fptechscience.com/transformers/api/v1/captcha',
   },
   stage: {
     SEARCH_API_URL        :   'https://api-gateway-stage.fptechscience.com/search',
@@ -81,7 +84,8 @@ const a = {
     REVIEWS_API_URL       :   'https://api-gateway-stage.fptechscience.com/reviews',
     VAULT_API_URL         :   'https://api-gateway-stage.fptechscience.com/vault',
     TRANSFORMER_API_URL   :   'http://transformers-mgmt.fptsinternal.com/fpts/page-config/get-all-pages',
-    SUGGESSIONS_URL       :   'https://api-gateway-stage.fptechscience.com/auto-suggest/suggest/suggestions'
+    SUGGESSIONS_URL       :   'https://api-gateway-stage.fptechscience.com/auto-suggest/suggest/suggestions',
+    CAPTCHA_URL           :   'https://api-gateway-stage.fptechscience.com/transformers/api/v1/captcha',
   },
   preprod: {
     SEARCH_API_URL        :   'https://apigateway-preprod.tila.com/search',
@@ -100,6 +104,7 @@ const a = {
     VAULT_API_URL         :   'https://apigateway-preprod.tila.com/vault',
     TRANSFORMER_API_URL   :   'http://transformers-mgmt.fptsinternal.com/fpts/page-config/get-all-pages',
     SUGGESSIONS_URL       :   'https://api-gateway-stage.fptechscience.com/auto-suggest/suggest/suggestions',
+    CAPTCHA_URL           :   'https://api-gateway-stage.fptechscience.com/transformers/api/v1/captcha',
   },
   prod: {
     SEARCH_API_URL        :   'http://gateway-dev.fptechscience.com/search',
@@ -117,7 +122,8 @@ const a = {
     REVIEWS_API_URL       :   'http://gateway-dev.fptechscience.com/reviews',
     VAULT_API_URL         :   'http://gateway-dev.fptechscience.com/vault',
     TRANSFORMER_API_URL   :   'http://transformers-mgmt.fptsinternal.com/fpts/page-config/get-all-pages',
-    SUGGESSIONS_URL       :   'https://api-gateway-stage.fptechscience.com/auto-suggest/suggest/suggestions'
+    SUGGESSIONS_URL       :   'https://api-gateway-stage.fptechscience.com/auto-suggest/suggest/suggestions',
+    CAPTCHA_URL           :   'https://api-gateway-stage.fptechscience.com/transformers/api/v1/captcha',
   }
 };
 // console.log('constants.js 2', a);

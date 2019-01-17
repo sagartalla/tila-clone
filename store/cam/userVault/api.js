@@ -9,7 +9,6 @@ const getCardResultsApi = () => {
 
 const addCardDetailsApi = (params) => {
   return axios.post(`${constants.VAULT_API_URL}/api/v1/vault/add`, params).then(({ data }) => {
-
     //after successfully added, get all card details again.
     return getCardResultsApi();
   });

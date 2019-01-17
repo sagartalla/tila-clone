@@ -66,7 +66,6 @@ class Cart extends Component {
   }
 
   removeCartItem(e) {
-    debugger;    
     let productId = e.currentTarget.getAttribute('data-productId')
     digitalData.cart.item = digitalData.cart.item.filter((item) => {
       return item.productInfo.productID !== productId
