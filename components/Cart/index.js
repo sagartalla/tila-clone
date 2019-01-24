@@ -106,11 +106,13 @@ class Cart extends Component {
     const listing_id = e.currentTarget.getAttribute('data-id');
     const item = cartData.items.filter(_item => listing_id == _item.item_id)[0];
     this.props.addToWishlistAndFetch({
-      "catalog_id": item.item_id,
-      "product_id": item.product_id,
-      "variant_id": item.variant_id
+      catalog_id: item.item_id,
+      product_id: item.product_id,
+      variant_id: item.variant_id,
+      wishlisted_price: item.price,
+      wishlisted_currency: item.cur,
     });
-    this.cartItemCount(listing_id, 'remove');
+    this.props.removeCartItem(listing_id);
   }
 
   addOrRemoveGift(e) {
