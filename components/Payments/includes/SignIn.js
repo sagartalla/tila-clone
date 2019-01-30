@@ -37,7 +37,7 @@ class SignIn extends Component {
     return (
       <div className={`${styles['box']} ${styles['mb-20']} ${styles['relative']} ${styles['payment-signup']}`}>
         <SVGComponent clsName={`${styles['profile']} ${props.configJson.done ? 'done' : ''} ${props.configJson.progress ? 'payment-active' : ''}`} src="icons/profile/profile" />
-        <Row className={`${props.configJson.done ? '' : 'hide'} ${styles['flex-center']}`}>
+        <Row className={`${props.configJson.done ? '' : 'hide'} ${styles['flex-center']} ${styles['m-blk']}`}>
           <Col md={8} sm={12} xs={12}>
             <h4 className={styles['m-0']}>{PAYMENT_PAGE.SIGN_IN}</h4>
             <small>{PAYMENT_PAGE.SIGN_IN_SIGN_UP_TO_CONTINUE}</small>
