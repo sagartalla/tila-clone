@@ -11,14 +11,14 @@ const CashOnDelivery = props => {
   const { PAYMENT_PAGE } = languageDefinations();
   return (
     <div className={`${styles['cash-on-dly-points']}`}>
-      <Row className={styles['pl-40']}>
+      <Row className={`${styles['pl-40']} ${styles['m-pd-l-10']}`}>
         <Col md={12}>
           <h4 className={`${styles['fontW300']} ${styles['fs-20']} ${styles['lgt-blue']} ${styles['mt-0']} ${styles['pb-10']}`}>Pay on Delivery</h4>
           <div className={styles['checkbox-material']}>
             <input id="pay-delivery" type="checkbox" />
             <label for="pay-delivery"> I agree to pay cash on delivery </label>
           </div>
-          <div className={`${styles['flx-spacebw-alignc']} ${styles['pt-30']} ${styles['pb-30']}`}>
+          <div className={`${styles['flx-spacebw-alignc']} ${styles['capcha-pay']} ${styles['pt-30']} ${styles['pb-30']}`}>
             <div>
               <ul className={`${styles['pl-0']} ${styles['m-0']} ${styles['cash-tab']}`}>
                 <li>Visual</li>
