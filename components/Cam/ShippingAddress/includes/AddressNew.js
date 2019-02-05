@@ -63,10 +63,10 @@ const AddressNew = props => {
           </Col>
           <Col md={12} sm={12} xs={12}>
             <div className={`${styles['fp-input']} ${styles['common-input-mb']}`}>
-              <input type="text"name="address_line_1" onChange={inputOnChange} value={data.address_line_1} className={styles.input} required />
+              <input type="text" name="address_line_1" onChange={inputOnChange} value={data.address_line_1} className={styles.input} required />
               <span className={styles['highlight']}></span>
               <span className={styles['bar']}></span>
-              <label>Flat/house no.floor/Building/</label>
+              <label>Flat/House Number/Floor/Building</label>
             </div>
           </Col>
           <Col md={6} sm={12} xs={12}>
@@ -124,8 +124,8 @@ const AddressNew = props => {
             </div>
           </Col>
           <Col md={12} sm={12} xs={12} className={styles['m-flx']}>
-            <Button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-x-large']} ${styles['m-fs-11']} ${styles['text-uppercase']} ${styles['m-pad-10']}`} onClick={saveBtnClickHandler} > {DELIVERY_ADDR_PAGE.SAVE_DELIVER_BTN} </Button>
-            <Button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']} ${styles['m-fs-11']} ${styles['ml-10']} ${styles['m-pad-10']}`} onClick={showAddAdrressForm}>{DELIVERY_ADDR_PAGE.CANCEL}</Button>
+            <Button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-x-large']} ${styles['m-fs-11']} ${styles['m-pad-10']}`} onClick={saveBtnClickHandler} > {DELIVERY_ADDR_PAGE.SAVE_DELIVER_BTN} </Button>
+            <Button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['m-fs-11']} ${styles['ml-10']} ${styles['m-pad-10']}`} onClick={showAddAdrressForm}>{DELIVERY_ADDR_PAGE.CANCEL}</Button>
           </Col>
         </Row>
       </div>
