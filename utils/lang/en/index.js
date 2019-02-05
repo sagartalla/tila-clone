@@ -388,9 +388,9 @@ export const EN_KEYWORDS = {
   LOGIN_PAGE: {
     'SIGN_UP': 'Sign Up',
     'SIGN_IN': 'Sign In',
-    'SIGN_UP_WITH': 'Or Sign up with',
+    'SIGN_UP_WITH': 'Or sign up with',
     'NO_ACCOUNT': 'Don\'t have an Account',
-    'HAVE_ACCOUNT': 'Already have an Account',
+    'HAVE_ACCOUNT': 'If you already have an account, please',
     'EMAIL': 'Email',
     'PASSWORD': 'Password',
     'TILA_COM': 'Tila.com',

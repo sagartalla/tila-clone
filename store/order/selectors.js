@@ -6,7 +6,8 @@ const getOrderDetails = (store) => {
   if (order_id) {
     return {
       name: address ? `${address.first_name} ${address.last_name}` : 'No Name',
-      address: address ? `${address.address_line_1}, ${address.address_line_2}, ${address.city}, ${address.state}, ${address.postal_code}` : 'no address info',
+      address: address ? `${address.address_line_1 !== null ? `${address.address_line_1},` : ''} ${address.address_line_2 !== null ? `${address.address_line_2},` : ''}
+        ${address.city !== null ? `${address.city},` : ''} ${address.state !== null ? `${address.state},` : ''} ${address.postal_code !== null ? `${address.postal_code}` : ''}` : 'no address info',
       phone: address ? `${address.mobile_country_code} ${address.mobile_no}` : 'No phone number',
       orderId: order_id,
       orderDate: created_at,

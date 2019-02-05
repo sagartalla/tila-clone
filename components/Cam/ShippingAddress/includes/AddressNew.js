@@ -16,8 +16,8 @@ const AddressNew = props => {
     <div className={`${styles['addr-new-container']} ${styles['pb-30']} ${styles['pr-30']} ${styles['pl-30']}`}>
       <div className={styles['new-addr-inn']}>
         <Row>
-          <Col md={10} sm={9} xs={9}>
-            <h1 className={`${styles['thick-blue']} ${styles['mb-20']} ${styles['fs-20']} ${styles['fontW300']}`}>{DELIVERY_ADDR_PAGE.ADD_NEW_ADDR_HEAD}</h1>
+          <Col md={10} sm={9} xs={12}>
+            <h1 className={`${styles['thick-blue']} ${styles['mb-20']} ${styles['fs-20']} ${styles['fontW300']} ${styles['m-fs-16']}`}>{DELIVERY_ADDR_PAGE.ADD_NEW_ADDR_HEAD}</h1>
           </Col>
 
           <Col md={12} sm={12} xs={12}>
@@ -123,9 +123,9 @@ const AddressNew = props => {
               <label for="prefer-loaction" className={`${styles['fontW300']} ${styles['thick-gry-clr']} ${styles['mb-0']}`}>{DELIVERY_ADDR_PAGE.PREF_LOC}</label>
             </div>
           </Col>
-          <Col md={12} sm={12} xs={12}>
-            <Button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-x-large']} ${styles['text-uppercase']}`} onClick={saveBtnClickHandler} > {DELIVERY_ADDR_PAGE.SAVE_DELIVER_BTN} </Button>
-            <Button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']} ${styles['ml-10']} `} onClick={showAddAdrressForm}>{DELIVERY_ADDR_PAGE.CANCEL}</Button>
+          <Col md={12} sm={12} xs={12} className={styles['m-flx']}>
+            <Button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-x-large']} ${styles['m-fs-11']} ${styles['text-uppercase']} ${styles['m-pad-10']}`} onClick={saveBtnClickHandler} > {DELIVERY_ADDR_PAGE.SAVE_DELIVER_BTN} </Button>
+            <Button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']} ${styles['m-fs-11']} ${styles['ml-10']} ${styles['m-pad-10']}`} onClick={showAddAdrressForm}>{DELIVERY_ADDR_PAGE.CANCEL}</Button>
           </Col>
         </Row>
       </div>

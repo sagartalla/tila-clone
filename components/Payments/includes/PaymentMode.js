@@ -69,7 +69,7 @@ const PaymentMode = props => {
             <div>
               <h4 className={`${styles['m-0']} ${styles['mb-10']}`}>{PAYMENT_PAGE.MAKE_PAYMENT}</h4>
               <Row>
-                <Col md={3} sm={12} xs={12}>
+                <Col md={3} sm={12} xs={12} className={styles['payment-mode-inn']}>
                   <ul className={` ${styles['pay-menu']} ${styles['m-0']} ${styles['pl-5']} ${styles['pt-5']}`}>
                     {
                       props.data.data.payment_options_available.map((val, index) => {
@@ -84,7 +84,7 @@ const PaymentMode = props => {
                     }
                   </ul>
                 </Col>
-                <Col md={9} sm={12} xs={12}>
+                <Col md={9} sm={12} xs={12} className={styles['m-pd-0']}>
                   {
                     props.data.data.payment_options_available.map((val, index) => {
                       const Page = paymentPageConfig[val.type];

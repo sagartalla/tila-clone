@@ -112,7 +112,7 @@ class Login extends Component {
                 {
                  this.state.mode === 'register'
                  ?
-                  'Register With tila.com'
+                  'Register with tila.com'
                   :
                   LOGIN_PAGE.TILA_COM
                 }
@@ -204,7 +204,7 @@ class Login extends Component {
                   ?
                     <div className={`${styles['checkbox-material']} ${styles['flex']} ${styles['pb-15']}`}>
                       <input id="deals-offers-reg" type="checkbox" /> 
-                      <label for="deals-offers-reg">I would like to receive <a>Deals &amp; Offers.</a> </label>
+                      <label for="deals-offers-reg">I would like to receive deals and offers.</label>
                     </div>
                   :
                   null
@@ -219,7 +219,7 @@ class Login extends Component {
                 {
                   this.state.mode === 'register'
                   ?
-                  <p className={`${styles['fs-12']} ${styles['termes-label']} ${styles['pt-10']}`}>Registration with us means you agree with Tila&apos;s <a href="/terms" target="_blank">T&amp;C, Privacy Policy &amp; Cookie Policy</a></p>
+                  <p className={`${styles['fs-12']} ${styles['termes-label']} ${styles['pt-10']}`}>By signing up, you agree to our terms and conditions.</p>
                   :
                   null
                 }
@@ -239,12 +239,12 @@ class Login extends Component {
           {
             this.state.mode === 'register'
             ?
-              <h4 className={styles['ff-b']}>
+              <h4 className={`${styles['ff-b']} ${styles['fs-14']}`}>
                 <span>{LOGIN_PAGE.HAVE_ACCOUNT}&nbsp;</span>
                 <span className={styles['link-text']} onClick={this.toggleLoginSignUp}>{LOGIN_PAGE.SIGN_IN}</span>
               </h4>
             :
-            <h4 className={styles['ff-b']}>
+            <h4 className={`${styles['ff-b']} ${styles['fs-14']}`}>
               <span>{LOGIN_PAGE.NO_ACCOUNT} &nbsp;</span>
               <span className={styles['link-text']} onClick={this.toggleLoginSignUp}>{LOGIN_PAGE.SIGN_UP}</span>
             </h4>
