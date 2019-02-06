@@ -103,18 +103,27 @@ class EditPassword extends React.Component {
   }
 
   handleSubmit = () => {
+    const { EDIT_PASSWORD_MODAL } = languageDefinations();
+    const { newPassword, rePassword, oldPassword } = this.state;
+    let { error } = this.state;
     this.props.resetPasswordInfoStore();
-    if (this.state.newPassword == this.state.rePassword && this.state.newPassword.length > 0 && this.state.oldPassword.length > 0) {
-      this.props.changePassword({
-        "current_password": this.state.oldPassword,
-        "new_password": this.state.newPassword
-      });
+    if (newPassword.length > 0 && oldPassword.length > 0 && newPassword === rePassword) {
+      const passreg = /^([a-zA-Z0-9_-]){8,30}$/;
+      const rechPassword = passreg.test(newPassword);
+      if (rechPassword) {
+        this.props.changePassword({
+          current_password: oldPassword,
+          new_password: newPassword,
+        });
+      } else {
+        error = EDIT_PASSWORD_MODAL.PASSWORD_LENGTH;
+      }
+    } else if (newPassword.length === 0 || oldPassword.length === 0 || rePassword.length === 0) {
+      error = EDIT_PASSWORD_MODAL.EMPTY_ERROR_MESSAGE;
     } else {
-      if (this.state.newPassword.length == 0 || this.state.oldPassword.length == 0 || this.state.rePassword.length == 0)
-        this.setState({ error: "Password cannot be empty" });
-      else
-        this.setState({ error: "Passwords must match" });
+      error = EDIT_PASSWORD_MODAL.MATCH_ERROR_MESSAGE;
     }
+    this.setState({ error });
   }
 
   render() {
