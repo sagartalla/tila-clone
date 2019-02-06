@@ -62,6 +62,14 @@ class EditPassword extends React.Component {
 
   handleNewPasswordChange = (e) => {
     const { EDIT_PASSWORD_MODAL } = languageDefinations();
+    // const password = e.target.value;
+    // const passreg = /^([a-zA-Z0-9_-]){8,30}$/;
+    // const rechPassword = passreg.test(password);
+    // if (rechPassword) {
+    //   return true;
+    // } else {
+    //   alert('fail');
+    // }
     if (e.target.value != this.state.rePassword && this.state.rePassword.length > 0) {
       this.setState({
         error: EDIT_PASSWORD_MODAL.MATCH_ERROR_MESSAGE,
@@ -103,18 +111,26 @@ class EditPassword extends React.Component {
   }
 
   handleSubmit = () => {
+    const { newPassword, rePassword, oldPassword } = this.state;
+    let { error } = this.state;
     this.props.resetPasswordInfoStore();
-    if (this.state.newPassword == this.state.rePassword && this.state.newPassword.length > 0 && this.state.oldPassword.length > 0) {
-      this.props.changePassword({
-        "current_password": this.state.oldPassword,
-        "new_password": this.state.newPassword
-      });
+    if (newPassword === rePassword && newPassword.length > 0 && oldPassword.length > 0) {
+      const passreg = /^([a-zA-Z0-9_-]){8,30}$/;
+      const rechPassword = passreg.test(newPassword);
+      if (rechPassword) {
+        this.props.changePassword({
+          current_password: oldPassword,
+          new_password: newPassword,
+        });
+      } else {
+        error = 'Your password must be at least 8 characters long.';
+      }
+    } else if (newPassword.length === 0 || oldPassword.length === 0 || rePassword.length === 0) {
+      error = 'Password cannot be empty';
     } else {
-      if (this.state.newPassword.length == 0 || this.state.oldPassword.length == 0 || this.state.rePassword.length == 0)
-        this.setState({ error: "Password cannot be empty" });
-      else
-        this.setState({ error: "Passwords must match" });
+      error = 'Passwords must match';
     }
+    this.setState({ error });
   }
 
   render() {
