@@ -124,7 +124,7 @@ class ShippingAddress extends Component {
 
   addrTypeHandler(e) {
     const addr = { ...this.state.addr };
-    addr['address_type'] = e.target.name;
+    addr['address_type'] = e.target.innerText;
     this.setState({ addr });
   }
 

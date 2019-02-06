@@ -22,7 +22,12 @@ phases:
       - docker push $REPOSITORY_URI:latest
       - docker push $REPOSITORY_URI:$IMAGE_TAG
       - echo Writing image definitions file...
-      - printf '[{"name":"ecs-storefront-app-container","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
-      - cat imagedefinitions.json
+      - printf '[{"name":"ecs-storefront-stage-app-container","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions-stage.json
+      - cat imagedefinitions-stage.json
+      - printf '[{"name":"ecs-storefront-prod-app-container","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions-prod.json
+      - cat imagedefinitions-prod.json
 artifacts:
-    files: imagedefinitions.json
+    files: 
+      - imagedefinitions-stage.json
+      - imagedefinitions-prod.json
+    

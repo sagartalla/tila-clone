@@ -104,7 +104,9 @@ class Search extends Component {
             onChange={this.onChangeSearchInput}
             value={this.state.query}
            />
-          <div onClick={this.imageSearch}>IMG</div>
+          <div className={`${styles['search-btn']} ${styles['r-40']}`} onClick={this.imageSearch}>
+           <SVGComponent clsName={`${styles['searching-icon']}`} src="icons/dragdrop"/>
+          </div>
           <button type="submit" className={styles['search-btn']}><SVGComponent clsName={`${styles['searching-icon']}`} src="icons/search/search-white-icon" /></button>
           <ul className={styles['search-suggestions']}>
             {

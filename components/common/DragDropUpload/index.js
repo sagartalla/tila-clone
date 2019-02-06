@@ -1,4 +1,7 @@
 import React,{Component} from 'react'
+import { mergeCss } from '../../../utils/cssUtil';
+import SVGComponent from '../../common/SVGComponet'
+const styles = mergeCss('components/common/DragDropUpload/dragDrop');
 
 export default class DragDropUpload extends Component {
     constructor(props) {
@@ -40,8 +43,7 @@ export default class DragDropUpload extends Component {
     }    
     render() {
         return (
-            <div ref={this.setRef}>
-             <p> upload or drag and drop the files</p>
+            <div className={`${styles['upload']}`} ref={this.setRef}>
                 <form>
                     <input 
                         type='file' 
@@ -49,6 +51,10 @@ export default class DragDropUpload extends Component {
                         onChange={this.handleChange} 
                         onDrop={this.handleDrop}
                     />
+                    <div className={`${styles['dragdropicon']}`}>
+                     <SVGComponent src="icons/dragdrop" className={`${styles['dragdropicon']}`} />
+                    </div>                    
+                    <p> upload or drag and drop the files</p>
                 </form>
             </div>
         )
