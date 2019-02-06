@@ -62,14 +62,6 @@ class EditPassword extends React.Component {
 
   handleNewPasswordChange = (e) => {
     const { EDIT_PASSWORD_MODAL } = languageDefinations();
-    // const password = e.target.value;
-    // const passreg = /^([a-zA-Z0-9_-]){8,30}$/;
-    // const rechPassword = passreg.test(password);
-    // if (rechPassword) {
-    //   return true;
-    // } else {
-    //   alert('fail');
-    // }
     if (e.target.value != this.state.rePassword && this.state.rePassword.length > 0) {
       this.setState({
         error: EDIT_PASSWORD_MODAL.MATCH_ERROR_MESSAGE,
