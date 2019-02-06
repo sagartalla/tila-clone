@@ -227,7 +227,8 @@ export const AR_KEYWORDS = {
     'ENTER_NEW_PASSWORD_MESSAGE': 'أدخل كلمة المرور الجديدة',
     'RE_ENTER_PASSWORD_MESSAGE': 'أعد إدخال كلمة المرور الجديدة',
     'SUBMIT_BUTTON': 'تغيير كلمة المرور',
-    'PASSWORD_LENGTH_MESSAGE': 'Be at least 8 characters in length Not be same as your current password'
+    'PASSWORD_LENGTH_MESSAGE': 'Be at least 8 characters in length Not be same as your current password',
+    'PASSWORD_LENGTH': 'Your password must be at least 8 characters long.'
   },
   PERSONAL_INFO_MODAL: {
     'HEADING': 'Personel Information',

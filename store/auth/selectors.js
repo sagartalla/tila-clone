@@ -1,5 +1,5 @@
 const getErrorMessege = (store) => {
-  return store.authReducer.error;
+  return store.authReducer.error ? JSON.stringify(store.authReducer.error) : '';
 }
 
 const getLoginProgressStatus = (store) => {
