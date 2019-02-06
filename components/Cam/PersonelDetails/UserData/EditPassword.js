@@ -103,10 +103,11 @@ class EditPassword extends React.Component {
   }
 
   handleSubmit = () => {
+    const { EDIT_PASSWORD_MODAL } = languageDefinations();
     const { newPassword, rePassword, oldPassword } = this.state;
     let { error } = this.state;
     this.props.resetPasswordInfoStore();
-    if (newPassword === rePassword && newPassword.length > 0 && oldPassword.length > 0) {
+    if (newPassword.length > 0 && oldPassword.length > 0 && newPassword === rePassword) {
       const passreg = /^([a-zA-Z0-9_-]){8,30}$/;
       const rechPassword = passreg.test(newPassword);
       if (rechPassword) {
@@ -115,12 +116,12 @@ class EditPassword extends React.Component {
           new_password: newPassword,
         });
       } else {
-        error = 'Your password must be at least 8 characters long.';
+        error = EDIT_PASSWORD_MODAL.PASSWORD_LENGTH;
       }
     } else if (newPassword.length === 0 || oldPassword.length === 0 || rePassword.length === 0) {
-      error = 'Password cannot be empty';
+      error = EDIT_PASSWORD_MODAL.EMPTY_ERROR_MESSAGE;
     } else {
-      error = 'Passwords must match';
+      error = EDIT_PASSWORD_MODAL.MATCH_ERROR_MESSAGE;
     }
     this.setState({ error });
   }
