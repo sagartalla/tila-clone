@@ -69,7 +69,7 @@ const WishlistBody = (props) => {
                         </span>
                         <h4 className={`${styles['fontW600']} ${styles['light-gry-clr']} ${styles['mt-25']}`}><span className={`${styles['fs-30']} ${styles['m-fs-18']}`}>{price}</span> <span className={`styles['fs-18']} ${styles['m-fs-14']}`}> {cur}</span></h4>
                         <span className={`${styles['flex']}`}>
-                          <span className={`${styles['thick-red-clr']} ${styles.flex}`}>{percentage(price, mrp)}%</span>&nbsp;&nbsp;&nbsp;
+                          <span className={`${styles['success-green']} ${styles.flex}`}>{percentage(price, mrp)}%</span>&nbsp;&nbsp;&nbsp;
                           <strike className={`${styles['label-gry-clr']}`}>{mrp}&nbsp;{cur}</strike>
                         </span>
                         {getPriceAlert(price, wishlisted_price, cur)}
