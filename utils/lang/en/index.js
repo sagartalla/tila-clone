@@ -256,7 +256,7 @@ export const EN_KEYWORDS = {
   },
   SEARCH_PAGE: {
     'DELIVER_TO': 'Deliver to',
-    'NO_OF_ITEMS_FOUND': 'no of items found',
+    'NO_OF_ITEMS_FOUND_FOR': 'no of items found for',
     'SORT_BY': 'Sort by',
     'BEST_MATCH': 'Best Match',
     'BEST_OFFERS': 'Best Offers',
