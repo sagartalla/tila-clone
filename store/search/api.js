@@ -18,7 +18,8 @@ const getSearchResultsApi = ({
   categoryTree,
   choosenCategoryName,
   shippingDetails,
-  sort
+  sort,
+  disableSpellCheck,
 }) => {
   const options = {
     country,
@@ -31,6 +32,7 @@ const getSearchResultsApi = ({
     isListed,
     shippingDetails,
     sort,
+    disableSpellCheck,
   };
   if (categoryTree) {
     options.categoryId = categoryFilter.id;

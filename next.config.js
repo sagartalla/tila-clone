@@ -5,6 +5,7 @@ const withCSS = require('@zeit/next-css');
 const path = require('path');
 const git = require('git-rev-sync');
 const withSourceMaps = require('@zeit/next-source-maps')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 // require('./deploy/env');
 
 const version = process.env.version || git.short();
@@ -29,6 +30,9 @@ module.exports = withSourceMaps(withStylus(withCSS({
     config.node = {
       fs: 'empty'
     }
+    // config.plugins = [
+    //   new BundleAnalyzerPlugin()
+    // ]
     // if(!dev) {
     //   config.devtool = 'source-map'
     // }

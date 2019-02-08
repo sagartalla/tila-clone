@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import _ from 'lodash';
-import Router from 'next/router'
+import {Router} from '../../../routes';
 import Waypoint from 'react-waypoint';
 import constants from '../../../constants';
 import { actionCreators } from '../../../store/cam/wishlist';
@@ -102,7 +102,7 @@ class Product extends Component {
   }
   routeChange(productId,variantId,catalogId,itemtype,index,pageNum) {
     this.itemNumberClick(index,pageNum)
-    Router.push(`/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemtype}`)
+    Router.pushRoute(`/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemtype}`)
   }
 
   render() {
