@@ -112,13 +112,14 @@ class ShippingAddress extends Component {
   }
 
   getDataFromMap(json) {
-    let { lat, lng, address } = json;
+        
+    let { lat, lng, address,countryObj:{country} } = json;
     const addr = { ...this.state.addr };
 
     addr['latitude'] = lat;
     addr['longitude'] = lng;
     addr['address_line_1'] = address;
-
+    addr['country_name'] = country
     this.setState({ addr });
   }
 
