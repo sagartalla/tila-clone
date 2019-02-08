@@ -43,7 +43,7 @@ class GeoWidget extends Component {
     if (!this.state.displayCity && geoShippingData) {
       this.setState({
         displayCity: geoShippingData.displayCity
-      })
+      },() => location.reload())
     }
   }
 
