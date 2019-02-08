@@ -34,6 +34,8 @@ const getCartResults = (store) => {
           brand_name: item.product_details.catalog_details.attribute_map.brand.attribute_values[0].value,
           gift_info: item.gift_info,
           shipping: item.listing_info.shipping,
+          catalogId: item.product_details.catalog_details.catalog_id,
+          itemType: item.product_details.catalog_details.item_type_name,
           warranty: _.groupBy(item.listing_info.warranty_details, 'type')['MANUFACTURER'] || [{}],
         }
       })
