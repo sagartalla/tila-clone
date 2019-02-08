@@ -23,7 +23,7 @@ const CartBody = props => {
   const { CART_PAGE } = languageDefinations();
 
   const routeChange = (variantId, productId, catalogId, itemType) => {
-    Router.push(`/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemType}`);
+    Router.pushRoute(`/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemType}`);
   }
 
   return (
