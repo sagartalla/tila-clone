@@ -77,7 +77,6 @@ const errorInterceptor = (err) => {
         }).then((res) => {
           return axios(err.config);
         }).catch((err) => {
-          alert('You are logged out, Login and try again');
           location.reload();
         });
       } else {

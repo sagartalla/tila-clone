@@ -34,10 +34,14 @@ class Product extends Component {
 
   addToWishlist(e) {
     e.stopPropagation();
-    const { productId: product_id, catalogId: catalog_id, variants } = this.props;
-    this.props.addToWishlistAndFetch({
+    const {
+      productId: product_id, catalogId: catalog_id, variants, priceRange, currency, addToWishlistAndFetch,
+    } = this.props;
+    addToWishlistAndFetch({
       catalog_id,
       product_id,
+      wishlisted_price: priceRange,
+      wishlisted_currency: currency,
     });
   }
 
