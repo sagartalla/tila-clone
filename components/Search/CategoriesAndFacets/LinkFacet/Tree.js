@@ -35,7 +35,7 @@ class Tree extends Component {
             filter.children.slice(0, this.state.maxRows).map((category) => {
               return (
                 <li key={category.id} className={ first ? styles['main-sub-list'] : styles['category-sub-list-inn']}>
-                  <Link route={`/srp/${category.canonicalId}-${category.id}/${window.location.search}`}>{category.name}</Link>
+                  <Link route={`/srp/${category.canonicalId}-${category.id}/${window.location.search}`}><a>{category.name}</a></Link>
                   {/*<ul className={`${styles['category-sub-order-list']} ${styles['pl-15']}`}>
                     {
                       category.children.map((subcategory) => {

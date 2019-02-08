@@ -105,11 +105,11 @@ const AddressNew = (props) => {
           <Col md={6} sm={12} xs={12}>
             <div className={`${styles['flex']} ${styles['home-work-btns']}`}>
               <Button name="home" data-name="HOME" className={`${styles['fp-btn']} ${data.address_type === 'HOME' ? `${styles['fp-btn-primary']}` : `${styles['fp-btn-default']}`} ${styles['flex-center']} ${styles['border-rt-rb-0']}`} onClick={addrTypeHandler}>
-                <SVGComponent clsName={`${styles['home-icon']}`} src="icons/common-icon/home-icon" />
+                <SVGComponent clsName={`${styles['home-icon']} ${data.address_type === 'HOME' ? 'home-active' : ''}`} src="icons/common-icon/home-icon" />
                 <span className={`${styles['pl-10']}`}>{DELIVERY_ADDR_PAGE.HOME}</span>
               </Button>
               <Button name="work" data-name="WORK" className={`${styles['fp-btn']} ${data.address_type === 'WORK' ? `${styles['fp-btn-primary']}` : `${styles['fp-btn-default']}`} ${styles['flex-center']} ${styles['border-lt-lb-0']}`} onClick={addrTypeHandler}>
-                <SVGComponent clsName={`${styles['work-icon']}`} src="icons/common-icon/work-icon" />
+                <SVGComponent clsName={`${styles['work-icon']} ${data.address_type === 'WORK' ? 'work-active' : ''}`} src="icons/common-icon/work-icon" />
                 <span className={`${styles['pl-10']}`}>{DELIVERY_ADDR_PAGE.WORK}</span>
               </Button>
             </div>
