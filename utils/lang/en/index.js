@@ -97,7 +97,7 @@ export const EN_KEYWORDS = {
   },
   WISH_LIST_PAGE: {
     'WISHLIST_HEADER': 'items in wishlist',
-    'ADD_TO_CART_BTN': 'ADD TO CART'
+    'ADD_TO_CART_BTN': 'MOVE TO CART'
   },
   PDP_PAGE: {
     'LOADING_REVIEWS': 'Loading Reviews...',
@@ -256,7 +256,7 @@ export const EN_KEYWORDS = {
   },
   SEARCH_PAGE: {
     'DELIVER_TO': 'Deliver to',
-    'NO_OF_ITEMS_FOUND': 'no of items found',
+    'NO_OF_ITEMS_FOUND_FOR': 'no of items found for',
     'SORT_BY': 'Sort by',
     'BEST_MATCH': 'Best Match',
     'BEST_OFFERS': 'Best Offers',

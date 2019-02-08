@@ -24,8 +24,10 @@ const getWishListResults = (store) => {
         price: variant_info.selling_price,
         mrp: variant_info.mrp,
         wishlisted_price: item.wishlisted_price,
-      });
-    });
+        catalog_id: item.product_details.catalog_details.catalog_id,
+        itemType: item.product_details.catalog_details.item_type_name,
+      })
+    })
 
     return newData.reverse();
   }

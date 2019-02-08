@@ -33,10 +33,10 @@ class Search extends Component {
   componentWillUnmount() {
     this.props.hideSearchBarFitlers();
   }
-
-  querySearch = querySearch => () => {
-    const { optionalParams } = this.props;
-    Router.pushRoute(`/srp?search=${querySearch}&${Object.entries(optionalParams).map(([key, val]) => `${key}=${val}`).join('&')}`);
+ 
+  querySearch = (e) => {    
+    let dataSearchQuery = e.currentTarget.dataset.querysearch;
+    Router.pushRoute(`/srp?search=${dataSearchQuery}&disableSpellCheck=true&${Object.entries(this.props.optionalParams).map(([key, val]) => `${key}=${val}`).join('&')}`);
   }
 
   render() {
@@ -50,7 +50,7 @@ class Search extends Component {
               Did you Mean&nbsp;
               <a
                 href="javascript: void(0)"
-                onClick={this.querySearch(spellCheckResp[query.search])}
+                onClick={this.querySearch}
                 data-querysearch={spellCheckResp[query.search]}
               >
                 <b>{`${spellCheckResp[query.search]} ?`}</b>

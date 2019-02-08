@@ -4,37 +4,37 @@ const config = getConfig()
 export default {
   local: {
     mediaDomain: 'https://static-dev.tila.com',
-    sellerPlatform: 'http://sellermarket-dev.fptechscience.com/',
+    sellerPlatform: 'https://sellermarket-stage.fptechscience.com/login',
     customerHelp: 'https://fptsuae.custhelp.com/app/faq/faq',
     custhelpDomain: 'https://fptsuae.custhelp.com'
   },
   dev: {
     mediaDomain: 'https://static-dev.tila.com',
-    sellerPlatform: 'http://sellermarket-dev.fptechscience.com/',
+    sellerPlatform: 'https://sellermarket-stage.fptechscience.com/login',
     customerHelp: 'https://fptsuae.custhelp.com/app/faq/faq',
     custhelpDomain: 'https://fptsuae.custhelp.com'
   },
   staging: {
     mediaDomain: 'https://static-dev.tila.com',
-    sellerPlatform: 'http://sellermarket-stage.fptechscience.com/',
+    sellerPlatform: 'https://sellermarket-stage.fptechscience.com/login',
     customerHelp: 'https://fptsuae.custhelp.com/app/faq/faq',
     custhelpDomain: 'https://fptsuae.custhelp.com'
   },
   stage: {
     mediaDomain: 'https://static-dev.tila.com',
-    sellerPlatform: 'http://sellermarket-stage.fptechscience.com/',
+    sellerPlatform: 'https://sellermarket-stage.fptechscience.com/login',
     customerHelp: 'https://fptsuae.custhelp.com/app/faq/faq',
     custhelpDomain: 'https://fptsuae.custhelp.com'
   },
   production: {
     mediaDomain: 'https://static-dev.tila.com',
-    sellerPlatform: 'http://sellermarket-dev.fptechscience.com/',
+    sellerPlatform: 'https://seller.afdalalmazaya.com/login',
     customerHelp: 'https://fptsuae.custhelp.com/app/faq/faqs',
     custhelpDomain: 'https://fptsuae.custhelp.com'
   },
   preprod: {
     mediaDomain: 'https://static-dev.tila.com',
-    sellerPlatform: 'http://sellermarket-stage.fptechscience.com/',
+    sellerPlatform: 'https://seller-preprod.afdalalmazaya.com/login',
     customerHelp: 'https://fptsuae.custhelp.com/app/faq/faq',
     custhelpDomain: 'https://fptsuae.custhelp.com'
   }
