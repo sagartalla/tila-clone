@@ -11,6 +11,7 @@ const UserProfile = (props) => {
   const [tab, ...queryParams] = tabDetails ? tabDetails.split('/') : [];
   return(
   <Link route="/cam/profile">
+    <a style={{ display:'block'}}> 
     <div className={`${'/cam/profile' === `/cam/${tab}` ? styles['active'] : {}} ${styles['user-profile']} ${styles['p-10-20']}  ${styles['align-center']} ${styles['flex']}`}>
       <div className={`${styles['profile-pic']} ${styles['pr-15']}`}>
         <div className={styles['img-style']} />
@@ -20,6 +21,7 @@ const UserProfile = (props) => {
         <div>{props.userInfo.personalInfo.first_name}</div>
       </div>
     </div>
+    </a>
   </Link>
 )};
 

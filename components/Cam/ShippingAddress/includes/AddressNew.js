@@ -10,6 +10,8 @@ const styles = mergeCss('components/Cam/ShippingAddress/address');
 //TODO validations is pending. SF-28
 //TODO country dropdown. SF-25
 const AddressNew = props => {
+  console.log(props);
+  
   const { data, inputOnChange, addrTypeHandler, setAsDefaultLocation, saveBtnClickHandler, showAddAdrressForm, getDataFromMap } = props;
   const { DELIVERY_ADDR_PAGE } = languageDefinations();
   return (
@@ -63,7 +65,7 @@ const AddressNew = props => {
           </Col>
           <Col md={6} sm={12} xs={12}>
             <div className={`${styles['fp-input']} ${styles['common-input-mb']}`}>
-              <input type="text" name="country_name" onChange={inputOnChange} value={data.state} className={styles.input} required />
+              <input type="text" name="country_name" onChange={inputOnChange} value={data.country_name} className={styles.input} required />
               <span className={styles['highlight']}></span>
               <span className={styles['bar']}></span>
               <label>Country</label>

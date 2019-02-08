@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import { Row, Col, Button, OverlayTrigger, Popover } from 'react-bootstrap';
 import SVGComponent from '../../../common/SVGComponet';
 import OrderItem from '../../../Order/includes/OrderDetails/OrderItem';
-
+import { Router } from '../../../../routes';
 import { mergeCss } from '../../../../utils/cssUtil';
+
 const styles = mergeCss('components/Cam/Orders/orders');
 
 const Order = ({order}) => {
@@ -15,12 +16,17 @@ const Order = ({order}) => {
       </address>
     </Popover>
   );
+
+  const routeChange = () => {
+    Router.push(`/cam/orders/${order.id}`);
+  }
+
   return (
     <div className={`${styles['order-item-wrap']} ${styles['box-shadow']} ${styles['mt-20']} ${styles['mb-20']} ${styles['p-20']}`}>
       <div className={`${styles['flx-spacebw-alignc']}`}>
         <div>
           <span>Order Id #</span>
-          <div>
+          <div onClick={routeChange}>
             <span className={styles['link-text']}>{order.id}</span>
           </div>
         </div>

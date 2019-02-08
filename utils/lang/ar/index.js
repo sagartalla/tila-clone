@@ -252,7 +252,7 @@ export const AR_KEYWORDS = {
   },
   SEARCH_PAGE: {
     'DELIVER_TO': 'يوصل إلى',
-    'NO_OF_ITEMS_FOUND': 'عدد القطع  التي تم العثور عليها',
+    'NO_OF_ITEMS_FOUND_FOR': 'عدد القطع  التي تم العثور عليها',
     'SORT_BY': 'ترتيب حسب',
     'BEST_MATCH': ' التطابق الأفضل',
     'BEST_OFFERS': 'أفضل العروض',
