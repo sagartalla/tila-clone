@@ -76,9 +76,9 @@ export const AR_KEYWORDS = {
   DELIVERY_ADDR_PAGE: {
     'DELIVERY_ADDR': 'عنوان التوصيل',
     'EDIT': 'تصحيح',
-    'SUB_TAG': 'اختر بطاقة دائمة أو أضف بطاقة جديدة.',
+    'SUB_TAG': 'تعديل أو حذف عنوان موجود أو إضافة عنوان جديد.',
     'CONTINUE': 'تابع',
-    'MANAGE_SHIP_ADDR': 'تعديل عنوان الشحن',
+    'MANAGE_SHIP_ADDR': 'إدارة عناوين الشحن',
     'DEFAULT_ADDR': 'العنوان الرئيسي',
     'MAKE_DEFAULT': 'هذا عنواني الدائم',
     'DELETE': 'حذف',
