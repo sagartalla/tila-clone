@@ -22,6 +22,8 @@ const getWishListResults = (store) => {
         img: img_url + '/' +  item.product_details.product_details_vo.cached_product_details.media.gallery_media[0].url,
         cur: variant_info.selling_price_currency,
         price: variant_info.selling_price,
+        catalog_id: item.product_details.catalog_details.catalog_id,
+        itemType: item.product_details.catalog_details.item_type_name,
       })
     })
 

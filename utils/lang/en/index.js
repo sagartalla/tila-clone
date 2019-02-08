@@ -97,7 +97,7 @@ export const EN_KEYWORDS = {
   },
   WISH_LIST_PAGE: {
     'WISHLIST_HEADER': 'items in wishlist',
-    'ADD_TO_CART_BTN': 'ADD TO CART'
+    'ADD_TO_CART_BTN': 'MOVE TO CART'
   },
   PDP_PAGE: {
     'LOADING_REVIEWS': 'Loading Reviews...',
