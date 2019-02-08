@@ -69,9 +69,9 @@ class CheckboxFacet extends Component {
               {
                 filter.children.slice(0, this.state.maxRows).map(childFitler => (
                   <li key={childFitler.id} className={styles['category-sub-list-inn']}>
-                    <div className={styles['checkbox-material']}>
+                    <div className={`${styles['checkbox-material']} ${styles['select-check-mate']}`}>
                       <input id={childFitler.name} type="checkbox" onChange={this.onChangeItem({ name: childFitler.name, param: childFitler.param })} checked={selectedItems.indexOf(childFitler.name) !== -1} />
-                      <label htmlFor={childFitler.name} className={styles['fs-12']}> {childFitler.name} <span>({childFitler.count})</span> </label>
+                      <label htmlFor={childFitler.name} className={`${styles['fs-12']} ${styles['category-label']}`}> <span className={styles['category-span']}>{childFitler.name}</span> <span>({childFitler.count})</span> </label>
                     </div>
                   </li>
                 ))

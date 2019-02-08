@@ -63,6 +63,7 @@ class Wishlist extends Component {
                   <CartBottomPopup
                     data={results}
                     addToCart={this.addToCart}
+                    showCartPageBtmPopup={this.showCartPageBtmPopup}
                   />
                   : null
               }

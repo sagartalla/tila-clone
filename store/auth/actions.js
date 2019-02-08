@@ -24,126 +24,95 @@ const actions = {
 };
 
 const actionCreators = {
-  userLogin: (params) => (dispatch, getState) => {
-    return dispatch({
-      type: actions.USER_LOGIN,
-      payload: api.userLogin(params)
-    }).then(() => {
-      if(typeof refStore.postLoginRef === 'function') {
-        refStore.postLoginRef(dispatch, getState)
-      } else {
-        if(refStore.postLoginRef){
-          dispatch(refStore.postLoginRef);
-          dispatch(actions.DELETE_POST_LOGIN_ACTION_INFO);
-        }
+  userLogin: params => (dispatch, getState) => dispatch({
+    type: actions.USER_LOGIN,
+    payload: api.userLogin(params),
+  }).then(() => {
+    if (typeof refStore.postLoginRef === 'function') {
+      refStore.postLoginRef(dispatch, getState);
+    } else if (refStore.postLoginRef) {
+      dispatch(refStore.postLoginRef);
+      dispatch(actions.DELETE_POST_LOGIN_ACTION_INFO);
+    }
+  }),
+  userRegister: params => (dispatch, getState) => dispatch({
+    type: actions.USER_REGISTER,
+    payload: api.userRegister(params).then((res) => {
+      if (res.status === 200) {
+        const { email, password, rememberMe } = params;
+        dispatch(actionCreators.userLogin({
+          username: email,
+          password,
+          rememberMe,
+        }));
+        return res;
       }
-    });
-  },
-  userRegister: (params) => (dispatch, getState) => {
-    return dispatch({
-      type: actions.USER_REGISTER,
-      payload: api.userRegister(params).then((res) => {
-        if (res.status === 200) {
-          const { email, password, rememberMe } = params;
-          dispatch(
-            actionCreators.userLogin({
-              username: email,
-              password,
-              rememberMe,
-            })
-          );
-          return res;
-        } else {
-          return Promise.reject(res);
-        }
-      })
-    });
-  },
+      return Promise.reject(res);
+    }),
+  }),
   userLogout: () => {
     api.userLogout();
     return ({
       type: actions.USER_LOGOUT,
-    })
+    });
   },
-  getLoginInfo: () => {
-    return {
-      type: actions.USER_LOGIN_INFO,
-      payload: api.getLoginInfo()
-    }
-  },
-  setCountry: (country) => {
-    return {
-      type: actions.SET_COUNTRY,
-      payload: api.setCountry(country)
-    }
-  },
-  setSessionID: (sessionId) => {
-    return {
-      type: actions.SET_SESSION_ID,
-      payload: api.setSessionID(sessionId)
-    }
-  },
-  deriveCity: (params) => {
-    return {
-      type: actions.DERIVE_CITY,
-      payload: api.deriveCity(params),
-    }
-  },
-  setCity: (params) => {
-    return {
-      type: actions.SET_CITY,
-      payload: api.setCity(params),
-    }
-  },
-  removeCity: () => {
-    return {
-      type: actions.REMOVE_CITY,
-      payload: api.removeCity(),
-    }
-  },
-  autoCompleteCity: (params) => {
-    return {
-      type: actions.AUTOCOMPLETE_CITY,
-      payload: api.autoCompleteCity(params),
-    }
-  },
-  resetAutoCompleteData: () => {
-    return {
-      type: actions.RESET_AUTOCOMPLETE_CITY,
-    }
-  },
-  resetLoginError: () => {
-    return {
-      type: actions.RESET_LOGIN_ERROR,
-    }
-  },
-  showLogin: () => {
-    return {
-      type: actions.SHOW_LOGIN
-    }
-  },
-  storePostLoginActionInfo: (ret) => {
-    return {
-      type: actions.STORE_POST_LOGIN_ACTION_INFO,
-      payload: {
-        ref: ret
-      }
-    }
-  },
+  getLoginInfo: () => ({
+    type: actions.USER_LOGIN_INFO,
+    payload: api.getLoginInfo(),
+  }),
+  setCountry: country => ({
+    type: actions.SET_COUNTRY,
+    payload: api.setCountry(country),
+  }),
+  setSessionID: sessionId => ({
+    type: actions.SET_SESSION_ID,
+    payload: api.setSessionID(sessionId),
+  }),
+  deriveCity: params => ({
+    type: actions.DERIVE_CITY,
+    payload: api.deriveCity(params),
+  }),
+  setCity: params => ({
+    type: actions.SET_CITY,
+    payload: api.setCity(params),
+  }),
+  removeCity: () => ({
+    type: actions.REMOVE_CITY,
+    payload: api.removeCity(),
+  }),
+  autoCompleteCity: params => ({
+    type: actions.AUTOCOMPLETE_CITY,
+    payload: api.autoCompleteCity(params),
+  }),
+  resetAutoCompleteData: () => ({
+    type: actions.RESET_AUTOCOMPLETE_CITY,
+  }),
+  resetLoginError: () => ({
+    type: actions.RESET_LOGIN_ERROR,
+  }),
+  showLogin: () => ({
+    type: actions.SHOW_LOGIN,
+  }),
+  storePostLoginActionInfo: ret => ({
+    type: actions.STORE_POST_LOGIN_ACTION_INFO,
+    payload: {
+      ref: ret,
+    },
+  }),
   deletePostLoginActionInfo: () => ({
-    type: actions.DELETE_POST_LOGIN_ACTION_INFO
+    type: actions.DELETE_POST_LOGIN_ACTION_INFO,
   }),
   resetShowLogin: () => ({
-    type: actions.RESET_SHOW_LOGIN
+    type: actions.RESET_SHOW_LOGIN,
   }),
-  setLanguage: (language) => ({
+  setLanguage: language => ({
     type: actions.SET_LANGUAGE,
     payload: api.setLanguage(language),
   }),
-  savePtaToken: (ptaToken) => ({
+  savePtaToken: ptaToken => ({
     type: actions.SAVE_PTA,
     payload: api.savePtaToken(ptaToken),
-  })
+  }),
 };
 
 export { actions, actionCreators };

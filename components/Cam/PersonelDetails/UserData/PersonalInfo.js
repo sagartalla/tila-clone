@@ -51,7 +51,7 @@ class PersonalInfo extends React.Component {
         <h4 className={`${styles['flx-space-bw']} ${styles['information-title']} ${styles['fontW600']} ${styles['mt-0']}`}>
           <span>{PERSONAL_INFO_MODAL.HEADING}</span>
           <a className={`${styles['flex']}`} onClick={this.handleShow(true)}>
-            <SVGComponent clsName={`${styles['edit-icon']}`} src="icons/common-icon/edit-icon" />
+            <SVGComponent clsName={`${styles['edit-icon']}`} src="icons/common-icon/edit/edit-penc" />
           </a>
         </h4>
         <div className={`${styles['flex-center']} ${styles['bb-dashed']} ${styles['pt-10']} ${styles['pb-10']}`}>

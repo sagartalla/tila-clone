@@ -167,7 +167,7 @@ class OrderHeader extends Component {
               <Col md={5} xs={6} sm={5}>
                 <Col md={6} sm={6}><span className={`${styles['light-gry-clr']}`}>{ORDER_PAGE.GRAND_TOTAL}</span></Col>
                 <Col md={6} sm={6}>
-                <span className={`${styles['fontW600']} ${styles['light-gry-clr']}`}>{price.total_offer_price}&nbsp;{currency_code} <a onMouseOver={this.showToolTip} onMouseLeave={this.hideToolTip}>?</a></span>
+                <span className={`${styles['fontW600']} ${styles['light-gry-clr']}`}>{price.total_offer_price}&nbsp;{currency_code} (<a onMouseOver={this.showToolTip} onMouseLeave={this.hideToolTip}>i</a>)</span>
                 {
                   showToolTip ?
                     <div className={styles['tool-tip']}>

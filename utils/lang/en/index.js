@@ -97,7 +97,7 @@ export const EN_KEYWORDS = {
   },
   WISH_LIST_PAGE: {
     'WISHLIST_HEADER': 'items in wishlist',
-    'ADD_TO_CART_BTN': 'ADD TO CART'
+    'ADD_TO_CART_BTN': 'MOVE TO CART'
   },
   PDP_PAGE: {
     'LOADING_REVIEWS': 'Loading Reviews...',
@@ -228,8 +228,8 @@ export const EN_KEYWORDS = {
     'ENTER_NEW_PASSWORD_MESSAGE': 'Enter New Password',
     'RE_ENTER_PASSWORD_MESSAGE': 'Re-enter New Password',
     'SUBMIT_BUTTON': 'Change Password',
-    'PASSWORD_LENGTH_MESSAGE': 'Be at least 8 characters in length Not be same as your current password'
-
+    'PASSWORD_LENGTH_MESSAGE': 'Be at least 8 characters in length Not be same as your current password',
+    'PASSWORD_LENGTH': 'Your password must be at least 8 characters long.'
   },
   PERSONAL_INFO_MODAL: {
     'HEADING': 'Personel Information',
@@ -256,7 +256,7 @@ export const EN_KEYWORDS = {
   },
   SEARCH_PAGE: {
     'DELIVER_TO': 'Deliver to',
-    'NO_OF_ITEMS_FOUND': 'no of items found',
+    'NO_OF_ITEMS_FOUND_FOR': 'no of items found for',
     'SORT_BY': 'Sort by',
     'BEST_MATCH': 'Best Match',
     'BEST_OFFERS': 'Best Offers',

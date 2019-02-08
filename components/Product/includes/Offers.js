@@ -50,7 +50,7 @@ class Offers extends Component {
                 isAddedToCart
                 ?
                 <Button>
-                  <Link route="/cart">{PDP_PAGE.GO_TO_CART}</Link>
+                  <Link route="/cart"><a>{PDP_PAGE.GO_TO_CART}</a></Link>
                 </Button>
                 :
                 null

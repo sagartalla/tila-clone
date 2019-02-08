@@ -14,7 +14,7 @@ const { WISH_LIST_PAGE } = languageDefinations();
 class CartBottomPopup extends Component {
 
   render() {
-    const { data, addToCart } = this.props;
+    const { data, addToCart, showCartPageBtmPopup } = this.props;
     const settings = {
       arrows: true,
       dots: false,
@@ -26,7 +26,15 @@ class CartBottomPopup extends Component {
     return (
       <div className={`${styles['cart-wishlist-popup']} ${styles['mr-15']}`}>
         <Grid>
-          <h4 className={`${styles['cart-wishlist-popup-title']} ${styles['fs-30']} ${styles['flex-center']} ${styles['justify-center']} ${styles['lgt-blue']} ${styles['mt-5']} ${styles['mb-15']} ${styles['fontW300']}`}><span className={`${styles['bg-white']} ${styles['title-label']}`}>From Your Wishlist </span><span className={styles['title-border']}></span></h4>
+          <div className={`${styles['flx-spacebw-alignc']}`}>
+            <div className={`${styles.width100}`}>
+              <h4 className={`${styles['cart-wishlist-popup-title']} ${styles['fs-30']} ${styles['flex-center']} ${styles['justify-center']} ${styles['lgt-blue']} ${styles['mt-5']} ${styles['mb-15']} ${styles['fontW300']}`}>
+                <span className={`${styles['bg-white']} ${styles['title-label']}`}>From Your Wishlist </span>
+                <span className={styles['title-border']}></span>
+              </h4>
+            </div>
+            <a onClick={showCartPageBtmPopup} className={styles['fs-24']}>X</a>
+          </div>
           <Slider {...settings} className={styles['cart-wishlist-popup-inn']}>
             {
               data.length > 0 && data.map((item, i) => {

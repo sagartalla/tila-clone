@@ -84,19 +84,26 @@ class MyGMap extends React.Component {
   onSearchBoxMounted(ref) {
     refs.searchBox = ref;
   }
-
+  fetchCountryName = (data) => {
+    return data.reduce((obj,curr) => {
+      if(curr.types[0] === 'country') obj['country'] = curr.long_name
+      return obj
+    },{})
+  }
   onPlacesChanged() {
     const { center } = this.state;
     const { getDataFromMap } = this.props;
 
     const places = refs.searchBox.getPlaces();
     const _bounds = new google.maps.LatLngBounds();
-
+     
     const lat = places[0].geometry.location.lat()
     const lng = places[0].geometry.location.lng()
     const address = places[0].formatted_address;
 
-    getDataFromMap({ lat, lng, address });
+    let countryObj = this.fetchCountryName(places[0].address_components) 
+
+    getDataFromMap({ lat, lng, address,countryObj });
 
     places.forEach(place => {
       if (place.geometry.viewport) {

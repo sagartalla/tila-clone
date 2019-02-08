@@ -18,9 +18,9 @@ const getUserInfo = (store) => {
         contactInfo.phoneNum=phoneNum;
       }
       if (contactInfo.pwd_updated_at) {
-        const lastUpdated = contactInfo.pwd_updated_at.split('T')[0];
-        let msg = moment(new Date(lastUpdated)).fromNow();
-        contactInfo.lastUpdated = "Last updated "+ msg;
+        const lastUpdated = contactInfo.pwd_updated_at.split('[')[0];
+        const msg = moment(lastUpdated).subtract(new Date().getTimezoneOffset(), 'minutes').fromNow();
+        contactInfo.lastUpdated = `Last updated ${msg}`;
       }
       else
         contactInfo.lastUpdated = 'Not Available';
