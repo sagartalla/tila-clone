@@ -33,7 +33,7 @@ class SearchDetailsBar extends Component {
   }
 
   render() {
-    const { results, query, categoryId } = this.props;
+    const { results, query, categoryId } = this.props;    
     return (
       <Waypoint onEnter={this.handleWaypointEnter} onLeave={this.handleWaypointLeave}>
         <div className={styles['search-results-wrap']}>
@@ -41,7 +41,7 @@ class SearchDetailsBar extends Component {
             (results.totalCount > 0 || query || categoryId) ?
               <Fragment>
                 <div className={`${styles['flx-space-bw']} ${styles['pb-10']} ${styles['items-list-show']} ${styles['ipad-flex-clm']}`}>
-                  <h4 className={`${styles['meta-info']} ${styles['mt-0']} ${styles['mb-0']} ${styles['fontW300']}`}>{results.totalCount} {SEARCH_PAGE.NO_OF_ITEMS_FOUND}</h4>
+                  <h4 className={`${styles['meta-info']} ${styles['mt-0']} ${styles['mb-0']} ${styles['fontW300']}`}>{results.totalCount} {SEARCH_PAGE.NO_OF_ITEMS_FOUND_FOR} <b>{query}</b></h4>
                   <div className={`${styles['flx-spacebw-alignc']} ${styles['deliver-to-main']}`}>
                     <GeoWidget />
                     <SortByWidget />

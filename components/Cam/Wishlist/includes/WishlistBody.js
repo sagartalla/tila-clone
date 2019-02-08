@@ -3,13 +3,18 @@ import { Row, Col } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import SVGComponent from '../../../common/SVGComponet';
 import { languageDefinations } from '../../../../utils/lang/';
-
+import { Router } from '../../../../routes';
 import { mergeCss } from '../../../../utils/cssUtil';
+
 const styles = mergeCss('components/Cam/Wishlist/wishlist');
 
 const WishlistBody = props => {
   const { data, deleteItem, addToCart } = props;
   const { WISH_LIST_PAGE } = languageDefinations();
+
+  const routeChange = (variantId, productId, catalogId, itemType) => {
+    Router.push(`/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemType}`);
+  }
 
   return (
     <div>
@@ -23,17 +28,22 @@ const WishlistBody = props => {
       <div className={`${styles['box']}`}>
         {
           data.length > 0 && data.map((item, index) => {
-            const { wishlist_id, listing_id, brand_name, name, img, price, cur } = item;
+            const { wishlist_id, listing_id, brand_name, name, img, price, cur, variant_id, product_id, catalog_id, itemType } = item;
             return (
               <div key={index} className={`${styles['thick-border-btm']} ${styles['p-30-20']} ${styles['mb-wishlist-part']}`}>
                 <Row className={styles['m-m-0']}>
                   <Col md={2} xs={2} className={styles['m-p-0']}>
-                    <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles['mb-wishlist-part-img']}`}><img className={styles['img']} src={img} /></div>
+                    <div
+                      className={`${styles['flex-center']} ${styles['justify-center']} ${styles.pointer} ${styles['mb-wishlist-part-img']}`}
+                      onClick={() => routeChange(variant_id, product_id, catalog_id, itemType)}
+                    >
+                      <img className={styles['img']} src={img} />
+                    </div>
                   </Col>
                   <Col md={10} xs={10}>
                     <Col md={8} xs={8} className={styles['pl-0']}>
                       <h5 className={`${styles['mt-0']} ${styles['mb-0']} ${styles['thick-blue']}`}>{brand_name}</h5>
-                      <h5 className={`${styles['lgt-gry-clr']} ${styles['light-gry-clr']}`}>{name}</h5>
+                      <h5 className={`${styles['lgt-gry-clr']} ${styles.pointer} ${styles['light-gry-clr']}`} onClick={() => routeChange(variant_id, product_id, catalog_id, itemType)}>{name}</h5>
                       <div className={`${styles['mt-30']} ${styles['m-t-0']} ${styles['m-fs-12']}`}>
                         <button id={listing_id} data-wish-id={wishlist_id}  className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['add-to-btn']}`} onClick={addToCart}>{WISH_LIST_PAGE.ADD_TO_CART_BTN}</button>
                       </div>
