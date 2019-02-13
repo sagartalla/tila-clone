@@ -37,10 +37,13 @@ class Search extends Component {
 
   submitQuery(e) {
     e.preventDefault();
+    if(!this.state.query) return false;
     // const { isCategoryTree } = this.props;
     digitalData.page.pageInfo['onsiteSearchTerm'] = this.state.query
-    this.fireCustomEventClick(); 
     const flushFilters = true;
+
+    this.fireCustomEventClick();
+
     this.setState({
       searchInput: false
     });
@@ -56,8 +59,8 @@ class Search extends Component {
     this.props.fetchImageSearchData(file)
     Router.pushRoute(`/srp`);
   }
-  onChangeSearchInput(e) {       
-    
+  onChangeSearchInput(e) {
+
     this.setState({
       query: e.target.value,
       searchInput: true
@@ -74,7 +77,7 @@ class Search extends Component {
     var event = new CustomEvent('event-internalSearch-click');
     document.dispatchEvent(event);
   }
-  componentWillReceiveProps(nextProps) { 
+  componentWillReceiveProps(nextProps) {
     const { isCategoryTree, choosenCategoryName, query: queryProp } = nextProps;
     const { query, searchInput } = this.state;
     this.setState({
@@ -120,8 +123,8 @@ class Search extends Component {
             }
           </ul>
         </form>
-        
-        
+
+
           <Modal
             {...this.props}
             show={openImagesearch}
@@ -134,8 +137,8 @@ class Search extends Component {
            />
          </Modal.Body>
         </Modal>
-        
-        
+
+
       </div>
     )
   }
