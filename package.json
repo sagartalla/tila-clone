@@ -1,10 +1,10 @@
 {
-  "name": "store-front",
+  "name": "storefront",
   "scripts": {
     "dev": "ENV=stage node --inspect server.js",
     "build": "version=$version next build",
     "start": "NODE_ENV=production ENV=dev node server.js",
-    "start:ecs": "NODE_ENV=production node server.js",
+    "start:ecs": "node server.js",
     "start:stage": "PORT=3000 NODE_ENV=production ENV=staging node server.js",
     "start:preprod": "PORT=3000 NODE_ENV=production ENV=preprod node server.js",
     "start:prod": "NODE_ENV=production ENV=production node server.js"
