@@ -127,10 +127,10 @@ class ShippingAddress extends Component {
 
     addr.latitude = lat;
     addr.longitude = lng;
-    addr.address_line_1 = address;
-    addr.country_name = country;
-    addr.city = city;
-    addr.po_box = po_box;
+    addr.address_line_1 = address || '';
+    addr.country_name = country || '';
+    addr.city = city || '';
+    addr.po_box = po_box || '';
     this.setState({ addr });
   }
 
