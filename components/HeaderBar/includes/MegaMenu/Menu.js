@@ -58,6 +58,7 @@ class Menu extends Component {
 
   render() {
     const { selectedCategoryTree, colorScheme } =  this.props;
+    console.log(colorScheme);
     return (
       <div
         className={`${styles['pt-40']} ${styles['megamenu-dropdown']} ${styles[colorScheme]} ${this.state.viewAllMenu ? {} : styles['max-height']}`}
@@ -68,23 +69,40 @@ class Menu extends Component {
               <span className={`${styles['flex']} ${styles['mb-10']}`}>
                 <a className={`${styles['level-1-item']} ${styles['fontW600']}`}>{HEADER_PAGE.TOP_BRANDS}</a>
               </span>
-              <ul className={`${styles['megamenu-sub-child-list']}`}>
-                <li className={`${styles['flex']} ${styles['mb-10']} ${styles['brand-icon']}`}>
-                  <img src="/static/img/bg-img/samsung-img.jpg" className={`${styles['img-responsive']}`} />
-                </li>
-                <li className={`${styles['flex']} ${styles['mb-10']} ${styles['brand-icon']}`}>
-                  <img src="/static/img/bg-img/apple.jpg" className={`${styles['img-responsive']}`} />
+              {colorScheme ?
+                <ul className={`${styles['megamenu-sub-child-list']}`}>
+                  <li className={`${styles['flex']} ${styles['mb-10']} ${styles['brand-icon']}`}>
+                    <img src="/static/img/bg-img/samsung-img.jpg" className={`${styles['img-responsive']}`} />
                   </li>
-                <li className={`${styles['flex']} ${styles['mb-10']} ${styles['brand-icon']}`}>
-                  <img src="/static/img/bg-img/sony.jpg" className={`${styles['img-responsive']}`} />
+                  <li className={`${styles['flex']} ${styles['mb-10']} ${styles['brand-icon']}`}>
+                    <img src="/static/img/bg-img/apple.jpg" className={`${styles['img-responsive']}`} />
                   </li>
-                <li className={`${styles['flex']} ${styles['mb-10']} ${styles['brand-icon']}`}>
-                  <img src="/static/img/bg-img/philips.jpg" className={`${styles['img-responsive']}`} />
+                  <li className={`${styles['flex']} ${styles['mb-10']} ${styles['brand-icon']}`}>
+                    <img src="/static/img/bg-img/sony.jpg" className={`${styles['img-responsive']}`} />
                   </li>
-                <li className={`${styles['flex']} ${styles['mb-10']} ${styles['brand-icon']}`}>
-                  <img src="/static/img/bg-img/microsoft.jpg" className={`${styles['img-responsive']}`} />
-                </li>
-              </ul>
+                  <li className={`${styles['flex']} ${styles['mb-10']} ${styles['brand-icon']}`}>
+                    <img src="/static/img/bg-img/philips.jpg" className={`${styles['img-responsive']}`} />
+                  </li>
+                  <li className={`${styles['flex']} ${styles['mb-10']} ${styles['brand-icon']}`}>
+                    <img src="/static/img/bg-img/microsoft.jpg" className={`${styles['img-responsive']}`} />
+                  </li>
+                </ul>
+                :
+                <ul className={`${styles['megamenu-sub-child-list']}`}>
+                  <li className={`${styles['flex']} ${styles['mb-10']} ${styles['brand-icon']}`}>
+                    <img src="/static/img/bg-img/christy.jpg" className={`${styles['img-responsive']}`} />
+                  </li>
+                  <li className={`${styles['flex']} ${styles['mb-10']} ${styles['brand-icon']}`}>
+                    <img src="/static/img/bg-img/tefal.jpg" className={`${styles['img-responsive']}`} />
+                  </li>
+                  <li className={`${styles['flex']} ${styles['mb-10']} ${styles['brand-icon']}`}>
+                    <img src="/static/img/bg-img/adidas.jpg" className={`${styles['img-responsive']}`} />
+                  </li>
+                  <li className={`${styles['flex']} ${styles['mb-10']} ${styles['brand-icon']}`}>
+                    <img src="/static/img/bg-img/lacoste.jpg" className={`${styles['img-responsive']}`} />
+                  </li>
+                </ul>
+              }
             </li>
           </ul>
           <ul className={`${styles['top-brands-wrap']} ${styles['megamenu-sub-drop-down']}`}>
@@ -92,23 +110,40 @@ class Menu extends Component {
               <span className={`${styles['flex']} ${styles['mb-10']}`}>
                 <a className={`${styles['level-1-item']} ${styles['fontW600']}`}>{HEADER_PAGE.TRENDING}</a>
               </span>
-              <ul className={`${styles['megamenu-sub-child-list']}`}>
-                <li className={`${styles['flex']} ${styles['mb-10']} ${styles['brand-icon']}`}>
-                  <img src="/static/img/bg-img/samsung-img.jpg" className={`${styles['img-responsive']}`} />
-                </li>
-                <li className={`${styles['flex']} ${styles['mb-10']} ${styles['brand-icon']}`}>
-                  <img src="/static/img/bg-img/apple.jpg" className={`${styles['img-responsive']}`} />
+              {colorScheme ?
+                <ul className={`${styles['megamenu-sub-child-list']}`}>
+                  <li className={`${styles['flex']} ${styles['mb-10']} ${styles['brand-icon']}`}>
+                    <img src="/static/img/bg-img/samsung-img.jpg" className={`${styles['img-responsive']}`} />
                   </li>
-                <li className={`${styles['flex']} ${styles['mb-10']} ${styles['brand-icon']}`}>
-                  <img src="/static/img/bg-img/sony.jpg" className={`${styles['img-responsive']}`} />
+                  <li className={`${styles['flex']} ${styles['mb-10']} ${styles['brand-icon']}`}>
+                    <img src="/static/img/bg-img/apple.jpg" className={`${styles['img-responsive']}`} />
                   </li>
-                <li className={`${styles['flex']} ${styles['mb-10']} ${styles['brand-icon']}`}>
-                  <img src="/static/img/bg-img/philips.jpg" className={`${styles['img-responsive']}`} />
+                  <li className={`${styles['flex']} ${styles['mb-10']} ${styles['brand-icon']}`}>
+                    <img src="/static/img/bg-img/sony.jpg" className={`${styles['img-responsive']}`} />
                   </li>
-                <li className={`${styles['flex']} ${styles['mb-10']} ${styles['brand-icon']}`}>
-                  <img src="/static/img/bg-img/microsoft.jpg" className={`${styles['img-responsive']}`} />
-                </li>
-              </ul>
+                  <li className={`${styles['flex']} ${styles['mb-10']} ${styles['brand-icon']}`}>
+                    <img src="/static/img/bg-img/philips.jpg" className={`${styles['img-responsive']}`} />
+                  </li>
+                  <li className={`${styles['flex']} ${styles['mb-10']} ${styles['brand-icon']}`}>
+                    <img src="/static/img/bg-img/microsoft.jpg" className={`${styles['img-responsive']}`} />
+                  </li>
+                </ul>
+                :
+                <ul className={`${styles['megamenu-sub-child-list']}`}>
+                  <li className={`${styles['flex']} ${styles['mb-10']} ${styles['brand-icon']}`}>
+                    <img src="/static/img/bg-img/river_island.jpg" className={`${styles['img-responsive']}`} />
+                  </li>
+                  <li className={`${styles['flex']} ${styles['mb-10']} ${styles['brand-icon']}`}>
+                    <img src="/static/img/bg-img/debenhams.jpg" className={`${styles['img-responsive']}`} />
+                  </li>
+                  <li className={`${styles['flex']} ${styles['mb-10']} ${styles['brand-icon']}`}>
+                    <img src="/static/img/bg-img/sony.jpg" className={`${styles['img-responsive']}`} />
+                  </li>
+                  <li className={`${styles['flex']} ${styles['mb-10']} ${styles['brand-icon']}`}>
+                    <img src="/static/img/bg-img/_philips.jpg" className={`${styles['img-responsive']}`} />
+                  </li>
+                </ul>
+              }
             </li>
           </ul>
         </div>

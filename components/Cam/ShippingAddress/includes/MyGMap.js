@@ -165,7 +165,7 @@ class MyGMap extends React.Component {
 }
 
 MyGoogleMap.propTypes = {
-  updateAddressFromGoogleMap: PropTypes.func.isRequired
+  getDataFromMap: PropTypes.func.isRequired,
 };
 
 MyGoogleMap.defaultProps = {
