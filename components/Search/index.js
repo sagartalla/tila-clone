@@ -3,16 +3,18 @@ import { Grid, Col } from 'react-bootstrap';
 import NoSSR from 'react-no-ssr';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { actionCreators } from '../../store/search';
+import { actionCreators,selectors } from '../../store/search';
 
 import HeaderBar from '../HeaderBar/index';
 import FooterBar from '../Footer/index';
 import CategoriesAndFacets from './CategoriesAndFacets';
 import SearchDetailsBar from './SearchDetailsBar';
 import SearchResults from './SearchResults';
-import CompareWidget from '../common/CompareWidget';
+// import CompareWidget from '../common/CompareWidget';
+import { Router } from '../../routes';
 
 import { mergeCss } from '../../utils/cssUtil';
+
 const styles = mergeCss('components/Search/search');
 
 const onClickMenuHandle = (e) => {
@@ -33,12 +35,30 @@ class Search extends Component {
   componentWillUnmount() {
     this.props.hideSearchBarFitlers();
   }
+ 
+  querySearch = (e) => {    
+    let dataSearchQuery = e.currentTarget.dataset.querysearch;
+    Router.pushRoute(`/srp?search=${dataSearchQuery}&disableSpellCheck=true&${Object.entries(this.props.optionalParams).map(([key, val]) => `${key}=${val}`).join('&')}`);
+  }
 
   render() {
+    const { spellCheckResp, query } = this.props;
     return (
       <div>
         <HeaderBar />
         <Grid className={styles['pt-20']}>
+          {spellCheckResp &&
+            <div className={`${styles['mb-15']} ${styles['spell-strip']}`}>
+              Did you Mean&nbsp;
+              <a
+                href="javascript: void(0)"
+                onClick={this.querySearch}
+                data-querysearch={spellCheckResp[query.search]}
+              >
+                <b>{`${spellCheckResp[query.search]} ?`}</b>
+              </a>
+            </div>
+          }
           <Col md={2} onClick={onClickMenuHandle} className={`${styles['filter-panel']} ${styles['border-radius4']} ${styles['bg-white']} ${styles['p-0']}`}>
             <NoSSR>
               <CategoriesAndFacets />
@@ -54,7 +74,10 @@ class Search extends Component {
     )
   }
 };
-
+const mapStateToProps = (store) => ({
+  spellCheckResp:selectors.getSpellCheckResponse(store),
+  optionalParams: selectors.optionParams(store)
+});
 const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators(
 		{
@@ -64,4 +87,4 @@ const mapDispatchToProps = (dispatch) => {
 	);
 };
 
-export default connect(null, mapDispatchToProps)(Search);
+export default connect(mapStateToProps, mapDispatchToProps)(Search);

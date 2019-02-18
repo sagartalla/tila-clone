@@ -23,7 +23,7 @@ const DeliveryAddress = props => {
             <small>{DELIVERY_ADDR_PAGE.SUB_TAG}</small>
           </p>
         </Col>
-        <Col md={4} sm={12} xs={12} className={`${configJson.done ? '' : 'hide'} ${styles['t-rt']} ${styles['thin-border-right']}`}>
+        <Col md={4} sm={12} xs={7} className={`${configJson.done ? '' : 'hide'} ${styles['t-rt']} ${styles['m-tn-l']} ${styles['thin-border-right']}`}>
           {
             defaultAddress && defaultAddress.length > 0 ?
               <div>
@@ -35,7 +35,7 @@ const DeliveryAddress = props => {
               : null
           }
         </Col>
-        <Col md={2} sm={12} xs={12} className={`${configJson.done ? '' : 'hide'} ${styles['t-rt']} ${styles['pl-0']}`}>
+        <Col md={2} sm={12} xs={5} className={`${configJson.done ? '' : 'hide'} ${styles['t-rt']} ${styles['pl-0']}`}>
           <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']}`} onClick={editAddressTab}>
             {DELIVERY_ADDR_PAGE.EDIT}
           </button>

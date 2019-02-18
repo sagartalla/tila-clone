@@ -45,9 +45,18 @@ const searchReducer = typeToReducer({
       return Object.assign({}, state, { error: action.payload.message, ui: { loading: false } })
     },
   },
+  // [actions.FETCH_IMAGESEARCHDATA]:{
+  //   PENDING: state => Object.assign({},state,)
+  // },
   [actions.GET_SEARCH_RESULTS]: {
-    PENDING: state => Object.assign({}, state, { ui: { loading: true } }),
-    FULFILLED: (state, action) => {
+    PENDING: state => Object.assign({}, state, {
+      ...state,
+      data: {
+        ...state.data,
+        spellCheckResponse: null,
+      }
+    }, { ui: { loading: true } }),
+    FULFILLED: (state, action) => {      
       return Object.assign({}, state, {
         ...state,
         data: {

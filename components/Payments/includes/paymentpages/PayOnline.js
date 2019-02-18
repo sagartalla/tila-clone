@@ -32,11 +32,11 @@ class PayOnline extends Component {
       <div className={`${styles['pay-online']} ${styles['p-10']} `}>
         <Grid>
           <Row>
-            <Col md={12} sm={12} xs={12}>
+            <Col md={12} sm={12} xs={12} className={styles['payment-frame']}>
               {/* <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']}`} onClick={props.makePayment}>Pay {props.orderRes.data.amount} {props.orderRes.data.currency}</button> */}
-              <iframe src={orderRes.payData.iframe_url} style={{ height: '406px', width: '600px', border: '0' }}></iframe>
+              <iframe src={orderRes.payData.iframe_url} style={{ height: '406px', width: '500px', border: '0' }}></iframe>
             </Col>
-            <Col md={12}>
+            <Col md={12} xs={12}>
               <div className={styles['checkbox-material']}>
                 <input id="save-card" type="checkbox" onClick={this.saveCardHandler} disabled={disableSaveCard} />
                 <label for="save-card"> Save this card </label>

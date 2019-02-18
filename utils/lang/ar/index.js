@@ -76,9 +76,9 @@ export const AR_KEYWORDS = {
   DELIVERY_ADDR_PAGE: {
     'DELIVERY_ADDR': 'عنوان التوصيل',
     'EDIT': 'تصحيح',
-    'SUB_TAG': 'اختر بطاقة دائمة أو أضف بطاقة جديدة.',
+    'SUB_TAG': 'تعديل أو حذف عنوان موجود أو إضافة عنوان جديد.',
     'CONTINUE': 'تابع',
-    'MANAGE_SHIP_ADDR': 'تعديل عنوان الشحن',
+    'MANAGE_SHIP_ADDR': 'إدارة عناوين الشحن',
     'DEFAULT_ADDR': 'العنوان الرئيسي',
     'MAKE_DEFAULT': 'هذا عنواني الدائم',
     'DELETE': 'حذف',
@@ -227,7 +227,8 @@ export const AR_KEYWORDS = {
     'ENTER_NEW_PASSWORD_MESSAGE': 'أدخل كلمة المرور الجديدة',
     'RE_ENTER_PASSWORD_MESSAGE': 'أعد إدخال كلمة المرور الجديدة',
     'SUBMIT_BUTTON': 'تغيير كلمة المرور',
-    'PASSWORD_LENGTH_MESSAGE': 'Be at least 8 characters in length Not be same as your current password'
+    'PASSWORD_LENGTH_MESSAGE': 'Be at least 8 characters in length Not be same as your current password',
+    'PASSWORD_LENGTH': 'Your password must be at least 8 characters long.'
   },
   PERSONAL_INFO_MODAL: {
     'HEADING': 'Personel Information',
@@ -251,7 +252,7 @@ export const AR_KEYWORDS = {
   },
   SEARCH_PAGE: {
     'DELIVER_TO': 'يوصل إلى',
-    'NO_OF_ITEMS_FOUND': 'عدد القطع  التي تم العثور عليها',
+    'NO_OF_ITEMS_FOUND_FOR': 'عدد القطع  التي تم العثور عليها',
     'SORT_BY': 'ترتيب حسب',
     'BEST_MATCH': ' التطابق الأفضل',
     'BEST_OFFERS': 'أفضل العروض',

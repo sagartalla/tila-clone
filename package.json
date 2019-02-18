@@ -1,7 +1,7 @@
 {
-  "name": "store-front",
+  "name": "storefront",
   "scripts": {
-    "dev": "ENV=preprod node --inspect server.js",
+    "dev": "ENV=stage node --inspect server.js",
     "build": "version=$version next build",
     "start": "NODE_ENV=production ENV=dev node server.js",
     "start:ecs": "NODE_ENV=production node server.js",
@@ -67,6 +67,7 @@
     "poststylus": "^1.0.0",
     "react-dev-utils": "^5.0.1",
     "svg-inline-loader": "^0.8.0",
-    "svg-inline-react": "^3.1.0"
+    "svg-inline-react": "^3.1.0",
+    "webpack-bundle-analyzer": "^3.0.3"
   }
 }

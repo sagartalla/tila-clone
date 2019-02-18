@@ -4,12 +4,15 @@ import { Grid, Row, Col } from 'react-bootstrap';
 import OrderHeader from './OrderHeader';
 import OrderItem from './OrderItem';
 import OrderIssueWidget from '../OrderIssueWidget';
-
-// import styles from '../order.styl';
+import { Router } from '../../../../routes';
 import { mergeCss } from '../../../../utils/cssUtil';
+
 const styles = mergeCss('components/Order/order');
 
 const OrderDetails = ({ query, orderData, thankyouPage }) => {
+  const routeChange = (route) => {
+    Router.push(route);
+  }
   return (
     <div>
       <Grid>
@@ -19,9 +22,9 @@ const OrderDetails = ({ query, orderData, thankyouPage }) => {
               {
                 thankyouPage ? '' :
                   <Fragment>
-                    <span><a>My account</a></span>
+                    <span><a onClick={() => routeChange('/cam/profile')}>My account</a></span>
                     <span> > </span>
-                    <span><a>Orders</a></span>
+                    <span><a onClick={() => routeChange('/cam/orders')}>Orders</a></span>
                     <span> > </span>
                     <span>{query.orderId}</span>
                   </Fragment>

@@ -18,7 +18,8 @@ const getSearchResultsApi = ({
   categoryTree,
   choosenCategoryName,
   shippingDetails,
-  sort
+  sort,
+  disableSpellCheck,
 }) => {
   const options = {
     country,
@@ -31,6 +32,7 @@ const getSearchResultsApi = ({
     isListed,
     shippingDetails,
     sort,
+    disableSpellCheck,
   };
   if (categoryTree) {
     options.categoryId = categoryFilter.id;
@@ -71,4 +73,27 @@ const getSearchResultsApi = ({
 const fetchSuggestions = ({key}) => {
   return axios.get(`${constants.SUGGESSIONS_URL}?queryString=${key}&lang=${cookies.get('language')}`)
 }
-export default { getSearchResultsApi, fetchSuggestions };
+
+const fetchImageSearchApi = (file) => {
+  const body = new FormData();
+  body.append('file', file);
+  // body.append('X-Access-Token', file);
+  // body.append('directory', `${URL.ENV}/${path}`);
+  return axios.request({
+    url:'https://apigateway-preprod.tila.com/image-search/imagesearch',
+    method:'POST',
+    data:body
+  })
+}
+// return axios.request({
+//   url: `${URL.UPLOAD_SERVICE_URL}/fpts/document-service/upload?public=${isPublic}&directory=${directory}`,
+//   method: 'POST',
+//   onUploadProgress: (progressEvent) => {
+//   if (progressEvent.lengthComputable) {
+//   const percent = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+//   dispatch(uploadProgressData(percent));
+//   }
+//   },
+//   data: body,
+//   })
+export default { getSearchResultsApi, fetchSuggestions,fetchImageSearchApi };

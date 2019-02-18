@@ -1,5 +1,5 @@
-require('./deploy/env');
-
+// require('./deploy/env');
+process.env.ENV = process.env.npm_package_config_ENV;
 const next = require('next');
 const express = require('express');
 const bodyParser = require('body-parser');
