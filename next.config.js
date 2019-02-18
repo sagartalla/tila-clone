@@ -7,8 +7,9 @@ const git = require('git-rev-sync');
 const withSourceMaps = require('@zeit/next-source-maps')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 // require('./deploy/env');
-
-process.env.ENV = process.env.npm_package_config_ENV;
+if(process.env.npm_package_config_ENV) {
+  process.env.ENV = process.env.npm_package_config_ENV;
+}
 const version = process.env.version || git.short();
 module.exports = withSourceMaps(withStylus(withCSS({
   cssModules: true,
