@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Cookie from 'universal-cookie';
 
 import { selectors, actionCreators } from '../../../store/cart';
 import { Router } from '../../../routes';
@@ -9,6 +10,11 @@ import { languageDefinations } from '../../../utils/lang';
 import SVGCompoent from '../../common/SVGComponet';
 import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Product/product');
+
+const cookies = new Cookie();
+
+const language = cookies.get('language') || 'en';
+const country = cookies.get('country') || 'SAU';
 
 const { PDP_PAGE } = languageDefinations();
 //
@@ -46,7 +52,7 @@ class AddToCart extends Component {
 
   componentWillReceiveProps(nextProps) {
     if(this.state.buyNow == true && nextProps.isAddedToCart){
-       Router.pushRoute('/payment');
+       Router.pushRoute(`/${country}/${language}/payment`);
     }
   }
 

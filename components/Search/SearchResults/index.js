@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import InfiniteScroll from 'react-infinite-scroller';
 import _ from 'lodash'
+import Cookie from 'universal-cookie';
+
 import Product from "./Product";
 import SVGCompoent from '../../common/SVGComponet';
 import { actionCreators, selectors } from '../../../store/search';
@@ -11,6 +13,11 @@ import { actionCreators as wishlistActionCreators } from '../../../store/cam/wis
 import { mergeCss } from '../../../utils/cssUtil';
 import { Router } from '../../../routes';
 const styles = mergeCss('components/Search/search');
+
+const cookies = new Cookie();
+
+const language = cookies.get('language') || 'en';
+const country = cookies.get('country') || 'SAU';
 
 class SearchResults extends Component {
 
@@ -39,7 +46,7 @@ class SearchResults extends Component {
 
   componentWillReceiveProps(nextProps) {
     if(this.state.buyNow == true && (nextProps.isAddedToCart)){
-       Router.pushRoute('/payment');
+       Router.pushRoute(`/${country}/${language}/payment`);
     }
   }
 

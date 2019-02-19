@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import Cookie from 'universal-cookie';
 
 import { selectors } from '../../../../store/product';
 import Variant from './Variant';
 import { Router } from '../../../../routes';
 import { mergeCss } from '../../../../utils/cssUtil';
 const styles = mergeCss('components/Product/product');
+
+const cookies = new Cookie();
+
+const language = cookies.get('language') || 'en';
+const country = cookies.get('country') || 'SAU';
 
 class Variants extends Component {
   constructor(props){
@@ -39,7 +45,7 @@ class Variants extends Component {
         variants: variantsData.variants,
         selectedVariantData,
       });
-      Router.pushRoute(`/product?productId=${pId}&catalogId=CMOBU8FKGUCHLBAH2V&itemType=mobile`);
+      Router.pushRoute(`/${country}/${language}/product?productId=${pId}&catalogId=CMOBU8FKGUCHLBAH2V&itemType=mobile`);
     });
   }
 

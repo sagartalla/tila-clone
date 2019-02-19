@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Cookie from 'universal-cookie';
 import { addUrlProps, UrlQueryParamTypes, pushInUrlQuery } from 'react-url-query';
 import _ from 'lodash';
 import { actionCreators, selectors } from '../../store/search';
@@ -16,6 +17,11 @@ const styles = mergeCss('components/HeaderBar/header');
 const urlPropsQueryConfig = {
   searchText: { type: UrlQueryParamTypes.string, queryParam: 'search', }
 };
+
+const cookies = new Cookie();
+
+const language = cookies.get('language') || 'en';
+const country = cookies.get('country') || 'SAU';
 
 class Search extends Component {
 
@@ -39,12 +45,12 @@ class Search extends Component {
     e.preventDefault();
     // const { isCategoryTree } = this.props;
     digitalData.page.pageInfo['onsiteSearchTerm'] = this.state.query
-    this.fireCustomEventClick(); 
+    this.fireCustomEventClick();
     const flushFilters = true;
     this.setState({
       searchInput: false
     });
-    Router.pushRoute(`/srp?search=${this.state.query}&${Object.entries(this.props.optionalParams).map(([key, val]) => `${key}=${val}`).join('&')}`);
+    Router.pushRoute(`/${country}/${language}/srp?search=${this.state.query}&${Object.entries(this.props.optionalParams).map(([key, val]) => `${key}=${val}`).join('&')}`);
   }
   imageSearch() {
     this.setState({openImagesearch:true})
@@ -54,10 +60,10 @@ class Search extends Component {
   }
   handleUploadImage(file) {
     this.props.fetchImageSearchData(file)
-    Router.pushRoute(`/srp`);
+    Router.pushRoute(`/${country}/${language}/srp`);
   }
-  onChangeSearchInput(e) {       
-    
+  onChangeSearchInput(e) {
+
     this.setState({
       query: e.target.value,
       searchInput: true
@@ -74,7 +80,7 @@ class Search extends Component {
     var event = new CustomEvent('event-internalSearch-click');
     document.dispatchEvent(event);
   }
-  componentWillReceiveProps(nextProps) { 
+  componentWillReceiveProps(nextProps) {
     const { isCategoryTree, choosenCategoryName, query: queryProp } = nextProps;
     const { query, searchInput } = this.state;
     this.setState({
@@ -120,8 +126,8 @@ class Search extends Component {
             }
           </ul>
         </form>
-        
-        
+
+
           <Modal
             {...this.props}
             show={openImagesearch}
@@ -134,8 +140,8 @@ class Search extends Component {
            />
          </Modal.Body>
         </Modal>
-        
-        
+
+
       </div>
     )
   }
