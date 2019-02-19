@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Cookie from 'universal-cookie';
 import _ from 'lodash';
 
 import Leaves from './Leaves';
@@ -8,6 +9,11 @@ import { mergeCss } from '../../../../utils/cssUtil';
 const styles = mergeCss('components/HeaderBar/header');
 import {languageDefinations} from '../../../../utils/lang';
 const{HEADER_PAGE} = languageDefinations()
+
+const cookies = new Cookie();
+
+const language = cookies.get('language') || 'en';
+const country = cookies.get('country') || 'SAU';
 
 class Menu extends Component {
   constructor(props){
@@ -39,7 +45,7 @@ class Menu extends Component {
               :
               null
             }
-            <Link route={`/srp/${childItem.displayName}-${childItem.id}?categoryTree=true&isListed=true`}>
+            <Link route={`/${country}/${language}/srp/${childItem.displayName}-${childItem.id}?categoryTree=true&isListed=true`}>
               <a className={`${styles['level-1-item']} ${depth === 1 ? styles['fontW600'] : {}}`}>{childItem.displayName}</a>
             </Link>
           </span>

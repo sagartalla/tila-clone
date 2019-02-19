@@ -16,7 +16,11 @@ const server = express();
 const app = next({ dev: process.env.NODE_ENV !== 'production' })
 
 const handler = routes.getRequestHandler(app, ({ req, res, route, query }) => {
-  global.APP_LANGUAGE = req.universalCookies.cookies.language;
+  global.APP_LANGUAGE = req.universalCookies.cookies.language || 'en';
+  global.APP_COUNTRY = req.universalCookies.cookies.country || 'SAU';
+  if(req.originalUrl === '/') {
+    res.redirect(302, '/' + APP_COUNTRY + '/' + APP_LANGUAGE);
+  }
   app.render(req, res, route.page, query)
 });
 

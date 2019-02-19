@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Grid } from 'react-bootstrap';
 import _ from 'lodash';
+import Cookie from 'universal-cookie';
 import routes, { Link } from '../../../../routes';
 import publicUrls from '../../../../constants';
 import { selectors, actionCreators } from '../../../../store/megamenu';
@@ -12,6 +13,11 @@ import SubMenu from './SubMenu';
 import { mergeCss } from '../../../../utils/cssUtil';
 import {languageDefinations} from '../../../../utils/lang';
 const styles = mergeCss('components/HeaderBar/header');
+
+const cookies = new Cookie();
+
+const language = cookies.get('language') || 'en';
+const country = cookies.get('country') || 'SAU';
 
 const {HEADER_PAGE} = languageDefinations()
 //TODO make it SEO friendly
@@ -78,13 +84,13 @@ class MegaMenu extends Component {
 
   getLandingPageLink(name) {
     if(name === 'Electronics') {
-      return '/landing/electronics';
+      return 'landing/electronics';
     }
     if(name === 'Fashion') {
-      return '/landing/fashion';
+      return 'landing/fashion';
     }
     if(name === 'Lifestyle' || name === 'Home & Living') {
-      return '/landing/lifestyle';
+      return 'landing/lifestyle';
     }
   }
 
@@ -106,7 +112,7 @@ class MegaMenu extends Component {
                   <li key={item.id} onMouseOver={this.onHoverCurry(item)} onMouseLeave={this.onHoverOutDelayed} className={`${styles[`${(item.displayName || '').split(' ').join('').toLowerCase().replace('&', '-')}-item`]} ${(!selectedCategoryTree && this.getLandingPageLink(item.displayName)) === `/landing/${category}` ? styles['active-menu-item']: {}}`}>
                     <div>
                       {/* <Link route={`/category/${item.displayName}-${item.id}?categoryTree=true&isListed=true`}> */}
-                      <Link route={this.getLandingPageLink(item.displayName)}>
+                      <Link route={`/${country}/${language}/this.getLandingPageLink(item.displayName)`}>
                         <a>{item.displayName}</a>
                       </Link>
                     </div>

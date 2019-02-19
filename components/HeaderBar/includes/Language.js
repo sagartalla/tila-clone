@@ -26,6 +26,7 @@ class Language extends Component {
   }
 
   componentDidMount() {
+    return;
   	const language = cookies.get('language') || this.state.selectedItem;
   	if(language){
   	  this.setState({

@@ -24,6 +24,9 @@ const styles = mergeCss('components/HeaderBar/header');
 const {HEADER_PAGE} = languageDefinations();
 const cookies = new Cookie();
 
+const language = cookies.get('language') || 'en';
+const country = cookies.get('country') || 'SAU';
+
 class ActionBar extends Component {
   constructor(props) {
     super(props);
@@ -108,7 +111,7 @@ class ActionBar extends Component {
           </NoSSR>
         </div>
         <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']}`}>
-          <Link route="/cam/wishlist">
+          <Link route={`/${country}/${language}/cam/wishlist`}>
            <a style={{dispaly:'block'}}>
             <span className={`${styles['flex-center']} ${styles['justify-center']}`}>
               <SVGComponent clsName={`${styles['wish-list-icon']}`} src="icons/wish-list/wish-list-icon" />
@@ -119,7 +122,7 @@ class ActionBar extends Component {
         <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']}`}>
           <Dropdown id="cart-toggle" className={`${styles['cart-inn']} ${styles['profile-login-inn']}`}>
             <Dropdown.Toggle>
-              <Link route="/cart">
+              <Link route={`/${country}/${language}/cart`}>
               <a style={{dispaly:'block'}}>
                 <span className={`${styles['flex-center']} ${styles['justify-center']} ${styles['relative']}`}>
                   <SVGComponent clsName={`${styles['cart-icon']}`} src="icons/cart/cart-icon" />
