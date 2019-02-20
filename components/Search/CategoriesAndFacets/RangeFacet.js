@@ -90,12 +90,10 @@ class RangeFitler extends Component {
         <Panel.Body collapsible className={`${styles['mb-15']} ${styles['mt-15']}`}>
         <div className={`${styles['flx-spacebw-alignc']} ${styles['p-10-20']}`}>
           <select className={styles['price-select-list']} componentclass="select" placeholder="select" onChange={this.minChange} value={this.state.value.min}>
-            <option value="select">select (minimum)</option>
             {filter.children[0].values.map((value) => <option value={value} key={value}>{value}</option>)}
           </select>
           <span className={`${styles['pl-10']} ${styles['pr-10']}`}>to</span>
           <select className={styles['price-select-list']} componentclass="select" placeholder="select" onChange={this.maxChange} value={this.state.value.max}>
-            <option value="select">select (maximum)</option>
             {filter.children[0].values.map((value) => <option value={value} key={value}>{value}</option>)}
           </select>
         </div>
