@@ -51,7 +51,7 @@ class OrderHeader extends Component {
   }
 
   getDataFromMap(json) {
-    let { lat, lng, address } = json;
+    const { lat, lng } = json;
     this.setState({ lat, lng });
   }
 
