@@ -1,5 +1,5 @@
 {
-  "name": "store-front",
+  "name": "storefront",
   "scripts": {
     "dev": "ENV=stage node --inspect server.js",
     "build": "version=$version next build",
