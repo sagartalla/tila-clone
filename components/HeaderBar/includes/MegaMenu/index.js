@@ -95,6 +95,7 @@ class MegaMenu extends Component {
     // const selectedCategory = 3245;
     // const selectedCategory = 3234;
     const selectedCategoryTree = _.find(megamenu, { id: selectedCategory });
+
     return (
       <div>
         <Grid>
@@ -136,6 +137,7 @@ class MegaMenu extends Component {
                 <SubMenu
                   subMenuItems={selectedCategoryTree.childCategories}
                   onLinkClick={this.onLinkClick}
+                  colorScheme={this.state.colorScheme}                  
                 />
                 :
                 <Grid className={styles['megamenu-event-container']}>
