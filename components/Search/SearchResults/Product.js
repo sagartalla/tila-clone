@@ -1,18 +1,21 @@
 // params: { columnIndex, key, rowIndex, style }
-import { Link } from '../../../routes';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import _ from 'lodash';
-import {Router} from '../../../routes';
 import Waypoint from 'react-waypoint';
+// import { Grid, Row, Col } from 'react-bootstrap';
+
+import { Router } from '../../../routes';
+// import { Link } from '../../../routes';
 import constants from '../../../constants';
 import { actionCreators } from '../../../store/cam/wishlist';
-import { Grid, Row, Col } from 'react-bootstrap';
+import { actionCreators as compareActions  } from '../../../store/compare/actions';
 import SVGCompoent from '../../common/SVGComponet';
 import { mergeCss } from '../../../utils/cssUtil';
-import { languageDefinations } from '../../../utils/lang'
+import { languageDefinations } from '../../../utils/lang';
+
 const styles = mergeCss('components/Search/search');
 const { PDP_PAGE } = languageDefinations()
 class Product extends Component {
@@ -23,6 +26,7 @@ class Product extends Component {
     this.addToWishlist = this.addToWishlist.bind(this);
     this.addToCart = this.addToCart.bind(this);
     this.buyNow = this.buyNow.bind(this);
+    this.addToCompare = this.addToCompare.bind(this);
   }
 
   setImg() {
@@ -110,10 +114,14 @@ class Product extends Component {
   }
 
   addToCompare(e) {
-    const { itemType, productId } = e.currentTarget;
+    e.stopPropagation();
+    const { productId, itemtype, media, displayName } = this.props;
+    const src = `${constants.mediaDomain}/${media[0]}`;
     this.props.addToCompare({
-      itemType,
+      itemtype,
       productId,
+      src,
+      displayName,
     });
   }
 
@@ -135,7 +143,7 @@ class Product extends Component {
       index,
       pageNum
     } = this.props;   
-    //route={`/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemtype}`}
+    // route={`/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemtype}`}
     return (
       <div onClick = {() => this.routeChange(productId,variantId,catalogId,itemtype,index,pageNum)} >        
         <div className={`${styles['product-items-main']}`}>
@@ -267,6 +275,7 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       addToWishlistAndFetch: actionCreators.addToWishlistAndFetch,
+      addToCompare: compareActions.addToCompare,
     },
     dispatch,
   );

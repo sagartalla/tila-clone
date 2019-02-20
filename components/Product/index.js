@@ -21,6 +21,7 @@ import ProductDetails from './includes/ProductDetails';
 import ReviewRatingList from '../RatingReviews/List';
 import FooterBar from '../Footer/index';
 import Theme from '../helpers/context/theme';
+import CompareWidget from '../common/CompareWidget';
 
 import { mergeCss } from '../../utils/cssUtil';
 const styles = mergeCss('components/Product/product');
@@ -184,6 +185,7 @@ const getProductComponent = (isPreview, taskCode) => {
               }
             </div>
           </div>
+          <CompareWidget />
         </Theme.Provider>
       );
     }

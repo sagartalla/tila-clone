@@ -9,7 +9,7 @@ const getCompareCount = (store) => {
 const getCompareInfo = (store) => {
   // return store.compareReducer.data.compareInfo;
   const { compareInfo } = store.compareReducer.data;
-  if(!compareInfo.length) {
+  if (!compareInfo.length) {
     return {
       compareCount: 0,
       features: [],
@@ -47,15 +47,19 @@ const getCompareInfo = (store) => {
       key: attr.attribute_category_name.split(' ').join('_').toLowerCase(),
       value: attr.attribute_category_name
     })), 'value'),
-    products: _.map(compareInfo, (product) => ({
-      id: product.product_id,
-      imgSrc: product.product_details.product_details_vo.cached_product_details.media.gallery_media[0].url,
-      brand: product.product_details.catalog_details.attribute_map.brand.attribute_values[0].value,
-      price: product.listing_info.selling_price,
-      currency: product.listing_info.selling_price_currency,
-      offer: 0,
-      name: product.product_details.product_details_vo.cached_product_details.attribute_map.calculated_display_name.attribute_values[0].value
-    })),
+    products: _.map(compareInfo, (product) => {
+      const variant = Object.keys(product.variant_preferred_listings)[0];
+      const variant_info = product.variant_preferred_listings[variant][0];
+      return {
+        id: product.product_id,
+        imgSrc: product.product_details.product_details_vo.cached_product_details.media.gallery_media[0].url,
+        brand: product.product_details.catalog_details.attribute_map.brand.attribute_values[0].value,
+        price: variant_info.selling_price,
+        currency: variant_info.selling_price_currency,
+        offer: 0,
+        name: product.product_details.product_details_vo.cached_product_details.attribute_map.calculated_display_name.attribute_values[0].value
+      };
+    }),
     productsFeatures: fp.compose(
       fp.map.convert({'cap': false })((productFeature, key) => {
         return ({

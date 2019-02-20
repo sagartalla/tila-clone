@@ -39,7 +39,6 @@ class Compare extends Component {
   componentWillReceiveProps(nextProps) {
     const { compareInfo } = nextProps;
     if(!this.state.init && compareInfo.features && compareInfo.features.length) {
-      debugger;
       this.setState({
         selectedGroups: compareInfo.features.reduce((acc, a) => ({...acc, [a.key]: true}), {}),
         init: true
