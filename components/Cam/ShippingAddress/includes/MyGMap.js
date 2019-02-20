@@ -141,9 +141,12 @@ class MyGMap extends React.Component {
     const lat = marker.latLng.lat();
     const lng = marker.latLng.lng();
     const places = refs.searchBox.getPlaces();
-    const address = places[0].formatted_address;
+    const cityCountryObj = this.fetchCountryName(places[0].address_components) 
 
-    getDataFromMap({ lat, lng, address });
+    cityCountryObj.address = places[0].formatted_address;
+    getDataFromMap({
+      lat, lng, cityCountryObj,
+    });
   }
 
   // <button onClick={this.onGetLocation.bind(this)}>LOCATE ME</button>
