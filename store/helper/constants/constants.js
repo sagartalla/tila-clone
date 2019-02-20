@@ -8,8 +8,6 @@ env = env.env || '';
 env = env || process.env.ENV;
 env = env.trim();
 
-console.log('constants.js', env, process.env.ENV);
-
 const a = {
   local: {
     SEARCH_API_URL        :   'http://gateway-dev.fptechscience.com/search',
@@ -123,7 +121,5 @@ const a = {
 // console.log('constants.js 2', a);
 var b = env || 'preprod';
 var c = a[b];
-
-console.log('constants.js 3', c);
 
 module.exports = c;
