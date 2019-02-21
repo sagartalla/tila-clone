@@ -6,12 +6,13 @@ import { bindActionCreators } from 'redux';
 import { Modal } from "react-router-modal";
 
 import RightSideBar from '../../common/CartPaymentSideBar';
-
+import constants from '../../../constants';
 import { actionCreators as cartActionCreators, selectors as cartSelectors } from '../../../store/listingCart';
+import { actionCreators as compareActions  } from '../../../store/compare/actions';
 import {languageDefinations} from '../../../utils/lang';
 import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Product/product');
-const {PDP_PAGE} = languageDefinations()
+const { PDP_PAGE } = languageDefinations()
 
 /*
   -- DON'T REMOVE
@@ -37,6 +38,7 @@ class TitleInfo extends Component {
       showCheckoutModal: false
     }
     this.addToCart = this.addToCart.bind(this);
+    this.addToCompare = this.addToCompare.bind(this);
     this.increaseItemCnt = this.increaseItemCnt.bind(this);
     this.decreaseItemCnt = this.decreaseItemCnt.bind(this);
     this.checkoutInstantHandler = this.checkoutInstantHandler.bind(this);
@@ -58,6 +60,18 @@ class TitleInfo extends Component {
     this.props.addToCart({
       listing_id: this.props.listingId
     }, this.props.listingId);
+  }
+
+  addToCompare() {
+    const { addToCompare } = this.props;
+    const { product_id, itemtype, media, title } = this.props;
+    const src = `${constants.mediaDomain}/${media}`;
+    this.props.addToCompare({
+      itemtype,
+      productId: product_id,
+      src,
+      displayName: title,
+    });
   }
 
   checkoutInstantHandler() {
@@ -88,7 +102,10 @@ class TitleInfo extends Component {
     const { showCheckoutModal } = this.state;
     return (
       <div className={styles['pb-10']}>
-        <div className={`${styles['fontW300']} ${styles['lgt-blue']}`}>{brand}</div>
+        <div className={`${styles['fontW300']} ${styles['lgt-blue']} ${styles['flx-space-bw']}`}>
+          <span>{brand}</span>
+          {isPreview ? null : <a className={`${styles['black-color']} ${styles['fontW700']}`} href="javascript: void(0)" onClick={this.addToCompare}>{PDP_PAGE.ADD_TO_COMPARE}</a>}
+        </div>
         <div className={`${styles['fs-20']} ${styles['fontW700']} ${styles['black-color']}`}>{title}</div>
         {
           isPreview
@@ -119,7 +136,7 @@ class TitleInfo extends Component {
                 {
                   totalInventoryCount < 5
                     ?
-                    <span className={`${styles['flex']} ${styles['fs-12']} ${styles['google-clr']} ${styles['fontW600']}`}>{PDP_PAGE.ONLY} {totalInventoryCount}{PDP_PAGE.LEFT_IN_STOCK}</span>
+                      <span className={`${styles['flex']} ${styles['fs-12']} ${styles['google-clr']} ${styles['fontW600']}`}>{PDP_PAGE.ONLY} {totalInventoryCount}{PDP_PAGE.LEFT_IN_STOCK}</span>
                     :
                     null
                 }
@@ -151,7 +168,7 @@ class TitleInfo extends Component {
           <div className={styles['ti-discount-percent']}>{discountPercent}</div>
         </div> */}
       </div>
-    )
+    );
   }
 }
 
@@ -163,9 +180,9 @@ TitleInfo.propTypes = {
   price: PropTypes.string.isRequired,
   originalPrice: PropTypes.string.isRequired,
   discountPercent: PropTypes.string.isRequired,
-}
+};
 
-const mapStateToProps = (store) => ({
+const mapStateToProps = store => ({
   listingCartData: cartSelectors.getListingCartResults(store),
 });
 
@@ -175,10 +192,9 @@ const mapDispatchToProps = (dispatch) => {
     cartItemCount: cartActionCreators.cartItemCount,
     getListingCartResults: cartActionCreators.getListingCartResults,
     removeCartItem: cartActionCreators.removeCartItem,
-  },
-    dispatch,
-  );
-}
+    addToCompare: compareActions.addToCompare,
+  }, dispatch);
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(TitleInfo);
 

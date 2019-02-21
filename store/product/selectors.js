@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 const getProduct = (store, variantId) => {
-  const { product_details, variant_preferred_listings, tree } = store.productReducer.data[0];
+  const { product_details, variant_preferred_listings, tree, product_id } = store.productReducer.data[0];
   const computedVariantId = variantId;
   const listings = computedVariantId ? variant_preferred_listings[computedVariantId] : _.reduce(variant_preferred_listings, (acc, val, key) => {
     return [...acc, ...val];
@@ -21,6 +21,7 @@ const getProduct = (store, variantId) => {
   priceInfo = priceInfo.length ? priceInfo[0] : null;
   const availabilityError = activeCount === listings.length;
   const stockError = listingInventryCount === listings.length;
+  const imgUrls = product_details.product_details_vo.cached_product_details.media.gallery_media;
   const titleInfo = {
     brand: product_details.catalog_details.attribute_map.brand.attribute_values[0].value,
     title: productAttributeMap.calculated_display_name.attribute_values[0].value,
@@ -36,6 +37,9 @@ const getProduct = (store, variantId) => {
     discountPercent: '',
     listingId: priceInfo ? priceInfo.listing_id : 'No Listing',
     totalInventoryCount: priceInfo ? priceInfo.total_inventory_count : 0,
+    product_id,
+    itemtype: product_details.catalog_details.item_type_name,
+    media: imgUrls[0].url,
   };
   const returnInfo = {
     acceptsReturns: priceInfo ? priceInfo.accepts_returns : false,
@@ -51,7 +55,6 @@ const getProduct = (store, variantId) => {
   }
   const keyfeatures = _.map(productAttributeMap.calculated_highlights.attribute_values, (kf) => kf.value);
   const details = catalogAttributeMap.description ? catalogAttributeMap.description.attribute_values.map((d) => d.value).join(', ') : null;
-  const imgUrls = product_details.product_details_vo.cached_product_details.media.gallery_media;
   return {
     titleInfo,
     details,
