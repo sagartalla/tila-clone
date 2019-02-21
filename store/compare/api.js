@@ -2,6 +2,8 @@ import _ from 'lodash';
 import axios from 'axios';
 import constants from '../helper/constants';
 
+const maxEle = 5;
+
 const getCompareCount = () => {
   const compareItems = JSON.parse(localStorage.getItem('compare')) || [];
   return {
@@ -21,7 +23,7 @@ const addToCompare = ({
     };
   }
   if (compareItems.length) {
-    if (compareItems[0].itemtype === itemtype && compareItems.length < 4) {
+    if (compareItems[0].itemtype === itemtype && compareItems.length < maxEle) {
       localStorage.setItem('compare', JSON.stringify([...compareItems, {
         itemtype,
         productId,
@@ -31,10 +33,10 @@ const addToCompare = ({
       return {
         count: compareItems.length + 1,
       };
-    } else if (compareItems.length >= 4) {
-      alert('Only four items can be compared at a time');
+    } else if (compareItems.length >= maxEle) {
+      alert('Only five items can be compared at a time');
       return {
-        count: 4,
+        count: maxEle,
       };
     }
     alert('Only similar item types can be compared');

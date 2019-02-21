@@ -226,7 +226,7 @@ class Product extends Component {
                 </a>
               </span>
               <span className={styles['flex']}>
-                <a className={styles['flex-center']}>
+                <a className={styles['flex-center']} onClick={this.addToCompare}>
                   <SVGCompoent clsName={`${styles['wish-list']}`} src="icons/cam/cam-icon" />
                   <span className={`${styles['pl-5']} ${styles['fs-12']}`}>{PDP_PAGE.ADD_TO_COMPARE}</span>
                 </a>

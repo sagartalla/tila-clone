@@ -5,14 +5,14 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Row, Col } from 'react-bootstrap';
 
-import constants from '../../constants'
+import constants from '../../constants';
 import HeaderBar from '../HeaderBar';
 import FooterBar from '../Footer';
 import { actionCreators, selectors } from '../../store/compare';
 import { languageDefinations } from '../../utils/lang';
 import { mergeCss } from '../../utils/cssUtil';
 
-const styles = mergeCss('');
+const styles = mergeCss('components/Compare/compare');
 const { COMPARE } = languageDefinations();
 
 const ICONS = {
@@ -20,63 +20,77 @@ const ICONS = {
   camera: 'icons/common-icon/camera-icon',
   processor: 'icons/common-icon/processor-icon',
   batteryPower: 'icons/common-icon/battery',
-}
+};
 
 class Compare extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedGroups: {}  /*props.features.reduce((acc, a) => ({...acc, [a.key]: true}), {})*/
+      selectedGroups: {}, /* props.features.reduce((acc, a) => ({...acc, [a.key]: true}), {}) */
     };
     this.selectGroup = this.selectGroup.bind(this);
+    this.clearAllChecks = this.clearAllChecks.bind(this);
   }
 
   componentDidMount() {
-    //read from local store productIds
+    // read from local store productIds
     this.props.getCompareItemsData();
   }
 
   componentWillReceiveProps(nextProps) {
     const { compareInfo } = nextProps;
-    if(!this.state.init && compareInfo.features && compareInfo.features.length) {
+    if (!this.state.init && compareInfo.features && compareInfo.features.length) {
       this.setState({
-        selectedGroups: compareInfo.features.reduce((acc, a) => ({...acc, [a.key]: true}), {}),
-        init: true
+        selectedGroups: compareInfo.features.reduce((acc, a) => ({ ...acc, [a.key]: true }), {}),
+        init: true,
       });
     }
   }
 
   selectGroup(e) {
     const id = e.currentTarget.getAttribute('id');
-    const checked = e.currentTarget.checked;
+    const { checked } = e.currentTarget;
     this.setState({
       selectedGroups: {
         ...this.state.selectedGroups,
         [id]: checked,
-      }
-    })
+      },
+    });
+  }
+
+  clearAllChecks() {
+    const { selectedGroups } = this.state;
+    Object.keys(selectedGroups).forEach((feature) => {
+      selectedGroups[feature] = false;
+    });
+    this.setState({
+      selectedGroups,
+    });
   }
 
   render() {
-    const { compareInfo={} } = this.props;
-    const { compareCount=0, features=[], products=[], productsFeatures=[] } = compareInfo;
+    const { compareInfo = {} } = this.props;
+    const {
+      compareCount = 0, features = [], products = [], productsFeatures = [],
+    } = compareInfo;
+    console.log(this.state.selectedGroups, 'selectedGroups');
     return (
       <div>
         <HeaderBar />
-        <div className={`${styles['compare-main']} ${styles['pt-25']} ${styles['pb-25']}`}>
-          <h4 className={`${styles['fs-16']} ${styles['fontW600']}`}>{COMPARE.TILA_COMPARE_1}{compareCount} {COMPARE.TILA_COMPARE_2}</h4>
-          <Row className={styles['feature-part']}>
+        <div className={`${styles['compare-main']} ${styles['p-25']}`}>
+          <h4 className={`${styles['fs-16']} ${styles.fontW600}`}>{COMPARE.TILA_COMPARE_1}{compareCount} {COMPARE.TILA_COMPARE_2}</h4>
+          <Row className={styles.flex}>
             <Col md={3}>
               <div className={styles['compare-product']}>
                 <div className={styles['compare-product-inn']}>
                   <h5 className={`${styles['flx-space-bw']}`}>
-                    <span className={styles['fontW600']}>{COMPARE.FEATUERS}</span>
-                    <span className={styles['lgt-blue']}>{COMPARE.CLEAR_ALL}</span>
+                    <span className={styles.fontW600}>{COMPARE.FEATUERS}</span>
+                    <span className={`${styles['lgt-blue']} ${styles.pointer}`} onClick={this.clearAllChecks}>{COMPARE.CLEAR_ALL}</span>
                   </h5>
                   {
-                    features.map((feature) => (
+                    features.map(feature => (
                       <div key={feature.key} className={styles['checkbox-material']}>
-                        <input id={feature.key} type="checkbox" onClick={this.selectGroup} checked={this.state.selectedGroups[feature.key]}/>
+                        <input id={feature.key} type="checkbox" onClick={this.selectGroup} checked={this.state.selectedGroups[feature.key]} />
                         <label htmlFor={feature.key}>{feature.value} </label>
                       </div>
                     ))
@@ -85,16 +99,16 @@ class Compare extends Component {
               </div>
             </Col>
             {
-              products.map((product) => (
+              products.map(product => (
                 <Col md={3} key={product.id}>
                   <div className={styles['compare-dtls']}>
-                    <div className={`${styles['compare-dtls-img']} ${styles['flex']} ${styles['justify-center']}`}>
-                      <img src={`${constants.mediaDomain}/${product.imgSrc}`} className="img-responsive" />
+                    <div className={`${styles['ht-290']} ${styles.flex} ${styles['justify-center']}`}>
+                      <img alt={product.name} src={`${constants.mediaDomain}/${product.imgSrc}`} className={`img-responsive ${styles['object-scale-down']}`} />
                     </div>
                     <div className={`${styles['compare-dtls-inn']} ${styles['pt-20']} ${styles['t-c']}`}>
                       <span className={`${styles['fs-12']} ${styles['lgt-blue']}`}>{product.brand}</span>
                       <div>
-                        <span className={styles['fontW600']}>{product.price} {product.currency}</span>
+                        <span className={styles.fontW600}>{product.price} {product.currency}</span>
                         <span className={`${styles['fs-12']} ${styles['google-clr']}`}>{product.offer}</span>
                       </div>
                       <span className={`${styles['fs-10']} ${styles['thick-gry-clr']}`}>{product.name}</span>
@@ -106,40 +120,37 @@ class Compare extends Component {
           </Row>
           <div className={styles['compare-main-items']}>
             {
-              productsFeatures.map((productFeature) => {
-                return this.state.selectedGroups[productFeature.key] ? (
+              productsFeatures.map(productFeature =>
+                (this.state.selectedGroups[productFeature.key] ? (
                   <div id={productFeature.key} key={productFeature.key}>
                     <Row>
                       <Col md={12}>
-                        <span>{productFeature.name}</span>
+                        <h3>{productFeature.name}</h3>
                       </Col>
                     </Row>
                     {
-                      productFeature.attributes.map((attr) => (
-                        <Row className={`${styles['compare-product-spficication']} ${styles['flex-center']} ${styles['m-0']}`}>
+                      productFeature.attributes.map(attr => (
+                        <Row key={attr.name} className={`${styles['compare-product-spficication']} ${styles['flex-center']} ${styles['pt-5']} ${styles['pb-5']}`}>
                           <Col md={3}>
                             <div className={`${styles['flex-center']} ${styles['flex-colum']} ${styles['dispy-screen']}`}>
-                              {/*<SVGCompoent clsName={`${styles['screen-icon']}`} src={ICONS[item.id]} />*/}
+                              {/* <SVGCompoent clsName={`${styles['screen-icon']}`} src={ICONS[item.id]} /> */}
                               <span className={`${styles['fs-10']} ${styles['thick-gry-clr']} ${styles['pt-10']}`}>{attr.name}</span>
                             </div>
                           </Col>
                           {
-                            attr.items.map((item) => {
-                              return (
-                                <Col key={item.id} md={3}>
-                                  <div className={`${styles['compare-product-spficication-inn']} ${styles['flex-center']} ${styles['flex-colum']} ${styles['fs-12']} ${styles['fontW600']}`}>
-                                    <span>{item.value.map((i) => i.value).join(' ')}</span>
-                                  </div>
-                                </Col>
-                              )
-                            })
+                            attr.items.map(item => (
+                              <Col key={item.id} md={3}>
+                                <div className={`${styles['compare-product-spficication-inn']} ${styles['flex-center']} ${styles['flex-colum']} ${styles['fs-12']} ${styles.fontW600}`}>
+                                  <span>{item.value.map(i => i.value).join(' ')}</span>
+                                </div>
+                              </Col>
+                            ))
                           }
                         </Row>
                       ))
                     }
-                </div>
-                ) : null;
-              })
+                  </div>
+                ) : null))
             }
           </div>
         </div>
@@ -149,8 +160,8 @@ class Compare extends Component {
   }
 }
 
-const mapStateToProps = (store) => ({
-  compareInfo: selectors.getCompareInfo(store)
+const mapStateToProps = store => ({
+  compareInfo: selectors.getCompareInfo(store),
 });
 
 const mapDispatchToProps = dispatch =>
