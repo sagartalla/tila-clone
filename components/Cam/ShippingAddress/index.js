@@ -56,6 +56,7 @@ class ShippingAddress extends Component {
     this.getDataFromMap = this.getDataFromMap.bind(this);
     this.setAsDefaultLocation = this.setAsDefaultLocation.bind(this);
     this.addrTypeHandler = this.addrTypeHandler.bind(this);
+    this.resetAddAdrressForm = this.resetAddAdrressForm.bind(this);
   }
 
   componentDidMount() {
@@ -89,7 +90,14 @@ class ShippingAddress extends Component {
     this.props.makeDefaultAddress(addrId)
   }
 
-  showAddAdrressForm(e) {
+  resetAddAdrressForm() {
+    this.setState({
+      addr: initialAddrObj,
+    });
+    this.showAddAdrressForm();
+  }
+
+  showAddAdrressForm() {
     this.setState({ showNewAddr: !this.state.showNewAddr })
   }
 
@@ -107,25 +115,28 @@ class ShippingAddress extends Component {
 
   setAsDefaultLocation(e) {
     const addr = { ...this.state.addr };
-    addr['default'] = e.target.checked;
+    addr.default = e.target.checked;
     this.setState({ addr });
   }
 
   getDataFromMap(json) {
-        
-    let { lat, lng, address,countryObj:{country} } = json;
+    const {
+      lat, lng, cityCountryObj: { country, city, address, po_box },
+    } = json;
     const addr = { ...this.state.addr };
 
-    addr['latitude'] = lat;
-    addr['longitude'] = lng;
-    addr['address_line_1'] = address;
-    addr['country_name'] = country
+    addr.latitude = lat;
+    addr.longitude = lng;
+    addr.address_line_1 = address || '';
+    addr.country_name = country || '';
+    addr.city = city || '';
+    addr.po_box = po_box || '';
     this.setState({ addr });
   }
 
   addrTypeHandler(e) {
     const addr = { ...this.state.addr };
-    addr['address_type'] = e.currentTarget.getAttribute('data-name');
+    addr.address_type = e.currentTarget.getAttribute('data-name');
     this.setState({ addr });
   }
 
@@ -136,7 +147,7 @@ class ShippingAddress extends Component {
     const { DELIVERY_ADDR_PAGE } = languageDefinations();
 
     return (
-      <div className={`${styles['address-container']} ${standalone !== true ? '' : `${styles['box']} ${styles['ml-5']}`} `}>
+      <div className={`${styles['address-container']} ${standalone !== true ? '' : `${styles.box} ${styles['ml-5']}`} `}>
         {
           miniAddress ?
             <Fragment>
@@ -159,7 +170,7 @@ class ShippingAddress extends Component {
                         getDataFromMap={this.getDataFromMap}
                         setAsDefaultLocation={this.setAsDefaultLocation}
                         addrTypeHandler={this.addrTypeHandler}
-                        showAddAdrressForm={this.showAddAdrressForm}
+                        resetAddAdrressForm={this.resetAddAdrressForm}
                       />
                     </div>
                     :
@@ -172,6 +183,7 @@ class ShippingAddress extends Component {
                         homeButton={this.homeButton}
                         getDataFromMap={this.getDataFromMap}
                         setAsDefaultLocation={this.setAsDefaultLocation}
+                        resetAddAdrressForm={this.resetAddAdrressForm}
                         addrTypeHandler={this.addrTypeHandler}
                         showAddAdrressForm={this.showAddAdrressForm}
                       />
@@ -194,6 +206,7 @@ class ShippingAddress extends Component {
                     deleteAddr={this.deleteAddr}
                     editAddress={this.editAddress}
                     makeDefaultAddress={this.makeDefaultAddress}
+                    resetAddAdrressForm={this.resetAddAdrressForm}
                     standalone={standalone}
                   />
                 </Col>
@@ -209,6 +222,7 @@ class ShippingAddress extends Component {
                         getDataFromMap={this.getDataFromMap}
                         setAsDefaultLocation={this.setAsDefaultLocation}
                         addrTypeHandler={this.addrTypeHandler}
+                        resetAddAdrressForm={this.resetAddAdrressForm}
                         showAddAdrressForm={this.showAddAdrressForm}
                       /> : ''
                   }

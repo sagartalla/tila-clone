@@ -64,67 +64,71 @@ const FooterBar = props => (
           <Col md={3} sm={3} className={styles['ipad-pr-0']}>
             <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['flex-center']}`}>
               <SVGComponent clsName={`${styles['footer-list-icon']} ${styles['mr-10']}`} src="icons/footers-icons/fashion" />
-              Fashion
+              <span className={styles['pointer']}>Fashion</span>
             </h4>
             <ul className={`${styles['pl-30']} ${styles['lne-ht2']}`}>
-              <li>{`${FOOTER_PAGE.WOMENS} ${FOOTER_PAGE.FASHION}`}</li>
-              <li>{`${FOOTER_PAGE.MENS} ${FOOTER_PAGE.FASHION}`}</li>
-              <li>{`${FOOTER_PAGE.GIRLS} ${FOOTER_PAGE.FASHION}`}</li>
-              <li>{`${FOOTER_PAGE.BOYS} ${FOOTER_PAGE.FASHION}`}</li>
-              <li>{FOOTER_PAGE.WATCHES}</li>
-              <li>{FOOTER_PAGE.JEWELLERY}</li>
-              <li>{`${FOOTER_PAGE.WOMENS} ${FOOTER_PAGE.HANDGBAGS}`}</li>
-              <li>{`${FOOTER_PAGE.MENS} ${FOOTER_PAGE.EYEWEAR}`}</li>
+              <li><span className={styles['pointer']}>{`${FOOTER_PAGE.WOMENS} ${FOOTER_PAGE.FASHION}`}</span></li>
+              <li><span className={styles['pointer']}>{`${FOOTER_PAGE.MENS} ${FOOTER_PAGE.FASHION}`}</span></li>
+              <li><span className={styles['pointer']}>{`${FOOTER_PAGE.GIRLS} ${FOOTER_PAGE.FASHION}`}</span></li>
+              <li><span className={styles['pointer']}>{`${FOOTER_PAGE.BOYS} ${FOOTER_PAGE.FASHION}`}</span></li>
+              <li><span className={styles['pointer']}>{FOOTER_PAGE.WATCHES}</span></li>
+              <li><span className={styles['pointer']}>{FOOTER_PAGE.JEWELLERY}</span></li>
+              <li><span className={styles['pointer']}>{`${FOOTER_PAGE.WOMENS} ${FOOTER_PAGE.HANDGBAGS}`}</span></li>
+              <li><span className={styles['pointer']}>{`${FOOTER_PAGE.MENS} ${FOOTER_PAGE.EYEWEAR}`}</span></li>
             </ul>
           </Col>
           <Col md={3} sm={3} className={styles['ipad-pr-0']}>
             <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['flex-center']}`}>
               <SVGComponent clsName={`${styles['footer-list-icon']} ${styles['mr-10']}`} src="icons/common-icon/processor-icon" />
-              {FOOTER_PAGE.ELECTRONICS}
+              <span className={styles['pointer']}>{FOOTER_PAGE.ELECTRONICS}</span>
             </h4>
             <ul className={`${styles['pl-30']} ${styles['lne-ht2']}`}>
-              <li>{FOOTER_PAGE.MOBILES}</li>
-              <li>{FOOTER_PAGE.TABLETS}</li>
-              <li>{FOOTER_PAGE.LAPTOPS}</li>
-              <li>{FOOTER_PAGE.HOME_APLLIANCES}</li>
-              <li>{`${FOOTER_PAGE.CAMERA},${FOOTER_PAGE.PHOTO} & ${FOOTER_PAGE.VIDEO}`}</li>
-              <li>{FOOTER_PAGE.TELEVISIONS}</li>
-              <li>{FOOTER_PAGE.HEADPHONES}</li>
-              <li>{FOOTER_PAGE.VIDEO_GAMES}</li>
+              <li><span className={styles['pointer']}>{FOOTER_PAGE.MOBILES}</span></li>
+              <li><span className={styles['pointer']}>{FOOTER_PAGE.TABLETS}</span></li>
+              <li><span className={styles['pointer']}>{FOOTER_PAGE.LAPTOPS}</span></li>
+              <li><span className={styles['pointer']}>{FOOTER_PAGE.HOME_APLLIANCES}</span></li>
+              <li><span className={styles['pointer']}>{`${FOOTER_PAGE.CAMERA},${FOOTER_PAGE.PHOTO} & ${FOOTER_PAGE.VIDEO}`}</span></li>
+              <li><span className={styles['pointer']}>{FOOTER_PAGE.TELEVISIONS}</span></li>
+              <li><span className={styles['pointer']}>{FOOTER_PAGE.HEADPHONES}</span></li>
+              <li><span className={styles['pointer']}>{FOOTER_PAGE.VIDEO_GAMES}</span></li>
             </ul>
           </Col>
           <Col md={2} sm={2} className={styles['ipad-pr-0']}>
             <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['flex-center']}`}>
               <SVGComponent clsName={`${styles['footer-list-icon']} ${styles['mr-10']}`} src="icons/footers-icons/life-style" />
-              Lifestyle</h4>
+              <span className={styles['pointer']}>Lifestyle</span>
+            </h4>
             <ul className={`${styles['pl-30']} ${styles['lne-ht2']}`}>
-              <li>{FOOTER_PAGE.HOME_DECOR}</li>
-              <li>{`${FOOTER_PAGE.KITCHEN} & ${FOOTER_PAGE.DINING}`}</li>
-              <li>{FOOTER_PAGE.BATH}</li>
-              <li>{FOOTER_PAGE.HOME_APLLIANCES}</li>
-              <li>{`${FOOTER_PAGE.TOOLS} & ${FOOTER_PAGE.HOME_IMPROVE}`}</li>
-              <li>{`${FOOTER_PAGE.AUDIO} & ${FOOTER_PAGE.VIDEO}`}</li>
-              <li>{FOOTER_PAGE.FURNITURE}</li>
-              <li>{`${FOOTER_PAGE.PATIO}, ${FOOTER_PAGE.LAWN} & ${FOOTER_PAGE.GARDEN}`}</li>
+              <li><span className={styles['pointer']}>{FOOTER_PAGE.HOME_DECOR}</span></li>
+              <li><span className={styles['pointer']}>{`${FOOTER_PAGE.KITCHEN} & ${FOOTER_PAGE.DINING}`}</span></li>
+              <li><span className={styles['pointer']}>{FOOTER_PAGE.BATH}</span></li>
+              <li><span className={styles['pointer']}>{FOOTER_PAGE.HOME_APLLIANCES}</span></li>
+              <li><span className={styles['pointer']}>{`${FOOTER_PAGE.TOOLS} & ${FOOTER_PAGE.HOME_IMPROVE}`}</span></li>
+              <li><span className={styles['pointer']}>{`${FOOTER_PAGE.AUDIO} & ${FOOTER_PAGE.VIDEO}`}</span></li>
+              <li><span className={styles['pointer']}>{FOOTER_PAGE.FURNITURE}</span></li>
+              <li><span className={styles['pointer']}>{`${FOOTER_PAGE.PATIO}, ${FOOTER_PAGE.LAWN} & ${FOOTER_PAGE.GARDEN}`}</span></li>
             </ul>
           </Col>
           <Col md={2} sm={2} className={styles['ipad-pr-0']}>
             <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['flex-center']}`}>
               <SVGComponent clsName={`${styles['footer-list-icon']} ${styles['mr-10']}`} src="icons/footers-icons/beauty-makeup" />
-              {`${FOOTER_PAGE.BEAUTY} & ${FOOTER_PAGE.MAKEUP}`}</h4>
+              <span className={styles['pointer']}>{`${FOOTER_PAGE.BEAUTY} & ${FOOTER_PAGE.MAKEUP}`}</span>
+              </h4>
             <ul className={`${styles['pl-30']} ${styles['lne-ht2']}`}>
-              <li>{FOOTER_PAGE.FRAGRANCE}</li>
-              <li>{FOOTER_PAGE.MAKEUP}</li>
-              <li>{FOOTER_PAGE.HAIRCARE}</li>
-              <li>{`${FOOTER_PAGE.SKINCARE}${FOOTER_PAGE.AUDIO} & ${FOOTER_PAGE.VIDEO}`}</li>
-              <li>{FOOTER_PAGE.PERSONAL_CARE}</li>
-              <li>{`${FOOTER_PAGE.TOOLS} & ${FOOTER_PAGE.ACCESSORIES}`}</li>
-              <li>{`${FOOTER_PAGE.MENS} ${FOOTER_PAGE.GROOMING}`}</li>
+              <li><span className={styles['pointer']}>{FOOTER_PAGE.FRAGRANCE}</span></li>
+              <li><span className={styles['pointer']}>{FOOTER_PAGE.MAKEUP}</span></li>
+              <li><span className={styles['pointer']}>{FOOTER_PAGE.HAIRCARE}</span></li>
+              <li><span className={styles['pointer']}>{`${FOOTER_PAGE.SKINCARE}${FOOTER_PAGE.AUDIO} & ${FOOTER_PAGE.VIDEO}`}</span></li>
+              <li><span className={styles['pointer']}>{FOOTER_PAGE.PERSONAL_CARE}</span></li>
+              <li><span className={styles['pointer']}>{`${FOOTER_PAGE.TOOLS} & ${FOOTER_PAGE.ACCESSORIES}`}</span></li>
+              <li><span className={styles['pointer']}>{`${FOOTER_PAGE.MENS} ${FOOTER_PAGE.GROOMING}`}</span></li>
             </ul>
           </Col>
 
           <Col md={2} sm={2} className={styles['ipad-pr-0']}>
-            <h4 className={`${styles['fontW600']} ${styles['fs-16']}`}>{FOOTER_PAGE.TOP_BRAND}</h4>
+            <h4 className={`${styles['fontW600']} ${styles['fs-16']}`}>
+            <span className={styles['pointer']}>{FOOTER_PAGE.TOP_BRAND}</span>
+            </h4>
             <ul className={`${styles['pl-0']} ${styles['lne-ht2']} ${styles['top-brands']}`}>
               <li className={`${styles['flex']} ${styles['mb-20']} ${styles['brand-icon']}`}>
                 <img src="/static/img/bg-img/samsung-img.jpg" className={styles['img-responsive']} />

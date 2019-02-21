@@ -3,14 +3,29 @@ import _ from 'lodash';
 
 import Leaves from './Leaves';
 import SVGComponent from '../../../common/SVGComponet';
-import routes, { Link } from '../../../../routes';
+import { Link } from '../../../../routes';
 import { mergeCss } from '../../../../utils/cssUtil';
+import { languageDefinations } from '../../../../utils/lang';
+
 const styles = mergeCss('components/HeaderBar/header');
-import {languageDefinations} from '../../../../utils/lang';
-const{HEADER_PAGE} = languageDefinations()
+
+const { HEADER_PAGE } = languageDefinations()
+
+const brandImages = {
+  topBrands: {
+    electronics: ['samsung-img', 'apple', 'sony', 'philips'],
+    'home-living': ['samsung-img', 'apple', 'sony', 'philips'],
+    fashion: ['christy', 'tefal', 'adidas', 'lacoste'],
+  },
+  trending: {
+    electronics: ['samsung-img', 'apple', 'sony', 'philips'],
+    'home-living': ['samsung-img', 'apple', 'sony', 'philips'],
+    fashion: ['river_island', 'debenhams', 'sony', 'philips'],
+  },
+};
 
 class Menu extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {};
     this.viewAllMenu = this.viewAllMenu.bind(this);
@@ -19,7 +34,7 @@ class Menu extends Component {
 
   viewAllMenu() {
     this.setState({
-      viewAllMenu: !this.state.viewAllMenu
+      viewAllMenu: !this.state.viewAllMenu,
     })
   }
 
@@ -61,7 +76,7 @@ class Menu extends Component {
     return (
       <div
         className={`${styles['pt-40']} ${styles['megamenu-dropdown']} ${styles[colorScheme]} ${this.state.viewAllMenu ? {} : styles['max-height']}`}
-        >
+      >
         <div className={styles['top-brands-trending-wrap']}>
           <ul className={`${styles['top-brands-wrap']} ${styles['megamenu-sub-drop-down']}`}>
             <li className={`${styles['megamenu-sub-list']}`}>
@@ -69,21 +84,11 @@ class Menu extends Component {
                 <a className={`${styles['level-1-item']} ${styles['fontW600']}`}>{HEADER_PAGE.TOP_BRANDS}</a>
               </span>
               <ul className={`${styles['megamenu-sub-child-list']}`}>
-                <li className={`${styles['flex']} ${styles['mb-10']} ${styles['brand-icon']}`}>
-                  <img src="/static/img/bg-img/samsung-img.jpg" className={`${styles['img-responsive']}`} />
-                </li>
-                <li className={`${styles['flex']} ${styles['mb-10']} ${styles['brand-icon']}`}>
-                  <img src="/static/img/bg-img/apple.jpg" className={`${styles['img-responsive']}`} />
+                {brandImages.topBrands[colorScheme].map(image => (
+                  <li className={`${styles.flex} ${styles['mb-10']} ${styles['brand-icon']}`}>
+                    <img alt={image} src={`/static/img/bg-img/${image}.jpg`} className={`${styles['img-responsive']}`} />
                   </li>
-                <li className={`${styles['flex']} ${styles['mb-10']} ${styles['brand-icon']}`}>
-                  <img src="/static/img/bg-img/sony.jpg" className={`${styles['img-responsive']}`} />
-                  </li>
-                <li className={`${styles['flex']} ${styles['mb-10']} ${styles['brand-icon']}`}>
-                  <img src="/static/img/bg-img/philips.jpg" className={`${styles['img-responsive']}`} />
-                  </li>
-                <li className={`${styles['flex']} ${styles['mb-10']} ${styles['brand-icon']}`}>
-                  <img src="/static/img/bg-img/microsoft.jpg" className={`${styles['img-responsive']}`} />
-                </li>
+                ))}
               </ul>
             </li>
           </ul>
@@ -93,21 +98,11 @@ class Menu extends Component {
                 <a className={`${styles['level-1-item']} ${styles['fontW600']}`}>{HEADER_PAGE.TRENDING}</a>
               </span>
               <ul className={`${styles['megamenu-sub-child-list']}`}>
-                <li className={`${styles['flex']} ${styles['mb-10']} ${styles['brand-icon']}`}>
-                  <img src="/static/img/bg-img/samsung-img.jpg" className={`${styles['img-responsive']}`} />
-                </li>
-                <li className={`${styles['flex']} ${styles['mb-10']} ${styles['brand-icon']}`}>
-                  <img src="/static/img/bg-img/apple.jpg" className={`${styles['img-responsive']}`} />
+                {brandImages.trending[colorScheme].map(image => (
+                  <li className={`${styles.flex} ${styles['mb-10']} ${styles['brand-icon']}`}>
+                    <img alt={image} src={`/static/img/bg-img/${image}.jpg`} className={`${styles['img-responsive']}`} />
                   </li>
-                <li className={`${styles['flex']} ${styles['mb-10']} ${styles['brand-icon']}`}>
-                  <img src="/static/img/bg-img/sony.jpg" className={`${styles['img-responsive']}`} />
-                  </li>
-                <li className={`${styles['flex']} ${styles['mb-10']} ${styles['brand-icon']}`}>
-                  <img src="/static/img/bg-img/philips.jpg" className={`${styles['img-responsive']}`} />
-                  </li>
-                <li className={`${styles['flex']} ${styles['mb-10']} ${styles['brand-icon']}`}>
-                  <img src="/static/img/bg-img/microsoft.jpg" className={`${styles['img-responsive']}`} />
-                </li>
+                ))}
               </ul>
             </li>
           </ul>

@@ -66,8 +66,7 @@ class Cart extends Component {
   }
 
   removeCartItem(e) {
-    debugger;    
-    let productId = e.currentTarget.getAttribute('data-productId')
+    let productId = e.currentTarget.getAttribute('data-productid')
     digitalData.cart.item = digitalData.cart.item.filter((item) => {
       return item.productInfo.productID !== productId
     })
@@ -75,7 +74,7 @@ class Cart extends Component {
   }
 
   increaseItemCnt(e) {
-    let productId =  e.target.getAttribute('data-productId')
+    let productId =  e.target.getAttribute('data-productid')
     digitalData.cart.item = digitalData.cart.item.map((item) => {
       if(item.productInfo.productID === productId) {
         item.quantity++
@@ -87,7 +86,7 @@ class Cart extends Component {
   }
 
   decreaseItemCnt(e) {
-    let productId =  e.target.getAttribute('data-productId')
+    let productId =  e.target.getAttribute('data-productid')
     digitalData.cart.item.forEach((item) => {
       if(item.productInfo.productID === productId) {
         item.quantity--;

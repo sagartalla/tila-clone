@@ -84,28 +84,26 @@ class MyGMap extends React.Component {
   onSearchBoxMounted(ref) {
     refs.searchBox = ref;
   }
-  fetchCountryName = (data) => {
-    return data.reduce((obj,curr) => {
-      if(curr.types[0] === 'country') obj['country'] = curr.long_name
-      return obj
-    },{})
-  }
+
   onPlacesChanged() {
     const { center } = this.state;
     const { getDataFromMap } = this.props;
 
     const places = refs.searchBox.getPlaces();
     const _bounds = new google.maps.LatLngBounds();
-     
+
     const lat = places[0].geometry.location.lat()
     const lng = places[0].geometry.location.lng()
-    const address = places[0].formatted_address;
 
-    let countryObj = this.fetchCountryName(places[0].address_components) 
+    const cityCountryObj = this.fetchCountryName(places[0].address_components) 
 
-    getDataFromMap({ lat, lng, address,countryObj });
+    cityCountryObj.address = places[0].formatted_address;
 
-    places.forEach(place => {
+    getDataFromMap({
+      lat, lng, cityCountryObj,
+    });
+
+    places.forEach((place) => {
       if (place.geometry.viewport) {
         _bounds.union(place.geometry.viewport)
       } else {
@@ -123,15 +121,32 @@ class MyGMap extends React.Component {
     });
   }
 
+  fetchCountryName = data => data.reduce((obj, curr) => {
+    if (curr.types.includes('country')) {
+      obj.country = curr.long_name;
+    }
+    if (curr.types.includes('locality')) {
+      obj.city = curr.long_name;
+    }
+    if (curr.types.includes('postal_code')) {
+      obj.po_box = curr.long_name;
+    }
+    return obj;
+  }, {});
+
+
   markerLatlng(marker) {
     const { getDataFromMap } = this.props;
 
     const lat = marker.latLng.lat();
     const lng = marker.latLng.lng();
     const places = refs.searchBox.getPlaces();
-    const address = places[0].formatted_address;
+    const cityCountryObj = this.fetchCountryName(places[0].address_components) 
 
-    getDataFromMap({ lat, lng, address });
+    cityCountryObj.address = places[0].formatted_address;
+    getDataFromMap({
+      lat, lng, cityCountryObj,
+    });
   }
 
   // <button onClick={this.onGetLocation.bind(this)}>LOCATE ME</button>
@@ -164,8 +179,8 @@ class MyGMap extends React.Component {
   }
 }
 
-MyGoogleMap.propTypes = {
-  updateAddressFromGoogleMap: PropTypes.func.isRequired
+MyGMap.propTypes = {
+  getDataFromMap: PropTypes.func.isRequired,
 };
 
 MyGoogleMap.defaultProps = {
