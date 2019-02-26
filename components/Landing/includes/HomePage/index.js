@@ -23,14 +23,11 @@ const tbs = [{
 },{
   img: '/static/img/landing-home/shirt.jpg',
   title: 'SHIRTS'
-},{
-  img: '/static/img/landing-home/mac.jpg',
-  title: 'MAC'
-},]
+}]
 
 const tie = [{
   img: '/static/img/landing-home/Mobiles.png',
-  title: 'Mobile'
+  title: 'Mobiles'
 },{
   img: '/static/img/landing-home/Laptops.png',
   title: 'Laptops'
@@ -43,9 +40,6 @@ const tie = [{
 },{
   img: '/static/img/landing-home/television.png',
   title: 'Television'
-},{
-  img: '/static/img/landing-home/home-appliances.png',
-  title: 'Home Appliances'
 },{
   img: '/static/img/landing-home/home-appliances.png',
   title: 'Home Appliances'
@@ -66,9 +60,6 @@ const hal = [{
 },{
   img: '/static/img/landing-home/watches.png',
   title: 'Watches'
-},{
-  img: '/static/img/landing-home/perfumes.png',
-  title: 'Perfumes'
 },{
   img: '/static/img/landing-home/perfumes.png',
   title: 'Perfumes'
@@ -98,6 +89,8 @@ const d_tihl = [
   'static/img/landing-home/lights.png',
 ]
 
+const b_d_b = {"Mobiles":"https://storefront-stage.fptechscience.com/srp?search=Mobiles&language=en&isListed=false","Clothing":"https://storefront-stage.fptechscience.com/srp?isListed=false&language=en&search=Clothing","Clothing Accessories":"https://storefront-stage.fptechscience.com/srp?search=Clothing&language=en&isListed=false","Laptops":"https://storefront-stage.fptechscience.com/srp/laptop-1173/?search=Laptops&language=en&isListed=false","Storage Devices":"https://storefront-stage.fptechscience.com/srp?search=Storage&language=en&isListed=false","Cameras":"https://storefront-stage.fptechscience.com/srp?search=Camera&language=en&isListed=false","Television":"https://storefront-stage.fptechscience.com/srp/Televisions-878?categoryTree=true&isListed=false","Home Appliances":"https://storefront-stage.fptechscience.com/srp?search=Home%20Appliances&language=en&isListed=false","Womens Clothing":"https://storefront-stage.fptechscience.com/srp/Clothing-910?categoryTree=true&isListed=false","Mens Clothing":"https://storefront-stage.fptechscience.com/srp/Clothing-899?categoryTree=true&isListed=false","Fashion Accessories":"https://storefront-stage.fptechscience.com/srp?isListed=false&language=en&search=Fashion%20Accessories","Watches":"https://storefront-stage.fptechscience.com/srp/watches-1128/?isListed=false&language=en&search=Watch","Kitchen Appliances":"https://storefront-stage.fptechscience.com/srp?isListed=false&language=en&search=Kitchen%20Appliances","Speakers":"https://storefront-stage.fptechscience.com/srp?isListed=false&language=en&search=Speaker","Microwave Ovens":"https://storefront-stage.fptechscience.com/srp?isListed=false&language=en&search=Microwave%20oven","Smart Watch":"https://storefront-stage.fptechscience.com/srp?isListed=false&language=en&search=Smart%20Watch","Mobile Accessories":"https://storefront-stage.fptechscience.com/srp?isListed=false&language=en&search=Mobile%20Accessories\t\t\t\t\t\t\t\t\t\t\t\t\t","Kid's Fashion":"https://storefront-stage.fptechscience.com/srp?isListed=false&language=en&search=Kids","Footwear":"https://storefront-stage.fptechscience.com/srp/Footwear-921?categoryTree=true&isListed=false&language=en","Men's Footwear":"https://storefront-stage.fptechscience.com/srp/Footwear-921?categoryTree=true&isListed=false&language=en","Women Footwear":"https://storefront-stage.fptechscience.com/srp/Footwear-921?categoryTree=true&isListed=false&language=en","Bags":"https://storefront-stage.fptechscience.com/srp/Backpack-926?categoryTree=true&isListed=false&language=en","Eyewear":"https://storefront-stage.fptechscience.com/srp?isListed=false&language=en&search=eyewear","Jewellery":"https://storefront-stage.fptechscience.com/srp?isListed=false&language=en&search=Jewellery","GUESS":"https://storefront-stage.fptechscience.com/srp/womens-clothing-1056/?isListed=false&language=en&search=guess","FENDI":"https://storefront-stage.fptechscience.com/srp/watches-1128/?isListed=false&language=en&search=FENDI","MORPHY RICHARDS":"https://storefront-stage.fptechscience.com/srp/home-kitchen-appliances-1010/?isListed=false&language=en&search=morphy%20richards","SHIRTS":"https://storefront-stage.fptechscience.com/srp?search=shirts&language=en&isListed=false","Perfumes": "https://storefront-stage.fptechscience.com/srp?isListed=false&language=en&search=FENDI", "Shoes": "https://storefront-stage.fptechscience.com/srp/footwear-1101/?isListed=false&language=en&search=Shoe", "Lights": "https://storefront-stage.fptechscience.com/srp?isListed=false&language=en&search=Lights"}
+
 const HomePage = () => (
   <NoSSR>
     <div className={styles['home-style-main']}>
@@ -117,9 +110,11 @@ const HomePage = () => (
           {tbs.map((i) => {
             return (
               <div>
-                <div className={styles['item']} key={i}>
-                  <img src={i.img} />
-                </div>
+                <a href={b_d_b[i.title]}>
+                  <div className={styles['item']} key={i}>
+                    <img src={i.img} />
+                  </div>
+                </a>
               </div>
             )
           })}
@@ -139,7 +134,9 @@ const HomePage = () => (
               return (
                 <div>
                   <div className={styles['item']} key={i}>
-                    <img src={i.img} />
+                    <a href={b_d_b[i.title]}>
+                      <img src={i.img} />
+                    </a>
                     <span>{i.title}</span>
                   </div>
                 </div>
@@ -160,7 +157,9 @@ const HomePage = () => (
               return (
                 <div>
                   <div className={styles['item']} key={i}>
-                    <img src={i.img} />
+                    <a href={b_d_b[i.title]}>
+                      <img src={i.img} />
+                    </a>
                     <span>{i.title}</span>
                   </div>
                 </div>
@@ -171,49 +170,74 @@ const HomePage = () => (
       </div>
       <div className={styles['display-t-i-e']}>
         <div className={`${styles['fs-20']} ${styles['title']}`}>TOP IN ELECTRONICS</div>
-        <div className={styles['d1']}>
-          <div>
-            <span className={styles['fs-20']}><span className={styles['lite']}>Laptops</span><span className={styles['bold']}>UP TO 50% OFF</span></span>
-            <div className={styles['shadow']}><img src={d_tie[0]} className={styles['img-responsive']} /></div>
-            <div className={styles['btn']}>
-              <span>SHOP NOW</span>
-              <SVGComponent clsName={`${styles['arrow']}`} src="icons/common-icon/arrow" />
+        {/*<div className={`${styles['']}`}>
+          <span>See more</span><SVGComponent clsName={`${styles['arrow']}`} src="icons/common-icon/arrow" />
+        </div>*/}
+        <div>
+          <div className={styles['d1']}>
+            <div>
+              <span className={styles['fs-20']}><span className={styles['lite']}>Laptops</span><span className={styles['bold']}>UP TO 50% OFF</span></span>
+              <a href={b_d_b['Laptops']}>
+                <div className={styles['shadow']}>
+                    <img src={d_tie[0]} className={styles['img-responsive']} />
+                </div>
+              </a>
+              <div className={styles['btn']}>
+                <span>SHOP NOW</span>
+                <SVGComponent clsName={`${styles['arrow']}`} src="icons/common-icon/arrow" />
+              </div>
+            </div>
+            <div>
+              <span className={styles['fs-20']}><span className={styles['lite']}>Mobiles</span><span className={styles['bold']}>UP TO 50% OFF</span></span>
+              <a href={b_d_b['Mobiles']}>
+                <div className={styles['shadow']}>
+                  <img src={d_tie[1]} className={styles['img-responsive']} />
+                </div>
+              </a>
+              <div className={styles['btn']}>
+                <span>SHOP NOW</span>
+                <SVGComponent clsName={`${styles['arrow']}`} src="icons/common-icon/arrow" />
+              </div>
             </div>
           </div>
-          <div>
-            <span className={styles['fs-20']}><span className={styles['lite']}>Mobiles</span><span className={styles['bold']}>UP TO 50% OFF</span></span>
-            <div className={styles['shadow']}><img src={d_tie[1]} className={styles['img-responsive']} /></div>
-            <div className={styles['btn']}>
-              <span>SHOP NOW</span>
-              <SVGComponent clsName={`${styles['arrow']}`} src="icons/common-icon/arrow" />
+          <div className={styles['d2']}>
+            <div>
+              <span className={styles['fs-20']}><span className={styles['lite']}>Camara</span><span className={styles['bold']}>UP TO 50% OFF</span></span>
+              <a href={b_d_b['Cameras']}>
+                <div className={styles['shadow']}>
+                  <img src={d_tie[2]} className={styles['img-responsive']} />
+                </div>
+              </a>
+              <div className={styles['btn']}>
+                <span>SHOP NOW</span>
+                <SVGComponent clsName={`${styles['arrow']}`} src="icons/common-icon/arrow" />
+              </div>
+            </div>
+            <div>
+              <span className={styles['fs-20']}><span className={styles['lite']}>Kitchen Appliances</span><span className={styles['bold']}>UP TO 50% OFF</span></span>
+              <a href={b_d_b['Kitchen Appliances']}>
+                <div className={styles['shadow']}>
+                    <img src={d_tie[3]} className={styles['img-responsive']} />
+                </div>
+              </a>
+              <div className={styles['btn']}>
+                <span>SHOP NOW</span>
+                <SVGComponent clsName={`${styles['arrow']}`} src="icons/common-icon/arrow" />
+              </div>
             </div>
           </div>
-        </div>
-        <div className={styles['d2']}>
-          <div>
-            <span className={styles['fs-20']}><span className={styles['lite']}>Camara</span><span className={styles['bold']}>UP TO 50% OFF</span></span>
-            <div className={styles['shadow']}><img src={d_tie[2]} className={styles['img-responsive']} /></div>
-            <div className={styles['btn']}>
-              <span>SHOP NOW</span>
-              <SVGComponent clsName={`${styles['arrow']}`} src="icons/common-icon/arrow" />
-            </div>
-          </div>
-          <div>
-            <span className={styles['fs-20']}><span className={styles['lite']}>Kitchen Appliances</span><span className={styles['bold']}>UP TO 50% OFF</span></span>
-            <div className={styles['shadow']}><img src={d_tie[3]} className={styles['img-responsive']} /></div>
-            <div className={styles['btn']}>
-              <span>SHOP NOW</span>
-              <SVGComponent clsName={`${styles['arrow']}`} src="icons/common-icon/arrow" />
-            </div>
-          </div>
-        </div>
-        <div className={styles['d3']}>
-          <div>
-            <span className={styles['fs-20']}><span className={styles['lite']}>Audio Devices</span><span className={styles['bold']}>UP TO 50% OFF</span></span>
-            <div className={styles['shadow']}><img src={d_tie[4]} className={styles['img-responsive']} /></div>
-            <div className={styles['btn']}>
-              <span>SHOP NOW</span>
-              <SVGComponent clsName={`${styles['arrow']}`} src="icons/common-icon/arrow" />
+          <div className={styles['d3']}>
+            <div>
+              <span className={styles['fs-20']}><span className={styles['lite']}>Audio Devices</span><span className={styles['bold']}>UP TO 50% OFF</span></span>
+              <a href={b_d_b['Speakers']}>
+                <div className={styles['shadow']}>
+                    <img src={d_tie[4]} className={styles['img-responsive']} />
+                </div>
+              </a>
+              <div className={styles['btn']}>
+                <span>SHOP NOW</span>
+                <SVGComponent clsName={`${styles['arrow']}`} src="icons/common-icon/arrow" />
+              </div>
             </div>
           </div>
         </div>
@@ -226,7 +250,11 @@ const HomePage = () => (
         <div className={styles['d1']}>
           <div>
             <span className={styles['fs-20']}><span className={styles['lite']}>Kids Fashion</span><span className={styles['bold']}>UP TO 50% OFF</span></span>
-            <div className={styles['shadow']}><img src={d_tif[0]} className={styles['img-responsive']} /></div>
+            <a href={b_d_b["Kid's Fashion"]}>
+              <div className={styles['shadow']}>
+                  <img src={d_tif[0]} className={styles['img-responsive']} />
+              </div>
+            </a>
             <div className={styles['btn']}>
               <span>SHOP NOW</span>
               <SVGComponent clsName={`${styles['arrow']}`} src="icons/common-icon/arrow" />
@@ -234,7 +262,11 @@ const HomePage = () => (
           </div>
           <div>
             <span className={styles['fs-20']}><span className={styles['lite']}>Women Clothing</span><span className={styles['bold']}>UP TO 50% OFF</span></span>
-            <div className={styles['shadow']}><img src={d_tif[1]} className={styles['img-responsive']} /></div>
+            <a href={b_d_b['Womens Clothing']}>
+              <div className={styles['shadow']}>
+                  <img src={d_tif[1]} className={styles['img-responsive']} />
+              </div>
+            </a>
             <div className={styles['btn']}>
               <span>SHOP NOW</span>
               <SVGComponent clsName={`${styles['arrow']}`} src="icons/common-icon/arrow" />
@@ -244,7 +276,11 @@ const HomePage = () => (
         <div className={styles['d2']}>
           <div>
             <span className={styles['fs-20']}><span className={styles['lite']}>Shoes</span><span className={styles['bold']}>UP TO 50% OFF</span></span>
-            <div className={styles['shadow']}><img src={d_tif[2]} className={styles['img-responsive']} /></div>
+            <a href={b_d_b['Shoes']}>
+              <div className={styles['shadow']}>
+                <img src={d_tif[2]} className={styles['img-responsive']} />
+              </div>
+            </a>
             <div className={styles['btn']}>
               <span>SHOP NOW</span>
               <SVGComponent clsName={`${styles['arrow']}`} src="icons/common-icon/arrow" />
@@ -252,7 +288,11 @@ const HomePage = () => (
           </div>
           <div>
             <span className={styles['fs-20']}><span className={styles['lite']}>Watches</span><span className={styles['bold']}>UP TO 50% OFF</span></span>
-            <div className={styles['shadow']}><img src={d_tif[3]} className={styles['img-responsive']} /></div>
+            <a href={b_d_b['Watches']}>
+              <div className={styles['shadow']}>
+                <img src={d_tif[3]} className={styles['img-responsive']} />
+              </div>
+            </a>
             <div className={styles['btn']}>
               <span>SHOP NOW</span>
               <SVGComponent clsName={`${styles['arrow']}`} src="icons/common-icon/arrow" />
@@ -262,7 +302,11 @@ const HomePage = () => (
         <div className={styles['d3']}>
           <div>
             <span className={styles['fs-20']}><span className={styles['lite']}>Men Clothing</span><span className={styles['bold']}>UP TO 50% OFF</span></span>
-            <div className={styles['shadow']}><img src={d_tif[4]} className={styles['img-responsive']} /></div>
+            <a href={b_d_b['Mens Clothing']}>
+              <div className={styles['shadow']}>
+                  <img src={d_tif[4]} className={styles['img-responsive']} />
+              </div>
+            </a>
             <div className={styles['btn']}>
               <span>SHOP NOW</span>
               <SVGComponent clsName={`${styles['arrow']}`} src="icons/common-icon/arrow" />
@@ -322,7 +366,7 @@ const HomePage = () => (
           </div>
         </div>
         <div className={`${styles['breadcrums']} ${styles['mt-10']} ${styles['pointer']}`}>
-          <span>Besheets  |  Furniture  |  Cushions  |  Wall Decor  |  Lights  |  Living Room Furniture  |  Photo Frames  |  Rugs & Mats  & more…</span>
+          <a href="https://storefront-stage.fptechscience.com/landing/lifestyle?language=en"><span>Besheets  |  Furniture  |  Cushions  |  Wall Decor  |  Lights  |  Living Room Furniture  |  Photo Frames  |  Rugs & Mats  & more…</span></a>
         </div>
       </div>
     </div>
