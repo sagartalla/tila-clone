@@ -112,7 +112,7 @@ class MegaMenu extends Component {
                   <li key={item.id} onMouseOver={this.onHoverCurry(item)} onMouseLeave={this.onHoverOutDelayed} className={`${styles[`${(item.displayName || '').split(' ').join('').toLowerCase().replace('&', '-')}-item`]} ${(!selectedCategoryTree && this.getLandingPageLink(item.displayName)) === `/landing/${category}` ? styles['active-menu-item']: {}}`}>
                     <div>
                       {/* <Link route={`/category/${item.displayName}-${item.id}?categoryTree=true&isListed=true`}> */}
-                      <Link route={`/${country}/${language}/this.getLandingPageLink(item.displayName)`}>
+                      <Link route={`/${country}/${language}/${this.getLandingPageLink(item.displayName)}`}>
                         <a>{item.displayName}</a>
                       </Link>
                     </div>
