@@ -21,7 +21,7 @@ class CompareWidget extends React.Component {
 
   componentDidMount() {
     this.setState({
-      cmpData: JSON.parse(localStorage.getItem('compare')),
+      cmpData: JSON.parse(localStorage.getItem('compare')) || [],
     });
     this.props.getCompareCount();
   }
@@ -31,7 +31,7 @@ class CompareWidget extends React.Component {
     const { compareCount } = this.props;
     if (compareCount !== newProps.compareCount) {
       this.setState({
-        cmpData: JSON.parse(localStorage.getItem('compare')),
+        cmpData: JSON.parse(localStorage.getItem('compare')) || [],
       });
     }
   }
