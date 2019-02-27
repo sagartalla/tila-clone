@@ -586,7 +586,7 @@ const HomePage = () => (
           ))}
         </Slider>
         <div className={`${styles.breadcrums} ${styles['mt-10']} ${styles.pointer}`}>
-          <span>Besheets  |  Furniture  |  Cushions  |  Wall Decor  |  Lights  |  Living Room Furniture  |  Photo Frames  |  Rugs & Mats  & more…</span>
+          <span>Zara  |  Guess  |  Max  |  Nike  |  Fossil  |  Levis  |  Wrangler  |  Shein  & more…</span>
         </div>
       </Row>
 
