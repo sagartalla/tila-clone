@@ -104,7 +104,9 @@ class ActionBar extends Component {
         </div>
         <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']} ${styles['country-code']}`}>
           <NoSSR>
+            {this.props.hideCountry ? null :
             <Country />
+            }
           </NoSSR>
         </div>
         <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']}`}>

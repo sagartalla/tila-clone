@@ -11,7 +11,7 @@ import { actionCreators, selectors } from '../store/landing';
 class LandingPage extends Base {
   pageName = 'HOME';
   static async getInitialProps({ store, query, isServer, req }) {
-    await store.dispatch(actionCreators.getPages());
+    // await store.dispatch(actionCreators.getPages());
     return { isServer };
   }
 

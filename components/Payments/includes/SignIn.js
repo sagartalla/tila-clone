@@ -39,14 +39,22 @@ class SignIn extends Component {
         <SVGComponent clsName={`${styles['profile']} ${props.configJson.done ? 'done' : ''} ${props.configJson.progress ? 'payment-active' : ''}`} src="icons/profile/profile" />
         <Row className={`${props.configJson.done ? '' : 'hide'} ${styles['flex-center']} ${styles['m-blk']}`}>
           <Col md={8} sm={12} xs={12}>
-            <h4 className={styles['m-0']}>{PAYMENT_PAGE.SIGN_IN}</h4>
+            <h4 className={styles['m-0']}>{`${PAYMENT_PAGE.REGISTER} or ${PAYMENT_PAGE.SIGN_IN}`}</h4>
+            {props.login.username ?
+            <small>{`You have signed in as ${props.login.username}`}</small>
+            :
             <small>{PAYMENT_PAGE.SIGN_IN_SIGN_UP_TO_CONTINUE}</small>
+            }
           </Col>
+          {props.login.username ?
           <Col md={4} sm={12} xs={12} className={styles['t-rt']}>
-            <span className={`${styles['light-gry-clr']} ${styles['fontW600']}`}>{props.login.username}</span>
-          </Col>
+            <span className={`${styles['light-gry-clr']} ${styles['fontW600']}`}>{props.login.username}&emsp;</span> 
+            <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']}`} onClick={props.onClickEdit}>
+              EDIT
+            </button>
+          </Col> : null
+          }
         </Row>
-
         <Row className={`${props.configJson.progress ? '' : 'hide'} ${styles['pb-5']} ${styles['pt-5']}`}>
           <Col md={4} sm={5} xs={12} className={styles['landscape-socail-part']}>
             <h4 className={`${styles['mb-20']} ${styles['mt-0']} ${styles['light-gry-clr']}`}>{PAYMENT_PAGE.REGISTER}</h4>

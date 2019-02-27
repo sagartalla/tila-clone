@@ -5,11 +5,11 @@ const getPages = (store) => {
 }
 
 const getElectronicsPage = (store) => {
-  return JSON.parse(_.find(store.landingReducer.data.content, { page_type_value: 'Electronics' }).json);
+  return JSON.parse(_.find(store.landingReducer.data.content, { pageTypeValue: 'Electronics' }).json);
 }
 
 const getFashionPage = (store) => {
-  return JSON.parse(_.find(store.landingReducer.data.content, {page_type_value: 'Fashion'}).json);
+  return JSON.parse(_.find(store.landingReducer.data.content, { pageTypeValue: 'Fashion' }).json);
 }
 
 export { getPages, getElectronicsPage, getFashionPage };

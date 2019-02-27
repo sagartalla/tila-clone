@@ -37,11 +37,16 @@ class Country extends Component {
 
   changeCountry(e) {
     const id = e.currentTarget.getAttribute('data-id')
-    this.setState({
-      selectedItem: id
-    }, () => {
-      this.storeCountry(id);
-    });
+    if(id===this.state.selectedItem){
+      return;
+    }else{
+      confirm('Do you wish to change the country, the cart becomes 0') ?
+      this.setState({
+        selectedItem: id
+      }, () => {
+        this.storeCountry(id);
+      }) : null
+  }
   }
 
   storeCountry(country) {
