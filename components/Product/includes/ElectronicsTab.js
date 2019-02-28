@@ -12,7 +12,6 @@ import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Product/product');
 
 const ElectronicsTab = ({ catalog,productDescription }) => {
-  console.log(productDescription);
   return (
     <div>
       <Tabs defaultActiveKey={1}>
