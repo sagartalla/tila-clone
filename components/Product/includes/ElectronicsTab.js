@@ -12,6 +12,7 @@ import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Product/product');
 
 const ElectronicsTab = ({ catalog,productDescription }) => {
+  console.log(productDescription);
   return (
     <div>
       <Tabs defaultActiveKey={1}>
@@ -19,9 +20,9 @@ const ElectronicsTab = ({ catalog,productDescription }) => {
           <OverView   catalog={catalog}/>
         </Tab>
         {
-          productDescription.length > 0 ? <Tab eventKey={2} title="Description">
+          productDescription && <Tab eventKey={2} title="Description">
             <Description productDescription={productDescription} />
-          </Tab> : null
+          </Tab>
         }
         {/*<Tab eventKey={2} title="Description">
           <Description />

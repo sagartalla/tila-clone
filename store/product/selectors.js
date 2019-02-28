@@ -52,7 +52,8 @@ const getProduct = (store, variantId) => {
   const keyfeatures = _.map(productAttributeMap.calculated_highlights.attribute_values, (kf) => kf.value);
   const details = catalogAttributeMap.description ? catalogAttributeMap.description.attribute_values.map((d) => d.value).join(', ') : null;
   const imgUrls = product_details.product_details_vo.cached_product_details.media.gallery_media;
-  const productDescription = product_details.product_details_vo.cached_product_details.rich_product_desc
+  let productDescription = product_details.product_details_vo.cached_product_details.rich_product_desc
+  productDescription = productDescription.length > 0 ? _.sortBy(productDescription,['order']) : null
   return {
     titleInfo,
     details,

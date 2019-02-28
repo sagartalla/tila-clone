@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import { Grid, Row, Col } from 'react-bootstrap';
-import _ from 'lodash';
 import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Product/product');
 import constants from '../../../constants';
@@ -56,7 +55,7 @@ const Description = ({ productDescription }) => {
       className={`${styles['elt-description-main']} ${styles['pt-30']} ${styles['pb-30']}`}>
         <div>
           {
-              _.sortBy(productDescription,['order']).map(displayDescription)
+            productDescription.map(displayDescription)
           }
         </div>
     </div>
