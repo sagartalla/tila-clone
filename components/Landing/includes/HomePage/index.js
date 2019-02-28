@@ -340,6 +340,144 @@ const HomePage = () => (
             ))}
         </Slider>
       </Row>
+      <div className={styles['display-t-i-f']}>
+        <div className={`${styles['fs-20']} ${styles.title}`}>TOP IN FASHION</div>
+        <div className={styles.d1}>
+          <div>
+            <span className={styles['fs-20']}><span className={styles['lite']}>Kids Fashion</span><span className={styles['bold']}>UP TO 50% OFF</span></span>
+            <a href={b_d_b["Kid's Fashion"]}>
+              <div className={styles['shadow']}>
+                  <img src={d_tif[0]} className={styles['img-responsive']} />
+              </div>
+            </a>
+            <div className={styles['btn']}>
+              <span>SHOP NOW</span>
+              <SVGComponent clsName={`${styles.arrow}`} src="icons/common-icon/arrow" />
+            </div>
+          </div>
+          <div>
+            <span className={styles['fs-20']}><span className={styles['lite']}>Women Clothing</span><span className={styles['bold']}>UP TO 50% OFF</span></span>
+            <a href={b_d_b['Womens Clothing']}>
+              <div className={styles['shadow']}>
+                  <img src={d_tif[1]} className={styles['img-responsive']} />
+              </div>
+            </a>
+            <div className={styles['btn']}>
+              <span>SHOP NOW</span>
+              <SVGComponent clsName={`${styles.arrow}`} src="icons/common-icon/arrow" />
+            </div>
+          </div>
+        </div>
+        <div className={styles.d2}>
+          <div>
+            <span className={styles['fs-20']}><span className={styles['lite']}>Shoes</span><span className={styles['bold']}>UP TO 50% OFF</span></span>
+            <a href={b_d_b['Shoes']}>
+              <div className={styles['shadow']}>
+                <img src={d_tif[2]} className={styles['img-responsive']} />
+              </div>
+            </a>
+            <div className={styles['btn']}>
+              <span>SHOP NOW</span>
+              <SVGComponent clsName={`${styles.arrow}`} src="icons/common-icon/arrow" />
+            </div>
+          </div>
+          <div>
+            <span className={styles['fs-20']}><span className={styles['lite']}>Watches</span><span className={styles['bold']}>UP TO 50% OFF</span></span>
+            <a href={b_d_b['Watches']}>
+              <div className={styles['shadow']}>
+                <img src={d_tif[3]} className={styles['img-responsive']} />
+              </div>
+            </a>
+            <div className={styles['btn']}>
+              <span>SHOP NOW</span>
+              <SVGComponent clsName={`${styles.arrow}`} src="icons/common-icon/arrow" />
+            </div>
+          </div>
+        </div>
+        <div className={styles.d3}>
+          <div>
+            <span className={styles['fs-20']}><span className={styles['lite']}>Men Clothing</span><span className={styles['bold']}>UP TO 50% OFF</span></span>
+            <a href={b_d_b['Mens Clothing']}>
+              <div className={styles['shadow']}>
+                  <img src={d_tif[4]} className={styles['img-responsive']} />
+              </div>
+            </a>
+            <div className={styles['btn']}>
+              <span>SHOP NOW</span>
+              <SVGComponent clsName={`${styles.arrow}`} src="icons/common-icon/arrow" />
+            </div>
+          </div>
+        </div>
+        <div className={`${styles.breadcrums} ${styles['mt-10']} ${styles.pointer}`}>
+          <span>Mobiles  |  Laptops  |  Speakers  |  Cameras  |  Microwave Ovens  |  Smartwatch  |  Lights & Lamps  & more…</span>
+        </div>
+      </div>
+      <Row className={`${styles['m-15']} ${styles['mt-40']} ${styles['mb-40']}`}>
+        {threeCols.map(col => (
+          <Col md={4} xs={4} sm={4}>
+            <img src={col.img} alt={col.title} />
+          </Col>
+        ))}
+      </Row>
+      <div className={styles['display-t-i-hl']}>
+        <div className={`${styles['fs-20']} ${styles.title}`}>BEST OF HOME & LIVING</div>
+        <div className={styles.d1}>
+          <div>
+            <span className={styles['fs-20']}><span className={styles.lite}>Kids Fashion</span><span className={styles.bold}>UP TO 50% OFF</span></span>
+            <div className={styles.shadow}><img src={d_tihl[0]} className={styles['img-responsive']} /></div>
+            <div className={styles.btn}>
+              <span>SHOP NOW</span>
+              <SVGComponent clsName={`${styles.arrow}`} src="icons/common-icon/arrow" />
+            </div>
+          </div>
+          <div>
+            <span className={styles['fs-20']}><span className={styles.lite}>Women Clothing</span><span className={styles.bold}>UP TO 50% OFF</span></span>
+            <div className={styles.shadow}><img src={d_tihl[1]} className={styles['img-responsive']} /></div>
+            <div className={styles.btn}>
+              <span>SHOP NOW</span>
+              <SVGComponent clsName={`${styles.arrow}`} src="icons/common-icon/arrow" />
+            </div>
+          </div>
+        </div>
+        <div className={styles.d2}>
+          <div>
+            <span className={styles['fs-20']}><span className={styles.lite}>Shoes</span><span className={styles.bold}>UP TO 50% OFF</span></span>
+            <div className={styles.shadow}><img src={d_tihl[2]} className={styles['img-responsive']} /></div>
+            <div className={styles.btn}>
+              <span>SHOP NOW</span>
+              <SVGComponent clsName={`${styles.arrow}`} src="icons/common-icon/arrow" />
+            </div>
+          </div>
+          <div>
+            <span className={styles['fs-20']}><span className={styles.lite}>Watches</span><span className={styles.bold}>UP TO 50% OFF</span></span>
+            <div className={styles.shadow}><img src={d_tihl[3]} className={styles['img-responsive']} /></div>
+            <div className={styles.btn}>
+              <span>SHOP NOW</span>
+              <SVGComponent clsName={`${styles.arrow}`} src="icons/common-icon/arrow" />
+            </div>
+          </div>
+        </div>
+        <div className={styles.d3}>
+          <div>
+            <span className={styles['fs-20']}><span className={styles.lite}>Men Clothing</span><span className={styles.bold}>UP TO 50% OFF</span></span>
+            <div className={styles.shadow}><img src={d_tihl[4]} className={styles['img-responsive']} /></div>
+            <div className={styles.btn}>
+              <span>SHOP NOW</span>
+              <SVGComponent clsName={`${styles.arrow}`} src="icons/common-icon/arrow" />
+            </div>
+          </div>
+        </div>
+        <div className={`${styles['breadcrums']} ${styles['mt-10']} ${styles['pointer']}`}>
+          <a href="https://storefront-stage.fptechscience.com/landing/lifestyle?language=en"><span>Besheets  |  Furniture  |  Cushions  |  Wall Decor  |  Lights  |  Living Room Furniture  |  Photo Frames  |  Rugs & Mats  & more…</span></a>
+        </div>
+      </div>
+      <Row className={`${styles['m-15']} ${styles['mt-40']} ${styles['mb-40']}`}>
+        {twoCols.map(col => (
+          <Col md={6} xs={6} sm={6}>
+            <img src={col.img} alt={col.title} />
+          </Col>
+        ))}
+      </Row>
       <div className={styles['display-t-i-e']}>
         <div className={`${styles['fs-20']} ${styles['title']}`}>TOP IN ELECTRONICS</div>
         {/*<div className={`${styles['']}`}>
@@ -415,148 +553,6 @@ const HomePage = () => (
         </div>
         <div className={`${styles.breadcrums} ${styles['mt-10']} ${styles.pointer}`}>
           <span>Mobiles  |  Laptops  |  Speakers  |  Cameras  |  Microwave Ovens  |  Smartwatch  |  Lights & Lamps  & more…</span>
-        </div>
-      </div>
-
-      <Row className={`${styles['m-15']} ${styles['mt-40']} ${styles['mb-40']}`}>
-        {twoCols.map(col => (
-          <Col md={6} xs={6} sm={6}>
-            <img src={col.img} alt={col.title} />
-          </Col>
-        ))}
-      </Row>
-
-      <div className={styles['display-t-i-f']}>
-        <div className={`${styles['fs-20']} ${styles.title}`}>TOP IN FASHION</div>
-        <div className={styles.d1}>
-          <div>
-            <span className={styles['fs-20']}><span className={styles['lite']}>Kids Fashion</span><span className={styles['bold']}>UP TO 50% OFF</span></span>
-            <a href={b_d_b["Kid's Fashion"]}>
-              <div className={styles['shadow']}>
-                  <img src={d_tif[0]} className={styles['img-responsive']} />
-              </div>
-            </a>
-            <div className={styles['btn']}>
-              <span>SHOP NOW</span>
-              <SVGComponent clsName={`${styles.arrow}`} src="icons/common-icon/arrow" />
-            </div>
-          </div>
-          <div>
-            <span className={styles['fs-20']}><span className={styles['lite']}>Women Clothing</span><span className={styles['bold']}>UP TO 50% OFF</span></span>
-            <a href={b_d_b['Womens Clothing']}>
-              <div className={styles['shadow']}>
-                  <img src={d_tif[1]} className={styles['img-responsive']} />
-              </div>
-            </a>
-            <div className={styles['btn']}>
-              <span>SHOP NOW</span>
-              <SVGComponent clsName={`${styles.arrow}`} src="icons/common-icon/arrow" />
-            </div>
-          </div>
-        </div>
-        <div className={styles.d2}>
-          <div>
-            <span className={styles['fs-20']}><span className={styles['lite']}>Shoes</span><span className={styles['bold']}>UP TO 50% OFF</span></span>
-            <a href={b_d_b['Shoes']}>
-              <div className={styles['shadow']}>
-                <img src={d_tif[2]} className={styles['img-responsive']} />
-              </div>
-            </a>
-            <div className={styles['btn']}>
-              <span>SHOP NOW</span>
-              <SVGComponent clsName={`${styles.arrow}`} src="icons/common-icon/arrow" />
-            </div>
-          </div>
-          <div>
-            <span className={styles['fs-20']}><span className={styles['lite']}>Watches</span><span className={styles['bold']}>UP TO 50% OFF</span></span>
-            <a href={b_d_b['Watches']}>
-              <div className={styles['shadow']}>
-                <img src={d_tif[3]} className={styles['img-responsive']} />
-              </div>
-            </a>
-            <div className={styles['btn']}>
-              <span>SHOP NOW</span>
-              <SVGComponent clsName={`${styles.arrow}`} src="icons/common-icon/arrow" />
-            </div>
-          </div>
-        </div>
-        <div className={styles.d3}>
-          <div>
-            <span className={styles['fs-20']}><span className={styles['lite']}>Men Clothing</span><span className={styles['bold']}>UP TO 50% OFF</span></span>
-            <a href={b_d_b['Mens Clothing']}>
-              <div className={styles['shadow']}>
-                  <img src={d_tif[4]} className={styles['img-responsive']} />
-              </div>
-            </a>
-            <div className={styles['btn']}>
-              <span>SHOP NOW</span>
-              <SVGComponent clsName={`${styles.arrow}`} src="icons/common-icon/arrow" />
-            </div>
-          </div>
-        </div>
-        <div className={`${styles.breadcrums} ${styles['mt-10']} ${styles.pointer}`}>
-          <span>Mobiles  |  Laptops  |  Speakers  |  Cameras  |  Microwave Ovens  |  Smartwatch  |  Lights & Lamps  & more…</span>
-        </div>
-      </div>
-
-      <Row className={`${styles['m-15']} ${styles['mt-40']} ${styles['mb-40']}`}>
-        {threeCols.map(col => (
-          <Col md={4} xs={4} sm={4}>
-            <img src={col.img} alt={col.title} />
-          </Col>
-        ))}
-      </Row>
-
-      <div className={styles['display-t-i-hl']}>
-        <div className={`${styles['fs-20']} ${styles.title}`}>BEAST OF HOME & LIVING</div>
-        <div className={styles.d1}>
-          <div>
-            <span className={styles['fs-20']}><span className={styles.lite}>Kids Fashion</span><span className={styles.bold}>UP TO 50% OFF</span></span>
-            <div className={styles.shadow}><img src={d_tihl[0]} className={styles['img-responsive']} /></div>
-            <div className={styles.btn}>
-              <span>SHOP NOW</span>
-              <SVGComponent clsName={`${styles.arrow}`} src="icons/common-icon/arrow" />
-            </div>
-          </div>
-          <div>
-            <span className={styles['fs-20']}><span className={styles.lite}>Women Clothing</span><span className={styles.bold}>UP TO 50% OFF</span></span>
-            <div className={styles.shadow}><img src={d_tihl[1]} className={styles['img-responsive']} /></div>
-            <div className={styles.btn}>
-              <span>SHOP NOW</span>
-              <SVGComponent clsName={`${styles.arrow}`} src="icons/common-icon/arrow" />
-            </div>
-          </div>
-        </div>
-        <div className={styles.d2}>
-          <div>
-            <span className={styles['fs-20']}><span className={styles.lite}>Shoes</span><span className={styles.bold}>UP TO 50% OFF</span></span>
-            <div className={styles.shadow}><img src={d_tihl[2]} className={styles['img-responsive']} /></div>
-            <div className={styles.btn}>
-              <span>SHOP NOW</span>
-              <SVGComponent clsName={`${styles.arrow}`} src="icons/common-icon/arrow" />
-            </div>
-          </div>
-          <div>
-            <span className={styles['fs-20']}><span className={styles.lite}>Watches</span><span className={styles.bold}>UP TO 50% OFF</span></span>
-            <div className={styles.shadow}><img src={d_tihl[3]} className={styles['img-responsive']} /></div>
-            <div className={styles.btn}>
-              <span>SHOP NOW</span>
-              <SVGComponent clsName={`${styles.arrow}`} src="icons/common-icon/arrow" />
-            </div>
-          </div>
-        </div>
-        <div className={styles.d3}>
-          <div>
-            <span className={styles['fs-20']}><span className={styles.lite}>Men Clothing</span><span className={styles.bold}>UP TO 50% OFF</span></span>
-            <div className={styles.shadow}><img src={d_tihl[4]} className={styles['img-responsive']} /></div>
-            <div className={styles.btn}>
-              <span>SHOP NOW</span>
-              <SVGComponent clsName={`${styles.arrow}`} src="icons/common-icon/arrow" />
-            </div>
-          </div>
-        </div>
-        <div className={`${styles['breadcrums']} ${styles['mt-10']} ${styles['pointer']}`}>
-          <a href="https://storefront-stage.fptechscience.com/landing/lifestyle?language=en"><span>Besheets  |  Furniture  |  Cushions  |  Wall Decor  |  Lights  |  Living Room Furniture  |  Photo Frames  |  Rugs & Mats  & more…</span></a>
         </div>
       </div>
 

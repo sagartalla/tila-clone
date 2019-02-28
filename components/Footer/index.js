@@ -344,7 +344,7 @@ const FooterBar = props => (
               <li>{FOOTER_PAGE.COOKIE_POLICY}</li>
             </ul>
           </Col>
-          <Col md={2} sm={2} className={styles['ipad-pr-0']}>
+          {/*<Col md={2} sm={2} className={styles['ipad-pr-0']}>
             <div>
               <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['black-color']}`}>{FOOTER_PAGE.SELL_ON_TILA}</h4>
               <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
@@ -356,8 +356,8 @@ const FooterBar = props => (
                 <li>{FOOTER_PAGE.FAQS}</li>
               </ul>
             </div>
-          </Col>
-          <Col md={2} sm={2} className={styles['ipad-pr-0']}>
+          </Col>*/}
+          <Col md={4} sm={4} className={styles['ipad-pr-0']}>
             <div>
               <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['black-color']}`}>{FOOTER_PAGE.CUSTOMER_SERVICE}</h4>
               <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
