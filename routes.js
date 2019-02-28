@@ -12,6 +12,7 @@ routes
   .add({ name: 'thankyou', pattern: '/thankyou/:orderId/:status(SUCCESSFUL|FAILED)', page: 'thankyou' })
   .add({ name: 'landing', pattern: '/landing/:category', page: 'landing'})
   .add({ name: 'search', pattern: '/srp/:category?/:subCategory?', page: 'search' })
+  .add({ name: 'resetpassword', pattern: '/resetpassword/:token', page: 'resetpassword' })
   .add({ name: 'default', pattern: '/', page: 'index'})
   ;
 

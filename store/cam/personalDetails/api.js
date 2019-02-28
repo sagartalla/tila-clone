@@ -19,6 +19,14 @@ const changePassword = (body) => {
   })
 };
 
+const resetPassword = (body) => {
+  return axios.post('https://apigateway-dev.tila.com/cms/api/v1/user/password/reset', body).then((data) => {
+    return data;
+  }).catch((error) => {
+    return error.response.data;
+  })
+}
+
 const editPersonalInfo = (body) => {
   return axios.put(`${constants.CMS_API_URL}/api/v1/user/account/edit`, body).then(({ data }) => {
     return axios.get(`${constants.CMS_API_URL}/api/v1/user/account/details`).then(userInfoResult=> [data,userInfoResult]);
@@ -33,5 +41,5 @@ const deactivateUserProfile = () =>
   axios.put(`${constants.CMS_API_URL}/api/v1/user/deactivate/`);
 
 export default {
-  getUserProfileInfo, changePassword , editPersonalInfo, deactivateUserProfile,
+  getUserProfileInfo, changePassword , editPersonalInfo, deactivateUserProfile, resetPassword,
 };
