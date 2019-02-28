@@ -11,7 +11,9 @@ const styles = mergeCss('components/Landing/includes/HomePage/homepage');
 let sliderTBS,
   sliderTIE,
   sliderHAL,
-  sliderDODAY;
+  sliderDODAY,
+  sliderBS,
+  sliderRV;
 
 // const tie = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
@@ -152,6 +154,37 @@ const d_o_day = [{
   price: '1000.00',
   mrp: '1600.00',
 }];
+
+const responsive = [
+  {
+    breakpoint: 1441,
+    settings: {
+      slidesToShow: 5,
+    },
+  }, {
+    breakpoint: 1300,
+    settings: {
+      slidesToShow: 4,
+    },
+  },
+  {
+    breakpoint: 1024,
+    settings: {
+      slidesToShow: 3,
+    },
+  }, {
+    breakpoint: 768,
+    settings: {
+      slidesToShow: 2,
+    },
+  },
+  {
+    breakpoint: 480,
+    settings: {
+      slidesToShow: 1,
+    },
+  },
+];
 
 const twoCols = [{
   img: '/static/img/landing-home/ps4.jpg',
@@ -297,7 +330,7 @@ const HomePage = () => (
           <span className={`${styles.title} ${styles['fs-18']}`}>DEALS OF THE DAY</span>
           <span className={`${styles.timer} ${styles['flex-center']}`}>
             <SVGComponent clsName={styles.time} src="icons/common-icon/timer" />
-            <span className={`${styles['fs-12']} ${styles['pl-25']}`}>
+            <span className={`${styles['fs-12']}`}>
               <span className={styles.fontW600}>ENDS IN:</span>  17 : 16 : 50
             </span>
           </span>
@@ -306,8 +339,10 @@ const HomePage = () => (
           asNavFor={sliderDODAY}
           ref={slider => (sliderDODAY = slider)}
           lazyLoad
+          centerMode
           className={styles['ht-100per']}
           slidesToShow={6}
+          responsive={responsive}
           nextArrow={<SampleNextArrow />}
           prevArrow={<SamplePrevArrow />}
         >
@@ -591,11 +626,12 @@ const HomePage = () => (
           <span className={`${styles.title} ${styles['fs-18']}`}>BEST SELLING</span>
         </div>
         <Slider
-          asNavFor={sliderDODAY}
-          ref={slider => (sliderDODAY = slider)}
+          asNavFor={sliderBS}
+          ref={slider => (sliderBS = slider)}
           lazyLoad
           className={styles['ht-100per']}
           slidesToShow={6}
+          responsive={responsive}
           nextArrow={<SampleNextArrow />}
           prevArrow={<SamplePrevArrow />}
         >
@@ -633,11 +669,12 @@ const HomePage = () => (
           <span className={`${styles.title} ${styles['fs-18']}`}>RECENTLY VIEWED</span>
         </div>
         <Slider
-          asNavFor={sliderDODAY}
-          ref={slider => (sliderDODAY = slider)}
+          asNavFor={sliderRV}
+          ref={slider => (sliderRV = slider)}
           lazyLoad
           className={styles['ht-100per']}
           slidesToShow={6}
+          responsive={responsive}
           nextArrow={<SampleNextArrow />}
           prevArrow={<SamplePrevArrow />}
         >
