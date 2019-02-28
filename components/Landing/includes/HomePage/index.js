@@ -420,7 +420,7 @@ const HomePage = () => (
         ))}
       </Row>
       <div className={styles['display-t-i-hl']}>
-        <div className={`${styles['fs-20']} ${styles.title}`}>BEAST OF HOME & LIVING</div>
+        <div className={`${styles['fs-20']} ${styles.title}`}>BEST OF HOME & LIVING</div>
         <div className={styles.d1}>
           <div>
             <span className={styles['fs-20']}><span className={styles.lite}>Kids Fashion</span><span className={styles.bold}>UP TO 50% OFF</span></span>
