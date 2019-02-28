@@ -14,8 +14,8 @@ require('./utils/error-handle');
 const server = express();
 
 server.get('/', (req, res) => {
-  global.APP_LANGUAGE = ((req.headers.cookie.match(/language=(.+)/g) || [])[0] || '').split('=')[1] || 'en';
-  global.APP_COUNTRY = ((req.headers.cookie.match(/country=(.+)/g) || [])[0] || '').split('=')[1] || 'SAU';
+  global.APP_LANGUAGE = (req.headers.cookie.match(/language=(.+?);/) || [])[1] || 'en';
+  global.APP_COUNTRY = (req.headers.cookie.match(/country=(.+?);/) || [])[1]|| 'SAU';
   // if(req.originalUrl === '/') {
   res.redirect(302, '/' + APP_COUNTRY + '/' + APP_LANGUAGE);
   // }

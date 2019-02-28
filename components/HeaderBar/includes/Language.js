@@ -34,7 +34,6 @@ class Language extends Component {
       });
   	}
   	this.props.setLanguage(language);
-    this.props.onChangeLanguage(language);
 	}
 
   changeLanguage(e) {
@@ -48,8 +47,6 @@ class Language extends Component {
 
   storeLanguage(language) {
     this.props.setLanguage(language);
-    this.props.onChangeLanguage(language);
-    location.reload();
   }
 
   render() {
@@ -83,17 +80,5 @@ const mapDispatchToProps = (dispatch) => {
 	);
 }
 
-
-function mapUrlToProps(url, props) {
-  return {
-    language: url.language,
-  };
-}
-
-const mapUrlChangeHandlersToProps = (props) => {
-  return {
-    onChangeLanguage: (value) => replaceInUrlQuery('language', value)
-  };
-}
-
-export default addUrlProps({ mapUrlToProps, mapUrlChangeHandlersToProps })(connect(null, mapDispatchToProps)(Language));
+// export default addUrlProps({ mapUrlToProps, mapUrlChangeHandlersToProps })(connect(null, mapDispatchToProps)(Language));
+export default connect(null, mapDispatchToProps)(Language);
