@@ -630,6 +630,7 @@ const HomePage = () => (
           ref={slider => (sliderBS = slider)}
           lazyLoad
           className={styles['ht-100per']}
+          centerMode
           slidesToShow={6}
           responsive={responsive}
           nextArrow={<SampleNextArrow />}
@@ -673,6 +674,7 @@ const HomePage = () => (
           ref={slider => (sliderRV = slider)}
           lazyLoad
           className={styles['ht-100per']}
+          centerMode
           slidesToShow={6}
           responsive={responsive}
           nextArrow={<SampleNextArrow />}
