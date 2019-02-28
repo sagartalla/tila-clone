@@ -30,8 +30,7 @@ const displayDescription = (el,index) => {
         <Col md={4}>
           <div>
             <h4>{el.title}</h4>
-            <p
-              style={{fontSize:'16px'}} className={styles['fs-15']}>{el.body}</p>
+            <p className={styles['fs-16']}>{el.body}</p>
           </div>
         </Col>
       </div>
@@ -39,12 +38,12 @@ const displayDescription = (el,index) => {
   }
   return (
     <div key={'desc_'+index} className={styles['elt-description-column']}>
-        <div style={{marginBottom:'5px'}}>
+        <div className={styles['mb-5']}>
           {renderVideoImage(el.media.url)[el.media.type]}
         </div>
         <div>
           <h4>{el.title}</h4>
-          <p style={{fontSize:'16px'}} className={styles['fs-15']}>{el.body}</p>
+          <p className={styles['fs-16']}>{el.body}</p>
         </div>
     </div>
 
@@ -52,7 +51,6 @@ const displayDescription = (el,index) => {
 }
 
 const Description = ({ productDescription }) => {
-  console.log(_.sortBy(productDescription,['order']));
   return (
     <div
       className={`${styles['elt-description-main']} ${styles['pt-30']} ${styles['pb-30']}`}>
