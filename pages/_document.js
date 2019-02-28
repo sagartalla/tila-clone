@@ -10,10 +10,10 @@ export default class MyDocument extends Document {
         <Head>
           {/*<!-- Google Tag Manager -->*/}
           <script src="/static/scripts/googleTagManager.js"></script>
+          {/*<!-- End Google Tag Manager -->*/}
           {/*<!-- Adobe Launch Tags -->*/}
           <script src="//assets.adobedtm.com/launch-ENc0358fe6617e4066a1c1c0ecff96f2e5-development.min.js" async></script>
           {/*<!-- End Adobe Launch Tags -->*/}
-          {/*<!-- End Google Tag Manager -->*/}
           {
             props.__NEXT_DATA__.query.language === 'ar'
               ?
@@ -31,7 +31,7 @@ export default class MyDocument extends Document {
         <body>
           {/*<!-- Google Tag Manager (noscript) -->*/}
           <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M68MT36"
-          height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+          height="0" width="0" style={{display:'none', visibility:'hidden'}}></iframe></noscript>
           {/*<!-- End Google Tag Manager (noscript) -->*/}
           <Main />
           <NextScript />
