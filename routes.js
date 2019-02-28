@@ -12,6 +12,7 @@ routes
   .add({ name: 'thankyou', pattern: '/thankyou/:orderId/:status(SUCCESSFUL|FAILED)', page: 'thankyou' })
   .add({ name: 'landing', pattern: '/landing/:category', page: 'index'})
   .add({ name: 'search', pattern: '/srp/:category?/:subCategory?', page: 'search' })
+  .add({ name: 'policy', pattern: '/policy/:name', page: 'policy' })
   .add({ name: 'default', pattern: '/', page: 'index'})
   ;
 
