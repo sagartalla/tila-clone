@@ -8,6 +8,18 @@ export default class MyDocument extends Document {
     return (
       <html>
         <Head>
+          {/*<!-- Google Tag Manager -->*/}
+          <Script>
+            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-M68MT36');
+          </Script>
+          {/*<!-- Adobe Launch Tags -->*/}
+          <script src="//assets.adobedtm.com/launch-ENc0358fe6617e4066a1c1c0ecff96f2e5-development.min.js" async></script>
+          {/*<!-- End Adobe Launch Tags -->*/}
+          {/*<!-- End Google Tag Manager -->*/}
           {
             props.__NEXT_DATA__.query.language === 'ar'
               ?
@@ -23,6 +35,10 @@ export default class MyDocument extends Document {
           <script src="//assets.adobedtm.com/launch-ENf3bacf30d8974e6a81eeec612ff12c02-development.min.js" async></script>
         </Head>
         <body>
+          {/*<!-- Google Tag Manager (noscript) -->*/}
+          <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M68MT36"
+          height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+          {/*<!-- End Google Tag Manager (noscript) -->*/}
           <Main />
           <NextScript />
         </body>
