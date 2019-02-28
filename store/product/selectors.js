@@ -52,6 +52,7 @@ const getProduct = (store, variantId) => {
   const keyfeatures = _.map(productAttributeMap.calculated_highlights.attribute_values, (kf) => kf.value);
   const details = catalogAttributeMap.description ? catalogAttributeMap.description.attribute_values.map((d) => d.value).join(', ') : null;
   const imgUrls = product_details.product_details_vo.cached_product_details.media.gallery_media;
+  const productDescription = product_details.product_details_vo.cached_product_details.rich_product_desc
   return {
     titleInfo,
     details,
@@ -60,6 +61,7 @@ const getProduct = (store, variantId) => {
     offerInfo,
     shippingInfo,
     returnInfo,
+    productDescription,
     breadcrums: tree.breadcrumb,
     categoryType: tree.finance ? tree.finance[0].display_name_en : '',
     catalog: _.groupBy(_.filter(catalogAttributeMap, (val) => val.visible), (attrMap) => attrMap.attribute_category_name)
