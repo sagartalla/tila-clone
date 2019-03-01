@@ -116,11 +116,11 @@ class MegaMenu extends Component {
               })
             }
           </ul>
-          <div className={`${styles['float-r']} ${styles['fs-12']}`}>
+          {/*<div className={`${styles['float-r']} ${styles['fs-12']}`}>
             <span className={`${styles['pl-5']} ${styles['pr-5']}`}>
               <a href={publicUrls.sellerPlatform} target="_blank" className={styles['black-color']}>{HEADER_PAGE.SELL_WITH_TILA}</a>
             </span>
-          </div>
+          </div>*/}
         </nav>
       </Grid>
         {
@@ -137,7 +137,7 @@ class MegaMenu extends Component {
                 <SubMenu
                   subMenuItems={selectedCategoryTree.childCategories}
                   onLinkClick={this.onLinkClick}
-                  colorScheme={this.state.colorScheme}                  
+                  colorScheme={this.state.colorScheme}
                 />
                 :
                 <Grid className={styles['megamenu-event-container']}>
