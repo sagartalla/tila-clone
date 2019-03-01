@@ -14,7 +14,7 @@ const Policy = ({query}) => {
   return (
     <Fragment>
       <HeaderBar />
-      <iframe src={`/static/docs/${query.name}.pdf`} style={{ height: '100vh', width: '100vw', border: '0' }}></iframe>
+      <iframe src={`/static/docs/${query.name}.pdf#toolbar=0&navpanes=0&view=FitH`} style={{ height: '100vh', width: '100vw', border: '0' }}></iframe>
       <FooterBar />
     </Fragment>
   )
