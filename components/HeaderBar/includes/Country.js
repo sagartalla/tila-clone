@@ -40,7 +40,7 @@ class Country extends Component {
     if(id===this.state.selectedItem){
       return;
     }else{
-      confirm('Do you wish to change the country, the cart becomes 0') ?
+      confirm('Do you wish to change the country, the cart will change accordingly') ?
       this.setState({
         selectedItem: id
       }, () => {
