@@ -77,9 +77,9 @@ export const EN_KEYWORDS = {
   DELIVERY_ADDR_PAGE: {
     'DELIVERY_ADDR': 'Delivery Address',
     'EDIT': 'Edit',
-    'SUB_TAG': 'select a delivery address or create new address',
+    'SUB_TAG': 'Edit or delete an existing address or add a new address.',
     'CONTINUE': 'Continue',
-    'MANAGE_SHIP_ADDR': 'Manage Shipping Address',
+    'MANAGE_SHIP_ADDR': 'Manage Shipping Addresses',
     'DEFAULT_ADDR': 'Default Address',
     'MAKE_DEFAULT': 'Make as Default',
     'DELETE': 'Delete',
@@ -89,7 +89,7 @@ export const EN_KEYWORDS = {
     'ADD_NEW_ADDR_HEAD': 'Add New Delivery Address',
     'HOME': 'HOME',
     'WORK': 'WORK',
-    'PREF_LOC': 'My Preffered Location',
+    'PREF_LOC': 'My preffered location',
     'CANCEL': 'Cancel',
     'SAVE_DELIVER_BTN': 'Save and Deliver here',
     'ENTER_LOC': 'Enter a location',
@@ -97,7 +97,7 @@ export const EN_KEYWORDS = {
   },
   WISH_LIST_PAGE: {
     'WISHLIST_HEADER': 'items in wishlist',
-    'ADD_TO_CART_BTN': 'ADD TO CART'
+    'ADD_TO_CART_BTN': 'MOVE TO CART'
   },
   PDP_PAGE: {
     'LOADING_REVIEWS': 'Loading Reviews...',
@@ -228,8 +228,8 @@ export const EN_KEYWORDS = {
     'ENTER_NEW_PASSWORD_MESSAGE': 'Enter New Password',
     'RE_ENTER_PASSWORD_MESSAGE': 'Re-enter New Password',
     'SUBMIT_BUTTON': 'Change Password',
-    'PASSWORD_LENGTH_MESSAGE': 'Be at least 8 characters in length Not be same as your current password'
-
+    'PASSWORD_LENGTH_MESSAGE': 'Be at least 8 characters in length Not be same as your current password',
+    'PASSWORD_LENGTH': 'Your password must be at least 8 characters long.'
   },
   PERSONAL_INFO_MODAL: {
     'HEADING': 'Personel Information',
@@ -256,7 +256,7 @@ export const EN_KEYWORDS = {
   },
   SEARCH_PAGE: {
     'DELIVER_TO': 'Deliver to',
-    'NO_OF_ITEMS_FOUND': 'no of items found',
+    'NO_OF_ITEMS_FOUND_FOR': 'no of items found for',
     'SORT_BY': 'Sort by',
     'BEST_MATCH': 'Best Match',
     'BEST_OFFERS': 'Best Offers',
@@ -350,9 +350,10 @@ export const EN_KEYWORDS = {
     'CAREERS': 'Careers',
     'CONTACT_US': 'Contact Us',
     'POLICY': 'POLICY',
-    'TERMS_CONDITION': 'Terms and conditions',
-    'PRIVACY_POLICY': 'Privacy Policy',
-    'COOKIE_POLICY': 'Cookie Policy',
+    'TERMS_CONDITION': 'User Terms and Conditions',
+    'REFUND_POLICY': 'Returns,Exchanges,Cancellation & Refund policy',
+    'WARRENTY_POLICY': 'Warranty Policy',
+    'SHIPPING_POLICY': 'Shipping Policy ',
     'SELL_ON_TILA': 'Selling on TiLa.com',
     'HOW_WORKS': 'How It Works',
     'SELL_POLICY': 'Selling Policies',
@@ -388,9 +389,9 @@ export const EN_KEYWORDS = {
   LOGIN_PAGE: {
     'SIGN_UP': 'Sign Up',
     'SIGN_IN': 'Sign In',
-    'SIGN_UP_WITH': 'Or Sign up with',
+    'SIGN_UP_WITH': 'Or sign up with',
     'NO_ACCOUNT': 'Don\'t have an Account',
-    'HAVE_ACCOUNT': 'Already have an Account',
+    'HAVE_ACCOUNT': 'If you already have an account, please',
     'EMAIL': 'Email',
     'PASSWORD': 'Password',
     'TILA_COM': 'Tila.com',

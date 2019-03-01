@@ -205,6 +205,175 @@
   max-width 100%
   max-height 100%
 
+@media screen and (min-device-width: 320px) and (max-device-width: 736px) and (orientation : portrait){
+  .payment-header {
+    display none
+  }
+
+  .m-p-l-15 {
+    padding-left 15px
+  }
+
+  .payment {
+    .payment-signup, .delivery-adress-prt, .pay-loyalty-main, .payment-mode-prt, .pay-offers-discounts {
+       padding 15px 25px
+    }
+    
+    .payment-signup {
+
+      .landscape-socail-part {
+
+        .facebook-btn {
+          padding 10px 42px
+        }
+
+        .google-btn {
+          padding 10px 50px
+        }
+
+        .regist-btn {
+          padding 10px 60px
+        }
+
+      }
+
+      .landscape-login-part {
+        padding-top 20px
+
+        .sign-part {
+          width 100%
+        }
+      }
+    }
+
+    .social-icons-list {
+      border-right: 0;
+      border-bottom: 1px solid lht-bdr;
+      padding-bottom: 20px;
+
+      .sub-title {
+        bottom: -13px;
+        right: 47%;
+        top: auto
+      }
+    }
+  }
+
+  .loyalty-points-inn {
+    padding 5px 0
+  }
+
+  .pay-loyalty-main .pay-loyalty-inn {
+    width 87%
+  }
+
+  .m-loyalty-btm {
+    display flex
+    justify-content space-between
+  }
+
+  .offers-bottom {
+    .cont-btn {
+      margin-right 10px
+      padding 10px 15px
+      font-size 12px
+    }
+
+    .skip-btn {
+      padding 10px 15px
+      font-size 12px
+    }
+  }
+
+  .debit-cards-list {
+    flex-wrap: wrap
+
+    h4 {
+      padding-bottom 0
+    }
+  }
+  .offers-show-part .emi-table {
+    overflow scroll
+  }
+
+  .payment-mode-inn {
+    padding 10px 0 10px 0
+    width 100%
+    overflow scroll
+
+    .pay-menu {
+      padding 0
+      display flex
+      overflow scroll
+      min-width 500px
+      max-width 500px
+      background none
+
+      li {
+        padding 10px
+
+        i {
+          display none
+        }
+      }
+
+      .active {
+        border-bottom 2px solid #e40880
+        border-right 0
+        box-shadow none
+      }
+    }
+  }
+
+  .netbanking-part {
+    flex-wrap wrap
+  }
+
+  .pay-online {
+    padding 0
+
+    .payment-frame {
+      overflow scroll
+      border 1px solid #ccc
+      padding 5px
+
+      iframe {
+        width 100% !important
+      }
+    }
+
+    .checkbox-material {
+      display flex
+      align-items center
+      margin 10px 0
+    }
+  }
+
+  .cash-on-dly-points .captcha-icon-part {
+    span {
+      margin-right 5px
+    }
+
+    i {
+      width 20px !important
+      height 20px !important
+    }
+  }
+
+  .capcha-pay {
+    flex-wrap wrap
+  }
+
+  .drop-box-icon {
+    width 87px
+    height 86px
+    margin-top 20px
+  }
+
+
+
+}
+
 @media screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation : portrait){
   .payment {
     .secure-img {

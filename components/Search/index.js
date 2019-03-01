@@ -29,26 +29,34 @@ const onClickMenuHandle = (e) => {
 }
 
 class Search extends Component {
-  constructor(props) {
-    super(props)
-    this.querySearch = this.querySearch.bind(this)
-  }
+
   componentWillUnmount() {
     this.props.hideSearchBarFitlers();
   }
-  querySearch(e) {
-    let dataSearchQuery = e.target.dataset.querysearch;
-    Router.pushRoute(`/srp?search=${dataSearchQuery}&${Object.entries(this.props.optionalParams).map(([key, val]) => `${key}=${val}`).join('&')}`);
+ 
+  querySearch = (e) => {    
+    let dataSearchQuery = e.currentTarget.dataset.querysearch;
+    Router.pushRoute(`/srp?search=${dataSearchQuery}&disableSpellCheck=true&${Object.entries(this.props.optionalParams).map(([key, val]) => `${key}=${val}`).join('&')}`);
   }
+
   render() {
-    console.log(this.props)
+    const { spellCheckResp, query } = this.props;
     return (
       <div>
         <HeaderBar />
-        {
-          this.props.spellCheckResp && <div><b>Did you Mean</b><span onClick={this.querySearch} data-querysearch={this.props.spellCheckResp[this.props.query.search]}>{this.props.spellCheckResp[this.props.query.search]}</span></div>
-        }
         <Grid className={styles['pt-20']}>
+          {spellCheckResp &&
+            <div className={`${styles['mb-15']} ${styles['spell-strip']}`}>
+              Did you Mean&nbsp;
+              <a
+                href="javascript: void(0)"
+                onClick={this.querySearch}
+                data-querysearch={spellCheckResp[query.search]}
+              >
+                <b>{`${spellCheckResp[query.search]} ?`}</b>
+              </a>
+            </div>
+          }
           <Col md={2} onClick={onClickMenuHandle} className={`${styles['filter-panel']} ${styles['border-radius4']} ${styles['bg-white']} ${styles['p-0']}`}>
             <NoSSR>
               <CategoriesAndFacets />

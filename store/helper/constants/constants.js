@@ -8,8 +8,6 @@ env = env.env || '';
 env = env || process.env.ENV;
 env = env.trim();
 
-console.log('constants.js', env, process.env.ENV);
-
 const a = {
   local: {
     SEARCH_API_URL        :   'http://gateway-dev.fptechscience.com/search',
@@ -31,20 +29,20 @@ const a = {
     CAPTCHA_URL           :   'https://api-gateway-stage.fptechscience.com/transformers/api/v1/captcha',
   },
   dev: {
-    SEARCH_API_URL        :   'http://gateway-dev.fptechscience.com/search',
+    SEARCH_API_URL        :   'http://apigateway-dev.tila.com/search',
     CATALOG_API_URL       :   'http://catalogapis-dev.fptechscience.com',
-    LISTING_API_URL       :   'http://gateway-dev.fptechscience.com/listing',
+    LISTING_API_URL       :   'http://apigateway-dev.tila.com/listing',
     PIM_API_URL           :   'http://pimapis-dev.fptechscience.com/pim',
-    CMS_API_URL           :   'http://gateway-dev.fptechscience.com/cms',
-    ORDERS_API_URL        :   'http://gateway-dev.fptechscience.com/order',
-    TRANSACTIONS_API_URL  :   'http://gateway-dev.fptechscience.com/transactions',
-    AUTH_API_URL          :   'http://gateway-dev.fptechscience.com/auth-service',
-    CART_API_URL          :   'http://gateway-dev.fptechscience.com/cart',
-    CATEGORYTREE_API_URL  :   'http://gateway-dev.fptechscience.com/category-tree',
-    WISHLIST_API_URL      :   'http://gateway-dev.fptechscience.com/wl',
-    FCM_API_URL           :   'http://gateway-dev.fptechscience.com/fcm',
-    REVIEWS_API_URL       :   'http://gateway-dev.fptechscience.com/reviews',
-    VAULT_API_URL         :   'http://gateway-dev.fptechscience.com/vault',
+    CMS_API_URL           :   'http://apigateway-dev.tila.com/cms',
+    ORDERS_API_URL        :   'http://apigateway-dev.tila.com/order',
+    TRANSACTIONS_API_URL  :   'http://apigateway-dev.tila.com/transactions',
+    AUTH_API_URL          :   'http://apigateway-dev.tila.com/auth-service',
+    CART_API_URL          :   'http://apigateway-dev.tila.com/cart',
+    CATEGORYTREE_API_URL  :   'http://apigateway-dev.tila.com/category-tree',
+    WISHLIST_API_URL      :   'http://apigateway-dev.tila.com/wl',
+    FCM_API_URL           :   'http://apigateway-dev.tila.com/fcm',
+    REVIEWS_API_URL       :   'http://apigateway-dev.tila.com/reviews',
+    VAULT_API_URL         :   'http://apigateway-dev.tila.com/vault',
     TRANSFORMER_API_URL   :   'http://transformers-mgmt.fptsinternal.com/fpts/page-config/get-all-pages',
     SUGGESSIONS_URL       :   'https://api-gateway-stage.fptechscience.com/auto-suggest/suggest/suggestions',
     CAPTCHA_URL           :   'https://api-gateway-stage.fptechscience.com/transformers/api/v1/captcha',
@@ -129,7 +127,5 @@ const a = {
 // console.log('constants.js 2', a);
 var b = env || 'preprod';
 var c = a[b];
-
-console.log('constants.js 3', c);
 
 module.exports = c;

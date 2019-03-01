@@ -37,27 +37,35 @@ class SignIn extends Component {
     return (
       <div className={`${styles['box']} ${styles['mb-20']} ${styles['relative']} ${styles['payment-signup']}`}>
         <SVGComponent clsName={`${styles['profile']} ${props.configJson.done ? 'done' : ''} ${props.configJson.progress ? 'payment-active' : ''}`} src="icons/profile/profile" />
-        <Row className={`${props.configJson.done ? '' : 'hide'} ${styles['flex-center']}`}>
+        <Row className={`${props.configJson.done ? '' : 'hide'} ${styles['flex-center']} ${styles['m-blk']}`}>
           <Col md={8} sm={12} xs={12}>
-            <h4 className={styles['m-0']}>{PAYMENT_PAGE.SIGN_IN}</h4>
+            <h4 className={styles['m-0']}>{`${PAYMENT_PAGE.REGISTER} or ${PAYMENT_PAGE.SIGN_IN}`}</h4>
+            {props.login.username ?
+            <small>{`You have signed in as ${props.login.username}`}</small>
+            :
             <small>{PAYMENT_PAGE.SIGN_IN_SIGN_UP_TO_CONTINUE}</small>
+            }
           </Col>
+          {props.login.username ?
           <Col md={4} sm={12} xs={12} className={styles['t-rt']}>
-            <span className={`${styles['light-gry-clr']} ${styles['fontW600']}`}>{props.login.username}</span>
-          </Col>
+            <span className={`${styles['light-gry-clr']} ${styles['fontW600']}`}>{props.login.username}&emsp;</span> 
+            <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']}`} onClick={props.onClickEdit}>
+              EDIT
+            </button>
+          </Col> : null
+          }
         </Row>
-
         <Row className={`${props.configJson.progress ? '' : 'hide'} ${styles['pb-5']} ${styles['pt-5']}`}>
-          <Col md={3} sm={5} xs={12} className={styles['landscape-socail-part']}>
+          <Col md={4} sm={5} xs={12} className={styles['landscape-socail-part']}>
             <h4 className={`${styles['mb-20']} ${styles['mt-0']} ${styles['light-gry-clr']}`}>{PAYMENT_PAGE.REGISTER}</h4>
             <div className={`${styles['thin-border-right']} ${styles['social-icons-list']}`}>
               <span className={`${styles['sub-title']} ${styles['fs-10']} ${styles['p-5']} ${styles['bg-white']}`}>{PAYMENT_PAGE.OR}</span>
-              <button className={`${styles['fp-btn']} ${styles['mb-20']} ${styles['fp-btn-primary']}`}>{PAYMENT_PAGE.SIGN_IN_WITH_FACEBOOK}</button>
-              <button className={`${styles['fp-btn']} ${styles['mb-20']} ${styles['fp-btn-danger']}`}>{PAYMENT_PAGE.SIGN_IN_WITH_GOOGLE}</button>
-              <button className={`${styles['fp-btn']} ${styles['fp-btn-sucess']}`}>{PAYMENT_PAGE.REGISTER_WITH_US}</button>
+              <button className={`${styles['fp-btn']} ${styles['mb-20']} ${styles['fp-btn-primary']} ${styles['facebook-btn']}`}>{PAYMENT_PAGE.SIGN_IN_WITH_FACEBOOK}</button>
+              <button className={`${styles['fp-btn']} ${styles['mb-20']} ${styles['fp-btn-danger']} ${styles['google-btn']}`}>{PAYMENT_PAGE.SIGN_IN_WITH_GOOGLE}</button>
+              <button className={`${styles['fp-btn']} ${styles['fp-btn-sucess']} ${styles['regist-btn']}`}>{PAYMENT_PAGE.REGISTER_WITH_US}</button>
             </div>
           </Col>
-          <Col md={8} sm={6} xs={12} className={`${styles['ml-30']} ${styles['landscape-login-part']}`}>
+          <Col md={8} sm={6} xs={12} className={`${styles['landscape-login-part']}`}>
             <h4 className={`${styles['mb-20']} ${styles['mt-0']} ${styles['light-gry-clr']}`}>{PAYMENT_PAGE.SIGN_IN}</h4>
             <div className={styles['sign-part']}>
               <div className={`${styles['fp-input']}`}>

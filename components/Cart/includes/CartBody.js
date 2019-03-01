@@ -11,6 +11,8 @@ import Wishlist from '../../Cam/Wishlist/';
 import { languageDefinations } from '../../../utils/lang/';
 import constants from '../../../constants';
 import { mergeCss } from '../../../utils/cssUtil';
+import { Router } from '../../../routes';
+
 const styles = mergeCss('components/Cart/cart');
 
 const CartBody = props => {
@@ -19,6 +21,10 @@ const CartBody = props => {
   const flag = data && items && items.length;
   const cnt = flag > 0 ? items.length : 0;
   const { CART_PAGE } = languageDefinations();
+
+  const routeChange = (variantId, productId, catalogId, itemType) => {
+    Router.pushRoute(`/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemType}`);
+  }
 
   return (
     <div className={styles['cart-container']}>
@@ -39,7 +45,11 @@ const CartBody = props => {
               <div>
                 {
                   items.map((item, index) => {
-                    const { item_id, img, name, price, cur, quantity, max_limit, inventory, brand_name, gift_info, shipping, warranty, total_amount } = item;
+                    const {
+                      item_id, img, name, price, cur, quantity, max_limit, inventory,
+                      brand_name, gift_info, shipping, warranty, total_amount,
+                      product_id, variant_id, itemType, catalogId
+                    } = item;
                     return (
                       <div key={item_id} className={`${styles['mb-20']} ${styles['box']}`}>
                         {
@@ -61,7 +71,12 @@ const CartBody = props => {
 
                           <Row>
                             <Col md={2} sm={2} className={styles['ipad-pr-0']}>
-                              <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles['pb-15']} ${styles['card-box-inn-img']}`}><img className={styles['img']} src={img} /></div>
+                              <div
+                                className={`${styles['flex-center']} ${styles['justify-center']} ${styles['pb-15']} ${styles['card-box-inn-img']}`}
+                                onClick={() => routeChange(variant_id, product_id, catalogId, itemType)}
+                              >
+                                <img className={styles['img']} src={img} />
+                              </div>
                               <CartStepper
                                 count={count}
                                 item={item}
@@ -76,7 +91,9 @@ const CartBody = props => {
                                   <h5 className={`${styles['mt-0']} ${styles['mb-0']}`}>{brand_name}</h5>
                                 </Col>
                                 <Col md={10} sm={10} className={styles['landscape-cart-details']}>
-                                  <h4 className={`${styles['fontW600']} ${styles['light-gry-clr']}`}>{name}</h4>
+                                  <h4 className={`${styles['fontW600']} ${styles['light-gry-clr']}`}>
+                                    <a onClick={() => routeChange(variant_id, product_id, catalogId, itemType)}>{name}</a>
+                                  </h4>
                                   <div className={`${styles['warranty-part']} ${styles['p-10']} ${styles['light-gry-clr']}`}>
                                     <p className={`${styles['fs-12']}`}><span>{CART_PAGE.WARRENTY} : </span><span className={`${styles['pl-10']} ${styles['pr-10']}`}>{warranty[0].duration} {CART_PAGE.WARRENTY_TXT} </span><a href="" className={`${styles['fontW600']}`}>{CART_PAGE.VIEW_MORE}</a></p>
                                     <p className={`${styles['mb-0']} ${styles['fs-12']}`}>

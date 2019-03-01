@@ -74,6 +74,7 @@ class Payments extends React.Component {
     this.handleLoyaltyBtn = this.handleLoyaltyBtn.bind(this);
     this.handleOffersDiscountsTab = this.handleOffersDiscountsTab.bind(this);
     this.handleShippingAddressContinue = this.handleShippingAddressContinue.bind(this);
+    this.onClickEdit = this.onClickEdit.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -113,6 +114,9 @@ class Payments extends React.Component {
   showAddressTab() {
     this.setState({ signInLoader: true });
     this.props.userLogin(this.state.login);
+    const paymentConfigJson = { ...this.state.paymentConfigJson };
+    paymentConfigJson['signIn'] = { basic: false, progress: false, done: true };
+    this.setState({paymentConfigJson});
   }
 
   inputOnChange(e) {
@@ -211,6 +215,12 @@ class Payments extends React.Component {
     });
   }
 
+  onClickEdit() {
+    const paymentConfigJson = { ...this.state.paymentConfigJson };
+    paymentConfigJson['signIn'] = { basic: false, progress: true, done: false };
+    this.setState({paymentConfigJson});
+  }
+
   render() {
     const { login, showTab, paymentConfigJson, signInLoader, editCartDetails } = this.state;
     const { paymentOptions, defaultAddress, isLoggedIn, cartResults } = this.props;
@@ -233,6 +243,7 @@ class Payments extends React.Component {
                 showAddressTab={this.showAddressTab}
                 inputOnChange={this.inputOnChange}
                 configJson={paymentConfigJson.signIn}
+                onClickEdit={this.onClickEdit}
               />
               <DeliveryAddress
                 defaultAddress={defaultAddress}
@@ -258,7 +269,7 @@ class Payments extends React.Component {
                 configJson={paymentConfigJson.payment}
               />
             </Col>
-            <Col md={3} xs={12} sm={12} className={`${styles['pl-5']} ${styles['landscape-pr-0']}`}>
+            <Col md={3} xs={12} sm={12} className={`${styles['pl-5']} ${styles['landscape-pr-0']} ${styles['m-p-l-15']}`}>
               <div>
                 {
                   cartResults && cartResults.total_price ?

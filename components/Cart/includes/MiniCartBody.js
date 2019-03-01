@@ -33,18 +33,18 @@ const MiniCartBody = props => {
               const { item_id, img,product_id, name, price, cur, quantity, max_limit, inventory, brand_name } = item;
               return (
                 <div key={item_id} className={`${styles['flex']} ${styles['pt-15']} ${styles['pb-15']} ${styles['border-b']} ${styles['min-items-list']}`}>
-                  <Col md={2} sm={2} className={`${styles['pl-0']} ${styles['pr-0']}`}>
+                  <Col md={2} sm={2} xs={2} className={`${styles['pl-0']} ${styles['pr-0']}`}>
                     <div className={`${styles['cart-container-img']} ${styles['flex']} ${styles['justify-center']}`}>
                       <img className={styles['img']} src={img} />
                     </div>
                   </Col>
-                  <Col md={10} sm={10} className={`${styles['pr-0']} ${styles['card-details-labels']}`}>
+                  <Col md={10} sm={10} xs={10} className={`${styles['pr-0']} ${styles['card-details-labels']}`}>
                     <div className={`${styles['flx-space-bw']}`}>
                       <h6 className={`${styles['m-0']} ${styles['card-details-name']}`}>{name}</h6>
                       {
                         editCartDetails
                           ?
-                          <span id={item_id} data-productId ={product_id} onClick={removeCartItem} className={`${styles['flex']} ${styles['min-delete-icon']}`}>
+                          <span id={item_id} data-productid={product_id} onClick={removeCartItem} className={`${styles['flex']} ${styles['min-delete-icon']}`}>
                             <a className={styles['flex']}>
                               <SVGComponent clsName={`${styles['delete-icon']}`} src="icons/delete-icon/delete-icon" />
                             </a>

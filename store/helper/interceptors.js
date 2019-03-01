@@ -68,20 +68,6 @@ const apmResInterceptor = (response) => {
 
 const errorInterceptor = (err) => {
   try {
-    if(env !== 'local') {
-      apm.setCustomContext({
-        response: {
-          status: err.response.status,
-          data: err.response.data,
-          headers: err.response.headers,
-        },
-        request: {
-          url: err.config.url,
-          headers: err.config.headers,
-        }
-      });
-      apm.captureError(err)
-    }
     if (err.response && err.response.status == '401') {
       const { refresh_token } =  cookies.get('auth') || {};
       if(refresh_token) {
@@ -91,7 +77,6 @@ const errorInterceptor = (err) => {
         }).then((res) => {
           return axios(err.config);
         }).catch((err) => {
-          alert('You are logged out, Login and try again');
           location.reload();
         });
       } else {
@@ -105,7 +90,7 @@ const errorInterceptor = (err) => {
 }
 
 axios.interceptors.request.use(_.compose(configModifer));
-// axios.interceptors.response.use(_.compose(apmResInterceptor), _.compose(errorInterceptor));
+axios.interceptors.response.use(null, _.compose(errorInterceptor));
 
 pimServiceInstance.interceptors.request.use(_.compose(
   (config) => {

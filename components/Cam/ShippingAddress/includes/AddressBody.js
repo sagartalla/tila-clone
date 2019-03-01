@@ -50,7 +50,7 @@ const AddressBody = (props) => {
                   <div className={styles['address-card-body']}>
                     <h5 className={`${styles['fontW600']} ${styles['m-0']} ${styles['mb-10']} ${styles['lgt-blue']}`}> {val.first_name + ' ' + val.last_name} </h5>
                     <address className={`${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['full-address-details']}`}>
-                      {val.address_line_1 + ', ' + val.address_line_2 + ', ' + val.city + ', ' + val.country}
+                      {val.address_line_1 + ', ' + val.address_line_2 + ', ' + val.city + ', ' + val.country_name}
                     </address>
                     <span className={`${styles['address-card-phone']} ${styles['fontW600']} ${styles['lgt-blue']}`}>
                       {val.mobile_country_code + ' ' + val.mobile_no}
@@ -78,7 +78,7 @@ const AddressBody = (props) => {
           })
         }
         <Col md={4} sm={12} xs={12}>
-          <div className={`${styles['address-card']} ${styles['address-card-new']} ${styles['p-20']}`} onClick={props.showAddAdrressForm}>
+          <div className={`${styles['address-card']} ${styles['address-card-new']} ${styles['p-20']}`} onClick={props.resetAddAdrressForm}>
             <div className={`${styles['flex-center']} ${styles['flex-wrap']}`}>
               <h5 className={`${styles['m-0']} ${styles['mb-10']} ${styles['thick-blue']} ${styles['fontW600']} ${styles['flex']}`}>
                 <SVGComponent clsName={`${styles['pls-icon']}`} src="icons/common-icon/plus-icon" />
@@ -86,7 +86,7 @@ const AddressBody = (props) => {
               </h5>
               <p className={`${styles['fs-12']} ${styles['thick-gry-clr']}`}>{DELIVERY_ADDR_PAGE.ADD_NEW_ADDR_TAG}</p>
               <p>
-                <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']} ${styles['small-btn']}`}>
+                <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['small-btn']}`}>
                   {DELIVERY_ADDR_PAGE.ADD_NEW_BTN}
                 </button>
               </p>
@@ -102,6 +102,7 @@ AddressBody.propTypes = {
   deleteAddr: PropTypes.func.isRequired,
   editAddress: PropTypes.func.isRequired,
   makeDefaultAddress: PropTypes.func.isRequired,
+  resetAddAdrressForm: PropTypes.func.isRequired,
   data: PropTypes.array
 };
 

@@ -188,3 +188,16 @@
     }
 }
 
+.top-banner-slider .slick-dots li {
+  width: initial;
+  color: #444444;
+}
+
+.top-banner-slider .slick-slider button {
+  display: none !important;
+}
+
+.top-banner-slider .slick-dots li.slick-active {
+  font-family: ProximaNova-SBold;
+  color: #000000;
+}
