@@ -27,8 +27,8 @@ const PaymentMode = props => {
   }
 
   const paymentPageIcons = {
-    "VOUCHER": '',
-    "REWARD_POINTS": '',
+    "VOUCHER": 'credit-card',
+    "REWARD_POINTS": 'credit-card',
     "PAY_ONLINE": 'credit-card',
     "GIFT_CARD": 'gift-card',
     "NET_BANKING": 'netbanking',

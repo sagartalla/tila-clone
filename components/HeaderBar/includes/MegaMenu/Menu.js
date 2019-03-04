@@ -54,7 +54,7 @@ class Menu extends Component {
               :
               null
             }
-            <Link route={`/srp/${childItem.displayName}-${childItem.id}?categoryTree=true&isListed=true`}>
+            <Link route={`/srp/${childItem.displayName}-${childItem.id}?categoryTree=true&isListed=false`}>
               <a className={`${styles['level-1-item']} ${depth === 1 ? styles['fontW600'] : {}}`}>{childItem.displayName}</a>
             </Link>
           </span>
