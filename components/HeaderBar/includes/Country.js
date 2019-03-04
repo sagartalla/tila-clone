@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Dropdown, MenuItem } from "react-bootstrap";
+import { Dropdown, MenuItem } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import _ from 'lodash';
@@ -19,7 +19,7 @@ class Country extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedItem: 'SAU'
+      selectedItem: 'SAU',
     };
     this.changeCountry = this.changeCountry.bind(this);
     this.storeCountry = this.storeCountry.bind(this);
@@ -27,18 +27,18 @@ class Country extends Component {
 
   componentDidMount() {
   	const country = cookies.get('country') || this.state.selectedItem;
-  	if(country){
+  	if (country) {
   	  this.setState({
-        selectedItem: country
+        selectedItem: country,
       });
   	}
   	this.props.setCountry(country);
-	}
+  }
 
   changeCountry(e) {
     const id = e.currentTarget.getAttribute('data-id')
     if(id===this.state.selectedItem){
-      return;
+      
     }else{
       confirm('Do you wish to change the country, the cart will change accordingly') ?
       this.setState({
@@ -61,11 +61,11 @@ class Country extends Component {
         <Dropdown.Toggle>
           <img src={img} title={name} />
         </Dropdown.Toggle>
-        <Dropdown.Menu className={styles['item']}>
+        <Dropdown.Menu className={styles.item}>
           {
-            _.map(countriesData, (country) => (
+            _.map(countriesData, country => (
               <MenuItem key={country.name} eventKey="1" onClick={this.changeCountry} data-id={country.id}>
-                <img src={country.img} title={country.name}/>
+                <img src={country.img} title={country.name} />
               </MenuItem>
             ))
           }
@@ -75,13 +75,11 @@ class Country extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-	return bindActionCreators(
+const mapDispatchToProps = (dispatch) => bindActionCreators(
 		{
 			setCountry: actionCreators.setCountry
 		},
 		dispatch,
 	);
-}
 
 export default connect(null, mapDispatchToProps)(Country);

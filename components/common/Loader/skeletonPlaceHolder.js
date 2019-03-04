@@ -1,90 +1,202 @@
-import {TextBlock,MediaBlock,TextRow,RectShape,RoundShape}
-from
-'react-placeholder/lib/placeholders';
+
 import 'react-placeholder/lib/reactPlaceholder.css';
 import { mergeCss } from '../../../utils/cssUtil';
+import Input from '../../common/commonInput/index';
+import Rectangle from '../../common/commonInput/RectangleShape';
 
-const styles = mergeCss('components/common/Loader/loader')
-
+const styles = mergeCss('components/common/Loader/loader');
+/* eslint-disable */
 export const searchPlaceHolder = (
-  <div className= 'search-placeholder container'>
+  <div style={{ overflow: 'hidden', maxHeight: '800px' }}>
+    <div className={
+    `${styles.container}`
+  }
+    />
     <div
-    className =
-      {
+      className={
         `${styles['filter-panel']} ${styles['border-radius4']}
-          ${styles['bg-white']} ${styles['col-md-2']}`
+          ${styles['bg-white']} col-md-2`
+      }
+    >
+      <Input style={{ height: 80 }} />
+      <div style={{ borderBottom: '1px solid #f7f5f5', marginBottom: '5px' }} />
+      {
+          [0, 1, 2, 3, 4, 5, 6, 7].map((el, i) => (
+            <div>
+              <div key={`rect_${i}`}>
+                <Input />
+              </div>
+              <div style={{ borderBottom: '1px solid #f7f5f5', marginBottom: '5px' }} />
+            </div>
+              ))
+          }
+    </div>
+    <div className={`${styles['search-results']} ${styles['p-0']} col-md-10`}>
+      <div style={{
+        display: 'flex', justifyContent: 'space-between', padding: 20,
+        }}
+      >
+        <Input
+        style={{
+              background: '#f7f5f5', height: '2em',
+              }}
+      />
+        <Input
+        style={{
+                background: '#f7f5f5', height: '2em',
+              }}
+      />
+      </div>
+      <div style={{
+            display: 'flex', padding: 20, background: '#ffff',
+        }}
+      >
+        <Input
+            style={{
+              background: '#f7f5f5', width: '85%', height: '2em',
+              }}
+          />
+        <Input
+            style={{
+                background: '#f7f5f5', width: '70%', height: '2em',
+              }}
+          />
+        <div style={{ borderRight: '1px solid #f7f5f5' }} />
+        <Input
+            style={{
+              background: '#f7f5f5', width: '65%', marginLeft: '40px', height: '2em',
+              }}
+          />
+        <Input
+            style={{
+                background: '#f7f5f5', height: '2em',
+              }}
+          />
+      </div>
+      <div className={
+        `${styles.flx}
+         ${styles['flex-center']} ${styles['mb-10']}
+         ${styles['border-radius4']} suggested-tags`
       }
       >
-      <TextBlock color='#E0E0E0' style={{padding:20}} rows={1} />
-      <TextBlock color='#E0E0E0' style={{borderRadius:4}} rows={8} />
-    </div>
-    <div className={`${styles['search-results']} ${styles['p-0']} ${styles['col-md-10']}`}>
-      <div className="flx-space-bw items-list-show">
-        <TextRow color='#f7f5f5' />
-        <TextRow color='#f7f5f5' />
-      </div>
-      <div className=
-      {
-        `${ styles['flx']}
-         ${ styles['flex-center']} ${styles['mb-20']}
-         ${styles['border-radius4']} suggested-tags`
-      }     >
-        <div style={{display:'flex',alignItems:'center', padding:20,width:'100%'}}>
-          <TextRow color='#f7f5f5' style={{height:'2em',width:'25%',marginRight:'1.5em',marginTop:0}}/>
-          <TextRow color='#f7f5f5' style={{height:'2em',width:'25%',marginRight:'1.5em',marginTop:0}}/>
-          <TextRow color='#f7f5f5' style={{height:'2em',width:'25%',marginRight:'1.5em',marginTop:0}}/>
+        <div style={{
+        display: 'flex', alignItems: 'center', padding: 20, width: '100%',
+        }}
+        >
+          <Input
+          style={{
+              width: '85%', marginRight: '1.5px', background: '#f7f5f5', height: '2em',
+
+              }}
+        />
+          <Input
+          color="blue"
+          style={{
+                width: '95%', marginRight: '1.5em', background: '#f7f5f5', height: '2em',
+              }}
+        />
+          <Input
+          style={{
+                width: '95%', marginRight: '1.5em', background: '#f7f5f5', height: '2em',
+              }}
+        />
         </div>
       </div>
-      <div className={`${styles['grid-cont']} ${styles['flex-wrp']} ${styles['flx']} result-box`} >
+      <div className={`${styles['grid-cont']} ${styles['flex-wrp']} ${styles.flx} result-box`} >
         {
-          [0,1,2,3].map(() => {
-            return [0,1,2,3].map((el,i) =>  (
-              <div key={'rect_'+i}>
-                <RectShape
-                  style={{width:268,marginBottom:20,marginRight:8,height:276,background:'#f7f5f5'}}
-                />
-                <TextRow
-                  color='#f7f5f5'
-                  style={{marginTop:0,marginBottom:5,marginLeft:5,height:'2em',width:'86%'}}
-                />
-                <TextRow
-                  color='#f7f5f5'
-                  style={{marginTop:0,marginBottom:10,marginLeft:5,height:'1.5em',width:'75%'}}
-                />
-              </div>
-              ))
-            })
+          [0, 1, 2, 3].map(() => [0, 1, 2, 3].map((el, i) => (
+            <div key={`rect_${i}`}>
+              <Rectangle />
+              <Input
+                style={{
+                        marginTop: 0, marginBottom: 5, marginLeft: 5, height: '2em', width: '86%',
+                        }}
+              />
+              <Input
+                style={{
+                        marginTop: 0, marginBottom: 35, marginLeft: 5, height: '1.5em', width: '75%',
+                        }}
+              />
+            </div>
+              )))
           }
       </div>
     </div>
   </div>
-)
-
+);
 export const productPlaceHolder = (
-  <div className="productPlaceHolder col-md-8">
-    <div style={{display:'flex',alignItems:'center', padding:20,width:'100%'}}>
-      <TextRow color='#f7f5f5' style={{height:'2em',width:'10%',marginRight:'1.5em',marginTop:0}}/>
-      <TextRow color='#f7f5f5' style={{height:'2em',width:'10%',marginRight:'1.5em',marginTop:0}}/>
-      <TextRow color='#f7f5f5' style={{height:'2em',width:'10%',marginRight:'1.5em',marginTop:0}}/>
-    </div>
+  <div style={{ display: 'flex' }}>
+  <div className={
+    `${styles.container}`
+  }
+    />
+  <div className="col-md-8">
+    <div style={{
+        display: 'flex', alignItems: 'center', padding: 20, width: '100%',
+        }}
+            >
+              <Input
+                style={{
+            height: '3em', width: '70%', marginTop: 0,
+            }}
+              />
+              <Input
+                style={{
+            height: '3em', width: '70%', marginTop: 0,
+            }}
+              />
+              <Input
+                style={{
+            height: '3em', width: '70%', marginTop: 0,
+        }}
+              />
+            </div>
     <div className={`${styles['display-item-wrap']}`}>
-      <RectShape
-        color='#f7f5f5'
-        style={{width:268,marginBottom:20,margin:'0 auto',height:350,background:'#f7f5f5',objectFit:'contain'}}
-      />
-    </div>
-    <div className={`${styles['flx']}`}>
-    <RectShape
-      color='#f7f5f5'
-      style={{width:68,marginBottom:20,marginRight:20,height:76,background:'#f7f5f5'}}
-    />
-    <RectShape
-      color='#f7f5f5'
-      style={{width:68,marginBottom:20,marginRight:20,height:76,background:'#f7f5f5'}}
-    />
-    <TextRow color='#f7f5f5' style={{height:'2em',width:'10%',marginRight:'2.5em',marginTop:25}}/>
-    <TextRow color='#f7f5f5' style={{height:'2em',width:'10%',marginRight:'2.5em',marginTop:25}}/>
-    </div>
+              <Rectangle
+                style={{
+                  width: '100%', height: '100%'
+                  }}
+              />
+            </div>
+    <div className={`${styles.flx} ${styles['align-center']}`}>
+              <Rectangle
+                style={{
+                  width: 400, marginBottom: 20, marginRight: 20, height: 76, marginTop: 20,
+        }}
+              />
+              <Rectangle
+                style={{
+                   width: 400, marginBottom: 20, marginRight: 20, height: 76, marginTop: 20,
+        }}
+              />
+              <Rectangle
+                style={{
+                   width: 400, marginBottom: 20, marginRight: 20, height: 76, marginTop: 20,
+              }}
+              />
+            </div>
   </div>
-)
-// export default searchPlaceHolder
+    <div className="productPlaceHolder col-md-4">
+      <div style={{
+            padding: 20, marginTop: '12%',
+          }}
+            >
+              <Rectangle
+                style={{
+                  width: '400px', height: '200px',
+                  }}
+              />
+              <Rectangle
+                style={{
+                  width: '400px', height: '200px',
+                  }}
+              />
+             <Rectangle
+                style={{
+                  width: '400px', height: '200px',
+                  }}
+              />
+            </div>
+  </div>
+  </div>
+);
