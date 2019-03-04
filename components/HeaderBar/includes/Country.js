@@ -38,7 +38,7 @@ class Country extends Component {
   changeCountry(e) {
     const id = e.currentTarget.getAttribute('data-id')
     if(id===this.state.selectedItem){
-      
+      return;
     }else{
       confirm('Do you wish to change the country, the cart will change accordingly') ?
       this.setState({
@@ -61,7 +61,7 @@ class Country extends Component {
         <Dropdown.Toggle>
           <img src={img} title={name} />
         </Dropdown.Toggle>
-        <Dropdown.Menu className={styles.item}>
+        <Dropdown.Menu className={styles['item']}>
           {
             _.map(countriesData, country => (
               <MenuItem key={country.name} eventKey="1" onClick={this.changeCountry} data-id={country.id}>
@@ -75,11 +75,13 @@ class Country extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => bindActionCreators(
+const mapDispatchToProps = (dispatch) => {
+	return bindActionCreators(
 		{
 			setCountry: actionCreators.setCountry
 		},
 		dispatch,
 	);
+}
 
 export default connect(null, mapDispatchToProps)(Country);
