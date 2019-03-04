@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-import ReactPlaceholder from 'react-placeholder';
 import 'react-placeholder/lib/reactPlaceholder.css';
 import { searchPlaceHolder, productPlaceHolder } from './skeletonPlaceHolder';
 
@@ -23,12 +22,7 @@ class SkeletonLoader extends Component {
     const { loadComponent, children, pathname } = this.props;
     return (
       <div>
-        <ReactPlaceholder
-          customPlaceholder={this.getPlaceHolder(pathname)}
-          ready={!loadComponent}
-        >
-          {children}
-        </ReactPlaceholder>
+        {!loadComponent ? children : this.getPlaceHolder(pathname)}
       </div>
     );
   }
