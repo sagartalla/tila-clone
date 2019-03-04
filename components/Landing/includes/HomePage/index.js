@@ -1,13 +1,3 @@
-import React from 'react';
-import { Grid, Row, Col } from 'react-bootstrap';
-import Slider from 'react-slick';
-import NoSSR from 'react-no-ssr';
-
-import SVGComponent from '../../../common/SVGComponet';
-import { mergeCss } from '../../../../utils/cssUtil';
-
-const styles = mergeCss('components/Landing/includes/HomePage/homepage');
-
 let sliderTBS,
   sliderTIE,
   sliderHAL,
