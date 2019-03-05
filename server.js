@@ -14,9 +14,11 @@ require('./utils/error-handle');
 const server = express();
 
 server.get('/', (req, res) => {
-  global.APP_LANGUAGE = (req.headers.cookie.match(/language=(.+?);/) || [])[1] || 'en';
-  global.APP_COUNTRY = (req.headers.cookie.match(/country=(.+?);/) || [])[1]|| 'SAU';
-  // if(req.originalUrl === '/') {
+  const cookieString = req.headers.cookie || '';
+  global.APP_LANGUAGE = (cookieString.match(/language=(.+?);/) || [])[1] || 'en';
+  global.APP_COUNTRY = (cookieString.match(/country=(.+?);/) || [])[1]|| 'SAU';
+  res.cookie('language', global.APP_LANGUAGE);
+  res.cookie('country', global.APP_COUNTRY);
   res.redirect(302, '/' + APP_COUNTRY + '/' + APP_LANGUAGE);
   // }
 });
