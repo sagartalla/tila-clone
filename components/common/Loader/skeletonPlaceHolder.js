@@ -1,5 +1,4 @@
 
-import 'react-placeholder/lib/reactPlaceholder.css';
 import { mergeCss } from '../../../utils/cssUtil';
 import Input from '../../common/commonInput/index';
 import Rectangle from '../../common/commonInput/RectangleShape';
@@ -136,7 +135,7 @@ export const productPlaceHolder = (
         }}>
         {
           [0, 1, 2].map((el, i) => (
-                <Input 
+                <Input
                   style={{
                     height: '3em', width: '50%', marginRight: '20px',
                 }}
@@ -152,7 +151,7 @@ export const productPlaceHolder = (
     <div className={`${styles.flx} ${styles['align-center']}`}>
           {
           [0, 1, 2].map((el, i) => (
-                <Rectangle 
+                <Rectangle
                 style={{
                   width: 400, marginBottom: 20, marginRight: 20, height: 76, marginTop: 20,
              }}
@@ -167,7 +166,7 @@ export const productPlaceHolder = (
           }}>
                {
           [0, 1, 2].map((el, i) => (
-                <Rectangle 
+                <Rectangle
                 style={{
                   width: '400px', height: '200px',
                   }}
