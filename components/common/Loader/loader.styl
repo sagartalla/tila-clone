@@ -1,0 +1,76 @@
+@import '../../../layout/main/executables.styl'
+.container {
+  position: absolute
+  width: 3%
+  height: 100%
+  background: #f7f5f5
+  -webkit-animation: mymove 3s ifinite; /* Safari 4.0 - 8.0 */
+  animation: mymove 3s infinite;
+  z-index: 9999
+  box-shadow: 4px 0px 16px 10px #f7f5f5;
+}
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes mymove {
+  from {left: 0px;}
+  to {left: 97%;}
+}
+
+@keyframes mymove {
+  from {left: 0px;}
+  to {left: 97%;}
+}
+
+
+.filter-panel
+  float left
+  width 17%
+  margin 17px
+  border 1px solid #e5e5e5
+  box-shadow 0 2px 7px 0 rgba(0,0,0,0,0.3)
+  position sticky
+  height 100vh
+  padding: 15px
+.panel-group .panel
+  margin-bottom 0
+  border-radius 4px
+.panel
+  box-shadow none
+.panel-default
+  border 0
+.search-results
+  float left
+  width calc(82% - 45px)
+.search-results .items-list-show
+  justify content space-between
+.flx-space-bw
+  justify-content space-between
+.flx
+  display flex
+.bg-white
+  background-color #fff
+.border-radius4
+  border-radius 4px
+.flex-center
+  align-items center
+.grid-cont
+  position relative
+  border 1px solid #fff
+  box-shadow 0 2px 7px 0 rgba(0,0,0,0.03)
+  background-color #fff
+  border-radius 10px
+.flex-wrp
+  flex-wrap wrap
+.suggested-tags .text-row
+  height:2em!important
+  width 25%!important
+  margin-right 1.5em!important
+  margin-top 0!important
+.result-box .text-row
+  height 2em!important
+.input-wrapper
+  background-color #E0E0E0
+.productPlaceHolder
+  margin-right 6%
+
+
