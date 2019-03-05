@@ -11,13 +11,19 @@ import SVGCompoent from '../../common/SVGComponet';
 import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Product/product');
 
-const ElectronicsTab = ({ catalog }) => {
+const ElectronicsTab = ({ catalog,productDescription }) => {
+  console.log(productDescription);
   return (
     <div>
       <Tabs defaultActiveKey={1}>
         <Tab eventKey={1} title="Overview">
           <OverView   catalog={catalog}/>
         </Tab>
+        {
+          productDescription && <Tab eventKey={2} title="Description">
+            <Description productDescription={productDescription} />
+          </Tab>
+        }
         {/*<Tab eventKey={2} title="Description">
           <Description />
         </Tab>
