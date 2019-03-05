@@ -14,11 +14,13 @@ const Landing = ({query}) => {
     <Fragment>
       <HeaderBar query={query} />
       {
-        'fashion': (<Fashion />),
-        'electronics': (<Electronics />),
-        'lifestyle': (<Lifestyle />),
-        'homepage': (<HomePage />),
-      }[category || 'homepage']
+        {
+          'fashion': (<Fashion />),
+          'electronics': (<Electronics />),
+          'lifestyle': (<Lifestyle />),
+          'homepage': (<HomePage />),
+        }[category || 'homepage']
+      }
       <FooterBar />
     </Fragment>
   )
