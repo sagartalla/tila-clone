@@ -8,14 +8,11 @@ const styles = mergeCss('components/common/commonInput/index');
 const Input = props => (
   <div
     className={
-        `${styles['input-wrapper']}`
+        `${styles.input}`
       }
-  >
-    <input
-      disabled
-      style={props.style}
-    />
-  </div>
+    style={props.style}
+
+  />
 );
 
 Input.propTypes = {

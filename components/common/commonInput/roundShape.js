@@ -7,7 +7,7 @@ const styles = mergeCss('components/common/commonInput/index');
 const Round = props => (
   <div
     className={
-        `${styles.dot}`
+        `${styles.round}`
       }
     style={props.style}
   />

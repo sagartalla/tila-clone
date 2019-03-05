@@ -5,16 +5,12 @@ import { searchPlaceHolder, productPlaceHolder } from './skeletonPlaceHolder';
 
 class SkeletonLoader extends Component {
   getPlaceHolder = (pathname) => {
-    switch (pathname) {
-      case '/search':
-        return searchPlaceHolder;
-        break;
-      case '/product':
-        return productPlaceHolder;
-      case '/srp':
-        return searchPlaceHolder;
-        break;
-      default:
+    if (pathname.split('/')[1] === 'search') {
+      return searchPlaceHolder;
+    } else if (pathname.split('/')[1] === 'product') {
+      return productPlaceHolder;
+    } else if (pathname.split('/')[1] === 'srp') {
+      return searchPlaceHolder;
     }
   }
 
@@ -22,7 +18,7 @@ class SkeletonLoader extends Component {
     const { loadComponent, children, pathname } = this.props;
     return (
       <div>
-        {!loadComponent ? children : this.getPlaceHolder(pathname)}
+        {loadComponent ? this.getPlaceHolder(pathname) : children}
       </div>
     );
   }
