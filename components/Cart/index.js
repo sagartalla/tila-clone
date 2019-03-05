@@ -80,7 +80,7 @@ class Cart extends Component {
   }
 
   increaseItemCnt(e) {
-    let productId =  e.target.getAttribute('data-productId')
+    let productId =  e.target.getAttribute('data-productid')
     digitalData.cart.item = digitalData.cart.item.map((item) => {
       if(item.productInfo.productID === productId) {
         item.quantity++
@@ -92,7 +92,7 @@ class Cart extends Component {
   }
 
   decreaseItemCnt(e) {
-    let productId =  e.target.getAttribute('data-productId')
+    let productId =  e.target.getAttribute('data-productid')
     digitalData.cart.item.forEach((item) => {
       if(item.productInfo.productID === productId) {
         item.quantity--;

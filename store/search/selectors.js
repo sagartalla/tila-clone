@@ -178,7 +178,9 @@ const getCategoryId = (store) => {
 const getQuery = (store) => {
   return store.searchReducer.data.searchDetails.query;
 }
-
+const getCategorySearchQuery = (store) => {
+  return store.searchReducer.data.searchDetails.choosenCategoryName
+}
 const optionParams = (store) => {
   let isListed = store.searchReducer.data;
   isListed = isListed ? isListed.hardCodedValues : true;
@@ -227,4 +229,4 @@ const getSuggestions = (store) => {
   return store.searchReducer.data.suggestions;
 }
 
-export { getSearchFilters, getSearchResutls, getPaginationDetails, getUIState, getCategoryId, getQuery, getFacetfilters, optionParams, getSearchBarFilterState, addCartAndWishlistDetails, getIsCategoryTree, getChoosenCategoryName, getAppliedFitlers, getSuggestions,getSpellCheckResponse };
+export { getSearchFilters, getSearchResutls, getPaginationDetails, getUIState, getCategoryId, getQuery, getCategorySearchQuery,getFacetfilters, optionParams, getSearchBarFilterState, addCartAndWishlistDetails, getIsCategoryTree, getChoosenCategoryName, getAppliedFitlers, getSuggestions,getSpellCheckResponse };

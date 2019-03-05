@@ -119,7 +119,7 @@ class TitleInfo extends Component {
                 {
                   totalInventoryCount < 5
                     ?
-                    <span className={`${styles['flex']} ${styles['fs-12']} ${styles['google-clr']} ${styles['fontW600']}`}>{PDP_PAGE.ONLY} {totalInventoryCount}{PDP_PAGE.LEFT_IN_STOCK}</span>
+                    <span className={`${styles['flex']} ${styles['fs-12']} ${styles['google-clr']} ${styles['fontW600']}`}>{PDP_PAGE.ONLY} {totalInventoryCount} {PDP_PAGE.LEFT_IN_STOCK}</span>
                     :
                     null
                 }

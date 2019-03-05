@@ -6,19 +6,19 @@ import FooterBar from '../Footer';
 import Fashion from './includes/Fashion';
 import Electronics from './includes/Electronics';
 import Lifestyle from './includes/Lifestyle';
+import HomePage from './includes/HomePage';
 
 const Landing = ({query}) => {
   const { category } = query;
   return (
     <Fragment>
       <HeaderBar query={query} />
-      {/*
-        {
-          'fashion': (<Fashion />),
-          'electronics': (<Electronics />),
-          'lifestyle': (<Lifestyle />),
-        }[category || 'electronics']
-      */}
+      {
+        'fashion': (<Fashion />),
+        'electronics': (<Electronics />),
+        'lifestyle': (<Lifestyle />),
+        'homepage': (<HomePage />),
+      }[category || 'homepage']
       <FooterBar />
     </Fragment>
   )

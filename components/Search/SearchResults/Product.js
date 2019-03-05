@@ -136,11 +136,10 @@ class Product extends Component {
     } = this.props;
     //route={`/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemtype}`}
     return (
-
       <div onClick = {() => this.routeChange(productId,variantId,catalogId,itemtype,index,pageNum)} >
         <Link route={`/${country}/${language}/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemtype}`}>
           <a>
-            <div className={`${styles['product-items-main']}`}>
+            <div className={`${styles['product-items-main']}`} onClick = {() => this.routeChange(productId,variantId,catalogId,itemtype,index,pageNum)}>
               <div className={`${styles['product-items']}`}>
                 <div className={`${styles['img-cont']} ${styles['border-radius4']} ${styles['relative']}`}>
                   <div className={styles['image-div']}>
@@ -258,7 +257,6 @@ class Product extends Component {
                   </div>*/}
                 </div>
               </div>
-            </div>
           </a>
         </Link>
       </div>

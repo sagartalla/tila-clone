@@ -43,10 +43,14 @@ class Search extends Component {
 
   submitQuery(e) {
     e.preventDefault();
+    if(!this.state.query) return false;
     // const { isCategoryTree } = this.props;
     digitalData.page.pageInfo['onsiteSearchTerm'] = this.state.query
     this.fireCustomEventClick();
     const flushFilters = true;
+
+    this.fireCustomEventClick();
+
     this.setState({
       searchInput: false
     });

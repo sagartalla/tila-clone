@@ -12,6 +12,7 @@ routes
   .add({ name: 'thankyou', pattern: '/:country/:language/thankyou/:orderId/:status(SUCCESSFUL|FAILED)', page: 'thankyou' })
   .add({ name: 'landing', pattern: '/:country/:language/landing/:category', page: 'index'})
   .add({ name: 'search', pattern: '/:country/:language/srp/:category?/:subCategory?', page: 'search' })
+  .add({ name: 'policy', pattern: '/:country/:language/policy/:name', page: 'policy' })
   .add({ name: 'default', pattern: '/:country/:language', page: 'index'})
   ;
 

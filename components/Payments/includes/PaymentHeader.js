@@ -16,7 +16,7 @@ const PaymentHeader = props => (
           </div>
         </Col>
         <Col md={4}>
-          <ActionBar />
+          <ActionBar hideCountry={true}/>
         </Col>
       </Row>
     </Grid>

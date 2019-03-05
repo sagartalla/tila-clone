@@ -45,7 +45,7 @@ const userLogout = () => {
 const getLoginInfo = () => {
   const userCreds = cookies.get('userCreds');
   return {
-    userCreds: userCreds ? userCreds.username : '',
+    userCreds: userCreds || null,
     isLoggedIn: !!cookies.get('auth'),
   };
 }
