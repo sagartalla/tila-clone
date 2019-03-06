@@ -351,7 +351,7 @@ export const EN_KEYWORDS = {
     'CONTACT_US': 'Contact Us',
     'POLICY': 'POLICY',
     'TERMS_CONDITION': 'User Terms and Conditions',
-    'REFUND_POLICY': 'Returns,Exchanges,Cancellation & Refund policy',
+    'REFUND_POLICY': 'Return and Exchange Policy',
     'WARRENTY_POLICY': 'Warranty Policy',
     'SHIPPING_POLICY': 'Shipping Policy ',
     'SELL_ON_TILA': 'Selling on TiLa.com',

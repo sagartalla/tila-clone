@@ -14,14 +14,11 @@ const tbs = [{
 }, {
   img: '/static/img/landing-home/shirt.jpg',
   title: 'SHIRTS'
-}, {
-  img: '/static/img/landing-home/mac.jpg',
-  title: 'MAC'
 }];
 
 const tie = [{
   img: '/static/img/landing-home/Mobiles.png',
-  title: 'Mobile'
+  title: 'Mobiles'
 }, {
   img: '/static/img/landing-home/Laptops.png',
   title: 'Laptops'
@@ -33,13 +30,13 @@ const tie = [{
   title: 'Cameras'
 }, {
   img: '/static/img/landing-home/television.png',
-  title: 'Television'
+  title: 'Televisions'
 }, {
   img: '/static/img/landing-home/home-appliances.png',
   title: 'Home Appliances'
 }, {
-  img: '/static/img/landing-home/home-appliances.png',
-  title: 'Home Appliances'
+  img: '/static/img/landing-home/storage-devices.png',
+  title: 'Storage Devices'
 }];
 
 const hal = [{
@@ -61,8 +58,8 @@ const hal = [{
   img: '/static/img/landing-home/perfumes.png',
   title: 'Perfumes'
 }, {
-  img: '/static/img/landing-home/perfumes.png',
-  title: 'Perfumes'
+  img: '/static/img/landing-home/jewellery.png',
+  title: 'Jewellery'
 }];
 
 const d_tie = ['static/img/landing-home/d-laptops.png', 'static/img/landing-home/d-mobiles.png', 'static/img/landing-home/d-cameras.png', 'static/img/landing-home/d-kitchen.png', 'static/img/landing-home/d-audio.png'];
@@ -159,12 +156,15 @@ const twoCols = [{
 
 const threeCols = [{
   img: '/static/img/landing-home/shoes.jpg',
+  link: 'https://storefront-stage.fptechscience.com/srp/footwear-1101/?isListed=false&language=en&search=Shoe',
   title: 'Shoes'
 }, {
   img: '/static/img/landing-home/ls2.jpg',
+  link: 'https://storefront-stage.fptechscience.com/srp?disableSpellCheck=true&isListed=false&language=en&search=helmet',
   title: 'LS2'
 }, {
   img: '/static/img/landing-home/furniture.jpg',
+  link: 'https://storefront-stage.fptechscience.com/srp?isListed=false&language=en&search=Furniture',
   title: 'Furniture'
 }];
 
@@ -215,8 +215,42 @@ function SampleNextArrow(props) {
 }
 
 const b_d_b = {
-  'Mobiles': 'https://storefront-stage.fptechscience.com/srp?search=Mobiles&language=en&isListed=false', 'Clothing': 'https://storefront-stage.fptechscience.com/srp?isListed=false&language=en&search=Clothing', 'Clothing Accessories': 'https://storefront-stage.fptechscience.com/srp?search=Clothing&language=en&isListed=false', Laptops: 'https://storefront-stage.fptechscience.com/srp/laptop-1173/?search=Laptops&language=en&isListed=false', 'Storage Devices': 'https://storefront-stage.fptechscience.com/srp?search=Storage&language=en&isListed=false', 'Cameras': 'https://storefront-stage.fptechscience.com/srp?search=Camera&language=en&isListed=false', Television: 'https://storefront-stage.fptechscience.com/srp/Televisions-878?categoryTree=true&isListed=false', 'Home Appliances': 'https://storefront-stage.fptechscience.com/srp?search=Home%20Appliances&language=en&isListed=false', 'Womens Clothing': 'https://storefront-stage.fptechscience.com/srp/Clothing-910?categoryTree=true&isListed=false', 'Mens Clothing': 'https://storefront-stage.fptechscience.com/srp/Clothing-899?categoryTree=true&isListed=false', 'Fashion Accessories': 'https://storefront-stage.fptechscience.com/srp?isListed=false&language=en&search=Fashion%20Accessories', Watches: 'https://storefront-stage.fptechscience.com/srp/watches-1128/?isListed=false&language=en&search=Watch', 'Kitchen Appliances': 'https://storefront-stage.fptechscience.com/srp?isListed=false&language=en&search=Kitchen%20Appliances', Speakers: 'https://storefront-stage.fptechscience.com/srp?isListed=false&language=en&search=Speaker', 'Microwave Ovens': 'https://storefront-stage.fptechscience.com/srp?isListed=false&language=en&search=Microwave%20oven', 'Smart Watch': 'https://storefront-stage.fptechscience.com/srp?isListed=false&language=en&search=Smart%20Watch', 'Mobile Accessories': 'https://storefront-stage.fptechscience.com/srp?isListed=false&language=en&search=Mobile%20Accessories\t\t\t\t\t\t\t\t\t\t\t\t\t', "Kid's Fashion": 'https://storefront-stage.fptechscience.com/srp?isListed=false&language=en&search=Kids', 'Footwear': 'https://storefront-stage.fptechscience.com/srp/Footwear-921?categoryTree=true&isListed=false&language=en', "Men's Footwear": 'https://storefront-stage.fptechscience.com/srp/Footwear-921?categoryTree=true&isListed=false&language=en', 'Women Footwear': 'https://storefront-stage.fptechscience.com/srp/Footwear-921?categoryTree=true&isListed=false&language=en', 'Bags': 'https://storefront-stage.fptechscience.com/srp/Backpack-926?categoryTree=true&isListed=false&language=en', Eyewear: 'https://storefront-stage.fptechscience.com/srp?isListed=false&language=en&search=eyewear', Jewellery: 'https://storefront-stage.fptechscience.com/srp?isListed=false&language=en&search=Jewellery', GUESS: 'https://storefront-stage.fptechscience.com/srp/womens-clothing-1056/?isListed=false&language=en&search=guess', 'FENDI': 'https://storefront-stage.fptechscience.com/srp/watches-1128/?isListed=false&language=en&search=FENDI', 'MORPHY RICHARDS': 'https://storefront-stage.fptechscience.com/srp/home-kitchen-appliances-1010/?isListed=false&language=en&search=morphy%20richards', SHIRTS: 'https://storefront-stage.fptechscience.com/srp?search=shirts&language=en&isListed=false', 'Perfumes': 'https://storefront-stage.fptechscience.com/srp?isListed=false&language=en&search=FENDI', 'Shoes': 'https://storefront-stage.fptechscience.com/srp/footwear-1101/?isListed=false&language=en&search=Shoe', Lights: 'https://storefront-stage.fptechscience.com/srp?isListed=false&language=en&search=Lights'
+  Mobiles: 'https://storefront-stage.fptechscience.com/srp?search=Mobiles&language=en&isListed=false',
+  Clothing: 'https://storefront-stage.fptechscience.com/srp?isListed=false&language=en&search=Clothing',
+  'Clothing Accessories': 'https://storefront-stage.fptechscience.com/srp?search=Clothing&language=en&isListed=false',
+  Laptops: 'https://storefront-stage.fptechscience.com/srp/laptop-1173/?search=Laptops&language=en&isListed=false',
+  'Storage Devices': 'https://storefront-stage.fptechscience.com/srp?search=Storage&language=en&isListed=false',
+  Cameras: 'https://storefront-stage.fptechscience.com/srp?search=Camera&language=en&isListed=false',
+  Televisions: 'https://storefront-stage.fptechscience.com/srp/Televisions-878?categoryTree=true&isListed=false',
+  'Home Appliances': 'https://storefront-stage.fptechscience.com/srp?search=Home%20Appliances&language=en&isListed=false',
+  'Womens Clothing': 'https://storefront-stage.fptechscience.com/srp/Clothing-910?categoryTree=true&isListed=false',
+  'Mens Clothing': 'https://storefront-stage.fptechscience.com/srp/Clothing-899?categoryTree=true&isListed=false',
+  'Fashion Accessories': 'https://storefront-stage.fptechscience.com/srp?isListed=false&language=en&search=Fashion%20Accessories',
+  Watches: 'https://storefront-stage.fptechscience.com/srp/watches-1128/?isListed=false&language=en&search=Watch',
+  'Kitchen Appliances': 'https://storefront-stage.fptechscience.com/srp?isListed=false&language=en&search=Kitchen%20Appliances',
+  Speakers: 'https://storefront-stage.fptechscience.com/srp?isListed=false&language=en&search=Speaker',
+  'Microwave Ovens': 'https://storefront-stage.fptechscience.com/srp?isListed=false&language=en&search=Microwave%20oven',
+  'Smart Watch': 'https://storefront-stage.fptechscience.com/srp?isListed=false&language=en&search=Smart%20Watch',
+  'Mobile Accessories': 'https://storefront-stage.fptechscience.com/srp?isListed=false&language=en&search=Mobile%20Accessories\t\t\t\t\t\t\t\t\t\t\t\t\t',
+  "Kid's Fashion": 'https://storefront-stage.fptechscience.com/srp?isListed=false&language=en&search=Kids',
+  Footwear: 'https://storefront-stage.fptechscience.com/srp/Footwear-921?categoryTree=true&isListed=false&language=en',
+  "Men's Footwear": 'https://storefront-stage.fptechscience.com/srp/Footwear-921?categoryTree=true&isListed=false&language=en',
+  'Women Footwear': 'https://storefront-stage.fptechscience.com/srp/Footwear-921?categoryTree=true&isListed=false&language=en',
+  Bags: 'https://storefront-stage.fptechscience.com/srp/Backpack-926?categoryTree=true&isListed=false&language=en',
+  Eyewear: 'https://storefront-stage.fptechscience.com/srp?isListed=false&language=en&search=eyewear',
+  Jewellery: 'https://storefront-stage.fptechscience.com/srp?isListed=false&language=en&search=Jewellery',
+  GUESS: 'https://storefront-stage.fptechscience.com/srp/womens-clothing-1056/?isListed=false&language=en&search=guess',
+  FENDI: 'https://storefront-stage.fptechscience.com/srp/watches-1128/?isListed=false&language=en&search=FENDI',
+  'MORPHY RICHARDS': 'https://storefront-stage.fptechscience.com/srp/home-kitchen-appliances-1010/?isListed=false&language=en&search=morphy%20richards',
+  SHIRTS: 'https://storefront-stage.fptechscience.com/srp?search=shirts&language=en&isListed=false',
+  Perfumes: 'https://storefront-stage.fptechscience.com/srp?disableSpellCheck=true&isListed=false&language=en&search=perfume',
+  Shoes: 'https://storefront-stage.fptechscience.com/srp/footwear-1101/?isListed=false&language=en&search=Shoe',
+  Lights: 'https://storefront-stage.fptechscience.com/srp?isListed=false&language=en&search=Lights',
+  lamps: 'https://storefront-stage.fptechscience.com/srp?isListed=false&language=en&search=lamps',
+  bedding: 'https://storefront-stage.fptechscience.com/srp?isListed=false&language=en&search=Bedding%20Set',
+  furniture: 'https://storefront-stage.fptechscience.com/srp?isListed=false&language=en&search=Furniture'
 };
+
 const HomePage = () => React.createElement(
   NoSSR,
   null,
@@ -665,9 +699,13 @@ const HomePage = () => React.createElement(
         'div',
         { className: `${styles.breadcrums} ${styles['mt-10']} ${styles.pointer}` },
         React.createElement(
-          'span',
-          null,
-          'Mobiles  |  Laptops  |  Speakers  |  Cameras  |  Microwave Ovens  |  Smartwatch  |  Lights & Lamps  & more\u2026'
+          'a',
+          { href: 'https://storefront-stage.fptechscience.com/landing/fashion' },
+          React.createElement(
+            'span',
+            null,
+            'Men\'s Clothing| Women\'s Clothing| Kid\'s Clothing| Footwear| Jewellery| Eyewear & More\u2026'
+          )
         )
       )
     ),
@@ -677,7 +715,11 @@ const HomePage = () => React.createElement(
       threeCols.map(col => React.createElement(
         Col,
         { md: 4, xs: 4, sm: 4 },
-        React.createElement('img', { src: col.img, alt: col.title })
+        React.createElement(
+          'a',
+          { href: col.link },
+          React.createElement('img', { src: col.img, alt: col.title })
+        )
       ))
     ),
     React.createElement(
@@ -709,9 +751,13 @@ const HomePage = () => React.createElement(
             )
           ),
           React.createElement(
-            'div',
-            { className: 'shadow' },
-            React.createElement('img', { src: d_tihl[0], className: 'img-responsive' })
+            'a',
+            { href: b_d_b['furniture'] },
+            React.createElement(
+              'div',
+              { className: 'shadow' },
+              React.createElement('img', { src: d_tihl[0], className: 'img-responsive' })
+            )
           ),
           React.createElement(
             'div',
@@ -741,6 +787,7 @@ const HomePage = () => React.createElement(
               'FROM SAR 200'
             )
           ),
+          React.createElement('a', { href: b_d_b['furniture'] }),
           React.createElement(
             'div',
             { className: 'shadow' },
@@ -779,9 +826,13 @@ const HomePage = () => React.createElement(
             )
           ),
           React.createElement(
-            'div',
-            { className: 'shadow' },
-            React.createElement('img', { src: d_tihl[2], className: 'img-responsive' })
+            'a',
+            { href: b_d_b['lamps'] },
+            React.createElement(
+              'div',
+              { className: 'shadow' },
+              React.createElement('img', { src: d_tihl[2], className: 'img-responsive' })
+            )
           ),
           React.createElement(
             'div',
@@ -812,9 +863,13 @@ const HomePage = () => React.createElement(
             )
           ),
           React.createElement(
-            'div',
-            { className: 'shadow' },
-            React.createElement('img', { src: d_tihl[3], className: 'img-responsive' })
+            'a',
+            { href: b_d_b['bedding'] },
+            React.createElement(
+              'div',
+              { className: 'shadow' },
+              React.createElement('img', { src: d_tihl[3], className: 'img-responsive' })
+            )
           ),
           React.createElement(
             'div',
@@ -849,9 +904,13 @@ const HomePage = () => React.createElement(
             )
           ),
           React.createElement(
-            'div',
-            { className: 'shadow' },
-            React.createElement('img', { src: d_tihl[4], className: 'img-responsive' })
+            'a',
+            { href: b_d_b['Lights'] },
+            React.createElement(
+              'div',
+              { className: 'shadow' },
+              React.createElement('img', { src: d_tihl[4], className: 'img-responsive' })
+            )
           ),
           React.createElement(
             'div',
@@ -867,7 +926,7 @@ const HomePage = () => React.createElement(
       ),
       React.createElement(
         'div',
-        { className: ` breadcrums ${styles['mt-10']} ${styles.pointer}` },
+        { className: `${styles['breadcrums']} ${styles['mt-10']} ${styles['pointer']}` },
         React.createElement(
           'a',
           { href: 'https://storefront-stage.fptechscience.com/landing/lifestyle?language=en' },
@@ -1101,9 +1160,13 @@ const HomePage = () => React.createElement(
         'div',
         { className: `${styles.breadcrums} ${styles['mt-10']} ${styles.pointer}` },
         React.createElement(
-          'span',
-          null,
-          'Mobiles  |  Laptops  |  Speakers  |  Cameras  |  Microwave Ovens  |  Smartwatch  |  Lights & Lamps  & more\u2026'
+          'a',
+          { href: 'https://storefront-stage.fptechscience.com/landing/electronics?language=en' },
+          React.createElement(
+            'span',
+            null,
+            'Mobiles  |  Laptops  |  Speakers  |  Cameras  |  Microwave Ovens  |  Smartwatch  |  Lights & Lamps  & more\u2026'
+          )
         )
       )
     ),
