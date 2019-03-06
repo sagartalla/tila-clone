@@ -8,8 +8,10 @@ const cookies = new Cookies();
 
 const userLogin = (params) => {
   return axios.post(`/api/login`, Object.assign({}, params, {
-    type: 'CUSTOMER',
-    authVersion: 'V1'
+    authVersion: 'V1',
+    tenant: 'CUSTOMER',
+    type: 'RT',
+    client_type: 'WEB'
   })).then(({data, status}) => {
     // cart merge
     if(status === 200) {
@@ -33,8 +35,13 @@ const userLogin = (params) => {
         return data;
       });
     }
+  }).catch(err => {
+    alert(err.response.data.data.error.message);
+    throw err;
   });
 }
+
+const userSocialLogin = (params) => axios.post(`${constants.AUTH_API_URL}/api/v1/sls/auth`, params);
 
 const userRegister = (params) => axios.post(`${constants.CMS_API_URL}/api/v1/user/register`, params);
 
@@ -47,6 +54,7 @@ const getLoginInfo = () => {
   return {
     userCreds: userCreds || null,
     isLoggedIn: !!cookies.get('auth'),
+    ...(!cookies.get('auth') && {instagramCode:  window.localStorage.getItem('instagramCode') || null}),
   };
 }
 
@@ -109,4 +117,4 @@ const savePtaToken = (ptaToken) => {
   }).then(() => ptaToken);
 }
 
-export default { userLogin, userRegister, userLogout, getLoginInfo, setCountry, setSessionID, deriveCity, autoCompleteCity, setCity, removeCity, setLanguage, savePtaToken, savePtaToken };
+export default { userLogin, userSocialLogin, userRegister, userLogout, getLoginInfo, setCountry, setSessionID, deriveCity, autoCompleteCity, setCity, removeCity, setLanguage, savePtaToken, savePtaToken };
