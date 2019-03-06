@@ -448,7 +448,7 @@ const HomePage = () => (
         <div className={`${styles['fs-20']} title`}>BEST OF HOME & LIVING</div>
         <div className="d1">
           <div>
-            <span className={styles['fs-20']}><span className="lite">Kids Fashion</span><span className={styles.bold}>UP TO 50% OFF</span></span>
+            <span className={styles['fs-20']}><span className="lite">Kids Furniture</span><span className={styles.bold}>UP TO 50% OFF</span></span>
             <div className="shadow"><img src={d_tihl[0]} className="img-responsive" /></div>
             <div className="btn">
               <span>SHOP NOW</span>
@@ -456,7 +456,7 @@ const HomePage = () => (
             </div>
           </div>
           <div>
-            <span className={styles['fs-20']}><span className="lite">Women Clothing</span><span className={styles.bold}>UP TO 50% OFF</span></span>
+            <span className={styles['fs-20']}><span className="lite">Living Room Furniture</span><span className={styles.bold}>FROM SAR 200</span></span>
             <div className="shadow"><img src={d_tihl[1]} className="img-responsive" /></div>
             <div className="btn">
               <span>SHOP NOW</span>
@@ -466,7 +466,7 @@ const HomePage = () => (
         </div>
         <div className="d2">
           <div>
-            <span className={styles['fs-20']}><span className="lite">Shoes</span><span className={styles.bold}>UP TO 50% OFF</span></span>
+            <span className={styles['fs-20']}><span className="lite">Lamps</span><span className={styles.bold}>UP TO 50% OFF</span></span>
             <div className="shadow"><img src={d_tihl[2]} className="img-responsive" /></div>
             <div className="btn">
               <span>SHOP NOW</span>
@@ -474,7 +474,7 @@ const HomePage = () => (
             </div>
           </div>
           <div>
-            <span className={styles['fs-20']}><span className="lite">Watches</span><span className={styles.bold}>UP TO 50% OFF</span></span>
+            <span className={styles['fs-20']}><span className="lite">Cushions</span><span className={styles.bold}>UP TO 50% OFF</span></span>
             <div className="shadow"><img src={d_tihl[3]} className="img-responsive" /></div>
             <div className="btn">
               <span>SHOP NOW</span>
@@ -484,7 +484,7 @@ const HomePage = () => (
         </div>
         <div className="d3">
           <div>
-            <span className={styles['fs-20']}><span className="lite">Men Clothing</span><span className={styles.bold}>UP TO 50% OFF</span></span>
+            <span className={styles['fs-20']}><span className="lite">Lights</span><span className={styles.bold}>FROM SAR 200</span></span>
             <div className="shadow"><img src={d_tihl[4]} className="img-responsive" /></div>
             <div className="btn">
               <span>SHOP NOW</span>
@@ -514,7 +514,7 @@ const HomePage = () => (
               <span className={styles['fs-20']}><span className="lite">Laptops</span><span className={styles.bold}>UP TO 50% OFF</span></span>
               <a href={b_d_b.Laptops}>
                 <div className="shadow">
-                  <img src={d_tie[0]} className={styles['img-responsive']} />
+                  <img src={d_tie[0]} className="img-responsive" />
                 </div>
               </a>
               <div className="btn">
@@ -528,7 +528,7 @@ const HomePage = () => (
               </span>
               <a href={b_d_b.Mobiles}>
                 <div className="shadow">
-                  <img src={d_tie[1]} className={styles['img-responsive']} />
+                  <img src={d_tie[1]} className="img-responsive" />
                 </div>
               </a>
               <div className="btn">
@@ -542,7 +542,7 @@ const HomePage = () => (
               <span className={styles['fs-20']}><span className="lite">Camara</span><span className={styles.bold}>UP TO 50% OFF</span></span>
               <a href={b_d_b.Cameras}>
                 <div className="shadow">
-                  <img src={d_tie[2]} className={styles['img-responsive']} />
+                  <img src={d_tie[2]} className="img-responsive" />
                 </div>
               </a>
               <div className="btn">
@@ -554,7 +554,7 @@ const HomePage = () => (
               <span className={styles['fs-20']}><span className="lite">Kitchen Appliances</span><span className={styles.bold}>UP TO 50% OFF</span></span>
               <a href={b_d_b['Kitchen Appliances']}>
                 <div className="shadow">
-                  <img src={d_tie[3]} className={styles['img-responsive']} />
+                  <img src={d_tie[3]} className="img-responsive" />
                 </div>
               </a>
               <div className="btn">
@@ -568,7 +568,7 @@ const HomePage = () => (
               <span className={styles['fs-20']}><span className="lite">Audio Devices</span><span className={styles.bold}>UP TO 50% OFF</span></span>
               <a href={b_d_b.Speakers}>
                 <div className="shadow">
-                  <img src={d_tie[4]} className={styles['img-responsive']} />
+                  <img src={d_tie[4]} className="img-responsive" />
                 </div>
               </a>
               <div className="btn">

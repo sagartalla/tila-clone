@@ -6,9 +6,6 @@ import getConfig from 'next/config';
 import Slider from 'react-slick';
 import NoSSR from 'react-no-ssr';
 
-const config = getConfig()
-const isLocal = config.publicRuntimeConfig.isLocal;
-
 import HeaderBar from '../HeaderBar';
 import FooterBar from '../Footer';
 import RemoteComponent from '../common/RemoteComponent';
@@ -17,7 +14,10 @@ import RemoteComponent from '../common/RemoteComponent';
 import SVGComponent from '../common/SVGComponet';
 import { mergeCss } from '../../utils/cssUtil';
 
-const hompePageStyles = mergeCss('components/Landing/includes/HomePage/homepage');
+const config = getConfig()
+const isLocal = config.publicRuntimeConfig.isLocal;
+
+const allStyles = mergeCss('components/Landing/index');
 
 
 /*
@@ -41,21 +41,44 @@ RemoteComponent.loadRemoteComponents(remoteComponents)
   console.log("Something went wrong: " + err);
 });
 */
-var remoteComponents = {
+let remoteComponents = {
   fashion: {
     name: 'Fashion',
-    src: '',
-    context: {}
+    src: isLocal ? 'http://localhost:8000/Fashion/index.js' : 'https://s3.ap-south-1.amazonaws.com/tila.com/test/index.js',
+    styles: isLocal ? 'http://localhost:8000/Fashion/style.css' : 'https://s3.ap-south-1.amazonaws.com/tila.com/test/style.css',
+    context: {
+      React,
+      Grid,
+      Row,
+      Col,
+      SVGComponent,
+      styles: allStyles,
+    },
   },
-  electronics : {
+  electronics: {
     name: 'Electronics',
-    src: '',
-    context: {}
+    src: isLocal ? 'http://localhost:8000/Electronics/index.js' : 'https://s3.ap-south-1.amazonaws.com/tila.com/test/index.js',
+    styles: isLocal ? 'http://localhost:8000/Electronics/style.css' : 'https://s3.ap-south-1.amazonaws.com/tila.com/test/style.css',
+    context: {
+      React,
+      Grid,
+      Row,
+      Col,
+      SVGComponent,
+      styles: allStyles,
+    },
   },
   lifestyle: {
     name: 'Lifestyle',
-    src: '',
-    context: {}
+    src: isLocal ? 'http://localhost:8000/Lifestyle/index.js' : 'https://s3.ap-south-1.amazonaws.com/tila.com/test/index.js',
+    styles: isLocal ? 'http://localhost:8000/Lifestyle/style.css' : 'https://s3.ap-south-1.amazonaws.com/tila.com/test/style.css',
+    context: {
+      React,
+      Grid,
+      Col,
+      SVGComponent,
+      styles: allStyles,
+    },
   },
   homepage: {
     name: 'HomePage',
@@ -69,9 +92,9 @@ var remoteComponents = {
       Slider,
       NoSSR,
       SVGComponent,
-      styles: hompePageStyles
-    }
-  }
+      styles: allStyles,
+    },
+  },
 };
 
 class Landing extends Component {
@@ -79,16 +102,15 @@ class Landing extends Component {
     super(props);
     this.state = {};
   }
-  componentDidMount() {
-    const { query } = this.props;
-    const { category } = query;
+  componentWillReceiveProps(newProps) {
+    const { category } = newProps.query;
     RemoteComponent.loadRemoteComponents([remoteComponents[category || 'homepage']])
-    .then((children) => {
-      this.setState({
-        children,
-      });
-    })
-    .catch(function(err) {
+      .then((children) => {
+        this.setState({
+          children,
+        });
+      })
+      .catch((err) => {
       console.log("Something went wrong: " + err);
     });
   }
@@ -99,13 +121,11 @@ class Landing extends Component {
       <Fragment>
         <HeaderBar query={query} />
         {
-          _.map(this.state.children, (child, index) => {
-            return React.createElement(child.name, _.merge(child.props, {key: index}))
-          })
+          _.map(this.state.children, (child, index) => React.createElement(child.name, _.merge(child.props, {key: index})))
         }
         <FooterBar />
       </Fragment>
-    )
+    );
   }
 }
 

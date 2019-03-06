@@ -700,7 +700,7 @@ const HomePage = () => React.createElement(
             React.createElement(
               'span',
               { className: 'lite' },
-              'Kids Fashion'
+              'Kids Furniture'
             ),
             React.createElement(
               'span',
@@ -733,12 +733,12 @@ const HomePage = () => React.createElement(
             React.createElement(
               'span',
               { className: 'lite' },
-              'Women Clothing'
+              'Living Room Furniture'
             ),
             React.createElement(
               'span',
               { className: styles.bold },
-              'UP TO 50% OFF'
+              'FROM SAR 200'
             )
           ),
           React.createElement(
@@ -770,7 +770,7 @@ const HomePage = () => React.createElement(
             React.createElement(
               'span',
               { className: 'lite' },
-              'Shoes'
+              'Lamps'
             ),
             React.createElement(
               'span',
@@ -803,7 +803,7 @@ const HomePage = () => React.createElement(
             React.createElement(
               'span',
               { className: 'lite' },
-              'Watches'
+              'Cushions'
             ),
             React.createElement(
               'span',
@@ -840,12 +840,12 @@ const HomePage = () => React.createElement(
             React.createElement(
               'span',
               { className: 'lite' },
-              'Men Clothing'
+              'Lights'
             ),
             React.createElement(
               'span',
               { className: styles.bold },
-              'UP TO 50% OFF'
+              'FROM SAR 200'
             )
           ),
           React.createElement(
@@ -925,7 +925,7 @@ const HomePage = () => React.createElement(
               React.createElement(
                 'div',
                 { className: 'shadow' },
-                React.createElement('img', { src: d_tie[0], className: styles['img-responsive'] })
+                React.createElement('img', { src: d_tie[0], className: 'img-responsive' })
               )
             ),
             React.createElement(
@@ -962,7 +962,7 @@ const HomePage = () => React.createElement(
               React.createElement(
                 'div',
                 { className: 'shadow' },
-                React.createElement('img', { src: d_tie[1], className: styles['img-responsive'] })
+                React.createElement('img', { src: d_tie[1], className: 'img-responsive' })
               )
             ),
             React.createElement(
@@ -1003,7 +1003,7 @@ const HomePage = () => React.createElement(
               React.createElement(
                 'div',
                 { className: 'shadow' },
-                React.createElement('img', { src: d_tie[2], className: styles['img-responsive'] })
+                React.createElement('img', { src: d_tie[2], className: 'img-responsive' })
               )
             ),
             React.createElement(
@@ -1040,7 +1040,7 @@ const HomePage = () => React.createElement(
               React.createElement(
                 'div',
                 { className: 'shadow' },
-                React.createElement('img', { src: d_tie[3], className: styles['img-responsive'] })
+                React.createElement('img', { src: d_tie[3], className: 'img-responsive' })
               )
             ),
             React.createElement(
@@ -1081,7 +1081,7 @@ const HomePage = () => React.createElement(
               React.createElement(
                 'div',
                 { className: 'shadow' },
-                React.createElement('img', { src: d_tie[4], className: styles['img-responsive'] })
+                React.createElement('img', { src: d_tie[4], className: 'img-responsive' })
               )
             ),
             React.createElement(

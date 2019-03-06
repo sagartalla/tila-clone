@@ -1,4 +1,3 @@
-@import './override.css';
 .img-responsive {
   max-height: 100%;
   max-width: 100%;
@@ -252,6 +251,7 @@
   padding: 0.8em 1.1em;
   border-radius: 1.5em 0 1.5em 0;
   cursor: pointer;
+  display: flex;
 }
 .home-style-main .display-t-i-e .d1>div .btn .arrow,
 .home-style-main .display-t-i-f .d1>div .btn .arrow,
