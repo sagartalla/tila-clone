@@ -122,7 +122,7 @@ const getProductComponent = (isPreview, taskCode) => {
     render() {
       console.log(this.props.productData);
       const { productData } = this.props;
-      const { catalog, titleInfo, keyfeatures, imgUrls, offerInfo, shippingInfo, returnInfo, details,productDescription, categoryType = '' } = productData;
+      const { catalog, titleInfo, keyfeatures, imgUrls, offerInfo, shippingInfo, returnInfo, details,productDescription, catalogObj,categoryType = '' } = productData;
       const { stickyElements, recentlyViewed } = this.state;
       return (
         <Theme.Provider value={categoryType.toLowerCase()}>
@@ -172,7 +172,7 @@ const getProductComponent = (isPreview, taskCode) => {
                     }
                     </Col>*/}
                     <Col md={8}>
-                      <ElectronicsTab catalog={catalog} productDescription={productDescription} />
+                      <ElectronicsTab catalog={catalog} catalogObj={catalogObj} productDescription={productDescription} />
                     </Col>
                   </Row>
                 </Grid>

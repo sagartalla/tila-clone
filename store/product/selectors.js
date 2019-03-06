@@ -49,6 +49,14 @@ const getProduct = (store, variantId) => {
     availabilityError,
     stockError,
   }
+  const variant_id = Object.keys(variant_preferred_listings)[0]
+
+  const catalogObj = {
+    catalog_id: product_details.catalog_details.catalog_id,
+    item_type: product_details.catalog_details.item_type_name,
+    product_id: product_details.product_id,
+    variant_id
+  }
   const keyfeatures = _.map(productAttributeMap.calculated_highlights.attribute_values, (kf) => kf.value);
   const details = catalogAttributeMap.description ? catalogAttributeMap.description.attribute_values.map((d) => d.value).join(', ') : null;
   const imgUrls = product_details.product_details_vo.cached_product_details.media.gallery_media;
@@ -63,6 +71,7 @@ const getProduct = (store, variantId) => {
     shippingInfo,
     returnInfo,
     productDescription,
+    catalogObj,
     breadcrums: tree.breadcrumb,
     categoryType: tree.finance ? tree.finance[0].display_name_en : '',
     catalog: _.groupBy(_.filter(catalogAttributeMap, (val) => val.visible), (attrMap) => attrMap.attribute_category_name)
@@ -185,4 +194,10 @@ const getSelectedVariantId = (store) => (options) => {
   }
 }
 
-export { getProduct, getVariants, getPreview, getSelectedVariantId };
+const getReviewRatings = (store) => {
+  return store.productReducer.reviews
+}
+const getReviewResponse = (store) => {
+  return store.productReducer.reviewResponse
+}
+export { getProduct, getVariants, getPreview, getSelectedVariantId, getReviewRatings, getReviewResponse };
