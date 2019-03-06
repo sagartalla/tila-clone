@@ -1,7 +1,10 @@
 import React from 'react';
-
+import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
-import Input from '../Input';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+import { actionCreators } from '../../../store/cam/wishlist';
 import { mergeCss } from '../../../utils/cssUtil';
 
 const styles = mergeCss('components/common/NotifyMe/notifyMe');
@@ -24,11 +27,12 @@ class NotifyMe extends React.Component {
     });
   }
 
-  notifyMe = () => {
+  notify = () => {
     const { pId, notifyMe, closeNotify } = this.props;
     let {
       email, mobile, emailErr, mobileErr,
     } = this.state;
+    /* email validation regex, TODO:: move to utils */
     const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     let params = {
       product_id: pId,
@@ -83,7 +87,7 @@ class NotifyMe extends React.Component {
         <div className={styles.flex}>
           <Button
             className={`${styles['fp-btn']} ${styles['fp-btn-primary']}`}
-            onClick={this.notifyMe}
+            onClick={this.notify}
           >
             Notify
           </Button>
@@ -93,4 +97,17 @@ class NotifyMe extends React.Component {
   }
 }
 
-export default NotifyMe;
+NotifyMe.propTypes = {
+  notifyMe: PropTypes.func.isRequired,
+  closeNotify: PropTypes.func.isRequired,
+  pId: PropTypes.string.isRequired,
+};
+
+const mapDispatchToProps = dispatch => bindActionCreators(
+  {
+    notifyMe: actionCreators.notifyMe,
+  },
+  dispatch,
+);
+
+export default connect(null, mapDispatchToProps)(NotifyMe);

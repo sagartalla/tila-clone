@@ -157,7 +157,6 @@ const getProductComponent = (isPreview, taskCode) => {
     }
 
     render() {
-      console.log(this.props.productData);
       const { productData, userDetails } = this.props;
       const {
         catalog, titleInfo, keyfeatures, imgUrls, offerInfo, shippingInfo, returnInfo, details, productDescription, categoryType = '',
@@ -194,7 +193,7 @@ const getProductComponent = (isPreview, taskCode) => {
                           isPreview ? null : <AddToCart offerInfo={offerInfo} />
                         }
                         {
-                          offerInfo.stockError &&
+                          (offerInfo.stockError || offerInfo.availabilityError) &&
                           <div className={`${styles['flx-space-bw']} ${styles['align-baseline']}`}>
                             {!userDetails.isLoggedIn &&
                             <div className={`${styles['mb-0']} ${styles['fp-input']} ${styles['pb-10']}`}>

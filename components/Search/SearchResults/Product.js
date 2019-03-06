@@ -28,7 +28,7 @@ class Product extends Component {
     this.addToWishlist = this.addToWishlist.bind(this);
     this.addToCart = this.addToCart.bind(this);
     this.buyNow = this.buyNow.bind(this);
-    this.notifyMe = this.notifyMe.bind(this);
+    this.notify = this.notify.bind(this);
     this.closeNotify = this.closeNotify.bind(this);
   }
 
@@ -58,11 +58,11 @@ class Product extends Component {
     this.props.buyNow(variants.listingId[0]);
   }
 
-  notifyMe(e) {
+  notify(e) {
     e.stopPropagation();
-    const { userDetails, productId } = this.props;
+    const { userDetails, productId, notifyMe } = this.props;
     if (userDetails.isLoggedIn) {
-      this.props.notifyMe({
+      notifyMe({
         product_id: productId,
         email: userDetails.userCreds && userDetails.userCreds.username,
       });
@@ -156,7 +156,6 @@ class Product extends Component {
       index,
       pageNum,
       userDetails,
-      notifyMe,
     } = this.props;
     const { showNotify } = this.state;
     //route={`/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemtype}`}
@@ -238,7 +237,7 @@ class Product extends Component {
                 </div>
                 :
                 <div className={`${styles['flex']} ${styles['justify-around']} ${styles['quick-view']} ${styles['border-radius4']}`}>
-                  <a className={`${styles['flex-center']} ${styles['buy-now-btn']}`} onClick={this.notifyMe}>
+                  <a className={`${styles['flex-center']} ${styles['buy-now-btn']}`} onClick={this.notify}>
                     <span className={styles['pl-5']}>{PDP_PAGE.NOTIFY_ME}</span>
                   </a>
                 </div>
@@ -296,7 +295,6 @@ class Product extends Component {
           <Modal.Body>
             <NotifyMe
               pId={productId}
-              notifyMe={notifyMe}
               closeNotify={this.closeNotify}
             />
           </Modal.Body>

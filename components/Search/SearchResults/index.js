@@ -17,7 +17,6 @@ class SearchResults extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showNotify: false,
     };
     this.loadMore = this.loadMore.bind(this);
     this.buyNow = this.buyNow.bind(this);
@@ -66,7 +65,6 @@ class SearchResults extends Component {
 
   render() {
     const { results, pagiantionDetails, userDetails, notifyMe } = this.props;
-    const { showNotify } = this.state;
     const { pageNum } = this.props.pagiantionDetails;
     return (
       <div>
@@ -97,7 +95,7 @@ class SearchResults extends Component {
   }
 }
 
-const mapStateToProps = (store) => ({
+const mapStateToProps = store => ({
   results: selectors.getSearchResutls(store),
   pagiantionDetails: selectors.getPaginationDetails(store),
   ui: selectors.getUIState(store),
