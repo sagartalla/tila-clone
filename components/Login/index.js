@@ -97,21 +97,25 @@ class Login extends Component {
 
     if (this.onLoginFieldValidations()) {
       if (this.state.mode === 'register') {
-        this.props.userRegister({
-          email,
-          password: password,
-          mobile_no: phone,
-          mobile_country_code: country,
-          rememberMe: true,
-        });
+        const serverData = {
+          channel: 'BASIC_REGISTER',
+          metadata:{
+            username: email,
+            password,
+            mobile_no: phone,
+            mobile_country_code: country,
+          },
+          rememberMe: true
+        };
+        this.props.userLogin(serverData)
       } else {
         const serverData = {
           channel: 'BASIC_AUTH',
           metadata: {
             username: email,
             password: password,
-            rememberMe: true,
-          }
+          },
+          rememberMe: true,
         }
         this.props.userLogin(serverData);
       }
