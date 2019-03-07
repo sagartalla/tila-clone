@@ -97,7 +97,8 @@ export const EN_KEYWORDS = {
   },
   WISH_LIST_PAGE: {
     'WISHLIST_HEADER': 'items in wishlist',
-    'ADD_TO_CART_BTN': 'MOVE TO CART'
+    'ADD_TO_CART_BTN': 'MOVE TO CART',
+    'NOTIFY_ME_BTN': 'Notify Me'
   },
   PDP_PAGE: {
     'LOADING_REVIEWS': 'Loading Reviews...',
@@ -118,6 +119,7 @@ export const EN_KEYWORDS = {
     'PRODUCT_DETAILS': 'PRODUCT DETAILS',
     'ADD_TO_CART': 'Add To Cart',
     'BUY_NOW': 'Buy Now',
+    'NOTIFY_ME': 'Notify Me',
     'BUY_FOR': 'BUY FOR',
     'ADDED_TO_CART': 'In Cart',
     // //New keys

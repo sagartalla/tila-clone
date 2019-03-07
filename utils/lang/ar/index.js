@@ -97,6 +97,7 @@ export const AR_KEYWORDS = {
   WISH_LIST_PAGE: {
     'WISHLIST_HEADER': 'المنتجات في قائمة الامنيات',
     'ADD_TO_CART_BTN': 'أضف إلى سلة المشتريات',
+    'NOTIFY_ME_BTN': 'اعلمني',
   },
   PDP_PAGE: {
     'LOADING_REVIEWS': 'جارٍ تحميل آراء التقييم ...',
@@ -117,6 +118,7 @@ export const AR_KEYWORDS = {
     'PRODUCT_DETAILS': 'PRODUCT DETAILS',
     'ADD_TO_CART': 'ADD TO CART',
     'BUY_NOW': 'BUY NOW',
+    'NOTIFY_ME': 'Notify Me',
     'BUY_FOR': 'BUY FOR',
     'ADDED_TO_CART': 'أضف إلى سلة المشتريات',
     // //New keys
