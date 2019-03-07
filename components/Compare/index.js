@@ -27,6 +27,7 @@ class Compare extends Component {
     super(props);
     this.state = {
       selectedGroups: {}, /* props.features.reduce((acc, a) => ({...acc, [a.key]: true}), {}) */
+      selectedBrand: '',
     };
     this.selectGroup = this.selectGroup.bind(this);
     this.clearAllChecks = this.clearAllChecks.bind(this);
@@ -39,11 +40,16 @@ class Compare extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { compareInfo } = nextProps;
+    const { compareInfo, productList } = nextProps;
     if (!this.state.init && compareInfo.features && compareInfo.features.length) {
       this.setState({
         selectedGroups: compareInfo.features.reduce((acc, a) => ({ ...acc, [a.key]: true }), {}),
         init: true,
+      });
+    }
+    if (compareInfo.compareCount !== this.props.compareInfo.compareCount) {
+      this.setState({
+        selectedBrand: '',
       });
     }
   }
@@ -71,6 +77,9 @@ class Compare extends Component {
 
   selectBrand = ({ target }) => {
     if (target.value) {
+      this.setState({
+        selectedBrand: target.value,
+      });
       this.props.getProducts(target.value);
     }
   }
@@ -104,6 +113,7 @@ class Compare extends Component {
     const {
       compareCount = 0, features = [], products = [], productsFeatures = [], 
     } = compareInfo;
+    const { selectedBrand } = this.state;
     return (
       <div>
         <HeaderBar />
@@ -153,7 +163,7 @@ class Compare extends Component {
               <div className={`${styles['flex-center']} ${styles['ht-100per']} ${styles['bg-white']} ${styles['justify-center']} ${styles['flex-colum']}`}>
                 <div className={styles['add-icon']}>+</div>
                 <div className={`${styles.width100} ${styles['p-10-40']}`}>
-                  <select className={styles.width100} onChange={this.selectBrand}>
+                  <select className={styles.width100} value={selectedBrand} onChange={this.selectBrand}>
                     <option value="">Select Brand</option>
                     {brands.length > 0 &&
                     brands.map(brand => (
