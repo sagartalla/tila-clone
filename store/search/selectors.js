@@ -106,7 +106,7 @@ const getSearchResutls = (store) => {
   if (store.searchReducer.data.productResponse) {
     resutls.totalCount = store.searchReducer.data.productResponse.noOfProducts;
     resutls.items = store.searchReducer.data.productResponse.products.map((product) => {
-      const variantInfo = product.variantListingAdapters.reduce((modifiedVaraints, v) => {
+      const variantInfo = product.variantAdapters[0].listingAdapters.reduce((modifiedVaraints, v) => {
         const attributesData = {...v.attributes};
         delete attributesData.type;
         delete attributesData.variantId;
@@ -117,9 +117,9 @@ const getSearchResutls = (store) => {
         });
         return modifiedVaraintsCopy;
     }, {});
-      const priceInfo = product.variantListingAdapters.map((vla) => vla.attributes.sellingPrice);
-      const offers = product.variantListingAdapters.map((vla) => vla.attributes.discount);
-      let currency = product.variantListingAdapters || '';
+      const priceInfo = product.variantAdapters[0].listingAdapters.map((vla) => vla.attributes.sellingPrice);
+      const offers = product.variantAdapters[0].listingAdapters.map((vla) => vla.attributes.discount);
+      let currency = product.variantAdapters[0].listingAdapters || '';
       currency = currency[0] || '';
       currency = currency.attributes || '';
       currency = currency.currency || ''
