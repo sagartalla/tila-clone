@@ -44,8 +44,8 @@ RemoteComponent.loadRemoteComponents(remoteComponents)
 let remoteComponents = {
   fashion: {
     name: 'Fashion',
-    src: isLocal ? 'http://localhost:8000/Fashion/index.js' : 'https://s3.ap-south-1.amazonaws.com/tila.com/test/index.js',
-    styles: isLocal ? 'http://localhost:8000/Fashion/style.css' : 'https://s3.ap-south-1.amazonaws.com/tila.com/test/style.css',
+    src: isLocal ? 'http://localhost:8000/Fashion/index.js' : 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/fashion/index.js',
+    styles: isLocal ? 'http://localhost:8000/Fashion/style.css' : 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/fashion/style.css',
     context: {
       React,
       Grid,
@@ -57,8 +57,8 @@ let remoteComponents = {
   },
   electronics: {
     name: 'Electronics',
-    src: isLocal ? 'http://localhost:8000/Electronics/index.js' : 'https://s3.ap-south-1.amazonaws.com/tila.com/test/index.js',
-    styles: isLocal ? 'http://localhost:8000/Electronics/style.css' : 'https://s3.ap-south-1.amazonaws.com/tila.com/test/style.css',
+    src: isLocal ? 'http://localhost:8000/Electronics/index.js' : 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/electronics/index.js',
+    styles: isLocal ? 'http://localhost:8000/Electronics/style.css' : 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/electronics/style.css',
     context: {
       React,
       Grid,
@@ -70,8 +70,8 @@ let remoteComponents = {
   },
   lifestyle: {
     name: 'Lifestyle',
-    src: isLocal ? 'http://localhost:8000/Lifestyle/index.js' : 'https://s3.ap-south-1.amazonaws.com/tila.com/test/index.js',
-    styles: isLocal ? 'http://localhost:8000/Lifestyle/style.css' : 'https://s3.ap-south-1.amazonaws.com/tila.com/test/style.css',
+    src: isLocal ? 'http://localhost:8000/Lifestyle/index.js' : 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/lifestyle/index.js',
+    styles: isLocal ? 'http://localhost:8000/Lifestyle/style.css' : 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/lifestyle/style.css',
     context: {
       React,
       Grid,
@@ -82,8 +82,8 @@ let remoteComponents = {
   },
   homepage: {
     name: 'HomePage',
-    src: isLocal ? 'http://localhost:8000/homepage/index.js' : 'https://s3.ap-south-1.amazonaws.com/tila.com/test/index.js',
-    styles: isLocal ? 'http://localhost:8000/homepage/style.css' : 'https://s3.ap-south-1.amazonaws.com/tila.com/test/style.css',
+    src: isLocal ? 'http://localhost:8000/homepage/index.js' : 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/homepage/index.js',
+    styles: isLocal ? 'http://localhost:8000/homepage/style.css' : 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/homepage/style.css',
     context: {
       React,
       Grid,
