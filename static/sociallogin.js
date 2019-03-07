@@ -1,6 +1,6 @@
 /*eslint-disable*/
 var googleAuth2 = '';
-const instagramAppID = '8673452296e2447a956d3a9e3463a697';
+const instagramAppID = 'e75178e4dcd24b18a6cd5e650c73d9d8';
 const facebookAppID = '258606608345622';
 const googleAppID = '289717607267-r4ij4arfmkdhshvfd93thqedb71nbojn.apps.googleusercontent.com';
 
