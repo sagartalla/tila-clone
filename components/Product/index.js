@@ -159,7 +159,7 @@ const getProductComponent = (isPreview, taskCode) => {
     render() {
       const { productData, userDetails } = this.props;
       const {
-        catalog, titleInfo, keyfeatures, imgUrls, offerInfo, shippingInfo, returnInfo, details, productDescription, categoryType = '',
+        catalog, titleInfo, keyfeatures, imgUrls, offerInfo, shippingInfo, returnInfo, details, productDescription, catalogObj, categoryType = '',
       } = productData;
       const {
         stickyElements, recentlyViewed, notifyEmail, emailErr,
@@ -228,7 +228,7 @@ const getProductComponent = (isPreview, taskCode) => {
                     }
                     </Col> */}
                     <Col md={8}>
-                      <ElectronicsTab catalog={catalog} productDescription={productDescription} />
+                      <ElectronicsTab catalog={catalog} catalogObj={catalogObj} productDescription={productDescription} />
                     </Col>
                   </Row>
                 </Grid>
