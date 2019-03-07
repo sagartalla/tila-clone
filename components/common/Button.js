@@ -7,7 +7,7 @@ const Btn = props => (
   <Button
     className={props.className}
     style={{ width: props.btnWidth, background: props.backGround, color: props.color }}
-    onClick={props.BtnClickHandler}
+    onClick={props.onClick}
   >
     {props.btnText}
   </Button>
@@ -15,7 +15,7 @@ const Btn = props => (
 
 Btn.propTypes = {
   btnWidth: PropTypes.string,
-  BtnClickHandler: PropTypes.func,
+  onClick: PropTypes.func,
   color: PropTypes.string,
   backGround: PropTypes.string,
   btnText: PropTypes.string,
@@ -24,7 +24,7 @@ Btn.defaultProps = {
   btnWidth: '',
   color: '',
   backGround: '',
-  BtnClickHandler: () => {},
+  onClick: () => {},
   btnText: '',
 };
 export default Btn;

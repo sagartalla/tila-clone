@@ -1,7 +1,9 @@
 import _ from 'lodash';
 
 const getProduct = (store, variantId) => {
-  const { product_details, variant_preferred_listings, tree } = store.productReducer.data[0];
+  const {
+    product_details, variant_preferred_listings, tree, product_id,
+  } = store.productReducer.data[0];
   const computedVariantId = variantId;
   const listings = computedVariantId ? variant_preferred_listings[computedVariantId] : _.reduce(variant_preferred_listings, (acc, val, key) => {
     return [...acc, ...val];
@@ -70,6 +72,7 @@ const getProduct = (store, variantId) => {
     offerInfo,
     shippingInfo,
     returnInfo,
+    product_id,
     productDescription,
     catalogObj,
     breadcrums: tree.breadcrumb,
