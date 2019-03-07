@@ -106,7 +106,7 @@ class Login extends Component {
         });
       } else {
         const serverData = {
-          channel: 'BASIC_REGISTER',
+          channel: 'BASIC_AUTH',
           metadata: {
             username: email,
             password: password,
