@@ -43,6 +43,11 @@ const wishlistReducer = typeToReducer({
       return Object.assign({}, state, { removeToWishlist: action.payload.data, data: [...action.payload.data], ui: { loading: false } });
     },
   },
+  [actions.NOTIFY_ME]: {
+    PENDING: state => state,
+    FULFILLED: state => state,
+    REJECTED: state => state,
+  },
 }, initialState);
 
 export default wishlistReducer;
