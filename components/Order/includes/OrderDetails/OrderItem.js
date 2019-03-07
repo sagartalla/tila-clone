@@ -100,7 +100,9 @@ const OrderItem = ({ payments=[{}], orderItem, raiseOrderIssue, orderId, showWid
                 <div className={`${styles['date-cont']} ${styles['flx-spacebw-alignc']}`}>
                   <div>
                     <div className={styles['fs-12']}>{btnType === 'cancel' ? 'Delivery by' : showWidget && !thankyouPage ? 'Canceled on' : 'Canceled'}</div>
-                    <div className={`${styles['ff-t']} ${styles['fs-26']} ${styles['ipad-fs-20']}`}>{btnType === 'cancel' ? moment(orderItem.products[0].promisedDeliveryDate).format('Do, dddd') : showWidget && !thankyouPage ? moment(orderItem.products[0].state_times.CANCELLED.time).format('Do, dddd') : null}</div>
+                    <div className={`${styles['ff-t']} ${styles['fs-26']} ${styles['ipad-fs-20']}`}>
+                      {btnType === 'cancel' ? moment(orderItem.products[0].promisedDeliveryDate).format('Do, dddd') : showWidget && !thankyouPage ? moment(orderItem.products[0].state_time_estimates.CANCELLED.time).format('Do, dddd') : null}
+                    </div>
                   </div>
                   {
                     btnType ?

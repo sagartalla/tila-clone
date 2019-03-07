@@ -27,7 +27,7 @@ const getOrderDetails = (store) => {
           name: i.variant_info.title,
           item_tracking_id: i.item_tracking_id || shortid.generate(),
           status: i.external_status,
-          state_times: i.state_times,
+          state_time_estimates: i.state_time_estimates,
           price: i.price.offer_price,
           currency_code: currency_code,
           promisedDeliveryDate: i.promised_delivery_date

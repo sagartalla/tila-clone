@@ -3,20 +3,21 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import InfiniteScroll from 'react-infinite-scroller';
 import _ from 'lodash'
-import Product from "./Product";
+import Product from './Product';
 import SVGCompoent from '../../common/SVGComponet';
 import { actionCreators, selectors } from '../../../store/search';
-import { actionCreators as cartActionCreators, selectors as cartSelector } from '../../../store/cart'
-import { actionCreators as wishlistActionCreators } from '../../../store/cam/wishlist'
+import { actionCreators as cartActionCreators, selectors as cartSelector } from '../../../store/cart';
+import { actionCreators as wishlistActionCreators } from '../../../store/cam/wishlist';
 import { mergeCss } from '../../../utils/cssUtil';
 import { Router } from '../../../routes';
+
 const styles = mergeCss('components/Search/search');
 
 class SearchResults extends Component {
-
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+    };
     this.loadMore = this.loadMore.bind(this);
     this.buyNow = this.buyNow.bind(this);
     this.addToCart = this.addToCart.bind(this);
@@ -63,7 +64,7 @@ class SearchResults extends Component {
   }
 
   render() {
-    const { results, pagiantionDetails } = this.props;
+    const { results, pagiantionDetails, userDetails, notifyMe } = this.props;
     const { pageNum } = this.props.pagiantionDetails;
     return (
       <div>
@@ -84,6 +85,8 @@ class SearchResults extends Component {
               addToCart={this.addToCart}
               index={`${item.id}_${index}`}
               pageNum={pageNum}
+              userDetails={userDetails}
+              notifyMe={notifyMe}
             />
           ))}
         </InfiniteScroll>
@@ -92,11 +95,12 @@ class SearchResults extends Component {
   }
 }
 
-const mapStateToProps = (store) => ({
+const mapStateToProps = store => ({
   results: selectors.getSearchResutls(store),
   pagiantionDetails: selectors.getPaginationDetails(store),
   ui: selectors.getUIState(store),
   isAddedToCart: cartSelector.isAddedToCart(store),
+  userDetails: selectors.getUserDetails(store),
 });
 
 const mapDispatchToProps = dispatch =>
@@ -106,6 +110,7 @@ const mapDispatchToProps = dispatch =>
       addToCartAndFetch: cartActionCreators.addToCartAndFetch,
       resetAddtoCart: cartActionCreators.resetAddtoCart,
       getWishlist: wishlistActionCreators.getWishlist,
+      notifyMe: wishlistActionCreators.notifyMe,
     },
     dispatch,
   );
