@@ -32,8 +32,12 @@ export default class FeedbackModal extends Component {
       rating:0,
       validation:this.validations.valid()
     }
+    this.handleTextChange = this.handleTextChange.bind(this)
+    this.retrieveRating = this.retrieveRating.bind(this)
+    this.sumbitFeedBack = this.sumbitFeedBack.bind(this)
   }
   validateTextArea = (fieldvalue,state) => {
+    console.log(this.state);
     if(fieldvalue === '') {
       return true
     }
@@ -47,15 +51,15 @@ export default class FeedbackModal extends Component {
     return false
   }
 
-  handleTextChange =({target:{value}}) => {
+  handleTextChange({target:{value}}){
     this.setState({
       textValue:value
       })
   }
-  retrieveRating = (e,rating) => {
+  retrieveRating(e,rating){
     this.setState({ rating })
   }
-  sumbitFeedBack = () => {
+  sumbitFeedBack() {
 
     let validation = this.validations.validate(this.state)
     const { rating, textValue} = this.state
@@ -68,7 +72,7 @@ export default class FeedbackModal extends Component {
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;')
-      
+
       let params = {
         ratings:rating,
         comment:textContent,
@@ -111,8 +115,10 @@ export default class FeedbackModal extends Component {
 
             <div
               className={`${styles['flex-center']}
+              ${styles['review-rating-block']}
               ${styles['space-between']} ${styles['mr-20']} ${styles['ml-20']}
-              ${styles['mt-20']} ${styles['mb-20']} ${styles['ht-55']}`} >
+              ${styles['mt-20']} ${styles['mb-20']} ${styles['p-15']}`} >
+
               <div className={`${styles['flex-center']}
                 ${styles['p-10']} ${styles['ht-40']}`}
                 >
@@ -129,7 +135,7 @@ export default class FeedbackModal extends Component {
               <div
               className =
               {`${styles['flex']} ${styles['review-start']} ${styles['mt-5']}
-               ${styles['max-ht100']}`}>
+               ${styles['max-ht100']} ${styles['ht-25']} `}>
                 <StarRating
                   rating={rating}
                   total={5}
