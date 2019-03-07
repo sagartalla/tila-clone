@@ -99,7 +99,7 @@ const getSearchResutls = (store) => {
     resutls.totalCount = store.searchReducer.data.productResponse.noOfProducts;
     resutls.items = store.searchReducer.data.productResponse.products.map((product) => {
       const variantInfo = product.variantAdapters[0].listingAdapters.reduce((modifiedVaraints, v) => {
-        const attributesData = {...v.attributes};
+        const attributesData = { ...v.attributes };
         delete attributesData.type;
         delete attributesData.variantId;
         const modifiedVaraintsCopy = Object.assign(modifiedVaraints);
@@ -124,6 +124,10 @@ const getSearchResutls = (store) => {
         priceRange = priceInfo[0] || '';
       }
       const { brand } = product.attributes;
+
+      const categoryTreePath = product.attributes.categoryTreePath.split('/');
+      const categoryId = categoryTreePath[categoryTreePath.length - 1].split(',')[0];
+
       return {
         id: product.id,
         media: product.attributes.media_unrestricted_images,
@@ -135,6 +139,8 @@ const getSearchResutls = (store) => {
         variants: variantInfo,
         priceRange,
         currency,
+        categoryId,
+        flags: product.flags,
         offers: Math.max.apply(null, offers),
       };
     });

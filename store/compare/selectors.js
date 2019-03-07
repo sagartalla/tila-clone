@@ -21,26 +21,31 @@ const getCompareInfo = (store) => {
   const b = _.uniq(compareInfo.reduce((acc, map) => {
       return [...acc, ...Object.keys((map.product_details.catalog_details.attribute_map))];
     }, [])).map((attrName) => {
-      let attributeCategoryName = '';
-      for(let index in compareInfo) {
-        const { attribute_category_name } = compareInfo[index].product_details.catalog_details.attribute_map[attrName] || {}
-        if(attribute_category_name){
-          attributeCategoryName = attribute_category_name || ''
-          break;
-        }
+    let attributeCategoryName = '';
+    let displayString = '';
+    for (const index in compareInfo) {
+      const attName = compareInfo[index].product_details.catalog_details.attribute_map[attrName];
+      const { attribute_category_name, display_string } = attName || {};
+      if (attribute_category_name && !attributeCategoryName) {
+        attributeCategoryName = attribute_category_name || '';
       }
-      return {
-        name: attrName,
-        items: compareInfo.map((map) => {
-          const { attribute_values, name} = map.product_details.catalog_details.attribute_map[attrName] || {};
-          return ({
-            id: (name || '')  + shortid.generate(),
-            value: attribute_values || [{value: 'N/A'}]
-          });
-        }),
-        attribute_category_name: attributeCategoryName
-      };
-    });
+      if (display_string && !displayString) {
+        displayString = display_string;
+      }
+    }
+      
+    return {
+      name: displayString,
+      items: compareInfo.map((map) => {
+        const { attribute_values, name} = map.product_details.catalog_details.attribute_map[attrName] || {};
+        return ({
+          id: (name || '') + shortid.generate(),
+          value: attribute_values || [{ value: 'N/A' }],
+        });
+      }),
+      attribute_category_name: attributeCategoryName,
+    };
+  });
   const a = {
     compareCount: compareInfo.length,
     features: _.uniqBy(_.map(compareInfo[0].product_details.catalog_details.attribute_map, (attr, key) => ({
@@ -48,8 +53,8 @@ const getCompareInfo = (store) => {
       value: attr.attribute_category_name
     })), 'value'),
     products: _.map(compareInfo, (product) => {
-      const variant = Object.keys(product.variant_preferred_listings)[0];
-      const variant_info = product.variant_preferred_listings[variant][0];
+      const variant = product.variant_preferred_listings ? Object.keys(product.variant_preferred_listings)[0] : [];
+      const variant_info = product.variant_preferred_listings ? product.variant_preferred_listings[variant][0] : {};
       return {
         id: product.product_id,
         imgSrc: product.product_details.product_details_vo.cached_product_details.media.gallery_media[0].url,
@@ -57,7 +62,7 @@ const getCompareInfo = (store) => {
         price: variant_info.selling_price,
         currency: variant_info.selling_price_currency,
         offer: 0,
-        name: product.product_details.product_details_vo.cached_product_details.attribute_map.calculated_display_name.attribute_values[0].value
+        name: product.product_details.product_details_vo.cached_product_details.attribute_map.calculated_display_name.attribute_values[0].value,
       };
     }),
     productsFeatures: fp.compose(
@@ -72,6 +77,24 @@ const getCompareInfo = (store) => {
     )(b),
   };
   return a;
-}
+};
 
-export { getCompareCount, getCompareInfo };
+const getBrandsInfo = (store) => {
+  const { brands } = store.compareReducer.data;
+  return brands.facetResponse && brands.facetResponse.facets && brands.facetResponse.facets[0].Values;
+};
+
+const getProductList = (store) => {
+  const { products } = store.compareReducer.data;
+  return products.productResponse && products.productResponse.products &&
+    products.productResponse.products.map(product => ({
+      productId: product.id,
+      displayName: product.attributes.calculated_display_name[0],
+      media: product.attributes.media_unrestricted_images,
+      itemtype: product.attributes.itemType,
+    }));
+};
+
+export {
+  getCompareCount, getCompareInfo, getBrandsInfo, getProductList,
+};

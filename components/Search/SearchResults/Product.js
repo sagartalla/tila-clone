@@ -142,13 +142,17 @@ class Product extends Component {
 
   addToCompare(e) {
     e.stopPropagation();
-    const { productId, itemtype, media, displayName } = this.props;
+    const {
+      productId, itemtype, media, displayName, categoryId,
+    } = this.props;
+    console.log('categoryId', categoryId);
     const src = `${constants.mediaDomain}/${media[0]}`;
     this.props.addToCompare({
       itemtype,
       productId,
       src,
       displayName,
+      categoryId,
     });
   }
 
@@ -170,9 +174,10 @@ class Product extends Component {
       index,
       pageNum,
       userDetails,
+      flags,
     } = this.props;
     const { showNotify } = this.state;
-    //route={`/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemtype}`}
+    // route={`/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemtype}`}
     return (
       <Fragment>
         <div className={`${styles['product-items-main']}`} onClick = {() => this.routeChange(productId,variantId,catalogId,itemtype,index,pageNum)}>
@@ -262,12 +267,13 @@ class Product extends Component {
                     <span className={`${styles['pl-5']} ${styles['fs-12']}`} disabled={addedToWishlist}>{addedToWishlist ? `${PDP_PAGE.ADDED_TO_WISHLIST}` : `${PDP_PAGE.ADD_TO_WISHLIST}`}</span>
                   </a>
                 </span>
+                {flags.comparable &&
                 <span className={styles['flex']}>
-                  <a className={styles['flex-center']}>
+                  <a className={styles['flex-center']} onClick={this.addToCompare}>
                     <SVGCompoent clsName={`${styles['wish-list']}`} src="icons/cam/cam-icon" />
                     <span className={`${styles['pl-5']} ${styles['fs-12']}`}>{PDP_PAGE.ADD_TO_COMPARE}</span>
                   </a>
-                </span>
+                </span>}
               </div>
               <div className={styles['brand-price-details']}>
                 {/* <div> */}

@@ -42,6 +42,7 @@ const getProduct = (store, variantId) => {
     product_id,
     itemtype: product_details.catalog_details.item_type_name,
     media: imgUrls[0].url,
+    categoryId: tree.breadcrumb[tree.breadcrumb.length - 1].id,
   };
   const returnInfo = {
     acceptsReturns: priceInfo ? priceInfo.accepts_returns : false,

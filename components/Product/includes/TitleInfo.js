@@ -63,14 +63,16 @@ class TitleInfo extends Component {
   }
 
   addToCompare() {
-    const { addToCompare } = this.props;
-    const { product_id, itemtype, media, title } = this.props;
+    const {
+      addToCompare, product_id, itemtype, media, title, categoryId,
+    } = this.props;
     const src = `${constants.mediaDomain}/${media}`;
     this.props.addToCompare({
       itemtype,
       productId: product_id,
       src,
       displayName: title,
+      categoryId,
     });
   }
 

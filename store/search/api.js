@@ -14,7 +14,6 @@ const getSearchResultsApi = ({
   facetFilters,
   facetFiltersCopyWithNames,
   pageNum,
-  fl,
   isListed,
   categoryTree,
   choosenCategoryName,
@@ -29,7 +28,7 @@ const getSearchResultsApi = ({
     pageNum,
     pageSize,
     query,
-    fl,
+    fl: '*',
     isListed,
     shippingDetails,
     sort,
@@ -41,6 +40,7 @@ const getSearchResultsApi = ({
   } else {
     options.categoryFilter = categoryFilter;
   }
+
   return axios.get(`${constants.SEARCH_API_URL}/search${categoryTree ? '/browseByCatId/' : ''}?query=${escape(JSON.stringify(options))}`).then(({ data }) => {
     const { products, noOfProducts } = data.productResponse;
     const hasMore = (((pageNum - 1) * pageSize) + products.length) !== noOfProducts;
@@ -65,7 +65,7 @@ const getSearchResultsApi = ({
       language,
     };
     data.hardCodedValues = {
-      fl,
+      fl: '*',
       isListed,
     };
     return { data };
