@@ -88,9 +88,9 @@ class Review extends Component {
   render() {
     const { reviewData, openModal } = this.state
     const { catalogObj } = this.props
-    if(!reviewData.length) {
-      return <div> Fetching reviews for the product please wait....</div>
-    }
+    // if(!reviewData.length) {
+    //   return <div> Fetching reviews for the product please wait....</div>
+    // }
 
     return (
       <Theme.Consumer>
@@ -123,7 +123,7 @@ class Review extends Component {
                 </div>
                 <React.Fragment>
                   {
-                    this.renderReviewDetails(reviewData,categoryType)
+                    reviewData.length ? this.renderReviewDetails(reviewData,categoryType) : <div> No reviews available for this product. </div>
                   }
                 </React.Fragment>
                 <div>
