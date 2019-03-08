@@ -21,7 +21,6 @@ const actions = {
   DELETE_POST_LOGIN_ACTION_INFO: 'DELETE_POST_LOGIN_ACTION_INFO',
   SET_LANGUAGE: 'SET_LANGUAGE',
   SAVE_PTA: 'SAVE_PTA',
-  USER_SOCIAL_LOGIN: 'USER_SOCIAL_LOGIN',
 };
 
 const actionCreators = {
@@ -35,10 +34,6 @@ const actionCreators = {
       dispatch(refStore.postLoginRef);
       dispatch(actions.DELETE_POST_LOGIN_ACTION_INFO);
     }
-  }),
-  userSocialLogin: params => ({
-    type: actions.USER_SOCIAL_LOGIN,
-    payload: api.userSocialLogin(params),
   }),
   userRegister: params => (dispatch, getState) => dispatch({
     type: actions.USER_REGISTER,

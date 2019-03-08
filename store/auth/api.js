@@ -41,8 +41,6 @@ const userLogin = (params) => {
   });
 }
 
-const userSocialLogin = (params) => axios.post(`${constants.AUTH_API_URL}/api/v1/sls/auth`, params);
-
 const userRegister = (params) => axios.post(`${constants.CMS_API_URL}/api/v1/user/register`, params);
 
 const userLogout = () => {
@@ -117,4 +115,4 @@ const savePtaToken = (ptaToken) => {
   }).then(() => ptaToken);
 }
 
-export default { userLogin, userSocialLogin, userRegister, userLogout, getLoginInfo, setCountry, setSessionID, deriveCity, autoCompleteCity, setCity, removeCity, setLanguage, savePtaToken, savePtaToken };
+export default { userLogin, userRegister, userLogout, getLoginInfo, setCountry, setSessionID, deriveCity, autoCompleteCity, setCity, removeCity, setLanguage, savePtaToken, savePtaToken };

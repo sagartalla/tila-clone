@@ -51,34 +51,6 @@ const authReducer = typeToReducer({
       error: '',
     }
   },
-  [actions.USER_SOCIAL_LOGIN]: {
-    PENDING: state => {
-      return Object.assign({}, state, {
-        error: '',
-      }, { ui: { loginLoading: true } });
-    },
-    FULFILLED: (state, action) => {
-      return Object.assign({}, state, {
-        data: {
-          ...state.data,
-          ...action.payload.data,
-          showLogin: false,
-        },
-        ui: { loginLoading: false }
-      });
-    },
-    REJECTED: (state, action) => {
-      const messege = ({403: 'username/password did not match'}[action.payload.response.status]);
-      return Object.assign({}, state, {
-        error: messege,
-        data: {
-          ...state.data,
-          isLoggedIn: false
-        },
-        ui: { loginLoading: false }
-      });
-    },
-  },
   [actions.USER_REGISTER]: {
     PENDING: state => {
       return Object.assign({}, state, {
