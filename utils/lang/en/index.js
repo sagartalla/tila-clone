@@ -214,7 +214,6 @@ export const EN_KEYWORDS = {
     'EDIT_PHONE_NUMBER': 'Edit Phone Number',
     'ENTER': 'Enter',
     'RESEND': 'Resend',
-    'PROFILE_CREATION_SUCCESS_MESSAGE': 'Your profile is complete. You can edit or change any details at anytime you want',
     'THANK_YOU': 'Thank You',
     'MALE': 'Male',
     'FEMALE': 'Female',
@@ -250,8 +249,8 @@ export const EN_KEYWORDS = {
     'BUTTON_LABEL': 'EDIT NOTIFICATIONS'
   },
   LINK_TO_SOCIAL_MEDIA: {
-    'HEADING': 'Link to Social Media',
-    'SUB_TITTLE': 'Easy one clicklogin when using your Social Media Accounts',
+    'HEADING': 'Link to social media',
+    'SUB_TITTLE': 'One click login/signup when using social media account.',
     'FACEBOOK': 'Facebook',
     'GOOGLE': 'Google',
     'TWITTER': 'Twitter',

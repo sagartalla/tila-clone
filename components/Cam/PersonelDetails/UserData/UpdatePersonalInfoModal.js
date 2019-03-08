@@ -85,7 +85,7 @@ class UpdatePersonalInfoModal extends React.Component {
         "image_url": ""
       });
       this.handleClose();
-      alert("Details updated successfully!!");
+      alert("Your personal information has been updated.");
     }else{
       alert("Fill in all the fields");
     }
@@ -108,7 +108,7 @@ class UpdatePersonalInfoModal extends React.Component {
               <div className={`${styles['personal-info-img']} ${styles['flex']} ${styles['justify-center']}`}>
                 <SVGComponent clsName={`${styles['personal-info-img-icon']}`} src="icons/common-icon/personal-info-mobile" />
               </div>
-              <p className={`${styles['thick-gry-clr']} ${styles['fs-12']} ${styles['t-c']}`}>Enter your Name, DOB and Gender for a more personalised abcd.com Experience</p>
+              <p className={`${styles['thick-gry-clr']} ${styles['fs-12']} ${styles['t-c']}`}>Enter your Name, DOB and Gender for a more personalised Tila Experience</p>
             </div>
             <div className={`${styles['m-5']} ${styles['mt-20']} ${styles['gender-select-main']} ${styles['flex-center']} ${styles['justify-center']}`}>
               <div className={styles['t-c']}>
@@ -129,7 +129,7 @@ class UpdatePersonalInfoModal extends React.Component {
               <div className={`${styles['m-5']} ${styles['mt-20']} ${styles['update-profile-input']} ${styles['flex']}`}>
                 <Col xs={12} md={12}>
                   <div className={styles['fp-input']}>
-                    <label className={`${styles['mb-0']} ${styles['fs-12']} ${styles['label-gry-clr']}`}>Name</label>
+                    <label className={`${styles['mb-0']} ${styles['fs-12']} ${styles['label-gry-clr']}`}>Username</label>
                     <input className={styles['user-name']} type="text" value={user_name} onChange={this.handleNameChange} maxLength={40}/>
                     {/* <span className={styles['highlight']}></span>
                   <span className={styles['bar']}></span>
@@ -162,7 +162,7 @@ class UpdatePersonalInfoModal extends React.Component {
               <div>
                 <Col xs={12} md={12} className={`${styles['pt-30']}`}>
                   {/* <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles['update-profile-btn']} ${styles['text-uppercase']}`} onClick={this.handleSubmit} >Update Personal Details</button> */}
-                  <Btn className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles['update-profile-btn']} ${styles['text-uppercase']}`} btnText="Update Personal Details" onClick={this.handleSubmit} />
+                  <Btn className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles['update-profile-btn']} `} btnText="Update Personal Information" onClick={this.handleSubmit} />
                 </Col>
               </div>
             </div>
