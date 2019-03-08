@@ -179,7 +179,7 @@ class EditPassword extends React.Component {
           </div>
           <div>
             <Col xs={12} md={12} className={`${styles['pt-30']}`}>
-              <Btn className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles['update-profile-btn']} ${styles['text-uppercase']}`} btnText={EDIT_PASSWORD_MODAL.SUBMIT_BUTTON} BtnClickHandler={this.handleSubmit} />
+              <Btn className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles['update-profile-btn']} ${styles['text-uppercase']}`} btnText={EDIT_PASSWORD_MODAL.SUBMIT_BUTTON} onClick={this.handleSubmit} />
             </Col>
           </div>
         </div>

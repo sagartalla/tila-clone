@@ -161,8 +161,8 @@ class UpdatePersonalInfoModal extends React.Component {
               </div>
               <div>
                 <Col xs={12} md={12} className={`${styles['pt-30']}`}>
-                  {/* <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles['update-profile-btn']} ${styles['text-uppercase']}`} BtnClickHandler={this.handleSubmit} >Update Personal Details</button> */}
-                  <Btn className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles['update-profile-btn']} ${styles['text-uppercase']}`} btnText="Update Personal Details" BtnClickHandler={this.handleSubmit} />
+                  {/* <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles['update-profile-btn']} ${styles['text-uppercase']}`} onClick={this.handleSubmit} >Update Personal Details</button> */}
+                  <Btn className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles['update-profile-btn']} ${styles['text-uppercase']}`} btnText="Update Personal Details" onClick={this.handleSubmit} />
                 </Col>
               </div>
             </div>
