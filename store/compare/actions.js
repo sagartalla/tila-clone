@@ -1,8 +1,8 @@
 import api from './api';
 
 const actions = {
-  CRUD_COMPARE: 'ADD_TO_COMPARE',
-  CRUD_COMPARE_STATE: 'CRUD_COMPARE_STATE',
+  CRUD_COMPARE: 'CRUD_COMPARE',
+  REMOVE_COMPARE_ITEM: 'REMOVE_COMPARE_ITEM',
   GET_COMPARE_ITEM_DATA: 'GET_COMPARE_ITEM_DATA',
   GET_COMPARE_COUNT: 'GET_COMPARE_COUNT',
   GET_BRANDS: 'GET_BRANDS',
@@ -27,16 +27,16 @@ const actionCreators = {
     type: actions.GET_PRODUCTS_TO_COMPARE,
     payload: api.getProducts(param),
   }),
-  getCompareItemsData: () => ({
+  getCompareItemsData: (product) => ({
     type: actions.GET_COMPARE_ITEM_DATA,
-    payload: api.getCompareItemsData(),
+    payload: api.getCompareItemsData(product),
   }),
   removeCompareData: id => ({
     type: actions.CRUD_COMPARE,
     payload: api.removeCompareData(id),
   }),
   removeCompareItem: id => ({
-    type: actions.CRUD_COMPARE_STATE,
+    type: actions.REMOVE_COMPARE_ITEM,
     payload: api.removeCompareData(id),
   }),
 };

@@ -95,6 +95,14 @@ const getProductList = (store) => {
     }));
 };
 
+const getCmpData = store => store.compareReducer.data.compareItems || {
+  products: [],
+};
+
 export {
-  getCompareCount, getCompareInfo, getBrandsInfo, getProductList,
+  getCompareCount,
+  getCompareInfo,
+  getBrandsInfo,
+  getProductList,
+  getCmpData,
 };

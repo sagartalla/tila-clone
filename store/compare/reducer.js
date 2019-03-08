@@ -6,6 +6,9 @@ const initialState = {
     loading: false,
   },
   data: {
+    compareItems: {
+      products: [],
+    },
     compareItemsCount: 0,
     compareInfo: [],
     brands: {},
@@ -19,6 +22,7 @@ const compareReducer = typeToReducer({
     data: {
       ...state.data,
       compareItemsCount: action.payload && action.payload.count,
+      compareItems: action.payload && action.payload.compareItems,
     },
   }),
   [actions.GET_BRANDS]: {
@@ -31,13 +35,17 @@ const compareReducer = typeToReducer({
       },
       ui: { loading: false },
     }),
-    REJECTED: (state, action) => Object.assign({}, state, { error: action.payload.error, ui: { loading: false } }),
+    REJECTED: (state, action) => Object.assign({}, state, {
+      error: action.payload.error,
+      ui: { loading: false },
+    }),
   },
-  [actions.CRUD_COMPARE_STATE]: (state, action) => Object.assign({}, state, {
+  [actions.REMOVE_COMPARE_ITEM]: (state, action) => Object.assign({}, state, {
     data: {
       ...state.data,
       compareItemsCount: action.payload && action.payload.count,
       compareInfo: state.data.compareInfo.filter(item => item.product_id !== action.payload.id),
+      compareItems: action.payload && action.payload.compareItems,
       products: {},
     },
   }),
@@ -52,9 +60,10 @@ const compareReducer = typeToReducer({
       },
       ui: { loading: false },
     }),
-    REJECTED: (state, action) => {
-      return Object.assign({}, state, { error: action.payload.error, ui: { loading: false } })
-    },
+    REJECTED: (state, action) => Object.assign({}, state, {
+      error: action.payload.error,
+      ui: { loading: false },
+    }),
   },
   [actions.GET_PRODUCTS_TO_COMPARE]: {
     PENDING: state => Object.assign({}, state, { ui: { loading: true } }),
@@ -64,12 +73,13 @@ const compareReducer = typeToReducer({
         ...state.data,
         products: action.payload.data,
       },
-      ui: { loading: false }
+      ui: { loading: false },
     }),
-    REJECTED: (state, action) => {
-      return Object.assign({}, state, { error: action.payload.error, ui: { loading: false } })
-    },
-  }
+    REJECTED: (state, action) => Object.assign({}, state, {
+      error: action.payload.error,
+      ui: { loading: false },
+    }),
+  },
 }, initialState);
 
 export default compareReducer;

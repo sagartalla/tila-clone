@@ -8,56 +8,88 @@ const cookies = new Cookies();
 
 const maxEle = 5;
 
+const itemFormat = {
+  categoryId: '',
+  itemtype: '',
+  products: [],
+};
+
+const getItem = () => JSON.parse(localStorage.getItem('compare')) || itemFormat;
+const setItem = product => localStorage.setItem('compare', JSON.stringify(product));
+
 const getCompareCount = () => {
-  const compareItems = JSON.parse(localStorage.getItem('compare')) || [];
+  const compareItems = getItem();
   return {
     count: compareItems.length,
+    compareItems,
   };
 };
 
 const addToCompare = ({
   itemtype, productId, src, displayName, categoryId,
 }) => {
-  const compareItems = JSON.parse(localStorage.getItem('compare')) || [];
-  const index = _.findIndex(compareItems, item => item.productId === productId);
+  const compareItems = getItem();
+  const index = _.findIndex(compareItems.products, item => item.productId === productId);
   if (index > -1) {
     alert('Same item cannot be added to compare');
     return {
-      count: compareItems.length,
+      count: compareItems.products.length,
+      compareItems,
     };
   }
   const product = {
-    itemtype,
-    productId,
-    src,
-    displayName,
-    categoryId,
+    itemtype: compareItems.itemtype || itemtype,
+    categoryId: compareItems.categoryId || categoryId,
+    products: [...compareItems.products, {
+      productId,
+      src,
+      displayName,
+    }],
   };
-
-  if (compareItems.length) {
-    if (compareItems[0].itemtype === itemtype && compareItems.length < maxEle) {
-      localStorage.setItem('compare', JSON.stringify([...compareItems, product]));
+  if (compareItems.products.length) {
+    if (compareItems.itemtype === itemtype && compareItems.products.length < maxEle) {
+      setItem(product);
       return {
-        count: compareItems.length + 1,
+        count: product.products.length,
+        compareItems: product,
       };
-    } else if (compareItems.length >= maxEle) {
+    } else if (compareItems.products.length >= maxEle) {
       alert('Only five items can be compared at a time');
       return {
         count: maxEle,
+        compareItems,
       };
     }
     alert('Only similar item types can be compared');
     return {
-      count: compareItems.length,
+      count: compareItems.products.length,
+      compareItems,
     };
   }
-  localStorage.setItem('compare', JSON.stringify([product]));
+  setItem(product);
   return {
     count: 1,
+    compareItems: product,
   };
 };
 
-const getCompareItemsData = () => {
+const getCompareItemsData = (item) => {
+  if (item) {
+    const {
+      itemtype, productId, src, displayName, categoryId,
+    } = item;
+    const compareItems = getItem();
+    const product = {
+      itemtype: compareItems.itemtype || itemtype,
+      categoryId: compareItems.categoryId || categoryId,
+      products: [...compareItems.products, {
+        productId,
+        src,
+        displayName,
+      }],
+    };
+    setItem(product);
+  }
   const options = {
     country_code: 'SAU',
     flags: {
@@ -68,18 +100,22 @@ const getCompareItemsData = () => {
       shipping: true,
     },
     language: 'en',
-    product_ids: JSON.parse(localStorage.getItem('compare')).map(product => product.productId),
+    product_ids: getItem().products.map(product => product.productId),
     size: 'LARGE',
   };
   return axios.post(`${constants.LISTING_API_URL}/api/v1/listing/`, options);
 };
 
 const removeCompareData = (id) => {
-  let compareItems = JSON.parse(localStorage.getItem('compare')) || [];
-  compareItems = compareItems.filter(data => data.productId !== id);
-  localStorage.setItem('compare', JSON.stringify(compareItems));
+  let compareItems = getItem();
+  compareItems.products = compareItems.products.filter(data => data.productId !== id);
+  if (compareItems.products.length === 0) {
+    compareItems = itemFormat;
+  }
+  setItem(compareItems);
   return {
     count: compareItems.length,
+    compareItems,
     id,
   };
 };
@@ -87,7 +123,7 @@ const removeCompareData = (id) => {
 const getBrands = () => {
   const options = {
     isListed: false,
-    itemType: JSON.parse(localStorage.getItem('compare'))[0].itemtype,
+    itemType: getItem().itemtype,
     language: 'en',
     limit: -1,
     sort: 'index',
@@ -98,7 +134,7 @@ const getBrands = () => {
 const getProducts = (brand = '') => {
   const country = cookies.get('country');
   const language = cookies.get('language');
-  const product = JSON.parse(localStorage.getItem('compare'))[0];
+  const product = getItem();
   const options = {
     country,
     facetFilters: {

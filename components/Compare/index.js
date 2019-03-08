@@ -96,15 +96,12 @@ class Compare extends Component {
       } = JSON.parse(target.value);
 
       const src = `${constants.mediaDomain}/${media[0]}`;
-
-      const compareItems = JSON.parse(localStorage.getItem('compare')) || [];
-      localStorage.setItem('compare', JSON.stringify([...compareItems, {
+      this.props.getCompareItemsData({
         itemtype,
         productId,
         src,
         displayName,
-      }]));
-      this.props.getCompareItemsData();
+      });
     }
   }
 
