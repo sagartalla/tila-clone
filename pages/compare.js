@@ -13,8 +13,8 @@ class ComparePage extends Base {
   pageName = 'COMPARE';
 
   componentDidMount() {
-    const { compareInfo } = this.props;
-    if (!compareInfo.compareCount) {
+    const { compareItems } = this.props;
+    if (!compareItems.products.length) {
       window.location = '/';
     }
   }
@@ -31,7 +31,7 @@ class ComparePage extends Base {
 }
 
 const mapStateToProps = store => ({
-  compareInfo: selectors.getCompareInfo(store),
+  compareItems: selectors.getCompareItemsCount(store),
 });
 
 const mapDispatchToProps = dispatch =>

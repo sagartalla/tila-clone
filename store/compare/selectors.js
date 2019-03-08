@@ -99,10 +99,15 @@ const getCmpData = store => store.compareReducer.data.compareItems || {
   products: [],
 };
 
+const getCompareItemsCount = () => JSON.parse(localStorage.getItem('compare')) || {
+  products: [],
+};
+
 export {
   getCompareCount,
   getCompareInfo,
   getBrandsInfo,
   getProductList,
   getCmpData,
+  getCompareItemsCount,
 };
