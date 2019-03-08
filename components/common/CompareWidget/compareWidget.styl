@@ -1,0 +1,62 @@
+@import '../../../layout/main/executables.styl';
+
+.compare-fixed
+  position fixed
+  right 0
+  top 50%
+  z-index 999
+  .compare-container
+    position relative
+    &:hover
+      .compare-items
+        display block
+    .compare-icon-com
+      position absolute
+      width 57px
+      background lightseagreen
+      height 57px
+      border-radius 50%
+      right -10px
+      z-index 99
+      cursor pointer
+      .compare-icon-holder
+        position absolute
+        width 15px
+        height 20px
+        top 50%
+        left 50%
+        transform translate(-50%, -50%)
+      .compare-icon
+        width 30px
+    .compare-items
+      display none
+      padding-bottom 0
+      border-radius 5px
+      background-color #fff
+      box-shadow 0 1px 2px 0 rgba(0,0,0,.2)
+      position absolute
+      bottom -20px
+      right 35px
+      border 1px solid #f0f0f0
+      .item
+        width 160px
+        height 200px
+        padding 0 10px 
+        position relative
+        .item-image
+          width 100%
+          height 85%
+          .image
+            max-height 100%
+            max-width 100%
+            object-fit scale-down
+        .close
+          position absolute
+          top 5px
+          right 5px
+          border-radius 50%
+          box-shadow 0 1px 2px 0 rgba(0,0,0,0.2)
+          cursor pointer
+          span
+            padding 5px
+

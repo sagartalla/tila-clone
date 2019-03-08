@@ -5,14 +5,15 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import _ from 'lodash';
 import Waypoint from 'react-waypoint';
-import { Modal } from 'react-bootstrap';
 
 import { Router } from '../../../routes';
 import constants from '../../../constants';
 import { actionCreators } from '../../../store/cam/wishlist';
+import { actionCreators as compareActions  } from '../../../store/compare/actions';
 import SVGCompoent from '../../common/SVGComponet';
 import { mergeCss } from '../../../utils/cssUtil';
 import { languageDefinations } from '../../../utils/lang';
+import { Modal } from 'react-bootstrap';
 import NotifyMe from '../../common/NotifyMe/NotifyMe';
 
 
@@ -28,6 +29,7 @@ class Product extends Component {
     this.addToWishlist = this.addToWishlist.bind(this);
     this.addToCart = this.addToCart.bind(this);
     this.buyNow = this.buyNow.bind(this);
+    this.addToCompare = this.addToCompare.bind(this);
     this.notify = this.notify.bind(this);
     this.closeNotify = this.closeNotify.bind(this);
   }
@@ -138,6 +140,22 @@ class Product extends Component {
     Router.pushRoute(`/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemtype}`)
   }
 
+  addToCompare(e) {
+    e.stopPropagation();
+    const {
+      productId, itemtype, media, displayName, categoryId,
+    } = this.props;
+    console.log('categoryId', categoryId);
+    const src = `${constants.mediaDomain}/${media[0]}`;
+    this.props.addToCompare({
+      itemtype,
+      productId,
+      src,
+      displayName,
+      categoryId,
+    });
+  }
+
   render() {
     const {
       media = [],
@@ -156,9 +174,10 @@ class Product extends Component {
       index,
       pageNum,
       userDetails,
+      flags,
     } = this.props;
     const { showNotify } = this.state;
-    //route={`/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemtype}`}
+    // route={`/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemtype}`}
     return (
       <Fragment>
         <div className={`${styles['product-items-main']}`} onClick = {() => this.routeChange(productId,variantId,catalogId,itemtype,index,pageNum)}>
@@ -189,7 +208,6 @@ class Product extends Component {
                   <span className={`${styles['fs-12']} ${styles['fontW600']} ${styles['pl-10']} ${styles['fullfilled-label']}`}>{PDP_PAGE.FULLFILLED_BY_TILA}</span>
                 </span>
               </span>
-
             </div>
             <div className={styles['desc-cont']}>
               <div className={`${styles['pb-20']} ${styles['pl-20']} ${styles['flex']} ${styles['flex-colum']}`}>
@@ -249,12 +267,13 @@ class Product extends Component {
                     <span className={`${styles['pl-5']} ${styles['fs-12']}`} disabled={addedToWishlist}>{addedToWishlist ? `${PDP_PAGE.ADDED_TO_WISHLIST}` : `${PDP_PAGE.ADD_TO_WISHLIST}`}</span>
                   </a>
                 </span>
+                {flags.comparable &&
                 <span className={styles['flex']}>
-                  <a className={styles['flex-center']}>
+                  <a className={styles['flex-center']} onClick={this.addToCompare}>
                     <SVGCompoent clsName={`${styles['wish-list']}`} src="icons/cam/cam-icon" />
                     <span className={`${styles['pl-5']} ${styles['fs-12']}`}>{PDP_PAGE.ADD_TO_COMPARE}</span>
                   </a>
-                </span>
+                </span>}
               </div>
               <div className={styles['brand-price-details']}>
                 {/* <div> */}
@@ -314,6 +333,7 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       addToWishlistAndFetch: actionCreators.addToWishlistAndFetch,
+      addToCompare: compareActions.addToCompare,
     },
     dispatch,
   );
