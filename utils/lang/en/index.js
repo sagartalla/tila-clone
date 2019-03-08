@@ -231,11 +231,10 @@ export const EN_KEYWORDS = {
     'RE_ENTER_PASSWORD_MESSAGE': 'Re-enter New Password',
     'SUBMIT_BUTTON': 'Change Password',
     'PASSWORD_LENGTH_MESSAGE': 'Be at least 8 characters in length Not be same as your current password',
-    'PASSWORD_LENGTH': 'Your password must be at least 8 characters long.',
-    'SAME_PASSWORD_MESSAGE': 'Make sure the new password is different from the password used before.',
+    'PASSWORD_LENGTH': 'Your password must be at least 8 characters long.'
   },
   PERSONAL_INFO_MODAL: {
-    'HEADING': 'Personal Information',
+    'HEADING': 'Personel Information',
     'EDIT': 'Edit',
     'NAME': 'Name',
     'DOB': 'Date Of Birth',

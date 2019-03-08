@@ -28,7 +28,7 @@ class EditPassword extends React.Component {
         show: nextProps.show
       })
     }
-    if (this.state.show == true) {
+    if (this.state.show == true && nextProps.errorMessege != this.state.error) {
       this.setState({
         error: nextProps.errorMessege
       });
@@ -106,7 +106,8 @@ class EditPassword extends React.Component {
     const { EDIT_PASSWORD_MODAL } = languageDefinations();
     const { newPassword, rePassword, oldPassword } = this.state;
     let { error } = this.state;
-    if (newPassword.length > 0 && oldPassword.length > 0 && newPassword === rePassword && newPassword !== oldPassword) {
+    this.props.resetPasswordInfoStore();
+    if (newPassword.length > 0 && oldPassword.length > 0 && newPassword === rePassword) {
       const passreg = /^([a-zA-Z0-9_-]){8,30}$/;
       const rechPassword = passreg.test(newPassword);
       if (rechPassword) {
@@ -119,8 +120,6 @@ class EditPassword extends React.Component {
       }
     } else if (newPassword.length === 0 || oldPassword.length === 0 || rePassword.length === 0) {
       error = EDIT_PASSWORD_MODAL.EMPTY_ERROR_MESSAGE;
-    } else if (newPassword === oldPassword){
-      error = EDIT_PASSWORD_MODAL.SAME_PASSWORD_MESSAGE;
     } else {
       error = EDIT_PASSWORD_MODAL.MATCH_ERROR_MESSAGE;
     }
