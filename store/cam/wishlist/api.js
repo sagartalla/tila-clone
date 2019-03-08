@@ -21,4 +21,12 @@ const deleteWishlistApi = (wishlist_id) => {
   });
 }
 
-export default { getWishlistApi, addToWishlistApi, deleteWishlistApi };
+const notifyMe = params => axios.post(`${constants.WISHLIST_API_URL}/api/v1/alert/stock/srp`, params)
+  .then((res) => {
+    alert('Will be notified soon');
+    return res;
+  });
+
+export default {
+  getWishlistApi, addToWishlistApi, deleteWishlistApi, notifyMe,
+};

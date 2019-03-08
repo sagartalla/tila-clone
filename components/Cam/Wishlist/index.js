@@ -42,8 +42,15 @@ class Wishlist extends Component {
 
   addToCart(e) {
     this.props.addToCart({
-      listing_id: e.target.id
+      listing_id: e.target.id,
     }, e.target.getAttribute('data-wish-id'), e.target.getAttribute('data-cart-res'));
+  }
+
+  notify = ({ target }) => {
+    const { notifyMe } = this.props;
+    notifyMe({
+      product_id: target.getAttribute('data-product-id'),
+    });
   }
 
   render() {
@@ -73,6 +80,7 @@ class Wishlist extends Component {
               data={results}
               deleteItem={this.deleteItem}
               addToCart={this.addToCart}
+              notifyMe={this.notify}
             />
         }
 
@@ -81,8 +89,8 @@ class Wishlist extends Component {
   }
 }
 
-const mapStateToProps = (store) => ({
-  results: selectors.getWishListResults(store)
+const mapStateToProps = store => ({
+  results: selectors.getWishListResults(store),
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -91,6 +99,7 @@ const mapDispatchToProps = (dispatch) =>
       getWishlist: actionCreators.getWishlist,
       deleteWishlist: actionCreators.deleteWishlist,
       addToCart: actionCreators.addToCart,
+      notifyMe: actionCreators.notifyMe,
     },
     dispatch,
   );

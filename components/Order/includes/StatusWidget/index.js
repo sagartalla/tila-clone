@@ -7,7 +7,7 @@ const styles = mergeCss('components/Order/includes/StatusWidget/statusWidget');
 
 const StatusWidget = ({ currentStatus }) => {
 
-  const len = Object.keys(currentStatus[0].state_times).length;
+  const len = Object.keys(currentStatus[0].state_time_estimates).length;
   const pivot = (100 / (len - 1));
   let barLen = 0;
 
@@ -16,8 +16,8 @@ const StatusWidget = ({ currentStatus }) => {
       <Row className={styles['m-0']}>
         <div className={`${styles['gray-line']} ${styles['flx-space-bw']}`}>
           {
-            Object.keys(currentStatus[0].state_times).map((i, k, index) => {
-              const { completed } = currentStatus[0].state_times[i];
+            Object.keys(currentStatus[0].state_time_estimates).map((i, k, index) => {
+              const { completed } = currentStatus[0].state_time_estimates[i];
               if (completed) {
                 barLen = pivot * k;
               }

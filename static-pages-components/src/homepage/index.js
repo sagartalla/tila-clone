@@ -1,13 +1,3 @@
-import React from 'react';
-import { Grid, Row, Col } from 'react-bootstrap';
-import Slider from 'react-slick';
-import NoSSR from 'react-no-ssr';
-
-import SVGComponent from '../../../common/SVGComponet';
-import { mergeCss } from '../../../../utils/cssUtil';
-
-const styles = mergeCss('components/Landing/includes/HomePage/homepage');
-
 let sliderTBS,
   sliderTIE,
   sliderHAL,
@@ -231,7 +221,7 @@ function SamplePrevArrow(props) {
   const { onClick } = props;
   return (
     <div
-      className={styles['leftArrow']}
+      className="leftArrow"
       onClick={onClick}
     >
       <img src="/static/img/landing-home/c-left.svg" alt="left" />
@@ -243,7 +233,7 @@ function SampleNextArrow(props) {
   const { onClick } = props;
   return (
     <div
-      className={styles['rightArrow']}
+      className="rightArrow"
       onClick={onClick}
     >
       <img src="/static/img/landing-home/c-right.svg" alt="right" />
@@ -290,7 +280,7 @@ const b_d_b = {
 
 const HomePage = () => (
   <NoSSR>
-    <div className={styles['home-style-main']}>
+    <div className="home-style-main">
       <div className={`${styles['mb-40']} top-banner-slider`}>
         <Slider
           dots
@@ -307,7 +297,7 @@ const HomePage = () => (
           {tbs.map(i => (
             <div>
               <a href={b_d_b[i.title]}>
-                <div className={styles['item']} key={i}>
+                <div className="item" key={i}>
                   <img src={i.img} />
                 </div>
               </a>
@@ -315,9 +305,9 @@ const HomePage = () => (
           ))}
         </Slider>
       </div>
-      <div className={styles['ff-t-i']}>
-        <div className={styles.e}>
-          <span className={`${styles.title} ${styles['fs-18']}`}>TOP IN ELECTRONICS</span>
+      <div className="ff-t-i">
+        <div className="e">
+          <span className={`title ${styles['fs-18']}`}>TOP IN ELECTRONICS</span>
           <Slider
             asNavFor={sliderTIE}
             ref={slider => (sliderTIE = slider)}
@@ -327,7 +317,7 @@ const HomePage = () => (
           >
             {tie.map(i => (
               <div>
-                <div className={styles.item} key={i}>
+                <div className="item" key={i}>
                   <a href={b_d_b[i.title]}>
                     <img src={i.img} alt={i.title} />
                   </a>
@@ -337,8 +327,8 @@ const HomePage = () => (
               ))}
           </Slider>
         </div>
-        <div className={styles['h-a-l']}>
-          <span className={`${styles.title} ${styles['fs-18']}`}>TOP IN FASHION AND HOME & LIVING</span>
+        <div className="h-a-l">
+          <span className={`title ${styles['fs-18']}`}>TOP IN FASHION AND HOME & LIVING</span>
           <Slider
             asNavFor={sliderHAL}
             ref={slider => (sliderHAL = slider)}
@@ -346,25 +336,24 @@ const HomePage = () => (
             className={styles['ht-100per']}
             slidesToShow={6}
           >
-            {hal.map((i) => {
-              return (
+            {hal.map((i) => (
                 <div>
-                  <div className={styles['item']} key={i}>
+                  <div className='item' key={i}>
                     <a href={b_d_b[i.title]}>
                       <img src={i.img} />
                     </a>
                     <span>{i.title}</span>
                   </div>
                 </div>
-            )})}
+            ))}
           </Slider>
         </div>
       </div>
-      <Row className={styles['d_items']}>
+      <Row className="d_items" >
         <div className={`${styles['flex-center']} ${styles['mb-15']}`}>
-          <span className={`${styles.title} ${styles['fs-18']}`}>DEALS OF THE DAY</span>
-          <span className={`${styles.timer} ${styles['flex-center']}`}>
-            <SVGComponent clsName={styles.time} src="icons/common-icon/timer" />
+          <span className={`title ${styles['fs-18']}`}>DEALS OF THE DAY</span>
+          <span className={`timer ${styles['flex-center']}`}>
+            <SVGComponent clsName="time" src="icons/common-icon/timer" />
             <span className={`${styles['fs-12']}`}>
               <span className={styles.fontW600}>ENDS IN:</span>  17 : 16 : 50
             </span>
@@ -383,98 +372,98 @@ const HomePage = () => (
         >
           {d_o_day.map(i => (
             <div className={styles.relative}>
-              <div className={styles.d_item} key={i}>
-                <div className={styles.image}>
+              <div className="d_item" key={i}>
+                <div className="image">
                   <img src={i.img} alt={i.title} />
                 </div>
-                <div className={styles['t_n_p']}>
+                <div className="t_n_p">
                   <div>
-                    <span className={styles['fontW600']}>{i.brand}</span>{' '}-{' '}
+                    <span className={styles.fontW600}>{i.brand}</span>{' '}-{' '}
                     <span>{i.title}</span>
                   </div>
                   <div>
-                    <span className={`${styles['fontW600']} ${styles['fs-12']}`}>{i.currency}</span>&nbsp;
-                    <span className={`${styles['fontW600']} ${styles['fs-18']}`}>{i.price}</span>&nbsp;&nbsp;
+                    <span className={`${styles.fontW600} ${styles['fs-12']}`}>{i.currency}</span>&nbsp;
+                    <span className={`${styles.fontW600} ${styles['fs-18']}`}>{i.price}</span>&nbsp;&nbsp;
                     <span className={styles['light-gray']}><s>{i.mrp}</s></span>
                   </div>
                 </div>
-                <div className={styles['b_n_c']}>
-                  <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['buy_now']}`}>BUY NOW</button>
-                  <button className={`${styles['fp-btn']} ${styles['add_to_cart']}`}>ADD TO CART</button>
+                <div className="b_n_c">
+                  <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} buy_now`}>BUY NOW</button>
+                  <button className={`${styles['fp-btn']} add_to_cart`}>ADD TO CART</button>
                 </div>
               </div>
-              <div className={styles['discount']}>
+              <div className="discount">
                 {Math.round(((i.price - i.mrp) / i.mrp) * 100)}%
               </div>
             </div>
             ))}
         </Slider>
       </Row>
-      <div className={styles['display-t-i-f']}>
-        <div className={`${styles['fs-20']} ${styles.title}`}>TOP IN FASHION</div>
-        <div className={styles.d1}>
+      <div className="display-t-i-f">
+        <div className={`${styles['fs-20']} title`}>TOP IN FASHION</div>
+        <div className="d1">
           <div>
-            <span className={styles['fs-20']}><span className={styles['lite']}>Kids Fashion</span><span className={styles['bold']}>UP TO 50% OFF</span></span>
+            <span className={styles['fs-20']}><span className="lite">Kids Fashion</span><span className={styles.bold}>UP TO 50% OFF</span></span>
             <a href={b_d_b["Kid's Fashion"]}>
-              <div className={styles['shadow']}>
-                  <img src={d_tif[0]} className={styles['img-responsive']} />
+              <div className="shadow">
+                <img src={d_tif[0]} className="img-responsive" />
               </div>
             </a>
-            <div className={styles['btn']}>
+            <div className="btn">
               <span>SHOP NOW</span>
-              <SVGComponent clsName={`${styles.arrow}`} src="icons/common-icon/arrow" />
+              <SVGComponent clsName="arrow" src="icons/common-icon/arrow" />
             </div>
           </div>
           <div>
-            <span className={styles['fs-20']}><span className={styles['lite']}>Women Clothing</span><span className={styles['bold']}>UP TO 50% OFF</span></span>
+            <span className={styles['fs-20']}><span className="lite">Women Clothing</span><span className={styles.bold}>UP TO 50% OFF</span></span>
             <a href={b_d_b['Womens Clothing']}>
-              <div className={styles['shadow']}>
-                  <img src={d_tif[1]} className={styles['img-responsive']} />
+              <div className="shadow">
+                <img src={d_tif[1]} className="img-responsive" />
               </div>
             </a>
-            <div className={styles['btn']}>
+            <div className="btn">
               <span>SHOP NOW</span>
-              <SVGComponent clsName={`${styles.arrow}`} src="icons/common-icon/arrow" />
+              <SVGComponent clsName="arrow" src="icons/common-icon/arrow" />
             </div>
           </div>
         </div>
-        <div className={styles.d2}>
+        <div className="d2">
           <div>
-            <span className={styles['fs-20']}><span className={styles['lite']}>Shoes</span><span className={styles['bold']}>UP TO 50% OFF</span></span>
-            <a href={b_d_b['Shoes']}>
-              <div className={styles['shadow']}>
-                <img src={d_tif[2]} className={styles['img-responsive']} />
+            <span className={styles['fs-20']}><span className="lite">Shoes</span><span className={styles.bold}>UP TO 50% OFF</span></span>
+            <a href={b_d_b.Shoes}>
+              <div className="shadow">
+                <img src={d_tif[2]} className="img-responsive" />
               </div>
             </a>
-            <div className={styles['btn']}>
+            <div className="btn">
               <span>SHOP NOW</span>
-              <SVGComponent clsName={`${styles.arrow}`} src="icons/common-icon/arrow" />
+              <SVGComponent clsName="arrow" src="icons/common-icon/arrow" />
             </div>
           </div>
           <div>
-            <span className={styles['fs-20']}><span className={styles['lite']}>Watches</span><span className={styles['bold']}>UP TO 50% OFF</span></span>
-            <a href={b_d_b['Watches']}>
-              <div className={styles['shadow']}>
-                <img src={d_tif[3]} className={styles['img-responsive']} />
+            <span className={styles['fs-20']}><span className="lite">Watches</span><span className={styles.bold}>UP TO 50% OFF</span></span>
+            <a href={b_d_b.Watches}>
+              <div className="shadow">
+                <img src={d_tif[3]} className="img-responsive" />
               </div>
             </a>
-            <div className={styles['btn']}>
+            <div className="btn">
               <span>SHOP NOW</span>
-              <SVGComponent clsName={`${styles.arrow}`} src="icons/common-icon/arrow" />
+              <SVGComponent clsName="arrow" src="icons/common-icon/arrow" />
             </div>
           </div>
         </div>
-        <div className={styles.d3}>
+        <div className="d3">
           <div>
-            <span className={styles['fs-20']}><span className={styles['lite']}>Men Clothing</span><span className={styles['bold']}>UP TO 50% OFF</span></span>
+            <span className={styles['fs-20']}><span className="lite">Men Clothing</span><span className={styles.bold}>UP TO 50% OFF</span></span>
             <a href={b_d_b['Mens Clothing']}>
-              <div className={styles['shadow']}>
-                  <img src={d_tif[4]} className={styles['img-responsive']} />
+              <div className="shadow">
+                <img src={d_tif[4]} className="img-responsive" />
               </div>
             </a>
-            <div className={styles['btn']}>
+            <div className="btn">
               <span>SHOP NOW</span>
-              <SVGComponent clsName={`${styles.arrow}`} src="icons/common-icon/arrow" />
+              <SVGComponent clsName="arrow" src="icons/common-icon/arrow" />
             </div>
           </div>
         </div>
@@ -493,70 +482,70 @@ const HomePage = () => (
           </Col>
         ))}
       </Row>
-      <div className={styles['display-t-i-hl']}>
-        <div className={`${styles['fs-20']} ${styles.title}`}>BEST OF HOME & LIVING</div>
-        <div className={styles.d1}>
+      <div className="display-t-i-hl">
+        <div className={`${styles['fs-20']} title`}>BEST OF HOME & LIVING</div>
+        <div className="d1">
           <div>
-            <span className={styles['fs-20']}><span className={styles.lite}>Kids Furniture</span><span className={styles.bold}>UP TO 50% OFF</span></span>
+            <span className={styles['fs-20']}><span className="lite">Kids Furniture</span><span className={styles.bold}>UP TO 50% OFF</span></span>
             <a href={b_d_b['furniture']}>
-              <div className={styles.shadow}>
-                <img src={d_tihl[0]} className={styles['img-responsive']} />
+              <div className="shadow">
+                <img src={d_tihl[0]} className="img-responsive" />
               </div>
             </a>
-            <div className={styles.btn}>
+            <div className="btn">
               <span>SHOP NOW</span>
-              <SVGComponent clsName={`${styles.arrow}`} src="icons/common-icon/arrow" />
+              <SVGComponent clsName="arrow" src="icons/common-icon/arrow" />
             </div>
           </div>
           <div>
-            <span className={styles['fs-20']}><span className={styles.lite}>Living Room Furniture</span><span className={styles.bold}>FROM SAR 200</span></span>
+            <span className={styles['fs-20']}><span className="lite">Living Room Furniture</span><span className={styles.bold}>FROM SAR 200</span></span>
             <a href={b_d_b['furniture']}></a>
-              <div className={styles.shadow}>
-                <img src={d_tihl[1]} className={styles['img-responsive']} />
+              <div className="shadow">
+                <img src={d_tihl[1]} className="img-responsive" />
               </div>
-            <div className={styles.btn}>
+            <div className="btn">
               <span>SHOP NOW</span>
-              <SVGComponent clsName={`${styles.arrow}`} src="icons/common-icon/arrow" />
+              <SVGComponent clsName="arrow" src="icons/common-icon/arrow" />
             </div>
           </div>
         </div>
-        <div className={styles.d2}>
+        <div className="d2">
           <div>
-            <span className={styles['fs-20']}><span className={styles.lite}>Lamps</span><span className={styles.bold}>UP TO 50% OFF</span></span>
+            <span className={styles['fs-20']}><span className="lite">Lamps</span><span className={styles.bold}>UP TO 50% OFF</span></span>
             <a href={b_d_b['lamps']}>
-              <div className={styles.shadow}>
-                <img src={d_tihl[2]} className={styles['img-responsive']} />
+              <div className="shadow">
+                <img src={d_tihl[2]} className="img-responsive" />
               </div>
             </a>
-            <div className={styles.btn}>
+            <div className="btn">
               <span>SHOP NOW</span>
-              <SVGComponent clsName={`${styles.arrow}`} src="icons/common-icon/arrow" />
+              <SVGComponent clsName="arrow" src="icons/common-icon/arrow" />
             </div>
           </div>
           <div>
-            <span className={styles['fs-20']}><span className={styles.lite}>Cushions</span><span className={styles.bold}>UP TO 50% OFF</span></span>
+            <span className={styles['fs-20']}><span className="lite">Cushions</span><span className={styles.bold}>UP TO 50% OFF</span></span>
             <a href={b_d_b['bedding']}>
-              <div className={styles.shadow}>
-                <img src={d_tihl[3]} className={styles['img-responsive']} />
+              <div className="shadow">
+                <img src={d_tihl[3]} className="img-responsive" />
               </div>
             </a>
-            <div className={styles.btn}>
+            <div className="btn">
               <span>SHOP NOW</span>
-              <SVGComponent clsName={`${styles.arrow}`} src="icons/common-icon/arrow" />
+              <SVGComponent clsName="arrow" src="icons/common-icon/arrow" />
             </div>
           </div>
         </div>
-        <div className={styles.d3}>
+        <div className="d3">
           <div>
-            <span className={styles['fs-20']}><span className={styles.lite}>Lights</span><span className={styles.bold}>FROM SAR 200</span></span>
+            <span className={styles['fs-20']}><span className="lite">Lights</span><span className={styles.bold}>FROM SAR 200</span></span>
             <a href={b_d_b['Lights']}>
-              <div className={styles.shadow}>
-                <img src={d_tihl[4]} className={styles['img-responsive']} />
+              <div className="shadow">
+                <img src={d_tihl[4]} className="img-responsive" />
               </div>
             </a>
-            <div className={styles.btn}>
+            <div className="btn">
               <span>SHOP NOW</span>
-              <SVGComponent clsName={`${styles.arrow}`} src="icons/common-icon/arrow" />
+              <SVGComponent clsName="arrow" src="icons/common-icon/arrow" />
             </div>
           </div>
         </div>
@@ -573,75 +562,77 @@ const HomePage = () => (
           </Col>
         ))}
       </Row>
-      <div className={styles['display-t-i-e']}>
-        <div className={`${styles['fs-20']} ${styles['title']}`}>TOP IN ELECTRONICS</div>
-        {/*<div className={`${styles['']}`}>
+      <div className="display-t-i-e">
+        <div className={`${styles['fs-20']} title`}>TOP IN ELECTRONICS</div>
+        {/* <div className={`${styles['']}`}>
           <span>See more</span><SVGComponent clsName={`${styles['arrow']}`} src="icons/common-icon/arrow" />
         </div>*/}
         <div>
-          <div className={styles['d1']}>
+          <div className="d1">
             <div>
-              <span className={styles['fs-20']}><span className={styles['lite']}>Laptops</span><span className={styles['bold']}>UP TO 50% OFF</span></span>
-              <a href={b_d_b['Laptops']}>
-                <div className={styles['shadow']}>
-                    <img src={d_tie[0]} className={styles['img-responsive']} />
+              <span className={styles['fs-20']}><span className="lite">Laptops</span><span className={styles.bold}>UP TO 50% OFF</span></span>
+              <a href={b_d_b.Laptops}>
+                <div className="shadow">
+                  <img src={d_tie[0]} className="img-responsive" />
                 </div>
               </a>
-              <div className={styles['btn']}>
+              <div className="btn">
                 <span>SHOP NOW</span>
-                <SVGComponent clsName={`${styles['arrow']}`} src="icons/common-icon/arrow" />
+                <SVGComponent clsName="arrow" src="icons/common-icon/arrow" />
               </div>
             </div>
             <div>
-              <span className={styles['fs-20']}><span className={styles['lite']}>Mobiles</span><span className={styles['bold']}>UP TO 50% OFF</span></span>
-              <a href={b_d_b['Mobiles']}>
-                <div className={styles['shadow']}>
-                  <img src={d_tie[1]} className={styles['img-responsive']} />
+              <span className={styles['fs-20']}><span className="lite">Mobiles
+                                                </span><span className={styles.bold}>UP TO 50% OFF</span>
+              </span>
+              <a href={b_d_b.Mobiles}>
+                <div className="shadow">
+                  <img src={d_tie[1]} className="img-responsive" />
                 </div>
               </a>
-              <div className={styles['btn']}>
+              <div className="btn">
                 <span>SHOP NOW</span>
-                <SVGComponent clsName={`${styles['arrow']}`} src="icons/common-icon/arrow" />
+                <SVGComponent clsName="arrow" src="icons/common-icon/arrow" />
               </div>
             </div>
           </div>
-          <div className={styles['d2']}>
+          <div className="d2">
             <div>
-              <span className={styles['fs-20']}><span className={styles['lite']}>Camara</span><span className={styles['bold']}>UP TO 50% OFF</span></span>
-              <a href={b_d_b['Cameras']}>
-                <div className={styles['shadow']}>
-                  <img src={d_tie[2]} className={styles['img-responsive']} />
+              <span className={styles['fs-20']}><span className="lite">Camara</span><span className={styles.bold}>UP TO 50% OFF</span></span>
+              <a href={b_d_b.Cameras}>
+                <div className="shadow">
+                  <img src={d_tie[2]} className="img-responsive" />
                 </div>
               </a>
-              <div className={styles['btn']}>
+              <div className="btn">
                 <span>SHOP NOW</span>
-                <SVGComponent clsName={`${styles['arrow']}`} src="icons/common-icon/arrow" />
+                <SVGComponent clsName="arrow" src="icons/common-icon/arrow" />
               </div>
             </div>
             <div>
-              <span className={styles['fs-20']}><span className={styles['lite']}>Kitchen Appliances</span><span className={styles['bold']}>UP TO 50% OFF</span></span>
+              <span className={styles['fs-20']}><span className="lite">Kitchen Appliances</span><span className={styles.bold}>UP TO 50% OFF</span></span>
               <a href={b_d_b['Kitchen Appliances']}>
-                <div className={styles['shadow']}>
-                    <img src={d_tie[3]} className={styles['img-responsive']} />
+                <div className="shadow">
+                  <img src={d_tie[3]} className="img-responsive" />
                 </div>
               </a>
-              <div className={styles['btn']}>
+              <div className="btn">
                 <span>SHOP NOW</span>
-                <SVGComponent clsName={`${styles['arrow']}`} src="icons/common-icon/arrow" />
+                <SVGComponent clsName="arrow" src="icons/common-icon/arrow" />
               </div>
             </div>
           </div>
-          <div className={styles['d3']}>
+          <div className="d3">
             <div>
-              <span className={styles['fs-20']}><span className={styles['lite']}>Audio Devices</span><span className={styles['bold']}>UP TO 50% OFF</span></span>
-              <a href={b_d_b['Speakers']}>
-                <div className={styles['shadow']}>
-                    <img src={d_tie[4]} className={styles['img-responsive']} />
+              <span className={styles['fs-20']}><span className="lite">Audio Devices</span><span className={styles.bold}>UP TO 50% OFF</span></span>
+              <a href={b_d_b.Speakers}>
+                <div className="shadow">
+                  <img src={d_tie[4]} className="img-responsive" />
                 </div>
               </a>
-              <div className={styles['btn']}>
+              <div className="btn">
                 <span>SHOP NOW</span>
-                <SVGComponent clsName={`${styles['arrow']}`} src="icons/common-icon/arrow" />
+                <SVGComponent clsName="arrow" src="icons/common-icon/arrow" />
               </div>
             </div>
           </div>
@@ -653,9 +644,9 @@ const HomePage = () => (
         </div>
       </div>
 
-      <Row className={styles['d_items']}>
+      <Row className="d_items" >
         <div>
-          <span className={`${styles.title} ${styles['fs-18']}`}>BRANDS YOU LOVE</span>
+          <span className={`title ${styles['fs-18']}`}>BRANDS YOU LOVE</span>
         </div>
         <Slider
           asNavFor={sliderDODAY}
@@ -668,12 +659,12 @@ const HomePage = () => (
         >
           {b_y_l.map(i => (
             <Col key={i} md={3} xs={3} sm={3}>
-              <div className={styles.image}>
+              <div className="image">
                 <img src={i.img} alt={i.img} />
               </div>
-              <div className={styles['b_l']}>
+              <div className="b_l">
                 <img src={i.brandImg} width="80" height="30" alt={i.brandImg} />
-                <SVGComponent clsName={`${styles.arrow} arrow-black `} src="icons/common-icon/arrow" />
+                <SVGComponent clsName="arrow arrow-black " src="icons/common-icon/arrow" />
               </div>
             </Col>
           ))}
@@ -683,9 +674,9 @@ const HomePage = () => (
         </div>
       </Row>
 
-      <Row className={styles['d_items']}>
+      <Row className="d_items" >
         <div>
-          <span className={`${styles.title} ${styles['fs-18']}`}>BEST SELLING</span>
+          <span className={`title ${styles['fs-18']}`}>BEST SELLING</span>
         </div>
         <Slider
           asNavFor={sliderBS}
@@ -700,36 +691,36 @@ const HomePage = () => (
         >
           {d_o_day.map(i => (
             <div className={styles.relative}>
-              <div className={styles.d_item} key={i}>
-                <div className={styles.image}>
+              <div className="d_item" key={i}>
+                <div className="image">
                   <img src={i.img} alt={i.title} />
                 </div>
-                <div className={styles['t_n_p']}>
+                <div className="t_n_p">
                   <div>
-                    <span className={styles['fontW600']}>{i.brand}</span>{' '}-{' '}
+                    <span className={styles.fontW600}>{i.brand}</span>{' '}-{' '}
                     <span>{i.title}</span>
                   </div>
                   <div>
-                    <span className={`${styles['fontW600']} ${styles['fs-12']}`}>{i.currency}</span>&nbsp;
-                    <span className={`${styles['fontW600']} ${styles['fs-18']}`}>{i.price}</span>&nbsp;&nbsp;
+                    <span className={`${styles.fontW600} ${styles['fs-12']}`}>{i.currency}</span>&nbsp;
+                    <span className={`${styles.fontW600} ${styles['fs-18']}`}>{i.price}</span>&nbsp;&nbsp;
                     <span className={styles['light-gray']}><s>{i.mrp}</s></span>
                   </div>
                 </div>
-                <div className={styles['b_n_c']}>
-                  <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['buy_now']}`}>BUY NOW</button>
-                  <button className={`${styles['fp-btn']} ${styles['add_to_cart']}`}>ADD TO CART</button>
+                <div className="b_n_c">
+                  <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} buy_now`}>BUY NOW</button>
+                  <button className={`${styles['fp-btn']} add_to_cart`}>ADD TO CART</button>
                 </div>
               </div>
-              <div className={styles['sold']}>
+              <div className="sold">
                 {Math.round(Math.random() * 100)}+ Sold
               </div>
             </div>
             ))}
         </Slider>
       </Row>
-      <Row className={styles['d_items']}>
+      <Row className="d_items" >
         <div>
-          <span className={`${styles.title} ${styles['fs-18']}`}>RECENTLY VIEWED</span>
+          <span className={`title ${styles['fs-18']}`}>RECENTLY VIEWED</span>
         </div>
         <Slider
           asNavFor={sliderRV}
@@ -744,27 +735,27 @@ const HomePage = () => (
         >
           {d_o_day.map(i => (
             <div className={styles.relative}>
-              <div className={styles.d_item} key={i}>
-                <div className={styles.image}>
+              <div className="d_item" key={i}>
+                <div className="image">
                   <img src={i.img} alt={i.title} />
                 </div>
-                <div className={styles['t_n_p']}>
+                <div className="t_n_p">
                   <div>
-                    <span className={styles['fontW600']}>{i.brand}</span>{' '}-{' '}
+                    <span className={styles.fontW600}>{i.brand}</span>{' '}-{' '}
                     <span>{i.title}</span>
                   </div>
                   <div>
-                    <span className={`${styles['fontW600']} ${styles['fs-12']}`}>{i.currency}</span>&nbsp;
-                    <span className={`${styles['fontW600']} ${styles['fs-18']}`}>{i.price}</span>&nbsp;&nbsp;
+                    <span className={`${styles.fontW600} ${styles['fs-12']}`}>{i.currency}</span>&nbsp;
+                    <span className={`${styles.fontW600} ${styles['fs-18']}`}>{i.price}</span>&nbsp;&nbsp;
                     <span className={styles['light-gray']}><s>{i.mrp}</s></span>
                   </div>
                 </div>
-                <div className={styles['b_n_c']}>
-                  <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['buy_now']}`}>BUY NOW</button>
-                  <button className={`${styles['fp-btn']} ${styles['add_to_cart']}`}>ADD TO CART</button>
+                <div className="b_n_c">
+                  <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} buy_now`}>BUY NOW</button>
+                  <button className={`${styles['fp-btn']} add_to_cart`}>ADD TO CART</button>
                 </div>
               </div>
-              <div className={styles['discount']}>
+              <div className="discount">
                 {Math.round(((i.price - i.mrp) / i.mrp) * 100)}%
               </div>
             </div>
@@ -775,4 +766,3 @@ const HomePage = () => (
   </NoSSR>
 );
 
-export default HomePage;

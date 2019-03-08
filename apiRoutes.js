@@ -61,6 +61,7 @@ apiRoutes
   })
   .post('/logout', (req, res) => {
     req.universalCookies.remove('auth');
+    req.universalCookies.remove('userCreds');
     req.universalCookies.remove('ptaToken');
     return res.json({});
   })
