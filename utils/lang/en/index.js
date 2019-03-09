@@ -97,7 +97,8 @@ export const EN_KEYWORDS = {
   },
   WISH_LIST_PAGE: {
     'WISHLIST_HEADER': 'items in wishlist',
-    'ADD_TO_CART_BTN': 'MOVE TO CART'
+    'ADD_TO_CART_BTN': 'MOVE TO CART',
+    'NOTIFY_ME_BTN': 'Notify Me'
   },
   PDP_PAGE: {
     'LOADING_REVIEWS': 'Loading Reviews...',
@@ -118,6 +119,7 @@ export const EN_KEYWORDS = {
     'PRODUCT_DETAILS': 'PRODUCT DETAILS',
     'ADD_TO_CART': 'Add To Cart',
     'BUY_NOW': 'Buy Now',
+    'NOTIFY_ME': 'Notify Me',
     'BUY_FOR': 'BUY FOR',
     'ADDED_TO_CART': 'In Cart',
     // //New keys
@@ -229,10 +231,11 @@ export const EN_KEYWORDS = {
     'RE_ENTER_PASSWORD_MESSAGE': 'Re-enter New Password',
     'SUBMIT_BUTTON': 'Change Password',
     'PASSWORD_LENGTH_MESSAGE': 'Be at least 8 characters in length Not be same as your current password',
-    'PASSWORD_LENGTH': 'Your password must be at least 8 characters long.'
+    'PASSWORD_LENGTH': 'Your password must be at least 8 characters long.',
+    'SAME_PASSWORD_MESSAGE': 'Make sure the new password is different from the password used before.',
   },
   PERSONAL_INFO_MODAL: {
-    'HEADING': 'Personel Information',
+    'HEADING': 'Personal Information',
     'EDIT': 'Edit',
     'NAME': 'Name',
     'DOB': 'Date Of Birth',
@@ -369,6 +372,13 @@ export const EN_KEYWORDS = {
     'DOWNLOAD_APP': 'Download the app',
     'TILA_RIGHTS': '&copy; 2018 www.tila.com. All rights reserved'
 
+  },
+  COMPARE: {
+    'TILA_COMPARE_1': 'Tila Comparing (',
+    'TILA_COMPARE_2': 'items) for you',
+    'FEATUERS': 'Features',
+    'CLEAR_ALL': 'Clear All',
+    'COMPARE': 'COMPARE',
   },
   HEADER_PAGE: {
     'HELLO_GUEST': 'Hello Guest',

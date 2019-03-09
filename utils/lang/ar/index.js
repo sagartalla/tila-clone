@@ -97,6 +97,7 @@ export const AR_KEYWORDS = {
   WISH_LIST_PAGE: {
     'WISHLIST_HEADER': 'المنتجات في قائمة الامنيات',
     'ADD_TO_CART_BTN': 'أضف إلى سلة المشتريات',
+    'NOTIFY_ME_BTN': 'اعلمني',
   },
   PDP_PAGE: {
     'LOADING_REVIEWS': 'جارٍ تحميل آراء التقييم ...',
@@ -117,6 +118,7 @@ export const AR_KEYWORDS = {
     'PRODUCT_DETAILS': 'PRODUCT DETAILS',
     'ADD_TO_CART': 'ADD TO CART',
     'BUY_NOW': 'BUY NOW',
+    'NOTIFY_ME': 'Notify Me',
     'BUY_FOR': 'BUY FOR',
     'ADDED_TO_CART': 'أضف إلى سلة المشتريات',
     // //New keys
@@ -228,10 +230,11 @@ export const AR_KEYWORDS = {
     'RE_ENTER_PASSWORD_MESSAGE': 'أعد إدخال كلمة المرور الجديدة',
     'SUBMIT_BUTTON': 'تغيير كلمة المرور',
     'PASSWORD_LENGTH_MESSAGE': 'Be at least 8 characters in length Not be same as your current password',
-    'PASSWORD_LENGTH': 'Your password must be at least 8 characters long.'
+    'PASSWORD_LENGTH': 'Your password must be at least 8 characters long.',
+    'SAME_PASSWORD_MESSAGE': 'Make sure the new password is different from the password used before.',
   },
   PERSONAL_INFO_MODAL: {
-    'HEADING': 'Personel Information',
+    'HEADING': 'Personal Information',
     'EDIT': 'تصحيح',
     'NAME': 'Name',
     'DOB': 'تاريخ الولادة',

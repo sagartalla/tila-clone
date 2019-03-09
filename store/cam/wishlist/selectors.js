@@ -26,8 +26,9 @@ const getWishListResults = (store) => {
         wishlisted_price: item.wishlisted_price,
         catalog_id: item && item.product_details && item.product_details.catalog_details.catalog_id,
         itemType: item && item.product_details && item.product_details.catalog_details.item_type_name,
-      })
-    })
+        inventory_count: variant_info.total_inventory_count,
+      });
+    });
 
     return newData.reverse();
   }

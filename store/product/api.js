@@ -20,6 +20,10 @@ const getPreview = (options) => {
     };
   });
 }
-
-
-export default { getProduct, getPreview };
+const getReviewRatings = (options) => {
+  return axios.post(`${constants.REVIEWS_API_URL}/api/v1/reviews/fetch`,options)
+}
+const submitUserReview = (options) => {
+  return axios.post(`${constants.REVIEWS_API_URL}/api/v1/reviews/write_or_edit`,options)
+}
+export default { getProduct, getPreview, getReviewRatings,submitUserReview };
