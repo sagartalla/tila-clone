@@ -15,7 +15,7 @@ const addCartAndWishlistDetails = (store, results) => {
   //   return resutls;
   // }
   const cartListingIds = items.map(i => i.listing_id) || [];
-  const wishListProductIds = store.wishlistReducer.data.map(w => w.product_id) || [];
+  const wishListProductIds = data.map(w => w.product_id) || [];
   return {
     ...results,
     items: results.items.map((i) => {
