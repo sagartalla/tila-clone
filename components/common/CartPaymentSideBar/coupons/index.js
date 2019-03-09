@@ -53,7 +53,6 @@ class Coupon extends Component {
    const {
      showTerms, termsOfUse, howToUse, showHowToUse, couponCode,
    } = this.state;
-   console.log(moment('Sun Oct 20 08:46:48 UTC 2019').format("hh:mm:ss"));
    return (
      <div>
        <div className={styles.couponApply}>
@@ -70,7 +69,7 @@ class Coupon extends Component {
        <div>
          {couponData.map(data =>
             (
-              moment(data.ends_on).format("hh:mm:ss") >= moment().format("hh:mm:ss") &&
+              (moment(data.ends_on).toDate().getTime() >= moment().toDate().getTime()) &&
               <div className={styles.couponDiv}>
                 <div className={`${styles.flex}`}>
                   <div className={data.offer_sub_type === 'LISTING' ? `${styles.couponCodeListing}` : data.offer_sub_type === 'BANK' ? `${styles.couponCodeBank}` : `${styles.couponCodeCategory}`}>
