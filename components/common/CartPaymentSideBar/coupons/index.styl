@@ -1,0 +1,155 @@
+@import '../../../../layout/main/executables.styl';
+
+.couponDiv
+   border: solid 0.9px #eeeeee;
+   height 200px
+   width: 350px;
+   margin-top: 30px;
+   box-shadow: 0 5px 9px 0 rgba(0, 0, 0, 0.05);
+   border-radius: 5px;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+
+.couponApply
+    position: fixed;
+    top: 10%;
+    border-radius: 2px;
+    box-shadow: 0 3px 9px 0 rgba(0, 0, 0, 0.07);
+    background-color: #ffffff;
+    border-bottom: 0;
+    display flex
+    align-items center
+    z-index 5;
+
+.couponCodeListing
+    padding: 7px;
+    border-top-right-radius: 7px;
+    border-bottom-right-radius: 7px;
+    width: 30%;
+    border-right: 0 !important;
+    margin-top: 10px;
+    height: 33px;
+    text-align: center;
+    left: -10px;
+    position: relative;
+    border: solid 1px #cce792;
+    background-color: #f3ffda;
+
+
+.couponCodeListing:after {
+    content: '';
+    display: block;
+    position: relative;
+    left: -8px;
+    width: 0;
+    border-bottom: 10px solid #c8d4b0;
+    border-left: 10px solid transparent;
+    top: 27%;
+    transform: rotate(-90deg);
+}
+.couponCodeCategory
+    padding: 7px;
+    border-top-right-radius: 7px;
+    border-bottom-right-radius: 7px;
+    width: 30%;
+    border-right: 0 !important;
+    margin-top: 10px;
+    height: 33px;
+    text-align: center;
+    left: -10px;
+    position: relative;
+    border: solid 1.3px #cee3fa;
+    background-color: #f0f7ff;
+
+
+.couponCodeCategory:after {
+    content: '';
+    display: block;
+    position: relative;
+    left: -8px;
+    width: 0;
+    border-bottom: 10px solid #abc3df;
+    border-left: 10px solid transparent;
+    top: 27%;
+    transform: rotate(-90deg);
+}
+
+.couponCodeBank
+    padding: 7px;
+    border-top-right-radius: 7px;
+    border-bottom-right-radius: 7px;
+    width: 30%;
+    border-right: 0 !important;
+    margin-top: 10px;
+    height: 33px;
+    text-align: center;
+    left: -10px;
+    position: relative;
+    border: solid 1.3px #b6f2e5;
+    background-color: #e0fdf7;
+
+.couponCodeBank:after {
+    content: '';
+    display: block;
+    position: relative;
+    left: -8px;
+    width: 0;
+    border-bottom: 10px solid #c3e3dc;
+    border-left: 10px solid transparent;
+    top: 27%;
+    transform: rotate(-90deg);
+}
+
+.couponOffer
+    padding: 7px;
+    border-top-left-radius: 7px;
+    border-bottom-left-radius: 7px;
+    width: 30%;
+    border-left: 0 !important;
+    margin-top: 10px;
+    text-align: center;
+    left: -10px;
+    position: relative;
+    height: 33px;
+
+.listingColor
+    border: solid 1px #cce792;
+    background-color: #f3ffda;
+
+.categoryColor
+   border: solid 1.3px #cee3fa;
+   background-color: #f0f7ff;
+
+.bankColor
+   border: solid 1.3px #b6f2e5;
+   background-color: #e0fdf7;
+
+
+.modalClassName
+   position absolute
+   top 35%
+
+.applied 
+   color: #9c3;
+   
+.buttonStyle
+   left: 55%;
+   bottom: 1%;
+   position: absolute;
+
+.wordBreak
+   word-break: break-all;
+
+.input
+  width 350px !important
+  height 60px
+  border 0 !important
+
+.overflow
+  overflow: auto;
+  max-height: 200px;
+
+.border
+  border-right: 1px dotted;
+  margin-left: 30px;

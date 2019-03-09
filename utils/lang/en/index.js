@@ -435,5 +435,12 @@ export const EN_KEYWORDS = {
     'MY_ACCOUNT': 'My account',
     'ORDERS': 'Orders',
     'PAYMENT_FAILED': 'Payment Failed',
-  }
+  },
+  COUPON_OFFERS: {
+    'VIEW_TERMS': 'View T & C',
+    'HOW_TO_USE': 'How to use',
+    'APPLIED': 'Applied',
+    'OK': 'OK',
+    'APPLY': 'Apply',
+  },
 };
