@@ -16,14 +16,18 @@ import { languageDefinations } from '../../../utils/lang';
 import { Modal } from 'react-bootstrap';
 import NotifyMe from '../../common/NotifyMe/NotifyMe';
 
-
+import RenderVariants from './renderVariants'
 const styles = mergeCss('components/Search/search');
 const { PDP_PAGE } = languageDefinations()
+
 class Product extends Component {
   constructor(props) {
     super(props);
     this.state = {
       showNotify: false,
+      src:'',
+      selectedIndex:0,
+      showLoader:false
     };
     this.setImg = this.setImg.bind(this);
     this.addToWishlist = this.addToWishlist.bind(this);
@@ -32,6 +36,8 @@ class Product extends Component {
     this.addToCompare = this.addToCompare.bind(this);
     this.notify = this.notify.bind(this);
     this.closeNotify = this.closeNotify.bind(this);
+    this.selectedVariant = this.selectedVariant.bind(this);
+    this.closeVariantTab = this.closeVariantTab.bind(this);
   }
 
   setImg() {
@@ -59,6 +65,8 @@ class Product extends Component {
     const { variants } = this.props;
     this.props.buyNow(variants.listingId[0]);
   }
+
+
 
   notify(e) {
     e.stopPropagation();
@@ -90,27 +98,36 @@ class Product extends Component {
       media,
       variants,
       itemtype,
-      currency
+      currency,
+      addToCart
     } = this.props;
-    digitalData.cart.item.push({
-      productInfo:{
-        productID:productId,
-        productName:productName,
-        manufacturer:brand,
-        productImage:media[0]
-      },
-      category:{
-        primaryCategory:itemtype
-      },
-      price:{
-        basePrice:variants.sellingPrice[0],
-        currency
-      },
-      quantity:1
-    })
-    this.props.addToCart(variants.listingId[0]);
-  }
 
+    if(variants.length <= 1) {
+      this.props.addToCart(variants[0].listingId[0])
+    } else {
+      let id = [productId]
+      this.props.selectedProduct(id)
+    }
+    // digitalData.cart.item.push({
+    //   productInfo:{
+    //     productID:productId,
+    //     productName:productName,
+    //     manufacturer:brand,
+    //     productImage:media[0]
+    //   },
+    //   category:{
+    //     primaryCategory:itemtype
+    //   },
+    //   price:{
+    //     basePrice:variants.sellingPrice[0],
+    //     currency
+    //   },
+    //   quantity:1
+    // })
+  }
+  componentWillReceiveProps() {
+    this.setState({showLoader:false})
+  }
   getOfferClassName(offer) {
     if (offer > 10 && offer < 20) {
       return 'green'
@@ -125,6 +142,17 @@ class Product extends Component {
       return 'red';
     }
   }
+  closeVariantTab(e) {
+    e.stopPropagation();
+    this.props.selectedProduct([])
+  }
+  selectedVariant(listingId,index) {
+    const { addToCart } = this.props
+    this.setState({
+      selectedIndex:index,
+      showLoader:true
+    },() => this.props.addToCart(listingId))
+  }
   itemNumberClick = (index,pageNum) => {
     let productInfo = {
       pageFragmentation:pageNum,
@@ -134,7 +162,6 @@ class Product extends Component {
     var event = new CustomEvent('event-pageItem-click');
     document.dispatchEvent(event);
   }
-
   routeChange(productId,variantId,catalogId,itemtype,index,pageNum) {
     this.itemNumberClick(index,pageNum)
     Router.pushRoute(`/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemtype}`)
@@ -174,33 +201,32 @@ class Product extends Component {
       index,
       pageNum,
       userDetails,
-      flags,
+      selectedID,
+      flags
     } = this.props;
-    const { showNotify } = this.state;
-    // route={`/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemtype}`}
+    const { showNotify,selectedIndex,showLoader } = this.state;
     return (
       <Fragment>
-        <div className={`${styles['product-items-main']}`} onClick = {() => this.routeChange(productId,variantId,catalogId,itemtype,index,pageNum)}>
+        <div
+          className=
+          {
+             selectedID.length > 0 && selectedID.includes(productId) ?
+            `${styles['active-product']} ${styles['product-items-main']}` : `${styles['product-items-main']}`}
+            onClick = {() => this.routeChange(productId,variantId,catalogId,itemtype,index,pageNum)}>
           <div className={`${styles['product-items']}`}>
+            {
+              showLoader ? <div className={styles['loader-div']}>
+                <SVGCompoent clsName={`${styles['loader-styl']}`} src="icons/common-icon/circleLoader" />
+              </div> : null
+            }
+
             <div className={`${styles['img-cont']} ${styles['border-radius4']} ${styles['relative']}`}>
               <div className={styles['image-div']}>
                 <Waypoint onEnter={this.setImg}>
                   <img src={this.state.src} />
                 </Waypoint>
               </div>
-              {
-                (offers.length > 0)
-                  ?
-                  (
-                    offers.length > 1 && (offers[0] <= 10 && offers[0] > 0)
-                      ?
-                      <span className={`${styles['tag-main']} ${styles['absolute']}`}></span>
-                      :
-                      <span className={`${styles['offer-tag']} ${styles['white-color']} ${styles['fs-12']} ${styles['absolute']} ${styles[this.getOfferClassName(offers[0])]}`}>{offers[0]} {PDP_PAGE.OFF}</span>
-                  )
-                  :
-                  null
-              }
+
               <span className={`${styles['variants-main']}`}></span>
               <span className={styles['full-and-globe-main']}>
                 <span className={`${styles['fullfill-main']} ${styles['flex-center']}`}>
@@ -216,20 +242,13 @@ class Product extends Component {
                 </h5>
                 <span>
                   <span className={`${styles['pr-5']} ${styles['fs-12']} ${styles['fontW600']}`}>{currency}</span>
-                  <span className={`${styles['fs-16']} ${styles['fontW700']}`}>{priceRange}</span>
-                  <span className={`${styles['offers-label-color']} ${styles['fontW600']} ${styles['fs-12']}`}>
-                    {
-                      offers.length > 1
-                        ?
-                        `${offers} Offers`
-                        :
-                        offers.length > 0 && (offers[0] <= 10 && offers[0] > 0)
-                          ?
-                          `${offers[0]} OFF`
-                          :
-                          null
-                    }
-                  </span>
+                  {
+                    variants.length > 0  &&
+                    <span
+                    className={`${styles['fs-16']} ${styles['fontW700']}`}>{variants[selectedIndex].sellingPrice[0]}
+                   </span>
+
+                }
                 </span>
               </div>
               {/* <div className={styles['variant-info']}>
@@ -238,15 +257,18 @@ class Product extends Component {
                 }
               </div> */}
             </div>
-            <div className={`${styles['hover-show-date']} ${styles['pb-10']} ${styles['pb-10']} ${styles['relative']}`}>
-              {Object.keys(variants).length > 0 ?
+            <div className={ selectedID.length > 0 && selectedID.includes(productId) ?
+                `${styles['active-product']} ${styles['display-buttons']} ${styles['hover-show-date']} ${styles['pb-10']} ${styles['relative']}`
+                : `${styles['hover-show-date']} ${styles['pb-10']} ${styles['relative']}`}
+                >
+              {
+                variants.length > 0 ?
                 <div className={`${styles['flex']} ${styles['justify-around']} ${styles['quick-view']} ${styles['border-radius4']}`}>
                   <a className={`${styles['flex']} ${styles['add-to-crt']}`} onClick={this.addToCart}>
                     {/* <SVGCompoent clsName={`${styles['cart-list']}`} src="icons/cart/blue-cart-icon" /> */}
-                    <span disabled={addedToCart}>
-                      {
-                        addedToCart ? <span className={styles['flex']}><SVGCompoent clsName={styles['cart-list']} src="icons/cart/added-cart-icon" />{PDP_PAGE.ADDED_TO_CART}</span> :
-                          <span className={styles['flex']}><SVGCompoent clsName={styles['cart-list']} src="icons/cart/blue-cart-icon" />{PDP_PAGE.ADD_TO_CART}</span>}</span>
+                    <span>
+                      <span className={styles['flex']}><SVGCompoent clsName={styles['cart-list']} src="icons/cart/blue-cart-icon" />{PDP_PAGE.ADD_TO_CART}</span>
+                    </span>
                   </a>
                   <a className={`${styles['flex-center']} ${styles['buy-now-btn']}`} onClick={this.buyNow}>
                     <SVGCompoent clsName={`${styles['cart-list']}`} src="icons/cart/buy-icon" />
@@ -283,7 +305,7 @@ class Product extends Component {
                   {/* <span className={`${styles['fs-12']} ${styles['label-gry-clr']}`}>Denim shirt with baseball shirt stiff collar and formal tie</span> */}
                 {/* </div> */}
                 <span className={`${styles['pr-5']} ${styles['fs-12']} ${styles['fontW600']}`}>{currency}</span>
-                <span className={`${styles['fs-16']} ${styles['fontW700']}`}>{priceRange}</span>
+                {variants.length > 0 && <span className={`${styles['fs-16']} ${styles['fontW700']}`}>{variants[selectedIndex].sellingPrice[0]}</span>}
                 <div className={`${styles['flex']} ${styles['pt-5']}`}>
                   <span className={styles['flex']}>
                     <SVGCompoent clsName={`${styles['star-raing']}`} src="icons/common-icon/star-full-yellow" />
@@ -305,6 +327,15 @@ class Product extends Component {
                 </div>
               </div> */}
             </div>
+            {
+              variants.length > 1 &&
+                <RenderVariants
+                  variantData={variants}
+                  onSelectedVariant={this.selectedVariant}
+                  isvisible={selectedID.length > 0 && selectedID.includes(productId)}
+                  OncloseVariant={this.closeVariantTab}
+                />
+            }
           </div>
         </div>
         <Modal show={showNotify} onHide={this.closeNotify}>
@@ -340,3 +371,7 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(null, mapDispatchToProps)(Product);
+
+
+
+  // variants[selectedIndex].addedToCart ? <span className={styles['flex']}><SVGCompoent clsName={styles['cart-list']} src="icons/cart/added-cart-icon" />{PDP_PAGE.ADDED_TO_CART}</span> :

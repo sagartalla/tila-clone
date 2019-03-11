@@ -1,6 +1,28 @@
 import shortid from 'shortid';
 import _ from 'lodash';
 
+const filterVariants = (cartListingId,variants) => {
+
+  // if(!variants.length > 1) {
+  //   return cartListingIds.indexOf(variants.listingId[0]) !== -1
+  // }
+    let variantList;
+    if(variants.length === 0) {
+      return variants
+    }
+    if(variants.length >= 1) {
+        variantList = variants.reduce((acc,curr) => {
+          if(curr.productAvailable) {
+            curr['addedToCart'] = cartListingId.indexOf(curr.listingId[0]) !== -1
+          }
+          acc.push(curr);
+          return acc
+        },[])
+    }
+
+  return variantList
+
+}
 const addCartAndWishlistDetails = (store, results) => {
   const { items = [] } = store.cartReducer.data;
   const { data = [] } = store.wishlistReducer;
@@ -19,10 +41,9 @@ const addCartAndWishlistDetails = (store, results) => {
   return {
     ...results,
     items: results.items.map((i) => {
-      const { listingId } = i.variants;
       return ({
         ...i,
-        addedToCart: listingId ? cartListingIds.indexOf(i.variants.listingId[0]) !== -1 : false,
+        variants:filterVariants(cartListingIds,i.variants),
         addedToWishlist: wishListProductIds.indexOf(i.productId) !== -1,
       });
     }),
@@ -95,34 +116,52 @@ const getSearchResutls = (store) => {
     totalCount: 0,
     items: [],
   };
+  let isNotifyMe;
   if (store.searchReducer.data.productResponse) {
     resutls.totalCount = store.searchReducer.data.productResponse.noOfProducts;
-    resutls.items = store.searchReducer.data.productResponse.products.map((product) => {
-      const variantInfo = product.variantAdapters[0].listingAdapters.reduce((modifiedVaraints, v) => {
-        const attributesData = { ...v.attributes };
-        delete attributesData.type;
-        delete attributesData.variantId;
-        const modifiedVaraintsCopy = Object.assign(modifiedVaraints);
-        _.forEach(attributesData, (val, key) => {
-          modifiedVaraintsCopy[key] = modifiedVaraintsCopy[key] || [];
-          modifiedVaraintsCopy[key] = modifiedVaraintsCopy[key].concat(val);
-        });
-        return modifiedVaraintsCopy;
-    }, {});
-      const priceInfo = product.variantAdapters[0].listingAdapters.map((vla) => vla.attributes.sellingPrice);
-      const offers = product.variantAdapters[0].listingAdapters.map((vla) => vla.attributes.discount);
+    resutls.items = store.searchReducer.data.productResponse.products.map((product,prodIndex) => {
+      isNotifyMe = true
+      let variantInfo = product.variantAdapters.reduce((modifiedVaraints, v) => {
+        let modifiedVaraintsCopy = {}
+        let { listingAdapters } = v;
+        if(listingAdapters.length > 0){
+          isNotifyMe = false
+          const attributesData = {...listingAdapters[0].attributes};
+          delete attributesData.type;
+          delete attributesData.variantId;
+           // modifiedVaraintsCopy = Object.assign(modifiedVaraints);
+          modifiedVaraintsCopy['productSize'] = Object.values(v.attributes)[0]
+          modifiedVaraintsCopy['productAvailable'] = true
+          _.forEach(attributesData, (val, key) => {
+            modifiedVaraintsCopy[key] = modifiedVaraintsCopy[key] || [];
+            modifiedVaraintsCopy[key] = modifiedVaraintsCopy[key].concat(val);
+          });
+        } else {
+          modifiedVaraintsCopy['productSize'] = Object.values(v.attributes)[0]
+          modifiedVaraintsCopy['productAvailable'] = false
+        }
+
+        modifiedVaraints.push(modifiedVaraintsCopy)
+
+        return modifiedVaraints;
+    }, []);
+      if(isNotifyMe) {
+        variantInfo = []
+      }
+      // const priceInfo = product.variantAdapters[0].listingAdapters.map((vla) => vla.attributes.sellingPrice);
+      // const offers = product.variantAdapters[0].listingAdapters.map((vla) => vla.attributes.discount);
       let currency = product.variantAdapters[0].listingAdapters || '';
       currency = currency[0] || '';
       currency = currency.attributes || '';
       currency = currency.currency || '';
-      let priceRange = '';
-      if (priceInfo.length > 2) {
-        priceRange = [Math.min.apply(null, priceInfo), Math.max.apply(null, priceInfo)].join(' - ');
-      } else if (priceInfo.length > 1) {
-        priceRange = priceInfo.sort().join(' - ');
-      } else {
-        priceRange = priceInfo[0] || '';
-      }
+      // let priceRange = '';
+      // if (priceInfo.length > 2) {
+      //   priceRange = [Math.min.apply(null, priceInfo), Math.max.apply(null, priceInfo)].join(' - ');
+      // } else if (priceInfo.length > 1) {
+      //   priceRange = priceInfo.sort().join(' - ');
+      // } else {
+      //   priceRange = priceInfo[0] || '';
+      // }
       const { brand } = product.attributes;
 
       const categoryTreePath = product.attributes.categoryTreePath.split('/');
@@ -137,11 +176,10 @@ const getSearchResutls = (store) => {
         displayName: product.attributes.calculated_display_name.join(','),
         brand: brand ? brand[0] : '',
         variants: variantInfo,
-        priceRange,
+        // priceRange,
         currency,
         categoryId,
-        flags: product.flags,
-        offers: Math.max.apply(null, offers),
+        flags: product.flags
       };
     });
   }
