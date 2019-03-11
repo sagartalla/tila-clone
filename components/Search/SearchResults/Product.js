@@ -151,7 +151,9 @@ class Product extends Component {
     this.setState({
       selectedIndex:index,
       showLoader:true
-    },() => this.props.addToCart(listingId))
+    },() =>{
+      this.props.addToCart(listingId);
+    })
   }
   itemNumberClick = (index,pageNum) => {
     let productInfo = {
