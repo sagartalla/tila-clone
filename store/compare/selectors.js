@@ -6,6 +6,23 @@ const getCompareCount = (store) => {
   return store.compareReducer.data.compareItemsCount;
 }
 
+const getAddToCartDetails = (store, results) => {
+  const items = store.cartReducer.data.items || [];
+  if (!items.length) {
+    return results;
+  }
+  const cartListingIds = items.map(i => i.listing_id) || [];  
+  return {
+    ...results,
+    products: results.products.map((product) => {
+      return {
+        ...product,
+        addedToCart: cartListingIds.indexOf(product.listing_id) > -1,
+      };
+    }),
+  };
+};
+
 const getCompareInfo = (store) => {
   // return store.compareReducer.data.compareInfo;
   const { compareInfo } = store.compareReducer.data;
@@ -57,6 +74,7 @@ const getCompareInfo = (store) => {
       const variant_info = product.variant_preferred_listings ? product.variant_preferred_listings[variant][0] : {};
       return {
         id: product.product_id,
+        listing_id: variant_info.listing_id,
         imgSrc: product.product_details.product_details_vo.cached_product_details.media.gallery_media[0].url,
         brand: product.product_details.catalog_details.attribute_map.brand.attribute_values[0].value,
         price: variant_info.selling_price,
@@ -76,7 +94,7 @@ const getCompareInfo = (store) => {
       fp.groupBy((attrMap) => attrMap.attribute_category_name)
     )(b),
   };
-  return a;
+  return getAddToCartDetails(store, a);
 };
 
 const getBrandsInfo = (store) => {
@@ -110,4 +128,5 @@ export {
   getProductList,
   getCmpData,
   getCompareItemsCount,
+  getAddToCartDetails,
 };

@@ -7,7 +7,7 @@ const initialState = {
   },
   data: {
     addToCart: {},
-    items: []
+    items: [],
   },
   error: '',
 };

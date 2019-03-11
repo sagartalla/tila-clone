@@ -8,7 +8,9 @@ import { Row, Col, Dropdown } from 'react-bootstrap';
 import constants from '../../constants';
 import HeaderBar from '../HeaderBar';
 import FooterBar from '../Footer';
+import SVGCompoent from '../common/SVGComponet';
 import { actionCreators, selectors } from '../../store/compare';
+import { actionCreators as cartActionCreators } from '../../store/cart';
 import { languageDefinations } from '../../utils/lang';
 import { mergeCss } from '../../utils/cssUtil';
 
@@ -52,6 +54,13 @@ class Compare extends Component {
         selectedBrand: '',
       });
     }
+  }
+
+  addToCart = ({ currentTarget }) => {
+    const { addToCartAndFetch } = this.props;
+    addToCartAndFetch({
+      listing_id: currentTarget.getAttribute('data-listing-id'),
+    });
   }
 
   selectGroup(e) {
@@ -150,6 +159,22 @@ class Compare extends Component {
                       </div>
                       <span className={`${styles['fs-10']} ${styles['thick-gry-clr']}`}>{product.name}</span>
                     </div>
+                    <div className={`${styles.flex} ${styles['justify-center']}`}>
+                      {product.addedToCart ?
+                      <a className={`${styles['p-10']} ${styles['flex-center']} ${styles['added-btn']}`}>
+                        <span className={styles.flex}>
+                          <SVGCompoent clsName={styles['cart-list']} src="icons/cart/added-cart-icon" />
+                          In Cart
+                        </span>
+                      </a>
+                      :
+                      <a className={`${styles['p-10']} ${styles['flex-center']} ${styles['added-btn']}`} data-listing-id={product.listing_id} onClick={this.addToCart}>
+                        <span className={styles.flex}>
+                          <SVGCompoent clsName={styles['cart-list']} src="icons/cart/blue-cart-icon" />
+                          Add To Cart
+                        </span>
+                      </a>}
+                    </div>
                     {compareCount > 1 && <span className={`${styles['close-item']} ${styles.pointer}`} data-prod-id={product.id} onClick={this.removeItem}>x</span>}
                   </div>
                 </Col>
@@ -237,6 +262,7 @@ const mapDispatchToProps = dispatch =>
       getBrands: actionCreators.getBrands,
       removeCompareItem: actionCreators.removeCompareItem,
       getProducts: actionCreators.getProducts,
+      addToCartAndFetch: cartActionCreators.addToCartAndFetch,
     },
     dispatch,
   );
