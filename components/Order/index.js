@@ -54,6 +54,6 @@ const mapDispatchToProps = (dispatch) => {
     { getOrderDetails: actionCreators.getOrderDetails },
     dispatch,
   );
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Order);

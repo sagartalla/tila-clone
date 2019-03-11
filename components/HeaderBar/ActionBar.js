@@ -111,7 +111,7 @@ class ActionBar extends Component {
         </div>
         <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']}`}>
           <Link route="/cam/wishlist">
-           <a style={{dispaly:'block'}}>
+           <a style={{display:'block'}}>
             <span className={`${styles['flex-center']} ${styles['justify-center']}`}>
               <SVGComponent clsName={`${styles['wish-list-icon']}`} src="icons/wish-list/wish-list-icon" />
             </span>
@@ -122,7 +122,7 @@ class ActionBar extends Component {
           <Dropdown id="cart-toggle" className={`${styles['cart-inn']} ${styles['profile-login-inn']}`}>
             <Dropdown.Toggle>
               <Link route="/cart">
-              <a style={{dispaly:'block'}}>
+              <a style={{display:'block'}}>
                 <span className={`${styles['flex-center']} ${styles['justify-center']} ${styles['relative']}`}>
                   <SVGComponent clsName={`${styles['cart-icon']}`} src="icons/cart/cart-icon" />
                   <span className={`${styles['absolute']} ${styles['cart-count']} ${styles['fs-10']} ${styles['white-color']}`}>{cartResults.items.length}</span>

@@ -1,6 +1,10 @@
 import _ from 'lodash';
 import {pimServiceInstance} from '../helper/services';
 import axios from 'axios';
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
+
 import constants from '../helper/constants';
 
 const getProduct = (options) => {
@@ -20,10 +24,28 @@ const getPreview = (options) => {
     };
   });
 }
+
 const getReviewRatings = (options) => {
   return axios.post(`${constants.REVIEWS_API_URL}/api/v1/reviews/fetch`,options)
 }
+
 const submitUserReview = (options) => {
   return axios.post(`${constants.REVIEWS_API_URL}/api/v1/reviews/write_or_edit`,options)
 }
-export default { getProduct, getPreview, getReviewRatings,submitUserReview };
+
+const setSelectedVariant = ({selectedVariantData, itemType, catalogId, variantId}) => {
+  return axios.post(`${constants.LISTING_API_URL}/api/v1/listing/getVariantStockDetails`, {
+    "itemType": itemType,
+    "attributeKey": Object.keys(selectedVariantData)[0],
+    "attributeValue": Object.values(selectedVariantData)[0],
+    "catalogId": catalogId,
+    "countryCode": cookies.get('country')
+  }).then(({data}) => {
+    return {
+      selectedVariantId: variantId,
+      selectedVariantData,
+      availableSimilarProducts: data.reduce((acc, val) => ({ ...acc, [val.productId]: [val.inStock] }), {})
+    }
+  });
+}
+export default { getProduct, getPreview, getReviewRatings,submitUserReview, setSelectedVariant };
