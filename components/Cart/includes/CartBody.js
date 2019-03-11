@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
@@ -9,14 +9,25 @@ import SVGComponent from '../../common/SVGComponet';
 import RightBar from '../../common/CartPaymentSideBar';
 import Wishlist from '../../Cam/Wishlist/';
 import { languageDefinations } from '../../../utils/lang/';
-import constants from '../../../constants';
 import { mergeCss } from '../../../utils/cssUtil';
 import { Router } from '../../../routes';
+import { cartPlaceHolder } from '../../common/Loader/skeletonPlaceHolder';
 
 const styles = mergeCss('components/Cart/cart');
 
-const CartBody = props => {
-  const { showBlocker, increaseItemCnt, decreaseItemCnt, data, removeCartItem, checkoutBtnHandler, addToWishlist, addOrRemoveGift, cartStepperInputHandler, count } = props;
+const CartBody = ({
+  showBlocker,
+  increaseItemCnt,
+  decreaseItemCnt,
+  data,
+  removeCartItem,
+  checkoutBtnHandler,
+  addToWishlist,
+  addOrRemoveGift,
+  cartStepperInputHandler,
+  count,
+  isLoading,
+}) => {
   const { items, error } = data;
   const flag = data && items && items.length;
   const cnt = flag > 0 ? items.length : 0;
@@ -26,7 +37,9 @@ const CartBody = props => {
     Router.pushRoute(`/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemType}`);
   }
 
-  return (
+  return (isLoading ?
+    cartPlaceHolder
+    :
     <div className={styles['cart-container']}>
       {
         showBlocker ? <Blocker /> : ''
