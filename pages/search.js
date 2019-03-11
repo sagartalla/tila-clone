@@ -46,7 +46,7 @@ class SearchPage extends Base {
       disableSpellCheck,
       choosenCategoryName: categoryName || subCategoryName,
     };
-    if(shippingCity) {
+    if (shippingCity) {
       searchOptions.shippingDetails = {
         shippingCity: shippingCity.toUpperCase(),
         shippingCountry: (country || 'ARE').toUpperCase(),

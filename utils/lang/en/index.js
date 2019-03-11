@@ -372,6 +372,13 @@ export const EN_KEYWORDS = {
     'TILA_RIGHTS': '&copy; 2018 www.tila.com. All rights reserved'
 
   },
+  COMPARE: {
+    'TILA_COMPARE_1': 'Tila Comparing (',
+    'TILA_COMPARE_2': 'items) for you',
+    'FEATUERS': 'Features',
+    'CLEAR_ALL': 'Clear All',
+    'COMPARE': 'COMPARE',
+  },
   HEADER_PAGE: {
     'HELLO_GUEST': 'Hello Guest',
     'MY_ACCOUNT': 'My Account',

@@ -23,6 +23,7 @@ const getProduct = (store, variantId) => {
   priceInfo = priceInfo.length ? priceInfo[0] : null;
   const availabilityError = activeCount === listings.length;
   const stockError = listingInventryCount === listings.length;
+  const imgUrls = product_details.product_details_vo.cached_product_details.media.gallery_media;
   const titleInfo = {
     brand: product_details.catalog_details.attribute_map.brand.attribute_values[0].value,
     title: productAttributeMap.calculated_display_name.attribute_values[0].value,
@@ -38,6 +39,10 @@ const getProduct = (store, variantId) => {
     discountPercent: '',
     listingId: priceInfo ? priceInfo.listing_id : 'No Listing',
     totalInventoryCount: priceInfo ? priceInfo.total_inventory_count : 0,
+    product_id,
+    itemtype: product_details.catalog_details.item_type_name,
+    media: imgUrls[0].url,
+    categoryId: tree.breadcrumb[tree.breadcrumb.length - 1].id,
   };
   const returnInfo = {
     acceptsReturns: priceInfo ? priceInfo.accepts_returns : false,
@@ -61,7 +66,6 @@ const getProduct = (store, variantId) => {
   }
   const keyfeatures = _.map(productAttributeMap.calculated_highlights.attribute_values, (kf) => kf.value);
   const details = catalogAttributeMap.description ? catalogAttributeMap.description.attribute_values.map((d) => d.value).join(', ') : null;
-  const imgUrls = product_details.product_details_vo.cached_product_details.media.gallery_media;
   let productDescription = product_details.product_details_vo.cached_product_details.rich_product_desc
   productDescription = productDescription.length > 0 ? _.sortBy(productDescription,['order']) : null
   return {
