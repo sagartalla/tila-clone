@@ -19,7 +19,7 @@ const UserProfile = (props) => {
         <div className={styles['img-style']} />
       </div>
       <div className={styles['profile-details']}>
-        <span className={`${styles['fs-12']} ${styles['light-gry-clr']}`}>Hello</span>
+        <span className={`${styles['fs-12']} ${styles['light-gry-clr']}`}>Hello,</span>
         <div>{name}</div>
       </div>
     </div>
