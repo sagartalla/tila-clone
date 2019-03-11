@@ -205,13 +205,13 @@ class Product extends Component {
       flags
     } = this.props;
     const { showNotify,selectedIndex,showLoader } = this.state;
+    const selectedProduct = selectedID.length > 0 && selectedID.includes(productId)
     return (
       <Fragment>
         <div
           className=
           {
-             selectedID.length > 0 && selectedID.includes(productId) ?
-            `${styles['active-product']} ${styles['product-items-main']}` : `${styles['product-items-main']}`}
+            `${styles['product-items-main']} ${selectedProduct ? styles['active-product'] : ''}`}
             onClick = {() => this.routeChange(productId,variantId,catalogId,itemtype,index,pageNum)}>
           <div className={`${styles['product-items']}`}>
             {
@@ -257,9 +257,9 @@ class Product extends Component {
                 }
               </div> */}
             </div>
-            <div className={ selectedID.length > 0 && selectedID.includes(productId) ?
-                `${styles['active-product']} ${styles['display-buttons']} ${styles['hover-show-date']} ${styles['pb-10']} ${styles['relative']}`
-                : `${styles['hover-show-date']} ${styles['pb-10']} ${styles['relative']}`}
+            <div className={
+                `${selectedProduct ? `${styles['display-buttons']} ${styles['active-product']}`: ''}  ${styles['hover-show-date']} ${styles['pb-10']} ${styles['relative']}
+                 ${styles['pb-10']}`}
                 >
               {
                 variants.length > 0 ?
@@ -332,7 +332,7 @@ class Product extends Component {
                 <RenderVariants
                   variantData={variants}
                   onSelectedVariant={this.selectedVariant}
-                  isvisible={selectedID.length > 0 && selectedID.includes(productId)}
+                  isvisible={selectedProduct}
                   OncloseVariant={this.closeVariantTab}
                 />
             }
