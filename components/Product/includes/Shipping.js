@@ -9,11 +9,22 @@ import { languageDefinations } from '../../../utils/lang';
 import { actionCreators, selectors } from '../../../store/product';
 import SVGCompoent from '../../common/SVGComponet';
 import { mergeCss } from '../../../utils/cssUtil';
+import { Modal } from "react-router-modal";
 const styles = mergeCss('components/Product/product');
 
 const { PDP_PAGE } = languageDefinations();
 
 class Shipping extends Component {
+  state = {
+    showModal: false,
+  }
+  showModal = () => {
+    this.setState({ showModal: true });
+  }
+
+  closeModal = () => {
+    this.setState({ showModal: false });
+  }
   render() {
     const { shippingInfo, offerInfo } = this.props;
     const { shipping_fees, shipping_days, shippable, acceptsReturns, maxDaysToReturn, isPreview } = shippingInfo;
@@ -65,27 +76,37 @@ class Shipping extends Component {
                         `${PDP_PAGE.NON_RETURNABLE}`
                     }
                   </div>
-                  <div className={styles['flx-spacebw-alignc']}>
-                    {/* <SVGCompoent clsName={`${styles['secure-icon']} ${styles['mr-10']}`} src="icons/common-icon/trust-secure" />
-                    <span>1 {PDP_PAGE.YEAR} {PDP_PAGE.WARRANTY}</span> */}
-                    <div className={`${styles['radio-btn-group']}`}>
-                      <input type="radio" id="option-one" name="selector" />
-                      <label for="option-one">
-                        <span className={styles['fs-12']}>1 Year</span>
-                        <span className={styles['fs-10']}>Free of cost</span>
-                      </label>
-                      <input type="radio" id="option-two" name="selector" />
-                      <label for="option-two">
-                        <span className={styles['fs-12']}>2 Year</span>
-                        <span className={styles['fs-10']}>+12.76 AED</span>
-                      </label>
-                      <input type="radio" id="option-three" name="selector" />
-                      <label for="option-three">
-                        <span className={styles['fs-12']}>2 Year</span>
-                        <span className={styles['fs-10']}>+15 AED</span>
-                      </label>
-                    </div>
+                  {this.props.warranty ?
+                  <div className={`${styles['flex-center']} ${styles['warenty-part-inn']}`}>
+                      <SVGCompoent clsName={`${styles['trust-icon']}`} src="icons/common-icon/trust-secure" /> &nbsp;
+                      <span>
+                        <a onClick={this.showModal}>
+                          {this.props.warranty.duration + " " + this.props.warranty.duration_unit + " " + PDP_PAGE.WARRANTY}
+                        </a>
+                      </span>
+                      {
+                        this.state.showModal ?
+                          // <div className={styles['tool-tip']}>
+                          <Modal className={`react-router-modal__modal ${styles['p-20']}`} onBackdropClick={this.closeModal}>
+                            <div>
+                              <h3>Summary</h3>
+                              {this.props.warranty.summary}
+                              <p>
+                                <strong>Covers : </strong>
+                                {this.props.warranty.covered}<br/>
+                                <strong>Not Covers : </strong>
+                                {this.props.warranty.not_covered}
+                              </p>
+                            </div><br/>
+                          </Modal>
+                          : null
+                      }
                   </div>
+                  :
+                  <div className={`${styles['flex-center']} ${styles['warenty-part-inn']}`}>
+                    <span>{PDP_PAGE.NO_WARRANTY}</span> 
+                  </div>
+                  }
                 </div>
               </div>
               :

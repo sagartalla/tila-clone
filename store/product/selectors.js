@@ -20,6 +20,7 @@ const getProduct = (store, variantId) => {
     }
     return listing.total_inventory_count > 0 && listing.active
   }) : [];
+  let warranty = tree.finance.filter((data)=> data.isLeaf === true)[0].warranty ? JSON.parse(tree.finance.filter((data)=> data.isLeaf === true)[0].warranty) : null; //converting 'warranty' into JSON
   priceInfo = priceInfo.length ? priceInfo[0] : null;
   const availabilityError = activeCount === listings.length;
   const stockError = listingInventryCount === listings.length;
@@ -80,6 +81,7 @@ const getProduct = (store, variantId) => {
     productDescription,
     catalogObj,
     breadcrums: tree.breadcrumb,
+    warranty,
     categoryType: tree.finance ? tree.finance[0].display_name_en : '',
     catalog: _.groupBy(_.filter(catalogAttributeMap, (val) => val.visible), (attrMap) => attrMap.attribute_category_name)
   };

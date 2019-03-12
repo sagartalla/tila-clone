@@ -160,7 +160,7 @@ const getProductComponent = (isPreview, taskCode) => {
     render() {
       const { productData, userDetails } = this.props;
       const {
-        catalog, titleInfo, keyfeatures, imgUrls, offerInfo, shippingInfo, returnInfo, details, productDescription, catalogObj, categoryType = '',
+        catalog, titleInfo, keyfeatures, imgUrls, offerInfo, shippingInfo, returnInfo, details, productDescription, catalogObj, categoryType = '', warranty,
       } = productData;
       const {
         stickyElements, recentlyViewed, notifyEmail, emailErr,
@@ -188,7 +188,7 @@ const getProductComponent = (isPreview, taskCode) => {
                       </div>
                       <div className={`${styles['ipad-details']} ${styles['bdr-lt']} ${styles['ipad-pl-15']}`}>
                         {
-                          isPreview ? null : <Shipping shippingInfo={shippingInfo} offerInfo={offerInfo} />
+                          isPreview ? null : <Shipping shippingInfo={shippingInfo} offerInfo={offerInfo} warranty={warranty}/>
                         }
                         {
                           isPreview ? null : <AddToCart offerInfo={offerInfo} />
