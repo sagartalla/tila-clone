@@ -1,16 +1,12 @@
-
+import React from 'react';
 import { mergeCss } from '../../../utils/cssUtil';
 import Input from '../../common/commonInput/index';
 import Rectangle from '../../common/commonInput/RectangleShape';
 
 const styles = mergeCss('components/common/Loader/loader');
-/* eslint-disable */
 export const searchPlaceHolder = (
   <div style={{ overflow: 'hidden', maxHeight: '800px' }}>
-    <div className={
-    `${styles.container}`
-  }
-    />
+    <div className={`${styles.container}`} />
     <div
       className={
         `${styles['filter-panel']} ${styles['border-radius4']}
@@ -175,5 +171,34 @@ export const productPlaceHolder = (
           }
             </div>
   </div>
+  </div>
+);
+
+
+export const cartPlaceHolder = (
+  <div className={`${styles.flex} ${styles['pt-40']} ${styles.relative}`}>
+    <div className={`${styles.container}`} />
+    <div className={`${styles.flex} ${styles['p-20']} ${styles.width100}`}>
+      <div style={{ width: '75%' }} className={`${styles.flex} ${styles['flex-colum']} ${styles.width63} ${styles['mr-20']}`}>
+        <Rectangle
+          style={{
+            width: '100%',
+            height: '300px',
+            marginBottom: '20px',
+          }}
+        />
+        <Rectangle
+          style={{
+            width: '100%',
+            height: '100px',
+          }}
+        />
+      </div>
+      <Rectangle
+        style={{
+          width: '25%', height: '600px',
+        }}
+      />
+    </div>
   </div>
 );

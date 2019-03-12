@@ -11,7 +11,7 @@ import SVGCompoent from '../../common/SVGComponet';
 import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Product/product');
 
-const ElectronicsTab = ({ catalog,productDescription,catalogObj }) => {
+const ElectronicsTab = ({ catalog, productDescription, catalogObj }) => {
   return (
     <div>
       <Tabs defaultActiveKey={1}>

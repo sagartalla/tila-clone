@@ -89,6 +89,7 @@ const authReducer = typeToReducer({
         ...state.data,
         isLoggedIn: action.payload.isLoggedIn,
         userCreds: action.payload.userCreds,
+        instagramCode: action.payload.instagramCode,
       }
     }
   },

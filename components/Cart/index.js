@@ -13,17 +13,17 @@ import CartBody from './includes/CartBody';
 import MiniCartBody from './includes/MiniCartBody';
 import FooterBar from '../Footer/index';
 import { mergeCss } from '../../utils/cssUtil';
+
 const styles = mergeCss('components/Cart/cart');
 
 class Cart extends Component {
-
   constructor(props) {
     super(props);
 
     this.state = {
       showBlocker: false,
-      count: ''
-    }
+      count: '',
+    };
 
     this.addToWishlist = this.addToWishlist.bind(this);
     this.removeCartItem = this.removeCartItem.bind(this);
@@ -34,21 +34,22 @@ class Cart extends Component {
     this.cartStepperInputHandler = this.cartStepperInputHandler.bind(this);
   }
 
+  componentDidMount() {
+    if (!this.props.showMiniCart) {
+      this.props.getCartResults();
+    }
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.cartData.ui.loader && nextProps.cartData.ui.loader == 'hide') {
       this.setState({ showBlocker: false });
     }
   }
 
-  componentDidMount() {
-    if (!this.props.showMiniCart)
-      this.props.getCartResults();
-  }
-
   cartStepperInputHandler(e) {
     const { cartData } = this.props;
     const id = e.target.getAttribute('data-id');
-    const count = e.target.value
+    const count = e.target.value;
     const selelecItem = cartData.items.filter(item => item.item_id == id)[0];
 
     this.setState({ count: selelecItem.max_limit < count ? selelecItem.max_limit : count })
@@ -120,54 +121,58 @@ class Cart extends Component {
 
   render() {
     const { showBlocker, count } = this.state;
-    const { cartData, editCartDetails, showCheckOutBtn } = this.props;
+    const {
+      cartData, editCartDetails, showCheckOutBtn, isLoading,
+    } = this.props;
     return (
       <div>
         {
           this.props.showMiniCart
             ?
-            <div>
-              <MiniCartBody
-                data={cartData}
-                showBlocker={showBlocker}
-                editCartDetails={editCartDetails}
-                showCheckOutBtn={showCheckOutBtn}
-                removeCartItem={this.removeCartItem}
-                increaseItemCnt={this.increaseItemCnt}
-                decreaseItemCnt={this.decreaseItemCnt}
-                checkoutBtnHandler={this.checkoutBtnHandler}
-              />
-            </div>
-            :
-            <Fragment>
-              <HeaderBar />
-              <Grid>
-                <CartBody
-                  count={count}
+              <div>
+                <MiniCartBody
                   data={cartData}
                   showBlocker={showBlocker}
-                  addToWishlist={this.addToWishlist}
+                  editCartDetails={editCartDetails}
+                  showCheckOutBtn={showCheckOutBtn}
                   removeCartItem={this.removeCartItem}
                   increaseItemCnt={this.increaseItemCnt}
                   decreaseItemCnt={this.decreaseItemCnt}
-                  addOrRemoveGift={this.addOrRemoveGift}
                   checkoutBtnHandler={this.checkoutBtnHandler}
-                  cartStepperInputHandler={this.cartStepperInputHandler}
                 />
-              </Grid>
-              <FooterBar />
-            </Fragment>
+              </div>
+            :
+              <Fragment>
+                <HeaderBar />
+                <Grid>
+                  <CartBody
+                    count={count}
+                    data={cartData}
+                    showBlocker={showBlocker}
+                    isLoading={isLoading}
+                    addToWishlist={this.addToWishlist}
+                    removeCartItem={this.removeCartItem}
+                    increaseItemCnt={this.increaseItemCnt}
+                    decreaseItemCnt={this.decreaseItemCnt}
+                    addOrRemoveGift={this.addOrRemoveGift}
+                    checkoutBtnHandler={this.checkoutBtnHandler}
+                    cartStepperInputHandler={this.cartStepperInputHandler}
+                  />
+                </Grid>
+                <FooterBar />
+              </Fragment>
         }
       </div>
-    )
+    );
   }
 }
 
-const mapStateToProps = (store) => ({
+const mapStateToProps = store => ({
   cartData: selectors.getCartResults(store),
+  isLoading: store.cartReducer.ui.loading,
 });
 
-const mapDispatchToProps = (dispatch) =>
+const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       getCartResults: actionCreators.getCartResults,

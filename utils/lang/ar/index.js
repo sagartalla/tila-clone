@@ -213,7 +213,6 @@ export const AR_KEYWORDS = {
     'EDIT_PHONE_NUMBER': 'Edit Phone Number',
     'ENTER': 'Enter',
     'RESEND': 'Resend',
-    'PROFILE_CREATION_SUCCESS_MESSAGE': 'Your profile is complete. You can edit or change any details at anytime you want',
     'THANK_YOU': 'Thank You',
     'MALE': 'Male',
     'FEMALE': 'Female',

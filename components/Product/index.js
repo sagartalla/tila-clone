@@ -22,6 +22,7 @@ import ProductDetails from './includes/ProductDetails';
 import ReviewRatingList from '../RatingReviews/List';
 import FooterBar from '../Footer/index';
 import Theme from '../helpers/context/theme';
+import CompareWidget from '../common/CompareWidget';
 import { actionCreators as wishlistActionCreators } from '../../store/cam/wishlist';
 
 import { mergeCss } from '../../utils/cssUtil';
@@ -241,6 +242,7 @@ const getProductComponent = (isPreview, taskCode) => {
               }
             </div>
           </div>
+          <CompareWidget />
         </Theme.Provider>
       );
     }

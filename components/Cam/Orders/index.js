@@ -25,7 +25,7 @@ class Orders extends Component {
           ?
           ordersData.map((order) => <Order key={order.id} order={order} />)
           :
-          <div className={`${styles['box']} ${styles['mt-20']} ${styles['mb-20']} ${styles['p-20']}`}>No order history</div>
+          <div className={`${styles['box']} ${styles['mt-20']} ${styles['mb-20']} ${styles['p-20']}`}>Oops! No orders yet. Start Shopping</div>
         }
         </div>
         <OrderIssueWidget />
