@@ -22,6 +22,7 @@ const getProduct = (store, variantId) => {
     return listing.total_inventory_count > 0 && listing.active
   }) : [];
   priceInfo = priceInfo.length ? priceInfo[0] : null;
+  debugger;
   const availabilityError = activeCount === listings.length;
   const stockError = listingInventryCount === listings.length;
   const titleInfo = {
@@ -310,7 +311,7 @@ const getSelectedVariantId = ({selectedVariantData, map}) => {
   let match, matchVid;
    _.forEach(map, (mapValues, vid) => {
     match = _.reduce(selectedVariantData, (acc, selectedValue, selectedKey) => {
-      return acc && (mapValues[selectedKey].indexOf(selectedValue) !== -1)
+      return acc && (mapValues[selectedKey] && mapValues[selectedKey].indexOf(selectedValue) !== -1)
     }, true);
     if(match) {
       matchVid = vid;
@@ -329,7 +330,7 @@ const getSelectedPropductId = ({selectedProductData, map}) => {
   let match, matchPid;
    _.forEach(map, (mapValues, pid) => {
     match = _.reduce(selectedProductData, (acc, selectedValue, selectedKey) => {
-      return acc && (mapValues[selectedKey].indexOf(selectedValue) !== -1)
+      return acc && (mapValues[selectedKey] && mapValues[selectedKey].indexOf(selectedValue) !== -1)
     }, true);
     if(match) {
       matchPid = pid;
