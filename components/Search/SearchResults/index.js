@@ -74,7 +74,7 @@ class SearchResults extends Component {
 
   render() {
     const { results, pagiantionDetails, userDetails, notifyMe } = this.props;
-    const { pageNum } = this.props.pagiantionDetails;    
+    const { pageNum } = this.props.pagiantionDetails;
     return (
       <div>
         <InfiniteScroll

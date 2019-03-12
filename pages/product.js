@@ -27,7 +27,7 @@ class ProductPage extends Base {
     let language = req ? req.universalCookies.get('language') : cookies.get('language');
     const shippingData = req ?  req.universalCookies.get('shippingInfo') : cookies.get('shippingInfo');
     const { city: shippingCity, country: shippingCountry } = shippingData || {};
-    const { isPreview, taskCode, itemType, productId, variantId } = query;
+    const { isPreview, taskCode, itemType, productId, variantId, listingId } = query;
     if (taskCode){
       await store.dispatch(actionCreators.getPreview({
         taskCode: taskCode,
@@ -50,6 +50,9 @@ class ProductPage extends Base {
         "language": language,
         "product_ids": [
           productId
+        ],
+        "listing_ids": [
+          listingId
         ],
         "size": "LARGE"
       };

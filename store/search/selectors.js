@@ -154,6 +154,10 @@ const getSearchResutls = (store) => {
       currency = currency[0] || '';
       currency = currency.attributes || '';
       currency = currency.currency || '';
+
+      let listingId = product.variantAdapters[0].listingAdapters || null;
+      listingId = listingId[0] || null;
+      listingId = listingId ? listingId.id : null
       // let priceRange = '';
       // if (priceInfo.length > 2) {
       //   priceRange = [Math.min.apply(null, priceInfo), Math.max.apply(null, priceInfo)].join(' - ');
@@ -172,6 +176,7 @@ const getSearchResutls = (store) => {
         media: product.attributes.media_unrestricted_images,
         productId: product.attributes.productId,
         catalogId: product.attributes.catalogId,
+        listingId,
         itemtype: product.attributes.itemType,
         displayName: product.attributes.calculated_display_name.join(','),
         brand: brand ? brand[0] : '',
