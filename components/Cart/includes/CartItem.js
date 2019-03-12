@@ -17,16 +17,25 @@ class CartItem extends React.Component {
     this.state = {
       gift_card_message: gift_info ? gift_info.gift_card_message : '',
       checked: gift_info ? true : false,
+      showMessage: true,
     };
   }
 
   giftChecked = ({ currentTarget }) => {
     const { addOrRemoveGift } = this.props;
+    let { showMessage } = this.state;
     if (!currentTarget.checked) {
       addOrRemoveGift(currentTarget.getAttribute('data-id'), 'remove');
-    }
+    } else showMessage = false;
     this.setState({
       checked: currentTarget.checked,
+      showMessage,
+    });
+  }
+
+  toggleMessage = () => {
+    this.setState({
+      showMessage: false,
     });
   }
 
@@ -56,7 +65,7 @@ class CartItem extends React.Component {
       cartStepperInputHandler,
       addOrRemoveGift,
     } = this.props;
-    const { gift_card_message, checked } = this.state;
+    const { gift_card_message, checked, showMessage } = this.state;
     const {
       item_id, img, name, price, cur, quantity, max_limit, inventory,
       brand_name, gift_info, shipping, warranty, total_amount,
@@ -117,7 +126,13 @@ class CartItem extends React.Component {
                     <input data-id={item_id} id={"gift" + item_id} type="checkbox" checked={checked} onClick={this.giftChecked} />
                     <label htmlFor={"gift" + item_id}> {CART_PAGE.SEND_GIFT} {gift_info ? "(" + gift_info.gift_rate + " " + cur + ")" : ''} </label>
                   </div>
-                  {checked &&
+                  {checked && showMessage &&
+                    <div>
+                      <span className={styles.fontW600}>Message:&nbsp;</span><span>{gift_card_message}&nbsp;</span>
+                      <span>{'('}<a onClick={this.toggleMessage}>edit</a>{')'}</span>
+                    </div>
+                  }
+                  {!showMessage && checked &&
                   <div className={styles['flex-center']}>
                     <textarea
                       name="msg"
