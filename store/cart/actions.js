@@ -50,12 +50,10 @@ const actionCreators = {
       payload: api.cartItemCountApi(params, typ)
     })
   },
-  addOrRemoveGift: (cartItemId, typ) => {
-    return {
-      type: actions.ADD_REMOVE_GIFT,
-      payload: api.giftApi(cartItemId, typ)
-    }
-  },
+  addOrRemoveGift: (cartItemId, typ, params) => ({
+    type: actions.ADD_REMOVE_GIFT,
+    payload: api.giftApi(cartItemId, typ, params),
+  }),
   resetAddtoCart: () => ({
     type: actions.RESET_ADD_TO_CART
   }),

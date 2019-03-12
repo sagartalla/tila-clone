@@ -115,8 +115,8 @@ class Cart extends Component {
     this.props.removeCartItem(listing_id);
   }
 
-  addOrRemoveGift(e) {
-    this.props.addOrRemoveGift(e.currentTarget.getAttribute('data-id'), e.currentTarget.checked ? 'add' : 'remove');
+  addOrRemoveGift(id, val, params) {
+    this.props.addOrRemoveGift(id, val, params);
   }
 
   render() {
