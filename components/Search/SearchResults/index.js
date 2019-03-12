@@ -17,10 +17,12 @@ class SearchResults extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      productID:[]
     };
     this.loadMore = this.loadMore.bind(this);
     this.buyNow = this.buyNow.bind(this);
     this.addToCart = this.addToCart.bind(this);
+    this.selectedProduct = this.selectedProduct.bind(this)
   }
 
   async loadMore(){
@@ -48,7 +50,11 @@ class SearchResults extends Component {
     this.props.resetAddtoCart();
     this.props.getWishlist();
   }
-
+  selectedProduct(productID) {
+    this.setState({
+      productID
+    })
+  }
   buyNow(listingId) {
     this.setState({
       buyNow: true
@@ -58,6 +64,9 @@ class SearchResults extends Component {
   }
 
   addToCart(listingId) {
+    this.setState({
+      productID:[]
+    })
     this.props.addToCartAndFetch({
       listing_id: listingId
     });
@@ -65,7 +74,7 @@ class SearchResults extends Component {
 
   render() {
     const { results, pagiantionDetails, userDetails, notifyMe } = this.props;
-    const { pageNum } = this.props.pagiantionDetails;
+    const { pageNum } = this.props.pagiantionDetails;    
     return (
       <div>
         <InfiniteScroll
@@ -87,6 +96,9 @@ class SearchResults extends Component {
               pageNum={pageNum}
               userDetails={userDetails}
               notifyMe={notifyMe}
+              productID={item.id}
+              selectedProduct={this.selectedProduct}
+              selectedID={this.state.productID}
             />
           ))}
         </InfiniteScroll>
