@@ -22,7 +22,6 @@ const getProduct = (store, variantId) => {
     return listing.total_inventory_count > 0 && listing.active
   }) : [];
   priceInfo = priceInfo.length ? priceInfo[0] : null;
-  debugger;
   const availabilityError = activeCount === listings.length;
   const stockError = listingInventryCount === listings.length;
   const imgUrls = product_details.product_details_vo.cached_product_details.media.gallery_media;
@@ -151,7 +150,9 @@ const getVariantsAndSimilarProducts = (store) => {
   const { availableSimilarProducts } = variantsData || {};
   const { similar_products, product_details, variant_preferred_listings } = store.productReducer.data[0];
   const { item_type_name: itemType, catalog_id: catalogId } = product_details.catalog_details;
-  const { product_id: productId } = product_details;
+  const { product_id: productId, product_details_vo } = product_details;
+  const { cached_product_details } = product_details_vo;
+  const { attribute_map } = cached_product_details;
   // sample output
   // const variants = {
   //   display: {
@@ -206,9 +207,9 @@ const getVariantsAndSimilarProducts = (store) => {
   // sample output
   // const similarProducts = {
   //   display: {
-  //     size: {
-  //       displayName: 'Size',
-  //       values: ['s', '', '']
+  //     color: {
+  //       displayName: 'Color',
+  //       values: ['red', '', '']
   //     },
   //     something_else: {
   //       displayName: 'Something Else',
@@ -217,14 +218,14 @@ const getVariantsAndSimilarProducts = (store) => {
   //   },
   //   map: {
   //     [productId]: {
-  //       size:'s',
+  //       color:'red',
   //       somethingElse: ''
   //     }
   //   }]
   // }
-  const similarProducts = _.reduce(similar_products, (acc, product) => {
+  const similarProducts = _.reduce([product_details, ...similar_products], (acc, product) => {
     if(availableSimilarProducts && !availableSimilarProducts[product.product_details_vo.cached_product_details.product_id]) return;
-    const key = product.listing.product_id;
+    const key = product.product_details_vo.cached_product_details.product_id;
     const display = {
       ...acc.display
     };
