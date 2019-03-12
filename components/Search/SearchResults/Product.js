@@ -164,9 +164,9 @@ class Product extends Component {
     var event = new CustomEvent('event-pageItem-click');
     document.dispatchEvent(event);
   }
-  routeChange(productId,variantId,catalogId,itemtype,index,pageNum, listingId) {
+  routeChange(productId,variantId,catalogId,itemtype,index,pageNum) {
     this.itemNumberClick(index,pageNum)
-    Router.pushRoute(`/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemtype}&listingId=${listingId}`)
+    Router.pushRoute(`/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemtype}`)
   }
 
   addToCompare(e) {
@@ -192,7 +192,6 @@ class Product extends Component {
       variants,
       productId,
       variantId,
-      listingId,
       catalogId,
       itemtype,
       priceRange,
@@ -215,7 +214,7 @@ class Product extends Component {
           className=
           {
             `${styles['product-items-main']} ${selectedProduct ? styles['active-product'] : ''}`}
-            onClick = {() => this.routeChange(productId,variantId,catalogId,itemtype,index,pageNum,listingId)}>
+            onClick = {() => this.routeChange(productId,variantId,catalogId,itemtype,index,pageNum)}>
           <div className={`${styles['product-items']}`}>
             {
               showLoader ? <div className={styles['loader-div']}>
