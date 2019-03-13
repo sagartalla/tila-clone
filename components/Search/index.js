@@ -34,8 +34,8 @@ class Search extends Component {
   componentWillUnmount() {
     this.props.hideSearchBarFitlers();
   }
- 
-  querySearch = (e) => {    
+
+  querySearch = (e) => {
     let dataSearchQuery = e.currentTarget.dataset.querysearch;
     Router.pushRoute(`/srp?search=${dataSearchQuery}&disableSpellCheck=true&${Object.entries(this.props.optionalParams).map(([key, val]) => `${key}=${val}`).join('&')}`);
   }
@@ -52,7 +52,7 @@ class Search extends Component {
               <a
                 href="javascript: void(0)"
                 onClick={this.querySearch}
-                data-querysearch={spellCheckResp[query.search]}
+                data-querysearch={query.search}
               >
                 <b>{`${spellCheckResp[query.search]} ?`}</b>
               </a>
