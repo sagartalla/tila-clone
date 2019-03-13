@@ -36,6 +36,7 @@ const getCartResults = (store) => {
           shipping: item.listing_info.shipping,
           catalogId: item.product_details.catalog_details.catalog_id,
           itemType: item.product_details.catalog_details.item_type_name,
+          warranty_duration: item.tree.finance.filter((data)=> data.isLeaf === true)[0].warranty ? JSON.parse(item.tree.finance.filter((data)=> data.isLeaf === true)[0].warranty) : null,
           warranty: _.groupBy(item.listing_info.warranty_details, 'type')['MANUFACTURER'] || [{}],
         }
       })

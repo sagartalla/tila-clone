@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators, selectors } from '../../store/cart';
 import { actionCreators as wishlistActionCreators, selectors as wishlistSelectors } from '../../store/cam/wishlist';
-
 import HeaderBar from '../HeaderBar/index';
 import CartBody from './includes/CartBody';
 import MiniCartBody from './includes/MiniCartBody';
@@ -157,6 +156,7 @@ class Cart extends Component {
                     addOrRemoveGift={this.addOrRemoveGift}
                     checkoutBtnHandler={this.checkoutBtnHandler}
                     cartStepperInputHandler={this.cartStepperInputHandler}
+                    cartData={cartData}
                   />
                 </Grid>
                 <FooterBar />

@@ -9,22 +9,12 @@ import { languageDefinations } from '../../../utils/lang';
 import { actionCreators, selectors } from '../../../store/product';
 import SVGCompoent from '../../common/SVGComponet';
 import { mergeCss } from '../../../utils/cssUtil';
-import { Modal } from "react-router-modal";
-const styles = mergeCss('components/Product/product');
+import Warranty from './Warranty';
 
+const styles = mergeCss('components/Product/product');
 const { PDP_PAGE } = languageDefinations();
 
 class Shipping extends Component {
-  state = {
-    showModal: false,
-  }
-  showModal = () => {
-    this.setState({ showModal: true });
-  }
-
-  closeModal = () => {
-    this.setState({ showModal: false });
-  }
   render() {
     const { shippingInfo, offerInfo } = this.props;
     const { shipping_fees, shipping_days, shippable, acceptsReturns, maxDaysToReturn, isPreview } = shippingInfo;
@@ -77,31 +67,7 @@ class Shipping extends Component {
                     }
                   </div>
                   {this.props.warranty ?
-                  <div className={`${styles['flex-center']} ${styles['warenty-part-inn']}`}>
-                      <SVGCompoent clsName={`${styles['trust-icon']}`} src="icons/common-icon/trust-secure" /> &nbsp;
-                      <span>
-                        <a onClick={this.showModal}>
-                          {this.props.warranty.duration + " " + this.props.warranty.duration_unit + " " + PDP_PAGE.WARRANTY}
-                        </a>
-                      </span>
-                      {
-                        this.state.showModal ?
-                          // <div className={styles['tool-tip']}>
-                          <Modal className={`react-router-modal__modal ${styles['p-20']}`} onBackdropClick={this.closeModal}>
-                            <div>
-                              <h3>Summary</h3>
-                              {this.props.warranty.summary}
-                              <p>
-                                <strong>Covers : </strong>
-                                {this.props.warranty.covered}<br/>
-                                <strong>Not Covers : </strong>
-                                {this.props.warranty.not_covered}
-                              </p>
-                            </div><br/>
-                          </Modal>
-                          : null
-                      }
-                  </div>
+                    <Warranty warranty={this.props.warranty}/>
                   :
                   <div className={`${styles['flex-center']} ${styles['warenty-part-inn']}`}>
                     <span>{PDP_PAGE.NO_WARRANTY}</span> 

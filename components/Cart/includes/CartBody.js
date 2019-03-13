@@ -2,7 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
-
+import Warranty from '../../Product/includes/Warranty';
 import CartStepper from './CartStepper';
 import Blocker from '../../common/Blocker';
 import SVGComponent from '../../common/SVGComponet';
@@ -27,6 +27,7 @@ const CartBody = ({
   cartStepperInputHandler,
   count,
   isLoading,
+  cartData,
 }) => {
   const { items, error } = data;
   const flag = data && items && items.length;
@@ -108,7 +109,7 @@ const CartBody = ({
                                     <a onClick={() => routeChange(variant_id, product_id, catalogId, itemType)}>{name}</a>
                                   </h4>
                                   <div className={`${styles['warranty-part']} ${styles['p-10']} ${styles['light-gry-clr']}`}>
-                                    <p className={`${styles['fs-12']}`}><span>{CART_PAGE.WARRENTY} : </span><span className={`${styles['pl-10']} ${styles['pr-10']}`}>{warranty[0].duration} {CART_PAGE.WARRENTY_TXT} </span><a href="" className={`${styles['fontW600']}`}>{CART_PAGE.VIEW_MORE}</a></p>
+                                    {cartData.items ? <Warranty warranty={cartData.items[index].warranty_duration} /> : null}
                                     <p className={`${styles['mb-0']} ${styles['fs-12']}`}>
                                       <span>{CART_PAGE.SHIPPING} : </span>
                                       <span className={`${styles['pl-10']} ${styles['pr-10']}`}>{CART_PAGE.REGULAR_SHIPPING}  ({shipping.shipping_fees + ' ' + cur}) - <span className={`${styles['fs-12']} ${styles['base-font']}`}>{CART_PAGE.ETA_DELIVERY_BY} {moment().add(shipping.shipping_days, 'days').format('LL')}</span>
