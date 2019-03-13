@@ -14,8 +14,8 @@ import Search from '../components/Search';
 const cookies = new Cookies();
 
 class SearchPage extends Base {
-  static async getInitialProps({ store, isServer, query, req }) {
-    
+
+  static async getInitialProps({ store, isServer, query, req }) {    
     const { language, search, facets, category, subCategory, isListed, disableSpellCheck } = query
     const categoryTree = query.categoryTree === 'true'; //TODO need better way to identify category tree
     //TODO SF-37 better handling of country
@@ -46,7 +46,7 @@ class SearchPage extends Base {
       disableSpellCheck,
       choosenCategoryName: categoryName || subCategoryName,
     };
-    if(shippingCity) {
+    if (shippingCity) {
       searchOptions.shippingDetails = {
         shippingCity: shippingCity.toUpperCase(),
         shippingCountry: (country || 'ARE').toUpperCase(),

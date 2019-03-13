@@ -14,6 +14,10 @@ const getLoggedInStatus = (store) => {
   return store.authReducer.data.isLoggedIn
 }
 
+const getInstaCode  = (store) => {
+  return store.authReducer.data.instagramCode || null
+}
+
 const getUserCreds = (store) => {
   return store.authReducer.data.userCreds
 }
@@ -34,4 +38,4 @@ const getShowLogin = (store) => {
   return store.authReducer.ui.showLogin;
 }
 
-export { getErrorMessege, getCountry, getLoggedInStatus, getUserCreds, getDeliveryCity, getAutoCompleteCityData, getLoginProgressStatus, getShowLogin, getPTAToken};
+export { getErrorMessege, getCountry, getLoggedInStatus, getInstaCode, getUserCreds, getDeliveryCity, getAutoCompleteCityData, getLoginProgressStatus, getShowLogin, getPTAToken};

@@ -11,7 +11,7 @@ const styles = mergeCss('components/Cam/Wishlist/wishlist');
 const percentage = (a, b) => Math.floor(((a - b) / b) * 100);
 
 const WishlistBody = (props) => {
-  const { data, deleteItem, addToCart } = props;
+  const { data, deleteItem, addToCart, notifyMe } = props;
   const { WISH_LIST_PAGE } = languageDefinations();
 
   const getPriceAlert = (a, b, cur) => {
@@ -51,7 +51,10 @@ const WishlistBody = (props) => {
       <div className={`${styles['box']}`}>
         {
           data.length > 0 && data.map((item, index) => {
-            const { wishlist_id, listing_id, brand_name, name, img, price, cur, wishlisted_price, mrp, variant_id, product_id, catalog_id, itemType } = item;
+            const {
+              wishlist_id, listing_id, brand_name, name, img, price, cur, inventory_count,
+              wishlisted_price, mrp, variant_id, product_id, catalog_id, itemType,
+            } = item;
             return (
               <div key={index} className={`${styles['thick-border-btm']} ${styles['p-30-20']} ${styles['mb-wishlist-part']}`}>
                 <Row className={styles['m-m-0']}>
@@ -68,7 +71,24 @@ const WishlistBody = (props) => {
                       <h5 className={`${styles['mt-0']} ${styles['mb-0']} ${styles['thick-blue']}`}>{brand_name}</h5>
                       <h5 className={`${styles['lgt-gry-clr']} ${styles.pointer} ${styles['light-gry-clr']}`} onClick={() => routeChange(variant_id, product_id, catalog_id, itemType)}>{name}</h5>
                       <div className={`${styles['mt-30']} ${styles['m-t-0']} ${styles['m-fs-12']}`}>
-                        <button id={listing_id} data-wish-id={wishlist_id}  className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['add-to-btn']}`} onClick={addToCart}>{WISH_LIST_PAGE.ADD_TO_CART_BTN}</button>
+                        {inventory_count > 0 ?
+                          <button
+                            id={listing_id}
+                            data-wish-id={wishlist_id} 
+                            className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['add-to-btn']}`}
+                            onClick={addToCart}
+                          >
+                            {WISH_LIST_PAGE.ADD_TO_CART_BTN}
+                          </button>
+                          :
+                          <button
+                            data-product-id={product_id} 
+                            className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['add-to-btn']}`}
+                            onClick={notifyMe}
+                          >
+                            {WISH_LIST_PAGE.NOTIFY_ME_BTN}
+                          </button>
+                        }
                       </div>
                     </Col>
                     <Col md={4} xs={4} className={styles['m-p-0']}>
@@ -81,10 +101,11 @@ const WishlistBody = (props) => {
                           <span className={`${styles['success-green']} ${styles.flex}`}>{percentage(price, mrp)}%</span>&nbsp;&nbsp;&nbsp;
                           <strike className={`${styles['label-gry-clr']}`}>{mrp}&nbsp;{cur}</strike>
                         </span>
-                        {getPriceAlert(price, wishlisted_price, cur)}
+                        {wishlisted_price && price && cur && getPriceAlert(price, wishlisted_price, cur)}
+                        {wishlisted_price &&
                         <span className={`${styles['thick-gry-clr']}`}>
                           Item was {wishlisted_price} {cur} when added to Wish List
-                        </span>
+                        </span>}
                       </div>
                     </Col>
                   </Col>
@@ -102,6 +123,7 @@ WishlistBody.propTypes = {
   data: PropTypes.array,
   deleteItem: PropTypes.func.isRequired,
   addToCart: PropTypes.func.isRequired,
+  notifyMe: PropTypes.func.isRequired,
 };
 
 WishlistBody.defaultProps = {

@@ -9,6 +9,8 @@ const UserProfile = (props) => {
   const { query } = props;
   const { tabDetails } = query;
   const [tab, ...queryParams] = tabDetails ? tabDetails.split('/') : [];
+  let full_name = props.userInfo.personalInfo.first_name + " " + props.userInfo.personalInfo.last_name
+  let name = full_name ? (full_name.length < 20 ? full_name : (full_name.slice(0,20) + "...")) : null;
   return(
   <Link route="/cam/profile">
     <a style={{ display:'block'}}> 
@@ -17,8 +19,8 @@ const UserProfile = (props) => {
         <div className={styles['img-style']} />
       </div>
       <div className={styles['profile-details']}>
-        <span className={`${styles['fs-12']} ${styles['light-gry-clr']}`}>Hello</span>
-        <div>{props.userInfo.personalInfo.first_name}</div>
+        <span className={`${styles['fs-12']} ${styles['light-gry-clr']}`}>Hello,</span>
+        <div>{name}</div>
       </div>
     </div>
     </a>

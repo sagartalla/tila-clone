@@ -1,7 +1,7 @@
 import fp, * as _ from 'lodash/fp';
 import shortid from 'shortid';
 
-const getOrderDetails = (store) => {
+const getOrderDetails = (store) => {  
   const { created_by, customer_account_id, address, order_id, created_at, order_items, price, total_shipping, currency_code, payments } = store.singleOrderReducer.data.orderDetails;
   if (order_id) {
     return {
@@ -18,18 +18,18 @@ const getOrderDetails = (store) => {
       //TODO move compose to common util
       orderItems: _.compose(
         _.reduce.convert({ 'cap': false })((acc, val, key) => {
-          return acc.concat({ id: key, products: val, status: val[0].status });
+          return acc.concat({ id: key, products: [val], status: val.status });
         }, []),
-        _.groupBy((i) => i.item_tracking_id || i.id),
         _.map((i) => ({
-          id: i.order_item_id,
+          id: i.order_item_ids[0],
           img: i.variant_info.image_url,
           name: i.variant_info.title,
           item_tracking_id: i.item_tracking_id || shortid.generate(),
           status: i.external_status,
-          state_times: i.state_times,
+          state_time_estimates: i.state_time_estimates,
           price: i.price.offer_price,
           currency_code: currency_code,
+          orderIds: i.order_item_ids,
           promisedDeliveryDate: i.promised_delivery_date
         }))
       )(order_items)

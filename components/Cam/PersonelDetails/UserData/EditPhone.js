@@ -102,7 +102,7 @@ class EditPhone  extends React.Component {
     </Row>
     <Row>
       <Col xs={12} md={12} className={`${styles['t-c']}`}>
-        <Btn btnWidth="95%" backGround="#034e94" color="#fff" btnText="Verify Mobile Number" BtnClickHandler={this.handleSubmit} />
+        <Btn btnWidth="95%" backGround="#034e94" color="#fff" btnText="Verify Mobile Number" onClick={this.handleSubmit} />
       </Col>
     </Row>
   </div>
