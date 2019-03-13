@@ -6,7 +6,7 @@ import { Row, Col } from 'react-bootstrap';
 import CartStepper from './CartStepper';
 import Blocker from '../../common/Blocker';
 import SVGComponent from '../../common/SVGComponet';
-import RightBar from '../../common/CartPaymentSideBar';
+import RightBar from '../CartPaymentSideBar';
 import Wishlist from '../../Cam/Wishlist/';
 import { languageDefinations } from '../../../utils/lang/';
 import constants from '../../../constants';

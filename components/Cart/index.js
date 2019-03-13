@@ -22,8 +22,8 @@ class Cart extends Component {
 
     this.state = {
       showBlocker: false,
-      count: ''
-    }
+      count: '',
+    };
 
     this.addToWishlist = this.addToWishlist.bind(this);
     this.removeCartItem = this.removeCartItem.bind(this);

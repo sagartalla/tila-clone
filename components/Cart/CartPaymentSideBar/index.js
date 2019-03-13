@@ -2,18 +2,23 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import SVGComponent from '../SVGComponet';
+import Cookie from 'universal-cookie';
+import SVGComponent from '../../common/SVGComponet';
+import Blocker from '../../common/Blocker';
 import { actionCreators } from '../../../store/cam/coupons';
-import InstantCheckout from '../InstantCheckout';
+import InstantCheckout from '../../common/InstantCheckout';
 import { languageDefinations } from '../../../utils/lang/';
+import { actionCreators as cartActioncreators } from '../../../store/cart';
 
 import CartStepper from '../../Cart/includes/CartStepper';
-import Slider from '../slider/index';
+import Slider from '../../common/slider';
 import Coupon from '../CartPaymentSideBar/coupons/index';
 
 import { mergeCss } from '../../../utils/cssUtil';
 
-const styles = mergeCss('components/common/CartPaymentSideBar/sideBar');
+const cookies = new Cookie();
+
+const styles = mergeCss('components/Cart/CartPaymentSideBar/sideBar');
 
 const { CART_PAGE } = languageDefinations();
 class CartAndPaymentSideBar extends Component {
@@ -22,13 +27,23 @@ class CartAndPaymentSideBar extends Component {
 
     this.state = {
       slider: false,
+      showBlocker: false,
+      hideCouponCode: props.hideCouponCode,
     };
   }
-
   openSlider = () => {
-    this.props.getCouponOffers('SAU');
+    let { showBlocker } = this.state;
+    showBlocker = true;
+    this.props.getCouponOffers(cookies.get('country')).then((res) => {
+      if (res.value.status === 200 || res.value.status === 201 || res.value.status === 204) {
+        this.setState({
+          showBlocker: false,
+        });
+      }
+    });
     this.setState({
       slider: true,
+      showBlocker,
     });
   }
   closeSlider = () => {
@@ -36,14 +51,25 @@ class CartAndPaymentSideBar extends Component {
       slider: false,
     });
   }
+  showOfferApplied = (data) => {
+    this.setState({
+      hideCouponCode: true,
+      offerCode: data,
+    });
+  }
   render() {
     const {
-      checkoutBtnHandler, showCheckoutBtn, showInstant, hideCouponCode, hideUpSell, showStepper, increaseItemCnt, decreaseItemCnt, insnt_item_listing_id, isPdp, couponData,
+      checkoutBtnHandler, showCheckoutBtn, showInstant,
+      hideUpSell, showStepper, increaseItemCnt, decreaseItemCnt,
+      insnt_item_listing_id, isPdp, couponData, getCartResults, viewData,
     } = this.props;
     const {
-      items, total_price, total_offer_price, total_discount, total_shipping, tax, item_cnt, currency,
+      items, total_price, total_offer_price,
+      total_discount, total_shipping, tax, item_cnt, currency,
     } = this.props.data;
-    const { slider } = this.state;
+    const {
+      slider, showBlocker, hideCouponCode, offerCode,
+    } = this.state;
     return (
       <div className={`${styles['right-bar']}`}>
         <div className={`${styles['coupon-code-main']} ${styles['pb-10']}`}>
@@ -52,15 +78,27 @@ class CartAndPaymentSideBar extends Component {
             <span className={styles['pl-5']}>Buy & Earn 300 Reward Points</span>
           </h4>
           {
-          hideCouponCode ? null :
-          <span className={`${styles['flex-center']} ${styles['justify-center']} ${styles['p-10']} ${styles['m-20']} ${styles['apply-coupon']}`}>
-            <SVGComponent clsName={`${styles['coupon-code']}`} src="icons/common-icon/coupon-code" />
-            <span className={`${styles['text-uppercase']} ${styles['pl-5']}`} onClick={this.openSlider}><div className={`${styles.pointer}`}>Apply Coupon Code</div></span>
-          </span>
+          hideCouponCode || viewData.coupon_code ?
+            <span className={`${styles['p-10']} ${styles['m-20']} ${styles['applied-coupon']} ${styles.flex} ${styles['flex-center']}`}>
+              <SVGComponent clsName={`${styles['coupon-code']}`} src="icons/common-icon/coupon-code" />
+              <span className={`${styles['pl-5']} ${styles.flex} ${styles.width100} ${styles['flex-center']} ${styles['justify-between']} `}>
+                <div>
+                  <div className={`${styles.applied}`}>Offer Applied</div>
+                  <div >{offerCode === '' || offerCode === undefined ? viewData.coupon_code : offerCode}</div>
+                </div>
+                <div className={`${styles.pointer} ${styles['lgt-blue']}`} onClick={this.openSlider}>Change</div>
+              </span>
+            </span>
+          :
+            <span className={`${styles['flex-center']} ${styles['justify-center']} ${styles['p-10']} ${styles.flex} ${styles['m-20']} ${styles['apply-coupon']}`}>
+              <SVGComponent clsName={`${styles['coupon-code']}`} src="icons/common-icon/coupon-code" />
+              <span className={`${styles['text-uppercase']} ${styles['pl-5']}`} onClick={this.openSlider}><div className={`${styles.pointer}`}>Apply Coupon Code</div></span>
+            </span>
         }
 
         </div>
-        {slider &&
+        {showBlocker ? <Blocker /> :
+        slider &&
           <Slider
             closeSlider={this.closeSlider}
             isOpen={slider}
@@ -68,6 +106,9 @@ class CartAndPaymentSideBar extends Component {
           >
             <Coupon
               couponData={couponData}
+              getCartResults={getCartResults}
+              closeSlider={this.closeSlider}
+              showOfferApplied={this.showOfferApplied}
             />
           </Slider>
         }
@@ -135,6 +176,9 @@ class CartAndPaymentSideBar extends Component {
 
 CartAndPaymentSideBar.propTypes = {
   data: PropTypes.object,
+  getCouponOffers: PropTypes.func,
+  applyTheCoupon: PropTypes.func,
+
 };
 
 CartAndPaymentSideBar.defaultProps = {
@@ -143,21 +187,30 @@ CartAndPaymentSideBar.defaultProps = {
   hideUpSell: false,
   showStepper: false,
   insnt_item_listing_id: '',
+  getCouponOffers: f => f,
+  applyTheCoupon: f => f,
 };
-const mapStateToProps = ({ couponOffersData }) => {
+const mapStateToProps = ({ couponOffersData, cartReducer }) => {
+  // const { couponOffersData, cartReducer } = store;
   const {
     couponData,
   } = couponOffersData;
+  const {
+    data,
+  } = cartReducer;
   return {
     couponData,
+    viewData: data,
   };
 };
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
-    { getCouponOffers: actionCreators.getCouponOffers },
+    {
+      getCouponOffers: actionCreators.getCouponOffers,
+      getCartResults: cartActioncreators.getCartResults,
+    },
     dispatch,
   );
 
 export default connect(mapStateToProps, mapDispatchToProps)(CartAndPaymentSideBar);
-
