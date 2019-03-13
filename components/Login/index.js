@@ -7,8 +7,8 @@ import SVGComponent from '../common/SVGComponet';
 import { selectors, actionCreators } from '../../store/auth';
 import constants from '../../constants';
 import { Row, FormGroup, Col, Button, ControlLabel, Checkbox } from 'react-bootstrap';
+import ForgotPassword from './ForgotPassword';
 import SocialLogin from './SocialLogin';
-
 import { mergeCss } from '../../utils/cssUtil';
 const styles = mergeCss('components/Login/login');
 import { languageDefinations } from '../../utils/lang';
@@ -31,10 +31,12 @@ class Login extends Component {
       mode: props.mode || 'login',
       country: '',
       phone: '',
+      forgotPassword: false,
     };
     this.login = this.login.bind(this);
     this.onChangeField = this.onChangeField.bind(this);
     this.toggleLoginSignUp = this.toggleLoginSignUp.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
@@ -144,11 +146,17 @@ class Login extends Component {
     }, () => this.fireCustomEventClick(this.state.mode));
   }
 
+  handleClick() {
+    this.setState({forgotPassword: true});
+  }
+
   render() {
     const { userCreds } = this.props;
     const { errObj, mode, error } = this.state;
     return (
       <Row className={`${styles['bg-white']} ${styles['m-0']}`}>
+        { !this.state.forgotPassword ?
+      <div>
         <Col md={6} xs={6} className={styles['pl-0']}>
           <div className={styles['image-placeholder']}>
             <img className={styles['img-responsive']} src={`${constants.mediaDomain}/pim/15f45930-fecf-4f7b-a3d6-613d41196c20/workbench/image/a1ccb74a-1858-42dd-8c38-cfb103e85bb2/login-screen.jpeg`} />
@@ -292,6 +300,11 @@ class Login extends Component {
               </Col>
             </FormGroup>
             <div className={`${styles['login-social-icon']} ${styles['pl-15']}`}>
+              <a>
+                <span onClick={this.handleClick}>
+                  Forgot Password?
+                </span>
+              </a>
               <span className={`${styles['thick-gry-clr']} ${styles['pt-10']} ${styles['pb-10']} ${styles['flex']}`}>{LOGIN_PAGE.SIGN_UP_WITH}</span>
               <NoSSR>
                 <SocialLogin />
@@ -315,6 +328,11 @@ class Login extends Component {
           </div>
 
         </Col>
+        </div>
+        :
+        <ForgotPassword />
+        }
+
       </Row>
     );
   }
