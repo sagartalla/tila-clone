@@ -8,10 +8,11 @@ import Cookie from 'universal-cookie';
 import Product from "./Product";
 import SVGCompoent from '../../common/SVGComponet';
 import { actionCreators, selectors } from '../../../store/search';
-import { actionCreators as cartActionCreators, selectors as cartSelector } from '../../../store/cart'
-import { actionCreators as wishlistActionCreators } from '../../../store/cam/wishlist'
+import { actionCreators as cartActionCreators, selectors as cartSelector } from '../../../store/cart';
+import { actionCreators as wishlistActionCreators } from '../../../store/cam/wishlist';
 import { mergeCss } from '../../../utils/cssUtil';
 import { Router } from '../../../routes';
+
 const styles = mergeCss('components/Search/search');
 
 const cookies = new Cookie();
@@ -20,13 +21,15 @@ const language = cookies.get('language') || 'en';
 const country = cookies.get('country') || 'SAU';
 
 class SearchResults extends Component {
-
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      productID:[]
+    };
     this.loadMore = this.loadMore.bind(this);
     this.buyNow = this.buyNow.bind(this);
     this.addToCart = this.addToCart.bind(this);
+    this.selectedProduct = this.selectedProduct.bind(this)
   }
 
   async loadMore(){
@@ -54,7 +57,11 @@ class SearchResults extends Component {
     this.props.resetAddtoCart();
     this.props.getWishlist();
   }
-
+  selectedProduct(productID) {
+    this.setState({
+      productID
+    })
+  }
   buyNow(listingId) {
     this.setState({
       buyNow: true
@@ -64,13 +71,16 @@ class SearchResults extends Component {
   }
 
   addToCart(listingId) {
+    this.setState({
+      productID:[]
+    })
     this.props.addToCartAndFetch({
       listing_id: listingId
     });
   }
 
   render() {
-    const { results, pagiantionDetails } = this.props;
+    const { results, pagiantionDetails, userDetails, notifyMe } = this.props;
     const { pageNum } = this.props.pagiantionDetails;
     return (
       <div>
@@ -91,6 +101,11 @@ class SearchResults extends Component {
               addToCart={this.addToCart}
               index={`${item.id}_${index}`}
               pageNum={pageNum}
+              userDetails={userDetails}
+              notifyMe={notifyMe}
+              productID={item.id}
+              selectedProduct={this.selectedProduct}
+              selectedID={this.state.productID}
             />
           ))}
         </InfiniteScroll>
@@ -99,11 +114,12 @@ class SearchResults extends Component {
   }
 }
 
-const mapStateToProps = (store) => ({
+const mapStateToProps = store => ({
   results: selectors.getSearchResutls(store),
   pagiantionDetails: selectors.getPaginationDetails(store),
   ui: selectors.getUIState(store),
   isAddedToCart: cartSelector.isAddedToCart(store),
+  userDetails: selectors.getUserDetails(store),
 });
 
 const mapDispatchToProps = dispatch =>
@@ -113,6 +129,7 @@ const mapDispatchToProps = dispatch =>
       addToCartAndFetch: cartActionCreators.addToCartAndFetch,
       resetAddtoCart: cartActionCreators.resetAddtoCart,
       getWishlist: wishlistActionCreators.getWishlist,
+      notifyMe: wishlistActionCreators.notifyMe,
     },
     dispatch,
   );

@@ -27,6 +27,21 @@ const cookies = new Cookie();
 const language = cookies.get('language') || 'en';
 const country = cookies.get('country') || 'SAU';
 
+const snMetaObj = {
+  'google': {
+    channel: "GOOGLE_AUTH",
+    metadata: "google.access_token"
+  },
+  'facebook': {
+    channel: "FACEBOOK_AUTH",
+    metadata: "fb.access_token"
+  },
+  'instagram': {
+    channel: "INSTAGRAM_AUTH",
+    metadata: "instagram.code"
+  }
+}
+
 class ActionBar extends Component {
   constructor(props) {
     super(props);
@@ -65,6 +80,11 @@ class ActionBar extends Component {
             window.location.replace(`${publicUrls.custhelpDomain}/ci/pta/login/redirect/${unescape(Router.router.query.p_next_page)}/p_li/${cookies.get('ptaToken')}`);
         }
       }
+    } else {
+      if((nextProps.instaCode !== this.props.instaCode) && nextProps.instaCode) {
+        window.localStorage.removeItem('instagramCode');
+        this.getTokenCall('instagram', nextProps.instaCode);
+      }
     }
   }
 
@@ -94,6 +114,16 @@ class ActionBar extends Component {
     this.setState({ show: false });
     this.props.resetLoginError();
     this.props.resetShowLogin();
+  }
+
+  getTokenCall = (socialNetwork, token) => {
+    const serverData = {
+      "channel": snMetaObj[socialNetwork].channel,
+      "metadata": {
+        [snMetaObj[socialNetwork].metadata]: token
+      }
+    }
+    this.props.userLogin(serverData)
   }
 
   render() {
@@ -223,6 +253,7 @@ const mapStateToProps = (store) => {
   return ({
     error: selectors.getErrorMessege(store),
     isLoggedIn: selectors.getLoggedInStatus(store),
+    instaCode: selectors.getInstaCode(store),
     cartResults: cartSelectors.getCartResults(store),
     loginInProgress: selectors.getLoginProgressStatus(store),
     userInfo: personalSelectors.getUserInfo(store),
@@ -240,6 +271,7 @@ const mapDispatchToProps = (dispatch) => {
       resetLoginError: actionCreators.resetLoginError,
       resetShowLogin: actionCreators.resetShowLogin,
       savePtaToken: actionCreators.savePtaToken,
+      userLogin: actionCreators.userLogin,
     },
     dispatch,
   );

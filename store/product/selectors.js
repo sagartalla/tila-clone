@@ -1,7 +1,10 @@
 import _ from 'lodash';
 
 const getProduct = (store, variantId) => {
-  const { product_details, variant_preferred_listings, tree } = store.productReducer.data[0];
+  const {
+    product_details, variant_preferred_listings, tree, product_id,
+  } = store.productReducer.data[0];
+  variantId = store.productReducer.variantsData.selectedVariantId || variantId;
   const computedVariantId = variantId;
   const listings = computedVariantId ? variant_preferred_listings[computedVariantId] : _.reduce(variant_preferred_listings, (acc, val, key) => {
     return [...acc, ...val];
@@ -21,6 +24,7 @@ const getProduct = (store, variantId) => {
   priceInfo = priceInfo.length ? priceInfo[0] : null;
   const availabilityError = activeCount === listings.length;
   const stockError = listingInventryCount === listings.length;
+  const imgUrls = product_details.product_details_vo.cached_product_details.media.gallery_media;
   const titleInfo = {
     brand: product_details.catalog_details.attribute_map.brand.attribute_values[0].value,
     title: productAttributeMap.calculated_display_name.attribute_values[0].value,
@@ -36,6 +40,10 @@ const getProduct = (store, variantId) => {
     discountPercent: '',
     listingId: priceInfo ? priceInfo.listing_id : 'No Listing',
     totalInventoryCount: priceInfo ? priceInfo.total_inventory_count : 0,
+    product_id,
+    itemtype: product_details.catalog_details.item_type_name,
+    media: imgUrls[0].url,
+    categoryId: tree.breadcrumb[tree.breadcrumb.length - 1].id,
   };
   const returnInfo = {
     acceptsReturns: priceInfo ? priceInfo.accepts_returns : false,
@@ -48,10 +56,28 @@ const getProduct = (store, variantId) => {
     listingAvailable: !!priceInfo,
     availabilityError,
     stockError,
+    offerPricing: priceInfo ? {
+      strickedPrice: priceInfo.pricing.mrp,
+      showPrise: priceInfo.pricing.offer_price,
+      sellingPrice: priceInfo.pricing.price,
+      discount: priceInfo.pricing.discount_per_mrp,
+      offerMesseges: priceInfo.pricing.actions.map((a) => a.description),
+      offerDiscounts: priceInfo.pricing.actions.map((a) => a.discount),
+      totalDiscountMRP: priceInfo.pricing.total_discount_mrp,
+      currency: priceInfo.mrp_currency
+    } : 'No Listing'
+  }
+  const variant_id = Object.keys(variant_preferred_listings)[0]
+
+  const catalogObj = {
+    catalog_id: product_details.catalog_details.catalog_id,
+    item_type: product_details.catalog_details.item_type_name,
+    product_id: product_details.product_id,
+    variant_id
   }
   const keyfeatures = _.map(productAttributeMap.calculated_highlights.attribute_values, (kf) => kf.value);
+  const extraOffers = priceInfo ? priceInfo.pricing.extra_offers_detail : [];
   const details = catalogAttributeMap.description ? catalogAttributeMap.description.attribute_values.map((d) => d.value).join(', ') : null;
-  const imgUrls = product_details.product_details_vo.cached_product_details.media.gallery_media;
   let productDescription = product_details.product_details_vo.cached_product_details.rich_product_desc
   productDescription = productDescription.length > 0 ? _.sortBy(productDescription,['order']) : null
   return {
@@ -59,10 +85,13 @@ const getProduct = (store, variantId) => {
     details,
     keyfeatures,
     imgUrls,
+    extraOffers,
     offerInfo,
     shippingInfo,
     returnInfo,
+    product_id,
     productDescription,
+    catalogObj,
     breadcrums: tree.breadcrumb,
     categoryType: tree.finance ? tree.finance[0].display_name_en : '',
     catalog: _.groupBy(_.filter(catalogAttributeMap, (val) => val.visible), (attrMap) => attrMap.attribute_category_name)
@@ -70,6 +99,7 @@ const getProduct = (store, variantId) => {
 };
 
 const getVariants = (store) => {
+  // remove this method
   const { similar_products, product_details } = store.productReducer.data[0];
   const { product_details_vo } = product_details;
   const { cached_product_details } = product_details_vo;
@@ -127,6 +157,123 @@ const getVariants = (store) => {
   }
 };
 
+const getVariantsAndSimilarProducts = (store) => {
+  const { variantsData } = store.productReducer;
+  const { availableSimilarProducts } = variantsData || {};
+  const { similar_products, product_details, variant_preferred_listings } = store.productReducer.data[0];
+  const { item_type_name: itemType, catalog_id: catalogId } = product_details.catalog_details;
+  const { product_id: productId, product_details_vo } = product_details;
+  const { cached_product_details } = product_details_vo;
+  const { attribute_map } = cached_product_details;
+  // sample output
+  // const variants = {
+  //   display: {
+  //     size: {
+  //       displayName: 'Size',
+  //       values: ['s', '', '']
+  //     },
+  //     something_else: {
+  //       displayName: 'Something Else',
+  //       values: ['', '', '']
+  //     }
+  //   },
+  //   map: {
+  //     [variantId]: {
+  //       size:'s',
+  //       somethingElse: ''
+  //     }
+  //   }]
+  // }
+  const variants = _.reduce(product_details.product_details_vo.cached_variant, (acc, value, key) => {
+    const display = {
+      ...acc.display
+    };
+    const map = {
+      ...acc.map
+    };
+    map[key] =  map[key] || {};
+    _.forEach(value.attribute_map, (attVal, attKey) => {
+      if(attVal.attribute_group_name !== 'IDENTITY') {
+        return;
+      }
+      if(!display[attKey]) {
+        display[attKey] = {
+          displayName: attVal.display_string,
+          values: []
+        }
+      }
+      display[attKey].values = [...display[attKey].values, ...(attVal.attribute_values.map((i) => i.value))]
+      if(!map[key][attKey]) {
+        map[key][attKey] = [];
+      }
+      map[key] = {
+        [attKey]: [...map[key][attKey], ...(attVal.attribute_values.map((i) => i.value))]
+      };
+    });
+    return {
+      ...acc,
+      display,
+      map
+    };
+  }, { display: {}, map: [] });
+  // sample output
+  // const similarProducts = {
+  //   display: {
+  //     color: {
+  //       displayName: 'Color',
+  //       values: ['red', '', '']
+  //     },
+  //     something_else: {
+  //       displayName: 'Something Else',
+  //       values: ['', '', '']
+  //     }
+  //   },
+  //   map: {
+  //     [productId]: {
+  //       color:'red',
+  //       somethingElse: ''
+  //     }
+  //   }]
+  // }
+  const similarProducts = _.reduce([product_details, ...similar_products], (acc, product) => {
+    if(availableSimilarProducts && !availableSimilarProducts[product.product_details_vo.cached_product_details.product_id]) return;
+    const key = product.product_details_vo.cached_product_details.product_id;
+    const display = {
+      ...acc.display
+    };
+    const map = {
+      ...acc.map
+    };
+    map[key] =  map[key] || {};
+    _.forEach(product.product_details_vo.cached_product_details.attribute_map, (attVal, attKey) => {
+      if(attVal.attribute_group_name !== 'IDENTITY' || !attVal.searchable) {
+        return;
+      }
+      if(!display[attKey]) {
+        display[attKey] = {
+          displayName: attVal.display_string,
+          values: []
+        }
+      }
+      display[attKey].values = [...display[attKey].values, ...(attVal.attribute_values.map((i) => i.value))]
+      if(!map[key][attKey]) {
+        map[key][attKey] = [];
+      }
+      map[key] = {
+        [attKey]: [...map[key][attKey], ...(attVal.attribute_values.map((i) => i.value))]
+      };
+    });
+    return {
+      ...acc,
+      display,
+      map
+    };
+  }, { display: {}, map: [] });
+  return {
+    variants, similarProducts, itemType, catalogId, productId
+  };
+}
+
 const getPreview = (store) => {
   const { attributes, products } = store.productReducer.data.pimData;
   const { catalogData } = store.productReducer.data;
@@ -177,12 +324,40 @@ const getPreview = (store) => {
   };
 };
 
-const getSelectedVariantId = (store) => (options) => {
-  const selectedVariant = _.filter(options.variants, options.selectedVariantData)[0];
-  return {
-    pId: selectedVariant.pId,
-    vId: selectedVariant.vId,
-  }
+const getSelectedVariantId = ({selectedVariantData, map}) => {
+  let match, matchVid;
+   _.forEach(map, (mapValues, vid) => {
+    match = _.reduce(selectedVariantData, (acc, selectedValue, selectedKey) => {
+      return acc && (mapValues[selectedKey] && mapValues[selectedKey].indexOf(selectedValue) !== -1)
+    }, true);
+    if(match) {
+      matchVid = vid;
+    }
+  });
+  return matchVid;
 }
 
-export { getProduct, getVariants, getPreview, getSelectedVariantId };
+const getReviewRatings = (store) => {
+  return store.productReducer.reviews
+}
+const getReviewResponse = (store) => {
+  return store.productReducer.reviewResponse
+}
+const getSelectedPropductId = ({selectedProductData, map}) => {
+  let match, matchPid;
+   _.forEach(map, (mapValues, pid) => {
+    match = _.reduce(selectedProductData, (acc, selectedValue, selectedKey) => {
+      return acc && (mapValues[selectedKey] && mapValues[selectedKey].indexOf(selectedValue) !== -1)
+    }, true);
+    if(match) {
+      matchPid = pid;
+    }
+  });
+  return matchPid;
+}
+
+const getSelectedVariantData = (store) => {
+  store.productReducer.variantsData ? store.productReducer.variantsData.selectedVariantData : {};
+}
+
+export { getProduct, getVariants, getPreview, getSelectedVariantId, getReviewRatings, getReviewResponse, getVariantsAndSimilarProducts, getSelectedPropductId, getSelectedVariantData };

@@ -70,7 +70,7 @@ class UpdateTimelineComponent extends React.Component {
         </div>
         <Row>
           <Col xs={12} md={12} className={styles['t-c']}>
-            <Btn btnWidth="95%" btnText="Update Your Info" BtnClickHandler={this.handleShow(true)} />
+            <Btn btnWidth="95%" btnText="Update Your Info" onClick={this.handleShow(true)} />
           </Col>
         </Row>
         <Row>

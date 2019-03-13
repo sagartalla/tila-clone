@@ -59,4 +59,13 @@ const resetPasswordStatus =(store) => {
 return store.personalDetailsReducer;
 }
 
-export { getUserInfo, getPasswordResetStatus, getErrorMessege, getEditPersonalInfoStatus ,resetPasswordStatus};
+const forgotPasswordStatus = (store) => {
+  if(store.personalDetailsReducer.data.Response){
+    return store.personalDetailsReducer.data.Response;
+  }else if(store.personalDetailsReducer.data.message){
+    return store.personalDetailsReducer.data.message;
+  }
+}
+
+
+export { getUserInfo, getPasswordResetStatus, getErrorMessege, getEditPersonalInfoStatus , forgotPasswordStatus, resetPasswordStatus};

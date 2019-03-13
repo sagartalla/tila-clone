@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Slider from "react-slick";
 import { Grid, Row, Col } from 'react-bootstrap';
@@ -25,7 +25,7 @@ class Display extends Component {
   }
 
   render() {
-    const { imgs } = this.props;
+    const { imgs, extraOffers } = this.props;
     return (
       <div className={`${styles['ht-100per']}`}>
         <div className={`${styles['display-item-wrap']}`}>
@@ -66,18 +66,39 @@ class Display extends Component {
               }
             </Slider>
           </Col>
-          <Col md={4} sm={4}>
-            <div className={`${styles['thick-gry-clr']} ${styles['copon-code']} ${styles['pl-15']}`}>
-              <h5 className={`${styles['mb-5']} ${styles['fontW600']}`}>10% EXTRA DISCOUNT</h5>
-              <span className={styles['fs-12']}>Buy fashion for AED 1000/- and get 10% Extra Discount</span>
-            </div>
-          </Col>
-          <Col md={4} sm={4}>
-            <div className={`${styles['thick-gry-clr']} ${styles['copon-code']} ${styles['pl-15']}`}>
-              <h5 className={`${styles['mb-5']} ${styles['fontW600']}`}>10% EXTRA DISCOUNT</h5>
-              <span className={styles['fs-12']}>Buy fashion for AED 1000/- and get 10% Extra Discount</span>
-            </div>
-          </Col>
+          {
+            extraOffers && extraOffers.length
+              ?
+              <Fragment>
+              {
+                extraOffers[0]
+                ?
+                  <Col md={4} sm={4}>
+                    <div className={`${styles['thick-gry-clr']} ${styles['copon-code']} ${styles['pl-15']}`}>
+                      <h5 className={`${styles['mb-5']} ${styles['fontW600']}`}>{extraOffers[0]}</h5>
+                      {/*<span className={styles['fs-12']}>Buy fashion for AED 1000/- and get 10% Extra Discount</span>*/}
+                    </div>
+                  </Col>
+                :
+                  null
+                }
+              {
+                extraOffers[1]
+                ?
+                <Col md={4} sm={4}>
+                  <div className={`${styles['thick-gry-clr']} ${styles['copon-code']} ${styles['pl-15']}`}>
+                    <h5 className={`${styles['mb-5']} ${styles['fontW600']}`}>{extraOffers[1]}</h5>
+                    {/*<span className={styles['fs-12']}>Buy fashion for AED 1000/- and get 10% Extra Discount</span>*/}
+                  </div>
+                </Col>
+                :
+                  null
+                }
+              </Fragment>
+              :
+               null
+          }
+
         </div>
       </div>
     );

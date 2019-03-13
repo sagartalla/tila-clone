@@ -11,9 +11,10 @@ import FooterBar from '../Footer/index';
 import CategoriesAndFacets from './CategoriesAndFacets';
 import SearchDetailsBar from './SearchDetailsBar';
 import SearchResults from './SearchResults';
+import CompareWidget from '../common/CompareWidget';
 import { Router } from '../../routes';
-
 import { mergeCss } from '../../utils/cssUtil';
+
 const styles = mergeCss('components/Search/search');
 
 const cookies = new Cookie();
@@ -58,7 +59,7 @@ class Search extends Component {
               <a
                 href="javascript: void(0)"
                 onClick={this.querySearch}
-                data-querysearch={spellCheckResp[query.search]}
+                data-querysearch={query.search}
               >
                 <b>{`${spellCheckResp[query.search]} ?`}</b>
               </a>
@@ -74,6 +75,7 @@ class Search extends Component {
             <SearchResults />
           </Col>
         </Grid>
+        <CompareWidget />
         <FooterBar />
       </div>
     )
