@@ -67,8 +67,7 @@ const isAddedToCart = (store) => {
     })
     return !!selectedCartItem;
   } catch (e) {
-
   }
 }
 
-export { getCartResults, getLoadingStatus, getErrorMessege, isAddedToCart }
+export { getCartResults, getLoadingStatus, getErrorMessege, isAddedToCart, getBtnLoaders }

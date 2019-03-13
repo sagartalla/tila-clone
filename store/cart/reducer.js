@@ -4,6 +4,7 @@ import { actions } from './actions';
 const initialState = {
   ui: {
     loading: false,
+    btnLoading: false,
   },
   data: {
     addToCart: {},
@@ -34,7 +35,10 @@ const cartReducer = typeToReducer({
   [actions.ADD_TO_CART]: {
     PENDING: state => Object.assign({}, state, {
       ...state,
-      ui: { loading: true },
+      ui: {
+        loading: true,
+        btnLoading: true,
+      },
     }),
     FULFILLED: (state, action) => Object.assign({}, state, {
       ...state,
@@ -42,13 +46,17 @@ const cartReducer = typeToReducer({
         ...state.data,
         addToCart: action.payload.data,
       },
-      ui: { loading: false },
+      ui: {
+        loading: false,
+        btnLoading: true,
+      },
     }),
     REJECTED: (state, action) => Object.assign({}, state, {
       ...state,
       error: action.payload.response ? action.payload.response.data.message : action.payload.message,
       ui: {
         loading: false,
+        btnLoading: true,
       },
     }),
   },
