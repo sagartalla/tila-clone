@@ -8,7 +8,6 @@ import _ from 'lodash';
 import {Link, Router} from '../../../routes';
 import Waypoint from 'react-waypoint';
 
-import { Router } from '../../../routes';
 import constants from '../../../constants';
 import { actionCreators } from '../../../store/cam/wishlist';
 import { actionCreators as compareActions  } from '../../../store/compare/actions';
