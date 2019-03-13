@@ -23,9 +23,6 @@ class Coupon extends Component {
       errorMsg: '',
     };
   }
-  handleChild = (e) => {
-    e.stopPropagation();
-  }
  showTerms = data => () => {
    this.setState({
      showTerms: true,
@@ -51,14 +48,14 @@ class Coupon extends Component {
    });
  }
 handleApply = data => () => {
-  const { getCartResults, closeSlider } = this.props;
+  const { getCartResults, closeSlider, showOfferApplied } = this.props;
   const params = {
     coupon_code: data.coupon_code,
     remove_coupon: false,
   };
   getCartResults(params).then((res) => {
     if (res.value.data.coupon_code) {
-      this.props.showOfferApplied(data.coupon_code);
+      showOfferApplied(data.coupon_code);
       closeSlider();
     }
   });
@@ -79,6 +76,7 @@ handleInputApply = code => () => {
   };
   getCartResults(params)
     .then((res) => {
+      console.log(res);
       if (res.value.data.coupon_code) {
         this.props.showOfferApplied(code);
         closeSlider();
@@ -116,13 +114,13 @@ render() {
                 <div className={`${styles.flex}`}>
                   <div className={data.offer_sub_type === 'LISTING' ? `${styles.couponCodeListing}` : data.offer_sub_type === 'BANK' ? `${styles.couponCodeBank}` : `${styles.couponCodeCategory}`}>
                     <div className={`${styles['align-end']} ${styles.flex}`}>
-                       <div className={`${styles['fs-10']} ${styles.textColor} `}>{data.offer_currency}</div>
+                      <div className={`${styles['fs-10']} ${styles.textColor} `}>{data.offer_currency}</div>
                        &nbsp;
-                       <div className={`${styles.ellipsis}`} title={data.coupon_code}>{data.coupon_code}</div>
+                      <div className={`${styles.ellipsis}`} title={data.coupon_code}>{data.coupon_code}</div>
                     </div>
                   </div>
                   <div className={data.offer_sub_type === 'LISTING' ? `${styles.listingColor} ${styles.couponOffer} ` : data.offer_sub_type === 'BANK' ? `${styles.bankColor} ${styles.couponOffer}` : `${styles.categoryColor} ${styles.couponOffer}`}>
-                     <div className={`${styles.ellipsis}`} title={data.offer_sub_type}>{data.offer_sub_type}</div>
+                    <div className={`${styles.ellipsis}`} title={data.offer_sub_type}>{data.offer_sub_type}</div>
                   </div>
                 </div>
                 <div className={`${styles.wordBreak} ${styles['p-5']}`}>{data.description}</div>
@@ -131,45 +129,48 @@ render() {
                     <div className={styles.border} />
                   </div>
                   <div className={`${styles['lgt-blue']} ${styles.pointer}`} onClick={this.showHowtoUse(data)}>{COUPON_OFFERS.HOW_TO_USE}</div>
-                  {!data.applied ?
+                  {/* {data.applied ?
                     <div className={`${styles.flex}`}>
                       <img src="/static/img/icons/common-icon/green-tick.svg" alt="checked" />
-                      <div className={`${styles.applied} ${styles['p-10']}`}>{COUPON_OFFERS.APPLIED}</div>
+                      <div className={`${styles.applied} ${styles['p-10']}`}>
+                      {COUPON_OFFERS.APPLIED}</div>
                     </div>
-                  : <Button className={`${styles['fp-btn-default']}`} btnText={COUPON_OFFERS.APPLY} onClick={this.handleApply(data)} />}
+                  : */}
+                  <Button className={`${styles['fp-btn-default']}`} btnText={COUPON_OFFERS.APPLY} onClick={this.handleApply(data)} />
+                  {/* } */}
                 </div>
               </div>
           ))}
-     </div>
-     <div>
-      <Modal
-        show={showTerms}
-        onHide={this.closeTerms}
-        className={styles.modalClassName}
-      >
-        <Modal.Body>
-          {termsOfUse}
-        </Modal.Body>
-        <div className={`${styles['justify-end']} ${styles['p-30']} ${styles.flex}`}>
-          <button className="btn btn-primary" style={{ backgroundColor: '#45689a', width: '15%' }} onClick={this.closeTerms}>
-             {COUPON_OFFERS.OK}
-           </button>
-        </div>
-      </Modal>
-      <Modal
-        show={showHowToUse}
-        onHide={this.closeTerms}
-        className={styles.modalClassName}
-      >
-        <Modal.Body>
-          {howToUse}
-        </Modal.Body>
-        <div className={`${styles['justify-end']}  ${styles['p-30']} ${styles.flex}`}>
-          <button className="btn btn-primary" style={{ backgroundColor: '#45689a', width: '15%' }} onClick={this.closeTerms}>
-             {COUPON_OFFERS.OK}
-           </button>
-        </div>
-      </Modal>
+      </div>
+      <div>
+        <Modal
+          show={showTerms}
+          onHide={this.closeTerms}
+          className={styles.modalClassName}
+        >
+          <Modal.Body>
+            {termsOfUse}
+          </Modal.Body>
+          <div className={`${styles['justify-end']} ${styles['p-30']} ${styles.flex}`}>
+            <button className="btn btn-primary" style={{ backgroundColor: '#45689a', width: '15%' }} onClick={this.closeTerms}>
+              {COUPON_OFFERS.OK}
+            </button>
+          </div>
+        </Modal>
+        <Modal
+          show={showHowToUse}
+          onHide={this.closeTerms}
+          className={styles.modalClassName}
+        >
+          <Modal.Body>
+            {howToUse}
+          </Modal.Body>
+          <div className={`${styles['justify-end']}  ${styles['p-30']} ${styles.flex}`}>
+            <button className="btn btn-primary" style={{ backgroundColor: '#45689a', width: '15%' }} onClick={this.closeTerms}>
+              {COUPON_OFFERS.OK}
+            </button>
+          </div>
+        </Modal>
       </div>
     </div>
   );
@@ -178,14 +179,14 @@ render() {
 
 Coupon.propTypes = {
   couponData: PropTypes.instanceOf(Array),
-  applyTheCoupon: PropTypes.func,
+  getCartResults: PropTypes.func,
   closeSlider: PropTypes.func,
   showOfferApplied: PropTypes.func,
 };
 
 Coupon.defaultProps = {
   couponData: [],
-  applyTheCoupon: f => f,
+  getCartResults: f => f,
   closeSlider: f => f,
   showOfferApplied: f => f,
 };
