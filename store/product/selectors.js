@@ -56,6 +56,16 @@ const getProduct = (store, variantId) => {
     listingAvailable: !!priceInfo,
     availabilityError,
     stockError,
+    offerPricing: priceInfo ? {
+      strickedPrice: priceInfo.pricing.mrp,
+      showPrise: priceInfo.pricing.offer_price,
+      sellingPrice: priceInfo.pricing.price,
+      discount: priceInfo.pricing.discount_per_mrp,
+      offerMesseges: priceInfo.pricing.actions.map((a) => a.description),
+      offerDiscounts: priceInfo.pricing.actions.map((a) => a.discount),
+      totalDiscountMRP: priceInfo.pricing.total_discount_mrp,
+      currency: priceInfo.mrp_currency
+    } : 'No Listing'
   }
   const variant_id = Object.keys(variant_preferred_listings)[0]
 
@@ -66,6 +76,7 @@ const getProduct = (store, variantId) => {
     variant_id
   }
   const keyfeatures = _.map(productAttributeMap.calculated_highlights.attribute_values, (kf) => kf.value);
+  const extraOffers = priceInfo ? priceInfo.pricing.extra_offers_detail : [];
   const details = catalogAttributeMap.description ? catalogAttributeMap.description.attribute_values.map((d) => d.value).join(', ') : null;
   let productDescription = product_details.product_details_vo.cached_product_details.rich_product_desc
   productDescription = productDescription.length > 0 ? _.sortBy(productDescription,['order']) : null
@@ -74,6 +85,7 @@ const getProduct = (store, variantId) => {
     details,
     keyfeatures,
     imgUrls,
+    extraOffers,
     offerInfo,
     shippingInfo,
     returnInfo,

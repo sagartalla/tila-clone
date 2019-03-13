@@ -157,7 +157,10 @@ for x in range(0px, 40px, 5)
 
 .align-center
   align-items center
-//line height part
+
+.align-baseline
+  align-items baseline
+
 .lne-ht1
   line-height 1
 
@@ -377,6 +380,25 @@ for x in range(0px, 40px, 5)
 
 .lable
   background light-gray-color
+
+.cross-strike-red::after
+  content: ''
+  border-top 1px solid #dd1e31
+  width 100%
+  position absolute
+  transform rotateZ(-15deg)
+  transform-origin center center
+  top 16px
+  left -3px
+
+.table
+  display table
+
+.t-row
+  display table-row
+
+.t-cell
+  display table-cell
 
 .resize-none
   resize none
