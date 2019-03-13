@@ -27,7 +27,7 @@ const transactionApi = (orderRes) => {
 
 //Create Order Second step.
 const createOrder = () => {
-  return axios.post(`${constants.ORDERS_API_URL}/api/v1/order/purchase`).then(({ data }) => {
+  return axios.post(`${constants.CART_API_URL}/api/v1/cart/checkout`).then(({ data }) => {
     return transactionApi(data);
   });
 };
