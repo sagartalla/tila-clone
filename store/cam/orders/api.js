@@ -1,6 +1,6 @@
 import axios from 'axios';
 import constants from '../../helper/constants';
 
-const getOrderHistory = () => axios.get(`${constants.ORDERS_API_URL}/api/v1/customer/order/history`);
+const getOrderHistory = () => axios.get(`${constants.ORDERS_API_URL}/api/v1/customer/order/history?grouped=true`);
 
 export default { getOrderHistory };
