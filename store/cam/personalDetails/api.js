@@ -20,7 +20,7 @@ const changePassword = (body) => {
 };
 
 const forgotPassword = (body) => {
-  return axios.post('https://apigateway-dev.tila.com/cms/api/v1/user/password/forgot', body).then(({data}) => {
+  return axios.post(`${constants.CMS_API_URL}/api/v1/user/password/forgot`, body).then(({data}) => {
     return data;
   }).catch((error) => {
     return error.response.data;
