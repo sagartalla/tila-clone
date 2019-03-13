@@ -21,7 +21,7 @@ export const EN_KEYWORDS = {
     'MOVE_TO_WISHLIST': 'Move to Wishlist',
     'SEND_GIFT': 'Send this as a gift',
     'SHIPPING': 'Shipping',
-    'WARRENTY': 'Warrenty',
+    'WARRENTY': 'Warranty',
     'WARRENTY_TXT': 'Months Extended Manufacturer Warranty',
     'ETA_DELIVERY_BY': 'Estimated Delivery by',
     'REGULAR_SHIPPING': 'Regular Shipping',

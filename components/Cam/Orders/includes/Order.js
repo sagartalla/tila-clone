@@ -52,11 +52,11 @@ const Order = ({order}) => {
           {order.orderItems.map((orderItem) => <OrderItem key={orderItem.id} orderItem={orderItem} orderId={order.id} showWidget={false}/>)}
         </Col>
       </Row>
-      <Row> 
+      <Row>
         <Col md={7}>
           <div>
             <span>
-              Orderd on 
+              Orderd on
             </span> <span className={`${styles['fontW600']} ${styles['light-gry-clr']}`}>
               {order.orderDate}
             </span>
