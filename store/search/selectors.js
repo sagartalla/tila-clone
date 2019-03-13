@@ -125,7 +125,7 @@ const getSearchResutls = (store) => {
         let modifiedVaraintsCopy = {}
         let { listingAdapters } = v;
         if (listingAdapters.length > 0) {
-          isNotifyMe = false
+          isNotifyMe = !(listingAdapters[0].attributes.isActive && listingAdapters[0].attributes.inStock)
           const attributesData = {...listingAdapters[0].attributes};
           delete attributesData.type;
           delete attributesData.variantId;
