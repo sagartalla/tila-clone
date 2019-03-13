@@ -207,10 +207,11 @@ class Product extends Component {
 
     const { showNotify, selectedIndex, showLoader } = this.state;
     const selectedProduct = selectedID.length > 0 && selectedID.includes(productId);
-    const discountValue = Math.floor(variants[selectedIndex].discount[0]);
+    const discountValue = variants.length > 0 &&
+      variants[selectedIndex].discount && Math.floor(variants[selectedIndex].discount[0]);
     const popover = (
       <Popover id={productId}>
-        {variants[selectedIndex].offersApplied &&
+        {variants.length > 0 && variants[selectedIndex].offersApplied &&
           variants[selectedIndex].offersApplied.map(offer => <div>{offer}</div>)}
       </Popover>
     );
