@@ -46,7 +46,7 @@ const OrderItem = ({ payments=[{}], orderItem, raiseOrderIssue, orderId, showWid
       return null;
     }
   })();
-
+  console.log(orderId);
   return (
     <div className={`${styles['shipment-wrap']} ${styles['mb-20']} ${styles['mt-20']} ${styles['flex']}`}>
       <Col md={7} sm={7} className={`${styles['pl-0']} ${styles['pr-0']}`}>
@@ -66,17 +66,17 @@ const OrderItem = ({ payments=[{}], orderItem, raiseOrderIssue, orderId, showWid
                       <Col md={9} sm={9} className={styles['p-0']}>
                         <div className={`${styles['flex']} ${styles['pt-15']} ${styles['pb-15']} ${styles['ipad-tp-5']} ${styles['ipad-tb-5']} ${styles['fs-12']} ${styles['thick-gry-clr']}`}>
                           <span className={styles['pr-20']}>
-                            <span>Storage : </span>
-                            <span>32GB</span>
+                            <span></span>
+                            <span></span>
                           </span>
                           <span>
                             <span>Quantity : </span>
-                            <span>1</span>
+                            <span>{product.orderIds.length}</span>
                           </span>
                         </div>
                         <div className={styles['prod-sub-content-inn']}>
-                          <span className={`${styles['coupon-code']} ${styles['fs-12']}`}>XYGFCKPNG</span>
-                          <span className={`${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pl-15']} ${styles['promo-code-label']} ${styles['ipad-tp-5']} ${styles['ipad-pl-0']}`}>Promo code used, you saved 200 SAR  as discount</span>
+                          {/* <span className={`${styles['coupon-code']} ${styles['fs-12']}`}></span> */}
+                          <span className={`${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pl-15']} ${styles['promo-code-label']} ${styles['ipad-tp-5']} ${styles['ipad-pl-0']}`}></span>
                         </div>
                       </Col>
                       <Col md={3} sm={3} className={styles['ipad-pr-0']}>

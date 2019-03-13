@@ -29,13 +29,6 @@ const UserData = ({
           <PersonalInfo />
           <ContactInfo />
         </Col>
-        <Col md={5}>
-          <div className={`${styles.box} ${styles['p-20']} ${styles['t-c']}`}>
-            <span />
-            <h4>{CONTACT_INFO_MODAL.THANK_YOU}</h4>
-            <span className={styles['thick-gry-clr']}>{CONTACT_INFO_MODAL.PROFILE_CREATION_SUCCESS_MESSAGE}</span>
-          </div>
-        </Col>
       </Row>
       <span
         className={`${styles.flex} ${styles.pointer} ${styles['thick-red-clr']} ${styles['deactive-account-lable']} ${styles['p-10-40']} ${styles['bg-light-gray']}`}

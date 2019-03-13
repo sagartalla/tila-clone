@@ -17,9 +17,8 @@ import DeliveryAddress from './includes/DeliveryAddress';
 import { actionCreators, selectors } from '../../store/payments';
 import { actionCreators as authActionCreators, selectors as authSelectors } from '../../store/auth';
 import { actionCreators as cartActionCreators, selectors as cartSelectors } from '../../store/cart';
-
-
 import { mergeCss } from '../../utils/cssUtil';
+
 const styles = mergeCss('components/Payments/payment');
 
 class Payments extends React.Component {

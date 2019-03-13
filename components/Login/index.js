@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import NoSSR from 'react-no-ssr';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -6,12 +7,14 @@ import SVGComponent from '../common/SVGComponet';
 import { selectors, actionCreators } from '../../store/auth';
 import constants from '../../constants';
 import { Row, FormGroup, Col, Button, ControlLabel, Checkbox } from 'react-bootstrap';
+import SocialLogin from './SocialLogin';
 
 import { mergeCss } from '../../utils/cssUtil';
 import { languageDefinations } from '../../utils/lang';
 const styles = mergeCss('components/Login/login');
 
 const { LOGIN_PAGE } = languageDefinations();
+
 
 const errSchema = {
   email: '',
@@ -97,19 +100,27 @@ class Login extends Component {
 
     if (this.onLoginFieldValidations()) {
       if (this.state.mode === 'register') {
-        this.props.userRegister({
-          email,
-          password,
-          mobile_no: phone,
-          mobile_country_code: country,
-          rememberMe: true,
-        });
+        const serverData = {
+          channel: 'BASIC_REGISTER',
+          metadata:{
+            username: email,
+            password,
+            mobile_no: phone,
+            mobile_country_code: country,
+          },
+          rememberMe: true
+        };
+        this.props.userLogin(serverData)
       } else {
-        this.props.userLogin({
-          username: email,
-          password,
+        const serverData = {
+          channel: 'BASIC_AUTH',
+          metadata: {
+            username: email,
+            password: password,
+          },
           rememberMe: true,
-        });
+        }
+        this.props.userLogin(serverData);
       }
       this.props.resetLoginError();
     } else {
@@ -284,13 +295,10 @@ class Login extends Component {
               </Col>
             </FormGroup>
             <div className={`${styles['login-social-icon']} ${styles['pl-15']}`}>
-              <span className={`${styles['thick-gry-clr']} ${styles['pt-10']} ${styles['pb-10']} ${styles.flex}`}>{LOGIN_PAGE.SIGN_UP_WITH}</span>
-              <div className={styles.flex}>
-                <a className={styles.flex}><SVGComponent clsName={`${styles['bg-social-icon']} ${styles['mr-10']}`} src="icons/social-icons/bg-facebook" /></a>
-                <a className={styles.flex}><SVGComponent clsName={`${styles['bg-social-icon']} ${styles['mr-10']}`} src="icons/social-icons/bg-google" /></a>
-                <a className={styles.flex}><SVGComponent clsName={`${styles['bg-social-icon']} ${styles['mr-10']}`} src="icons/social-icons/bg-twitter" /></a>
-                <a className={styles.flex}><SVGComponent clsName={`${styles['bg-social-icon']}`} src="icons/social-icons/bg-instagram" /></a>
-              </div>
+              <span className={`${styles['thick-gry-clr']} ${styles['pt-10']} ${styles['pb-10']} ${styles['flex']}`}>{LOGIN_PAGE.SIGN_UP_WITH}</span>
+              <NoSSR>
+                <SocialLogin />
+              </NoSSR>
             </div>
           </form>
           <div className={styles['pl-15']}>
