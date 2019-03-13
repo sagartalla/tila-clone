@@ -15,7 +15,7 @@ const userLogin = (params) => {
   })).then(({data, status}) => {
     // cart merge
     if(status === 200) {
-      const { username } = params;
+      const { username } = params.metadata;
       const PTA_PARAMS = {
         'p_userid': username,
         'p_email.addr': username,

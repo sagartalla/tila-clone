@@ -207,9 +207,9 @@ const getQuery = store => store.searchReducer.data.searchDetails.query;
 const getCategorySearchQuery = store => store.searchReducer.data.searchDetails.choosenCategoryName;
 const optionParams = (store) => {
   let isListed = store.searchReducer.data;
-  isListed = isListed ? isListed.hardCodedValues : true;
-  isListed = isListed ? isListed.isListed : true;
-  isListed = isListed || true;
+  isListed = isListed ? isListed.hardCodedValues : false;
+  isListed = isListed ? isListed.isListed : false;
+  isListed = isListed || false;
   return {
     language: store.searchReducer.data.geoDetails ? store.searchReducer.data.geoDetails.language : 'en',
     isListed,

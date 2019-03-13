@@ -10,6 +10,7 @@ import { actionCreators, selectors } from '../../../../store/cam/personalDetails
 import SVGComponent from '../../../common/SVGComponet';
 import { mergeCss } from '../../../../utils/cssUtil';
 const styles = mergeCss('components/Cam/PersonelDetails/profile');
+const { EDIT_PASSWORD_MODAL } = languageDefinations();
 
 class EditPassword extends React.Component {
 
@@ -61,7 +62,6 @@ class EditPassword extends React.Component {
   }
 
   handleNewPasswordChange = (e) => {
-    const { EDIT_PASSWORD_MODAL } = languageDefinations();
     if (e.target.value != this.state.rePassword && this.state.rePassword.length > 0) {
       this.setState({
         error: EDIT_PASSWORD_MODAL.MATCH_ERROR_MESSAGE,
@@ -85,7 +85,7 @@ class EditPassword extends React.Component {
 
   handleRePasswordBlur = (e) => {
     if (e.target.value != this.state.newPassword) {
-      this.setState({ error: "Passwords must match" });
+      this.setState({ error: EDIT_PASSWORD_MODAL.MATCH_ERROR_MESSAGE });
     }
     else if (e.target.value == this.state.newPassword) {
       this.setState({ error: "" });
