@@ -67,7 +67,7 @@ class Display extends Component {
             </Slider>
           </Col>
           {
-            extraOffers.length
+            extraOffers && extraOffers.length
               ?
               <Fragment>
               {
