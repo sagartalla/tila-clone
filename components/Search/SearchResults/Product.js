@@ -3,31 +3,31 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import _ from 'lodash';
 import Waypoint from 'react-waypoint';
+import { OverlayTrigger, Modal, Popover } from 'react-bootstrap';
 
 import { Router } from '../../../routes';
 import constants from '../../../constants';
 import { actionCreators } from '../../../store/cam/wishlist';
-import { actionCreators as compareActions  } from '../../../store/compare/actions';
+import { actionCreators as compareActions } from '../../../store/compare/actions';
 import SVGCompoent from '../../common/SVGComponet';
 import { mergeCss } from '../../../utils/cssUtil';
 import { languageDefinations } from '../../../utils/lang';
-import { Modal } from 'react-bootstrap';
 import NotifyMe from '../../common/NotifyMe/NotifyMe';
 
-import RenderVariants from './renderVariants'
+import RenderVariants from './renderVariants';
+
 const styles = mergeCss('components/Search/search');
-const { PDP_PAGE } = languageDefinations()
+const { PDP_PAGE } = languageDefinations();
 
 class Product extends Component {
   constructor(props) {
     super(props);
     this.state = {
       showNotify: false,
-      src:'',
-      selectedIndex:0,
-      showLoader:false
+      src: '',
+      selectedIndex: 0,
+      showLoader: false,
     };
     this.setImg = this.setImg.bind(this);
     this.addToWishlist = this.addToWishlist.bind(this);
@@ -65,8 +65,6 @@ class Product extends Component {
     const { variants } = this.props;
     this.props.buyNow(variants.listingId[0]);
   }
-
-
 
   notify(e) {
     e.stopPropagation();
@@ -129,7 +127,7 @@ class Product extends Component {
     this.setState({showLoader:false})
   }
   getOfferClassName(offer) {
-    if (offer > 10 && offer < 20) {
+    if (offer > 5 && offer < 20) {
       return 'green'
     }
     if (offer > 20 && offer < 40) {
@@ -206,13 +204,46 @@ class Product extends Component {
       selectedID,
       flags
     } = this.props;
-    const { showNotify,selectedIndex,showLoader } = this.state;
-    const selectedProduct = selectedID.length > 0 && selectedID.includes(productId)
+
+    const { showNotify, selectedIndex, showLoader } = this.state;
+    const selectedProduct = selectedID.length > 0 && selectedID.includes(productId);
+    const discountValue = Math.floor(variants[selectedIndex].discount[0]);
+    const popover = (
+      <Popover id={productId}>
+        {variants[selectedIndex].offersApplied &&
+          variants[selectedIndex].offersApplied.map(offer => <div>{offer}</div>)}
+      </Popover>
+    );
+
+    const getPriceAndOffer = () => (
+      <span>
+        <span
+          className={`${styles['fs-16']} ${styles.fontW700}`}
+        >
+          {variants[selectedIndex].sellingPrice[0]}
+        </span>
+        <span className={`${styles['ml-5']} ${styles['label-gry-clr']}`}>
+          <s>{variants[selectedIndex].mrp[0]}</s>
+        </span>
+        {variants[selectedIndex].offersApplied &&
+          variants[selectedIndex].offersApplied.length > 0 &&
+          <OverlayTrigger
+            placement="bottom"
+            overlay={popover}
+          >
+            <span className={`${styles['success-green']} ${styles['ml-5']} ${styles.pointer}`}>
+              {variants[selectedIndex].offersApplied.length} offers
+            </span>
+          </OverlayTrigger>
+        }
+      </span>
+    );
+
     return (
       <Fragment>
         <div
           className=
-          {
+            {
             `${styles['product-items-main']} ${selectedProduct ? styles['active-product'] : ''}`}
             onClick = {() => this.routeChange(productId,variantId,catalogId,itemtype,index,pageNum)}>
           <div className={`${styles['product-items']}`}>
@@ -236,6 +267,11 @@ class Product extends Component {
                   <span className={`${styles['fs-12']} ${styles['fontW600']} ${styles['pl-10']} ${styles['fullfilled-label']}`}>{PDP_PAGE.FULLFILLED_BY_TILA}</span>
                 </span>
               </span>
+
+              {discountValue >= 5 &&
+              <span className={`${styles.absolute} ${styles['offer-tag']} ${styles[this.getOfferClassName(discountValue)]}`}>
+                <span>{discountValue}%</span>
+              </span>}
             </div>
             <div className={styles['desc-cont']}>
               <div className={`${styles['pb-20']} ${styles['pl-20']} ${styles['flex']} ${styles['flex-colum']}`}>
@@ -244,13 +280,7 @@ class Product extends Component {
                 </h5>
                 <span>
                   <span className={`${styles['pr-5']} ${styles['fs-12']} ${styles['fontW600']}`}>{currency}</span>
-                  {
-                    variants.length > 0  &&
-                    <span
-                    className={`${styles['fs-16']} ${styles['fontW700']}`}>{variants[selectedIndex].sellingPrice[0]}
-                   </span>
-
-                }
+                  {variants.length > 0 && getPriceAndOffer()}
                 </span>
               </div>
               {/* <div className={styles['variant-info']}>
@@ -307,7 +337,10 @@ class Product extends Component {
                   {/* <span className={`${styles['fs-12']} ${styles['label-gry-clr']}`}>Denim shirt with baseball shirt stiff collar and formal tie</span> */}
                 {/* </div> */}
                 <span className={`${styles['pr-5']} ${styles['fs-12']} ${styles['fontW600']}`}>{currency}</span>
-                {variants.length > 0 && <span className={`${styles['fs-16']} ${styles['fontW700']}`}>{variants[selectedIndex].sellingPrice[0]}</span>}
+                {
+                  variants.length > 0 &&
+                  getPriceAndOffer()
+                }
                 <div className={`${styles['flex']} ${styles['pt-5']}`}>
                   <span className={styles['flex']}>
                     <SVGCompoent clsName={`${styles['star-raing']}`} src="icons/common-icon/star-full-yellow" />
@@ -354,7 +387,7 @@ class Product extends Component {
       </Fragment>
     );
   }
-};
+}
 
 Product.propTypes = {
   media: PropTypes.array.isRequired,
