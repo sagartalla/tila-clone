@@ -56,6 +56,16 @@ const getProduct = (store, variantId) => {
     listingAvailable: !!priceInfo,
     availabilityError,
     stockError,
+    offerPricing: priceInfo ? {
+      strickedPrice: priceInfo.pricing.mrp,
+      showPrise: priceInfo.pricing.offer_price,
+      sellingPrice: priceInfo.pricing.price,
+      discount: priceInfo.pricing.discount_per_mrp,
+      offerMesseges: priceInfo.pricing.actions.map((a) => a.description),
+      offerDiscounts: priceInfo.pricing.actions.map((a) => a.discount),
+      totalDiscountMRP: priceInfo.pricing.total_discount_mrp,
+      currency: priceInfo.mrp_currency
+    } : 'No Listing'
   }
   const variant_id = Object.keys(variant_preferred_listings)[0]
 
