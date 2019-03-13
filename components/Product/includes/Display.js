@@ -1,11 +1,18 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import Slider from "react-slick";
+import Slider from 'react-slick';
+import Cookies from 'universal-cookie';
+
+import { Link } from '../../../routes';
 import { Grid, Row, Col } from 'react-bootstrap';
 import constants from '../../../constants';
 // import userAgent from '../../../utils/user-agent';
 import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Product/product');
+
+const cookies = new Cookies();
+const language = cookies.get('language') || 'en';
+const country = cookies.get('country') || 'SAU';
 // const maxImages = userAgent.isiPad ? 3 : 4;
 
 class Display extends Component {
@@ -20,14 +27,29 @@ class Display extends Component {
   componentDidMount() {
     this.setState({
       nav1: this.slider1,
-      nav2: this.slider2
+      nav2: this.slider2,
     });
   }
 
+  getUrl = (crum) => {
+    return `/${country}/${language}/srp/${crum.display_name_en.toLowerCase().split(' ').join('-')}-${crum.id}?search=${crum.display_name_en}&isListed=false`;
+  }
+
   render() {
-    const { imgs, extraOffers } = this.props;
+    const { imgs, extraOffers, breadcrums } = this.props;
     return (
       <div className={`${styles['ht-100per']}`}>
+        {breadcrums.length > 0 &&
+          <div className={styles['p-10']}>
+            {breadcrums.map((crum, index) => (
+              <span>
+                <Link route={this.getUrl(crum)}>{crum.display_name_en}</Link>
+                {breadcrums.length - 1 !== index &&
+                  <span>&nbsp;&nbsp;{'/'}&nbsp;&nbsp;</span>}
+              </span>
+            ))}
+          </div>
+        }
         <div className={`${styles['display-item-wrap']}`}>
           <Slider
             asNavFor={this.state.nav2}
