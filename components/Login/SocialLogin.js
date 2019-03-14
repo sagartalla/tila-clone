@@ -24,7 +24,7 @@ const snMetaObj = {
 }
 
 class SocialLogin extends Component {
-  
+
   constructor(props){
     super(props);
   }
@@ -55,7 +55,7 @@ class SocialLogin extends Component {
   googleSignIn = () => {
     googleAuth2.signIn().then(this.checkGoogleResponse).catch(err => console.log(err));
   }
-  checkGoogleResponse = () => { 
+  checkGoogleResponse = () => {
     if(googleAuth2.isSignedIn.get()){
       this.getGoogleUserData();
     } else {
@@ -88,21 +88,11 @@ class SocialLogin extends Component {
   }
 
   render(){
-    return(
-      <NoSSR>
-        <div className={styles['flex']}>
-          <a className={styles['flex']} onClick={this.handleSocialLogin('facebook')}><SVGComponent clsName={`${styles['bg-social-icon']} ${styles['mr-10']}`} src="icons/social-icons/bg-facebook" /></a>
-          <a className={styles['flex']} onClick={this.handleSocialLogin('google')}><SVGComponent clsName={`${styles['bg-social-icon']} ${styles['mr-10']}`} src="icons/social-icons/bg-google" /></a>
-          {/* <a className={styles['flex']} onClick={this.handleSocialLogin('twitter')}><SVGComponent clsName={`${styles['bg-social-icon']} ${styles['mr-10']}`} src="icons/social-icons/bg-twitter" /></a>
-          <a className={styles['flex']} onClick={this.handleSocialLogin('instagram')}><SVGComponent clsName={`${styles['bg-social-icon']}`} src="icons/social-icons/bg-instagram" /></a> */}
-        </div> 
-      </NoSSR>     
-    )
+    const callbackMethod = [this.handleSocialLogin]
+    return this.props.children(callbackMethod)
+
+
   }
 }
 
 export default connect((store) => ({error: selectors.getErrorMessege(store)}), {userLogin: actionCreators.userLogin,})(SocialLogin)
-
-
-
-

@@ -20,8 +20,8 @@ class ProductPage extends Base {
     super(props);
     this.product = getProductComponent(this.props.url.query.isPreview, this.props.url.query.taskCode);
   }
-  static async getInitialProps({ store, query, isServer, req }) {  
-      
+  static async getInitialProps({ store, query, isServer, req }) {
+
     const state = store.getState();
     const country = req ? req.universalCookies.get('country') : cookies.get('country');
     let language = req ? req.universalCookies.get('language') : cookies.get('language');
@@ -40,9 +40,10 @@ class ProductPage extends Base {
         "country_code": country || "SAU",
         "flags": {
           "catalog_details": true,
-          // "include_all_pref_listings": true,
           "category_tree_bread_crumb": true,
           "category_tree_finance": true,
+          "include_offers": true,
+          "include_policies": true,
           "include_related_products": true,
           "shipping": true
         },

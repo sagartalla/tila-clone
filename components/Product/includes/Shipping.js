@@ -33,7 +33,7 @@ class Shipping extends Component {
             <div className={styles['pdp-deliver-list']}>
               <GeoWidget  hideLabel={true} />
             </div>
-            <div className={`${styles['radio-btn-group']}`}>
+            {/*<div className={`${styles['radio-btn-group']}`}>
               <input type="radio" id="free-no-cost" name="selector" />
               <label for="free-no-cost">
                 <span className={styles['fs-12']}>FREE</span>
@@ -49,7 +49,7 @@ class Shipping extends Component {
                 <span className={styles['fs-12']}>SAME DAY</span>
                 <span className={styles['fs-10']}>+15 AED</span>
               </label>
-            </div>
+            </div>*/}
           </div>
           {
             shippable
