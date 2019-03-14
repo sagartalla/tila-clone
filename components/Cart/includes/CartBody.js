@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
+import Cookie from 'universal-cookie';
+
 import CartItem from './CartItem';
 import Blocker from '../../common/Blocker';
 import RightBar from '../../common/CartPaymentSideBar';
@@ -9,6 +11,11 @@ import { languageDefinations } from '../../../utils/lang/';
 import { mergeCss } from '../../../utils/cssUtil';
 import { Router } from '../../../routes';
 import { cartPlaceHolder } from '../../common/Loader/skeletonPlaceHolder';
+
+const cookies = new Cookie();
+
+const language = cookies.get('language') || 'en';
+const country = cookies.get('country') || 'SAU';
 
 const styles = mergeCss('components/Cart/cart');
 
@@ -32,7 +39,7 @@ const CartBody = ({
   const { CART_PAGE } = languageDefinations();
 
   const routeChange = (variantId, productId, catalogId, itemType) => {
-    Router.pushRoute(`/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemType}`);
+    Router.pushRoute(`/${country}/${language}/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemType}`);
   }
 
   return (isLoading ?

@@ -1,11 +1,12 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col, Grid } from 'react-bootstrap';
-import { Router } from '../../routes';
-
+import Cookie from 'universal-cookie';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+
 import { actionCreators, selectors } from '../../store/cart';
+import { Router } from '../../routes';
 import { actionCreators as wishlistActionCreators, selectors as wishlistSelectors } from '../../store/cam/wishlist';
 import HeaderBar from '../HeaderBar/index';
 import CartBody from './includes/CartBody';
@@ -14,6 +15,11 @@ import FooterBar from '../Footer/index';
 import { mergeCss } from '../../utils/cssUtil';
 
 const styles = mergeCss('components/Cart/cart');
+
+const cookies = new Cookie();
+
+const language = cookies.get('language') || 'en';
+const country = cookies.get('country') || 'SAU';
 
 class Cart extends Component {
   constructor(props) {
@@ -62,11 +68,11 @@ class Cart extends Component {
     if (newRes.length) {
       alert('There is some issue with cart items.');
     } else
-      Router.pushRoute('/payment');
+      Router.pushRoute(`/${country}/${language}/payment`);
   }
 
   removeCartItem(e) {
-    let productId = e.currentTarget.getAttribute('data-productid')
+    let productId = e.currentTarget.getAttribute('data-productId')
     digitalData.cart.item = digitalData.cart.item.filter((item) => {
       return item.productInfo.productID !== productId
     })
@@ -78,7 +84,7 @@ class Cart extends Component {
     digitalData.cart.item = digitalData.cart.item.map((item) => {
       if(item.productInfo.productID === productId) {
         item.quantity++
-      } 
+      }
 
       return item;
     })
@@ -90,7 +96,7 @@ class Cart extends Component {
     digitalData.cart.item.forEach((item) => {
       if(item.productInfo.productID === productId) {
         item.quantity--;
-      } 
+      }
     })
     this.cartItemCount(e.target.getAttribute('data-id'), 'remove');
   }

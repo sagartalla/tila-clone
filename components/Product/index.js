@@ -160,7 +160,7 @@ const getProductComponent = (isPreview, taskCode) => {
     render() {
       const { productData, userDetails } = this.props;
       const {
-        catalog, titleInfo, keyfeatures, extraOffers, imgUrls, offerInfo, shippingInfo, returnInfo, details, productDescription, catalogObj, categoryType = '', warranty,
+        catalog, titleInfo, keyfeatures, extraOffers, imgUrls, offerInfo, shippingInfo, returnInfo, details, productDescription, catalogObj, categoryType = '', warranty, breadcrums
       } = productData;
       const {
         stickyElements, recentlyViewed, notifyEmail, emailErr,
@@ -176,7 +176,11 @@ const getProductComponent = (isPreview, taskCode) => {
                 <Row className={`${styles['m-0']} ${styles['ht-100per']}`}>
                   <Col xs={12} md={8} sm={12} className={`${styles['pl-0']} ${styles['ht-100per']} ${styles['pdp-img-prt']}`}>
                     <NoSSR>
-                      <Dispalay imgs={imgUrls} extraOffers={extraOffers}/>
+                      <Dispalay
+                        imgs={imgUrls}
+                        extraOffers={extraOffers}
+                        breadcrums={breadcrums}
+                      />
                     </NoSSR>
                   </Col>
                   <div className={styles['details-pixel']} ref={this.detailsRef} />

@@ -13,10 +13,19 @@ require('./utils/error-handle');
 
 const server = express();
 
+server.get('/', (req, res) => {
+  const cookieString = req.headers.cookie || '';
+  global.APP_LANGUAGE = (cookieString.match(/language=(.+?);/) || [])[1] || 'en';
+  global.APP_COUNTRY = (cookieString.match(/country=(.+?);/) || [])[1]|| 'SAU';
+  res.cookie('language', global.APP_LANGUAGE);
+  res.cookie('country', global.APP_COUNTRY);
+  res.redirect(302, '/' + APP_COUNTRY + '/' + APP_LANGUAGE);
+  // }
+});
+
 const app = next({ dev: process.env.NODE_ENV !== 'production' })
 
 const handler = routes.getRequestHandler(app, ({ req, res, route, query }) => {
-  global.APP_LANGUAGE = req.universalCookies.cookies.language;
   app.render(req, res, route.page, query)
 });
 

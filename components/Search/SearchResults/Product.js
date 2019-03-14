@@ -1,12 +1,14 @@
 // params: { columnIndex, key, rowIndex, style }
 import React, { Component, Fragment } from 'react';
+import Cookie from 'universal-cookie';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import _ from 'lodash';
+import {Link, Router} from '../../../routes';
 import Waypoint from 'react-waypoint';
 import { OverlayTrigger, Modal, Popover } from 'react-bootstrap';
 
-import { Router } from '../../../routes';
 import constants from '../../../constants';
 import { actionCreators } from '../../../store/cam/wishlist';
 import { actionCreators as compareActions } from '../../../store/compare/actions';
@@ -19,6 +21,11 @@ import RenderVariants from './renderVariants';
 
 const styles = mergeCss('components/Search/search');
 const { PDP_PAGE } = languageDefinations();
+
+const cookies = new Cookie();
+
+const language = cookies.get('language') || 'en';
+const country = cookies.get('country') || 'SAU';
 
 class Product extends Component {
   constructor(props) {
@@ -162,9 +169,10 @@ class Product extends Component {
     var event = new CustomEvent('event-pageItem-click');
     document.dispatchEvent(event);
   }
+
   routeChange(productId,variantId,catalogId,itemtype,index,pageNum) {
     this.itemNumberClick(index,pageNum)
-    Router.pushRoute(`/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemtype}`)
+    // Router.pushRoute(`/${country}/${language}/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemtype}`)
   }
 
   addToCompare(e) {
@@ -247,6 +255,8 @@ class Product extends Component {
             {
             `${styles['product-items-main']} ${selectedProduct ? styles['active-product'] : ''}`}
             onClick = {() => this.routeChange(productId,variantId,catalogId,itemtype,index,pageNum)}>
+            <Link route={`/${country}/${language}/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemtype}`}>
+              <a>
           <div className={`${styles['product-items']}`}>
             {
               showLoader ? <div className={styles['loader-div']}>
@@ -281,7 +291,7 @@ class Product extends Component {
                 </h5>
                 <span>
                   <span className={`${styles['pr-5']} ${styles['fs-12']} ${styles['fontW600']}`}>{currency}</span>
-                  {variants.length > 0 && getPriceAndOffer()}
+                  {variants.length > 0 && variants[selectedIndex].sellingPrice && getPriceAndOffer()}
                 </span>
               </div>
               {/* <div className={styles['variant-info']}>
@@ -332,14 +342,14 @@ class Product extends Component {
               </div>
               <div className={styles['brand-price-details']}>
                 {/* <div> */}
-                  {/* <h5 className={`${styles['prdt-name']}  ${styles['pb-5']} ${styles['m-0']}`}>
+                {/* <h5 className={`${styles['prdt-name']}  ${styles['pb-5']} ${styles['m-0']}`}>
                     <span className={`${styles['fontW600']}`}>{brand}</span> <span className={`${styles['thick-gry-clr']} ${styles['fontW300']}`}>{displayName.replace(brand, '').trim()}</span>
                   </h5> */}
-                  {/* <span className={`${styles['fs-12']} ${styles['label-gry-clr']}`}>Denim shirt with baseball shirt stiff collar and formal tie</span> */}
+                {/* <span className={`${styles['fs-12']} ${styles['label-gry-clr']}`}>Denim shirt with baseball shirt stiff collar and formal tie</span> */}
                 {/* </div> */}
                 <span className={`${styles['pr-5']} ${styles['fs-12']} ${styles['fontW600']}`}>{currency}</span>
                 {
-                  variants.length > 0 &&
+                  variants.length > 0 && variants[selectedIndex].sellingPrice &&
                   getPriceAndOffer()
                 }
                 <div className={`${styles['flex']} ${styles['pt-5']}`}>
@@ -373,6 +383,8 @@ class Product extends Component {
                 />
             }
           </div>
+        </a>
+        </Link>
         </div>
         <Modal show={showNotify} onHide={this.closeNotify}>
           <Modal.Header closeButton>

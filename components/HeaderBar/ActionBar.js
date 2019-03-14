@@ -24,6 +24,9 @@ const styles = mergeCss('components/HeaderBar/header');
 const {HEADER_PAGE} = languageDefinations();
 const cookies = new Cookie();
 
+const language = cookies.get('language') || 'en';
+const country = cookies.get('country') || 'SAU';
+
 const snMetaObj = {
   'google': {
     channel: "GOOGLE_AUTH",
@@ -140,8 +143,8 @@ class ActionBar extends Component {
           </NoSSR>
         </div>
         <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']}`}>
-          <Link route="/cam/wishlist">
-           <a style={{display:'block'}}>
+          <Link route={`/${country}/${language}/cam/wishlist`}>
+           <a style={{dispaly:'block'}}>
             <span className={`${styles['flex-center']} ${styles['justify-center']}`}>
               <SVGComponent clsName={`${styles['wish-list-icon']}`} src="icons/wish-list/wish-list-icon" />
             </span>
@@ -151,8 +154,8 @@ class ActionBar extends Component {
         <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']}`}>
           <Dropdown id="cart-toggle" className={`${styles['cart-inn']} ${styles['profile-login-inn']}`}>
             <Dropdown.Toggle>
-              <Link route="/cart">
-              <a style={{display:'block'}}>
+              <Link route={`/${country}/${language}/cart`}>
+              <a style={{dispaly:'block'}}>
                 <span className={`${styles['flex-center']} ${styles['justify-center']} ${styles['relative']}`}>
                   <SVGComponent clsName={`${styles['cart-icon']}`} src="icons/cart/cart-icon" />
                   <span className={`${styles['absolute']} ${styles['cart-count']} ${styles['fs-10']} ${styles['white-color']}`}>{cartResults.items.length}</span>
@@ -187,19 +190,19 @@ class ActionBar extends Component {
                 </div>
                 <ul className={`${styles['pl-0']} ${styles['profile-inn']}`}>
                   <li className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']}`}>
-                    <a href="/cam" className={styles['flex-center']}>
+                    <a href={`/${country}/${language}/cam`} className={styles['flex-center']}>
                     <SVGComponent clsName={`${styles['profile-icon']}`} src="icons/profile-icons/round-profile" />
                     <span className={styles['pl-20']}>{HEADER_PAGE.MY_ACCOUNT}</span>
                     </a>
                   </li>
                   <li className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']}`}>
-                    <a href="/cam/orders" className={styles['flex-center']}>
+                    <a href={`/${country}/${language}/cam/orders`} className={styles['flex-center']}>
                       <SVGComponent clsName={`${styles['profile-icon']}`} src="icons/my-orders" />
                       <span className={styles['pl-20']}>{HEADER_PAGE.MY_ORDERS}</span>
                     </a>
                   </li>
                   <li className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']}`}>
-                  <a href="/cam/notifications" className={styles['flex-center']}>
+                  <a href={`/${country}/${language}/cam/notifications`} className={styles['flex-center']}>
                     <SVGComponent clsName={`${styles['profile-icon']}`} src="icons/notifications" />
                     <span className={styles['pl-20']}>{HEADER_PAGE.NOTIFICATIONS}</span>
                     </a>
