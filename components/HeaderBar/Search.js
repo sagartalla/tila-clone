@@ -28,8 +28,10 @@ class Search extends Component {
   constructor(props) {
     super(props);
     const { query, isCategoryTree, choosenCategoryName,searchText } = props;
+    let finalQuery = query ? query : isCategoryTree ? choosenCategoryName : '';
+    finalQuery = finalQuery.split('-').join(' ');
     this.state = {
-      query: query ? query : isCategoryTree ? choosenCategoryName : '',
+      query: finalQuery,
       openImagesearch: false
     };
     this.submitQuery = this.submitQuery.bind(this);
@@ -87,8 +89,9 @@ class Search extends Component {
   componentWillReceiveProps(nextProps) {
     const { isCategoryTree, choosenCategoryName, query: queryProp } = nextProps;
     const { query, searchInput } = this.state;
+    let finalQuery = searchInput ? query : isCategoryTree ? choosenCategoryName : queryProp;
     this.setState({
-      query: searchInput ? query : isCategoryTree ? choosenCategoryName : queryProp,
+      query: finalQuery ? finalQuery.split('-').join(' ') : '',
       //query: isCategoryTree ? choosenCategoryName : searchInput ? query : queryProp,
       suggestions: nextProps.suggestions
     });

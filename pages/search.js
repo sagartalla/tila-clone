@@ -27,7 +27,7 @@ class SearchPage extends Base {
     // categoryName = categoryName ? categoryName.join(' ') : null;
     // subCategoryName = subCategoryName ? subCategoryName.join(' ') : null;
     const categoryFilter = {
-      id: sid.split(',').pop(),
+      id: sid ? sid.split(',').pop() : null,
     };
     const { facetFilters, facetFiltersCopyWithNames } = selectors.getFacetfilters(store.getState())(JSON.parse(facets || '{}'));
     const shippingData = req ? req.universalCookies.get('shippingInfo') : cookies.get('shippingInfo');;
