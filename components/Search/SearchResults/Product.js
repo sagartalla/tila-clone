@@ -214,7 +214,9 @@ class Product extends Component {
       flags
     } = this.props;
     const { showNotify,selectedIndex,showLoader } = this.state;
-    const selectedProduct = selectedID.length > 0 && selectedID.includes(productId)
+    const selectedProduct = selectedID.length > 0 && selectedID.includes(productId);
+
+    console.log(productId, 'gdfihuk uigi', index, variants[selectedIndex]);
     return (
       <Fragment>
         <div
@@ -254,12 +256,13 @@ class Product extends Component {
                 <span>
                   <span className={`${styles['pr-5']} ${styles['fs-12']} ${styles['fontW600']}`}>{currency}</span>
                   {
-                    variants.length > 0  &&
+                    variants.length > 0 && variants[selectedIndex].sellingPrice &&
                     <span
-                    className={`${styles['fs-16']} ${styles['fontW700']}`}>{variants[selectedIndex].sellingPrice[0]}
-                   </span>
-
-                }
+                      className={`${styles['fs-16']} ${styles['fontW700']}`}
+                    >
+                      {variants[selectedIndex].sellingPrice[0]}
+                    </span>
+                  }
                 </span>
               </div>
               {/* <div className={styles['variant-info']}>
@@ -310,13 +313,14 @@ class Product extends Component {
               </div>
               <div className={styles['brand-price-details']}>
                 {/* <div> */}
-                  {/* <h5 className={`${styles['prdt-name']}  ${styles['pb-5']} ${styles['m-0']}`}>
+                {/* <h5 className={`${styles['prdt-name']}  ${styles['pb-5']} ${styles['m-0']}`}>
                     <span className={`${styles['fontW600']}`}>{brand}</span> <span className={`${styles['thick-gry-clr']} ${styles['fontW300']}`}>{displayName.replace(brand, '').trim()}</span>
                   </h5> */}
-                  {/* <span className={`${styles['fs-12']} ${styles['label-gry-clr']}`}>Denim shirt with baseball shirt stiff collar and formal tie</span> */}
+                {/* <span className={`${styles['fs-12']} ${styles['label-gry-clr']}`}>Denim shirt with baseball shirt stiff collar and formal tie</span> */}
                 {/* </div> */}
                 <span className={`${styles['pr-5']} ${styles['fs-12']} ${styles['fontW600']}`}>{currency}</span>
-                {variants.length > 0 && <span className={`${styles['fs-16']} ${styles['fontW700']}`}>{variants[selectedIndex].sellingPrice[0]}</span>}
+                {variants.length > 0 && variants[selectedIndex].sellingPrice &&
+                  <span className={`${styles['fs-16']} ${styles['fontW700']}`}>{variants[selectedIndex].sellingPrice[0]}</span>}
                 <div className={`${styles['flex']} ${styles['pt-5']}`}>
                   <span className={styles['flex']}>
                     <SVGCompoent clsName={`${styles['star-raing']}`} src="icons/common-icon/star-full-yellow" />
