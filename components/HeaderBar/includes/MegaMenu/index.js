@@ -112,7 +112,7 @@ class MegaMenu extends Component {
                 return (
                   <li key={item.id} onMouseOver={this.onHoverCurry(item)} onMouseLeave={this.onHoverOutDelayed} className={`${styles[`${(item.displayName || '').split(' ').join('').toLowerCase().replace('&', '-')}-item`]} ${(!selectedCategoryTree && this.getLandingPageLink(item.displayName)) === `/landing/${category}` ? styles['active-menu-item']: {}}`}>
                     <div>
-                      {/* <Link route={`/category/${item.displayName}-${item.id}?categoryTree=true&isListed=true`}> */}
+                      {/* <Link route={`/category/${item.displayName}-${item.id}?categoryTree=true&isListed=false`}> */}
                       <Link route={`/${country}/${language}/${this.getLandingPageLink(item.displayName)}`}>
                         <a>{item.displayName}</a>
                       </Link>
@@ -144,11 +144,13 @@ class MegaMenu extends Component {
                   subMenuItems={selectedCategoryTree.childCategories}
                   onLinkClick={this.onLinkClick}
                   colorScheme={this.state.colorScheme}
+                  parentID={selectedCategory}
                 />
                 :
                 <Grid className={styles['megamenu-event-container']}>
                   <Menu
                     selectedCategoryTree={selectedCategoryTree}
+                    parentID={selectedCategory}
                     colorScheme={this.state.colorScheme}
                     onLinkClick={this.onLinkClick}
                   />

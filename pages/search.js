@@ -15,18 +15,19 @@ const cookies = new Cookies();
 
 class SearchPage extends Base {
   static async getInitialProps({ store, isServer, query, req }) {
-    const { language, search, facets, category, subCategory, isListed, disableSpellCheck } = query
+    const { language, search, facets, category, subCategory, isListed, disableSpellCheck, sid } = query
+    debugger;
     const categoryTree = query.categoryTree === 'true'; //TODO need better way to identify category tree
     //TODO SF-37 better handling of country
     const state = store.getState();
     // const country = authSelectors.getCountry(state);
     const country = req ? req.universalCookies.get('country') : cookies.get('country');
-    let [categoryId, ...categoryName] = category ? category.split('-').reverse() : [null, null];
-    let [subCategoryId, ...subCategoryName] = subCategory ? subCategory.split('-').reverse() : [null, null];
-    categoryName = categoryName ? categoryName.join(' ') : null;
-    subCategoryName = subCategoryName ? subCategoryName.join(' ') : null;
+    // let [categoryId, ...categoryName] = category ? category.split('-').reverse() : [null, null];
+    // let [subCategoryId, ...subCategoryName] = subCategory ? subCategory.split('-').reverse() : [null, null];
+    // categoryName = categoryName ? categoryName.join(' ') : null;
+    // subCategoryName = subCategoryName ? subCategoryName.join(' ') : null;
     const categoryFilter = {
-      id: subCategoryId || categoryId,
+      id: sid.split(',').pop(),
     };
     const { facetFilters, facetFiltersCopyWithNames } = selectors.getFacetfilters(store.getState())(JSON.parse(facets || '{}'));
     const shippingData = req ? req.universalCookies.get('shippingInfo') : cookies.get('shippingInfo');;
@@ -43,7 +44,7 @@ class SearchPage extends Base {
       isListed: isListed === 'true',
       categoryTree,
       disableSpellCheck,
-      choosenCategoryName: categoryName || subCategoryName,
+      choosenCategoryName: category || subCategory,
     };
     if (shippingCity) {
       searchOptions.shippingDetails = {

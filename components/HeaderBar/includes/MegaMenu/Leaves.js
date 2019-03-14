@@ -31,7 +31,7 @@ class Leaves extends Component {
         {
           items.slice(0, this.state.maxRows).map((item) => item ? (
             <li key={item.id} className={`${styles['pt-5']} ${styles['pb-5']}`}>
-              <Link route={`/${country}/${language}/srp/${item.displayName}-${item.id}?categoryTree=true&isListed=true`}>
+              <Link route={`/${country}/${language}/srp/${item.displayName.split(' ').join('-').toLowerCase()}?categoryTree=true&isListed=false&sid=${this.props.parentID},${item.id}`}>
                 <a className={`${styles['level-1-item']}`}>{item.displayName}</a>
               </Link>
             </li>
@@ -41,7 +41,7 @@ class Leaves extends Component {
           this.state.isMoreButtonRequired
           ?
           <li>
-            <Link route={`/${country}/${language}/srp/${parent.displayName}-${parent.id}?categoryTree=true&isListed=true`}>
+            <Link route={`/${country}/${language}/srp/${parent.displayName.split(' ').join('-').toLowerCase()}?categoryTree=true&isListed=false&sid=${this.props.parentID},${item.id}`}>
               <a className={`${styles['level-1-item']}`}>{HEADER_PAGE.VIEW_ALL}</a>
             </Link>
           </li>

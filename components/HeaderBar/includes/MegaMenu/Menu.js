@@ -60,14 +60,14 @@ class Menu extends Component {
               :
               null
             }
-            <Link route={`/${country}/${language}/srp/${childItem.displayName}-${childItem.id}?categoryTree=true&isListed=true`}>
+            <Link route={`/${country}/${language}/srp/${childItem.displayName.split(' ').join('-').toLowerCase()}?categoryTree=true&isListed=false&sid=${this.props.parentID},${childItem.id}`}>
               <a className={`${styles['level-1-item']} ${depth === 1 ? styles['fontW600'] : {}}`}>{childItem.displayName}</a>
             </Link>
           </span>
           {
             childItem.childCategories
             ?
-            <Leaves items={childItem.childCategories} parent={childItem} />
+            <Leaves items={childItem.childCategories} parent={childItem} parentID={`${this.props.parentID},${childItem.id}`} />
             :
             null
           }
@@ -78,7 +78,7 @@ class Menu extends Component {
 
 
   render() {
-    const { selectedCategoryTree, colorScheme } =  this.props;
+    const { selectedCategoryTree, colorScheme, parentID } =  this.props;
     return (
       <div
         className={`${styles['pt-40']} ${styles['megamenu-dropdown']} ${styles[colorScheme]} ${this.state.viewAllMenu ? {} : styles['max-height']}`}
