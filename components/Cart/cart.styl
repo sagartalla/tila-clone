@@ -125,6 +125,21 @@
       width 20px
       height 19px
 
+.cross-strike::after
+  content ''
+  border-top 1px solid #dd1e31
+  width 100%
+  position absolute
+  transform rotateZ(-8deg)
+  transform-origin center center
+  top 6px
+  left 0
+
+.question
+  width-height-radius(20px, 20px, 50%)
+  border 0.25px solid generic-gray-color
+
+
 @media screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation : portrait){ 
   .cart-container .cart-box .quantity-title {
     margin: 0px 5px;
