@@ -32,7 +32,7 @@ class Display extends Component {
   }
 
   getUrl = (crum) => {
-    return `/${country}/${language}/srp/${crum.display_name_en.toLowerCase().split(' ').join('-')}-${crum.id}?search=${crum.display_name_en}&isListed=false`;
+    return `/${country}/${language}/srp/${crum.display_name_en.toLowerCase().split(' ').join('-')}?search=${crum.display_name_en}&isListed=false&sid=${crum.id}`;
   }
 
   render() {
