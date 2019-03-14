@@ -7,7 +7,6 @@ import Cookie from 'universal-cookie';
 import { bindActionCreators } from 'redux';
 
 import { actionCreators, selectors } from '../../store/cart';
-import { Router } from '../../routes';
 import { actionCreators as wishlistActionCreators, selectors as wishlistSelectors } from '../../store/cam/wishlist';
 
 import HeaderBar from '../HeaderBar/index';
