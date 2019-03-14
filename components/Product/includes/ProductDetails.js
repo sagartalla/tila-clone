@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import NoSSR from 'react-no-ssr';
 
-import Variants from './Variants';
+import VariantsAndSimilarProducts from './VariantsAndSimilarProducts';
 import KeyFeatures from './KeyFeatures';
 import SVGCompoent from '../../common/SVGComponet';
 import Accordian from '../../common/Accordian';
@@ -30,7 +30,7 @@ const ProductDetails = ({ details, keyfeatures, isPreview }) => {
       }
       <NoSSR>
         {
-          isPreview ? null : <Variants />
+          isPreview ? null : <VariantsAndSimilarProducts />
         }
       </NoSSR>
       {/*

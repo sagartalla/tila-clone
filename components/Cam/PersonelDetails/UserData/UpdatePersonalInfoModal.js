@@ -41,8 +41,6 @@ class UpdatePersonalInfoModal extends React.Component {
         show: nextProps.show,
         responseState: true
       })
-      alert("Details updated successfully!!");
-      this.handleClose();
     }
   }
 
@@ -76,13 +74,22 @@ class UpdatePersonalInfoModal extends React.Component {
   handleSubmit = () => {
     const { user_name, user_dob, user_gender } = this.state;
     this.setState({ responseState: false });
-    this.props.EditPersonalInfo({
-      "first_name": user_name.length > 0 ? user_name.split(" ")[0] : "",
-      "dob": user_dob.format("YYYY-MM-DD"),
-      "gender": user_gender,
-      "last_name": user_name.length > 0 ? user_name.split(" ")[1] : "",
-      "image_url": ""
-    });
+    let [first_name, ...second_name] = user_name.split(" ");
+    second_name = second_name.join(" ");
+    if(user_name && user_dob && user_gender){
+      this.props.EditPersonalInfo({
+        "first_name": first_name ? first_name : "",
+        "dob": user_dob.format("YYYY-MM-DD"),
+        "gender": user_gender,
+        "last_name": second_name ? second_name : "",
+        "image_url": ""
+      });
+      this.handleClose();
+      alert("Your personal information has been updated.");
+    }else{
+      alert("Fill in all the fields");
+    }
+    
   }
   render() {
     const calendar = (
@@ -101,7 +108,7 @@ class UpdatePersonalInfoModal extends React.Component {
               <div className={`${styles['personal-info-img']} ${styles['flex']} ${styles['justify-center']}`}>
                 <SVGComponent clsName={`${styles['personal-info-img-icon']}`} src="icons/common-icon/personal-info-mobile" />
               </div>
-              <p className={`${styles['thick-gry-clr']} ${styles['fs-12']} ${styles['t-c']}`}>Enter your Name, DOB and Gender for a more personalised abcd.com Experience</p>
+              <p className={`${styles['thick-gry-clr']} ${styles['fs-12']} ${styles['t-c']}`}>Enter your Name, DOB and Gender for a more personalised Tila Experience</p>
             </div>
             <div className={`${styles['m-5']} ${styles['mt-20']} ${styles['gender-select-main']} ${styles['flex-center']} ${styles['justify-center']}`}>
               <div className={styles['t-c']}>
@@ -122,8 +129,8 @@ class UpdatePersonalInfoModal extends React.Component {
               <div className={`${styles['m-5']} ${styles['mt-20']} ${styles['update-profile-input']} ${styles['flex']}`}>
                 <Col xs={12} md={12}>
                   <div className={styles['fp-input']}>
-                    <label className={`${styles['mb-0']} ${styles['fs-12']} ${styles['label-gry-clr']}`}>Email / Username</label>
-                    <input className={styles['user-name']} type="text" value={user_name} onChange={this.handleNameChange} />
+                    <label className={`${styles['mb-0']} ${styles['fs-12']} ${styles['label-gry-clr']}`}>Username</label>
+                    <input className={styles['user-name']} type="text" value={user_name} onChange={this.handleNameChange} maxLength={40}/>
                     {/* <span className={styles['highlight']}></span>
                   <span className={styles['bar']}></span>
                   <label>Email / Username</label> */}
@@ -154,8 +161,8 @@ class UpdatePersonalInfoModal extends React.Component {
               </div>
               <div>
                 <Col xs={12} md={12} className={`${styles['pt-30']}`}>
-                  {/* <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles['update-profile-btn']} ${styles['text-uppercase']}`} BtnClickHandler={this.handleSubmit} >Update Personal Details</button> */}
-                  <Btn className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles['update-profile-btn']} ${styles['text-uppercase']}`} btnText="Update Personal Details" BtnClickHandler={this.handleSubmit} />
+                  {/* <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles['update-profile-btn']} ${styles['text-uppercase']}`} onClick={this.handleSubmit} >Update Personal Details</button> */}
+                  <Btn className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles['update-profile-btn']} `} btnText="Update Personal Information" onClick={this.handleSubmit} />
                 </Col>
               </div>
             </div>

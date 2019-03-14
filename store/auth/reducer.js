@@ -89,6 +89,7 @@ const authReducer = typeToReducer({
         ...state.data,
         isLoggedIn: action.payload.isLoggedIn,
         userCreds: action.payload.userCreds,
+        instagramCode: action.payload.instagramCode,
       }
     }
   },
@@ -231,14 +232,27 @@ const authReducer = typeToReducer({
       }
     }
   },
-  [actions.SET_LANGUAGE]: (state, action) => {
-    return {
-      ...state,
-      data: {
-        ...state.data,
-        language: action.payload
+  [actions.SET_LANGUAGE]: {
+    PENDING: state => {
+      return Object.assign({}, state, {
+        error: '',
+      }, { ui: { loading: true } });
+    },
+    FULFILLED: (state, action) => {
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          language: action.payload
+        }
       }
-    }
+    },
+    REJECTED: (state, action) => {
+      return Object.assign({}, state, {
+        error: action.payload.response ? action.payload.response.data.message : action.payload.message,
+        ui: { loading: false }
+      });
+    },
   },
 }, initialState);
 

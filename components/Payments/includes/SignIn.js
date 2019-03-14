@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Row, Col } from 'react-bootstrap';
-
+import NoSSR from 'react-no-ssr';
 import Terms from '../../common/terms';
 import { Modal } from "react-router-modal";
 import Privacy from '../../common/privacy';
 import SVGComponent from '../../common/SVGComponet';
 import { languageDefinations } from '../../../utils/lang/';
-
+import SocialLogin from '../../Login/SocialLogin';
 import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Payments/payment');
 const { PAYMENT_PAGE } = languageDefinations();
@@ -48,7 +48,7 @@ class SignIn extends Component {
           </Col>
           {props.login.username ?
           <Col md={4} sm={12} xs={12} className={styles['t-rt']}>
-            <span className={`${styles['light-gry-clr']} ${styles['fontW600']}`}>{props.login.username}&emsp;</span> 
+            <span className={`${styles['light-gry-clr']} ${styles['fontW600']}`}>{props.login.username}&emsp;</span>
             <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']}`} onClick={props.onClickEdit}>
               EDIT
             </button>
@@ -60,9 +60,19 @@ class SignIn extends Component {
             <h4 className={`${styles['mb-20']} ${styles['mt-0']} ${styles['light-gry-clr']}`}>{PAYMENT_PAGE.REGISTER}</h4>
             <div className={`${styles['thin-border-right']} ${styles['social-icons-list']}`}>
               <span className={`${styles['sub-title']} ${styles['fs-10']} ${styles['p-5']} ${styles['bg-white']}`}>{PAYMENT_PAGE.OR}</span>
-              <button className={`${styles['fp-btn']} ${styles['mb-20']} ${styles['fp-btn-primary']} ${styles['facebook-btn']}`}>{PAYMENT_PAGE.SIGN_IN_WITH_FACEBOOK}</button>
-              <button className={`${styles['fp-btn']} ${styles['mb-20']} ${styles['fp-btn-danger']} ${styles['google-btn']}`}>{PAYMENT_PAGE.SIGN_IN_WITH_GOOGLE}</button>
-              <button className={`${styles['fp-btn']} ${styles['fp-btn-sucess']} ${styles['regist-btn']}`}>{PAYMENT_PAGE.REGISTER_WITH_US}</button>
+              <NoSSR>
+                <SocialLogin>
+                  {([handleSocialLogin]) => {
+                    return (
+                      <>
+                      <button onClick={handleSocialLogin('facebook')} className={`${styles['fp-btn']} ${styles['mb-20']} ${styles['fp-btn-primary']} ${styles['facebook-btn']}`}>{PAYMENT_PAGE.SIGN_IN_WITH_FACEBOOK}</button>
+                      <button onClick={handleSocialLogin('google')} className={`${styles['fp-btn']} ${styles['mb-20']} ${styles['fp-btn-danger']} ${styles['google-btn']}`}>{PAYMENT_PAGE.SIGN_IN_WITH_GOOGLE}</button>
+                      </>
+                    )
+                  }}
+                </SocialLogin>
+             </NoSSR>
+              {/* <button className={`${styles['fp-btn']} ${styles['fp-btn-sucess']} ${styles['regist-btn']}`}>{PAYMENT_PAGE.REGISTER_WITH_US}</button> */}
             </div>
           </Col>
           <Col md={8} sm={6} xs={12} className={`${styles['landscape-login-part']}`}>

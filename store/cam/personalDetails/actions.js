@@ -7,6 +7,7 @@ const actions = {
   EDIT_PERSONAL_INFO: 'EDIT_PERSONAL_INFO',
   RESET_PASSWORD_INFO_STORE: 'RESET_PASSWORD_INFO_STORE',
   DEACTIVATE_USER_PROFILE: 'DEACTIVATE_USER_PROFILE',
+  FORGOT_PASSWORD: 'FORGOT_PASSWORD',
 };
 
 const actionCreators = {
@@ -21,6 +22,12 @@ const actionCreators = {
       type: actions.CHANGE_PASSWORD,
       payload: apis.changePassword(body),
     });
+  },
+  forgotPassword: (body) => {
+    return ({
+      type: actions.FORGOT_PASSWORD,
+      payload: apis.forgotPassword(body),
+    })
   },
   EditPersonalInfo: (body) => {
     return ({

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import NoSSR from 'react-no-ssr';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -6,11 +7,13 @@ import SVGComponent from '../common/SVGComponet';
 import { selectors, actionCreators } from '../../store/auth';
 import constants from '../../constants';
 import { Row, FormGroup, Col, Button, ControlLabel, Checkbox } from 'react-bootstrap';
-
+import ForgotPassword from './ForgotPassword';
+import SocialLogin from './SocialLogin';
 import { mergeCss } from '../../utils/cssUtil';
 const styles = mergeCss('components/Login/login');
 import { languageDefinations } from '../../utils/lang';
 const { LOGIN_PAGE } = languageDefinations()
+
 
 const errSchema = {
   email: '',
@@ -28,10 +31,12 @@ class Login extends Component {
       mode: props.mode || 'login',
       country: '',
       phone: '',
+      forgotPassword: false,
     };
     this.login = this.login.bind(this);
     this.onChangeField = this.onChangeField.bind(this);
     this.toggleLoginSignUp = this.toggleLoginSignUp.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
@@ -94,19 +99,27 @@ class Login extends Component {
 
     if (this.onLoginFieldValidations()) {
       if (this.state.mode === 'register') {
-        this.props.userRegister({
-          email,
-          password: password,
-          mobile_no: phone,
-          mobile_country_code: country,
-          rememberMe: true,
-        });
+        const serverData = {
+          channel: 'BASIC_REGISTER',
+          metadata:{
+            username: email,
+            password,
+            mobile_no: phone,
+            mobile_country_code: country,
+          },
+          rememberMe: true
+        };
+        this.props.userLogin(serverData)
       } else {
-        this.props.userLogin({
-          username: email,
-          password: password,
+        const serverData = {
+          channel: 'BASIC_AUTH',
+          metadata: {
+            username: email,
+            password: password,
+          },
           rememberMe: true,
-        });
+        }
+        this.props.userLogin(serverData);
       }
       this.props.resetLoginError();
     } else {
@@ -133,11 +146,17 @@ class Login extends Component {
     }, () => this.fireCustomEventClick(this.state.mode));
   }
 
+  handleClick() {
+    this.setState({forgotPassword: true});
+  }
+
   render() {
     const { userCreds } = this.props;
     const { errObj, mode, error } = this.state;
     return (
       <Row className={`${styles['bg-white']} ${styles['m-0']}`}>
+        { !this.state.forgotPassword ?
+      <div>
         <Col md={6} xs={6} className={styles['pl-0']}>
           <div className={styles['image-placeholder']}>
             <img className={styles['img-responsive']} src={`${constants.mediaDomain}/pim/15f45930-fecf-4f7b-a3d6-613d41196c20/workbench/image/a1ccb74a-1858-42dd-8c38-cfb103e85bb2/login-screen.jpeg`} />
@@ -281,13 +300,28 @@ class Login extends Component {
               </Col>
             </FormGroup>
             <div className={`${styles['login-social-icon']} ${styles['pl-15']}`}>
+              <a>
+                <span onClick={this.handleClick}>
+                  Forgot Password?
+                </span>
+              </a>
               <span className={`${styles['thick-gry-clr']} ${styles['pt-10']} ${styles['pb-10']} ${styles['flex']}`}>{LOGIN_PAGE.SIGN_UP_WITH}</span>
-              <div className={styles['flex']}>
-                <a className={styles['flex']}><SVGComponent clsName={`${styles['bg-social-icon']} ${styles['mr-10']}`} src="icons/social-icons/bg-facebook" /></a>
-                <a className={styles['flex']}><SVGComponent clsName={`${styles['bg-social-icon']} ${styles['mr-10']}`} src="icons/social-icons/bg-google" /></a>
-                <a className={styles['flex']}><SVGComponent clsName={`${styles['bg-social-icon']} ${styles['mr-10']}`} src="icons/social-icons/bg-twitter" /></a>
-                <a className={styles['flex']}><SVGComponent clsName={`${styles['bg-social-icon']}`} src="icons/social-icons/bg-instagram" /></a>
-              </div>
+              <NoSSR>
+                <SocialLogin>
+                  {([handleSocialLogin]) => {
+                    return (
+                      <NoSSR>
+                        <div className={styles['flex']}>
+                          <a className={styles['flex']} onClick={handleSocialLogin('facebook')}><SVGComponent clsName={`${styles['bg-social-icon']} ${styles['mr-10']}`} src="icons/social-icons/bg-facebook" /></a>
+                          <a className={styles['flex']} onClick={handleSocialLogin('google')}><SVGComponent clsName={`${styles['bg-social-icon']} ${styles['mr-10']}`} src="icons/social-icons/bg-google" /></a>
+                          {/* <a className={styles['flex']} onClick={this.handleSocialLogin('twitter')}><SVGComponent clsName={`${styles['bg-social-icon']} ${styles['mr-10']}`} src="icons/social-icons/bg-twitter" /></a>
+                          <a className={styles['flex']} onClick={this.handleSocialLogin('instagram')}><SVGComponent clsName={`${styles['bg-social-icon']}`} src="icons/social-icons/bg-instagram" /></a> */}
+                        </div>
+                      </NoSSR>
+                    )
+                  }}
+                </SocialLogin>
+              </NoSSR>
             </div>
           </form>
           <div className={styles['pl-15']}>
@@ -307,6 +341,11 @@ class Login extends Component {
           </div>
 
         </Col>
+        </div>
+        :
+        <ForgotPassword />
+        }
+
       </Row>
     );
   }

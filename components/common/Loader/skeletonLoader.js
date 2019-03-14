@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-import 'react-placeholder/lib/reactPlaceholder.css';
 import { searchPlaceHolder, productPlaceHolder } from './skeletonPlaceHolder';
 
 class SkeletonLoader extends Component {

@@ -1,17 +1,12 @@
-
-import 'react-placeholder/lib/reactPlaceholder.css';
+import React from 'react';
 import { mergeCss } from '../../../utils/cssUtil';
 import Input from '../../common/commonInput/index';
 import Rectangle from '../../common/commonInput/RectangleShape';
 
 const styles = mergeCss('components/common/Loader/loader');
-/* eslint-disable */
 export const searchPlaceHolder = (
   <div style={{ overflow: 'hidden', maxHeight: '800px' }}>
-    <div className={
-    `${styles.container}`
-  }
-    />
+    <div className={`${styles.container}`} />
     <div
       className={
         `${styles['filter-panel']} ${styles['border-radius4']}
@@ -136,7 +131,7 @@ export const productPlaceHolder = (
         }}>
         {
           [0, 1, 2].map((el, i) => (
-                <Input 
+                <Input
                   style={{
                     height: '3em', width: '50%', marginRight: '20px',
                 }}
@@ -152,7 +147,7 @@ export const productPlaceHolder = (
     <div className={`${styles.flx} ${styles['align-center']}`}>
           {
           [0, 1, 2].map((el, i) => (
-                <Rectangle 
+                <Rectangle
                 style={{
                   width: 400, marginBottom: 20, marginRight: 20, height: 76, marginTop: 20,
              }}
@@ -167,7 +162,7 @@ export const productPlaceHolder = (
           }}>
                {
           [0, 1, 2].map((el, i) => (
-                <Rectangle 
+                <Rectangle
                 style={{
                   width: '400px', height: '200px',
                   }}
@@ -176,5 +171,34 @@ export const productPlaceHolder = (
           }
             </div>
   </div>
+  </div>
+);
+
+
+export const cartPlaceHolder = (
+  <div className={`${styles.flex} ${styles['pt-40']} ${styles.relative}`}>
+    <div className={`${styles.container}`} />
+    <div className={`${styles.flex} ${styles['p-20']} ${styles.width100}`}>
+      <div style={{ width: '75%' }} className={`${styles.flex} ${styles['flex-colum']} ${styles.width63} ${styles['mr-20']}`}>
+        <Rectangle
+          style={{
+            width: '100%',
+            height: '300px',
+            marginBottom: '20px',
+          }}
+        />
+        <Rectangle
+          style={{
+            width: '100%',
+            height: '100px',
+          }}
+        />
+      </div>
+      <Rectangle
+        style={{
+          width: '25%', height: '600px',
+        }}
+      />
+    </div>
   </div>
 );

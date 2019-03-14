@@ -1,7 +1,7 @@
 {
   "name": "storefront",
   "scripts": {
-    "dev": "ENV=stage node --inspect server.js",
+    "dev": "LOCAL=true ENV=stage node --inspect server.js",
     "build": "version=$version next build",
     "start": "NODE_ENV=production ENV=dev node server.js",
     "start:ecs": "NODE_ENV=production node server.js",
@@ -35,7 +35,6 @@
     "react-infinite-scroller": "^1.2.0",
     "react-input-range": "^1.3.0",
     "react-no-ssr": "^1.1.0",
-    "react-placeholder": "^3.0.1",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
     "react-router-modal": "^1.4.1",
