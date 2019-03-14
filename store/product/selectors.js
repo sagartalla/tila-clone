@@ -5,7 +5,7 @@ const getProduct = (store, variantId) => {
     product_details, variant_preferred_listings, tree, product_id,
   } = store.productReducer.data[0];
   variantId = store.productReducer.variantsData.selectedVariantId || variantId;
-  variantId = variantId || Object.keys(variant_preferred_listings)[0] 
+  variantId = variantId || Object.keys(variant_preferred_listings)[0]
   const computedVariantId = variantId;
   const listings = computedVariantId ? variant_preferred_listings[computedVariantId] : _.reduce(variant_preferred_listings, (acc, val, key) => {
     return [...acc, ...val];
