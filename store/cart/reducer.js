@@ -84,7 +84,10 @@ const cartReducer = typeToReducer({
         ...state.data,
         ...action.payload.data,
       },
-      ui: { loading: false },
+      ui: {
+        loading: false,
+        loader: 'hide',
+      },
     }),
     REJECTED: (state, action) => Object.assign({}, state, {
       error: action.payload.response ? action.payload.response.data.message : action.payload.message,

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Grid, Row, Col } from 'react-bootstrap';
+import Cookies from 'universal-cookie';
 
 import Cart from '../Cart';
 import SignIn from './includes/SignIn';
@@ -20,6 +21,10 @@ import { actionCreators as cartActionCreators, selectors as cartSelectors } from
 import { mergeCss } from '../../utils/cssUtil';
 
 const styles = mergeCss('components/Payments/payment');
+const cookies = new Cookies();
+
+const language = cookies.get('language') || 'en';
+const country = cookies.get('country') || 'SAU';
 
 class Payments extends React.Component {
   constructor(props) {
@@ -80,7 +85,7 @@ class Payments extends React.Component {
     // if cart is empty redirect to cart page.
     // if user hits payment url directly and no cart items, this condition will execute.
     if (nextProps.cartResults.items.length === 0 && nextProps.cartResults.ui.loaded) {
-      Router.push('/cart');
+      Router.push(`${country}/${language}/cart`);
     }
     const { loggedInFlag } = this.state;
 
