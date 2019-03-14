@@ -70,21 +70,22 @@ const apmResInterceptor = (response) => {
 const errorInterceptor = (err) => {
   try {
     if(err.response && err.response.status){
-      toast.error(err.response.status + " : " + err.response.data.error);
-    }
-    if (err.response && err.response.status == '401') {
-      const { refresh_token } =  cookies.get('auth') || {};
-      if(refresh_token) {
-        return axios.post(`/api/refresh`, {
-          'auth_version': 'V1',
-          'refresh_token': refresh_token
-        }).then((res) => {
-          return axios(err.config);
-        }).catch((err) => {
-          location.reload();
-        });
-      } else {
-        cookies.remove('auth');
+      if (err.response.status == '401') {
+        const { refresh_token } =  cookies.get('auth') || {};
+        if(refresh_token) {
+          return axios.post(`/api/refresh`, {
+            'auth_version': 'V1',
+            'refresh_token': refresh_token
+          }).then((res) => {
+            return axios(err.config);
+          }).catch((err) => {
+            location.reload();
+          });
+        } else {
+          cookies.remove('auth');
+        }
+      }else{
+        toast.error(err.response.status + " : " + err.response.data.error);
       }
     }
   } catch (e) {
