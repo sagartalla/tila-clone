@@ -17,7 +17,13 @@ const productReducer = typeToReducer({
       return Object.assign({}, state, { ui: { loading: true } });
     },
     FULFILLED: (state, action) => {
-      return Object.assign({}, state, { data: action.payload.data, ui: { loading: true } });
+      return Object.assign({}, state, {
+        data: action.payload.data,
+        variantsData: {
+          selectedVariantId: Object.keys(action.payload.data[0].variant_preferred_listings)[0]
+        },
+        ui: { loading: true }
+      });
     },
     REJECTED: (state, action) => {
       return Object.assign({}, state, { error: action.payload.message, ui: { loading: false } })

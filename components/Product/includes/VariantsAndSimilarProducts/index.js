@@ -59,6 +59,9 @@ class VariantsAndSimilarProducts extends Component {
         selectedProductData: this.state.selectedProductData,
         map: this.props.VariantsAndSimilarProducts.similarProducts.map
       });
+      if(!pid){
+        alert('product not available!');
+      }
       let newQuery = window.location.search;
       newQuery = newQuery.replace(productId, pid)
       Router.pushRoute(`/${country}/${language}/product${newQuery}`);
