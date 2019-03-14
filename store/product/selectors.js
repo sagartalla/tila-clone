@@ -47,7 +47,7 @@ const getProduct = (store, variantId) => {
   };
   const returnInfo = {
     acceptsReturns: priceInfo ? priceInfo.accepts_returns : false,
-    maxDaysToReturn: priceInfo ? priceInfo.max_days_to_return : 0
+    maxDaysToReturn: priceInfo ? priceInfo.max_days_to_return : 0,
   }
   const shippingInfo = priceInfo ? {...priceInfo.shipping, ...returnInfo} : {}
   const offerInfo = {
@@ -67,7 +67,7 @@ const getProduct = (store, variantId) => {
       currency: priceInfo.mrp_currency
     } : 'No Listing'
   }
-  const variant_id = Object.keys(variant_preferred_listings)[0]
+  const variant_id = variant_preferred_listings ? Object.keys(variant_preferred_listings)[0] : '';
 
   const catalogObj = {
     catalog_id: product_details.catalog_details.catalog_id,
