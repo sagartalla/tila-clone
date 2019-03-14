@@ -190,19 +190,19 @@ class ActionBar extends Component {
                 </div>
                 <ul className={`${styles['pl-0']} ${styles['profile-inn']}`}>
                   <li className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']}`}>
-                    <a href="/cam" className={styles['flex-center']}>
+                    <a href={`/${country}/${language}/cam`} className={styles['flex-center']}>
                     <SVGComponent clsName={`${styles['profile-icon']}`} src="icons/profile-icons/round-profile" />
                     <span className={styles['pl-20']}>{HEADER_PAGE.MY_ACCOUNT}</span>
                     </a>
                   </li>
                   <li className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']}`}>
-                    <a href="/cam/orders" className={styles['flex-center']}>
+                    <a href={`/${country}/${language}/cam/orders`} className={styles['flex-center']}>
                       <SVGComponent clsName={`${styles['profile-icon']}`} src="icons/my-orders" />
                       <span className={styles['pl-20']}>{HEADER_PAGE.MY_ORDERS}</span>
                     </a>
                   </li>
                   <li className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']}`}>
-                  <a href="/cam/notifications" className={styles['flex-center']}>
+                  <a href={`/${country}/${language}/cam/notifications`} className={styles['flex-center']}>
                     <SVGComponent clsName={`${styles['profile-icon']}`} src="icons/notifications" />
                     <span className={styles['pl-20']}>{HEADER_PAGE.NOTIFICATIONS}</span>
                     </a>
