@@ -42,7 +42,7 @@ const WishlistBody = (props) => {
     return str;
   };
   const routeChange = (variantId, productId, catalogId, itemType) => {
-    Router.push(`${country}/${language}/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemType}`);
+    Router.push(`/${country}/${language}/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemType}`);
   }
 
   return (

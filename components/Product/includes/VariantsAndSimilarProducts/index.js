@@ -61,7 +61,7 @@ class VariantsAndSimilarProducts extends Component {
       });
       let newQuery = window.location.search;
       newQuery = newQuery.replace(productId, pid)
-      Router.pushRoute(`${country}/${language}/product${newQuery}`);
+      Router.pushRoute(`/${country}/${language}/product${newQuery}`);
     });
   }
 
