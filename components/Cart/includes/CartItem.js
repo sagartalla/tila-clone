@@ -117,7 +117,6 @@ class CartItem extends React.Component {
                     <a onClick={() => routeChange(variant_id, product_id, catalogId, itemType)}>{name}</a>
                   </h4>
                   <div className={`${styles['warranty-part']} ${styles['p-10']} ${styles['light-gry-clr']}`}>
-                    {/* <p className={`${styles['fs-12']}`}><span>{CART_PAGE.WARRENTY} : </span><span className={`${styles['pl-10']} ${styles['pr-10']}`}>{warranty[0].duration} {CART_PAGE.WARRENTY_TXT} </span><a href="" className={`${styles['fontW600']}`}>{CART_PAGE.VIEW_MORE}</a></p> */}
                     <div className={`${styles['flx-spacebw-alignc']} ${styles['fontW600']} ${styles['p-5']} ${styles['fs-12']} ${styles['warrenty-part']}`}>
                       {cartData.items ? <Warranty warranty={cartData.items[index].warranty_duration} /> : null}
                     </div>
