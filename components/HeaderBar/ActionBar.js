@@ -7,7 +7,7 @@ import { ModalContainer } from 'react-router-modal';
 import { Dropdown, MenuItem } from "react-bootstrap";
 import Cookie from 'universal-cookie';
 import { selectors as personalSelectors } from '../../store/cam/personalDetails';
-import { selectors as wishListSelectors } from '../../store/cam/wishlist';
+import { actionCreators as wishListActionCreators, selectors as wishListSelectors } from '../../store/cam/wishlist';
 import Cart from '../Cart';
 import Login from '../Login';
 import { Link } from '../../routes';
@@ -60,6 +60,7 @@ class ActionBar extends Component {
   componentDidMount() {
     this.props.getLoginInfo();
     this.props.getCartResults();
+    this.props.getWishlist();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -129,6 +130,7 @@ class ActionBar extends Component {
 
   render() {
     const { isLoggedIn, cartResults, userInfo, wishListCount } = this.props;
+    console.log('wishListCount', wishListCount);
     return (
       <div className={styles['actionbar-wrapper']}>
         <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']} ${styles['country-code']}`}>
@@ -275,6 +277,7 @@ const mapDispatchToProps = (dispatch) => {
       resetShowLogin: actionCreators.resetShowLogin,
       savePtaToken: actionCreators.savePtaToken,
       userLogin: actionCreators.userLogin,
+      getWishlist: wishListActionCreators.getWishlist,
     },
     dispatch,
   );
