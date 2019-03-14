@@ -23,7 +23,7 @@ class SubMenu extends Component {
   }
 
   render() {
-    const { subMenuItems, onLinkClick, colorScheme } = this.props;
+    const { subMenuItems, onLinkClick, colorScheme, parentID } = this.props;
     const { selectedSubCategory } = this.state;
     const selectedSubCategoryTree = _.find(subMenuItems, { id: parseInt(selectedSubCategory) });
     return (
@@ -47,6 +47,7 @@ class SubMenu extends Component {
                   selectedCategoryTree={selectedSubCategoryTree}
                   colorScheme={colorScheme}
                   onLinkClick={onLinkClick}
+                  parentID={parentID}
                 />
               </Grid>
             :

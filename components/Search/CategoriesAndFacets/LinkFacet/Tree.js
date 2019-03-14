@@ -34,15 +34,21 @@ class Tree extends Component {
 
   render() {
     const { filter, first } = this.props;
+    let queryString = window.location.search;
     return (
       <ul className={`${styles['category-sub-list']} ${styles['pl-20']} ${styles['lne-ht2']}`}>
         {
           filter
             ?
             filter.children.slice(0, this.state.maxRows).map((category) => {
+              if(queryString.indexOf('sid') !== -1) {
+                queryString = queryString.replace(/sid=.*/, `sid=${category.id}`);
+              } else {
+                queryString = `${queryString}&sid=${category.id}`;
+              }
               return (
                 <li key={category.id} className={ first ? styles['main-sub-list'] : styles['category-sub-list-inn']}>
-                  <Link route={`/${country}/${language}/srp/${category.canonicalId}-${category.id}/${window.location.search}`}><a>{category.name}</a></Link>
+                  <Link route={`/${country}/${language}/srp/${category.canonicalId}/${queryString}`}><a>{category.name}</a></Link>
                   {/*<ul className={`${styles['category-sub-order-list']} ${styles['pl-15']}`}>
                     {
                       category.children.map((subcategory) => {
