@@ -24,7 +24,7 @@ const Order = ({order}) => {
   );
 
   const routeChange = () => {
-    Router.push(`${country}/${language}/cam/orders/${order.id}`);
+    Router.push(`/${country}/${language}/cam/orders/${order.id}`);
   }
 
   return (
@@ -48,7 +48,7 @@ const Order = ({order}) => {
           </div>
         </div>
         <div>
-          <a href={`${country}/${language}/cam/orders/${order.id}`} className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['text-uppercase']}`}>
+          <a href={`/${country}/${language}/cam/orders/${order.id}`} className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['text-uppercase']}`}>
             Track Order
           </a>
         </div>
