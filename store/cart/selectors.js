@@ -61,8 +61,6 @@ const getErrorMessege = (store) => {
 // }
 
 const isAddedToCart = (store) => {
-  console.log('isAddedToCart', store.cartReducer, store.productReducer);
-  debugger;
   try {
     const selectedCartItem = _.find(store.cartReducer.data.items, ({listing_id}) => {
       return store.productReducer.data[0].variant_preferred_listings[store.productReducer.variantsData.selectedVariantId][0].listing_id === listing_id
