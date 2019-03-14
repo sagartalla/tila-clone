@@ -5,7 +5,7 @@ const getProduct = (store, variantId) => {
     product_details, variant_preferred_listings, tree, product_id,
   } = store.productReducer.data[0];
   variantId = store.productReducer.variantsData.selectedVariantId || variantId;
-  variantId = variantId || Object.keys(variant_preferred_listings)[0] 
+  variantId = variantId || Object.keys(variant_preferred_listings)[0]
   const computedVariantId = variantId;
   const listings = computedVariantId ? variant_preferred_listings[computedVariantId] : _.reduce(variant_preferred_listings, (acc, val, key) => {
     return [...acc, ...val];
@@ -236,7 +236,7 @@ const getVariantsAndSimilarProducts = (store) => {
   //     }
   //   }]
   // }
-  const similarProducts = _.reduce([product_details, ...similar_products], (acc, product) => {
+  const similarProducts = similar_products ? _.reduce([product_details, ...similar_products], (acc, product) => {
     if(availableSimilarProducts && !availableSimilarProducts[product.product_details_vo.cached_product_details.product_id]) return;
     const key = product.product_details_vo.cached_product_details.product_id;
     const display = {
@@ -269,7 +269,8 @@ const getVariantsAndSimilarProducts = (store) => {
       display,
       map
     };
-  }, { display: {}, map: [] });
+  }, { display: {}, map: [] })
+  : [];
   return {
     variants, similarProducts, itemType, catalogId, productId
   };
