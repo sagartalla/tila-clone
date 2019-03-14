@@ -3,8 +3,9 @@ import { Grid, Col } from 'react-bootstrap';
 import NoSSR from 'react-no-ssr';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { actionCreators,selectors } from '../../store/search';
+import Cookie from 'universal-cookie';
 
+import { actionCreators,selectors } from '../../store/search';
 import HeaderBar from '../HeaderBar/index';
 import FooterBar from '../Footer/index';
 import CategoriesAndFacets from './CategoriesAndFacets';
@@ -15,6 +16,12 @@ import { Router } from '../../routes';
 import { mergeCss } from '../../utils/cssUtil';
 
 const styles = mergeCss('components/Search/search');
+
+const cookies = new Cookie();
+
+const language = cookies.get('language') || 'en';
+const country = cookies.get('country') || 'SAU';
+
 
 const onClickMenuHandle = (e) => {
   const target = e.currentTarget;
@@ -37,7 +44,7 @@ class Search extends Component {
 
   querySearch = (e) => {
     let dataSearchQuery = e.currentTarget.dataset.querysearch;
-    Router.pushRoute(`/srp?search=${dataSearchQuery}&disableSpellCheck=true&${Object.entries(this.props.optionalParams).map(([key, val]) => `${key}=${val}`).join('&')}`);
+    Router.pushRoute(`/${country}/${language}/srp?search=${dataSearchQuery}&disableSpellCheck=true&${Object.entries(this.props.optionalParams).map(([key, val]) => `${key}=${val}`).join('&')}`);
   }
 
   render() {

@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {Row, Col, Button} from 'react-bootstrap';
+import Cookie from 'universal-cookie';
 
 import { selectors, actionCreators } from '../../../store/cart';
 import { Link } from '../../../routes';
@@ -13,6 +14,11 @@ import { mergeCss } from '../../../utils/cssUtil';
 import {languageDefinations} from '../../../utils/lang'
 const {PDP_PAGE} = languageDefinations()
 const styles = mergeCss('components/Product/product');
+
+const cookies = new Cookie();
+
+const language = cookies.get('language') || 'en';
+const country = cookies.get('country') || 'SAU';
 
 class Offers extends Component {
   constructor(props){
@@ -50,7 +56,7 @@ class Offers extends Component {
                 isAddedToCart
                 ?
                 <Button>
-                  <Link route="/cart"><a>{PDP_PAGE.GO_TO_CART}</a></Link>
+                  <Link route={`/${country}/${language}/cart`}><a>{PDP_PAGE.GO_TO_CART}</a></Link>
                 </Button>
                 :
                 null

@@ -1,10 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { Row, Col, Grid } from 'react-bootstrap';
 import { Router } from '../../routes';
+import { Row, Col, Grid } from 'react-bootstrap';
+import Cookie from 'universal-cookie';
+import { bindActionCreators } from 'redux';
+
 import { actionCreators, selectors } from '../../store/cart';
+import { Router } from '../../routes';
 import { actionCreators as wishlistActionCreators, selectors as wishlistSelectors } from '../../store/cam/wishlist';
 
 import HeaderBar from '../HeaderBar/index';
@@ -17,6 +20,11 @@ import Coupon from '../Cart/CartPaymentSideBar/coupons';
 
 
 const styles = mergeCss('components/Cart/cart');
+
+const cookies = new Cookie();
+
+const language = cookies.get('language') || 'en';
+const country = cookies.get('country') || 'SAU';
 
 class Cart extends Component {
   constructor(props) {
@@ -81,12 +89,16 @@ class Cart extends Component {
 
     if (newRes.length) {
       alert('There is some issue with cart items.');
-    } else { Router.pushRoute('/payment'); }
+    } else { 
+      Router.pushRoute(`/${country}/${language}/payment`);
+    }
   }
 
   removeCartItem(e) {
-    const productId = e.currentTarget.getAttribute('data-productid');
-    digitalData.cart.item = digitalData.cart.item.filter(item => item.productInfo.productID !== productId);
+    let productId = e.currentTarget.getAttribute('data-productId')
+    digitalData.cart.item = digitalData.cart.item.filter((item) => {
+      return item.productInfo.productID !== productId
+    })
     this.props.removeCartItem(e.currentTarget.id);
   }
 

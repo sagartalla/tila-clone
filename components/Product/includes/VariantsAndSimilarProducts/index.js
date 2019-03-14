@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import { bindActionCreators } from 'redux';
+import Cookies from 'universal-cookie';
 
 import { selectors, actionCreators } from '../../../../store/product';
 import Variant from './Variant';
@@ -10,6 +11,11 @@ import SimilarProducts from './SimilarProducts';
 import { Router } from '../../../../routes';
 import { mergeCss } from '../../../../utils/cssUtil';
 const styles = mergeCss('components/Product/product');
+
+const cookies = new Cookies();
+
+const language = cookies.get('language') || 'en';
+const country = cookies.get('country') || 'SAU';
 
 class VariantsAndSimilarProducts extends Component {
   constructor(props){
@@ -55,7 +61,7 @@ class VariantsAndSimilarProducts extends Component {
       });
       let newQuery = window.location.search;
       newQuery = newQuery.replace(productId, pid)
-      Router.pushRoute(`/product${newQuery}`);
+      Router.pushRoute(`${country}/${language}/product${newQuery}`);
     });
   }
 
