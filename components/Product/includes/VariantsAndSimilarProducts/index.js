@@ -57,6 +57,7 @@ class VariantsAndSimilarProducts extends Component {
         [key]: val,
       }
     }, () => {
+      const { selectedProductData } = this.state;
       const productId = this.props.VariantsAndSimilarProducts.productId;
       const pid = this.props.getSelectedPropductId({
         selectedProductData: this.state.selectedProductData,
@@ -69,6 +70,7 @@ class VariantsAndSimilarProducts extends Component {
       }
       let newQuery = window.location.search;
       newQuery = newQuery.replace(productId, pid)
+      this.props.setSelectedProductData({selectedProductData});
       Router.pushRoute(`/${country}/${language}/product${newQuery}`);
     });
   }
@@ -98,13 +100,16 @@ class VariantsAndSimilarProducts extends Component {
 const mapStateToProps = (store) => ({
   getSelectedVariantId: selectors.getSelectedVariantId,
   VariantsAndSimilarProducts: selectors.getVariantsAndSimilarProducts(store),
-  getSelectedPropductId: selectors.getSelectedPropductId,
+  getSelectedPropductId: selectors.getSelectedPropductId(store),
   SelectedVariantData: selectors.getSelectedVariantData(store),
 });
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
-    { setSelectedVariant: actionCreators.setSelectedVariant },
+    {
+      setSelectedVariant: actionCreators.setSelectedVariant,
+      setSelectedProductData: actionCreators.setSelectedProductData
+    },
     dispatch,
   );
 }

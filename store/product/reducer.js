@@ -72,6 +72,9 @@ const productReducer = typeToReducer({
     REJECTED: (state,action) => {
       return Object.assign({}, state, { error: action.payload.message, ui: {loading: false }});
     }
+  },
+  [actions.SET_SELECTED_PRODUCT_DATA]: (state, action) => {
+    return state;
   }
 }, initialState);
 

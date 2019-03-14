@@ -206,11 +206,12 @@ const getVariantsAndSimilarProducts = (store) => {
           values: []
         }
       }
-      display[attKey].values = [...display[attKey].values, ...(attVal.attribute_values.map((i) => i.value))]
+      display[attKey].values = _.uniq([...display[attKey].values, ...(attVal.attribute_values.map((i) => i.value))]);
       if(!map[key][attKey]) {
         map[key][attKey] = [];
       }
       map[key] = {
+        ...map[key],
         [attKey]: [...map[key][attKey], ...(attVal.attribute_values.map((i) => i.value))]
       };
     });
@@ -259,11 +260,12 @@ const getVariantsAndSimilarProducts = (store) => {
           values: []
         }
       }
-      display[attKey].values = [...display[attKey].values, ...(attVal.attribute_values.map((i) => i.value))]
+      display[attKey].values = _.uniq([...display[attKey].values, ...(attVal.attribute_values.map((i) => i.value))]);
       if(!map[key][attKey]) {
         map[key][attKey] = [];
       }
       map[key] = {
+        ...map[key],
         [attKey]: [...map[key][attKey], ...(attVal.attribute_values.map((i) => i.value))]
       };
     });
@@ -347,14 +349,28 @@ const getReviewRatings = (store) => {
 const getReviewResponse = (store) => {
   return store.productReducer.reviewResponse
 }
-const getSelectedPropductId = ({selectedProductData, map, lastSelectionAttribute}) => {
-  let match, matchPid, count, pids;
+const getSelectedPropductId = (store) => ({selectedProductData, map, lastSelectionAttribute}) => {
+  const exisitingProductData = _.reduce(store.productReducer.data[0].product_details.product_details_vo.cached_product_details.attribute_map, (acc, val, key) => {
+    if(val.attribute_group_name !== 'IDENTITY' || !val.searchable) {
+      return acc;
+    }
+    return {
+      ...acc,
+      [key]: val.attribute_values[0].value
+    }
+  }, {})
+  selectedProductData = {
+    ...exisitingProductData,
+    ...selectedProductData,
+  };
+  let match, matchPid, count, pids = [];
    _.forEach(map, (mapValues, pid) => {
     count = 0;
     match = _.reduce(selectedProductData, (acc, selectedValue, selectedKey) => {
       const temp = mapValues[selectedKey] && mapValues[selectedKey].indexOf(selectedValue) !== -1
       if(temp) {
         count++;
+        pids[count] = pid;
       }
       return acc && temp
     }, true);
@@ -362,18 +378,13 @@ const getSelectedPropductId = ({selectedProductData, map, lastSelectionAttribute
       matchPid = pid;
     }
   });
-  debugger;
+  for(var i = Object.keys(selectedProductData).length; i >= 0 ; i--) {
+    if(pids[i]) {
+      matchPid = pids[i];
+      break;
+    }
+  }
   return matchPid;
-  // if(matchPid) {
-  //   return matchPid;
-  // } else {
-  //   _.forEach(map, (mapValues, pid) => {
-  //    match = mapValues[selectedKey] && mapValues[selectedKey].indexOf(selectedValue) !== -1
-  //    if(match) {
-  //      matchPid = pid;
-  //    }
-  //  });
-  // }
 }
 
 const getSelectedVariantData = (store) => {
