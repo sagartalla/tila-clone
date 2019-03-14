@@ -2,12 +2,18 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Modal } from 'react-bootstrap';
 import moment from 'moment';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import Cookie from 'universal-cookie';
 import Button from '../../../common/Button';
 import Input from '../../../common/Input';
 import { languageDefinations } from '../../../../utils/lang/';
 import { mergeCss } from '../../../../utils/cssUtil';
+import { actionCreators } from '../../../../store/cart';
+import { actionCreators as couponActionCreators, selectors as couponSelectors } from '../../../../store/cam/coupons';
 
 const { COUPON_OFFERS } = languageDefinations();
+const cookies = new Cookie();
 
 const styles = mergeCss('components/Cart/CartPaymentSideBar/coupons/index');
 
@@ -23,6 +29,11 @@ class Coupon extends Component {
       errorMsg: '',
     };
   }
+
+  componentDidMount() {
+    this.props.getCouponOffers(cookies.get('country'));
+  }
+
  showTerms = data => () => {
    this.setState({
      showTerms: true,
@@ -48,21 +59,21 @@ class Coupon extends Component {
    });
  }
 handleApply = data => () => {
-  const { getCartResults, closeSlider, showOfferApplied } = this.props;
+  const { getCartResults, closeSlider, newData } = this.props;
   const params = {
     coupon_code: data.coupon_code,
-    remove_coupon: false,
+    // remove_coupon: false,
   };
-  getCartResults(params).then((res) => {
-    if (res.value.data.coupon_code) {
-      showOfferApplied(data.coupon_code);
-      closeSlider();
-    }
-  });
+  getCartResults(params);
+  if (newData) {
+    closeSlider();
+  }
 }
 
 handleInputApply = code => () => {
-  const { getCartResults, closeSlider } = this.props;
+  const {
+    getCartResults, openSlider, closeSlider, isError,
+  } = this.props;
   const { couponCode } = this.state;
   if (couponCode === '' || couponCode === undefined) {
     this.setState({
@@ -70,25 +81,18 @@ handleInputApply = code => () => {
     });
     return false;
   }
+  this.setState({
+    errorMsg: '',
+  });
   const params = {
     coupon_code: code,
-    remove_coupon: false,
+    // remove_coupon: false,
   };
-  getCartResults(params)
-    .then((res) => {
-      console.log(res);
-      if (res.value.data.coupon_code) {
-        this.props.showOfferApplied(code);
-        closeSlider();
-      }
-    })
-    .catch(err => this.setState({
-      errorMsg: 'The coupon you entered is not valid',
-    }));
+  getCartResults(params);
 }
 
 render() {
-  const { couponData } = this.props;
+  const { couponData, isError } = this.props;
   const {
     showTerms, termsOfUse, howToUse, showHowToUse, couponCode, errorMsg,
   } = this.state;
@@ -105,9 +109,11 @@ render() {
         />
         <Button className={`${styles.buttonStyle} ${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles.width35} ${styles['m-10']}`} btnText="Apply" onClick={this.handleInputApply(couponCode)} />
       </div>
-      {errorMsg ? <span className={styles['error-msg']}>{errorMsg}</span> : ''}
-      <div>
-        {couponData.map(data =>
+      <div className={styles.errorStyle}>
+        {errorMsg ? <span className={styles['error-msg']}>{errorMsg}</span> : isError ? <span className={styles['error-msg']}>{isError}</span> : ''}
+      </div>
+      <div className={styles.applyCoupon}>
+        {couponData && couponData.length > 0 ? couponData.map(data =>
             (
               (moment(data.ends_on).toDate().getTime() >= moment().toDate().getTime()) &&
               <div className={styles.couponDiv}>
@@ -120,7 +126,9 @@ render() {
                     </div>
                   </div>
                   <div className={data.offer_sub_type === 'LISTING' ? `${styles.listingColor} ${styles.couponOffer} ` : data.offer_sub_type === 'BANK' ? `${styles.bankColor} ${styles.couponOffer}` : `${styles.categoryColor} ${styles.couponOffer}`}>
-                    <div className={`${styles.ellipsis}`} title={data.offer_sub_type}>{data.offer_sub_type}</div>
+                    <div className={`${styles.ellipsis}`} title={(data.offer_sub_type === 'LISTING' || data.offer_sub_type === 'PRODUCT' || data.offer_sub_type === 'ITEM_TYPE') ? 'Category Offer' : data.offer_sub_type === 'BANK' ? 'Bank Offer' : 'Brand Offer'}>
+                      {(data.offer_sub_type === 'LISTING' || data.offer_sub_type === 'PRODUCT' || data.offer_sub_type === 'ITEM_TYPE') ? 'Category Offer' : data.offer_sub_type === 'BANK' ? 'Bank Offer' : 'Brand Offer'}
+                    </div>
                   </div>
                 </div>
                 <div className={`${styles.wordBreak} ${styles['p-5']}`}>{data.description}</div>
@@ -140,7 +148,10 @@ render() {
                   {/* } */}
                 </div>
               </div>
-          ))}
+          ))
+          :
+        <span className={styles['error-msg']}>{COUPON_OFFERS.NO_COUPONS}</span>
+        }
       </div>
       <div>
         <Modal
@@ -177,18 +188,37 @@ render() {
 }
 }
 
+
+const mapStateToProps = store => ({
+  couponData: couponSelectors.getCouponOffers(store),
+});
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      getCouponOffers: couponActionCreators.getCouponOffers,
+      getCartResults: actionCreators.getCartResults,
+    },
+    dispatch,
+  );
 Coupon.propTypes = {
   couponData: PropTypes.instanceOf(Array),
   getCartResults: PropTypes.func,
   closeSlider: PropTypes.func,
-  showOfferApplied: PropTypes.func,
+  newData: PropTypes.string,
+  getCouponOffers: PropTypes.func,
+  isError: PropTypes.string,
+  openSlider: PropTypes.func,
 };
 
 Coupon.defaultProps = {
   couponData: [],
   getCartResults: f => f,
   closeSlider: f => f,
-  showOfferApplied: f => f,
+  newData: '',
+  getCouponOffers: f => f,
+  isError: '',
+  openSlider: f => f,
 };
 
-export default Coupon;
+export default connect(mapStateToProps, mapDispatchToProps)(Coupon);

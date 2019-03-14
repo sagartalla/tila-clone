@@ -27,6 +27,8 @@ const CartBody = ({
   cartStepperInputHandler,
   count,
   isLoading,
+  openSlider,
+  isError,
 }) => {
   const { items, error } = data;
   const flag = data && items && items.length;
@@ -37,9 +39,10 @@ const CartBody = ({
     Router.pushRoute(`/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemType}`);
   }
 
-  return (isLoading ?
-    cartPlaceHolder
-    :
+  return (
+    isLoading ?
+      cartPlaceHolder
+          : 
     <div className={styles['cart-container']}>
       {
         showBlocker ? <Blocker /> : ''
@@ -55,6 +58,7 @@ const CartBody = ({
         flag > 0 ?
           <Row className={styles['mr-0']}>
             <Col md={9} sm={12} xs={12} className={styles['pr-5']}>
+            
               <div>
                 {
                   items.map((item, index) => {
@@ -164,7 +168,6 @@ const CartBody = ({
 
                 <Wishlist cartMiniWishList={true} />
               </div>
-
             </Col>
             <Col md={3} sm={12} xs={12} className={styles['pr-0']}>
               <div className={`${styles['box']}`}>
@@ -173,6 +176,7 @@ const CartBody = ({
                   showInstant={true}
                   showCheckoutBtn={true}
                   checkoutBtnHandler={checkoutBtnHandler}
+                  openSlider={openSlider}
                 />
               </div>
               <div className={styles['secure-img']}>

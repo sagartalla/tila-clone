@@ -436,5 +436,10 @@ export const AR_KEYWORDS = {
     'APPLIED': 'Applied',
     'OK': 'OK',
     'APPLY': 'Apply',
+    'NO_COUPONS': 'No coupons to show',
+    'OFFER_APPLIED': 'Offer Applied',
+    'CHANGE': 'Change',
+    'APPLY_COUPON': 'Apply Coupon Code',
+    'BUY_AND_EARN': 'Buy & Earn 300 Reward Points',
   },
 };

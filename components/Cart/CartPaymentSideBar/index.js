@@ -2,21 +2,17 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import Cookie from 'universal-cookie';
+import { languageDefinations } from '../../../utils/lang/';
 import SVGComponent from '../../common/SVGComponet';
-import Blocker from '../../common/Blocker';
 import { actionCreators } from '../../../store/cam/coupons';
 import InstantCheckout from '../../common/InstantCheckout';
-import { languageDefinations } from '../../../utils/lang/';
 import { actionCreators as cartActioncreators } from '../../../store/cart';
 
 import CartStepper from '../../Cart/includes/CartStepper';
-import Slider from '../../common/slider';
-import Coupon from '../CartPaymentSideBar/coupons/index';
 
 import { mergeCss } from '../../../utils/cssUtil';
 
-const cookies = new Cookie();
+const { COUPON_OFFERS } = languageDefinations();
 
 const styles = mergeCss('components/Cart/CartPaymentSideBar/sideBar');
 
@@ -26,92 +22,47 @@ class CartAndPaymentSideBar extends Component {
     super(props);
 
     this.state = {
-      slider: false,
-      showBlocker: false,
-      hideCouponCode: props.hideCouponCode,
     };
   }
-  openSlider = () => {
-    let { showBlocker } = this.state;
-    showBlocker = true;
-    this.props.getCouponOffers(cookies.get('country')).then((res) => {
-      if (res.value.status === 200 || res.value.status === 201 || res.value.status === 204) {
-        this.setState({
-          showBlocker: false,
-        });
-      }
-    });
-    this.setState({
-      slider: true,
-      showBlocker,
-    });
-  }
-  closeSlider = () => {
-    this.setState({
-      slider: false,
-    });
-  }
-  showOfferApplied = (data) => {
-    this.setState({
-      hideCouponCode: true,
-      offerCode: data,
-    });
-  }
+
   render() {
     const {
       checkoutBtnHandler, showCheckoutBtn, showInstant,
       hideUpSell, showStepper, increaseItemCnt, decreaseItemCnt,
-      insnt_item_listing_id, isPdp, couponData, getCartResults, viewData,
+      insnt_item_listing_id, isPdp, couponData, getCartResults, viewData, hideCouponCode,
     } = this.props;
     const {
       items, total_price, total_offer_price,
       total_discount, total_shipping, tax, item_cnt, currency,
     } = this.props.data;
-    const {
-      slider, showBlocker, hideCouponCode, offerCode,
-    } = this.state;
+
     return (
       <div className={`${styles['right-bar']}`}>
         <div className={`${styles['coupon-code-main']} ${styles['pb-10']}`}>
           <h4 className={`${styles['fs-16']} ${styles.fontW600} ${styles['m-0']} ${styles['p-10']} ${styles.flex} ${styles['justify-center']} ${styles['white-color']}`}>
             <SVGComponent clsName={`${styles['buy-coupon-code']}`} src="icons/common-icon/buy-coupon" />
-            <span className={styles['pl-5']}>Buy & Earn 300 Reward Points</span>
+            <span className={styles['pl-5']}>{COUPON_OFFERS.BUY_AND_EARN}</span>
           </h4>
           {
-          hideCouponCode || viewData.coupon_code ?
+          hideCouponCode ? null : viewData.coupon_code ?
             <span className={`${styles['p-10']} ${styles['m-20']} ${styles['applied-coupon']} ${styles.flex} ${styles['flex-center']}`}>
               <SVGComponent clsName={`${styles['coupon-code']}`} src="icons/common-icon/coupon-code" />
               <span className={`${styles['pl-5']} ${styles.flex} ${styles.width100} ${styles['flex-center']} ${styles['justify-between']} `}>
                 <div>
-                  <div className={`${styles.applied}`}>Offer Applied</div>
-                  <div >{offerCode === '' || offerCode === undefined ? viewData.coupon_code : offerCode}</div>
+                  <div className={`${styles.applied}`}>{COUPON_OFFERS.OFFER_APPLIED}</div>
+                  <div >{viewData.coupon_code}</div>
                 </div>
-                <div className={`${styles.pointer} ${styles['lgt-blue']}`} onClick={this.openSlider}>Change</div>
+                <div className={`${styles.pointer} ${styles['lgt-blue']}`} onClick={this.props.openSlider}>{COUPON_OFFERS.CHANGE}</div>
               </span>
             </span>
           :
             <span className={`${styles['flex-center']} ${styles['justify-center']} ${styles['p-10']} ${styles.flex} ${styles['m-20']} ${styles['apply-coupon']}`}>
               <SVGComponent clsName={`${styles['coupon-code']}`} src="icons/common-icon/coupon-code" />
-              <span className={`${styles['text-uppercase']} ${styles['pl-5']}`} onClick={this.openSlider}><div className={`${styles.pointer}`}>Apply Coupon Code</div></span>
+              <span className={`${styles['text-uppercase']} ${styles['pl-5']}`} onClick={this.props.openSlider}><div className={`${styles.pointer}`}>{COUPON_OFFERS.APPLY_COUPON}</div></span>
             </span>
         }
 
         </div>
-        {showBlocker ? <Blocker /> :
-        slider &&
-          <Slider
-            closeSlider={this.closeSlider}
-            isOpen={slider}
-            label="Coupons"
-          >
-            <Coupon
-              couponData={couponData}
-              getCartResults={getCartResults}
-              closeSlider={this.closeSlider}
-              showOfferApplied={this.showOfferApplied}
-            />
-          </Slider>
-        }
         {
         showInstant ?
           <div className={`${styles['p-10-20']}`}>
@@ -178,6 +129,7 @@ CartAndPaymentSideBar.propTypes = {
   data: PropTypes.object,
   getCouponOffers: PropTypes.func,
   applyTheCoupon: PropTypes.func,
+  openSlider: PropTypes.func,
 
 };
 
@@ -189,17 +141,13 @@ CartAndPaymentSideBar.defaultProps = {
   insnt_item_listing_id: '',
   getCouponOffers: f => f,
   applyTheCoupon: f => f,
+  openSlider: f => f,
 };
-const mapStateToProps = ({ couponOffersData, cartReducer }) => {
-  // const { couponOffersData, cartReducer } = store;
-  const {
-    couponData,
-  } = couponOffersData;
+const mapStateToProps = ({ cartReducer }) => {
   const {
     data,
   } = cartReducer;
   return {
-    couponData,
     viewData: data,
   };
 };
