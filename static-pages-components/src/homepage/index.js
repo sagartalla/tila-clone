@@ -68,27 +68,27 @@ const hal = [{
 }];
 
 const d_tie = [
-  'static/img/landing-home/d-laptops.png',
-  'static/img/landing-home/d-mobiles.png',
-  'static/img/landing-home/d-cameras.png',
-  'static/img/landing-home/d-kitchen.png',
-  'static/img/landing-home/d-audio.png',
+  '/static/img/landing-home/d-laptops.png',
+  '/static/img/landing-home/d-mobiles.png',
+  '/static/img/landing-home/d-cameras.png',
+  '/static/img/landing-home/d-kitchen.png',
+  '/static/img/landing-home/d-audio.png',
 ];
 
 const d_tif = [
-  'static/img/landing-home/kids-fashion.png',
-  'static/img/landing-home/t-women-cloths.png',
-  'static/img/landing-home/shoes.png',
-  'static/img/landing-home/t-watches.png',
-  'static/img/landing-home/t-mens-cloths.png',
+  '/static/img/landing-home/kids-fashion.png',
+  '/static/img/landing-home/t-women-cloths.png',
+  '/static/img/landing-home/shoes.png',
+  '/static/img/landing-home/t-watches.png',
+  '/static/img/landing-home/t-mens-cloths.png',
 ];
 
 const d_tihl = [
-  'static/img/landing-home/kids-furniture.png',
-  'static/img/landing-home/living-room-furniture.png',
-  'static/img/landing-home/tables.png',
-  'static/img/landing-home/cushions.png',
-  'static/img/landing-home/lights.png',
+  '/static/img/landing-home/kids-furniture.png',
+  '/static/img/landing-home/living-room-furniture.png',
+  '/static/img/landing-home/tables.png',
+  '/static/img/landing-home/cushions.png',
+  '/static/img/landing-home/lights.png',
 ];
 
 const d_o_day = [{
@@ -765,4 +765,3 @@ const HomePage = () => (
     </div>
   </NoSSR>
 );
-
