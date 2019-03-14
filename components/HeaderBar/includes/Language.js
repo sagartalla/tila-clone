@@ -7,7 +7,7 @@ import _ from 'lodash';
 import Cookies from 'universal-cookie';
 import { decode, encode, addUrlProps, replaceInUrlQuery } from 'react-url-query';
 
-import { actionCreators } from '../../../store/auth';
+import { actionCreators, selectors } from '../../../store/auth';
 
 import { mergeCss } from '../../../utils/cssUtil';
 import languageData from '../../../constants/languages';
@@ -32,23 +32,23 @@ class Language extends Component {
         selectedItem: language
       });
   	}
-  	this.props.setLanguage(language);
-    this.props.onChangeLanguage(language);
+    this.storeLanguage(language);
 	}
 
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.language !== this.state.selectedItem) {
+      const currentURl = window.location.href;
+      window.location.href = currentURl.replace(`/${this.state.selectedItem}`, `/${nextProps.language}`);
+    }
+  }
+
   changeLanguage(e) {
-    const id = e.currentTarget.getAttribute('data-id')
-    this.setState({
-      selectedItem: id
-    }, () => {
-      this.storeLanguage(id);
-    });
+    const id = e.currentTarget.getAttribute('data-id');
+    this.storeLanguage(id);
   }
 
   storeLanguage(language) {
     this.props.setLanguage(language);
-    this.props.onChangeLanguage(language);
-    location.reload();
   }
 
   render() {
@@ -83,16 +83,8 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 
-function mapUrlToProps(url, props) {
-  return {
-    language: url.language,
-  };
-}
+const mapStateToProps = (store) => ({
+  language: selectors.getLanguage(store),
+});
 
-const mapUrlChangeHandlersToProps = (props) => {
-  return {
-    onChangeLanguage: (value) => replaceInUrlQuery('language', value)
-  };
-}
-
-export default addUrlProps({ mapUrlToProps, mapUrlChangeHandlersToProps })(connect(null, mapDispatchToProps)(Language));
+export default connect(mapStateToProps, mapDispatchToProps)(Language);

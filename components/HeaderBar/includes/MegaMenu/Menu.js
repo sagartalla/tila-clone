@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Cookie from 'universal-cookie';
 import _ from 'lodash';
 
 import Leaves from './Leaves';
@@ -23,6 +24,11 @@ const brandImages = {
     fashion: ['river_island', 'debenhams', 'sony', 'philips'],
   },
 };
+
+const cookies = new Cookie();
+
+const language = cookies.get('language') || 'en';
+const country = cookies.get('country') || 'SAU';
 
 class Menu extends Component {
   constructor(props) {
@@ -54,14 +60,14 @@ class Menu extends Component {
               :
               null
             }
-            <Link route={`/srp/${childItem.displayName}-${childItem.id}?categoryTree=true&isListed=false`}>
+            <Link route={`/${country}/${language}/srp/${childItem.displayName.split(' ').join('-').toLowerCase()}?categoryTree=true&isListed=false&sid=${this.props.parentID},${childItem.id}`}>
               <a className={`${styles['level-1-item']} ${depth === 1 ? styles['fontW600'] : {}}`}>{childItem.displayName}</a>
             </Link>
           </span>
           {
             childItem.childCategories
             ?
-            <Leaves items={childItem.childCategories} parent={childItem} />
+            <Leaves items={childItem.childCategories} parent={childItem} parentID={`${this.props.parentID},${childItem.id}`} />
             :
             null
           }
@@ -72,7 +78,7 @@ class Menu extends Component {
 
 
   render() {
-    const { selectedCategoryTree, colorScheme } =  this.props;
+    const { selectedCategoryTree, colorScheme, parentID } =  this.props;
     return (
       <div
         className={`${styles['pt-40']} ${styles['megamenu-dropdown']} ${styles[colorScheme]} ${this.state.viewAllMenu ? {} : styles['max-height']}`}

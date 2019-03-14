@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Cookie from 'universal-cookie';
 import _ from 'lodash';
 
 import { Router } from '../../../../routes';
@@ -17,6 +18,13 @@ import { selectors, actionCreators } from '../../../../store/order';
 
 import { mergeCss } from '../../../../utils/cssUtil';
 const styles = mergeCss('components/Order/includes/OrderIssueWidget/orderIssue');
+
+
+const cookies = new Cookie();
+
+const language = cookies.get('language') || 'en';
+const country = cookies.get('country') || 'SAU';
+
 
 class Body extends Component {
   constructor(props) {
@@ -83,7 +91,7 @@ class Body extends Component {
     ?
     nextStep === ORDER_ISSUE_TYPES.EXCHANGE || nextStep === ORDER_ISSUE_TYPES.RETURN
     ?
-    Router.pushRoute(`/cam/orders/${orderIssue.orderId}/issue/${returnExchangeType}/item/${selectedItem.id}`)
+    Router.pushRoute(`/${country}/${language}/cam/orders/${orderIssue.orderId}/issue/${returnExchangeType}/item/${selectedItem.id}`)
     :
     goToNextStep({ nextStep, })
     :

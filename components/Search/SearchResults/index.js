@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import InfiniteScroll from 'react-infinite-scroller';
 import _ from 'lodash'
-import Product from './Product';
+import Cookie from 'universal-cookie';
+
+import Product from "./Product";
 import SVGCompoent from '../../common/SVGComponet';
 import { actionCreators, selectors } from '../../../store/search';
 import { actionCreators as cartActionCreators, selectors as cartSelector } from '../../../store/cart';
@@ -12,6 +14,11 @@ import { mergeCss } from '../../../utils/cssUtil';
 import { Router } from '../../../routes';
 
 const styles = mergeCss('components/Search/search');
+
+const cookies = new Cookie();
+
+const language = cookies.get('language') || 'en';
+const country = cookies.get('country') || 'SAU';
 
 class SearchResults extends Component {
   constructor(props) {
@@ -42,7 +49,7 @@ class SearchResults extends Component {
 
   componentWillReceiveProps(nextProps) {
     if(this.state.buyNow == true && (nextProps.isAddedToCart)){
-       Router.pushRoute('/payment');
+       Router.pushRoute(`/${country}/${language}/payment`);
     }
   }
 
@@ -74,7 +81,7 @@ class SearchResults extends Component {
 
   render() {
     const { results, pagiantionDetails, userDetails, notifyMe } = this.props;
-    const { pageNum } = this.props.pagiantionDetails;    
+    const { pageNum } = this.props.pagiantionDetails;
     return (
       <div>
         <InfiniteScroll

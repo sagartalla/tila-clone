@@ -98,7 +98,9 @@ const setLanguage = (language) => {
     data: {
       language,
     }
-  }).then(() => language);
+  }).then(() => {
+    return language;
+  });
 }
 
 const removeCity = () => {
