@@ -237,7 +237,8 @@ const getVariantsAndSimilarProducts = (store) => {
   //     }
   //   }]
   // }
-  const similarProducts = _.reduce([product_details, ...similar_products], (acc, product) => {
+  console.log(similar_products);
+  const similarProducts = similar_products ? _.reduce([product_details, ...similar_products], (acc, product) => {
     if(availableSimilarProducts && !availableSimilarProducts[product.product_details_vo.cached_product_details.product_id]) return;
     const key = product.product_details_vo.cached_product_details.product_id;
     const display = {
@@ -270,7 +271,8 @@ const getVariantsAndSimilarProducts = (store) => {
       display,
       map
     };
-  }, { display: {}, map: [] });
+  }, { display: {}, map: [] })
+  : [];
   return {
     variants, similarProducts, itemType, catalogId, productId
   };
