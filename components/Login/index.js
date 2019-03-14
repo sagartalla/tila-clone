@@ -307,7 +307,20 @@ class Login extends Component {
               </a>
               <span className={`${styles['thick-gry-clr']} ${styles['pt-10']} ${styles['pb-10']} ${styles['flex']}`}>{LOGIN_PAGE.SIGN_UP_WITH}</span>
               <NoSSR>
-                <SocialLogin />
+                <SocialLogin>
+                  {([handleSocialLogin]) => {
+                    return (
+                      <NoSSR>
+                        <div className={styles['flex']}>
+                          <a className={styles['flex']} onClick={handleSocialLogin('facebook')}><SVGComponent clsName={`${styles['bg-social-icon']} ${styles['mr-10']}`} src="icons/social-icons/bg-facebook" /></a>
+                          <a className={styles['flex']} onClick={handleSocialLogin('google')}><SVGComponent clsName={`${styles['bg-social-icon']} ${styles['mr-10']}`} src="icons/social-icons/bg-google" /></a>
+                          {/* <a className={styles['flex']} onClick={this.handleSocialLogin('twitter')}><SVGComponent clsName={`${styles['bg-social-icon']} ${styles['mr-10']}`} src="icons/social-icons/bg-twitter" /></a>
+                          <a className={styles['flex']} onClick={this.handleSocialLogin('instagram')}><SVGComponent clsName={`${styles['bg-social-icon']}`} src="icons/social-icons/bg-instagram" /></a> */}
+                        </div>
+                      </NoSSR>
+                    )
+                  }}
+                </SocialLogin>
               </NoSSR>
             </div>
           </form>
