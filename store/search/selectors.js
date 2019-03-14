@@ -124,8 +124,8 @@ const getSearchResutls = (store) => {
       let variantInfo = product.variantAdapters.reduce((modifiedVaraints, v) => {
         let modifiedVaraintsCopy = {}
         let { listingAdapters } = v;
-        if(listingAdapters.length > 0){
-          isNotifyMe = false
+        if (listingAdapters.length > 0) {
+          isNotifyMe = !(listingAdapters[0].attributes.isActive && listingAdapters[0].attributes.inStock)
           const attributesData = {...listingAdapters[0].attributes};
           delete attributesData.type;
           delete attributesData.variantId;
@@ -164,8 +164,8 @@ const getSearchResutls = (store) => {
       // }
       const { brand } = product.attributes;
 
-      const categoryTreePath = product.attributes.categoryTreePath.split('/');
-      const categoryId = categoryTreePath[categoryTreePath.length - 1].split(',')[0];
+      const categoryTreePath = product.attributes.categoryTreePath ? product.attributes.categoryTreePath.split('/') : [];
+      const categoryId = categoryTreePath.length > 0 ? categoryTreePath[categoryTreePath.length - 1].split(',')[0] : '';
 
       return {
         id: product.id,

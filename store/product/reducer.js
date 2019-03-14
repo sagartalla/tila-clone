@@ -8,6 +8,7 @@ const initialState = {
   data: {},
   reviews:[],
   reviewResponse:{},
+  variantsData: {},
   error: {},
 };
 const productReducer = typeToReducer({
@@ -55,6 +56,17 @@ const productReducer = typeToReducer({
       return Object.assign({}, state, { error: action.payload.message, ui: {loading: false }} )
     }
   },
+  [actions.SET_SELECTED_VARIANT]: {
+    PENDING: state => {
+      return Object.assign({}, state, { ui: { loading: true }});
+    },
+    FULFILLED: (state,action) => {
+      return Object.assign({}, state, { variantsData: action.payload, ui: { loading: false } });
+    },
+    REJECTED: (state,action) => {
+      return Object.assign({}, state, { error: action.payload.message, ui: {loading: false }});
+    }
+  }
 }, initialState);
 
 export default productReducer;

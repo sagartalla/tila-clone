@@ -25,8 +25,8 @@ const cartItemCountApi = (params, typ) => {
   });
 }
 
-const giftApi = (cartItemId, typ) => {
-  return axios.post(`${constants.CART_API_URL}/api/v1/cart/${cartItemId}/gift/${typ}`, {}).then(({ data }) => {
+const giftApi = (cartItemId, typ, params = {}) => {
+  return axios.post(`${constants.CART_API_URL}/api/v1/cart/${cartItemId}/gift/${typ}`, params).then(({ data }) => {
     return getCartDetailsApi();
   })
 }
