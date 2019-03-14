@@ -7,6 +7,7 @@ import { ModalContainer } from 'react-router-modal';
 import { Dropdown, MenuItem } from "react-bootstrap";
 import Cookie from 'universal-cookie';
 import { selectors as personalSelectors } from '../../store/cam/personalDetails';
+import { selectors as wishListSelectors } from '../../store/cam/wishlist';
 import Cart from '../Cart';
 import Login from '../Login';
 import { Link } from '../../routes';
@@ -127,7 +128,7 @@ class ActionBar extends Component {
   }
 
   render() {
-    const { isLoggedIn, cartResults, userInfo } = this.props;
+    const { isLoggedIn, cartResults, userInfo, wishListCount } = this.props;
     return (
       <div className={styles['actionbar-wrapper']}>
         <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']} ${styles['country-code']}`}>
@@ -145,14 +146,15 @@ class ActionBar extends Component {
         <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']}`}>
           <Link route={`/${country}/${language}/cam/wishlist`}>
            <a style={{dispaly:'block'}}>
-            <span className={`${styles['flex-center']} ${styles['justify-center']}`}>
+            <span className={`${styles['flex-center']} ${styles['justify-center']} ${styles['relative']}`}>
               <SVGComponent clsName={`${styles['wish-list-icon']}`} src="icons/wish-list/wish-list-icon" />
+              <span className={`${styles['absolute']} ${styles['cart-count']} ${styles['fs-10']} ${styles['white-color']}`}>{wishListCount.length}</span>
             </span>
             </a>
           </Link>
         </div>
-        <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']}`}>
-          <Dropdown id="cart-toggle" className={`${styles['cart-inn']} ${styles['profile-login-inn']}`}>
+        <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']} `}>
+          <Dropdown id="cart-toggle" className={`${styles['cart-inn']} ${styles.width55} ${styles['profile-login-inn']}`}>
             <Dropdown.Toggle>
               <Link route={`/${country}/${language}/cart`}>
               <a style={{dispaly:'block'}}>
@@ -259,6 +261,7 @@ const mapStateToProps = (store) => {
     userInfo: personalSelectors.getUserInfo(store),
     showLogin: selectors.getShowLogin(store),
     ptaToken: selectors.getPTAToken(store),
+    wishListCount: wishListSelectors.getWishListResults(store),    
   })
 };
 
