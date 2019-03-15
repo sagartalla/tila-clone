@@ -75,6 +75,7 @@ class Product extends Component {
 
   notify(e) {
     e.stopPropagation();
+    e.preventDefault();
     const { userDetails, productId, notifyMe } = this.props;
     if (userDetails.isLoggedIn) {
       notifyMe({
