@@ -85,7 +85,7 @@ const ProductPrice = ({offerInfo}) => {
                 <span className={`${styles['fs-12']} ${styles['pr-5']}`}>{offerPricing.currency}</span>
               </div>
               <div className={`${styles['flex']} ${styles['align-baseline']} ${styles['relative']} ${styles['ml-10']}`}>
-                <span className={`${styles['fs-12']} ${styles['pr-5']} ${styles['offers-applied']} `}>{`${offerPricing.discount} OFF`}</span>
+                <span className={`${styles['fs-12']} ${styles['pr-5']} ${styles['offers-applied']} `}>{`${offerPricing.discount}% OFF`}</span>
                   <OverlayTrigger trigger="click" placement="bottom" overlay={popover(offerPricing)}>
                     <span className={`${styles['fs-12']} ${styles['pr-5']}`}>
                       <SVGCompoent clsName={`${styles['secure-icon']} ${styles['mr-10']} ${styles['pointer']}`} src="icons/common-icon/trust-secure" />
