@@ -389,6 +389,7 @@ export const EN_KEYWORDS = {
     'LOGOUT': 'Logout',
     'SELL_WITH_TILA': 'Sell With Tila',
     'VIEW_ALL': 'View All',
+    'VIEW_LESS': 'View Less',
     'TOP_BRANDS': 'Top Brands',
     'TRENDING': 'Trending',
     'TILA_CUSTOMER': 'Tila Customer',
