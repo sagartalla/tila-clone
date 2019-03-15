@@ -17,34 +17,44 @@ const country = cookies.get('country') || 'SAU';
 class Leaves extends Component {
   constructor(props) {
     super(props);
-    const { items } = this.props;
+    const { items } = props;
     this.state = {
       maxRows: MaxItems,
       isMoreButtonRequired: items.length > MaxItems,
-    }
+    };
+  }
+
+  toggleItems = (e) => {
+    e.stopPropagation();
+    const { items } = this.props;
+    const { maxRows } = this.state;
+    this.setState({
+      maxRows: maxRows === MaxItems ? items.length : MaxItems,
+    });
   }
 
   render() {
-    const {items, parent} = this.props;
+    const { maxRows, isMoreButtonRequired } = this.state;
+    const { items, parentID, parent } = this.props;
     return (
       <ul className={`${styles['megamenu-sub-child-list']} ${styles['pl-20']}`}>
         {
-          items.slice(0, this.state.maxRows).map((item) => item ? (
+          items.slice(0, maxRows).map(item => (item ? (
             <li key={item.id} className={`${styles['pt-5']} ${styles['pb-5']}`}>
-              <Link route={`/${country}/${language}/srp/${item.displayName.split(' ').join('-').toLowerCase()}?categoryTree=true&isListed=false&sid=${this.props.parentID},${item.id}`}>
+              <Link route={`/${country}/${language}/srp/${item.displayName.split(' ').join('-').toLowerCase()}?categoryTree=true&isListed=false&sid=${parentID},${item.id}`}>
                 <a className={`${styles['level-1-item']}`}>{item.displayName}</a>
               </Link>
             </li>
-          ) : null)
+          ) : null))
         }
         {
-          this.state.isMoreButtonRequired
+          isMoreButtonRequired
           ?
-          <li>
-            <Link route={`/${country}/${language}/srp/${parent.displayName.split(' ').join('-').toLowerCase()}?categoryTree=true&isListed=false&sid=${this.props.parentID},${item.id}`}>
-              <a className={`${styles['level-1-item']}`}>{HEADER_PAGE.VIEW_ALL}</a>
-            </Link>
-          </li>
+            <li>
+                <a className={`${styles['level-1-item']}`} onClick={this.toggleItems}>
+                  {maxRows === MaxItems ? HEADER_PAGE.VIEW_ALL : HEADER_PAGE.VIEW_LESS}
+                </a>
+            </li>
           :
           null
         }

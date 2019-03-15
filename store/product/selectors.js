@@ -77,8 +77,8 @@ const getProduct = (store, variantId) => {
       showPrise: priceInfo.pricing.offer_price,
       sellingPrice: priceInfo.pricing.price,
       discount: priceInfo.pricing.discount_per_mrp,
-      offerMesseges: priceInfo.pricing.actions.map((a) => a.description),
-      offerDiscounts: priceInfo.pricing.actions.map((a) => a.discount),
+      offerMesseges: priceInfo.pricing.actions ? priceInfo.pricing.actions.map((a) => a.description) : [],
+      offerDiscounts: priceInfo.pricing.actions ? priceInfo.pricing.actions.map((a) => a.discount) : [],
       totalDiscountMRP: priceInfo.pricing.total_discount_mrp,
       currency: priceInfo.mrp_currency
     } : 'No Listing'
