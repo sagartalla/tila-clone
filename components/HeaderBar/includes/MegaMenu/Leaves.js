@@ -41,7 +41,7 @@ class Leaves extends Component {
           this.state.isMoreButtonRequired
           ?
           <li>
-            <Link route={`/${country}/${language}/srp/${parent.displayName.split(' ').join('-').toLowerCase()}?categoryTree=true&isListed=false&sid=${this.props.parentID},${item.id}`}>
+            <Link route={`/${country}/${language}/srp/${parent.displayName.split(' ').join('-').toLowerCase()}?categoryTree=true&isListed=false&sid=${this.props.parentID}`}>
               <a className={`${styles['level-1-item']}`}>{HEADER_PAGE.VIEW_ALL}</a>
             </Link>
           </li>
