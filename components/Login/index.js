@@ -157,6 +157,7 @@ class Login extends Component {
     this.setState({
       ...this.state,
       mode: this.state.mode === 'login' ? 'register' : 'login',
+      password: '',
       error: '',
       validation: this.validations.valid(),
     }, () => this.fireCustomEventClick(this.state.mode));
