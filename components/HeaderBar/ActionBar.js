@@ -130,7 +130,6 @@ class ActionBar extends Component {
 
   render() {
     const { isLoggedIn, cartResults, userInfo, wishListCount } = this.props;
-    console.log('wishListCount', wishListCount);
     return (
       <div className={styles['actionbar-wrapper']}>
         <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']} ${styles['country-code']}`}>
