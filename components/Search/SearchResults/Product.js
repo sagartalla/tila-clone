@@ -232,20 +232,23 @@ class Product extends Component {
         >
           {variants[selectedIndex].sellingPrice[0]}
         </span>
-        <span className={`${styles['ml-5']} ${styles['label-gry-clr']}`}>
-          <s>{variants[selectedIndex].mrp[0]}</s>
-        </span>
-        {variants[selectedIndex].offersApplied &&
-          variants[selectedIndex].offersApplied.length > 0 &&
-          <OverlayTrigger
-            placement="bottom"
-            overlay={popover}
-          >
-            <span className={`${styles['success-green']} ${styles['ml-5']} ${styles.pointer}`}>
-              {variants[selectedIndex].offersApplied.length} offers
-            </span>
-          </OverlayTrigger>
-        }
+        {discountValue > 5 &&
+        <React.Fragment>
+          <span className={`${styles['ml-5']} ${styles['label-gry-clr']}`}>
+            <s>{variants[selectedIndex].mrp[0]}</s>
+          </span>
+          {variants[selectedIndex].offersApplied &&
+            variants[selectedIndex].offersApplied.length > 0 &&
+            <OverlayTrigger
+              placement="bottom"
+              overlay={popover}
+            >
+              <span className={`${styles['success-green']} ${styles['ml-5']} ${styles.pointer}`}>
+                {variants[selectedIndex].offersApplied.length} offers
+              </span>
+            </OverlayTrigger>
+          }
+        </React.Fragment>}
       </span>
     );
 

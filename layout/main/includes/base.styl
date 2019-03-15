@@ -386,7 +386,7 @@ for x in range(0px, 40px, 5)
 
 .cross-strike-red::after
   content: ''
-  border-top 1px solid #dd1e31
+  border-top 1px solid thick-red-arrow
   width 100%
   position absolute
   transform rotateZ(-15deg)
@@ -404,10 +404,15 @@ for x in range(0px, 40px, 5)
   display table-cell
 
 .total-amount
-  background: #eee;
-  height: 3em;
+  background light-gray-color
+  height 3em
   div
     vertical-align middle
+
+.overall-amount
+  border-radius 3px
+  border solid 1px yellow-color
+  background-color: light-yellow-color
 
 .resize-none
   resize none
