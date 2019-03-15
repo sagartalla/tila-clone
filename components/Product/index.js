@@ -5,7 +5,6 @@ import { Grid, Row, Col, Tabs, Tab } from 'react-bootstrap';
 import NoSSR from 'react-no-ssr';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-
 import { selectors } from '../../store/product';
 import HeaderBar from '../HeaderBar/index';
 import Dispalay from './includes/Display';
@@ -157,7 +156,7 @@ const getProductComponent = (isPreview, taskCode) => {
     }
 
     render() {
-      const { productData, userDetails } = this.props;
+      const { productData, userDetails, productInfo } = this.props;
       const {
         catalog, titleInfo, keyfeatures, imgUrls, extraOffers, offerInfo, shippingInfo, returnInfo, details, productDescription, catalogObj, categoryType = '', breadcrums,
       } = productData;
@@ -187,7 +186,7 @@ const getProductComponent = (isPreview, taskCode) => {
                     <div className={`${styles['details-right-part-inn']}`}>
                       <div className={`${styles['ipad-details']} ${styles['ipad-pr-15']}`}>
                         <TitleInfo {...titleInfo} isPreview={isPreview} />
-                        <ProductDetails details={details} keyfeatures={keyfeatures} isPreview={isPreview} />
+                        <ProductDetails details={details} keyfeatures={keyfeatures} isPreview={isPreview} productInfo={productInfo}/>
                       </div>
                       <div className={`${styles['ipad-details']} ${styles['bdr-lt']} ${styles['ipad-pl-15']}`}>
                         {
@@ -254,6 +253,7 @@ const getProductComponent = (isPreview, taskCode) => {
   const mapStateToProps = store => ({
     productData: taskCode ? selectors.getPreview(store) : selectors.getProduct(store),
     userDetails: store.authReducer.data,
+    productInfo: selectors.getProduct(store),
   });
 
   const mapDispatchToProps = dispatch =>
