@@ -27,7 +27,7 @@ class CompareWidget extends React.Component {
   }
 
   showComparePage = () => {
-    Router.pushRoute(`${country}/${language}/compare`);
+    Router.pushRoute(`/${country}/${language}/compare`);
   }
 
   render() {

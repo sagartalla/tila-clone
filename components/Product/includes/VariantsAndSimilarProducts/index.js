@@ -31,37 +31,47 @@ class VariantsAndSimilarProducts extends Component {
   }
 
   onSelectVariant(e) {
+    const [key, val] = [e.target.id, e.target.value];
     this.setState({
       selectedVariantData: {
         ...this.state.selectedVariantData,
-        [e.target.id]: e.target.value,
+        [key]: val,
       }
     }, () => {
       const { selectedVariantData } = this.state;
       const { itemType, catalogId, variants } = this.props.VariantsAndSimilarProducts;
       const variantId = this.props.getSelectedVariantId({
         selectedVariantData: this.state.selectedVariantData,
-        map: variants.map
+        map: variants.map,
+        lastSelectionAttribute: key
       });
       this.props.setSelectedVariant({selectedVariantData, itemType, catalogId, variantId});
     });
   }
 
   onSelectProduct(e) {
+    const [key, val] = [e.target.id, e.target.value];
     this.setState({
       selectedProductData: {
         ...this.state.selectedProductData,
-        [e.target.id]: e.target.value,
+        [key]: val,
       }
     }, () => {
+      const { selectedProductData } = this.state;
       const productId = this.props.VariantsAndSimilarProducts.productId;
       const pid = this.props.getSelectedPropductId({
         selectedProductData: this.state.selectedProductData,
-        map: this.props.VariantsAndSimilarProducts.similarProducts.map
+        map: this.props.VariantsAndSimilarProducts.similarProducts.map,
+        lastSelectionAttribute: key
       });
+      if(!pid){
+        alert('product not available!');
+        return;
+      }
       let newQuery = window.location.search;
       newQuery = newQuery.replace(productId, pid)
-      Router.pushRoute(`${country}/${language}/product${newQuery}`);
+      this.props.setSelectedProductData({selectedProductData});
+      Router.pushRoute(`/${country}/${language}/product${newQuery}`);
     });
   }
 
@@ -90,13 +100,16 @@ class VariantsAndSimilarProducts extends Component {
 const mapStateToProps = (store) => ({
   getSelectedVariantId: selectors.getSelectedVariantId,
   VariantsAndSimilarProducts: selectors.getVariantsAndSimilarProducts(store),
-  getSelectedPropductId: selectors.getSelectedPropductId,
+  getSelectedPropductId: selectors.getSelectedPropductId(store),
   SelectedVariantData: selectors.getSelectedVariantData(store),
 });
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
-    { setSelectedVariant: actionCreators.setSelectedVariant },
+    {
+      setSelectedVariant: actionCreators.setSelectedVariant,
+      setSelectedProductData: actionCreators.setSelectedProductData
+    },
     dispatch,
   );
 }

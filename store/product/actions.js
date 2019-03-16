@@ -5,7 +5,8 @@ const actions = {
   GET_PREVIEW: 'GET_PREVIEW',
   GET_REVIEW_RATINGS: 'GET_REVIEW_RATINGS',
   SUBMIT_USER_REVIEW: 'SUBMIT_USER_REVIEW',
-  SET_SELECTED_VARIANT: 'SET_SELECTED_VARIANT'
+  SET_SELECTED_VARIANT: 'SET_SELECTED_VARIANT',
+  SET_SELECTED_PRODUCT_DATA: 'SET_SELECTED_PRODUCT_DATA',
 };
 
 const actionCreators = {
@@ -36,6 +37,10 @@ const actionCreators = {
   setSelectedVariant: (params) => ({
     type:actions.SET_SELECTED_VARIANT,
     payload:api.setSelectedVariant(params)
+  }),
+  setSelectedProductData: (params) => ({
+    type: actions.SET_SELECTED_PRODUCT_DATA,
+    payload:params
   })
 };
 
