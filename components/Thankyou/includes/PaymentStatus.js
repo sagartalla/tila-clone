@@ -32,7 +32,9 @@ const PaymentStatus = props => {
             <h3 className={`${styles['mt-0']} ${styles['light-gry-clr']} ${styles['fontW600']}`}>{message}</h3>
             {
               props.status == "SUCCESSFUL" ?
-                <a href={`/${country}/${language}/cam/orders" className={styles['mb-20']}><button className={`${styles['fp-btn']} ${styles['fp-btn-default']}`}>{THANK_YOU_PAGE.TRACK_ORDERS}</button></a>
+                <a href={`/${country}/${language}/cam/orders`} className={styles['mb-20']}>
+                  <button className={`${styles['fp-btn']} ${styles['fp-btn-default']}`}>{THANK_YOU_PAGE.TRACK_ORDERS}</button>
+                </a>
                 : null
             }
           </div>

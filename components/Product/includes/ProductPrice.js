@@ -52,7 +52,7 @@ const popover = ({strickedPrice: mrp, sellingPrice:sp, offerDiscounts, showPrise
           </div>
           <div className={`${styles['t-row']} ${styles['total-amount']}`}>
             <div className={styles['t-cell']}>Total</div>
-            <div className={styles['t-cell']}>100.99 AED</div>
+            <div className={styles['t-cell']}>{`${total} ${currency}`}</div>
           </div>
         </div>
         <div>

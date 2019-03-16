@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, OverlayTrigger, Popover } from 'react-bootstrap';
 import moment from 'moment';
 
 import CartStepper from './CartStepper';
@@ -9,6 +9,63 @@ import { languageDefinations } from '../../../utils/lang/';
 
 const styles = mergeCss('components/Cart/cart');
 const { CART_PAGE } = languageDefinations();
+
+const popover = ({
+  mrp, offer_price, total_amount, cur, selling_price, offerDiscounts, total_discount,
+}) => {
+  return (
+    <Popover id="offer-popover">
+      <div className={styles['fs-12']}>
+        <div className={`${styles['table']} ${styles['width100']}`}>
+          <div className={styles['t-row']}>
+            <div className={`${styles['t-cell']} ${styles['pb-10']}`}>
+              <div>Maximum Retail Price</div>
+              <div className={`${styles['fs-10']} ${styles['label-light-grey']}`}>(Incl. of all taxes)</div>
+            </div>
+            <div className={`${styles['t-cell']} ${styles['t-rt']}`}>
+              {`${mrp} ${cur}`}
+            </div>
+          </div>
+          <div className={styles['t-row']}>
+            <div className={`${styles['t-cell']} ${styles['pb-10']}`}>
+              <div>Selling Price</div>
+            </div>
+            <div className={`${styles['t-cell']} ${styles['t-rt']}`}>
+              {`${selling_price} ${cur}`}
+            </div>
+          </div>
+          {offerDiscounts.length > 0 &&
+            offerDiscounts.map((od) => {
+              return (
+                <div className={styles['t-row']}>
+                  <div className={`${styles['t-cell']} ${styles['pb-10']}`}>
+                    <div>{od.description}</div>
+                  </div>
+                  <div className={`${styles['t-cell']} ${styles['t-rt']}`}>
+                    {`${od.discount} ${cur}`}
+                  </div>
+                </div>
+              );
+            })
+          }
+          <div className={styles['t-row']}>
+            <div className={`${styles['t-cell']} ${styles['pb-10']}`}>
+              <div>Dilevery Charges</div>
+            </div>
+            <div className={`${styles['t-cell']} ${styles['t-rt']}`}>Free</div>
+          </div>
+          <div className={`${styles['t-row']} ${styles['total-amount']}`}>
+            <div className={styles['t-cell']}>Total</div>
+            <div className={`${styles['t-cell']} ${styles['t-rt']}`}>{total_amount} {cur}</div>
+          </div>
+        </div>
+        <div>
+          <div>Overall you save {total_discount} {cur} on this Product</div>
+        </div>
+      </div>
+    </Popover>
+  );
+}
 
 class CartItem extends React.Component {
   constructor(props) {
@@ -67,9 +124,9 @@ class CartItem extends React.Component {
     } = this.props;
     const { gift_card_message, checked, showMessage } = this.state;
     const {
-      item_id, img, name, price, cur, quantity, max_limit, inventory,
+      item_id, img, name, offer_price, cur, quantity, max_limit, inventory,
       brand_name, gift_info, shipping, warranty, total_amount,
-      product_id, variant_id, itemType, catalogId,
+      product_id, variant_id, itemType, catalogId, discount, mrp,
     } = item;
     return (
       <div key={item_id} className={`${styles['mb-20']} ${styles['box']}`}>
@@ -154,7 +211,24 @@ class CartItem extends React.Component {
                   </div>}
                 </Col>
                 <Col md={2} sm={2} className={`${styles['pl-0']} ${styles['landscape-cart-price']}`}>
-                  <h4 className={`${styles['fontW600']} ${styles['light-gry-clr']} ${styles['mt-15']} ${styles['t-rt']}`}>{price + ' ' + cur}</h4>
+                  <p className={`${styles['mb-0']} ${styles['fs-12']}`}>
+                    {Math.floor(discount) && <span className={styles['success-green']}>{`${Math.floor(discount)}% OFF`}</span>}
+                    <span className={`${styles['cross-strike']} ${styles.relative} ${styles['ml-10']}`}>
+                      <span className={styles['label-light-grey']}>
+                        <span>{mrp}&nbsp;</span>
+                        <span>{cur}</span>
+                      </span>
+                    </span>
+                  </p>
+                  <h4 className={`${styles.fontW600} ${styles['justify-flex-end']} ${styles['light-gry-clr']} ${styles['flex-center']} ${styles['mt-10']} ${styles['t-rt']}`}>
+                    {`${offer_price} ${cur}`}
+                    <OverlayTrigger placement="bottom" overlay={popover(item)}>
+                      {/* <span className={`${styles['fs-12']} ${styles['pr-5']}`}>
+                        <SVGComponent clsName={`${styles['secure-icon']} ${styles['mr-10']} ${styles['pointer']}`} src="icons/common-icon/trust-secure" />
+                      </span> */}
+                      <span className={`${styles.question} ${styles['ml-5']} ${styles['flex-center']} ${styles['justify-center']} ${styles['default-shadow']} ${styles['fs-14']} ${styles.pointer}`}>  ? </span>
+                    </OverlayTrigger>
+                  </h4>
                   <p className={`${styles['t-rt']}`}>0.00 <span className={`${styles['fs-12']}`}>{cur}</span></p>
                   <p className={`${styles['t-rt']}`}>{shipping.shipping_fees} <span className={`${styles['fs-12']}`}>{cur}</span></p>
                 </Col>
