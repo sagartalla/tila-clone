@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Grid, Row, Col } from 'react-bootstrap';
 import Cookies from 'universal-cookie';
+import { toast } from 'react-toastify';
 
 import Cart from '../Cart';
 import SignIn from './includes/SignIn';
@@ -170,7 +171,7 @@ class Payments extends React.Component {
       paymentConfigJson['payment'] = { basic: true, progress: false, done: false };
       this.setState({ paymentConfigJson, editCartDetails: !editCartDetails });
     } else {
-      alert('Please add a delivery address.');
+      toast.info('Please add a delivery address.');
     }
 
   }

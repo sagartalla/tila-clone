@@ -19,16 +19,16 @@ const actionCreators = {
     type: actions.ADD_TO_WISHLIST,
     payload: apis.addToWishlistApi(params),
   })),
-  deleteWishlist: loginReq(wishlist_id => ({
+  deleteWishlist: loginReq((wishlist_id, showToast) => ({
     type: actions.DELETE_TO_WISHLIST,
-    payload: apis.deleteWishlistApi(wishlist_id),
+    payload: apis.deleteWishlistApi(wishlist_id, showToast),
   })),
   addToCart: (params, wishlist_id, getCartData) => (dispatch, getState) => dispatch(cartActionCreators.addToCart(params)).then(() => {
     if (getCartData) {
-      dispatch(actionCreators.deleteWishlist(wishlist_id)).then(() => {
+      dispatch(actionCreators.deleteWishlist(wishlist_id, false)).then(() => {
         dispatch(cartActionCreators.getCartResults({}));
       });
-    } else { dispatch(actionCreators.deleteWishlist(wishlist_id)); }
+    } else { dispatch(actionCreators.deleteWishlist(wishlist_id, false)); }
   }),
   addToWishlistAndFetch: loginReq(params => dispatch => dispatch(actionCreators.addToWishlist(params)).then(() => {
     dispatch(actionCreators.getWishlist());

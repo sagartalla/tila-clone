@@ -69,7 +69,7 @@ const apmResInterceptor = (response) => {
 
 const errorInterceptor = (err) => {
   try {
-    if(err.response && err.response.status){
+    if (err.response && err.response.status) {
       if (err.response.status == '401') {
         const { refresh_token } =  cookies.get('auth') || {};
         if(refresh_token) {
@@ -84,7 +84,7 @@ const errorInterceptor = (err) => {
         } else {
           cookies.remove('auth');
         }
-      }else{
+      } else {
         toast.error(err.response.status + " : " + err.response.data.error);
       }
     }

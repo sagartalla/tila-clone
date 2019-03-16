@@ -56,6 +56,7 @@ class Product extends Component {
 
   addToWishlist(e) {
     e.stopPropagation();
+    e.preventDefault();
     const {
       productId: product_id, catalogId: catalog_id, variants, priceRange, currency, addToWishlistAndFetch,
     } = this.props;
@@ -178,6 +179,7 @@ class Product extends Component {
 
   addToCompare(e) {
     e.stopPropagation();
+    e.preventDefault();
     const {
       productId, itemtype, media, displayName, categoryId,
     } = this.props;
