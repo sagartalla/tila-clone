@@ -27,13 +27,13 @@ class Coupon extends Component {
       howToUse: '',
       showHowToUse: false,
       errorMsg: '',
+      couponApplied: true,
     };
   }
 
   componentDidMount() {
     this.props.getCouponOffers(cookies.get('country'));
   }
-
  showTerms = data => () => {
    this.setState({
      showTerms: true,
@@ -59,20 +59,31 @@ class Coupon extends Component {
    });
  }
 handleApply = data => () => {
-  const { getCartResults, closeSlider, newData } = this.props;
+  const {
+    getCartResults, closeSlider, openSlider,
+  } = this.props;
   const params = {
     coupon_code: data.coupon_code,
     // remove_coupon: false,
   };
-  getCartResults(params);
-  if (newData) {
-    closeSlider();
-  }
+  getCartResults(params).then((res) => {
+    if (res.value.data.coupon_applied) {
+      this.setState({
+        couponApplied: res.value.data.coupon_applied,
+      });
+      closeSlider();
+    } else {
+      this.setState({
+        couponApplied: false,
+      });
+      openSlider();
+    }
+  });
 }
 
 handleInputApply = code => () => {
   const {
-    getCartResults, openSlider, closeSlider, isError,
+    getCartResults, closeSlider, openSlider,
   } = this.props;
   const { couponCode } = this.state;
   if (couponCode === '' || couponCode === undefined) {
@@ -88,13 +99,25 @@ handleInputApply = code => () => {
     coupon_code: code,
     // remove_coupon: false,
   };
-  getCartResults(params);
+  getCartResults(params).then((res) => {
+    if (res.value.data.coupon_applied) {
+      this.setState({
+        couponApplied: res.value.data.coupon_applied,
+      });
+      closeSlider();
+    } else {
+      this.setState({
+        couponApplied: false,
+      });
+      openSlider();
+    }
+  });
 }
 
 render() {
-  const { couponData, isError } = this.props;
+  const { couponData } = this.props;
   const {
-    showTerms, termsOfUse, howToUse, showHowToUse, couponCode, errorMsg,
+    showTerms, termsOfUse, howToUse, showHowToUse, couponCode, errorMsg, couponApplied,
   } = this.state;
   return (
     <div>
@@ -110,7 +133,7 @@ render() {
         <Button className={`${styles.buttonStyle} ${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles.width35} ${styles['m-10']}`} btnText="Apply" onClick={this.handleInputApply(couponCode)} />
       </div>
       <div className={styles.errorStyle}>
-        {errorMsg ? <span className={styles['error-msg']}>{errorMsg}</span> : isError ? <span className={styles['error-msg']}>{isError}</span> : ''}
+        {errorMsg ? <span className={styles['error-msg']}>{errorMsg}</span> : couponApplied ? '' : <span className={styles['error-msg']}>The Coupon applied is invalid</span>}
       </div>
       <div className={styles.applyCoupon}>
         {couponData && couponData.length > 0 ? couponData.map(data =>
@@ -137,7 +160,7 @@ render() {
                     <div className={styles.border} />
                   </div>
                   <div className={`${styles['lgt-blue']} ${styles.pointer}`} onClick={this.showHowtoUse(data)}>{COUPON_OFFERS.HOW_TO_USE}</div>
-                  {/* {data.applied ?
+                  {/* {couponApplied.coupon_applied && couponApplied.coupon_code === newCouponCode ?
                     <div className={`${styles.flex}`}>
                       <img src="/static/img/icons/common-icon/green-tick.svg" alt="checked" />
                       <div className={`${styles.applied} ${styles['p-10']}`}>
@@ -205,9 +228,7 @@ Coupon.propTypes = {
   couponData: PropTypes.instanceOf(Array),
   getCartResults: PropTypes.func,
   closeSlider: PropTypes.func,
-  newData: PropTypes.string,
   getCouponOffers: PropTypes.func,
-  isError: PropTypes.string,
   openSlider: PropTypes.func,
 };
 
@@ -215,9 +236,7 @@ Coupon.defaultProps = {
   couponData: [],
   getCartResults: f => f,
   closeSlider: f => f,
-  newData: '',
   getCouponOffers: f => f,
-  isError: '',
   openSlider: f => f,
 };
 

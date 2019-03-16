@@ -17,6 +17,7 @@ const getCartResults = (store) => {
       newData.item_cnt = data.items.length;
       newData.currency = data.items[0].listing_info.selling_price_currency;
       newData.coupon_code = data.coupon_code;
+      newData.coupon_applied = data.coupon_applied;
       data.items.map((item, index) => {
         newData.items[index] = {
           item_id: item.cart_item_id,

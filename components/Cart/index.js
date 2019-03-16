@@ -33,7 +33,6 @@ class Cart extends Component {
       showBlocker: false,
       count: '',
       showSlider: false,
-      newError: '',
     };
 
     this.addToWishlist = this.addToWishlist.bind(this);
@@ -54,12 +53,6 @@ class Cart extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.cartData.ui.loader && nextProps.cartData.ui.loader == 'hide') {
       this.setState({ showBlocker: false });
-    }
-    if (this.props.isError !== nextProps.isError && nextProps.isError !== '') {
-      this.setState({
-        newError: nextProps.isError,
-        showSlider: true,
-      });
     }
   }
 
@@ -148,7 +141,7 @@ class Cart extends Component {
 
   render() {
     const {
-      showBlocker, count, showSlider, newError,
+      showBlocker, count, showSlider,
     } = this.state;
     const {
       cartData, editCartDetails, showCheckOutBtn, isLoading, couponData, getCartResults,
@@ -201,9 +194,7 @@ class Cart extends Component {
           >
             <Coupon
               closeSlider={this.closeSlider}
-              isError={newError}
               openSlider={this.openSlider}
-              newData={cartData && cartData.coupon_code}
             />
           </Slider>
         }
@@ -215,7 +206,6 @@ class Cart extends Component {
 const mapStateToProps = store => ({
   cartData: selectors.getCartResults(store),
   isLoading: store.cartReducer.ui.loading,
-  isError: store.cartReducer.error,
 });
 
 const mapDispatchToProps = dispatch =>
@@ -233,11 +223,9 @@ const mapDispatchToProps = dispatch =>
 
 Cart.propTypes = {
   cartData: PropTypes.object,
-  isError: PropTypes.string,
 };
 
 Cart.defaultProps = {
-  isError: '',
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);

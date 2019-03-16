@@ -35,7 +35,6 @@ class CartAndPaymentSideBar extends Component {
       items, total_price, total_offer_price,
       total_discount, total_shipping, tax, item_cnt, currency,
     } = this.props.data;
-
     return (
       <div className={`${styles['right-bar']}`}>
         <div className={`${styles['coupon-code-main']} ${styles['pb-10']}`}>
@@ -58,7 +57,12 @@ class CartAndPaymentSideBar extends Component {
           :
             <span className={`${styles['flex-center']} ${styles['justify-center']} ${styles['p-10']} ${styles.flex} ${styles['m-20']} ${styles['apply-coupon']}`}>
               <SVGComponent clsName={`${styles['coupon-code']}`} src="icons/common-icon/coupon-code" />
-              <span className={`${styles['text-uppercase']} ${styles['pl-5']}`} onClick={this.props.openSlider}><div className={`${styles.pointer}`}>{COUPON_OFFERS.APPLY_COUPON}</div></span>
+              <div className={styles.noCoupon}>
+              <span className={`${styles['text-uppercase']} ${styles['pl-5']}`} onClick={this.props.openSlider}>
+              <div className={`${styles.pointer}`}>{COUPON_OFFERS.APPLY_COUPON}</div>
+              </span>
+              <div className={`${styles['light-gray']}`}>{'No Coupon Applied'}</div>
+              </div>
             </span>
         }
 
