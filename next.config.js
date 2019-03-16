@@ -30,9 +30,9 @@ module.exports = withSourceMaps(withStylus(withCSS({
   },
   webpack: (config, { dev }) => {
     // Fixes npm packages that depend on `fs` module
-    config.node = {
-      fs: 'empty'
-    }
+    // config.node = {
+    //   fs: 'empty'
+    // }
     // config.plugins = [
     //   new BundleAnalyzerPlugin()
     // ]
@@ -50,13 +50,13 @@ module.exports = withSourceMaps(withStylus(withCSS({
     //     }
     //   });
     // }
-    config.resolve = {
-      extensions: ['.js', '.json', '.svg', '.css'],
-      modules: [
-        path.resolve('./'),
-        path.resolve('./node_modules')
-      ]
-    }
+    // config.resolve = Object.assign(config.resolve, {
+    //   extensions: ['.js', '.json', '.svg', '.css'],
+    //   modules: [
+    //     path.resolve('./'),
+    //     path.resolve('./node_modules')
+    //   ]
+    // });
     config.module.rules.push({
       test: /\.svg$/,
       loader: 'svg-inline-loader'
