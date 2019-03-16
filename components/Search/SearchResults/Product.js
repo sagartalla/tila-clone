@@ -95,6 +95,7 @@ class Product extends Component {
   }
 
   addToCart(e) {
+    e.preventDefault();
     e.stopPropagation();
     const {
       productId,
@@ -255,8 +256,8 @@ class Product extends Component {
             {
             `${styles['product-items-main']} ${selectedProduct ? styles['active-product'] : ''}`}
             onClick = {() => this.routeChange(productId,variantId,catalogId,itemtype,index,pageNum)}>
-            <Link route={`/${country}/${language}/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemtype}`}>
-              <a>
+          <Link route={`/${country}/${language}/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemtype}`}>
+            <a>
           <div className={`${styles['product-items']}`}>
             {
               showLoader ? <div className={styles['loader-div']}>
@@ -294,11 +295,6 @@ class Product extends Component {
                   {variants.length > 0 && variants[selectedIndex].sellingPrice && getPriceAndOffer()}
                 </span>
               </div>
-              {/* <div className={styles['variant-info']}>
-                {
-                  _.map(variants, (variantValues, key) => <div key={key}>{`${key} : ${variantValues.join(', ')}`}</div>)
-                }
-              </div> */}
             </div>
             <div className={
                 `${selectedProduct ? `${styles['display-buttons']} ${styles['active-product']}`: ''}  ${styles['hover-show-date']} ${styles['pb-10']} ${styles['relative']}

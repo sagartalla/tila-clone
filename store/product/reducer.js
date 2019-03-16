@@ -20,7 +20,7 @@ const productReducer = typeToReducer({
       return Object.assign({}, state, {
         data: action.payload.data,
         variantsData: {
-          selectedVariantId: Object.keys(action.payload.data[0].variant_preferred_listings)[0]
+          selectedVariantId: Object.keys(action.payload.data[0].variant_preferred_listings || {})[0]
         },
         ui: { loading: true }
       });
@@ -72,6 +72,9 @@ const productReducer = typeToReducer({
     REJECTED: (state,action) => {
       return Object.assign({}, state, { error: action.payload.message, ui: {loading: false }});
     }
+  },
+  [actions.SET_SELECTED_PRODUCT_DATA]: (state, action) => {
+    return state;
   }
 }, initialState);
 
