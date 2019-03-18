@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
+import { toast } from 'react-toastify';
 
 import constants from '../helper/constants';
 
@@ -31,7 +32,7 @@ const addToCompare = ({
   const compareItems = getItem();
   const index = _.findIndex(compareItems.products, item => item.productId === productId);
   if (index > -1) {
-    alert('Same item cannot be added to compare');
+    toast.error('Same item cannot be added to compare');
     return {
       count: compareItems.products.length,
       compareItems,
@@ -49,23 +50,25 @@ const addToCompare = ({
   if (compareItems.products.length) {
     if (compareItems.itemtype === itemtype && compareItems.products.length < maxEle) {
       setItem(product);
+      toast.success('Item added to compare');
       return {
         count: product.products.length,
         compareItems: product,
       };
     } else if (compareItems.products.length >= maxEle) {
-      alert('Only five items can be compared at a time');
+      toast.error('Only five items can be compared at a time');
       return {
         count: maxEle,
         compareItems,
       };
     }
-    alert('Only similar item types can be compared');
+    toast.error('Only similar item types can be compared');
     return {
       count: compareItems.products.length,
       compareItems,
     };
   }
+  toast.success('Item added to compare');
   setItem(product);
   return {
     count: 1,
@@ -112,6 +115,7 @@ const removeCompareData = (id) => {
   if (compareItems.products.length === 0) {
     compareItems = itemFormat;
   }
+  toast.success('Item removed from compare');
   setItem(compareItems);
   return {
     count: compareItems.length,

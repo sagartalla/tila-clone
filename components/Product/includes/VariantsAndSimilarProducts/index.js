@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 import { bindActionCreators } from 'redux';
 import Cookies from 'universal-cookie';
+import { toast } from 'react-toastify';
 
 import { selectors, actionCreators } from '../../../../store/product';
 import Variant from './Variant';
@@ -64,8 +65,8 @@ class VariantsAndSimilarProducts extends Component {
         map: this.props.VariantsAndSimilarProducts.similarProducts.map,
         lastSelectionAttribute: key
       });
-      if(!pid){
-        alert('product not available!');
+      if (!pid) {
+        toast.warn('product not available!');
         return;
       }
       let newQuery = window.location.search;
