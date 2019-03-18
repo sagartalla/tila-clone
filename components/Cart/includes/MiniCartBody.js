@@ -15,7 +15,6 @@ const MiniCartBody = props => {
   const flag = data && items && items.length;
   const cnt = flag > 0 ? items.length : 0;
   const { CART_PAGE } = languageDefinations();
-
   return (
     <div>
       <div className={`${styles['cart-container']} ${styles['mini-cart']} ${styles['border-t']}`}>
@@ -30,7 +29,7 @@ const MiniCartBody = props => {
         <div>
           {
             items.map((item, index) => {
-              const { item_id, img,product_id, name, price, cur, quantity, max_limit, inventory, brand_name } = item;
+              const { item_id, img,product_id, name, offer_price, cur, quantity, max_limit, inventory, brand_name } = item;
               return (
                 <div key={item_id} className={`${styles['flex']} ${styles['pt-15']} ${styles['pb-15']} ${styles['border-b']} ${styles['min-items-list']}`}>
                   <Col md={2} sm={2} xs={2} className={`${styles['pl-0']} ${styles['pr-0']}`}>
@@ -53,7 +52,7 @@ const MiniCartBody = props => {
                       }
                     </div>
                     <div className={`${styles['flx-space-bw']} ${styles['pt-10']} ${styles['price-stepper-part']}`}>
-                      <span className={styles['fontW600']}>{price + ' ' + cur}</span>
+                      <span className={styles['fontW600']}>{offer_price + ' ' + cur}</span>
                       <span>
                         {
                           editCartDetails ?

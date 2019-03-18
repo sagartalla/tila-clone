@@ -50,7 +50,7 @@ const popover = ({
           }
           <div className={styles['t-row']}>
             <div className={`${styles['t-cell']} ${styles['pb-10']}`}>
-              <div>Dilevery Charges</div>
+              <div>Delivery Charges</div>
             </div>
             <div className={`${styles['t-cell']} ${styles['t-rt']}`}>Free</div>
           </div>
