@@ -25,10 +25,14 @@ const actionCreators = {
   })),
   addToCart: (params, wishlist_id, getCartData) => (dispatch, getState) => dispatch(cartActionCreators.addToCart(params)).then(() => {
     if (getCartData) {
-      dispatch(actionCreators.deleteWishlist(wishlist_id, false)).then(() => {
+      dispatch(actionCreators.deleteWishlist(wishlist_id, {
+        showToast: false,
+      })).then(() => {
         dispatch(cartActionCreators.getCartResults({}));
       });
-    } else { dispatch(actionCreators.deleteWishlist(wishlist_id, false)); }
+    } else {
+      dispatch(actionCreators.deleteWishlist(wishlist_id, { showToast: false }));
+    }
   }),
   addToWishlistAndFetch: loginReq(params => dispatch => dispatch(actionCreators.addToWishlist(params)).then(() => {
     dispatch(actionCreators.getWishlist());

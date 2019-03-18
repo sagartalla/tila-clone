@@ -17,7 +17,7 @@ const addToCart = (params) => {
   });
 }
 
-const removeCartItemApi = (params, showToast = true) => {
+const removeCartItemApi = (params, { showToast = true }) => {
   return axios.put(`${constants.CART_API_URL}/api/v1/cart/delete`, params).then(({ data }) => {
     if (showToast) {
       toast.success('Item deleted from Cart');

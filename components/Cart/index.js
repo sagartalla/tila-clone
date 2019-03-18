@@ -119,7 +119,9 @@ class Cart extends Component {
       wishlisted_price: item.price,
       wishlisted_currency: item.cur,
     });
-    this.props.removeCartItem(listing_id, false);
+    this.props.removeCartItem(listing_id, {
+      showToast: false,
+    });
   }
 
   addOrRemoveGift(id, val, params) {
