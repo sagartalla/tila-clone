@@ -174,9 +174,11 @@ class CartItem extends React.Component {
                     <a onClick={() => routeChange(variant_id, product_id, catalogId, itemType)}>{name}</a>
                   </h4>
                   <div className={`${styles['warranty-part']} ${styles['p-10']} ${styles['light-gry-clr']}`}>
-                    <div className={`${styles['flx-spacebw-alignc']} ${styles['fontW600']} ${styles['p-5']} ${styles['fs-12']} ${styles['warrenty-part']}`}>
-                      {cartData.items ? <Warranty warranty={cartData.items[index].warranty_duration} /> : null}
-                    </div>
+                    {cartData.items ? <p className={`${styles['mb-0']} ${styles['fs-12']}`}>
+                      <span>Warranty : </span>
+                       <span className={`${styles['pl-10']} ${styles['pr-10']}`}><Warranty warranty={cartData.items[index].warranty_duration} /></span>
+                        </p>
+                        : null}
                     <p className={`${styles['mb-0']} ${styles['fs-12']}`}>
                       <span>{CART_PAGE.SHIPPING} : </span>
                       <span className={`${styles['pl-10']} ${styles['pr-10']}`}>{CART_PAGE.REGULAR_SHIPPING}  ({shipping.shipping_fees + ' ' + cur}) - <span className={`${styles['fs-12']} ${styles['base-font']}`}>{CART_PAGE.ETA_DELIVERY_BY} {moment().add(shipping.shipping_days, 'days').format('LL')}</span>

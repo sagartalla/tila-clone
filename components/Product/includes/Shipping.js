@@ -67,7 +67,10 @@ class Shipping extends Component {
                     }
                   </div>
                   {this.props.warranty ?
-                    <Warranty warranty={this.props.warranty}/>
+                    <div className={`${styles['flex-center']} ${styles['warenty-part-inn']}`}>
+                      <SVGCompoent clsName={`${styles['trust-icon']}`} src="icons/common-icon/trust-secure" /> &nbsp;
+                      <Warranty warranty={this.props.warranty} break={true}/>
+                    </div>
                   :
                   <div className={`${styles['flex-center']} ${styles['warenty-part-inn']}`}>
                     <span>{PDP_PAGE.NO_WARRANTY}</span> 
