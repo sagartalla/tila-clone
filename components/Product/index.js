@@ -10,7 +10,6 @@ import { selectors } from '../../store/product';
 import HeaderBar from '../HeaderBar/index';
 import Dispalay from './includes/Display';
 import TitleInfo from './includes/TitleInfo';
-import Offers from './includes/Offers';
 import Shipping from './includes/Shipping';
 
 import AddToCart from './includes/AddToCart';
