@@ -40,12 +40,12 @@ class Display extends Component {
     return (
       <div className={`${styles['ht-100per']}`}>
         {breadcrums.length > 0 &&
-          <div className={styles['p-10']}>
+          <div className={`${styles['breadcrums-part']} ${styles['fs-12']}`}>
             {breadcrums.map((crum, index) => (
               <span>
                 <Link route={this.getUrl(crum)}>{crum.display_name_en}</Link>
                 {breadcrums.length - 1 !== index &&
-                  <span>&nbsp;&nbsp;{'/'}&nbsp;&nbsp;</span>}
+                  <span className={`${styles['label-gry-clr']}`}>&nbsp;&nbsp;{'>'}&nbsp;&nbsp;</span>}
               </span>
             ))}
           </div>

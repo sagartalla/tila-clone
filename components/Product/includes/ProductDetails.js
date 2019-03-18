@@ -19,11 +19,21 @@ const ProductDetails = ({ details, keyfeatures, isPreview, productInfo }) => {
         details
           ?
           <div className={styles['border-b']}>
-            <h4 className={`${styles['fs-12']} ${styles['fontW600']} ${styles['mb-5']} ${styles['mt-0']} ${styles['flx-space-bw']}`}>
-              <span>{PDP_PAGE.PRODUCT_DETAILS}</span>
-              <SVGCompoent clsName={`${styles['expand-icon']}`} src="icons/common-icon/down-arrow-circle" />
-            </h4>
-            <p className={`${styles['fs-12']} ${styles['fontW300']} ${styles['sub-decryption']}`}>{details}</p>
+            <PanelGroup accordion>
+              <Panel eventKey="1">
+                <Panel.Heading>
+                  <Panel.Title toggle className={styles['key-feature-inn']}>
+                    <h4 className={`${styles['fs-12']} ${styles['fontW600']} ${styles['mb-5']} ${styles['mt-0']} ${styles['flx-space-bw']}`}>
+                      <span>{PDP_PAGE.PRODUCT_DETAILS}</span>
+                      <SVGCompoent clsName={`${styles['expand-icon']}`} src="icons/down-arrow/down-arrow" />
+                    </h4>
+                  </Panel.Title>
+                </Panel.Heading>
+                <Panel.Body collapsible>
+                  <p className={`${styles['fs-12']} ${styles['fontW300']} ${styles['sub-decryption']}`}>{details}</p>
+                </Panel.Body>
+              </Panel>
+            </PanelGroup>
           </div>
           :
           null
@@ -50,12 +60,12 @@ const ProductDetails = ({ details, keyfeatures, isPreview, productInfo }) => {
       */}
       <div className={styles['pt-10']}>
         <PanelGroup accordion defaultActiveKey="2">
-          <Panel eventKey="1">
+          <Panel eventKey="2">
             <Panel.Heading>
               <Panel.Title toggle className={styles['key-feature-inn']}>
-                <h4 className={`${styles['fs-12']} ${styles['fontW600']} ${styles['mb-5']} ${styles['mt-0']} ${styles['flx-space-bw']}`}>
+                <h4 className={`${styles['fs-14']} ${styles['fontW600']} ${styles['mb-5']} ${styles['mt-0']} ${styles['flx-space-bw']}`}>
                   <span>Key features</span>
-                  {/* <SVGCompoent clsName={`${styles['expand-icon']}`} src="icons/common-icon/down-arrow-circle" /> */}
+                  <SVGCompoent clsName={`${styles['expand-icon']}`} src="icons/down-arrow/down-arrow" />
                   {/* <span className={styles['fs-16']}>+</span> */}
                 </h4>
               </Panel.Title>

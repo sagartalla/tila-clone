@@ -104,7 +104,7 @@ class MegaMenu extends Component {
 
     return (
       <div>
-        <Grid>
+        <Grid className={`${styles['pl-0']}`}>
         <nav className={`${styles['megamenu-wrapper']} ${styles['flx-spacebw-alignc']} ${styles[this.state.colorScheme]}`}>
           <ul className={styles['mb-0']}>
             {
