@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import NoSSR from 'react-no-ssr';
-
 import VariantsAndSimilarProducts from './VariantsAndSimilarProducts';
 import KeyFeatures from './KeyFeatures';
 import SVGCompoent from '../../common/SVGComponet';
 import Accordian from '../../common/Accordian';
 import { mergeCss } from '../../../utils/cssUtil';
 import { languageDefinations } from '../../../utils/lang';
+import SizeChart from '../includes/SizeChart/index';
 import { PanelGroup,Panel, Heading, Body, Title } from 'react-bootstrap';
 const styles = mergeCss('components/Product/product');
 const { PDP_PAGE } = languageDefinations();
 
-const ProductDetails = ({ details, keyfeatures, isPreview }) => {
+const ProductDetails = ({ details, keyfeatures, isPreview, productInfo }) => {
   return (
     <div className={`${styles['product-details-main']} ${styles['border-radius4']} ${styles['mb-10']} ${styles['box']}`}>
       {
@@ -33,6 +33,9 @@ const ProductDetails = ({ details, keyfeatures, isPreview }) => {
           isPreview ? null : <VariantsAndSimilarProducts />
         }
       </NoSSR>
+      {<SizeChart
+        productInfo={productInfo}
+      />}
       {/*
         <div className={`${styles['flex']} ${styles['pt-10']} ${styles['pb-10']} ${styles['border-b']}`}>
           <span className={`${styles['fontW600']} ${styles['pr-20']}`}>
