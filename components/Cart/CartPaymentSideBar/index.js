@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { languageDefinations } from '../../../utils/lang/';
 import SVGComponent from '../../common/SVGComponet';
-import { actionCreators } from '../../../store/cam/coupons';
+import { actionCreators } from '../../../store/coupons';
 import InstantCheckout from '../../common/InstantCheckout';
 import { actionCreators as cartActioncreators } from '../../../store/cart';
 
@@ -29,7 +29,7 @@ class CartAndPaymentSideBar extends Component {
     const {
       checkoutBtnHandler, showCheckoutBtn, showInstant,
       hideUpSell, showStepper, increaseItemCnt, decreaseItemCnt,
-      insnt_item_listing_id, isPdp, couponData, getCartResults, viewData, hideCouponCode,
+      insnt_item_listing_id, isPdp, couponData, getCartResults, data, hideCouponCode,
     } = this.props;
     const {
       items, total_price, total_offer_price,
@@ -43,13 +43,13 @@ class CartAndPaymentSideBar extends Component {
             <span className={styles['pl-5']}>{COUPON_OFFERS.BUY_AND_EARN}</span>
           </h4>
           {
-          hideCouponCode ? null : viewData.coupon_code ?
+          hideCouponCode ? null : data.coupon_code ?
             <span className={`${styles['p-10']} ${styles['m-20']} ${styles['applied-coupon']} ${styles.flex} ${styles['flex-center']}`}>
               <SVGComponent clsName={`${styles['coupon-code']}`} src="icons/common-icon/coupon-code" />
               <span className={`${styles['pl-5']} ${styles.flex} ${styles.width100} ${styles['flex-center']} ${styles['justify-between']} `}>
                 <div>
                   <div className={`${styles.applied}`}>{COUPON_OFFERS.OFFER_APPLIED}</div>
-                  <div >{viewData.coupon_code}</div>
+                  <div >{data.coupon_code}</div>
                 </div>
                 <div className={`${styles.pointer} ${styles['lgt-blue']}`} onClick={this.props.openSlider}>{COUPON_OFFERS.CHANGE}</div>
               </span>
@@ -147,14 +147,6 @@ CartAndPaymentSideBar.defaultProps = {
   applyTheCoupon: f => f,
   openSlider: f => f,
 };
-const mapStateToProps = ({ cartReducer }) => {
-  const {
-    data,
-  } = cartReducer;
-  return {
-    viewData: data,
-  };
-};
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
@@ -165,4 +157,4 @@ const mapDispatchToProps = dispatch =>
     dispatch,
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(CartAndPaymentSideBar);
+export default connect(mapDispatchToProps)(CartAndPaymentSideBar);

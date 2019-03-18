@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Modal } from 'react-bootstrap';
-import moment from 'moment';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Cookie from 'universal-cookie';
@@ -10,7 +9,7 @@ import Input from '../../../common/Input';
 import { languageDefinations } from '../../../../utils/lang/';
 import { mergeCss } from '../../../../utils/cssUtil';
 import { actionCreators } from '../../../../store/cart';
-import { actionCreators as couponActionCreators, selectors as couponSelectors } from '../../../../store/cam/coupons';
+import { actionCreators as couponActionCreators, selectors as couponSelectors } from '../../../../store/coupons';
 
 const { COUPON_OFFERS } = languageDefinations();
 const cookies = new Cookie();
@@ -136,44 +135,41 @@ render() {
         {errorMsg ? <span className={styles['error-msg']}>{errorMsg}</span> : couponApplied ? '' : <span className={styles['error-msg']}>The Coupon applied is invalid</span>}
       </div>
       <div className={styles.applyCoupon}>
-        {couponData && couponData.length > 0 ? couponData.map(data =>
-            (
-              (moment(data.ends_on).toDate().getTime() >= moment().toDate().getTime()) &&
-              <div className={styles.couponDiv}>
-                <div className={`${styles.flex}`}>
-                  <div className={data.offer_sub_type === 'LISTING' ? `${styles.couponCodeListing}` : data.offer_sub_type === 'BANK' ? `${styles.couponCodeBank}` : `${styles.couponCodeCategory}`}>
-                    <div className={`${styles['align-end']} ${styles.flex}`}>
-                      <div className={`${styles['fs-10']} ${styles.textColor} `}>{data.offer_currency}</div>
+        {couponData && couponData.length > 0 && couponData.map(data =>
+          (
+            <div className={styles.couponDiv}>
+              <div className={`${styles.flex}`}>
+                <div className={data.offer_sub_type === 'LISTING' ? `${styles.couponCodeListing}` : data.offer_sub_type === 'BANK' ? `${styles.couponCodeBank}` : `${styles.couponCodeCategory}`}>
+                  <div className={`${styles['align-end']} ${styles.flex}`}>
+                    <div className={`${styles['fs-10']} ${styles.textColor} `}>{data.offer_currency}</div>
                        &nbsp;
-                      <div className={`${styles.ellipsis}`} title={data.coupon_code}>{data.coupon_code}</div>
-                    </div>
-                  </div>
-                  <div className={data.offer_sub_type === 'LISTING' ? `${styles.listingColor} ${styles.couponOffer} ` : data.offer_sub_type === 'BANK' ? `${styles.bankColor} ${styles.couponOffer}` : `${styles.categoryColor} ${styles.couponOffer}`}>
-                    <div className={`${styles.ellipsis}`} title={(data.offer_sub_type === 'LISTING' || data.offer_sub_type === 'PRODUCT' || data.offer_sub_type === 'ITEM_TYPE') ? 'Category Offer' : data.offer_sub_type === 'BANK' ? 'Bank Offer' : 'Brand Offer'}>
-                      {(data.offer_sub_type === 'LISTING' || data.offer_sub_type === 'PRODUCT' || data.offer_sub_type === 'ITEM_TYPE') ? 'Category Offer' : data.offer_sub_type === 'BANK' ? 'Bank Offer' : 'Brand Offer'}
-                    </div>
+                    <div className={`${styles.ellipsis}`} title={data.coupon_code}>{data.coupon_code}</div>
                   </div>
                 </div>
-                <div className={`${styles.wordBreak} ${styles['p-5']}`}>{data.description}</div>
-                <div className={`${styles['p-5']} ${styles['flex-center']} ${styles['justify-between']} ${styles.flex}`}>
-                  <div className={`${styles['lgt-blue']} ${styles.pointer} ${styles.flex}`} onClick={this.showTerms(data)}>{COUPON_OFFERS.VIEW_TERMS}
-                    <div className={styles.border} />
+                <div className={data.offer_sub_type === 'LISTING' ? `${styles.listingColor} ${styles.couponOffer} ` : data.offer_sub_type === 'BANK' ? `${styles.bankColor} ${styles.couponOffer}` : `${styles.categoryColor} ${styles.couponOffer}`}>
+                  <div className={`${styles.ellipsis}`} title={(data.offer_sub_type === 'LISTING' || data.offer_sub_type === 'PRODUCT' || data.offer_sub_type === 'ITEM_TYPE') ? 'Category Offer' : data.offer_sub_type === 'BANK' ? 'Bank Offer' : 'Brand Offer'}>
+                    {(data.offer_sub_type === 'LISTING' || data.offer_sub_type === 'PRODUCT' || data.offer_sub_type === 'ITEM_TYPE') ? 'Category Offer' : data.offer_sub_type === 'BANK' ? 'Bank Offer' : 'Brand Offer'}
                   </div>
-                  <div className={`${styles['lgt-blue']} ${styles.pointer}`} onClick={this.showHowtoUse(data)}>{COUPON_OFFERS.HOW_TO_USE}</div>
-                  {/* {couponApplied.coupon_applied && couponApplied.coupon_code === newCouponCode ?
+                </div>
+              </div>
+              <div className={`${styles.wordBreak} ${styles['p-5']}`}>{data.description}</div>
+              <div className={`${styles['p-5']} ${styles['flex-center']} ${styles['justify-between']} ${styles.flex}`}>
+                <div className={`${styles['lgt-blue']} ${styles.pointer} ${styles.flex}`} onClick={this.showTerms(data)}>{COUPON_OFFERS.VIEW_TERMS}
+                  <div className={styles.border} />
+                </div>
+                <div className={`${styles['lgt-blue']} ${styles.pointer}`} onClick={this.showHowtoUse(data)}>{COUPON_OFFERS.HOW_TO_USE}</div>
+                {/* {data.coupon_applied ?
                     <div className={`${styles.flex}`}>
                       <img src="/static/img/icons/common-icon/green-tick.svg" alt="checked" />
                       <div className={`${styles.applied} ${styles['p-10']}`}>
                       {COUPON_OFFERS.APPLIED}</div>
                     </div>
                   : */}
-                  <Button className={`${styles['fp-btn-default']}`} btnText={COUPON_OFFERS.APPLY} onClick={this.handleApply(data)} />
-                  {/* } */}
-                </div>
+                <Button className={`${styles['fp-btn-default']}`} btnText={COUPON_OFFERS.APPLY} onClick={this.handleApply(data)} />
+                {/* } */}
               </div>
+            </div>
           ))
-          :
-        <span className={styles['error-msg']}>{COUPON_OFFERS.NO_COUPONS}</span>
         }
       </div>
       <div>
