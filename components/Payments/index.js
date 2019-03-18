@@ -117,8 +117,13 @@ class Payments extends React.Component {
 
   //TODO Show loader on clicking on login button.
   showAddressTab() {
+    const serverData = {
+      channel: 'BASIC_AUTH',
+      metadata: this.state.login,
+      rememberMe: true,
+    }
     this.setState({ signInLoader: true });
-    this.props.userLogin(this.state.login);
+    this.props.userLogin(serverData);
     const paymentConfigJson = { ...this.state.paymentConfigJson };
     paymentConfigJson['signIn'] = { basic: false, progress: false, done: true };
     this.setState({paymentConfigJson});
