@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
 import DatePicker from 'rc-calendar/lib/Picker';
 import moment from 'moment';
+import { toast } from 'react-toastify';
 
 import Btn from '../../../common/Button';
 import Input from '../../../common/Input';
@@ -17,27 +18,27 @@ const styles = mergeCss('components/Cam/PersonelDetails/profile');
 
 class UpdatePersonalInfoModal extends React.Component {
   state = {
-    user_name: "",
-    user_gender: "",
+    user_name: '',
+    user_gender: '',
     user_dob: moment(new Date()),
     show: this.props.show,
     responseState: false
   };
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.userInfo.personalInfo && Object.keys(nextProps.userInfo.personalInfo).length > 0 && this.state.user_name == "" && this.state.user_gender == "") {
+    if (nextProps.userInfo.personalInfo && Object.keys(nextProps.userInfo.personalInfo).length > 0 && this.state.user_name == '' && this.state.user_gender == '') {
       this.setState({
         user_name: nextProps.userInfo.personalInfo.user_name,
         user_gender: nextProps.userInfo.personalInfo.gender,
-        user_dob: nextProps.userInfo.personalInfo.dob != "" && nextProps.userInfo.personalInfo.dob ? moment(new Date(nextProps.userInfo.personalInfo.dob)) : moment(new Date()),
+        user_dob: nextProps.userInfo.personalInfo.dob != '' && nextProps.userInfo.personalInfo.dob ? moment(new Date(nextProps.userInfo.personalInfo.dob)) : moment(new Date()),
         show: nextProps.show
       })
     }
-    if (nextProps.getEditPersonalInfoStatus && nextProps.getEditPersonalInfoStatus.Response == "SUCCESS" && nextProps.userInfo.personalInfo && !this.state.responseState) {
+    if (nextProps.getEditPersonalInfoStatus && nextProps.getEditPersonalInfoStatus.Response == 'SUCCESS' && nextProps.userInfo.personalInfo && !this.state.responseState) {
       this.setState({
         user_name: nextProps.userInfo.personalInfo.user_name,
         user_gender: nextProps.userInfo.personalInfo.gender,
-        user_dob: nextProps.userInfo.personalInfo.dob != "" && nextProps.userInfo.personalInfo.dob ? moment(new Date(nextProps.userInfo.personalInfo.dob)) : moment(new Date()),
+        user_dob: nextProps.userInfo.personalInfo.dob != '' && nextProps.userInfo.personalInfo.dob ? moment(new Date(nextProps.userInfo.personalInfo.dob)) : moment(new Date()),
         show: nextProps.show,
         responseState: true
       })
@@ -47,8 +48,8 @@ class UpdatePersonalInfoModal extends React.Component {
   handleClose = () => {
     this.setState({
       user_dob: moment(new Date()),
-      user_name: "",
-      user_gender: "",
+      user_name: '',
+      user_gender: '',
       show: false
     });
     this.props.handleShow(false)();
@@ -66,7 +67,6 @@ class UpdatePersonalInfoModal extends React.Component {
     })
   }
 
-
   handleGenderChange = (val) => (e) => {
     this.setState({ user_gender: val });
   }
@@ -74,23 +74,23 @@ class UpdatePersonalInfoModal extends React.Component {
   handleSubmit = () => {
     const { user_name, user_dob, user_gender } = this.state;
     this.setState({ responseState: false });
-    let [first_name, ...second_name] = user_name.split(" ");
-    second_name = second_name.join(" ");
-    if(user_name && user_dob && user_gender){
+    let [first_name, ...second_name] = user_name.split(' ');
+    second_name = second_name.join(' ');
+    if (user_name && user_dob && user_gender) {
       this.props.EditPersonalInfo({
-        "first_name": first_name ? first_name : "",
-        "dob": user_dob.format("YYYY-MM-DD"),
-        "gender": user_gender,
-        "last_name": second_name ? second_name : "",
-        "image_url": ""
+        first_name: first_name ? first_name : '',
+        dob: user_dob.format('YYYY-MM-DD'),
+        gender: user_gender,
+        last_name: second_name ? second_name : '',
+        image_url: ''
       });
       this.handleClose();
-      alert("Your personal information has been updated.");
-    }else{
-      alert("Fill in all the fields");
+      toast.success('Your personal information has been updated.');
+    } else {
+      toast.error('Fill in all the fields');
     }
-    
   }
+
   render() {
     const calendar = (
       <Calendar />
@@ -112,14 +112,14 @@ class UpdatePersonalInfoModal extends React.Component {
             </div>
             <div className={`${styles['m-5']} ${styles['mt-20']} ${styles['gender-select-main']} ${styles['flex-center']} ${styles['justify-center']}`}>
               <div className={styles['t-c']}>
-                <a onClick={this.handleGenderChange("M")} className={user_gender == 'M' ? `${styles['gender-select']}` : `${styles['gender-unselect']}`}>
+                <a onClick={this.handleGenderChange('M')} className={user_gender == 'M' ? `${styles['gender-select']}` : `${styles['gender-unselect']}`}>
                   <SVGComponent clsName={`${styles['gender-select-inn']} ${user_gender == 'M' ? 'select-icon' : 'not-select-icon'}`} src="icons/common-icon/male" />
                   <span className={`${styles['fs-12']} ${styles['label-gry-clr']}`}>Male</span>
                 </a>
               </div>
               <div className={`${styles['fs-12']} ${styles['ml-10']} ${styles['mr-10']} ${styles['gender-or']} ${styles['flex-center']} ${styles['justify-center']}`}>or</div>
-              <div className={styles['t-c']} onClick={this.handleGenderChange("F")}>
-                <a onClick={this.handleGenderChange("M")} className={user_gender == 'F' ? `${styles['gender-select']}` : `${styles['gender-unselect']}`}>
+              <div className={styles['t-c']} onClick={this.handleGenderChange('F')}>
+                <a onClick={this.handleGenderChange('M')} className={user_gender == 'F' ? `${styles['gender-select']}` : `${styles['gender-unselect']}`}>
                   <SVGComponent clsName={`${styles['gender-select-inn']} ${user_gender == 'F' ? 'select-icon' : 'not-select-icon'}`} src="icons/common-icon/female" />
                   <span className={`${styles['fs-12']} ${styles['label-gry-clr']}`}>Female</span>
                 </a>

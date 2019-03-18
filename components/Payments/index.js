@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Grid, Row, Col } from 'react-bootstrap';
 import Cookies from 'universal-cookie';
+import { toast } from 'react-toastify';
 
 import Cart from '../Cart';
 import SignIn from './includes/SignIn';
@@ -116,8 +117,13 @@ class Payments extends React.Component {
 
   //TODO Show loader on clicking on login button.
   showAddressTab() {
+    const serverData = {
+      channel: 'BASIC_AUTH',
+      metadata: this.state.login,
+      rememberMe: true,
+    }
     this.setState({ signInLoader: true });
-    this.props.userLogin(this.state.login);
+    this.props.userLogin(serverData);
     const paymentConfigJson = { ...this.state.paymentConfigJson };
     paymentConfigJson['signIn'] = { basic: false, progress: false, done: true };
     this.setState({paymentConfigJson});
@@ -170,7 +176,7 @@ class Payments extends React.Component {
       paymentConfigJson['payment'] = { basic: true, progress: false, done: false };
       this.setState({ paymentConfigJson, editCartDetails: !editCartDetails });
     } else {
-      alert('Please add a delivery address.');
+      toast.info('Please add a delivery address.');
     }
 
   }

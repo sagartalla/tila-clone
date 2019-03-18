@@ -15,7 +15,7 @@ const getWishListResults = (store) => {
       newData.push({
         wishlist_id: item.wishlist_id,
         listing_id: variant_info.listing_id,
-        product_id: variant_info.product_id,
+        product_id: item.product_id,
         variant_id: variant_info.variant_id,
         name: item && item.product_details && item.product_details.product_details_vo.cached_product_details.attribute_map.calculated_display_name.attribute_values[0].value,
         brand_name: item && item.product_details && item.product_details.catalog_details.attribute_map.brand.attribute_values[0].value,

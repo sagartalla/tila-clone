@@ -33,6 +33,7 @@ const CartBody = ({
   isLoading,
   openSlider,
   isError,
+  cartData,
 }) => {
   const { items, error } = data;
   const flag = data && items && items.length;
@@ -46,7 +47,7 @@ const CartBody = ({
   return (
     isLoading ?
       cartPlaceHolder
-          : 
+          :
     <div className={styles['cart-container']}>
       {
         showBlocker ? <Blocker /> : ''
@@ -62,10 +63,10 @@ const CartBody = ({
         flag > 0 ?
           <Row className={styles['mr-0']}>
             <Col md={9} sm={12} xs={12} className={styles['pr-5']}>
-            
+
               <div>
                 {
-                  items.map(item => (
+                  items.map((item,index) => (
                     <CartItem
                       item={item}
                       count={count}
@@ -76,6 +77,8 @@ const CartBody = ({
                       removeCartItem={removeCartItem}
                       cartStepperInputHandler={cartStepperInputHandler}
                       addOrRemoveGift={addOrRemoveGift}
+                      cartData={cartData}
+                      index={index}
                     />
                 ))}
 

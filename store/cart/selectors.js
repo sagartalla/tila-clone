@@ -37,8 +37,9 @@ const getCartResults = (store) => {
           brand_name: item && item.product_details && item.product_details.catalog_details.attribute_map.brand.attribute_values[0].value,
           gift_info: item.gift_info,
           shipping: item.listing_info.shipping,
-          catalogId: item && item.product_details && item.product_details.catalog_details.catalog_id,
-          itemType: item && item.product_details && item.product_details.catalog_details.item_type_name,
+          catalogId: item.product_details.catalog_details.catalog_id,
+          itemType: item.product_details.catalog_details.item_type_name,
+          warranty_duration: item.listing_info.warranty_policy.policies.TILA,
           warranty: _.groupBy(item.listing_info.warranty_details, 'type')['MANUFACTURER'] || [{}],
           discount: item.listing_info.pricing && item.listing_info.pricing.discount_per_mrp,
           mrp: item.listing_info.pricing && item.listing_info.pricing.mrp,
@@ -74,8 +75,9 @@ const isAddedToCart = (store) => {
     });
     return !!selectedCartItem;
   } catch (e) {
-
   }
-}
+};
 
-export { getCartResults, getLoadingStatus, getErrorMessege, isAddedToCart };
+const getBtnLoaders = store => store.cartReducer.ui.btnLoading;
+
+export { getCartResults, getLoadingStatus, getErrorMessege, isAddedToCart, getBtnLoaders }

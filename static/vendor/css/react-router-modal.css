@@ -34,7 +34,7 @@
 /* mobile devices, particularly iOS, have some quirks to work around */
 @media only screen and (max-device-width: 1024px) {
   .react-router-modal__modal-open {
-    position: fixed;
+    /* position: fixed; */
     overflow: hidden;
     -webkit-overflow-scrolling: touch;
   }

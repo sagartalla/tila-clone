@@ -90,7 +90,7 @@ class SearchResults extends Component {
           loadMore={this.loadMore}
           hasMore={pagiantionDetails.hasMore}
           loader={<div className={styles['loader']} key={0}>Loading ...</div>}
-          className={`${styles['grid-cont']} ${styles['flex']} ${styles['flex-wrp']}`}
+          className={`${styles['grid-cont']} ${styles['flex']} ${styles['flex-wrp']} ${styles['search-main-part']}`}
 
         >
           {results.items.map((item,index) => (

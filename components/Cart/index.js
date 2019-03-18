@@ -5,10 +5,10 @@ import { Router } from '../../routes';
 import { Row, Col, Grid } from 'react-bootstrap';
 import Cookie from 'universal-cookie';
 import { bindActionCreators } from 'redux';
+import { toast } from 'react-toastify';
 
 import { actionCreators, selectors } from '../../store/cart';
 import { actionCreators as wishlistActionCreators, selectors as wishlistSelectors } from '../../store/cam/wishlist';
-
 import HeaderBar from '../HeaderBar/index';
 import CartBody from './includes/CartBody';
 import MiniCartBody from './includes/MiniCartBody';
@@ -80,8 +80,8 @@ class Cart extends Component {
     const newRes = cartData.items.filter(data => data.inventory == 0);
 
     if (newRes.length) {
-      alert('There is some issue with cart items.');
-    } else { 
+      toast.warn('There is some issue with cart items.');
+    } else
       Router.pushRoute(`/${country}/${language}/payment`);
     }
   }
@@ -132,7 +132,9 @@ class Cart extends Component {
       wishlisted_price: item.price,
       wishlisted_currency: item.cur,
     });
-    this.props.removeCartItem(listing_id);
+    this.props.removeCartItem(listing_id, {
+      showToast: false,
+    });
   }
 
   addOrRemoveGift(id, val, params) {
@@ -180,6 +182,7 @@ class Cart extends Component {
                     addOrRemoveGift={this.addOrRemoveGift}
                     checkoutBtnHandler={this.checkoutBtnHandler}
                     cartStepperInputHandler={this.cartStepperInputHandler}
+                    cartData={cartData}
                   />
                 </Grid>
                 <FooterBar />
