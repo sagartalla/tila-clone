@@ -6,6 +6,7 @@ import getConfig from 'next/config'
 import constants from './constants';
 import { pimServiceInstance } from './services';
 import Cookie from 'universal-cookie';
+import { toast } from 'react-toastify';
 
 const config = getConfig()
 const env = config.publicRuntimeConfig.env;
@@ -68,19 +69,24 @@ const apmResInterceptor = (response) => {
 
 const errorInterceptor = (err) => {
   try {
-    if (err.response && err.response.status == '401') {
-      const { refresh_token } =  cookies.get('auth') || {};
-      if(refresh_token) {
-        return axios.post(`/api/refresh`, {
-          'auth_version': 'V1',
-          'refresh_token': refresh_token
-        }).then((res) => {
-          return axios(err.config);
-        }).catch((err) => {
-          location.reload();
-        });
+    if (err.response && err.response.status) {
+      if (err.response.status == '401') {
+        const { refresh_token } =  cookies.get('auth') || {};
+        if(refresh_token) {
+          return axios.post(`/api/refresh`, {
+            'auth_version': 'V1',
+            'refresh_token': refresh_token
+          }).then((res) => {
+            return axios(err.config);
+          }).catch((err) => {
+            location.reload();
+          });
+        } else {
+          cookies.remove('auth');
+        }
       } else {
         cookies.remove('auth');
+        toast.error(`${err.response.status} : ${err.response.data.error}`);
       }
     }
   } catch (e) {
