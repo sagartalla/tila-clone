@@ -1,11 +1,13 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import PropTypes from 'prop-types';
+import { toast } from 'react-toastify';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
 import Btn from '../../../common/Button';
 import Input from '../../../common/Input';
 import { languageDefinations } from '../../../../utils/lang/';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { actionCreators, selectors } from '../../../../store/cam/personalDetails';
 import SVGComponent from '../../../common/SVGComponet';
 import { mergeCss } from '../../../../utils/cssUtil';
@@ -38,7 +40,7 @@ class EditPassword extends React.Component {
       if (nextProps.passwordResetStatus.Response == "SUCCESS") {
         this.setState({ error: "" });
         this.handleClose();
-        alert(EDIT_PASSWORD_MODAL.PASSWORD_SUCCESS_MESSAGE);
+        toast.success(EDIT_PASSWORD_MODAL.PASSWORD_SUCCESS_MESSAGE);
       }
     }
 

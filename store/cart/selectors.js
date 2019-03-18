@@ -73,8 +73,9 @@ const isAddedToCart = (store) => {
     });
     return !!selectedCartItem;
   } catch (e) {
-
   }
-}
+};
 
-export { getCartResults, getLoadingStatus, getErrorMessege, isAddedToCart };
+const getBtnLoaders = store => store.cartReducer.ui.btnLoading;
+
+export { getCartResults, getLoadingStatus, getErrorMessege, isAddedToCart, getBtnLoaders }
