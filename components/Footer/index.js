@@ -371,10 +371,10 @@ const FooterBar = props => (
           <Col md={3} sm={3} className={styles['ipad-pr-0']}>
             <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['black-color']}`}>{FOOTER_PAGE.POLICY}</h4>
             <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
-              <li><a href="/policy/tc" target="_blank">{FOOTER_PAGE.TERMS_CONDITION}</a></li>
-              <li><a href="/policy/re" target="_blank">{FOOTER_PAGE.REFUND_POLICY}</a></li>
-              <li><a href="/policy/wp" target="_blank">{FOOTER_PAGE.WARRENTY_POLICY}</a></li>
-              <li><a href="/policy/sp" target="_blank">{FOOTER_PAGE.SHIPPING_POLICY}</a></li>
+              <li><a href="policy/tc" target="_blank">{FOOTER_PAGE.TERMS_CONDITION}</a></li>
+              <li><a href="policy/re" target="_blank">{FOOTER_PAGE.REFUND_POLICY}</a></li>
+              <li><a href="policy/wp" target="_blank">{FOOTER_PAGE.WARRENTY_POLICY}</a></li>
+              <li><a href="policy/sp" target="_blank">{FOOTER_PAGE.SHIPPING_POLICY}</a></li>
             </ul>
           </Col>
           {/*<Col md={2} sm={2} className={styles['ipad-pr-0']}>
