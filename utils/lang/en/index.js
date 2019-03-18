@@ -21,7 +21,7 @@ export const EN_KEYWORDS = {
     'MOVE_TO_WISHLIST': 'Move to Wishlist',
     'SEND_GIFT': 'Send this as a gift',
     'SHIPPING': 'Shipping',
-    'WARRENTY': 'Warrenty',
+    'WARRENTY': 'Warranty',
     'WARRENTY_TXT': 'Months Extended Manufacturer Warranty',
     'ETA_DELIVERY_BY': 'Estimated Delivery by',
     'REGULAR_SHIPPING': 'Regular Shipping',
@@ -97,7 +97,8 @@ export const EN_KEYWORDS = {
   },
   WISH_LIST_PAGE: {
     'WISHLIST_HEADER': 'items in wishlist',
-    'ADD_TO_CART_BTN': 'MOVE TO CART'
+    'ADD_TO_CART_BTN': 'MOVE TO CART',
+    'NOTIFY_ME_BTN': 'Notify Me'
   },
   PDP_PAGE: {
     'LOADING_REVIEWS': 'Loading Reviews...',
@@ -118,6 +119,7 @@ export const EN_KEYWORDS = {
     'PRODUCT_DETAILS': 'PRODUCT DETAILS',
     'ADD_TO_CART': 'Add To Cart',
     'BUY_NOW': 'Buy Now',
+    'NOTIFY_ME': 'Notify Me',
     'BUY_FOR': 'BUY FOR',
     'ADDED_TO_CART': 'In Cart',
     // //New keys
@@ -212,7 +214,6 @@ export const EN_KEYWORDS = {
     'EDIT_PHONE_NUMBER': 'Edit Phone Number',
     'ENTER': 'Enter',
     'RESEND': 'Resend',
-    'PROFILE_CREATION_SUCCESS_MESSAGE': 'Your profile is complete. You can edit or change any details at anytime you want',
     'THANK_YOU': 'Thank You',
     'MALE': 'Male',
     'FEMALE': 'Female',
@@ -221,18 +222,19 @@ export const EN_KEYWORDS = {
   },
   EDIT_PASSWORD_MODAL: {
     'PASSWORD_SUCCESS_MESSAGE': 'Your password is changed successfully!!',
-    'MATCH_ERROR_MESSAGE': 'Passwords must match',
+    'MATCH_ERROR_MESSAGE': 'The passwords entered do not match. Please try again.',
     'EMPTY_ERROR_MESSAGE': 'Password cannot be empty',
     'HEADING': 'Change Password',
-    'ENTER_PASSWORD_MESSAGE': 'Enter Old Password',
-    'ENTER_NEW_PASSWORD_MESSAGE': 'Enter New Password',
-    'RE_ENTER_PASSWORD_MESSAGE': 'Re-enter New Password',
+    'ENTER_PASSWORD_MESSAGE': 'Enter old password',
+    'ENTER_NEW_PASSWORD_MESSAGE': 'Enter new password',
+    'RE_ENTER_PASSWORD_MESSAGE': 'Re-enter new password',
     'SUBMIT_BUTTON': 'Change Password',
-    'PASSWORD_LENGTH_MESSAGE': 'Be at least 8 characters in length Not be same as your current password',
-    'PASSWORD_LENGTH': 'Your password must be at least 8 characters long.'
+    'PASSWORD_LENGTH_MESSAGE': 'Your password should be 8 characters in length and should not be the same as your old password.',
+    'PASSWORD_LENGTH': 'Your password must be at least 8 characters long.',
+    'SAME_PASSWORD_MESSAGE': 'Make sure the new password is different from the password used before.',
   },
   PERSONAL_INFO_MODAL: {
-    'HEADING': 'Personel Information',
+    'HEADING': 'Personal Information',
     'EDIT': 'Edit',
     'NAME': 'Name',
     'DOB': 'Date Of Birth',
@@ -247,8 +249,8 @@ export const EN_KEYWORDS = {
     'BUTTON_LABEL': 'EDIT NOTIFICATIONS'
   },
   LINK_TO_SOCIAL_MEDIA: {
-    'HEADING': 'Link to Social Media',
-    'SUB_TITTLE': 'Easy one clicklogin when using your Social Media Accounts',
+    'HEADING': 'Link to social media',
+    'SUB_TITTLE': 'One click login/signup when using social media account.',
     'FACEBOOK': 'Facebook',
     'GOOGLE': 'Google',
     'TWITTER': 'Twitter',
@@ -350,9 +352,10 @@ export const EN_KEYWORDS = {
     'CAREERS': 'Careers',
     'CONTACT_US': 'Contact Us',
     'POLICY': 'POLICY',
-    'TERMS_CONDITION': 'Terms and conditions',
-    'PRIVACY_POLICY': 'Privacy Policy',
-    'COOKIE_POLICY': 'Cookie Policy',
+    'TERMS_CONDITION': 'User Terms and Conditions',
+    'REFUND_POLICY': 'Return and Exchange Policy',
+    'WARRENTY_POLICY': 'Warranty Policy',
+    'SHIPPING_POLICY': 'Shipping Policy ',
     'SELL_ON_TILA': 'Selling on TiLa.com',
     'HOW_WORKS': 'How It Works',
     'SELL_POLICY': 'Selling Policies',
@@ -369,6 +372,13 @@ export const EN_KEYWORDS = {
     'TILA_RIGHTS': '&copy; 2018 www.tila.com. All rights reserved'
 
   },
+  COMPARE: {
+    'TILA_COMPARE_1': 'Tila Comparing (',
+    'TILA_COMPARE_2': 'items) for you',
+    'FEATUERS': 'Features',
+    'CLEAR_ALL': 'Clear All',
+    'COMPARE': 'COMPARE',
+  },
   HEADER_PAGE: {
     'HELLO_GUEST': 'Hello Guest',
     'MY_ACCOUNT': 'My Account',
@@ -379,6 +389,7 @@ export const EN_KEYWORDS = {
     'LOGOUT': 'Logout',
     'SELL_WITH_TILA': 'Sell With Tila',
     'VIEW_ALL': 'View All',
+    'VIEW_LESS': 'View Less',
     'TOP_BRANDS': 'Top Brands',
     'TRENDING': 'Trending',
     'TILA_CUSTOMER': 'Tila Customer',

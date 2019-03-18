@@ -32,7 +32,7 @@ class Shipping extends Component {
             <div className={styles['pdp-deliver-list']}>
               <GeoWidget  hideLabel={true} />
             </div>
-            <div className={`${styles['radio-btn-group']}`}>
+            {/*<div className={`${styles['radio-btn-group']}`}>
               <input type="radio" id="free-no-cost" name="selector" />
               <label for="free-no-cost">
                 <span className={styles['fs-12']}>FREE</span>
@@ -48,7 +48,7 @@ class Shipping extends Component {
                 <span className={styles['fs-12']}>SAME DAY</span>
                 <span className={styles['fs-10']}>+15 AED</span>
               </label>
-            </div>
+            </div>*/}
           </div>
           {
             shippable
@@ -65,9 +65,7 @@ class Shipping extends Component {
                         `${PDP_PAGE.NON_RETURNABLE}`
                     }
                   </div>
-                  <div className={styles['flx-spacebw-alignc']}>
-                    {/* <SVGCompoent clsName={`${styles['secure-icon']} ${styles['mr-10']}`} src="icons/common-icon/trust-secure" />
-                    <span>1 {PDP_PAGE.YEAR} {PDP_PAGE.WARRANTY}</span> */}
+                  {/*<div className={styles['flx-spacebw-alignc']}>
                     <div className={`${styles['radio-btn-group']}`}>
                       <input type="radio" id="option-one" name="selector" />
                       <label for="option-one">
@@ -85,7 +83,7 @@ class Shipping extends Component {
                         <span className={styles['fs-10']}>+15 AED</span>
                       </label>
                     </div>
-                  </div>
+                  </div>*/}
                 </div>
               </div>
               :

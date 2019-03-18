@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Cookie from 'universal-cookie';
 import { addUrlProps, UrlQueryParamTypes, pushInUrlQuery } from 'react-url-query';
 import _ from 'lodash';
 import { actionCreators, selectors } from '../../store/search';
@@ -17,13 +18,20 @@ const urlPropsQueryConfig = {
   searchText: { type: UrlQueryParamTypes.string, queryParam: 'search', }
 };
 
+const cookies = new Cookie();
+
+const language = cookies.get('language') || 'en';
+const country = cookies.get('country') || 'SAU';
+
 class Search extends Component {
 
   constructor(props) {
     super(props);
     const { query, isCategoryTree, choosenCategoryName,searchText } = props;
+    let finalQuery = query ? query : isCategoryTree ? choosenCategoryName : '';
+    finalQuery = finalQuery.split('-').join(' ');
     this.state = {
-      query: query ? query : isCategoryTree ? choosenCategoryName : '',
+      query: finalQuery,
       openImagesearch: false
     };
     this.submitQuery = this.submitQuery.bind(this);
@@ -40,6 +48,7 @@ class Search extends Component {
     if(!this.state.query) return false;
     // const { isCategoryTree } = this.props;
     digitalData.page.pageInfo['onsiteSearchTerm'] = this.state.query
+    this.fireCustomEventClick();
     const flushFilters = true;
 
     this.fireCustomEventClick();
@@ -47,7 +56,7 @@ class Search extends Component {
     this.setState({
       searchInput: false
     });
-    Router.pushRoute(`/srp?search=${this.state.query}&${Object.entries(this.props.optionalParams).map(([key, val]) => `${key}=${val}`).join('&')}`);
+    Router.pushRoute(`/${country}/${language}/srp?search=${this.state.query}&${Object.entries(this.props.optionalParams).map(([key, val]) => `${key}=${val}`).join('&')}`);
   }
   imageSearch() {
     this.setState({openImagesearch:true})
@@ -57,7 +66,7 @@ class Search extends Component {
   }
   handleUploadImage(file) {
     this.props.fetchImageSearchData(file)
-    Router.pushRoute(`/srp`);
+    Router.pushRoute(`/${country}/${language}/srp`);
   }
   onChangeSearchInput(e) {
 
@@ -80,8 +89,9 @@ class Search extends Component {
   componentWillReceiveProps(nextProps) {
     const { isCategoryTree, choosenCategoryName, query: queryProp } = nextProps;
     const { query, searchInput } = this.state;
+    let finalQuery = searchInput ? query : isCategoryTree ? choosenCategoryName : queryProp;
     this.setState({
-      query: searchInput ? query : isCategoryTree ? choosenCategoryName : queryProp,
+      query: finalQuery ? finalQuery.split('-').join(' ') : '',
       //query: isCategoryTree ? choosenCategoryName : searchInput ? query : queryProp,
       suggestions: nextProps.suggestions
     });

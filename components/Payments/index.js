@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Grid, Row, Col } from 'react-bootstrap';
+import Cookies from 'universal-cookie';
 
 import Cart from '../Cart';
 import SignIn from './includes/SignIn';
@@ -17,10 +18,13 @@ import DeliveryAddress from './includes/DeliveryAddress';
 import { actionCreators, selectors } from '../../store/payments';
 import { actionCreators as authActionCreators, selectors as authSelectors } from '../../store/auth';
 import { actionCreators as cartActionCreators, selectors as cartSelectors } from '../../store/cart';
-
-
 import { mergeCss } from '../../utils/cssUtil';
+
 const styles = mergeCss('components/Payments/payment');
+const cookies = new Cookies();
+
+const language = cookies.get('language') || 'en';
+const country = cookies.get('country') || 'SAU';
 
 class Payments extends React.Component {
   constructor(props) {
@@ -28,34 +32,34 @@ class Payments extends React.Component {
     this.state = {
       login: {
         username: '',
-        password: ''
+        password: '',
       },
       paymentConfigJson: {
         signIn: {
           basic: false,
           progress: true,
-          done: false
+          done: false,
         },
         address: {
           basic: true,
           progress: false,
-          done: false
+          done: false,
         },
         loyaltyPoints: {
           basic: true,
           progress: false,
-          done: false
+          done: false,
         },
         offersDiscounts: {
           basic: true,
           progress: false,
-          done: false
+          done: false,
         },
         payment: {
           basic: true,
           progress: false,
-          done: false
-        }
+          done: false,
+        },
       },
       showTab: 0,// to show payment tabs
       paymentOptions: {}, // which payment options to show.
@@ -81,7 +85,7 @@ class Payments extends React.Component {
     // if cart is empty redirect to cart page.
     // if user hits payment url directly and no cart items, this condition will execute.
     if (nextProps.cartResults.items.length === 0 && nextProps.cartResults.ui.loaded) {
-      Router.push('/cart');
+      Router.push(`/${country}/${language}/cart`);
     }
     const { loggedInFlag } = this.state;
 
@@ -136,15 +140,16 @@ class Payments extends React.Component {
   makePayment() {
     const { paymentOptions } = this.props;
     const paymentjson = {
-      "payment_details": [
+      payment_details: [
         {
-          "amount": 0,
-          "currency": "",
-          "payment_mode": ""
-        }
+          amount: 0,
+          currency: '',
+          payment_mode: '',
+        },
       ],
-      "transaction_id": "string"
-    }
+      redirect_url: `${window.location.origin}/${country}/${language}`,
+      transaction_id: '',
+    };
     paymentjson.payment_details[0].amount = paymentOptions.data.amount;
     paymentjson.payment_details[0].currency = paymentOptions.data.currency;
     paymentjson.payment_details[0].payment_mode = 'PAY_ONLINE';
@@ -209,9 +214,9 @@ class Payments extends React.Component {
   saveCard(e) {
     const { paymentOptions } = this.props;
     this.props.saveCard({
-      "save_card": e.target.checked,
-      "transaction_id": paymentOptions.data.transaction_id,
-      "user_id": ""
+      save_card: e.target.checked,
+      transaction_id: paymentOptions.data.transaction_id,
+      user_id: "",
     });
   }
 

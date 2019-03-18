@@ -1,11 +1,12 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col, Grid } from 'react-bootstrap';
-import { Router } from '../../routes';
-
+import Cookie from 'universal-cookie';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+
 import { actionCreators, selectors } from '../../store/cart';
+import { Router } from '../../routes';
 import { actionCreators as wishlistActionCreators, selectors as wishlistSelectors } from '../../store/cam/wishlist';
 
 import HeaderBar from '../HeaderBar/index';
@@ -13,17 +14,22 @@ import CartBody from './includes/CartBody';
 import MiniCartBody from './includes/MiniCartBody';
 import FooterBar from '../Footer/index';
 import { mergeCss } from '../../utils/cssUtil';
+
 const styles = mergeCss('components/Cart/cart');
 
-class Cart extends Component {
+const cookies = new Cookie();
 
+const language = cookies.get('language') || 'en';
+const country = cookies.get('country') || 'SAU';
+
+class Cart extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       showBlocker: false,
-      count: ''
-    }
+      count: '',
+    };
 
     this.addToWishlist = this.addToWishlist.bind(this);
     this.removeCartItem = this.removeCartItem.bind(this);
@@ -34,21 +40,22 @@ class Cart extends Component {
     this.cartStepperInputHandler = this.cartStepperInputHandler.bind(this);
   }
 
+  componentDidMount() {
+    if (!this.props.showMiniCart) {
+      this.props.getCartResults();
+    }
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.cartData.ui.loader && nextProps.cartData.ui.loader == 'hide') {
       this.setState({ showBlocker: false });
     }
   }
 
-  componentDidMount() {
-    if (!this.props.showMiniCart)
-      this.props.getCartResults();
-  }
-
   cartStepperInputHandler(e) {
     const { cartData } = this.props;
     const id = e.target.getAttribute('data-id');
-    const count = e.target.value
+    const count = e.target.value;
     const selelecItem = cartData.items.filter(item => item.item_id == id)[0];
 
     this.setState({ count: selelecItem.max_limit < count ? selelecItem.max_limit : count })
@@ -62,11 +69,11 @@ class Cart extends Component {
     if (newRes.length) {
       alert('There is some issue with cart items.');
     } else
-      Router.pushRoute('/payment');
+      Router.pushRoute(`/${country}/${language}/payment`);
   }
 
   removeCartItem(e) {
-    let productId = e.currentTarget.getAttribute('data-productid')
+    let productId = e.currentTarget.getAttribute('data-productId')
     digitalData.cart.item = digitalData.cart.item.filter((item) => {
       return item.productInfo.productID !== productId
     })
@@ -78,7 +85,7 @@ class Cart extends Component {
     digitalData.cart.item = digitalData.cart.item.map((item) => {
       if(item.productInfo.productID === productId) {
         item.quantity++
-      } 
+      }
 
       return item;
     })
@@ -90,7 +97,7 @@ class Cart extends Component {
     digitalData.cart.item.forEach((item) => {
       if(item.productInfo.productID === productId) {
         item.quantity--;
-      } 
+      }
     })
     this.cartItemCount(e.target.getAttribute('data-id'), 'remove');
   }
@@ -114,60 +121,64 @@ class Cart extends Component {
     this.props.removeCartItem(listing_id);
   }
 
-  addOrRemoveGift(e) {
-    this.props.addOrRemoveGift(e.currentTarget.getAttribute('data-id'), e.currentTarget.checked ? 'add' : 'remove');
+  addOrRemoveGift(id, val, params) {
+    this.props.addOrRemoveGift(id, val, params);
   }
 
   render() {
     const { showBlocker, count } = this.state;
-    const { cartData, editCartDetails, showCheckOutBtn } = this.props;
+    const {
+      cartData, editCartDetails, showCheckOutBtn, isLoading,
+    } = this.props;
     return (
       <div>
         {
           this.props.showMiniCart
             ?
-            <div>
-              <MiniCartBody
-                data={cartData}
-                showBlocker={showBlocker}
-                editCartDetails={editCartDetails}
-                showCheckOutBtn={showCheckOutBtn}
-                removeCartItem={this.removeCartItem}
-                increaseItemCnt={this.increaseItemCnt}
-                decreaseItemCnt={this.decreaseItemCnt}
-                checkoutBtnHandler={this.checkoutBtnHandler}
-              />
-            </div>
-            :
-            <Fragment>
-              <HeaderBar />
-              <Grid>
-                <CartBody
-                  count={count}
+              <div>
+                <MiniCartBody
                   data={cartData}
                   showBlocker={showBlocker}
-                  addToWishlist={this.addToWishlist}
+                  editCartDetails={editCartDetails}
+                  showCheckOutBtn={showCheckOutBtn}
                   removeCartItem={this.removeCartItem}
                   increaseItemCnt={this.increaseItemCnt}
                   decreaseItemCnt={this.decreaseItemCnt}
-                  addOrRemoveGift={this.addOrRemoveGift}
                   checkoutBtnHandler={this.checkoutBtnHandler}
-                  cartStepperInputHandler={this.cartStepperInputHandler}
                 />
-              </Grid>
-              <FooterBar />
-            </Fragment>
+              </div>
+            :
+              <Fragment>
+                <HeaderBar />
+                <Grid>
+                  <CartBody
+                    count={count}
+                    data={cartData}
+                    showBlocker={showBlocker}
+                    isLoading={isLoading}
+                    addToWishlist={this.addToWishlist}
+                    removeCartItem={this.removeCartItem}
+                    increaseItemCnt={this.increaseItemCnt}
+                    decreaseItemCnt={this.decreaseItemCnt}
+                    addOrRemoveGift={this.addOrRemoveGift}
+                    checkoutBtnHandler={this.checkoutBtnHandler}
+                    cartStepperInputHandler={this.cartStepperInputHandler}
+                  />
+                </Grid>
+                <FooterBar />
+              </Fragment>
         }
       </div>
-    )
+    );
   }
 }
 
-const mapStateToProps = (store) => ({
+const mapStateToProps = store => ({
   cartData: selectors.getCartResults(store),
+  isLoading: store.cartReducer.ui.loading,
 });
 
-const mapDispatchToProps = (dispatch) =>
+const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       getCartResults: actionCreators.getCartResults,

@@ -3,17 +3,25 @@ import { Grid, Col } from 'react-bootstrap';
 import NoSSR from 'react-no-ssr';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { actionCreators,selectors } from '../../store/search';
+import Cookie from 'universal-cookie';
 
+import { actionCreators,selectors } from '../../store/search';
 import HeaderBar from '../HeaderBar/index';
 import FooterBar from '../Footer/index';
 import CategoriesAndFacets from './CategoriesAndFacets';
 import SearchDetailsBar from './SearchDetailsBar';
 import SearchResults from './SearchResults';
+import CompareWidget from '../common/CompareWidget';
 import { Router } from '../../routes';
-
 import { mergeCss } from '../../utils/cssUtil';
+
 const styles = mergeCss('components/Search/search');
+
+const cookies = new Cookie();
+
+const language = cookies.get('language') || 'en';
+const country = cookies.get('country') || 'SAU';
+
 
 const onClickMenuHandle = (e) => {
   const target = e.currentTarget;
@@ -33,10 +41,10 @@ class Search extends Component {
   componentWillUnmount() {
     this.props.hideSearchBarFitlers();
   }
- 
-  querySearch = (e) => {    
+
+  querySearch = (e) => {
     let dataSearchQuery = e.currentTarget.dataset.querysearch;
-    Router.pushRoute(`/srp?search=${dataSearchQuery}&disableSpellCheck=true&${Object.entries(this.props.optionalParams).map(([key, val]) => `${key}=${val}`).join('&')}`);
+    Router.pushRoute(`/${country}/${language}/srp?search=${dataSearchQuery}&disableSpellCheck=true&${Object.entries(this.props.optionalParams).map(([key, val]) => `${key}=${val}`).join('&')}`);
   }
 
   render() {
@@ -51,7 +59,7 @@ class Search extends Component {
               <a
                 href="javascript: void(0)"
                 onClick={this.querySearch}
-                data-querysearch={spellCheckResp[query.search]}
+                data-querysearch={query.search}
               >
                 <b>{`${spellCheckResp[query.search]} ?`}</b>
               </a>
@@ -67,6 +75,7 @@ class Search extends Component {
             <SearchResults />
           </Col>
         </Grid>
+        <CompareWidget />
         <FooterBar />
       </div>
     )

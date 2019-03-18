@@ -24,6 +24,24 @@ const styles = mergeCss('components/HeaderBar/header');
 const {HEADER_PAGE} = languageDefinations();
 const cookies = new Cookie();
 
+const language = cookies.get('language') || 'en';
+const country = cookies.get('country') || 'SAU';
+
+const snMetaObj = {
+  'google': {
+    channel: "GOOGLE_AUTH",
+    metadata: "google.access_token"
+  },
+  'facebook': {
+    channel: "FACEBOOK_AUTH",
+    metadata: "fb.access_token"
+  },
+  'instagram': {
+    channel: "INSTAGRAM_AUTH",
+    metadata: "instagram.code"
+  }
+}
+
 class ActionBar extends Component {
   constructor(props) {
     super(props);
@@ -62,6 +80,11 @@ class ActionBar extends Component {
             window.location.replace(`${publicUrls.custhelpDomain}/ci/pta/login/redirect/${unescape(Router.router.query.p_next_page)}/p_li/${cookies.get('ptaToken')}`);
         }
       }
+    } else {
+      if((nextProps.instaCode !== this.props.instaCode) && nextProps.instaCode) {
+        window.localStorage.removeItem('instagramCode');
+        this.getTokenCall('instagram', nextProps.instaCode);
+      }
     }
   }
 
@@ -93,6 +116,16 @@ class ActionBar extends Component {
     this.props.resetShowLogin();
   }
 
+  getTokenCall = (socialNetwork, token) => {
+    const serverData = {
+      "channel": snMetaObj[socialNetwork].channel,
+      "metadata": {
+        [snMetaObj[socialNetwork].metadata]: token
+      }
+    }
+    this.props.userLogin(serverData)
+  }
+
   render() {
     const { isLoggedIn, cartResults, userInfo } = this.props;
     return (
@@ -110,7 +143,7 @@ class ActionBar extends Component {
           </NoSSR>
         </div>
         <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']}`}>
-          <Link route="/cam/wishlist">
+          <Link route={`/${country}/${language}/cam/wishlist`}>
            <a style={{dispaly:'block'}}>
             <span className={`${styles['flex-center']} ${styles['justify-center']}`}>
               <SVGComponent clsName={`${styles['wish-list-icon']}`} src="icons/wish-list/wish-list-icon" />
@@ -121,7 +154,7 @@ class ActionBar extends Component {
         <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']}`}>
           <Dropdown id="cart-toggle" className={`${styles['cart-inn']} ${styles['profile-login-inn']}`}>
             <Dropdown.Toggle>
-              <Link route="/cart">
+              <Link route={`/${country}/${language}/cart`}>
               <a style={{dispaly:'block'}}>
                 <span className={`${styles['flex-center']} ${styles['justify-center']} ${styles['relative']}`}>
                   <SVGComponent clsName={`${styles['cart-icon']}`} src="icons/cart/cart-icon" />
@@ -157,19 +190,19 @@ class ActionBar extends Component {
                 </div>
                 <ul className={`${styles['pl-0']} ${styles['profile-inn']}`}>
                   <li className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']}`}>
-                    <a href="/cam" className={styles['flex-center']}>
+                    <a href={`/${country}/${language}/cam`} className={styles['flex-center']}>
                     <SVGComponent clsName={`${styles['profile-icon']}`} src="icons/profile-icons/round-profile" />
                     <span className={styles['pl-20']}>{HEADER_PAGE.MY_ACCOUNT}</span>
                     </a>
                   </li>
                   <li className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']}`}>
-                    <a href="/cam/orders" className={styles['flex-center']}>
+                    <a href={`/${country}/${language}/cam/orders`} className={styles['flex-center']}>
                       <SVGComponent clsName={`${styles['profile-icon']}`} src="icons/my-orders" />
                       <span className={styles['pl-20']}>{HEADER_PAGE.MY_ORDERS}</span>
                     </a>
                   </li>
                   <li className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']}`}>
-                  <a href="/cam/notifications" className={styles['flex-center']}>
+                  <a href={`/${country}/${language}/cam/notifications`} className={styles['flex-center']}>
                     <SVGComponent clsName={`${styles['profile-icon']}`} src="icons/notifications" />
                     <span className={styles['pl-20']}>{HEADER_PAGE.NOTIFICATIONS}</span>
                     </a>
@@ -220,6 +253,7 @@ const mapStateToProps = (store) => {
   return ({
     error: selectors.getErrorMessege(store),
     isLoggedIn: selectors.getLoggedInStatus(store),
+    instaCode: selectors.getInstaCode(store),
     cartResults: cartSelectors.getCartResults(store),
     loginInProgress: selectors.getLoginProgressStatus(store),
     userInfo: personalSelectors.getUserInfo(store),
@@ -237,6 +271,7 @@ const mapDispatchToProps = (dispatch) => {
       resetLoginError: actionCreators.resetLoginError,
       resetShowLogin: actionCreators.resetShowLogin,
       savePtaToken: actionCreators.savePtaToken,
+      userLogin: actionCreators.userLogin,
     },
     dispatch,
   );
