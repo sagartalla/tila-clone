@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Col, OverlayTrigger, Popover } from 'react-bootstrap';
 import moment from 'moment';
-
+import Warranty from '../../Product/includes/Warranty';
 import CartStepper from './CartStepper';
 import SVGComponent from '../../common/SVGComponet';
 import { mergeCss } from '../../../utils/cssUtil';
@@ -119,6 +119,8 @@ class CartItem extends React.Component {
       removeCartItem,
       cartStepperInputHandler,
       addOrRemoveGift,
+      cartData,
+      index,
     } = this.props;
     const { gift_card_message, checked, showMessage } = this.state;
     const {
@@ -170,7 +172,11 @@ class CartItem extends React.Component {
                     <a onClick={() => routeChange(variant_id, product_id, catalogId, itemType)}>{name}</a>
                   </h4>
                   <div className={`${styles['warranty-part']} ${styles['p-10']} ${styles['light-gry-clr']}`}>
-                    <p className={`${styles['fs-12']}`}><span>{CART_PAGE.WARRENTY} : </span><span className={`${styles['pl-10']} ${styles['pr-10']}`}>{warranty[0].duration} {CART_PAGE.WARRENTY_TXT} </span><a href="" className={`${styles['fontW600']}`}>{CART_PAGE.VIEW_MORE}</a></p>
+                    {cartData.items ? <p className={`${styles['mb-0']} ${styles['fs-12']}`}>
+                      <span>Warranty : </span>
+                       <span className={`${styles['pl-10']} ${styles['pr-10']}`}><Warranty warranty={cartData.items[index].warranty_duration} /></span>
+                        </p>
+                        : null}
                     <p className={`${styles['mb-0']} ${styles['fs-12']}`}>
                       <span>{CART_PAGE.SHIPPING} : </span>
                       <span className={`${styles['pl-10']} ${styles['pr-10']}`}>{CART_PAGE.REGULAR_SHIPPING}  ({shipping.shipping_fees + ' ' + cur}) - <span className={`${styles['fs-12']} ${styles['base-font']}`}>{CART_PAGE.ETA_DELIVERY_BY} {moment().add(shipping.shipping_days, 'days').format('LL')}</span>

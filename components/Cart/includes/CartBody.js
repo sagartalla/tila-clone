@@ -31,6 +31,7 @@ const CartBody = ({
   cartStepperInputHandler,
   count,
   isLoading,
+  cartData,
 }) => {
   const { items, error } = data;
   const flag = data && items && items.length;
@@ -61,7 +62,7 @@ const CartBody = ({
             <Col md={9} sm={12} xs={12} className={styles['pr-5']}>
               <div>
                 {
-                  items.map(item => (
+                  items.map((item,index) => (
                     <CartItem
                       item={item}
                       count={count}
@@ -72,6 +73,8 @@ const CartBody = ({
                       removeCartItem={removeCartItem}
                       cartStepperInputHandler={cartStepperInputHandler}
                       addOrRemoveGift={addOrRemoveGift}
+                      cartData={cartData}
+                      index={index}
                     />
                 ))}
 

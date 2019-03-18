@@ -23,6 +23,7 @@ const getProduct = (store, variantId) => {
     // }
     return listing.total_inventory_count > 0 && listing.active
   }) : [];
+  let warranty = variant_preferred_listings[computedVariantId][0].warranty_policy.policies.TILA
   priceInfo = priceInfo.length ? priceInfo[0] : null;
 
   const availabilityError = !priceInfo;
@@ -113,6 +114,7 @@ const getProduct = (store, variantId) => {
       sizeChartImgName,
     },
     breadcrums: tree.breadcrumb,
+    warranty,
     categoryType: tree.finance ? tree.finance[0].display_name_en : '',
     catalog: _.groupBy(_.filter(catalogAttributeMap, (val) => val.visible), (attrMap) => attrMap.attribute_category_name)
   };
