@@ -17,7 +17,7 @@ const UserProfile = (props) => {
   const { tabDetails } = query;
   const {first_name, last_name} = props.userInfo.personalInfo;
   const [tab, ...queryParams] = tabDetails ? tabDetails.split('/') : [];
-  let full_name = first_name && last_name ? first_name + " " + last_name : "";
+  let full_name = first_name || last_name ? first_name + " " + last_name : "";
   let name = full_name ? (full_name.length < 20 ? full_name : (full_name.slice(0,20) + "...")) : "";
   return(
   <Link route={`/${country}/${language}/cam/profile`}>
