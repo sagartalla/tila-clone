@@ -35,7 +35,6 @@ class SizeChart extends Component {
   }
   render() {
     const { productInfo } = this.props;
-    console.log('productInfo', productInfo);
     const { showSlider } = this.state;
     return (
       <div className={`${styles['pt-10']} ${styles['pb-10']} ${styles['pr-15']}`}>

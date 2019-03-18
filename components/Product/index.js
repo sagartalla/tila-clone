@@ -156,7 +156,7 @@ const getProductComponent = (isPreview, taskCode) => {
     }
 
     render() {
-      const { productData, userDetails, productInfo } = this.props;
+      const { productData, userDetails } = this.props;
       const {
         catalog, titleInfo, keyfeatures, imgUrls, extraOffers, offerInfo, shippingInfo, returnInfo, details, productDescription, catalogObj, categoryType = '', breadcrums,
       } = productData;
@@ -186,7 +186,7 @@ const getProductComponent = (isPreview, taskCode) => {
                     <div className={`${styles['details-right-part-inn']}`}>
                       <div className={`${styles['ipad-details']} ${styles['ipad-pr-15']}`}>
                         <TitleInfo {...titleInfo} isPreview={isPreview} />
-                        <ProductDetails details={details} keyfeatures={keyfeatures} isPreview={isPreview} productInfo={productInfo}/>
+                        <ProductDetails details={details} keyfeatures={keyfeatures} isPreview={isPreview} productInfo={productData}/>
                       </div>
                       <div className={`${styles['ipad-details']} ${styles['bdr-lt']} ${styles['ipad-pl-15']}`}>
                         {
@@ -253,7 +253,6 @@ const getProductComponent = (isPreview, taskCode) => {
   const mapStateToProps = store => ({
     productData: taskCode ? selectors.getPreview(store) : selectors.getProduct(store),
     userDetails: store.authReducer.data,
-    productInfo: selectors.getProduct(store),
   });
 
   const mapDispatchToProps = dispatch =>
