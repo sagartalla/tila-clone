@@ -16,7 +16,6 @@ const cookies = new Cookies();
 class SearchPage extends Base {
   static async getInitialProps({ store, isServer, query, req }) {
     const { language, search, facets, category, subCategory, isListed, disableSpellCheck, sid } = query
-    debugger;
     const categoryTree = query.categoryTree === 'true'; //TODO need better way to identify category tree
     //TODO SF-37 better handling of country
     const state = store.getState();

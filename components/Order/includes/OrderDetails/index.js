@@ -28,9 +28,9 @@ const OrderDetails = ({ query, orderData, thankyouPage }) => {
               {
                 thankyouPage ? '' :
                   <Fragment>
-                    <span><a onClick={() => routeChange(`${country}/${language}/cam/profile`)}>My account</a></span>
+                    <span><a onClick={() => routeChange(`/${country}/${language}/cam/profile`)}>My account</a></span>
                     <span> > </span>
-                    <span><a onClick={() => routeChange(`${country}/${language}/cam/orders`)}>Orders</a></span>
+                    <span><a onClick={() => routeChange(`/${country}/${language}/cam/orders`)}>Orders</a></span>
                     <span> > </span>
                     <span>{query.orderId}</span>
                   </Fragment>
