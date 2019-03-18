@@ -1,37 +1,55 @@
 import React, { Component } from 'react';
 import NoSSR from 'react-no-ssr';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Row, FormGroup, Col } from 'react-bootstrap';
+
 import SVGComponent from '../common/SVGComponet';
 import { selectors, actionCreators } from '../../store/auth';
 import constants from '../../constants';
-import { Row, FormGroup, Col, Button, ControlLabel, Checkbox } from 'react-bootstrap';
 import ForgotPassword from './ForgotPassword';
 import SocialLogin from './SocialLogin';
 import { mergeCss } from '../../utils/cssUtil';
-const styles = mergeCss('components/Login/login');
 import { languageDefinations } from '../../utils/lang';
+import FormValidator from '../common/FormValidator';
+
+const styles = mergeCss('components/Login/login');
 const { LOGIN_PAGE } = languageDefinations()
 
-
-const errSchema = {
-  email: '',
-  password: '',
-};
 
 class Login extends Component {
   constructor(props) {
     super(props);
+    this.validations = new FormValidator([
+      {
+        field: 'email',
+        method: this.validateEmail,
+        message: 'Enter valid emailid',
+        validWhen: false,
+      },
+      {
+        field: 'password',
+        method: this.validatePassword,
+        message: 'Special characters are not allowed.',
+        validWhen: false,
+      },
+      {
+        field: 'password',
+        method: this.validateLengthPassword,
+        message: 'Your password must be at least 8 characters long.',
+        validWhen: false,
+      },
+    ]);
+
     this.state = {
       error: '',
-      errObj: { ...errSchema },
       email: '',
       password: '',
       mode: props.mode || 'login',
       country: '',
       phone: '',
       forgotPassword: false,
+      validation: this.validations.valid(),
     };
     this.login = this.login.bind(this);
     this.onChangeField = this.onChangeField.bind(this);
@@ -61,32 +79,33 @@ class Login extends Component {
   onChangeField(e) {
     this.setState({
       ...this.state,
-      [e.target.name]: e.target.value
-    })
+      [e.target.name]: e.target.value,
+    });
   }
 
-  onLoginFieldValidations = () => {
-    const { email, password, errObj } = this.state;
+  validateEmail = (fieldvalue, state) => {
     const emailReg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (emailReg.test(fieldvalue)) return false;
+    return true;
+  }
+
+  validateLengthPassword = (fieldvalue, state) => {
+    if (fieldvalue.length >= 8) return false;
+    return true;
+  }
+
+  validatePassword = (fieldvalue, state) => {
     const passreg = /^([a-zA-Z0-9_-]){8,30}$/;
-    if (!passreg.test(password) || !emailReg.test(email)) {
-      if (!passreg.test(password)) {
-        errObj.password = 'Your password must be at least 8 characters long.';
-      }
-      if (!emailReg.test(email)) {
-        errObj.email = 'Enter valid emailid';
-      }
-      this.setState({
-        errObj,
-      });
-      return false;
-    }
+    if (passreg.test(fieldvalue)) return false;
     return true;
   }
 
   login(e) {
     e.preventDefault();
-    const { email, password, phone, country } = this.state;
+    const {
+      email, password, phone, country,
+    } = this.state;
+    const validation = this.validations.validate(this.state);
     if (email === '') {
       this.fireCustomEventClick('emptylogin');
     }
@@ -97,17 +116,17 @@ class Login extends Component {
       this.fireCustomEventClick('forgotpassword');
     }
 
-    if (this.onLoginFieldValidations()) {
+    if (validation.isValid) {
       if (this.state.mode === 'register') {
         const serverData = {
           channel: 'BASIC_REGISTER',
-          metadata:{
+          metadata: {
             username: email,
             password,
             mobile_no: phone,
             mobile_country_code: country,
           },
-          rememberMe: true
+          rememberMe: true,
         };
         this.props.userLogin(serverData)
       } else {
@@ -125,11 +144,8 @@ class Login extends Component {
     } else {
       console.log('password Error');
     }
+    this.setState({ validation });
   }
-
-  // loginFromSubmit() {
-  //   this.login();
-  // }
 
   fireCustomEventClick(type) {
     digitalData.login[type] = type;
@@ -141,8 +157,9 @@ class Login extends Component {
     this.setState({
       ...this.state,
       mode: this.state.mode === 'login' ? 'register' : 'login',
+      password: '',
       error: '',
-      errObj: { ...errSchema },
+      validation: this.validations.valid(),
     }, () => this.fireCustomEventClick(this.state.mode));
   }
 
@@ -152,7 +169,7 @@ class Login extends Component {
 
   render() {
     const { userCreds } = this.props;
-    const { errObj, mode, error } = this.state;
+    const { mode, error, validation } = this.state;
     return (
       <Row className={`${styles['bg-white']} ${styles['m-0']}`}>
         { !this.state.forgotPassword ?
@@ -203,9 +220,9 @@ class Login extends Component {
                   <span className={styles['bar']}></span>
                   <label>{LOGIN_PAGE.EMAIL}</label>
                   {
-                    errObj.email
+                    validation.email.message
                       ?
-                      <span className={`${styles['error-msg']}`}>{errObj.email}</span>
+                        <span className={`${styles['error-msg']}`}>{validation.email.message}</span>
                       :
                       null
                   }
@@ -226,9 +243,9 @@ class Login extends Component {
                   <span className={styles['bar']}></span>
                   <label>{LOGIN_PAGE.PASSWORD}</label>
                   {
-                    errObj.password
+                    validation.password.message
                       ?
-                        <span className={`${styles['error-msg']}`}>{errObj.password}</span>
+                        <span className={`${styles['error-msg']}`}>{validation.password.message}</span>
                       :
                       null
                   }
