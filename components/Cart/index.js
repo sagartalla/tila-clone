@@ -75,15 +75,16 @@ class Cart extends Component {
       showSlider: false,
     });
   }
+
   checkoutBtnHandler() {
     const { cartData } = this.props;
     const newRes = cartData.items.filter(data => data.inventory == 0);
 
-    if (newRes.length) {
-      toast.warn('There is some issue with cart items.');
-    } else
-      Router.pushRoute(`/${country}/${language}/payment`);
-    }
+    // if (newRes.length) {
+    //   toast.warn('There is some issue with cart items.');
+    // } else
+    //   Router.pushRoute(`/${country}/${language}/payment`);
+    // }
   }
 
   removeCartItem(e) {
