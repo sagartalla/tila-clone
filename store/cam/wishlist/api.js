@@ -15,10 +15,10 @@ const addToWishlistApi = (params) => {
   });
 }
 
-const deleteWishlistApi = (wishlist_id, { showToast = true }) => {
+const deleteWishlistApi = (wishlist_id, toastObj = {}) => {
   return axios.post(`${constants.WISHLIST_API_URL}/api/v1/wishlist/delete?wishlist_id=${wishlist_id}`, {}).then(({ data }) => {
     // return { data };
-    if (showToast) {
+    if (toastObj.showToast) {
       toast.success('Item removed from Wishlist');
     }
     return getWishlistApi();
