@@ -24,7 +24,8 @@ const getCartResults = (store) => {
           listing_id: item.listing_info.listing_id,
           cart_item_id: item.cart_item_id,
           name: item.product_details.product_details_vo.cached_product_details.attribute_map.calculated_display_name.attribute_values[0].value,
-          price: item.listing_info.selling_price,
+          offer_price: item.listing_info.pricing && item.listing_info.pricing.offer_price,
+          selling_price: item.listing_info.pricing && item.listing_info.pricing.price,
           total_amount: item.total_amount,
           cur: item.listing_info.selling_price_currency,
           img: img_url + '/' + item.product_details.product_details_vo.cached_product_details.media.gallery_media[0].url,
@@ -37,8 +38,12 @@ const getCartResults = (store) => {
           catalogId: item.product_details.catalog_details.catalog_id,
           itemType: item.product_details.catalog_details.item_type_name,
           warranty: _.groupBy(item.listing_info.warranty_details, 'type')['MANUFACTURER'] || [{}],
-        }
-      })
+          discount: item.listing_info.pricing && item.listing_info.pricing.discount_per_mrp,
+          mrp: item.listing_info.pricing && item.listing_info.pricing.mrp,
+          offerDiscounts: item.listing_info.pricing && item.listing_info.pricing.actions,
+          total_discount: item.listing_info.pricing && item.listing_info.pricing.total_discount_mrp,
+        };
+      });
     }
 
     newData.items = newData.items.reverse();

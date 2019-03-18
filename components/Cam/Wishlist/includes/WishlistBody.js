@@ -1,12 +1,18 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import PropTypes from 'prop-types';
+import Cookies from 'universal-cookie';
+
 import SVGComponent from '../../../common/SVGComponet';
 import { languageDefinations } from '../../../../utils/lang/';
 import { Router } from '../../../../routes';
 import { mergeCss } from '../../../../utils/cssUtil';
 
 const styles = mergeCss('components/Cam/Wishlist/wishlist');
+const cookies = new Cookies();
+
+const language = cookies.get('language') || 'en';
+const country = cookies.get('country') || 'SAU';
 
 const percentage = (a, b) => Math.floor(((a - b) / b) * 100);
 
@@ -36,7 +42,7 @@ const WishlistBody = (props) => {
     return str;
   };
   const routeChange = (variantId, productId, catalogId, itemType) => {
-    Router.push(`/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemType}`);
+    Router.push(`/${country}/${language}/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemType}`);
   }
 
   return (

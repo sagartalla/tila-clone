@@ -10,7 +10,6 @@ import { selectors } from '../../store/product';
 import HeaderBar from '../HeaderBar/index';
 import Dispalay from './includes/Display';
 import TitleInfo from './includes/TitleInfo';
-import Offers from './includes/Offers';
 import Shipping from './includes/Shipping';
 
 import AddToCart from './includes/AddToCart';
@@ -160,7 +159,7 @@ const getProductComponent = (isPreview, taskCode) => {
     render() {
       const { productData, userDetails } = this.props;
       const {
-        catalog, titleInfo, keyfeatures, imgUrls, extraOffers, offerInfo, shippingInfo, returnInfo, details, productDescription, catalogObj, categoryType = '',
+        catalog, titleInfo, keyfeatures, imgUrls, extraOffers, offerInfo, shippingInfo, returnInfo, details, productDescription, catalogObj, categoryType = '', breadcrums,
       } = productData;
       const {
         stickyElements, recentlyViewed, notifyEmail, emailErr,
@@ -176,7 +175,11 @@ const getProductComponent = (isPreview, taskCode) => {
                 <Row className={`${styles['m-0']} ${styles['ht-100per']}`}>
                   <Col xs={12} md={8} sm={12} className={`${styles['pl-0']} ${styles['ht-100per']} ${styles['pdp-img-prt']}`}>
                     <NoSSR>
-                      <Dispalay imgs={imgUrls} extraOffers={extraOffers}/>
+                      <Dispalay
+                        imgs={imgUrls}
+                        extraOffers={extraOffers}
+                        breadcrums={breadcrums}
+                      />
                     </NoSSR>
                   </Col>
                   <div className={styles['details-pixel']} ref={this.detailsRef} />

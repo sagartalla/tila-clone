@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Cookies from 'universal-cookie';
 
 import SVGCompoent from '../SVGComponet';
 import { selectors, actionCreators } from '../../../store/compare';
@@ -9,6 +10,11 @@ import { Router } from '../../../routes';
 import { mergeCss } from '../../../utils/cssUtil';
 
 const styles = mergeCss('components/common/CompareWidget/compareWidget');
+
+const cookies = new Cookies();
+
+const language = cookies.get('language') || 'en';
+const country = cookies.get('country') || 'SAU';
 
 class CompareWidget extends React.Component {
 
@@ -21,7 +27,7 @@ class CompareWidget extends React.Component {
   }
 
   showComparePage = () => {
-    Router.pushRoute('/compare');
+    Router.pushRoute(`/${country}/${language}/compare`);
   }
 
   render() {
