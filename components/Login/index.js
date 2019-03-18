@@ -343,7 +343,9 @@ class Login extends Component {
         </Col>
         </div>
         :
-        <ForgotPassword />
+        <ForgotPassword
+          enteredEmail={this.state.email}
+        />
         }
 
       </Row>
