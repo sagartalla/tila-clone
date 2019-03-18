@@ -96,7 +96,9 @@ const errorInterceptor = (err) => {
 }
 
 axios.interceptors.request.use(_.compose(configModifer));
-axios.interceptors.response.use(null, _.compose(errorInterceptor));
+axios.interceptors.response.use(() => {
+  throw 'Test Error'; 
+}, _.compose(errorInterceptor));
 
 pimServiceInstance.interceptors.request.use(_.compose(
   (config) => {
