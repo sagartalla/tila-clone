@@ -56,7 +56,7 @@ const popover = ({strickedPrice: mrp, sellingPrice:sp, offerDiscounts, showPrise
           </div>
         </div>
         <div>
-          <div>Overall you save ${`${discountMrp} ${currency}`} on this Product</div>
+          <div className={`${styles['p-5']} ${styles['mt-5']} ${styles['overall-amount']}`}>Overall you save ${`${discountMrp} ${currency}`} on this Product</div>
         </div>
       </div>
     </Popover>
@@ -77,22 +77,22 @@ const ProductPrice = ({offerInfo}) => {
             <span className={`${styles['fs-12']} ${styles['pr-5']}`}>{offerPricing.currency}</span>
           </div>
           {
-            offerPricing.showPrise !== offerPricing.strickedPrice
+            offerPricing.showPrise !== offerPricing.strickedPrice && Math.floor(offerPricing.discount) > 5
             ?
-            <Fragment>
-              <div className={`${styles['flex']} ${styles['align-baseline']} ${styles['cross-strike-red']} ${styles['relative']} ${styles['ml-10']}`}>
-                <span className={`${styles['fs-26']} ${styles['pr-5']}`}>{offerPricing.strickedPrice}</span>
-                <span className={`${styles['fs-12']} ${styles['pr-5']}`}>{offerPricing.currency}</span>
-              </div>
-              <div className={`${styles['flex']} ${styles['align-baseline']} ${styles['relative']} ${styles['ml-10']}`}>
-                <span className={`${styles['fs-12']} ${styles['pr-5']} ${styles['offers-applied']} `}>{`${offerPricing.discount}% OFF`}</span>
+              <Fragment>
+                <div className={`${styles['flex']} ${styles['align-baseline']} ${styles['cross-strike-red']} ${styles['relative']} ${styles['ml-10']}`}>
+                  <span className={`${styles['fs-26']} ${styles['pr-5']}`}>{offerPricing.strickedPrice}</span>
+                  <span className={`${styles['fs-12']} ${styles['pr-5']}`}>{offerPricing.currency}</span>
+                </div>
+                <div className={`${styles['flex']} ${styles['align-baseline']} ${styles['relative']} ${styles['ml-10']}`}>
+                  <span className={`${styles['fs-12']} ${styles['pr-5']} ${styles['offers-applied']} `}>{`${Math.floor(offerPricing.discount)}% OFF`}</span>
                   <OverlayTrigger trigger="click" placement="bottom" overlay={popover(offerPricing)}>
                     <span className={`${styles['fs-12']} ${styles['pr-5']}`}>
                       <SVGCompoent clsName={`${styles['secure-icon']} ${styles['mr-10']} ${styles['pointer']}`} src="icons/common-icon/trust-secure" />
                     </span>
                   </OverlayTrigger>
-              </div>
-            </Fragment>
+                </div>
+              </Fragment>
             :
             null
           }
