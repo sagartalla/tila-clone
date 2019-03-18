@@ -23,7 +23,7 @@ const getProduct = (store, variantId) => {
     // }
     return listing.total_inventory_count > 0 && listing.active
   }) : [];
-  let warranty = tree.finance.filter((data)=> data.isLeaf === true)[0].warranty ? JSON.parse(tree.finance.filter((data)=> data.isLeaf === true)[0].warranty) : null; //converting 'warranty' into JSON
+  let warranty = variant_preferred_listings[computedVariantId][0].warranty_policy.policies.TILA
   priceInfo = priceInfo.length ? priceInfo[0] : null;
 
   const availabilityError = !priceInfo;
