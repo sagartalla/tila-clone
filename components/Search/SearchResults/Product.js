@@ -266,7 +266,6 @@ class Product extends Component {
                 <SVGCompoent clsName={`${styles['loader-styl']}`} src="icons/common-icon/circleLoader" />
               </div> : null
             }
-
             <div className={`${styles['img-cont']} ${styles['border-radius4']} ${styles['relative']}`}>
               <div className={styles['image-div']}>
                 <Waypoint onEnter={this.setImg}>
