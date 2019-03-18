@@ -61,7 +61,7 @@ class AddToCart extends Component {
   }
 
   render () {
-    const { isLoading, error, isAddedToCart, offerInfo } = this.props;
+    const { isLoading, error, isAddedToCart, offerInfo, btnLoading } = this.props;
     const { price, listingAvailable, listingId, stockError, availabilityError } = offerInfo;
     return (availabilityError || stockError)
     ?
@@ -69,7 +69,19 @@ class AddToCart extends Component {
     :
     (
       <div className={`${styles['pt-25']} ${styles['flx-space-bw']} ${styles['addto-cart']} ${styles['ipad-p-0']} ${styles['border-t']}`}>
-        <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['fs-16']} ${styles['ipad-fs-14']} ${styles['add-to-card-btn']} ${styles['flex']}`} onClick={this.addToCart} disabled={isLoading || isAddedToCart} >{isAddedToCart ? <SVGCompoent clsName={`${styles['added-cart-icon']}`} src="icons/cart/added-cart-icon" /> : PDP_PAGE.ADD_TO_CART}</button>
+        <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['fs-16']} ${styles['ipad-fs-14']} ${styles['add-to-card-btn']} ${styles['flex']}`} onClick={this.addToCart} disabled={isLoading || isAddedToCart} >
+        {/* {isAddedToCart ? <SVGCompoent clsName={`${styles['added-cart-icon']}`} src="icons/cart/added-cart-icon" /> : PDP_PAGE.ADD_TO_CART} */}
+          {
+          btnLoading ?
+          <div className={styles['loader-div']}>
+            <SVGCompoent clsName={`${styles['loader-styl']}`} src="icons/common-icon/circleLoader" />
+          </div>
+          :
+          isAddedToCart ?
+          <SVGCompoent clsName={`${styles['added-cart-icon']}`} src="icons/cart/added-cart-icon" />
+          : PDP_PAGE.ADD_TO_CART
+        }
+        </button>
         <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fs-16']} ${styles['ipad-fs-14']} ${styles['buy-now-btn']}`} onClick={this.buyNow}>{PDP_PAGE.BUY_NOW}</button>
       </div>
     );
@@ -78,6 +90,7 @@ class AddToCart extends Component {
 
 const mapStateToProps = (store) => {
   return ({
+    btnLoading: selectors.getBtnLoaders(store),
     isLoading: selectors.getLoadingStatus(store),
     error: selectors.getErrorMessege(store),
     isAddedToCart: selectors.isAddedToCart(store)

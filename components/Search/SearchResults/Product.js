@@ -56,6 +56,7 @@ class Product extends Component {
 
   addToWishlist(e) {
     e.stopPropagation();
+    e.preventDefault();
     const {
       productId: product_id, catalogId: catalog_id, variants, priceRange, currency, addToWishlistAndFetch,
     } = this.props;
@@ -75,6 +76,7 @@ class Product extends Component {
 
   notify(e) {
     e.stopPropagation();
+    e.preventDefault();
     const { userDetails, productId, notifyMe } = this.props;
     if (userDetails.isLoggedIn) {
       notifyMe({
@@ -178,6 +180,7 @@ class Product extends Component {
 
   addToCompare(e) {
     e.stopPropagation();
+    e.preventDefault();
     const {
       productId, itemtype, media, displayName, categoryId,
     } = this.props;
@@ -267,7 +270,6 @@ class Product extends Component {
                 <SVGCompoent clsName={`${styles['loader-styl']}`} src="icons/common-icon/circleLoader" />
               </div> : null
             }
-
             <div className={`${styles['img-cont']} ${styles['border-radius4']} ${styles['relative']}`}>
               <div className={styles['image-div']}>
                 <Waypoint onEnter={this.setImg}>

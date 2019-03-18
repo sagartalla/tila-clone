@@ -22,14 +22,14 @@ const actionCreators = {
       payload: api.getCartDetailsApi(params)
     })
   },
-  removeCartItem: (cartId) => {
+  removeCartItem: (cartId, showToast) => {
     const params = {
-      "cart_item_id": cartId
-    }
+      cart_item_id: cartId,
+    };
     return ({
       type: actions.REMOVE_CART_ITEM,
-      payload: api.removeCartItemApi(params)
-    })
+      payload: api.removeCartItemApi(params, showToast),
+    });
   },
   cartItemCount: (cartId, typ) => {
     const params = {
