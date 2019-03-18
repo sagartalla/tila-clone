@@ -10,7 +10,7 @@ const getMessage = (statusCode) => {
         default:
     }
 }
-const ErrorsPart = ({statusCode}) => {
+const ErrorsPart = ({ statusCode, messege}) => {
     return (
         <div className={`${styles['errors-main']}`}>
             <div className={`${styles['errors-main-inn']}`}>
@@ -20,7 +20,7 @@ const ErrorsPart = ({statusCode}) => {
                 {/* <div className={`${styles['errors-label']}`}>
                     <img className={styles['']} src={"/static/img/errors-img/404img.png"} />
                 </div> */}
-                <span className={styles['label-not']}>{statusCode}{getMessage(statusCode)}</span>
+                <span className={styles['label-not']}>{ messege ? messege : getMessage(statusCode)}</span>
             </div>
         </div>
     );
