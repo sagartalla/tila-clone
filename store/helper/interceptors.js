@@ -85,7 +85,8 @@ const errorInterceptor = (err) => {
           cookies.remove('auth');
         }
       } else {
-        toast.error(err.response.status + " : " + err.response.data.error);
+        cookies.remove('auth');
+        toast.error(`${err.response.status} : ${err.response.data.error}`);
       }
     }
   } catch (e) {
