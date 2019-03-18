@@ -18,7 +18,7 @@ const Catalog = ({ catalog }) => {
                 return (
                   <Row key={attributes.display_string}>
                     <Col xs={4} md={3}>{attributes.display_string}</Col>
-                    <Col xs={8} md={9}>{attributes.attribute_values.map((av) => av.value).join(', ')}</Col>
+                    <Col xs={8} md={9}>{attributes.attribute_values.map((av) => av.value + " " +(av.qualifier_unit ? av.qualifier_unit : "")).join(', ')}</Col>
                   </Row>
                 )
               })
