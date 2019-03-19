@@ -103,10 +103,14 @@ const WishlistBody = (props) => {
                           <SVGComponent clsName={`${styles['delete-icon']}`} src="icons/delete-icon/delete-icon" />
                         </span>
                         <h4 className={`${styles['fontW600']} ${styles['light-gry-clr']} ${styles['mt-25']}`}><span className={`${styles['fs-30']} ${styles['m-fs-18']}`}>{price}</span> <span className={`styles['fs-18']} ${styles['m-fs-14']}`}> {cur}</span></h4>
-                        <span className={`${styles['flex']}`}>
-                          <span className={`${styles['success-green']} ${styles.flex}`}>{percentage(price, mrp)}%</span>&nbsp;&nbsp;&nbsp;
-                          <strike className={`${styles['label-gry-clr']}`}>{mrp}&nbsp;{cur}</strike>
-                        </span>
+                        {
+                          variant_id && percentage(price, mrp) <= -5 &&
+                          <span className={`${styles['flex']}`}>
+                            <span className={`${styles['success-green']} ${styles.flex}`}>{percentage(price, mrp)}%</span>&nbsp;&nbsp;&nbsp;
+                            <strike className={`${styles['label-gry-clr']}`}>{mrp} {cur}</strike>
+                          </span>
+                        }
+                      
                         {wishlisted_price && price && cur && getPriceAlert(price, wishlisted_price, cur)}
                         {wishlisted_price &&
                         <span className={`${styles['thick-gry-clr']}`}>
