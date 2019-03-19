@@ -12,6 +12,7 @@ const initialState = {
         reasons: [],
         cancelStatus: {},
         exchangeVariants: [],
+        selectedReasons:{}
       },
     },
     error: '',
@@ -64,6 +65,19 @@ const productReducer = typeToReducer({
       data: {
         ...state.data,
         orderIssue,
+      }
+    }
+  },
+  [actions.SET_ADDRESS_DATA] : (state,action) => {
+    return {
+      ...state,
+      data: {
+        ...state.data,
+        orderIssue: {
+          ...state.data.orderIssue,
+          selectedReasons:action.payload.data
+
+        }
       }
     }
   },

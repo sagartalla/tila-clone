@@ -4,17 +4,43 @@ import { Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import moment from 'moment';
-
+import { Router } from '../../../../routes';
 import StatusWidget from '../StatusWidget';
 import constants from '../../../../constants';
 import { ORDER_ISSUE_TYPES, ORDER_ISSUE_STEPS } from '../../constants';
 import { actionCreators } from '../../../../store/order';
+import Cookies from 'universal-cookie';
 
 // import  styles from '../order.styl';
 import { mergeCss } from '../../../../utils/cssUtil';
 const styles = mergeCss('components/Order/order');
+const cookies = new Cookies();
 
-const OrderItem = ({ payments=[{}], orderItem, raiseOrderIssue, orderId, showWidget, thankyouPage }) => {
+const language = cookies.get('language') || 'en';
+const country = cookies.get('country') || 'SAU';
+
+const RenderButton = ({callbackMethod,refundType}) => {
+  return (
+    <div className={styles['cancel-btn']}>
+      <span
+        className={`${styles['link-text']} ${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']} ${styles['fs-12']}`}
+        onClick={callbackMethod}>{refundType}</span>
+    </div>
+  )
+}
+
+const OrderItem = ({
+  payments=[{}],
+  orderItem,
+  raiseOrderIssue,
+  isCancelable,
+  isReturnable,
+  isExchangable,
+  orderId,
+  showWidget,
+  variantId,
+  thankyouPage,
+ }) => {
   const { products } = orderItem;
 
   const cancelOrder = () => {
@@ -26,13 +52,14 @@ const OrderItem = ({ payments=[{}], orderItem, raiseOrderIssue, orderId, showWid
     });
   };
 
-  const exchangeReturnOrder = () => {
-    raiseOrderIssue({
-      issueType: null,
-      items: products,
-      defaultStep: ORDER_ISSUE_STEPS.LIST,
-      orderId,
-    });
+  const exchangeReturnOrder = (OrderType) => () => {
+      Router.pushRoute(`/${country}/${language}/cam/orders/${orderId}/issue/${OrderType}/item/${orderItem.id}/${variantId}`)
+    // raiseOrderIssue({
+    //   issueType: null,
+    //   items: products,
+    //   defaultStep: ORDER_ISSUE_STEPS.LIST,
+    //   orderId,
+    // });
   };
 
   const btnType = (() => {
@@ -46,7 +73,7 @@ const OrderItem = ({ payments=[{}], orderItem, raiseOrderIssue, orderId, showWid
       return null;
     }
   })();
-  console.log(orderId);
+  // console.log(isCancelable);
   return (
     <div className={`${styles['shipment-wrap']} ${styles['mb-20']} ${styles['mt-20']} ${styles['flex']}`}>
       <Col md={7} sm={7} className={`${styles['pl-0']} ${styles['pr-0']}`}>
@@ -104,16 +131,20 @@ const OrderItem = ({ payments=[{}], orderItem, raiseOrderIssue, orderId, showWid
                       {btnType === 'cancel' ? moment(orderItem.products[0].promisedDeliveryDate).format('Do, dddd') : showWidget && !thankyouPage ? moment(orderItem.products[0].state_time_estimates.CANCELLED.time).format('Do, dddd') : null}
                     </div>
                   </div>
-                  {
-                    btnType ?
-                      <div className={styles['cancel-btn']}>
-                        <span
-                          className={`${styles['link-text']} ${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']} ${styles['fs-12']}`}
-                          onClick={btnType === 'cancel' ? cancelOrder : exchangeReturnOrder}> {btnType === 'cancel' ? 'Cancel' : 'Return/Exchange'}</span>
-                      </div>
-                      :
-                      null
+                  {isCancelable === 'TRUE' && <RenderButton callbackMethod={cancelOrder}
+                   refundType = 'Cancel'
+                   />}
+
+                   {isReturnable &&
+                   <RenderButton
+                     callbackMethod={exchangeReturnOrder(ORDER_ISSUE_TYPES.RETURN)}
+                     refundType='Return' />}
+                  {isExchangable &&
+                    <RenderButton
+                      callbackMethod={exchangeReturnOrder(ORDER_ISSUE_TYPES.EXCHANGE)}
+                      refundType='Exchange' />
                   }
+
                 </div>
                 <div className={`${styles['widget-wrap']} ${styles['pt-10']} ${styles['pb-10']}`}>
                   {
@@ -148,3 +179,16 @@ OrderItem.propTypes = {
 }
 
 export default connect(null, mapDispatchToProps)(OrderItem);
+
+
+
+
+
+// btnType ?
+//   <div className={styles['cancel-btn']}>
+//     <span
+//       className={`${styles['link-text']} ${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']} ${styles['fs-12']}`}
+//       onClick={btnType === 'cancel' ? cancelOrder : exchangeReturnOrder}> {btnType === 'cancel' ? 'Cancel' : 'Return/Exchange'}</span>
+//   </div>
+//   :
+//   null

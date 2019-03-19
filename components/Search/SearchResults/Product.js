@@ -71,7 +71,8 @@ class Product extends Component {
   buyNow(e) {
     e.stopPropagation();
     const { variants } = this.props;
-    this.props.buyNow(variants.listingId[0]);
+    const {selectedIndex} = this.state;
+    this.props.buyNow(variants[selectedIndex].listingId[0]);
   }
 
   notify(e) {

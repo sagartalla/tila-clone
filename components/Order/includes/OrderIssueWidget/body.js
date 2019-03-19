@@ -12,11 +12,13 @@ import CancelComplete from './CancelComplete';
 import ReturnExchange from './ReturnExchange';
 import ChooseAddress from './ChooseAddress';
 import ReturnComplete from './ReturnComplete';
+import ChoosePaymentMode from './ChoosePaymentMode';
 import { ORDER_ISSUE_STEPS as STEPS, ORDER_ISSUE_TYPES } from '../../constants';
-
+import Cookies from 'universal-cookie';
 import { selectors, actionCreators } from '../../../../store/order';
 
 import { mergeCss } from '../../../../utils/cssUtil';
+
 const styles = mergeCss('components/Order/includes/OrderIssueWidget/orderIssue');
 
 
@@ -33,34 +35,74 @@ class Body extends Component {
   }
 
   getBody(step, items) {
-    switch(step) {
+    switch (step) {
       case STEPS.LIST: {
         return <List goToNextStep={this.goToNextStep} />;
       }
       case STEPS.REASONS: {
-        return <Reason goToNextStep={this.goToNextStep} />;
+        return (
+          <Reason goToNextStep={this.goToNextStep} query={this.props.query} />
+        );
       }
       case STEPS.CANCEL_COMPLETE: {
         return <CancelComplete goToNextStep={this.goToNextStep} />;
       }
       case STEPS.CHOOSE_RETURN_EXCHANGE: {
-        return <ReturnExchange goToNextStep={this.goToNextStep} />;
+        return (
+          <ReturnExchange
+            goToNextStep={this.goToNextStep}
+            query={this.props.query}
+          />
+        );
       }
       case STEPS.CHOOSE_ADDRESS: {
-        return <ChooseAddress goToNextStep={this.goToNextStep} />
+        return (
+          <ChooseAddress
+            goToNextStep={this.goToNextStep}
+            query={this.props.query}
+          />
+        );
+      }
+      case STEPS.CHOOSE_PAYMENT_MODE: {
+        return (
+          <ChoosePaymentMode
+            goToNextStep={this.goToNextStep}
+            query={this.props.query}
+          />
+        );
       }
       case STEPS.RETURN_COMPLETE: {
-        return <ReturnComplete goToNextStep={this.goToNextStep} />
+        return <ReturnComplete
+                goToNextStep={this.goToNextStep}
+                query={this.props.query}
+              />;
       }
       default: {
-        return <List goToNextStep={this.goToNextStep} />;;
+        return <List goToNextStep={this.goToNextStep} />;
       }
     }
   }
 
+  getButton(step) {
+    if (step === 'cancelSuccess') {
+      return 'done';
+    }
+    return 'continue';
+  }
+
+  closePopup() {
+    this.props.resetOrderIssue();
+  }
+
   goToNextStep() {
+    debugger;
     const { goToNextStep, resetOrderIssue, orderIssue } = this.props;
-    const { step: currentStep, issueType, returnExchangeType, selectedItem } = orderIssue;
+    const {
+      step: currentStep,
+      issueType,
+      returnExchangeType,
+      selectedItem,
+    } = orderIssue;
     let nextStep = STEPS.LIST;
     switch (currentStep) {
       case STEPS.LIST: {
@@ -77,70 +119,55 @@ class Body extends Component {
       }
       case STEPS.CHOOSE_RETURN_EXCHANGE: {
         nextStep = returnExchangeType;
-        break
+        break;
       }
-      case STEP.CHOOSE_ADDRESS: {
-        nextStep = STEPS.RETURN_COMPLETE;
+      case STEPS.CHOOSE_ADDRESS: {
+        nextStep =
+          issueType === ORDER_ISSUE_TYPES.RETURN
+            ? STEPS.CHOOSE_PAYMENT_MODE
+            : STEPS.RETURN_COMPLETE;
+        break;
       }
-      case STEP.RETURN_COMPLETE: {
-        Rotuer.pushRoute('/cam/orders');
-        return;
+      case STEPS.RETURN_COMPLETE: {
+        nextStep = null;
+        Router.pushRoute(`/${country}/${language}/cam/orders`);
+        break;
       }
+      default:
     }
     nextStep !== null
-    ?
-    nextStep === ORDER_ISSUE_TYPES.EXCHANGE || nextStep === ORDER_ISSUE_TYPES.RETURN
-    ?
-    Router.pushRoute(`/${country}/${language}/cam/orders/${orderIssue.orderId}/issue/${returnExchangeType}/item/${selectedItem.id}`)
-    :
-    goToNextStep({ nextStep, })
-    :
-    resetOrderIssue();
-  }
-
-  closePopup() {
-    this.props.resetOrderIssue();
-  }
-
-  getButton(step) {
-    if(step === 'cancelSuccess') {
-      return 'done';
-    } else {
-      return 'continue';
-    }
+      ?
+      goToNextStep({ nextStep })
+      : resetOrderIssue();
   }
 
   render() {
     const { orderIssue } = this.props;
     const { step } = orderIssue;
-    return (
-      <div>
-        {this.getBody(step)}
-      </div>
-    )
+    return <div>{this.getBody(step)}</div>;
   }
 }
 
-const mapStateToProps = (store) => {
-  return ({
-    orderIssue: selectors.getOrderIssue(store)
-  })
-};
+const mapStateToProps = store => ({
+  orderIssue: selectors.getOrderIssue(store),
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators(
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
     {
       goToNextStep: actionCreators.goToNextStep,
       resetOrderIssue: actionCreators.resetOrderIssue,
     },
     dispatch,
   );
-}
 
 Body.propTypes = {
   goToNextStep: PropTypes.func.isRequired,
   resetOrderIssue: PropTypes.func.isRequired,
   orderIssue: PropTypes.object.isRequired,
-}
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Body);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Body);

@@ -18,12 +18,12 @@ const {ORDER_PAGE} = languageDefinations()
 class OrderReturnExchange extends Component {
   componentDidMount(){
     const { query, orderIssue, getSelectedOrder, setOrderIssueData } = this.props;
-    const { orderId, orderItemId, returnExchangeType } = query;
+    const { orderId, orderItemId, returnExchangeType,variantId } = query;
     const params = {
       orderId: orderId,
       issueType: null,
       step: STEPS.REASONS,
-      returnExchangeType: returnExchangeType,
+      returnExchangeType: returnExchangeType
     };
     if(!orderIssue.selectedItem) {
       params.selectedItem = getSelectedOrder(query.orderItemId);
@@ -54,7 +54,7 @@ class OrderReturnExchange extends Component {
                 </div>
               </Col>
               <Col md={6}>
-                <OrderIssueBody />
+                <OrderIssueBody query={query} />
               </Col>
             </Row>
           </Grid>

@@ -1,7 +1,7 @@
 import fp, * as _ from 'lodash/fp';
 import shortid from 'shortid';
 
-const getOrderDetails = (store) => {  
+const getOrderDetails = (store) => {
   const { created_by, customer_account_id, address, order_id, created_at, order_items, price, total_shipping, currency_code, payments } = store.singleOrderReducer.data.orderDetails;
   if (order_id) {
     return {
@@ -18,7 +18,15 @@ const getOrderDetails = (store) => {
       //TODO move compose to common util
       orderItems: _.compose(
         _.reduce.convert({ 'cap': false })((acc, val, key) => {
-          return acc.concat({ id: key, products: [val], status: val.status });
+          return acc.concat({
+            id: val.id,
+            products: [val],
+            status: val.status,
+            variantId:val.variantId,
+            isCancelable:val.isCancelable,
+            isReturnable:val.isReturnable,
+            isExchangable:val.isExchangable
+           });
         }, []),
         _.map((i) => ({
           id: i.order_item_ids[0],
@@ -30,7 +38,11 @@ const getOrderDetails = (store) => {
           price: i.price.offer_price,
           currency_code: currency_code,
           orderIds: i.order_item_ids,
-          promisedDeliveryDate: i.promised_delivery_date
+          variantId:i.variant_id,
+          promisedDeliveryDate: i.promised_delivery_date,
+          isCancelable:i.cancelable,
+          isReturnable:i.returnable,
+          isExchangable:i.exchangeable
         }))
       )(order_items)
     };
@@ -44,7 +56,9 @@ const getOrderDetails = (store) => {
 const getOrderIssue = (store) => {
   return store.singleOrderReducer.data.orderIssue;
 }
-
+const getOrderInfo = (store) => {
+  return store.singleOrderReducer.data.orderDetails
+}
 const getCancelStatus = (store) => {
   return store.singleOrderReducer.data.orderIssue.cancelStatus;
 }
@@ -58,8 +72,20 @@ const getLoadingStatus = (store) => {
 }
 
 const getSelectedOrder = (store) => (orderItemId) => {
-  const item = _.find({ order_item_id: orderItemId }, store.singleOrderReducer.data.orderDetails.order_items);
-  return { id: item.order_item_id, img: item.variant_info.image_url, name: item.variant_info.title, item_tracking_id: item.item_tracking_id || shortid.generate(), status: item.external_status }
+  const item = store.singleOrderReducer.data.orderDetails.order_items.find((el,key) => {
+    return el.order_item_ids[0] === orderItemId
+  })
+  // const item = _.find([ 'order_item_ids',orderItemId ], store.singleOrderReducer.data.orderDetails.order_items);
+
+  var itemObj = {
+    id: item.order_item_ids[0],
+    img: item.variant_info.image_url,
+    name: item.variant_info.title,
+    item_tracking_id: item.item_tracking_id || shortid.generate(),
+    status: item.external_status
+  }
+  return itemObj
+
 }
 
 const getReturnStatus = (store) => {
@@ -130,4 +156,4 @@ const getExchangeOptions = (store) => {
   };
 }
 
-export { getOrderDetails, getOrderIssue, getCancelStatus, getErrorMessege, getLoadingStatus, getSelectedOrder, getReturnStatus, getExchangeOptions };
+export { getOrderDetails, getOrderIssue, getOrderInfo, getCancelStatus, getErrorMessege, getLoadingStatus, getSelectedOrder, getReturnStatus, getExchangeOptions };

@@ -24,7 +24,7 @@ class ReturnComplete extends Component {
   }
 
   render() {
-    const { orderIssue, loadingStatus, errorMessege, goToNextStep } = this.props;
+    const { orderIssue, loadingStatus, errorMessege, goToNextStep,query } = this.props;
     const { selectedItem } = orderIssue;
     return (
       <div>
@@ -46,10 +46,22 @@ class ReturnComplete extends Component {
                   <span>{ORDER_PAGE.YOUR_ORDER}{selectedItem.name}</span>
                 </div>
                 <div>
-                  <span>{ORDER_PAGE.REQ_RETURN_SUCCESS}</span>
+                  <span>
+                    {
+                      query.returnExchangeType === 'Return' ?
+                      ORDER_PAGE.REQ_RETURN_SUCCESS :
+                      ORDER_PAGE.REQ_EXCHANGE_SUCCESS
+                  }
+                  </span>
                 </div>
                 <div>
-                  <span>{ORDER_PAGE.RETURN_MESSAGE}</span>
+                  <span>
+                    {
+                      query.returnExchangeType === 'Return' ?
+                      ORDER_PAGE.RETURN_MESSAGE : ''
+
+                    }
+                  </span>
                 </div>
               </div>
             }
