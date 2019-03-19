@@ -6,6 +6,7 @@ import CartStepper from './CartStepper';
 import SVGComponent from '../../common/SVGComponet';
 import { mergeCss } from '../../../utils/cssUtil';
 import { languageDefinations } from '../../../utils/lang/';
+import constants from '../../../constants';
 
 const styles = mergeCss('components/Cart/cart');
 const { CART_PAGE } = languageDefinations();
@@ -152,7 +153,7 @@ class CartItem extends React.Component {
                 className={`${styles['flex-center']} ${styles['justify-center']} ${styles['pb-15']} ${styles['card-box-inn-img']}`}
                 onClick={() => routeChange(variant_id, product_id, catalogId, itemType)}
               >
-                <img className={styles.img} alt={img} src={img} />
+                <img className={styles.img} alt={img} src={`${constants.mediaDomain}/${img}`} />
               </div>
               <CartStepper
                 count={count}
