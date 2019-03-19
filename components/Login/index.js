@@ -16,10 +16,6 @@ const styles = mergeCss('components/Login/login');
 const { LOGIN_PAGE } = languageDefinations();
 import FormValidator from '../common/FormValidator';
 
-const styles = mergeCss('components/Login/login');
-const { LOGIN_PAGE } = languageDefinations()
-
-
 class Login extends Component {
   constructor(props) {
     super(props);
