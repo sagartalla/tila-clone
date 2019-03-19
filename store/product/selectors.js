@@ -23,11 +23,24 @@ const getProduct = (store, variantId) => {
     // }
     return listing.total_inventory_count > 0 && listing.active
   }) : [];
+  let warranty = variant_preferred_listings[computedVariantId][0].warranty_policy.policies.TILA
   priceInfo = priceInfo.length ? priceInfo[0] : null;
 
   const availabilityError = !priceInfo;
   const stockError = !priceInfo;
-
+  let showSizeChart;
+  const sizeChartImgName = product_details && product_details.catalog_details &&
+  product_details.catalog_details.attribute_map && product_details.catalog_details.attribute_map.ideal_for &&
+  product_details.catalog_details.attribute_map.ideal_for.attribute_values &&
+  product_details.catalog_details.attribute_map.ideal_for.attribute_values[0].value;
+  if (tree && tree.breadcrumb && tree.breadcrumb.length > 0 && tree.breadcrumb[0].display_name_en === 'Fashion') {
+    tree.breadcrumb.map((category) => {
+      if (category.display_name_en === 'Clothing' || category.display_name_en === 'Footwear') {
+        showSizeChart = true;
+      }
+    });
+  }
+    
   const imgUrls = product_details.product_details_vo.cached_product_details.media.gallery_media;
   const titleInfo = {
     brand: product_details.catalog_details.attribute_map.brand.attribute_values[0].value,
@@ -96,7 +109,12 @@ const getProduct = (store, variantId) => {
     product_id,
     productDescription,
     catalogObj,
+    sizeChart: {
+      showSizeChart,
+      sizeChartImgName,
+    },
     breadcrums: tree.breadcrumb,
+    warranty,
     categoryType: tree.finance ? tree.finance[0].display_name_en : '',
     catalog: _.groupBy(_.filter(catalogAttributeMap, (val) => val.visible), (attrMap) => attrMap.attribute_category_name)
   };
