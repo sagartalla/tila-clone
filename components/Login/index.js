@@ -11,11 +11,10 @@ import ForgotPassword from './ForgotPassword';
 import SocialLogin from './SocialLogin';
 import { mergeCss } from '../../utils/cssUtil';
 import { languageDefinations } from '../../utils/lang';
-import FormValidator from '../common/FormValidator';
-
 const styles = mergeCss('components/Login/login');
-const { LOGIN_PAGE } = languageDefinations()
 
+const { LOGIN_PAGE } = languageDefinations();
+import FormValidator from '../common/FormValidator';
 
 class Login extends Component {
   constructor(props) {
@@ -63,10 +62,10 @@ class Login extends Component {
 
   componentWillReceiveProps(nextProps) {
     let { userCreds, error } = nextProps;
-    userCreds = userCreds || this.props.userCreds
+    userCreds = userCreds || this.props.userCreds;
     if (error) {
       this.setState({
-        error
+        error,
       });
       return;
     }
@@ -199,7 +198,7 @@ class Login extends Component {
           {
             error
               ?
-              <div className={`${styles['text-center']} ${styles['error-msg']}`}>
+                <div className={`${styles['text-center']} ${styles['error-msg']}`}>
                 <span>{error}</span>
               </div>
               :
@@ -216,8 +215,8 @@ class Login extends Component {
                 </div> */}
                 <div className={`${styles['fp-input']} ${styles['pb-10']}`}>
                   <input onChange={this.onChangeField} name="email" type="email" value={this.state.email} required />
-                  <span className={styles['highlight']}></span>
-                  <span className={styles['bar']}></span>
+                  <span className={styles.highlight} />
+                  <span className={styles.bar} />
                   <label>{LOGIN_PAGE.EMAIL}</label>
                   {
                     validation.email.message
@@ -239,8 +238,8 @@ class Login extends Component {
                 </div> */}
                 <div className={`${styles['fp-input']} ${styles['pb-10']}`}>
                   <input onChange={this.onChangeField} name="password" type="password" value={this.state.password} required />
-                  <span className={styles['highlight']}></span>
-                  <span className={styles['bar']}></span>
+                  <span className={styles.highlight} />
+                  <span className={styles.bar} />
                   <label>{LOGIN_PAGE.PASSWORD}</label>
                   {
                     validation.password.message
@@ -292,9 +291,9 @@ class Login extends Component {
                 {
                   this.state.mode === 'register'
                     ?
-                    <div className={`${styles['checkbox-material']} ${styles['flex']} ${styles['pb-15']}`}>
+                      <div className={`${styles['checkbox-material']} ${styles.flex} ${styles['pb-15']}`}>
                       <input id="deals-offers-reg" type="checkbox" />
-                      <label for="deals-offers-reg">I would like to receive deals and offers.</label>
+                      <label htmlFor="deals-offers-reg">I would like to receive deals and offers.</label>
                     </div>
                     :
                     null
@@ -304,13 +303,13 @@ class Login extends Component {
             <FormGroup>
               <Col md={12}>
                 {/* <Button className={`${styles['sign-in-btn']} ${styles['fontW700']}`} onClick={this.login}>{this.state.mode === 'register' ? `${LOGIN_PAGE.SIGN_UP}` : `${LOGIN_PAGE.SIGN_IN}`}</Button>  */}
-                <input className={`${styles['sign-in-btn']} ${styles['fontW700']}`} type="submit" value={this.state.mode === 'register' ? `${LOGIN_PAGE.SIGN_UP}` : `${LOGIN_PAGE.SIGN_IN}`} />
+                <input className={`${styles['sign-in-btn']} ${styles.fontW700}`} type="submit" value={this.state.mode === 'register' ? `${LOGIN_PAGE.SIGN_UP}` : `${LOGIN_PAGE.SIGN_IN}`} />
               </Col>
               <Col md={12}>
                 {
                   this.state.mode === 'register'
                     ?
-                    <p className={`${styles['fs-12']} ${styles['termes-label']} ${styles['pt-10']} ${styles['mb-0']}`}>By signing up, you agree to our terms and conditions.</p>
+                      <p className={`${styles['fs-12']} ${styles['termes-label']} ${styles['pt-10']} ${styles['mb-0']}`}>By signing up, you agree to our terms and conditions.</p>
                     :
                     null
                 }
@@ -345,7 +344,7 @@ class Login extends Component {
             {
               this.state.mode === 'register'
                 ?
-                <h4 className={`${styles['ff-b']} ${styles['fs-14']}`}>
+                  <h4 className={`${styles['ff-b']} ${styles['fs-14']}`}>
                   <span>{LOGIN_PAGE.HAVE_ACCOUNT}&nbsp;</span>
                   <span className={styles['link-text']} onClick={this.toggleLoginSignUp}>{LOGIN_PAGE.SIGN_IN}</span>
                 </h4>
@@ -370,15 +369,12 @@ class Login extends Component {
   }
 }
 
-const mapStateToProps = (store) => {
-  return ({
+const mapStateToProps = (store) => ({
     error: selectors.getErrorMessege(store),
     userCreds: selectors.getUserCreds(store)
-  })
-};
+  });
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators(
+const mapDispatchToProps = (dispatch) => bindActionCreators(
     {
       userLogin: actionCreators.userLogin,
       userRegister: actionCreators.userRegister,
@@ -387,6 +383,5 @@ const mapDispatchToProps = (dispatch) => {
     },
     dispatch,
   );
-}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

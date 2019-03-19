@@ -13,7 +13,7 @@ import PaymentMode from './includes/PaymentMode';
 import PaymentHeader from './includes/PaymentHeader';
 import LoyaltyPoints from './includes/LoyaltyPoints';
 import OffersAndDiscounts from './includes/OffersAndDiscounts';
-import RightSideBar from '../common/CartPaymentSideBar';
+import RightSideBar from '../Cart/CartPaymentSideBar';
 import { languageDefinations } from '../../utils/lang/';
 import DeliveryAddress from './includes/DeliveryAddress';
 import { actionCreators, selectors } from '../../store/payments';

@@ -16,6 +16,9 @@ const getCartResults = (store) => {
       newData.tax = 0;
       newData.item_cnt = data.items.length;
       newData.currency = data.items[0].listing_info.selling_price_currency;
+      newData.coupon_code = data.coupon_code;
+      newData.coupon_applied = data.coupon_applied;
+      newData.applyCouponRequestCount = data.applyCouponRequestCount;
       data.items.map((item, index) => {
         newData.items[index] = {
           item_id: item.cart_item_id,
@@ -28,11 +31,11 @@ const getCartResults = (store) => {
           selling_price: item.listing_info.pricing && item.listing_info.pricing.price,
           total_amount: item.total_amount,
           cur: item.listing_info.selling_price_currency,
-          img: img_url + '/' + item.product_details.product_details_vo.cached_product_details.media.gallery_media[0].url,
+          img: img_url + '/' + item && item.product_details && item.product_details.product_details_vo.cached_product_details.media.gallery_media[0].url,
           quantity: item.quantity,
           inventory: item.listing_info.total_inventory_count,
           max_limit: item.listing_info.max_limit_per_user,
-          brand_name: item.product_details.catalog_details.attribute_map.brand.attribute_values[0].value,
+          brand_name: item && item.product_details && item.product_details.catalog_details.attribute_map.brand.attribute_values[0].value,
           gift_info: item.gift_info,
           shipping: item.listing_info.shipping,
           catalogId: item.product_details.catalog_details.catalog_id,
