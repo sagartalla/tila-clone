@@ -31,7 +31,7 @@ class Wishlist extends Component {
   }
 
   deleteItem(e) {
-    this.props.deleteWishlist(e.currentTarget.id)
+    this.props.deleteWishlist(e.currentTarget.id, { showToast: true })
   }
 
   showCartPageBtmPopup() {

@@ -23,7 +23,8 @@ const PaymentMode = props => {
     "PAY_ONLINE": PayOnline,
     "GIFT_CARD": GiftCard,
     "NET_BANKING": NetBanking,
-    "CASH_ON_DELIVERY": CashOnDelivery
+    "CASH_ON_DELIVERY": CashOnDelivery,
+    'SAVED_CARD': Voucher,
   }
 
   const paymentPageIcons = {
@@ -32,7 +33,8 @@ const PaymentMode = props => {
     "PAY_ONLINE": 'credit-card',
     "GIFT_CARD": 'gift-card',
     "NET_BANKING": 'netbanking',
-    "CASH_ON_DELIVERY": 'cash-on-drt'
+    "CASH_ON_DELIVERY": 'cash-on-drt',
+    'SAVED_CARD': 'credit-card',
   }
 
   // const paymentTypeNames = {

@@ -6,6 +6,7 @@ import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
 const getSearchResultsApi = ({
+  categoryFacet,
   categoryFilter,
   country,
   pageSize,
@@ -35,7 +36,7 @@ const getSearchResultsApi = ({
     disableSpellCheck,
     requestContext: 'CUSTOMER_BROWSE',
   };
-  if (categoryTree) {
+  if (categoryTree && !categoryFacet) {
     options.categoryId = categoryFilter.id;
   } else {
     options.categoryFilter = categoryFilter;
