@@ -145,7 +145,6 @@ const getSearchResutls = (store) => {
 
         return modifiedVaraints;
     }, []);
-    console.log(variantInfo, "sssdsss");
 
       if(isNotifyMe) {
         variantInfo = []

@@ -184,7 +184,7 @@ class Product extends Component {
     const {
       productId, itemtype, media, displayName, categoryId,
     } = this.props;
-    console.log('categoryId', categoryId);
+    
     const src = `${constants.mediaDomain}/${media[0]}`;
     this.props.addToCompare({
       itemtype,
