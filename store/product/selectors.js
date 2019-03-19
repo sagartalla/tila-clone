@@ -23,7 +23,7 @@ const getProduct = (store, variantId) => {
     // }
     return listing.total_inventory_count > 0 && listing.active
   }) : [];
-  let warranty =  priceInfo.length ? priceInfo.warranty_policy.policies.TILA : {}
+  let warranty =  priceInfo.length ? priceInfo[0].warranty_policy.policies.TILA : {}
   priceInfo = priceInfo.length ? priceInfo[0] : null;
 
   const availabilityError = !priceInfo;
