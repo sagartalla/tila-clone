@@ -92,7 +92,7 @@ class Cart extends Component {
     digitalData.cart.item = digitalData.cart.item.filter((item) => {
       return item.productInfo.productID !== productId
     })
-    this.props.removeCartItem(e.currentTarget.id);
+    this.props.removeCartItem(e.currentTarget.id, { showToast: true});
   }
 
   increaseItemCnt(e) {
