@@ -23,7 +23,7 @@ const getProduct = (store, variantId) => {
     // }
     return listing.total_inventory_count > 0 && listing.active
   }) : [];
-  let warranty = variant_preferred_listings[computedVariantId][0].warranty_policy.policies.TILA
+  let warranty =  priceInfo.length ? priceInfo[0].warranty_policy.policies.TILA : {}
   priceInfo = priceInfo.length ? priceInfo[0] : null;
 
   const availabilityError = !priceInfo;
@@ -40,7 +40,7 @@ const getProduct = (store, variantId) => {
       }
     });
   }
-    
+
   const imgUrls = product_details.product_details_vo.cached_product_details.media.gallery_media;
   const titleInfo = {
     brand: product_details.catalog_details.attribute_map.brand.attribute_values[0].value,

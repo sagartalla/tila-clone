@@ -5,6 +5,7 @@ import { Row, Col } from 'react-bootstrap';
 import SVGComponent from '../../common/SVGComponet';
 import Blocker from '../../common/Blocker';
 import CartStepper from './CartStepper';
+import constants from '../../../constants';
 
 import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Cart/cart');
@@ -34,7 +35,7 @@ const MiniCartBody = props => {
                 <div key={item_id} className={`${styles['flex']} ${styles['pt-15']} ${styles['pb-15']} ${styles['border-b']} ${styles['min-items-list']}`}>
                   <Col md={2} sm={2} xs={2} className={`${styles['pl-0']} ${styles['pr-0']}`}>
                     <div className={`${styles['cart-container-img']} ${styles['flex']} ${styles['justify-center']}`}>
-                      <img className={styles['img']} src={img} />
+                      <img className={styles['img']} src={`${constants.mediaDomain}/${img}`} />
                     </div>
                   </Col>
                   <Col md={10} sm={10} xs={10} className={`${styles['pr-0']} ${styles['card-details-labels']}`}>

@@ -6,7 +6,9 @@ import constants from '../helper/constants';
 
 const getCartDetailsApi = (params = {}) => {
   return axios.put(`${constants.CART_API_URL}/api/v1/cart/view`, params).then(({ data }) => {
-    data.applyCouponRequestCount = params.applyCouponRequestCount;
+    if (data) {
+      data.applyCouponRequestCount = params.applyCouponRequestCount;
+    }
     return { data };
   });
 };

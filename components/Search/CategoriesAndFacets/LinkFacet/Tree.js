@@ -48,7 +48,7 @@ class Tree extends Component {
               }
               return (
                 <li key={category.id} className={ first ? styles['main-sub-list'] : styles['category-sub-list-inn']}>
-                  <Link route={`/${country}/${language}/srp/${category.canonicalId}/${queryString}`}><a>{category.name}</a></Link>
+                  <Link route={`/${country}/${language}/srp/${category.canonicalId}/${queryString}&categoryFacet=true`}><a>{category.name}</a></Link>
                   {/*<ul className={`${styles['category-sub-order-list']} ${styles['pl-15']}`}>
                     {
                       category.children.map((subcategory) => {
