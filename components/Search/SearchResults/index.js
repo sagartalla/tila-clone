@@ -80,7 +80,9 @@ class SearchResults extends Component {
   }
 
   render() {
-    const { results, pagiantionDetails, userDetails, notifyMe } = this.props;
+    const {
+      results, pagiantionDetails, userDetails, notifyMe, cartButtonLoaders,
+    } = this.props;
     const { pageNum } = this.props.pagiantionDetails;
     return (
       <div>
@@ -101,6 +103,7 @@ class SearchResults extends Component {
               addToCart={this.addToCart}
               index={`${item.id}_${index}`}
               pageNum={pageNum}
+              cartButtonLoaders={cartButtonLoaders}
               userDetails={userDetails}
               notifyMe={notifyMe}
               productID={item.id}
@@ -120,6 +123,7 @@ const mapStateToProps = store => ({
   ui: selectors.getUIState(store),
   isAddedToCart: cartSelector.isAddedToCart(store),
   userDetails: selectors.getUserDetails(store),
+  cartButtonLoaders: selectors.getCartButtonLoaders(store),
 });
 
 const mapDispatchToProps = dispatch =>

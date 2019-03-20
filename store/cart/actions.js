@@ -6,7 +6,9 @@ const actions = {
   REMOVE_CART_ITEM: 'REMOVE_CART_ITEM',
   CART_ITEM_COUNT: 'CART_ITEM_COUNT',
   ADD_REMOVE_GIFT: 'ADD_REMOVE_GIFT',
-  RESET_ADD_TO_CART: 'RESET_ADD_TO_CART'
+  RESET_ADD_TO_CART: 'RESET_ADD_TO_CART',
+  SHOW_CART_BUTTON_LOADER: 'SHOW_CART_BUTTON_LOADER',
+  HIDE_CART_BUTTON_LOADER: 'HIDE_CART_BUTTON_LOADER',
 };
 
 const actionCreators = {
@@ -58,11 +60,23 @@ const actionCreators = {
     type: actions.RESET_ADD_TO_CART
   }),
 
-  addToCartAndFetch: (params) => (dispatch, getState) => {
+  showBtnLoader: params => ({
+    type: actions.SHOW_CART_BUTTON_LOADER,
+    params,
+  }),
+
+  hideBtnLoader: params => ({
+    type: actions.HIDE_CART_BUTTON_LOADER,
+    params,
+  }),
+
+  addToCartAndFetch: params => (dispatch, getState) => {
+    dispatch(actionCreators.showBtnLoader(params));
     return dispatch(actionCreators.addToCart(params)).then(() => {
       dispatch(actionCreators.getCartResults());
-    })
-  }
+      dispatch(actionCreators.hideBtnLoader(params));
+    });
+  },
 };
 
 export { actions, actionCreators };

@@ -2,9 +2,10 @@ import React from 'react'
 import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Search/search');
 
-const RenderVariants = ({variantData,onSelectedVariant,isvisible,OncloseVariant}) => {
-  const selectProductSize = (listingId,index) => (e) => {
+const RenderVariants = ({ variantData, onSelectedVariant, isvisible, OncloseVariant }) => {
+  const selectProductSize = (listingId, index) => (e) => {
     e.stopPropagation();
+    e.preventDefault();
     onSelectedVariant(listingId,index)
   }
   return(

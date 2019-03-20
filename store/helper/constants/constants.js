@@ -11,6 +11,7 @@ env = env.trim();
 
 const a = {
   local: {
+    IMAGE_SEARCH_URL: 'https://gateway-dev.fptechscience.com/image-search',
     SEARCH_API_URL: 'https://gateway-dev.fptechscience.com/search',
     CATALOG_API_URL: 'https://catalogapis-dev.fptechscience.com',
     LISTING_API_URL: 'https://gateway-dev.fptechscience.com/listing',
@@ -30,6 +31,7 @@ const a = {
     COUPONS_URL: 'https://api-gateway-stage.fptechscience.com/dip/fpts',
   },
   dev: {
+    IMAGE_SEARCH_URL: 'https://apigateway-dev.tila.com/image-search',
     SEARCH_API_URL: 'https://apigateway-dev.tila.com/search',
     CATALOG_API_URL: 'https://catalogapis-dev.fptechscience.com',
     LISTING_API_URL: 'https://apigateway-dev.tila.com/listing',
@@ -49,6 +51,7 @@ const a = {
     COUPONS_URL: 'https://api-gateway-stage.fptechscience.com/dip/fpts',
   },
   staging: {
+    IMAGE_SEARCH_URL: 'https://api-gateway-stage.fptechscience.com/image-search',
     SEARCH_API_URL: 'https://api-gateway-stage.fptechscience.com/search',
     CATALOG_API_URL: 'http://api-gateway-internal-stage.fptsinternal.com/catalogapi',
     LISTING_API_URL: 'https://api-gateway-stage.fptechscience.com/listing',
@@ -68,6 +71,7 @@ const a = {
     COUPONS_URL: 'https://api-gateway-stage.fptechscience.com/dip/fpts',
   },
   stage: {
+    IMAGE_SEARCH_URL: 'https://api-gateway-stage.fptechscience.com/image-search',
     SEARCH_API_URL: 'https://api-gateway-stage.fptechscience.com/search',
     CATALOG_API_URL: 'http://api-gateway-internal-stage.fptsinternal.com/catalogapi',
     LISTING_API_URL: 'https://api-gateway-stage.fptechscience.com/listing',
@@ -87,6 +91,7 @@ const a = {
     COUPONS_URL: 'https://api-gateway-stage.fptechscience.com/dip/fpts',
   },
   preprod: {
+    IMAGE_SEARCH_URL: 'https://apigateway-preprod.tila.com/image-search',
     SEARCH_API_URL: 'https://apigateway-preprod.tila.com/search',
     CATALOG_API_URL: 'http://api-gateway-internal-stage.fptsinternal.com/catalogapi',
     LISTING_API_URL: 'https://apigateway-preprod.tila.com/listing',
@@ -106,6 +111,7 @@ const a = {
     COUPONS_URL: 'https://api-gateway-stage.fptechscience.com/dip/fpts',
   },
   prod: {
+    IMAGE_SEARCH_URL: 'https://gateway-dev.fptechscience.com/image-search',
     SEARCH_API_URL: 'http://gateway-dev.fptechscience.com/search',
     CATALOG_API_URL: 'http://api-gateway-internal-stage.fptsinternal.com',
     LISTING_API_URL: 'http://gateway-dev.fptechscience.com/listing',
