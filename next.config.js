@@ -4,6 +4,7 @@ const withCSS = require('@zeit/next-css');
 // const commonsChunkConfig = require('@zeit/next-css/commons-chunk-config');
 const path = require('path');
 const git = require('git-rev-sync');
+const webpack = require('webpack')
 const withSourceMaps = require('@zeit/next-source-maps')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 // require('./deploy/env');
@@ -28,11 +29,11 @@ module.exports = withSourceMaps(withStylus(withCSS({
   generateBuildId: async () => {
     return version;
   },
-  webpack: (config, { dev }) => {
+  webpack: (config, { dev, isServer, buildId }) => {
     // Fixes npm packages that depend on `fs` module
-    // config.node = {
-    //   fs: 'empty'
-    // }
+    config.node = {
+      fs: 'empty'
+    }
     // config.plugins = [
     //   new BundleAnalyzerPlugin()
     // ]
@@ -57,6 +58,11 @@ module.exports = withSourceMaps(withStylus(withCSS({
     //     path.resolve('./node_modules')
     //   ]
     // });
+    config.plugins.push(
+      new webpack.DefinePlugin({
+        'process.env.SENTRY_RELEASE': JSON.stringify(buildId)
+      })
+    );
     config.module.rules.push({
       test: /\.svg$/,
       loader: 'svg-inline-loader'

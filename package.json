@@ -1,7 +1,7 @@
 {
   "name": "storefront",
   "scripts": {
-    "dev": "LOCAL=true ENV=stage node --inspect server.js",
+    "dev": "SENTRY_DSN=https://f330056a5bc44dc1bb2561bbd0929d9a@sentry.fptechscience.com/2 LOCAL=true ENV=stage node --inspect server.js",
     "build": "version=$version next build",
     "start": "NODE_ENV=production ENV=dev node server.js",
     "start:ecs": "NODE_ENV=production node server.js",
@@ -10,6 +10,8 @@
     "start:prod": "NODE_ENV=production ENV=production node server.js"
   },
   "dependencies": {
+    "@sentry/browser": "^4.6.4",
+    "@sentry/node": "^4.6.4",
     "@zeit/next-css": "1.0.1",
     "@zeit/next-source-maps": "0.0.2",
     "@zeit/next-stylus": "1.0.1",
@@ -46,13 +48,15 @@
     "redux-devtools-extension": "^2.13.5",
     "redux-promise-middleware": "^5.1.1",
     "redux-thunk": "^2.3.0",
+    "sentry-testkit": "^2.1.0",
     "sha.js": "^2.4.11",
     "shortid": "^2.2.12",
     "slick-carousel": "^1.8.1",
     "stylus": "^0.54.5",
     "type-to-reducer": "^1.1.0",
     "universal-cookie": "^2.2.0",
-    "universal-cookie-express": "^2.2.0"
+    "universal-cookie-express": "^2.2.0",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.6",
