@@ -1,55 +1,54 @@
-    import React, { Component } from 'react';
-    import PropTypes from 'prop-types';
-    import { Modal } from 'react-bootstrap';
-    import { connect } from 'react-redux';
-    import { bindActionCreators } from 'redux';
-    import Cookie from 'universal-cookie';
-    import Button from '../../../common/Button';
-    import Input from '../../../common/Input';
-    import { languageDefinations } from '../../../../utils/lang/';
-    import { mergeCss } from '../../../../utils/cssUtil';
-    import { actionCreators, selectors } from '../../../../store/cart';
-    import { actionCreators as couponActionCreators, selectors as couponSelectors } from '../../../../store/coupons';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Modal } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import Cookie from 'universal-cookie';
+import Button from '../../../common/Button';
+import Input from '../../../common/Input';
+import { languageDefinations } from '../../../../utils/lang/';
+import { mergeCss } from '../../../../utils/cssUtil';
+import { actionCreators, selectors } from '../../../../store/cart';
+import { actionCreators as couponActionCreators, selectors as couponSelectors } from '../../../../store/coupons';
 
-    const { COUPON_OFFERS } = languageDefinations();
-    const cookies = new Cookie();
+const { COUPON_OFFERS } = languageDefinations();
+const cookies = new Cookie();
 
-    const styles = mergeCss('components/Cart/CartPaymentSideBar/coupons/index');
+const styles = mergeCss('components/Cart/CartPaymentSideBar/coupons/index');
 
 
-    class Coupon extends Component {
-      constructor(props) {
-        super(props);
-        this.state = {
-          showTerms: false,
-          termsOfUse: '',
-          howToUse: '',
-          showHowToUse: false,
-          errorMsg: '',
-          couponApplied: true,
-          applyCouponRequestCount: 0,
-          copuonAttempted: false,
-        };
-      }
+class Coupon extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showTerms: false,
+      termsOfUse: '',
+      howToUse: '',
+      showHowToUse: false,
+      errorMsg: '',
+      couponApplied: true,
+      applyCouponRequestCount: 0,
+      copuonAttempted: false,
+    };
+  }
 
-     componentDidMount() {
-        this.props.getCouponOffers(cookies.get('country'));
+  componentDidMount() {
+    this.props.getCouponOffers(cookies.get('country'));
+  }
 
-     }
-
-     componentWillReceiveProps (nextProps) {
-       const {
-         closeSlider, openSlider,
-       } = this.props;
-       this.setState({
-         couponApplied: this.state.copuonAttempted && nextProps.cartData.coupon_applied,
-       });
-       if (this.state.copuonAttempted && nextProps.cartData.coupon_applied) {
-         closeSlider();
-       } else {
-         openSlider();
-       }
-     }
+  componentWillReceiveProps(nextProps) {
+    const {
+      closeSlider, openSlider,
+    } = this.props;
+    this.setState({
+      couponApplied: this.state.copuonAttempted && nextProps.cartData.coupon_applied,
+    });
+    if (this.state.copuonAttempted && nextProps.cartData.coupon_applied) {
+      closeSlider();
+    } else {
+      openSlider();
+    }
+  }
 
      showTerms = data => () => {
        this.setState({
@@ -78,22 +77,22 @@
 
     handleApply = data => () => {
       const {
-        getCartResults
+        getCartResults,
       } = this.props;
       this.setState({
         applyCouponRequestCount: this.state.applyCouponRequestCount + 1,
-        copuonAttempted: true
+        copuonAttempted: true,
       }, () => {
         getCartResults({
           coupon_code: data.coupon_code,
-          applyCouponRequestCount: this.state.applyCouponRequestCount
-        })
+          applyCouponRequestCount: this.state.applyCouponRequestCount,
+        });
       });
     }
 
     handleInputApply = code => () => {
       const {
-        getCartResults
+        getCartResults,
       } = this.props;
       const { couponCode } = this.state;
       if (couponCode === '' || couponCode === undefined) {
@@ -105,24 +104,21 @@
       this.setState({
         errorMsg: '',
       });
-      const params = {
-        coupon_code: code,
-      };
       this.setState({
         applyCouponRequestCount: this.state.applyCouponRequestCount + 1,
-        copuonAttempted: true
+        copuonAttempted: true,
       }, () => {
         getCartResults({
-          coupon_code: data.coupon_code,
-          applyCouponRequestCount: this.state.applyCouponRequestCount
-        })
+          coupon_code: code,
+          applyCouponRequestCount: this.state.applyCouponRequestCount,
+        });
       });
     }
 
     render() {
       const { couponData } = this.props;
       const {
-        showTerms, termsOfUse, howToUse, showHowToUse, couponCode, errorMsg, couponApplied,
+        showTerms, termsOfUse, howToUse, showHowToUse, couponCode, errorMsg, couponApplied, copuonAttempted,
       } = this.state;
       return (
         <div>
@@ -138,7 +134,7 @@
             <Button className={`${styles.buttonStyle} ${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles.width35} ${styles['m-10']}`} btnText="Apply" onClick={this.handleInputApply(couponCode)} />
           </div>
           <div className={styles.errorStyle}>
-            {errorMsg ? <span className={styles['error-msg']}>{errorMsg}</span> : couponApplied ? '' : <span className={styles['error-msg']}>The Coupon applied is invalid</span>}
+            {errorMsg ? <span className={styles['error-msg']}>{errorMsg}</span> : (copuonAttempted ? (couponApplied ? '' : <span className={styles['error-msg']}>The Coupon applied is invalid</span>) : '')}
           </div>
           <div className={styles.applyCoupon}>
             {/* TODO: move to a seperate file */}
@@ -212,39 +208,35 @@
         </div>
       );
     }
-    }
+}
 
 
-    const mapStateToProps = store => {
-      return {
-        couponData: couponSelectors.getCouponOffers(store),
-        cartData: selectors.getCartResults(store),
-      }
-    };
+const mapStateToProps = store => ({
+  couponData: couponSelectors.getCouponOffers(store),
+  cartData: selectors.getCartResults(store),
+});
 
-    const mapDispatchToProps = dispatch => {
-      return bindActionCreators(
-        {
-          getCouponOffers: couponActionCreators.getCouponOffers,
-          getCartResults: actionCreators.getCartResults,
-        },
-        dispatch,
-      );
-    }
-    Coupon.propTypes = {
-      couponData: PropTypes.instanceOf(Array),
-      getCartResults: PropTypes.func,
-      closeSlider: PropTypes.func,
-      getCouponOffers: PropTypes.func,
-      openSlider: PropTypes.func,
-    };
+const mapDispatchToProps = dispatch => bindActionCreators(
+  {
+    getCouponOffers: couponActionCreators.getCouponOffers,
+    getCartResults: actionCreators.getCartResults,
+  },
+  dispatch,
+);
+Coupon.propTypes = {
+  couponData: PropTypes.instanceOf(Array),
+  getCartResults: PropTypes.func,
+  closeSlider: PropTypes.func,
+  getCouponOffers: PropTypes.func,
+  openSlider: PropTypes.func,
+};
 
-    Coupon.defaultProps = {
-      couponData: [],
-      getCartResults: f => f,
-      closeSlider: f => f,
-      getCouponOffers: f => f,
-      openSlider: f => f,
-    };
+Coupon.defaultProps = {
+  couponData: [],
+  getCartResults: f => f,
+  closeSlider: f => f,
+  getCouponOffers: f => f,
+  openSlider: f => f,
+};
 
-    export default connect(mapStateToProps, mapDispatchToProps)(Coupon);
+export default connect(mapStateToProps, mapDispatchToProps)(Coupon);
