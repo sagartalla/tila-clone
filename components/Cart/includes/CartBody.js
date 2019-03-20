@@ -5,7 +5,7 @@ import Cookie from 'universal-cookie';
 
 import CartItem from './CartItem';
 import Blocker from '../../common/Blocker';
-import RightBar from '../../common/CartPaymentSideBar';
+import RightBar from '../CartPaymentSideBar';
 import Wishlist from '../../Cam/Wishlist/';
 import { languageDefinations } from '../../../utils/lang/';
 import { mergeCss } from '../../../utils/cssUtil';
@@ -31,6 +31,9 @@ const CartBody = ({
   cartStepperInputHandler,
   count,
   isLoading,
+  openSlider,
+  isError,
+  cartData,
 }) => {
   const { items, error } = data;
   const flag = data && items && items.length;
@@ -41,9 +44,10 @@ const CartBody = ({
     Router.pushRoute(`/${country}/${language}/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemType}`);
   }
 
-  return (isLoading ?
-    cartPlaceHolder
-    :
+  return (
+    isLoading ?
+      cartPlaceHolder
+          :
     <div className={styles['cart-container']}>
       {
         showBlocker ? <Blocker /> : ''
@@ -59,9 +63,10 @@ const CartBody = ({
         flag > 0 ?
           <Row className={styles['mr-0']}>
             <Col md={9} sm={12} xs={12} className={styles['pr-5']}>
+
               <div>
                 {
-                  items.map(item => (
+                  items.map((item,index) => (
                     <CartItem
                       item={item}
                       count={count}
@@ -72,6 +77,8 @@ const CartBody = ({
                       removeCartItem={removeCartItem}
                       cartStepperInputHandler={cartStepperInputHandler}
                       addOrRemoveGift={addOrRemoveGift}
+                      cartData={cartData}
+                      index={index}
                     />
                 ))}
 
@@ -85,6 +92,7 @@ const CartBody = ({
                   showInstant={true}
                   showCheckoutBtn={true}
                   checkoutBtnHandler={checkoutBtnHandler}
+                  openSlider={openSlider}
                 />
               </div>
               <div className={styles['secure-img']}>

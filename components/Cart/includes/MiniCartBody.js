@@ -5,6 +5,7 @@ import { Row, Col } from 'react-bootstrap';
 import SVGComponent from '../../common/SVGComponet';
 import Blocker from '../../common/Blocker';
 import CartStepper from './CartStepper';
+import constants from '../../../constants';
 
 import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Cart/cart');
@@ -15,7 +16,6 @@ const MiniCartBody = props => {
   const flag = data && items && items.length;
   const cnt = flag > 0 ? items.length : 0;
   const { CART_PAGE } = languageDefinations();
-
   return (
     <div>
       <div className={`${styles['cart-container']} ${styles['mini-cart']} ${styles['border-t']}`}>
@@ -30,12 +30,12 @@ const MiniCartBody = props => {
         <div>
           {
             items.map((item, index) => {
-              const { item_id, img,product_id, name, price, cur, quantity, max_limit, inventory, brand_name } = item;
+              const { item_id, img,product_id, name, offer_price, cur, quantity, max_limit, inventory, brand_name } = item;
               return (
                 <div key={item_id} className={`${styles['flex']} ${styles['pt-15']} ${styles['pb-15']} ${styles['border-b']} ${styles['min-items-list']}`}>
                   <Col md={2} sm={2} xs={2} className={`${styles['pl-0']} ${styles['pr-0']}`}>
                     <div className={`${styles['cart-container-img']} ${styles['flex']} ${styles['justify-center']}`}>
-                      <img className={styles['img']} src={img} />
+                      <img className={styles['img']} src={`${constants.mediaDomain}/${img}`} />
                     </div>
                   </Col>
                   <Col md={10} sm={10} xs={10} className={`${styles['pr-0']} ${styles['card-details-labels']}`}>
@@ -53,7 +53,7 @@ const MiniCartBody = props => {
                       }
                     </div>
                     <div className={`${styles['flx-space-bw']} ${styles['pt-10']} ${styles['price-stepper-part']}`}>
-                      <span className={styles['fontW600']}>{price + ' ' + cur}</span>
+                      <span className={styles['fontW600']}>{offer_price + ' ' + cur}</span>
                       <span>
                         {
                           editCartDetails ?

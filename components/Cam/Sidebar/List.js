@@ -20,7 +20,7 @@ const List = props => props.data.map((val, id) => {
   <div className={styles['list-container']} key={id.toString()}>
     {val.data.map((itemVal, itemIndex) => {
       return (
-        <Link route={`/${country}/${language}/${itemVal.href}`} key={itemVal.display}>
+        <Link route={`/${country}/${language}${itemVal.href}`} key={itemVal.display}>
           {/* TODO can be next client side routes */ }
           <a style={{display:'block'}}>
           <div className={`${itemVal.href === `/${country}/${language}/cam/${tab}` ? styles['active'] : {}} ${styles['list-items-container']} ${styles['light-gry-clr']} ${styles['flex']}`} key={itemIndex.toString()}>

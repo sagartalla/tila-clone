@@ -17,6 +17,7 @@ class SearchPage extends Base {
   static async getInitialProps({ store, isServer, query, req }) {
     const { language, search, facets, category, subCategory, isListed, disableSpellCheck, sid } = query
     const categoryTree = query.categoryTree === 'true'; //TODO need better way to identify category tree
+    const categoryFacet = query.categoryFacet === 'true';
     //TODO SF-37 better handling of country
     const state = store.getState();
     // const country = authSelectors.getCountry(state);
@@ -33,6 +34,7 @@ class SearchPage extends Base {
     const { city: shippingCity, country: shippingCountry } = shippingData || {};
     const searchOptions = {
       categoryFilter,
+      categoryFacet,
       country: country || undefined,
       pageSize: 25,
       query: search,

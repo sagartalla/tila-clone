@@ -1,11 +1,12 @@
 import React from 'react';
 import { Row, Col, OverlayTrigger, Popover } from 'react-bootstrap';
 import moment from 'moment';
-
+import Warranty from '../../Product/includes/Warranty';
 import CartStepper from './CartStepper';
 import SVGComponent from '../../common/SVGComponet';
 import { mergeCss } from '../../../utils/cssUtil';
 import { languageDefinations } from '../../../utils/lang/';
+import constants from '../../../constants';
 
 const styles = mergeCss('components/Cart/cart');
 const { CART_PAGE } = languageDefinations();
@@ -50,7 +51,7 @@ const popover = ({
           }
           <div className={styles['t-row']}>
             <div className={`${styles['t-cell']} ${styles['pb-10']}`}>
-              <div>Dilevery Charges</div>
+              <div>Delivery Charges</div>
             </div>
             <div className={`${styles['t-cell']} ${styles['t-rt']}`}>Free</div>
           </div>
@@ -59,13 +60,11 @@ const popover = ({
             <div className={`${styles['t-cell']} ${styles['t-rt']}`}>{total_amount} {cur}</div>
           </div>
         </div>
-        <div>
-          <div>Overall you save {total_discount} {cur} on this Product</div>
-        </div>
+        <div className={`${styles['p-5']} ${styles['mt-5']} ${styles['overall-amount']}`}>Overall you save {total_discount} {cur} on this product</div>
       </div>
     </Popover>
   );
-}
+};
 
 class CartItem extends React.Component {
   constructor(props) {
@@ -121,6 +120,8 @@ class CartItem extends React.Component {
       removeCartItem,
       cartStepperInputHandler,
       addOrRemoveGift,
+      cartData,
+      index,
     } = this.props;
     const { gift_card_message, checked, showMessage } = this.state;
     const {
@@ -152,7 +153,7 @@ class CartItem extends React.Component {
                 className={`${styles['flex-center']} ${styles['justify-center']} ${styles['pb-15']} ${styles['card-box-inn-img']}`}
                 onClick={() => routeChange(variant_id, product_id, catalogId, itemType)}
               >
-                <img className={styles.img} alt={img} src={img} />
+                <img className={styles.img} alt={img} src={`${constants.mediaDomain}/${img}`} />
               </div>
               <CartStepper
                 count={count}
@@ -172,7 +173,11 @@ class CartItem extends React.Component {
                     <a onClick={() => routeChange(variant_id, product_id, catalogId, itemType)}>{name}</a>
                   </h4>
                   <div className={`${styles['warranty-part']} ${styles['p-10']} ${styles['light-gry-clr']}`}>
-                    <p className={`${styles['fs-12']}`}><span>{CART_PAGE.WARRENTY} : </span><span className={`${styles['pl-10']} ${styles['pr-10']}`}>{warranty[0].duration} {CART_PAGE.WARRENTY_TXT} </span><a href="" className={`${styles['fontW600']}`}>{CART_PAGE.VIEW_MORE}</a></p>
+                    {cartData.items ? <p className={`${styles['mb-0']} ${styles['fs-12']}`}>
+                      <span>Warranty : </span>
+                       <span className={`${styles['pl-10']} ${styles['pr-10']}`}><Warranty warranty={cartData.items[index].warranty_duration} /></span>
+                        </p>
+                        : null}
                     <p className={`${styles['mb-0']} ${styles['fs-12']}`}>
                       <span>{CART_PAGE.SHIPPING} : </span>
                       <span className={`${styles['pl-10']} ${styles['pr-10']}`}>{CART_PAGE.REGULAR_SHIPPING}  ({shipping.shipping_fees + ' ' + cur}) - <span className={`${styles['fs-12']} ${styles['base-font']}`}>{CART_PAGE.ETA_DELIVERY_BY} {moment().add(shipping.shipping_days, 'days').format('LL')}</span>
@@ -211,18 +216,19 @@ class CartItem extends React.Component {
                   </div>}
                 </Col>
                 <Col md={2} sm={2} className={`${styles['pl-0']} ${styles['landscape-cart-price']}`}>
+                  {Math.floor(discount) > 5 &&
                   <p className={`${styles['mb-0']} ${styles['fs-12']}`}>
-                    {Math.floor(discount) && <span className={styles['success-green']}>{`${Math.floor(discount)}% OFF`}</span>}
+                    <span className={styles['success-green']}>{`${Math.floor(discount)}% OFF`}</span>
                     <span className={`${styles['cross-strike']} ${styles.relative} ${styles['ml-10']}`}>
                       <span className={styles['label-light-grey']}>
                         <span>{mrp}&nbsp;</span>
                         <span>{cur}</span>
                       </span>
                     </span>
-                  </p>
+                  </p>}
                   <h4 className={`${styles.fontW600} ${styles['justify-flex-end']} ${styles['light-gry-clr']} ${styles['flex-center']} ${styles['mt-10']} ${styles['t-rt']}`}>
                     {`${offer_price} ${cur}`}
-                    <OverlayTrigger placement="bottom" overlay={popover(item)}>
+                    <OverlayTrigger trigger="click" placement="bottom" overlay={popover(item)}>
                       {/* <span className={`${styles['fs-12']} ${styles['pr-5']}`}>
                         <SVGComponent clsName={`${styles['secure-icon']} ${styles['mr-10']} ${styles['pointer']}`} src="icons/common-icon/trust-secure" />
                       </span> */}

@@ -1,19 +1,22 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { Router } from '../../routes';
 import { Row, Col, Grid } from 'react-bootstrap';
 import Cookie from 'universal-cookie';
-import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { toast } from 'react-toastify';
 
 import { actionCreators, selectors } from '../../store/cart';
-import { Router } from '../../routes';
 import { actionCreators as wishlistActionCreators, selectors as wishlistSelectors } from '../../store/cam/wishlist';
-
 import HeaderBar from '../HeaderBar/index';
 import CartBody from './includes/CartBody';
 import MiniCartBody from './includes/MiniCartBody';
 import FooterBar from '../Footer/index';
 import { mergeCss } from '../../utils/cssUtil';
+import Slider from '../common/slider';
+import Coupon from '../Cart/CartPaymentSideBar/coupons';
+
 
 const styles = mergeCss('components/Cart/cart');
 
@@ -29,6 +32,7 @@ class Cart extends Component {
     this.state = {
       showBlocker: false,
       count: '',
+      showSlider: false,
     };
 
     this.addToWishlist = this.addToWishlist.bind(this);
@@ -58,18 +62,28 @@ class Cart extends Component {
     const count = e.target.value;
     const selelecItem = cartData.items.filter(item => item.item_id == id)[0];
 
-    this.setState({ count: selelecItem.max_limit < count ? selelecItem.max_limit : count })
+    this.setState({ count: selelecItem.max_limit < count ? selelecItem.max_limit : count });
     this.props.cartItemInputCount(id, 'add', selelecItem.max_limit < count ? selelecItem.max_limit : count);
+  }
+  openSlider = () => {
+    this.setState({
+      showSlider: true,
+    });
+  }
+  closeSlider = () => {
+    this.setState({
+      showSlider: false,
+    });
   }
 
   checkoutBtnHandler() {
     const { cartData } = this.props;
     const newRes = cartData.items.filter(data => data.inventory == 0);
-
     if (newRes.length) {
-      alert('There is some issue with cart items.');
-    } else
+      toast.warn('There is some issue with cart items.');
+    } else {
       Router.pushRoute(`/${country}/${language}/payment`);
+    }
   }
 
   removeCartItem(e) {
@@ -77,33 +91,33 @@ class Cart extends Component {
     digitalData.cart.item = digitalData.cart.item.filter((item) => {
       return item.productInfo.productID !== productId
     })
-    this.props.removeCartItem(e.currentTarget.id);
+    this.props.removeCartItem(e.currentTarget.id, { showToast: true});
   }
 
   increaseItemCnt(e) {
-    let productId =  e.target.getAttribute('data-productid')
+    const productId = e.target.getAttribute('data-productid');
     digitalData.cart.item = digitalData.cart.item.map((item) => {
-      if(item.productInfo.productID === productId) {
-        item.quantity++
+      if (item.productInfo.productID === productId) {
+        item.quantity++;
       }
 
       return item;
-    })
+    });
     this.cartItemCount(e.target.getAttribute('data-id'), 'add');
   }
 
   decreaseItemCnt(e) {
-    let productId =  e.target.getAttribute('data-productid')
+    const productId = e.target.getAttribute('data-productid');
     digitalData.cart.item.forEach((item) => {
-      if(item.productInfo.productID === productId) {
+      if (item.productInfo.productID === productId) {
         item.quantity--;
       }
-    })
+    });
     this.cartItemCount(e.target.getAttribute('data-id'), 'remove');
   }
 
   cartItemCount(id, typ) {
-    this.setState({ showBlocker: true })
+    this.setState({ showBlocker: true });
     this.props.cartItemCount(id, typ);
   }
 
@@ -118,7 +132,9 @@ class Cart extends Component {
       wishlisted_price: item.price,
       wishlisted_currency: item.cur,
     });
-    this.props.removeCartItem(listing_id);
+    this.props.removeCartItem(listing_id, {
+      showToast: false,
+    });
   }
 
   addOrRemoveGift(id, val, params) {
@@ -126,9 +142,11 @@ class Cart extends Component {
   }
 
   render() {
-    const { showBlocker, count } = this.state;
     const {
-      cartData, editCartDetails, showCheckOutBtn, isLoading,
+      showBlocker, count, showSlider,
+    } = this.state;
+    const {
+      cartData, editCartDetails, showCheckOutBtn, isLoading, couponData, getCartResults,
     } = this.props;
     return (
       <div>
@@ -157,16 +175,31 @@ class Cart extends Component {
                     showBlocker={showBlocker}
                     isLoading={isLoading}
                     addToWishlist={this.addToWishlist}
+                    openSlider={this.openSlider}
                     removeCartItem={this.removeCartItem}
                     increaseItemCnt={this.increaseItemCnt}
                     decreaseItemCnt={this.decreaseItemCnt}
                     addOrRemoveGift={this.addOrRemoveGift}
                     checkoutBtnHandler={this.checkoutBtnHandler}
                     cartStepperInputHandler={this.cartStepperInputHandler}
+                    cartData={cartData}
                   />
                 </Grid>
                 <FooterBar />
               </Fragment>
+        }
+        {
+        showSlider &&
+          <Slider
+            closeSlider={this.closeSlider}
+            isOpen={showSlider}
+            label="Coupons"
+          >
+            <Coupon
+              closeSlider={this.closeSlider}
+              openSlider={this.openSlider}
+            />
+          </Slider>
         }
       </div>
     );
@@ -196,7 +229,6 @@ Cart.propTypes = {
 };
 
 Cart.defaultProps = {
-
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);

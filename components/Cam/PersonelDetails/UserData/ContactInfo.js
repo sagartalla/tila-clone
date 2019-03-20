@@ -46,7 +46,7 @@ class ContactInfo extends React.Component {
           </Col>
           <Col xs={6} md={8} className={`${styles['flex-center']} ${styles['tickmark-part']}`}>
             <span className={styles['pr-20']}>{email}</span>
-            <span className={email_verified == 'NV' ? `${styles['showDiv']}` : `${styles['hideDiv']}`}>
+            <span className={email_verified !== 'NV' ? `${styles['showDiv']}` : `${styles['hideDiv']}`}>
               <span className={styles['flex']}><SVGComponent clsName={`${styles['tickmark-icon']}`} src="icons/common-icon/bg-tick-mark" /></span>
             </span>
           </Col>
