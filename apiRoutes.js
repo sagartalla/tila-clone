@@ -16,9 +16,9 @@ apiRoutes
     return axios.post(`${constants.AUTH_API_URL}/api/v1/sls/auth`, Object.assign({}, params, {})).then(({data, status}) => {
       let isLoggedIn = false;
       if(status === 200) {
-        if(!params.rememberMe) {
-          delete data.refresh_token;
-        }
+        // if(!params.rememberMe) {
+        //   delete data.refresh_token;
+        // }
         req.universalCookies.set('auth', data, { path: '/' });
         req.universalCookies.set('userCreds', { username: params.username || '' }, { path: '/' });
         isLoggedIn = true;
