@@ -70,8 +70,10 @@ class Product extends Component {
 
   buyNow(e) {
     e.stopPropagation();
+    e.preventDefault();
+    const { selectedIndex } = this.state;
     const { variants } = this.props;
-    this.props.buyNow(variants.listingId[0]);
+    this.props.buyNow(variants[selectedIndex].listingId[0]);
   }
 
   notify(e) {
@@ -134,7 +136,7 @@ class Product extends Component {
     // })
   }
   componentWillReceiveProps() {
-    this.setState({showLoader:false})
+    this.setState({ showLoader: false });
   }
   getOfferClassName(offer) {
     if (offer > 5 && offer < 20) {

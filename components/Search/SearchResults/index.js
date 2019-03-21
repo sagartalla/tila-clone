@@ -48,7 +48,7 @@ class SearchResults extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(this.state.buyNow == true && (nextProps.isAddedToCart)){
+    if(this.state.buyNow == true && (nextProps.isLastAddedToCartSuccess)){
        Router.pushRoute(`/${country}/${language}/payment`);
     }
   }
@@ -121,7 +121,7 @@ const mapStateToProps = store => ({
   results: selectors.getSearchResutls(store),
   pagiantionDetails: selectors.getPaginationDetails(store),
   ui: selectors.getUIState(store),
-  isAddedToCart: cartSelector.isAddedToCart(store),
+  isLastAddedToCartSuccess: cartSelector.isLastAddedToCartSuccess(store),
   userDetails: selectors.getUserDetails(store),
   cartButtonLoaders: selectors.getCartButtonLoaders(store),
 });
