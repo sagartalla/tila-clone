@@ -99,11 +99,11 @@ const getSearchFilters = (store) => {
           count: value.Count,
           param: value.Param,
         };
-        if (item.Type === 'PERCENTILE') {
-          attrObj.values = value.attributeValue;
-        } else {
+        // if (item.Type === 'PERCENTILE') {
+        //   attrObj.values = value.attributeValue;
+        // } else {
           attrObj.name = value.attributeValue;
-        }
+        // }
         return attrObj;
       }),
     }), []);
