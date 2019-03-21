@@ -51,7 +51,9 @@ class SavedCards extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    debugger;
+    if(nextProps.processData && nextProps.processData.redirect_url) {
+        window.location = nextProps.processData.redirect_url;
+    }
   }
 
   proceedToPayment() {
