@@ -95,7 +95,6 @@ class Body extends Component {
   }
 
   goToNextStep() {
-    debugger;
     const { goToNextStep, resetOrderIssue, orderIssue } = this.props;
     const {
       step: currentStep,
@@ -144,7 +143,7 @@ class Body extends Component {
   render() {
     const { orderIssue } = this.props;
     const { step } = orderIssue;
-    return <div>{this.getBody(step)}</div>;
+    return <div className={styles['retun-exchange-right']}>{this.getBody(step)}</div>;
   }
 }
 

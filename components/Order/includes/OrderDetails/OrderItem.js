@@ -22,9 +22,9 @@ const country = cookies.get('country') || 'SAU';
 const RenderButton = ({callbackMethod,refundType}) => {
   return (
     <div className={styles['cancel-btn']}>
-      <span
+      <button
         className={`${styles['link-text']} ${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']} ${styles['fs-12']}`}
-        onClick={callbackMethod}>{refundType}</span>
+        onClick={callbackMethod}>{refundType}</button>
     </div>
   )
 }

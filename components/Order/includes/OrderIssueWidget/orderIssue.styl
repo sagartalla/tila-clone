@@ -8,6 +8,7 @@
     img
       max-width 100%
       max-height 100%
+      object-fit scale-down
   .widget-cont
     display block
     width 450px
@@ -34,6 +35,7 @@
           transform: rotate(90deg);
           height: 20px;
       .reason-cont
+        padding-bottom 20px
         .instruction-txt
           color: generic-gray-color
     .widget-footer
@@ -68,27 +70,28 @@
   .cancel-success-text
     background-color head-gray
 .product-sizeContainer
-  padding 8px 10px 10px
+  padding 10px 0 10px 0
   overflow-x auto
   max-height 118px
   box-sizing border-box
   .productSize-Button
     border-radius 20px
-    margin 5px
-    min-width 34px
-    min-height 34px
-    background-color #fff
-    border 1px solid #bfc0c6
-    padding 8px
+    margin-right 10px
+    min-width 40px
+    min-height 40px
+    background-color white
+    border 1px solid light-gray
     outline none
-    text-align center
+    display flex
+    align-items center
+    justify-content center
     cursor pointer
   .product-StrikeButton
     border-radius 20px
     margin 5px
     min-width 34px
     min-height 34px
-    background-color #ffffff
+    background-color white
     border 1px solid #BFC0C6
     padding 8px
     display inline-block
@@ -100,7 +103,7 @@
     &::after
       content ''
       display block
-      border-top 1px solid #000
+      border-top 1px solid black
       width 100%
       height 100%
       position absolute
@@ -108,3 +111,30 @@
       top 50%
       transform rotateZ(-45deg)
       transform-origin top
+
+.retun-exchange-right
+  width 100%
+  display flex
+  justify-content center
+
+  .retun-btn-part
+    width 100%
+    border-bottom-right-radius 20px
+
+  .comment-cont
+    textarea
+      outline none
+      resize none
+      border-style solid
+      border-width 0 0 1px 0
+      border-color light-border
+
+.retun-sucess-meg
+  h4
+    .bg-tick-mark-icon
+      height 20px
+      width 20px
+
+.exchange-items
+  .success-msg
+    color light-green

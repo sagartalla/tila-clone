@@ -5,20 +5,19 @@ import { selectors, actionCreators } from '../../../../store/order'
 import { mergeCss } from '../../../../utils/cssUtil';
 const styles = mergeCss('components/Order/includes/OrderIssueWidget/orderIssue');
 
-const RenderRadioInput = ({paymentType,value,onCallBack}) => {
-    return (
-      <div>
-        <label>
-          <input
-            type="radio"
-            value={value}
-            checked={paymentType === value}
-            onChange={onCallBack}
-          />
-        {value}
-        </label>
-      </div>
-    )
+const RenderRadioInput = ({ paymentType, value, onCallBack }) => {
+  return (
+    <div className={styles['pb-15']}>
+      <input
+        className={styles['radio-btn']}
+        type="radio"
+        value={value}
+        checked={paymentType === value}
+        onChange={onCallBack}
+      />
+      <label className={styles['pl-10']}>{value}</label>
+    </div>
+  )
 }
 class ChoosePaymentMode extends Component {
   constructor(props) {
@@ -28,8 +27,8 @@ class ChoosePaymentMode extends Component {
     this.onOptionChange = this.onOptionChange.bind(this)
     this.saveAndGoNext = this.saveAndGoNext.bind(this)
     this.state = {
-      paymentType:props.orderDetails.payments[0].payment_mode === 'PAY_ONLINE' ?
-      'Online' : 'Wallet'
+      paymentType: props.orderDetails.payments[0].payment_mode === 'PAY_ONLINE' ?
+        'Online' : 'Wallet'
     }
   }
   onOptionChange(e) {
@@ -40,26 +39,26 @@ class ChoosePaymentMode extends Component {
     const { orderIssue } = this.props
     const { selectedReasons } = orderIssue
     var refundType = paymentType === 'Online' ? 'BACK_TO_SOURCE' : 'WALLET'
-    const orderReturnParams = Object.assign({},selectedReasons,{refund_mode:refundType})
+    const orderReturnParams = Object.assign({}, selectedReasons, { refund_mode: refundType })
     this.props.submitReturnRequest(orderReturnParams)
   }
   getPaymentModes(payment) {
     const { paymentType } = this.state
-    var data = [ <RenderRadioInput
-        key={'radio_1'}
-        value='Wallet'
-        onCallBack={this.onOptionChange}
-        paymentType={paymentType}
-        />
+    var data = [<RenderRadioInput
+      key={'radio_1'}
+      value='Wallet'
+      onCallBack={this.onOptionChange}
+      paymentType={paymentType}
+    />
     ]
 
-    if(paymentType === 'Online') {
+    if (paymentType === 'Online') {
       data.push(
         <RenderRadioInput
-            key={'radio_2'}
-            value='Online'
-            onCallBack={this.onOptionChange}
-            paymentType={paymentType}
+          key={'radio_2'}
+          value='Online'
+          onCallBack={this.onOptionChange}
+          paymentType={paymentType}
         />
       )
     }
@@ -67,16 +66,18 @@ class ChoosePaymentMode extends Component {
     return data;
   }
   render() {
-     const { orderDetails } = this.props;
-     const { paymentType } = this.state
+    const { orderDetails } = this.props;
+    const { paymentType } = this.state
     return (
       <div>
-        {this.getPaymentModes(orderDetails.payments)}
-
+        <h4 className={`${styles['fs-20']} ${styles['fontW400']} ${styles['pb-15']}`}>Choose your desired  Mode of Payment</h4>
+        <div>
+          {this.getPaymentModes(orderDetails.payments)}
+        </div>
         <div>
           <button
             onClick={this.saveAndGoNext}
-            className={`${styles['fp-btn']} ${styles['fp-btn-primary']}`}
+            className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['retun-btn-part']}`}
           >
             {`${paymentType} Transfer`}
           </button>
@@ -89,18 +90,18 @@ class ChoosePaymentMode extends Component {
 const mapStateToProps = (store) => {
   return ({
     orderIssue: selectors.getOrderIssue(store),
-    orderDetails:selectors.getOrderInfo(store)
+    orderDetails: selectors.getOrderInfo(store)
   })
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators (
+  return bindActionCreators(
     {
-      setReturnOrder:actionCreators.setReturnOrder,
+      setReturnOrder: actionCreators.setReturnOrder,
       submitReturnRequest: actionCreators.submitReturnRequest
     },
     dispatch
   )
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(ChoosePaymentMode)
+export default connect(mapStateToProps, mapDispatchToProps)(ChoosePaymentMode)

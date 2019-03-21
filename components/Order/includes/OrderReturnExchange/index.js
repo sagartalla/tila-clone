@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {Grid, Row, Col} from 'react-bootstrap';
+import { Grid, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -12,20 +12,20 @@ import { ORDER_ISSUE_STEPS as STEPS } from '../../constants';
 
 import { mergeCss } from '../../../../utils/cssUtil';
 const styles = mergeCss('components/Order/order');
-import {languageDefinations} from '../../../../utils/lang'
-const {ORDER_PAGE} = languageDefinations()
+import { languageDefinations } from '../../../../utils/lang'
+const { ORDER_PAGE } = languageDefinations()
 
 class OrderReturnExchange extends Component {
-  componentDidMount(){
+  componentDidMount() {
     const { query, orderIssue, getSelectedOrder, setOrderIssueData } = this.props;
-    const { orderId, orderItemId, returnExchangeType,variantId } = query;
+    const { orderId, orderItemId, returnExchangeType, variantId } = query;
     const params = {
       orderId: orderId,
       issueType: null,
       step: STEPS.REASONS,
       returnExchangeType: returnExchangeType
     };
-    if(!orderIssue.selectedItem) {
+    if (!orderIssue.selectedItem) {
       params.selectedItem = getSelectedOrder(query.orderItemId);
     }
     setOrderIssueData(params);
@@ -36,29 +36,40 @@ class OrderReturnExchange extends Component {
     const { orderId, selectedItem } = orderIssue;
     const { img, name } = selectedItem || {};
     return (
-      <div className={styles['ret-exch-wrap']}>
-        <div className={styles['Breadcrums']}>
-          <span>{ORDER_PAGE.MY_ACCOUNT}</span>
-          <span>></span>
-          <span>{ORDER_PAGE.ORDERS}</span>
-          <span>></span>
-          <span>{orderId}</span>
-        </div>
-        <div className={styles['ret-exch-cont']}>
-          <Grid>
-            <Row>
-              <Col md={6}>
-                <div className={styles['product-wrap']}>
-                  <img src={`${constants.mediaDomain}/${img}`} />
-                  <div className={styles['title']}>{name}</div>
-                </div>
-              </Col>
-              <Col md={6}>
-                <OrderIssueBody query={query} />
-              </Col>
-            </Row>
-          </Grid>
-        </div>
+      <div>
+        <Grid>
+          <Row>
+            <div className={`${styles['ret-exch-wrap']} ${styles['mt-20']}`}>
+              <div className={`${styles['breadcrums']} ${styles['fs-12']}`}>
+                <span className={`${styles['thick-gry-clr']}`}>{ORDER_PAGE.MY_ACCOUNT}</span>
+                <span> > </span>
+                <span className={`${styles['thick-gry-clr']}`}>{ORDER_PAGE.ORDERS}</span>
+                <span> > </span>
+                <span className={`${styles['black-color']}`}>{orderId}</span>
+              </div>
+              <div className={`${styles['ret-exch-cont']} ${styles['pt-25']} ${styles['pb-25']}`}>
+                <Grid>
+                  <Row>
+                    <Col md={6}>
+                      <div className={styles['product-wrap']}>
+                        <Col md={2}>
+                          <img src={`${constants.mediaDomain}/${img}`} />
+                        </Col>
+                        <Col md={10}>
+                          <h4 className={`${styles['fs-16']} ${styles['fontW600']}`}>{name}</h4>
+                          <span className={styles['fs-14']}>Quantity:</span>
+                        </Col>
+                      </div>
+                    </Col>
+                    <Col md={5} className={styles['thick-border-left']}>
+                      <OrderIssueBody query={query} />
+                    </Col>
+                  </Row>
+                </Grid>
+              </div>
+            </div>
+          </Row>
+        </Grid>
       </div>
     );
   }

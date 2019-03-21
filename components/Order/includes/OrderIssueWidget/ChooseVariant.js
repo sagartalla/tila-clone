@@ -86,26 +86,26 @@ class ChooseVariant extends Component {
     const { exchangeVariants } = orderIssue;
     const { message } = this.state;
     return (
-      <div>
-        <div>
-          {`Your Selected Order Size : ${this.selectedSize(variantId,exchangeVariants)}`}
-        </div>
-        <div>
-          <div>Size To Exchange :</div>
-          <div>
+      <div className={styles['exchange-items']}>
+        <span className={`${styles['fontW600']} ${styles['pt-15']} ${styles['pb-15']} ${styles['flex']}`}>
+          {`Order Size : ${this.selectedSize(variantId,exchangeVariants)}`}
+        </span>
+        <div className={styles['pb-10']}>
+          <h5 className={`${styles['fontW600']} ${styles['m-0']}`}>Size To Exchange :</h5>
+          <span className={`${styles['fs-12']} ${styles['textColor']}`}>
             Size not available? Click on the unavailable size to return the item
-          </div>
+          </span>
         </div>
         <ul className={`${styles['flex']} ${styles['product-sizeContainer']}`}>
           {this.renderExchangeVariants(exchangeVariants)}
         </ul>
         <div>
           {{
-            errorMsg: <p className={`${styles['error-msg']}`}>Selected Size is
+            errorMsg: <p className={`${styles['error-msg']} ${styles['fs-12']}`}>Selected Size is
              Not Available Currently
             .How ever you can return the product to get full refund
           </p>,
-          successMsg : <p className={`${styles['success-msg']}`}>
+          successMsg : <p className={`${styles['success-msg']} ${styles['fs-12']}`}>
             Selected Size is Available For Exchange
           </p>,
           emptyMsg: ''
