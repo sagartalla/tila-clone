@@ -86,7 +86,7 @@ class Reason extends Component {
 					<div className={`${styles['dd-cont']} ${styles['pb-15']}`}>
             <div className={styles['select']}>
               <select className={styles['select-text']} required onChange={this.selectReason}>
-                <option>{loadingStatus ? ORDER_PAGE.LOADING : ORDER_PAGE.SELECT_REASON}</option>
+                <option disabled selected>{loadingStatus ? ORDER_PAGE.LOADING : ORDER_PAGE.SELECT_REASON}</option>
                 {
                   reasons.map((reason) => <option key={reason.id} value={reason.name}>{reason.name}</option>)
                 }

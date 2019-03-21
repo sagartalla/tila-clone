@@ -20,6 +20,8 @@ import { actionCreators, selectors } from '../../store/payments';
 import { actionCreators as authActionCreators, selectors as authSelectors } from '../../store/auth';
 import { actionCreators as cartActionCreators, selectors as cartSelectors } from '../../store/cart';
 import { mergeCss } from '../../utils/cssUtil';
+import Slider from '../common/slider';
+import Coupon from '../Cart/CartPaymentSideBar/coupons';
 
 const styles = mergeCss('components/Payments/payment');
 const cookies = new Cookies();
@@ -67,6 +69,7 @@ class Payments extends React.Component {
       loggedInFlag: false,
       signInLoader: false,
       editCartDetails: true,
+      showSlider: false,
     }
 
     this.saveCard = this.saveCard.bind(this);
@@ -114,6 +117,7 @@ class Payments extends React.Component {
     this.props.getLoginInfo();
     this.props.getCartResults();
   }
+
 
   //TODO Show loader on clicking on login button.
   showAddressTab() {
@@ -232,8 +236,18 @@ class Payments extends React.Component {
     this.setState({paymentConfigJson});
   }
 
+  openSlider = () => {
+    this.setState({
+      showSlider: true,
+    });
+  }
+  closeSlider = () => {
+    this.setState({
+      showSlider: false,
+    });
+  }
   render() {
-    const { login, showTab, paymentConfigJson, signInLoader, editCartDetails } = this.state;
+    const { login, showTab, paymentConfigJson, signInLoader, editCartDetails, showSlider } = this.state;
     const { paymentOptions, defaultAddress, isLoggedIn, cartResults } = this.props;
     const { PAYMENT_PAGE } = languageDefinations();
 
@@ -288,6 +302,7 @@ class Payments extends React.Component {
                       <RightSideBar
                         data={cartResults}
                         showInstant={false}
+                        openSlider={this.openSlider}
                       />
                       <Cart
                         showMiniCart={true}
@@ -304,6 +319,19 @@ class Payments extends React.Component {
             </Col>
           </Row>
         </Grid>
+        {
+        showSlider &&
+          <Slider
+            closeSlider={this.closeSlider}
+            isOpen={showSlider}
+            label="Coupons"
+          >
+            <Coupon
+              closeSlider={this.closeSlider}
+              openSlider={this.openSlider}
+            />
+          </Slider>
+        }
       </div>
     )
   }
