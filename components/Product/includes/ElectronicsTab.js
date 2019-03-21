@@ -5,7 +5,7 @@ import Review from './Reviews';
 import OverView from './ElectronicsOverView';
 import Description from './ElectronicsDescription';
 import Specification from './ElectronicsSpecifications';
-import Compare from './ElectronicsCompare';
+// import Compare from './ElectronicsCompare';
 import SVGCompoent from '../../common/SVGComponet';
 
 import { mergeCss } from '../../../utils/cssUtil';
@@ -32,9 +32,9 @@ const ElectronicsTab = ({ catalog, productDescription, catalogObj }) => {
         <Tab eventKey={4} title="Reviews">
           <Review catalogObj={catalogObj} />
         </Tab>
-        <Tab eventKey={5} title="Compare">
+        {/* <Tab eventKey={5} title="Compare">
           <Compare />
-        </Tab>
+        </Tab> */}
       </Tabs>
     </div>
   );
