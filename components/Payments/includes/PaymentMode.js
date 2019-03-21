@@ -148,6 +148,7 @@ const paymentPageIcons = {
 class PaymentMode extends Component {
   constructor(props) {
     super(props);
+    this.state = {};
     this.showPaymentType = this.showPaymentType.bind(this);
   }
 
@@ -157,9 +158,9 @@ class PaymentMode extends Component {
     })
   }
 
-  componentWillReceiveProps() {
+  componentWillReceiveProps(nextProps) {
     this.setState({
-      showTab: Object.keys(props.paymentModesData.paymentModes)[0]
+      showTab: Object.keys(nextProps.paymentModesData.paymentModes)[0]
     })
   }
 

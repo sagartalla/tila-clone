@@ -12,17 +12,17 @@ const country = cookies.get('country') || 'SAU';
 const transactionApi = (orderRes) => {
 
   return axios.get(orderRes.redirect_url).then(({ data }) => {
-    const params = {
-      payment_details: [
-        {
-          amount: data.amount,
-          currency: data.currency,
-          payment_mode: 'PAY_ONLINE',
-        },
-      ],
-      redirect_url: `${window.location.origin}/${country}/${language}`,
-      transaction_id: data.transaction_id,
-    };
+    // const params = {
+    //   payment_details: [
+    //     {
+    //       amount: data.amount,
+    //       currency: data.currency,
+    //       payment_mode: 'PAY_ONLINE',
+    //     },
+    //   ],
+    //   redirect_url: `${window.location.origin}/${country}/${language}`,
+    //   transaction_id: data.transaction_id,
+    // };
     // return axios.post(`${constants.TRANSACTIONS_API_URL}/fpts/transaction/process`, params).then(({ data: payData }) => {
     //
     //   return { orderRes, data, payData }
@@ -57,4 +57,9 @@ const saveCardApi = (params) => {
   });
 }
 
-export default { createOrderApi, doPaymentApi, saveCardApi };
+const makeProcessRequest = (params) => {
+  params.redirect_url = `${window.location.origin}/${country}/${language}`;
+  return axios.post(`${constants.TRANSACTIONS_API_URL}/fpts/transaction/process`, params);
+}
+
+export default { createOrderApi, doPaymentApi, saveCardApi, makeProcessRequest };

@@ -5,6 +5,7 @@ const actions = {
   DO_PAYMENT: 'DO_PAYMENT',
   SAVE_CARD: 'SAVE_CARD',
   EMPTY_PAYMENT_PAYLOAD: 'EMPTY_PAYMENT_PAYLOAD',
+  MAKE_PROCESS_REQUEST: 'MAKE_PROCESS_REQUEST',
 };
 
 const actionCreators = {
@@ -34,8 +35,16 @@ const actionCreators = {
       type: actions.SAVE_CARD,
       payload: apis.saveCardApi(params),
     }
+  },
+  makeProcessRequest: (params) => (dispatch, getState) => {
+    const state = getState();
+    const { paymentsReducer } = state;
+    params.transaction_id = paymentsReducer.data.data.transaction_id;
+    return dispatch({
+      type: actions.MAKE_PROCESS_REQUEST,
+      payload: apis.makeProcessRequest(params)
+    })
   }
 };
 
 export { actions, actionCreators };
-

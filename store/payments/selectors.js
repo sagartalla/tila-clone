@@ -50,4 +50,8 @@ const getPaymentModesData = (store) => {
   }
 }
 
-export { getPaymentOptions, getPaymentUrl, getDefaultAddress, getPaymentModesData };
+const getProcessData = (store) => {
+  return store.paymentsReducer.data.processData;
+}
+
+export { getPaymentOptions, getPaymentUrl, getDefaultAddress, getPaymentModesData, getProcessData };

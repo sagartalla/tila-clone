@@ -20,7 +20,7 @@ class CategoriesAndFacets extends Component {
 
   onChangeHandle(facetName, facetType) {
     const curryHandler = (value, e) => {
-      const params = JSON.parse(decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent('facets').replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1")) || '{}');      
+      const params = JSON.parse(decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent('facets').replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1")) || '{}');
       params[facetName] = params[facetName] || [];
       digitalData.filter['leftnavfilters'] = `${facetName}:${value.name}`
       if (facetType === 'PERCENTILE') {
