@@ -23,11 +23,12 @@ const transactionApi = (orderRes) => {
       redirect_url: `${window.location.origin}/${country}/${language}`,
       transaction_id: data.transaction_id,
     };
-    return axios.post(`${constants.TRANSACTIONS_API_URL}/fpts/transaction/process`, params).then(({ data: payData }) => {
-
-      return { orderRes, data, payData }
-    });
-  })
+    // return axios.post(`${constants.TRANSACTIONS_API_URL}/fpts/transaction/process`, params).then(({ data: payData }) => {
+    //
+    //   return { orderRes, data, payData }
+    // });
+    return { orderRes, data };
+  });
 };
 
 //Create Order Second step.
@@ -41,7 +42,7 @@ const createOrder = () => {
 const createOrderApi = (defaultAddrId) => {
   return axios.put(`${constants.CART_API_URL}/api/v1/cart/view`, { address_id: defaultAddrId }).then(({ data }) => {
     return createOrder(data);
-  });
+  }).catch(() => {});
 };
 
 const doPaymentApi = (params) => {
