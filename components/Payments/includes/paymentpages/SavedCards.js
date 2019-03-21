@@ -70,34 +70,30 @@ class SavedCards extends Component {
     const { data, voucherData } = this.props;
     return (
       <div className={`${styles['saved-cards']} ${styles['p-10']} `}>
-        <Grid>
-          <Voucher voucherData={voucherData} />
-          <Row>
-            <ul>
-            {
-              data.cards_list.map((card, index) => {
-                return (
-                  <li>
-                    <input
-                      id={`card-${index}`}
-                      name="credit-card"
-                      type='radio'
-                      onClick={this.selectCard(card.card_token)}
-                      checked={card.default}
-                    />
-                    <label for={`card-${index}`}>
-                      <div>{card.masked_number}</div>
-                      <div>{card.holder_name}</div>
-                      <div>{`${card.expiry_month}/${card.expiry_year}`}</div>
-                    </label>
-                  </li>
-                );
-              })
-            }
-            </ul>
-            <button onClick={this.proceedToPayment} className={`${styles['fp-btn-primary']} ${styles['fp-btn']}`}>Pay {data.amount_to_pay} {data.currency_code}</button>
-          </Row>
-        </Grid>
+        <Voucher voucherData={voucherData} />
+        <ul>
+        {
+          data.cards_list.map((card, index) => {
+            return (
+              <li>
+                <input
+                  id={`card-${index}`}
+                  name="credit-card"
+                  type='radio'
+                  onClick={this.selectCard(card.card_token)}
+                  checked={card.default}
+                />
+                <label for={`card-${index}`}>
+                  <div>{card.masked_number}</div>
+                  <div>{card.holder_name}</div>
+                  <div>{`${card.expiry_month}/${card.expiry_year}`}</div>
+                </label>
+              </li>
+            );
+          })
+        }
+        </ul>
+        <button onClick={this.proceedToPayment} className={`${styles['fp-btn-primary']} ${styles['fp-btn']}`}>Pay {data.amount_to_pay} {data.currency_code}</button>
       </div>
     );
   }

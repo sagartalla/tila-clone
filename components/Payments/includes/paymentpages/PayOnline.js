@@ -55,31 +55,25 @@ class PayOnline extends Component {
 
     return (
       <div className={`${styles['pay-online']} ${styles['p-10']} `}>
-        <Grid>
           <Voucher voucherData={voucherData} />
-          <Row>
-            <Col md={12} sm={12} xs={12} className={styles['payment-frame']}>
-              {/* <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']}`} onClick={props.makePayment}>Pay {props.orderRes.data.amount} {props.orderRes.data.currency}</button> */}
-              {/*<iframe src={processData.iframe_url} style={{ height: '406px', width: '500px', border: '0' }}></iframe>*/}
-              {
-                iframe_url
-                  ?
-                    <div>
-                      <iframe src={iframe_url} style={{ height: '406px', width: '500px', border: '0' }}></iframe>
-                      <div className={styles['checkbox-material']}>
-                        <input id="save-card" type="checkbox" onClick={this.saveCardHandler} disabled={disableSaveCard} />
-                        <label for="save-card"> Save this card </label>
-                      </div>
+          <div>
+            {
+              iframe_url
+                ?
+                  <div>
+                    <iframe src={iframe_url} style={{ height: '406px', width: '500px', border: '0' }}></iframe>
+                    <div className={styles['checkbox-material']}>
+                      <input id="save-card" type="checkbox" onClick={this.saveCardHandler} disabled={disableSaveCard} />
+                      <label for="save-card"> Save this card </label>
                     </div>
-                  :
-                    <div>
-                        <div>Once you click on Add New Card. There is no going back. You can't access any other modes of payment.</div>
-                        <button className={`${styles['fp-btn-primary']} ${styles['fp-btn']}`} onClick={this.fetchIframe}>Pay {data.amount_to_pay} {data.currency_code} Using New Card</button>
-                    </div>
-              }
-            </Col>
-          </Row>
-        </Grid>
+                  </div>
+                :
+                  <div>
+                      <div>Once you click on Add New Card. There is no going back. You can't access any other modes of payment.</div>
+                      <button className={`${styles['fp-btn-primary']} ${styles['fp-btn']}`} onClick={this.fetchIframe}>Pay {data.amount_to_pay} {data.currency_code} Using New Card</button>
+                  </div>
+            }
+          </div>
       </div>
     );
   }
