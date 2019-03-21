@@ -55,11 +55,11 @@ class CartAndPaymentSideBar extends Component {
               </span>
             </span>
           :
-            <span className={`${styles['flex-center']} ${styles['justify-center']} ${styles['p-10']} ${styles.flex} ${styles['m-20']} ${styles['apply-coupon']}`}>
+            <span className={`${styles['flex-center']} ${styles['justify-center']} ${styles['p-10']} ${styles.flex} ${styles['m-20']} ${styles['apply-coupon']} ${styles.pointer}`} onClick={this.props.openSlider}>
               <SVGComponent clsName={`${styles['coupon-code']}`} src="icons/common-icon/coupon-code" />
               <div className={styles.noCoupon}>
-              <span className={`${styles['text-uppercase']} ${styles['pl-5']}`} onClick={this.props.openSlider}>
-              <div className={`${styles.pointer}`}>{COUPON_OFFERS.APPLY_COUPON}</div>
+              <span className={`${styles['text-uppercase']} ${styles['pl-5']}`}>
+              <div>{COUPON_OFFERS.APPLY_COUPON}</div>
               </span>
               <div className={`${styles['light-gray']}`}>{'No Coupon Applied'}</div>
               </div>

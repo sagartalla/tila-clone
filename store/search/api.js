@@ -81,7 +81,7 @@ const fetchImageSearchApi = (file) => {
   // body.append('X-Access-Token', file);
   // body.append('directory', `${URL.ENV}/${path}`);
   return axios.request({
-    url: 'https://apigateway-preprod.tila.com/image-search/imagesearch',
+    url: `${constants.IMAGE_SEARCH_URL}/imagesearch`,
     method: 'POST',
     data: body,
   });
