@@ -76,8 +76,9 @@ class Reason extends Component {
   };
 
   saveAndGoNext() {
-    const { goToNextStep, setReason, query, orderDetails } = this.props;
-    const { orderId, returnExchangeType } = query;
+    debugger;
+    const { goToNextStep, setReason, query, orderIssue } = this.props;
+    //const { orderId, returnExchangeType } = query;
     const { reason, subReason, selectedVariant, comment, variantId } = this.state
     const params = {
       orderId,
@@ -103,6 +104,7 @@ class Reason extends Component {
     ) {
       this.props.setOrderIssueData(params);
       this.props.setAddressData(reasonParams)
+      this.props.refundOptions(query.orderItemId)
       goToNextStep();
     }
     else if (
@@ -337,7 +339,8 @@ const mapDispatchToProps = dispatch =>
       getExchangeVariants: actionCreators.getExchangeVariants,
       setOrderIssueData: actionCreators.setOrderIssueData,
       setExchangeOrder: actionCreators.setExchangeOrder,
-      setAddressData: actionCreators.setAddressData
+      setAddressData: actionCreators.setAddressData,
+      refundOptions:actionCreators.getRefundOptions
     },
     dispatch,
   );

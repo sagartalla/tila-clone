@@ -25,8 +25,8 @@
     width 276px
     padding-bottom 20px
     .loader-div
-       width 40px
-       height 40px
+       width 20px
+       height 20px
        position absolute
        z-index 14
        left 120px
@@ -313,6 +313,20 @@
         text-overflow ellipsis
         width 80%
 
+.quick-view
+  .add-loader
+    align-items center
+    justify-content center
+    .loader-div
+      position relative
+      z-index initial
+      left auto
+      bottom auto
+
+
+.search-results .hover-show-date .quick-view .add-loader
+  padding: 6px 0 6px 0px;
+
 .loader
   position absolute
   bottom 0
@@ -348,6 +362,7 @@
       padding: 6px 10px;
       border-bottom-right-radius 26px
       border-top-left-radius 10px
+      color white
       // .down-arrow
       //   width 0
       //   height 0

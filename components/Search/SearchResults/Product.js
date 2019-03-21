@@ -70,6 +70,8 @@ class Product extends Component {
 
   buyNow(e) {
     e.stopPropagation();
+    e.preventDefault();
+    const { selectedIndex } = this.state;
     const { variants } = this.props;
     const {selectedIndex} = this.state;
     this.props.buyNow(variants[selectedIndex].listingId[0]);
@@ -135,7 +137,7 @@ class Product extends Component {
     // })
   }
   componentWillReceiveProps() {
-    this.setState({showLoader:false})
+    this.setState({ showLoader: false });
   }
   getOfferClassName(offer) {
     if (offer > 5 && offer < 20) {
@@ -153,6 +155,7 @@ class Product extends Component {
   }
   closeVariantTab(e) {
     e.stopPropagation();
+    e.preventDefault();
     this.props.selectedProduct([])
   }
   selectedVariant(listingId,index) {
@@ -185,7 +188,7 @@ class Product extends Component {
     const {
       productId, itemtype, media, displayName, categoryId,
     } = this.props;
-    
+
     const src = `${constants.mediaDomain}/${media[0]}`;
     this.props.addToCompare({
       itemtype,
@@ -194,6 +197,11 @@ class Product extends Component {
       displayName,
       categoryId,
     });
+  }
+
+  loaderClick = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
   }
 
   render() {
@@ -215,9 +223,9 @@ class Product extends Component {
       pageNum,
       userDetails,
       selectedID,
-      flags
+      flags,
+      cartButtonLoaders,
     } = this.props;
-
     const { showNotify, selectedIndex, showLoader } = this.state;
     const selectedProduct = selectedID.length > 0 && selectedID.includes(productId);
     const discountValue = variants.length > 0 &&
@@ -303,23 +311,31 @@ class Product extends Component {
               </div>
             </div>
             <div className={
-                `${selectedProduct ? `${styles['display-buttons']} ${styles['active-product']}`: ''}  ${styles['hover-show-date']} ${styles['pb-10']} ${styles['relative']}
-                 ${styles['pb-10']}`}
-                >
+              `${selectedProduct ? `${styles['display-buttons']} ${styles['active-product']}`: ''}  ${styles['hover-show-date']} ${styles['pb-10']} ${styles['relative']}
+                ${styles['pb-10']}`}
+            >
               {
                 variants.length > 0 ?
-                <div className={`${styles['flex']} ${styles['justify-around']} ${styles['quick-view']} ${styles['border-radius4']}`}>
-                  <a className={`${styles['flex']} ${styles['add-to-crt']}`} onClick={this.addToCart}>
-                    {/* <SVGCompoent clsName={`${styles['cart-list']}`} src="icons/cart/blue-cart-icon" /> */}
-                    <span>
-                      <span className={styles['flex']}><SVGCompoent clsName={styles['cart-list']} src="icons/cart/blue-cart-icon" />{PDP_PAGE.ADD_TO_CART}</span>
-                    </span>
-                  </a>
-                  <a className={`${styles['flex-center']} ${styles['buy-now-btn']}`} onClick={this.buyNow}>
-                    <SVGCompoent clsName={`${styles['cart-list']}`} src="icons/cart/buy-icon" />
-                    <span className={styles['pl-5']}>{PDP_PAGE.BUY_NOW}</span>
-                  </a>
-                </div>
+                  <div className={`${styles['flex']} ${styles['justify-around']} ${styles['quick-view']} ${styles['border-radius4']}`}>
+                    {cartButtonLoaders[variants[selectedIndex].listingId[0]] ?
+                      <a className={`${styles['flex']} ${styles['add-to-crt']} ${styles['add-loader']}`} onClick={this.loaderClick}>
+                        <div className={styles['loader-div']}>
+                          <SVGCompoent clsName={`${styles['loader-styl']}`} src="icons/common-icon/circleLoader" />
+                        </div>
+                      </a>
+                      :
+                      <a className={`${styles['flex']} ${styles['add-to-crt']}`} onClick={this.addToCart}>
+                        {/* <SVGCompoent clsName={`${styles['cart-list']}`} src="icons/cart/blue-cart-icon" /> */}
+                        <span>
+                          <span className={styles['flex']}><SVGCompoent clsName={styles['cart-list']} src="icons/cart/blue-cart-icon" />{PDP_PAGE.ADD_TO_CART}</span>
+                        </span>
+                      </a>
+                    }
+                    <a className={`${styles['flex-center']} ${styles['buy-now-btn']}`} onClick={this.buyNow}>
+                      <SVGCompoent clsName={`${styles['cart-list']}`} src="icons/cart/buy-icon" />
+                      <span className={styles['pl-5']}>{PDP_PAGE.BUY_NOW}</span>
+                    </a>
+                  </div>
                 :
                 <div className={`${styles['flex']} ${styles['justify-around']} ${styles['quick-view']} ${styles['border-radius4']}`}>
                   <a className={`${styles['flex-center']} ${styles['buy-now-btn']}`} onClick={this.notify}>

@@ -35,7 +35,7 @@ const b = [{"Perfumes":	"https://storefront-stage.fptechscience.com/srp?disableS
 {"Personal Care":	"https://storefront-stage.fptechscience.com/srp/Personal%20Care-969?categoryTree=true&isListed=false&language=en"}];
 
 const FooterBar = props => (
-  <div className={`${styles['footer-container']} ${styles['mt-25']} hidden-xs`}>
+  <div className={`${styles['footer-container']} ${styles['mt-25']}`}>
     <div className={`${styles['footer-container-inn']} ${styles['pt-40']} ${styles['pb-40']}`}>
       <Grid>
         <Row>

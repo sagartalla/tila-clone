@@ -316,12 +316,12 @@ class Login extends Component {
               </Col>
             </FormGroup>
             <div className={`${styles['login-social-icon']} ${styles['pl-15']}`}>
-              <a>
+              <a className={`${styles['flex']} ${styles['pt-10']}`}>
                 <span onClick={this.handleClick}>
                   Forgot Password?
                 </span>
               </a>
-              <span className={`${styles['thick-gry-clr']} ${styles['pt-10']} ${styles['pb-10']} ${styles['flex']}`}>{LOGIN_PAGE.SIGN_UP_WITH}</span>
+              <span className={`${styles['thick-gry-clr']} ${styles['pt-5']} ${styles['pb-5']} ${styles['flex']}`}>{LOGIN_PAGE.SIGN_UP_WITH}</span>
               <NoSSR>
                 <SocialLogin>
                   {([handleSocialLogin]) => {

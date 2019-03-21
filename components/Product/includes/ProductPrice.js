@@ -35,10 +35,10 @@ const popover = ({strickedPrice: mrp, sellingPrice:sp, offerDiscounts, showPrise
               return (
                 <div className={styles['t-row']}>
                   <div className={styles['t-cell']}>
-                    <div>Offer Discount</div>
+                    <div>{od.description}</div>
                   </div>
                   <div className={styles['t-cell']}>
-                    {`${od} ${currency}`}
+                    {`${od.discount} ${currency}`}
                   </div>
                 </div>
               );
@@ -86,7 +86,7 @@ const ProductPrice = ({offerInfo}) => {
                 </div>
                 <div className={`${styles['flex']} ${styles['align-baseline']} ${styles['relative']} ${styles['ml-10']}`}>
                   <span className={`${styles['fs-12']} ${styles['pr-5']} ${styles['offers-applied']} `}>{`${Math.floor(offerPricing.discount)}% OFF`}</span>
-                  <OverlayTrigger trigger="click" placement="bottom" overlay={popover(offerPricing)}>
+                  <OverlayTrigger placement="bottom" overlay={popover(offerPricing)}>
                     <span className={`${styles['fs-12']} ${styles['pr-5']}`}>
                       <SVGCompoent clsName={`${styles['secure-icon']} ${styles['mr-10']} ${styles['pointer']}`} src="icons/common-icon/trust-secure" />
                     </span>

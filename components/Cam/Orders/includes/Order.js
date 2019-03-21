@@ -40,7 +40,7 @@ const Order = ({order}) => {
           <span>Shipping to</span>
           <div className={`${styles['flex']}`}>
             <span className={styles['link-text']}>{order.shippingTo.name}</span>
-            <OverlayTrigger trigger="click" placement="bottom" overlay={popover}>
+            <OverlayTrigger placement="bottom" overlay={popover}>
               <span className={styles['ml-10']}>
                 <SVGComponent clsName={`${styles['down-arrow']}`} src="icons/down-arrow/down-arrow" />
               </span>

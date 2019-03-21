@@ -55,7 +55,7 @@ class Display extends Component {
             asNavFor={this.state.nav2}
             ref={slider => (this.slider1 = slider)}
             lazyLoad={true}
-            className={styles['ht-100per']}
+            className={`${styles['ht-100per']} ${styles.slick}`}
           >
             {imgs.map(({url}) => {
               return (
@@ -75,7 +75,7 @@ class Display extends Component {
               swipeToSlide={true}
               focusOnSelect={true}
               lazyLoad={true}
-              className={styles['sub-slider']}
+              className={`${styles['sub-slider']} ${styles.slick}`}
             >
               {
                 imgs.map(({url}, index) => {
