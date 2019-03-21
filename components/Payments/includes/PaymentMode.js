@@ -159,9 +159,11 @@ class PaymentMode extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({
-      showTab: Object.keys(nextProps.paymentModesData.paymentModes)[0]
-    })
+    if(!this.state.showTab) {
+      this.setState({
+        showTab: Object.keys(nextProps.paymentModesData.paymentModes)[0]
+      });
+    }
   }
 
   render() {
@@ -206,15 +208,24 @@ class PaymentMode extends Component {
                           {
                             _.map(props.paymentModesData.paymentModes, (val, key) => {
                               const Page = paymentPageConfig[val.type];
-                              return (
-                                <div key={key} className={`${showTab == key ? '' : 'hide'}`}>
-                                  <Page
-                                    saveCard={props.saveCard}
-                                    voucherData={props.paymentModesData.voucherData}
-                                    data={props.paymentModesData.paymentModes[key]}
-                                  />
-                                </div>
-                              )
+                              return showTab == key
+                              ?
+                                <Page
+                                  saveCard={props.saveCard}
+                                  voucherData={props.paymentModesData.voucherData}
+                                  data={props.paymentModesData.paymentModes[key]}
+                                />
+                              :
+                                null
+                              // return (
+                              //   <div key={key} className={`${showTab == key ? '' : 'hide'}`}>
+                              //     <Page
+                              //       saveCard={props.saveCard}
+                              //       voucherData={props.paymentModesData.voucherData}
+                              //       data={props.paymentModesData.paymentModes[key]}
+                              //     />
+                              //   </div>
+                              // )
                             })
                           }
                         </Col>

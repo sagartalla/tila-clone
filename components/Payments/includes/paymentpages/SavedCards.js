@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Grid, Row, Col } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import _ from 'lodash';
+
+import { actionCreators, selectors } from '../../../../store/payments';
 
 import Voucher from './Voucher';
 
@@ -28,16 +33,35 @@ const { PAYMENT_PAGE } = languageDefinations();
 // );
 
 class SavedCards extends Component {
-
   constructor(props) {
     super(props);
+    this.state = {
+      card_token: _.find(props.data.cards_list, { default: true }).card_token
+    };
     this.selectCard = this.selectCard.bind(this);
+    this.proceedToPayment = this.proceedToPayment.bind(this);
   }
 
   selectCard(card_token) {
     return () => {
-      console.log('card_token', card_token);
+      this.setState({
+        card_token: card_token
+      });
     }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    debugger;
+  }
+
+  proceedToPayment() {
+    const { data, makeProcessRequest } = this.props;
+    makeProcessRequest({
+      payment_details: [{
+        payment_mode: data.type,
+        card_token: this.state.card_token
+      }]
+    });
   }
 
   render() {
@@ -69,7 +93,7 @@ class SavedCards extends Component {
               })
             }
             </ul>
-            <button className={`${styles['fp-btn-primary']} ${styles['fp-btn']}`}>Pay {data.amount_to_pay} {data.currency_code}</button>
+            <button onClick={this.proceedToPayment} className={`${styles['fp-btn-primary']} ${styles['fp-btn']}`}>Pay {data.amount_to_pay} {data.currency_code}</button>
           </Row>
         </Grid>
       </div>
@@ -77,12 +101,19 @@ class SavedCards extends Component {
   }
 }
 
-SavedCards.propTypes = {
-  makePayment: PropTypes.func.isRequired,
-}
+const mapStateToprops = (store) => {
+  debugger;
+  return ({
+    processData: selectors.getProcessData(store)
+  });
+};
 
-SavedCards.defaultProps = {
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      makeProcessRequest: actionCreators.makeProcessRequest
+    },
+    dispatch,
+  );
 
-}
-
-export default SavedCards;
+export default connect(mapStateToprops, mapDispatchToProps)(SavedCards);

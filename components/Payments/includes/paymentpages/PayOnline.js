@@ -42,9 +42,11 @@ class PayOnline extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({
-      iframe_url: nextProps.data.iframe_url
-    });
+    if (nextProps.processData) {
+      this.setState({
+        iframe_url: nextProps.processData.iframe_url
+      });
+    }
   }
 
   render() {
@@ -72,7 +74,7 @@ class PayOnline extends Component {
                   :
                     <div>
                         <div>Once you click on Add New Card. There is no going back. You can't access any other modes of payment.</div>
-                        <button onClick={this.fetchIframe}>Pay {data.amount_to_pay} {data.currency_code} Using New Card</button>
+                        <button className={`${styles['fp-btn-primary']} ${styles['fp-btn']}`} onClick={this.fetchIframe}>Pay {data.amount_to_pay} {data.currency_code} Using New Card</button>
                     </div>
               }
             </Col>

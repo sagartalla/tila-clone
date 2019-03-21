@@ -42,7 +42,7 @@ const createOrder = () => {
 const createOrderApi = (defaultAddrId) => {
   return axios.put(`${constants.CART_API_URL}/api/v1/cart/view`, { address_id: defaultAddrId }).then(({ data }) => {
     return createOrder(data);
-  }).catch(() => {});
+  });
 };
 
 const doPaymentApi = (params) => {
@@ -59,7 +59,7 @@ const saveCardApi = (params) => {
 
 const makeProcessRequest = (params) => {
   params.redirect_url = `${window.location.origin}/${country}/${language}`;
-  return axios.post(`${constants.TRANSACTIONS_API_URL}/fpts/transaction/process`, params);
+  return axios.post(`${constants.TRANSACTIONS_API_URL}/fpts/transaction/process`, params).then(({data}) => data);
 }
 
 export default { createOrderApi, doPaymentApi, saveCardApi, makeProcessRequest };
