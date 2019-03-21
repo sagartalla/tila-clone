@@ -104,7 +104,6 @@ class SavedCards extends Component {
 }
 
 const mapStateToprops = (store) => {
-  debugger;
   return ({
     processData: selectors.getProcessData(store)
   });
