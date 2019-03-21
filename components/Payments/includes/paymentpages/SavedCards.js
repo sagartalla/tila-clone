@@ -75,7 +75,7 @@ class SavedCards extends Component {
         {
           data.cards_list.map((card, index) => {
             return (
-              <li>
+              <li className={styles['saved-card-item']}>
                 <input
                   id={`card-${index}`}
                   name="credit-card"
@@ -83,10 +83,12 @@ class SavedCards extends Component {
                   onClick={this.selectCard(card.card_token)}
                   checked={card.default}
                 />
-                <label for={`card-${index}`}>
-                  <div>{card.masked_number}</div>
-                  <div>{card.holder_name}</div>
-                  <div>{`${card.expiry_month}/${card.expiry_year}`}</div>
+                <label for={`card-${index}`} className={styles['card-label']}>
+                  <div className={`${styles['flex']} ${styles['justify-between']}`}>
+                    <div>{card.masked_number}</div>
+                    <div>{card.holder_name}</div>
+                    <div>{`${card.expiry_month}/${card.expiry_year}`}</div>
+                  </div>
                 </label>
               </li>
             );
