@@ -9,6 +9,7 @@ const initialState = {
   data: {
     addToCart: {},
     items: [],
+    cartButtonLoaders: {},
   },
   error: '',
 };
@@ -132,6 +133,30 @@ const cartReducer = typeToReducer({
       addToCart: {},
     },
   }),
+  [actions.SHOW_CART_BUTTON_LOADER]: (state, action) => {
+    return {
+      ...state,
+      data: {
+        ...state.data,
+        cartButtonLoaders: {
+          ...state.data.cartButtonLoaders,
+          [action.params.listing_id]: true,
+        },
+      },
+    };
+  },
+  [actions.HIDE_CART_BUTTON_LOADER]: (state, action) => {
+    return {
+      ...state,
+      data: {
+        ...state.data,
+        cartButtonLoaders: {
+          ...state.data.cartButtonLoaders,
+          [action.params.listing_id]: false,
+        },
+      },
+    };
+  },
 }, initialState);
 
 export default cartReducer;

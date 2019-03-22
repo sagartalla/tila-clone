@@ -61,7 +61,7 @@ class Search extends Component {
                 onClick={this.querySearch}
                 data-querysearch={query.search}
               >
-                <b>{`${spellCheckResp[query.search]} ?`}</b>
+                <b>{`${query.search} ?`}</b>
               </a>
             </div>
           }

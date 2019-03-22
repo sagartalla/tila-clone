@@ -35,7 +35,7 @@ const b = [{"Perfumes":	"https://storefront-stage.fptechscience.com/srp?disableS
 {"Personal Care":	"https://storefront-stage.fptechscience.com/srp/Personal%20Care-969?categoryTree=true&isListed=false&language=en"}];
 
 const FooterBar = props => (
-  <div className={`${styles['footer-container']} ${styles['mt-25']} hidden-xs`}>
+  <div className={`${styles['footer-container']} ${styles['mt-25']}`}>
     <div className={`${styles['footer-container-inn']} ${styles['pt-40']} ${styles['pb-40']}`}>
       <Grid>
         <Row>
@@ -371,10 +371,10 @@ const FooterBar = props => (
           <Col md={3} sm={3} className={styles['ipad-pr-0']}>
             <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['black-color']}`}>{FOOTER_PAGE.POLICY}</h4>
             <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
-              <li><a href="policy/tc" target="_blank">{FOOTER_PAGE.TERMS_CONDITION}</a></li>
-              <li><a href="policy/re" target="_blank">{FOOTER_PAGE.REFUND_POLICY}</a></li>
-              <li><a href="policy/wp" target="_blank">{FOOTER_PAGE.WARRENTY_POLICY}</a></li>
-              <li><a href="policy/sp" target="_blank">{FOOTER_PAGE.SHIPPING_POLICY}</a></li>
+              <li><a href="/SAU/en/policy/tc" target="_blank">{FOOTER_PAGE.TERMS_CONDITION}</a></li>
+              <li><a href="/SAU/en/policy/re" target="_blank">{FOOTER_PAGE.REFUND_POLICY}</a></li>
+              <li><a href="/SAU/en/policy/wp" target="_blank">{FOOTER_PAGE.WARRENTY_POLICY}</a></li>
+              <li><a href="/SAU/en/policy/sp" target="_blank">{FOOTER_PAGE.SHIPPING_POLICY}</a></li>
             </ul>
           </Col>
           {/*<Col md={2} sm={2} className={styles['ipad-pr-0']}>

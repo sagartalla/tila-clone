@@ -71,7 +71,7 @@ class CheckboxFacet extends Component {
                   <li key={childFitler.id} className={styles['category-sub-list-inn']}>
                     <div className={`${styles['checkbox-material']} ${styles['select-check-mate']}`}>
                       <input id={childFitler.name} type="checkbox" onChange={this.onChangeItem({ name: childFitler.name, param: childFitler.param })} checked={selectedItems.indexOf(childFitler.name) !== -1} />
-                      <label htmlFor={childFitler.name} className={`${styles['fs-12']} ${styles['category-label']}`}> <span className={styles['category-span']}>{childFitler.name}</span> <span>({childFitler.count})</span> </label>
+                      <label htmlFor={childFitler.name} className={`${styles['fs-12']} ${styles['category-label']}`}> <span className={styles['category-span']}>{childFitler.name}</span> <span>{childFitler.count ? `(${childFitler.count})` : ''}</span> </label>
                     </div>
                   </li>
                 ))

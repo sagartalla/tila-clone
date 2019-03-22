@@ -228,7 +228,7 @@ class CartItem extends React.Component {
                   </p>}
                   <h4 className={`${styles.fontW600} ${styles['justify-flex-end']} ${styles['light-gry-clr']} ${styles['flex-center']} ${styles['mt-10']} ${styles['t-rt']}`}>
                     {`${offer_price} ${cur}`}
-                    <OverlayTrigger trigger="click" placement="bottom" overlay={popover(item)}>
+                    <OverlayTrigger placement="bottom" overlay={popover(item)}>
                       {/* <span className={`${styles['fs-12']} ${styles['pr-5']}`}>
                         <SVGComponent clsName={`${styles['secure-icon']} ${styles['mr-10']} ${styles['pointer']}`} src="icons/common-icon/trust-secure" />
                       </span> */}

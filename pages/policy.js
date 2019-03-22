@@ -9,13 +9,14 @@ import Base, { baseActions } from './base';
 import { actionCreators, selectors } from '../store/landing';
 
 class PolicyPage extends Base {
-  pageName = 'HOME';
+  pageName = 'POLICY';
   static async getInitialProps({ store, query, isServer, req }) {
     // await store.dispatch(actionCreators.getPages());
     return { isServer };
   }
 
   render() {
+    console.log('PolicyPage')
     const { url } = this.props;
     return (
       <div>

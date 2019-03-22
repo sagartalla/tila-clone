@@ -99,11 +99,11 @@ const getSearchFilters = (store) => {
           count: value.Count,
           param: value.Param,
         };
-        if (item.Type === 'PERCENTILE') {
-          attrObj.values = value.attributeValue;
-        } else {
+        // if (item.Type === 'PERCENTILE') {
+        //   attrObj.values = value.attributeValue;
+        // } else {
           attrObj.name = value.attributeValue;
-        }
+        // }
         return attrObj;
       }),
     }), []);
@@ -244,8 +244,10 @@ const getUserDetails = store => store.authReducer.data;
 
 const getSuggestions = store => store.searchReducer.data.suggestions;
 
+const getCartButtonLoaders = store => store.cartReducer.data.cartButtonLoaders || {};
+
 export {
   getSearchFilters, getSearchResutls, getPaginationDetails, getUIState, getCategoryId, getQuery, getCategorySearchQuery,
   getFacetfilters, optionParams, getSearchBarFilterState, addCartAndWishlistDetails, getIsCategoryTree, getChoosenCategoryName,
-  getAppliedFitlers, getSuggestions, getSpellCheckResponse, getUserDetails,
+  getAppliedFitlers, getSuggestions, getSpellCheckResponse, getUserDetails, getCartButtonLoaders,
 };
