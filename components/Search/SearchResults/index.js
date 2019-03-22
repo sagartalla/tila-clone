@@ -83,6 +83,13 @@ class SearchResults extends Component {
     const {
       results, pagiantionDetails, userDetails, notifyMe, cartButtonLoaders,
     } = this.props;
+    if(results.totalCount === 0) {
+      return (
+        <div className={`${styles['no-results']} ${styles['fs-40']} ${styles['flex-center']} ${styles['justify-center']}`}>
+          No items found
+        </div>
+      )
+    }
     const { pageNum } = this.props.pagiantionDetails;
     return (
       <div>

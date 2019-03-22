@@ -52,7 +52,7 @@ const actionCreators = {
     return ({
       type:actions.GET_SEARCH_RESULTS,
       payload:apis.fetchImageSearchApi(params)
-    }) 
+    })
   }
 };
 

@@ -19,6 +19,14 @@ const changePassword = (body) => {
   })
 };
 
+const resetPassword = (body) => {
+  return axios.post(`${constants.CMS_API_URL}/api/v1/user/password/reset`, body).then((data) => {
+    return data;
+  }).catch((error) => {
+    return error.response.data;
+  })
+}
+
 const forgotPassword = (body) => {
   return axios.post(`${constants.CMS_API_URL}/api/v1/user/password/forgot`, body).then(({data}) => {
     return data;
@@ -42,5 +50,5 @@ const deactivateUserProfile = () =>
   axios.put(`${constants.CMS_API_URL}/api/v1/user/deactivate/`);
 
 export default {
-  getUserProfileInfo, changePassword , forgotPassword, editPersonalInfo, deactivateUserProfile,
+  getUserProfileInfo, changePassword, forgotPassword, editPersonalInfo, deactivateUserProfile, resetPassword,
 };
