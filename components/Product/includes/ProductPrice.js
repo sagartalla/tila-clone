@@ -70,68 +70,64 @@ const ProductPrice = ({offerInfo}) => {
     {
       listingAvailable
       ?
-      <Fragment>
-        <div className={`${styles['flex']} ${styles['align-baseline']}`}>
+        <Fragment>
           <div className={`${styles['flex']} ${styles['align-baseline']}`}>
-            <span className={`${styles['fs-30']} ${styles['fontW600']} ${styles['pr-5']}`}>{offerPricing.showPrise}</span>
-            <span className={`${styles['fs-12']} ${styles['pr-5']}`}>{offerPricing.currency}</span>
+            <div className={`${styles['flex']} ${styles['align-baseline']}`}>
+              <span className={`${styles['fs-30']} ${styles['fontW600']} ${styles['pr-5']}`}>{offerPricing.showPrise}</span>
+              <span className={`${styles['fs-12']} ${styles['pr-5']}`}>{offerPricing.currency}</span>
+            </div>
+            <Fragment>
+              {offerPricing.showPrise !== offerPricing.strickedPrice && Math.floor(offerPricing.discount) > 5 &&
+              <div className={`${styles.flex} ${styles['align-baseline']} ${styles['cross-strike-red']} ${styles.relative} ${styles['ml-10']}`}>
+                <span className={`${styles['fs-26']} ${styles['pr-5']}`}>{offerPricing.strickedPrice}</span>
+                <span className={`${styles['fs-12']} ${styles['pr-5']}`}>{offerPricing.currency}</span>
+              </div>}
+              <div className={`${styles['flex']} ${styles['align-baseline']} ${styles['relative']} ${styles['ml-10']}`}>
+                {offerPricing.showPrise !== offerPricing.strickedPrice && Math.floor(offerPricing.discount) > 5 &&
+                <span className={`${styles['fs-12']} ${styles['pr-5']} ${styles['offers-applied']} `}>{`${Math.floor(offerPricing.discount)}% OFF`}</span>}
+                <OverlayTrigger placement="bottom" overlay={popover(offerPricing)}>
+                  <span className={`${styles['fs-12']} ${styles['pr-5']}`}>
+                    <SVGCompoent clsName={`${styles['secure-icon']} ${styles['mr-10']} ${styles['pointer']}`} src="icons/common-icon/trust-secure" />
+                  </span>
+                </OverlayTrigger>
+              </div>
+            </Fragment>
           </div>
           {
-            offerPricing.showPrise !== offerPricing.strickedPrice && Math.floor(offerPricing.discount) > 5
-            ?
-              <Fragment>
-                <div className={`${styles['flex']} ${styles['align-baseline']} ${styles['cross-strike-red']} ${styles['relative']} ${styles['ml-10']}`}>
-                  <span className={`${styles['fs-26']} ${styles['pr-5']}`}>{offerPricing.strickedPrice}</span>
-                  <span className={`${styles['fs-12']} ${styles['pr-5']}`}>{offerPricing.currency}</span>
-                </div>
-                <div className={`${styles['flex']} ${styles['align-baseline']} ${styles['relative']} ${styles['ml-10']}`}>
-                  <span className={`${styles['fs-12']} ${styles['pr-5']} ${styles['offers-applied']} `}>{`${Math.floor(offerPricing.discount)}% OFF`}</span>
-                  <OverlayTrigger placement="bottom" overlay={popover(offerPricing)}>
-                    <span className={`${styles['fs-12']} ${styles['pr-5']}`}>
-                      <SVGCompoent clsName={`${styles['secure-icon']} ${styles['mr-10']} ${styles['pointer']}`} src="icons/common-icon/trust-secure" />
-                    </span>
-                  </OverlayTrigger>
-                </div>
-              </Fragment>
-            :
-            null
-          }
-        </div>
-        {
           offerPricing.offerMesseges.length
           ?
-          <div className={`${styles['flex']} ${styles['offers-applied']}`}>
-            <span className={styles['fontW600']}>Offer Applied: </span>
-            <ul className={styles['p-0']}>
-              {
-                offerPricing.offerMesseges.map((m) => {
-                  return (
-                    <li>
-                      <span className={`${styles['fs-12']} ${styles['pl-10']}`}>{m}</span>
-                    </li>
-                  );
-                })
-              }
-            </ul>
-          </div>
+            <div className={`${styles['flex']} ${styles['offers-applied']}`}>
+              <span className={styles['fontW600']}>Offer Applied: </span>
+              <ul className={styles['p-0']}>
+                {
+                  offerPricing.offerMesseges.map((m) => {
+                    return (
+                      <li>
+                        <span className={`${styles['fs-12']} ${styles['pl-10']}`}>{m}</span>
+                      </li>
+                    );
+                  })
+                }
+              </ul>
+            </div>
           :
           null
-        }
-      </Fragment>
+          }
+        </Fragment>
       :
-      <h2>
-        {
-          availabilityError
-          ?
-            `${PDP_PAGE.PRODUCT_NOT_AVAILABLE}`
-          :
-            stockError
+        <h2>
+          {
+            availabilityError
             ?
-              `${PDP_PAGE.PRODUCT_OUT_OF_STOCK}`
+              `${PDP_PAGE.PRODUCT_NOT_AVAILABLE}`
             :
-              null
-        }
-      </h2>
+              stockError
+              ?
+                `${PDP_PAGE.PRODUCT_OUT_OF_STOCK}`
+              :
+                null
+          }
+        </h2>
     }
 
   </div>
