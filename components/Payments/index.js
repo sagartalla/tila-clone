@@ -141,6 +141,7 @@ class Payments extends React.Component {
 
   // onclick payment method tabs.
   showPaymentType(value) {
+    /* method not used */
     this.setState({ showTab: value });
   }
 
@@ -148,6 +149,7 @@ class Payments extends React.Component {
   // TODO make paymentjson manipulation as util
   // NOT USING - remove 6 months later after PCD-IS [31-Jul-2018]
   makePayment() {
+    /* method not used */
     const { paymentOptions } = this.props;
     const paymentjson = {
       payment_details: [
@@ -175,9 +177,9 @@ class Payments extends React.Component {
 
       const paymentConfigJson = { ...this.state.paymentConfigJson };
       paymentConfigJson['address'] = { basic: false, progress: false, done: true };
-      paymentConfigJson['loyaltyPoints'] = { basic: false, progress: true, done: false };
-      paymentConfigJson['offersDiscounts'] = { basic: true, progress: false, done: false };
-      paymentConfigJson['payment'] = { basic: true, progress: false, done: false };
+      // paymentConfigJson['loyaltyPoints'] = { basic: false, progress: true, done: false };
+      // paymentConfigJson['offersDiscounts'] = { basic: true, progress: false, done: false };
+      paymentConfigJson['payment'] = { basic: false, progress: true, done: false };
       this.setState({ paymentConfigJson, editCartDetails: !editCartDetails });
     } else {
       toast.info('Please add a delivery address.');
@@ -276,17 +278,16 @@ class Payments extends React.Component {
                 configJson={paymentConfigJson.address}
                 handleShippingAddressContinue={this.handleShippingAddressContinue}
               />
-              <LoyaltyPoints
+            {/*<LoyaltyPoints
                 editLoyalityTab={this.editLoyalityTab}
                 handleLoyaltyBtn={this.handleLoyaltyBtn}
                 configJson={paymentConfigJson.loyaltyPoints}
-              />
-              <OffersAndDiscounts
+              />*/}
+              {/*<OffersAndDiscounts
                 configJson={paymentConfigJson.offersDiscounts}
                 handleOffersDiscountsTab={this.handleOffersDiscountsTab}
-              />
+              />*/}
               <PaymentMode
-                showTab={showTab}
                 data={paymentOptions}
                 saveCard={this.saveCard}
                 makePayment={this.makePayment}
@@ -370,5 +371,3 @@ Payments.defaultProps = {
 };
 
 export default connect(mapStateToprops, mapDispatchToProps)(Payments);
-
-
