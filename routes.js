@@ -14,7 +14,7 @@ routes
   .add({ name: 'search', pattern: '/:country/:language/srp/:category?/:subCategory?', page: 'search' })
   .add({ name: 'compare', pattern: '/:country/:language/compare', page: 'compare' })
   .add({ name: 'policy', pattern: '/:country/:language/policy/:name', page: 'policy' })
-  .add({ name: 'resetpassword', pattern: '/resetpassword/:token', page: 'resetpassword' })  
+  .add({ name: 'resetpassword', pattern: '/:country/:language/resetpassword/:token', page: 'resetPassword' })
   .add({ name: 'default', pattern: '/:country/:language', page: 'index'})
   ;
 
