@@ -109,7 +109,11 @@ class Body extends Component {
         break;
       }
       case STEPS.REASONS: {
-        nextStep = issueType ? STEPS.CANCEL_COMPLETE : STEPS.CHOOSE_ADDRESS;
+        nextStep = issueType === ORDER_ISSUE_TYPES.CANCEL ? STEPS.CHOOSE_PAYMENT_MODE : STEPS.CHOOSE_ADDRESS;
+        break;
+      }
+      case STEPS.CHOOSE_PAYMENT_MODE: {
+        nextStep = issueType === ORDER_ISSUE_TYPES.CANCEL ? STEPS.CANCEL_COMPLETE : STEPS.RETURN_COMPLETE
         break;
       }
       case STEPS.CANCEL_COMPLETE: {
@@ -122,7 +126,8 @@ class Body extends Component {
       }
       case STEPS.CHOOSE_ADDRESS: {
         nextStep =
-          issueType === ORDER_ISSUE_TYPES.RETURN
+          issueType === (ORDER_ISSUE_TYPES.RETURN ||
+            ORDER_ISSUE_TYPES.CANCEL)
             ? STEPS.CHOOSE_PAYMENT_MODE
             : STEPS.RETURN_COMPLETE;
         break;

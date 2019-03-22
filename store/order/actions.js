@@ -16,9 +16,10 @@ const actions = {
   GET_EXCHANGE_VARIANTS: 'GET_EXCHANGE_VARIANTS',
   SET_VARIANT_OPTION: 'SET_VARIANT_OPTION',
   SEND_MAP_DATA: 'SEND_MAP_DATA',
-  EXCHANGE_ORDER:'EXCHANGE_ORDER',
+  SET_EXCHANGE_ORDER:'SET_EXCHANGE_ORDER',
   SUBMIT_ORDER_RETURN: 'SUBMIT_ORDER_RETURN',
-  SET_ADDRESS_DATA: 'SET_ADDRESS_DATA'
+  SET_ADDRESS_DATA: 'SET_ADDRESS_DATA',
+  GET_REFUND_OPTIONS:'GET_REFUND_OPTIONS'
 };
 
 const actionCreators = {
@@ -45,7 +46,7 @@ const actionCreators = {
   setExchangeOrder : (params) => {
     return (
       {
-        type:actions.EXCHANGE_ORDER,
+        type:actions.SET_EXCHANGE_ORDER,
         payload:api.setExchangeOrder(params)
       }
     )
@@ -69,6 +70,12 @@ const actionCreators = {
           selectedItem: params.selectedItem
         }
       }
+    }
+  },
+  getRefundOptions:(params) => {
+    return {
+      type:actions.GET_REFUND_OPTIONS,
+      payload:api.getRefundOptions(params)
     }
   },
   setReason: (params) => {

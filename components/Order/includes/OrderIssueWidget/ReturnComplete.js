@@ -12,18 +12,8 @@ const { ORDER_PAGE } = languageDefinations();
 
 class ReturnComplete extends Component {
 
-  componentDidMount() {
-    // const { orderIssue, submitReturnRequest } = this.props;
-    // const { selectedItem, selectedReasons } = orderIssue;
-    // submitReturnRequest({
-    //   orderItemId: selectedItem.id,
-    //   reason: selectedReasons.reason,
-    //   comment: selectedReasons.comment,
-    //   addressId: orderIssue.returnExchangeAddressId,
-    // });
-  }
-
   render() {
+
     const { orderIssue, loadingStatus, errorMessege, goToNextStep, query } = this.props;
     const { selectedItem } = orderIssue;
     return (
@@ -50,7 +40,7 @@ class ReturnComplete extends Component {
                         <span><span className={styles['fontW600']}> {ORDER_PAGE.YOUR_ORDER}{selectedItem.name} </span>
                           <span>
                             {
-                              query.returnExchangeType === 'Return' ?
+                              query.returnExchangeType === 'RETURN' ?
                                 ORDER_PAGE.REQ_RETURN_SUCCESS :
                                 ORDER_PAGE.REQ_EXCHANGE_SUCCESS
                             }
@@ -60,7 +50,7 @@ class ReturnComplete extends Component {
                       <div>
                         <span>
                           {
-                            query.returnExchangeType === 'Return' ?
+                            query.returnExchangeType === 'RETURN' ?
                               ORDER_PAGE.RETURN_MESSAGE : ''
 
                           }

@@ -27,23 +27,29 @@ class ChoosePaymentMode extends Component {
     this.onOptionChange = this.onOptionChange.bind(this)
     this.saveAndGoNext = this.saveAndGoNext.bind(this)
     this.state = {
-      paymentType: props.orderDetails.payments[0].payment_mode === 'PAY_ONLINE' ?
-        'Online' : 'Wallet'
+      paymentType: Object.keys(props.orderIssue.refundOptions).length > 0 &&
+                    props.orderIssue.refundOptions['RETURN'].indexOf("BACK_TO_SOURCE") !== -1
+                    ? 'Online' : 'Wallet'
     }
   }
   onOptionChange(e) {
-
+    this.setState({
+      paymentType:e.currentTarget.value
+    })
   }
   saveAndGoNext() {
     const { paymentType } = this.state
-    const { orderIssue } = this.props
+    const { orderIssue,goToNextStep } = this.props
     const { selectedReasons } = orderIssue
     var refundType = paymentType === 'Online' ? 'BACK_TO_SOURCE' : 'WALLET'
     const orderReturnParams = Object.assign({}, selectedReasons, { refund_mode: refundType })
     this.props.submitReturnRequest(orderReturnParams)
+    goToNextStep()
   }
   getPaymentModes(payment) {
     const { paymentType } = this.state
+    const { orderIssue } = this.props;
+    const { refundOptions } = orderIssue
     var data = [<RenderRadioInput
       key={'radio_1'}
       value='Wallet'
@@ -52,7 +58,8 @@ class ChoosePaymentMode extends Component {
     />
     ]
 
-    if (paymentType === 'Online') {
+    if (Object.keys(refundOptions).length > 0
+        && refundOptions['RETURN'].indexOf("BACK_TO_SOURCE") !== -1) {
       data.push(
         <RenderRadioInput
           key={'radio_2'}
@@ -66,7 +73,8 @@ class ChoosePaymentMode extends Component {
     return data;
   }
   render() {
-    const { orderDetails } = this.props;
+    const { orderDetails,orderIssue } = this.props;
+    console.log('orderdata',orderIssue);
     const { paymentType } = this.state
     return (
       <div>

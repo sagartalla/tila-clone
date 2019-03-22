@@ -21,7 +21,7 @@ class Reason extends Component {
     super(props);
     this.state = {
       selectedMode: ORDER_ISSUE_TYPES.RETURN === props.orderIssue.returnExchangeType ?
-        'Return' : 'Exchange',
+        'Return' : ORDER_ISSUE_TYPES.EXCHANGE ===  props.orderIssue.returnExchangeType ? 'Exchange' : 'Cancel',
       selectedVariant: [],
       displaySizeError: false
     };
@@ -40,6 +40,8 @@ class Reason extends Component {
     };
     this.props.getReasons(orderId);
     this.props.getExchangeVariants(orderId);
+    this.props.getOrderDetails({ orderId:this.props.orderIssue.orderId });
+
   }
   onOptionChange = (e) => {
     this.setState({
@@ -76,13 +78,12 @@ class Reason extends Component {
   };
 
   saveAndGoNext() {
-    debugger;
-    const { goToNextStep, setReason, query, orderIssue } = this.props;
-    //const { orderId, returnExchangeType } = query;
-    const { reason, subReason, selectedVariant, comment, variantId } = this.state
+    const { goToNextStep, setReason, query, orderIssue, orderDetails } = this.props;
+    const { orderId, returnExchangeType, issueType } = orderIssue;
+    const { reason, subReason, selectedVariant, comment, variantId, selectedMode } = this.state
     const params = {
       orderId,
-      issueType: ORDER_ISSUE_TYPES.RETURN,
+      issueType: issueType,
       step: STEPS.CHOOSE_ADDRESS,
       returnExchangeType
     };
@@ -93,18 +94,18 @@ class Reason extends Component {
       reason,
       sub_reason: subReason,
       comments: comment,
-      order_item_id: query.orderItemId,
+      order_item_id: orderIssue.selectedItem.id,
       address_id: orderDetails.address.address_id
     }
 
     if (
-      this.state.selectedMode === 'Return' &&
+      (selectedMode === 'Return' || selectedMode === 'Cancel' )&&
       (ORDER_ISSUE_TYPES.RETURN === 'RETURN' ||
         ORDER_ISSUE_TYPES.EXCHANGE === 'EXCHANGE')
     ) {
       this.props.setOrderIssueData(params);
       this.props.setAddressData(reasonParams)
-      this.props.refundOptions(query.orderItemId)
+      this.props.refundOptions(orderIssue.selectedItem.id)
       goToNextStep();
     }
     else if (
@@ -340,7 +341,8 @@ const mapDispatchToProps = dispatch =>
       setOrderIssueData: actionCreators.setOrderIssueData,
       setExchangeOrder: actionCreators.setExchangeOrder,
       setAddressData: actionCreators.setAddressData,
-      refundOptions:actionCreators.getRefundOptions
+      refundOptions:actionCreators.getRefundOptions,
+      getOrderDetails:actionCreators.getOrderDetails
     },
     dispatch,
   );

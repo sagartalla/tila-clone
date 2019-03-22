@@ -8,7 +8,7 @@ import { selectors, actionCreators } from '../../../../store/order';
 import OrderIssueBody from '../OrderIssueWidget/body';
 
 import constants from '../../../../constants';
-import { ORDER_ISSUE_STEPS as STEPS } from '../../constants';
+import { ORDER_ISSUE_STEPS as STEPS,ORDER_ISSUE_TYPES } from '../../constants';
 
 import { mergeCss } from '../../../../utils/cssUtil';
 const styles = mergeCss('components/Order/order');
@@ -21,7 +21,7 @@ class OrderReturnExchange extends Component {
     const { orderId, orderItemId, returnExchangeType, variantId } = query;
     const params = {
       orderId: orderId,
-      issueType: null,
+      issueType: returnExchangeType,
       step: STEPS.REASONS,
       returnExchangeType: returnExchangeType
     };

@@ -73,7 +73,6 @@ const OrderItem = ({
       return null;
     }
   })();
-  // console.log(isCancelable);
   return (
     <div className={`${styles['shipment-wrap']} ${styles['mb-20']} ${styles['mt-20']} ${styles['flex']}`}>
       <Col md={7} sm={7} className={`${styles['pl-0']} ${styles['pr-0']}`}>
@@ -131,15 +130,16 @@ const OrderItem = ({
                       {btnType === 'cancel' ? moment(orderItem.products[0].promisedDeliveryDate).format('Do, dddd') : showWidget && !thankyouPage ? moment(orderItem.products[0].state_time_estimates.CANCELLED.time).format('Do, dddd') : null}
                     </div>
                   </div>
-                  {isCancelable === 'TRUE' && <RenderButton callbackMethod={cancelOrder}
-                   refundType = 'Cancel'
+                  {isCancelable === 'TRUE' &&
+                    <RenderButton callbackMethod={cancelOrder}
+                      refundType = 'Cancel'
                    />}
 
-                   {isReturnable &&
+                   {isReturnable === 'TRUE' &&
                    <RenderButton
                      callbackMethod={exchangeReturnOrder(ORDER_ISSUE_TYPES.RETURN)}
                      refundType='Return' />}
-                  {isExchangable &&
+                  {isExchangable === 'TRUE' &&
                     <RenderButton
                       callbackMethod={exchangeReturnOrder(ORDER_ISSUE_TYPES.EXCHANGE)}
                       refundType='Exchange' />

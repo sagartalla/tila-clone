@@ -73,7 +73,6 @@ class Product extends Component {
     e.preventDefault();
     const { selectedIndex } = this.state;
     const { variants } = this.props;
-    const {selectedIndex} = this.state;
     this.props.buyNow(variants[selectedIndex].listingId[0]);
   }
 
