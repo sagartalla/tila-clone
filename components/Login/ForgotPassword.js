@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
+import { Col } from 'react-bootstrap';
 import Btn from '../common/Button';
-import { Col, FormGroup } from 'react-bootstrap';
 import { mergeCss } from '../../utils/cssUtil';
 import { selectors, actionCreators } from '../../store/cam/personalDetails';
 import { actionCreators as authActionCreators } from '../../store/auth';
@@ -18,10 +18,10 @@ class ForgotPassword extends Component {
     super(props);
     this.state = {
       email: props.enteredEmail || '',
-      validation: '',
+      showInput: '',
       userNameError: false,
       errorMsg: '',
-    }
+    };
     this.sendLink = this.sendLink.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.switchState = this.switchState.bind(this);
@@ -29,9 +29,9 @@ class ForgotPassword extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.forgotPasswordStatus === 'SUCCESS') {
-      this.setState({ validation: 'True' });
+      this.setState({ showInput: true });
     } else {
-      this.setState({ validation: 'False' });
+      this.setState({ showInput: false });
     }
   }
 
@@ -39,7 +39,7 @@ class ForgotPassword extends Component {
     const { email } = this.state;
     let { userNameError, errorMsg } = this.state;
     const body = {
-      'email' : email
+      email,
     };
     if (email === '') {
       userNameError = true;
@@ -48,7 +48,13 @@ class ForgotPassword extends Component {
       userNameError = true;
       errorMsg = 'Entered email is invalid';
     } else {
-      this.props.forgotPassword(body);
+      this.props.forgotPassword(body).then((res) => {
+        if (res && res.value && res.value.Response === 'SUCCESS') {
+          this.setState({ showInput: true });
+        } else {
+          this.setState({ showInput: false });
+        }
+      });
     }
     this.setState({
       userNameError,
@@ -57,35 +63,52 @@ class ForgotPassword extends Component {
   }
 
   handleChange(e) {
+    let { userNameError, errorMsg } = this.state;
+    if (!emailPattern.test(e.target.value)) {
+      userNameError = true;
+      errorMsg = 'Entered email is invalid';
+    } else {
+      userNameError = false;
+      errorMsg = '';
+    }
     this.setState({
       email: e.target.value,
+      userNameError,
+      errorMsg,
     });
   }
 
   switchState() {
     this.setState({
-      validation: '',
+      showInput: '',
     });
   }
-
   render() {
-    const { errorMsg, userNameError, email } = this.state;
+    const {
+      errorMsg, userNameError, email, showInput,
+    } = this.state;
     return (
       <div className={styles['forgot-password']}>
         <h2><b>Forgot Password?</b></h2>
-        { this.state.validation === '' ?
+        {showInput === '' ?
           <div>
             <div className={`${styles['fp-input']} ${styles['pb-10']}`}>
-              <input name="email" type="email" onChange={this.handleChange} placeholder='Registered Email ID' value={email} required />
+              <input name="email" type="email" onChange={this.handleChange} placeholder="Registered Email ID" value={email} required />
               {userNameError && <span className={`${styles['thick-red-clr']}`}>{errorMsg}</span>}
             </div>
             <Col xs={12} md={12} className={`${styles['pt-30']}`}>
-              <Btn className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles['update-profile-btn']} ${styles['text-uppercase']}`} btnText='SEND VERIFICATION LINK' onClick={this.sendLink} />
+              <Btn className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles['update-profile-btn']} ${styles['text-uppercase']}`} btnText="SEND VERIFICATION LINK" onClick={this.sendLink} />
             </Col>
           </div>
                 :
           <div>
-            <VerifyStatus resetLogin={this.props.resetShowLogin} switchState={this.switchState} validation={this.state.validation} forgotPasswordStatus={this.props.forgotPasswordStatus} />
+            <VerifyStatus
+              resetLogin={this.props.resetShowLogin}
+              switchState={this.switchState}
+              showInput={showInput}
+              forgotPasswordStatus={this.props.forgotPasswordStatus}
+              sendLink={this.sendLink}
+            />
           </div>
                 }
       </div>
@@ -93,26 +116,26 @@ class ForgotPassword extends Component {
   }
 }
 
-const mapStateToProps = (store) => {
-  return ({
-    forgotPasswordStatus: selectors.forgotPasswordStatus(store),
-  });
-};
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators(
-    {
-      forgotPassword: actionCreators.forgotPassword,
-      resetShowLogin: authActionCreators.resetShowLogin,
-    },
-    dispatch,
-  );
-};
+const mapStateToProps = store => ({
+  forgotPasswordStatus: selectors.forgotPasswordStatus(store),
+});
+const mapDispatchToProps = dispatch => bindActionCreators(
+  {
+    forgotPassword: actionCreators.forgotPassword,
+    resetShowLogin: authActionCreators.resetShowLogin,
+  },
+  dispatch,
+);
 
 ForgotPassword.propTypes = {
   enteredEmail: PropTypes.string,
+  forgotPassword: PropTypes.func,
+  forgotPasswordStatus: PropTypes.string,
 };
 
 ForgotPassword.defaultProps = {
   enteredEmail: '',
+  forgotPassword: f => f,
+  forgotPasswordStatus: '',
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ForgotPassword);

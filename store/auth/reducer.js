@@ -21,16 +21,21 @@ const authReducer = typeToReducer({
     PENDING: state => {
       return Object.assign({}, state, {
         error: '',
-      }, { ui: { loginLoading: true } });
+      }, { ui: {
+        ...state.ui,
+        loginLoading: true } });
     },
     FULFILLED: (state, action) => {
       return Object.assign({}, state, {
         data: {
           ...state.data,
           ...action.payload.data,
+        },
+        ui: {
+          ...state.ui,
+          loginLoading: false,
           showLogin: false,
         },
-        ui: { loginLoading: false }
       });
     },
     REJECTED: (state, action) => {
@@ -41,7 +46,10 @@ const authReducer = typeToReducer({
           ...state.data,
           isLoggedIn: false
         },
-        ui: { loginLoading: false }
+        ui: { 
+          ...state.ui,
+          loginLoading: false,
+        }
       });
     },
   },
@@ -55,7 +63,9 @@ const authReducer = typeToReducer({
     PENDING: state => {
       return Object.assign({}, state, {
         error: '',
-      }, { ui: { loading: true } });
+      }, { ui: {
+        ...state.ui,
+        loading: true } });
     },
     FULFILLED: (state, action) => {
       return Object.assign({}, state, {
@@ -63,13 +73,19 @@ const authReducer = typeToReducer({
           ...state.data,
           registrationDetails: action.payload.data
         },
-        ui: { loading: false }
+        ui: {
+          ...state.ui,
+          loading: false,
+        },
       });
     },
     REJECTED: (state, action) => {
       return Object.assign({}, state, {
         error: action.payload.response ? action.payload.response.data.message : action.payload.message,
-        ui: { loading: false }
+        ui: {
+          ...state.ui,
+          loading: false,
+        },
       });
     },
   },
@@ -90,15 +106,19 @@ const authReducer = typeToReducer({
         isLoggedIn: action.payload.isLoggedIn,
         userCreds: action.payload.userCreds,
         instagramCode: action.payload.instagramCode,
-      }
-    }
+      },
+      ui: {
+        ...state.ui,
+        showLogin: true,
+      },
+    };
   },
   [actions.SET_COUNTRY]: (state, action) => {
     return {
       ...state,
       data: {
         ...state.data,
-        country: action.payload
+        country: action.payload,
       }
     }
   },
@@ -106,7 +126,10 @@ const authReducer = typeToReducer({
     PENDING: state => {
       return Object.assign({}, state, {
         error: '',
-      }, { ui: { loading: true } });
+      }, { ui: { 
+        ...state.ui,
+        loading: true,
+      } });
     },
     FULFILLED: (state, action) => {
       const { city, country, displayCity } = action.payload
@@ -126,7 +149,8 @@ const authReducer = typeToReducer({
     REJECTED: (state, action) => {
       return Object.assign({}, state, {
         error: action.payload.response ? action.payload.response.data.message : action.payload.message,
-        ui: { loading: false }
+        ui: {  ...state.ui,
+          loading: false }
       });
     },
   },
@@ -134,7 +158,10 @@ const authReducer = typeToReducer({
     PENDING: state => {
       return Object.assign({}, state, {
         error: '',
-      }, { ui: { loading: true } });
+      }, { ui: { 
+        ...state.ui,
+           loading: true,
+          } });
     },
     FULFILLED: (state, action) => {
       return {
@@ -152,7 +179,8 @@ const authReducer = typeToReducer({
     REJECTED: (state, action) => {
       return Object.assign({}, state, {
         error: action.payload.response ? action.payload.response.data.message : action.payload.message,
-        ui: { loading: false }
+        ui: {  ...state.ui,
+          loading: false }
       });
     },
   },
@@ -160,7 +188,10 @@ const authReducer = typeToReducer({
     PENDING: state => {
       return Object.assign({}, state, {
         error: '',
-      }, { ui: { loading: true } });
+      }, { ui: { 
+        ...state.ui,
+        loading: true,
+      } });
     },
     FULFILLED: (state, action) => {
       const { city, country, displayCity } = action.payload;
@@ -179,7 +210,10 @@ const authReducer = typeToReducer({
     REJECTED: (state, action) => {
       return Object.assign({}, state, {
         error: action.payload.response ? action.payload.response.data.message : action.payload.message,
-        ui: { loading: false }
+        ui: {
+          ...state.ui,
+          loading: false,
+        },
       });
     },
   },
@@ -193,10 +227,15 @@ const authReducer = typeToReducer({
     }
   },
   [actions.AUTOCOMPLETE_CITY]: {
-    PENDING: state => {
+    PENDING: (state) => {
       return Object.assign({}, state, {
         error: '',
-      }, { ui: { loading: true } });
+      }, {
+        ui: {
+          ...state.ui,
+          loading: true,
+        },
+      });
     },
     FULFILLED: (state, action) => {
       return {
@@ -210,7 +249,10 @@ const authReducer = typeToReducer({
     REJECTED: (state, action) => {
       return Object.assign({}, state, {
         error: action.payload.response ? action.payload.response.data.message : action.payload.message,
-        ui: { loading: false }
+        ui: {
+          ...state.ui,
+          loading: false,
+        },
       });
     },
   },
@@ -220,8 +262,8 @@ const authReducer = typeToReducer({
       ui: {
         ...state.ui,
         showLogin: true,
-      }
-    }
+      },
+    };
   },
   [actions.RESET_SHOW_LOGIN]: (state) => {
     return {
@@ -236,21 +278,28 @@ const authReducer = typeToReducer({
     PENDING: state => {
       return Object.assign({}, state, {
         error: '',
-      }, { ui: { loading: true } });
+      }, { ui: {
+        ...state.ui,
+        loading: true,
+      },
+    });
     },
     FULFILLED: (state, action) => {
       return {
         ...state,
         data: {
           ...state.data,
-          language: action.payload
-        }
-      }
+          language: action.payload,
+        },
+      };
     },
     REJECTED: (state, action) => {
       return Object.assign({}, state, {
         error: action.payload.response ? action.payload.response.data.message : action.payload.message,
-        ui: { loading: false }
+        ui: {
+          ...state.ui,
+          loading: false,
+        },
       });
     },
   },
