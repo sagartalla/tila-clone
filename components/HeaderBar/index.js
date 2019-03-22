@@ -8,6 +8,7 @@ import Search from './Search';
 import ActionBar from './ActionBar';
 import MegaMenu from './includes/MegaMenu';
 import SearchFilters from '../common/SearchFilters';
+import Betalogo from '../../components/common/beta';
 import { mergeCss } from '../../utils/cssUtil';
 import publicUrls from '../../constants';
 import { actionCreators, selectors } from '../../store/search';
@@ -16,6 +17,7 @@ const styles = mergeCss('components/HeaderBar/header');
 const HeaderBar = props => (
   <div className={`${styles['header-container']}`}>
     <div className={`${styles['header-container-inn']} ${ props.showFitlers ? styles['faded'] : {} }`}>
+      <Betalogo />
       <Grid>
         <Row className={`${styles['flex-center']} ${styles['pb-10']} ${styles['pt-10']} ${styles['border-b']}`}>
           <Col md={1} sm={2}>

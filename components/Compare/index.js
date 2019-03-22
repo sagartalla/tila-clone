@@ -229,7 +229,7 @@ class Compare extends Component {
                             attr.items.map(item => (
                               <Col key={item.id} md={3}>
                                 <div className={`${styles['compare-product-spficication-inn']} ${styles['flex-center']} ${styles['flex-colum']} ${styles['fs-12']} ${styles.fontW600}`}>
-                                  <span>{item.value.map(i => i.value).join(' ')}</span>
+                                  <span>{item.value.map(i => i.value).join(' ')} {item.value[0].qualifier_unit}</span>
                                 </div>
                               </Col>
                             ))
