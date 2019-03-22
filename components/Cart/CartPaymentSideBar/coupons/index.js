@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
@@ -29,6 +30,8 @@ class Coupon extends Component {
       couponApplied: true,
       applyCouponRequestCount: 0,
       copuonAttempted: false,
+      appliedCoupon: '',
+      couponCode: '',
     };
   }
 
@@ -47,9 +50,18 @@ class Coupon extends Component {
       closeSlider();
     } else {
       openSlider();
+      this.scrollToTop();
     }
   }
 
+  scrollToTop() {
+    // eslint-disable-next-line
+    var scroll = ReactDOM.findDOMNode(this);
+    scroll.scrollIntoView({
+      behavior: 'instant',
+      block: 'end',
+    });
+  }
      showTerms = data => () => {
        this.setState({
          showTerms: true,
@@ -72,6 +84,8 @@ class Coupon extends Component {
      enterCouponCode = (e) => {
        this.setState({
          couponCode: e.target.value,
+         appliedCoupon: '',
+         copuonAttempted: false,
        });
      }
 
@@ -82,6 +96,8 @@ class Coupon extends Component {
       this.setState({
         applyCouponRequestCount: this.state.applyCouponRequestCount + 1,
         copuonAttempted: true,
+        appliedCoupon: data.coupon_code,
+        couponCode: '',
       }, () => {
         getCartResults({
           coupon_code: data.coupon_code,
@@ -94,8 +110,8 @@ class Coupon extends Component {
       const {
         getCartResults,
       } = this.props;
-      const { couponCode } = this.state;
-      if (couponCode === '' || couponCode === undefined) {
+      const { couponCode, appliedCoupon } = this.state;
+      if (couponCode === '' && appliedCoupon === '') {
         this.setState({
           errorMsg: 'Please enter coupon code',
         });
@@ -107,6 +123,7 @@ class Coupon extends Component {
       this.setState({
         applyCouponRequestCount: this.state.applyCouponRequestCount + 1,
         copuonAttempted: true,
+        appliedCoupon: code,
       }, () => {
         getCartResults({
           coupon_code: code,
@@ -118,7 +135,7 @@ class Coupon extends Component {
     render() {
       const { couponData } = this.props;
       const {
-        showTerms, termsOfUse, howToUse, showHowToUse, couponCode, errorMsg, couponApplied, copuonAttempted,
+        showTerms, termsOfUse, howToUse, showHowToUse, couponCode, errorMsg, couponApplied, copuonAttempted, appliedCoupon,
       } = this.state;
       return (
         <div>
@@ -129,12 +146,12 @@ class Coupon extends Component {
                 width: '350px', height: '60px', border: '0',
               }}
               onChange={this.enterCouponCode}
-              val={couponCode}
+              val={couponCode || appliedCoupon}
             />
-            <Button className={`${styles.buttonStyle} ${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles.width35} ${styles['m-10']}`} btnText="Apply" onClick={this.handleInputApply(couponCode)} />
+            <Button className={`${styles.buttonStyle} ${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles.width35} ${styles['m-10']}`} btnText="Apply" onClick={this.handleInputApply(couponCode || appliedCoupon)} />
           </div>
           <div className={styles.errorStyle}>
-            {errorMsg ? <span className={styles['error-msg']}>{errorMsg}</span> : (copuonAttempted ? (couponApplied ? '' : <span className={styles['error-msg']}>The Coupon applied is invalid</span>) : '')}
+            {errorMsg ? <span className={styles['error-msg']}>{errorMsg}</span> : (copuonAttempted ? (couponApplied ? '' : <span className={styles['error-msg']}>{appliedCoupon} applied is invalid</span>) : '')}
           </div>
           <div className={styles.applyCoupon}>
             {/* TODO: move to a seperate file */}
@@ -229,6 +246,7 @@ Coupon.propTypes = {
   closeSlider: PropTypes.func,
   getCouponOffers: PropTypes.func,
   openSlider: PropTypes.func,
+  cartData: PropTypes.object,
 };
 
 Coupon.defaultProps = {
@@ -237,6 +255,7 @@ Coupon.defaultProps = {
   closeSlider: f => f,
   getCouponOffers: f => f,
   openSlider: f => f,
+  cartData: {},
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Coupon);

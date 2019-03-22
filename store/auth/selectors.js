@@ -15,6 +15,7 @@ const getLanguage = (store) => {
 }
 
 const getLoggedInStatus = (store) => {
+  console.log('store', store);
   return store.authReducer.data.isLoggedIn
 }
 

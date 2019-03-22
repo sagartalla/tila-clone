@@ -44,7 +44,8 @@ const userLogin = (params) => {
 const userRegister = (params) => axios.post(`${constants.CMS_API_URL}/api/v1/user/register`, params);
 
 const userLogout = () => {
-  axios.post('/api/logout');
+  // axios.post('/api/logout');
+  axios.put(`${constants.AUTH_API_URL}/api/v1/sls/lo`);
 }
 
 const getLoginInfo = () => {
