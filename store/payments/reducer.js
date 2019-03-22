@@ -87,6 +87,24 @@ const paymentsReducer = typeToReducer({
         ui: { loading: false },
       });
     },
+  },
+  [actions.GET_REDIRECT]: {
+    PENDING: state => Object.assign({}, state, {
+      ui: { loading: true },
+    }),
+    REJECTED: (state, action) => Object.assign({}, state, {
+      error: action.payload.message,
+      ui: { loading: false },
+    }),
+    FULFILLED: (state, action) => {
+      return Object.assign({}, state, {
+        data: {
+          ...state.data,
+          redirect3dSecureData: action.payload,
+        },
+        ui: { loading: false },
+      });
+    },
   }
 }, initialState);
 

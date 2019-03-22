@@ -6,6 +6,7 @@ const actions = {
   SAVE_CARD: 'SAVE_CARD',
   EMPTY_PAYMENT_PAYLOAD: 'EMPTY_PAYMENT_PAYLOAD',
   MAKE_PROCESS_REQUEST: 'MAKE_PROCESS_REQUEST',
+  GET_REDIRECT: 'GET_REDIRECT',
 };
 
 const actionCreators = {
@@ -44,7 +45,14 @@ const actionCreators = {
       type: actions.MAKE_PROCESS_REQUEST,
       payload: apis.makeProcessRequest(params)
     })
+  },
+  getRedirect: (params) => {
+    return {
+      type: actions.GET_REDIRECT,
+      payload: apis.getRedirectApi(params)
+    }
   }
+
 };
 
 export { actions, actionCreators };

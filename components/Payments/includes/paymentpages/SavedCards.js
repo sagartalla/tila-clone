@@ -52,7 +52,7 @@ class SavedCards extends Component {
 
   componentWillReceiveProps(nextProps) {
     if(nextProps.processData && nextProps.processData.redirect_url) {
-        window.location = nextProps.processData.redirect_url;
+      window.location = nextProps.processData.redirect_url;
     }
   }
 

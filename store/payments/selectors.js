@@ -54,4 +54,8 @@ const getProcessData = (store) => {
   return store.paymentsReducer.data.processData;
 }
 
-export { getPaymentOptions, getPaymentUrl, getDefaultAddress, getPaymentModesData, getProcessData };
+const get3dSecureRedirectionUrl = () => {
+  return store.paymentTypeNames.data.redirect3dSecureData.redirect_url;
+}
+
+export { getPaymentOptions, getPaymentUrl, getDefaultAddress, getPaymentModesData, getProcessData, get3dSecureRedirectionUrl };

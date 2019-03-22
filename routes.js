@@ -14,6 +14,7 @@ routes
   .add({ name: 'search', pattern: '/:country/:language/srp/:category?/:subCategory?', page: 'search' })
   .add({ name: 'compare', pattern: '/:country/:language/compare', page: 'compare' })
   .add({ name: 'policy', pattern: '/:country/:language/policy/:name', page: 'policy' })
+  .add({ name: '3dsecure', pattern: '/gateway/callback/:encryptedString', page: 'redirect'})
   .add({ name: 'default', pattern: '/:country/:language', page: 'index'})
   ;
 

@@ -51,6 +51,10 @@ const doPaymentApi = (params) => {
   });
 }
 
+const getRedirectApi = (params) => {
+  return axois.get(`${constants.TRANSACTIONS_API_URL}/fpts/transaction/gateway/callback/${params.encryptedString}`)
+}
+
 const saveCardApi = (params) => {
   return axios.post(`${constants.TRANSACTIONS_API_URL}/fpts/transaction/save_card`, params).then(({ data }) => {
     return { data }
@@ -62,4 +66,4 @@ const makeProcessRequest = (params) => {
   return axios.post(`${constants.TRANSACTIONS_API_URL}/fpts/transaction/process`, params).then(({data}) => data);
 }
 
-export default { createOrderApi, doPaymentApi, saveCardApi, makeProcessRequest };
+export default { createOrderApi, doPaymentApi, saveCardApi, makeProcessRequest, getRedirectApi };
