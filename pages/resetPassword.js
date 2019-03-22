@@ -6,10 +6,27 @@ import Base, { baseActions } from './base';
 import ResetPassword from '../components/Login/ResetPassword';
 
 class ResetPasswordPage extends Base {
+  constructor(props) {
+    super(props);
+    this.state = {
+      // token: null,
+    };
+  }
   pageName = 'RESETPASSWORD';
+  // componentWillMount() {
+  //   let token = window.location.pathname.split('/');
+  //   token = token[token.length - 1];
+  //   this.setState({
+  //     token,
+  //   });
+  // }
+
   render() {
+    // const { token } = this.state;
     return (
-      <ResetPassword token="4e54318db5db45e99cd9f8c51fb59a93" />
+    // TODO >>> token should be dynamic
+    // <ResetPassword token={token}/>
+      <ResetPassword token="ab7eb0775db645ff9b96af619a6e97aa" />
     );
   }
 }

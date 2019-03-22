@@ -49,7 +49,7 @@ class ForgotPassword extends Component {
       errorMsg = 'Entered email is invalid';
     } else {
       this.props.forgotPassword(body).then((res) => {
-        if (res.value.Response === 'SUCCESS') {
+        if (res && res.value && res.value.Response === 'SUCCESS') {
           this.setState({ showInput: true });
         } else {
           this.setState({ showInput: false });

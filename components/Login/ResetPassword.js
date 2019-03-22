@@ -8,16 +8,16 @@ import { actionCreators } from '../../store/cam/personalDetails';
 import SVGComponent from '../common/SVGComponet';
 const styles = mergeCss('components/Login/login');
 
-class ResetPassword extends Component{
-    constructor(props){
-        super(props);
-        this.state = {
-            success: false,
-            password: '',
-            confirmPassword: '',
-        }
-        this.passwordSuccess = this.passwordSuccess.bind(this);
-    }
+class ResetPassword extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      success: false,
+      password: '',
+      confirmPassword: '',
+    };
+    this.passwordSuccess = this.passwordSuccess.bind(this);
+  }
 
     onChange = (e) => {
       this.setState({ [e.target.name]: e.target.value });
@@ -25,28 +25,30 @@ class ResetPassword extends Component{
 
     passwordSuccess() {
       const { password, confirmPassword } = this.state;
-      if(password===confirmPassword){
-        let body = {
+      if (password === confirmPassword) {
+        const body = {
           'password': password,
           'token': this.props.token
-        }
-        this.props.resetPassword(body);
-        console.log(this.props.resetPassword(body));
-        this.setState({
-          success: true
-        })
-      }else{
+        };
+        this.props.resetPassword(body).then((res) => {
+          if (res && res.value && res.value.data && res.value.data.Response === 'SUCCESS') {
+            this.setState({ success: true });
+          } else {
+            this.setState({ success: false });
+          }
+        });
+      } else {
         alert('Passwords do not match');
         this.setState({
           password: '',
           confirmPassword: '',
-        })
+        });
       }
     }
 
-    render(){
+    render() {
       const { password, confirmPassword } = this.state;
-        return (
+      return (
             <div>
             {!this.state.success ?
               <div className={styles['forgot-password']}>
@@ -78,7 +80,7 @@ class ResetPassword extends Component{
                     />
                 </div>
                 <Col xs={12} md={12} className={`${styles['pt-30']}`}>
-                    <Btn className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles['update-profile-btn']} ${styles['text-uppercase']}`} btnText='SAVE PASSWORD' BtnClickHandler={this.passwordSuccess} />
+                    <Btn className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles['update-profile-btn']} ${styles['text-uppercase']}`} btnText='SAVE PASSWORD' onClick={this.passwordSuccess} />
                 </Col>
                 </form>
               </div>
@@ -91,17 +93,17 @@ class ResetPassword extends Component{
                 </>
             }
             </div>
-        );
+      );
     }
 }
   
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators(
-      {
-        resetPassword: actionCreators.resetPassword,
-      },
-      dispatch,
-    );
+  return bindActionCreators(
+    {
+      resetPassword: actionCreators.resetPassword,
+    },
+    dispatch,
+  );
 }
 
 export default connect(null, mapDispatchToProps)(ResetPassword);
