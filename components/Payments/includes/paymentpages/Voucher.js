@@ -36,8 +36,8 @@ class Voucher extends Component {
 
   render() {
     const {props} = this;
-    const { voucherData, isOnlyVocuher } = props;
-    const { balance, amount_to_pay, currency_code, remaining_amount } = voucherData;
+    const { data, isOnlyVocuher } = props;
+    const { balance, amount_to_pay, currency_code, remaining_amount } = data;
     return (
       <div className={`${styles['voucher']} ${styles['p-10']}`}>
         <div>Tila Credit Used</div>
