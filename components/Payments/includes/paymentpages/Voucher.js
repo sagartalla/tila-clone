@@ -26,18 +26,18 @@ class Voucher extends Component {
   }
 
   proceedToPayment() {
-    const { data, makeProcessRequest } = this.props;
+    const { voucherData, makeProcessRequest } = this.props;
     makeProcessRequest({
       payment_details: [{
-        payment_mode: data.type,
+        payment_mode: voucherData.type,
       }]
     });
   }
 
   render() {
     const {props} = this;
-    const { data, isOnlyVocuher } = props;
-    const { balance, amount_to_pay, currency_code, remaining_amount } = data;
+    const { voucherData, isOnlyVocuher } = props;
+    const { balance, amount_to_pay, currency_code, remaining_amount } = voucherData;
     return (
       <div className={`${styles['voucher']} ${styles['p-10']}`}>
         <div>Tila Credit Used</div>

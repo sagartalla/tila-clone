@@ -232,7 +232,7 @@ class PaymentMode extends Component {
                       </Row>
                     :
                       <Row>
-                        <Voucher data={props.paymentModesData.voucherData} isOnlyVocuher={true}/>
+                        <Voucher voucherData={props.paymentModesData.voucherData} isOnlyVocuher={true}/>
                       </Row>
                 }
 

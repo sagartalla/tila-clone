@@ -5,9 +5,9 @@ import { actionCreators, selectors } from '../../store/payments';
 
 const Redirect = (props) => {
   if(props.redirect3dSecureUrl) {
-    window.location = redirect3dSecureUrl;
+    window.location = props.redirect3dSecureUrl;
   }
-  props.get3dSecureRedirectionUrl({encryptedString: props.encryptedString});
+  props.getRedirect({encryptedString: props.encryptedString});
   return 'loading...'
 };
 
@@ -18,7 +18,7 @@ const mapStateToprops = (store) => ({
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
-      get3dSecureRedirectionUrl: actionCreators.get3dSecureRedirectionUrl,
+      getRedirect: actionCreators.getRedirect,
     },
     dispatch,
   );

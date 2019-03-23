@@ -52,7 +52,7 @@ const doPaymentApi = (params) => {
 }
 
 const getRedirectApi = (params) => {
-  return axois.get(`${constants.TRANSACTIONS_API_URL}/fpts/transaction/gateway/callback/${params.encryptedString}`)
+  return axios.get(`${constants.TRANSACTIONS_API_URL}/fpts/transaction/gateway/callback/${params.encryptedString}`).then(({data}) => data)
 }
 
 const saveCardApi = (params) => {
