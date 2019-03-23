@@ -48,7 +48,7 @@ class Voucher extends Component {
             :
               null
         }
-        <div className={`${styles['flex']} ${styles['justify-between']}`}> 
+        <div className={`${styles['flex']} ${styles['justify-between']}`}>
           <div>
             <div>Money in Wallet</div>
             <div>{balance} {currency_code}</div>

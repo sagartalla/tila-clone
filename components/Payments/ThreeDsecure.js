@@ -12,7 +12,7 @@ const Redirect = (props) => {
 };
 
 const mapStateToprops = (store) => ({
-  redirect3dSecureUrl: authSelectors.getRedirect(store),
+  redirect3dSecureUrl: selectors.get3dSecureRedirectionUrl(store),
 });
 
 const mapDispatchToProps = (dispatch) => {
