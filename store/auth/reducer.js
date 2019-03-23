@@ -74,7 +74,6 @@ const authReducer = typeToReducer({
     },
   },
   [actions.USER_LOGOUT]: (state, action) => {
-    console.log('action', action);
     return {
       ...state,
       data: {
@@ -84,7 +83,6 @@ const authReducer = typeToReducer({
     }
   },
   [actions.USER_LOGIN_INFO]: (state, action) => {
-    console.log('login', action);
     return {
       ...state,
       data: {

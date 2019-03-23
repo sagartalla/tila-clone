@@ -20,7 +20,7 @@ apiRoutes
         //   delete data.refresh_token;
         // }
         req.universalCookies.set('auth', data, { path: '/' });
-        req.universalCookies.set('userCreds', { username: params.username || '' }, { path: '/' });
+        req.universalCookies.set('userCreds', { username: params.metadata.username || '' }, { path: '/' });
         isLoggedIn = true;
       } else {
         req.universalCookies.remove('auth');
@@ -58,11 +58,24 @@ apiRoutes
       });
   })
   .post('/logout', (req, res) => {
-    req.universalCookies.remove('auth');
-    req.universalCookies.remove('userCreds');
-    req.universalCookies.remove('ptaToken');
-    return res.json({});
+    return axios.put(`${constants.AUTH_API_URL}/api/v1/sls/lo`, null, {
+      headers: { 'x-access-token': req.headers['x-access-token'] }
+    }).then((response) => {
+      if (response && response.status === 200) {
+        req.universalCookies.remove('auth');
+        req.universalCookies.remove('userCreds');
+        req.universalCookies.remove('ptaToken');
+        return res.json({});
+      }
+    });
   })
+  // .post('/logout', (req, res) => {
+  //   req.universalCookies.remove('auth');
+  //   req.universalCookies.remove('userCreds');
+  //   req.universalCookies.remove('ptaToken');
+  //   return res.json({});
+  // })
+
   .post('/setCookie', (req, res) => {
     let {data, options} = req.body;
     let cookieOption = {
