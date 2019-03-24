@@ -102,14 +102,14 @@ class TitleInfo extends Component {
 
   render() {
     const {
- brand, title, rating, reviews, price, originalPrice, discountPercent, totalInventoryCount, isPreview, listingId, listingCartData 
+ brand, title, rating, reviews, price, originalPrice, discountPercent, totalInventoryCount, isPreview, listingId, listingCartData, comparable
 } = this.props;
     const { showCheckoutModal } = this.state;
     return (
       <div className={styles['pb-10']}>
         <div className={`${styles.fontW300} ${styles['lgt-blue']} ${styles['flx-space-bw']}`}>
           <span>{brand}</span>
-          {isPreview ? null : <a className={`${styles['black-color']} ${styles.fontW700}`} href="javascript: void(0)" onClick={this.addToCompare}>{PDP_PAGE.ADD_TO_COMPARE}</a>}
+          {isPreview ? null : comparable ? <a className={`${styles['black-color']} ${styles.fontW700}`} href="javascript: void(0)" onClick={this.addToCompare}>{PDP_PAGE.ADD_TO_COMPARE}</a> : null}
         </div>
         <div className={`${styles['fs-20']} ${styles.fontW700} ${styles['black-color']}`}>{title}</div>
         {
