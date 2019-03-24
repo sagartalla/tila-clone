@@ -455,7 +455,7 @@ export const EN_KEYWORDS = {
     'APPLY': 'Apply',
     'NO_COUPONS': 'No coupons to show',
     'OFFER_APPLIED': 'Offer Applied',
-    'CHANGE': 'Change',
+    'REMOVE': 'Remove',
     'APPLY_COUPON': 'Apply Coupon Code',
     'BUY_AND_EARN': 'Buy & Earn 300 Reward Points',
   },

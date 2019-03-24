@@ -190,7 +190,7 @@ const getProductComponent = (isPreview, taskCode) => {
                       </div>
                       <div className={`${styles['ipad-details']} ${styles['bdr-lt']} ${styles['ipad-pl-15']}`}>
                         {
-                          isPreview ? null : <Shipping shippingInfo={shippingInfo} offerInfo={offerInfo} warranty={warranty}/>
+                          isPreview ? null : <Shipping shippingInfo={shippingInfo} offerInfo={offerInfo} warranty={warranty} />
                         }
                         {
                           isPreview ? null : <AddToCart offerInfo={offerInfo} />

@@ -2,7 +2,7 @@ import fp, * as _ from 'lodash/fp';
 import shortid from 'shortid';
 
 const getOrderDetails = (store) => {
-  const { created_by, customer_account_id, address, order_id, created_at, order_items, price, total_shipping, currency_code, payments } = store.singleOrderReducer.data.orderDetails;
+  const { created_by, customer_account_id, status, address, order_id, created_at, order_items, price, total_shipping, currency_code, payments } = store.singleOrderReducer.data.orderDetails;
   if (order_id) {
     return {
       name: address ? `${address.first_name} ${address.last_name}` : 'No Name',
@@ -15,6 +15,7 @@ const getOrderDetails = (store) => {
       currency_code,
       shippingTotal: total_shipping,
       payments,
+      status,
       //TODO move compose to common util
       orderItems: _.compose(
         _.reduce.convert({ 'cap': false })((acc, val, key) => {

@@ -15,7 +15,7 @@ routes
   .add({ name: 'compare', pattern: '/:country/:language/compare', page: 'compare' })
   .add({ name: 'policy', pattern: '/:country/:language/policy/:name', page: 'policy' })
   .add({ name: 'resetpassword', pattern: '/:country/:language/resetpassword/:token', page: 'resetPassword' })
-  .add({ name: '3dsecure', pattern: '/gateway/callback/:encryptedString', page: 'redirect' })
+  .add({ name: '3dsecure', pattern: '/:country/:language/gateway/callback/:encryptedString', page: 'redirect' })
   .add({ name: 'default', pattern: '/:country/:language', page: 'index' });
 
 module.exports = routes;

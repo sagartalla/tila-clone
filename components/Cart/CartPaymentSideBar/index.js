@@ -24,7 +24,14 @@ class CartAndPaymentSideBar extends Component {
     this.state = {
     };
   }
-
+  removeCoupon = () => {
+    const {
+      getCartResults,
+    } = this.props;
+    getCartResults({
+      remove_coupon: true,
+    });
+  }
   render() {
     const {
       checkoutBtnHandler, showCheckoutBtn, showInstant,
@@ -51,7 +58,7 @@ class CartAndPaymentSideBar extends Component {
                   <div className={`${styles.applied}`}>{COUPON_OFFERS.OFFER_APPLIED}</div>
                   <div >{data.coupon_code}</div>
                 </div>
-                <div className={`${styles.pointer} ${styles['lgt-blue']}`} onClick={this.props.openSlider}>{COUPON_OFFERS.CHANGE}</div>
+                <div className={`${styles.pointer} ${styles['lgt-blue']}`} onClick={this.removeCoupon}>{COUPON_OFFERS.REMOVE}</div>
               </span>
             </span>
           :
@@ -134,6 +141,7 @@ CartAndPaymentSideBar.propTypes = {
   getCouponOffers: PropTypes.func,
   applyTheCoupon: PropTypes.func,
   openSlider: PropTypes.func,
+  getCartResults: PropTypes.func,
 
 };
 
@@ -146,6 +154,7 @@ CartAndPaymentSideBar.defaultProps = {
   getCouponOffers: f => f,
   applyTheCoupon: f => f,
   openSlider: f => f,
+  getCartResults: f => f,
 };
 
 const mapDispatchToProps = dispatch =>
@@ -157,4 +166,4 @@ const mapDispatchToProps = dispatch =>
     dispatch,
   );
 
-export default connect(mapDispatchToProps)(CartAndPaymentSideBar);
+export default connect(null, mapDispatchToProps)(CartAndPaymentSideBar);
