@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
@@ -21,14 +22,13 @@ class Coupon extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showTerms: false,
-      termsOfUse: '',
-      howToUse: '',
-      showHowToUse: false,
       errorMsg: '',
       couponApplied: true,
       applyCouponRequestCount: 0,
       copuonAttempted: false,
+      appliedCoupon: '',
+      couponCode: '',
+      showPopup: false,
     };
   }
 
@@ -40,51 +40,73 @@ class Coupon extends Component {
     const {
       closeSlider, openSlider,
     } = this.props;
+    const {
+      isCartLoading, cartData,
+    } = nextProps;
     this.setState({
-      couponApplied: this.state.copuonAttempted && nextProps.cartData.coupon_applied,
+      couponApplied: this.state.copuonAttempted && cartData.coupon_applied,
     });
-    if (this.state.copuonAttempted && nextProps.cartData.coupon_applied) {
+    if (isCartLoading) {
+      return;
+    }
+    if (this.state.copuonAttempted && cartData.coupon_applied) {
       closeSlider();
     } else {
       openSlider();
+      this.scrollToTop();
     }
   }
 
-     showTerms = data => () => {
-       this.setState({
-         showTerms: true,
-         termsOfUse: data.tc,
-       });
-     }
-     showHowtoUse = data => () => {
-       this.setState({
-         showHowToUse: true,
-         howToUse: data.how_to_use,
-       });
-     }
+  scrollToTop() {
+    // eslint-disable-next-line
+    var scroll = ReactDOM.findDOMNode(this);
+    scroll.scrollIntoView({
+      behavior: 'instant',
+      block: 'end',
+    });
+  }
+
+  showPopup = (e) => {
+    const docId = e.target.getAttribute('data-obj');
+    const key = e.target.getAttribute('keyVal');
+    const { showTermsAndConditions } = this.props;
+    if (key === 'terms') {
+      showTermsAndConditions(docId);
+    } else {
+      showTermsAndConditions(docId);
+    }
+    this.setState({
+      showPopup: true,
+    });
+  }
+
      closeTerms = () => {
        this.setState({
-         showTerms: false,
-         showHowToUse: false,
+         showPopup: false,
        });
      }
 
      enterCouponCode = (e) => {
        this.setState({
          couponCode: e.target.value,
+         appliedCoupon: '',
+         copuonAttempted: false,
        });
      }
 
-    handleApply = data => () => {
+    handleApply = (e) => {
       const {
         getCartResults,
       } = this.props;
+      const couponCode = e.target.getAttribute('data-code');
       this.setState({
         applyCouponRequestCount: this.state.applyCouponRequestCount + 1,
         copuonAttempted: true,
+        appliedCoupon: couponCode,
+        couponCode: '',
       }, () => {
         getCartResults({
-          coupon_code: data.coupon_code,
+          coupon_code: couponCode,
           applyCouponRequestCount: this.state.applyCouponRequestCount,
         });
       });
@@ -94,8 +116,8 @@ class Coupon extends Component {
       const {
         getCartResults,
       } = this.props;
-      const { couponCode } = this.state;
-      if (couponCode === '' || couponCode === undefined) {
+      const { couponCode, appliedCoupon } = this.state;
+      if (couponCode === '' && appliedCoupon === '') {
         this.setState({
           errorMsg: 'Please enter coupon code',
         });
@@ -107,6 +129,7 @@ class Coupon extends Component {
       this.setState({
         applyCouponRequestCount: this.state.applyCouponRequestCount + 1,
         copuonAttempted: true,
+        appliedCoupon: code,
       }, () => {
         getCartResults({
           coupon_code: code,
@@ -116,9 +139,9 @@ class Coupon extends Component {
     }
 
     render() {
-      const { couponData } = this.props;
+      const { couponData, termsAndConditions } = this.props;
       const {
-        showTerms, termsOfUse, howToUse, showHowToUse, couponCode, errorMsg, couponApplied, copuonAttempted,
+        couponCode, errorMsg, couponApplied, copuonAttempted, appliedCoupon, showPopup,
       } = this.state;
       return (
         <div>
@@ -129,12 +152,12 @@ class Coupon extends Component {
                 width: '350px', height: '60px', border: '0',
               }}
               onChange={this.enterCouponCode}
-              val={couponCode}
+              val={couponCode || appliedCoupon}
             />
-            <Button className={`${styles.buttonStyle} ${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles.width35} ${styles['m-10']}`} btnText="Apply" onClick={this.handleInputApply(couponCode)} />
+            <Button className={`${styles.buttonStyle} ${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles.width35} ${styles['m-10']}`} btnText="Apply" onClick={this.handleInputApply(couponCode || appliedCoupon)} />
           </div>
           <div className={styles.errorStyle}>
-            {errorMsg ? <span className={styles['error-msg']}>{errorMsg}</span> : (copuonAttempted ? (couponApplied ? '' : <span className={styles['error-msg']}>The Coupon applied is invalid</span>) : '')}
+            {errorMsg ? <span className={styles['error-msg']}>{errorMsg}</span> : (copuonAttempted ? (couponApplied ? '' : <span className={styles['error-msg']}>{appliedCoupon} applied is invalid</span>) : '')}
           </div>
           <div className={styles.applyCoupon}>
             {/* TODO: move to a seperate file */}
@@ -157,10 +180,10 @@ class Coupon extends Component {
                   </div>
                   <div className={`${styles.wordBreak} ${styles['p-5']}`}>{data.description}</div>
                   <div className={`${styles['p-5']} ${styles['flex-center']} ${styles['justify-between']} ${styles.flex}`}>
-                    <div className={`${styles['lgt-blue']} ${styles.pointer} ${styles.flex}`} onClick={this.showTerms(data)}>{COUPON_OFFERS.VIEW_TERMS}
+                    <div className={`${styles['lgt-blue']} ${styles.pointer} ${styles.flex}`} data-obj={data.terms_and_condition_doc_id} keyVal="terms" onClick={this.showPopup}>{COUPON_OFFERS.VIEW_TERMS}
                       <div className={styles.border} />
                     </div>
-                    <div className={`${styles['lgt-blue']} ${styles.pointer}`} onClick={this.showHowtoUse(data)}>{COUPON_OFFERS.HOW_TO_USE}</div>
+                    <div className={`${styles['lgt-blue']} ${styles.pointer}`} data-obj={data.how_to_use_doc_id} keyVal="use" onClick={this.showPopup}>{COUPON_OFFERS.HOW_TO_USE}</div>
                     {/* {data.coupon_applied ?
                         <div className={`${styles.flex}`}>
                           <img src="/static/img/icons/common-icon/green-tick.svg" alt="checked" />
@@ -168,7 +191,7 @@ class Coupon extends Component {
                           {COUPON_OFFERS.APPLIED}</div>
                         </div>
                       : */}
-                    <Button className={`${styles['fp-btn-default']}`} btnText={COUPON_OFFERS.APPLY} onClick={this.handleApply(data)} />
+                    <div><button data-code={data.coupon_code} className={`${styles['fp-btn']} ${styles['apply-btn']} ${styles['small-btn']}`} onClick={this.handleApply}>{COUPON_OFFERS.APPLY}</button></div>
                     {/* } */}
                   </div>
                 </div>
@@ -177,28 +200,21 @@ class Coupon extends Component {
           </div>
           <div>
             <Modal
-              show={showTerms}
+              show={showPopup}
               onHide={this.closeTerms}
               className={styles.modalClassName}
             >
               <Modal.Body>
-                {termsOfUse}
+                <iframe
+                  title="TERMS"
+                  // src={termsAndConditions.document_url}
+                  src="https://fptsdocumentservice.s3.ap-south-1.amazonaws.com/default/HowToUse.html?X-Amz-Security-Token=FQoGZXIvYXdzEAoaDG74ae2PNhqA3NLeqSK5A7NQktZ7j6LAPavSDgke22Vy2dQB16%2FODYMgWeXtes1Rnge8CViqBvH4KKW%2B4z%2B2q8M%2BlK55wZXJIG157ObRprh%2Bsry5Z1c1YatPtt%2FU45TDVhN7T3MM%2BAIG8aQqL2Rif9SXbTu%2FZrZmyjpbLRns8JKP%2F%2FLSoZPIAOdt9ggraq9bDaddfeU5wdYL3zfghQvN%2B39vvc8f2gf5ePS32%2BNcEpwXeydNpV%2FDx7kPcAMaJhFwdCnshbk9tobKT0cpykGrx4fJpP6mi9XdaFbPzW%2BB7fRD9mAUplPhOYyxFzggmKqJdNcII7S3EEL9vEgI3amocW5k9jr49tOGO4uyRMEacUJ%2B74FnP9uBlTyWsMwGo5aD%2B7Jot8hFTgu0xS26L2xK3jDuEqt2DDMP%2F1uYFXj954QBpYtZ6YyU9CU7ZaibAcs4KK0MMcAIgUsvLpyajJoeSIq%2BCJk3PUID8KloxGVHWjwgIYrcTaLBlYGd8fIhrXC5itITlbB7K60WVncRttsZNA04jXtkBGJu73bwS9FpX2PFnmMWD9Uqtbh7i7op717zEogPzWQaRXFpN%2BlX7jR%2B06BZJsTktpJWSiii3NfkBQ%3D%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190323T092057Z&X-Amz-SignedHeaders=host&X-Amz-Expires=300&X-Amz-Credential=ASIAQ7IOH7NSKG4RMB5C%2F20190323%2Fap-south-1%2Fs3%2Faws4_request&X-Amz-Signature=0c6703bda9a0c6875e3299046ddfc1341a2362c2845ba8b0ca84b5c91eaf3f9f"
+                  frameBorder="0"
+                  width="560px"
+                  height="450px"
+                />
               </Modal.Body>
               <div className={`${styles['justify-end']} ${styles['p-30']} ${styles.flex}`}>
-                <button className="btn btn-primary" style={{ backgroundColor: '#45689a', width: '15%' }} onClick={this.closeTerms}>
-                  {COUPON_OFFERS.OK}
-                </button>
-              </div>
-            </Modal>
-            <Modal
-              show={showHowToUse}
-              onHide={this.closeTerms}
-              className={styles.modalClassName}
-            >
-              <Modal.Body>
-                {howToUse}
-              </Modal.Body>
-              <div className={`${styles['justify-end']}  ${styles['p-30']} ${styles.flex}`}>
                 <button className="btn btn-primary" style={{ backgroundColor: '#45689a', width: '15%' }} onClick={this.closeTerms}>
                   {COUPON_OFFERS.OK}
                 </button>
@@ -214,12 +230,15 @@ class Coupon extends Component {
 const mapStateToProps = store => ({
   couponData: couponSelectors.getCouponOffers(store),
   cartData: selectors.getCartResults(store),
+  termsAndConditions: couponSelectors.getTermsAndConditions(store),
+  isCartLoading: selectors.getLoadingStatus(store),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(
   {
     getCouponOffers: couponActionCreators.getCouponOffers,
     getCartResults: actionCreators.getCartResults,
+    showTermsAndConditions: couponActionCreators.showTermsAndConditions,
   },
   dispatch,
 );
@@ -229,6 +248,10 @@ Coupon.propTypes = {
   closeSlider: PropTypes.func,
   getCouponOffers: PropTypes.func,
   openSlider: PropTypes.func,
+  cartData: PropTypes.object,
+  showTermsAndConditions: PropTypes.func,
+  termsAndConditions: PropTypes.string,
+  isCartLoading: PropTypes.bool,
 };
 
 Coupon.defaultProps = {
@@ -237,6 +260,10 @@ Coupon.defaultProps = {
   closeSlider: f => f,
   getCouponOffers: f => f,
   openSlider: f => f,
+  cartData: {},
+  showTermsAndConditions: f => f,
+  termsAndConditions: '',
+  isCartLoading: false,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Coupon);

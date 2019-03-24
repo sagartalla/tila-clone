@@ -89,6 +89,7 @@ const a = {
     TRANSFORMER_API_URL: 'http://transformers-mgmt.fptsinternal.com/fpts/page-config/get-all-pages',
     SUGGESSIONS_URL: 'https://api-gateway-stage.fptechscience.com/auto-suggest/suggest/suggestions',
     COUPONS_URL: 'https://api-gateway-stage.fptechscience.com/dip/fpts',
+    TRANSFORMERS_SERVICE_URL: 'https://api-gateway-stage.fptechscience.com/transformers',
   },
   preprod: {
     IMAGE_SEARCH_URL: 'https://apigateway-preprod.tila.com/image-search',
