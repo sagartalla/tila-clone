@@ -28,9 +28,10 @@ const getOrderDetails = (store) => {
           item_tracking_id: i.item_tracking_id || shortid.generate(),
           status: i.external_status,
           state_time_estimates: i.state_time_estimates,
-          price: i.price.offer_price,
+          price: i.price,
           currency_code: currency_code,
           orderIds: i.order_item_ids,
+          offers: i.offers,
           promisedDeliveryDate: i.promised_delivery_date
         }))
       )(order_items)
