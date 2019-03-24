@@ -26,10 +26,10 @@ class Voucher extends Component {
   }
 
   proceedToPayment() {
-    const { data, makeProcessRequest } = this.props;
+    const { voucherData, makeProcessRequest } = this.props;
     makeProcessRequest({
       payment_details: [{
-        payment_mode: data.type,
+        payment_mode: voucherData.type,
       }]
     });
   }
