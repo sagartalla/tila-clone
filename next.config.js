@@ -25,6 +25,7 @@ module.exports = withSourceMaps(withStylus(withCSS({
       env: process.env.ENV || 'preprod',
       isLocal: process.env.LOCAL === 'true',
       version: version,
+      SENTRY_DSN: 'https://f330056a5bc44dc1bb2561bbd0929d9a@sentry.fptechscience.com/2'
   },
   generateBuildId: async () => {
     return version;

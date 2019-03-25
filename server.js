@@ -63,9 +63,9 @@ const handler = routes.getRequestHandler(app, ({ req, res, route, query }) => {
 });
 
 app.prepare().then(() => {
-  const Sentry  = require('./utils/sentry')({ release: app.buildId }).Sentry
+  // const Sentry  = require('./utils/sentry')({ release: app.buildId }).Sentry
   server
-    .use(Sentry.Handlers.requestHandler())
+    // .use(Sentry.Handlers.requestHandler())
     .use(bodyParser.urlencoded({
       extended: true
     }))
@@ -73,10 +73,10 @@ app.prepare().then(() => {
     // .use(cookieParser())
     .use(cookiesMiddleware())
     .use(sessionCookie)
-    .get(/\.map$/, sourcemapsForSentryOnly(process.env.SENTRY_TOKEN))
+    // .get(/\.map$/, sourcemapsForSentryOnly(process.env.SENTRY_TOKEN))
     .use('/api', apiRoutes)
     .use(handler)
-    .use(Sentry.Handlers.errorHandler())
+    // .use(Sentry.Handlers.errorHandler())
     .listen(port, err => {
       if (err) {
         throw err
