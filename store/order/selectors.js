@@ -23,29 +23,30 @@ const getOrderDetails = (store) => {
             id: val.id,
             products: [val],
             status: val.status,
-            variantId:val.variantId,
-            isCancelable:val.isCancelable,
-            isReturnable:val.isReturnable,
-            isExchangable:val.isExchangable
-           });
+            variantId: val.variantId,
+            isCancelable: val.isCancelable,
+            isReturnable: val.isReturnable,
+            isExchangable: val.isExchangable,
+          });
         }, []),
-        _.map((i) => ({
+        _.map(i => ({
           id: i.order_item_ids[0],
           img: i.variant_info.image_url,
           name: i.variant_info.title,
           item_tracking_id: i.item_tracking_id || shortid.generate(),
           status: i.external_status,
           state_time_estimates: i.state_time_estimates,
-          price: i.price.offer_price,
-          currency_code: currency_code,
+          price: i.price,
+          currency_code,
           orderIds: i.order_item_ids,
-          variantId:i.variant_id,
+          offers: i.offers,
+          variantId: i.variant_id,
           promisedDeliveryDate: i.promised_delivery_date,
-          isCancelable:i.cancelable,
-          isReturnable:i.returnable,
-          isExchangable:i.exchangeable
-        }))
-      )(order_items)
+          isCancelable: i.cancelable,
+          isReturnable: i.returnable,
+          isExchangable: i.exchangeable,
+        })),
+      )(order_items),
     };
   }
   return {

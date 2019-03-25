@@ -65,7 +65,7 @@ class ChooseVariant extends Component {
     const data = exchangeVariants.filter((el,index) => {
       return el.listing.variant_id === variantId
     })
-    return data[0].variant_details.attribute_map.size.attribute_values[0].value
+    return  data[0].variant_details.attribute_map.size.attribute_values[0].value 
   }
   renderExchangeVariants(variants) {
     const data = variants.map((el,index) => {
@@ -87,18 +87,19 @@ class ChooseVariant extends Component {
     const { message } = this.state;
     return (
       <div className={styles['exchange-items']}>
-        <span className={`${styles['fontW600']} ${styles['pt-15']} ${styles['pb-15']} ${styles['flex']}`}>
-          {`Order Size : ${this.selectedSize(variantId,exchangeVariants)}`}
-        </span>
+        
         <div className={styles['pb-10']}>
           <h5 className={`${styles['fontW600']} ${styles['m-0']}`}>Size To Exchange :</h5>
           <span className={`${styles['fs-12']} ${styles['textColor']}`}>
             Size not available? Click on the unavailable size to return the item
           </span>
         </div>
-        <ul className={`${styles['flex']} ${styles['product-sizeContainer']}`}>
-          {this.renderExchangeVariants(exchangeVariants)}
-        </ul>
+        {
+          Object.keys(exchangeVariants[0].variant_details.attribute_map).length > 0  &&
+          <ul className={`${styles['flex']} ${styles['product-sizeContainer']}`}>
+            { this.renderExchangeVariants(exchangeVariants) }
+          </ul>
+        }        
         <div>
           {{
             errorMsg: <p className={`${styles['error-msg']} ${styles['fs-12']}`}>Selected Size is
@@ -159,3 +160,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(ChooseVariant);
 //     ))
 //   }
 // </div>
+
+// {/* <span className={`${styles['fontW600']} ${styles['pt-15']} ${styles['pb-15']} ${styles['flex']}`}>
+//           {Object.keys(exchangeVariants[0].variant_details.attribute_map).length > 0 ? `Order Size : ${this.selectedSize(variantId,exchangeVariants)}`: null}
+//         </span> */}
