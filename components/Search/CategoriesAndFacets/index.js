@@ -20,19 +20,19 @@ class CategoriesAndFacets extends Component {
 
   onChangeHandle(facetName, facetType) {
     const curryHandler = (value, e) => {
-      const params = JSON.parse(decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent('facets').replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1")) || '{}');      
+      const params = JSON.parse(decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent('facets').replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1")) || '{}');
       params[facetName] = params[facetName] || [];
       digitalData.filter['leftnavfilters'] = `${facetName}:${value.name}`
-      if (facetType === 'PERCENTILE') {
-        params[facetName] = [value];
+      // if (facetType === 'PERCENTILE') {
+      //   params[facetName] = [value];
+      // } else {
+      if (e.target.checked) {
+        params[facetName].push(value);
       } else {
-        if (e.target.checked) {
-          params[facetName].push(value);
-        } else {
-          params[facetName].splice(params[facetName].indexOf(value), 1);
-          if (!params[facetName].length) { delete params[facetName]; }
-        }
+        params[facetName].splice(params[facetName].indexOf(value), 1);
+        if (!params[facetName].length) { delete params[facetName]; }
       }
+      // }
       this.props.onChangeFacets(params);
       this.submitQuery(params);
     }
@@ -54,10 +54,10 @@ class CategoriesAndFacets extends Component {
       }
       {
         filters.facets.map((filter, index) => {
-          if (filter.type === 'PERCENTILE') {
-            let selectedFilters = facets[filter.attributeName];
-            return filter.children.length ? <RangeFitler filter={filter} key={filter.id} onChangeHandle={this.onChangeHandle(filter.attributeName, filter.type)} selectedFilters={selectedFilters || []}/> : null;
-          }
+          // if (filter.type === 'PERCENTILE') {
+          //   let selectedFilters = facets[filter.attributeName];
+          //   return filter.children.length ? <RangeFitler filter={filter} key={filter.id} onChangeHandle={this.onChangeHandle(filter.attributeName, filter.type)} selectedFilters={selectedFilters || []}/> : null;
+          // }
           let selectedFilters = facets[filter.attributeName];
           selectedFilters = selectedFilters ? selectedFilters.map((item) => item.name) : [];
           return filter.children.length ? <CheckboxFacet attributeName={filter.attributeName} facets={facets} filter={filter} onChangeHandle={this.onChangeHandle(filter.attributeName, filter.type)} selectedFilters={selectedFilters} index={index}/> : null;

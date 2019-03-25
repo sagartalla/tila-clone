@@ -38,6 +38,13 @@
       box-shadow -4px 0 8px rgba(204, 204, 204, 0.8)
       border-right 5px solid #45689a
       color black-color
+    .payment-lists
+      .make-paymrnt-icon
+        width: 24px;
+        height: 17px;
+      &.disabled
+        opacity: 0.4;
+        pointer-events: none;
 
   .right-bar
     font-size font-size-14
@@ -74,6 +81,14 @@
   width 74px
   height 34px
 
+.saved-card-item
+  padding 8px
+  border 1px solid #aaa
+
+.card-label
+  width: 95%;
+  float: right;
+
 .secure-img
   display: flex;
   padding: 20px 25px;
@@ -82,11 +97,6 @@
   height: 77px;
   img
     width 100%
-
-.payment-lists
-  .make-paymrnt-icon
-    width: 24px;
-    height: 17px;
 
 .pay-loyalty-main
   .pay-loyalty-inn
@@ -210,7 +220,7 @@
     .payment-signup, .delivery-adress-prt, .pay-loyalty-main, .payment-mode-prt, .pay-offers-discounts {
        padding 15px 25px
     }
-    
+
     .payment-signup {
 
       .landscape-socail-part {
@@ -396,3 +406,19 @@
     padding-right 0
   }
 }
+.voucher 
+      background: aliceblue;
+
+.paymentBorder
+     border: 1px solid #eee;
+     background: #fff;
+     width: 28%;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     border-radius: 5px;
+     padding: 5px;
+     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.08);
+
+.border-radius
+     border-bottom-right-radius 25px;

@@ -6,7 +6,7 @@ import _ from 'lodash'
 import Cookie from 'universal-cookie';
 
 import Product from "./Product";
-import SVGCompoent from '../../common/SVGComponet';
+import SVGComponent from '../../common/SVGComponet';
 import { actionCreators, selectors } from '../../../store/search';
 import { actionCreators as cartActionCreators, selectors as cartSelector } from '../../../store/cart';
 import { actionCreators as wishlistActionCreators } from '../../../store/cam/wishlist';
@@ -48,7 +48,7 @@ class SearchResults extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(this.state.buyNow == true && (nextProps.isAddedToCart)){
+    if(this.state.buyNow == true && (nextProps.isLastAddedToCartSuccess)){
        Router.pushRoute(`/${country}/${language}/payment`);
     }
   }
@@ -80,7 +80,21 @@ class SearchResults extends Component {
   }
 
   render() {
-    const { results, pagiantionDetails, userDetails, notifyMe } = this.props;
+    const {
+      results, pagiantionDetails, userDetails, notifyMe, cartButtonLoaders,
+    } = this.props;
+    if(results.totalCount === 0) {
+      return (
+        <div className={`${styles['caption']}`}>
+          <div className={`${styles['no-results']} ${styles['fs-40']} ${styles['fontW600']} ${styles['justify-center']}`}>
+              Sorry, no results<br/><span  className={`${styles['fontW300']} ${styles['fs-20']}`}>for "{this.props.search}"</span>
+          </div>
+          <div className={`${styles['no-search']}`}>
+            <SVGComponent src={"errors-img/noSearch"} />
+          </div>
+        </div>
+      )
+    }
     const { pageNum } = this.props.pagiantionDetails;
     return (
       <div>
@@ -101,6 +115,7 @@ class SearchResults extends Component {
               addToCart={this.addToCart}
               index={`${item.id}_${index}`}
               pageNum={pageNum}
+              cartButtonLoaders={cartButtonLoaders}
               userDetails={userDetails}
               notifyMe={notifyMe}
               productID={item.id}
@@ -118,8 +133,9 @@ const mapStateToProps = store => ({
   results: selectors.getSearchResutls(store),
   pagiantionDetails: selectors.getPaginationDetails(store),
   ui: selectors.getUIState(store),
-  isAddedToCart: cartSelector.isAddedToCart(store),
+  isLastAddedToCartSuccess: cartSelector.isLastAddedToCartSuccess(store),
   userDetails: selectors.getUserDetails(store),
+  cartButtonLoaders: selectors.getCartButtonLoaders(store),
 });
 
 const mapDispatchToProps = dispatch =>

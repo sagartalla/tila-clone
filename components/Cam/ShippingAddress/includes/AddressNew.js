@@ -79,7 +79,7 @@ const AddressNew = (props) => {
           </Col>
           <Col md={6} sm={12} xs={12}>
             <div className={`${styles['fp-input']} ${styles['common-input-mb']}`}>
-              <input type="text" name="po_box" onChange={inputOnChange} value={data.po_box} className={styles.input} required />
+              <input type="text" name="postal_code" onChange={inputOnChange} value={data.postal_code} className={styles.input} required />
               <span className={styles['highlight']}></span>
               <span className={styles['bar']}></span>
               <label>PO box</label>

@@ -32,7 +32,7 @@ const initialAddrObj = {
   longitude: 0,
   mobile_country_code: '',
   mobile_no: '',
-  po_box: "",
+  postal_code: '',
   shipping_country_code: '',
 }
 
@@ -121,7 +121,7 @@ class ShippingAddress extends Component {
 
   getDataFromMap(json) {
     const {
-      lat, lng, cityCountryObj: { country, city, address, po_box },
+      lat, lng, cityCountryObj: { country, city, address, postal_code },
     } = json;
     const addr = { ...this.state.addr };
 
@@ -130,7 +130,7 @@ class ShippingAddress extends Component {
     addr.address_line_1 = address || '';
     addr.country_name = country || '';
     addr.city = city || '';
-    addr.po_box = po_box || '';
+    addr.postal_code = postal_code || '';
     this.setState({ addr });
   }
 

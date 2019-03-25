@@ -23,7 +23,8 @@ const getProduct = (store, variantId) => {
     // }
     return listing.total_inventory_count > 0 && listing.active
   }) : [];
-  let warranty =  priceInfo.length ? priceInfo[0].warranty_policy.policies.TILA : {}
+  const warranty = priceInfo.length && priceInfo[0].warranty_policy && priceInfo[0].warranty_policy.preferred_policy ?
+    priceInfo[0].warranty_policy.policies[priceInfo[0].warranty_policy.preferred_policy] : {}
   priceInfo = priceInfo.length ? priceInfo[0] : null;
 
   const availabilityError = !priceInfo;
@@ -61,6 +62,7 @@ const getProduct = (store, variantId) => {
     itemtype: product_details.catalog_details.item_type_name,
     media: imgUrls[0].url,
     categoryId: tree.breadcrumb[tree.breadcrumb.length - 1].id,
+    comparable: product_details.catalog_details.comparable,
   };
   const returnInfo = {
     acceptsReturns: priceInfo ? priceInfo.accepts_returns : false,
@@ -79,7 +81,7 @@ const getProduct = (store, variantId) => {
       sellingPrice: priceInfo.pricing.price,
       discount: priceInfo.pricing.discount_per_mrp,
       offerMesseges: priceInfo.pricing.actions ? priceInfo.pricing.actions.map((a) => a.description) : [],
-      offerDiscounts: priceInfo.pricing.actions ? priceInfo.pricing.actions.map((a) => a.discount) : [],
+      offerDiscounts: priceInfo.pricing.actions ? priceInfo.pricing.actions : [],
       totalDiscountMRP: priceInfo.pricing.total_discount_mrp,
       currency: priceInfo.mrp_currency
     } : 'No Listing'

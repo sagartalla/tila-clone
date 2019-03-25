@@ -40,7 +40,8 @@ const getCartResults = (store) => {
           shipping: item.listing_info.shipping,
           catalogId: item.product_details.catalog_details.catalog_id,
           itemType: item.product_details.catalog_details.item_type_name,
-          warranty_duration: item.listing_info.warranty_policy.policies.TILA,
+          warranty_duration: item.listing_info.warranty_policy.preferred_policy ?
+            item.listing_info.warranty_policy.policies[item.listing_info.warranty_policy.preferred_policy] : {},
           warranty: _.groupBy(item.listing_info.warranty_details, 'type')['MANUFACTURER'] || [{}],
           discount: item.listing_info.pricing && item.listing_info.pricing.discount_per_mrp,
           mrp: item.listing_info.pricing && item.listing_info.pricing.mrp,
@@ -72,13 +73,20 @@ const getErrorMessege = (store) => {
 const isAddedToCart = (store) => {
   try {
     const selectedCartItem = _.find(store.cartReducer.data.items, ({listing_id}) => {
-      return store.productReducer.data[0].variant_preferred_listings[store.productReducer.variantsData.selectedVariantId][0].listing_id === listing_id
+      return store.productReducer.data[0].variant_preferred_listings[store.productReducer.variantsData.selectedVariantId][0].listing_id === listing_id;
     });
     return !!selectedCartItem;
   } catch (e) {
   }
 };
 
+const isLastAddedToCartSuccess = (store) => {
+  return store.cartReducer.data.addToCart.item_status === 'ADDED';
+}
+
 const getBtnLoaders = store => store.cartReducer.ui.btnLoading;
 
-export { getCartResults, getLoadingStatus, getErrorMessege, isAddedToCart, getBtnLoaders }
+export {
+  getCartResults, getLoadingStatus, getErrorMessege,
+  isAddedToCart, getBtnLoaders, isLastAddedToCartSuccess,
+};

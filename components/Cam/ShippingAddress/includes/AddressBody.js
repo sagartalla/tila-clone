@@ -11,7 +11,12 @@ const styles = mergeCss('components/Cam/ShippingAddress/address');
 const AddressBody = (props) => {
 
   const deleteAddr = (e) => {
-    props.deleteAddr(e.target.id || e.target.parentNode.id)
+    let confirmDelete = confirm("Are you sure you want to delete this address?");
+    if(confirmDelete){
+      props.deleteAddr(e.target.id || e.target.parentNode.id)
+    }else{
+      return;
+    }
   }
 
   const editAddress = (e) => {
@@ -49,8 +54,8 @@ const AddressBody = (props) => {
                   </div>
                   <div className={styles['address-card-body']}>
                     <h5 className={`${styles['fontW600']} ${styles['m-0']} ${styles['mb-10']} ${styles['lgt-blue']}`}> {val.first_name + ' ' + val.last_name} </h5>
-                    <address className={`${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['full-address-details']}`}>
-                      {val.address_line_1 + ', ' + val.address_line_2 + ', ' + val.city + ', ' + val.country_name}
+                    <address className={`${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['full-address-details']}`} title={val.address_line_1 + ', ' + val.address_line_2 + ', ' + val.city + ', ' + val.country_name + ', ' + val.postal_code}>
+                      {val.address_line_1 + ', ' + val.address_line_2 + ', ' + val.city + ', ' + val.country_name + ', ' + val.postal_code}
                     </address>
                     <span className={`${styles['address-card-phone']} ${styles['fontW600']} ${styles['lgt-blue']}`}>
                       {val.mobile_country_code + ' ' + val.mobile_no}

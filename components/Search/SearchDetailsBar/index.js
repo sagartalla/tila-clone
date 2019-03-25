@@ -38,16 +38,15 @@ class SearchDetailsBar extends Component {
     return (
       <Waypoint onEnter={this.handleWaypointEnter} onLeave={this.handleWaypointLeave}>
         <div className={styles['search-results-wrap']}>
-          {
-            (results.totalCount > 0 || query || categoryId) ?
-              <Fragment>
-                <div className={`${styles['flx-space-bw']} ${styles['pb-10']} ${styles['items-list-show']} ${styles['ipad-flex-clm']}`}>
-                  <h4 className={`${styles['meta-info']} ${styles['mt-0']} ${styles['mb-0']} ${styles['fontW300']}`}>{results.totalCount} {SEARCH_PAGE.NO_OF_ITEMS_FOUND_FOR} <h1 className={styles['no-h1']}>{finalQuery.split('-').join(' ')}</h1></h4>
-                  <div className={`${styles['flx-spacebw-alignc']} ${styles['deliver-to-main']}`}>
-                    <GeoWidget />
-                    <SortByWidget />
-                  </div>
+          <Fragment>
+              <div className={`${styles['flx-space-bw']} ${styles['pb-10']} ${styles['items-list-show']} ${styles['ipad-flex-clm']}`}>
+                <h4 className={`${styles['meta-info']} ${styles['mt-0']} ${styles['mb-0']} ${styles['fontW300']}`}>{results.totalCount} {SEARCH_PAGE.NO_OF_ITEMS_FOUND_FOR} <h1 className={styles['no-h1']}>{finalQuery && finalQuery.split('-').join(' ')}</h1></h4>
+                <div className={`${styles['flx-spacebw-alignc']} ${styles['deliver-to-main']}`}>
+                  <GeoWidget />
+                  <SortByWidget />
                 </div>
+              </div>
+              {/*
                 <div className={`${styles['suggested-tags-main']} ${styles['bg-white']} ${styles['border-radius4']} ${styles['mb-20']} ${styles['flex-center']} ${styles['p-15']}`}>
                   <SearchFilters/>
                   <span className={`${styles['flex-center']} ${styles['pl-15']} ${styles['sugest-tag']}`}>
@@ -58,15 +57,11 @@ class SearchDetailsBar extends Component {
                     </span>
                   </span>
                 </div>
-                <NoSSR>
-                  <AppliedFilters />
-                </NoSSR>
-              </Fragment>
-              :
-              <div className={`${styles['no-results']} ${styles['fs-40']} ${styles['flex-center']} ${styles['justify-center']}`}>
-                {results.totalCount} {SEARCH_PAGE.NO_OF_ITEMS_FOUND}
-              </div>
-          }
+              */}
+              <NoSSR>
+                <AppliedFilters />
+              </NoSSR>
+            </Fragment>
         </div>
       </Waypoint>
     );
