@@ -150,6 +150,7 @@ class PaymentMode extends Component {
     super(props);
     this.state = {};
     this.showPaymentType = this.showPaymentType.bind(this);
+    this.disableAllOthers = this.disableAllOthers.bind(this);
   }
 
   showPaymentType(e) {
@@ -164,6 +165,12 @@ class PaymentMode extends Component {
         showTab: Object.keys(nextProps.paymentModesData.paymentModes)[0]
       });
     }
+  }
+
+  disableAllOthers({except}) {
+    this.setState({
+      except,
+    })
   }
 
   render() {
@@ -194,7 +201,7 @@ class PaymentMode extends Component {
                             {
                               _.map(props.paymentModesData.paymentModes, (val, key) => {
                                 return (
-                                  <li id={key} key={key} onClick={this.showPaymentType} className={`${key == showTab ? styles['active'] : ''} ${styles['flex-center']} ${styles['payment-lists']}`}>
+                                  <li id={key} key={key} onClick={this.showPaymentType} className={`${key == showTab ? styles['active'] : ''} ${styles['flex-center']} ${styles['payment-lists']} ${(this.state.except && this.state.except !== key) ? styles['disabled'] : ''}`}>
                                     <SVGComponent clsName={`${styles['make-paymrnt-icon']}`} src={"icons/cards-icons-list/" + paymentPageIcons[val.type]} />
                                     {/* <img src={"/static/img/icons/cards-icons-list/" + paymentPageIcons[val.type]} /> */}
                                     <span className={styles['pl-10']}>{val.display_name}</span>
@@ -214,6 +221,7 @@ class PaymentMode extends Component {
                                   saveCard={props.saveCard}
                                   voucherData={props.paymentModesData.voucherData}
                                   data={props.paymentModesData.paymentModes[key]}
+                                  disableAllOthers={this.disableAllOthers}
                                 />
                               :
                                 null
