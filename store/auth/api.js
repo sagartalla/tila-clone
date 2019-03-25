@@ -32,18 +32,17 @@ const userLogin = (params) => {
           input: inputString
         }
       ).then((ptaData) => {
-        const { output } = ptaData.data;
+        let { output } = ptaData.data;
         const strlen = output.length
-        let str = '';
         for(let i = 0; i < strlen; i++){
-          str = output.replace('+', '_').replace('/','~').replace('=','*');
+          output = output.replace('+', '_').replace('/','~').replace('=','*');
         }
-        data.data.ptaToken = str;
+        data.data.ptaToken = output;
         return data;
       });
     }
   }).catch(err => {
-    alert(err.response.data.data.error.message);
+    err.response && alert(err.response.data.data.error.message);
     throw err;
   });
 }
