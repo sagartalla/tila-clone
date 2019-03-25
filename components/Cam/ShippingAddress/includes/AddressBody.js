@@ -11,7 +11,12 @@ const styles = mergeCss('components/Cam/ShippingAddress/address');
 const AddressBody = (props) => {
 
   const deleteAddr = (e) => {
-    props.deleteAddr(e.target.id || e.target.parentNode.id)
+    let confirmDelete = confirm("Are you sure you want to delete this address?");
+    if(confirmDelete){
+      props.deleteAddr(e.target.id || e.target.parentNode.id)
+    }else{
+      return;
+    }
   }
 
   const editAddress = (e) => {

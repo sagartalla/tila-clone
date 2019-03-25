@@ -15,7 +15,9 @@ class VaultBody extends Component {
   }
 
   deleteCard(token) {
-    this.props.deleteCard(token);
+    let confirmCardDelete = confirm("Are you sure you want to delete this card?");
+    confirmCardDelete ?
+    this.props.deleteCard(token) : null;
   }
 
   paymentCardIcon(provider_type) {
