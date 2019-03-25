@@ -5,4 +5,10 @@ const getCouponOffers = (store) => {
   }
 };
 
-export { getCouponOffers };
+const getTermsAndConditions = (store) => {
+  if (store.couponOffersData.termsAndConditions) {
+    return store.couponOffersData.termsAndConditions;
+  }
+}
+
+export { getCouponOffers, getTermsAndConditions };
