@@ -8,6 +8,8 @@ import { pimServiceInstance } from './services';
 import Cookie from 'universal-cookie';
 import { toast } from 'react-toastify';
 
+import Sentry from '../../utils/sentryUtil';
+
 const config = getConfig()
 const env = config.publicRuntimeConfig.env;
 const cookies = new Cookie();
@@ -50,22 +52,21 @@ const getServiceName = (url) => {
   }, Object.values(constants))];
 }
 
-const apmReqInterceptor = (config) => {
-  const serviceName = getServiceName(config.url);
-  if(env === 'local') return config;
-  // config.transaction = apm.startTransaction(`${serviceName} Service`, 'custom')
-  // config.httpSpan = config.transaction ? config.transaction.startSpan(`FETCH ${JSON.stringify(config)}`, 'http') : null;
-  return config;
-}
-
-const apmResInterceptor = (response) => {
-  const serviceName = getServiceName(response.config.url);
-  // if (env === 'local') return response;
-  // const { httpSpan, transaction } = response.config;
-  // httpSpan && httpSpan.end();
-  // transaction && transaction.end();
-  return response;
-}
+const notifySentry = (err) => {
+  Sentry.configureScope((scope) => {
+      scope.setTag(`api`, true);
+      scope.setExtra(`url`, err.config.url);
+      scope.setExtra(`reqData`, err.config.data);
+      scope.setExtra(`resData`, err.response.data);
+      scope.setExtra(`statusCode`, err.response.status);
+      scope.setExtra(`reqHeaders`, err.config.headers);
+      scope.setExtra(`resHeaders`, err.response.headers);
+      if (req.user) {
+        scope.setUser({ id: req.user.id, email: req.user.email });
+      }
+  });
+  Sentry.captureException(err);
+};
 
 const errorInterceptor = (err) => {
   try {
@@ -85,8 +86,11 @@ const errorInterceptor = (err) => {
           cookies.remove('auth');
         }
       } else {
-        cookies.remove('auth');
+        if(err.response.status == '403') {
+          cookies.remove('auth');
+        }
         toast.error(`${err.response.data.message}`);
+        notifySentry(err);
       }
     }
   } catch (e) {
