@@ -7,6 +7,7 @@ import SVGComponent from '../../../common/SVGComponet';
 import { languageDefinations } from '../../../../utils/lang/';
 import { Router } from '../../../../routes';
 import { mergeCss } from '../../../../utils/cssUtil';
+import constants from '../../../../constants';
 
 const styles = mergeCss('components/Cam/Wishlist/wishlist');
 const cookies = new Cookies();
@@ -69,7 +70,7 @@ const WishlistBody = (props) => {
                       className={`${styles['flex-center']} ${styles['justify-center']} ${styles.pointer} ${styles['mb-wishlist-part-img']}`}
                       onClick={() => routeChange(variant_id, product_id, catalog_id, itemType)}
                     >
-                      <img className={styles['img']} src={img} />
+                      <img className={styles['img']} src={`${constants.mediaDomain}/${img}`} />
                     </div>
                   </Col>
                   <Col md={10} xs={10}>
@@ -80,7 +81,7 @@ const WishlistBody = (props) => {
                         {inventory_count > 0 ?
                           <button
                             id={listing_id}
-                            data-wish-id={wishlist_id} 
+                            data-wish-id={wishlist_id}
                             className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['add-to-btn']}`}
                             onClick={addToCart}
                           >
@@ -88,7 +89,7 @@ const WishlistBody = (props) => {
                           </button>
                           :
                           <button
-                            data-product-id={product_id} 
+                            data-product-id={product_id}
                             className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['add-to-btn']}`}
                             onClick={notifyMe}
                           >
@@ -110,7 +111,7 @@ const WishlistBody = (props) => {
                             <strike className={`${styles['label-gry-clr']}`}>{mrp} {cur}</strike>
                           </span>
                         }
-                      
+
                         {wishlisted_price && price && cur && getPriceAlert(price, wishlisted_price, cur)}
                         {wishlisted_price &&
                         <span className={`${styles['thick-gry-clr']}`}>

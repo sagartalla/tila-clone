@@ -38,7 +38,10 @@ class PayOnline extends Component {
       payment_details: [{
         payment_mode: data.type,
       }]
-    })
+    });
+    this.props.disableAllOthers({
+      except: data.type
+    });
   }
 
   componentWillReceiveProps(nextProps) {

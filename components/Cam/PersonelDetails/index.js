@@ -13,12 +13,12 @@ const UserInfo = () => {
   return (
     <div className={`${styles['profile-main-part']} ${styles['pl-5']} ${styles['ipad-pl-0']}`}>
       <UserData />
-      <Col xs={12} md={6} className={`${styles['pl-0']} ${styles['ipad-pr-0']} ${styles['ipad-mb-15']}`}>
+      {/*<Col xs={12} md={6} className={`${styles['pl-0']} ${styles['ipad-pr-0']} ${styles['ipad-mb-15']}`}>
         <SocialMedia />
       </Col>
       <Col xs={12} md={6} className={`${styles['pl-5']} ${styles['pr-0']} ${styles['ipad-pl-0']}`}>
         <Notification />
-      </Col>
+      </Col>*/}
     </div>
   );
 }

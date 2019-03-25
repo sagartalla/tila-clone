@@ -72,7 +72,7 @@ class Search extends Component {
           </Col>
           <Col md={10} className={`${styles['search-results']} ${styles['p-0']}`}>
             <SearchDetailsBar />
-            <SearchResults />
+            <SearchResults  search={query.search}/>
           </Col>
         </Grid>
         <CompareWidget />
