@@ -6,12 +6,12 @@ import _ from 'lodash';
 
 import { selectors, actionCreators } from '../../../../store/order';
 import { selectors as addressSelectors, actionCreators as addressActionCreators } from '../../../../store/cam/address';
-import {languageDefinations} from '../../../../utils/lang'
+import { languageDefinations } from '../../../../utils/lang'
 import { mergeCss } from '../../../../utils/cssUtil';
 const styles = mergeCss('components/Order/includes/OrderIssueWidget/orderIssue');
-const {ORDER_PAGE} = languageDefinations()
+const { ORDER_PAGE } = languageDefinations()
 class ChooseAddress extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
     this.state = {};
     this.saveAndgoToNextStep = this.saveAndgoToNextStep.bind(this);
@@ -24,14 +24,14 @@ class ChooseAddress extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { addresses } = nextProps;
-    if(!this.state.choosenAddress && addresses.length) {
+    if (!this.state.choosenAddress && addresses.length) {
       this.setState({
         choosenAddress: addresses[0].id
       })
     }
   }
 
-  chooseAddress (e) {
+  chooseAddress(e) {
     this.setState({
       choosenAddress: e.target.value
     })
@@ -50,24 +50,22 @@ class ChooseAddress extends Component {
     const { choosenAddress } = this.state;
     return (
       <div>
-      <div>{ORDER_PAGE.ADDRESS_PICKUP}</div>
-      {
-        addresses.map((address) => (
-          <div key={address.id} className={styles['generic-radio']}>
-            <input onChange={this.chooseAddress} id="return-item" name="exch-retrn-add" type="radio" value={address.id} checked={choosenAddress === address.id}/>
-            <label for="return-item">
-              <div>
-                <div>{address.name}</div>
-                <div>{address.address}</div>
-                <div>{address.phone}</div>
-              </div>
-            </label>
-          </div>
-        ))
-      }
-      <div className={`${styles['widget-footer']} ${styles['box']} ${styles['pt-25']}`}>
-        <button onClick={this.saveAndgoToNextStep} className={`${styles['m-0-auto']} ${styles['fs-16']}`} >{ORDER_PAGE.CONTINUE}</button>
-      </div>
+        <h4 className={`${styles['fs-20']} ${styles['fontW400']} ${styles['pb-15']}`}>{ORDER_PAGE.ADDRESS_PICKUP}</h4>
+        {
+          addresses.map((address) => (
+            <div key={address.id} className={`${styles['generic-radio']} ${styles['flex']} ${styles['pb-10']}`}>
+              <input onChange={this.chooseAddress} id="return-item" className={styles['radio-btn']} name="exch-retrn-add" type="radio" value={address.id} checked={choosenAddress === address.id} />
+              <label for="return-item" className={styles['pl-10']}>
+                <h4 className={`${styles['fs-16']} ${styles['fontW600']} ${styles['m-0']}`}>{address.name}</h4>
+                <div className={`${styles['fs-12']} ${styles['light-gry-clr']} ${styles['fontW300']}`}>{address.address}</div>
+                <span className={`${styles['fs-14']} ${styles['fontW400']} ${styles['thick-gry-clr']}`}>{address.phone}</span>
+              </label>
+            </div>
+          ))
+        }
+        <div className={`${styles['widget-footer']} ${styles['pt-15']}`}>
+          <button onClick={this.saveAndgoToNextStep} className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['retun-btn-part']}`} >{ORDER_PAGE.CONTINUE}</button>
+        </div>
       </div>
     );
   }

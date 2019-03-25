@@ -446,6 +446,7 @@ export const EN_KEYWORDS = {
     'SELECT_SUB_REASON': 'Select a Sub Reason',
     'RETURN_MESSAGE': 'Sorry that you had to Return, we will work on reason for your Return',
     'REQ_RETURN_SUCCESS': 'has been Requested for Return Successfully',
+    'REQ_EXCHANGE_SUCCESS':'has been requested for Exchange Successfully',
     'EXCHANGE': 'Exchange',
     'RETURN': 'Return',
     'MY_ACCOUNT': 'My account',

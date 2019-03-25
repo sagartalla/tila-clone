@@ -12,6 +12,9 @@ const initialState = {
         reasons: [],
         cancelStatus: {},
         exchangeVariants: [],
+        selectedReasons:{},
+        refundOptions:[],
+        exchangeId:[]
       },
     },
     error: '',
@@ -64,6 +67,63 @@ const productReducer = typeToReducer({
       data: {
         ...state.data,
         orderIssue,
+      }
+    }
+  },
+  [actions.GET_REFUND_OPTIONS] : {
+    PENDING: state => {
+      return Object.assign({},state,{ ui: { loading: true }})
+    },
+    FULFILLED: (state,action) => {
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          orderIssue:{
+            ...state.data.orderIssue,
+            refundOptions:action.payload.data
+          }
+        }
+      }
+    },
+    REJECTED: (state,action) => {
+      return Object.assign({}, state, { error: action.payload.response.data.message, ui: { loading: false } })
+    },
+  },
+  [actions.SET_EXCHANGE_ORDER] : {
+    PENDING: state => {
+      return Object.assign({},state,{ ui: { loading: true }})
+    },
+    FULFILLED: (state,action) => {
+      return {
+        ...state,
+        data:{
+          ...state.data,
+          orderIssue:{
+            ...state.data.orderIssue,
+            exchangeId:[action.payload.data]
+          }
+        }
+      }
+    },
+    REJECTED: (state,action) => {
+      return Object.assign(
+        {},
+        state,
+        { error: action.payload.response.data.message,
+        ui:{ loading: false }})
+    },
+  },
+  [actions.SET_ADDRESS_DATA] : (state,action) => {
+    return {
+      ...state,
+      data: {
+        ...state.data,
+        orderIssue: {
+          ...state.data.orderIssue,
+          selectedReasons:action.payload.data
+
+        }
       }
     }
   },

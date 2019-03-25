@@ -4,11 +4,12 @@ import { Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import moment from 'moment';
-
+import { Router } from '../../../../routes';
 import StatusWidget from '../StatusWidget';
 import constants from '../../../../constants';
 import { ORDER_ISSUE_TYPES, ORDER_ISSUE_STEPS } from '../../constants';
 import { actionCreators } from '../../../../store/order';
+import Cookies from 'universal-cookie';
 
 // import  styles from '../order.styl';
 import { mergeCss } from '../../../../utils/cssUtil';
@@ -16,6 +17,21 @@ import { languageDefinations } from '../../../../utils/lang';
 
 const { ORDER_PAGE } = languageDefinations();
 const styles = mergeCss('components/Order/order');
+const cookies = new Cookies();
+
+const language = cookies.get('language') || 'en';
+const country = cookies.get('country') || 'SAU';
+
+const RenderButton = ({callbackMethod,refundType}) => {
+  return (
+    <div className={styles['cancel-btn']}>
+      <button
+        className={`${styles['link-text']} ${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']} ${styles['fs-12']}`}
+        onClick={callbackMethod}>{refundType}</button>
+    </div>
+  )
+}
+
 
 class OrderItem extends Component {
   constructor() {
@@ -33,6 +49,7 @@ class OrderItem extends Component {
     this.setState({ showToolTip: false });
   }
 
+
   cancelOrder = () => {
     const { raiseOrderIssue, orderItem, orderId } = this.props;
     const { products } = orderItem;
@@ -44,24 +61,30 @@ class OrderItem extends Component {
     });
   }
 
-  exchangeReturnOrder = () => {
-    const { raiseOrderIssue, orderItem, orderId } = this.props;
-    const { products } = orderItem;
-    raiseOrderIssue({
-      issueType: null,
-      items: products,
-      defaultStep: ORDER_ISSUE_STEPS.LIST,
-      orderId,
-    });
+  exchangeReturnOrder = OrderType => () => {
+    const { orderId, orderItem, variantId } = this.props;
+    Router.pushRoute(`/${country}/${language}/cam/orders/${orderId}/issue/${OrderType}/item/${orderItem.id}/${variantId}`);
+    // raiseOrderIssue({
+    //   issueType: null,
+    //   items: products,
+    //   defaultStep: ORDER_ISSUE_STEPS.LIST,
+    //   orderId,
+    // });
+  };
+
+  cancelledDate = (estimates) => {
+    if (estimates.length > 0) {
+      return moment(estimates.filter(state => state.status === 'CANCELLED')[0].actual_time).format('Do, dddd');
+    } return '';
   }
 
   render() {
     const {
-      payments = [{}], orderItem, orderId, showWidget, thankyouPage,
+      payments = [{}], orderItem, orderId, showWidget, thankyouPage, isCancelable, isReturnable, isExchangable,
     } = this.props;
     const { showToolTip } = this.state;
     const btnType = (() => {
-      if (['DELIVERED', 'PLACED', 'PROCESSING'].indexOf(orderItem.status) !== -1) {
+      if (['DELIVERED', 'PLACED', 'SHIPPED', 'PROCESSING'].indexOf(orderItem.status) !== -1) {
         return 'cancel';
       }
       if (orderItem.status === 'SHIPPED') {
@@ -69,6 +92,19 @@ class OrderItem extends Component {
       }
       return null;
     })();
+
+    const displayText = () => {
+      if (['SHIPPED', 'PLACED', 'PROCESSING'].indexOf(orderItem.status) !== -1) {
+        return 'Delivery by';
+      } else if (orderItem.status === 'DELIVERED') {
+        return 'Delivered on';
+      } else if (orderItem.status === 'CANCELLED') {
+        return 'Cancelled';
+      } else if (orderItem.status === 'RETURN_IN_PROGRESS') {
+        return 'Return in progress';
+      }
+    };
+
     return (
       <div className={`${styles['shipment-wrap']} ${styles['mb-20']} ${styles['mt-20']} ${styles.flex}`}>
         <Col md={7} sm={7} className={`${styles['pl-0']} ${styles['pr-0']}`}>
@@ -111,9 +147,12 @@ class OrderItem extends Component {
                               <div className={styles['tool-tip']}>
                                 <ul>
                                   <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.MRP} : </span><span> {product.price.mrp} {product.currency_code}</span></li>
-                                  {product.offers.length > 0 &&
-                                    product.offers.map(offer => <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{offer.coupon_code ? offer.coupon_code : offer.description} : </span><span>{'(-)'} {offer.discount} {product.currency_code}</span></li>)}
-                                  <li className={`${styles['flx-space-bw']} ${styles['b-t']}`}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.PRICE} : </span><span> {product.price.offer_price} {product.currency_code}</span></li>
+                                  {product.offers.length > 0 ?
+                                    product.offers.map(offer => <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{offer.coupon_code ? offer.coupon_code : offer.description} : </span><span>{'(-)'} {offer.discount} {product.currency_code}</span></li>)
+                                    :
+                                    <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.DISCOUNT} :</span><span>{'(-)'} {product.price.mrp - product.price.offer_price} {product.currency_code}</span></li>
+                                  }
+                                  <li className={`${styles['flx-space-bw']} ${styles['b-t']}`}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.PRICE} :</span><span> {product.price.offer_price} {product.currency_code}</span></li>
                                   <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.SHIPPING} : </span><span>{product.price.shipping_fees ? `(+) ${product.price.shipping_fees} ${product.currency_code}` : 'FREE'}</span></li>
                                   <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.GIFT_CHARGES} : </span><span>{product.price.gift_charge ? `(+) ${product.price.gift_charge} ${product.currency_code}` : 'FREE'}</span></li>
                                   <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.TOTAL} : </span><span className={styles['fontW600']}> {product.price.offer_price} {product.currency_code}</span></li>
@@ -139,34 +178,37 @@ class OrderItem extends Component {
                 <div className={`${styles['p-15']} ${styles['ipad-pl-0']} ${styles['ipad-pr-0']}`}>
                   <div className={`${styles['date-cont']} ${styles['flx-spacebw-alignc']}`}>
                     <div>
-                      <div className={styles['fs-12']}>{btnType === 'cancel' ? 'Delivery by' : showWidget && !thankyouPage ? 'Canceled on' : 'Canceled'}</div>
+                      <div className={styles['fs-12']}>{displayText()}</div>
                       <div className={`${styles['ff-t']} ${styles['fs-26']} ${styles['ipad-fs-20']}`}>
-                        {btnType === 'cancel' ? moment(orderItem.products[0].promisedDeliveryDate).format('Do, dddd') : showWidget && !thankyouPage ? moment(orderItem.products[0].state_time_estimates.CANCELLED.time).format('Do, dddd') : null}
+                        {btnType === 'cancel' ? moment(orderItem.products[0].promisedDeliveryDate).format('Do, dddd') : showWidget && !thankyouPage ? this.cancelledDate(orderItem.products[0].state_time_estimates) : null}
                       </div>
                     </div>
-                    {
-                      btnType ?
-                        <div className={styles['cancel-btn']}>
-                          <span
-                            className={`${styles['link-text']} ${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']} ${styles['fs-12']}`}
-                            onClick={btnType === 'cancel' ? this.cancelOrder : this.exchangeReturnOrder}
-                          > {btnType === 'cancel' ? 'Cancel' : 'Return/Exchange'}
-                          </span>
-                        </div>
-                        :
-                        null
-                    }
                   </div>
-                  <div className={`${styles['widget-wrap']} ${styles['pt-10']} ${styles['pb-10']}`}>
-                    {
-                      orderItem.status === 'DELIVERED' || !showWidget || thankyouPage
-                        ?
-                        null
-                        :
-                        <StatusWidget currentStatus={orderItem.products} />
-                    }
-                  </div>
+                  
+                  {isCancelable === 'TRUE' &&
+                    <RenderButton callbackMethod={this.cancelOrder}
+                      refundType = 'Cancel'
+                   />}
+
+                   {isReturnable === 'TRUE' &&
+                   <RenderButton
+                     callbackMethod={this.exchangeReturnOrder(ORDER_ISSUE_TYPES.RETURN)}
+                     refundType='Return' />}
+                  {isExchangable  === 'TRUE' &&
+                    <RenderButton
+                      callbackMethod={this.exchangeReturnOrder(ORDER_ISSUE_TYPES.EXCHANGE)}
+                      refundType='Exchange' />
+                  }
+                <div className={`${styles['widget-wrap']} ${styles['pt-10']} ${styles['pb-10']}`}>
+                  {
+                    orderItem.status === 'DELIVERED' || !showWidget || thankyouPage
+                      ?
+                      null
+                      :
+                      <StatusWidget currentStatus={orderItem.products} />
+                  }
                 </div>
+              </div>
             :
             null
           }
@@ -188,3 +230,16 @@ OrderItem.propTypes = {
 };
 
 export default connect(null, mapDispatchToProps)(OrderItem);
+
+
+
+
+
+// btnType ?
+//   <div className={styles['cancel-btn']}>
+//     <span
+//       className={`${styles['link-text']} ${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']} ${styles['fs-12']}`}
+//       onClick={btnType === 'cancel' ? cancelOrder : exchangeReturnOrder}> {btnType === 'cancel' ? 'Cancel' : 'Return/Exchange'}</span>
+//   </div>
+//   :
+//   null
