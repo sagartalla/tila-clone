@@ -81,7 +81,7 @@ class SavedCards extends Component {
                   name="credit-card"
                   type='radio'
                   onClick={this.selectCard(card.card_token)}
-                  checked={card.default}
+                  checked={this.state.card_token ? (this.state.card_token === card.card_token) : card.default}
                 />
                 <label for={`card-${index}`} className={styles['card-label']}>
                   <div className={`${styles['flex']} ${styles['justify-between']}`}>

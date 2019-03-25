@@ -26,10 +26,10 @@ class Voucher extends Component {
   }
 
   proceedToPayment() {
-    const { data, makeProcessRequest } = this.props;
+    const { voucherData, makeProcessRequest } = this.props;
     makeProcessRequest({
       payment_details: [{
-        payment_mode: data.type,
+        payment_mode: voucherData.type,
       }]
     });
   }
@@ -48,7 +48,7 @@ class Voucher extends Component {
             :
               null
         }
-        <div className={`${styles['flex']} ${styles['justify-between']}`}> 
+        <div className={`${styles['flex']} ${styles['justify-between']}`}>
           <div>
             <div>Money in Wallet</div>
             <div>{balance} {currency_code}</div>
