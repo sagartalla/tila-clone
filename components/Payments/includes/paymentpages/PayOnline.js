@@ -68,9 +68,9 @@ class PayOnline extends Component {
                     </div>
                   </div>
                 :
-                  <div>
-                      <div>Once you click on Add New Card. There is no going back. You can't access any other modes of payment.</div>
-                      <button className={`${styles['fp-btn-primary']} ${styles['fp-btn']}`} onClick={this.fetchIframe}>Pay {data.amount_to_pay} {data.currency_code} Using New Card</button>
+                  <div className={`${styles['p-30']} `}>
+                      <div className={`${styles['mb-25']} `}>Once you click on Add New Card. There is no going back. You can't access any other modes of payment.</div>
+                      <button className={`${styles['fp-btn-primary']} ${styles['fp-btn']} ${styles['border-radius']}`} onClick={this.fetchIframe}>Pay {data.amount_to_pay} {data.currency_code} Using New Card</button>
                   </div>
             }
           </div>
@@ -81,7 +81,7 @@ class PayOnline extends Component {
 
 
 const mapStateToprops = (store) => ({
-  processData: selectors.getProcessData(store)
+  processData: selectors.getProcessData(store),
 });
 
 const mapDispatchToProps = (dispatch) =>

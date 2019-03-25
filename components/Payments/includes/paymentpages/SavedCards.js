@@ -95,7 +95,7 @@ class SavedCards extends Component {
           })
         }
         </ul>
-        <button onClick={this.proceedToPayment} className={`${styles['fp-btn-primary']} ${styles['fp-btn']}`}>Pay {data.amount_to_pay} {data.currency_code}</button>
+        <button onClick={this.proceedToPayment} className={`${styles['fp-btn-primary']} ${styles['fp-btn']} ${styles['border-radius']}`}>Pay {data.amount_to_pay} {data.currency_code}</button>
       </div>
     );
   }
