@@ -119,7 +119,7 @@ const OrderItem = ({
       <Col md={5} sm={5} className={styles['thick-border-left']}>
         {
           payments ?
-            payments[0].transaction_status == 'FAILED' ?
+            payments[0] && payments[0].transaction_status == 'FAILED' ?
               <div>Order Unsuccessful</div>
               :
               <div className={`${styles['p-15']} ${styles['ipad-pl-0']} ${styles['ipad-pr-0']}`}>
