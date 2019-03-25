@@ -16,8 +16,29 @@ const getOrdersData = (store) => {
         order_items,
       } = order;
       const orderItems = _.compose(
-        _.reduce.convert({'cap': false })((acc, val, key) => { console.log('val',val,key); return acc.concat({ id: key, products: [val], status: val.status })}, []),
-        _.map((i) => ({ id: i.order_item_ids[0], img: i.variant_info.image_url, name: i.variant_info.title, item_tracking_id: i.item_tracking_id || shortid.generate(), status: i.external_status, promisedDeliveryDate: i.promised_delivery_date,orderIds: i.order_item_ids }))
+        _.reduce.convert({'cap': false })((acc, val, key) => acc.concat(
+          {
+            id: val.id,
+            products: [val],
+            status: val.status ,
+            variantId:val.variantId,
+            isCancelable:val.isCancelable,
+            isReturnable:val.isReturnable,
+            isExchangable:val.isExchangable
+          }), []),
+        _.map((i) => ({
+          id: i.order_item_ids[0],
+          img: i.variant_info.image_url,
+          name: i.variant_info.title,
+          item_tracking_id: i.item_tracking_id || shortid.generate(),
+          status: i.external_status,
+          promisedDeliveryDate: i.promised_delivery_date,
+          variantId:i.variant_id,
+          orderIds: i.order_item_ids,
+          isCancelable:i.cancelable,
+          isReturnable:i.returnable,
+          isExchangable:i.exchangeable
+         }))
       )(order_items);
       return {
         id: order_id,

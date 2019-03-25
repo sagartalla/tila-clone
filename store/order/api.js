@@ -14,15 +14,13 @@ const submitCancelRequest = (params) => axios.post(`${constants.ORDERS_API_URL}/
   sub_reasons: params.subReason,
 });
 
-const submitReturnRequest = (params) => axios.post(`${constants.ORDERS_API_URL}/api/v1/order/return`, {
-  address_id: params.addressId,
-  order_item_id: params.orderItemId,
-  reason: params.reason,
-  comment: selectedReasons.comment,
-});
-
+const submitReturnRequest = (params) => axios.post(`${constants.ORDERS_API_URL}/api/v1/order/return`,params);
 const getExchangeVariants = (params) => axios.get(`${constants.ORDERS_API_URL}/api/v1/return/exchange_options?order_item_id=${params.orderItemId}`)
 
 const sendMapDataApi = (order_id, params) => axios.post(`${constants.ORDERS_API_URL}/api/v1/order/${order_id}/address/geo`, params);
 
-export default { getOrderDetails, getReasons, submitCancelRequest, submitReturnRequest, getExchangeVariants, sendMapDataApi };
+const getRefundOptions = (orderItemId) => axios.get(`${constants.ORDERS_API_URL}/api/v1/order_item/${orderItemId}/refund_options`)
+
+const setExchangeOrder = (params) => axios.post(`${constants.ORDERS_API_URL}/api/v1/order/exchange`,params)
+
+export default { getOrderDetails, getRefundOptions, getReasons, submitCancelRequest, submitReturnRequest, getExchangeVariants, sendMapDataApi,setExchangeOrder };

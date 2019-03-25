@@ -55,7 +55,16 @@ const Order = ({order}) => {
       </div>
       <Row>
         <Col md={12}>
-          {order.orderItems.map((orderItem) => <OrderItem key={orderItem.id} orderItem={orderItem} orderId={order.id} showWidget={false}/>)}
+          {order.orderItems.map((orderItem) => <OrderItem
+            key={orderItem.id}
+            orderItem={orderItem}
+            orderId={order.id}
+            showWidget={false}
+            variantId={orderItem.variantId}
+            isCancelable={orderItem.isCancelable}
+            isReturnable={orderItem.isReturnable}
+            isExchangable={orderItem.isExchangable}
+            />)}
         </Col>
       </Row>
       <Row>
