@@ -40,7 +40,7 @@ class Voucher extends Component {
     const { balance, amount_to_pay, currency_code, remaining_amount } = voucherData;
     return (
       <div className={`${styles['voucher']} ${styles['p-10']}`}>
-        <div>Tila Credit Used</div>
+        <div className={`${styles['lgt-blue']} ${styles['fs-16']} ${styles['p-5']}`}>Tila Credit Used</div>
         {
           isOnlyVocuher
             ?
@@ -48,31 +48,32 @@ class Voucher extends Component {
             :
               null
         }
-        <div className={`${styles['flex']} ${styles['justify-between']}`}>
-          <div>
-            <div>Money in Wallet</div>
-            <div>{balance} {currency_code}</div>
+        <div className={`${styles.flex} ${styles['justify-between']}`}>
+         <div className={`${styles.paymentBorder}`}>
+            <div className={`${styles['success-green']}`}>Total Amount To Pay</div>
+            <b>{amount_to_pay} {currency_code}</b>
           </div>
-          <div>
+          <div className={`${styles.flex} ${styles['align-center']} ${styles['thick-red-clr']}`}>
             <span>-</span>
           </div>
-          <div>
-            <div>Total Amount To Pay</div>
-            <div>{amount_to_pay} {currency_code}</div>
+          <div className={`${styles.paymentBorder}`}>
+        <div className={balance < amount_to_pay ? `${styles['thick-red-clr']}` : `${styles['success-green']}`}>Money in Wallet</div>
+            <b>{balance} {currency_code}</b>
           </div>
-          <div>
+          <div className={`${styles.flex} ${styles['align-center']}`}>
             <span>=</span>
           </div>
-          <div>
-            <div>Remaining amount to pay</div>
-            <div>{remaining_amount} {currency_code}</div>
+          <div className={`${styles.paymentBorder}`}>
+            <div className={balance >= amount_to_pay ? `${styles['success-green']}` : `${styles['thick-red-clr']}`}>Remaining amount to pay</div>
+            <b>{remaining_amount} {currency_code}</b>
           </div>
+         
         </div>
         {
           isOnlyVocuher
             ?
               <div>
-                <button onClick={this.proceedToPayment} className={`${styles['fp-btn-primary']} ${styles['fp-btn']}`}>PAY USING TILA CREDIT</button>
+                <button onClick={this.proceedToPayment} className={`${styles['fp-btn-primary']} ${styles['fp-btn']} ${styles['border-radius']}`}>PAY USING TILA CREDIT</button>
               </div>
             :
              null
