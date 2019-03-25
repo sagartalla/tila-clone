@@ -23,15 +23,22 @@ const userLogin = (params) => {
         'p_ccf_15': 9
       };
       axios.put(`${constants.CART_API_URL}/api/v1/cart/merge`);
+      let inputString = '';
+      for(let key in PTA_PARAMS){
+        inputString = inputString ? `${inputString}&${encodeURI(key)}=${encodeURI(PTA_PARAMS[key])}` : `${encodeURI(key)}=${encodeURI(PTA_PARAMS[key])}`
+      }
       return axios.post(`${constants.AUTH_API_URL}/api/v1/encrypt/`,
         {
-          input: _.reduce(PTA_PARAMS, (acc, val, key) => {
-            return `${acc}&${encodeURI(key)}=${encodeURI(val)}`;
-          }, '')
+          input: inputString
         }
       ).then((ptaData) => {
         const { output } = ptaData.data;
-        data.data.ptaToken = output.replace(/\+/g, '_').replace('/\//g','~').replace('/\=/g','*');
+        const strlen = output.length
+        let str = '';
+        for(let i = 0; i < strlen; i++){
+          str = output.replace('+', '_').replace('/','~').replace('=','*');
+        }
+        data.data.ptaToken = str;
         return data;
       });
     }

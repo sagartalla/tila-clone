@@ -69,10 +69,12 @@ class Login extends Component {
       });
       return;
     }
-    this.setState({
-      email: userCreds.username,
-      password: userCreds.password,
-    });
+    if (userCreds) {
+      this.setState({
+        email: userCreds.username,
+        password: userCreds.password,
+      });
+    }
   }
 
   onChangeField(e) {
