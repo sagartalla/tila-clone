@@ -96,6 +96,7 @@ class Body extends Component {
 
   goToNextStep() {
     const { goToNextStep, resetOrderIssue, orderIssue } = this.props;
+    const { exchangeId } = orderIssue
     const {
       step: currentStep,
       issueType,
@@ -134,7 +135,8 @@ class Body extends Component {
       }
       case STEPS.RETURN_COMPLETE: {
         nextStep = null;
-        Router.pushRoute(`/${country}/${language}/cam/orders`);
+        issueType == 'EXCHANGE' ? Router.pushRoute(`/${country}/${language}/cam/orders/${exchangeId.order_id}`):
+                      Router.pushRoute(`/${country}/${language}/cam/orders`)
         break;
       }
       default:
