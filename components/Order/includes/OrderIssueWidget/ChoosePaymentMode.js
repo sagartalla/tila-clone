@@ -40,10 +40,14 @@ class ChoosePaymentMode extends Component {
   saveAndGoNext() {
     const { paymentType } = this.state
     const { orderIssue,goToNextStep } = this.props
+    const { issueType } = orderIssue
     const { selectedReasons } = orderIssue
     var refundType = paymentType === 'Online' ? 'BACK_TO_SOURCE' : 'WALLET'
     const orderReturnParams = Object.assign({}, selectedReasons, { refund_mode: refundType })
-    this.props.submitReturnRequest(orderReturnParams)
+    if(issueType === 'RETURN') {
+      this.props.submitReturnRequest(orderReturnParams)
+    }
+
     goToNextStep()
   }
   getPaymentModes(payment) {
