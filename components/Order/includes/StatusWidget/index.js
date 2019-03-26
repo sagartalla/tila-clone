@@ -17,6 +17,7 @@ const StatusWidget = ({ currentStatus }) => {
           {
             currentStatus[0].state_time_estimates.map((i, k) => {
               const { actual_time } = i;
+              if (!i.valid) return null;
               if (actual_time) {
                 barLen = pivot * k;
               }

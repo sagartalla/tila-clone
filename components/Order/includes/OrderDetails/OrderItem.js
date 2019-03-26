@@ -202,7 +202,7 @@ class OrderItem extends Component {
                   }
                 <div className={`${styles['widget-wrap']} ${styles['pt-10']} ${styles['pb-10']}`}>
                   {
-                    orderItem.status === 'DELIVERED' || !showWidget || thankyouPage
+                    !showWidget || thankyouPage
                       ?
                       null
                       :
