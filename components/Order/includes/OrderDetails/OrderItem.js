@@ -141,7 +141,7 @@ class OrderItem extends Component {
                         <Col md={3} sm={3} className={styles['ipad-pr-0']}>
                           {product.price &&
                           <span className={`${styles['flex-center']} ${styles['fs-16']} ${styles.fontW600}`}>
-                            {product.price.offer_price} {product.currency_code}
+                            {product.price.final_price} {product.currency_code}
                             <span onMouseOver={this.showToolTip} onMouseLeave={this.hideToolTip} className={`${styles.relative} ${styles['tool-tip-parent']} ${styles['checkout-quat']} ${styles['fs-12']} ${styles['flex-center']} ${styles['justify-around']}`}>
                               {'?'}
                               {showToolTip &&
@@ -156,7 +156,7 @@ class OrderItem extends Component {
                                   <li className={`${styles['flx-space-bw']} ${styles['b-t']}`}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.PRICE} :</span><span> {product.price.offer_price} {product.currency_code}</span></li>
                                   <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.SHIPPING} : </span><span>{product.price.shipping_fees ? `(+) ${product.price.shipping_fees} ${product.currency_code}` : 'FREE'}</span></li>
                                   <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.GIFT_CHARGES} : </span><span>{product.price.gift_charge ? `(+) ${product.price.gift_charge} ${product.currency_code}` : 'FREE'}</span></li>
-                                  <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.TOTAL} : </span><span className={styles['fontW600']}> {product.price.offer_price} {product.currency_code}</span></li>
+                                  <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.TOTAL} : </span><span className={styles['fontW600']}> {product.price.final_price} {product.currency_code}</span></li>
                                 </ul>
                               </div>}
                             </span>
