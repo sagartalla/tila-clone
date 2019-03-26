@@ -20,8 +20,8 @@ class Voucher extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.processData && nextProps.processData.redirect_url) {
-        window.location = nextProps.processData.redirect_url;
+    if (nextProps.processData && nextProps.processData.redirect_url) {
+      window.location = nextProps.processData.redirect_url;
     }
   }
 
@@ -35,48 +35,48 @@ class Voucher extends Component {
   }
 
   render() {
-    const {props} = this;
+    const { props } = this;
     const { voucherData, isOnlyVocuher } = props;
     const { balance, amount_to_pay, currency_code, remaining_amount } = voucherData;
     return (
       <div className={`${styles['voucher']} ${styles['p-10']}`}>
-        <div className={`${styles['lgt-blue']} ${styles['fs-16']} ${styles['p-5']}`}>Tila Credit Used</div>
+        <h3 className={`${styles['lgt-blue']} ${styles['fs-20']} ${styles['pb-10']} ${styles['fontW300']} ${styles['m-0']}`}>Tila Credit Used</h3>
         {
           isOnlyVocuher
             ?
-              <div>All other payment methods have been disabled as you have enough tila credit in your Wallet to purchace this item. Enjoy your purchase :)</div>
+            <div>All other payment methods have been disabled as you have enough tila credit in your Wallet to purchace this item. Enjoy your purchase :)</div>
             :
-              null
+            null
         }
         <div className={`${styles.flex} ${styles['justify-between']}`}>
-         <div className={`${styles.paymentBorder}`}>
-            <div className={`${styles['success-green']}`}>Total Amount To Pay</div>
-            <b>{amount_to_pay} {currency_code}</b>
+          <div className={`${styles.paymentBorder}`}>
+            <span className={`${styles['success-green']} ${styles['fs-12']}`}>Total Amount To Pay</span>
+            <b className={`${styles['pt-5']} ${styles['fs-16']}`}>{amount_to_pay} {currency_code}</b>
           </div>
           <div className={`${styles.flex} ${styles['align-center']} ${styles['thick-red-clr']}`}>
             <span>-</span>
           </div>
           <div className={`${styles.paymentBorder}`}>
-        <div className={balance < amount_to_pay ? `${styles['thick-red-clr']}` : `${styles['success-green']}`}>Money in Wallet</div>
-            <b>{balance} {currency_code}</b>
+            <span className={balance < amount_to_pay ? `${styles['thick-red-clr']} ${styles['fs-12']}` : `${styles['success-green']} ${styles['fs-12']}`}>Money in Wallet</span>
+            <b className={`${styles['pt-5']} ${styles['fs-16']}`}>{balance} {currency_code}</b>
           </div>
           <div className={`${styles.flex} ${styles['align-center']}`}>
             <span>=</span>
           </div>
           <div className={`${styles.paymentBorder}`}>
-            <div className={balance >= amount_to_pay ? `${styles['success-green']}` : `${styles['thick-red-clr']}`}>Remaining amount to pay</div>
-            <b>{remaining_amount} {currency_code}</b>
+            <span className={balance >= amount_to_pay ? `${styles['success-green']} ${styles['fs-12']}` : `${styles['thick-red-clr']} ${styles['fs-12']}`}>Remaining amount to pay</span>
+            <b className={`${styles['pt-5']} ${styles['fs-16']}`}>{remaining_amount} {currency_code}</b>
           </div>
-         
+
         </div>
         {
           isOnlyVocuher
             ?
-              <div>
-                <button onClick={this.proceedToPayment} className={`${styles['fp-btn-primary']} ${styles['fp-btn']} ${styles['border-radius']}`}>PAY USING TILA CREDIT</button>
-              </div>
+            <div>
+              <button onClick={this.proceedToPayment} className={`${styles['fp-btn-primary']} ${styles['fp-btn']} ${styles['border-radius']}`}>PAY USING TILA CREDIT</button>
+            </div>
             :
-             null
+            null
         }
 
       </div>

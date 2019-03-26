@@ -33,7 +33,7 @@ class PayOnline extends Component {
   }
 
   fetchIframe() {
-    const {data} = this.props;
+    const { data } = this.props;
     this.props.makeProcessRequest({
       payment_details: [{
         payment_mode: data.type,
@@ -57,26 +57,26 @@ class PayOnline extends Component {
     const { disableSaveCard, iframe_url } = this.state
 
     return (
-      <div className={`${styles['pay-online']} ${styles['p-10']} `}>
-          <Voucher voucherData={voucherData} />
-          <div>
-            {
-              iframe_url
-                ?
-                  <div>
-                    <iframe src={iframe_url} style={{ height: '406px', width: '500px', border: '0' }}></iframe>
-                    <div className={styles['checkbox-material']}>
-                      <input id="save-card" type="checkbox" onClick={this.saveCardHandler} disabled={disableSaveCard} />
-                      <label for="save-card"> Save this card </label>
-                    </div>
-                  </div>
-                :
-                  <div className={`${styles['p-30']} `}>
-                      <div className={`${styles['mb-25']} `}>Once you click on Add New Card. There is no going back. You can't access any other modes of payment.</div>
-                      <button className={`${styles['fp-btn-primary']} ${styles['fp-btn']} ${styles['border-radius']}`} onClick={this.fetchIframe}>Pay {data.amount_to_pay} {data.currency_code} Using New Card</button>
-                  </div>
-            }
-          </div>
+      <div className={`${styles['pay-online']}`}>
+        <Voucher voucherData={voucherData} />
+        <div>
+          {
+            iframe_url
+              ?
+              <div className={`${styles['pt-20']} ${styles['pb-20']}`}>
+                <iframe src={iframe_url} style={{ height: '426px', width: '500px', border: '0' }}></iframe>
+                <div className={styles['checkbox-material']}>
+                  <input id="save-card" type="checkbox" onClick={this.saveCardHandler} disabled={disableSaveCard} />
+                  <label for="save-card"> Save this card </label>
+                </div>
+              </div>
+              :
+              <div className={`${styles['pt-30']} ${styles['pb-30']}`}>
+                <p className={`${styles['mb-25']} `}>Once you click on Add New Card. There is no going back. You can't access any other modes of payment.</p>
+                <button className={`${styles['fp-btn-primary']} ${styles['fp-btn']} ${styles['text-uppercase']} ${styles['new-card-btn']} ${styles['fs-18']} ${styles['border-radius']}`} onClick={this.fetchIframe}>Pay {data.amount_to_pay} {data.currency_code} Using New Card</button>
+              </div>
+          }
+        </div>
       </div>
     );
   }
