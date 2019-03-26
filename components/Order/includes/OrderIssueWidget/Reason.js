@@ -172,8 +172,8 @@ class Reason extends Component {
     const { img, name } = itemData;
     const { selectedMode, displaySizeError } = this.state;
     return (
-      <div className={styles['reason-item-main']}>
-        <h4 className={`${styles['fs-20']} ${styles['fontW400']} ${styles['text-capitalize']}`}>Why do you want to {returnExchangeType} this Item?</h4>
+      <div className={`${styles['reason-item-main']} ${styles['width100']}`}>
+        <h4 className={`${styles['fs-20']} ${styles['fontW300']} ${styles['text-capitalize']} ${styles['ml-20']} ${styles['mr-20']}`}>Why do you want to {returnExchangeType} this Item?</h4>
         {returnExchangeType ? null : (
           <div
             className={`${styles['flx-spacebw-alignc']} ${styles['pb-20']} ${
@@ -204,7 +204,7 @@ class Reason extends Component {
             </div>
           </div>
         )}
-        <div className={`${styles['reason-cont']} ${styles['pb-15']}`}>
+        <div className={`${styles['reason-cont']} ${styles['pb-15']} ${styles['ml-20']} ${styles['mr-20']}`}>
           <span className={`${styles['instruction-txt']} ${styles['pb-20']} ${styles['pt-20']} ${styles['flex']} ${styles['fs-12']} ${styles['google-clr']}`}>
             {ORDER_PAGE.SELECT_CANCEL_REASON}
           </span>
