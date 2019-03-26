@@ -19,14 +19,5 @@
 		"icon": "icons/creditcards",
 		"display": "Credit Cards, Vouchers & Reward points",
 		"href": "/cam/uservault"
-	},{
-		"icon": "icons/messages",
-		"display": "Messages",
-		"count": "13",
-		"href": "/cam/messages"
-	},{
-		"icon": "icons/notifications",
-		"display": "Notifications",
-		"href": "/cam/notifications"
 	}]
 }]

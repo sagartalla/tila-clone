@@ -8,7 +8,7 @@ import Search from './Search';
 import ActionBar from './ActionBar';
 import MegaMenu from './includes/MegaMenu';
 import SearchFilters from '../common/SearchFilters';
-import Betalogo from '../../components/common/beta';
+// import Betalogo from '../../components/common/beta';
 import { mergeCss } from '../../utils/cssUtil';
 import publicUrls from '../../constants';
 import { actionCreators, selectors } from '../../store/search';
@@ -17,16 +17,21 @@ const styles = mergeCss('components/HeaderBar/header');
 const HeaderBar = props => (
   <div className={`${styles['header-container']}`}>
     <div className={`${styles['header-container-inn']} ${ props.showFitlers ? styles['faded'] : {} }`}>
-      <Betalogo />
       <Grid>
         <Row className={`${styles['flex-center']} ${styles['pb-10']} ${styles['pt-10']} ${styles['border-b']}`}>
           <Col md={1} sm={2}>
             <Logo />
           </Col>
           <Col md={props.showFitlers ? 6 : 7} sm={5}>
-            <NoSSR>
-              <Search />
-            </NoSSR>
+            {
+              props.hideSearch
+                ?
+                null
+                :
+                <NoSSR>
+                  <Search />
+                </NoSSR>
+            }
           </Col>
           {
             props.showFitlers
@@ -45,16 +50,23 @@ const HeaderBar = props => (
         </Row>
       </Grid>
     </div>
-    <div className={styles['header-megamenu']}>
-      <div className={styles['header-megamenu-inn']}></div>
-      <div className={styles['header-meganenu-sub']}>
-        <Row className={styles['m-0']}>
-          <Col md={12}>
-            <MegaMenu query={props.query} />
-          </Col>
-        </Row>
-      </div>
-    </div>
+    {
+      props.hideMegamenu
+        ?
+        null
+        :
+        <div className={styles['header-megamenu']}>
+          <div className={styles['header-megamenu-inn']}></div>
+          <div className={styles['header-meganenu-sub']}>
+            <Row className={styles['m-0']}>
+              <Col md={12}>
+                <MegaMenu query={props.query} />
+              </Col>
+            </Row>
+          </div>
+        </div>
+    }
+
   </div>
 );
 

@@ -3,7 +3,7 @@ import { configureUrlQuery } from 'react-url-query';
 import createHistory from 'history/createBrowserHistory';
 import Cookies from 'universal-cookie';
 
-import { uuidv4 } from '../store/helper/util';
+// import { uuidv4 } from '../store/helper/util';
 import { actionCreators, selectors } from '../store/auth';
 import makeStore from '../store';
 
@@ -17,9 +17,9 @@ class Base extends Component {
     const history = createHistory();
     configureUrlQuery({ history });
     // window.elasticApm.setInitialPageLoadName(this.pageName);
-    if(!cookies.get('sessionId')) {
-      this.props.setSessionID(uuidv4())
-    }
+    // if(!cookies.get('sessionId')) {
+    //   this.props.setSessionID(uuidv4())
+    // }
     digitalData.page.pageInfo[ 'pageType' ]= this.pageName;
     digitalData.page.pageInfo.pageName = this.pageName;
 

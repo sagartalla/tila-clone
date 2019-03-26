@@ -121,11 +121,6 @@ class TitleInfo extends Component {
               <div className={`${styles['ti-rating-wrap']} ${styles['pr-5']}`}>
                 {rating.rating} {rating.count}
               </div>
-              <div className={`${styles['ti-reviews-wrap']} ${styles['fs-12']}`}>
-                <span className={`${styles['pr-5']} ${styles['pl-5']}`}>{PDP_PAGE.READ_EXPERT_REVIEW}</span>
-                <span className={`${styles['pr-5']} ${styles['pl-5']}`}>{PDP_PAGE.CUSTOMER_REVIEW}</span>
-                <span className={`${styles['pr-5']} ${styles['pl-5']}`}>{PDP_PAGE.ASK_QUESTION}</span>
-              </div>
             </div>
         }
         {
