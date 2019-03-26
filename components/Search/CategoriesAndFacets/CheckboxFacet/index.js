@@ -64,7 +64,7 @@ class CheckboxFacet extends Component {
               <SVGCompoent clsName={`${styles['expand-icon']}`} src="icons/common-icon/down-arrow-circle" />
             </Panel.Title>
           </Panel.Heading>
-          <Panel.Body collapsible>
+          <Panel.Body collapsible className={`${styles['border-b']}`}>
             <ul className={`${styles['category-sub-list']} ${styles['pl-20']} ${styles['pt-15']}`}>
               {
                 filter.children.slice(0, this.state.maxRows).map(childFitler => (
