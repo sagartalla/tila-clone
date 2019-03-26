@@ -20,22 +20,6 @@ const couponOffersData = typeToReducer({
         ...state,
       }),
   },
-  [actions.SHOW_TERMS]: {
-    PENDING: state => ({
-      ...state,
-    }),
-    FULFILLED: (state, action) => {
-      const { payload } = action;
-      return {
-        ...state,
-        termsAndConditions: payload.data,
-      };
-    },
-    REJECTED: state => (
-      {
-        ...state,
-      }),
-  },
 }, initialState);
 
 export default couponOffersData;
