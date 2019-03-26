@@ -51,7 +51,7 @@ const getCartResults = (store) => {
       });
     }
 
-    newData.items = newData.items.reverse();
+    // newData.items = newData.items.reverse();
     return newData;
   }
   return {};
