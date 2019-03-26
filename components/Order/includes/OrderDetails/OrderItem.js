@@ -72,9 +72,10 @@ class OrderItem extends Component {
     // });
   };
 
-  cancelledDate = (estimates) => {
+  getDate = (estimates) => {
+    const { orderItem } = this.props;
     if (estimates.length > 0) {
-      return moment(estimates.filter(state => state.status === 'CANCELLED')[0].actual_time).format('Do, dddd');
+      return moment(estimates.filter(state => state.status === orderItem.status)[0].actual_time).format('Do, dddd');
     } return '';
   }
 
@@ -140,7 +141,7 @@ class OrderItem extends Component {
                         <Col md={3} sm={3} className={styles['ipad-pr-0']}>
                           {product.price &&
                           <span className={`${styles['flex-center']} ${styles['fs-16']} ${styles.fontW600}`}>
-                            {product.price.offer_price} {product.currency_code}
+                            {product.price.final_price} {product.currency_code}
                             <span onMouseOver={this.showToolTip} onMouseLeave={this.hideToolTip} className={`${styles.relative} ${styles['tool-tip-parent']} ${styles['checkout-quat']} ${styles['fs-12']} ${styles['flex-center']} ${styles['justify-around']}`}>
                               {'?'}
                               {showToolTip &&
@@ -155,7 +156,7 @@ class OrderItem extends Component {
                                   <li className={`${styles['flx-space-bw']} ${styles['b-t']}`}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.PRICE} :</span><span> {product.price.offer_price} {product.currency_code}</span></li>
                                   <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.SHIPPING} : </span><span>{product.price.shipping_fees ? `(+) ${product.price.shipping_fees} ${product.currency_code}` : 'FREE'}</span></li>
                                   <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.GIFT_CHARGES} : </span><span>{product.price.gift_charge ? `(+) ${product.price.gift_charge} ${product.currency_code}` : 'FREE'}</span></li>
-                                  <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.TOTAL} : </span><span className={styles['fontW600']}> {product.price.offer_price} {product.currency_code}</span></li>
+                                  <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.TOTAL} : </span><span className={styles['fontW600']}> {product.price.final_price} {product.currency_code}</span></li>
                                 </ul>
                               </div>}
                             </span>
@@ -180,7 +181,7 @@ class OrderItem extends Component {
                     <div>
                       <div className={styles['fs-12']}>{displayText()}</div>
                       <div className={`${styles['ff-t']} ${styles['fs-26']} ${styles['ipad-fs-20']}`}>
-                        {btnType === 'cancel' ? moment(orderItem.products[0].promisedDeliveryDate).format('Do, dddd') : showWidget && !thankyouPage ? this.cancelledDate(orderItem.products[0].state_time_estimates) : null}
+                        {btnType === 'cancel' ? moment(orderItem.products[0].promisedDeliveryDate).format('Do, dddd') : showWidget && !thankyouPage ? this.getDate(orderItem.products[0].state_time_estimates) : null}
                       </div>
                     </div>
                   </div>
@@ -201,7 +202,7 @@ class OrderItem extends Component {
                   }
                 <div className={`${styles['widget-wrap']} ${styles['pt-10']} ${styles['pb-10']}`}>
                   {
-                    orderItem.status === 'DELIVERED' || !showWidget || thankyouPage
+                    !showWidget || thankyouPage
                       ?
                       null
                       :

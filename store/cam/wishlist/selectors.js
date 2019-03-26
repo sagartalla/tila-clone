@@ -30,7 +30,7 @@ const getWishListResults = (store) => {
       });
     });
 
-    return newData.reverse();
+    return newData;
   }
   return [];
 }
