@@ -181,7 +181,7 @@ class CartItem extends React.Component {
                     <p className={`${styles['mb-0']} ${styles['fs-12']}`}>
                       <span>{CART_PAGE.SHIPPING} : </span>
                       <span className={`${styles['pl-10']} ${styles['pr-10']}`}>{CART_PAGE.REGULAR_SHIPPING}  ({shipping.shipping_fees + ' ' + cur}) - <span className={`${styles['fs-12']} ${styles['base-font']}`}>{CART_PAGE.ETA_DELIVERY_BY} {moment().add(shipping.shipping_days, 'days').format('LL')}</span>
-                      </span><a href="" className={`${styles['fontW600']}`}> {CART_PAGE.VIEW_MORE}</a>
+                      </span>
                     </p>
                   </div>
                   <div data-id={item_id} className={`${styles['checkbox-material']} ${styles['mt-15']}`}>
