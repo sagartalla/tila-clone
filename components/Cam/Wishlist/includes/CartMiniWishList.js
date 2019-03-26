@@ -7,6 +7,8 @@ import { languageDefinations } from '../../../../utils/lang/';
 import { mergeCss } from '../../../../utils/cssUtil';
 const styles = mergeCss('components/Cart/cart');
 
+import constants from '../../../../constants';
+
 const { CART_PAGE } = languageDefinations();
 
 class CartMiniWishList extends Component {
@@ -34,7 +36,7 @@ class CartMiniWishList extends Component {
             tempData.length > 0 && tempData.map((item, i) => {
               return (
                 <span key={i} className={`${styles['wishlist-img']} ${styles['mr-15']}`}>
-                  <img className={styles['img']} src={item.img} />
+                  <img className={styles['img']} src={`${constants.mediaDomain}/${item.img}`} />
                 </span>
               )
             })

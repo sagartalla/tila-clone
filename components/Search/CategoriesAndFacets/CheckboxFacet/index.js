@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Checkbox, Panel, Heading, Body, Title } from 'react-bootstrap';
-import SVGCompoent from '../../common/SVGComponet';
-import { mergeCss } from '../../../utils/cssUtil';
+import SVGCompoent from '../../../common/SVGComponet';
+import { mergeCss } from '../../../../utils/cssUtil';
 const styles = mergeCss('components/Search/search');
-import {languageDefinations} from '../../../utils/lang';
+import {languageDefinations} from '../../../../utils/lang';
 const {SEARCH_PAGE} = languageDefinations()
 const MaxItems = 3;
 

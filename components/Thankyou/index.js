@@ -6,7 +6,7 @@ import { selectors, actionCreators } from '../../store/order';
 
 import PaymentStatus from './includes/PaymentStatus';
 import OrderDetails from '../Order/includes/OrderDetails';
-import PaymentHeader from '../Payments/includes/PaymentHeader';
+import HeaderBar from '../HeaderBar';
 
 import { mergeCss } from '../../utils/cssUtil';
 const styles = mergeCss('components/Thankyou/thankyou');
@@ -38,7 +38,7 @@ class Thankyou extends Component {
 
     return (
       <div className={styles['thankyou']}>
-        <PaymentHeader />
+        <HeaderBar hideSearch hideMegamenu/>
         <PaymentStatus
           status={status}
           orderId={orderId}

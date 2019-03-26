@@ -10,7 +10,7 @@ import { toast } from 'react-toastify';
 import Cart from '../Cart';
 import SignIn from './includes/SignIn';
 import PaymentMode from './includes/PaymentMode';
-import PaymentHeader from './includes/PaymentHeader';
+import HeaderBar from '../HeaderBar';
 import LoyaltyPoints from './includes/LoyaltyPoints';
 import OffersAndDiscounts from './includes/OffersAndDiscounts';
 import RightSideBar from '../Cart/CartPaymentSideBar';
@@ -255,8 +255,8 @@ class Payments extends React.Component {
 
     return (
       <div className={styles['payment']}>
-        <PaymentHeader />
-        <Grid>
+        <HeaderBar hideSearch hideMegamenu/>
+        <Grid className={styles['pt-75']}>
           <Row>
             <Col xs={12} md={12} sm={12}>
               <h4 className={`${styles['mt-30']} ${styles['mb-20']} ${styles['light-gry-clr']}`}>{PAYMENT_PAGE.SECURE_CHECKOUT}</h4>
