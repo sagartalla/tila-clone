@@ -5,10 +5,5 @@ const getCouponOffers = (store) => {
   }
 };
 
-const getTermsAndConditions = (store) => {
-  if (store.couponOffersData.termsAndConditions) {
-    return store.couponOffersData.termsAndConditions;
-  }
-}
 
-export { getCouponOffers, getTermsAndConditions };
+export { getCouponOffers };

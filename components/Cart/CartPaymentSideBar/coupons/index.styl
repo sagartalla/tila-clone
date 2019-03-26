@@ -25,10 +25,7 @@
 
 .couponCodeListing
     padding: 7px;
-    border-top-right-radius: 7px;
-    border-bottom-right-radius: 7px;
-    width: 40%;
-    border-right: 0 !important;
+    width: 50%;
     margin-top: 10px;
     height: 33px;
     text-align: center;
@@ -45,58 +42,6 @@
     left: -8px;
     width: 0;
     border-bottom: 10px solid listing-triangle-color;
-    border-left: 10px solid transparent;
-    top: 27%;
-    transform: rotate(-90deg);
-}
-.couponCodeCategory
-    padding: 7px;
-    border-top-right-radius: 7px;
-    border-bottom-right-radius: 7px;
-    width: 40%;
-    border-right: 0 !important;
-    margin-top: 10px;
-    height: 33px;
-    text-align: center;
-    left: -10px;
-    position: relative;
-    border: solid 1.3px category-border;
-    background-color: category-background-color;
-
-
-.couponCodeCategory:after {
-    content: '';
-    display: block;
-    position: relative;
-    left: -8px;
-    width: 0;
-    border-bottom: 10px solid category-triangle;
-    border-left: 10px solid transparent;
-    top: 27%;
-    transform: rotate(-90deg);
-}
-
-.couponCodeBank
-    padding: 7px;
-    border-top-right-radius: 7px;
-    border-bottom-right-radius: 7px;
-    width: 40%;
-    border-right: 0 !important;
-    margin-top: 10px;
-    height: 33px;
-    text-align: center;
-    left: -10px;
-    position: relative;
-    border: solid 1.3px bank-border;
-    background-color: bank-background-color;
-
-.couponCodeBank:after {
-    content: '';
-    display: block;
-    position: relative;
-    left: -8px;
-    width: 0;
-    border-bottom: 10px solid bank-triangle;
     border-left: 10px solid transparent;
     top: 27%;
     transform: rotate(-90deg);
@@ -129,7 +74,7 @@
 
 .modalClassName
    position absolute
-   top 12%
+   top 10%
 
 .applied 
    color: green-applied;
@@ -137,7 +82,10 @@
 .buttonStyle
    left: 55%;
    bottom: 0%;
+   height: 68%;
    position: absolute;
+   border: 1px solid thick-blue;
+   border-radius: 5px;
 
 .wordBreak
    word-break: break-all;
@@ -159,7 +107,7 @@
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
-  max-width: 100px;
+  max-width: 500;
 }
 
 .applyCoupon {
@@ -179,4 +127,8 @@
     border: 1px solid #c8c7cc;
     padding: 10px 25px;
     background-color: #fff;
+}
+
+body.c3 {
+    display: none !important;
 }
