@@ -4,6 +4,7 @@ import { Grid, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import _ from 'lodash';
+import SVGComponent from '../../../common/SVGComponet';
 
 import { actionCreators, selectors } from '../../../../store/payments';
 
@@ -51,7 +52,7 @@ class SavedCards extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.processData && nextProps.processData.redirect_url) {
+    if (nextProps.processData && nextProps.processData.redirect_url) {
       window.location = nextProps.processData.redirect_url;
     }
   }
@@ -66,36 +67,54 @@ class SavedCards extends Component {
     });
   }
 
+  paymentIcons(provider_type) {
+    switch (provider_type) {
+      case 'Visa':
+        return "icons/cards-icons-list/bg-visa-icon";
+      case 'Mastercard':
+        return "icons/cards-icons-list/bg-master-icon";
+      case 'Maestro':
+        return "icons/cards-icons-list/bg-mastro-icon";
+    }
+  }
+
   render() {
     const { data, voucherData } = this.props;
     return (
-      <div className={`${styles['saved-cards']} ${styles['p-10']} `}>
+      <div className={`${styles['saved-cards']}`}>
         <Voucher voucherData={voucherData} />
-        <ul>
-        {
-          data.cards_list.map((card, index) => {
-            return (
-              <li className={styles['saved-card-item']}>
-                <input
-                  id={`card-${index}`}
-                  name="credit-card"
-                  type='radio'
-                  onClick={this.selectCard(card.card_token)}
-                  checked={this.state.card_token ? (this.state.card_token === card.card_token) : card.default}
-                />
-                <label for={`card-${index}`} className={styles['card-label']}>
-                  <div className={`${styles['flex']} ${styles['justify-between']}`}>
-                    <div>{card.masked_number}</div>
-                    <div>{card.holder_name}</div>
-                    <div>{`${card.expiry_month}/${card.expiry_year}`}</div>
-                  </div>
-                </label>
-              </li>
-            );
-          })
-        }
+        <h4 className={`${styles['lgt-blue']} ${styles['fontW300']} ${styles['fs-20']} ${styles['pt-25']}`}>Your saved Credit & Debit cards</h4>
+        <ul className={`${styles['saved-cards-part']} ${styles['pl-0']}`}>
+          {
+            data.cards_list.map((card, index) => {
+              return (
+                <li className={`${this.state.card_token === card.card_token ? styles['card-active'] : ''} ${styles['saved-card-item']} ${styles['mt-20']} ${styles['mb-20']}`}>
+                  <input
+                    id={`card-${index}`}
+                    className={styles['radio-btn']}
+                    name="credit-card"
+                    type='radio'
+                    onClick={this.selectCard(card.card_token)}
+                    checked={this.state.card_token ? (this.state.card_token === card.card_token) : card.default}
+                  />
+                  <label for={`card-${index}`} className={`${styles['card-label']} ${styles['flex']} ${styles['justify-between']}`}>
+                    <span className={`${styles['flex']} ${styles['fontW300']}`}>
+                      {
+                        this.paymentIcons(card.provider_type) ?
+                          <SVGComponent clsName={`${styles['vault-card']}`} src={this.paymentIcons(card.provider_type)} />
+                          : ''
+                      }
+                      <span className={`${styles['card-no']}`}>{card.masked_number}</span>
+                    </span>
+                    <span className={`${styles['flex']} ${styles['fontW300']} ${styles['thick-gry-clr']}`}>{card.holder_name}</span>
+                    <span className={`${styles['flex']} ${styles['fontW300']} ${styles['thick-gry-clr']}`}>{`${card.expiry_month}/${card.expiry_year}`}</span>
+                  </label>
+                </li>
+              );
+            })
+          }
         </ul>
-        <button onClick={this.proceedToPayment} className={`${styles['fp-btn-primary']} ${styles['fp-btn']} ${styles['border-radius']}`}>Pay {data.amount_to_pay} {data.currency_code}</button>
+        <button onClick={this.proceedToPayment} className={`${styles['fp-btn-primary']} ${styles['fp-btn']} ${styles['fs-18']} ${styles['text-uppercase']} ${styles['pay-btn']} ${styles['border-radius']}`}>Pay {data.amount_to_pay} {data.currency_code}</button>
       </div>
     );
   }
