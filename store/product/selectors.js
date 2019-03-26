@@ -58,7 +58,7 @@ const getProduct = (store, variantId) => {
     discountPercent: '',
     listingId: priceInfo ? priceInfo.listing_id : 'No Listing',
     totalInventoryCount: priceInfo ? priceInfo.total_inventory_count : 0,
-    product_id,
+    product_id: product_details.product_id,
     itemtype: product_details.catalog_details.item_type_name,
     media: imgUrls[0].url,
     categoryId: tree.breadcrumb[tree.breadcrumb.length - 1].id,

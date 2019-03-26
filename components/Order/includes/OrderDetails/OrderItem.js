@@ -72,9 +72,10 @@ class OrderItem extends Component {
     // });
   };
 
-  cancelledDate = (estimates) => {
+  getDate = (estimates) => {
+    const { orderItem } = this.props;
     if (estimates.length > 0) {
-      return moment(estimates.filter(state => state.status === 'CANCELLED')[0].actual_time).format('Do, dddd');
+      return moment(estimates.filter(state => state.status === orderItem.status)[0].actual_time).format('Do, dddd');
     } return '';
   }
 
@@ -180,7 +181,7 @@ class OrderItem extends Component {
                     <div>
                       <div className={styles['fs-12']}>{displayText()}</div>
                       <div className={`${styles['ff-t']} ${styles['fs-26']} ${styles['ipad-fs-20']}`}>
-                        {btnType === 'cancel' ? moment(orderItem.products[0].promisedDeliveryDate).format('Do, dddd') : showWidget && !thankyouPage ? this.cancelledDate(orderItem.products[0].state_time_estimates) : null}
+                        {btnType === 'cancel' ? moment(orderItem.products[0].promisedDeliveryDate).format('Do, dddd') : showWidget && !thankyouPage ? this.getDate(orderItem.products[0].state_time_estimates) : null}
                       </div>
                     </div>
                   </div>
