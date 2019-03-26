@@ -66,7 +66,7 @@ const getProductComponent = (isPreview, taskCode) => {
           // if (index > -1 && arr.length <= 5) {
           //   arr = arr.slice(index, 1);
           // } else
-          if (arr.length == 5) {
+          if (arr.length === 15) {
             arr.pop();
           }
 

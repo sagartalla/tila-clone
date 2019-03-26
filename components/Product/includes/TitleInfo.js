@@ -135,7 +135,8 @@ class TitleInfo extends Component {
             :
             <div className={`${styles['flex-center']} ${styles['checkout-instantly']} ${styles['pt-10']}`}>
               <div className={`${styles.flex}`}>
-                <a className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['small-btn']}`} onClick={this.checkoutInstantHandler}>{PDP_PAGE.CHECKOUT_INSTANT}</a>
+                {totalInventoryCount > 0 &&
+                  <a className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['small-btn']}`} onClick={this.checkoutInstantHandler}>{PDP_PAGE.CHECKOUT_INSTANT}</a>}
               </div>
               <div>
                 {

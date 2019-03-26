@@ -56,7 +56,7 @@ const popover = ({strickedPrice: mrp, sellingPrice:sp, offerDiscounts, showPrise
           </div>
         </div>
         <div>
-          <div className={`${styles['p-5']} ${styles['mt-5']} ${styles['overall-amount']}`}>Overall you save ${`${discountMrp} ${currency}`} on this Product</div>
+          <div className={`${styles['p-5']} ${styles['mt-5']} ${styles['overall-amount']}`}>Overall you save {`${discountMrp} ${currency}`} on this Product</div>
         </div>
       </div>
     </Popover>
