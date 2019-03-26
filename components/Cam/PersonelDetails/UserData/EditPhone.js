@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Dropdown } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import Btn from '../../../common/Button';
 import Input from '../../../common/Input';
@@ -7,17 +7,38 @@ import Input from '../../../common/Input';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators, selectors } from '../../../../store/cam/personalDetails';
-
+import Cookies from 'universal-cookie';
 import { mergeCss } from '../../../../utils/cssUtil';
 import {languageDefinations} from '../../../../utils/lang';
+import CountryDialCode from '../../../common/CountryDialCode';
+import FormValidator from '../../../common/FormValidator'
 const styles = mergeCss('components/Cam/PersonelDetails/profile');
 const {CONTACT_INFO_MODAL} = languageDefinations();
+const cookies = new Cookies();
+
+const language = cookies.get('language') || 'en';
+const country = cookies.get('country') || 'SAU';
+
 class EditPhone  extends React.Component {
-  state = {
-    phoneNumber: "",
-    otp: "",
-    error: "",
-    show: false
+  constructor(props) {
+    super(props);
+    this.validations = new FormValidator([
+      {
+        field:'phoneNumber',
+        method:this.isEmptyString,
+        message:'phone number cannot be empty',
+        validWhen:false
+      }
+    ])
+
+    this.state = {
+      phoneNumber: "",
+      otp: "",
+      error: "",
+      show: false,
+      countryCode:country,
+      validation:this.validations.valid()
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -34,7 +55,29 @@ class EditPhone  extends React.Component {
       });
     }
   }
+  optionChange = (e) => {
+    this.setState({countryCode:e.target.value})
+  }
+  isEmptyString = (fieldValue) => {
+    if(fieldValue === '') {
+      return true
+    }
+    return false
+  }
+  fetchOtp = () => {
+    const { countryCode,phoneNumber} = this.state
+    let validation = this.validations.validate(this.state)
+    this.setState({ validation })
+    if(validation.isValid) {
+      const params = {
+        mobile_country_code:countryCode,
+        mobile_no:phoneNumber
+      }
 
+      this.props.otpUserUpdate(params)
+    }
+
+  }
   handleClose = () => {
     this.setState({
       show: false,
@@ -46,9 +89,10 @@ class EditPhone  extends React.Component {
   }
 
   handlePhoneNumberChange = (e) => {
-    this.setState({ phoneNumber: e.target.value });
+    if(/^[0-9]*$/gm.test(e.target.value)) {
+        this.setState({ phoneNumber: e.target.value });
+    }
   }
-
   handleOTPChange = (e) => {
       this.setState({ otp: e.target.value });
   }
@@ -64,7 +108,7 @@ class EditPhone  extends React.Component {
   }
 
   render(){
-  const {phoneNumber, error, otp} = this.state;
+  const {phoneNumber, error, otp,countryCode,validation} = this.state;
   return (
     <div className={styles['editProfileModal']}>
     <Row>
@@ -84,9 +128,40 @@ class EditPhone  extends React.Component {
       <Col xs={4} md={4} />
     </Row>
     <Row className={`${styles['m-5']} ${styles['mt-20']}`}>
-      <Col xs={12} md={12} className={styles['box']}>
-        <div>{CONTACT_INFO_MODAL.PHONE_NUMBER}</div>
-        <Input placeholder={`${CONTACT_INFO_MODAL.ENTER} ${CONTACT_INFO_MODAL.PHONE_NUMBER}`} type="number" val={phoneNumber} onChange={this.handlePhoneNumberChange} />
+      <Col xs={12} md={12} className={`${styles['relative']} ${styles['box']}`}>
+          <Col xs={5} md={5} >
+            <div>
+              <label>Mobile number</label>
+              <select onChange={this.optionChange}>
+                {
+                  Object.keys(CountryDialCode).map(
+                    (value, index) => ( <option
+                                  key={CountryDialCode[value].code}
+                                  value={CountryDialCode[value].code}>
+                                  {CountryDialCode[value].code}
+                                </option>
+                    ))
+                }
+              </select>
+            </div>
+          </Col>
+          <Col xs={7} md={7}>
+            <div className={`${styles['phoneInpt']}`}>
+              {
+                validation.phoneNumber.isInValid ?
+                <div className={`${styles['fs-12']}`}>
+                  <span>{validation.phoneNumber.message}</span>
+                </div>: null
+              }
+              <Input
+                placeholder={`${CONTACT_INFO_MODAL.ENTER} ${CONTACT_INFO_MODAL.PHONE_NUMBER}`}
+                type="text"
+                val={phoneNumber}
+                onChange={this.handlePhoneNumberChange}
+              />
+            <div className={`${styles['show-otp']}`} onClick={this.fetchOtp}>send otp</div>
+            </div>
+          </Col>
       </Col>
       <Col xs={12} md={12} className={styles['box']}>
         <div>{CONTACT_INFO_MODAL.ENTER} {CONTACT_INFO_MODAL.OTP}</div>
@@ -116,6 +191,12 @@ const mapStateToProps = (store) => ({
   userInfo: selectors.getUserInfo(store)
 });
 
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    otpUserUpdate:actionCreators.otpUserUpdate
+  },dispatch)
+}
+
 EditPhone.propTypes = {
   show: PropTypes.bool,
   handleShow: PropTypes.func.isRequired,
@@ -123,4 +204,4 @@ EditPhone.propTypes = {
   userInfo: PropTypes.object
 };
 
-export default connect(mapStateToProps)(EditPhone);
+export default connect(mapStateToProps,mapDispatchToProps)(EditPhone);

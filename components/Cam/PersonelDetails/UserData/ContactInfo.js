@@ -67,9 +67,10 @@ class ContactInfo extends React.Component {
             <span onClick={this.handleShow(true, `password`)} className={`${styles['float-r']} ${styles['flex']} ${styles['p-0']} ${styles['ml-5']}`}>
               <SVGComponent clsName={`${styles['edit-icon']}`} src="icons/common-icon/edit/edit-penc" />
             </span>
-          </Col> 
+          </Col>
         </div>
         <div className={`${styles['flex-center']} ${styles['pt-10']} ${styles['pb-10']}`}>
+
           <Col xs={12} md={3} className={`${styles['pl-0']} ${styles['pr-0']}`}>
             <span>{CONTACT_INFO_MODAL.PHONE_NUMBER}</span>
           </Col>
@@ -77,14 +78,19 @@ class ContactInfo extends React.Component {
             <span>{phoneNum}</span>
           </Col>
           <Col xs={6} md={1} className={styles['pr-0']}>
-            {/* <span className={`${styles['float-r']} ${styles['p-0']} ${styles['ml-5']}`}>
-              <a onClick={this.handleShow(true, `phone`)}>Edit</a>
-            </span> */}
+            <span
+              onClick={this.handleShow(true, `phone`)}
+              className={`${styles['float-r']} ${styles['flex']} ${styles['p-0']} ${styles['ml-5']}`}>
+              <SVGComponent
+                clsName={`${styles['edit-icon']}`}
+                src="icons/common-icon/edit/edit-penc"
+              />
+            </span>
           </Col>
         </div>
-        <div className={show ? `${styles['modalContainer']} ${styles['showDiv']}` : `${styles['modalContainer']} ${styles['hideDiv']}`}>
-          <div className={`${styles['disabled']}`}>
-          </div>
+        <div className={show ? `${styles['modalContainer']} ${styles['showDiv']}`
+          : `${styles['modalContainer']} ${styles['hideDiv']}`}>
+          <div className={`${styles['disabled']}`}></div>
         </div>
         <div className={show ? `${styles['openModal']}` : `${styles['closeModal']}`}>
           <UpdateContactInfoModal
