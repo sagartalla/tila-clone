@@ -28,8 +28,8 @@ function sessionCookie(req, res, next) {
   }
   const sid = req.universalCookies.get('sid');
   if (!sid || sid.length === 0) {
-    req.universalCookies.set('sid', uuidv4());
-    res.cookie('sid', req.universalCookies.get('sid'));
+    req.universalCookies.set('sessionId', uuidv4());
+    res.cookie('sessionId', req.universalCookies.get('sid'));
   }
   next()
 }
