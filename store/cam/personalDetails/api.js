@@ -38,12 +38,19 @@ const forgotPassword = (body) => {
 const otpUserUpdate = async(params) => {
   try {
     const update = await axios.put(`${constants.CMS_API_URL}/api/v1/user/update`,params)
-    const otpResponse = await axios.post(`${constants.CMS_API_URL}/api/v1/verification/mobile`)
+    const otpResponse = await verifyMobile()
 
-    return otpResponse
+    return update
   }catch(error) {
     return error.response.data
   }
+}
+const verifyMobileOtp = async() => {
+  const response =  await axios.post(`${constants.CMS_API_URL}/api/v1/verification/mobile`)
+  return response
+}
+const verifyOtp = (params) => {
+  return axios.put(`${constants.CMS_API_URL}/api/v1/verification/mobile/otp`,params)
 }
 const editPersonalInfo = (body) => {
   return axios.put(`${constants.CMS_API_URL}/api/v1/user/account/edit`, body).then(({ data }) => {
@@ -60,5 +67,5 @@ const deactivateUserProfile = () =>
 
 export default {
   getUserProfileInfo, changePassword, forgotPassword, editPersonalInfo,
-  deactivateUserProfile, resetPassword, otpUserUpdate
+  deactivateUserProfile, resetPassword, otpUserUpdate, verifyOtp,verifyMobileOtp
 };

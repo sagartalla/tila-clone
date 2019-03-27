@@ -154,7 +154,44 @@
       position absolute
       right 0
       top 8px
+.loader-div
+  width 20px
+  position absolute
+  z-index 14
+  top 170px
+  left 202px
+  .loader-styl
+    width 40px
+    height 40px
+    svg
+      animation rotate 1.4s linear infinite;
+      -webkit-animation rotate 1.4s linear infinite;
+      -moz-animation rotate 1.4s linear infinite;
+      @keyframes rotate {
+        to {
+          transform rotate(360deg);
+        }
+      }
 
+      @-webkit-keyframes rotate {
+        to {
+          -webkit-transform rotate(360deg);
+        }
+      }
+
+      @-moz-keyframes rotate {
+        to {
+          transform rotate(360deg);
+        }
+      }
+.mobile-tick-icon
+  width 101px
+  height 146px
+  object-fit contain
+  .mobiletick-icon-styl
+    width 101px
+    height 146px
+    object-fit contain
 @keyframes slideOpen {
   from {right: -800px;}
   to {right: 0;}

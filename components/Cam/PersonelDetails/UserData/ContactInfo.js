@@ -80,7 +80,7 @@ class ContactInfo extends React.Component {
           <Col xs={6} md={1} className={styles['pr-0']}>
             <span
               onClick={this.handleShow(true, `phone`)}
-              className={`${styles['float-r']} ${styles['flex']} ${styles['p-0']} ${styles['ml-5']}`}>
+              className={`${styles['float-r']} ${styles['pointer']} ${styles['flex']} ${styles['p-0']} ${styles['ml-5']}`}>
               <SVGComponent
                 clsName={`${styles['edit-icon']}`}
                 src="icons/common-icon/edit/edit-penc"

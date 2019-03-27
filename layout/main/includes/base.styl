@@ -52,7 +52,10 @@ input[type=text],input[type=password], input[type=email]
   border-bottom 1px solid light-border
   // box-shadow none !important
   border-radius 0 !important
-
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button
+    -webkit-appearance none
+    margin 0
 /* font sizes */
 // it will generate fonts from fs-10, fs-12, fs-14, ...., to fs-40.
 for i in range(10px, 46px, 2)
