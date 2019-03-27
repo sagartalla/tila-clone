@@ -102,7 +102,7 @@ class Login extends Component {
     return true;
   }
 
-  acceptsTerms = (event) => {
+  acceptsOffers = (event) => {
     let { clicked } = this.state;
     if (event.target.checked) {
       clicked = true;
@@ -308,7 +308,7 @@ class Login extends Component {
                   this.state.mode === 'register'
                     ?
                       <div className={`${styles['checkbox-material']} ${styles.flex} ${styles['pb-15']}`}>
-                          <input id="deals-offers-reg" type="checkbox" onChange={this.acceptsTerms} checked={clicked} />
+                          <input id="deals-offers-reg" type="checkbox" onChange={this.acceptsOffers} checked={clicked} />
                           <label htmlFor="deals-offers-reg">
                              I would like to receive deals and offers.
                           </label>
