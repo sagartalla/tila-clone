@@ -3,6 +3,8 @@ import Slider from "react-slick";
 import PropTypes from 'prop-types';
 import { Grid, Col } from 'react-bootstrap';
 
+import constants from '../../../../constants';
+
 import { languageDefinations } from '../../../../utils/lang/';
 
 import { mergeCss } from '../../../../utils/cssUtil';
@@ -41,7 +43,7 @@ class CartBottomPopup extends Component {
                 const { wishlist_id, listing_id, brand_name, name, img, price, cur } = item;
                 return (
                   <div key={i} className={`${styles['item']} ${styles['flex']} ${styles['flex-colum']}`}>
-                    <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles['wish-pop-img']}`}><img className={styles['img']} src={img} /></div>
+                    <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles['wish-pop-img']}`}><img className={styles['img']} src={`${constants.mediaDomain}/${img}`} /></div>
                     <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']}`}>
                       <h5 className={`${styles['label-gry-clr']} ${styles['fs-12']} ${styles['t-c']}`}>{name}</h5>
                       <span className={`${styles['light-gry-clr']} ${styles['t-c']}`}>
