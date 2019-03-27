@@ -313,9 +313,9 @@ class Payments extends React.Component {
                     </div>
                     : null
                 }
-                <div className={styles['secure-img']}>
+                {/*<div className={styles['secure-img']}>
                   <img className={styles['']} src={"/static/img/bg-img/group-cards.png"} />
-                </div>
+                </div>*/}
               </div>
             </Col>
           </Row>
