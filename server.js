@@ -31,19 +31,14 @@ function sessionCookie(req, res, next) {
     req.universalCookies.set('sessionId', uuidv4());
     res.cookie('sessionId', req.universalCookies.get('sessionId'));
   }
-  next()
-}
 
-
-server.get('/', (req, res) => {
-  const cookieString = req.headers.cookie || '';
-  global.APP_LANGUAGE = (cookieString.match(/language=(.+?);/) || [])[1] || 'en';
-  global.APP_COUNTRY = (cookieString.match(/country=(.+?);/) || [])[1]|| 'SAU';
+  global.APP_LANGUAGE = req.universalCookies.get('language') || 'en';
+  global.APP_COUNTRY = req.universalCookies.get('country') || 'SAU';
   res.cookie('language', global.APP_LANGUAGE);
   res.cookie('country', global.APP_COUNTRY);
-  res.redirect(302, '/' + APP_COUNTRY + '/' + APP_LANGUAGE);
-  // }
-});
+
+  next()
+}
 
 const sourcemapsForSentryOnly = token => (req, res, next) => {
   // In production we only want to serve source maps for sentry
