@@ -56,7 +56,7 @@ class Reason extends Component {
 
     if (findData.length > 0) {
       return [
-        <div>
+        <div key='replace'>
           <input
             className={styles['radio-btn']}
             type="radio"
@@ -70,7 +70,7 @@ class Reason extends Component {
     }
 
     return [
-      <div>
+      <div key='replace-disable'>
         <input type="radio" className={styles['radio-btn']} value="Replace" checked={false} disabled />
         <label className={styles['pl-10']}>Replace</label>
       </div>,
@@ -107,7 +107,7 @@ class Reason extends Component {
       goToNextStep();
     }
     else if (
-      this.state.selectedMode === 'Exchange' 
+      this.state.selectedMode === 'Exchange'
     ) {
       if (this.state.selectedVariant.length <= 0) {
         this.setState({
