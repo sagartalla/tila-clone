@@ -10,7 +10,7 @@ import { actionCreators, selectors } from '../../../../store/cam/personalDetails
 import Cookies from 'universal-cookie';
 import { mergeCss } from '../../../../utils/cssUtil';
 import {languageDefinations} from '../../../../utils/lang';
-import CountryDialCode from '../../../common/CountryDialCode';
+import CountryDialCode from '../../../../constants/CountryDialCode';
 import FormValidator from '../../../common/FormValidator';
 import SVGCompoent from '../../../common/SVGComponet';
 const styles = mergeCss('components/Cam/PersonelDetails/profile');
@@ -149,7 +149,7 @@ class EditPhone  extends React.Component {
   }
 
   render(){
-  const {phoneNumber, error, otp,countryCode,validation,otpResponse,showOtp} = this.state;
+  const {phoneNumber, error, otp,countryCode,validation,otpResponse,showOtp,showImage} = this.state;
   const { isLoading } = this.props
   if(otpResponse === 'SUCCESS') {
     return (
@@ -159,7 +159,14 @@ class EditPhone  extends React.Component {
             X</a>
           </Col>
         </Row>
-        <MobileImage />
+        {
+          showImage
+            ?
+            <MobileImage />
+            :
+            null
+        }
+
         <div>Thank you</div>
         <p> Your phone number has been successfully verified </p>
         <Button variant="primary" onClick={this.handleClose}>done</Button>
