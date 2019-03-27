@@ -30,7 +30,7 @@ class ExcludeOOS extends Component {
     return (
       <Panel>
         <div className={`${styles['category-list-title']} ${styles['black-color']} ${styles['fontW600']} ${styles['p-10-20']} ${styles['flx-spacebw-alignc']}`}>
-          <span>Test</span>
+          <span>Hide Out of Stock</span>
           <input onClick={this.excludeOOS} type="checkbox" checked={this.props.excludeOOS === 'true'}/>
         </div>
       </Panel>

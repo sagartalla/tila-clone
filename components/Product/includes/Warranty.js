@@ -29,7 +29,7 @@ class Warranty extends React.Component {
   }
 
   render(){
-    const {warranty} = this.props;
+    const warranty = this.props.warranty || {};
     const warranty_display = warranty.duration + " " + warranty.duration_unit + " " + PDP_PAGE.WARRANTY
     return (
     <div className={`${styles['flex-center']} ${styles['display-inline']}`}>
