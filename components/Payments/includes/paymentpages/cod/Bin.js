@@ -1,5 +1,5 @@
 import { DropTarget } from 'react-dnd';
-import { mergeCss } from '../../../../utils/cssUtil';
+import { mergeCss } from '../../../../../utils/cssUtil';
 
 const styles = mergeCss('components/Payments/payment');
 const Types = {

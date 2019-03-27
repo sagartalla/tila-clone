@@ -2,7 +2,7 @@ import typeToReducer from 'type-to-reducer';
 import { actions } from './actions';
 
 const initialState = {
-  data: 'initialState',
+  data: {}
 };
 
 const captchaReducer = typeToReducer({
