@@ -18,13 +18,12 @@ const initialState = {
 
 const authReducer = typeToReducer({
   [actions.USER_LOGIN]: {
-    PENDING: state => {
-      return Object.assign({}, state, {
-        error: '',
-      }, { ui: {
+    PENDING: state => Object.assign({}, state, {
+      ui: {
         ...state.ui,
-        loginLoading: true } });
-    },
+        loginLoading: true,
+      },
+    }),
     FULFILLED: (state, action) => {
       return Object.assign({}, state, {
         data: {
@@ -160,8 +159,8 @@ const authReducer = typeToReducer({
         error: '',
       }, { ui: { 
         ...state.ui,
-           loading: true,
-          } });
+        loading: true,
+      } });
     },
     FULFILLED: (state, action) => {
       return {
@@ -282,7 +281,7 @@ const authReducer = typeToReducer({
         ...state.ui,
         loading: true,
       },
-    });
+      });
     },
     FULFILLED: (state, action) => {
       return {

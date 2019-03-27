@@ -3,6 +3,7 @@ import axios from 'axios';
 import constants from '../helper/constants';
 import Cookies from 'universal-cookie';
 import moment from 'moment';
+import { toast } from 'react-toastify';
 
 const cookies = new Cookies();
 
@@ -34,33 +35,34 @@ const userLogin = (params) => {
       ).then((ptaData) => {
         let { output } = ptaData.data;
         const strlen = output.length
-        for(let i = 0; i < strlen; i++){
-          output = output.replace('+', '_').replace('/','~').replace('=','*');
+        for (let i = 0; i < strlen; i++) {
+          output = output.replace('+', '_').replace('/', '~').replace('=', '*');
         }
         data.data.ptaToken = output;
         return data;
       });
     }
-  }).catch(err => {
-    err.response && alert(err.response.data.data.error.message);
-    throw err;
-  });
-}
+  })
+  // .catch((err) => {
+  //   err.response && alert(err.response.data.data.error.message);
+  //   throw err;
+  // });
+};
 
 const userRegister = (params) => axios.post(`${constants.CMS_API_URL}/api/v1/user/register`, params);
 
 const userLogout = () => {
   axios.post('/api/logout');
-}
+};
 
 const getLoginInfo = () => {
   const userCreds = cookies.get('userCreds');
   return {
     userCreds: userCreds || null,
     isLoggedIn: !!cookies.get('auth'),
-    ...(!cookies.get('auth') && {instagramCode:  window.localStorage.getItem('instagramCode') || null}),
+    ...(!cookies.get('auth') && { instagramCode: window.localStorage.getItem('instagramCode') || null }),
   };
-}
+};
 
 const setCountry = (country) => {
   return axios.post('/api/setCookie', {
