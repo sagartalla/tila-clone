@@ -130,6 +130,8 @@ class Reason extends Component {
       }
     }
     else {
+      let paramObject = Object.assign({},params,{issueType:'REPLACE'})
+      this.props.setOrderIssueData(paramObject)
       goToNextStep();
     }
 
