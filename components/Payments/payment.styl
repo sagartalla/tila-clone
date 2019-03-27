@@ -82,7 +82,7 @@
   height 34px
 
 .saved-card-item
-  padding 8px
+  padding 15px
   border 1px solid #aaa
 
 .card-label
@@ -206,6 +206,31 @@
 .img-responsive
   max-width 100%
   max-height 100%
+
+.saved-cards
+  .saved-cards-part
+    .saved-card-item
+      // box-shadow 0 3px 3px 0 rgba(0, 0, 0, 0.07)
+      border 0.5px solid light-gry
+      border-radius 4px
+      .card-no
+        letter-spacing 2px
+      .vault-card
+        width 34px
+        height 20px
+        margin 0 15px
+  .pay-btn
+    padding 10px 70px
+
+.saved-cards-part .saved-card-item.card-active
+  box-shadow 0 3px 3px 0 rgba(0, 0, 0, 0.07)
+  border 0.5px solid navy-blue
+
+.voucher
+  padding 20px 40px
+
+.new-card-btn
+  padding 10px 30px
 
 @media screen and (min-device-width: 320px) and (max-device-width: 736px) and (orientation : portrait){
   .payment-header {
@@ -371,9 +396,6 @@
     height 86px
     margin-top 20px
   }
-
-
-
 }
 
 @media screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation : portrait){
@@ -410,15 +432,15 @@
       background: aliceblue;
 
 .paymentBorder
-     border: 1px solid #eee;
-     background: #fff;
-     width: 28%;
-     display: flex;
-     flex-direction: column;
-     align-items: center;
-     border-radius: 5px;
-     padding: 5px;
-     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.08);
+     border 1px solid border-color
+     background white
+     width 28%
+     display flex
+     flex-direction column
+     align-items center
+     border-radius 4px
+     padding 10px
+     box-shadow 0 2px 4px 0 rgba(0, 0, 0, 0.08)
 
 .border-radius
      border-bottom-right-radius 25px;

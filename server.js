@@ -26,10 +26,10 @@ function sessionCookie(req, res, next) {
     next()
     return
   }
-  const sid = req.universalCookies.get('sid');
+  const sid = req.universalCookies.get('sessionId');
   if (!sid || sid.length === 0) {
-    req.universalCookies.set('sid', uuidv4());
-    res.cookie('sid', req.universalCookies.get('sid'));
+    req.universalCookies.set('sessionId', uuidv4());
+    res.cookie('sessionId', req.universalCookies.get('sessionId'));
   }
   next()
 }

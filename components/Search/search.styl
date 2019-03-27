@@ -30,6 +30,7 @@
   .product-items-main
     width 276px
     padding-bottom 20px
+    padding-right 1px
     .loader-div
        width 20px
        height 20px
@@ -148,7 +149,7 @@
     .quick-view
       // background-color label-light
       // padding 10px 0
-      width 92%
+      width 96%
       margin 0 auto
       .add-to-crt
         border: 1px solid navy-blue
@@ -170,14 +171,15 @@
         width 50%
         text-align center
         padding 6px 0 6px 15px
+        align-items flex-end
         .cart-list
-          width 15px
+          width 14px
           height 16px
         // &:first-child
         //   border-right 1px solid white
 
     .brand-price-details
-      padding 0 15px
+      padding 0 10px
 
       .prdt-name
         line-height 19px
@@ -187,7 +189,7 @@
         margin-right 2px
 
     .wish-list-part
-      margin 10px 15px
+      margin 10px 8px
       // border-bottom: 1px solid cam-border-gray
       // padding-bottom: 10px;
       .wish-list
@@ -263,14 +265,21 @@
     border-bottom-left-radius 20px
     // border-top-right-radius 12px
     &:hover
+      background-color rgba(216,216,216,0.8)
       .fullfilled-label
         display block
+      .fulfill-img
+        background-color transparent
 
     .fulfill-img
-      background url(/static/img/icons/common-icon/icon-fullfilled.svg) no-repeat
-      width 24px
-      height 20px
+      background url(/static/img/icons/common-icon/icon-fullfilled.svg) no-repeat center
+      width 30px
+      height 30px
+      border-radius 50%
+      background-color rgba(216,216,216,0.8)
       display inline-flex
+      background-position center
+      
         // position absolute
     .fullfilled-label
       color rgba(0, 0, 0, 0.5)
@@ -288,7 +297,7 @@
     width 276px
 
     .fullfill-main
-      background-color: rgba(216, 216, 216, 0.8)
+      // background-color: rgba(216, 216, 216, 0.8)
     // .fullfilled-label
     //   display block
     .image-div
@@ -343,7 +352,7 @@
 .grid-cont
   // overflow hidden
   position relative
-  border 1px solid border-gray
+  // border 1px solid border-gray
   box-shadow 0 2px 7px 0 rgba(0,0,0,0.03)
   background-color white
   border-radius 10px
@@ -406,16 +415,17 @@
         object-fit scale-down
 
 .category-list
-  border-bottom 0.5px solid border-gray
+  // border-bottom 0.5px solid border-gray
   // padding-bottom 10px
 
   .category-list-title
     border-bottom 0.5px solid border-gray
     a
-      display: flex;
-      justify-content: space-between;
-      width: 100%;
-      align-items: center;
+      display flex
+      justify-content space-between
+      width 100%
+      font-size 13px
+      align-items center
       .expand-icon
         width 16px
         height 16px

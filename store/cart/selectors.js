@@ -42,7 +42,6 @@ const getCartResults = (store) => {
           itemType: item.product_details.catalog_details.item_type_name,
           warranty_duration: item.listing_info.warranty_policy.preferred_policy ?
             item.listing_info.warranty_policy.policies[item.listing_info.warranty_policy.preferred_policy] : {},
-          warranty: _.groupBy(item.listing_info.warranty_details, 'type')['MANUFACTURER'] || [{}],
           discount: item.listing_info.pricing && item.listing_info.pricing.discount_per_mrp,
           mrp: item.listing_info.pricing && item.listing_info.pricing.mrp,
           offerDiscounts: item.listing_info.pricing && item.listing_info.pricing.actions,
@@ -51,7 +50,7 @@ const getCartResults = (store) => {
       });
     }
 
-    newData.items = newData.items.reverse();
+    // newData.items = newData.items.reverse();
     return newData;
   }
   return {};

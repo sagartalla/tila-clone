@@ -239,7 +239,7 @@ class Product extends Component {
     const getPriceAndOffer = () => (
       <span>
         <span
-          className={`${styles['fs-16']} ${styles.fontW700}`}
+          className={`${styles['fs-16']} ${styles.fontW700} ${styles['black-color']}`}
         >
           {variants[selectedIndex].sellingPrice[0]}
         </span>
@@ -301,10 +301,10 @@ class Product extends Component {
             <div className={styles['desc-cont']}>
               <div className={`${styles['pb-20']} ${styles['pl-20']} ${styles['flex']} ${styles['flex-colum']}`}>
                 <h5 className={`${styles['prdt-name']} ${styles['pt-15']} ${styles['pb-5']}  ${styles['m-0']} ${styles['ellips']}`}>
-                  <span className={`${styles['fontW600']}`}>{brand}</span> <span className={`${styles['thick-gry-clr']} ${styles['fontW300']}`}>{displayName.replace(brand, '').trim()}</span>
+                  <span className={`${styles['fontW600']} ${styles['black-color']}`}>{brand}</span> <span className={`${styles['thick-gry-clr']} ${styles['fontW300']}`}>{displayName.replace(brand, '').trim()}</span>
                 </h5>
                 <span>
-                  <span className={`${styles['pr-5']} ${styles['fs-12']} ${styles['fontW600']}`}>{currency}</span>
+                  <span className={`${styles['pr-5']} ${styles['fs-12']} ${styles['fontW600']} ${styles['black-color']}`}>{currency}</span>
                   {variants.length > 0 && variants[selectedIndex].sellingPrice && getPriceAndOffer()}
                 </span>
               </div>
@@ -323,14 +323,14 @@ class Product extends Component {
                         </div>
                       </a>
                       :
-                      <a className={`${styles['flex']} ${styles['add-to-crt']}`} onClick={this.addToCart}>
+                      <a className={`${styles['flex']} ${styles['add-to-crt']} ${styles['fs-12']} ${styles['text-uppercase']}`} onClick={this.addToCart}>
                         {/* <SVGCompoent clsName={`${styles['cart-list']}`} src="icons/cart/blue-cart-icon" /> */}
                         <span>
                           <span className={styles['flex']}><SVGCompoent clsName={styles['cart-list']} src="icons/cart/blue-cart-icon" />{PDP_PAGE.ADD_TO_CART}</span>
                         </span>
                       </a>
                     }
-                    <a className={`${styles['flex-center']} ${styles['buy-now-btn']}`} onClick={this.buyNow}>
+                    <a className={`${styles['flex-center']} ${styles['buy-now-btn']} ${styles['fs-12']} ${styles['text-uppercase']}`} onClick={this.buyNow}>
                       <SVGCompoent clsName={`${styles['cart-list']}`} src="icons/cart/buy-icon" />
                       <span className={styles['pl-5']}>{PDP_PAGE.BUY_NOW}</span>
                     </a>
@@ -357,14 +357,14 @@ class Product extends Component {
                   </a>
                 </span>}
               </div>
-              <div className={styles['brand-price-details']}>
+              <div className={`${styles['brand-price-details']} ${styles['black-color']}`}>
                 {/* <div> */}
                 {/* <h5 className={`${styles['prdt-name']}  ${styles['pb-5']} ${styles['m-0']}`}>
                     <span className={`${styles['fontW600']}`}>{brand}</span> <span className={`${styles['thick-gry-clr']} ${styles['fontW300']}`}>{displayName.replace(brand, '').trim()}</span>
                   </h5> */}
                 {/* <span className={`${styles['fs-12']} ${styles['label-gry-clr']}`}>Denim shirt with baseball shirt stiff collar and formal tie</span> */}
                 {/* </div> */}
-                <span className={`${styles['pr-5']} ${styles['fs-12']} ${styles['fontW600']}`}>{currency}</span>
+                <span className={`${styles['pr-5']} ${styles['fs-12']}`}>{currency}</span>
                 {
                   variants.length > 0 && variants[selectedIndex].sellingPrice &&
                   getPriceAndOffer()

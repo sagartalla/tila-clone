@@ -121,11 +121,6 @@ class TitleInfo extends Component {
               <div className={`${styles['ti-rating-wrap']} ${styles['pr-5']}`}>
                 {rating.rating} {rating.count}
               </div>
-              <div className={`${styles['ti-reviews-wrap']} ${styles['fs-12']}`}>
-                <span className={`${styles['pr-5']} ${styles['pl-5']}`}>{PDP_PAGE.READ_EXPERT_REVIEW}</span>
-                <span className={`${styles['pr-5']} ${styles['pl-5']}`}>{PDP_PAGE.CUSTOMER_REVIEW}</span>
-                <span className={`${styles['pr-5']} ${styles['pl-5']}`}>{PDP_PAGE.ASK_QUESTION}</span>
-              </div>
             </div>
         }
         {
@@ -135,7 +130,8 @@ class TitleInfo extends Component {
             :
             <div className={`${styles['flex-center']} ${styles['checkout-instantly']} ${styles['pt-10']}`}>
               <div className={`${styles.flex}`}>
-                <a className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['small-btn']}`} onClick={this.checkoutInstantHandler}>{PDP_PAGE.CHECKOUT_INSTANT}</a>
+                {totalInventoryCount > 0 &&
+                  <a className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['small-btn']}`} onClick={this.checkoutInstantHandler}>{PDP_PAGE.CHECKOUT_INSTANT}</a>}
               </div>
               <div>
                 {

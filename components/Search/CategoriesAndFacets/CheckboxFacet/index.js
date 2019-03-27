@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Checkbox, Panel, Heading, Body, Title } from 'react-bootstrap';
-import SVGCompoent from '../../common/SVGComponet';
-import { mergeCss } from '../../../utils/cssUtil';
+import SVGCompoent from '../../../common/SVGComponet';
+import { mergeCss } from '../../../../utils/cssUtil';
 const styles = mergeCss('components/Search/search');
-import {languageDefinations} from '../../../utils/lang';
+import {languageDefinations} from '../../../../utils/lang';
 const {SEARCH_PAGE} = languageDefinations()
 const MaxItems = 3;
 
@@ -64,7 +64,7 @@ class CheckboxFacet extends Component {
               <SVGCompoent clsName={`${styles['expand-icon']}`} src="icons/common-icon/down-arrow-circle" />
             </Panel.Title>
           </Panel.Heading>
-          <Panel.Body collapsible>
+          <Panel.Body collapsible className={`${styles['border-b']}`}>
             <ul className={`${styles['category-sub-list']} ${styles['pl-20']} ${styles['pt-15']}`}>
               {
                 filter.children.slice(0, this.state.maxRows).map(childFitler => (

@@ -6,6 +6,7 @@ import { decode, encode, addUrlProps, replaceInUrlQuery } from 'react-url-query'
 import { actionCreators, selectors } from '../../../store/search';
 import { PanelGroup, Panel } from 'react-bootstrap';
 import CheckboxFacet from './CheckboxFacet';
+import ExcludeOOS from './ExcludeOOS';
 import LinkFacet from './LinkFacet';
 import RangeFitler from './RangeFacet';
 import { mergeCss } from '../../../utils/cssUtil';
@@ -63,6 +64,7 @@ class CategoriesAndFacets extends Component {
           return filter.children.length ? <CheckboxFacet attributeName={filter.attributeName} facets={facets} filter={filter} onChangeHandle={this.onChangeHandle(filter.attributeName, filter.type)} selectedFilters={selectedFilters} index={index}/> : null;
         })
       }
+      <ExcludeOOS />
       </PanelGroup>
     );
   }

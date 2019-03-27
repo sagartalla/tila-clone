@@ -55,13 +55,21 @@ class Search extends Component {
         <Grid className={styles['pt-20']}>
           {spellCheckResp &&
             <div className={`${styles['mb-15']} ${styles['spell-strip']}`}>
-              Did you Mean&nbsp;
+              Showing results for&nbsp;
+              <a
+                href="javascript: void(0)"
+                onClick={this.querySearch}
+                data-querysearch={spellCheckResp[query.search]}
+              >
+                <b>{`${spellCheckResp[query.search]}. `}</b>
+              </a>
+              Search instead for&nbsp;
               <a
                 href="javascript: void(0)"
                 onClick={this.querySearch}
                 data-querysearch={query.search}
               >
-                <b>{`${query.search} ?`}</b>
+                <b>{`${query.search}`}</b>
               </a>
             </div>
           }
