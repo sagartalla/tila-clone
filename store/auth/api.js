@@ -8,12 +8,14 @@ const cookies = new Cookies();
 
 const userLogin = (params) => {
   return axios.post(`/api/login`, Object.assign({}, params, {
-    type: 'CUSTOMER',
-    authVersion: 'V1'
+    authVersion: 'V1',
+    tenant: 'CUSTOMER',
+    type: 'RT',
+    client_type: 'WEB'
   })).then(({data, status}) => {
     // cart merge
     if(status === 200) {
-      const { username } = params;
+      const { username } = params.metadata;
       const PTA_PARAMS = {
         'p_userid': username,
         'p_email.addr': username,
@@ -21,18 +23,27 @@ const userLogin = (params) => {
         'p_ccf_15': 9
       };
       axios.put(`${constants.CART_API_URL}/api/v1/cart/merge`);
+      let inputString = '';
+      for(let key in PTA_PARAMS){
+        inputString = inputString ? `${inputString}&${encodeURI(key)}=${encodeURI(PTA_PARAMS[key])}` : `${encodeURI(key)}=${encodeURI(PTA_PARAMS[key])}`
+      }
       return axios.post(`${constants.AUTH_API_URL}/api/v1/encrypt/`,
         {
-          input: _.reduce(PTA_PARAMS, (acc, val, key) => {
-            return `${acc}&${encodeURI(key)}=${encodeURI(val)}`;
-          }, '')
+          input: inputString
         }
       ).then((ptaData) => {
-        const { output } = ptaData.data;
-        data.data.ptaToken = output.replace(/\+/g, '_').replace('/\//g','~').replace('/\=/g','*');
+        let { output } = ptaData.data;
+        const strlen = output.length
+        for(let i = 0; i < strlen; i++){
+          output = output.replace('+', '_').replace('/','~').replace('=','*');
+        }
+        data.data.ptaToken = output;
         return data;
       });
     }
+  }).catch(err => {
+    err.response && alert(err.response.data.data.error.message);
+    throw err;
   });
 }
 
@@ -47,6 +58,7 @@ const getLoginInfo = () => {
   return {
     userCreds: userCreds || null,
     isLoggedIn: !!cookies.get('auth'),
+    ...(!cookies.get('auth') && {instagramCode:  window.localStorage.getItem('instagramCode') || null}),
   };
 }
 
@@ -92,7 +104,9 @@ const setLanguage = (language) => {
     data: {
       language,
     }
-  }).then(() => language);
+  }).then(() => {
+    return language;
+  });
 }
 
 const removeCity = () => {
@@ -109,4 +123,4 @@ const savePtaToken = (ptaToken) => {
   }).then(() => ptaToken);
 }
 
-export default { userLogin, userRegister, userLogout, getLoginInfo, setCountry, setSessionID, deriveCity, autoCompleteCity, setCity, removeCity, setLanguage, savePtaToken, savePtaToken };
+export default { userLogin, userRegister, userLogout, getLoginInfo, setCountry, setSessionID, deriveCity, autoCompleteCity, setCity, removeCity, setLanguage, savePtaToken };

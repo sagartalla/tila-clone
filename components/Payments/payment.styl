@@ -38,6 +38,13 @@
       box-shadow -4px 0 8px rgba(204, 204, 204, 0.8)
       border-right 5px solid #45689a
       color black-color
+    .payment-lists
+      .make-paymrnt-icon
+        width: 24px;
+        height: 17px;
+      &.disabled
+        opacity: 0.4;
+        pointer-events: none;
 
   .right-bar
     font-size font-size-14
@@ -74,6 +81,14 @@
   width 74px
   height 34px
 
+.saved-card-item
+  padding 15px
+  border 1px solid #aaa
+
+.card-label
+  width: 95%;
+  float: right;
+
 .secure-img
   display: flex;
   padding: 20px 25px;
@@ -82,11 +97,6 @@
   height: 77px;
   img
     width 100%
-
-.payment-lists
-  .make-paymrnt-icon
-    width: 24px;
-    height: 17px;
 
 .pay-loyalty-main
   .pay-loyalty-inn
@@ -205,6 +215,31 @@
   max-width 100%
   max-height 100%
 
+.saved-cards
+  .saved-cards-part
+    .saved-card-item
+      // box-shadow 0 3px 3px 0 rgba(0, 0, 0, 0.07)
+      border 0.5px solid light-gry
+      border-radius 4px
+      .card-no
+        letter-spacing 2px
+      .vault-card
+        width 34px
+        height 20px
+        margin 0 15px
+  .pay-btn
+    padding 10px 70px
+
+.saved-cards-part .saved-card-item.card-active
+  box-shadow 0 3px 3px 0 rgba(0, 0, 0, 0.07)
+  border 0.5px solid navy-blue
+
+.voucher
+  padding 20px 40px
+
+.new-card-btn
+  padding 10px 30px
+
 @media screen and (min-device-width: 320px) and (max-device-width: 736px) and (orientation : portrait){
   .payment-header {
     display none
@@ -218,7 +253,7 @@
     .payment-signup, .delivery-adress-prt, .pay-loyalty-main, .payment-mode-prt, .pay-offers-discounts {
        padding 15px 25px
     }
-    
+
     .payment-signup {
 
       .landscape-socail-part {
@@ -369,9 +404,6 @@
     height 86px
     margin-top 20px
   }
-
-
-
 }
 
 @media screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation : portrait){
@@ -404,3 +436,19 @@
     padding-right 0
   }
 }
+.voucher 
+      background: aliceblue;
+
+.paymentBorder
+     border 1px solid border-color
+     background white
+     width 28%
+     display flex
+     flex-direction column
+     align-items center
+     border-radius 4px
+     padding 10px
+     box-shadow 0 2px 4px 0 rgba(0, 0, 0, 0.08)
+
+.border-radius
+     border-bottom-right-radius 25px;

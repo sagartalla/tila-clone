@@ -3,15 +3,17 @@ import _ from 'lodash';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Modal } from "react-router-modal";
+import { Modal } from 'react-router-modal';
 
-import RightSideBar from '../../common/CartPaymentSideBar';
-
+import RightSideBar from '../../Cart/CartPaymentSideBar';
+import constants from '../../../constants';
 import { actionCreators as cartActionCreators, selectors as cartSelectors } from '../../../store/listingCart';
-import {languageDefinations} from '../../../utils/lang';
+import { actionCreators as compareActions } from '../../../store/compare/actions';
+import { languageDefinations } from '../../../utils/lang';
 import { mergeCss } from '../../../utils/cssUtil';
+
 const styles = mergeCss('components/Product/product');
-const {PDP_PAGE} = languageDefinations()
+const { PDP_PAGE } = languageDefinations();
 
 /*
   -- DON'T REMOVE
@@ -34,9 +36,10 @@ class TitleInfo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showCheckoutModal: false
-    }
+      showCheckoutModal: false,
+    };
     this.addToCart = this.addToCart.bind(this);
+    this.addToCompare = this.addToCompare.bind(this);
     this.increaseItemCnt = this.increaseItemCnt.bind(this);
     this.decreaseItemCnt = this.decreaseItemCnt.bind(this);
     this.checkoutInstantHandler = this.checkoutInstantHandler.bind(this);
@@ -56,15 +59,29 @@ class TitleInfo extends Component {
     const { showCheckoutModal } = this.state;
     const { listingId, getCartResults } = this.props;
     this.props.addToCart({
-      listing_id: this.props.listingId
+      listing_id: this.props.listingId,
     }, this.props.listingId);
+  }
+
+  addToCompare() {
+    const {
+      addToCompare, product_id, itemtype, media, title, categoryId,
+    } = this.props;
+    const src = `${constants.mediaDomain}/${media}`;
+    this.props.addToCompare({
+      itemtype,
+      productId: product_id,
+      src,
+      displayName: title,
+      categoryId,
+    });
   }
 
   checkoutInstantHandler() {
     const { showCheckoutModal } = this.state;
     const { listingCartData, listingId, removeCartItem } = this.props;
 
-    if (!showCheckoutModal) {// adding item to cart
+    if (!showCheckoutModal) { // adding item to cart
       this.addToCart();
     } else { // removing item from cart.
       removeCartItem(listingCartData.items[0].cart_item_id);
@@ -84,25 +101,25 @@ class TitleInfo extends Component {
   }
 
   render() {
-    const { brand, title, rating, reviews, price, originalPrice, discountPercent, totalInventoryCount, isPreview, listingId, listingCartData } = this.props;
+    const {
+ brand, title, rating, reviews, price, originalPrice, discountPercent, totalInventoryCount, isPreview, listingId, listingCartData, comparable
+} = this.props;
     const { showCheckoutModal } = this.state;
     return (
       <div className={styles['pb-10']}>
-        <div className={`${styles['fontW300']} ${styles['lgt-blue']}`}>{brand}</div>
-        <div className={`${styles['fs-20']} ${styles['fontW700']} ${styles['black-color']}`}>{title}</div>
+        <div className={`${styles.fontW300} ${styles['lgt-blue']} ${styles['flx-space-bw']}`}>
+          <span>{brand}</span>
+          {isPreview ? null : comparable ? <a className={`${styles['black-color']} ${styles.fontW700}`} href="javascript: void(0)" onClick={this.addToCompare}>{PDP_PAGE.ADD_TO_COMPARE}</a> : null}
+        </div>
+        <div className={`${styles['fs-20']} ${styles.fontW700} ${styles['black-color']}`}>{title}</div>
         {
           isPreview
             ?
             null
             :
-            <div className={`${styles['flex']} ${styles['fs-12']} ${styles['pt-5']}`}>
+            <div className={`${styles.flex} ${styles['fs-12']} ${styles['pt-5']}`}>
               <div className={`${styles['ti-rating-wrap']} ${styles['pr-5']}`}>
                 {rating.rating} {rating.count}
-              </div>
-              <div className={`${styles['ti-reviews-wrap']} ${styles['fs-12']}`}>
-                <span className={`${styles['pr-5']} ${styles['pl-5']}`}>{PDP_PAGE.READ_EXPERT_REVIEW}</span>
-                <span className={`${styles['pr-5']} ${styles['pl-5']}`}>{PDP_PAGE.CUSTOMER_REVIEW}</span>
-                <span className={`${styles['pr-5']} ${styles['pl-5']}`}>{PDP_PAGE.ASK_QUESTION}</span>
               </div>
             </div>
         }
@@ -112,30 +129,31 @@ class TitleInfo extends Component {
             null
             :
             <div className={`${styles['flex-center']} ${styles['checkout-instantly']} ${styles['pt-10']}`}>
-              <div className={`${styles['flex']}`}>
-                <a className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['small-btn']}`} onClick={this.checkoutInstantHandler}>{PDP_PAGE.CHECKOUT_INSTANT}</a>
+              <div className={`${styles.flex}`}>
+                {totalInventoryCount > 0 &&
+                  <a className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['small-btn']}`} onClick={this.checkoutInstantHandler}>{PDP_PAGE.CHECKOUT_INSTANT}</a>}
               </div>
               <div>
                 {
                   totalInventoryCount < 5
                     ?
-                    <span className={`${styles['flex']} ${styles['fs-12']} ${styles['google-clr']} ${styles['fontW600']}`}>{PDP_PAGE.ONLY} {totalInventoryCount} {PDP_PAGE.LEFT_IN_STOCK}</span>
+                      <span className={`${styles.flex} ${styles['fs-12']} ${styles['google-clr']} ${styles.fontW600}`}>{PDP_PAGE.ONLY} {totalInventoryCount} {PDP_PAGE.LEFT_IN_STOCK}</span>
                     :
                     null
                 }
 
-                <span className={`${styles['flex']} ${styles['fs-12']}`}>{PDP_PAGE.COD_AVAILABLE}</span>
+                <span className={`${styles.flex} ${styles['fs-12']}`}>{PDP_PAGE.COD_AVAILABLE}</span>
               </div>
 
               {showCheckoutModal ?
                 <Modal className={`react-router-modal__modal ${styles['right-side-modal']}`} onBackdropClick={this.checkoutInstantHandler}>
                   <RightSideBar
                     data={listingCartData}
-                    hideUpSell={true}
-                    showInstant={true}
-                    showStepper={true} // only for PDP
-                    isPdp={true}
-                    hideCouponCode={true}
+                    hideUpSell
+                    showInstant
+                    showStepper // only for PDP
+                    isPdp
+                    hideCouponCode
                     insnt_item_listing_id={listingCartData.items.length > 0 ? listingCartData.items[0].listing_id : ''}
                     increaseItemCnt={this.increaseItemCnt}
                     decreaseItemCnt={this.decreaseItemCnt}
@@ -151,7 +169,7 @@ class TitleInfo extends Component {
           <div className={styles['ti-discount-percent']}>{discountPercent}</div>
         </div> */}
       </div>
-    )
+    );
   }
 }
 
@@ -163,22 +181,19 @@ TitleInfo.propTypes = {
   price: PropTypes.string.isRequired,
   originalPrice: PropTypes.string.isRequired,
   discountPercent: PropTypes.string.isRequired,
-}
+};
 
-const mapStateToProps = (store) => ({
+const mapStateToProps = store => ({
   listingCartData: cartSelectors.getListingCartResults(store),
 });
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({
+const mapDispatchToProps = (dispatch) => bindActionCreators({
     addToCart: cartActionCreators.addToCart,
     cartItemCount: cartActionCreators.cartItemCount,
     getListingCartResults: cartActionCreators.getListingCartResults,
     removeCartItem: cartActionCreators.removeCartItem,
-  },
-    dispatch,
-  );
-}
+    addToCompare: compareActions.addToCompare,
+  }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(TitleInfo);
 

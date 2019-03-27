@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Cookie from 'universal-cookie';
 
 import { selectors, actionCreators } from '../../../store/cart';
 import { Router } from '../../../routes';
@@ -9,6 +10,11 @@ import { languageDefinations } from '../../../utils/lang';
 import SVGCompoent from '../../common/SVGComponet';
 import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Product/product');
+
+const cookies = new Cookie();
+
+const language = cookies.get('language') || 'en';
+const country = cookies.get('country') || 'SAU';
 
 const { PDP_PAGE } = languageDefinations();
 //
@@ -46,7 +52,7 @@ class AddToCart extends Component {
 
   componentWillReceiveProps(nextProps) {
     if(this.state.buyNow == true && nextProps.isAddedToCart){
-       Router.pushRoute('/payment');
+       Router.pushRoute(`/${country}/${language}/payment`);
     }
   }
 
@@ -55,7 +61,7 @@ class AddToCart extends Component {
   }
 
   render () {
-    const { isLoading, error, isAddedToCart, offerInfo } = this.props;
+    const { isLoading, error, isAddedToCart, offerInfo, btnLoading } = this.props;
     const { price, listingAvailable, listingId, stockError, availabilityError } = offerInfo;
     return (availabilityError || stockError)
     ?
@@ -63,7 +69,19 @@ class AddToCart extends Component {
     :
     (
       <div className={`${styles['pt-25']} ${styles['flx-space-bw']} ${styles['addto-cart']} ${styles['ipad-p-0']} ${styles['border-t']}`}>
-        <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['fs-16']} ${styles['ipad-fs-14']} ${styles['add-to-card-btn']} ${styles['flex']}`} onClick={this.addToCart} disabled={isLoading || isAddedToCart} >{isAddedToCart ? <SVGCompoent clsName={`${styles['added-cart-icon']}`} src="icons/cart/added-cart-icon" /> : PDP_PAGE.ADD_TO_CART}</button>
+        <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['fs-16']} ${styles['ipad-fs-14']} ${styles['add-to-card-btn']} ${styles['flex']}`} onClick={this.addToCart} disabled={isLoading || isAddedToCart} >
+        {/* {isAddedToCart ? <SVGCompoent clsName={`${styles['added-cart-icon']}`} src="icons/cart/added-cart-icon" /> : PDP_PAGE.ADD_TO_CART} */}
+          {
+          btnLoading ?
+          <div className={styles['loader-div']}>
+            <SVGCompoent clsName={`${styles['loader-styl']}`} src="icons/common-icon/circleLoader" />
+          </div>
+          :
+          isAddedToCart ?
+          <SVGCompoent clsName={`${styles['added-cart-icon']}`} src="icons/cart/added-cart-icon" />
+          : PDP_PAGE.ADD_TO_CART
+        }
+        </button>
         <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fs-16']} ${styles['ipad-fs-14']} ${styles['buy-now-btn']}`} onClick={this.buyNow}>{PDP_PAGE.BUY_NOW}</button>
       </div>
     );
@@ -72,6 +90,7 @@ class AddToCart extends Component {
 
 const mapStateToProps = (store) => {
   return ({
+    btnLoading: selectors.getBtnLoaders(store),
     isLoading: selectors.getLoadingStatus(store),
     error: selectors.getErrorMessege(store),
     isAddedToCart: selectors.isAddedToCart(store)

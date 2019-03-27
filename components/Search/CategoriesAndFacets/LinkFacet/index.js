@@ -22,7 +22,7 @@ class LinkFacet extends Component {
             <SVGCompoent clsName={`${styles['expand-icon']}`} src="icons/common-icon/down-arrow-circle" />
           </Panel.Title>
         </Panel.Heading>
-        <Panel.Body collapsible>
+        <Panel.Body collapsible className={`${styles['border-b']}`}>
           {
             filter
               ?

@@ -10,30 +10,122 @@
   box-shadow 0 2px 7px 0 rgba(0,0,0,0.03)
   position sticky
   top 65px;
-  // ul
-  //   padding 0 20px
   li
     list-style none
+
+.search-main-part
+  min-height 530px
 
 .search-results
   float left
   width calc(82% - 20px)
-
+  .no-search
+    width 300px
+    text-align center
+    margin auto
+  .no-results
+    text-align center
+  .caption
+    background white
   .product-items-main
     width 276px
     padding-bottom 20px
-    // margin-right 10px
-    // &:nth-child(4n)
-    //   margin-right 0
-  /*.search-results-wrap
-    position sticky
-    top 61px
-    background #f9f9f9
-    z-index 7
-    box-shadow 0 7px 4px -4px rgba(0,0,0,0.09)*/
-  .no-results
-    height 400px
+    padding-right 1px
+    .loader-div
+       width 20px
+       height 20px
+       position absolute
+       z-index 14
+       left 120px
+       bottom -49px
+      .loader-styl
+        width 40px
+        height 40px
+        svg
+          animation rotate 1.4s linear infinite;
+          -webkit-animation rotate 1.4s linear infinite;
+          -moz-animation rotate 1.4s linear infinite;
+          @keyframes rotate {
+            to {
+              transform rotate(360deg);
+            }
+          }
 
+          @-webkit-keyframes rotate {
+            to {
+              -webkit-transform rotate(360deg);
+            }
+          }
+
+          @-moz-keyframes rotate {
+            to {
+              transform rotate(360deg);
+            }
+          }
+    &.active-product
+      .product-showsizeDisplay
+        visibility visible
+        margin-bottom 0
+      .desc-cont
+        display none
+
+    .product-sizeDisplay
+        z-index 3
+        width 100%
+        max-width 100%
+        position absolute
+        bottom 0px
+        background #ffffff
+        visibility hidden
+        margin-bottom -15px
+        webkit-transition all 0.2s ease-out
+        transition all 0.2s ease-out
+        .product-displayHeader
+          padding 8px
+          text-align left
+          color #535766
+          padding-left 10px
+        .product-sizeContainer
+          padding 8px 10px 10px
+          overflow-y auto
+          max-height 118px
+          box-sizing border-box
+          .product-sizebutton
+            border-radius 20px
+            margin 5px
+            min-width 34px
+            min-height 34px
+            background-color #ffffff
+            border 1px solid #BFC0C6
+            padding 8px
+            display inline-block
+            outline none
+            text-align center
+          .product-strikebutton
+            border-radius 20px
+            margin 5px
+            min-width 34px
+            min-height 34px
+            background-color #ffffff
+            border 1px solid #BFC0C6
+            padding 8px
+            display inline-block
+            text-align center
+            outline none
+            background-color #f7f6f6
+            pointer-events none
+            position relative
+            &::after
+              content ''
+              display block
+              border-top 1px solid #000
+              width 100%
+              height 100%
+              position absolute
+              left 2%
+              top 50%
+              transform rotateZ(-45deg)
+              transform-origin top
   .hover-show-date
     display none
     z-index 9
@@ -41,10 +133,23 @@
     left 0
     border-radius 12px
     // bottom -20%
+    &.active-product,&.display-buttons
+        display block
+        z-index 9
+        // transform scale(1.1)
+        // padding 4px
+        border-bottom-left-radius 10px
+        border-bottom-right-radius: 10px
+        background-color white
+        box-shadow 0 2px 10px 0 rgba(0, 0, 0, 0.1)
+        z-index 11
+        position absolute
+        width 276px
+
     .quick-view
       // background-color label-light
       // padding 10px 0
-      width 92%
+      width 96%
       margin 0 auto
       .add-to-crt
         border: 1px solid navy-blue
@@ -66,13 +171,15 @@
         width 50%
         text-align center
         padding 6px 0 6px 15px
+        align-items flex-end
         .cart-list
-          width 15px
+          width 14px
           height 16px
         // &:first-child
         //   border-right 1px solid white
+
     .brand-price-details
-      padding 0 15px
+      padding 0 10px
 
       .prdt-name
         line-height 19px
@@ -82,7 +189,7 @@
         margin-right 2px
 
     .wish-list-part
-      margin 10px 15px
+      margin 10px 8px
       // border-bottom: 1px solid cam-border-gray
       // padding-bottom: 10px;
       .wish-list
@@ -130,7 +237,8 @@
         padding: 2px 10px
         box-sizing: border-box
         border-left: 0.5px solid rgba(192, 192, 192, 0.3)
-
+.justify-spacebetween
+  justify-content space-between
 .product-items
   // transform: scale(1)
   transition: all .5s ease
@@ -157,14 +265,21 @@
     border-bottom-left-radius 20px
     // border-top-right-radius 12px
     &:hover
+      background-color rgba(216,216,216,0.8)
       .fullfilled-label
         display block
+      .fulfill-img
+        background-color transparent
 
     .fulfill-img
-      background url(/static/img/icons/common-icon/icon-fullfilled.svg) no-repeat
-      width 24px
-      height 20px
+      background url(/static/img/icons/common-icon/icon-fullfilled.svg) no-repeat center
+      width 30px
+      height 30px
+      border-radius 50%
+      background-color rgba(216,216,216,0.8)
       display inline-flex
+      background-position center
+      
         // position absolute
     .fullfilled-label
       color rgba(0, 0, 0, 0.5)
@@ -182,7 +297,7 @@
     width 276px
 
     .fullfill-main
-      background-color: rgba(216, 216, 216, 0.8)
+      // background-color: rgba(216, 216, 216, 0.8)
     // .fullfilled-label
     //   display block
     .image-div
@@ -194,7 +309,11 @@
       display none
     .hover-show-date
       display block
-
+  .discount-main
+    position absolute
+    top 0
+    left 0
+    padding 7px 18px
 .category-sub-list-inn
   .select-check-mate
     display flex
@@ -209,6 +328,20 @@
         text-overflow ellipsis
         width 80%
 
+.quick-view
+  .add-loader
+    align-items center
+    justify-content center
+    .loader-div
+      position relative
+      z-index initial
+      left auto
+      bottom auto
+
+
+.search-results .hover-show-date .quick-view .add-loader
+  padding: 6px 0 6px 0px;
+
 .loader
   position absolute
   bottom 0
@@ -219,7 +352,7 @@
 .grid-cont
   // overflow hidden
   position relative
-  border 1px solid border-gray
+  // border 1px solid border-gray
   box-shadow 0 2px 7px 0 rgba(0,0,0,0.03)
   background-color white
   border-radius 10px
@@ -244,6 +377,7 @@
       padding: 6px 10px;
       border-bottom-right-radius 26px
       border-top-left-radius 10px
+      color white
       // .down-arrow
       //   width 0
       //   height 0
@@ -281,16 +415,17 @@
         object-fit scale-down
 
 .category-list
-  border-bottom 0.5px solid border-gray
+  // border-bottom 0.5px solid border-gray
   // padding-bottom 10px
 
   .category-list-title
     border-bottom 0.5px solid border-gray
     a
-      display: flex;
-      justify-content: space-between;
-      width: 100%;
-      align-items: center;
+      display flex
+      justify-content space-between
+      width 100%
+      font-size 13px
+      align-items center
       .expand-icon
         width 16px
         height 16px

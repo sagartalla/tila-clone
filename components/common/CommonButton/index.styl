@@ -1,0 +1,43 @@
+
+@import '../../../layout/main/executables.styl';
+
+
+.button-styl
+   background-color #45689a
+   color #fff
+   height 38px
+   
+.button-hoverstyl
+    color #fff
+    height 38px
+
+ .loader-div
+          width 20px
+          height 20px
+          .loader-styl
+            svg
+              animation rotate 1.4s linear infinite;
+              -webkit-animation rotate 1.4s linear infinite;
+              -moz-animation rotate 1.4s linear infinite;
+              @keyframes rotate {
+                to {
+                  transform rotate(360deg);
+                }
+              }
+
+              @-webkit-keyframes rotate {
+                to {
+                  -webkit-transform rotate(360deg);
+                }
+              }
+
+              @-moz-keyframes rotate {
+                to {
+                  transform rotate(360deg);
+                }
+              }
+
+.image-icon 
+      width  20px
+      height 20px
+      margin-right 10px

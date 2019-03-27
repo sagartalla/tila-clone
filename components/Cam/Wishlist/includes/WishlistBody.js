@@ -1,17 +1,24 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import PropTypes from 'prop-types';
+import Cookies from 'universal-cookie';
+
 import SVGComponent from '../../../common/SVGComponet';
 import { languageDefinations } from '../../../../utils/lang/';
 import { Router } from '../../../../routes';
 import { mergeCss } from '../../../../utils/cssUtil';
+import constants from '../../../../constants';
 
 const styles = mergeCss('components/Cam/Wishlist/wishlist');
+const cookies = new Cookies();
+
+const language = cookies.get('language') || 'en';
+const country = cookies.get('country') || 'SAU';
 
 const percentage = (a, b) => Math.floor(((a - b) / b) * 100);
 
 const WishlistBody = (props) => {
-  const { data, deleteItem, addToCart } = props;
+  const { data, deleteItem, addToCart, notifyMe } = props;
   const { WISH_LIST_PAGE } = languageDefinations();
 
   const getPriceAlert = (a, b, cur) => {
@@ -36,7 +43,7 @@ const WishlistBody = (props) => {
     return str;
   };
   const routeChange = (variantId, productId, catalogId, itemType) => {
-    Router.push(`/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemType}`);
+    Router.push(`/${country}/${language}/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemType}`);
   }
 
   return (
@@ -51,7 +58,10 @@ const WishlistBody = (props) => {
       <div className={`${styles['box']}`}>
         {
           data.length > 0 && data.map((item, index) => {
-            const { wishlist_id, listing_id, brand_name, name, img, price, cur, wishlisted_price, mrp, variant_id, product_id, catalog_id, itemType } = item;
+            const {
+              wishlist_id, listing_id, brand_name, name, img, price, cur, inventory_count,
+              wishlisted_price, mrp, variant_id, product_id, catalog_id, itemType,
+            } = item;
             return (
               <div key={index} className={`${styles['thick-border-btm']} ${styles['p-30-20']} ${styles['mb-wishlist-part']}`}>
                 <Row className={styles['m-m-0']}>
@@ -60,7 +70,7 @@ const WishlistBody = (props) => {
                       className={`${styles['flex-center']} ${styles['justify-center']} ${styles.pointer} ${styles['mb-wishlist-part-img']}`}
                       onClick={() => routeChange(variant_id, product_id, catalog_id, itemType)}
                     >
-                      <img className={styles['img']} src={img} />
+                      <img className={styles['img']} src={`${constants.mediaDomain}/${img}`} />
                     </div>
                   </Col>
                   <Col md={10} xs={10}>
@@ -68,7 +78,24 @@ const WishlistBody = (props) => {
                       <h5 className={`${styles['mt-0']} ${styles['mb-0']} ${styles['thick-blue']}`}>{brand_name}</h5>
                       <h5 className={`${styles['lgt-gry-clr']} ${styles.pointer} ${styles['light-gry-clr']}`} onClick={() => routeChange(variant_id, product_id, catalog_id, itemType)}>{name}</h5>
                       <div className={`${styles['mt-30']} ${styles['m-t-0']} ${styles['m-fs-12']}`}>
-                        <button id={listing_id} data-wish-id={wishlist_id}  className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['add-to-btn']}`} onClick={addToCart}>{WISH_LIST_PAGE.ADD_TO_CART_BTN}</button>
+                        {inventory_count > 0 ?
+                          <button
+                            id={listing_id}
+                            data-wish-id={wishlist_id}
+                            className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['add-to-btn']}`}
+                            onClick={addToCart}
+                          >
+                            {WISH_LIST_PAGE.ADD_TO_CART_BTN}
+                          </button>
+                          :
+                          <button
+                            data-product-id={product_id}
+                            className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['add-to-btn']}`}
+                            onClick={notifyMe}
+                          >
+                            {WISH_LIST_PAGE.NOTIFY_ME_BTN}
+                          </button>
+                        }
                       </div>
                     </Col>
                     <Col md={4} xs={4} className={styles['m-p-0']}>
@@ -77,14 +104,19 @@ const WishlistBody = (props) => {
                           <SVGComponent clsName={`${styles['delete-icon']}`} src="icons/delete-icon/delete-icon" />
                         </span>
                         <h4 className={`${styles['fontW600']} ${styles['light-gry-clr']} ${styles['mt-25']}`}><span className={`${styles['fs-30']} ${styles['m-fs-18']}`}>{price}</span> <span className={`styles['fs-18']} ${styles['m-fs-14']}`}> {cur}</span></h4>
-                        <span className={`${styles['flex']}`}>
-                          <span className={`${styles['success-green']} ${styles.flex}`}>{percentage(price, mrp)}%</span>&nbsp;&nbsp;&nbsp;
-                          <strike className={`${styles['label-gry-clr']}`}>{mrp}&nbsp;{cur}</strike>
-                        </span>
-                        {getPriceAlert(price, wishlisted_price, cur)}
+                        {
+                          variant_id && percentage(price, mrp) <= -5 &&
+                          <span className={`${styles['flex']}`}>
+                            <span className={`${styles['success-green']} ${styles.flex}`}>{percentage(price, mrp)}%</span>&nbsp;&nbsp;&nbsp;
+                            <strike className={`${styles['label-gry-clr']}`}>{mrp} {cur}</strike>
+                          </span>
+                        }
+
+                        {wishlisted_price && price && cur && getPriceAlert(price, wishlisted_price, cur)}
+                        {wishlisted_price &&
                         <span className={`${styles['thick-gry-clr']}`}>
                           Item was {wishlisted_price} {cur} when added to Wish List
-                        </span>
+                        </span>}
                       </div>
                     </Col>
                   </Col>
@@ -102,6 +134,7 @@ WishlistBody.propTypes = {
   data: PropTypes.array,
   deleteItem: PropTypes.func.isRequired,
   addToCart: PropTypes.func.isRequired,
+  notifyMe: PropTypes.func.isRequired,
 };
 
 WishlistBody.defaultProps = {

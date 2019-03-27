@@ -1,7 +1,7 @@
 import api from './api';
 import loginReq from '../helper/loginReq';
 import refStore from '../refHandler';
-
+import { actionCreators as cartActionCreators } from '../cart'
 const actions = {
   USER_LOGIN: 'USER_LOGIN',
   USER_REGISTER: 'USER_REGISTER',
@@ -28,6 +28,7 @@ const actionCreators = {
     type: actions.USER_LOGIN,
     payload: api.userLogin(params),
   }).then(() => {
+    dispatch(cartActionCreators.getCartResults())
     if (typeof refStore.postLoginRef === 'function') {
       refStore.postLoginRef(dispatch, getState);
     } else if (refStore.postLoginRef) {
@@ -50,10 +51,11 @@ const actionCreators = {
       return Promise.reject(res);
     }),
   }),
-  userLogout: () => {
-    api.userLogout();
-    return ({
+  userLogout: () => (dispatch) => {
+    dispatch(cartActionCreators.getCartResults())
+    dispatch({
       type: actions.USER_LOGOUT,
+      payload:api.userLogout()
     });
   },
   getLoginInfo: () => ({
@@ -105,10 +107,12 @@ const actionCreators = {
   resetShowLogin: () => ({
     type: actions.RESET_SHOW_LOGIN,
   }),
-  setLanguage: language => ({
-    type: actions.SET_LANGUAGE,
-    payload: api.setLanguage(language),
-  }),
+  setLanguage: language => {
+    return ({
+      type: actions.SET_LANGUAGE,
+      payload: api.setLanguage(language),
+    })
+  },
   savePtaToken: ptaToken => ({
     type: actions.SAVE_PTA,
     payload: api.savePtaToken(ptaToken),

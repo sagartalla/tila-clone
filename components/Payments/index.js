@@ -4,23 +4,30 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Grid, Row, Col } from 'react-bootstrap';
+import Cookies from 'universal-cookie';
+import { toast } from 'react-toastify';
 
 import Cart from '../Cart';
 import SignIn from './includes/SignIn';
 import PaymentMode from './includes/PaymentMode';
-import PaymentHeader from './includes/PaymentHeader';
+import HeaderBar from '../HeaderBar';
 import LoyaltyPoints from './includes/LoyaltyPoints';
 import OffersAndDiscounts from './includes/OffersAndDiscounts';
-import RightSideBar from '../common/CartPaymentSideBar';
+import RightSideBar from '../Cart/CartPaymentSideBar';
 import { languageDefinations } from '../../utils/lang/';
 import DeliveryAddress from './includes/DeliveryAddress';
 import { actionCreators, selectors } from '../../store/payments';
 import { actionCreators as authActionCreators, selectors as authSelectors } from '../../store/auth';
 import { actionCreators as cartActionCreators, selectors as cartSelectors } from '../../store/cart';
-
-
 import { mergeCss } from '../../utils/cssUtil';
+import Slider from '../common/slider';
+import Coupon from '../Cart/CartPaymentSideBar/coupons';
+
 const styles = mergeCss('components/Payments/payment');
+const cookies = new Cookies();
+
+const language = cookies.get('language') || 'en';
+const country = cookies.get('country') || 'SAU';
 
 class Payments extends React.Component {
   constructor(props) {
@@ -28,40 +35,41 @@ class Payments extends React.Component {
     this.state = {
       login: {
         username: '',
-        password: ''
+        password: '',
       },
       paymentConfigJson: {
         signIn: {
           basic: false,
           progress: true,
-          done: false
+          done: false,
         },
         address: {
           basic: true,
           progress: false,
-          done: false
+          done: false,
         },
         loyaltyPoints: {
           basic: true,
           progress: false,
-          done: false
+          done: false,
         },
         offersDiscounts: {
           basic: true,
           progress: false,
-          done: false
+          done: false,
         },
         payment: {
           basic: true,
           progress: false,
-          done: false
-        }
+          done: false,
+        },
       },
       showTab: 0,// to show payment tabs
       paymentOptions: {}, // which payment options to show.
       loggedInFlag: false,
       signInLoader: false,
       editCartDetails: true,
+      showSlider: false,
     }
 
     this.saveCard = this.saveCard.bind(this);
@@ -81,7 +89,7 @@ class Payments extends React.Component {
     // if cart is empty redirect to cart page.
     // if user hits payment url directly and no cart items, this condition will execute.
     if (nextProps.cartResults.items.length === 0 && nextProps.cartResults.ui.loaded) {
-      Router.push('/cart');
+      Router.push(`/${country}/${language}/cart`);
     }
     const { loggedInFlag } = this.state;
 
@@ -110,10 +118,16 @@ class Payments extends React.Component {
     this.props.getCartResults();
   }
 
+
   //TODO Show loader on clicking on login button.
   showAddressTab() {
+    const serverData = {
+      channel: 'BASIC_AUTH',
+      metadata: this.state.login,
+      rememberMe: true,
+    }
     this.setState({ signInLoader: true });
-    this.props.userLogin(this.state.login);
+    this.props.userLogin(serverData);
     const paymentConfigJson = { ...this.state.paymentConfigJson };
     paymentConfigJson['signIn'] = { basic: false, progress: false, done: true };
     this.setState({paymentConfigJson});
@@ -127,6 +141,7 @@ class Payments extends React.Component {
 
   // onclick payment method tabs.
   showPaymentType(value) {
+    /* method not used */
     this.setState({ showTab: value });
   }
 
@@ -134,17 +149,19 @@ class Payments extends React.Component {
   // TODO make paymentjson manipulation as util
   // NOT USING - remove 6 months later after PCD-IS [31-Jul-2018]
   makePayment() {
+    /* method not used */
     const { paymentOptions } = this.props;
     const paymentjson = {
-      "payment_details": [
+      payment_details: [
         {
-          "amount": 0,
-          "currency": "",
-          "payment_mode": ""
-        }
+          amount: 0,
+          currency: '',
+          payment_mode: '',
+        },
       ],
-      "transaction_id": "string"
-    }
+      redirect_url: `${window.location.origin}/${country}/${language}`,
+      transaction_id: '',
+    };
     paymentjson.payment_details[0].amount = paymentOptions.data.amount;
     paymentjson.payment_details[0].currency = paymentOptions.data.currency;
     paymentjson.payment_details[0].payment_mode = 'PAY_ONLINE';
@@ -160,12 +177,12 @@ class Payments extends React.Component {
 
       const paymentConfigJson = { ...this.state.paymentConfigJson };
       paymentConfigJson['address'] = { basic: false, progress: false, done: true };
-      paymentConfigJson['loyaltyPoints'] = { basic: false, progress: true, done: false };
-      paymentConfigJson['offersDiscounts'] = { basic: true, progress: false, done: false };
-      paymentConfigJson['payment'] = { basic: true, progress: false, done: false };
+      // paymentConfigJson['loyaltyPoints'] = { basic: false, progress: true, done: false };
+      // paymentConfigJson['offersDiscounts'] = { basic: true, progress: false, done: false };
+      paymentConfigJson['payment'] = { basic: false, progress: true, done: false };
       this.setState({ paymentConfigJson, editCartDetails: !editCartDetails });
     } else {
-      alert('Please add a delivery address.');
+      toast.info('Please add a delivery address.');
     }
 
   }
@@ -209,9 +226,9 @@ class Payments extends React.Component {
   saveCard(e) {
     const { paymentOptions } = this.props;
     this.props.saveCard({
-      "save_card": e.target.checked,
-      "transaction_id": paymentOptions.data.transaction_id,
-      "user_id": ""
+      save_card: e.target.checked,
+      transaction_id: paymentOptions.data.transaction_id,
+      user_id: "",
     });
   }
 
@@ -221,15 +238,25 @@ class Payments extends React.Component {
     this.setState({paymentConfigJson});
   }
 
+  openSlider = () => {
+    this.setState({
+      showSlider: true,
+    });
+  }
+  closeSlider = () => {
+    this.setState({
+      showSlider: false,
+    });
+  }
   render() {
-    const { login, showTab, paymentConfigJson, signInLoader, editCartDetails } = this.state;
+    const { login, showTab, paymentConfigJson, signInLoader, editCartDetails, showSlider } = this.state;
     const { paymentOptions, defaultAddress, isLoggedIn, cartResults } = this.props;
     const { PAYMENT_PAGE } = languageDefinations();
 
     return (
       <div className={styles['payment']}>
-        <PaymentHeader />
-        <Grid>
+        <HeaderBar hideSearch hideMegamenu/>
+        <Grid className={styles['pt-75']}>
           <Row>
             <Col xs={12} md={12} sm={12}>
               <h4 className={`${styles['mt-30']} ${styles['mb-20']} ${styles['light-gry-clr']}`}>{PAYMENT_PAGE.SECURE_CHECKOUT}</h4>
@@ -251,17 +278,16 @@ class Payments extends React.Component {
                 configJson={paymentConfigJson.address}
                 handleShippingAddressContinue={this.handleShippingAddressContinue}
               />
-              <LoyaltyPoints
+            {/*<LoyaltyPoints
                 editLoyalityTab={this.editLoyalityTab}
                 handleLoyaltyBtn={this.handleLoyaltyBtn}
                 configJson={paymentConfigJson.loyaltyPoints}
-              />
-              <OffersAndDiscounts
+              />*/}
+              {/*<OffersAndDiscounts
                 configJson={paymentConfigJson.offersDiscounts}
                 handleOffersDiscountsTab={this.handleOffersDiscountsTab}
-              />
+              />*/}
               <PaymentMode
-                showTab={showTab}
                 data={paymentOptions}
                 saveCard={this.saveCard}
                 makePayment={this.makePayment}
@@ -277,6 +303,7 @@ class Payments extends React.Component {
                       <RightSideBar
                         data={cartResults}
                         showInstant={false}
+                        openSlider={this.openSlider}
                       />
                       <Cart
                         showMiniCart={true}
@@ -286,13 +313,26 @@ class Payments extends React.Component {
                     </div>
                     : null
                 }
-                <div className={styles['secure-img']}>
+                {/*<div className={styles['secure-img']}>
                   <img className={styles['']} src={"/static/img/bg-img/group-cards.png"} />
-                </div>
+                </div>*/}
               </div>
             </Col>
           </Row>
         </Grid>
+        {
+        showSlider &&
+          <Slider
+            closeSlider={this.closeSlider}
+            isOpen={showSlider}
+            label="Coupons"
+          >
+            <Coupon
+              closeSlider={this.closeSlider}
+              openSlider={this.openSlider}
+            />
+          </Slider>
+        }
       </div>
     )
   }
@@ -331,5 +371,3 @@ Payments.defaultProps = {
 };
 
 export default connect(mapStateToprops, mapDispatchToProps)(Payments);
-
-

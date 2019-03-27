@@ -8,8 +8,9 @@ import OrderDetails from './includes/OrderDetails';
 import OrderReturnExchange from './includes/OrderReturnExchange';
 
 import { selectors, actionCreators } from '../../store/order';
-import {languageDefinations} from '../../utils/lang';
-const {ORDER_PAGE} = languageDefinations();
+import { languageDefinations } from '../../utils/lang';
+
+const { ORDER_PAGE } = languageDefinations();
 
 import { mergeCss } from '../../utils/cssUtil';
 const styles = mergeCss('components/Order/order');
@@ -54,6 +55,6 @@ const mapDispatchToProps = (dispatch) => {
     { getOrderDetails: actionCreators.getOrderDetails },
     dispatch,
   );
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Order);
