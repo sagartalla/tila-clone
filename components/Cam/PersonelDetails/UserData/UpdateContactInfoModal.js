@@ -13,7 +13,7 @@ const UpdateContactInfoModal = (props) => {
         element == "password" ?
           <EditPassword {...props} />
           : element == "phone" ?
-            <EditPhone {...props} />
+            <EditPhone {...props} showImage={true} />
             :
             (<div>Loading...</div>)
       }
@@ -22,4 +22,3 @@ const UpdateContactInfoModal = (props) => {
 
 }
 export default UpdateContactInfoModal;
-

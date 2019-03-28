@@ -9,6 +9,8 @@ const actions = {
   DEACTIVATE_USER_PROFILE: 'DEACTIVATE_USER_PROFILE',
   RESET_PASSWORD: 'RESET_PASSWORD',
   FORGOT_PASSWORD: 'FORGOT_PASSWORD',
+  USER_UPDATE_FETCH_OTP:'USER_UPDATE_FETCH_OTP',
+  VERIFY_OTP:'VERIFY_OTP'
 };
 
 const actionCreators = {
@@ -23,6 +25,18 @@ const actionCreators = {
       type: actions.CHANGE_PASSWORD,
       payload: apis.changePassword(body),
     });
+  },
+  verifyOtp:(params) => {
+    return {
+      type:actions.VERIFY_OTP,
+      payload:apis.verifyOtp(params)
+    }
+  },
+  otpUserUpdate: (params) => {
+    return {
+      type:actions.USER_UPDATE_FETCH_OTP,
+      payload:apis.otpUserUpdate(params)
+    }
   },
   resetPassword: (body) => {
     return ({
@@ -58,4 +72,3 @@ const actionCreators = {
 };
 
 export { actions, actionCreators };
-
