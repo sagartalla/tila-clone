@@ -222,6 +222,7 @@ class PaymentMode extends Component {
                                   voucherData={props.paymentModesData.voucherData}
                                   data={props.paymentModesData.paymentModes[key]}
                                   disableAllOthers={this.disableAllOthers}
+                                  transactionId={props.paymentModesData.transaction_id}
                                 />
                               :
                                 null
