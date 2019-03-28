@@ -37,7 +37,6 @@ export default class FeedbackModal extends Component {
     this.sumbitFeedBack = this.sumbitFeedBack.bind(this)
   }
   validateTextArea = (fieldvalue,state) => {
-    console.log(this.state);
     if(fieldvalue === '') {
       return true
     }

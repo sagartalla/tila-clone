@@ -27,7 +27,7 @@ class CancelComplete extends Component {
     const { orderIssue, loadingStatus, errorMessege, goToNextStep } = this.props;
     const { selectedItem } = orderIssue;
     return (
-      <div>
+      <div className={styles['width100']}>
       {
         loadingStatus
         ?
@@ -38,7 +38,7 @@ class CancelComplete extends Component {
             {
               errorMessege
               ?
-              errorMessege
+              <span className={`${styles['p-20']} ${styles['flex']}`}>{errorMessege}</span>
               :
               <div>
                 {/* insert image here */}

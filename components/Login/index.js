@@ -11,10 +11,11 @@ import ForgotPassword from './ForgotPassword';
 import SocialLogin from './SocialLogin';
 import { mergeCss } from '../../utils/cssUtil';
 import { languageDefinations } from '../../utils/lang';
+import FormValidator from '../common/FormValidator';
+
 const styles = mergeCss('components/Login/login');
 
 const { LOGIN_PAGE } = languageDefinations();
-import FormValidator from '../common/FormValidator';
 
 class Login extends Component {
   constructor(props) {
@@ -24,12 +25,6 @@ class Login extends Component {
         field: 'email',
         method: this.validateEmail,
         message: 'Enter valid emailid',
-        validWhen: false,
-      },
-      {
-        field: 'password',
-        method: this.validatePassword,
-        message: 'Special characters are not allowed.',
         validWhen: false,
       },
       {
@@ -49,6 +44,7 @@ class Login extends Component {
       phone: '',
       forgotPassword: false,
       validation: this.validations.valid(),
+      clicked: false,
     };
     this.login = this.login.bind(this);
     this.onChangeField = this.onChangeField.bind(this);
@@ -95,16 +91,28 @@ class Login extends Component {
     return true;
   }
 
-  validatePassword = (fieldvalue, state) => {
-    const passreg = /^([a-zA-Z0-9_-]){8,30}$/;
-    if (passreg.test(fieldvalue)) return false;
-    return true;
+  // validatePassword = (fieldvalue, state) => {
+  //   const passreg = /^([a-zA-Z0-9_-]){8,30}$/;
+  //   if (passreg.test(fieldvalue)) return false;
+  //   return true;
+  // }
+
+  acceptsOffers = (event) => {
+    let { clicked } = this.state;
+    if (event.target.checked) {
+      clicked = true;
+    } else {
+      clicked = false;
+    }
+    this.setState({
+      clicked,
+    });
   }
 
   login(e) {
     e.preventDefault();
     const {
-      email, password, phone, country,
+      email, password, phone, country, clicked,
     } = this.state;
     const validation = this.validations.validate(this.state);
     if (email === '') {
@@ -126,6 +134,7 @@ class Login extends Component {
             password,
             mobile_no: phone,
             mobile_country_code: country,
+            promotional_notification: clicked ? true : false,
           },
           rememberMe: true,
         };
@@ -170,7 +179,7 @@ class Login extends Component {
 
   render() {
     const { userCreds } = this.props;
-    const { mode, error, validation } = this.state;
+    const { mode, error, validation, clicked } = this.state;
     return (
       <Row className={`${styles['bg-white']} ${styles['m-0']}`}>
         { !this.state.forgotPassword ?
@@ -294,9 +303,12 @@ class Login extends Component {
                   this.state.mode === 'register'
                     ?
                       <div className={`${styles['checkbox-material']} ${styles.flex} ${styles['pb-15']}`}>
-                      <input id="deals-offers-reg" type="checkbox" />
-                      <label htmlFor="deals-offers-reg">I would like to receive deals and offers.</label>
-                    </div>
+                          <input id="deals-offers-reg" type="checkbox" onChange={this.acceptsOffers} checked={clicked} />
+                          <label htmlFor="deals-offers-reg">
+                             I would like to receive deals and offers.
+                          </label>
+                      </div>
+
                     :
                     null
                 }

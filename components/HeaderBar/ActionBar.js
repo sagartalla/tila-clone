@@ -64,8 +64,11 @@ class ActionBar extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const show = (!nextProps.isLoggedIn && (nextProps.isLoggedIn != this.props.isLoggedIn) && !this.state.logoutClicked) || this.state.loginClicked || !!nextProps.error || nextProps.loginInProgress || (!nextProps.isLoggedIn && nextProps.showLogin);
+    let show = (!nextProps.isLoggedIn && (nextProps.isLoggedIn != this.props.isLoggedIn) && !this.state.logoutClicked) || this.state.loginClicked || !!nextProps.error || nextProps.loginInProgress || (!nextProps.isLoggedIn && nextProps.showLogin);
     // console.log('show:',show,'nextProps.isLoggedIn', nextProps.isLoggedIn, 'this.props.isLoggedIn', this.props.isLoggedIn, 'this.state.logoutClicked', this.state.logoutClicked, 'nextProps.error', nextProps.error, 'nextProps.loginInProgress', nextProps.loginInProgress);
+    if (window.location.pathname.indexOf('/payment') >= -1) {
+      show = false;
+    }
     this.setState({
       show: show,
       logoutClicked: false,

@@ -8,6 +8,8 @@ const initialState = {
   data: {},
   useractive: true,
   error: '',
+  otpResponse:{},
+  otpData:{}
 };
 
 const personalDetailsReducer = typeToReducer({
@@ -51,6 +53,14 @@ const personalDetailsReducer = typeToReducer({
       error: action.payload.data,
       ui: { loading: false },
     }),
+  },
+  [actions.VERIFY_OTP]:{
+    PENDING: state => Object.assign({},state, {ui: {loading:true}}),
+    FULFILLED:(state,action) => Object.assign({},state,{otpData:action.payload.data,ui:{loading:false}}),
+    REJECTED:(state,action) => Object.assign({},state,{
+      otpData:{messege: action.payload.response.data.message, error: true},
+      ui:{loading:false}
+    })
   },
   [actions.FORGOT_PASSWORD]: {
     PENDING: state => Object.assign({}, state, { ui: { loading: true } }),
@@ -96,6 +106,17 @@ const personalDetailsReducer = typeToReducer({
     };
     return newState;
   },
+  [actions.USER_UPDATE_FETCH_OTP]: {
+    PENDING: state => Object.assign({}, state, { ui: { loading: true }}),
+    FULFILLED: (state,action) => Object.assign({}, state, {
+      ui: { loading:false },
+      otpResponse:action.payload.data
+    }),
+    REJECTED: (state, action) => Object.assign({}, state,
+      { error: action.payload.data, ui: {loading: false }
+    })
+  },
+
   [actions.DEACTIVATE_USER_PROFILE]: {
     PENDING: state => Object.assign({}, state, { ui: { loading: true } }),
     FULFILLED: state => Object.assign({}, state, {

@@ -22,6 +22,7 @@ import { actionCreators as cartActionCreators, selectors as cartSelectors } from
 import { mergeCss } from '../../utils/cssUtil';
 import Slider from '../common/slider';
 import Coupon from '../Cart/CartPaymentSideBar/coupons';
+import FormValidator from '../common/FormValidator';
 
 const styles = mergeCss('components/Payments/payment');
 const cookies = new Cookies();
@@ -32,11 +33,26 @@ const country = cookies.get('country') || 'SAU';
 class Payments extends React.Component {
   constructor(props) {
     super(props);
+    this.validations = new FormValidator([
+      {
+        field: 'username',
+        method: this.validateEmail,
+        message: 'Enter valid emailid',
+        validWhen: false,
+      },
+      {
+        field: 'password',
+        method: this.validateLengthPassword,
+        message: 'Your password must be at least 8 characters long.',
+        validWhen: false,
+      },
+    ]);
     this.state = {
       login: {
         username: '',
         password: '',
       },
+      validation: this.validations.valid(),
       paymentConfigJson: {
         signIn: {
           basic: false,
@@ -67,7 +83,6 @@ class Payments extends React.Component {
       showTab: 0,// to show payment tabs
       paymentOptions: {}, // which payment options to show.
       loggedInFlag: false,
-      signInLoader: false,
       editCartDetails: true,
       showSlider: false,
     }
@@ -83,6 +98,12 @@ class Payments extends React.Component {
     this.handleOffersDiscountsTab = this.handleOffersDiscountsTab.bind(this);
     this.handleShippingAddressContinue = this.handleShippingAddressContinue.bind(this);
     this.onClickEdit = this.onClickEdit.bind(this);
+  }
+
+  componentDidMount() {
+    // TODO move it to base component later after discussion on login.
+    this.props.getLoginInfo();
+    this.props.getCartResults();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -105,32 +126,26 @@ class Payments extends React.Component {
     if (nextProps.isLoggedIn && !loggedInFlag) {
       const login = nextProps.userCreds || this.state.login;
       const paymentConfigJson = { ...this.state.paymentConfigJson };
-
       paymentConfigJson['signIn'] = { basic: false, progress: false, done: true };
       paymentConfigJson['address'] = { basic: false, progress: true, done: false };
-      this.setState({ paymentConfigJson, login, loggedInFlag: true, signInLoader: false });
+      this.setState({
+        paymentConfigJson, login, loggedInFlag: true,
+      });
     }
   }
 
-  componentDidMount() {
-    // TODO move it to base component later after discussion on login.
-    this.props.getLoginInfo();
-    this.props.getCartResults();
-  }
-
-
-  //TODO Show loader on clicking on login button.
-  showAddressTab() {
-    const serverData = {
-      channel: 'BASIC_AUTH',
-      metadata: this.state.login,
-      rememberMe: true,
-    }
-    this.setState({ signInLoader: true });
-    this.props.userLogin(serverData);
+  onClickEdit() {
     const paymentConfigJson = { ...this.state.paymentConfigJson };
-    paymentConfigJson['signIn'] = { basic: false, progress: false, done: true };
-    this.setState({paymentConfigJson});
+    paymentConfigJson.signIn = { basic: false, progress: true, done: false };
+    paymentConfigJson.address = {
+      basic: true,
+      progress: false,
+      done: false,
+    };
+    this.setState({
+      paymentConfigJson,
+      loggedInFlag: false,
+    });
   }
 
   inputOnChange(e) {
@@ -232,10 +247,38 @@ class Payments extends React.Component {
     });
   }
 
-  onClickEdit() {
-    const paymentConfigJson = { ...this.state.paymentConfigJson };
-    paymentConfigJson['signIn'] = { basic: false, progress: true, done: false };
-    this.setState({paymentConfigJson});
+  //TODO Show loader on clicking on login button.
+  showAddressTab() {
+    const validation = this.validations.validate(this.state.login);
+    if (validation.isValid) {
+      const serverData = {
+        channel: 'BASIC_AUTH',
+        metadata: this.state.login,
+        rememberMe: true,
+      };
+
+      this.props.userLogin(serverData);
+    }
+    this.setState({
+      validation,
+    });
+  }
+
+  validateEmail = (fieldvalue, state) => {
+    const emailReg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (emailReg.test(fieldvalue)) return false;
+    return true;
+  }
+
+  validateLengthPassword = (fieldvalue, state) => {
+    if (fieldvalue.length >= 8) return false;
+    return true;
+  }
+
+  validatePassword = (fieldvalue, state) => {
+    const passreg = /^([a-zA-Z0-9_-]){8,30}$/;
+    if (passreg.test(fieldvalue)) return false;
+    return true;
   }
 
   openSlider = () => {
@@ -249,8 +292,8 @@ class Payments extends React.Component {
     });
   }
   render() {
-    const { login, showTab, paymentConfigJson, signInLoader, editCartDetails, showSlider } = this.state;
-    const { paymentOptions, defaultAddress, isLoggedIn, cartResults } = this.props;
+    const { login, showTab, paymentConfigJson, editCartDetails, showSlider, validation } = this.state;
+    const { paymentOptions, defaultAddress, signInLoader, isLoggedIn, cartResults } = this.props;
     const { PAYMENT_PAGE } = languageDefinations();
 
     return (
@@ -271,6 +314,7 @@ class Payments extends React.Component {
                 inputOnChange={this.inputOnChange}
                 configJson={paymentConfigJson.signIn}
                 onClickEdit={this.onClickEdit}
+                validation={validation}
               />
               <DeliveryAddress
                 defaultAddress={defaultAddress}
@@ -334,20 +378,21 @@ class Payments extends React.Component {
           </Slider>
         }
       </div>
-    )
+    );
   }
 }
 
-const mapStateToprops = (store) => ({
+const mapStateToprops = store => ({
   userCreds: authSelectors.getUserCreds(store),
   cartResults: cartSelectors.getCartResults(store),
   paymentOptions: selectors.getPaymentOptions(store),
   makePaymentOptions: selectors.getPaymentUrl(store),
   defaultAddress: selectors.getDefaultAddress(store),
   isLoggedIn: authSelectors.getLoggedInStatus(store),
-})
+  signInLoader: authSelectors.getLoginProgressStatus(store),
+});
 
-const mapDispatchToProps = (dispatch) =>
+const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       saveCard: actionCreators.saveCard,

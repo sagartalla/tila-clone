@@ -8,8 +8,8 @@ import Cookie from 'universal-cookie';
 import { actionCreators, selectors } from '../../../store/auth';
 import SVGCompoent from '../SVGComponet';
 import { languageDefinations } from '../../../utils/lang';
-
 import { mergeCss } from '../../../utils/cssUtil';
+
 const styles = mergeCss('components/common/GeoWidget/geoWidget');
 
 const { SEARCH_PAGE } = languageDefinations();
@@ -40,10 +40,10 @@ class GeoWidget extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { geoShippingData } = nextProps;
-    if (!this.state.displayCity && geoShippingData) {
+    if (this.props.geoShippingData.city !== geoShippingData.city) {
       this.setState({
-        displayCity: geoShippingData.displayCity
-      },() => location.reload())
+        displayCity: geoShippingData.displayCity,
+      }, () => location.reload());
     }
   }
 
@@ -116,7 +116,17 @@ class GeoWidget extends Component {
         <div className={styles['auto-suggestions-wrap']}>
           <input type="text" value={this.state.displayCity} className={styles['fs-12']} onChange={this.onChangeCity} />
           {
-            autoCompleteCityData.map((result) => <div key={result.displayCity} className={`${styles['auto-suggestions']} ${styles['p-10']} ${styles['bg-white']}`}><div data-id={result.displayCity} onClick={this.selectCityFromSuggesstions} className={`${styles['item']} ${styles['fs-12']}`}>{result.displayCity}</div></div>)
+            <div className={`${styles['auto-suggestions-list']}`}>
+            {autoCompleteCityData.map(result =>
+              (
+                <div
+                  key={result.displayCity}
+                  className={`${styles['auto-suggestions']} ${styles['pt-5']} ${styles['pl-10']} ${styles['bg-white']}`}
+                >
+                  <div data-id={result.displayCity} onClick={this.selectCityFromSuggesstions} className={`${styles.item} ${styles['fs-12']}`}>{result.displayCity}</div>
+                </div>
+              ))}
+              </div>
           }
           {
             this.state.displayCity

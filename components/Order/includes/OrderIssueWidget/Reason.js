@@ -56,7 +56,7 @@ class Reason extends Component {
 
     if (findData.length > 0) {
       return [
-        <div>
+        <div key='replace'>
           <input
             className={styles['radio-btn']}
             type="radio"
@@ -70,7 +70,7 @@ class Reason extends Component {
     }
 
     return [
-      <div>
+      <div key='replace-disable'>
         <input type="radio" className={styles['radio-btn']} value="Replace" checked={false} disabled />
         <label className={styles['pl-10']}>Replace</label>
       </div>,
@@ -99,9 +99,7 @@ class Reason extends Component {
     }
 
     if (
-      (selectedMode === 'Return' || selectedMode === 'Cancel' )&&
-      (ORDER_ISSUE_TYPES.RETURN === 'RETURN' ||
-        ORDER_ISSUE_TYPES.EXCHANGE === 'EXCHANGE')
+      (selectedMode === 'Return' || selectedMode === 'Cancel' )
     ) {
       this.props.setOrderIssueData(params);
       this.props.setAddressData(reasonParams)
@@ -109,8 +107,7 @@ class Reason extends Component {
       goToNextStep();
     }
     else if (
-      this.state.selectedMode === 'Exchange' &&
-      ORDER_ISSUE_TYPES.EXCHANGE === 'EXCHANGE'
+      this.state.selectedMode === 'Exchange'
     ) {
       if (this.state.selectedVariant.length <= 0) {
         this.setState({
@@ -130,6 +127,16 @@ class Reason extends Component {
       }
     }
     else {
+      let paramObject = Object.assign({},params,{issueType:'REPLACE'})
+      this.props.setOrderIssueData(paramObject)
+      this.props.setExchangeOrder({
+        comments: comment,
+        reason,
+        sub_reason: subReason,
+        new_listing_id: orderDetails.order_items[0].listing_id,
+        variant_id: orderDetails.order_items[0].variant_id,
+        order_item_id: query.orderItemId
+      })
       goToNextStep();
     }
 
@@ -172,8 +179,8 @@ class Reason extends Component {
     const { img, name } = itemData;
     const { selectedMode, displaySizeError } = this.state;
     return (
-      <div className={styles['reason-item-main']}>
-        <h4 className={`${styles['fs-20']} ${styles['fontW400']} ${styles['text-capitalize']}`}>Why do you want to {returnExchangeType} this Item?</h4>
+      <div className={`${styles['reason-item-main']} ${styles['width100']}`}>
+        <h4 className={`${styles['fs-20']} ${styles['fontW300']} ${styles['text-capitalize']} ${styles['ml-20']} ${styles['mr-20']}`}>Why do you want to {returnExchangeType} this Item?</h4>
         {returnExchangeType ? null : (
           <div
             className={`${styles['flx-spacebw-alignc']} ${styles['pb-20']} ${
@@ -204,7 +211,7 @@ class Reason extends Component {
             </div>
           </div>
         )}
-        <div className={`${styles['reason-cont']} ${styles['pb-15']}`}>
+        <div className={`${styles['reason-cont']} ${styles['pb-15']} ${styles['ml-20']} ${styles['mr-20']}`}>
           <span className={`${styles['instruction-txt']} ${styles['pb-20']} ${styles['pt-20']} ${styles['flex']} ${styles['fs-12']} ${styles['google-clr']}`}>
             {ORDER_PAGE.SELECT_CANCEL_REASON}
           </span>
