@@ -49,13 +49,14 @@ class EditPhone  extends React.Component {
         validWhen:false
       }
     ])
-
+    debugger;
+    console.log(CountryDialCode, country, CountryDialCode[country].code);
     this.state = {
       phoneNumber: "",
       otp: null,
       error: "",
       show: false,
-      countryCode:country,
+      countryCode: CountryDialCode[country].data,
       otpResponse:null,
       showOtp:true,
       validation:this.validations.valid()
@@ -69,6 +70,7 @@ class EditPhone  extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    const { afterSuccessOtpVerification } = this.props;
 
     if (this.state.show == true && nextProps.errorMessege != this.state.error) {
       this.setState({
@@ -84,6 +86,8 @@ class EditPhone  extends React.Component {
     } else if(Object.keys(nextProps.otpData).length > 0){
       this.setState({
         otpResponse:nextProps.otpData.Response
+      }, () => {
+        afterSuccessOtpVerification && afterSuccessOtpVerification();
       })
     }
 
@@ -98,13 +102,13 @@ class EditPhone  extends React.Component {
     return false
   }
   fetchOtp(){
-    const { countryCode,phoneNumber,showOtp} = this.state
+    const { countryCode, phoneNumber, showOtp} = this.state
     let validation = this.validations.validate(this.state)
     this.setState({ validation })
 
     if(validation.isValid) {
       const params = {
-        mobile_country_code:countryCode,
+        mobile_country_code: countryCode,
         mobile_no:phoneNumber
       }
       this.setState({
@@ -146,17 +150,21 @@ class EditPhone  extends React.Component {
 
   render(){
   const {phoneNumber, error, otp, countryCode, validation, otpResponse, showOtp} = this.state;
-  const { isLoading, showImage } = this.props
+  const { isLoading, isPopup } = this.props
   if(otpResponse === 'SUCCESS') {
     return (
       <div>
-        <Row>
-          <Col xs={1} md={1} onClick={this.handleClose}><a>
-            X</a>
-          </Col>
-        </Row>
         {
-          showImage
+          isPopup && (
+            <Row>
+              <Col xs={1} md={1} onClick={this.handleClose}><a>
+                X</a>
+              </Col>
+            </Row>
+          )
+        }
+        {
+          isPopup
             ?
             <MobileImage />
             :
@@ -165,19 +173,25 @@ class EditPhone  extends React.Component {
 
         <div>Thank you</div>
         <p> Your phone number has been successfully verified </p>
-        <Button variant="primary" onClick={this.handleClose}>done</Button>
+        {
+            isPopup && <Button variant="primary" onClick={this.handleClose}>done</Button>
+        }
       </div>
     )
   }
   return (
     <div>
-      <Row>
-        <Col xs={1} md={1} onClick={this.handleClose}><a>
-          X</a>
-        </Col>
-      </Row>
       {
-        showImage
+        isPopup && (
+          <Row>
+            <Col xs={1} md={1} onClick={this.handleClose}><a>
+              X</a>
+            </Col>
+          </Row>
+        )
+      }
+      {
+        isPopup
           ?
           <MobileImage />
           :
@@ -194,11 +208,13 @@ class EditPhone  extends React.Component {
           </SVGCompoent>
         </div> : null
       }
-      <Row>
-        <Col xs={11} md={11}>
-          <h3>{CONTACT_INFO_MODAL.EDIT_PHONE_NUMBER}</h3>
-        </Col>
-      </Row>
+      {
+        isPopup && (<Row>
+          <Col xs={11} md={11}>
+            <h3>{CONTACT_INFO_MODAL.EDIT_PHONE_NUMBER}</h3>
+          </Col>
+        </Row>)
+      }
       <div>
       <Row>
         <Col xs={4} md={4} />
