@@ -11,10 +11,11 @@ import ForgotPassword from './ForgotPassword';
 import SocialLogin from './SocialLogin';
 import { mergeCss } from '../../utils/cssUtil';
 import { languageDefinations } from '../../utils/lang';
+import FormValidator from '../common/FormValidator';
+
 const styles = mergeCss('components/Login/login');
 
 const { LOGIN_PAGE } = languageDefinations();
-import FormValidator from '../common/FormValidator';
 
 class Login extends Component {
   constructor(props) {
@@ -24,12 +25,6 @@ class Login extends Component {
         field: 'email',
         method: this.validateEmail,
         message: 'Enter valid emailid',
-        validWhen: false,
-      },
-      {
-        field: 'password',
-        method: this.validatePassword,
-        message: 'Special characters are not allowed.',
         validWhen: false,
       },
       {
@@ -95,11 +90,11 @@ class Login extends Component {
     return true;
   }
 
-  validatePassword = (fieldvalue, state) => {
-    const passreg = /^([a-zA-Z0-9_-]){8,30}$/;
-    if (passreg.test(fieldvalue)) return false;
-    return true;
-  }
+  // validatePassword = (fieldvalue, state) => {
+  //   const passreg = /^([a-zA-Z0-9_-]){8,30}$/;
+  //   if (passreg.test(fieldvalue)) return false;
+  //   return true;
+  // }
 
   login(e) {
     e.preventDefault();
