@@ -56,7 +56,7 @@ class Reason extends Component {
 
     if (findData.length > 0) {
       return [
-        <div>
+        <div key='replace'>
           <input
             className={styles['radio-btn']}
             type="radio"
@@ -70,7 +70,7 @@ class Reason extends Component {
     }
 
     return [
-      <div>
+      <div key='replace-disable'>
         <input type="radio" className={styles['radio-btn']} value="Replace" checked={false} disabled />
         <label className={styles['pl-10']}>Replace</label>
       </div>,
@@ -99,9 +99,7 @@ class Reason extends Component {
     }
 
     if (
-      (selectedMode === 'Return' || selectedMode === 'Cancel' )&&
-      (ORDER_ISSUE_TYPES.RETURN === 'RETURN' ||
-        ORDER_ISSUE_TYPES.EXCHANGE === 'EXCHANGE')
+      (selectedMode === 'Return' || selectedMode === 'Cancel' )
     ) {
       this.props.setOrderIssueData(params);
       this.props.setAddressData(reasonParams)
@@ -109,8 +107,7 @@ class Reason extends Component {
       goToNextStep();
     }
     else if (
-      this.state.selectedMode === 'Exchange' &&
-      ORDER_ISSUE_TYPES.EXCHANGE === 'EXCHANGE'
+      this.state.selectedMode === 'Exchange'
     ) {
       if (this.state.selectedVariant.length <= 0) {
         this.setState({
@@ -130,6 +127,16 @@ class Reason extends Component {
       }
     }
     else {
+      let paramObject = Object.assign({},params,{issueType:'REPLACE'})
+      this.props.setOrderIssueData(paramObject)
+      this.props.setExchangeOrder({
+        comments: comment,
+        reason,
+        sub_reason: subReason,
+        new_listing_id: orderDetails.order_items[0].listing_id,
+        variant_id: orderDetails.order_items[0].variant_id,
+        order_item_id: query.orderItemId
+      })
       goToNextStep();
     }
 
