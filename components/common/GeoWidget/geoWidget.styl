@@ -1,17 +1,23 @@
 @import '../../../layout/main/executables.styl';
 
 .auto-suggestions-wrap
-  position relative
+    position: relative;
+    .auto-suggestions-list
+      position: absolute;
+      z-index: 9999;
+      left: 0%;
+      top: 100%;
+      height: 200px;
+      overflow: auto;
+      overflow-x: hidden;
   input[type=text]
     background transparent
   .auto-suggestions
-    position absolute
     z-index 1
     cursor pointer
     box-shadow 0 2px 4px 0 rgba(0,0,0,0.11)
     line-height 2.5
-    width 230px
-
+    width 200px
     .item
       display block
       border-bottom 0.5px solid border-gray

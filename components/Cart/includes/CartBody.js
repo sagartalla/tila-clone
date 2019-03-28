@@ -59,49 +59,50 @@ const CartBody = ({
           </h4>
         </Col>
       </Row>
-      {
-        flag > 0 ?
-          <Row className={styles['mr-0']}>
-            <Col md={9} sm={12} xs={12} className={styles['pr-5']}>
-
-              <div>
-                {
-                  items.map((item,index) => (
-                    <CartItem
-                      item={item}
-                      count={count}
-                      routeChange={routeChange}
-                      increaseItemCnt={increaseItemCnt}
-                      decreaseItemCnt={decreaseItemCnt}
-                      addToWishlist={addToWishlist}
-                      removeCartItem={removeCartItem}
-                      cartStepperInputHandler={cartStepperInputHandler}
-                      addOrRemoveGift={addOrRemoveGift}
-                      cartData={cartData}
-                      index={index}
-                    />
-                ))}
-
-                <Wishlist cartMiniWishList={true} />
-              </div>
-            </Col>
-            <Col md={3} sm={12} xs={12} className={styles['pr-0']}>
-              <div className={`${styles['box']}`}>
-                <RightBar
-                  data={data}
-                  showInstant={true}
-                  showCheckoutBtn={true}
-                  checkoutBtnHandler={checkoutBtnHandler}
-                  openSlider={openSlider}
+      <Row className={styles['mr-0']}>
+        <Col md={9} sm={12} xs={12} className={styles['pr-5']}>
+          <div>
+            {
+              items.map((item,index) => (
+                <CartItem
+                  item={item}
+                  count={count}
+                  routeChange={routeChange}
+                  increaseItemCnt={increaseItemCnt}
+                  decreaseItemCnt={decreaseItemCnt}
+                  addToWishlist={addToWishlist}
+                  removeCartItem={removeCartItem}
+                  cartStepperInputHandler={cartStepperInputHandler}
+                  addOrRemoveGift={addOrRemoveGift}
+                  cartData={cartData}
+                  index={index}
                 />
-              </div>
-              <div className={styles['secure-img']}>
-                <img className={styles['']} src={"/static/img/bg-img/group-cards.png"} />
-              </div>
-            </Col>
-          </Row>
-          : null
-      }
+            ))}
+
+            <Wishlist cartMiniWishList={true} />
+          </div>
+        </Col>
+        {
+          flag > 0
+            ?
+              <Col md={3} sm={12} xs={12} className={styles['pr-0']}>
+                <div className={`${styles['box']}`}>
+                  <RightBar
+                    data={data}
+                    showInstant={true}
+                    showCheckoutBtn={true}
+                    checkoutBtnHandler={checkoutBtnHandler}
+                    openSlider={openSlider}
+                  />
+                </div>
+                {/*<div className={styles['secure-img']}>
+                  <img className={styles['']} src={"/static/img/bg-img/group-cards.png"} />
+                </div>*/}
+              </Col>
+            :
+              null
+        }
+      </Row>
     </div>
   );
 };

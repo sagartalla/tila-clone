@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Router from 'next/router';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import withRedux from 'next-redux-wrapper';
@@ -10,8 +11,20 @@ import { actionCreators, selectors } from '../store/landing';
 
 class LandingPage extends Base {
   pageName = 'HOME';
-  static async getInitialProps({ store, query, isServer, req }) {
-    // await store.dispatch(actionCreators.getPages());
+  static async getInitialProps({ store, query, isServer, req, res }) {
+    const { country, language } = query;
+    const setCountry = country || 'SAU'
+    const setLanguage = language || 'en'
+    if(!country || !language) {
+      if(res) {
+        res.writeHead(302, {
+          Location: `/${setCountry}/${setLanguage}`
+        })
+        res.end();
+      } else {
+        Router.push(`/${setCountry}/${setLanguage}`)
+      }
+    }
     return { isServer };
   }
 

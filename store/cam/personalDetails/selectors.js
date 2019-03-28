@@ -27,7 +27,7 @@ const getUserInfo = (store) => {
 
     }
     let personalInfo = {}
-    if(store.personalDetailsReducer.data.personalInfo != "" && store.personalDetailsReducer.data.personalInfo && Object.keys(store.personalDetailsReducer.data.personalInfo).length > 0) 
+    if(store.personalDetailsReducer.data.personalInfo != "" && store.personalDetailsReducer.data.personalInfo && Object.keys(store.personalDetailsReducer.data.personalInfo).length > 0)
     {
       personalInfo=store.personalDetailsReducer.data.personalInfo;
       personalInfo.user_name=personalInfo.first_name+" "+personalInfo.last_name;
@@ -54,7 +54,12 @@ const getEditPersonalInfoStatus = (store) => {
 const getErrorMessege = (store) => {
   return store.personalDetailsReducer.error ? store.personalDetailsReducer.error : "";
 }
-
+const getLoadingStatus = (store) => {
+  return store.personalDetailsReducer.ui.loading
+}
+const getOtpData = (store) => {
+  return store.personalDetailsReducer.otpData
+}
 const resetPasswordStatus =(store) => {
 return store.personalDetailsReducer;
 }
@@ -68,4 +73,4 @@ const forgotPasswordStatus = (store) => {
 }
 
 
-export { getUserInfo, getPasswordResetStatus, getErrorMessege, getEditPersonalInfoStatus , forgotPasswordStatus, resetPasswordStatus};
+export { getUserInfo, getPasswordResetStatus, getLoadingStatus, getErrorMessege, getEditPersonalInfoStatus , forgotPasswordStatus, resetPasswordStatus, getOtpData};

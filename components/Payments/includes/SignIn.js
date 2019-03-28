@@ -16,7 +16,7 @@ class SignIn extends Component {
     super(props);
     this.state = {
       showTerms: false,
-      showPrivacy: false
+      showPrivacy: false,
     }
 
     this.tcToggle = this.tcToggle.bind(this);
@@ -83,15 +83,29 @@ class SignIn extends Component {
                 <span className={styles['highlight']}></span>
                 <span className={styles['bar']}></span>
                 <label>{PAYMENT_PAGE.EMAIL_OR_USERNAME}</label>
+                {
+                    props.validation.username.message
+                      ?
+                        <span className={`${styles['error-msg']}`}>{props.validation.username.message}</span>
+                      :
+                      null
+                  }
               </div>
               <div className={`${styles['fp-input']}`}>
                 <input type="password" name="password" onChange={props.inputOnChange} value={props.login.password} className={styles.input} required />
                 <span className={styles['highlight']}></span>
                 <span className={styles['bar']}></span>
                 <label>{PAYMENT_PAGE.PASSWORD}</label>
+                {
+                  props.validation.password.message
+                    ?
+                      <span className={`${styles['error-msg']}`}>{props.validation.password.message}</span>
+                    :
+                    null
+                }
               </div>
               <div className={`${styles['mt-10']} ${styles['mb-10']}`}>
-                <input type="checkbox" defaultChecked="true" />{PAYMENT_PAGE.AGREE_TO} <a onClick={this.tcToggle}>{PAYMENT_PAGE.TC}</a>{PAYMENT_PAGE.AND}<a onClick={this.privacyToggle}>{PAYMENT_PAGE.PRIVACY_POLICY}</a>
+                <input type="checkbox" defaultChecked="true" /> {PAYMENT_PAGE.AGREE_TO} <a onClick={this.tcToggle}>{PAYMENT_PAGE.TC}</a> {PAYMENT_PAGE.AND} <a onClick={this.privacyToggle}>{PAYMENT_PAGE.PRIVACY_POLICY}</a>
               </div>
               <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles['fontW600']} ${styles['text-uppercase']}`} onClick={props.showAddressTab}>{PAYMENT_PAGE.CONTINUE}</button>
               {
