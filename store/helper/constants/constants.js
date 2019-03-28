@@ -74,7 +74,6 @@ const a = {
   },
   stage: {
     IMAGE_SEARCH_URL: 'https://api-gateway-stage.fptechscience.com/image-search',
-    USER_API_URL: 'https://api-gateway-stage.fptechscience.com',
     SEARCH_API_URL: 'https://api-gateway-stage.fptechscience.com/search',
     CATALOG_API_URL: 'http://api-gateway-internal-stage.fptsinternal.com/catalogapi',
     LISTING_API_URL: 'https://api-gateway-stage.fptechscience.com/listing',
@@ -96,7 +95,6 @@ const a = {
   },
   preprod: {
     IMAGE_SEARCH_URL: 'https://apigateway-preprod.tila.com/image-search',
-    USER_API_URL: 'https://apigateway-preprod.tila.com',
     SEARCH_API_URL: 'https://apigateway-preprod.tila.com/search',
     CATALOG_API_URL: 'http://api-gateway-internal-stage.fptsinternal.com/catalogapi',
     LISTING_API_URL: 'https://apigateway-preprod.tila.com/listing',
@@ -118,7 +116,6 @@ const a = {
   },
   prod: {
     IMAGE_SEARCH_URL: 'https://gateway-dev.fptechscience.com/image-search',
-    USER_API_URL: 'https://gateway-dev.fptechscience.com',
     SEARCH_API_URL: 'http://gateway-dev.fptechscience.com/search',
     CATALOG_API_URL: 'http://api-gateway-internal-stage.fptsinternal.com',
     LISTING_API_URL: 'http://gateway-dev.fptechscience.com/listing',

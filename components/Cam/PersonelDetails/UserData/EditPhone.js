@@ -85,11 +85,7 @@ class EditPhone  extends React.Component {
       this.setState({
         otpResponse:nextProps.otpData.Response
       })
-    } else {
-      //show something went wrong
-      toast.error('something went wrong. please try again')
     }
-
 
   }
   optionChange(e) {
@@ -149,8 +145,8 @@ class EditPhone  extends React.Component {
   }
 
   render(){
-  const {phoneNumber, error, otp,countryCode,validation,otpResponse,showOtp,showImage} = this.state;
-  const { isLoading } = this.props
+  const {phoneNumber, error, otp, countryCode, validation, otpResponse, showOtp} = this.state;
+  const { isLoading, showImage } = this.props
   if(otpResponse === 'SUCCESS') {
     return (
       <div>
@@ -180,7 +176,13 @@ class EditPhone  extends React.Component {
           X</a>
         </Col>
       </Row>
-      <MobileImage />
+      {
+        showImage
+          ?
+          <MobileImage />
+          :
+          null
+      }
       <div className={styles['editProfileModal']}>
       {
         isLoading ?
