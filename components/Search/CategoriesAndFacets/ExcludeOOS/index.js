@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Panel } from 'react-bootstrap';
 import { addUrlProps, UrlQueryParamTypes, pushInUrlQuery } from 'react-url-query';
-
 import { Router } from '../../../../routes';
 import { mergeCss } from '../../../../utils/cssUtil';
 
@@ -31,7 +30,10 @@ class ExcludeOOS extends Component {
       <Panel>
         <div className={`${styles['category-list-title']} ${styles['black-color']} ${styles['fontW600']} ${styles['p-10-20']} ${styles['flx-spacebw-alignc']}`}>
           <span>Hide Out of Stock</span>
-          <input onClick={this.excludeOOS} type="checkbox" checked={this.props.excludeOOS === 'true'}/>
+          <input className={`${styles['HideOOS']}`} onClick={this.excludeOOS} id="Toggle" type="checkbox" checked={this.props.excludeOOS === 'true'}/>
+          <label className={`${styles['Switch']}`} for="Toggle">
+            <div className={`${styles['Toggle']}`}></div>
+          </label>
         </div>
       </Panel>
     )
