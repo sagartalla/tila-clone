@@ -5,10 +5,10 @@ const actions = {
     VERIFY_CAPTCHA: 'VERIFY_CAPTCHA',
 };
 const actionCreators = {
-  captchaQuestion: () => (dispatch) => {
+  captchaQuestion: (params) => (dispatch) => {
     return dispatch({
       type: actions.CAPTCHA_DISPLAY,
-      payload: apis.captchaDisplay(),
+      payload: apis.captchaDisplay(params),
     });
   },
 
@@ -21,4 +21,3 @@ const actionCreators = {
 };
 
 export { actions, actionCreators };
-

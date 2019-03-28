@@ -11,7 +11,7 @@ import SVGComponent from '../../common/SVGComponet';
 import PayOnline from './paymentpages/PayOnline';
 import NetBanking from './paymentpages/NetBanking';
 import RewardPoints from './paymentpages/RewardPoints';
-import CashOnDelivery from './paymentpages/cod';
+import CashOnDelivery from './paymentpages/CashOnDelivery';
 import SavedCards from './paymentpages/SavedCards';
 
 import { actionCreators, selectors } from '../../../store/payments';
@@ -222,6 +222,7 @@ class PaymentMode extends Component {
                                   voucherData={props.paymentModesData.voucherData}
                                   data={props.paymentModesData.paymentModes[key]}
                                   disableAllOthers={this.disableAllOthers}
+                                  transactionId={props.paymentModesData.transaction_id}
                                 />
                               :
                                 null

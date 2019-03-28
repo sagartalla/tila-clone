@@ -1,12 +1,12 @@
 import axios from 'axios';
 import constants from '../helper/constants';
-const captchaDisplay = () => {
-  let headers = { 
-    headers: { 
+const captchaDisplay = ({txnId}) => {
+  let headers = {
+    headers: {
       'X-Request-Id': {}
     }
   }
-  return axios.get(constants.CAPTCHA_URL, headers).then(({data}) => {
+  return axios.get(`${constants.CAPTCHA_URL}?txnId=${txnId}`, headers).then(({data}) => {
     return data;
   })
 }
