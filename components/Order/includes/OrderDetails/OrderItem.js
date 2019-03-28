@@ -75,7 +75,8 @@ class OrderItem extends Component {
   getDate = (estimates) => {
     const { orderItem } = this.props;
     if (estimates.length > 0) {
-      return moment(estimates.filter(state => state.status === orderItem.status)[0].actual_time).format('Do, dddd');
+      const t = estimates.filter(state => state.status === orderItem.status)[0];
+      return t.actual_time ? moment(t.actual_time).format('Do, dddd') : '';
     } return '';
   }
 

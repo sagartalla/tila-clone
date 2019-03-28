@@ -3,7 +3,7 @@ import axios from 'axios';
 import constants from '../helper/constants';
 
 const getOrderDetails = ({ orderId }) => {
-  return axios.get(`${constants.ORDERS_API_URL}/api/v1/customer/order/details/${orderId}?include_state_times=true&include_payments=true&grouped=true`)
+  return axios.get(`${constants.ORDERS_API_URL}/api/v1/customer/order/details/${orderId}?include_state_times=true&include_payments=true&grouped=true&include_item_history=true&include_refunds=true&include_return_exchange=true`)
 }
 
 const getReasons = (params) => axios.get(`${constants.ORDERS_API_URL}/api/v1/return/reasons?order_item_id=${params.orderItemId}`);

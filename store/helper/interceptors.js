@@ -86,10 +86,10 @@ const errorInterceptor = (err) => {
           cookies.remove('auth');
         }
       } else {
-        if(err.response.status == '403') {
+        if (err.response.status === '403') {
           cookies.remove('auth');
         }
-        toast.error(`${err.response.data.message}`);
+        toast.error(err.response.data.message || err.response.data.data.error.message);
         notifySentry(err);
       }
     }

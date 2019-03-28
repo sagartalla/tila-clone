@@ -21,7 +21,7 @@ const List = ({ orderIssue, goToNextStep, setSelectedItem }) => {
   }
 
   return (
-    <div>
+    <div className={`${styles['width100']}`}>
       <div className={styles['widget-body']}>
       {
         items.map((item) => {
