@@ -13,6 +13,7 @@ import { actionCreators, selectors } from '../../store/compare';
 import { actionCreators as cartActionCreators } from '../../store/cart';
 import { languageDefinations } from '../../utils/lang';
 import { mergeCss } from '../../utils/cssUtil';
+import Button from '../common/CommonButton';
 
 const styles = mergeCss('components/Compare/compare');
 const { COMPARE } = languageDefinations();
@@ -57,9 +58,10 @@ class Compare extends Component {
   }
 
   addToCart = ({ currentTarget }) => {
+    debugger;
     const { addToCartAndFetch } = this.props;
     addToCartAndFetch({
-      listing_id: currentTarget.getAttribute('data-listing-id'),
+      listing_id: currentTarget.getAttribute('id'),
     });
   }
 
@@ -120,6 +122,7 @@ class Compare extends Component {
       compareCount = 0, features = [], products = [], productsFeatures = [], 
     } = compareInfo;
     const { selectedBrand } = this.state;
+    console.log('products compare', products);
     return (
       <div>
         <HeaderBar />
@@ -160,20 +163,13 @@ class Compare extends Component {
                       <span className={`${styles['fs-10']} ${styles['thick-gry-clr']}`}>{product.name}</span>
                     </div>
                     <div className={`${styles.flex} ${styles['justify-center']}`}>
-                      {product.addedToCart ?
-                      <a className={`${styles['p-10']} ${styles['flex-center']} ${styles['added-btn']}`}>
-                        <span className={styles.flex}>
-                          <SVGCompoent clsName={styles['cart-list']} src="icons/cart/added-cart-icon" />
-                          In Cart
-                        </span>
-                      </a>
-                      :
-                      <a className={`${styles['p-10']} ${styles['flex-center']} ${styles['added-btn']}`} data-listing-id={product.listing_id} onClick={this.addToCart}>
-                        <span className={styles.flex}>
-                          <SVGCompoent clsName={styles['cart-list']} src="icons/cart/blue-cart-icon" />
-                          Add To Cart
-                        </span>
-                      </a>}
+                      <Button
+                        className={`${styles['p-10']} ${styles['flex-center']} ${styles['added-btn']}`}
+                        id={product.listing_id}
+                        onClick={product.addedToCart === false && this.addToCart}
+                        btnText={product.addedToCart ? 'In Cart' : 'Add To Cart'}
+                        showImage={product.addedToCart ? 'icons/cart/added-cart-icon' : 'icons/cart/blue-cart-icon'}
+                      />
                     </div>
                     {compareCount > 1 && <span className={`${styles['close-item']} ${styles.pointer}`} data-prod-id={product.id} onClick={this.removeItem}>x</span>}
                   </div>
