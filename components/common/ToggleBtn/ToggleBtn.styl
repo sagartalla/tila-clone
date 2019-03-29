@@ -1,0 +1,24 @@
+@import '/static/vendor/css/react-input-range.css';
+@import '/static/vendor/css/react-input-range-override.css';
+
+.Switch
+  display: inline-block;
+  cursor pointer
+  width 30px
+  height 13px
+  background #ccc
+  border-radius 8px
+  .Toggle
+    border-radius 40px
+    width 17px
+    height 16px
+    background white
+    border 1px solid gray
+    position absolute
+    top 9px
+.HideOOS 
+  visibility: hidden
+.HideOOS:checked + .Switch
+  background #99e600
+  .Toggle
+    transform translateX(13px)

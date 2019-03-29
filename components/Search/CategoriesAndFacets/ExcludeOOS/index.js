@@ -3,6 +3,7 @@ import { Panel } from 'react-bootstrap';
 import { addUrlProps, UrlQueryParamTypes, pushInUrlQuery } from 'react-url-query';
 import { Router } from '../../../../routes';
 import { mergeCss } from '../../../../utils/cssUtil';
+import ToggleBtn from '../../../common/ToggleBtn';
 
 const styles = mergeCss('components/Search/search');
 
@@ -13,10 +14,10 @@ const urlPropsQueryConfig = {
 class ExcludeOOS extends Component {
   constructor(props) {
     super(props);
-    this.excludeOOS = this.excludeOOS.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
-  excludeOOS(e) {
+  handleClick(e) {
     const query = e.target.checked
       ?
         window.location.search.replace('isListed=false', 'isListed=true')
@@ -30,10 +31,7 @@ class ExcludeOOS extends Component {
       <Panel>
         <div className={`${styles['category-list-title']} ${styles['black-color']} ${styles['fontW600']} ${styles['p-10-20']} ${styles['flx-spacebw-alignc']}`}>
           <span>Hide Out of Stock</span>
-          <input className={`${styles['HideOOS']}`} onClick={this.excludeOOS} id="Toggle" type="checkbox" checked={this.props.excludeOOS === 'true'}/>
-          <label className={`${styles['Switch']}`} for="Toggle">
-            <div className={`${styles['Toggle']}`}></div>
-          </label>
+          <ToggleBtn handleClick={this.handleClick} excludeOOS={this.props.excludeOOS}/>
         </div>
       </Panel>
     )
