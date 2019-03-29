@@ -16,6 +16,7 @@ import SVGCompoent from '../../common/SVGComponet';
 import { mergeCss } from '../../../utils/cssUtil';
 import { languageDefinations } from '../../../utils/lang';
 import NotifyMe from '../../common/NotifyMe/NotifyMe';
+import Button from '../../common/CommonButton';
 
 import RenderVariants from './renderVariants';
 
@@ -35,6 +36,8 @@ class Product extends Component {
       src: '',
       selectedIndex: 0,
       showLoader: false,
+      showCartLoader: false,
+      showBuyNowLoader: false,
     };
     this.setImg = this.setImg.bind(this);
     this.addToWishlist = this.addToWishlist.bind(this);
@@ -74,6 +77,9 @@ class Product extends Component {
     const { selectedIndex } = this.state;
     const { variants } = this.props;
     this.props.buyNow(variants[selectedIndex].listingId[0]);
+    this.setState({
+      showBuyNowLoader: true,
+    });
   }
 
   notify(e) {
@@ -118,6 +124,9 @@ class Product extends Component {
       let id = [productId]
       this.props.selectedProduct(id)
     }
+    this.setState({
+      showCartLoader: true,
+    });
     // digitalData.cart.item.push({
     //   productInfo:{
     //     productID:productId,
@@ -224,8 +233,9 @@ class Product extends Component {
       selectedID,
       flags,
       cartButtonLoaders,
+      isLastAddedToCartSuccess,
     } = this.props;
-    const { showNotify, selectedIndex, showLoader } = this.state;
+    const { showNotify, selectedIndex, showLoader, showCartLoader, showBuyNowLoader } = this.state;
     const selectedProduct = selectedID.length > 0 && selectedID.includes(productId);
     const discountValue = variants.length > 0 &&
       variants[selectedIndex].discount && Math.floor(variants[selectedIndex].discount[0]);
@@ -316,24 +326,22 @@ class Product extends Component {
               {
                 variants.length > 0 ?
                   <div className={`${styles['flex']} ${styles['justify-around']} ${styles['quick-view']} ${styles['border-radius4']}`}>
-                    {cartButtonLoaders[variants[selectedIndex].listingId[0]] ?
-                      <a className={`${styles['flex']} ${styles['add-to-crt']} ${styles['add-loader']}`} onClick={this.loaderClick}>
-                        <div className={styles['loader-div']}>
-                          <SVGCompoent clsName={`${styles['loader-styl']}`} src="icons/common-icon/circleLoader" />
-                        </div>
-                      </a>
-                      :
-                      <a className={`${styles['flex']} ${styles['add-to-crt']} ${styles['fs-12']} ${styles['text-uppercase']}`} onClick={this.addToCart}>
-                        {/* <SVGCompoent clsName={`${styles['cart-list']}`} src="icons/cart/blue-cart-icon" /> */}
-                        <span>
-                          <span className={styles['flex']}><SVGCompoent clsName={styles['cart-list']} src="icons/cart/blue-cart-icon" />{PDP_PAGE.ADD_TO_CART}</span>
-                        </span>
-                      </a>
-                    }
-                    <a className={`${styles['flex-center']} ${styles['buy-now-btn']} ${styles['fs-12']} ${styles['text-uppercase']}`} onClick={this.buyNow}>
-                      <SVGCompoent clsName={`${styles['cart-list']}`} src="icons/cart/buy-icon" />
-                      <span className={styles['pl-5']}>{PDP_PAGE.BUY_NOW}</span>
-                    </a>
+                    <Button
+                      className={`${styles['flex']} ${styles['add-to-crt']} ${styles['fs-12']} ${styles['text-uppercase']}`}
+                      onClick={this.addToCart}
+                      disabled={cartButtonLoaders[variants[selectedIndex].listingId[0]]}
+                      btnText={PDP_PAGE.ADD_TO_CART}
+                      showImage="icons/cart/blue-cart-icon"
+                      btnLoading={cartButtonLoaders[variants[selectedIndex].listingId[0]] && showCartLoader}
+                    />
+                    <Button
+                      className={`${styles['flex-center']} ${styles['buy-now-btn']} ${styles['fs-12']} ${styles['text-uppercase']}`}
+                      onClick={this.buyNow}
+                      disabled={cartButtonLoaders[variants[selectedIndex].listingId[0]]}
+                      btnText={PDP_PAGE.BUY_NOW}
+                      showImage="icons/cart/buy-icon"
+                      btnLoading={cartButtonLoaders[variants[selectedIndex].listingId[0]] && showBuyNowLoader}
+                    />
                   </div>
                 :
                 <div className={`${styles['flex']} ${styles['justify-around']} ${styles['quick-view']} ${styles['border-radius4']}`}>
@@ -423,6 +431,9 @@ Product.propTypes = {
   media: PropTypes.array.isRequired,
   displayName: PropTypes.string.isRequired,
   variants: PropTypes.object.isRequired,
+};
+
+Product.defaultProps = {
 };
 
 const mapDispatchToProps = (dispatch) => {

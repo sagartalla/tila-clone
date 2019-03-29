@@ -81,7 +81,7 @@ class SearchResults extends Component {
 
   render() {
     const {
-      results, pagiantionDetails, userDetails, notifyMe, cartButtonLoaders,
+      results, pagiantionDetails, userDetails, notifyMe, cartButtonLoaders, isLastAddedToCartSuccess,
     } = this.props;
     if(results.totalCount === 0) {
       return (

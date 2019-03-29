@@ -9,6 +9,8 @@ import { Router } from '../../../routes';
 import { languageDefinations } from '../../../utils/lang';
 import SVGCompoent from '../../common/SVGComponet';
 import { mergeCss } from '../../../utils/cssUtil';
+import Button from '../../common/CommonButton';
+
 const styles = mergeCss('components/Product/product');
 
 const cookies = new Cookie();
@@ -69,20 +71,19 @@ class AddToCart extends Component {
     :
     (
       <div className={`${styles['pt-25']} ${styles['flx-space-bw']} ${styles['addto-cart']} ${styles['ipad-p-0']} ${styles['border-t']}`}>
-        <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['fs-16']} ${styles['ipad-fs-14']} ${styles['add-to-card-btn']} ${styles['flex']}`} onClick={this.addToCart} disabled={isLoading || isAddedToCart} >
-        {/* {isAddedToCart ? <SVGCompoent clsName={`${styles['added-cart-icon']}`} src="icons/cart/added-cart-icon" /> : PDP_PAGE.ADD_TO_CART} */}
-          {
-          btnLoading ?
-          <div className={styles['loader-div']}>
-            <SVGCompoent clsName={`${styles['loader-styl']}`} src="icons/common-icon/circleLoader" />
-          </div>
-          :
-          isAddedToCart ?
-          <SVGCompoent clsName={`${styles['added-cart-icon']}`} src="icons/cart/added-cart-icon" />
-          : PDP_PAGE.ADD_TO_CART
-        }
-        </button>
-        <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fs-16']} ${styles['ipad-fs-14']} ${styles['buy-now-btn']}`} onClick={this.buyNow}>{PDP_PAGE.BUY_NOW}</button>
+        <Button
+          className={`${styles['fs-16']} ${styles['ipad-fs-14']} ${styles['add-to-card-btn']} ${styles['flex']}`}
+          disabled={isLoading || isAddedToCart}
+          onClick={isAddedToCart === false && this.addToCart}
+          btnLoading={btnLoading}
+          btnText={isAddedToCart ? '' : 'Add To Cart'}
+          showImage={isAddedToCart && 'icons/cart/added-cart-icon'}
+        />
+        <Button
+          className={`${styles['fs-16']} ${styles['ipad-fs-14']} ${styles['buy-now-btn']}`}
+          onClick={this.buyNow}
+          btnText={PDP_PAGE.BUY_NOW}
+        />
       </div>
     );
   }
