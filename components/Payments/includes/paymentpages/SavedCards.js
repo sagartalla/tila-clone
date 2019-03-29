@@ -5,14 +5,12 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import _ from 'lodash';
 import SVGComponent from '../../../common/SVGComponet';
-
 import { actionCreators, selectors } from '../../../../store/payments';
-
 import Voucher from './Voucher';
-
 import { languageDefinations } from '../../../../utils/lang/';
-
 import { mergeCss } from '../../../../utils/cssUtil';
+import Button from '../../../common/CommonButton';
+
 const styles = mergeCss('components/Payments/payment');
 const { PAYMENT_PAGE } = languageDefinations();
 
@@ -114,7 +112,11 @@ class SavedCards extends Component {
             })
           }
         </ul>
-        <button onClick={this.proceedToPayment} className={`${styles['fp-btn-primary']} ${styles['fp-btn']} ${styles['fs-18']} ${styles['text-uppercase']} ${styles['pay-btn']} ${styles['border-radius']}`}>Pay {data.amount_to_pay} {data.currency_code}</button>
+        <Button
+          className={`${styles['fs-18']} ${styles['text-uppercase']} ${styles['pay-btn']} ${styles['border-radius']} ${styles.width33} ${styles['new-card-btn']}`}
+          onClick={this.proceedToPayment}
+          btnText={'Pay' + ' ' + data.amount_to_pay + ' ' + data.currency_code}
+        />
       </div>
     );
   }

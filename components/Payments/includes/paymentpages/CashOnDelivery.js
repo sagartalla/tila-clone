@@ -1,3 +1,4 @@
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
@@ -9,14 +10,14 @@ import { actionCreators as paymentsActionCreators, selectors as paymentsSelector
 import { actionCreators as camActionCreators, selectors as camSelectors } from '../../../../store/cam/personalDetails';
 import { bindActionCreators } from 'redux';
 import { Router } from '../../../../routes';
-
 import Captcha from './Captcha';
 import EditPhone from '../../../Cam/PersonelDetails/UserData/EditPhone';
+import Button from '../../../common/CommonButton';
 
 const { PAYMENT_PAGE } = languageDefinations();
 const styles = mergeCss('components/Payments/payment');
 
-class CashOnDelivery extends React.Component{
+class CashOnDelivery extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -62,8 +63,8 @@ class CashOnDelivery extends React.Component{
 
   afterSuccessOtpVerification() {
     this.setState({
-      showPayBtn: true
-    })
+      showPayBtn: true,
+    });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -82,7 +83,7 @@ class CashOnDelivery extends React.Component{
     });
   }
   render() {
-    const {data} = this.props;
+    const { data } = this.props;
     return <div>
         <div className={`${styles['cash-on-dly-points']}`}>
     <Row className={styles['pl-40']}>
@@ -115,11 +116,23 @@ class CashOnDelivery extends React.Component{
     <Col md={6} sm={12} xs={12}>
       {
         this.state.showContinueButton &&
-           (<button className={`${styles['fp-btn']} ${styles['fs-16']} ${styles['fontW600']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']}`} onClick={this.onContinueHandle} >Continue</button>)
+           (
+           <Button
+              className={`${styles['fs-16']} ${styles['fontW600']} ${styles.width55} ${styles['new-card-btn']}`}
+              onClick={this.onContinueHandle}
+              btnText="Continue"
+           />
+          )
       }
       {
         this.state.showPayBtn &&
-            (<button className={`${styles['fp-btn']} ${styles['fs-16']} ${styles['fontW600']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']}`} onClick={this.proceedToPayment} >Pay {data.amount_to_pay} {data.currency_code} </button>)
+            (
+            <Button
+              className={`${styles['fs-16']} ${styles['fontW600']} ${styles['new-card-btn']} ${styles['border-radius']} ${styles.width55}`}
+              onClick={this.proceedToPayment}
+              btnText={'Pay' + ' ' + data.amount_to_pay + ' ' + data.currency_code}
+         />
+          )
       }
     </Col>
     </Row>

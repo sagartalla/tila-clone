@@ -3,18 +3,14 @@ import PropTypes from 'prop-types';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-
 import { actionCreators, selectors } from '../../../../store/payments';
-
 import Voucher from './Voucher';
-
 import { languageDefinations } from '../../../../utils/lang/';
-
 import { mergeCss } from '../../../../utils/cssUtil';
+import Button from '../../../common/CommonButton';
+
 const styles = mergeCss('components/Payments/payment');
 const { PAYMENT_PAGE } = languageDefinations();
-
-
 
 class PayOnline extends Component {
 
@@ -73,7 +69,11 @@ class PayOnline extends Component {
               :
               <div className={`${styles['pt-30']} ${styles['pb-30']}`}>
                 <p className={`${styles['mb-25']} `}>Once you click on Add New Card. There is no going back. You can't access any other modes of payment.</p>
-                <button className={`${styles['fp-btn-primary']} ${styles['fp-btn']} ${styles['text-uppercase']} ${styles['new-card-btn']} ${styles['fs-18']} ${styles['border-radius']}`} onClick={this.fetchIframe}>Pay {data.amount_to_pay} {data.currency_code} Using New Card</button>
+                <Button
+                  className={`${styles['text-uppercase']} ${styles['new-card-btn']} ${styles['fs-16']} ${styles['border-radius']} ${styles.width55}`}
+                  onClick={this.fetchIframe}
+                  btnText={'Pay' + ' ' + data.amount_to_pay + ' ' + data.currency_code + ' ' + 'Using New Card'}
+                />
               </div>
           }
         </div>
