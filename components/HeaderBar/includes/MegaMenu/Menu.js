@@ -90,7 +90,8 @@ class Menu extends Component {
                 <a className={`${styles['level-1-item']} ${styles['fontW600']}`}>{HEADER_PAGE.TOP_BRANDS}</a>
               </span>
               <ul className={`${styles['megamenu-sub-child-list']}`}>
-                {brandImages.topBrands[colorScheme].map(image => (
+                {brandImages.topBrands[colorScheme] &&
+                brandImages.topBrands[colorScheme].length > 0 && brandImages.topBrands[colorScheme].map(image => (
                   <li className={`${styles.flex} ${styles['mb-10']} ${styles['brand-icon']}`}>
                     <img alt={image} src={`/static/img/bg-img/${image}.jpg`} className={`${styles['img-responsive']}`} />
                   </li>
@@ -104,7 +105,8 @@ class Menu extends Component {
                 <a className={`${styles['level-1-item']} ${styles['fontW600']}`}>{HEADER_PAGE.TRENDING}</a>
               </span>
               <ul className={`${styles['megamenu-sub-child-list']}`}>
-                {brandImages.trending[colorScheme].map(image => (
+                {brandImages.trending[colorScheme] && brandImages.trending[colorScheme].length > 0 &&
+                brandImages.trending[colorScheme].map(image => (
                   <li className={`${styles.flex} ${styles['mb-10']} ${styles['brand-icon']}`}>
                     <img alt={image} src={`/static/img/bg-img/${image}.jpg`} className={`${styles['img-responsive']}`} />
                   </li>

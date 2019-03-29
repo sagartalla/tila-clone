@@ -5,6 +5,7 @@ export const AR_KEYWORDS = {
     'ORDER_SUMMARY': 'ملخص الطلب',
     'PRICE': 'السعر',
     'DELIVERY_CHARGES': 'رسوم التوصيل',
+    'GIFT_CHARGES': 'رسوم الهدايا',
     'DISCOUNT': 'خصم',
     'TOTAL_AMOUNT': 'المبلغ الإجمالي',
     'REMOVE': 'حذف',
