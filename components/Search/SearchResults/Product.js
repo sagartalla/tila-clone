@@ -314,7 +314,7 @@ class Product extends Component {
                 ${styles['pb-10']}`}
             >
               {
-                variants.length > 0 ?
+                variants.length > 0 && variants[selectedIndex].productAvailable ?
                   <div className={`${styles['flex']} ${styles['justify-around']} ${styles['quick-view']} ${styles['border-radius4']}`}>
                     {cartButtonLoaders[variants[selectedIndex].listingId[0]] ?
                       <a className={`${styles['flex']} ${styles['add-to-crt']} ${styles['add-loader']}`} onClick={this.loaderClick}>
