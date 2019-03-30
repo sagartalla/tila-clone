@@ -73,6 +73,7 @@ class PayOnline extends Component {
                   className={`${styles['text-uppercase']} ${styles['new-card-btn']} ${styles['fs-16']} ${styles['border-radius']} ${styles.width55}`}
                   onClick={this.fetchIframe}
                   btnText={'Pay' + ' ' + data.amount_to_pay + ' ' + data.currency_code + ' ' + 'Using New Card'}
+                  hoverClassName="hoverBlueBackground"             
                 />
               </div>
           }

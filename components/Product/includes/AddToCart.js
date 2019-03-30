@@ -83,6 +83,7 @@ class AddToCart extends Component {
           className={`${styles['fs-16']} ${styles['ipad-fs-14']} ${styles['buy-now-btn']}`}
           onClick={this.buyNow}
           btnText={PDP_PAGE.BUY_NOW}
+          hoverClassName="hoverBlueBackground"
         />
       </div>
     );

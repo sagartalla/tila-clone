@@ -121,6 +121,8 @@ class CashOnDelivery extends React.Component {
               className={`${styles['fs-16']} ${styles['fontW600']} ${styles.width55} ${styles['new-card-btn']}`}
               onClick={this.onContinueHandle}
               btnText="Continue"
+              hoverClassName="hoverBlueBackground"
+              
            />
           )
       }
@@ -131,6 +133,8 @@ class CashOnDelivery extends React.Component {
               className={`${styles['fs-16']} ${styles['fontW600']} ${styles['new-card-btn']} ${styles['border-radius']} ${styles.width55}`}
               onClick={this.proceedToPayment}
               btnText={'Pay' + ' ' + data.amount_to_pay + ' ' + data.currency_code}
+              hoverClassName="hoverBlueBackground"
+              
          />
           )
       }

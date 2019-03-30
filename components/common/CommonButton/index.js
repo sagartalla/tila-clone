@@ -32,7 +32,7 @@ class Button extends Component {
     const { hover } = this.state;
     return (
     <button
-        className={hover ? `${styles[hoverClassName]} ${styles['button-hoverstyl']} ${className}` : `${styles['button-styl']} ${className}` }
+        className={hover ? ` ${styles['button-hoverstyl']} ${className} ${styles[hoverClassName]}` : `${styles['button-styl']} ${className}` }
         style={style}
         id={id}
         onClick={onClick}
@@ -48,7 +48,7 @@ class Button extends Component {
       showImage ?
         <div className={`${styles.flex} ${styles['align-center']}`}>
           <SVGCompoent clsName={`${styles['image-icon']}`} src={showImage} />
-          {btnText}
+        {btnText}
         </div> :
     btnText}
   </button>

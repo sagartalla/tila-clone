@@ -116,6 +116,7 @@ class SavedCards extends Component {
           className={`${styles['fs-18']} ${styles['text-uppercase']} ${styles['pay-btn']} ${styles['border-radius']} ${styles.width33} ${styles['new-card-btn']}`}
           onClick={this.proceedToPayment}
           btnText={'Pay' + ' ' + data.amount_to_pay + ' ' + data.currency_code}
+          hoverClassName="hoverBlueBackground"
         />
       </div>
     );

@@ -79,6 +79,7 @@ class Product extends Component {
     this.props.buyNow(variants[selectedIndex].listingId[0]);
     this.setState({
       showBuyNowLoader: true,
+      showCartLoader: false,
     });
   }
 
@@ -337,15 +338,15 @@ class Product extends Component {
                     <Button
                       className={`${styles['flex-center']} ${styles['buy-now-btn']} ${styles['fs-12']} ${styles['text-uppercase']}`}
                       onClick={this.buyNow}
-                      disabled={cartButtonLoaders[variants[selectedIndex].listingId[0]]}
                       btnText={PDP_PAGE.BUY_NOW}
                       showImage="icons/cart/buy-icon"
-                      btnLoading={cartButtonLoaders[variants[selectedIndex].listingId[0]] && showBuyNowLoader}
+                      hoverClassName="hoverBlueBackground"
+                      btnLoading={false}
                     />
                   </div>
                 :
                 <div className={`${styles['flex']} ${styles['justify-around']} ${styles['quick-view']} ${styles['border-radius4']}`}>
-                  <a className={`${styles['flex-center']} ${styles['buy-now-btn']}`} onClick={this.notify}>
+                  <a className={`${styles['flex-center']} ${styles['buy-now-btn']} ${styles['notifyBackground']}`} onClick={this.notify}>
                     <span className={styles['pl-5']}>{PDP_PAGE.NOTIFY_ME}</span>
                   </a>
                 </div>
