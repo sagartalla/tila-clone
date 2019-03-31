@@ -12,7 +12,7 @@ const styles = mergeCss('components/Product/product');
 const { PDP_PAGE } = languageDefinations();
 
 const settings = {
-  infinite: true,
+  infinite: false,
   speed: 500,
   slidesToShow: 5,
   slidesToScroll: 1,
