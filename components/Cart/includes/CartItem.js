@@ -173,11 +173,11 @@ class CartItem extends React.Component {
                     <a onClick={() => routeChange(variant_id, product_id, catalogId, itemType)}>{name}</a>
                   </h4>
                   <div className={`${styles['warranty-part']} ${styles['p-10']} ${styles['light-gry-clr']}`}>
-                    {cartData.items ? <p className={`${styles['mb-0']} ${styles['fs-12']}`}>
+                    {cartData.items ? <p className={`${styles['mb-0']} ${styles['fs-12']} ${styles['flex']}`}>
                       <span>Warranty : </span>
-                       <span className={`${styles['pl-10']} ${styles['pr-10']}`}><Warranty warranty={cartData.items[index].warranty_duration} /></span>
-                        </p>
-                        : null}
+                      <span className={`${styles['pl-10']} ${styles['pr-10']}`}><Warranty warranty={cartData.items[index].warranty_duration} /></span>
+                    </p>
+                      : null}
                     <p className={`${styles['mb-0']} ${styles['fs-12']}`}>
                       <span>{CART_PAGE.SHIPPING} : </span>
                       <span className={`${styles['pl-10']} ${styles['pr-10']}`}>{CART_PAGE.REGULAR_SHIPPING}  ({shipping.shipping_fees + ' ' + cur}) - <span className={`${styles['fs-12']} ${styles['base-font']}`}>{CART_PAGE.ETA_DELIVERY_BY} {moment().add(shipping.shipping_days, 'days').format('LL')}</span>
@@ -195,37 +195,37 @@ class CartItem extends React.Component {
                     </div>
                   }
                   {!showMessage && checked &&
-                  <div className={styles['flex-center']}>
-                    <textarea
-                      name="msg"
-                      id={item_id}
-                      cols="30"
-                      rows="2"
-                      className={styles['resize-none']}
-                      placeholder="Gift Message (optional)"
-                      value={gift_card_message}
-                      onChange={this.updateMsg}
-                    />
-                    <button
-                      data-id={item_id}
-                      className={`${styles['ml-5']} ${styles['bg-thick-blue']} ${styles['p-5']} ${styles['white-color']} ${styles['border-radius4']}`}
-                      onClick={this.sendGiftPack}
-                    >
-                      Gift Pack
+                    <div className={styles['flex-center']}>
+                      <textarea
+                        name="msg"
+                        id={item_id}
+                        cols="30"
+                        rows="2"
+                        className={styles['resize-none']}
+                        placeholder="Gift Message (optional)"
+                        value={gift_card_message}
+                        onChange={this.updateMsg}
+                      />
+                      <button
+                        data-id={item_id}
+                        className={`${styles['ml-5']} ${styles['bg-thick-blue']} ${styles['p-5']} ${styles['white-color']} ${styles['border-radius4']}`}
+                        onClick={this.sendGiftPack}
+                      >
+                        Gift Pack
                     </button>
-                  </div>}
+                    </div>}
                 </Col>
                 <Col md={2} sm={2} className={`${styles['pl-0']} ${styles['landscape-cart-price']}`}>
                   {Math.floor(discount) > 5 &&
-                  <p className={`${styles['mb-0']} ${styles['fs-12']}`}>
-                    <span className={styles['success-green']}>{`${Math.floor(discount)}% OFF`}</span>
-                    <span className={`${styles['cross-strike']} ${styles.relative} ${styles['ml-10']}`}>
-                      <span className={styles['label-light-grey']}>
-                        <span>{mrp}&nbsp;</span>
-                        <span>{cur}</span>
+                    <p className={`${styles['mb-0']} ${styles['fs-12']}`}>
+                      <span className={styles['success-green']}>{`${Math.floor(discount)}% OFF`}</span>
+                      <span className={`${styles['cross-strike']} ${styles.relative} ${styles['ml-10']}`}>
+                        <span className={styles['label-light-grey']}>
+                          <span>{mrp}&nbsp;</span>
+                          <span>{cur}</span>
+                        </span>
                       </span>
-                    </span>
-                  </p>}
+                    </p>}
                   <h4 className={`${styles.fontW600} ${styles['justify-flex-end']} ${styles['light-gry-clr']} ${styles['flex-center']} ${styles['mt-10']} ${styles['t-rt']}`}>
                     {`${offer_price} ${cur}`}
                     <OverlayTrigger placement="bottom" overlay={popover(item)}>

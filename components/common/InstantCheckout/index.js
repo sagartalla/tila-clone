@@ -27,10 +27,10 @@ const language = cookies.get('language') || 'en';
 const country = cookies.get('country') || 'SAU';
 
 class InstantCheckout extends Component {
-  
+
   constructor(props) {
     super(props);
-    
+
     this.state = {
       showMiniAddress: false,
       showMiniVault: false,
@@ -41,7 +41,7 @@ class InstantCheckout extends Component {
       cntryCode: '',
       phoneNumber: '',
     }
-    
+
     this.updateCVV = this.updateCVV.bind(this);
     this.mobilehandler = this.mobilehandler.bind(this);
     this.codClickHandler = this.codClickHandler.bind(this);
@@ -51,62 +51,66 @@ class InstantCheckout extends Component {
     this.toggleMiniAddress = this.toggleMiniAddress.bind(this);
     this.creditCardClickHandler = this.creditCardClickHandler.bind(this);
   }
-  
+
   componentDidMount() {
     this.props.getShippingAddressResults();
     this.props.getCardResults();
   }
-  
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.getInstantCheckoutdata && nextProps.getInstantCheckoutdata.redirect_url) {
       location.href = nextProps.getInstantCheckoutdata.redirect_url;
     }
   }
-  
+
   toggleMiniAddress() {
     this.setState({ showMiniAddress: !this.state.showMiniAddress, showMiniVault: false });
   }
-  
+
   toggleMiniVault() {
     this.setState({ showMiniVault: !this.state.showMiniVault, showMiniAddress: false });
   }
-  
+
   doInstantCheckout() {
-    const { creditDebitCard, cvv, cntryCode, phoneNumber } = this.state;
-    const { defaultCard, insnt_item_listing_id } = this.props;
-    
+    const {
+      creditDebitCard, cntryCode, phoneNumber,
+    } = this.state;
+    const { defaultCard, insnt_item_listing_id, doInstantCheckout } = this.props;
+
+    const params = {
+      listing_ids: insnt_item_listing_id ? [insnt_item_listing_id] : [],
+      payment_mode: creditDebitCard ? 'SAVED_CARD' : 'CASH_ON_DELIVERY',
+      redirect_url: `${window.location.origin}/${country}/${language}`,
+    };
+
+    if (creditDebitCard) {
+      params.card_token = defaultCard[0].card_token;
+    } else params.phone_number = phoneNumber ? `${cntryCode} ${phoneNumber}` : '';
+
     this.setState({ showBlocker: true });
-    
-    this.props.doInstantCheckout({
-      "listing_ids": insnt_item_listing_id ? [insnt_item_listing_id] : [],
-      "payment_mode": creditDebitCard ? "SAVED_CARD" : 'COD',
-      "card_token": defaultCard[0].card_token,
-      "cvv": cvv,
-      "phone_number": phoneNumber ? cntryCode + ' ' + phoneNumber : '',
-      "redirect_url": `${window.location.origin}/${country}/${language}` 
-    });
+    doInstantCheckout(params);
   }
-  
+
   creditCardClickHandler() {
     this.setState({ creditDebitCard: true, cod: false });
   }
-  
+
   codClickHandler() {
     this.setState({ creditDebitCard: false, cod: true });
   }
-  
+
   updateCVV(e) {
     this.setState({ cvv: e.target.value });
   }
-  
+
   mobilehandler(e) {
     this.setState({ phoneNumber: e.target.value });
   }
-  
+
   cntryCodehandler(e) {
     this.setState({ cntryCode: e.target.value });
   }
-  
+
   render() {
     const { addressResults, defaultAddr, vaultResults, defaultCard, isPdp } = this.props;
     const { showMiniAddress, showMiniVault, creditDebitCard, cod, showBlocker } = this.state;
@@ -118,7 +122,7 @@ class InstantCheckout extends Component {
         {
           showBlocker ?
           <div className={styles['blocker']}>
-          
+
           </div>
           : ''
         }
@@ -183,7 +187,7 @@ class InstantCheckout extends Component {
           </Row>
           </div> : null
         }
-        
+
         {/* <div className={`${styles['p-10-20']}`}>
         <div className={styles['checkbox-material']}>
         <input id="checkout-label" type="checkbox" />
@@ -198,7 +202,7 @@ class InstantCheckout extends Component {
       : null
     }
     </div>
-    
+
     )
   }
 }
@@ -226,15 +230,14 @@ bindActionCreators(
   },
   dispatch,
   );
-  
+
   InstantCheckout.propTypes = {
-    
+
   };
-  
+
   InstantCheckout.defaultProps = {
-    
+
   };
-  
+
   export default connect(mapStateToProps, mapDispatchToProps)(InstantCheckout);
-  
-  
+

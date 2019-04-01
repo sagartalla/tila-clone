@@ -13,6 +13,7 @@ const getCartResults = (store) => {
       newData.total_offer_price = data.total_offer_price;
       newData.total_discount = data.total_discount;
       newData.total_shipping = data.total_shipping;
+      newData.total_gift_charges = data.total_gift_charges;
       newData.tax = 0;
       newData.item_cnt = data.items.length;
       newData.currency = data.items[0].listing_info.selling_price_currency;
