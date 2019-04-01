@@ -22,8 +22,8 @@ import FooterBar from '../Footer/index';
 import Theme from '../helpers/context/theme';
 import CompareWidget from '../common/CompareWidget';
 import { actionCreators as wishlistActionCreators } from '../../store/cam/wishlist';
-
 import { mergeCss } from '../../utils/cssUtil';
+import Button from '../common/CommonButton';
 
 const styles = mergeCss('components/Product/product');
 
@@ -206,9 +206,12 @@ const getProductComponent = (isPreview, taskCode) => {
                                 <span className={styles['error-msg']}>{emailErr}</span>
                               }
                             </div>}
-                            <a className={`${styles['flex-center']} ${styles.notify_me_btn}`} onClick={this.notify}>
-                              <span className={`${styles['p-10-40']} ${styles['fs-20']}`}>Notify Me</span>
-                            </a>
+                            <Button
+                              className={`${styles['flex-center']} ${styles.notify_me_btn} ${styles['fs-20']}`}
+                              btnText="Notify Me"
+                              onClick={this.notify}
+                              hoverClassName="hoverBlueBackground"
+                            />
                           </div>
                         }
                       </div>
