@@ -60,7 +60,7 @@ const WishlistBody = (props) => {
           data.length > 0 && data.map((item, index) => {
             const {
               wishlist_id, listing_id, brand_name, name, img, price, cur, inventory_count,
-              wishlisted_price, mrp, variant_id, product_id, catalog_id, itemType, buttonText
+              wishlisted_price, mrp, variant_id, product_id, catalog_id, itemType, buttonValue
             } = item;
             return (
               <div key={index} className={`${styles['thick-border-btm']} ${styles['p-30-20']} ${styles['mb-wishlist-part']}`}>
@@ -83,9 +83,9 @@ const WishlistBody = (props) => {
                             id={listing_id}
                             data-wish-id={wishlist_id}
                             className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['add-to-btn']}`}
-                            onClick={buttonText === 'MOVE TO CART' && addToCart}
+                            onClick={buttonValue && addToCart}
                           >
-                            {buttonText}
+                            {buttonValue ? WISH_LIST_PAGE.ADD_TO_CART_BTN : PDP_PAGE.ADDED_TO_CART}
                           </button>
                           :
                           <button
