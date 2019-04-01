@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators, selectors } from '../../../store/cam/wishlist';
+import { selectors as cartSelectors } from '../../../store/cart';
 
 import WishlistBody from './includes/WishlistBody';
 import CartBottomPopup from './includes/CartBottomPopup';
@@ -54,7 +55,7 @@ class Wishlist extends Component {
   }
 
   render() {
-    const { results, cartMiniWishList } = this.props;
+    const { results, cartMiniWishList, cartData } = this.props;
     const { showCartPageBtmPopup } = this.state;
     return (
       <div className={`${styles['wishlist']} ${styles['pl-5']}`}>
@@ -81,6 +82,7 @@ class Wishlist extends Component {
               deleteItem={this.deleteItem}
               addToCart={this.addToCart}
               notifyMe={this.notify}
+              cartData={cartData.items}
             />
         }
 
@@ -91,6 +93,7 @@ class Wishlist extends Component {
 
 const mapStateToProps = store => ({
   results: selectors.getWishListResults(store),
+  cartData: cartSelectors.getCartResults(store),
 });
 
 const mapDispatchToProps = (dispatch) =>
