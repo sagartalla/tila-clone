@@ -325,7 +325,7 @@ class Product extends Component {
                 ${styles['pb-10']}`}
             >
               {
-                variants.length > 0 ?
+                variants.length > 0 && variants[selectedIndex].productAvailable ?
                   <div className={`${styles['flex']} ${styles['justify-around']} ${styles['quick-view']} ${styles['border-radius4']}`}>
                     <Button
                       className={`${styles['flex']} ${styles['add-to-crt']} ${styles['fs-12']} ${styles['text-uppercase']}`}
