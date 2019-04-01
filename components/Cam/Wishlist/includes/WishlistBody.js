@@ -18,7 +18,7 @@ const country = cookies.get('country') || 'SAU';
 const percentage = (a, b) => Math.floor(((a - b) / b) * 100);
 
 const WishlistBody = (props) => {
-  const { data, deleteItem, addToCart, notifyMe, cartData } = props;
+  const { data, deleteItem, addToCart, notifyMe } = props;
   const { WISH_LIST_PAGE, PDP_PAGE } = languageDefinations();
 
   const getPriceAlert = (a, b, cur) => {
@@ -60,10 +60,8 @@ const WishlistBody = (props) => {
           data.length > 0 && data.map((item, index) => {
             const {
               wishlist_id, listing_id, brand_name, name, img, price, cur, inventory_count,
-              wishlisted_price, mrp, variant_id, product_id, catalog_id, itemType,
+              wishlisted_price, mrp, variant_id, product_id, catalog_id, itemType, buttonText
             } = item;
-            const values = cartData && cartData.map(function (e) { return e.product_id; }).indexOf(product_id);
-            const buttonValue = values === -1 ? WISH_LIST_PAGE.ADD_TO_CART_BTN : PDP_PAGE.ADDED_TO_CART;
             return (
               <div key={index} className={`${styles['thick-border-btm']} ${styles['p-30-20']} ${styles['mb-wishlist-part']}`}>
                 <Row className={styles['m-m-0']}>
@@ -85,9 +83,9 @@ const WishlistBody = (props) => {
                             id={listing_id}
                             data-wish-id={wishlist_id}
                             className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['add-to-btn']}`}
-                            onClick={buttonValue === 'MOVE TO CART' && addToCart}
+                            onClick={buttonText === 'MOVE TO CART' && addToCart}
                           >
-                            {buttonValue}
+                            {buttonText}
                           </button>
                           :
                           <button
@@ -137,7 +135,6 @@ WishlistBody.propTypes = {
   deleteItem: PropTypes.func.isRequired,
   addToCart: PropTypes.func.isRequired,
   notifyMe: PropTypes.func.isRequired,
-  cartData: PropTypes.instanceOf(Array),
 };
 
 WishlistBody.defaultProps = {

@@ -82,7 +82,6 @@ class Wishlist extends Component {
               deleteItem={this.deleteItem}
               addToCart={this.addToCart}
               notifyMe={this.notify}
-              cartData={cartData.items}
             />
         }
 
@@ -93,7 +92,6 @@ class Wishlist extends Component {
 
 const mapStateToProps = store => ({
   results: selectors.getWishListResults(store),
-  cartData: cartSelectors.getCartResults(store),
 });
 
 const mapDispatchToProps = (dispatch) =>
