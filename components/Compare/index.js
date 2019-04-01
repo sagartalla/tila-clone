@@ -10,7 +10,8 @@ import HeaderBar from '../HeaderBar';
 import FooterBar from '../Footer';
 import SVGCompoent from '../common/SVGComponet';
 import { actionCreators, selectors } from '../../store/compare';
-import { actionCreators as cartActionCreators } from '../../store/cart';
+import { actionCreators as cartActionCreators,  } from '../../store/cart';
+import { selectors as cartSelectors } from '../../store/search';
 import { languageDefinations } from '../../utils/lang';
 import { mergeCss } from '../../utils/cssUtil';
 import Button from '../common/CommonButton';
@@ -117,12 +118,13 @@ class Compare extends Component {
   }
 
   render() {
-    const { compareInfo = {}, brands = [], productList = [] } = this.props;
+    const { compareInfo = {}, brands = [], productList = [], cartButtonLoaders } = this.props;
     const {
       compareCount = 0, features = [], products = [], productsFeatures = [], 
     } = compareInfo;
     const { selectedBrand } = this.state;
-    console.log('products compare', products);
+    console.log('cartButtonLoaders', cartButtonLoaders);
+    console.log('products ====>', products);
     return (
       <div>
         <HeaderBar />
@@ -169,6 +171,7 @@ class Compare extends Component {
                         onClick={product.addedToCart === false && this.addToCart}
                         btnText={product.addedToCart ? 'In Cart' : 'Add To Cart'}
                         showImage={product.addedToCart ? 'icons/cart/added-cart-icon' : 'icons/cart/blue-cart-icon'}
+                        btnLoading={cartButtonLoaders && cartButtonLoaders[product.listing_id]}
                       />
                     </div>
                     {compareCount > 1 && <span className={`${styles['close-item']} ${styles.pointer}`} data-prod-id={product.id} onClick={this.removeItem}>x</span>}
@@ -249,6 +252,7 @@ const mapStateToProps = store => ({
   compareInfo: selectors.getCompareInfo(store),
   brands: selectors.getBrandsInfo(store),
   productList: selectors.getProductList(store),
+  cartButtonLoaders: cartSelectors.getCartButtonLoaders(store),
 });
 
 const mapDispatchToProps = dispatch =>
