@@ -30,7 +30,7 @@ const getWishListResults = (store) => {
         catalog_id: item && item.product_details && item.product_details.catalog_details.catalog_id,
         itemType: item && item.product_details && item.product_details.catalog_details.item_type_name,
         inventory_count: variant_info.total_inventory_count,
-        buttonValue: values === -1 ? true : false,
+        buttonValue: values === -1,
       });
     });
 
