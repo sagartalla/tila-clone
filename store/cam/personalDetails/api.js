@@ -1,5 +1,6 @@
 import axios from 'axios';
 import constants from '../../helper/constants';
+import { toast } from 'react-toastify';
 
 const getUserProfileInfo = () => {
   return Promise.all([
@@ -12,6 +13,34 @@ const getUserProfileInfo = () => {
     }
   })
 };
+
+const uploadProfilePic = (body) => {
+  return axios.request({
+    method: 'POST',
+    url: 'https://api-gateway-stage.fptechscience.com/transformers/fpts/document-service/upload',
+    data: body,
+    headers: {
+      'tenant': 'profile-service',
+    },
+  }).then(({data}) => {
+    toast.success('Your Profile Pic is successfully uploaded');
+    return data;
+  }).catch((data) => {
+    console.log(data);
+  })
+}
+
+const getProfilePic = (body) => {
+  return axios.request({
+    method: 'GET',
+    url: `${'https://api-gateway-stage.fptechscience.com/transformers/fpts/document-service/download/'}${body}`,
+    headers: {
+      'tenant': 'profile-service',
+    },
+  }).then(({data}) => {
+    return data;
+  })
+}
 
 const changePassword = (body) => {
   return axios.put(`${constants.CMS_API_URL}/api/v1/user/password/set`, body).then(({ data }) => {
@@ -66,6 +95,6 @@ const deactivateUserProfile = () =>
   axios.put(`${constants.CMS_API_URL}/api/v1/user/deactivate/`);
 
 export default {
-  getUserProfileInfo, changePassword, forgotPassword, editPersonalInfo,
+  getUserProfileInfo, getProfilePic, changePassword, uploadProfilePic, forgotPassword, editPersonalInfo,
   deactivateUserProfile, resetPassword, otpUserUpdate, verifyOtp,sendOtpToMobile
 };

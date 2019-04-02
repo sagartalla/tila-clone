@@ -10,7 +10,9 @@ const actions = {
   RESET_PASSWORD: 'RESET_PASSWORD',
   FORGOT_PASSWORD: 'FORGOT_PASSWORD',
   USER_UPDATE_FETCH_OTP:'USER_UPDATE_FETCH_OTP',
-  VERIFY_OTP:'VERIFY_OTP'
+  VERIFY_OTP:'VERIFY_OTP',
+  UPLOAD_PROFILE_PIC: 'UPLOAD_PROFILE_PIC',
+  DOWNLOAD_PROFILE_PIC: 'DOWNLOAD_PROFILE_PIC',
 };
 
 const actionCreators = {
@@ -24,6 +26,18 @@ const actionCreators = {
     return ({
       type: actions.CHANGE_PASSWORD,
       payload: apis.changePassword(body),
+    });
+  },
+  uploadProfilePic: (body) => {
+    return ({
+      type: actions.UPLOAD_PROFILE_PIC,
+      payload: apis.uploadProfilePic(body),
+    });
+  },
+  getProfilePic: (body) => {
+    return ({
+      type: actions.DOWNLOAD_PROFILE_PIC,
+      payload: apis.getProfilePic(body),
     });
   },
   verifyOtp:(params) => {
