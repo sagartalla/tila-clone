@@ -123,8 +123,6 @@ class Compare extends Component {
       compareCount = 0, features = [], products = [], productsFeatures = [], 
     } = compareInfo;
     const { selectedBrand } = this.state;
-    console.log('cartButtonLoaders', cartButtonLoaders);
-    console.log('products ====>', products);
     return (
       <div>
         <HeaderBar />
@@ -166,7 +164,7 @@ class Compare extends Component {
                     </div>
                     <div className={`${styles.flex} ${styles['justify-center']}`}>
                       <Button
-                        className={`${styles['p-10']} ${styles['flex-center']} ${styles['added-btn']}`}
+                        className={product.addedToCart ? `${styles['p-10']} ${styles['flex-center']} ${styles['added-btn']}` :  `${styles['p-10']} ${styles['flex-center']} ${styles['cart-btn']}`}
                         id={product.listing_id}
                         onClick={product.addedToCart === false && this.addToCart}
                         btnText={product.addedToCart ? 'In Cart' : 'Add To Cart'}

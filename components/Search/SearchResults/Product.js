@@ -17,6 +17,7 @@ import { mergeCss } from '../../../utils/cssUtil';
 import { languageDefinations } from '../../../utils/lang';
 import NotifyMe from '../../common/NotifyMe/NotifyMe';
 import Button from '../../common/CommonButton';
+import { selectors } from '../../../store/cart';
 
 import RenderVariants from './renderVariants';
 
@@ -235,6 +236,7 @@ class Product extends Component {
       flags,
       cartButtonLoaders,
       isLastAddedToCartSuccess,
+      btnLoading,
     } = this.props;
     const { showNotify, selectedIndex, showLoader, showCartLoader, showBuyNowLoader } = this.state;
     const selectedProduct = selectedID.length > 0 && selectedID.includes(productId);
@@ -330,10 +332,10 @@ class Product extends Component {
                     <Button
                       className={`${styles['flex']} ${styles['add-to-crt']} ${styles['fs-12']} ${styles['text-uppercase']}`}
                       onClick={this.addToCart}
-                      disabled={cartButtonLoaders[variants[selectedIndex].listingId[0]]}
+                      disabled={btnLoading}
                       btnText={PDP_PAGE.ADD_TO_CART}
                       showImage="icons/cart/blue-cart-icon"
-                      btnLoading={cartButtonLoaders[variants[selectedIndex].listingId[0]] && showCartLoader}
+                      btnLoading={btnLoading && showCartLoader}
                     />
                     <Button
                       className={`${styles['flex-center']} ${styles['buy-now-btn']} ${styles['fs-12']} ${styles['text-uppercase']}`}
@@ -437,6 +439,12 @@ Product.propTypes = {
 Product.defaultProps = {
 };
 
+
+const mapStateToProps = (store) => {
+  return ({
+    btnLoading: selectors.getBtnLoaders(store),
+  })
+};
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
@@ -447,7 +455,7 @@ const mapDispatchToProps = (dispatch) => {
   );
 };
 
-export default connect(null, mapDispatchToProps)(Product);
+export default connect(mapStateToProps, mapDispatchToProps)(Product);
 
 
 

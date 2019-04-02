@@ -49,7 +49,7 @@ class PayOnline extends Component {
   }
 
   render() {
-    const { voucherData, data, processData } = this.props;
+    const { voucherData, data, processData, showLoading } = this.props;
     const { disableSaveCard, iframe_url } = this.state
 
     return (
@@ -70,10 +70,11 @@ class PayOnline extends Component {
               <div className={`${styles['pt-30']} ${styles['pb-30']}`}>
                 <p className={`${styles['mb-25']} `}>Once you click on Add New Card. There is no going back. You can't access any other modes of payment.</p>
                 <Button
-                  className={`${styles['text-uppercase']} ${styles['new-card-btn']} ${styles['fs-16']} ${styles['border-radius']} ${styles.width55}`}
+                  className={`${styles['text-uppercase']} ${styles['new-card-btn']} ${styles['fs-16']} ${styles['border-radius']} ${styles['ht-40']} ${styles.width55}`}
                   onClick={this.fetchIframe}
                   btnText={'Pay' + ' ' + data.amount_to_pay + ' ' + data.currency_code + ' ' + 'Using New Card'}
-                  hoverClassName="hoverBlueBackground"             
+                  hoverClassName="hoverBlueBackground"
+                  btnLoading={showLoading}           
                 />
               </div>
           }
@@ -86,6 +87,7 @@ class PayOnline extends Component {
 
 const mapStateToprops = (store) => ({
   processData: selectors.getProcessData(store),
+  showLoading: selectors.getLoader(store),  
 });
 
 const mapDispatchToProps = (dispatch) =>

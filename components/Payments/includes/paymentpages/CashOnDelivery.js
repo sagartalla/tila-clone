@@ -83,7 +83,7 @@ class CashOnDelivery extends React.Component {
     });
   }
   render() {
-    const { data } = this.props;
+    const { data, showLoading } = this.props;
     return <div>
         <div className={`${styles['cash-on-dly-points']}`}>
     <Row className={styles['pl-40']}>
@@ -130,10 +130,11 @@ class CashOnDelivery extends React.Component {
         this.state.showPayBtn &&
             (
             <Button
-              className={`${styles['fs-16']} ${styles['fontW600']} ${styles['new-card-btn']} ${styles['border-radius']} ${styles.width55}`}
+              className={`${styles['fs-16']} ${styles['fontW600']} ${styles['new-card-btn']} ${styles['border-radius']} ${styles.width55} ${styles['ht-40']}`}
               onClick={this.proceedToPayment}
               btnText={'Pay' + ' ' + data.amount_to_pay + ' ' + data.currency_code}
               hoverClassName="hoverBlueBackground"
+              btnLoading={showLoading}              
               
          />
           )
@@ -150,21 +151,20 @@ CashOnDelivery.propTypes = {
 }
 
 
-const mapStateToProps = (store) => ({
+const mapStateToProps = store => ({
   getCaptcha: selectors.getCaptcha(store),
   getVerification: selectors.getVerification(store),
   processData: paymentsSelectors.getProcessData(store),
-  profileInfo: camSelectors.getUserInfo(store)
-})
+  profileInfo: camSelectors.getUserInfo(store),
+  showLoading: paymentsSelectors.getLoader(store),
+});
 
-const mapDispatchToProps = (dispatch) =>
-  bindActionCreators(
-    {
-      verifyCaptcha: actionCreators.verifyCaptcha,
-      captchaQuestion: actionCreators.captchaQuestion,
-      makeProcessRequest: paymentsActionCreators.makeProcessRequest,
-      getUserProfileInfo: camActionCreators.getUserProfileInfo,
-    }, dispatch
-  );
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({
+    verifyCaptcha: actionCreators.verifyCaptcha,
+    captchaQuestion: actionCreators.captchaQuestion,
+    makeProcessRequest: paymentsActionCreators.makeProcessRequest,
+    getUserProfileInfo: camActionCreators.getUserProfileInfo,
+  }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(CashOnDelivery);

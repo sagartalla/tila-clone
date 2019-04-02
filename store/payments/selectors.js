@@ -54,6 +54,12 @@ const getProcessData = (store) => {
   return store.paymentsReducer.data.processData;
 }
 
+
+const getLoader = (store) => {
+  return store.paymentsReducer.ui.loading;
+}
+
+
 const get3dSecureRedirectionUrl = (store) => {
   const { redirect3dSecureData } = store.paymentsReducer.data;
   if(redirect3dSecureData) {
@@ -61,4 +67,4 @@ const get3dSecureRedirectionUrl = (store) => {
   }
 }
 
-export { getPaymentOptions, getPaymentUrl, getDefaultAddress, getPaymentModesData, getProcessData, get3dSecureRedirectionUrl };
+export { getPaymentOptions, getPaymentUrl, getDefaultAddress, getPaymentModesData, getProcessData, get3dSecureRedirectionUrl, getLoader };

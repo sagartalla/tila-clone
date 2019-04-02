@@ -3,6 +3,8 @@ const getWishListResults = (store) => {
   if (store.wishlistReducer.data) {
     const data = store.wishlistReducer.data;
     const img_url = constants.mediaDomain;
+    const showLoading = store.wishlistReducer.ui.loading;
+    
     const newData = [];
 
     data.forEach((item) => {
@@ -35,4 +37,10 @@ const getWishListResults = (store) => {
   return [];
 }
 
-export { getWishListResults }
+const getLoader = (store) => {
+  if (store.wishlistReducer.ui.loading) {
+    return store.wishlistReducer.ui.loading;
+  }
+};
+
+export { getWishListResults, getLoader }

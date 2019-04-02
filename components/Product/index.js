@@ -21,7 +21,7 @@ import ReviewRatingList from '../RatingReviews/List';
 import FooterBar from '../Footer/index';
 import Theme from '../helpers/context/theme';
 import CompareWidget from '../common/CompareWidget';
-import { actionCreators as wishlistActionCreators } from '../../store/cam/wishlist';
+import { actionCreators as wishlistActionCreators, selectors as wishListSelectors } from '../../store/cam/wishlist';
 import { mergeCss } from '../../utils/cssUtil';
 import Button from '../common/CommonButton';
 
@@ -154,9 +154,9 @@ const getProductComponent = (isPreview, taskCode) => {
         });
       }
     }
-
+/* eslint-disable */
     render() {
-      const { productData, userDetails } = this.props;
+      const { productData, userDetails, showLoading } = this.props;
       const {
         catalog, titleInfo, keyfeatures, extraOffers, imgUrls, offerInfo, shippingInfo, returnInfo, details, productDescription, catalogObj, categoryType = '', warranty, breadcrums
       } = productData;
@@ -211,6 +211,7 @@ const getProductComponent = (isPreview, taskCode) => {
                               btnText="Notify Me"
                               onClick={this.notify}
                               hoverClassName="hoverBlueBackground"
+                              btnLoading={showLoading}
                             />
                           </div>
                         }
@@ -256,6 +257,7 @@ const getProductComponent = (isPreview, taskCode) => {
   const mapStateToProps = store => ({
     productData: taskCode ? selectors.getPreview(store) : selectors.getProduct(store),
     userDetails: store.authReducer.data,
+    showLoading: wishListSelectors.getLoader(store),
   });
 
   const mapDispatchToProps = dispatch =>
