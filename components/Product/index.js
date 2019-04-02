@@ -158,8 +158,10 @@ const getProductComponent = (isPreview, taskCode) => {
     render() {
       const { productData, userDetails, showLoading } = this.props;
       const {
-        catalog, titleInfo, keyfeatures, extraOffers, imgUrls, offerInfo, shippingInfo, returnInfo, details, productDescription, catalogObj, categoryType = '', warranty, breadcrums
+        catalog, titleInfo, keyfeatures, extraOffers, imgUrls, offerInfo, shippingInfo, isWishlisted,
+        details, productDescription, catalogObj, categoryType = '', warranty, breadcrums, product_id,
       } = productData;
+      const { offerPricing } = offerInfo;
       const {
         stickyElements, recentlyViewed, notifyEmail, emailErr,
       } = this.state;
@@ -175,7 +177,11 @@ const getProductComponent = (isPreview, taskCode) => {
                   <Col xs={12} md={8} sm={12} className={`${styles['pl-0']} ${styles['ht-100per']} ${styles['pdp-img-prt']}`}>
                     <NoSSR>
                       <Dispalay
+                        product_id={product_id}
+                        offerPricing={offerPricing}
+                        catalog_id={catalogObj.catalog_id}
                         imgs={imgUrls}
+                        isWishlisted={isWishlisted}
                         extraOffers={extraOffers}
                         breadcrums={breadcrums}
                       />

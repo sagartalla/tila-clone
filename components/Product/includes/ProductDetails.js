@@ -14,7 +14,7 @@ const { PDP_PAGE } = languageDefinations();
 
 const ProductDetails = ({ details, keyfeatures, isPreview, productInfo }) => {
   return (
-    <div className={`${styles['product-details-main']} ${styles['border-radius4']} ${styles['mb-10']} ${styles['box']}`}>
+    <div className={`${styles['product-details-main']} ${styles['border-radius4']} ${styles['mb-5']} ${styles['box']}`}>
       {
         details
           ?

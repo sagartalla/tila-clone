@@ -66,20 +66,20 @@ const popover = ({strickedPrice: mrp, sellingPrice:sp, offerDiscounts, showPrise
 const ProductPrice = ({offerInfo}) => {
   const { price, listingAvailable, listingId, stockError, availabilityError, offerPricing } = offerInfo;
  return(
-  <div className={`${styles['p-15']} ${styles['product-price-bg']} ${styles['border-radius4']}`}>
+  <div className={`${styles['p-10']} ${styles['product-price-bg']} ${styles['border-radius4']}`}>
     {
       listingAvailable
       ?
         <Fragment>
           <div className={`${styles['flex']} ${styles['align-baseline']}`}>
             <div className={`${styles['flex']} ${styles['align-baseline']}`}>
-              <span className={`${styles['fs-30']} ${styles['fontW600']} ${styles['pr-5']}`}>{offerPricing.showPrise}</span>
+              <span className={`${styles['fs-24']} ${styles['fontW600']} ${styles['pr-5']}`}>{offerPricing.showPrise}</span>
               <span className={`${styles['fs-12']} ${styles['pr-5']}`}>{offerPricing.currency}</span>
             </div>
             <Fragment>
               {offerPricing.showPrise !== offerPricing.strickedPrice && Math.floor(offerPricing.discount) > 5 &&
               <div className={`${styles.flex} ${styles['align-baseline']} ${styles['cross-strike-red']} ${styles.relative} ${styles['ml-10']}`}>
-                <span className={`${styles['fs-26']} ${styles['pr-5']}`}>{offerPricing.strickedPrice}</span>
+                <span className={`${styles['fs-24']} ${styles['pr-5']}`}>{offerPricing.strickedPrice}</span>
                 <span className={`${styles['fs-12']} ${styles['pr-5']}`}>{offerPricing.currency}</span>
               </div>}
               <div className={`${styles['flex']} ${styles['align-baseline']} ${styles['relative']} ${styles['ml-10']}`}>

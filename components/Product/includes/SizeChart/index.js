@@ -37,10 +37,10 @@ class SizeChart extends Component {
     const { productInfo } = this.props;
     const { showSlider } = this.state;
     return (
-      <div className={`${styles['pt-10']} ${styles['pb-10']} ${styles['pr-15']}`}>
+      <div>
         <div className={`${styles['flex-center']}`}>
           {productInfo.sizeChart.showSizeChart &&
-          <div>
+          <div className={`${styles['pt-10']} ${styles['pb-10']} ${styles['pr-15']}`}>
             <span>Try our&nbsp;</span><span className={`${styles['lgt-blue']} ${styles.pointer}`} onClick={this.openSlider}>Size Chart</span>
           </div>
         }
