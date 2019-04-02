@@ -35,6 +35,7 @@ class Product extends Component {
       src: '',
       selectedIndex: 0,
       showLoader: false,
+      btnType: '',
     };
     this.setImg = this.setImg.bind(this);
     this.addToWishlist = this.addToWishlist.bind(this);
@@ -68,14 +69,6 @@ class Product extends Component {
     });
   }
 
-  buyNow(e) {
-    e.stopPropagation();
-    e.preventDefault();
-    const { selectedIndex } = this.state;
-    const { variants } = this.props;
-    this.props.buyNow(variants[selectedIndex].listingId[0]);
-  }
-
   notify(e) {
     e.stopPropagation();
     e.preventDefault();
@@ -98,26 +91,47 @@ class Product extends Component {
     });
   }
 
+  buyNow(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    const { selectedIndex } = this.state;
+    let { btnType } = this.state;
+    const {
+      variants,
+      productId,
+      buyNow,
+      selectedProduct,
+    } = this.props;
+
+    if (variants.length <= 1) {
+      buyNow(variants[selectedIndex].listingId[0]);
+    } else {
+      const id = [productId];
+      btnType = 'BUY_NOW';
+      selectedProduct(id);
+    }
+    this.setState({ btnType });
+  }
+
   addToCart(e) {
     e.preventDefault();
     e.stopPropagation();
     const {
       productId,
-      productName,
-      brand,
-      media,
       variants,
-      itemtype,
-      currency,
-      addToCart
+      addToCart,
+      selectedProduct,
     } = this.props;
+    let { btnType } = this.state;
 
-    if(variants.length <= 1) {
-      this.props.addToCart(variants[0].listingId[0])
+    if (variants.length <= 1) {
+      addToCart(variants[0].listingId[0]);
     } else {
-      let id = [productId]
-      this.props.selectedProduct(id)
+      const id = [productId];
+      btnType = 'ADD_TO_CART';
+      selectedProduct(id);
     }
+    this.setState({ btnType });
     // digitalData.cart.item.push({
     //   productInfo:{
     //     productID:productId,
@@ -135,9 +149,11 @@ class Product extends Component {
     //   quantity:1
     // })
   }
+
   componentWillReceiveProps() {
     this.setState({ showLoader: false });
   }
+
   getOfferClassName(offer) {
     if (offer > 5 && offer < 20) {
       return 'green'
@@ -152,20 +168,26 @@ class Product extends Component {
       return 'red';
     }
   }
+
   closeVariantTab(e) {
     e.stopPropagation();
     e.preventDefault();
-    this.props.selectedProduct([])
+    this.props.selectedProduct([]);
   }
-  selectedVariant(listingId,index) {
-    const { addToCart } = this.props
+
+  selectedVariant(listingId, index) {
+    const { addToCart, buyNow } = this.props;
+    const { btnType } = this.state;
     this.setState({
-      selectedIndex:index,
-      showLoader:true
-    },() =>{
-      this.props.addToCart(listingId);
-    })
+      selectedIndex: index,
+      showLoader: true,
+    }, () => {
+      if (btnType === 'BUY_NOW') {
+        buyNow(listingId);
+      } else addToCart(listingId);
+    });
   }
+
   itemNumberClick = (index,pageNum) => {
     let productInfo = {
       pageFragmentation:pageNum,
@@ -381,7 +403,9 @@ class Product extends Component {
                 </div>
               </div>
               {/* <div className={styles['desc-cont']}>
-                <div className={`${styles['prdt-name']} ${styles['fs-12']} ${styles['pt-15']} ${styles['pb-5']}`}><a href="#">{displayName}</a></div>
+                <div className={`${styles['prdt-name']} ${styles['fs-12']} ${styles['pt-15']} ${styles['pb-5']}`}>
+                  <a href="#">{displayName}</a>
+                </div>
                 <div>{priceRange}</div>
                 <div className={styles['variant-info']}>
                   {
