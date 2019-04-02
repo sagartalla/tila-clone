@@ -8,7 +8,7 @@ import { Modal } from 'react-router-modal';
 import RightSideBar from '../../Cart/CartPaymentSideBar';
 import constants from '../../../constants';
 import { actionCreators as cartActionCreators, selectors as cartSelectors } from '../../../store/listingCart';
-import { actionCreators as compareActions } from '../../../store/compare/actions';
+import { actionCreators as compareActions, selectors } from '../../../store/compare';
 import { languageDefinations } from '../../../utils/lang';
 import { mergeCss } from '../../../utils/cssUtil';
 
@@ -45,6 +45,10 @@ class TitleInfo extends Component {
     this.checkoutInstantHandler = this.checkoutInstantHandler.bind(this);
   }
 
+  componentDidMount() {
+    this.props.getCompareCount();
+  }
+
   componentWillReceiveProps(nextProps) {
     const { showCheckoutModal } = this.state;
     if (nextProps && nextProps.listingCartData.ui.loader) {
@@ -63,18 +67,20 @@ class TitleInfo extends Component {
     }, this.props.listingId);
   }
 
-  addToCompare() {
+  addToCompare({ target }) {
     const {
-      addToCompare, product_id, itemtype, media, title, categoryId,
+      addToCompare, product_id, itemtype, media, title, categoryId, removeCompareData,
     } = this.props;
     const src = `${constants.mediaDomain}/${media}`;
-    this.props.addToCompare({
-      itemtype,
-      productId: product_id,
-      src,
-      displayName: title,
-      categoryId,
-    });
+    if (target.checked) {
+      addToCompare({
+        itemtype,
+        productId: product_id,
+        src,
+        displayName: title,
+        categoryId,
+      });
+    } else removeCompareData(product_id);
   }
 
   checkoutInstantHandler() {
@@ -102,24 +108,47 @@ class TitleInfo extends Component {
 
   render() {
     const {
- brand, title, rating, reviews, price, originalPrice, discountPercent, totalInventoryCount, isPreview, listingId, listingCartData, comparable
-} = this.props;
+      brand, title, rating, reviews, price, originalPrice, discountPercent, product_id,
+      totalInventoryCount, isPreview, listingId, listingCartData, comparable, cmpData,
+    } = this.props;
     const { showCheckoutModal } = this.state;
     return (
       <div className={styles['pb-10']}>
         <div className={`${styles.fontW300} ${styles['lgt-blue']} ${styles['flx-space-bw']}`}>
           <span>{brand}</span>
-          {isPreview ? null : comparable ? <a className={`${styles['black-color']} ${styles.fontW700}`} href="javascript: void(0)" onClick={this.addToCompare}>{PDP_PAGE.ADD_TO_COMPARE}</a> : null}
+          {/* eslint-disable-next-line no-nested-ternary */}
+          {isPreview ? null : comparable ?
+            <div className={styles['checkbox-material']}>
+              <input
+                id="add-to-compare"
+                type="checkbox"
+                onChange={this.addToCompare}
+                checked={cmpData.products &&
+                  _.findIndex(cmpData.products, o => o.productId === product_id) > -1}
+              />
+              <label for="add-to-compare"> {PDP_PAGE.ADD_TO_COMPARE}</label>
+            </div>
+            :
+            null
+          }
+          {/* {
+            cmpData.map(childFitler => (
+              <div className={styles['checkbox-material']}>
+                <input id="add-to-compare" type="checkbox" onChange={this.addToCompare} />
+                <label for="add-to-compare"> {PDP_PAGE.ADD_TO_COMPARE} </label>
+              </div>
+            ))
+          } */}
         </div>
-        <div className={`${styles['fs-20']} ${styles.fontW700} ${styles['black-color']}`}>{title}</div>
+        <div className={`${styles['fs-18']} ${styles.fontW700} ${styles['black-color']}`}>{title}</div>
         {
           isPreview
             ?
             null
             :
-            <div className={`${styles.flex} ${styles['fs-12']} ${styles['pt-5']}`}>
+            <div className={`${styles.flex} ${styles['fs-12']}`}>
               <div className={`${styles['ti-rating-wrap']} ${styles['pr-5']}`}>
-                {rating.rating} {rating.count}
+                <span className={styles['pt-5']}>{rating.rating} {rating.count}</span>
               </div>
             </div>
         }
@@ -131,13 +160,13 @@ class TitleInfo extends Component {
             <div className={`${styles['flex-center']} ${styles['checkout-instantly']} ${styles['pt-10']}`}>
               <div className={`${styles.flex}`}>
                 {totalInventoryCount > 0 &&
-                  <a className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['small-btn']}`} onClick={this.checkoutInstantHandler}>{PDP_PAGE.CHECKOUT_INSTANT}</a>}
+                  <a className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['fs-14']} ${styles['small-btn']} ${styles['checkout-instant-btn']}`} onClick={this.checkoutInstantHandler}>{PDP_PAGE.CHECKOUT_INSTANT}</a>}
               </div>
               <div>
                 {
                   totalInventoryCount < 5
                     ?
-                      <span className={`${styles.flex} ${styles['fs-12']} ${styles['google-clr']} ${styles.fontW600}`}>{PDP_PAGE.ONLY} {totalInventoryCount} {PDP_PAGE.LEFT_IN_STOCK}</span>
+                    <span className={`${styles.flex} ${styles['fs-12']} ${styles['google-clr']} ${styles.fontW600}`}>{PDP_PAGE.ONLY} {totalInventoryCount} {PDP_PAGE.LEFT_IN_STOCK}</span>
                     :
                     null
                 }
@@ -185,15 +214,18 @@ TitleInfo.propTypes = {
 
 const mapStateToProps = store => ({
   listingCartData: cartSelectors.getListingCartResults(store),
+  cmpData: selectors.getCmpData(store),
 });
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({
-    addToCart: cartActionCreators.addToCart,
-    cartItemCount: cartActionCreators.cartItemCount,
-    getListingCartResults: cartActionCreators.getListingCartResults,
-    removeCartItem: cartActionCreators.removeCartItem,
-    addToCompare: compareActions.addToCompare,
-  }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({
+  addToCart: cartActionCreators.addToCart,
+  cartItemCount: cartActionCreators.cartItemCount,
+  getListingCartResults: cartActionCreators.getListingCartResults,
+  removeCartItem: cartActionCreators.removeCartItem,
+  addToCompare: compareActions.addToCompare,
+  getCompareCount: compareActions.getCompareCount,
+  removeCompareData: compareActions.removeCompareData,
+}, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(TitleInfo);
 

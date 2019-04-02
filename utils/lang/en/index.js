@@ -5,6 +5,7 @@ export const EN_KEYWORDS = {
     'ORDER_SUMMARY': 'Order Summary',
     'PRICE': 'Price',
     'DELIVERY_CHARGES': 'Delivery Charges',
+    'GIFT_CHARGES': 'Gift Fees',
     'DISCOUNT': 'Discount',
     'TOTAL_AMOUNT': 'Total Amount',
     'REMOVE': 'Remove',
