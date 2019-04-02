@@ -39,13 +39,14 @@ class Product extends Component {
     };
     this.setImg = this.setImg.bind(this);
     this.addToWishlist = this.addToWishlist.bind(this);
-    this.addToCart = this.addToCart.bind(this);
-    this.buyNow = this.buyNow.bind(this);
+    // this.addToCart = this.addToCart.bind(this);
+    // this.buyNow = this.buyNow.bind(this);
     this.addToCompare = this.addToCompare.bind(this);
     this.notify = this.notify.bind(this);
     this.closeNotify = this.closeNotify.bind(this);
     this.selectedVariant = this.selectedVariant.bind(this);
     this.closeVariantTab = this.closeVariantTab.bind(this);
+    this.showVariants = this.showVariants.bind(this);
   }
 
   setImg() {
@@ -91,64 +92,88 @@ class Product extends Component {
     });
   }
 
-  buyNow(e) {
+  showVariants(e) {
+    const btnType = e.target.getAttribute('data-btn-type')
     e.stopPropagation();
     e.preventDefault();
     const { selectedIndex } = this.state;
-    let { btnType } = this.state;
     const {
       variants,
       productId,
       buyNow,
-      selectedProduct,
-    } = this.props;
-
-    if (variants.length <= 1) {
-      buyNow(variants[selectedIndex].listingId[0]);
-    } else {
-      const id = [productId];
-      btnType = 'BUY_NOW';
-      selectedProduct(id);
-    }
-    this.setState({ btnType });
-  }
-
-  addToCart(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    const {
-      productId,
-      variants,
       addToCart,
       selectedProduct,
     } = this.props;
-    let { btnType } = this.state;
 
     if (variants.length <= 1) {
-      addToCart(variants[0].listingId[0]);
+      (btnType === 'BUY_NOW' ? buyNow : addToCart)(variants[selectedIndex].listingId[0]);
     } else {
       const id = [productId];
-      btnType = 'ADD_TO_CART';
-      selectedProduct(id);
+      this.setState({ btnType }, () => {
+        selectedProduct(id);
+      });
     }
-    this.setState({ btnType });
-    // digitalData.cart.item.push({
-    //   productInfo:{
-    //     productID:productId,
-    //     productName:productName,
-    //     manufacturer:brand,
-    //     productImage:media[0]
-    //   },
-    //   category:{
-    //     primaryCategory:itemtype
-    //   },
-    //   price:{
-    //     basePrice:variants.sellingPrice[0],
-    //     currency
-    //   },
-    //   quantity:1
-    // })
+
   }
+
+  // buyNow(e) {
+  //   e.stopPropagation();
+  //   e.preventDefault();
+  //   const { selectedIndex } = this.state;
+  //   let { btnType } = this.state;
+  //   const {
+  //     variants,
+  //     productId,
+  //     buyNow,
+  //     selectedProduct,
+  //   } = this.props;
+  //
+  //   if (variants.length <= 1) {
+  //     buyNow(variants[selectedIndex].listingId[0]);
+  //   } else {
+  //     const id = [productId];
+  //     btnType = 'BUY_NOW';
+  //     selectedProduct(id);
+  //   }
+  //   this.setState({ btnType });
+  // }
+  //
+  // addToCart(e) {
+  //   e.preventDefault();
+  //   e.stopPropagation();
+  //   const {
+  //     productId,
+  //     variants,
+  //     addToCart,
+  //     selectedProduct,
+  //   } = this.props;
+  //   let { btnType } = this.state;
+  //
+  //   if (variants.length <= 1) {
+  //     addToCart(variants[0].listingId[0]);
+  //   } else {
+  //     const id = [productId];
+  //     btnType = 'ADD_TO_CART';
+  //     selectedProduct(id);
+  //   }
+  //   this.setState({ btnType });
+  //   // digitalData.cart.item.push({
+  //   //   productInfo:{
+  //   //     productID:productId,
+  //   //     productName:productName,
+  //   //     manufacturer:brand,
+  //   //     productImage:media[0]
+  //   //   },
+  //   //   category:{
+  //   //     primaryCategory:itemtype
+  //   //   },
+  //   //   price:{
+  //   //     basePrice:variants.sellingPrice[0],
+  //   //     currency
+  //   //   },
+  //   //   quantity:1
+  //   // })
+  // }
 
   componentWillReceiveProps() {
     this.setState({ showLoader: false });
@@ -345,14 +370,14 @@ class Product extends Component {
                         </div>
                       </a>
                       :
-                      <a className={`${styles['flex']} ${styles['add-to-crt']} ${styles['fs-12']} ${styles['text-uppercase']}`} onClick={this.addToCart}>
+                      <a className={`${styles['flex']} ${styles['add-to-crt']} ${styles['fs-12']} ${styles['text-uppercase']}`} data-btn-type="ADD_TO_CART" onClick={this.showVariants}>
                         {/* <SVGCompoent clsName={`${styles['cart-list']}`} src="icons/cart/blue-cart-icon" /> */}
                         <span>
                           <span className={styles['flex']}><SVGCompoent clsName={styles['cart-list']} src="icons/cart/blue-cart-icon" />{PDP_PAGE.ADD_TO_CART}</span>
                         </span>
                       </a>
                     }
-                    <a className={`${styles['flex-center']} ${styles['buy-now-btn']} ${styles['fs-12']} ${styles['text-uppercase']}`} onClick={this.buyNow}>
+                    <a className={`${styles['flex-center']} ${styles['buy-now-btn']} ${styles['fs-12']} ${styles['text-uppercase']}`} data-btn-type="BUY_NOW" onClick={this.showVariants}>
                       <SVGCompoent clsName={`${styles['cart-list']}`} src="icons/cart/buy-icon" />
                       <span className={styles['pl-5']}>{PDP_PAGE.BUY_NOW}</span>
                     </a>
