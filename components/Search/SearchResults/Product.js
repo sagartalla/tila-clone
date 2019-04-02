@@ -116,65 +116,6 @@ class Product extends Component {
 
   }
 
-  // buyNow(e) {
-  //   e.stopPropagation();
-  //   e.preventDefault();
-  //   const { selectedIndex } = this.state;
-  //   let { btnType } = this.state;
-  //   const {
-  //     variants,
-  //     productId,
-  //     buyNow,
-  //     selectedProduct,
-  //   } = this.props;
-  //
-  //   if (variants.length <= 1) {
-  //     buyNow(variants[selectedIndex].listingId[0]);
-  //   } else {
-  //     const id = [productId];
-  //     btnType = 'BUY_NOW';
-  //     selectedProduct(id);
-  //   }
-  //   this.setState({ btnType });
-  // }
-  //
-  // addToCart(e) {
-  //   e.preventDefault();
-  //   e.stopPropagation();
-  //   const {
-  //     productId,
-  //     variants,
-  //     addToCart,
-  //     selectedProduct,
-  //   } = this.props;
-  //   let { btnType } = this.state;
-  //
-  //   if (variants.length <= 1) {
-  //     addToCart(variants[0].listingId[0]);
-  //   } else {
-  //     const id = [productId];
-  //     btnType = 'ADD_TO_CART';
-  //     selectedProduct(id);
-  //   }
-  //   this.setState({ btnType });
-  //   // digitalData.cart.item.push({
-  //   //   productInfo:{
-  //   //     productID:productId,
-  //   //     productName:productName,
-  //   //     manufacturer:brand,
-  //   //     productImage:media[0]
-  //   //   },
-  //   //   category:{
-  //   //     primaryCategory:itemtype
-  //   //   },
-  //   //   price:{
-  //   //     basePrice:variants.sellingPrice[0],
-  //   //     currency
-  //   //   },
-  //   //   quantity:1
-  //   // })
-  // }
-
   componentWillReceiveProps() {
     this.setState({ showLoader: false });
   }
