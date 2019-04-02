@@ -31,7 +31,7 @@ class ExcludeOOS extends Component {
       <Panel>
         <div className={`${styles['category-list-title']} ${styles['black-color']} ${styles['fontW600']} ${styles['p-10-20']} ${styles['flx-spacebw-alignc']}`}>
           <span>Hide Out of Stock</span>
-          <ToggleBtn handleClick={this.handleClick} excludeOOS={this.props.excludeOOS}/>
+          <ToggleBtn handleClick={this.handleClick} checked={this.props.excludeOOS === 'true'}/>
         </div>
       </Panel>
     )
