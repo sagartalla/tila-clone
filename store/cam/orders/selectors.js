@@ -3,7 +3,7 @@ import fp, * as _ from 'lodash/fp';
 import shortid from 'shortid';
 
 const getOrdersData = (store) => {
-  const { orders } = store.ordersReducer.data
+  const { orders} = store.ordersReducer.data
   if (orders && orders.length) {
     return orders.map((order) => {
       const {
@@ -56,4 +56,13 @@ const getOrdersData = (store) => {
   return [];
 };
 
-export { getOrdersData };
+const getPageDetails = (store) => {
+  const {total_pages=0,total_size=0,page=0} =  store.ordersReducer.data
+
+  return {
+    total_pages,
+    total_size,
+    page
+  }
+}
+export { getOrdersData, getPageDetails };
