@@ -54,11 +54,11 @@ export default class Pagination extends Component {
     let totalBlocks = totalNumbers + 2;
     if(totalSize > totalBlocks) {
       let beforeLastPage = totalSize - 1
-      let startPage = Math.max(2,currentPage - pageNeighbours)
+      let startPage = Math.max(1,currentPage - pageNeighbours)
       let endPage = Math.min(totalSize - 1, currentPage + pageNeighbours)
       let pages = this.range(startPage,endPage)
 
-      let leftSpill = startPage > 2;
+      let leftSpill = startPage > 1;
       let rightSpill = endPage < beforeLastPage
       let offSet = totalNumbers - pages.length - 1
 
@@ -89,17 +89,16 @@ export default class Pagination extends Component {
     return this.range(0,totalSize)
   }
   render(){
-    debugger
     if(!this.props.totalSize) return null;
-
+    const { currentPage } = this.state;
     let pages = this.fetchPageNumbers()
     return (
       <div className={styles['pagination-prt']}>
         <>
           <ul className={`${styles['pagination-list']} ${styles['pl-0']} ${styles['flex']}`}>
             {
-              pages.map((el,index) => {
-                if(el === 'LEFT_PAGE') {
+              pages.map((page,index) => {
+                if(page === 'LEFT_PAGE') {
                   return (
                     <li key={index} >
                     <a
@@ -113,7 +112,7 @@ export default class Pagination extends Component {
                   )
                 }
 
-                if(el === 'RIGHT_PAGE'){
+                if(page === 'RIGHT_PAGE'){
                   return (
                     <li key={index} className="page-item">
                       <a
@@ -132,12 +131,13 @@ export default class Pagination extends Component {
                 return (
                   <li
                   key={index}
+                  className={`${currentPage === page ? styles.active : ''}`}
                   >
                   <a
                     href="#"
-                    onClick={this.handleClick(el)}
+                    onClick={this.handleClick(page)}
                   >
-                    {el}
+                    {page}
                   </a>
                 </li>
                 )
