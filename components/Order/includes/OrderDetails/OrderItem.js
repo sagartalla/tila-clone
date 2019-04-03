@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Link } from '../../../../routes'
 import moment from 'moment';
 import { Router } from '../../../../routes';
 import StatusWidget from '../StatusWidget';
@@ -121,7 +122,11 @@ class OrderItem extends Component {
                   </Col>
                   <Col md={10} className={styles['ipad-pr-0']}>
                     <div className={`${styles['text-wrap']}`}>
-                      <span className={`${styles.fontW600}`}>{product.name}</span>
+                      <Link route={`/${country}/${language}/product?productId=${product.productId}${product.variantId ? `&variantId=${product.variantId}` : ''}&catalogId=${product.catalogId}&itemType=${product.itemType}`}>
+                        <a>
+                          <span className={`${styles.fontW600}`}>{product.name}</span>
+                        </a>
+                      </Link>
                       <div className={`${styles['flex-center']} ${styles['prod-sub-content']}`}>
                         <Col md={9} sm={9} className={styles['p-0']}>
                           <div className={`${styles.flex} ${styles['pt-15']} ${styles['pb-15']} ${styles['ipad-tp-5']} ${styles['ipad-tb-5']} ${styles['fs-12']} ${styles['thick-gry-clr']}`}>
