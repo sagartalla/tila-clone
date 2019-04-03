@@ -32,7 +32,12 @@ class SearchResults extends Component {
     this.selectedProduct = this.selectedProduct.bind(this)
   }
 
-  async loadMore(){
+  componentDidMount() {
+    this.props.resetAddtoCart();
+    this.props.getWishlist();
+  }
+
+  async loadMore() {
     if (!this.props.pagiantionDetails.hasMore){
       return;
     }
@@ -53,14 +58,10 @@ class SearchResults extends Component {
     }
   }
 
-  componentDidMount(){
-    this.props.resetAddtoCart();
-    this.props.getWishlist();
-  }
   selectedProduct(productID) {
     this.setState({
       productID
-    })
+    });
   }
   buyNow(listingId) {
     this.setState({
