@@ -1,0 +1,50 @@
+.flexCenterContainer
+  display flex
+  align-items center
+  justify-content center
+
+.flexColCenterContainer
+  @extend .flexCenterContainer
+  flex-direction column
+
+.helpHeroContainer 
+  height 310px
+  background-color #EFFCFF
+  position relative
+
+.boxContainer 
+  border-radius 3px
+  display flex
+  max-width 600px
+  width 100%
+  background-color #fff
+  box-shadow 0px 0px 15px -5px #ccc
+
+.searchContainer
+  @extends .boxContainer 
+  height 40px
+
+.contactContainer
+  @extends .boxContainer 
+  height 65px
+  position absolute
+  bottom -30px
+
+.helpContentContainer 
+  margin auto
+  padding 60px 20px
+  min-height 600px
+  max-width 1200px
+  width 100%
+
+.topicContainer
+  height: 250px
+  width: 350px
+  border-radius 10px
+  box-shadow 0px 0px 15px -5px #ccc
+  overflow: hidden;
+  margin: 20px 0px
+  padding: 20px
+  display: flex
+  flex-direction: column
+  justify-content: space-between
