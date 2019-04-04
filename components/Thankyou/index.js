@@ -30,9 +30,11 @@ class Thankyou extends Component {
 
   componentDidMount() {
     const { orderId, getOrderDetails, status } = this.props;
+    window.dataLayer.push({
+      'event': 'purchase'
+     });
     this.setState({ status })
     getOrderDetails({ orderId: orderId }).then(() => {
-      debugger;
       if(this.props.orderData.hasOwnProperty('orderItems')&this.props.orderData.hasOwnProperty('payments')){   
         this.props.track({
           eventName: "Order Placed","orderData":this.props
@@ -40,9 +42,7 @@ class Thankyou extends Component {
           }
         
     });
-    window.dataLayer.push({
-      'event': 'purchase'
-     });
+   
   }
    
   

@@ -12,7 +12,7 @@ export default class MyDocument extends Document {
           <script src="/static/scripts/googleTagManager.js"></script>
           {/*<!-- End Google Tag Manager -->*/}
           {/*<!-- Adobe Launch Tags -->*/}
-          <script src="//assets.adobedtm.com/launch-ENd0eda5a178ee43669aa760f3e0956940-development.min.js" async></script>
+          <script src="//assets.adobedtm.com/launch-ENc0358fe6617e4066a1c1c0ecff96f2e5-development.min.js" async></script>
           {/*<!-- End Adobe Launch Tags -->*/}
           {
             props.__NEXT_DATA__.query.language === 'ar'
