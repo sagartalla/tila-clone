@@ -104,7 +104,7 @@ class OrderItem extends Component {
         return 'Cancelled';
       } else if (orderItem.status === 'RETURN_IN_PROGRESS') {
         return 'Return in progress';
-      }
+      } return '';
     };
 
     return (
