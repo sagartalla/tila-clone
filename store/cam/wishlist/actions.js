@@ -26,7 +26,6 @@ const actionCreators = {
       payload: apis.deleteWishlistApi(wishlist_id, showToast),
     });
   }),
-
   addToCart: (params, wishlist_id, getCartData) => (dispatch, getState) => dispatch(cartActionCreators.addToCart(params)).then(() => {
     if (getCartData) {
       dispatch(actionCreators.deleteWishlist(wishlist_id, {
@@ -40,7 +39,6 @@ const actionCreators = {
     dispatch(actionCreators.track({
       eventName: 'Product Added',"wishlistId":wishlist_id
     }))
-
   }),
   addToWishlistAndFetch: loginReq(params => dispatch => dispatch(actionCreators.addToWishlist(params)).then(() => {
     dispatch(actionCreators.getWishlist());

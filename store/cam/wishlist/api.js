@@ -31,28 +31,25 @@ const notifyMe = params => axios.post(`${constants.WISHLIST_API_URL}/api/v1/aler
     return res;
   });
   const track = (params) => {
-   
-    if(params.hasOwnProperty("wishlistId")){
-      for(var i=0;i<params.postResult.length;i++){
-        if(params.postResult[i].wishlist_id===params.wishlistId){
+    if (params.hasOwnProperty("wishlistId")) {
+      for (var i = 0; i < params.postResult.length; i++) {
+        if (params.postResult[i].wishlist_id === params.wishlistId) {
           window.appEventData.push({
             "event": params.eventName,
             "cart": {
               "item": params.postResult[i],
             }
           });
-        } 
+        }
       }
-    }
-    else if(params.hasOwnProperty("params")){
+    } else if (params.hasOwnProperty("params")) {
       window.appEventData.push({
         "event": params.eventName,
         "cart": {
           "item": params.params.product_id,
         }
       });
-    }
-    else{
+    } else {
       window.appEventData.push({
         "event": params.eventName,
         "cart": {
@@ -60,7 +57,7 @@ const notifyMe = params => axios.post(`${constants.WISHLIST_API_URL}/api/v1/aler
         }
       });
     }
-   }
+  }
 export default {
   getWishlistApi, addToWishlistApi, deleteWishlistApi, notifyMe,track
 };

@@ -27,7 +27,7 @@ const track = (params) => {
   window.appEventData.push({
     "event": "Order Placed",
     "transaction": {
-      "transactionID":params.orderData.orderData.orderId,
+      "transactionID": params.orderData.orderData.orderId,
       "total": {
         "currency": "SAR",
         "salesTax": ""
@@ -35,7 +35,7 @@ const track = (params) => {
       "profile": {
         "address": {
           "stateProvince": params.orderData.orderData.address,
-          "postalCode":params.orderData.orderData.pincode
+          "postalCode": params.orderData.orderData.pincode
         }
       },
       // Collection of Payment Objects
@@ -44,13 +44,13 @@ const track = (params) => {
           "paymentID": params.orderData.orderData.orderId,
           "paymentAmount": params.orderData.orderData.payments[0].amount
         }
-       
+
       ],
       // Collection of Item Objects
       "item": params.orderData.orderData.orderItems[0]
     }
   });
-  
-      }
+
+}
     
 export default { getOrderDetails, getRefundOptions, getReasons, submitCancelRequest, submitReturnRequest, getExchangeVariants, sendMapDataApi,setExchangeOrder,track, };

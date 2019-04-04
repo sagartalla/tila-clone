@@ -45,56 +45,47 @@ const giftApi = (cartItemId, typ, params = {}) => {
 }
 
 const track = (params) => {
-  if(params.hasOwnProperty("type")||params.eventName==="Cart Removals"){
-    for(var i=0;i<params.postResult.length;i++){
-    if(params.type==="add"){
-      if(params.postResult[i].cart_item_id===params.cartId){
-    // params.postResult[0].product_details.quantity++;
-    params.postResult[i].quantity=params.postResult[i].quantity+1;  
-    window.appEventData.push({
-      "event": params.eventName,
-      "cart": {
-        "item": params.postResult,
+    if (params.hasOwnProperty("type") || params.eventName === "Cart Removals") {
+      for (var i = 0; i < params.postResult.length; i++) {
+        if (params.type === "add") {
+          if (params.postResult[i].cart_item_id === params.cartId) {
+            params.postResult[i].quantity = params.postResult[i].quantity + 1;
+            window.appEventData.push({
+              "event": params.eventName,
+              "cart": {
+                "item": params.postResult,
+              }
+            });
+          }
+        } else if (params.eventName === "Cart Removals") {
+          if (params.postResult[i].cart_item_id === params.cartId) {
+            window.appEventData.push({
+              "event": params.eventName,
+              "cart": {
+                "item": params.postResult[i],
+              }
+            });
+          }
+        } else {
+          if (params.postResult[i].cart_item_id === params.cartId) {
+            params.postResult[i].quantity = params.postResult[i].quantity - 1;
+            window.appEventData.push({
+              "event": params.eventName,
+              "cart": {
+                "item": params.postResult,
+              }
+            });
+          }
+        }
       }
-    });       }
-  }
-
-  else if(params.eventName==="Cart Removals"){
-  if(params.postResult[i].cart_item_id===params.cartId){
-    window.appEventData.push({
-      "event": params.eventName,
-      "cart": {
-        "item": params.postResult[i],
-      }
-    });
     }
-  }
- 
-  else{
-    if(params.postResult[i].cart_item_id===params.cartId){
-    params.postResult[i].quantity=params.postResult[i].quantity-1;
-    window.appEventData.push({
-      "event": params.eventName,
-      "cart": {
-        "item": params.postResult,
-      }
-    }); 
+    if (params.eventName !== "Cart Removals") {
+      window.appEventData.push({
+        "event": params.eventName,
+        "cart": {
+          "item": params.postResult,
+        }
+      });
     }
-  }
 }
-}
-
-if(params.eventName!=="Cart Removals"){
-window.appEventData.push({
-  "event": params.eventName,
-  "cart": {
-    "item": params.postResult,
-  }
-});
-}
-
-}
-
-
-
 export default { getCartDetailsApi, addToCart, removeCartItemApi, cartItemCountApi, giftApi,track };

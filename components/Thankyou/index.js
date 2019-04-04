@@ -21,12 +21,10 @@ class Thankyou extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if((nextProps.orderData.status && nextProps.orderData.status !== 'CONFIRMED') && (window.location.href.indexOf('FAILED') === -1)) {
+    if ((nextProps.orderData.status && nextProps.orderData.status !== 'CONFIRMED') && (window.location.href.indexOf('FAILED') === -1)) {
       window.location = window.location.href.replace('SUCCESSFUL', 'FAILED');
     }
-    
-    
-}   
+  }
 
   componentDidMount() {
     const { orderId, getOrderDetails, status } = this.props;
@@ -39,16 +37,9 @@ class Thankyou extends Component {
         this.props.track({
           eventName: "Order Placed","orderData":this.props
         });
-          }
-        
-    });
-   
+      }     
+    });  
   }
-   
-  
-
-
-
   render() {
     const { orderId, query, orderData } = this.props;
     const { status } = this.state;
