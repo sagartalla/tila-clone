@@ -6,7 +6,7 @@ const getWishListResults = (store) => {
     const img_url = constants.mediaDomain;
     const newData = [];
 
-    data.forEach((item) => {
+    data && data.length > 0 && data.forEach((item) => {
       // const variant = Object.keys(item.product_details.product_details_vo.cached_variant)[0];
       // const variant_info = item.variant_preferred_listings[variant][0];
 
