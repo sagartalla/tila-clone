@@ -5,11 +5,11 @@ const actions = {
 };
 
 const actionCreators = {
-  getOrderHistory: () => {
+  getOrderHistory: (pageSize) => {
     return ({
       type: actions.GET_ORDER_HISTORY,
-      payload: api.getOrderHistory()
-    });    
+      payload: api.getOrderHistory(pageSize)
+    });
   }
 }
 

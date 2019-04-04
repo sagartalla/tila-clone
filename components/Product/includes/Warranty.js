@@ -32,9 +32,9 @@ class Warranty extends React.Component {
     const warranty = this.props.warranty || {};
     const warranty_display = warranty.duration + " " + warranty.duration_unit + " " + PDP_PAGE.WARRANTY
     return (
-    <div className={`${styles['flex-center']} ${styles['display-inline']}`}>
-      <span >{warranty_display}</span>{this.props.break ? <br/> : null}
-      <a className={`${styles['fontW600']} ${styles['ml-20']}`} onClick={this.openSlider}>View More</a>
+    <div className={`${styles['flex-center']} ${styles['warranty-part']}  ${styles['relative']} ${styles['pointer']}`}>
+      <span className={`${styles['flex-center']}`}><span className={styles['pl-10']}>{warranty_display}</span></span>
+      <a className={`${styles['fontW600']} ${styles['ml-20']} ${styles['view-more-label']} ${styles['fs-12']}`} onClick={this.openSlider}>View More</a>
       {this.state.slider && <Slider label="Warranty" isOpen={this.state.slider} closeSlider={this.closeSlider}>
         <div className={`${styles['warranty-modal']}`}>
         <hr/>

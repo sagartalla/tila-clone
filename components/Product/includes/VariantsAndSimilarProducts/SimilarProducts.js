@@ -19,7 +19,7 @@ class Variant extends Component {
   render() {
     const { displayName, values, onSelectProduct, id } = this.props;
     return (
-      <div className={`${styles['pt-10']} ${styles['pb-10']} ${styles['pr-15']}`}>
+      <div className={`${styles['pt-5']} ${styles['pb-5']} ${styles['pr-15']}`}>
         <div className={`${styles['flex-center']}`}>
           <span className={`${styles['fs-12']} ${styles['fontW600']} ${styles['pr-15']}`}>{displayName}</span>
           <div className={`${styles['flex-center']} ${styles['size-btn-main']}`}>

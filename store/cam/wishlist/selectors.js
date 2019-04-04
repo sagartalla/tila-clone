@@ -1,16 +1,19 @@
 import constants from '../../../constants';
+
 const getWishListResults = (store) => {
   if (store.wishlistReducer.data) {
     const data = store.wishlistReducer.data;
     const img_url = constants.mediaDomain;
     const newData = [];
 
-    data.forEach((item) => {
+    data && data.length > 0 && data.forEach((item) => {
       // const variant = Object.keys(item.product_details.product_details_vo.cached_variant)[0];
       // const variant_info = item.variant_preferred_listings[variant][0];
 
       const variant = item.variant_preferred_listings ? Object.keys(item.variant_preferred_listings)[0] : '';
       const variant_info = item.variant_preferred_listings ? item.variant_preferred_listings[variant][0] : {};
+
+      const values = store.cartReducer.data.items.map(function (e) { return e.product_details.product_id; }).indexOf(item.product_id);
 
       newData.push({
         wishlist_id: item.wishlist_id,
@@ -27,6 +30,7 @@ const getWishListResults = (store) => {
         catalog_id: item && item.product_details && item.product_details.catalog_details.catalog_id,
         itemType: item && item.product_details && item.product_details.catalog_details.item_type_name,
         inventory_count: variant_info.total_inventory_count,
+        buttonValue: values === -1,
       });
     });
 

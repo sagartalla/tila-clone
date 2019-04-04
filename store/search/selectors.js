@@ -37,14 +37,14 @@ const addCartAndWishlistDetails = (store, results) => {
   //   return resutls;
   // }
   const cartListingIds = items.map(i => i.listing_id) || [];
-  const wishListProductIds = data.map(w => w.product_id) || [];
+  const wishListProductIds = data && data.length > 0 && (data.map(w => w.product_id) || []);
   return {
     ...results,
     items: results.items.map((i) => {
       return ({
         ...i,
         variants:filterVariants(cartListingIds,i.variants),
-        addedToWishlist: wishListProductIds.indexOf(i.productId) !== -1,
+        addedToWishlist: wishListProductIds && wishListProductIds.indexOf(i.productId) !== -1,
       });
     }),
   };

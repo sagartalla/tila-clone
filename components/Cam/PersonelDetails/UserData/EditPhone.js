@@ -53,7 +53,7 @@ class EditPhone  extends React.Component {
     console.log(CountryDialCode, country, CountryDialCode[country].code);
     this.state = {
       phoneNumber: "",
-      otp: null,
+      otp: '',
       error: "",
       show: false,
       countryCode: CountryDialCode[country].data,
@@ -137,8 +137,9 @@ class EditPhone  extends React.Component {
         this.setState({ otp: e.target.value });
     }
   }
-  handleSubmit(){
+  handleSubmit(e){
     // TODO : handle action for phone number edit
+    e.preventDefault()
     let validation = this.validations.validate(this.state)
     this.setState({ validation })
     const { otp } = this.state;
@@ -287,7 +288,7 @@ class EditPhone  extends React.Component {
           null:null,
           FAILURE:<div className={`${styles['thick-red']} ${styles['fs-12']}`}>please enter valid otp</div>,
           SUCCESS:''
-        },[otpResponse]}
+        }[otpResponse]}
       </div>
     </div>
     </div>

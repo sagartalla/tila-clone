@@ -19,7 +19,7 @@ const percentage = (a, b) => Math.floor(((a - b) / b) * 100);
 
 const WishlistBody = (props) => {
   const { data, deleteItem, addToCart, notifyMe } = props;
-  const { WISH_LIST_PAGE } = languageDefinations();
+  const { WISH_LIST_PAGE, PDP_PAGE } = languageDefinations();
 
   const getPriceAlert = (a, b, cur) => {
     if (a === b) return null;
@@ -60,7 +60,7 @@ const WishlistBody = (props) => {
           data.length > 0 && data.map((item, index) => {
             const {
               wishlist_id, listing_id, brand_name, name, img, price, cur, inventory_count,
-              wishlisted_price, mrp, variant_id, product_id, catalog_id, itemType,
+              wishlisted_price, mrp, variant_id, product_id, catalog_id, itemType, buttonValue
             } = item;
             return (
               <div key={index} className={`${styles['thick-border-btm']} ${styles['p-30-20']} ${styles['mb-wishlist-part']}`}>
@@ -83,9 +83,9 @@ const WishlistBody = (props) => {
                             id={listing_id}
                             data-wish-id={wishlist_id}
                             className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['add-to-btn']}`}
-                            onClick={addToCart}
+                            onClick={buttonValue && addToCart}
                           >
-                            {WISH_LIST_PAGE.ADD_TO_CART_BTN}
+                            {buttonValue ? WISH_LIST_PAGE.ADD_TO_CART_BTN : PDP_PAGE.ADDED_TO_CART}
                           </button>
                           :
                           <button
@@ -138,7 +138,7 @@ WishlistBody.propTypes = {
 };
 
 WishlistBody.defaultProps = {
-
+  cartData: [],
 };
 
 export default WishlistBody;
