@@ -11,17 +11,17 @@ const actions = {
 };
 
 const actionCreators = {
-  getWishlist: loginReq(() => (dispatch, getState) => dispatch({
+  getWishlist: loginReq((currentPage) => (dispatch, getState) => dispatch({
     type: actions.GET_WISHLIST,
-    payload: apis.getWishlistApi(),
+    payload: apis.getWishlistApi(currentPage),
   })),
   addToWishlist: loginReq(params => ({
     type: actions.ADD_TO_WISHLIST,
     payload: apis.addToWishlistApi(params),
   })),
-  deleteWishlist: loginReq((wishlist_id, showToast) => ({
+  deleteWishlist: loginReq((wishlist_id, showToast,currentPage) => ({
     type: actions.DELETE_TO_WISHLIST,
-    payload: apis.deleteWishlistApi(wishlist_id, showToast),
+    payload: apis.deleteWishlistApi(wishlist_id, showToast,currentPage),
   })),
   addToCart: (params, wishlist_id, getCartData) => (dispatch, getState) => dispatch(cartActionCreators.addToCart(params)).then(() => {
     if (getCartData) {
