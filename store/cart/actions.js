@@ -24,23 +24,25 @@ const actionCreators = {
       payload: api.getCartDetailsApi(params)
     })
   },
-  removeCartItem: (cartId, showToast) => {
+  removeCartItem: (cartId, showToast) => (dispatch,getState) => {
+    dispatch(actionCreators.track({eventName: 'Cart Removals',"cartId":cartId}));
     const params = {
       cart_item_id: cartId,
     };
-    return ({
+    return dispatch({
       type: actions.REMOVE_CART_ITEM,
       payload: api.removeCartItemApi(params, showToast),
     });
   },
-  cartItemCount: (cartId, typ) => {
+  cartItemCount: (cartId, typ) => (dispatch,getState) => {
+    dispatch(actionCreators.track({eventName: 'Cart Views',"cartId":cartId,"type":typ}));
     const params = {
       "cart_item_id": cartId
     }
-    return ({
+    return dispatch({
       type: actions.CART_ITEM_COUNT,
       payload: api.cartItemCountApi(params, typ)
-    })
+    });
   },
   cartItemInputCount: (cartId, typ, val) => {
     const params = {
@@ -77,6 +79,14 @@ const actionCreators = {
       dispatch(actionCreators.hideBtnLoader(params));
     });
   },
+  track: (params) => (dispatch, getState) => {
+    const state = getState();
+    params.postResult = state.cartReducer.data.items;
+    return {
+      type: actions.CART_TRACK,
+      payload: api.track(params)
+    };
+  }
 };
 
 export { actions, actionCreators };

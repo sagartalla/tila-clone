@@ -174,7 +174,16 @@ const actionCreators = {
       type: actions.SEND_MAP_DATA,
       payload: api.sendMapDataApi(order_id, params)
     }
+  },
+  track: (params) => (dispatch, getState) => {
+    const state = getState();
+    params.postResult = state.cartReducer.data.items;
+    return {
+      type: actions.THANKYOU_PAGE_TRACK,
+      payload: api.track(params)
+    };
   }
+
 };
 
 

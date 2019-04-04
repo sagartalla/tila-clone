@@ -29,6 +29,9 @@ class Wishlist extends Component {
 
   componentDidMount() {
     this.props.getWishlist();
+    this.props.track({
+      eventName: "WishList View"
+    });
   }
 
   deleteItem(e) {
@@ -101,6 +104,7 @@ const mapDispatchToProps = (dispatch) =>
       deleteWishlist: actionCreators.deleteWishlist,
       addToCart: actionCreators.addToCart,
       notifyMe: actionCreators.notifyMe,
+      track: actionCreators.track,
     },
     dispatch,
   );

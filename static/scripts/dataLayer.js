@@ -26,3 +26,6 @@ window.digitalData = {
     user:''
     
   };
+
+  window.appEventData = window.appEventData || [];
+  window.dataLayer = window.dataLayer || [];

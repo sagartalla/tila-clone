@@ -22,7 +22,14 @@ class Base extends Component {
     // }
     digitalData.page.pageInfo[ 'pageType' ]= this.pageName;
     digitalData.page.pageInfo.pageName = this.pageName;
-
+    window.appEventData.push({
+      "event": "Page Loaded",
+      "page": {
+        "pageType": this.pageName,
+        "pageName": this.pageName,
+        "pageCategory": ""
+      }
+    });
     this.fireViewEndCustomEvent();
 
     digitalData.user = this.pageName;

@@ -24,12 +24,23 @@ class Thankyou extends Component {
     if((nextProps.orderData.status && nextProps.orderData.status !== 'CONFIRMED') && (window.location.href.indexOf('FAILED') === -1)) {
       window.location = window.location.href.replace('SUCCESSFUL', 'FAILED');
     }
-  }
+  if(nextProps.orderData!==this.props.orderData){
+    if(nextProps.orderData.hasOwnProperty('orderItems')&nextProps.orderData.hasOwnProperty('payments')){   
+      this.props.track({
+        eventName: "Order Placed","orderData":nextProps
+      });
+        }
+      }
+    
+}   
 
   componentDidMount() {
     const { orderId, getOrderDetails, status } = this.props;
     this.setState({ status })
     getOrderDetails({ orderId: orderId });
+    dataLayer.push({
+      'event': 'purchase'
+     });
   }
 
   render() {
@@ -65,7 +76,8 @@ const mapStateToProps = (store) => {
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    getOrderDetails: actionCreators.getOrderDetails
+    getOrderDetails: actionCreators.getOrderDetails,
+    track: actionCreators.track,
   },
     dispatch,
   );

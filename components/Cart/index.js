@@ -47,6 +47,9 @@ class Cart extends Component {
   componentDidMount() {
     if (!this.props.showMiniCart) {
       this.props.getCartResults();
+      this.props.track({
+        eventName: "Cart Views"
+      });
     }
   }
 
@@ -103,7 +106,7 @@ class Cart extends Component {
 
       return item;
     });
-    this.cartItemCount(e.target.getAttribute('data-id'), 'add');
+    this.cartItemCount(e.target.getAttribute('data-id'), 'add',this.props.cartData.items);
   }
 
   decreaseItemCnt(e) {
@@ -113,7 +116,7 @@ class Cart extends Component {
         item.quantity--;
       }
     });
-    this.cartItemCount(e.target.getAttribute('data-id'), 'remove');
+    this.cartItemCount(e.target.getAttribute('data-id'), 'remove',this.props.cartData.items);
   }
 
   cartItemCount(id, typ) {
@@ -220,6 +223,7 @@ const mapDispatchToProps = dispatch =>
       addOrRemoveGift: actionCreators.addOrRemoveGift,
       cartItemInputCount: actionCreators.cartItemInputCount,
       addToWishlistAndFetch: wishlistActionCreators.addToWishlistAndFetch,
+      track: actionCreators.track,
     },
     dispatch,
   );

@@ -23,4 +23,34 @@ const getRefundOptions = (orderItemId) => axios.get(`${constants.ORDERS_API_URL}
 
 const setExchangeOrder = (params) => axios.post(`${constants.ORDERS_API_URL}/api/v1/order/exchange`,params)
 
-export default { getOrderDetails, getRefundOptions, getReasons, submitCancelRequest, submitReturnRequest, getExchangeVariants, sendMapDataApi,setExchangeOrder };
+const track = (params) => {
+  window.appEventData.push({
+    "event": "Order Placed",
+    "transaction": {
+      "transactionID":params.orderData.orderData.orderId,
+      "total": {
+        "currency": "SAR",
+        "salesTax": ""
+      },
+      "profile": {
+        "address": {
+          "stateProvince": params.orderData.orderData.address,
+          "postalCode":params.orderData.orderData.pincode
+        }
+      },
+      // Collection of Payment Objects
+      "payment": [{
+          "paymentMethod": params.orderData.orderData.payments[0].payment_mode,
+          "paymentID": params.orderData.orderData.orderId,
+          "paymentAmount": params.orderData.orderData.payments[0].amount
+        }
+       
+      ],
+      // Collection of Item Objects
+      "item": params.orderData.orderData.orderItems[0]
+    }
+  });
+  
+      }
+    
+export default { getOrderDetails, getRefundOptions, getReasons, submitCancelRequest, submitReturnRequest, getExchangeVariants, sendMapDataApi,setExchangeOrder,track, };
