@@ -15,19 +15,19 @@ const popover = ({strickedPrice: mrp, sellingPrice:sp, offerDiscounts, showPrise
         <div className={`${styles['table']} ${styles['width100']}`}>
           <div className={styles['t-row']}>
             <div className={styles['t-cell']}>
-              <div>Maximum Retail Price</div>
-              <div>(Incl. of all taxes)</div>
+              <div className={styles['fs-12']}>Maximum Retail Price</div>
+              <div className={styles['fs-12']}>(Incl. of all taxes)</div>
             </div>
             <div className={styles['t-cell']}>
-              {`${mrp} ${currency}`}
+              <span className={styles['fs-12']}>{`${mrp} ${currency}`}</span>
             </div>
           </div>
           <div className={styles['t-row']}>
             <div className={styles['t-cell']}>
-              <div>Selling Price</div>
+              <div className={styles['fs-12']}>Selling Price</div>
             </div>
             <div className={styles['t-cell']}>
-              {`${sp} ${currency}`}
+              <span className={styles['fs-12']}>{`${sp} ${currency}`}</span>
             </div>
           </div>
           {
@@ -35,10 +35,10 @@ const popover = ({strickedPrice: mrp, sellingPrice:sp, offerDiscounts, showPrise
               return (
                 <div className={styles['t-row']}>
                   <div className={styles['t-cell']}>
-                    <div>{od.description}</div>
+                    <div className={styles['fs-12']}>{od.description}</div>
                   </div>
                   <div className={styles['t-cell']}>
-                    {`${od.discount} ${currency}`}
+                    <span className={styles['fs-12']}>{`${od.discount} ${currency}`}</span>
                   </div>
                 </div>
               );
@@ -46,17 +46,17 @@ const popover = ({strickedPrice: mrp, sellingPrice:sp, offerDiscounts, showPrise
           }
           <div className={styles['t-row']}>
             <div className={styles['t-cell']}>
-              <div>Dilevery Charges</div>
+              <div className={styles['fs-12']}>Dilevery Charges</div>
             </div>
-            <div className={styles['t-cell']}>Free</div>
+            <div className={`${styles['t-cell']} ${styles['fs-12']}`}>Free</div>
           </div>
           <div className={`${styles['t-row']} ${styles['total-amount']}`}>
-            <div className={styles['t-cell']}>Total</div>
-            <div className={styles['t-cell']}>{`${total} ${currency}`}</div>
+            <div className={`${styles['t-cell']} ${styles['fs-12']}`}>Total</div>
+            <div className={`${styles['t-cell']} ${styles['fs-12']}`}>{`${total} ${currency}`}</div>
           </div>
         </div>
         <div>
-          <div className={`${styles['p-5']} ${styles['mt-5']} ${styles['overall-amount']}`}>Overall you save {`${discountMrp} ${currency}`} on this Product</div>
+          <div className={`${styles['p-5']} ${styles['mt-5']} ${styles['fs-12']} ${styles['overall-amount']}`}>Overall you save {`${discountMrp} ${currency}`} on this Product</div>
         </div>
       </div>
     </Popover>
@@ -86,8 +86,9 @@ const ProductPrice = ({offerInfo}) => {
                 {offerPricing.showPrise !== offerPricing.strickedPrice && Math.floor(offerPricing.discount) > 5 &&
                 <span className={`${styles['fs-12']} ${styles['pr-5']} ${styles['offers-applied']} `}>{`${Math.floor(offerPricing.discount)}% OFF`}</span>}
                 <OverlayTrigger placement="bottom" overlay={popover(offerPricing)}>
-                  <span className={`${styles['fs-12']} ${styles['pr-5']}`}>
-                    <SVGCompoent clsName={`${styles['secure-icon']} ${styles['mr-10']} ${styles['pointer']}`} src="icons/common-icon/trust-secure" />
+                  <span className={`${styles['fs-12']} ${styles['pr-5']} ${styles['checkout-quat']} ${styles['flex-center']} ${styles['justify-center']}`}>
+                    {/* <SVGCompoent clsName={`${styles['secure-icon']} ${styles['mr-10']} ${styles['pointer']}`} src="icons/common-icon/trust-secure" /> */}
+                    ?
                   </span>
                 </OverlayTrigger>
               </div>
