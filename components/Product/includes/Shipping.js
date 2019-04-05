@@ -18,7 +18,7 @@ class Shipping extends Component {
   render() {
     const { shippingInfo, offerInfo } = this.props;
     const { shipping_fees, shipping_days, shippable, acceptsReturns, maxDaysToReturn, isPreview } = shippingInfo;
-    console.log(this.props.warranty);
+    
     return (
       <div className={`${styles['box']} ${styles['border-radius4']} ${styles['mt-5']} ${styles['mb-10']} ${styles['ipad-delivery-address-part']} ${styles['free-delivery-part']}`}>
         <div className={`${styles['free-delivery-list']} ${styles['flex']}`}>
