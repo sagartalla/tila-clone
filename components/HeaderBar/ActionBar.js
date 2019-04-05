@@ -64,7 +64,7 @@ class ActionBar extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    let show = (!nextProps.isLoggedIn && (nextProps.isLoggedIn != this.props.isLoggedIn) && !this.state.logoutClicked) || this.state.loginClicked || !!nextProps.error || nextProps.loginInProgress || (!nextProps.isLoggedIn && nextProps.showLogin);
+    let show = (!nextProps.isLoggedIn && (nextProps.isLoggedIn != this.props.isLoggedIn) && !this.state.logoutClicked) || this.state.loginClicked || !!nextProps.error || nextProps.loginInProgress || (!nextProps.isLoggedIn && nextProps.showLogin) || nextProps.showEmailScreen;
     // console.log('show:',show,'nextProps.isLoggedIn', nextProps.isLoggedIn, 'this.props.isLoggedIn', this.props.isLoggedIn, 'this.state.logoutClicked', this.state.logoutClicked, 'nextProps.error', nextProps.error, 'nextProps.loginInProgress', nextProps.loginInProgress);
     if (window.location.pathname.indexOf('/payment') > -1) {
       show = false;
@@ -266,6 +266,7 @@ const mapStateToProps = (store) => {
     showLogin: selectors.getShowLogin(store),
     ptaToken: selectors.getPTAToken(store),
     wishListCount: wishListSelectors.getWishListResults(store),
+    showEmailScreen: selectors.showEmailScreen(store),
   })
 };
 

@@ -466,4 +466,12 @@ export const EN_KEYWORDS = {
     'APPLY_COUPON': 'Apply Coupon Code',
     'BUY_AND_EARN': 'Buy & Earn 300 Reward Points',
   },
+ EMAIL_VERIFICATION: {
+   'VERIFY_YOUR_EMAIL': 'Verify Your Email Address',
+   'OTP_SENT':  'An OTP has been sent to',
+   'ENTER_OTP': 'Please enter the OTP to verify your Email Address',
+   'OTP_EXPIRE_IN': 'OTP will expire in',
+   'TWENTY_FOUR_HOURS': '24 Hours.',
+   'RESEND': 'Resend',
+ }
 };

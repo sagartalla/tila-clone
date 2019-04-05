@@ -22,7 +22,7 @@ apiRoutes
         // }
         req.universalCookies.set('auth', data, { path: '/' });
         req.universalCookies.set('userCreds', { username: params.metadata.username || '' }, { path: '/' });
-        isLoggedIn = true;
+        // isLoggedIn = true;
       } else {
         req.universalCookies.remove('auth');
         isLoggedIn = false;

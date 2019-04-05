@@ -1,7 +1,10 @@
+import Cookies from 'universal-cookie';
 import api from './api';
 import loginReq from '../helper/loginReq';
 import refStore from '../refHandler';
 import { actionCreators as cartActionCreators } from '../cart';
+
+const cookies = new Cookies();
 
 const actions = {
   USER_LOGIN: 'USER_LOGIN',
@@ -22,12 +25,15 @@ const actions = {
   DELETE_POST_LOGIN_ACTION_INFO: 'DELETE_POST_LOGIN_ACTION_INFO',
   SET_LANGUAGE: 'SET_LANGUAGE',
   SAVE_PTA: 'SAVE_PTA',
+  VERIFY_EMAIL: 'VERIFY_EMAIL',
+  VERIFY_RESEND_EMAIL: 'VERIFY_RESEND_EMAIL',
+  GET_USER_INFO: 'GET_USER_INFO',
 };
 
 const actionCreators = {
-  userLogin: params => (dispatch, getState) => dispatch({
+  userLogin: (params, mode) => (dispatch, getState) => dispatch({
     type: actions.USER_LOGIN,
-    payload: api.userLogin(params),
+    payload: api.userLogin(params, mode),
   }).then(() => {
     dispatch(cartActionCreators.getCartResults());
     if (typeof refStore.postLoginRef === 'function') {
@@ -36,6 +42,21 @@ const actionCreators = {
       dispatch(refStore.postLoginRef);
       dispatch(actions.DELETE_POST_LOGIN_ACTION_INFO);
     }
+    dispatch({
+      type: actions.GET_USER_INFO,
+      payload: api.getUserInfo().then((res) => {
+        if (res.data.email_verified === 'NV') {
+          cookies.set('isVerified', false);
+          dispatch({
+            type: actions.VERIFY_RESEND_EMAIL,
+            payload: api.verifyResendEmail(),
+          });
+        } else {
+          cookies.set('isVerified', true);
+        }
+        return res;
+      }),
+    });
   }),
   userRegister: params => (dispatch, getState) => dispatch({
     type: actions.USER_REGISTER,
@@ -53,7 +74,7 @@ const actionCreators = {
     }),
   }),
   userLogout: () => (dispatch) => {
-    dispatch(cartActionCreators.getCartResults())
+    dispatch(cartActionCreators.getCartResults());
     dispatch({
       type: actions.USER_LOGOUT,
       payload: api.userLogout(),
@@ -115,6 +136,18 @@ const actionCreators = {
   savePtaToken: ptaToken => ({
     type: actions.SAVE_PTA,
     payload: api.savePtaToken(ptaToken),
+  }),
+  verifyEmailId: value => ({
+    type: actions.VERIFY_EMAIL,
+    payload: api.verifyEmail(value),
+  }),
+  verifyResendEmailId: () => ({
+    type: actions.VERIFY_RESEND_EMAIL,
+    payload: api.verifyResendEmail(),
+  }),
+  getUserInfoData: () => ({
+    type: actions.GET_USER_INFO,
+    payload: api.getUserInfo(),
   }),
 };
 
