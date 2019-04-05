@@ -21,8 +21,14 @@ const VaultHeader = (props) => {
               <h1 className={`${styles['fontW600']} ${styles['fs-20']} ${styles['m-0']}`}>{VAULT_PAGE.MANAGE_VAULT_HDR}</h1>
               <small className={`${styles['label-gry-clr']}`}>{VAULT_PAGE.SUB_TAG}</small>
             </div>
+            <div className={styles['tila-credit-wrap']}>
+              <div className={styles['label']}>Your Tila credit Balance is</div>
+              <div className={styless['amount-wrap']}>
+                <div className={styles['currency']}>SAR</div>
+                <div className={styles['amount']}>57.50</div>
+              </div>
+            </div>
           </div>
-
         </Col>
         <Col md={12}>
           <ul className={`${styles['card-items-list']} ${styles['mb-0']} ${styles['pl-30']}`}>
