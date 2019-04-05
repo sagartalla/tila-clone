@@ -31,9 +31,9 @@ const actions = {
 };
 
 const actionCreators = {
-  userLogin: (params, mode) => (dispatch, getState) => dispatch({
+  userLogin: params => (dispatch, getState) => dispatch({
     type: actions.USER_LOGIN,
-    payload: api.userLogin(params, mode),
+    payload: api.userLogin(params),
   }).then(() => {
     dispatch(cartActionCreators.getCartResults());
     if (typeof refStore.postLoginRef === 'function') {
@@ -49,7 +49,7 @@ const actionCreators = {
           cookies.set('isVerified', false);
           dispatch({
             type: actions.VERIFY_RESEND_EMAIL,
-            payload: api.verifyResendEmail(),
+            payload: api.verifyResendEmail(false),
           });
         } else {
           cookies.set('isVerified', true);
@@ -143,7 +143,7 @@ const actionCreators = {
   }),
   verifyResendEmailId: () => ({
     type: actions.VERIFY_RESEND_EMAIL,
-    payload: api.verifyResendEmail(),
+    payload: api.verifyResendEmail(true),
   }),
   getUserInfoData: () => ({
     type: actions.GET_USER_INFO,

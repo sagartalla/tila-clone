@@ -45,7 +45,7 @@ class Login extends Component {
       forgotPassword: false,
       validation: this.validations.valid(),
       clicked: false,
-      verifyEmail: false,
+      showVerifyScreen: false,
     };
     this.login = this.login.bind(this);
     this.onChangeField = this.onChangeField.bind(this);
@@ -58,7 +58,7 @@ class Login extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    let { userCreds, error, showSignup, showEmailScreen } = nextProps;
+    let { userCreds, error, showEmailScreen } = nextProps;
     userCreds = userCreds || this.props.userCreds;
     if (error) {
       this.setState({
@@ -72,9 +72,9 @@ class Login extends Component {
     //     password: userCreds.password,
     //   });
     // }
-    if (showSignup) {
+    if (showEmailScreen) {
       this.setState({
-        verifyEmail: true,
+        showVerifyScreen: true,
       });
     }
   }
@@ -88,7 +88,7 @@ class Login extends Component {
 
   onBackdropClick = () => {
     this.setState({
-      verifyEmail: false,
+      showVerifyScreen: false,
     });
     this.props.resetLoginError();  
     this.props.resetShowLogin();
@@ -192,7 +192,7 @@ class Login extends Component {
 
   render() {
     const { userCreds } = this.props;
-    const { mode, error, validation, clicked, verifyEmail, email } = this.state;
+    const { mode, error, validation, clicked, showVerifyScreen, email } = this.state;
     return (
       <Row className={`${styles['bg-white']} ${styles['m-0']}`}>
         { !this.state.forgotPassword ?
@@ -202,7 +202,7 @@ class Login extends Component {
             <img className={styles['img-responsive']} src={`${constants.mediaDomain}/pim/15f45930-fecf-4f7b-a3d6-613d41196c20/workbench/image/a1ccb74a-1858-42dd-8c38-cfb103e85bb2/login-screen.jpeg`} />
           </div>
         </Col>
-        {!verifyEmail ?
+        {!showVerifyScreen ?
         <Col md={6} xs={6}>
           <div className={`${styles.flex} ${styles['align-center']} ${styles['justify-between']} ${styles['flex-row']}`}>
            <div className={`${styles.flex} ${styles.pointer}`} onClick={this.onBackdropClick}><SVGComponent clsName={`${styles['cross-icon']}`} src="icons/common-icon/cross-button" /></div>
@@ -407,7 +407,7 @@ class Login extends Component {
 const mapStateToProps = (store) => ({
   error: selectors.getErrorMessege(store),
   userCreds: selectors.getUserCreds(store),
-  showSignup: selectors.showEmailScreen(store),
+  showEmailScreen: selectors.showEmailVerificationScreen(store),
   loading: selectors.getLoginProgressStatus(store),
 });
 

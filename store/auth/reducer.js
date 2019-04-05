@@ -9,7 +9,7 @@ const initialState = {
     loading: false,
     loginLoading: false,
     showLogin: false,
-    showEmailScreen: false,
+    showEmailVerificationScreen: false,
   },
   data: {
     isLoggedIn: false,
@@ -39,7 +39,7 @@ const authReducer = typeToReducer({
         ui: {
           ...state.ui,
           loginLoading: false,
-          showEmailScreen: true,
+          showEmailVerificationScreen: true,
         },
       });
     },
@@ -98,14 +98,14 @@ const authReducer = typeToReducer({
     ...state,
     data: {
       ...state.data,
-      isLoggedIn: state.data.userInfoData.email_verified === 'NV' ? false : (action.payload.isLoggedIn && (action.payload.isLoggedIn === "false" ? false : true)),
+      isLoggedIn: state.data.userInfoData.email_verified === 'NV' ? false : action.payload.isLoggedIn,
       userCreds: action.payload.userCreds,
       instagramCode: action.payload.instagramCode,
     },
     ui: {
       ...state.ui,
       showLogin: true,
-      showEmailScreen: false,
+      showEmailVerificationScreen: false,
     },
   }),
   [actions.SET_COUNTRY]: (state, action) => ({
@@ -232,7 +232,7 @@ const authReducer = typeToReducer({
     ui: {
       ...state.ui,
       showLogin: true,
-      showEmailScreen: false,
+      showEmailVerificationScreen: false,
     },
     data: {
       ...state.data,
@@ -248,7 +248,7 @@ const authReducer = typeToReducer({
     ui: {
       ...state.ui,
       showLogin: false,
-      showEmailScreen: false,
+      showEmailVerificationScreen: false,
     },
   }),
   [actions.SET_LANGUAGE]: {
@@ -275,32 +275,32 @@ const authReducer = typeToReducer({
     }),
   },
   [actions.VERIFY_EMAIL]: {
-    PENDING: state => Object.assign({}, state, { ui: { ...state.ui, loading: true, showEmailScreen: true } }),
+    PENDING: state => Object.assign({}, state, { ui: { ...state.ui, loading: true, showEmailVerificationScreen: true } }),
     FULFILLED: (state, action) => Object.assign({}, state, {
       data: {
         ...state.data,
         ...action.payload,
       },
-      ui: { ...state.ui, loading: false, showEmailScreen: false },
+      ui: { ...state.ui, loading: false, showEmailVerificationScreen: false },
     }),
     REJECTED: state =>
-      Object.assign({}, state, { ui: { ...state.ui, loading: false, showEmailScreen: true } }),
+      Object.assign({}, state, { ui: { ...state.ui, loading: false, showEmailVerificationScreen: true } }),
   },
   [actions.VERIFY_RESEND_EMAIL]: {
-    PENDING: state => Object.assign({}, state, { ui: { ...state.ui, loading: true, showEmailScreen: true } }),
+    PENDING: state => Object.assign({}, state, { ui: { ...state.ui, loading: true, showEmailVerificationScreen: true } }),
     FULFILLED: (state, action) => Object.assign({}, state, {
       data: {
         ...state.data,
         ...action.payload,
       },
-      ui: { ...state.ui, loading: false, showEmailScreen: true },
+      ui: { ...state.ui, loading: false, showEmailVerificationScreen: true },
     }),
     REJECTED: state =>
-      Object.assign({}, state, { ui: { ...state.ui, loading: false, showEmailScreen: true } }),
+      Object.assign({}, state, { ui: { ...state.ui, loading: false, showEmailVerificationScreen: true } }),
   },
 
   [actions.GET_USER_INFO]: {
-    PENDING: state => Object.assign({}, state, { ui: { ...state.ui, loading: true, showEmailScreen: true } }),
+    PENDING: state => Object.assign({}, state, { ui: { ...state.ui, loading: true, showEmailVerificationScreen: true } }),
     FULFILLED: (state, action) => Object.assign({}, state, {
       data: {
         ...state.data,
@@ -309,11 +309,11 @@ const authReducer = typeToReducer({
       ui: {
         ...state.ui,
         loading: false,
-        showEmailScreen: action.payload && action.payload.data.email_verified === 'NV' ? true : false,
+        showEmailVerificationScreen: action.payload && action.payload.data.email_verified === 'NV' ? true : false,
       },
     }),
     REJECTED: state =>
-      Object.assign({}, state, { ui: { ...state.ui, loading: false, showEmailScreen: true } }),
+      Object.assign({}, state, { ui: { ...state.ui, loading: false, showEmailVerificationScreen: true } }),
   },
 }, initialState);
 

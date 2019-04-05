@@ -12,7 +12,7 @@ const getUserInfo = () => {
   return axios.post(`${constants.CMS_API_URL}/api/v1/user/info`);
 }
 
-const userLogin = (params, mode) => {
+const userLogin = (params) => {
   return axios.post(`/api/login`, Object.assign({}, params, {
     authVersion: 'V1',
     tenant: 'CUSTOMER',
@@ -64,7 +64,7 @@ const getLoginInfo = () => {
   const userCreds = cookies.get('userCreds');
   return {
     userCreds: userCreds || null,
-    isLoggedIn: !!cookies.get('auth') && cookies.get('isVerified'),
+    isLoggedIn: !!cookies.get('auth') && (cookies.get('isVerified') && (cookies.get('isVerified') === "false" ? false : true)),
     ...(!cookies.get('auth') && { instagramCode: window.localStorage.getItem('instagramCode') || null }),
   };
 };
@@ -134,13 +134,13 @@ const verifyEmail = (body) => {
     toast.success('Your email is verified');
     return { data };
   });
-}
+};
 
-const verifyResendEmail = () => {
+const verifyResendEmail = (value) => {
   return axios.post(`${constants.CMS_API_URL}/api/v1/verification/email`).then(({ data }) => {
-    toast.success('OTP sent to your mail id');
+    if (value ? toast.success('OTP sent to your mail id') : '');
     return { data };
-  });;
-}
+  });
+};
 
 export default { userLogin, userRegister, userLogout, getLoginInfo, setCountry, setSessionID, deriveCity, autoCompleteCity, setCity, removeCity, setLanguage, savePtaToken, verifyEmail, verifyResendEmail, getUserInfo };
