@@ -2,7 +2,7 @@ import axios from 'axios';
 import constants from '../../helper/constants';
 
 const getCardResultsApi = () => {
-  return axios.get(`${constants.VAULT_API_URL}/api/v1/vault/cards`).then(({ data }) => {
+  return axios.get(`${constants.VAULT_API_URL}/api/v1/user/wallet`).then(({ data }) => {
     return { data };
   });
 };
