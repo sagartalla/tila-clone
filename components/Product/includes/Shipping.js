@@ -18,6 +18,7 @@ class Shipping extends Component {
   render() {
     const { shippingInfo, offerInfo } = this.props;
     const { shipping_fees, shipping_days, shippable, acceptsReturns, maxDaysToReturn, isPreview } = shippingInfo;
+    console.log(this.props.warranty);
     return (
       <div className={`${styles['box']} ${styles['border-radius4']} ${styles['mt-5']} ${styles['mb-10']} ${styles['ipad-delivery-address-part']} ${styles['free-delivery-part']}`}>
         <div className={`${styles['free-delivery-list']} ${styles['flex']}`}>
@@ -82,14 +83,14 @@ class Shipping extends Component {
                         `${PDP_PAGE.NON_RETURNABLE}`
                     }
                   </div>
-                  {this.props.warranty ?
+                  {Object.keys(this.props.warranty).length > 0 ?
                     <div className={`${styles['flex-center']} ${styles['warenty-part-inn']} ${styles['warenty-part-single']}`}>
-                      <SVGCompoent clsName={`${styles['trust-icon']}`} src="icons/common-icon/non-warnty" /> 
+                      <SVGCompoent clsName={`${styles['trust-icon']}`} src="icons/common-icon/non-warnty" />
                       <Warranty warranty={this.props.warranty} break={true} />
                     </div>
                     :
                     <div className={`${styles['flex-center']} ${styles['warenty-part-inn']}`}>
-                      <span>{PDP_PAGE.NO_WARRANTY}</span>
+                      <span className={styles['fs-10']}>{PDP_PAGE.NO_WARRANTY}</span>
                     </div>
                   }
                 </div>
