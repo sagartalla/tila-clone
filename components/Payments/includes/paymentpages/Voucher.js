@@ -37,7 +37,7 @@ class Voucher extends Component {
   render() {
     const { props } = this;
     const { voucherData, isOnlyVocuher } = props;
-    const { balance, amount_to_pay, currency_code, remaining_amount } = voucherData;
+    const { balance, total_amount, amount_to_pay, currency_code, remaining_amount } = voucherData;
     return (
       <div className={`${styles['voucher']} ${styles['p-10']}`}>
         <h3 className={`${styles['lgt-blue']} ${styles['fs-20']} ${styles['pb-10']} ${styles['fontW300']} ${styles['m-0']}`}>Tila Credit Used</h3>
@@ -51,7 +51,7 @@ class Voucher extends Component {
         <div className={`${styles.flex} ${styles['justify-between']}`}>
           <div className={`${styles.paymentBorder}`}>
             <span className={`${styles['success-green']} ${styles['fs-12']}`}>Total Amount To Pay</span>
-            <b className={`${styles['pt-5']} ${styles['fs-16']}`}>{amount_to_pay} {currency_code}</b>
+            <b className={`${styles['pt-5']} ${styles['fs-16']}`}>{total_amount} {currency_code}</b>
           </div>
           <div className={`${styles.flex} ${styles['align-center']} ${styles['thick-red-clr']}`}>
             <span>-</span>
