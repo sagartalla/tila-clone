@@ -40,7 +40,7 @@ const wishlistReducer = typeToReducer({
       return Object.assign({}, state, { error: action.payload.message, ui: { loading: false } })
     },
     FULFILLED: (state, action) => {
-      return Object.assign({}, state, { removeToWishlist: action.payload.data, data: [...action.payload.data], ui: { loading: false } });
+      return Object.assign({}, state, { removeToWishlist: action.payload.data.content, data: [...action.payload.data.content], ui: { loading: false } });
     },
   },
   [actions.NOTIFY_ME]: {
