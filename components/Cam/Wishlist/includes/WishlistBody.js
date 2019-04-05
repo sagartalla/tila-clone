@@ -45,7 +45,6 @@ const WishlistBody = (props) => {
   const routeChange = (variantId, productId, catalogId, itemType) => {
     Router.push(`/${country}/${language}/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemType}`);
   }
-console.log(props);
   return (
     <div>
       <div className={`${styles['flex']}`}>
