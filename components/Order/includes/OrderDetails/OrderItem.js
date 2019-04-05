@@ -142,7 +142,7 @@ class OrderItem extends Component {
                         <Col md={3} sm={3} className={styles['ipad-pr-0']}>
                           {product.price &&
                           <span className={`${styles['flex-center']} ${styles['fs-16']} ${styles.fontW600}`}>
-                            {product.price.final_price} {product.currency_code}
+                            {product.orderIds.length} x {product.price.final_price} {product.currency_code}
                             <span onMouseOver={this.showToolTip} onMouseLeave={this.hideToolTip} className={`${styles.relative} ${styles['tool-tip-parent']} ${styles['checkout-quat']} ${styles['fs-12']} ${styles['flex-center']} ${styles['justify-around']}`}>
                               {'?'}
                               {showToolTip &&
