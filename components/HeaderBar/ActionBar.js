@@ -65,7 +65,6 @@ class ActionBar extends Component {
 
   componentWillReceiveProps(nextProps) {
     let show = (!nextProps.isLoggedIn && (nextProps.isLoggedIn != this.props.isLoggedIn) && !this.state.logoutClicked) || this.state.loginClicked || !!nextProps.error || nextProps.loginInProgress || (!nextProps.isLoggedIn && nextProps.showLogin) || nextProps.showEmailVerificationScreen;
-    // console.log('show:',show,'nextProps.isLoggedIn', nextProps.isLoggedIn, 'this.props.isLoggedIn', this.props.isLoggedIn, 'this.state.logoutClicked', this.state.logoutClicked, 'nextProps.error', nextProps.error, 'nextProps.loginInProgress', nextProps.loginInProgress);
     if (window.location.pathname.indexOf('/payment') > -1) {
       show = false;
     }
@@ -119,6 +118,7 @@ class ActionBar extends Component {
     this.setState({ show: false });
     this.props.resetLoginError();
     this.props.resetShowLogin();
+    this.props.logout();
   }
 
   getTokenCall = (socialNetwork, token) => {
@@ -244,7 +244,7 @@ class ActionBar extends Component {
             ?
             (
               <Modal className={`react-router-modal__modal ${styles['login-reg-modal']} ${styles['p-20']}`} onBackdropClick={this.onBackdropClick}>
-                <Login mode={this.state.mode} />
+                <Login mode={this.state.mode} onBackdropClick={this.onBackdropClick} />
               </Modal>
             )
             :

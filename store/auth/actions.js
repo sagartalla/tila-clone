@@ -44,18 +44,15 @@ const actionCreators = {
     }
     dispatch({
       type: actions.GET_USER_INFO,
-      payload: api.getUserInfo().then((res) => {
-        if (res.data.email_verified === 'NV') {
-          cookies.set('isVerified', false);
-          dispatch({
-            type: actions.VERIFY_RESEND_EMAIL,
-            payload: api.verifyResendEmail(false),
-          });
-        } else {
-          cookies.set('isVerified', true);
-        }
-        return res;
-      }),
+      payload: api.getUserInfo()
+    }).then((res) => {
+      if (res && res.data && res.data.email_verified === 'NV') {
+        dispatch(actionCreators.setVerfied(false));
+        dispatch(actionCreators.sendOtpToEmailId(false));
+      } else {
+        dispatch(actionCreators.setVerfied(true))
+      }
+      return res;
     });
   }),
   userRegister: params => (dispatch, getState) => dispatch({
@@ -141,14 +138,18 @@ const actionCreators = {
     type: actions.VERIFY_EMAIL,
     payload: api.verifyEmail(value),
   }),
-  verifyResendEmailId: () => ({
+  sendOtpToEmailId: (status=true) => ({
     type: actions.VERIFY_RESEND_EMAIL,
-    payload: api.verifyResendEmail(true),
+    payload: api.sendOtpToEmailId(status),
   }),
   getUserInfoData: () => ({
     type: actions.GET_USER_INFO,
     payload: api.getUserInfo(),
   }),
+  setVerfied: (isVerified) => ({
+    type: actions.SET_VERFIED,
+    payload: api.setVerfied(isVerified),
+  })
 };
 
 export { actions, actionCreators };

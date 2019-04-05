@@ -51,7 +51,7 @@ const authReducer = typeToReducer({
           ...state.data,
           isLoggedIn: false,
         },
-        ui: { 
+        ui: {
           ...state.ui,
           loginLoading: false,
         }
@@ -91,7 +91,7 @@ const authReducer = typeToReducer({
     ...state,
     data: {
       ...state.data,
-      isLoggedIn: cookies.set('isVerified', false),
+      isLoggedIn: false,
     }
   }),
   [actions.USER_LOGIN_INFO]: (state, action) => ({
@@ -118,7 +118,7 @@ const authReducer = typeToReducer({
   [actions.SET_CITY]: {
     PENDING: state => Object.assign({}, state, {
       error: '',
-    }, { ui: { 
+    }, { ui: {
       ...state.ui,
       loading: true,
     } }),
@@ -146,7 +146,7 @@ const authReducer = typeToReducer({
   [actions.REMOVE_CITY]: {
     PENDING: state => Object.assign({}, state, {
       error: '',
-    }, { ui: { 
+    }, { ui: {
       ...state.ui,
       loading: true,
     } }),
@@ -170,7 +170,7 @@ const authReducer = typeToReducer({
   [actions.DERIVE_CITY]: {
     PENDING: state => Object.assign({}, state, {
       error: '',
-    }, { ui: { 
+    }, { ui: {
       ...state.ui,
       loading: true,
     } }),

@@ -51,9 +51,9 @@ class VerifyEmail extends Component {
     verifyEmailId(body);
   }
 
-  ResendEmail = () => {
-    const { verifyResendEmailId } = this.props;
-    verifyResendEmailId();
+  sendOtpToEmailId = () => {
+    const { sendOtpToEmailId } = this.props;
+    sendOtpToEmailId();
   }
   render() {
     const { email, onBackdropClick } = this.props;
@@ -85,7 +85,7 @@ class VerifyEmail extends Component {
             <div className={`${styles.flex}`}><div className={`${styles['otp-expire']}`}>{EMAIL_VERIFICATION.OTP_EXPIRE_IN}&nbsp;</div><div className={`${styles['black-color']}`}>{EMAIL_VERIFICATION.TWENTY_FOUR_HOURS}</div>
               <span
                 className={`${styles['lgt-blue']} ${styles.pointer}`}
-                onClick={this.ResendEmail}
+                onClick={this.sendOtpToEmailId}
               >&nbsp;{EMAIL_VERIFICATION.RESEND}
               </span>
             </div>
@@ -99,20 +99,20 @@ class VerifyEmail extends Component {
 const mapDispatchToProps = dispatch => bindActionCreators(
   {
     verifyEmailId: actionCreators.verifyEmailId,
-    verifyResendEmailId: actionCreators.verifyResendEmailId,
+    sendOtpToEmailId: actionCreators.sendOtpToEmailId,
   },
   dispatch,
 );
 
 VerifyEmail.propTypes = {
   verifyEmailId: PropTypes.func,
-  verifyResendEmailId: PropTypes.func,
+  sendOtpToEmailId: PropTypes.func,
   email: PropTypes.string,
   onBackdropClick: PropTypes.func,
 };
 VerifyEmail.defaultProps = {
   verifyEmailId: f => f,
-  verifyResendEmailId: f => f,
+  sendOtpToEmailId: f => f,
   email: '',
   onBackdropClick: f => f,
 };

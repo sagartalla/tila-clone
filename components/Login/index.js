@@ -72,11 +72,9 @@ class Login extends Component {
     //     password: userCreds.password,
     //   });
     // }
-    if (showEmailScreen) {
-      this.setState({
-        showVerifyScreen: true,
-      });
-    }
+    this.setState({
+      showVerifyScreen: showEmailScreen,
+    });
   }
 
   onChangeField(e) {
@@ -87,12 +85,9 @@ class Login extends Component {
   }
 
   onBackdropClick = () => {
-    this.setState({
-      showVerifyScreen: false,
-    });
-    this.props.resetLoginError();  
-    this.props.resetShowLogin();
+    this.props.onBackdropClick();
   }
+
   validateEmail = (fieldvalue, state) => {
     const emailReg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (emailReg.test(fieldvalue)) return false;
