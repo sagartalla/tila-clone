@@ -85,7 +85,7 @@ class SearchResults extends Component {
     let finalQuery = search ? search : isCategoryTree ? choosenCategoryName : '';
     finalQuery = finalQuery.split('-').join(' ');
     const {
-      results, pagiantionDetails, userDetails, notifyMe, cartButtonLoaders,
+      results, pagiantionDetails, userDetails, notifyMe, cartButtonLoaders, isLastAddedToCartSuccess,
     } = this.props;
     if(results.totalCount === 0) {
       return (

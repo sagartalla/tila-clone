@@ -45,9 +45,15 @@ const wishlistReducer = typeToReducer({
     },
   },
   [actions.NOTIFY_ME]: {
-    PENDING: state => state,
-    FULFILLED: state => state,
-    REJECTED: state => state,
+    PENDING: (state) => {
+      return Object.assign({}, state, { ui: { loading: true } });
+    },
+    REJECTED: (state) => {
+      return Object.assign({}, state, { ui: { loading: false } });
+    },
+    FULFILLED: (state) => {
+      return Object.assign({}, state, { ui: { loading: false } });
+    },
   },
 }, initialState);
 

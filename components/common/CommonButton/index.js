@@ -11,7 +11,7 @@ class Button extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      hover: '',
+      hover: false,
     };
   }
 
@@ -27,13 +27,14 @@ class Button extends Component {
     });
   }
   render() {
-    const { className, style, onClick, disabled, hoverClassName, showImage, btnLoading, btnText } = this.props;
+    const { className, style, onClick, disabled, hoverClassName, showImage, btnText, id } = this.props;
+    let { btnLoading } = this.props;
     const { hover } = this.state;
-    console.log('get class', hoverClassName);
     return (
     <button
-        className={hover ? `${styles[hoverClassName]} ${styles['button-hoverstyl']} ${className}` : `${styles['button-styl']} ${className}` }
+        className={hover ? ` ${styles['button-hoverstyl']} ${className} ${styles[hoverClassName]}` : `${styles['button-styl']} ${className}` }
         style={style}
+        id={id}
         onClick={onClick}
         disabled={disabled}
         onMouseOver={this.onMouseEnter(true)}
@@ -45,9 +46,9 @@ class Button extends Component {
       </div>
       :
       showImage ?
-        <div className={`${styles.flex}`}>
+        <div className={`${styles.flex} ${styles['align-center']}`}>
           <SVGCompoent clsName={`${styles['image-icon']}`} src={showImage} />
-          {btnText}
+        {btnText}
         </div> :
     btnText}
   </button>
@@ -61,6 +62,7 @@ Button.propTypes = {
   className: PropTypes.object,
   btnLoading: PropTypes.bool,
   disabled: PropTypes.bool,
+  id: PropTypes.string,
 };
 Button.defaultProps = {
   onClick: f => f,
@@ -68,5 +70,6 @@ Button.defaultProps = {
   className: {},
   btnLoading: false,
   disabled: false,
+  id: '',
 };
 export default Button;

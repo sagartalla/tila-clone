@@ -222,7 +222,7 @@ class Reason extends Component {
                 required
                 onChange={this.selectReason}
               >
-                <option>
+                <option disabled selected>
                   {loadingStatus
                     ? ORDER_PAGE.LOADING
                     : ORDER_PAGE.SELECT_REASON}
