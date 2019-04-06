@@ -3,13 +3,16 @@ import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Cookies from 'universal-cookie';
+
+import { Link } from '../../../../routes'
 import moment from 'moment';
 import { Router } from '../../../../routes';
 import StatusWidget from '../StatusWidget';
 import constants from '../../../../constants';
 import { ORDER_ISSUE_TYPES, ORDER_ISSUE_STEPS } from '../../constants';
 import { actionCreators } from '../../../../store/order';
-import Cookies from 'universal-cookie';
+
 
 // import  styles from '../order.styl';
 import { mergeCss } from '../../../../utils/cssUtil';
@@ -116,12 +119,20 @@ class OrderItem extends Component {
                 <div key={product.id} className={`${styles['product-item']} ${styles.flex}`}>
                   <Col md={2} className={styles['p-0']}>
                     <div className={`${styles['img-wrap']} ${styles['flex-center']} ${styles['justify-center']}`}>
-                      <img className={`${styles['order-item-img']}`} src={`${constants.mediaDomain}/${product.img}`} alt={product.img} />
+                      <Link route={`/${country}/${language}/product?productId=${product.productId}${product.variantId ? `&variantId=${product.variantId}` : ''}&catalogId=${product.catalogId}&itemType=${product.itemType}`}>
+                        <a className={`${styles['width100']} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
+                          <img className={`${styles['order-item-img']}`} src={`${constants.mediaDomain}/${product.img}`} alt={product.img} />
+                        </a>
+                      </Link>
                     </div>
                   </Col>
                   <Col md={10} className={styles['ipad-pr-0']}>
                     <div className={`${styles['text-wrap']}`}>
-                      <span className={`${styles.fontW600}`}>{product.name}</span>
+                      <Link route={`/${country}/${language}/product?productId=${product.productId}${product.variantId ? `&variantId=${product.variantId}` : ''}&catalogId=${product.catalogId}&itemType=${product.itemType}`}>
+                        <a className={`${styles['width100']} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
+                          <span className={`${styles.fontW600}`}>{product.name}</span>
+                        </a>
+                      </Link>
                       <div className={`${styles['flex-center']} ${styles['prod-sub-content']}`}>
                         <Col md={9} sm={9} className={styles['p-0']}>
                           <div className={`${styles.flex} ${styles['pt-15']} ${styles['pb-15']} ${styles['ipad-tp-5']} ${styles['ipad-tb-5']} ${styles['fs-12']} ${styles['thick-gry-clr']}`}>
@@ -186,7 +197,7 @@ class OrderItem extends Component {
                       </div>
                     </div>
                   </div>
-                  
+
                   {isCancelable === 'TRUE' &&
                     <RenderButton callbackMethod={this.cancelOrder}
                       refundType = 'Cancel'
