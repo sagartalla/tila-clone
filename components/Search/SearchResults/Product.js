@@ -72,14 +72,6 @@ class Product extends Component {
     });
   }
 
-  buyNow(e) {
-    e.stopPropagation();
-    e.preventDefault();
-    const { selectedIndex } = this.state;
-    const { variants } = this.props;
-    this.props.buyNow(variants[selectedIndex].listingId[0]);
-  }
-
   notify(e) {
     e.stopPropagation();
     e.preventDefault();
@@ -102,26 +94,27 @@ class Product extends Component {
     });
   }
 
-  showVariants(e) {
-    const btnType = e.target.getAttribute('data-btn-type')
-    e.stopPropagation();
-    e.preventDefault();
-    const { selectedIndex } = this.state;
-    const {
-      variants,
-      productId,
-      buyNow,
-      addToCart,
-      selectedProduct,
-    } = this.props;
+  showVariants(btnType) {
+    return (e) => {
+      e.stopPropagation();
+      e.preventDefault();
+      const { selectedIndex } = this.state;
+      const {
+        variants,
+        productId,
+        buyNow,
+        addToCart,
+        selectedProduct,
+      } = this.props;
 
-    if (variants.length <= 1) {
-      (btnType === 'BUY_NOW' ? buyNow : addToCart)(variants[selectedIndex].listingId[0]);
-    } else {
-      const id = [productId];
-      this.setState({ btnType }, () => {
-        selectedProduct(id);
-      });
+      if (variants.length <= 1) {
+        (btnType === 'BUY_NOW' ? buyNow : addToCart)(variants[selectedIndex].listingId[0]);
+      } else {
+        const id = [productId];
+        this.setState({ btnType }, () => {
+          selectedProduct(id);
+        });
+      }
     }
   }
 
@@ -317,7 +310,7 @@ class Product extends Component {
                   <div className={`${styles['flex']} ${styles['justify-around']} ${styles['quick-view']} ${styles['border-radius4']}`}>
                     <Button
                       className={`${styles['flex']} ${styles['add-to-crt']} ${styles['fs-12']} ${styles['text-uppercase']}`}
-                      onClick={this.addToCart}
+                      onClick={this.showVariants('ADD_TO_CART')}
                       disabled={btnLoading}
                       btnText={PDP_PAGE.ADD_TO_CART}
                       showImage="icons/cart/blue-cart-icon"
@@ -325,7 +318,7 @@ class Product extends Component {
                     />
                     <Button
                       className={`${styles['flex-center']} ${styles['buy-now-btn']} ${styles['fs-12']} ${styles['text-uppercase']}`}
-                      onClick={this.buyNow}
+                      onClick={this.showVariants('BUY_NOW')}
                       btnText={PDP_PAGE.BUY_NOW}
                       showImage="icons/cart/buy-icon"
                       hoverClassName="hoverBlueBackground"
