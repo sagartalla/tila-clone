@@ -40,10 +40,6 @@ const CartBody = ({
   const cnt = flag > 0 ? items.length : 0;
   const { CART_PAGE } = languageDefinations();
 
-  const routeChange = (variantId, productId, catalogId, itemType) => {
-    Router.pushRoute(`/${country}/${language}/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemType}`);
-  }
-
   return (
     isLoading ?
       cartPlaceHolder
@@ -67,7 +63,6 @@ const CartBody = ({
                 <CartItem
                   item={item}
                   count={count}
-                  routeChange={routeChange}
                   increaseItemCnt={increaseItemCnt}
                   decreaseItemCnt={decreaseItemCnt}
                   addToWishlist={addToWishlist}
