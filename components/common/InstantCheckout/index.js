@@ -126,7 +126,10 @@ class InstantCheckout extends Component {
           </div>
           : ''
         }
-        <h4 className={`${styles['fontW600']} ${styles['mb-0']} ${styles['flex']}`}>Checkout with 1 click <span className={`${styles['checkout-quat']} ${styles['fs-12']} ${styles['flex-center']} ${styles['justify-around']}`}>?</span></h4>
+        <h4 className={`${styles['fontW600']} ${styles['mb-0']} ${styles['flex']}`}>
+          Checkout with 1 click
+          {/* <span className={`${styles['checkout-quat']} ${styles['fs-12']} ${styles['flex-center']} ${styles['justify-around']}`}>?</span> */}
+        </h4>
         <p className={`${styles['fs-12']} ${styles['thick-gry-clr']}`}>With your preffered payment and delivery address</p>
         <div className={`${styles['flex']}`}>
         <span className={`${styles['fs-12']} ${styles['pr-30']}`}><input type="radio" name="pay_type" className={styles['radio-btn']} checked={creditDebitCard} onChange={this.creditCardClickHandler} /> Credit/ Debit Card</span>

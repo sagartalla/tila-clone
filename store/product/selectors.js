@@ -6,9 +6,8 @@ const getProduct = (store, variantId) => {
   } = store.productReducer.data[0];
 
   const { data = [] } = store.wishlistReducer;
-  const wishListProductIds = data.map(w => w.product_id) || [];
+  const wishListProductIds = data && data.length > 0 && (data.map(w => w.product_id) || []);
 
-  console.log(wishListProductIds, 'wishListProductIds', wishListProductIds.indexOf(product_id) !== -1);
   variantId = store.productReducer.variantsData.selectedVariantId || variantId;
   variantId = variantId || Object.keys(variant_preferred_listings || {})[0]
   const computedVariantId = variantId;
@@ -124,7 +123,7 @@ const getProduct = (store, variantId) => {
     warranty,
     categoryType: tree.finance ? tree.finance[0].display_name_en : '',
     catalog: _.groupBy(_.filter(catalogAttributeMap, (val) => val.visible), (attrMap) => attrMap.attribute_category_name),
-    isWishlisted: wishListProductIds.indexOf(product_id) !== -1,
+    isWishlisted: wishListProductIds && wishListProductIds.indexOf(product_id) !== -1,
   };
 };
 

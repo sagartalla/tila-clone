@@ -31,22 +31,25 @@ const getPaymentModesData = (store) => {
   */
   if(store.paymentsReducer.data.data) {
     const paymentModesData = store.paymentsReducer.data.data.payment_options_available.reduce((acc, val, key) => {
-      if(val.type === "VOUCHER") {
-        acc.voucherData = val;
+      if (val.type === 'VOUCHER') {
+        acc.voucherData = {
+          ...val,
+          total_amount: store.paymentsReducer.data.data.amount,
+        };
       } else {
         acc.paymentModes[val.type] = val;
       }
       return acc;
     }, {
       voucherData: null,
-      paymentModes: {}
+      paymentModes: {},
     });
     paymentModesData.transaction_id = store.paymentsReducer.data.data.transaction_id;
     return paymentModesData;
   }
   return {
     voucherData: {},
-    paymentModes: {}
+    paymentModes: {},
   }
 }
 

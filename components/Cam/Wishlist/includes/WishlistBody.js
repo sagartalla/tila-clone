@@ -45,7 +45,6 @@ const WishlistBody = (props) => {
   const routeChange = (variantId, productId, catalogId, itemType) => {
     Router.push(`/${country}/${language}/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemType}`);
   }
-
   return (
     <div>
       <div className={`${styles['flex']}`}>
@@ -105,15 +104,14 @@ const WishlistBody = (props) => {
                         </span>
                         <h4 className={`${styles['fontW600']} ${styles['light-gry-clr']} ${styles['mt-25']}`}><span className={`${styles['fs-30']} ${styles['m-fs-18']}`}>{price}</span> <span className={`styles['fs-18']} ${styles['m-fs-14']}`}> {cur}</span></h4>
                         {
-                          variant_id && percentage(price, mrp) <= -5 &&
+                          variant_id && percentage(price, mrp) <= -5 ?
                           <span className={`${styles['flex']}`}>
                             <span className={`${styles['success-green']} ${styles.flex}`}>{percentage(price, mrp)}%</span>&nbsp;&nbsp;&nbsp;
                             <strike className={`${styles['label-gry-clr']}`}>{mrp} {cur}</strike>
-                          </span>
+                          </span> : ''
                         }
-
-                        {wishlisted_price && price && cur && getPriceAlert(price, wishlisted_price, cur)}
-                        {wishlisted_price &&
+                        {wishlisted_price > 0 && price && cur && getPriceAlert(price, wishlisted_price, cur)}
+                        {wishlisted_price > 0 &&
                         <span className={`${styles['thick-gry-clr']}`}>
                           Item was {wishlisted_price} {cur} when added to Wish List
                         </span>}

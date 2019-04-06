@@ -2,13 +2,14 @@ import constants from '../../../constants';
 
 const getWishListResults = (store) => {
   if (store.wishlistReducer.data) {
+
     const data = store.wishlistReducer.data;
     const img_url = constants.mediaDomain;
     const showLoading = store.wishlistReducer.ui.loading;
-    
+
     const newData = [];
 
-    data.forEach((item) => {
+    data && data.length > 0 && data.forEach((item) => {
       // const variant = Object.keys(item.product_details.product_details_vo.cached_variant)[0];
       // const variant_info = item.variant_preferred_listings[variant][0];
 
@@ -40,11 +41,20 @@ const getWishListResults = (store) => {
   }
   return [];
 }
+const getPaginationDetails = (store) => {
+   const {number=0,total_pages=0,total_elements=0,number_of_elements=0} = store.wishlistReducer.paginationData
+
+   return {
+     number,
+     total_pages,
+     total_elements,
+     number_of_elements
+   }
+}
 
 const getLoader = (store) => {
   if (store.wishlistReducer.ui.loading) {
     return store.wishlistReducer.ui.loading;
   }
 };
-
-export { getWishListResults, getLoader }
+export { getWishListResults, getPaginationDetails, getLoader }

@@ -2,10 +2,19 @@ import React, { Fragment } from 'react';
 import { languageDefinations } from '../../../utils/lang/';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
+import Cookies from 'universal-cookie';
+
+import { Link } from '../../../routes';
 import SVGComponent from '../../common/SVGComponet';
 import Blocker from '../../common/Blocker';
 import CartStepper from './CartStepper';
 import constants from '../../../constants';
+
+const cookies = new Cookies();
+
+const language = cookies.get('language') || 'en';
+const country = cookies.get('country') || 'SAU';
+
 
 import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Cart/cart');
@@ -30,17 +39,27 @@ const MiniCartBody = props => {
         <div>
           {
             items.map((item, index) => {
-              const { item_id, img,product_id, name, offer_price, cur, quantity, max_limit, inventory, brand_name } = item;
+              const { item_id, img, product_id, name, offer_price, cur, quantity, max_limit, inventory, brand_name, variant_id, itemType, catalogId } = item;
               return (
                 <div key={item_id} className={`${styles['flex']} ${styles['pt-15']} ${styles['pb-15']} ${styles['border-b']} ${styles['min-items-list']}`}>
                   <Col md={2} sm={2} xs={2} className={`${styles['pl-0']} ${styles['pr-0']}`}>
                     <div className={`${styles['cart-container-img']} ${styles['flex']} ${styles['justify-center']}`}>
-                      <img className={styles['img']} src={`${constants.mediaDomain}/${img}`} />
+                      <Link route={`/${country}/${language}/product?productId=${product_id}${variant_id ? `&variantId=${variant_id}` : ''}&catalogId=${catalogId}&itemType=${itemType}`}>
+                        <a className={`${styles['width100']} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
+                          <img className={styles['img']} src={`${constants.mediaDomain}/${img}`} />
+                        </a>
+                      </Link>
                     </div>
                   </Col>
                   <Col md={10} sm={10} xs={10} className={`${styles['pr-0']} ${styles['card-details-labels']}`}>
                     <div className={`${styles['flx-space-bw']}`}>
-                      <h6 className={`${styles['m-0']} ${styles['card-details-name']}`}>{name}</h6>
+                      <h6 className={`${styles['m-0']} ${styles['card-details-name']}`}>
+                        <Link route={`/${country}/${language}/product?productId=${product_id}${variant_id ? `&variantId=${variant_id}` : ''}&catalogId=${catalogId}&itemType=${itemType}`}>
+                          <a className={`${styles['width100']} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
+                            {name}
+                          </a>
+                        </Link>
+                      </h6>
                       {
                         editCartDetails
                           ?

@@ -21,24 +21,27 @@ const getOrdersData = (store) => {
             id: val.id,
             products: [val],
             status: val.status ,
-            variantId:val.variantId,
-            isCancelable:val.isCancelable,
-            isReturnable:val.isReturnable,
-            isExchangable:val.isExchangable
+            variantId: val.variantId,
+            isCancelable: val.isCancelable,
+            isReturnable: val.isReturnable,
+            isExchangable: val.isExchangable,
           }), []),
-        _.map((i) => ({
+        _.map(i => ({
           id: i.order_item_ids[0],
           img: i.variant_info.image_url,
           name: i.variant_info.title,
+          itemType: i.variant_info.item_type,
+          productId: i.variant_info.product_id,
+          catalogId: i.variant_info.catalog_id,
           item_tracking_id: i.item_tracking_id || shortid.generate(),
           status: i.external_status,
           promisedDeliveryDate: i.promised_delivery_date,
-          variantId:i.variant_id,
+          variantId: i.variant_id,
           orderIds: i.order_item_ids,
-          isCancelable:i.cancelable,
-          isReturnable:i.returnable,
-          isExchangable:i.exchangeable
-         }))
+          isCancelable: i.cancelable,
+          isReturnable: i.returnable,
+          isExchangable: i.exchangeable,
+        })),
       )(order_items);
       return {
         id: order_id,

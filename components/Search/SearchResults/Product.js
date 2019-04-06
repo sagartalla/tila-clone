@@ -37,18 +37,18 @@ class Product extends Component {
       src: '',
       selectedIndex: 0,
       showLoader: false,
-      showCartLoader: false,
-      showBuyNowLoader: false,
+      btnType: '',
     };
     this.setImg = this.setImg.bind(this);
     this.addToWishlist = this.addToWishlist.bind(this);
-    this.addToCart = this.addToCart.bind(this);
-    this.buyNow = this.buyNow.bind(this);
+    // this.addToCart = this.addToCart.bind(this);
+    // this.buyNow = this.buyNow.bind(this);
     this.addToCompare = this.addToCompare.bind(this);
     this.notify = this.notify.bind(this);
     this.closeNotify = this.closeNotify.bind(this);
     this.selectedVariant = this.selectedVariant.bind(this);
     this.closeVariantTab = this.closeVariantTab.bind(this);
+    this.showVariants = this.showVariants.bind(this);
   }
 
   setImg() {
@@ -78,10 +78,6 @@ class Product extends Component {
     const { selectedIndex } = this.state;
     const { variants } = this.props;
     this.props.buyNow(variants[selectedIndex].listingId[0]);
-    this.setState({
-      showBuyNowLoader: true,
-      showCartLoader: false,
-    });
   }
 
   notify(e) {
@@ -106,49 +102,33 @@ class Product extends Component {
     });
   }
 
-  addToCart(e) {
-    e.preventDefault();
+  showVariants(e) {
+    const btnType = e.target.getAttribute('data-btn-type')
     e.stopPropagation();
+    e.preventDefault();
+    const { selectedIndex } = this.state;
     const {
-      productId,
-      productName,
-      brand,
-      media,
       variants,
-      itemtype,
-      currency,
-      addToCart
+      productId,
+      buyNow,
+      addToCart,
+      selectedProduct,
     } = this.props;
 
-    if(variants.length <= 1) {
-      this.props.addToCart(variants[0].listingId[0])
+    if (variants.length <= 1) {
+      (btnType === 'BUY_NOW' ? buyNow : addToCart)(variants[selectedIndex].listingId[0]);
     } else {
-      let id = [productId]
-      this.props.selectedProduct(id)
+      const id = [productId];
+      this.setState({ btnType }, () => {
+        selectedProduct(id);
+      });
     }
-    this.setState({
-      showCartLoader: true,
-    });
-    // digitalData.cart.item.push({
-    //   productInfo:{
-    //     productID:productId,
-    //     productName:productName,
-    //     manufacturer:brand,
-    //     productImage:media[0]
-    //   },
-    //   category:{
-    //     primaryCategory:itemtype
-    //   },
-    //   price:{
-    //     basePrice:variants.sellingPrice[0],
-    //     currency
-    //   },
-    //   quantity:1
-    // })
   }
+
   componentWillReceiveProps() {
     this.setState({ showLoader: false });
   }
+
   getOfferClassName(offer) {
     if (offer > 5 && offer < 20) {
       return 'green'
@@ -163,20 +143,26 @@ class Product extends Component {
       return 'red';
     }
   }
+
   closeVariantTab(e) {
     e.stopPropagation();
     e.preventDefault();
-    this.props.selectedProduct([])
+    this.props.selectedProduct([]);
   }
-  selectedVariant(listingId,index) {
-    const { addToCart } = this.props
+
+  selectedVariant(listingId, index) {
+    const { addToCart, buyNow } = this.props;
+    const { btnType } = this.state;
     this.setState({
-      selectedIndex:index,
-      showLoader:true
-    },() =>{
-      this.props.addToCart(listingId);
-    })
+      selectedIndex: index,
+      showLoader: true,
+    }, () => {
+      if (btnType === 'BUY_NOW') {
+        buyNow(listingId);
+      } else addToCart(listingId);
+    });
   }
+
   itemNumberClick = (index,pageNum) => {
     let productInfo = {
       pageFragmentation:pageNum,
@@ -238,7 +224,7 @@ class Product extends Component {
       isLastAddedToCartSuccess,
       btnLoading,
     } = this.props;
-    const { showNotify, selectedIndex, showLoader, showCartLoader, showBuyNowLoader } = this.state;
+    const { showNotify, selectedIndex, showLoader } = this.state;
     const selectedProduct = selectedID.length > 0 && selectedID.includes(productId);
     const discountValue = variants.length > 0 &&
       variants[selectedIndex].discount && Math.floor(variants[selectedIndex].discount[0]);
@@ -335,7 +321,7 @@ class Product extends Component {
                       disabled={btnLoading}
                       btnText={PDP_PAGE.ADD_TO_CART}
                       showImage="icons/cart/blue-cart-icon"
-                      btnLoading={btnLoading && showCartLoader}
+                      btnLoading={cartButtonLoaders[variants[selectedIndex].listingId[0]]}
                     />
                     <Button
                       className={`${styles['flex-center']} ${styles['buy-now-btn']} ${styles['fs-12']} ${styles['text-uppercase']}`}
@@ -392,7 +378,9 @@ class Product extends Component {
                 </div>
               </div>
               {/* <div className={styles['desc-cont']}>
-                <div className={`${styles['prdt-name']} ${styles['fs-12']} ${styles['pt-15']} ${styles['pb-5']}`}><a href="#">{displayName}</a></div>
+                <div className={`${styles['prdt-name']} ${styles['fs-12']} ${styles['pt-15']} ${styles['pb-5']}`}>
+                  <a href="#">{displayName}</a>
+                </div>
                 <div>{priceRange}</div>
                 <div className={styles['variant-info']}>
                   {

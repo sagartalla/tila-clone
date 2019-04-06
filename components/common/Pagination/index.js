@@ -47,6 +47,11 @@ export default class Pagination extends Component {
 
     return range;
   }
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      currentPage:nextProps.currentPage
+    })
+  }
   fetchPageNumbers() {
     const {totalSize,pageNeighbours} = this.props;
     const { currentPage } = this.state;
@@ -137,7 +142,7 @@ export default class Pagination extends Component {
                     href="#"
                     onClick={this.handleClick(page)}
                   >
-                    {page}
+                    {page + 1}
                   </a>
                 </li>
                 )
