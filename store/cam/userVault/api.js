@@ -23,7 +23,7 @@ const makeCardDefaultApi = (card_token) => {
 }
 
 const deleteCardApi = (card_token) => {
-  return axios.delete(`${constants.VAULT_API_URL}/api/v1/vault/card/` + card_token).then(({ data }) => {
+  return axios.delete(`${constants.VAULT_API_URL}//api/v1/user/wallet/deleteCard/${card_token}`).then(({ data }) => {
     //after successfully added, get all card details again.
     return getCardResultsApi();
   });
