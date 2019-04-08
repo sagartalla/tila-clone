@@ -235,7 +235,7 @@ class Reason extends Component {
                   className={styles['select-text']}
                   onChange={this.selectSubReason}
                 >
-                  <option>
+                  <option disabled selected>
                     {loadingStatus
                       ? ORDER_PAGE.LOADING
                       : ORDER_PAGE.SELECT_SUB_REASON}
