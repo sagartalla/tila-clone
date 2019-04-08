@@ -102,7 +102,7 @@ class CashOnDelivery extends React.Component {
         ?
             this.state.nextStep === 'captcha'
               ?
-                <Captcha onCaptchaSuccess={this.onCaptchaSuccess} txnId={this.props.transactionId}/>
+                <Captcha onCaptchaSuccess={this.onCaptchaSuccess} txnId={this.props.transactionId} onContinueHandle={this.onContinueHandle}/>
               :
                 this.state.nextStep === 'mobileVerification'
                   ?
