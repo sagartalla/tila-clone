@@ -68,18 +68,18 @@ class Search extends Component {
     this.props.fetchImageSearchData(file)
     Router.pushRoute(`/${country}/${language}/srp`);
   }
-  onChangeSearchInput(e) {
 
+  onChangeSearchInput(e) {
     this.setState({
-      query: e.target.value,
-      searchInput: true
+      query: e.target.value.replace(/^\s+/g, ''),
+      searchInput: true,
     }, () => {
       this.fetchSuggestions();
     });
   }
 
   fetchSuggestions(e) {
-    this.props.fetchSuggestions({key: this.state.query});
+    this.props.fetchSuggestions({key: this.state.query.trim()});
   }
 
   fireCustomEventClick() {
