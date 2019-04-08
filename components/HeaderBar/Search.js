@@ -76,7 +76,7 @@ class Search extends Component {
       return;
     }
     this.setState({
-      query: e.target.value.replace(/^\s+/g, ''),,
+      query: e.target.value.replace(/^\s+/g, ''),
       searchInput: true,
     }, () => {
       this.fetchSuggestions();
