@@ -66,6 +66,7 @@ apiRoutes
         req.universalCookies.remove('auth');
         req.universalCookies.remove('userCreds');
         req.universalCookies.remove('ptaToken');
+        req.universalCookies.remove('isVerified');
         return res.json({});
       }
     });
