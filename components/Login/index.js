@@ -12,11 +12,11 @@ import SocialLogin from './SocialLogin';
 import { mergeCss } from '../../utils/cssUtil';
 import { languageDefinations } from '../../utils/lang';
 import FormValidator from '../common/FormValidator';
+import VerifyEmail from './VerifyEmail';
 
 const styles = mergeCss('components/Login/login');
 
 const { LOGIN_PAGE } = languageDefinations();
-
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -45,6 +45,7 @@ class Login extends Component {
       forgotPassword: false,
       validation: this.validations.valid(),
       clicked: false,
+      showVerifyScreen: false,
     };
     this.login = this.login.bind(this);
     this.onChangeField = this.onChangeField.bind(this);
@@ -57,7 +58,7 @@ class Login extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    let { userCreds, error } = nextProps;
+    let { userCreds, error, showEmailScreen } = nextProps;
     userCreds = userCreds || this.props.userCreds;
     if (error) {
       this.setState({
@@ -65,12 +66,15 @@ class Login extends Component {
       });
       return;
     }
-    if (userCreds) {
-      this.setState({
-        email: userCreds.username,
-        password: userCreds.password,
-      });
-    }
+    // if (userCreds) {
+    //   this.setState({
+    //     email: userCreds.username,
+    //     password: userCreds.password,
+    //   });
+    // }
+    this.setState({
+      showVerifyScreen: showEmailScreen,
+    });
   }
 
   onChangeField(e) {
@@ -80,6 +84,10 @@ class Login extends Component {
     });
   }
 
+  onBackdropClick = () => {
+    this.props.onBackdropClick();
+  }
+
   validateEmail = (fieldvalue, state) => {
     const emailReg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (emailReg.test(fieldvalue)) return false;
@@ -87,7 +95,7 @@ class Login extends Component {
   }
 
   validateLengthPassword = (fieldvalue, state) => {
-    if (fieldvalue.length >= 8) return false;
+    if (fieldvalue && fieldvalue.length >= 8) return false;
     return true;
   }
 
@@ -138,7 +146,7 @@ class Login extends Component {
           },
           rememberMe: true,
         };
-        this.props.userLogin(serverData)
+        this.props.userLogin(serverData, this.state.mode);
       } else {
         const serverData = {
           channel: 'BASIC_AUTH',
@@ -179,18 +187,20 @@ class Login extends Component {
 
   render() {
     const { userCreds } = this.props;
-    const { mode, error, validation, clicked } = this.state;
+    const { mode, error, validation, clicked, showVerifyScreen, email } = this.state;
     return (
       <Row className={`${styles['bg-white']} ${styles['m-0']}`}>
         { !this.state.forgotPassword ?
-      <div>
+      <div className={`${styles.flex}`}>
         <Col md={6} xs={6} className={styles['pl-0']}>
           <div className={styles['image-placeholder']}>
             <img className={styles['img-responsive']} src={`${constants.mediaDomain}/pim/15f45930-fecf-4f7b-a3d6-613d41196c20/workbench/image/a1ccb74a-1858-42dd-8c38-cfb103e85bb2/login-screen.jpeg`} />
           </div>
         </Col>
+        {!showVerifyScreen ?
         <Col md={6} xs={6}>
-          <div>
+          <div className={`${styles.flex} ${styles['align-center']} ${styles['justify-between']} ${styles['flex-row']}`}>
+           <div className={`${styles.flex} ${styles.pointer}`} onClick={this.onBackdropClick}><SVGComponent clsName={`${styles['cross-icon']}`} src="icons/common-icon/cross-button" /></div>
             <h3 className={`${styles['fs-26']} ${styles['mb-25']}`}>
               <div>
                 <span className={`${styles['ff-b']} ${styles['pl-10']}`}>
@@ -369,8 +379,14 @@ class Login extends Component {
                 </h4>
             }
           </div>
-
+        </Col> :
+         <Col md={6} xs={6} className={`${styles.flex}`}>
+        <VerifyEmail
+         email={email}
+         onBackdropClick={this.onBackdropClick}
+        />
         </Col>
+        }
         </div>
         :
         <ForgotPassword
@@ -384,18 +400,22 @@ class Login extends Component {
 }
 
 const mapStateToProps = (store) => ({
-    error: selectors.getErrorMessege(store),
-    userCreds: selectors.getUserCreds(store)
-  });
+  error: selectors.getErrorMessege(store),
+  userCreds: selectors.getUserCreds(store),
+  showEmailScreen: selectors.showEmailVerificationScreen(store),
+  loading: selectors.getLoginProgressStatus(store),
+});
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(
-    {
-      userLogin: actionCreators.userLogin,
-      userRegister: actionCreators.userRegister,
-      getLoginInfo: actionCreators.getLoginInfo,
-      resetLoginError: actionCreators.resetLoginError,
-    },
-    dispatch,
-  );
+  {
+    userLogin: actionCreators.userLogin,
+    userRegister: actionCreators.userRegister,
+    getLoginInfo: actionCreators.getLoginInfo,
+    resetLoginError: actionCreators.resetLoginError,
+    resetShowLogin: actionCreators.resetShowLogin,
+    resetLoginError: actionCreators.resetLoginError,
+  },
+  dispatch,
+);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
