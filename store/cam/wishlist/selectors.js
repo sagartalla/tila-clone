@@ -2,8 +2,11 @@ import constants from '../../../constants';
 
 const getWishListResults = (store) => {
   if (store.wishlistReducer.data) {
+
     const data = store.wishlistReducer.data;
     const img_url = constants.mediaDomain;
+    const showLoading = store.wishlistReducer.ui.loading;
+
     const newData = [];
 
     data && data.length > 0 && data.forEach((item) => {
@@ -38,5 +41,20 @@ const getWishListResults = (store) => {
   }
   return [];
 }
+const getPaginationDetails = (store) => {
+   const {number=0,total_pages=0,total_elements=0,number_of_elements=0} = store.wishlistReducer.paginationData
 
-export { getWishListResults }
+   return {
+     number,
+     total_pages,
+     total_elements,
+     number_of_elements
+   }
+}
+
+const getLoader = (store) => {
+  if (store.wishlistReducer.ui.loading) {
+    return store.wishlistReducer.ui.loading;
+  }
+};
+export { getWishListResults, getPaginationDetails, getLoader }

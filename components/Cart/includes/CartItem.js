@@ -1,6 +1,9 @@
 import React from 'react';
 import { Row, Col, OverlayTrigger, Popover } from 'react-bootstrap';
 import moment from 'moment';
+import Cookie from 'universal-cookie';
+
+import { Link } from '../../../routes'
 import Warranty from '../../Product/includes/Warranty';
 import CartStepper from './CartStepper';
 import SVGComponent from '../../common/SVGComponet';
@@ -10,6 +13,12 @@ import constants from '../../../constants';
 
 const styles = mergeCss('components/Cart/cart');
 const { CART_PAGE } = languageDefinations();
+
+const cookies = new Cookie();
+
+const language = cookies.get('language') || 'en';
+const country = cookies.get('country') || 'SAU';
+
 
 const popover = ({
   mrp, offer_price, total_amount, cur, selling_price, offerDiscounts, total_discount,
@@ -151,9 +160,12 @@ class CartItem extends React.Component {
             <Col md={2} sm={2} className={styles['ipad-pr-0']}>
               <div
                 className={`${styles['flex-center']} ${styles['justify-center']} ${styles['pb-15']} ${styles['card-box-inn-img']}`}
-                onClick={() => routeChange(variant_id, product_id, catalogId, itemType)}
               >
-                <img className={styles.img} alt={img} src={`${constants.mediaDomain}/${img}`} />
+                <Link route={`/${country}/${language}/product?productId=${product_id}${variant_id ? `&variantId=${variant_id}` : ''}&catalogId=${catalogId}&itemType=${itemType}`}>
+                  <a className={`${styles['width100']} ${styles['ht-100P']}`}>
+                    <img className={styles.img} alt={img} src={`${constants.mediaDomain}/${img}`} />
+                  </a>
+                </Link>
               </div>
               <CartStepper
                 count={count}
@@ -169,8 +181,12 @@ class CartItem extends React.Component {
                   <h5 className={`${styles['mt-0']} ${styles['mb-0']}`}>{brand_name}</h5>
                 </Col>
                 <Col md={10} sm={10} className={styles['landscape-cart-details']}>
-                  <h4 className={`${styles['fontW600']} ${styles['light-gry-clr']}`}>
-                    <a onClick={() => routeChange(variant_id, product_id, catalogId, itemType)}>{name}</a>
+                  <h4 className={`${styles['fontW600']}`}>
+                    <Link route={`/${country}/${language}/product?productId=${product_id}${variant_id ? `&variantId=${variant_id}` : ''}&catalogId=${catalogId}&itemType=${itemType}`}>
+                      <a className={`${styles['width100']} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
+                        {name}
+                      </a>
+                    </Link>
                   </h4>
                   <div className={`${styles['warranty-part']} ${styles['p-10']} ${styles['light-gry-clr']}`}>
                     {cartData.items ? <p className={`${styles['mb-0']} ${styles['fs-12']} ${styles['flex']}`}>

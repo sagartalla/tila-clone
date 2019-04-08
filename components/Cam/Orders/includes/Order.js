@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Cookies from 'universal-cookie';
 import { Row, Col, Button, OverlayTrigger, Popover } from 'react-bootstrap';
@@ -71,7 +71,7 @@ const Order = ({order}) => {
         <Col md={7}>
           <div>
             <span>
-              Orderd on
+              Ordered on
             </span> <span className={`${styles['fontW600']} ${styles['light-gry-clr']}`}>
               {order.orderDate}
             </span>

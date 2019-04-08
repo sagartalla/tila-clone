@@ -7,6 +7,7 @@ const initialState = {
   },
   data: [],
   error: '',
+  paginationData:{}
 };
 
 const wishlistReducer = typeToReducer({
@@ -18,7 +19,7 @@ const wishlistReducer = typeToReducer({
       return Object.assign({}, state, { error: action.payload.message, ui: { loading: false } })
     },
     FULFILLED: (state, action) => {
-      return Object.assign({}, state, { data: action.payload.data.content, ui: { loading: false } });
+      return Object.assign({}, state, { paginationData: action.payload.data, data: action.payload.data.content,  ui: { loading: false } });
     },
   },
   [actions.ADD_TO_WISHLIST]: {
@@ -40,13 +41,19 @@ const wishlistReducer = typeToReducer({
       return Object.assign({}, state, { error: action.payload.message, ui: { loading: false } })
     },
     FULFILLED: (state, action) => {
-      return Object.assign({}, state, { removeToWishlist: action.payload.data.content, data: [...action.payload.data.content], ui: { loading: false } });
+      return Object.assign({}, state, { paginationData: action.payload.data,removeToWishlist: action.payload.data.content, data: [...action.payload.data.content], ui: { loading: false } });
     },
   },
   [actions.NOTIFY_ME]: {
-    PENDING: state => state,
-    FULFILLED: state => state,
-    REJECTED: state => state,
+    PENDING: (state) => {
+      return Object.assign({}, state, { ui: { loading: true } });
+    },
+    REJECTED: (state) => {
+      return Object.assign({}, state, { ui: { loading: false } });
+    },
+    FULFILLED: (state) => {
+      return Object.assign({}, state, { ui: { loading: false } });
+    },
   },
 }, initialState);
 

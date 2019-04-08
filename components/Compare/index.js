@@ -10,9 +10,11 @@ import HeaderBar from '../HeaderBar';
 import FooterBar from '../Footer';
 import SVGCompoent from '../common/SVGComponet';
 import { actionCreators, selectors } from '../../store/compare';
-import { actionCreators as cartActionCreators } from '../../store/cart';
+import { actionCreators as cartActionCreators,  } from '../../store/cart';
+import { selectors as cartSelectors } from '../../store/search';
 import { languageDefinations } from '../../utils/lang';
 import { mergeCss } from '../../utils/cssUtil';
+import Button from '../common/CommonButton';
 
 const styles = mergeCss('components/Compare/compare');
 const { COMPARE } = languageDefinations();
@@ -57,9 +59,10 @@ class Compare extends Component {
   }
 
   addToCart = ({ currentTarget }) => {
+    debugger;
     const { addToCartAndFetch } = this.props;
     addToCartAndFetch({
-      listing_id: currentTarget.getAttribute('data-listing-id'),
+      listing_id: currentTarget.getAttribute('id'),
     });
   }
 
@@ -115,7 +118,7 @@ class Compare extends Component {
   }
 
   render() {
-    const { compareInfo = {}, brands = [], productList = [] } = this.props;
+    const { compareInfo = {}, brands = [], productList = [], cartButtonLoaders } = this.props;
     const {
       compareCount = 0, features = [], products = [], productsFeatures = [], 
     } = compareInfo;
@@ -160,20 +163,14 @@ class Compare extends Component {
                       <span className={`${styles['fs-10']} ${styles['thick-gry-clr']}`}>{product.name}</span>
                     </div>
                     <div className={`${styles.flex} ${styles['justify-center']}`}>
-                      {product.addedToCart ?
-                      <a className={`${styles['p-10']} ${styles['flex-center']} ${styles['added-btn']}`}>
-                        <span className={styles.flex}>
-                          <SVGCompoent clsName={styles['cart-list']} src="icons/cart/added-cart-icon" />
-                          In Cart
-                        </span>
-                      </a>
-                      :
-                      <a className={`${styles['p-10']} ${styles['flex-center']} ${styles['added-btn']}`} data-listing-id={product.listing_id} onClick={this.addToCart}>
-                        <span className={styles.flex}>
-                          <SVGCompoent clsName={styles['cart-list']} src="icons/cart/blue-cart-icon" />
-                          Add To Cart
-                        </span>
-                      </a>}
+                      <Button
+                        className={product.addedToCart ? `${styles['p-10']} ${styles['flex-center']} ${styles['added-btn']}` :  `${styles['p-10']} ${styles['flex-center']} ${styles['cart-btn']}`}
+                        id={product.listing_id}
+                        onClick={product.addedToCart === false && this.addToCart}
+                        btnText={product.addedToCart ? 'In Cart' : 'Add To Cart'}
+                        showImage={product.addedToCart ? 'icons/cart/added-cart-icon' : 'icons/cart/blue-cart-icon'}
+                        btnLoading={cartButtonLoaders && cartButtonLoaders[product.listing_id]}
+                      />
                     </div>
                     {compareCount > 1 && <span className={`${styles['close-item']} ${styles.pointer}`} data-prod-id={product.id} onClick={this.removeItem}>x</span>}
                   </div>
@@ -253,6 +250,7 @@ const mapStateToProps = store => ({
   compareInfo: selectors.getCompareInfo(store),
   brands: selectors.getBrandsInfo(store),
   productList: selectors.getProductList(store),
+  cartButtonLoaders: cartSelectors.getCartButtonLoaders(store),
 });
 
 const mapDispatchToProps = dispatch =>

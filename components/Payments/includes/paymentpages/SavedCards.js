@@ -5,14 +5,12 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import _ from 'lodash';
 import SVGComponent from '../../../common/SVGComponet';
-
 import { actionCreators, selectors } from '../../../../store/payments';
-
 import Voucher from './Voucher';
-
 import { languageDefinations } from '../../../../utils/lang/';
-
 import { mergeCss } from '../../../../utils/cssUtil';
+import Button from '../../../common/CommonButton';
+
 const styles = mergeCss('components/Payments/payment');
 const { PAYMENT_PAGE } = languageDefinations();
 
@@ -79,7 +77,7 @@ class SavedCards extends Component {
   }
 
   render() {
-    const { data, voucherData } = this.props;
+    const { data, voucherData, showLoading } = this.props;
     return (
       <div className={`${styles['saved-cards']}`}>
         <Voucher voucherData={voucherData} />
@@ -114,7 +112,13 @@ class SavedCards extends Component {
             })
           }
         </ul>
-        <button onClick={this.proceedToPayment} className={`${styles['fp-btn-primary']} ${styles['fp-btn']} ${styles['fs-18']} ${styles['text-uppercase']} ${styles['pay-btn']} ${styles['border-radius']}`}>Pay {data.amount_to_pay} {data.currency_code}</button>
+        <Button
+          className={`${styles['fs-16']} ${styles['text-uppercase']} ${styles['pay-btn']} ${styles['border-radius']} ${styles.width33} ${styles['ht-40']} ${styles['new-card-btn']}`}
+          onClick={this.proceedToPayment}
+          btnText={'Pay' + ' ' + data.amount_to_pay + ' ' + data.currency_code}
+          hoverClassName="hoverBlueBackground"
+          btnLoading={showLoading}
+        />
       </div>
     );
   }
@@ -122,7 +126,8 @@ class SavedCards extends Component {
 
 const mapStateToprops = (store) => {
   return ({
-    processData: selectors.getProcessData(store)
+    processData: selectors.getProcessData(store),
+    showLoading: selectors.getLoader(store),
   });
 };
 
@@ -134,4 +139,10 @@ const mapDispatchToProps = (dispatch) =>
     dispatch,
   );
 
+SavedCards.propTypes = {
+  showLoading: PropTypes.bool,
+};
+SavedCards.defaultProps = {
+  showLoading: false,
+};
 export default connect(mapStateToprops, mapDispatchToProps)(SavedCards);

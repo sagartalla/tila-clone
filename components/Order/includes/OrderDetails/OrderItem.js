@@ -3,13 +3,16 @@ import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Cookies from 'universal-cookie';
+
+import { Link } from '../../../../routes'
 import moment from 'moment';
 import { Router } from '../../../../routes';
 import StatusWidget from '../StatusWidget';
 import constants from '../../../../constants';
 import { ORDER_ISSUE_TYPES, ORDER_ISSUE_STEPS } from '../../constants';
 import { actionCreators } from '../../../../store/order';
-import Cookies from 'universal-cookie';
+
 
 // import  styles from '../order.styl';
 import { mergeCss } from '../../../../utils/cssUtil';
@@ -104,7 +107,7 @@ class OrderItem extends Component {
         return 'Cancelled';
       } else if (orderItem.status === 'RETURN_IN_PROGRESS') {
         return 'Return in progress';
-      }
+      } return '';
     };
 
     return (
@@ -116,12 +119,20 @@ class OrderItem extends Component {
                 <div key={product.id} className={`${styles['product-item']} ${styles.flex}`}>
                   <Col md={2} className={styles['p-0']}>
                     <div className={`${styles['img-wrap']} ${styles['flex-center']} ${styles['justify-center']}`}>
-                      <img className={`${styles['order-item-img']}`} src={`${constants.mediaDomain}/${product.img}`} alt={product.img} />
+                      <Link route={`/${country}/${language}/product?productId=${product.productId}${product.variantId ? `&variantId=${product.variantId}` : ''}&catalogId=${product.catalogId}&itemType=${product.itemType}`}>
+                        <a className={`${styles['width100']} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
+                          <img className={`${styles['order-item-img']}`} src={`${constants.mediaDomain}/${product.img}`} alt={product.img} />
+                        </a>
+                      </Link>
                     </div>
                   </Col>
                   <Col md={10} className={styles['ipad-pr-0']}>
                     <div className={`${styles['text-wrap']}`}>
-                      <span className={`${styles.fontW600}`}>{product.name}</span>
+                      <Link route={`/${country}/${language}/product?productId=${product.productId}${product.variantId ? `&variantId=${product.variantId}` : ''}&catalogId=${product.catalogId}&itemType=${product.itemType}`}>
+                        <a className={`${styles['width100']} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
+                          <span className={`${styles.fontW600}`}>{product.name}</span>
+                        </a>
+                      </Link>
                       <div className={`${styles['flex-center']} ${styles['prod-sub-content']}`}>
                         <Col md={9} sm={9} className={styles['p-0']}>
                           <div className={`${styles.flex} ${styles['pt-15']} ${styles['pb-15']} ${styles['ipad-tp-5']} ${styles['ipad-tb-5']} ${styles['fs-12']} ${styles['thick-gry-clr']}`}>
@@ -142,7 +153,7 @@ class OrderItem extends Component {
                         <Col md={3} sm={3} className={styles['ipad-pr-0']}>
                           {product.price &&
                           <span className={`${styles['flex-center']} ${styles['fs-16']} ${styles.fontW600}`}>
-                            {product.price.final_price} {product.currency_code}
+                            {product.orderIds.length} x {product.price.final_price} {product.currency_code}
                             <span onMouseOver={this.showToolTip} onMouseLeave={this.hideToolTip} className={`${styles.relative} ${styles['tool-tip-parent']} ${styles['checkout-quat']} ${styles['fs-12']} ${styles['flex-center']} ${styles['justify-around']}`}>
                               {'?'}
                               {showToolTip &&
@@ -174,7 +185,7 @@ class OrderItem extends Component {
         <Col md={5} sm={5} className={styles['thick-border-left']}>
           {
             payments ?
-              payments[0].transaction_status == 'FAILED' ?
+            payments[0] && payments[0].transaction_status == 'FAILED' ?
                 <div>Order Unsuccessful</div>
                 :
                 <div className={`${styles['p-15']} ${styles['ipad-pl-0']} ${styles['ipad-pr-0']}`}>
@@ -186,7 +197,7 @@ class OrderItem extends Component {
                       </div>
                     </div>
                   </div>
-                  
+
                   {isCancelable === 'TRUE' &&
                     <RenderButton callbackMethod={this.cancelOrder}
                       refundType = 'Cancel'

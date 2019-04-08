@@ -2,8 +2,9 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import constants from '../../helper/constants';
 
-const getWishlistApi = () => {
-  return axios.get(`${constants.WISHLIST_API_URL}/api/v1/wishlist/getWishlist`).then(({ data }) => {
+const getWishlistApi = (currentPage=0) => {
+  console.log('page',currentPage);
+  return axios.get(`${constants.WISHLIST_API_URL}/api/v1/wishlist/getWishlist?size=10&page=${currentPage}`).then(({ data }) => {
     return { data };
   });
 };
@@ -15,13 +16,13 @@ const addToWishlistApi = (params) => {
   });
 }
 
-const deleteWishlistApi = (wishlist_id, toastObj = {}) => {
+const deleteWishlistApi = (wishlist_id, toastObj = {},currentPage) => {
   return axios.post(`${constants.WISHLIST_API_URL}/api/v1/wishlist/delete?wishlist_id=${wishlist_id}`, {}).then(({ data }) => {
     // return { data };
     if (toastObj.showToast) {
       toast.success('Item removed from Wishlist');
     }
-    return getWishlistApi();
+    return getWishlistApi(currentPage);
   });
 }
 
