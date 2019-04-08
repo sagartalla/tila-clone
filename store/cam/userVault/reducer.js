@@ -12,7 +12,10 @@ const vaultReducer = typeToReducer({
       return Object.assign({}, state, { error: action.payload.message, ui: { loading: false } })
     },
     FULFILLED: (state, action) => {
-      return Object.assign({}, state, { data: _.sortBy(action.payload.data, (o) => { return !o.default; }), ui: { loading: true } });
+      return Object.assign({}, state, { data: {
+        savedCards: _.sortBy(action.payload.data.saved_cards, (o) => { return !o.default; }),
+        tilaCredit: action.payload.data.tila_credit
+      }, ui: { loading: true } });
     },
   },
   [actions.ADD_CARD_DETAILS]: {
