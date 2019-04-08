@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { toast } from 'react-toastify';
 import Cookie from 'universal-cookie';
 import { addUrlProps, UrlQueryParamTypes, pushInUrlQuery } from 'react-url-query';
 import _ from 'lodash';
@@ -68,10 +69,14 @@ class Search extends Component {
     this.props.fetchImageSearchData(file)
     Router.pushRoute(`/${country}/${language}/srp`);
   }
-
   onChangeSearchInput(e) {
+    const numberOfCharacters = /^[\s\S]{0,300}$/;
+    if (!numberOfCharacters.test(e.target.value)) {
+      toast.error('Maximum search text exceeded');
+      return;
+    }
     this.setState({
-      query: e.target.value.replace(/^\s+/g, ''),
+      query: e.target.value.replace(/^\s+/g, ''),,
       searchInput: true,
     }, () => {
       this.fetchSuggestions();

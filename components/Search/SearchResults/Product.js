@@ -306,7 +306,7 @@ class Product extends Component {
                 ${styles['pb-10']}`}
             >
               {
-                variants.length > 0 && variants[selectedIndex].productAvailable ?
+                variants.length > 0 ?
                   <div className={`${styles['flex']} ${styles['justify-around']} ${styles['quick-view']} ${styles['border-radius4']}`}>
                     <Button
                       className={`${styles['flex']} ${styles['add-to-crt']} ${styles['fs-12']} ${styles['text-uppercase']}`}
@@ -314,7 +314,7 @@ class Product extends Component {
                       disabled={btnLoading}
                       btnText={PDP_PAGE.ADD_TO_CART}
                       showImage="icons/cart/blue-cart-icon"
-                      btnLoading={cartButtonLoaders[variants[selectedIndex].listingId[0]]}
+                      btnLoading={variants[selectedIndex].listingId && cartButtonLoaders[variants[selectedIndex].listingId[0]]}
                     />
                     <Button
                       className={`${styles['flex-center']} ${styles['buy-now-btn']} ${styles['fs-12']} ${styles['text-uppercase']}`}
