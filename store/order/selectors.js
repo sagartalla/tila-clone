@@ -52,7 +52,7 @@ const getOrderDetails = (store) => {
           order_type: i.order_type,
           order_item_type: i.order_item_type,
           order_status: i.status,
-          warranty_duration: i.warranty_policy.preferred_policy ?
+          warranty_duration: i.warranty_policy && i.warranty_policy.preferred_policy ?
             i.warranty_policy.policies[i.warranty_policy.preferred_policy] : {},
           gift_info: i.gift_info,
           sizeInfo: i.variant_info && i.variant_info.variant_details &&
