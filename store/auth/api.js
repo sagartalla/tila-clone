@@ -8,8 +8,8 @@ import { toast } from 'react-toastify';
 
 const cookies = new Cookies();
 
-const getUserInfo = () => {
-  return axios.post(`${constants.CMS_API_URL}/api/v1/user/info`);
+const getUserInfo = ({initiateEmailVerification}) => {
+  return axios.post(`${constants.CMS_API_URL}/api/v1/user/info?initiateEmailVerification=${initiateEmailVerification}`);
 }
 
 const userLogin = (params) => {
@@ -53,8 +53,6 @@ const userLogin = (params) => {
   //   throw err;
   // });
 };
-
-const userRegister = (params) => axios.post(`${constants.CMS_API_URL}/api/v1/user/register`, params);
 
 const userLogout = () => {
   axios.post('/api/logout');
@@ -151,4 +149,4 @@ const setVerfied = (isVerified) => {
   }).then(() => isVerified);
 }
 
-export default { userLogin, userRegister, userLogout, getLoginInfo, setCountry, setSessionID, deriveCity, autoCompleteCity, setCity, removeCity, setLanguage, savePtaToken, verifyEmail, sendOtpToEmailId, getUserInfo, setVerfied };
+export default { userLogin, userLogout, getLoginInfo, setCountry, setSessionID, deriveCity, autoCompleteCity, setCity, removeCity, setLanguage, savePtaToken, verifyEmail, sendOtpToEmailId, getUserInfo, setVerfied };
