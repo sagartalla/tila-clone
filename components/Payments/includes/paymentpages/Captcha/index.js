@@ -56,16 +56,14 @@ class Captcha extends React.Component{
             </div>
           })
     } else if(this.props.getVerification==="SUCCESS"){
-      this.props.captchaQuestion({
-        txnId: this.props.txnId
-      });
       this.setState({openBox: <SVGComponent clsName={`${styles['success_box-icon']}`} src="icons/captcha-icons-list/success_box-icon" />,
         boxText: <span style={{color: '#99cc33'}} className={`${styles['fs-16']} ${styles['pt-20']}`}>&nbsp;Success</span>
       });
       this.props.onCaptchaSuccess({
         captcha_request_id: items.request_id
       });
-    }else{
+      this.props.onContinueHandle();
+    } else {
       return;
     }
   }

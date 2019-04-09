@@ -31,28 +31,37 @@ const getPaymentModesData = (store) => {
   */
   if(store.paymentsReducer.data.data) {
     const paymentModesData = store.paymentsReducer.data.data.payment_options_available.reduce((acc, val, key) => {
-      if(val.type === "VOUCHER") {
-        acc.voucherData = val;
+      if (val.type === 'VOUCHER') {
+        acc.voucherData = {
+          ...val,
+          total_amount: store.paymentsReducer.data.data.amount,
+        };
       } else {
         acc.paymentModes[val.type] = val;
       }
       return acc;
     }, {
       voucherData: null,
-      paymentModes: {}
+      paymentModes: {},
     });
     paymentModesData.transaction_id = store.paymentsReducer.data.data.transaction_id;
     return paymentModesData;
   }
   return {
     voucherData: {},
-    paymentModes: {}
+    paymentModes: {},
   }
 }
 
 const getProcessData = (store) => {
   return store.paymentsReducer.data.processData;
 }
+
+
+const getLoader = (store) => {
+  return store.paymentsReducer.ui.loading;
+}
+
 
 const get3dSecureRedirectionUrl = (store) => {
   const { redirect3dSecureData } = store.paymentsReducer.data;
@@ -61,4 +70,4 @@ const get3dSecureRedirectionUrl = (store) => {
   }
 }
 
-export { getPaymentOptions, getPaymentUrl, getDefaultAddress, getPaymentModesData, getProcessData, get3dSecureRedirectionUrl };
+export { getPaymentOptions, getPaymentUrl, getDefaultAddress, getPaymentModesData, getProcessData, get3dSecureRedirectionUrl, getLoader };

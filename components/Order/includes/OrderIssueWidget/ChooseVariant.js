@@ -74,7 +74,7 @@ class ChooseVariant extends Component {
           className={`${el.listing.total_inventory_count > 0 ? styles['productSize-Button'] : styles['product-StrikeButton']}`}
           onClick={el.listing.total_inventory_count > 0 ? this.choosedVariant(el.listing) : this.sizeNotAvailable}
           >
-          {el.variant_details.attribute_map.size.attribute_values[0].value}
+          {el.variant_details.attribute_map && el.variant_details.attribute_map.size && el.variant_details.attribute_map.size.attribute_values[0].value}
         </li>
       }
     })

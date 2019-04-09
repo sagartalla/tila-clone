@@ -30,7 +30,7 @@
   .product-items-main
     width 276px
     padding-bottom 20px
-    padding-right 1px
+    margin-right 1px
     .loader-div
        width 20px
        height 20px
@@ -154,14 +154,17 @@
       .add-to-crt
         border: 1px solid navy-blue
         border-bottom-left-radius: 16px
+        background-color white 
         color navy-blue
+        width 50%
+        height: 35px;
         .cart-list
           margin-right 8px
       .buy-now-btn
-        background-color navy-blue
         border-bottom-right-radius 16px
         color white
-        padding-left 14px
+        width 50%
+        height 35px
         .cart-list
           height 20px
           width 20px
@@ -265,18 +268,17 @@
     border-bottom-left-radius 20px
     // border-top-right-radius 12px
     &:hover
-      background-color rgba(216,216,216,0.8)
+      background-color rgba(255,255,255,0.8)
       .fullfilled-label
         display block
       .fulfill-img
         background-color transparent
 
     .fulfill-img
-      background url(/static/img/icons/common-icon/icon-fullfilled.svg) no-repeat center
-      width 30px
-      height 30px
+      background: rgba(255,255,255,0.5) url(/static/img/icons/common-icon/icon-fullfilled.svg) no-repeat center;
+      width 35px
+      height 35px
       border-radius 50%
-      background-color rgba(216,216,216,0.8)
       display inline-flex
       background-position center
       
@@ -489,11 +491,5 @@
       width 265px
     }
 
-  }
-}
-
-@media screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation : landscape){
-  .search-results .product-items-main {
-    width 245px
   }
 }

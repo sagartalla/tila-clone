@@ -45,7 +45,7 @@ class CartAndPaymentSideBar extends Component {
     return (
       <div className={`${styles['right-bar']}`}>
         <div className={`${styles['coupon-code-main']} ${styles['pb-10']}`}>
-          <h4 className={`${styles['fs-16']} ${styles.fontW600} ${styles['m-0']} ${styles['p-10']} ${styles.flex} ${styles['justify-center']} ${styles['white-color']}`}>
+          <h4 className={`${styles['fs-16']} ${styles.fontW600} ${styles['m-0']} ${styles['p-0']} ${styles.flex} ${styles['justify-center']} ${styles['white-color']}`}>
             {/*<SVGComponent clsName={`${styles['buy-coupon-code']}`} src="icons/common-icon/buy-coupon" />
           <span className={styles['pl-5']}>{COUPON_OFFERS.BUY_AND_EARN}</span>*/}
           </h4>
