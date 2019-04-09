@@ -10,7 +10,10 @@ import { actionCreators as paymentsActionCreators, selectors as paymentsSelector
 import { actionCreators as camActionCreators, selectors as camSelectors } from '../../../../store/cam/personalDetails';
 import { bindActionCreators } from 'redux';
 import { Router } from '../../../../routes';
-import Captcha from './Captcha';
+
+import Captcha from '../../../common/Captcha';
+import CaptchaContent from '../../../common/Captcha/CaptchaContent'
+
 import EditPhone from '../../../Cam/PersonelDetails/UserData/EditPhone';
 import Button from '../../../common/CommonButton';
 
@@ -49,9 +52,14 @@ class CashOnDelivery extends React.Component {
 
   onCaptchaSuccess({captcha_request_id}) {
     this.setState({
-      showContinueButton: true,
+      nextStep: this.state.nextStep === 'captcha' ? 'mobileVerification' : 'captcha',
       captcha_request_id,
+      // showContinueButton: this.state.nextStep !== 'captcha'
     });
+    // this.setState({
+    //   showContinueButton: true,
+    //   captcha_request_id,
+    // });
   }
 
   onContinueHandle() {
@@ -100,15 +108,21 @@ class CashOnDelivery extends React.Component {
     {
       this.state.checked
         ?
-            this.state.nextStep === 'captcha'
-              ?
-                <Captcha onCaptchaSuccess={this.onCaptchaSuccess} txnId={this.props.transactionId} onContinueHandle={this.onContinueHandle}/>
-              :
-                this.state.nextStep === 'mobileVerification'
-                  ?
-                    <EditPhone afterSuccessOtpVerification={this.afterSuccessOtpVerification}/>
-                  :
-                  null
+          {
+            captcha:  <Captcha
+              onCaptchaSuccess={this.onCaptchaSuccess}
+              txnId={this.props.transactionId}
+              render={([items,state,handleClick,handleDrop]) =>
+                <CaptchaContent
+                  items={items}
+                  state={state}
+                  handleClick={handleClick}
+                  handleDrop={handleDrop}
+                />
+              }
+              />,
+            mobileVerification: <EditPhone afterSuccessOtpVerification={this.afterSuccessOtpVerification}/>
+          }[this.state.nextStep]
         :
           null
     }
@@ -122,21 +136,21 @@ class CashOnDelivery extends React.Component {
               onClick={this.onContinueHandle}
               btnText="Continue"
               hoverClassName="hoverBlueBackground"
-              
+
            />
           )
       }
       {
         this.state.showPayBtn &&
             (
-            <Button
-              className={`${styles['fs-16']} ${styles['fontW600']} ${styles['new-card-btn']} ${styles['border-radius']} ${styles.width55} ${styles['ht-40']}`}
-              onClick={this.proceedToPayment}
-              btnText={'Pay' + ' ' + data.amount_to_pay + ' ' + data.currency_code}
-              hoverClassName="hoverBlueBackground"
-              btnLoading={showLoading}              
-              
-         />
+              <Button
+                className={`${styles['fs-16']} ${styles['fontW600']} ${styles['new-card-btn']} ${styles['border-radius']} ${styles.width55} ${styles['ht-40']}`}
+                onClick={this.proceedToPayment}
+                btnText={'Pay' + ' ' + data.amount_to_pay + ' ' + data.currency_code}
+                hoverClassName="hoverBlueBackground"
+                btnLoading={showLoading}
+
+              />
           )
       }
     </Col>
