@@ -44,13 +44,13 @@ const actionCreators = {
     }
     dispatch({
       type: actions.GET_USER_INFO,
-      payload: api.getUserInfo()
+      payload: api.getUserInfo(),
     }).then((res) => {
-      if (res && res.data && res.data.email_verified === 'NV') {
-        dispatch(actionCreators.setVerfied(false));
+      if (res && res.value && res.value.data && res.value.data.email_verified === 'NV') {
+        dispatch(actionCreators.setVerfied(false)).then(() => dispatch(actionCreators.getLoginInfo()));
         dispatch(actionCreators.sendOtpToEmailId(false));
       } else {
-        dispatch(actionCreators.setVerfied(true))
+        dispatch(actionCreators.setVerfied(true)).then(() => dispatch(actionCreators.getLoginInfo()));
       }
       return res;
     });
@@ -138,7 +138,7 @@ const actionCreators = {
     type: actions.VERIFY_EMAIL,
     payload: api.verifyEmail(value),
   }),
-  sendOtpToEmailId: (status=true) => ({
+  sendOtpToEmailId: (status = true) => ({
     type: actions.VERIFY_RESEND_EMAIL,
     payload: api.sendOtpToEmailId(status),
   }),
@@ -146,10 +146,10 @@ const actionCreators = {
     type: actions.GET_USER_INFO,
     payload: api.getUserInfo(),
   }),
-  setVerfied: (isVerified) => ({
+  setVerfied: isVerified => ({
     type: actions.SET_VERFIED,
     payload: api.setVerfied(isVerified),
-  })
+  }),
 };
 
 export { actions, actionCreators };
