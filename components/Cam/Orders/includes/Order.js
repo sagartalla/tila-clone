@@ -69,15 +69,19 @@ const Order = ({ order }) => {
         </Col>
       </Row>
       <Row>
-        <Col md={7}>
-          <div>
+        <Col md={7} className={styles.flex}>
+          <div className={`${styles['pr-10']} ${styles['thck-gry-rt-border']}`}>
             <span>
-              Ordered on
+              Ordered on{' '}
             </span>
             <span className={`${styles['fontW600']} ${styles['light-gry-clr']}`}>
               {order.orderDate}
             </span>
           </div>
+          <span className={`${styles['thick-blue']} ${styles['p-5']} ${styles['flex-center']} ${styles['ml-10']} ${styles.border} ${styles['border-radius4']}`}>
+            <SVGComponent clsName={`${styles['help-icon']}`} src="icons/help-icon/help" />
+            &nbsp;&nbsp;Need Help?
+          </span>
         </Col>
         <Col md={5} className={styles['pl-0']}>
           <div className={`${styles['flx-space-bw']}`}>

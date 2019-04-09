@@ -4,8 +4,9 @@ import { Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Cookies from 'universal-cookie';
-
 import moment from 'moment';
+
+import SVGComponent from '../../../common/SVGComponet';
 import StatusWidget from '../StatusWidget';
 import { Link, Router } from '../../../../routes';
 import constants from '../../../../constants';
@@ -139,7 +140,7 @@ class OrderItem extends Component {
                         </a>
                       </Link>
                       <div className={`${styles['flex-center']} ${styles['prod-sub-content']}`}>
-                        <Col md={9} sm={9} className={styles['p-0']}>
+                        <Col md={8} sm={8} className={styles['p-0']}>
                           <div className={`${styles.flex} ${styles['pt-15']} ${styles['pb-15']} ${styles['ipad-tp-5']} ${styles['ipad-tb-5']} ${styles['fs-12']} ${styles['thick-gry-clr']}`}>
                             {product.sizeInfo &&
                             <span className={styles['pr-20']}>
@@ -156,9 +157,9 @@ class OrderItem extends Component {
                             <span className={`${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pl-15']} ${styles['promo-code-label']} ${styles['ipad-tp-5']} ${styles['ipad-pl-0']}`} />
                           </div>
                         </Col>
-                        <Col md={3} sm={3} className={styles['ipad-pr-0']}>
+                        <Col md={4} sm={4} className={styles['ipad-pr-0']}>
                           {product.price &&
-                          <span className={`${styles['flex-center']} ${styles['fs-16']} ${styles.fontW600}`}>
+                          <span className={`${styles['justify-end']} ${styles['flex-center']} ${styles['fs-16']} ${styles.fontW600}`}>
                             {product.orderIds.length} x {product.price.final_price} {product.currency_code}
                             <span onMouseOver={this.showToolTip} onMouseLeave={this.hideToolTip} className={`${styles.relative} ${styles['tool-tip-parent']} ${styles['checkout-quat']} ${styles['fs-12']} ${styles['flex-center']} ${styles['justify-around']}`}>
                               {'?'}
@@ -175,7 +176,7 @@ class OrderItem extends Component {
                                   <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.SHIPPING} : </span><span>{product.price.shipping_fees ? `(+) ${product.price.shipping_fees} ${product.currency_code}` : 'FREE'}</span></li>
                                   {product.gift_info &&
                                     <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.GIFT_CHARGES} : </span><span>{product.price.gift_charge ? `(+) ${product.price.gift_charge} ${product.currency_code}` : 'FREE'}</span></li>}
-                                  <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.TOTAL} : </span><span className={styles['fontW600']}> {product.price.final_price} {product.currency_code}</span></li>
+                                  <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.TOTAL} : </span><span className={styles.fontW600}> {product.price.final_price} {product.currency_code}</span></li>
                                 </ul>
                               </div>}
                             </span>
@@ -195,60 +196,67 @@ class OrderItem extends Component {
                 </div>
               </div>
               {product.order_type === 'EXCHANGE' && product.order_item_type === 'DELIVERY' &&
-              <div className={`${styles['pt-5']} ${styles['pb-5']} ${styles['pl-15']} ${styles['thick-border-top']}`}>
-                This is an exchange order on the item you have requested for exchange.
-                {/* To view the parent order please <a>Click here</a> */}
-              </div>}
+                <div className={`${styles['pt-5']} ${styles['pb-5']} ${styles['pl-15']} ${styles['thick-border-top']}`}>
+                  This is an exchange order on the item you have requested for exchange.
+                  {/* To view the parent order please <a>Click here</a> */}
+                </div>}
               {product.order_status === 'RETURN_REQUESTED' &&
-              <div className={`${styles['pt-15']} ${styles['pb-5']} ${styles['pl-15']} ${styles['thick-border-top']} ${styles.relative}`}>
-                <div className={`${styles['bg-white']} ${styles['fs-12']} ${styles.absolute} ${styles['p-5']} ${styles['border-lg']} ${styles['refund-label']}`}>Refund Status</div>
-                Refund Initiated.
-                {/* To view the parent order please <a>Click here</a> */}
-              </div>}
+                <div className={`${styles['pt-15']} ${styles['pb-5']} ${styles['pl-15']} ${styles['thick-border-top']} ${styles.relative}`}>
+                  <div className={`${styles['bg-white']} ${styles['fs-12']} ${styles.absolute} ${styles['p-5']} ${styles['border-lg']} ${styles['refund-label']}`}>Refund Status</div>
+                  Refund Initiated.
+                </div>}
+              {product.gift_info &&
+                <div className={`${styles['fs-12']} ${styles.absolute} ${styles['p-5']} ${styles.right0} ${styles.top0} ${styles['thick-gry-clr']} ${styles['bg-light-gray']}`}>
+                  This order contains gift. <a>View details</a>
+                </div>}
             </React.Fragment>
           ))}
+          <span className={`${styles['help-position']} ${styles.absolute} ${styles['thick-blue']} ${styles['p-5']} ${styles['flex-center']} ${styles['ml-10']} ${styles.border} ${styles['border-radius4']}`}>
+            <SVGComponent clsName={`${styles['help-icon']}`} src="icons/help-icon/help" />
+            &nbsp;&nbsp;Need Help?
+          </span>
         </Col>
         <Col md={5} sm={5} className={styles['thick-border-left']}>
-          {payments ?
-            payments.length > 0 && payments[0].transaction_status == 'FAILED' ?
-              <div>Order Unsuccessful</div>
-              :
-              <React.Fragment>
-                <div className={`${styles['p-15']} ${styles['ipad-pl-0']} ${styles['ipad-pr-0']} ${styles['flx-space-bw']}`}>
-                  <div className={`${styles['date-cont']} ${styles['flx-spacebw-alignc']}`}>
-                    <div>
-                      <div className={styles['fs-12']}>{displayText()}</div>
-                      <div className={`${styles['ff-t']} ${styles['fs-24']} ${styles['ipad-fs-20']}`}>
-                        {btnType === 'cancel' ? moment(orderItem.products[0].promisedDeliveryDate).format('Do, dddd') : !thankyouPage ? this.getDate(orderItem.products[0].state_time_estimates) : null}
-                      </div>
+          {payments && payments.length > 0 && payments[0].transaction_status === 'FAILED' ?
+            <div>Order Unsuccessful</div>
+            :
+            <React.Fragment>
+              <div className={`${styles['p-15']} ${styles['ipad-pl-0']} ${styles['ipad-pr-0']} ${styles['flx-space-bw']}`}>
+                <div className={`${styles['date-cont']} ${styles['flx-spacebw-alignc']}`}>
+                  <div>
+                    <div className={styles['fs-12']}>{displayText()}</div>
+                    <div className={`${styles['ff-t']} ${styles['fs-24']} ${styles['ipad-fs-20']}`}>
+                      {btnType === 'cancel' ? moment(orderItem.products[0].promisedDeliveryDate).format('Do, dddd') : !thankyouPage ? this.getDate(orderItem.products[0].state_time_estimates) : null}
                     </div>
                   </div>
-                  <div className={styles.flex}>
-                    {isCancelable === 'TRUE' &&
-                      <RenderButton callbackMethod={this.cancelOrder}
-                        refundType = 'Cancel'
-                    />}
-                    {isReturnable === 'TRUE' &&
-                    <RenderButton
-                      callbackMethod={this.exchangeReturnOrder(ORDER_ISSUE_TYPES.RETURN)}
-                      refundType='Return' />}
-                    {isExchangable  === 'TRUE' &&
-                      <RenderButton
-                        callbackMethod={this.exchangeReturnOrder(ORDER_ISSUE_TYPES.EXCHANGE)}
-                        refundType='Exchange' />
-                    }
-                  </div>
                 </div>
-                <div className={`${styles['widget-wrap']} ${styles['pb-10']}`}>
-                  {thankyouPage ?
-                    null
-                    :
-                    <StatusWidget currentStatus={orderItem.products} />
+                <div className={styles.flex}>
+                  {isCancelable === 'TRUE' &&
+                    <RenderButton
+                      callbackMethod={this.cancelOrder}
+                      refundType="Cancel"
+                    />}
+                  {isReturnable === 'TRUE' &&
+                  <RenderButton
+                    callbackMethod={this.exchangeReturnOrder(ORDER_ISSUE_TYPES.RETURN)}
+                    refundType="Return"
+                  />}
+                  {isExchangable === 'TRUE' &&
+                    <RenderButton
+                      callbackMethod={this.exchangeReturnOrder(ORDER_ISSUE_TYPES.EXCHANGE)}
+                      refundType="Exchange"
+                    />
                   }
                 </div>
-              </React.Fragment>            
-            :
-            null
+              </div>
+              <div className={`${styles['widget-wrap']} ${styles['pb-10']}`}>
+                {thankyouPage ?
+                  null
+                  :
+                  <StatusWidget currentStatus={orderItem.products} />
+                }
+              </div>
+            </React.Fragment>
           }
         </Col>
       </div>
@@ -256,10 +264,9 @@ class OrderItem extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => bindActionCreators(
-    { raiseOrderIssue: actionCreators.raiseOrderIssue },
-    dispatch,
-  );
+const mapDispatchToProps = dispatch => bindActionCreators({
+  raiseOrderIssue: actionCreators.raiseOrderIssue,
+}, dispatch);
 
 OrderItem.propTypes = {
   orderItem: PropTypes.object.isRequired,
@@ -268,9 +275,6 @@ OrderItem.propTypes = {
 };
 
 export default connect(null, mapDispatchToProps)(OrderItem);
-
-
-
 
 
 // btnType ?
