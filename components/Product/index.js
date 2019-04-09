@@ -227,7 +227,7 @@ const getProductComponent = (isPreview, taskCode) => {
                   </Col>
                 </Row>
               </div>
-              <div className={styles['bg-white']}>
+              <div className={`${styles['bg-white']} ${styles['mt-30']}`}>
                 <Grid>
                   <Row>
                     <Col md={8}>
