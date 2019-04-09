@@ -457,5 +457,6 @@ export const AR_KEYWORDS = {
     'OTP_EXPIRE_IN': 'OTP will expire in',
     'TWENTY_FOUR_HOURS': '24 Hours.',
     'RESEND': 'Resend',
+    'VERIFY': 'Verify',
   }
 };

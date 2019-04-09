@@ -147,7 +147,7 @@ const setVerfied = (isVerified) => {
   return axios.post('/api/setCookie', {
     data: {
       isVerified,
-    }
+    },
   }).then(() => isVerified);
 }
 
