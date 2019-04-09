@@ -74,9 +74,8 @@
         height 64px
 
   .update-profile-input
-    .fp-input
-      .user-name
-        box-shadow none
+    .user-name
+      box-shadow none
 
   .date-dob-caldr
     input
@@ -148,6 +147,9 @@
 .phoneInpt
   .show-otp
     opacity 0
+    position: absolute;
+    right: 0;
+    top: 8px;
   &:hover
     .show-otp
       opacity 1
@@ -184,14 +186,24 @@
           transform rotate(360deg);
         }
       }
+.request-opt
+  .request-opt-inn
+    position absolute
+    right 0
+    top 10px
+    font-size 12px
+.verify-no-btn
+    border-bottom-right-radius 26px
+    box-shadow 0 2px 7px 0 rgba(0, 0, 0, 0.08)
+    background-color thick-blue
+    color white
+    padding 10px
+    border 0
+    width 100%
 .mobile-tick-icon
-  width 101px
-  height 146px
-  object-fit contain
   .mobiletick-icon-styl
     width 101px
     height 146px
-    object-fit contain
 @keyframes slideOpen {
   from {right: -800px;}
   to {right: 0;}

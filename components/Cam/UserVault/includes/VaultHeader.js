@@ -2,15 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { actionCreators, selectors } from '../../../../store/cam/userVault';
+
 import SVGComponent from '../../../common/SVGComponet';
 import { languageDefinations } from '../../../../utils/lang/';
 
 import { mergeCss } from '../../../../utils/cssUtil';
 const styles = mergeCss('components/Cam/UserVault/uservault');
-
+const { VAULT_PAGE } = languageDefinations();
 const VaultHeader = (props) => {
-  const { VAULT_PAGE } = languageDefinations();
-
   return (
     <div className={`${styles['vault-card-header']}`}>
       <Row>
@@ -21,8 +23,14 @@ const VaultHeader = (props) => {
               <h1 className={`${styles['fontW600']} ${styles['fs-20']} ${styles['m-0']}`}>{VAULT_PAGE.MANAGE_VAULT_HDR}</h1>
               <small className={`${styles['label-gry-clr']}`}>{VAULT_PAGE.SUB_TAG}</small>
             </div>
+            <div className={`${styles['tila-credit-wrap']} ${styles['flex']} ${styles['align-center']}`}>
+              <div className={styles['label']}>Your Tila credit Balance is &nbsp; &nbsp;</div>
+              <div className={styles['amount-wrap']}>
+                <div className={`${styles['currency']} ${styles['fs-12']}`}>{props.tilaCredit.currency_code} &nbsp;</div>
+                <div className={`${styles['amount']} ${styles['fs-30']}`}>{props.tilaCredit.balance_amount}</div>
+              </div>
+            </div>
           </div>
-
         </Col>
         <Col md={12}>
           <ul className={`${styles['card-items-list']} ${styles['mb-0']} ${styles['pl-30']}`}>
@@ -34,4 +42,8 @@ const VaultHeader = (props) => {
   )
 };
 
-export default VaultHeader;
+const mapStateToProps = (store) => ({
+  tilaCredit: selectors.getTilaCredit(store),
+});
+
+export default connect(mapStateToProps, null)(VaultHeader);

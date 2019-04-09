@@ -64,8 +64,7 @@ class ActionBar extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    let show = (!nextProps.isLoggedIn && (nextProps.isLoggedIn != this.props.isLoggedIn) && !this.state.logoutClicked) || this.state.loginClicked || !!nextProps.error || nextProps.loginInProgress || (!nextProps.isLoggedIn && nextProps.showLogin);
-    // console.log('show:',show,'nextProps.isLoggedIn', nextProps.isLoggedIn, 'this.props.isLoggedIn', this.props.isLoggedIn, 'this.state.logoutClicked', this.state.logoutClicked, 'nextProps.error', nextProps.error, 'nextProps.loginInProgress', nextProps.loginInProgress);
+    let show = (!nextProps.isLoggedIn && (nextProps.isLoggedIn != this.props.isLoggedIn) && !this.state.logoutClicked) || this.state.loginClicked || !!nextProps.error || nextProps.loginInProgress || (!nextProps.isLoggedIn && nextProps.showLogin) || nextProps.showEmailVerificationScreen;
     if (window.location.pathname.indexOf('/payment') > -1) {
       show = false;
     }
@@ -119,6 +118,7 @@ class ActionBar extends Component {
     this.setState({ show: false });
     this.props.resetLoginError();
     this.props.resetShowLogin();
+    this.props.logout();
   }
 
   getTokenCall = (socialNetwork, token) => {
@@ -158,7 +158,7 @@ class ActionBar extends Component {
           </Link>
         </div>
         <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']} `}>
-          <Dropdown id="cart-toggle" className={`${styles['cart-inn']} ${styles.width55} ${styles['profile-login-inn']}`}>
+          <Dropdown id="cart-toggle" className={`${styles['cart-inn']} ${styles['profile-login-inn']}`}>
             <Dropdown.Toggle>
               <Link route={`/${country}/${language}/cart`}>
               <a style={{dispaly:'block'}}>
@@ -244,7 +244,7 @@ class ActionBar extends Component {
             ?
             (
               <Modal className={`react-router-modal__modal ${styles['login-reg-modal']} ${styles['p-20']}`} onBackdropClick={this.onBackdropClick}>
-                <Login mode={this.state.mode} />
+                <Login mode={this.state.mode} onBackdropClick={this.onBackdropClick} />
               </Modal>
             )
             :
@@ -266,6 +266,7 @@ const mapStateToProps = (store) => {
     showLogin: selectors.getShowLogin(store),
     ptaToken: selectors.getPTAToken(store),
     wishListCount: wishListSelectors.getWishListResults(store),
+    showEmailVerificationScreen: selectors.showEmailVerificationScreen(store),
   })
 };
 

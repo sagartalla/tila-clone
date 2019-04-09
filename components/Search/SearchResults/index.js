@@ -81,14 +81,17 @@ class SearchResults extends Component {
   }
 
   render() {
+    const { search, isCategoryTree, choosenCategoryName } = this.props;
+    let finalQuery = search ? search : isCategoryTree ? choosenCategoryName : '';
+    finalQuery = finalQuery.split('-').join(' ');
     const {
-      results, pagiantionDetails, userDetails, notifyMe, cartButtonLoaders,
+      results, pagiantionDetails, userDetails, notifyMe, cartButtonLoaders, isLastAddedToCartSuccess,
     } = this.props;
     if(results.totalCount === 0) {
       return (
         <div className={`${styles['caption']}`}>
           <div className={`${styles['no-results']} ${styles['fs-40']} ${styles['fontW600']} ${styles['justify-center']}`}>
-              Sorry, no results<br/><span  className={`${styles['fontW300']} ${styles['fs-20']}`}>for "{this.props.search}"</span>
+              Sorry, no results<br/><span  className={`${styles['fontW300']} ${styles['fs-20']}`}>for "{finalQuery}"</span>
           </div>
           <div className={`${styles['no-search']}`}>
             <SVGComponent src={"errors-img/noSearch"} />
@@ -137,6 +140,8 @@ const mapStateToProps = store => ({
   isLastAddedToCartSuccess: cartSelector.isLastAddedToCartSuccess(store),
   userDetails: selectors.getUserDetails(store),
   cartButtonLoaders: selectors.getCartButtonLoaders(store),
+  isCategoryTree: selectors.getIsCategoryTree(store),
+  choosenCategoryName: selectors.getChoosenCategoryName(store),
 });
 
 const mapDispatchToProps = dispatch =>

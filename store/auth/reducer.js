@@ -1,17 +1,22 @@
 import typeToReducer from 'type-to-reducer';
+import Cookies from 'universal-cookie';
 import { actions } from './actions';
+
+const cookies = new Cookies();
 
 const initialState = {
   ui: {
     loading: false,
     loginLoading: false,
     showLogin: false,
+    showEmailVerificationScreen: false,
   },
   data: {
     isLoggedIn: false,
     userCreds: {},
     geoShippingDetails: {},
     autoCompleteCity: [],
+    userInfoData: {},
   },
   error: '',
 };
@@ -29,6 +34,7 @@ const authReducer = typeToReducer({
         data: {
           ...state.data,
           ...action.payload.data,
+          isLoggedIn: true,
         },
         ui: {
           ...state.ui,
@@ -43,93 +49,86 @@ const authReducer = typeToReducer({
         error: messege,
         data: {
           ...state.data,
-          isLoggedIn: false
+          isLoggedIn: false,
         },
-        ui: { 
+        ui: {
           ...state.ui,
           loginLoading: false,
         }
       });
     },
   },
-  [actions.RESET_LOGIN_ERROR]: (state) => {
-    return {
-      ...state,
-      error: '',
-    }
-  },
+
+  [actions.RESET_LOGIN_ERROR]: state => ({
+    ...state,
+    error: '',
+  }),
   [actions.USER_REGISTER]: {
-    PENDING: state => {
-      return Object.assign({}, state, {
-        error: '',
-      }, { ui: {
+    PENDING: state => Object.assign({}, state, {
+      error: '',
+    },
+    {
+      ui: {
         ...state.ui,
-        loading: true } });
+        loading: true,
+      },
     },
-    FULFILLED: (state, action) => {
-      return Object.assign({}, state, {
-        data: {
-          ...state.data,
-          registrationDetails: action.payload.data
-        },
-        ui: {
-          ...state.ui,
-          loading: false,
-        },
-      });
-    },
-    REJECTED: (state, action) => {
-      return Object.assign({}, state, {
-        error: action.payload.response ? action.payload.response.data.message : action.payload.message,
-        ui: {
-          ...state.ui,
-          loading: false,
-        },
-      });
-    },
-  },
-  [actions.USER_LOGOUT]: (state, action) => {
-    return {
-      ...state,
+    ),
+    FULFILLED: (state, action) => Object.assign({}, state, {
       data: {
         ...state.data,
-        isLoggedIn: false,
-      }
-    }
-  },
-  [actions.USER_LOGIN_INFO]: (state, action) => {
-    return {
-      ...state,
-      data: {
-        ...state.data,
-        isLoggedIn: action.payload.isLoggedIn,
-        userCreds: action.payload.userCreds,
-        instagramCode: action.payload.instagramCode,
+        registrationDetails: action.payload.data,
       },
       ui: {
         ...state.ui,
-        showLogin: true,
+        loading: false,
       },
-    };
-  },
-  [actions.SET_COUNTRY]: (state, action) => {
-    return {
-      ...state,
-      data: {
-        ...state.data,
-        country: action.payload,
-      }
-    }
-  },
-  [actions.SET_CITY]: {
-    PENDING: state => {
-      return Object.assign({}, state, {
-        error: '',
-      }, { ui: { 
+    }),
+    REJECTED: (state, action) => Object.assign({}, state, {
+      error: action.payload.response ? action.payload.response.data.message : action.payload.message,
+      ui: {
         ...state.ui,
-        loading: true,
-      } });
+        loading: false,
+      },
+    }),
+  },
+  [actions.USER_LOGOUT]: state => ({
+    ...state,
+    data: {
+      ...state.data,
+      isLoggedIn: false,
     },
+    ui: {
+      showLogin: false,
+    },
+  }),
+  [actions.USER_LOGIN_INFO]: (state, action) => ({
+    ...state,
+    data: {
+      ...state.data,
+      isLoggedIn: state.data.userInfoData.email_verified === 'NV' ? false : action.payload.isLoggedIn,
+      userCreds: action.payload.userCreds,
+      instagramCode: action.payload.instagramCode,
+    },
+    ui: {
+      ...state.ui,
+      showLogin: true,
+    },
+  }),
+  [actions.SET_COUNTRY]: (state, action) => ({
+    ...state,
+    data: {
+      ...state.data,
+      country: action.payload,
+    }
+  }),
+  [actions.SET_CITY]: {
+    PENDING: state => Object.assign({}, state, {
+      error: '',
+    }, { ui: {
+      ...state.ui,
+      loading: true,
+    } }),
     FULFILLED: (state, action) => {
       const { city, country, displayCity } = action.payload
       return {
@@ -145,53 +144,43 @@ const authReducer = typeToReducer({
         }
       }
     },
-    REJECTED: (state, action) => {
-      return Object.assign({}, state, {
-        error: action.payload.response ? action.payload.response.data.message : action.payload.message,
-        ui: {  ...state.ui,
-          loading: false }
-      });
-    },
+    REJECTED: (state, action) => Object.assign({}, state, {
+      error: action.payload.response ? action.payload.response.data.message : action.payload.message,
+      ui: {  ...state.ui,
+        loading: false }
+    }),
   },
   [actions.REMOVE_CITY]: {
-    PENDING: state => {
-      return Object.assign({}, state, {
-        error: '',
-      }, { ui: { 
-        ...state.ui,
-        loading: true,
-      } });
-    },
-    FULFILLED: (state, action) => {
-      return {
-        ...state,
-        data: {
-          ...state.data,
-          geoShippingDetails: {
-            city: '',
-            country: '',
-            displayCity: '',
-          }
+    PENDING: state => Object.assign({}, state, {
+      error: '',
+    }, { ui: {
+      ...state.ui,
+      loading: true,
+    } }),
+    FULFILLED: (state, action) => ({
+      ...state,
+      data: {
+        ...state.data,
+        geoShippingDetails: {
+          city: '',
+          country: '',
+          displayCity: '',
         }
       }
-    },
-    REJECTED: (state, action) => {
-      return Object.assign({}, state, {
-        error: action.payload.response ? action.payload.response.data.message : action.payload.message,
-        ui: {  ...state.ui,
-          loading: false }
-      });
-    },
+    }),
+    REJECTED: (state, action) => Object.assign({}, state, {
+      error: action.payload.response ? action.payload.response.data.message : action.payload.message,
+      ui: {  ...state.ui,
+        loading: false }
+    }),
   },
   [actions.DERIVE_CITY]: {
-    PENDING: state => {
-      return Object.assign({}, state, {
-        error: '',
-      }, { ui: { 
-        ...state.ui,
-        loading: true,
-      } });
-    },
+    PENDING: state => Object.assign({}, state, {
+      error: '',
+    }, { ui: {
+      ...state.ui,
+      loading: true,
+    } }),
     FULFILLED: (state, action) => {
       const { city, country, displayCity } = action.payload;
       return {
@@ -206,101 +195,132 @@ const authReducer = typeToReducer({
         }
       }
     },
-    REJECTED: (state, action) => {
-      return Object.assign({}, state, {
-        error: action.payload.response ? action.payload.response.data.message : action.payload.message,
-        ui: {
-          ...state.ui,
-          loading: false,
-        },
-      });
-    },
-  },
-  [actions.RESET_AUTOCOMPLETE_CITY]: (state, action) => {
-    return {
-      ...state,
-      data: {
-        ...state.data,
-        autoCompleteCity: []
-      }
-    }
-  },
-  [actions.AUTOCOMPLETE_CITY]: {
-    PENDING: (state) => {
-      return Object.assign({}, state, {
-        error: '',
-      }, {
-        ui: {
-          ...state.ui,
-          loading: true,
-        },
-      });
-    },
-    FULFILLED: (state, action) => {
-      return {
-        ...state,
-        data: {
-          ...state.data,
-          autoCompleteCity: action.payload,
-        }
-      }
-    },
-    REJECTED: (state, action) => {
-      return Object.assign({}, state, {
-        error: action.payload.response ? action.payload.response.data.message : action.payload.message,
-        ui: {
-          ...state.ui,
-          loading: false,
-        },
-      });
-    },
-  },
-  [actions.SHOW_LOGIN]: (state, action) => {
-    return {
-      ...state,
+    REJECTED: (state, action) => Object.assign({}, state, {
+      error: action.payload.response ? action.payload.response.data.message : action.payload.message,
       ui: {
         ...state.ui,
-        showLogin: true,
+        loading: false,
       },
-    };
+    }),
   },
-  [actions.RESET_SHOW_LOGIN]: (state) => {
-    return {
-      ...state,
-      ui: {
-        ...state.ui,
-        showLogin: false,
-      }
+  [actions.RESET_AUTOCOMPLETE_CITY]: (state, action) => ({
+    ...state,
+    data: {
+      ...state.data,
+      autoCompleteCity: []
     }
-  },
-  [actions.SET_LANGUAGE]: {
-    PENDING: state => {
-      return Object.assign({}, state, {
-        error: '',
-      }, { ui: {
+  }),
+  [actions.AUTOCOMPLETE_CITY]: {
+    PENDING: (state) => Object.assign({}, state, {
+      error: '',
+    }, {
+      ui: {
         ...state.ui,
         loading: true,
       },
-      });
+    }),
+    FULFILLED: (state, action) => ({
+      ...state,
+      data: {
+        ...state.data,
+        autoCompleteCity: action.payload,
+      }
+    }),
+    REJECTED: (state, action) => Object.assign({}, state, {
+      error: action.payload.response ? action.payload.response.data.message : action.payload.message,
+      ui: {
+        ...state.ui,
+        loading: false,
+      },
+    }),
+  },
+  [actions.SHOW_LOGIN]: (state, action) => ({
+    ...state,
+    ui: {
+      ...state.ui,
+      showLogin: true,
+      showEmailVerificationScreen: false,
     },
-    FULFILLED: (state, action) => {
-      return {
-        ...state,
-        data: {
-          ...state.data,
-          language: action.payload,
-        },
-      };
+    data: {
+      ...state.data,
+      isLoggedIn: state.data.userInfoData.email_verified === 'NV' ? false : (cookies.get('isVerified') && (cookies.get('isVerified') === "false" ? false : true)),
     },
-    REJECTED: (state, action) => {
-      return Object.assign({}, state, {
-        error: action.payload.response ? action.payload.response.data.message : action.payload.message,
-        ui: {
-          ...state.ui,
-          loading: false,
-        },
-      });
+  }),
+  [actions.RESET_SHOW_LOGIN]: state => ({
+    ...state,
+    data: {
+      ...state.data,
+      isLoggedIn: state.data.userInfoData.email_verified === 'NV' ? false : (cookies.get('isVerified') && (cookies.get('isVerified') === "false" ? false : true)),
     },
+    ui: {
+      ...state.ui,
+      showLogin: false,
+      showEmailVerificationScreen: false,
+    },
+  }),
+  [actions.SET_LANGUAGE]: {
+    PENDING: state => Object.assign({}, state, {
+      error: '',
+    }, { ui: {
+      ...state.ui,
+      loading: true,
+    },
+    }),
+    FULFILLED: (state, action) => ({
+      ...state,
+      data: {
+        ...state.data,
+        language: action.payload,
+      },
+    }),
+    REJECTED: (state, action) => Object.assign({}, state, {
+      error: action.payload.response ? action.payload.response.data.message : action.payload.message,
+      ui: {
+        ...state.ui,
+        loading: false,
+      },
+    }),
+  },
+  [actions.VERIFY_EMAIL]: {
+    PENDING: state => Object.assign({}, state, { ui: { ...state.ui, loading: true, showEmailVerificationScreen: true } }),
+    FULFILLED: (state, action) => Object.assign({}, state, {
+      data: {
+        ...state.data,
+        ...action.payload,
+      },
+      ui: { ...state.ui, loading: false, showEmailVerificationScreen: false },
+    }),
+    REJECTED: state =>
+      Object.assign({}, state, { ui: { ...state.ui, loading: false, showEmailVerificationScreen: true } }),
+  },
+  [actions.VERIFY_RESEND_EMAIL]: {
+    PENDING: state => Object.assign({}, state, { ui: { ...state.ui, loading: true, showEmailVerificationScreen: true } }),
+    FULFILLED: (state, action) => Object.assign({}, state, {
+      data: {
+        ...state.data,
+        ...action.payload,
+      },
+      ui: { ...state.ui, loading: false, showEmailVerificationScreen: true },
+    }),
+    REJECTED: state =>
+      Object.assign({}, state, { ui: { ...state.ui, loading: false, showEmailVerificationScreen: true } }),
+  },
+
+  [actions.GET_USER_INFO]: {
+    PENDING: state => Object.assign({}, state, { ui: { ...state.ui, loading: true, showEmailVerificationScreen: false } }),
+    FULFILLED: (state, action) => Object.assign({}, state, {
+      data: {
+        ...state.data,
+        userInfoData: action.payload && action.payload.data,
+      },
+      ui: {
+        ...state.ui,
+        loading: false,
+        showEmailVerificationScreen: action.payload && action.payload.data.email_verified === 'NV' ? true : false,
+      },
+    }),
+    REJECTED: state =>
+      Object.assign({}, state, { ui: { ...state.ui, loading: false, showEmailVerificationScreen: false } }),
   },
 }, initialState);
 

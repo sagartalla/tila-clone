@@ -21,9 +21,9 @@ import ReviewRatingList from '../RatingReviews/List';
 import FooterBar from '../Footer/index';
 import Theme from '../helpers/context/theme';
 import CompareWidget from '../common/CompareWidget';
-import { actionCreators as wishlistActionCreators } from '../../store/cam/wishlist';
-
+import { actionCreators as wishlistActionCreators, selectors as wishListSelectors } from '../../store/cam/wishlist';
 import { mergeCss } from '../../utils/cssUtil';
+import Button from '../common/CommonButton';
 
 const styles = mergeCss('components/Product/product');
 
@@ -154,9 +154,9 @@ const getProductComponent = (isPreview, taskCode) => {
         });
       }
     }
-
+/* eslint-disable */
     render() {
-      const { productData, userDetails } = this.props;
+      const { productData, userDetails, showLoading } = this.props;
       const {
         catalog, titleInfo, keyfeatures, extraOffers, imgUrls, offerInfo, shippingInfo, isWishlisted,
         details, productDescription, catalogObj, categoryType = '', warranty, breadcrums, product_id,
@@ -212,9 +212,13 @@ const getProductComponent = (isPreview, taskCode) => {
                                 <span className={styles['error-msg']}>{emailErr}</span>
                               }
                             </div>}
-                            <a className={`${styles['flex-center']} ${styles.notify_me_btn}`} onClick={this.notify}>
-                              <span className={`${styles['p-10-40']} ${styles['fs-20']}`}>Notify Me</span>
-                            </a>
+                            <Button
+                              className={`${styles['flex-center']} ${styles.notify_me_btn} ${styles['fs-20']}`}
+                              btnText="Notify Me"
+                              onClick={this.notify}
+                              hoverClassName="hoverBlueBackground"
+                              btnLoading={showLoading}
+                            />
                           </div>
                         }
                       </div>
@@ -223,7 +227,7 @@ const getProductComponent = (isPreview, taskCode) => {
                   </Col>
                 </Row>
               </div>
-              <div className={styles['bg-white']}>
+              <div className={`${styles['bg-white']} ${styles['mt-30']}`}>
                 <Grid>
                   <Row>
                     <Col md={8}>
@@ -259,6 +263,7 @@ const getProductComponent = (isPreview, taskCode) => {
   const mapStateToProps = store => ({
     productData: taskCode ? selectors.getPreview(store) : selectors.getProduct(store),
     userDetails: store.authReducer.data,
+    showLoading: wishListSelectors.getLoader(store),
   });
 
   const mapDispatchToProps = dispatch =>
