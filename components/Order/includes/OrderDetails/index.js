@@ -24,7 +24,7 @@ const OrderDetails = ({ query, orderData, thankyouPage }) => {
       <Grid>
         <Row className={styles['m-0']}>
           <Col md={12}>
-            <div className={`${styles['mb-20']}`}>
+            <div className={`${styles['mt-20']} ${styles['mb-20']}`}>
               {
                 thankyouPage ? '' :
                   <Fragment>
@@ -55,6 +55,7 @@ const OrderDetails = ({ query, orderData, thankyouPage }) => {
                   key={item.id}
                   payments={orderData.payments}
                   orderItem={item}
+                  needHelp
                   orderId={orderData.orderId}
                   thankyouPage={thankyouPage}
                   variantId={item.variantId}

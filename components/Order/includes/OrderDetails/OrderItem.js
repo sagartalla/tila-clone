@@ -88,7 +88,7 @@ class OrderItem extends Component {
 
   render() {
     const {
-      payments = [{}], orderItem, orderId, thankyouPage, isCancelable, isReturnable, isExchangable,
+      payments = [{}], orderItem, orderId, thankyouPage, isCancelable, isReturnable, isExchangable, needHelp,
     } = this.props;
     const { showToolTip } = this.state;
     const btnType = (() => {
@@ -112,7 +112,6 @@ class OrderItem extends Component {
         return 'Return in progress';
       } return '';
     };
-    console.log('cdsfdf', orderItem);
     return (
       <div className={`${styles['shipment-wrap']} ${styles['mb-20']} ${styles['mt-20']} ${styles.flex}`}>
         <Col md={7} sm={7} className={`${styles['pl-0']} ${styles['pr-0']}`}>
@@ -184,7 +183,7 @@ class OrderItem extends Component {
                           </span>}
                         </Col>
                       </div>
-                      {Object.keys(product.warranty_duration).length > 0 ?
+                      {product.warranty_duration && Object.keys(product.warranty_duration).length > 0 ?
                         <p className={`${styles['mb-0']} ${styles['fs-12']} ${styles.flex}`}>
                           <span className={`${styles.flex} ${styles['p-10']} ${styles.lable}`}>
                             <span>Warranty : </span>
@@ -212,10 +211,10 @@ class OrderItem extends Component {
                 </div>}
             </React.Fragment>
           ))}
-          <span className={`${styles['help-position']} ${styles.absolute} ${styles['thick-blue']} ${styles['p-5']} ${styles['flex-center']} ${styles['ml-10']} ${styles.border} ${styles['border-radius4']}`}>
+          {needHelp && <span className={`${styles['help-position']} ${styles.absolute} ${styles['thick-blue']} ${styles['p-5']} ${styles['flex-center']} ${styles['ml-10']} ${styles.border} ${styles['border-radius4']}`}>
             <SVGComponent clsName={`${styles['help-icon']}`} src="icons/help-icon/help" />
             &nbsp;&nbsp;Need Help?
-          </span>
+          </span>}
         </Col>
         <Col md={5} sm={5} className={styles['thick-border-left']}>
           {payments && payments.length > 0 && payments[0].transaction_status === 'FAILED' ?
