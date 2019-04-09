@@ -20,6 +20,7 @@ import { reducer as instantCheckoutReducer } from './common/instantCheckout';
 import { reducer as listingCartReducer } from './listingCart';
 import { reducer as landingReducer } from './landing';
 import { reducer as captchaReducer } from './captcha';
+import { reducer as helpSupportReducer } from './helpsupport';
 
 export default combineReducers({
   searchReducer,
@@ -43,4 +44,5 @@ export default combineReducers({
   landingReducer,
   captchaReducer,
   couponOffersData,
+  helpSupportReducer,
 });

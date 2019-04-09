@@ -30,6 +30,7 @@ const a = {
     SUGGESSIONS_URL: 'http://192.168.0.180:9090/auto-suggest/suggest/suggestions',
     COUPONS_URL: 'http://192.168.0.180:9090/dip/fpts',
     CAPTCHA_URL: 'https://api-gateway-stage.fptechscience.com/transformers/api/v1/captcha',
+    HNS_URL: 'https://api-gateway-stage.fptechscience.com/hns/api/v1',
   },
   dev: {
     IMAGE_SEARCH_URL: 'https://apigateway-dev.tila.com/image-search',
@@ -52,6 +53,7 @@ const a = {
     SUGGESSIONS_URL: 'https://api-gateway-stage.fptechscience.com/auto-suggest/suggest/suggestions',
     COUPONS_URL: 'https://api-gateway-stage.fptechscience.com/dip/fpts',
     CAPTCHA_URL: 'https://api-gateway-stage.fptechscience.com/transformers/api/v1/captcha',
+    HNS_URL: 'https://apigateway-dev.tila.com/hns/api/v1',
   },
   staging: {
     IMAGE_SEARCH_URL: 'https://api-gateway-stage.fptechscience.com/image-search',
@@ -74,6 +76,7 @@ const a = {
     SUGGESSIONS_URL: 'https://api-gateway-stage.fptechscience.com/auto-suggest/suggest/suggestions',
     COUPONS_URL: 'https://api-gateway-stage.fptechscience.com/dip/fpts',
     CAPTCHA_URL: 'https://api-gateway-stage.fptechscience.com/transformers/api/v1/captcha',
+    HNS_URL: 'https://api-gateway-stage.fptechscience.com/hns/api/v1',
   },
   stage: {
     IMAGE_SEARCH_URL: 'https://api-gateway-stage.fptechscience.com/image-search',
@@ -96,6 +99,7 @@ const a = {
     SUGGESSIONS_URL: 'https://api-gateway-stage.fptechscience.com/auto-suggest/suggest/suggestions',
     COUPONS_URL: 'https://api-gateway-stage.fptechscience.com/dip/fpts',
     CAPTCHA_URL: 'https://api-gateway-stage.fptechscience.com/transformers/api/v1/captcha',
+    HNS_URL: 'https://api-gateway-stage.fptechscience.com/hns/api/v1',
   },
   preprod: {
     IMAGE_SEARCH_URL: 'https://apigateway-preprod.tila.com/image-search',
@@ -118,6 +122,7 @@ const a = {
     SUGGESSIONS_URL: 'https://api-gateway-stage.fptechscience.com/auto-suggest/suggest/suggestions',
     COUPONS_URL: 'https://api-gateway-stage.fptechscience.com/dip/fpts',
     CAPTCHA_URL: 'https://api-gateway-stage.fptechscience.com/transformers/api/v1/captcha',
+    HNS_URL: 'https://apigateway-preprod.tila.com/hns/api/v1',
   },
   prod: {
     IMAGE_SEARCH_URL: 'https://gateway-dev.fptechscience.com/image-search',
@@ -140,6 +145,7 @@ const a = {
     SUGGESSIONS_URL: 'https://api-gateway-stage.fptechscience.com/auto-suggest/suggest/suggestions',
     COUPONS_URL: 'https://api-gateway-stage.fptechscience.com/dip/fpts',
     CAPTCHA_URL: 'https://api-gateway-stage.fptechscience.com/transformers/api/v1/captcha',
+    HNS_URL: 'http://gateway-dev.fptechscience.com/hns/api/v1',
   },
 };
 // console.log('constants.js 2', a);

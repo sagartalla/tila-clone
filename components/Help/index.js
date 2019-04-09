@@ -1,59 +1,58 @@
 /*eslint-disable*/
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
 import HeaderBar from '../HeaderBar';
 import { mergeCss } from '../../utils/cssUtil';
-import Faq from './Faq';
-import Answers from './Answers';
+import { actionCreators } from '../../store/helpsupport';
+import { selectors } from '../../store/auth';
+import ErrorsPart from '../../components/common/Error'
+import {Router} from '../../routes';
+import { ContactTabs, helpComponents } from './helpConstants';
+import EmailModal from './EmailModal';
 
 const styles = mergeCss('components/Help/help');
 
 const QUERY = 'Select id, lookupname, parent from ServiceCategories'
 
-const ContactTabs = [
-  { type: 'email', icon: '', text: ['Want to mail us ?', 'Email us now'] },
-  { type: 'chat', icon: '', text: ['Want to chat ?', 'Chat with us now'] },
-  { type: 'call', icon: '', text: ['Phone Support', 'Call us now'] }
-]
-
-const helpComponents = {
-  'faq': (url, categoriesObj, query) => <Faq url={url} categoriesObj={categoriesObj} query={query}/>,
-  'answers': (url, categoriesObj, query) => <Answers url={url} categoriesObj={categoriesObj} query={query}/>,
-  'incidents': (url, categoriesObj, query) => <div>Incidents</div>,
-}
-
-export default class Help extends Component {
+class Help extends Component {
   constructor(props){
     super(props);
     const { 0 : urlQuery } = props.query;
-    const [type, ...url] = urlQuery.split('/');
+    const [type, ...url] = (urlQuery || '').split('/');
     this.state = {
-      type,
+      type: type || 'faq',
       url,
-      categoriesObj: {}
+      showModal: false,
+      modalType: '',
+      selectedOrder: '',
+      selectedIssue: '',
     }
-    this.getCategories();
+    this.props.getCategories(QUERY);
   }
-  getCategories = () => {
-    fetch(`https://fptsuae.custhelp.com/services/rest/connect/v1.3/queryResults?query=${encodeURIComponent(QUERY)}`, {
-      method: 'GET',
-      headers: {
-        'Authorization': 'Basic YWRtaW5pc3RyYXRvcjpGcHRzQDEyMzQ1Ng=='
-      }
-    }).then(res => res.ok && res.text()).then((res) => {
-      const { items } = JSON.parse(res);
-      const { columnNames, rows: categories } = items[0];
-      const categoriesObj = categories.reduce((acc, c, i) => {
-        c[2] && (acc[c[2]] = {...acc[c[2]], child: [...acc[c[2]].child, c[0]]})
-        return {
-          ...acc, [c[0]]: {name: c[1], id: c[0], hasParent: !!c[2], child:[]}
-        }
-      }, {})
+  handleContactClick = ({type, isClickable}, selectedOrder, selectedIssue) => (e) => {
+    if(isClickable) {
       this.setState({
-        categoriesObj
-      })
-    }).catch(err => alert('err'))
-  } 
-  renderContactCard = (type, index) => (
+        showModal: true,
+        modalType: type,
+        selectedOrder: selectedOrder,
+        selectedIssue: selectedIssue
+      });
+    }
+  }
+  closeModal = () => {
+    this.setState({
+      showModal: false,
+      modalType: ''
+    })
+  }
+  renderModal = (isLoggedIn) => (
+    {
+      'email': <EmailModal query={this.props.query[0]} selectedOrder={this.state.selectedOrder} selectedIssue={this.state.selectedIssue} isLoggedIn={isLoggedIn} />,
+      'chat': <EmailModal query={this.props.query[0]} selectedOrder={this.state.selectedOrder} selectedIssue={this.state.selectedIssue} isLoggedIn={isLoggedIn} />
+    }[this.state.modalType]
+  );
+  renderContactCard = (selectedOrder, selectedIssue) => (type, index) => {
+    return (
     <div key={type.type} className={styles['flexCenterContainer']}
       style={{
         margin: '10px 0px', 
@@ -65,14 +64,16 @@ export default class Help extends Component {
       <div style={{ margin: '10px', width: '35px', height: '35px', borderRadius: '50%', backgroundColor: '#8DD7C2'}}></div>
       <div>
         <div style={{ fontSize: '13px', fontWeight: 'bolder'}}>{type.text[0]}</div>
-        <div style={{ fontSize: '12px', color: '#7891B6' }}>{type.text[1]}</div>
+        <div style={{ fontSize: '12px', color: '#7891B6', cursor: type.isClickable ? 'pointer' : 'normal' }} onClick={this.handleContactClick(type, selectedOrder, selectedIssue)}>{type.text[1]}</div>
       </div>
     </div>
-  )
+  )}
 
   render(){
+    const {isCategoryLoaded, categoryData, query, isLoggedIn} = this.props;
+    const {type, url, showModal} = this.state;
     return(
-      Object.keys(this.state.categoriesObj).length > 0 ?
+      !!isCategoryLoaded ?
       <div style={{ height: '100%', overflow: 'hidden'}}>
         <HeaderBar />
         <div style={{ height: `calc(100% - 110px)`, overflow: 'auto'}}>
@@ -83,17 +84,31 @@ export default class Help extends Component {
                 <div className={styles['searchContainer']}></div>
               </div>
               <div className={styles['contactContainer']}>
-                {ContactTabs.map(this.renderContactCard)}
+                {ContactTabs.map(this.renderContactCard())}
               </div>
             </div>
             <div style={{ backgroundColor: '#fff'}}>
               <div className={styles['helpContentContainer']}>
-                {helpComponents[this.state.type](this.state.url, this.state.categoriesObj, this.props.query[0])}
+                {helpComponents(type)(url, categoryData, query[0], isLoggedIn, this.renderContactCard, this.handleContactClick)}
               </div>
             </div>
           </div>
+        </div>
+        <div className={showModal ? `${styles['modalContainer']} ${styles['showDiv']}`
+          : `${styles['modalContainer']} ${styles['hideDiv']}`}>
+          <div className={`${styles['disabled']}`} onClick={this.closeModal}></div>
+        </div>
+        <div className={styles['modal']} style={{transform: showModal ? 'translateX(0px)' : 'translateX(800px)'}}>
+          <div style={{height: '100%', width: '100%', overflow: 'auto'}}>{this.renderModal(this.props.isLoggedIn)}</div>
         </div>
       </div> : null
     )
   }
 }
+
+export default connect((state) => ({ 
+  categoryData: state.helpSupportReducer.categoryData,
+  isCategoryLoaded: state.helpSupportReducer.isCategoryLoaded,
+  isLoggedIn: selectors.getLoggedInStatus(state)
+  }),
+  {...actionCreators})(Help);

@@ -34,7 +34,7 @@
   margin auto
   padding 60px 20px
   min-height 600px
-  max-width 1200px
+  max-width 1300px
   width 100%
 
 .topicContainer
@@ -48,3 +48,94 @@
   display: flex
   flex-direction: column
   justify-content: space-between
+
+.incidentContainer 
+  padding: 20px
+  display: flex
+  height: 120px
+  width: 100%
+  border-radius 10px
+  box-shadow 0px 0px 15px -5px #ccc
+  justify-content: space-between
+  align-items: center
+  margin: 20px 0px
+
+.categoryValue
+  display flex
+  justify-content space-between
+  align-items center 
+  font-size 14px 
+  padding 0px 10px 
+  height 55px 
+
+.categoryWithChild
+   cursor pointer
+   display flex
+   justify-content space-between
+   width 100%
+
+.categoryContainer
+  margin 0px 1px
+  width 25%
+  height 100%
+  overflow scroll
+  border-right 0.25px solid #f2f2f2
+  border-left 0.25px solid #f2f2f2
+
+.answersContainer
+  width: 75%
+  overflow: scroll
+  padding: 0px 20px
+
+.showDiv
+  display block
+
+.hideDiv
+  display none
+
+.modalContainer
+  height 100%
+  width 100%
+  top 0
+  left 0
+  .disabled
+    height 100%
+    width 100%
+    position fixed
+    top 0
+    left 0
+    z-index 2000
+    background-color grey
+    opacity 0.8
+
+.modal
+  height 100%
+  width 30%
+  position fixed
+  top 0
+  right 0
+  z-index 2001
+  background-color white
+  transition: all 0.3s;
+
+.closeModal
+  height 100%
+  width 30%
+  position fixed
+  top 0
+  right 0
+  transform: translateX(800px)
+  z-index 2001
+  background-color white
+  animation-name slideClose
+  animation-duration 0.3s
+  animation-fill-mode both
+
+@keyframes slideOpen {
+  from {transform: translateX(800px)}
+  to {transform: translateX(0px)}
+  }
+@keyframes slideClose {
+  from {transform: translateX(0px)}
+  to {transform: translateX(800px)}
+  }
