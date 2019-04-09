@@ -78,7 +78,6 @@ const paymentsReducer = typeToReducer({
       ui: { loading: false },
     }),
     FULFILLED: (state, action) => {
-      debugger;
       return Object.assign({}, state, {
         data: {
           ...state.data,

@@ -3,7 +3,7 @@ import fp, * as _ from 'lodash/fp';
 import shortid from 'shortid';
 
 const getOrdersData = (store) => {
-  const { orders} = store.ordersReducer.data
+  const { orders } = store.ordersReducer.data;
   if (orders && orders.length) {
     return orders.map((order) => {
       const {
@@ -14,18 +14,18 @@ const getOrdersData = (store) => {
         total_amount,
         currency_code,
         order_items,
+        order_type,
       } = order;
       const orderItems = _.compose(
-        _.reduce.convert({'cap': false })((acc, val, key) => acc.concat(
-          {
-            id: val.id,
-            products: [val],
-            status: val.status ,
-            variantId: val.variantId,
-            isCancelable: val.isCancelable,
-            isReturnable: val.isReturnable,
-            isExchangable: val.isExchangable,
-          }), []),
+        _.reduce.convert({ cap: false })((acc, val, key) => acc.concat({
+          id: val.id,
+          products: [val],
+          status: val.status,
+          variantId: val.variantId,
+          isCancelable: val.isCancelable,
+          isReturnable: val.isReturnable,
+          isExchangable: val.isExchangable,
+        }), []),
         _.map(i => ({
           id: i.order_item_ids[0],
           img: i.variant_info.image_url,
@@ -35,13 +35,20 @@ const getOrdersData = (store) => {
           catalogId: i.variant_info.catalog_id,
           item_tracking_id: i.item_tracking_id || shortid.generate(),
           status: i.external_status,
+          state_time_estimates: i.state_time_estimates,
           promisedDeliveryDate: i.promised_delivery_date,
           variantId: i.variant_id,
           orderIds: i.order_item_ids,
           isCancelable: i.cancelable,
           isReturnable: i.returnable,
           isExchangable: i.exchangeable,
+          order_type: i.order_type,
+          order_item_type: i.order_item_type,
+          order_status: i.status,
+          sizeInfo: i.variant_info && i.variant_info.variant_details &&
+            i.variant_info.variant_details.attribute_map && i.variant_info.variant_details.attribute_map.size,
         })),
+        _.filter(i => i.order_item_type === 'DELIVERY'),
       )(order_items);
       return {
         id: order_id,
@@ -53,6 +60,7 @@ const getOrdersData = (store) => {
         orderDate: moment(created_at).format('MMMM DD, YYYY'),
         orderTotal: `${total_amount} ${currency_code}`,
         orderItems,
+        order_type,
       };
     });
   }
@@ -60,12 +68,12 @@ const getOrdersData = (store) => {
 };
 
 const getPageDetails = (store) => {
-  const {total_pages=0,total_size=0,page=0} =  store.ordersReducer.data
-
+  const { total_pages = 0, total_size = 0, page = 0 } = store.ordersReducer.data;
   return {
     total_pages,
     total_size,
-    page
-  }
-}
+    page,
+  };
+};
+
 export { getOrdersData, getPageDetails };

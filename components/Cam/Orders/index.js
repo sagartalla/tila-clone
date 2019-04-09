@@ -34,7 +34,7 @@ class Orders extends Component {
   }
   render() {
     const { ordersData,pageDetails } = this.props;
-    const { currentPage } = this.state
+    const { currentPage } = this.state;
     return (
       <div>
         <div className={styles['orders-container']}>

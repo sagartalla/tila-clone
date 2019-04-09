@@ -14,7 +14,7 @@ const cookies = new Cookies();
 const language = cookies.get('language') || 'en';
 const country = cookies.get('country') || 'SAU';
 
-const Order = ({order}) => {
+const Order = ({ order }) => {
   const popover = (
     <Popover id="popover-positioned-right">
       <address>
@@ -39,7 +39,7 @@ const Order = ({order}) => {
         <div>
           <span>Shipping to</span>
           <div className={`${styles['flex']}`}>
-            <span className={styles['link-text']}>{order.shippingTo.name}</span>
+            <span className={`${styles['link-text']} ${styles['text-capitalize']}`}>{order.shippingTo.name}</span>
             <OverlayTrigger placement="bottom" overlay={popover}>
               <span className={styles['ml-10']}>
                 <SVGComponent clsName={`${styles['down-arrow']}`} src="icons/down-arrow/down-arrow" />
@@ -55,16 +55,17 @@ const Order = ({order}) => {
       </div>
       <Row>
         <Col md={12}>
-          {order.orderItems.map((orderItem) => <OrderItem
-            key={orderItem.id}
-            orderItem={orderItem}
-            orderId={order.id}
-            showWidget={false}
-            variantId={orderItem.variantId}
-            isCancelable={orderItem.isCancelable}
-            isReturnable={orderItem.isReturnable}
-            isExchangable={orderItem.isExchangable}
-            />)}
+          {order.orderItems.map(orderItem => (
+            <OrderItem
+              key={orderItem.id}
+              orderItem={orderItem}
+              orderId={order.id}
+              variantId={orderItem.variantId}
+              isCancelable={orderItem.isCancelable}
+              isReturnable={orderItem.isReturnable}
+              isExchangable={orderItem.isExchangable}
+            />
+          ))}
         </Col>
       </Row>
       <Row>
@@ -72,7 +73,8 @@ const Order = ({order}) => {
           <div>
             <span>
               Ordered on
-            </span> <span className={`${styles['fontW600']} ${styles['light-gry-clr']}`}>
+            </span>
+            <span className={`${styles['fontW600']} ${styles['light-gry-clr']}`}>
               {order.orderDate}
             </span>
           </div>

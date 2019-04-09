@@ -2,7 +2,7 @@ import fp, * as _ from 'lodash/fp';
 import shortid from 'shortid';
 
 const getOrderDetails = (store) => {
-  const { created_by, customer_account_id, status, address, order_id, created_at, order_items, price, total_shipping, currency_code, payments } = store.singleOrderReducer.data.orderDetails;
+  const { created_by, customer_account_id, status, address, order_id, created_at, order_items, price, total_shipping, currency_code, payments, order_type } = store.singleOrderReducer.data.orderDetails;
   if (order_id) {
     return {
       name: address ? `${address.first_name} ${address.last_name}` : 'No Name',
@@ -12,6 +12,7 @@ const getOrderDetails = (store) => {
       orderId: order_id,
       orderDate: created_at,
       price,
+      order_type,
       currency_code,
       shippingTotal: total_shipping,
       payments,
@@ -42,12 +43,20 @@ const getOrderDetails = (store) => {
           price: i.price,
           currency_code,
           orderIds: i.order_item_ids,
-          offers: i.offers,
+          offers: i.offers || [],
           variantId: i.variant_id,
           promisedDeliveryDate: i.promised_delivery_date,
           isCancelable: i.cancelable,
           isReturnable: i.returnable,
           isExchangable: i.exchangeable,
+          order_type: i.order_type,
+          order_item_type: i.order_item_type,
+          order_status: i.status,
+          warranty_duration: i.warranty_policy.preferred_policy ?
+            i.warranty_policy.policies[i.warranty_policy.preferred_policy] : {},
+          gift_info: i.gift_info,
+          sizeInfo: i.variant_info && i.variant_info.variant_details &&
+            i.variant_info.variant_details.attribute_map && i.variant_info.variant_details.attribute_map.size,
         })),
       )(order_items),
     };

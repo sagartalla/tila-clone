@@ -18,7 +18,7 @@ const country = cookies.get('country') || 'SAU';
 const OrderDetails = ({ query, orderData, thankyouPage }) => {
   const routeChange = (route) => {
     Router.push(route);
-  }
+  };
   return (
     <div>
       <Grid>
@@ -50,22 +50,19 @@ const OrderDetails = ({ query, orderData, thankyouPage }) => {
         <Row className={styles['m-0']}>
           <Col md={12}>
             <div className={`${styles['box']} ${styles['p-20']} ${styles['mt-20']}`}>
-              {
-                orderData.orderItems.map((item) =>
-                  <OrderItem
-                    key={item.id}
-                    payments={orderData.payments}
-                    orderItem={item}
-                    orderId={orderData.orderId}
-                    showWidget={true}
-                    thankyouPage={thankyouPage}
-                    variantId={item.variantId}
-                    isCancelable={item.isCancelable}
-                    isReturnable={item.isReturnable}
-                    isExchangable={item.isExchangable}
-                  />
-                )
-              }
+              {orderData.orderItems.map(item => (
+                <OrderItem
+                  key={item.id}
+                  payments={orderData.payments}
+                  orderItem={item}
+                  orderId={orderData.orderId}
+                  thankyouPage={thankyouPage}
+                  variantId={item.variantId}
+                  isCancelable={item.isCancelable}
+                  isReturnable={item.isReturnable}
+                  isExchangable={item.isExchangable}
+                />
+              ))}
             </div>
           </Col>
         </Row>
