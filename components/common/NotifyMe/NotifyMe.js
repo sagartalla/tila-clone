@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-
+import { languageDefinations } from '../../../utils/lang/';
 import { actionCreators } from '../../../store/cam/wishlist';
 import { mergeCss } from '../../../utils/cssUtil';
 
 const styles = mergeCss('components/common/NotifyMe/notifyMe');
-
+const { CONTACT_INFO_MODAL, PERSONAL_INFO_MODAL } = languageDefinations();
 class NotifyMe extends React.Component {
   constructor() {
     super();
@@ -70,15 +70,15 @@ class NotifyMe extends React.Component {
         <div className={`${styles['flex-center']} ${styles['justify-around']}`}>
           <div className={`${styles['mb-0']} ${styles['fp-input']} ${styles['pb-10']}`}>
             <input onChange={this.handleChange} name="email" type="text" value={email} required disabled={mobile} />
-            <label>Email</label>
+            <label>{CONTACT_INFO_MODAL.EMAIL}</label>
             {emailErr &&
               <span className={styles['error-msg']}>{emailErr}</span>
             }
           </div>
-          <div>OR</div>
+          <div>{PERSONAL_INFO_MODAL.OR}</div>
           <div className={`${styles['mb-0']} ${styles['fp-input']} ${styles['pb-10']}`}>
             <input onChange={this.handleChange} name="mobile" type="number" value={mobile} required disabled={email} />
-            <label>Mobile</label>
+            <label>{PERSONAL_INFO_MODAL.MOBILE}</label>
             {mobileErr &&
               <span className={styles['error-msg']}>{mobileErr}</span>
             }
@@ -89,7 +89,7 @@ class NotifyMe extends React.Component {
             className={`${styles['fp-btn']} ${styles['fp-btn-primary']}`}
             onClick={this.notify}
           >
-            Notify
+            {PERSONAL_INFO_MODAL.NOTIFY}
           </Button>
         </div>
       </React.Fragment>

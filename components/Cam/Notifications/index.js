@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-// import { languageDefinations } from '../../../utils/lang/';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators, selectors } from '../../../store/cam/notifications';
-
+import { languageDefinations } from '../../../utils/lang/';
 import { mergeCss } from '../../../utils/cssUtil';
+
+const { MESSAGES } = languageDefinations();
+
 const styles = mergeCss('components/Cam/Notifications/notifications');
 
 class Notifications extends Component {
@@ -25,9 +27,9 @@ class Notifications extends Component {
 
     return (
       <div className={`${styles['notifications-container']} ${styles['ml-5']}`}>
-        <h4 className={`${styles['mt-0']} ${styles['fontW600']} ${styles['mb-30']}`}>All Notifications</h4>
+        <h4 className={`${styles['mt-0']} ${styles['fontW600']} ${styles['mb-30']}`}>{MESSAGES.ALL_NOTIFICATIONS}</h4>
         <div className={`${styles['notification-inn']}`}>
-          <span className={`${styles['white-color']} ${styles['notification-data']} ${styles['mb-15']}`}>Today</span>
+          <span className={`${styles['white-color']} ${styles['notification-data']} ${styles['mb-15']}`}>{MESSAGES.TODAy}</span>
 
           {
             results.length > 0 && results.map((res, index) => {
@@ -39,12 +41,12 @@ class Notifications extends Component {
                     <Col md={11}>{res.content}</Col>
                   </Row>
                 </div>
-              )
+              );
             })
           }
         </div>
       </div>
-    )
+    );
   }
 }
 

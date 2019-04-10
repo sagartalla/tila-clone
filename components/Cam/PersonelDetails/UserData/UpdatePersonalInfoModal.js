@@ -5,15 +5,17 @@ import { Row, Col } from 'react-bootstrap';
 import DatePicker from 'rc-calendar/lib/Picker';
 import moment from 'moment';
 import { toast } from 'react-toastify';
-
+import { languageDefinations } from '../../../../utils/lang';
 import Btn from '../../../common/Button';
 import Input from '../../../common/Input';
-
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators, selectors } from '../../../../store/cam/personalDetails';
 import SVGComponent from '../../../common/SVGComponet';
 import { mergeCss } from '../../../../utils/cssUtil';
+
+const { PERSONAL_INFO_MODAL } = languageDefinations();
+
 const styles = mergeCss('components/Cam/PersonelDetails/profile');
 
 class UpdatePersonalInfoModal extends React.Component {
@@ -108,20 +110,20 @@ class UpdatePersonalInfoModal extends React.Component {
               <div className={`${styles['personal-info-img']} ${styles['flex']} ${styles['justify-center']}`}>
                 <SVGComponent clsName={`${styles['personal-info-img-icon']}`} src="icons/common-icon/personal-info-mobile" />
               </div>
-              <p className={`${styles['thick-gry-clr']} ${styles['fs-12']} ${styles['t-c']}`}>Enter your Name, DOB and Gender for a more personalised Tila Experience</p>
+              <p className={`${styles['thick-gry-clr']} ${styles['fs-12']} ${styles['t-c']}`}>{PERSONAL_INFO_MODAL.ENTER_YOUR_NAME}{PERSONAL_INFO_MODAL.EXPERIANCE}</p>
             </div>
             <div className={`${styles['m-5']} ${styles['mt-20']} ${styles['gender-select-main']} ${styles['flex-center']} ${styles['justify-center']}`}>
               <div className={styles['t-c']}>
                 <a onClick={this.handleGenderChange('M')} className={user_gender == 'M' ? `${styles['gender-select']}` : `${styles['gender-unselect']}`}>
                   <SVGComponent clsName={`${styles['gender-select-inn']} ${user_gender == 'M' ? 'select-icon' : 'not-select-icon'}`} src="icons/common-icon/male" />
-                  <span className={`${styles['fs-12']} ${styles['label-gry-clr']}`}>Male</span>
+                  <span className={`${styles['fs-12']} ${styles['label-gry-clr']}`}>{PERSONAL_INFO_MODAL.MALE}</span>
                 </a>
               </div>
-              <div className={`${styles['fs-12']} ${styles['ml-10']} ${styles['mr-10']} ${styles['gender-or']} ${styles['flex-center']} ${styles['justify-center']}`}>or</div>
+              <div className={`${styles['fs-12']} ${styles['ml-10']} ${styles['mr-10']} ${styles['gender-or']} ${styles['flex-center']} ${styles['justify-center']}`}>{PERSONAL_INFO_MODAL.OR}</div>
               <div className={styles['t-c']} onClick={this.handleGenderChange('F')}>
                 <a onClick={this.handleGenderChange('M')} className={user_gender == 'F' ? `${styles['gender-select']}` : `${styles['gender-unselect']}`}>
                   <SVGComponent clsName={`${styles['gender-select-inn']} ${user_gender == 'F' ? 'select-icon' : 'not-select-icon'}`} src="icons/common-icon/female" />
-                  <span className={`${styles['fs-12']} ${styles['label-gry-clr']}`}>Female</span>
+                  <span className={`${styles['fs-12']} ${styles['label-gry-clr']}`}>{PERSONAL_INFO_MODAL.FEMALE}</span>
                 </a>
               </div>
             </div>
@@ -129,7 +131,7 @@ class UpdatePersonalInfoModal extends React.Component {
               <div className={`${styles['m-5']} ${styles['mt-20']} ${styles['update-profile-input']} ${styles['flex']}`}>
                 <Col xs={12} md={12}>
                   <div className={styles['fp-input']}>
-                    <label className={`${styles['mb-0']} ${styles['fs-12']} ${styles['label-gry-clr']}`}>Username</label>
+                    <label className={`${styles['mb-0']} ${styles['fs-12']} ${styles['label-gry-clr']}`}>{PERSONAL_INFO_MODAL.USERNAME}</label>
                     <input className={styles['user-name']} type="text" value={user_name} onChange={this.handleNameChange} maxLength={40}/>
                     {/* <span className={styles['highlight']}></span>
                   <span className={styles['bar']}></span>
@@ -142,7 +144,7 @@ class UpdatePersonalInfoModal extends React.Component {
               <div className={`${styles['m-5']} ${styles['mt-20']} ${styles['flex']}`}>
                 <Col xs={12} md={12}>
                   <div className={`${styles['fp-input']} ${styles['date-dob-caldr']}`}>
-                    <div className={`${styles['mb-0']} ${styles['fs-12']} ${styles['label-gry-clr']}`}>Date Of Birth</div>
+                    <div className={`${styles['mb-0']} ${styles['fs-12']} ${styles['label-gry-clr']}`}>{PERSONAL_INFO_MODAL.DOB}</div>
                     <DatePicker
                       animation="slide-up"
                       value={user_dob}
@@ -162,7 +164,7 @@ class UpdatePersonalInfoModal extends React.Component {
               <div>
                 <Col xs={12} md={12} className={`${styles['pt-30']}`}>
                   {/* <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles['update-profile-btn']} ${styles['text-uppercase']}`} onClick={this.handleSubmit} >Update Personal Details</button> */}
-                  <Btn className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles['update-profile-btn']} `} btnText="Update Personal Information" onClick={this.handleSubmit} />
+                  <Btn className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles['update-profile-btn']} `} btnText={PERSONAL_INFO_MODAL.UPDATE_PERSONAL_INFORMATION} onClick={this.handleSubmit} />
                 </Col>
               </div>
             </div>

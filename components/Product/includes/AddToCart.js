@@ -76,7 +76,7 @@ class AddToCart extends Component {
           disabled={isLoading || isAddedToCart}
           onClick={isAddedToCart === false && this.addToCart}
           btnLoading={btnLoading}
-          btnText={isAddedToCart ? '' : 'Add To Cart'}
+          btnText={isAddedToCart ? '' : PDP_PAGE.ADD_TO_CART}
           showImage={isAddedToCart && 'icons/cart/added-cart-icon'}
         />
         <Button

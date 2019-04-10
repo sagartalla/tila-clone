@@ -2,9 +2,10 @@ import { Grid, Row, Col } from 'react-bootstrap';
 import SVGComponent from '../common/SVGComponet';
 import { mergeCss } from '../../utils/cssUtil';
 import publicUrls from '../../constants';
-const styles = mergeCss('components/Footer/footer');
 import { languageDefinations } from '../../utils/lang';
-const {FOOTER_PAGE} = languageDefinations();
+
+const styles = mergeCss('components/Footer/footer');
+const { FOOTER_PAGE } = languageDefinations();
 
 
 const f = [{"Women Clothing":	"https://storefront-stage.fptechscience.com/srp/Clothing-910?categoryTree=true&isListed=false"},

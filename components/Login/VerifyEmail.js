@@ -81,7 +81,7 @@ class VerifyEmail extends Component {
               val={value}
               onChange={this.enterOtp}
             />
-            {otpError ? <div className={`${styles['thick-red-clr']}`}>Please enter OTP sent to your mail id</div> : ''}
+            {otpError ? <div className={`${styles['thick-red-clr']}`}>{EMAIL_VERIFICATION.PLEASE_ENTER_OTP_SENT}</div> : ''}
             <div className={`${styles.flex}`}><div className={`${styles['otp-expire']}`}>{EMAIL_VERIFICATION.OTP_EXPIRE_IN}&nbsp;</div><div className={`${styles['black-color']}`}>{EMAIL_VERIFICATION.TWENTY_FOUR_HOURS}</div>
               <span
                 className={`${styles['lgt-blue']} ${styles.pointer}`}

@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { selectors, actionCreators } from '../../../../store/order'
+import { selectors, actionCreators } from '../../../../store/order';
+import { languageDefinations } from '../../../../utils/lang';
 import { mergeCss } from '../../../../utils/cssUtil';
+
 const styles = mergeCss('components/Order/includes/OrderIssueWidget/orderIssue');
+const { ORDER_PAGE } = languageDefinations();
 
 const RenderRadioInput = ({ paymentType, value, onCallBack }) => {
   return (
@@ -77,12 +80,12 @@ class ChoosePaymentMode extends Component {
     return data;
   }
   render() {
-    const { orderDetails,orderIssue } = this.props;
+    const { orderDetails, orderIssue } = this.props;
     console.log('orderdata',orderIssue);
-    const { paymentType } = this.state
+    const { paymentType } = this.state;
     return (
       <div>
-        <h4 className={`${styles['fs-20']} ${styles['fontW400']} ${styles['pb-15']}`}>Choose your desired  Mode of Payment</h4>
+        <h4 className={`${styles['fs-20']} ${styles['fontW400']} ${styles['pb-15']}`}>{ORDER_PAGE.CHOOSE_YOUR_MODE_OF_PAYMENT}</h4>
         <div>
           {this.getPaymentModes(orderDetails.payments)}
         </div>
