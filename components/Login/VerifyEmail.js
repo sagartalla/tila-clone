@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { mergeCss } from '../../utils/cssUtil';
 import { actionCreators } from '../../store/auth';
 import Input from '../common/Input';
-// import Button from '../common/CommonButton';
+import Button from '../common/CommonButton';
 import SVGComponent from '../common/SVGComponet';
 import { languageDefinations } from '../../utils/lang';
 
@@ -56,7 +56,7 @@ class VerifyEmail extends Component {
     sendOtpToEmailId();
   }
   render() {
-    const { email, onBackdropClick } = this.props;
+    const { email, onBackdropClick, loadingStatus } = this.props;
     const { value, otpError } = this.state;
     return (
       <div>
@@ -81,7 +81,7 @@ class VerifyEmail extends Component {
               val={value}
               onChange={this.enterOtp}
             />
-            {otpError ? <div className={`${styles['thick-red-clr']}`}>Please enter OTP sent to your mail id</div> : ''}
+            {otpError ? <div className={`${styles['thick-red-clr']}`}>{EMAIL_VERIFICATION.PLEASE_ENTER_OTP_SENT}</div> : ''}
             <div className={`${styles.flex}`}><div className={`${styles['otp-expire']}`}>{EMAIL_VERIFICATION.OTP_EXPIRE_IN}&nbsp;</div><div className={`${styles['black-color']}`}>{EMAIL_VERIFICATION.TWENTY_FOUR_HOURS}</div>
               <span
                 className={`${styles['lgt-blue']} ${styles.pointer}`}
@@ -90,7 +90,13 @@ class VerifyEmail extends Component {
               </span>
             </div>
           </div>
-          <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles['text-uppercase']} ${styles['button-radius']}`} onClick={this.verifyEmail}>Verify</button>
+          <Button
+            className={`${styles['flex-center']} ${styles['fs-14']} ${styles['text-uppercase']} ${styles['button-radius']}`}
+            onClick={this.verifyEmail}
+            btnText={EMAIL_VERIFICATION.VERIFY}
+            hoverClassName="hoverBlueBackground"
+            btnLoading={loadingStatus}
+          />
         </div>
       </div>
     );
@@ -109,12 +115,14 @@ VerifyEmail.propTypes = {
   sendOtpToEmailId: PropTypes.func,
   email: PropTypes.string,
   onBackdropClick: PropTypes.func,
+  loadingStatus: PropTypes.bool,
 };
 VerifyEmail.defaultProps = {
   verifyEmailId: f => f,
   sendOtpToEmailId: f => f,
   email: '',
   onBackdropClick: f => f,
+  loadingStatus: false,
 };
 
 export default connect(null, mapDispatchToProps)(VerifyEmail);

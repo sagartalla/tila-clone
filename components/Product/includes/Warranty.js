@@ -5,7 +5,7 @@ import { mergeCss } from '../../../utils/cssUtil';
 import Slider from '../../common/slider';
 
 const styles = mergeCss('components/Product/product');
-const { PDP_PAGE } = languageDefinations();
+const { PDP_PAGE, CART_PAGE } = languageDefinations();
 
 
 class Warranty extends React.Component {
@@ -34,23 +34,23 @@ class Warranty extends React.Component {
     return (
     <div className={`${styles['flex-center']} ${styles['warranty-part']}  ${styles['relative']} ${styles['pointer']}`}>
       <span className={`${styles['flex-center']}`}><span className={styles['pl-10']}>{warranty_display}</span></span>
-      <a className={`${styles['fontW600']} ${styles['ml-20']} ${styles['view-more-label']} ${styles['fs-12']}`} onClick={this.openSlider}>View More</a>
+      <a className={`${styles['fontW600']} ${styles['ml-20']} ${styles['view-more-label']} ${styles['fs-12']}`} onClick={this.openSlider}>{CART_PAGE.VIEW_MORE}</a>
       {this.state.slider && <Slider label="Warranty" isOpen={this.state.slider} closeSlider={this.closeSlider}>
         <div className={`${styles['warranty-modal']}`}>
         <hr/>
-            <div className={`${styles['fs-20']} ${styles['ml-20']}`}>Warranty Summary
+            <div className={`${styles['fs-20']} ${styles['ml-20']}`}>{PDP_PAGE.WARRANTY_SUMMARY}
               <ul>
                 <li>{warranty.summary}</li>
               </ul>
             </div>
             <hr/>
-            <div className={`${styles['fs-20']} ${styles['ml-20']}`}>Covered in Warranty
+            <div className={`${styles['fs-20']} ${styles['ml-20']}`}>{PDP_PAGE.COVERED_IN_WARRANTY}
               <ul>
                 <li>{warranty.covered}</li>
               </ul>
             </div>
             <hr/>
-            <div className={`${styles['fs-20']} ${styles['ml-20']}`}>Not Covered in Warranty
+            <div className={`${styles['fs-20']} ${styles['ml-20']}`}>{PDP_PAGE.NOT_COVERED_IN_WARRANTY}
               <ul>
                 <li>{warranty.not_covered}</li>
               </ul>

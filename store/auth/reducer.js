@@ -39,7 +39,7 @@ const authReducer = typeToReducer({
         ui: {
           ...state.ui,
           loginLoading: false,
-          showEmailVerificationScreen: true,
+          showLogin: false,
         },
       });
     },
@@ -59,20 +59,25 @@ const authReducer = typeToReducer({
     },
   },
 
-  [actions.RESET_LOGIN_ERROR]: (state) => ({
+  [actions.RESET_LOGIN_ERROR]: state => ({
     ...state,
     error: '',
   }),
   [actions.USER_REGISTER]: {
     PENDING: state => Object.assign({}, state, {
       error: '',
-    }, { ui: {
-      ...state.ui,
-      loading: true } }),
+    },
+    {
+      ui: {
+        ...state.ui,
+        loading: true,
+      },
+    },
+    ),
     FULFILLED: (state, action) => Object.assign({}, state, {
       data: {
         ...state.data,
-        registrationDetails: action.payload.data
+        registrationDetails: action.payload.data,
       },
       ui: {
         ...state.ui,
@@ -87,12 +92,15 @@ const authReducer = typeToReducer({
       },
     }),
   },
-  [actions.USER_LOGOUT]: (state, action) => ({
+  [actions.USER_LOGOUT]: state => ({
     ...state,
     data: {
       ...state.data,
       isLoggedIn: false,
-    }
+    },
+    ui: {
+      showLogin: false,
+    },
   }),
   [actions.USER_LOGIN_INFO]: (state, action) => ({
     ...state,
@@ -105,7 +113,6 @@ const authReducer = typeToReducer({
     ui: {
       ...state.ui,
       showLogin: true,
-      showEmailVerificationScreen: false,
     },
   }),
   [actions.SET_COUNTRY]: (state, action) => ({
@@ -281,7 +288,7 @@ const authReducer = typeToReducer({
         ...state.data,
         ...action.payload,
       },
-      ui: { ...state.ui, loading: false, showEmailVerificationScreen: false },
+      ui: { ...state.ui, loading: false, showEmailVerificationScreen: false, showLogin: false },
     }),
     REJECTED: state =>
       Object.assign({}, state, { ui: { ...state.ui, loading: false, showEmailVerificationScreen: true } }),
@@ -300,7 +307,7 @@ const authReducer = typeToReducer({
   },
 
   [actions.GET_USER_INFO]: {
-    PENDING: state => Object.assign({}, state, { ui: { ...state.ui, loading: true, showEmailVerificationScreen: true } }),
+    PENDING: state => Object.assign({}, state, { ui: { ...state.ui, loading: true, showEmailVerificationScreen: false } }),
     FULFILLED: (state, action) => Object.assign({}, state, {
       data: {
         ...state.data,
@@ -313,7 +320,7 @@ const authReducer = typeToReducer({
       },
     }),
     REJECTED: state =>
-      Object.assign({}, state, { ui: { ...state.ui, loading: false, showEmailVerificationScreen: true } }),
+      Object.assign({}, state, { ui: { ...state.ui, loading: false, showEmailVerificationScreen: false } }),
   },
 }, initialState);
 

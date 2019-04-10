@@ -81,7 +81,7 @@ class SavedCards extends Component {
     return (
       <div className={`${styles['saved-cards']}`}>
         <Voucher voucherData={voucherData} />
-        <h4 className={`${styles['lgt-blue']} ${styles['fontW300']} ${styles['fs-20']} ${styles['pt-25']}`}>Your saved Credit & Debit cards</h4>
+        <h4 className={`${styles['lgt-blue']} ${styles['fontW300']} ${styles['fs-20']} ${styles['pt-25']}`}>{PAYMENT_PAGE.YOUR_SAVED_CREDIT_AND_DEBIT_CARDS}</h4>
         <ul className={`${styles['saved-cards-part']} ${styles['pl-0']}`}>
           {
             data.cards_list.map((card, index) => {
@@ -115,7 +115,7 @@ class SavedCards extends Component {
         <Button
           className={`${styles['fs-16']} ${styles['text-uppercase']} ${styles['pay-btn']} ${styles['border-radius']} ${styles.width33} ${styles['ht-40']} ${styles['new-card-btn']}`}
           onClick={this.proceedToPayment}
-          btnText={'Pay' + ' ' + data.amount_to_pay + ' ' + data.currency_code}
+          btnText={PAYMENT_PAGE.PAY + ' ' + data.amount_to_pay + ' ' + data.currency_code}
           hoverClassName="hoverBlueBackground"
           btnLoading={showLoading}
         />

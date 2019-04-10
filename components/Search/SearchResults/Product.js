@@ -296,8 +296,8 @@ class Product extends Component {
                   <span className={`${styles['fontW600']} ${styles['black-color']}`}>{brand}</span> <span className={`${styles['thick-gry-clr']} ${styles['fontW300']}`}>{displayName.replace(brand, '').trim()}</span>
                 </h5>
                 <span>
-                  <span className={`${styles['pr-5']} ${styles['fs-12']} ${styles['fontW600']} ${styles['black-color']}`}>{currency}</span>
-                  {variants.length > 0 && variants[selectedIndex].sellingPrice && getPriceAndOffer()}
+                  <span className={`${styles['pr-5']}`}>{variants.length > 0 && variants[selectedIndex].sellingPrice && getPriceAndOffer()}</span>
+                  <span className={`${styles['fs-12']} ${styles['fontW600']} ${styles['black-color']}`}>{currency}</span>
                 </span>
               </div>
             </div>
@@ -354,11 +354,10 @@ class Product extends Component {
                   </h5> */}
                 {/* <span className={`${styles['fs-12']} ${styles['label-gry-clr']}`}>Denim shirt with baseball shirt stiff collar and formal tie</span> */}
                 {/* </div> */}
-                <span className={`${styles['pr-5']} ${styles['fs-12']}`}>{currency}</span>
-                {
-                  variants.length > 0 && variants[selectedIndex].sellingPrice &&
-                  getPriceAndOffer()
-                }
+                <span className={`${styles['pr-5']}`}>{variants.length > 0 && variants[selectedIndex].sellingPrice &&
+                  getPriceAndOffer()}
+                </span>
+                <span className={`${styles['fs-12']}`}>{currency}</span>
                 <div className={`${styles['flex']} ${styles['pt-5']}`}>
                   <span className={styles['flex']}>
                     <SVGCompoent clsName={`${styles['star-raing']}`} src="icons/common-icon/star-full-yellow" />

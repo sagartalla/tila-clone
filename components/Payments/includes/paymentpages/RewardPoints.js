@@ -17,7 +17,7 @@ const RewardPonits = props => (
       </Row>
       <Row>
         <Col md={12} sm={12} xs={12}>
-          <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']}`} onClick={props.makePayment}>Pay {props.orderRes.data.amount} {props.orderRes.data.currency}</button>
+          <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']}`} onClick={props.makePayment}>{PAYMENT_PAGE.PAY} {props.orderRes.data.amount} {props.orderRes.data.currency}</button>
         </Col>
       </Row>
     </Grid>

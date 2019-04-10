@@ -66,12 +66,12 @@ class Login extends Component {
       });
       return;
     }
-    // if (userCreds) {
-    //   this.setState({
-    //     email: userCreds.username,
-    //     password: userCreds.password,
-    //   });
-    // }
+    if (userCreds) {
+      this.setState({
+        email: userCreds.username,
+        password: userCreds.password,
+      });
+    }
     this.setState({
       showVerifyScreen: showEmailScreen,
     });
@@ -186,8 +186,8 @@ class Login extends Component {
   }
 
   render() {
-    const { userCreds } = this.props;
-    const { mode, error, validation, clicked, showVerifyScreen, email } = this.state;
+    const { userCreds, loadingStatus } = this.props;
+    const { mode, error, validation, clicked, showVerifyScreen } = this.state;
     return (
       <Row className={`${styles['bg-white']} ${styles['m-0']}`}>
         { !this.state.forgotPassword ?
@@ -207,7 +207,7 @@ class Login extends Component {
                   {
                     mode === 'register'
                       ?
-                      'Register with tila.com'
+                      LOGIN_PAGE.REGISTER_WITH_TILA
                       :
                       LOGIN_PAGE.TILA_COM
                   }
@@ -315,7 +315,7 @@ class Login extends Component {
                       <div className={`${styles['checkbox-material']} ${styles.flex} ${styles['pb-15']}`}>
                           <input id="deals-offers-reg" type="checkbox" onChange={this.acceptsOffers} checked={clicked} />
                           <label htmlFor="deals-offers-reg">
-                             I would like to receive deals and offers.
+                             {LOGIN_PAGE.I_WOULD_LIKE_TO_RECEIVE_OFFERS}
                           </label>
                       </div>
 
@@ -342,7 +342,7 @@ class Login extends Component {
             <div className={`${styles['login-social-icon']} ${styles['pl-15']}`}>
               <a className={`${styles['flex']} ${styles['pt-10']}`}>
                 <span onClick={this.handleClick}>
-                  Forgot Password?
+                  {LOGIN_PAGE.FORGOT_PASSWORD}
                 </span>
               </a>
               <span className={`${styles['thick-gry-clr']} ${styles['pt-5']} ${styles['pb-5']} ${styles['flex']}`}>{LOGIN_PAGE.SIGN_UP_WITH}</span>
@@ -382,8 +382,9 @@ class Login extends Component {
         </Col> :
          <Col md={6} xs={6} className={`${styles.flex}`}>
         <VerifyEmail
-         email={email}
+         email={userCreds && userCreds.username}
          onBackdropClick={this.onBackdropClick}
+         loadingStatus={loadingStatus}
         />
         </Col>
         }
@@ -404,15 +405,13 @@ const mapStateToProps = (store) => ({
   userCreds: selectors.getUserCreds(store),
   showEmailScreen: selectors.showEmailVerificationScreen(store),
   loading: selectors.getLoginProgressStatus(store),
+  loadingStatus: selectors.getLoadingStatus(store),
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(
   {
     userLogin: actionCreators.userLogin,
-    userRegister: actionCreators.userRegister,
     getLoginInfo: actionCreators.getLoginInfo,
-    resetLoginError: actionCreators.resetLoginError,
-    resetShowLogin: actionCreators.resetShowLogin,
     resetLoginError: actionCreators.resetLoginError,
   },
   dispatch,

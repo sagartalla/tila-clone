@@ -183,7 +183,7 @@ class PaymentMode extends Component {
           <Col md={12} sm={12} xs={12}>
             <h4 className={styles['m-0']}>{PAYMENT_PAGE.MAKE_PAYMENT}</h4>
             <p className={styles['mb-0']}>
-              <small>Net banking, credit card, vouchers and etc....</small>
+              <small>{PAYMENT_PAGE.PAYMENT_MODE}</small>
             </p>
           </Col>
         </Row>

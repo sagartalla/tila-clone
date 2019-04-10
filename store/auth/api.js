@@ -4,12 +4,14 @@ import constants from '../helper/constants';
 import Cookies from 'universal-cookie';
 import moment from 'moment';
 import { toast } from 'react-toastify';
+import { languageDefinations } from '../../utils/lang/';
 // import { actionCreators } from './actions';
+const { API_TEXT } = languageDefinations();
 
 const cookies = new Cookies();
 
-const getUserInfo = () => {
-  return axios.post(`${constants.CMS_API_URL}/api/v1/user/info`);
+const getUserInfo = ({initiateEmailVerification}) => {
+  return axios.post(`${constants.CMS_API_URL}/api/v1/user/info?initiateEmailVerification=${initiateEmailVerification}`);
 }
 
 const userLogin = (params) => {
@@ -53,8 +55,6 @@ const userLogin = (params) => {
   //   throw err;
   // });
 };
-
-const userRegister = (params) => axios.post(`${constants.CMS_API_URL}/api/v1/user/register`, params);
 
 const userLogout = () => {
   axios.post('/api/logout');
@@ -131,14 +131,14 @@ const savePtaToken = (ptaToken) => {
 }
 const verifyEmail = (body) => {
   return axios.put(`${constants.CMS_API_URL}/api/v1/verification/email/otp`, body).then(({ data }) => {
-    toast.success('Your email is verified');
+    toast.success(API_TEXT.YOUR_EMAIL_IS_VERIFIED);
     return { data };
   });
 };
 
 const sendOtpToEmailId = (showToast) => {
   return axios.post(`${constants.CMS_API_URL}/api/v1/verification/email`).then(({ data }) => {
-    if (showToast ? toast.success('OTP sent to your mail id') : '');
+    if (showToast ? toast.success(API_TEXT.OTP_SENT_TO_YOUR_MAIL_ID) : '');
     return { data };
   });
 };
@@ -147,8 +147,8 @@ const setVerfied = (isVerified) => {
   return axios.post('/api/setCookie', {
     data: {
       isVerified,
-    }
+    },
   }).then(() => isVerified);
 }
 
-export default { userLogin, userRegister, userLogout, getLoginInfo, setCountry, setSessionID, deriveCity, autoCompleteCity, setCity, removeCity, setLanguage, savePtaToken, verifyEmail, sendOtpToEmailId, getUserInfo, setVerfied };
+export default { userLogin, userLogout, getLoginInfo, setCountry, setSessionID, deriveCity, autoCompleteCity, setCity, removeCity, setLanguage, savePtaToken, verifyEmail, sendOtpToEmailId, getUserInfo, setVerfied };
