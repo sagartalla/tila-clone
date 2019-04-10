@@ -24,7 +24,7 @@ const VaultHeader = (props) => {
               <small className={`${styles['label-gry-clr']}`}>{VAULT_PAGE.SUB_TAG}</small>
             </div>
             <div className={`${styles['tila-credit-wrap']} ${styles['flex']} ${styles['align-center']}`}>
-              <div className={styles['label']}>Your Tila credit Balance is &nbsp; &nbsp;</div>
+              <div className={styles['label']}>{VAULT_PAGE.YOUR_TILA_CREDIT_BALANCE_IS} &nbsp; &nbsp;</div>
               <div className={styles['amount-wrap']}>
                 <div className={`${styles['currency']} ${styles['fs-12']}`}>{props.tilaCredit.currency_code} &nbsp;</div>
                 <div className={`${styles['amount']} ${styles['fs-30']}`}>{props.tilaCredit.balance_amount}</div>

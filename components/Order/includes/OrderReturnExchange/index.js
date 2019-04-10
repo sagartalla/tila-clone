@@ -14,7 +14,7 @@ import { mergeCss } from '../../../../utils/cssUtil';
 const styles = mergeCss('components/Order/order');
 import { languageDefinations } from '../../../../utils/lang'
 import Cookie from 'universal-cookie';
-const { ORDER_PAGE } = languageDefinations()
+const { ORDER_PAGE, CART_PAGE } = languageDefinations()
 const cookies = new Cookie();
 
 const language = cookies.get('language') || 'en';
@@ -74,7 +74,7 @@ class OrderReturnExchange extends Component {
                         </Col>
                         <Col md={10}>
                           <h4 className={`${styles['fs-16']} ${styles['fontW600']}`}>{name}</h4>
-                          <span className={styles['fs-14']}>Quantity:</span>
+                          <span className={styles['fs-14']}>{CART_PAGE.QUANTITY}:</span>
                         </Col>
                       </div>
                     </Col>

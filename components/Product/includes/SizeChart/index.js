@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { mergeCss } from '../../../../utils/cssUtil';
+import { languageDefinations } from '../../../../utils/lang/';
 import Slider from '../../../common/slider';
 
 const styles = mergeCss('components/Product/product');
+const { FOOTER_PAGE } = languageDefinations();
 
 class SizeChart extends Component {
   constructor(props) {
@@ -41,7 +43,7 @@ class SizeChart extends Component {
         <div className={`${styles['flex-center']}`}>
           {productInfo.sizeChart.showSizeChart &&
           <div className={`${styles['pt-10']} ${styles['pb-10']} ${styles['pr-15']}`}>
-            <span>Try our&nbsp;</span><span className={`${styles['lgt-blue']} ${styles.pointer}`} onClick={this.openSlider}>Size Chart</span>
+            <span>Try our&nbsp;</span><span className={`${styles['lgt-blue']} ${styles.pointer}`} onClick={this.openSlider}>{FOOTER_PAGE.SIZE_CHART}</span>
           </div>
         }
         </div>
@@ -51,7 +53,7 @@ class SizeChart extends Component {
             isOpen={showSlider}
             label={
               <div className={`${styles['black-color']}`}>
-                {`${productInfo.sizeChart.sizeChartImgName}` + ' Size Guide'}
+                {`${productInfo.sizeChart.sizeChartImgName}` + ' ' + FOOTER_PAGE.SIZE_GUIDE}
               </div>}
           >
             <div className={`${styles['size-chart-image']}`}>

@@ -4,7 +4,7 @@ import NoSSR from 'react-no-ssr';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Cookie from 'universal-cookie';
-
+import { languageDefinations } from '../../utils/lang';
 import { actionCreators,selectors } from '../../store/search';
 import HeaderBar from '../HeaderBar/index';
 import FooterBar from '../Footer/index';
@@ -16,6 +16,7 @@ import { Router } from '../../routes';
 import { mergeCss } from '../../utils/cssUtil';
 
 const styles = mergeCss('components/Search/search');
+const { SEARCH_PAGE } = languageDefinations();
 
 const cookies = new Cookie();
 
@@ -55,7 +56,7 @@ class Search extends Component {
         <Grid className={styles['pt-20']}>
           {spellCheckResp &&
             <div className={`${styles['mb-15']} ${styles['spell-strip']}`}>
-              Showing results for&nbsp;
+              {SEARCH_PAGE.SEARCH_RESULTS_FOR}&nbsp;
               <a
                 href="javascript: void(0)"
                 onClick={this.querySearch}
@@ -63,7 +64,7 @@ class Search extends Component {
               >
                 <b>{`${spellCheckResp[query.search]}. `}</b>
               </a>
-              Search instead for&nbsp;
+              {SEARCH_PAGE.SEARCH_INSTEAD_FOR}&nbsp;
               <a
                 href="javascript: void(0)"
                 onClick={this.querySearch}

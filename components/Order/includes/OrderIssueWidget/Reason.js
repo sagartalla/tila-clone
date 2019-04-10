@@ -179,7 +179,7 @@ class Reason extends Component {
     const { selectedMode, displaySizeError } = this.state;
     return (
       <div className={`${styles['reason-item-main']} ${styles['width100']}`}>
-        <h4 className={`${styles['fs-20']} ${styles['fontW300']} ${styles['text-capitalize']} ${styles['ml-20']} ${styles['mr-20']}`}>Why do you want to {issueType} this Item?</h4>
+        <h4 className={`${styles['fs-20']} ${styles['fontW300']} ${styles['text-capitalize']} ${styles['ml-20']} ${styles['mr-20']}`}>{ORDER_PAGE.WHY_DO_YOU_WANT_TO} {issueType} {ORDER_PAGE.THIS_ITEM}</h4>
         {returnExchangeType ? null : (
           <div
             className={`${styles['flx-spacebw-alignc']} ${styles['pb-20']} ${
@@ -262,7 +262,7 @@ class Reason extends Component {
               />
             ) : null}
           {displaySizeError ?
-            <p>Please Select The Size To continue</p> : null
+            <p>{ORDER_PAGE.PLEASE_SELECT_SIZE_TO_CONTINUE}</p> : null
 
           }
           {
@@ -287,7 +287,7 @@ class Reason extends Component {
                       selectedMode === 'Return'
                     }
                   />
-                  <label className={styles['pl-10']}>Return</label>
+                  <label className={styles['pl-10']}>{ORDER_PAGE.RETURN}</label>
                 </div>
                 {orderIssue.exchangeVariants &&
                   orderIssue.exchangeVariants.length > 0 ? (

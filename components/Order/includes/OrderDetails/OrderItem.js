@@ -18,7 +18,7 @@ import Warranty from '../../../../components/Product/includes/Warranty';
 import { mergeCss } from '../../../../utils/cssUtil';
 import { languageDefinations } from '../../../../utils/lang';
 
-const { ORDER_PAGE } = languageDefinations();
+const { ORDER_PAGE, CART_PAGE } = languageDefinations();
 const styles = mergeCss('components/Order/order');
 const cookies = new Cookies();
 
@@ -150,7 +150,7 @@ class OrderItem extends Component {
                               <span>{product.sizeInfo.attribute_values[0].value}</span>
                             </span>}
                             <span>
-                              <span>Quantity : </span>
+                              <span>{CART_PAGE.QUANTITY} : </span>
                               <span>{product.orderIds.length}</span>
                             </span>
                           </div>

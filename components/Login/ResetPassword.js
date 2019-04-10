@@ -3,10 +3,12 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Btn from '../common/Button';
 import { Col } from 'react-bootstrap';
+import { languageDefinations } from '../../utils/lang';
 import { mergeCss } from '../../utils/cssUtil';
 import { actionCreators } from '../../store/cam/personalDetails';
 import SVGComponent from '../common/SVGComponet';
 const styles = mergeCss('components/Login/login');
+const { LOGIN_PAGE } = languageDefinations();
 
 class ResetPassword extends Component {
   constructor(props) {
@@ -52,35 +54,35 @@ class ResetPassword extends Component {
             <div>
             {!this.state.success ?
               <div className={styles['forgot-password']}>
-                <h2><b>Reset Password</b></h2>
+                <h2><b>{LOGIN_PAGE.RESET_PASSWORD}</b></h2>
                 <h3 className={styles['bg-light-gray']}>
-                    Please set your secure password.
+                {LOGIN_PAGE.PLEASE_SET_YOUR_SECURE_PASSWORD}
                 </h3>
                 <form>
                 <div>
-                    <label>Enter your new password here</label>
+                    <label>{LOGIN_PAGE.ENTER_YOUR_NEW_PASSWORD}</label>
                     <input
                       type="password"
                       name="password"
-                      placeholder="Password"
+                      placeholder={LOGIN_PAGE.PASSWORD}
                       value={password}
                       onChange={this.onChange}
                       required
                     />
                 </div>
                 <div>
-                    <label>Confirm your new password</label>
+                    <label>{LOGIN_PAGE.CONFIRM_YOUR_NEW_PASSWORD}</label>
                     <input
                       type="password"
                       name="confirmPassword"
-                      placeholder="Confirm Password"
+                      placeholder={LOGIN_PAGE.CONFIRM_PASSWORD}
                       value={confirmPassword}
                       onChange={this.onChange}
                       required
                     />
                 </div>
                 <Col xs={12} md={12} className={`${styles['pt-30']}`}>
-                    <Btn className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles['update-profile-btn']} ${styles['text-uppercase']}`} btnText='SAVE PASSWORD' onClick={this.passwordSuccess} />
+                    <Btn className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles['update-profile-btn']} ${styles['text-uppercase']}`} btnText={LOGIN_PAGE.SAVE_PASSWORD} onClick={this.passwordSuccess} />
                 </Col>
                 </form>
               </div>
@@ -89,7 +91,7 @@ class ResetPassword extends Component {
                     <Col xs={12} md={12} className={`${styles['flex-center']} ${styles['tickmark-part']}`}>
                         <SVGComponent clsName={`${styles['tickmark-icon']}`} src="icons/common-icon/bg-tick-mark" />
                     </Col>
-                    <h2 className={styles['text-center']}><b>Password Reset Successfully</b></h2>
+                    <h2 className={styles['text-center']}><b>{LOGIN_PAGE.PASSWORD_RESET_SUCCESSFULL}</b></h2>
                 </>
             }
             </div>

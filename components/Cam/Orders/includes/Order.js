@@ -6,9 +6,10 @@ import SVGComponent from '../../../common/SVGComponet';
 import OrderItem from '../../../Order/includes/OrderDetails/OrderItem';
 import { Router } from '../../../../routes';
 import { mergeCss } from '../../../../utils/cssUtil';
+import { languageDefinations } from '../../../../utils/lang/';
 
 const styles = mergeCss('components/Cam/Orders/orders');
-
+const { ORDERS } = languageDefinations();
 const cookies = new Cookies();
 
 const language = cookies.get('language') || 'en';
@@ -31,13 +32,13 @@ const Order = ({ order }) => {
     <div className={`${styles['order-item-wrap']} ${styles['box-shadow']} ${styles['mt-20']} ${styles['mb-20']} ${styles['p-20']}`}>
       <div className={`${styles['flx-spacebw-alignc']}`}>
         <div>
-          <span>Order Id #</span>
+          <span>{ORDERS.ORDER_ID}</span>
           <div onClick={routeChange}>
             <span className={styles['link-text']}>{order.id}</span>
           </div>
         </div>
         <div>
-          <span>Shipping to</span>
+          <span>{ORDERS.SHIPPING_TO}</span>
           <div className={`${styles['flex']}`}>
             <span className={`${styles['link-text']} ${styles['text-capitalize']}`}>{order.shippingTo.name}</span>
             <OverlayTrigger placement="bottom" overlay={popover}>
@@ -49,7 +50,7 @@ const Order = ({ order }) => {
         </div>
         <div>
           <a href={`/${country}/${language}/cam/orders/${order.id}`} className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['text-uppercase']}`}>
-            Track Order
+            {ORDERS.TRACK_ORDER}
           </a>
         </div>
       </div>
