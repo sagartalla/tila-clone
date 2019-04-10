@@ -5,15 +5,15 @@ import Cookies from 'universal-cookie';
 import { actionCreators as helpActions } from '../../store/helpsupport';
 import { selectors as orderSelectors, actionCreators as orderActions} from '../../store/cam/orders';
 import { selectors as authSelectors } from '../../store/auth';
-import { Issues as issues } from './helpConstants';
+import { Issues as issues, countryLanguageHelpCode as clCode } from './helpConstants';
 import { mergeCss } from '../../utils/cssUtil';
 import constants from '../../constants';
 
 
 const cookies = new Cookies();
 
-const language = cookies.get('language') || 'en';
-const country = cookies.get('country') || 'SAU';
+const language = clCode[cookies.get('language') || 'en'];
+const country = clCode[cookies.get('country') || 'SAU'];
 const userCredentials = cookies.get('userCreds');
 
 const styles = mergeCss('components/Help/help');
@@ -31,6 +31,8 @@ class EmailModal extends Component{
       currentOrderPage: 0,
       totalOrderPages: 1,
       email: props.isLoggedIn ? userCredentials.username : '',
+      firstname: '',
+      lastname: '',
       incidentCreated: false,
       referenceNumber: '',
       incidentId: ''
@@ -55,9 +57,9 @@ class EmailModal extends Component{
       dropDownType: type === this.state.dropDownType ? '' : type
     })
   }
-  handleEmail = (e) => {
+  handleUserInfoChange = (e) => {
     this.setState({
-      email: e.target.value
+      [e.target.name]: e.target.value
     })
   }
   handleMsg = (e) => {
@@ -80,6 +82,23 @@ class EmailModal extends Component{
   getOrders = () => {
     this.state.currentOrderPage < this.state.totalOrderPages && this.props.getOrderHistory(this.state.currentOrderPage);
   }
+  openChat = () => {
+    const baseURL = `https://fptsuae.custhelp.com/app/chat/chat_landing`;
+    if(!this.state.email || !this.state.selectedIssue){
+      alert('Email and Issue is mandatory');
+      return
+    }
+    const baseCustomObjectUrl = `/Incident.CustomFields.c`
+    const firstName = this.state.firstname ? `/Contact.Name.First/${this.state.firstname}` : '';
+    const lastName = this.state.lastname ? `/Contact.Name.Last/${this.state.lastname}` : '';
+    const email = `/Contact.Email.0.Address/${this.state.email}`;
+    const order_number = this.state.selectedOrder ? `${baseCustomObjectUrl}.order_number/${this.state.selectedOrder.order_item_ids[0]}` : '';
+    const countryCode = `${baseCustomObjectUrl}.incident_source_country/${country}`;
+    const languageCode = `${baseCustomObjectUrl}.incident_source_language/${language}`;
+    const categoryCode = `/Incident.Category/${this.state.selectedIssue.category}`;
+    const chatURL = `${baseURL}${firstName}${lastName}${email}${categoryCode}${order_number}${countryCode}${languageCode}`;
+    window.open(chatURL, '_blank');
+  }
   handleOrdersScroll = (e) => {
     clearTimeout(this.scrollTimeout)
     const {scrollHeight, scrollTop, offsetHeight} = e.target;
@@ -94,13 +113,14 @@ class EmailModal extends Component{
     })
   }
   createIncident = () => {
+    if(!this.state.email || !this.state.selectedIssue){
+      alert('Email and Issue is mandatory');
+      return
+    }
     const param = {
       "emailId": this.state.email
     }
     const serverData = {
-      "primaryContact": {
-        "id": 21
-      },
       "subject": this.state.selectedIssue.q,
       "threads": {
         "entryType": {
@@ -108,13 +128,14 @@ class EmailModal extends Component{
         },
         "text": this.state.msg
       },
-      ...(this.state.selectedOrder ? {
-        "customFields": {
-          "c": {
-            "order_number": this.state.selectedOrder.order_item_ids[0]
-          }
+      "category": {"id": this.state.selectedIssue.category},
+      "customFields": {
+        "c": {
+          "incident_source_country": {"id": country},
+          "incident_source_language": {"id": language},
+          ...(this.state.selectedOrder && {"order_number": this.state.selectedOrder.order_item_ids[0]})
         }
-      }: {})
+      }
     }
     this.props.raiseTicket(param, serverData).then(res => {
       this.setState({
@@ -180,7 +201,7 @@ class EmailModal extends Component{
     )
   }
   render(){
-    const { dropDownType, orders, selectedOrder, selectedIssue, email, incidentCreated, referenceNumber } = this.state;
+    const { dropDownType, orders, selectedOrder, selectedIssue, email, incidentCreated, referenceNumber, firstname, lastname } = this.state;
     return (
       <div style={{padding: '20px', fontSize: '14px', display: 'flex', flexDirection: 'column', height: '100%'}}>
         {!incidentCreated ? 
@@ -192,8 +213,20 @@ class EmailModal extends Component{
         <div style={{padding: '40px 0px'}}>
           <div style={{padding: '10px 0px'}}>
             <div style={{ fontSize: '12px', color: '#8C8C92'}}>Enter Email ID</div>
-            <input type="text" value={email} onChange={this.handleEmail}/>
+            <input type="text" name="email" value={email} onChange={this.handleUserInfoChange}/>
           </div>
+          {this.props.type === 'chat' && 
+          <div style={{padding: '10px 0px'}}>
+            <div style={{ fontSize: '12px', color: '#8C8C92'}}>Enter Firstname</div>
+            <input type="text" name="firstname" value={firstname} onChange={this.handleUserInfoChange}/>
+          </div>
+          }
+          {this.props.type === 'chat' && 
+          <div style={{padding: '10px 0px'}}>
+            <div style={{ fontSize: '12px', color: '#8C8C92'}}>Enter Lastname</div>
+            <input type="text" name="lastname" value={lastname} onChange={this.handleUserInfoChange}/>
+          </div>
+          }
           <div style={{padding: '30px 0px'}}>
             <div style={{ fontSize: '12px', color: '#8C8C92'}}>Select an Issue</div>
             <div style={{ position: 'relative'}}>
@@ -271,6 +304,7 @@ class EmailModal extends Component{
             </div>
           </div>
           : null}
+          {this.props.type === "email" ? 
           <div style={{padding: '30px 0px'}}>
             <div style={{ fontSize: '12px', color: '#8C8C92'}}>Write a Message</div>
             <textarea 
@@ -287,9 +321,23 @@ class EmailModal extends Component{
               resize: 'vertical',
               margin: '10px 0px'
             }}/>
-          </div>
+          </div> : null}
         </div>
-        <div onClick={this.createIncident} style={{ marginTop: 'auto', marginBottom: '10px', textAlign: 'center', cursor: 'pointer', padding: '5px 25px', backgroundColor: '#44689A', color: '#ffffff', borderBottomRightRadius: '25px'}}>SEND EMAIL</div>
+        {this.props.type === "email" ? 
+          <div 
+            onClick={this.createIncident} 
+            style={{ marginTop: '30px', marginBottom: '10px', textAlign: 'center', cursor: 'pointer', padding: '10px 25px', backgroundColor: '#44689A', color: '#ffffff', borderBottomRightRadius: '25px'}}
+          >
+            SEND EMAIL
+          </div>
+        : 
+          <div
+            onClick={this.openChat}
+            style={{ marginTop: '30px', marginBottom: '10px', textAlign: 'center', cursor: 'pointer', padding: '10px 25px', backgroundColor: '#44689A', color: '#ffffff', borderBottomRightRadius: '25px'}}
+          >
+            START CHATTING
+          </div>
+        }
         </React.Fragment>
         : this.renderPostIncidentCreation()}
         

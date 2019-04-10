@@ -7,12 +7,10 @@ import Orders from './Orders';
 
 const styles = mergeCss('components/Help/help');
 
-const QUERY = 'Select id, question, solution, Categories.CategoriesList.id as CategoryID, Categories.ParentCategory.ParentCategory.id as ParentID from Answers'
-
-const getQuery = (selectedId, childIds) => {
-  let query = `${QUERY} Where Categories.id=${selectedId} LIMIT 100`;
-  childIds.length > 0 && (query = `${QUERY} Where Categories.id in (${childIds.join(',')})`);
-  return query;
+const getIds = (selectedId, childIds) => {
+  let id = [selectedId];
+  childIds.length > 0 && (id = childIds);
+  return id;
 }
 
 const sort = (a,b) => a - b;
@@ -27,7 +25,7 @@ class Answers extends Component {
       openedCategory: parentCategoryId,
       openedAnswer: answerId,
     }
-    parentCategoryId !== 'orders' && props.getAnswers(getQuery(this.state.selectedCategory, props.categoriesObj[this.state.selectedCategory] ? props.categoriesObj[this.state.selectedCategory].child : []));
+    parentCategoryId !== 'orders' && props.getAnswers(getIds(this.state.selectedCategory, props.categoriesObj[this.state.selectedCategory] ? props.categoriesObj[this.state.selectedCategory].child : []));
   }
   openCategory = (categoryId) => (e) => {
     this.setState({
@@ -112,10 +110,12 @@ class Answers extends Component {
   }
   renderRecentOrderTab = () => {
     const isSelected = this.state.selectedCategory === 'orders';
+    const { pathname } = window.location;
+    const ordersUrl = pathname.replace(this.props.query, `answers/orders`)
     return (
       <a 
         className={styles['categoryValue']} 
-        href={'orders'}
+        href={ordersUrl}
         style={{
           fontWeight: 800,
           backgroundColor: isSelected ? '#45689A' : 'transparent',
@@ -135,7 +135,7 @@ class Answers extends Component {
         <a href={helpCenterUrl} style={{margin: '1px', fontSize: '13px'}}>Back to Help Center</a>
         <div style={{ display: 'flex', padding: '10px 0px', maxHeight: '800px', height: '100%'}}>
           <div className={styles['categoryContainer']}>
-            {this.props.isLoggedIn ? this.renderRecentOrderTab() : null}
+            {this.renderRecentOrderTab()}
             {Object.keys(this.props.categoriesObj).sort(sort).map(this.renderCategories(true, null))}
           </div>
           <div className={styles['answersContainer']}>

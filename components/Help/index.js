@@ -5,14 +5,11 @@ import HeaderBar from '../HeaderBar';
 import { mergeCss } from '../../utils/cssUtil';
 import { actionCreators } from '../../store/helpsupport';
 import { selectors } from '../../store/auth';
-import ErrorsPart from '../../components/common/Error'
 import {Router} from '../../routes';
 import { ContactTabs, helpComponents } from './helpConstants';
 import EmailModal from './EmailModal';
 
 const styles = mergeCss('components/Help/help');
-
-const QUERY = 'Select id, lookupname, parent from ServiceCategories'
 
 class Help extends Component {
   constructor(props){
@@ -27,7 +24,7 @@ class Help extends Component {
       selectedOrder: '',
       selectedIssue: '',
     }
-    this.props.getCategories(QUERY);
+    this.props.getCategories();
   }
   handleContactClick = ({type, isClickable}, selectedOrder, selectedIssue) => (e) => {
     if(isClickable) {
@@ -47,8 +44,8 @@ class Help extends Component {
   }
   renderModal = (isLoggedIn) => (
     {
-      'email': <EmailModal query={this.props.query[0]} selectedOrder={this.state.selectedOrder} selectedIssue={this.state.selectedIssue} isLoggedIn={isLoggedIn} />,
-      'chat': <EmailModal query={this.props.query[0]} selectedOrder={this.state.selectedOrder} selectedIssue={this.state.selectedIssue} isLoggedIn={isLoggedIn} />
+      'email': <EmailModal type="email" query={this.props.query[0]} selectedOrder={this.state.selectedOrder} selectedIssue={this.state.selectedIssue} isLoggedIn={isLoggedIn} />,
+      'chat': <EmailModal type="chat" query={this.props.query[0]} selectedOrder={this.state.selectedOrder} selectedIssue={this.state.selectedIssue} isLoggedIn={isLoggedIn} />
     }[this.state.modalType]
   );
   renderContactCard = (selectedOrder, selectedIssue) => (type, index) => {

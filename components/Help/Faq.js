@@ -6,14 +6,12 @@ import { mergeCss } from '../../utils/cssUtil';
 import { Link } from '../../routes';
 const styles = mergeCss('components/Help/help');
 
-const QUERY = 'Select id, question, Categories.id as CategoryID, Categories.ParentCategory.ParentCategory.id as ParentID from Answers LIMIT 100'
-
 const sort = (a,b) => a - b;
 
 class Faq extends Component {
   constructor(props) {
     super(props);
-    props.getQuestions(QUERY);
+    props.getQuestions();
   }
 
   renderQuestions = (topicKey) => (questionKey, index) => {

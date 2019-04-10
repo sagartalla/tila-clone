@@ -1,4 +1,5 @@
 /*eslint-disable*/
+import ErrorsPart from '../../components/common/Error'
 import Faq from './Faq';
 import Answers from './Answers';
 import Incidents from './Incidents';
@@ -25,9 +26,15 @@ const helpComponents = (type) => {
 }
 
 const Issues = [
-  { id: 1, q: 'Issue 1', a: 'This is the solution', orderRelated: true }, 
-  { id: 2, q: 'Issue 2', a: 'This is the solution', orderRelated: false },
-  { id: 3, q: 'Issue 3', a: 'This is the solution', orderRelated: true }
+  { id: 1, q: 'Issue 1', a: 'This is the solution', orderRelated: true, category: 2 }, 
+  { id: 2, q: 'Issue 2', a: 'This is the solution', orderRelated: false, category: 5 },
+  { id: 3, q: 'Issue 3', a: 'This is the solution', orderRelated: true, category: 3 }
 ]
 
-export {ContactTabs, helpComponents, Issues}
+const countryLanguageHelpCode = {
+  "ARE": 1,
+  "SAU": 2,
+  "en": 3,
+  "ar": 4
+}
+export {ContactTabs, helpComponents, Issues, countryLanguageHelpCode}

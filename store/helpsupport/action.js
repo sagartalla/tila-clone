@@ -40,6 +40,10 @@ const actionCreators = {
     type: actions.UPDATE_TKT,
     payload: api.updateTktApi(params, data),
   }),
+  downloadFileAttachment: (ticketNumber, fileId) => ({
+    type: actions.DOWNLOAD_FILE_ATTACHMENT,
+    payload: api.downloadFileAttachmentApi(ticketNumber, fileId),
+  }),
 };
 
 export { actions, actionCreators };
