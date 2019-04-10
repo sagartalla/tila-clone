@@ -288,7 +288,7 @@ const authReducer = typeToReducer({
         ...state.data,
         ...action.payload,
       },
-      ui: { ...state.ui, loading: false, showEmailVerificationScreen: false },
+      ui: { ...state.ui, loading: false, showEmailVerificationScreen: false, showLogin: false },
     }),
     REJECTED: state =>
       Object.assign({}, state, { ui: { ...state.ui, loading: false, showEmailVerificationScreen: true } }),
