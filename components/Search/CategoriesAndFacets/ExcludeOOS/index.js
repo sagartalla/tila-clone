@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import { Panel } from 'react-bootstrap';
 import { addUrlProps, UrlQueryParamTypes, pushInUrlQuery } from 'react-url-query';
 import { Router } from '../../../../routes';
+import { languageDefinations } from '../../../../utils/lang';
 import { mergeCss } from '../../../../utils/cssUtil';
 import ToggleBtn from '../../../common/ToggleBtn';
 
 const styles = mergeCss('components/Search/search');
+const { PDP_PAGE } = languageDefinations();
 
 const urlPropsQueryConfig = {
   excludeOOS: { type: UrlQueryParamTypes.string, queryParam: 'isListed', }
@@ -30,7 +32,7 @@ class ExcludeOOS extends Component {
     return (
       <Panel>
         <div className={`${styles['category-list-title']} ${styles['black-color']} ${styles['fontW600']} ${styles['p-10-20']} ${styles['flx-spacebw-alignc']}`}>
-          <span>Hide Out of Stock</span>
+          <span>{PDP_PAGE.HIDE_OUT_OF_STOCK}</span>
           <ToggleBtn handleClick={this.handleClick} checked={this.props.excludeOOS === 'true'}/>
         </div>
       </Panel>

@@ -41,7 +41,6 @@ class Reason extends Component {
     this.props.getReasons(orderId);
     this.props.getExchangeVariants(orderId);
     this.props.getOrderDetails({ orderId:this.props.orderIssue.orderId });
-
   }
   onOptionChange = (e) => {
     this.setState({
@@ -175,12 +174,12 @@ class Reason extends Component {
 
   render() {
     const { orderIssue, loadingStatus, query } = this.props;
-    const { selectedItem: itemData, reasons, returnExchangeType } = orderIssue;
+    const { selectedItem: itemData, reasons, returnExchangeType, issueType } = orderIssue;
     const { img, name } = itemData;
     const { selectedMode, displaySizeError } = this.state;
     return (
       <div className={`${styles['reason-item-main']} ${styles['width100']}`}>
-        <h4 className={`${styles['fs-20']} ${styles['fontW300']} ${styles['text-capitalize']} ${styles['ml-20']} ${styles['mr-20']}`}>Why do you want to {returnExchangeType} this Item?</h4>
+        <h4 className={`${styles['fs-20']} ${styles['fontW300']} ${styles['text-capitalize']} ${styles['ml-20']} ${styles['mr-20']}`}>{ORDER_PAGE.WHY_DO_YOU_WANT_TO} {issueType} {ORDER_PAGE.THIS_ITEM}</h4>
         {returnExchangeType ? null : (
           <div
             className={`${styles['flx-spacebw-alignc']} ${styles['pb-20']} ${
@@ -189,16 +188,6 @@ class Reason extends Component {
               styles['reasons-item-wrap']
               }`}
           >
-            <span
-              className={`${styles['back-btn']} ${styles['flex-center']} ${
-                styles['justify-center']
-                }`}
-            >
-              <SVGComponent
-                clsName={`${styles['down-arrow-icon']}`}
-                src="icons/common-icon/down-arrow-circle"
-              />
-            </span>
             <div
               className={`${styles['img-cont']} ${styles['flex-center']} ${
                 styles['justify-center']
@@ -246,7 +235,7 @@ class Reason extends Component {
                   className={styles['select-text']}
                   onChange={this.selectSubReason}
                 >
-                  <option>
+                  <option disabled selected>
                     {loadingStatus
                       ? ORDER_PAGE.LOADING
                       : ORDER_PAGE.SELECT_SUB_REASON}
@@ -273,7 +262,7 @@ class Reason extends Component {
               />
             ) : null}
           {displaySizeError ?
-            <p>Please Select The Size To continue</p> : null
+            <p>{ORDER_PAGE.PLEASE_SELECT_SIZE_TO_CONTINUE}</p> : null
 
           }
           {
@@ -298,7 +287,7 @@ class Reason extends Component {
                       selectedMode === 'Return'
                     }
                   />
-                  <label className={styles['pl-10']}>Return</label>
+                  <label className={styles['pl-10']}>{ORDER_PAGE.RETURN}</label>
                 </div>
                 {orderIssue.exchangeVariants &&
                   orderIssue.exchangeVariants.length > 0 ? (

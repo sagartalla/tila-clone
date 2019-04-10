@@ -6,6 +6,7 @@ import _ from 'lodash'
 import Cookie from 'universal-cookie';
 
 import Product from "./Product";
+import { languageDefinations } from '../../../utils/lang';
 import SVGComponent from '../../common/SVGComponet';
 import { actionCreators, selectors } from '../../../store/search';
 import { actionCreators as cartActionCreators, selectors as cartSelector } from '../../../store/cart';
@@ -16,6 +17,7 @@ import { Router } from '../../../routes';
 const styles = mergeCss('components/Search/search');
 
 const cookies = new Cookie();
+const { SEARCH_PAGE } = languageDefinations();
 
 const language = cookies.get('language') || 'en';
 const country = cookies.get('country') || 'SAU';
@@ -91,7 +93,7 @@ class SearchResults extends Component {
       return (
         <div className={`${styles['caption']}`}>
           <div className={`${styles['no-results']} ${styles['fs-40']} ${styles['fontW600']} ${styles['justify-center']}`}>
-              Sorry, no results<br/><span  className={`${styles['fontW300']} ${styles['fs-20']}`}>for "{finalQuery}"</span>
+              {SEARCH_PAGE.SORRY_NO_RESULTS}<br/><span  className={`${styles['fontW300']} ${styles['fs-20']}`}>{SEARCH_PAGE.FOR} "{finalQuery}"</span>
           </div>
           <div className={`${styles['no-search']}`}>
             <SVGComponent src={"errors-img/noSearch"} />
@@ -107,7 +109,7 @@ class SearchResults extends Component {
           pageStart={0}
           loadMore={this.loadMore}
           hasMore={pagiantionDetails.hasMore}
-          loader={<div className={styles['loader']} key={0}>Loading ...</div>}
+          loader={<div className={styles['loader']} key={0}>{SEARCH_PAGE.LOADING}</div>}
           className={`${styles['grid-cont']} ${styles['flex']} ${styles['flex-wrp']} ${styles['search-main-part']}`}
 
         >

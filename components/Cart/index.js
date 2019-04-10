@@ -6,7 +6,7 @@ import { Row, Col, Grid } from 'react-bootstrap';
 import Cookie from 'universal-cookie';
 import { bindActionCreators } from 'redux';
 import { toast } from 'react-toastify';
-
+import { languageDefinations } from '../../utils/lang/';
 import { actionCreators, selectors } from '../../store/cart';
 import { actionCreators as wishlistActionCreators, selectors as wishlistSelectors } from '../../store/cam/wishlist';
 import HeaderBar from '../HeaderBar/index';
@@ -17,6 +17,7 @@ import { mergeCss } from '../../utils/cssUtil';
 import Slider from '../common/slider';
 import Coupon from '../Cart/CartPaymentSideBar/coupons';
 
+const { CART_PAGE } = languageDefinations();
 
 const styles = mergeCss('components/Cart/cart');
 
@@ -86,7 +87,7 @@ class Cart extends Component {
     });
     const newRes = cartData.items.filter(data => data.inventory == 0);
     if (newRes.length) {
-      toast.warn('There is some issue with cart items.');
+      toast.warn(CART_PAGE.THERE_IS_SOME_ISSUE_WITH_CART_ITEMS);
     } else {
       Router.pushRoute(`/${country}/${language}/payment`);
     }
@@ -199,7 +200,7 @@ class Cart extends Component {
           <Slider
             closeSlider={this.closeSlider}
             isOpen={showSlider}
-            label="Coupons"
+            label={CART_PAGE.COUPONS}
           >
             <Coupon
               closeSlider={this.closeSlider}

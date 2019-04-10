@@ -19,10 +19,10 @@ import { Router } from '../../routes';
 
 import { selectors, actionCreators } from '../../store/auth';
 import { actionCreators as cartActionCreators, selectors as cartSelectors } from '../../store/cart';
-import { languageDefinations } from '../../utils/lang'
+import { languageDefinations } from '../../utils/lang';
 import { mergeCss } from '../../utils/cssUtil';
 const styles = mergeCss('components/HeaderBar/header');
-const {HEADER_PAGE} = languageDefinations();
+const { HEADER_PAGE } = languageDefinations();
 const cookies = new Cookie();
 
 const language = cookies.get('language') || 'en';
@@ -64,8 +64,7 @@ class ActionBar extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    let show = (!nextProps.isLoggedIn && (nextProps.isLoggedIn != this.props.isLoggedIn) && !this.state.logoutClicked) || this.state.loginClicked || !!nextProps.error || nextProps.loginInProgress || (!nextProps.isLoggedIn && nextProps.showLogin);
-    // console.log('show:',show,'nextProps.isLoggedIn', nextProps.isLoggedIn, 'this.props.isLoggedIn', this.props.isLoggedIn, 'this.state.logoutClicked', this.state.logoutClicked, 'nextProps.error', nextProps.error, 'nextProps.loginInProgress', nextProps.loginInProgress);
+    let show = (!nextProps.isLoggedIn && (nextProps.isLoggedIn != this.props.isLoggedIn) && !this.state.logoutClicked) || this.state.loginClicked || !!nextProps.error || nextProps.loginInProgress || (!nextProps.isLoggedIn && nextProps.showLogin) || nextProps.showEmailVerificationScreen;
     if (window.location.pathname.indexOf('/payment') > -1) {
       show = false;
     }
@@ -119,6 +118,7 @@ class ActionBar extends Component {
     this.setState({ show: false });
     this.props.resetLoginError();
     this.props.resetShowLogin();
+    this.props.logout();
   }
 
   getTokenCall = (socialNetwork, token) => {
@@ -192,7 +192,7 @@ class ActionBar extends Component {
               <div className={styles['profile-part']}>
                 <div className={`${styles['flex-center']} ${styles['ple-icon']}`}>
                   <span className={styles['icon']}></span>
-                  <span className={styles['pl-15']}>Hello {userInfo.personalInfo.first_name || `${HEADER_PAGE.TILA_CUSTOMER}` }</span>
+                  <span className={styles['pl-15']}>{HEADER_PAGE.HELLO} {userInfo.personalInfo.first_name || `${HEADER_PAGE.TILA_CUSTOMER}` }</span>
                 </div>
                 <ul className={`${styles['pl-0']} ${styles['profile-inn']}`}>
                   <li className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']}`}>
@@ -244,7 +244,7 @@ class ActionBar extends Component {
             ?
             (
               <Modal className={`react-router-modal__modal ${styles['login-reg-modal']} ${styles['p-20']}`} onBackdropClick={this.onBackdropClick}>
-                <Login mode={this.state.mode} />
+                <Login mode={this.state.mode} onBackdropClick={this.onBackdropClick} />
               </Modal>
             )
             :
@@ -266,6 +266,7 @@ const mapStateToProps = (store) => {
     showLogin: selectors.getShowLogin(store),
     ptaToken: selectors.getPTAToken(store),
     wishListCount: wishListSelectors.getWishListResults(store),
+    showEmailVerificationScreen: selectors.showEmailVerificationScreen(store),
   })
 };
 

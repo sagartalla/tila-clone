@@ -21,7 +21,7 @@ const settings = {
 const RecentView = (props) => {
   const { recentlyViewed, shippingInfo } = props;
   return (
-    <div className={`${styles['recentview-main']} ${styles['pt-25']} ${styles['pb-25']}`}>
+    <div className={`${styles['recentview-main']} ${styles['pb-25']}`}>
       <h6 className={`${styles['recent-title']} ${styles['pt-15']} ${styles['pb-15']} ${styles['pl-15']} ${styles['fontW600']}`}><span className={styles['pl-15']}>{PDP_PAGE.RECENTLY_VIEWED}</span></h6>
       <div>
         <Slider {...settings}>

@@ -5,11 +5,13 @@ import PropTypes from 'prop-types';
 import { Col } from 'react-bootstrap';
 import Btn from '../common/Button';
 import { mergeCss } from '../../utils/cssUtil';
+import { languageDefinations } from '../../utils/lang';
 import { selectors, actionCreators } from '../../store/cam/personalDetails';
 import { actionCreators as authActionCreators } from '../../store/auth';
 import VerifyStatus from './VerifyStatus';
 
 const styles = mergeCss('components/Login/login');
+const { LOGIN_PAGE } = languageDefinations();
 
 // eslint-disable-next-line
 const emailPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -89,15 +91,15 @@ class ForgotPassword extends Component {
     } = this.state;
     return (
       <div className={styles['forgot-password']}>
-        <h2><b>Forgot Password?</b></h2>
+        <h2><b>{LOGIN_PAGE.FORGOT_PASSWORD}</b></h2>
         {showInput === '' ?
           <div>
             <div className={`${styles['fp-input']} ${styles['pb-10']}`}>
-              <input name="email" type="email" onChange={this.handleChange} placeholder="Registered Email ID" value={email} required />
+              <input name="email" type="email" onChange={this.handleChange} placeholder={LOGIN_PAGE.REGISTERED_EMAIL_ID} value={email} required />
               {userNameError && <span className={`${styles['thick-red-clr']}`}>{errorMsg}</span>}
             </div>
             <Col xs={12} md={12} className={`${styles['pt-30']}`}>
-              <Btn className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles['update-profile-btn']} ${styles['text-uppercase']}`} btnText="SEND VERIFICATION LINK" onClick={this.sendLink} />
+              <Btn className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles['update-profile-btn']} ${styles['text-uppercase']}`} btnText={LOGIN_PAGE.SEND_VERIFICATION_LINK} onClick={this.sendLink} />
             </Col>
           </div>
                 :

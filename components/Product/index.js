@@ -5,6 +5,7 @@ import { Grid, Row, Col, Tabs, Tab } from 'react-bootstrap';
 import NoSSR from 'react-no-ssr';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
+import { languageDefinations } from '../../utils/lang';
 import { selectors } from '../../store/product';
 import HeaderBar from '../HeaderBar/index';
 import Dispalay from './includes/Display';
@@ -27,6 +28,7 @@ import { mergeCss } from '../../utils/cssUtil';
 import Button from '../common/CommonButton';
 
 const styles = mergeCss('components/Product/product');
+const { PDP_PAGE } = languageDefinations();
 
 const getProductComponent = (isPreview, taskCode) => {
   class Product extends Component {
@@ -116,7 +118,7 @@ const getProductComponent = (isPreview, taskCode) => {
           emailErr = '';
           notifyEmail = '';
         } else {
-          emailErr = 'Enter Valid EmailID';
+          emailErr = PDP_PAGE.ENTER_VALID_EMAIL;
         }
       } else {
         notifyMe(params);
@@ -211,14 +213,14 @@ const getProductComponent = (isPreview, taskCode) => {
                             {!userDetails.isLoggedIn &&
                             <div className={`${styles['mb-0']} ${styles['fp-input']} ${styles['pb-10']}`}>
                               <input onChange={this.onChangeField} name="notify" type="text" value={notifyEmail} required />
-                              <label>GetNotified</label>
+                              <label>{PDP_PAGE.GET_NOTIFIED}</label>
                               {emailErr &&
                                 <span className={styles['error-msg']}>{emailErr}</span>
                               }
                             </div>}
                             <Button
                               className={`${styles['flex-center']} ${styles.notify_me_btn} ${styles['fs-20']}`}
-                              btnText="Notify Me"
+                              btnText={PDP_PAGE.NOTIFY_ME}
                               onClick={this.notify}
                               hoverClassName="hoverBlueBackground"
                               btnLoading={showLoading}
@@ -231,7 +233,7 @@ const getProductComponent = (isPreview, taskCode) => {
                   </Col>
                 </Row>
               </div>
-              <div className={styles['bg-white']}>
+              <div className={`${styles['bg-white']} ${styles['mt-30']}`}>
                 <Grid>
                   <Row>
                     <Col md={8}>

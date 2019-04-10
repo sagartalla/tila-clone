@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { toast } from 'react-toastify';
 import Cookie from 'universal-cookie';
 import { addUrlProps, UrlQueryParamTypes, pushInUrlQuery } from 'react-url-query';
 import _ from 'lodash';
+import { languageDefinations } from '../../utils/lang/';
 import { actionCreators, selectors } from '../../store/search';
 import { Router } from '../../routes';
 import SVGComponent from '../common/SVGComponet';
@@ -13,6 +15,7 @@ import { mergeCss } from '../../utils/cssUtil';
 import {Modal} from 'react-bootstrap';
 import DragDropUpload from '../common/DragDropUpload';
 const styles = mergeCss('components/HeaderBar/header');
+const { SEARCH_PAGE } = languageDefinations();
 
 const urlPropsQueryConfig = {
   searchText: { type: UrlQueryParamTypes.string, queryParam: 'search', }
@@ -69,17 +72,21 @@ class Search extends Component {
     Router.pushRoute(`/${country}/${language}/srp`);
   }
   onChangeSearchInput(e) {
-
+    const numberOfCharacters = /^[\s\S]{0,300}$/;
+    if (!numberOfCharacters.test(e.target.value)) {
+      toast.error(SEARCH_PAGE.MAXIMUN_TEXT_EXCEEDED);
+      return;
+    }
     this.setState({
-      query: e.target.value,
-      searchInput: true
+      query: e.target.value.replace(/^\s+/g, ''),
+      searchInput: true,
     }, () => {
       this.fetchSuggestions();
     });
   }
 
   fetchSuggestions(e) {
-    this.props.fetchSuggestions({key: this.state.query});
+    this.props.fetchSuggestions({key: this.state.query.trim()});
   }
 
   fireCustomEventClick() {
@@ -113,7 +120,7 @@ class Search extends Component {
         <form onSubmit={this.submitQuery}>
           <input
             className={styles['search-input']}
-            placeholder="Search your fav item..."
+            placeholder={SEARCH_PAGE.SEARCH_YOUR_FAV_ITEM}
             onChange={this.onChangeSearchInput}
             value={this.state.query}
            />

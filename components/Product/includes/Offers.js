@@ -84,7 +84,7 @@ class Offers extends Component {
               <li>
                 <h5 className={`${styles['ff-b']} ${styles['black-color']}`}>{PDP_PAGE.OFFERS}</h5>
                 <ul className={`${styles['pl-15']} ${styles['no-list-blt']}`}>
-                  <li>No offers </li>
+                  <li>{PDP_PAGE.NO_OFFERS} </li>
                 </ul>
               </li>
               <li>

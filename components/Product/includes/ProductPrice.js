@@ -6,7 +6,7 @@ import { languageDefinations } from '../../../utils/lang';
 import { OverlayTrigger, Popover } from 'react-bootstrap';
 
 const styles = mergeCss('components/Product/product');
-const {PDP_PAGE} = languageDefinations();
+const { PDP_PAGE, CART_PAGE, ORDER_PAGE, COUPON_OFFERS } = languageDefinations();
 
 const popover = ({strickedPrice: mrp, sellingPrice:sp, offerDiscounts, showPrise:total, totalDiscountMRP:discountMrp, currency}) => {
   return (
@@ -15,8 +15,8 @@ const popover = ({strickedPrice: mrp, sellingPrice:sp, offerDiscounts, showPrise
         <div className={`${styles['table']} ${styles['width100']}`}>
           <div className={styles['t-row']}>
             <div className={styles['t-cell']}>
-              <div className={styles['fs-12']}>Maximum Retail Price</div>
-              <div className={styles['fs-12']}>(Incl. of all taxes)</div>
+              <div className={styles['fs-12']}>{CART_PAGE.MAXIMUM_RETAIL_PRICE}</div>
+              <div className={styles['fs-12']}>({CART_PAGE.INCL_OF_ALL_TAXES})</div>
             </div>
             <div className={styles['t-cell']}>
               <span className={styles['fs-12']}>{`${mrp} ${currency}`}</span>
@@ -24,7 +24,7 @@ const popover = ({strickedPrice: mrp, sellingPrice:sp, offerDiscounts, showPrise
           </div>
           <div className={styles['t-row']}>
             <div className={styles['t-cell']}>
-              <div className={styles['fs-12']}>Selling Price</div>
+              <div className={styles['fs-12']}>{CART_PAGE.SELLING_PRICE}</div>
             </div>
             <div className={styles['t-cell']}>
               <span className={styles['fs-12']}>{`${sp} ${currency}`}</span>
@@ -46,17 +46,17 @@ const popover = ({strickedPrice: mrp, sellingPrice:sp, offerDiscounts, showPrise
           }
           <div className={styles['t-row']}>
             <div className={styles['t-cell']}>
-              <div className={styles['fs-12']}>Dilevery Charges</div>
+              <div className={styles['fs-12']}>{CART_PAGE.DELIVERY_CHARGES}</div>
             </div>
-            <div className={`${styles['t-cell']} ${styles['fs-12']}`}>Free</div>
+            <div className={`${styles['t-cell']} ${styles['fs-12']}`}>{CART_PAGE.FREE}</div>
           </div>
           <div className={`${styles['t-row']} ${styles['total-amount']}`}>
-            <div className={`${styles['t-cell']} ${styles['fs-12']}`}>Total</div>
+            <div className={`${styles['t-cell']} ${styles['fs-12']}`}>{ORDER_PAGE.TOTAL}</div>
             <div className={`${styles['t-cell']} ${styles['fs-12']}`}>{`${total} ${currency}`}</div>
           </div>
         </div>
         <div>
-          <div className={`${styles['p-5']} ${styles['mt-5']} ${styles['fs-12']} ${styles['overall-amount']}`}>Overall you save {`${discountMrp} ${currency}`} on this Product</div>
+          <div className={`${styles['p-5']} ${styles['mt-5']} ${styles['fs-12']} ${styles['overall-amount']}`}>{CART_PAGE.OVERALL_YOU_SAVE} {`${discountMrp} ${currency}`} {CART_PAGE.ON_THIS_PRODUCT}</div>
         </div>
       </div>
     </Popover>
@@ -98,7 +98,7 @@ const ProductPrice = ({offerInfo}) => {
           offerPricing.offerMesseges.length
           ?
             <div className={`${styles['flex']} ${styles['offers-applied']}`}>
-              <span className={styles['fontW600']}>Offer Applied: </span>
+              <span className={styles['fontW600']}>{COUPON_OFFERS.OFFER_APPLIED}: </span>
               <ul className={styles['p-0']}>
                 {
                   offerPricing.offerMesseges.map((m) => {

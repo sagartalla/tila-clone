@@ -12,12 +12,12 @@ import HTML5Backend from 'react-dnd-html5-backend';
 import { DragDropContext } from 'react-dnd';
 import { Router } from '../../../../../routes';
 
-const { PAYMENT_PAGE } = languageDefinations();
+const { PAYMENT_PAGE, ORDER_PAGE } = languageDefinations();
 const styles = mergeCss('components/Payments/payment');
 
 const initialState = {
   openBox: <SVGComponent clsName={`${styles['drop-box-icon']}`} src="icons/captcha-icons-list/box-icon" />,
-  boxText: <span className={`${styles['fs-12']} ${styles['pt-20']}`}>Drop the Answer icon into the box Above</span>,
+  boxText: <span className={`${styles['fs-12']} ${styles['pt-20']}`}>{PAYMENT_PAGE.DROP_THE_ANSWER_INTO_BOX}</span>,
 }
 
 class Captcha extends React.Component{
@@ -51,21 +51,19 @@ class Captcha extends React.Component{
       this.setState({openBox: <SVGComponent clsName={`${styles['error_box-icon']}`} src="icons/captcha-icons-list/error_box-icon" />,
           boxText:
             <div style={{textAlign: "center"}}>
-              <span style={{color: '#dd1e31'}} className={`${styles['fs-16']} ${styles['pt-20']}`}>Error. Please Try Again</span><br/>
-              <span className={`${styles['fs-12']} ${styles['pt-20']}`}>Drop the Answer icon into the box Above</span>
+              <span style={{color: '#dd1e31'}} className={`${styles['fs-16']} ${styles['pt-20']}`}>{PAYMENT_PAGE.ERROR_PLEASE_TRY_AGAIN}</span><br/>
+              <span className={`${styles['fs-12']} ${styles['pt-20']}`}>{PAYMENT_PAGE.DROP_THE_ANSWER_INTO_BOX}</span>
             </div>
           })
     } else if(this.props.getVerification==="SUCCESS"){
-      this.props.captchaQuestion({
-        txnId: this.props.txnId
-      });
       this.setState({openBox: <SVGComponent clsName={`${styles['success_box-icon']}`} src="icons/captcha-icons-list/success_box-icon" />,
-        boxText: <span style={{color: '#99cc33'}} className={`${styles['fs-16']} ${styles['pt-20']}`}>&nbsp;Success</span>
+        boxText: <span style={{color: '#99cc33'}} className={`${styles['fs-16']} ${styles['pt-20']}`}>&nbsp;{ORDER_PAGE.SUCCESS}</span>
       });
       this.props.onCaptchaSuccess({
         captcha_request_id: items.request_id
       });
-    }else{
+      this.props.onContinueHandle();
+    } else {
       return;
     }
   }

@@ -3,7 +3,9 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 
 import constants from '../helper/constants';
-import { ifError } from 'assert';
+import { languageDefinations } from '../../utils/lang/';
+
+const { API_TEXT } = languageDefinations();
 
 const getCartDetailsApi = (params = {}) => {
   return axios.put(`${constants.CART_API_URL}/api/v1/cart/view`, params).then(({ data }) => {
@@ -16,7 +18,7 @@ const getCartDetailsApi = (params = {}) => {
 
 const addToCart = (params) => {
   return axios.post(`${constants.CART_API_URL}/api/v1/cart/add`, params).then((res) => {
-    toast.success('Item added to Cart');
+    toast.success(API_TEXT.ITEM_ADDED_TO_CART);
     return res;
   });
 }
@@ -24,7 +26,7 @@ const addToCart = (params) => {
 const removeCartItemApi = (params, toastObj = {}) => {
   return axios.put(`${constants.CART_API_URL}/api/v1/cart/delete`, params).then(({ data }) => {
     if (toastObj.showToast) {
-      toast.success('Item deleted from Cart');
+      toast.success(API_TEXT.ITEM_DELETED_FROM_CART);
     }
     return getCartDetailsApi();
   });

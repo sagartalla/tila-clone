@@ -12,11 +12,11 @@ import SocialLogin from './SocialLogin';
 import { mergeCss } from '../../utils/cssUtil';
 import { languageDefinations } from '../../utils/lang';
 import FormValidator from '../common/FormValidator';
+import VerifyEmail from './VerifyEmail';
 
 const styles = mergeCss('components/Login/login');
 
 const { LOGIN_PAGE } = languageDefinations();
-
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -45,6 +45,7 @@ class Login extends Component {
       forgotPassword: false,
       validation: this.validations.valid(),
       clicked: false,
+      showVerifyScreen: false,
     };
     this.login = this.login.bind(this);
     this.onChangeField = this.onChangeField.bind(this);
@@ -57,7 +58,7 @@ class Login extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    let { userCreds, error } = nextProps;
+    let { userCreds, error, showEmailScreen } = nextProps;
     userCreds = userCreds || this.props.userCreds;
     if (error) {
       this.props.track("SignIn",error);
@@ -72,6 +73,9 @@ class Login extends Component {
         password: userCreds.password,
       });
     }
+    this.setState({
+      showVerifyScreen: showEmailScreen,
+    });
   }
 
   onChangeField(e) {
@@ -81,6 +85,10 @@ class Login extends Component {
     });
   }
 
+  onBackdropClick = () => {
+    this.props.onBackdropClick();
+  }
+
   validateEmail = (fieldvalue, state) => {
     const emailReg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (emailReg.test(fieldvalue)) return false;
@@ -88,7 +96,7 @@ class Login extends Component {
   }
 
   validateLengthPassword = (fieldvalue, state) => {
-    if (fieldvalue.length >= 8) return false;
+    if (fieldvalue && fieldvalue.length >= 8) return false;
     return true;
   }
 
@@ -140,7 +148,7 @@ class Login extends Component {
           },
           rememberMe: true,
         };
-        this.props.userLogin(serverData)
+        this.props.userLogin(serverData, this.state.mode);
       } else {
         const serverData = {
           channel: 'BASIC_AUTH',
@@ -181,26 +189,28 @@ class Login extends Component {
   }
 
   render() {
-    const { userCreds } = this.props;
-    const { mode, error, validation, clicked } = this.state;
+    const { userCreds, loadingStatus } = this.props;
+    const { mode, error, validation, clicked, showVerifyScreen } = this.state;
     return (
       <Row className={`${styles['bg-white']} ${styles['m-0']}`}>
         { !this.state.forgotPassword ?
-      <div>
+      <div className={`${styles.flex}`}>
         <Col md={6} xs={6} className={styles['pl-0']}>
           <div className={styles['image-placeholder']}>
             <img className={styles['img-responsive']} src={`${constants.mediaDomain}/pim/15f45930-fecf-4f7b-a3d6-613d41196c20/workbench/image/a1ccb74a-1858-42dd-8c38-cfb103e85bb2/login-screen.jpeg`} />
           </div>
         </Col>
+        {!showVerifyScreen ?
         <Col md={6} xs={6}>
-          <div>
+          <div className={`${styles.flex} ${styles['align-center']} ${styles['justify-between']} ${styles['flex-row']}`}>
+           <div className={`${styles.flex} ${styles.pointer}`} onClick={this.onBackdropClick}><SVGComponent clsName={`${styles['cross-icon']}`} src="icons/common-icon/cross-button" /></div>
             <h3 className={`${styles['fs-26']} ${styles['mb-25']}`}>
               <div>
                 <span className={`${styles['ff-b']} ${styles['pl-10']}`}>
                   {
                     mode === 'register'
                       ?
-                      'Register with tila.com'
+                      LOGIN_PAGE.REGISTER_WITH_TILA
                       :
                       LOGIN_PAGE.TILA_COM
                   }
@@ -308,7 +318,7 @@ class Login extends Component {
                       <div className={`${styles['checkbox-material']} ${styles.flex} ${styles['pb-15']}`}>
                           <input id="deals-offers-reg" type="checkbox" onChange={this.acceptsOffers} checked={clicked} />
                           <label htmlFor="deals-offers-reg">
-                             I would like to receive deals and offers.
+                             {LOGIN_PAGE.I_WOULD_LIKE_TO_RECEIVE_OFFERS}
                           </label>
                       </div>
 
@@ -335,7 +345,7 @@ class Login extends Component {
             <div className={`${styles['login-social-icon']} ${styles['pl-15']}`}>
               <a className={`${styles['flex']} ${styles['pt-10']}`}>
                 <span onClick={this.handleClick}>
-                  Forgot Password?
+                  {LOGIN_PAGE.FORGOT_PASSWORD}
                 </span>
               </a>
               <span className={`${styles['thick-gry-clr']} ${styles['pt-5']} ${styles['pb-5']} ${styles['flex']}`}>{LOGIN_PAGE.SIGN_UP_WITH}</span>
@@ -372,8 +382,15 @@ class Login extends Component {
                 </h4>
             }
           </div>
-
+        </Col> :
+         <Col md={6} xs={6} className={`${styles.flex}`}>
+        <VerifyEmail
+         email={userCreds && userCreds.username}
+         onBackdropClick={this.onBackdropClick}
+         loadingStatus={loadingStatus}
+        />
         </Col>
+        }
         </div>
         :
         <ForgotPassword
@@ -387,9 +404,12 @@ class Login extends Component {
 }
 
 const mapStateToProps = (store) => ({
-    error: selectors.getErrorMessege(store),
-    userCreds: selectors.getUserCreds(store)
-  });
+  error: selectors.getErrorMessege(store),
+  userCreds: selectors.getUserCreds(store),
+  showEmailScreen: selectors.showEmailVerificationScreen(store),
+  loading: selectors.getLoginProgressStatus(store),
+  loadingStatus: selectors.getLoadingStatus(store),
+});
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(
     {
@@ -401,5 +421,12 @@ const mapDispatchToProps = (dispatch) => bindActionCreators(
     },
     dispatch,
   );
+  {
+    userLogin: actionCreators.userLogin,
+    getLoginInfo: actionCreators.getLoginInfo,
+    resetLoginError: actionCreators.resetLoginError,
+  },
+  dispatch,
+);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

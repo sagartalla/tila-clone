@@ -88,12 +88,12 @@ class CashOnDelivery extends React.Component {
         <div className={`${styles['cash-on-dly-points']}`}>
     <Row className={styles['pl-40']}>
       <Col md={12}>
-        <h4 className={`${styles['fontW300']} ${styles['fs-20']} ${styles['lgt-blue']} ${styles['mt-0']} ${styles['pb-10']}`}>Pay on Delivery</h4>
+        <h4 className={`${styles['fontW300']} ${styles['fs-20']} ${styles['lgt-blue']} ${styles['mt-0']} ${styles['pb-10']}`}>{PAYMENT_PAGE.PAY_ON_DELIVERY}</h4>
     {
       this.state.nextStep === 'captcha' && (
         <div className={styles['checkbox-material']}>
           <input id="pay-delivery" type="checkbox" onChange={ this.handleChange } checked={ this.state.checked }/>
-          <label for="pay-delivery"> I agree to pay cash on delivery </label>
+          <label for="pay-delivery"> {PAYMENT_PAGE.I_AGREE_TO_PAY_COD} </label>
         </div>
       )
     }
@@ -102,7 +102,7 @@ class CashOnDelivery extends React.Component {
         ?
             this.state.nextStep === 'captcha'
               ?
-                <Captcha onCaptchaSuccess={this.onCaptchaSuccess} txnId={this.props.transactionId}/>
+                <Captcha onCaptchaSuccess={this.onCaptchaSuccess} txnId={this.props.transactionId} onContinueHandle={this.onContinueHandle}/>
               :
                 this.state.nextStep === 'mobileVerification'
                   ?
@@ -120,7 +120,7 @@ class CashOnDelivery extends React.Component {
            <Button
               className={`${styles['fs-16']} ${styles['fontW600']} ${styles.width55} ${styles['new-card-btn']}`}
               onClick={this.onContinueHandle}
-              btnText="Continue"
+              btnText={PAYMENT_PAGE.CONTINUE}
               hoverClassName="hoverBlueBackground"
               
            />
@@ -132,7 +132,7 @@ class CashOnDelivery extends React.Component {
             <Button
               className={`${styles['fs-16']} ${styles['fontW600']} ${styles['new-card-btn']} ${styles['border-radius']} ${styles.width55} ${styles['ht-40']}`}
               onClick={this.proceedToPayment}
-              btnText={'Pay' + ' ' + data.amount_to_pay + ' ' + data.currency_code}
+              btnText={ PAYMENT_PAGE.PAY + ' ' + data.amount_to_pay + ' ' + data.currency_code}
               hoverClassName="hoverBlueBackground"
               btnLoading={showLoading}              
               

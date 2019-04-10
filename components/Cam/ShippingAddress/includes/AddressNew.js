@@ -34,7 +34,7 @@ const AddressNew = (props) => {
               <input type="text" name="first_name" onChange={inputOnChange} value={data.first_name} className={styles.input} required />
               <span className={styles['highlight']}></span>
               <span className={styles['bar']}></span>
-              <label>First Name</label>
+              <label>{DELIVERY_ADDR_PAGE.FIRST_NAME}</label>
             </div>
           </Col>
           <Col md={6} sm={12} xs={12}>
@@ -42,7 +42,7 @@ const AddressNew = (props) => {
               <input type="text" name="last_name" onChange={inputOnChange} value={data.last_name} className={styles.input} required />
               <span className={styles['highlight']}></span>
               <span className={styles['bar']}></span>
-              <label>Last Name</label>
+              <label>{DELIVERY_ADDR_PAGE.LAST_NAME}</label>
             </div>
           </Col>
           <Col md={12} sm={12} xs={12}>
@@ -50,7 +50,7 @@ const AddressNew = (props) => {
               <input type="text"name="address_line_1" onChange={inputOnChange} value={data.address_line_1} className={styles.input} required />
               <span className={styles['highlight']}></span>
               <span className={styles['bar']}></span>
-              <label>Flat/house no.floor/Building/</label>
+              <label>{DELIVERY_ADDR_PAGE.FLAT_HOUSE_NO}</label>
             </div>
           </Col>
           <Col md={6} sm={12} xs={12}>
@@ -58,7 +58,7 @@ const AddressNew = (props) => {
               <input type="text" name="city" onChange={inputOnChange} value={data.city} className={styles.input} required />
               <span className={styles['highlight']}></span>
               <span className={styles['bar']}></span>
-              <label>City</label>
+              <label>{DELIVERY_ADDR_PAGE.CITY}</label>
             </div>
           </Col>
           <Col md={6} sm={12} xs={12}>
@@ -66,7 +66,7 @@ const AddressNew = (props) => {
               <input type="text" name="country_name" onChange={inputOnChange} value={data.country_name} className={styles.input} required />
               <span className={styles['highlight']}></span>
               <span className={styles['bar']}></span>
-              <label>Country</label>
+              <label>{DELIVERY_ADDR_PAGE.COUNTRY}</label>
             </div>
           </Col>
           <Col md={6} sm={12} xs={12}>
@@ -74,7 +74,7 @@ const AddressNew = (props) => {
               <input type="text" name="address_line_2" onChange={inputOnChange} value={data.address_line_2} className={styles.input} required />
               <span className={styles['highlight']}></span>
               <span className={styles['bar']}></span>
-              <label>Landmark</label>
+              <label>{DELIVERY_ADDR_PAGE.LANDMARK}</label>
             </div>
           </Col>
           <Col md={6} sm={12} xs={12}>
@@ -82,7 +82,7 @@ const AddressNew = (props) => {
               <input type="text" name="postal_code" onChange={inputOnChange} value={data.postal_code} className={styles.input} required />
               <span className={styles['highlight']}></span>
               <span className={styles['bar']}></span>
-              <label>PO box</label>
+              <label>{DELIVERY_ADDR_PAGE.PO_BOX}</label>
             </div>
           </Col>
           <Col md={2} sm={4} xs={4} className={`${styles['pr-0']}`}>
@@ -90,7 +90,7 @@ const AddressNew = (props) => {
               <input type="text" name="mobile_country_code" onChange={inputOnChange} value={data.mobile_country_code} className={styles.input} required />
               <span className={styles['highlight']}></span>
               <span className={styles['bar']}></span>
-              <label>Code</label>
+              <label>{DELIVERY_ADDR_PAGE.CODE}</label>
             </div>
           </Col>
           <Col md={4} sm={8} xs={8}>
@@ -98,7 +98,7 @@ const AddressNew = (props) => {
               <input type="text" name="mobile_no" onChange={inputOnChange} value={data.mobile_no} className={styles.input} required />
               <span className={styles['highlight']}></span>
               <span className={styles['bar']}></span>
-              <label>Mobile Number</label>
+              <label>{DELIVERY_ADDR_PAGE.MOBILE_NUMBER}</label>
             </div>
           </Col>
           <Col md={6} sm={12} xs={12}>

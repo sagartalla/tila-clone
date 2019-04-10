@@ -1,7 +1,10 @@
+import Cookies from 'universal-cookie';
 import api from './api';
 import loginReq from '../helper/loginReq';
 import refStore from '../refHandler';
 import { actionCreators as cartActionCreators } from '../cart';
+
+const cookies = new Cookies();
 
 const actions = {
   USER_LOGIN: 'USER_LOGIN',
@@ -22,6 +25,9 @@ const actions = {
   DELETE_POST_LOGIN_ACTION_INFO: 'DELETE_POST_LOGIN_ACTION_INFO',
   SET_LANGUAGE: 'SET_LANGUAGE',
   SAVE_PTA: 'SAVE_PTA',
+  VERIFY_EMAIL: 'VERIFY_EMAIL',
+  VERIFY_RESEND_EMAIL: 'VERIFY_RESEND_EMAIL',
+  GET_USER_INFO: 'GET_USER_INFO',
 };
 
 const actionCreators = {
@@ -36,32 +42,28 @@ const actionCreators = {
       dispatch(refStore.postLoginRef);
       dispatch(actions.DELETE_POST_LOGIN_ACTION_INFO);
     }
-  }),
-  userRegister: params => (dispatch, getState) => dispatch({
-    type: actions.USER_REGISTER,
-    payload: api.userRegister(params).then((res) => {
-      if (res.status === 200) {
-        const { email, password, rememberMe } = params;
-        dispatch(actionCreators.userLogin({
-          username: email,
-          password,
-          rememberMe,
-        }));
-        return res;
+    dispatch(actionCreators.getUserInfoData({initiateEmailVerification: params.channel === 'BASIC_REGISTER'})).then((res) => {
+      if(params.channel !== 'BASIC_REGISTER') {
+        if (res && res.value && res.value.data && res.value.data.email_verified === 'NV') {
+          dispatch(actionCreators.setVerfied(false))/*.then(() => dispatch(actionCreators.getLoginInfo()));*/
+          dispatch(actionCreators.sendOtpToEmailId(false));
+        } else {
+          dispatch(actionCreators.setVerfied(true))/*.then(() => dispatch(actionCreators.getLoginInfo()));*/
+        }
       }
-      return Promise.reject(res);
-    }),
+      return res;
+    });
   }),
   userLogout: () => (dispatch) => {
-    dispatch(cartActionCreators.getCartResults())
+    dispatch(cartActionCreators.getCartResults());
     dispatch({
       type: actions.USER_LOGOUT,
       payload: api.userLogout(),
     });
   },
-  getLoginInfo: () => ({
+  getLoginInfo: (params) => ({
     type: actions.USER_LOGIN_INFO,
-    payload: api.getLoginInfo(),
+    payload: api.getLoginInfo(params),
   }),
   setCountry: country => ({
     type: actions.SET_COUNTRY,
@@ -116,13 +118,35 @@ const actionCreators = {
     type: actions.SAVE_PTA,
     payload: api.savePtaToken(ptaToken),
   }),
-  track: (event,params) => (dispatch, getState) => {
-    const state = getState();
-    return {
-      type: actions.CART_TRACK,
-      payload: api.track(event,params),
-    };
-  }
+  verifyEmailId: value => (dispatch, getState) => {
+    dispatch({
+      type: actions.VERIFY_EMAIL,
+      payload: api.verifyEmail(value),
+    }).then(() => {
+      dispatch(actionCreators.setVerfied(true));
+    }, () => {
+      dispatch(actionCreators.setVerfied(false));
+    })
+  },
+  sendOtpToEmailId: (status = true) => ({
+    type: actions.VERIFY_RESEND_EMAIL,
+    payload: api.sendOtpToEmailId(status),
+  }),
+  getUserInfoData: (params={}) => ({
+    type: actions.GET_USER_INFO,
+    payload: api.getUserInfo(params),
+  }),
+  setVerfied: isVerified => ({
+    type: actions.SET_VERFIED,
+    payload: api.setVerfied(isVerified),
+  }),
 };
+track: (event,params) => (dispatch, getState) => {
+  const state = getState();
+  return {
+    type: actions.CART_TRACK,
+    payload: api.track(event,params),
+  };
+},
 
 export { actions, actionCreators};
