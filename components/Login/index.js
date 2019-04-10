@@ -411,7 +411,6 @@ const mapStateToProps = (store) => ({
 const mapDispatchToProps = (dispatch) => bindActionCreators(
   {
     userLogin: actionCreators.userLogin,
-    userRegister: actionCreators.userRegister,
     getLoginInfo: actionCreators.getLoginInfo,
     resetLoginError: actionCreators.resetLoginError,
   },
