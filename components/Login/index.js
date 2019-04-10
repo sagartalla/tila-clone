@@ -412,19 +412,11 @@ const mapStateToProps = (store) => ({
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(
-    {
-      userLogin: actionCreators.userLogin,
-      userRegister: actionCreators.userRegister,
-      getLoginInfo: actionCreators.getLoginInfo,
-      resetLoginError: actionCreators.resetLoginError,
-      track: actionCreators.track,
-    },
-    dispatch,
-  );
   {
     userLogin: actionCreators.userLogin,
     getLoginInfo: actionCreators.getLoginInfo,
     resetLoginError: actionCreators.resetLoginError,
+    track: actionCreators.track,
   },
   dispatch,
 );

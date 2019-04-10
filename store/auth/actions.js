@@ -147,6 +147,6 @@ track: (event,params) => (dispatch, getState) => {
     type: actions.CART_TRACK,
     payload: api.track(event,params),
   };
-},
+}
 
 export { actions, actionCreators};

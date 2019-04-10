@@ -24,7 +24,6 @@ const getRefundOptions = (orderItemId) => axios.get(`${constants.ORDERS_API_URL}
 const setExchangeOrder = (params) => axios.post(`${constants.ORDERS_API_URL}/api/v1/order/exchange`,params)
 
 const track = (params) => {
-  console.log(params);
   window.appEventData.push({
     "event": "Order Placed",
     "transaction": {
