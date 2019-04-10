@@ -108,7 +108,7 @@ class Product extends Component {
       } = this.props;
 
       if (variants.length <= 1) {
-        (btnType === 'BUY_NOW' ? buyNow : addToCart)(variants[selectedIndex].listingId[0]);
+        (btnType === 'BUY_NOW' ? buyNow : addToCart)(variants[selectedIndex].listingId[0], this.props.productId);
       } else {
         const id = [productId];
         this.setState({ btnType }, () => {

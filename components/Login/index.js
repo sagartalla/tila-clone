@@ -60,6 +60,7 @@ class Login extends Component {
     let { userCreds, error } = nextProps;
     userCreds = userCreds || this.props.userCreds;
     if (error) {
+      this.props.track("SignIn",error);
       this.setState({
         error,
       });
@@ -127,6 +128,7 @@ class Login extends Component {
 
     if (validation.isValid) {
       if (this.state.mode === 'register') {
+        this.props.track("SignUp","Success");
         const serverData = {
           channel: 'BASIC_REGISTER',
           metadata: {
@@ -152,6 +154,7 @@ class Login extends Component {
       }
       this.props.resetLoginError();
     } else {
+      this.props.track("SignIn","password length error");
       console.log('password Error');
     }
     this.setState({ validation });
@@ -394,6 +397,7 @@ const mapDispatchToProps = (dispatch) => bindActionCreators(
       userRegister: actionCreators.userRegister,
       getLoginInfo: actionCreators.getLoginInfo,
       resetLoginError: actionCreators.resetLoginError,
+      track: actionCreators.track,
     },
     dispatch,
   );

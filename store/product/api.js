@@ -48,4 +48,34 @@ const setSelectedVariant = ({selectedVariantData, itemType, catalogId, variantId
     }
   });
 }
-export default { getProduct, getPreview, getReviewRatings,submitUserReview, setSelectedVariant };
+const track = (params) => {
+  window.appEventData.push({
+    "event": "Product Viewed",
+    "product": [
+      {
+        "productInfo": {
+          // "pageName":params.titleInfo.title,
+          "categoryType":params.ProductData.categoryType,
+          "productID": params.ProductData.catalogObj.product_id,
+          "variantId" :params.ProductData.catalogObj.variant_id,
+          "itemType" :params.ProductData.catalogObj.item_type,
+          "breadcrums":params.ProductData.breadcrums.map(item => item.display_name_en),
+          "catalogId" :params.ProductData.catalogObj.catalog_id,
+          "itemType" :params.ProductData.catalogObj.item_type,
+          "listingId" :params.ProductData.titleInfo.listingId,
+          "brandTitle" :params.ProductData.titleInfo.brand,
+          "ratingCount" :params.ProductData.titleInfo.rating.count,
+          "reviewsCount" :params.ProductData.titleInfo.reviews.count,
+          "productTitle" :params.ProductData.titleInfo.title,
+          "productPrice" :params.ProductData.titleInfo.price,
+          "isOutOfStock": false
+        },
+        "price": {
+          "sellingPrice": "",
+          "basePrice": ""
+        }
+      }
+    ]
+  });
+}
+export default { getProduct, getPreview, getReviewRatings,submitUserReview, setSelectedVariant ,track };

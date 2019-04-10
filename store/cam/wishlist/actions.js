@@ -35,10 +35,10 @@ const actionCreators = {
       });
     } else {
       dispatch(actionCreators.deleteWishlist(wishlist_id, { showToast: false }));
+      dispatch(actionCreators.track({
+        eventName: 'Product Added',"wishlistId":wishlist_id
+      }))  
     }
-    dispatch(actionCreators.track({
-      eventName: 'Product Added',"wishlistId":wishlist_id
-    }))
   }),
   addToWishlistAndFetch: loginReq(params => dispatch => dispatch(actionCreators.addToWishlist(params)).then(() => {
     dispatch(actionCreators.getWishlist());
@@ -46,10 +46,15 @@ const actionCreators = {
       eventName: 'WishList Added',"params":params
     }))
   })),
-  notifyMe: (params => ({
-    type: actions.NOTIFY_ME,
-    payload: apis.notifyMe(params),
-  })),
+  notifyMe: loginReq(params => (dispatch, getState) => {
+    dispatch(actionCreators.track({
+        eventName: 'Notify Me',"params":params
+      })),
+      dispatch({
+        type: actions.NOTIFY_ME,
+        payload: apis.notifyMe(params),
+      })
+    }),
   track: (params) => (dispatch, getState) => {
     const state = getState();
     params.postResult = state.wishlistReducer.data;

@@ -35,7 +35,7 @@ const actionCreators = {
     });
   },
   cartItemCount: (cartId, typ) => (dispatch,getState) => {
-    dispatch(actionCreators.track({eventName: 'Cart Views',"cartId":cartId,"type":typ}));
+    dispatch(actionCreators.track({eventName: 'Cart Qty Change',"cartId":cartId,"type":typ}));
     const params = {
       "cart_item_id": cartId
     }
@@ -73,6 +73,8 @@ const actionCreators = {
   }),
 
   addToCartAndFetch: params => (dispatch, getState) => {
+    params.eventName="Product Added";
+    dispatch(actionCreators.track(params));
     dispatch(actionCreators.showBtnLoader(params));
     return dispatch(actionCreators.addToCart(params)).then(() => {
       dispatch(actionCreators.getCartResults());

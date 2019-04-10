@@ -17,6 +17,7 @@ const userLogin = (params) => {
     // cart merge
     if(status === 200) {
       const { username } = params.metadata;
+      track("SignIn","Success");
       const PTA_PARAMS = {
         'p_userid': username,
         'p_email.addr': username,
@@ -125,4 +126,19 @@ const savePtaToken = (ptaToken) => {
   }).then(() => ptaToken);
 }
 
-export default { userLogin, userRegister, userLogout, getLoginInfo, setCountry, setSessionID, deriveCity, autoCompleteCity, setCity, removeCity, setLanguage, savePtaToken };
+const track = (event,status) => {
+  window.appEventData.push({
+    "event": event,
+    "login":
+      {
+        "loginInfo": {
+          "pageName":"login",
+          "pageType":"login",
+          "error":status
+        }
+      }
+
+})
+}
+
+export default { userLogin, userRegister, userLogout, getLoginInfo, setCountry, setSessionID, deriveCity, autoCompleteCity, setCity, removeCity, setLanguage, savePtaToken , track};

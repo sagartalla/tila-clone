@@ -39,8 +39,9 @@ class AddToCart extends Component {
 
   addToCart() {
     const { listingId } = this.props.offerInfo
+    const { productData } =this.props
     this.props.addToCartAndFetch({
-      listing_id: listingId
+      listing_id: listingId,product_id: productData,
     });
   }
 

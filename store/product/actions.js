@@ -41,7 +41,15 @@ const actionCreators = {
   setSelectedProductData: (params) => ({
     type: actions.SET_SELECTED_PRODUCT_DATA,
     payload:params
-  })
+  }),
+  track: (params) => (dispatch, getState) => {
+    const state = getState();
+    params.postResult = state.cartReducer.data.items;
+    return {
+      type: actions.CART_TRACK,
+      payload: api.track(params)
+    };
+  }
 };
 
 export { actions, actionCreators };

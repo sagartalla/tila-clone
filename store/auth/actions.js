@@ -116,6 +116,13 @@ const actionCreators = {
     type: actions.SAVE_PTA,
     payload: api.savePtaToken(ptaToken),
   }),
+  track: (event,params) => (dispatch, getState) => {
+    const state = getState();
+    return {
+      type: actions.CART_TRACK,
+      payload: api.track(event,params),
+    };
+  }
 };
 
-export { actions, actionCreators };
+export { actions, actionCreators};

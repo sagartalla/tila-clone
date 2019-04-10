@@ -63,20 +63,20 @@ class SearchResults extends Component {
       productID
     });
   }
-  buyNow(listingId) {
+  buyNow(listingId,productId) {
     this.setState({
       buyNow: true
     }, () => {
-      this.addToCart(listingId);
+      this.addToCart(listingId,productId);
     });
   }
 
-  addToCart(listingId) {
+  addToCart(listingId,productId) {
     this.setState({
       productID:[]
     })
     this.props.addToCartAndFetch({
-      listing_id: listingId
+      listing_id: listingId, product_id: productId,
     });
   }
 

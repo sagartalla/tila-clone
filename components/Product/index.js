@@ -21,6 +21,7 @@ import ReviewRatingList from '../RatingReviews/List';
 import FooterBar from '../Footer/index';
 import Theme from '../helpers/context/theme';
 import CompareWidget from '../common/CompareWidget';
+import { actionCreators, } from '../../store/product';
 import { actionCreators as wishlistActionCreators, selectors as wishListSelectors } from '../../store/cam/wishlist';
 import { mergeCss } from '../../utils/cssUtil';
 import Button from '../common/CommonButton';
@@ -56,6 +57,9 @@ const getProductComponent = (isPreview, taskCode) => {
         digitalData.page.pageInfo.pageName = titleInfo.title;
         digitalData.page.category = { primaryCategory: productData.categoryType };
         digitalData.page.pageInfo.breadCrumbs = productData.breadcrums.map(item => item.display_name_en);
+        this.props.track({
+          eventName: "Cart Views","ProductData":productData,
+        });
         if (offerInfo.price) {
           const pr = offerInfo.price.split(' ');
           const recentData = localStorage.getItem('rv');
@@ -199,7 +203,7 @@ const getProductComponent = (isPreview, taskCode) => {
                           isPreview ? null : <Shipping shippingInfo={shippingInfo} offerInfo={offerInfo} warranty={warranty} />
                         }
                         {
-                          isPreview ? null : <AddToCart offerInfo={offerInfo} />
+                          isPreview ? null : <AddToCart offerInfo={offerInfo} productData={productData.product_id}/>
                         }
                         {
                           (offerInfo.stockError || offerInfo.availabilityError) &&
@@ -270,6 +274,8 @@ const getProductComponent = (isPreview, taskCode) => {
     bindActionCreators(
       {
         notifyMe: wishlistActionCreators.notifyMe,
+        track: actionCreators.track,
+
       },
       dispatch,
     );

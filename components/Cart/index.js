@@ -81,6 +81,9 @@ class Cart extends Component {
 
   checkoutBtnHandler() {
     const { cartData } = this.props;
+    this.props.track({
+      eventName: "Checkout Started"
+    });
     const newRes = cartData.items.filter(data => data.inventory == 0);
     if (newRes.length) {
       toast.warn('There is some issue with cart items.');

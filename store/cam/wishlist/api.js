@@ -37,20 +37,28 @@ const notifyMe = params => axios.post(`${constants.WISHLIST_API_URL}/api/v1/aler
         if (params.postResult[i].wishlist_id === params.wishlistId) {
           window.appEventData.push({
             "event": params.eventName,
-            "cart": {
-              "item": params.postResult[i],
-            }
+            "product": [
+              {
+                "productInfo": {
+                  "productID": params.postResult[i].product_details.product_id,
+                }
+              }
+            ]
           });
         }
       }
     } else if (params.hasOwnProperty("params")) {
-      window.appEventData.push({
+        window.appEventData.push({
         "event": params.eventName,
-        "cart": {
-          "item": params.params.product_id,
-        }
+        "product": [
+          {
+            "productInfo": {
+              "productID": params.params.product_id,
+            }
+          }
+        ]
       });
-    } else {
+  }else {
       window.appEventData.push({
         "event": params.eventName,
         "cart": {

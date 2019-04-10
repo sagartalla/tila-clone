@@ -45,47 +45,75 @@ const giftApi = (cartItemId, typ, params = {}) => {
 }
 
 const track = (params) => {
-    if (params.hasOwnProperty("type") || params.eventName === "Cart Removals") {
-      for (var i = 0; i < params.postResult.length; i++) {
-        if (params.type === "add") {
-          if (params.postResult[i].cart_item_id === params.cartId) {
-            params.postResult[i].quantity = params.postResult[i].quantity + 1;
-            window.appEventData.push({
-              "event": params.eventName,
-              "cart": {
-                "item": params.postResult,
+  if (params.hasOwnProperty("type") || params.eventName === "Cart Removals") {
+    for (var i = 0; i < params.postResult.length; i++) {
+      if (params.type === "add") {
+        if (params.postResult[i].cart_item_id === params.cartId) {
+          params.postResult[i].quantity = params.postResult[i].quantity + 1;
+          window.appEventData.push({
+            "event": params.eventName,
+            "product": [
+              {
+                "quantity": params.postResult[i].quantity,
+                "productInfo": {
+                  "productID": params.postResult[i].product_details.product_id
+                }
               }
-            });
-          }
-        } else if (params.eventName === "Cart Removals") {
-          if (params.postResult[i].cart_item_id === params.cartId) {
-            window.appEventData.push({
-              "event": params.eventName,
-              "cart": {
-                "item": params.postResult[i],
+            ]
+          });
+        }
+      } else if (params.eventName === "Cart Removals") {
+        if (params.postResult[i].cart_item_id === params.cartId) {
+          window.appEventData.push({
+            "event": params.eventName,
+            "product": [
+              {
+                "quantity": params.postResult[i].quantity,
+                "productInfo": {
+                  "productID": params.postResult[i].product_details.product_id
+                }
               }
-            });
-          }
-        } else {
-          if (params.postResult[i].cart_item_id === params.cartId) {
-            params.postResult[i].quantity = params.postResult[i].quantity - 1;
-            window.appEventData.push({
-              "event": params.eventName,
-              "cart": {
-                "item": params.postResult,
+            ]
+          });
+        }
+      } else {
+        if (params.postResult[i].cart_item_id === params.cartId) {
+          params.postResult[i].quantity = params.postResult[i].quantity - 1;
+          window.appEventData.push({
+            "event": params.eventName,
+            "product": [
+              {
+                "quantity": params.postResult[i].quantity,
+                "productInfo": {
+                  "productID": params.postResult[i].product_details.product_id
+                }
               }
-            });
-          }
+            ]
+          });
         }
       }
     }
-    if (params.eventName !== "Cart Removals") {
-      window.appEventData.push({
-        "event": params.eventName,
-        "cart": {
-          "item": params.postResult,
+  }
+   else if (params.eventName !== "Cart Removals" && params.eventName!== "Product Added") {
+    window.appEventData.push({
+      "event": params.eventName,
+      "cart": {
+        "item": params.postResult,
+      }
+    });
+  }
+  else{
+    window.appEventData.push({
+      "event": params.eventName,
+      "product": [
+        {
+          "quantity": params.quantity,
+          "productInfo": {
+            "productID": params.product_id
+          }
         }
-      });
-    }
+      ]
+    });
+  }
 }
 export default { getCartDetailsApi, addToCart, removeCartItemApi, cartItemCountApi, giftApi,track };
