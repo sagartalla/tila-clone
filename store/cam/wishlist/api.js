@@ -3,7 +3,6 @@ import { toast } from 'react-toastify';
 import constants from '../../helper/constants';
 
 const getWishlistApi = (currentPage=0) => {
-  console.log('page',currentPage);
   return axios.get(`${constants.WISHLIST_API_URL}/api/v1/wishlist/getWishlist?size=10&page=${currentPage}`).then(({ data }) => {
     return { data };
   });

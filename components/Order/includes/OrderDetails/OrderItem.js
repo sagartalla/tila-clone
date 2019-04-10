@@ -110,14 +110,16 @@ class OrderItem extends Component {
         return 'Cancelled On';
       } else if (orderItem.status === 'RETURN_IN_PROGRESS') {
         return 'Return in progress';
+      } else if (orderItem.status === 'EXCHANGE_IN_PROGRESS') {
+        return 'Exchange in progress';
       } return '';
     };
     return (
       <div className={`${styles['shipment-wrap']} ${styles['mb-20']} ${styles['mt-20']} ${styles.flex}`}>
-        <Col md={7} sm={7} className={`${styles['pl-0']} ${styles['pr-0']}`}>
+        <Col md={7} sm={7} className={`${styles['pl-0']} ${styles['pr-0']} ${styles.flex} ${styles['flex-colum']}`}>
           {orderItem.products.map(product => (
             <React.Fragment>
-              <div className={`${styles['products-wrap']} ${styles.flex} ${styles['p-15']}`}>
+              <div className={`${styles.relative} ${styles['ht-100P']} ${styles['products-wrap']} ${styles.flex} ${styles['p-15']}`}>
                 <div key={product.id} className={`${styles['product-item']} ${styles.width100} ${styles.flex}`}>
                   <Col md={2} className={styles['p-0']}>
                     <div className={`${styles['img-wrap']} ${styles['flex-center']} ${styles['justify-center']}`}>
@@ -173,7 +175,7 @@ class OrderItem extends Component {
                                     <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.DISCOUNT} :</span><span>{'(-)'} {product.price.mrp - product.price.offer_price} {product.currency_code}</span></li>
                                   }
                                   <li className={`${styles['flx-space-bw']} ${styles['b-t']}`}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.PRICE} :</span><span> {product.price.offer_price} {product.currency_code}</span></li>
-                                  <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.SHIPPING} : </span><span>{product.price.shipping_fees ? `(+) ${product.price.shipping_fees} ${product.currency_code}` : 'FREE'}</span></li>
+                                  <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.SHIPPING} : </span><span className={styles.flex}>{product.price.shipping_fees ? `(+) ${product.price.shipping_fees} ${product.currency_code}` : <SVGComponent clsName={`${styles['ship-icon']}`} src="icons/free-shipping" />}</span></li>
                                   {product.gift_info &&
                                     <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.GIFT_CHARGES} : </span><span>{product.price.gift_charge ? `(+) ${product.price.gift_charge} ${product.currency_code}` : 'FREE'}</span></li>}
                                   <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.TOTAL} : </span><span className={styles.fontW600}> {product.price.final_price} {product.currency_code}</span></li>
@@ -194,6 +196,11 @@ class OrderItem extends Component {
                     </div>
                   </Col>
                 </div>
+                {needHelp &&
+                  <span className={`${styles['help-position']} ${styles.absolute} ${styles['thick-blue']} ${styles['p-5']} ${styles['flex-center']} ${styles['ml-10']} ${styles.border} ${styles['border-radius4']}`}>
+                    <SVGComponent clsName={`${styles['help-icon']}`} src="icons/help-icon/help" />
+                    &nbsp;&nbsp;Need Help?
+                  </span>}
               </div>
               {product.order_type === 'EXCHANGE' && product.order_item_type === 'DELIVERY' &&
                 <div className={`${styles['pt-5']} ${styles['pb-5']} ${styles['pl-15']} ${styles['thick-border-top']}`}>
@@ -206,15 +213,12 @@ class OrderItem extends Component {
                   Refund Initiated.
                 </div>}
               {product.gift_info &&
-                <div className={`${styles['fs-12']} ${styles.absolute} ${styles['p-5']} ${styles.right0} ${styles.top0} ${styles['thick-gry-clr']} ${styles['bg-light-gray']}`}>
-                  This order contains gift. <a>View details</a>
+                <div className={`${styles.flex} ${styles['fs-12']} ${styles.absolute} ${styles['p-5']} ${styles.right0} ${styles.top0} ${styles['thick-gry-clr']} ${styles['bg-light-gray']}`}>
+                  <SVGComponent clsName={`${styles['help-icon']}`} src="icons/gift-blue" />
+                  <span className={styles['ml-5']}>This order contains gift. <a>View details</a></span>
                 </div>}
             </React.Fragment>
           ))}
-          {needHelp && <span className={`${styles['help-position']} ${styles.absolute} ${styles['thick-blue']} ${styles['p-5']} ${styles['flex-center']} ${styles['ml-10']} ${styles.border} ${styles['border-radius4']}`}>
-            <SVGComponent clsName={`${styles['help-icon']}`} src="icons/help-icon/help" />
-            &nbsp;&nbsp;Need Help?
-          </span>}
         </Col>
         <Col md={5} sm={5} className={styles['thick-border-left']}>
           {payments && payments.length > 0 && payments[0].transaction_status === 'FAILED' ?
