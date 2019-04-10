@@ -107,13 +107,16 @@ class Wishlist extends Component {
               notifyMe={this.notify}
             />
         }
-        <Pagination
-          totalSize={getPageDetails.total_pages > 1 ? (getPageDetails.total_pages - 1): 0}
-          pageNeighbours={0}
-          onPageChanged = {this.onPageChanged}
-          currentPage={currentPage}
-        >
-        </Pagination>
+        {
+          !cartMiniWishList &&
+          <Pagination
+            totalSize={getPageDetails.total_pages > 1 ? (getPageDetails.total_pages - 1): 0}
+            pageNeighbours={0}
+            onPageChanged = {this.onPageChanged}
+            currentPage={currentPage}
+          >
+          </Pagination>
+        }
       </div>
     )
   }

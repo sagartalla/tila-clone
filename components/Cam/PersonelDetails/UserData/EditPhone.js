@@ -314,7 +314,7 @@ class EditPhone extends React.Component {
             </Row>
             <Row>
               <Col xs={12} md={12} className={`${styles['t-c']}`}>
-                <button className={`${styles['verify-no-btn']} ${styles['mt-20']}`} onClick={this.handleSubmit}>Verify Mobile Number</button>
+                <button className={`${styles['verify-no-btn']} ${styles['mt-20']}`} onClick={this.handleSubmit}>{this.props.buttonText}</button>
               </Col>
             </Row>
             <div>
@@ -352,5 +352,8 @@ EditPhone.propTypes = {
   errorMessege: PropTypes.string,
   userInfo: PropTypes.object
 };
+EditPhone.defaultProps = {
+  buttonText:'verify Mobile Number'
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditPhone);

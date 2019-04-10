@@ -82,6 +82,8 @@ class CartAndPaymentSideBar extends Component {
             <InstantCheckout
               insnt_item_listing_id={insnt_item_listing_id}
               isPdp={isPdp}
+              totalPrice={total_price}
+              currency={currency}
             />
           </div>
           : null

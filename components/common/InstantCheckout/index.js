@@ -12,6 +12,7 @@ import { selectors as paymentSelector} from '../../../store/payments'
 import { actionCreators as addressActionCreators, selectors as addressSelectors } from '../../../store/cam/address';
 import { actionCreators as vaultActionCreators, selectors as vaultSelectors } from '../../../store/cam/userVault';
 
+import Button from '../CommonButton'
 import ShippingAddress from '../../Cam/ShippingAddress';
 import UserVault from '../../Cam/UserVault';
 import {Modal} from 'react-bootstrap';
@@ -45,7 +46,8 @@ class InstantCheckout extends Component {
       cntryCode: '',
       phoneNumber: '',
       checked:false,
-      nextStep:'captcha'
+      nextStep:'captcha',
+      btnLoader:false
     }
 
     this.updateCVV = this.updateCVV.bind(this);
@@ -95,6 +97,7 @@ class InstantCheckout extends Component {
       nextStep: 'checkoutBtn'
     })
   }
+
   doInstantCheckout() {
     const {
       creditDebitCard, cntryCode, phoneNumber,
@@ -148,13 +151,32 @@ class InstantCheckout extends Component {
       redirect_url: `${window.location.origin}/${country}/${language}`,
       request_id: this.state.captcha_request_id
     };
-      doInstantCheckout(params)
+    this.setState({
+      btnLoader:true
+    },() => doInstantCheckout(params))
+
   }
 
   render() {
-    const { addressResults, defaultAddr, vaultResults, defaultCard, isPdp,paymentModesData } = this.props;
-    const { showMiniAddress, showMiniVault, creditDebitCard, cod, showBlocker } = this.state;
-    console.log('instantCheckout render',paymentModesData);
+    const {
+      addressResults,
+      defaultAddr,
+      vaultResults,
+      defaultCard,
+      isPdp,
+      paymentModesData,
+      totalPrice,
+      currency
+    } = this.props;
+    const {
+      showMiniAddress,
+      showMiniVault,
+      creditDebitCard,
+      cod,
+      showBlocker,
+      btnLoader,
+      checked
+    } = this.state;
     return (
       <div>
       {
@@ -238,9 +260,19 @@ class InstantCheckout extends Component {
         </div>
       </div> */}
       </div>
-      <div className={`${styles['flex']} ${styles['justify-center']}`}>
-      <button className={`${styles['fp-btn']} ${styles['fp-btn-sucess']} ${styles['fontW600']} ${styles['instant-btn']}`} onClick={this.doInstantCheckout}>INSTANT CHECKOUT</button>
+      {
+        !cod &&
+        <div
+          className={`${styles['flex']} ${styles['justify-center']}`}
+        >
+         <button
+          className={`${styles['fp-btn']} ${styles['fp-btn-sucess']} ${styles['fontW600']} ${styles['instant-btn']}`}
+          onClick={this.doInstantCheckout}>
+          INSTANT CHECKOUT
+         </button>
       </div>
+      }
+
       </div>
       : null
     }
@@ -255,11 +287,11 @@ class InstantCheckout extends Component {
           closeButton
           className={`${styles['modal-headerStyl']}`}
         >
-          <Modal.Title>Please Verify Your Number</Modal.Title>
+          <Modal.Title>Instant Checkout COD </Modal.Title>
         </Modal.Header>
        <Modal.Body>
          {
-           this.state.checked
+           checked
              ?
                {
                  captcha:  <Captcha
@@ -280,12 +312,13 @@ class InstantCheckout extends Component {
                 />,
               checkoutBtn:
                 <div>
-                  <button
+                  <Button
                     className={`${styles['fp-btn']} ${styles['fp-btn-sucess']} ${styles['fontW600']} ${styles['instant-btn']}`}
                     onClick={this.callInstantCheckout}
-                  >
-                    INSTANT CHECKOUT
-                  </button>
+                    btnText={ `Pay ${totalPrice} ${currency} on delivery` }
+                    disabled={btnLoader}
+                    btnLoading={btnLoader}
+                />
                 </div>
                }[this.state.nextStep]
              :
@@ -334,19 +367,3 @@ bindActionCreators(
   };
 
   export default connect(mapStateToProps, mapDispatchToProps)(InstantCheckout);
-
-
-
-
-
-  // <div className={`${styles['p-10-20']} ${styles['border-b']}`}>
-  // <label>Mobile Number*</label>
-  // <Row>
-  // <Col md={4}>
-  // <input type="text" placeholder="country code" onChange={this.cntryCodehandler} />
-  // </Col>
-  // <Col md={8}>
-  // <input type="text" placeholder="Mobile No" onChange={this.mobilehandler} />
-  // </Col>
-  // </Row>
-  // </div>
