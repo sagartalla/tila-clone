@@ -1,7 +1,9 @@
 import React from 'react';
 import { mergeCss } from '../../../utils/cssUtil';
+import { languageDefinations } from '../../../utils/lang';
 
 const styles = mergeCss('components/Search/search');
+const { PDP_PAGE } = languageDefinations();
 
 const RenderVariants = ({
   variantData, onSelectedVariant, isvisible, OncloseVariant,
@@ -15,7 +17,7 @@ const RenderVariants = ({
   return (
     <div className={`${styles['product-sizeDisplay']} ${isvisible ? styles['product-showsizeDisplay'] : ''}`} >
       <div className={`${styles['product-displayHeader']} ${styles['fs-14']} ${styles.flex} ${styles['justify-spacebetween']} ${styles['align-center']}`}>
-        <h4>Please Select productSize</h4>
+        <h4>{PDP_PAGE.PLEASE_SELECT_PRODUCT_SIZE}</h4>
         <div className={`${styles['fs-22']} ${styles['mr-5']} ${styles.pointer}`} onClick={OncloseVariant}>x</div>
       </div>
       <div className={`${styles['product-sizeContainer']}`}>

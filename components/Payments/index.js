@@ -294,7 +294,7 @@ class Payments extends React.Component {
   render() {
     const { login, showTab, paymentConfigJson, editCartDetails, showSlider, validation } = this.state;
     const { paymentOptions, defaultAddress, signInLoader, isLoggedIn, cartResults } = this.props;
-    const { PAYMENT_PAGE } = languageDefinations();
+    const { PAYMENT_PAGE, CART_PAGE } = languageDefinations();
 
     return (
       <div className={styles['payment']}>
@@ -369,7 +369,7 @@ class Payments extends React.Component {
           <Slider
             closeSlider={this.closeSlider}
             isOpen={showSlider}
-            label="Coupons"
+            label={CART_PAGE.COUPONS}
           >
             <Coupon
               closeSlider={this.closeSlider}

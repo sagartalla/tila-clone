@@ -64,7 +64,7 @@ const ProductDetails = ({ details, keyfeatures, isPreview, productInfo }) => {
             <Panel.Heading>
               <Panel.Title toggle className={styles['key-feature-inn']}>
                 <h4 className={`${styles['fs-14']} ${styles['fontW600']} ${styles['mb-5']} ${styles['mt-0']} ${styles['flx-space-bw']}`}>
-                  <span>Key features</span>
+                  <span>{PDP_PAGE.KEY_FEATURES}</span>
                   <SVGCompoent clsName={`${styles['expand-icon']}`} src="icons/down-arrow/down-arrow" />
                   {/* <span className={styles['fs-16']}>+</span> */}
                 </h4>
