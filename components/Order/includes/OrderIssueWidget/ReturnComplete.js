@@ -35,7 +35,7 @@ class ReturnComplete extends Component {
                       <div>
                         <h4 className={`${styles['flex-center']} ${styles['pb-20']}`}>
                           <SVGComponent clsName={`${styles['bg-tick-mark-icon']}`} src="icons/common-icon/bg-tick-mark" />
-                          <span className={styles['pl-15']}>Success</span>
+                          <span className={styles['pl-15']}>{ORDER_PAGE.SUCCESS}</span>
                         </h4>
                         <span><span className={styles['fontW600']}> {ORDER_PAGE.YOUR_ORDER}{selectedItem.name} </span>
                           <span>

@@ -1,11 +1,13 @@
 import React,{Component} from 'react'
 import PropTypes from 'prop-types';
-import _ from 'lodash'
+import _ from 'lodash';
+import { languageDefinations } from '../../../utils/lang/';
 import { mergeCss } from '../../../utils/cssUtil';
 
 const styles = mergeCss('components/common/Pagination/pagination');
 const LEFT_PAGE = 'LEFT_PAGE'
 const RIGHT_PAGE = 'RIGHT_PAGE'
+const { PERSONAL_INFO_MODAL } = languageDefinations();
 
 export default class Pagination extends Component {
   constructor(props) {
@@ -127,7 +129,7 @@ export default class Pagination extends Component {
                         onClick={this.handleMoveRight}
                       >
                         <span aria-hidden="true">&raquo;</span>
-                        <span className="sr-only">Next</span>
+                        <span className="sr-only">{PERSONAL_INFO_MODAL.NEXT}</span>
                       </a>
                     </li>
                   )

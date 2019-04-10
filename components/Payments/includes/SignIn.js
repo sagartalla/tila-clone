@@ -9,7 +9,7 @@ import { languageDefinations } from '../../../utils/lang/';
 import SocialLogin from '../../Login/SocialLogin';
 import { mergeCss } from '../../../utils/cssUtil';
 const styles = mergeCss('components/Payments/payment');
-const { PAYMENT_PAGE } = languageDefinations();
+const { PAYMENT_PAGE, CONTACT_INFO_MODAL } = languageDefinations();
 
 class SignIn extends Component {
   constructor(props) {
@@ -50,7 +50,7 @@ class SignIn extends Component {
           <Col md={4} sm={12} xs={12} className={styles['t-rt']}>
             <span className={`${styles['light-gry-clr']} ${styles['fontW600']}`}>{props.login.username}&emsp;</span>
             <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']}`} onClick={props.onClickEdit}>
-              EDIT
+              {CONTACT_INFO_MODAL.EDIT}
             </button>
           </Col> : null
           }

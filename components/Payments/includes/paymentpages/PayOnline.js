@@ -63,18 +63,18 @@ class PayOnline extends Component {
                 <iframe src={iframe_url} style={{ height: '426px', width: '500px', border: '0' }}></iframe>
                 <div className={styles['checkbox-material']}>
                   <input id="save-card" type="checkbox" onClick={this.saveCardHandler} disabled={disableSaveCard} />
-                  <label for="save-card"> Save this card </label>
+                  <label for="save-card"> {PAYMENT_PAGE.SAVE_THIS_CARD} </label>
                 </div>
               </div>
               :
               <div className={`${styles['pt-30']} ${styles['pb-30']}`}>
-                <p className={`${styles['mb-25']} `}>Once you click on Add New Card. There is no going back. You can't access any other modes of payment.</p>
+                <p className={`${styles['mb-25']} `}>{PAYMENT_PAGE.ONCE_YOU_CLICK_ON_ADD_NEW_CARD_THERE_IS_NO_GOING_BACK}</p>
                 <Button
                   className={`${styles['text-uppercase']} ${styles['new-card-btn']} ${styles['fs-16']} ${styles['border-radius']} ${styles['ht-40']} ${styles.width55}`}
                   onClick={this.fetchIframe}
-                  btnText={'Pay' + ' ' + data.amount_to_pay + ' ' + data.currency_code + ' ' + 'Using New Card'}
+                  btnText={PAYMENT_PAGE.PAY + ' ' + data.amount_to_pay + ' ' + data.currency_code + ' ' + PAYMENT_PAGE.USING_NEW_CARD}
                   hoverClassName="hoverBlueBackground"
-                  btnLoading={showLoading}           
+                  btnLoading={showLoading}        
                 />
               </div>
           }
