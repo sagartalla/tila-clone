@@ -96,6 +96,7 @@ const a = {
     SUGGESSIONS_URL: 'https://api-gateway-stage.fptechscience.com/auto-suggest/suggest/suggestions',
     COUPONS_URL: 'https://api-gateway-stage.fptechscience.com/dip/fpts',
     CAPTCHA_URL: 'https://api-gateway-stage.fptechscience.com/transformers/api/v1/captcha',
+    LOGISTICS_URL: 'https://api-gateway-stage.fptechscience.com/logistics',
   },
   preprod: {
     IMAGE_SEARCH_URL: 'https://apigateway-preprod.tila.com/image-search',

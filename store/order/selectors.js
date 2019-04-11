@@ -37,7 +37,6 @@ const getOrderDetails = (store) => {
           itemType: i.variant_info.item_type,
           productId: i.variant_info.product_id,
           catalogId: i.variant_info.catalog_id,
-          item_tracking_id: i.item_tracking_id || shortid.generate(),
           status: i.external_status,
           state_time_estimates: i.state_time_estimates,
           price: i.price,
@@ -52,6 +51,7 @@ const getOrderDetails = (store) => {
           order_type: i.order_type,
           order_item_type: i.order_item_type,
           order_status: i.status,
+          trackingId: i.item_tracking_id || null,
           warranty_duration: i.warranty_policy && i.warranty_policy.preferred_policy ?
             i.warranty_policy.policies[i.warranty_policy.preferred_policy] : {},
           gift_info: i.gift_info,

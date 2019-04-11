@@ -13,6 +13,7 @@ import constants from '../../../../constants';
 import { ORDER_ISSUE_TYPES, ORDER_ISSUE_STEPS } from '../../constants';
 import { actionCreators } from '../../../../store/order';
 import Warranty from '../../../../components/Product/includes/Warranty';
+import OrderTracker from './OrderTracker';
 
 // import  styles from '../order.styl';
 import { mergeCss } from '../../../../utils/cssUtil';
@@ -25,18 +26,16 @@ const cookies = new Cookies();
 const language = cookies.get('language') || 'en';
 const country = cookies.get('country') || 'SAU';
 
-const RenderButton = ({ callbackMethod, refundType }) => {
-  return (
-    <div className={styles['ml-5']}>
-      <button
-        className={`${styles['mini-btn']} ${styles['link-text']} ${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']} ${styles['fs-12']}`}
-        onClick={callbackMethod}
-      >
-        {refundType}
-      </button>
-    </div>
-  )
-}
+const RenderButton = ({ callbackMethod, refundType }) => (
+  <div className={styles['ml-5']}>
+    <button
+      className={`${styles['mini-btn']} ${styles['link-text']} ${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']} ${styles['fs-12']}`}
+      onClick={callbackMethod}
+    >
+      {refundType}
+    </button>
+  </div>
+);
 
 
 class OrderItem extends Component {
@@ -51,7 +50,7 @@ class OrderItem extends Component {
     const { orderItem } = this.props;
     const t = estimates.filter(state => state.status === orderItem.status);
     if (t.length > 0) {
-      return t[0].actual_time ? moment(t[0].actual_time).format('Do, dddd') : '';
+      return t[0].actual_time ? moment(t[0].actual_time).format('ddd, MMM Do') : '';
     } return '';
   }
 
@@ -62,7 +61,6 @@ class OrderItem extends Component {
   hideToolTip = () => {
     this.setState({ showToolTip: false });
   }
-
 
   cancelOrder = () => {
     const { raiseOrderIssue, orderItem, orderId } = this.props;
@@ -114,6 +112,18 @@ class OrderItem extends Component {
         return 'Exchange in progress';
       } return '';
     };
+
+    const showMsgAndDate = () => (
+      <div className={`${styles['date-cont']} ${styles['flx-spacebw-alignc']}`}>
+        <div>
+          <div className={styles['fs-12']}>{displayText()}</div>
+          <div className={`${styles['ff-t']} ${styles['fs-24']} ${styles['ipad-fs-20']}`}>
+            {btnType === 'cancel' ? moment(orderItem.products[0].promisedDeliveryDate).format('ddd, MMM Do') : !thankyouPage ? this.getDate(orderItem.products[0].state_time_estimates) : null}
+          </div>
+        </div>
+      </div>
+    );
+
     return (
       <div className={`${styles['shipment-wrap']} ${styles['mb-20']} ${styles['mt-20']} ${styles.flex}`}>
         <Col md={7} sm={7} className={`${styles['pl-0']} ${styles['pr-0']} ${styles.flex} ${styles['flex-colum']}`}>
@@ -220,20 +230,13 @@ class OrderItem extends Component {
             </React.Fragment>
           ))}
         </Col>
-        <Col md={5} sm={5} className={styles['thick-border-left']}>
+        <Col md={5} sm={5} className={`${styles['thick-border-left']} ${styles['p-0']}`}>
           {payments && payments.length > 0 && payments[0].transaction_status === 'FAILED' ?
             <div>Order Unsuccessful</div>
             :
             <React.Fragment>
               <div className={`${styles['p-15']} ${styles['ipad-pl-0']} ${styles['ipad-pr-0']} ${styles['flx-space-bw']}`}>
-                <div className={`${styles['date-cont']} ${styles['flx-spacebw-alignc']}`}>
-                  <div>
-                    <div className={styles['fs-12']}>{displayText()}</div>
-                    <div className={`${styles['ff-t']} ${styles['fs-24']} ${styles['ipad-fs-20']}`}>
-                      {btnType === 'cancel' ? moment(orderItem.products[0].promisedDeliveryDate).format('Do, dddd') : !thankyouPage ? this.getDate(orderItem.products[0].state_time_estimates) : null}
-                    </div>
-                  </div>
-                </div>
+                {showMsgAndDate()}
                 <div className={styles.flex}>
                   {isCancelable === 'TRUE' &&
                     <RenderButton
@@ -253,7 +256,7 @@ class OrderItem extends Component {
                   }
                 </div>
               </div>
-              <div className={`${styles['widget-wrap']} ${styles['pb-10']}`}>
+              <div className={`${styles['widget-wrap']} ${styles['p-20']}`}>
                 {thankyouPage ?
                   null
                   :
@@ -262,6 +265,7 @@ class OrderItem extends Component {
               </div>
             </React.Fragment>
           }
+          {orderItem.products[0].trackingId && <OrderTracker orderItem={orderItem.products[0]} showMsgAndDate={showMsgAndDate()} />}
         </Col>
       </div>
     );
