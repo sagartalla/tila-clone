@@ -78,7 +78,7 @@ class Help extends Component {
             <div className={`${styles['flexCenterContainer']} ${styles['helpHeroContainer']}`}>
               <div className={`${styles['flexColCenterContainer']}`} style={{width: '100%'}}>
                 <h3>Hi, How can we help you today ?</h3>
-                <div className={styles['searchContainer']}></div>
+                {/* <div className={styles['searchContainer']}></div> */}
               </div>
               <div className={styles['contactContainer']}>
                 {ContactTabs.map(this.renderContactCard())}
