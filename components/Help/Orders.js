@@ -105,8 +105,7 @@ class Orders extends Component {
     const { title, image_url } = variant_info;
     const [order_item_id] = order_item_ids;
     const isSelected = this.state.selectedOrder ? this.state.selectedOrder.order_item_ids[0] === order_item_id : false;
-    const { pathname } = window.location;
-    const orderURL = pathname.replace(this.props.query, `cam/orders/${order_id}`)
+    const orderURL =`/${country}/${language}/cam/orders/${order_id}`
     return (
       <div key={order_item_id} style={{  borderBottom: '0.5px solid #f2f2f2'}} onClick={this.selectOrder(orderItemObj)}>
         <div className={styles['facp']} style={{ height: '110px', padding: 10 }}>
