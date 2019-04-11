@@ -1,7 +1,10 @@
-import React,{Component} from 'react'
+import React,{Component} from 'react';
 import { mergeCss } from '../../../utils/cssUtil';
-import SVGComponent from '../../common/SVGComponet'
+import { languageDefinations } from '../../../utils/lang/';
+import SVGComponent from '../../common/SVGComponet';
+
 const styles = mergeCss('components/common/DragDropUpload/dragDrop');
+const { DRAG_DROP } = languageDefinations();
 
 export default class DragDropUpload extends Component {
     constructor(props) {
@@ -54,7 +57,7 @@ export default class DragDropUpload extends Component {
                     <div className={`${styles['dragdropicon']}`}>
                      <SVGComponent src="icons/dragdrop" className={`${styles['dragdropicon']}`} />
                     </div>                    
-                    <p> upload or drag and drop the files</p>
+                    <p> {DRAG_DROP.DRAG_AND_DROP}</p>
                 </form>
             </div>
         )

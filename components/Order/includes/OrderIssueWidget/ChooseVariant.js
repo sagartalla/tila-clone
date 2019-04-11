@@ -3,14 +3,13 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import _ from 'lodash';
-
 import { selectors, actionCreators } from '../../../../store/order';
-import {languageDefinations} from '../../../../utils/lang'
+import { languageDefinations } from '../../../../utils/lang';
 import { mergeCss } from '../../../../utils/cssUtil';
 
 const styles = mergeCss('components/Order/includes/OrderIssueWidget/orderIssue');
 
-const {ORDER_PAGE}=languageDefinations()
+const { ORDER_PAGE } = languageDefinations();
 
 class ChooseVariant extends Component {
   constructor(props) {
@@ -89,27 +88,25 @@ class ChooseVariant extends Component {
       <div className={styles['exchange-items']}>
         
         <div className={styles['pb-10']}>
-          <h5 className={`${styles['fontW600']} ${styles['m-0']}`}>Size To Exchange :</h5>
+          <h5 className={`${styles['fontW600']} ${styles['m-0']}`}>{ORDER_PAGE.SIZE_TO_EXCHANGE} :</h5>
           <span className={`${styles['fs-12']} ${styles['textColor']}`}>
-            Size not available? Click on the unavailable size to return the item
+            {ORDER_PAGE.SIZE_NOT_AVALABLE}
           </span>
         </div>
         {
-          Object.keys(exchangeVariants[0].variant_details.attribute_map).length > 0  &&
+          Object.keys(exchangeVariants[0].variant_details.attribute_map).length > 0 &&
           <ul className={`${styles['flex']} ${styles['product-sizeContainer']}`}>
             { this.renderExchangeVariants(exchangeVariants) }
           </ul>
         }        
         <div>
           {{
-            errorMsg: <p className={`${styles['error-msg']} ${styles['fs-12']}`}>Selected Size is
-             Not Available Currently
-            .How ever you can return the product to get full refund
+            errorMsg: <p className={`${styles['error-msg']} ${styles['fs-12']}`}>{ORDER_PAGE.SELECTED_SIZE_NOT_AVAILABLE}
           </p>,
           successMsg : <p className={`${styles['success-msg']} ${styles['fs-12']}`}>
-            Selected Size is Available For Exchange
+            {ORDER_PAGE.SELECTED_SIZE_AVAILABLE_FOR_EXCHANGE}
           </p>,
-          emptyMsg: ''
+          emptyMsg: '',
           }[message]}
         </div>
       </div>

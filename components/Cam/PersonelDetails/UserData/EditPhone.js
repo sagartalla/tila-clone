@@ -1,20 +1,20 @@
 import React from 'react';
 import { Row, Col, Dropdown, Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import Btn from '../../../common/Button';
-import Input from '../../../common/Input';
-
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { actionCreators, selectors } from '../../../../store/cam/personalDetails';
+import { toast } from 'react-toastify';
 import Cookies from 'universal-cookie';
+import Btn from '../../../common/Button';
+import Input from '../../../common/Input';
+import { actionCreators, selectors } from '../../../../store/cam/personalDetails';
 import { mergeCss } from '../../../../utils/cssUtil';
 import { languageDefinations } from '../../../../utils/lang';
 import CountryDialCode from '../../../../constants/CountryDialCode';
 import FormValidator from '../../../common/FormValidator';
 import SVGCompoent from '../../../common/SVGComponet';
+
 const styles = mergeCss('components/Cam/PersonelDetails/profile');
-import { toast } from 'react-toastify';
 const { CONTACT_INFO_MODAL } = languageDefinations();
 const cookies = new Cookies();
 
@@ -170,10 +170,10 @@ class EditPhone extends React.Component {
               null
           }
           <div className={`${styles['thank-you-part']} ${styles['p-40']} ${styles['flex-center']} ${styles['flex-colum']}`}>
-            <h4 className={`${styles['m-0']} ${styles['pb-20']}`}>Thank you</h4>
-            <p className={`${styles['fs-12']} ${styles['thick-gry-clr']}`}> Your phone number has been successfully verified </p>
+            <h4 className={`${styles['m-0']} ${styles['pb-20']}`}>{CONTACT_INFO_MODAL.THANK_YOU}</h4>
+            <p className={`${styles['fs-12']} ${styles['thick-gry-clr']}`}> {CONTACT_INFO_MODAL.YOUR_PHONE_NUMBER_VERIFIED} </p>
             {
-              isPopup && <button className={`${styles['verify-no-btn']} ${styles['mt-20']}`} variant="primary" onClick={this.handleClose}>done</button>
+              isPopup && <button className={`${styles['verify-no-btn']} ${styles['mt-20']}`} variant="primary" onClick={this.handleClose}>{CONTACT_INFO_MODAL.DONE}</button>
             }
           </div>
         </div>
@@ -196,7 +196,7 @@ class EditPhone extends React.Component {
             ?
             <span className={`${styles['flex-center']} ${styles['flex-colum']}`}>
               <MobileImage />
-              <span className={`${styles['thick-gry-clr']} ${styles['fs-14']} ${styles['pt-20']}`}>Verify your phone number to Enable Pay on Delivery</span>
+              <span className={`${styles['thick-gry-clr']} ${styles['fs-14']} ${styles['pt-20']}`}>{CONTACT_INFO_MODAL.VERIFY_PHONE}</span>
             </span>
 
             :
@@ -263,7 +263,7 @@ class EditPhone extends React.Component {
                         : null
                     }
                     {/* <span className={styles['error']}>error message</span> */}
-                    {showOtp ? <a className={`${styles['show-otp']} ${styles['fs-12']} ${styles['thick-blue']}`} onClick={this.fetchOtp}>send otp</a> : null}
+                    {showOtp ? <a className={`${styles['show-otp']} ${styles['fs-12']} ${styles['thick-blue']}`} onClick={this.fetchOtp}>{CONTACT_INFO_MODAL.SEND_OTP}</a> : null}
                   </div>
                   {/* <Input
                     placeholder={`${CONTACT_INFO_MODAL.ENTER} ${CONTACT_INFO_MODAL.PHONE_NUMBER}`}
@@ -314,13 +314,13 @@ class EditPhone extends React.Component {
             </Row>
             <Row>
               <Col xs={12} md={12} className={`${styles['t-c']}`}>
-                <button className={`${styles['verify-no-btn']} ${styles['mt-20']}`} onClick={this.handleSubmit}>Verify Mobile Number</button>
+                <button className={`${styles['verify-no-btn']} ${styles['mt-20']}`} onClick={this.handleSubmit}>{CONTACT_INFO_MODAL.VERIFY_MOBILE_NUMBER}</button>
               </Col>
             </Row>
             <div>
               {{
                 null: null,
-                FAILURE: <div className={`${styles['thick-red']} ${styles['fs-12']}`}>please enter valid otp</div>,
+                FAILURE: <div className={`${styles['thick-red']} ${styles['fs-12']}`}>{CONTACT_INFO_MODAL.ENTER_VALID_OTP}</div>,
                 SUCCESS: ''
               }[otpResponse]}
             </div>

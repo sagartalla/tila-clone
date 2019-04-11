@@ -71,7 +71,7 @@ class Shipping extends Component {
                 <div className={`${styles['flx-spacebw-alignc']} ${styles['fontW600']} ${styles['pt-15']} ${styles['pb-15']} ${styles['fs-12']} ${styles['warrenty-part']}`}>
                   <div className={`${styles['flex-center']}`}>
                     <SVGCompoent clsName={`${styles['return-icon']} ${styles['mr-10']}`} src="icons/common-icon/guarantee" />
-                    <span>100% Orginal</span>
+                    <span>{PDP_PAGE.HUNDRED_PER_ORIGINAL}</span>
                   </div>
                   <div className={`${styles['flex-center']} ${styles['warenty-part-inn']}`}>
                     <SVGCompoent clsName={`${styles['return-icon']} ${styles['mr-10']}`} src="icons/common-icon/non-return" />

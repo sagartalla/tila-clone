@@ -124,7 +124,7 @@ class VaultAddNewCard extends Component {
               <Col md={5}>
                 <Col md={12} sm={12} xs={12} className={styles['pl-0']}>
                   <InputComponent
-                    labelTxt='Card Number*'
+                    labelTxt={VAULT_PAGE.CARD_NUMBER}
                     inputName='card_number'
                     onChangeFunc={this.cardChk}
                     error={card_number_error}
@@ -132,7 +132,7 @@ class VaultAddNewCard extends Component {
                 </Col>
                 <Col md={12} sm={12} xs={12} className={styles['pl-0']}>
                   <InputComponent
-                    labelTxt='Name on Card*'
+                    labelTxt={VAULT_PAGE.NAME_ON_CARD}
                     inputName='user_name'
                     onChangeFunc={this.nameChk}
                     error={nm_error}
@@ -141,7 +141,7 @@ class VaultAddNewCard extends Component {
                 <Col md={6} sm={12} xs={12} className={styles['pl-0']}>
                   <div className={styles['select']}>
                     <select name="exp_mm" className={styles['select-text']} onChange={this.expMonthChk} required>
-                      <option value="0">Expiry Month</option>
+                      <option value="0">{VAULT_PAGE.EXPIRY_MONTH}</option>
                       {dateoptions}
                     </select>
                     <span className={styles['select-highlight']}></span>
@@ -152,7 +152,7 @@ class VaultAddNewCard extends Component {
                 <Col md={6} sm={12} xs={12} className={styles['pl-0']}>
                   <div className={styles['select']}>
                     <select name="exp_yr" className={styles['select-text']} onChange={this.expYearChk} required>
-                      <option value="0">Expiry Year</option>
+                      <option value="0">{VAULT_PAGE.EXPIRY_YEAR}</option>
                       {yearoptions}
                     </select>
                     <span className={styles['select-highlight']}></span>

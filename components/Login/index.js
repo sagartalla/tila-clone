@@ -207,7 +207,7 @@ class Login extends Component {
                   {
                     mode === 'register'
                       ?
-                      'Register with tila.com'
+                      LOGIN_PAGE.REGISTER_WITH_TILA
                       :
                       LOGIN_PAGE.TILA_COM
                   }
@@ -315,7 +315,7 @@ class Login extends Component {
                       <div className={`${styles['checkbox-material']} ${styles.flex} ${styles['pb-15']}`}>
                           <input id="deals-offers-reg" type="checkbox" onChange={this.acceptsOffers} checked={clicked} />
                           <label htmlFor="deals-offers-reg">
-                             I would like to receive deals and offers.
+                             {LOGIN_PAGE.I_WOULD_LIKE_TO_RECEIVE_OFFERS}
                           </label>
                       </div>
 
@@ -342,7 +342,7 @@ class Login extends Component {
             <div className={`${styles['login-social-icon']} ${styles['pl-15']}`}>
               <a className={`${styles['flex']} ${styles['pt-10']}`}>
                 <span onClick={this.handleClick}>
-                  Forgot Password?
+                  {LOGIN_PAGE.FORGOT_PASSWORD}
                 </span>
               </a>
               <span className={`${styles['thick-gry-clr']} ${styles['pt-5']} ${styles['pb-5']} ${styles['flex']}`}>{LOGIN_PAGE.SIGN_UP_WITH}</span>

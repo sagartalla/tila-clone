@@ -42,7 +42,7 @@ const SocialMedia = () => (
           </span>
         </a>
       </div>
-      <span className={`${styles['fs-10']}`}>{LINK_TO_SOCIAL_MEDIA.NOTE} <a href="#">(Unlink Now)</a></span>
+      <span className={`${styles['fs-10']}`}>{LINK_TO_SOCIAL_MEDIA.NOTE} <a href="#">({LINK_TO_SOCIAL_MEDIA.UN_LINK})</a></span>
     </div>
   </div>
 );

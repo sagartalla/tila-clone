@@ -18,7 +18,7 @@ import { actionCreators } from '../../../../store/order';
 import { mergeCss } from '../../../../utils/cssUtil';
 import { languageDefinations } from '../../../../utils/lang';
 
-const { ORDER_PAGE } = languageDefinations();
+const { ORDER_PAGE, CART_PAGE } = languageDefinations();
 const styles = mergeCss('components/Order/order');
 const cookies = new Cookies();
 
@@ -141,7 +141,7 @@ class OrderItem extends Component {
                               <span />
                             </span>
                             <span>
-                              <span>Quantity : </span>
+                              <span>{CART_PAGE.QUANTITY} : </span>
                               <span>{product.orderIds.length}</span>
                             </span>
                           </div>
@@ -166,8 +166,8 @@ class OrderItem extends Component {
                                     <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.DISCOUNT} :</span><span>{'(-)'} {product.price.mrp - product.price.offer_price} {product.currency_code}</span></li>
                                   }
                                   <li className={`${styles['flx-space-bw']} ${styles['b-t']}`}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.PRICE} :</span><span> {product.price.offer_price} {product.currency_code}</span></li>
-                                  <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.SHIPPING} : </span><span>{product.price.shipping_fees ? `(+) ${product.price.shipping_fees} ${product.currency_code}` : 'FREE'}</span></li>
-                                  <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.GIFT_CHARGES} : </span><span>{product.price.gift_charge ? `(+) ${product.price.gift_charge} ${product.currency_code}` : 'FREE'}</span></li>
+                                  <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.SHIPPING} : </span><span>{product.price.shipping_fees ? `(+) ${product.price.shipping_fees} ${product.currency_code}` : CART_PAGE.FREE}</span></li>
+                                  <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.GIFT_CHARGES} : </span><span>{product.price.gift_charge ? `(+) ${product.price.gift_charge} ${product.currency_code}` : CART_PAGE.FREE}</span></li>
                                   <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.TOTAL} : </span><span className={styles['fontW600']}> {product.price.final_price} {product.currency_code}</span></li>
                                 </ul>
                               </div>}

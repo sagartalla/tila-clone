@@ -6,20 +6,20 @@ import { Row, Col } from 'react-bootstrap';
 import Cookies from 'universal-cookie';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-
+import { languageDefinations } from '../../../utils/lang/';
 import { actionCreators, selectors } from '../../../store/common/instantCheckout';
 import { actionCreators as addressActionCreators, selectors as addressSelectors } from '../../../store/cam/address';
 import { actionCreators as vaultActionCreators, selectors as vaultSelectors } from '../../../store/cam/userVault';
-
 import ShippingAddress from '../../Cam/ShippingAddress';
 import UserVault from '../../Cam/UserVault';
 
 import AddrCard from './includes/AddrCard';
 import VaultCard from './includes/VaultCard';
 import CodCard from './includes/CodCard';
-
 import { mergeCss } from '../../../utils/cssUtil';
+
 const styles = mergeCss('components/common/InstantCheckout/instant');
+const { INSTANT_CHECKOUT } = languageDefinations();
 
 const cookies = new Cookies();
 
@@ -110,7 +110,7 @@ class InstantCheckout extends Component {
   cntryCodehandler(e) {
     this.setState({ cntryCode: e.target.value });
   }
-
+/* eslint-disable */
   render() {
     const { addressResults, defaultAddr, vaultResults, defaultCard, isPdp } = this.props;
     const { showMiniAddress, showMiniVault, creditDebitCard, cod, showBlocker } = this.state;
@@ -127,13 +127,13 @@ class InstantCheckout extends Component {
           : ''
         }
         <h4 className={`${styles['fontW600']} ${styles['mb-0']} ${styles['flex']}`}>
-          Checkout with 1 click
+          {INSTANT_CHECKOUT.CHECKOUT_WITH_ONE_CLICK}
           {/* <span className={`${styles['checkout-quat']} ${styles['fs-12']} ${styles['flex-center']} ${styles['justify-around']}`}>?</span> */}
         </h4>
-        <p className={`${styles['fs-12']} ${styles['thick-gry-clr']}`}>With your preffered payment and delivery address</p>
+        <p className={`${styles['fs-12']} ${styles['thick-gry-clr']}`}>{INSTANT_CHECKOUT.WITH_YOUR_PREFERRED_PAYMENT}</p>
         <div className={`${styles['flex']}`}>
-        <span className={`${styles['fs-12']} ${styles['pr-30']}`}><input type="radio" name="pay_type" className={styles['radio-btn']} checked={creditDebitCard} onChange={this.creditCardClickHandler} /> Credit/ Debit Card</span>
-        <span className={styles['fs-12']}><input type="radio" name="pay_type" className={styles['radio-btn']} checked={cod} onChange={this.codClickHandler} /> COD</span>
+        <span className={`${styles['fs-12']} ${styles['pr-30']}`}><input type="radio" name="pay_type" className={styles['radio-btn']} checked={creditDebitCard} onChange={this.creditCardClickHandler} /> {INSTANT_CHECKOUT.CREDIT_DEDIT}</span>
+        <span className={styles['fs-12']}><input type="radio" name="pay_type" className={styles['radio-btn']} checked={cod} onChange={this.codClickHandler} /> {INSTANT_CHECKOUT.COD}</span>
         </div>
         <div className={`${styles['border']} ${styles['border-radius2']} ${styles['bg-white']} ${styles['relative']} ${styles['mt-10']}`}>
         {
@@ -179,13 +179,13 @@ class InstantCheckout extends Component {
         {
           cod ?
           <div className={`${styles['p-10-20']} ${styles['border-b']}`}>
-          <label>Mobile Number*</label>
+          <label>{INSTANT_CHECKOUT.MOBILE_NUMBER}</label>
           <Row>
           <Col md={4}>
-          <input type="text" placeholder="country code" onChange={this.cntryCodehandler} />
+          <input type="text" placeholder={INSTANT_CHECKOUT.COUNTRY_CODE} onChange={this.cntryCodehandler} />
           </Col>
           <Col md={8}>
-          <input type="text" placeholder="Mobile No" onChange={this.mobilehandler} />
+          <input type="text" placeholder={INSTANT_CHECKOUT.MOBILE_NO} onChange={this.mobilehandler} />
           </Col>
           </Row>
           </div> : null
@@ -199,7 +199,7 @@ class InstantCheckout extends Component {
       </div> */}
       </div>
       <div className={`${styles['flex']} ${styles['justify-center']}`}>
-      <button className={`${styles['fp-btn']} ${styles['fp-btn-sucess']} ${styles['fontW600']} ${styles['instant-btn']}`} onClick={this.doInstantCheckout}>INSTANT CHECKOUT</button>
+      <button className={`${styles['fp-btn']} ${styles['fp-btn-sucess']} ${styles['fontW600']} ${styles['instant-btn']}`} onClick={this.doInstantCheckout}>{INSTANT_CHECKOUT.INSTANT_CHECKOUT}</button>
       </div>
       </div>
       : null
