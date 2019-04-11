@@ -3,6 +3,11 @@
   align-items center
   justify-content center
 
+.facp
+  display flex
+  align-items center
+  cursor pointer 
+
 .flexColCenterContainer
   @extend .flexCenterContainer
   flex-direction column
@@ -38,27 +43,27 @@
   width 100%
 
 .topicContainer
-  height: 250px
-  width: 350px
+  height 250px
+  width 350px
   border-radius 10px
   box-shadow 0px 0px 15px -5px #ccc
-  overflow: hidden;
-  margin: 20px 0px
-  padding: 20px
-  display: flex
-  flex-direction: column
-  justify-content: space-between
+  overflow hidden;
+  margin 20px 0px
+  padding 20px
+  display flex
+  flex-direction column
+  justify-content space-between
 
 .incidentContainer 
-  padding: 20px
-  display: flex
-  height: 120px
-  width: 100%
+  padding 20px
+  display flex
+  height 120px
+  width 100%
   border-radius 10px
   box-shadow 0px 0px 15px -5px #ccc
-  justify-content: space-between
-  align-items: center
-  margin: 20px 0px
+  justify-content space-between
+  align-items center
+  margin 20px 0px
 
 .categoryValue
   display flex
@@ -83,9 +88,9 @@
   border-left 0.25px solid #f2f2f2
 
 .answersContainer
-  width: 75%
-  overflow: scroll
-  padding: 0px 20px
+  width 75%
+  overflow scroll
+  padding 0px 20px
 
 .showDiv
   display block
@@ -116,7 +121,7 @@
   right 0
   z-index 2001
   background-color white
-  transition: all 0.3s;
+  transition all 0.3s;
 
 .closeModal
   height 100%
@@ -124,18 +129,179 @@
   position fixed
   top 0
   right 0
-  transform: translateX(800px)
+  transform translateX(800px)
   z-index 2001
   background-color white
   animation-name slideClose
   animation-duration 0.3s
   animation-fill-mode both
 
+.contentContainer
+  display flex
+  padding 10px 0px
+  max-height 800px
+  height 100%
+
+.questionBox
+  cursor pointer
+  font-size 14px
+  height 40px
+  overflow hidden
+  display flex
+  align-items center
+
+.questionBox-open
+  @extend .questionBox
+  color #45689A
+  font-weight 800
+  border-bottom 0
+
+.questionBox-close
+  @extend .questionBox
+  color #000000
+  font-weight 500
+  border-bottom 0.25px solid #f2f2f2
+
+.orderImgContainer
+  flex-shrink 0
+  width 75px
+  height 95px
+  padding 5px
+  border-radius 5px
+  border 0.5px solid #f2f2f2
+
+.imgContain
+  width 100%
+  height 100%
+  object-fit contain
+
+.formLabel
+  font-size 12px
+  color #8C8C92
+
+.dropDownInput
+  @extends .facp
+  width 100%
+  min-height 35px
+  border-bottom 1px solid #c8c6cc
+  position relative
+  outline 0
+
+.dropDownBox
+  border-radius 5px
+  padding 10px
+  position absolute
+  width 100%
+  margin 10px 0px
+  box-shadow 0px 0px 15px -5px #ccc
+  transition all 0.25s
+  background-color #fff
+  z-index 5
+
+.dropDownBox-open
+  @extends .dropDownBox
+  visibility visible
+  opacity 1
+  top 30px
+
+.dropDownBox-close
+  @extends .dropDownBox
+  visibility hidden
+  opacity 0
+  top -10px
+
+.textAreaBox
+  width 100%
+  border-radius 5px
+  border-color #d2d2d2
+  outline 0
+  font-size 14px
+  padding 10px
+  resize vertical
+  
+
+.ModalTextArea
+  @extends .textAreaBox
+  margin 10px 0px
+  min-height 250px
+
+.MsgTextArea
+  @extends .textAreaBox
+  min-height 100px
+
+.modalFormButton
+  margin-top 30px
+  margin-bottom 10px
+  text-align center
+  cursor pointer
+  padding 10px 25px
+  background-color #44689A
+  color #ffffff
+  border-bottom-right-radius 25px
+
+.MsgBoxContainer
+  display flex
+  justify-content space-between
+  font-size 13px
+  margin 20px 0px
+
+.UploadButton
+  position relative
+  overflow hidden
+  cursor pointer
+  padding 5px 10px
+  border 1px solid #44689A
+  color #44689A
+  border-radius 5px
+
+.SendMsgButton
+  cursor pointer
+  padding 5px 25px
+  background-color #44689A
+  color #ffffff
+  border-bottom-right-radius 25px
+
+.SelectIssueButton
+   height 30px
+   width 150px
+   margin 10px
+   display flex
+   justify-content center
+   align-items center
+   font-size 14px
+   padding 10px 20px
+   color #44689A
+   border 0.5px solid #f2f2f2
+   border-radius 3
+
+.TktTitleContainer
+  line-height 1.5
+  cursor pointer
+  padding 0px 20px
+  height 90px
+  display flex
+  flex-direction column
+  justify-content center
+  border-top 0.5px solid #f2f2f2
+
+.userProfile
+  width 40px
+  height 40px
+  border-radius 50%
+  background-color #CFCFCF
+  margin 10px 10px 10px 0px
+
+.SupportBoxContainer
+  height 150px
+  display flex
+  flex-direction column
+  justify-content space-evenly
+
 @keyframes slideOpen {
   from {transform: translateX(800px)}
   to {transform: translateX(0px)}
-  }
+}
 @keyframes slideClose {
   from {transform: translateX(0px)}
   to {transform: translateX(800px)}
-  }
+}

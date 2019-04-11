@@ -5,7 +5,6 @@ import Cookies from 'universal-cookie';
 import { actionCreators as helpActions } from '../../store/helpsupport';
 import { selectors as authSelectors } from '../../store/auth';
 import { mergeCss } from '../../utils/cssUtil';
-import { mockData, mockInc } from './mockIncidents';
 
 const cookies = new Cookies();
 
@@ -58,22 +57,13 @@ const ReplyBox = (props) => {
   )
   return(
     <div style={{ padding: '10px 0px'}}>
-      <textarea style={{    
-        width: '100%',
-        borderRadius: '5px',
-        borderColor: '#d2d2d2',
-        outline: 0,
-        fontSize: '14px',
-        padding: '10px',
-        minHeight:'100px',
-        resize: 'vertical'
-      }} placeholder='Reply to this message' value={msg} onChange={handleMsg} />
-      <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '13px', margin: '20px 0px'}}>
-        <div style={{ position: 'relative', overflow: 'hidden', cursor: 'pointer', padding: '5px 10px', border: '1px solid #44689A', color: '#44689A', borderRadius: '5px'}}>
+      <textarea className={styles['MsgTextArea']} placeholder='Reply to this message' value={msg} onChange={handleMsg} />
+      <div className={styles['MsgBoxContainer']}>
+        <div className={styles['UploadButton']}>
           UPLOAD
           <input type='file' onChange={handleAttachements} style={{opacity: 0, position: 'absolute', top: 0, right: 0, width: '100%', heignt: '100%'}} />
         </div>
-        <div onClick={props.updateIncident(msg, files)} style={{ cursor: 'pointer', padding: '5px 25px', backgroundColor: '#44689A', color: '#ffffff', borderBottomRightRadius: '25px'}}>SEND MESSAGE</div>
+        <div onClick={props.updateIncident(msg, files)} className={styles['SendMsgButton']}>SEND MESSAGE</div>
       </div>
       {Object.keys(files).length ? 
             <div style={{ fontSize: '12px'}}>
@@ -163,7 +153,7 @@ class Incidents extends Component {
     const {id, createdTime, referenceNumber, subject, statusTiLa} = tkt;
     const isSelected = id === this.state.selectedIncident;
     return (
-      <div key={id} onClick={this.selectTicket(id)} style={{ lineHeight: 1.5, backgroundColor: isSelected ? '#F8F8F8' : 'transparent', cursor: 'pointer', padding: '0px 20px', height: '90px', display: 'flex', flexDirection: 'column', justifyContent: 'center', borderTop: '0.5px solid #f2f2f2'}}>
+      <div key={id} onClick={this.selectTicket(id)} className={styles['TktTitleContainer']} style={{ backgroundColor: isSelected ? '#F8F8F8' : 'transparent'}}>
         <div style={{ fontSize: '14px' }}>{subject}</div>
         <div style={{ fontSize: '13px', color: '#636363'}}>{referenceNumber}</div>
         <div style={{ fontSize: '12px', color: '#636363', display: 'flex', justifyContent: 'space-between' }}>
@@ -190,7 +180,7 @@ class Incidents extends Component {
       <div key={threadSequence} style={{ padding: '20px 0px', borderBottom: '0.5px solid #f2f2f2'}}>
         <div style={{display: 'flex', alignItems: 'center', fontSize: '14px', justifyContent: 'space-between'}}>
           <div style={{display: 'flex', alignItems: 'center'}}>
-            <div style={{ width: 40, height: 40, borderRadius: '50%', backgroundColor: '#CFCFCF', margin: '10px 10px 10px 0px'}}/>
+            <div className={styles['userProfile']}/>
             <div>
               <div>{nameOfPerson || 'User'}</div>
               <div style={{ fontSize: '12px', color: '#98989D'}}>Title</div>

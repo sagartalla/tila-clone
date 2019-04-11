@@ -90,14 +90,7 @@ class Answers extends Component {
         <div 
           onClick={this.openAnswer(id)} 
           dangerouslySetInnerHTML={{__html: question}}
-          style={{ 
-            cursor: 'pointer', 
-            fontSize: 14, 
-            height: 40, 
-            color: isOpened ? '#45689A' : '#000000',
-            fontWeight: isOpened ? '800' : '500',
-            borderBottom: isOpened ? '0' : '0.25px solid #f2f2f2', overflow: 'hidden', display: 'flex', alignItems: 'center'
-          }}
+          className={isOpened ? styles['questionBox-open'] : styles['questionBox-close']}
         >
         </div>
         <div 
@@ -109,7 +102,7 @@ class Answers extends Component {
     )
   }
   renderRecentOrderTab = () => {
-    const isSelected = this.state.selectedCategory === 'orders';
+    const isSelected = this.state.selectedCategory === 'orders' && !window.location.hash;
     const { pathname } = window.location;
     const ordersUrl = pathname.replace(this.props.query, `answers/orders`)
     return (
@@ -133,7 +126,7 @@ class Answers extends Component {
     return(
       <div>
         <a href={helpCenterUrl} style={{margin: '1px', fontSize: '13px'}}>Back to Help Center</a>
-        <div style={{ display: 'flex', padding: '10px 0px', maxHeight: '800px', height: '100%'}}>
+        <div className={styles['contentContainer']}>
           <div className={styles['categoryContainer']}>
             {this.renderRecentOrderTab()}
             {Object.keys(this.props.categoriesObj).sort(sort).map(this.renderCategories(true, null))}
@@ -143,7 +136,7 @@ class Answers extends Component {
             ? answerKeys.length > 0 ? answerKeys.map(this.renderAnswers) : <div> No Questions Available </div> 
             : 
               <div style={{ height: '100%'}}>
-                <Orders isLoggedIn={this.props.isLoggedIn} renderContactCard={this.props.renderContactCard} handleContactClick={this.props.handleContactClick}/>
+                <Orders query={this.props.query} isLoggedIn={this.props.isLoggedIn} renderContactCard={this.props.renderContactCard} handleContactClick={this.props.handleContactClick}/>
               </div>
           }
           </div>

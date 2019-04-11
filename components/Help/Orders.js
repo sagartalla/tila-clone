@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Cookies from 'universal-cookie';
 import { actionCreators as helpActions } from '../../store/helpsupport';
 import { selectors as orderSelectors, actionCreators as orderActions} from '../../store/cam/orders';
+import { selectors, actionCreators as orderDetailActions } from '../../store/order';
 import constants from '../../constants';
 import { ContactTabs, Issues as issues } from './helpConstants';
 import { mergeCss } from '../../utils/cssUtil';
@@ -27,7 +28,8 @@ class Orders extends Component {
       totalOrderPages: 1,
     }
     this.scrollTimeout = '';
-    this.getOrders();
+    this.orderId = (window.location.hash || '#').split('#')[1]
+    this.orderId ? this.props.getOrderDetails({orderId: this.orderId}) : this.getOrders();
   }
   componentWillReceiveProps(nextProps) {
     if(nextProps.ordersData !== this.props.ordersData) {
@@ -35,6 +37,11 @@ class Orders extends Component {
         orders: [...this.state.orders, ...nextProps.ordersData.orders],
         currentOrderPage: nextProps.ordersData.page + 1,
         totalOrderPages: nextProps.ordersData.total_pages
+      })
+    }
+    if(nextProps.ordersDetailData !== this.props.ordersDetailData && nextProps.ordersDetailData.order_id && nextProps.ordersDetailData.order_id === this.orderId) {
+      this.setState({
+        orders: [nextProps.ordersDetailData]
       })
     }
   }
@@ -60,12 +67,7 @@ class Orders extends Component {
   }
 
   renderSupportBox = () => (
-    <div style={{
-      height: '150px',
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'space-evenly'
-    }}>
+    <div className={styles['SupportBoxContainer']}>
       <div style={{ fontWeight: '800', color: '#000000'}}>
         Issue still not resolved ?
       </div>
@@ -85,7 +87,9 @@ class Orders extends Component {
     const isSelected = this.state.selectedIssue.id === id;
     return (
       orderRelated ?
-      <div key={id} style={{ color: '#636363' ,fontSize: '14px', padding: '10px 10px', backgroundColor: isSelected ? '#F8F8F8' : 'transparent'}} onClick={this.selectIssue(issueObj)}>
+      <div key={id} 
+        style={{ color: '#636363' ,fontSize: '14px', padding: '10px 10px', backgroundColor: isSelected ? '#F8F8F8' : 'transparent'}} 
+        onClick={this.selectIssue(issueObj)}>
         <h5 style={{ color: isSelected ? '#43689A' : '#000000', fontWeight: isSelected ? '800' : '500', cursor: 'pointer'}}>{q}</h5>
         <div style={{ height: isSelected ? 'auto' : 0, overflow: 'hidden'}}>
           <h5 style={{ borderBottom: '0.5px solid #E3E4E4', paddingBottom: '20px'}}>
@@ -97,18 +101,20 @@ class Orders extends Component {
     )
   }
   renderOrderItems = (orderItemObj, index) => {
-    const {order_item_ids, status, variant_info} = orderItemObj;
+    const {order_item_ids, status, variant_info, order_id} = orderItemObj;
     const { title, image_url } = variant_info;
     const [order_item_id] = order_item_ids;
     const isSelected = this.state.selectedOrder ? this.state.selectedOrder.order_item_ids[0] === order_item_id : false;
+    const { pathname } = window.location;
+    const orderURL = pathname.replace(this.props.query, `cam/orders/${order_id}`)
     return (
       <div key={order_item_id} style={{  borderBottom: '0.5px solid #f2f2f2'}} onClick={this.selectOrder(orderItemObj)}>
-        <div style={{ height: '110px', padding: 10, display:'flex', alignItems: 'center', cursor: 'pointer' }}>
-          <div style={{ width: 75, height: 95, padding: 5, borderRadius: 5, border: '0.5px solid #f2f2f2'}}><img style={{width: '100%', height: '100%', objectFit: 'contain'}} src={`${constants.mediaDomain}/${image_url}`} /></div>
+        <div className={styles['facp']} style={{ height: '110px', padding: 10 }}>
+          <div className={styles['orderImgContainer']}><img className={styles['imgContain']} src={`${constants.mediaDomain}/${image_url}`} /></div>
           <div style={{display: 'flex', fontSize: '14px', flexGrow: 1, padding: '10px 20px'}}>{title}</div>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <div style={{ height: '30px', width: '150px', margin: '10px', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '14px', padding: '10px 20px', color: '#44689A', border: '0.5px solid #f2f2f2', borderRadius: 3}}>Select Issue</div>
-            <div style={{ margin: '5px', fontSize: '12px'}}>{`Order Status - ${status} - `}<a>View detail</a></div>
+            <div className={styles['SelectIssueButton']}>Select Issue</div>
+            <div style={{ margin: '5px', fontSize: '12px'}}>{`Order Status - ${status} - `}<a href={orderURL}>View detail</a></div>
           </div>
         </div>
         <div style={{borderTop: isSelected ? '0.5px solid #f2f2f2' : 0, padding: '10px 0px 0px 0px', margin: '10px 0px 10px 100px', height: isSelected ? 'auto' : 0, overflow: 'hidden'}}>
@@ -149,5 +155,6 @@ class Orders extends Component {
 }
 
 export default connect((state) => ({ 
-  ordersData: state.ordersReducer.data
-}), {...helpActions, ...orderActions})(Orders)
+  ordersData: state.ordersReducer.data,
+  ordersDetailData: state.singleOrderReducer.data.orderDetails
+}), {...helpActions, ...orderActions, ...orderDetailActions})(Orders)
