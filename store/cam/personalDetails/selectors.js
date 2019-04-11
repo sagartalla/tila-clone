@@ -52,16 +52,8 @@ const getEditPersonalInfoStatus = (store) => {
 }
 
 const getPictureDocumentId = (store) => {
-  debugger;
   if(store.personalDetailsReducer.data.uploadPicStatus) {
     return store.personalDetailsReducer.data.uploadPicStatus.documentId;
-  }
-  return {};
-}
-
-const getProfilePicture = (store) => {
-  if(store.personalDetailsReducer.data.downloadPic){
-    return store.personalDetailsReducer.data.downloadPic
   }
   return null;
 }
@@ -88,4 +80,4 @@ const forgotPasswordStatus = (store) => {
 }
 
 
-export { getUserInfo, getPasswordResetStatus, getLoadingStatus, getPictureDocumentId, getErrorMessege, getEditPersonalInfoStatus , forgotPasswordStatus, resetPasswordStatus, getOtpData, getProfilePicture};
+export { getUserInfo, getPasswordResetStatus, getLoadingStatus, getPictureDocumentId, getErrorMessege, getEditPersonalInfoStatus , forgotPasswordStatus, resetPasswordStatus, getOtpData};

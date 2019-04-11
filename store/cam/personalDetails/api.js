@@ -1,6 +1,5 @@
 import axios from 'axios';
 import constants from '../../helper/constants';
-import { toast } from 'react-toastify';
 
 const getUserProfileInfo = () => {
   return Promise.all([
@@ -23,22 +22,9 @@ const uploadProfilePic = (body) => {
       'tenant': 'profile-service',
     },
   }).then(({data}) => {
-    toast.success('Your Profile Pic is successfully uploaded');
     return data;
   }).catch((data) => {
     console.log(data);
-  })
-}
-
-const getProfilePic = (body) => {
-  return axios.request({
-    method: 'GET',
-    url: `${'https://api-gateway-stage.fptechscience.com/transformers/fpts/document-service/download/'}${body}`,
-    headers: {
-      'tenant': 'profile-service',
-    },
-  }).then(({data}) => {
-    return data;
   })
 }
 
@@ -95,6 +81,6 @@ const deactivateUserProfile = () =>
   axios.put(`${constants.CMS_API_URL}/api/v1/user/deactivate/`);
 
 export default {
-  getUserProfileInfo, getProfilePic, changePassword, uploadProfilePic, forgotPassword, editPersonalInfo,
+  getUserProfileInfo, changePassword, uploadProfilePic, forgotPassword, editPersonalInfo,
   deactivateUserProfile, resetPassword, otpUserUpdate, verifyOtp,sendOtpToMobile
 };
