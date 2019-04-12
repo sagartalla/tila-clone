@@ -152,7 +152,7 @@ class ActionBar extends Component {
            <a style={{dispaly:'block'}}>
             <span className={`${styles['flex-center']} ${styles['justify-center']} ${styles['relative']}`}>
               <SVGComponent clsName={`${styles['wish-list-icon']}`} src="icons/wish-list/wish-list-icon" />
-              <span className={`${styles['absolute']} ${styles['cart-count']} ${styles['fs-10']} ${styles['white-color']}`}>{wishListCount.length}</span>
+              <span className={`${styles['absolute']} ${styles['cart-count']} ${styles['fs-10']} ${styles['white-color']}`}>{wishListCount}</span>
             </span>
             </a>
           </Link>
@@ -265,7 +265,7 @@ const mapStateToProps = (store) => {
     userInfo: personalSelectors.getUserInfo(store),
     showLogin: selectors.getShowLogin(store),
     ptaToken: selectors.getPTAToken(store),
-    wishListCount: wishListSelectors.getWishListResults(store),
+    wishListCount: wishListSelectors.getPaginationDetails(store).total_elements,
     showEmailVerificationScreen: selectors.showEmailVerificationScreen(store),
   })
 };
