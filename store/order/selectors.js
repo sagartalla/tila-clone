@@ -55,8 +55,8 @@ const getOrderDetails = (store) => {
           warranty_duration: i.warranty_policy && i.warranty_policy.preferred_policy ?
             i.warranty_policy.policies[i.warranty_policy.preferred_policy] : {},
           gift_info: i.gift_info,
-          sizeInfo: i.variant_info && i.variant_info.variant_details &&
-            i.variant_info.variant_details.attribute_map && i.variant_info.variant_details.attribute_map.size,
+          variantAttributes: i.variant_info && i.variant_info.variant_details && i.variant_info.variant_details.attribute_map ?
+            Object.values(i.variant_info.variant_details.attribute_map).filter(attr => attr.visible) : [],
         })),
       )(order_items),
     };

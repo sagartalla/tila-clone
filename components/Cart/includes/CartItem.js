@@ -138,7 +138,7 @@ class CartItem extends React.Component {
     const {
       item_id, img, name, offer_price, cur, quantity, max_limit, inventory,
       brand_name, gift_info, shipping, warranty_duration, total_amount,
-      product_id, variant_id, itemType, catalogId, discount, mrp, sizeInfo,
+      product_id, variant_id, itemType, catalogId, discount, mrp, variantAttributes,
     } = item;
     return (
       <div key={item_id} className={`${styles['mb-20']} ${styles['box']}`}>
@@ -190,11 +190,13 @@ class CartItem extends React.Component {
                       </a>
                     </Link>
                   </h4>
-                  {sizeInfo &&
-                  <div className={`${styles['thick-gry-clr']} ${styles['fs-12']} ${styles['mb-15']}`}>
-                    <span>{sizeInfo.display_string} : </span>
-                    <span>{sizeInfo.attribute_values[0].value}</span>
-                  </div>}
+                  {variantAttributes.length > 0 &&
+                    variantAttributes.map(attr => (
+                      <div className={`${styles['thick-gry-clr']} ${styles['fs-12']} ${styles['mb-15']}`}>
+                        <span>{attr.display_string} : </span>
+                        <span>{attr.attribute_values[0].value}</span>
+                      </div>
+                    ))}
                   <div className={`${styles['warranty-part']} ${styles['p-10']} ${styles['light-gry-clr']}`}>
                     <p className={`${styles['mb-0']} ${styles['fs-12']} ${styles['flex']}`}>
                       <span>Warranty : </span>

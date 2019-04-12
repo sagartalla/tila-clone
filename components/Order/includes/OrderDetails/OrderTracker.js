@@ -60,11 +60,13 @@ class OrderTracker extends React.Component {
                 <Col md={9}>
                   <div className={`${styles.fontW600}`}>{orderItem.name}</div>
                   <div className={`${styles.flex} ${styles['pt-15']} ${styles['pb-15']} ${styles['ipad-tp-5']} ${styles['ipad-tb-5']} ${styles['fs-12']} ${styles['thick-gry-clr']}`}>
-                    {orderItem.sizeInfo &&
-                    <span className={styles['pr-20']}>
-                      <span>{orderItem.sizeInfo.display_string} : </span>
-                      <span>{orderItem.sizeInfo.attribute_values[0].value}</span>
-                    </span>}
+                    {orderItem.variantAttributes.length > 0 &&
+                      orderItem.variantAttributes.map(attr => (
+                        <span className={styles['pr-20']}>
+                          <span>{attr.display_string} : </span>
+                          <span>{attr.attribute_values[0].value}</span>
+                        </span>
+                      ))}
                     <span>
                       <span>{CART_PAGE.QUANTITY} : </span>
                       <span>{orderItem.orderIds.length}</span>

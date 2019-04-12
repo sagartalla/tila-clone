@@ -123,7 +123,6 @@ class OrderItem extends Component {
         </div>
       </div>
     );
-
     return (
       <div className={`${styles['shipment-wrap']} ${styles['mb-20']} ${styles['mt-20']} ${styles.flex}`}>
         <Col md={7} sm={7} className={`${styles['pl-0']} ${styles['pr-0']} ${styles.flex} ${styles['flex-colum']}`}>
@@ -154,11 +153,13 @@ class OrderItem extends Component {
                       <div className={`${styles['flex-center']} ${styles['prod-sub-content']}`}>
                         <Col md={8} sm={8} className={styles['p-0']}>
                           <div className={`${styles.flex} ${styles['pt-15']} ${styles['pb-15']} ${styles['ipad-tp-5']} ${styles['ipad-tb-5']} ${styles['fs-12']} ${styles['thick-gry-clr']}`}>
-                            {product.sizeInfo &&
-                            <span className={styles['pr-20']}>
-                              <span>{product.sizeInfo.display_string} : </span>
-                              <span>{product.sizeInfo.attribute_values[0].value}</span>
-                            </span>}
+                            {product.variantAttributes.length > 0 &&
+                              product.variantAttributes.map(attr => (
+                                <span className={styles['pr-20']}>
+                                  <span>{attr.display_string} : </span>
+                                  <span>{attr.attribute_values[0].value}</span>
+                                </span>
+                              ))}
                             <span>
                               <span>{CART_PAGE.QUANTITY} : </span>
                               <span>{product.orderIds.length}</span>
