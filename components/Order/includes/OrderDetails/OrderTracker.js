@@ -2,12 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Col } from 'react-bootstrap';
+import moment from 'moment';
 
-import { actionCreators } from '../../../../store/order';
+import { actionCreators, selectors } from '../../../../store/order';
 import { languageDefinations } from '../../../../utils/lang';
 import Slider from '../../../common/slider';
 import { mergeCss } from '../../../../utils/cssUtil';
 import constants from '../../../../constants';
+import orderStatusAttributes from './orderAttributes';
 
 const styles = mergeCss('components/Order/order');
 
@@ -39,7 +41,7 @@ class OrderTracker extends React.Component {
   }
 
   render() {
-    const { orderItem, showMsgAndDate } = this.props;
+    const { orderItem, showMsgAndDate, orderTracker } = this.props;
     return (
       <div className={`${styles['p-10']} ${styles['bg-light-gray']} ${styles['flex-center']} ${styles.relative} ${styles.pointer}`}>
         <div>Your Item is out for delivery</div>
@@ -75,14 +77,48 @@ class OrderTracker extends React.Component {
             <div className={`${styles['border-b']} ${styles['p-20']} ${styles['pl-40']}`}>
               {showMsgAndDate}
             </div>
+
+            <ul className={`${styles['state-times']}`}>
+              {orderItem.state_time_estimates.length > 0 &&
+                orderItem.state_time_estimates.map(estimate => (
+                  <li>
+                    <p className={`${estimate.actual_time ? styles.activeP : ''}`}>
+                      {estimate.actual_time ? moment(estimate.actual_time).format('D MMM') : ''}
+                      <div className={`${styles['fs-12']} ${styles['label-gry-clr']}`}>
+                        {estimate.actual_time ? moment(estimate.actual_time).format('hh:mm A') : ''}
+                      </div>
+                    </p>
+                    <span className={`${styles.status} ${estimate.actual_time ? styles['border-lt-green'] : styles['border-lt']}`}>
+                      <strong>{orderStatusAttributes[estimate.status]}</strong>
+                      {(estimate.status === 'SHIPPED' || estimate.status === 'SCHEDULED') &&
+                        orderTracker[orderItem.trackingId] && orderTracker[orderItem.trackingId].events.length > 0 &&
+                        <ul className={`${styles.events} ${styles['label-gry-clr']} ${styles['pl-10']} ${styles['fs-10']}`}>
+                          {orderTracker[orderItem.trackingId].events.map(event => (
+                            <li className={`${styles['flex-center']} ${styles['mt-5']}`}>
+                              <span className={styles.dot} />
+                              <span className={styles['ml-5']}>{moment(event.date).format('hh:mm A')}</span>
+                              <span className={styles['ml-5']}>{event.event_message}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      }
+                    </span>
+                  </li>
+                ))}
+            </ul>
           </div>
         </Slider>}
-      </div>);
+      </div>
+    );
   }
 }
+
+const mapStateToProps = store => ({
+  orderTracker: selectors.getOrderTracker(store),
+});
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   getTrackingDetails: actionCreators.getTrackingDetails,
 }, dispatch);
 
-export default connect(null, mapDispatchToProps)(OrderTracker);
+export default connect(mapStateToProps, mapDispatchToProps)(OrderTracker);

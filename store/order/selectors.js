@@ -168,6 +168,11 @@ const getExchangeOptions = (store) => {
     listingDetails,
     variantDetails,
   };
-}
+};
 
-export { getOrderDetails, getOrderIssue, getOrderInfo, getCancelStatus, getErrorMessege, getLoadingStatus, getSelectedOrder, getReturnStatus, getExchangeOptions };
+const getOrderTracker = store => store.singleOrderReducer.data.orderTracker;
+
+export {
+  getOrderDetails, getOrderIssue, getOrderInfo, getCancelStatus, getErrorMessege,
+  getLoadingStatus, getSelectedOrder, getReturnStatus, getExchangeOptions, getOrderTracker,
+};
