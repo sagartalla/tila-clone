@@ -61,6 +61,7 @@ const CartBody = ({
             {
               items.map((item,index) => (
                 <CartItem
+                  key={item.item_id}
                   item={item}
                   count={count}
                   increaseItemCnt={increaseItemCnt}
