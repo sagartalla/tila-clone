@@ -118,7 +118,7 @@ class TitleInfo extends Component {
           <span>{brand}</span>
           {/* eslint-disable-next-line no-nested-ternary */}
           {isPreview ? null : comparable ?
-            <div className={styles['checkbox-material']}>
+            <div className={`${styles['checkbox-material']} ${styles['add-to-compare']}`}>
               <input
                 id="add-to-compare"
                 type="checkbox"
