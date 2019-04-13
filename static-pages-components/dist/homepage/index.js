@@ -377,7 +377,7 @@ const HomePage = () => React.createElement(
         { className: `${styles['flex-center']} ${styles['mb-15']}` },
         React.createElement(
           'span',
-          { className: `title ${styles['fs-18']}` },
+          { className: `title ${styles['mr-15']} ${styles['fs-18']}` },
           'DEALS OF THE DAY'
         ),
         React.createElement(
@@ -656,7 +656,7 @@ const HomePage = () => React.createElement(
       ),
       React.createElement(
         'div',
-        { className: 'd3' },
+        { className: `d3 ${styles.right0}` },
         React.createElement(
           'div',
           null,
@@ -885,7 +885,7 @@ const HomePage = () => React.createElement(
       ),
       React.createElement(
         'div',
-        { className: 'd3' },
+        { className: `d3 ${styles.right0}` },
         React.createElement(
           'div',
           null,
@@ -1116,7 +1116,7 @@ const HomePage = () => React.createElement(
         ),
         React.createElement(
           'div',
-          { className: 'd3' },
+          { className: `d3 ${styles.right0}` },
           React.createElement(
             'div',
             null,
