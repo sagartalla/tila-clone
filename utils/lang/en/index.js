@@ -659,4 +659,12 @@ export const EN_KEYWORDS = {
    'ONLY_SIMILAR_ITEM_TYPES_CAN_BE_COMPARED': 'Only similar item types can be compared',
    'ITEM_REMOVED_FROM_COMPARE': 'Item removed from compare',
  },
+
+ MOBILE_FOOTER: {
+   'HOME': 'home',
+   'CATEGORIES': 'categories',
+   'WISHLIST': 'wishlist',
+   'ACCOUNT': 'account',
+   'CART': 'cart',
+ },
 };
