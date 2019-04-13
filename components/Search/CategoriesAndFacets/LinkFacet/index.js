@@ -3,11 +3,16 @@ import { Panel, Heading, Body, Title } from 'react-bootstrap';
 
 import { Link } from '../../../../routes';
 import SVGCompoent from '../../../common/SVGComponet';
-import { mergeCss } from '../../../../utils/cssUtil';
+
 
 import Tree from './Tree';
 
-const styles = mergeCss('components/Search/search');
+import lang from '../../../../utils/language';
+
+import styles_en from '../../search_en.styl';
+import styles_ar from '../../search_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 
 class LinkFacet extends Component {

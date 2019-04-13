@@ -3,8 +3,13 @@ import PropTypes from 'prop-types';
 import InputRange from 'react-input-range';
 import {FormControl, Panel, Heading, Body, Title} from 'react-bootstrap';
 import SVGCompoent from '../../common/SVGComponet';
-import { mergeCss } from '../../../utils/cssUtil';
-const styles = mergeCss('components/Search/search');
+
+import lang from '../../../utils/language';
+
+import styles_en from '../search_en.styl';
+import styles_ar from '../search_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 class RangeFitler extends Component {
   static getClosest(values, goal) {

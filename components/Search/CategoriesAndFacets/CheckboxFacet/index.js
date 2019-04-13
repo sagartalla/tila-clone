@@ -2,11 +2,17 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Checkbox, Panel, Heading, Body, Title } from 'react-bootstrap';
 import SVGCompoent from '../../../common/SVGComponet';
-import { mergeCss } from '../../../../utils/cssUtil';
-const styles = mergeCss('components/Search/search');
+
 import {languageDefinations} from '../../../../utils/lang';
 const {SEARCH_PAGE} = languageDefinations()
 const MaxItems = 3;
+
+import lang from '../../../../utils/language';
+
+import styles_en from '../../search_en.styl';
+import styles_ar from '../../search_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 class CheckboxFacet extends Component {
   constructor(props) {
