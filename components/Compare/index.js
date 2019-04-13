@@ -17,7 +17,7 @@ import { mergeCss } from '../../utils/cssUtil';
 import Button from '../common/CommonButton';
 
 const styles = mergeCss('components/Compare/compare');
-const { COMPARE } = languageDefinations();
+const { COMPARE, PDP_PAGE } = languageDefinations();
 
 const ICONS = {
   screenSize: '/icons/common-icon/display-screen',
@@ -167,7 +167,7 @@ class Compare extends Component {
                         className={product.addedToCart ? `${styles['p-10']} ${styles['flex-center']} ${styles['added-btn']}` :  `${styles['p-10']} ${styles['flex-center']} ${styles['cart-btn']}`}
                         id={product.listing_id}
                         onClick={product.addedToCart === false && this.addToCart}
-                        btnText={product.addedToCart ? 'In Cart' : 'Add To Cart'}
+                        btnText={product.addedToCart ? PDP_PAGE.ADDED_TO_CART : PDP_PAGE.ADD_TO_CART}
                         showImage={product.addedToCart ? 'icons/cart/added-cart-icon' : 'icons/cart/blue-cart-icon'}
                         btnLoading={cartButtonLoaders && cartButtonLoaders[product.listing_id]}
                       />
@@ -183,7 +183,7 @@ class Compare extends Component {
                 <div className={styles['add-icon']}>+</div>
                 <div className={`${styles.width100} ${styles['p-10-40']}`}>
                   <select className={styles.width100} value={selectedBrand} onChange={this.selectBrand}>
-                    <option value="">Select Brand</option>
+                    <option value="">{COMPARE.SELECT_BRAND}</option>
                     {brands.length > 0 &&
                     brands.map(brand => (
                       <option key={brand.Param} value={brand.Param}>{brand.attributeValue}</option>
@@ -193,7 +193,7 @@ class Compare extends Component {
                 {productList.length > 0 &&
                 <div className={`${styles.width100} ${styles['p-10-40']}`}>
                   <select className={styles.width100} onChange={this.selectProduct}>
-                    <option value="">Select Product</option>
+                    <option value="">{COMPARE.SELECT_PRODUCT}</option>
                     {productList.length > 0 &&
                       productList.map(product => (
                         <option key={product.id} value={JSON.stringify(product)}>{product.displayName}</option>

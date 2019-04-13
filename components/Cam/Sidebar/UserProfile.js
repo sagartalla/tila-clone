@@ -1,14 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Cookies from 'universal-cookie';
-
+import { languageDefinations } from '../../../utils/lang/';
 import { Link } from '../../../routes';
 import { mergeCss } from '../../../utils/cssUtil';
 import { selectors } from '../../../store/cam/personalDetails';
 const styles = mergeCss('components/Cam/Sidebar/sidebar');
 
 const cookies = new Cookies();
-
+const { PERSONAL_INFO_MODAL } = languageDefinations();
 const language = cookies.get('language') || 'en';
 const country = cookies.get('country') || 'SAU';
 
@@ -27,7 +27,7 @@ const UserProfile = (props) => {
         <div className={styles['img-style']} />
       </div>
       <div className={styles['profile-details']}>
-        <span className={`${styles['fs-12']} ${styles['light-gry-clr']}`}>Hello,</span>
+        <span className={`${styles['fs-12']} ${styles['light-gry-clr']}`}>{PERSONAL_INFO_MODAL.HELLO}</span>
         <div>{name}</div>
       </div>
     </div>

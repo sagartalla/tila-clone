@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import Cookie from 'universal-cookie';
 import { addUrlProps, UrlQueryParamTypes, pushInUrlQuery } from 'react-url-query';
 import _ from 'lodash';
+import { languageDefinations } from '../../utils/lang/';
 import { actionCreators, selectors } from '../../store/search';
 import { Router } from '../../routes';
 import SVGComponent from '../common/SVGComponet';
@@ -14,6 +15,7 @@ import { mergeCss } from '../../utils/cssUtil';
 import {Modal} from 'react-bootstrap';
 import DragDropUpload from '../common/DragDropUpload';
 const styles = mergeCss('components/HeaderBar/header');
+const { SEARCH_PAGE } = languageDefinations();
 
 const urlPropsQueryConfig = {
   searchText: { type: UrlQueryParamTypes.string, queryParam: 'search', }
@@ -72,7 +74,7 @@ class Search extends Component {
   onChangeSearchInput(e) {
     const numberOfCharacters = /^[\s\S]{0,300}$/;
     if (!numberOfCharacters.test(e.target.value)) {
-      toast.error('Maximum search text exceeded');
+      toast.error(SEARCH_PAGE.MAXIMUN_TEXT_EXCEEDED);
       return;
     }
     this.setState({
@@ -118,7 +120,7 @@ class Search extends Component {
         <form onSubmit={this.submitQuery}>
           <input
             className={styles['search-input']}
-            placeholder="Search your fav item..."
+            placeholder={SEARCH_PAGE.SEARCH_YOUR_FAV_ITEM}
             onChange={this.onChangeSearchInput}
             value={this.state.query}
            />

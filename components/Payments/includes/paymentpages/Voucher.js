@@ -40,31 +40,31 @@ class Voucher extends Component {
     const { balance, total_amount, amount_to_pay, currency_code, remaining_amount } = voucherData;
     return (
       <div className={`${styles['voucher']} ${styles['p-10']}`}>
-        <h3 className={`${styles['lgt-blue']} ${styles['fs-20']} ${styles['pb-10']} ${styles['fontW300']} ${styles['m-0']}`}>Tila Credit Used</h3>
+        <h3 className={`${styles['lgt-blue']} ${styles['fs-20']} ${styles['pb-10']} ${styles['fontW300']} ${styles['m-0']}`}>{PAYMENT_PAGE.TILA_CREDIT_USED}</h3>
         {
           isOnlyVocuher
             ?
-            <div>All other payment methods have been disabled as you have enough tila credit in your Wallet to purchace this item. Enjoy your purchase :)</div>
+            <div>{PAYMENT_PAGE.ALL_OTHER_PAYMENT_METHODS_ARE_DISABLED} :)</div>
             :
             null
         }
         <div className={`${styles.flex} ${styles['justify-between']}`}>
           <div className={`${styles.paymentBorder}`}>
-            <span className={`${styles['success-green']} ${styles['fs-12']}`}>Total Amount To Pay</span>
+            <span className={`${styles['success-green']} ${styles['fs-12']}`}>{PAYMENT_PAGE.TOTAL_AMOUNT_TO_PAY}</span>
             <b className={`${styles['pt-5']} ${styles['fs-16']}`}>{total_amount} {currency_code}</b>
           </div>
           <div className={`${styles.flex} ${styles['align-center']} ${styles['thick-red-clr']}`}>
             <span>-</span>
           </div>
           <div className={`${styles.paymentBorder}`}>
-            <span className={balance < amount_to_pay ? `${styles['thick-red-clr']} ${styles['fs-12']}` : `${styles['success-green']} ${styles['fs-12']}`}>Money in Wallet</span>
+            <span className={balance < amount_to_pay ? `${styles['thick-red-clr']} ${styles['fs-12']}` : `${styles['success-green']} ${styles['fs-12']}`}>{PAYMENT_PAGE.MONEY_IN_WALLET}</span>
             <b className={`${styles['pt-5']} ${styles['fs-16']}`}>{balance} {currency_code}</b>
           </div>
           <div className={`${styles.flex} ${styles['align-center']}`}>
             <span>=</span>
           </div>
           <div className={`${styles.paymentBorder}`}>
-            <span className={balance >= amount_to_pay ? `${styles['success-green']} ${styles['fs-12']}` : `${styles['thick-red-clr']} ${styles['fs-12']}`}>Remaining amount to pay</span>
+            <span className={balance >= amount_to_pay ? `${styles['success-green']} ${styles['fs-12']}` : `${styles['thick-red-clr']} ${styles['fs-12']}`}>{PAYMENT_PAGE.REMAINING_AMOUNT_TO_PAY}</span>
             <b className={`${styles['pt-5']} ${styles['fs-16']}`}>{remaining_amount} {currency_code}</b>
           </div>
 
@@ -73,7 +73,7 @@ class Voucher extends Component {
           isOnlyVocuher
             ?
             <div>
-              <button onClick={this.proceedToPayment} className={`${styles['fp-btn-primary']} ${styles['fp-btn']} ${styles['border-radius']}`}>PAY USING TILA CREDIT</button>
+              <button onClick={this.proceedToPayment} className={`${styles['fp-btn-primary']} ${styles['fp-btn']} ${styles['border-radius']}`}>{PAYMENT_PAGE.PAY_USING_TILA_CREDIT}</button>
             </div>
             :
             null

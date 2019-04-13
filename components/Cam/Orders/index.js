@@ -8,6 +8,9 @@ import OrderIssueWidget from '../../Order/includes/OrderIssueWidget';
 import { selectors, actionCreators } from '../../../store/cam/orders';
 import Pagination from '../../common/Pagination';
 import { mergeCss } from '../../../utils/cssUtil';
+import { languageDefinations } from '../../../utils/lang/';
+
+const { ORDERS } = languageDefinations();
 const styles = mergeCss('components/Cam/Orders/orders');
 
 class Orders extends Component {
@@ -43,7 +46,7 @@ class Orders extends Component {
           ?
           ordersData.map((order) => <Order key={order.id} order={order} />)
           :
-          <div className={`${styles['box']} ${styles['mt-20']} ${styles['mb-20']} ${styles['p-20']}`}>Oops! No orders yet. Start Shopping</div>
+          <div className={`${styles['box']} ${styles['mt-20']} ${styles['mb-20']} ${styles['p-20']}`}>{ORDERS.NO_ORDERS}</div>
         }
         <Pagination
           totalSize={pageDetails.total_pages > 1 ? (pageDetails.total_pages - 1): 0}

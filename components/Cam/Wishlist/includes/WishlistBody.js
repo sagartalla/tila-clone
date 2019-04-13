@@ -113,7 +113,7 @@ const WishlistBody = (props) => {
                         {wishlisted_price > 0 && price && cur && getPriceAlert(price, wishlisted_price, cur)}
                         {wishlisted_price > 0 &&
                         <span className={`${styles['thick-gry-clr']}`}>
-                          Item was {wishlisted_price} {cur} when added to Wish List
+                          {WISH_LIST_PAGE.ITEM_WAS} {wishlisted_price} {cur} {WISH_LIST_PAGE.WHEN_ADDED_TO_WISHLIST}
                         </span>}
                       </div>
                     </Col>

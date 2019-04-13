@@ -6,7 +6,7 @@ import { Row, Col } from 'react-bootstrap';
 import Cookies from 'universal-cookie';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-
+import { languageDefinations } from '../../../utils/lang/';
 import { actionCreators, selectors } from '../../../store/common/instantCheckout';
 import { selectors as paymentSelector} from '../../../store/payments'
 import { actionCreators as addressActionCreators, selectors as addressSelectors } from '../../../store/cam/address';
@@ -22,9 +22,10 @@ import EditPhone from '../../Cam/PersonelDetails/UserData/EditPhone';
 import AddrCard from './includes/AddrCard';
 import VaultCard from './includes/VaultCard';
 import CodCard from './includes/CodCard';
-
 import { mergeCss } from '../../../utils/cssUtil';
+
 const styles = mergeCss('components/common/InstantCheckout/instant');
+const { INSTANT_CHECKOUT } = languageDefinations();
 
 const cookies = new Cookies();
 
@@ -190,13 +191,13 @@ class InstantCheckout extends Component {
           : ''
         }
         <h4 className={`${styles['fontW600']} ${styles['mb-0']} ${styles['flex']}`}>
-          Checkout with 1 click
+          {INSTANT_CHECKOUT.CHECKOUT_WITH_ONE_CLICK}
           {/* <span className={`${styles['checkout-quat']} ${styles['fs-12']} ${styles['flex-center']} ${styles['justify-around']}`}>?</span> */}
         </h4>
-        <p className={`${styles['fs-12']} ${styles['thick-gry-clr']}`}>With your preffered payment and delivery address</p>
+        <p className={`${styles['fs-12']} ${styles['thick-gry-clr']}`}>{INSTANT_CHECKOUT.WITH_YOUR_PREFERRED_PAYMENT}</p>
         <div className={`${styles['flex']}`}>
-        <span className={`${styles['fs-12']} ${styles['pr-30']}`}><input type="radio" name="pay_type" className={styles['radio-btn']} checked={creditDebitCard} onChange={this.creditCardClickHandler} /> Credit/ Debit Card</span>
-        <span className={styles['fs-12']}><input type="radio" name="pay_type" className={styles['radio-btn']} checked={cod} onChange={this.codClickHandler} /> COD</span>
+        <span className={`${styles['fs-12']} ${styles['pr-30']}`}><input type="radio" name="pay_type" className={styles['radio-btn']} checked={creditDebitCard} onChange={this.creditCardClickHandler} /> {INSTANT_CHECKOUT.CREDIT_DEDIT}</span>
+        <span className={styles['fs-12']}><input type="radio" name="pay_type" className={styles['radio-btn']} checked={cod} onChange={this.codClickHandler} /> {INSTANT_CHECKOUT.COD}</span>
         </div>
         <div className={`${styles['border']} ${styles['border-radius2']} ${styles['bg-white']} ${styles['relative']} ${styles['mt-10']}`}>
         {
@@ -268,9 +269,9 @@ class InstantCheckout extends Component {
          <button
           className={`${styles['fp-btn']} ${styles['fp-btn-sucess']} ${styles['fontW600']} ${styles['instant-btn']}`}
           onClick={this.doInstantCheckout}>
-          INSTANT CHECKOUT
+          {INSTANT_CHECKOUT.INSTANT_CHECKOUT}
          </button>
-      </div>
+        </div>
       }
 
       </div>
