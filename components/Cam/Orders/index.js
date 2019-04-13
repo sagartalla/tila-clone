@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -14,47 +13,53 @@ const { ORDERS } = languageDefinations();
 const styles = mergeCss('components/Cam/Orders/orders');
 
 class Orders extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
-      currentPage:0
-    }
-    this.onPageChanged = this.onPageChanged.bind(this)
+      currentPage: 0,
+    };
+    this.onPageChanged = this.onPageChanged.bind(this);
   }
+
   componentDidMount() {
     this.props.getOrderHistory(this.state.currentPage);
   }
+
+  componentWillReceiveProps(nextProps) {
+    const { currentPage } = this.state;
+    if (nextProps.pageDetails.page !== currentPage) {
+      window.scrollTo(0, 0);
+      this.setState({
+        currentPage: nextProps.pageDetails.page,
+      });
+    }
+  }
+
   onPageChanged(currentPage) {
     this.setState({
-      currentPage
-    },() => this.props.getOrderHistory(currentPage))
+      currentPage,
+    }, () => this.props.getOrderHistory(currentPage));
+  }
 
-  }
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      currentPage:nextProps.pageDetails.page
-    })
-  }
   render() {
-    const { ordersData,pageDetails } = this.props;
-    const { currentPage } = this.state
+    const { ordersData, pageDetails } = this.props;
+    const { currentPage } = this.state;
     return (
       <div>
         <div className={styles['orders-container']}>
-        {
+          {
           ordersData.length
           ?
-          ordersData.map((order) => <Order key={order.id} order={order} />)
+          ordersData.map(order => <Order key={order.id} order={order} />)
           :
-          <div className={`${styles['box']} ${styles['mt-20']} ${styles['mb-20']} ${styles['p-20']}`}>{ORDERS.NO_ORDERS}</div>
+          <div className={`${styles.box} ${styles['mt-20']} ${styles['mb-20']} ${styles['p-20']}`}>{ORDERS.NO_ORDERS}</div>
         }
-        <Pagination
-          totalSize={pageDetails.total_pages > 1 ? (pageDetails.total_pages - 1): 0}
-          pageNeighbours={0}
-          onPageChanged = {this.onPageChanged}
-          currentPage={currentPage}
-        >
-        </Pagination>
+          <Pagination
+            totalSize={pageDetails.total_pages > 1 ? (pageDetails.total_pages - 1) : 0}
+            pageNeighbours={0}
+            onPageChanged={this.onPageChanged}
+            currentPage={currentPage}
+          />
         </div>
         <OrderIssueWidget />
       </div>
@@ -62,12 +67,12 @@ class Orders extends Component {
   }
 }
 
-const mapStateToProps = (store) => ({
+const mapStateToProps = store => ({
   ordersData: selectors.getOrdersData(store),
-  pageDetails: selectors.getPageDetails(store)
+  pageDetails: selectors.getPageDetails(store),
 });
 
-const mapDispatchToProps = (dispatch) =>
+const mapDispatchToProps = dispatch =>
   bindActionCreators(
     { getOrderHistory: actionCreators.getOrderHistory },
     dispatch,
