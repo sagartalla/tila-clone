@@ -34,12 +34,6 @@ const getDeliveryCity = (store) => {
   return store.authReducer.data.geoShippingDetails;
 }
 
-// const getAutoCompleteCityData = (store) => {
-//   const data = store.productReducer.allCitiesData;
-//   const params = store.authReducer.autoCompleteCity;
-//   return params ? data.filter(item => item.city_name.toLowerCase().indexOf(params.toLowerCase()) > -1) : data;
-// }
-
 const getPTAToken = (store) => {
   return store.authReducer.data.ptaToken;
 }

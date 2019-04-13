@@ -41,6 +41,7 @@ class GeoWidget extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { geoShippingData } = nextProps;
+    console.log('geoShippingData', geoShippingData);
     if (this.props.geoShippingData.city !== geoShippingData.city) {
       this.setState({
         displayCity: geoShippingData.displayCity,
@@ -84,12 +85,10 @@ class GeoWidget extends Component {
   }
 
   selectCityFromSuggesstions(e) {
-    // const { autoCompleteCityData } = this.props;
     const selectedCity = e.target.getAttribute('data-id');
     const city = e.target.getAttribute('data-code');
     const displayCity = e.target.getAttribute('data-id');
     const country = cookies.get('country');
-    // resetAutoCompleteData();
     this.setState({
       displayCity: selectedCity,
     });
@@ -112,13 +111,9 @@ class GeoWidget extends Component {
 
   render() {
     const {
-      geoShippingData, hideLabel, getAllCities, isLoading,
+      geoShippingData, hideLabel, getAllCities,
     } = this.props;
     const { showCitiesData } = this.state;
-    console.log('showCitiesData', showCitiesData);
-    console.log('getAllCities', getAllCities);
-    console.log('isLoading', isLoading);
-    console.log('this.state.displayCity', this.state.displayCity);
     return (
       <div className={`${styles['flex-center']} ${styles['delovery-inn']}`}>
         {
@@ -136,7 +131,7 @@ class GeoWidget extends Component {
           className={styles['auto-suggestions-wrap']}
           ref={(el) => { this.filterRef = el; }}
         >
-          <input type="text" value={isLoading ? 'Loading...' : this.state.displayCity} className={styles['fs-12']} onChange={this.onChangeCity} />
+          <input type="text" value={this.state.displayCity} className={styles['fs-12']} onChange={this.onChangeCity} />
           {
             <div className={`${styles['auto-suggestions-list']}`}>
               {showCitiesData && getAllCities.map(result =>
@@ -167,9 +162,7 @@ class GeoWidget extends Component {
 
 const mapStateToProps = store => ({
   geoShippingData: selectors.getDeliveryCity(store),
-  // autoCompleteCityData: productSelectors.getAutoCompleteCityData(store),
   getAllCities: productSelectors.getAllCities(store),
-  isLoading: productSelectors.isLoading(store),
 });
 
 const mapDispatchToProps = dispatch =>
@@ -178,7 +171,6 @@ const mapDispatchToProps = dispatch =>
       deriveCity: actionCreators.deriveCity,
       setCity: actionCreators.setCity,
       autoCompleteCity: productActionCreators.autoCompleteCity,
-      // resetAutoCompleteData: actionCreators.resetAutoCompleteData,
       getCitiesByCountryCode: productActionCreators.getCitiesByCountryCode,
       removeCity: actionCreators.removeCity,
     },

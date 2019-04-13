@@ -16,8 +16,6 @@ const actions = {
   DERIVE_CITY: 'DERIVE_CITY',
   SET_CITY: 'SET_CITY',
   REMOVE_CITY: 'REMOVE_CITY',
-  // AUTOCOMPLETE_CITY: 'AUTOCOMPLETE_CITY',
-  // RESET_AUTOCOMPLETE_CITY: 'RESET_AUTOCOMPLETE_CITY',
   RESET_LOGIN_ERROR: 'RESET_LOGIN_ERROR',
   SHOW_LOGIN: 'SHOW_LOGIN',
   RESET_SHOW_LOGIN: 'RESET_SHOW_LOGIN',
@@ -85,13 +83,6 @@ const actionCreators = {
     type: actions.REMOVE_CITY,
     payload: api.removeCity(),
   }),
-  // autoCompleteCity: params => ({
-  //   type: actions.AUTOCOMPLETE_CITY,
-  //   params,
-  // }),
-  // resetAutoCompleteData: () => ({
-  //   type: actions.RESET_AUTOCOMPLETE_CITY,
-  // }),
   resetLoginError: () => ({
     type: actions.RESET_LOGIN_ERROR,
   }),

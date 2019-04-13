@@ -422,7 +422,4 @@ const getAllCities = (store) => {
   return (searchKey ? allCities.filter(item => item.city_name.toLowerCase().indexOf(searchKey.toLowerCase()) > -1) : allCities);
 };
 
-const isLoading = (store) => {
-  return store.productReducer.ui.loading;
-};
-export { getProduct, getVariants, getPreview, getSelectedVariantId, getReviewRatings, getReviewResponse, getVariantsAndSimilarProducts, getSelectedPropductId, getSelectedVariantData, getAllCities, isLoading };
+export { getProduct, getVariants, getPreview, getSelectedVariantId, getReviewRatings, getReviewResponse, getVariantsAndSimilarProducts, getSelectedPropductId, getSelectedVariantData, getAllCities };
