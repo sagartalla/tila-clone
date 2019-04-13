@@ -559,7 +559,7 @@ export const EN_KEYWORDS = {
     'CANCEL_MESSAGE': 'Sorry that you had to cancel, we will work on reason for your cancellation',
     'DONE': 'Done',
     'CONTINUE': 'Continue',
-    'ADDRESS_PICKUP': 'Please Choose Address for Pick Up',
+    'ADDRESS_PICKUP': 'Address for Pick Up',
     'SELECT_VARIANT': 'Select Variant',
     'SELECT_TYPE_EXCHANGE': 'Select Variant to Exchange',
     'SELECT_CANCEL_REASON': 'Please select a reason for your cancellation and we\'ll take care of it!',
@@ -618,7 +618,7 @@ export const EN_KEYWORDS = {
  MESSAGES: {
    'MESSAGES': 'Messages',
    'TODAY': 'Today',
-   'ALL_NOTIFICATIONS': 'All Notifications',   
+   'ALL_NOTIFICATIONS': 'All Notifications',
  },
  ORDERS: {
    'ORDER_ID': 'Order Id #',
@@ -658,5 +658,13 @@ export const EN_KEYWORDS = {
    'ONLY_FIVE_ITEMS_CAN_BE_COMPARED': 'Only five items can be compared at a time',
    'ONLY_SIMILAR_ITEM_TYPES_CAN_BE_COMPARED': 'Only similar item types can be compared',
    'ITEM_REMOVED_FROM_COMPARE': 'Item removed from compare',
+ },
+
+ MOBILE_FOOTER: {
+   'HOME': 'home',
+   'CATEGORIES': 'categories',
+   'WISHLIST': 'wishlist',
+   'ACCOUNT': 'account',
+   'CART': 'cart',
  },
 };
