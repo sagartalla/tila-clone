@@ -51,7 +51,9 @@ class Review extends Component {
     })
   }
   submitUserReview = (reviewObj) => {
-    this.props.submitUserReview(reviewObj)
+    this.setState({
+      openModal:false
+    }, () => this.props.submitUserReview(reviewObj))
   }
 
   renderReviewDetails = (reviewData,categoryType) => {
