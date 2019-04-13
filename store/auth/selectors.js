@@ -34,9 +34,11 @@ const getDeliveryCity = (store) => {
   return store.authReducer.data.geoShippingDetails;
 }
 
-const getAutoCompleteCityData = (store) => {
-  return store.authReducer.data.autoCompleteCity;
-}
+// const getAutoCompleteCityData = (store) => {
+//   const data = store.productReducer.allCitiesData;
+//   const params = store.authReducer.autoCompleteCity;
+//   return params ? data.filter(item => item.city_name.toLowerCase().indexOf(params.toLowerCase()) > -1) : data;
+// }
 
 const getPTAToken = (store) => {
   return store.authReducer.data.ptaToken;
@@ -50,4 +52,4 @@ const showEmailVerificationScreen = (store) => {
   return store.authReducer.ui.showEmailVerificationScreen;
 }
 
-export { getErrorMessege, getCountry, getLoggedInStatus, getInstaCode, getUserCreds, getDeliveryCity, getAutoCompleteCityData, getLoginProgressStatus, getShowLogin, getPTAToken, showEmailVerificationScreen, getLanguage, getLoadingStatus };
+export { getErrorMessege, getCountry, getLoggedInStatus, getInstaCode, getUserCreds, getDeliveryCity, getLoginProgressStatus, getShowLogin, getPTAToken, showEmailVerificationScreen, getLanguage, getLoadingStatus };

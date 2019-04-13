@@ -7,6 +7,8 @@ const actions = {
   SUBMIT_USER_REVIEW: 'SUBMIT_USER_REVIEW',
   SET_SELECTED_VARIANT: 'SET_SELECTED_VARIANT',
   SET_SELECTED_PRODUCT_DATA: 'SET_SELECTED_PRODUCT_DATA',
+  GET_CITIES: 'GET_CITIES',
+  AUTOCOMPLETE_CITY: 'AUTOCOMPLETE_CITY',
 };
 
 const actionCreators = {
@@ -41,7 +43,21 @@ const actionCreators = {
   setSelectedProductData: (params) => ({
     type: actions.SET_SELECTED_PRODUCT_DATA,
     payload:params
-  })
+  }),
+
+  getCitiesByCountryCode: (code) => {
+    return ({
+      type: actions.GET_CITIES,
+      payload: api.getCities(code),
+    });
+  },
+
+  autoCompleteCity: (searchKeyWord) => {
+    return ({
+      type: actions.AUTOCOMPLETE_CITY,
+      searchKeyWord,
+    });
+  },
 };
 
 export { actions, actionCreators };

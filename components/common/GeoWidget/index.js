@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import _ from 'lodash';
 import Cookie from 'universal-cookie';
-
+import { selectors as productSelectors, actionCreators as productActionCreators } from '../../../store/product';
 import { actionCreators, selectors } from '../../../store/auth';
 import SVGCompoent from '../SVGComponet';
 import { languageDefinations } from '../../../utils/lang';
@@ -22,20 +22,21 @@ class GeoWidget extends Component {
     this.state = {
       ...props.geoShippingData,
       ...shippingInfo,
-    }
+      showCitiesData: false,
+    };
     this.deriveCity = this.deriveCity.bind(this);
     this.onChangeCity = this.onChangeCity.bind(this);
-    this.autoCompleteCity = _.debounce(this.autoCompleteCity.bind(this), 300);
+    // this.autoCompleteCity = this.autoCompleteCity.bind(this);
     this.selectCityFromSuggesstions = this.selectCityFromSuggesstions.bind(this);
     this.deleteCity = this.deleteCity.bind(this);
     this.locateMe = this.locateMe.bind(this);
+    this.handleOutsideClick = this.handleOutsideClick.bind(this);
   }
 
-  locateMe() {
-    const shippingInfo = cookies.get('shippingInfo')
-    if (navigator.geolocation && !shippingInfo) {
-      navigator.geolocation.getCurrentPosition(this.deriveCity);
-    }
+  componentDidMount() {
+    const { getCitiesByCountryCode } = this.props;
+    getCitiesByCountryCode(cookies.get('country'));
+    document.addEventListener('click', this.handleOutsideClick, false);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -46,19 +47,17 @@ class GeoWidget extends Component {
       }, () => location.reload());
     }
   }
-
+  componentWillUnmount() {
+    document.removeEventListener('click', this.handleOutsideClick, false);
+  }
   onChangeCity(e) {
+    const { autoCompleteCity, getAllCities } = this.props;
     const displayCity = e.target.value;
     this.setState({
-      displayCity
+      displayCity,
+      showCitiesData: true,
     });
-    this.autoCompleteCity(displayCity);
-  }
-
-  autoCompleteCity(city) {
-    this.props.autoCompleteCity({
-      input: city
-    });
+    autoCompleteCity(e.target.value);
   }
 
   setCity(city, country, displayCity) {
@@ -69,6 +68,12 @@ class GeoWidget extends Component {
     });
   }
 
+  locateMe() {
+    const shippingInfo = cookies.get('shippingInfo');
+    if (navigator.geolocation && !shippingInfo) {
+      navigator.geolocation.getCurrentPosition(this.deriveCity);
+    }
+  }
   deriveCity(position) {
     const { longitude, latitude } = position.coords;
     this.props.deriveCity({
@@ -79,73 +84,92 @@ class GeoWidget extends Component {
   }
 
   selectCityFromSuggesstions(e) {
-    const { autoCompleteCityData, resetAutoCompleteData } = this.props;
-    const selectedCity = _.find(autoCompleteCityData, { displayCity: e.target.getAttribute('data-id') });
-    const { city, country, displayCity } = selectedCity;
-    resetAutoCompleteData();
+    // const { autoCompleteCityData } = this.props;
+    const selectedCity = e.target.getAttribute('data-id');
+    const city = e.target.getAttribute('data-code');
+    const displayCity = e.target.getAttribute('data-id');
+    const country = cookies.get('country');
+    // resetAutoCompleteData();
     this.setState({
-      displayCity: selectedCity.displayCity
+      displayCity: selectedCity,
     });
     this.setCity(city, country, displayCity);
   }
-
+  handleOutsideClick(event) {
+    const { target } = event;
+    if (this.filterRef && target !== this.filterRef && !this.filterRef.contains(target)) {
+      this.setState({
+        showCitiesData: false,
+      });
+    }
+  }
   deleteCity() {
     this.setState({
-      displayCity: null
+      displayCity: null,
     });
     this.props.removeCity();
   }
 
   render() {
-    const { autoCompleteCityData, geoShippingData, hideLabel } = this.props;
-    // const { displayCity } = geoShippingData;
-    // const { displayCity: stateDisplayCity } = this.state;
+    const {
+      geoShippingData, hideLabel, getAllCities, isLoading,
+    } = this.props;
+    const { showCitiesData } = this.state;
+    console.log('showCitiesData', showCitiesData);
+    console.log('getAllCities', getAllCities);
+    console.log('isLoading', isLoading);
+    console.log('this.state.displayCity', this.state.displayCity);
     return (
       <div className={`${styles['flex-center']} ${styles['delovery-inn']}`}>
         {
           (!hideLabel)
             ?
-            <span className={`${styles['flex-center']} ${styles['delivery-part']}`}>
-              <SVGCompoent clsName={`${styles['map-icon']}`} src="icons/common-icon/black-map-location" />
-              <span className={`${styles['fontW600']} ${styles['pl-5']} ${styles['pr-10']}`}>{SEARCH_PAGE.DELIVER_TO} :</span>
+              <span className={`${styles['flex-center']} ${styles['delivery-part']}`}>
+                <SVGCompoent clsName={`${styles['map-icon']}`} src="icons/common-icon/black-map-location" />
+                <span className={`${styles.fontW600} ${styles['pl-5']} ${styles['pr-10']}`}>{SEARCH_PAGE.DELIVER_TO} :</span>
 
-            </span>
+              </span>
             :
             null
         }
-        <div className={styles['auto-suggestions-wrap']}>
-          <input type="text" value={this.state.displayCity} className={styles['fs-12']} onChange={this.onChangeCity} />
+        <div
+          className={styles['auto-suggestions-wrap']}
+          ref={(el) => { this.filterRef = el; }}
+        >
+          <input type="text" value={isLoading ? 'Loading...' : this.state.displayCity} className={styles['fs-12']} onChange={this.onChangeCity} />
           {
             <div className={`${styles['auto-suggestions-list']}`}>
-            {autoCompleteCityData.map(result =>
+              {showCitiesData && getAllCities.map(result =>
               (
                 <div
-                  key={result.displayCity}
+                  key={result.rescity_nameult}
                   className={`${styles['auto-suggestions']} ${styles['pt-5']} ${styles['pl-10']} ${styles['bg-white']}`}
                 >
-                  <div data-id={result.displayCity} onClick={this.selectCityFromSuggesstions} className={`${styles.item} ${styles['fs-12']}`}>{result.displayCity}</div>
+                  <div data-id={result.city_name} data-code={result.code} onClick={this.selectCityFromSuggesstions} className={`${styles.item} ${styles['fs-12']}`}>{result.city_name}</div>
                 </div>
               ))}
-              </div>
+            </div>
           }
           {
             this.state.displayCity
               ?
-              <div onClick={this.deleteCity} className={styles['delete-btn']}>x</div>
+                <div onClick={this.deleteCity} className={styles['delete-btn']}>x</div>
               :
-              <div onClick={this.locateMe} className={styles['delete-btn']}>
+                <div onClick={this.locateMe} className={styles['delete-btn']}>
                 <SVGCompoent clsName={`${styles['map-icon']}`} src="icons/locate-me" />
               </div>
           }
         </div>
       </div>
-    )
+    );
   }
 }
 
-const mapStateToProps = (store) => ({
+const mapStateToProps = store => ({
   geoShippingData: selectors.getDeliveryCity(store),
-  autoCompleteCityData: selectors.getAutoCompleteCityData(store)
+  // autoCompleteCityData: productSelectors.getAutoCompleteCityData(store),
+  getAllCities: productSelectors.getAllCities(store),
+  isLoading: productSelectors.isLoading(store),
 });
 
 const mapDispatchToProps = dispatch =>
@@ -153,8 +177,9 @@ const mapDispatchToProps = dispatch =>
     {
       deriveCity: actionCreators.deriveCity,
       setCity: actionCreators.setCity,
-      autoCompleteCity: actionCreators.autoCompleteCity,
-      resetAutoCompleteData: actionCreators.resetAutoCompleteData,
+      autoCompleteCity: productActionCreators.autoCompleteCity,
+      // resetAutoCompleteData: actionCreators.resetAutoCompleteData,
+      getCitiesByCountryCode: productActionCreators.getCitiesByCountryCode,
       removeCity: actionCreators.removeCity,
     },
     dispatch,

@@ -203,37 +203,37 @@ const authReducer = typeToReducer({
       },
     }),
   },
-  [actions.RESET_AUTOCOMPLETE_CITY]: (state, action) => ({
-    ...state,
-    data: {
-      ...state.data,
-      autoCompleteCity: []
-    }
-  }),
-  [actions.AUTOCOMPLETE_CITY]: {
-    PENDING: (state) => Object.assign({}, state, {
-      error: '',
-    }, {
-      ui: {
-        ...state.ui,
-        loading: true,
-      },
-    }),
-    FULFILLED: (state, action) => ({
-      ...state,
-      data: {
-        ...state.data,
-        autoCompleteCity: action.payload,
-      }
-    }),
-    REJECTED: (state, action) => Object.assign({}, state, {
-      error: action.payload.response ? action.payload.response.data.message : action.payload.message,
-      ui: {
-        ...state.ui,
-        loading: false,
-      },
-    }),
-  },
+  // [actions.RESET_AUTOCOMPLETE_CITY]: (state, action) => ({
+  //   ...state,
+  //   data: {
+  //     ...state.data,
+  //     autoCompleteCity: []
+  //   }
+  // }),
+  // [actions.AUTOCOMPLETE_CITY]: {
+  //   PENDING: (state) => Object.assign({}, state, {
+  //     error: '',
+  //   }, {
+  //     ui: {
+  //       ...state.ui,
+  //       loading: true,
+  //     },
+  //   }),
+  //   FULFILLED: (state, params) => ({
+  //     ...state,
+  //     data: {
+  //       ...state.data,
+  //       autoCompleteCity: params,
+  //     }
+  //   }),
+  //   REJECTED: (state, action) => Object.assign({}, state, {
+  //     error: action.payload.response ? action.payload.response.data.message : action.payload.message,
+  //     ui: {
+  //       ...state.ui,
+  //       loading: false,
+  //     },
+  //   }),
+  // },
   [actions.SHOW_LOGIN]: (state, action) => ({
     ...state,
     ui: {
