@@ -50,10 +50,11 @@ class Review extends Component {
       openModal:false
     })
   }
-  submitUserReview = (reviewObj) => {
+  submituserreview = (reviewObj) => {
     this.setState({
       openModal:false
     }, () => this.props.submitUserReview(reviewObj))
+
   }
 
   renderReviewDetails = (reviewData,categoryType) => {
@@ -149,7 +150,7 @@ class Review extends Component {
                      <Modal.Body>
                        <ReviewFeedBackModal
                         catalogObj={catalogObj}
-                        feedbackSubmit={this.submitUserReview}
+                        feedbackSubmit={this.submituserreview}
                        />
                      </Modal.Body>
                     </Modal>
