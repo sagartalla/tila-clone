@@ -26,7 +26,6 @@ class GeoWidget extends Component {
     };
     this.deriveCity = this.deriveCity.bind(this);
     this.onChangeCity = this.onChangeCity.bind(this);
-    // this.autoCompleteCity = this.autoCompleteCity.bind(this);
     this.selectCityFromSuggesstions = this.selectCityFromSuggesstions.bind(this);
     this.deleteCity = this.deleteCity.bind(this);
     this.locateMe = this.locateMe.bind(this);
@@ -41,7 +40,6 @@ class GeoWidget extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { geoShippingData } = nextProps;
-    console.log('geoShippingData', geoShippingData);
     if (this.props.geoShippingData.city !== geoShippingData.city) {
       this.setState({
         displayCity: geoShippingData.displayCity,
