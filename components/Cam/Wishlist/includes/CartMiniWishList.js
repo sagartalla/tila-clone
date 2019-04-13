@@ -41,7 +41,7 @@ class CartMiniWishList extends Component {
           }
         </Col>
         <Col md={2} className={`${styles['pl-0']} ${styles['pr-0']} ${styles['flex']} ${styles['view-btn-list']}`}>
-          <a className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']} ${styles['default-small']}`} onClick={this.wishlistClickHandler}>View Wishlist</a>
+          <a className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']} ${styles['default-small']}`} onClick={this.wishlistClickHandler}>{CART_PAGE.VIEW_WISHLIST}</a>
         </Col>
       </div>
     )

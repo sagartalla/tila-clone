@@ -12,7 +12,7 @@ import { languageDefinations } from '../../../utils/lang/';
 import constants from '../../../constants';
 
 const styles = mergeCss('components/Cart/cart');
-const { CART_PAGE } = languageDefinations();
+const { CART_PAGE, ORDER_PAGE } = languageDefinations();
 
 const cookies = new Cookie();
 
@@ -29,8 +29,8 @@ const popover = ({
         <div className={`${styles['table']} ${styles['width100']}`}>
           <div className={styles['t-row']}>
             <div className={`${styles['t-cell']} ${styles['pb-10']}`}>
-              <div>Maximum Retail Price</div>
-              <div className={`${styles['fs-10']} ${styles['label-light-grey']}`}>(Incl. of all taxes)</div>
+              <div>{CART_PAGE.MAXIMUM_RETAIL_PRICE}</div>
+              <div className={`${styles['fs-10']} ${styles['label-light-grey']}`}>({CART_PAGE.INCL_OF_ALL_TAXES})</div>
             </div>
             <div className={`${styles['t-cell']} ${styles['t-rt']}`}>
               {`${mrp} ${cur}`}
@@ -38,7 +38,7 @@ const popover = ({
           </div>
           <div className={styles['t-row']}>
             <div className={`${styles['t-cell']} ${styles['pb-10']}`}>
-              <div>Selling Price</div>
+              <div>{CART_PAGE.SELLING_PRICE}</div>
             </div>
             <div className={`${styles['t-cell']} ${styles['t-rt']}`}>
               {`${selling_price} ${cur}`}
@@ -60,16 +60,16 @@ const popover = ({
           }
           <div className={styles['t-row']}>
             <div className={`${styles['t-cell']} ${styles['pb-10']}`}>
-              <div>Delivery Charges</div>
+              <div>{CART_PAGE.DELIVERY_CHARGES}</div>
             </div>
-            <div className={`${styles['t-cell']} ${styles['t-rt']}`}>Free</div>
+            <div className={`${styles['t-cell']} ${styles['t-rt']}`}>{ORDER_PAGE.FREE}</div>
           </div>
           <div className={`${styles['t-row']} ${styles['total-amount']}`}>
-            <div className={styles['t-cell']}>Total</div>
+            <div className={styles['t-cell']}>{ORDER_PAGE.TOTAL}</div>
             <div className={`${styles['t-cell']} ${styles['t-rt']}`}>{total_amount} {cur}</div>
           </div>
         </div>
-        <div className={`${styles['p-5']} ${styles['mt-5']} ${styles['overall-amount']}`}>Overall you save {total_discount} {cur} on this product</div>
+        <div className={`${styles['p-5']} ${styles['mt-5']} ${styles['overall-amount']}`}>{ORDER_PAGE.OVERALL_YOU_SAVE} {total_discount} {cur} {ORDER_PAGE.ON_THIS_PRODUCT}</div>
       </div>
     </Popover>
   );
@@ -149,7 +149,7 @@ class CartItem extends React.Component {
           {
             inventory <= 0 ?
               <div className={`${styles['out-of-stock']} ${styles['text-center']} ${styles['absolute']} ${styles['bg-white']}`}>
-                <h3>uh-oh!</h3>
+                <h3>{CART_PAGE.UH_OH}</h3>
                 <p>
                   {CART_PAGE.ITEM_OUT_OF_STOCK_MESSAGE} <br /> {CART_PAGE.CONTINUE_TO_WISHLIST}
                 </p>
@@ -157,7 +157,7 @@ class CartItem extends React.Component {
               : null
           }
           <Row>
-            <Col md={2} sm={2} className={styles['ipad-pr-0']}>
+            <Col md={2} sm={2} xs={3} className={`${styles['ipad-pr-0']} ${styles['m-pd-r-0']}`}>
               <div
                 className={`${styles['flex-center']} ${styles['justify-center']} ${styles['pb-15']} ${styles['card-box-inn-img']}`}
               >
@@ -175,13 +175,13 @@ class CartItem extends React.Component {
                 cartStepperInputHandler={cartStepperInputHandler}
               />
             </Col>
-            <Col md={10} sm={10}>
+            <Col md={10} sm={10} xs={9}>
               <Row>
                 <Col md={12}>
                   <h5 className={`${styles['mt-0']} ${styles['mb-0']}`}>{brand_name}</h5>
                 </Col>
                 <Col md={10} sm={10} className={styles['landscape-cart-details']}>
-                  <h4 className={`${styles['fontW600']}`}>
+                  <h4 className={`${styles['fontW600']} ${styles['m-fs-14']}`}>
                     <Link route={`/${country}/${language}/product?productId=${product_id}${variant_id ? `&variantId=${variant_id}` : ''}&catalogId=${catalogId}&itemType=${itemType}`}>
                       <a className={`${styles['width100']} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
                         {name}
@@ -190,7 +190,7 @@ class CartItem extends React.Component {
                   </h4>
                   <div className={`${styles['warranty-part']} ${styles['p-10']} ${styles['light-gry-clr']}`}>
                     {cartData.items ? <p className={`${styles['mb-0']} ${styles['fs-12']} ${styles['flex']}`}>
-                      <span>Warranty : </span>
+                      <span>{CART_PAGE.WARRENTY} : </span>
                       <span className={`${styles['pl-10']} ${styles['pr-10']}`}><Warranty warranty={cartData.items[index].warranty_duration} /></span>
                     </p>
                       : null}
@@ -206,8 +206,8 @@ class CartItem extends React.Component {
                   </div>
                   {checked && showMessage &&
                     <div>
-                      <span className={styles.fontW600}>Message:&nbsp;</span><span>{gift_card_message}&nbsp;</span>
-                      <span>{'('}<a onClick={this.toggleMessage}>edit</a>{')'}</span>
+                      <span className={styles.fontW600}>{CART_PAGE.MESSAGE}:&nbsp;</span><span>{gift_card_message}&nbsp;</span>
+                      <span>{'('}<a onClick={this.toggleMessage}>{CART_PAGE.EDIT}</a>{')'}</span>
                     </div>
                   }
                   {!showMessage && checked &&
@@ -218,7 +218,7 @@ class CartItem extends React.Component {
                         cols="30"
                         rows="2"
                         className={styles['resize-none']}
-                        placeholder="Gift Message (optional)"
+                        placeholder={CART_PAGE.GIFT_MESSAGE_OPTIONAL}
                         value={gift_card_message}
                         onChange={this.updateMsg}
                       />
@@ -227,7 +227,7 @@ class CartItem extends React.Component {
                         className={`${styles['ml-5']} ${styles['bg-thick-blue']} ${styles['p-5']} ${styles['white-color']} ${styles['border-radius4']}`}
                         onClick={this.sendGiftPack}
                       >
-                        Gift Pack
+                        {CART_PAGE.GIFT_PACK}
                     </button>
                     </div>}
                 </Col>
@@ -242,7 +242,7 @@ class CartItem extends React.Component {
                         </span>
                       </span>
                     </p>}
-                  <h4 className={`${styles.fontW600} ${styles['justify-flex-end']} ${styles['light-gry-clr']} ${styles['flex-center']} ${styles['mt-10']} ${styles['t-rt']}`}>
+                  <h4 className={`${styles.fontW600} ${styles['justify-flex-end']} ${styles['cart-price-label']} ${styles['light-gry-clr']} ${styles['flex-center']} ${styles['mt-10']} ${styles['t-rt']}`}>
                     {`${offer_price} ${cur}`}
                     <OverlayTrigger placement="bottom" overlay={popover(item)}>
                       {/* <span className={`${styles['fs-12']} ${styles['pr-5']}`}>
@@ -259,7 +259,7 @@ class CartItem extends React.Component {
           </Row>
         </div>
         <div className={`${styles['cart-box-btm']} ${styles['flex']} ${styles['p-14-22']}`}>
-          <Col md={9} sm={9} className={styles['flex']}>
+          <Col md={9} sm={9} xs={9} className={`${styles['flex']} ${styles['m-pd-r-0']}`}>
             <span className={styles['width21']}>
               {
                 inventory <= 10 && inventory != 0 ?
@@ -281,8 +281,8 @@ class CartItem extends React.Component {
               <span className={styles['pl-10']}>{CART_PAGE.REMOVE}</span>
             </span>
           </Col>
-          <Col md={3} sm={3} className={`${styles['t-rt']} ${styles['pr-0']}`}>
-            <span>Total : </span><span className={`${styles['fs-16']} ${styles['fontW600']}`}>{total_amount + ' ' + cur}</span>
+          <Col md={3} sm={3} xs={3} className={`${styles['t-rt']} ${styles['pr-0']} ${styles['m-pad-5']}`}>
+            <span>{ORDER_PAGE.TOTAL} : </span><span className={`${styles['fs-16']} ${styles['fontW600']}`}>{total_amount + ' ' + cur}</span>
           </Col>
         </div>
 

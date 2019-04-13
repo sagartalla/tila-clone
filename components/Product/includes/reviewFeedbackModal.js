@@ -1,59 +1,63 @@
-import React , {Component} from 'react'
+import React, { Component } from 'react';
+import { Col,Button } from 'react-bootstrap';
 import SVGCompoent from '../../common/SVGComponet';
 import StarRating from '../../common/StarRating';
 import { mergeCss } from '../../../utils/cssUtil';
-const styles = mergeCss('components/Product/product');
-import {languageDefinations} from '../../../utils/lang';
+import { languageDefinations } from '../../../utils/lang';
 import Theme from '../../helpers/context/theme';
-const {PDP_PAGE} = languageDefinations();
-import { Col,Button } from 'react-bootstrap';
-import FormValidator from '../../common/FormValidator'
+import FormValidator from '../../common/FormValidator';
+
+const styles = mergeCss('components/Product/product');
+
+const { PDP_PAGE } = languageDefinations();
 
 export default class FeedbackModal extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.validations = new FormValidator([
       {
-        field:'textValue',
-        method:this.validateTextArea,
-        message:'Description cannot be empty',
-        validWhen:false
+        field: 'textValue',
+        method: this.validateTextArea,
+        message: PDP_PAGE.DESCRIPTION_CANNOT_BE_EMPTY,
+        validWhen: false,
       },
       {
-        field:'rating',
-        method:this.validateStarRating,
-        message:'please select the starRating',
-        validWhen:false
-      }
-    ])
+        field: 'rating',
+        method: this.validateStarRating,
+        message: PDP_PAGE.PLEASE_SELECT_THE_STAR_RATING,
+        validWhen: false,
+      },
+    ]);
 
     this.state = {
-      textValue:'',
-      rating:0,
-      validation:this.validations.valid()
-    }
-    this.handleTextChange = this.handleTextChange.bind(this)
-    this.retrieveRating = this.retrieveRating.bind(this)
-    this.sumbitFeedBack = this.sumbitFeedBack.bind(this)
+      textValue: '',
+      rating: 0,
+      validation: this.validations.valid(),
+      charsLeft:300
+    };
+    this.handleTextChange = this.handleTextChange.bind(this);
+    this.retrieveRating = this.retrieveRating.bind(this);
+    this.sumbitFeedBack = this.sumbitFeedBack.bind(this);
   }
-  validateTextArea = (fieldvalue,state) => {
-    if(fieldvalue === '') {
-      return true
+  validateTextArea = (fieldvalue, state) => {
+    if (fieldvalue === '') {
+      return true;
     }
     return false;
   }
-  validateStarRating = (fieldvalue,state) => {
-    if(fieldvalue === 0) {
-      return true
+  validateStarRating = (fieldvalue, state) => {
+    if (fieldvalue === 0) {
+      return true;
     }
 
-    return false
+    return false;
   }
 
   handleTextChange({target:{value}}){
     this.setState({
-      textValue:value
-      })
+      textValue:value,
+      charsLeft: 300 - value.length
+    })
   }
   retrieveRating(e,rating){
     this.setState({ rating })
@@ -85,7 +89,7 @@ export default class FeedbackModal extends Component {
 
   }
   render() {
-    const { rating,validation } = this.state;
+    const { rating,validation,charsLeft } = this.state;
     return (
       <Theme.Consumer>
       {
@@ -96,12 +100,14 @@ export default class FeedbackModal extends Component {
               {`${styles['review-block']} ${styles['mt-20']} ${styles['mb-20']} ${styles['t-c']}`}
               >
               <textarea
-                placeholder='Any Other Suggestions?Let Us Know'
-                value={this.state.textValue}
-                name="message" rows='1' cols='50'
+                placeholder={PDP_PAGE.ANY_OTHER_SUGGESTIONS}
+                type='text'
+                name="message" rows='3' cols='70'
+                maxlength="300"
                 onChange={this.handleTextChange}
                 className={`${styles['review-textarea']}`}
                 >
+                {this.state.textValue}
               </textarea>
               {
                 validation.textValue.isInValid ?
@@ -111,7 +117,11 @@ export default class FeedbackModal extends Component {
               }
 
             </div>
-
+            <div className={`${styles['fl-rt']} ${styles['fs-12']}`}>
+              <span>maxLength</span>
+              <span>{charsLeft}</span>
+            </div>
+            <div className={styles['cl-bth']}></div>
             <div
               className={`${styles['flex-center']}
               ${styles['review-rating-block']}
@@ -129,7 +139,7 @@ export default class FeedbackModal extends Component {
                     src={`icons/common-icon/product-box`}
                   />
                 </div>
-                <div className={`${styles['ml-15']} ${styles['mt-10']}`}>Rate The Product</div>
+                <div className={`${styles['ml-15']} ${styles['mt-10']}`}>{PDP_PAGE.RATE_THE_PRODUCT}</div>
               </div>
               <div
               className =
@@ -156,7 +166,7 @@ export default class FeedbackModal extends Component {
                 onClick={this.sumbitFeedBack}
                 className={`${styles['btn-style']} ${styles['fs-16']}`}
               >
-              submit FeedBack
+              {PDP_PAGE.SUBMIT_FEEDBACK}
               </Button>
             </div>
           </div>

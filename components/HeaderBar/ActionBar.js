@@ -19,10 +19,10 @@ import { Router } from '../../routes';
 
 import { selectors, actionCreators } from '../../store/auth';
 import { actionCreators as cartActionCreators, selectors as cartSelectors } from '../../store/cart';
-import { languageDefinations } from '../../utils/lang'
+import { languageDefinations } from '../../utils/lang';
 import { mergeCss } from '../../utils/cssUtil';
 const styles = mergeCss('components/HeaderBar/header');
-const {HEADER_PAGE} = languageDefinations();
+const { HEADER_PAGE } = languageDefinations();
 const cookies = new Cookie();
 
 const language = cookies.get('language') || 'en';
@@ -152,7 +152,7 @@ class ActionBar extends Component {
            <a style={{dispaly:'block'}}>
             <span className={`${styles['flex-center']} ${styles['justify-center']} ${styles['relative']}`}>
               <SVGComponent clsName={`${styles['wish-list-icon']}`} src="icons/wish-list/wish-list-icon" />
-              <span className={`${styles['absolute']} ${styles['cart-count']} ${styles['fs-10']} ${styles['white-color']}`}>{wishListCount.length}</span>
+              <span className={`${styles['absolute']} ${styles['cart-count']} ${styles['fs-10']} ${styles['white-color']}`}>{wishListCount}</span>
             </span>
             </a>
           </Link>
@@ -192,7 +192,7 @@ class ActionBar extends Component {
               <div className={styles['profile-part']}>
                 <div className={`${styles['flex-center']} ${styles['ple-icon']}`}>
                   <span className={styles['icon']}></span>
-                  <span className={styles['pl-15']}>Hello {userInfo.personalInfo.first_name || `${HEADER_PAGE.TILA_CUSTOMER}` }</span>
+                  <span className={styles['pl-15']}>{HEADER_PAGE.HELLO} {userInfo.personalInfo.first_name || `${HEADER_PAGE.TILA_CUSTOMER}` }</span>
                 </div>
                 <ul className={`${styles['pl-0']} ${styles['profile-inn']}`}>
                   <li className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']}`}>
@@ -265,7 +265,7 @@ const mapStateToProps = (store) => {
     userInfo: personalSelectors.getUserInfo(store),
     showLogin: selectors.getShowLogin(store),
     ptaToken: selectors.getPTAToken(store),
-    wishListCount: wishListSelectors.getWishListResults(store),
+    wishListCount: wishListSelectors.getPaginationDetails(store).total_elements,
     showEmailVerificationScreen: selectors.showEmailVerificationScreen(store),
   })
 };

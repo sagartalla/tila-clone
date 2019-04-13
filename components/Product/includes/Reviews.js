@@ -50,8 +50,11 @@ class Review extends Component {
       openModal:false
     })
   }
-  submitUserReview = (reviewObj) => {
-    this.props.submitUserReview(reviewObj)
+  submituserreview = (reviewObj) => {
+    this.setState({
+      openModal:false
+    }, () => this.props.submitUserReview(reviewObj))
+
   }
 
   renderReviewDetails = (reviewData,categoryType) => {
@@ -123,7 +126,7 @@ class Review extends Component {
                 </div>
                 <React.Fragment>
                   {
-                    reviewData.length ? this.renderReviewDetails(reviewData,categoryType) : <div> No reviews available for this product. </div>
+                    reviewData.length ? this.renderReviewDetails(reviewData,categoryType) : <div> {PDP_PAGE.NO_REVIEWS_AVAILABLE} </div>
                   }
                 </React.Fragment>
                 <div>
@@ -142,12 +145,12 @@ class Review extends Component {
                         closeButton
                         className={`${styles['modal-headerStyl']}`}
                       >
-                        <Modal.Title>Share your Experience</Modal.Title>
+                        <Modal.Title>{PDP_PAGE.SHARE_YOUR_EXPERIENCE}</Modal.Title>
                       </Modal.Header>
                      <Modal.Body>
                        <ReviewFeedBackModal
                         catalogObj={catalogObj}
-                        feedbackSubmit={this.submitUserReview}
+                        feedbackSubmit={this.submituserreview}
                        />
                      </Modal.Body>
                     </Modal>

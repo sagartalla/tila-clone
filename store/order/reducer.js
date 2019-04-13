@@ -14,7 +14,8 @@ const initialState = {
         exchangeVariants: [],
         selectedReasons:{},
         refundOptions:[],
-        exchangeId:{}
+        exchangeId:{},
+        refundInitiated:false
       },
     },
     error: '',
@@ -250,7 +251,8 @@ const productReducer = typeToReducer({
           ...state.data,
           orderIssue: {
             ...state.data.orderIssue,
-            returnStatus: action.payload.data
+            returnStatus: action.payload.data,
+            refundInitiated:true
           }
         },
         ui: { loading: false }

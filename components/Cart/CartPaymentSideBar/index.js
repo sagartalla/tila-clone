@@ -12,11 +12,10 @@ import CartStepper from '../../Cart/includes/CartStepper';
 
 import { mergeCss } from '../../../utils/cssUtil';
 
-const { COUPON_OFFERS } = languageDefinations();
+const { COUPON_OFFERS, CART_PAGE } = languageDefinations();
 
 const styles = mergeCss('components/Cart/CartPaymentSideBar/sideBar');
 
-const { CART_PAGE } = languageDefinations();
 class CartAndPaymentSideBar extends Component {
   constructor(props) {
     super(props);
@@ -38,6 +37,8 @@ class CartAndPaymentSideBar extends Component {
       hideUpSell, showStepper, increaseItemCnt, decreaseItemCnt,
       insnt_item_listing_id, isPdp, couponData, getCartResults, data, hideCouponCode,
     } = this.props;
+
+    console.log('showinstant', showInstant);
     const {
       items, total_price, total_offer_price, total_gift_charges,
       total_discount, total_shipping, tax, item_cnt, currency,
@@ -68,7 +69,7 @@ class CartAndPaymentSideBar extends Component {
               <span className={`${styles['text-uppercase']} ${styles['pl-5']}`}>
               <div>{COUPON_OFFERS.APPLY_COUPON}</div>
               </span>
-              <div className={`${styles['light-gray']}`}>{'No Coupon Applied'}</div>
+              <div className={`${styles['light-gray']}`}>{COUPON_OFFERS.NO_COUPON_APPLIED}</div>
               </div>
             </span>
         }
@@ -80,6 +81,8 @@ class CartAndPaymentSideBar extends Component {
             <InstantCheckout
               insnt_item_listing_id={insnt_item_listing_id}
               isPdp={isPdp}
+              totalPrice={total_price}
+              currency={currency}
             />
           </div>
           : null
@@ -109,7 +112,7 @@ class CartAndPaymentSideBar extends Component {
             {
             showStepper ?
               <li>
-                Quantity
+                {CART_PAGE.QUANTITY}
                 <span>
                   <CartStepper
                     item={items[0]}
@@ -127,7 +130,7 @@ class CartAndPaymentSideBar extends Component {
             <li className={`${styles['mt-20']} ${styles['fs-16']} ${styles['light-gry-clr']} ${styles.flex} ${styles['flex-colum']}`}><b>{CART_PAGE.TOTAL_AMOUNT} <span>{`${total_price} ${currency}`}</span></b>
               {
                 total_discount > 0 ?
-                  <span className={`${styles['fs-12']} ${styles['thick-red']} ${styles['t-rt']}`}>You saved {total_discount} {currency}</span>
+                  <span className={`${styles['fs-12']} ${styles['thick-red']} ${styles['t-rt']}`}>{CART_PAGE.YOU_SAVED} {total_discount} {currency}</span>
                 : null
               }
             </li>

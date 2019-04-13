@@ -18,7 +18,9 @@ const country = cookies.get('country') || 'SAU';
 const percentage = (a, b) => Math.floor(((a - b) / b) * 100);
 
 const WishlistBody = (props) => {
-  const { data, deleteItem, addToCart, notifyMe } = props;
+  const {
+    data, deleteItem, addToCart, notifyMe, pageDetails,
+  } = props;
   const { WISH_LIST_PAGE, PDP_PAGE } = languageDefinations();
 
   const getPriceAlert = (a, b, cur) => {
@@ -44,13 +46,15 @@ const WishlistBody = (props) => {
   };
   const routeChange = (variantId, productId, catalogId, itemType) => {
     Router.push(`/${country}/${language}/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemType}`);
-  }
+  };
+
+  console.log('ewfbfiwu', pageDetails);
   return (
     <div>
       <div className={`${styles['flex']}`}>
         <Col md={12} sm={12} xs={12} className={`${styles['pl-0']}`}>
           <h4 className={`${styles['mt-0']} ${styles['mb-20']} ${styles['fontW300']}}`}>
-            <span>{data.length + ' ' + WISH_LIST_PAGE.WISHLIST_HEADER}</span>
+            <span>{`Showing ${(pageDetails.number * pageDetails.size) + 1}-${(pageDetails.number + 1) * pageDetails.size > pageDetails.total_elements ? pageDetails.total_elements : (pageDetails.number + 1) * pageDetails.size} of ${pageDetails.total_elements} ${WISH_LIST_PAGE.WISHLIST_HEADER}`}</span>
           </h4>
         </Col>
       </div>
@@ -113,7 +117,7 @@ const WishlistBody = (props) => {
                         {wishlisted_price > 0 && price && cur && getPriceAlert(price, wishlisted_price, cur)}
                         {wishlisted_price > 0 &&
                         <span className={`${styles['thick-gry-clr']}`}>
-                          Item was {wishlisted_price} {cur} when added to Wish List
+                          {WISH_LIST_PAGE.ITEM_WAS} {wishlisted_price} {cur} {WISH_LIST_PAGE.WHEN_ADDED_TO_WISHLIST}
                         </span>}
                       </div>
                     </Col>
