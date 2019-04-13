@@ -249,7 +249,7 @@ class InstantCheckout extends Component {
               onChange={ this.handleChange }
               checked={ this.state.checked }
             />
-            <label for="pay-delivery"> I agree to pay cash on delivery </label>
+          <label for="pay-delivery">{INSTANT_CHECKOUT.AGREE_CASH_ON_DELIVERY}</label>
           </div>
            : null
         }

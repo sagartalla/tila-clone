@@ -618,7 +618,7 @@ export const EN_KEYWORDS = {
  MESSAGES: {
    'MESSAGES': 'Messages',
    'TODAY': 'Today',
-   'ALL_NOTIFICATIONS': 'All Notifications',   
+   'ALL_NOTIFICATIONS': 'All Notifications',
  },
  ORDERS: {
    'ORDER_ID': 'Order Id #',
@@ -641,6 +641,7 @@ export const EN_KEYWORDS = {
    'INSTANT_CHECKOUT': 'INSTANT CHECKOUT',
    'COUNTRY_CODE': 'Country Code',
    'MOBILE_NO': 'Mobile No',
+   'AGREE_CASH_ON_DELIVERY': 'I agree to pay cash on delivery'
  },
  API_TEXT: {
    'YOUR_EMAIL_IS_VERIFIED': 'Your email is verified',
