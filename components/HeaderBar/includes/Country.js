@@ -8,11 +8,16 @@ import Cookies from 'universal-cookie';
 
 import { actionCreators } from '../../../store/auth';
 
-import { mergeCss } from '../../../utils/cssUtil';
 
 import countriesData from '../../../constants/countries';
 
-const styles = mergeCss('components/HeaderBar/header');
+import lang from '../../../utils/language';
+
+import styles_en from '../header_en.styl';
+import styles_ar from '../header_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 const cookies = new Cookies();
 
 class Country extends Component {
