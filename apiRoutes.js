@@ -13,7 +13,6 @@ const GOOGLE_KEY = 'AIzaSyDrVNKZshUspEprFsNnQD-sos6tvgFdijg';
 apiRoutes
   .post('/login', (req, res) => {
     const params = req.body;
-    debugger;
     return axios.post(`${constants.AUTH_API_URL}/api/v1/sls/auth`, Object.assign({}, params, {})).then(({data, status}) => {
       let isLoggedIn = false;
       if(status === 200) {

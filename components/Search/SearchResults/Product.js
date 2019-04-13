@@ -13,7 +13,6 @@ import constants from '../../../constants';
 import { actionCreators } from '../../../store/cam/wishlist';
 import { actionCreators as compareActions } from '../../../store/compare/actions';
 import SVGCompoent from '../../common/SVGComponet';
-import { mergeCss } from '../../../utils/cssUtil';
 import { languageDefinations } from '../../../utils/lang';
 import NotifyMe from '../../common/NotifyMe/NotifyMe';
 import Button from '../../common/CommonButton';
@@ -21,7 +20,13 @@ import { selectors } from '../../../store/cart';
 
 import RenderVariants from './renderVariants';
 
-const styles = mergeCss('components/Search/search');
+import lang from '../../../utils/language';
+
+import styles_en from '../search_en.styl';
+import styles_ar from '../search_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 const { PDP_PAGE } = languageDefinations();
 
 const cookies = new Cookie();

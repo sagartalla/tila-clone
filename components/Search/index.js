@@ -13,9 +13,6 @@ import SearchDetailsBar from './SearchDetailsBar';
 import SearchResults from './SearchResults';
 import CompareWidget from '../common/CompareWidget';
 import { Router } from '../../routes';
-import { mergeCss } from '../../utils/cssUtil';
-
-const styles = mergeCss('components/Search/search');
 const { SEARCH_PAGE } = languageDefinations();
 
 const cookies = new Cookie();
@@ -23,6 +20,13 @@ const cookies = new Cookie();
 const language = cookies.get('language') || 'en';
 const country = cookies.get('country') || 'SAU';
 
+
+import lang from '../../utils/language';
+
+import styles_en from './search_en.styl';
+import styles_ar from './search_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 const onClickMenuHandle = (e) => {
   const target = e.currentTarget;
@@ -74,7 +78,7 @@ class Search extends Component {
               </a>
             </div>
           }
-          <Col md={2} onClick={onClickMenuHandle} className={`${styles['filter-panel']} ${styles['border-radius4']} ${styles['bg-white']} ${styles['p-0']}`}>
+          <Col md={2} onClick={onClickMenuHandle} className={`${styles['filter-panel']} ${styles['mr-10']} ${styles['float-l']} ${styles['border-radius4']} ${styles['bg-white']} ${styles['p-0']}`}>
             <NoSSR>
               <CategoriesAndFacets />
             </NoSSR>
