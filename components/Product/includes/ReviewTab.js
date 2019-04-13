@@ -5,11 +5,17 @@ import { Tabs, Tab } from 'react-bootstrap';
 
 import Review from './Reviews';
 import SVGCompoent from '../../common/SVGComponet';
-import { mergeCss } from '../../../utils/cssUtil';
+
 
 const { PDP_PAGE } = languageDefinations();
 
-const styles = mergeCss('components/Product/product');
+import lang from '../../../utils/language';
+
+import styles_en from '../product_en.styl';
+import styles_ar from '../product_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 
 const ReviewsTab = ({ tabs }) => {
   return (

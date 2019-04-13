@@ -14,13 +14,6 @@ export default class MyDocument extends Document {
           {/*<!-- Adobe Launch Tags -->*/}
           <script src="//assets.adobedtm.com/launch-ENc0358fe6617e4066a1c1c0ecff96f2e5-development.min.js" async></script>
           {/*<!-- End Adobe Launch Tags -->*/}
-          {
-            props.__NEXT_DATA__.query.language === 'ar'
-              ?
-              <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-rtl/3.4.0/css/bootstrap-rtl.css" />
-              :
-              null
-          }
           {/*<script type='text/javascript' src='//service.maxymiser.net/api/eu/fptechscience.com/3a077f/mmapi.js'> </script>*/}
           {/* <script type='text/javascript' src='/static/fb.js'></script> */}
           <script type='text/javascript' src='/static/sociallogin.js'></script>
@@ -30,6 +23,13 @@ export default class MyDocument extends Document {
           <script src="//assets.adobedtm.com/launch-ENf3bacf30d8974e6a81eeec612ff12c02-development.min.js" async></script>
         </Head>
         <body>
+          {
+            props.__NEXT_DATA__.query.language === 'ar'
+              ?
+              <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-rtl/3.4.0/css/bootstrap-rtl.css" />
+              :
+              null
+          }
           {/*<!-- Google Tag Manager (noscript) -->*/}
           <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M68MT36"
           height="0" width="0" style={{display:'none', visibility:'hidden'}}></iframe></noscript>

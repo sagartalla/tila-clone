@@ -10,8 +10,14 @@ import { selectors, actionCreators } from '../../../../store/product';
 import Variant from './Variant';
 import SimilarProducts from './SimilarProducts';
 import { Router } from '../../../../routes';
-import { mergeCss } from '../../../../utils/cssUtil';
-const styles = mergeCss('components/Product/product');
+
+import lang from '../../../../utils/language';
+
+import styles_en from '../../product_en.styl';
+import styles_ar from '../../product_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 
 const cookies = new Cookies();
 

@@ -1,10 +1,16 @@
 import React from 'react';
 import { languageDefinations } from '../../../utils/lang';
 import SVGCompoent from '../../common/SVGComponet';
-import { mergeCss } from '../../../utils/cssUtil';
+
 import Slider from '../../common/slider';
 
-const styles = mergeCss('components/Product/product');
+import lang from '../../../utils/language';
+
+import styles_en from '../product_en.styl';
+import styles_ar from '../product_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 const { PDP_PAGE, CART_PAGE } = languageDefinations();
 
 
