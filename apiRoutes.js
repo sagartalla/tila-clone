@@ -60,7 +60,7 @@ apiRoutes
   })
   .post('/logout', (req, res) => {
     return axios.put(`${constants.AUTH_API_URL}/api/v1/sls/lo`, null, {
-      headers: { 'x-access-token': req.headers['x-access-token'] }
+      headers: { 'x-access-token': req.headers['x-access-token'] || '' }
     }).then((response) => {
       if (response && response.status === 200) {
         req.universalCookies.remove('auth');
