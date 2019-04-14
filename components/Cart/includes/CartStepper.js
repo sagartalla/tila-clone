@@ -2,8 +2,13 @@ import React, { Component } from 'react';
 import { languageDefinations } from '../../../utils/lang/';
 import PropTypes from 'prop-types';
 
-import { mergeCss } from '../../../utils/cssUtil';
-const styles = mergeCss('components/Cart/cart');
+import lang from '../../../utils/language';
+
+import styles_en from '../cart_en.styl';
+import styles_ar from '../cart_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 
 const CartStepper = props => {
   const { item, decreaseItemCnt, increaseItemCnt, cartStepperInputHandler, count } = props;

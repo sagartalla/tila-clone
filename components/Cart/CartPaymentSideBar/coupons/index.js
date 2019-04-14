@@ -8,15 +8,19 @@ import Cookie from 'universal-cookie';
 import Button from '../../../common/Button';
 import Input from '../../../common/Input';
 import { languageDefinations } from '../../../../utils/lang/';
-import { mergeCss } from '../../../../utils/cssUtil';
 import { actionCreators, selectors } from '../../../../store/cart';
 import { actionCreators as couponActionCreators, selectors as couponSelectors } from '../../../../store/coupons';
 
 const { COUPON_OFFERS } = languageDefinations();
 const cookies = new Cookie();
 
-const styles = mergeCss('components/Cart/CartPaymentSideBar/coupons/index');
 
+import lang from '../../../../utils/language';
+
+import styles_en from './index_en.styl';
+import styles_ar from './index_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 class Coupon extends Component {
   constructor(props) {

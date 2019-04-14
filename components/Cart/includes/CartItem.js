@@ -7,11 +7,17 @@ import { Link } from '../../../routes'
 import Warranty from '../../Product/includes/Warranty';
 import CartStepper from './CartStepper';
 import SVGComponent from '../../common/SVGComponet';
-import { mergeCss } from '../../../utils/cssUtil';
 import { languageDefinations } from '../../../utils/lang/';
 import constants from '../../../constants';
 
-const styles = mergeCss('components/Cart/cart');
+import lang from '../../../utils/language';
+
+import styles_en from '../cart_en.styl';
+import styles_ar from '../cart_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
+
 const { CART_PAGE, ORDER_PAGE } = languageDefinations();
 
 const cookies = new Cookie();

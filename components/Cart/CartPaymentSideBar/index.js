@@ -10,11 +10,15 @@ import { actionCreators as cartActioncreators } from '../../../store/cart';
 
 import CartStepper from '../../Cart/includes/CartStepper';
 
-import { mergeCss } from '../../../utils/cssUtil';
-
 const { COUPON_OFFERS, CART_PAGE } = languageDefinations();
 
-const styles = mergeCss('components/Cart/CartPaymentSideBar/sideBar');
+import lang from '../../../utils/language';
+
+import styles_en from './sideBar_en.styl';
+import styles_ar from './sideBar_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 
 class CartAndPaymentSideBar extends Component {
   constructor(props) {
