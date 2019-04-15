@@ -92,19 +92,15 @@ const deriveCity = (params) => {
   return axios.get(`/api/googleApi?api=${params.api}&latitude=${params.latitude}&longitude=${params.longitude}`).then(({data}) => data);
 }
 
-const autoCompleteCity = (params) => {
-    return axios.get(`/api/autoCompleteCity?api=${'/place/autocomplete/json'}&input=${params.input}`).then(({data}) => data);
-}
-
 const setCity = (params) => {
   return axios.post('/api/setCookie', {
     data: {
       shippingInfo: {
-        ...params
-      }
-    }
+        ...params,
+      },
+    },
   }).then(() => params);
-}
+};
 
 const setLanguage = (language) => {
   return axios.post('/api/setCookie', {
@@ -149,6 +145,6 @@ const setVerfied = (isVerified) => {
       isVerified,
     },
   }).then(() => isVerified);
-}
+};
 
-export default { userLogin, userLogout, getLoginInfo, setCountry, setSessionID, deriveCity, autoCompleteCity, setCity, removeCity, setLanguage, savePtaToken, verifyEmail, sendOtpToEmailId, getUserInfo, setVerfied };
+export default { userLogin, userLogout, getLoginInfo, setCountry, setSessionID, deriveCity, setCity, removeCity, setLanguage, savePtaToken, verifyEmail, sendOtpToEmailId, getUserInfo, setVerfied };
