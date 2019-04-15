@@ -22,7 +22,13 @@ const country = cookies.get('country') || 'SAU';
 
 class OrderReturnExchange extends Component {
   componentDidMount() {
-    const { query, orderIssue, getSelectedOrder, setOrderIssueData } = this.props;
+    const {
+      query,
+      orderIssue,
+      getSelectedOrder,
+      setOrderIssueData,
+      getOrderDetails
+    } = this.props;
     const { orderId, orderItemId, returnExchangeType, variantId } = query;
     const params = {
       orderId: orderId,
@@ -31,13 +37,14 @@ class OrderReturnExchange extends Component {
       returnExchangeType: returnExchangeType
     };
     if (!orderIssue.selectedItem) {
-      params.selectedItem = getSelectedOrder(query.orderItemId);
+      params.selectedItem = getSelectedOrder(orderItemId);
     }
     setOrderIssueData(params);
+    getOrderDetails({ orderId });
   }
 
   render() {
-    const { query, orderIssue } = this.props;
+    const { query, orderIssue, orderDetails } = this.props;
     const { orderId, selectedItem } = orderIssue;
     const { img, name } = selectedItem || {};
     return (
@@ -76,6 +83,44 @@ class OrderReturnExchange extends Component {
                           <h4 className={`${styles['fs-16']} ${styles['fontW600']}`}>{name}</h4>
                           <span className={styles['fs-14']}>{CART_PAGE.QUANTITY}:</span>
                         </Col>
+                        <Col md={10} className={`${styles['mt-25']}`}>
+                          <h4
+                            className={
+                              `${styles['fs-16']} ${styles['fontW400']}
+                              ${styles['pb-15']}`}>Pickup Address
+                          </h4>
+                        </Col>
+                        <Col
+                          md={10}
+                          className={`${styles['bg-light-gray']}`}
+                        >
+                          <div className={`${styles['p-10']}`}>
+                            <h4
+                              className={
+                                `${styles['fs-16']} ${styles['fontW600']}
+                                 ${styles['m-0']}`}>
+                                 {orderDetails.address.first_name}
+                                 {orderDetails.address.last_name}
+                            </h4>
+                            <div
+                              className={
+                                `${styles['fs-12']}
+                                 ${styles['light-gry-clr']}
+                                 ${styles['fontW300']}`}>
+                                {orderDetails.address.address_line_1}
+                            </div>
+                            <span className={
+                                `${styles['fs-14']}
+                                 ${styles['fontW400']}
+                                 ${styles['thick-gry-clr']}`}>
+                                 {orderDetails.address.account_mobile_number}
+                            </span>
+                          </div>
+                        </Col>
+                        {
+                          orderIssue.refundInitiated &&
+                          <div>Refund initiated </div>
+                        }
                       </div>
                     </Col>
                     <Col md={5} className={styles['thick-border-left']}>
@@ -102,13 +147,16 @@ OrderReturnExchange.propTypes = {
 const mapStateToProps = (store) => {
   return ({
     orderIssue: selectors.getOrderIssue(store),
-    getSelectedOrder: selectors.getSelectedOrder(store)
+    getSelectedOrder: selectors.getSelectedOrder(store),
+    orderDetails: selectors.getOrderInfo(store)
   })
 };
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
-    { setOrderIssueData: actionCreators.setOrderIssueData },
+    { setOrderIssueData: actionCreators.setOrderIssueData,
+      getOrderDetails:actionCreators.getOrderDetails
+     },
     dispatch,
   );
 }
