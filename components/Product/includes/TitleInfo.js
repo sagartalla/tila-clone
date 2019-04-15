@@ -10,9 +10,13 @@ import constants from '../../../constants';
 import { actionCreators as cartActionCreators, selectors as cartSelectors } from '../../../store/listingCart';
 import { actionCreators as compareActions, selectors } from '../../../store/compare';
 import { languageDefinations } from '../../../utils/lang';
-import { mergeCss } from '../../../utils/cssUtil';
+import lang from '../../../utils/language';
 
-const styles = mergeCss('components/Product/product');
+import styles_en from '../product_en.styl';
+import styles_ar from '../product_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 const { PDP_PAGE } = languageDefinations();
 
 /*

@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
-
-import { mergeCss } from '../../../utils/cssUtil';
 import { languageDefinations } from '../../../utils/lang/';
 
-const styles = mergeCss('components/common/beta/betalogo');
+import lang from '../../../utils/language';
+
+import styles_en from './betalogo_en.styl';
+import styles_ar from './betalogo_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 const { BETA } = languageDefinations();
 
 const Betalogo = () => (

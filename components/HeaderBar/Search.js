@@ -11,10 +11,15 @@ import { actionCreators, selectors } from '../../store/search';
 import { Router } from '../../routes';
 import SVGComponent from '../common/SVGComponet';
 
-import { mergeCss } from '../../utils/cssUtil';
+
 import {Modal} from 'react-bootstrap';
 import DragDropUpload from '../common/DragDropUpload';
-const styles = mergeCss('components/HeaderBar/header');
+import lang from '../../utils/language';
+
+import styles_en from './header_en.styl';
+import styles_ar from './header_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 const { SEARCH_PAGE } = languageDefinations();
 
 const urlPropsQueryConfig = {

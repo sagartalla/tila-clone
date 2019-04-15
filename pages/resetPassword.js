@@ -13,9 +13,8 @@ class ResetPasswordPage extends Base {
     };
   }
   pageName = 'RESETPASSWORD';
-  componentWillMount() {
-    let token = window.location.pathname.split('/');
-    token = token[token.length - 1];
+  componentDidMount() {
+    let token = this.props.url.query.token;
     this.setState({
       token,
     });

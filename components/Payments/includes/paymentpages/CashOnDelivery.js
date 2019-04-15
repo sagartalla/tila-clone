@@ -4,7 +4,6 @@ import { Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { languageDefinations } from '../../../../utils/lang/';
 import SVGComponent from '../../../common/SVGComponet';
-import { mergeCss } from '../../../../utils/cssUtil';
 import { actionCreators, selectors } from '../../../../store/captcha';
 import { actionCreators as paymentsActionCreators, selectors as paymentsSelectors } from '../../../../store/payments';
 import { actionCreators as camActionCreators, selectors as camSelectors } from '../../../../store/cam/personalDetails';
@@ -18,7 +17,13 @@ import EditPhone from '../../../Cam/PersonelDetails/UserData/EditPhone';
 import Button from '../../../common/CommonButton';
 
 const { PAYMENT_PAGE } = languageDefinations();
-const styles = mergeCss('components/Payments/payment');
+
+import lang from '../../../../utils/language';
+
+import styles_en from '../../payment_en.styl';
+import styles_ar from '../../payment_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 class CashOnDelivery extends React.Component {
   constructor() {

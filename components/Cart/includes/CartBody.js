@@ -8,7 +8,7 @@ import Blocker from '../../common/Blocker';
 import RightBar from '../CartPaymentSideBar';
 import Wishlist from '../../Cam/Wishlist/';
 import { languageDefinations } from '../../../utils/lang/';
-import { mergeCss } from '../../../utils/cssUtil';
+
 import { Router } from '../../../routes';
 import { cartPlaceHolder } from '../../common/Loader/skeletonPlaceHolder';
 
@@ -17,7 +17,12 @@ const cookies = new Cookie();
 const language = cookies.get('language') || 'en';
 const country = cookies.get('country') || 'SAU';
 
-const styles = mergeCss('components/Cart/cart');
+import lang from '../../../utils/language';
+
+import styles_en from '../cart_en.styl';
+import styles_ar from '../cart_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 const CartBody = ({
   showBlocker,

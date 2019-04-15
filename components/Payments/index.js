@@ -19,12 +19,17 @@ import DeliveryAddress from './includes/DeliveryAddress';
 import { actionCreators, selectors } from '../../store/payments';
 import { actionCreators as authActionCreators, selectors as authSelectors } from '../../store/auth';
 import { actionCreators as cartActionCreators, selectors as cartSelectors } from '../../store/cart';
-import { mergeCss } from '../../utils/cssUtil';
 import Slider from '../common/slider';
 import Coupon from '../Cart/CartPaymentSideBar/coupons';
 import FormValidator from '../common/FormValidator';
 
-const styles = mergeCss('components/Payments/payment');
+import lang from '../../utils/language';
+
+import styles_en from './payment_en.styl';
+import styles_ar from './payment_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 const cookies = new Cookies();
 
 const language = cookies.get('language') || 'en';

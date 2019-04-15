@@ -12,9 +12,15 @@ import MiniAddress from './includes/MiniAddress';
 import AddressHeader from './includes/AddressHeader';
 import { languageDefinations } from '../../../utils/lang/';
 import { actionCreators, selectors } from '../../../store/cam/address';
-import { mergeCss } from '../../../utils/cssUtil';
 
-const styles = mergeCss('components/Cam/ShippingAddress/address');
+import lang from '../../../utils/language';
+
+import styles_en from './address_en.styl';
+import styles_ar from './address_ar.styl';
+
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 
 const cookies = new Cookie();
 //TODO: better handling of cookie
@@ -67,7 +73,7 @@ class ShippingAddress extends Component {
     if (!this.props.miniAddress)
       this.props.getShippingAddressResults();
   }
- 
+
   shouldComponentUpdate(nextProps) {
     return true;
   }
@@ -79,7 +85,7 @@ class ShippingAddress extends Component {
     this.setState({ addr, showCitiesData: true });
     autoCompleteCity(e.target.value);
   }
-  
+
   selectCityFromSuggesstions(e) {
     const addr = { ...this.state.addr };
     const name = e.target.getAttribute('data-name');
@@ -190,7 +196,7 @@ class ShippingAddress extends Component {
                         resetAddAdrressForm={this.resetAddAdrressForm}
                         getAllCities={getAllCities}
                         selectCityFromSuggesstions={this.selectCityFromSuggesstions}
-                        showCitiesData={showCitiesData}          
+                        showCitiesData={showCitiesData}
                       />
                     </div>
                     :
@@ -208,8 +214,8 @@ class ShippingAddress extends Component {
                         showAddAdrressForm={this.showAddAdrressForm}
                         getAllCities={getAllCities}
                         selectCityFromSuggesstions={this.selectCityFromSuggesstions}
-                        showCitiesData={showCitiesData}                  
-                        
+                        showCitiesData={showCitiesData}
+
                       />
                     </Modal>
                   : ''
@@ -273,7 +279,7 @@ const mapStateToProps = store => ({
   results: selectors.getShippingAddressResults(store),
   getAddrById: selectors.getAddrById(store),
   getAllCities: productSelectors.getAllCities(store),
-  
+
 });
 
 const mapDispatchToProps = dispatch =>

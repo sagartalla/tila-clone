@@ -39,7 +39,7 @@ export const sessionId = () => {
 
 export const authToken = () => {
   const auth =  cookies.get('auth');
-  return auth ? auth.access_token : undefined;
+  return auth ? auth.access_token : '';
 }
 
 export const country = () => {

@@ -6,11 +6,16 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators, selectors } from '../../../store/cam/notifications';
 import { languageDefinations } from '../../../utils/lang/';
-import { mergeCss } from '../../../utils/cssUtil';
+import lang from '../../../utils/language';
+
+import styles_en from './notifications_en.styl';
+import styles_ar from './notifications_ar.styl';
+
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 const { MESSAGES } = languageDefinations();
 
-const styles = mergeCss('components/Cam/Notifications/notifications');
 
 class Notifications extends Component {
 

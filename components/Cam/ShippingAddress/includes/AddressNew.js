@@ -4,9 +4,12 @@ import { Row, Col, Button } from 'react-bootstrap';
 import { languageDefinations } from '../../../../utils/lang/';
 import SVGComponent from '../../../common/SVGComponet';
 import MyGMap from './MyGMap';
-import { mergeCss } from '../../../../utils/cssUtil';
+import lang from '../../../../utils/language';
 
-const styles = mergeCss('components/Cam/ShippingAddress/address');
+import styles_en from '../address_en.styl';
+import styles_ar from '../address_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 //TODO validations is pending. SF-28
 //TODO country dropdown. SF-25
@@ -135,7 +138,7 @@ const AddressNew = (props) => {
         <Row>
           <Col md={12} sm={12} xs={12}>
             <div className={`${styles['checkbox-material']} ${styles['mt-25']} ${styles['mb-25']}`}>
-              <input id="prefer-loaction" type="checkbox" onClick={setAsDefaultLocation} defaultChecked={data.default} /> 
+              <input id="prefer-loaction" type="checkbox" onClick={setAsDefaultLocation} defaultChecked={data.default} />
               <label htmlFor="prefer-loaction" className={`${styles['fontW300']} ${styles['thick-gry-clr']} ${styles['mb-0']}`}>{DELIVERY_ADDR_PAGE.PREF_LOC}</label>
             </div>
           </Col>

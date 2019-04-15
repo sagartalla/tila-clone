@@ -20,8 +20,14 @@ import { Router } from '../../routes';
 import { selectors, actionCreators } from '../../store/auth';
 import { actionCreators as cartActionCreators, selectors as cartSelectors } from '../../store/cart';
 import { languageDefinations } from '../../utils/lang';
-import { mergeCss } from '../../utils/cssUtil';
-const styles = mergeCss('components/HeaderBar/header');
+
+import lang from '../../utils/language';
+
+import styles_en from './header_en.styl';
+import styles_ar from './header_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 const { HEADER_PAGE } = languageDefinations();
 const cookies = new Cookie();
 

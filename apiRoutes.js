@@ -21,7 +21,6 @@ const removeCookies = (req,res) => {
 apiRoutes
   .post('/login', (req, res) => {
     const params = req.body;
-    debugger;
     return axios.post(`${constants.AUTH_API_URL}/api/v1/sls/auth`, Object.assign({}, params, {})).then(({data, status}) => {
       let isLoggedIn = false;
       if(status === 200) {
@@ -73,7 +72,7 @@ apiRoutes
 
     }
     return axios.put(`${constants.AUTH_API_URL}/api/v1/sls/lo`, null, {
-      headers: { 'x-access-token': req.headers['x-access-token'] }
+      headers: { 'x-access-token': req.headers['x-access-token'] || '' }
     }).then((response) => {
       if (response && response.status === 200) {
         return removeCookies(req,res)

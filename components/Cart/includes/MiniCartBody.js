@@ -16,8 +16,12 @@ const language = cookies.get('language') || 'en';
 const country = cookies.get('country') || 'SAU';
 
 
-import { mergeCss } from '../../../utils/cssUtil';
-const styles = mergeCss('components/Cart/cart');
+import lang from '../../../utils/language';
+
+import styles_en from '../cart_en.styl';
+import styles_ar from '../cart_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 const MiniCartBody = props => {
   const { showBlocker, increaseItemCnt, decreaseItemCnt, data, removeCartItem, editCartDetails, showCheckOutBtn, checkoutBtnHandler } = props;

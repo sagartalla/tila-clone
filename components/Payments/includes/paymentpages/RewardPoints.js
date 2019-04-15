@@ -3,8 +3,13 @@ import { Grid, Row, Col } from 'react-bootstrap';
 
 import { languageDefinations } from '../../../../utils/lang/';
 
-import { mergeCss } from '../../../../utils/cssUtil';
-const styles = mergeCss('components/Payments/payment');
+import lang from '../../../../utils/language';
+
+import styles_en from '../../payment_en.styl';
+import styles_ar from '../../payment_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 const { PAYMENT_PAGE } = languageDefinations();
 
 const RewardPonits = props => (

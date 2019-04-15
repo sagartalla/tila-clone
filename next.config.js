@@ -59,6 +59,30 @@ module.exports = withSourceMaps(withStylus(withCSS({
     //     path.resolve('./node_modules')
     //   ]
     // });
+    // config.optimization = Object.assign({}, config.optimization, {
+    //   splitChunks: Object.assign({}, config.optimization.splitChunks, {
+    //     cacheGroups: Object.assign({}, config.optimization.splitChunks.cacheGroups, {
+    //       englishStyle: {
+    //         name: 'styles_en',
+    //         test: (m, c) => {
+    //           return m.constructor.name === 'CssModule' && m._identifier.indexOf('_ar') === -1;
+    //         },
+    //         chunks: 'all',
+    //         priority: 2,
+    //         // enforce: true,
+    //       },
+    //       arabicStyles: {
+    //         name: 'styles_ar',
+    //         test: (m, c) => {
+    //           return m.constructor.name === 'CssModule' && m._identifier.indexOf('_ar') !== -1;
+    //         },
+    //         priority: 1,
+    //         chunks: 'all',
+    //         // enforce: true,
+    //       }
+    //     })
+    //   })
+    // });
     config.plugins.push(
       new webpack.DefinePlugin({
         'process.env.SENTRY_RELEASE': JSON.stringify(buildId)
