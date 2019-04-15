@@ -25,12 +25,16 @@ class Slider extends Component {
           onClick={this.handleChild}
         >
           <span
-            role="button"
-            onClick={closeSlider}
-            tabIndex="0"
             className={`${styles.cross} ${styles.absolute} ${styles.flex} ${styles['align-center']} ${styles['fs-40']}`}
           >
-            &times;{<div className={`${styles['fs-20']} ${styles['lgt-blue']} ${styles['ml-20']}`}>{label}</div>}
+            <span
+              role="button"
+              onClick={closeSlider}
+              tabIndex="0"
+            >
+              &times;
+            </span>
+            <span className={`${styles['fs-20']} ${styles['lgt-blue']} ${styles['ml-20']}`}>{label}</span>
           </span>
           {children}
         </div>

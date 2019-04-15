@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Row } from 'react-bootstrap';
 
+import orderStatusAttributes from '../OrderDetails/orderAttributes';
+
 import { mergeCss } from '../../../../utils/cssUtil';
 
 const styles = mergeCss('components/Order/includes/StatusWidget/statusWidget');
@@ -24,7 +26,7 @@ const StatusWidget = ({ currentStatus }) => {
               return (
                 <div className={`${styles['relative']}`}>
                   <span className={`${styles['point']} ${actual_time ? (i.status == 'CANCELLED' ? styles['cancelled'] : styles['active']) : ''} `} style={{ left: `${k == 0 ? '0' : (pivot * k)}%` }}></span>
-                  <span className={`${styles['pt-10']} ${styles['pb-10']} ${styles['flex']} ${styles['fs-12']}`}>{i.status}</span>
+                  <span className={`${styles['pt-10']} ${styles['pb-10']} ${styles['flex']} ${styles['fs-12']}`}>{orderStatusAttributes[i.status]}</span>
                 </div>
               );
             })
