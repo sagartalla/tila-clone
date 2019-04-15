@@ -28,7 +28,7 @@ class GeoWidget extends Component {
     this.onChangeCity = this.onChangeCity.bind(this);
     this.selectCityFromSuggesstions = this.selectCityFromSuggesstions.bind(this);
     this.deleteCity = this.deleteCity.bind(this);
-    this.locateMe = this.locateMe.bind(this);
+    // this.locateMe = this.locateMe.bind(this);
     this.handleOutsideClick = this.handleOutsideClick.bind(this);
   }
 
@@ -67,12 +67,13 @@ class GeoWidget extends Component {
     });
   }
 
-  locateMe() {
-    const shippingInfo = cookies.get('shippingInfo');
-    if (navigator.geolocation && !shippingInfo) {
-      navigator.geolocation.getCurrentPosition(this.deriveCity);
-    }
-  }
+  // locateMe() {
+  //   const shippingInfo = cookies.get('shippingInfo');
+  //   if (navigator.geolocation && !shippingInfo) {
+  //     navigator.geolocation.getCurrentPosition(this.deriveCity);
+  //   }
+  // }
+
   deriveCity(position) {
     const { longitude, latitude } = position.coords;
     this.props.deriveCity({
@@ -144,12 +145,8 @@ class GeoWidget extends Component {
           }
           {
             this.state.displayCity
-              ?
+              &&
                 <div onClick={this.deleteCity} className={styles['delete-btn']}>x</div>
-              :
-                <div onClick={this.locateMe} className={styles['delete-btn']}>
-                <SVGCompoent clsName={`${styles['map-icon']}`} src="icons/locate-me" />
-              </div>
           }
         </div>
       </div>
