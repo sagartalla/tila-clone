@@ -144,7 +144,7 @@ class TitleInfo extends Component {
             ))
           } */}
         </div>
-        <div className={`${styles['fs-18']} ${styles.fontW700} ${styles['black-color']}`}>{title}</div>
+        <h1 className={`${styles['fs-18']} ${styles.fontW700} ${styles['black-color']}`}>{title}</h1>
         {
           isPreview
             ?
