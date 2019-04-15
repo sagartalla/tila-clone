@@ -6,7 +6,6 @@ import { languageDefinations } from '../../../utils/lang/';
 const { API_TEXT } = languageDefinations();
 
 const getWishlistApi = (currentPage=0) => {
-  console.log('page',currentPage);
   return axios.get(`${constants.WISHLIST_API_URL}/api/v1/wishlist/getWishlist?size=10&page=${currentPage}`).then(({ data }) => {
     return { data };
   });
