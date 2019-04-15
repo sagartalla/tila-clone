@@ -17,7 +17,6 @@ const initialState = {
         exchangeId:{},
         refundInitiated:false
       },
-    },
     orderTracker: {},
   },
   error: '',
