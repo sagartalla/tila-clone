@@ -7,8 +7,8 @@ import constants from '../../../../constants';
 
 import lang from '../../../../utils/language';
 
-import styles_en from '../wishlist_en.styl';
-import styles_ar from '../wishlist_ar.styl';
+import styles_en from '../../../Cart/cart_en.styl';
+import styles_ar from '../../../Cart/cart_ar.styl';
 
 const styles = lang === 'en' ? styles_en : styles_ar;
 
