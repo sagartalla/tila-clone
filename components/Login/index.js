@@ -9,12 +9,16 @@ import { selectors, actionCreators } from '../../store/auth';
 import constants from '../../constants';
 import ForgotPassword from './ForgotPassword';
 import SocialLogin from './SocialLogin';
-import { mergeCss } from '../../utils/cssUtil';
 import { languageDefinations } from '../../utils/lang';
 import FormValidator from '../common/FormValidator';
 import VerifyEmail from './VerifyEmail';
 
-const styles = mergeCss('components/Login/login');
+import lang from '../../utils/language';
+
+import styles_en from './login_en.styl';
+import styles_ar from './login_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 const { LOGIN_PAGE } = languageDefinations();
 class Login extends Component {
