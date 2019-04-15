@@ -2,19 +2,21 @@ import typeToReducer from 'type-to-reducer';
 import { actions } from './actions';
 
 const initialState = {
-  ui: {
-    loading: false,
-  },
-  data: {
-    orderDetails: {},
-    orderIssue: {
-      items: [],
-      reasons: [],
-      cancelStatus: {},
-      exchangeVariants: [],
-      selectedReasons: {},
-      refundOptions: [],
-      exchangeId: {},
+    ui: {
+        loading: false,
+    },
+    data: {
+			orderDetails: {},
+			orderIssue: {
+        items: [],
+        reasons: [],
+        cancelStatus: {},
+        exchangeVariants: [],
+        selectedReasons:{},
+        refundOptions:[],
+        exchangeId:{},
+        refundInitiated:false
+      },
     },
     orderTracker: {},
   },
@@ -251,7 +253,8 @@ const productReducer = typeToReducer({
           ...state.data,
           orderIssue: {
             ...state.data.orderIssue,
-            returnStatus: action.payload.data
+            returnStatus: action.payload.data,
+            refundInitiated:true
           }
         },
         ui: { loading: false }

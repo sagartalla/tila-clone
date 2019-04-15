@@ -159,7 +159,7 @@ class CartItem extends React.Component {
               : null
           }
           <Row>
-            <Col md={2} sm={2} className={styles['ipad-pr-0']}>
+            <Col md={2} sm={2} xs={3} className={`${styles['ipad-pr-0']} ${styles['m-pd-r-0']}`}>
               <div
                 className={`${styles['flex-center']} ${styles['justify-center']} ${styles['pb-15']} ${styles['card-box-inn-img']}`}
               >
@@ -177,13 +177,13 @@ class CartItem extends React.Component {
                 cartStepperInputHandler={cartStepperInputHandler}
               />
             </Col>
-            <Col md={10} sm={10}>
+            <Col md={10} sm={10} xs={9}>
               <Row>
                 <Col md={12}>
                   <h5 className={`${styles['mt-0']} ${styles['mb-0']}`}>{brand_name}</h5>
                 </Col>
                 <Col md={10} sm={10} className={styles['landscape-cart-details']}>
-                  <h4 className={`${styles['fontW600']}`}>
+                  <h4 className={`${styles['fontW600']} ${styles['m-fs-14']}`}>
                     <Link route={`/${country}/${language}/product?productId=${product_id}${variant_id ? `&variantId=${variant_id}` : ''}&catalogId=${catalogId}&itemType=${itemType}`}>
                       <a className={`${styles['width100']} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
                         {name}
@@ -254,7 +254,7 @@ class CartItem extends React.Component {
                         </span>
                       </span>
                     </p>}
-                  <h4 className={`${styles.fontW600} ${styles['justify-flex-end']} ${styles['light-gry-clr']} ${styles['flex-center']} ${styles['mt-10']} ${styles['t-rt']}`}>
+                  <h4 className={`${styles.fontW600} ${styles['justify-flex-end']} ${styles['cart-price-label']} ${styles['light-gry-clr']} ${styles['flex-center']} ${styles['mt-10']} ${styles['t-rt']}`}>
                     {`${offer_price} ${cur}`}
                     <OverlayTrigger placement="bottom" overlay={popover(item)}>
                       {/* <span className={`${styles['fs-12']} ${styles['pr-5']}`}>
@@ -271,7 +271,7 @@ class CartItem extends React.Component {
           </Row>
         </div>
         <div className={`${styles['cart-box-btm']} ${styles['flex']} ${styles['p-14-22']}`}>
-          <Col md={9} sm={9} className={styles['flex']}>
+          <Col md={9} sm={9} xs={9} className={`${styles['flex']} ${styles['m-pd-r-0']}`}>
             <span className={styles['width21']}>
               {
                 inventory <= 10 && inventory != 0 ?
@@ -293,7 +293,7 @@ class CartItem extends React.Component {
               <span className={styles['pl-10']}>{CART_PAGE.REMOVE}</span>
             </span>
           </Col>
-          <Col md={3} sm={3} className={`${styles['t-rt']} ${styles['pr-0']}`}>
+          <Col md={3} sm={3} xs={3} className={`${styles['t-rt']} ${styles['pr-0']} ${styles['m-pad-5']}`}>
             <span>{ORDER_PAGE.TOTAL} : </span><span className={`${styles['fs-16']} ${styles['fontW600']}`}>{total_amount + ' ' + cur}</span>
           </Col>
         </div>

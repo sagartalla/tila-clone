@@ -29,6 +29,7 @@ const getPaymentModesData = (store) => {
       transaction_id
     }
   */
+
   if(store.paymentsReducer.data.data) {
     const paymentModesData = store.paymentsReducer.data.data.payment_options_available.reduce((acc, val, key) => {
       if (val.type === 'VOUCHER') {

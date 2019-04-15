@@ -59,7 +59,7 @@ class Display extends Component {
       imgs, extraOffers, breadcrums, isWishlisted,
     } = this.props;
     return (
-      <div className={`${styles['ht-100per']}`}>
+      <div className={`${styles['ht-100per']} ${styles['mobile-slide-part']}`}>
         {breadcrums.length > 0 &&
           <div className={`${styles['breadcrums-part']} ${styles['fs-12']}`}>
             {breadcrums.map((crum, index) => (
