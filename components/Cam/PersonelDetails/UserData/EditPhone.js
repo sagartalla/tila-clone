@@ -230,7 +230,7 @@ class EditPhone extends React.Component {
                           (value, index) => (<option
                             key={CountryDialCode[value].code}
                             value={CountryDialCode[value].code}>
-                            <img src={CountryDialCode[value].img} />{CountryDialCode[value].code}
+                              {CountryDialCode[value].code}
                           </option>
                           ))
                       }
