@@ -82,8 +82,13 @@ class ShippingAddress extends Component {
     const { autoCompleteCity } = this.props;
     const addr = { ...this.state.addr };
     addr[e.target.name] = e.target.value;
-    this.setState({ addr, showCitiesData: true });
-    autoCompleteCity(e.target.value);
+    this.setState({ addr });
+    if(e.target.name === 'city') {
+      this.setState({
+        showCitiesData: true
+      });
+      autoCompleteCity(e.target.value);
+    }
   }
 
   selectCityFromSuggesstions(e) {
@@ -143,6 +148,7 @@ class ShippingAddress extends Component {
   }
 
   getDataFromMap(json) {
+    debugger;
     const {
       lat, lng, cityCountryObj: { country, city, address, postal_code },
     } = json;
@@ -152,7 +158,7 @@ class ShippingAddress extends Component {
     addr.longitude = lng;
     addr.address_line_1 = address || '';
     addr.country_name = country || '';
-    addr.city = city || '';
+    // addr.city = city || '';
     addr.postal_code = postal_code || '';
     this.setState({ addr });
   }
