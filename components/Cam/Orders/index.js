@@ -6,7 +6,6 @@ import Order from './includes/Order';
 import OrderIssueWidget from '../../Order/includes/OrderIssueWidget';
 import { selectors, actionCreators } from '../../../store/cam/orders';
 import Pagination from '../../common/Pagination';
-import { mergeCss } from '../../../utils/cssUtil';
 import { languageDefinations } from '../../../utils/lang/';
 
 import lang from '../../../utils/language';
