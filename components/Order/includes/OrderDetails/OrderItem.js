@@ -13,14 +13,22 @@ import constants from '../../../../constants';
 import { ORDER_ISSUE_TYPES, ORDER_ISSUE_STEPS } from '../../constants';
 import { actionCreators } from '../../../../store/order';
 
-
-// import  styles from '../order.styl';
-import { mergeCss } from '../../../../utils/cssUtil';
 import { languageDefinations } from '../../../../utils/lang';
 
+
+import lang from '../../../../utils/language';
+
+import styles_en from '../../order_en.styl';
+import styles_ar from '../../order_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
+
 const { ORDER_PAGE, CART_PAGE } = languageDefinations();
-const styles = mergeCss('components/Order/order');
+
 const cookies = new Cookies();
+
+
 
 const language = cookies.get('language') || 'en';
 const country = cookies.get('country') || 'SAU';

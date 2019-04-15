@@ -17,10 +17,12 @@ import { ORDER_ISSUE_STEPS as STEPS, ORDER_ISSUE_TYPES } from '../../constants';
 import Cookies from 'universal-cookie';
 import { selectors, actionCreators } from '../../../../store/order';
 
-import { mergeCss } from '../../../../utils/cssUtil';
+import lang from '../../../../utils/language';
 
-const styles = mergeCss('components/Order/includes/OrderIssueWidget/orderIssue');
+import styles_en from './orderIssue_en.styl';
+import styles_ar from './orderIssue_ar.styl';
 
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 const cookies = new Cookie();
 

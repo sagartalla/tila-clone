@@ -2,9 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Row } from 'react-bootstrap';
 
-import { mergeCss } from '../../../../utils/cssUtil';
+import lang from '../../../../utils/language';
 
-const styles = mergeCss('components/Order/includes/StatusWidget/statusWidget');
+import styles_en from './statusWidget_en.styl';
+import styles_ar from './statusWidget_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 const StatusWidget = ({ currentStatus }) => {
   const len = Object.keys(currentStatus[0].state_time_estimates).length;

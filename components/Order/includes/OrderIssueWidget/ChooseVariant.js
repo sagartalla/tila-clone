@@ -5,9 +5,14 @@ import { bindActionCreators } from 'redux';
 import _ from 'lodash';
 import { selectors, actionCreators } from '../../../../store/order';
 import { languageDefinations } from '../../../../utils/lang';
-import { mergeCss } from '../../../../utils/cssUtil';
 
-const styles = mergeCss('components/Order/includes/OrderIssueWidget/orderIssue');
+import lang from '../../../../utils/language';
+
+import styles_en from './orderIssue_en.styl';
+import styles_ar from './orderIssue_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 
 const { ORDER_PAGE } = languageDefinations();
 
@@ -64,7 +69,7 @@ class ChooseVariant extends Component {
     const data = exchangeVariants.filter((el,index) => {
       return el.listing.variant_id === variantId
     })
-    return  data[0].variant_details.attribute_map.size.attribute_values[0].value 
+    return  data[0].variant_details.attribute_map.size.attribute_values[0].value
   }
   renderExchangeVariants(variants) {
     const data = variants.map((el,index) => {
@@ -86,7 +91,7 @@ class ChooseVariant extends Component {
     const { message } = this.state;
     return (
       <div className={styles['exchange-items']}>
-        
+
         <div className={styles['pb-10']}>
           <h5 className={`${styles['fontW600']} ${styles['m-0']}`}>{ORDER_PAGE.SIZE_TO_EXCHANGE} :</h5>
           <span className={`${styles['fs-12']} ${styles['textColor']}`}>
@@ -98,7 +103,7 @@ class ChooseVariant extends Component {
           <ul className={`${styles['flex']} ${styles['product-sizeContainer']}`}>
             { this.renderExchangeVariants(exchangeVariants) }
           </ul>
-        }        
+        }
         <div>
           {{
             errorMsg: <p className={`${styles['error-msg']} ${styles['fs-12']}`}>{ORDER_PAGE.SELECTED_SIZE_NOT_AVAILABLE}

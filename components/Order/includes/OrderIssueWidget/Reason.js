@@ -12,9 +12,14 @@ import { languageDefinations } from '../../../../utils/lang';
 
 import { ORDER_ISSUE_TYPES, ORDER_ISSUE_STEPS as STEPS } from '../../constants';
 
-import { mergeCss } from '../../../../utils/cssUtil';
+import lang from '../../../../utils/language';
 
-const styles = mergeCss('components/Order/includes/OrderIssueWidget/orderIssue');
+import styles_en from './orderIssue_en.styl';
+import styles_ar from './orderIssue_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
+
 const { ORDER_PAGE } = languageDefinations();
 class Reason extends Component {
   constructor(props) {
