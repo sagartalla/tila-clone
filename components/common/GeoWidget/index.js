@@ -83,12 +83,11 @@ class GeoWidget extends Component {
   }
 
   selectCityFromSuggesstions(e) {
-    const selectedCity = e.target.getAttribute('data-id');
     const city = e.target.getAttribute('data-code');
     const displayCity = e.target.getAttribute('data-id');
     const country = cookies.get('country');
     this.setState({
-      displayCity: selectedCity,
+      displayCity,
     });
     this.setCity(city, country, displayCity);
   }
@@ -138,7 +137,7 @@ class GeoWidget extends Component {
                   key={result.rescity_nameult}
                   className={`${styles['auto-suggestions']} ${styles['pt-5']} ${styles['pl-10']} ${styles['bg-white']}`}
                 >
-                  <div data-id={result.city_name} data-code={result.code} onClick={this.selectCityFromSuggesstions} className={`${styles.item} ${styles['fs-12']}`}>{result.city_name}</div>
+                  <div data-id={result.city_name} data-code={result.code} onClick={this.selectCityFromSuggesstions} className={`${styles.item} ${styles['fs-12']} ${styles.pointer}`}>{result.city_name}</div>
                 </div>
               ))}
             </div>
