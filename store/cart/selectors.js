@@ -47,6 +47,9 @@ const getCartResults = (store) => {
           mrp: item.listing_info.pricing && item.listing_info.pricing.mrp,
           offerDiscounts: item.listing_info.pricing && item.listing_info.pricing.actions,
           total_discount: item.listing_info.pricing && item.listing_info.pricing.total_discount_mrp,
+          variantAttributes: item.product_details.product_details_vo.cached_variant[item.listing_info.variant_id].attribute_map ?
+            Object.values(item.product_details.product_details_vo.cached_variant[item.listing_info.variant_id].attribute_map)
+              .filter(attr => attr.visible) : [],
         };
       });
     }
