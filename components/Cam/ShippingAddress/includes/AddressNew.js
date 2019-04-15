@@ -4,8 +4,12 @@ import { languageDefinations } from '../../../../utils/lang/';
 import { Row, Col, Button } from 'react-bootstrap';
 import SVGComponent from '../../../common/SVGComponet';
 import MyGMap from './MyGMap';
-import { mergeCss } from '../../../../utils/cssUtil';
-const styles = mergeCss('components/Cam/ShippingAddress/address');
+import lang from '../../../../utils/language';
+
+import styles_en from '../address_en.styl';
+import styles_ar from '../address_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 //TODO validations is pending. SF-28
 //TODO country dropdown. SF-25

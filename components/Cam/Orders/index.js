@@ -9,8 +9,17 @@ import Pagination from '../../common/Pagination';
 import { mergeCss } from '../../../utils/cssUtil';
 import { languageDefinations } from '../../../utils/lang/';
 
+import lang from '../../../utils/language';
+
+import styles_en from './orders_en.styl';
+import styles_ar from './orders_ar.styl';
+
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
+
 const { ORDERS } = languageDefinations();
-const styles = mergeCss('components/Cam/Orders/orders');
+
 
 class Orders extends Component {
   constructor(props) {

@@ -10,8 +10,13 @@ import { actionCreators, selectors } from '../../../../store/cam/personalDetails
 import UpdatePersonalInfoModal from './UpdatePersonalInfoModal';
 import Btn from '../../../common/Button';
 import { languageDefinations } from '../../../../utils/lang';
-import { mergeCss } from '../../../../utils/cssUtil';
-const styles = mergeCss('components/Cam/PersonelDetails/profile');
+
+import lang from '../../../../utils/language';
+
+import styles_en from '../profile_en.styl';
+import styles_ar from '../profile_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 const { PERSONAL_INFO_MODAL } = languageDefinations();
 
