@@ -16,7 +16,7 @@ const getUserProfileInfo = () => {
 const uploadProfilePic = (body) => {
   return axios.request({
     method: 'POST',
-    url: 'https://api-gateway-stage.fptechscience.com/transformers/fpts/document-service/upload',
+    url: `${constants.TRANSFORMER_API_URL}/fpts/document-service/upload`,
     data: body,
     headers: {
       'tenant': 'profile-service',
