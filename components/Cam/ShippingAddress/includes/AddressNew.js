@@ -11,7 +11,7 @@ const styles = mergeCss('components/Cam/ShippingAddress/address');
 //TODO validations is pending. SF-28
 //TODO country dropdown. SF-25
 const AddressNew = (props) => {
-  const { data, inputOnChange, addrTypeHandler, setAsDefaultLocation, saveBtnClickHandler, resetAddAdrressForm, getDataFromMap, getAllCities, selectCityFromSuggesstions, showCitiesData, showData } = props;
+  const { data, inputOnChange, addrTypeHandler, setAsDefaultLocation, saveBtnClickHandler, resetAddAdrressForm, getDataFromMap, getAllCities, selectCityFromSuggesstions, showCitiesData } = props;
   const { DELIVERY_ADDR_PAGE } = languageDefinations();
   return (
     <div className={`${styles['addr-new-container']} ${styles['pb-30']} ${styles['pr-30']} ${styles['pl-30']}`}>
