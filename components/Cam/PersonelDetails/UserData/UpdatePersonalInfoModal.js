@@ -12,11 +12,16 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators, selectors } from '../../../../store/cam/personalDetails';
 import SVGComponent from '../../../common/SVGComponet';
-import { mergeCss } from '../../../../utils/cssUtil';
+
+import lang from '../../../../utils/language';
+
+import styles_en from '../profile_en.styl';
+import styles_ar from '../profile_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 const { PERSONAL_INFO_MODAL } = languageDefinations();
 
-const styles = mergeCss('components/Cam/PersonelDetails/profile');
 
 class UpdatePersonalInfoModal extends React.Component {
   state = {

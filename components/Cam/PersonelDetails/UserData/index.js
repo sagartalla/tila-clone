@@ -7,10 +7,15 @@ import { bindActionCreators } from 'redux';
 import PersonalInfo from './PersonalInfo';
 import ContactInfo from './ContactInfo';
 import { actionCreators } from '../../../../store/cam/personalDetails';
-import { mergeCss } from '../../../../utils/cssUtil';
 import { languageDefinations } from '../../../../utils/lang';
 
-const styles = mergeCss('components/Cam/PersonelDetails/profile');
+import lang from '../../../../utils/language';
+
+import styles_en from '../profile_en.styl';
+import styles_ar from '../profile_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 const { CONTACT_INFO_MODAL } = languageDefinations();
 
 const UserData = ({

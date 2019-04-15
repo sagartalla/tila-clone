@@ -8,13 +8,18 @@ import Cookies from 'universal-cookie';
 import Btn from '../../../common/Button';
 import Input from '../../../common/Input';
 import { actionCreators, selectors } from '../../../../store/cam/personalDetails';
-import { mergeCss } from '../../../../utils/cssUtil';
 import { languageDefinations } from '../../../../utils/lang';
 import CountryDialCode from '../../../../constants/CountryDialCode';
 import FormValidator from '../../../common/FormValidator';
 import SVGCompoent from '../../../common/SVGComponet';
 
-const styles = mergeCss('components/Cam/PersonelDetails/profile');
+import lang from '../../../../utils/language';
+
+import styles_en from '../profile_en.styl';
+import styles_ar from '../profile_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 const { CONTACT_INFO_MODAL } = languageDefinations();
 const cookies = new Cookies();
 

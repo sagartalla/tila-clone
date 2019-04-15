@@ -6,10 +6,15 @@ import Cookies from 'universal-cookie';
 import SVGComponent from '../../../common/SVGComponet';
 import { languageDefinations } from '../../../../utils/lang/';
 import { Router } from '../../../../routes';
-import { mergeCss } from '../../../../utils/cssUtil';
 import constants from '../../../../constants';
 
-const styles = mergeCss('components/Cam/Wishlist/wishlist');
+import lang from '../../../../utils/language';
+
+import styles_en from '../wishlist_en.styl';
+import styles_ar from '../wishlist_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 const cookies = new Cookies();
 
 const language = cookies.get('language') || 'en';

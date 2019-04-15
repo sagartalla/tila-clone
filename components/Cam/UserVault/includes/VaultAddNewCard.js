@@ -7,8 +7,12 @@ import InputComponent from '../../../common/InputComponent';
 import SVGComponent from '../../../common/SVGComponet';
 import { languageDefinations } from '../../../../utils/lang/';
 
-import { mergeCss } from '../../../../utils/cssUtil';
-const styles = mergeCss('components/Cam/UserVault/uservault');
+import lang from '../../../../utils/language';
+
+import styles_en from '../uservault_en.styl';
+import styles_ar from '../uservault_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 const { VAULT_PAGE } = languageDefinations();
 const dateoptions = [...Array(13)].map((number, index) => {

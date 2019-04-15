@@ -10,8 +10,12 @@ import VaultBody from './includes/VaultBody';
 import VaultHeader from './includes/VaultHeader';
 import VaultAddNewCard from './includes/VaultAddNewCard';
 
-import { mergeCss } from '../../../utils/cssUtil';
-const styles = mergeCss('components/Cam/UserVault/uservault');
+import lang from '../../../utils/language';
+
+import styles_en from './uservault_en.styl';
+import styles_ar from './uservault_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 const initialVaultCardObj = {
   card_number: '',

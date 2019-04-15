@@ -13,9 +13,14 @@ import CartMiniWishList from './includes/CartMiniWishList';
 import Pagination from '../../common/Pagination';
 
 // import { isAddedToCart } from '../../../store/cart/selectors';
-import { mergeCss } from '../../../utils/cssUtil';
+import lang from '../../../utils/language';
 
-const styles = mergeCss('components/Cam/Wishlist/wishlist');
+import styles_en from './wishlist_en.styl';
+import styles_ar from './wishlist_ar.styl';
+
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 
 class Wishlist extends Component {
   constructor(props) {
