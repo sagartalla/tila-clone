@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import Cookie from 'universal-cookie';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Modal } from "react-router-modal";
-
+import { Modal } from 'react-router-modal';
+import { selectors as productSelectors, actionCreators as productActionCreators } from '../../../store/product';
 import AddressNew from './includes/AddressNew';
 import AddressBody from './includes/AddressBody';
 import MiniAddress from './includes/MiniAddress';
@@ -51,7 +51,8 @@ class ShippingAddress extends Component {
       addr: initialAddrObj,
       showNewAddr: false,
       homeButton: true,
-      editAddrId: ''
+      editAddrId: '',
+      showCitiesData: false,
     }
     this.inputOnChange = this.inputOnChange.bind(this);
     this.saveBtnClickHandler = this.saveBtnClickHandler.bind(this);
@@ -63,9 +64,12 @@ class ShippingAddress extends Component {
     this.setAsDefaultLocation = this.setAsDefaultLocation.bind(this);
     this.addrTypeHandler = this.addrTypeHandler.bind(this);
     this.resetAddAdrressForm = this.resetAddAdrressForm.bind(this);
+    this.selectCityFromSuggesstions = this.selectCityFromSuggesstions.bind(this);
   }
 
   componentDidMount() {
+    const { getCitiesByCountryCode } = this.props;
+    getCitiesByCountryCode(cookies.get('country'));
     if (!this.props.miniAddress)
       this.props.getShippingAddressResults();
   }
@@ -75,9 +79,22 @@ class ShippingAddress extends Component {
   }
 
   inputOnChange(e) {
+    const { autoCompleteCity } = this.props;
     const addr = { ...this.state.addr };
     addr[e.target.name] = e.target.value;
-    this.setState({ addr });
+    this.setState({ addr, showCitiesData: true });
+    autoCompleteCity(e.target.value);
+  }
+
+  selectCityFromSuggesstions(e) {
+    const addr = { ...this.state.addr };
+    const name = e.target.getAttribute('data-name');
+    addr[name] = e.target.getAttribute('data-id');
+    this.setState({ addr }, () => {
+      this.setState({
+        showCitiesData: false,
+      });
+    });
   }
 
   deleteAddr(addrId) {
@@ -148,8 +165,8 @@ class ShippingAddress extends Component {
 
   render() {
     // if standalone is true, it is stand alone address page else from payment page or any other pages.
-    const { results, standalone, handleShippingAddressContinue, miniAddress, isPdp } = this.props;
-    let { showNewAddr, addr } = this.state;
+    const { results, standalone, handleShippingAddressContinue, miniAddress, isPdp, getAllCities } = this.props;
+    let { showNewAddr, addr, showCitiesData } = this.state;
     const { DELIVERY_ADDR_PAGE } = languageDefinations();
 
     return (
@@ -177,6 +194,9 @@ class ShippingAddress extends Component {
                         setAsDefaultLocation={this.setAsDefaultLocation}
                         addrTypeHandler={this.addrTypeHandler}
                         resetAddAdrressForm={this.resetAddAdrressForm}
+                        getAllCities={getAllCities}
+                        selectCityFromSuggesstions={this.selectCityFromSuggesstions}
+                        showCitiesData={showCitiesData}
                       />
                     </div>
                     :
@@ -192,6 +212,10 @@ class ShippingAddress extends Component {
                         resetAddAdrressForm={this.resetAddAdrressForm}
                         addrTypeHandler={this.addrTypeHandler}
                         showAddAdrressForm={this.showAddAdrressForm}
+                        getAllCities={getAllCities}
+                        selectCityFromSuggesstions={this.selectCityFromSuggesstions}
+                        showCitiesData={showCitiesData}
+
                       />
                     </Modal>
                   : ''
@@ -230,6 +254,9 @@ class ShippingAddress extends Component {
                         addrTypeHandler={this.addrTypeHandler}
                         resetAddAdrressForm={this.resetAddAdrressForm}
                         showAddAdrressForm={this.showAddAdrressForm}
+                        getAllCities={getAllCities}
+                        selectCityFromSuggesstions={this.selectCityFromSuggesstions}
+                        showCitiesData={showCitiesData}
                       /> : ''
                   }
                 </Col>
@@ -248,12 +275,14 @@ class ShippingAddress extends Component {
   }
 }
 
-const mapStateToProps = (store) => ({
+const mapStateToProps = store => ({
   results: selectors.getShippingAddressResults(store),
-  getAddrById: selectors.getAddrById(store)
+  getAddrById: selectors.getAddrById(store),
+  getAllCities: productSelectors.getAllCities(store),
+
 });
 
-const mapDispatchToProps = (dispatch) =>
+const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       getShippingAddressResults: actionCreators.getShippingAddressResults,
@@ -261,6 +290,8 @@ const mapDispatchToProps = (dispatch) =>
       editAddressDetails: actionCreators.editAddressDetails,
       deleteAddress: actionCreators.deleteAddress,
       makeDefaultAddress: actionCreators.makeDefaultAddress,
+      autoCompleteCity: productActionCreators.autoCompleteCity,
+      getCitiesByCountryCode: productActionCreators.getCitiesByCountryCode,
     },
     dispatch,
   );
@@ -269,11 +300,13 @@ ShippingAddress.propTypes = {
   standalone: PropTypes.bool,
 
   //from payment page
-  handleShippingAddressContinue: PropTypes.func
+  handleShippingAddressContinue: PropTypes.func,
+  autoCompleteCity: PropTypes.func,
 };
 
 ShippingAddress.defaultProps = {
-  standalone: false
+  standalone: false,
+  autoCompleteCity: f => f,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShippingAddress);

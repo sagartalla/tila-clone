@@ -32,6 +32,7 @@ class ResetPassword extends Component {
     }
 
     passwordSuccess() {
+    debugger;
       const { password, confirmPassword } = this.state;
       if (password === confirmPassword) {
         const body = {

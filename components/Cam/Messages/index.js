@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators, selectors } from '../../../store/cam/messages';
 
-import MessagesBody from './includes/MessagesBody';
 import { languageDefinations } from '../../../utils/lang/';
 
 import lang from '../../../utils/language';

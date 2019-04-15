@@ -74,7 +74,11 @@ class Search extends Component {
   }
   handleUploadImage(file) {
     this.props.fetchImageSearchData(file)
-    Router.pushRoute(`/${country}/${language}/srp`);
+    this.setState({
+      openImagesearch:false
+    },() => Router.pushRoute(`/${country}/${language}/srp`))
+
+
   }
   onChangeSearchInput(e) {
     const numberOfCharacters = /^[\s\S]{0,300}$/;

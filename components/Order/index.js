@@ -14,8 +14,8 @@ const { ORDER_PAGE } = languageDefinations();
 
 import lang from '../../utils/language';
 
-import styles_en from './search_en.styl';
-import styles_ar from './search_ar.styl';
+import styles_en from './order_en.styl';
+import styles_ar from './order_ar.styl';
 
 const styles = lang === 'en' ? styles_en : styles_ar;
 

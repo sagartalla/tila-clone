@@ -344,7 +344,7 @@ class Product extends Component {
                     <span className={`${styles['pl-5']} ${styles['fs-12']}`} disabled={addedToWishlist}>{addedToWishlist ? `${PDP_PAGE.ADDED_TO_WISHLIST}` : `${PDP_PAGE.ADD_TO_WISHLIST}`}</span>
                   </a>
                 </span>
-                {flags.comparable &&
+                {(flags && flags.comparable) &&
                 <span className={styles['flex']}>
                   <a className={styles['flex-center']} onClick={this.addToCompare}>
                     <SVGCompoent clsName={`${styles['wish-list']}`} src="icons/cam/cam-icon" />

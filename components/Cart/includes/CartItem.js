@@ -27,7 +27,7 @@ const country = cookies.get('country') || 'SAU';
 
 
 const popover = ({
-  mrp, offer_price, total_amount, cur, selling_price, offerDiscounts, total_discount,
+  mrp, offer_price, total_amount, cur, selling_price, offerDiscounts, total_discount, shipping,
 }) => {
   return (
     <Popover id="offer-popover">
@@ -68,7 +68,11 @@ const popover = ({
             <div className={`${styles['t-cell']} ${styles['pb-10']}`}>
               <div>{CART_PAGE.DELIVERY_CHARGES}</div>
             </div>
-            <div className={`${styles['t-cell']} ${styles['t-rt']}`}>{ORDER_PAGE.FREE}</div>
+            <div className={`${styles['t-cell']} ${styles['t-rt']}`}>
+              {shipping.shipping_fees ?
+                `${shipping.shipping_fees} ${cur}`
+                : ORDER_PAGE.FREE}
+            </div>
           </div>
           <div className={`${styles['t-row']} ${styles['total-amount']}`}>
             <div className={styles['t-cell']}>{ORDER_PAGE.TOTAL}</div>
@@ -135,14 +139,12 @@ class CartItem extends React.Component {
       removeCartItem,
       cartStepperInputHandler,
       addOrRemoveGift,
-      cartData,
-      index,
     } = this.props;
     const { gift_card_message, checked, showMessage } = this.state;
     const {
       item_id, img, name, offer_price, cur, quantity, max_limit, inventory,
-      brand_name, gift_info, shipping, warranty, total_amount,
-      product_id, variant_id, itemType, catalogId, discount, mrp,
+      brand_name, gift_info, shipping, warranty_duration, total_amount,
+      product_id, variant_id, itemType, catalogId, discount, mrp, variantAttributes,
     } = item;
     return (
       <div key={item_id} className={`${styles['mb-20']} ${styles['box']}`}>
@@ -194,14 +196,24 @@ class CartItem extends React.Component {
                       </a>
                     </Link>
                   </h4>
+                  {variantAttributes.length > 0 &&
+                    variantAttributes.map(attr => (
+                      <div className={`${styles['thick-gry-clr']} ${styles['fs-12']} ${styles['mb-15']}`}>
+                        <span>{attr.display_string} : </span>
+                        <span>{attr.attribute_values[0].value}</span>
+                      </div>
+                    ))}
                   <div className={`${styles['warranty-part']} ${styles['p-10']} ${styles['light-gry-clr']}`}>
-                    {cartData.items ? <p className={`${styles['mb-0']} ${styles['fs-12']} ${styles['flex']}`}>
-                      <span>{CART_PAGE.WARRENTY} : </span>
-                      <span className={`${styles['pl-10']} ${styles['pr-10']}`}><Warranty warranty={cartData.items[index].warranty_duration} /></span>
+                    <p className={`${styles['mb-0']} ${styles['fs-12']} ${styles['flex']}`}>
+                      <span>Warranty : </span>
+                      <span className={`${styles['pl-10']} ${styles['pr-10']}`}>
+                        {warranty_duration && Object.keys(warranty_duration).length > 0 ?
+                          <Warranty warranty={warranty_duration} />
+                          : 'No Warranty'}
+                      </span>
                     </p>
-                      : null}
                     <p className={`${styles['mb-0']} ${styles['fs-12']}`}>
-                      <span>{CART_PAGE.SHIPPING} : </span>
+                      <span>{CART_PAGE.SHIPPING} :</span>
                       <span className={`${styles['pl-10']} ${styles['pr-10']}`}>{CART_PAGE.REGULAR_SHIPPING}  ({shipping.shipping_fees + ' ' + cur}) - <span className={`${styles['fs-12']} ${styles['base-font']}`}>{CART_PAGE.ETA_DELIVERY_BY} {moment().add(shipping.shipping_days, 'days').format('LL')}</span>
                       </span>
                     </p>

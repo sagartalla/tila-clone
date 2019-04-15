@@ -74,8 +74,6 @@ const CartBody = ({
                   removeCartItem={removeCartItem}
                   cartStepperInputHandler={cartStepperInputHandler}
                   addOrRemoveGift={addOrRemoveGift}
-                  cartData={cartData}
-                  index={index}
                 />
             ))}
 

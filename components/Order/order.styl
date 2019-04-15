@@ -1,4 +1,4 @@
-@import '../../layout/main/executables.styl';
+@import '../../layout/main/executables.styl'
 
 $shipment-wrap-border-color = #D8D8D8
 .orders-container
@@ -14,13 +14,12 @@ $shipment-wrap-border-color = #D8D8D8
     padding 10px 15px
 
 .product-item
-  display flex
   .prod-sub-content
     .prod-sub-content-inn
       display block
       .promo-code-label
-        float: left;
-        width: 70%;
+        float left
+        width 70%
       .coupon-code
         color generic-green-color
         border 1px dotted generic-green-color
@@ -31,8 +30,6 @@ $shipment-wrap-border-color = #D8D8D8
   border 1px solid $shipment-wrap-border-color
   border-radius 6px
   .products-wrap
-    display table
-    width 100%
     .product-item
       .img-wrap, .text-wrap
         position relative
@@ -47,7 +44,6 @@ $shipment-wrap-border-color = #D8D8D8
 
   .widget-wrap
     clear both
-    padding-top 20px
 
 .share-cont
   .share-icon
@@ -57,6 +53,18 @@ $shipment-wrap-border-color = #D8D8D8
 .addres-dtls
   .pin-map-icon
     width 20px
+
+.green-label
+  padding 4px 10px
+  font-size 12px
+  background listing-background-color
+  border 1px solid generic-green-color
+
+.refund-label
+    top -11px
+    padding 2px 5px
+    border-radius 4px
+    box-shadow 0 2px 4px 0 rgba(0, 0, 0, 0.09)
 
 .ret-exch-wrap
   .breadcrums
@@ -69,3 +77,66 @@ $shipment-wrap-border-color = #D8D8D8
   .product-wrap
     img
       object-fit scale-down
+
+.help-position
+  right 20px
+  bottom 0px
+  border-bottom 0
+
+.ship-icon
+  width 80px
+  height 25px
+
+.track-img-wrap
+  height 90px
+  .track-img
+    max-width 100%
+    max-height 100%
+
+
+
+
+
+.state-times
+  margin 15px
+  &::after
+    box-sizing border-box
+  li
+    display flex
+  p
+    position relative
+    color light-gray-clr
+    padding 0 20px
+    width 100px
+    &::after
+      content ""
+      position absolute
+      z-index 2
+      right 0
+      top 0
+      transform translateX(50%)
+      border-radius 50%
+      background light-gray
+      width 12px
+      height 12px
+  .activeP
+    &::after
+      background generic-green-color      
+  .status
+    padding 0 20px 20px 20px
+    position relative
+    &::before
+      content ""
+      position absolute
+      z-index 1
+      left 0
+      height 100%
+    .events
+      .dot
+        width 5px
+        height 5px
+        border-radius 50%
+        background generic-green-color
+  strong
+   display block
+   font-weight 600
