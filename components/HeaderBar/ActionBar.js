@@ -164,7 +164,7 @@ class ActionBar extends Component {
           </Link>
         </div>
         <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']}`}>
-          <Dropdown id="cart-toggle" className={`${styles['cart-inn']} ${styles['profile-login-inn']}`}>
+          <Dropdown id="cart-toggle" className={`${styles['cart-inn']} ${styles['profile-login-inn']} ${styles['pr-20']}`}>
               <Link route={`/${country}/${language}/cart`}>
               <a style={{dispaly:'block'}}>
                 <span className={`${styles['flex-center']} ${styles['justify-center']} ${styles['relative']}`}>
