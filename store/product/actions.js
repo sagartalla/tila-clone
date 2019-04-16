@@ -44,12 +44,12 @@ const actionCreators = {
     type: actions.SET_SELECTED_PRODUCT_DATA,
     payload:params
   }),
-  track: (params) => (dispatch, getState) => {
+  track: params => (dispatch, getState) => {
     const state = getState();
     params.postResult = state.cartReducer.data.items;
     return {
       type: actions.CART_TRACK,
-      payload: api.track(params)
+      payload: api.track(params),
     };
   },
   getCitiesByCountryCode: (code) => {
@@ -58,7 +58,6 @@ const actionCreators = {
       payload: api.getCities(code),
     });
   },
-
   autoCompleteCity: (searchKeyWord) => {
     return ({
       type: actions.AUTOCOMPLETE_CITY,

@@ -16,12 +16,12 @@ import FooterBar from '../Footer/index';
 import Slider from '../common/slider';
 import Coupon from '../Cart/CartPaymentSideBar/coupons';
 
-const { CART_PAGE } = languageDefinations();
-
 import lang from '../../utils/language';
 
 import styles_en from './cart_en.styl';
 import styles_ar from './cart_ar.styl';
+
+const { CART_PAGE } = languageDefinations();
 
 const styles = lang === 'en' ? styles_en : styles_ar;
 
@@ -51,15 +51,15 @@ class Cart extends Component {
 
   componentDidMount() {
     if (!this.props.showMiniCart) {
-      this.props.getCartResults();
-      this.props.track({
-        eventName: "Cart Views"
-      });
+      this.props.getCartResults().then(() =>
+        this.props.track({
+          eventName: 'CART_VIEW',
+        }));
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.cartData.ui.loader && nextProps.cartData.ui.loader == 'hide') {
+    if (nextProps.cartData.ui.loader && nextProps.cartData.ui.loader === 'hide') {
       this.setState({ showBlocker: false });
     }
   }
@@ -86,23 +86,21 @@ class Cart extends Component {
 
   checkoutBtnHandler() {
     const { cartData } = this.props;
-    this.props.track({
-      eventName: "Checkout Started"
-    });
     const newRes = cartData.items.filter(data => data.inventory == 0);
     if (newRes.length) {
       toast.warn(CART_PAGE.THERE_IS_SOME_ISSUE_WITH_CART_ITEMS);
     } else {
+      this.props.track({
+        eventName: 'Checkout Started',
+      });
       Router.pushRoute(`/${country}/${language}/payment`);
     }
   }
 
   removeCartItem(e) {
-    let productId = e.currentTarget.getAttribute('data-productId')
-    digitalData.cart.item = digitalData.cart.item.filter((item) => {
-      return item.productInfo.productID !== productId
-    })
-    this.props.removeCartItem(e.currentTarget.id, { showToast: true});
+    const productId = e.currentTarget.getAttribute('data-productId');
+    digitalData.cart.item = digitalData.cart.item.filter((item) => item.productInfo.productID !== productId);
+    this.props.removeCartItem(e.currentTarget.id, { showToast: true });
   }
 
   increaseItemCnt(e) {
@@ -114,7 +112,7 @@ class Cart extends Component {
 
       return item;
     });
-    this.cartItemCount(e.target.getAttribute('data-id'), 'add',this.props.cartData.items);
+    this.cartItemCount(e.target.getAttribute('data-id'), 'add', this.props.cartData.items);
   }
 
   decreaseItemCnt(e) {
@@ -124,7 +122,7 @@ class Cart extends Component {
         item.quantity--;
       }
     });
-    this.cartItemCount(e.target.getAttribute('data-id'), 'remove',this.props.cartData.items);
+    this.cartItemCount(e.target.getAttribute('data-id'), 'remove', this.props.cartData.items);
   }
 
   cartItemCount(id, typ) {
@@ -237,7 +235,7 @@ const mapDispatchToProps = dispatch =>
   );
 
 Cart.propTypes = {
-  cartData: PropTypes.object,
+  cartData: PropTypes.object.isRequired,
 };
 
 Cart.defaultProps = {

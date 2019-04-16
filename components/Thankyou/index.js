@@ -20,8 +20,27 @@ class Thankyou extends Component {
     super(props);
     this.state = {
       status: 'SUCCESSFUL',
-      orderId: ''
+      orderId: '',
     };
+  }
+
+  componentDidMount() {
+    const {
+      orderId, getOrderDetails, status, track,
+    } = this.props;
+    window.dataLayer.push({
+      event: 'purchase',
+    });
+    this.setState({ status });
+    getOrderDetails({ orderId }).then((res) => {
+      const { data } = res.value;
+      if (res.value.status === 200) {
+        track({
+          event: 'Order Placed',
+          orderData: data,
+        });
+      }
+    });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -30,27 +49,13 @@ class Thankyou extends Component {
     }
   }
 
-  componentDidMount() {
-    const { orderId, getOrderDetails, status } = this.props;
-    window.dataLayer.push({
-      'event': 'purchase'
-     });
-    this.setState({ status })
-    getOrderDetails({ orderId: orderId }).then(() => {
-      if(this.props.orderData.hasOwnProperty('orderItems')&this.props.orderData.hasOwnProperty('payments')){   
-        this.props.track({
-          eventName: "Order Placed","orderData":this.props
-        });
-      }     
-    });  
-  }
   render() {
     const { orderId, query, orderData } = this.props;
     const { status } = this.state;
 
     return (
-      <div className={styles['thankyou']}>
-        <HeaderBar hideSearch hideMegamenu/>
+      <div className={styles.thankyou}>
+        <HeaderBar hideSearch hideMegamenu />
         <PaymentStatus
           status={status}
           orderId={orderId}
@@ -60,7 +65,7 @@ class Thankyou extends Component {
             <OrderDetails
               query={query}
               orderData={orderData}
-              thankyouPage={true}
+              thankyouPage
             />
             : null
         }
@@ -69,19 +74,16 @@ class Thankyou extends Component {
   }
 }
 
-const mapStateToProps = (store) => {
-  return ({
-    orderData: selectors.getOrderDetails(store)
-  })
-};
+const mapStateToProps = store => ({
+  orderData: selectors.getOrderDetails(store),
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({
+const mapDispatchToProps = dispatch => bindActionCreators(
+  {
     getOrderDetails: actionCreators.getOrderDetails,
     track: actionCreators.track,
   },
-    dispatch,
-  );
-}
+  dispatch,
+);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Thankyou);

@@ -161,15 +161,17 @@ const getProducts = (brand = '') => {
 };
 const track = (params) => {
   window.appEventData.push({
-    "event": params.eventName,
-    "product": [
+    event: params.eventName,
+    product: [
       {
-        "productInfo": {
-          "productID": params.params.productId,
-        }
-      }
-    ]
-  });}
+        productInfo: {
+          productID: params.params.productId,
+        },
+      },
+    ],
+  });
+};
+
 export default {
   addToCompare,
   getCompareItemsData,

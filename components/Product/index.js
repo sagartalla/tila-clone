@@ -6,7 +6,6 @@ import NoSSR from 'react-no-ssr';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { languageDefinations } from '../../utils/lang';
-import { selectors } from '../../store/product';
 import HeaderBar from '../HeaderBar/index';
 import Dispalay from './includes/Display';
 import TitleInfo from './includes/TitleInfo';
@@ -14,15 +13,12 @@ import Shipping from './includes/Shipping';
 
 import AddToCart from './includes/AddToCart';
 import RecentView from './includes/RecentView';
-import Review from './includes/Reviews';
-import ReviewsTab from './includes/ReviewTab';
 import ElectronicsTab from './includes/ElectronicsTab';
 import ProductDetails from './includes/ProductDetails';
-import ReviewRatingList from '../RatingReviews/List';
 import FooterBar from '../Footer/index';
 import Theme from '../helpers/context/theme';
 import CompareWidget from '../common/CompareWidget';
-import { actionCreators, } from '../../store/product';
+import { actionCreators, selectors } from '../../store/product';
 import { actionCreators as wishlistActionCreators, selectors as wishListSelectors } from '../../store/cam/wishlist';
 import Button from '../common/CommonButton';
 
@@ -65,7 +61,8 @@ const getProductComponent = (isPreview, taskCode) => {
         digitalData.page.category = { primaryCategory: productData.categoryType };
         digitalData.page.pageInfo.breadCrumbs = productData.breadcrums.map(item => item.display_name_en);
         this.props.track({
-          eventName: "Cart Views","ProductData":productData,
+          eventName: 'Product Viewed',
+          ProductData: productData,
         });
         if (offerInfo.price) {
           const pr = offerInfo.price.split(' ');
@@ -81,7 +78,7 @@ const getProductComponent = (isPreview, taskCode) => {
             arr.pop();
           }
 
-          if (index == -1) {
+          if (index === -1) {
             arr.unshift({
               nm: titleInfo.title,
               im: imgUrls[0].url,

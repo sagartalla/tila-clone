@@ -59,7 +59,7 @@ const actionCreators = {
       payload: api.userLogout(),
     });
   },
-  getLoginInfo: (params) => ({
+  getLoginInfo: params => ({
     type: actions.USER_LOGIN_INFO,
     payload: api.getLoginInfo(params),
   }),
@@ -131,13 +131,10 @@ const actionCreators = {
     type: actions.SET_VERFIED,
     payload: api.setVerfied(isVerified),
   }),
-};
-track: (event,params) => (dispatch, getState) => {
-  const state = getState();
-  return {
+  track: (event, params) => ({
     type: actions.CART_TRACK,
-    payload: api.track(event,params),
-  };
-}
+    payload: api.track(event, params),
+  }),
+};
 
-export { actions, actionCreators};
+export { actions, actionCreators };
