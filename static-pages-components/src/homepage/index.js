@@ -351,7 +351,7 @@ const HomePage = () => (
       </div>
       <Row className="d_items" >
         <div className={`${styles['flex-center']} ${styles['mb-15']}`}>
-          <span className={`title ${styles['fs-18']}`}>DEALS OF THE DAY</span>
+          <span className={`title ${styles['mr-15']} ${styles['fs-18']}`}>DEALS OF THE DAY</span>
           <span className={`timer ${styles['flex-center']}`}>
             <SVGComponent clsName="time" src="icons/common-icon/timer" />
             <span className={`${styles['fs-12']}`}>
@@ -453,7 +453,7 @@ const HomePage = () => (
             </div>
           </div>
         </div>
-        <div className="d3">
+        <div className={`d3 ${styles.right0}`}>
           <div>
             <span className={styles['fs-20']}><span className="lite">Men Clothing</span><span className={styles.bold}>UP TO 50% OFF</span></span>
             <a href={b_d_b['Mens Clothing']}>
@@ -535,7 +535,7 @@ const HomePage = () => (
             </div>
           </div>
         </div>
-        <div className="d3">
+        <div className={`d3 ${styles.right0}`}>
           <div>
             <span className={styles['fs-20']}><span className="lite">Lights</span><span className={styles.bold}>FROM SAR 200</span></span>
             <a href={b_d_b['Lights']}>
@@ -622,7 +622,7 @@ const HomePage = () => (
               </div>
             </div>
           </div>
-          <div className="d3">
+          <div className={`d3 ${styles.right0}`}>
             <div>
               <span className={styles['fs-20']}><span className="lite">Audio Devices</span><span className={styles.bold}>UP TO 50% OFF</span></span>
               <a href={b_d_b.Speakers}>

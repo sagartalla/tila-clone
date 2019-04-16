@@ -8,8 +8,12 @@ import PaymentStatus from './includes/PaymentStatus';
 import OrderDetails from '../Order/includes/OrderDetails';
 import HeaderBar from '../HeaderBar';
 
-import { mergeCss } from '../../utils/cssUtil';
-const styles = mergeCss('components/Thankyou/thankyou');
+import lang from '../../utils/language';
+
+import styles_en from './thankyou_en.styl';
+import styles_ar from './thankyou_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 class Thankyou extends Component {
   constructor(props) {

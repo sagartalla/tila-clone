@@ -93,19 +93,15 @@ const deriveCity = (params) => {
   return axios.get(`/api/googleApi?api=${params.api}&latitude=${params.latitude}&longitude=${params.longitude}`).then(({data}) => data);
 }
 
-const autoCompleteCity = (params) => {
-    return axios.get(`/api/autoCompleteCity?api=${'/place/autocomplete/json'}&input=${params.input}`).then(({data}) => data);
-}
-
 const setCity = (params) => {
   return axios.post('/api/setCookie', {
     data: {
       shippingInfo: {
-        ...params
-      }
-    }
+        ...params,
+      },
+    },
   }).then(() => params);
-}
+};
 
 const setLanguage = (language) => {
   return axios.post('/api/setCookie', {
@@ -150,7 +146,7 @@ const setVerfied = (isVerified) => {
       isVerified,
     },
   }).then(() => isVerified);
-}
+};
 
 const track = (event,status) => {
   window.appEventData.push({

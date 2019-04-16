@@ -5,11 +5,16 @@ import VariantsAndSimilarProducts from './VariantsAndSimilarProducts';
 import KeyFeatures from './KeyFeatures';
 import SVGCompoent from '../../common/SVGComponet';
 import Accordian from '../../common/Accordian';
-import { mergeCss } from '../../../utils/cssUtil';
 import { languageDefinations } from '../../../utils/lang';
 import SizeChart from '../includes/SizeChart/index';
 import { PanelGroup,Panel, Heading, Body, Title } from 'react-bootstrap';
-const styles = mergeCss('components/Product/product');
+import lang from '../../../utils/language';
+
+import styles_en from '../product_en.styl';
+import styles_ar from '../product_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 const { PDP_PAGE } = languageDefinations();
 
 const ProductDetails = ({ details, keyfeatures, isPreview, productInfo }) => {

@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Row } from 'react-bootstrap';
+import orderStatusAttributes from '../OrderDetails/orderAttributes';
+import lang from '../../../../utils/language';
 
-import { mergeCss } from '../../../../utils/cssUtil';
+import styles_en from './statusWidget_en.styl';
+import styles_ar from './statusWidget_ar.styl';
 
-const styles = mergeCss('components/Order/includes/StatusWidget/statusWidget');
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 const StatusWidget = ({ currentStatus }) => {
   const len = Object.keys(currentStatus[0].state_time_estimates).length;
@@ -24,7 +27,7 @@ const StatusWidget = ({ currentStatus }) => {
               return (
                 <div className={`${styles['relative']}`}>
                   <span className={`${styles['point']} ${actual_time ? (i.status == 'CANCELLED' ? styles['cancelled'] : styles['active']) : ''} `} style={{ left: `${k == 0 ? '0' : (pivot * k)}%` }}></span>
-                  <span className={`${styles['pt-10']} ${styles['pb-10']} ${styles['flex']} ${styles['fs-12']}`}>{i.status}</span>
+                  <span className={`${styles['pt-10']} ${styles['pb-10']} ${styles['flex']} ${styles['fs-12']}`}>{orderStatusAttributes[i.status]}</span>
                 </div>
               );
             })

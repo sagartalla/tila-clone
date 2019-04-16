@@ -1,4 +1,4 @@
-@import '../../layout/main/executables.styl'
+@import '../../layout/main/executables.styl';
 
 .header-container
   display block
@@ -408,6 +408,13 @@ nav
   position absolute
   width 100%
   background #fff
+
+
+@media screen and (min-device-width: 320px) and (max-device-width: 736px) and (orientation : portrait){
+  .login-reg-modal {
+    width 88%
+  }
+}
 
 @media screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation : portrait){
   .megamenu-sub-drop-down .top-brands-trending-wrap .megamenu-sub-child-list {

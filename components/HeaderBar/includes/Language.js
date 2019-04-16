@@ -9,10 +9,15 @@ import { decode, encode, addUrlProps, replaceInUrlQuery } from 'react-url-query'
 
 import { actionCreators, selectors } from '../../../store/auth';
 
-import { mergeCss } from '../../../utils/cssUtil';
+
 import languageData from '../../../constants/languages';
 
-const styles = mergeCss('components/HeaderBar/header');
+import lang from '../../../utils/language';
+
+import styles_en from '../header_en.styl';
+import styles_ar from '../header_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 const cookies = new Cookies();
 
 class Language extends Component {

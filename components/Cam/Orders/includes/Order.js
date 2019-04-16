@@ -5,10 +5,16 @@ import { Row, Col, Button, OverlayTrigger, Popover } from 'react-bootstrap';
 import SVGComponent from '../../../common/SVGComponet';
 import OrderItem from '../../../Order/includes/OrderDetails/OrderItem';
 import { Router } from '../../../../routes';
-import { mergeCss } from '../../../../utils/cssUtil';
 import { languageDefinations } from '../../../../utils/lang/';
 
-const styles = mergeCss('components/Cam/Orders/orders');
+import lang from '../../../../utils/language';
+
+import styles_en from '../orders_en.styl';
+import styles_ar from '../orders_ar.styl';
+
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 const { ORDERS } = languageDefinations();
 const cookies = new Cookies();
 
@@ -40,7 +46,7 @@ const Order = ({ order }) => {
         <div>
           <span>{ORDERS.SHIPPING_TO}</span>
           <div className={`${styles['flex']}`}>
-            <span className={styles['link-text']}>{order.shippingTo.name}</span>
+            <span className={`${styles['link-text']} ${styles['text-capitalize']}`}>{order.shippingTo.name}</span>
             <OverlayTrigger placement="bottom" overlay={popover}>
               <span className={styles['ml-10']}>
                 <SVGComponent clsName={`${styles['down-arrow']}`} src="icons/down-arrow/down-arrow" />
@@ -56,27 +62,33 @@ const Order = ({ order }) => {
       </div>
       <Row>
         <Col md={12}>
-          {order.orderItems.map((orderItem) => <OrderItem
-            key={orderItem.id}
-            orderItem={orderItem}
-            orderId={order.id}
-            showWidget={false}
-            variantId={orderItem.variantId}
-            isCancelable={orderItem.isCancelable}
-            isReturnable={orderItem.isReturnable}
-            isExchangable={orderItem.isExchangable}
-            />)}
+          {order.orderItems.map(orderItem => (
+            <OrderItem
+              key={orderItem.id}
+              orderItem={orderItem}
+              orderId={order.id}
+              variantId={orderItem.variantId}
+              isCancelable={orderItem.isCancelable}
+              isReturnable={orderItem.isReturnable}
+              isExchangable={orderItem.isExchangable}
+            />
+          ))}
         </Col>
       </Row>
       <Row>
-        <Col md={7}>
-          <div>
+        <Col md={7} className={styles.flex}>
+          <div className={`${styles['pr-10']} ${styles['thck-gry-rt-border']}`}>
             <span>
-              Ordered on
-            </span> <span className={`${styles['fontW600']} ${styles['light-gry-clr']}`}>
+              Ordered on{' '}
+            </span>
+            <span className={`${styles['fontW600']} ${styles['light-gry-clr']}`}>
               {order.orderDate}
             </span>
           </div>
+          <span className={`${styles['thick-blue']} ${styles['p-5']} ${styles['flex-center']} ${styles['ml-10']} ${styles.border} ${styles['border-radius4']}`}>
+            <SVGComponent clsName={`${styles['help-icon']}`} src="icons/help-icon/help" />
+            &nbsp;&nbsp;Need Help?
+          </span>
         </Col>
         <Col md={5} className={styles['pl-0']}>
           <div className={`${styles['flx-space-bw']}`}>

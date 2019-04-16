@@ -28,6 +28,13 @@ export default class MyDocument extends Document {
 
         </Head>
         <body>
+          {
+            props.__NEXT_DATA__.query.language === 'ar'
+              ?
+              <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-rtl/3.4.0/css/bootstrap-rtl.css" />
+              :
+              null
+          }
           {/*<!-- Google Tag Manager (noscript) -->*/}
           <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M68MT36"
           height="0" width="0" style={{display:'none', visibility:'hidden'}}></iframe></noscript>

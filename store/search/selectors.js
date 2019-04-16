@@ -58,30 +58,31 @@ const getSearchFilters = (store) => {
   const { categoryFilter } = store.searchReducer.data;
   if (categoryFilter) {
     const { nodes } = categoryFilter;
+    console.log('nodes:' ,nodes);
     filters.category = [{
       name: 'Category',
       id: 'category',
       children: _.reduce(nodes, (acc, value, key) => [
         ...acc,
         {
-          canonicalId: _.kebabCase(key),
+          canonicalId: _.kebabCase(value.name),
           children: _.reduce(value.child, (acc, value, key) => [
             ...acc,
             {
-              canonicalId: _.kebabCase(key),
+              canonicalId: _.kebabCase(value.name),
               id: value.id,
               name: key,
               children: _.reduce(value.child, (acc, value, key) => [
                 ...acc,
                 {
-                  canonicalId: _.kebabCase(key),
+                  canonicalId: _.kebabCase(value.name),
                   id: value.id,
                   name: key,
                 },
               ], []),
             }], []),
           id: value.id,
-          name: key,
+          name: value.name,
         },
       ], []),
     }];

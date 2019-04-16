@@ -2,8 +2,7 @@ import constants from '../../../constants';
 
 const getWishListResults = (store) => {
   if (store.wishlistReducer.data) {
-
-    const data = store.wishlistReducer.data;
+    const { data } = store.wishlistReducer;
     const img_url = constants.mediaDomain;
     const showLoading = store.wishlistReducer.ui.loading;
 
@@ -16,7 +15,7 @@ const getWishListResults = (store) => {
       const variant = item.variant_preferred_listings ? Object.keys(item.variant_preferred_listings)[0] : '';
       const variant_info = item.variant_preferred_listings ? item.variant_preferred_listings[variant][0] : {};
 
-      const values = store.cartReducer.data.items.map(function (e) { return e.product_details.product_id; }).indexOf(item.product_id);
+      const values = store.cartReducer.data.items.map(e => e.product_details.product_id).indexOf(item.product_id);
 
       newData.push({
         wishlist_id: item.wishlist_id,
@@ -25,7 +24,7 @@ const getWishListResults = (store) => {
         variant_id: variant_info.variant_id,
         name: item && item.product_details && item.product_details.product_details_vo.cached_product_details.attribute_map.calculated_display_name.attribute_values[0].value,
         brand_name: item && item.product_details && item.product_details.catalog_details.attribute_map.brand.attribute_values[0].value,
-        img: img_url + '/' + item && item.product_details && item.product_details.product_details_vo.cached_product_details.media.gallery_media[0].url,
+        img: `${img_url}/${item}` && item.product_details && item.product_details.product_details_vo.cached_product_details.media.gallery_media[0].url,
         cur: variant_info.selling_price_currency,
         price: variant_info.selling_price,
         mrp: variant_info.mrp,
@@ -40,21 +39,25 @@ const getWishListResults = (store) => {
     return newData;
   }
   return [];
-}
-const getPaginationDetails = (store) => {
-   const {number=0,total_pages=0,total_elements=0,number_of_elements=0} = store.wishlistReducer.paginationData
+};
 
-   return {
-     number,
-     total_pages,
-     total_elements,
-     number_of_elements
-   }
-}
+const getPaginationDetails = (store) => {
+  const {
+    number = 0, total_pages = 0, total_elements = 0, number_of_elements = 0, size = 10,
+  } = store.wishlistReducer.paginationData;
+
+  return {
+    size,
+    number,
+    total_pages,
+    total_elements,
+    number_of_elements,
+  };
+};
 
 const getLoader = (store) => {
   if (store.wishlistReducer.ui.loading) {
     return store.wishlistReducer.ui.loading;
   }
 };
-export { getWishListResults, getPaginationDetails, getLoader }
+export { getWishListResults, getPaginationDetails, getLoader };

@@ -8,10 +8,17 @@ import SVGComponent from '../../../common/SVGComponet';
 import { actionCreators, selectors } from '../../../../store/payments';
 import Voucher from './Voucher';
 import { languageDefinations } from '../../../../utils/lang/';
-import { mergeCss } from '../../../../utils/cssUtil';
+
 import Button from '../../../common/CommonButton';
 
-const styles = mergeCss('components/Payments/payment');
+import lang from '../../../../utils/language';
+
+import styles_en from '../../payment_en.styl';
+import styles_ar from '../../payment_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
+
 const { PAYMENT_PAGE } = languageDefinations();
 
 // const SavedCards = props => (

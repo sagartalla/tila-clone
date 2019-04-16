@@ -11,10 +11,14 @@ import SVGComponent from '../../common/SVGComponet';
 import { actionCreators, selectors } from '../../../store/search';
 import { actionCreators as cartActionCreators, selectors as cartSelector } from '../../../store/cart';
 import { actionCreators as wishlistActionCreators } from '../../../store/cam/wishlist';
-import { mergeCss } from '../../../utils/cssUtil';
 import { Router } from '../../../routes';
 
-const styles = mergeCss('components/Search/search');
+import lang from '../../../utils/language';
+
+import styles_en from '../search_en.styl';
+import styles_ar from '../search_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 const cookies = new Cookie();
 const { SEARCH_PAGE } = languageDefinations();

@@ -10,11 +10,15 @@ import { actionCreators as cartActioncreators } from '../../../store/cart';
 
 import CartStepper from '../../Cart/includes/CartStepper';
 
-import { mergeCss } from '../../../utils/cssUtil';
-
 const { COUPON_OFFERS, CART_PAGE } = languageDefinations();
 
-const styles = mergeCss('components/Cart/CartPaymentSideBar/sideBar');
+import lang from '../../../utils/language';
+
+import styles_en from './sideBar_en.styl';
+import styles_ar from './sideBar_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 
 class CartAndPaymentSideBar extends Component {
   constructor(props) {
@@ -37,6 +41,8 @@ class CartAndPaymentSideBar extends Component {
       hideUpSell, showStepper, increaseItemCnt, decreaseItemCnt,
       insnt_item_listing_id, isPdp, couponData, getCartResults, data, hideCouponCode,
     } = this.props;
+
+    console.log('showinstant', showInstant);
     const {
       items, total_price, total_offer_price, total_gift_charges,
       total_discount, total_shipping, tax, item_cnt, currency,
@@ -79,6 +85,8 @@ class CartAndPaymentSideBar extends Component {
             <InstantCheckout
               insnt_item_listing_id={insnt_item_listing_id}
               isPdp={isPdp}
+              totalPrice={total_price}
+              currency={currency}
             />
           </div>
           : null

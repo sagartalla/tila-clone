@@ -13,13 +13,17 @@ import HeaderBar from '../HeaderBar/index';
 import CartBody from './includes/CartBody';
 import MiniCartBody from './includes/MiniCartBody';
 import FooterBar from '../Footer/index';
-import { mergeCss } from '../../utils/cssUtil';
 import Slider from '../common/slider';
 import Coupon from '../Cart/CartPaymentSideBar/coupons';
 
 const { CART_PAGE } = languageDefinations();
 
-const styles = mergeCss('components/Cart/cart');
+import lang from '../../utils/language';
+
+import styles_en from './cart_en.styl';
+import styles_ar from './cart_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 const cookies = new Cookie();
 

@@ -24,10 +24,15 @@ import Theme from '../helpers/context/theme';
 import CompareWidget from '../common/CompareWidget';
 import { actionCreators, } from '../../store/product';
 import { actionCreators as wishlistActionCreators, selectors as wishListSelectors } from '../../store/cam/wishlist';
-import { mergeCss } from '../../utils/cssUtil';
 import Button from '../common/CommonButton';
 
-const styles = mergeCss('components/Product/product');
+import lang from '../../utils/language';
+
+import styles_en from './product_en.styl';
+import styles_ar from './product_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 const { PDP_PAGE } = languageDefinations();
 
 const getProductComponent = (isPreview, taskCode) => {

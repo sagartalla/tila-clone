@@ -3,9 +3,14 @@ import Cookie from 'universal-cookie';
 
 import { Link } from '../../../../routes';
 import SVGCompoent from '../../../common/SVGComponet';
-import { mergeCss } from '../../../../utils/cssUtil';
 import { Panel, Heading, Body, Title } from 'react-bootstrap';
-const styles = mergeCss('components/Search/search');
+
+import lang from '../../../../utils/language';
+
+import styles_en from '../../search_en.styl';
+import styles_ar from '../../search_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 const cookies = new Cookie();
 

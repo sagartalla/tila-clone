@@ -10,8 +10,13 @@ import Input from '../../../common/Input';
 import { languageDefinations } from '../../../../utils/lang/';
 import { actionCreators, selectors } from '../../../../store/cam/personalDetails';
 import SVGComponent from '../../../common/SVGComponet';
-import { mergeCss } from '../../../../utils/cssUtil';
-const styles = mergeCss('components/Cam/PersonelDetails/profile');
+import lang from '../../../../utils/language';
+
+import styles_en from '../profile_en.styl';
+import styles_ar from '../profile_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 const { EDIT_PASSWORD_MODAL } = languageDefinations();
 
 class EditPassword extends React.Component {

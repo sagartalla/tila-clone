@@ -6,7 +6,10 @@ const captchaDisplay = ({txnId}) => {
       'X-Request-Id': {}
     }
   }
-  return axios.get(`${constants.CAPTCHA_URL}?txnId=${txnId}`, headers).then(({data}) => {
+  let uri = `${constants.CAPTCHA_URL}?txnId=${txnId}`
+  if (txnId === null)
+    uri = `${constants.CAPTCHA_URL}`
+  return axios.get(uri, headers).then(({data}) => {
     return data;
   })
 }
