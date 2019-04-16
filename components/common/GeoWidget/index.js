@@ -8,9 +8,12 @@ import { selectors as productSelectors, actionCreators as productActionCreators 
 import { actionCreators, selectors } from '../../../store/auth';
 import SVGCompoent from '../SVGComponet';
 import { languageDefinations } from '../../../utils/lang';
-import { mergeCss } from '../../../utils/cssUtil';
+import lang from '../../../utils/language';
 
-const styles = mergeCss('components/common/GeoWidget/geoWidget');
+import styles_en from './geoWidget_en.styl';
+import styles_ar from './geoWidget_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 const { SEARCH_PAGE } = languageDefinations();
 const cookies = new Cookie();
