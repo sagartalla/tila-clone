@@ -20,8 +20,14 @@ import { Router } from '../../routes';
 import { selectors, actionCreators } from '../../store/auth';
 import { actionCreators as cartActionCreators, selectors as cartSelectors } from '../../store/cart';
 import { languageDefinations } from '../../utils/lang';
-import { mergeCss } from '../../utils/cssUtil';
-const styles = mergeCss('components/HeaderBar/header');
+
+import lang from '../../utils/language';
+
+import styles_en from './header_en.styl';
+import styles_ar from './header_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 const { HEADER_PAGE } = languageDefinations();
 const cookies = new Cookie();
 
@@ -152,7 +158,7 @@ class ActionBar extends Component {
            <a style={{dispaly:'block'}}>
             <span className={`${styles['flex-center']} ${styles['justify-center']} ${styles['relative']}`}>
               <SVGComponent clsName={`${styles['wish-list-icon']}`} src="icons/wish-list/wish-list-icon" />
-              <span className={`${styles['absolute']} ${styles['cart-count']} ${styles['fs-10']} ${styles['white-color']}`}>{wishListCount.length}</span>
+              <span className={`${styles['absolute']} ${styles['cart-count']} ${styles['fs-10']} ${styles['white-color']}`}>{wishListCount}</span>
             </span>
             </a>
           </Link>
@@ -265,7 +271,7 @@ const mapStateToProps = (store) => {
     userInfo: personalSelectors.getUserInfo(store),
     showLogin: selectors.getShowLogin(store),
     ptaToken: selectors.getPTAToken(store),
-    wishListCount: wishListSelectors.getWishListResults(store),
+    wishListCount: wishListSelectors.getPaginationDetails(store).total_elements,
     showEmailVerificationScreen: selectors.showEmailVerificationScreen(store),
   })
 };

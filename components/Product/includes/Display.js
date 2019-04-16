@@ -10,10 +10,16 @@ import { Grid, Row, Col } from 'react-bootstrap';
 import constants from '../../../constants';
 import SVGComponent from '../../common/SVGComponet';
 // import userAgent from '../../../utils/user-agent';
-import { mergeCss } from '../../../utils/cssUtil';
+
 import { actionCreators } from '../../../store/cam/wishlist';
 
-const styles = mergeCss('components/Product/product');
+import lang from '../../../utils/language';
+
+import styles_en from '../product_en.styl';
+import styles_ar from '../product_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 
 const cookies = new Cookies();
 const language = cookies.get('language') || 'en';
@@ -59,7 +65,7 @@ class Display extends Component {
       imgs, extraOffers, breadcrums, isWishlisted,
     } = this.props;
     return (
-      <div className={`${styles['ht-100per']}`}>
+      <div className={`${styles['ht-100per']} ${styles['mobile-slide-part']}`}>
         {breadcrums.length > 0 &&
           <div className={`${styles['breadcrums-part']} ${styles['fs-12']}`}>
             {breadcrums.map((crum, index) => (

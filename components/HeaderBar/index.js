@@ -9,10 +9,16 @@ import ActionBar from './ActionBar';
 import MegaMenu from './includes/MegaMenu';
 import SearchFilters from '../common/SearchFilters';
 // import Betalogo from '../../components/common/beta';
-import { mergeCss } from '../../utils/cssUtil';
+
 import publicUrls from '../../constants';
 import { actionCreators, selectors } from '../../store/search';
-const styles = mergeCss('components/HeaderBar/header');
+
+import lang from '../../utils/language';
+
+import styles_en from './header_en.styl';
+import styles_ar from './header_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 const HeaderBar = props => (
   <div className={`${styles['header-container']}`}>

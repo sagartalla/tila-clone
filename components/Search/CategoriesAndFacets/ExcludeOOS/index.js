@@ -3,10 +3,16 @@ import { Panel } from 'react-bootstrap';
 import { addUrlProps, UrlQueryParamTypes, pushInUrlQuery } from 'react-url-query';
 import { Router } from '../../../../routes';
 import { languageDefinations } from '../../../../utils/lang';
-import { mergeCss } from '../../../../utils/cssUtil';
+
 import ToggleBtn from '../../../common/ToggleBtn';
 
-const styles = mergeCss('components/Search/search');
+import lang from '../../../../utils/language';
+
+import styles_en from '../../search_en.styl';
+import styles_ar from '../../search_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 const { PDP_PAGE } = languageDefinations();
 
 const urlPropsQueryConfig = {

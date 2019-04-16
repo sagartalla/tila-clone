@@ -2,11 +2,15 @@
 import React, { Component } from 'react';
 import NoSSR from 'react-no-ssr';
 import SVGComponent from '../common/SVGComponet';
-import { mergeCss } from '../../utils/cssUtil';
 import { connect } from 'react-redux';
 import { selectors, actionCreators } from '../../store/auth';
 
-const styles = mergeCss('components/Login/login');
+import lang from '../../utils/language';
+
+import styles_en from './login_en.styl';
+import styles_ar from './login_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 const snMetaObj = {
   'google': {

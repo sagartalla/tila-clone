@@ -48,4 +48,9 @@ const setSelectedVariant = ({selectedVariantData, itemType, catalogId, variantId
     }
   });
 }
-export default { getProduct, getPreview, getReviewRatings,submitUserReview, setSelectedVariant };
+
+const getCities = (code) => {
+  return axios.get(`${constants.TRANSFORMER_API_URL}/fpts/geolocation/city_by_code?iso_3=${code}`);
+}
+
+export default { getProduct, getPreview, getReviewRatings,submitUserReview, setSelectedVariant, getCities };

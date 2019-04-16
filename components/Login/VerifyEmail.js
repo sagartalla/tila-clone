@@ -2,14 +2,19 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { mergeCss } from '../../utils/cssUtil';
 import { actionCreators } from '../../store/auth';
 import Input from '../common/Input';
 import Button from '../common/CommonButton';
 import SVGComponent from '../common/SVGComponet';
 import { languageDefinations } from '../../utils/lang';
 
-const styles = mergeCss('components/Login/login');
+import lang from '../../utils/language';
+
+import styles_en from './login_en.styl';
+import styles_ar from './login_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 const { EMAIL_VERIFICATION } = languageDefinations();
 
 class VerifyEmail extends Component {

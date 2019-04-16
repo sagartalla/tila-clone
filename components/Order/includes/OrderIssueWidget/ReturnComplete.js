@@ -5,8 +5,14 @@ import { bindActionCreators } from 'redux';
 
 import { selectors, actionCreators } from '../../../../store/order';
 import SVGComponent from '../../../common/SVGComponet';
-import { mergeCss } from '../../../../utils/cssUtil';
-const styles = mergeCss('components/Order/includes/OrderIssueWidget/orderIssue');
+
+import lang from '../../../../utils/language';
+
+import styles_en from './orderIssue_en.styl';
+import styles_ar from './orderIssue_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 import { languageDefinations } from '../../../../utils/lang';
 const { ORDER_PAGE } = languageDefinations();
 

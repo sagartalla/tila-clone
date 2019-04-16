@@ -6,10 +6,15 @@ import Cookies from 'universal-cookie';
 import SVGComponent from '../../../common/SVGComponet';
 import { languageDefinations } from '../../../../utils/lang/';
 import { Router } from '../../../../routes';
-import { mergeCss } from '../../../../utils/cssUtil';
 import constants from '../../../../constants';
 
-const styles = mergeCss('components/Cam/Wishlist/wishlist');
+import lang from '../../../../utils/language';
+
+import styles_en from '../wishlist_en.styl';
+import styles_ar from '../wishlist_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 const cookies = new Cookies();
 
 const language = cookies.get('language') || 'en';
@@ -18,7 +23,9 @@ const country = cookies.get('country') || 'SAU';
 const percentage = (a, b) => Math.floor(((a - b) / b) * 100);
 
 const WishlistBody = (props) => {
-  const { data, deleteItem, addToCart, notifyMe } = props;
+  const {
+    data, deleteItem, addToCart, notifyMe, pageDetails,
+  } = props;
   const { WISH_LIST_PAGE, PDP_PAGE } = languageDefinations();
 
   const getPriceAlert = (a, b, cur) => {
@@ -44,13 +51,15 @@ const WishlistBody = (props) => {
   };
   const routeChange = (variantId, productId, catalogId, itemType) => {
     Router.push(`/${country}/${language}/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemType}`);
-  }
+  };
+
+  console.log('ewfbfiwu', pageDetails);
   return (
     <div>
       <div className={`${styles['flex']}`}>
         <Col md={12} sm={12} xs={12} className={`${styles['pl-0']}`}>
           <h4 className={`${styles['mt-0']} ${styles['mb-20']} ${styles['fontW300']}}`}>
-            <span>{data.length + ' ' + WISH_LIST_PAGE.WISHLIST_HEADER}</span>
+            <span>{`Showing ${(pageDetails.number * pageDetails.size) + 1}-${(pageDetails.number + 1) * pageDetails.size > pageDetails.total_elements ? pageDetails.total_elements : (pageDetails.number + 1) * pageDetails.size} of ${pageDetails.total_elements} ${WISH_LIST_PAGE.WISHLIST_HEADER}`}</span>
           </h4>
         </Col>
       </div>

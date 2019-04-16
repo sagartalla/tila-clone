@@ -13,11 +13,17 @@ import MyGMap from '../../../Cam/ShippingAddress/includes/MyGMap';
 
 import SVGComponent from '../../../common/SVGComponet';
 
-import { mergeCss } from '../../../../utils/cssUtil';
 import { languageDefinations } from '../../../../utils/lang';
 const {ORDER_PAGE,CART_PAGE} = languageDefinations();
 
-const styles = mergeCss('components/Order/order');
+import lang from '../../../../utils/language';
+
+import styles_en from '../../order_en.styl';
+import styles_ar from '../../order_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
+
 
 class OrderHeader extends Component {
 

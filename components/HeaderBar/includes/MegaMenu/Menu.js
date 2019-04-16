@@ -5,10 +5,15 @@ import _ from 'lodash';
 import Leaves from './Leaves';
 import SVGComponent from '../../../common/SVGComponet';
 import { Link } from '../../../../routes';
-import { mergeCss } from '../../../../utils/cssUtil';
+
 import { languageDefinations } from '../../../../utils/lang';
 
-const styles = mergeCss('components/HeaderBar/header');
+import lang from '../../../../utils/language';
+
+import styles_en from '../../header_en.styl';
+import styles_ar from '../../header_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 const { HEADER_PAGE } = languageDefinations()
 

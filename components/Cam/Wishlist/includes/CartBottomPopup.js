@@ -7,8 +7,13 @@ import constants from '../../../../constants';
 
 import { languageDefinations } from '../../../../utils/lang/';
 
-import { mergeCss } from '../../../../utils/cssUtil';
-const styles = mergeCss('components/Cam/Wishlist/wishlist');
+import lang from '../../../../utils/language';
+
+import styles_en from '../wishlist_en.styl';
+import styles_ar from '../wishlist_ar.styl';
+
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 const { WISH_LIST_PAGE } = languageDefinations();
 

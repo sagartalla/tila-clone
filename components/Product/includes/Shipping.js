@@ -8,22 +8,28 @@ import GeoWidget from '../../common/GeoWidget';
 import { languageDefinations } from '../../../utils/lang';
 import { actionCreators, selectors } from '../../../store/product';
 import SVGCompoent from '../../common/SVGComponet';
-import { mergeCss } from '../../../utils/cssUtil';
 import Warranty from './Warranty';
 
-const styles = mergeCss('components/Product/product');
+import lang from '../../../utils/language';
+
+import styles_en from '../product_en.styl';
+import styles_ar from '../product_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
+
 const { PDP_PAGE } = languageDefinations();
 
 class Shipping extends Component {
   render() {
     const { shippingInfo, offerInfo } = this.props;
     const { shipping_fees, shipping_days, shippable, acceptsReturns, maxDaysToReturn, isPreview } = shippingInfo;
-    
+
     return (
       <div className={`${styles['box']} ${styles['border-radius4']} ${styles['mt-5']} ${styles['mb-10']} ${styles['ipad-delivery-address-part']} ${styles['free-delivery-part']}`}>
         <div className={`${styles['free-delivery-list']} ${styles['flex']}`}>
           <div className={styles['pdp-deliver-list']}>
-            <GeoWidget hideLabel={true} />
+            <GeoWidget />
           </div>
           {
             shipping_days

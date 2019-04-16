@@ -10,10 +10,14 @@ import { selectors, actionCreators } from '../../../../store/megamenu';
 import SVGComponent from '../../../common/SVGComponet';
 import Menu from './Menu';
 import SubMenu from './SubMenu';
-import { mergeCss } from '../../../../utils/cssUtil';
-import {languageDefinations} from '../../../../utils/lang';
-const styles = mergeCss('components/HeaderBar/header');
 
+import {languageDefinations} from '../../../../utils/lang';
+import lang from '../../../../utils/language';
+
+import styles_en from '../../header_en.styl';
+import styles_ar from '../../header_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 const cookies = new Cookie();
 
 const language = cookies.get('language') || 'en';

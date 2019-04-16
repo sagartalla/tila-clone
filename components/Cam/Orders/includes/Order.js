@@ -5,10 +5,16 @@ import { Row, Col, Button, OverlayTrigger, Popover } from 'react-bootstrap';
 import SVGComponent from '../../../common/SVGComponet';
 import OrderItem from '../../../Order/includes/OrderDetails/OrderItem';
 import { Router } from '../../../../routes';
-import { mergeCss } from '../../../../utils/cssUtil';
 import { languageDefinations } from '../../../../utils/lang/';
 
-const styles = mergeCss('components/Cam/Orders/orders');
+import lang from '../../../../utils/language';
+
+import styles_en from '../orders_en.styl';
+import styles_ar from '../orders_ar.styl';
+
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 const { ORDERS } = languageDefinations();
 const cookies = new Cookies();
 

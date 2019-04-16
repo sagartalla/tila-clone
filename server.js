@@ -20,24 +20,26 @@ function sessionCookie(req, res, next) {
   const htmlPage =
     !req.path.match(/^\/(_next|static)/) &&
     !req.path.match(/\.(js|map)$/) &&
-    req.accepts('text/html', 'text/css', 'image/png') === 'text/html'
-
-  if (!htmlPage) {
-    next()
-    return
+    req.accepts('text/html', 'text/css', 'image/png') === 'text/html';
+  const isApiRoute = req.path.match(/^\/api/);
+  if (!htmlPage || isApiRoute) {
+    next();
+    return;
   }
+  const pathSplit = req.path.split('/');
+  const country = pathSplit[1];
+  const language = pathSplit[2];
   const sid = req.universalCookies.get('sessionId');
   if (!sid || sid.length === 0) {
     req.universalCookies.set('sessionId', uuidv4());
     res.cookie('sessionId', req.universalCookies.get('sessionId'));
   }
-
-  global.APP_LANGUAGE = req.universalCookies.get('language') || 'en';
-  global.APP_COUNTRY = req.universalCookies.get('country') || 'SAU';
+  global.APP_LANGUAGE = ['en', 'ar'].indexOf(language) !== -1 ? language : req.universalCookies.get('language') || 'en';
+  global.APP_COUNTRY = country || 'SAU';
+  
   res.cookie('language', global.APP_LANGUAGE);
   res.cookie('country', global.APP_COUNTRY);
-
-  next()
+  next();
 }
 
 const sourcemapsForSentryOnly = token => (req, res, next) => {

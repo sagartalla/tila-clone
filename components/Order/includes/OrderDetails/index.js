@@ -6,9 +6,15 @@ import OrderItem from './OrderItem';
 import { languageDefinations } from '../../../../utils/lang';
 import OrderIssueWidget from '../OrderIssueWidget';
 import { Router } from '../../../../routes';
-import { mergeCss } from '../../../../utils/cssUtil';
 
-const styles = mergeCss('components/Order/order');
+import lang from '../../../../utils/language';
+
+import styles_en from '../../order_en.styl';
+import styles_ar from '../../order_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
+
 const cookies = new Cookies();
 
 const language = cookies.get('language') || 'en';

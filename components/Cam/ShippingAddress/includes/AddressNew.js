@@ -1,16 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { languageDefinations } from '../../../../utils/lang/';
 import { Row, Col, Button } from 'react-bootstrap';
+import { languageDefinations } from '../../../../utils/lang/';
 import SVGComponent from '../../../common/SVGComponet';
 import MyGMap from './MyGMap';
-import { mergeCss } from '../../../../utils/cssUtil';
-const styles = mergeCss('components/Cam/ShippingAddress/address');
+import lang from '../../../../utils/language';
+
+import styles_en from '../address_en.styl';
+import styles_ar from '../address_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 //TODO validations is pending. SF-28
 //TODO country dropdown. SF-25
 const AddressNew = (props) => {
-  const { data, inputOnChange, addrTypeHandler, setAsDefaultLocation, saveBtnClickHandler, resetAddAdrressForm, getDataFromMap } = props;
+  const { data, inputOnChange, addrTypeHandler, setAsDefaultLocation, saveBtnClickHandler, resetAddAdrressForm, getDataFromMap, getAllCities, selectCityFromSuggesstions, showCitiesData } = props;
   const { DELIVERY_ADDR_PAGE } = languageDefinations();
   return (
     <div className={`${styles['addr-new-container']} ${styles['pb-30']} ${styles['pr-30']} ${styles['pl-30']}`}>
@@ -54,11 +58,26 @@ const AddressNew = (props) => {
             </div>
           </Col>
           <Col md={6} sm={12} xs={12}>
-            <div className={`${styles['fp-input']} ${styles['common-input-mb']}`}>
+            <div
+              className={`${styles['fp-input']} ${styles['common-input-mb']}`}
+            >
               <input type="text" name="city" onChange={inputOnChange} value={data.city} className={styles.input} required />
               <span className={styles['highlight']}></span>
               <span className={styles['bar']}></span>
               <label>{DELIVERY_ADDR_PAGE.CITY}</label>
+              {
+                <div className={`${styles['auto-suggestions-list']}`}>
+                  {showCitiesData && getAllCities.map(result =>
+              (
+                <div
+                  key={result.rescity_nameult}
+                  className={`${styles['auto-suggestions']} ${styles['bg-white']}`}
+                >
+                  <div data-id={result.city_name} data-name="city" onClick={selectCityFromSuggesstions} className={`${styles.item} ${styles['fs-12']} ${styles['pl-5']} ${styles['ht-25']} ${styles.pointer}`}>{result.city_name}</div>
+                </div>
+              ))}
+                </div>
+          }
             </div>
           </Col>
           <Col md={6} sm={12} xs={12}>
@@ -119,7 +138,7 @@ const AddressNew = (props) => {
         <Row>
           <Col md={12} sm={12} xs={12}>
             <div className={`${styles['checkbox-material']} ${styles['mt-25']} ${styles['mb-25']}`}>
-              <input id="prefer-loaction" type="checkbox" onClick={setAsDefaultLocation} defaultChecked={data.default} /> 
+              <input id="prefer-loaction" type="checkbox" onClick={setAsDefaultLocation} defaultChecked={data.default} />
               <label htmlFor="prefer-loaction" className={`${styles['fontW300']} ${styles['thick-gry-clr']} ${styles['mb-0']}`}>{DELIVERY_ADDR_PAGE.PREF_LOC}</label>
             </div>
           </Col>
@@ -141,10 +160,16 @@ AddressNew.propTypes = {
   getDataFromMap: PropTypes.func.isRequired,
   inputOnChange: PropTypes.func.isRequired,
   data: PropTypes.object,
+  getAllCities: PropTypes.instanceOf(Array),
+  selectCityFromSuggesstions: PropTypes.func,
+  showCitiesData: PropTypes.bool,
 };
 
 AddressNew.defaultProps = {
-  data: {}
+  data: {},
+  getAllCities: [],
+  selectCityFromSuggesstions: f => f,
+  showCitiesData: false,
 };
 
 export default AddressNew;
