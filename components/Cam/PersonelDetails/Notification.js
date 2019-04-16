@@ -2,9 +2,16 @@ import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import SVGComponent from '../../common/SVGComponet';
 import Btn from '../../common/Button';
-import { mergeCss } from '../../../utils/cssUtil';
+
 import { languageDefinations } from '../../../utils/lang/';
-const styles = mergeCss('components/Cam/PersonelDetails/profile');
+
+import lang from '../../../utils/language';
+
+import styles_en from './profile_en.styl';
+import styles_ar from './profile_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 const { NOTITICATION_INFO } = languageDefinations();
 const Notification = () => (
   <div className={`${styles['box']} ${styles['notification-main']} ${styles['flex']} ${styles['flex-colum']}`}>

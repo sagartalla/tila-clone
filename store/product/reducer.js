@@ -10,6 +10,7 @@ const initialState = {
   reviewResponse:{},
   variantsData: {},
   error: {},
+  allCitiesData: [],
 };
 const productReducer = typeToReducer({
   [actions.GET_PRODUCT]: {
@@ -75,7 +76,24 @@ const productReducer = typeToReducer({
   },
   [actions.SET_SELECTED_PRODUCT_DATA]: (state, action) => {
     return state;
-  }
+  },
+
+  [actions.GET_CITIES]: {
+    PENDING: state => Object.assign({}, state, { ui: { ...state.ui, loading: true } }),
+    FULFILLED: (state, action) => Object.assign({}, state, {
+      ui: {
+        ...state.ui,
+        loading: false,
+      },
+      allCitiesData: action.payload && action.payload.data,
+    }),
+    REJECTED: state =>
+      Object.assign({}, state, { ui: { ...state.ui, loading: false } }),
+  },
+
+  [actions.AUTOCOMPLETE_CITY]: (state, action) => Object.assign({}, state, {
+    searchKeyWord: action.searchKeyWord,
+  }),
 }, initialState);
 
 export default productReducer;

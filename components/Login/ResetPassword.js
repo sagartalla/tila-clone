@@ -4,10 +4,16 @@ import { bindActionCreators } from 'redux';
 import Btn from '../common/Button';
 import { Col } from 'react-bootstrap';
 import { languageDefinations } from '../../utils/lang';
-import { mergeCss } from '../../utils/cssUtil';
 import { actionCreators } from '../../store/cam/personalDetails';
 import SVGComponent from '../common/SVGComponet';
-const styles = mergeCss('components/Login/login');
+
+import lang from '../../utils/language';
+
+import styles_en from './login_en.styl';
+import styles_ar from './login_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 const { LOGIN_PAGE } = languageDefinations();
 
 class ResetPassword extends Component {
@@ -26,6 +32,7 @@ class ResetPassword extends Component {
     }
 
     passwordSuccess() {
+    debugger;
       const { password, confirmPassword } = this.state;
       if (password === confirmPassword) {
         const body = {
@@ -98,7 +105,7 @@ class ResetPassword extends Component {
       );
     }
 }
-  
+
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {

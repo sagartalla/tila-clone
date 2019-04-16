@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { mergeCss } from '../../../utils/cssUtil';
+import lang from '../../../utils/language';
 
-const styles = mergeCss('components/common/slider/index');
+import styles_en from './index_en.styl';
+import styles_ar from './index_ar.styl';
 
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 class Slider extends Component {
   handleChild = (e) => {
@@ -25,12 +27,16 @@ class Slider extends Component {
           onClick={this.handleChild}
         >
           <span
-            role="button"
-            onClick={closeSlider}
-            tabIndex="0"
             className={`${styles.cross} ${styles.absolute} ${styles.flex} ${styles['align-center']} ${styles['fs-40']}`}
           >
-            &times;{<div className={`${styles['fs-20']} ${styles['lgt-blue']} ${styles['ml-20']}`}>{label}</div>}
+            <span
+              role="button"
+              onClick={closeSlider}
+              tabIndex="0"
+            >
+              &times;
+            </span>
+            <span className={`${styles['fs-20']} ${styles['lgt-blue']} ${styles['ml-20']}`}>{label}</span>
           </span>
           {children}
         </div>

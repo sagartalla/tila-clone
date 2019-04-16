@@ -3,11 +3,16 @@ import { Grid, Row, Col } from 'react-bootstrap';
 import Cookie from 'universal-cookie';
 
 import SVGComponent from '../../common/SVGComponet';
-
-import { mergeCss } from '../../../utils/cssUtil';
 import { languageDefinations } from '../../../utils/lang';
 
-const styles = mergeCss('components/Thankyou/thankyou');
+import lang from '../../../utils/language';
+
+import styles_en from '../thankyou_en.styl';
+import styles_ar from '../thankyou_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
+
 const { THANK_YOU_PAGE } = languageDefinations();
 const cookies = new Cookie();
 

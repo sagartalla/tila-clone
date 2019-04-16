@@ -1,0 +1,487 @@
+@import '../executables.styl';
+
+* { box-sizing:border-box; }
+
+html
+  font-size 1vmax
+  font-family ProximaNova
+
+body
+  font-size 1rem
+  font-family ProximaNova
+  background light-gray-color
+  color black
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #ddd;
+    opacity: 1; /* Firefox */
+}
+
+// @media (min-width: 1200px){
+
+// }
+
+button:focus
+  outline none
+
+ul li
+  list-style none
+  // display inline-block
+
+a
+  cursor pointer
+  color navy-blue
+
+a:hover
+  text-decoration none
+
+// heading tags
+h1
+  font-size font-size-32
+h2
+  font-size font-size-30
+h3
+  font-size font-size-24
+
+input[type=text],input[type=password], input[type=email]
+  border 0
+  // border-bottom 1px solid generic-gray-color !important
+  padding px-5 0
+  outline none !important
+  width 100%
+  border-bottom 1px solid light-border
+  // box-shadow none !important
+  border-radius 0 !important
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button
+    -webkit-appearance none
+    margin 0
+/* font sizes */
+// it will generate fonts from fs-10, fs-12, fs-14, ...., to fs-40.
+for i in range(10px, 46px, 2)
+  .fs-{i}
+    font-size (i/base-px)rem
+
+/* Paddings and Margins*/
+// it will generate margin from m-5, m-10, m-15, ...., to m-40.
+mrgpad(types=margin padding margin-left margin-right margin-top margin-bottom  padding-left padding-right padding-top padding-bottom, n)
+  padding unit(n/base-px, rem) if padding in types
+  padding-left unit(n/base-px, rem) if padding-left in types
+  padding-right unit(n/base-px, rem) if padding-right in types
+  padding-top unit(n/base-px, rem) if padding-top in types
+  padding-bottom unit(n/base-px, rem) if padding-bottom in types
+  margin unit(n/base-px, rem) if margin in types
+  margin-left unit(n/base-px, rem) if margin-left in types
+  margin-right unit(n/base-px, rem) if margin-right in types
+  margin-top unit(n/base-px, rem) if margin-top in types
+  margin-bottom unit(n/base-px, rem) if margin-bottom in types
+
+for x in range(0px, 80px, 5)
+  .m-{x}
+    mrgpad(margin, x)
+
+  .ml-{x}
+    mrgpad(margin-right, x)
+
+  .mr-{x}
+    mrgpad(margin-left, x)
+
+  .mt-{x}
+    mrgpad(margin-top, x)
+
+  .mb-{x}
+    mrgpad(margin-bottom, x)
+
+  .p-{x}
+    mrgpad(padding, x)
+
+  .pl-{x}
+    mrgpad(padding-right, x)
+
+  .pr-{x}
+    mrgpad(padding-left, x)
+
+  .pt-{x}
+    mrgpad(padding-top, x)
+
+  .pb-{x}
+    mrgpad(padding-bottom, x)
+
+.p-10-20
+  padding 10px 20px
+
+.p-14-22
+  padding 14px 22px
+
+.p-10-22
+  padding 10px 22px
+
+.p-10-24
+  padding 10px 24px
+
+.p-30-20
+  padding 30px 20px
+
+.p-20-40
+  padding 20px 40px
+
+.p-10-40
+  padding 10px 40px
+
+
+//height
+.ht-100P
+  height 100%
+
+.ht-35
+  height 35px
+
+.ht-40
+  height 40px
+
+.ht-100
+  height 100px
+
+.ht-auto
+  height auto
+
+.ht-170
+  height 170px
+
+.ht-240
+  height 240px
+
+.ht-290
+  height 290px
+
+.ht-100per
+  height 100%
+
+.main-layout
+  min-height 100vh
+  height 100px
+
+.t-rt
+  text-align left
+.t-lt
+  text-align right
+.t-c
+  text-align center
+
+.align-center
+  align-items center
+
+.align-end
+  align-items flex-end
+.justify-around
+   justify-content space-around
+
+.justify-between
+   justify-content space-between
+
+.justify-end
+   justify-content flex-end
+
+.flex-col
+   flex-direction column
+
+.flex-row
+   flex-direction row-reverse
+
+//line height part
+.align-baseline
+  align-items baseline
+
+.lne-ht1
+  line-height 1
+
+.lne-ht2
+  line-height 2
+
+//colors
+.black-color
+  color black
+
+.white-color
+  color white
+
+.thick-gry-clr
+  color base-font
+
+.thick-red-clr
+  color thick-red-arrow
+
+.pink-clr
+  color pink-color
+
+.lgt-blue
+  color navy-blue
+
+.lgt-black
+  color light-black
+
+.offers-label-color
+  color offers-label
+
+.thick-blue
+  color thick-blue
+
+.light-gray
+  color light-gray
+
+.label-light-grey
+  color label-light-grey
+
+.facebook-clr
+  color facebook-color
+
+.light-gry-clr
+  color light-gray-clr
+
+.thick-red
+  color thick-red
+
+.google-clr
+ color google-red
+
+.success-green
+  color generic-green-color
+
+.thck-gry-rt-border
+  border-right 1px solid dottes-gry-clr
+
+.lgt-gry-clr
+  color lgt-gry
+
+.label-gry-clr
+  color label-light
+
+.twitter-clr
+  color twitter-color
+
+.thck-gry-rt-border
+  border-right 1px solid thck-gry-clr
+
+//font-weight
+.fontW300
+  font-family ProximaNova-Light
+
+.fontW700
+  font-family ProximaNova
+
+.fontW600
+  font-family ProximaNova-Bold
+
+//width list
+.width100
+  width 100%
+
+.width55
+  width 55%
+
+.width63
+  width 63%
+
+.width50
+  width 50%
+
+.width33
+  width 33%
+
+.width35
+  width 35%
+
+.width21
+  width 21%
+
+.width70
+  width 70%
+
+//border
+.border
+  border 1px solid border-light-gray
+
+.border-t
+  border-top 1px solid border-light-gray
+
+.border-b
+  border-bottom 1px solid border-light-gray
+
+.border-lg
+  border 1px solid light-gray
+
+.border-rt
+  border-right 1px solid light-gray
+
+.thick-border-btm
+  border-bottom 1px solid light-gray-color
+
+.thick-border-bottom
+  border-bottom 4px solid #fff;
+
+.thick-border-left
+  border-left 1px solid thck-gry-clr
+
+.thick-bdr-rgt
+  border-left 4px solid border-pink
+
+.thin-border-right
+  border-right 1px solid generic-gray-color
+
+.border-btm-dottes
+  border-bottom 1px dotted generic-gray-color
+
+.bb-dashed
+  border-bottom 1px dashed generic-gray-color
+
+.bg-mauve
+  background mauve-light
+
+.bg-light-gray
+  background light-gray-color
+
+.bg-thick-blue
+  background thick-blue
+
+.facebook-blue-color
+  border 1px solid facebook-color
+
+.facebook-blue-lt-color
+  border-left 1px solid facebook-color
+
+.bdr-btm-green-color
+  border-bottom 3px solid elct-green-color
+
+//list style
+.no-lst
+  list-style-type none
+
+.no-list-blt li
+  @extends .no-lst
+
+//border-radius
+.border-radius2
+  border-radius 2px
+
+.border-radius4
+  border-radius 4px
+
+.border-rt-rb-0
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+
+.border-lt-lb-0
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+
+//box-shadow
+.default-shadow
+  box-shadow 0 2px 4px 0 rgba(0,0,0,0.11)
+
+//cursor
+.pointer
+  cursor pointer
+
+//tooltip color
+.alrt-message-bg
+  background-color thin-yellow
+
+.bg-white
+  background-color white
+
+//text-uppercase
+.text-uppercase
+  text-transform uppercase
+
+.text-capitalize
+  text-transform capitalize
+
+//postions
+.relative
+  position relative
+
+.absolute
+  position absolute
+
+.fixed
+  position fixed
+
+.electronics
+  .thick-bdr-rgt, .thick-border-bottom
+    border-color electronics-color
+
+.fashion
+  .thick-bdr-rgt, .thick-border-bottom
+    border-color fashion-color
+
+.lifestyle
+  .thick-bdr-rgt, .thick-border-bottom
+    border-color lifestyle-color
+
+.textColor
+    color: ash-color
+
+.object-scale-down
+  object-fit scale-down;
+
+.lable
+  background light-gray-color
+
+.cross-strike-red::after
+  content: ''
+  border-top 1px solid thick-red-arrow
+  width 100%
+  position absolute
+  transform rotateZ(-15deg)
+  transform-origin center center
+  top 16px
+  left -3px
+
+.table
+  display table
+
+.t-row
+  display table-row
+
+.t-cell
+  display table-cell
+
+.total-amount
+  background light-gray-color
+  height 3em
+  div
+    vertical-align middle
+
+.overall-amount
+  border-radius 3px
+  border solid 1px yellow-color
+  background-color: light-yellow-color
+
+.resize-none
+  resize none
+
+.no-h1
+  font-size: initial;
+  display: inline;
+  font-family: ProximaNova-Bold;
+
+
+.checkout-quat
+  background white
+  box-shadow 0 0.5px 0.5px rgba(0,0,0,0.5)
+  padding 5px
+  border-radius 17px
+  height 17px
+  width 17px
+  margin-left 5px
+  color thick-blue
+  cursor pointer
+
+.hoverBlueBackground
+   background-color light-navy-blue
+
+.notifyBackground
+   background-color navy-blue
+
+.right0
+  left 0

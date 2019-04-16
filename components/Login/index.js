@@ -9,12 +9,16 @@ import { selectors, actionCreators } from '../../store/auth';
 import constants from '../../constants';
 import ForgotPassword from './ForgotPassword';
 import SocialLogin from './SocialLogin';
-import { mergeCss } from '../../utils/cssUtil';
 import { languageDefinations } from '../../utils/lang';
 import FormValidator from '../common/FormValidator';
 import VerifyEmail from './VerifyEmail';
 
-const styles = mergeCss('components/Login/login');
+import lang from '../../utils/language';
+
+import styles_en from './login_en.styl';
+import styles_ar from './login_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 const { LOGIN_PAGE } = languageDefinations();
 class Login extends Component {
@@ -192,16 +196,16 @@ class Login extends Component {
       <Row className={`${styles['bg-white']} ${styles['m-0']}`}>
         { !this.state.forgotPassword ?
       <div className={`${styles.flex}`}>
-        <Col md={6} xs={6} className={styles['pl-0']}>
+        <Col md={6} xs={12} sm={6} className={`${styles['pl-0']} ${styles['m-hdn']}`}>
           <div className={styles['image-placeholder']}>
             <img className={styles['img-responsive']} src={`${constants.mediaDomain}/pim/15f45930-fecf-4f7b-a3d6-613d41196c20/workbench/image/a1ccb74a-1858-42dd-8c38-cfb103e85bb2/login-screen.jpeg`} />
           </div>
         </Col>
         {!showVerifyScreen ?
-        <Col md={6} xs={6}>
+        <Col md={6} xs={12} sm={6}>
           <div className={`${styles.flex} ${styles['align-center']} ${styles['justify-between']} ${styles['flex-row']}`}>
            <div className={`${styles.flex} ${styles.pointer}`} onClick={this.onBackdropClick}><SVGComponent clsName={`${styles['cross-icon']}`} src="icons/common-icon/cross-button" /></div>
-            <h3 className={`${styles['fs-26']} ${styles['mb-25']}`}>
+            <h3 className={`${styles['fs-26']} ${styles['mb-25']} ${styles['m-fs-20']}`}>
               <div>
                 <span className={`${styles['ff-b']} ${styles['pl-10']}`}>
                   {
@@ -235,7 +239,7 @@ class Login extends Component {
                   <label>{LOGIN_PAGE.EMAIL}</label>
                 </div> */}
                 <div className={`${styles['fp-input']} ${styles['pb-10']}`}>
-                  <input onChange={this.onChangeField} name="email" type="email" value={this.state.email} required />
+                  <input onChange={this.onChangeField} className={styles['m-fs-16']} name="email" type="email" value={this.state.email} required />
                   <span className={styles.highlight} />
                   <span className={styles.bar} />
                   <label>{LOGIN_PAGE.EMAIL}</label>
@@ -258,7 +262,7 @@ class Login extends Component {
                   <label>{LOGIN_PAGE.PASSWORD}</label>
                 </div> */}
                 <div className={`${styles['fp-input']} ${styles['pb-10']}`}>
-                  <input onChange={this.onChangeField} name="password" type="password" value={this.state.password} required />
+                  <input onChange={this.onChangeField} className={styles['m-fs-16']} name="password" type="password" value={this.state.password} required />
                   <span className={styles.highlight} />
                   <span className={styles.bar} />
                   <label>{LOGIN_PAGE.PASSWORD}</label>
@@ -340,18 +344,18 @@ class Login extends Component {
               </Col>
             </FormGroup>
             <div className={`${styles['login-social-icon']} ${styles['pl-15']}`}>
-              <a className={`${styles['flex']} ${styles['pt-10']}`}>
+              <a className={`${styles['flex']} ${styles['pt-10']} ${styles['m-fs-14']} ${styles['m-justy-center']}`}>
                 <span onClick={this.handleClick}>
                   {LOGIN_PAGE.FORGOT_PASSWORD}
                 </span>
               </a>
-              <span className={`${styles['thick-gry-clr']} ${styles['pt-5']} ${styles['pb-5']} ${styles['flex']}`}>{LOGIN_PAGE.SIGN_UP_WITH}</span>
+              <span className={`${styles['thick-gry-clr']} ${styles['pt-5']} ${styles['pb-5']} ${styles['flex']} ${styles['m-justy-center']} ${styles['m-fs-14']}`}>{LOGIN_PAGE.SIGN_UP_WITH}</span>
               <NoSSR>
                 <SocialLogin>
                   {([handleSocialLogin]) => {
                     return (
                       <NoSSR>
-                        <div className={styles['flex']}>
+                        <div className={`${styles['flex']} ${styles['social-icons']}`}>
                           <a className={styles['flex']} onClick={handleSocialLogin('facebook')}><SVGComponent clsName={`${styles['bg-social-icon']} ${styles['mr-10']}`} src="icons/social-icons/bg-facebook" /></a>
                           <a className={styles['flex']} onClick={handleSocialLogin('google')}><SVGComponent clsName={`${styles['bg-social-icon']} ${styles['mr-10']}`} src="icons/social-icons/bg-google" /></a>
                           {/* <a className={styles['flex']} onClick={this.handleSocialLogin('twitter')}><SVGComponent clsName={`${styles['bg-social-icon']} ${styles['mr-10']}`} src="icons/social-icons/bg-twitter" /></a>
@@ -368,12 +372,12 @@ class Login extends Component {
             {
               this.state.mode === 'register'
                 ?
-                  <h4 className={`${styles['ff-b']} ${styles['fs-14']}`}>
+                  <h4 className={`${styles['ff-b']} ${styles['fs-14']} ${styles['m-fs-14']} ${styles['m-t-c']}`}>
                   <span>{LOGIN_PAGE.HAVE_ACCOUNT}&nbsp;</span>
                   <span className={styles['link-text']} onClick={this.toggleLoginSignUp}>{LOGIN_PAGE.SIGN_IN}</span>
                 </h4>
                 :
-                <h4 className={`${styles['ff-b']} ${styles['fs-14']}`}>
+                <h4 className={`${styles['ff-b']} ${styles['fs-14']} ${styles['m-fs-14']} ${styles['m-t-c']}`}>
                   <span>{LOGIN_PAGE.NO_ACCOUNT} &nbsp;</span>
                   <span className={styles['link-text']} onClick={this.toggleLoginSignUp}>{LOGIN_PAGE.SIGN_UP}</span>
                 </h4>

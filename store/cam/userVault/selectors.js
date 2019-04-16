@@ -14,8 +14,8 @@ const getTilaCredit = (store) => {
 }
 
 const getDefaultCard = (store) => {
-  if (store.vaultReducer.data && store.vaultReducer.data.length > 0) {
-    return _.filter(store.vaultReducer.data, function (value, key) { return value.default; });
+  if ((store.vaultReducer.data && store.vaultReducer.data.savedCards ) && store.vaultReducer.data.savedCards.length > 0) {
+    return _.filter(store.vaultReducer.data.savedCards, function (value, key) { return value.default; });
   }
   return [];
 }

@@ -4,8 +4,13 @@ import UserProfile from './UserProfile';
 import List from './List';
 
 import data from '../list.json';
-import { mergeCss } from '../../../utils/cssUtil';
-const styles = mergeCss('components/Cam/Sidebar/sidebar');
+import lang from '../../../utils/language';
+
+import styles_en from './sidebar_en.styl';
+import styles_ar from './sidebar_ar.styl';
+
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 const Sidebar = ({query}) => (
   <div className={`${styles['sidebar-container']} hidden-xs`}>

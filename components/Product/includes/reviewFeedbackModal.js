@@ -2,12 +2,18 @@ import React, { Component } from 'react';
 import { Col,Button } from 'react-bootstrap';
 import SVGCompoent from '../../common/SVGComponet';
 import StarRating from '../../common/StarRating';
-import { mergeCss } from '../../../utils/cssUtil';
+
 import { languageDefinations } from '../../../utils/lang';
 import Theme from '../../helpers/context/theme';
 import FormValidator from '../../common/FormValidator';
 
-const styles = mergeCss('components/Product/product');
+import lang from '../../../utils/language';
+
+import styles_en from '../product_en.styl';
+import styles_ar from '../product_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 
 const { PDP_PAGE } = languageDefinations();
 
@@ -33,6 +39,7 @@ export default class FeedbackModal extends Component {
       textValue: '',
       rating: 0,
       validation: this.validations.valid(),
+      charsLeft:300
     };
     this.handleTextChange = this.handleTextChange.bind(this);
     this.retrieveRating = this.retrieveRating.bind(this);
@@ -54,8 +61,9 @@ export default class FeedbackModal extends Component {
 
   handleTextChange({target:{value}}){
     this.setState({
-      textValue:value
-      })
+      textValue:value,
+      charsLeft: 300 - value.length
+    })
   }
   retrieveRating(e,rating){
     this.setState({ rating })
@@ -87,7 +95,7 @@ export default class FeedbackModal extends Component {
 
   }
   render() {
-    const { rating,validation } = this.state;
+    const { rating,validation,charsLeft } = this.state;
     return (
       <Theme.Consumer>
       {
@@ -99,11 +107,13 @@ export default class FeedbackModal extends Component {
               >
               <textarea
                 placeholder={PDP_PAGE.ANY_OTHER_SUGGESTIONS}
-                value={this.state.textValue}
-                name="message" rows='1' cols='50'
+                type='text'
+                name="message" rows='3' cols='70'
+                maxlength="300"
                 onChange={this.handleTextChange}
                 className={`${styles['review-textarea']}`}
                 >
+                {this.state.textValue}
               </textarea>
               {
                 validation.textValue.isInValid ?
@@ -113,7 +123,11 @@ export default class FeedbackModal extends Component {
               }
 
             </div>
-
+            <div className={`${styles['fl-rt']} ${styles['fs-12']}`}>
+              <span>maxLength</span>
+              <span>{charsLeft}</span>
+            </div>
+            <div className={styles['cl-bth']}></div>
             <div
               className={`${styles['flex-center']}
               ${styles['review-rating-block']}

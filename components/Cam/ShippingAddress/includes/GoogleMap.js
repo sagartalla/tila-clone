@@ -6,8 +6,13 @@ import _ from 'lodash';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps";
 import { SearchBox } from "react-google-maps/lib/components/places/SearchBox";
 
-import { mergeCss } from '../../../../utils/cssUtil';
-const styles = mergeCss('components/Cam/ShippingAddress/address');
+import lang from '../../../../utils/language';
+
+import styles_en from '../address_en.styl';
+import styles_ar from '../address_ar.styl';
+
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 const MyGoogleMap = withScriptjs(withGoogleMap((props) => {
   const { DELIVERY_ADDR_PAGE } = languageDefinations();

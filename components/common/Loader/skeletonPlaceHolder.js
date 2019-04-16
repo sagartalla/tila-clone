@@ -1,9 +1,14 @@
 import React from 'react';
-import { mergeCss } from '../../../utils/cssUtil';
 import Input from '../../common/commonInput/index';
 import Rectangle from '../../common/commonInput/RectangleShape';
 
-const styles = mergeCss('components/common/Loader/loader');
+
+import lang from '../../../utils/language';
+
+import styles_en from './loader_en.styl';
+import styles_ar from './loader_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 export const searchPlaceHolder = (
   <div style={{ overflow: 'hidden', maxHeight: '800px' }}>
     <div className={`${styles.container}`} />

@@ -13,10 +13,15 @@ import { actionCreators, selectors } from '../../store/compare';
 import { actionCreators as cartActionCreators,  } from '../../store/cart';
 import { selectors as cartSelectors } from '../../store/search';
 import { languageDefinations } from '../../utils/lang';
-import { mergeCss } from '../../utils/cssUtil';
 import Button from '../common/CommonButton';
 
-const styles = mergeCss('components/Compare/compare');
+import lang from '../../utils/language';
+
+import styles_en from './compare_en.styl';
+import styles_ar from './compare_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 const { COMPARE, PDP_PAGE } = languageDefinations();
 
 const ICONS = {
@@ -120,7 +125,7 @@ class Compare extends Component {
   render() {
     const { compareInfo = {}, brands = [], productList = [], cartButtonLoaders } = this.props;
     const {
-      compareCount = 0, features = [], products = [], productsFeatures = [], 
+      compareCount = 0, features = [], products = [], productsFeatures = [],
     } = compareInfo;
     const { selectedBrand } = this.state;
     return (

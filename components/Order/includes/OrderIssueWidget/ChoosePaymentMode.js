@@ -3,9 +3,15 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { selectors, actionCreators } from '../../../../store/order';
 import { languageDefinations } from '../../../../utils/lang';
-import { mergeCss } from '../../../../utils/cssUtil';
 
-const styles = mergeCss('components/Order/includes/OrderIssueWidget/orderIssue');
+import lang from '../../../../utils/language';
+
+import styles_en from './orderIssue_en.styl';
+import styles_ar from './orderIssue_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
+
 const { ORDER_PAGE } = languageDefinations();
 
 const RenderRadioInput = ({ paymentType, value, onCallBack }) => {

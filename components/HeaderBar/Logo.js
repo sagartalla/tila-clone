@@ -1,9 +1,12 @@
 import React from "react";
 import SVGComponent from '../common/SVGComponet';
-import { mergeCss } from '../../utils/cssUtil';
 import Theme from '../helpers/context/theme';
-const styles = mergeCss('components/HeaderBar/header');
+import lang from '../../utils/language';
 
+import styles_en from './header_en.styl';
+import styles_ar from './header_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 const Logo = () => (
   <Theme.Consumer>
     {

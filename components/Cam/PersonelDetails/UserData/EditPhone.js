@@ -8,13 +8,18 @@ import Cookies from 'universal-cookie';
 import Btn from '../../../common/Button';
 import Input from '../../../common/Input';
 import { actionCreators, selectors } from '../../../../store/cam/personalDetails';
-import { mergeCss } from '../../../../utils/cssUtil';
 import { languageDefinations } from '../../../../utils/lang';
 import CountryDialCode from '../../../../constants/CountryDialCode';
 import FormValidator from '../../../common/FormValidator';
 import SVGCompoent from '../../../common/SVGComponet';
 
-const styles = mergeCss('components/Cam/PersonelDetails/profile');
+import lang from '../../../../utils/language';
+
+import styles_en from '../profile_en.styl';
+import styles_ar from '../profile_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 const { CONTACT_INFO_MODAL } = languageDefinations();
 const cookies = new Cookies();
 
@@ -225,7 +230,7 @@ class EditPhone extends React.Component {
                           (value, index) => (<option
                             key={CountryDialCode[value].code}
                             value={CountryDialCode[value].code}>
-                            <img src={CountryDialCode[value].img} />{CountryDialCode[value].code}
+                              {CountryDialCode[value].code}
                           </option>
                           ))
                       }
@@ -314,7 +319,7 @@ class EditPhone extends React.Component {
             </Row>
             <Row>
               <Col xs={12} md={12} className={`${styles['t-c']}`}>
-                <button className={`${styles['verify-no-btn']} ${styles['mt-20']}`} onClick={this.handleSubmit}>{CONTACT_INFO_MODAL.VERIFY_MOBILE_NUMBER}</button>
+                <button className={`${styles['verify-no-btn']} ${styles['mt-20']}`} onClick={this.handleSubmit}>{this.props.buttonText}</button>
               </Col>
             </Row>
             <div>
@@ -352,5 +357,8 @@ EditPhone.propTypes = {
   errorMessege: PropTypes.string,
   userInfo: PropTypes.object
 };
+EditPhone.defaultProps = {
+  buttonText:CONTACT_INFO_MODAL.VERIFY_MOBILE_NUMBER
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditPhone);

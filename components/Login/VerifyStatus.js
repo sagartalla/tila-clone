@@ -1,9 +1,15 @@
 import React from 'react';
 import Btn from '../common/Button';
 import { Col } from 'react-bootstrap';
-import { mergeCss } from '../../utils/cssUtil';
 import { languageDefinations } from '../../utils/lang';
-const styles = mergeCss('components/Login/login');
+
+import lang from '../../utils/language';
+
+import styles_en from './login_en.styl';
+import styles_ar from './login_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 const { EMAIL_VERIFICATION } = languageDefinations();
 
 const VerifyStatus = (props) => {

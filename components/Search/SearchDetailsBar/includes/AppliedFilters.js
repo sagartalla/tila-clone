@@ -9,8 +9,13 @@ import { actionCreators, selectors } from '../../../../store/search';
 import { languageDefinations } from '../../../../utils/lang';
 const { SEARCH_PAGE } = languageDefinations();
 
-import { mergeCss } from '../../../../utils/cssUtil';
-const styles = mergeCss('components/Search/search');
+import lang from '../../../../utils/language';
+
+import styles_en from '../../search_en.styl';
+import styles_ar from '../../search_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 
 class AppliedFilters extends Component {
   constructor(props) {

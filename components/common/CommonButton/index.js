@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import SVGCompoent from '../../common/SVGComponet';
-import { mergeCss } from '../../../utils/cssUtil';
+import lang from '../../../utils/language';
 
-const styles = mergeCss('components/common/CommonButton/index');
+import styles_en from './index_en.styl';
+import styles_ar from './index_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 /* eslint-disable */
 
 

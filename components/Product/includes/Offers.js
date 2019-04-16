@@ -10,10 +10,16 @@ import Cookie from 'universal-cookie';
 import { selectors, actionCreators } from '../../../store/cart';
 import { Link } from '../../../routes';
 
-import { mergeCss } from '../../../utils/cssUtil';
+
 import {languageDefinations} from '../../../utils/lang'
 const {PDP_PAGE} = languageDefinations()
-const styles = mergeCss('components/Product/product');
+import lang from '../../../utils/language';
+
+import styles_en from '../product_en.styl';
+import styles_ar from '../product_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 
 const cookies = new Cookie();
 

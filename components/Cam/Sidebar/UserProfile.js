@@ -3,9 +3,14 @@ import { connect } from 'react-redux';
 import Cookies from 'universal-cookie';
 import { languageDefinations } from '../../../utils/lang/';
 import { Link } from '../../../routes';
-import { mergeCss } from '../../../utils/cssUtil';
 import { selectors } from '../../../store/cam/personalDetails';
-const styles = mergeCss('components/Cam/Sidebar/sidebar');
+import lang from '../../../utils/language';
+
+import styles_en from './sidebar_en.styl';
+import styles_ar from './sidebar_ar.styl';
+
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 const cookies = new Cookies();
 const { PERSONAL_INFO_MODAL } = languageDefinations();
