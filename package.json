@@ -57,8 +57,8 @@
     "slick-carousel": "^1.8.1",
     "stylus": "^0.54.5",
     "type-to-reducer": "^1.1.0",
-    "universal-cookie": "^2.2.0",
-    "universal-cookie-express": "^2.2.0",
+    "universal-cookie": "^3.1.0",
+    "universal-cookie-express": "^3.1.0",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
