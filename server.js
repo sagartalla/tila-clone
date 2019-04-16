@@ -21,13 +21,14 @@ function sessionCookie(req, res, next) {
     !req.path.match(/^\/(_next|static)/) &&
     !req.path.match(/\.(js|map)$/) &&
     req.accepts('text/html', 'text/css', 'image/png') === 'text/html';
-  const pathSplit = req.path.split('/');
-  const country = pathSplit[1];
-  const language = pathSplit[2];
-  if (!htmlPage) {
+  const isApiRoute = req.path.match(/^\/api/);
+  if (!htmlPage || isApiRoute) {
     next();
     return;
   }
+  const pathSplit = req.path.split('/');
+  const country = pathSplit[1];
+  const language = pathSplit[2];
   const sid = req.universalCookies.get('sessionId');
   if (!sid || sid.length === 0) {
     req.universalCookies.set('sessionId', uuidv4());
@@ -35,6 +36,7 @@ function sessionCookie(req, res, next) {
   }
   global.APP_LANGUAGE = ['en', 'ar'].indexOf(language) !== -1 ? language : req.universalCookies.get('language') || 'en';
   global.APP_COUNTRY = country || 'SAU';
+  
   res.cookie('language', global.APP_LANGUAGE);
   res.cookie('country', global.APP_COUNTRY);
   next();
