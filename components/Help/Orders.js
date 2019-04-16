@@ -104,7 +104,6 @@ class Orders extends Component {
   }
   renderOrderItems = (orderItemObj, index) => {
     const issueKeys = Object.keys(this.props.issueData).sort(sort);
-    console.log(issueKeys, this.props.issueData)
     const {order_item_ids, status, variant_info, order_id} = orderItemObj;
     const { title, image_url } = variant_info;
     const [order_item_id] = order_item_ids;

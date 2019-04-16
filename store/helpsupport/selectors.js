@@ -33,6 +33,16 @@ const computeQuestion = (questionRes) => {
   return qObj;
 }
 
+const computeAllIssues = (issueRes) => {
+  const { items } = issueRes;
+  const { columnNames, rows: issues } = items[0];
+  const aObj = issues.reduce((acc, a, i) => ({
+    ...acc, 
+    [a[0]]: [...a, !!orderRelatedCatId[a[2]]]
+    }),{});
+  return aObj;
+}
+
 const computeAnswer = (answerRes) => {
   const { items } = answerRes;
   const { columnNames, rows: answers } = items[0];
@@ -43,4 +53,4 @@ const computeAnswer = (answerRes) => {
   return aObj;
 }
 
-export default { computeCategory, computeQuestion, computeAnswer }
+export default { computeCategory, computeQuestion, computeAnswer, computeAllIssues }

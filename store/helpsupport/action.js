@@ -3,6 +3,7 @@ import api from './api';
 const actions = {
   GET_CATEGORIES: 'GET_CATEGORIES',
   GET_QUESTIONS: 'GET_QUESTIONS',
+  GET_ALL_ISSUES: 'GET_ALL_ISSUES',
   GET_ANSWERS: 'GET_ANSWERS',
   GET_ISSUES: 'GET_ISSUES',
   GET_TKTS: 'GET_TKTS',
@@ -20,6 +21,10 @@ const actionCreators = {
   getQuestions: query => ({
     type: actions.GET_QUESTIONS,
     payload: api.getQuestionsApi(query),
+  }),
+  getAllIssues: query => ({
+    type: actions.GET_ALL_ISSUES,
+    payload: api.getAllIssuesApi(query),
   }),
   getAnswers: query => ({
     type: actions.GET_ANSWERS,

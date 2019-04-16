@@ -5,7 +5,7 @@ import Cookies from 'universal-cookie';
 import { actionCreators as helpActions } from '../../store/helpsupport';
 import { selectors as orderSelectors, actionCreators as orderActions } from '../../store/cam/orders';
 import { selectors as authSelectors } from '../../store/auth';
-import { Issues as issues, countryLanguageHelpCode as clCode } from './helpConstants';
+import { countryLanguageHelpCode as clCode } from './helpConstants';
 import { mergeCss } from '../../utils/cssUtil';
 import constants from '../../constants';
 
@@ -15,6 +15,7 @@ const cookies = new Cookies();
 const language = clCode[cookies.get('language') || 'en'];
 const country = clCode[cookies.get('country') || 'SAU'];
 const userCredentials = cookies.get('userCreds');
+const sort = (a,b) => a - b;
 
 const styles = mergeCss('components/Help/help');
 
@@ -38,6 +39,7 @@ class EmailModal extends Component {
       incidentId: ''
     }
     this.state.selectedIssue && this.state.selectedIssue.orderRelated && this.getOrders();
+    props.getAllIssues();
     this.scrollTimeout = '';
   }
 
@@ -146,14 +148,14 @@ class EmailModal extends Component {
     });
   }
   renderIssues = (issue, index) => {
-    const { id, q, orderRelated } = issue;
+    const [ id, q, catId, parentId, orderRelated ] = this.props.allIssueData[issue];
+    const issueObj = {id, q, catId, parentId, orderRelated};
     const isSelected = this.state.selectedIssue.id === id;
     return (
-      <div onClick={this.handleIssueSelect(issue)} key={id}
+      <div onClick={this.handleIssueSelect(issueObj)} key={id}
         className={`${styles['facp']} ${styles['ht-45']} ${index !== 0 && styles['bT']} ${ isSelected && styles['highlightColor']}`}
-      >
-        {q}
-      </div>
+        dangerouslySetInnerHTML={{__html: q}}
+      />
     )
   }
   renderOrderItems = (orderItemObj, index) => {
@@ -195,13 +197,15 @@ class EmailModal extends Component {
   }
   render() {
     const { dropDownType, orders, selectedOrder, selectedIssue, email, incidentCreated, referenceNumber, firstname, lastname } = this.state;
+    const { allIssueData } = this.props;
+    const issues = Object.keys(allIssueData).sort(sort)
     return (
       <div className={styles['modalCont']}>
         {!incidentCreated ?
           <React.Fragment>
             <div className={styles['modalTitleContainer']}>
               <h4>WHAT CAN WE HELP YOU WITH</h4>
-              <h4>X</h4>
+              <h4 className={styles['pointer']} onClick={this.props.closeModal}>X</h4>
             </div>
             <div className={styles['pV-40']}>
               <div className={styles['pV-10']}>
@@ -227,7 +231,7 @@ class EmailModal extends Component {
                     className={styles['dropDownInput']}
                   >
                     <div className={styles['dropDownArrow']}>v</div>
-                    <div>{selectedIssue ? selectedIssue.q : ''}</div>
+                    <div dangerouslySetInnerHTML={{__html: selectedIssue ? selectedIssue.q : ''}} />
                   </div>
                   <div className={dropDownType !== 'issue' ? styles['dropDownBox-close'] : styles['dropDownBox-open']}
                   >
@@ -288,5 +292,5 @@ class EmailModal extends Component {
 
 export default connect((state) => ({
   ordersData: state.ordersReducer.data,
-  issueData: state.helpSupportReducer.issueData
+  allIssueData: state.helpSupportReducer.allIssueData
 }), { ...helpActions, ...orderActions })(EmailModal)

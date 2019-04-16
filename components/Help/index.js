@@ -44,8 +44,8 @@ class Help extends Component {
   }
   renderModal = (isLoggedIn) => (
     {
-      'email': <EmailModal type="email" query={this.props.query[0]} selectedOrder={this.state.selectedOrder} selectedIssue={this.state.selectedIssue} isLoggedIn={isLoggedIn} />,
-      'chat': <EmailModal type="chat" query={this.props.query[0]} selectedOrder={this.state.selectedOrder} selectedIssue={this.state.selectedIssue} isLoggedIn={isLoggedIn} />
+      'email': <EmailModal type="email" closeModal={this.closeModal} query={this.props.query[0]} selectedOrder={this.state.selectedOrder} selectedIssue={this.state.selectedIssue} isLoggedIn={isLoggedIn} />,
+      'chat': <EmailModal type="chat" closeModal={this.closeModal} query={this.props.query[0]} selectedOrder={this.state.selectedOrder} selectedIssue={this.state.selectedIssue} isLoggedIn={isLoggedIn} />
     }[this.state.modalType]
   );
   renderContactCard = (selectedOrder, selectedIssue) => (type, index) => {
