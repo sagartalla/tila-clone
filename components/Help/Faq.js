@@ -18,7 +18,7 @@ class Faq extends Component {
     const questionArr = this.props.questionData[topicKey][questionKey];
     return (
       <div key={questionKey}>
-        <Link route={`answers/${topicKey}/${questionArr[2]}#${questionKey}`} ><a style={{ fontSize: 13, color: '#848484'}} dangerouslySetInnerHTML={{__html: questionArr[1]}} /></Link>
+        <Link route={`answers/${topicKey}/${questionArr[2]}#${questionKey}`} ><a className={`${styles['fs-13p']} ${styles['greyColor']}`} dangerouslySetInnerHTML={{__html: questionArr[1]}} /></Link>
       </div>
     )
   }
@@ -29,10 +29,10 @@ class Faq extends Component {
     return (
       <div key={topicKey} className={styles['topicContainer']}>
         <h4>{this.props.categoriesObj[topicKey].name}</h4>
-        <div style={{ height: 175}}>
+        <div className={styles['ht-175']}>
           {questionKeys.map(this.renderQuestions(topicKey))}
         </div>
-        {remaining.length > 0 ? <Link route={`answers/${topicKey}`}><a style={{ fontSize: 12, color: '#476A9B', alignSelf: 'flex-end' }}>{`${remaining.length} more >`}</a></Link> : <div />}
+        {remaining.length > 0 ? <Link route={`answers/${topicKey}`}><a className={`${styles['fs-13p']} ${styles['greyColor']} ${styles['as-flex-end']}`}>{`${remaining.length} more >`}</a></Link> : <div />}
       </div>
     )
   }
@@ -42,7 +42,7 @@ class Faq extends Component {
     return(
       <div>
         <h4>TOPICS</h4>
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between'}}>
+        <div className={`${styles['flex']} ${styles['flexWrap']} ${styles['justify-between']}`}>
           {questionTypeKeys.map(this.renderTopics)}
         </div>
         {this.props.isLoggedIn ? 
@@ -51,9 +51,9 @@ class Faq extends Component {
             <div className={styles['incidentContainer']}>
               <div>
                 <h4>MY TICKETS</h4>
-                <div style={{fontSize: 13, color: '#848484'}} >All your tickets in one place.</div>
+                <div className={`${styles['fs-13p']} ${styles['greyColor']}`} >All your tickets in one place.</div>
               </div>
-              <div><Link route='incidents'><a style={{fontSize: '12px'}}>View More</a></Link></div>
+              <div><Link route='incidents'><a className={styles['fs-13p']}>View More</a></Link></div>
             </div>
           </div>
         : null}

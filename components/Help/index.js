@@ -50,18 +50,11 @@ class Help extends Component {
   );
   renderContactCard = (selectedOrder, selectedIssue) => (type, index) => {
     return (
-    <div key={type.type} className={styles['flexCenterContainer']}
-      style={{
-        margin: '10px 0px', 
-        width: '200px', 
-        display: 'flex',
-        ...(index !== 0 && {borderLeft: '0.5px solid rgba(0,0,0,0.25)'})
-      }}
-    >
-      <div style={{ margin: '10px', width: '35px', height: '35px', borderRadius: '50%', backgroundColor: '#8DD7C2'}}></div>
+    <div key={type.type} className={`${styles['flexCenterContainer']} ${styles['wh-200']} ${index !== 0 && styles['bL']}`}>
+      <div className={styles['contactIcon']}></div>
       <div>
-        <div style={{ fontSize: '13px', fontWeight: 'bolder'}}>{type.text[0]}</div>
-        <div style={{ fontSize: '12px', color: '#7891B6', cursor: type.isClickable ? 'pointer' : 'normal' }} onClick={this.handleContactClick(type, selectedOrder, selectedIssue)}>{type.text[1]}</div>
+        <div className={`${styles['fs-13p']} ${styles['fwBolder']}`}>{type.text[0]}</div>
+        <div className={`${styles['fs-12p']} ${styles['highlightColor']} ${type.isClickable && styles['pointer']}`} onClick={this.handleContactClick(type, selectedOrder, selectedIssue)}>{type.text[1]}</div>
       </div>
     </div>
   )}
@@ -71,9 +64,9 @@ class Help extends Component {
     const {type, url, showModal} = this.state;
     return(
       !!isCategoryLoaded ?
-      <div style={{ height: '100%', overflow: 'hidden'}}>
+      <div className={styles['helpContainer']}>
         <HeaderBar />
-        <div style={{ height: `calc(100% - 110px)`, overflow: 'auto'}}>
+        <div className={styles['helpContentCont']}>
           <div>
             <div className={`${styles['flexCenterContainer']} ${styles['helpHeroContainer']}`}>
               <div className={`${styles['flexColCenterContainer']}`} style={{width: '100%'}}>
@@ -84,7 +77,7 @@ class Help extends Component {
                 {ContactTabs.map(this.renderContactCard())}
               </div>
             </div>
-            <div style={{ backgroundColor: '#fff'}}>
+            <div className={styles['whiteBG']}>
               <div className={styles['helpContentContainer']}>
                 {helpComponents(type)(url, categoryData, query[0], isLoggedIn, this.renderContactCard, this.handleContactClick)}
               </div>
@@ -95,8 +88,8 @@ class Help extends Component {
           : `${styles['modalContainer']} ${styles['hideDiv']}`}>
           <div className={`${styles['disabled']}`} onClick={this.closeModal}></div>
         </div>
-        <div className={styles['modal']} style={{transform: showModal ? 'translateX(0px)' : 'translateX(800px)'}}>
-          <div style={{height: '100%', width: '100%', overflow: 'auto'}}>{this.renderModal(this.props.isLoggedIn)}</div>
+        <div className={`${styles['modal']} ${showModal ? styles['showModal'] : styles['hideModal']}`}>
+          <div className={styles['modalFill']}>{this.renderModal(this.props.isLoggedIn)}</div>
         </div>
       </div> : null
     )

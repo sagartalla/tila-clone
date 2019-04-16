@@ -4,6 +4,7 @@ const actions = {
   GET_CATEGORIES: 'GET_CATEGORIES',
   GET_QUESTIONS: 'GET_QUESTIONS',
   GET_ANSWERS: 'GET_ANSWERS',
+  GET_ISSUES: 'GET_ISSUES',
   GET_TKTS: 'GET_TKTS',
   GET_TKT_DETAIL: 'GET_TKT_DETAIL',
   RAISE_TKT: 'RAISE_TKT',
@@ -23,6 +24,10 @@ const actionCreators = {
   getAnswers: query => ({
     type: actions.GET_ANSWERS,
     payload: api.getAnswersApi(query),
+  }),
+  getIssues: query => ({
+    type: actions.GET_ISSUES,
+    payload: api.getIssuesApi(query),
   }),
   getAllTickets: params => ({
     type: actions.GET_TKTS,

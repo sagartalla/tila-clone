@@ -15,6 +15,8 @@ const cookies = new Cookies();
 
 const language = cookies.get('language') || 'en';
 const country = cookies.get('country') || 'SAU';
+const orderRelatedCatId = [1,2,3,4,5,6,7];
+const sort = (a,b) => a - b;
 
 class Orders extends Component {
 
@@ -30,6 +32,7 @@ class Orders extends Component {
     this.scrollTimeout = '';
     this.orderId = (window.location.hash || '#').split('#')[1]
     this.orderId ? this.props.getOrderDetails({orderId: this.orderId}) : this.getOrders();
+    props.getIssues(orderRelatedCatId);
   }
   componentWillReceiveProps(nextProps) {
     if(nextProps.ordersData !== this.props.ordersData) {
@@ -68,7 +71,7 @@ class Orders extends Component {
 
   renderSupportBox = () => (
     <div className={styles['SupportBoxContainer']}>
-      <div style={{ fontWeight: '800', color: '#000000'}}>
+      <div className={`${styles['fwBolder']} ${styles['blackColor']}`}>
         Issue still not resolved ?
       </div>
       <div>
@@ -81,44 +84,45 @@ class Orders extends Component {
       </div>
     </div>
   )
-  renderIssues = (orderItemId) => (issueObj) => {
-    const {id, q, a, orderRelated} = issueObj
+  renderIssues = (orderItemId) => (issueKey) => {
+    const [id, q, a, catId, parentId, orderRelated] = this.props.issueData[issueKey]
     const issueId = `${orderItemId}-${id}`
     const isSelected = this.state.selectedIssue.id === id;
+    const issueObj = {id, q, a, catId, parentId, orderRelated}
     return (
       orderRelated ?
       <div key={id} 
-        style={{ color: '#636363' ,fontSize: '14px', padding: '10px 10px', backgroundColor: isSelected ? '#F8F8F8' : 'transparent'}} 
+        className={`${styles['greyColor']} ${styles['fs-14p']} ${styles['pV-10']} ${styles['pH-10']} ${isSelected && styles['openBGColor']}`}
         onClick={this.selectIssue(issueObj)}>
-        <h5 style={{ color: isSelected ? '#43689A' : '#000000', fontWeight: isSelected ? '800' : '500', cursor: 'pointer'}}>{q}</h5>
-        <div style={{ height: isSelected ? 'auto' : 0, overflow: 'hidden'}}>
-          <h5 style={{ borderBottom: '0.5px solid #E3E4E4', paddingBottom: '20px'}}>
-            {a}
-          </h5>
+        <h5 className={`${styles['pointer']} ${isSelected && `${styles['highlightColor']} ${styles['fwBolder']}`}`} dangerouslySetInnerHTML={{__html: q}} />
+        <div className={`${styles['overflow-hidden']} ${isSelected ? styles['ht-auto'] : styles['ht-0']}`}>
+          <h5 className={`${styles['bB']} ${styles['pb-20']}`} dangerouslySetInnerHTML={{__html: a}} />
           {this.renderSupportBox()}
         </div>
       </div> : null
     )
   }
   renderOrderItems = (orderItemObj, index) => {
+    const issueKeys = Object.keys(this.props.issueData).sort(sort);
+    console.log(issueKeys, this.props.issueData)
     const {order_item_ids, status, variant_info, order_id} = orderItemObj;
     const { title, image_url } = variant_info;
     const [order_item_id] = order_item_ids;
     const isSelected = this.state.selectedOrder ? this.state.selectedOrder.order_item_ids[0] === order_item_id : false;
     const orderURL =`/${country}/${language}/cam/orders/${order_id}`
     return (
-      <div key={order_item_id} style={{  borderBottom: '0.5px solid #f2f2f2'}} onClick={this.selectOrder(orderItemObj)}>
-        <div className={styles['facp']} style={{ height: '110px', padding: 10 }}>
+      <div key={order_item_id} className={styles['bB']} onClick={this.selectOrder(orderItemObj)}>
+        <div className={`${styles['facp']} ${styles['ht-110']} ${styles['p-10']}`}>
           <div className={styles['orderImgContainer']}><img className={styles['imgContain']} src={`${constants.mediaDomain}/${image_url}`} /></div>
-          <div style={{display: 'flex', fontSize: '14px', flexGrow: 1, padding: '10px 20px'}}>{title}</div>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <div className={styles['orderItemTitle']}>{title}</div>
+          <div className={styles['orderIssueContainer']}>
             <div className={styles['SelectIssueButton']}>Select Issue</div>
-            <div style={{ margin: '5px', fontSize: '12px'}}>{`Order Status - ${status} - `}<a href={orderURL}>View detail</a></div>
+            <div className={`${styles['m-5']} ${styles['fs-12p']}`}>{`Order Status - ${status} - `}<a href={orderURL}>View detail</a></div>
           </div>
         </div>
-        <div style={{borderTop: isSelected ? '0.5px solid #f2f2f2' : 0, padding: '10px 0px 0px 0px', margin: '10px 0px 10px 100px', height: isSelected ? 'auto' : 0, overflow: 'hidden'}}>
-          <h5 style={{ fontWeight: '800'}}>SELECT YOUR ISSUE</h5>
-          {issues.map(this.renderIssues(order_item_id))}
+        <div className={`${isSelected ? `${styles['bT']} ${styles['ht-auto']}` : styles['ht-0']} ${styles['overflow-hidden']} ${styles['orderIssueListContainer']}`}>
+          <h5 className={styles['fwBolder']}>SELECT YOUR ISSUE</h5>
+          {issueKeys.map(this.renderIssues(order_item_id))}
         </div>
       </div>
     )
@@ -137,10 +141,10 @@ class Orders extends Component {
     const { isLoggedIn } = this.props;
     return (
       isLoggedIn ?
-        <div onScroll={this.handleOrdersScroll} style={{height:'100%', overflow: 'auto'}}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', borderBottom: '0.5px solid #f2f2f2', paddingBottom: '10px', margin: '10px'}}>
+        <div onScroll={this.handleOrdersScroll} className={styles['ordersContentContainer']}>
+          <div className={styles['orderContents']}>
             <h4>SELECT ORDER WITH ISSUE</h4>
-            <a href={`/${country}/${language}/cam/orders/`} style={{ height: '30px', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '12px', padding: '5px 20px', color: '#ffffff', backgroundColor: '#44689A', borderRadius: 3}}>
+            <a href={`/${country}/${language}/cam/orders/`} className={styles['myOrderBtn']}>
               My Orders
             </a>
           </div>
@@ -155,5 +159,6 @@ class Orders extends Component {
 
 export default connect((state) => ({ 
   ordersData: state.ordersReducer.data,
-  ordersDetailData: state.singleOrderReducer.data.orderDetails
+  ordersDetailData: state.singleOrderReducer.data.orderDetails,
+  issueData: state.helpSupportReducer.issueData
 }), {...helpActions, ...orderActions, ...orderDetailActions})(Orders)

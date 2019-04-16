@@ -1,9 +1,9 @@
 /*eslint-disable*/
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Cookies from 'universal-cookie';
 import { actionCreators as helpActions } from '../../store/helpsupport';
-import { selectors as orderSelectors, actionCreators as orderActions} from '../../store/cam/orders';
+import { selectors as orderSelectors, actionCreators as orderActions } from '../../store/cam/orders';
 import { selectors as authSelectors } from '../../store/auth';
 import { Issues as issues, countryLanguageHelpCode as clCode } from './helpConstants';
 import { mergeCss } from '../../utils/cssUtil';
@@ -18,9 +18,9 @@ const userCredentials = cookies.get('userCreds');
 
 const styles = mergeCss('components/Help/help');
 
-class EmailModal extends Component{
+class EmailModal extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       showDropDown: false,
@@ -42,7 +42,7 @@ class EmailModal extends Component{
   }
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.ordersData !== this.props.ordersData) {
+    if (nextProps.ordersData !== this.props.ordersData) {
       this.setState({
         orders: [...this.state.orders, ...nextProps.ordersData.orders],
         currentOrderPage: nextProps.ordersData.page + 1,
@@ -74,7 +74,7 @@ class EmailModal extends Component{
       dropDownType: '',
       selectedOrder: issue.orderRelated ? this.state.selectedOrder : ''
     }, () => {
-      if(issue.orderRelated && !this.state.orders.length) {
+      if (issue.orderRelated && !this.state.orders.length) {
         this.getOrders();
       }
     })
@@ -84,7 +84,7 @@ class EmailModal extends Component{
   }
   openChat = () => {
     const baseURL = `https://fptsuae.custhelp.com/app/chat/chat_landing`;
-    if(!this.state.email || !this.state.selectedIssue){
+    if (!this.state.email || !this.state.selectedIssue) {
       alert('Email and Issue is mandatory');
       return
     }
@@ -101,8 +101,8 @@ class EmailModal extends Component{
   }
   handleOrdersScroll = (e) => {
     clearTimeout(this.scrollTimeout)
-    const {scrollHeight, scrollTop, offsetHeight} = e.target;
-    if((scrollTop + 10 + offsetHeight) > scrollHeight) {
+    const { scrollHeight, scrollTop, offsetHeight } = e.target;
+    if ((scrollTop + 10 + offsetHeight) > scrollHeight) {
       this.scrollTimeout = setTimeout(this.getOrders, 100)
     }
   }
@@ -113,7 +113,7 @@ class EmailModal extends Component{
     })
   }
   createIncident = () => {
-    if(!this.state.email || !this.state.selectedIssue){
+    if (!this.state.email || !this.state.selectedIssue) {
       alert('Email and Issue is mandatory');
       return
     }
@@ -128,12 +128,12 @@ class EmailModal extends Component{
         },
         "text": this.state.msg
       },
-      "category": {"id": this.state.selectedIssue.category},
+      "category": { "id": this.state.selectedIssue.category },
       "customFields": {
         "c": {
-          "incident_source_country": {"id": country},
-          "incident_source_language": {"id": language},
-          ...(this.state.selectedOrder && {"order_number": this.state.selectedOrder.order_item_ids[0]})
+          "incident_source_country": { "id": country },
+          "incident_source_language": { "id": language },
+          ...(this.state.selectedOrder && { "order_number": this.state.selectedOrder.order_item_ids[0] })
         }
       }
     }
@@ -146,41 +146,36 @@ class EmailModal extends Component{
     });
   }
   renderIssues = (issue, index) => {
-    const {id, q, orderRelated} = issue;
+    const { id, q, orderRelated } = issue;
     const isSelected = this.state.selectedIssue.id === id;
     return (
-      <div onClick={this.handleIssueSelect(issue)} key={id} 
-        className={styles['facp']}
-        style={{ 
-          height: '45px', 
-          borderTop: index !== 0 ? '0.5px solid rgb(242,242,242)' : 0, 
-          color: isSelected ? '#44689A' : '#000'
-          }}
-        >
+      <div onClick={this.handleIssueSelect(issue)} key={id}
+        className={`${styles['facp']} ${styles['ht-45']} ${index !== 0 && styles['bT']} ${ isSelected && styles['highlightColor']}`}
+      >
         {q}
       </div>
     )
   }
   renderOrderItems = (orderItemObj, index) => {
-    const {order_item_ids, status, variant_info} = orderItemObj;
+    const { order_item_ids, status, variant_info } = orderItemObj;
     const { title, image_url } = variant_info;
     const [order_item_id] = order_item_ids;
     const isSelected = this.state.selectedOrder ? this.state.selectedOrder.order_item_ids[0] === order_item_id : false;
     return (
-      <div key={order_item_id} style={{  borderBottom: '0.5px solid #f2f2f2', color: index && isSelected ? '#44689A' : '#000'}} onClick={this.selectOrder(orderItemObj)}>
-        <div className={styles['facp']} style={{ height: '110px', padding: 10}}>
+      <div key={order_item_id} className={`${styles['bB']} ${ index !== undefined && isSelected && styles['highlightColor']}`} onClick={this.selectOrder(orderItemObj)}>
+        <div className={styles['orderItemContainer']}>
           <div className={styles['orderImgContainer']}><img className={styles['imgContain']} src={`${constants.mediaDomain}/${image_url}`} /></div>
-          <div style={{ padding: '10px 20px'}}>
+          <div className={styles['p-10-20']}>
             <div>{title}</div>
-            <div style={{ margin: '5px 0px', fontSize: '12px'}}>{`Order Status - ${status}`}</div>
+            <div className={`${styles['mV-5']} ${styles['fs-12p']}`}>{`Order Status - ${status}`}</div>
           </div>
         </div>
       </div>
     )
   }
   renderOrders = (orderObj, index) => {
-    const {order_id, order_items} = orderObj
-    return(
+    const { order_id, order_items } = orderObj
+    return (
       <div key={order_id}>
         <div>
           {order_items.map(this.renderOrderItems)}
@@ -198,99 +193,100 @@ class EmailModal extends Component{
       </div>
     )
   }
-  render(){
+  render() {
     const { dropDownType, orders, selectedOrder, selectedIssue, email, incidentCreated, referenceNumber, firstname, lastname } = this.state;
     return (
-      <div style={{padding: '20px', fontSize: '14px', display: 'flex', flexDirection: 'column', height: '100%'}}>
-        {!incidentCreated ? 
+      <div className={styles['modalCont']}>
+        {!incidentCreated ?
           <React.Fragment>
-          <div style={{display: 'flex', width: '100%', justifyContent: 'space-between'}}>
-          <h4>WHAT CAN WE HELP YOU WITH</h4>
-          <h4>X</h4>
-        </div>
-        <div style={{padding: '40px 0px'}}>
-          <div style={{padding: '10px 0px'}}>
-            <div className={styles['formLabel']}>Enter Email ID</div>
-            <input type="text" name="email" value={email} onChange={this.handleUserInfoChange}/>
-          </div>
-          {this.props.type === 'chat' && 
-          <div style={{padding: '10px 0px'}}>
-            <div className={styles['formLabel']}>Enter Firstname</div>
-            <input type="text" name="firstname" value={firstname} onChange={this.handleUserInfoChange}/>
-          </div>
-          }
-          {this.props.type === 'chat' && 
-          <div style={{padding: '10px 0px'}}>
-            <div className={styles['formLabel']}>Enter Lastname</div>
-            <input type="text" name="lastname" value={lastname} onChange={this.handleUserInfoChange}/>
-          </div>
-          }
-          <div style={{padding: '30px 0px'}}>
-            <div className={styles['formLabel']}>Select an Issue</div>
-            <div style={{ position: 'relative'}}>
-              <div tabIndex={0} onBlur={this.handleDropDown('')} onClick={this.handleDropDown('issue')} 
-                className={styles['dropDownInput']}
-              >
-                <div style={{position: 'absolute', color: '#c8c6cc', right: 0, top: '25%', fontSize: '12px'}}>v</div>
-                <div>{selectedIssue ? selectedIssue.q : ''}</div>
-              </div>
-              <div className={dropDownType !== 'issue' ? styles['dropDownBox-close'] : styles['dropDownBox-open']}
-              >
-                {issues.map(this.renderIssues)}
-              </div>
+            <div className={styles['modalTitleContainer']}>
+              <h4>WHAT CAN WE HELP YOU WITH</h4>
+              <h4>X</h4>
             </div>
-          </div>
-          {selectedIssue && selectedIssue.orderRelated ? 
-            <div style={{padding: '30px 0px'}}>
-            <div style={{ fontSize: '12px', color: '#8C8C92'}}>Select an Order</div>
-            <div style={{ position: 'relative'}}>
-              <div tabIndex={1} onBlur={this.handleDropDown('')} onClick={this.handleDropDown('order')} 
-                className={styles['dropDownInput']}
-              >
-                <div style={{position: 'absolute', color: '#c8c6cc', right: 0, top: '25%', fontSize: '12px'}}>v</div>
-                <div>{selectedOrder ? this.renderOrderItems(selectedOrder) : ''}</div>
+            <div className={styles['pV-40']}>
+              <div className={styles['pV-10']}>
+                <div className={styles['formLabel']}>Enter Email ID</div>
+                <input type="text" name="email" value={email} onChange={this.handleUserInfoChange} />
               </div>
-              <div className={dropDownType !== 'order' ? styles['dropDownBox-close'] : styles['dropDownBox-open']}
-                onScroll={this.handleOrdersScroll}
-              >
-                {orders.length ? orders.map(this.renderOrders) : 'No Orders'}
+              {this.props.type === 'chat' &&
+                <div className={styles['pV-10']}>
+                  <div className={styles['formLabel']}>Enter Firstname</div>
+                  <input type="text" name="firstname" value={firstname} onChange={this.handleUserInfoChange} />
+                </div>
+              }
+              {this.props.type === 'chat' &&
+                <div className={styles['pV-10']}>
+                  <div className={styles['formLabel']}>Enter Lastname</div>
+                  <input type="text" name="lastname" value={lastname} onChange={this.handleUserInfoChange} />
+                </div>
+              }
+              <div className={styles['pV-30']}>
+                <div className={styles['formLabel']}>Select an Issue</div>
+                <div className={styles['relative']}>
+                  <div tabIndex={0} onBlur={this.handleDropDown('')} onClick={this.handleDropDown('issue')}
+                    className={styles['dropDownInput']}
+                  >
+                    <div className={styles['dropDownArrow']}>v</div>
+                    <div>{selectedIssue ? selectedIssue.q : ''}</div>
+                  </div>
+                  <div className={dropDownType !== 'issue' ? styles['dropDownBox-close'] : styles['dropDownBox-open']}
+                  >
+                    {issues.map(this.renderIssues)}
+                  </div>
+                </div>
               </div>
+              {selectedIssue && selectedIssue.orderRelated ?
+                <div className={styles['pV-30']}>
+                  <div className={styles['formLabel']}>Select an Order</div>
+                  <div className={styles['relative']}>
+                    <div tabIndex={1} onBlur={this.handleDropDown('')} onClick={this.handleDropDown('order')}
+                      className={styles['dropDownInput']}
+                    >
+                      <div className={styles['dropDownArrow']}>v</div>
+                      <div>{selectedOrder ? this.renderOrderItems(selectedOrder) : ''}</div>
+                    </div>
+                    <div className={dropDownType !== 'order' ? styles['dropDownBox-close'] : styles['dropDownBox-open']}
+                      onScroll={this.handleOrdersScroll}
+                    >
+                      {orders.length ? orders.map(this.renderOrders) : 'No Orders'}
+                    </div>
+                  </div>
+                </div>
+                : null}
+              {this.props.type === "email" ?
+                <div className={styles['pV-30']}>
+                  <div className={styles['formLabel']}>Write a Message</div>
+                  <textarea
+                    value={this.state.msg}
+                    onChange={this.handleMsg}
+                    className={styles['ModalTextArea']}
+                  />
+                </div> : null}
             </div>
+            {this.props.type === "email" ?
+              <div
+                onClick={this.createIncident}
+                className={styles['modalFormButton']}
+              >
+                SEND EMAIL
           </div>
-          : null}
-          {this.props.type === "email" ? 
-          <div style={{padding: '30px 0px'}}>
-            <div style={{ fontSize: '12px', color: '#8C8C92'}}>Write a Message</div>
-            <textarea 
-              value={this.state.msg}
-              onChange={this.handleMsg}
-              className={styles['ModalTextArea']} 
-            />
-          </div> : null}
-        </div>
-        {this.props.type === "email" ? 
-          <div 
-            onClick={this.createIncident} 
-            className={styles['modalFormButton']}
-          >
-            SEND EMAIL
+              :
+              <div
+                onClick={this.openChat}
+                className={styles['modalFormButton']}
+              >
+                START CHATTING
           </div>
-        : 
-          <div
-            onClick={this.openChat}
-            className={styles['modalFormButton']}
-          >
-            START CHATTING
-          </div>
-        }
-        </React.Fragment>
-        : this.renderPostIncidentCreation()}
-        
+            }
+          </React.Fragment>
+          : this.renderPostIncidentCreation()}
+
       </div>
     )
   }
 }
 
-export default connect((state) => ({ 
-  ordersData: state.ordersReducer.data
-}), {...helpActions, ...orderActions})(EmailModal)
+export default connect((state) => ({
+  ordersData: state.ordersReducer.data,
+  issueData: state.helpSupportReducer.issueData
+}), { ...helpActions, ...orderActions })(EmailModal)

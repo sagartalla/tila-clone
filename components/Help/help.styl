@@ -1,3 +1,9 @@
+.flex
+  display flex
+.flexWrap
+  flex-wrap wrap
+.flex-grow
+  flex-grow 1
 .flexCenterContainer
   display flex
   align-items center
@@ -8,9 +14,79 @@
   align-items center
   cursor pointer 
 
+.as-flex-end
+  align-self flex-end
+
+.openBGColor
+  background-color #F8F8F8
+.selectedBG
+  background-color #45689A
+.whiteBG
+  background-color  #ffffff
+.fwBolder
+  font-weight 800
+
+.whiteColor
+  color #ffffff
+.blackColor
+  color #000000
+.highlightColor
+  color #44689A
+.greyColor
+  color #848484
+
+.overflow-hidden
+  overflow hidden
+.overflow-auto
+  overflow auto
+
+.ht-auto
+  height auto
+.ht-0
+  height 0
+.ht-45
+  height 45px
+.ht-110
+  height 110px
+.ht-175
+  height 175px
+
+.wh-250
+  width 250px
+.wh-200
+  width 200px
+
+.fs-11p
+  font-size 11px
+.fs-10p
+  font-size 10px
+.fs-12p
+  font-size 12px
+.fs-13p
+  font-size 13px
+.fs-14p
+  font-size 14px
+
+.bT
+ border-top 0.25px solid #f2f2f2
+.bB
+ border-bottom 0.25px solid #f2f2f2
+.bR
+ border-right 0.25px solid #f2f2f2
+.bL
+ border-left 0.25px solid #f2f2f2
+
 .flexColCenterContainer
   @extend .flexCenterContainer
   flex-direction column
+
+.helpContainer
+  height 100%
+  overflow hidden
+
+.helpContentCont
+  height calc(100% - 110px)
+  overflow auto
 
 .helpHeroContainer 
   height 310px
@@ -135,6 +211,12 @@
   animation-name slideClose
   animation-duration 0.3s
   animation-fill-mode both
+
+.showModal
+  transform translateX(0px)
+
+.hideModal
+  transform translateX(800px)
 
 .contentContainer
   display flex
@@ -296,6 +378,138 @@
   display flex
   flex-direction column
   justify-content space-evenly
+
+.ansContainer
+  padding 0px 10px
+
+.answers
+  margin 10px 0px
+  font-size 13px
+  border-bottom 0
+  overflow hidden
+  height 0
+
+.openedAnswers
+  height auto
+  border-bottom 0.25px solid #f2f2f2
+
+.openedAnswers ul li
+  list-style initial
+
+.modalCont
+  padding 20px
+  font-size 14px
+  display flex
+  flex-direction column
+  height 100%
+
+.modalTitleContainer
+  display flex
+  width 100%
+  justify-content space-between
+
+.categoryCont
+  overflow hidden
+  transition all 0.25s
+
+.myOrderBtn
+  height 30px
+  display flex
+  justify-content center
+  align-items center
+  font-size 12px
+  padding 5px 20px
+  color #ffffff
+  background-color #44689A
+  border-radius 3
+
+.ordersContentContainer
+  height 100%
+  overflow auto
+
+.orderContents
+  display flex
+  justify-content space-between
+  width 100%
+  border-bottom 0.5px solid #f2f2f2
+  padding-bottom 10px
+  margin 10px
+
+.orderItemContainer
+  @extend .facp 
+  min-height 110px
+  padding 10px
+
+.orderItemTitle
+  display flex
+  font-size 14px
+  flex-grow 1
+  padding 10px 20px
+
+.orderIssueContainer
+  display flex
+  flex-direction column
+  align-items center
+
+.orderIssueListContainer
+  padding 10px 0px 0px 0px
+  margin 10px 0px 10px 100px
+
+.backHelp
+  margin 1px
+  font-size 13px
+
+.dropDownArrow
+  position absolute
+  color #c8c6cc
+  right 0
+  top 25%
+  font-size 12px
+
+.fileNameCont
+  width 90%
+  overflow hidden
+  text-overflow ellipsis
+  white-space nowrap
+
+.fileNameDelete
+  width 10%
+  margin 0px 10px
+  cursor pointer
+
+.fileInput
+  opacity 0
+  position absolute
+  top 0
+  right 0
+  width 100%
+  height 100%
+
+.tktClmCont
+  max-height 600px
+  overflow auto
+
+.threadContainer
+  display flex
+  align-items center
+  font-size 14px
+  justify-content space-between
+
+.tktContainer
+  width 100%
+  display flex
+
+.contactIcon
+  margin 10px
+  width 35px
+  height 35px
+  border-radius 50%
+  background-color #8DD7C2
+
+.modalFill
+  height 100%
+  width 100%
+  overflow auto
 
 @keyframes slideOpen {
   from {transform: translateX(800px)}

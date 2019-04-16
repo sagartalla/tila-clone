@@ -48,25 +48,25 @@ const ReplyBox = (props) => {
     setFiles(newFileObj);
   }
   const renderFiles = (fileName, index) => (
-    <div key={String(index)} style={{display: 'flex', justifyContent: 'space-between', width: '250px'}}>
-      <div style={{ width: '90%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
+    <div key={String(index)} className={`${styles['flex']} ${styles['justify-between']} ${styles['wh-250']}`}>
+      <div className={styles['fileNameCont']}>
         <a href={files[fileName]} download={fileName}>{fileName}</a>
       </div>
-      <div style={{width: '10%', margin: '0px 10px', cursor: 'pointer'}} onClick={removeFile(fileName)}>x</div>
+      <div className={styles['fileNameDelete']} onClick={removeFile(fileName)}>x</div>
     </div>
   )
   return(
-    <div style={{ padding: '10px 0px'}}>
+    <div className={styles['pV-10']}>
       <textarea className={styles['MsgTextArea']} placeholder='Reply to this message' value={msg} onChange={handleMsg} />
       <div className={styles['MsgBoxContainer']}>
         <div className={styles['UploadButton']}>
           UPLOAD
-          <input type='file' onChange={handleAttachements} style={{opacity: 0, position: 'absolute', top: 0, right: 0, width: '100%', heignt: '100%'}} />
+          <input type='file' onChange={handleAttachements} className={styles['fileInput']} />
         </div>
         <div onClick={props.updateIncident(msg, files)} className={styles['SendMsgButton']}>SEND MESSAGE</div>
       </div>
       {Object.keys(files).length ? 
-            <div style={{ fontSize: '12px'}}>
+            <div className={styles['fs-12p']}>
               <div>{`Attachments (${Object.keys(files).length})`}</div>
                 {Object.keys(files).map(renderFiles)}
             </div>
@@ -153,10 +153,10 @@ class Incidents extends Component {
     const {id, createdTime, referenceNumber, subject, statusTiLa} = tkt;
     const isSelected = id === this.state.selectedIncident;
     return (
-      <div key={id} onClick={this.selectTicket(id)} className={styles['TktTitleContainer']} style={{ backgroundColor: isSelected ? '#F8F8F8' : 'transparent'}}>
-        <div style={{ fontSize: '14px' }}>{subject}</div>
-        <div style={{ fontSize: '13px', color: '#636363'}}>{referenceNumber}</div>
-        <div style={{ fontSize: '12px', color: '#636363', display: 'flex', justifyContent: 'space-between' }}>
+      <div key={id} onClick={this.selectTicket(id)} className={`${styles['TktTitleContainer']} ${isSelected && styles['openBGColor']}`}>
+        <div className={styles['fs-14p']}>{subject}</div>
+        <div className={`${styles['fs-13p']} ${styles['greyColor']}`}>{referenceNumber}</div>
+        <div className={`${styles['fs-12p']} ${styles['greyColor']} ${styles['flex']} ${styles['justify-between']}`}>
           <div>{new Date(createdTime).toDateString()}</div>
           <div style={{ color: statusColor[statusTiLa] || '#F5A624'}}>{statusTiLa}</div>
         </div>
@@ -167,9 +167,9 @@ class Incidents extends Component {
     const {tktData} = this.props;
     return (
       <div>
-        <h4 style={{padding: '0px 20px'}}>MY TICKETS</h4>
-        <div style={{ maxHeight: '600px', overflow: 'auto'}}>
-          {tktData.length ? tktData.map(this.renderTktTitle) : <div style={{padding: '0px 20px'}}>No Incidents Available</div>}
+        <h4 className={styles['pH-20']}>MY TICKETS</h4>
+        <div className={styles['tktClmCont']}>
+          {tktData.length ? tktData.map(this.renderTktTitle) : <div className={styles['pH-20']}>No Incidents Available</div>}
         </div>
       </div>
     )
@@ -177,21 +177,21 @@ class Incidents extends Component {
   renderThread = (threadObj) => (threadId, index) => {
     const { nameOfPerson, createdTs, msg, threadSequence } = threadObj[threadId];
     return(
-      <div key={threadSequence} style={{ padding: '20px 0px', borderBottom: '0.5px solid #f2f2f2'}}>
-        <div style={{display: 'flex', alignItems: 'center', fontSize: '14px', justifyContent: 'space-between'}}>
-          <div style={{display: 'flex', alignItems: 'center'}}>
+      <div key={threadSequence} className={`${styles['pV-20']} ${styles['bB']}`}>
+        <div className={styles['threadContainer']}>
+          <div className={`${styles['flex']} ${styles['align-center']}`}>
             <div className={styles['userProfile']}/>
             <div>
               <div>{nameOfPerson || 'User'}</div>
-              <div style={{ fontSize: '12px', color: '#98989D'}}>Title</div>
+              <div className={`${styles['fs-12p']} ${styles['greyColor']}`}>Title</div>
             </div>
           </div>
-          <div style={{ fontSize: '12px', color: '#98989D'}}>
+          <div className={`${styles['fs-12p']} ${styles['greyColor']}`}>
             <div>{new Date(createdTs).toDateString()}</div>
             <div>{new Date(createdTs).toLocaleTimeString()}</div>
           </div>
         </div>
-        <div style={{ fontSize: '13px', color: '#98989D'}}>{msg}</div>
+        <div className={`${styles['fs-13p']} ${styles['greyColor']}`}>{msg}</div>
         {index === 0 ? 
           <ReplyBox updateIncident={this.updateIncident} />
         : null}
@@ -218,10 +218,10 @@ class Incidents extends Component {
     const threadIds = Object.keys(threads).sort((a,b) => b - a);
     return(
       <div>
-        <div style={{ padding: '10px 0px'}}>{subject}</div>
+        <div className={styles['pV-10']}>{subject}</div>
         <div>{threadIds.map(this.renderThread(threads))}</div>
         {fileIds.length ? 
-          <div style={{ padding: '10px 0px', fontSize: '14px'}}>
+          <div className={`${styles['pV-10']} ${styles['fs-14p']}`}>
             <div>{`All Attachments (${fileIds.length})`}</div>
             <div>{fileIds.map(this.renderFile(fileAttachments, id))}</div>
           </div>
@@ -235,10 +235,10 @@ class Incidents extends Component {
     const helpCenterUrl = pathname.replace(this.props.query, `faq`)
     return(
       <div>
-        <div style={{margin: '10px 2px', fontSize: '13px'}}>
+        <div className={`${styles['mV-10']} ${styles['mH-5']} ${styles['fs-13p']}`}>
           <a href={helpCenterUrl}>Back to Help Center</a>
         </div>
-        <div style={{ width: '100%', display: 'flex'}}>
+        <div className={styles['tktContainer']}>
           <div className={styles['categoryContainer']}>{this.renderTicketColumn()}</div>
           <div className={styles['answersContainer']}>{this.renderTicketDetail()}</div>
           <div><a href='https://fptsuae.custhelp.com/app/chat/chat_landing' target="_blank" /></div>

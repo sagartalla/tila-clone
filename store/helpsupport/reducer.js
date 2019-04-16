@@ -7,6 +7,7 @@ const initialState = {
   isCategoryLoaded: false,
   questionData: {},
   answerData: {},
+  issueData: {},
   tktData: [],
   tktDetailData: {},
   raiseTktData: {},
@@ -55,6 +56,22 @@ const helpSupportData = typeToReducer({
       return {
         ...state,
         answerData: selectors.computeAnswer(payload.data),
+      };
+    },
+    REJECTED: state => (
+      {
+        ...state,
+      }),
+  },
+  [actions.GET_ISSUES]: {
+    PENDING: state => ({
+      ...state, issueData: {},
+    }),
+    FULFILLED: (state, action) => {
+      const { payload } = action;
+      return {
+        ...state,
+        issueData: selectors.computeAnswer(payload.data),
       };
     },
     REJECTED: state => (

@@ -52,29 +52,27 @@ class Answers extends Component {
     if ((fromParent && !categoryObj.hasParent) || (!fromParent)) {
       return(
         <div key={categoryObj.id} 
-        style={{ borderTop: index !==0 ? '0.25px solid #f2f2f2' : 0, backgroundColor : isOpened ? '#F8F8F8' : 'transparent'}}>
+          className={`${index !==0 && styles['bT']} ${isOpened && styles['openBGColor']}`}
+        >
           <div 
-            className={styles['categoryValue']}
-            style={{
-              fontWeight: fromParent ? '800' : '400',
-              backgroundColor: isSelected ? '#45689A' : 'transparent',
-            }}
+            className={`${styles['categoryValue']} ${isSelected && styles['selectedBG']} ${fromParent && styles['fwBolder']}`}
           >
            {childLength ?
-              <div className={styles['categoryWithChild']} style={{color: isSelected ? '#ffffff' : '#000000'}} onClick={this.openCategory(categoryObj.id)}>
+              <div className={`${styles['categoryWithChild']} ${isSelected && styles['whiteColor']}`} onClick={this.openCategory(categoryObj.id)}>
                 <div>{categoryObj.name}</div>
                 <div>v</div>
               </div>
               : <a 
                   href={this.getUrl(fromParent, categoryId, parentId, childLength ? categoryObj.child[0] : null)} 
-                  style={{color: isSelected ? '#ffffff' : '#000000', fontWeight: isSelected ? '800' : '500'}} 
+                  className={`${isSelected ? `${styles['whiteColor']} ${styles['fwBolder']}` : styles['blackColor']}`}
                 >
                   {categoryObj.name}
                 </a>
             }
           </div>
           {childLength ? 
-          <div style={{ overflow: 'hidden', transition: 'all 0.25s', height: this.state.openedCategory === categoryObj.id ?  (childLength * 55) : 0}}>
+          <div className={styles['categoryCont']}
+            style={{ height: this.state.openedCategory === categoryObj.id ?  (childLength * 55) : 0}}>
             {categoryObj.child.map(this.renderCategories(false, categoryId))}
           </div> : null}
         </div>
@@ -86,7 +84,7 @@ class Answers extends Component {
     const [id, question, ans, categoryId, parentId] = this.props.answerData[answerKey];
     const isOpened = id === this.state.openedAnswer;
     return (
-      <div key={id} style={{ backgroundColor: isOpened ? '#F8F8F8' : '#FFFFFF', padding: '0px 10px'}}>
+      <div key={id} className={`${styles['ansContainer']} ${isOpened && styles['openBGColor']}`}>
         <div 
           onClick={this.openAnswer(id)} 
           dangerouslySetInnerHTML={{__html: question}}
@@ -95,7 +93,7 @@ class Answers extends Component {
         </div>
         <div 
           dangerouslySetInnerHTML={{__html: ans}}
-          style={{ margin: '10px 0px', fontSize: 13, borderBottom: !isOpened ? '0' : '0.25px solid #f2f2f2', overflow: 'hidden', height: isOpened ? '' : 0}} 
+          className={`${styles['answers']} ${isOpened && styles['openedAnswers']}`}
         >
         </div>
       </div>
@@ -107,13 +105,8 @@ class Answers extends Component {
     const ordersUrl = pathname.replace(this.props.query, `answers/orders`)
     return (
       <a 
-        className={styles['categoryValue']} 
         href={ordersUrl}
-        style={{
-          fontWeight: 800,
-          backgroundColor: isSelected ? '#45689A' : 'transparent',
-          color: isSelected ? '#ffffff' : '#000000',
-        }}
+        className={`${styles['categoryValue']} ${styles['fwBolder']} ${isSelected ? `${styles['selectedBG']} ${styles['whiteColor']}` : styles['blackColor']}`}
       >
         Recent Orders
       </a>
@@ -125,7 +118,7 @@ class Answers extends Component {
     const helpCenterUrl = pathname.replace(this.props.query, `faq`)
     return(
       <div>
-        <a href={helpCenterUrl} style={{margin: '1px', fontSize: '13px'}}>Back to Help Center</a>
+        <a href={helpCenterUrl} className={styles['backHelp']}>Back to Help Center</a>
         <div className={styles['contentContainer']}>
           <div className={styles['categoryContainer']}>
             {this.renderRecentOrderTab()}
@@ -135,7 +128,7 @@ class Answers extends Component {
           { this.state.selectedCategory !== 'orders' 
             ? answerKeys.length > 0 ? answerKeys.map(this.renderAnswers) : <div> No Questions Available </div> 
             : 
-              <div style={{ height: '100%'}}>
+              <div className={styles['ht-100P']}>
                 <Orders query={this.props.query} isLoggedIn={this.props.isLoggedIn} renderContactCard={this.props.renderContactCard} handleContactClick={this.props.handleContactClick}/>
               </div>
           }

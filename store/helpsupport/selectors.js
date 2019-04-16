@@ -1,5 +1,13 @@
 /*eslint-disable*/
-
+const orderRelatedCatId = {
+  1: true,
+  2: true,
+  3: true,
+  4: true,
+  5: true,
+  6: true,
+  7: true,
+}
 const computeCategory = (categoryRes) => {
   const { items } = categoryRes;
   const { columnNames, rows: categories } = items[0];
@@ -30,7 +38,7 @@ const computeAnswer = (answerRes) => {
   const { columnNames, rows: answers } = items[0];
   const aObj = answers.reduce((acc, a, i) => ({
     ...acc, 
-    [a[0]]: a
+    [a[0]]: [...a, !!orderRelatedCatId[a[3]]]
     }),{});
   return aObj;
 }
