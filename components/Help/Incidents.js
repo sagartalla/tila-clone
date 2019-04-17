@@ -3,7 +3,10 @@ import React, {Component, useState} from 'react';
 import { connect } from 'react-redux';
 import Cookies from 'universal-cookie';
 import { actionCreators as helpActions } from '../../store/helpsupport';
+import { actionCreators as orderActions} from '../../store/cam/orders';
+import { selectors, actionCreators as orderDetailActions } from '../../store/order';
 import { selectors as authSelectors } from '../../store/auth';
+import constants from '../../constants';
 import { mergeCss } from '../../utils/cssUtil';
 
 const cookies = new Cookies();
@@ -17,12 +20,6 @@ const styles = mergeCss('components/Help/help');
 const statusColor = {
   'New': '#F5A624',
   'Solved': '#AFD75F'
-}
-
-const getBase64 = async (file) => {
-  let fileObj = {};
-  
-  return fileObj;
 }
 
 const ReplyBox = (props) => {
@@ -81,6 +78,7 @@ class Incidents extends Component {
     super(props);
     this.state = {
       selectedIncident: (window.location.hash || '#').split('#')[1],
+      tktOrder: ''
     }
     this.scrollTimeout = '';
     userCredentials && userCredentials.username && this.initiateApiCalls();
@@ -88,6 +86,23 @@ class Incidents extends Component {
   componentWillReceiveProps(nextProps){
     if(nextProps.tktData !== this.props.tktData && nextProps.tktData.length &&!this.props.tktData.length) {
       this.selectTicket(nextProps.tktData[0].id)() 
+    }
+    if(nextProps.tktDetailData !== this.props.tktDetailData) {
+      const { orderNumberTiLa } = nextProps.tktDetailData;
+      if(!!orderNumberTiLa) {
+        const [orderId, orderItemId] = orderNumberTiLa.split('-');
+        this.props.getOrderDetails({orderId}).then(res => {
+          const {data} = res.value;
+          const orderObj = data.order_items.filter(order => order.order_item_ids[0] === orderNumberTiLa)[0];
+          this.setState({
+            tktOrder: orderObj
+          })
+        })
+      } else {
+        this.setState({
+          tktOrder: ''
+        })
+      }
     }
   }
   initiateApiCalls = () => {
@@ -206,8 +221,25 @@ class Incidents extends Component {
       </div>
     )
   }
+  renderOrderItems = (orderItemObj) => {
+    const {order_item_ids, status, variant_info, order_id} = orderItemObj;
+    const { title, image_url } = variant_info;
+    const [order_item_id] = order_item_ids;
+    const orderURL =`/${country}/${language}/cam/orders/${order_id}`
+    return (
+      <div key={order_item_id} className={`${styles['bB']} ${styles['bT']}`}>
+        <div className={`${styles['facp']} ${styles['ht-110']} ${styles['p-10']}`}>
+          <div className={styles['orderImgContainer']}><img className={styles['imgContain']} src={`${constants.mediaDomain}/${image_url}`} /></div>
+          <div className={styles['orderItemTitle']}>{title}</div>
+          <div className={styles['orderIssueContainer']}>
+            <div className={`${styles['m-5']} ${styles['fs-12p']}`}>{`Order Status - ${status} - `}<a href={orderURL}>View detail</a></div>
+          </div>
+        </div>
+      </div>
+    )
+  }
   renderTicketDetail = () => {
-    const { id, referenceNumber, subject, threadTiLaList, statusTiLa, fileAttachmentTiLaList} = this.props.tktDetailData || {};
+    const { id, referenceNumber, subject, threadTiLaList, statusTiLa, fileAttachmentTiLaList, orderNumberTiLa} = this.props.tktDetailData || {};
     const threads = (threadTiLaList || []).reduce((acc, val, i) => {
       return {...acc, [val.threadSequence]: val}
     },{});
@@ -219,6 +251,7 @@ class Incidents extends Component {
     return(
       <div>
         <div className={styles['pV-10']}>{subject}</div>
+        {orderNumberTiLa && (this.state.tktOrder ? this.renderOrderItems(this.state.tktOrder) : <div>Getting order details of {orderNumberTiLa}</div>)}
         <div>{threadIds.map(this.renderThread(threads))}</div>
         {fileIds.length ? 
           <div className={`${styles['pV-10']} ${styles['fs-14p']}`}>
@@ -256,6 +289,8 @@ export default connect(
     updateTktData: state.helpSupportReducer.updateTktData,
     userCredentials: authSelectors.getUserCreds(state)
   }), {
-    ...helpActions
+    ...helpActions,
+    ...orderActions,
+    ...orderDetailActions
   }
 )(Incidents)
