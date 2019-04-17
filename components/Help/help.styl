@@ -279,12 +279,14 @@
   transition all 0.25s
   background-color #fff
   z-index 5
+  max-height: 400px
+  overflow: auto
 
 .dropDownBox-open
   @extends .dropDownBox
   visibility visible
   opacity 1
-  top 30px
+  top 0px
 
 .dropDownBox-close
   @extends .dropDownBox
@@ -312,7 +314,7 @@
   min-height 100px
 
 .modalFormButton
-  margin-top 30px
+  margin-top 20px
   margin-bottom 10px
   text-align center
   cursor pointer

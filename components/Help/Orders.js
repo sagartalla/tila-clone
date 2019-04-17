@@ -36,11 +36,13 @@ class Orders extends Component {
   }
   componentWillReceiveProps(nextProps) {
     if(nextProps.ordersData !== this.props.ordersData) {
-      this.setState({
-        orders: [...this.state.orders, ...nextProps.ordersData.orders],
-        currentOrderPage: nextProps.ordersData.page + 1,
-        totalOrderPages: nextProps.ordersData.total_pages
-      })
+      if(nextProps.ordersData.page + 1 > this.state.currentOrderPage){
+        this.setState({
+          orders: [...this.state.orders, ...nextProps.ordersData.orders],
+          currentOrderPage: nextProps.ordersData.page + 1,
+          totalOrderPages: nextProps.ordersData.total_pages
+        })
+      }
     }
     if(nextProps.ordersDetailData !== this.props.ordersDetailData && nextProps.ordersDetailData.order_id && nextProps.ordersDetailData.order_id === this.orderId) {
       this.setState({
@@ -87,8 +89,8 @@ class Orders extends Component {
   renderIssues = (orderItemId) => (issueKey) => {
     const [id, q, a, catId, parentId, orderRelated] = this.props.issueData[issueKey]
     const issueId = `${orderItemId}-${id}`
-    const isSelected = this.state.selectedIssue.id === id;
-    const issueObj = {id, q, a, catId, parentId, orderRelated}
+    const isSelected = this.state.selectedIssue.issueId === issueId;
+    const issueObj = {id, q, a, catId, parentId, orderRelated, issueId}
     return (
       orderRelated ?
       <div key={id} 

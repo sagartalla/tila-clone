@@ -224,7 +224,7 @@ class EmailModal extends Component {
                   <input type="text" name="lastname" value={lastname} onChange={this.handleUserInfoChange} />
                 </div>
               }
-              <div className={styles['pV-30']}>
+              <div className={styles['pV-20']}>
                 <div className={styles['formLabel']}>Select an Issue</div>
                 <div className={styles['relative']}>
                   <div tabIndex={0} onBlur={this.handleDropDown('')} onClick={this.handleDropDown('issue')}
@@ -240,7 +240,7 @@ class EmailModal extends Component {
                 </div>
               </div>
               {selectedIssue && selectedIssue.orderRelated ?
-                <div className={styles['pV-30']}>
+                <div className={styles['pV-20']}>
                   <div className={styles['formLabel']}>Select an Order</div>
                   <div className={styles['relative']}>
                     <div tabIndex={1} onBlur={this.handleDropDown('')} onClick={this.handleDropDown('order')}
@@ -258,7 +258,7 @@ class EmailModal extends Component {
                 </div>
                 : null}
               {this.props.type === "email" ?
-                <div className={styles['pV-30']}>
+                <div className={styles['pV-20']}>
                   <div className={styles['formLabel']}>Write a Message</div>
                   <textarea
                     value={this.state.msg}
