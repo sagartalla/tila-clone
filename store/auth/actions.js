@@ -43,10 +43,9 @@ const actionCreators = {
     dispatch(actionCreators.getUserInfoData({initiateEmailVerification: params.channel === 'BASIC_REGISTER'})).then((res) => {
       if(params.channel !== 'BASIC_REGISTER') {
         if (res && res.value && res.value.data && res.value.data.email_verified === 'NV') {
-          dispatch(actionCreators.setVerfied(false))/*.then(() => dispatch(actionCreators.getLoginInfo()));*/
-          dispatch(actionCreators.sendOtpToEmailId(false));
+          dispatch(actionCreators.setVerfied(false));
         } else {
-          dispatch(actionCreators.setVerfied(true))/*.then(() => dispatch(actionCreators.getLoginInfo()));*/
+          dispatch(actionCreators.setVerfied(true));
         }
       }
       return res;
