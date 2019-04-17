@@ -159,6 +159,18 @@ const getProducts = (brand = '') => {
 
   return axios.get(`${constants.SEARCH_API_URL}/search?query=${escape(JSON.stringify(options))}`);
 };
+const track = (params) => {
+  window.appEventData.push({
+    event: params.eventName,
+    product: [
+      {
+        productInfo: {
+          productID: params.params.productId,
+        },
+      },
+    ],
+  });
+};
 
 export default {
   addToCompare,
@@ -167,4 +179,5 @@ export default {
   removeCompareData,
   getBrands,
   getProducts,
+  track,
 };
