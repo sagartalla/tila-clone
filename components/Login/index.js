@@ -65,6 +65,7 @@ class Login extends Component {
     let { userCreds, error, showEmailScreen } = nextProps;
     userCreds = userCreds || this.props.userCreds;
     if (error) {
+      this.props.track('SignIn', error);
       this.setState({
         error,
       });
@@ -164,6 +165,7 @@ class Login extends Component {
       }
       this.props.resetLoginError();
     } else {
+      this.props.track('SignIn', 'password length error');
       console.log('password Error');
     }
     this.setState({ validation });
@@ -404,7 +406,7 @@ class Login extends Component {
   }
 }
 
-const mapStateToProps = (store) => ({
+const mapStateToProps = store => ({
   error: selectors.getErrorMessege(store),
   userCreds: selectors.getUserCreds(store),
   showEmailScreen: selectors.showEmailVerificationScreen(store),
@@ -412,11 +414,12 @@ const mapStateToProps = (store) => ({
   loadingStatus: selectors.getLoadingStatus(store),
 });
 
-const mapDispatchToProps = (dispatch) => bindActionCreators(
+const mapDispatchToProps = dispatch => bindActionCreators(
   {
     userLogin: actionCreators.userLogin,
     getLoginInfo: actionCreators.getLoginInfo,
     resetLoginError: actionCreators.resetLoginError,
+    track: actionCreators.track,
   },
   dispatch,
 );
