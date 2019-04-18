@@ -81,9 +81,11 @@ const track = (params) => {
 };
 
 const getCities = (code) => {
-  return axios.get(`${constants.TRANSFORMER_API_URL}/fpts/geolocation/city_by_code?iso_3=${code}`);
-}
+  return axios.get(`${constants.TRANSFORMER_API_URL}/fpts/geolocation/city_by_code?iso_${code.length}=${code}`);
+};
+
+const getCountries = () => axios.get(`${constants.TRANSFORMER_API_URL}/fpts/geolocation/country`);
 
 export default {
-  getProduct, getPreview, getReviewRatings,submitUserReview, setSelectedVariant, getCities, track,
+  getProduct, getPreview, getReviewRatings,submitUserReview, setSelectedVariant, getCities, track, getCountries,
 };

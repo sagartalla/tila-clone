@@ -8,7 +8,9 @@ const actions = {
   SET_SELECTED_VARIANT: 'SET_SELECTED_VARIANT',
   SET_SELECTED_PRODUCT_DATA: 'SET_SELECTED_PRODUCT_DATA',
   GET_CITIES: 'GET_CITIES',
+  GET_COUNTRIES: 'GET_COUNTRIES',
   AUTOCOMPLETE_CITY: 'AUTOCOMPLETE_CITY',
+  AUTOCOMPLETE_COUNTRY: 'AUTOCOMPLETE_COUNTRY',
 };
 
 const actionCreators = {
@@ -52,6 +54,11 @@ const actionCreators = {
       payload: api.track(params),
     };
   },
+
+  getCountries: () => ({
+    type: actions.GET_COUNTRIES,
+    payload: api.getCountries(),
+  }),
   getCitiesByCountryCode: (code) => {
     return ({
       type: actions.GET_CITIES,
@@ -64,6 +71,10 @@ const actionCreators = {
       searchKeyWord,
     });
   },
+  autoCompleteCoutry: searchKeyWord => ({
+    type: actions.AUTOCOMPLETE_COUNTRY,
+    searchKeyWord,
+  }),
 };
 
 export { actions, actionCreators };

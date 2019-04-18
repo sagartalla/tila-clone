@@ -144,7 +144,9 @@ const setVerfied = isVerified => axios.post('/api/setCookie', {
   },
 }).then(() => isVerified);
 
+const getDomainCountries = () => axios.get(`${constants.TRANSFORMER_API_URL}/fpts/domainCurrencyMapping`);
+
 export default {
-  userLogin, userLogout, getLoginInfo, setCountry, setSessionID, deriveCity, setCity, removeCity,
-  setLanguage, savePtaToken, verifyEmail, sendOtpToEmailId, getUserInfo, setVerfied, track,
+  userLogin, userLogout, getLoginInfo, setCountry, setSessionID, deriveCity, setCity, getDomainCountries,
+  removeCity, setLanguage, savePtaToken, verifyEmail, sendOtpToEmailId, getUserInfo, setVerfied,
 };

@@ -1,3 +1,4 @@
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
@@ -25,10 +26,9 @@ const initialState = {
   boxText: <span className={`${styles['fs-12']} ${styles['pt-20']}`}>{PAYMENT_PAGE.DROP_THE_ANSWER_INTO_BOX}</span>,
 }
 
-class Captcha extends React.Component{
+class Captcha extends React.Component {
   constructor() {
     super();
-    debugger;
     this.state = { checked: false,
       continueButton: null,
       ...initialState
