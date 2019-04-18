@@ -58,7 +58,7 @@ class Search extends Component {
       <div>
         <HeaderBar />
         <Grid className={styles['pt-20']}>
-          {spellCheckResp &&
+          {/* {spellCheckResp &&
             <div className={`${styles['mb-15']} ${styles['spell-strip']}`}>
               {SEARCH_PAGE.SEARCH_RESULTS_FOR}&nbsp;
               <a
@@ -77,13 +77,13 @@ class Search extends Component {
                 <b>{`${query.search}`}</b>
               </a>
             </div>
-          }
+          } */}
           <Col md={2} onClick={onClickMenuHandle} className={`${styles['filter-panel']} ${styles['mr-10']} ${styles['float-l']} ${styles['border-radius4']} ${styles['bg-white']} ${styles['p-0']}`}>
             <NoSSR>
               <CategoriesAndFacets />
             </NoSSR>
           </Col>
-          <Col md={10} className={`${styles['search-results']} ${styles['p-0']}`}>
+          <Col md={10} className={`${styles['search-results']}`}>
             <SearchDetailsBar />
             <SearchResults  search={query.search}/>
           </Col>

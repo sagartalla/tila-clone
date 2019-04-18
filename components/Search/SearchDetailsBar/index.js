@@ -29,6 +29,11 @@ class SearchDetailsBar extends Component {
     this.handleWaypointLeave = this.handleWaypointLeave.bind(this);
   }
 
+  querySearch = (e) => {
+    let dataSearchQuery = e.currentTarget.dataset.querysearch;
+    Router.pushRoute(`/${country}/${language}/srp?search=${dataSearchQuery}&disableSpellCheck=true&${Object.entries(this.props.optionalParams).map(([key, val]) => `${key}=${val}`).join('&')}`);
+  }
+
   handleWaypointEnter() {
     this.props.hideSearchBarFitlers();
   }
@@ -38,15 +43,32 @@ class SearchDetailsBar extends Component {
   }
 
   render() {
-    const { results, query, categoryId,categoryQuery } = this.props;
+    const { results, query, categoryId,categoryQuery, spellCheckResp } = this.props;
     const finalQuery = query || categoryQuery;
+    console.log(spellCheckResp);
     return (
       <Waypoint onEnter={this.handleWaypointEnter} onLeave={this.handleWaypointLeave}>
         <div className={styles['search-results-wrap']}>
           <Fragment>
-              <div className={`${styles['flx-space-bw']} ${styles['pb-10']} ${styles['items-list-show']} ${styles['ipad-flex-clm']}`}>
-                <h4 className={`${styles['meta-info']} ${styles['mt-0']} ${styles['mb-0']} ${styles['fontW300']}`}>{results.totalCount} {SEARCH_PAGE.NO_OF_ITEMS_FOUND_FOR} <h1 className={styles['no-h1']}>{finalQuery && finalQuery.split('-').join(' ')}</h1></h4>
-                <div className={`${styles['flx-spacebw-alignc']} ${styles['deliver-to-main']}`}>
+              <div className={`${styles['flx-space-bw']} ${styles['pb-15']} ${styles['items-list-show']} ${styles['ipad-flex-clm']}`}>
+                <div className={styles['flex-center']}>
+                  <h4 className={`${styles['meta-info']} ${styles['mt-0']} ${styles['mb-0']} ${styles['pr-10']} ${styles['fontW300']}`}>
+                  {
+                    spellCheckResp ? 
+                    <a href="javascript: void(0)" onClick={this.querySearch} className={`${styles['black-color']} ${styles['fontW600']}`} data-querysearch={spellCheckResp[query]}>
+                      <b>{`${spellCheckResp[query]}`}</b>
+                    </a> : <h1 className={styles['no-h1']}>{finalQuery && finalQuery.split('-').join(' ')}</h1>
+                  }
+                  
+                    <span className={`${styles['pl-5']} ${styles['pr-5']}`}>{ results.totalCount }</span> { SEARCH_PAGE.SEARCH_ITEMS } ,
+                    {/* <h1 className={styles['no-h1']}>{finalQuery && finalQuery.split('-').join(' ')}</h1> */}
+                  </h4>
+                  { 
+                    spellCheckResp &&
+                    <h4><span>You entered:</span> <span>{finalQuery && finalQuery.split('-').join(' ')}</span> </h4>
+                  }
+                </div>
+                <div className={`${styles['flex']} ${styles['deliver-to-main']}`}>
                   <GeoWidget />
                   <SortByWidget />
                 </div>
@@ -80,6 +102,8 @@ const mapStateToProps = (store) => ({
   categoryQuery:selectors.getCategorySearchQuery(store),
   results: selectors.getSearchResutls(store),
   ui: selectors.getUIState(store),
+  spellCheckResp:selectors.getSpellCheckResponse(store),
+  optionalParams: selectors.optionParams(store)
 });
 
 const mapDispatchToProps = dispatch => {

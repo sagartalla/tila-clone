@@ -129,7 +129,7 @@ class GeoWidget extends Component {
           className={styles['auto-suggestions-wrap']}
           ref={(el) => { this.filterRef = el; }}
         >
-          <input type="text" value={this.state.displayCity} className={styles['fs-12']} onChange={this.onChangeCity} />
+          <input type="text" value={this.state.displayCity} className={`${styles['fs-12']} ${styles['delivery-input']}`} onChange={this.onChangeCity} />
           {
             <div className={`${styles['auto-suggestions-list']}`}>
               {showCitiesData && getAllCities.map(result =>
