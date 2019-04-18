@@ -178,6 +178,7 @@ export const AR_KEYWORDS = {
     'NOTIFY_ME': 'Notify Me',
     'BUY_FOR': 'BUY FOR',
     'ADDED_TO_CART': 'أضف إلى سلة المشتريات',
+    'IN_CART' : 'IN CART',    
     // //New keys
     'GO_TO_CART': 'Go To Cart',
     'LIKE': 'Like',

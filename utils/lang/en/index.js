@@ -179,6 +179,7 @@ export const EN_KEYWORDS = {
     'NOTIFY_ME': 'Notify Me',
     'BUY_FOR': 'BUY FOR',
     'ADDED_TO_CART': 'In Cart',
+    'IN_CART' : 'IN CART',
     // //New keys
     'GO_TO_CART': 'Go To Cart',
     'LIKE': 'Like',
