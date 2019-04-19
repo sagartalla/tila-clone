@@ -44,7 +44,7 @@ const AddressNew = (props) => {
               <span className={styles.bar} />
               <label>{DELIVERY_ADDR_PAGE.FIRST_NAME}</label>
               {
-                validation.first_name.message
+                validation.first_name && validation.first_name.message
                   ?
                     <span className={`${styles['error-msg']}`}>{validation.first_name.message}</span>
                   :
@@ -59,7 +59,7 @@ const AddressNew = (props) => {
               <span className={styles.bar} />
               <label>{DELIVERY_ADDR_PAGE.LAST_NAME}</label>
               {
-                validation.last_name.message
+                validation.last_name && validation.last_name.message
                   ?
                     <span className={`${styles['error-msg']}`}>{validation.last_name.message}</span>
                   :
@@ -74,7 +74,7 @@ const AddressNew = (props) => {
               <span className={styles.bar} />
               <label>{DELIVERY_ADDR_PAGE.FLAT_HOUSE_NO}</label>
               {
-                validation.address_line_1.message
+                validation.address_line_1 && validation.address_line_1.message
                   ?
                     <span className={`${styles['error-msg']}`}>{validation.address_line_1.message}</span>
                   :
@@ -101,7 +101,7 @@ const AddressNew = (props) => {
                 </div>
               }
               {
-                validation.country_name.message
+                validation.country_name && validation.country_name.message
                   ?
                     <span className={`${styles['error-msg']}`}>{validation.country_name.message}</span>
                   :
@@ -130,7 +130,7 @@ const AddressNew = (props) => {
                 </div>
               }
               {
-                validation.city.message
+                validation.city && validation.city.message
                   ?
                     <span className={`${styles['error-msg']}`}>{validation.city.message}</span>
                   :
@@ -145,7 +145,7 @@ const AddressNew = (props) => {
               <span className={styles.bar} />
               <label>{DELIVERY_ADDR_PAGE.LANDMARK}</label>
               {
-                validation.address_line_2.message
+                validation.address_line_2 && validation.address_line_2.message
                   ?
                     <span className={`${styles['error-msg']}`}>{validation.address_line_2.message}</span>
                   :

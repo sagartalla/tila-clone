@@ -86,7 +86,9 @@ class Country extends Component {
       country,
       city: obj.city.code,
       displayCity: obj.city[lang === 'en' ? 'city_name' : 'city_name_ar'],
-    }).then(() => Router.pushRoute(`${window.location.origin}/${country}/${language}/${page}${search}`));
+    }).then(() => {
+      window.location = `${window.location.origin}/${country}/${language}/${page}${search}`
+    });
   }
 
   render() {
