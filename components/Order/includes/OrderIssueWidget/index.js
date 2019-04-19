@@ -9,11 +9,16 @@ import { ORDER_ISSUE_STEPS as STEPS, ORDER_ISSUE_TYPES } from '../../constants';
 
 import { selectors, actionCreators } from '../../../../store/order';
 
-import { mergeCss } from '../../../../utils/cssUtil';
-const styles = mergeCss('components/Order/includes/OrderIssueWidget/orderIssue');
+import lang from '../../../../utils/language';
+
+import styles_en from './orderIssue_en.styl';
+import styles_ar from './orderIssue_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 
 const OrderIssueWidget = ({orderIssue, resetOrderIssue}) => {
-  const { step } = orderIssue;
+  const { step,issueType } = orderIssue;
 
   const getTitle = (step) => {
       const { issueType } = orderIssue;
@@ -44,7 +49,7 @@ const OrderIssueWidget = ({orderIssue, resetOrderIssue}) => {
   return (
     <div className={styles['order-issue-wrap']}>
     {
-      step
+      step && issueType === 'CANCEL'
       ?
       <div className={styles['back-drop']}>
         <div className={`${styles['widget-cont']} ${styles['box']} ${styles['p-0']} ${styles['middle']} ${styles['center']}`}>

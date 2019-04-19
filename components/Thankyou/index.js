@@ -1,37 +1,51 @@
-import React, { Component, Fragment } from 'react';
-import PropTypes from 'prop-types';
-import { Grid } from 'react-bootstrap';
-
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-// import { actionCreators, selectors } from '../../store/thankyou';
 
 import { selectors, actionCreators } from '../../store/order';
 
 import PaymentStatus from './includes/PaymentStatus';
-import PaymentHeader from '../Payments/includes/PaymentHeader';
-// import Summary from './includes/Summary';
-// import OrderList from './includes/OrderList';
 import OrderDetails from '../Order/includes/OrderDetails';
+import HeaderBar from '../HeaderBar';
 
+import lang from '../../utils/language';
 
-import { mergeCss } from '../../utils/cssUtil';
-const styles = mergeCss('components/Thankyou/thankyou');
+import styles_en from './thankyou_en.styl';
+import styles_ar from './thankyou_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 class Thankyou extends Component {
   constructor(props) {
     super(props);
     this.state = {
       status: 'SUCCESSFUL',
-      orderId: ''
+      orderId: '',
     };
   }
 
   componentDidMount() {
-    const { orderId, getOrderDetails, status } = this.props;
-    this.setState({ status })
-    if (status == 'SUCCESSFUL') {
-      getOrderDetails({ orderId: orderId });
+    const {
+      orderId, getOrderDetails, status, track,
+    } = this.props;
+    window.dataLayer.push({
+      event: 'purchase',
+    });
+    this.setState({ status });
+    getOrderDetails({ orderId }).then((res) => {
+      const { data } = res.value;
+      if (res.value.status === 200) {
+        track({
+          event: 'Order Placed',
+          orderData: data,
+        });
+      }
+    });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if ((nextProps.orderData.status && nextProps.orderData.status !== 'CONFIRMED') && (window.location.href.indexOf('FAILED') === -1)) {
+      window.location = window.location.href.replace('SUCCESSFUL', 'FAILED');
     }
   }
 
@@ -40,40 +54,36 @@ class Thankyou extends Component {
     const { status } = this.state;
 
     return (
-      <div className={styles['thankyou']}>
-        <PaymentHeader />
-        {/* <Grid> */}
-        <PaymentStatus status={status} orderId={orderId} />
+      <div className={styles.thankyou}>
+        <HeaderBar hideSearch hideMegamenu />
+        <PaymentStatus
+          status={status}
+          orderId={orderId}
+        />
         {
-          status == 'SUCCESSFUL' && orderData.orderItems.length ?
-            <OrderDetails query={query} orderData={orderData} thankyouPage={true} />
+          orderData.orderItems.length ?
+            <OrderDetails
+              query={query}
+              orderData={orderData}
+              thankyouPage
+            />
             : null
         }
-        {/* </Grid> */}
       </div>
-    )
+    );
   }
 }
 
-const mapStateToProps = (store) => {
-  return ({
-    orderData: selectors.getOrderDetails(store)
-  })
-};
+const mapStateToProps = store => ({
+  orderData: selectors.getOrderDetails(store),
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({
-    getOrderDetails: actionCreators.getOrderDetails
+const mapDispatchToProps = dispatch => bindActionCreators(
+  {
+    getOrderDetails: actionCreators.getOrderDetails,
+    track: actionCreators.track,
   },
-    dispatch,
-  );
-}
-
-// Thankyou.propTypes = {
-//   orderDetails: PropTypes.object.isRequired,
-//   orderId: PropTypes.string.isRequired,
-//   status: PropTypes.string.isRequired,
-//   getOrderStatusDetails: PropTypes.func.isRequired,
-// };
+  dispatch,
+);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Thankyou);

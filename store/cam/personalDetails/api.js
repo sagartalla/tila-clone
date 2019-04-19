@@ -19,6 +19,39 @@ const changePassword = (body) => {
   })
 };
 
+const resetPassword = (body) => {
+  return axios.post(`${constants.CMS_API_URL}/api/v1/user/password/reset`, body).then((data) => {
+    return data;
+  }).catch((error) => {
+    return error.response.data;
+  })
+}
+
+const forgotPassword = (body) => {
+  return axios.post(`${constants.CMS_API_URL}/api/v1/user/password/forgot`, body).then(({data}) => {
+    return data;
+  }).catch((error) => {
+    return error.response.data;
+  });
+}
+
+const otpUserUpdate = async(params) => {
+  try {
+    const update = await axios.put(`${constants.CMS_API_URL}/api/v1/user/update`,params)
+    const otpResponse = await sendOtpToMobile()
+
+    return update
+  }catch(error) {
+    return error.response.data
+  }
+}
+const sendOtpToMobile = async() => {
+  const response =  await axios.post(`${constants.CMS_API_URL}/api/v1/verification/mobile`)
+  return response
+}
+const verifyOtp = (params) => {
+  return axios.put(`${constants.CMS_API_URL}/api/v1/verification/mobile/otp`,params)
+}
 const editPersonalInfo = (body) => {
   return axios.put(`${constants.CMS_API_URL}/api/v1/user/account/edit`, body).then(({ data }) => {
     return axios.get(`${constants.CMS_API_URL}/api/v1/user/account/details`).then(userInfoResult=> [data,userInfoResult]);
@@ -29,6 +62,10 @@ const editPersonalInfo = (body) => {
   });
 }
 
+const deactivateUserProfile = () =>
+  axios.put(`${constants.CMS_API_URL}/api/v1/user/deactivate/`);
 
-
-export default { getUserProfileInfo, changePassword , editPersonalInfo};
+export default {
+  getUserProfileInfo, changePassword, forgotPassword, editPersonalInfo,
+  deactivateUserProfile, resetPassword, otpUserUpdate, verifyOtp,sendOtpToMobile
+};

@@ -6,15 +6,20 @@ import SVGComponent from '../../common/SVGComponet';
 import ShippingAddress from '../../Cam/ShippingAddress';
 import { languageDefinations } from '../../../utils/lang/';
 
-import { mergeCss } from '../../../utils/cssUtil';
-const styles = mergeCss('components/Payments/payment');
+import lang from '../../../utils/language';
+
+import styles_en from '../payment_en.styl';
+import styles_ar from '../payment_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 const { DELIVERY_ADDR_PAGE } = languageDefinations();
 
 const DeliveryAddress = props => {
   const { configJson, defaultAddress, handleShippingAddressContinue, editAddressTab } = props;
-  
+
   return (
-    <div className={`${styles['pb-15']} ${styles['pt-15']} ${styles['pl-35']} ${styles['pr-35']} ${styles['box']} ${styles['mb-20']} ${styles['relative']}`}>
+    <div className={`${styles['delivery-adress-prt']} ${styles['box']} ${styles['mb-20']} ${styles['relative']}`}>
       <SVGComponent clsName={`${styles['map-address']} ${configJson.done ? 'done' : ''} ${configJson.progress ? 'payment-active' : ''}`} src="icons/map/address" />
       <Row className={`${configJson.basic || configJson.done ? '' : 'hide'}`}>
         <Col md={6} sm={12} xs={12}>
@@ -23,7 +28,7 @@ const DeliveryAddress = props => {
             <small>{DELIVERY_ADDR_PAGE.SUB_TAG}</small>
           </p>
         </Col>
-        <Col md={4} sm={12} xs={12} className={`${configJson.done ? '' : 'hide'} ${styles['t-rt']} ${styles['thin-border-right']}`}>
+        <Col md={4} sm={12} xs={7} className={`${configJson.done ? '' : 'hide'} ${styles['t-rt']} ${styles['m-tn-l']} ${styles['thin-border-right']}`}>
           {
             defaultAddress && defaultAddress.length > 0 ?
               <div>
@@ -35,7 +40,7 @@ const DeliveryAddress = props => {
               : null
           }
         </Col>
-        <Col md={2} sm={12} xs={12} className={`${configJson.done ? '' : 'hide'} ${styles['t-rt']} ${styles['pl-0']}`}>
+        <Col md={2} sm={12} xs={5} className={`${configJson.done ? '' : 'hide'} ${styles['t-rt']} ${styles['pl-0']}`}>
           <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']}`} onClick={editAddressTab}>
             {DELIVERY_ADDR_PAGE.EDIT}
           </button>
@@ -68,4 +73,3 @@ DeliveryAddress.defaultProps = {
 }
 
 export default DeliveryAddress;
-

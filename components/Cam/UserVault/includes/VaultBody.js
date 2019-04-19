@@ -4,9 +4,12 @@ import { Row, Col } from 'react-bootstrap';
 
 import SVGComponent from '../../../common/SVGComponet';
 import { languageDefinations } from '../../../../utils/lang/';
+import lang from '../../../../utils/language';
 
-import { mergeCss } from '../../../../utils/cssUtil';
-const styles = mergeCss('components/Cam/UserVault/uservault');
+import styles_en from '../uservault_en.styl';
+import styles_ar from '../uservault_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 class VaultBody extends Component {
 
@@ -15,7 +18,9 @@ class VaultBody extends Component {
   }
 
   deleteCard(token) {
-    this.props.deleteCard(token);
+    let confirmCardDelete = confirm("Are you sure you want to delete this card?");
+    confirmCardDelete ?
+    this.props.deleteCard(token) : null;
   }
 
   paymentCardIcon(provider_type) {

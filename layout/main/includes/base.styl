@@ -3,7 +3,7 @@
 * { box-sizing:border-box; }
 
 html
-  font-size 14px
+  font-size 1vmax
   font-family ProximaNova
 
 body
@@ -52,7 +52,10 @@ input[type=text],input[type=password], input[type=email]
   border-bottom 1px solid light-border
   // box-shadow none !important
   border-radius 0 !important
-
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button
+    -webkit-appearance none
+    margin 0
 /* font sizes */
 // it will generate fonts from fs-10, fs-12, fs-14, ...., to fs-40.
 for i in range(10px, 46px, 2)
@@ -73,7 +76,7 @@ mrgpad(types=margin padding margin-left margin-right margin-top margin-bottom  p
   margin-top unit(n/base-px, rem) if margin-top in types
   margin-bottom unit(n/base-px, rem) if margin-bottom in types
 
-for x in range(0px, 40px, 5)
+for x in range(0px, 80px, 5)
   .m-{x}
     mrgpad(margin, x)
 
@@ -125,7 +128,17 @@ for x in range(0px, 40px, 5)
 .p-10-40
   padding 10px 40px
 
+
 //height
+.ht-100P
+  height 100%
+
+.ht-35
+  height 35px
+
+.ht-40
+  height 40px
+
 .ht-100
   height 100px
 
@@ -135,16 +148,25 @@ for x in range(0px, 40px, 5)
 .ht-170
   height 170px
 
+.ht-240
+  height 240px
+
 .ht-290
   height 290px
 
 .ht-100per
   height 100%
 
+.ht-80per
+  height 80%
+
 .main-layout
   min-height 100vh
   height 100px
-
+.fl-rt
+  float right
+.cl-bth
+  clear both
 .t-rt
   text-align right
 .t-lt
@@ -152,7 +174,30 @@ for x in range(0px, 40px, 5)
 .t-c
   text-align center
 
+.align-center
+  align-items center
+
+.align-end
+  align-items flex-end
+.justify-around
+   justify-content space-around
+
+.justify-between
+   justify-content space-between
+
+.justify-end
+   justify-content flex-end
+
+.flex-col
+   flex-direction column
+
+.flex-row
+   flex-direction row-reverse
+
 //line height part
+.align-baseline
+  align-items baseline
+
 .lne-ht1
   line-height 1
 
@@ -168,6 +213,9 @@ for x in range(0px, 40px, 5)
 
 .thick-gry-clr
   color base-font
+
+.thick-red-clr
+  color thick-red-arrow
 
 .pink-clr
   color pink-color
@@ -187,6 +235,9 @@ for x in range(0px, 40px, 5)
 .light-gray
   color light-gray
 
+.label-light-grey
+  color label-light-grey
+
 .facebook-clr
   color facebook-color
 
@@ -198,6 +249,9 @@ for x in range(0px, 40px, 5)
 
 .google-clr
  color google-red
+
+.success-green
+  color generic-green-color
 
 .thck-gry-rt-border
   border-right 1px solid dottes-gry-clr
@@ -219,7 +273,7 @@ for x in range(0px, 40px, 5)
   font-family ProximaNova-Light
 
 .fontW700
-  font-weight 700
+  font-family ProximaNova
 
 .fontW600
   font-family ProximaNova-Bold
@@ -228,14 +282,26 @@ for x in range(0px, 40px, 5)
 .width100
   width 100%
 
+.width55
+  width 55%
+
 .width63
   width 63%
+
+.width50
+  width 50%
 
 .width33
   width 33%
 
+.width35
+  width 35%
+
 .width21
   width 21%
+
+.width70
+  width 70%
 
 //border
 .border
@@ -253,13 +319,29 @@ for x in range(0px, 40px, 5)
 .border-rt
   border-right 1px solid light-gray
 
+.border-lt
+  border-left 1px solid light-gray
+
+.border-lt-green
+  border-left 1px solid generic-green-color
+
+
 .thick-border-btm
   border-bottom 1px solid light-gray-color
+
+.thick-border-bottom
+  border-bottom 4px solid #fff;
 
 .thick-border-left
   border-left 1px solid thck-gry-clr
 
-.think-pink-bdr-rgt
+.thick-border-top
+  border-top 1px solid thck-gry-clr
+
+.thick-border-right
+  border-right 1px solid thck-gry-clr
+
+.thick-bdr-rgt
   border-left 4px solid border-pink
 
 .thin-border-right
@@ -276,6 +358,12 @@ for x in range(0px, 40px, 5)
 
 .bg-light-gray
   background light-gray-color
+
+.bg-thick-blue
+  background thick-blue
+
+.bg-thick-red-clr
+  background thick-red-arrow
 
 .facebook-blue-color
   border 1px solid facebook-color
@@ -299,6 +387,9 @@ for x in range(0px, 40px, 5)
 
 .border-radius4
   border-radius 4px
+
+.border-radius12
+  border-radius 12px
 
 .border-rt-rb-0
   border-top-right-radius: 0 !important;
@@ -339,3 +430,99 @@ for x in range(0px, 40px, 5)
 
 .fixed
   position fixed
+
+.electronics
+  .thick-bdr-rgt, .thick-border-bottom
+    border-color electronics-color
+
+.fashion
+  .thick-bdr-rgt, .thick-border-bottom
+    border-color fashion-color
+
+.lifestyle
+  .thick-bdr-rgt, .thick-border-bottom
+    border-color lifestyle-color
+
+.textColor
+    color: ash-color
+
+.object-scale-down
+  object-fit scale-down;
+
+.lable
+  background light-gray-color
+
+.cross-strike-red::after
+  content: ''
+  border-top 1px solid thick-red-arrow
+  width 100%
+  position absolute
+  transform rotateZ(-15deg)
+  transform-origin center center
+  top 16px
+  left -3px
+
+.table
+  display table
+
+.t-row
+  display table-row
+
+.t-cell
+  display table-cell
+
+.total-amount
+  background light-gray-color
+  height 3em
+  div
+    vertical-align middle
+
+.overall-amount
+  border-radius 3px
+  border solid 1px yellow-color
+  background-color: light-yellow-color
+
+.resize-none
+  resize none
+
+.no-h1
+  font-size: initial;
+  display: inline;
+  font-family: ProximaNova-Bold;
+
+
+.checkout-quat
+  background white
+  box-shadow 0 0.5px 0.5px rgba(0,0,0,0.5)
+  padding 5px
+  border-radius 17px
+  height 17px
+  width 17px
+  margin-left 5px
+  color thick-blue
+  cursor pointer
+
+.hoverBlueBackground
+   background-color light-navy-blue
+
+.notifyBackground
+   background-color navy-blue
+
+.right0
+  right 0
+
+.help-icon
+  width: 15px;
+  height: 15px;
+
+.right0
+  right 0
+
+.left0
+  left 0
+
+.top0
+  top 0
+
+.bottom0
+  bottom 0

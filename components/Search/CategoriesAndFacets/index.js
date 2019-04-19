@@ -6,10 +6,16 @@ import { decode, encode, addUrlProps, replaceInUrlQuery } from 'react-url-query'
 import { actionCreators, selectors } from '../../../store/search';
 import { PanelGroup, Panel } from 'react-bootstrap';
 import CheckboxFacet from './CheckboxFacet';
+import ExcludeOOS from './ExcludeOOS';
 import LinkFacet from './LinkFacet';
 import RangeFitler from './RangeFacet';
-import { mergeCss } from '../../../utils/cssUtil';
-const styles = mergeCss('components/Search/search');
+
+import lang from '../../../utils/language';
+
+import styles_en from '../search_en.styl';
+import styles_ar from '../search_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 class CategoriesAndFacets extends Component {
   constructor(props) {
@@ -20,26 +26,27 @@ class CategoriesAndFacets extends Component {
 
   onChangeHandle(facetName, facetType) {
     const curryHandler = (value, e) => {
-      const params = this.props.facets || {};
+      const params = JSON.parse(decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent('facets').replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1")) || '{}');
       params[facetName] = params[facetName] || [];
-      if (facetType === 'PERCENTILE') {
-        params[facetName] = [value];
+      digitalData.filter['leftnavfilters'] = `${facetName}:${value.name}`
+      // if (facetType === 'PERCENTILE') {
+      //   params[facetName] = [value];
+      // } else {
+      if (e.target.checked) {
+        params[facetName].push(value);
       } else {
-        if (e.target.checked) {
-          params[facetName].push(value);
-        } else {
-          params[facetName].splice(params[facetName].indexOf(value), 1);
-          if (!params[facetName].length) { delete params[facetName]; }
-        }
+        params[facetName].splice(params[facetName].indexOf(value), 1);
+        if (!params[facetName].length) { delete params[facetName]; }
       }
+      // }
       this.props.onChangeFacets(params);
-      this.submitQuery();
+      this.submitQuery(params);
     }
     return curryHandler;
   }
 
-  submitQuery() {
-    this.props.getSearchResults({ facetFilters: this.props.getFacetfilters(this.props.facets) });
+  submitQuery(params) {
+    this.props.getSearchResults(this.props.getFacetfilters(params));
   }
 
   render() {
@@ -53,15 +60,16 @@ class CategoriesAndFacets extends Component {
       }
       {
         filters.facets.map((filter, index) => {
-          if (filter.type === 'PERCENTILE') {
-            let selectedFilters = facets[filter.attributeName];
-            return filter.children.length ? <RangeFitler filter={filter} key={filter.id} onChangeHandle={this.onChangeHandle(filter.attributeName, filter.type)} selectedFilters={selectedFilters || []}/> : null;
-          }
+          // if (filter.type === 'PERCENTILE') {
+          //   let selectedFilters = facets[filter.attributeName];
+          //   return filter.children.length ? <RangeFitler filter={filter} key={filter.id} onChangeHandle={this.onChangeHandle(filter.attributeName, filter.type)} selectedFilters={selectedFilters || []}/> : null;
+          // }
           let selectedFilters = facets[filter.attributeName];
           selectedFilters = selectedFilters ? selectedFilters.map((item) => item.name) : [];
-          return filter.children.length ? <CheckboxFacet filter={filter} onChangeHandle={this.onChangeHandle(filter.attributeName, filter.type)} selectedFilters={selectedFilters} index={index}/> : null;
+          return filter.children.length ? <CheckboxFacet attributeName={filter.attributeName} facets={facets} filter={filter} onChangeHandle={this.onChangeHandle(filter.attributeName, filter.type)} selectedFilters={selectedFilters} index={index}/> : null;
         })
       }
+      <ExcludeOOS />
       </PanelGroup>
     );
   }

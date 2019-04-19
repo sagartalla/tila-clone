@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import InputRange from 'react-input-range';
-import {FormControl} from 'react-bootstrap';
+import {FormControl, Panel, Heading, Body, Title} from 'react-bootstrap';
 import SVGCompoent from '../../common/SVGComponet';
-import { mergeCss } from '../../../utils/cssUtil';
-const styles = mergeCss('components/Search/search');
+
+import lang from '../../../utils/language';
+
+import styles_en from '../search_en.styl';
+import styles_ar from '../search_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 class RangeFitler extends Component {
   static getClosest(values, goal) {
@@ -75,18 +80,25 @@ class RangeFitler extends Component {
     const { filter } = this.props;
     const { min, max } = this.state.static;
     return (
-      <li>
-        <div className={`${styles['category-list-title']} ${styles['black-color']} ${styles['fontW600']} ${styles['p-10-20']} ${styles['flx-spacebw-alignc']}`}>
+      <Panel eventKey="6" key={filter.id}>
+      <li className={`${styles['category-list']}`}>
+        <Panel.Heading>
+        {/* <Panel.Title toggle className={`${styles['category-list-title']} ${styles['black-color']} ${styles['fontW600']} ${styles['p-10-20']} ${styles['flx-spacebw-alignc']}`}>
+            {filter.name}
+            <SVGCompoent clsName={`${styles['expand-icon']}`} src="icons/common-icon/down-arrow-circle" />
+          </Panel.Title> */}
+        <Panel.Title toggle className={`${styles['category-list-title']} ${styles['black-color']} ${styles['fontW600']} ${styles['p-10-20']} ${styles['flx-spacebw-alignc']}`}>
           {filter.name}
-        </div>
+          <SVGCompoent clsName={`${styles['expand-icon']}`} src="icons/common-icon/down-arrow-circle" />
+        </Panel.Title>
+        </Panel.Heading>
+        <Panel.Body collapsible className={`${styles['mb-15']} ${styles['mt-15']} ${styles['border-b']}`}>
         <div className={`${styles['flx-spacebw-alignc']} ${styles['p-10-20']}`}>
           <select className={styles['price-select-list']} componentclass="select" placeholder="select" onChange={this.minChange} value={this.state.value.min}>
-            <option value="select">select (minimum)</option>
             {filter.children[0].values.map((value) => <option value={value} key={value}>{value}</option>)}
           </select>
           <span className={`${styles['pl-10']} ${styles['pr-10']}`}>to</span>
           <select className={styles['price-select-list']} componentclass="select" placeholder="select" onChange={this.maxChange} value={this.state.value.max}>
-            <option value="select">select (maximum)</option>
             {filter.children[0].values.map((value) => <option value={value} key={value}>{value}</option>)}
           </select>
         </div>
@@ -98,7 +110,9 @@ class RangeFitler extends Component {
             onChange={value => this.onChangeRange(value)}
           />
         </div>
+        </Panel.Body>
       </li>
+      </Panel>
     );
   }
 }

@@ -4,8 +4,13 @@ import { Row, Col } from 'react-bootstrap';
 import SVGComponent from '../../common/SVGComponet';
 import { languageDefinations } from '../../../utils/lang/';
 
-import { mergeCss } from '../../../utils/cssUtil';
-const styles = mergeCss('components/Payments/payment');
+import lang from '../../../utils/language';
+
+import styles_en from '../payment_en.styl';
+import styles_ar from '../payment_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 const { PAYMENT_PAGE } = languageDefinations();
 
 class LoyaltyPoints extends Component {
@@ -18,7 +23,7 @@ class LoyaltyPoints extends Component {
     return (
       <div className={`${styles['pb-15']} ${styles['pt-15']} ${styles['box']} ${styles['mb-20']} ${styles['relative']} ${styles['pay-loyalty-main']}`}>
         <SVGComponent clsName={`${styles['payment-icon']} ${configJson.done ? 'done' : ''} ${configJson.progress ? 'payment-active' : ''}`} src="icons/common-icon/pay-loyalty" />
-        <div className={`${configJson.basic || configJson.done ? '' : 'hide'} ${styles['flex-center']} ${styles['pl-35']} ${styles['pr-35']}`}>
+        <div className={`${configJson.basic || configJson.done ? '' : 'hide'} ${styles['flex-center']} ${styles['pay-loyalty-main-inn']}`}>
           <Col md={10} sm={12} xs={12} className={styles['pl-0']}>
             <h4 className={styles['m-0']}>Pay With Loyalty Points</h4>
             <small>Pay With Loyalty Points</small>
@@ -30,10 +35,10 @@ class LoyaltyPoints extends Component {
           </Col> */}
         </div>
 
-        <div className={`${configJson.progress ? '' : 'hide'} ${styles['pb-5']} ${styles['pt-5']} ${styles['pl-35']} ${styles['pr-35']}`}>
+        <div className={`${configJson.progress ? '' : 'hide'} ${styles['pb-5']} ${styles['pt-5']} ${styles['loyalty-points-inn']}`}>
           <h4 className={styles['m-0']}>Pay With Loyalty Points</h4>
-          <div className={`${styles['flex']} ${styles['pt-30']} ${styles['pb-30']}`}>
-            <Col md={2} className={styles['pl-0']} >
+          <div className={`${styles['flex']} ${styles['pt-30']} ${styles['pb-30']} ${styles['m-flx-wrap']}`}>
+            <Col md={2} xs={6} className={styles['pl-0']} >
               <div className={`${styles['pay-loyalty-inn']}`}>
                 <h5 className={`${styles['t-c']} ${styles['thick-gry-clr']}`}>ADCB</h5>
                 <div className={`${styles['pay-loyalty']} ${styles['flex-center']} ${styles['justify-center']} ${styles['p-15']}`}>
@@ -41,7 +46,7 @@ class LoyaltyPoints extends Component {
                 </div>
               </div>
             </Col>
-            <Col md={2} className={styles['pl-0']}>
+            <Col md={2} xs={6} className={styles['pl-0']}>
               <div className={`${styles['pay-loyalty-inn']}`}>
                 <h5 className={`${styles['t-c']} ${styles['thick-gry-clr']}`}>Mashreq</h5>
                 <div className={`${styles['pay-loyalty']} ${styles['flex-center']} ${styles['justify-center']} ${styles['p-15']}`}>
@@ -49,7 +54,7 @@ class LoyaltyPoints extends Component {
                 </div>
               </div>
             </Col>
-            <Col md={2} className={styles['pl-0']}>
+            <Col md={2} xs={6} className={styles['pl-0']}>
               <div className={`${styles['pay-loyalty-inn']}`}>
                 <h5 className={`${styles['t-c']} ${styles['thick-gry-clr']}`}>SABB</h5>
                 <div className={`${styles['pay-loyalty']} ${styles['flex-center']} ${styles['justify-center']} ${styles['p-15']}`}>
@@ -57,7 +62,7 @@ class LoyaltyPoints extends Component {
                 </div>
               </div>
             </Col>
-            <Col md={2} className={styles['pl-0']}>
+            <Col md={2} xs={6} className={styles['pl-0']}>
               <div className={`${styles['pay-loyalty-inn']}`}>
                 <h5 className={`${styles['t-c']} ${styles['thick-gry-clr']}`}>Al Rajhi Bank</h5>
                 <div className={`${styles['pay-loyalty']} ${styles['flex-center']} ${styles['justify-center']} ${styles['p-15']}`}>
@@ -65,7 +70,7 @@ class LoyaltyPoints extends Component {
                 </div>
               </div>
             </Col>
-            <Col md={2} className={styles['pl-0']}>
+            <Col md={2} xs={6} className={styles['pl-0']}>
               <div className={`${styles['pay-loyalty-inn']}`}>
                 <h5 className={`${styles['t-c']} ${styles['thick-gry-clr']}`}>Emirates NBD</h5>
                 <div className={`${styles['pay-loyalty']} ${styles['flex-center']} ${styles['justify-center']} ${styles['p-15']}`}>
@@ -73,7 +78,7 @@ class LoyaltyPoints extends Component {
                 </div>
               </div>
             </Col>
-            <Col md={2} className={styles['pl-0']}>
+            <Col md={2} xs={6} className={styles['pl-0']}>
               <div className={`${styles['pay-loyalty-inn']}`}>
                 <h5 className={`${styles['t-c']} ${styles['thick-gry-clr']}`}>Air Miles</h5>
                 <div className={`${styles['pay-loyalty']} ${styles['flex-center']} ${styles['justify-center']} ${styles['p-15']}`}>
@@ -85,12 +90,12 @@ class LoyaltyPoints extends Component {
           </div>
 
         </div>
-        <div className={`${configJson.progress ? '' : 'hide'} ${styles['flex']} ${styles['pt-15']} ${styles['pl-35']} ${styles['flex']} ${styles['offers-bottom']}`}>
-          <Col md={12} className={styles['pl-0']}>
-            <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-x-large']} ${styles['mr-20']}`} onClick={handleLoyaltyBtn}>
+        <div className={`${configJson.progress ? '' : 'hide'} ${styles['flex']} ${styles['pt-15']} ${styles['pl-35']} ${styles['flex']} ${styles['m-pd-l-0']} ${styles['offers-bottom']}`}>
+          <Col md={12} xs={12} className={`${styles['pl-0']} ${styles['m-pd-r-0']} ${styles['m-loyalty-btm']}`}>
+            <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-x-large']} ${styles['mr-20']} ${styles['cont-btn']}`} onClick={handleLoyaltyBtn}>
               CONTINUE
               </button>
-            <button className={`${styles['fp-btn']} ${styles['fp-btn-default']}`} onClick={handleLoyaltyBtn}>
+            <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['skip-btn']}`} onClick={handleLoyaltyBtn}>
               SKIP THIS STEP
               </button>
           </Col>

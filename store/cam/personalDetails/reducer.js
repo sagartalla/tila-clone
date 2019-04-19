@@ -6,33 +6,29 @@ const initialState = {
     loading: false,
   },
   data: {},
-  error: "",
+  useractive: true,
+  error: '',
+  otpResponse:{},
+  otpData:{}
 };
 
 const personalDetailsReducer = typeToReducer({
   [actions.GET_USER_PROFILE_INFO]: {
-    PENDING: state => {
-      return Object.assign({}, state, { ui: { loading: true } });
-    },
-    FULFILLED: (state, action) => {
-      return Object.assign({}, state, {
-        data: {
-          ...state.data,
-          ...action.payload
-       },
-        ui: { loading: false }
-      });
-    },
-    REJECTED: (state, action) => {
-      return Object.assign({}, state, { error: action.payload.message, ui: { loading: false } })
-    },
+    PENDING: state => Object.assign({}, state, { ui: { loading: true } }),
+    FULFILLED: (state, action) => Object.assign({}, state, {
+      data: {
+        ...state.data,
+        ...action.payload,
+      },
+      ui: { loading: false },
+    }),
+    REJECTED: (state, action) =>
+      Object.assign({}, state, { error: action.payload.message, ui: { loading: false } }),
   },
   [actions.CHANGE_PASSWORD]: {
-    PENDING: state => {
-      return Object.assign({}, state, { ui: { loading: true } });
-    },
+    PENDING: state => Object.assign({}, state, { ui: { loading: true } }),
     FULFILLED: (state, action) => {
-      const passResetStatus = {'passResetStatus': action.payload.data}
+      const passResetStatus = { passResetStatus: action.payload.data };
       const newState = {
         ...state,
         data: {
@@ -40,21 +36,42 @@ const personalDetailsReducer = typeToReducer({
           ...passResetStatus,
         },
         ui: {
-          loading: true
-        }
-      }
+          loading: true,
+        },
+      };
       return newState;
     },
-    REJECTED: (state, action) => {
-      return Object.assign({}, state, { 
-        error: action.payload.response.data.message, 
-        ui: { loading: false } })
-    }
+    REJECTED: (state, action) => Object.assign({}, state, {
+      error: action.payload.response.data.message,
+      ui: { loading: false },
+    }),
+  },
+  [actions.RESET_PASSWORD]: {
+    PENDING: state => Object.assign({}, state, { ui: { loading: true } }),
+    FULFILLED: (state, action) => Object.assign({}, state, { data: action.payload, ui: { loading: false } }),
+    REJECTED: (state, action) => Object.assign({}, state, {
+      error: action.payload.data,
+      ui: { loading: false },
+    }),
+  },
+  [actions.VERIFY_OTP]:{
+    PENDING: state => Object.assign({},state, {ui: {loading:true}}),
+    FULFILLED:(state,action) => Object.assign({},state,{otpData:action.payload.data,ui:{loading:false}}),
+    REJECTED:(state,action) => Object.assign({},state,{
+      otpData:{messege: action.payload.response.data.message, error: true},
+      ui:{loading:false}
+    })
+  },
+  [actions.FORGOT_PASSWORD]: {
+    PENDING: state => Object.assign({}, state, { ui: { loading: true } }),
+    FULFILLED: (state, action) => Object.assign({}, state, { data: action.payload, ui: { loading: false } }),
+    REJECTED: (state, action) => Object.assign({}, state, {
+      error: action.payload.data,
+      ui: { loading: false },
+    }),
   },
   [actions.EDIT_PERSONAL_INFO]: {
-    PENDING: state => {
-      return Object.assign({}, state, { ui: { loading: true } });
-    },
+    PENDING: state => Object.assign({}, state, { ui: { loading: true } }),
     FULFILLED: (state, action) => {
       const newState = {
         ...state,
@@ -63,34 +80,51 @@ const personalDetailsReducer = typeToReducer({
           ...action.payload,
         },
         ui: {
-          loading: true
-        }
-      }
+          loading: true,
+        },
+      };
       return newState;
     },
-    REJECTED: (state, action) => {
-      return Object.assign({}, state, { 
-        error: action.payload.response.data.message, 
-        ui: { loading: false } })
-    }
+    REJECTED: (state, action) => Object.assign({}, state, {
+      error: action.payload.response.data.message,
+      ui: { loading: false },
+    }),
   },
-  [actions.RESET_PASSWORD_INFO_STORE]: (state, action) => {
-    const error=""
-    const passResetStatus = {'passResetStatus': {}} 
-   const newState={
-    ...state,
-    error,
-    data: {
-      ...state.data,
-      ...passResetStatus,
-    },
-    ui: {
-      loading: true
-    }
-   }
-   return newState;
-  }
+  [actions.RESET_PASSWORD_INFO_STORE]: (state) => {
+    const error = '';
+    const passResetStatus = { passResetStatus: {} };
+    const newState = {
+      ...state,
+      error,
+      data: {
+        ...state.data,
+        ...passResetStatus,
+      },
+      ui: {
+        loading: true,
+      },
+    };
+    return newState;
+  },
+  [actions.USER_UPDATE_FETCH_OTP]: {
+    PENDING: state => Object.assign({}, state, { ui: { loading: true }}),
+    FULFILLED: (state,action) => Object.assign({}, state, {
+      ui: { loading:false },
+      otpResponse:action.payload.data
+    }),
+    REJECTED: (state, action) => Object.assign({}, state,
+      { error: action.payload.data, ui: {loading: false }
+    })
+  },
 
+  [actions.DEACTIVATE_USER_PROFILE]: {
+    PENDING: state => Object.assign({}, state, { ui: { loading: true } }),
+    FULFILLED: state => Object.assign({}, state, {
+      ui: { loading: false },
+      useractive: false,
+    }),
+    REJECTED: state => Object.assign({}, state, { ui: { loading: false } }),
+  },
 }, initialState);
 
 export default personalDetailsReducer;

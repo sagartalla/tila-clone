@@ -3,8 +3,13 @@ import { Grid, Row, Col } from 'react-bootstrap';
 
 import { languageDefinations } from '../../../../utils/lang/';
 
-import { mergeCss } from '../../../../utils/cssUtil';
-const styles = mergeCss('components/Payments/payment');
+import lang from '../../../../utils/language';
+
+import styles_en from '../../payment_en.styl';
+import styles_ar from '../../payment_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 const { PAYMENT_PAGE } = languageDefinations();
 
 const RewardPonits = props => (
@@ -17,7 +22,7 @@ const RewardPonits = props => (
       </Row>
       <Row>
         <Col md={12} sm={12} xs={12}>
-          <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']}`} onClick={props.makePayment}>Pay {props.orderRes.data.amount} {props.orderRes.data.currency}</button>
+          <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']}`} onClick={props.makePayment}>{PAYMENT_PAGE.PAY} {props.orderRes.data.amount} {props.orderRes.data.currency}</button>
         </Col>
       </Row>
     </Grid>

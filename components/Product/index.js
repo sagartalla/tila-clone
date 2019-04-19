@@ -1,28 +1,35 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Grid, Row, Col, Tabs, Tab } from 'react-bootstrap';
 import NoSSR from 'react-no-ssr';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-
-import { selectors } from '../../store/product';
+import { languageDefinations } from '../../utils/lang';
 import HeaderBar from '../HeaderBar/index';
 import Dispalay from './includes/Display';
 import TitleInfo from './includes/TitleInfo';
-import Offers from './includes/Offers';
 import Shipping from './includes/Shipping';
 
 import AddToCart from './includes/AddToCart';
 import RecentView from './includes/RecentView';
-import Review from './includes/Reviews';
-import ReviewsTab from './includes/ReviewTab';
 import ElectronicsTab from './includes/ElectronicsTab';
 import ProductDetails from './includes/ProductDetails';
-import ReviewRatingList from '../RatingReviews/List';
 import FooterBar from '../Footer/index';
+import Theme from '../helpers/context/theme';
+import CompareWidget from '../common/CompareWidget';
+import { actionCreators, selectors } from '../../store/product';
+import { actionCreators as wishlistActionCreators, selectors as wishListSelectors } from '../../store/cam/wishlist';
+import Button from '../common/CommonButton';
 
-import { mergeCss } from '../../utils/cssUtil';
-const styles = mergeCss('components/Product/product');
+import lang from '../../utils/language';
+
+import styles_en from './product_en.styl';
+import styles_ar from './product_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
+const { PDP_PAGE } = languageDefinations();
 
 const getProductComponent = (isPreview, taskCode) => {
   class Product extends Component {
@@ -34,43 +41,55 @@ const getProductComponent = (isPreview, taskCode) => {
           slidebar: 'stateTop',
         },
         recentlyViewed: [],
-      }
+        notifyEmail: null,
+        emailErr: '',
+      };
       this.detailsRef = React.createRef();
       this.bottomRef = React.createRef();
+      this.onChangeField = this.onChangeField.bind(this);
       this.handleScroll = this.handleScroll.bind(this);
+      this.notify = this.notify.bind(this);
     }
 
     componentDidMount() {
       if (window.localStorage && !isPreview) {
         const { productData } = this.props;
-        const { offerInfo, titleInfo, imgUrls, shippingInfo } = productData;
-
+        const {
+          offerInfo, titleInfo, imgUrls, shippingInfo,
+        } = productData;
+        digitalData.page.pageInfo.pageName = titleInfo.title;
+        digitalData.page.category = { primaryCategory: productData.categoryType };
+        digitalData.page.pageInfo.breadCrumbs = productData.breadcrums.map(item => item.display_name_en);
+        this.props.track({
+          eventName: 'Product Viewed',
+          ProductData: productData,
+        });
         if (offerInfo.price) {
           const pr = offerInfo.price.split(' ');
           const recentData = localStorage.getItem('rv');
-          let arr = recentData ? JSON.parse(recentData) : [];
-          let index = _.findIndex(arr, function (o) { return o.id == shippingInfo.listing_id; })
+          const arr = recentData ? JSON.parse(recentData) : [];
+          const index = _.findIndex(arr, (o) => o.id == shippingInfo.listing_id);
 
 
           // if (index > -1 && arr.length <= 5) {
           //   arr = arr.slice(index, 1);
           // } else
-          if (arr.length == 5) {
-            arr.pop()
+          if (arr.length === 15) {
+            arr.pop();
           }
 
-          if (index == -1) {
+          if (index === -1) {
             arr.unshift({
-              'nm': titleInfo.title,
-              'im': imgUrls[0].url,
-              'pr': pr[0],
-              'cd': pr[1],
-              'uri': location.href,
-              'id': shippingInfo.listing_id
+              nm: titleInfo.title,
+              im: imgUrls[0].url,
+              pr: pr[0],
+              cd: pr[1],
+              uri: location.href,
+              id: shippingInfo.listing_id,
             });
             localStorage.setItem('rv', JSON.stringify(arr));
           }
-          this.setState({ recentlyViewed: arr })
+          this.setState({ recentlyViewed: arr });
         }
       }
 
@@ -81,16 +100,47 @@ const getProductComponent = (isPreview, taskCode) => {
       window.removeEventListener('scroll', this.handleScroll);
     }
 
+    onChangeField({ target }) {
+      this.setState({
+        notifyEmail: target.value,
+      });
+    }
+
+    notify() {
+      const { productData, userDetails, notifyMe } = this.props;
+      let { emailErr, notifyEmail } = this.state;
+      const params = {
+        product_id: productData.product_id,
+      };
+      const emailReg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      if (!userDetails.isLoggedIn) {
+        if (emailReg.test(notifyEmail)) {
+          params.email = notifyEmail;
+          notifyMe(params);
+          emailErr = '';
+          notifyEmail = '';
+        } else {
+          emailErr = PDP_PAGE.ENTER_VALID_EMAIL;
+        }
+      } else {
+        notifyMe(params);
+      }
+      this.setState({
+        emailErr,
+        notifyEmail,
+      });
+    }
+
     handleScroll(event) {
-      let scrollTop = event.currentTarget.pageYOffset;
-      let detailsRect = this.detailsRef.current.getBoundingClientRect();
-      let bottomRefRect = this.bottomRef.current.getBoundingClientRect();
+      const scrollTop = event.currentTarget.pageYOffset;
+      const detailsRect = this.detailsRef.current.getBoundingClientRect();
+      const bottomRefRect = this.bottomRef.current.getBoundingClientRect();
       if (bottomRefRect.top <= window.innerHeight && this.state.stickyElements.details !== 'stateBottom') {
         this.setState({
           stickyElements: {
             ...this.state.stickyElements,
             details: 'stateBottom',
-          }
+          },
         });
         return;
       }
@@ -99,7 +149,7 @@ const getProductComponent = (isPreview, taskCode) => {
           stickyElements: {
             ...this.state.stickyElements,
             details: 'stateMiddle',
-          }
+          },
         });
         return;
       }
@@ -108,83 +158,137 @@ const getProductComponent = (isPreview, taskCode) => {
           stickyElements: {
             ...this.state.stickyElements,
             details: 'stateTop',
-          }
+          },
         });
-        return;
       }
     }
-
+/* eslint-disable */
     render() {
-      const { productData } = this.props;
-      const { catalog, titleInfo, keyfeatures, imgUrls, offerInfo, shippingInfo, returnInfo, details } = productData;
-      const { stickyElements, recentlyViewed } = this.state;
+      const { productData, userDetails, showLoading } = this.props;
+      const {
+        catalog, titleInfo, keyfeatures, extraOffers, imgUrls, offerInfo, shippingInfo, isWishlisted,
+        details, productDescription, catalogObj, categoryType = '', warranty, breadcrums, product_id,
+      } = productData;
+      const { offerPricing } = offerInfo;
+      const {
+        stickyElements, recentlyViewed, notifyEmail, emailErr,
+      } = this.state;
       return (
-        <div className={styles['pdp-wrap']}>
-          {
-            isPreview ? null : <HeaderBar />
-          }
-          <div className={`${styles['relative']}`}>
-            <div className={`${styles['page-details-slider']}`}>
-              <Row className={`${styles['m-0']} ${styles['ht-100per']}`}>
-                <Col xs={12} md={8} className={`${styles['pl-0']} ${styles['ht-100per']}`}>
-                  <Dispalay imgs={imgUrls} />
-                </Col>
-                <div className={styles['details-pixel']} ref={this.detailsRef}></div>
-                <div className={`${styles['details-right-part']} ${styles[stickyElements.details]}`}>
-                  <div className={`${styles['details-right-part-inn']}`}>
-                    <TitleInfo {...titleInfo} isPreview={isPreview} />
-                    <ProductDetails details={details} keyfeatures={keyfeatures} isPreview={isPreview} />
-                    {
-                      isPreview ? null : <Shipping shippingInfo={shippingInfo} offerInfo={offerInfo} />
-                    }
-                  
-                  </div>
-                  {
-                    isPreview ? null : <AddToCart offerInfo={offerInfo} />
-                  }
-                </div>
-              </Row>
-            </div>
-            <div className={styles['bg-white']}>
-              <Grid>
-                <Row>
-                  <Col md={8}>
-                    {
-                      isPreview ? null : <NoSSR> <RecentView recentlyViewed={recentlyViewed} shippingInfo={shippingInfo} /> </NoSSR>
-                    }
+        <Theme.Provider value={categoryType.toLowerCase()}>
+          <div className={`${styles['pdp-wrap']} ${categoryType.toLowerCase()} ${styles[categoryType.toLowerCase()]}`}>
+            {
+              isPreview ? null : <HeaderBar />
+            }
+            <div className={`${styles.relative}`}>
+              <div className={`${styles['page-details-slider']}`}>
+                <Row className={`${styles['m-0']} ${styles['ht-100per']}`}>
+                  <Col xs={12} md={8} sm={12} className={`${styles['pl-0']} ${styles['ht-100per']} ${styles['pdp-img-prt']}`}>
+                    <NoSSR>
+                      <Dispalay
+                        product_id={product_id}
+                        offerPricing={offerPricing}
+                        catalog_id={catalogObj.catalog_id}
+                        imgs={imgUrls}
+                        isWishlisted={isWishlisted}
+                        extraOffers={extraOffers}
+                        breadcrums={breadcrums}
+                      />
+                    </NoSSR>
                   </Col>
-                  {/*<Col md={8}>
-                  {
-                    isPreview ? null : <ReviewsTab />
-                  }
-                  </Col>*/}
-                  <Col md={8}>
-                    <ElectronicsTab catalog={catalog} />
+                  <div className={styles['details-pixel']} ref={this.detailsRef} />
+                  <Col sm={12} className={`${styles['details-right-part']} ${styles[stickyElements.details]}`}>
+                    <div className={`${styles['details-right-part-inn']}`}>
+                      <div className={`${styles['ipad-details']} ${styles['ipad-pr-15']}`}>
+                        <TitleInfo {...titleInfo} isPreview={isPreview} />
+                        <ProductDetails details={details} keyfeatures={keyfeatures} isPreview={isPreview} productInfo={productData}/>
+                      </div>
+                      <div className={`${styles['ipad-details']} ${styles['bdr-lt']} ${styles['ipad-pl-15']}`}>
+                        {
+                          isPreview ? null : <Shipping shippingInfo={shippingInfo} offerInfo={offerInfo} warranty={warranty} />
+                        }
+                        {
+                          isPreview ? null : <AddToCart offerInfo={offerInfo} productData={productData.product_id}/>
+                        }
+                        {
+                          (offerInfo.stockError || offerInfo.availabilityError) &&
+                          <div className={`${styles['flx-space-bw']} ${styles['align-baseline']}`}>
+                            {!userDetails.isLoggedIn &&
+                            <div className={`${styles['mb-0']} ${styles['fp-input']} ${styles['pb-10']}`}>
+                              <input onChange={this.onChangeField} name="notify" type="text" value={notifyEmail} required />
+                              <label>{PDP_PAGE.GET_NOTIFIED}</label>
+                              {emailErr &&
+                                <span className={styles['error-msg']}>{emailErr}</span>
+                              }
+                            </div>}
+                            <Button
+                              className={`${styles['flex-center']} ${styles.notify_me_btn} ${styles['fs-20']}`}
+                              btnText={PDP_PAGE.NOTIFY_ME}
+                              onClick={this.notify}
+                              hoverClassName="hoverBlueBackground"
+                              btnLoading={showLoading}
+                            />
+                          </div>
+                        }
+                      </div>
+                    </div>
+
                   </Col>
                 </Row>
-              </Grid>
+              </div>
+              <div className={`${styles['bg-white']} ${styles['mt-30']}`}>
+                <Grid>
+                  <Row>
+                    <Col md={8}>
+                      {
+                        isPreview ? null : <NoSSR> <RecentView recentlyViewed={recentlyViewed} shippingInfo={shippingInfo} /> </NoSSR>
+                      }
+                    </Col>
+                    {/* <Col md={8}>
+                    {
+                      isPreview ? null : <ReviewsTab />
+                    }
+                    </Col> */}
+                    <Col md={8}>
+                      <ElectronicsTab catalog={catalog} catalogObj={catalogObj} productDescription={productDescription} />
+                    </Col>
+                  </Row>
+                </Grid>
+              </div>
+              <div className={styles['pdp-bottom-ref']} ref={this.bottomRef} />
             </div>
-            <div className={styles['pdp-bottom-ref']} ref={this.bottomRef}></div>
+            <div className={`${styles['border-b']} ${styles['border-t']} ${styles['pb-30']} ${styles['pt-30']}`}>
+              {
+                isPreview ? null : <FooterBar />
+              }
+            </div>
           </div>
-          <div className={`${styles['border-b']} ${styles['border-t']} ${styles['pb-30']} ${styles['pt-30']}`}>
-            {
-              isPreview ? null : <FooterBar />
-            }
-          </div>
-        </div>
+          <CompareWidget />
+        </Theme.Provider>
       );
     }
-  };
+  }
 
-  const mapStateToProps = (store) => ({
-    productData: taskCode ? selectors.getPreview(store) : selectors.getProduct(store)
+  const mapStateToProps = store => ({
+    productData: taskCode ? selectors.getPreview(store) : selectors.getProduct(store),
+    userDetails: store.authReducer.data,
+    showLoading: wishListSelectors.getLoader(store),
   });
 
+  const mapDispatchToProps = dispatch =>
+    bindActionCreators(
+      {
+        notifyMe: wishlistActionCreators.notifyMe,
+        track: actionCreators.track,
+
+      },
+      dispatch,
+    );
+
   Product.propTypes = {
-    productData: PropTypes.object.isRequired
+    productData: PropTypes.object.isRequired,
   };
 
-  return connect(mapStateToProps, null)(Product);
-}
+  return connect(mapStateToProps, mapDispatchToProps)(Product);
+};
 
 export default getProductComponent;

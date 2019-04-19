@@ -63,7 +63,7 @@ class List extends Component {
               <select id="rating-filter" onChange={this.selectRating}>
                 <option>{PDP_PAGE.ALL_STARTS}</option>
                 {
-                  [1, 2, 3, 4, 5].map((n) => <option value={n}> {n} PDP_PAGE.STAR</option>)
+                  [1, 2, 3, 4, 5].map((n) => <option value={n}> {n} {PDP_PAGE.STAR}</option>)
                 }
               </select>
             </div>
@@ -85,7 +85,7 @@ class List extends Component {
                       {
                         userReview.certifiedBuyer
                         ?
-                        <div>PDP_PAGE.CERTIFIED_BUYER</div>
+                        <div>{PDP_PAGE.CERTIFIED_BUYER}</div>
                         :
                         null
                       }
@@ -95,8 +95,8 @@ class List extends Component {
                       <div>{userReview.comment}</div>
                     </Col>
                     <Col md={2}>
-                      <div>{userReview.likes} PDP_PAGE.LIKE</div>
-                      <div>{userReview.dislikes} PDP_PAGE.DISLIKE</div>
+                      <div>{userReview.likes} {PDP_PAGE.LIKE}</div>
+                      <div>{userReview.dislikes} {PDP_PAGE.DISLIKE}</div>
                     </Col>
                   </Row>
                 )

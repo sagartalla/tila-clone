@@ -2,8 +2,13 @@ import React from 'react';
 
 import { languageDefinations } from '../../../../utils/lang/';
 
-import { mergeCss } from '../../../../utils/cssUtil';
-const styles = mergeCss('components/Cam/ShippingAddress/address');
+import lang from '../../../../utils/language';
+
+import styles_en from '../address_en.styl';
+import styles_ar from '../address_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 const { DELIVERY_ADDR_PAGE } = languageDefinations();
 
 const MiniAddress = (props) => {
@@ -20,7 +25,7 @@ const MiniAddress = (props) => {
               <div key={id} id={val.address_id} className={`${styles['flex']} ${styles['flex-colum']} ${styles['p-10-20']} ${styles['min-address-part-inn']} ${styles['pointer']}`} onClick={makeDefaultAddress}>
                 <h5 className={`${styles['fontW600']} ${styles['m-0']} ${styles['mb-5']} ${styles['thick-gry-clr']}`}> {val.first_name + ' ' + val.last_name} </h5>
                 <address className={`${styles['fs-12']} ${styles['mb-0']} ${styles['full-address-details']} ${styles['label-gry-clr']}`}>
-                  {val.address_line_1 + ', ' + val.address_line_2 + ', ' + val.city + ', ' + val.country_name}
+                  {val.address_line_1 + ', ' + val.address_line_2 + ', ' + val.city + ', ' + val.country_name + ', ' + val.postal_code}
                 </address>
               </div>
             )

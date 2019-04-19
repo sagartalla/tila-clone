@@ -11,9 +11,10 @@ const Input = props => {
       type={type}
       value={val}
       placeholder={props.placeholder}
-      
+      style={props.style}
       onChange={props.onChange}
       onBlur={props.onBlur}
+      autoFocus={props.autoFocus}
     />
   );
 }

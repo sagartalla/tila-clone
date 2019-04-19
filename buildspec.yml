@@ -1,0 +1,39 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws --version
+      - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
+      - REPOSITORY_URI=067138747236.dkr.ecr.ap-south-1.amazonaws.com/web-front-end/store-front
+      - IMAGE_TAG=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+      - docker pull $REPOSITORY_URI:latest
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Building the Docker image...
+      - docker build --build-arg version=$IMAGE_TAG --cache-from $REPOSITORY_URI:latest --tag $REPOSITORY_URI:$IMAGE_TAG --tag $REPOSITORY_URI:latest .
+      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker images...
+      - docker push $REPOSITORY_URI:latest
+      - docker push $REPOSITORY_URI:$IMAGE_TAG
+      - echo Writing image definitions file...
+      - printf '[{"name":"ecs-storefront-app-container-dev","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions-dev.json
+      - cat imagedefinitions-dev.json
+      - printf '[{"name":"ecs-storefront-app-container-stage","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions-stage.json
+      - cat imagedefinitions-stage.json
+      - printf '[{"name":"ecs-storefront-app-container-preprod","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions-preprod.json
+      - cat imagedefinitions-preprod.json
+      - printf '[{"name":"ecs-storefront-app-container-prod","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions-prod.json
+      - cat imagedefinitions-prod.json
+artifacts:
+    files: 
+      - imagedefinitions-dev.json
+      - imagedefinitions-stage.json
+      - imagedefinitions-preprod.json
+      - imagedefinitions-prod.json
+    

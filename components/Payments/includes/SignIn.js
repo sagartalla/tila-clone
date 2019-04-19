@@ -1,22 +1,29 @@
 import React, { Component } from 'react';
 import { Row, Col } from 'react-bootstrap';
-
+import NoSSR from 'react-no-ssr';
 import Terms from '../../common/terms';
 import { Modal } from "react-router-modal";
 import Privacy from '../../common/privacy';
 import SVGComponent from '../../common/SVGComponet';
 import { languageDefinations } from '../../../utils/lang/';
+import SocialLogin from '../../Login/SocialLogin';
 
-import { mergeCss } from '../../../utils/cssUtil';
-const styles = mergeCss('components/Payments/payment');
-const { PAYMENT_PAGE } = languageDefinations();
+import lang from '../../../utils/language';
+
+import styles_en from '../payment_en.styl';
+import styles_ar from '../payment_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
+
+const { PAYMENT_PAGE, CONTACT_INFO_MODAL } = languageDefinations();
 
 class SignIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
       showTerms: false,
-      showPrivacy: false
+      showPrivacy: false,
     }
 
     this.tcToggle = this.tcToggle.bind(this);
@@ -35,29 +42,47 @@ class SignIn extends Component {
     const { props } = this;
     const { showTerms, showPrivacy } = this.state;
     return (
-      <div className={`${styles['pb-15']} ${styles['pt-15']} ${styles['pl-35']} ${styles['pr-35']} ${styles['box']} ${styles['mb-20']} ${styles['relative']} ${styles['payment-signup']}`}>
+      <div className={`${styles['box']} ${styles['mb-20']} ${styles['relative']} ${styles['payment-signup']}`}>
         <SVGComponent clsName={`${styles['profile']} ${props.configJson.done ? 'done' : ''} ${props.configJson.progress ? 'payment-active' : ''}`} src="icons/profile/profile" />
-        <Row className={`${props.configJson.done ? '' : 'hide'} ${styles['flex-center']}`}>
+        <Row className={`${props.configJson.done ? '' : 'hide'} ${styles['flex-center']} ${styles['m-blk']}`}>
           <Col md={8} sm={12} xs={12}>
-            <h4 className={styles['m-0']}>{PAYMENT_PAGE.SIGN_IN}</h4>
+            <h4 className={styles['m-0']}>{`${PAYMENT_PAGE.REGISTER} or ${PAYMENT_PAGE.SIGN_IN}`}</h4>
+            {props.login.username ?
+            <small>{`You have signed in as ${props.login.username}`}</small>
+            :
             <small>{PAYMENT_PAGE.SIGN_IN_SIGN_UP_TO_CONTINUE}</small>
+            }
           </Col>
+          {props.login.username ?
           <Col md={4} sm={12} xs={12} className={styles['t-rt']}>
-            <span className={`${styles['light-gry-clr']} ${styles['fontW600']}`}>{props.login.username}</span>
-          </Col>
+            <span className={`${styles['light-gry-clr']} ${styles['fontW600']}`}>{props.login.username}&emsp;</span>
+            <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']}`} onClick={props.onClickEdit}>
+              {CONTACT_INFO_MODAL.EDIT}
+            </button>
+          </Col> : null
+          }
         </Row>
-
         <Row className={`${props.configJson.progress ? '' : 'hide'} ${styles['pb-5']} ${styles['pt-5']}`}>
-          <Col md={3} sm={12} xs={12}>
+          <Col md={4} sm={5} xs={12} className={styles['landscape-socail-part']}>
             <h4 className={`${styles['mb-20']} ${styles['mt-0']} ${styles['light-gry-clr']}`}>{PAYMENT_PAGE.REGISTER}</h4>
             <div className={`${styles['thin-border-right']} ${styles['social-icons-list']}`}>
               <span className={`${styles['sub-title']} ${styles['fs-10']} ${styles['p-5']} ${styles['bg-white']}`}>{PAYMENT_PAGE.OR}</span>
-              <button className={`${styles['fp-btn']} ${styles['mb-20']} ${styles['fp-btn-primary']}`}>{PAYMENT_PAGE.SIGN_IN_WITH_FACEBOOK}</button>
-              <button className={`${styles['fp-btn']} ${styles['mb-20']} ${styles['fp-btn-danger']}`}>{PAYMENT_PAGE.SIGN_IN_WITH_GOOGLE}</button>
-              <button className={`${styles['fp-btn']} ${styles['fp-btn-sucess']}`}>{PAYMENT_PAGE.REGISTER_WITH_US}</button>
+              <NoSSR>
+                <SocialLogin>
+                  {([handleSocialLogin]) => {
+                    return (
+                      <>
+                      <button onClick={handleSocialLogin('facebook')} className={`${styles['fp-btn']} ${styles['mb-20']} ${styles['fp-btn-primary']} ${styles['facebook-btn']}`}>{PAYMENT_PAGE.SIGN_IN_WITH_FACEBOOK}</button>
+                      <button onClick={handleSocialLogin('google')} className={`${styles['fp-btn']} ${styles['mb-20']} ${styles['fp-btn-danger']} ${styles['google-btn']}`}>{PAYMENT_PAGE.SIGN_IN_WITH_GOOGLE}</button>
+                      </>
+                    )
+                  }}
+                </SocialLogin>
+             </NoSSR>
+              {/* <button className={`${styles['fp-btn']} ${styles['fp-btn-sucess']} ${styles['regist-btn']}`}>{PAYMENT_PAGE.REGISTER_WITH_US}</button> */}
             </div>
           </Col>
-          <Col md={8} sm={12} xs={12} className={styles['ml-30']}>
+          <Col md={8} sm={6} xs={12} className={`${styles['landscape-login-part']}`}>
             <h4 className={`${styles['mb-20']} ${styles['mt-0']} ${styles['light-gry-clr']}`}>{PAYMENT_PAGE.SIGN_IN}</h4>
             <div className={styles['sign-part']}>
               <div className={`${styles['fp-input']}`}>
@@ -65,15 +90,29 @@ class SignIn extends Component {
                 <span className={styles['highlight']}></span>
                 <span className={styles['bar']}></span>
                 <label>{PAYMENT_PAGE.EMAIL_OR_USERNAME}</label>
+                {
+                    props.validation.username.message
+                      ?
+                        <span className={`${styles['error-msg']}`}>{props.validation.username.message}</span>
+                      :
+                      null
+                  }
               </div>
               <div className={`${styles['fp-input']}`}>
                 <input type="password" name="password" onChange={props.inputOnChange} value={props.login.password} className={styles.input} required />
                 <span className={styles['highlight']}></span>
                 <span className={styles['bar']}></span>
                 <label>{PAYMENT_PAGE.PASSWORD}</label>
+                {
+                  props.validation.password.message
+                    ?
+                      <span className={`${styles['error-msg']}`}>{props.validation.password.message}</span>
+                    :
+                    null
+                }
               </div>
               <div className={`${styles['mt-10']} ${styles['mb-10']}`}>
-                <input type="checkbox" defaultChecked="true" />{PAYMENT_PAGE.AGREE_TO} <a onClick={this.tcToggle}>{PAYMENT_PAGE.TC}</a>{PAYMENT_PAGE.AND}<a onClick={this.privacyToggle}>{PAYMENT_PAGE.PRIVACY_POLICY}</a>
+                <input type="checkbox" defaultChecked="true" /> {PAYMENT_PAGE.AGREE_TO} <a onClick={this.tcToggle}>{PAYMENT_PAGE.TC}</a> {PAYMENT_PAGE.AND} <a onClick={this.privacyToggle}>{PAYMENT_PAGE.PRIVACY_POLICY}</a>
               </div>
               <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles['fontW600']} ${styles['text-uppercase']}`} onClick={props.showAddressTab}>{PAYMENT_PAGE.CONTINUE}</button>
               {

@@ -7,8 +7,13 @@ import { selectors } from '../../../../store/cam/personalDetails';
 import { languageDefinations } from '../../../../utils/lang/';
 import UpdatePersonalInfoModal from './UpdatePersonalInfoModal';
 import SVGComponent from '../../../common/SVGComponet';
-import { mergeCss } from '../../../../utils/cssUtil';
-const styles = mergeCss('components/Cam/PersonelDetails/profile');
+
+import lang from '../../../../utils/language';
+
+import styles_en from '../profile_en.styl';
+import styles_ar from '../profile_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 class PersonalInfo extends React.Component {
 
@@ -51,7 +56,7 @@ class PersonalInfo extends React.Component {
         <h4 className={`${styles['flx-space-bw']} ${styles['information-title']} ${styles['fontW600']} ${styles['mt-0']}`}>
           <span>{PERSONAL_INFO_MODAL.HEADING}</span>
           <a className={`${styles['flex']}`} onClick={this.handleShow(true)}>
-            <SVGComponent clsName={`${styles['edit-icon']}`} src="icons/common-icon/edit-icon" />
+            <SVGComponent clsName={`${styles['edit-icon']}`} src="icons/common-icon/edit/edit-penc" />
           </a>
         </h4>
         <div className={`${styles['flex-center']} ${styles['bb-dashed']} ${styles['pt-10']} ${styles['pb-10']}`}>
@@ -75,7 +80,7 @@ class PersonalInfo extends React.Component {
             <span>{PERSONAL_INFO_MODAL.GENDER}</span>
           </Col>
           <Col xs={12} md={8} className={`${styles['p-0']}`}>
-            <span className={styles['pl-15']}>{gender == 'F' ? `${CONTACT_INFO_MODAL.FEMALE}` : gender == "M" ? `${CONTACT_INFO_MODAL.MALE}` : ""}</span>
+            <span className={styles['pl-15']}>{gender == 'F' ? `${PERSONAL_INFO_MODAL.FEMALE}` : gender == "M" ? `${PERSONAL_INFO_MODAL.MALE}` : ""}</span>
           </Col>
         </div>
         <div className={show ? `${styles['modalContainer']} ${styles['showDiv']}` : `${styles['modalContainer']} ${styles['hideDiv']}`}>

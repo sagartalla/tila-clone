@@ -8,11 +8,16 @@ import OrderDetails from './includes/OrderDetails';
 import OrderReturnExchange from './includes/OrderReturnExchange';
 
 import { selectors, actionCreators } from '../../store/order';
-import {languageDefinations} from '../../utils/lang';
-const {ORDER_PAGE} = languageDefinations();
+import { languageDefinations } from '../../utils/lang';
 
-import { mergeCss } from '../../utils/cssUtil';
-const styles = mergeCss('components/Order/order');
+const { ORDER_PAGE } = languageDefinations();
+
+import lang from '../../utils/language';
+
+import styles_en from './order_en.styl';
+import styles_ar from './order_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 class Order extends Component {
   componentDidMount() {
@@ -54,6 +59,6 @@ const mapDispatchToProps = (dispatch) => {
     { getOrderDetails: actionCreators.getOrderDetails },
     dispatch,
   );
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Order);

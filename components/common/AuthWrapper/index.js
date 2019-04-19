@@ -13,12 +13,20 @@ class AuthWrapper extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {  
+    if(!nextProps.isLoginShown){
+      this.props.popupClosed && this.props.popupClosed();
+    } else {
+      this.props.popupOpened && this.props.popupOpened();
+    }
+  }
+
   render () {
     const { children, isLoggedIn } = this.props;
     if(isLoggedIn){
       return (
         <Fragment>
-          {children}
+          {children ? children : null}
         </Fragment>
       );
     }
@@ -27,7 +35,8 @@ class AuthWrapper extends Component {
 }
 
 const mapStateToProps = (store) => ({
-  isLoggedIn: selectors.getLoggedInStatus(store)
+  isLoggedIn: selectors.getLoggedInStatus(store),
+  isLoginShown: selectors.getShowLogin(store)
 });
 
 const mapDispatchToProps = dispatch =>

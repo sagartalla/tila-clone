@@ -1,28 +1,64 @@
-import _ from 'lodash';
 import axios from 'axios';
 import constants from '../helper/constants';
 
-const getOrderDetails = ({ orderId }) => {
-  return axios.get(`${constants.ORDERS_API_URL}/api/v1/customer/order/details/${orderId}?include_state_times=true&include_payments=true`)
-}
+const getOrderDetails = ({ orderId }) => axios.get(`${constants.ORDERS_API_URL}/api/v1/customer/order/details/${orderId}?include_state_times=true&include_payments=true&grouped=true&include_item_history=true&include_refunds=true&include_return_exchange=true`);
 
-const getReasons = (params) => axios.get(`${constants.ORDERS_API_URL}/api/v1/return/reasons?order_item_id=${params.orderItemId}`);
+const getReasons = params => axios.get(`${constants.ORDERS_API_URL}/api/v1/return/reasons?order_item_id=${params.orderItemId}`);
 
-const submitCancelRequest = (params) => axios.post(`${constants.ORDERS_API_URL}/api/v1/order_item/delivery/${params.orderItemId}/request_cancel`, {
+const submitCancelRequest = params => axios.post(`${constants.ORDERS_API_URL}/api/v1/order_item/delivery/${params.orderItemId}/request_cancel`, {
   reason: params.reason,
   comment: params.comment,
   sub_reasons: params.subReason,
 });
 
-const submitReturnRequest = (params) => axios.post(`${constants.ORDERS_API_URL}/api/v1/order/return`, {
-  address_id: params.addressId,
-  order_item_id: params.orderItemId,
-  reason: params.reason,
-  comment: selectedReasons.comment,
-});
-
-const getExchangeVariants = (params) => axios.get(`${constants.ORDERS_API_URL}/api/v1/return/exchange_options?order_item_id=${params.orderItemId}`)
+const submitReturnRequest = params => axios.post(`${constants.ORDERS_API_URL}/api/v1/order/return`, params);
+const getExchangeVariants = params => axios.get(`${constants.ORDERS_API_URL}/api/v1/return/exchange_options?order_item_id=${params.orderItemId}`);
 
 const sendMapDataApi = (order_id, params) => axios.post(`${constants.ORDERS_API_URL}/api/v1/order/${order_id}/address/geo`, params);
 
-export default { getOrderDetails, getReasons, submitCancelRequest, submitReturnRequest, getExchangeVariants, sendMapDataApi };
+const getRefundOptions = orderItemId => axios.get(`${constants.ORDERS_API_URL}/api/v1/order_item/${orderItemId}/refund_options`);
+
+const setExchangeOrder = params => axios.post(`${constants.ORDERS_API_URL}/api/v1/order/exchange`, params);
+
+const track = ({ event, orderData }) => {
+  window.dataLayer.push({ event: 'purchase' });
+  window.appEventData.push({
+    event,
+    transaction: {
+      transactionID: orderData.payment_id,
+      total: {
+        currency: orderData.currency_code,
+        salesTax: '',
+      },
+      profile: {
+        address: {
+          stateProvince: orderData.address.city,
+          postalCode: orderData.address.postal_code,
+        },
+      },
+      // Collection of Payment Objects
+      payment: {
+        paymentMethod: orderData.payments.map(payment => payment.payment_mode).join(','),
+        paymentAmount: orderData.payments.map(payment => payment.amount).join(','),
+      },
+      // Collection of Item Objects
+      item: orderData.order_items.map(item => item.variant_info.product_id),
+    },
+  });
+};
+
+const getTrackingDetails = trackingId => axios.get(`${constants.LOGISTICS_URL}/api/shipment/v1/track/${trackingId}`);
+
+export default {
+  getOrderDetails,
+  getRefundOptions,
+  getReasons,
+  submitCancelRequest,
+  getTrackingDetails,
+  submitReturnRequest,
+  getExchangeVariants,
+  sendMapDataApi,
+  setExchangeOrder,
+  track,
+};
+

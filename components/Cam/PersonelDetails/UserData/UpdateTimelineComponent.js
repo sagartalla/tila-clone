@@ -9,9 +9,16 @@ import { actionCreators, selectors } from '../../../../store/cam/personalDetails
 
 import UpdatePersonalInfoModal from './UpdatePersonalInfoModal';
 import Btn from '../../../common/Button';
+import { languageDefinations } from '../../../../utils/lang';
 
-import { mergeCss } from '../../../../utils/cssUtil';
-const styles = mergeCss('components/Cam/PersonelDetails/profile');
+import lang from '../../../../utils/language';
+
+import styles_en from '../profile_en.styl';
+import styles_ar from '../profile_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
+const { PERSONAL_INFO_MODAL } = languageDefinations();
 
 class UpdateTimelineComponent extends React.Component {
 
@@ -23,7 +30,7 @@ class UpdateTimelineComponent extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.userInfo.personalInfo) {
       this.setState({
-        personalInfo: nextProps.userInfo.personalInfo
+        personalInfo: nextProps.userInfo.personalInfo,
       });
     }
   }
@@ -62,22 +69,22 @@ class UpdateTimelineComponent extends React.Component {
           <Row>
             <div>
               <Col xs={12} md={12}>
-                <span>Enter Your Name, DOB and Gender for a</span><br />
-                <span>more personalised abcd.com Experience</span>
+                <span>{PERSONAL_INFO_MODAL.ENTER_YOUR_NAME}</span><br />
+                <span>{PERSONAL_INFO_MODAL.EXPERIANCE}</span>
               </Col>
             </div>
           </Row>
         </div>
         <Row>
           <Col xs={12} md={12} className={styles['t-c']}>
-            <Btn btnWidth="95%" btnText="Update Your Info" BtnClickHandler={this.handleShow(true)} />
+            <Btn btnWidth="95%" btnText="Update Your Info" onClick={this.handleShow(true)} />
           </Col>
         </Row>
         <Row>
-          <Col xs={12} md={12} className={`${styles['t-c']}`}>Timeline Component</Col>
+          <Col xs={12} md={12} className={`${styles['t-c']}`}>{PERSONAL_INFO_MODAL.TIME_LINE}</Col>
         </Row>
         <Row>
-          <Col xs={12} md={12} className={styles['t-c']}>We wont Spam.Swear!</Col>
+          <Col xs={12} md={12} className={styles['t-c']}>{PERSONAL_INFO_MODAL.WE_WONT_SPAM}</Col>
         </Row>
         <div className={show ? `${styles['modalContainer']} ${styles['showDiv']}` : `${styles['modalContainer']} ${styles['hideDiv']}`}>
           <div className={`${styles['disabled']}`}>

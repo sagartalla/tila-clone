@@ -7,8 +7,12 @@ import { selectors, actionCreators } from '../../../../store/order';
 import {languageDefinations} from '../../../../utils/lang'
 const {ORDER_PAGE} = languageDefinations()
 
-import { mergeCss } from '../../../../utils/cssUtil';
-const styles = mergeCss('components/Order/includes/OrderIssueWidget/orderIssue');
+import lang from '../../../../utils/language';
+
+import styles_en from './orderIssue_en.styl';
+import styles_ar from './orderIssue_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 class CancelComplete extends Component {
 
@@ -27,7 +31,7 @@ class CancelComplete extends Component {
     const { orderIssue, loadingStatus, errorMessege, goToNextStep } = this.props;
     const { selectedItem } = orderIssue;
     return (
-      <div>
+      <div className={styles['width100']}>
       {
         loadingStatus
         ?
@@ -38,7 +42,7 @@ class CancelComplete extends Component {
             {
               errorMessege
               ?
-              errorMessege
+              <span className={`${styles['p-20']} ${styles['flex']}`}>{errorMessege}</span>
               :
               <div>
                 {/* insert image here */}

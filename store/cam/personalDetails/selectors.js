@@ -18,16 +18,16 @@ const getUserInfo = (store) => {
         contactInfo.phoneNum=phoneNum;
       }
       if (contactInfo.pwd_updated_at) {
-        const lastUpdated = contactInfo.pwd_updated_at.split('T')[0];
-        let msg = moment(new Date(lastUpdated)).fromNow();
-        contactInfo.lastUpdated = "Last updated "+ msg;
+        const lastUpdated = contactInfo.pwd_updated_at.split('[')[0];
+        const msg = moment(lastUpdated).subtract(new Date().getTimezoneOffset(), 'minutes').fromNow();
+        contactInfo.lastUpdated = `Last updated ${msg}`;
       }
       else
         contactInfo.lastUpdated = 'Not Available';
 
     }
     let personalInfo = {}
-    if(store.personalDetailsReducer.data.personalInfo != "" && store.personalDetailsReducer.data.personalInfo && Object.keys(store.personalDetailsReducer.data.personalInfo).length > 0) 
+    if(store.personalDetailsReducer.data.personalInfo != "" && store.personalDetailsReducer.data.personalInfo && Object.keys(store.personalDetailsReducer.data.personalInfo).length > 0)
     {
       personalInfo=store.personalDetailsReducer.data.personalInfo;
       personalInfo.user_name=personalInfo.first_name+" "+personalInfo.last_name;
@@ -54,9 +54,23 @@ const getEditPersonalInfoStatus = (store) => {
 const getErrorMessege = (store) => {
   return store.personalDetailsReducer.error ? store.personalDetailsReducer.error : "";
 }
-
+const getLoadingStatus = (store) => {
+  return store.personalDetailsReducer.ui.loading
+}
+const getOtpData = (store) => {
+  return store.personalDetailsReducer.otpData
+}
 const resetPasswordStatus =(store) => {
 return store.personalDetailsReducer;
 }
 
-export { getUserInfo, getPasswordResetStatus, getErrorMessege, getEditPersonalInfoStatus ,resetPasswordStatus};
+const forgotPasswordStatus = (store) => {
+  if(store.personalDetailsReducer.data.Response){
+    return store.personalDetailsReducer.data.Response;
+  }else if(store.personalDetailsReducer.data.message){
+    return store.personalDetailsReducer.data.message;
+  }
+}
+
+
+export { getUserInfo, getPasswordResetStatus, getLoadingStatus, getErrorMessege, getEditPersonalInfoStatus , forgotPasswordStatus, resetPasswordStatus, getOtpData};

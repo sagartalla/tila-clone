@@ -7,8 +7,12 @@ import { selectors } from '../../../../store/cam/personalDetails';
 import { languageDefinations } from '../../../../utils/lang/';
 import UpdateContactInfoModal from './UpdateContactInfoModal';
 import SVGComponent from '../../../common/SVGComponet';
-import { mergeCss } from '../../../../utils/cssUtil';
-const styles = mergeCss('components/Cam/PersonelDetails/profile');
+import lang from '../../../../utils/language';
+
+import styles_en from '../profile_en.styl';
+import styles_ar from '../profile_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 
 class ContactInfo extends React.Component {
@@ -45,8 +49,8 @@ class ContactInfo extends React.Component {
             <span>{CONTACT_INFO_MODAL.EMAIL}</span>
           </Col>
           <Col xs={6} md={8} className={`${styles['flex-center']} ${styles['tickmark-part']}`}>
-            <span className={styles['pr-20']}>{mailId}</span>
-            <span className={email_verified == 'NV' ? `${styles['showDiv']}` : `${styles['hideDiv']}`}>
+            <span className={styles['pr-20']}>{email}</span>
+            <span className={email_verified !== 'NV' ? `${styles['showDiv']}` : `${styles['hideDiv']}`}>
               <span className={styles['flex']}><SVGComponent clsName={`${styles['tickmark-icon']}`} src="icons/common-icon/bg-tick-mark" /></span>
             </span>
           </Col>
@@ -65,11 +69,12 @@ class ContactInfo extends React.Component {
           </Col>
           <Col xs={6} md={1} className={styles['pr-0']}>
             <span onClick={this.handleShow(true, `password`)} className={`${styles['float-r']} ${styles['flex']} ${styles['p-0']} ${styles['ml-5']}`}>
-              <SVGComponent clsName={`${styles['edit-icon']}`} src="icons/common-icon/edit-icon" />
+              <SVGComponent clsName={`${styles['edit-icon']}`} src="icons/common-icon/edit/edit-penc" />
             </span>
           </Col>
         </div>
         <div className={`${styles['flex-center']} ${styles['pt-10']} ${styles['pb-10']}`}>
+
           <Col xs={12} md={3} className={`${styles['pl-0']} ${styles['pr-0']}`}>
             <span>{CONTACT_INFO_MODAL.PHONE_NUMBER}</span>
           </Col>
@@ -77,14 +82,19 @@ class ContactInfo extends React.Component {
             <span>{phoneNum}</span>
           </Col>
           <Col xs={6} md={1} className={styles['pr-0']}>
-            {/* <span className={`${styles['float-r']} ${styles['p-0']} ${styles['ml-5']}`}>
-              <a onClick={this.handleShow(true, `phone`)}>Edit</a>
-            </span> */}
+            <span
+              onClick={this.handleShow(true, `phone`)}
+              className={`${styles['float-r']} ${styles['pointer']} ${styles['flex']} ${styles['p-0']} ${styles['ml-5']}`}>
+              <SVGComponent
+                clsName={`${styles['edit-icon']}`}
+                src="icons/common-icon/edit/edit-penc"
+              />
+            </span>
           </Col>
         </div>
-        <div className={show ? `${styles['modalContainer']} ${styles['showDiv']}` : `${styles['modalContainer']} ${styles['hideDiv']}`}>
-          <div className={`${styles['disabled']}`}>
-          </div>
+        <div className={show ? `${styles['modalContainer']} ${styles['showDiv']}`
+          : `${styles['modalContainer']} ${styles['hideDiv']}`}>
+          <div className={`${styles['disabled']}`}></div>
         </div>
         <div className={show ? `${styles['openModal']}` : `${styles['closeModal']}`}>
           <UpdateContactInfoModal

@@ -1,9 +1,21 @@
 import React from 'react';
+import Cookies from 'universal-cookie';
+
 import SVGComponent from '../../common/SVGComponet';
 import { Link } from '../../../routes';
 
-import { mergeCss } from '../../../utils/cssUtil';
-const styles = mergeCss('components/Cam/Sidebar/sidebar');
+import lang from '../../../utils/language';
+
+import styles_en from './sidebar_en.styl';
+import styles_ar from './sidebar_ar.styl';
+
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
+const cookies = new Cookies();
+
+const language = cookies.get('language') || 'en';
+const country = cookies.get('country') || 'SAU';
 
 const List = props => props.data.map((val, id) => {
   const { query } = props;
@@ -13,9 +25,10 @@ const List = props => props.data.map((val, id) => {
   <div className={styles['list-container']} key={id.toString()}>
     {val.data.map((itemVal, itemIndex) => {
       return (
-        <Link route={itemVal.href} key={itemVal.display}>
+        <Link route={`/${country}/${language}${itemVal.href}`} key={itemVal.display}>
           {/* TODO can be next client side routes */ }
-          <div className={`${itemVal.href === `/cam/${tab}` ? styles['active'] : {}} ${styles['list-items-container']} ${styles['light-gry-clr']} ${styles['flex']}`} key={itemIndex.toString()}>
+          <a style={{display:'block'}}>
+          <div className={`${itemVal.href === `/${country}/${language}/cam/${tab}` ? styles['active'] : {}} ${styles['list-items-container']} ${styles['light-gry-clr']} ${styles['flex']}`} key={itemIndex.toString()}>
             <div className={`${styles['list-item-left']} ${styles['pr-10']}`}>
               <SVGComponent src={itemVal.icon} />
             </div>
@@ -31,6 +44,7 @@ const List = props => props.data.map((val, id) => {
             } */}
 
           </div>
+          </a>
         </Link>
         );
       })}

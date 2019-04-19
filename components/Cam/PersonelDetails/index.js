@@ -6,19 +6,24 @@ import UserData from './UserData';
 import SocialMedia from './SocialMedia';
 import Notification from './Notification';
 
-import { mergeCss } from '../../../utils/cssUtil';
-const styles = mergeCss('components/Cam/PersonelDetails/profile');
+import lang from '../../../utils/language';
+
+import styles_en from './profile_en.styl';
+import styles_ar from './profile_ar.styl';
+
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 const UserInfo = () => {
   return (
-    <div className={`${styles['profile-main-part']} ${styles['pl-5']}`}>
+    <div className={`${styles['profile-main-part']} ${styles['pl-5']} ${styles['ipad-pl-0']}`}>
       <UserData />
-      <Col xs={12} md={6} className={styles['pl-0']}>
+      {/*<Col xs={12} md={6} className={`${styles['pl-0']} ${styles['ipad-pr-0']} ${styles['ipad-mb-15']}`}>
         <SocialMedia />
       </Col>
-      <Col xs={12} md={6} className={`${styles['pl-5']} ${styles['pr-0']}`}>
+      <Col xs={12} md={6} className={`${styles['pl-5']} ${styles['pr-0']} ${styles['ipad-pl-0']}`}>
         <Notification />
-      </Col>
+      </Col>*/}
     </div>
   );
 }

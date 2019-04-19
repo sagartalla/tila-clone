@@ -2,8 +2,13 @@ import React, { Component, Fragment } from 'react';
 import { Grid } from 'react-bootstrap';
 
 import Menu from './Menu';
-import { mergeCss } from '../../../../utils/cssUtil';
-const styles = mergeCss('components/HeaderBar/header');
+
+import lang from '../../../../utils/language';
+
+import styles_en from '../../header_en.styl';
+import styles_ar from '../../header_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 class SubMenu extends Component {
   constructor(props) {
@@ -23,7 +28,7 @@ class SubMenu extends Component {
   }
 
   render() {
-    const { subMenuItems, onLinkClick } = this.props;
+    const { subMenuItems, onLinkClick, colorScheme, parentID } = this.props;
     const { selectedSubCategory } = this.state;
     const selectedSubCategoryTree = _.find(subMenuItems, { id: parseInt(selectedSubCategory) });
     return (
@@ -45,8 +50,9 @@ class SubMenu extends Component {
               <Grid>
                 <Menu
                   selectedCategoryTree={selectedSubCategoryTree}
-                  colorScheme=""
+                  colorScheme={colorScheme}
                   onLinkClick={onLinkClick}
+                  parentID={parentID}
                 />
               </Grid>
             :
@@ -56,6 +62,5 @@ class SubMenu extends Component {
     );
   }
 }
-
 
 export default SubMenu;

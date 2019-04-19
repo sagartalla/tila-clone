@@ -39,13 +39,37 @@
     background-color: #E40A80;
 }
 
+.nav-tabs>li.active {
+    border-bottom: 4px solid #e40a80;
+}
+
+.lifestyle .progress .progress-bar-danger {
+    background-color: #f26b6b;
+}
+
+.lifestyle .nav-tabs>li.active {
+    border-color: #f26b6b;
+}
+
+.electronics .nav-tabs>li.active {
+    border-color: #2ac497;
+}
+
+.electronics .progress .progress-bar-danger {
+    background-color: #2ac497;
+}
+
+.fashion .nav-tabs>li.active {
+    border-color: #939393;
+}
+
+.fashion .progress .progress-bar-danger {
+    background-color: #939393;
+}
+
 .nav-tabs {
     background: rgba(216, 216, 216, 0.1);
     border: 0;
-}
-
-.nav-tabs>li.active {
-    border-bottom: 4px solid #e40a80;
 }
 
 .panel-default>.panel-heading {
@@ -53,11 +77,11 @@
     border-color: #FFF;
 }
 
-
 .nav-tabs>li a {
     font-size: 16px;
     color: #666;
 }
+
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
     color: #000;
     border: 0;
@@ -99,6 +123,10 @@
     padding: 0
 }
 
+.panel-group .panel-heading a {
+    position: relative;
+    display: block;
+}
 
 .panel-group {
     margin-bottom: 0;
@@ -117,9 +145,10 @@
 }
 
 #cart-toggle {
-    padding: 0 20px;
+    padding-right: 24px;
     border-right: 1px solid #e5e5e5;
     border-radius: 0;
+    margin: 0px 0 0 22px;
 }
 
 #cart-toggle .caret {
@@ -152,4 +181,24 @@
     background: url(/static/img/icons/common-icon/long-right-arrow.svg) no-repeat;
     background-size: contain;
     color: transparent !important;
+}
+
+@media screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation : portrait){
+    .slick-next, .slick-prev {
+        display: none !important;
+    }
+}
+
+.top-banner-slider .slick-dots li {
+  width: initial;
+  color: #444444;
+}
+
+.top-banner-slider .slick-slider button {
+  display: none !important;
+}
+
+.top-banner-slider .slick-dots li.slick-active {
+  font-family: ProximaNova-SBold;
+  color: #000000;
 }

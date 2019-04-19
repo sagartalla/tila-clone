@@ -13,7 +13,11 @@ const UpdateContactInfoModal = (props) => {
         element == "password" ?
           <EditPassword {...props} />
           : element == "phone" ?
-            <EditPhone {...props} />
+            <EditPhone
+              {...props}
+              isPopup={true}
+              buttonText={'verfiy Mobile Number'}
+            />
             :
             (<div>Loading...</div>)
       }
@@ -22,4 +26,3 @@ const UpdateContactInfoModal = (props) => {
 
 }
 export default UpdateContactInfoModal;
-

@@ -5,13 +5,17 @@ import { Grid, Row, Col } from 'react-bootstrap';
 import SVGComponent from '../../common/SVGComponet';
 import ShippingAddress from '../../Cam/ShippingAddress';
 
-import { mergeCss } from '../../../utils/cssUtil';
-const styles = mergeCss('components/Payments/payment');
+import lang from '../../../utils/language';
+
+import styles_en from '../payment_en.styl';
+import styles_ar from '../payment_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 const Loyalty = props => {
   const { configJson } = props;
   return (
-    <div className={`${styles['pb-15']} ${styles['pt-15']} ${styles['pl-35']} ${styles['pr-35']} ${styles['box']} ${styles['mb-20']} ${styles['pay-loyalty-main']} ${styles['relative']}`}>
+    <div className={`${styles['box']} ${styles['mb-20']} ${styles['pay-loyalty-main']} ${styles['relative']}`}>
       <SVGComponent clsName={`${styles['map-address']}`} src="icons/map/address" />
       <h4 className={`${styles['mb-20']} ${styles['mt-0']}`}>Pay with Loyalty Points</h4>
       <Row>

@@ -4,64 +4,92 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Grid, Row, Col } from 'react-bootstrap';
+import Cookies from 'universal-cookie';
+import { toast } from 'react-toastify';
 
 import Cart from '../Cart';
 import SignIn from './includes/SignIn';
 import PaymentMode from './includes/PaymentMode';
-import PaymentHeader from './includes/PaymentHeader';
+import HeaderBar from '../HeaderBar';
 import LoyaltyPoints from './includes/LoyaltyPoints';
 import OffersAndDiscounts from './includes/OffersAndDiscounts';
-import RightSideBar from '../common/CartPaymentSideBar';
+import RightSideBar from '../Cart/CartPaymentSideBar';
 import { languageDefinations } from '../../utils/lang/';
 import DeliveryAddress from './includes/DeliveryAddress';
 import { actionCreators, selectors } from '../../store/payments';
 import { actionCreators as authActionCreators, selectors as authSelectors } from '../../store/auth';
 import { actionCreators as cartActionCreators, selectors as cartSelectors } from '../../store/cart';
+import Slider from '../common/slider';
+import Coupon from '../Cart/CartPaymentSideBar/coupons';
+import FormValidator from '../common/FormValidator';
 
+import lang from '../../utils/language';
 
-import { mergeCss } from '../../utils/cssUtil';
-const styles = mergeCss('components/Payments/payment');
+import styles_en from './payment_en.styl';
+import styles_ar from './payment_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
+const cookies = new Cookies();
+
+const language = cookies.get('language') || 'en';
+const country = cookies.get('country') || 'SAU';
 
 class Payments extends React.Component {
   constructor(props) {
     super(props);
+    this.validations = new FormValidator([
+      {
+        field: 'username',
+        method: this.validateEmail,
+        message: 'Enter valid emailid',
+        validWhen: false,
+      },
+      {
+        field: 'password',
+        method: this.validateLengthPassword,
+        message: 'Your password must be at least 8 characters long.',
+        validWhen: false,
+      },
+    ]);
     this.state = {
       login: {
         username: '',
-        password: ''
+        password: '',
       },
+      validation: this.validations.valid(),
       paymentConfigJson: {
         signIn: {
           basic: false,
           progress: true,
-          done: false
+          done: false,
         },
         address: {
           basic: true,
           progress: false,
-          done: false
+          done: false,
         },
         loyaltyPoints: {
           basic: true,
           progress: false,
-          done: false
+          done: false,
         },
         offersDiscounts: {
           basic: true,
           progress: false,
-          done: false
+          done: false,
         },
         payment: {
           basic: true,
           progress: false,
-          done: false
-        }
+          done: false,
+        },
       },
       showTab: 0,// to show payment tabs
       paymentOptions: {}, // which payment options to show.
       loggedInFlag: false,
-      signInLoader: false,
       editCartDetails: true,
+      showSlider: false,
     }
 
     this.saveCard = this.saveCard.bind(this);
@@ -74,13 +102,20 @@ class Payments extends React.Component {
     this.handleLoyaltyBtn = this.handleLoyaltyBtn.bind(this);
     this.handleOffersDiscountsTab = this.handleOffersDiscountsTab.bind(this);
     this.handleShippingAddressContinue = this.handleShippingAddressContinue.bind(this);
+    this.onClickEdit = this.onClickEdit.bind(this);
+  }
+
+  componentDidMount() {
+    // TODO move it to base component later after discussion on login.
+    this.props.getLoginInfo();
+    this.props.getCartResults();
   }
 
   componentWillReceiveProps(nextProps) {
     // if cart is empty redirect to cart page.
     // if user hits payment url directly and no cart items, this condition will execute.
     if (nextProps.cartResults.items.length === 0 && nextProps.cartResults.ui.loaded) {
-      Router.push('/cart');
+      Router.push(`/${country}/${language}/cart`);
     }
     const { loggedInFlag } = this.state;
 
@@ -96,23 +131,26 @@ class Payments extends React.Component {
     if (nextProps.isLoggedIn && !loggedInFlag) {
       const login = nextProps.userCreds || this.state.login;
       const paymentConfigJson = { ...this.state.paymentConfigJson };
-
       paymentConfigJson['signIn'] = { basic: false, progress: false, done: true };
       paymentConfigJson['address'] = { basic: false, progress: true, done: false };
-      this.setState({ paymentConfigJson, login, loggedInFlag: true, signInLoader: false });
+      this.setState({
+        paymentConfigJson, login, loggedInFlag: true,
+      });
     }
   }
 
-  componentDidMount() {
-    // TODO move it to base component later after discussion on login.
-    this.props.getLoginInfo();
-    this.props.getCartResults();
-  }
-
-  //TODO Show loader on clicking on login button.
-  showAddressTab() {
-    this.setState({ signInLoader: true });
-    this.props.userLogin(this.state.login);
+  onClickEdit() {
+    const paymentConfigJson = { ...this.state.paymentConfigJson };
+    paymentConfigJson.signIn = { basic: false, progress: true, done: false };
+    paymentConfigJson.address = {
+      basic: true,
+      progress: false,
+      done: false,
+    };
+    this.setState({
+      paymentConfigJson,
+      loggedInFlag: false,
+    });
   }
 
   inputOnChange(e) {
@@ -123,6 +161,7 @@ class Payments extends React.Component {
 
   // onclick payment method tabs.
   showPaymentType(value) {
+    /* method not used */
     this.setState({ showTab: value });
   }
 
@@ -130,17 +169,19 @@ class Payments extends React.Component {
   // TODO make paymentjson manipulation as util
   // NOT USING - remove 6 months later after PCD-IS [31-Jul-2018]
   makePayment() {
+    /* method not used */
     const { paymentOptions } = this.props;
     const paymentjson = {
-      "payment_details": [
+      payment_details: [
         {
-          "amount": 0,
-          "currency": "",
-          "payment_mode": ""
-        }
+          amount: 0,
+          currency: '',
+          payment_mode: '',
+        },
       ],
-      "transaction_id": "string"
-    }
+      redirect_url: `${window.location.origin}/${country}/${language}`,
+      transaction_id: '',
+    };
     paymentjson.payment_details[0].amount = paymentOptions.data.amount;
     paymentjson.payment_details[0].currency = paymentOptions.data.currency;
     paymentjson.payment_details[0].payment_mode = 'PAY_ONLINE';
@@ -150,15 +191,20 @@ class Payments extends React.Component {
 
   handleShippingAddressContinue(e) {
     const { editCartDetails } = this.state;
-    const defaultAddrId = this.props.defaultAddress[0].address_id;
-    this.props.createOrder(defaultAddrId)
+    if (this.props.defaultAddress[0]) {
+      const defaultAddrId = this.props.defaultAddress[0].address_id;
+      this.props.createOrder(defaultAddrId)
 
-    const paymentConfigJson = { ...this.state.paymentConfigJson };
-    paymentConfigJson['address'] = { basic: false, progress: false, done: true };
-    paymentConfigJson['loyaltyPoints'] = { basic: false, progress: true, done: false };
-    paymentConfigJson['offersDiscounts'] = { basic: true, progress: false, done: false };
-    paymentConfigJson['payment'] = { basic: true, progress: false, done: false };
-    this.setState({ paymentConfigJson, editCartDetails: !editCartDetails });
+      const paymentConfigJson = { ...this.state.paymentConfigJson };
+      paymentConfigJson['address'] = { basic: false, progress: false, done: true };
+      // paymentConfigJson['loyaltyPoints'] = { basic: false, progress: true, done: false };
+      // paymentConfigJson['offersDiscounts'] = { basic: true, progress: false, done: false };
+      paymentConfigJson['payment'] = { basic: false, progress: true, done: false };
+      this.setState({ paymentConfigJson, editCartDetails: !editCartDetails });
+    } else {
+      toast.info('Please add a delivery address.');
+    }
+
   }
 
   handleLoyaltyBtn() {
@@ -200,21 +246,65 @@ class Payments extends React.Component {
   saveCard(e) {
     const { paymentOptions } = this.props;
     this.props.saveCard({
-      "save_card": e.target.checked,
-      "transaction_id": paymentOptions.data.transaction_id,
-      "user_id": ""
+      save_card: e.target.checked,
+      transaction_id: paymentOptions.data.transaction_id,
+      user_id: "",
     });
   }
 
+  //TODO Show loader on clicking on login button.
+  showAddressTab() {
+    const validation = this.validations.validate(this.state.login);
+    if (validation.isValid) {
+      const serverData = {
+        channel: 'BASIC_AUTH',
+        metadata: this.state.login,
+        rememberMe: true,
+      };
+
+      this.props.userLogin(serverData);
+    }
+    this.setState({
+      validation,
+    });
+  }
+
+  validateEmail = (fieldvalue, state) => {
+    const emailReg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (emailReg.test(fieldvalue)) return false;
+    return true;
+  }
+
+  validateLengthPassword = (fieldvalue, state) => {
+    if (fieldvalue.length >= 8) return false;
+    return true;
+  }
+
+  validatePassword = (fieldvalue, state) => {
+    const passreg = /^([a-zA-Z0-9_-]){8,30}$/;
+    if (passreg.test(fieldvalue)) return false;
+    return true;
+  }
+
+  openSlider = () => {
+    this.setState({
+      showSlider: true,
+    });
+  }
+  closeSlider = () => {
+    this.setState({
+      showSlider: false,
+    });
+  }
   render() {
-    const { login, showTab, paymentConfigJson, signInLoader, editCartDetails } = this.state;
-    const { paymentOptions, defaultAddress, isLoggedIn, cartResults } = this.props;
-    const { PAYMENT_PAGE } = languageDefinations();
+    const { login, showTab, paymentConfigJson, editCartDetails, showSlider, validation } = this.state;
+    const { paymentOptions, defaultAddress, signInLoader, isLoggedIn, cartResults } = this.props;
+    const { PAYMENT_PAGE, CART_PAGE } = languageDefinations();
 
     return (
       <div className={styles['payment']}>
-        <PaymentHeader />
-        <Grid>
+        <HeaderBar hideSearch hideMegamenu/>
+        <Grid className={styles['pt-75']}>
           <Row>
             <Col xs={12} md={12} sm={12}>
               <h4 className={`${styles['mt-30']} ${styles['mb-20']} ${styles['light-gry-clr']}`}>{PAYMENT_PAGE.SECURE_CHECKOUT}</h4>
@@ -228,6 +318,8 @@ class Payments extends React.Component {
                 showAddressTab={this.showAddressTab}
                 inputOnChange={this.inputOnChange}
                 configJson={paymentConfigJson.signIn}
+                onClickEdit={this.onClickEdit}
+                validation={validation}
               />
               <DeliveryAddress
                 defaultAddress={defaultAddress}
@@ -235,17 +327,16 @@ class Payments extends React.Component {
                 configJson={paymentConfigJson.address}
                 handleShippingAddressContinue={this.handleShippingAddressContinue}
               />
-              <LoyaltyPoints
+            {/*<LoyaltyPoints
                 editLoyalityTab={this.editLoyalityTab}
                 handleLoyaltyBtn={this.handleLoyaltyBtn}
                 configJson={paymentConfigJson.loyaltyPoints}
-              />
-              <OffersAndDiscounts
+              />*/}
+              {/*<OffersAndDiscounts
                 configJson={paymentConfigJson.offersDiscounts}
                 handleOffersDiscountsTab={this.handleOffersDiscountsTab}
-              />
+              />*/}
               <PaymentMode
-                showTab={showTab}
                 data={paymentOptions}
                 saveCard={this.saveCard}
                 makePayment={this.makePayment}
@@ -253,7 +344,7 @@ class Payments extends React.Component {
                 configJson={paymentConfigJson.payment}
               />
             </Col>
-            <Col md={3} xs={12} sm={12} className={`${styles['pl-5']}`}>
+            <Col md={3} xs={12} sm={12} className={`${styles['pl-5']} ${styles['landscape-pr-0']} ${styles['m-p-l-15']}`}>
               <div>
                 {
                   cartResults && cartResults.total_price ?
@@ -261,6 +352,7 @@ class Payments extends React.Component {
                       <RightSideBar
                         data={cartResults}
                         showInstant={false}
+                        openSlider={this.openSlider}
                       />
                       <Cart
                         showMiniCart={true}
@@ -270,28 +362,42 @@ class Payments extends React.Component {
                     </div>
                     : null
                 }
-                <div className={styles['secure-img']}>
+                {/*<div className={styles['secure-img']}>
                   <img className={styles['']} src={"/static/img/bg-img/group-cards.png"} />
-                </div>
+                </div>*/}
               </div>
             </Col>
           </Row>
         </Grid>
+        {
+        showSlider &&
+          <Slider
+            closeSlider={this.closeSlider}
+            isOpen={showSlider}
+            label={CART_PAGE.COUPONS}
+          >
+            <Coupon
+              closeSlider={this.closeSlider}
+              openSlider={this.openSlider}
+            />
+          </Slider>
+        }
       </div>
-    )
+    );
   }
 }
 
-const mapStateToprops = (store) => ({
+const mapStateToprops = store => ({
   userCreds: authSelectors.getUserCreds(store),
   cartResults: cartSelectors.getCartResults(store),
   paymentOptions: selectors.getPaymentOptions(store),
   makePaymentOptions: selectors.getPaymentUrl(store),
   defaultAddress: selectors.getDefaultAddress(store),
   isLoggedIn: authSelectors.getLoggedInStatus(store),
-})
+  signInLoader: authSelectors.getLoginProgressStatus(store),
+});
 
-const mapDispatchToProps = (dispatch) =>
+const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       saveCard: actionCreators.saveCard,
@@ -315,5 +421,3 @@ Payments.defaultProps = {
 };
 
 export default connect(mapStateToprops, mapDispatchToProps)(Payments);
-
-

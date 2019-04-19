@@ -19,43 +19,5 @@
 		"icon": "icons/creditcards",
 		"display": "Credit Cards, Vouchers & Reward points",
 		"href": "/cam/uservault"
-	},{
-		"icon": "icons/messages",
-		"display": "Messages",
-		"count": "13",
-		"href": "/cam/messages"
-	},{
-		"icon": "icons/notifications",
-		"display": "Notifications",
-		"href": "/cam/notifications"
-	}]
-}, {
-	"data": [{
-		"icon": "icons/my-reviews",
-		"display": "My reviews & ratings",
-		"href": "#"
-	},{
-		"icon": "icons/gift-registry",
-		"display": "Gift Registry",
-		"href": "#"
-	},{
-		"icon": "icons/my-coupons",
-		"display": "My Coupons",
-		"count": "13",
-		"href": "#"
-	},{
-		"icon": "icons/subscriptions",
-		"display": "Subscriptions",
-		"href": "#"
-	}]
-}, {
-	"data": [{
-		"icon": "icons/preferences",
-		"display": "Preferences",
-		"href": "#"
-	},{
-		"icon": "icons/refer",
-		"display": "Refer/Invite Friends",
-		"href": "#"
 	}]
 }]

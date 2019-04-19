@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { mergeCss } from '../../../utils/cssUtil';
-const styles = mergeCss('components/Product/product');
+import lang from '../../../utils/language';
+
+import styles_en from '../product_en.styl';
+import styles_ar from '../product_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 
 const KeyFeatures = ({ features }) => {
   return (
-    <div className={`${styles['pt-0']} ${styles['pb-15']} ${styles['border-b']}`}>
+    <div className={`${styles['pt-0']}`}>
       <ul className={`${styles['kf-list']} ${styles['flex']} ${styles['flex-wrp']} ${styles['fs-12']} ${styles['mb-0']} ${styles['pl-0']}`}>
         {
-          features.map((feature) =>  <li key={feature} className={`${styles['no-lst']} ${styles['pr-20']}`}>{feature}</li>)
+          features.map((feature) =>  <li key={feature} className={styles['pr-20']}><span>{feature}</span> </li>)
         }
       </ul>
     </div>

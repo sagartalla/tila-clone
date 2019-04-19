@@ -1,21 +1,38 @@
-import React, { Component } from 'react';
+import React from 'react';
 // import PropTypes from 'prop-types';
 import { Col } from 'react-bootstrap';
+import Slider from 'react-slick';
 // import constants from '../../../constants';
 import constants from '../../../constants';
-import { mergeCss } from '../../../utils/cssUtil';
-const styles = mergeCss('components/Product/product');
-import {languageDefinations} from '../../../utils/lang'
-const {PDP_PAGE} = languageDefinations()
-const RecentView = props => {
+
+import { languageDefinations } from '../../../utils/lang';
+
+import lang from '../../../utils/language';
+
+import styles_en from '../product_en.styl';
+import styles_ar from '../product_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
+
+const { PDP_PAGE } = languageDefinations();
+
+const settings = {
+  infinite: false,
+  speed: 500,
+  slidesToShow: 5,
+  slidesToScroll: 1,
+};
+
+const RecentView = (props) => {
   const { recentlyViewed, shippingInfo } = props;
   return (
-    <div className={`${styles['recentview-main']} ${styles['pt-25']} ${styles['pb-25']}`}>
+    <div className={`${styles['recentview-main']} ${styles['pb-25']}`}>
       <h6 className={`${styles['recent-title']} ${styles['pt-15']} ${styles['pb-15']} ${styles['pl-15']} ${styles['fontW600']}`}><span className={styles['pl-15']}>{PDP_PAGE.RECENTLY_VIEWED}</span></h6>
-      <div className={styles['flex']}>
-        {
-          recentlyViewed.map((item) => {
-            return (
+      <div>
+        <Slider {...settings}>
+          {
+            recentlyViewed.map(item => (
               <Col md={2} className={`${styles['pl-0']}`}>
                 <a href={item.uri}>
                   <div className={`${styles['recentview-main-inn']} ${styles['flex']} ${styles['flex-colum']}`}>
@@ -27,9 +44,9 @@ const RecentView = props => {
                   </div>
                 </a>
               </Col>
-            )
-          })
-        }
+            ))
+          }
+        </Slider>
       </div>
     </div>
   );

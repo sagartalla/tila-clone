@@ -5,19 +5,28 @@ import Review from './Reviews';
 import OverView from './ElectronicsOverView';
 import Description from './ElectronicsDescription';
 import Specification from './ElectronicsSpecifications';
-import Compare from './ElectronicsCompare';
+// import Compare from './ElectronicsCompare';
 import SVGCompoent from '../../common/SVGComponet';
 
-import { mergeCss } from '../../../utils/cssUtil';
-const styles = mergeCss('components/Product/product');
+import lang from '../../../utils/language';
 
-const ElectronicsTab = ({ catalog }) => {
+import styles_en from '../product_en.styl';
+import styles_ar from '../product_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
+const ElectronicsTab = ({ catalog, productDescription, catalogObj }) => {
   return (
     <div>
       <Tabs defaultActiveKey={1}>
         <Tab eventKey={1} title="Overview">
-          <OverView   catalog={catalog}/>
+          <OverView  catalog={catalog}/>
         </Tab>
+        {
+          productDescription && <Tab eventKey={2} title="Description">
+            <Description productDescription={productDescription} />
+          </Tab>
+        }
         {/*<Tab eventKey={2} title="Description">
           <Description />
         </Tab>
@@ -25,11 +34,11 @@ const ElectronicsTab = ({ catalog }) => {
           <Specification />
         </Tab>*/}
         <Tab eventKey={4} title="Reviews">
-          <Review />
+          <Review catalogObj={catalogObj} />
         </Tab>
-        <Tab eventKey={5} title="Compare">
+        {/* <Tab eventKey={5} title="Compare">
           <Compare />
-        </Tab>
+        </Tab> */}
       </Tabs>
     </div>
   );

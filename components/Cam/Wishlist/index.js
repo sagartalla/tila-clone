@@ -5,52 +5,102 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators, selectors } from '../../../store/cam/wishlist';
+import { selectors as cartSelectors } from '../../../store/cart';
 
 import WishlistBody from './includes/WishlistBody';
 import CartBottomPopup from './includes/CartBottomPopup';
 import CartMiniWishList from './includes/CartMiniWishList';
+import Pagination from '../../common/Pagination';
 
 // import { isAddedToCart } from '../../../store/cart/selectors';
-import { mergeCss } from '../../../utils/cssUtil';
-const styles = mergeCss('components/Cam/Wishlist/wishlist');
+import lang from '../../../utils/language';
+
+import styles_en from './wishlist_en.styl';
+import styles_ar from './wishlist_ar.styl';
+
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 
 class Wishlist extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
-      showCartPageBtmPopup: false
-    }
+      showCartPageBtmPopup: false,
+      currentPage: 0,
+      renderWishlist: true,
+    };
     this.deleteItem = this.deleteItem.bind(this);
     this.addToCart = this.addToCart.bind(this);
     this.showCartPageBtmPopup = this.showCartPageBtmPopup.bind(this);
+    this.onPageChanged = this.onPageChanged.bind(this);
   }
 
   componentDidMount() {
-    this.props.getWishlist();
+    this.props.getWishlist(this.state.currentPage).then(() => this.props.track({
+      eventName: 'WishList View',
+      page: this.state.currentPage,
+    }));
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.getPageDetails.number !== this.state.currentPage) {
+      window.scrollTo(0, 0);
+      this.setState({
+        currentPage: nextProps.getPageDetails.number,
+        renderWishlist: true,
+      });
+    }
+    if (nextProps.getPageDetails.number_of_elements === 0
+      && nextProps.getPageDetails.total_elements > 0 && this.state.renderWishlist) {
+      this.setState({
+        renderWishlist: false,
+      }, () =>
+        this.props.getWishlist(nextProps.getPageDetails.number - 1).then(() =>
+          this.props.track({
+            eventName: 'WishList View',
+            page: this.state.currentPage,
+          })));
+    }
+  }
+
+  onPageChanged(currentPage) {
+    this.setState({
+      currentPage,
+    }, () => this.props.getWishlist(currentPage));
   }
 
   deleteItem(e) {
-    this.props.deleteWishlist(e.currentTarget.id)
+    const { currentPage } = this.state;
+    this.props.deleteWishlist(e.currentTarget.id, { showToast: true }, currentPage);
   }
 
   showCartPageBtmPopup() {
     this.setState({
-      showCartPageBtmPopup: !this.state.showCartPageBtmPopup
+      showCartPageBtmPopup: !this.state.showCartPageBtmPopup,
     });
   }
 
   addToCart(e) {
     this.props.addToCart({
-      listing_id: e.target.id
+      listing_id: e.target.id,
     }, e.target.getAttribute('data-wish-id'), e.target.getAttribute('data-cart-res'));
   }
 
+  notify = ({ target }) => {
+    const { notifyMe } = this.props;
+    notifyMe({
+      product_id: target.getAttribute('data-product-id'),
+    });
+  }
+
   render() {
-    const { results, cartMiniWishList } = this.props;
-    const { showCartPageBtmPopup } = this.state;
+    const {
+      results, cartMiniWishList, getPageDetails,
+    } = this.props;
+    const { showCartPageBtmPopup, currentPage } = this.state;
     return (
-      <div className={`${styles['wishlist']} ${styles['pl-5']}`}>
+      <div className={`${styles.wishlist} ${styles['pl-5']}`}>
         {
           cartMiniWishList ?
             <Fragment>
@@ -63,6 +113,7 @@ class Wishlist extends Component {
                   <CartBottomPopup
                     data={results}
                     addToCart={this.addToCart}
+                    showCartPageBtmPopup={this.showCartPageBtmPopup}
                   />
                   : null
               }
@@ -72,30 +123,44 @@ class Wishlist extends Component {
               data={results}
               deleteItem={this.deleteItem}
               addToCart={this.addToCart}
+              notifyMe={this.notify}
+              pageDetails={getPageDetails}
             />
         }
-
+        {
+          !cartMiniWishList &&
+          <Pagination
+            totalSize={getPageDetails.total_pages > 1 ? (getPageDetails.total_pages - 1): 0}
+            pageNeighbours={0}
+            onPageChanged = {this.onPageChanged}
+            currentPage={currentPage}
+          >
+          </Pagination>
+        }
       </div>
-    )
+    );
   }
 }
 
-const mapStateToProps = (store) => ({
-  results: selectors.getWishListResults(store)
+const mapStateToProps = store => ({
+  results: selectors.getWishListResults(store),
+  getPageDetails: selectors.getPaginationDetails(store),
 });
 
-const mapDispatchToProps = (dispatch) =>
+const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       getWishlist: actionCreators.getWishlist,
       deleteWishlist: actionCreators.deleteWishlist,
       addToCart: actionCreators.addToCart,
+      notifyMe: actionCreators.notifyMe,
+      track: actionCreators.track,
     },
     dispatch,
   );
 
 Wishlist.propTypes = {
-  results: PropTypes.array,
+  results: PropTypes.instanceOf(Array).isRequired,
 };
 
 Wishlist.defaultProps = {

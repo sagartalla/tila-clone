@@ -15,46 +15,49 @@ const cookies = new Cookies();
 
 class SearchPage extends Base {
   static async getInitialProps({ store, isServer, query, req }) {
-    const { language, search, facets, category, subCategory, isListed } = query
+    const { country, language, search, facets, category, subCategory, isListed, disableSpellCheck, sid } = query
     const categoryTree = query.categoryTree === 'true'; //TODO need better way to identify category tree
+    const categoryFacet = query.categoryFacet === 'true';
     //TODO SF-37 better handling of country
     const state = store.getState();
     // const country = authSelectors.getCountry(state);
-    const country = req ? req.universalCookies.get('country') : cookies.get('country');
-    let [categoryId, ...categoryName] = category ? category.split('-').reverse() : [null, null];
-    let [subCategoryId, ...subCategoryName] = subCategory ? subCategory.split('-').reverse() : [null, null];
-    categoryName = categoryName ? categoryName.join(' ') : null;
-    subCategoryName = subCategoryName ? subCategoryName.join(' ') : null;
+    // const country = req ? req.universalCookies.get('country') : cookies.get('country');
+    // let [categoryId, ...categoryName] = category ? category.split('-').reverse() : [null, null];
+    // let [subCategoryId, ...subCategoryName] = subCategory ? subCategory.split('-').reverse() : [null, null];
+    // categoryName = categoryName ? categoryName.join(' ') : null;
+    // subCategoryName = subCategoryName ? subCategoryName.join(' ') : null;
     const categoryFilter = {
-      id: subCategoryId || categoryId,
+      id: sid ? sid.split(',').pop() : null,
     };
-    const facetFilters = selectors.getFacetfilters(store.getState())(JSON.parse(facets || '{}'));
+    const { facetFilters, facetFiltersCopyWithNames } = selectors.getFacetfilters(store.getState())(JSON.parse(facets || '{}'));
     const shippingData = req ? req.universalCookies.get('shippingInfo') : cookies.get('shippingInfo');;
     const { city: shippingCity, country: shippingCountry } = shippingData || {};
     const searchOptions = {
       categoryFilter,
+      categoryFacet,
       country: country || undefined,
-      pageSize: 100,
+      pageSize: 25,
       query: search,
       language: language || 'en',
       facetFilters,
+      facetFiltersCopyWithNames,
       pageNum: 1,
-      fl: '*',
       isListed: isListed === 'true',
       categoryTree,
-      choosenCategoryName: categoryName || subCategoryName,
+      disableSpellCheck,
+      choosenCategoryName: category || subCategory,
     };
-    if(shippingCity) {
+    if (shippingCity) {
       searchOptions.shippingDetails = {
         shippingCity: shippingCity.toUpperCase(),
-        shippingCountry: (country || 'uae').toUpperCase(),
+        shippingCountry: (country || 'ARE').toUpperCase(),
       }
     }
     await store.dispatch(actionCreators.getSearchResults(searchOptions))
     return { isServer };
   }
 
-  pageName = 'SEAERCH';
+  pageName = 'SEARCH';
 
   render() {
     return (

@@ -1,0 +1,130 @@
+@import '../../../../layout/main/executables.styl';
+
+.couponDiv
+   border: solid 0.9px border-color;
+   height 200px
+   width: 350px;
+   margin-top: 30px;
+   box-shadow: 0 5px 9px 0 rgba(0, 0, 0, 0.05);
+   border-radius: 5px;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+
+.couponApply
+    position: fixed;
+    top: 10%;
+    border-radius: 2px;
+    box-shadow: 0 3px 9px 0 rgba(0, 0, 0, 0.07);
+    background-color: white;
+    border-bottom: 0;
+    display flex
+    align-items center
+    z-index 5;
+    left: 15%
+
+.couponCodeListing
+    padding: 7px;
+    width: 50%;
+    margin-top: 10px;
+    height: 33px;
+    text-align: center;
+    left: -10px;
+    position: relative;
+    border: solid 1px listing-border;
+    background-color: listing-background-color;
+
+
+.couponCodeListing:after {
+    content: '';
+    display: block;
+    position: relative;
+    left: -8px;
+    width: 0;
+    border-bottom: 10px solid listing-triangle-color;
+    border-left: 10px solid transparent;
+    top: 27%;
+    transform: rotate(-90deg);
+}
+
+.couponOffer
+    padding: 7px;
+    border-top-left-radius: 7px;
+    border-bottom-left-radius: 7px;
+    width: 40%;
+    border-left: 0 !important;
+    margin-top: 10px;
+    text-align: center;
+    left: -10px;
+    position: relative;
+    height: 33px;
+
+.listingColor
+    border: solid 1px listing-border;
+    background-color: listing-background-color;
+
+.categoryColor
+   border: solid 1.3px category-border;
+   background-color: popup-header;
+
+.bankColor
+   border: solid 1.3px bank-border;
+   background-color: bank-background-color;
+
+
+.modalClassName
+   position absolute
+   top 10%
+
+.applied 
+   color: generic-green-color;
+   
+.buttonStyle
+   left: 55%;
+   bottom: 0%;
+   height: 68%;
+   position: absolute;
+   border: 1px solid thick-blue;
+   border-radius: 5px;
+
+.wordBreak
+   word-break: break-all;
+
+.input
+  width 350px !important
+  height 60px
+  border 0 !important
+
+.overflow
+  overflow: auto;
+  max-height: 200px;
+
+.border
+  border-right: 1px dotted;
+  margin-left: 30px;
+
+.ellipsis {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 500px;
+}
+
+.applyCoupon {
+    position: absolute;
+    left: 15%;
+    top: 20%;
+}
+
+.errorStyle {
+    position: absolute
+    top: 20%
+    left: 15%;    
+}
+
+.apply-btn {
+    color: #000;
+    border: 1px solid #c8c7cc;
+    padding: 10px 25px;
+    background-color: #fff;
+}

@@ -1,17 +1,29 @@
 const getErrorMessege = (store) => {
-  return store.authReducer.error;
+  return store.authReducer.error ? JSON.stringify(store.authReducer.error) : '';
 }
 
 const getLoginProgressStatus = (store) => {
   return store.authReducer.ui.loginLoading;
 }
 
+const getLoadingStatus = (store) => {
+  return store.authReducer.ui.loading;
+};
+
 const getCountry = (store) => {
   return store.authReducer.data.country
 }
 
+const getLanguage = (store) => {
+  return store.authReducer.data.language
+}
+
 const getLoggedInStatus = (store) => {
   return store.authReducer.data.isLoggedIn
+}
+
+const getInstaCode  = (store) => {
+  return store.authReducer.data.instagramCode || null
 }
 
 const getUserCreds = (store) => {
@@ -22,12 +34,21 @@ const getDeliveryCity = (store) => {
   return store.authReducer.data.geoShippingDetails;
 }
 
-const getAutoCompleteCityData = (store) => {
-  return store.authReducer.data.autoCompleteCity;
+const getPTAToken = (store) => {
+  return store.authReducer.data.ptaToken;
 }
 
 const getShowLogin = (store) => {
   return store.authReducer.ui.showLogin;
 }
 
-export { getErrorMessege, getCountry, getLoggedInStatus, getUserCreds, getDeliveryCity, getAutoCompleteCityData, getLoginProgressStatus, getShowLogin };
+const showEmailVerificationScreen = (store) => {
+  return store.authReducer.ui.showEmailVerificationScreen;
+};
+
+const getDomainCountries = store => store.authReducer.data.domainCountries;
+
+export {
+  getErrorMessege, getCountry, getLoggedInStatus, getInstaCode, getUserCreds, getDeliveryCity, getDomainCountries,
+  getLoginProgressStatus, getShowLogin, getPTAToken, showEmailVerificationScreen, getLanguage, getLoadingStatus,
+};

@@ -3,26 +3,32 @@ const apiRoutes = express.Router();
 const axios = require('axios');
 const Cookies = require('universal-cookie');
 const _ = require('lodash');
-
+const constants = require('./store/helper/constants/constants');
+console.log('constants', constants);
 //TODO SF-101 //remove constants from here
-const AUTH_API_URL = 'http://gateway-dev.fptechscience.com/auth-service';
+// const constants.AUTH_API_URL = 'http://gateway-dev.fptechscience.com/auth-service';
 const GOOGLE_MAPS_URL = 'https://maps.googleapis.com/maps/api';
 const GOOGLE_KEY = 'AIzaSyDrVNKZshUspEprFsNnQD-sos6tvgFdijg';
 
+
+const removeCookies = (req,res) => {
+  req.universalCookies.remove('auth');
+  req.universalCookies.remove('userCreds');
+  req.universalCookies.remove('ptaToken');
+  req.universalCookies.remove('isVerified');
+  return res.json({});
+}
 apiRoutes
   .post('/login', (req, res) => {
     const params = req.body;
-    return axios.post(`${AUTH_API_URL}/api/v1/login/basic`, Object.assign({}, params, {
-      type: 'CUSTOMER',
-      authVersion: 'V1'
-    })).then(({data, status}) => {
+    return axios.post(`${constants.AUTH_API_URL}/api/v1/sls/auth`, Object.assign({}, params, {})).then(({data, status}) => {
       let isLoggedIn = false;
       if(status === 200) {
-        if(!params.rememberMe) {
-          delete data.refresh_token;
-        }
+        // if(!params.rememberMe) {
+        //   delete data.refresh_token;
+        // }
         req.universalCookies.set('auth', data, { path: '/' });
-        req.universalCookies.set('userCreds', { username: params.username }, { path: '/' });
+        req.universalCookies.set('userCreds', { username: params.metadata.username || '' }, { path: '/' });
         isLoggedIn = true;
       } else {
         req.universalCookies.remove('auth');
@@ -38,7 +44,8 @@ apiRoutes
       res.status(response.status)
       res.json({
         data: {
-          isLoggedIn: false
+          isLoggedIn: false,
+          error: response.data
         }
       })
 
@@ -46,7 +53,7 @@ apiRoutes
   })
   .post('/refresh', (req, res) => {
     const auth = req.universalCookies.get('auth');
-    return axios.post(`${AUTH_API_URL}/api/v1/refresh`, {
+    return axios.post(`${constants.AUTH_API_URL}/api/v1/refresh`, {
         'auth_version': 'V1',
         'refresh_token': auth.refresh_token
       }).then((data) => {
@@ -59,9 +66,20 @@ apiRoutes
       });
   })
   .post('/logout', (req, res) => {
-    req.universalCookies.remove('auth');
-    return res.json({});
+    const auth = req.universalCookies.get('auth');
+    if(!auth) {
+      return removeCookies(req,res)
+
+    }
+    return axios.put(`${constants.AUTH_API_URL}/api/v1/sls/lo`, null, {
+      headers: { 'x-access-token': req.headers['x-access-token'] || '' }
+    }).then((response) => {
+      if (response && response.status === 200) {
+        return removeCookies(req,res)
+      }
+    });
   })
+
   .post('/setCookie', (req, res) => {
     let {data, options} = req.body;
     let cookieOption = {
@@ -76,10 +94,10 @@ apiRoutes
     });
     return res.json({});
   })
-  .post('/deleteCookie', () => {
-    const params = req.body;
-    params.forEach((key) => {
-      req.universalCookies.remove('key');
+  .post('/deleteCookie', (req, res) => {
+    const { keys } = req.body;
+    keys.forEach((key) => {
+      req.universalCookies.remove(key);
     });
     res.json({});
   })
@@ -122,8 +140,6 @@ apiRoutes
         res.json(e);
       })
   });
-
-
 
 
 module.exports = apiRoutes;
