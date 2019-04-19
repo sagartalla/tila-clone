@@ -203,51 +203,62 @@ class CartItem extends React.Component {
                         <span>{attr.attribute_values[0].value}</span>
                       </div>
                     ))}
-                  <div className={`${styles['warranty-part']} ${styles['p-10']} ${styles['light-gry-clr']}`}>
-                    <p className={`${styles['mb-0']} ${styles['fs-12']} ${styles['flex']}`}>
-                      <span>Warranty : </span>
-                      <span className={`${styles['pl-10']} ${styles['pr-10']}`}>
-                        {warranty_duration && Object.keys(warranty_duration).length > 0 ?
-                          <Warranty warranty={warranty_duration} />
-                          : 'No Warranty'}
-                      </span>
-                    </p>
-                    <p className={`${styles['mb-0']} ${styles['fs-12']}`}>
-                      <span>{CART_PAGE.SHIPPING} :</span>
-                      <span className={`${styles['pl-10']} ${styles['pr-10']}`}>{CART_PAGE.REGULAR_SHIPPING}  ({shipping.shipping_fees + ' ' + cur}) - <span className={`${styles['fs-12']} ${styles['base-font']}`}>{CART_PAGE.ETA_DELIVERY_BY} {moment().add(shipping.shipping_days, 'days').format('LL')}</span>
-                      </span>
-                    </p>
-                  </div>
-                  <div data-id={item_id} className={`${styles['checkbox-material']} ${styles['mt-15']}`}>
-                    <input data-id={item_id} id={"gift" + item_id} type="checkbox" checked={checked} onClick={this.giftChecked} />
-                    <label htmlFor={"gift" + item_id}> {CART_PAGE.SEND_GIFT} {gift_info ? "(" + gift_info.gift_rate + " " + cur + ")" : ''} </label>
-                  </div>
-                  {checked && showMessage &&
-                    <div>
-                      <span className={styles.fontW600}>{CART_PAGE.MESSAGE}:&nbsp;</span><span>{gift_card_message}&nbsp;</span>
-                      <span>{'('}<a onClick={this.toggleMessage}>{CART_PAGE.EDIT}</a>{')'}</span>
+                  {shipping.shippable ?
+                    <React.Fragment>
+                      <div className={`${styles['warranty-part']} ${styles['p-10']} ${styles['light-gry-clr']}`}>
+                        <p className={`${styles['mb-0']} ${styles['fs-12']} ${styles['flex']}`}>
+                          <span>Warranty : </span>
+                          <span className={`${styles['pl-10']} ${styles['pr-10']}`}>
+                            {warranty_duration && Object.keys(warranty_duration).length > 0 ?
+                              <Warranty warranty={warranty_duration} />
+                              : 'No Warranty'}
+                          </span>
+                        </p>
+                        <p className={`${styles['mb-0']} ${styles['fs-12']}`}>
+                          <span>{CART_PAGE.SHIPPING} :</span>
+                          <span className={`${styles['pl-10']} ${styles['pr-10']}`}>{CART_PAGE.REGULAR_SHIPPING} ({shipping.shipping_fees + ' ' + cur}) - <span className={`${styles['fs-12']} ${styles['base-font']}`}>{CART_PAGE.ETA_DELIVERY_BY} {moment().add(shipping.shipping_days, 'days').format('LL')}</span>
+                          </span>
+                        </p>
+                      </div>
+                      <div data-id={item_id} className={`${styles['checkbox-material']} ${styles['mt-15']}`}>
+                        <input data-id={item_id} id={"gift" + item_id} type="checkbox" checked={checked} onClick={this.giftChecked} />
+                        <label htmlFor={"gift" + item_id}> {CART_PAGE.SEND_GIFT} {gift_info ? "(" + gift_info.gift_rate + " " + cur + ")" : ''} </label>
+                      </div>
+                      {checked && showMessage &&
+                        <div>
+                          <span className={styles.fontW600}>{CART_PAGE.MESSAGE}:&nbsp;</span><span>{gift_card_message}&nbsp;</span>
+                          <span>{'('}<a onClick={this.toggleMessage}>{CART_PAGE.EDIT}</a>{')'}</span>
+                        </div>
+                      }
+                      {!showMessage && checked &&
+                        <div className={styles['flex-center']}>
+                          <textarea
+                            name="msg"
+                            id={item_id}
+                            cols="30"
+                            rows="2"
+                            className={styles['resize-none']}
+                            placeholder={CART_PAGE.GIFT_MESSAGE_OPTIONAL}
+                            value={gift_card_message}
+                            onChange={this.updateMsg}
+                          />
+                          <button
+                            data-id={item_id}
+                            className={`${styles['ml-5']} ${styles['bg-thick-blue']} ${styles['p-5']} ${styles['white-color']} ${styles['border-radius4']}`}
+                            onClick={this.sendGiftPack}
+                          >
+                            {CART_PAGE.GIFT_PACK}
+                          </button>
+                        </div>}
+                    </React.Fragment>
+                  :
+                    <div className={`${styles['mt-20']} ${styles['fs-12']}`}>
+                      <div>
+                        <span className={`${styles['white-color']} ${styles['pb-5']} ${styles['pt-5']} ${styles['pr-10']} ${styles['pl-10']} ${styles['bg-thick-red-clr']} ${styles['border-radius12']}`}>Not Shippable</span>
+                      </div>
+                      <p className={`${styles['mt-20']} ${styles['thick-red-clr']}`}>Unfortunately, we cannot deliver this item to your selected Address. Please remove the item or move it to your wishlist to continue.</p>
                     </div>
                   }
-                  {!showMessage && checked &&
-                    <div className={styles['flex-center']}>
-                      <textarea
-                        name="msg"
-                        id={item_id}
-                        cols="30"
-                        rows="2"
-                        className={styles['resize-none']}
-                        placeholder={CART_PAGE.GIFT_MESSAGE_OPTIONAL}
-                        value={gift_card_message}
-                        onChange={this.updateMsg}
-                      />
-                      <button
-                        data-id={item_id}
-                        className={`${styles['ml-5']} ${styles['bg-thick-blue']} ${styles['p-5']} ${styles['white-color']} ${styles['border-radius4']}`}
-                        onClick={this.sendGiftPack}
-                      >
-                        {CART_PAGE.GIFT_PACK}
-                    </button>
-                    </div>}
                 </Col>
                 <Col md={2} sm={2} className={`${styles['pl-0']} ${styles['landscape-cart-price']}`}>
                   {Math.floor(discount) > 5 &&
