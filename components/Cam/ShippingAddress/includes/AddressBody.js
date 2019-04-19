@@ -16,13 +16,11 @@ const styles = lang === 'en' ? styles_en : styles_ar;
 const AddressBody = (props) => {
 
   const deleteAddr = (e) => {
-    let confirmDelete = confirm("Are you sure you want to delete this address?");
-    if(confirmDelete){
+    const confirmDelete = confirm("Are you sure you want to delete this address?");
+    if (confirmDelete) {
       props.deleteAddr(e.target.id || e.target.parentNode.id)
-    }else{
-      return;
     }
-  }
+  };
 
   const editAddress = (e) => {
     props.editAddress(e.target.id || e.target.parentNode.id);

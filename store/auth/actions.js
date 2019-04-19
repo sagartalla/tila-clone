@@ -26,6 +26,7 @@ const actions = {
   VERIFY_EMAIL: 'VERIFY_EMAIL',
   VERIFY_RESEND_EMAIL: 'VERIFY_RESEND_EMAIL',
   GET_USER_INFO: 'GET_USER_INFO',
+  GET_DOMAIN_COUNTRIES: 'GET_DOMAIN_COUNTRIES',
 };
 
 const actionCreators = {
@@ -134,6 +135,10 @@ const actionCreators = {
   track: (event, params) => ({
     type: actions.CART_TRACK,
     payload: api.track(event, params),
+  }),
+  getDomainCountries: () => ({
+    type: actions.GET_DOMAIN_COUNTRIES,
+    payload: api.getDomainCountries(),
   }),
 };
 

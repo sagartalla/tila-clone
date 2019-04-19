@@ -17,6 +17,7 @@ const initialState = {
     geoShippingDetails: {},
     autoCompleteCity: [],
     userInfoData: {},
+    domainCountries: [],
   },
   error: '',
 };
@@ -290,6 +291,16 @@ const authReducer = typeToReducer({
     }),
     REJECTED: state =>
       Object.assign({}, state, { ui: { ...state.ui, loading: false, showEmailVerificationScreen: false } }),
+  },
+  [actions.GET_DOMAIN_COUNTRIES]: {
+    PENDING: state => state,
+    FULFILLED: (state, action) => Object.assign({}, state, {
+      data: {
+        ...state.data,
+        domainCountries: action.payload && action.payload.data,
+      },
+    }),
+    REJECTED: state => state,
   },
 }, initialState);
 
