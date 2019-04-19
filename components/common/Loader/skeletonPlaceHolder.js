@@ -10,7 +10,7 @@ import styles_ar from './loader_ar.styl';
 
 const styles = lang === 'en' ? styles_en : styles_ar;
 export const searchPlaceHolder = (
-  <div className={`${styles['skeletonLoader']}`}>
+  <div style={{ overflow: 'hidden', maxHeight: '800px' }}>
     {/* <div className={`${styles.container}`} /> */}
     <div
       className={
@@ -125,7 +125,7 @@ export const searchPlaceHolder = (
   </div>
 );
 export const productPlaceHolder = (
-  <div className={`${styles['skeletonLoader']}`}>
+  <div style={{ display: 'flex' }}>
   {/* <div className={
     `${styles.container}`
   }
@@ -181,7 +181,7 @@ export const productPlaceHolder = (
 
 
 export const cartPlaceHolder = (
-  <div className={`${styles.flex} ${styles['pt-40']} ${styles.relative} ${styles['skeletonLoader']}`}>
+  <div className={`${styles.flex} ${styles['pt-40']} ${styles.relative}`}>
     {/* <div className={`${styles.container}`} /> */}
     <div className={`${styles.flex} ${styles['p-20']} ${styles.width100}`}>
       <div style={{ width: '75%' }} className={`${styles.flex} ${styles['flex-colum']} ${styles.width63} ${styles['mr-20']}`}>
