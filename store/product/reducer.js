@@ -10,7 +10,10 @@ const initialState = {
   reviewResponse:{},
   variantsData: {},
   error: {},
+  searchCityKeyWord: '',
+  searchCountryKeyWord: '',
   allCitiesData: [],
+  countriesData: [],
 };
 const productReducer = typeToReducer({
   [actions.GET_PRODUCT]: {
@@ -90,9 +93,22 @@ const productReducer = typeToReducer({
     REJECTED: state =>
       Object.assign({}, state, { ui: { ...state.ui, loading: false } }),
   },
-
+  [actions.GET_COUNTRIES]: {
+    PENDING: state => Object.assign({}, state, { ui: { ...state.ui, loading: true } }),
+    FULFILLED: (state, action) => Object.assign({}, state, {
+      ui: {
+        ...state.ui,
+        loading: false,
+      },
+      countriesData: action.payload && action.payload.data,
+    }),
+    REJECTED: state => Object.assign({}, state, { ui: { ...state.ui, loading: false } }),
+  },
   [actions.AUTOCOMPLETE_CITY]: (state, action) => Object.assign({}, state, {
-    searchKeyWord: action.searchKeyWord,
+    searchCityKeyWord: action.searchKeyWord,
+  }),
+  [actions.AUTOCOMPLETE_COUNTRY]: (state, action) => Object.assign({}, state, {
+    searchCountryKeyWord: action.searchKeyWord,
   }),
 }, initialState);
 

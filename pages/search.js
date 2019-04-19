@@ -15,13 +15,13 @@ const cookies = new Cookies();
 
 class SearchPage extends Base {
   static async getInitialProps({ store, isServer, query, req }) {
-    const { language, search, facets, category, subCategory, isListed, disableSpellCheck, sid } = query
+    const { country, language, search, facets, category, subCategory, isListed, disableSpellCheck, sid } = query
     const categoryTree = query.categoryTree === 'true'; //TODO need better way to identify category tree
     const categoryFacet = query.categoryFacet === 'true';
     //TODO SF-37 better handling of country
     const state = store.getState();
     // const country = authSelectors.getCountry(state);
-    const country = req ? req.universalCookies.get('country') : cookies.get('country');
+    // const country = req ? req.universalCookies.get('country') : cookies.get('country');
     // let [categoryId, ...categoryName] = category ? category.split('-').reverse() : [null, null];
     // let [subCategoryId, ...subCategoryName] = subCategory ? subCategory.split('-').reverse() : [null, null];
     // categoryName = categoryName ? categoryName.join(' ') : null;

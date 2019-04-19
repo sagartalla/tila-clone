@@ -64,7 +64,6 @@ class Compare extends Component {
   }
 
   addToCart = ({ currentTarget }) => {
-    debugger;
     const { addToCartAndFetch } = this.props;
     addToCartAndFetch({
       listing_id: currentTarget.getAttribute('id'),

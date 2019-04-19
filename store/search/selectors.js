@@ -58,7 +58,6 @@ const getSearchFilters = (store) => {
   const { categoryFilter } = store.searchReducer.data;
   if (categoryFilter) {
     const { nodes } = categoryFilter;
-    console.log('nodes:' ,nodes);
     filters.category = [{
       name: 'Category',
       id: 'category',
