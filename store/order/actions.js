@@ -61,6 +61,14 @@ const actionCreators = {
       },
     });
   },
+  track: params => (dispatch, getState) => {
+    const state = getState();
+    params.postResult = state.cartReducer.data.items;
+    return {
+      type: actions.THANKYOU_PAGE_TRACK,
+      payload: api.track(params),
+    };
+  },
   setSelectedItem: params => ({
     type: actions.SET_SELECTED_ITEM,
     payload: {

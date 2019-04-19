@@ -23,7 +23,7 @@ import styles_ar from '../cart_ar.styl';
 
 const styles = lang === 'en' ? styles_en : styles_ar;
 
-const MiniCartBody = props => {
+const MiniCartBody = (props) => {
   const { showBlocker, increaseItemCnt, decreaseItemCnt, data, removeCartItem, editCartDetails, showCheckOutBtn, checkoutBtnHandler } = props;
   const { items, error, total_offer_price, currency } = data;
   const flag = data && items && items.length;
@@ -43,7 +43,8 @@ const MiniCartBody = props => {
         <div>
           {
             items.map((item, index) => {
-              const { item_id, img, product_id, name, offer_price, cur, quantity, max_limit, inventory, brand_name, variant_id, itemType, catalogId } = item;
+              const { item_id, img, product_id, name, offer_price, cur,
+                variant_id, itemType, catalogId, shipping } = item;
               return (
                 <div key={item_id} className={`${styles['flex']} ${styles['pt-15']} ${styles['pb-15']} ${styles['border-b']} ${styles['min-items-list']}`}>
                   <Col md={2} sm={2} xs={2} className={`${styles['pl-0']} ${styles['pr-0']}`}>
@@ -75,20 +76,29 @@ const MiniCartBody = props => {
                           : null
                       }
                     </div>
-                    <div className={`${styles['flx-space-bw']} ${styles['pt-10']} ${styles['price-stepper-part']}`}>
-                      <span className={styles['fontW600']}>{offer_price + ' ' + cur}</span>
-                      <span>
-                        {
-                          editCartDetails ?
-                            <CartStepper
-                              item={item}
-                              decreaseItemCnt={decreaseItemCnt}
-                              increaseItemCnt={increaseItemCnt}
-                            />
-                            : ''
-                        }
-                      </span>
-                    </div>
+                    {shipping.shippable ?
+                      <div className={`${styles['flx-space-bw']} ${styles['pt-10']} ${styles['price-stepper-part']}`}>
+                        <span className={styles['fontW600']}>{offer_price + ' ' + cur}</span>
+                        <span>
+                          {
+                            editCartDetails ?
+                              <CartStepper
+                                item={item}
+                                decreaseItemCnt={decreaseItemCnt}
+                                increaseItemCnt={increaseItemCnt}
+                              />
+                              : ''
+                          }
+                        </span>
+                      </div>
+                    :
+                      <div className={`${styles['mt-20']} ${styles['fs-12']}`}>
+                        <div>
+                          <span className={`${styles['white-color']} ${styles['pb-5']} ${styles['pt-5']} ${styles['pr-10']} ${styles['pl-10']} ${styles['bg-thick-red-clr']} ${styles['border-radius12']}`}>Not Shippable</span>
+                        </div>
+                        <p className={`${styles['mt-20']} ${styles['thick-red-clr']}`}>Unfortunately, we cannot deliver this item to your selected Address. Please remove the item to continue.</p>
+                      </div>
+                    }
                   </Col>
                 </div>
               )

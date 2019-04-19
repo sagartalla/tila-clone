@@ -43,10 +43,22 @@ class AddToCart extends Component {
     this.buyNow = this.buyNow.bind(this);
   }
 
+  componentDidMount() {
+    this.props.resetAddtoCart();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.state.buyNow == true && nextProps.isAddedToCart) {
+      Router.pushRoute(`/${country}/${language}/payment`);
+    }
+  }
+
   addToCart() {
     const { listingId } = this.props.offerInfo
+    const { productData } =this.props
     this.props.addToCartAndFetch({
-      listing_id: listingId
+      listing_id: listingId,
+      product_id: productData,
     });
   }
 
@@ -58,41 +70,31 @@ class AddToCart extends Component {
     });
   }
 
-  componentWillReceiveProps(nextProps) {
-    if(this.state.buyNow == true && nextProps.isAddedToCart){
-       Router.pushRoute(`/${country}/${language}/payment`);
-    }
-  }
-
-  componentDidMount() {
-    this.props.resetAddtoCart();
-  }
-
-  render () {
+  render() {
     const { isLoading, error, isAddedToCart, offerInfo, btnLoading } = this.props;
     const { price, listingAvailable, listingId, stockError, availabilityError } = offerInfo;
     return (availabilityError || stockError)
-    ?
-    null
-    :
-    (
-      <div className={`${styles['pt-25']} ${styles['flx-space-bw']} ${styles['addto-cart']} ${styles['ipad-p-0']} ${styles['border-t']}`}>
-        <Button
-          className={`${styles['fs-16']} ${styles['ipad-fs-14']} ${styles['add-to-card-btn']} ${styles['flex']}`}
-          disabled={isLoading || isAddedToCart}
-          onClick={isAddedToCart === false && this.addToCart}
-          btnLoading={btnLoading}
-          btnText={isAddedToCart ? '' : PDP_PAGE.ADD_TO_CART}
-          showImage={isAddedToCart && 'icons/cart/added-cart-icon'}
-        />
-        <Button
-          className={`${styles['fs-16']} ${styles['ipad-fs-14']} ${styles['buy-now-btn']}`}
-          onClick={this.buyNow}
-          btnText={PDP_PAGE.BUY_NOW}
-          hoverClassName="hoverBlueBackground"
-        />
-      </div>
-    );
+      ?
+      null
+      :
+      (
+        <div className={`${styles['pt-25']} ${styles['flx-space-bw']} ${styles['addto-cart']} ${styles['ipad-p-0']} ${styles['border-t']}`}>
+          <Button
+            className={`${styles['fs-16']} ${styles['ipad-fs-14']} ${styles['add-to-card-btn']} ${styles['flex']}`}
+            disabled={isLoading || isAddedToCart}
+            onClick={isAddedToCart === false && this.addToCart}
+            btnLoading={btnLoading}
+            btnText={isAddedToCart ? '' : PDP_PAGE.ADD_TO_CART}
+            showImage={isAddedToCart && 'icons/cart/added-cart-icon'}
+          />
+          <Button
+            className={`${styles['fs-16']} ${styles['ipad-fs-14']} ${styles['buy-now-btn']}`}
+            onClick={this.buyNow}
+            btnText={PDP_PAGE.BUY_NOW}
+            hoverClassName="hoverBlueBackground"
+          />
+        </div>
+      );
   }
 }
 
@@ -102,7 +104,7 @@ const mapStateToProps = (store) => {
     isLoading: selectors.getLoadingStatus(store),
     error: selectors.getErrorMessege(store),
     isAddedToCart: selectors.isAddedToCart(store)
-  })
+  });
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -113,6 +115,6 @@ const mapDispatchToProps = (dispatch) => {
     },
     dispatch,
   );
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddToCart);
