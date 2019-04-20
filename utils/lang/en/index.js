@@ -303,7 +303,7 @@ export const EN_KEYWORDS = {
     'YOUR_PHONE_NUMBER_VERIFIED': 'Your phone number has been successfully verified',
     'DONE': 'done',
     'VERIFY_PHONE': 'Verify your phone number to Enable Pay on Delivery',
-    'SEND_OTP': 'send otp',
+    'SEND_OTP': 'Send OTP',
     'VERIFY_MOBILE_NUMBER': 'Verify Mobile Number',
     'ENTER_VALID_OTP': 'please enter valid otp',
   },

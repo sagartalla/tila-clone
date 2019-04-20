@@ -178,22 +178,29 @@ class TitleInfo extends Component {
                 <span className={`${styles.flex} ${styles['fs-12']}`}>{PDP_PAGE.COD_AVAILABLE}</span>
               </div>
 
-              {showCheckoutModal ?
-                <Modal className={`react-router-modal__modal ${styles['right-side-modal']}`} onBackdropClick={this.checkoutInstantHandler}>
-                  <RightSideBar
-                    data={listingCartData}
-                    hideUpSell
-                    showInstant
-                    showStepper // only for PDP
-                    isPdp
-                    hideCouponCode
-                    insnt_item_listing_id={listingCartData.items.length > 0 ? listingCartData.items[0].listing_id : ''}
-                    increaseItemCnt={this.increaseItemCnt}
-                    decreaseItemCnt={this.decreaseItemCnt}
-                  />
-                </Modal>
-                : null
-              }
+              
+              <React.Fragment>
+                <div className={showCheckoutModal ? `${styles['modalContainer']} ${styles['showDiv']}` : `${styles['modalContainer']} ${styles['hideDiv']}`}>
+                  <div className={`${styles['disabled']}`} onClick={this.checkoutInstantHandler}></div>
+                </div>
+                <div className={`${styles['modal']} ${showCheckoutModal ? styles['showModal'] : styles['hideModal']}`}>
+                  <div className={styles['modalFill']}>
+                    {showCheckoutModal ? 
+                      <RightSideBar
+                        data={listingCartData}
+                        hideUpSell
+                        showInstant
+                        showStepper // only for PDP
+                        isPdp
+                        hideCouponCode
+                        insnt_item_listing_id={listingCartData.items.length > 0 ? listingCartData.items[0].listing_id : ''}
+                        increaseItemCnt={this.increaseItemCnt}
+                        decreaseItemCnt={this.decreaseItemCnt}
+                      />
+                    : null}
+                  </div>
+                </div>
+              </React.Fragment>
             </div>
         }
         {/* <div className={`${styles['fs-18']} ${styles['fontW600']} ${styles['black-color']}`}>
