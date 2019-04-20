@@ -37,9 +37,11 @@ const actionCreators = {
       type: actions.GET_COMPARE_ITEM_DATA,
       payload: api.getCompareItemsData(product),
     });
-    dispatch(actionCreators.track({
-      eventName: 'AddTo Compare', params: product,
-    }));
+    if (product) {
+      dispatch(actionCreators.track({
+        eventName: 'AddTo Compare', params: product,
+      }));
+    }
   },
   removeCompareData: id => ({
     type: actions.CRUD_COMPARE,

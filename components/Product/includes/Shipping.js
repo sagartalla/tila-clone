@@ -23,18 +23,20 @@ const { PDP_PAGE } = languageDefinations();
 class Shipping extends Component {
   render() {
     const { shippingInfo, offerInfo } = this.props;
-    const { shipping_fees, shipping_days, shippable, acceptsReturns, maxDaysToReturn, isPreview } = shippingInfo;
+    const {
+      shipping_fees, shipping_days, shippable, acceptsReturns, maxDaysToReturn, isPreview,
+    } = shippingInfo;
 
     return (
-      <div className={`${styles['box']} ${styles['border-radius4']} ${styles['mt-5']} ${styles['mb-10']} ${styles['ipad-delivery-address-part']} ${styles['free-delivery-part']}`}>
-        <div className={`${styles['free-delivery-list']} ${styles['flex']}`}>
+      <div className={`${styles.box} ${styles['border-radius4']} ${styles['mt-5']} ${styles['mb-10']} ${styles['ipad-delivery-address-part']} ${styles['free-delivery-part']}`}>
+        <div className={`${styles['free-delivery-list']} ${styles.flex}`}>
           <div className={styles['pdp-deliver-list']}>
             <GeoWidget />
           </div>
           {
             shipping_days
               ?
-              <span className={`${styles['fs-12']} ${styles['pl-20']}`}>{PDP_PAGE.FREE_DELIVERY_BY} <span className={styles['fontW600']}>{moment().add(shipping_days, 'days').format("ddd, hA")}</span> </span>
+                <span className={`${styles['fs-12']} ${styles['pl-20']}`}>{PDP_PAGE.FREE_DELIVERY_BY} <span className={styles.fontW600}>{moment().add(shipping_days, 'days').format('ddd, hA')}</span> </span>
               :
               null
           }
@@ -52,7 +54,7 @@ class Shipping extends Component {
           {/* <div className={styles['pdp-deliver-list']}>
               <GeoWidget  hideLabel={true} />
             </div> */}
-          {/*<div className={`${styles['radio-btn-group']}`}>
+          {/* <div className={`${styles['radio-btn-group']}`}>
               <input type="radio" id="free-no-cost" name="selector" />
               <label for="free-no-cost">
                 <span className={styles['fs-12']}>FREE</span>
@@ -68,65 +70,59 @@ class Shipping extends Component {
                 <span className={styles['fs-12']}>SAME DAY</span>
                 <span className={styles['fs-10']}>+15 AED</span>
               </label>
-            </div>*/}
+            </div> */}
           {/* </div> */}
-          {
-            shippable
-              ?
-              <div>
-                <div className={`${styles['flx-spacebw-alignc']} ${styles['fontW600']} ${styles['pt-15']} ${styles['pb-15']} ${styles['fs-12']} ${styles['warrenty-part']}`}>
-                  <div className={`${styles['flex-center']}`}>
-                    <SVGCompoent clsName={`${styles['return-icon']} ${styles['mr-10']}`} src="icons/common-icon/guarantee" />
-                    <span>{PDP_PAGE.HUNDRED_PER_ORIGINAL}</span>
-                  </div>
-                  <div className={`${styles['flex-center']} ${styles['warenty-part-inn']}`}>
-                    <SVGCompoent clsName={`${styles['return-icon']} ${styles['mr-10']}`} src="icons/common-icon/non-return" />
-                    {
-                      acceptsReturns
-                        ?
-                        <span>{maxDaysToReturn} {PDP_PAGE.DAY} {PDP_PAGE.EASY_RETURN}</span>
-                        :
-                        `${PDP_PAGE.NON_RETURNABLE}`
-                    }
-                  </div>
-                  {Object.keys(this.props.warranty).length > 0 ?
-                    <div className={`${styles['flex-center']} ${styles['warenty-part-inn']} ${styles['warenty-part-single']}`}>
-                      <SVGCompoent clsName={`${styles['trust-icon']}`} src="icons/common-icon/non-warnty" />
-                      <Warranty warranty={this.props.warranty} break={true} />
-                    </div>
-                    :
-                    <div className={`${styles['flex-center']} ${styles['warenty-part-inn']}`}>
-                      <span className={styles['fs-10']}>{PDP_PAGE.NO_WARRANTY}</span>
-                    </div>
-                  }
+          {shippable &&
+            <div>
+              <div className={`${styles['flx-spacebw-alignc']} ${styles.fontW600} ${styles['pt-15']} ${styles['pb-15']} ${styles['fs-12']} ${styles['warrenty-part']}`}>
+                <div className={`${styles['flex-center']}`}>
+                  <SVGCompoent clsName={`${styles['return-icon']} ${styles['mr-10']}`} src="icons/common-icon/guarantee" />
+                  <span>{PDP_PAGE.HUNDRED_PER_ORIGINAL}</span>
                 </div>
+                <div className={`${styles['flex-center']} ${styles['warenty-part-inn']}`}>
+                  <SVGCompoent clsName={`${styles['return-icon']} ${styles['mr-10']}`} src="icons/common-icon/non-return" />
+                  {
+                  acceptsReturns
+                    ?
+                      <span>{maxDaysToReturn} {PDP_PAGE.DAY} {PDP_PAGE.EASY_RETURN}</span>
+                    :
+                    `${PDP_PAGE.NON_RETURNABLE}`
+                }
+                </div>
+                {Object.keys(this.props.warranty).length > 0 ?
+                  <div className={`${styles['flex-center']} ${styles['warenty-part-inn']} ${styles['warenty-part-single']}`}>
+                    <SVGCompoent clsName={`${styles['trust-icon']}`} src="icons/common-icon/non-warnty" />
+                    <Warranty warranty={this.props.warranty} break />
+                  </div>
+                :
+                  <div className={`${styles['flex-center']} ${styles['warenty-part-inn']}`}>
+                    <span className={styles['fs-10']}>{PDP_PAGE.NO_WARRANTY}</span>
+                  </div>
+              }
               </div>
-              :
-              <p className={`${styles['flex']} ${styles['pt-15']} ${styles['justify-center']}`}>{PDP_PAGE.NO_SHIPPING_CITY}</p>
-
+            </div>
           }
+                        {/* :
+                <p className={`${styles.flex} ${styles['pt-15']} ${styles['justify-center']}`}>{PDP_PAGE.NO_SHIPPING_CITY}</p> */}
+
         </div>
         {
           !isPreview && <ProductPrice offerInfo={offerInfo} />
         }
       </div>
-    )
+    );
   }
 }
 
 Shipping.PropTypes = {
 
-}
-
-const mapStateToProps = (store) => {
-  return ({});
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators(
-    {},
-    dispatch,
-  );
-}
+const mapStateToProps = store => ({});
+
+const mapDispatchToProps = dispatch => bindActionCreators(
+  {},
+  dispatch,
+);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Shipping);
