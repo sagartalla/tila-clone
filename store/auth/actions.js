@@ -27,6 +27,7 @@ const actions = {
   VERIFY_RESEND_EMAIL: 'VERIFY_RESEND_EMAIL',
   GET_USER_INFO: 'GET_USER_INFO',
   GET_DOMAIN_COUNTRIES: 'GET_DOMAIN_COUNTRIES',
+  AUTH_TRACK: 'AUTH_TRACK'
 };
 
 const actionCreators = {
@@ -133,7 +134,7 @@ const actionCreators = {
     payload: api.setVerfied(isVerified),
   }),
   track: (event, params) => ({
-    type: actions.CART_TRACK,
+    type: actions.AUTH_TRACK,
     payload: api.track(event, params),
   }),
   getDomainCountries: (currentCountry) => (dispatch, getState) => {
