@@ -24,6 +24,7 @@ class Shipping extends Component {
   render() {
     const { shippingInfo, offerInfo } = this.props;
     const { shipping_fees, shipping_days, shippable, acceptsReturns, maxDaysToReturn, isPreview } = shippingInfo;
+    const { availabilityError } = offerInfo;
 
     return (
       <div className={`${styles['box']} ${styles['border-radius4']} ${styles['mt-5']} ${styles['mb-10']} ${styles['ipad-delivery-address-part']} ${styles['free-delivery-part']}`}>
@@ -102,7 +103,15 @@ class Shipping extends Component {
                 </div>
               </div>
               :
-              <p className={`${styles['flex']} ${styles['pt-15']} ${styles['justify-center']}`}>{PDP_PAGE.NO_SHIPPING_CITY}</p>
+              <p className={`${styles['flex']} ${styles['pt-15']} ${styles['justify-center']}`}>
+                {
+                  availabilityError
+                  ?
+                  null
+                  :
+                  PDP_PAGE.NO_SHIPPING_CITY
+                 }
+               </p>
 
           }
         </div>
