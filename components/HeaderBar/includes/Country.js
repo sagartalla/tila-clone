@@ -40,7 +40,7 @@ class Country extends Component {
       });
     }
     this.props.setCountry(country);
-    this.props.getDomainCountries();
+    this.props.getDomainCountries(country);
   }
 
   // componentWillReceiveProps(nextProps) {
