@@ -27,6 +27,7 @@ const actions = {
   VERIFY_RESEND_EMAIL: 'VERIFY_RESEND_EMAIL',
   GET_USER_INFO: 'GET_USER_INFO',
   GET_DOMAIN_COUNTRIES: 'GET_DOMAIN_COUNTRIES',
+  AUTH_TRACK: 'AUTH_TRACK'
 };
 
 const actionCreators = {
@@ -54,7 +55,7 @@ const actionCreators = {
     });
   }),
   userLogout: () => (dispatch) => {
-    dispatch(cartActionCreators.getCartResults());
+    // dispatch(cartActionCreators.getCartResults());
     dispatch({
       type: actions.USER_LOGOUT,
       payload: api.userLogout(),
@@ -133,13 +134,22 @@ const actionCreators = {
     payload: api.setVerfied(isVerified),
   }),
   track: (event, params) => ({
-    type: actions.CART_TRACK,
+    type: actions.AUTH_TRACK,
     payload: api.track(event, params),
   }),
-  getDomainCountries: () => ({
-    type: actions.GET_DOMAIN_COUNTRIES,
-    payload: api.getDomainCountries(),
-  }),
+  getDomainCountries: (currentCountry) => (dispatch, getState) => {
+    return dispatch({
+      type: actions.GET_DOMAIN_COUNTRIES,
+      payload: api.getDomainCountries(),
+    }).then((data) => {
+      const {city_name, code} = data.value.data.filter(function(i) { return i.country.code3 === currentCountry })[0].city
+      dispatch(actionCreators.setCity({
+        "country": currentCountry,
+        "city": code,
+        "displayCity": city_name
+      }));
+    });
+  },
 };
 
 export { actions, actionCreators };

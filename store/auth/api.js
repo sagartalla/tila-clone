@@ -85,6 +85,7 @@ const getLoginInfo = () => {
     userCreds: userCreds || null,
     isLoggedIn: !!cookies.get('auth') && (cookies.get('isVerified') === 'true'),
     ...(!cookies.get('auth') && { instagramCode: window.localStorage.getItem('instagramCode') || null }),
+    isVerified: cookies.get('isVerified') === 'true',
   };
 };
 
@@ -148,5 +149,5 @@ const getDomainCountries = () => axios.get(`${constants.TRANSFORMER_API_URL}/fpt
 
 export default {
   userLogin, userLogout, getLoginInfo, setCountry, setSessionID, deriveCity, setCity, getDomainCountries,
-  removeCity, setLanguage, savePtaToken, verifyEmail, sendOtpToEmailId, getUserInfo, setVerfied,
+  removeCity, setLanguage, savePtaToken, verifyEmail, sendOtpToEmailId, getUserInfo, setVerfied, track,
 };

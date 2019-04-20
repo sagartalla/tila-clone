@@ -8,6 +8,7 @@ const actions = {
   GET_BRANDS: 'GET_BRANDS',
   GET_PRODUCTS_TO_COMPARE: 'GET_PRODUCTS_TO_COMPARE',
   ADD_PRODUCT_TO_COMPARE: 'ADD_PRODUCT_TO_COMPARE',
+  COMPARE_TRACK: 'COMPARE_TRACK'
 };
 
 const actionCreators = {
@@ -53,7 +54,7 @@ const actionCreators = {
     const state = getState();
     params.postResult = state.cartReducer.data.items;
     return {
-      type: actions.CART_TRACK,
+      type: actions.COMPARE_TRACK,
       payload: api.track(params),
     };
   },
