@@ -263,7 +263,7 @@ class ShippingAddress extends Component {
                 showNewAddr
                   ?
                   isPdp ?
-                    <div style={{ position: 'absolute', top: '-155px', background: '#fff', width: '488px', left: '-31px' }}>
+                    <div style={{ position: 'absolute', zIndex: 10, top: '-120px', background: '#fff', width: '500px', left: '-31px' }}>
                       <AddressNew
                         inputOnChange={this.inputOnChange}
                         saveBtnClickHandler={this.saveBtnClickHandler}

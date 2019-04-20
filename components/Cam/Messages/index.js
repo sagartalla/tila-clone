@@ -7,13 +7,14 @@ import { actionCreators, selectors } from '../../../store/cam/messages';
 
 import { languageDefinations } from '../../../utils/lang/';
 
-import lang from '../../../utils/language';
-
-import styles_en from './message_en.styl';
-import styles_ar from './message_ar.styl';
-
-
-const styles = lang === 'en' ? styles_en : styles_ar;
+// import lang from '../../../utils/language';
+//
+// import styles_en from './message_en.styl';
+// import styles_ar from './message_ar.styl';
+//
+//
+// const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = {};
 
 const { MESSAGES } = languageDefinations();
 

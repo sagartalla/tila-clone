@@ -3,6 +3,9 @@
 @import '/static/vendor/css/slick-theme.min.css';
 @import '../../layout/main/executables.styl';
 
+.ship-icon
+  width 80px
+  height 25px
 .pdp-wrap
   .pdp-bottom-ref-pixel
     position absolute
@@ -506,6 +509,51 @@
   left: 4%;
   width: 93%;
 
+
+.showDiv
+  display block
+
+.hideDiv
+  display none
+
+
+.showModal
+  transform translateX(0px)
+
+.hideModal
+  transform translateX(800px)
+
+.modalContainer
+  height 100%
+  width 100%
+  top 0
+  left 0
+  .disabled
+    height 100%
+    width 100%
+    position fixed
+    top 0
+    left 0
+    z-index 100
+    background-color grey
+    opacity 0.8
+
+.modal
+  height 100%
+  max-width: 500px;
+  width: 100%;
+  position fixed
+  top 0
+  right 0
+  z-index 101
+  background-color white
+  transition all 0.3s;
+
+.modalFill
+  height 100%
+  width 100%
+  overflow auto
+
 @media screen and (min-device-width: 320px) and (max-device-width: 767px) and (orientation : portrait) {
   .details-right-part {
     float left
@@ -547,6 +595,7 @@
     width 50%
   }
 }
+
 
 @media screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation : portrait){
   .details-right-part {
@@ -622,6 +671,7 @@
   }
 
 }
+
 
 @media screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation : landscape){
   .page-details-slider .details-right-part .details-right-part-inn {

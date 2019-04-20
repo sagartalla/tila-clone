@@ -30,8 +30,7 @@ const popover = ({
   mrp, offer_price, total_amount, cur, selling_price, offerDiscounts, total_discount, shipping,
 }) => {
   return (
-    <Popover id="offer-popover">
-      <div className={styles['fs-12']}>
+      <div className={`${styles['p-10']} ${styles['tool-tip']}`}>
         <div className={`${styles['table']} ${styles['width100']}`}>
           <div className={styles['t-row']}>
             <div className={`${styles['t-cell']} ${styles['pb-10']}`}>
@@ -73,7 +72,7 @@ const popover = ({
                 <div className={`${styles['t-cell']} ${styles['t-rt']}`}>
                   {shipping.shipping_fees ?
                     `${shipping.shipping_fees} ${cur}`
-                    : ORDER_PAGE.FREE}
+                    : <SVGComponent clsName={`${styles['ship-icon']}`} src="icons/free-shipping" />}
                 </div>
               </div>
             :
@@ -85,9 +84,8 @@ const popover = ({
             <div className={`${styles['t-cell']} ${styles['t-rt']}`}>{total_amount} {cur}</div>
           </div>
         </div>
-        <div className={`${styles['p-5']} ${styles['mt-5']} ${styles['overall-amount']}`}>{ORDER_PAGE.OVERALL_YOU_SAVE} {total_discount} {cur} {ORDER_PAGE.ON_THIS_PRODUCT}</div>
+        <div className={`${styles['p-5']} ${styles['mt-5']} ${styles['overall-amount']}`}>{CART_PAGE.OVERALL_YOU_SAVE} {total_discount} {cur} {CART_PAGE.ON_THIS_PRODUCT}</div>
       </div>
-    </Popover>
   );
 };
 

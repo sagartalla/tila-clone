@@ -8,6 +8,7 @@ const actions = {
   DELETE_TO_WISHLIST: 'DELETE_TO_WISHLIST',
   ADD_TO_CART: 'ADD_TO_CART',
   NOTIFY_ME: 'NOTIFY_ME',
+  WISHLIST_TRACK: 'WISHLIST_TRACK',
 };
 
 const actionCreators = {

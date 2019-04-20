@@ -11,6 +11,7 @@ const actions = {
   GET_COUNTRIES: 'GET_COUNTRIES',
   AUTOCOMPLETE_CITY: 'AUTOCOMPLETE_CITY',
   AUTOCOMPLETE_COUNTRY: 'AUTOCOMPLETE_COUNTRY',
+  PDP_TRACK: 'PDP_TRACK',
 };
 
 const actionCreators = {
@@ -50,7 +51,7 @@ const actionCreators = {
     const state = getState();
     params.postResult = state.cartReducer.data.items;
     return {
-      type: actions.CART_TRACK,
+      type: actions.PDP_TRACK,
       payload: api.track(params),
     };
   },
