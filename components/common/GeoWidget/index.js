@@ -46,9 +46,10 @@ class GeoWidget extends Component {
     if (this.props.geoShippingData.city !== geoShippingData.city) {
       this.setState({
         displayCity: geoShippingData.displayCity,
-      }, () => location.reload());
+      });
     }
   }
+
   componentWillUnmount() {
     document.removeEventListener('click', this.handleOutsideClick, false);
   }
@@ -93,7 +94,9 @@ class GeoWidget extends Component {
     this.setState({
       displayCity,
     });
-    this.setCity(city, country, displayCity);
+    this.setCity(city, country, displayCity).then(() => {
+      location.reload()
+    });
   }
   handleOutsideClick(event) {
     const { target } = event;

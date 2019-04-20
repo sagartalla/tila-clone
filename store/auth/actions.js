@@ -136,10 +136,20 @@ const actionCreators = {
     type: actions.CART_TRACK,
     payload: api.track(event, params),
   }),
-  getDomainCountries: () => ({
-    type: actions.GET_DOMAIN_COUNTRIES,
-    payload: api.getDomainCountries(),
-  }),
+  getDomainCountries: (currentCountry) => (dispatch, getState) => {
+    return dispatch({
+      type: actions.GET_DOMAIN_COUNTRIES,
+      payload: api.getDomainCountries(),
+    }).then((data) => {
+      debugger;
+      const {city_name, code} = data.value.data.filter(function(i) { return i.country.code3 === currentCountry })[0].city
+      dispatch(actionCreators.setCity({
+        "country": currentCountry,
+        "city": code,
+        "displayCity": city_name
+      }));
+    });
+  },
 };
 
 export { actions, actionCreators };
