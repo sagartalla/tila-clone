@@ -54,7 +54,7 @@ const actionCreators = {
     });
   }),
   userLogout: () => (dispatch) => {
-    dispatch(cartActionCreators.getCartResults());
+    // dispatch(cartActionCreators.getCartResults());
     dispatch({
       type: actions.USER_LOGOUT,
       payload: api.userLogout(),
