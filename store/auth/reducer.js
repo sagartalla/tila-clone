@@ -109,7 +109,7 @@ const authReducer = typeToReducer({
     ...state,
     data: {
       ...state.data,
-      isLoggedIn: state.data.userInfoData.email_verified === 'NV' ? false : action.payload.isLoggedIn,
+      isLoggedIn: action.payload.isLoggedIn,
       userCreds: action.payload.userCreds,
       instagramCode: action.payload.instagramCode,
     },
