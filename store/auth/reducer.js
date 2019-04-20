@@ -115,7 +115,7 @@ const authReducer = typeToReducer({
     },
     ui: {
       ...state.ui,
-      showLogin: state.data.userInfoData.email_verified === 'NV',
+      showLogin: !action.payload.isVerified,
     },
   }),
   [actions.SET_COUNTRY]: (state, action) => ({
