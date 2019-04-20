@@ -85,6 +85,7 @@ const getLoginInfo = () => {
     userCreds: userCreds || null,
     isLoggedIn: !!cookies.get('auth') && (cookies.get('isVerified') === 'true'),
     ...(!cookies.get('auth') && { instagramCode: window.localStorage.getItem('instagramCode') || null }),
+    isVerified: cookies.get('isVerified') === 'true',
   };
 };
 
