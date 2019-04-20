@@ -165,7 +165,7 @@ const track = (params) => {
     product: [
       {
         productInfo: {
-          productID: params.params.productId,
+          productID: params.params && params.params.productId,
         },
       },
     ],
