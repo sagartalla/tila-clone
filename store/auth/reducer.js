@@ -16,7 +16,9 @@ const initialState = {
     userCreds: {},
     geoShippingDetails: {},
     autoCompleteCity: [],
-    userInfoData: {},
+    userInfoData: {
+      email_verified: 'NV'
+    },
     domainCountries: [],
   },
   error: '',
@@ -113,7 +115,7 @@ const authReducer = typeToReducer({
     },
     ui: {
       ...state.ui,
-      showLogin: true,
+      showLogin: state.data.userInfoData.email_verified === 'NV',
     },
   }),
   [actions.SET_COUNTRY]: (state, action) => ({
@@ -256,7 +258,10 @@ const authReducer = typeToReducer({
     FULFILLED: (state, action) => Object.assign({}, state, {
       data: {
         ...state.data,
-        ...action.payload,
+        userInfoData: {
+          ...state.data.userInfoData,
+          email_verified: 'V',
+        }
       },
       ui: { ...state.ui, loading: false, showEmailVerificationScreen: false, showLogin: false },
     }),
