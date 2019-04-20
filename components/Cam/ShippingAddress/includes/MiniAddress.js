@@ -33,7 +33,7 @@ const MiniAddress = (props) => {
         }
       </div>
       <div className={`${styles['flex']} ${styles['justify-center']} ${styles['p-10']} ${styles['add-new-addres']}`}>
-        <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']}`} onClick={showAddAdrressForm}> {DELIVERY_ADDR_PAGE.ADD_NEW_BTN} </button>
+        <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['fp-btn-large']}`} onClick={showAddAdrressForm}> {DELIVERY_ADDR_PAGE.ADD_NEW_BTN} </button>
       </div>
     </div>
   )
