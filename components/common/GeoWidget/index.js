@@ -110,7 +110,9 @@ class GeoWidget extends Component {
     this.setState({
       displayCity: null,
     });
-    this.props.removeCity();
+    this.props.removeCity().then(() => {
+      location.reload()
+    });
   }
 
   render() {
