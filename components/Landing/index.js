@@ -121,7 +121,7 @@ class Landing extends Component {
     const { category } = query;
     return (
       <Fragment>
-        {/* <HeaderBar query={query} /> */}
+        <HeaderBar query={query} />
         {/* {
           _.map(this.state.children, (child, index) => React.createElement(child.name, _.merge(child.props, {key: index})))
         } */}

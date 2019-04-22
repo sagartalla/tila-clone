@@ -7,11 +7,11 @@ import { Modal } from 'react-router-modal';
 
 import RightSideBar from '../../Cart/CartPaymentSideBar';
 import constants from '../../../constants';
-import { actionCreators as cartActionCreators, selectors as cartSelectors } from '../../../store/listingCart';
+import { actionCreators as cartActionCreators, selectors as cartSelectors } from '../../../store/cart';
 import { actionCreators as compareActions, selectors } from '../../../store/compare';
 import { languageDefinations } from '../../../utils/lang';
 import lang from '../../../utils/language';
-import { selectors } from '../../../store/cart';
+
 import styles_en from '../product_en.styl';
 import styles_ar from '../product_ar.styl';
 
