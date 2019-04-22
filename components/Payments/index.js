@@ -17,6 +17,7 @@ import RightSideBar from '../Cart/CartPaymentSideBar';
 import { languageDefinations } from '../../utils/lang/';
 import DeliveryAddress from './includes/DeliveryAddress';
 import { actionCreators, selectors } from '../../store/payments';
+import { actionCreators as cartAction } from '../../store/cart'
 import { actionCreators as authActionCreators, selectors as authSelectors } from '../../store/auth';
 import { actionCreators as cartActionCreators, selectors as cartSelectors } from '../../store/cart';
 import Slider from '../common/slider';
@@ -200,7 +201,9 @@ class Payments extends React.Component {
       // paymentConfigJson['loyaltyPoints'] = { basic: false, progress: true, done: false };
       // paymentConfigJson['offersDiscounts'] = { basic: true, progress: false, done: false };
       paymentConfigJson['payment'] = { basic: false, progress: true, done: false };
-      this.setState({ paymentConfigJson, editCartDetails: !editCartDetails });
+      this.setState(
+       { paymentConfigJson, editCartDetails: !editCartDetails }
+      ,() => this.props.cartEditDetails(this.state.editCartDetails));
     } else {
       toast.info('Please add a delivery address.');
     }
@@ -237,7 +240,7 @@ class Payments extends React.Component {
     paymentConfigJson['offersDiscounts'] = { basic: true, progress: false, done: false };
     paymentConfigJson['payment'] = { basic: true, progress: false, done: false };
 
-    this.setState({ paymentConfigJson, editCartDetails: !editCartDetails });
+    this.setState({ paymentConfigJson, editCartDetails: !editCartDetails },() => this.props.cartEditDetails(this.state.editCartDetails));
 
     //clearing payment reducer on address edit button.
     this.props.emptyPaymentPaylod();
@@ -407,6 +410,7 @@ const mapDispatchToProps = dispatch =>
       getLoginInfo: authActionCreators.getLoginInfo,
       getCartResults: cartActionCreators.getCartResults,
       emptyPaymentPaylod: actionCreators.emptyPaymentPaylod,
+      cartEditDetails:cartAction.cartEditDetails
     },
     dispatch,
   );

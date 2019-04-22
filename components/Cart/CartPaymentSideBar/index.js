@@ -86,6 +86,7 @@ class CartAndPaymentSideBar extends Component {
               isPdp={isPdp}
               totalPrice={total_price}
               currency={currency}
+              isMounted={false}
             />
           </div>
           : null
