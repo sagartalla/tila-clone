@@ -45,7 +45,7 @@ class SearchDetailsBar extends Component {
         <div className={styles['search-results-wrap']}>
           <Fragment>
               <div className={`${styles['flx-space-bw']} ${styles['pb-10']} ${styles['items-list-show']} ${styles['ipad-flex-clm']}`}>
-                <h4 className={`${styles['meta-info']} ${styles['mt-0']} ${styles['mb-0']} ${styles['fontW300']}`}>{results.totalCount} {SEARCH_PAGE.NO_OF_ITEMS_FOUND_FOR} <h1 className={styles['no-h1']}>{finalQuery && finalQuery.split('-').join(' ')}</h1></h4>
+                <h4 className={`${styles['mt-0']} ${styles['mb-0']} ${styles['fontW300']}`}>{results.totalCount} {SEARCH_PAGE.NO_OF_ITEMS_FOUND_FOR} <div className={`${styles['no-h1']} ${styles.ellipsis} ${styles['mb-3px']}`} title={finalQuery && finalQuery.split('-').join(' ')}>{finalQuery && finalQuery.split('-').join(' ')}</div></h4>
                 <div className={`${styles['flx-spacebw-alignc']} ${styles['deliver-to-main']}`}>
                   <GeoWidget />
                   <SortByWidget />
