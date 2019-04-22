@@ -122,9 +122,9 @@ class Landing extends Component {
     return (
       <Fragment>
         <HeaderBar query={query} />
-        {/* {
+        {
           _.map(this.state.children, (child, index) => React.createElement(child.name, _.merge(child.props, {key: index})))
-        } */}
+        }
         <FooterBar />
       </Fragment>
     );

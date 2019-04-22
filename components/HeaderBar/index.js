@@ -28,7 +28,7 @@ const HeaderBar = props => (
           <Col md={1} sm={2}>
             <Logo />
           </Col>
-          <Col md={props.showFitlers ? 7 : 7} sm={5}>
+          <Col md={7} sm={5}>
             {
               props.hideSearch
                 ?
