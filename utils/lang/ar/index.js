@@ -52,6 +52,7 @@ export const AR_KEYWORDS = {
     'THERE_IS_SOME_ISSUE_WITH_CART_ITEMS': 'There is some issue with cart items.',
     'COUPONS': 'Coupons',
     'GIFT_MESSAGE_OPTIONAL': 'Gift Message (optional)',
+    'CANNOT_DELIVER': 'Unfortunately, we cannot deliver this item to your selected Address. Please remove the item or move it to your wishlist to continue.',
   },
   PAYMENT_PAGE: {
     'SECURE_CHECKOUT': 'الدفع الآمن',
@@ -296,7 +297,7 @@ export const AR_KEYWORDS = {
     'YOUR_PHONE_NUMBER_VERIFIED': 'Your phone number has been successfully verified',
     'DONE': 'done',
     'VERIFY_PHONE': 'Verify your phone number to Enable Pay on Delivery',
-    'SEND_OTP': 'send otp',
+    'SEND_OTP': 'Send OTP',
     'VERIFY_MOBILE_NUMBER': 'Verify Mobile Number',
     'ENTER_VALID_OTP': 'please enter valid otp',
   },
@@ -346,7 +347,7 @@ export const AR_KEYWORDS = {
     'GOOGLE': 'جوجل',
     'TWITTER': 'تويتر',
     'NOTE': 'لقد تم ربط حسابك على facebook بـ Tila.com ',
-    'UN_LINK': 'Unlink Now',    
+    'UN_LINK': 'Unlink Now',
   },
   SEARCH_PAGE: {
     'DELIVER_TO': 'يوصل إلى',
@@ -466,7 +467,7 @@ export const AR_KEYWORDS = {
     'CONSUMER_RIGHT': 'Consumer Rights',
     'DOWNLOAD_APP': 'Download the app',
     'TILA_RIGHTS': '&copy; 2018 www.tila.com. All rights reserved',
-    'SIZE_CHART': 'Size Chart',    
+    'SIZE_CHART': 'Size Chart',
 
   },
 
@@ -479,7 +480,7 @@ export const AR_KEYWORDS = {
     'SELECT_BRAND': 'Select Brand',
     'SELECT_PRODUCT': 'Select Product',
   },
-  
+
   HEADER_PAGE: {
     'HELLO_GUEST': 'Hello Guest',
     'MY_ACCOUNT': 'My Account',
@@ -496,7 +497,7 @@ export const AR_KEYWORDS = {
     'TILA_CUSTOMER': 'Tila Customer',
     'MATCHING_ITEM': 'MATCHING ITEM',
     'MATCHING_PRODUCTS': 'MATCHING PRODUCTS',
-    'HELLO': 'Hello'    
+    'HELLO': 'Hello'
   },
   LOGIN_PAGE: {
     'SIGN_UP': 'Sign Up',
@@ -610,7 +611,7 @@ export const AR_KEYWORDS = {
   MESSAGES: {
     'MESSAGES': 'Messages',
     'TODAY': 'Today',
-    'ALL_NOTIFICATIONS': 'All Notifications',   
+    'ALL_NOTIFICATIONS': 'All Notifications',
   },
   ORDERS: {
     'ORDER_ID': 'Order Id #',

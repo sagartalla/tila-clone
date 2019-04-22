@@ -148,8 +148,15 @@ class OrderHeader extends Component {
                   {payments && payments.length > 0 &&
                     payments.map(p => (
                       <Fragment>
-                        <Col md={6}>{p.payment_mode.replace('_', ' ')}</Col>
-                        <Col md={6}> {`${p.amount} ${p.currency_code}`}</Col>
+                        <Row>
+                          <Col className={`${styles['thick-gry-clr']}`} md={6}>{p.payment_mode.replace('_', ' ')}</Col>
+                          <Col md={6}> {`${p.amount} ${p.currency_code}`}</Col>
+                        </Row>
+                        {p.card_type &&
+                          <Row>
+                            <Col className={`${styles['thick-gry-clr']}`} md={6}>{p.card_type}</Col>
+                            <Col md={6}> {`${p.masked_card_first6}******${p.masked_card_last4}`}</Col>
+                          </Row>}
                       </Fragment>
                     ))}
                 </Col>

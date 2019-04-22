@@ -52,6 +52,7 @@ export const EN_KEYWORDS = {
     'THERE_IS_SOME_ISSUE_WITH_CART_ITEMS': 'There is some issue with cart items.',
     'COUPONS': 'Coupons',
     'GIFT_MESSAGE_OPTIONAL': 'Gift Message (optional)',
+    'CANNOT_DELIVER': 'Unfortunately, we cannot deliver this item to your selected Address. Please remove the item or move it to your wishlist to continue.'
 
   },
   PAYMENT_PAGE: {
@@ -302,7 +303,7 @@ export const EN_KEYWORDS = {
     'YOUR_PHONE_NUMBER_VERIFIED': 'Your phone number has been successfully verified',
     'DONE': 'done',
     'VERIFY_PHONE': 'Verify your phone number to Enable Pay on Delivery',
-    'SEND_OTP': 'send otp',
+    'SEND_OTP': 'Send OTP',
     'VERIFY_MOBILE_NUMBER': 'Verify Mobile Number',
     'ENTER_VALID_OTP': 'please enter valid otp',
   },

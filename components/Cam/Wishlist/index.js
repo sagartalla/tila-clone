@@ -37,10 +37,7 @@ class Wishlist extends Component {
   }
 
   componentDidMount() {
-    this.props.getWishlist(this.state.currentPage).then(() => this.props.track({
-      eventName: 'WishList View',
-      page: this.state.currentPage,
-    }));
+    this.props.getWishlist(this.state.currentPage);
   }
 
   componentWillReceiveProps(nextProps) {

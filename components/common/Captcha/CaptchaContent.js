@@ -28,11 +28,11 @@ const CaptchaContent = ({items,state,handleDrop,handleClick}) => {
   return (
     items
       ?
-        <div className={`${styles['flx-spacebw-alignc']} ${styles['pt-30']} ${styles['pb-30']}`}>
+        <div className={`${styles['flx-spacebw-alignc']} ${styles['fw700']} ${styles['pt-30']} ${styles['pb-30']}`}>
             <div>
-              <ul className={`${styles['pl-0']} ${styles['m-0']} ${styles['cash-tab']}`}>
+              {/* <ul className={`${styles['pl-0']} ${styles['m-0']} ${styles['cash-tab']}`}>
                 <li>Visual</li>
-              </ul>
+              </ul> */}
               <div className={`${styles['captch-inn']} ${styles['p-20']}`}>
                 <span className={`${styles['flx-spacebw-alignc']} ${styles['refresh-part']} ${styles['pb-20']}`}>
                   <span className={styles['fs-12']}>{items.question}</span>

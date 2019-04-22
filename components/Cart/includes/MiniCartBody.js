@@ -76,7 +76,7 @@ const MiniCartBody = (props) => {
                           : null
                       }
                     </div>
-                    {shipping.shippable ?
+                    {(shipping === null || (shipping !== null && shipping.shippable)) ?
                       <div className={`${styles['flx-space-bw']} ${styles['pt-10']} ${styles['price-stepper-part']}`}>
                         <span className={styles['fontW600']}>{offer_price + ' ' + cur}</span>
                         <span>

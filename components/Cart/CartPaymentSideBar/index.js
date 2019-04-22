@@ -49,31 +49,30 @@ class CartAndPaymentSideBar extends Component {
     } = this.props.data;
     return (
       <div className={`${styles['right-bar']}`}>
-        <div className={`${styles['coupon-code-main']} ${styles['pb-10']}`}>
-          <h4 className={`${styles['fs-16']} ${styles.fontW600} ${styles['m-0']} ${styles['p-0']} ${styles.flex} ${styles['justify-center']} ${styles['white-color']}`}>
+        <div className={`${styles['coupon-code-main']}`}>
+          <h4 className={`${styles['fs-12']} ${styles.fontW600} ${styles['m-0']} ${styles['p-0']} ${styles.flex} ${styles['justify-center']} ${styles['white-color']}`}>
             {/*<SVGComponent clsName={`${styles['buy-coupon-code']}`} src="icons/common-icon/buy-coupon" />
           <span className={styles['pl-5']}>{COUPON_OFFERS.BUY_AND_EARN}</span>*/}
           </h4>
           {
           hideCouponCode ? null : data.coupon_code ?
-            <span className={`${styles['p-10']} ${styles['m-20']} ${styles['applied-coupon']} ${styles.flex} ${styles['flex-center']}`}>
+            <span className={`${styles['pt-5']} ${styles['pb-5']} ${styles['pr-10']} ${styles['pl-10']} ${styles['m-20']} ${styles['applied-coupon']} ${styles.flex} ${styles['flex-center']}`}>
               <SVGComponent clsName={`${styles['coupon-code']}`} src="icons/common-icon/coupon-code" />
               <span className={`${styles['pl-5']} ${styles.flex} ${styles.width100} ${styles['flex-center']} ${styles['justify-between']} `}>
                 <div>
-                  <div className={`${styles.applied}`}>{COUPON_OFFERS.OFFER_APPLIED}</div>
-                  <div >{data.coupon_code}</div>
+                  <div className={`${styles.applied} ${styles['fs-10']}`}>{COUPON_OFFERS.OFFER_APPLIED}</div>
+                  <div className={styles['fs-12']}>{data.coupon_code}</div>
                 </div>
-                <div className={`${styles.pointer} ${styles['lgt-blue']}`} onClick={this.removeCoupon}>{COUPON_OFFERS.REMOVE}</div>
+                <div className={`${styles.pointer} ${styles['lgt-blue']} ${styles['fs-12']}`} onClick={this.removeCoupon}>{COUPON_OFFERS.REMOVE}</div>
               </span>
             </span>
           :
-            <span className={`${styles['flex-center']} ${styles['justify-center']} ${styles['p-10']} ${styles.flex} ${styles['m-20']} ${styles['apply-coupon']} ${styles.pointer}`} onClick={this.props.openSlider}>
+            <span className={`${styles['flex-center']} ${styles['justify-center']} ${styles['pt-5']} ${styles['pb-5']} ${styles['pr-10']} ${styles['pl-10']} ${styles.flex} ${styles['m-20']} ${styles['apply-coupon']} ${styles.pointer}`} onClick={this.props.openSlider}>
               <SVGComponent clsName={`${styles['coupon-code']}`} src="icons/common-icon/coupon-code" />
               <div className={styles.noCoupon}>
               <span className={`${styles['text-uppercase']} ${styles['pl-5']}`}>
-              <div>{COUPON_OFFERS.APPLY_COUPON}</div>
+              <div className={styles['fs-12']}>{COUPON_OFFERS.APPLY_COUPON}</div>
               </span>
-              <div className={`${styles['light-gray']}`}>{COUPON_OFFERS.NO_COUPON_APPLIED}</div>
               </div>
             </span>
         }
@@ -81,7 +80,7 @@ class CartAndPaymentSideBar extends Component {
         </div>
         {
         showInstant ?
-          <div className={`${styles['p-10-20']}`}>
+          <div className={`${styles['p-10-0']}`}>
             <InstantCheckout
               insnt_item_listing_id={insnt_item_listing_id}
               isPdp={isPdp}
@@ -94,7 +93,7 @@ class CartAndPaymentSideBar extends Component {
 
         {
         showCheckoutBtn ?
-          <div className={`${styles['p-10-20']}`}>
+          <div className={`${styles['pt-10']} ${styles['pb-10']} ${styles['pr-20']} ${styles['pl-20']}`}>
             <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles['fs-18']} ${styles['flex-center']} ${styles['justify-center']}`} onClick={checkoutBtnHandler}>
               <SVGComponent clsName={`${styles['secure-checkout']}`} src="icons/common-icon/secure-checkout" />
               <span className={styles['pl-5']}>{CART_PAGE.SECURE_CHECKOUT}</span>

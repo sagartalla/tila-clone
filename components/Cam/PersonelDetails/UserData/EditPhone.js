@@ -61,9 +61,10 @@ class EditPhone extends React.Component {
       show: false,
       countryCode: CountryDialCode[country].data,
       otpResponse: null,
-      showOtp: true,
-      validation: this.validations.valid()
+      validation: this.validations.valid(),
+      otpCount: 0
     }
+    this.otpTimer = () => {}
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleClose = this.handleClose.bind(this)
     this.optionChange = this.optionChange.bind(this)
@@ -105,7 +106,7 @@ class EditPhone extends React.Component {
     return false
   }
   fetchOtp() {
-    const { countryCode, phoneNumber, showOtp } = this.state
+    const { countryCode, phoneNumber, otpCount } = this.state
     // let validation = this.validations.validate(this.state)
     // this.setState({ validation })
     if (phoneNumber.length > 0) {
@@ -114,7 +115,7 @@ class EditPhone extends React.Component {
         mobile_no: phoneNumber,
       };
       this.setState({
-        showOtp: false,
+        otpCount: otpCount + 1,
       }, () => this.props.otpUserUpdate(params));
     }
   }
@@ -152,7 +153,7 @@ class EditPhone extends React.Component {
   }
 
   render() {
-    const { phoneNumber, error, otp, countryCode, validation, otpResponse, showOtp } = this.state;
+    const { phoneNumber, error, otp, countryCode, validation, otpResponse, otpCount } = this.state;
     const { isLoading, isPopup } = this.props
     if (otpResponse === 'SUCCESS') {
       return (
@@ -268,7 +269,9 @@ class EditPhone extends React.Component {
                         : null
                     }
                     {/* <span className={styles['error']}>error message</span> */}
-                    {showOtp ? <a className={`${styles['show-otp']} ${styles['fs-12']} ${styles['thick-blue']}`} onClick={this.fetchOtp}>{CONTACT_INFO_MODAL.SEND_OTP}</a> : null}
+                      <a className={`${styles['show-otp']} ${styles['fs-12']} ${styles['thick-blue']}`} onClick={this.fetchOtp}>
+                       {otpCount ? `${CONTACT_INFO_MODAL.RESEND} ${CONTACT_INFO_MODAL.OTP}` : CONTACT_INFO_MODAL.SEND_OTP}
+                      </a> 
                   </div>
                   {/* <Input
                     placeholder={`${CONTACT_INFO_MODAL.ENTER} ${CONTACT_INFO_MODAL.PHONE_NUMBER}`}
@@ -285,7 +288,8 @@ class EditPhone extends React.Component {
                   } */}
                 </div>
               </Col>
-              <Col xs={12} md={12} className={styles['pt-20']}>
+              {otpCount ?
+                <Col xs={12} md={12} className={styles['pt-20']}>
                 <div className={`${styles['request-opt']} ${styles['relative']}`}>
                   {/* <Input type='number' placeholder={`${CONTACT_INFO_MODAL.ENTER} ${CONTACT_INFO_MODAL.OTP}`} val={otp} onChange={this.handleOTPChange} /> */}
                   <div className={styles['fp-input']}>
@@ -307,7 +311,6 @@ class EditPhone extends React.Component {
                     {/* <span className={styles['error']}>error message</span> */}
 
                   </div>
-                  <span className={styles['request-opt-inn']}><a onClick={this.fetchOtp}>{CONTACT_INFO_MODAL.RESEND} {CONTACT_INFO_MODAL.OTP}</a></span>
                 </div>
                 {/* {
                       validation.otp.isInValid ?
@@ -316,10 +319,11 @@ class EditPhone extends React.Component {
                         </div> : null
                     } */}
               </Col>
+              : null}
             </Row>
             <Row>
               <Col xs={12} md={12} className={`${styles['t-c']}`}>
-                <button className={`${styles['verify-no-btn']} ${styles['mt-20']}`} onClick={this.handleSubmit}>{this.props.buttonText}</button>
+                <button disabled={!otp} className={`${!otp ? styles['verify-no-btn-disabled'] : styles['verify-no-btn']} ${styles['mt-20']}`} onClick={this.handleSubmit}>{this.props.buttonText}</button>
               </Col>
             </Row>
             <div>

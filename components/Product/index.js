@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { languageDefinations } from '../../utils/lang';
 import HeaderBar from '../HeaderBar/index';
-import Dispalay from './includes/Display';
+import Display from './includes/Display';
 import TitleInfo from './includes/TitleInfo';
 import Shipping from './includes/Shipping';
 
@@ -173,6 +173,7 @@ const getProductComponent = (isPreview, taskCode) => {
       const {
         stickyElements, recentlyViewed, notifyEmail, emailErr,
       } = this.state;
+      console.log('guygbut', (offerInfo.stockError || offerInfo.availabilityError) || Object.keys(shippingInfo).length === 0 || !shippingInfo.shippable);
       return (
         <Theme.Provider value={categoryType.toLowerCase()}>
           <div className={`${styles['pdp-wrap']} ${categoryType.toLowerCase()} ${styles[categoryType.toLowerCase()]}`}>
@@ -184,7 +185,7 @@ const getProductComponent = (isPreview, taskCode) => {
                 <Row className={`${styles['m-0']} ${styles['ht-100per']}`}>
                   <Col xs={12} md={8} sm={12} className={`${styles['pl-0']} ${styles['ht-100per']} ${styles['pdp-img-prt']}`}>
                     <NoSSR>
-                      <Dispalay
+                      <Display
                         product_id={product_id}
                         offerPricing={offerPricing}
                         catalog_id={catalogObj.catalog_id}
@@ -210,7 +211,7 @@ const getProductComponent = (isPreview, taskCode) => {
                           isPreview ? null : <AddToCart offerInfo={offerInfo} productData={productData.product_id}/>
                         }
                         {
-                          (offerInfo.stockError || offerInfo.availabilityError) &&
+                          ((offerInfo.stockError || offerInfo.availabilityError) || Object.keys(shippingInfo).length === 0 || !shippingInfo.shippable) &&
                           <div className={`${styles['flx-space-bw']} ${styles['align-baseline']}`}>
                             {!userDetails.isLoggedIn &&
                             <div className={`${styles['mb-0']} ${styles['fp-input']} ${styles['pb-10']}`}>
