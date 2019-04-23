@@ -137,11 +137,12 @@ const actionCreators = {
     type: actions.AUTH_TRACK,
     payload: api.track(event, params),
   }),
-  getDomainCountries: (currentCountry) => (dispatch, getState) => {
+  getDomainCountries: (currentCountry, shippingInfo) => (dispatch, getState) => {
     return dispatch({
       type: actions.GET_DOMAIN_COUNTRIES,
       payload: api.getDomainCountries(),
     }).then((data) => {
+      if(shippingInfo) { return; }
       const {city_name, code} = data.value.data.filter(function(i) { return i.country.code3 === currentCountry })[0].city
       dispatch(actionCreators.setCity({
         "country": currentCountry,
