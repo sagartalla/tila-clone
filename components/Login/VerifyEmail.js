@@ -41,6 +41,11 @@ class VerifyEmail extends Component {
     });
   }
 
+  handleEnterKey = (e) => {
+    if (e.charCode === 13) {
+      this.verifyEmail();
+    }
+  }
   verifyEmail = () => {
     const { value } = this.state;
     if (value === '') {
@@ -85,6 +90,7 @@ class VerifyEmail extends Component {
               style={{ border: '1px solid lightgray', width: '50%', margin: '15px' }}
               val={value.trim()}
               onChange={this.enterOtp}
+              onKeyPress={this.handleEnterKey}
             />
             {otpError ? <div className={`${styles['thick-red-clr']}`}>{EMAIL_VERIFICATION.PLEASE_ENTER_OTP_SENT}</div> : ''}
             <div className={`${styles.flex}`}><div className={`${styles['otp-expire']}`}>{EMAIL_VERIFICATION.OTP_EXPIRE_IN}&nbsp;</div><div className={`${styles['black-color']}`}>{EMAIL_VERIFICATION.TWENTY_FOUR_HOURS}</div>
