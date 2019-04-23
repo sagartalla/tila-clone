@@ -83,7 +83,7 @@ class VerifyEmail extends Component {
               type="text"
               autoFocus
               style={{ border: '1px solid lightgray', width: '50%', margin: '15px' }}
-              val={value}
+              val={value.trim()}
               onChange={this.enterOtp}
             />
             {otpError ? <div className={`${styles['thick-red-clr']}`}>{EMAIL_VERIFICATION.PLEASE_ENTER_OTP_SENT}</div> : ''}
