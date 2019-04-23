@@ -57,15 +57,18 @@ class SearchDetailsBar extends Component {
                     spellCheckResp ? 
                     <a href="javascript: void(0)" onClick={this.querySearch} className={`${styles['black-color']} ${styles['fontW600']}`} data-querysearch={spellCheckResp[query]}>
                       <b>{`${spellCheckResp[query]}`}</b>
-                    </a> : <h1 className={styles['no-h1']}>{finalQuery && finalQuery.split('-').join(' ')}</h1>
+                      <span className={`${styles['fs-10']} ${styles['textColor']}`}>({ SEARCH_PAGE.AUTO_CORRECTED })</span>
+                    </a>
+                    : 
+                    <h1 className={styles['no-h1']}>{finalQuery && finalQuery.split('-').join(' ')}</h1>
                   }
                   
-                    <span className={`${styles['pl-5']} ${styles['pr-5']}`}>{ results.totalCount }</span> { SEARCH_PAGE.SEARCH_ITEMS } ,
+                    <span className={`${styles['pl-5']} ${styles['pr-5']}`}>{ results.totalCount }</span> { SEARCH_PAGE.SEARCH_ITEMS }
                     {/* <h1 className={styles['no-h1']}>{finalQuery && finalQuery.split('-').join(' ')}</h1> */}
                   </h4>
                   { 
                     spellCheckResp &&
-                    <h4><span>You entered:</span> <span>{finalQuery && finalQuery.split('-').join(' ')}</span> </h4>
+                    <h4 className={`${styles['pl-10']} ${styles['sple-check-prt']}`}><span>{ SEARCH_PAGE.YOUR_ENTERED }</span> <span className={`${styles['fontW600']} ${styles['lgt-blue']}`}>{finalQuery && finalQuery.split('-').join(' ')}</span> </h4>
                   }
                 </div>
                 <div className={`${styles['flex']} ${styles['deliver-to-main']}`}>

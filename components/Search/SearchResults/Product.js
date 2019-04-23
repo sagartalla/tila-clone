@@ -323,7 +323,7 @@ class Product extends Component {
                     variants.length > 0 ?
                       <div className={`${styles['flex']} ${styles['justify-around']} ${styles['quick-view']} ${styles['border-radius4']}`}>
                         <Button
-                          className={`${styles['flex']} ${styles['add-to-crt']} ${styles['fs-12']} ${styles['text-uppercase']}`}
+                          className={`${styles['flex']} ${styles['add-to-crt']} ${styles['fs-12']} ${styles['text-capitalize']}`}
                           onClick={this.showVariants('ADD_TO_CART')}
                           disabled={btnLoading}
                           btnText={PDP_PAGE.ADD_TO_CART}
@@ -331,7 +331,7 @@ class Product extends Component {
                           btnLoading={variants[selectedIndex].listingId && cartButtonLoaders[variants[selectedIndex].listingId[0]]}
                         />
                         <Button
-                          className={`${styles['flex-center']} ${styles['buy-now-btn']} ${styles['fs-12']} ${styles['text-uppercase']}`}
+                          className={`${styles['flex-center']} ${styles['buy-now-btn']} ${styles['fs-12']} ${styles['text-capitalize']}`}
                           onClick={this.showVariants('BUY_NOW')}
                           btnText={PDP_PAGE.BUY_NOW}
                           showImage="icons/cart/buy-icon"
