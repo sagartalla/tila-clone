@@ -5,4 +5,8 @@ const getInstantCheckoutResData = (store) => {
   return {};
 }
 
-export { getInstantCheckoutResData };
+const showLoading = (store) => {
+    return store.instantCheckoutReducer.ui.loading;
+}
+
+export { getInstantCheckoutResData, showLoading };
