@@ -232,14 +232,14 @@ TitleInfo.propTypes = {
 };
 
 const mapStateToProps = store => ({
-  listingCartData: cartSelectors.getListingCartResults(store),
+  listingCartData: cartSelectors.getCartResults(store),
   cmpData: selectors.getCmpData(store),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   addToCart: cartActionCreators.addToCart,
   cartItemCount: cartActionCreators.cartItemCount,
-  getListingCartResults: cartActionCreators.getListingCartResults,
+  getListingCartResults: cartActionCreators.getCartResults,
   removeCartItem: cartActionCreators.removeCartItem,
   addToCompare: compareActions.addToCompare,
   getCompareCount: compareActions.getCompareCount,

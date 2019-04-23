@@ -310,8 +310,8 @@ class Product extends Component {
                       <span className={`${styles['fontW600']} ${styles['black-color']}`}>{brand}</span> <span className={`${styles['thick-gry-clr']} ${styles['fontW300']}`}>{displayName.replace(brand, '').trim()}</span>
                     </h5>
                     <span>
+                      <span className={`${styles['pr-5']}`}>{variants.length > 0 && variants[selectedIndex].sellingPrice && getPriceAndOffer()}</span>
                       <span className={`${styles['fs-12']} ${styles['black-color']}`}>{currency}</span>
-                      <span className={`${styles['pl-5']}`}>{variants.length > 0 && variants[selectedIndex].sellingPrice && getPriceAndOffer()}</span>
                     </span>
                   </div>
                 </div>
@@ -367,23 +367,13 @@ class Product extends Component {
                         />
                         <label for="add-to-compare-srp" className={`${styles['fs-12']}`}> {PDP_PAGE.ADD_TO_COMPARE}</label>
                       </div>
-                      // <a className={styles['flex-center']} onClick={this.addToCompare}>
-                      //   <SVGCompoent clsName={`${styles['wish-list']}`} src="icons/cam/cam-icon" />
-                      //   <span className={`${styles['pl-5']} ${styles['fs-12']}`}>{PDP_PAGE.ADD_TO_COMPARE}</span>
-                      // </a>
                       }
                   </div>
                   <div className={`${styles['brand-price-details']} ${styles['black-color']}`}>
-                    {/* <div> */}
-                    {/* <h5 className={`${styles['prdt-name']}  ${styles['pb-5']} ${styles['m-0']}`}>
-                    <span className={`${styles['fontW600']}`}>{brand}</span> <span className={`${styles['thick-gry-clr']} ${styles['fontW300']}`}>{displayName.replace(brand, '').trim()}</span>
-                  </h5> */}
-                    {/* <span className={`${styles['fs-12']} ${styles['label-gry-clr']}`}>Denim shirt with baseball shirt stiff collar and formal tie</span> */}
-                    {/* </div> */}
-                    <span className={`${styles['fs-12']}`}>{currency}</span>
-                    <span className={`${styles['pl-5']}`}>{variants.length > 0 && variants[selectedIndex].sellingPrice &&
+                    <span className={`${styles['pr-5']}`}>{variants.length > 0 && variants[selectedIndex].sellingPrice &&
                       getPriceAndOffer()}
                     </span>
+                    <span className={`${styles['fs-12']}`}>{currency}</span>
                     <div className={`${styles['flex']} ${styles['pt-5']}`}>
                       <span className={styles['flex']}>
                         <SVGCompoent clsName={`${styles['star-raing']}`} src="icons/common-icon/star-full-yellow" />

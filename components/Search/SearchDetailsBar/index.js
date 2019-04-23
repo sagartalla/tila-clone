@@ -1,12 +1,13 @@
 import React, { Component, Fragment } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Waypoint from 'react-waypoint';
+import Cookie from 'universal-cookie';
 import NoSSR from 'react-no-ssr';
 import GeoWidget from '../../common/GeoWidget';
 import SortByWidget from './SortByWidget';
-import SearchFilters from '../../common/SearchFilters';
+import { Router } from '../../../routes';
+// import SearchFilters from '../../common/SearchFilters';
 import AppliedFilters from './includes/AppliedFilters';
 
 import { actionCreators, selectors } from '../../../store/search';
@@ -18,6 +19,11 @@ import styles_en from '../search_en.styl';
 import styles_ar from '../search_ar.styl';
 
 const styles = lang === 'en' ? styles_en : styles_ar;
+
+const cookies = new Cookie();
+
+const language = cookies.get('language') || 'en';
+const country = cookies.get('country') || 'SAU';
 
 
 const { SEARCH_PAGE } = languageDefinations();
@@ -45,7 +51,6 @@ class SearchDetailsBar extends Component {
   render() {
     const { results, query, categoryId,categoryQuery, spellCheckResp } = this.props;
     const finalQuery = query || categoryQuery;
-    console.log(spellCheckResp);
     return (
       <Waypoint onEnter={this.handleWaypointEnter} onLeave={this.handleWaypointLeave}>
         <div className={styles['search-results-wrap']}>
@@ -53,7 +58,7 @@ class SearchDetailsBar extends Component {
               <div className={`${styles['flx-space-bw']} ${styles['pb-15']} ${styles['items-list-show']} ${styles['ipad-flex-clm']}`}>
                 <div className={styles['flex-center']}>
                   <h4 className={`${styles['meta-info']} ${styles['mt-0']} ${styles['mb-0']} ${styles['pr-10']} ${styles['fontW300']}`}>
-                  {
+                    {
                     spellCheckResp ? 
                     <a href="javascript: void(0)" onClick={this.querySearch} className={`${styles['black-color']} ${styles['fontW600']}`} data-querysearch={spellCheckResp[query]}>
                       <b>{`${spellCheckResp[query]}`}</b>
@@ -64,11 +69,15 @@ class SearchDetailsBar extends Component {
                   }
                   
                     <span className={`${styles['pl-5']} ${styles['pr-5']}`}>{ results.totalCount }</span> { SEARCH_PAGE.SEARCH_ITEMS }
-                    {/* <h1 className={styles['no-h1']}>{finalQuery && finalQuery.split('-').join(' ')}</h1> */}
                   </h4>
-                  { 
+                  {
                     spellCheckResp &&
-                    <h4 className={`${styles['pl-10']} ${styles['sple-check-prt']}`}><span>{ SEARCH_PAGE.YOUR_ENTERED }</span> <span className={`${styles['fontW600']} ${styles['lgt-blue']}`}>{finalQuery && finalQuery.split('-').join(' ')}</span> </h4>
+                    <h4 className={`${styles['pl-10']} ${styles['sple-check-prt']}`}>
+                      <span>{ SEARCH_PAGE.YOUR_ENTERED } : </span>
+                      <a href="javascript: void(0)" onClick={this.querySearch} className={`${styles['fontW600']} ${styles['lgt-blue']}`} data-querysearch={finalQuery.split('-').join(' ')}>
+                        {finalQuery && finalQuery.split('-').join(' ')}
+                      </a>
+                    </h4>
                   }
                 </div>
                 <div className={`${styles['flex']} ${styles['deliver-to-main']}`}>

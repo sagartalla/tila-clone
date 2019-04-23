@@ -55,7 +55,7 @@ class AppliedFilters extends Component {
         ?
         <div className={`${styles['applied-tags']} ${styles['flex-center']} ${styles['pb-20']}`}>
           <span>{SEARCH_PAGE.APPLIED_FILTERS_TAGS} : </span>
-          <div className={`${styles.flex} ${styles['flex-wrp']} ${styles.width70}`}>
+          <div className={`${styles.flex} ${styles['flex-wrp']} ${styles['applied-tags-i']}`}>
             {
               appliedFilters.map((af) => (
                 <div key={af.key} className={`${styles['flex-center']} ${styles['applied-tags-inn']} ${styles['ml-10']}`}>
