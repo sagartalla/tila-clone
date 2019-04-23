@@ -136,7 +136,7 @@ class UpdatePersonalInfoModal extends React.Component {
               <div className={`${styles['m-5']} ${styles['mt-20']} ${styles['update-profile-input']} ${styles['flex']}`}>
                 <Col xs={12} md={12}>
                   <div className={styles['fp-input']}>
-                    <label className={`${styles['mb-0']} ${styles['fs-12']} ${styles['label-gry-clr']}`}>{PERSONAL_INFO_MODAL.USERNAME}</label>
+                    <div className={`${styles['mb-0']} ${styles['fs-12']} ${styles['label-gry-clr']}`}>{PERSONAL_INFO_MODAL.USERNAME}</div>
                     <input className={styles['user-name']} type="text" value={user_name} onChange={this.handleNameChange} maxLength={40}/>
                     {/* <span className={styles['highlight']}></span>
                   <span className={styles['bar']}></span>

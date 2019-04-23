@@ -68,6 +68,8 @@ class GeoWidget extends Component {
       city,
       country,
       displayCity,
+    }).then(() => {
+      location.reload()
     });
   }
 
@@ -93,10 +95,9 @@ class GeoWidget extends Component {
     const country = cookies.get('country');
     this.setState({
       displayCity,
+      showCitiesData: false
     });
-    this.setCity(city, country, displayCity).then(() => {
-      location.reload()
-    });
+    this.setCity(city, country, displayCity);
   }
   handleOutsideClick(event) {
     const { target } = event;
