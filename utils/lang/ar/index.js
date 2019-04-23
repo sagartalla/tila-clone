@@ -53,6 +53,10 @@ export const AR_KEYWORDS = {
     'COUPONS': 'Coupons',
     'GIFT_MESSAGE_OPTIONAL': 'Gift Message (optional)',
     'CANNOT_DELIVER': 'Unfortunately, we cannot deliver this item to your selected Address. Please remove the item or move it to your wishlist to continue.',
+    'THERE_IS': 'There is',
+    'THERE_ARE': 'There are',
+    'ITEM_IN_YOUR_WISHLIST': 'item in Your Wishlist',
+    'ITEMS_IN_YOUR_WISH_LIST': 'items in Your Wishlist',
   },
   PAYMENT_PAGE: {
     'SECURE_CHECKOUT': 'الدفع الآمن',

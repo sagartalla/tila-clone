@@ -120,9 +120,16 @@ const setLanguage = language => axios.post('/api/setCookie', {
   },
 }).then(() => language);
 
-const removeCity = () => axios.post('/api/deleteCookie', {
-  keys: ['shippingInfo'],
-});
+const removeCity = () => {
+  const shippingInfo = cookies.get('shippingInfo') || {};
+  return axios.post('/api/setCookie', {
+    data: {
+      shippingInfo: {
+        country: shippingInfo.country,
+      }
+    }
+  });
+};
 
 const savePtaToken = ptaToken => axios.post('/api/setCookie', {
   data: {
