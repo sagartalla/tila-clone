@@ -34,29 +34,15 @@ class Country extends Component {
 
   componentDidMount() {
     const country = cookies.get('country') || this.state.selectedItem;
+    const shippingInfo = cookies.get('shippingInfo');
     if (country) {
       this.setState({
         selectedItem: country,
       });
     }
     this.props.setCountry(country);
-    this.props.getDomainCountries(country);
+    this.props.getDomainCountries(country, shippingInfo);
   }
-
-  // componentWillReceiveProps(nextProps) {
-  //   const { domainCountries, setShippingInfo } = this.props;
-  //   const pathnameArr = window.location.pathname.split('/');
-  //   const country = pathnameArr[1];
-  //   if (domainCountries.length !== nextProps.domainCountries.length) {
-  //     const obj = nextProps.domainCountries.length > 0 ?
-  //       nextProps.domainCountries.filter(domain => domain.country.code3 === country)[0] : {};
-  //     setShippingInfo({
-  //       country,
-  //       city: obj.city.code,
-  //       displayCity: obj.city[lang === 'en' ? 'city_name' : 'city_name_ar'],
-  //     });
-  //   }
-  // }
 
   changeCountry(e) {
     const id = e.currentTarget.getAttribute('data-id');
