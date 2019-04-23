@@ -36,7 +36,6 @@ class Button extends Component {
     return (
     <button
         className={hover ? ` ${styles['button-hoverstyl']} ${className} ${styles[hoverClassName]}` : `${styles['button-styl']} ${className}` }
-        style={style}
         id={id}
         onClick={onClick}
         disabled={disabled}
@@ -50,8 +49,8 @@ class Button extends Component {
       :
       showImage ?
         <div className={`${styles.flex} ${styles['align-center']}`}>
-          <SVGCompoent clsName={`${styles['image-icon']}`} src={showImage} />
-        {btnText}
+          <SVGCompoent style={style} clsName={`${styles['image-icon']}`} src={showImage} />
+          <span>{btnText}</span>
         </div> :
     btnText}
   </button>
@@ -66,6 +65,7 @@ Button.propTypes = {
   btnLoading: PropTypes.bool,
   disabled: PropTypes.bool,
   id: PropTypes.string,
+  style: PropTypes.object,
 };
 Button.defaultProps = {
   onClick: f => f,
@@ -74,5 +74,6 @@ Button.defaultProps = {
   btnLoading: false,
   disabled: false,
   id: '',
+  style: {},
 };
 export default Button;

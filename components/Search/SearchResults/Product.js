@@ -314,9 +314,10 @@ class Product extends Component {
                 variants.length > 0 ?
                   <div className={`${styles['flex']} ${styles['justify-around']} ${styles['quick-view']} ${styles['border-radius4']}`}>
                     <Button
-                      className={`${styles['flex']} ${styles['add-to-crt']} ${styles['fs-12']} ${styles['text-uppercase']}`}
+                      className={`${styles['flex']} ${styles['add-to-crt']} ${styles['add-card-btn']} ${styles['fs-12']} ${styles['text-uppercase']}`}
                       onClick={this.showVariants('ADD_TO_CART')}
                       disabled={btnLoading}
+                      style={{ width: '14px', height: '14px', marginRight: '5px' }}
                       btnText={PDP_PAGE.ADD_TO_CART}
                       showImage="icons/cart/blue-cart-icon"
                       btnLoading={variants[selectedIndex].listingId && cartButtonLoaders[variants[selectedIndex].listingId[0]]}
@@ -325,6 +326,7 @@ class Product extends Component {
                       className={`${styles['flex-center']} ${styles['buy-now-btn']} ${styles['fs-12']} ${styles['text-uppercase']}`}
                       onClick={this.showVariants('BUY_NOW')}
                       btnText={PDP_PAGE.BUY_NOW}
+                      style={{ width: '18px', height: '14px', marginRight: '5px' }}
                       showImage="icons/cart/buy-icon"
                       hoverClassName="hoverBlueBackground"
                       btnLoading={false}
