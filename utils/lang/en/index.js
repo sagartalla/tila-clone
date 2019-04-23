@@ -123,6 +123,7 @@ export const EN_KEYWORDS = {
     'REMAINING_AMOUNT_TO_PAY': 'Remaining amount to pay',
     'PAY_USING_TILA_CREDIT': 'PAY USING TILA CREDIT',
     'PAYMENT_MODE': 'Net banking, credit card, vouchers and etc....',
+    'ON_DELIVERY': 'on delivery',
   },
   DELIVERY_ADDR_PAGE: {
     'DELIVERY_ADDR': 'Delivery Address',
@@ -184,6 +185,7 @@ export const EN_KEYWORDS = {
     'NOTIFY_ME': 'Notify Me',
     'BUY_FOR': 'BUY FOR',
     'ADDED_TO_CART': 'In Cart',
+    'IN_CART' : 'IN CART',
     // //New keys
     'GO_TO_CART': 'Go To Cart',
     'LIKE': 'Like',
@@ -310,6 +312,7 @@ export const EN_KEYWORDS = {
     'SEND_OTP': 'Send OTP',
     'VERIFY_MOBILE_NUMBER': 'Verify Mobile Number',
     'ENTER_VALID_OTP': 'please enter valid otp',
+    'PLEASE_CONFIRM_YOUR_ORDER': 'Your Mobile Number is already Verified, Please confirm your order',
   },
   EDIT_PASSWORD_MODAL: {
     'PASSWORD_SUCCESS_MESSAGE': 'Your password is changed successfully!!',

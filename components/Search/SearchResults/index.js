@@ -97,7 +97,11 @@ class SearchResults extends Component {
       return (
         <div className={`${styles['caption']}`}>
           <div className={`${styles['no-results']} ${styles['fs-40']} ${styles['fontW600']} ${styles['justify-center']}`}>
-              {SEARCH_PAGE.SORRY_NO_RESULTS}<br/><span  className={`${styles['fontW300']} ${styles['fs-20']}`}>{SEARCH_PAGE.FOR} "{finalQuery}"</span>
+              {SEARCH_PAGE.SORRY_NO_RESULTS}<br/>
+              <div className={`${styles.flex} ${styles['flex-center']}  ${styles['flex-colum']}`}>
+              <span  className={`${styles['fontW300']} ${styles['fs-20']}`}>{SEARCH_PAGE.FOR}</span>
+              <div className={`${styles.ellipsis} ${styles['fontW300']} ${styles['fs-20']}`} title={`"${finalQuery}"`}>"{finalQuery}"</div>
+              </div>
           </div>
           <div className={`${styles['no-search']}`}>
             <SVGComponent src={"errors-img/noSearch"} />

@@ -64,7 +64,7 @@ class Search extends Component {
   }
 
   onChangeSearchInput(e) {
-    const numberOfCharacters = /^[\s\S]{0,300}$/;
+    const numberOfCharacters = /^[\s\S]{0,200}$/;
     if (!numberOfCharacters.test(e.target.value)) {
       toast.error(SEARCH_PAGE.MAXIMUN_TEXT_EXCEEDED);
       return;
