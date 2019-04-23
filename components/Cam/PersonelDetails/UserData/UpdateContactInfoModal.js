@@ -16,6 +16,7 @@ const UpdateContactInfoModal = (props) => {
             <EditPhone
               {...props}
               isPopup={true}
+              mobileVerified={false}
               buttonText={'verfiy Mobile Number'}
             />
             :
