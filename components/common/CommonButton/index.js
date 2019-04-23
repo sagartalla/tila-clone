@@ -30,7 +30,7 @@ class Button extends Component {
     });
   }
   render() {
-    const { className, style, onClick, disabled, hoverClassName, showImage, btnText, id } = this.props;
+    const { className, onClick, disabled, hoverClassName, showImage, btnText, id } = this.props;
     let { btnLoading } = this.props;
     const { hover } = this.state;
     return (
@@ -49,7 +49,7 @@ class Button extends Component {
       :
       showImage ?
         <div className={`${styles.flex} ${styles['align-start']}`}>
-          <SVGCompoent style={style} clsName={`${styles['image-icon']}`} src={showImage} />
+          <SVGCompoent clsName={`${styles['image-icon']}`} src={showImage} />
           <span>{btnText}</span>
         </div> :
     btnText}
