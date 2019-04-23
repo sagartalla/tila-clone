@@ -407,8 +407,16 @@ nav
 .search-suggestions
   position absolute
   width 100%
-  background #fff
-
+  background white
+  padding 0
+  box-shadow 0px 2px 2px 1px rgba(0,0,0,0.09)
+  li
+    line-height 35px
+    &:hover
+      background rgba(216, 216, 216, 0.3)
+    a
+      &:hover
+        color black
 
 @media screen and (min-device-width: 320px) and (max-device-width: 736px) and (orientation : portrait){
   .login-reg-modal {
