@@ -182,6 +182,7 @@ class Reason extends Component {
     const { selectedItem: itemData, reasons, returnExchangeType, issueType } = orderIssue;
     const { img, name } = itemData;
     const { selectedMode, displaySizeError } = this.state;
+    const selectedReason = reasons.filter(reason => reason.name === this.state.reason)[0]
     return (
       <div className={`${styles['reason-item-main']} ${styles['width100']}`}>
         <h4 className={`${styles['fs-20']} ${styles['fontW300']} ${styles['text-capitalize']} ${styles['ml-20']} ${styles['mr-20']}`}>{ORDER_PAGE.WHY_DO_YOU_WANT_TO} {issueType} {ORDER_PAGE.THIS_ITEM}</h4>
@@ -236,6 +237,7 @@ class Reason extends Component {
                   styles['mb-10']
                   }`}
               >
+              { selectedReason.sub_reasons ?
                 <select
                   className={styles['select-text']}
                   onChange={this.selectSubReason}
@@ -246,7 +248,7 @@ class Reason extends Component {
                       : ORDER_PAGE.SELECT_SUB_REASON}
                   </option>
                   {_.map(
-                    reasons.filter(reason => reason.name === this.state.reason)[0].sub_reasons,
+                    selectedReason.sub_reasons,
                     subReason => (
                       <option key={subReason.id} value={subReason.name}>
                         {subReason.name}
@@ -254,6 +256,8 @@ class Reason extends Component {
                     ),
                   )}
                 </select>
+                :
+                null}
               </div>
             ) : null}
           </div>
