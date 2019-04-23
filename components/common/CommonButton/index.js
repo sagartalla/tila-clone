@@ -10,7 +10,7 @@ const styles = lang === 'en' ? styles_en : styles_ar;
 /* eslint-disable */
 
 
-class Button extends Component { 
+class Button extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -40,7 +40,7 @@ class Button extends Component {
         onClick={onClick}
         disabled={disabled}
         onMouseOver={this.onMouseEnter(true)}
-        onMouseOut={this.onMouseEnter(false)}        
+        onMouseOut={this.onMouseEnter(false)}
     >
     {btnLoading ?
       <div className={`${styles['loader-div']}`} >
@@ -48,7 +48,7 @@ class Button extends Component {
       </div>
       :
       showImage ?
-        <div className={`${styles.flex} ${styles['align-center']}`}>
+        <div className={`${styles.flex} ${styles['align-start']}`}>
           <SVGCompoent style={style} clsName={`${styles['image-icon']}`} src={showImage} />
           <span>{btnText}</span>
         </div> :
