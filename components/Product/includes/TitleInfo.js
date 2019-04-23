@@ -113,7 +113,7 @@ class TitleInfo extends Component {
   render() {
     const {
       brand, title, rating, reviews, price, originalPrice, discountPercent, product_id,
-      totalInventoryCount, isPreview, listingId, listingCartData, comparable, cmpData,
+      totalInventoryCount, isPreview, listingId, listingCartData, comparable, cmpData, offerInfo,
     } = this.props;
     const { showCheckoutModal } = this.state;
     return (
@@ -163,7 +163,7 @@ class TitleInfo extends Component {
             :
             <div className={`${styles['flex-center']} ${styles['checkout-instantly']} ${styles['pt-10']}`}>
               <div className={`${styles.flex}`}>
-                {totalInventoryCount > 0 &&
+                {totalInventoryCount > 0 && offerInfo.availabilityError &&
                   <a className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['fs-14']} ${styles['small-btn']} ${styles['checkout-instant-btn']}`} onClick={this.checkoutInstantHandler}>{PDP_PAGE.CHECKOUT_INSTANT}</a>}
               </div>
               <div>
@@ -182,18 +182,15 @@ class TitleInfo extends Component {
                     :
                     null
                 }
-
                 <span className={`${styles.flex} ${styles['fs-12']}`}>{PDP_PAGE.COD_AVAILABLE}</span>
               </div>
-
-              
               <React.Fragment>
                 <div className={showCheckoutModal ? `${styles['modalContainer']} ${styles['showDiv']}` : `${styles['modalContainer']} ${styles['hideDiv']}`}>
                   <div className={`${styles['disabled']}`} onClick={this.checkoutInstantHandler}></div>
                 </div>
                 <div className={`${styles['modal']} ${showCheckoutModal ? styles['showModal'] : styles['hideModal']}`}>
                   <div className={styles['modalFill']}>
-                    {showCheckoutModal ? 
+                    {showCheckoutModal &&
                       <RightSideBar
                         data={listingCartData}
                         hideUpSell
@@ -204,8 +201,7 @@ class TitleInfo extends Component {
                         insnt_item_listing_id={listingCartData.items.length > 0 ? listingCartData.items[0].listing_id : ''}
                         increaseItemCnt={this.increaseItemCnt}
                         decreaseItemCnt={this.decreaseItemCnt}
-                      />
-                    : null}
+                      />}
                   </div>
                 </div>
               </React.Fragment>

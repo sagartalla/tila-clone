@@ -173,7 +173,6 @@ const getProductComponent = (isPreview, taskCode) => {
       const {
         stickyElements, recentlyViewed, notifyEmail, emailErr,
       } = this.state;
-      console.log('guygbut', (offerInfo.stockError || offerInfo.availabilityError) || Object.keys(shippingInfo).length === 0 || !shippingInfo.shippable);
       return (
         <Theme.Provider value={categoryType.toLowerCase()}>
           <div className={`${styles['pdp-wrap']} ${categoryType.toLowerCase()} ${styles[categoryType.toLowerCase()]}`}>
@@ -200,7 +199,7 @@ const getProductComponent = (isPreview, taskCode) => {
                   <Col sm={12} className={`${styles['details-right-part']} ${styles[stickyElements.details]}`}>
                     <div className={`${styles['details-right-part-inn']}`}>
                       <div className={`${styles['ipad-details']} ${styles['ipad-pr-15']}`}>
-                        <TitleInfo {...titleInfo} isPreview={isPreview} />
+                        <TitleInfo {...titleInfo} isPreview={isPreview} offerInfo={offerInfo} />
                         <ProductDetails details={details} keyfeatures={keyfeatures} isPreview={isPreview} productInfo={productData}/>
                       </div>
                       <div className={`${styles['ipad-details']} ${styles['bdr-lt']} ${styles['ipad-pl-15']}`}>
@@ -208,10 +207,10 @@ const getProductComponent = (isPreview, taskCode) => {
                           isPreview ? null : <Shipping shippingInfo={shippingInfo} offerInfo={offerInfo} warranty={warranty} />
                         }
                         {
-                          isPreview ? null : <AddToCart offerInfo={offerInfo} productData={productData.product_id}/>
+                          isPreview ? null : shippingInfo.shippable && <AddToCart offerInfo={offerInfo} productData={productData.product_id}/>
                         }
                         {
-                          ((offerInfo.stockError || offerInfo.availabilityError) || Object.keys(shippingInfo).length === 0 || !shippingInfo.shippable) &&
+                          ((offerInfo.stockError || offerInfo.availabilityError) || Object.keys(shippingInfo).length === 0 || shippingInfo.shippable) &&
                           <div className={`${styles['flx-space-bw']} ${styles['align-baseline']}`}>
                             {!userDetails.isLoggedIn &&
                             <div className={`${styles['mb-0']} ${styles['fp-input']} ${styles['pb-10']}`}>
