@@ -186,7 +186,7 @@ const getProductComponent = (isPreview, taskCode) => {
                   <Col xs={12} md={8} sm={12} className={`${styles['pl-0']} ${styles['ht-100per']} ${styles['pdp-img-prt']}`}>
                     <NoSSR>
                       <Display
-                        product_id={product_id}
+                        product_id={catalogObj.product_id}
                         offerPricing={offerPricing}
                         catalog_id={catalogObj.catalog_id}
                         imgs={imgUrls}

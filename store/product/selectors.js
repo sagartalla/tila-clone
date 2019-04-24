@@ -123,7 +123,7 @@ const getProduct = (store, variantId) => {
     warranty,
     categoryType: tree.finance ? tree.finance[0].display_name_en : '',
     catalog: _.groupBy(_.filter(catalogAttributeMap, (val) => val.visible), (attrMap) => attrMap.attribute_category_name),
-    isWishlisted: wishListProductIds && wishListProductIds.indexOf(product_id) !== -1,
+    isWishlisted: wishListProductIds && wishListProductIds.indexOf(catalogObj.product_id) !== -1,
   };
 };
 
