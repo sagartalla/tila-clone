@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Modal } from 'react-bootstrap';
+import { Modal, Dropdown, MenuItem } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import Cookie from 'universal-cookie';
 import { addUrlProps, UrlQueryParamTypes } from 'react-url-query';
@@ -14,6 +14,8 @@ import { Router } from '../../routes';
 import SVGComponent from '../common/SVGComponet';
 import DragDropUpload from '../common/DragDropUpload';
 import lang from '../../utils/language';
+
+import CustomToggle from './CustomToggle';
 
 import styles_en from './header_en.styl';
 import styles_ar from './header_ar.styl';
@@ -134,30 +136,33 @@ class Search extends Component {
     return (
       <div className={styles['search-wrapper']}>
         <form onSubmit={this.submitQuery}>
-          <input
-            className={styles['search-input']}
-            placeholder={SEARCH_PAGE.SEARCH_YOUR_FAV_ITEM}
-            onChange={this.onChangeSearchInput}
-            value={query}
-          />
+
+          <Dropdown id="search-toggle" className={`${styles['cart-inn']} ${styles.width100}`}>
+            <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
+              <input
+                className={styles['search-input']}
+                placeholder={SEARCH_PAGE.SEARCH_YOUR_FAV_ITEM}
+                onChange={this.onChangeSearchInput}
+                value={query}
+              />
+            </Dropdown.Toggle>
+            <Dropdown.Menu className={`${styles.width100} ${styles['p-0']} ${styles['m-0']}`}>
+              {suggestions.length > 0 &&
+                suggestions.map((s, index) => (
+                  <MenuItem className={styles['search-suggestion']} onClick={this.setSearchText} eventKey={index + 1}>
+                    <a className={`${styles['black-color']}`}>
+                      <span>{s.data_edgengram}</span>
+                    </a>
+                  </MenuItem>))
+              }
+            </Dropdown.Menu>
+          </Dropdown>
+
           <div className={`${styles['search-btn']} ${styles['r-40']}`} onClick={this.imageSearch}>
             <SVGComponent clsName={`${styles['searching-icon']}`} src="icons/dragdrop" />
           </div>
           <button type="submit" className={styles['search-btn']}><SVGComponent clsName={`${styles['searching-icon']}`} src="icons/search/search-white-icon" /></button>
-          {suggestions.length > 0 &&
-            <ul className={`${styles['search-suggestions']} ${styles['border-radius4']}`}>
-              {suggestions.map(s => (
-                <li key={s.data_edgengram}>
-                  <a className={`${styles.flex} ${styles.width100} ${styles['pl-20']} ${styles['black-color']}`} onClick={this.setSearchText}>
-                    <span>{s.data_edgengram}</span>
-                    {/* <span className={styles.fontW600}>{s.data_edgengram.split(query)[1]}</span> */}
-                  </a>
-                </li>))
-              }
-            </ul>}
         </form>
-
-
         <Modal
           {...this.props}
           show={openImagesearch}
