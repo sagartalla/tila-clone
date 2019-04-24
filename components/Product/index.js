@@ -210,7 +210,7 @@ const getProductComponent = (isPreview, taskCode) => {
                           isPreview ? null : shippingInfo.shippable && <AddToCart offerInfo={offerInfo} productData={productData.product_id}/>
                         }
                         {
-                          ((offerInfo.stockError || offerInfo.availabilityError) || Object.keys(shippingInfo).length === 0 || shippingInfo.shippable) &&
+                          (offerInfo.stockError || offerInfo.availabilityError) && (Object.keys(shippingInfo).length === 0 || shippingInfo.shippable) &&
                           <div className={`${styles['flx-space-bw']} ${styles['align-baseline']}`}>
                             {!userDetails.isLoggedIn &&
                             <div className={`${styles['mb-0']} ${styles['fp-input']} ${styles['pb-10']}`}>

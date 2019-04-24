@@ -229,7 +229,7 @@ class OrderItem extends Component {
                   This is an exchange order on the item you have requested for exchange.
                   {/* To view the parent order please <a>Click here</a> */}
                 </div>}
-              {(product.order_status === 'RETURN_REQUESTED' || product.order_status === 'CANCELLED') &&
+              {product.refunds && product.refunds.length > 0 &&
                 <div className={`${styles['pt-15']} ${styles['pb-5']} ${styles['pl-15']} ${styles['thick-border-top']} ${styles.relative}`}>
                   <div className={`${styles['bg-white']} ${styles['fs-12']} ${styles.absolute} ${styles['p-5']} ${styles['border-lg']} ${styles['refund-label']}`}>Refund Status</div>
                   Refund Initiated.

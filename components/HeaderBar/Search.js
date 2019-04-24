@@ -132,7 +132,6 @@ class Search extends Component {
     const {
       suggestions, openImagesearch, query,
     } = this.state;
-    console.log(suggestions, 'fuhebwfiuew');
     return (
       <div className={styles['search-wrapper']}>
         <form onSubmit={this.submitQuery}>
