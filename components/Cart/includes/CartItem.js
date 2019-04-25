@@ -268,11 +268,11 @@ class CartItem extends React.Component {
                     </div>))
                   }
                 </Col>
-                <Col md={2} sm={2} className={`${styles['pl-0']} ${styles['landscape-cart-price']}`}>
+                <Col md={2} sm={2} className={`${styles['pl-0']} ${styles['pr-5']} ${styles['landscape-cart-price']}`}>
                   {Math.floor(discount) > 5 &&
                     <p className={`${styles['mb-0']} ${styles['fs-12']}`}>
                       <span className={styles['success-green']}>{`${Math.floor(discount)}% OFF`}</span>
-                      <span className={`${styles['cross-strike']} ${styles.relative} ${styles['ml-10']}`}>
+                      <span className={`${styles['cross-strike']} ${styles.relative} ${styles['ml-5']}`}>
                         <span className={styles['label-light-grey']}>
                           <span>{mrp}&nbsp;</span>
                           <span>{cur}</span>
