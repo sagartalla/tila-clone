@@ -112,11 +112,13 @@ class ActionBar extends Component {
     this.setState(state);
   }
 
-  onBackdropClick() {
+  onBackdropClick(logoutRequired = false) {
     this.setState({ show: false });
     this.props.resetLoginError();
     this.props.resetShowLogin();
-    this.props.logout();
+    if (logoutRequired) {
+      this.props.logout();
+    }
   }
 
   getTokenCall = (socialNetwork, token) => {
@@ -237,9 +239,7 @@ class ActionBar extends Component {
           (this.state.show)
             ?
             (
-              <Modal className={`react-router-modal__modal ${styles['login-reg-modal']} ${styles['p-20']}`} onBackdropClick={this.onBackdropClick}>
-                <Login mode={this.state.mode} onBackdropClick={this.onBackdropClick} />
-              </Modal>
+              <Login mode={this.state.mode} onBackdropClick={this.onBackdropClick} />
             )
             :
             null}
@@ -259,7 +259,7 @@ const mapStateToProps = (store) => {
     userInfo: personalSelectors.getUserInfo(store),
     showLogin: selectors.getShowLogin(store),
     ptaToken: selectors.getPTAToken(store),
-    wishListCount: wishListSelectors.getPaginationDetails(store).total_elements,
+    wishListCount: wishListSelectors.getProductsDetails(store).length,
     showEmailVerificationScreen: selectors.showEmailVerificationScreen(store),
   });
 };
@@ -274,7 +274,7 @@ const mapDispatchToProps = (dispatch) => {
       resetShowLogin: actionCreators.resetShowLogin,
       savePtaToken: actionCreators.savePtaToken,
       userLogin: actionCreators.userLogin,
-      getWishlist: wishListActionCreators.getWishlist,
+      getWishlist: wishListActionCreators.getWishlistProducts,
     },
     dispatch,
   );

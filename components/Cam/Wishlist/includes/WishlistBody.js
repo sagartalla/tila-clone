@@ -53,7 +53,6 @@ const WishlistBody = (props) => {
     Router.push(`/${country}/${language}/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemType}`);
   };
 
-  console.log('ewfbfiwu', pageDetails);
   return (
     <div>
       <div className={`${styles['flex']}`}>

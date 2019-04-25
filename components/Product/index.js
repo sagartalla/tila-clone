@@ -173,6 +173,7 @@ const getProductComponent = (isPreview, taskCode) => {
       const {
         stickyElements, recentlyViewed, notifyEmail, emailErr,
       } = this.state;
+      console.log(productData, 'rio2ndf2rnh2');
       return (
         <Theme.Provider value={categoryType.toLowerCase()}>
           <div className={`${styles['pdp-wrap']} ${categoryType.toLowerCase()} ${styles[categoryType.toLowerCase()]}`}>
@@ -187,7 +188,7 @@ const getProductComponent = (isPreview, taskCode) => {
                       <Display
                         product_id={product_id}
                         offerPricing={offerPricing}
-                        catalog_id={catalogObj.catalog_id}
+                        catalogObj={catalogObj}
                         imgs={imgUrls}
                         isWishlisted={isWishlisted}
                         extraOffers={extraOffers}

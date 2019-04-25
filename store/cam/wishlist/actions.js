@@ -9,6 +9,7 @@ const actions = {
   ADD_TO_CART: 'ADD_TO_CART',
   NOTIFY_ME: 'NOTIFY_ME',
   WISHLIST_TRACK: 'WISHLIST_TRACK',
+  WISHLIST_PRODUCTS: 'WISHLIST_PRODUCTS',
 };
 
 const actionCreators = {
@@ -42,7 +43,7 @@ const actionCreators = {
     }
   }),
   addToWishlistAndFetch: loginReq(params => dispatch => dispatch(actionCreators.addToWishlist(params)).then(() => {
-    dispatch(actionCreators.getWishlist());
+    dispatch(actionCreators.getWishlistProducts());
     dispatch(actionCreators.track({
       eventName: 'WishList Added', params, type: 'WL_ADD',
     }));
@@ -62,6 +63,10 @@ const actionCreators = {
       payload: apis.track(params),
     };
   },
+  getWishlistProducts: loginReq(() => dispatch => dispatch({
+    type: actions.WISHLIST_PRODUCTS,
+    payload: apis.getWishlistProducts(),
+  })),
 };
 
 export { actions, actionCreators };
