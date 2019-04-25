@@ -22,11 +22,14 @@ const language = cookies.get('language') || 'en';
 const country = cookies.get('country') || 'SAU';
 
 const Order = ({ order }) => {
+  console.log('order', order);
   const popover = (
     <Popover id="popover-positioned-right">
-      <address>
-        {order.shippingTo.address} {order.shippingTo.phone}
-      </address>
+      <div className={`${styles.flex} ${styles['justify-between']} ${styles['flex-colum']} ${styles['ht-100']}`}>
+        <div className={`${styles.fontW600} ${styles['fs-16']} ${styles['black-color']}`}>{order.shippingTo.name}</div>
+        <div className={`${styles['fs-14']}`}>{order.shippingTo.address}</div>
+        <div className={`${styles['fs-14']}`}>{order.shippingTo.phone}</div>
+      </div>
     </Popover>
   );
 
