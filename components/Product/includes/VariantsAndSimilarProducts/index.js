@@ -87,16 +87,26 @@ class VariantsAndSimilarProducts extends Component {
     const { variants, itemType, similarProducts } = VariantsAndSimilarProducts;
     const { display: variantsDisplay } = variants;
     const { display: similarProductsDisplay } = similarProducts;
+    console.log('variants', variantsDisplay);
     return (
       <div className={`${styles['flex-center']} ${styles['border-b']} ${styles['flex-wrp']}`}>
         {
           _.map(variantsDisplay, (variantAttVal, variantAttKey) => {
-            return <Variant onSelectVariant={this.onSelectVariant} key={variantAttVal.displayName} {...variantAttVal} id={variantAttKey} />;
+            return <Variant
+                      onSelectVariant={this.onSelectVariant}
+                      key={variantAttVal.displayName}
+                      {...variantAttVal} id={variantAttKey}
+                    />;
           })
         }
         {
           _.map(similarProductsDisplay, (variantAttVal, variantAttKey) => {
-            return <SimilarProducts onSelectProduct={this.onSelectProduct} key={variantAttVal.displayName} {...variantAttVal} id={variantAttKey} />
+            return <SimilarProducts
+                      onSelectProduct={this.onSelectProduct}
+                      key={variantAttVal.displayName}
+                      {...variantAttVal}
+                      id={variantAttKey}
+                    />
           })
         }
       </div>
@@ -104,9 +114,9 @@ class VariantsAndSimilarProducts extends Component {
   }
 }
 
-const mapStateToProps = (store) => ({
+const mapStateToProps = (store,ownProps) => ({
   getSelectedVariantId: selectors.getSelectedVariantId,
-  VariantsAndSimilarProducts: selectors.getVariantsAndSimilarProducts(store),
+  VariantsAndSimilarProducts: selectors.getVariantsAndSimilarProducts(ownProps.variantId,ownProps.productId)(store),
   getSelectedPropductId: selectors.getSelectedPropductId(store),
   SelectedVariantData: selectors.getSelectedVariantData(store),
 });

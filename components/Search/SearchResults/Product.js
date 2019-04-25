@@ -271,7 +271,7 @@ class Product extends Component {
             {
             `${styles['product-items-main']} ${selectedProduct ? styles['active-product'] : ''}`}
             onClick = {() => this.routeChange(productId,variantId,catalogId,itemtype,index,pageNum)}>
-          <Link route={`/${country}/${language}/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemtype}`}>
+          <Link route={`/${country}/${language}/product?productId=${productId} ${variants.length > 0 && variants[selectedIndex].variantId ? `&variantId=${variants[selectedIndex].variantId}` : ''}&catalogId=${catalogId}&itemType=${itemtype}`}>
             <a>
           <div className={`${styles['product-items']}`}>
             {
