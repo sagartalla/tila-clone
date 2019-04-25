@@ -48,7 +48,6 @@ class Display extends Component {
   addToWishlist(e) {
     e.stopPropagation();
     e.preventDefault();
-    console.log(this.props, 'fowihefion');
     const {
       product_id, catalogObj, addToWishlistAndFetch, offerPricing,
     } = this.props;

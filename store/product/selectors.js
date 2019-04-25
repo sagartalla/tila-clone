@@ -2,7 +2,7 @@ import _ from 'lodash';
 
 const getProduct = (store, variantId) => {
   const {
-    product_details, variant_preferred_listings, tree, product_id,
+    product_details, variant_preferred_listings, tree,
   } = store.productReducer.data[0];
 
   const { products = [] } = store.wishlistReducer;
@@ -112,7 +112,7 @@ const getProduct = (store, variantId) => {
     offerInfo,
     shippingInfo,
     returnInfo,
-    product_id,
+    product_id: product_details.product_id,
     productDescription,
     catalogObj,
     sizeChart: {
@@ -123,7 +123,7 @@ const getProduct = (store, variantId) => {
     warranty,
     categoryType: tree.finance ? tree.finance[0].display_name_en : '',
     catalog: _.groupBy(_.filter(catalogAttributeMap, (val) => val.visible), (attrMap) => attrMap.attribute_category_name),
-    isWishlisted: wishListProductIds && wishListProductIds.indexOf(product_id) !== -1,
+    isWishlisted: wishListProductIds && wishListProductIds.indexOf(product_details.product_id) !== -1,
   };
 };
 
