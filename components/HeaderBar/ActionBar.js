@@ -7,6 +7,7 @@ import { Dropdown } from 'react-bootstrap';
 import Cookie from 'universal-cookie';
 import { selectors as personalSelectors } from '../../store/cam/personalDetails';
 import { actionCreators as wishListActionCreators, selectors as wishListSelectors } from '../../store/cam/wishlist';
+
 import Cart from '../Cart';
 import Login from '../Login';
 import { Link, Router } from '../../routes';
@@ -132,7 +133,7 @@ class ActionBar extends Component {
   }
 
   render() {
-    const { isLoggedIn, cartResults, userInfo, wishListCount } = this.props;
+    const { isLoggedIn, cartResults, userInfo, wishListCount,getEditDetails } = this.props;
     return (
       <div className={styles['actionbar-wrapper']}>
         <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']} ${styles['country-code']}`}>
@@ -173,7 +174,7 @@ class ActionBar extends Component {
                   showMiniCart={true}
                   showCheckOutBtn={true}
                   cartData={cartResults}
-                  editCartDetails={true}
+                  editCartDetails={getEditDetails}
                 />
               </span>
             </Dropdown.Menu>
@@ -261,7 +262,9 @@ const mapStateToProps = (store) => {
     ptaToken: selectors.getPTAToken(store),
     wishListCount: wishListSelectors.getProductsDetails(store).length,
     showEmailVerificationScreen: selectors.showEmailVerificationScreen(store),
+    getEditDetails:cartSelectors.getEditDetails(store),
   });
+
 };
 
 const mapDispatchToProps = (dispatch) => {

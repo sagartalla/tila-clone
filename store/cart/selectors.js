@@ -82,7 +82,9 @@ const isAddedToCart = (store) => {
   } catch (e) {
   }
 };
-
+const getEditDetails = (store) => {
+  return store.cartReducer.editDetails
+}
 const isLastAddedToCartSuccess = (store) => {
   return store.cartReducer.data.addToCart.item_status === 'ADDED';
 }
@@ -91,5 +93,5 @@ const getBtnLoaders = store => store.cartReducer.ui.btnLoading;
 
 export {
   getCartResults, getLoadingStatus, getErrorMessege,
-  isAddedToCart, getBtnLoaders, isLastAddedToCartSuccess,
+  isAddedToCart, getBtnLoaders, isLastAddedToCartSuccess,getEditDetails
 };
