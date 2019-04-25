@@ -29,13 +29,15 @@ function sessionCookie(req, res, next) {
   const pathSplit = req.path.split('/');
   const country = pathSplit[1];
   const language = pathSplit[2];
+  const cookieCountry = req.universalCookies.get('country');
+  const cookieLanguage = req.universalCookies.get('language');
   const sid = req.universalCookies.get('sessionId');
   if (!sid || sid.length === 0) {
     req.universalCookies.set('sessionId', uuidv4());
     res.cookie('sessionId', req.universalCookies.get('sessionId'));
   }
-  global.APP_LANGUAGE = ['en', 'ar'].indexOf(language) !== -1 ? language : req.universalCookies.get('language') || 'en';
-  global.APP_COUNTRY = country || 'SAU';
+  global.APP_LANGUAGE = ['en', 'ar'].indexOf(language) !== -1 ? language : (cookieLanguage ? cookieCountry : 'en');
+  global.APP_COUNTRY = country ? country : (cookieCountry ? cookieCountry : 'SAU');
   
   res.cookie('language', global.APP_LANGUAGE);
   res.cookie('country', global.APP_COUNTRY);

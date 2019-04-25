@@ -52,7 +52,12 @@ class Wishlist extends Component {
       && nextProps.getPageDetails.total_elements > 0 && this.state.renderWishlist) {
       this.setState({
         renderWishlist: false,
-      }, () => this.props.getWishlist(nextProps.getPageDetails.number - 1));
+      }, () =>
+        this.props.getWishlist(nextProps.getPageDetails.number - 1).then(() =>
+          this.props.track({
+            eventName: 'WishList View',
+            page: this.state.currentPage,
+          })));
     }
   }
 
@@ -146,6 +151,7 @@ const mapDispatchToProps = dispatch =>
       deleteWishlist: actionCreators.deleteWishlist,
       addToCart: actionCreators.addToCart,
       notifyMe: actionCreators.notifyMe,
+      track: actionCreators.track,
     },
     dispatch,
   );

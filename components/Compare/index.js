@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import _ from 'lodash';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Row, Col, Dropdown } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
+import Cookie from 'universal-cookie';
 
+import { Link } from '../../routes';
 import constants from '../../constants';
 import HeaderBar from '../HeaderBar';
 import FooterBar from '../Footer';
-import SVGCompoent from '../common/SVGComponet';
 import { actionCreators, selectors } from '../../store/compare';
-import { actionCreators as cartActionCreators,  } from '../../store/cart';
+import { actionCreators as cartActionCreators } from '../../store/cart';
 import { selectors as cartSelectors } from '../../store/search';
 import { languageDefinations } from '../../utils/lang';
 import Button from '../common/CommonButton';
@@ -24,12 +23,11 @@ const styles = lang === 'en' ? styles_en : styles_ar;
 
 const { COMPARE, PDP_PAGE } = languageDefinations();
 
-const ICONS = {
-  screenSize: '/icons/common-icon/display-screen',
-  camera: 'icons/common-icon/camera-icon',
-  processor: 'icons/common-icon/processor-icon',
-  batteryPower: 'icons/common-icon/battery',
-};
+const cookies = new Cookie();
+
+const language = cookies.get('language') || 'en';
+const country = cookies.get('country') || 'SAU';
+
 
 class Compare extends Component {
   constructor(props) {
@@ -64,7 +62,6 @@ class Compare extends Component {
   }
 
   addToCart = ({ currentTarget }) => {
-    debugger;
     const { addToCartAndFetch } = this.props;
     addToCartAndFetch({
       listing_id: currentTarget.getAttribute('id'),
@@ -128,6 +125,7 @@ class Compare extends Component {
       compareCount = 0, features = [], products = [], productsFeatures = [],
     } = compareInfo;
     const { selectedBrand } = this.state;
+    console.log('cefjice', this.props);
     return (
       <div>
         <HeaderBar />
@@ -156,16 +154,22 @@ class Compare extends Component {
               products.map(product => (
                 <Col md={3} key={product.id}>
                   <div className={`${styles['compare-dtls']} ${styles['ht-100per']}`}>
-                    <div className={`${styles['ht-290']} ${styles.flex} ${styles['justify-center']}`}>
-                      <img alt={product.name} src={`${constants.mediaDomain}/${product.imgSrc}`} className={`img-responsive ${styles['object-scale-down']}`} />
+                    <div className={`${styles.pointer} ${styles['ht-290']} ${styles.flex} ${styles['justify-center']}`}>
+                      <Link route={`/${country}/${language}/product?productId=${product.id}${product.variant_id ? `&variantId=${product.variant_id}` : ''}&catalogId=${product.catalog_id}&itemType=${product.item_type}`}>
+                        <img alt={product.name} src={`${constants.mediaDomain}/${product.imgSrc}`} className={`img-responsive ${styles['object-scale-down']}`} />
+                      </Link>
                     </div>
                     <div className={`${styles['compare-dtls-inn']} ${styles['pt-20']} ${styles['t-c']}`}>
-                      <span className={`${styles['fs-12']} ${styles['lgt-blue']}`}>{product.brand}</span>
+                      <Link route={`/${country}/${language}/product?productId=${product.id}${product.variant_id ? `&variantId=${product.variant_id}` : ''}&catalogId=${product.catalog_id}&itemType=${product.item_type}`}>
+                        <span className={`${styles.pointer}`}>
+                          <span className={`${styles.fontW600} ${styles['fs-12']}`}>{product.brand}</span>{' - '}
+                          <span className={`${styles['fs-12']} ${styles['thick-gry-clr']}`}>{product.name}</span>
+                        </span>
+                      </Link>
                       <div>
                         <span className={styles.fontW600}>{product.price} {product.currency}</span>
-                        <span className={`${styles['fs-12']} ${styles['google-clr']}`}>{product.offer}</span>
+                        {/* <span className={`${styles['fs-12']} ${styles['google-clr']}`}>{product.offer}</span> */}
                       </div>
-                      <span className={`${styles['fs-10']} ${styles['thick-gry-clr']}`}>{product.name}</span>
                     </div>
                     <div className={`${styles.flex} ${styles['justify-center']}`}>
                       <Button
@@ -215,22 +219,22 @@ class Compare extends Component {
                   <div id={productFeature.key} key={productFeature.key}>
                     <Row>
                       <Col md={12}>
-                        <h3>{productFeature.name}</h3>
+                        <h3 className={styles.featureTitle}>{productFeature.name}</h3>
                       </Col>
                     </Row>
                     {
                       productFeature.attributes.map(attr => (
                         <Row key={attr.name} className={`${styles['compare-product-spficication']} ${styles['flex-center']} ${styles['pt-5']} ${styles['pb-5']}`}>
                           <Col md={3}>
-                            <div className={`${styles['flex-center']} ${styles['flex-colum']} ${styles['dispy-screen']}`}>
+                            <div className={`${styles['pl-20']} ${styles['flex']} ${styles['flex-colum']} ${styles['dispy-screen']} ${styles.fontW600}`}>
                               {/* <SVGCompoent clsName={`${styles['screen-icon']}`} src={ICONS[item.id]} /> */}
-                              <span className={`${styles['fs-10']} ${styles['thick-gry-clr']} ${styles['pt-10']}`}>{attr.name}</span>
+                              <span className={`${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pt-10']}`}>{attr.name}</span>
                             </div>
                           </Col>
                           {
                             attr.items.map(item => (
                               <Col key={item.id} md={3}>
-                                <div className={`${styles['compare-product-spficication-inn']} ${styles['flex-center']} ${styles['flex-colum']} ${styles['fs-12']} ${styles.fontW600}`}>
+                                <div className={`${styles['compare-product-spficication-inn']} ${styles['flex-center']} ${styles['flex-colum']} ${styles['fs-12']}`}>
                                   <span>{item.value.map(i => i.value).join(' ')} {item.value[0].qualifier_unit}</span>
                                 </div>
                               </Col>

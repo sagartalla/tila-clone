@@ -52,6 +52,11 @@ export const EN_KEYWORDS = {
     'THERE_IS_SOME_ISSUE_WITH_CART_ITEMS': 'There is some issue with cart items.',
     'COUPONS': 'Coupons',
     'GIFT_MESSAGE_OPTIONAL': 'Gift Message (optional)',
+    'CANNOT_DELIVER': 'Unfortunately, we cannot deliver this item to your selected Address. Please remove the item or move it to your wishlist to continue.',
+    'THERE_IS': 'There is',
+    'THERE_ARE': 'There are',
+    'ITEM_IN_YOUR_WISHLIST': 'item in Wishlist',
+    'ITEMS_IN_YOUR_WISHLIST': 'items in Wishlist',
 
   },
   PAYMENT_PAGE: {
@@ -118,6 +123,7 @@ export const EN_KEYWORDS = {
     'REMAINING_AMOUNT_TO_PAY': 'Remaining amount to pay',
     'PAY_USING_TILA_CREDIT': 'PAY USING TILA CREDIT',
     'PAYMENT_MODE': 'Net banking, credit card, vouchers and etc....',
+    'ON_DELIVERY': 'on delivery',
   },
   DELIVERY_ADDR_PAGE: {
     'DELIVERY_ADDR': 'Delivery Address',
@@ -179,6 +185,7 @@ export const EN_KEYWORDS = {
     'NOTIFY_ME': 'Notify Me',
     'BUY_FOR': 'BUY FOR',
     'ADDED_TO_CART': 'In Cart',
+    'IN_CART' : 'IN CART',
     // //New keys
     'GO_TO_CART': 'Go To Cart',
     'LIKE': 'Like',
@@ -302,9 +309,10 @@ export const EN_KEYWORDS = {
     'YOUR_PHONE_NUMBER_VERIFIED': 'Your phone number has been successfully verified',
     'DONE': 'done',
     'VERIFY_PHONE': 'Verify your phone number to Enable Pay on Delivery',
-    'SEND_OTP': 'send otp',
+    'SEND_OTP': 'Send OTP',
     'VERIFY_MOBILE_NUMBER': 'Verify Mobile Number',
     'ENTER_VALID_OTP': 'please enter valid otp',
+    'PLEASE_CONFIRM_YOUR_ORDER': 'Your Mobile Number is already Verified, Please confirm your order',
   },
   EDIT_PASSWORD_MODAL: {
     'PASSWORD_SUCCESS_MESSAGE': 'Your password is changed successfully!!',

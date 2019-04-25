@@ -6,22 +6,19 @@ import NoSSR from 'react-no-ssr';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { languageDefinations } from '../../utils/lang';
-import { selectors } from '../../store/product';
 import HeaderBar from '../HeaderBar/index';
-import Dispalay from './includes/Display';
+import Display from './includes/Display';
 import TitleInfo from './includes/TitleInfo';
 import Shipping from './includes/Shipping';
 
 import AddToCart from './includes/AddToCart';
 import RecentView from './includes/RecentView';
-import Review from './includes/Reviews';
-import ReviewsTab from './includes/ReviewTab';
 import ElectronicsTab from './includes/ElectronicsTab';
 import ProductDetails from './includes/ProductDetails';
-import ReviewRatingList from '../RatingReviews/List';
 import FooterBar from '../Footer/index';
 import Theme from '../helpers/context/theme';
 import CompareWidget from '../common/CompareWidget';
+import { actionCreators, selectors } from '../../store/product';
 import { actionCreators as wishlistActionCreators, selectors as wishListSelectors } from '../../store/cam/wishlist';
 import Button from '../common/CommonButton';
 
@@ -63,6 +60,10 @@ const getProductComponent = (isPreview, taskCode) => {
         digitalData.page.pageInfo.pageName = titleInfo.title;
         digitalData.page.category = { primaryCategory: productData.categoryType };
         digitalData.page.pageInfo.breadCrumbs = productData.breadcrums.map(item => item.display_name_en);
+        this.props.track({
+          eventName: 'Product Viewed',
+          ProductData: productData,
+        });
         if (offerInfo.price) {
           const pr = offerInfo.price.split(' ');
           const recentData = localStorage.getItem('rv');
@@ -77,7 +78,7 @@ const getProductComponent = (isPreview, taskCode) => {
             arr.pop();
           }
 
-          if (index == -1) {
+          if (index === -1) {
             arr.unshift({
               nm: titleInfo.title,
               im: imgUrls[0].url,
@@ -172,6 +173,7 @@ const getProductComponent = (isPreview, taskCode) => {
       const {
         stickyElements, recentlyViewed, notifyEmail, emailErr,
       } = this.state;
+      console.log('guygbut', (offerInfo.stockError || offerInfo.availabilityError) || Object.keys(shippingInfo).length === 0 || !shippingInfo.shippable);
       return (
         <Theme.Provider value={categoryType.toLowerCase()}>
           <div className={`${styles['pdp-wrap']} ${categoryType.toLowerCase()} ${styles[categoryType.toLowerCase()]}`}>
@@ -183,7 +185,7 @@ const getProductComponent = (isPreview, taskCode) => {
                 <Row className={`${styles['m-0']} ${styles['ht-100per']}`}>
                   <Col xs={12} md={8} sm={12} className={`${styles['pl-0']} ${styles['ht-100per']} ${styles['pdp-img-prt']}`}>
                     <NoSSR>
-                      <Dispalay
+                      <Display
                         product_id={product_id}
                         offerPricing={offerPricing}
                         catalog_id={catalogObj.catalog_id}
@@ -206,10 +208,10 @@ const getProductComponent = (isPreview, taskCode) => {
                           isPreview ? null : <Shipping shippingInfo={shippingInfo} offerInfo={offerInfo} warranty={warranty} />
                         }
                         {
-                          isPreview ? null : <AddToCart offerInfo={offerInfo} />
+                          isPreview ? null : <AddToCart offerInfo={offerInfo} productData={productData.product_id}/>
                         }
                         {
-                          (offerInfo.stockError || offerInfo.availabilityError) &&
+                          ((offerInfo.stockError || offerInfo.availabilityError) || Object.keys(shippingInfo).length === 0 || !shippingInfo.shippable) &&
                           <div className={`${styles['flx-space-bw']} ${styles['align-baseline']}`}>
                             {!userDetails.isLoggedIn &&
                             <div className={`${styles['mb-0']} ${styles['fp-input']} ${styles['pb-10']}`}>
@@ -277,6 +279,8 @@ const getProductComponent = (isPreview, taskCode) => {
     bindActionCreators(
       {
         notifyMe: wishlistActionCreators.notifyMe,
+        track: actionCreators.track,
+
       },
       dispatch,
     );

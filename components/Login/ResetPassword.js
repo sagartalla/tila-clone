@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import Btn from '../common/Button';
 import { Col } from 'react-bootstrap';
+import Btn from '../common/Button';
 import { languageDefinations } from '../../utils/lang';
 import { actionCreators } from '../../store/cam/personalDetails';
 import SVGComponent from '../common/SVGComponet';
@@ -32,7 +32,6 @@ class ResetPassword extends Component {
     }
 
     passwordSuccess() {
-    debugger;
       const { password, confirmPassword } = this.state;
       if (password === confirmPassword) {
         const body = {
@@ -58,16 +57,17 @@ class ResetPassword extends Component {
     render() {
       const { password, confirmPassword } = this.state;
       return (
-            <div>
+        <div>
             {!this.state.success ?
-              <div className={styles['forgot-password']}>
-                <h2><b>{LOGIN_PAGE.RESET_PASSWORD}</b></h2>
-                <h3 className={styles['bg-light-gray']}>
+              <div className={`${styles.flex} ${styles['justify-center']} ${styles['ht-100vh']} ${styles['flex-center']} ${styles['bg-gray']}`}>
+              <div className={styles['reset-password']}>
+                <div className={`${styles['fs-30']}`}><b>{LOGIN_PAGE.RESET_PASSWORD}</b></div>
+                <div className={`${styles['light-gray']} ${styles['fs-16']}`}>
                 {LOGIN_PAGE.PLEASE_SET_YOUR_SECURE_PASSWORD}
-                </h3>
+                </div>
                 <form>
-                <div>
-                    <label>{LOGIN_PAGE.ENTER_YOUR_NEW_PASSWORD}</label>
+                <div className={`${styles['mt-15']}`}>
+                    <label className={`${styles['lgt-blue']}`}>{LOGIN_PAGE.ENTER_YOUR_NEW_PASSWORD}</label>
                     <input
                       type="password"
                       name="password"
@@ -77,8 +77,8 @@ class ResetPassword extends Component {
                       required
                     />
                 </div>
-                <div>
-                    <label>{LOGIN_PAGE.CONFIRM_YOUR_NEW_PASSWORD}</label>
+                <div className={`${styles['mt-15']}`}>
+                    <label className={`${styles['lgt-blue']}`}>{LOGIN_PAGE.CONFIRM_YOUR_NEW_PASSWORD}</label>
                     <input
                       type="password"
                       name="confirmPassword"
@@ -88,18 +88,21 @@ class ResetPassword extends Component {
                       required
                     />
                 </div>
-                <Col xs={12} md={12} className={`${styles['pt-30']}`}>
+                </form>
+                <Col xs={12} md={12} className={`${styles['p-0']} ${styles['pt-30']}`}>
                     <Btn className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles['update-profile-btn']} ${styles['text-uppercase']}`} btnText={LOGIN_PAGE.SAVE_PASSWORD} onClick={this.passwordSuccess} />
                 </Col>
-                </form>
+              </div>
               </div>
             :
-                <>
+                <div className={`${styles.flex} ${styles['justify-center']} ${styles['ht-100vh']} ${styles['flex-center']} ${styles['flex-col']} ${styles['bg-gray']}`}>
+                <div className={`${styles['reset-password']} ${styles.flex} ${styles['justify-center']} ${styles['flex-center']} ${styles['flex-col']} ${styles['ht-240']}`}>
                     <Col xs={12} md={12} className={`${styles['flex-center']} ${styles['tickmark-part']}`}>
                         <SVGComponent clsName={`${styles['tickmark-icon']}`} src="icons/common-icon/bg-tick-mark" />
                     </Col>
                     <h2 className={styles['text-center']}><b>{LOGIN_PAGE.PASSWORD_RESET_SUCCESSFULL}</b></h2>
-                </>
+                    </div>
+                </div>
             }
             </div>
       );

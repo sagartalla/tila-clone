@@ -46,9 +46,10 @@ class GeoWidget extends Component {
     if (this.props.geoShippingData.city !== geoShippingData.city) {
       this.setState({
         displayCity: geoShippingData.displayCity,
-      }, () => location.reload());
+      });
     }
   }
+
   componentWillUnmount() {
     document.removeEventListener('click', this.handleOutsideClick, false);
   }
@@ -67,6 +68,8 @@ class GeoWidget extends Component {
       city,
       country,
       displayCity,
+    }).then(() => {
+      location.reload()
     });
   }
 
@@ -92,6 +95,7 @@ class GeoWidget extends Component {
     const country = cookies.get('country');
     this.setState({
       displayCity,
+      showCitiesData: false
     });
     this.setCity(city, country, displayCity);
   }
@@ -107,7 +111,9 @@ class GeoWidget extends Component {
     this.setState({
       displayCity: null,
     });
-    this.props.removeCity();
+    this.props.removeCity().then(() => {
+      location.reload()
+    });
   }
 
   render() {

@@ -1,4 +1,5 @@
 import apis from './api';
+import { actionCreators as cartActionCreators } from '../../cart';
 
 const actions = {
   GET_SHIPPING_ADDR_RESULTS: 'GET_SHIPPING_ADDR_RESULTS',
@@ -20,6 +21,8 @@ const actionCreators = {
     return dispatch({
       type: actions.SEND_NEW_ADDR_DETAILS,
       payload: apis.sendNewAddressDetailsApi(addressDetails)
+    }).then(() => {
+      dispatch(cartActionCreators.getCartResults())
     })
   },
 
@@ -27,6 +30,8 @@ const actionCreators = {
     return dispatch({
       type: actions.EDIT_ADDR_DETAILS,
       payload: apis.editAddressDetailsApi(addressDetails)
+    }).then(() => {
+      dispatch(cartActionCreators.getCartResults())
     })
   },
 
@@ -34,6 +39,8 @@ const actionCreators = {
     return dispatch({
       type: actions.DELETE_ADDRESS,
       payload: apis.deleteAddressApi(addrId)
+    }).then(() => {
+      dispatch(cartActionCreators.getCartResults())
     })
   },
 
@@ -41,6 +48,8 @@ const actionCreators = {
     return dispatch({
       type: actions.MAKE_DEFAULT_ADDR,
       payload: apis.makeDefaultAddressApi(addrId)
+    }).then(() => {
+      dispatch(cartActionCreators.getCartResults())
     })
   }
 };

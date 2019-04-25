@@ -44,7 +44,6 @@ class CashOnDelivery extends React.Component {
   componentDidMount() {
     this.props.getUserProfileInfo();
   }
-
   handleChange() {
     const {data} = this.props;
     this.setState({
@@ -56,10 +55,17 @@ class CashOnDelivery extends React.Component {
   }
 
   onCaptchaSuccess({captcha_request_id}) {
+    const { profileInfo } = this.props;
     this.setState({
       nextStep: this.state.nextStep === 'captcha' ? 'mobileVerification' : 'captcha',
       captcha_request_id,
       // showContinueButton: this.state.nextStep !== 'captcha'
+    }, () => {
+      if (profileInfo.contactInfo.mobile_verified === 'V') {
+        this.setState({
+          showPayBtn: true,
+        });
+      }
     });
     // this.setState({
     //   showContinueButton: true,
@@ -96,7 +102,7 @@ class CashOnDelivery extends React.Component {
     });
   }
   render() {
-    const { data, showLoading } = this.props;
+    const { data, showLoading, profileInfo } = this.props;
     return <div>
         <div className={`${styles['cash-on-dly-points']}`}>
     <Row className={styles['pl-40']}>
@@ -126,7 +132,12 @@ class CashOnDelivery extends React.Component {
                 />
               }
               />,
-            mobileVerification: <EditPhone afterSuccessOtpVerification={this.afterSuccessOtpVerification}/>
+            mobileVerification:
+            <EditPhone
+            afterSuccessOtpVerification={this.afterSuccessOtpVerification}
+            mobileVerified = {profileInfo.contactInfo.mobile_verified === 'V'}
+            userData = {profileInfo.contactInfo}
+            />
           }[this.state.nextStep]
         :
           null
@@ -149,9 +160,9 @@ class CashOnDelivery extends React.Component {
         this.state.showPayBtn &&
             (
               <Button
-                className={`${styles['fs-16']} ${styles['fontW600']} ${styles['new-card-btn']} ${styles['border-radius']} ${styles.width55} ${styles['ht-40']}`}
+                className={`${styles['fs-16']} ${styles['fontW600']} ${styles['new-card-btn']} ${styles['border-radius']} ${styles['ht-40']} ${styles.width70}`}
                 onClick={this.proceedToPayment}
-                btnText={PAYMENT_PAGE.PAY + ' ' + data.amount_to_pay + ' ' + data.currency_code}
+                btnText={PAYMENT_PAGE.PAY + ' ' + data.amount_to_pay + ' ' + data.currency_code + ' ' + PAYMENT_PAGE.ON_DELIVERY}
                 hoverClassName="hoverBlueBackground"
                 btnLoading={showLoading}
 

@@ -21,6 +21,7 @@ const actions = {
   SET_ADDRESS_DATA: 'SET_ADDRESS_DATA',
   GET_REFUND_OPTIONS: 'GET_REFUND_OPTIONS',
   GET_TRACKING_DETAILS: 'GET_TRACKING_DETAILS',
+  THANKYOU_PAGE_TRACK: 'THANKYOU_PAGE_TRACK',
 };
 
 const actionCreators = {
@@ -60,6 +61,14 @@ const actionCreators = {
         },
       },
     });
+  },
+  track: params => (dispatch, getState) => {
+    const state = getState();
+    params.postResult = state.cartReducer.data.items;
+    return {
+      type: actions.THANKYOU_PAGE_TRACK,
+      payload: api.track(params),
+    };
   },
   setSelectedItem: params => ({
     type: actions.SET_SELECTED_ITEM,
