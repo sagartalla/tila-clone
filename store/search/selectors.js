@@ -25,7 +25,7 @@ const filterVariants = (cartListingId,variants) => {
 }
 const addCartAndWishlistDetails = (store, results) => {
   const { items = [] } = store.cartReducer.data;
-  const { data = [] } = store.wishlistReducer;
+  const { products = [] } = store.wishlistReducer;
 
   if (items === null) {
     return results;
@@ -37,13 +37,13 @@ const addCartAndWishlistDetails = (store, results) => {
   //   return resutls;
   // }
   const cartListingIds = items.map(i => i.listing_id) || [];
-  const wishListProductIds = data && data.length > 0 && (data.map(w => w.product_id) || []);
+  const wishListProductIds = products && products.length > 0 && (products.map(w => w.product_id) || []);
   return {
     ...results,
     items: results.items.map((i) => {
       return ({
         ...i,
-        variants:filterVariants(cartListingIds,i.variants),
+        variants: filterVariants(cartListingIds, i.variants),
         addedToWishlist: wishListProductIds && wishListProductIds.indexOf(i.productId) !== -1,
       });
     }),

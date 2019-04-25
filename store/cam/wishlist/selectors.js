@@ -60,4 +60,7 @@ const getLoader = (store) => {
     return store.wishlistReducer.ui.loading;
   }
 };
-export { getWishListResults, getPaginationDetails, getLoader };
+
+const getProductsDetails = store => store.wishlistReducer.products;
+
+export { getWishListResults, getPaginationDetails, getLoader, getProductsDetails };

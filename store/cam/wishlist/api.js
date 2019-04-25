@@ -9,6 +9,8 @@ const getWishlistApi = (currentPage = 0) => axios.get(`${constants.WISHLIST_API_
   return { data };
 });
 
+const getWishlistProducts = () => axios.get(`${constants.WISHLIST_API_URL}/api/v1/wishlist/productIds`);
+
 const track = (params) => {
   if (params.wishlistId) {
     const wishlist = params.postResult.filter(w => w.wishlist_id === params.wishlistId)[0];
@@ -63,5 +65,5 @@ const notifyMe = params => axios.post(`${constants.WISHLIST_API_URL}/api/v1/aler
 });
 
 export default {
-  getWishlistApi, addToWishlistApi, deleteWishlistApi, notifyMe, track,
+  getWishlistApi, addToWishlistApi, deleteWishlistApi, notifyMe, track, getWishlistProducts,
 };

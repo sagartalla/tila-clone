@@ -50,10 +50,11 @@ class Display extends Component {
     e.preventDefault();
     console.log(this.props, 'fowihefion');
     const {
-      product_id, catalog_id, addToWishlistAndFetch, offerPricing,
+      product_id, catalogObj, addToWishlistAndFetch, offerPricing,
     } = this.props;
     addToWishlistAndFetch({
-      catalog_id,
+      catalog_id: catalogObj.catalog_id,
+      variant_id: catalogObj.variant_id,
       product_id,
       wishlisted_price: offerPricing.showPrise,
       wishlisted_currency: offerPricing.currency,

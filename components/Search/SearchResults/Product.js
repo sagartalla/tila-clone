@@ -56,6 +56,26 @@ class Product extends Component {
     this.showVariants = this.showVariants.bind(this);
   }
 
+  componentWillReceiveProps() {
+    this.setState({ showLoader: false });
+  }
+
+  getOfferClassName = (offer) => {
+    if (offer > 5 && offer < 20) {
+      return 'green';
+    }
+    if (offer > 20 && offer < 40) {
+      return 'yellow';
+    }
+    if (offer > 40 && offer < 60) {
+      return 'orange';
+    }
+    if (offer > 60) {
+      return 'red';
+    }
+    return '';
+  }
+
   setImg() {
     const { media = [] } = this.props;
     this.setState({
@@ -67,12 +87,15 @@ class Product extends Component {
     e.stopPropagation();
     e.preventDefault();
     const {
-      productId: product_id, catalogId: catalog_id, variants, priceRange, currency, addToWishlistAndFetch,
+      productId: product_id, catalogId: catalog_id, variantId: variant_id,
+      variants, currency, addToWishlistAndFetch,
     } = this.props;
+    const { selectedIndex } = this.state;
     addToWishlistAndFetch({
       catalog_id,
       product_id,
-      wishlisted_price: priceRange,
+      variant_id,
+      wishlisted_price: variants[selectedIndex].sellingPrice[0],
       wishlisted_currency: currency,
     });
   }
@@ -120,26 +143,7 @@ class Product extends Component {
           selectedProduct(id);
         });
       }
-    }
-  }
-
-  componentWillReceiveProps() {
-    this.setState({ showLoader: false });
-  }
-
-  getOfferClassName(offer) {
-    if (offer > 5 && offer < 20) {
-      return 'green'
-    }
-    if (offer > 20 && offer < 40) {
-      return 'yellow'
-    }
-    if (offer > 40 && offer < 60) {
-      return 'orange';
-    }
-    if (offer > 60) {
-      return 'red';
-    }
+    };
   }
 
   closeVariantTab(e) {
@@ -165,14 +169,14 @@ class Product extends Component {
     let productInfo = {
       pageFragmentation:pageNum,
       itemPosition:index
-    }
-    digitalData.product.push(productInfo)
+    };
+    digitalData.product.push(productInfo);
     var event = new CustomEvent('event-pageItem-click');
     document.dispatchEvent(event);
   }
 
   routeChange(productId,variantId,catalogId,itemtype,index,pageNum) {
-    this.itemNumberClick(index,pageNum)
+    this.itemNumberClick(index,pageNum);
     // Router.pushRoute(`/${country}/${language}/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemtype}`)
   }
 
@@ -428,7 +432,7 @@ Product.defaultProps = {
 const mapStateToProps = (store) => {
   return ({
     btnLoading: selectors.getBtnLoaders(store),
-  })
+  });
 };
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(

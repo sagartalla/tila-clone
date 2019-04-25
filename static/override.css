@@ -155,6 +155,20 @@
     display: none;
 }
 
+#search-toggle {
+    border: none;
+    padding: 0;
+    width: 100%;
+}
+
+#search-toggle:hover {
+    z-index: 0;
+}
+
+#search-toggle .caret {
+    display: none;
+}
+
 .btn-default.active.focus, .btn-default.active:focus, .btn-default.active:hover, .btn-default:active.focus, .btn-default:active:focus, .btn-default:active:hover, .open>.dropdown-toggle.btn-default.focus, .open>.dropdown-toggle.btn-default:focus, .open>.dropdown-toggle.btn-default:hover {
     background-color: transparent;
     box-shadow: none;

@@ -5,8 +5,8 @@ const getProduct = (store, variantId) => {
     product_details, variant_preferred_listings, tree, product_id,
   } = store.productReducer.data[0];
 
-  const { data = [] } = store.wishlistReducer;
-  const wishListProductIds = data && data.length > 0 && (data.map(w => w.product_id) || []);
+  const { products = [] } = store.wishlistReducer;
+  const wishListProductIds = products && products.length > 0 && (products.map(w => w.product_id) || []);
 
   variantId = store.productReducer.variantsData.selectedVariantId || variantId;
   variantId = variantId || Object.keys(variant_preferred_listings || {})[0];
