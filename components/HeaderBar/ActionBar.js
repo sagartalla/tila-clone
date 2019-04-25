@@ -27,7 +27,7 @@ import styles_ar from './header_ar.styl';
 
 const styles = lang === 'en' ? styles_en : styles_ar;
 
-const { HEADER_PAGE } = languageDefinations();
+const { HEADER_PAGE, PDP_PAGE } = languageDefinations();
 const cookies = new Cookie();
 
 const language = cookies.get('language') || 'en';
@@ -151,7 +151,7 @@ class ActionBar extends Component {
         <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']}`}>
           <Link route={`/${country}/${language}/cam/wishlist`}>
            <a style={{dispaly:'block'}}>
-            <span className={`${styles['flex-center']} ${styles['justify-center']} ${styles['relative']}`}>
+            <span className={`${styles['flex-center']} ${styles['justify-center']} ${styles['relative']}`} title={PDP_PAGE.GO_TO_WISHLIST}>
               <SVGComponent clsName={`${styles['wish-list-icon']}`} src="icons/wish-list/wish-list-icon" />
               <span className={`${styles['absolute']} ${styles['cart-count']} ${styles['fs-10']} ${styles['white-color']}`}>{wishListCount}</span>
             </span>
@@ -162,7 +162,7 @@ class ActionBar extends Component {
           <Dropdown id="cart-toggle" className={`${styles['cart-inn']} ${styles['profile-login-inn']} ${styles['pr-20']}`}>
               <Link route={`/${country}/${language}/cart`}>
                 <a style={{dispaly:'block'}}>
-                  <span className={`${styles['flex-center']} ${styles['justify-center']} ${styles['relative']}`}>
+                  <span className={`${styles['flex-center']} ${styles['justify-center']} ${styles['relative']}`} title={PDP_PAGE.GO_TO_CART}>
                     <SVGComponent clsName={`${styles['cart-icon']}`} src="icons/cart/cart-icon" />
                     <span className={`${styles['absolute']} ${styles['cart-count']} ${styles['fs-10']} ${styles['white-color']}`}>{cartResults.items.length}</span>
                   </span>
@@ -262,9 +262,8 @@ const mapStateToProps = (store) => {
     ptaToken: selectors.getPTAToken(store),
     wishListCount: wishListSelectors.getProductsDetails(store).length,
     showEmailVerificationScreen: selectors.showEmailVerificationScreen(store),
-    getEditDetails:cartSelectors.getEditDetails(store),
+    getEditDetails: cartSelectors.getEditDetails(store),
   });
-
 };
 
 const mapDispatchToProps = (dispatch) => {
