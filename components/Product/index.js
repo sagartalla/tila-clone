@@ -164,7 +164,8 @@ const getProductComponent = (isPreview, taskCode) => {
     }
 /* eslint-disable */
     render() {
-      const { productData, userDetails, showLoading } = this.props;
+      const { productData, userDetails, showLoading, query } = this.props;
+      console.log('query', this.props.query);
       const {
         catalog, titleInfo, keyfeatures, extraOffers, imgUrls, offerInfo, shippingInfo, isWishlisted,
         details, productDescription, catalogObj, categoryType = '', warranty, breadcrums, product_id,
@@ -201,7 +202,14 @@ const getProductComponent = (isPreview, taskCode) => {
                     <div className={`${styles['details-right-part-inn']}`}>
                       <div className={`${styles['ipad-details']} ${styles['ipad-pr-15']}`}>
                         <TitleInfo {...titleInfo} isPreview={isPreview} />
-                        <ProductDetails details={details} keyfeatures={keyfeatures} isPreview={isPreview} productInfo={productData}/>
+                        <ProductDetails
+                          details={details}
+                          keyfeatures={keyfeatures}
+                          isPreview={isPreview}
+                          productInfo={productData}
+                          variantId={query.variantId}
+                          productId={query.productId}
+                        />
                       </div>
                       <div className={`${styles['ipad-details']} ${styles['bdr-lt']} ${styles['ipad-pl-15']}`}>
                         {

@@ -133,6 +133,7 @@ const getSearchResutls = (store) => {
            // modifiedVaraintsCopy = Object.assign(modifiedVaraints);
           modifiedVaraintsCopy['productSize'] = Object.values(v.attributes)[0]
           modifiedVaraintsCopy['productAvailable'] = true
+          modifiedVaraintsCopy['variantId'] = v.id
           _.forEach(attributesData, (val, key) => {
             modifiedVaraintsCopy[key] = modifiedVaraintsCopy[key] || [];
             modifiedVaraintsCopy[key] = modifiedVaraintsCopy[key].concat(val);
@@ -140,6 +141,7 @@ const getSearchResutls = (store) => {
         } else {
           modifiedVaraintsCopy['productSize'] = Object.values(v.attributes)[0]
           modifiedVaraintsCopy['productAvailable'] = false
+          modifiedVaraintsCopy['variantId'] = v.id
         }
 
         modifiedVaraints.push(modifiedVaraintsCopy)

@@ -186,7 +186,7 @@ const getVariants = (store) => {
   };
 };
 
-const getVariantsAndSimilarProducts = (store) => {
+const getVariantsAndSimilarProducts = (variantId,productId) => (store) => {
   const { variantsData } = store.productReducer;
   const { availableSimilarProducts } = variantsData || {};
   const { similar_products, product_details, variant_preferred_listings } = store.productReducer.data[0];
@@ -213,7 +213,20 @@ const getVariantsAndSimilarProducts = (store) => {
   //     }
   //   }]
   // }
-  const variants = _.reduce(product_details.product_details_vo.cached_variant, (acc, value, key) => {
+
+  let variantProducts = []
+  _.forIn(product_details.product_details_vo.cached_variant,(value,key) => {
+    value['key'] = key
+    if(key === variantId) {
+      variantProducts.unshift(value)
+    } else {
+      variantProducts.push(value)
+    }
+    console.log(value);
+  })
+
+  const variants = _.reduce(variantProducts, (acc, value) => {
+    const key = value.key
     const display = {
       ...acc.display
     };
@@ -265,7 +278,17 @@ const getVariantsAndSimilarProducts = (store) => {
   //     }
   //   }]
   // }
-  const similarProducts = similar_products ? _.reduce([product_details, ...similar_products], (acc, product) => {
+
+  let modifiedProducts = []
+  similar_products.forEach(product => {
+    if(product.listing.product_id === productId.trim()) {
+      modifiedProducts.unshift(product)
+    } else {
+      modifiedProducts.push(product)
+    }
+  })
+  const similarProducts = similar_products ? _.reduce([product_details, ...modifiedProducts], (acc, product) => {
+
     if(availableSimilarProducts && !availableSimilarProducts[product.product_details_vo.cached_product_details.product_id]) return acc;
     const key = product.product_details_vo.cached_product_details.product_id;
     const display = {
@@ -285,6 +308,7 @@ const getVariantsAndSimilarProducts = (store) => {
           values: []
         };
       }
+
       display[attKey].values = _.uniq([...display[attKey].values, ...(attVal.attribute_values.map((i) => i.value))]);
       if(!map[key][attKey]) {
         map[key][attKey] = [];
