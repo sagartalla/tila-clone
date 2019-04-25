@@ -188,6 +188,7 @@ export const EN_KEYWORDS = {
     'IN_CART' : 'IN CART',
     // //New keys
     'GO_TO_CART': 'Go To Cart',
+    'GO_TO_WISHLIST': 'Go To Wishlist',
     'LIKE': 'Like',
     'OFFERS': 'Offers',
     'NO_OFFERS': 'No offers',
