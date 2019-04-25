@@ -183,9 +183,11 @@ class Reason extends Component {
     const { img, name } = itemData;
     const { selectedMode, displaySizeError } = this.state;
     const selectedReason = reasons.filter(reason => reason.name === this.state.reason)[0]
+    const issueType_small = issueType.toLowerCase();
+    console.log(issueType_small);
     return (
       <div className={`${styles['reason-item-main']} ${styles['width100']}`}>
-        <h4 className={`${styles['fs-20']} ${styles['fontW300']} ${styles['text-capitalize']} ${styles['ml-20']} ${styles['mr-20']}`}>{ORDER_PAGE.WHY_DO_YOU_WANT_TO} {issueType} {ORDER_PAGE.THIS_ITEM}</h4>
+        <h4 className={`${styles['fs-20']} ${styles['fontW300']} ${styles['ml-20']} ${styles['mr-20']}`}>{ORDER_PAGE.WHY_DO_YOU_WANT_TO} {issueType_small} {ORDER_PAGE.THIS_ITEM}</h4>
         {returnExchangeType ? null : (
           <div
             className={`${styles['flx-spacebw-alignc']} ${styles['pb-20']} ${
@@ -208,7 +210,7 @@ class Reason extends Component {
         )}
         <div className={`${styles['reason-cont']} ${styles['pb-15']} ${styles['ml-20']} ${styles['mr-20']}`}>
           <span className={`${styles['instruction-txt']} ${styles['pb-20']} ${styles['pt-20']} ${styles['flex']} ${styles['fs-12']} ${styles['google-clr']}`}>
-            {ORDER_PAGE.SELECT_CANCEL_REASON}
+            {issueType_small==='cancel' ? ORDER_PAGE.SELECT_CANCEL_REASON : (issueType_small==='return' ? ORDER_PAGE.SELECT_RETURN_REASON : ORDER_PAGE.SELECT_EXCHANGE_REASON)}
           </span>
           <div className={`${styles['dd-cont']}`}>
             <div className={`${styles.select} ${styles['mt-10']} ${styles['pb-10']}`}>
@@ -316,7 +318,7 @@ class Reason extends Component {
             className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['retun-btn-part']}`}
             disabled={loadingStatus || !this.state.reason}
           >
-            {`${selectedMode} Type`}
+            {`${selectedMode}`}
           </button>
         </div>
       </div>

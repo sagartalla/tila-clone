@@ -41,10 +41,10 @@ const tie = [{
 
 const hal = [{
   img: '/static/img/landing-home/womens-clothing.png',
-  title: 'Womens Clothing'
+  title: 'Women\'s Clothing'
 }, {
   img: '/static/img/landing-home/mens-clothing.png',
-  title: 'Mens Clothing'
+  title: 'Men\'s Clothing'
 }, {
   img: '/static/img/landing-home/jewellery.png',
   title: 'Jewellery'
@@ -337,7 +337,7 @@ const HomePage = () => React.createElement(
         React.createElement(
           'span',
           { className: `title ${styles['fs-18']}` },
-          'TOP IN FASHION AND HOME & LIVING'
+          'TOP IN FASHION | HOME & LIVING'
         ),
         React.createElement(
           Slider,
@@ -547,7 +547,7 @@ const HomePage = () => React.createElement(
             React.createElement(
               'span',
               { className: 'lite' },
-              'Women Clothing'
+              'Women\'s Clothing'
             ),
             React.createElement(
               'span',
@@ -666,7 +666,7 @@ const HomePage = () => React.createElement(
             React.createElement(
               'span',
               { className: 'lite' },
-              'Men Clothing'
+              'Men\'s Clothing'
             ),
             React.createElement(
               'span',
@@ -704,7 +704,7 @@ const HomePage = () => React.createElement(
           React.createElement(
             'span',
             null,
-            'Men\'s Clothing| Women\'s Clothing| Kid\'s Clothing| Footwear| Jewellery| Eyewear & More\u2026'
+            'Men\'s Clothing| Women\'s Clothing| Kids Clothing| Footwear| Jewellery| Eyewear & More\u2026'
           )
         )
       )
@@ -933,7 +933,7 @@ const HomePage = () => React.createElement(
           React.createElement(
             'span',
             null,
-            'Besheets  |  Furniture  |  Cushions  |  Wall Decor  |  Lights  |  Living Room Furniture  |  Photo Frames  |  Rugs & Mats  & more\u2026'
+            'Bedsheets  |  Furniture  |  Cushions  |  Wall Decor  |  Lights  |  Living Room Furniture  |  Photo Frames  |  Rugs & Mats  & more\u2026'
           )
         )
       )
@@ -1048,7 +1048,7 @@ const HomePage = () => React.createElement(
               React.createElement(
                 'span',
                 { className: 'lite' },
-                'Camara'
+                'Camera'
               ),
               React.createElement(
                 'span',
@@ -1165,7 +1165,7 @@ const HomePage = () => React.createElement(
           React.createElement(
             'span',
             null,
-            'Mobiles  |  Laptops  |  Speakers  |  Cameras  |  Microwave Ovens  |  Smartwatch  |  Lights & Lamps  & more\u2026'
+            'Mobiles  |  Laptops  |  Speakers  |  Cameras  |  Microwave Ovens  |  Smartwatches  |  Lights & Lamps  & more\u2026'
           )
         )
       )

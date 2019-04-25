@@ -24,7 +24,7 @@ const OrderIssueWidget = ({orderIssue, resetOrderIssue}) => {
       const { issueType } = orderIssue;
       switch(step) {
         case STEPS.LIST: {
-          return `Choose an order to ${issueType ? 'Cancel': 'Return/Exchange'}`;
+          return `Choose an order to ${issueType ? 'cancel': 'Return/Exchange'}`;
           break;
         }
         case STEPS.REASONS: {

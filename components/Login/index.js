@@ -28,13 +28,13 @@ class Login extends Component {
       {
         field: 'email',
         method: this.validateEmail,
-        message: 'Enter valid emailid',
+        message: 'Please enter valid email ID',
         validWhen: false,
       },
       {
         field: 'password',
         method: this.validateLengthPassword,
-        message: 'Your password must be at least 8 characters long.',
+        message: 'Password must be atleast 8 characters',
         validWhen: false,
       },
     ]);
@@ -374,12 +374,12 @@ class Login extends Component {
             {
               this.state.mode === 'register'
                 ?
-                  <h4 className={`${styles['ff-b']} ${styles['fs-14']} ${styles['m-fs-14']} ${styles['m-t-c']}`}>
+                  <h4 className={`${styles['ff-b']} ${styles['fs-14']} ${styles['m-fs-14']} ${styles['t-c']}`}>
                   <span>{LOGIN_PAGE.HAVE_ACCOUNT}&nbsp;</span>
                   <span className={styles['link-text']} onClick={this.toggleLoginSignUp}>{LOGIN_PAGE.SIGN_IN}</span>
                 </h4>
                 :
-                <h4 className={`${styles['ff-b']} ${styles['fs-14']} ${styles['m-fs-14']} ${styles['m-t-c']}`}>
+                <h4 className={`${styles['ff-b']} ${styles['fs-14']} ${styles['m-fs-14']} ${styles['t-c']}`}>
                   <span>{LOGIN_PAGE.NO_ACCOUNT} &nbsp;</span>
                   <span className={styles['link-text']} onClick={this.toggleLoginSignUp}>{LOGIN_PAGE.SIGN_UP}</span>
                 </h4>

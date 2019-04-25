@@ -11,13 +11,13 @@ import styles_ar from './footer_ar.styl';
 
 const styles = lang === 'en' ? styles_en : styles_ar;
 
-const f = [{"Women Clothing":	"https://storefront-stage.fptechscience.com/srp/Clothing-910?categoryTree=true&isListed=false"},
-{"Men Clothing":	"https://storefront-stage.fptechscience.com/srp/Clothing-899?categoryTree=true&isListed=false"},
-{"Kid's Clothing":	"https://storefront-stage.fptechscience.com/srp?isListed=false&language=en&search=Kids"},
+const f = [{"Women's Clothing":	"https://storefront-stage.fptechscience.com/srp/Clothing-910?categoryTree=true&isListed=false"},
+{"Men's Clothing":	"https://storefront-stage.fptechscience.com/srp/Clothing-899?categoryTree=true&isListed=false"},
+{"Kids Clothing":	"https://storefront-stage.fptechscience.com/srp?isListed=false&language=en&search=Kids"},
 {"Watches":	"https://storefront-stage.fptechscience.com/srp/watches-1128/?isListed=false&language=en&search=Watch"},
 {"Jewellery":	"https://storefront-stage.fptechscience.com/srp?isListed=false&language=en&search=Jewellery"},
-{"Mens Footwear":	"https://storefront-stage.fptechscience.com/srp/Footwear-921?categoryTree=true&isListed=false&language=en"},
-{"Womens Footwear":	"https://storefront-stage.fptechscience.com/srp/Footwear-921?categoryTree=true&isListed=false&language=en"},
+{"Men's Footwear":	"https://storefront-stage.fptechscience.com/srp/Footwear-921?categoryTree=true&isListed=false&language=en"},
+{"Women's Footwear":	"https://storefront-stage.fptechscience.com/srp/Footwear-921?categoryTree=true&isListed=false&language=en"},
 {"Bags":	"https://storefront-stage.fptechscience.com/srp/Backpack-926?categoryTree=true&isListed=false&language=en"}];
 
 const e = [{"Mobiles":"https://storefront-stage.fptechscience.com/srp?search=Mobiles&language=en&isListed=false"},
@@ -29,7 +29,7 @@ const e = [{"Mobiles":"https://storefront-stage.fptechscience.com/srp?search=Mob
 {"Speakers":"https://storefront-stage.fptechscience.com/srp?isListed=false&language=en&search=Speaker"},
 {"Storage Devices":"https://storefront-stage.fptechscience.com/srp?search=Storage&language=en&isListed=false"}];
 
-const l = [{"Travel Acessories":	"https://storefront-stage.fptechscience.com/srp?isListed=false&language=en&search=travel%20accessories"},
+const l = [{"Travel Accessories":	"https://storefront-stage.fptechscience.com/srp?isListed=false&language=en&search=travel%20accessories"},
 {"Photo Frames":	"https://storefront-stage.fptechscience.com/srp?isListed=false&language=en&search=Photo%20Frames"},
 {"Lights":	"https://storefront-stage.fptechscience.com/srp?isListed=false&language=en&search=Lights"}];
 

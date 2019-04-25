@@ -93,7 +93,7 @@ class VerifyEmail extends Component {
               onKeyPress={this.handleEnterKey}
             />
             {otpError ? <div className={`${styles['thick-red-clr']}`}>{EMAIL_VERIFICATION.PLEASE_ENTER_OTP_SENT}</div> : ''}
-            <div className={`${styles.flex}`}><div className={`${styles['otp-expire']}`}>{EMAIL_VERIFICATION.OTP_EXPIRE_IN}&nbsp;</div><div className={`${styles['black-color']}`}>{EMAIL_VERIFICATION.TWENTY_FOUR_HOURS}</div>
+            <div className={`${styles.flex}`}><div className={`${styles['otp-expire']}`}>{EMAIL_VERIFICATION.DIDNT_RECEIVE_OTP}&nbsp;</div>
               <span
                 className={`${styles['lgt-blue']} ${styles.pointer}`}
                 onClick={this.sendOtpToEmailId}

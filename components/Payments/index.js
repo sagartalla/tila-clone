@@ -48,7 +48,7 @@ class Payments extends React.Component {
       {
         field: 'password',
         method: this.validateLengthPassword,
-        message: 'Your password must be at least 8 characters long.',
+        message: 'Password must be atleast 8 characters',
         validWhen: false,
       },
     ]);

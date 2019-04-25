@@ -262,7 +262,7 @@ const Lifestyle = () => React.createElement(
       React.createElement(
         'h5',
         { className: `main-title ${styles['fs-16']} ${styles['fontW600']}  ${styles['mb-0']}` },
-        'Top Selling Furnitures'
+        'Top Selling Furniture'
       ),
       React.createElement(
         'span',
