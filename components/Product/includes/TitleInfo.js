@@ -7,7 +7,7 @@ import { Modal } from 'react-router-modal';
 
 import RightSideBar from '../../Cart/CartPaymentSideBar';
 import constants from '../../../constants';
-import { actionCreators as cartActionCreators, selectors as cartSelectors } from '../../../store/listingCart';
+import { actionCreators as cartActionCreators, selectors as cartSelectors } from '../../../store/cart';
 import { actionCreators as compareActions, selectors } from '../../../store/compare';
 import { languageDefinations } from '../../../utils/lang';
 import lang from '../../../utils/language';
@@ -228,14 +228,14 @@ TitleInfo.propTypes = {
 };
 
 const mapStateToProps = store => ({
-  listingCartData: cartSelectors.getListingCartResults(store),
+  listingCartData: cartSelectors.getCartResults(store),
   cmpData: selectors.getCmpData(store),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   addToCart: cartActionCreators.addToCart,
   cartItemCount: cartActionCreators.cartItemCount,
-  getListingCartResults: cartActionCreators.getListingCartResults,
+  getListingCartResults: cartActionCreators.getCartResults,
   removeCartItem: cartActionCreators.removeCartItem,
   addToCompare: compareActions.addToCompare,
   getCompareCount: compareActions.getCompareCount,

@@ -364,6 +364,7 @@ export const AR_KEYWORDS = {
     'DELIVER_TO': 'التوصيل إلى',
     'NO_OF_ITEMS_FOUND_FOR': 'عدد المنتجات التي وجدناها ل..',
     'SORT_BY': 'تصنيفها على حسب',
+    'SEARCH_ITEMS': 'items',
     'BEST_MATCH': 'أفضل مطابقه',
     'BEST_OFFERS': 'أفضل العروض',
     'SUGGESTED_TAGS': 'التاغات المقترحة',
@@ -374,7 +375,6 @@ export const AR_KEYWORDS = {
     'BEST_MATCH': 'أفضل مطابقه',
     'PRICE_LOW_TO_HIGH': 'الأسعار من الرخيص إلى الغالي',
     'PRICE_HIGH_TO_LOW': 'الأسعار من الغالي إلى الرخيص',
-    //New comments
     'SHOW_LESS': 'استعرض أقل',
     'SHOW_MORE': 'استعرض أكثر',
     'ADDED_TO_CART': 'تم إضافته إلى سلة التسوَّق',
@@ -386,6 +386,8 @@ export const AR_KEYWORDS = {
     'SEARCH_INSTEAD_FOR': 'البحث بدلاً عن ',
     'SEARCH_YOUR_FAV_ITEM': 'البحث عن المنتج المفضَّل لديك...', //
     'MAXIMUN_TEXT_EXCEEDED': 'لقد تخطيت الحد الأقصى للنص المسموح به للبحث',
+    'YOUR_ENTERED': 'You entered',
+    'AUTO_CORRECTED': 'Auto corrected',
   },
   // adding new page content
   FOOTER_PAGE: {

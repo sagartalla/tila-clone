@@ -366,6 +366,7 @@ export const EN_KEYWORDS = {
   SEARCH_PAGE: {
     'DELIVER_TO': 'Deliver to',
     'NO_OF_ITEMS_FOUND_FOR': 'no of items found for',
+    'SEARCH_ITEMS': 'items',
     'SORT_BY': 'Sort by',
     'BEST_MATCH': 'Best Match',
     'BEST_OFFERS': 'Best Offers',
@@ -389,6 +390,8 @@ export const EN_KEYWORDS = {
     'SEARCH_INSTEAD_FOR': 'Search instead for',
     'SEARCH_YOUR_FAV_ITEM': 'Search your fav item...',
     'MAXIMUN_TEXT_EXCEEDED': 'Maximum search text exceeded',
+    'YOUR_ENTERED': 'You entered',
+    'AUTO_CORRECTED': 'Auto corrected',
   },
   // adding new page content
   FOOTER_PAGE: {
