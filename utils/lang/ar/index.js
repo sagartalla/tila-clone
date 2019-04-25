@@ -564,7 +564,7 @@ export const AR_KEYWORDS = {
     'CANCEL_MESSAGE': 'نعتذر أنه كان عليك الإلغاء. سوف نعمل على حل سبب إلغائك',
     'DONE': 'انتهى',
     'CONTINUE': 'متابعه',
-    'ADDRESS_PICKUP': 'يرجى اختيار عنوان للاستلام', // Please Choose Address for Pick Up is arabic translation
+    'ADDRESS_PICKUP': 'يرجى اختيار عنوان للاستلام',
     'SELECT_VARIANT': 'اختيار مختلف',
     'SELECT_TYPE_EXCHANGE': 'اختيار مختلف للتبديل',
     'SELECT_CANCEL_REASON': 'يرجى اختيار سبب لإلغائك للطلب ونحن سنهتم بالأمر!',

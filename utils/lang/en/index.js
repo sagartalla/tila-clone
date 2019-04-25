@@ -567,7 +567,7 @@ export const EN_KEYWORDS = {
     'CANCEL_MESSAGE': 'Sorry that you had to cancel, we will work on reason for your cancellation',
     'DONE': 'Done',
     'CONTINUE': 'Continue',
-    'ADDRESS_PICKUP': 'Address for Pick Up',
+    'ADDRESS_PICKUP': 'Please Choose Address for Pick Up',
     'SELECT_VARIANT': 'Select Variant',
     'SELECT_TYPE_EXCHANGE': 'Select Variant to Exchange',
     'SELECT_CANCEL_REASON': 'Please select a reason for your cancellation and we\'ll take care of it!',
