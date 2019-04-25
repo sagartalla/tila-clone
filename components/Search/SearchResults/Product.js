@@ -302,7 +302,6 @@ class Product extends Component {
                       <span className={`${styles['fs-12']} ${styles['fontW600']} ${styles['pl-10']} ${styles['fullfilled-label']}`}>{PDP_PAGE.FULLFILLED_BY_TILA}</span>
                     </span>
                   </span>
-
                   {discountValue >= 5 &&
                     <span className={`${styles.absolute} ${styles['offer-tag']} ${styles[this.getOfferClassName(discountValue)]}`}>
                       <span>{discountValue}%</span>
@@ -319,10 +318,7 @@ class Product extends Component {
                     </span>
                   </div>
                 </div>
-                <div className={
-                  `${selectedProduct ? `${styles['display-buttons']} ${styles['active-product']}` : ''}  ${styles['hover-show-date']} ${styles['pb-10']} ${styles['relative']}
-                ${styles['pb-10']}`}
-                >
+                <div className={`${selectedProduct ? `${styles['display-buttons']} ${styles['active-product']}` : ''}  ${styles['hover-show-date']} ${styles['pb-10']} ${styles['relative']}`}>
                   {
                     variants.length > 0 ?
                       <div className={`${styles['flex']} ${styles['justify-around']} ${styles['quick-view']} ${styles['border-radius4']}`}>

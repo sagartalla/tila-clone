@@ -144,7 +144,7 @@ class TitleInfo extends Component {
             ))
           } */}
         </div>
-        <h1 className={`${styles['fs-18']} ${styles.fontW700} ${styles['black-color']}`}>{title}</h1>
+        <h1 className={`${styles['fs-18']} ${styles.fontW700} ${styles['black-color']} ${styles['mt-5']} ${styles['mb-0']}`}>{title}</h1>
         {
           isPreview
             ?
@@ -162,7 +162,7 @@ class TitleInfo extends Component {
             null
             :
             <div className={`${styles['flex-center']} ${styles['checkout-instantly']} ${styles['pt-10']}`}>
-              <div className={`${styles.flex}`}>
+              <div className={`${styles.flex} ${styles['pr-10']}`}>
                 {totalInventoryCount > 0 && offerInfo.availabilityError &&
                   <a className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['fs-14']} ${styles['small-btn']} ${styles['checkout-instant-btn']}`} onClick={this.checkoutInstantHandler}>{PDP_PAGE.CHECKOUT_INSTANT}</a>}
               </div>
@@ -170,7 +170,7 @@ class TitleInfo extends Component {
                 {
                   totalInventoryCount < 5
                     ?
-                    <span className={`${styles.flex} ${styles['fs-12']} ${styles['google-clr']} ${styles.fontW600}`}>
+                    <span className={`${styles.flex} ${styles['fs-12']} ${styles['google-clr']} ${styles['pr-10']} ${styles.fontW600}`}>
                       {
                         totalInventoryCount === 0
                           ?
@@ -180,7 +180,7 @@ class TitleInfo extends Component {
                         }
                     </span>
                     :
-                    null
+                    null 
                 }
                 <span className={`${styles.flex} ${styles['fs-12']}`}>{PDP_PAGE.COD_AVAILABLE}</span>
               </div>
