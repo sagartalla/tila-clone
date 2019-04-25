@@ -165,7 +165,10 @@ class EditPhone extends React.Component {
               //     X</a>
               //   </Col>
               // </Row>
-              <h4 className={`${styles['fs-20']} ${styles['fontW300']} ${styles['p-20']}`}><span onClick={this.handleClose}>X</span> <span className={`${styles['pl-20']} ${styles['lgt-blue']}`}>{CONTACT_INFO_MODAL.EDIT_PHONE_NUMBER}</span></h4>
+              <h4 className={`${styles['flx-spacebw-alignc']} ${styles['m-0']} ${styles['p-20']}`}> 
+                <span className={styles['lgt-blue']}>{CONTACT_INFO_MODAL.EDIT_PHONE_NUMBER}</span>
+                <span onClick={this.handleClose} className={styles['fs-24']}>X</span>
+              </h4>
             )
           }
           {
@@ -194,7 +197,10 @@ class EditPhone extends React.Component {
             //     X</a>
             //   </Col>
             // </Row>
-            <h4 className={`${styles['fs-20']} ${styles['fontW300']} ${styles['p-20']}`}><span onClick={this.handleClose}>X</span> <span className={`${styles['pl-20']} ${styles['lgt-blue']}`}>{CONTACT_INFO_MODAL.EDIT_PHONE_NUMBER}</span></h4>
+            <h4 className={`${styles['flx-spacebw-alignc']} ${styles['m-0']} ${styles['p-20']}`}>
+              <span className={styles['lgt-blue']}>{CONTACT_INFO_MODAL.EDIT_PHONE_NUMBER}</span>
+              <span onClick={this.handleClose} className={styles['fs-24']}>X</span> 
+            </h4>
           )
         }
         {
