@@ -32,7 +32,7 @@ const actionCreators = {
       payload:bool
     })
   },
-  removeCartItem: (cartId, showToast) => {
+  removeCartItem: (cartId, showToast) => (dispatch) => {
     const params = {
       cart_item_id: cartId,
     };
