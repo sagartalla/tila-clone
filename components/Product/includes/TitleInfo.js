@@ -166,7 +166,7 @@ class TitleInfo extends Component {
                 {totalInventoryCount > 0 && offerInfo.availabilityError &&
                   <a className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['fs-14']} ${styles['small-btn']} ${styles['checkout-instant-btn']}`} onClick={this.checkoutInstantHandler}>{PDP_PAGE.CHECKOUT_INSTANT}</a>}
               </div>
-              <div>
+              <div className={styles['flex']}>
                 {
                   totalInventoryCount < 5
                     ?
@@ -182,7 +182,7 @@ class TitleInfo extends Component {
                     :
                     null 
                 }
-                <span className={`${styles.flex} ${styles['fs-12']}`}>{PDP_PAGE.COD_AVAILABLE}</span>
+                <span className={`${styles.flex} ${styles['fs-12']} ${styles['pl-10']}`}>{PDP_PAGE.COD_AVAILABLE}</span>
               </div>
               <React.Fragment>
                 <div className={showCheckoutModal ? `${styles['modalContainer']} ${styles['showDiv']}` : `${styles['modalContainer']} ${styles['hideDiv']}`}>

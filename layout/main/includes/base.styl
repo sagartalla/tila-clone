@@ -7,7 +7,7 @@ html
   font-family ProximaNova
 
 body
-  font-size 1rem
+  font-size 14px
   font-family ProximaNova
   background light-gray-color
   color black
@@ -49,7 +49,7 @@ input[type=text],input[type=password], input[type=email]
   padding px-5 0
   outline none !important
   width 100%
-  border-bottom 1px solid light-border
+  border-bottom 1px solid light-brdr
   // box-shadow none !important
   border-radius 0 !important
 input[type=number]::-webkit-inner-spin-button,
@@ -281,8 +281,7 @@ for x in range(0px, 80px, 5)
   color generic-green-color
 
 .thck-gry-rt-border
-  border-right 1px solid dottes-gry-clr
-
+  border-right 1px solid light-brdr
 .lgt-gry-clr
   color lgt-gry
 
@@ -293,7 +292,7 @@ for x in range(0px, 80px, 5)
   color twitter-color
 
 .thck-gry-rt-border
-  border-right 1px solid thck-gry-clr
+  border-right 1px solid light-brdr
 
 //font-weight
 .fontW300
@@ -338,53 +337,47 @@ for x in range(0px, 80px, 5)
 
 //border
 .border
-  border 1px solid border-light-gray
+  border 1px solid light-brdr
 
 .border-t
-  border-top 1px solid border-light-gray
+  border-top 1px solid light-brdr
 
 .border-b
-  border-bottom 1px solid border-light-gray
+  border-bottom 1px solid light-brdr
 
 .border-lg
-  border 1px solid light-gray
+  border 1px solid light-brdr
 
 .border-rt
-  border-right 1px solid light-gray
+  border-right 1px solid light-brdr
 
 .border-lt
-  border-left 1px solid light-gray
+  border-left 1px solid light-brdr
 
 .border-lt-green
   border-left 1px solid generic-green-color
 
 
 .thick-border-btm
-  border-bottom 1px solid light-gray-color
+  border-bottom 1px solid light-brdr
 
 .thick-border-bottom
-  border-bottom 4px solid #fff;
+  border-bottom 4px solid white;
 
 .thick-border-left
-  border-left 1px solid thck-gry-clr
-
-.thick-border-top
-  border-top 1px solid thck-gry-clr
-
-.thick-border-right
-  border-right 1px solid thck-gry-clr
+  border-left 1px solid light-brdr
 
 .thick-bdr-rgt
   border-left 4px solid border-pink
 
 .thin-border-right
-  border-right 1px solid generic-gray-color
+  border-right 1px solid light-brdr
 
 .border-btm-dottes
-  border-bottom 1px dotted generic-gray-color
+  border-bottom 1px dotted light-brdr
 
 .bb-dashed
-  border-bottom 1px dashed generic-gray-color
+  border-bottom 1px dashed light-brdr
 
 .bg-mauve
   background mauve-light
@@ -569,4 +562,11 @@ for x in range(0px, 80px, 5)
   overflow: hidden;
   white-space: nowrap;
   max-width: 500px;
+}
+
+@media screen and (min-device-width: 1900px) and (max-device-width: 1024px) and (orientation : landscape){
+  h1 {
+    font-size 22px
+  }
+      
 }

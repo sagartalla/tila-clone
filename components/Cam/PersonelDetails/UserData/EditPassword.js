@@ -147,8 +147,8 @@ class EditPassword extends React.Component {
     return (
       <div className={styles['editProfileModal']}>
         <h4 className={`${styles['flx-spacebw-alignc']} ${styles['m-0']}`}>
-          <span className={styles['lgt-blue']}> {EDIT_PASSWORD_MODAL.HEADING}</span>
-          <a onClick={this.handleClose} className={styles['fs-24']}>X</a>
+          <span> {EDIT_PASSWORD_MODAL.HEADING}</span>
+          <a onClick={this.handleClose} className={`${styles['fs-22']} ${styles['black-color']}`}>X</a>
         </h4>
         <div>
           <div className={`${styles['flex-center']} ${styles['flex-colum']} ${styles['personal-info-main']}`}>
