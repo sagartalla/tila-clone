@@ -37,7 +37,7 @@ const MiniCartBody = (props) => {
         }
         <div>
           <h5 className={`${styles['mt-0']} ${styles['pb-15']} ${styles['fontW600']} ${styles['thick-gry-clr']} ${styles['mb-0']}`}>
-            <span>{cnt + ' Items'}</span>
+            <span>My cart ({cnt})</span>
           </h5>
         </div>
         <div>
@@ -96,7 +96,7 @@ const MiniCartBody = (props) => {
                         <div>
                           <span className={`${styles['white-color']} ${styles['pb-5']} ${styles['pt-5']} ${styles['pr-10']} ${styles['pl-10']} ${styles['bg-thick-red-clr']} ${styles['border-radius12']}`}>Not Shippable</span>
                         </div>
-                        <p className={`${styles['mt-20']} ${styles['thick-red-clr']}`}>Unfortunately, we cannot deliver this item to your selected Address. Please remove the item to continue.</p>
+                        <p className={`${styles['mt-20']} ${styles['thick-red-clr']}`}>{CART_PAGE.CANNOT_DELIVER}</p>
                       </div>
                     }
                   </Col>

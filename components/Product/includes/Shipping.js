@@ -85,7 +85,7 @@ class Shipping extends Component {
                   {
                   acceptsReturns
                     ?
-                      <span>{maxDaysToReturn} {PDP_PAGE.DAY} {PDP_PAGE.EASY_RETURN}</span>
+                      <span>{maxDaysToReturn} {PDP_PAGE.DAYS} {PDP_PAGE.EASY_RETURN}</span>
                     :
                     `${PDP_PAGE.NON_RETURNABLE}`
                 }

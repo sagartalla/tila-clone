@@ -19,10 +19,10 @@ const boxObject = {
 const textObject = {
   errortext:<div style={{textAlign: "center"}}>
     <span style={{color: '#dd1e31'}} className={`${styles['fs-16']} ${styles['pt-20']}`}>Error. Please Try Again</span><br/>
-    <span className={`${styles['fs-12']} ${styles['pt-20']}`}>Drop the Answer icon into the box Above</span>
+    <span className={`${styles['fs-12']} ${styles['pt-20']}`}>Drop the answer icon into the box above</span>
   </div>,
   successtext:<span style={{color: '#99cc33'}} className={`${styles['fs-16']} ${styles['pt-20']}`}>&nbsp;Success</span>,
-  opentext:<span className={`${styles['fs-12']} ${styles['pt-20']}`}>Drop the Answer icon into the box Above</span>
+  opentext:<span className={`${styles['fs-12']} ${styles['pt-20']}`}>Drop the answer icon into the box above</span>
 }
 const CaptchaContent = ({items,state,handleDrop,handleClick}) => {
   return (

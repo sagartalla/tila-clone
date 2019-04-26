@@ -407,10 +407,17 @@ nav
 .mini-cart
   height: auto;
 
-.search-suggestions
-  position absolute
-  width 100%
-  background #fff
+.search-suggestion
+  display flex
+  a
+    line-height 2
+    width 100%
+    display flex
+    &:hover
+      color black
+    &:focus
+      outline none
+
 
 @media screen and (min-device-width: 320px) and (max-device-width: 736px) and (orientation : portrait){
   .login-reg-modal {

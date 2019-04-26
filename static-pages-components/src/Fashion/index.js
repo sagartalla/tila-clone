@@ -22,7 +22,7 @@ const Fashion = () => (
             </Col>
             <Col md={6} className={styles['p-0']}>
               <div className={`${styles['flex']} ${styles['flex-colum']}`}>
-                <span className={`lobster-family ${styles['fs-24']}`}>Mens Shoes</span>
+                <span className={`lobster-family ${styles['fs-24']}`}>Men's Shoes</span>
                 <span className={styles['fs-12']}>They lift you physically & emotionally.</span>
                 <span className={`${styles['pt-25']} shop-now-btn`}><a className={`${styles['fs-12']} ${styles['fontW600']} ${styles['border-radius4']}`}>Buy NOW</a></span>
               </div>
@@ -217,7 +217,7 @@ const Fashion = () => (
               <div className={styles['pb-10']}>
                 <img src="/static/img/landing-page-fashion/getting-img5.jpg" className="img-responsive" />
                 <div className={`${styles['bg-white']} chinos-part-inn`}>
-                  <h6 className={`${styles['m-0']} ${styles['fs-14']} ${styles['fontW600']}`}>Womens Formal Shoes</h6>
+                  <h6 className={`${styles['m-0']} ${styles['fs-14']} ${styles['fontW600']}`}>Women's Formal Shoes</h6>
                   <span className="disc">Up to 50% Off</span>
                 </div>
               </div>
