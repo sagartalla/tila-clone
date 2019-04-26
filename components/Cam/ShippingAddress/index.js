@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Modal } from 'react-router-modal';
 import { selectors as productSelectors, actionCreators as productActionCreators } from '../../../store/product';
+import { selectors as cartSelectors } from '../../../store/cart';
 import AddressNew from './includes/AddressNew';
 import AddressBody from './includes/AddressBody';
 import MiniAddress from './includes/MiniAddress';
@@ -242,15 +243,20 @@ class ShippingAddress extends Component {
   render() {
     // if standalone is true, it is stand alone address page else from payment page or any other pages.
     const {
-      results, standalone, handleShippingAddressContinue, miniAddress, isPdp, getAllCities, countriesData,
+      results, standalone, handleShippingAddressContinue, miniAddress, isPdp, getAllCities, countriesData, cartResults, showNonShippable,
     } = this.props;
     const {
       showNewAddr, addr, showCitiesData, showCountriesData, validation,
     } = this.state;
     const { DELIVERY_ADDR_PAGE } = languageDefinations();
-
     return (
       <div className={`${styles['address-container']} ${standalone !== true ? '' : `${styles.box} ${styles['ml-5']}`} `}>
+        {!cartResults.cart_shippable && (cartResults.cart_shippable !== undefined) && showNonShippable &&
+        <div className={`${styles['not-shippable']} ${styles.flex} ${styles['mb-20']} ${styles['p-10']}`}>
+          <Col md={2} sm={3} xs={3} className={`${styles['thick-red-clr']} ${styles.fontW600} ${styles['not-shipping-font']}`}>{DELIVERY_ADDR_PAGE.NOT_SHIPPABLE}</Col>
+          <Col md={10} sm={9} xs={9} className={`${styles['fs-12']} ${styles.fontW600}`}>{DELIVERY_ADDR_PAGE.UNFORTUNATELY_WE_CANNOT_DELIVER_REMOVE_ITEM}</Col>
+        </div>
+      }
         {
           miniAddress ?
             <Fragment>
@@ -354,7 +360,7 @@ class ShippingAddress extends Component {
                 {
                   standalone !== true ?
                     <Col md={12} sm={12} xs={12} className={`${styles['pl-15']}`}>
-                      <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']}`} onClick={handleShippingAddressContinue}>{DELIVERY_ADDR_PAGE.CONTINUE}</button>
+                      <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']}`} disabled={cartResults.cart_shippable !== undefined && !cartResults.cart_shippable} onClick={handleShippingAddressContinue}>{DELIVERY_ADDR_PAGE.CONTINUE}</button>
                     </Col>
                     : null
                 }
@@ -371,6 +377,7 @@ const mapStateToProps = store => ({
   getAddrById: selectors.getAddrById(store),
   getAllCities: productSelectors.getAllCities(store),
   countriesData: productSelectors.getAllCountries(store),
+  cartResults: cartSelectors.getCartResults(store),
 });
 
 const mapDispatchToProps = dispatch =>

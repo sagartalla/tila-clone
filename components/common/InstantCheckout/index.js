@@ -285,6 +285,7 @@ class InstantCheckout extends Component {
                       className={`${styles['fp-btn']} ${styles['fp-btn-sucess']} ${styles['fontW600']} ${styles['instant-btn']}`}
                       onClick={this.doInstantCheckout}
                       btnText={INSTANT_CHECKOUT.INSTANT_CHECKOUT}
+                      showImage="icons/common-icon/instant-checkout"
                       btnLoading={showLoading}
                     />
                   </div>

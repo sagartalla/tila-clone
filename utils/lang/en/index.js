@@ -154,6 +154,8 @@ export const EN_KEYWORDS = {
     'PO_BOX': 'PO box',
     'CODE': 'Code',
     'MOBILE_NUMBER': 'Mobile Number',
+    'NOT_SHIPPABLE': 'Not Shippable',
+    'UNFORTUNATELY_WE_CANNOT_DELIVER_REMOVE_ITEM': 'Unfortunately, we cannot deliver Some of the item(s) to your selected Address. Please remove the item from your mini cart on the right, or change the delivery address to continue.',
   },
   WISH_LIST_PAGE: {
     'WISHLIST_HEADER': 'items in wishlist',

@@ -23,6 +23,7 @@ apiRoutes
     const params = req.body;
     return axios.post(`${constants.AUTH_API_URL}/api/v1/sls/auth`, Object.assign({}, params, {})).then(({data, status}) => {
       let isLoggedIn = false;
+      debugger
       if(status === 200) {
         // if(!params.rememberMe) {
         //   delete data.refresh_token;

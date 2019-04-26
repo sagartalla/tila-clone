@@ -329,6 +329,7 @@ class Payments extends React.Component {
                 editAddressTab={this.editAddressTab}
                 configJson={paymentConfigJson.address}
                 handleShippingAddressContinue={this.handleShippingAddressContinue}
+                showNonShippable
               />
             {/*<LoyaltyPoints
                 editLoyalityTab={this.editLoyalityTab}
@@ -350,7 +351,7 @@ class Payments extends React.Component {
             <Col md={3} xs={12} sm={12} className={`${styles['pl-5']} ${styles['landscape-pr-0']} ${styles['m-p-l-15']}`}>
               <div>
                 {
-                  cartResults && cartResults.total_price ?
+                  cartResults && (cartResults.total_price === 0 || cartResults.total_price > 0) ?
                     <div className={`${styles['box']} ${styles['payment-summary']}`}>
                       <RightSideBar
                         data={cartResults}

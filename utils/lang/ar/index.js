@@ -152,6 +152,8 @@ export const AR_KEYWORDS = {
     'PO_BOX': 'صندوق البريد',
     'CODE': 'الكود',
     'MOBILE_NUMBER': 'رقم الجوال',
+    'NOT_SHIPPABLE': 'Not Shippable',
+    'UNFORTUNATELY_WE_CANNOT_DELIVER_REMOVE_ITEM': 'Unfortunately, we cannot deliver Some of the item(s) to your selected Address. Please remove the item from your mini cart on the right, or change the delivery address to continue.',
   },
   WISH_LIST_PAGE: {
     'WISHLIST_HEADER': 'المنتجات الموجوده في قائمة المفضلة',
