@@ -93,7 +93,7 @@ class Country extends Component {
     if (Object.keys(obj).length === 0) return null;
     return (
       
-      <div className={`${styles.pointer} ${styles['pl-10']} ${styles['mr-10']} ${styles['pr-10']} ${styles['border-rt']}`}>
+      <div className={`${styles.pointer} ${styles['pl-20']} ${styles['pr-20']} ${styles['border-rt']}`}>
         <img src={countriesData[selectedItem].img} alt={obj.name} title={obj.name} />
       </div>
     );
