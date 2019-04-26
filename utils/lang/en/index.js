@@ -144,7 +144,7 @@ export const EN_KEYWORDS = {
     'CANCEL': 'Cancel',
     'SAVE_DELIVER_BTN': 'Save and Deliver here',
     'ENTER_LOC': 'Enter a location',
-    'ADD_NEW_ADDR_TAG': 'Add a new network or home address where you want the orders to be delivered.',
+    'ADD_NEW_ADDR_TAG': 'Add address where you want the orders to be delivered.',
     'FIRST_NAME': 'First Name',
     'LAST_NAME': 'Last Name',
     'FLAT_HOUSE_NO': 'Flat/house no.floor/Building/',
@@ -188,6 +188,7 @@ export const EN_KEYWORDS = {
     'IN_CART' : 'IN CART',
     // //New keys
     'GO_TO_CART': 'Go To Cart',
+    'GO_TO_WISHLIST': 'Go To Wishlist',
     'LIKE': 'Like',
     'OFFERS': 'Offers',
     'NO_OFFERS': 'No offers',
@@ -211,7 +212,7 @@ export const EN_KEYWORDS = {
     'EASY_RETURN': 'easy return',
     'NO_SHIPPING_CITY': 'Currently not shipping to your city!',
     'FREE_DELIVERY_BY': 'FREE Delivery By',
-    'FREE_DELIVERY_IN': 'Free deliver in',
+    'FREE_DELIVERY_IN': 'Free delivery in',
     'NON_RETURNABLE': 'Non returnable',
     'DAY': 'Day',
     'YEAR': 'year',
@@ -231,7 +232,7 @@ export const EN_KEYWORDS = {
     'NO_OFFERS': 'No offers',
     'KEY_FEATURES': 'Key features',
     'DESCRIPTION_CANNOT_BE_EMPTY': 'Description cannot be empty',
-    'PLEASE_SELECT_THE_STAR_RATING': 'please select the starRating',
+    'PLEASE_SELECT_THE_STAR_RATING': 'Please rate this product',
     'ANY_OTHER_SUGGESTIONS': 'Any Other Suggestions?Let Us Know',
     'RATE_THE_PRODUCT': 'Rate The Product',
     'SUBMIT_FEEDBACK': 'submit FeedBack',
@@ -366,6 +367,7 @@ export const EN_KEYWORDS = {
   SEARCH_PAGE: {
     'DELIVER_TO': 'Deliver to',
     'NO_OF_ITEMS_FOUND_FOR': 'items found for',
+    'SEARCH_ITEMS': 'items',
     'SORT_BY': 'Sort by',
     'BEST_MATCH': 'Best Match',
     'BEST_OFFERS': 'Best Offers',
@@ -388,6 +390,8 @@ export const EN_KEYWORDS = {
     'SEARCH_INSTEAD_FOR': 'Search instead for',
     'SEARCH_YOUR_FAV_ITEM': 'Search your favourite items here!',
     'MAXIMUN_TEXT_EXCEEDED': 'Maximum search text exceeded',
+    'YOUR_ENTERED': 'You entered',
+    'AUTO_CORRECTED': 'Auto corrected',
   },
   // adding new page content
   FOOTER_PAGE: {

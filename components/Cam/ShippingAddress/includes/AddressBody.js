@@ -66,13 +66,13 @@ const AddressBody = (props) => {
                   </div>
                   <div className={styles['address-card-actions']}>
                     <Row>
-                      <Col md={6} sm={6} xs={6} className={`${styles['thck-gry-rt-border']} ${styles['flex']} ${styles['justify-center']}`}>
+                      <Col md={6} sm={6} xs={6} className={`${styles['thck-gry-rt-border']} ${styles['delete-action']} ${styles['flex']} ${styles['justify-center']}`}>
                         <span id={val.address_id} onClick={deleteAddr} className={`${styles['delete-icon']} ${styles['flex-center']}`}>
                           <SVGComponent clsName={`${styles['delete-icon-inn']}`} src="icons/delete-icon/delete-icon" />
                           <span className={styles['pl-5']}>{DELIVERY_ADDR_PAGE.DELETE}</span>
                         </span>
                       </Col>
-                      <Col md={6} sm={6} xs={6} className={`${styles['pl-0']} ${styles['flex']} ${styles['justify-center']}`}>
+                      <Col md={6} sm={6} xs={6} className={`${styles['pl-0']} ${styles['edit-action']} ${styles['flex']} ${styles['justify-center']}`}>
                         <span id={val.address_id} onClick={editAddress} className={styles['edit-icon']}>
                           <SVGComponent clsName={`${styles['edit-icon-inn']}`} src="icons/common-icon/edit-icon" />
                           {DELIVERY_ADDR_PAGE.EDIT_ADDR}
@@ -88,7 +88,7 @@ const AddressBody = (props) => {
         <Col md={4} sm={12} xs={12}>
           <div className={`${styles['address-card']} ${styles['address-card-new']} ${styles['p-20']}`} onClick={props.resetAddAdrressForm}>
             <div className={`${styles['flex-center']} ${styles['flex-wrap']}`}>
-              <h5 className={`${styles['m-0']} ${styles['mb-10']} ${styles['thick-blue']} ${styles['fontW600']} ${styles['flex']}`}>
+              <h5 className={`${styles['m-0']} ${styles['mb-10']} ${styles['thick-blue']} ${styles['fontW600']} ${styles['flex-center']} ${styles['flex']}`}>
                 <SVGComponent clsName={`${styles['pls-icon']}`} src="icons/common-icon/plus-icon" />
                 <span className={styles['pl-10']}>{DELIVERY_ADDR_PAGE.ADD_NEW_ADDR}</span>
               </h5>

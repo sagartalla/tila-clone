@@ -47,45 +47,20 @@ class Search extends Component {
     this.props.hideSearchBarFitlers();
   }
 
-  querySearch = (e) => {
-    let dataSearchQuery = e.currentTarget.dataset.querysearch;
-    Router.pushRoute(`/${country}/${language}/srp?search=${dataSearchQuery}&disableSpellCheck=true&${Object.entries(this.props.optionalParams).map(([key, val]) => `${key}=${val}`).join('&')}`);
-  }
-
   render() {
-    const { spellCheckResp, query } = this.props;
+    const { query, optionalParams } = this.props;
     return (
       <div>
         <HeaderBar />
         <Grid className={styles['pt-20']}>
-          {spellCheckResp &&
-            <div className={`${styles['mb-15']} ${styles['spell-strip']}`}>
-              {SEARCH_PAGE.SEARCH_RESULTS_FOR}&nbsp;
-              <a
-                href="javascript: void(0)"
-                onClick={this.querySearch}
-                data-querysearch={spellCheckResp[query.search]}
-              >
-                <b>{`${spellCheckResp[query.search]}. `}</b>
-              </a>
-              {SEARCH_PAGE.SEARCH_INSTEAD_FOR}&nbsp;
-              <a
-                href="javascript: void(0)"
-                onClick={this.querySearch}
-                data-querysearch={query.search}
-              >
-                <b>{`${query.search}`}</b>
-              </a>
-            </div>
-          }
           <Col md={2} onClick={onClickMenuHandle} className={`${styles['filter-panel']} ${styles['mr-10']} ${styles['float-l']} ${styles['border-radius4']} ${styles['bg-white']} ${styles['p-0']}`}>
             <NoSSR>
               <CategoriesAndFacets />
             </NoSSR>
           </Col>
-          <Col md={10} className={`${styles['search-results']} ${styles['p-0']}`}>
-            <SearchDetailsBar />
-            <SearchResults  search={query.search}/>
+          <Col md={10} className={`${styles['search-results']}`}>
+            <SearchDetailsBar optionalParams={optionalParams} />
+            <SearchResults search={query.search}/>
           </Col>
         </Grid>
         <CompareWidget />

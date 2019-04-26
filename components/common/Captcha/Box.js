@@ -12,7 +12,10 @@ const boxSource = {
         index: props.index
     }
   },
-  endDrag(props){
+  endDrag(props, monitor){
+    if(!monitor.didDrop()){
+      return;
+    }
     return props.handleDrop(props.index);
   }
 };
