@@ -41,7 +41,7 @@ class Language extends Component {
 	}
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.language !== this.state.selectedItem) {
+    if (nextProps.language !== this.state.selectedItem) {
       const currentURl = window.location.href;
       window.location.href = currentURl.replace(`/${this.state.selectedItem}`, `/${nextProps.language}`);
     }
@@ -57,26 +57,31 @@ class Language extends Component {
   }
 
   render() {
-    const { img, name } = languageData[this.state.selectedItem];
+    const { name, id } = languageData[this.state.selectedItem];
     return (
-      <Dropdown id="language-dd" className={styles['language-dd']}>
-        <Dropdown.Toggle>
-          <span>{name}</span>
-        </Dropdown.Toggle>
-        <Dropdown.Menu className={styles['item']}>
-          {
-            _.map(languageData, (language) => (
-              <MenuItem key={language.name} eventKey="1" onClick={this.changeLanguage} data-id={language.id}>
-                {/*<img src={language.img} title={language.name}/>*/}
-                <span>{language.name}</span>
-              </MenuItem>
-            ))
-          }
-        </Dropdown.Menu>
-      </Dropdown>
+      <div className={`${styles.pointer} ${styles['pr-20']} ${styles['border-rt']}`} onClick={this.changeLanguage} data-id={id}>
+        <span>{name}</span>
+      </div>
     );
   }
 }
+
+{ /* <Dropdown id="language-dd" className={styles['language-dd']}>
+<Dropdown.Toggle>
+  <span>{name}</span>
+</Dropdown.Toggle>
+<Dropdown.Menu className={styles['item']}>
+  {
+    _.map(languageData, (language) => (
+      <MenuItem key={language.name} eventKey="1" onClick={this.changeLanguage} data-id={language.id}>
+        {/*<img src={language.img} title={language.name}/>
+        <span>{language.name}</span>
+      </MenuItem>
+    ))
+  }
+</Dropdown.Menu>
+</Dropdown> */ }
+
 
 const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators(

@@ -48,7 +48,6 @@ const giftApi = (cartItemId, typ, params = {}) => {
 
 const track = (params) => {
   const cartItem = params.postResult.filter(item => item.cart_item_id === params.cartId)[0];
-  console.log('dvcsgudsc', params, cartItem);
   const obj = {
     event: params.eventName,
   };

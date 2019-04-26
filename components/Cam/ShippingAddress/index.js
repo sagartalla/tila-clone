@@ -14,6 +14,7 @@ import AddressHeader from './includes/AddressHeader';
 import { languageDefinations } from '../../../utils/lang/';
 import { actionCreators, selectors } from '../../../store/cam/address';
 import FormValidator from '../../common/FormValidator';
+import Slider from '../../common/slider';
 
 import lang from '../../../utils/language';
 
@@ -85,6 +86,7 @@ class ShippingAddress extends Component {
       addr: initialAddrObj,
       validation: this.validations.valid(),
       showNewAddr: false,
+      showSlider: true,
       showCitiesData: false,
       showCountriesData: false,
     };
@@ -192,6 +194,10 @@ class ShippingAddress extends Component {
     this.props.deleteAddress(addrId);
   }
 
+  closeSlider = () => {
+    this.setState({ showSlider: false });
+  }
+
   editAddress(addrId) {
     const { getAddrById, getCitiesByCountryCode } = this.props;
     const addr = getAddrById(addrId)[0];
@@ -216,7 +222,11 @@ class ShippingAddress extends Component {
   }
 
   showAddAdrressForm() {
-    this.setState({ showNewAddr: !this.state.showNewAddr });
+    const { isFromCart } = this.props;
+    this.setState({
+      showNewAddr: isFromCart ? true : !this.state.showNewAddr,
+      showSlider: true,
+    });
   }
 
   // TODO if adding service fail, we should not clearuser added data. SF-25
@@ -246,7 +256,7 @@ class ShippingAddress extends Component {
       results, standalone, handleShippingAddressContinue, miniAddress, isPdp, getAllCities, countriesData, cartResults, showNonShippable,
     } = this.props;
     const {
-      showNewAddr, addr, showCitiesData, showCountriesData, validation,
+      showNewAddr, addr, showCitiesData, showCountriesData, validation, showSlider,
     } = this.state;
     const { DELIVERY_ADDR_PAGE } = languageDefinations();
     return (
@@ -290,7 +300,11 @@ class ShippingAddress extends Component {
                       />
                     </div>
                     :
-                    <Modal className={`react-router-modal__modal ${styles['right-side-modal']}`}>
+                    <Slider
+                      isOpen={showSlider}
+                      label=" "
+                      closeSlider={this.closeSlider}
+                    >
                       <AddressNew
                         inputOnChange={this.inputOnChange}
                         saveBtnClickHandler={this.saveBtnClickHandler}
@@ -310,7 +324,7 @@ class ShippingAddress extends Component {
                         showCountriesData={showCountriesData}
                         selectCountry={this.selectCountry}
                       />
-                    </Modal>
+                    </Slider>
                   : ''
               }
             </Fragment>

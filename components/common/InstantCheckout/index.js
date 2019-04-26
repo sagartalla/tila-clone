@@ -179,6 +179,7 @@ class InstantCheckout extends Component {
       currency,
       profileInfo,
       showLoading,
+      isFromCart,
     } = this.props;
     const {
       showMiniAddress,
@@ -225,6 +226,7 @@ class InstantCheckout extends Component {
                             <ShippingAddress
                               miniAddress={true}
                               isPdp={isPdp}
+                              isFromCart={isFromCart}
                               toggleMiniAddress={this.toggleMiniAddress}
                             />
                             : null

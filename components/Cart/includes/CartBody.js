@@ -89,6 +89,7 @@ const CartBody = ({
                   <RightBar
                     data={data}
                     showInstant={true}
+                    isFromCart={true}
                     showCheckoutBtn={true}
                     checkoutBtnHandler={checkoutBtnHandler}
                     openSlider={openSlider}

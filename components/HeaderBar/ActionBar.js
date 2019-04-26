@@ -148,7 +148,7 @@ class ActionBar extends Component {
             }
           </NoSSR>
         </div>
-        <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']}`}>
+        <div className={`${styles['action-item']} ${styles['pr-20']} ${styles['pl-20']} ${styles['border-rt']} ${styles['flex-center']} ${styles['justify-center']}`}>
           <Link route={`/${country}/${language}/cam/wishlist`}>
            <a style={{dispaly:'block'}}>
             <span className={`${styles['flex-center']} ${styles['justify-center']} ${styles['relative']}`} title={PDP_PAGE.GO_TO_WISHLIST}>
