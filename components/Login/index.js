@@ -29,13 +29,13 @@ class Login extends Component {
       {
         field: 'email',
         method: this.validateEmail,
-        message: 'Enter valid emailid',
+        message: 'Please enter valid email ID',
         validWhen: false,
       },
       {
         field: 'password',
         method: this.validateLengthPassword,
-        message: 'Your password must be at least 8 characters long.',
+        message: 'Password must be atleast 8 characters',
         validWhen: false,
       },
     ]);
@@ -327,7 +327,6 @@ class Login extends Component {
                               {LOGIN_PAGE.I_WOULD_LIKE_TO_RECEIVE_OFFERS}
                             </label>
                         </div>
-
                       :
                       null
                   }

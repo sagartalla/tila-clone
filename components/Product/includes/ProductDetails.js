@@ -29,7 +29,7 @@ const ProductDetails = ({ details, keyfeatures, isPreview, productInfo,variantId
               <Panel eventKey="1">
                 <Panel.Heading>
                   <Panel.Title toggle className={styles['key-feature-inn']}>
-                    <h4 className={`${styles['fs-12']} ${styles['fontW600']} ${styles['mb-5']} ${styles['mt-0']} ${styles['flx-space-bw']}`}>
+                    <h4 className={`${styles['fs-14']} ${styles['fontW600']} ${styles['mb-5']} ${styles['mt-0']} ${styles['flx-space-bw']}`}>
                       <span>{PDP_PAGE.PRODUCT_DETAILS}</span>
                       <SVGCompoent clsName={`${styles['expand-icon']}`} src="icons/down-arrow/down-arrow" />
                     </h4>

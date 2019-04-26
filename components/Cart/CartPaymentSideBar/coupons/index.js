@@ -158,7 +158,7 @@ class Coupon extends Component {
           <Button className={`${styles.buttonStyle} ${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles.width35} ${styles['m-10']}`} btnText="Apply" onClick={this.handleInputApply(couponCode || appliedCoupon)} />
         </div>
         <div className={styles.errorStyle}>
-          {errorMsg ? <span className={styles['error-msg']}>{errorMsg}</span> : (copuonAttempted ? (couponApplied ? '' : <span className={styles['error-msg']}>{appliedCoupon} {COUPON_OFFERS.APPLIED_IS_INVALID}</span>) : '')}
+          {errorMsg ? <span className={styles['error-msg']}>{errorMsg}</span> : (copuonAttempted ? (couponApplied ? '' : <span className={styles['error-msg']}>This {appliedCoupon} {COUPON_OFFERS.IS_INVALID}</span>) : '')}
         </div>
         <div className={styles.applyCoupon}>
           {/* TODO: move to a seperate file */}

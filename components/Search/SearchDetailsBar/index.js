@@ -33,6 +33,7 @@ class SearchDetailsBar extends Component {
     super(props);
     this.handleWaypointEnter = this.handleWaypointEnter.bind(this);
     this.handleWaypointLeave = this.handleWaypointLeave.bind(this);
+    this.capitalize = this.capitalize.bind(this);
   }
 
   querySearch = (e) => {
@@ -46,6 +47,10 @@ class SearchDetailsBar extends Component {
 
   handleWaypointLeave() {
     this.props.showSearchBarFilters();
+  }
+
+  capitalize(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
   }
 
   render() {
@@ -75,7 +80,7 @@ class SearchDetailsBar extends Component {
                     <h4 className={`${styles['pl-10']} ${styles['sple-check-prt']}`}>
                       <span>{ SEARCH_PAGE.YOUR_ENTERED } : </span>
                       <a href="javascript: void(0)" onClick={this.querySearch} className={`${styles['fontW600']} ${styles['lgt-blue']}`} data-querysearch={finalQuery.split('-').join(' ')}>
-                        {finalQuery && finalQuery.split('-').join(' ')}
+                        "{finalQuery && this.capitalize(finalQuery.split('-').join(' '))}"
                       </a>
                     </h4>
                   }

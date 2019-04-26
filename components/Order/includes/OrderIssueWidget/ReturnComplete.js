@@ -43,21 +43,22 @@ class ReturnComplete extends Component {
                           <SVGComponent clsName={`${styles['bg-tick-mark-icon']}`} src="icons/common-icon/bg-tick-mark" />
                           <span className={styles['pl-15']}>{ORDER_PAGE.SUCCESS}</span>
                         </h4>
-                        <span><span className={styles['fontW600']}> {ORDER_PAGE.YOUR_ORDER}{selectedItem.name} </span>
+                        <span>
                           <span>
                             {
                               query.returnExchangeType === 'RETURN' ?
-                                ORDER_PAGE.REQ_RETURN_SUCCESS :
-                                ORDER_PAGE.REQ_EXCHANGE_SUCCESS
+                                ORDER_PAGE.REQ_RETURN :
+                                ORDER_PAGE.REQ_EXCHANGE
                             }
                           </span>
+                          <span className={styles['fontW600']}> {selectedItem.name} {ORDER_PAGE.REQ_SUCCESS}</span>
                         </span>
                       </div>
                       <div>
                         <span>
                           {
                             query.returnExchangeType === 'RETURN' ?
-                              ORDER_PAGE.RETURN_MESSAGE : ''
+                              ORDER_PAGE.INCONVENIENCE : ''
 
                           }
                         </span>
