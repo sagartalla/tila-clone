@@ -169,7 +169,7 @@ class Incidents extends Component {
     const isSelected = id === this.state.selectedIncident;
     return (
       <div key={id} onClick={this.selectTicket(id)} className={`${styles['TktTitleContainer']} ${isSelected && styles['openBGColor']}`}>
-        <div className={styles['fs-14p']}>{subject}</div>
+        <div className={styles['fs-14p']} dangerouslySetInnerHTML={{__html: subject}} />
         <div className={`${styles['fs-13p']} ${styles['greyColor']}`}>{referenceNumber}</div>
         <div className={`${styles['fs-12p']} ${styles['greyColor']} ${styles['flex']} ${styles['justify-between']}`}>
           <div>{new Date(createdTime).toDateString()}</div>
@@ -250,7 +250,7 @@ class Incidents extends Component {
     const threadIds = Object.keys(threads).sort((a,b) => b - a);
     return(
       <div>
-        <div className={styles['pV-10']}>{subject}</div>
+        <div className={styles['pV-10']} dangerouslySetInnerHTML={{__html: subject}} />
         {orderNumberTiLa && (this.state.tktOrder ? this.renderOrderItems(this.state.tktOrder) : <div>Getting order details of {orderNumberTiLa}</div>)}
         <div>{threadIds.map(this.renderThread(threads))}</div>
         {fileIds.length ? 
