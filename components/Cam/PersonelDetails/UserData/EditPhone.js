@@ -198,8 +198,8 @@ class EditPhone extends React.Component {
             //   </Col>
             // </Row>
             <h4 className={`${styles['flx-spacebw-alignc']} ${styles['m-0']} ${styles['p-20']}`}>
-              <span className={styles['lgt-blue']}>{CONTACT_INFO_MODAL.EDIT_PHONE_NUMBER}</span>
-              <span onClick={this.handleClose} className={styles['fs-24']}>X</span> 
+              <span>{CONTACT_INFO_MODAL.EDIT_PHONE_NUMBER}</span>
+              <span onClick={this.handleClose} className={`${styles['fs-22']} ${styles['black-color']}`}>X</span> 
             </h4>
           )
         }

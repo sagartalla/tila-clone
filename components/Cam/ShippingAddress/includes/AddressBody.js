@@ -56,11 +56,11 @@ const AddressBody = (props) => {
                     }
                   </div>
                   <div className={styles['address-card-body']}>
-                    <h5 className={`${styles['fontW600']} ${styles['m-0']} ${styles['mb-10']} ${styles['lgt-blue']}`}> {val.first_name + ' ' + val.last_name} </h5>
+                    <h4 className={`${styles['fontW600']} ${styles['m-0']} ${styles['mb-10']}`}> {val.first_name + ' ' + val.last_name} </h4>
                     <address className={`${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['full-address-details']}`} title={val.address_line_1 + ', ' + val.address_line_2 + ', ' + val.city + ', ' + val.country_name + ', ' + val.postal_code}>
                       {val.address_line_1 + ', ' + val.address_line_2 + ', ' + val.city + ', ' + val.country_name + ', ' + val.postal_code}
                     </address>
-                    <span className={`${styles['address-card-phone']} ${styles['fontW600']} ${styles['lgt-blue']}`}>
+                    <span className={`${styles['address-card-phone']} ${styles['fontW600']}`}>
                       {val.mobile_country_code + ' ' + val.mobile_no}
                     </span>
                   </div>
@@ -88,10 +88,10 @@ const AddressBody = (props) => {
         <Col md={4} sm={12} xs={12}>
           <div className={`${styles['address-card']} ${styles['address-card-new']} ${styles['p-20']}`} onClick={props.resetAddAdrressForm}>
             <div className={`${styles['flex-center']} ${styles['flex-wrap']}`}>
-              <h5 className={`${styles['m-0']} ${styles['mb-10']} ${styles['thick-blue']} ${styles['fontW600']} ${styles['flex-center']} ${styles['flex']}`}>
+              <h4 className={`${styles['m-0']} ${styles['mb-10']} ${styles['thick-blue']} ${styles['fontW600']} ${styles['flex-center']} ${styles['flex']}`}>
                 <SVGComponent clsName={`${styles['pls-icon']}`} src="icons/common-icon/plus-icon" />
                 <span className={styles['pl-10']}>{DELIVERY_ADDR_PAGE.ADD_NEW_ADDR}</span>
-              </h5>
+              </h4>
               <p className={`${styles['fs-12']} ${styles['thick-gry-clr']}`}>{DELIVERY_ADDR_PAGE.ADD_NEW_ADDR_TAG}</p>
               <p>
                 <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['small-btn']}`}>
