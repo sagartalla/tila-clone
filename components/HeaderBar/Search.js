@@ -158,7 +158,7 @@ class Search extends Component {
           </Dropdown>
 
           <div className={`${styles['search-btn']} ${styles['r-40']}`} onClick={this.imageSearch}>
-            <SVGComponent clsName={`${styles['searching-icon']}`} src="icons/dragdrop" />
+           <SVGComponent clsName={`${styles['searching-icon']}`} src="icons/camera"/>
           </div>
           <button type="submit" className={styles['search-btn']}><SVGComponent clsName={`${styles['searching-icon']}`} src="icons/search/search-white-icon" /></button>
         </form>
