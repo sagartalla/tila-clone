@@ -226,8 +226,10 @@ class ActionBar extends Component {
                     {isLoggedIn
                       ?
                       <span onClick={this.logoutClick} className={`${styles['flex-center']} ${styles['login-details-inn']} ${styles['pointer']}`}>
-                        <SVGComponent clsName={`${styles['logout-icon']}`} src="icons/common-icon/icon-logout" />
-                        <span className={`${styles['pl-20']} `}>{HEADER_PAGE.LOGOUT}</span>
+                        <a href={`/`} className={styles['flex-center']}>
+                          <SVGComponent clsName={`${styles['logout-icon']}`} src="icons/common-icon/icon-logout" />
+                          <span className={`${styles['pl-20']} `}>{HEADER_PAGE.LOGOUT}</span>
+                        </a>
                       </span>
                       :
                       <span onClick={this.loginClick} className={`${styles['flex-center']} ${styles['login-details-inn']} ${styles['pointer']}`}>
