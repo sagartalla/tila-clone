@@ -284,6 +284,7 @@ const HomePage = () => (
       <div className={`${styles['mb-40']} top-banner-slider`}>
         <Slider
           dots
+          autoplay={true}
           asNavFor={sliderTBS}
           ref={slider => (sliderTBS = slider)}
           lazyLoad={false}
