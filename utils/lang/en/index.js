@@ -370,6 +370,7 @@ export const EN_KEYWORDS = {
     'DELIVER_TO': 'Deliver to',
     'NO_OF_ITEMS_FOUND_FOR': 'items found for',
     'SEARCH_ITEMS': 'items',
+    'FOUND': 'found',
     'SORT_BY': 'Sort by',
     'BEST_MATCH': 'Best Match',
     'BEST_OFFERS': 'Best Offers',
