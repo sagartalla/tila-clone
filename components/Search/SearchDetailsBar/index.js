@@ -70,10 +70,10 @@ class SearchDetailsBar extends Component {
                       <span className={`${styles['fs-10']} ${styles['textColor']}`}>({ SEARCH_PAGE.AUTO_CORRECTED })</span>
                     </a>
                     : 
-                    <h1 className={styles['no-h1']}>{finalQuery && finalQuery.split('-').join(' ')}</h1>
+                    <h1 className={styles['no-h1']}>{finalQuery && this.capitalize(finalQuery.split('-').join(' '))}</h1>
                   }
                   
-                    <span className={`${styles['pl-5']} ${styles['pr-5']}`}>{ results.totalCount }</span> { SEARCH_PAGE.SEARCH_ITEMS }
+                    <span className={`${styles['pl-5']} ${styles['pr-5']}`}>({ results.totalCount.toLocaleString('en') } { SEARCH_PAGE.SEARCH_ITEMS } {SEARCH_PAGE.FOUND})</span>
                   </h4>
                   {
                     spellCheckResp &&
