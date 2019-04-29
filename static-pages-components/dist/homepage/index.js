@@ -264,6 +264,7 @@ const HomePage = () => React.createElement(
         Slider,
         {
           dots: true,
+          autoplay: true,
           asNavFor: sliderTBS,
           ref: slider => sliderTBS = slider,
           lazyLoad: false,
