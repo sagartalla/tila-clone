@@ -219,10 +219,13 @@ class OrderItem extends Component {
                   </Col>
                 </div>
                 {needHelp &&
+                <a href={`/${country}/${language}/help/answers/orders#${orderId}`}>
                   <span className={`${styles['help-position']} ${styles.absolute} ${styles['thick-blue']} ${styles['p-5']} ${styles['flex-center']} ${styles['ml-10']} ${styles.border} ${styles['border-radius4']}`}>
                     <SVGComponent clsName={`${styles['help-icon']}`} src="icons/help-icon/help" />
                     &nbsp;&nbsp;Need Help?
-                  </span>}
+                  </span>
+                </a>
+                  }
               </div>
               {product.order_type === 'EXCHANGE' && product.order_item_type === 'DELIVERY' &&
                 <div className={`${styles['pt-5']} ${styles['pb-5']} ${styles['pl-15']} ${styles['border-t']}`}>
