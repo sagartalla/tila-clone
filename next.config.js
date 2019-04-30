@@ -88,6 +88,11 @@ module.exports = withSourceMaps(withStylus(withCSS({
         'process.env.SENTRY_RELEASE': JSON.stringify(buildId)
       })
     );
+    config.plugins.push(
+      new FilterWarningsPlugin({ 
+        exclude: /mini-css-extract-plugin[^]*Conflicting order between:/,
+      })
+    );
     config.module.rules.push({
       test: /\.svg$/,
       loader: 'svg-inline-loader'

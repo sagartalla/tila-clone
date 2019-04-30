@@ -78,7 +78,8 @@ class EditPhone extends React.Component {
 
     if (this.state.show == true && nextProps.errorMessege != this.state.error) {
       this.setState({
-        error: nextProps.errorMessege
+        error: nextProps.errorMessege,
+        otpResponse:'RESET'
       });
     }
 
@@ -278,7 +279,7 @@ class EditPhone extends React.Component {
                     {/* <span className={styles['error']}>error message</span> */}
                       <a className={`${styles['show-otp']} ${styles['fs-12']} ${styles['thick-blue']}`} onClick={this.fetchOtp}>
                        {otpCount ? `${CONTACT_INFO_MODAL.RESEND} ${CONTACT_INFO_MODAL.OTP}` : CONTACT_INFO_MODAL.SEND_OTP}
-                      </a> 
+                      </a>
                   </div>
                   {/* <Input
                     placeholder={`${CONTACT_INFO_MODAL.ENTER} ${CONTACT_INFO_MODAL.PHONE_NUMBER}`}
@@ -335,9 +336,9 @@ class EditPhone extends React.Component {
             </Row>
             <div>
               {{
-                null: null,
                 FAILURE: <div className={`${styles['thick-red']} ${styles['fs-12']}`}>{CONTACT_INFO_MODAL.ENTER_VALID_OTP}</div>,
-                SUCCESS: ''
+                SUCCESS: '',
+                RESET:''
               }[otpResponse]}
             </div>
           </div>
