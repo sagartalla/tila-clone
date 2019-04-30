@@ -87,10 +87,13 @@ const Order = ({ order }) => {
               {order.orderDate}
             </span>
           </div>
-          <span className={`${styles['thick-blue']} ${styles['p-5']} ${styles['flex-center']} ${styles['ml-10']} ${styles.border} ${styles['border-radius4']}`}>
-            <SVGComponent clsName={`${styles['help-icon']}`} src="icons/help-icon/help" />
+          <a href={`/${country}/${language}/help/answers/orders#${order.id}`}>
+            <span className={`${styles['thick-blue']} ${styles['p-5']} ${styles['flex-center']} ${styles['ml-10']} ${styles.border} ${styles['border-radius4']}`}>
+              <SVGComponent clsName={`${styles['help-icon']}`} src="icons/help-icon/help" />
             &nbsp;&nbsp;Need Help?
-          </span>
+            </span>
+          </a>
+         
         </Col>
         <Col md={5} className={styles['pl-0']}>
           <div className={`${styles['flx-space-bw']}`}>
