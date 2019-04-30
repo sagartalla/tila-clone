@@ -301,7 +301,6 @@ const productReducer = typeToReducer({
   [actions.GET_TRACKING_DETAILS]: {
     PENDING: state => Object.assign({}, state, { ui: { loading: true } }),
     FULFILLED: (state, action) => {
-      console.log(action, '::::action');
       return {
         ...state,
         data: {

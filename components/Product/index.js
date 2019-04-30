@@ -165,7 +165,6 @@ const getProductComponent = (isPreview, taskCode) => {
 /* eslint-disable */
     render() {
       const { productData, userDetails, showLoading, query } = this.props;
-      console.log('query', this.props.query);
       const {
         catalog, titleInfo, keyfeatures, extraOffers, imgUrls, offerInfo, shippingInfo, isWishlisted,
         details, productDescription, catalogObj, categoryType = '', warranty, breadcrums, product_id,
@@ -174,7 +173,6 @@ const getProductComponent = (isPreview, taskCode) => {
       const {
         stickyElements, recentlyViewed, notifyEmail, emailErr,
       } = this.state;
-      console.log(productData, 'rio2ndf2rnh2');
       return (
         <Theme.Provider value={categoryType.toLowerCase()}>
           <div className={`${styles['pdp-wrap']} ${categoryType.toLowerCase()} ${styles[categoryType.toLowerCase()]}`}>

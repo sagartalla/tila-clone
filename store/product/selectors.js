@@ -222,7 +222,6 @@ const getVariantsAndSimilarProducts = (variantId,productId) => (store) => {
     } else {
       variantProducts.push(value)
     }
-    console.log(value);
   })
 
   const variants = _.reduce(variantProducts, (acc, value) => {
