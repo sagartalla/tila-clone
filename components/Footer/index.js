@@ -273,7 +273,7 @@ const FooterBar = props => (
                 </span>
               </div>
               <div className={styles['pt-30']}>
-                <span className={styles['fs-10']}>{FOOTER_PAGE.TILA_RIGHTS}</span>
+                <span className={styles['fs-10']}>&copy;{FOOTER_PAGE.TILA_RIGHTS}</span>
               </div>
             </div>
           </Col>

@@ -489,7 +489,7 @@ export const EN_KEYWORDS = {
     'RETURN': 'Returns',
     'CONSUMER_RIGHT': 'Consumer Rights',
     'DOWNLOAD_APP': 'Download the app',
-    'TILA_RIGHTS': '&copy; 2018 www.tila.com. All rights reserved',
+    'TILA_RIGHTS': '2018 www.tila.com. All rights reserved',
     'SIZE_CHART': 'Size Chart',
 
   },
