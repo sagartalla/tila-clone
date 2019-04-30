@@ -38,7 +38,7 @@ class CartMiniWishList extends Component {
         </Col>
         <Col md={6}>
           {
-            data.length > 0 && data.data.slice(0, 6).map((item, i) => (
+            data.length > 0 && data.slice(0, 6).map((item, i) => (
               <span key={i} className={`${styles['wishlist-img']} ${styles['mr-15']}`}>
                 <img className={styles['img']} src={`${constants.mediaDomain}/${item.img}`} />
               </span>
