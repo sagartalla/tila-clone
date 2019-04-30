@@ -10,15 +10,15 @@ import Input from '../../../common/Input';
 import { languageDefinations } from '../../../../utils/lang/';
 import { actionCreators, selectors } from '../../../../store/cart';
 import { actionCreators as couponActionCreators, selectors as couponSelectors } from '../../../../store/coupons';
-
-const { COUPON_OFFERS } = languageDefinations();
-const cookies = new Cookie();
-
-
 import lang from '../../../../utils/language';
+
 
 import styles_en from './index_en.styl';
 import styles_ar from './index_ar.styl';
+
+
+const { COUPON_OFFERS } = languageDefinations();
+const cookies = new Cookie();
 
 const styles = lang === 'en' ? styles_en : styles_ar;
 
@@ -126,6 +126,7 @@ class Coupon extends Component {
     }
     this.setState({
       errorMsg: '',
+      couponApplied: false,
     });
     this.setState({
       applyCouponRequestCount: this.state.applyCouponRequestCount + 1,
@@ -145,8 +146,8 @@ class Coupon extends Component {
       couponCode, errorMsg, couponApplied, copuonAttempted, appliedCoupon, showPopup, document, background, showBackground,
     } = this.state;
     return (
-      <div>
-        <div className={styles.couponApply}>
+      <div className={`${styles.flex} ${styles['flex-colum']}`}>
+        <div className={`${styles.couponApply} ${styles.flex}`}>
           <Input
             placeholder={' ' + COUPON_OFFERS.ENTER_COUPON_CODE}
             style={{
@@ -158,9 +159,9 @@ class Coupon extends Component {
           <Button className={`${styles.buttonStyle} ${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles.width35} ${styles['m-10']}`} btnText="Apply" onClick={this.handleInputApply(couponCode || appliedCoupon)} />
         </div>
         <div className={styles.errorStyle}>
-          {errorMsg ? <span className={styles['error-msg']}>{errorMsg}</span> : (copuonAttempted ? (couponApplied ? '' : <span className={styles['error-msg']}>This {appliedCoupon} {COUPON_OFFERS.IS_INVALID}</span>) : '')}
+          {(copuonAttempted ? (couponApplied ? '' : <span className={styles['error-msg']}>This {appliedCoupon} {COUPON_OFFERS.IS_INVALID}</span>) : errorMsg ? <span className={styles['error-msg']}>{errorMsg}</span> : '')}
         </div>
-        <div className={styles.applyCoupon}>
+        <div className={`${styles.applyCoupon} ${styles['flex-colum']} ${styles.flex}`}>
           {/* TODO: move to a seperate file */}
           {couponData && couponData.length > 0 && couponData.map(data =>
           (

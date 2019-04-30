@@ -1,20 +1,27 @@
 @import '../../../../layout/main/executables.styl';
 
-.couponDiv
-   border: solid 0.9px border-color;
-   height 180px
-   width: 350px;
-   margin-top: 30px;
-   border-radius: 5px;
-   display: flex;
-   flex-direction: column;
-   justify-content: space-between;
-   &:hover
-    box-shadow: 0 5px 9px 0 rgba(0, 0, 0, 0.05);
+.applyCoupon {
+    width: 100%;
+    overflow: auto;
+    align-items: center;
+    margin-top: 20%;
+    max-height: 800px;
+      .couponDiv {
+        border: solid 0.9px border-color;
+        min-height 170px;
+        width: 350px;
+        margin-top: 30px;
+        box-shadow: 0 5px 9px 0 rgba(0, 0, 0, 0.05);
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        }
+}
 
 .couponApply
-    position: fixed;
-    top: 10%;
+    top: 7%;
+    position: absolute;
     border-radius: 2px;
     box-shadow: 0 3px 9px 0 rgba(0, 0, 0, 0.07);
     background-color: white;
@@ -22,7 +29,7 @@
     display flex
     align-items center
     z-index 5;
-    left: 15%
+    left: 14%;
 
 .couponCodeListing
     padding: 7px;
@@ -47,18 +54,6 @@
     top: 27%;
     transform: rotate(-90deg);
 }
-
-.couponOffer
-    padding: 7px;
-    border-top-left-radius: 7px;
-    border-bottom-left-radius: 7px;
-    width: 40%;
-    border-left: 0 !important;
-    margin-top: 10px;
-    text-align: center;
-    left: -10px;
-    position: relative;
-    height: 33px;
 
 .listingColor
     border: solid 1px listing-border;
@@ -96,31 +91,15 @@
   height 60px
   border 0 !important
 
-.overflow
-  overflow: auto;
-  max-height: 200px;
 
 .border
   border-right: 1px dotted;
   margin-left: 30px;
 
-.ellipsis {
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-  max-width: 500px;
-}
-
-.applyCoupon {
-    position: absolute;
-    left: 15%;
-    top: 20%;
-}
-
 .errorStyle {
-    position: absolute
-    top: 20%
-    left: 15%;    
+    position: absolute;
+    top: 18%
+    left: 15%;
 }
 
 .apply-btn {

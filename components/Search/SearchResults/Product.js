@@ -97,7 +97,7 @@ class Product extends Component {
       catalog_id,
       product_id,
       variant_id,
-      wishlisted_price: variants[selectedIndex].sellingPrice[0],
+      wishlisted_price: variants && variants[selectedIndex] && variants[selectedIndex].sellingPrice && variants[selectedIndex].sellingPrice[0],
       wishlisted_currency: currency,
     });
   }

@@ -23,12 +23,13 @@ class Slider extends Component {
       isOpen &&
       <div className={`${styles.slider} ${styles.fixed}`} onClick={closeSlider}>
         <div
-          className={`${styles.sliderInner} ${styles.flex} ${styles.width50} ${styles['ht-100P']} ${styles.absolute} ${styles['align-center']} ${styles['justify-around']}`}
+          className={`${styles.sliderInner} ${styles['ht-100P']} ${styles.absolute} ${styles['align-center']} ${styles['justify-around']}`}
           onClick={this.handleChild}
         >
           <span
-            className={`${styles.cross} ${styles.absolute} ${styles.flex} ${styles['align-center']} ${styles['fs-40']}`}
+            className={`${styles.cross} ${styles.flex} ${styles['align-center']} ${styles['fs-40']} ${styles['justify-between']} ${styles.width100}`}
           >
+            <span className={`${styles['fs-20']} ${styles['lgt-blue']} ${styles['ml-20']}`}>{label}</span>
             <span
               role="button"
               onClick={closeSlider}
@@ -36,7 +37,6 @@ class Slider extends Component {
             >
               &times;
             </span>
-            <span className={`${styles['fs-20']} ${styles['lgt-blue']} ${styles['ml-20']}`}>{label}</span>
           </span>
           {children}
         </div>
