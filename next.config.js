@@ -6,6 +6,7 @@ const path = require('path');
 const git = require('git-rev-sync');
 const webpack = require('webpack')
 const withSourceMaps = require('@zeit/next-source-maps')
+const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 // require('./deploy/env');
 if(process.env.npm_package_config_ENV) {
@@ -89,7 +90,7 @@ module.exports = withSourceMaps(withStylus(withCSS({
       })
     );
     config.plugins.push(
-      new FilterWarningsPlugin({ 
+      new FilterWarningsPlugin({
         exclude: /mini-css-extract-plugin[^]*Conflicting order between:/,
       })
     );
