@@ -17,7 +17,7 @@ import { languageDefinations } from '../../../utils/lang';
 import NotifyMe from '../../common/NotifyMe/NotifyMe';
 import Button from '../../common/CommonButton';
 import { selectors as cartSelector } from '../../../store/cart';
-import { selectors as compareSelectors} from '../../../store/compare'
+import { selectors as compareSelectors } from '../../../store/compare';
 
 import RenderVariants from './renderVariants';
 
@@ -171,38 +171,39 @@ class Product extends Component {
     let productInfo = {
       pageFragmentation: pageNum,
       itemPosition: index
-    }
-    digitalData.product.push(productInfo)
+    };
+    digitalData.product.push(productInfo);
     var event = new CustomEvent('event-pageItem-click');
     document.dispatchEvent(event);
   }
 
   routeChange(productId, variantId, catalogId, itemtype, index, pageNum) {
-    this.itemNumberClick(index, pageNum)
+    this.itemNumberClick(index, pageNum);
     // Router.pushRoute(`/${country}/${language}/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemtype}`)
   }
 
   preventDefaultClick(e) {
-    if( e.target.nodeName === 'LABEL' ) {
-      e.preventDefault()
-      this.addToCompare(e)
+    if (e.target.nodeName === 'LABEL') {
+      e.preventDefault();
+      this.addToCompare(e.target.previousSibling.checked);
     }
   }
 
-  addToCompare(e) {
-    
+  addToCompare(checked) {
     const {
-      productId, itemtype, media, displayName, categoryId,
+      productId, itemtype, media, displayName, categoryId, addToCompare, removeCompareData,
     } = this.props;
 
     const src = `${constants.mediaDomain}/${media[0]}`;
-    this.props.addToCompare({
-      itemtype,
-      productId,
-      src,
-      displayName,
-      categoryId,
-    });
+    if (!checked) {
+      addToCompare({
+        itemtype,
+        productId,
+        src,
+        displayName,
+        categoryId,
+      });
+    } else removeCompareData(productId);
   }
 
   loaderClick = (e) => {
@@ -219,19 +220,15 @@ class Product extends Component {
       variantId,
       catalogId,
       itemtype,
-      priceRange,
       currency,
-      offers,
-      addedToCart,
-      addedToWishlist,
       brand,
       index,
       pageNum,
       userDetails,
       selectedID,
       flags,
+      addedToWishlist,
       cartButtonLoaders,
-      isLastAddedToCartSuccess,
       btnLoading,
       cmpData,
     } = this.props;
@@ -266,7 +263,7 @@ class Product extends Component {
               >
                 <span className={`${styles['success-green']} ${styles['ml-5']} ${styles.pointer}`}>
                   {variants[selectedIndex].offersApplied.length} offers
-              </span>
+                </span>
               </OverlayTrigger>
             }
           </React.Fragment>}
@@ -280,7 +277,7 @@ class Product extends Component {
             {
             `${styles['product-items-main']} ${styles['p-0']} ${selectedProduct ? styles['active-product'] : ''}`}
             onClick = {() => this.routeChange(productId,variantId,catalogId,itemtype,index,pageNum)}>
-          <Link route={`/${country}/${language}/product?productId=${productId} ${variants.length > 0 && variants[selectedIndex].variantId ? `&variantId=${variants[selectedIndex].variantId}` : ''}&catalogId=${catalogId}&itemType=${itemtype}`}>
+          <Link route={`/${country}/${language}/product?productId=${productId}${variants.length > 0 && variants[selectedIndex].variantId ? `&variantId=${variants[selectedIndex].variantId}` : ''}&catalogId=${catalogId}&itemType=${itemtype}`}>
             <a>
               <div className={`${styles['product-items']}`}>
                 {
@@ -447,6 +444,7 @@ const mapDispatchToProps = (dispatch) => {
     {
       addToWishlistAndFetch: actionCreators.addToWishlistAndFetch,
       addToCompare: compareActions.addToCompare,
+      removeCompareData: compareActions.removeCompareData,
     },
     dispatch,
   );

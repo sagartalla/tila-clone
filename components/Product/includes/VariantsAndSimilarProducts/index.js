@@ -87,7 +87,6 @@ class VariantsAndSimilarProducts extends Component {
     const { variants, itemType, similarProducts } = VariantsAndSimilarProducts;
     const { display: variantsDisplay } = variants;
     const { display: similarProductsDisplay } = similarProducts;
-    console.log('variants', variantsDisplay);
     return (
       <div className={`${styles['flex-center']} ${styles['border-b']} ${styles['flex-wrp']}`}>
         {

@@ -162,7 +162,6 @@ class ShippingAddress extends Component {
   }
 
   validate = (fieldvalue) => {
-    console.log(fieldvalue, 'fgkeuf');
     return fieldvalue === '';
   }
 
