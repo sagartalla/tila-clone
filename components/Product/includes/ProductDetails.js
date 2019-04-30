@@ -18,7 +18,6 @@ const styles = lang === 'en' ? styles_en : styles_ar;
 const { PDP_PAGE } = languageDefinations();
 
 const ProductDetails = ({ details, keyfeatures, isPreview, productInfo,variantId,productId }) => {
-  console.log('details', keyfeatures);
   return (
     <div className={`${styles['product-details-main']} ${styles['border-radius4']} ${styles['mb-5']} ${styles['box']}`}>
       {

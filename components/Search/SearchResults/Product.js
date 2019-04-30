@@ -227,6 +227,7 @@ class Product extends Component {
       userDetails,
       selectedID,
       flags,
+      addedToWishlist,
       cartButtonLoaders,
       btnLoading,
       cmpData,
@@ -262,7 +263,7 @@ class Product extends Component {
               >
                 <span className={`${styles['success-green']} ${styles['ml-5']} ${styles.pointer}`}>
                   {variants[selectedIndex].offersApplied.length} offers
-              </span>
+                </span>
               </OverlayTrigger>
             }
           </React.Fragment>}

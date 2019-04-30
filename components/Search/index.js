@@ -32,7 +32,6 @@ const onClickMenuHandle = (e) => {
   const target = e.currentTarget;
   setTimeout(() => {
     const top = target.offsetHeight - window.innerHeight + 10;
-    console.log('top', top);
     if(top > 0) {
       target.style.top = `-${top}px`;
     } else {

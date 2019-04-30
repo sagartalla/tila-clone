@@ -168,7 +168,6 @@ class Login extends Component {
       this.props.resetLoginError();
     } else {
       this.props.track('SignIn', 'password length error');
-      console.log('password Error');
     }
     this.setState({ validation });
   }
