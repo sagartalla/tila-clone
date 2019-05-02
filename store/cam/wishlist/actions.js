@@ -26,7 +26,7 @@ const actionCreators = {
     return dispatch({
       type: actions.DELETE_TO_WISHLIST,
       payload: apis.deleteWishlistApi(wishlist_id, showToast, currentPage),
-    });
+    }).then(() => dispatch(actionCreators.getWishlistProducts()));
   }),
   addToCart: (params, wishlist_id, getCartData) => (dispatch, getState) => dispatch(cartActionCreators.addToCart(params)).then(() => {
     if (getCartData) {
@@ -57,7 +57,7 @@ const actionCreators = {
   }),
   track: params => (dispatch, getState) => {
     const state = getState();
-    params.postResult = state.wishlistReducer.data;
+    params.postResult = state.wishlistReducer.products;
     return {
       type: actions.WISHLIST_TRACK,
       payload: apis.track(params),
