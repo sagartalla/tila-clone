@@ -37,12 +37,11 @@ class CartAndPaymentSideBar extends Component {
   }
   render() {
     const {
-      checkoutBtnHandler, showCheckoutBtn, showInstant,
+      checkoutBtnHandler, showCheckoutBtn, showInstant, isFromCart,
       hideUpSell, showStepper, increaseItemCnt, decreaseItemCnt,
       insnt_item_listing_id, isPdp, couponData, getCartResults, data, hideCouponCode,
     } = this.props;
 
-    console.log('showinstant', showInstant);
     const {
       items, total_price, total_offer_price, total_gift_charges,
       total_discount, total_shipping, tax, item_cnt, currency,
@@ -84,8 +83,10 @@ class CartAndPaymentSideBar extends Component {
             <InstantCheckout
               insnt_item_listing_id={insnt_item_listing_id}
               isPdp={isPdp}
+              isFromCart={isFromCart}
               totalPrice={total_price}
               currency={currency}
+              isMounted={false}
             />
           </div>
           : null
@@ -111,11 +112,11 @@ class CartAndPaymentSideBar extends Component {
         <div className={styles['p-20']}>
           <ul className={`${styles['m-0']} ${styles['p-0']} ${styles['fs-12']}`}>
             <li><h5 className={`${styles['mb-15']} ${styles['mt-5']} ${styles['fs-16']} ${styles.fontW600} ${styles['light-gry-clr']}`}>{CART_PAGE.ORDER_SUMMARY}</h5></li>
-            <li>{CART_PAGE.PRICE} ({`${item_cnt} ${CART_PAGE.ITEMS}`})<span> {`${total_offer_price} ${currency}`}</span></li>
+            <li><span>{CART_PAGE.PRICE} ({`${item_cnt} ${CART_PAGE.ITEMS}`})</span><span> {`${total_offer_price} ${currency}`}</span></li>
             {
             showStepper ?
               <li>
-                {CART_PAGE.QUANTITY}
+                <span>{CART_PAGE.QUANTITY}</span>
                 <span>
                   <CartStepper
                     item={items[0]}
@@ -125,17 +126,19 @@ class CartAndPaymentSideBar extends Component {
                 </span>
               </li> : null
           }
-            <li>{CART_PAGE.DELIVERY_CHARGES} <span>{total_shipping} {currency}</span></li>
-            <li>{CART_PAGE.GIFT_CHARGES} <span>{total_gift_charges} {currency}</span></li>
+            <li><span>{CART_PAGE.DELIVERY_CHARGES} </span><span>{total_shipping} {currency}</span></li>
+            <li><span>{CART_PAGE.GIFT_CHARGES} </span><span>{total_gift_charges} {currency}</span></li>
             {
-            tax !== 0 ? <li>{CART_PAGE.TAXES} <span>{currency}</span></li> : null
+            tax !== 0 ? <li><span>{CART_PAGE.TAXES}</span> <span>{currency}</span></li> : null
           }
-            <li className={`${styles['mt-20']} ${styles['fs-16']} ${styles['light-gry-clr']} ${styles.flex} ${styles['flex-colum']}`}><b>{CART_PAGE.TOTAL_AMOUNT} <span>{`${total_price} ${currency}`}</span></b>
+            <li className={`${styles['mt-20']} ${styles['fs-16']} ${styles['light-gry-clr']}`}><b>{CART_PAGE.TOTAL_AMOUNT}</b>
+            <span className={`${styles.flex} ${styles['flex-colum']} ${styles['t-rt']}`}><span className={styles['fontW600']}>{`${total_price} ${currency}`}</span>
               {
                 total_discount > 0 ?
                   <span className={`${styles['fs-12']} ${styles['thick-red']} ${styles['t-rt']}`}>{CART_PAGE.YOU_SAVED} {total_discount} {currency}</span>
                 : null
               }
+              </span>
             </li>
 
           </ul>

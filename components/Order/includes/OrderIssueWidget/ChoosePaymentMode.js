@@ -87,7 +87,6 @@ class ChoosePaymentMode extends Component {
   }
   render() {
     const { orderDetails, orderIssue } = this.props;
-    console.log('orderdata',orderIssue);
     const { paymentType } = this.state;
     return (
       <div>

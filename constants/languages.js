@@ -1,14 +1,14 @@
 const languageData = {
-  en: {
+  ar: {
     img: '/static/img/bg-img/ksa.png',
-    name: 'en',
+    name: 'English',
     id: 'en',
   },
-  ar: {
+  en: {
     img: '/static/img/bg-img/uae.png',
-    name: 'ar',
+    name: 'العَرَبِيَّة',
     id: 'ar',
-  }
+  },
 };
 
 export default languageData;

@@ -16,7 +16,7 @@ const styles = lang === 'en' ? styles_en : styles_ar;
 const { DELIVERY_ADDR_PAGE } = languageDefinations();
 
 const DeliveryAddress = props => {
-  const { configJson, defaultAddress, handleShippingAddressContinue, editAddressTab } = props;
+  const { configJson, defaultAddress, handleShippingAddressContinue, editAddressTab, showNonShippable } = props;
 
   return (
     <div className={`${styles['delivery-adress-prt']} ${styles['box']} ${styles['mb-20']} ${styles['relative']}`}>
@@ -51,6 +51,7 @@ const DeliveryAddress = props => {
           <div className={`${styles['pb-5']} ${styles['pt-5']}`}>
             <h4 className={`${styles['mb-20']} ${styles['mt-0']}`}>{DELIVERY_ADDR_PAGE.DELIVERY_ADDR}</h4>
             <ShippingAddress
+              showNonShippable={showNonShippable}
               handleShippingAddressContinue={handleShippingAddressContinue}
             />
           </div>

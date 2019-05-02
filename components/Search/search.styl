@@ -14,9 +14,14 @@
 .search-main-part
   min-height 530px
 
+.search-main-part .product-items-main:nth-child(4) {
+  margin-right 0
+}
+
 .search-results
   float left
   width calc(82% - 20px)
+  padding 0 0 0 10px
   .no-search
     width 300px
     text-align center
@@ -26,7 +31,7 @@
   .caption
     background white
   .product-items-main
-    width 276px
+    width 24.85%
     padding-bottom 20px
     margin-right 1px
     .loader-div
@@ -155,14 +160,22 @@
         background-color white
         color navy-blue
         width 50%
-        height: 35px;
+        height 35px
         .cart-list
           margin-right 8px
+        i
+          width: 14px
+          height: 14px
+          margin-right: 5px
       .buy-now-btn
         border-bottom-right-radius 16px
         color white
         width 50%
         height 35px
+        i
+          width: 18px
+          height: 14px
+          margin-right: 5px
         .cart-list
           height 20px
           width 20px
@@ -191,22 +204,33 @@
 
     .wish-list-part
       margin 10px 8px
-      // border-bottom: 1px solid cam-border-gray
-      // padding-bottom: 10px;
       .wish-list
         width 15px
         height 15px
 
   .items-list-show
-    align-items flex-end
+    align-items center
+    .sple-check-prt
+      border-left 1px solid bor-light-gry
     .deliver-to-main
-      width 50%
-      .delovery-inn
-        width 60%
+      width 55%
+      justify-content flex-end
+      align-items center
       .sort-part-inn
-        width 50%
-        label
-          width 40%
+        padding-left 15px
+        display flex
+        border-left 1px solid border-gray
+        padding-left 15px
+          .sort-arrow
+            width 12px
+            height 12px
+        
+        .select-mn .select-text
+          border 0
+          background-color transparent
+
+        .select-mn .select-text:focus
+          outline none
 
   .suggested-tags-main
     .suggest-sublist
@@ -225,7 +249,8 @@
       height 16px
 
   .applied-tags
-    justify-content space-between
+    .applied-tags-i
+      max-width 70%
     .applied-tags-inn
       background: linear-gradient(to left, gray-light, white)
       border-radius: 15px
@@ -294,7 +319,7 @@
     box-shadow 0 2px 10px 0 rgba(0, 0, 0, 0.1)
     z-index 11
     position absolute
-    width 276px
+    width 24.85%
 
     .fullfill-main
       // background-color: rgba(216, 216, 216, 0.8)
@@ -352,7 +377,7 @@
 .grid-cont
   // overflow hidden
   position relative
-  // border 1px solid border-gray
+  border 1px solid rgba(151, 151, 151, 0.2)
   box-shadow 0 2px 7px 0 rgba(0,0,0,0.03)
   background-color white
   border-radius 10px
@@ -369,23 +394,13 @@
       height 22px
       top 20px
       left 20px
-      // position absolute
     .offer-tag
-      // position: absolute;
       top: 0
       left: 0
       padding: 6px 10px;
       border-bottom-right-radius 26px
       border-top-left-radius 10px
       color white
-      // .down-arrow
-      //   width 0
-      //   height 0
-      //   border-left 10px solid transparent
-      //   border-right 10px solid transparent
-      //   // border-top: 10px solid red;
-      //   // position absolute
-      //   top -16px
       &.green
         background generic-green-color
       &.yellow
@@ -406,20 +421,15 @@
       width 100%
       height 100%
       overflow hidden
-      display flex
-      justify-content center
-      align-items center
       img
         max-height 100%
         max-width 100%
         object-fit scale-down
 
 .category-list
-  // border-bottom 0.5px solid border-gray
-  // padding-bottom 10px
 
   .category-list-title
-    border-bottom 0.5px solid border-gray
+    border-bottom 0.5px solid light-brdr
     a
       display flex
       justify-content space-between
@@ -429,6 +439,9 @@
       .expand-icon
         width 16px
         height 16px
+
+.category-list-title span
+  font-size 13px
 
 .category-sub-list
   // padding 10px 0 0 20px
@@ -451,7 +464,7 @@
   width 50%
   border 0
   background transparent
-  border-bottom 1px solid light-gray
+  border-bottom 1px solid light-brdr
   border-radius 0
   -webkit-appearance none
   -moz-appearance none

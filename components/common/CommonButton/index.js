@@ -10,7 +10,7 @@ const styles = lang === 'en' ? styles_en : styles_ar;
 /* eslint-disable */
 
 
-class Button extends Component { 
+class Button extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -30,18 +30,17 @@ class Button extends Component {
     });
   }
   render() {
-    const { className, style, onClick, disabled, hoverClassName, showImage, btnText, id } = this.props;
+    const { className, onClick, disabled, hoverClassName, showImage, btnText, id } = this.props;
     let { btnLoading } = this.props;
     const { hover } = this.state;
     return (
     <button
         className={hover ? ` ${styles['button-hoverstyl']} ${className} ${styles[hoverClassName]}` : `${styles['button-styl']} ${className}` }
-        style={style}
         id={id}
         onClick={onClick}
         disabled={disabled}
         onMouseOver={this.onMouseEnter(true)}
-        onMouseOut={this.onMouseEnter(false)}        
+        onMouseOut={this.onMouseEnter(false)}
     >
     {btnLoading ?
       <div className={`${styles['loader-div']}`} >
@@ -49,9 +48,9 @@ class Button extends Component {
       </div>
       :
       showImage ?
-        <div className={`${styles.flex} ${styles['align-center']}`}>
+        <div className={`${styles.flex} ${styles['align-start']}`}>
           <SVGCompoent clsName={`${styles['image-icon']}`} src={showImage} />
-        {btnText}
+          <span>{btnText}</span>
         </div> :
     btnText}
   </button>
@@ -66,6 +65,7 @@ Button.propTypes = {
   btnLoading: PropTypes.bool,
   disabled: PropTypes.bool,
   id: PropTypes.string,
+  style: PropTypes.object,
 };
 Button.defaultProps = {
   onClick: f => f,
@@ -74,5 +74,6 @@ Button.defaultProps = {
   btnLoading: false,
   disabled: false,
   id: '',
+  style: {},
 };
 export default Button;

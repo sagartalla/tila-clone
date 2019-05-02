@@ -25,7 +25,7 @@ const filterVariants = (cartListingId,variants) => {
 }
 const addCartAndWishlistDetails = (store, results) => {
   const { items = [] } = store.cartReducer.data;
-  const { data = [] } = store.wishlistReducer;
+  const { products = [] } = store.wishlistReducer;
 
   if (items === null) {
     return results;
@@ -37,13 +37,20 @@ const addCartAndWishlistDetails = (store, results) => {
   //   return resutls;
   // }
   const cartListingIds = items.map(i => i.listing_id) || [];
-  const wishListProductIds = data && data.length > 0 && (data.map(w => w.product_id) || []);
+  const wishListProductIds = products && products.length > 0 && (products.map(w => w.product_id) || []);
+
+  const wishlistItems = {};
+  products.forEach((p) => {
+    wishlistItems[p.product_id] = p.wishlist_id;
+  });
+
   return {
     ...results,
     items: results.items.map((i) => {
       return ({
         ...i,
-        variants:filterVariants(cartListingIds,i.variants),
+        wishlistId: wishlistItems[i.productId] || '',
+        variants: filterVariants(cartListingIds, i.variants),
         addedToWishlist: wishListProductIds && wishListProductIds.indexOf(i.productId) !== -1,
       });
     }),
@@ -133,6 +140,7 @@ const getSearchResutls = (store) => {
            // modifiedVaraintsCopy = Object.assign(modifiedVaraints);
           modifiedVaraintsCopy['productSize'] = Object.values(v.attributes)[0]
           modifiedVaraintsCopy['productAvailable'] = true
+          modifiedVaraintsCopy['variantId'] = v.id
           _.forEach(attributesData, (val, key) => {
             modifiedVaraintsCopy[key] = modifiedVaraintsCopy[key] || [];
             modifiedVaraintsCopy[key] = modifiedVaraintsCopy[key].concat(val);
@@ -140,6 +148,7 @@ const getSearchResutls = (store) => {
         } else {
           modifiedVaraintsCopy['productSize'] = Object.values(v.attributes)[0]
           modifiedVaraintsCopy['productAvailable'] = false
+          modifiedVaraintsCopy['variantId'] = v.id
         }
 
         modifiedVaraints.push(modifiedVaraintsCopy)
@@ -181,7 +190,7 @@ const getSearchResutls = (store) => {
         // priceRange,
         currency,
         categoryId,
-        flags: product.flags
+        flags: product.flags,
       };
     });
   }

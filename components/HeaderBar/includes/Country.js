@@ -22,6 +22,11 @@ const styles = lang === 'en' ? styles_en : styles_ar;
 
 const cookies = new Cookies();
 
+
+/*
+  Changed the logic for one country mapping
+  Support for only one country. Need to update the logic for multiple countries.
+*/
 class Country extends Component {
   constructor(props) {
     super(props);
@@ -46,14 +51,17 @@ class Country extends Component {
 
   changeCountry(e) {
     const id = e.currentTarget.getAttribute('data-id');
-    if (id !== this.state.selectedItem) {
-      confirm('Do you wish to change the country, the cart will change accordingly') ?
-        this.setState({
-          selectedItem: id,
-        }, () => {
-          this.storeCountry(id);
-        }) : null;
-    }
+    const { domainCountries } = this.props;
+    if (domainCountries.length > 1) {
+      if (id !== this.state.selectedItem) {
+        confirm('Do you wish to change the country, the cart will change accordingly') ?
+          this.setState({
+            selectedItem: id,
+          }, () => {
+            this.storeCountry(id);
+          }) : null;
+      }
+    } 
   }
 
   storeCountry(country) {
@@ -80,26 +88,34 @@ class Country extends Component {
   render() {
     const { domainCountries } = this.props;
     const { selectedItem } = this.state;
-    const obj = domainCountries.length > 0 ?
-      domainCountries.filter(domain => domain.country.code3 === selectedItem)[0] : {};
+    const obj = domainCountries.length > 0 ? domainCountries.length > 1 ?
+      domainCountries.filter(domain => domain.country.code3 === selectedItem)[0] : domainCountries[0] : {};
+    if (Object.keys(obj).length === 0) return null;
     return (
-      <Dropdown id="country-dd" className={styles['country-dd']}>
-        <Dropdown.Toggle>
-          <img src={countriesData[selectedItem].img} alt={obj.name} title={obj.name} />
-        </Dropdown.Toggle>
-        <Dropdown.Menu className={styles.item}>
-          {domainCountries.length > 0 &&
-            domainCountries.map(domain => (
-              <MenuItem key={domain.country.code3} eventKey="1" onClick={this.changeCountry} data-id={domain.country.code3}>
-                <img src={countriesData[domain.country.code3].img} title={domain.name} />
-              </MenuItem>
-            ))
-          }
-        </Dropdown.Menu>
-      </Dropdown>
+      
+      <div className={`${styles.pointer} ${styles['pl-20']} ${styles['pr-20']} ${styles['border-rt']}`}>
+        <img src={countriesData[selectedItem].img} alt={obj.name} title={obj.name} />
+      </div>
     );
   }
 }
+
+
+/* <Dropdown id="country-dd" className={styles['country-dd']}>
+<Dropdown.Toggle>
+  <img src={countriesData[selectedItem].img} alt={obj.name} title={obj.name} />
+</Dropdown.Toggle>
+<Dropdown.Menu className={styles.item}>
+  {domainCountries.length > 0 &&
+    domainCountries.map(domain => (
+      <MenuItem key={domain.country.code3} eventKey="1" onClick={this.changeCountry} data-id={domain.country.code3}>
+        <img src={countriesData[domain.country.code3].img} title={domain.name} />
+      </MenuItem>
+    ))
+  }
+</Dropdown.Menu>
+</Dropdown> */
+
 
 const mapStateToProps = store => ({
   domainCountries: selectors.getDomainCountries(store),

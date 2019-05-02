@@ -122,7 +122,7 @@ const ProductPrice = ({offerInfo}) => {
           }
         </Fragment>
       :
-        <h2>
+        <h2 className={styles['fs-16']}>
           {
             availabilityError
             ?

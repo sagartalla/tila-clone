@@ -39,7 +39,7 @@ class Warranty extends React.Component {
     const warranty_display = `${warranty.duration} ${warranty.duration_unit} ${PDP_PAGE.WARRANTY}`;
     return (
       <div className={`${styles['flex-center']} ${styles['warranty-part']}  ${styles.relative} ${styles.pointer}`}>
-        <span className={`${styles['flex-center']}`}><span className={styles['pl-10']}>{warranty_display}</span></span>
+        <span className={`${styles['flex-center']}`}><span>{warranty_display}</span></span>
         <a className={`${styles.fontW600} ${styles['ml-20']} ${styles['view-more-label']} ${styles['fs-12']}`} onClick={this.openSlider}>View More</a>
         {this.state.slider &&
         <Slider label="Warranty" isOpen={this.state.slider} closeSlider={this.closeSlider}>

@@ -100,7 +100,7 @@ class OrderHeader extends Component {
                 <div className={styles['thick-gry-clr']}>{address}</div>
               </Col>
               {order_type !== 'EXCHANGE' ?
-                <Col md={5} xs={6} sm={5} className={`${styles['ipad-p-0']} ${styles['thick-border-left']} ${styles['thick-border-right']}`}>
+                <Col md={5} xs={6} sm={5} className={`${styles['ipad-p-0']} ${styles['thick-border-left']} ${styles['thin-border-right']}`}>
                   <div>
                     <h5 className={`${styles['mt-0']} ${styles['fs-16']} ${styles['flex-center']} ${styles['light-gry-clr']}  ${styles['mb-20']}`}>
                       <Col md={6} sm={6} className={styles['thick-gry-clr']}>{ORDER_PAGE.ORDER_SUMMARY}</Col>
@@ -123,7 +123,7 @@ class OrderHeader extends Component {
                   </div>
                 </Col>
                 :
-                <Col md={4} xs={6} sm={4} className={`${styles['ipad-p-0']} ${styles['thick-border-left']} ${styles['thick-border-right']}`}>
+                <Col md={4} xs={6} sm={4} className={`${styles['ipad-p-0']} ${styles['thick-border-left']} ${styles['thin-border-right']}`}>
                   <div className={`${styles['pl-15']} ${styles['pr-15']}`}>
                     <div className={styles.flex}>
                       <span className={styles['green-label']}>Exchange</span>

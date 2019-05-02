@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Modal } from 'react-router-modal';
 import { selectors as productSelectors, actionCreators as productActionCreators } from '../../../store/product';
+import { selectors as cartSelectors } from '../../../store/cart';
 import AddressNew from './includes/AddressNew';
 import AddressBody from './includes/AddressBody';
 import MiniAddress from './includes/MiniAddress';
@@ -13,6 +14,7 @@ import AddressHeader from './includes/AddressHeader';
 import { languageDefinations } from '../../../utils/lang/';
 import { actionCreators, selectors } from '../../../store/cam/address';
 import FormValidator from '../../common/FormValidator';
+import Slider from '../../common/slider';
 
 import lang from '../../../utils/language';
 
@@ -84,6 +86,7 @@ class ShippingAddress extends Component {
       addr: initialAddrObj,
       validation: this.validations.valid(),
       showNewAddr: false,
+      showSlider: true,
       showCitiesData: false,
       showCountriesData: false,
     };
@@ -159,7 +162,6 @@ class ShippingAddress extends Component {
   }
 
   validate = (fieldvalue) => {
-    console.log(fieldvalue, 'fgkeuf');
     return fieldvalue === '';
   }
 
@@ -191,6 +193,10 @@ class ShippingAddress extends Component {
     this.props.deleteAddress(addrId);
   }
 
+  closeSlider = () => {
+    this.setState({ showSlider: false });
+  }
+
   editAddress(addrId) {
     const { getAddrById, getCitiesByCountryCode } = this.props;
     const addr = getAddrById(addrId)[0];
@@ -215,7 +221,11 @@ class ShippingAddress extends Component {
   }
 
   showAddAdrressForm() {
-    this.setState({ showNewAddr: !this.state.showNewAddr });
+    const { isFromCart } = this.props;
+    this.setState({
+      showNewAddr: isFromCart ? true : !this.state.showNewAddr,
+      showSlider: true,
+    });
   }
 
   // TODO if adding service fail, we should not clearuser added data. SF-25
@@ -242,15 +252,20 @@ class ShippingAddress extends Component {
   render() {
     // if standalone is true, it is stand alone address page else from payment page or any other pages.
     const {
-      results, standalone, handleShippingAddressContinue, miniAddress, isPdp, getAllCities, countriesData,
+      results, standalone, handleShippingAddressContinue, miniAddress, isPdp, getAllCities, countriesData, cartResults, showNonShippable,
     } = this.props;
     const {
-      showNewAddr, addr, showCitiesData, showCountriesData, validation,
+      showNewAddr, addr, showCitiesData, showCountriesData, validation, showSlider,
     } = this.state;
     const { DELIVERY_ADDR_PAGE } = languageDefinations();
-
     return (
       <div className={`${styles['address-container']} ${standalone !== true ? '' : `${styles.box} ${styles['ml-5']}`} `}>
+        {!cartResults.cart_shippable && (cartResults.cart_shippable !== undefined) && showNonShippable &&
+        <div className={`${styles['not-shippable']} ${styles.flex} ${styles['mb-20']} ${styles['p-10']}`}>
+          <Col md={2} sm={3} xs={3} className={`${styles['thick-red-clr']} ${styles.fontW600} ${styles['not-shipping-font']}`}>{DELIVERY_ADDR_PAGE.NOT_SHIPPABLE}</Col>
+          <Col md={10} sm={9} xs={9} className={`${styles['fs-12']} ${styles.fontW600}`}>{DELIVERY_ADDR_PAGE.UNFORTUNATELY_WE_CANNOT_DELIVER_REMOVE_ITEM}</Col>
+        </div>
+      }
         {
           miniAddress ?
             <Fragment>
@@ -284,7 +299,11 @@ class ShippingAddress extends Component {
                       />
                     </div>
                     :
-                    <Modal className={`react-router-modal__modal ${styles['right-side-modal']}`}>
+                    <Slider
+                      isOpen={showSlider}
+                      label=" "
+                      closeSlider={this.closeSlider}
+                    >
                       <AddressNew
                         inputOnChange={this.inputOnChange}
                         saveBtnClickHandler={this.saveBtnClickHandler}
@@ -304,7 +323,7 @@ class ShippingAddress extends Component {
                         showCountriesData={showCountriesData}
                         selectCountry={this.selectCountry}
                       />
-                    </Modal>
+                    </Slider>
                   : ''
               }
             </Fragment>
@@ -354,7 +373,7 @@ class ShippingAddress extends Component {
                 {
                   standalone !== true ?
                     <Col md={12} sm={12} xs={12} className={`${styles['pl-15']}`}>
-                      <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']}`} onClick={handleShippingAddressContinue}>{DELIVERY_ADDR_PAGE.CONTINUE}</button>
+                      <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']}`} disabled={cartResults.cart_shippable !== undefined && !cartResults.cart_shippable} onClick={handleShippingAddressContinue}>{DELIVERY_ADDR_PAGE.CONTINUE}</button>
                     </Col>
                     : null
                 }
@@ -371,6 +390,7 @@ const mapStateToProps = store => ({
   getAddrById: selectors.getAddrById(store),
   getAllCities: productSelectors.getAllCities(store),
   countriesData: productSelectors.getAllCountries(store),
+  cartResults: cartSelectors.getCartResults(store),
 });
 
 const mapDispatchToProps = dispatch =>

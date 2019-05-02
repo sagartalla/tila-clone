@@ -4,7 +4,6 @@ const axios = require('axios');
 const Cookies = require('universal-cookie');
 const _ = require('lodash');
 const constants = require('./store/helper/constants/constants');
-console.log('constants', constants);
 //TODO SF-101 //remove constants from here
 // const constants.AUTH_API_URL = 'http://gateway-dev.fptechscience.com/auth-service';
 const GOOGLE_MAPS_URL = 'https://maps.googleapis.com/maps/api';

@@ -9,6 +9,7 @@ const actions = {
   ADD_TO_CART: 'ADD_TO_CART',
   NOTIFY_ME: 'NOTIFY_ME',
   WISHLIST_TRACK: 'WISHLIST_TRACK',
+  WISHLIST_PRODUCTS: 'WISHLIST_PRODUCTS',
 };
 
 const actionCreators = {
@@ -25,7 +26,7 @@ const actionCreators = {
     return dispatch({
       type: actions.DELETE_TO_WISHLIST,
       payload: apis.deleteWishlistApi(wishlist_id, showToast, currentPage),
-    });
+    }).then(() => dispatch(actionCreators.getWishlistProducts()));
   }),
   addToCart: (params, wishlist_id, getCartData) => (dispatch, getState) => dispatch(cartActionCreators.addToCart(params)).then(() => {
     if (getCartData) {
@@ -42,7 +43,7 @@ const actionCreators = {
     }
   }),
   addToWishlistAndFetch: loginReq(params => dispatch => dispatch(actionCreators.addToWishlist(params)).then(() => {
-    dispatch(actionCreators.getWishlist());
+    dispatch(actionCreators.getWishlistProducts());
     dispatch(actionCreators.track({
       eventName: 'WishList Added', params, type: 'WL_ADD',
     }));
@@ -56,12 +57,16 @@ const actionCreators = {
   }),
   track: params => (dispatch, getState) => {
     const state = getState();
-    params.postResult = state.wishlistReducer.data;
+    params.postResult = state.wishlistReducer.products;
     return {
       type: actions.WISHLIST_TRACK,
       payload: apis.track(params),
     };
   },
+  getWishlistProducts: loginReq(() => dispatch => dispatch({
+    type: actions.WISHLIST_PRODUCTS,
+    payload: apis.getWishlistProducts(),
+  })),
 };
 
 export { actions, actionCreators };

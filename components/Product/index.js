@@ -164,16 +164,15 @@ const getProductComponent = (isPreview, taskCode) => {
     }
 /* eslint-disable */
     render() {
-      const { productData, userDetails, showLoading } = this.props;
+      const { productData, userDetails, showLoading, query } = this.props;
       const {
         catalog, titleInfo, keyfeatures, extraOffers, imgUrls, offerInfo, shippingInfo, isWishlisted,
-        details, productDescription, catalogObj, categoryType = '', warranty, breadcrums, product_id,
+        details, productDescription, catalogObj, categoryType = '', warranty, breadcrums, product_id, wishlistId,
       } = productData;
       const { offerPricing } = offerInfo;
       const {
         stickyElements, recentlyViewed, notifyEmail, emailErr,
       } = this.state;
-      console.log('guygbut', (offerInfo.stockError || offerInfo.availabilityError) || Object.keys(shippingInfo).length === 0 || !shippingInfo.shippable);
       return (
         <Theme.Provider value={categoryType.toLowerCase()}>
           <div className={`${styles['pdp-wrap']} ${categoryType.toLowerCase()} ${styles[categoryType.toLowerCase()]}`}>
@@ -188,11 +187,12 @@ const getProductComponent = (isPreview, taskCode) => {
                       <Display
                         product_id={product_id}
                         offerPricing={offerPricing}
-                        catalog_id={catalogObj.catalog_id}
+                        catalogObj={catalogObj}
                         imgs={imgUrls}
                         isWishlisted={isWishlisted}
                         extraOffers={extraOffers}
                         breadcrums={breadcrums}
+                        wishlistId={wishlistId}
                       />
                     </NoSSR>
                   </Col>
@@ -200,18 +200,25 @@ const getProductComponent = (isPreview, taskCode) => {
                   <Col sm={12} className={`${styles['details-right-part']} ${styles[stickyElements.details]}`}>
                     <div className={`${styles['details-right-part-inn']}`}>
                       <div className={`${styles['ipad-details']} ${styles['ipad-pr-15']}`}>
-                        <TitleInfo {...titleInfo} isPreview={isPreview} />
-                        <ProductDetails details={details} keyfeatures={keyfeatures} isPreview={isPreview} productInfo={productData}/>
+                        <TitleInfo {...titleInfo} isPreview={isPreview} offerInfo={offerInfo} />
+                        <ProductDetails
+                          details={details}
+                          keyfeatures={keyfeatures}
+                          isPreview={isPreview}
+                          productInfo={productData}
+                          variantId={query.variantId}
+                          productId={query.productId}
+                        />
                       </div>
                       <div className={`${styles['ipad-details']} ${styles['bdr-lt']} ${styles['ipad-pl-15']}`}>
                         {
                           isPreview ? null : <Shipping shippingInfo={shippingInfo} offerInfo={offerInfo} warranty={warranty} />
                         }
                         {
-                          isPreview ? null : <AddToCart offerInfo={offerInfo} productData={productData.product_id}/>
+                          isPreview ? null : shippingInfo.shippable && <AddToCart offerInfo={offerInfo} productData={productData.product_id}/>
                         }
                         {
-                          ((offerInfo.stockError || offerInfo.availabilityError) || Object.keys(shippingInfo).length === 0 || !shippingInfo.shippable) &&
+                          (offerInfo.stockError || offerInfo.availabilityError) && (Object.keys(shippingInfo).length === 0 || shippingInfo.shippable) &&
                           <div className={`${styles['flx-space-bw']} ${styles['align-baseline']}`}>
                             {!userDetails.isLoggedIn &&
                             <div className={`${styles['mb-0']} ${styles['fp-input']} ${styles['pb-10']}`}>

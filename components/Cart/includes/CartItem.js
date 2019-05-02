@@ -192,7 +192,7 @@ class CartItem extends React.Component {
                 <Col md={12}>
                   <h5 className={`${styles['mt-0']} ${styles['mb-0']}`}>{brand_name}</h5>
                 </Col>
-                <Col md={10} sm={10} className={styles['landscape-cart-details']}>
+                <Col md={9} sm={9} className={`${styles['landscape-cart-details']} ${styles['pr-0']}`}>
                   <h4 className={`${styles['fontW600']} ${styles['m-fs-14']}`}>
                     <Link route={`/${country}/${language}/product?productId=${product_id}${variant_id ? `&variantId=${variant_id}` : ''}&catalogId=${catalogId}&itemType=${itemType}`}>
                       <a className={`${styles['width100']} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
@@ -210,7 +210,7 @@ class CartItem extends React.Component {
                   <React.Fragment>
                     <div className={`${styles['warranty-part']} ${styles['p-10']} ${styles['light-gry-clr']}`}>
                       <p className={`${styles['mb-0']} ${styles['fs-12']} ${styles['flex']}`}>
-                        <span>Warranty : </span>
+                        <span className={styles['thick-gry-clr']}>Warranty : </span>
                         <span className={`${styles['pl-10']} ${styles['pr-10']}`}>
                           {warranty_duration && Object.keys(warranty_duration).length > 0 ?
                             <Warranty warranty={warranty_duration} />
@@ -220,7 +220,7 @@ class CartItem extends React.Component {
                       {
                         shipping !== null && (shipping.shippable && (
                           <p className={`${styles['mb-0']} ${styles['fs-12']}`}>
-                            <span>{CART_PAGE.SHIPPING} :</span>
+                            <span className={styles['thick-gry-clr']}>{CART_PAGE.SHIPPING} :</span>
                             <span className={`${styles['pl-10']} ${styles['pr-10']}`}>{CART_PAGE.REGULAR_SHIPPING} ({shipping.shipping_fees + ' ' + cur}) - <span className={`${styles['fs-12']} ${styles['base-font']}`}>{CART_PAGE.ETA_DELIVERY_BY} {moment().add(shipping.shipping_days, 'days').format('LL')}</span>
                             </span>
                           </p>
@@ -268,11 +268,11 @@ class CartItem extends React.Component {
                     </div>))
                   }
                 </Col>
-                <Col md={2} sm={2} className={`${styles['pl-0']} ${styles['landscape-cart-price']}`}>
+                <Col md={3} sm={3} className={`${styles['pr-5']} ${styles['landscape-cart-price']}`}>
                   {Math.floor(discount) > 5 &&
-                    <p className={`${styles['mb-0']} ${styles['fs-12']}`}>
+                    <p className={`${styles['mb-0']} ${styles['fs-12']} ${styles['t-rt']}`}>
                       <span className={styles['success-green']}>{`${Math.floor(discount)}% OFF`}</span>
-                      <span className={`${styles['cross-strike']} ${styles.relative} ${styles['ml-10']}`}>
+                      <span className={`${styles['cross-strike']} ${styles.relative} ${styles['ml-5']}`}>
                         <span className={styles['label-light-grey']}>
                           <span>{mrp}&nbsp;</span>
                           <span>{cur}</span>

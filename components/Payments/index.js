@@ -17,6 +17,7 @@ import RightSideBar from '../Cart/CartPaymentSideBar';
 import { languageDefinations } from '../../utils/lang/';
 import DeliveryAddress from './includes/DeliveryAddress';
 import { actionCreators, selectors } from '../../store/payments';
+import { actionCreators as cartAction } from '../../store/cart'
 import { actionCreators as authActionCreators, selectors as authSelectors } from '../../store/auth';
 import { actionCreators as cartActionCreators, selectors as cartSelectors } from '../../store/cart';
 import Slider from '../common/slider';
@@ -48,7 +49,7 @@ class Payments extends React.Component {
       {
         field: 'password',
         method: this.validateLengthPassword,
-        message: 'Your password must be at least 8 characters long.',
+        message: 'Password must be atleast 8 characters',
         validWhen: false,
       },
     ]);
@@ -200,7 +201,9 @@ class Payments extends React.Component {
       // paymentConfigJson['loyaltyPoints'] = { basic: false, progress: true, done: false };
       // paymentConfigJson['offersDiscounts'] = { basic: true, progress: false, done: false };
       paymentConfigJson['payment'] = { basic: false, progress: true, done: false };
-      this.setState({ paymentConfigJson, editCartDetails: !editCartDetails });
+      this.setState(
+       { paymentConfigJson, editCartDetails: !editCartDetails }
+      ,() => this.props.cartEditDetails(this.state.editCartDetails));
     } else {
       toast.info('Please add a delivery address.');
     }
@@ -237,7 +240,7 @@ class Payments extends React.Component {
     paymentConfigJson['offersDiscounts'] = { basic: true, progress: false, done: false };
     paymentConfigJson['payment'] = { basic: true, progress: false, done: false };
 
-    this.setState({ paymentConfigJson, editCartDetails: !editCartDetails });
+    this.setState({ paymentConfigJson, editCartDetails: !editCartDetails },() => this.props.cartEditDetails(this.state.editCartDetails));
 
     //clearing payment reducer on address edit button.
     this.props.emptyPaymentPaylod();
@@ -326,6 +329,7 @@ class Payments extends React.Component {
                 editAddressTab={this.editAddressTab}
                 configJson={paymentConfigJson.address}
                 handleShippingAddressContinue={this.handleShippingAddressContinue}
+                showNonShippable
               />
             {/*<LoyaltyPoints
                 editLoyalityTab={this.editLoyalityTab}
@@ -347,7 +351,7 @@ class Payments extends React.Component {
             <Col md={3} xs={12} sm={12} className={`${styles['pl-5']} ${styles['landscape-pr-0']} ${styles['m-p-l-15']}`}>
               <div>
                 {
-                  cartResults && cartResults.total_price ?
+                  cartResults && (cartResults.total_price === 0 || cartResults.total_price > 0) ?
                     <div className={`${styles['box']} ${styles['payment-summary']}`}>
                       <RightSideBar
                         data={cartResults}
@@ -407,6 +411,7 @@ const mapDispatchToProps = dispatch =>
       getLoginInfo: authActionCreators.getLoginInfo,
       getCartResults: cartActionCreators.getCartResults,
       emptyPaymentPaylod: actionCreators.emptyPaymentPaylod,
+      cartEditDetails:cartAction.cartEditDetails
     },
     dispatch,
   );

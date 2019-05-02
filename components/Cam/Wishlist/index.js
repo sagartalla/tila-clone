@@ -79,9 +79,11 @@ class Wishlist extends Component {
   }
 
   addToCart(e) {
-    this.props.addToCart({
-      listing_id: e.target.id,
-    }, e.target.getAttribute('data-wish-id'), e.target.getAttribute('data-cart-res'));
+    if (e.target.id) {
+      this.props.addToCart({
+        listing_id: e.target.id,
+      }, e.target.getAttribute('data-wish-id'), e.target.getAttribute('data-cart-res'));
+    }
   }
 
   notify = ({ target }) => {
