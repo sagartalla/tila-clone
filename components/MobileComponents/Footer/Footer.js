@@ -1,9 +1,15 @@
 import React from 'react';
 import SVGComponent from '../../common/SVGComponet';
-import { mergeCss } from '../../../utils/cssUtil';
 import { languageDefinations } from '../../../utils/lang';
 
-const styles = mergeCss('components/MobileComponents/Footer/Footer');
+
+import lang from '../../../utils/language';
+
+import styles_en from './Footer_en.styl';
+import styles_ar from './Footer_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 const { MOBILE_FOOTER } = languageDefinations();
 
 
