@@ -7,11 +7,17 @@ import { Link } from '../../../routes'
 import Warranty from '../../Product/includes/Warranty';
 import CartStepper from './CartStepper';
 import SVGComponent from '../../common/SVGComponet';
-import { mergeCss } from '../../../utils/cssUtil';
 import { languageDefinations } from '../../../utils/lang/';
 import constants from '../../../constants';
 
-const styles = mergeCss('components/Cart/cart');
+import lang from '../../../utils/language';
+
+import styles_en from '../cart_en.styl';
+import styles_ar from '../cart_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
+
 const { CART_PAGE, ORDER_PAGE } = languageDefinations();
 
 const cookies = new Cookie();
@@ -21,11 +27,10 @@ const country = cookies.get('country') || 'SAU';
 
 
 const popover = ({
-  mrp, offer_price, total_amount, cur, selling_price, offerDiscounts, total_discount,
+  mrp, offer_price, total_amount, cur, selling_price, offerDiscounts, total_discount, shipping,
 }) => {
   return (
-    <Popover id="offer-popover">
-      <div className={styles['fs-12']}>
+      <div className={`${styles['p-10']} ${styles['tool-tip']}`}>
         <div className={`${styles['table']} ${styles['width100']}`}>
           <div className={styles['t-row']}>
             <div className={`${styles['t-cell']} ${styles['pb-10']}`}>
@@ -58,20 +63,29 @@ const popover = ({
               );
             })
           }
-          <div className={styles['t-row']}>
-            <div className={`${styles['t-cell']} ${styles['pb-10']}`}>
-              <div>{CART_PAGE.DELIVERY_CHARGES}</div>
-            </div>
-            <div className={`${styles['t-cell']} ${styles['t-rt']}`}>{ORDER_PAGE.FREE}</div>
-          </div>
+          {
+            shipping !== null ?
+              <div className={styles['t-row']}>
+                <div className={`${styles['t-cell']} ${styles['pb-10']}`}>
+                  <div>{CART_PAGE.DELIVERY_CHARGES}</div>
+                </div>
+                <div className={`${styles['t-cell']} ${styles['t-rt']}`}>
+                  {shipping.shipping_fees ?
+                    `${shipping.shipping_fees} ${cur}`
+                    : <SVGComponent clsName={`${styles['ship-icon']}`} src="icons/free-shipping" />}
+                </div>
+              </div>
+            :
+              null
+          }
+
           <div className={`${styles['t-row']} ${styles['total-amount']}`}>
             <div className={styles['t-cell']}>{ORDER_PAGE.TOTAL}</div>
             <div className={`${styles['t-cell']} ${styles['t-rt']}`}>{total_amount} {cur}</div>
           </div>
         </div>
-        <div className={`${styles['p-5']} ${styles['mt-5']} ${styles['overall-amount']}`}>{ORDER_PAGE.OVERALL_YOU_SAVE} {total_discount} {cur} {ORDER_PAGE.ON_THIS_PRODUCT}</div>
+        <div className={`${styles['p-5']} ${styles['mt-5']} ${styles['overall-amount']}`}>{CART_PAGE.OVERALL_YOU_SAVE} {total_discount} {cur} {CART_PAGE.ON_THIS_PRODUCT}</div>
       </div>
-    </Popover>
   );
 };
 
@@ -129,14 +143,12 @@ class CartItem extends React.Component {
       removeCartItem,
       cartStepperInputHandler,
       addOrRemoveGift,
-      cartData,
-      index,
     } = this.props;
     const { gift_card_message, checked, showMessage } = this.state;
     const {
       item_id, img, name, offer_price, cur, quantity, max_limit, inventory,
-      brand_name, gift_info, shipping, warranty, total_amount,
-      product_id, variant_id, itemType, catalogId, discount, mrp,
+      brand_name, gift_info, shipping, warranty_duration, total_amount,
+      product_id, variant_id, itemType, catalogId, discount, mrp, variantAttributes,
     } = item;
     return (
       <div key={item_id} className={`${styles['mb-20']} ${styles['box']}`}>
@@ -180,7 +192,7 @@ class CartItem extends React.Component {
                 <Col md={12}>
                   <h5 className={`${styles['mt-0']} ${styles['mb-0']}`}>{brand_name}</h5>
                 </Col>
-                <Col md={10} sm={10} className={styles['landscape-cart-details']}>
+                <Col md={9} sm={9} className={`${styles['landscape-cart-details']} ${styles['pr-0']}`}>
                   <h4 className={`${styles['fontW600']} ${styles['m-fs-14']}`}>
                     <Link route={`/${country}/${language}/product?productId=${product_id}${variant_id ? `&variantId=${variant_id}` : ''}&catalogId=${catalogId}&itemType=${itemType}`}>
                       <a className={`${styles['width100']} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
@@ -188,54 +200,79 @@ class CartItem extends React.Component {
                       </a>
                     </Link>
                   </h4>
-                  <div className={`${styles['warranty-part']} ${styles['p-10']} ${styles['light-gry-clr']}`}>
-                    {cartData.items ? <p className={`${styles['mb-0']} ${styles['fs-12']} ${styles['flex']}`}>
-                      <span>{CART_PAGE.WARRENTY} : </span>
-                      <span className={`${styles['pl-10']} ${styles['pr-10']}`}><Warranty warranty={cartData.items[index].warranty_duration} /></span>
-                    </p>
-                      : null}
-                    <p className={`${styles['mb-0']} ${styles['fs-12']}`}>
-                      <span>{CART_PAGE.SHIPPING} : </span>
-                      <span className={`${styles['pl-10']} ${styles['pr-10']}`}>{CART_PAGE.REGULAR_SHIPPING}  ({shipping.shipping_fees + ' ' + cur}) - <span className={`${styles['fs-12']} ${styles['base-font']}`}>{CART_PAGE.ETA_DELIVERY_BY} {moment().add(shipping.shipping_days, 'days').format('LL')}</span>
-                      </span>
-                    </p>
-                  </div>
-                  <div data-id={item_id} className={`${styles['checkbox-material']} ${styles['mt-15']}`}>
-                    <input data-id={item_id} id={"gift" + item_id} type="checkbox" checked={checked} onClick={this.giftChecked} />
-                    <label htmlFor={"gift" + item_id}> {CART_PAGE.SEND_GIFT} {gift_info ? "(" + gift_info.gift_rate + " " + cur + ")" : ''} </label>
-                  </div>
-                  {checked && showMessage &&
-                    <div>
-                      <span className={styles.fontW600}>{CART_PAGE.MESSAGE}:&nbsp;</span><span>{gift_card_message}&nbsp;</span>
-                      <span>{'('}<a onClick={this.toggleMessage}>{CART_PAGE.EDIT}</a>{')'}</span>
+                  {variantAttributes.length > 0 &&
+                    variantAttributes.map(attr => (
+                      <div className={`${styles['thick-gry-clr']} ${styles['fs-12']} ${styles['mb-15']}`}>
+                        <span>{attr.display_string} : </span>
+                        <span>{attr.attribute_values[0].value}</span>
+                      </div>
+                    ))}
+                  <React.Fragment>
+                    <div className={`${styles['warranty-part']} ${styles['p-10']} ${styles['light-gry-clr']}`}>
+                      <p className={`${styles['mb-0']} ${styles['fs-12']} ${styles['flex']}`}>
+                        <span className={styles['thick-gry-clr']}>Warranty : </span>
+                        <span className={`${styles['pl-10']} ${styles['pr-10']}`}>
+                          {warranty_duration && Object.keys(warranty_duration).length > 0 ?
+                            <Warranty warranty={warranty_duration} />
+                            : 'No Warranty'}
+                        </span>
+                      </p>
+                      {
+                        shipping !== null && (shipping.shippable && (
+                          <p className={`${styles['mb-0']} ${styles['fs-12']}`}>
+                            <span className={styles['thick-gry-clr']}>{CART_PAGE.SHIPPING} :</span>
+                            <span className={`${styles['pl-10']} ${styles['pr-10']}`}>{CART_PAGE.REGULAR_SHIPPING} ({shipping.shipping_fees + ' ' + cur}) - <span className={`${styles['fs-12']} ${styles['base-font']}`}>{CART_PAGE.ETA_DELIVERY_BY} {moment().add(shipping.shipping_days, 'days').format('LL')}</span>
+                            </span>
+                          </p>
+                        ))
+                      }
                     </div>
+                    <div data-id={item_id} className={`${styles['checkbox-material']} ${styles['mt-15']}`}>
+                      <input data-id={item_id} id={"gift" + item_id} type="checkbox" checked={checked} onClick={this.giftChecked} />
+                      <label htmlFor={"gift" + item_id}> {CART_PAGE.SEND_GIFT} {gift_info ? "(" + gift_info.gift_rate + " " + cur + ")" : ''} </label>
+                    </div>
+                    {checked && showMessage &&
+                      <div>
+                        <span className={styles.fontW600}>{CART_PAGE.MESSAGE}:&nbsp;</span><span>{gift_card_message}&nbsp;</span>
+                        <span>{'('}<a onClick={this.toggleMessage}>{CART_PAGE.EDIT}</a>{')'}</span>
+                      </div>
+                    }
+                    {!showMessage && checked &&
+                      <div className={styles['flex-center']}>
+                        <textarea
+                          name="msg"
+                          id={item_id}
+                          cols="30"
+                          rows="2"
+                          className={styles['resize-none']}
+                          placeholder={CART_PAGE.GIFT_MESSAGE_OPTIONAL}
+                          value={gift_card_message}
+                          onChange={this.updateMsg}
+                        />
+                        <button
+                          data-id={item_id}
+                          className={`${styles['ml-5']} ${styles['bg-thick-blue']} ${styles['p-5']} ${styles['white-color']} ${styles['border-radius4']}`}
+                          onClick={this.sendGiftPack}
+                        >
+                          {CART_PAGE.GIFT_PACK}
+                        </button>
+                      </div>}
+                  </React.Fragment>
+                  {
+                    shipping !== null && (!shipping.shippable &&
+                    (<div className={`${styles['mt-20']} ${styles['fs-12']}`}>
+                      <div>
+                        <span className={`${styles['white-color']} ${styles['pb-5']} ${styles['pt-5']} ${styles['pr-10']} ${styles['pl-10']} ${styles['bg-thick-red-clr']} ${styles['border-radius12']}`}>Not Shippable</span>
+                      </div>
+                      <p className={`${styles['mt-20']} ${styles['thick-red-clr']}`}>{CART_PAGE.CANNOT_DELIVER}</p>
+                    </div>))
                   }
-                  {!showMessage && checked &&
-                    <div className={styles['flex-center']}>
-                      <textarea
-                        name="msg"
-                        id={item_id}
-                        cols="30"
-                        rows="2"
-                        className={styles['resize-none']}
-                        placeholder={CART_PAGE.GIFT_MESSAGE_OPTIONAL}
-                        value={gift_card_message}
-                        onChange={this.updateMsg}
-                      />
-                      <button
-                        data-id={item_id}
-                        className={`${styles['ml-5']} ${styles['bg-thick-blue']} ${styles['p-5']} ${styles['white-color']} ${styles['border-radius4']}`}
-                        onClick={this.sendGiftPack}
-                      >
-                        {CART_PAGE.GIFT_PACK}
-                    </button>
-                    </div>}
                 </Col>
-                <Col md={2} sm={2} className={`${styles['pl-0']} ${styles['landscape-cart-price']}`}>
+                <Col md={3} sm={3} className={`${styles['pr-5']} ${styles['landscape-cart-price']}`}>
                   {Math.floor(discount) > 5 &&
-                    <p className={`${styles['mb-0']} ${styles['fs-12']}`}>
+                    <p className={`${styles['mb-0']} ${styles['fs-12']} ${styles['t-rt']}`}>
                       <span className={styles['success-green']}>{`${Math.floor(discount)}% OFF`}</span>
-                      <span className={`${styles['cross-strike']} ${styles.relative} ${styles['ml-10']}`}>
+                      <span className={`${styles['cross-strike']} ${styles.relative} ${styles['ml-5']}`}>
                         <span className={styles['label-light-grey']}>
                           <span>{mrp}&nbsp;</span>
                           <span>{cur}</span>
@@ -251,8 +288,13 @@ class CartItem extends React.Component {
                       <span className={`${styles.question} ${styles['ml-5']} ${styles['flex-center']} ${styles['justify-center']} ${styles['default-shadow']} ${styles['fs-14']} ${styles.pointer}`}>  ? </span>
                     </OverlayTrigger>
                   </h4>
-                  <p className={`${styles['t-rt']}`}>0.00 <span className={`${styles['fs-12']}`}>{cur}</span></p>
-                  <p className={`${styles['t-rt']}`}>{shipping.shipping_fees} <span className={`${styles['fs-12']}`}>{cur}</span></p>
+                  {
+                      shipping !== null
+                      ?
+                        <p className={`${styles['t-rt']}`}>{shipping.shipping_fees} <span className={`${styles['fs-12']}`}>{cur}</span></p>
+                      :
+                        null
+                  }
                 </Col>
               </Row>
             </Col>

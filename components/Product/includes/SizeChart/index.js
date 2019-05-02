@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { mergeCss } from '../../../../utils/cssUtil';
 import { languageDefinations } from '../../../../utils/lang/';
 import Slider from '../../../common/slider';
 
-const styles = mergeCss('components/Product/product');
+import lang from '../../../../utils/language';
+
+import styles_en from '../../product_en.styl';
+import styles_ar from '../../product_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
+
 const { FOOTER_PAGE } = languageDefinations();
 
 class SizeChart extends Component {

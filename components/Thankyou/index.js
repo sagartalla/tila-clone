@@ -8,28 +8,45 @@ import PaymentStatus from './includes/PaymentStatus';
 import OrderDetails from '../Order/includes/OrderDetails';
 import HeaderBar from '../HeaderBar';
 
-import { mergeCss } from '../../utils/cssUtil';
-const styles = mergeCss('components/Thankyou/thankyou');
+import lang from '../../utils/language';
+
+import styles_en from './thankyou_en.styl';
+import styles_ar from './thankyou_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 class Thankyou extends Component {
   constructor(props) {
     super(props);
     this.state = {
       status: 'SUCCESSFUL',
-      orderId: ''
+      orderId: '',
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    if((nextProps.orderData.status && nextProps.orderData.status !== 'CONFIRMED') && (window.location.href.indexOf('FAILED') === -1)) {
-      window.location = window.location.href.replace('SUCCESSFUL', 'FAILED');
-    }
+  componentDidMount() {
+    const {
+      orderId, getOrderDetails, status, track,
+    } = this.props;
+    window.dataLayer.push({
+      event: 'purchase',
+    });
+    this.setState({ status });
+    getOrderDetails({ orderId }).then((res) => {
+      const { data } = res.value;
+      if (res.value.status === 200) {
+        track({
+          event: 'Order Placed',
+          orderData: data,
+        });
+      }
+    });
   }
 
-  componentDidMount() {
-    const { orderId, getOrderDetails, status } = this.props;
-    this.setState({ status })
-    getOrderDetails({ orderId: orderId });
+  componentWillReceiveProps(nextProps) {
+    if ((nextProps.orderData.status && nextProps.orderData.status !== 'CONFIRMED') && (window.location.href.indexOf('FAILED') === -1)) {
+      window.location = window.location.href.replace('SUCCESSFUL', 'FAILED');
+    }
   }
 
   render() {
@@ -37,8 +54,8 @@ class Thankyou extends Component {
     const { status } = this.state;
 
     return (
-      <div className={styles['thankyou']}>
-        <HeaderBar hideSearch hideMegamenu/>
+      <div className={styles.thankyou}>
+        <HeaderBar hideSearch hideMegamenu />
         <PaymentStatus
           status={status}
           orderId={orderId}
@@ -48,7 +65,7 @@ class Thankyou extends Component {
             <OrderDetails
               query={query}
               orderData={orderData}
-              thankyouPage={true}
+              thankyouPage
             />
             : null
         }
@@ -57,18 +74,16 @@ class Thankyou extends Component {
   }
 }
 
-const mapStateToProps = (store) => {
-  return ({
-    orderData: selectors.getOrderDetails(store)
-  })
-};
+const mapStateToProps = store => ({
+  orderData: selectors.getOrderDetails(store),
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({
-    getOrderDetails: actionCreators.getOrderDetails
+const mapDispatchToProps = dispatch => bindActionCreators(
+  {
+    getOrderDetails: actionCreators.getOrderDetails,
+    track: actionCreators.track,
   },
-    dispatch,
-  );
-}
+  dispatch,
+);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Thankyou);

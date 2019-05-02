@@ -32,8 +32,8 @@ const removeCartItemApi = (params, toastObj = {}) => {
   });
 };
 
-const cartItemCountApi = (params, typ) => {
-  return axios.put(`${constants.CART_API_URL}/api/v1/cart/quantity/${typ}`, params).then(({ data }) => {
+const cartItemCountApi = (params, type) => {
+  return axios.put(`${constants.CART_API_URL}/api/v1/cart/quantity/${type}`, params).then(({ data }) => {
     return getCartDetailsApi();
   }).catch(function (error) {
     return getCartDetailsApi();
@@ -46,4 +46,49 @@ const giftApi = (cartItemId, typ, params = {}) => {
   })
 }
 
-export default { getCartDetailsApi, addToCart, removeCartItemApi, cartItemCountApi, giftApi };
+const track = (params) => {
+  const cartItem = params.postResult.filter(item => item.cart_item_id === params.cartId)[0];
+  const obj = {
+    event: params.eventName,
+  };
+  switch (params.eventName) {
+    case 'CART_VIEW':
+      obj.cart = {
+        item: params.postResult,
+      };
+      break;
+    case 'CART_REMOVE':
+      obj.product = [{
+        quantity: cartItem.quantity,
+        productInfo: {
+          productID: cartItem.product_details.product_id,
+        },
+      }];
+      break;
+    case 'CART_QTY_CHANGE':
+      obj.product = [{
+        quantity: params.type === 'add' ? cartItem.quantity + 1 : cartItem.quantity - 1,
+        productInfo: {
+          productID: cartItem.product_details.product_id,
+        },
+      }];
+      break;
+    case 'ADD_TO_CART':
+      obj.product = [{
+        quantity: params.quantity,
+        productInfo: {
+          productID: params.product_id,
+        },
+      }];
+      break;
+    default:
+      obj.cart = {
+        item: params.postResult,
+      };
+  }
+  window.appEventData.push(obj);
+};
+
+export default {
+  getCartDetailsApi, addToCart, removeCartItemApi, cartItemCountApi, giftApi, track,
+};

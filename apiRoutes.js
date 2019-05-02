@@ -4,16 +4,22 @@ const axios = require('axios');
 const Cookies = require('universal-cookie');
 const _ = require('lodash');
 const constants = require('./store/helper/constants/constants');
-console.log('constants', constants);
 //TODO SF-101 //remove constants from here
 // const constants.AUTH_API_URL = 'http://gateway-dev.fptechscience.com/auth-service';
 const GOOGLE_MAPS_URL = 'https://maps.googleapis.com/maps/api';
 const GOOGLE_KEY = 'AIzaSyDrVNKZshUspEprFsNnQD-sos6tvgFdijg';
 
+
+const removeCookies = (req,res) => {
+  req.universalCookies.remove('auth');
+  req.universalCookies.remove('userCreds');
+  req.universalCookies.remove('ptaToken');
+  req.universalCookies.remove('isVerified');
+  return res.json({});
+}
 apiRoutes
   .post('/login', (req, res) => {
     const params = req.body;
-    debugger;
     return axios.post(`${constants.AUTH_API_URL}/api/v1/sls/auth`, Object.assign({}, params, {})).then(({data, status}) => {
       let isLoggedIn = false;
       if(status === 200) {
@@ -59,15 +65,16 @@ apiRoutes
       });
   })
   .post('/logout', (req, res) => {
+    const auth = req.universalCookies.get('auth');
+    if(!auth) {
+      return removeCookies(req,res)
+
+    }
     return axios.put(`${constants.AUTH_API_URL}/api/v1/sls/lo`, null, {
-      headers: { 'x-access-token': req.headers['x-access-token'] }
+      headers: { 'x-access-token': req.headers['x-access-token'] || '' }
     }).then((response) => {
       if (response && response.status === 200) {
-        req.universalCookies.remove('auth');
-        req.universalCookies.remove('userCreds');
-        req.universalCookies.remove('ptaToken');
-        req.universalCookies.remove('isVerified');
-        return res.json({});
+        return removeCookies(req,res)
       }
     });
   })

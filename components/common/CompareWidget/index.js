@@ -7,9 +7,12 @@ import SVGCompoent from '../SVGComponet';
 import { selectors, actionCreators } from '../../../store/compare';
 import { Router } from '../../../routes';
 
-import { mergeCss } from '../../../utils/cssUtil';
+import lang from '../../../utils/language';
 
-const styles = mergeCss('components/common/CompareWidget/compareWidget');
+import styles_en from './compareWidget_en.styl';
+import styles_ar from './compareWidget_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 const cookies = new Cookies();
 

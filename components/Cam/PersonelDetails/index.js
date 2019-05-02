@@ -6,8 +6,13 @@ import UserData from './UserData';
 import SocialMedia from './SocialMedia';
 import Notification from './Notification';
 
-import { mergeCss } from '../../../utils/cssUtil';
-const styles = mergeCss('components/Cam/PersonelDetails/profile');
+import lang from '../../../utils/language';
+
+import styles_en from './profile_en.styl';
+import styles_ar from './profile_ar.styl';
+
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 const UserInfo = () => {
   return (

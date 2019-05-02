@@ -1,7 +1,11 @@
 import React from 'react';
-import { mergeCss } from '../../../utils/cssUtil';
+import lang from '../../../utils/language';
 
-const styles = mergeCss('components/common/Error/error');
+import styles_en from './error_en.styl';
+import styles_ar from './error_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 const getMessage = (statusCode) => {
     switch(statusCode) {
         case 404:

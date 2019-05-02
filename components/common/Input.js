@@ -15,6 +15,7 @@ const Input = props => {
       onChange={props.onChange}
       onBlur={props.onBlur}
       autoFocus={props.autoFocus}
+      onKeyPress={props.onKeyPress}
     />
   );
 }

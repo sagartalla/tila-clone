@@ -3,6 +3,9 @@
 @import '/static/vendor/css/slick-theme.min.css';
 @import '../../layout/main/executables.styl';
 
+.ship-icon
+  width 80px
+  height 25px
 .pdp-wrap
   .pdp-bottom-ref-pixel
     position absolute
@@ -29,15 +32,15 @@
   .size-chart-image
       position absolute
       top 10%
-      
+
   .varient-select-part
-    border: 1px solid rgba(0, 0, 0, 0.5)
+    border: 1px solid light-brdr;
     background-color: white
     border-radius: 4px
     -webkit-appearance: none
     -moz-appearance: none
     appearance: none
-    padding: 5px 14px 5px 8px
+    padding: 5px 20px 5px 8px
     position relative
     &:focus
       outline none
@@ -89,9 +92,7 @@
 
       .checkout-instantly
         .checkout-instant-btn
-          padding 5px 25px
-        div
-          flex 1
+          padding 5px 17px
     .addto-cart
       background-color white
       padding 12px 35px
@@ -106,6 +107,9 @@
         color: navy-blue
         width: 45%;
         padding: 10px;
+        i
+         width 18px
+         height 18px
         .loader-div
           width 30px
           height 30px
@@ -144,7 +148,7 @@
         border-radius 0
         border-bottom-right-radius 20px
         width: 45%;
-        padding: 10px;        
+        padding: 10px;
     .buy-coupon
       width 16px
       height 16px
@@ -251,7 +255,7 @@
   .kf-list li::before
     content "•"
     color thck-gry-clr
-    display inline-block 
+    display inline-block
     width 10px
     font-weight 600
     font-size 20px
@@ -273,7 +277,7 @@
       background url(/static/img/icons/down-arrow/down-arrow.svg) no-repeat
       height 7px
       width 10px
-      right 3px
+      right 5px
 
     .size-btn
       display none
@@ -506,6 +510,51 @@
   left: 4%;
   width: 93%;
 
+
+.showDiv
+  display block
+
+.hideDiv
+  display none
+
+
+.showModal
+  transform translateX(0px)
+
+.hideModal
+  transform translateX(800px)
+
+.modalContainer
+  height 100%
+  width 100%
+  top 0
+  left 0
+  .disabled
+    height 100%
+    width 100%
+    position fixed
+    top 0
+    left 0
+    z-index 100
+    background-color grey
+    opacity 0.8
+
+.modal
+  height 100%
+  max-width: 500px;
+  width: 100%;
+  position fixed
+  top 0
+  right 0
+  z-index 101
+  background-color white
+  transition all 0.3s;
+
+.modalFill
+  height 100%
+  width 100%
+  overflow auto
+
 @media screen and (min-device-width: 320px) and (max-device-width: 767px) and (orientation : portrait) {
   .details-right-part {
     float left
@@ -547,6 +596,7 @@
     width 50%
   }
 }
+
 
 @media screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation : portrait){
   .details-right-part {
@@ -610,7 +660,7 @@
     .buy-now-btn {
       background-color navy-blue
       width: 45%;
-      padding: 10px;   
+      padding: 10px;
     }
 
     .add-to-card-btn {
@@ -622,6 +672,7 @@
   }
 
 }
+
 
 @media screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation : landscape){
   .page-details-slider .details-right-part .details-right-part-inn {
@@ -654,7 +705,7 @@
       .buy-now-btn {
         background-color navy-blue
         width: 45%;
-        padding: 10px;        
+        padding: 10px;
       }
     }
   }

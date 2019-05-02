@@ -2,14 +2,19 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { mergeCss } from '../../utils/cssUtil';
 import { actionCreators } from '../../store/auth';
 import Input from '../common/Input';
 import Button from '../common/CommonButton';
 import SVGComponent from '../common/SVGComponet';
 import { languageDefinations } from '../../utils/lang';
 
-const styles = mergeCss('components/Login/login');
+import lang from '../../utils/language';
+
+import styles_en from './login_en.styl';
+import styles_ar from './login_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 const { EMAIL_VERIFICATION } = languageDefinations();
 
 class VerifyEmail extends Component {
@@ -36,6 +41,11 @@ class VerifyEmail extends Component {
     });
   }
 
+  handleEnterKey = (e) => {
+    if (e.charCode === 13) {
+      this.verifyEmail();
+    }
+  }
   verifyEmail = () => {
     const { value } = this.state;
     if (value === '') {
@@ -78,11 +88,12 @@ class VerifyEmail extends Component {
               type="text"
               autoFocus
               style={{ border: '1px solid lightgray', width: '50%', margin: '15px' }}
-              val={value}
+              val={value.trim()}
               onChange={this.enterOtp}
+              onKeyPress={this.handleEnterKey}
             />
             {otpError ? <div className={`${styles['thick-red-clr']}`}>{EMAIL_VERIFICATION.PLEASE_ENTER_OTP_SENT}</div> : ''}
-            <div className={`${styles.flex}`}><div className={`${styles['otp-expire']}`}>{EMAIL_VERIFICATION.OTP_EXPIRE_IN}&nbsp;</div><div className={`${styles['black-color']}`}>{EMAIL_VERIFICATION.TWENTY_FOUR_HOURS}</div>
+            <div className={`${styles.flex}`}><div className={`${styles['otp-expire']}`}>{EMAIL_VERIFICATION.DIDNT_RECEIVE_OTP}&nbsp;</div>
               <span
                 className={`${styles['lgt-blue']} ${styles.pointer}`}
                 onClick={this.sendOtpToEmailId}

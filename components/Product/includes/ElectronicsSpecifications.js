@@ -3,8 +3,13 @@ import PropTypes from "prop-types";
 import { Grid, Row, Col } from 'react-bootstrap';
 import SVGCompoent from '../../common/SVGComponet';
 import Review from './Reviews';
-import { mergeCss } from '../../../utils/cssUtil';
-const styles = mergeCss('components/Product/product');
+import lang from '../../../utils/language';
+
+import styles_en from '../product_en.styl';
+import styles_ar from '../product_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 
 const Specification = ({ catalog }) => {
   return (

@@ -10,10 +10,16 @@ import { Grid, Row, Col } from 'react-bootstrap';
 import constants from '../../../constants';
 import SVGComponent from '../../common/SVGComponet';
 // import userAgent from '../../../utils/user-agent';
-import { mergeCss } from '../../../utils/cssUtil';
+
 import { actionCreators } from '../../../store/cam/wishlist';
 
-const styles = mergeCss('components/Product/product');
+import lang from '../../../utils/language';
+
+import styles_en from '../product_en.styl';
+import styles_ar from '../product_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 
 const cookies = new Cookies();
 const language = cookies.get('language') || 'en';
@@ -42,16 +48,21 @@ class Display extends Component {
   addToWishlist(e) {
     e.stopPropagation();
     e.preventDefault();
-    console.log(this.props, 'fowihefion');
     const {
-      product_id, catalog_id, addToWishlistAndFetch, offerPricing,
+      product_id, catalogObj, addToWishlistAndFetch,
+      offerPricing, wishlistId, deleteWishlist,
     } = this.props;
-    addToWishlistAndFetch({
-      catalog_id,
-      product_id,
-      wishlisted_price: offerPricing.showPrise,
-      wishlisted_currency: offerPricing.currency,
-    });
+    if (wishlistId) {
+      deleteWishlist(wishlistId);
+    } else {
+      addToWishlistAndFetch({
+        catalog_id: catalogObj.catalog_id,
+        variant_id: catalogObj.variant_id,
+        product_id,
+        wishlisted_price: offerPricing.showPrise,
+        wishlisted_currency: offerPricing.currency,
+      });
+    }
   }
 
   render() {
@@ -98,11 +109,11 @@ class Display extends Component {
               className={`${styles['sub-slider']} ${styles.slick}`}
             >
               {
-                imgs.map(({ url }, index) => (
+                imgs.map(({ url }) => (
                   <div className={styles['carousel-item-wrap']} key={url}>
-                      <img src={`${constants.mediaDomain}/${url}`} />
-                    </div>
-                  ))
+                    <img src={`${constants.mediaDomain}/${url}`} />
+                  </div>
+                ))
               }
             </Slider>
           </Col>
@@ -115,30 +126,29 @@ class Display extends Component {
                     ?
                       <Col md={4} sm={4}>
                         <div className={`${styles['thick-gry-clr']} ${styles['copon-code']} ${styles['pl-15']}`}>
-                        <h5 className={`${styles['mb-5']} ${styles.fontW600}`}>{extraOffers[0]}</h5>
-                        {/* <span className={styles['fs-12']}>Buy fashion for AED 1000/- and get 10% Extra Discount</span> */}
-                      </div>
+                          <h5 className={`${styles['mb-5']} ${styles.fontW600}`}>{extraOffers[0]}</h5>
+                          {/* <span className={styles['fs-12']}>Buy fashion for AED 1000/- and get 10% Extra Discount</span> */}
+                        </div>
                       </Col>
                     :
                     null
-                }
+                  }
                   {
                   extraOffers[1]
                     ?
                       <Col md={4} sm={4}>
                         <div className={`${styles['thick-gry-clr']} ${styles['copon-code']} ${styles['pl-15']}`}>
-                        <h5 className={`${styles['mb-5']} ${styles.fontW600}`}>{extraOffers[1]}</h5>
-                        {/* <span className={styles['fs-12']}>Buy fashion for AED 1000/- and get 10% Extra Discount</span> */}
-                      </div>
+                          <h5 className={`${styles['mb-5']} ${styles.fontW600}`}>{extraOffers[1]}</h5>
+                          {/* <span className={styles['fs-12']}>Buy fashion for AED 1000/- and get 10% Extra Discount</span> */}
+                        </div>
                       </Col>
                     :
                     null
-                }
+                  }
                 </Fragment>
               :
               null
           }
-
         </div>
       </div>
     );
@@ -151,6 +161,7 @@ Display.propTypes = {
 
 const mapDispatchToProps = dispatch => bindActionCreators(
   {
+    deleteWishlist: actionCreators.deleteWishlist,
     addToWishlistAndFetch: actionCreators.addToWishlistAndFetch,
   },
   dispatch,

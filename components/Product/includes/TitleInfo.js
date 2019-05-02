@@ -7,12 +7,16 @@ import { Modal } from 'react-router-modal';
 
 import RightSideBar from '../../Cart/CartPaymentSideBar';
 import constants from '../../../constants';
-import { actionCreators as cartActionCreators, selectors as cartSelectors } from '../../../store/listingCart';
+import { actionCreators as cartActionCreators, selectors as cartSelectors } from '../../../store/cart';
 import { actionCreators as compareActions, selectors } from '../../../store/compare';
 import { languageDefinations } from '../../../utils/lang';
-import { mergeCss } from '../../../utils/cssUtil';
+import lang from '../../../utils/language';
 
-const styles = mergeCss('components/Product/product');
+import styles_en from '../product_en.styl';
+import styles_ar from '../product_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 const { PDP_PAGE } = languageDefinations();
 
 /*
@@ -109,7 +113,7 @@ class TitleInfo extends Component {
   render() {
     const {
       brand, title, rating, reviews, price, originalPrice, discountPercent, product_id,
-      totalInventoryCount, isPreview, listingId, listingCartData, comparable, cmpData,
+      totalInventoryCount, isPreview, listingId, listingCartData, comparable, cmpData, offerInfo,
     } = this.props;
     const { showCheckoutModal } = this.state;
     return (
@@ -140,7 +144,7 @@ class TitleInfo extends Component {
             ))
           } */}
         </div>
-        <div className={`${styles['fs-18']} ${styles.fontW700} ${styles['black-color']}`}>{title}</div>
+        <h1 className={`${styles['fs-18']} ${styles.fontW700} ${styles['black-color']} ${styles['mt-5']} ${styles['mb-0']}`}>{title}</h1>
         {
           isPreview
             ?
@@ -158,38 +162,49 @@ class TitleInfo extends Component {
             null
             :
             <div className={`${styles['flex-center']} ${styles['checkout-instantly']} ${styles['pt-10']}`}>
-              <div className={`${styles.flex}`}>
-                {totalInventoryCount > 0 &&
+              <div className={`${styles.flex} ${styles['pr-10']}`}>
+                {totalInventoryCount > 0 && offerInfo.availabilityError &&
                   <a className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['fs-14']} ${styles['small-btn']} ${styles['checkout-instant-btn']}`} onClick={this.checkoutInstantHandler}>{PDP_PAGE.CHECKOUT_INSTANT}</a>}
               </div>
-              <div>
+              <div className={styles['flex']}>
                 {
                   totalInventoryCount < 5
                     ?
-                    <span className={`${styles.flex} ${styles['fs-12']} ${styles['google-clr']} ${styles.fontW600}`}>{PDP_PAGE.ONLY} {totalInventoryCount} {PDP_PAGE.LEFT_IN_STOCK}</span>
+                    <span className={`${styles.flex} ${styles['fs-12']} ${styles['google-clr']} ${styles['pr-10']} ${styles.fontW600}`}>
+                      {
+                        totalInventoryCount === 0
+                          ?
+                            PDP_PAGE.PRODUCT_OUT_OF_STOCK
+                          :
+                            `${PDP_PAGE.ONLY} ${totalInventoryCount} ${PDP_PAGE.LEFT_IN_STOCK}`
+                        }
+                    </span>
                     :
-                    null
+                    null 
                 }
-
-                <span className={`${styles.flex} ${styles['fs-12']}`}>{PDP_PAGE.COD_AVAILABLE}</span>
+                <span className={`${styles.flex} ${styles['fs-12']} ${styles['pl-10']}`}>{PDP_PAGE.COD_AVAILABLE}</span>
               </div>
-
-              {showCheckoutModal ?
-                <Modal className={`react-router-modal__modal ${styles['right-side-modal']}`} onBackdropClick={this.checkoutInstantHandler}>
-                  <RightSideBar
-                    data={listingCartData}
-                    hideUpSell
-                    showInstant
-                    showStepper // only for PDP
-                    isPdp
-                    hideCouponCode
-                    insnt_item_listing_id={listingCartData.items.length > 0 ? listingCartData.items[0].listing_id : ''}
-                    increaseItemCnt={this.increaseItemCnt}
-                    decreaseItemCnt={this.decreaseItemCnt}
-                  />
-                </Modal>
-                : null
-              }
+              <React.Fragment>
+                <div className={showCheckoutModal ? `${styles['modalContainer']} ${styles['showDiv']}` : `${styles['modalContainer']} ${styles['hideDiv']}`}>
+                  <div className={`${styles['disabled']}`} onClick={this.checkoutInstantHandler}></div>
+                </div>
+                <div className={`${styles['modal']} ${showCheckoutModal ? styles['showModal'] : styles['hideModal']}`}>
+                  <div className={styles['modalFill']}>
+                    {showCheckoutModal &&
+                      <RightSideBar
+                        data={listingCartData}
+                        hideUpSell
+                        showInstant
+                        showStepper // only for PDP
+                        isPdp
+                        hideCouponCode
+                        insnt_item_listing_id={listingCartData.items.length > 0 ? listingCartData.items[0].listing_id : ''}
+                        increaseItemCnt={this.increaseItemCnt}
+                        decreaseItemCnt={this.decreaseItemCnt}
+                      />}
+                  </div>
+                </div>
+              </React.Fragment>
             </div>
         }
         {/* <div className={`${styles['fs-18']} ${styles['fontW600']} ${styles['black-color']}`}>
@@ -213,14 +228,14 @@ TitleInfo.propTypes = {
 };
 
 const mapStateToProps = store => ({
-  listingCartData: cartSelectors.getListingCartResults(store),
+  listingCartData: cartSelectors.getCartResults(store),
   cmpData: selectors.getCmpData(store),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   addToCart: cartActionCreators.addToCart,
   cartItemCount: cartActionCreators.cartItemCount,
-  getListingCartResults: cartActionCreators.getListingCartResults,
+  getListingCartResults: cartActionCreators.getCartResults,
   removeCartItem: cartActionCreators.removeCartItem,
   addToCompare: compareActions.addToCompare,
   getCompareCount: compareActions.getCompareCount,

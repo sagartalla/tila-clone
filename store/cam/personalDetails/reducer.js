@@ -131,7 +131,8 @@ const personalDetailsReducer = typeToReducer({
     PENDING: state => Object.assign({}, state, { ui: { loading: true }}),
     FULFILLED: (state,action) => Object.assign({}, state, {
       ui: { loading:false },
-      otpResponse:action.payload.data
+      otpResponse:action.payload.data,
+      otpData:{Response:'RESET'}
     }),
     REJECTED: (state, action) => Object.assign({}, state,
       { error: action.payload.data, ui: {loading: false }

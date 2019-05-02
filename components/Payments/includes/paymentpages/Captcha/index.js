@@ -1,3 +1,4 @@
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
@@ -5,7 +6,6 @@ import Bin from './Bin';
 import Box from './Box';
 import { languageDefinations } from '../../../../../utils/lang/';
 import SVGComponent from '../../../../common/SVGComponet';
-import { mergeCss } from '../../../../../utils/cssUtil';
 import {actionCreators, selectors} from '../../../../../store/captcha';
 import { bindActionCreators } from 'redux';
 import HTML5Backend from 'react-dnd-html5-backend';
@@ -13,17 +13,22 @@ import { DragDropContext } from 'react-dnd';
 import { Router } from '../../../../../routes';
 
 const { PAYMENT_PAGE, ORDER_PAGE } = languageDefinations();
-const styles = mergeCss('components/Payments/payment');
+
+import lang from '../../../../../utils/language';
+
+import styles_en from '../../../payment_en.styl';
+import styles_ar from '../../../payment_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 const initialState = {
   openBox: <SVGComponent clsName={`${styles['drop-box-icon']}`} src="icons/captcha-icons-list/box-icon" />,
   boxText: <span className={`${styles['fs-12']} ${styles['pt-20']}`}>{PAYMENT_PAGE.DROP_THE_ANSWER_INTO_BOX}</span>,
 }
 
-class Captcha extends React.Component{
+class Captcha extends React.Component {
   constructor() {
     super();
-    debugger;
     this.state = { checked: false,
       continueButton: null,
       ...initialState

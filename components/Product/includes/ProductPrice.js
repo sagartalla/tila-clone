@@ -1,17 +1,22 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import SVGCompoent from '../../common/SVGComponet';
-import { mergeCss } from '../../../utils/cssUtil';
+import SVGComponent from '../../common/SVGComponet';
+
 import { languageDefinations } from '../../../utils/lang';
 import { OverlayTrigger, Popover } from 'react-bootstrap';
 
-const styles = mergeCss('components/Product/product');
+import lang from '../../../utils/language';
+
+import styles_en from '../product_en.styl';
+import styles_ar from '../product_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 const { PDP_PAGE, CART_PAGE, ORDER_PAGE, COUPON_OFFERS } = languageDefinations();
 
 const popover = ({strickedPrice: mrp, sellingPrice:sp, offerDiscounts, showPrise:total, totalDiscountMRP:discountMrp, currency}) => {
   return (
-    <Popover id="offer-popover">
-      <div>
+      <div className={`${styles['p-10']} ${styles['tool-tip']}`}>
         <div className={`${styles['table']} ${styles['width100']}`}>
           <div className={styles['t-row']}>
             <div className={styles['t-cell']}>
@@ -48,7 +53,9 @@ const popover = ({strickedPrice: mrp, sellingPrice:sp, offerDiscounts, showPrise
             <div className={styles['t-cell']}>
               <div className={styles['fs-12']}>{CART_PAGE.DELIVERY_CHARGES}</div>
             </div>
-            <div className={`${styles['t-cell']} ${styles['fs-12']}`}>{CART_PAGE.FREE}</div>
+            <div className={`${styles['t-cell']} ${styles['fs-12']}`}>
+              <SVGComponent clsName={`${styles['ship-icon']}`} src="icons/free-shipping" />
+            </div>
           </div>
           <div className={`${styles['t-row']} ${styles['total-amount']}`}>
             <div className={`${styles['t-cell']} ${styles['fs-12']}`}>{ORDER_PAGE.TOTAL}</div>
@@ -59,7 +66,6 @@ const popover = ({strickedPrice: mrp, sellingPrice:sp, offerDiscounts, showPrise
           <div className={`${styles['p-5']} ${styles['mt-5']} ${styles['fs-12']} ${styles['overall-amount']}`}>{CART_PAGE.OVERALL_YOU_SAVE} {`${discountMrp} ${currency}`} {CART_PAGE.ON_THIS_PRODUCT}</div>
         </div>
       </div>
-    </Popover>
   );
 }
 
@@ -116,7 +122,7 @@ const ProductPrice = ({offerInfo}) => {
           }
         </Fragment>
       :
-        <h2>
+        <h2 className={styles['fs-16']}>
           {
             availabilityError
             ?

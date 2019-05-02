@@ -51,6 +51,8 @@
 
 .editProfileModal
   padding 40px
+  max-height 100vh
+  overflow auto
   .personal-info-img
     padding 40px 0
     .personal-info-img-icon
@@ -106,6 +108,9 @@
   .gender-unselect>span
     color base-font
 
+.profile-dts
+  font-size 12px
+
 .modalContainer
   height 100%
   width 100%
@@ -146,16 +151,10 @@
   animation-fill-mode both
 .phoneInpt
   .show-otp
-    opacity 0
+    opacity 1
     position: absolute;
     right: 0;
     top: 8px;
-  &:hover
-    .show-otp
-      opacity 1
-      position absolute
-      right 0
-      top 8px
 .loader-div
   width 20px
   position absolute
@@ -200,6 +199,15 @@
     padding 10px
     border 0
     width 100%
+.verify-no-btn-disabled
+  border-bottom-right-radius 26px
+  box-shadow 0 2px 7px 0 rgba(0, 0, 0, 0.08)
+  background-color #cccccc
+  color white
+  padding 10px
+  border 0
+  width 100%
+  cursor not-allowed
 .mobile-tick-icon
   .mobiletick-icon-styl
     width 101px

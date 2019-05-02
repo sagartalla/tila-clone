@@ -5,7 +5,7 @@
     "build": "version=$version next build",
     "start": "NODE_ENV=production ENV=dev node server.js",
     "start:ecs": "NODE_ENV=production node server.js",
-    "start:stage": "PORT=3000 NODE_ENV=production ENV=staging node server.js",
+    "start:stage": "PORT=3000 NODE_ENV=production ENV=stage node --inspect server.js",
     "start:preprod": "PORT=3000 NODE_ENV=production ENV=preprod node server.js",
     "start:prod": "NODE_ENV=production ENV=production node server.js"
   },
@@ -57,8 +57,8 @@
     "slick-carousel": "^1.8.1",
     "stylus": "^0.54.5",
     "type-to-reducer": "^1.1.0",
-    "universal-cookie": "^2.2.0",
-    "universal-cookie-express": "^2.2.0",
+    "universal-cookie": "^3.1.0",
+    "universal-cookie-express": "^3.1.0",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
@@ -77,6 +77,7 @@
     "react-dev-utils": "^5.0.1",
     "svg-inline-loader": "^0.8.0",
     "svg-inline-react": "^3.1.0",
-    "webpack-bundle-analyzer": "^3.0.3"
+    "webpack-bundle-analyzer": "^3.0.3",
+    "webpack-filter-warnings-plugin": "^1.2.1"
   }
 }

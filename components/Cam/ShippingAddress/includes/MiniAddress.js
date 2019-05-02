@@ -2,8 +2,13 @@ import React from 'react';
 
 import { languageDefinations } from '../../../../utils/lang/';
 
-import { mergeCss } from '../../../../utils/cssUtil';
-const styles = mergeCss('components/Cam/ShippingAddress/address');
+import lang from '../../../../utils/language';
+
+import styles_en from '../address_en.styl';
+import styles_ar from '../address_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 const { DELIVERY_ADDR_PAGE } = languageDefinations();
 
 const MiniAddress = (props) => {
@@ -28,7 +33,7 @@ const MiniAddress = (props) => {
         }
       </div>
       <div className={`${styles['flex']} ${styles['justify-center']} ${styles['p-10']} ${styles['add-new-addres']}`}>
-        <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']}`} onClick={showAddAdrressForm}> {DELIVERY_ADDR_PAGE.ADD_NEW_BTN} </button>
+        <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['fp-btn-large']}`} onClick={showAddAdrressForm}> {DELIVERY_ADDR_PAGE.ADD_NEW_BTN} </button>
       </div>
     </div>
   )

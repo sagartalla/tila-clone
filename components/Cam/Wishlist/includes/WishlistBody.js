@@ -6,10 +6,15 @@ import Cookies from 'universal-cookie';
 import SVGComponent from '../../../common/SVGComponet';
 import { languageDefinations } from '../../../../utils/lang/';
 import { Router } from '../../../../routes';
-import { mergeCss } from '../../../../utils/cssUtil';
 import constants from '../../../../constants';
 
-const styles = mergeCss('components/Cam/Wishlist/wishlist');
+import lang from '../../../../utils/language';
+
+import styles_en from '../wishlist_en.styl';
+import styles_ar from '../wishlist_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 const cookies = new Cookies();
 
 const language = cookies.get('language') || 'en';
@@ -48,7 +53,6 @@ const WishlistBody = (props) => {
     Router.push(`/${country}/${language}/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemType}`);
   };
 
-  console.log('ewfbfiwu', pageDetails);
   return (
     <div>
       <div className={`${styles['flex']}`}>
@@ -88,7 +92,7 @@ const WishlistBody = (props) => {
                             className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['add-to-btn']}`}
                             onClick={buttonValue && addToCart}
                           >
-                            {buttonValue ? WISH_LIST_PAGE.ADD_TO_CART_BTN : PDP_PAGE.ADDED_TO_CART}
+                            {buttonValue ? WISH_LIST_PAGE.ADD_TO_CART_BTN : PDP_PAGE.IN_CART}
                           </button>
                           :
                           <button
@@ -106,12 +110,12 @@ const WishlistBody = (props) => {
                         <span id={wishlist_id} className={`${styles['absolute']} ${styles['delete-icon-part']}`} onClick={deleteItem}>
                           <SVGComponent clsName={`${styles['delete-icon']}`} src="icons/delete-icon/delete-icon" />
                         </span>
-                        <h4 className={`${styles['fontW600']} ${styles['light-gry-clr']} ${styles['mt-25']}`}><span className={`${styles['fs-30']} ${styles['m-fs-18']}`}>{price}</span> <span className={`styles['fs-18']} ${styles['m-fs-14']}`}> {cur}</span></h4>
+                        <h4 className={`${styles['fontW600']} ${styles['light-gry-clr']} ${styles['mt-25']} ${styles['ff-b']}`}><span className={`${styles['fs-20']} ${styles['m-fs-18']}`}>{price} {cur}</span></h4>
                         {
                           variant_id && percentage(price, mrp) <= -5 ?
-                          <span className={`${styles['flex']}`}>
+                          <span className={`${styles['flex']} ${styles['flex-center']}`}>
                             <span className={`${styles['success-green']} ${styles.flex}`}>{percentage(price, mrp)}%</span>&nbsp;&nbsp;&nbsp;
-                            <strike className={`${styles['label-gry-clr']}`}>{mrp} {cur}</strike>
+                            <strike className={`${styles['label-gry-clr']} ${styles['fs-12']}`}>{mrp} {cur}</strike>
                           </span> : ''
                         }
                         {wishlisted_price > 0 && price && cur && getPriceAlert(price, wishlisted_price, cur)}

@@ -8,13 +8,18 @@ import Cookies from 'universal-cookie';
 import Btn from '../../../common/Button';
 import Input from '../../../common/Input';
 import { actionCreators, selectors } from '../../../../store/cam/personalDetails';
-import { mergeCss } from '../../../../utils/cssUtil';
 import { languageDefinations } from '../../../../utils/lang';
 import CountryDialCode from '../../../../constants/CountryDialCode';
 import FormValidator from '../../../common/FormValidator';
 import SVGCompoent from '../../../common/SVGComponet';
 
-const styles = mergeCss('components/Cam/PersonelDetails/profile');
+import lang from '../../../../utils/language';
+
+import styles_en from '../profile_en.styl';
+import styles_ar from '../profile_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 const { CONTACT_INFO_MODAL } = languageDefinations();
 const cookies = new Cookies();
 
@@ -50,15 +55,16 @@ class EditPhone extends React.Component {
       }
     ])
     this.state = {
-      phoneNumber: "",
+      phoneNumber: "" || props.userData && props.userData.mobile_no,
       otp: '',
       error: "",
       show: false,
       countryCode: CountryDialCode[country].data,
       otpResponse: null,
-      showOtp: true,
-      validation: this.validations.valid()
+      validation: this.validations.valid(),
+      otpCount: 0
     }
+    this.otpTimer = () => {}
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleClose = this.handleClose.bind(this)
     this.optionChange = this.optionChange.bind(this)
@@ -72,7 +78,8 @@ class EditPhone extends React.Component {
 
     if (this.state.show == true && nextProps.errorMessege != this.state.error) {
       this.setState({
-        error: nextProps.errorMessege
+        error: nextProps.errorMessege,
+        otpResponse:'RESET'
       });
     }
 
@@ -100,7 +107,7 @@ class EditPhone extends React.Component {
     return false
   }
   fetchOtp() {
-    const { countryCode, phoneNumber, showOtp } = this.state
+    const { countryCode, phoneNumber, otpCount } = this.state
     // let validation = this.validations.validate(this.state)
     // this.setState({ validation })
     if (phoneNumber.length > 0) {
@@ -109,7 +116,7 @@ class EditPhone extends React.Component {
         mobile_no: phoneNumber,
       };
       this.setState({
-        showOtp: false,
+        otpCount: otpCount + 1,
       }, () => this.props.otpUserUpdate(params));
     }
   }
@@ -147,8 +154,8 @@ class EditPhone extends React.Component {
   }
 
   render() {
-    const { phoneNumber, error, otp, countryCode, validation, otpResponse, showOtp } = this.state;
-    const { isLoading, isPopup } = this.props
+    const { phoneNumber, error, otp, countryCode, validation, otpResponse, otpCount } = this.state;
+    const { isLoading, isPopup, mobileVerified } = this.props;
     if (otpResponse === 'SUCCESS') {
       return (
         <div className={styles['edit-mobile-no-succ']}>
@@ -159,7 +166,10 @@ class EditPhone extends React.Component {
               //     X</a>
               //   </Col>
               // </Row>
-              <h4 className={`${styles['fs-20']} ${styles['fontW300']} ${styles['p-20']}`}><span onClick={this.handleClose}>X</span> <span className={`${styles['pl-20']} ${styles['lgt-blue']}`}>{CONTACT_INFO_MODAL.EDIT_PHONE_NUMBER}</span></h4>
+              <h4 className={`${styles['flx-spacebw-alignc']} ${styles['m-0']} ${styles['p-20']}`}> 
+                <span className={styles['lgt-blue']}>{CONTACT_INFO_MODAL.EDIT_PHONE_NUMBER}</span>
+                <span onClick={this.handleClose} className={styles['fs-24']}>X</span>
+              </h4>
             )
           }
           {
@@ -188,7 +198,10 @@ class EditPhone extends React.Component {
             //     X</a>
             //   </Col>
             // </Row>
-            <h4 className={`${styles['fs-20']} ${styles['fontW300']} ${styles['p-20']}`}><span onClick={this.handleClose}>X</span> <span className={`${styles['pl-20']} ${styles['lgt-blue']}`}>{CONTACT_INFO_MODAL.EDIT_PHONE_NUMBER}</span></h4>
+            <h4 className={`${styles['flx-spacebw-alignc']} ${styles['m-0']} ${styles['p-20']}`}>
+              <span>{CONTACT_INFO_MODAL.EDIT_PHONE_NUMBER}</span>
+              <span onClick={this.handleClose} className={`${styles['fs-22']} ${styles['black-color']}`}>X</span> 
+            </h4>
           )
         }
         {
@@ -202,6 +215,7 @@ class EditPhone extends React.Component {
             :
             null
         }
+        {!mobileVerified ?
         <div className={styles['editProfileModal']}>
           {
             isLoading ?
@@ -225,7 +239,7 @@ class EditPhone extends React.Component {
                           (value, index) => (<option
                             key={CountryDialCode[value].code}
                             value={CountryDialCode[value].code}>
-                            <img src={CountryDialCode[value].img} />{CountryDialCode[value].code}
+                              {CountryDialCode[value].code}
                           </option>
                           ))
                       }
@@ -251,7 +265,7 @@ class EditPhone extends React.Component {
                   <div className={styles['fp-input']}>
                     <input
                       type="text"
-                      val={phoneNumber}
+                      value={phoneNumber}
                       onChange={this.handlePhoneNumberChange}
                     />
                     <span className={styles['highlight']}></span>
@@ -263,7 +277,9 @@ class EditPhone extends React.Component {
                         : null
                     }
                     {/* <span className={styles['error']}>error message</span> */}
-                    {showOtp ? <a className={`${styles['show-otp']} ${styles['fs-12']} ${styles['thick-blue']}`} onClick={this.fetchOtp}>{CONTACT_INFO_MODAL.SEND_OTP}</a> : null}
+                      <a className={`${styles['show-otp']} ${styles['fs-12']} ${styles['thick-blue']}`} onClick={this.fetchOtp}>
+                       {otpCount ? `${CONTACT_INFO_MODAL.RESEND} ${CONTACT_INFO_MODAL.OTP}` : CONTACT_INFO_MODAL.SEND_OTP}
+                      </a>
                   </div>
                   {/* <Input
                     placeholder={`${CONTACT_INFO_MODAL.ENTER} ${CONTACT_INFO_MODAL.PHONE_NUMBER}`}
@@ -280,13 +296,14 @@ class EditPhone extends React.Component {
                   } */}
                 </div>
               </Col>
-              <Col xs={12} md={12} className={styles['pt-20']}>
+              {otpCount ?
+                <Col xs={12} md={12} className={styles['pt-20']}>
                 <div className={`${styles['request-opt']} ${styles['relative']}`}>
                   {/* <Input type='number' placeholder={`${CONTACT_INFO_MODAL.ENTER} ${CONTACT_INFO_MODAL.OTP}`} val={otp} onChange={this.handleOTPChange} /> */}
                   <div className={styles['fp-input']}>
                     <input
                       type="number"
-                      val={otp}
+                      value={otp}
                       className={styles['width100']}
                       onChange={this.handleOTPChange}
                       required
@@ -302,7 +319,6 @@ class EditPhone extends React.Component {
                     {/* <span className={styles['error']}>error message</span> */}
 
                   </div>
-                  <span className={styles['request-opt-inn']}><a onClick={this.fetchOtp}>{CONTACT_INFO_MODAL.RESEND} {CONTACT_INFO_MODAL.OTP}</a></span>
                 </div>
                 {/* {
                       validation.otp.isInValid ?
@@ -311,21 +327,24 @@ class EditPhone extends React.Component {
                         </div> : null
                     } */}
               </Col>
+              : null}
             </Row>
             <Row>
               <Col xs={12} md={12} className={`${styles['t-c']}`}>
-                <button className={`${styles['verify-no-btn']} ${styles['mt-20']}`} onClick={this.handleSubmit}>{this.props.buttonText}</button>
+                <button disabled={!otp} className={`${!otp ? styles['verify-no-btn-disabled'] : styles['verify-no-btn']} ${styles['mt-20']}`} onClick={this.handleSubmit}>{this.props.buttonText}</button>
               </Col>
             </Row>
             <div>
               {{
-                null: null,
                 FAILURE: <div className={`${styles['thick-red']} ${styles['fs-12']}`}>{CONTACT_INFO_MODAL.ENTER_VALID_OTP}</div>,
-                SUCCESS: ''
+                SUCCESS: '',
+                RESET:''
               }[otpResponse]}
             </div>
           </div>
-        </div>
+        </div> :
+       <div className={`${styles['success-green']} ${styles['mb-25']}`}>{CONTACT_INFO_MODAL.PLEASE_CONFIRM_YOUR_ORDER}</div>
+      }
       </div>
 
     );

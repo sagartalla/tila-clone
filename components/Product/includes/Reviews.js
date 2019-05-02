@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { mergeCss } from '../../../utils/cssUtil';
+
 import { Grid, Row, Col, Tabs, Tab, ProgressBar } from 'react-bootstrap';
 import Theme from '../../helpers/context/theme';
 import { selectors, actionCreators } from '../../../store/product'
@@ -8,12 +8,19 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import {Modal} from 'react-bootstrap';
 import SVGCompoent from '../../common/SVGComponet';
-const styles = mergeCss('components/Product/product');
+
 import {languageDefinations} from '../../../utils/lang';
 const {PDP_PAGE} = languageDefinations();
 import ReviewFeedBackModal from './reviewFeedbackModal'
 import StarRating from '../../common/StarRating';
 import AuthWrapper from '../../common/AuthWrapper';
+
+import lang from '../../../utils/language';
+
+import styles_en from '../product_en.styl';
+import styles_ar from '../product_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 class Review extends Component {
   state = {

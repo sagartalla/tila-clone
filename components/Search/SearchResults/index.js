@@ -11,10 +11,14 @@ import SVGComponent from '../../common/SVGComponet';
 import { actionCreators, selectors } from '../../../store/search';
 import { actionCreators as cartActionCreators, selectors as cartSelector } from '../../../store/cart';
 import { actionCreators as wishlistActionCreators } from '../../../store/cam/wishlist';
-import { mergeCss } from '../../../utils/cssUtil';
 import { Router } from '../../../routes';
 
-const styles = mergeCss('components/Search/search');
+import lang from '../../../utils/language';
+
+import styles_en from '../search_en.styl';
+import styles_ar from '../search_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 const cookies = new Cookie();
 const { SEARCH_PAGE } = languageDefinations();
@@ -65,20 +69,20 @@ class SearchResults extends Component {
       productID
     });
   }
-  buyNow(listingId) {
+  buyNow(listingId,productId) {
     this.setState({
       buyNow: true
     }, () => {
-      this.addToCart(listingId);
+      this.addToCart(listingId,productId);
     });
   }
 
-  addToCart(listingId) {
+  addToCart(listingId,productId) {
     this.setState({
       productID:[]
     })
     this.props.addToCartAndFetch({
-      listing_id: listingId
+      listing_id: listingId, product_id: productId,
     });
   }
 
@@ -93,7 +97,11 @@ class SearchResults extends Component {
       return (
         <div className={`${styles['caption']}`}>
           <div className={`${styles['no-results']} ${styles['fs-40']} ${styles['fontW600']} ${styles['justify-center']}`}>
-              {SEARCH_PAGE.SORRY_NO_RESULTS}<br/><span  className={`${styles['fontW300']} ${styles['fs-20']}`}>{SEARCH_PAGE.FOR} "{finalQuery}"</span>
+              {SEARCH_PAGE.SORRY_NO_RESULTS}<br/>
+              <div className={`${styles.flex} ${styles['flex-center']}  ${styles['flex-colum']}`}>
+              <span  className={`${styles['fontW300']} ${styles['fs-20']}`}>{SEARCH_PAGE.FOR}</span>
+              <div className={`${styles.ellipsis} ${styles['fontW300']} ${styles['fs-20']}`} title={`"${finalQuery}"`}>"{finalQuery}"</div>
+              </div>
           </div>
           <div className={`${styles['no-search']}`}>
             <SVGComponent src={"errors-img/noSearch"} />

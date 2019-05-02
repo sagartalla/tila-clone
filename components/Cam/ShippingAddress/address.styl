@@ -3,12 +3,37 @@
 .address-container
   .common-input-mb
     margin-bottom 25px
+  .auto-suggestions-list {
+      position: absolute;
+      z-index: 999;
+      left: 0%;
+      top: 100%;
+      max-height: 135px;
+      overflow: auto;
+      overflow-x: hidden;
+      width: 100%;
+  }
 
+.auto-suggestions {
+   z-index: 1;
+    cursor: pointer;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.11);
+    line-height: 2.5;
+}
+.item {
+      display: block;
+      border: 0.5px solid border-gray;
+      border-top: none;
+}
   .hide
     display none
+  
+  .pls-icon
+    width: 20px
+    height: 20px
 
   .min-address-part
-    box-shadow 0 0 7px 1px rgba(0,0,0,.07)
+    box-shadow 0px 8px 6px 2px rgba(0,0,0,0.12)
     left 0
     right 0
     z-index 9
@@ -36,28 +61,28 @@
   .flex-wrap
     flex-wrap wrap
 
-  .address-card-new
-    min-height 130px
-    cursor pointer
-    .pls-icon
-      width 16px
-
   .addr-header
     border-bottom 1px solid light-gray-color
     padding 25px 30px
 
   .address-body
     padding-bottom 0 !important
+    .address-card-new
+      .pls-icon
+        width 16px
     .address-card
       // border 1px solid light-gray-color
       border: solid 0.5px light-border;
       margin-bottom 30px
       border-radius 4px
       transition-timing-function ease-in-out;
+     
+      &..address-card-new
+        min-height 195px
       &:hover
         box-shadow 0 0 12px 0 rgba(0,0,0,0.1)
         border 0.5px solid transparent
-        .address-card-head span 
+        .address-card-head span
           font-weight 300
       .address-card-head
         border-bottom 1px dashed rgba(151, 151, 151, 0.2)
@@ -69,25 +94,25 @@
       .address-card-body
         padding 12px 20px
         min-height 114px
-        .full-address-details 
+        .full-address-details
           overflow: hidden;
           position: relative;
           line-height: 1.2em;
-          max-height: 2.3em;
-          text-align: justify; 
+          height: 28px;
+          text-align: justify;
           margin-right: -1em;
           padding-right: 1em;
           &:before
             content: '...';
             position: absolute;
             right: 0;
-            bottom: -1px;
+            bottom: -5px;
           &:after
             content: '';
             position: absolute;
             right: 0;
             width: 1em;
-            height: 1em;
+            height: 1.9em;
             margin-top: 0.2em;
             background: white;
         // address
@@ -101,15 +126,16 @@
             width 14px
             height 16px
           .edit-icon-inn
-            width 20px
+            width 16px
             height 16px
+            margin-right 5px
         cursor pointer
       &.address-selected
         border 0.5px solid parrot-color
 
   .addr-new-container
     .new-addr-inn
-      border-top 1px dashed rgba(151,151,151,0.2)
+      // border-top 1px dashed rgba(151,151,151,0.2)
       // .map
       //   height 200px
       //   background-color base-font
@@ -126,7 +152,7 @@
 
       .pref-loc
         padding 10px 0
-      
+
       .home-work-btns
         button
           padding 10px 20px
@@ -154,6 +180,7 @@
   .map-input
     width 350px
     padding 10px
+    background white
 
 .order-map
   height 400px
@@ -164,6 +191,20 @@
     width 350px
     padding 10px
 
+.not-shippable {
+  border: 1px solid thick-red-arrow;
+  background-color: light-red-color;
+  border-radius: 3px;
+  .not-shipping-font {
+    font-size: 13px;
+  }
+}
+
+.fp-btn.fp-btn-primary:disabled {
+    background-color: generic-gray-color;
+    color: white-color
+}
+       
 @media screen and (min-device-width: 320px) and (max-device-width: 736px) and (orientation : portrait){
   .addr-new-container {
     padding 0 0 30px 0
@@ -173,4 +214,3 @@
     display flex
   }
 }
-

@@ -10,8 +10,14 @@ import { selectors, actionCreators } from '../../../../store/product';
 import Variant from './Variant';
 import SimilarProducts from './SimilarProducts';
 import { Router } from '../../../../routes';
-import { mergeCss } from '../../../../utils/cssUtil';
-const styles = mergeCss('components/Product/product');
+
+import lang from '../../../../utils/language';
+
+import styles_en from '../../product_en.styl';
+import styles_ar from '../../product_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 
 const cookies = new Cookies();
 
@@ -85,12 +91,21 @@ class VariantsAndSimilarProducts extends Component {
       <div className={`${styles['flex-center']} ${styles['border-b']} ${styles['flex-wrp']}`}>
         {
           _.map(variantsDisplay, (variantAttVal, variantAttKey) => {
-            return <Variant onSelectVariant={this.onSelectVariant} key={variantAttVal.displayName} {...variantAttVal} id={variantAttKey} />;
+            return <Variant
+                      onSelectVariant={this.onSelectVariant}
+                      key={variantAttVal.displayName}
+                      {...variantAttVal} id={variantAttKey}
+                    />;
           })
         }
         {
           _.map(similarProductsDisplay, (variantAttVal, variantAttKey) => {
-            return <SimilarProducts onSelectProduct={this.onSelectProduct} key={variantAttVal.displayName} {...variantAttVal} id={variantAttKey} />
+            return <SimilarProducts
+                      onSelectProduct={this.onSelectProduct}
+                      key={variantAttVal.displayName}
+                      {...variantAttVal}
+                      id={variantAttKey}
+                    />
           })
         }
       </div>
@@ -98,9 +113,9 @@ class VariantsAndSimilarProducts extends Component {
   }
 }
 
-const mapStateToProps = (store) => ({
+const mapStateToProps = (store,ownProps) => ({
   getSelectedVariantId: selectors.getSelectedVariantId,
-  VariantsAndSimilarProducts: selectors.getVariantsAndSimilarProducts(store),
+  VariantsAndSimilarProducts: selectors.getVariantsAndSimilarProducts(ownProps.variantId,ownProps.productId)(store),
   getSelectedPropductId: selectors.getSelectedPropductId(store),
   SelectedVariantData: selectors.getSelectedVariantData(store),
 });

@@ -8,7 +8,7 @@ import Blocker from '../../common/Blocker';
 import RightBar from '../CartPaymentSideBar';
 import Wishlist from '../../Cam/Wishlist/';
 import { languageDefinations } from '../../../utils/lang/';
-import { mergeCss } from '../../../utils/cssUtil';
+
 import { Router } from '../../../routes';
 import { cartPlaceHolder } from '../../common/Loader/skeletonPlaceHolder';
 
@@ -17,7 +17,12 @@ const cookies = new Cookie();
 const language = cookies.get('language') || 'en';
 const country = cookies.get('country') || 'SAU';
 
-const styles = mergeCss('components/Cart/cart');
+import lang from '../../../utils/language';
+
+import styles_en from '../cart_en.styl';
+import styles_ar from '../cart_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 const CartBody = ({
   showBlocker,
@@ -51,7 +56,7 @@ const CartBody = ({
       <Row>
         <Col md={12} sm={12} xs={12}>
           <h4 className={`${styles['mt-20']} ${styles['mb-20']} ${styles['fontW300']} ${styles['fs-20']} ${styles['light-gry-clr']} ${styles['text-capitalize']}`}>
-            <span>{`${cnt} ${CART_PAGE.ITEMS_IN_CART}`}</span>
+            { cnt===1 ? <span>{`${cnt} item`}</span> : cnt===0 ? <span>Your shopping cart is empty.</span> :<span>{`${cnt} ${CART_PAGE.ITEMS}`}</span> }
           </h4>
         </Col>
       </Row>
@@ -61,6 +66,7 @@ const CartBody = ({
             {
               items.map((item,index) => (
                 <CartItem
+                  key={item.item_id}
                   item={item}
                   count={count}
                   increaseItemCnt={increaseItemCnt}
@@ -69,8 +75,6 @@ const CartBody = ({
                   removeCartItem={removeCartItem}
                   cartStepperInputHandler={cartStepperInputHandler}
                   addOrRemoveGift={addOrRemoveGift}
-                  cartData={cartData}
-                  index={index}
                 />
             ))}
 
@@ -85,6 +89,7 @@ const CartBody = ({
                   <RightBar
                     data={data}
                     showInstant={true}
+                    isFromCart={true}
                     showCheckoutBtn={true}
                     checkoutBtnHandler={checkoutBtnHandler}
                     openSlider={openSlider}

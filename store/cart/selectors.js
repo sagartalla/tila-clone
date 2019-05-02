@@ -19,6 +19,7 @@ const getCartResults = (store) => {
       newData.currency = data.items[0].listing_info.selling_price_currency;
       newData.coupon_code = data.coupon_code;
       newData.coupon_applied = data.coupon_applied;
+      newData.cart_shippable = data.cart_shippable;
       newData.applyCouponRequestCount = data.applyCouponRequestCount;
       data.items.map((item, index) => {
         newData.items[index] = {
@@ -47,6 +48,9 @@ const getCartResults = (store) => {
           mrp: item.listing_info.pricing && item.listing_info.pricing.mrp,
           offerDiscounts: item.listing_info.pricing && item.listing_info.pricing.actions,
           total_discount: item.listing_info.pricing && item.listing_info.pricing.total_discount_mrp,
+          variantAttributes: item.product_details.product_details_vo.cached_variant[item.listing_info.variant_id].attribute_map ?
+            Object.values(item.product_details.product_details_vo.cached_variant[item.listing_info.variant_id].attribute_map)
+              .filter(attr => attr.visible) : [],
         };
       });
     }
@@ -79,7 +83,9 @@ const isAddedToCart = (store) => {
   } catch (e) {
   }
 };
-
+const getEditDetails = (store) => {
+  return store.cartReducer.editDetails
+}
 const isLastAddedToCartSuccess = (store) => {
   return store.cartReducer.data.addToCart.item_status === 'ADDED';
 }
@@ -88,5 +94,5 @@ const getBtnLoaders = store => store.cartReducer.ui.btnLoading;
 
 export {
   getCartResults, getLoadingStatus, getErrorMessege,
-  isAddedToCart, getBtnLoaders, isLastAddedToCartSuccess,
+  isAddedToCart, getBtnLoaders, isLastAddedToCartSuccess,getEditDetails
 };

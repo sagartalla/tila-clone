@@ -10,6 +10,10 @@ const initialState = {
   reviewResponse:{},
   variantsData: {},
   error: {},
+  searchCityKeyWord: '',
+  searchCountryKeyWord: '',
+  allCitiesData: [],
+  countriesData: [],
 };
 const productReducer = typeToReducer({
   [actions.GET_PRODUCT]: {
@@ -75,7 +79,37 @@ const productReducer = typeToReducer({
   },
   [actions.SET_SELECTED_PRODUCT_DATA]: (state, action) => {
     return state;
-  }
+  },
+
+  [actions.GET_CITIES]: {
+    PENDING: state => Object.assign({}, state, { ui: { ...state.ui, loading: true } }),
+    FULFILLED: (state, action) => Object.assign({}, state, {
+      ui: {
+        ...state.ui,
+        loading: false,
+      },
+      allCitiesData: action.payload && action.payload.data,
+    }),
+    REJECTED: state =>
+      Object.assign({}, state, { ui: { ...state.ui, loading: false } }),
+  },
+  [actions.GET_COUNTRIES]: {
+    PENDING: state => Object.assign({}, state, { ui: { ...state.ui, loading: true } }),
+    FULFILLED: (state, action) => Object.assign({}, state, {
+      ui: {
+        ...state.ui,
+        loading: false,
+      },
+      countriesData: action.payload && action.payload.data,
+    }),
+    REJECTED: state => Object.assign({}, state, { ui: { ...state.ui, loading: false } }),
+  },
+  [actions.AUTOCOMPLETE_CITY]: (state, action) => Object.assign({}, state, {
+    searchCityKeyWord: action.searchKeyWord,
+  }),
+  [actions.AUTOCOMPLETE_COUNTRY]: (state, action) => Object.assign({}, state, {
+    searchCountryKeyWord: action.searchKeyWord,
+  }),
 }, initialState);
 
 export default productReducer;

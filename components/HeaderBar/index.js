@@ -9,10 +9,16 @@ import ActionBar from './ActionBar';
 import MegaMenu from './includes/MegaMenu';
 import SearchFilters from '../common/SearchFilters';
 // import Betalogo from '../../components/common/beta';
-import { mergeCss } from '../../utils/cssUtil';
+
 import publicUrls from '../../constants';
 import { actionCreators, selectors } from '../../store/search';
-const styles = mergeCss('components/HeaderBar/header');
+
+import lang from '../../utils/language';
+
+import styles_en from './header_en.styl';
+import styles_ar from './header_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 const HeaderBar = props => (
   <div className={`${styles['header-container']}`}>
@@ -22,7 +28,7 @@ const HeaderBar = props => (
           <Col md={1} sm={2}>
             <Logo />
           </Col>
-          <Col md={props.showFitlers ? 6 : 7} sm={5}>
+          <Col md={7} sm={5}>
             {
               props.hideSearch
                 ?
@@ -33,7 +39,7 @@ const HeaderBar = props => (
                 </NoSSR>
             }
           </Col>
-          {
+          {/* {
             props.showFitlers
             ?
             <Col md={4}>
@@ -43,7 +49,7 @@ const HeaderBar = props => (
             </Col>
             :
             null
-          }
+          } */}
           <Col md={props.showFitlers ? 3 : 4 } sm={5}>
             <ActionBar />
           </Col>

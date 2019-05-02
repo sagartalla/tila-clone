@@ -6,13 +6,18 @@ import SVGComponent from '../../common/SVGComponet';
 import ShippingAddress from '../../Cam/ShippingAddress';
 import { languageDefinations } from '../../../utils/lang/';
 
-import { mergeCss } from '../../../utils/cssUtil';
-const styles = mergeCss('components/Payments/payment');
+import lang from '../../../utils/language';
+
+import styles_en from '../payment_en.styl';
+import styles_ar from '../payment_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 const { DELIVERY_ADDR_PAGE } = languageDefinations();
 
 const DeliveryAddress = props => {
-  const { configJson, defaultAddress, handleShippingAddressContinue, editAddressTab } = props;
-  
+  const { configJson, defaultAddress, handleShippingAddressContinue, editAddressTab, showNonShippable } = props;
+
   return (
     <div className={`${styles['delivery-adress-prt']} ${styles['box']} ${styles['mb-20']} ${styles['relative']}`}>
       <SVGComponent clsName={`${styles['map-address']} ${configJson.done ? 'done' : ''} ${configJson.progress ? 'payment-active' : ''}`} src="icons/map/address" />
@@ -46,6 +51,7 @@ const DeliveryAddress = props => {
           <div className={`${styles['pb-5']} ${styles['pt-5']}`}>
             <h4 className={`${styles['mb-20']} ${styles['mt-0']}`}>{DELIVERY_ADDR_PAGE.DELIVERY_ADDR}</h4>
             <ShippingAddress
+              showNonShippable={showNonShippable}
               handleShippingAddressContinue={handleShippingAddressContinue}
             />
           </div>
@@ -68,4 +74,3 @@ DeliveryAddress.defaultProps = {
 }
 
 export default DeliveryAddress;
-

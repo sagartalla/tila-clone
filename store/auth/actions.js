@@ -16,8 +16,6 @@ const actions = {
   DERIVE_CITY: 'DERIVE_CITY',
   SET_CITY: 'SET_CITY',
   REMOVE_CITY: 'REMOVE_CITY',
-  AUTOCOMPLETE_CITY: 'AUTOCOMPLETE_CITY',
-  RESET_AUTOCOMPLETE_CITY: 'RESET_AUTOCOMPLETE_CITY',
   RESET_LOGIN_ERROR: 'RESET_LOGIN_ERROR',
   SHOW_LOGIN: 'SHOW_LOGIN',
   RESET_SHOW_LOGIN: 'RESET_SHOW_LOGIN',
@@ -28,6 +26,8 @@ const actions = {
   VERIFY_EMAIL: 'VERIFY_EMAIL',
   VERIFY_RESEND_EMAIL: 'VERIFY_RESEND_EMAIL',
   GET_USER_INFO: 'GET_USER_INFO',
+  GET_DOMAIN_COUNTRIES: 'GET_DOMAIN_COUNTRIES',
+  AUTH_TRACK: 'AUTH_TRACK'
 };
 
 const actionCreators = {
@@ -45,23 +45,22 @@ const actionCreators = {
     dispatch(actionCreators.getUserInfoData({initiateEmailVerification: params.channel === 'BASIC_REGISTER'})).then((res) => {
       if(params.channel !== 'BASIC_REGISTER') {
         if (res && res.value && res.value.data && res.value.data.email_verified === 'NV') {
-          dispatch(actionCreators.setVerfied(false))/*.then(() => dispatch(actionCreators.getLoginInfo()));*/
-          dispatch(actionCreators.sendOtpToEmailId(false));
+          dispatch(actionCreators.setVerfied(false));
         } else {
-          dispatch(actionCreators.setVerfied(true))/*.then(() => dispatch(actionCreators.getLoginInfo()));*/
+          dispatch(actionCreators.setVerfied(true));
         }
       }
       return res;
     });
   }),
   userLogout: () => (dispatch) => {
-    dispatch(cartActionCreators.getCartResults());
+    // dispatch(cartActionCreators.getCartResults());
     dispatch({
       type: actions.USER_LOGOUT,
       payload: api.userLogout(),
     });
   },
-  getLoginInfo: (params) => ({
+  getLoginInfo: params => ({
     type: actions.USER_LOGIN_INFO,
     payload: api.getLoginInfo(params),
   }),
@@ -84,13 +83,6 @@ const actionCreators = {
   removeCity: () => ({
     type: actions.REMOVE_CITY,
     payload: api.removeCity(),
-  }),
-  autoCompleteCity: params => ({
-    type: actions.AUTOCOMPLETE_CITY,
-    payload: api.autoCompleteCity(params),
-  }),
-  resetAutoCompleteData: () => ({
-    type: actions.RESET_AUTOCOMPLETE_CITY,
   }),
   resetLoginError: () => ({
     type: actions.RESET_LOGIN_ERROR,
@@ -140,6 +132,24 @@ const actionCreators = {
     type: actions.SET_VERFIED,
     payload: api.setVerfied(isVerified),
   }),
+  track: (event, params) => ({
+    type: actions.AUTH_TRACK,
+    payload: api.track(event, params),
+  }),
+  getDomainCountries: (currentCountry, shippingInfo) => (dispatch, getState) => {
+    return dispatch({
+      type: actions.GET_DOMAIN_COUNTRIES,
+      payload: api.getDomainCountries(),
+    }).then((data) => {
+      if(shippingInfo) { return; }
+      const {city_name, code} = data.value.data.filter(function(i) { return i.country.code3 === currentCountry })[0].city
+      dispatch(actionCreators.setCity({
+        "country": currentCountry,
+        "city": code,
+        "displayCity": city_name
+      }));
+    });
+  },
 };
 
 export { actions, actionCreators };

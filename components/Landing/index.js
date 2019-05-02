@@ -9,16 +9,18 @@ import NoSSR from 'react-no-ssr';
 import HeaderBar from '../HeaderBar';
 import FooterBar from '../Footer';
 import RemoteComponent from '../common/RemoteComponent';
-
-
 import SVGComponent from '../common/SVGComponet';
-import { mergeCss } from '../../utils/cssUtil';
 
-const config = getConfig()
+import lang from '../../utils/language';
+
+import styles_en from './index_en.styl';
+import styles_ar from './index_ar.styl';
+
+const config = getConfig();
 const isLocal = config.publicRuntimeConfig.isLocal;
 
-const allStyles = mergeCss('components/Landing/index');
 
+const allStyles = lang === 'en' ? styles_en : styles_ar;
 
 /*
 import Fashion from './includes/Fashion';

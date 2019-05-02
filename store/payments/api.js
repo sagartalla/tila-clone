@@ -40,9 +40,7 @@ const createOrder = () => {
 
 //Create Order First step.
 const createOrderApi = (defaultAddrId) => {
-  return axios.put(`${constants.CART_API_URL}/api/v1/cart/view`, { address_id: defaultAddrId }).then(({ data }) => {
-    return createOrder(data);
-  });
+  return createOrder();
 };
 
 const doPaymentApi = (params) => {

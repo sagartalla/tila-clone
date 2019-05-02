@@ -3,13 +3,18 @@ import PropTypes from "prop-types";
 import { Grid, Row, Col } from 'react-bootstrap';
 import constants from '../../../constants';
 import SVGCompoent from '../../common/SVGComponet';
-import { mergeCss } from '../../../utils/cssUtil';
-const styles = mergeCss('components/Product/product');
+import lang from '../../../utils/language';
+
+import styles_en from '../product_en.styl';
+import styles_ar from '../product_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 
 const Compare = ({ catalog }) => {
   return (
     <div className={`${styles['compare-main']} ${styles['pt-25']} ${styles['pb-25']}`}>
-      <h4 className={`${styles['fs-16']} ${styles['fontW600']}`}>Tila Comparing (4 items) for you</h4>
+      <h4 className={`${styles['fs-16']} ${styles['fontW600']}`}>Tila comparing (4 items) for you!</h4>
       <Row className={styles['feature-part']}>
         <Col md={3} sm={3}>
           <div className={styles['compare-product']}>

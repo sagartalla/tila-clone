@@ -1,12 +1,17 @@
-import React,{Component} from 'react'
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { languageDefinations } from '../../../utils/lang/';
-import { mergeCss } from '../../../utils/cssUtil';
+import lang from '../../../utils/language';
 
-const styles = mergeCss('components/common/Pagination/pagination');
+import styles_en from './pagination_en.styl';
+import styles_ar from './pagination_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 const LEFT_PAGE = 'LEFT_PAGE'
 const RIGHT_PAGE = 'RIGHT_PAGE'
+
 const { PERSONAL_INFO_MODAL } = languageDefinations();
 
 export default class Pagination extends Component {

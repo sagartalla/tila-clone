@@ -2,12 +2,18 @@ import React, { Component } from 'react';
 import { Col,Button } from 'react-bootstrap';
 import SVGCompoent from '../../common/SVGComponet';
 import StarRating from '../../common/StarRating';
-import { mergeCss } from '../../../utils/cssUtil';
+
 import { languageDefinations } from '../../../utils/lang';
 import Theme from '../../helpers/context/theme';
 import FormValidator from '../../common/FormValidator';
 
-const styles = mergeCss('components/Product/product');
+import lang from '../../../utils/language';
+
+import styles_en from '../product_en.styl';
+import styles_ar from '../product_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 
 const { PDP_PAGE } = languageDefinations();
 

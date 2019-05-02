@@ -16,7 +16,10 @@ const initialState = {
     userCreds: {},
     geoShippingDetails: {},
     autoCompleteCity: [],
-    userInfoData: {},
+    userInfoData: {
+      email_verified: 'NV'
+    },
+    domainCountries: [],
   },
   error: '',
 };
@@ -106,13 +109,13 @@ const authReducer = typeToReducer({
     ...state,
     data: {
       ...state.data,
-      isLoggedIn: state.data.userInfoData.email_verified === 'NV' ? false : action.payload.isLoggedIn,
+      isLoggedIn: action.payload.isLoggedIn,
       userCreds: action.payload.userCreds,
       instagramCode: action.payload.instagramCode,
     },
     ui: {
       ...state.ui,
-      showLogin: true,
+      showLogin: !action.payload.isVerified,
     },
   }),
   [actions.SET_COUNTRY]: (state, action) => ({
@@ -203,37 +206,6 @@ const authReducer = typeToReducer({
       },
     }),
   },
-  [actions.RESET_AUTOCOMPLETE_CITY]: (state, action) => ({
-    ...state,
-    data: {
-      ...state.data,
-      autoCompleteCity: []
-    }
-  }),
-  [actions.AUTOCOMPLETE_CITY]: {
-    PENDING: (state) => Object.assign({}, state, {
-      error: '',
-    }, {
-      ui: {
-        ...state.ui,
-        loading: true,
-      },
-    }),
-    FULFILLED: (state, action) => ({
-      ...state,
-      data: {
-        ...state.data,
-        autoCompleteCity: action.payload,
-      }
-    }),
-    REJECTED: (state, action) => Object.assign({}, state, {
-      error: action.payload.response ? action.payload.response.data.message : action.payload.message,
-      ui: {
-        ...state.ui,
-        loading: false,
-      },
-    }),
-  },
   [actions.SHOW_LOGIN]: (state, action) => ({
     ...state,
     ui: {
@@ -286,7 +258,10 @@ const authReducer = typeToReducer({
     FULFILLED: (state, action) => Object.assign({}, state, {
       data: {
         ...state.data,
-        ...action.payload,
+        userInfoData: {
+          ...state.data.userInfoData,
+          email_verified: 'V',
+        }
       },
       ui: { ...state.ui, loading: false, showEmailVerificationScreen: false, showLogin: false },
     }),
@@ -321,6 +296,16 @@ const authReducer = typeToReducer({
     }),
     REJECTED: state =>
       Object.assign({}, state, { ui: { ...state.ui, loading: false, showEmailVerificationScreen: false } }),
+  },
+  [actions.GET_DOMAIN_COUNTRIES]: {
+    PENDING: state => state,
+    FULFILLED: (state, action) => Object.assign({}, state, {
+      data: {
+        ...state.data,
+        domainCountries: action.payload && action.payload.data,
+      },
+    }),
+    REJECTED: state => state,
   },
 }, initialState);
 

@@ -9,8 +9,13 @@ import { ORDER_ISSUE_STEPS as STEPS, ORDER_ISSUE_TYPES } from '../../constants';
 
 import { selectors, actionCreators } from '../../../../store/order';
 
-import { mergeCss } from '../../../../utils/cssUtil';
-const styles = mergeCss('components/Order/includes/OrderIssueWidget/orderIssue');
+import lang from '../../../../utils/language';
+
+import styles_en from './orderIssue_en.styl';
+import styles_ar from './orderIssue_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 
 const OrderIssueWidget = ({orderIssue, resetOrderIssue}) => {
   const { step,issueType } = orderIssue;
@@ -19,7 +24,7 @@ const OrderIssueWidget = ({orderIssue, resetOrderIssue}) => {
       const { issueType } = orderIssue;
       switch(step) {
         case STEPS.LIST: {
-          return `Choose an order to ${issueType ? 'Cancel': 'Return/Exchange'}`;
+          return `Choose an order to ${issueType ? 'cancel': 'Return/Exchange'}`;
           break;
         }
         case STEPS.REASONS: {

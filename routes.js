@@ -14,8 +14,9 @@ routes
   .add({ name: 'search', pattern: '/:country/:language/srp/:category?/:subCategory?', page: 'search' })
   .add({ name: 'compare', pattern: '/:country/:language/compare', page: 'compare' })
   .add({ name: 'policy', pattern: '/:country/:language/policy/:name', page: 'policy' })
-  .add({ name: 'resetpassword', pattern: '/:country/:language/resetpassword/:token', page: 'resetPassword' })
+  .add({ name: 'resetpassword', pattern: '/:country/:language/resetpassword', page: 'resetPassword' })
   .add({ name: '3dsecure', pattern: '/:country/:language/gateway/callback/:encryptedString', page: 'redirect' })
+  .add({ name: 'help', pattern: '/:country/:language/help/(.*)', page: 'help' })
   .add({ name: 'default', pattern: '/:country?/:language?', page: 'index' });
 
 module.exports = routes;

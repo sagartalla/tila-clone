@@ -7,8 +7,12 @@ import { selectors } from '../../../../store/cam/personalDetails';
 import { languageDefinations } from '../../../../utils/lang/';
 import UpdateContactInfoModal from './UpdateContactInfoModal';
 import SVGComponent from '../../../common/SVGComponet';
-import { mergeCss } from '../../../../utils/cssUtil';
-const styles = mergeCss('components/Cam/PersonelDetails/profile');
+import lang from '../../../../utils/language';
+
+import styles_en from '../profile_en.styl';
+import styles_ar from '../profile_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 
 class ContactInfo extends React.Component {
@@ -34,7 +38,7 @@ class ContactInfo extends React.Component {
   }
 
   render() {
-    const { mailId, email, mobile_no, lastUpdated, phoneNum, email_verified } = this.state.contactInfo ? this.state.contactInfo : { mailId: "", email: "", mobile_no: "", lastUpdated: "not available", phoneNum: "", email_verified: "" };
+    const { mailId, email, mobile_no, lastUpdated, phoneNum, email_verified, mobile_verified } = this.state.contactInfo ? this.state.contactInfo : { mailId: "", email: "", mobile_no: "", lastUpdated: "not available", phoneNum: "", email_verified: "" };
     const { element, show } = this.state;
     const { CONTACT_INFO_MODAL } = languageDefinations();
     return (
@@ -74,8 +78,11 @@ class ContactInfo extends React.Component {
           <Col xs={12} md={3} className={`${styles['pl-0']} ${styles['pr-0']}`}>
             <span>{CONTACT_INFO_MODAL.PHONE_NUMBER}</span>
           </Col>
-          <Col xs={6} md={8}>
-            <span>{phoneNum}</span>
+          <Col xs={6} md={8} className={`${styles['flex-center']} ${styles['tickmark-part']}`}>
+            <span className={styles['pr-20']}>{phoneNum}</span>
+            <span className={mobile_verified !== 'NV' ? `${styles['showDiv']}` : `${styles['hideDiv']}`}>
+              <span className={styles['flex']}><SVGComponent clsName={`${styles['tickmark-icon']}`} src="icons/common-icon/bg-tick-mark" /></span>
+            </span>
           </Col>
           <Col xs={6} md={1} className={styles['pr-0']}>
             <span

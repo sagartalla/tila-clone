@@ -12,11 +12,16 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators, selectors } from '../../../../store/cam/personalDetails';
 import SVGComponent from '../../../common/SVGComponet';
-import { mergeCss } from '../../../../utils/cssUtil';
+
+import lang from '../../../../utils/language';
+
+import styles_en from '../profile_en.styl';
+import styles_ar from '../profile_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 const { PERSONAL_INFO_MODAL } = languageDefinations();
 
-const styles = mergeCss('components/Cam/PersonelDetails/profile');
 
 class UpdatePersonalInfoModal extends React.Component {
   state = {
@@ -102,8 +107,8 @@ class UpdatePersonalInfoModal extends React.Component {
       <div>
         <div className={styles['editProfileModal']}>
           <h4 className={`${styles['flx-spacebw-alignc']} ${styles['m-0']}`}>
-            <span className={styles['lgt-blue']}>Personal Information</span>
-            <a onClick={this.handleClose} className={styles['fs-24']}>X</a>
+            <span>Personal Information</span>
+            <a onClick={this.handleClose} className={`${styles['fs-22']} ${styles['black-color']}`}>X</a>
           </h4>
           <div className={`${styles['flex-center']} ${styles['flex-colum']}`}>
             <div className={`${styles['flex-center']} ${styles['flex-colum']} ${styles['personal-info-main']}`}>
@@ -131,7 +136,7 @@ class UpdatePersonalInfoModal extends React.Component {
               <div className={`${styles['m-5']} ${styles['mt-20']} ${styles['update-profile-input']} ${styles['flex']}`}>
                 <Col xs={12} md={12}>
                   <div className={styles['fp-input']}>
-                    <label className={`${styles['mb-0']} ${styles['fs-12']} ${styles['label-gry-clr']}`}>{PERSONAL_INFO_MODAL.USERNAME}</label>
+                    <div className={`${styles['mb-0']} ${styles['fs-12']} ${styles['label-gry-clr']} ${styles['profile-dts']}`}>{PERSONAL_INFO_MODAL.USERNAME}</div>
                     <input className={styles['user-name']} type="text" value={user_name} onChange={this.handleNameChange} maxLength={40}/>
                     {/* <span className={styles['highlight']}></span>
                   <span className={styles['bar']}></span>
@@ -144,7 +149,7 @@ class UpdatePersonalInfoModal extends React.Component {
               <div className={`${styles['m-5']} ${styles['mt-20']} ${styles['flex']}`}>
                 <Col xs={12} md={12}>
                   <div className={`${styles['fp-input']} ${styles['date-dob-caldr']}`}>
-                    <div className={`${styles['mb-0']} ${styles['fs-12']} ${styles['label-gry-clr']}`}>{PERSONAL_INFO_MODAL.DOB}</div>
+                    <div className={`${styles['mb-0']} ${styles['fs-12']} ${styles['label-gry-clr']} ${styles['profile-dts']}`}>{PERSONAL_INFO_MODAL.DOB}</div>
                     <DatePicker
                       animation="slide-up"
                       value={user_dob}

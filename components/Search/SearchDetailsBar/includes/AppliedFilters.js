@@ -9,8 +9,13 @@ import { actionCreators, selectors } from '../../../../store/search';
 import { languageDefinations } from '../../../../utils/lang';
 const { SEARCH_PAGE } = languageDefinations();
 
-import { mergeCss } from '../../../../utils/cssUtil';
-const styles = mergeCss('components/Search/search');
+import lang from '../../../../utils/language';
+
+import styles_en from '../../search_en.styl';
+import styles_ar from '../../search_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 
 class AppliedFilters extends Component {
   constructor(props) {
@@ -50,7 +55,7 @@ class AppliedFilters extends Component {
         ?
         <div className={`${styles['applied-tags']} ${styles['flex-center']} ${styles['pb-20']}`}>
           <span>{SEARCH_PAGE.APPLIED_FILTERS_TAGS} : </span>
-          <div className={`${styles.flex} ${styles['flex-wrp']} ${styles.width70}`}>
+          <div className={`${styles.flex} ${styles['flex-wrp']} ${styles['applied-tags-i']}`}>
             {
               appliedFilters.map((af) => (
                 <div key={af.key} className={`${styles['flex-center']} ${styles['applied-tags-inn']} ${styles['ml-10']}`}>

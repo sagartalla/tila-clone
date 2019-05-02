@@ -9,9 +9,15 @@ import OrderIssueBody from '../OrderIssueWidget/body';
 
 import constants from '../../../../constants';
 import { ORDER_ISSUE_STEPS as STEPS,ORDER_ISSUE_TYPES } from '../../constants';
+
 import { Link } from '../../../../routes'
-import { mergeCss } from '../../../../utils/cssUtil';
-const styles = mergeCss('components/Order/order');
+import lang from '../../../../utils/language';
+
+import styles_en from '../../order_en.styl';
+import styles_ar from '../../order_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 import { languageDefinations } from '../../../../utils/lang'
 import Cookie from 'universal-cookie';
 const { ORDER_PAGE, CART_PAGE } = languageDefinations()

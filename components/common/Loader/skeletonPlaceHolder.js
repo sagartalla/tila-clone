@@ -1,12 +1,17 @@
 import React from 'react';
-import { mergeCss } from '../../../utils/cssUtil';
 import Input from '../../common/commonInput/index';
 import Rectangle from '../../common/commonInput/RectangleShape';
 
-const styles = mergeCss('components/common/Loader/loader');
+
+import lang from '../../../utils/language';
+
+import styles_en from './loader_en.styl';
+import styles_ar from './loader_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 export const searchPlaceHolder = (
   <div style={{ overflow: 'hidden', maxHeight: '800px' }}>
-    <div className={`${styles.container}`} />
+    {/* <div className={`${styles.container}`} /> */}
     <div
       className={
         `${styles['filter-panel']} ${styles['border-radius4']}
@@ -121,10 +126,10 @@ export const searchPlaceHolder = (
 );
 export const productPlaceHolder = (
   <div style={{ display: 'flex' }}>
-  <div className={
+  {/* <div className={
     `${styles.container}`
   }
-    />
+    /> */}
   <div className="col-md-8">
     <div style={{
         display: 'flex', alignItems: 'center', padding: 20, width: '100%',
@@ -139,7 +144,7 @@ export const productPlaceHolder = (
               ))
           }
             </div>
-              <Rectangle
+            <Rectangle
                 style={{
                   width: '100%', height: '85%'
                   }}
@@ -177,7 +182,7 @@ export const productPlaceHolder = (
 
 export const cartPlaceHolder = (
   <div className={`${styles.flex} ${styles['pt-40']} ${styles.relative}`}>
-    <div className={`${styles.container}`} />
+    {/* <div className={`${styles.container}`} /> */}
     <div className={`${styles.flex} ${styles['p-20']} ${styles.width100}`}>
       <div style={{ width: '75%' }} className={`${styles.flex} ${styles['flex-colum']} ${styles.width63} ${styles['mr-20']}`}>
         <Rectangle

@@ -7,8 +7,15 @@ import Privacy from '../../common/privacy';
 import SVGComponent from '../../common/SVGComponet';
 import { languageDefinations } from '../../../utils/lang/';
 import SocialLogin from '../../Login/SocialLogin';
-import { mergeCss } from '../../../utils/cssUtil';
-const styles = mergeCss('components/Payments/payment');
+
+import lang from '../../../utils/language';
+
+import styles_en from '../payment_en.styl';
+import styles_ar from '../payment_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
+
 const { PAYMENT_PAGE, CONTACT_INFO_MODAL } = languageDefinations();
 
 class SignIn extends Component {

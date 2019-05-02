@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { mergeCss } from '../../../utils/cssUtil';
+import lang from '../../../utils/language';
 
-const styles = mergeCss('components/common/slider/index');
+import styles_en from './index_en.styl';
+import styles_ar from './index_ar.styl';
 
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 class Slider extends Component {
   handleChild = (e) => {
@@ -21,16 +23,20 @@ class Slider extends Component {
       isOpen &&
       <div className={`${styles.slider} ${styles.fixed}`} onClick={closeSlider}>
         <div
-          className={`${styles.sliderInner} ${styles.flex} ${styles.width50} ${styles['ht-100P']} ${styles.absolute} ${styles['align-center']} ${styles['justify-around']}`}
+          className={`${styles.sliderInner} ${styles['ht-100P']} ${styles.absolute} ${styles['align-center']} ${styles['justify-around']}`}
           onClick={this.handleChild}
         >
           <span
-            role="button"
-            onClick={closeSlider}
-            tabIndex="0"
-            className={`${styles.cross} ${styles.absolute} ${styles.flex} ${styles['align-center']} ${styles['fs-40']}`}
+            className={`${styles.cross} ${styles.flex} ${styles['align-center']} ${styles['fs-40']} ${styles['justify-between']} ${styles.width100}`}
           >
-            &times;{<div className={`${styles['fs-20']} ${styles['lgt-blue']} ${styles['ml-20']}`}>{label}</div>}
+            <span className={`${styles['fs-20']} ${styles['lgt-blue']} ${styles['ml-20']}`}>{label}</span>
+            <span
+              role="button"
+              onClick={closeSlider}
+              tabIndex="0"
+            >
+              &times;
+            </span>
           </span>
           {children}
         </div>

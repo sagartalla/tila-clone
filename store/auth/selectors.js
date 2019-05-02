@@ -34,10 +34,6 @@ const getDeliveryCity = (store) => {
   return store.authReducer.data.geoShippingDetails;
 }
 
-const getAutoCompleteCityData = (store) => {
-  return store.authReducer.data.autoCompleteCity;
-}
-
 const getPTAToken = (store) => {
   return store.authReducer.data.ptaToken;
 }
@@ -48,6 +44,11 @@ const getShowLogin = (store) => {
 
 const showEmailVerificationScreen = (store) => {
   return store.authReducer.ui.showEmailVerificationScreen;
-}
+};
 
-export { getErrorMessege, getCountry, getLoggedInStatus, getInstaCode, getUserCreds, getDeliveryCity, getAutoCompleteCityData, getLoginProgressStatus, getShowLogin, getPTAToken, showEmailVerificationScreen, getLanguage, getLoadingStatus };
+const getDomainCountries = store => store.authReducer.data.domainCountries;
+
+export {
+  getErrorMessege, getCountry, getLoggedInStatus, getInstaCode, getUserCreds, getDeliveryCity, getDomainCountries,
+  getLoginProgressStatus, getShowLogin, getPTAToken, showEmailVerificationScreen, getLanguage, getLoadingStatus,
+};

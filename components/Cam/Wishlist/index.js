@@ -13,9 +13,14 @@ import CartMiniWishList from './includes/CartMiniWishList';
 import Pagination from '../../common/Pagination';
 
 // import { isAddedToCart } from '../../../store/cart/selectors';
-import { mergeCss } from '../../../utils/cssUtil';
+import lang from '../../../utils/language';
 
-const styles = mergeCss('components/Cam/Wishlist/wishlist');
+import styles_en from './wishlist_en.styl';
+import styles_ar from './wishlist_ar.styl';
+
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 
 class Wishlist extends Component {
   constructor(props) {
@@ -47,7 +52,12 @@ class Wishlist extends Component {
       && nextProps.getPageDetails.total_elements > 0 && this.state.renderWishlist) {
       this.setState({
         renderWishlist: false,
-      }, () => this.props.getWishlist(nextProps.getPageDetails.number - 1));
+      }, () =>
+        this.props.getWishlist(nextProps.getPageDetails.number - 1).then(() =>
+          this.props.track({
+            eventName: 'WishList View',
+            page: this.state.currentPage,
+          })));
     }
   }
 
@@ -69,9 +79,11 @@ class Wishlist extends Component {
   }
 
   addToCart(e) {
-    this.props.addToCart({
-      listing_id: e.target.id,
-    }, e.target.getAttribute('data-wish-id'), e.target.getAttribute('data-cart-res'));
+    if (e.target.id) {
+      this.props.addToCart({
+        listing_id: e.target.id,
+      }, e.target.getAttribute('data-wish-id'), e.target.getAttribute('data-cart-res'));
+    }
   }
 
   notify = ({ target }) => {
@@ -141,6 +153,7 @@ const mapDispatchToProps = dispatch =>
       deleteWishlist: actionCreators.deleteWishlist,
       addToCart: actionCreators.addToCart,
       notifyMe: actionCreators.notifyMe,
+      track: actionCreators.track,
     },
     dispatch,
   );

@@ -7,7 +7,7 @@ html
   font-family ProximaNova
 
 body
-  font-size 1rem
+  font-size 14px
   font-family ProximaNova
   background light-gray-color
   color black
@@ -49,7 +49,7 @@ input[type=text],input[type=password], input[type=email]
   padding px-5 0
   outline none !important
   width 100%
-  border-bottom 1px solid light-border
+  border-bottom 1px solid light-brdr
   // box-shadow none !important
   border-radius 0 !important
 input[type=number]::-webkit-inner-spin-button,
@@ -64,7 +64,7 @@ for i in range(10px, 46px, 2)
 
 /* Paddings and Margins*/
 // it will generate margin from m-5, m-10, m-15, ...., to m-40.
-mrgpad(types=margin padding margin-left margin-right margin-top margin-bottom  padding-left padding-right padding-top padding-bottom, n)
+mrgpad(types=margin padding margin-left margin-right margin-top margin-bottom  padding-left padding-right padding-top padding-bottom padding-vertical padding-horizontal margin-vertical margin-horizontal, n)
   padding unit(n/base-px, rem) if padding in types
   padding-left unit(n/base-px, rem) if padding-left in types
   padding-right unit(n/base-px, rem) if padding-right in types
@@ -75,6 +75,15 @@ mrgpad(types=margin padding margin-left margin-right margin-top margin-bottom  p
   margin-right unit(n/base-px, rem) if margin-right in types
   margin-top unit(n/base-px, rem) if margin-top in types
   margin-bottom unit(n/base-px, rem) if margin-bottom in types
+  margin-top unit(n/base-px, rem) if margin-vertical in types
+  margin-bottom unit(n/base-px, rem) if margin-vertical in types
+  padding-top unit(n/base-px, rem) if padding-vertical in types
+  padding-bottom unit(n/base-px, rem) if padding-vertical in types
+  padding-left unit(n/base-px, rem) if padding-horizontal in types
+  padding-right unit(n/base-px, rem) if padding-horizontal in types
+  margin-left unit(n/base-px, rem) if margin-horizontal in types
+  margin-right unit(n/base-px, rem) if margin-horizontal in types
+
 
 for x in range(0px, 80px, 5)
   .m-{x}
@@ -91,6 +100,18 @@ for x in range(0px, 80px, 5)
 
   .mb-{x}
     mrgpad(margin-bottom, x)
+  
+  .mH-{x}
+    mrgpad(margin-horizontal, x)
+  
+  .mV-{x}
+    mrgpad(margin-vertical, x)
+  
+  .pH-{x}
+    mrgpad(padding-horizontal, x)
+  
+  .pV-{x}
+    mrgpad(padding-vertical, x)
 
   .p-{x}
     mrgpad(padding, x)
@@ -157,9 +178,15 @@ for x in range(0px, 80px, 5)
 .ht-100per
   height 100%
 
+.ht-80per
+  height 80%
+
 .main-layout
   min-height 100vh
   height 100px
+
+.ht-100vh
+  height: 100vh
 .fl-rt
   float right
 .cl-bth
@@ -170,6 +197,9 @@ for x in range(0px, 80px, 5)
   text-align left
 .t-c
   text-align center
+
+.align-start
+  align-items start
 
 .align-center
   align-items center
@@ -251,8 +281,7 @@ for x in range(0px, 80px, 5)
   color generic-green-color
 
 .thck-gry-rt-border
-  border-right 1px solid dottes-gry-clr
-
+  border-right 1px solid light-brdr
 .lgt-gry-clr
   color lgt-gry
 
@@ -263,7 +292,7 @@ for x in range(0px, 80px, 5)
   color twitter-color
 
 .thck-gry-rt-border
-  border-right 1px solid thck-gry-clr
+  border-right 1px solid light-brdr
 
 //font-weight
 .fontW300
@@ -273,6 +302,9 @@ for x in range(0px, 80px, 5)
   font-family ProximaNova
 
 .fontW600
+  font-family ProximaNova-SBold
+
+.fontW800
   font-family ProximaNova-Bold
 
 //width list
@@ -287,6 +319,9 @@ for x in range(0px, 80px, 5)
 
 .width50
   width 50%
+  
+.width45
+  width 45%
 
 .width33
   width 33%
@@ -302,40 +337,47 @@ for x in range(0px, 80px, 5)
 
 //border
 .border
-  border 1px solid border-light-gray
+  border 1px solid light-brdr
 
 .border-t
-  border-top 1px solid border-light-gray
+  border-top 1px solid light-brdr
 
 .border-b
-  border-bottom 1px solid border-light-gray
+  border-bottom 1px solid light-brdr
 
 .border-lg
-  border 1px solid light-gray
+  border 1px solid light-brdr
 
 .border-rt
-  border-right 1px solid light-gray
+  border-right 1px solid light-brdr
+
+.border-lt
+  border-left 1px solid light-brdr
+
+.border-lt-green
+  border-left 1px solid generic-green-color
+
 
 .thick-border-btm
-  border-bottom 1px solid light-gray-color
+  border-bottom 1px solid light-brdr
 
 .thick-border-bottom
-  border-bottom 4px solid #fff;
+  border-bottom 4px solid white;
 
 .thick-border-left
-  border-left 1px solid thck-gry-clr
+  border-left 1px solid light-brdr
 
 .thick-bdr-rgt
   border-left 4px solid border-pink
 
 .thin-border-right
-  border-right 1px solid generic-gray-color
+  border-right 1px solid light-brdr
 
 .border-btm-dottes
-  border-bottom 1px dotted generic-gray-color
+  border-bottom 1px dotted light-brdr
 
 .bb-dashed
-  border-bottom 1px dashed generic-gray-color
+  border-bottom 1px dashed light-brdr
 
 .bg-mauve
   background mauve-light
@@ -343,8 +385,14 @@ for x in range(0px, 80px, 5)
 .bg-light-gray
   background light-gray-color
 
+.bg-gray
+  background login-bg-gray
+
 .bg-thick-blue
   background thick-blue
+
+.bg-thick-red-clr
+  background thick-red-arrow
 
 .facebook-blue-color
   border 1px solid facebook-color
@@ -368,6 +416,9 @@ for x in range(0px, 80px, 5)
 
 .border-radius4
   border-radius 4px
+
+.border-radius12
+  border-radius 12px
 
 .border-rt-rb-0
   border-top-right-radius: 0 !important;
@@ -465,7 +516,7 @@ for x in range(0px, 80px, 5)
 
 .no-h1
   font-size: initial;
-  display: inline;
+  display: inline-block;
   font-family: ProximaNova-Bold;
 
 
@@ -485,3 +536,37 @@ for x in range(0px, 80px, 5)
 
 .notifyBackground
    background-color navy-blue
+
+.right0
+  right 0
+
+.help-icon
+  width: 15px;
+  height: 15px;
+
+.right0
+  right 0
+
+.left0
+  left 0
+
+.top0
+  top 0
+
+.bottom0
+  bottom 0
+
+
+.ellipsis {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 500px;
+}
+
+@media screen and (min-device-width: 1900px) and (max-device-width: 1024px) and (orientation : landscape){
+  h1 {
+    font-size 22px
+  }
+      
+}

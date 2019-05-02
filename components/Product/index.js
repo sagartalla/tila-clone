@@ -6,27 +6,29 @@ import NoSSR from 'react-no-ssr';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { languageDefinations } from '../../utils/lang';
-import { selectors } from '../../store/product';
 import HeaderBar from '../HeaderBar/index';
-import Dispalay from './includes/Display';
+import Display from './includes/Display';
 import TitleInfo from './includes/TitleInfo';
 import Shipping from './includes/Shipping';
 
 import AddToCart from './includes/AddToCart';
 import RecentView from './includes/RecentView';
-import Review from './includes/Reviews';
-import ReviewsTab from './includes/ReviewTab';
 import ElectronicsTab from './includes/ElectronicsTab';
 import ProductDetails from './includes/ProductDetails';
-import ReviewRatingList from '../RatingReviews/List';
 import FooterBar from '../Footer/index';
 import Theme from '../helpers/context/theme';
 import CompareWidget from '../common/CompareWidget';
+import { actionCreators, selectors } from '../../store/product';
 import { actionCreators as wishlistActionCreators, selectors as wishListSelectors } from '../../store/cam/wishlist';
-import { mergeCss } from '../../utils/cssUtil';
 import Button from '../common/CommonButton';
 
-const styles = mergeCss('components/Product/product');
+import lang from '../../utils/language';
+
+import styles_en from './product_en.styl';
+import styles_ar from './product_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 const { PDP_PAGE } = languageDefinations();
 
 const getProductComponent = (isPreview, taskCode) => {
@@ -58,6 +60,10 @@ const getProductComponent = (isPreview, taskCode) => {
         digitalData.page.pageInfo.pageName = titleInfo.title;
         digitalData.page.category = { primaryCategory: productData.categoryType };
         digitalData.page.pageInfo.breadCrumbs = productData.breadcrums.map(item => item.display_name_en);
+        this.props.track({
+          eventName: 'Product Viewed',
+          ProductData: productData,
+        });
         if (offerInfo.price) {
           const pr = offerInfo.price.split(' ');
           const recentData = localStorage.getItem('rv');
@@ -72,7 +78,7 @@ const getProductComponent = (isPreview, taskCode) => {
             arr.pop();
           }
 
-          if (index == -1) {
+          if (index === -1) {
             arr.unshift({
               nm: titleInfo.title,
               im: imgUrls[0].url,
@@ -158,10 +164,10 @@ const getProductComponent = (isPreview, taskCode) => {
     }
 /* eslint-disable */
     render() {
-      const { productData, userDetails, showLoading } = this.props;
+      const { productData, userDetails, showLoading, query } = this.props;
       const {
         catalog, titleInfo, keyfeatures, extraOffers, imgUrls, offerInfo, shippingInfo, isWishlisted,
-        details, productDescription, catalogObj, categoryType = '', warranty, breadcrums, product_id,
+        details, productDescription, catalogObj, categoryType = '', warranty, breadcrums, product_id, wishlistId,
       } = productData;
       const { offerPricing } = offerInfo;
       const {
@@ -178,14 +184,15 @@ const getProductComponent = (isPreview, taskCode) => {
                 <Row className={`${styles['m-0']} ${styles['ht-100per']}`}>
                   <Col xs={12} md={8} sm={12} className={`${styles['pl-0']} ${styles['ht-100per']} ${styles['pdp-img-prt']}`}>
                     <NoSSR>
-                      <Dispalay
+                      <Display
                         product_id={product_id}
                         offerPricing={offerPricing}
-                        catalog_id={catalogObj.catalog_id}
+                        catalogObj={catalogObj}
                         imgs={imgUrls}
                         isWishlisted={isWishlisted}
                         extraOffers={extraOffers}
                         breadcrums={breadcrums}
+                        wishlistId={wishlistId}
                       />
                     </NoSSR>
                   </Col>
@@ -193,18 +200,25 @@ const getProductComponent = (isPreview, taskCode) => {
                   <Col sm={12} className={`${styles['details-right-part']} ${styles[stickyElements.details]}`}>
                     <div className={`${styles['details-right-part-inn']}`}>
                       <div className={`${styles['ipad-details']} ${styles['ipad-pr-15']}`}>
-                        <TitleInfo {...titleInfo} isPreview={isPreview} />
-                        <ProductDetails details={details} keyfeatures={keyfeatures} isPreview={isPreview} productInfo={productData}/>
+                        <TitleInfo {...titleInfo} isPreview={isPreview} offerInfo={offerInfo} />
+                        <ProductDetails
+                          details={details}
+                          keyfeatures={keyfeatures}
+                          isPreview={isPreview}
+                          productInfo={productData}
+                          variantId={query.variantId}
+                          productId={query.productId}
+                        />
                       </div>
                       <div className={`${styles['ipad-details']} ${styles['bdr-lt']} ${styles['ipad-pl-15']}`}>
                         {
                           isPreview ? null : <Shipping shippingInfo={shippingInfo} offerInfo={offerInfo} warranty={warranty} />
                         }
                         {
-                          isPreview ? null : <AddToCart offerInfo={offerInfo} />
+                          isPreview ? null : shippingInfo.shippable && <AddToCart offerInfo={offerInfo} productData={productData.product_id}/>
                         }
                         {
-                          (offerInfo.stockError || offerInfo.availabilityError) &&
+                          (offerInfo.stockError || offerInfo.availabilityError) && (Object.keys(shippingInfo).length === 0 || shippingInfo.shippable) &&
                           <div className={`${styles['flx-space-bw']} ${styles['align-baseline']}`}>
                             {!userDetails.isLoggedIn &&
                             <div className={`${styles['mb-0']} ${styles['fp-input']} ${styles['pb-10']}`}>
@@ -272,6 +286,8 @@ const getProductComponent = (isPreview, taskCode) => {
     bindActionCreators(
       {
         notifyMe: wishlistActionCreators.notifyMe,
+        track: actionCreators.track,
+
       },
       dispatch,
     );

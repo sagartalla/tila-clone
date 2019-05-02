@@ -6,10 +6,15 @@ import { bindActionCreators } from 'redux';
 import { actionCreators, selectors } from '../../../../store/payments';
 import Voucher from './Voucher';
 import { languageDefinations } from '../../../../utils/lang/';
-import { mergeCss } from '../../../../utils/cssUtil';
 import Button from '../../../common/CommonButton';
 
-const styles = mergeCss('components/Payments/payment');
+import lang from '../../../../utils/language';
+
+import styles_en from '../../payment_en.styl';
+import styles_ar from '../../payment_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 const { PAYMENT_PAGE } = languageDefinations();
 
 class PayOnline extends Component {
@@ -74,7 +79,7 @@ class PayOnline extends Component {
                   onClick={this.fetchIframe}
                   btnText={PAYMENT_PAGE.PAY + ' ' + data.amount_to_pay + ' ' + data.currency_code + ' ' + PAYMENT_PAGE.USING_NEW_CARD}
                   hoverClassName="hoverBlueBackground"
-                  btnLoading={showLoading}        
+                  btnLoading={showLoading}
                 />
               </div>
           }
@@ -87,7 +92,7 @@ class PayOnline extends Component {
 
 const mapStateToprops = (store) => ({
   processData: selectors.getProcessData(store),
-  showLoading: selectors.getLoader(store),  
+  showLoading: selectors.getLoader(store),
 });
 
 const mapDispatchToProps = (dispatch) =>

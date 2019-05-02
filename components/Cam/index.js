@@ -14,9 +14,15 @@ import Notifications from './Notifications';
 import UserVault from './UserVault';
 import Messages from './Messages';
 import FooterBar from '../Footer/index';
-import { mergeCss } from '../../utils/cssUtil';
 import AuthWrapper from '../common/AuthWrapper';
-const styles = mergeCss('components/Cam/cam');
+
+import lang from '../../utils/language';
+
+import styles_en from './cam_en.styl';
+import styles_ar from './cam_ar.styl';
+
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 class Cam extends React.Component {
   constructor(props){
