@@ -81,9 +81,12 @@ class CashOnDelivery extends React.Component {
   }
 
   afterSuccessOtpVerification() {
-    this.setState({
-      showPayBtn: true,
-    });
+    const { profileInfo } = this.props;
+    if (profileInfo.contactInfo.mobile_verified === 'V') {
+      this.setState({
+        showPayBtn: true,
+      });
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -143,7 +146,7 @@ class CashOnDelivery extends React.Component {
           null
     }
     </Col>
-    <Col md={10} sm={12} xs={12}>
+    <Col md={6} sm={12} xs={12}>
       {
         this.state.showContinueButton &&
            (

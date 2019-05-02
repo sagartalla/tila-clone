@@ -1,0 +1,84 @@
+
+@import '../../../layout/main/executables.styl';
+
+   .applyCoupon {
+    align-items: center;
+    max-height: 500px;
+    overflow: auto;
+      .couponDiv {
+        border: solid 0.9px border-color;
+        min-height 170px;
+        width: 400px;
+        margin-top: 30px;
+        box-shadow: 0 5px 9px 0 rgba(0, 0, 0, 0.05);
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin: 5%
+      }
+   }
+        
+.couponCodeListing {
+    padding: 7px;
+    width: 50%;
+    margin-top: 10px;
+    height: 33px;
+    text-align: center;
+    left: -10px;
+    position: relative;
+    border: solid 1px listing-border;
+    background-color: listing-background-color;
+}
+
+
+.couponCodeListing:after {
+    content: '';
+    display: block;
+    position: relative;
+    left: -8px;
+    width: 0;
+    border-bottom: 10px solid listing-triangle-color;
+    border-left: 10px solid transparent;
+    top: 27%;
+    transform: rotate(-90deg);
+}
+
+.listingColor {
+    border: solid 1px listing-border;
+    background-color: listing-background-color;
+}
+
+
+
+.modalClassName
+   position absolute
+   top 10%
+
+.applied 
+   color: generic-green-color;
+
+.wordBreak
+   word-break: break-all;
+
+.input
+  width 350px !important
+  height 60px
+  border 0 !important
+
+
+.border
+  border-right: 1px dotted;
+  margin-left: 30px;
+
+.apply-btn
+    color: #000;
+    border: 1px solid #c8c7cc;
+    padding: 10px 25px;
+    background-color: #fff;
+
+.errorStyle {
+    position: absolute;
+    top: 0%
+    left: 5%;
+}
