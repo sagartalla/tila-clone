@@ -56,7 +56,7 @@ const CartBody = ({
       <Row>
         <Col md={12} sm={12} xs={12}>
           <h4 className={`${styles['mt-20']} ${styles['mb-20']} ${styles['fontW300']} ${styles['fs-20']} ${styles['light-gry-clr']} ${styles['text-capitalize']}`}>
-            <span>{`${cnt} ${CART_PAGE.ITEMS_IN_CART}`}</span>
+            { cnt===1 ? <span>{`${cnt} item`}</span> : cnt===0 ? <span>Your shopping cart is empty.</span> :<span>{`${cnt} ${CART_PAGE.ITEMS}`}</span> }
           </h4>
         </Col>
       </Row>
@@ -89,6 +89,7 @@ const CartBody = ({
                   <RightBar
                     data={data}
                     showInstant={true}
+                    isFromCart={true}
                     showCheckoutBtn={true}
                     checkoutBtnHandler={checkoutBtnHandler}
                     openSlider={openSlider}

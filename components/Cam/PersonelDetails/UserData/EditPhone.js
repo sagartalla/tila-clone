@@ -78,7 +78,8 @@ class EditPhone extends React.Component {
 
     if (this.state.show == true && nextProps.errorMessege != this.state.error) {
       this.setState({
-        error: nextProps.errorMessege
+        error: nextProps.errorMessege,
+        otpResponse:'RESET'
       });
     }
 
@@ -165,7 +166,10 @@ class EditPhone extends React.Component {
               //     X</a>
               //   </Col>
               // </Row>
-              <h4 className={`${styles['fs-20']} ${styles['fontW300']} ${styles['p-20']}`}><span onClick={this.handleClose}>X</span> <span className={`${styles['pl-20']} ${styles['lgt-blue']}`}>{CONTACT_INFO_MODAL.EDIT_PHONE_NUMBER}</span></h4>
+              <h4 className={`${styles['flx-spacebw-alignc']} ${styles['m-0']} ${styles['p-20']}`}> 
+                <span className={styles['lgt-blue']}>{CONTACT_INFO_MODAL.EDIT_PHONE_NUMBER}</span>
+                <span onClick={this.handleClose} className={styles['fs-24']}>X</span>
+              </h4>
             )
           }
           {
@@ -194,7 +198,10 @@ class EditPhone extends React.Component {
             //     X</a>
             //   </Col>
             // </Row>
-            <h4 className={`${styles['fs-20']} ${styles['fontW300']} ${styles['p-20']}`}><span onClick={this.handleClose}>X</span> <span className={`${styles['pl-20']} ${styles['lgt-blue']}`}>{CONTACT_INFO_MODAL.EDIT_PHONE_NUMBER}</span></h4>
+            <h4 className={`${styles['flx-spacebw-alignc']} ${styles['m-0']} ${styles['p-20']}`}>
+              <span>{CONTACT_INFO_MODAL.EDIT_PHONE_NUMBER}</span>
+              <span onClick={this.handleClose} className={`${styles['fs-22']} ${styles['black-color']}`}>X</span> 
+            </h4>
           )
         }
         {
@@ -272,7 +279,7 @@ class EditPhone extends React.Component {
                     {/* <span className={styles['error']}>error message</span> */}
                       <a className={`${styles['show-otp']} ${styles['fs-12']} ${styles['thick-blue']}`} onClick={this.fetchOtp}>
                        {otpCount ? `${CONTACT_INFO_MODAL.RESEND} ${CONTACT_INFO_MODAL.OTP}` : CONTACT_INFO_MODAL.SEND_OTP}
-                      </a> 
+                      </a>
                   </div>
                   {/* <Input
                     placeholder={`${CONTACT_INFO_MODAL.ENTER} ${CONTACT_INFO_MODAL.PHONE_NUMBER}`}
@@ -329,9 +336,9 @@ class EditPhone extends React.Component {
             </Row>
             <div>
               {{
-                null: null,
                 FAILURE: <div className={`${styles['thick-red']} ${styles['fs-12']}`}>{CONTACT_INFO_MODAL.ENTER_VALID_OTP}</div>,
-                SUCCESS: ''
+                SUCCESS: '',
+                RESET:''
               }[otpResponse]}
             </div>
           </div>

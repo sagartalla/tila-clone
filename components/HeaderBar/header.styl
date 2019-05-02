@@ -328,10 +328,10 @@
     display flex
     flex-wrap wrap
     align-content flex-start
-    width 80%
+    width 79%
     flex-direction column
     >.megamenu-sub-list
-      width 25%
+      width 26%
       float left
       min-height 110px
       >span a
@@ -407,10 +407,17 @@ nav
 .mini-cart
   height: auto;
 
-.search-suggestions
-  position absolute
-  width 100%
-  background #fff
+.search-suggestion
+  display flex
+  a
+    line-height 2
+    width 100%
+    display flex
+    &:hover
+      color black
+    &:focus
+      outline none
+
 
 @media screen and (min-device-width: 320px) and (max-device-width: 736px) and (orientation : portrait){
   .login-reg-modal {

@@ -1,21 +1,20 @@
 import React, { Component } from 'react';
-import { Modal } from "react-router-modal";
+import { Modal } from 'react-router-modal';
 import NoSSR from 'react-no-ssr';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { ModalContainer } from 'react-router-modal';
-import { Dropdown, MenuItem } from "react-bootstrap";
+import { Dropdown } from 'react-bootstrap';
 import Cookie from 'universal-cookie';
 import { selectors as personalSelectors } from '../../store/cam/personalDetails';
 import { actionCreators as wishListActionCreators, selectors as wishListSelectors } from '../../store/cam/wishlist';
+
 import Cart from '../Cart';
 import Login from '../Login';
-import { Link } from '../../routes';
+import { Link, Router } from '../../routes';
 import Country from './includes/Country';
 import Language from './includes/Language';
 import publicUrls from '../../constants';
 import SVGComponent from '../common/SVGComponet';
-import { Router } from '../../routes';
 
 import { selectors, actionCreators } from '../../store/auth';
 import { actionCreators as cartActionCreators, selectors as cartSelectors } from '../../store/cart';
@@ -28,26 +27,26 @@ import styles_ar from './header_ar.styl';
 
 const styles = lang === 'en' ? styles_en : styles_ar;
 
-const { HEADER_PAGE } = languageDefinations();
+const { HEADER_PAGE, PDP_PAGE } = languageDefinations();
 const cookies = new Cookie();
 
 const language = cookies.get('language') || 'en';
 const country = cookies.get('country') || 'SAU';
 
 const snMetaObj = {
-  'google': {
-    channel: "GOOGLE_AUTH",
-    metadata: "google.access_token"
+  google: {
+    channel: 'GOOGLE_AUTH',
+    metadata: 'google.access_token',
   },
-  'facebook': {
-    channel: "FACEBOOK_AUTH",
-    metadata: "fb.access_token"
+  facebook: {
+    channel: 'FACEBOOK_AUTH',
+    metadata: 'fb.access_token',
   },
-  'instagram': {
-    channel: "INSTAGRAM_AUTH",
-    metadata: "instagram.code"
-  }
-}
+  instagram: {
+    channel: 'INSTAGRAM_AUTH',
+    metadata: 'instagram.code',
+  },
+};
 
 class ActionBar extends Component {
   constructor(props) {
@@ -59,8 +58,6 @@ class ActionBar extends Component {
 
   state = {
     show: false,
-    isHidden: true,
-    isCountryToggle: true
   }
 
   componentDidMount() {
@@ -75,26 +72,22 @@ class ActionBar extends Component {
       show = false;
     }
     this.setState({
-      show: show,
+      show,
       logoutClicked: false,
-      loginClicked: false
+      loginClicked: false,
     });
-    if(nextProps.isLoggedIn) {
-      if(nextProps.ptaToken){
+    if (nextProps.isLoggedIn) {
+      if (nextProps.ptaToken) {
         this.props.savePtaToken(nextProps.ptaToken);
-        if(Router.router.pathname === '/login') {
-            window.location.replace(`${publicUrls.custhelpDomain}/ci/pta/login/redirect/${unescape(Router.router.query.p_next_page)}/p_li/${nextProps.ptaToken}`);
+        if (Router.router.pathname === '/login') {
+          window.location.replace(`${publicUrls.custhelpDomain}/ci/pta/login/redirect/${unescape(Router.router.query.p_next_page)}/p_li/${nextProps.ptaToken}`);
         }
-      } else {
-        if(Router.router.pathname === '/login') {
-            window.location.replace(`${publicUrls.custhelpDomain}/ci/pta/login/redirect/${unescape(Router.router.query.p_next_page)}/p_li/${cookies.get('ptaToken')}`);
-        }
+      } else if (Router.router.pathname === '/login') {
+        window.location.replace(`${publicUrls.custhelpDomain}/ci/pta/login/redirect/${unescape(Router.router.query.p_next_page)}/p_li/${cookies.get('ptaToken')}`);
       }
-    } else {
-      if((nextProps.instaCode !== this.props.instaCode) && nextProps.instaCode) {
-        window.localStorage.removeItem('instagramCode');
-        this.getTokenCall('instagram', nextProps.instaCode);
-      }
+    } else if ((nextProps.instaCode !== this.props.instaCode) && nextProps.instaCode) {
+      window.localStorage.removeItem('instagramCode');
+      this.getTokenCall('instagram', nextProps.instaCode);
     }
   }
 
@@ -103,7 +96,7 @@ class ActionBar extends Component {
       logoutClicked: true,
     }, () => {
       this.props.logout();
-    })
+    });
   }
 
   loginClick(e) {
@@ -120,25 +113,27 @@ class ActionBar extends Component {
     this.setState(state);
   }
 
-  onBackdropClick() {
+  onBackdropClick(logoutRequired = false) {
     this.setState({ show: false });
     this.props.resetLoginError();
     this.props.resetShowLogin();
-    this.props.logout();
+    if (logoutRequired) {
+      this.props.logout();
+    }
   }
 
   getTokenCall = (socialNetwork, token) => {
     const serverData = {
-      "channel": snMetaObj[socialNetwork].channel,
-      "metadata": {
-        [snMetaObj[socialNetwork].metadata]: token
-      }
-    }
-    this.props.userLogin(serverData)
+      channel: snMetaObj[socialNetwork].channel,
+      metadata: {
+        [snMetaObj[socialNetwork].metadata]: token,
+      },
+    };
+    this.props.userLogin(serverData);
   }
 
   render() {
-    const { isLoggedIn, cartResults, userInfo, wishListCount } = this.props;
+    const { isLoggedIn, cartResults, userInfo, wishListCount,getEditDetails } = this.props;
     return (
       <div className={styles['actionbar-wrapper']}>
         <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']} ${styles['country-code']}`}>
@@ -153,10 +148,10 @@ class ActionBar extends Component {
             }
           </NoSSR>
         </div>
-        <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']}`}>
+        <div className={`${styles['action-item']} ${styles['pr-20']} ${styles['pl-20']} ${styles['border-rt']} ${styles['flex-center']} ${styles['justify-center']}`}>
           <Link route={`/${country}/${language}/cam/wishlist`}>
            <a style={{dispaly:'block'}}>
-            <span className={`${styles['flex-center']} ${styles['justify-center']} ${styles['relative']}`}>
+            <span className={`${styles['flex-center']} ${styles['justify-center']} ${styles['relative']}`} title={PDP_PAGE.GO_TO_WISHLIST}>
               <SVGComponent clsName={`${styles['wish-list-icon']}`} src="icons/wish-list/wish-list-icon" />
               <span className={`${styles['absolute']} ${styles['cart-count']} ${styles['fs-10']} ${styles['white-color']}`}>{wishListCount}</span>
             </span>
@@ -166,12 +161,12 @@ class ActionBar extends Component {
         <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']}`}>
           <Dropdown id="cart-toggle" className={`${styles['cart-inn']} ${styles['profile-login-inn']} ${styles['pr-20']}`}>
               <Link route={`/${country}/${language}/cart`}>
-              <a style={{dispaly:'block'}}>
-                <span className={`${styles['flex-center']} ${styles['justify-center']} ${styles['relative']}`}>
-                  <SVGComponent clsName={`${styles['cart-icon']}`} src="icons/cart/cart-icon" />
-                  <span className={`${styles['absolute']} ${styles['cart-count']} ${styles['fs-10']} ${styles['white-color']}`}>{cartResults.items.length}</span>
-                </span>
-               </a>
+                <a style={{dispaly:'block'}}>
+                  <span className={`${styles['flex-center']} ${styles['justify-center']} ${styles['relative']}`} title={PDP_PAGE.GO_TO_CART}>
+                    <SVGComponent clsName={`${styles['cart-icon']}`} src="icons/cart/cart-icon" />
+                    <span className={`${styles['absolute']} ${styles['cart-count']} ${styles['fs-10']} ${styles['white-color']}`}>{cartResults.items.length}</span>
+                  </span>
+                </a>
               </Link>
             <Dropdown.Menu className={`${styles['cart-item']}`}>
               <span>
@@ -179,7 +174,7 @@ class ActionBar extends Component {
                   showMiniCart={true}
                   showCheckOutBtn={true}
                   cartData={cartResults}
-                  editCartDetails={true}
+                  editCartDetails={getEditDetails}
                 />
               </span>
             </Dropdown.Menu>
@@ -218,7 +213,7 @@ class ActionBar extends Component {
                     </a>
                   </li>
                   <li className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']}`}>
-                    <a href={publicUrls.customerHelp} target="_blank" className={styles['flex-center']}><span className={styles['support']}><span className={`${styles['flex-center']} ${styles['justify-center']}`}>?</span></span>
+                    <a href={`/${country}/${language}/help/faq`} target="_blank" className={styles['flex-center']}><span className={styles['support']}><span className={`${styles['flex-center']} ${styles['justify-center']}`}>?</span></span>
                       <span className={styles['pl-20']}>{HEADER_PAGE.HELP_SUPPORT}</span>
                     </a>
                   </li>
@@ -237,19 +232,15 @@ class ActionBar extends Component {
                     }
                   </li>
                 </ul>
-
               </div>
             </Dropdown.Menu>
           </Dropdown>
-
         </div>
         {
           (this.state.show)
             ?
             (
-              <Modal className={`react-router-modal__modal ${styles['login-reg-modal']} ${styles['p-20']}`} onBackdropClick={this.onBackdropClick}>
-                <Login mode={this.state.mode} onBackdropClick={this.onBackdropClick} />
-              </Modal>
+              <Login mode={this.state.mode} onBackdropClick={this.onBackdropClick} />
             )
             :
             null}
@@ -269,9 +260,10 @@ const mapStateToProps = (store) => {
     userInfo: personalSelectors.getUserInfo(store),
     showLogin: selectors.getShowLogin(store),
     ptaToken: selectors.getPTAToken(store),
-    wishListCount: wishListSelectors.getPaginationDetails(store).total_elements,
+    wishListCount: wishListSelectors.getProductsDetails(store).length,
     showEmailVerificationScreen: selectors.showEmailVerificationScreen(store),
-  })
+    getEditDetails: cartSelectors.getEditDetails(store),
+  });
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -284,11 +276,11 @@ const mapDispatchToProps = (dispatch) => {
       resetShowLogin: actionCreators.resetShowLogin,
       savePtaToken: actionCreators.savePtaToken,
       userLogin: actionCreators.userLogin,
-      getWishlist: wishListActionCreators.getWishlist,
+      getWishlist: wishListActionCreators.getWishlistProducts,
     },
     dispatch,
   );
-}
+};
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(ActionBar);

@@ -17,7 +17,7 @@ const styles = lang === 'en' ? styles_en : styles_ar;
 
 const { PDP_PAGE } = languageDefinations();
 
-const ProductDetails = ({ details, keyfeatures, isPreview, productInfo }) => {
+const ProductDetails = ({ details, keyfeatures, isPreview, productInfo,variantId,productId }) => {
   return (
     <div className={`${styles['product-details-main']} ${styles['border-radius4']} ${styles['mb-5']} ${styles['box']}`}>
       {
@@ -28,7 +28,7 @@ const ProductDetails = ({ details, keyfeatures, isPreview, productInfo }) => {
               <Panel eventKey="1">
                 <Panel.Heading>
                   <Panel.Title toggle className={styles['key-feature-inn']}>
-                    <h4 className={`${styles['fs-12']} ${styles['fontW600']} ${styles['mb-5']} ${styles['mt-0']} ${styles['flx-space-bw']}`}>
+                    <h4 className={`${styles['fs-14']} ${styles['fontW600']} ${styles['mb-5']} ${styles['mt-0']} ${styles['flx-space-bw']}`}>
                       <span>{PDP_PAGE.PRODUCT_DETAILS}</span>
                       <SVGCompoent clsName={`${styles['expand-icon']}`} src="icons/down-arrow/down-arrow" />
                     </h4>
@@ -45,7 +45,11 @@ const ProductDetails = ({ details, keyfeatures, isPreview, productInfo }) => {
       }
       <NoSSR>
         {
-          isPreview ? null : <VariantsAndSimilarProducts />
+          isPreview ? null :
+          <VariantsAndSimilarProducts
+            variantId={variantId}
+            productId={productId}
+          />
         }
       </NoSSR>
       {<SizeChart

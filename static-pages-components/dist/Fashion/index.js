@@ -64,7 +64,7 @@ const Fashion = () => React.createElement(
               React.createElement(
                 'span',
                 { className: `lobster-family ${styles['fs-24']}` },
-                'Mens Shoes'
+                'Men\'s Shoes'
               ),
               React.createElement(
                 'span',
@@ -584,7 +584,7 @@ const Fashion = () => React.createElement(
                 React.createElement(
                   'h6',
                   { className: `${styles['m-0']} ${styles['fs-14']} ${styles['fontW600']}` },
-                  'Womens Formal Shoes'
+                  'Women\'s Formal Shoes'
                 ),
                 React.createElement(
                   'span',

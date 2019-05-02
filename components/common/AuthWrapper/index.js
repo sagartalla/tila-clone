@@ -13,7 +13,7 @@ class AuthWrapper extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {  
+  componentWillReceiveProps(nextProps) {
     if(!nextProps.isLoginShown){
       this.props.popupClosed && this.props.popupClosed();
     } else {

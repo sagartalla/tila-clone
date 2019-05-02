@@ -24,9 +24,11 @@ const country = cookies.get('country') || 'SAU';
 const Order = ({ order }) => {
   const popover = (
     <Popover id="popover-positioned-right">
-      <address>
-        {order.shippingTo.address} {order.shippingTo.phone}
-      </address>
+      <div className={`${styles.flex} ${styles['justify-between']} ${styles['flex-colum']} ${styles['ht-100']}`}>
+        <div className={`${styles.fontW600} ${styles['fs-16']} ${styles['black-color']}`}>{order.shippingTo.name}</div>
+        <div className={`${styles['fs-14']} ${styles.ellipsis} ${styles['thick-gry-clr']}`}>{order.shippingTo.address}</div>
+        <div className={`${styles['fs-14']} ${styles['thick-gry-clr']}`}>{order.shippingTo.phone}</div>
+      </div>
     </Popover>
   );
 
@@ -85,10 +87,13 @@ const Order = ({ order }) => {
               {order.orderDate}
             </span>
           </div>
-          <span className={`${styles['thick-blue']} ${styles['p-5']} ${styles['flex-center']} ${styles['ml-10']} ${styles.border} ${styles['border-radius4']}`}>
-            <SVGComponent clsName={`${styles['help-icon']}`} src="icons/help-icon/help" />
+          <a href={`/${country}/${language}/help/answers/orders#${order.id}`}>
+            <span className={`${styles['thick-blue']} ${styles['p-5']} ${styles['flex-center']} ${styles['ml-10']} ${styles.border} ${styles['border-radius4']}`}>
+              <SVGComponent clsName={`${styles['help-icon']}`} src="icons/help-icon/help" />
             &nbsp;&nbsp;Need Help?
-          </span>
+            </span>
+          </a>
+         
         </Col>
         <Col md={5} className={styles['pl-0']}>
           <div className={`${styles['flx-space-bw']}`}>

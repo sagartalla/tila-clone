@@ -106,7 +106,7 @@ const Lifestyle = () => (
       </div>
       {/* top selling start */}
       <div className={`top-selling-part ${styles['pt-10']}`}>
-        <h5 className={`main-title ${styles['fs-16']} ${styles['fontW600']}  ${styles['mb-0']}`}>Top Selling Furnitures</h5>
+        <h5 className={`main-title ${styles['fs-16']} ${styles['fontW600']}  ${styles['mb-0']}`}>Top Selling Furniture</h5>
         <span className={`dec ${styles['fs-12']}`}>Trolley bags, Shoes, Perfumes, Makeup kit, Grooming kit, Trimmers, Slippers, &amp; more… </span>
         <div className={`top-selling-part-inn ${styles['pt-10']}`}>
           <Col md={2} className={styles['pl-0']}>

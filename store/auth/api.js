@@ -76,7 +76,11 @@ const userLogin = params =>
 ;
 
 const userLogout = () => {
-  axios.post('/api/logout');
+  axios.post('/api/logout').then((res) => {
+    if (res.status === 200) {
+      window.location = `${window.location.origin}/${cookies.get('country')}/${cookies.get('language')}`;
+    }
+  });
 };
 
 const getLoginInfo = () => {

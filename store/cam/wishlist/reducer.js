@@ -6,8 +6,9 @@ const initialState = {
     loading: false,
   },
   data: [],
+  products: [],
   error: '',
-  paginationData:{}
+  paginationData: {},
 };
 
 const wishlistReducer = typeToReducer({
@@ -54,6 +55,14 @@ const wishlistReducer = typeToReducer({
     FULFILLED: (state) => {
       return Object.assign({}, state, { ui: { loading: false } });
     },
+  },
+  [actions.WISHLIST_PRODUCTS]: {
+    PENDING: state => Object.assign({}, state, { ui: { loading: true } }),
+    REJECTED: state => Object.assign({}, state, { ui: { loading: false } }),
+    FULFILLED: (state, action) => Object.assign({}, state, {
+      ui: { loading: false },
+      products: action.payload && action.payload.data,
+    }),
   },
 }, initialState);
 

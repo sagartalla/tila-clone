@@ -125,7 +125,6 @@ class Compare extends Component {
       compareCount = 0, features = [], products = [], productsFeatures = [],
     } = compareInfo;
     const { selectedBrand } = this.state;
-    console.log('cefjice', this.props);
     return (
       <div>
         <HeaderBar />

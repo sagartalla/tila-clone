@@ -157,7 +157,7 @@ class OrderItem extends Component {
                   <Col md={10} className={styles['ipad-pr-0']}>
                     <div className={`${styles['text-wrap']}`}>
                       <Link route={`/${country}/${language}/product?productId=${product.productId}${product.variantId ? `&variantId=${product.variantId}` : ''}&catalogId=${product.catalogId}&itemType=${product.itemType}`}>
-                        <a className={`${styles['width100']} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
+                        <a className={`${styles['width100']} ${styles['fs-14']} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
                           <span className={`${styles.fontW600}`}>{product.name}</span>
                         </a>
                       </Link>
@@ -219,18 +219,21 @@ class OrderItem extends Component {
                   </Col>
                 </div>
                 {needHelp &&
+                <a href={`/${country}/${language}/help/answers/orders#${orderId}`}>
                   <span className={`${styles['help-position']} ${styles.absolute} ${styles['thick-blue']} ${styles['p-5']} ${styles['flex-center']} ${styles['ml-10']} ${styles.border} ${styles['border-radius4']}`}>
                     <SVGComponent clsName={`${styles['help-icon']}`} src="icons/help-icon/help" />
                     &nbsp;&nbsp;Need Help?
-                  </span>}
+                  </span>
+                </a>
+                  }
               </div>
               {product.order_type === 'EXCHANGE' && product.order_item_type === 'DELIVERY' &&
-                <div className={`${styles['pt-5']} ${styles['pb-5']} ${styles['pl-15']} ${styles['thick-border-top']}`}>
+                <div className={`${styles['pt-5']} ${styles['pb-5']} ${styles['pl-15']} ${styles['border-t']}`}>
                   This is an exchange order on the item you have requested for exchange.
                   {/* To view the parent order please <a>Click here</a> */}
                 </div>}
-              {(product.order_status === 'RETURN_REQUESTED' || product.order_status === 'CANCELLED') &&
-                <div className={`${styles['pt-15']} ${styles['pb-5']} ${styles['pl-15']} ${styles['thick-border-top']} ${styles.relative}`}>
+              {product.refunds && product.refunds.length > 0 &&
+                <div className={`${styles['pt-15']} ${styles['pb-5']} ${styles['pl-15']} ${styles['border-t']} ${styles.relative}`}>
                   <div className={`${styles['bg-white']} ${styles['fs-12']} ${styles.absolute} ${styles['p-5']} ${styles['border-lg']} ${styles['refund-label']}`}>Refund Status</div>
                   Refund Initiated.
                 </div>}
