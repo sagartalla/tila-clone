@@ -7,7 +7,6 @@ import { actionCreators as orderActions} from '../../store/cam/orders';
 import { selectors, actionCreators as orderDetailActions } from '../../store/order';
 import { selectors as authSelectors } from '../../store/auth';
 import constants from '../../constants';
-import { mergeCss } from '../../utils/cssUtil';
 
 const cookies = new Cookies();
 
@@ -15,7 +14,13 @@ const language = cookies.get('language') || 'en';
 const country = cookies.get('country') || 'SAU';
 const userCredentials = cookies.get('userCreds');
 
-const styles = mergeCss('components/Help/help');
+import lang from '../../utils/language';
+
+import styles_en from './help_en.styl';
+import styles_ar from './help_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
+
 
 const statusColor = {
   'New': '#F5A624',
@@ -37,7 +42,7 @@ const ReplyBox = (props) => {
       } else {
         alert('File size limit is 10MB')
       }
-    }  
+    }
   }
   const removeFile = (fileName) => (e) => {
     const newFileObj = {...files};
@@ -62,7 +67,7 @@ const ReplyBox = (props) => {
         </div>
         <div onClick={props.updateIncident(msg, files)} className={styles['SendMsgButton']}>SEND MESSAGE</div>
       </div>
-      {Object.keys(files).length ? 
+      {Object.keys(files).length ?
             <div className={styles['fs-12p']}>
               <div>{`Attachments (${Object.keys(files).length})`}</div>
                 {Object.keys(files).map(renderFiles)}
@@ -85,7 +90,7 @@ class Incidents extends Component {
   }
   componentWillReceiveProps(nextProps){
     if(nextProps.tktData !== this.props.tktData && nextProps.tktData.length &&!this.props.tktData.length) {
-      this.selectTicket(nextProps.tktData[0].id)() 
+      this.selectTicket(nextProps.tktData[0].id)()
     }
     if(nextProps.tktDetailData !== this.props.tktDetailData) {
       const { orderNumberTiLa } = nextProps.tktDetailData;
@@ -207,7 +212,7 @@ class Incidents extends Component {
           </div>
         </div>
         <div className={`${styles['fs-13p']} ${styles['greyColor']}`}>{msg}</div>
-        {index === 0 ? 
+        {index === 0 ?
           <ReplyBox updateIncident={this.updateIncident} />
         : null}
       </div>
@@ -253,13 +258,13 @@ class Incidents extends Component {
         <div className={styles['pV-10']} dangerouslySetInnerHTML={{__html: subject}} />
         {orderNumberTiLa && (this.state.tktOrder ? this.renderOrderItems(this.state.tktOrder) : <div>Getting order details of {orderNumberTiLa}</div>)}
         <div>{threadIds.map(this.renderThread(threads))}</div>
-        {fileIds.length ? 
+        {fileIds.length ?
           <div className={`${styles['pV-10']} ${styles['fs-14p']}`}>
             <div>{`All Attachments (${fileIds.length})`}</div>
             <div>{fileIds.map(this.renderFile(fileAttachments, id))}</div>
           </div>
         : null}
-        
+
       </div>
     )
   }
