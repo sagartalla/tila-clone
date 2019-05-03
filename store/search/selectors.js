@@ -38,11 +38,18 @@ const addCartAndWishlistDetails = (store, results) => {
   // }
   const cartListingIds = items.map(i => i.listing_id) || [];
   const wishListProductIds = products && products.length > 0 && (products.map(w => w.product_id) || []);
+
+  const wishlistItems = {};
+  products.forEach((p) => {
+    wishlistItems[p.product_id] = p.wishlist_id;
+  });
+
   return {
     ...results,
     items: results.items.map((i) => {
       return ({
         ...i,
+        wishlistId: wishlistItems[i.productId] || '',
         variants: filterVariants(cartListingIds, i.variants),
         addedToWishlist: wishListProductIds && wishListProductIds.indexOf(i.productId) !== -1,
       });
@@ -183,7 +190,7 @@ const getSearchResutls = (store) => {
         // priceRange,
         currency,
         categoryId,
-        flags: product.flags
+        flags: product.flags,
       };
     });
   }
