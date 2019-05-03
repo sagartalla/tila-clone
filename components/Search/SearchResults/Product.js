@@ -90,16 +90,20 @@ class Product extends Component {
     e.preventDefault();
     const {
       productId: product_id, catalogId: catalog_id, variantId: variant_id,
-      variants, currency, addToWishlistAndFetch,
+      variants, currency, addToWishlistAndFetch, wishlistId, deleteWishlist,
     } = this.props;
     const { selectedIndex } = this.state;
-    addToWishlistAndFetch({
-      catalog_id,
-      product_id,
-      variant_id,
-      wishlisted_price: variants && variants[selectedIndex] && variants[selectedIndex].sellingPrice && variants[selectedIndex].sellingPrice[0],
-      wishlisted_currency: currency,
-    });
+    if (wishlistId) {
+      deleteWishlist(wishlistId);
+    } else {
+      addToWishlistAndFetch({
+        catalog_id,
+        product_id,
+        variant_id,
+        wishlisted_price: variants && variants[selectedIndex] && variants[selectedIndex].sellingPrice && variants[selectedIndex].sellingPrice[0],
+        wishlisted_currency: currency,
+      });
+    }
   }
 
   notify(e) {
@@ -231,6 +235,7 @@ class Product extends Component {
       cartButtonLoaders,
       btnLoading,
       cmpData,
+      wishlistId,
     } = this.props;
     const { showNotify, selectedIndex, showLoader } = this.state;
     const selectedProduct = selectedID.length > 0 && selectedID.includes(productId);
@@ -270,7 +275,6 @@ class Product extends Component {
           </React.Fragment>}
       </span>
     );
-
     return (
       <Fragment>
         <div
@@ -355,7 +359,7 @@ class Product extends Component {
                       <div 
                         className={`${styles['checkbox-material']} ${styles['flex']} ${styles['add-to-compare']}`}
                         onClick={this.preventDefaultClick}
-                        >
+                      >
                         <input
                           id="add-to-compare-srp"
                           type="checkbox"
@@ -446,6 +450,7 @@ const mapDispatchToProps = (dispatch) => {
       addToWishlistAndFetch: actionCreators.addToWishlistAndFetch,
       addToCompare: compareActions.addToCompare,
       removeCompareData: compareActions.removeCompareData,
+      deleteWishlist: actionCreators.deleteWishlist,
     },
     dispatch,
   );

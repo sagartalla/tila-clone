@@ -93,14 +93,15 @@ class Search extends Component {
     if (!this.state.query) return false;
     // const { isCategoryTree } = this.props;
     digitalData.page.pageInfo.onsiteSearchTerm = this.state.query;
-    this.fireCustomEventClick();
-    const flushFilters = true;
+
+    // const flushFilters = true;
 
     this.fireCustomEventClick();
 
     this.setState({
       searchInput: false,
     });
+
     Router.pushRoute(`/${country}/${language}/srp?search=${this.state.query}&${Object.entries(this.props.optionalParams).map(([key, val]) => `${key}=${val}`).join('&')}`);
   }
 
