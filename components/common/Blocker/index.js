@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { mergeCss } from '../../../utils/cssUtil';
-const styles = mergeCss('components/common/Blocker/blocker');
+
+import lang from '../../../utils/language';
+
+import styles_en from './blocker_en.styl';
+import styles_ar from './blocker_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 const Blocker = props => {
   return (
@@ -23,4 +28,3 @@ Blocker.defaultProps = {
 };
 
 export default Blocker;
-
