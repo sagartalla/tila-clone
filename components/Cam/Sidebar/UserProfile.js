@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import Cookies from 'universal-cookie';
 import { languageDefinations } from '../../../utils/lang/';
 import { Link } from '../../../routes';
-import { mergeCss } from '../../../utils/cssUtil';
 import { selectors, actionCreators } from '../../../store/cam/personalDetails';
 import { bindActionCreators } from 'redux';
 import generateURL from '../../../utils/urlGenerator';
@@ -51,7 +50,7 @@ class UserProfile extends React.Component {
     }
     if (nextProps.userInfo.personalInfo && Object.keys(nextProps.userInfo.personalInfo).length > 0 && this.state.imgDocumentID === null) {
       this.setState({
-        imgDocumentID: image_url 
+        imgDocumentID: image_url
       })
     }
     if (nextProps.getPictureDocumentId && this.state.imgDocumentID !== nextProps.getPictureDocumentId) {
