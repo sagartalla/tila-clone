@@ -2,13 +2,19 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
 import { languageDefinations } from '../../../utils/lang';
-import { mergeCss } from '../../../utils/cssUtil';
+
 import SVGComponent from '../SVGComponet';
 import Bin from './Bin';
 import Box from './Box';
 
 const { PAYMENT_PAGE } = languageDefinations();
-const styles = mergeCss('components/Payments/payment');
+
+import lang from '../../../utils/language';
+
+import styles_en from './captcha_en.styl';
+import styles_ar from './captcha_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 const boxObject = {
   successbox:<SVGComponent clsName={`${styles['success_box-icon']}`} src="icons/captcha-icons-list/success_box-icon" />,
