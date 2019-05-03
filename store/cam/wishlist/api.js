@@ -19,7 +19,7 @@ const track = (params) => {
       product: [
         {
           productInfo: {
-            productID: wishlist.product_details.product_id,
+            productID: wishlist.product_id,
           },
         },
       ],
@@ -55,7 +55,7 @@ const deleteWishlistApi = (wishlist_id, toastObj = {}, currentPage) => axios.pos
   if (toastObj.showToast) {
     toast.success(API_TEXT.ITEM_REMOVED_FROM_WISHLIST);
   }
-
+  // getWishlistProducts();
   return getWishlistApi(currentPage);
 });
 

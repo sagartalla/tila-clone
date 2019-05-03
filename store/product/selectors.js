@@ -7,6 +7,13 @@ const getProduct = (store, variantId) => {
 
   const { products = [] } = store.wishlistReducer;
   const wishListProductIds = products && products.length > 0 && (products.map(w => w.product_id) || []);
+  let wishlistId = '';
+
+  products.forEach((p) => {
+    if (p.product_id === product_details.product_id) {
+      wishlistId = p.wishlist_id;
+    }
+  });
 
   variantId = store.productReducer.variantsData.selectedVariantId || variantId;
   variantId = variantId || Object.keys(variant_preferred_listings || {})[0];
@@ -124,6 +131,7 @@ const getProduct = (store, variantId) => {
     categoryType: tree.finance ? tree.finance[0].display_name_en : '',
     catalog: _.groupBy(_.filter(catalogAttributeMap, (val) => val.visible), (attrMap) => attrMap.attribute_category_name),
     isWishlisted: wishListProductIds && wishListProductIds.indexOf(product_details.product_id) !== -1,
+    wishlistId,
   };
 };
 

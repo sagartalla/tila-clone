@@ -167,7 +167,7 @@ const getProductComponent = (isPreview, taskCode) => {
       const { productData, userDetails, showLoading, query } = this.props;
       const {
         catalog, titleInfo, keyfeatures, extraOffers, imgUrls, offerInfo, shippingInfo, isWishlisted,
-        details, productDescription, catalogObj, categoryType = '', warranty, breadcrums, product_id,
+        details, productDescription, catalogObj, categoryType = '', warranty, breadcrums, product_id, wishlistId,
       } = productData;
       const { offerPricing } = offerInfo;
       const {
@@ -192,6 +192,7 @@ const getProductComponent = (isPreview, taskCode) => {
                         isWishlisted={isWishlisted}
                         extraOffers={extraOffers}
                         breadcrums={breadcrums}
+                        wishlistId={wishlistId}
                       />
                     </NoSSR>
                   </Col>

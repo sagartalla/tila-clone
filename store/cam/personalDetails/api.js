@@ -13,6 +13,21 @@ const getUserProfileInfo = () => {
   })
 };
 
+const uploadProfilePic = (body) => {
+  return axios.request({
+    method: 'POST',
+    url: `${constants.TRANSFORMER_API_URL}/fpts/document-service/upload`,
+    data: body,
+    headers: {
+      'tenant': 'profile-service',
+    },
+  }).then(({data}) => {
+    return data;
+  }).catch((data) => {
+    console.log(data);
+  })
+}
+
 const changePassword = (body) => {
   return axios.put(`${constants.CMS_API_URL}/api/v1/user/password/set`, body).then(({ data }) => {
     return { data };
@@ -66,6 +81,6 @@ const deactivateUserProfile = () =>
   axios.put(`${constants.CMS_API_URL}/api/v1/user/deactivate/`);
 
 export default {
-  getUserProfileInfo, changePassword, forgotPassword, editPersonalInfo,
+  getUserProfileInfo, changePassword, uploadProfilePic, forgotPassword, editPersonalInfo,
   deactivateUserProfile, resetPassword, otpUserUpdate, verifyOtp,sendOtpToMobile
 };
