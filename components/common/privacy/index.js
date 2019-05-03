@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 
-import { mergeCss } from '../../../utils/cssUtil';
-const styles = mergeCss('components/common/privacy/privacy');
+
+import lang from '../../../utils/language';
+
+import styles_en from './privacy_en.styl';
+import styles_ar from './privacy_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 const Privacy = props => {
   return (
@@ -20,4 +25,3 @@ const Privacy = props => {
 };
 
 export default Privacy;
-
