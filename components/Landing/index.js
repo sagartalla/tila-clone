@@ -64,7 +64,7 @@ const getURl = (page) => {
         };
         break;
     case 'HomePage':
-        switch('stage') {
+        switch(env) {
           case 'stage':
           case 'staging':
               return {
