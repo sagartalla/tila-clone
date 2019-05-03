@@ -18,7 +18,7 @@ import styles_ar from './index_ar.styl';
 
 const config = getConfig();
 const isLocal = config.publicRuntimeConfig.isLocal;
-
+const env = config.publicRuntimeConfig.env
 
 const allStyles = lang === 'en' ? styles_en : styles_ar;
 
@@ -43,11 +43,52 @@ RemoteComponent.loadRemoteComponents(remoteComponents)
   console.log("Something went wrong: " + err);
 });
 */
+const getURl = (page) => {
+  switch (page) {
+    case 'Fashion':
+        return {
+          JS: 'https://static-dev.tila.com/tila-static-pages/fashion/index.js',
+          CSS: 'https://static-dev.tila.com/tila-static-pages/fashion/style.css'
+        };
+        break;
+    case 'Electronics':
+        return {
+          JS: 'https://static-dev.tila.com/tila-static-pages/electronics/index.js',
+          CSS: 'https://static-dev.tila.com/tila-static-pages/electronics/style.css'
+        };
+        break;
+    case 'Lifestyle':
+        return {
+          JS: 'https://static-dev.tila.com/tila-static-pages/lifestyle/index.js',
+          CSS: 'https://static-dev.tila.com/tila-static-pages/lifestyle/style.css'
+        };
+        break;
+    case 'HomePage':
+        switch('stage') {
+          case 'stage':
+          case 'staging':
+              return {
+                JS: 'https://static-dev.tila.com/tila-static-pages/homepage/stage/index.js',
+                CSS: 'https://static-dev.tila.com/tila-static-pages/homepage/stage/style.css',
+              };
+              break;
+          case 'preprod':
+              return {
+                JS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/homepage/preprod/index.js',
+                CSS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/homepage/preprod/style.css',
+              };
+              break;
+        }
+
+        break;
+  }
+}
+
 let remoteComponents = {
   fashion: {
     name: 'Fashion',
-    src: isLocal ? 'http://localhost:8000/Fashion/index.js' : 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/fashion/index.js',
-    styles: isLocal ? 'http://localhost:8000/Fashion/style.css' : 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/fashion/style.css',
+    src: isLocal ? 'http://localhost:8000/Fashion/index.js' : getURl('Fashion').JS,
+    styles: isLocal ? 'http://localhost:8000/Fashion/style.css' : getURl('Fashion').CSS,
     context: {
       React,
       Grid,
@@ -59,8 +100,8 @@ let remoteComponents = {
   },
   electronics: {
     name: 'Electronics',
-    src: isLocal ? 'http://localhost:8000/Electronics/index.js' : 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/electronics/index.js',
-    styles: isLocal ? 'http://localhost:8000/Electronics/style.css' : 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/electronics/style.css',
+    src: isLocal ? 'http://localhost:8000/Electronics/index.js' : getURl('Electronics').JS,
+    styles: isLocal ? 'http://localhost:8000/Electronics/style.css' : getURl('Electronics').CSS,
     context: {
       React,
       Grid,
@@ -72,8 +113,8 @@ let remoteComponents = {
   },
   lifestyle: {
     name: 'Lifestyle',
-    src: isLocal ? 'http://localhost:8000/Lifestyle/index.js' : 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/lifestyle/index.js',
-    styles: isLocal ? 'http://localhost:8000/Lifestyle/style.css' : 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/lifestyle/style.css',
+    src: isLocal ? 'http://localhost:8000/Lifestyle/index.js' : getURl('Lifestyle').JS,
+    styles: isLocal ? 'http://localhost:8000/Lifestyle/style.css' : getURl('Lifestyle').CSS,
     context: {
       React,
       Grid,
@@ -84,8 +125,8 @@ let remoteComponents = {
   },
   homepage: {
     name: 'HomePage',
-    src: isLocal ? 'http://localhost:8000/homepage/index.js' : 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/homepage/index.js',
-    styles: isLocal ? 'http://localhost:8000/homepage/style.css' : 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/homepage/style.css',
+    src: isLocal ? 'http://localhost:8000/homepage/index.js' : getURl('HomePage').JS,
+    styles: isLocal ? 'http://localhost:8000/homepage/style.css' : getURl('HomePage').CSS,
     context: {
       React,
       Grid,

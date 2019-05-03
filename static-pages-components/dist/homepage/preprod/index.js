@@ -156,15 +156,15 @@ const twoCols = [{
 
 const threeCols = [{
   img: '/static/img/landing-home/shoes.jpg',
-  link: 'https://storefront-stage.fptechscience.com/SAU/en/srp/footwear-1101/?isListed=false&language=en&search=Shoe',
+  link: '/SAU/en/srp?search=footwear&language=en&isListed=false',
   title: 'Shoes'
 }, {
   img: '/static/img/landing-home/ls2.jpg',
-  link: 'https://storefront-stage.fptechscience.com/SAU/en/srp?disableSpellCheck=true&isListed=false&language=en&search=helmet',
+  link: '/SAU/en/srp?search=LS2&language=en&isListed=false',
   title: 'LS2'
 }, {
   img: '/static/img/landing-home/furniture.jpg',
-  link: 'https://storefront-stage.fptechscience.com/SAU/en/srp?isListed=false&language=en&search=Furniture',
+  link: '/SAU/en/srp?search=Furniture&language=en&isListed=false',
   title: 'Furniture'
 }];
 
@@ -215,40 +215,40 @@ function SampleNextArrow(props) {
 }
 
 const b_d_b = {
-  Mobiles: 'https://storefront-stage.fptechscience.com/SAU/en/srp?search=Mobiles&language=en&isListed=false',
-  Clothing: 'https://storefront-stage.fptechscience.com/SAU/en/srp?isListed=false&language=en&search=Clothing',
-  'Clothing Accessories': 'https://storefront-stage.fptechscience.com/SAU/en/srp?search=Clothing&language=en&isListed=false',
-  Laptops: 'https://storefront-stage.fptechscience.com/SAU/en/srp/laptop-1173/?search=Laptops&language=en&isListed=false',
-  'Storage Devices': 'https://storefront-stage.fptechscience.com/SAU/en/srp?search=Storage&language=en&isListed=false',
-  Cameras: 'https://storefront-stage.fptechscience.com/SAU/en/srp?search=Camera&language=en&isListed=false',
-  Televisions: 'https://storefront-stage.fptechscience.com/SAU/en/srp/Televisions-878?categoryTree=true&isListed=false',
-  'Home Appliances': 'https://storefront-stage.fptechscience.com/SAU/en/srp?search=Home%20Appliances&language=en&isListed=false',
-  'Womens Clothing': 'https://storefront-stage.fptechscience.com/SAU/en/srp/Clothing-910?categoryTree=true&isListed=false',
-  'Mens Clothing': 'https://storefront-stage.fptechscience.com/SAU/en/srp/Clothing-899?categoryTree=true&isListed=false',
-  'Fashion Accessories': 'https://storefront-stage.fptechscience.com/SAU/en/srp?isListed=false&language=en&search=Fashion%20Accessories',
-  Watches: 'https://storefront-stage.fptechscience.com/SAU/en/srp/watches-1128/?isListed=false&language=en&search=Watch',
-  'Kitchen Appliances': 'https://storefront-stage.fptechscience.com/SAU/en/srp?isListed=false&language=en&search=Kitchen%20Appliances',
-  Speakers: 'https://storefront-stage.fptechscience.com/SAU/en/srp?isListed=false&language=en&search=Speaker',
-  'Microwave Ovens': 'https://storefront-stage.fptechscience.com/SAU/en/srp?isListed=false&language=en&search=Microwave%20oven',
-  'Smart Watch': 'https://storefront-stage.fptechscience.com/SAU/en/srp?isListed=false&language=en&search=Smart%20Watch',
-  'Mobile Accessories': 'https://storefront-stage.fptechscience.com/SAU/en/srp?isListed=false&language=en&search=Mobile%20Accessories\t\t\t\t\t\t\t\t\t\t\t\t\t',
-  "Kid's Fashion": 'https://storefront-stage.fptechscience.com/SAU/en/srp?isListed=false&language=en&search=Kids',
-  Footwear: 'https://storefront-stage.fptechscience.com/SAU/en/srp/Footwear-921?categoryTree=true&isListed=false&language=en',
-  "Men's Footwear": 'https://storefront-stage.fptechscience.com/SAU/en/srp/Footwear-921?categoryTree=true&isListed=false&language=en',
-  'Women Footwear': 'https://storefront-stage.fptechscience.com/SAU/en/srp/Footwear-921?categoryTree=true&isListed=false&language=en',
-  Bags: 'https://storefront-stage.fptechscience.com/SAU/en/srp/Backpack-926?categoryTree=true&isListed=false&language=en',
-  Eyewear: 'https://storefront-stage.fptechscience.com/SAU/en/srp?isListed=false&language=en&search=eyewear',
-  Jewellery: 'https://storefront-stage.fptechscience.com/SAU/en/srp?isListed=false&language=en&search=Jewellery',
-  GUESS: 'https://storefront-stage.fptechscience.com/SAU/en/srp/womens-clothing-1056/?isListed=false&language=en&search=guess',
+  Mobiles: '/SAU/en/srp?search=Mobiles&language=en&isListed=false',
+  Clothing: '/SAU/en/srp?isListed=false&language=en&search=Clothing',
+  'Clothing Accessories': '/SAU/en/srp?search=Clothing&language=en&isListed=false',
+  Laptops: '/SAU/en/srp?search=Laptops&language=en&isListed=false',
+  'Storage Devices': '/SAU/en/srp?search=Storage&language=en&isListed=false',
+  Cameras: '/SAU/en/srp?search=Camera&language=en&isListed=false',
+  Televisions: '/SAU/en/srp?search=Televisions&language=en&isListed=false',
+  'Home Appliances': '/SAU/en/srp?search=Home%20Appliances&language=en&isListed=false',
+  'Womens Clothing': '/SAU/en/srp?search=Womens%20Clothing&language=en&isListed=false',
+  'Mens Clothing': '/SAU/en/srp?search=Mens%20Clothing&language=en&isListed=false',
+  'Fashion Accessories': '/SAU/en/srp?search=Accessories&language=en&isListed=false',
+  Watches: '/SAU/en/srp?search=Watches&language=en&isListed=false',
+  'Kitchen Appliances': '/SAU/en/srp?search=kitchen%20appliances&language=en&isListed=false',
+  Speakers: '/SAU/en/srp?search=Speakers&language=en&isListed=false',
+  'Microwave Ovens': '/SAU/en/srp?search=Microwave%20Ovens&language=en&isListed=false',
+  'Smart Watch': '/SAU/en/srp?search=Smart%20Watch&language=en&isListed=false',
+  'Mobile Accessories': '/SAU/en/srp?search=Mobile%20Accessories&language=en&isListed=false',
+  "Kid's Fashion": '/SAU/en/srp?search=Kid%27s%20Fashion&language=en&isListed=false',
+  Footwear: '/SAU/en/srp?search=Footwear&language=en&isListed=false',
+  "Men's Footwear": '/SAU/en/srp?search=Footwear&language=en&isListed=false',
+  'Women Footwear': '/SAU/en/srp?search=Footwear&language=en&isListed=false',
+  Bags: '/SAU/en/srp?search=Backpack&language=en&isListed=false',
+  Eyewear: '/SAU/en/srp?search=Eyewear&language=en&isListed=false',
+  Jewellery: '/SAU/en/srp?search=Jewellery&language=en&isListed=false',
+  GUESS: '/SAU/en/srp/womens-clothing-1056/?isListed=false&language=en&search=guess',
   FENDI: 'https://storefront-stage.fptechscience.com/SAU/en/srp/watches-1128/?isListed=false&language=en&search=FENDI',
-  'MORPHY RICHARDS': 'https://storefront-stage.fptechscience.com/SAU/en/srp/home-kitchen-appliances-1010/?isListed=false&language=en&search=morphy%20richards',
-  SHIRTS: 'https://storefront-stage.fptechscience.com/SAU/en/srp?search=shirts&language=en&isListed=false',
-  Perfumes: 'https://storefront-stage.fptechscience.com/SAU/en/srp?disableSpellCheck=true&isListed=false&language=en&search=perfume',
-  Shoes: 'https://storefront-stage.fptechscience.com/SAU/en/srp/footwear-1101/?isListed=false&language=en&search=Shoe',
-  Lights: 'https://storefront-stage.fptechscience.com/SAU/en/srp?isListed=false&language=en&search=Lights',
+  'MORPHY RICHARDS': '/SAU/en/srp?search=MORPHY%20RICHARDS%20&disableSpellCheck=true&language=en&isListed=false',
+  SHIRTS: '/SAU/en/srp?search=SHIRTS&language=en&isListed=false',
+  Perfumes: '/SAU/en/srp?search=Perfumes&language=en&isListed=false',
+  Shoes: '/SAU/en/srp?search=Shoes&language=en&isListed=false',
+  Lights: '/SAU/en/srp?search=Lights&language=en&isListed=false',
   lamps: 'https://storefront-stage.fptechscience.com/SAU/en/srp?isListed=false&language=en&search=lamps',
-  bedding: 'https://storefront-stage.fptechscience.com/SAU/en/srp?isListed=false&language=en&search=Bedding%20Set',
-  furniture: 'https://storefront-stage.fptechscience.com/SAU/en/srp?isListed=false&language=en&search=Furniture'
+  bedding: '/SAU/en/srp?search=bedding&language=en&isListed=false',
+  furniture: '/SAU/en/srp?search=furniture&language=en&isListed=false'
 };
 
 const HomePage = () => React.createElement(
