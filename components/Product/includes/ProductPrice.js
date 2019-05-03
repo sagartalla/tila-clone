@@ -85,8 +85,8 @@ const ProductPrice = ({offerInfo}) => {
             <Fragment>
               {offerPricing.showPrise !== offerPricing.strickedPrice && Math.floor(offerPricing.discount) > 5 &&
               <div className={`${styles.flex} ${styles['align-baseline']} ${styles['cross-strike-red']} ${styles.relative} ${styles['ml-10']}`}>
-                <span className={`${styles['fs-24']} ${styles['pr-5']}`}>{offerPricing.strickedPrice}</span>
-                <span className={`${styles['fs-12']} ${styles['pr-5']}`}>{offerPricing.currency}</span>
+                <span className={`${styles['fs-16']} ${styles['pr-5']}`}>{offerPricing.strickedPrice}</span>
+                {/* <span className={`${styles['fs-12']} ${styles['pr-5']}`}>{offerPricing.currency}</span> */}
               </div>}
               <div className={`${styles['flex']} ${styles['align-baseline']} ${styles['relative']} ${styles['ml-10']}`}>
                 {offerPricing.showPrise !== offerPricing.strickedPrice && Math.floor(offerPricing.discount) > 5 &&

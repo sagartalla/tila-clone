@@ -25,7 +25,7 @@ const PaymentStatus = props => {
   const subMessage = (props.status == "SUCCESSFUL") ? successMessage : (props.status == "FAILED") ? `${THANK_YOU_PAGE.ORDER_FAILURE_MESSAGE} 4 ${THANK_YOU_PAGE.WORKING_DAYS} ${THANK_YOU_PAGE.QUERIES_PLEASE_CONTACT}` : null;
 
   return (
-    <Grid className={styles['pt-75']}>
+    <Grid className={styles['pt-50']}>
       <Row className={`${styles['flex-center']} ${styles['m-0']}`}>
         <Col md={2} xs={2} sm={2}>
           <div className={styles['pb-25']}>

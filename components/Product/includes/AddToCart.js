@@ -80,7 +80,7 @@ class AddToCart extends Component {
       (
         <div className={`${styles['pt-25']} ${styles['flx-space-bw']} ${styles['addto-cart']} ${styles['ipad-p-0']} ${styles['border-t']}`}>
           <Button
-            className={`${styles['fs-16']} ${styles['ipad-fs-14']} ${styles['add-to-card-btn']} ${styles['flex']}`}
+            className={`${styles['fs-16']} ${styles['ipad-fs-14']} ${styles['add-to-card-btn']} ${styles['text-uppercase']} ${styles['flex']}`}
             disabled={isLoading || isAddedToCart}
             onClick={isAddedToCart === false && this.addToCart}
             btnLoading={btnLoading}
@@ -88,7 +88,7 @@ class AddToCart extends Component {
             showImage={isAddedToCart && 'icons/cart/added-cart-icon'}
           />
           <Button
-            className={`${styles['fs-16']} ${styles['ipad-fs-14']} ${styles['buy-now-btn']}`}
+            className={`${styles['fs-16']} ${styles['ipad-fs-14']} ${styles['text-uppercase']} ${styles['buy-now-btn']}`}
             onClick={this.buyNow}
             btnText={PDP_PAGE.BUY_NOW}
             hoverClassName="hoverBlueBackground"

@@ -22,8 +22,8 @@ const Catalog = ({ catalog }) => {
               group.map((attributes) => {
                 return (
                   <Row key={attributes.display_string}>
-                    <Col xs={4} md={3}>{attributes.display_string}</Col>
-                    <Col xs={8} md={9}>{attributes.attribute_values.map((av) => av.value + " " +(av.qualifier_unit ? av.qualifier_unit : "")).join(', ')}</Col>
+                    <Col xs={4} md={4}>{attributes.display_string}</Col>
+                    <Col xs={8} md={8} className={styles['pl-0']}>{attributes.attribute_values.map((av) => av.value + " " +(av.qualifier_unit ? av.qualifier_unit : "")).join(', ')}</Col>
                   </Row>
                 )
               })

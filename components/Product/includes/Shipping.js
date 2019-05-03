@@ -92,7 +92,7 @@ class Shipping extends Component {
                 </div>
                 {Object.keys(this.props.warranty).length > 0 ?
                   <div className={`${styles['flex-center']} ${styles['warenty-part-inn']} ${styles['warenty-part-single']}`}>
-                    <SVGCompoent clsName={`${styles['trust-icon']}`} src="icons/common-icon/non-warnty" />
+                    <SVGCompoent clsName={`${styles['trust-icon']} ${styles['mr-10']}`} src="icons/common-icon/non-warnty" />
                     <Warranty warranty={this.props.warranty} break />
                   </div>
                 :

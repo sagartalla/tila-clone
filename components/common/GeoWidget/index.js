@@ -128,7 +128,7 @@ class GeoWidget extends Component {
             ?
               <span className={`${styles['flex-center']} ${styles['delivery-part']}`}>
                 <SVGCompoent clsName={`${styles['map-icon']}`} src="icons/common-icon/black-map-location" />
-                <span className={`${styles.fontW600} ${styles['pl-5']} ${styles['pr-10']}`}>{SEARCH_PAGE.DELIVER_TO} :</span>
+                <span className={`${styles.fontW600} ${styles['pl-5']} ${styles['pr-5']}`}>{SEARCH_PAGE.DELIVER_TO}:</span>
 
               </span>
             :
@@ -138,7 +138,7 @@ class GeoWidget extends Component {
           className={styles['auto-suggestions-wrap']}
           ref={(el) => { this.filterRef = el; }}
         >
-          <input type="text" value={this.state.displayCity} className={`${styles['fs-12']} ${styles['delivery-input']}`} onChange={this.onChangeCity} />
+          <input type="text" value={this.state.displayCity} className={`${styles['fs-14']} ${styles['delivery-input']}`} onChange={this.onChangeCity} />
           {
             <div className={`${styles['auto-suggestions-list']}`}>
               {showCitiesData && getAllCities.map(result =>
