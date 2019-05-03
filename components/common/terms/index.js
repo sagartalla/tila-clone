@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 
-import { mergeCss } from '../../../utils/cssUtil';
-const styles = mergeCss('components/common/terms/terms');
+
+import lang from '../../../utils/language';
+
+import styles_en from './terms_en.styl';
+import styles_ar from './terms_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 const Terms = props => {
   return (
@@ -20,4 +25,3 @@ const Terms = props => {
 };
 
 export default Terms;
-
