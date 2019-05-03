@@ -222,7 +222,7 @@ export const AR_KEYWORDS = {
     'ONLY': 'فقط',
     'LEFT_IN_STOCK': 'المتبَّقي في المخزن',
     'COD_AVAILABLE': 'الدفع عند الاستلام متوفر',
-    'ADDED_TO_WISHLIST': 'تمت إضافته الى قائمة المفضلة',
+    'ADDED_TO_WISHLIST': 'In Wishlist',
     'ADD_TO_WISHLIST': 'إضافة  إلى  قائمة المفضلة',
     'FULLFILLED_BY_TILA': 'تم بنجاح مع تيله',
     'ADD_TO_COMPARE': 'أضف للمقارنة',
