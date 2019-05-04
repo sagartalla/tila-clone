@@ -120,8 +120,8 @@ const getURl = (page) => {
 let remoteComponents = {
   fashion: {
     name: 'Fashion',
-    src: isLocal ? 'http://localhost:8000/Fashion/index.js' : getURl('Fashion').JS,
-    styles: isLocal ? 'http://localhost:8000/Fashion/style.css' : getURl('Fashion').CSS,
+    src: isLocal ? 'http://localhost:8000/Fashion/preprod/index.js' : getURl('Fashion').JS,
+    styles: isLocal ? 'http://localhost:8000/Fashion/preprod/style.css' : getURl('Fashion').CSS,
     context: {
       React,
       Grid,

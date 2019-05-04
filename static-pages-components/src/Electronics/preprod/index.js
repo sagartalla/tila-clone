@@ -115,7 +115,7 @@ const Electronics = () => (
             </div>
             <div className="popular-cat-part-inn-1">
               <div className="popular-cat-inn-img">
-                <a href="http://localhost:3000/SAU/en/srp/home-entertainment?categoryTree=true&isListed=false&sid=848,879">
+                <a href="/SAU/en/srp/home-entertainment?categoryTree=true&isListed=false&sid=848,879">
                   <img src="/static/img/landing-page-tech-img/popular-cat9.png" className="img-responsive" />
                 </a>
               </div>
@@ -171,7 +171,7 @@ const Electronics = () => (
           <Col md={6} className={styles['pl-0']}>
             <h4 className={`${styles['fontW600']} ${styles['text-uppercase']} ${styles['pb-10']}`}><span className={`populat-cat-title ${styles['bdr-btm-green-color']}`}>Gaming  </span>  Consoles</h4>
             <div>
-              <a href="http://localhost:3000/SAU/en/srp/gaming-console?categoryTree=true&isListed=false&sid=848,866,870">
+              <a href="/SAU/en/srp/gaming-console?categoryTree=true&isListed=false&sid=848,866,870">
                 <img src="/static/img/landing-page-tech-img/gaming-img.jpg" className="img-responsive" />
               </a>
             </div>
@@ -179,7 +179,7 @@ const Electronics = () => (
           <Col md={6} className={styles['pr-0']}>
             <h4 className={`${styles['fontW600']} ${styles['text-uppercase']} ${styles['pb-10']}`}><span className={`populat-cat-title ${styles['bdr-btm-green-color']}`}>RC Toys</span> </h4>
             <div>
-              <a href="http://localhost:3000/SAU/en/srp/gaming-&-accessories?categoryTree=true&isListed=false&sid=848,866">
+              <a href="/SAU/en/srp/gaming-&-accessories?categoryTree=true&isListed=false&sid=848,866">
                 <img src="/static/img/landing-page-tech-img/gaming-img1.jpg" className="img-responsive" />
               </a>
             </div>
@@ -190,7 +190,7 @@ const Electronics = () => (
           <h4 className={`${styles['fontW600']} ${styles['text-uppercase']} ${styles['pb-10']}`}><span className={`populat-cat-title ${styles['bdr-btm-green-color']}`}>Home & Kitchen  </span>  Appliances</h4>
           <Col md={2} className={styles['pl-0']}>
             <div className={`${styles['mt-20']} ${styles['relative']} ${styles['home-kitchan-inn']}`}>
-              <a href="http://localhost:3000/SAU/en/srp?search=Iron&language=en&isListed=false">
+              <a href="/SAU/en/srp?search=Iron&language=en&isListed=false">
                 <img src="/static/img/landing-page-tech-img/home-kitchen1.jpg" className="img-responsive" />
               </a>
               <div className={`${styles['absolute']} home-price-details ${styles['white-color']} ${styles['flex']} ${styles['flex-colum']}`}>
@@ -202,7 +202,7 @@ const Electronics = () => (
           </Col>
           <Col md={2} className={styles['pl-0']}>
             <div className={`${styles['mt-20']} ${styles['relative']} ${styles['home-kitchan-inn']}`}>
-              <a href="http://localhost:3000/SAU/en/srp/refrigerators?categoryTree=true&isListed=false&sid=932,945,2263">
+              <a href="/SAU/en/srp/refrigerators?categoryTree=true&isListed=false&sid=932,945,2263">
                 <img src="/static/img/landing-page-tech-img/home-kitchen.jpg" className="img-responsive" />
               </a>
               <div className={`${styles['absolute']} home-price-details ${styles['white-color']} ${styles['flex']} ${styles['flex-colum']}`}>
@@ -214,7 +214,7 @@ const Electronics = () => (
           </Col>
           <Col md={2} className={styles['pl-0']}>
             <div className={`${styles['mt-20']} ${styles['relative']} ${styles['home-kitchan-inn']}`}>
-              <a href="http://localhost:3000/SAU/en/srp/mixer-grinder-juicers?categoryTree=true&isListed=false&sid=932,945,2259">
+              <a href="/SAU/en/srp/mixer-grinder-juicers?categoryTree=true&isListed=false&sid=932,945,2259">
                 <img src="/static/img/landing-page-tech-img/home-kitchen2.jpg" className="img-responsive" />
               </a>
               <div className={`${styles['absolute']} home-price-details ${styles['white-color']} ${styles['flex']} ${styles['flex-colum']}`}>
@@ -226,7 +226,7 @@ const Electronics = () => (
           </Col>
           <Col md={2} className={styles['pl-0']}>
             <div className={`${styles['mt-20']} ${styles['relative']} ${styles['home-kitchan-inn']}`}>
-              <a href="http://localhost:3000/SAU/en/srp/washing-machines?categoryTree=true&isListed=false&sid=932,935,2270">
+              <a href="/SAU/en/srp/washing-machines?categoryTree=true&isListed=false&sid=932,935,2270">
                 <img src="/static/img/landing-page-tech-img/home-kitchen3.jpg" className="img-responsive" />
               </a>
               <div className={`${styles['absolute']} home-price-details ${styles['white-color']} ${styles['flex']} ${styles['flex-colum']}`}>
@@ -250,7 +250,7 @@ const Electronics = () => (
           </Col>
           <Col md={2} className={styles['pl-0']}>
             <div className={`${styles['mt-20']} ${styles['relative']} ${styles['home-kitchan-inn']}`}>
-              <a href="http://localhost:3000/SAU/en/srp?search=Iron&language=en&isListed=false">
+              <a href="/SAU/en/srp?search=Iron&language=en&isListed=false">
                 <img src="/static/img/landing-page-tech-img/home-kitchen1.jpg" className="img-responsive" />
               </a>
               <div className={`${styles['absolute']} home-price-details ${styles['white-color']} ${styles['flex']} ${styles['flex-colum']}`}>

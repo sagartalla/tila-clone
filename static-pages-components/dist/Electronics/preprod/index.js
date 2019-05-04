@@ -286,7 +286,7 @@ const Electronics = () => React.createElement(
               { className: "popular-cat-inn-img" },
               React.createElement(
                 "a",
-                { href: "http://localhost:3000/SAU/en/srp/home-entertainment?categoryTree=true&isListed=false&sid=848,879" },
+                { href: "/SAU/en/srp/home-entertainment?categoryTree=true&isListed=false&sid=848,879" },
                 React.createElement("img", { src: "/static/img/landing-page-tech-img/popular-cat9.png", className: "img-responsive" })
               )
             ),
@@ -469,7 +469,7 @@ const Electronics = () => React.createElement(
             null,
             React.createElement(
               "a",
-              { href: "http://localhost:3000/SAU/en/srp/gaming-console?categoryTree=true&isListed=false&sid=848,866,870" },
+              { href: "/SAU/en/srp/gaming-console?categoryTree=true&isListed=false&sid=848,866,870" },
               React.createElement("img", { src: "/static/img/landing-page-tech-img/gaming-img.jpg", className: "img-responsive" })
             )
           )
@@ -492,7 +492,7 @@ const Electronics = () => React.createElement(
             null,
             React.createElement(
               "a",
-              { href: "http://localhost:3000/SAU/en/srp/gaming-&-accessories?categoryTree=true&isListed=false&sid=848,866" },
+              { href: "/SAU/en/srp/gaming-&-accessories?categoryTree=true&isListed=false&sid=848,866" },
               React.createElement("img", { src: "/static/img/landing-page-tech-img/gaming-img1.jpg", className: "img-responsive" })
             )
           )
@@ -519,7 +519,7 @@ const Electronics = () => React.createElement(
             { className: `${styles['mt-20']} ${styles['relative']} ${styles['home-kitchan-inn']}` },
             React.createElement(
               "a",
-              { href: "http://localhost:3000/SAU/en/srp?search=Iron&language=en&isListed=false" },
+              { href: "/SAU/en/srp?search=Iron&language=en&isListed=false" },
               React.createElement("img", { src: "/static/img/landing-page-tech-img/home-kitchen1.jpg", className: "img-responsive" })
             ),
             React.createElement(
@@ -551,7 +551,7 @@ const Electronics = () => React.createElement(
             { className: `${styles['mt-20']} ${styles['relative']} ${styles['home-kitchan-inn']}` },
             React.createElement(
               "a",
-              { href: "http://localhost:3000/SAU/en/srp/refrigerators?categoryTree=true&isListed=false&sid=932,945,2263" },
+              { href: "/SAU/en/srp/refrigerators?categoryTree=true&isListed=false&sid=932,945,2263" },
               React.createElement("img", { src: "/static/img/landing-page-tech-img/home-kitchen.jpg", className: "img-responsive" })
             ),
             React.createElement(
@@ -583,7 +583,7 @@ const Electronics = () => React.createElement(
             { className: `${styles['mt-20']} ${styles['relative']} ${styles['home-kitchan-inn']}` },
             React.createElement(
               "a",
-              { href: "http://localhost:3000/SAU/en/srp/mixer-grinder-juicers?categoryTree=true&isListed=false&sid=932,945,2259" },
+              { href: "/SAU/en/srp/mixer-grinder-juicers?categoryTree=true&isListed=false&sid=932,945,2259" },
               React.createElement("img", { src: "/static/img/landing-page-tech-img/home-kitchen2.jpg", className: "img-responsive" })
             ),
             React.createElement(
@@ -615,7 +615,7 @@ const Electronics = () => React.createElement(
             { className: `${styles['mt-20']} ${styles['relative']} ${styles['home-kitchan-inn']}` },
             React.createElement(
               "a",
-              { href: "http://localhost:3000/SAU/en/srp/washing-machines?categoryTree=true&isListed=false&sid=932,935,2270" },
+              { href: "/SAU/en/srp/washing-machines?categoryTree=true&isListed=false&sid=932,935,2270" },
               React.createElement("img", { src: "/static/img/landing-page-tech-img/home-kitchen3.jpg", className: "img-responsive" })
             ),
             React.createElement(
@@ -679,7 +679,7 @@ const Electronics = () => React.createElement(
             { className: `${styles['mt-20']} ${styles['relative']} ${styles['home-kitchan-inn']}` },
             React.createElement(
               "a",
-              { href: "http://localhost:3000/SAU/en/srp?search=Iron&language=en&isListed=false" },
+              { href: "/SAU/en/srp?search=Iron&language=en&isListed=false" },
               React.createElement("img", { src: "/static/img/landing-page-tech-img/home-kitchen1.jpg", className: "img-responsive" })
             ),
             React.createElement(
