@@ -582,9 +582,10 @@ const Fashion = () => React.createElement(
       React.createElement(
         'div',
         { className: styles['flex'] },
+        React.createElement(Col, { md: 2, className: `${styles['pl-0']} ${styles['pr-10']}` }),
         React.createElement(
           Col,
-          { md: 3, className: `${styles['pl-0']} ${styles['pr-10']}` },
+          { md: 2, className: `${styles['pl-0']} ${styles['pr-10']}` },
           React.createElement(
             'div',
             { className: `${styles['flex-center']}  ${styles['flex-colum']} ${styles['bg-white']} top-brand-part-inn ${styles['border-radius4']}` },
@@ -634,7 +635,7 @@ const Fashion = () => React.createElement(
         ),
         React.createElement(
           Col,
-          { md: 3, className: `${styles['pl-0']} ${styles['pr-10']}` },
+          { md: 2, className: `${styles['pl-0']} ${styles['pr-10']}` },
           React.createElement(
             'div',
             { className: `${styles['flex-center']}  ${styles['flex-colum']} ${styles['bg-white']} top-brand-part-inn ${styles['border-radius4']}` },
@@ -684,7 +685,7 @@ const Fashion = () => React.createElement(
         ),
         React.createElement(
           Col,
-          { md: 3, className: `${styles['pl-0']} ${styles['pr-10']}` },
+          { md: 2, className: `${styles['pl-0']} ${styles['pr-10']}` },
           React.createElement(
             'div',
             { className: `${styles['flex-center']}  ${styles['flex-colum']} ${styles['bg-white']} top-brand-part-inn ${styles['border-radius4']}` },
@@ -734,7 +735,7 @@ const Fashion = () => React.createElement(
         ),
         React.createElement(
           Col,
-          { md: 3, className: `${styles['pl-0']} ${styles['pr-10']}` },
+          { md: 2, className: `${styles['pl-0']} ${styles['pr-10']}` },
           React.createElement(
             'div',
             { className: `${styles['flex-center']}  ${styles['flex-colum']} ${styles['bg-white']} top-brand-part-inn ${styles['border-radius4']}` },
@@ -781,7 +782,8 @@ const Fashion = () => React.createElement(
               )
             )
           )
-        )
+        ),
+        React.createElement(Col, { md: 2, className: `${styles['pl-0']} ${styles['pr-10']}` })
       )
     )
   )

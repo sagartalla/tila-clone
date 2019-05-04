@@ -232,7 +232,9 @@ const Fashion = () => (
       <div className={`top-brand-part ${styles['clear-b']}`}>
         <h3 className={`${styles['flex-center']} what-title ${styles['justify-center']} ${styles['relative']} lobster-family ${styles['pt-40']} ${styles['pb-20']}`}><span className={`${styles['fs-36']} ${styles['lable']} ${styles['pl-10']} ${styles['pr-10']}`}>Top Brands</span> <span className={`${styles['absolute']} border`}></span></h3>
         <div className={styles['flex']}>
-          <Col md={3} className={`${styles['pl-0']} ${styles['pr-10']}`}>
+          <Col md={2} className={`${styles['pl-0']} ${styles['pr-10']}`}>
+          </Col>
+          <Col md={2} className={`${styles['pl-0']} ${styles['pr-10']}`}>
             <div className={`${styles['flex-center']}  ${styles['flex-colum']} ${styles['bg-white']} top-brand-part-inn ${styles['border-radius4']}`}>
               <div className={`canvali-logo ${styles['flex-center']}`}>
                 <a href="/SAU/en/srp?search=just%20cavalli&language=en&isListed=false">
@@ -250,7 +252,7 @@ const Fashion = () => (
               </div>
             </div>
           </Col>
-          <Col md={3} className={`${styles['pl-0']} ${styles['pr-10']}`}>
+          <Col md={2} className={`${styles['pl-0']} ${styles['pr-10']}`}>
             <div className={`${styles['flex-center']}  ${styles['flex-colum']} ${styles['bg-white']} top-brand-part-inn ${styles['border-radius4']}`}>
               <div className={`dg-logo ${styles['flex-center']}`}>
                 <a href="/SAU/en/srp?search=DOLCE%20&%20GABBANA&language=en&isListed=false">
@@ -268,7 +270,7 @@ const Fashion = () => (
               </div>
             </div>
           </Col>
-          <Col md={3} className={`${styles['pl-0']} ${styles['pr-10']}`}>
+          <Col md={2} className={`${styles['pl-0']} ${styles['pr-10']}`}>
             <div className={`${styles['flex-center']}  ${styles['flex-colum']} ${styles['bg-white']} top-brand-part-inn ${styles['border-radius4']}`}>
               <div className={`dg-logo ${styles['flex-center']}`}>
                 <a href="/SAU/en/srp?search=gg&language=en&isListed=false">
@@ -286,7 +288,7 @@ const Fashion = () => (
               </div>
             </div>
           </Col>
-          <Col md={3} className={`${styles['pl-0']} ${styles['pr-10']}`}>
+          <Col md={2} className={`${styles['pl-0']} ${styles['pr-10']}`}>
             <div className={`${styles['flex-center']}  ${styles['flex-colum']} ${styles['bg-white']} top-brand-part-inn ${styles['border-radius4']}`}>
               <div className={`guc-logo ${styles['flex-center']}`}>
                 <a href="/SAU/en/srp?search=gucci&language=en&isListed=false">
@@ -303,6 +305,8 @@ const Fashion = () => (
                 </ul>
               </div>
             </div>
+          </Col>
+          <Col md={2} className={`${styles['pl-0']} ${styles['pr-10']}`}>
           </Col>
         </div>
       </div>
