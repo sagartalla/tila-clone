@@ -86,14 +86,14 @@ class MegaMenu extends Component {
     });
   }
 
-  getLandingPageLink(name) {
-    if(name === 848) {
+  getLandingPageLink(id) {
+    if(id === 848) {
       return 'landing/electronics';
     }
-    if(name === 892) {
+    if(id === 892) {
       return 'landing/fashion';
     }
-    if(name === 932) {
+    if(id === 932) {
       return 'landing/lifestyle';
     }
   }
@@ -117,7 +117,7 @@ class MegaMenu extends Component {
                   <li key={item.id} onMouseOver={this.onHoverCurry(item)} onMouseLeave={this.onHoverOutDelayed} className={`${styles[`${(item.displayName || '').split(' ').join('').toLowerCase().replace('&', '-')}-item`]} ${(!selectedCategoryTree && this.getLandingPageLink(item.id)) === `/landing/${category}` ? styles['active-menu-item']: {}}`}>
                     <div>
                       {/* <Link route={`/category/${item.displayName}-${item.id}?categoryTree=true&isListed=false`}> */}
-                      <Link route={`/${country}/${language}/${this.getLandingPageLink(item.displayName)}`}>
+                      <Link route={`/${country}/${language}/${this.getLandingPageLink(item.id)}`}>
                         <a>{item.displayName}</a>
                       </Link>
                     </div>
