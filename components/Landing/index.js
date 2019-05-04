@@ -46,22 +46,55 @@ RemoteComponent.loadRemoteComponents(remoteComponents)
 const getURl = (page) => {
   switch (page) {
     case 'Fashion':
-        return {
-          JS: 'https://static-dev.tila.com/tila-static-pages/fashion/index.js',
-          CSS: 'https://static-dev.tila.com/tila-static-pages/fashion/style.css'
-        };
+        switch(env) {
+          case 'stage':
+          case 'staging':
+              return {
+                JS: 'https://static-dev.tila.com/tila-static-pages/fashion/index.js',
+                CSS: 'https://static-dev.tila.com/tila-static-pages/fashion/style.css'
+              };
+              break;
+          case 'preprod':
+              return {
+                JS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/fashion/preprod/index.js',
+                CSS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/fashion/preprod/style.css',
+              };
+              break;
+        }
         break;
     case 'Electronics':
-        return {
-          JS: 'https://static-dev.tila.com/tila-static-pages/electronics/index.js',
-          CSS: 'https://static-dev.tila.com/tila-static-pages/electronics/style.css'
-        };
+        switch(env) {
+          case 'stage':
+          case 'staging':
+              return {
+                JS: 'https://static-dev.tila.com/tila-static-pages/electronics/index.js',
+                CSS: 'https://static-dev.tila.com/tila-static-pages/electronics/style.css'
+              };
+              break;
+          case 'preprod':
+              return {
+                JS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/electronics/preprod/index.js',
+                CSS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/electronics/preprod/style.css',
+              };
+              break;
+        }
         break;
     case 'Lifestyle':
-        return {
-          JS: 'https://static-dev.tila.com/tila-static-pages/lifestyle/index.js',
-          CSS: 'https://static-dev.tila.com/tila-static-pages/lifestyle/style.css'
-        };
+        switch(env) {
+          case 'stage':
+          case 'staging':
+              return {
+                JS: 'https://static-dev.tila.com/tila-static-pages/lifestyle/index.js',
+                CSS: 'https://static-dev.tila.com/tila-static-pages/lifestyle/style.css'
+              };
+              break;
+          case 'preprod':
+              return {
+                JS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/lifestyle/preprod/index.js',
+                CSS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/lifestyle/preprod/style.css',
+              };
+              break;
+        }
         break;
     case 'HomePage':
         switch(env) {
@@ -100,8 +133,8 @@ let remoteComponents = {
   },
   electronics: {
     name: 'Electronics',
-    src: isLocal ? 'http://localhost:8000/Electronics/index.js' : getURl('Electronics').JS,
-    styles: isLocal ? 'http://localhost:8000/Electronics/style.css' : getURl('Electronics').CSS,
+    src: isLocal ? 'http://localhost:8000/Electronics/preprod/index.js' : getURl('Electronics').JS,
+    styles: isLocal ? 'http://localhost:8000/Electronics/preprod/style.css' : getURl('Electronics').CSS,
     context: {
       React,
       Grid,
