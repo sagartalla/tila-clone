@@ -199,22 +199,27 @@ const b_y_l = [{
   img: '/static/img/landing-home/levis-m.jpg',
   brandImg: '/static/img/landing-home/levis.jpg',
   title: 'Levis',
+  links: '/SAU/en/srp?search=Levis&language=en&isListed=false'
 }, {
   img: '/static/img/landing-home/guess-m.jpg',
   brandImg: '/static/img/landing-home/guess.jpg',
   title: 'Guess',
+  links: 'SAU/en/srp?search=Guess&language=en&isListed=false'
 }, {
   img: '/static/img/landing-home/max-m.jpg',
   brandImg: '/static/img/landing-home/max.jpg',
   title: 'Max',
+  links: 'SAU/en/srp?search=Max&language=en&isListed=false'
 }, {
   img: '/static/img/landing-home/gucci-m.jpg',
   brandImg: '/static/img/landing-home/gucci.jpg',
   title: 'Gucci',
+  links: '/SAU/en/srp?search=Gucci&language=en&isListed=false'
 }, {
   img: '/static/img/landing-home/levis-m.jpg',
   brandImg: '/static/img/landing-home/levis.jpg',
   title: 'Levis',
+  links: '/SAU/en/srp?search=Levis&language=en&isListed=false'
 }];
 
 function SamplePrevArrow(props) {
@@ -242,40 +247,40 @@ function SampleNextArrow(props) {
 }
 
 const b_d_b = {
-  Mobiles: '/SAU/en/srp?search=Mobiles&language=en&isListed=false',
+  Mobiles: 'SAU/en/srp/mobiles?categoryTree=true&isListed=false&sid=848,849',
   Clothing: '/SAU/en/srp?isListed=false&language=en&search=Clothing',
   'Clothing Accessories': '/SAU/en/srp?search=Clothing&language=en&isListed=false',
-  Laptops: '/SAU/en/srp?search=Laptops&language=en&isListed=false',
+  Laptops: '/SAU/en/srp/laptops?categoryTree=true&isListed=false&sid=848,864',
   'Storage Devices': '/SAU/en/srp?search=Storage&language=en&isListed=false',
-  Cameras: '/SAU/en/srp?search=Camera&language=en&isListed=false',
-  Televisions: '/SAU/en/srp?search=Televisions&language=en&isListed=false',
-  'Home Appliances': '/SAU/en/srp?search=Home%20Appliances&language=en&isListed=false',
-  'Womens Clothing': '/SAU/en/srp?search=Womens%20Clothing&language=en&isListed=false',
-  'Mens Clothing': '/SAU/en/srp?search=Mens%20Clothing&language=en&isListed=false',
-  'Fashion Accessories': '/SAU/en/srp?search=Accessories&language=en&isListed=false',
-  Watches: '/SAU/en/srp?search=Watches&language=en&isListed=false',
-  'Kitchen Appliances': '/SAU/en/srp?search=kitchen%20appliances&language=en&isListed=false',
+  Cameras: '/SAU/en/srp/camera?categoryTree=true&isListed=false&sid=848,882',
+  Televisions: '/SAU/en/srp/televisions?categoryTree=true&isListed=false&sid=848,878',
+  'Home Appliances': '/SAU/en/srp/home-applaince?categoryTree=true&isListed=false&sid=932,935',
+  'Womens Clothing': '/SAU/en/srp/clothing?categoryTree=true&isListed=false&sid=892,910',
+  'Mens Clothing': '/SAU/en/srp/clothing?categoryTree=true&isListed=false&sid=892,899',
+  'Fashion Accessories': '/SAU/en/srp/fashion-accessories?categoryTree=true&isListed=false&sid=892,923',
+  Watches: '/SAU/en/srp/watch?categoryTree=true&isListed=false&sid=892,929',
+  'Kitchen Appliances': '/SAU/en/srp/kitchen-appliances?categoryTree=true&isListed=false&sid=932,945',
   Speakers: '/SAU/en/srp?search=Speakers&language=en&isListed=false',
   'Microwave Ovens': '/SAU/en/srp?search=Microwave%20Ovens&language=en&isListed=false',
-  'Smart Watch': '/SAU/en/srp?search=Smart%20Watch&language=en&isListed=false',
-  'Mobile Accessories': '/SAU/en/srp?search=Mobile%20Accessories&language=en&isListed=false',
-  "Kid's Fashion": '/SAU/en/srp?search=Kid%27s%20Fashion&language=en&isListed=false',
+  'Smart Watch': '/SAU/en/srp/smart-watches?categoryTree=true&isListed=false&sid=848,860,861',
+  'Mobile Accessories': '/SAU/en/srp/mobile-accessories?categoryTree=true&isListed=false&sid=848,850',
+  "Kid's Fashion": '/SAU/en/srp/kid%27s?categoryTree=true&isListed=false&sid=892,893',
   Footwear: '/SAU/en/srp?search=Footwear&language=en&isListed=false',
-  "Men's Footwear": '/SAU/en/srp?search=Footwear&language=en&isListed=false',
-  'Women Footwear': '/SAU/en/srp?search=Footwear&language=en&isListed=false',
-  Bags: '/SAU/en/srp?search=Backpack&language=en&isListed=false',
+  "Men's Footwear": '/SAU/en/srp/footwear?categoryTree=true&isListed=false&sid=892,907',
+  'Women Footwear': '/SAU/en/srp/footwear?categoryTree=true&isListed=false&sid=892,921',
+  Bags: '/SAU/en/srp/backpack?categoryTree=true&isListed=false&sid=892,926',
   Eyewear: '/SAU/en/srp?search=Eyewear&language=en&isListed=false',
   Jewellery: '/SAU/en/srp?search=Jewellery&language=en&isListed=false',
   GUESS: '/SAU/en/srp/womens-clothing-1056/?isListed=false&language=en&search=guess',
   FENDI: 'https://storefront-stage.fptechscience.com/SAU/en/srp/watches-1128/?isListed=false&language=en&search=FENDI',
   'MORPHY RICHARDS': '/SAU/en/srp?search=MORPHY%20RICHARDS%20&disableSpellCheck=true&language=en&isListed=false',
   SHIRTS: '/SAU/en/srp?search=SHIRTS&language=en&isListed=false',
-  Perfumes: '/SAU/en/srp?search=Perfumes&language=en&isListed=false',
+  Perfumes: '/SAU/en/srp/fragrance?categoryTree=true&isListed=false&sid=932,958,964',
   Shoes: '/SAU/en/srp?search=Shoes&language=en&isListed=false',
-  Lights: '/SAU/en/srp?search=Lights&language=en&isListed=false',
-  lamps: 'https://storefront-stage.fptechscience.com/SAU/en/srp?isListed=false&language=en&search=lamps',
-  bedding: '/SAU/en/srp?search=bedding&language=en&isListed=false',
-  furniture: '/SAU/en/srp?search=furniture&language=en&isListed=false',
+  Lights: '/SAU/en/srp/light?categoryTree=true&isListed=false&sid=932,937,940',
+  lamps: 'SAU/en/srp/lamp?categoryTree=true&isListed=false&sid=932,937,939',
+  bedding: '/SAU/en/srp/bedding-set?categoryTree=true&isListed=false&sid=932,941,942',
+  furniture: '/SAU/en/srp/home-furnishing?categoryTree=true&isListed=false&sid=932,941',
 }
 
 const HomePage = () => (
@@ -610,13 +615,15 @@ const HomePage = () => (
         >
           {b_y_l.map(i => (
             <Col key={i} md={3} xs={3} sm={3}>
-              <div className="image">
-                <img src={i.img} alt={i.img} />
-              </div>
-              <div className="b_l">
-                <img src={i.brandImg} width="80" height="30" alt={i.brandImg} />
-                <SVGComponent clsName="arrow arrow-black " src="icons/common-icon/arrow" />
-              </div>
+              <a href={i.links}>
+                <div className="image">
+                  <img src={i.img} alt={i.img} />
+                </div>
+                <div className="b_l">
+                  <img src={i.brandImg} width="80" height="30" alt={i.brandImg} />
+                  <SVGComponent clsName="arrow arrow-black " src="icons/common-icon/arrow" />
+                </div>
+              </a>
             </Col>
           ))}
         </Slider>

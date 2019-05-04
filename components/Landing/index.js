@@ -125,8 +125,8 @@ let remoteComponents = {
   },
   homepage: {
     name: 'HomePage',
-    src: isLocal ? 'http://localhost:8000/homepage/stage/index.js' : getURl('HomePage').JS,
-    styles: isLocal ? 'http://localhost:8000/homepage/stage/style.css' : getURl('HomePage').CSS,
+    src: isLocal ? 'http://localhost:8000/homepage/preprod/index.js' : getURl('HomePage').JS,
+    styles: isLocal ? 'http://localhost:8000/homepage/preprod/style.css' : getURl('HomePage').CSS,
     context: {
       React,
       Grid,
