@@ -146,8 +146,8 @@ let remoteComponents = {
   },
   lifestyle: {
     name: 'Lifestyle',
-    src: isLocal ? 'http://localhost:8000/Lifestyle/index.js' : getURl('Lifestyle').JS,
-    styles: isLocal ? 'http://localhost:8000/Lifestyle/style.css' : getURl('Lifestyle').CSS,
+    src: isLocal ? 'http://localhost:8000/Lifestyle/preprod/index.js' : getURl('Lifestyle').JS,
+    styles: isLocal ? 'http://localhost:8000/Lifestyle/preprod/style.css' : getURl('Lifestyle').CSS,
     context: {
       React,
       Grid,
