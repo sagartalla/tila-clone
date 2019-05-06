@@ -252,9 +252,11 @@ export const EN_KEYWORDS = {
     'PLEASE_SELECT_PRODUCT_SIZE': 'Please Select Product Size',
   },
   VAULT_PAGE: {
+    'VOUCHER_HISTORY': 'Your gift voucher transaction history',
     'MANAGE_VAULT_HDR': 'Manage Cards, Vouchers and More',
     'SUB_TAG': 'Select a default card or add new card.',
     'SAVED_CARDS': 'Saved Cards',
+    'TILA_GIFT': 'Tila Gift',
     'VOUCHER': 'Vouchers',
     'REWARD_POINTS': 'Reward Points',
     'MANAGE_SAVED_CARDS': 'Manage Saved Cards',

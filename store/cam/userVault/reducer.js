@@ -48,9 +48,21 @@ const vaultReducer = typeToReducer({
       return Object.assign({}, state, { error: action.payload.message, ui: { loading: false } })
     },
     FULFILLED: (state, action) => {
-      return Object.assign({}, state, { data: action.payload.data, ui: { loading: true } });
+      return Object.assign({}, state, { data: action.payload, ui: { loading: true } });
     },
-  }
+  },
+  [actions.GET_TRANSACTIONS] : {
+    PENDING: state => {
+      return Object.assign({}, state, { ui: { loading: true }});
+    },
+    REJECTED: (state, action) => {
+      return Object.assign({}, state, { error: action.payload.message, ui: { loading: false } })
+    },
+    FULFILLED: (state, action) => {
+      debugger;
+      return Object.assign({}, state, { data: action.payload, ui: { loading: true } });
+    }
+  },
 }, initialState);
 
 export default vaultReducer;
