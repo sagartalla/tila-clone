@@ -114,8 +114,8 @@ const authReducer = typeToReducer({
       instagramCode: action.payload.instagramCode,
     },
     ui: {
-      ...state.ui,
-      showLogin: !action.payload.isVerified,
+      ...state.ui
+      //showLogin:!action.payload.isVerified
     },
   }),
   [actions.SET_COUNTRY]: (state, action) => ({
@@ -215,14 +215,14 @@ const authReducer = typeToReducer({
     },
     data: {
       ...state.data,
-      isLoggedIn: state.data.userInfoData.email_verified === 'NV' ? false : (cookies.get('isVerified') && (cookies.get('isVerified') === "false" ? false : true)),
+      isLoggedIn: (cookies.get('isVerified') && (cookies.get('isVerified') === "false" ? false : true)),
     },
   }),
   [actions.RESET_SHOW_LOGIN]: state => ({
     ...state,
     data: {
       ...state.data,
-      isLoggedIn: state.data.userInfoData.email_verified === 'NV' ? false : (cookies.get('isVerified') && (cookies.get('isVerified') === "false" ? false : true)),
+      isLoggedIn: (cookies.get('isVerified') && (cookies.get('isVerified') === "false" ? false : true)),
     },
     ui: {
       ...state.ui,
