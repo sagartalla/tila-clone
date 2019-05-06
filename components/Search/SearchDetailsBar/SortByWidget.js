@@ -47,9 +47,9 @@ class SortByWidget extends Component {
   render() {
     return (
       <div className={`${styles['flex-center']} ${styles['sort-part-inn']}`}>
-        <span className={`${styles['mb-0']} ${styles['fontW600']} ${styles['flex']}`}>
+        <span className={`${styles['mb-0']} ${styles['fontW600']} ${styles['flex-center']}`}>
           <SVGComponent clsName={`${styles['sort-arrow']}`} src="icons/common-icon/sort" />
-          <span className={styles['pl-10']}>{SEARCH_PAGE.SORT_BY} : </span>
+          <span className={`${styles['pl-5']} ${styles['pr-5']}`}>{SEARCH_PAGE.SORT_BY}: </span> 
         </span>
         <div className={styles['select-mn']}>
           <select className={styles['select-text']} required value={this.state.value} onChange={this.sortSelect}>

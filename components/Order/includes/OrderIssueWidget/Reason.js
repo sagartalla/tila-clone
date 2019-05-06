@@ -43,7 +43,21 @@ class Reason extends Component {
     const orderId = {
       orderItemId: this.props.orderIssue.selectedItem.id,
     };
-    this.props.getReasons(orderId);
+    let reasonType;
+    switch(this.props.orderIssue.issueType) {
+      case 'RETURN' :
+        reasonType = 'return'
+        break;
+      case 'CANCEL' :
+        reasonType = 'cancel'
+        break;
+      case 'EXCHANGE' :
+        reasonType = 'exchange'
+        break;
+      default:
+       reasonType = 'return'
+    }
+    this.props.getReasons(orderId,reasonType);
     this.props.getExchangeVariants(orderId);
     this.props.getOrderDetails({ orderId:this.props.orderIssue.orderId });
   }

@@ -50,18 +50,13 @@ class Login extends Component {
       forgotPassword: false,
       validation: this.validations.valid(),
       clicked: false,
-      showVerifyScreen: false,
+      showVerifyScreen: props.showEmailScreen || false,
     };
     this.login = this.login.bind(this);
     this.onChangeField = this.onChangeField.bind(this);
     this.toggleLoginSignUp = this.toggleLoginSignUp.bind(this);
     this.handleClick = this.handleClick.bind(this);
   }
-
-  componentDidMount() {
-    this.props.getLoginInfo();
-  }
-
   componentWillReceiveProps(nextProps) {
     let { userCreds, error, showEmailScreen } = nextProps;
     userCreds = userCreds || this.props.userCreds;
@@ -92,6 +87,9 @@ class Login extends Component {
 
   onBackdropClick = () => {
     const { showVerifyScreen } = this.state;
+    if(!window.sessionStorage.getItem('TILuservisitcount')) {
+      window.sessionStorage.setItem('TILuservisitcount', 1)
+    }
     this.props.onBackdropClick(showVerifyScreen);
   }
 
