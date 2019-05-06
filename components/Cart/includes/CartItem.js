@@ -38,7 +38,7 @@ const popover = ({
               <div className={`${styles['fs-10']} ${styles['label-light-grey']}`}>({CART_PAGE.INCL_OF_ALL_TAXES})</div>
             </div>
             <div className={`${styles['t-cell']} ${styles['t-rt']}`}>
-              {`${mrp.display_value} ${cur}`}
+              {`${mrp} ${cur}`}
             </div>
           </div>
           <div className={styles['t-row']}>
@@ -46,7 +46,7 @@ const popover = ({
               <div>{CART_PAGE.SELLING_PRICE}</div>
             </div>
             <div className={`${styles['t-cell']} ${styles['t-rt']}`}>
-              {`${selling_price.display_value} ${cur}`}
+              {`${selling_price} ${cur}`}
             </div>
           </div>
           {offerDiscounts.length > 0 &&
@@ -81,10 +81,10 @@ const popover = ({
 
           <div className={`${styles['t-row']} ${styles['total-amount']}`}>
             <div className={styles['t-cell']}>{ORDER_PAGE.TOTAL}</div>
-            <div className={`${styles['t-cell']} ${styles['t-rt']}`}>{total_amount.display_value} {cur}</div>
+            <div className={`${styles['t-cell']} ${styles['t-rt']}`}>{total_amount} {cur}</div>
           </div>
         </div>
-        <div className={`${styles['p-5']} ${styles['mt-5']} ${styles['overall-amount']}`}>{CART_PAGE.OVERALL_YOU_SAVE} {total_discount.display_value} {cur} {CART_PAGE.ON_THIS_PRODUCT}</div>
+        <div className={`${styles['p-5']} ${styles['mt-5']} ${styles['overall-amount']}`}>{CART_PAGE.OVERALL_YOU_SAVE} {total_discount} {cur} {CART_PAGE.ON_THIS_PRODUCT}</div>
       </div>
   );
 };
@@ -275,13 +275,13 @@ class CartItem extends React.Component {
                       <span className={styles['success-green']}>{`${Math.floor(discount)}% OFF`}</span>
                       <span className={`${styles['cross-strike']} ${styles.relative} ${styles['ml-5']}`}>
                         <span className={styles['label-light-grey']}>
-                          <span>{mrp.display_value}&nbsp;</span>
+                          <span>{mrp}&nbsp;</span>
                           <span>{cur}</span>
                         </span>
                       </span>
                     </p>}
                   <h4 className={`${styles.fontW600} ${styles['justify-flex-end']} ${styles['cart-price-label']} ${styles['light-gry-clr']} ${styles['flex-center']} ${styles['mt-10']} ${styles['t-rt']}`}>
-                    {`${offer_price.display_value} ${cur}`}
+                    {`${offer_price} ${cur}`}
                     <OverlayTrigger placement="bottom" overlay={popover(item)}>
                       {/* <span className={`${styles['fs-12']} ${styles['pr-5']}`}>
                         <SVGComponent clsName={`${styles['secure-icon']} ${styles['mr-10']} ${styles['pointer']}`} src="icons/common-icon/trust-secure" />
@@ -325,7 +325,7 @@ class CartItem extends React.Component {
             </span>
           </Col>
           <Col md={3} sm={3} xs={3} className={`${styles['t-rt']} ${styles['pr-0']} ${styles['m-pad-5']}`}>
-            <span>{ORDER_PAGE.TOTAL} : </span><span className={`${styles['fs-16']} ${styles['fontW600']}`}>{total_amount.display_value + ' ' + cur}</span>
+            <span>{ORDER_PAGE.TOTAL} : </span><span className={`${styles['fs-16']} ${styles['fontW600']}`}>{total_amount + ' ' + cur}</span>
           </Col>
         </div>
 
