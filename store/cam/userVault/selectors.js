@@ -7,10 +7,9 @@ const getCardResults = (store) => {
 
 const getTransactions = (store) => {
   if(store.vaultReducer.data && store.vaultReducer.data.content){
-    debugger;
     return store.vaultReducer.data.content;
   }else{
-    return {};
+    return [];
   }
 }
 

@@ -59,7 +59,6 @@ const vaultReducer = typeToReducer({
       return Object.assign({}, state, { error: action.payload.message, ui: { loading: false } })
     },
     FULFILLED: (state, action) => {
-      debugger;
       return Object.assign({}, state, { data: action.payload, ui: { loading: true } });
     }
   },

@@ -20,7 +20,9 @@ const TilaVoucher = (props) => {
         <div>
             <div className={`${styles['broad']}`}>
                 <span>
-                    {VAULT_PAGE.VOUCHER_HISTORY}
+                    <strong>
+                        {VAULT_PAGE.VOUCHER_HISTORY}
+                    </strong>
                 </span>
                 <div className={styles['gift-voucher']}>
                     <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']}`}>
@@ -45,6 +47,25 @@ const TilaVoucher = (props) => {
                     Balance
                 </Col>
             </Row>
+            <div className={styles['bodyRow']}>
+                <Row>
+                    <Col md={2}>
+                        create_date
+                    </Col>
+                    <Col md={4}>
+                        huha
+                    </Col>
+                    <Col md={2}>
+                        huha
+                    </Col>
+                    <Col md={2}>
+                        huha
+                    </Col>
+                    <Col md={2}>
+                        balance
+                    </Col>
+                </Row>
+            </div>
             {transactions.length>0 ? transactions.map((transaction) => {
                 const { transaction_description, transaction_type, amount} = transaction; //have to destructure create_date and balance, once api response is integrated with it.
                 console.log(transaction);

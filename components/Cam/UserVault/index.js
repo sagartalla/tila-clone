@@ -37,10 +37,21 @@ class UserVault extends Component {
     this.toggleAddCardBlock = this.toggleAddCardBlock.bind(this);
     this.setAsDefaultCard = this.setAsDefaultCard.bind(this);
     this.addBtnClickHandler = this.addBtnClickHandler.bind(this);
+    this.state = {
+      transactions: []
+    }
   }
 
   componentWillMount() {
     this.props.getWalletTransactions();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.transactions) {
+      this.setState({
+        transactions: nextProps.transactions
+      })
+    }
   }
 
   componentDidMount() {
@@ -111,7 +122,7 @@ class UserVault extends Component {
             />
             :
             <div className={`${styles['box']} ${styles['ml-5']}`}>
-              <VaultHeader transactions={this.props.transactions}>
+              <VaultHeader transactions={this.state.transactions}>
                 <VaultBody
                   data={results}
                   makeDefault={this.makeDefault}

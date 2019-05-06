@@ -9,7 +9,6 @@ const getCardResultsApi = () => {
 
 const getWalletTransactions = () => {
   return axios.get(`${constants.VAULT_API_URL}/api/v1/user/wallet/transactions?page=0&size=10`).then(({data}) => {
-    debugger;
     return data;
   });
 };
