@@ -95,9 +95,9 @@ const actionCreators = {
   resetOrderIssue: () => ({
     type: actions.RESET_ORDER_ISSUE,
   }),
-  getReasons: params => ({
+  getReasons: (params,reasonType) => ({
     type: actions.GET_REASONS,
-    payload: api.getReasons(params),
+    payload: api.getReasons(params,reasonType),
   }),
   submitCancelRequest: params => ({
     type: actions.SUBMIT_CANCEL_REQUEST,

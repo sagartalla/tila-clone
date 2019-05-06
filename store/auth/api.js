@@ -48,6 +48,11 @@ const userLogin = params =>
         p_ccf_14: 7,
         p_ccf_15: 9,
       };
+      axios.post('/api/setCookie', {
+        data: {
+          auth:cookies.get('auth')
+        }
+      })
       axios.put(`${constants.CART_API_URL}/api/v1/cart/merge`);
       let inputString = '';
       for (const key in PTA_PARAMS) {
@@ -76,7 +81,8 @@ const userLogin = params =>
 ;
 
 const userLogout = () => {
-  axios.post('/api/logout').then((res) => {
+  axios.post('/api/logout')
+  .then((res) => {
     if (res.status === 200) {
       window.location = `${window.location.origin}/${cookies.get('country')}/${cookies.get('language')}`;
     }
