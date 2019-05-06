@@ -84,7 +84,7 @@ class CartAndPaymentSideBar extends Component {
               insnt_item_listing_id={insnt_item_listing_id}
               isPdp={isPdp}
               isFromCart={isFromCart}
-              totalPrice={total_price}
+              totalPrice={total_price.display_value}
               currency={currency}
               isMounted={false}
             />
@@ -112,7 +112,7 @@ class CartAndPaymentSideBar extends Component {
         <div className={styles['p-20']}>
           <ul className={`${styles['m-0']} ${styles['p-0']} ${styles['fs-12']}`}>
             <li><h5 className={`${styles['mb-15']} ${styles['mt-5']} ${styles['fs-16']} ${styles.fontW600} ${styles['light-gry-clr']}`}>{CART_PAGE.ORDER_SUMMARY}</h5></li>
-            <li><span>{CART_PAGE.PRICE} ({`${item_cnt} ${CART_PAGE.ITEMS}`})</span><span> {`${total_offer_price} ${currency}`}</span></li>
+            <li><span>{CART_PAGE.PRICE} ({`${item_cnt} ${CART_PAGE.ITEMS}`})</span><span> {`${total_offer_price.display_value} ${currency}`}</span></li>
             {
             showStepper ?
               <li>
@@ -132,7 +132,7 @@ class CartAndPaymentSideBar extends Component {
             tax !== 0 ? <li><span>{CART_PAGE.TAXES}</span> <span>{currency}</span></li> : null
           }
             <li className={`${styles['mt-20']} ${styles['fs-16']} ${styles['light-gry-clr']}`}><b>{CART_PAGE.TOTAL_AMOUNT}</b>
-            <span className={`${styles.flex} ${styles['flex-colum']} ${styles['t-rt']}`}><span className={styles['fontW600']}>{`${total_price} ${currency}`}</span>
+            <span className={`${styles.flex} ${styles['flex-colum']} ${styles['t-rt']}`}><span className={styles['fontW600']}>{`${total_price.display_value} ${currency}`}</span>
               {
                 total_discount > 0 ?
                   <span className={`${styles['fs-12']} ${styles['thick-red']} ${styles['t-rt']}`}>{CART_PAGE.YOU_SAVED} {total_discount} {currency}</span>

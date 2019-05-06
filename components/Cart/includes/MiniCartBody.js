@@ -78,7 +78,7 @@ const MiniCartBody = (props) => {
                     </div>
                     {(shipping === null || (shipping !== null && shipping.shippable)) ?
                       <div className={`${styles['flx-space-bw']} ${styles['pt-10']} ${styles['price-stepper-part']}`}>
-                        <span className={styles['fontW600']}>{offer_price + ' ' + cur}</span>
+                        <span className={styles['fontW600']}>{offer_price.display_value + ' ' + cur}</span>
                         <span>
                           {
                             editCartDetails ?
@@ -111,7 +111,7 @@ const MiniCartBody = (props) => {
         cnt > 0 && showCheckOutBtn ?
           <div className={`${styles['p-20']} ${styles['instant-checkout-btn-part']}`}>
             <div className={`${styles['flx-spacebw-alignc']} ${styles['pb-10']}`}>
-              <span className={styles['fontW600']}>{CART_PAGE.TOTAL_AMOUNT} :</span><span className={`${styles['fs-16']} ${styles['fontW600']}`}> {total_offer_price + ' ' + currency}</span>
+              <span className={styles['fontW600']}>{CART_PAGE.TOTAL_AMOUNT} :</span><span className={`${styles['fs-16']} ${styles['fontW600']}`}> {total_offer_price.display_value + ' ' + currency}</span>
             </div>
             <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles['fs-18']} ${styles['flex-center']} ${styles['justify-center']}`} onClick={checkoutBtnHandler}>
               <SVGComponent clsName={`${styles['secure-checkout']}`} src="icons/common-icon/secure-checkout" />
