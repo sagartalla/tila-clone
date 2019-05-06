@@ -3,12 +3,14 @@ import constants from '../../../constants';
 const getWishListResults = (store) => {
   if (store.wishlistReducer.data) {
     const { data } = store.wishlistReducer;
+
     const img_url = constants.mediaDomain;
     const showLoading = store.wishlistReducer.ui.loading;
 
     const newData = [];
 
     data && data.length > 0 && data.forEach((item) => {
+      //console.log('wishlistItem', item);
       // const variant = Object.keys(item.product_details.product_details_vo.cached_variant)[0];
       // const variant_info = item.variant_preferred_listings[variant][0];
 
@@ -26,8 +28,8 @@ const getWishListResults = (store) => {
         brand_name: item && item.product_details && item.product_details.catalog_details.attribute_map.brand.attribute_values[0].value,
         img: `${img_url}/${item}` && item.product_details && item.product_details.product_details_vo.cached_product_details.media.gallery_media[0].url,
         cur: variant_info.selling_price_currency,
-        price: variant_info.selling_price,
-        mrp: variant_info.mrp,
+        price: variant_info.selling_price.display_value,
+        mrp: variant_info.mrp.display_value,
         wishlisted_price: item.wishlisted_price,
         catalog_id: item && item.product_details && item.product_details.catalog_details.catalog_id,
         itemType: item && item.product_details && item.product_details.catalog_details.item_type_name,
