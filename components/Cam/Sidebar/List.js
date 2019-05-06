@@ -28,7 +28,7 @@ const List = props => props.data.map((val, id) => {
         <Link route={`/${country}/${language}${itemVal.href}`} key={itemVal.display}>
           {/* TODO can be next client side routes */ }
           <a style={{display:'block'}}>
-          <div className={`${itemVal.href === `/${country}/${language}/cam/${tab}` ? styles['active'] : {}} ${styles['list-items-container']} ${styles['light-gry-clr']} ${styles['flex']}`} key={itemIndex.toString()}>
+          <div className={`${`/${country}/${language}${itemVal.href}` === `/${country}/${language}/cam/${tab}` ? styles['active'] : {}} ${styles['list-items-container']} ${styles['light-gry-clr']} ${styles['flex-center']}`} key={itemIndex.toString()}>
             <div className={`${styles['list-item-left']} ${styles['pr-10']}`}>
               <SVGComponent src={itemVal.icon} />
             </div>
