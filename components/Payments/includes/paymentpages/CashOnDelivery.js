@@ -81,12 +81,9 @@ class CashOnDelivery extends React.Component {
   }
 
   afterSuccessOtpVerification() {
-    const { profileInfo } = this.props;
-    if (profileInfo.contactInfo.mobile_verified === 'V') {
-      this.setState({
+    this.setState({
         showPayBtn: true,
       });
-    }
   }
 
   componentWillReceiveProps(nextProps) {
