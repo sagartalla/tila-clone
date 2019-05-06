@@ -16,7 +16,7 @@ const styles = lang === 'en' ? styles_en : styles_ar;
 const AddressNew = (props) => {
   const {
     data, inputOnChange, addrTypeHandler, setAsDefaultLocation, selectCountry,
-    saveBtnClickHandler, resetAddAdrressForm, countriesData, showCountriesData,
+    saveBtnClickHandler, resetAddAdrressForm, countriesData, showCountriesData, hideTitle,
     getDataFromMap, getAllCities, selectCityFromSuggesstions, showCitiesData, validation,
   } = props;
   const { DELIVERY_ADDR_PAGE } = languageDefinations();
@@ -25,7 +25,8 @@ const AddressNew = (props) => {
       <div className={styles['new-addr-inn']}>
         <Row>
           <Col md={10} sm={9} xs={12}>
-            <h1 className={`${styles['thick-blue']} ${styles['mb-20']} ${styles['fs-20']} ${styles.fontW300} ${styles['m-fs-16']}`}>{DELIVERY_ADDR_PAGE.ADD_NEW_ADDR_HEAD}</h1>
+            {!hideTitle &&
+            <h1 className={`${styles['thick-blue']} ${styles['mb-20']} ${styles['fs-20']} ${styles.fontW300} ${styles['m-fs-16']}`}>{DELIVERY_ADDR_PAGE.ADD_NEW_ADDR_HEAD}</h1>}
           </Col>
 
           <Col md={12} sm={12} xs={12}>
