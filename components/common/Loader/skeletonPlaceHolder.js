@@ -1,6 +1,7 @@
 import React from 'react';
-import Input from '../../common/commonInput/index';
-import Rectangle from '../../common/commonInput/RectangleShape';
+import Input from '../commonInput/index';
+import Rectangle from '../commonInput/RectangleShape';
+import Round from '../commonInput/roundShape';
 
 
 import lang from '../../../utils/language';
@@ -37,41 +38,41 @@ export const searchPlaceHolder = (
         }}
       >
         <Input
-        style={{
+          style={{
               height: '2em', width: '30%',
               }}
-      />
+        />
         <Input
-        style={{
-                height: '2em',  width: '30%',
+          style={{
+                height: '2em', width: '30%',
               }}
-      />
+        />
       </div>
       <div style={{
             display: 'flex', padding: 20, background: '#ffff',
         }}
       >
         <Input
-            style={{
+          style={{
               width: '20%', height: '2em', marginRight: '20px',
               }}
-          />
+        />
         <Input
-            style={{
+          style={{
                 width: '15%', height: '2em', marginRight: '30px',
               }}
-          />
+        />
         <div style={{ borderRight: '1px solid #f7f5f5' }} />
         <Input
-            style={{
+          style={{
               width: '10%', marginLeft: '25px', height: '2em', marginRight: '20px',
               }}
-          />
+        />
         <Input
-            style={{
-                height: '2em', width: '30%'
+          style={{
+                height: '2em', width: '30%',
               }}
-          />
+        />
       </div>
       <div className={
         `${styles.flx}
@@ -84,22 +85,21 @@ export const searchPlaceHolder = (
         }}
         >
           <Input
-          style={{
+            style={{
               width: '15%', marginRight: '15px', height: '2em',
 
               }}
-        />
+          />
           <Input
-          color="blue"
-          style={{
+            style={{
                 width: '20%', marginRight: '1.5em', height: '2em',
               }}
-        />
+          />
           <Input
-          style={{
+            style={{
                 width: '20%', marginRight: '1.5em', height: '2em',
               }}
-        />
+          />
         </div>
       </div>
       <div className={`${styles['grid-cont']} ${styles['flex-wrp']} ${styles.flx} result-box`} >
@@ -126,56 +126,58 @@ export const searchPlaceHolder = (
 );
 export const productPlaceHolder = (
   <div style={{ display: 'flex' }}>
-  {/* <div className={
+    {/* <div className={
     `${styles.container}`
   }
     /> */}
-  <div className="col-md-8">
-    <div style={{
+    <div className="col-md-8">
+      <div style={{
         display: 'flex', alignItems: 'center', padding: 20, width: '100%',
-        }}>
+        }}
+      >
         {
           [0, 1, 2].map((el, i) => (
-                <Input
-                  style={{
+            <Input
+              style={{
                     height: '3em', width: '50%', marginRight: '20px',
                 }}
-              />
+            />
               ))
           }
-            </div>
-            <Rectangle
-                style={{
-                  width: '100%', height: '85%'
+      </div>
+      <Rectangle
+        style={{
+                  width: '100%', height: '85%',
                   }}
-              />
-    <div className={`${styles.flx} ${styles['align-center']}`}>
-          {
+      />
+      <div className={`${styles.flx} ${styles['align-center']}`}>
+        {
           [0, 1, 2].map((el, i) => (
-                <Rectangle
-                style={{
+            <Rectangle
+              style={{
                   width: 400, marginBottom: 20, marginRight: 20, height: 76, marginTop: 20,
              }}
-              />
+            />
               ))
           }
-            </div>
-  </div>
+      </div>
+    </div>
     <div className="productPlaceHolder col-md-4">
       <div style={{
             padding: 20, marginTop: '15%',
-          }}>
-               {
+          }}
+      >
+        {
           [0, 1, 2].map((el, i) => (
-                <Rectangle
-                style={{
+            <Rectangle
+              style={{
                   width: '400px', height: '200px',
                   }}
-              />
+            />
               ))
           }
-            </div>
-  </div>
+      </div>
+    </div>
   </div>
 );
 
@@ -204,6 +206,65 @@ export const cartPlaceHolder = (
           width: '25%', height: '600px',
         }}
       />
+    </div>
+  </div>
+);
+
+export const couponPlaceHolder = (
+  <div style={{ overflow: 'hidden', maxHeight: '800px' }}>
+    {/* <div className={`${styles.container}`} /> */}
+    <div
+      className={
+        `${styles['filter-panel']} ${styles['border-radius4']}
+          ${styles['bg-white']} col-md-2 col-sm-4`
+      }
+    >
+      <div className={`${styles['flex-center']} ${styles['m-5']}`}>
+        <Round />
+        <div className={`${styles['flex-colum']} ${styles['ml-10']}`}>
+          <Input style={{ height: 15, width: '100px' }} />
+          <Input style={{ height: 15, width: '100px' }} />
+        </div>
+      </div>
+      {
+          [0, 1, 2, 3, 4, 5].map((el, i) => (
+            <div>
+              <div key={`rect_${i}`}>
+                <Input style={{ height: 40 }} />
+              </div>
+              <div style={{ borderBottom: '1px solid #f7f5f5', marginBottom: '5px' }} />
+            </div>
+              ))
+          }
+    </div>
+    <div className={`${styles['search-results']} ${styles['p-0']} col-md-10 col-sm-8`}>
+      <div className={`${styles['grid-cont']} ${styles['mt-15']} ${styles['flex-wrp']} ${styles.flx} result-box`} >
+        <div className={`${styles.couponHeader} ${styles['p-25']}`}>
+          <div className={`${styles['flex-center']} ${styles['m-5']}`}>
+            <Round style={{ backgroundColor: '#fff' }} />
+            <div className={`${styles['flex-colum']} ${styles['ml-10']}`}>
+              <Input style={{ height: 20, width: '300px', backgroundColor: '#fff' }} />
+              <Input style={{ height: 20, width: '300px', backgroundColor: '#fff' }} />
+            </div>
+          </div>
+          <div className={`${styles.flex} ${styles['mt-40']}`}>
+            <Input style={{ height: 30, width: '150px', backgroundColor: '#fff', marginRight: '10px' }} />
+            <Input style={{ height: 30, width: '150px', backgroundColor: '#fff' }} />
+          </div>
+        </div>
+        {
+          [0, 1, 2].map(() => [0, 1, 2].map((el, i) => (
+            <div key={`rect_${i}`}>
+              <Rectangle style={{
+                 width: '500px',
+                 height: '170px',
+                 margin: '10px',
+               }}
+              />
+            </div>
+              )))
+          }
+      </div>
     </div>
   </div>
 );

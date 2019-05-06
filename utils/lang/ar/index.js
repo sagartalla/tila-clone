@@ -606,6 +606,13 @@ export const AR_KEYWORDS = {
     'APPLIED_IS_INVALID': 'المستخدم غير صالح للاستعمال',
     'ENTER_COUPON_CODE': 'ادخل كود الكوبون',
     'NO_COUPON_APPLIED': 'لا يوجد كوبون مضاف',
+    'COPY': 'COPY', 'COUPONS_AND_SAVINGS': 'Coupons and Savings',
+    'WE_BELIEVE_IN_THE_POWER': 'We believe in the power of purchase intelligence',
+    'ACTIVE_COUPONS': 'Active Coupons',
+    'EXPIRED_COUPONS': 'Expired Coupons',
+    'TERMS_AND_CONDITIONS': 'Terms & Conditions',
+    'HOW_TO_USE': 'How to use',
+    'EXPIRED_ON': 'Expired on',
   },
  EMAIL_VERIFICATION: {
    'VERIFY_YOUR_EMAIL': 'تفعيل  بريدك الالكتروني',

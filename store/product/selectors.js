@@ -65,7 +65,7 @@ const getProduct = (store, variantId) => {
     product_id: product_details.product_id,
     itemtype: product_details.catalog_details.item_type_name,
     media: imgUrls[0].url,
-    categoryId: tree.breadcrumb[tree.breadcrumb.length - 1].id,
+    categoryId: tree && tree.breadcrumb && tree.breadcrumb[tree.breadcrumb.length - 1].id,
     comparable: product_details.catalog_details.comparable,
   };
   const returnInfo = {
@@ -80,13 +80,13 @@ const getProduct = (store, variantId) => {
     availabilityError,
     stockError,
     offerPricing: priceInfo ? {
-      strickedPrice: priceInfo.pricing.mrp,
-      showPrise: priceInfo.pricing.offer_price,
-      sellingPrice: priceInfo.pricing.price,
-      discount: priceInfo.pricing.discount_per_mrp,
+      strickedPrice: priceInfo.pricing.mrp.display_value,
+      showPrise: priceInfo.pricing.offer_price.display_value,
+      sellingPrice: priceInfo.pricing.price.display_value,
+      discount: priceInfo.pricing.discount_per_mrp.display_value,
       offerMesseges: priceInfo.pricing.actions ? priceInfo.pricing.actions.map((a) => a.description) : [],
       offerDiscounts: priceInfo.pricing.actions ? priceInfo.pricing.actions : [],
-      totalDiscountMRP: priceInfo.pricing.total_discount_mrp,
+      totalDiscountMRP: priceInfo.pricing.total_discount_mrp.display_value,
       currency: priceInfo.mrp_currency
     } : 'No Listing'
   };
