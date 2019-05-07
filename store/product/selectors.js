@@ -248,16 +248,16 @@ const getVariantsAndSimilarProducts = (variantId,productId) => (store) => {
       if(!display[attKey]) {
         display[attKey] = {
           displayName: attVal.display_string,
-          values: []
+          values: [],
         };
       }
-      display[attKey].values = _.uniq([...display[attKey].values, ...(attVal.attribute_values.map((i) => i.value))]);
-      if(!map[key][attKey]) {
+      display[attKey].values = _.uniq([...display[attKey].values, ...(attVal.attribute_values.map(i => `${i.value}${i.qualifier_unit ? ` ${i.qualifier_unit}` : ''}`))]);
+      if (!map[key][attKey]) {
         map[key][attKey] = [];
       }
       map[key] = {
         ...map[key],
-        [attKey]: [...map[key][attKey], ...(attVal.attribute_values.map((i) => i.value))]
+        [attKey]: [...map[key][attKey], ...(attVal.attribute_values.map(i => `${i.value}${i.qualifier_unit ? ` ${i.qualifier_unit}` : ''}`))]
       };
     });
     return {
@@ -316,13 +316,13 @@ const getVariantsAndSimilarProducts = (variantId,productId) => (store) => {
         };
       }
 
-      display[attKey].values = _.uniq([...display[attKey].values, ...(attVal.attribute_values.map((i) => i.value))]);
+      display[attKey].values = _.uniq([...display[attKey].values, ...(attVal.attribute_values.map(i => `${i.value}${i.qualifier_unit ? ` ${i.qualifier_unit}` : ''}`))]);
       if(!map[key][attKey]) {
         map[key][attKey] = [];
       }
       map[key] = {
         ...map[key],
-        [attKey]: [...map[key][attKey], ...(attVal.attribute_values.map((i) => i.value))]
+        [attKey]: [...map[key][attKey], ...(attVal.attribute_values.map(i => `${i.value}${i.qualifier_unit ? ` ${i.qualifier_unit}` : ''}`))]
       };
     });
     return {
