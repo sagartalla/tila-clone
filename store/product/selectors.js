@@ -1,7 +1,6 @@
 import _ from 'lodash';
 
 const getProduct = (store, variantId) => {
-  debugger;
   const {
     product_details, variant_preferred_listings, tree,
   } = store.productReducer.data[0];
