@@ -9,7 +9,7 @@ import Base, { baseActions } from './base';
 import Layout from '../layout/main';
 import Terms from '../components/common/terms';
 
-class ThankyouPage extends Base {
+class TermsPage extends Base {
   pageName = 'TERMS';
   render () {
     const {orderId, status} = this.props.url.query;
@@ -34,4 +34,4 @@ const mapDispatchToProps = dispatch =>
     dispatch,
   )
 
-export default withRedux(makeStore, null, mapDispatchToProps)(ThankyouPage);
+export default withRedux(makeStore, null, mapDispatchToProps)(TermsPage);

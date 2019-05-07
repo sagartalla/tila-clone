@@ -1,5 +1,3 @@
-@import '/static/vendor/css/react-input-range.css';
-@import '/static/vendor/css/react-input-range-override.css';
 @import '../../layout/main/executables.styl';
 
 .filter-panel
@@ -233,15 +231,13 @@
       justify-content flex-end
       align-items center
       .sort-part-inn
-        padding-left 15px
         display flex
         border-left 1px solid light-brdr
-        padding-left 15px
         .sort-arrow
           width 12px
           height 12px
-        
-        .select-mn 
+
+        .select-mn
           position relative
           .select-text
             border 0
@@ -250,7 +246,7 @@
             // &:after
             //   content ''
             //   position absolute
-         
+
 
         .select-mn .select-text:focus
           outline none
@@ -467,6 +463,8 @@
         max-height 100%
         max-width 100%
         object-fit scale-down
+        display: block;
+        margin: 0 auto;
 
 .category-list
 
@@ -521,7 +519,7 @@
 
 .margin
  margin-bottom -3px
- 
+
 @media screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation : portrait){
   .filter-panel {
     width 24%

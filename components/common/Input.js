@@ -1,8 +1,6 @@
 import React from 'react';
 import { FormControl } from 'react-bootstrap';
 
-// import styles from './rightBar.styl';
-
 const Input = props => {
   const val = props.val ? props.val : "";
   const type = props.type ? props.type : "text";

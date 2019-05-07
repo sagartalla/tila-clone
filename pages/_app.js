@@ -1,6 +1,5 @@
 import App,{Container} from 'next/app';
 import React from 'react';
-//import Loader from '../components/common/Loader/skeletonLoader';
 import WithLoadingBar from '../lib/hoc'
 
 class MyApp extends App {

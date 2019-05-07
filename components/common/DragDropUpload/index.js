@@ -1,9 +1,9 @@
 import React,{Component} from 'react';
-import { mergeCss } from '../../../utils/cssUtil';
 import { languageDefinations } from '../../../utils/lang/';
 import SVGComponent from '../../common/SVGComponet';
 
-const styles = mergeCss('components/common/DragDropUpload/dragDrop');
+import styles from './dragDrop.styl';
+
 const { DRAG_DROP } = languageDefinations();
 
 export default class DragDropUpload extends Component {

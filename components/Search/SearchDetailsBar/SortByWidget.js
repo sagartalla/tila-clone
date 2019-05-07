@@ -9,11 +9,12 @@ import SVGComponent from '../../common/SVGComponet';
 
 import lang from '../../../utils/language';
 
+import main_en from '../../../layout/main/main_en.styl';
+import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from '../search_en.styl';
 import styles_ar from '../search_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
-
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const { SEARCH_PAGE } = languageDefinations();
 
@@ -46,10 +47,10 @@ class SortByWidget extends Component {
 
   render() {
     return (
-      <div className={`${styles['flex-center']} ${styles['sort-part-inn']}`}>
+      <div className={`${styles['flex-center']} ${styles['sort-part-inn']} ${styles['pl-15']}`}>
         <span className={`${styles['mb-0']} ${styles['fontW600']} ${styles['flex-center']}`}>
           <SVGComponent clsName={`${styles['sort-arrow']}`} src="icons/common-icon/sort" />
-          <span className={`${styles['pl-5']} ${styles['pr-5']}`}>{SEARCH_PAGE.SORT_BY}: </span> 
+          <span className={`${styles['pl-5']} ${styles['pr-5']}`}>{SEARCH_PAGE.SORT_BY}: </span>
         </span>
         <div className={styles['select-mn']}>
           <select className={styles['select-text']} required value={this.state.value} onChange={this.sortSelect}>

@@ -8,11 +8,12 @@ import { SearchBox } from "react-google-maps/lib/components/places/SearchBox";
 
 import lang from '../../../../utils/language';
 
+import main_en from '../../../../layout/main/main_en.styl';
+import main_ar from '../../../../layout/main/main_ar.styl';
 import styles_en from '../address_en.styl';
 import styles_ar from '../address_ar.styl';
 
-
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const MyGoogleMap = withScriptjs(withGoogleMap((props) => {
   const { DELIVERY_ADDR_PAGE } = languageDefinations();
