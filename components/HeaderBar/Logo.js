@@ -20,7 +20,7 @@ const Logo = () => (
       categoryTree => (
         <div className={`${styles['flex-center']} ${styles['logos-part']}`}>
           <a href={`/${country}/${language}`} className={styles.flex}>
-            <SVGComponent clsName={`${styles['default-logo']}`} src={`icons/logos/${categoryTree}-logo`} />
+            <SVGComponent clsName={`${styles['default-logo']}`} src={language === 'en' ? `icons/logos/${categoryTree}-logo` : 'icons/logos/tilaarabiclogo'} />
           </a>
         </div>
       )
