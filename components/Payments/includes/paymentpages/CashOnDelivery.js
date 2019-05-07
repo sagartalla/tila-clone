@@ -84,8 +84,8 @@ class CashOnDelivery extends React.Component {
 
   afterSuccessOtpVerification() {
     this.setState({
-      showPayBtn: true,
-    });
+        showPayBtn: true,
+      });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -145,7 +145,7 @@ class CashOnDelivery extends React.Component {
           null
     }
     </Col>
-    <Col md={10} sm={12} xs={12}>
+    <Col md={6} sm={12} xs={12}>
       {
         this.state.showContinueButton &&
            (
@@ -164,7 +164,7 @@ class CashOnDelivery extends React.Component {
               <Button
                 className={`${styles['fs-16']} ${styles['fontW600']} ${styles['new-card-btn']} ${styles['border-radius']} ${styles['ht-40']} ${styles.width70}`}
                 onClick={this.proceedToPayment}
-                btnText={PAYMENT_PAGE.PAY + ' ' + data.amount_to_pay + ' ' + data.currency_code + ' ' + PAYMENT_PAGE.ON_DELIVERY}
+                btnText={PAYMENT_PAGE.PAY + ' ' + data.amount_to_pay.display_value + ' ' + data.amount_to_pay.currency_code + ' ' + PAYMENT_PAGE.ON_DELIVERY}
                 hoverClassName="hoverBlueBackground"
                 btnLoading={showLoading}
 

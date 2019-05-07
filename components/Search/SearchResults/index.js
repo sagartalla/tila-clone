@@ -11,6 +11,7 @@ import SVGComponent from '../../common/SVGComponet';
 import { actionCreators, selectors } from '../../../store/search';
 import { actionCreators as cartActionCreators, selectors as cartSelector } from '../../../store/cart';
 import { actionCreators as wishlistActionCreators } from '../../../store/cam/wishlist';
+import { selectors as authSelectors } from '../../../store/auth'
 import { Router } from '../../../routes';
 
 import lang from '../../../utils/language';
@@ -42,7 +43,11 @@ class SearchResults extends Component {
 
   componentDidMount() {
     this.props.resetAddtoCart();
-    this.props.getWishlist();
+    //console.log('searchlogin',this.props.isLoggedIn);
+    if(this.props.isLoggedIn) {
+      this.props.getWishlist();
+    }
+
   }
 
   async loadMore() {
@@ -154,6 +159,7 @@ const mapStateToProps = store => ({
   cartButtonLoaders: selectors.getCartButtonLoaders(store),
   isCategoryTree: selectors.getIsCategoryTree(store),
   choosenCategoryName: selectors.getChoosenCategoryName(store),
+  isLoggedIn:authSelectors.getLoggedInStatus(store)
 });
 
 const mapDispatchToProps = dispatch =>

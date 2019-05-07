@@ -39,6 +39,7 @@ const getOrdersData = (store) => {
           promisedDeliveryDate: i.promised_delivery_date,
           variantId: i.variant_id,
           orderIds: i.order_item_ids,
+          price: i.price,
           isCancelable: i.cancelable,
           isReturnable: i.returnable,
           isExchangable: i.exchangeable,
@@ -59,7 +60,7 @@ const getOrdersData = (store) => {
           phone: address ? `${address.mobile_country_code} ${address.mobile_no}` : 'No phone number',
         },
         orderDate: moment(created_at).format('MMMM DD, YYYY'),
-        orderTotal: `${total_amount} ${currency_code}`,
+        orderTotal: `${total_amount.display_value} ${total_amount.currency_code}`,
         orderItems,
         order_type,
       };

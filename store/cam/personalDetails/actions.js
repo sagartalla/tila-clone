@@ -34,12 +34,13 @@ const actionCreators = {
     });
   },
 
-  verifyOtp:(params) => {
-    return {
-      type:actions.VERIFY_OTP,
-      payload:apis.verifyOtp(params)
-    }
-  },
+  verifyOtp: params => dispatch => dispatch({
+    type: actions.VERIFY_OTP,
+    payload: apis.verifyOtp(params),
+  }).then(() => {
+    dispatch(actionCreators.getUserProfileInfo());
+  }),
+
   otpUserUpdate: (params) => {
     return {
       type:actions.USER_UPDATE_FETCH_OTP,

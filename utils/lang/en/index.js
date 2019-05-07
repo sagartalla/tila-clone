@@ -601,7 +601,7 @@ export const EN_KEYWORDS = {
     'SUCCESS': 'Success',
   },
   COUPON_OFFERS: {
-    'VIEW_TERMS': 'View Terms & Conditions',
+    'VIEW_TERMS': 'Terms & Conditions',
     'HOW_TO_USE': 'How to use',
     'APPLIED': 'Applied',
     'OK': 'OK',
@@ -614,6 +614,14 @@ export const EN_KEYWORDS = {
     'IS_INVALID': 'is invalid.',
     'ENTER_COUPON_CODE': 'Enter coupon Code',
     'NO_COUPON_APPLIED': 'No Coupon Applied',
+    'COPY': 'COPY',
+    'COUPONS_AND_SAVINGS': 'Coupons and Savings',
+    'WE_BELIEVE_IN_THE_POWER': 'We believe in the power of purchase intelligence',
+    'ACTIVE_COUPONS': 'Active Coupons',
+    'EXPIRED_COUPONS': 'Expired Coupons',
+    'TERMS_AND_CONDITIONS': 'Terms & Conditions',
+    'HOW_TO_USE': 'How to use',
+    'EXPIRED_ON': 'Expired on',
   },
  EMAIL_VERIFICATION: {
    'VERIFY_YOUR_EMAIL': 'Verify Your Email Address',

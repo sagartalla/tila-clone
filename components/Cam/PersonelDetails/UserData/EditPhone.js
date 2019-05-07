@@ -94,7 +94,7 @@ class EditPhone extends React.Component {
       this.setState({
         otpResponse: nextProps.otpData.Response
       }, () => {
-        afterSuccessOtpVerification && afterSuccessOtpVerification();
+        ((afterSuccessOtpVerification && nextProps.otpData.Response === 'SUCCESS') && afterSuccessOtpVerification());
       })
     }
 

@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import { Modal } from 'react-bootstrap';
+import { Tabs, Tab } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Cookie from 'universal-cookie';
+import Blocker from '../../../common/Blocker';
 import Button from '../../../common/Button';
 import Input from '../../../common/Input';
 import { languageDefinations } from '../../../../utils/lang/';
 import { actionCreators, selectors } from '../../../../store/cart';
 import { actionCreators as couponActionCreators, selectors as couponSelectors } from '../../../../store/coupons';
 import lang from '../../../../utils/language';
+import Slider from '../../../common/slider';
+import Coupons from './commonCoupon';
 
 import main_en from '../../../../layout/main/main_en.styl';
 import main_ar from '../../../../layout/main/main_ar.styl';
@@ -32,8 +35,12 @@ class Coupon extends Component {
       copuonAttempted: false,
       appliedCoupon: '',
       couponCode: '',
-      showPopup: false,
-      document: '',
+      documentTerms: '',
+      documentHowToUse: '',
+      couponDescription: '',
+      couponSelected: '',
+      showLoader: false,
+      showSlider: false,
     };
   }
 
@@ -46,13 +53,22 @@ class Coupon extends Component {
       closeSlider, openSlider,
     } = this.props;
     const {
-      isCartLoading, cartData,
+      isCartLoading, cartData, LoadingState,
     } = nextProps;
     this.setState({
       couponApplied: this.state.copuonAttempted && cartData.coupon_applied,
     });
     if (isCartLoading) {
       return;
+    }
+    if (LoadingState) {
+      this.setState({
+        showLoader: true,
+      });
+    } else {
+      this.setState({
+        showLoader: false,
+      });
     }
     if (this.state.copuonAttempted && cartData.coupon_applied) {
       closeSlider();
@@ -72,18 +88,24 @@ class Coupon extends Component {
   }
 
   showPopup = (e) => {
-    const docId = e.target.getAttribute('data-obj');
+    const docTerms = e.target.getAttribute('data-terms');
+    const docUse = e.target.getAttribute('data-use');
+    const coupon = e.target.getAttribute('data-coupon');
+    const description = e.target.getAttribute('data-desc');
+    const title = e.target.getAttribute('data-title');
     this.setState({
-      document: docId,
-    });
-    this.setState({
-      showPopup: true,
+      documentTerms: docTerms,
+      documentHowToUse: docUse,
+      couponSelected: coupon,
+      couponDescription: description,
+      title,
+      showSlider: true,
     });
   }
 
-  closeTerms = () => {
+  closeSlider = () => {
     this.setState({
-      showPopup: false,
+      showSlider: false,
     });
   }
 
@@ -94,7 +116,6 @@ class Coupon extends Component {
       copuonAttempted: false,
     });
   }
-
   handleApply = (e) => {
     const {
       getCartResults,
@@ -143,13 +164,20 @@ class Coupon extends Component {
   render() {
     const { couponData } = this.props;
     const {
-      couponCode, errorMsg, couponApplied, copuonAttempted, appliedCoupon, showPopup, document, background, showBackground,
+      couponCode, errorMsg, couponApplied, copuonAttempted, appliedCoupon, showSlider,
+      documentTerms,
+      documentHowToUse,
+      couponDescription,
+      couponSelected,
+      showLoader,
+      title,
     } = this.state;
     return (
+      showLoader ? <Blocker /> :
       <div className={`${styles.flex} ${styles['flex-colum']}`}>
         <div className={`${styles.couponApply} ${styles.flex}`}>
           <Input
-            placeholder={' ' + COUPON_OFFERS.ENTER_COUPON_CODE}
+            placeholder={` ${COUPON_OFFERS.ENTER_COUPON_CODE}`}
             style={{
             width: '350px', height: '60px', border: '0', paddingLeft: '10px',
           }}
@@ -161,57 +189,50 @@ class Coupon extends Component {
         <div className={styles.errorStyle}>
           {(copuonAttempted ? (couponApplied ? '' : <span className={styles['error-msg']}>This {appliedCoupon} {COUPON_OFFERS.IS_INVALID}</span>) : errorMsg ? <span className={styles['error-msg']}>{errorMsg}</span> : '')}
         </div>
-        <div className={`${styles.applyCoupon} ${styles['flex-colum']} ${styles.flex}`}>
-          {/* TODO: move to a seperate file */}
-          {couponData && couponData.length > 0 && couponData.map(data =>
-          (
-            <div className={styles.couponDiv}>
-              <div className={`${styles.couponCodeListing}`}>
-                <div className={`${styles['justify-center']} ${styles.flex}`}>
-                  <div className={`${styles.ellipsis}`} title={data.coupon_code}>{data.coupon_code}</div>
-                </div>
-              </div>
-              <div className={`${styles.wordBreak} ${styles['p-5']}`}>{data.description}</div>
-              <div className={`${styles['p-5']} ${styles['flex-center']} ${styles['justify-between']} ${styles.flex}`}>
-                <div className={`${styles['lgt-blue']} ${styles.pointer} ${styles.flex}`} data-obj={data.tc} onClick={this.showPopup}>{COUPON_OFFERS.VIEW_TERMS}
-                  <div className={styles.border} />
-                </div>
-                <div className={`${styles['lgt-blue']} ${styles.pointer}`} data-obj={data.how_to_use} onClick={this.showPopup}>{COUPON_OFFERS.HOW_TO_USE}</div>
-                {/* {data.coupon_applied ?
-                    <div className={`${styles.flex}`}>
-                      <img  src="/static/img/icons/common-icon/green-tick.svg" alt="checked" />
-                      <div className={`${styles.applied} ${styles['p-10']}`}>
-                      {COUPON_OFFERS.APPLIED}</div>
-                    </div>
-                  : */}
-                <div><button data-code={data.coupon_code} className={`${styles['fp-btn']} ${styles['apply-btn']} ${styles['small-btn']}`} onClick={this.handleApply}>{COUPON_OFFERS.APPLY}</button></div>
-                {/* } */}
-              </div>
-            </div>
-          ))
-        }
+        <div className={`${styles.applyCoupon} ${styles.applyCouponMargin} ${styles.flex} ${styles['flex-colum']}`}>
+          <Coupons
+            couponData={couponData}
+            showPopup={this.showPopup}
+            handleApply={this.handleApply}
+            showCartCoupon
+          />
         </div>
         <div>
-          <Modal
-            show={showPopup}
-            onHide={this.closeTerms}
-            className={styles.modalClassName}
+          {showSlider &&
+          <Slider
+            closeSlider={this.closeSlider}
+            isOpen={showSlider}
+            style={{ background: 'none' }}
           >
-            <Modal.Body>
-              <iframe
-                title="TERMS"
-                src={document}
-                frameBorder="0"
-                width="560px"
-                height="450px"
-              />
-            </Modal.Body>
-            <div className={`${styles['justify-end']} ${styles['p-30']} ${styles.flex}`}>
-              <button className="btn btn-primary" style={{ backgroundColor: '#45689a', width: '15%' }} onClick={this.closeTerms}>
-                {COUPON_OFFERS.OK}
-              </button>
+            <div className={`${styles['flex-center']}`}>
+              <div className={`${styles.couponCodeCartTerms} ${styles.fontW600} ${styles['m-5']}`}>{couponSelected}</div>
+              <div className={`${styles['label-gry-clr']}`}>{couponDescription}</div>
             </div>
-          </Modal>
+            <Tabs defaultActiveKey={1}>
+              <Tab eventKey={title === 'terms' ? 1 : 2} title={COUPON_OFFERS.TERMS_AND_CONDITIONS}>
+                <iframe
+                  title="TERMS"
+                  src={documentTerms}
+                  frameBorder="0"
+                  width="440px"
+                  height="550px"
+                />
+              </Tab>
+              <Tab eventKey={title === 'terms' ? 2 : 1} title={COUPON_OFFERS.HOW_TO_USE}>
+                <iframe
+                  title="TERMS"
+                  src={documentHowToUse}
+                  frameBorder="0"
+                  width="440px"
+                  height="550px"
+                />
+              </Tab>
+            </Tabs>
+            <div className={`${styles.flex} ${styles['justify-end']} ${styles['mr-20']}`}>
+              <Button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['m-10']} ${styles.width21}`} btnText={COUPON_OFFERS.OK} onClick={this.closeSlider} />
+            </div>
+          </Slider>
+        }
         </div>
       </div>
     );
@@ -223,6 +244,7 @@ const mapStateToProps = store => ({
   couponData: couponSelectors.getCouponOffers(store),
   cartData: selectors.getCartResults(store),
   isCartLoading: selectors.getLoadingStatus(store),
+  LoadingState: couponSelectors.showLoader(store),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(

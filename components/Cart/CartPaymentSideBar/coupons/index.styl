@@ -4,8 +4,7 @@
     width: 100%;
     overflow: auto;
     align-items: center;
-    margin-top: 20%;
-    max-height: 800px;
+    max-height: 650px;
       .couponDiv {
         border: solid 0.9px border-color;
         min-height 170px;
@@ -17,19 +16,23 @@
         flex-direction: column;
         justify-content: space-between;
         }
+        .couponMargin {
+          margin: 2%;
+          margin-right: 6%;
+        }
 }
 
 .couponApply
-    top: 7%;
-    position: absolute;
-    border-radius: 2px;
-    box-shadow: 0 3px 9px 0 rgba(0, 0, 0, 0.07);
-    background-color: white;
-    border-bottom: 0;
+    top 7%
+    position absolute
+    border-radius 2px
+    box-shadow 0 3px 9px 0 rgba(0, 0, 0, 0.07)
+    background-color white
+    border-bottom 0
     display flex
     align-items center
-    z-index 5;
-    left: 14%;
+    z-index 5
+    left 9%
 
 .couponCodeListing
     padding: 7px;
@@ -44,6 +47,52 @@
 
 
 .couponCodeListing:after {
+    content: '';
+    display: block;
+    position: relative;
+    left: -8px;
+    width: 0;
+    border-bottom: 10px solid listing-triangle-color;
+    border-left: 10px solid transparent;
+    top: 27%;
+    transform: rotate(-90deg);
+}
+
+.couponCodeTerms {
+    padding: 7px;
+    width: 30%;
+    height: 33px;
+    text-align: center;
+    left: -30px;
+    position: relative;
+    border: solid 1px listing-border;
+    background-color: listing-background-color;
+}
+
+.couponCodeTerms:after {
+    content: '';
+    display: block;
+    position: relative;
+    left: -8px;
+    width: 0;
+    border-bottom: 10px solid listing-triangle-color;
+    border-left: 10px solid transparent;
+    top: 27%;
+    transform: rotate(-90deg);
+}
+
+.couponCodeCartTerms {
+    padding: 7px;
+    width: 30%;
+    height: 33px;
+    text-align: center;
+    left: -15px;
+    position: relative;
+    border: solid 1px listing-border;
+    background-color: listing-background-color;
+}
+
+.couponCodeCartTerms:after {
     content: '';
     display: block;
     position: relative;
@@ -94,7 +143,7 @@
 
 .border
   border-right: 1px dotted;
-  margin-left: 30px;
+  margin-left: 25px;
 
 .errorStyle {
     position: absolute;
@@ -102,9 +151,47 @@
     left: 15%;
 }
 
-.apply-btn {
-    color: #000;
-    border: 1px solid #c8c7cc;
+.apply-btn
+    color #000
+    border 1px solid #c8c7cc
+    padding 10px 25px
+    background-color #fff
+
+.copy-btn
+    color: navy-blue;
+    border: 1px solid navy-blue;
     padding: 10px 25px;
     background-color: #fff;
-}
+
+.applyCouponMargin
+   margin-top: 20%;
+
+.loader-div
+    width 50px
+    height 50px
+    position absolute
+    z-index 14
+    top 242px
+    left 202px
+  .loader-styl
+    svg
+      animation rotate 1.4s linear infinite;
+      -webkit-animation rotate 1.4s linear infinite;
+      -moz-animation rotate 1.4s linear infinite;
+      @keyframes rotate {
+        to {
+          transform rotate(360deg);
+        }
+      }
+
+      @-webkit-keyframes rotate {
+        to {
+          -webkit-transform rotate(360deg);
+        }
+      }
+
+      @-moz-keyframes rotate {
+        to {
+          transform rotate(360deg);
+        }
+      }

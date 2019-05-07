@@ -59,17 +59,28 @@ class ActionBar extends Component {
   }
 
   state = {
-    show: false,
+    show: false
   }
 
   componentDidMount() {
+    if(window.sessionStorage.getItem('TILuservisitcount') !== '1') {
+      this.props.displayLogin();
+    }
     this.props.getLoginInfo();
     this.props.getCartResults();
-    this.props.getWishlist();
+    //console.log('loggedin', this.props.isLoggedIn);
+    if(this.props.isLoggedIn) {
+      this.props.getWishlist();
+    }
+
   }
 
   componentWillReceiveProps(nextProps) {
-    let show = (!nextProps.isLoggedIn && (nextProps.isLoggedIn != this.props.isLoggedIn) && !this.state.logoutClicked) || this.state.loginClicked || !!nextProps.error || nextProps.loginInProgress || (!nextProps.isLoggedIn && nextProps.showLogin) || nextProps.showEmailVerificationScreen;
+    if(nextProps.isLoggedIn !== this.props.isLoggedIn) {
+      this.props.getWishlist();
+    }
+
+    let show = ((nextProps.isLoggedIn != this.props.isLoggedIn) && !this.state.logoutClicked) || this.state.loginClicked || !!nextProps.error || (!nextProps.isLoggedIn && nextProps.showLogin) || nextProps.loginInProgress || nextProps.showEmailVerificationScreen;
     if (window.location.pathname.indexOf('/payment') > -1) {
       show = false;
     }
@@ -273,6 +284,7 @@ const mapDispatchToProps = (dispatch) => {
     {
       getLoginInfo: actionCreators.getLoginInfo,
       logout: actionCreators.userLogout,
+      displayLogin:actionCreators.showLogin,
       getCartResults: cartActionCreators.getCartResults,
       resetLoginError: actionCreators.resetLoginError,
       resetShowLogin: actionCreators.resetShowLogin,

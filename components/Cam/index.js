@@ -8,11 +8,12 @@ import HeaderBar from '../HeaderBar/index';
 import Sidebar from './Sidebar';
 import UserInfo from './PersonelDetails';
 import ShippingAddress from './ShippingAddress';
-import Orders from './Orders'
+import Orders from './Orders';
 import Wishlist from './Wishlist';
 import Notifications from './Notifications';
 import UserVault from './UserVault';
 import Messages from './Messages';
+import MyCoupons from './MyCoupons/MyCoupon';
 import FooterBar from '../Footer/index';
 import AuthWrapper from '../common/AuthWrapper';
 
@@ -44,6 +45,8 @@ class Cam extends React.Component {
           return <ShippingAddress standalone={true} />;
         case 'wishlist':
           return <Wishlist />;
+        case 'mycoupons':
+          return <MyCoupons />;
         case 'profile':
           return <UserInfo />;
         case 'messages':

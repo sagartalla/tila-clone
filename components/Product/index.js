@@ -54,6 +54,7 @@ const getProductComponent = (isPreview, taskCode) => {
     }
 
     componentDidMount() {
+      debugger;
       if (window.localStorage && !isPreview) {
         const { productData } = this.props;
         const {
@@ -66,8 +67,9 @@ const getProductComponent = (isPreview, taskCode) => {
           eventName: 'Product Viewed',
           ProductData: productData,
         });
-        if (offerInfo.price) {
-          const pr = offerInfo.price.split(' ');
+        if (offerInfo.offerPricing) {
+          const pr = offerInfo.offerPricing.sellingPrice.display_value;
+          const cd = offerInfo.offerPricing.sellingPrice.currency_code;
           const recentData = localStorage.getItem('rv');
           const arr = recentData ? JSON.parse(recentData) : [];
           const index = _.findIndex(arr, (o) => o.id == shippingInfo.listing_id);
@@ -84,8 +86,8 @@ const getProductComponent = (isPreview, taskCode) => {
             arr.unshift({
               nm: titleInfo.title,
               im: imgUrls[0].url,
-              pr: pr[0],
-              cd: pr[1],
+              pr,
+              cd,
               uri: location.href,
               id: shippingInfo.listing_id,
             });

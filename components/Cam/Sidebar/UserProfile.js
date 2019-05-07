@@ -79,7 +79,6 @@ class UserProfile extends React.Component {
     const [tab, ...queryParams] = tabDetails ? tabDetails.split('/') : [];
     let imagePreview = null;
     if (this.state.imgUrl) {
-      debugger;
       imagePreview = (<img className={styles['prev-img']} src={this.state.imgUrl} />);
     } else {
       imagePreview = (<div className={styles['edit-icon']}>Click to upload image</div>)
