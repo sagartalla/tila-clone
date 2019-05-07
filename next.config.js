@@ -40,6 +40,7 @@ module.exports = withSourceMaps(withStylus(withCSS({
 
     config.optimization = Object.assign({}, config.optimization, {
       splitChunks: Object.assign({}, config.optimization.splitChunks, {
+        minSize: 1000,
         cacheGroups: Object.assign({}, config.optimization.splitChunks.cacheGroups, {
           app: {
             name: 'app',
