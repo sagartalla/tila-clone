@@ -1,6 +1,7 @@
 import _ from 'lodash';
 
 const getProduct = (store, variantId) => {
+  debugger;
   const {
     product_details, variant_preferred_listings, tree,
   } = store.productReducer.data[0];
@@ -87,13 +88,13 @@ const getProduct = (store, variantId) => {
     availabilityError,
     stockError,
     offerPricing: priceInfo ? {
-      strickedPrice: priceInfo.pricing.mrp.display_value,
-      showPrise: priceInfo.pricing.offer_price.display_value,
-      sellingPrice: priceInfo.pricing.price.display_value,
-      discount: priceInfo.pricing.discount_per_mrp.display_value,
+      strickedPrice: priceInfo.pricing.mrp,
+      showPrise: priceInfo.pricing.offer_price,
+      sellingPrice: priceInfo.pricing.price,
+      discount: priceInfo.pricing.discount_per_mrp,
       offerMesseges: priceInfo.pricing.actions ? priceInfo.pricing.actions.map((a) => a.description) : [],
       offerDiscounts: priceInfo.pricing.actions ? priceInfo.pricing.actions : [],
-      totalDiscountMRP: priceInfo.pricing.total_discount_mrp.display_value,
+      totalDiscountMRP: priceInfo.pricing.total_discount_mrp,
       currency: priceInfo.mrp_currency
     } : 'No Listing'
   };
