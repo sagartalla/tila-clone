@@ -39,6 +39,7 @@ const getOrdersData = (store) => {
           promisedDeliveryDate: i.promised_delivery_date,
           variantId: i.variant_id,
           orderIds: i.order_item_ids,
+          price: i.price,
           isCancelable: i.cancelable,
           isReturnable: i.returnable,
           isExchangable: i.exchangeable,
