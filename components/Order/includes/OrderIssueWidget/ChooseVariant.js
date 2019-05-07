@@ -116,7 +116,6 @@ class ChooseVariant extends Component {
         </div>
       </div>
     );
-    return null;
   }
 }
 

@@ -47,7 +47,7 @@ class UserVault extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.transactions) {
+    if(nextProps.transactions.length>0) {
       this.setState({
         transactions: nextProps.transactions
       })

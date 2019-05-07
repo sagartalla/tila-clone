@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { actionCreators, selectors } from '../../../../store/cam/userVault';
 import { Col, Row } from 'react-bootstrap';
 import { languageDefinations } from '../../../../utils/lang/';
-
+import moment from 'moment';
 import lang from '../../../../utils/language';
 
 import styles_en from '../uservault_en.styl';
@@ -15,82 +15,71 @@ const styles = lang === 'en' ? styles_en : styles_ar;
 const { VAULT_PAGE } = languageDefinations();
 
 const TilaVoucher = (props) => {
-    const {transactions} = props;
+    const { transactions } = props;
     return (
         <div>
-            <div className={`${styles['broad']}`}>
-                <span>
-                    <strong>
-                        {VAULT_PAGE.VOUCHER_HISTORY}
-                    </strong>
-                </span>
-                <div className={styles['gift-voucher']}>
-                    <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']}`}>
-                        ADD TILA GIFT VOUCHER
-                    </button>
+            {transactions.length > 0 ?
+            <div>
+                <div className={`${styles['broad']}`}>
+                    <span>
+                        <strong>
+                            {VAULT_PAGE.VOUCHER_HISTORY}
+                        </strong>
+                    </span>
+                    {/* <div className={styles['gift-voucher']}>
+                        <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']}`}>
+                            ADD TILA GIFT VOUCHER
+                        </button>
+                    </div> */}
                 </div>
-            </div>
-            <Row className={`${styles['titleRow']}`} >
-                <Col md={2}>
-                    Date
-                </Col>
-                <Col md={4}>
-                    Description
-                </Col>
-                <Col md={2}>
-                    Added
-                </Col>
-                <Col md={2}>
-                    Used
-                </Col>
-                <Col md={2}>
-                    Balance
-                </Col>
-            </Row>
-            <div className={styles['bodyRow']}>
-                <Row>
-                    <Col md={2}>
-                        create_date
+                <Row className={`${styles['titleRow']}`} >
+                    <Col md={3}>
+                        Date
                     </Col>
-                    <Col md={4}>
-                        huha
+                    <Col md={3}>
+                        Description
                     </Col>
                     <Col md={2}>
-                        huha
+                        Added
                     </Col>
+                    <Col md={2} />
                     <Col md={2}>
-                        huha
-                    </Col>
-                    <Col md={2}>
-                        balance
+                        Balance
                     </Col>
                 </Row>
+                {transactions.map((transaction) => {
+                    const { created_date, transaction_description, transaction_type, amount, balance } = transaction;
+                    const date_arr = created_date.split('.')[0];
+                    const date = moment(date_arr).format('MMM D, YYYY')
+                    const time = moment(date_arr).format('hh:mm A')
+                    return (
+                        <div className={styles['bodyRow']}>
+                            <Row>
+                                <Col md={3}>
+                                    {`${date}, ${time}`}
+                                </Col>
+                                <Col md={3}>
+                                    {transaction_description}
+                                </Col>
+                                <Col md={2}>
+                                    {transaction_type === 'CREDIT' ? amount : ''}
+                                </Col>
+                                <Col md={2}>
+                                    {transaction_type === 'DEBIT' ? amount : ''}
+                                </Col>
+                                <Col md={2}>
+                                    {balance}
+                                </Col>
+                            </Row>
+                        </div>
+                    );
+                }) }
+            </div> 
+            : 
+            <div className={`${styles['vault-card-body']} ${styles['p-20-40']}`}>
+                <h4 className={`${styles['pb-5']} ${styles['fontW300']} ${styles['lgt-blue']}`}>No voucher history</h4>
             </div>
-            {transactions.length>0 ? transactions.map((transaction) => {
-                const { transaction_description, transaction_type, amount} = transaction; //have to destructure create_date and balance, once api response is integrated with it.
-                console.log(transaction);
-                return (
-                    <div className={styles['bodyRow']}>
-                        <Row>
-                            <Col md={2}>
-                                create_date
-                            </Col>
-                            <Col md={4}>
-                                {transaction_description}
-                            </Col>
-                            <Col md={2}>
-                                {transaction_type==='CREDIT' ? amount : ''}
-                            </Col>
-                            <Col md={2}>
-                                {transaction_type==='DEBIT' ? amount : ''}
-                            </Col>
-                            <Col md={2}>
-                                balance
-                            </Col>
-                        </Row>
-                    </div>
-                )
-            }) : null}
+            }
         </div>
     )
 };
