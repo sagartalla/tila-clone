@@ -66,7 +66,6 @@ class Display extends Component {
   }
 
   render() {
-    debugger;
     const {
       imgs, extraOffers, breadcrums, isWishlisted,
     } = this.props;
