@@ -111,6 +111,7 @@ class Wishlist extends Component {
                 showCartPageBtmPopup ?
                   <CartBottomPopup
                     data={results}
+                    notifyMe={this.notify}
                     addToCart={this.addToCart}
                     showCartPageBtmPopup={this.showCartPageBtmPopup}
                   />

@@ -15,6 +15,15 @@
     box-shadow 0 0 60px #aaa
     width 100%
 
+    .cart-wishlist-title
+      overflow hidden
+      text-overflow ellipsis
+      display -webkit-box
+      line-height 16px
+      max-height 32px
+      -webkit-line-clamp 2
+
+
     .cart-wishlist-popup-title
       position relative
       .title-label
@@ -30,6 +39,9 @@
       border 1px solid light-gray-color
       width 150px !important
       margin-right 20px
+      min-height 285px
+      &:focus
+        outline none
 
       .wish-pop-img
         height 150px

@@ -43,7 +43,7 @@ const popover = ({strickedPrice: mrp, sellingPrice:sp, offerDiscounts, showPrise
                     <div className={styles['fs-12']}>{od.description}</div>
                   </div>
                   <div className={styles['t-cell']}>
-                    <span className={styles['fs-12']}>{`${od.discount} ${currency}`}</span>
+                    <span className={styles['fs-12']}>{`${od.discount.display_value} ${od.discount.currency_code || currency}`}</span>
                   </div>
                 </div>
               );
