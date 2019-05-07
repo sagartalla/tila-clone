@@ -4,7 +4,6 @@ import { Modal, Tabs, Tab } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Cookie from 'universal-cookie';
-import CopyText from 'react-copy-text';
 import { languageDefinations } from '../../../utils/lang/';
 import { actionCreators } from '../../../store/cart';
 import Pagination from '../../common/Pagination';
@@ -26,12 +25,12 @@ class ActiveCoupons extends Component {
     super(props);
     this.state = {
       showPopup: false,
-      currentPage: 0,
       documentTerms: '',
       documentHowToUse: '',
       couponCode: '',
       couponDescription: '',
       copiedCode: '',
+      currentPage: 0,
     };
     this.onPageChanged = this.onPageChanged.bind(this);
   }
@@ -64,6 +63,12 @@ class ActiveCoupons extends Component {
   }
   copyCouponCode = (e) => {
     const couponCode = e.target.getAttribute('data-code');
+    const code = document.createElement('textarea');
+    code.innerText = couponCode;
+    document.body.appendChild(code);
+    code.select();
+    document.execCommand('copy');
+    code.remove();
     this.setState({
       copiedCode: couponCode,
     });
@@ -85,7 +90,6 @@ class ActiveCoupons extends Component {
             loading={loadingState}
           />
         </div>
-        <CopyText text={copiedCode} />
         <div>
           <Modal
             show={showPopup}

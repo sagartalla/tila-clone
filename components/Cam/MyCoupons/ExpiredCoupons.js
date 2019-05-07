@@ -45,7 +45,7 @@ class ExpiredCoupons extends Component {
           />
         </div>
         <Pagination
-          totalSize={couponDataList && (couponDataList.total_pages > 1 ? couponDataList && couponDataList.total_pages - 1 : 0)}
+          totalSize={couponDataList && (couponDataList.total_pages > 1 ? couponDataList.total_pages - 1 : 0)}
           pageNeighbours={0}
           onPageChanged={this.onPageChanged}
           currentPage={currentPage}

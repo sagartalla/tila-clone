@@ -15,7 +15,6 @@ const { COUPON_OFFERS } = languageDefinations();
 /* eslint-disable */
 
 const coupons = props => (
-    console.log('props.isLoading', props.isLoading),
     props.couponData && props.couponData.length > 0 ?
     <>
         {props.couponData && props.couponData.length > 0 && props.couponData.map(data =>
