@@ -10,12 +10,12 @@ import { actionCreators as cartActioncreators } from '../../../store/cart';
 
 import CartStepper from '../../Cart/includes/CartStepper';
 
-const { COUPON_OFFERS, CART_PAGE } = languageDefinations();
-
 import lang from '../../../utils/language';
 
 import styles_en from './sideBar_en.styl';
 import styles_ar from './sideBar_ar.styl';
+
+const { COUPON_OFFERS, CART_PAGE } = languageDefinations();
 
 const styles = lang === 'en' ? styles_en : styles_ar;
 
@@ -45,13 +45,13 @@ class CartAndPaymentSideBar extends Component {
     const {
       items, total_price, total_offer_price, total_gift_charges,
       total_discount, total_shipping, tax, item_cnt, currency,
-    } = this.props.data;
+    } = data;
     return (
       <div className={`${styles['right-bar']}`}>
         <div className={`${styles['coupon-code-main']}`}>
           <h4 className={`${styles['fs-12']} ${styles.fontW600} ${styles['m-0']} ${styles['p-0']} ${styles.flex} ${styles['justify-center']} ${styles['white-color']}`}>
             {/*<SVGComponent clsName={`${styles['buy-coupon-code']}`} src="icons/common-icon/buy-coupon" />
-          <span className={styles['pl-5']}>{COUPON_OFFERS.BUY_AND_EARN}</span>*/}
+          <span className={styles['pl-5']}>{COUPON_OFFERS.BUY_AND_EARN}</span> */}
           </h4>
           {
           hideCouponCode ? null : data.coupon_code ?
@@ -69,8 +69,8 @@ class CartAndPaymentSideBar extends Component {
             <span className={`${styles['flex-center']} ${styles['justify-center']} ${styles['pt-5']} ${styles['pb-5']} ${styles['pr-10']} ${styles['pl-10']} ${styles.flex} ${styles['m-20']} ${styles['apply-coupon']} ${styles.pointer}`} onClick={this.props.openSlider}>
               <SVGComponent clsName={`${styles['coupon-code']}`} src="icons/common-icon/coupon-code" />
               <div className={styles.noCoupon}>
-              <span className={`${styles['text-uppercase']} ${styles['pl-5']}`}>
-              <div className={styles['fs-12']}>{COUPON_OFFERS.APPLY_COUPON}</div>
+                <span className={`${styles['text-uppercase']} ${styles['pl-5']}`}>
+                <div className={styles['fs-12']}>{COUPON_OFFERS.APPLY_COUPON}</div>
               </span>
               </div>
             </span>
@@ -111,8 +111,12 @@ class CartAndPaymentSideBar extends Component {
 
         <div className={styles['p-20']}>
           <ul className={`${styles['m-0']} ${styles['p-0']} ${styles['fs-12']}`}>
-            <li><h5 className={`${styles['mb-15']} ${styles['mt-5']} ${styles['fs-16']} ${styles.fontW600} ${styles['light-gry-clr']}`}>{CART_PAGE.ORDER_SUMMARY}</h5></li>
-            <li><span>{CART_PAGE.PRICE} ({`${item_cnt} ${CART_PAGE.ITEMS}`})</span><span> {`${total_offer_price} ${currency}`}</span></li>
+            <li>
+              <h5 className={`${styles['mb-15']} ${styles['mt-5']} ${styles['fs-16']} ${styles.fontW600} ${styles['light-gry-clr']}`}>
+                {CART_PAGE.ORDER_SUMMARY}
+              </h5>
+            </li>
+            <li><span>{CART_PAGE.PRICE} ({`${item_cnt} ${CART_PAGE.ITEMS}`})</span><span> {`${total_offer_price.display_value} ${total_offer_price.currency_code || currency}`}</span></li>
             {
             showStepper ?
               <li>
@@ -126,18 +130,30 @@ class CartAndPaymentSideBar extends Component {
                 </span>
               </li> : null
           }
-            <li><span>{CART_PAGE.DELIVERY_CHARGES} </span><span>{total_shipping} {currency}</span></li>
-            <li><span>{CART_PAGE.GIFT_CHARGES} </span><span>{total_gift_charges} {currency}</span></li>
+            <li>
+              <span>{CART_PAGE.DELIVERY_CHARGES}</span>
+              <span>{total_shipping.display_value || 0} {total_shipping.currency_code || currency}</span>
+            </li>
+            {total_gift_charges.display_value &&
+            <li>
+              <span>{CART_PAGE.GIFT_CHARGES}</span>
+              <span>{total_gift_charges.display_value} {total_gift_charges.currency_code || currency}</span>
+            </li>}
             {
-            tax !== 0 ? <li><span>{CART_PAGE.TAXES}</span> <span>{currency}</span></li> : null
-          }
-            <li className={`${styles['mt-20']} ${styles['fs-16']} ${styles['light-gry-clr']}`}><b>{CART_PAGE.TOTAL_AMOUNT}</b>
-            <span className={`${styles.flex} ${styles['flex-colum']} ${styles['t-rt']}`}><span className={styles['fontW600']}>{`${total_price} ${currency}`}</span>
-              {
-                total_discount > 0 ?
-                  <span className={`${styles['fs-12']} ${styles['thick-red']} ${styles['t-rt']}`}>{CART_PAGE.YOU_SAVED} {total_discount} {currency}</span>
-                : null
-              }
+            tax !== 0 ?
+              <li>
+                <span>{CART_PAGE.TAXES}</span>
+                <span>{currency}</span>
+              </li> : null
+            }
+            <li className={`${styles['mt-20']} ${styles['fs-16']} ${styles['light-gry-clr']}`}>
+              <b>{CART_PAGE.TOTAL_AMOUNT}</b>
+              <span className={`${styles.flex} ${styles['flex-colum']} ${styles['t-rt']}`}>
+                <span className={styles.fontW600}>{`${total_price.display_value} ${total_price.currency_code || currency}`}</span>
+                {total_discount.money_value > 0 ?
+                  <span className={`${styles['fs-12']} ${styles['thick-red']} ${styles['t-rt']}`}>{CART_PAGE.YOU_SAVED} {total_discount.display_value} {total_discount.currency_code || currency}</span>
+                  : null
+                }
               </span>
             </li>
 
