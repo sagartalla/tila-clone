@@ -283,7 +283,14 @@ class EmailModal extends Component {
           </div>
             }
           </React.Fragment>
-          : this.renderPostIncidentCreation()}
+          : <React.Fragment>
+              <div className={styles['modalTitleContainer']}>
+                <h4>Incident Created</h4>
+                <h4 className={styles['pointer']} onClick={this.props.closeModal}>X</h4>
+              </div>
+              {this.renderPostIncidentCreation()}
+              </React.Fragment>
+            }
 
       </div>
     )
