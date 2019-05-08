@@ -206,12 +206,12 @@ class ActionBar extends Component {
                       <span className={styles['pl-20']}>{HEADER_PAGE.MY_ORDERS}</span>
                     </a>
                   </li>
-                  <li className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']}`}>
+                  {/* <li className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']}`}>
                   <a href={`/${country}/${language}/cam/notifications`} className={styles['flex-center']}>
                     <SVGComponent clsName={`${styles['profile-icon']}`} src="icons/notifications" />
                     <span className={styles['pl-20']}>{HEADER_PAGE.NOTIFICATIONS}</span>
                     </a>
-                  </li>
+                  </li> */}
                   <li className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']}`}>
                     <a href={`/${country}/${language}/help/faq`} target="_blank" className={styles['flex-center']}><span className={styles['support']}><span className={`${styles['flex-center']} ${styles['justify-center']}`}>?</span></span>
                       <span className={styles['pl-20']}>{HEADER_PAGE.HELP_SUPPORT}</span>
