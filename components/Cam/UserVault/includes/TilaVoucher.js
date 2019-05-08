@@ -1,12 +1,9 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { actionCreators, selectors } from '../../../../store/cam/userVault';
 import { Col, Row } from 'react-bootstrap';
 import { languageDefinations } from '../../../../utils/lang/';
 import moment from 'moment';
 import lang from '../../../../utils/language';
-
+import SVGComponent from '../../../common/SVGComponet';
 import styles_en from '../uservault_en.styl';
 import styles_ar from '../uservault_ar.styl';
 
@@ -76,8 +73,12 @@ const TilaVoucher = (props) => {
                 }) }
             </div> 
             : 
-            <div className={`${styles['vault-card-body']} ${styles['p-20-40']}`}>
-                <h4 className={`${styles['pb-5']} ${styles['fontW300']} ${styles['lgt-blue']}`}>No voucher history</h4>
+            // <div className={`${styles['vault-card-body']} ${styles['p-20-40']}`}>
+            //     <h4 className={`${styles['pb-5']} ${styles['fontW300']} ${styles['lgt-blue']}`}>No voucher history</h4>
+            // </div>
+            <div className={styles['no-result']}>
+                <SVGComponent clsName={`${styles['wallet-img']}`} src="errors-img/group-2" />
+                <h3>No voucher history</h3>
             </div>
             }
         </div>

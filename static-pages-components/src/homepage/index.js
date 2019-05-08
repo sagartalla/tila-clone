@@ -222,6 +222,7 @@ function SamplePrevArrow(props) {
   return (
     <div
       className="leftArrow"
+      onMouseOver={onClick}
       onClick={onClick}
     >
       <img src="/static/img/landing-home/c-left.svg" alt="left" />
@@ -234,6 +235,7 @@ function SampleNextArrow(props) {
   return (
     <div
       className="rightArrow"
+      onMouseOver={onClick}
       onClick={onClick}
     >
       <img src="/static/img/landing-home/c-right.svg" alt="right" />

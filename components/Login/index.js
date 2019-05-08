@@ -348,7 +348,7 @@ class Login extends Component {
               <div className={`${styles['login-social-icon']} ${styles['pl-15']}`}>
                 <a className={`${styles['flex']} ${styles['pt-10']} ${styles['m-fs-14']} ${styles['m-justy-center']}`}>
                   <span onClick={this.handleClick}>
-                    {LOGIN_PAGE.FORGOT_PASSWORD}
+                    {this.state.mode !== 'register' && LOGIN_PAGE.FORGOT_PASSWORD}
                   </span>
                 </a>
                 <span className={`${styles['thick-gry-clr']} ${styles['pt-5']} ${styles['pb-5']} ${styles['flex']} ${styles['m-justy-center']} ${styles['m-fs-14']}`}>{LOGIN_PAGE.SIGN_UP_WITH}</span>
