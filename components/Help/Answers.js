@@ -2,10 +2,16 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { actionCreators as helpActions } from '../../store/helpsupport';
-import { mergeCss } from '../../utils/cssUtil';
 import Orders from './Orders';
 
-const styles = mergeCss('components/Help/help');
+import lang from '../../utils/language';
+
+import main_en from '../../layout/main/main_en.styl';
+import main_ar from '../../layout/main/main_ar.styl';
+import styles_en from './help_en.styl';
+import styles_ar from './help_ar.styl';
+
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const getIds = (selectedId, childIds) => {
   let id = [selectedId];
@@ -41,7 +47,7 @@ class Answers extends Component {
     const { pathname } = window.location;
     if(fromParent){
       return pathname.replace(this.props.query, `answers/${categoryId}/${childId ? childId : ''}`);
-    } 
+    }
     return pathname.replace(this.props.query, `answers/${parentId}/${categoryId}`);
   }
   renderCategories = (fromParent, parentId) => (categoryId, index) => {
@@ -51,10 +57,10 @@ class Answers extends Component {
     const isSelected = categoryId === this.state.selectedCategory;
     if ((fromParent && !categoryObj.hasParent) || (!fromParent)) {
       return(
-        <div key={categoryObj.id} 
+        <div key={categoryObj.id}
           className={`${index !==0 && styles['bT']} ${isOpened && styles['openBGColor']}`}
         >
-          <div 
+          <div
             className={`${styles['categoryValue']} ${isSelected && styles['selectedBG']} ${fromParent && styles['fwBolder']}`}
           >
            {childLength ?
@@ -62,15 +68,15 @@ class Answers extends Component {
                 <div>{categoryObj.name}</div>
                 <div style={{transform: this.state.openedCategory === categoryObj.id ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'all 0.25s'}}>v</div>
               </div>
-              : <a 
-                  href={this.getUrl(fromParent, categoryId, parentId, childLength ? categoryObj.child[0] : null)} 
+              : <a
+                  href={this.getUrl(fromParent, categoryId, parentId, childLength ? categoryObj.child[0] : null)}
                   className={`${isSelected ? `${styles['whiteColor']} ${styles['fwBolder']}` : styles['blackColor']}`}
                 >
                   {categoryObj.name}
                 </a>
             }
           </div>
-          {childLength ? 
+          {childLength ?
           <div className={styles['categoryCont']}
             style={{ height: this.state.openedCategory === categoryObj.id ?  (childLength * 55) : 0}}>
             {categoryObj.child.map(this.renderCategories(false, categoryId))}
@@ -85,13 +91,13 @@ class Answers extends Component {
     const isOpened = id === this.state.openedAnswer;
     return (
       <div key={id} className={`${styles['ansContainer']} ${isOpened && styles['openBGColor']}`}>
-        <div 
-          onClick={this.openAnswer(id)} 
+        <div
+          onClick={this.openAnswer(id)}
           dangerouslySetInnerHTML={{__html: question}}
           className={isOpened ? styles['questionBox-open'] : styles['questionBox-close']}
         >
         </div>
-        <div 
+        <div
           dangerouslySetInnerHTML={{__html: ans}}
           className={`${styles['answers']} ${isOpened && styles['openedAnswers']}`}
         >
@@ -104,7 +110,7 @@ class Answers extends Component {
     const { pathname } = window.location;
     const ordersUrl = pathname.replace(this.props.query, `answers/orders`)
     return (
-      <a 
+      <a
         href={ordersUrl}
         className={`${styles['categoryValue']} ${styles['fwBolder']} ${isSelected ? `${styles['selectedBG']} ${styles['whiteColor']}` : styles['blackColor']}`}
       >
@@ -125,9 +131,9 @@ class Answers extends Component {
             {Object.keys(this.props.categoriesObj).sort(sort).map(this.renderCategories(true, null))}
           </div>
           <div className={styles['answersContainer']}>
-          { this.state.selectedCategory !== 'orders' 
-            ? answerKeys.length > 0 ? answerKeys.map(this.renderAnswers) : <div> No Questions Available </div> 
-            : 
+          { this.state.selectedCategory !== 'orders'
+            ? answerKeys.length > 0 ? answerKeys.map(this.renderAnswers) : <div> No Questions Available </div>
+            :
               <div className={styles['ht-100P']}>
                 <Orders query={this.props.query} isLoggedIn={this.props.isLoggedIn} renderContactCard={this.props.renderContactCard} handleContactClick={this.props.handleContactClick}/>
               </div>
@@ -139,6 +145,6 @@ class Answers extends Component {
   }
 }
 
-export default connect((state) => ({ 
+export default connect((state) => ({
   answerData: state.helpSupportReducer.answerData,
 }), {...helpActions})(Answers)

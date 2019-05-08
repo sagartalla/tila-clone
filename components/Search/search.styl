@@ -1,11 +1,9 @@
-@import '/static/vendor/css/react-input-range.css';
-@import '/static/vendor/css/react-input-range-override.css';
 @import '../../layout/main/executables.styl';
 
 .filter-panel
-  width 17%
-  border 1px solid light-brdr
-  box-shadow 0 2px 7px 0 rgba(0,0,0,0.03)
+  width: 16%;
+  border: 1px solid #e5e5e5;
+  box-shadow: 0 2px 7px 0 rgba(0,0,0,0.03);
   li
     list-style none
 
@@ -231,15 +229,13 @@
       justify-content flex-end
       align-items center
       .sort-part-inn
-        padding-left 15px
         display flex
         border-left 1px solid light-brdr
-        padding-left 15px
         .sort-arrow
           width 12px
           height 12px
-        
-        .select-mn 
+
+        .select-mn
           position relative
           .select-text
             border 0
@@ -248,7 +244,7 @@
             // &:after
             //   content ''
             //   position absolute
-         
+
 
         .select-mn .select-text:focus
           outline none
@@ -465,20 +461,22 @@
         max-height 100%
         max-width 100%
         object-fit scale-down
+        display: block;
+        margin: 0 auto;
 
 .category-list
-
-  .category-list-title
-    border-bottom 0.5px solid light-brdr
-    a
-      display flex
-      justify-content space-between
-      width 100%
-      font-size 13px
-      align-items center
-      .expand-icon
-        width 16px
-        height 16px
+  .category-list-head
+    .category-list-title
+      border-bottom 0.5px solid light-brdr
+      a
+        display flex
+        justify-content space-between
+        width 100%
+        font-size 13px
+        align-items center
+        .expand-icon
+          width 16px
+          height 16px
 
 .category-list-title span
   font-size 13px
@@ -519,7 +517,7 @@
 
 .margin
  margin-bottom -3px
- 
+
 @media screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation : portrait){
   .filter-panel {
     width 24%

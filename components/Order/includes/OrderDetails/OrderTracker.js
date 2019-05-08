@@ -7,11 +7,19 @@ import moment from 'moment';
 import { actionCreators, selectors } from '../../../../store/order';
 import { languageDefinations } from '../../../../utils/lang';
 import Slider from '../../../common/slider';
-import { mergeCss } from '../../../../utils/cssUtil';
+
 import constants from '../../../../constants';
 import orderStatusAttributes from './orderAttributes';
 
-const styles = mergeCss('components/Order/order');
+
+import lang from '../../../../utils/language';
+
+import main_en from '../../../../layout/main/main_en.styl';
+import main_ar from '../../../../layout/main/main_ar.styl';
+import styles_en from '../../order_en.styl';
+import styles_ar from '../../order_en.styl';
+
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const { CART_PAGE } = languageDefinations();
 

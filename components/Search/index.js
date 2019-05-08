@@ -23,10 +23,12 @@ const country = cookies.get('country') || 'SAU';
 
 import lang from '../../utils/language';
 
+import main_en from '../../layout/main/main_en.styl';
+import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './search_en.styl';
 import styles_ar from './search_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const onClickMenuHandle = (e) => {
   const target = e.currentTarget;
@@ -52,7 +54,7 @@ class Search extends Component {
       <div>
         <HeaderBar />
         <Grid className={styles['pt-20']}>
-          <Col md={2} onClick={onClickMenuHandle} className={`${styles['filter-panel']} ${styles['mr-10']} ${styles['float-l']} ${styles['border-radius4']} ${styles['bg-white']} ${styles['p-0']}`}>
+          <Col md={2} onClick={onClickMenuHandle} className={`${styles['filter-panel']} ${styles['float-l']} ${styles['border-radius4']} ${styles['bg-white']} ${styles['p-0']}`}>
             <NoSSR>
               <CategoriesAndFacets />
             </NoSSR>

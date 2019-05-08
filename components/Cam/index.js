@@ -19,11 +19,12 @@ import AuthWrapper from '../common/AuthWrapper';
 
 import lang from '../../utils/language';
 
+import main_en from '../../layout/main/main_en.styl';
+import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './cam_en.styl';
 import styles_ar from './cam_ar.styl';
 
-
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 class Cam extends React.Component {
   constructor(props){

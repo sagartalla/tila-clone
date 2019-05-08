@@ -15,10 +15,13 @@ import { languageDefinations } from '../../../utils/lang';
 
 import lang from '../../../utils/language';
 
+import main_en from '../../../layout/main/main_en.styl';
+import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from '../search_en.styl';
 import styles_ar from '../search_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+
 
 const cookies = new Cookie();
 
@@ -64,7 +67,7 @@ class SearchDetailsBar extends Component {
                 <div className={`${styles['flex-center']} ${styles['search-val-part']}`}>
                   <h4 className={`${styles['meta-info']} ${styles['mt-0']} ${styles['mb-0']} ${styles['pr-10']} ${styles['fs-14']} ${styles['fontW300']}`}>
                     {
-                      spellCheckResp ? 
+                      spellCheckResp ?
                       <a href="javascript: void(0)" onClick={this.querySearch} className={`${styles['black-color']} ${styles['fontW600']}`} data-querysearch={spellCheckResp[query]}>
                         <b className={styles['fs-14']}>{`${spellCheckResp[query]}`}</b>
                         <span className={`${styles['fs-10']} ${styles['textColor']}`}>({ SEARCH_PAGE.AUTO_CORRECTED }):</span>

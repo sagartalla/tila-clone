@@ -12,12 +12,14 @@ import CartStepper from '../../Cart/includes/CartStepper';
 
 import lang from '../../../utils/language';
 
+import main_en from '../../../layout/main/main_en.styl';
+import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from './sideBar_en.styl';
 import styles_ar from './sideBar_ar.styl';
 
-const { COUPON_OFFERS, CART_PAGE } = languageDefinations();
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const { COUPON_OFFERS, CART_PAGE } = languageDefinations();
 
 
 class CartAndPaymentSideBar extends Component {
@@ -68,10 +70,10 @@ class CartAndPaymentSideBar extends Component {
           :
             <span className={`${styles['flex-center']} ${styles['justify-center']} ${styles['pt-5']} ${styles['pb-5']} ${styles['pr-10']} ${styles['pl-10']} ${styles.flex} ${styles['m-20']} ${styles['apply-coupon']} ${styles.pointer}`} onClick={this.props.openSlider}>
               <SVGComponent clsName={`${styles['coupon-code']}`} src="icons/common-icon/coupon-code" />
-              <div className={styles.noCoupon}>
+              <div className={`${styles.noCoupon} ${styles['ml-5']}`}>
                 <span className={`${styles['text-uppercase']} ${styles['pl-5']}`}>
-                <div className={styles['fs-12']}>{COUPON_OFFERS.APPLY_COUPON}</div>
-              </span>
+                  <div className={styles['fs-12']}>{COUPON_OFFERS.APPLY_COUPON}</div>
+                </span>
               </div>
             </span>
         }

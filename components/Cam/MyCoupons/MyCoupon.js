@@ -11,6 +11,8 @@ import ActiveCoupons from './ActiveCoupons';
 import ExpiredCoupons from './ExpiredCoupons';
 import { actionCreators as couponActionCreators } from '../../../store/coupons';
 
+import main_en from  '../../../layout/main/main_en.styl';
+import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from './mycoupon_en.styl';
 import styles_ar from './mycoupon_ar.styl';
 
@@ -18,7 +20,7 @@ const cookies = new Cookie();
 
 const { COUPON_OFFERS } = languageDefinations();
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 class MyCoupons extends React.Component {
   constructor(props) {

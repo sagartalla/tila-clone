@@ -1,8 +1,6 @@
 import React from 'react';
 
-import { mergeCss } from '../../../utils/cssUtil';
-const styles = mergeCss('components/common/ToggleBtn/ToggleBtn');
-
+import styles from './ToggleBtn.styl';
 const ToggleBtn = props => {
   return (
     <div>

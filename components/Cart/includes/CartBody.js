@@ -6,7 +6,7 @@ import Cookie from 'universal-cookie';
 import CartItem from './CartItem';
 import Blocker from '../../common/Blocker';
 import RightBar from '../CartPaymentSideBar';
-import Wishlist from '../../Cam/Wishlist/';
+import Wishlist from '../../Cam/Wishlist';
 import { languageDefinations } from '../../../utils/lang/';
 
 import { Router } from '../../../routes';
@@ -19,10 +19,13 @@ const country = cookies.get('country') || 'SAU';
 
 import lang from '../../../utils/language';
 
+import main_en from '../../../layout/main/main_en.styl';
+import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from '../cart_en.styl';
 import styles_ar from '../cart_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+
 
 const CartBody = ({
   showBlocker,

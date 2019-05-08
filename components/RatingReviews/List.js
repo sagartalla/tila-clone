@@ -10,8 +10,16 @@ import { selectors, actionCreators } from '../../store/ratingReviews';
 import { TABS } from './constants';
 import { languageDefinations } from '../../utils/lang';
 
-import { mergeCss } from '../../utils/cssUtil';
-const styles = mergeCss('components/RatingReviews/ratingReviews');
+import lang from '../../utils/language';
+
+import main_en from '../../layout/main/main_en.styl';
+import main_ar from '../../layout/main/main_ar.styl';
+import styles_en from './ratingReviews_en.styl';
+import styles_ar from './ratingReviews_ar.styl';
+
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+
+
 const { PDP_PAGE } = languageDefinations();
 
 class List extends Component {

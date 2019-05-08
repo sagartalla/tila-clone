@@ -11,6 +11,9 @@ import { actionCreators as couponActionCreators, selectors as couponSelectors } 
 import lang from '../../../utils/language';
 import Coupons from '../../Cart/CartPaymentSideBar/coupons/commonCoupon';
 
+
+import main_en from  '../../../layout/main/main_en.styl';
+import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from '../../Cart/CartPaymentSideBar/coupons/index_en.styl';
 import styles_ar from '../../Cart/CartPaymentSideBar/coupons/index_ar.styl';
 
@@ -18,7 +21,7 @@ import styles_ar from '../../Cart/CartPaymentSideBar/coupons/index_ar.styl';
 const { COUPON_OFFERS } = languageDefinations();
 const cookies = new Cookie();
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 class ActiveCoupons extends Component {
   constructor(props) {

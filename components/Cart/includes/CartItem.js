@@ -12,11 +12,12 @@ import constants from '../../../constants';
 
 import lang from '../../../utils/language';
 
+import main_en from '../../../layout/main/main_en.styl';
+import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from '../cart_en.styl';
 import styles_ar from '../cart_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
-
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const { CART_PAGE, ORDER_PAGE } = languageDefinations();
 
@@ -271,7 +272,7 @@ class CartItem extends React.Component {
                 </Col>
                 <Col md={3} sm={3} className={`${styles['pr-5']} ${styles['landscape-cart-price']}`}>
                   {Math.floor(discount) > 5 &&
-                    <p className={`${styles['mb-0']} ${styles['fs-12']} ${styles['t-rt']}`}>
+                    <p className={`${styles['mb-0']} ${styles['fs-12']} ${styles['flex']} ${styles['justify-end']}`}>
                       <span className={styles['success-green']}>{`${Math.floor(discount)}% OFF`}</span>
                       <span className={`${styles['cross-strike']} ${styles.relative} ${styles['ml-5']}`}>
                         <span className={styles['label-light-grey']}>

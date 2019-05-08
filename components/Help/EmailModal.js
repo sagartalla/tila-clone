@@ -6,7 +6,16 @@ import { actionCreators as helpActions } from '../../store/helpsupport';
 import { selectors as orderSelectors, actionCreators as orderActions } from '../../store/cam/orders';
 import { selectors as authSelectors } from '../../store/auth';
 import { countryLanguageHelpCode as clCode } from './helpConstants';
-import { mergeCss } from '../../utils/cssUtil';
+
+import lang from '../../utils/language';
+
+import main_en from '../../layout/main/main_en.styl';
+import main_ar from '../../layout/main/main_ar.styl';
+import styles_en from './help_en.styl';
+import styles_ar from './help_ar.styl';
+
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+
 import constants from '../../constants';
 
 
@@ -17,7 +26,6 @@ const country = clCode[cookies.get('country') || 'SAU'];
 const userCredentials = cookies.get('userCreds');
 const sort = (a,b) => a - b;
 
-const styles = mergeCss('components/Help/help');
 
 class EmailModal extends Component {
 

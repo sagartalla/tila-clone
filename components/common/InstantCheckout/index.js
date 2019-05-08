@@ -23,9 +23,17 @@ import EditPhone from '../../Cam/PersonelDetails/UserData/EditPhone';
 import AddrCard from './includes/AddrCard';
 import VaultCard from './includes/VaultCard';
 import CodCard from './includes/CodCard';
-import { mergeCss } from '../../../utils/cssUtil';
 
-const styles = mergeCss('components/common/InstantCheckout/instant');
+import lang from '../../../utils/language';
+
+import main_en from '../../../layout/main/main_en.styl';
+import main_ar from '../../../layout/main/main_ar.styl';
+import styles_en from './instant_en.styl';
+import styles_ar from './instant_ar.styl';
+
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+
+
 const { INSTANT_CHECKOUT, PAYMENT_PAGE, CONTACT_INFO_MODAL } = languageDefinations();
 
 const cookies = new Cookies();
@@ -274,7 +282,7 @@ class InstantCheckout extends Component {
                     <input id="checkout-label" type="checkbox" />
                     <label for="checkout-label" className={`${styles['thick-gry-clr']} ${styles['fontW300']}`}> Don't call before delivery </label>
                     </div>
-                    </div> 
+                    </div>
                     */
                   }
                 </div>
@@ -367,7 +375,7 @@ const mapStateToProps = (store) => ({
   getInstantCheckoutdata: selectors.getInstantCheckoutResData(store),
   paymentModesData: paymentSelector.getPaymentModesData(store),
   profileInfo: camSelectors.getUserInfo(store),
-  showLoading: selectors.showLoading(store), 
+  showLoading: selectors.showLoading(store),
 });
 
 const mapDispatchToProps = (dispatch) =>

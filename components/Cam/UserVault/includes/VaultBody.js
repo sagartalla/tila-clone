@@ -6,10 +6,13 @@ import SVGComponent from '../../../common/SVGComponet';
 import { languageDefinations } from '../../../../utils/lang/';
 import lang from '../../../../utils/language';
 
+import main_en from '../../../../layout/main/main_en.styl';
+import main_ar from '../../../../layout/main/main_ar.styl';
 import styles_en from '../uservault_en.styl';
 import styles_ar from '../uservault_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+
 
 class VaultBody extends Component {
 
@@ -88,7 +91,7 @@ class VaultBody extends Component {
             })
           }
 
-          {/* 
+          {/*
             **
             DON'T REMOVE THIS CODE - Add new card button. Enable this coded when we do PCD-IS
             **
@@ -107,7 +110,7 @@ class VaultBody extends Component {
                 </p>
               </div>
             </div>
-          </Col> 
+          </Col>
           */}
         </Row>
       </div>

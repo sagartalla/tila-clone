@@ -13,6 +13,9 @@ if (process.env.npm_package_config_ENV) {
   process.env.ENV = process.env.npm_package_config_ENV;
 }
 const version = process.env.version || git.short();
+
+const files = [];
+
 module.exports = withSourceMaps(withStylus(withCSS({
   cssModules: true,
   cssLoaderOptions: {
@@ -34,54 +37,31 @@ module.exports = withSourceMaps(withStylus(withCSS({
     config.node = {
       fs: 'empty',
     };
-    // config.plugins = [
-    //   new BundleAnalyzerPlugin()
-    // ]
-    // if(!dev) {
-    //   config.devtool = 'source-map'
-    // }
-    // if (dev) {
-    //   config.module.rules.push({
-    //     test: /\.js$/,
-    //     exclude: /node_modules/,
-    //     loader: 'eslint-loader',
-    //     options: {
-    //       formatter: eslintFormatter,
-    //       emitWarning: dev
-    //     }
-    //   });
-    // }
-    // config.resolve = Object.assign(config.resolve, {
-    //   extensions: ['.js', '.json', '.svg', '.css'],
-    //   modules: [
-    //     path.resolve('./'),
-    //     path.resolve('./node_modules')
-    //   ]
-    // });
-    // config.optimization = Object.assign({}, config.optimization, {
-    //   splitChunks: Object.assign({}, config.optimization.splitChunks, {
-    //     cacheGroups: Object.assign({}, config.optimization.splitChunks.cacheGroups, {
-    //       englishStyle: {
-    //         name: 'styles_en',
-    //         test: (m, c) => {
-    //           return m.constructor.name === 'CssModule' && m._identifier.indexOf('_ar') === -1;
-    //         },
-    //         chunks: 'all',
-    //         priority: 2,
-    //         // enforce: true,
-    //       },
-    //       arabicStyles: {
-    //         name: 'styles_ar',
-    //         test: (m, c) => {
-    //           return m.constructor.name === 'CssModule' && m._identifier.indexOf('_ar') !== -1;
-    //         },
-    //         priority: 1,
-    //         chunks: 'all',
-    //         // enforce: true,
-    //       }
-    //     })
-    //   })
-    // });
+
+    config.optimization = Object.assign({}, config.optimization, {
+      splitChunks: Object.assign({}, config.optimization.splitChunks, {
+        minSize: 1000,
+        cacheGroups: Object.assign({}, config.optimization.splitChunks.cacheGroups, {
+          app: {
+            name: 'app',
+            test: (m, c) => {
+              if(files.indexOf(m._identifier) !== -1) {
+                return false;
+              }
+              files.push(m._identifier);
+              if(m.constructor.name === 'CssModule') {
+                console.log('app', m._identifier);
+              }
+              return m.constructor.name === 'CssModule';
+            },
+            priority: 2,
+            chunks: 'all',
+            enforce: true,
+            reuseExistingChunk: true,
+          },
+        })
+      })
+    });
     config.plugins.push(new webpack.DefinePlugin({
       'process.env.SENTRY_RELEASE': JSON.stringify(buildId),
     }));
