@@ -21,15 +21,15 @@ const coupons = props => (
         (
           <div className={props.showCartCoupon ? `${styles.couponDiv}` : `${styles.couponDiv} ${styles.couponMargin} `}>
             <div className={props.showExpiredCoupons ? '' : `${styles.couponCodeListing} ${styles['left10']} ${styles.width50} `}>
-              <div className={props.showExpiredCoupons ? `${styles['p-5']}` : `${styles['justify-center']} ${styles.flex}`}>
+              <div className={props.showExpiredCoupons ? `${styles['p-10']}` : `${styles['justify-center']} ${styles.flex}`}>
                 <div className={`${styles.ellipsis} ${styles.fontW600}`} title={data.coupon_code}>{data.coupon_code}</div>
               </div>
             </div>
-            <div className={`${styles.wordBreak} ${styles['p-5']}`}>{data.description}</div>
+            <div className={`${styles.wordBreak} ${styles['p-10']}`}>{data.description}</div>
             {props.showExpiredCoupons ?
-            <div className={`${styles['thick-red-clr']} ${styles['p-5']}`}>{COUPON_OFFERS.EXPIRED_ON} &nbsp;{moment(data.ends_on).format('MM/DD/YYYY')}</div>
+            <div className={`${styles['thick-red-clr']} ${styles['p-10']}`}>{COUPON_OFFERS.EXPIRED_ON} &nbsp;{moment(data.ends_on).format('MM/DD/YYYY')}</div>
             :
-            <div className={`${styles['p-5']} ${styles['flex-center']} ${styles['justify-between']} ${styles.flex}`}>
+            <div className={`${styles['p-10']} ${styles['flex-center']} ${styles['justify-between']} ${styles.flex}`}>
               <div className={`${styles['lgt-blue']} ${styles.pointer} ${styles.flex}`} data-terms={data.tc} data-use={data.how_to_use} data-coupon={data.coupon_code} data-desc={data.description} data-title="terms" onClick={props.showPopup}>{COUPON_OFFERS.VIEW_TERMS}
                 <div className={styles.border} />
               </div>
