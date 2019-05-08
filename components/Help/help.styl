@@ -159,13 +159,13 @@
   margin 0px 1px
   width 25%
   height 100%
-  overflow scroll
+  overflow auto
   border-right 0.25px solid #f2f2f2
   border-left 0.25px solid #f2f2f2
 
 .answersContainer
   width 75%
-  overflow scroll
+  overflow auto
   padding 0px 20px
 
 .showDiv
@@ -344,6 +344,10 @@
   background-color #44689A
   color #ffffff
   border-bottom-right-radius 25px
+
+.disabledButton
+  @extend .SendMsgButton
+  background-color #ccc
 
 .SelectIssueButton
    height 30px

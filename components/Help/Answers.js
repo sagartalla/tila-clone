@@ -29,7 +29,7 @@ class Answers extends Component {
   }
   openCategory = (categoryId) => (e) => {
     this.setState({
-      openedCategory: categoryId
+      openedCategory: this.state.openedCategory === categoryId ? '' : categoryId
     })
   }
   openAnswer = (answerId) => (e) => {
@@ -60,7 +60,7 @@ class Answers extends Component {
            {childLength ?
               <div className={`${styles['categoryWithChild']} ${isSelected && styles['whiteColor']}`} onClick={this.openCategory(categoryObj.id)}>
                 <div>{categoryObj.name}</div>
-                <div>v</div>
+                <div style={{transform: this.state.openedCategory === categoryObj.id ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'all 0.25s'}}>v</div>
               </div>
               : <a 
                   href={this.getUrl(fromParent, categoryId, parentId, childLength ? categoryObj.child[0] : null)} 
