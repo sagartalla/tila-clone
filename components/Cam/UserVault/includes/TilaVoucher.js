@@ -12,8 +12,6 @@ import main_ar from '../../../../layout/main/main_ar.styl';
 
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
-const styles = lang === 'en' ? styles_en : styles_ar;
-
 const { VAULT_PAGE } = languageDefinations();
 
 const TilaVoucher = (props) => {
