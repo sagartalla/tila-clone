@@ -98,7 +98,7 @@ class ActiveCoupons extends Component {
           >
             <Modal.Body>
               <div className={`${styles['flex-center']}`}>
-                <div className={`${styles.couponCodeTerms} ${styles.fontW600} ${styles['m-5']}`}>{couponCode}</div>
+                <div className={`${styles.couponCodeListing} ${styles['left30']} ${styles.width35} ${styles.fontW600} ${styles['m-5']}`}>{couponCode}</div>
                 <div className={`${styles['label-gry-clr']}`}>{couponDescription}</div>
               </div>
               <Tabs defaultActiveKey={1}>

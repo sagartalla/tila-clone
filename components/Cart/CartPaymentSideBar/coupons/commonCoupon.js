@@ -20,7 +20,7 @@ const coupons = props => (
         {props.couponData && props.couponData.length > 0 && props.couponData.map(data =>
         (
           <div className={props.showCartCoupon ? `${styles.couponDiv}` : `${styles.couponDiv} ${styles.couponMargin} `}>
-            <div className={props.showExpiredCoupons ? '' : `${styles.couponCodeListing}`}>
+            <div className={props.showExpiredCoupons ? '' : `${styles.couponCodeListing} ${styles['left10']} ${styles.width50} `}>
               <div className={props.showExpiredCoupons ? `${styles['p-5']}` : `${styles['justify-center']} ${styles.flex}`}>
                 <div className={`${styles.ellipsis} ${styles.fontW600}`} title={data.coupon_code}>{data.coupon_code}</div>
               </div>

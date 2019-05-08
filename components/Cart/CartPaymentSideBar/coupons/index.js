@@ -205,7 +205,7 @@ class Coupon extends Component {
             style={{ background: 'none' }}
           >
             <div className={`${styles['flex-center']}`}>
-              <div className={`${styles.couponCodeCartTerms} ${styles.fontW600} ${styles['m-5']}`}>{couponSelected}</div>
+              <div className={`${styles.couponCodeListing} ${styles.left15}  ${styles.width35} ${styles.fontW600} ${styles['m-5']}`}>{couponSelected}</div>
               <div className={`${styles['label-gry-clr']}`}>{couponDescription}</div>
             </div>
             <Tabs defaultActiveKey={1}>
