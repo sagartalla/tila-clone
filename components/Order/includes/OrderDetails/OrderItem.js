@@ -195,7 +195,7 @@ class OrderItem extends Component {
                                 <div className={styles['tool-tip']}>
                                   <ul>
                                     <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.MRP} : </span><span> {mrp.display_value} {product.currency_code}</span></li>
-                                    {product.offers.length > 0 ?
+                                    {product && product.offers && product.offers.length > 0 ?
                                       product.offers.map(offer => <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{offer.coupon_code ? offer.coupon_code : offer.description} : </span><span>{'(-)'} {offer.discount} {product.currency_code}</span></li>)
                                       :
                                       <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.DISCOUNT} :</span><span>{'(-)'} {mrp.display_value - offer_price.display_value} {offer_price.currency_code}</span></li>
