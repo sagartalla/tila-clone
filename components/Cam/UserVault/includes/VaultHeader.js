@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
-
+import { Tabs, Tab } from 'react-bootstrap';
+import TilaVoucher from './TilaVoucher';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators, selectors } from '../../../../store/cam/userVault';
@@ -38,9 +39,17 @@ const VaultHeader = (props) => {
           </div>
         </Col>
         <Col md={12}>
-          <ul className={`${styles['card-items-list']} ${styles['mb-0']} ${styles['pl-30']}`}>
+          {/* <ul className={`${styles['card-items-list']} ${styles['mb-0']} ${styles['pl-30']}`}>
             <li className={`${styles['pointer']} ${styles['p-10']} ${styles['thick-gry-clr']}`}>{VAULT_PAGE.SAVED_CARDS}</li>
-          </ul>
+          </ul> */}
+          <Tabs defaultActiveKey={1} className={`${styles['card-items-list']} ${styles['mb-0']} ${styles['pl-30']}`}>
+            <Tab eventKey={1} title={VAULT_PAGE.SAVED_CARDS} className={`${styles['pointer']} ${styles['p-10']} ${styles['thick-gry-clr']}`}>
+              {props.children}
+            </Tab>
+            <Tab eventKey={2} title={`${VAULT_PAGE.TILA_GIFT} ${VAULT_PAGE.VOUCHER}`} className={`${styles['pointer']} ${styles['p-10']} ${styles['thick-gry-clr']}`}>
+              <TilaVoucher transactions={props.transactions}/>
+            </Tab>
+          </Tabs>
         </Col>
       </Row>
     </div>

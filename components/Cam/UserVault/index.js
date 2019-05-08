@@ -37,6 +37,21 @@ class UserVault extends Component {
     this.toggleAddCardBlock = this.toggleAddCardBlock.bind(this);
     this.setAsDefaultCard = this.setAsDefaultCard.bind(this);
     this.addBtnClickHandler = this.addBtnClickHandler.bind(this);
+    this.state = {
+      transactions: []
+    }
+  }
+
+  componentWillMount() {
+    this.props.getWalletTransactions();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.transactions.length>0) {
+      this.setState({
+        transactions: nextProps.transactions
+      })
+    }
   }
 
   componentDidMount() {
@@ -107,23 +122,24 @@ class UserVault extends Component {
             />
             :
             <div className={`${styles['box']} ${styles['ml-5']}`}>
-              <VaultHeader />
-              <VaultBody
-                data={results}
-                makeDefault={this.makeDefault}
-                deleteCard={this.deleteCard}
-                toggleAddCardBlock={this.toggleAddCardBlock}
-              />
-              {
-                addNewCardBlock ?
-                  <VaultAddNewCard
-                    checked={this.state.default}
-                    inputChange={this.inputChange}
-                    addBtnClickHandler={this.addBtnClickHandler}
-                    setAsDefaultCard={this.setAsDefaultCard}
-                    toggleAddCardBlock={this.toggleAddCardBlock}
-                  /> : null
-              }
+              <VaultHeader transactions={this.state.transactions}>
+                <VaultBody
+                  data={results}
+                  makeDefault={this.makeDefault}
+                  deleteCard={this.deleteCard}
+                  toggleAddCardBlock={this.toggleAddCardBlock}
+                />
+                {
+                  addNewCardBlock ?
+                    <VaultAddNewCard
+                      checked={this.state.default}
+                      inputChange={this.inputChange}
+                      addBtnClickHandler={this.addBtnClickHandler}
+                      setAsDefaultCard={this.setAsDefaultCard}
+                      toggleAddCardBlock={this.toggleAddCardBlock}
+                    /> : null
+                }
+              </VaultHeader>
             </div>
         }
       </div>
@@ -133,6 +149,7 @@ class UserVault extends Component {
 
 const mapStateToProps = (store) => ({
   results: selectors.getCardResults(store),
+  transactions: selectors.getTransactions(store),
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -141,6 +158,7 @@ const mapDispatchToProps = (dispatch) =>
     addCard: actionCreators.addCard,
     deleteCard: actionCreators.deleteCard,
     makeCardDefault: actionCreators.makeCardDefault,
+    getWalletTransactions: actionCreators.getWalletTransactions,
   }, dispatch);
 
 UserVault.propTypes = {

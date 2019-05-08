@@ -5,6 +5,14 @@ const getCardResults = (store) => {
   return [];
 }
 
+const getTransactions = (store) => {
+  if(store.vaultReducer.data && store.vaultReducer.data.content){
+    return store.vaultReducer.data.content;
+  }else{
+    return [];
+  }
+}
+
 const getTilaCredit = (store) => {
   if(store.vaultReducer.data && store.vaultReducer.data.tilaCredit) {
     return store.vaultReducer.data.tilaCredit
@@ -20,4 +28,4 @@ const getDefaultCard = (store) => {
   return [];
 }
 
-export { getCardResults, getDefaultCard, getTilaCredit };
+export { getCardResults, getDefaultCard, getTilaCredit, getTransactions };
