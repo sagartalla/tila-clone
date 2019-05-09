@@ -72,7 +72,7 @@ const getProduct = (store, variantId) => {
     product_id: product_details.product_id,
     itemtype: product_details.catalog_details.item_type_name,
     media: imgUrls[0].url,
-    categoryId: tree.breadcrumb[tree.breadcrumb.length - 1].id,
+    categoryId: tree && tree.breadcrumb && tree.breadcrumb[tree.breadcrumb.length - 1].id,
     comparable: product_details.catalog_details.comparable,
   };
   const returnInfo = {
@@ -248,16 +248,16 @@ const getVariantsAndSimilarProducts = (variantId,productId) => (store) => {
       if(!display[attKey]) {
         display[attKey] = {
           displayName: attVal.display_string,
-          values: []
+          values: [],
         };
       }
-      display[attKey].values = _.uniq([...display[attKey].values, ...(attVal.attribute_values.map((i) => i.value))]);
-      if(!map[key][attKey]) {
+      display[attKey].values = _.uniq([...display[attKey].values, ...(attVal.attribute_values.map(i => `${i.value}${i.qualifier_unit ? ` ${i.qualifier_unit}` : ''}`))]);
+      if (!map[key][attKey]) {
         map[key][attKey] = [];
       }
       map[key] = {
         ...map[key],
-        [attKey]: [...map[key][attKey], ...(attVal.attribute_values.map((i) => i.value))]
+        [attKey]: [...map[key][attKey], ...(attVal.attribute_values.map(i => `${i.value}${i.qualifier_unit ? ` ${i.qualifier_unit}` : ''}`))]
       };
     });
     return {
@@ -316,13 +316,13 @@ const getVariantsAndSimilarProducts = (variantId,productId) => (store) => {
         };
       }
 
-      display[attKey].values = _.uniq([...display[attKey].values, ...(attVal.attribute_values.map((i) => i.value))]);
+      display[attKey].values = _.uniq([...display[attKey].values, ...(attVal.attribute_values.map(i => `${i.value}${i.qualifier_unit ? ` ${i.qualifier_unit}` : ''}`))]);
       if(!map[key][attKey]) {
         map[key][attKey] = [];
       }
       map[key] = {
         ...map[key],
-        [attKey]: [...map[key][attKey], ...(attVal.attribute_values.map((i) => i.value))]
+        [attKey]: [...map[key][attKey], ...(attVal.attribute_values.map(i => `${i.value}${i.qualifier_unit ? ` ${i.qualifier_unit}` : ''}`))]
       };
     });
     return {

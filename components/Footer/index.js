@@ -6,10 +6,12 @@ import { languageDefinations } from '../../utils/lang';
 
 const { FOOTER_PAGE } = languageDefinations();
 
+import main_en from '../../layout/main/main_en.styl';
+import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './footer_en.styl';
 import styles_ar from './footer_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const f = [{"Women's Clothing":	"https://storefront-stage.fptechscience.com/srp/Clothing-910?categoryTree=true&isListed=false"},
 {"Men's Clothing":	"https://storefront-stage.fptechscience.com/srp/Clothing-899?categoryTree=true&isListed=false"},
@@ -42,8 +44,8 @@ const FooterBar = props => (
   <div className={`${styles['footer-container']} ${styles['mt-25']}`}>
     <div className={`${styles['footer-container-inn']} ${styles['pt-40']} ${styles['pb-40']}`}>
       <Grid>
-        <Row>
-          <Col md={3}>
+        <div className={styles['flx-space-bw']}>
+          {/* <Col md={3}> */}
             <div className={`${styles['flex-center']} ${styles['border-radius4']} ${styles['footer-suport-part']} ${styles['p-15']}`}>
               <span className={`${styles['flex']} ${styles['quation-bar']}`}>
                 <SVGComponent clsName={`${styles['quation-bar-inn']}`} src="icons/common-icon/quation" />
@@ -53,8 +55,8 @@ const FooterBar = props => (
                 <span className={styles['footer-suport-title']}>{`${FOOTER_PAGE.WE_CARE_TILA} | 900-66666`}</span>
               </div>
             </div>
-          </Col>
-          <Col md={3}>
+          {/* </Col>
+          <Col md={3}> */}
             <div className={`${styles['flex-center']} ${styles['border-radius4']} ${styles['footer-suport-part']} ${styles['p-15']}`}>
               <span className={`${styles['flex']} ${styles['quation-bar']}`}>
                 <SVGComponent clsName={`${styles['quation-bar-inn']}`} src="icons/common-icon/guarantee" />
@@ -64,8 +66,8 @@ const FooterBar = props => (
                 <span className={styles['footer-suport-title']}>{FOOTER_PAGE.GURANTEE_PRODUCTS_AT_TILA}</span>
               </div>
             </div>
-          </Col>
-          <Col md={3}>
+          {/* </Col>
+          <Col md={3}> */}
             <div className={`${styles['flex-center']} ${styles['border-radius4']} ${styles['footer-suport-part']} ${styles['p-15']}`}>
               <span className={`${styles['flex']} ${styles['quation-bar']}`}>
                 <SVGComponent clsName={`${styles['quation-bar-inn']}`} src="icons/common-icon/return" />
@@ -75,8 +77,8 @@ const FooterBar = props => (
                 <span className={styles['footer-suport-title']}>{FOOTER_PAGE.PLACING_ORDER}</span>
               </div>
             </div>
-          </Col>
-          <Col md={3}>
+          {/* </Col>
+          <Col md={3}> */}
             <div className={`${styles['flex-center']} ${styles['border-radius4']} ${styles['footer-suport-part']} ${styles['p-15']}`}>
               <span className={`${styles['flex']} ${styles['quation-bar']}`}>
                 <SVGComponent clsName={`${styles['quation-bar-inn']}`} src="icons/common-icon/trust-secure" />
@@ -86,8 +88,8 @@ const FooterBar = props => (
                 <span className={styles['footer-suport-title']}>{`100% ${FOOTER_PAGE.SECURE_PAYMENTS_TILA}`}</span>
               </div>
             </div>
-          </Col>
-        </Row>
+          {/* </Col> */}
+        </div>
       </Grid>
     </div>
     <div className={`${styles['footer-menu-items']} ${styles['pt-30']} ${styles['pb-30']} ${styles['bg-white']}`}>

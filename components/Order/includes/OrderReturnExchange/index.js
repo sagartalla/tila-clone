@@ -13,10 +13,11 @@ import { ORDER_ISSUE_STEPS as STEPS,ORDER_ISSUE_TYPES } from '../../constants';
 import { Link } from '../../../../routes'
 import lang from '../../../../utils/language';
 
+import main_en from '../../../../layout/main/main_en.styl';
+import main_ar from '../../../../layout/main/main_ar.styl';
 import styles_en from '../../order_en.styl';
 import styles_ar from '../../order_ar.styl';
-
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 import { languageDefinations } from '../../../../utils/lang'
 import Cookie from 'universal-cookie';
@@ -87,7 +88,7 @@ class OrderReturnExchange extends Component {
                         </Col>
                         <Col md={10}>
                           <h4 className={`${styles['fs-16']} ${styles['fontW600']}`}>{name}</h4>
-                          <span className={styles['fs-14']}>{CART_PAGE.QUANTITY}:</span>
+                          <span className={styles['fs-14']}>{CART_PAGE.QUANTITY}: {orderDetails && orderDetails.order_items && orderDetails.order_items[0].quantity}</span>
                         </Col>
                         <Col md={10} className={`${styles['mt-25']}`}>
                           <h4

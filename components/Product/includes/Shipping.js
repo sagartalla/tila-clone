@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Cookie from 'universal-cookie';
 import moment from 'moment';
 import ProductPrice from '../includes/ProductPrice';
 import GeoWidget from '../../common/GeoWidget';
@@ -12,16 +13,21 @@ import Warranty from './Warranty';
 
 import lang from '../../../utils/language';
 
+import main_en from '../../../layout/main/main_en.styl';
+import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from '../product_en.styl';
 import styles_ar from '../product_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
-
+const cookies = new Cookie();
 const { PDP_PAGE } = languageDefinations();
 
 class Shipping extends Component {
   render() {
+
+    const shippingData = cookies.get('shippingInfo') || {};
+
     const { shippingInfo, offerInfo } = this.props;
     const {
       shipping_fees, shipping_days, shippable, acceptsReturns, maxDaysToReturn, isPreview,
@@ -32,7 +38,7 @@ class Shipping extends Component {
       <div className={`${styles.box} ${styles['border-radius4']} ${styles['mt-5']} ${styles['mb-10']} ${styles['ipad-delivery-address-part']} ${styles['free-delivery-part']}`}>
         <div className={`${styles['free-delivery-list']} ${styles.flex}`}>
           <div className={styles['pdp-deliver-list']}>
-            <GeoWidget />
+            <GeoWidget hideLabel={!!shippingData.displayCity} />
           </div>
           {
             shipping_days
@@ -92,7 +98,7 @@ class Shipping extends Component {
                 </div>
                 {Object.keys(this.props.warranty).length > 0 ?
                   <div className={`${styles['flex-center']} ${styles['warenty-part-inn']} ${styles['warenty-part-single']}`}>
-                    <SVGCompoent clsName={`${styles['trust-icon']}`} src="icons/common-icon/non-warnty" />
+                    <SVGCompoent clsName={`${styles['trust-icon']} ${styles['mr-10']}`} src="icons/common-icon/non-warnty" />
                     <Warranty warranty={this.props.warranty} break />
                   </div>
                 :

@@ -9,8 +9,9 @@ const actions = {
   DEACTIVATE_USER_PROFILE: 'DEACTIVATE_USER_PROFILE',
   RESET_PASSWORD: 'RESET_PASSWORD',
   FORGOT_PASSWORD: 'FORGOT_PASSWORD',
-  USER_UPDATE_FETCH_OTP: 'USER_UPDATE_FETCH_OTP',
-  VERIFY_OTP: 'VERIFY_OTP',
+  USER_UPDATE_FETCH_OTP:'USER_UPDATE_FETCH_OTP',
+  VERIFY_OTP:'VERIFY_OTP',
+  UPLOAD_PROFILE_PIC: 'UPLOAD_PROFILE_PIC',
 };
 
 const actionCreators = {
@@ -26,12 +27,20 @@ const actionCreators = {
       payload: apis.changePassword(body),
     });
   },
-  verifyOtp:(params) => {
-    return {
-      type:actions.VERIFY_OTP,
-      payload:apis.verifyOtp(params)
-    }
+  uploadProfilePic: (body) => {
+    return ({
+      type: actions.UPLOAD_PROFILE_PIC,
+      payload: apis.uploadProfilePic(body),
+    });
   },
+
+  verifyOtp: params => dispatch => dispatch({
+    type: actions.VERIFY_OTP,
+    payload: apis.verifyOtp(params),
+  }).then(() => {
+    dispatch(actionCreators.getUserProfileInfo());
+  }),
+
   otpUserUpdate: (params) => {
     return {
       type:actions.USER_UPDATE_FETCH_OTP,

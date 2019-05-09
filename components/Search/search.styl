@@ -1,18 +1,14 @@
-@import '/static/vendor/css/react-input-range.css';
-@import '/static/vendor/css/react-input-range-override.css';
 @import '../../layout/main/executables.styl';
 
 .filter-panel
-  width 17%
-  border 1px solid border-gray
-  box-shadow 0 2px 7px 0 rgba(0,0,0,0.03)
-  position sticky
-  top 65px;
+  width: 16%;
+  border: 1px solid #e5e5e5;
+  box-shadow: 0 2px 7px 0 rgba(0,0,0,0.03);
   li
     list-style none
 
 .search-main-part
-  min-height 530px
+  min-height 500px
 
 .search-main-part .product-items-main:nth-child(4) {
   margin-right 0
@@ -31,9 +27,11 @@
   .caption
     background white
   .product-items-main
-    width 24.85%
-    padding-bottom 20px
-    margin-right 1px
+    width 25%
+    padding-bottom 50px
+    border-right 1px solid light-brdr
+    a
+      text-decoration none
     .loader-div
        width 20px
        height 20px
@@ -164,8 +162,8 @@
         .cart-list
           margin-right 8px
         i
-          width: 14px
-          height: 14px
+          width: 13px
+          height: 11px
           margin-right: 5px
       .buy-now-btn
         border-bottom-right-radius 16px
@@ -207,27 +205,46 @@
       .wish-list
         width 15px
         height 15px
+      .add-to-compare
+        input[type="checkbox"]
+          margin-right 8px
+        input[type="checkbox"]:checked + label:after
+          width 10px
+          height 6px
+          top 3px
+        label:before
+          width 15px
+          height 15px
+          top 0px
+
 
   .items-list-show
     align-items center
+    .search-val-part
+      width 50%
     .sple-check-prt
-      border-left 1px solid bor-light-gry
+      border-left 1px solid lht-bdr
     .deliver-to-main
-      width 55%
+      width 50%
       justify-content flex-end
       align-items center
       .sort-part-inn
-        padding-left 15px
         display flex
-        border-left 1px solid border-gray
-        padding-left 15px
-          .sort-arrow
-            width 12px
-            height 12px
-        
-        .select-mn .select-text
-          border 0
-          background-color transparent
+        border-left 1px solid light-brdr
+        .sort-arrow
+          width 12px
+          height 12px
+
+        .select-mn
+          position relative
+          .select-text
+            border 0
+            background-color transparent
+            position relative
+            // &:after
+            //   content ''
+            //   position absolute
+
 
         .select-mn .select-text:focus
           outline none
@@ -241,7 +258,7 @@
         margin-left 10px
 
     .sugest-tag
-      border-left 1px solid border-gray
+      border-left 1px solid light-brdr
 
   .delivery-part
     .map-icon
@@ -252,22 +269,22 @@
     .applied-tags-i
       max-width 70%
     .applied-tags-inn
-      background: linear-gradient(to left, gray-light, white)
+      background linear-gradient(to left, gray-light, white)
       border-radius: 15px
       margin 5px
-      border: 0.5px solid rgba(192, 192, 192, 0.3)
+      border 0.5px solid rgba(192, 192, 192, 0.3)
       .title
-        padding: 0px 10px
+        padding 0px 10px
       .close-part
         cursor pointer
-        padding: 2px 10px
-        box-sizing: border-box
-        border-left: 0.5px solid rgba(192, 192, 192, 0.3)
+        padding 2px 10px
+        box-sizing border-box
+        border-left 0.5px solid rgba(192, 192, 192, 0.3)
 .justify-spacebetween
   justify-content space-between
 .product-items
-  // transform: scale(1)
-  transition: all .5s ease
+  // transform scale(1)
+  transition all .5s ease
   position relative
   // padding 4px
   // width 100%
@@ -319,7 +336,7 @@
     box-shadow 0 2px 10px 0 rgba(0, 0, 0, 0.1)
     z-index 11
     position absolute
-    width 24.85%
+    width 25%
 
     .fullfill-main
       // background-color: rgba(216, 216, 216, 0.8)
@@ -352,6 +369,25 @@
         o-text-overflow ellipsis
         text-overflow ellipsis
         width 80%
+
+.select-mn select
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+.select-mn:after
+  content ''
+  background url(/static/img/icons/down-arrow/down-arrow.svg) no-repeat center
+  height 10px
+  width 10px
+  background-position center
+  background-color transparent
+  top 4px
+  position absolute
+  right 0
+
 
 .quick-view
   .add-loader
@@ -425,20 +461,22 @@
         max-height 100%
         max-width 100%
         object-fit scale-down
+        display: block;
+        margin: 0 auto;
 
 .category-list
-
-  .category-list-title
-    border-bottom 0.5px solid light-brdr
-    a
-      display flex
-      justify-content space-between
-      width 100%
-      font-size 13px
-      align-items center
-      .expand-icon
-        width 16px
-        height 16px
+  .category-list-head
+    .category-list-title
+      border-bottom 0.5px solid light-brdr
+      a
+        display flex
+        justify-content space-between
+        width 100%
+        font-size 13px
+        align-items center
+        .expand-icon
+          width 16px
+          height 16px
 
 .category-list-title span
   font-size 13px
@@ -479,7 +517,7 @@
 
 .margin
  margin-bottom -3px
- 
+
 @media screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation : portrait){
   .filter-panel {
     width 24%

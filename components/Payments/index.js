@@ -26,10 +26,12 @@ import FormValidator from '../common/FormValidator';
 
 import lang from '../../utils/language';
 
+import main_en from '../../layout/main/main_en.styl';
+import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './payment_en.styl';
 import styles_ar from './payment_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const cookies = new Cookies();
 
@@ -307,10 +309,10 @@ class Payments extends React.Component {
     return (
       <div className={styles['payment']}>
         <HeaderBar hideSearch hideMegamenu/>
-        <Grid className={styles['pt-75']}>
+        <Grid className={styles['pt-50']}>
           <Row>
             <Col xs={12} md={12} sm={12}>
-              <h4 className={`${styles['mt-30']} ${styles['mb-20']} ${styles['light-gry-clr']}`}>{PAYMENT_PAGE.SECURE_CHECKOUT}</h4>
+              <h4 className={`${styles['mt-30']} ${styles['mb-20']} ${styles['fontW600']} ${styles['light-gry-clr']}`}>{PAYMENT_PAGE.SECURE_CHECKOUT}</h4>
             </Col>
           </Row>
           <Row>
@@ -351,7 +353,7 @@ class Payments extends React.Component {
             <Col md={3} xs={12} sm={12} className={`${styles['pl-5']} ${styles['landscape-pr-0']} ${styles['m-p-l-15']}`}>
               <div>
                 {
-                  cartResults && (cartResults.total_price === 0 || cartResults.total_price > 0) ?
+                  cartResults && (cartResults.total_price.money_value === 0 || cartResults.total_price.money_value > 0) ?
                     <div className={`${styles['box']} ${styles['payment-summary']}`}>
                       <RightSideBar
                         data={cartResults}

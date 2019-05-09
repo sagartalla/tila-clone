@@ -7,10 +7,13 @@ import { selectors, actionCreators } from '../../store/auth';
 
 import lang from '../../utils/language';
 
+import main_en from '../../layout/main/main_en.styl';
+import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './login_en.styl';
 import styles_ar from './login_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+
 
 const snMetaObj = {
   'google': {

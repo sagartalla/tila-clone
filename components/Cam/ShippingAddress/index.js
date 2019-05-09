@@ -18,11 +18,12 @@ import Slider from '../../common/slider';
 
 import lang from '../../../utils/language';
 
+import main_en from '../../../layout/main/main_en.styl';
+import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from './address_en.styl';
 import styles_ar from './address_ar.styl';
 
-
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 
 const cookies = new Cookie();
@@ -264,8 +265,7 @@ class ShippingAddress extends Component {
         <div className={`${styles['not-shippable']} ${styles.flex} ${styles['mb-20']} ${styles['p-10']}`}>
           <Col md={2} sm={3} xs={3} className={`${styles['thick-red-clr']} ${styles.fontW600} ${styles['not-shipping-font']}`}>{DELIVERY_ADDR_PAGE.NOT_SHIPPABLE}</Col>
           <Col md={10} sm={9} xs={9} className={`${styles['fs-12']} ${styles.fontW600}`}>{DELIVERY_ADDR_PAGE.UNFORTUNATELY_WE_CANNOT_DELIVER_REMOVE_ITEM}</Col>
-        </div>
-      }
+        </div>}
         {
           miniAddress ?
             <Fragment>
@@ -299,31 +299,42 @@ class ShippingAddress extends Component {
                       />
                     </div>
                     :
-                    <Slider
-                      isOpen={showSlider}
-                      label=" "
-                      closeSlider={this.closeSlider}
-                    >
-                      <AddressNew
-                        inputOnChange={this.inputOnChange}
-                        saveBtnClickHandler={this.saveBtnClickHandler}
-                        data={addr}
-                        showNewAddr={showNewAddr}
-                        homeButton={this.homeButton}
-                        getDataFromMap={this.getDataFromMap}
-                        setAsDefaultLocation={this.setAsDefaultLocation}
-                        resetAddAdrressForm={this.resetAddAdrressForm}
-                        addrTypeHandler={this.addrTypeHandler}
-                        showAddAdrressForm={this.showAddAdrressForm}
-                        getAllCities={getAllCities}
-                        countriesData={countriesData}
-                        validation={validation}
-                        selectCityFromSuggesstions={this.selectCityFromSuggesstions}
-                        showCitiesData={showCitiesData}
-                        showCountriesData={showCountriesData}
-                        selectCountry={this.selectCountry}
-                      />
-                    </Slider>
+                    <>
+                      <div onClick={this.closeSlider} className={showSlider ? `${styles['modalContainer']} ${styles['showDiv']}` : `${styles['modalContainer']} ${styles['hideDiv']}`}>
+                        <div className={`${styles['disabled']}`}>
+                        </div>
+                      </div>
+                      <div className={`${styles['overflow-y-auto']} ${showSlider ? `${styles['openModal']}` : `${styles['closeModal']}`}`}>
+                        <div className={styles['p-40']}>
+                          <h4 className={`${styles['flx-spacebw-alignc']} ${styles['m-0']} ${styles['mb-20']}`}>
+                            <span>{DELIVERY_ADDR_PAGE.ADD_NEW_ADDR_HEAD}</span>
+                            <a onClick={this.closeSlider} className={`${styles['fs-22']} ${styles['black-color']}`}>X</a>
+                          </h4>
+                          <div>
+                            <AddressNew
+                              hideTitle
+                              inputOnChange={this.inputOnChange}
+                              saveBtnClickHandler={this.saveBtnClickHandler}
+                              data={addr}
+                              showNewAddr={showNewAddr}
+                              homeButton={this.homeButton}
+                              getDataFromMap={this.getDataFromMap}
+                              setAsDefaultLocation={this.setAsDefaultLocation}
+                              resetAddAdrressForm={this.resetAddAdrressForm}
+                              addrTypeHandler={this.addrTypeHandler}
+                              showAddAdrressForm={this.showAddAdrressForm}
+                              getAllCities={getAllCities}
+                              countriesData={countriesData}
+                              validation={validation}
+                              selectCityFromSuggesstions={this.selectCityFromSuggesstions}
+                              showCitiesData={showCitiesData}
+                              showCountriesData={showCountriesData}
+                              selectCountry={this.selectCountry}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </>
                   : ''
               }
             </Fragment>
@@ -373,7 +384,7 @@ class ShippingAddress extends Component {
                 {
                   standalone !== true ?
                     <Col md={12} sm={12} xs={12} className={`${styles['pl-15']}`}>
-                      <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']}`} disabled={cartResults.cart_shippable !== undefined && !cartResults.cart_shippable} onClick={handleShippingAddressContinue}>{DELIVERY_ADDR_PAGE.CONTINUE}</button>
+                      <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['add-button']}`} disabled={cartResults.cart_shippable !== undefined && !cartResults.cart_shippable} onClick={handleShippingAddressContinue}>{DELIVERY_ADDR_PAGE.CONTINUE}</button>
                     </Col>
                     : null
                 }

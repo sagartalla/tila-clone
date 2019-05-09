@@ -1,9 +1,9 @@
 import Cookies from 'universal-cookie';
 import api from './api';
-import loginReq from '../helper/loginReq';
+// import loginReq from '../helper/loginReq';
 import refStore from '../refHandler';
 import { actionCreators as cartActionCreators } from '../cart';
-
+import { actionCreators as shippingActionCreators } from '../cam/address'
 const cookies = new Cookies();
 
 const actions = {
@@ -36,6 +36,8 @@ const actionCreators = {
     payload: api.userLogin(params),
   }).then(() => {
     dispatch(cartActionCreators.getCartResults());
+    dispatch(shippingActionCreators.getShippingAddressResults());
+
     if (typeof refStore.postLoginRef === 'function') {
       refStore.postLoginRef(dispatch, getState);
     } else if (refStore.postLoginRef) {

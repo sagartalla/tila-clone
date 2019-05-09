@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { searchPlaceHolder, productPlaceHolder } from './skeletonPlaceHolder';
+import { searchPlaceHolder, productPlaceHolder, couponPlaceHolder } from './skeletonPlaceHolder';
 import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
@@ -15,6 +15,8 @@ class SkeletonLoader extends Component {
       return productPlaceHolder;
     } else if (pathname.split('?')[0] === `/${country}/${language}/srp`) {
       return searchPlaceHolder;
+    } else if (pathname.split('?')[0] === `/${country}/${language}/cam/mycoupons`) {
+      return couponPlaceHolder;
     }
   }
 

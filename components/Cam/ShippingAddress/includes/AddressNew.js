@@ -6,17 +6,19 @@ import SVGComponent from '../../../common/SVGComponet';
 import MyGMap from './MyGMap';
 import lang from '../../../../utils/language';
 
+import main_en from '../../../../layout/main/main_en.styl';
+import main_ar from '../../../../layout/main/main_ar.styl';
 import styles_en from '../address_en.styl';
 import styles_ar from '../address_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 // TODO validations is pending. SF-28
 // TODO country dropdown. SF-25
 const AddressNew = (props) => {
   const {
     data, inputOnChange, addrTypeHandler, setAsDefaultLocation, selectCountry,
-    saveBtnClickHandler, resetAddAdrressForm, countriesData, showCountriesData,
+    saveBtnClickHandler, resetAddAdrressForm, countriesData, showCountriesData, hideTitle,
     getDataFromMap, getAllCities, selectCityFromSuggesstions, showCitiesData, validation,
   } = props;
   const { DELIVERY_ADDR_PAGE } = languageDefinations();
@@ -25,7 +27,8 @@ const AddressNew = (props) => {
       <div className={styles['new-addr-inn']}>
         <Row>
           <Col md={10} sm={9} xs={12}>
-            <h1 className={`${styles['thick-blue']} ${styles['mb-20']} ${styles['fs-20']} ${styles.fontW300} ${styles['m-fs-16']}`}>{DELIVERY_ADDR_PAGE.ADD_NEW_ADDR_HEAD}</h1>
+            {!hideTitle &&
+            <h1 className={`${styles['thick-blue']} ${styles['mb-20']} ${styles['fs-20']} ${styles.fontW300} ${styles['m-fs-16']}`}>{DELIVERY_ADDR_PAGE.ADD_NEW_ADDR_HEAD}</h1>}
           </Col>
 
           <Col md={12} sm={12} xs={12}>

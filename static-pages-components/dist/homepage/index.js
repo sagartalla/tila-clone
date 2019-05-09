@@ -196,6 +196,7 @@ function SamplePrevArrow(props) {
     'div',
     {
       className: 'leftArrow',
+      onMouseOver: onClick,
       onClick: onClick
     },
     React.createElement('img', { src: '/static/img/landing-home/c-left.svg', alt: 'left' })
@@ -208,6 +209,7 @@ function SampleNextArrow(props) {
     'div',
     {
       className: 'rightArrow',
+      onMouseOver: onClick,
       onClick: onClick
     },
     React.createElement('img', { src: '/static/img/landing-home/c-right.svg', alt: 'right' })
