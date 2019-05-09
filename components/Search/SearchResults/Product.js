@@ -310,6 +310,15 @@ class Product extends Component {
                     <span className={`${styles.absolute} ${styles['offer-tag']} ${styles[this.getOfferClassName(discountValue)]}`}>
                       <span>{discountValue}%</span>
                     </span>}
+                  {
+                    variants.length > 1 &&
+                    <RenderVariants
+                      variantData={variants}
+                      onSelectedVariant={this.selectedVariant}
+                      isvisible={selectedProduct}
+                      OncloseVariant={this.closeVariantTab}
+                    />
+                  }
                 </div>
                 <div className={styles['desc-cont']}>
                   <div className={`${styles['pb-20']} ${styles['pl-20']} ${styles['pr-20']} ${styles['flex']} ${styles['flex-colum']}`}>
@@ -401,15 +410,7 @@ class Product extends Component {
                 </div>
               </div> */}
                 </div>
-                {
-                  variants.length > 1 &&
-                  <RenderVariants
-                    variantData={variants}
-                    onSelectedVariant={this.selectedVariant}
-                    isvisible={selectedProduct}
-                    OncloseVariant={this.closeVariantTab}
-                  />
-                }
+                
               </div>
             </a>
           </Link>
