@@ -75,9 +75,10 @@ const getProduct = (store, variantId) => {
     categoryId: tree && tree.breadcrumb && tree.breadcrumb[tree.breadcrumb.length - 1].id,
     comparable: product_details.catalog_details.comparable,
   };
+  const preferredPolicyData = priceInfo ? priceInfo.return_policy ? priceInfo.return_policy.policies[priceInfo.return_policy.preferred_policy] : {} : {};
   const returnInfo = {
-    acceptsReturns: priceInfo ? priceInfo.accepts_returns : false,
-    maxDaysToReturn: priceInfo ? priceInfo.max_days_to_return : 0,
+    acceptsReturns: preferredPolicyData ? preferredPolicyData.allowed : false,
+    maxDaysToReturn: preferredPolicyData ? preferredPolicyData.duration : 0,
   };
   const shippingInfo = priceInfo ? {...priceInfo.shipping, ...returnInfo} : {};
   const offerInfo = {
