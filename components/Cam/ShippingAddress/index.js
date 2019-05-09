@@ -70,9 +70,15 @@ class ShippingAddress extends Component {
         validWhen: false,
       },
       {
+        field: 'shipping_country_code',
+        method: this.validate,
+        message: 'Select Country from list',
+        validWhen: false,
+      },
+      {
         field: 'country_name',
         method: this.validate,
-        message: 'Required Country',
+        message: 'Select Country',
         validWhen: false,
       },
       {
@@ -81,6 +87,24 @@ class ShippingAddress extends Component {
         message: 'Required City',
         validWhen: false,
       },
+      {
+        field: 'city_code',
+        method: this.validate,
+        message: 'Select City from list',
+        validWhen: false,
+      },
+      {
+        field: 'mobile_no',
+        method: this.mobileValidation,
+        message: 'Minimum 6 and maximum 12 digits',
+        validWhen: false,
+      },
+      // {
+      //   field: 'mobile_no',
+      //   method: this.validate,
+      //   message: 'Required Mobile Number',
+      //   validWhen: false,
+      // },
     ]);
 
     this.state = {
@@ -122,7 +146,7 @@ class ShippingAddress extends Component {
       },
     } = json;
     const addr = { ...this.state.addr };
-    const { getCitiesByCountryCode } = this.props;
+    const { getCitiesByCountryCode, countriesData } = this.props;
 
     addr.latitude = lat;
     addr.longitude = lng;
@@ -131,6 +155,13 @@ class ShippingAddress extends Component {
     addr.shipping_country_code = country.short_name || '';
     // addr.city = city || '';
     addr.postal_code = postal_code || '';
+    countriesData.forEach((ctr) => {
+      if (ctr.code === country.short_name) {
+        addr.mobile_country_code = ctr.country_phone_code;
+        addr.country_name = ctr.country_name || '';
+        addr.shipping_country_code = ctr.code3 || '';
+      }
+    });
     if (addr.shipping_country_code) {
       getCitiesByCountryCode(addr.shipping_country_code);
     }
@@ -148,15 +179,17 @@ class ShippingAddress extends Component {
     const addr = { ...this.state.addr };
     let { showCitiesData, showCountriesData } = this.state;
     addr[target.name] = target.value;
-    this.setState({ addr });
     if (target.name === 'city') {
       showCitiesData = true;
       autoCompleteCity(target.value);
     } else if (target.name === 'country_name') {
       showCountriesData = true;
+      addr.city = '';
+      addr.shipping_country_code = '';
       autoCompleteCoutry(target.value);
     }
     this.setState({
+      addr,
       showCitiesData,
       showCountriesData,
     });
@@ -164,6 +197,10 @@ class ShippingAddress extends Component {
 
   validate = (fieldvalue) => {
     return fieldvalue === '';
+  }
+
+  mobileValidation = (fieldValue) => {
+    return !(/^([0-9]){6,12}$/.test(fieldValue));
   }
 
   selectCityFromSuggesstions({ target }) {
@@ -182,6 +219,7 @@ class ShippingAddress extends Component {
     const addr = { ...this.state.addr };
     addr[target.getAttribute('name')] = target.getAttribute('data-id') || '';
     addr.country_name = target.innerHTML;
+    addr.mobile_country_code = target.getAttribute('data-code');
     this.setState({
       addr,
       showCountriesData: false,
@@ -199,6 +237,7 @@ class ShippingAddress extends Component {
   }
 
   editAddress(addrId) {
+    debugger;
     const { getAddrById, getCitiesByCountryCode } = this.props;
     const addr = getAddrById(addrId)[0];
     getCitiesByCountryCode(addr.shipping_country_code || 'SAU');
@@ -225,6 +264,7 @@ class ShippingAddress extends Component {
     const { isFromCart } = this.props;
     this.setState({
       showNewAddr: isFromCart ? true : !this.state.showNewAddr,
+      validation: this.validations.valid(),
       showSlider: true,
     });
   }
@@ -241,7 +281,11 @@ class ShippingAddress extends Component {
       this.setState({ addr: initialAddrObj });
       this.showAddAdrressForm();
     }
-    this.setState({ validation });
+    this.setState({
+      validation,
+      showCitiesData: false,
+      showCountriesData: false,
+    });
   }
 
   addrTypeHandler(e) {

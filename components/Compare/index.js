@@ -168,7 +168,7 @@ class Compare extends Component {
                         </span>
                       </Link>
                       <div>
-                        <span className={styles.fontW600}>{product.price} {product.currency}</span>
+                        <span className={styles.fontW600}>{product.price.display_value} {product.price.currency_code}</span>
                         {/* <span className={`${styles['fs-12']} ${styles['google-clr']}`}>{product.offer}</span> */}
                       </div>
                     </div>

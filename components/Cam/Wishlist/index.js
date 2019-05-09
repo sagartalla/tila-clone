@@ -95,7 +95,7 @@ class Wishlist extends Component {
 
   render() {
     const {
-      results, cartMiniWishList, getPageDetails,
+      results, cartMiniWishList, getPageDetails, wishListCount,
     } = this.props;
     const { showCartPageBtmPopup, currentPage } = this.state;
     return (
@@ -105,6 +105,7 @@ class Wishlist extends Component {
             <Fragment>
               <CartMiniWishList
                 data={results}
+                wishListCount={wishListCount}
                 showCartPageBtmPopup={this.showCartPageBtmPopup}
               />
               {
@@ -145,6 +146,7 @@ class Wishlist extends Component {
 const mapStateToProps = store => ({
   results: selectors.getWishListResults(store),
   getPageDetails: selectors.getPaginationDetails(store),
+  wishListCount: selectors.getProductsDetails(store).length,
 });
 
 const mapDispatchToProps = dispatch =>

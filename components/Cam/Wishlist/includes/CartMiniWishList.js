@@ -19,7 +19,6 @@ const { CART_PAGE } = languageDefinations();
 class CartMiniWishList extends Component {
   constructor(props) {
     super(props);
-
     this.wishlistClickHandler = this.wishlistClickHandler.bind(this);
   }
 
@@ -28,14 +27,14 @@ class CartMiniWishList extends Component {
   }
 
   render() {
-    const { data } = this.props;
+    const { data, wishListCount } = this.props;
     // let tempData = data.length > 10 ? data.slice(0, 10) : data;
 
     return (
       <div className={`${styles['view-wishlist-main']} ${styles['box']} ${styles['p-20']} ${styles['flex-center']}`}>
         <Col md={4}>
           <span className={styles['fs-12']}>
-            {data.length === 1 ? `${CART_PAGE.THERE_IS} ${data.length} ${CART_PAGE.ITEM_IN_YOUR_WISHLIST}` : `${CART_PAGE.THERE_ARE} ${data.length} ${CART_PAGE.ITEMS_IN_YOUR_WISHLIST}`}
+            {data.length === 1 ? `${CART_PAGE.THERE_IS} ${data.length} ${CART_PAGE.ITEM_IN_YOUR_WISHLIST}` : `${CART_PAGE.THERE_ARE} ${wishListCount} ${CART_PAGE.ITEMS_IN_YOUR_WISHLIST}`}
           </span>
         </Col>
         <Col md={6}>

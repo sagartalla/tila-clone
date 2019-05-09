@@ -60,8 +60,12 @@ class Cart extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    const { wishListCount, getWishlist } = this.props;
     if (nextProps.cartData.ui.loader && nextProps.cartData.ui.loader === 'hide') {
       this.setState({ showBlocker: false });
+    }
+    if (wishListCount !== nextProps.wishListCount) {
+      getWishlist(0, nextProps.wishListCount);
     }
   }
 
@@ -218,6 +222,7 @@ class Cart extends Component {
 
 const mapStateToProps = store => ({
   cartData: selectors.getCartResults(store),
+  wishListCount: wishlistSelectors.getProductsDetails(store).length,
   isLoading: store.cartReducer.ui.loading,
 });
 
@@ -230,6 +235,7 @@ const mapDispatchToProps = dispatch =>
       addOrRemoveGift: actionCreators.addOrRemoveGift,
       cartItemInputCount: actionCreators.cartItemInputCount,
       addToWishlistAndFetch: wishlistActionCreators.addToWishlistAndFetch,
+      getWishlist: wishlistActionCreators.getWishlist,
       track: actionCreators.track,
     },
     dispatch,
