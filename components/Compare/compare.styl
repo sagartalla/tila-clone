@@ -7,9 +7,7 @@
   border-radius 10px
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
   .cart-btn
-    background-color white
     border-bottom-right-radius 16px
-    color navy-blue
     width 75%
     height 40px
     margin-top 5px
@@ -46,19 +44,20 @@
   border 4px solid #dddddd
   color #dddddd
   border-radius 50%
-
-
+  
 .featureTitle
   padding 0px 10px
   border-left 3px solid electronics-color
 
-.parentContainer div:nth-child(odd) {
-           opacity: 0.5;
-           background-color: #ebebeb;
-     }
-  .select
-     border-radius 10px
-     -webkit-appearance none
-     -moz-appearance none
-     appearance none
-     border-width 0px
+ .parentBackground:nth-child(even) .childBackground
+    opacity 0.5
+    background-color #ebebeb
+    margin-right 5px
+
+  .parentBackground:nth-child(odd) .childBackground
+    background-color white
+    margin-right 5px
+
+ .parentBackground
+    word-break break-all
+
