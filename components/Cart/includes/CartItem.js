@@ -151,7 +151,6 @@ class CartItem extends React.Component {
       brand_name, gift_info, shipping, warranty_duration, total_amount,
       product_id, variant_id, itemType, catalogId, discount, mrp, variantAttributes,
     } = item;
-    console.log(item);
     return (
       <div key={item_id} className={`${styles['mb-20']} ${styles['box']}`}>
         {

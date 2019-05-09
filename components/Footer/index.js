@@ -94,8 +94,8 @@ const FooterBar = props => (
     </div>
     <div className={`${styles['footer-menu-items']} ${styles['pt-30']} ${styles['pb-30']} ${styles['bg-white']}`}>
       <Grid>
-        <Row>
-          <Col md={3} sm={3} className={styles['ipad-pr-0']}>
+        <div class={styles['flex']}>
+          <div className={`${styles['ipad-pr-0']} ${styles['footer-menu-inn']}`}>
             <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['flex-center']}`}>
               <SVGComponent clsName={`${styles['footer-list-icon']} ${styles['mr-10']}`} src="icons/footers-icons/fashion" />
               <span className={styles['pointer']}>Fashion</span>
@@ -111,8 +111,8 @@ const FooterBar = props => (
               <li><span className={styles['pointer']}>{`${FOOTER_PAGE.WOMENS} ${FOOTER_PAGE.HANDGBAGS}`}</span></li>
               <li><span className={styles['pointer']}>{`${FOOTER_PAGE.MENS} ${FOOTER_PAGE.EYEWEAR}`}</span></li>*/}
             </ul>
-          </Col>
-          <Col md={3} sm={3} className={styles['ipad-pr-0']}>
+          </div>
+          <div className={`${styles['ipad-pr-0']} ${styles['footer-menu-inn']}`}>
             <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['flex-center']}`}>
               <SVGComponent clsName={`${styles['footer-list-icon']} ${styles['mr-10']}`} src="icons/common-icon/processor-icon" />
               <span className={styles['pointer']}>{FOOTER_PAGE.ELECTRONICS}</span>
@@ -128,8 +128,8 @@ const FooterBar = props => (
               <li><span className={styles['pointer']}>{FOOTER_PAGE.HEADPHONES}</span></li>
               <li><span className={styles['pointer']}>{FOOTER_PAGE.VIDEO_GAMES}</span></li>*/}
             </ul>
-          </Col>
-          <Col md={2} sm={2} className={styles['ipad-pr-0']}>
+          </div>
+          <div className={`${styles['ipad-pr-0']} ${styles['footer-menu-inn']}`}>
             <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['flex-center']}`}>
               <SVGComponent clsName={`${styles['footer-list-icon']} ${styles['mr-10']}`} src="icons/footers-icons/life-style" />
               <span className={styles['pointer']}>Lifestyle</span>
@@ -145,8 +145,8 @@ const FooterBar = props => (
               <li><span className={styles['pointer']}>{FOOTER_PAGE.FURNITURE}</span></li>
               <li><span className={styles['pointer']}>{`${FOOTER_PAGE.PATIO}, ${FOOTER_PAGE.LAWN} & ${FOOTER_PAGE.GARDEN}`}</span></li>*/}
             </ul>
-          </Col>
-          <Col md={2} sm={2} className={styles['ipad-pr-0']}>
+          </div>
+          <div className={`${styles['ipad-pr-0']} ${styles['footer-menu-inn']}`}>
             <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['flex-center']}`}>
               <SVGComponent clsName={`${styles['footer-list-icon']} ${styles['mr-10']}`} src="icons/footers-icons/beauty-makeup" />
               <span className={styles['pointer']}>{`${FOOTER_PAGE.BEAUTY} & ${FOOTER_PAGE.MAKEUP}`}</span>
@@ -161,9 +161,9 @@ const FooterBar = props => (
               <li><span className={styles['pointer']}>{`${FOOTER_PAGE.TOOLS} & ${FOOTER_PAGE.ACCESSORIES}`}</span></li>
               <li><span className={styles['pointer']}>{`${FOOTER_PAGE.MENS} ${FOOTER_PAGE.GROOMING}`}</span></li>*/}
             </ul>
-          </Col>
+          </div>
 
-          <Col md={2} sm={2} className={styles['ipad-pr-0']}>
+          <div className={`${styles['ipad-pr-0']} ${styles['footer-menu-inn']}`}>
             <h4 className={`${styles['fontW600']} ${styles['fs-16']}`}>
             <span className={styles['pointer']}>{FOOTER_PAGE.TOP_BRAND}</span>
             </h4>
@@ -176,8 +176,8 @@ const FooterBar = props => (
               <li className={`${styles['flex']} ${styles['mb-20']} ${styles['brand-icon']}`}><img src="/static/img/bg-img/philips.jpg" className={styles['img-responsive']} /></li>
               <li className={`${styles['flex']} ${styles['mb-20']} ${styles['brand-icon']}`}><img src="/static/img/bg-img/microsoft.jpg" className={styles['img-responsive']} /></li>
             </ul>
-          </Col>
-        </Row>
+          </div>
+        </div>
       </Grid>
     </div>
     {/* social part start */}
@@ -252,7 +252,7 @@ const FooterBar = props => (
               </ul>
             </div>
           </Col>*/}
-          <Col md={4} sm={4} className={styles['ipad-pr-0']}>
+          <Col md={3} sm={4} className={styles['ipad-pr-0']}>
             <div>
               <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['black-color']}`}>{FOOTER_PAGE.CUSTOMER_SERVICE}</h4>
               <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
@@ -263,7 +263,7 @@ const FooterBar = props => (
               </ul>
             </div>
           </Col>
-          <Col md={2} sm={3} className={styles['ipad-pr-0']}>
+          <Col md={3} sm={3} className={styles['ipad-pr-0']}>
             <div className={`${styles['fs-12']} ${styles['footer-download-app']}`}>
               <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['black-color']}`}>{FOOTER_PAGE.DOWNLOAD_APP}</h4>
               <div>

@@ -3,7 +3,7 @@ const getShippingAddressResults = (store) => {
     return store.shippingAddrReducer.data;
   }
   return [];
-}
+};
 
 const getAddressWithNameAndPhone = (store) => {
   if (store.shippingAddrReducer.data && store.shippingAddrReducer.data.length > 0) {
@@ -15,20 +15,20 @@ const getAddressWithNameAndPhone = (store) => {
     }));
   }
   return [];
-}
+};
 
 const getAddrById = store => (addrId) => {
   if (store.shippingAddrReducer.data && store.shippingAddrReducer.data.length > 0) {
-    return store.shippingAddrReducer.data.filter(value => value.address_id === addrId);
+    return store.shippingAddrReducer.data.filter(value => value.address_id == addrId); // Don't change to ===
   }
   return false;
-}
+};
 
 const getDefaultAddress = (store) => {
   if (store.shippingAddrReducer.data && store.shippingAddrReducer.data.length > 0) {
-    return _.filter(store.shippingAddrReducer.data, function (value, key) { return value.default; });
+    return _.filter(store.shippingAddrReducer.data, value => value.default);
   }
   return false;
-}
+};
 
 export { getShippingAddressResults, getAddrById, getAddressWithNameAndPhone, getDefaultAddress };

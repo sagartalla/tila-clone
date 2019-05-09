@@ -119,7 +119,7 @@ class Reason extends Component {
     }
 
     if (
-      (selectedMode === 'Return' || selectedMode === 'Cancel' )
+      (selectedMode === 'Return' || selectedMode === 'Cancel')
     ) {
       this.props.setOrderIssueData(params);
       this.props.setAddressData(reasonParams)
