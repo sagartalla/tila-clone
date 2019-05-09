@@ -61,10 +61,11 @@ class Cart extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { wishListCount, getWishlist } = this.props;
+    const { pathname } = window.location;
     if (nextProps.cartData.ui.loader && nextProps.cartData.ui.loader === 'hide') {
       this.setState({ showBlocker: false });
     }
-    if (wishListCount !== nextProps.wishListCount) {
+    if (wishListCount !== nextProps.wishListCount && pathname.indexOf('/cart') > -1) {
       getWishlist(0, nextProps.wishListCount);
     }
   }

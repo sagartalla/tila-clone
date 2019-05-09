@@ -237,7 +237,6 @@ class ShippingAddress extends Component {
   }
 
   editAddress(addrId) {
-    debugger;
     const { getAddrById, getCitiesByCountryCode } = this.props;
     const addr = getAddrById(addrId)[0];
     getCitiesByCountryCode(addr.shipping_country_code || 'SAU');
