@@ -54,7 +54,6 @@ const getProductComponent = (isPreview, taskCode) => {
     }
 
     componentDidMount() {
-      debugger;
       if (window.localStorage && !isPreview) {
         const { productData } = this.props;
         const {
