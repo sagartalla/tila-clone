@@ -26,7 +26,7 @@ class Order extends Component {
     const { query, getOrderDetails } = this.props;
     getOrderDetails({ orderId: query.orderId });
   }
-
+  
   render() {
     const { query, orderData } = this.props;
     return (

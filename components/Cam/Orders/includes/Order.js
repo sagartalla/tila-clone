@@ -36,7 +36,6 @@ const Order = ({ order }) => {
   const routeChange = () => {
     Router.push(`/${country}/${language}/cam/orders/${order.id}`);
   }
-
   return (
     <div className={`${styles['order-item-wrap']} ${styles['box-shadow']} ${styles['mt-20']} ${styles['mb-20']} ${styles['p-20']}`}>
       <div className={`${styles['flx-spacebw-alignc']}`}>
