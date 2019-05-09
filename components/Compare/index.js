@@ -13,6 +13,7 @@ import { actionCreators as cartActionCreators } from '../../store/cart';
 import { selectors as cartSelectors } from '../../store/search';
 import { languageDefinations } from '../../utils/lang';
 import Button from '../common/CommonButton';
+import SVGComponent from '../common/SVGComponet';
 
 import lang from '../../utils/language';
 
@@ -127,6 +128,7 @@ class Compare extends Component {
       compareCount = 0, features = [], products = [], productsFeatures = [],
     } = compareInfo;
     const { selectedBrand } = this.state;
+    console.log('products', productsFeatures);
     return (
       <div>
         <HeaderBar />
@@ -182,7 +184,7 @@ class Compare extends Component {
                         btnLoading={cartButtonLoaders && cartButtonLoaders[product.listing_id]}
                       />
                     </div>
-                    {compareCount > 1 && <span className={`${styles['close-item']} ${styles.pointer}`} data-prod-id={product.id} onClick={this.removeItem}>x</span>}
+                    {compareCount > 1 && <span className={`${styles['close-item']} ${styles.pointer}`} data-prod-id={product.id} onClick={this.removeItem}><SVGComponent clsName={`${styles['cross-icon']}`} src="icons/common-icon/cross-button" /></span>}
                   </div>
                 </Col>
               ))
@@ -225,17 +227,17 @@ class Compare extends Component {
                     </Row>
                     {
                       productFeature.attributes.map(attr => (
-                        <Row key={attr.name} className={`${styles['compare-product-spficication']} ${styles['flex-center']} ${styles['pt-5']} ${styles['pb-5']}`}>
+                        <Row key={attr.name} className={`${styles['flex-center']} ${styles['pt-5']} ${styles['pb-5']}`}>
                           <Col md={3}>
                             <div className={`${styles['pl-20']} ${styles['flex']} ${styles['flex-colum']} ${styles['dispy-screen']} ${styles.fontW600}`}>
                               {/* <SVGCompoent clsName={`${styles['screen-icon']}`} src={ICONS[item.id]} /> */}
-                              <span className={`${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pt-10']}`}>{attr.name}</span>
+                              <span className={`${styles['fs-14']} ${styles['thick-gry-clr']} ${styles['pt-10']}`}>{attr.name}</span>
                             </div>
                           </Col>
                           {
                             attr.items.map(item => (
                               <Col key={item.id} md={3}>
-                                <div className={`${styles['compare-product-spficication-inn']} ${styles['flex-center']} ${styles['flex-colum']} ${styles['fs-12']}`}>
+                                <div className={`${styles['compare-product-spficication-inn']} ${styles['flex-center']} ${styles['flex-colum']} ${styles.fontW600} ${styles['fs-14']}`}>
                                   <span>{item.value.map(i => i.value).join(' ')} {item.value[0].qualifier_unit}</span>
                                 </div>
                               </Col>
