@@ -222,7 +222,7 @@ export const couponPlaceHolder = (
           ${styles['bg-white']} col-md-2 col-sm-4`
       }
     >
-      <div className={`${styles['flex-center']} ${styles['m-5']}`}>
+      <div className={`${styles.flex} ${styles['flex-center']} ${styles['m-5']}`}>
         <Round />
         <div className={`${styles['flex-colum']} ${styles['ml-10']}`}>
           <Input style={{ height: 15, width: '100px' }} />
@@ -243,7 +243,7 @@ export const couponPlaceHolder = (
     <div className={`${styles['search-results']} ${styles['p-0']} col-md-10 col-sm-8`}>
       <div className={`${styles['grid-cont']} ${styles['mt-15']} ${styles['flex-wrp']} ${styles.flx} result-box`} >
         <div className={`${styles.couponHeader} ${styles['p-25']}`}>
-          <div className={`${styles['flex-center']} ${styles['m-5']}`}>
+          <div className={`${styles['flex-center']} ${styles.flex} ${styles['m-5']}`}>
             <Round style={{ backgroundColor: '#fff' }} />
             <div className={`${styles['flex-colum']} ${styles['ml-10']}`}>
               <Input style={{ height: 20, width: '300px', backgroundColor: '#fff' }} />
