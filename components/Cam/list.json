@@ -20,4 +20,12 @@
 		"display": "Credit Cards, Vouchers & Reward points",
 		"href": "/cam/uservault"
 	}]
-}]
+},
+	{
+		"data": [{
+			"icon": "icons/common-icon/coupon-code",
+			"display": "My Coupons",
+			"href": "/cam/mycoupons"
+		}]
+}
+]

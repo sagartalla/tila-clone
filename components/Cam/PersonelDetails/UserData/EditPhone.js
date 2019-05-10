@@ -15,10 +15,12 @@ import SVGCompoent from '../../../common/SVGComponet';
 
 import lang from '../../../../utils/language';
 
+import main_en from '../../../../layout/main/main_en.styl';
+import main_ar from '../../../../layout/main/main_ar.styl';
 import styles_en from '../profile_en.styl';
 import styles_ar from '../profile_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const { CONTACT_INFO_MODAL } = languageDefinations();
 const cookies = new Cookies();
@@ -92,7 +94,7 @@ class EditPhone extends React.Component {
       this.setState({
         otpResponse: nextProps.otpData.Response
       }, () => {
-        afterSuccessOtpVerification && afterSuccessOtpVerification();
+        ((afterSuccessOtpVerification && nextProps.otpData.Response === 'SUCCESS') && afterSuccessOtpVerification());
       })
     }
 
@@ -166,7 +168,7 @@ class EditPhone extends React.Component {
               //     X</a>
               //   </Col>
               // </Row>
-              <h4 className={`${styles['flx-spacebw-alignc']} ${styles['m-0']} ${styles['p-20']}`}> 
+              <h4 className={`${styles['flx-spacebw-alignc']} ${styles['m-0']} ${styles['p-20']}`}>
                 <span className={styles['lgt-blue']}>{CONTACT_INFO_MODAL.EDIT_PHONE_NUMBER}</span>
                 <span onClick={this.handleClose} className={styles['fs-24']}>X</span>
               </h4>
@@ -200,7 +202,7 @@ class EditPhone extends React.Component {
             // </Row>
             <h4 className={`${styles['flx-spacebw-alignc']} ${styles['m-0']} ${styles['p-20']}`}>
               <span>{CONTACT_INFO_MODAL.EDIT_PHONE_NUMBER}</span>
-              <span onClick={this.handleClose} className={`${styles['fs-22']} ${styles['black-color']}`}>X</span> 
+              <span onClick={this.handleClose} className={`${styles['fs-22']} ${styles['black-color']}`}>X</span>
             </h4>
           )
         }

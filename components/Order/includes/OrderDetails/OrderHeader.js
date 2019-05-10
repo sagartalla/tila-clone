@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import { Modal } from "react-router-modal";
+import { Modal } from 'react-router-modal';
 import { Row, Col } from 'react-bootstrap';
 
 import { connect } from 'react-redux';
@@ -18,11 +18,12 @@ const {ORDER_PAGE,CART_PAGE} = languageDefinations();
 
 import lang from '../../../../utils/language';
 
+import main_en from '../../../../layout/main/main_en.styl';
+import main_ar from '../../../../layout/main/main_ar.styl';
 import styles_en from '../../order_en.styl';
-import styles_ar from '../../order_ar.styl';
+import styles_ar from '../../order_en.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
-
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 
 class OrderHeader extends Component {
@@ -65,8 +66,8 @@ class OrderHeader extends Component {
     const { lat, lng } = this.state;
     if (lat != 0 && lng != 0) {
       this.props.sendMapData(this.props.orderDetails.orderId, {
-        "latitude": lat,
-        "longitude": lng
+        'latitude': lat,
+        'longitude': lng
       });
       this.closeModal();
     }
@@ -82,12 +83,15 @@ class OrderHeader extends Component {
       name, address, phone, orderId, orderDate, price,
       shippingTotal, payments, currency_code, order_type,
     } = this.props.orderDetails;
+    const {
+      total_mrp = {}, total_shipping = {}, total_offer_price = {}, total_price = {}, total_gift_charges = {}, total_discount = {},
+    } = price;
     return (
-      <div className={`${styles['box']} ${styles['addres-dtls']}`}>
+      <div className={`${styles.box} ${styles['addres-dtls']}`}>
         <Row className={styles['m-0']}>
           {/* <Col md={12} xs={12} sm={12}> */}
           <Col md={12} xs={12} sm={12} className={`${styles['border-btm-dottes']}`}>
-            <div className={`${styles['pb-25']} ${styles['pt-25']} ${styles['flex']}`}>
+            <div className={`${styles['pb-25']} ${styles['pt-25']} ${styles.flex}`}>
               <Col md={3} xs={6} sm={3}>
                 <div className={styles['flx-space-bw']}>
                   <h5 className={`${styles['mt-0']} ${styles['fs-16']} ${styles['light-gry-clr']} ${styles['mb-20']}`}>{ORDER_PAGE.ADDRESS_DETAILS}</h5>
@@ -114,7 +118,7 @@ class OrderHeader extends Component {
                     </p>
                     <p className={`${styles['flex-center']}`}>
                       <Col md={6} sm={6} className={styles['thick-gry-clr']}>{ORDER_PAGE.ITEM_TOTAL}</Col>
-                      {price && <Col md={6} sm={6}><span>{price.total_offer_price}</span> <span>{currency_code}</span></Col>}
+                      {price && <Col md={6} sm={6}><span>{total_offer_price.display_value}</span> <span>{total_offer_price.currency_code}</span></Col>}
                     </p>
                     {/* <p className={`${styles['flex-center']}`}>
                       <Col md={6} sm={6}>{ORDER_PAGE.SHIPPING}</Col>
@@ -150,7 +154,7 @@ class OrderHeader extends Component {
                       <Fragment>
                         <Row>
                           <Col className={`${styles['thick-gry-clr']}`} md={6}>{p.payment_mode.replace('_', ' ')}</Col>
-                          <Col md={6}> {`${p.amount} ${p.currency_code}`}</Col>
+                          <Col md={6}> {`${p.amount.display_value} ${p.currency_code}`}</Col>
                         </Row>
                         {p.card_type &&
                           <Row>
@@ -196,8 +200,8 @@ class OrderHeader extends Component {
                 <Col md={6} sm={6}><span className={`${styles['light-gry-clr']}`}>{ORDER_PAGE.GRAND_TOTAL}</span></Col>
                 {price &&
                 <Col md={6} sm={6}>
-                  <span className={`${styles['fontW600']} ${styles['light-gry-clr']} ${styles['flex-center']}`}>
-                    {price.total_price}&nbsp;{currency_code}
+                  <span className={`${styles.fontW600} ${styles['light-gry-clr']} ${styles['flex-center']}`}>
+                    {total_price.display_value}&nbsp;{total_price.currency_code}
                     {/* (<a onMouseOver={this.showToolTip} onMouseLeave={this.hideToolTip}>i</a>) */}
                     <span onMouseOver={this.showToolTip} onMouseLeave={this.hideToolTip} className={`${styles.relative} ${styles['checkout-quat']} ${styles['fs-12']} ${styles['flex-center']} ${styles['justify-around']}`}>
                       {'?'}
@@ -205,13 +209,18 @@ class OrderHeader extends Component {
                       showToolTip ?
                         <div className={styles['tool-tip']}>
                           <ul>
-                            <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.T_MRP} : </span><span> {price.total_mrp} {currency_code}</span></li>
-                            <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.T_DISCOUNT} : </span><span>{'(-)'} {price.total_discount} {currency_code}</span></li>
-                            <li className={`${styles['flx-space-bw']} ${styles['b-t']}`}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.T_PRICE} : </span><span> {price.total_offer_price} {currency_code}</span></li>
-                            <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.T_SHIPPING} : </span><span className={styles.flex}>{price.total_shipping ? `(+) ${price.total_shipping} ${currency_code}` : <SVGComponent clsName={`${styles['ship-icon']}`} src="icons/free-shipping" />}</span></li>
-                            {price.total_gift_charges > 0 &&
-                              <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.T_GIFT_CHARGES} : </span><span>{price.total_gift_charges ? `(+) ${price.total_gift_charges} ${currency_code}` : 'FREE'}</span></li>}
-                            <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.TOTAL} : </span><span className={styles['fontW600']}>{price.total_price} {currency_code}</span></li>
+                            {total_mrp &&
+                            <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.T_MRP} : </span><span> {total_mrp.display_value} {total_mrp.currency_code}</span></li>}
+                            {total_discount &&
+                            <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.T_DISCOUNT} : </span><span>{'(-)'} {total_discount.display_value} {total_discount.currency_code}</span></li>}
+                            {total_offer_price &&
+                            <li className={`${styles['flx-space-bw']} ${styles['b-t']}`}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.T_PRICE} : </span><span> {total_offer_price.display_value} {total_offer_price.currency_code}</span></li>}
+                            {total_shipping &&
+                            <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.T_SHIPPING} : </span><span className={styles.flex}>{total_shipping.display_value ? `(+) ${total_shipping.display_value} ${total_shipping.currency_code}` : <SVGComponent clsName={`${styles['ship-icon']}`} src="icons/free-shipping" />}</span></li>}
+                            {total_gift_charges && total_gift_charges.money_value > 0 &&
+                              <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.T_GIFT_CHARGES} : </span><span>{total_gift_charges.display_value ? `(+) ${total_gift_charges.display_value} ${total_gift_charges.currency_code}` : 'FREE'}</span></li>}
+                            {total_price &&
+                            <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.TOTAL} : </span><span className={styles.fontW600}>{total_price.display_value} {total_price.currency_code}</span></li>}
                           </ul>
                         </div>
                         : null

@@ -187,6 +187,8 @@
     content: '';
     background: url(/static/img/icons/common-icon/long-Left-arrow.svg) no-repeat;
     background-size: contain;
+    display: flex;
+    height: 20px;
     color: transparent !important;
 }
 
@@ -194,6 +196,8 @@
     content: '';
     background: url(/static/img/icons/common-icon/long-right-arrow.svg) no-repeat;
     background-size: contain;
+    display: flex;
+    height: 20px;
     color: transparent !important;
 }
 

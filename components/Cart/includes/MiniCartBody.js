@@ -15,13 +15,14 @@ const cookies = new Cookies();
 const language = cookies.get('language') || 'en';
 const country = cookies.get('country') || 'SAU';
 
-
 import lang from '../../../utils/language';
 
+import main_en from '../../../layout/main/main_en.styl';
+import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from '../cart_en.styl';
 import styles_ar from '../cart_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const MiniCartBody = (props) => {
   const { showBlocker, increaseItemCnt, decreaseItemCnt, data, removeCartItem, editCartDetails, showCheckOutBtn, checkoutBtnHandler } = props;
@@ -111,7 +112,7 @@ const MiniCartBody = (props) => {
         cnt > 0 && showCheckOutBtn ?
           <div className={`${styles['p-20']} ${styles['instant-checkout-btn-part']}`}>
             <div className={`${styles['flx-spacebw-alignc']} ${styles['pb-10']}`}>
-              <span className={styles['fontW600']}>{CART_PAGE.TOTAL_AMOUNT} :</span><span className={`${styles['fs-16']} ${styles['fontW600']}`}> {total_offer_price + ' ' + currency}</span>
+              <span className={styles['fontW600']}>{CART_PAGE.TOTAL_AMOUNT} :</span><span className={`${styles['fs-16']} ${styles['fontW600']}`}> {total_offer_price.display_value + ' ' + currency}</span>
             </div>
             <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles['fs-18']} ${styles['flex-center']} ${styles['justify-center']}`} onClick={checkoutBtnHandler}>
               <SVGComponent clsName={`${styles['secure-checkout']}`} src="icons/common-icon/secure-checkout" />

@@ -2,14 +2,20 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import HeaderBar from '../HeaderBar';
-import { mergeCss } from '../../utils/cssUtil';
 import { actionCreators } from '../../store/helpsupport';
 import { selectors } from '../../store/auth';
 import {Router} from '../../routes';
 import { ContactTabs, helpComponents } from './helpConstants';
 import EmailModal from './EmailModal';
 
-const styles = mergeCss('components/Help/help');
+import lang from '../../utils/language';
+
+import main_en from '../../layout/main/main_en.styl';
+import main_ar from '../../layout/main/main_ar.styl';
+import styles_en from './help_en.styl';
+import styles_ar from './help_ar.styl';
+
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 class Help extends Component {
   constructor(props){
@@ -96,7 +102,7 @@ class Help extends Component {
   }
 }
 
-export default connect((state) => ({ 
+export default connect((state) => ({
   categoryData: state.helpSupportReducer.categoryData,
   isCategoryLoaded: state.helpSupportReducer.isCategoryLoaded,
   isLoggedIn: selectors.getLoggedInStatus(state)

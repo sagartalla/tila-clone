@@ -5,9 +5,15 @@ import Cookies from 'universal-cookie';
 import { actionCreators as helpActions } from '../../store/helpsupport';
 import { actionCreators as orderActions} from '../../store/cam/orders';
 import { selectors, actionCreators as orderDetailActions } from '../../store/order';
+import { selectors as personalSelectors } from '../../store/cam/personalDetails';
 import { selectors as authSelectors } from '../../store/auth';
 import constants from '../../constants';
-import { mergeCss } from '../../utils/cssUtil';
+
+//import { mergeCss } from '../../utils/cssUtil';
+import { languageDefinations } from '../../utils/lang';
+
+const { HEADER_PAGE } = languageDefinations();
+
 
 const cookies = new Cookies();
 
@@ -15,7 +21,14 @@ const language = cookies.get('language') || 'en';
 const country = cookies.get('country') || 'SAU';
 const userCredentials = cookies.get('userCreds');
 
-const styles = mergeCss('components/Help/help');
+import lang from '../../utils/language';
+
+import main_en from '../../layout/main/main_en.styl';
+import main_ar from '../../layout/main/main_ar.styl';
+import styles_en from './help_en.styl';
+import styles_ar from './help_ar.styl';
+
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const statusColor = {
   'New': '#F5A624',
@@ -37,7 +50,7 @@ const ReplyBox = (props) => {
       } else {
         alert('File size limit is 10MB')
       }
-    }  
+    }
   }
   const removeFile = (fileName) => (e) => {
     const newFileObj = {...files};
@@ -54,15 +67,15 @@ const ReplyBox = (props) => {
   )
   return(
     <div className={styles['pV-10']}>
-      <textarea className={styles['MsgTextArea']} placeholder='Reply to this message' value={msg} onChange={handleMsg} />
+      <textarea disabled={props.loading} className={styles['MsgTextArea']} placeholder='Reply to this message' value={msg} onChange={handleMsg} />
       <div className={styles['MsgBoxContainer']}>
         <div className={styles['UploadButton']}>
           UPLOAD
-          <input type='file' onChange={handleAttachements} className={styles['fileInput']} />
+          <input type='file' disabled={props.loading} onChange={handleAttachements} className={styles['fileInput']} />
         </div>
-        <div onClick={props.updateIncident(msg, files)} className={styles['SendMsgButton']}>SEND MESSAGE</div>
+        <div onClick={props.updateIncident(msg, files)} className={props.loading ? styles['disabledButton'] : styles['SendMsgButton']}>SEND MESSAGE</div>
       </div>
-      {Object.keys(files).length ? 
+      {Object.keys(files).length ?
             <div className={styles['fs-12p']}>
               <div>{`Attachments (${Object.keys(files).length})`}</div>
                 {Object.keys(files).map(renderFiles)}
@@ -78,14 +91,15 @@ class Incidents extends Component {
     super(props);
     this.state = {
       selectedIncident: (window.location.hash || '#').split('#')[1],
-      tktOrder: ''
+      tktOrder: '',
+      loading: false
     }
     this.scrollTimeout = '';
     userCredentials && userCredentials.username && this.initiateApiCalls();
   }
   componentWillReceiveProps(nextProps){
     if(nextProps.tktData !== this.props.tktData && nextProps.tktData.length &&!this.props.tktData.length) {
-      this.selectTicket(nextProps.tktData[0].id)() 
+      this.selectTicket(nextProps.tktData[0].id)()
     }
     if(nextProps.tktDetailData !== this.props.tktDetailData) {
       const { orderNumberTiLa } = nextProps.tktDetailData;
@@ -139,9 +153,19 @@ class Incidents extends Component {
         },
       })
     }
-    msg ? this.props.updateTicket(ticketId, serverData).then(res => {
-        this.props.getTicketDetail({ticketNumber: this.state.selectedIncident})
-    }) : alert('Enter a message');
+    if(msg && !this.state.loading) {
+      this.setState({
+        loading: true
+      }, () => {
+        this.props.updateTicket(ticketId, serverData).then(res => {
+          this.setState({ loading: false })
+          this.props.getTicketDetail({ticketNumber: this.state.selectedIncident})
+        })
+      })
+      
+    } else {
+      !this.state.loading && alert('Enter a message');
+    }
   }
   selectTicket = (tktId) => (e) => {
     this.setState({
@@ -197,8 +221,7 @@ class Incidents extends Component {
           <div className={`${styles['flex']} ${styles['align-center']}`}>
             <div className={styles['userProfile']}/>
             <div>
-              <div>{nameOfPerson || 'User'}</div>
-              <div className={`${styles['fs-12p']} ${styles['greyColor']}`}>Title</div>
+              <div>{nameOfPerson || this.props.userInfo.personalInfo.first_name || HEADER_PAGE.TILA_CUSTOMER}</div>
             </div>
           </div>
           <div className={`${styles['fs-12p']} ${styles['greyColor']}`}>
@@ -206,9 +229,10 @@ class Incidents extends Component {
             <div>{new Date(createdTs).toLocaleTimeString()}</div>
           </div>
         </div>
-        <div className={`${styles['fs-13p']} ${styles['greyColor']}`}>{msg}</div>
+        <div className={`${styles['fs-13p']} ${styles['greyColor']}`} dangerouslySetInnerHTML={{__html: msg}} />
         {index === 0 ? 
-          <ReplyBox updateIncident={this.updateIncident} />
+          <ReplyBox updateIncident={this.updateIncident} loading={this.state.loading}/>
+
         : null}
       </div>
     )
@@ -241,7 +265,7 @@ class Incidents extends Component {
   renderTicketDetail = () => {
     const { id, referenceNumber, subject, threadTiLaList, statusTiLa, fileAttachmentTiLaList, orderNumberTiLa} = this.props.tktDetailData || {};
     const threads = (threadTiLaList || []).reduce((acc, val, i) => {
-      return {...acc, [val.threadSequence]: val}
+      return {...acc, [val.id]: val}
     },{});
     const fileAttachments = (fileAttachmentTiLaList || []).reduce((acc, val, i) => {
       return {...acc, [val.fileId]: val}
@@ -253,13 +277,13 @@ class Incidents extends Component {
         <div className={styles['pV-10']} dangerouslySetInnerHTML={{__html: subject}} />
         {orderNumberTiLa && (this.state.tktOrder ? this.renderOrderItems(this.state.tktOrder) : <div>Getting order details of {orderNumberTiLa}</div>)}
         <div>{threadIds.map(this.renderThread(threads))}</div>
-        {fileIds.length ? 
+        {fileIds.length ?
           <div className={`${styles['pV-10']} ${styles['fs-14p']}`}>
             <div>{`All Attachments (${fileIds.length})`}</div>
             <div>{fileIds.map(this.renderFile(fileAttachments, id))}</div>
           </div>
         : null}
-        
+
       </div>
     )
   }
@@ -287,7 +311,8 @@ export default connect(
     tktDetailData: state.helpSupportReducer.tktDetailData,
     raiseTktData: state.helpSupportReducer.raiseTktData,
     updateTktData: state.helpSupportReducer.updateTktData,
-    userCredentials: authSelectors.getUserCreds(state)
+    userCredentials: authSelectors.getUserCreds(state),
+    userInfo: personalSelectors.getUserInfo(state),
   }), {
     ...helpActions,
     ...orderActions,

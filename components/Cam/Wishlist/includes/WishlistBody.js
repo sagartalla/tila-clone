@@ -10,10 +10,12 @@ import constants from '../../../../constants';
 
 import lang from '../../../../utils/language';
 
+import main_en from '../../../../layout/main/main_en.styl';
+import main_ar from '../../../../layout/main/main_ar.styl';
 import styles_en from '../wishlist_en.styl';
 import styles_ar from '../wishlist_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const cookies = new Cookies();
 
@@ -32,18 +34,19 @@ const WishlistBody = (props) => {
     if (a === b) return null;
     let str = '';
     const percent = percentage(a, b);
+    let priceVal = a - b;
     if (percent > 0) {
       str = (
         <span className={`${styles['thick-red-clr']} ${styles.flex}`}>
           <SVGComponent clsName={`${styles['alert-icon']}`} src="icons/increase/increase" />
-          {`Price Increased by ${a - b} ${cur} (${percent}%)`}
+          {`Price Increased by ${priceVal.toFixed(2)} ${cur} (${percent}%)`}
         </span>
       );
     } else {
       str = (
         <span className={`${styles['success-green']} ${styles.flex}`}>
           <SVGComponent clsName={`${styles['alert-icon']}`}src="icons/decrease/decrease" />
-          {`Price Decreased by ${a - b} ${cur} (${percent}%)`}
+          {`Price Decreased by ${priceVal.toFixed(2)} ${cur} (${percent}%)`}
         </span>
       );
     }
@@ -88,6 +91,7 @@ const WishlistBody = (props) => {
                         {inventory_count > 0 ?
                           <button
                             id={listing_id}
+                            data-cart-res={true}
                             data-wish-id={wishlist_id}
                             className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['add-to-btn']}`}
                             onClick={buttonValue && addToCart}

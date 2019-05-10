@@ -23,10 +23,12 @@ import RenderVariants from './renderVariants';
 
 import lang from '../../../utils/language';
 
+import main_en from '../../../layout/main/main_en.styl';
+import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from '../search_en.styl';
 import styles_ar from '../search_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const { PDP_PAGE } = languageDefinations();
 
@@ -251,10 +253,11 @@ class Product extends Component {
     const getPriceAndOffer = () => (
       <span>
         <span
-          className={`${styles['fs-16']} ${styles.fontW700} ${styles['black-color']}`}
+          className={`${styles['fs-16']} ${styles.fontW600} ${styles['black-color']}`}
         >
           {variants[selectedIndex].sellingPrice[0]}
-        </span>
+        </span>&nbsp;
+        <span className={`${styles['fs-12']} ${styles['black-color']}`}>{currency}</span>
         {discountValue > 5 &&
           <React.Fragment>
             <span className={`${styles['ml-5']} ${styles['label-gry-clr']} ${styles['fs-12']}`}>
@@ -307,15 +310,24 @@ class Product extends Component {
                     <span className={`${styles.absolute} ${styles['offer-tag']} ${styles[this.getOfferClassName(discountValue)]}`}>
                       <span>{discountValue}%</span>
                     </span>}
+                  {
+                    variants.length > 1 &&
+                    <RenderVariants
+                      variantData={variants}
+                      onSelectedVariant={this.selectedVariant}
+                      isvisible={selectedProduct}
+                      OncloseVariant={this.closeVariantTab}
+                    />
+                  }
                 </div>
                 <div className={styles['desc-cont']}>
-                  <div className={`${styles['pb-20']} ${styles['pl-20']} ${styles['flex']} ${styles['flex-colum']}`}>
+                  <div className={`${styles['pb-20']} ${styles['pl-20']} ${styles['pr-20']} ${styles['flex']} ${styles['flex-colum']}`}>
                     <h5 className={`${styles['prdt-name']} ${styles['pt-15']} ${styles['pb-5']}  ${styles['m-0']} ${styles['ellips']}`}>
                       <span className={`${styles['fontW600']} ${styles['black-color']}`}>{brand}</span> <span className={`${styles['thick-gry-clr']} ${styles['fontW300']}`}>{displayName.replace(brand, '').trim()}</span>
                     </h5>
                     <span>
                       <span className={`${styles['pr-5']}`}>{variants.length > 0 && variants[selectedIndex].sellingPrice && getPriceAndOffer()}</span>
-                      <span className={`${styles['fs-12']} ${styles['black-color']}`}>{currency}</span>
+                      {/* <span className={`${styles['fs-12']} ${styles['black-color']}`}>{currency}</span> */}
                     </span>
                   </div>
                 </div>
@@ -324,7 +336,7 @@ class Product extends Component {
                     variants.length > 0 ?
                       <div className={`${styles['flex']} ${styles['justify-around']} ${styles['quick-view']} ${styles['border-radius4']}`}>
                         <Button
-                          className={`${styles['flex']} ${styles['add-to-crt']} ${styles['fs-12']} ${styles['text-capitalize']}`}
+                          className={`${styles['flex']} ${styles['add-to-crt']} ${styles['fontW600']} ${styles['fs-10']} ${styles['text-uppercase']}`}
                           onClick={this.showVariants('ADD_TO_CART')}
                           disabled={btnLoading}
                           btnText={PDP_PAGE.ADD_TO_CART}
@@ -332,7 +344,7 @@ class Product extends Component {
                           btnLoading={variants[selectedIndex].listingId && cartButtonLoaders[variants[selectedIndex].listingId[0]]}
                         />
                         <Button
-                          className={`${styles['flex-center']} ${styles['buy-now-btn']} ${styles['fs-12']} ${styles['text-capitalize']}`}
+                          className={`${styles['flex-center']} ${styles['buy-now-btn']} ${styles['fontW600']} ${styles['fs-10']} ${styles['text-uppercase']}`}
                           onClick={this.showVariants('BUY_NOW')}
                           btnText={PDP_PAGE.BUY_NOW}
                           showImage="icons/cart/buy-icon"
@@ -355,7 +367,7 @@ class Product extends Component {
                       </a>
                     </span>
                     {(flags && flags.comparable) &&
-                      <div 
+                      <div
                         className={`${styles['checkbox-material']} ${styles['flex']} ${styles['add-to-compare']}`}
                         onClick={this.preventDefaultClick}
                       >
@@ -374,7 +386,7 @@ class Product extends Component {
                     <span className={`${styles['pr-5']}`}>{variants.length > 0 && variants[selectedIndex].sellingPrice &&
                       getPriceAndOffer()}
                     </span>
-                    <span className={`${styles['fs-12']}`}>{currency}</span>
+                    {/* <span className={`${styles['fs-12']} ${styles['black-color']}`}>{currency}</span> */}
                     <div className={`${styles['flex']} ${styles['pt-5']}`}>
                       <span className={styles['flex']}>
                         <SVGCompoent clsName={`${styles['star-raing']}`} src="icons/common-icon/star-full-yellow" />
@@ -398,15 +410,7 @@ class Product extends Component {
                 </div>
               </div> */}
                 </div>
-                {
-                  variants.length > 1 &&
-                  <RenderVariants
-                    variantData={variants}
-                    onSelectedVariant={this.selectedVariant}
-                    isvisible={selectedProduct}
-                    OncloseVariant={this.closeVariantTab}
-                  />
-                }
+                
               </div>
             </a>
           </Link>

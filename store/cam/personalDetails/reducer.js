@@ -46,6 +46,27 @@ const personalDetailsReducer = typeToReducer({
       ui: { loading: false },
     }),
   },
+  [actions.UPLOAD_PROFILE_PIC]: {
+    PENDING: state => Object.assign({}, state, { ui: {loading: true} }),
+    FULFILLED: (state, action) => {
+      const uploadPicStatus = { uploadPicStatus: action.payload };
+      const newState = {
+        ...state,
+        data: {
+          ...state.data,
+          ...uploadPicStatus,
+        },
+        ui: {
+          loading: true
+        },
+      };
+      return newState;
+    },
+    REJECTED: (state, action) => Object.assign({}, state, {
+      error: action.payload.data,
+      ui: { loading: false},
+    }),
+  },
   [actions.RESET_PASSWORD]: {
     PENDING: state => Object.assign({}, state, { ui: { loading: true } }),
     FULFILLED: (state, action) => Object.assign({}, state, { data: action.payload, ui: { loading: false } }),

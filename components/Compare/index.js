@@ -16,10 +16,12 @@ import Button from '../common/CommonButton';
 
 import lang from '../../utils/language';
 
+import main_en from '../../layout/main/main_en.styl';
+import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './compare_en.styl';
 import styles_ar from './compare_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const { COMPARE, PDP_PAGE } = languageDefinations();
 
@@ -166,7 +168,7 @@ class Compare extends Component {
                         </span>
                       </Link>
                       <div>
-                        <span className={styles.fontW600}>{product.price} {product.currency}</span>
+                        <span className={styles.fontW600}>{product.price.display_value} {product.price.currency_code}</span>
                         {/* <span className={`${styles['fs-12']} ${styles['google-clr']}`}>{product.offer}</span> */}
                       </div>
                     </div>
