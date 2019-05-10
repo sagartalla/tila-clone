@@ -178,9 +178,7 @@ class Coupon extends Component {
         <div className={`${styles.couponApply} ${styles.flex}`}>
           <Input
             placeholder={` ${COUPON_OFFERS.ENTER_COUPON_CODE}`}
-            style={{
-            width: '350px', height: '60px', border: '0', paddingLeft: '10px',
-          }}
+            className={`${styles.input}`}
             onChange={this.enterCouponCode}
             val={couponCode || appliedCoupon}
           />
