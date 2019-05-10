@@ -4,8 +4,9 @@
   background white
   position relative
   padding 20px
-  border-radius 10px
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
+.compare-background 
+   border-radius 10px
+   box-shadow 0 2px 4px 0 rgba(0, 0, 0, 0.13)
   .cart-btn
     border-bottom-right-radius 16px
     width 75%
@@ -32,12 +33,11 @@
       height 20px
       width 20px
       margin-right 5px
-  .cross-icon
-    width 12px
-    height 12px
+  .close-item
     position absolute
-    top 10px
-    right 12px
+    top 6px
+    right 10px
+    font-size 20px
 .add-icon
   padding 0px 14px
   font-size 30px
@@ -50,8 +50,7 @@
   border-left 3px solid electronics-color
 
  .parentBackground:nth-child(even) .childBackground
-    opacity 0.5
-    background-color #ebebeb
+    background-color: rgba(235,235,235, 0.5);
     margin-right 5px
 
   .parentBackground:nth-child(odd) .childBackground
@@ -60,4 +59,4 @@
 
  .parentBackground
     word-break break-all
-
+    align-items stretch
