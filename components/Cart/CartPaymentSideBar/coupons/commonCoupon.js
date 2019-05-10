@@ -1,7 +1,7 @@
 
 import moment from 'moment';
 import lang from '../../../../utils/language';
-import SVGCompoent from '../../../common/SVGComponet';
+import SVGComponent from '../../../common/SVGComponet';
 
 import main_en from '../../../../layout/main/main_en.styl';
 import main_ar from '../../../../layout/main/main_ar.styl';
@@ -47,15 +47,23 @@ const coupons = props => (
       }
       </> :
         props.loading ?
-          <div className={styles['loader-div']}>
-            <SVGCompoent
+        <div className={`${styles['coupon-result']} ${styles['flex-center']} ${styles['justify-center']} ${styles.width100}`}>
+          <div className={`${styles['loader-div']} ${styles['align-center']}`}>
+            <SVGComponent
               clsName={styles['loader-styl']}
               src="icons/common-icon/circleLoader"
             >
-            </SVGCompoent>
+            </SVGComponent>
+          </div>
           </div> :
-      <div className={`${styles['thick-red-clr']} ${styles['m-80']} ${styles['fs-18']} ${styles['t-c']}`}>{COUPON_OFFERS.NO_COUPONS}</div>
-    );
+            <div className={`${styles['coupon-result']} ${styles['flex-center']} ${styles['justify-center']} ${styles.width100} ${styles['flex-col']} ${styles['black-color']}`}>
+            <SVGComponent clsName={`${styles['coupon-img']}`} src="icons/common-icon/NoCoupons" />
+            <div className={`${styles['black-color']} ${styles['t-c']}  ${styles['fs-24']} ${styles['p-10']}`}>{COUPON_OFFERS.EMPTY_COUPON_BOX}</div>
+            <div className={`${styles['thick-gry-clr']} ${styles['t-c']} ${styles['fs-14']}`}>
+                  {COUPON_OFFERS.NO_COUPONS_AVAILABLE}<br />
+                  {COUPON_OFFERS.CHECK_BACK_LATER}</div>
+            </div>
+     );
 
 export default coupons;
 
