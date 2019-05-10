@@ -91,6 +91,7 @@ const WishlistBody = (props) => {
                         {inventory_count > 0 ?
                           <button
                             id={listing_id}
+                            data-cart-res={true}
                             data-wish-id={wishlist_id}
                             className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['add-to-btn']}`}
                             onClick={buttonValue && addToCart}

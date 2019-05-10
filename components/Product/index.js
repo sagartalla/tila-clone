@@ -67,8 +67,8 @@ const getProductComponent = (isPreview, taskCode) => {
           ProductData: productData,
         });
         if (offerInfo.offerPricing) {
-          const pr = offerInfo.offerPricing.sellingPrice.display_value;
-          const cd = offerInfo.offerPricing.sellingPrice.currency_code;
+          const pr = offerInfo && offerInfo.offerPricing && offerInfo.offerPricing.sellingPrice && offerInfo.offerPricing.sellingPrice.display_value;
+          const cd = offerInfo && offerInfo.offerPricing && offerInfo.offerPricing.sellingPrice && offerInfo.offerPricing.sellingPrice.currency_code;
           const recentData = localStorage.getItem('rv');
           const arr = recentData ? JSON.parse(recentData) : [];
           const index = _.findIndex(arr, (o) => o.id == shippingInfo.listing_id);
