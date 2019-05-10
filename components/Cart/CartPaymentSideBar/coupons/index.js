@@ -178,9 +178,7 @@ class Coupon extends Component {
         <div className={`${styles.couponApply} ${styles.flex}`}>
           <Input
             placeholder={` ${COUPON_OFFERS.ENTER_COUPON_CODE}`}
-            style={{
-            width: '350px', height: '60px', border: '0', paddingLeft: '10px',
-          }}
+            className={`${styles.input}`}
             onChange={this.enterCouponCode}
             val={couponCode || appliedCoupon}
           />
@@ -205,7 +203,7 @@ class Coupon extends Component {
             style={{ background: 'none' }}
           >
             <div className={`${styles['flex-center']}`}>
-              <div className={`${styles.couponCodeListing} ${styles.left15}  ${styles.width35} ${styles.fontW600} ${styles['m-5']}`}>{couponSelected}</div>
+              <div className={`${styles.couponCodeCartTerms} ${styles.width35} ${styles.fontW600} ${styles['m-5']}`}>{couponSelected}</div>
               <div className={`${styles['label-gry-clr']}`}>{couponDescription}</div>
             </div>
             <Tabs defaultActiveKey={1}>
