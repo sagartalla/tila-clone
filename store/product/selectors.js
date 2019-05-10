@@ -34,6 +34,7 @@ const getProduct = (store, variantId) => {
     // }
     return listing.total_inventory_count > 0 && listing.active;
   }) : [];
+
   const warranty = priceInfo.length && priceInfo[0].warranty_policy && priceInfo[0].warranty_policy.preferred_policy ?
     priceInfo[0].warranty_policy.policies[priceInfo[0].warranty_policy.preferred_policy] : {};
   priceInfo = priceInfo.length ? priceInfo[0] : null;
@@ -75,9 +76,14 @@ const getProduct = (store, variantId) => {
     categoryId: tree && tree.breadcrumb && tree.breadcrumb[tree.breadcrumb.length - 1].id,
     comparable: product_details.catalog_details.comparable,
   };
+  let returnPolicy = priceInfo && priceInfo.return_policy ?
+  priceInfo.return_policy.policies[priceInfo.return_policy.preferred_policy].allowed : false
+  let daysToReturn = priceInfo && priceInfo.return_policy ?
+  priceInfo.return_policy.policies[priceInfo.return_policy.preferred_policy].duration : 0
+
   const returnInfo = {
-    acceptsReturns: priceInfo ? priceInfo.accepts_returns : false,
-    maxDaysToReturn: priceInfo ? priceInfo.max_days_to_return : 0,
+    acceptsReturns: returnPolicy,
+    maxDaysToReturn: daysToReturn,
   };
   const shippingInfo = priceInfo ? {...priceInfo.shipping, ...returnInfo} : {};
   const offerInfo = {

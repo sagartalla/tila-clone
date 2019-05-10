@@ -86,7 +86,8 @@ class OrderItem extends Component {
   }
 
   exchangeReturnOrder = OrderType => () => {
-    const { orderId, orderItem, variantId } = this.props;
+    const { orderId, orderItem, variantId, getOrderDetails } = this.props;
+    getOrderDetails({ orderId })
     Router.pushRoute(`/${country}/${language}/cam/orders/${orderId}/issue/${OrderType}/item/${orderItem.id}/${variantId}`);
     // raiseOrderIssue({
     //   issueType: null,
@@ -138,7 +139,7 @@ class OrderItem extends Component {
     return (
       <div className={`${styles['shipment-wrap']} ${styles['mb-20']} ${styles['mt-20']} ${styles.flex}`}>
         <Col md={7} sm={7} className={`${styles['pl-0']} ${styles['pr-0']} ${styles.flex} ${styles['flex-colum']}`}>
-          {orderItem.products.map((product) => {
+          {orderItem.products.map((product) => {          
             const {
               final_price = {}, gift_charge = {}, mrp = {}, offer_price = {}, shipping_fees = {},
             } = product.price;
@@ -298,6 +299,7 @@ class OrderItem extends Component {
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   raiseOrderIssue: actionCreators.raiseOrderIssue,
+  getOrderDetails: actionCreators.getOrderDetails
 }, dispatch);
 
 OrderItem.propTypes = {

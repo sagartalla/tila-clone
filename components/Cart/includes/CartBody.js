@@ -121,4 +121,4 @@ CartBody.propTypes = {
   data: PropTypes.object.isRequired,
 };
 
-export default CartBody
+export default CartBody;

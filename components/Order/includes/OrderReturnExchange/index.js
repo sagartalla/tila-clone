@@ -28,6 +28,7 @@ const language = cookies.get('language') || 'en';
 const country = cookies.get('country') || 'SAU';
 
 class OrderReturnExchange extends Component {
+  state = { fetchRender:true}
   componentDidMount() {
     const {
       query,
@@ -37,17 +38,41 @@ class OrderReturnExchange extends Component {
       getOrderDetails
     } = this.props;
     const { orderId, orderItemId, returnExchangeType, variantId } = query;
+
     const params = {
       orderId: orderId,
       issueType: returnExchangeType,
       step: STEPS.REASONS,
       returnExchangeType: returnExchangeType
     };
-    if (!orderIssue.selectedItem) {
+    if(orderIssue.orderId !== orderId) {      
+      getOrderDetails({ orderId });
+    } else {
       params.selectedItem = getSelectedOrder(orderItemId);
+      setOrderIssueData(params);
     }
-    setOrderIssueData(params);
-    getOrderDetails({ orderId });
+
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { query, orderIssue, getSelectedOrder, setOrderIssueData,orderDetails } = nextProps;
+    const { orderId, orderItemId, returnExchangeType, variantId } = query;
+    const params = {
+      orderId: orderId,
+      issueType: returnExchangeType,
+      step: STEPS.REASONS,
+      returnExchangeType: returnExchangeType
+    };
+    if(orderDetails.order_id === orderId && this.state.fetchRender) {
+      params.selectedItem = getSelectedOrder(orderItemId);
+      this.setState({
+        fetchRender: false
+      },() => setOrderIssueData(params))
+
+
+    }
+
+
   }
 
   render() {
@@ -88,7 +113,7 @@ class OrderReturnExchange extends Component {
                         </Col>
                         <Col md={10}>
                           <h4 className={`${styles['fs-16']} ${styles['fontW600']}`}>{name}</h4>
-                          <span className={styles['fs-14']}>{CART_PAGE.QUANTITY}: {orderDetails && orderDetails.order_items && orderDetails.order_items[0].quantity}</span>
+                          <span className={styles['fs-14']}>{CART_PAGE.QUANTITY}:</span>
                         </Col>
                         <Col md={10} className={`${styles['mt-25']}`}>
                           <h4
