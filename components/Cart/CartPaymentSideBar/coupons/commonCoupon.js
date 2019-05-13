@@ -38,8 +38,8 @@ const coupons = props => (
               <div className={`${styles['lgt-blue']} ${styles.pointer}`} data-coupon={JSON.stringify(data)} data-title="use" onClick={props.showPopup}>{COUPON_OFFERS.HOW_TO_USE}</div>
               <div>
               {props.showActiveCoupons ?
-                <button data-code={data.coupon_code} className={`${styles['fp-btn']} ${styles['copy-btn']} ${styles['small-btn']}`} onClick={props.handleCopy}>{data.coupon_code === props.copiedCode ? 'COPIED' : COUPON_OFFERS.COPY}</button>
-                : <button data-code={data.coupon_code} className={`${styles['fp-btn']} ${styles['apply-btn']} ${styles['small-btn']} ${styles.fontW600}`} onClick={props.handleApply}>{COUPON_OFFERS.APPLY}</button>}
+                <button data-code={data.coupon_code} className={`${styles['copy-btn']}`} onClick={props.handleCopy}>{data.coupon_code === props.copiedCode ? 'COPIED' : COUPON_OFFERS.COPY}</button>
+                : <button data-code={data.coupon_code} className={`${styles['apply-btn']} ${styles.fontW600}`} onClick={props.handleApply}>{COUPON_OFFERS.APPLY}</button>}
                 </div>
             </div>}
           </div>
