@@ -140,7 +140,7 @@ class MegaMenu extends Component {
           selectedCategoryTree
             ?
             <div
-              className={`${styles['megamenu-event-wrapper']} ${styles['pb-40']}`}
+              className={`${styles['megamenu-event-wrapper']}`}
               onMouseOver={this.onExpandedHover}
               onMouseLeave={this.onHoverOut}
             >
