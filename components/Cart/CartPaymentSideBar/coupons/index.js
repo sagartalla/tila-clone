@@ -167,7 +167,7 @@ class Coupon extends Component {
     return (
       showLoader || couponLoading ? <Blocker /> :
       <div className={`${styles.flex} ${styles['flex-colum']} ${styles['align-center']} ${styles.relative}`}>
-        <div className={`${styles.couponApply} ${styles.flex} ${styles['mr-20']}`}>
+        <div className={`${styles.couponApply} ${styles.flex}`}>
           <Input
             placeholder={` ${COUPON_OFFERS.ENTER_COUPON_CODE}`}
             className={`${styles.input}`}
