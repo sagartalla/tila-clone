@@ -22,7 +22,7 @@ class Preferences extends React.Component {
 
   render() {
     return (
-      <div className={`${styles.box}`}>
+      <div className={`${styles.box} ${styles.flex} ${styles['flex-colum']}`}>
         <div className={`${styles.flex} ${styles['p-15']}`}>
           <div className={`${styles.flex}`}>
             <SVGComponent clsName={styles.preferenceIcon} src="icons/speaker" />

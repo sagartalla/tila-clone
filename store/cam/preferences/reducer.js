@@ -4,6 +4,7 @@ import { actions } from './action';
 const initialState = {
   notifications: {},
 };
+
 const preferencesReducer = typeToReducer({
   [actions.GET_NOTIFICATION_PREFERENCES]: {
     PENDING: state => ({
@@ -26,6 +27,27 @@ const preferencesReducer = typeToReducer({
       {
         ...state,
         notifications: {},
+        loader: false,
+      }),
+  },
+  [actions.UPDATE_NOTIFICATION_PREFERENCES]: {
+    PENDING: state => ({
+      ...state,
+      loader: true,
+    }),
+    FULFILLED: (state, action) => {
+      return {
+        ...state,
+        notifications: {
+          ...state.notifications,
+          [action.payload.setting_sub_group]: action.payload,
+        },
+        loader: false,
+      };
+    },
+    REJECTED: state => (
+      {
+        ...state,
         loader: false,
       }),
   },

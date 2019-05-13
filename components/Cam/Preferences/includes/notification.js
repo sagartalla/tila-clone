@@ -2,7 +2,20 @@ import { languageDefinations } from '../../../../utils/lang/';
 
 const { PREFERENCES } = languageDefinations();
 
-const preferences = {
+export const settingValues = [{
+  title: 'Push Notifications',
+  value: 'PUSH',
+},
+{
+  title: 'Email Notifications',
+  value: 'EMAIL',
+},
+{
+  title: 'SMS Notifications',
+  value: 'SMS',
+}];
+
+export const Preferences = {
   ACTIVITY_ALERT: {
     heading: PREFERENCES.ACTIVITY_ALERT_HEADING,
     subheading: PREFERENCES.ACTIVITY_ALERT_SUB,
@@ -24,5 +37,3 @@ const preferences = {
     subheading: PREFERENCES.FEEDBACK_SURVEY_AND_PRODUCT_REVIEW_SUB,
   },
 };
-
-export default preferences;

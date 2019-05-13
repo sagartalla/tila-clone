@@ -604,6 +604,9 @@ export const AR_KEYWORDS = {
     EXPIRED_COUPONS: 'Expired Coupons',
     TERMS_AND_CONDITIONS: 'Terms & Conditions',
     EXPIRED_ON: 'Expired on',
+    EMPTY_COUPON_BOX: 'You have found an empty Coupon box',
+    NO_COUPONS_AVAILABLE: 'No coupons are available currently.',
+    CHECK_BACK_LATER: 'Please Check back later',
   },
   EMAIL_VERIFICATION: {
     VERIFY_YOUR_EMAIL: 'تفعيل  بريدك الالكتروني',
