@@ -222,7 +222,7 @@ class CartItem extends React.Component {
                         shipping !== null && (shipping.shippable && (
                           <p className={`${styles['mb-0']} ${styles['fs-12']}`}>
                             <span className={styles['thick-gry-clr']}>{CART_PAGE.SHIPPING} :</span>
-                            <span className={`${styles['pl-10']} ${styles['pr-10']}`}>{CART_PAGE.REGULAR_SHIPPING} ({shipping.shipping_fees + ' ' + cur}) - <span className={`${styles['fs-12']} ${styles['base-font']}`}>{CART_PAGE.ETA_DELIVERY_BY} {moment().add(shipping.shipping_days, 'days').format('LL')}</span>
+                            <span className={`${styles['pl-10']} ${styles['pr-10']}`}>{CART_PAGE.REGULAR_SHIPPING} {shipping.shipping_fees ? `(${shipping.shipping_fees} ${cur})` : ''} - <span className={`${styles['fs-12']} ${styles['base-font']}`}>{CART_PAGE.ETA_DELIVERY_BY} {moment().add(shipping.shipping_days, 'days').format('LL')}</span>
                             </span>
                           </p>
                         ))
