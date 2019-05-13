@@ -32,10 +32,10 @@ const coupons = props => (
             <div className={`${styles['thick-red-clr']} ${styles['p-10']}`}>{COUPON_OFFERS.EXPIRED_ON} &nbsp;{moment(data.ends_on).format('MM/DD/YYYY')}</div>
             :
             <div className={`${styles['p-10']} ${styles['flex-center']} ${styles['justify-between']} ${styles.flex}`}>
-              <div className={`${styles['lgt-blue']} ${styles.pointer} ${styles.flex}`} data-terms={data.tc} data-use={data.how_to_use} data-coupon={data.coupon_code} data-desc={data.description} data-title="terms" onClick={props.showPopup}>{COUPON_OFFERS.VIEW_TERMS}
+              <div className={`${styles['lgt-blue']} ${styles.pointer} ${styles.flex}`} data-coupon={JSON.stringify(data)} data-title="terms" onClick={props.showPopup}>{COUPON_OFFERS.VIEW_TERMS}
                 <div className={styles.border} />
               </div>
-              <div className={`${styles['lgt-blue']} ${styles.pointer}`} data-terms={data.tc} data-use={data.how_to_use} data-coupon={data.coupon_code} data-desc={data.description} data-title="use" onClick={props.showPopup}>{COUPON_OFFERS.HOW_TO_USE}</div>
+              <div className={`${styles['lgt-blue']} ${styles.pointer}`} data-coupon={JSON.stringify(data)} data-title="use" onClick={props.showPopup}>{COUPON_OFFERS.HOW_TO_USE}</div>
               <div>
               {props.showActiveCoupons ?
                 <button data-code={data.coupon_code} className={`${styles['fp-btn']} ${styles['copy-btn']} ${styles['small-btn']}`} onClick={props.handleCopy}>{data.coupon_code === props.copiedCode ? 'COPIED' : COUPON_OFFERS.COPY}</button>
