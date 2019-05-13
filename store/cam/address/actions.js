@@ -7,6 +7,7 @@ const actions = {
   DELETE_ADDRESS: 'DELETE_ADDRESS',
   MAKE_DEFAULT_ADDR: 'MAKE_DEFAULT_ADDR',
   EDIT_ADDR_DETAILS: 'EDIT_ADDR_DETAILS',
+  SELECT_DELIVER_TO_ADDRESS: 'SELECT_DELIVER_TO_ADDRESS',
 };
 
 const actionCreators = {
@@ -51,6 +52,16 @@ const actionCreators = {
     }).then(() => {
       dispatch(cartActionCreators.getCartResults())
     })
+  },
+
+  selectDeliverToAddress: (addId) => (dispatch, getState) =>  {
+    dispatch({
+      type: actions.SELECT_DELIVER_TO_ADDRESS,
+      payload: addId
+    })
+    dispatch(cartActionCreators.getCartResults({
+      address_id: addId
+    }));
   }
 };
 

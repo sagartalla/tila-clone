@@ -133,6 +133,8 @@ export const AR_KEYWORDS = {
     'MAKE_DEFAULT': 'اجعله العنوان الرئيسي',
     'DELETE': 'حذف',
     'EDIT_ADDR': 'تعديل العنوان',
+    'MAKE_DEFAULT': 'Make Default',
+    'DELIVER_TO': 'Deliver To',
     'ADD_NEW_BTN': 'إضافة جديد',
     'ADD_NEW_ADDR': 'إضافة عنوان جديد',
     'ADD_NEW_ADDR_HEAD': 'إضافة عنوان توصيل جديد',
