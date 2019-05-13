@@ -699,4 +699,11 @@ export const EN_KEYWORDS = {
    'ACCOUNT': 'account',
    'CART': 'cart',
  },
+ CAM: {
+    'MY_ORDERS': 'My Orders',
+    'WISHLIST': 'Wishlist',
+    'SHIPPING_ADDRESS': 'Shipping Address',
+    'CREDIT_CARDS_VOUCHERS_REWARD_POINTS': 'Credit Cards, Vouchers and Rewards',
+    'MY_COUPONS': 'My Coupons'
+ }
 };
