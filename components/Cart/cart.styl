@@ -23,8 +23,21 @@
   .card-details-name
     width 70%
   .cart-box
-    margin-bottom 0;
+    margin-bottom 0
     border-radius 4px 4px 0 0
+    .cart-price-toltp
+      .cart-tool-tip
+        right -8px
+        display none
+        text-align left
+        .table
+          line-height 1.6
+        &:before
+          right 12px
+          left auto
+      &:hover
+        .cart-tool-tip
+          display block
     .out-of-stock
       z-index 1
       width 96%
