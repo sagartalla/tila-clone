@@ -43,7 +43,7 @@ const AddressBody = (props) => {
         {
           props.data && props.data.map((val, id) => {
             const isDefault = val.default;
-            const colLength = isDefault ? 6 : 4;
+            const colLength = props.isPaymentPage && !isDefault ? 4 : 6;
             return (
               <Col md={4} sm={12} xs={12} key={id}>
                 <div className={`${styles['address-card']} ${val.default ? styles['address-selected'] : ''}`}>
@@ -93,7 +93,7 @@ const AddressBody = (props) => {
                         </span>
                       </Col>
                       {
-                          !isDefault ?
+                          props.isPaymentPage && !isDefault ?
                             <Col md={colLength} sm={colLength} xs={colLength} className={`${styles['pl-0']} ${styles['edit-action']} ${styles['flex']} ${styles['justify-center']}`}>
                               <span id={val.address_id} onClick={makeDefaultAddress} className={styles['edit-icon']}>
                                 {DELIVERY_ADDR_PAGE.MAKE_DEFAULT}
