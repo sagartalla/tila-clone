@@ -55,6 +55,7 @@ const DeliveryAddress = props => {
             <ShippingAddress
               showNonShippable={showNonShippable}
               handleShippingAddressContinue={handleShippingAddressContinue}
+              isPaymentPage
             />
           </div>
           : null
