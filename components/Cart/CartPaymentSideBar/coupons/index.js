@@ -92,9 +92,6 @@ class Coupon extends Component {
       title,
       showSlider: true,
     });
-    Object.assign(document.body.style, {
-      overflow: 'hidden',
-    });
   }
 
   closeSlider = () => {
