@@ -1,7 +1,7 @@
 
 import moment from 'moment';
 import lang from '../../../../utils/language';
-import SVGCompoent from '../../../common/SVGComponet';
+import SVGComponent from '../../../common/SVGComponet';
 
 import main_en from '../../../../layout/main/main_en.styl';
 import main_ar from '../../../../layout/main/main_ar.styl';
@@ -32,14 +32,14 @@ const coupons = props => (
             <div className={`${styles['thick-red-clr']} ${styles['p-10']}`}>{COUPON_OFFERS.EXPIRED_ON} &nbsp;{moment(data.ends_on).format('MM/DD/YYYY')}</div>
             :
             <div className={`${styles['p-10']} ${styles['flex-center']} ${styles['justify-between']} ${styles.flex}`}>
-              <div className={`${styles['lgt-blue']} ${styles.pointer} ${styles.flex}`} data-terms={data.tc} data-use={data.how_to_use} data-coupon={data.coupon_code} data-desc={data.description} data-title="terms" onClick={props.showPopup}>{COUPON_OFFERS.VIEW_TERMS}
+              <div className={`${styles['lgt-blue']} ${styles.pointer} ${styles.flex}`} data-coupon={JSON.stringify(data)} data-title="terms" onClick={props.showPopup}>{COUPON_OFFERS.VIEW_TERMS}
                 <div className={styles.border} />
               </div>
-              <div className={`${styles['lgt-blue']} ${styles.pointer}`} data-terms={data.tc} data-use={data.how_to_use} data-coupon={data.coupon_code} data-desc={data.description} data-title="use" onClick={props.showPopup}>{COUPON_OFFERS.HOW_TO_USE}</div>
+              <div className={`${styles['lgt-blue']} ${styles.pointer}`} data-coupon={JSON.stringify(data)} data-title="use" onClick={props.showPopup}>{COUPON_OFFERS.HOW_TO_USE}</div>
               <div>
               {props.showActiveCoupons ?
-                <button data-code={data.coupon_code} className={`${styles['fp-btn']} ${styles['copy-btn']} ${styles['small-btn']}`} onClick={props.handleCopy}>{data.coupon_code === props.copiedCode ? 'COPIED' : COUPON_OFFERS.COPY}</button>
-                : <button data-code={data.coupon_code} className={`${styles['fp-btn']} ${styles['apply-btn']} ${styles['small-btn']} ${styles.fontW600}`} onClick={props.handleApply}>{COUPON_OFFERS.APPLY}</button>}
+                <button data-code={data.coupon_code} className={`${styles['copy-btn']}`} onClick={props.handleCopy}>{data.coupon_code === props.copiedCode ? 'COPIED' : COUPON_OFFERS.COPY}</button>
+                : <button data-code={data.coupon_code} className={`${styles['apply-btn']} ${styles.fontW600}`} onClick={props.handleApply}>{COUPON_OFFERS.APPLY}</button>}
                 </div>
             </div>}
           </div>
@@ -47,15 +47,23 @@ const coupons = props => (
       }
       </> :
         props.loading ?
-          <div className={styles['loader-div']}>
-            <SVGCompoent
+        <div className={`${styles['coupon-result']} ${styles['flex-center']} ${styles['justify-center']} ${styles.width100}`}>
+          <div className={`${styles['loader-div']} ${styles['align-center']}`}>
+            <SVGComponent
               clsName={styles['loader-styl']}
               src="icons/common-icon/circleLoader"
             >
-            </SVGCompoent>
+            </SVGComponent>
+          </div>
           </div> :
-      <div className={`${styles['thick-red-clr']} ${styles['m-80']} ${styles['fs-18']} ${styles['t-c']}`}>{COUPON_OFFERS.NO_COUPONS}</div>
-    );
+            <div className={`${styles['coupon-result']} ${styles['flex-center']} ${styles['justify-center']} ${styles.width100} ${styles['flex-col']} ${styles['black-color']}`}>
+            <SVGComponent clsName={`${styles['coupon-img']}`} src="icons/common-icon/NoCoupons" />
+            <div className={`${styles['black-color']} ${styles['t-c']}  ${styles['fs-24']} ${styles['p-10']}`}>{COUPON_OFFERS.EMPTY_COUPON_BOX}</div>
+            <div className={`${styles['thick-gry-clr']} ${styles['t-c']} ${styles['fs-14']}`}>
+                  {COUPON_OFFERS.NO_COUPONS_AVAILABLE}<br />
+                  {COUPON_OFFERS.CHECK_BACK_LATER}</div>
+            </div>
+     );
 
 export default coupons;
 

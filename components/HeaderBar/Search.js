@@ -88,6 +88,7 @@ class Search extends Component {
       suggestions: [],
     }, () => {
       this.submitQuery(e);
+      window.scrollTo(0, 0);
     });
   }
 

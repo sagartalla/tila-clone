@@ -14,6 +14,7 @@ const Input = props => {
       onBlur={props.onBlur}
       autoFocus={props.autoFocus}
       onKeyPress={props.onKeyPress}
+      className={props.className}
     />
   );
 }

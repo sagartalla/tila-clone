@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="82" height="81" viewBox="0 0 82 81">
+    <g fill="none" fill-rule="evenodd" opacity=".393" transform="translate(3 2)">
+        <circle cx="38" cy="38.655" r="38" fill="#FFF" stroke="#DDD" stroke-width="4.586"/>
+        <text fill="#DDD" font-family="ProximaNova-Semibold, Proxima Nova" font-size="62.897" font-weight="500">
+            <tspan x="17" y="57">+</tspan>
+        </text>
+    </g>
+</svg>

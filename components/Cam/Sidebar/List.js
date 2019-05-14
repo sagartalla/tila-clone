@@ -6,6 +6,8 @@ import { Link } from '../../../routes';
 
 import lang from '../../../utils/language';
 
+import { languageDefinations } from '../../../utils/lang';
+
 import main_en from '../../../layout/main/main_en.styl';
 import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from './sidebar_en.styl';
@@ -17,6 +19,8 @@ const cookies = new Cookies();
 
 const language = cookies.get('language') || 'en';
 const country = cookies.get('country') || 'SAU';
+
+const { CAM } = languageDefinations();
 
 const List = props => props.data.map((val, id) => {
   const { query } = props;
@@ -33,7 +37,7 @@ const List = props => props.data.map((val, id) => {
             <div className={`${styles['list-item-left']} ${styles['pr-10']}`}>
               <SVGComponent src={itemVal.icon} />
             </div>
-            <div className={`${styles['list-items']} ${styles['fs-14']}`}>{itemVal.display}</div>
+            <div className={`${styles['list-items']} ${styles['fs-14']}`}>{CAM[itemVal.display]}</div>
             {/* {
               itemVal.count
               ?

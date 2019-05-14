@@ -134,7 +134,7 @@ class MyGMap extends React.Component {
       obj.city = curr.long_name;
     }
     if (curr.types.includes('postal_code')) {
-      obj.po_box = curr.long_name;
+      obj.postal_code = curr.long_name;
     }
     return obj;
   }, {});

@@ -89,7 +89,7 @@ class Menu extends Component {
     const { selectedCategoryTree, colorScheme, parentID } =  this.props;
     return (
       <div
-        className={`${styles['pt-40']} ${styles['megamenu-dropdown']} ${styles[colorScheme]} ${this.state.viewAllMenu ? {} : styles['max-height']}`}
+        className={`${styles['pt-20']} ${styles['megamenu-dropdown']} ${styles[colorScheme]} ${this.state.viewAllMenu ? {} : styles['max-height']}`}
       >
         <div className={styles['top-brands-trending-wrap']}>
           <ul className={`${styles['top-brands-wrap']} ${styles['megamenu-sub-drop-down']}`}>

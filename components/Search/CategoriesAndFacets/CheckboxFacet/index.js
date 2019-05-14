@@ -63,6 +63,7 @@ class CheckboxFacet extends Component {
   render() {
     const { filter, index, facets } = this.props;
     const { selectedItems } = this.state;
+    
     return (
       <Panel eventKey={`${index + 'c'}`} key={filter.id}>
         <div className={`${styles['category-list']}`}>
