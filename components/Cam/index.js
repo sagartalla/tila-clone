@@ -14,7 +14,8 @@ import Notifications from './Notifications';
 import UserVault from './UserVault';
 import Messages from './Messages';
 import MyCoupons from './MyCoupons/MyCoupon';
-import FooterBar from '../Footer/index';
+import FooterBar from '../Footer';
+import Preferences from './Preferences';
 import AuthWrapper from '../common/AuthWrapper';
 
 import lang from '../../utils/language';
@@ -55,6 +56,8 @@ class Cam extends React.Component {
           return <Notifications />;
         case 'uservault':
           return <UserVault />;
+        case 'preferences':
+          return <Preferences />;
         default:
           return <UserInfo />;
       }

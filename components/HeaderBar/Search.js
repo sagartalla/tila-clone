@@ -88,7 +88,6 @@ class Search extends Component {
       suggestions: [],
     }, () => {
       this.submitQuery(e);
-      window.scrollTo(0, 0);
     });
   }
 
@@ -105,7 +104,7 @@ class Search extends Component {
     this.setState({
       searchInput: false,
     });
-
+    window.scrollTo(0, 0);
     Router.pushRoute(`/${country}/${language}/srp?search=${this.state.query}&${Object.entries(this.props.optionalParams).map(([key, val]) => `${key}=${val}`).join('&')}`);
   }
 

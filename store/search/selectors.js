@@ -184,7 +184,7 @@ const getSearchResutls = (store) => {
         productId: product.attributes.productId,
         catalogId: product.attributes.catalogId,
         itemtype: product.attributes.itemType,
-        displayName: product.attributes.calculated_display_name.join(','),
+        displayName: (product.attributes.calculated_display_name || []).join(','),
         brand: brand ? brand[0] : '',
         variants: variantInfo,
         // priceRange,
