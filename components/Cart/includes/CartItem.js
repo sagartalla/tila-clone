@@ -12,11 +12,12 @@ import constants from '../../../constants';
 
 import lang from '../../../utils/language';
 
+import main_en from '../../../layout/main/main_en.styl';
+import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from '../cart_en.styl';
 import styles_ar from '../cart_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
-
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const { CART_PAGE, ORDER_PAGE } = languageDefinations();
 
@@ -26,68 +27,68 @@ const language = cookies.get('language') || 'en';
 const country = cookies.get('country') || 'SAU';
 
 
-const popover = ({
-  mrp, offer_price, total_amount, cur, selling_price, offerDiscounts, total_discount, shipping,
-}) => {
-  return (
-      <div className={`${styles['p-10']} ${styles['tool-tip']}`}>
-        <div className={`${styles['table']} ${styles['width100']}`}>
-          <div className={styles['t-row']}>
-            <div className={`${styles['t-cell']} ${styles['pb-10']}`}>
-              <div>{CART_PAGE.MAXIMUM_RETAIL_PRICE}</div>
-              <div className={`${styles['fs-10']} ${styles['label-light-grey']}`}>({CART_PAGE.INCL_OF_ALL_TAXES})</div>
-            </div>
-            <div className={`${styles['t-cell']} ${styles['t-rt']}`}>
-              {`${mrp} ${cur}`}
-            </div>
-          </div>
-          <div className={styles['t-row']}>
-            <div className={`${styles['t-cell']} ${styles['pb-10']}`}>
-              <div>{CART_PAGE.SELLING_PRICE}</div>
-            </div>
-            <div className={`${styles['t-cell']} ${styles['t-rt']}`}>
-              {`${selling_price} ${cur}`}
-            </div>
-          </div>
-          {offerDiscounts.length > 0 &&
-            offerDiscounts.map((od) => {
-              return (
-                <div className={styles['t-row']}>
-                  <div className={`${styles['t-cell']} ${styles['pb-10']}`}>
-                    <div>{od.description}</div>
-                  </div>
-                  <div className={`${styles['t-cell']} ${styles['t-rt']}`}>
-                    {`${od.discount} ${cur}`}
-                  </div>
-                </div>
-              );
-            })
-          }
-          {
-            shipping !== null ?
-              <div className={styles['t-row']}>
-                <div className={`${styles['t-cell']} ${styles['pb-10']}`}>
-                  <div>{CART_PAGE.DELIVERY_CHARGES}</div>
-                </div>
-                <div className={`${styles['t-cell']} ${styles['t-rt']}`}>
-                  {shipping.shipping_fees ?
-                    `${shipping.shipping_fees} ${cur}`
-                    : <SVGComponent clsName={`${styles['ship-icon']}`} src="icons/free-shipping" />}
-                </div>
-              </div>
-            :
-              null
-          }
+// const popover = ({
+//   mrp, offer_price, total_amount, cur, selling_price, offerDiscounts, total_discount, shipping,
+// }) => {
+//   return (
+//       <div className={`${styles['p-10']} ${styles['tool-tip']}`}>
+//         <div className={`${styles['table']} ${styles['width100']}`}>
+//           <div className={styles['t-row']}>
+//             <div className={`${styles['t-cell']} ${styles['pb-10']}`}>
+//               <div>{CART_PAGE.MAXIMUM_RETAIL_PRICE}</div>
+//               <div className={`${styles['fs-10']} ${styles['label-light-grey']}`}>({CART_PAGE.INCL_OF_ALL_TAXES})</div>
+//             </div>
+//             <div className={`${styles['t-cell']} ${styles['t-rt']}`}>
+//               {`${mrp} ${cur}`}
+//             </div>
+//           </div>
+//           <div className={styles['t-row']}>
+//             <div className={`${styles['t-cell']} ${styles['pb-10']}`}>
+//               <div>{CART_PAGE.SELLING_PRICE}</div>
+//             </div>
+//             <div className={`${styles['t-cell']} ${styles['t-rt']}`}>
+//               {`${selling_price} ${cur}`}
+//             </div>
+//           </div>
+//           {offerDiscounts.length > 0 &&
+//             offerDiscounts.map((od) => {
+//               return (
+//                 <div className={styles['t-row']}>
+//                   <div className={`${styles['t-cell']} ${styles['pb-10']}`}>
+//                     <div>{od.description}</div>
+//                   </div>
+//                   <div className={`${styles['t-cell']} ${styles['t-rt']}`}>
+//                     {`${od.discount} ${cur}`}
+//                   </div>
+//                 </div>
+//               );
+//             })
+//           }
+//           {
+//             shipping !== null ?
+//               <div className={styles['t-row']}>
+//                 <div className={`${styles['t-cell']} ${styles['pb-10']}`}>
+//                   <div>{CART_PAGE.DELIVERY_CHARGES}</div>
+//                 </div>
+//                 <div className={`${styles['t-cell']} ${styles['t-rt']}`}>
+//                   {shipping.shipping_fees ?
+//                     `${shipping.shipping_fees} ${cur}`
+//                     : <SVGComponent clsName={`${styles['ship-icon']}`} src="icons/free-shipping" />}
+//                 </div>
+//               </div>
+//             :
+//               null
+//           }
 
-          <div className={`${styles['t-row']} ${styles['total-amount']}`}>
-            <div className={styles['t-cell']}>{ORDER_PAGE.TOTAL}</div>
-            <div className={`${styles['t-cell']} ${styles['t-rt']}`}>{total_amount} {cur}</div>
-          </div>
-        </div>
-        <div className={`${styles['p-5']} ${styles['mt-5']} ${styles['overall-amount']}`}>{CART_PAGE.OVERALL_YOU_SAVE} {total_discount} {cur} {CART_PAGE.ON_THIS_PRODUCT}</div>
-      </div>
-  );
-};
+//           <div className={`${styles['t-row']} ${styles['total-amount']}`}>
+//             <div className={styles['t-cell']}>{ORDER_PAGE.TOTAL}</div>
+//             <div className={`${styles['t-cell']} ${styles['t-rt']}`}>{total_amount} {cur}</div>
+//           </div>
+//         </div>
+//         <div className={`${styles['p-5']} ${styles['mt-5']} ${styles['overall-amount']}`}>{CART_PAGE.OVERALL_YOU_SAVE} {total_discount} {cur} {CART_PAGE.ON_THIS_PRODUCT}</div>
+//       </div>
+//   );
+// };
 
 class CartItem extends React.Component {
   constructor(props) {
@@ -143,12 +144,13 @@ class CartItem extends React.Component {
       removeCartItem,
       cartStepperInputHandler,
       addOrRemoveGift,
+
     } = this.props;
     const { gift_card_message, checked, showMessage } = this.state;
     const {
-      item_id, img, name, offer_price, cur, quantity, max_limit, inventory,
-      brand_name, gift_info, shipping, warranty_duration, total_amount,
-      product_id, variant_id, itemType, catalogId, discount, mrp, variantAttributes,
+      item_id, img, name, offer_price, cur, quantity, max_limit, inventory, offerDiscounts,
+      brand_name, gift_info, shipping, warranty_duration, total_amount, total_discount,
+      product_id, variant_id, itemType, catalogId, discount, mrp, variantAttributes, selling_price,
     } = item;
     return (
       <div key={item_id} className={`${styles['mb-20']} ${styles['box']}`}>
@@ -212,7 +214,7 @@ class CartItem extends React.Component {
                       <p className={`${styles['mb-0']} ${styles['fs-12']} ${styles['flex']}`}>
                         <span className={styles['thick-gry-clr']}>Warranty : </span>
                         <span className={`${styles['pl-10']} ${styles['pr-10']}`}>
-                          {warranty_duration && Object.keys(warranty_duration).length > 0 ?
+                          {(warranty_duration && Object.keys(warranty_duration).length > 0) && warranty_duration.duration !== 0 ?
                             <Warranty warranty={warranty_duration} />
                             : 'No Warranty'}
                         </span>
@@ -270,7 +272,7 @@ class CartItem extends React.Component {
                 </Col>
                 <Col md={3} sm={3} className={`${styles['pr-5']} ${styles['landscape-cart-price']}`}>
                   {Math.floor(discount) > 5 &&
-                    <p className={`${styles['mb-0']} ${styles['fs-12']} ${styles['t-rt']}`}>
+                    <p className={`${styles['mb-0']} ${styles['fs-12']} ${styles['flex']} ${styles['justify-end']}`}>
                       <span className={styles['success-green']}>{`${Math.floor(discount)}% OFF`}</span>
                       <span className={`${styles['cross-strike']} ${styles.relative} ${styles['ml-5']}`}>
                         <span className={styles['label-light-grey']}>
@@ -281,12 +283,71 @@ class CartItem extends React.Component {
                     </p>}
                   <h4 className={`${styles.fontW600} ${styles['justify-flex-end']} ${styles['cart-price-label']} ${styles['light-gry-clr']} ${styles['flex-center']} ${styles['mt-10']} ${styles['t-rt']}`}>
                     {`${offer_price} ${cur}`}
-                    <OverlayTrigger placement="bottom" overlay={popover(item)}>
+                    {/* <OverlayTrigger trigger="click" placement="bottom" overlay={popover(item)}> */}
                       {/* <span className={`${styles['fs-12']} ${styles['pr-5']}`}>
                         <SVGComponent clsName={`${styles['secure-icon']} ${styles['mr-10']} ${styles['pointer']}`} src="icons/common-icon/trust-secure" />
                       </span> */}
-                      <span className={`${styles.question} ${styles['ml-5']} ${styles['flex-center']} ${styles['justify-center']} ${styles['default-shadow']} ${styles['fs-14']} ${styles.pointer}`}>  ? </span>
-                    </OverlayTrigger>
+                      <div className={`${styles['relative']} ${styles['cart-price-toltp']}`}>
+                        <span className={`${styles.question} ${styles['ml-5']} ${styles['flex-center']} ${styles['justify-center']} ${styles['default-shadow']} ${styles['fs-14']} ${styles.pointer}`}>  ? </span>
+                        <div className={`${styles['p-10']} ${styles['tool-tip']} ${styles['cart-tool-tip']}`}>
+        <div className={`${styles['table']} ${styles['width100']}`}>
+          <div className={`${styles['flx-space-bw']} ${styles['fs-12']}`}>
+            <div className={`${styles['pb-10']}`}>
+              <div>{CART_PAGE.MAXIMUM_RETAIL_PRICE}</div>
+              <div className={`${styles['fs-10']} ${styles['label-light-grey']}`}>({CART_PAGE.INCL_OF_ALL_TAXES})</div>
+            </div>
+            <div className={`${styles['t-rt']}`}>
+              {`${mrp} ${cur}`}
+            </div>
+          </div>
+          <div className={`${styles['flx-space-bw']} ${styles['fs-12']}`}>
+            <div className={`${styles['pb-10']}`}>
+              <div>{CART_PAGE.SELLING_PRICE}</div>
+            </div>
+            <div className={`${styles['t-rt']}`}>
+              {`${selling_price} ${cur}`}
+            </div>
+          </div>
+          {offerDiscounts.length > 0 &&
+            offerDiscounts.map((od) => {
+              return (
+                <div className={`${styles['flx-space-bw']} ${styles['fs-12']}`}>
+                  <div className={`${styles['pb-10']}`}>
+                    <div>{od.description}</div>
+                  </div>
+                  <div className={`${styles['t-rt']}`}>
+                    {`${od.discount} ${cur}`}
+                  </div>
+                </div>
+              );
+            })
+          }
+          {
+            shipping !== null ?
+              <div className={`${styles['flx-space-bw']} ${styles['fs-12']}`}>
+                <div className={`${styles['pb-10']}`}>
+                  <div>{CART_PAGE.DELIVERY_CHARGES}</div>
+                </div>
+                <div className={`${styles['t-rt']}`}>
+                  {shipping.shipping_fees ?
+                    `${shipping.shipping_fees} ${cur}`
+                    : <SVGComponent clsName={`${styles['ship-icon']}`} src="icons/free-shipping" />}
+                </div>
+              </div>
+            :
+              null
+          }
+
+          <div className={` ${styles['flx-space-bw']} ${styles['total-amount']} ${styles['fs-12']}`}>
+            <div>{ORDER_PAGE.TOTAL}</div>
+            <div className={`${styles['t-rt']}`}>{total_amount} {cur}</div>
+          </div>
+        </div>
+        <div className={`${styles['p-5']} ${styles['mt-10']} ${styles['fs-12']} ${styles['overall-amount']}`}>{CART_PAGE.OVERALL_YOU_SAVE} {total_discount} {cur} {CART_PAGE.ON_THIS_PRODUCT}</div>
+      </div>
+                      </div>
+                      
+                    {/* </OverlayTrigger> */}
                   </h4>
                   {
                       shipping !== null

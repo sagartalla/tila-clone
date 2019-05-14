@@ -6,15 +6,14 @@ import { bindActionCreators } from 'redux';
 import { actionCreators, selectors } from '../../../store/cam/messages';
 
 import { languageDefinations } from '../../../utils/lang/';
+import lang from '../../../utils/language';
 
-// import lang from '../../../utils/language';
-//
-// import styles_en from './message_en.styl';
-// import styles_ar from './message_ar.styl';
-//
-//
-// const styles = lang === 'en' ? styles_en : styles_ar;
-const styles = {};
+import main_en from '../../../layout/main/main_en.styl';
+import main_ar from '../../../layout/main/main_ar.styl';
+import styles_en from './message_en.styl';
+import styles_ar from './message_ar.styl';
+
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const { MESSAGES } = languageDefinations();
 

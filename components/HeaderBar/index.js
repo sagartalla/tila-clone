@@ -7,7 +7,7 @@ import Logo from './Logo';
 import Search from './Search';
 import ActionBar from './ActionBar';
 import MegaMenu from './includes/MegaMenu';
-import SearchFilters from '../common/SearchFilters';
+// import SearchFilters from '../common/SearchFilters';
 // import Betalogo from '../../components/common/beta';
 
 import publicUrls from '../../constants';
@@ -15,10 +15,12 @@ import { actionCreators, selectors } from '../../store/search';
 
 import lang from '../../utils/language';
 
+import main_en from '../../layout/main/main_en.styl';
+import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './header_en.styl';
 import styles_ar from './header_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const HeaderBar = props => (
   <div className={`${styles['header-container']}`}>
@@ -50,7 +52,7 @@ const HeaderBar = props => (
             :
             null
           } */}
-          <Col md={props.showFitlers ? 3 : 4 } sm={5}>
+          <Col md={4} sm={5}>
             <ActionBar />
           </Col>
         </Row>

@@ -39,6 +39,7 @@ const getOrdersData = (store) => {
           promisedDeliveryDate: i.promised_delivery_date,
           variantId: i.variant_id,
           orderIds: i.order_item_ids,
+          price: i.price,
           isCancelable: i.cancelable,
           isReturnable: i.returnable,
           isExchangable: i.exchangeable,
@@ -55,11 +56,11 @@ const getOrdersData = (store) => {
         id: order_id,
         shippingTo: {
           name: address ? `${address.first_name} ${address.last_name}` : 'No Name',
-          address: address ? `${address.address_line_1}, ${address.address_line_2}, ${address.city}, ${address.state}, ${address.postal_code}` : 'no address info',
+          address: address ? `${address.address_line_1}, ${address.address_line_2}, ${address.city}, ${address.postal_code}` : 'no address info',
           phone: address ? `${address.mobile_country_code} ${address.mobile_no}` : 'No phone number',
         },
         orderDate: moment(created_at).format('MMMM DD, YYYY'),
-        orderTotal: `${total_amount} ${currency_code}`,
+        orderTotal: `${total_amount.display_value} ${total_amount.currency_code}`,
         orderItems,
         order_type,
       };

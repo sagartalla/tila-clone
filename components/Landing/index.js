@@ -13,14 +13,16 @@ import SVGComponent from '../common/SVGComponet';
 
 import lang from '../../utils/language';
 
+import main_en from '../../layout/main/main_en.styl';
+import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './index_en.styl';
 import styles_ar from './index_ar.styl';
+
+const allStyles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const config = getConfig();
 const isLocal = config.publicRuntimeConfig.isLocal;
 const env = config.publicRuntimeConfig.env
-
-const allStyles = lang === 'en' ? styles_en : styles_ar;
 
 /*
 import Fashion from './includes/Fashion';

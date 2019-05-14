@@ -6,10 +6,12 @@ import { languageDefinations } from '../../../../utils/lang';
 
 import lang from '../../../../utils/language';
 
+import main_en from '../../../../layout/main/main_en.styl';
+import main_ar from '../../../../layout/main/main_ar.styl';
 import styles_en from './orderIssue_en.styl';
 import styles_ar from './orderIssue_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 
 const { ORDER_PAGE } = languageDefinations();
@@ -35,11 +37,16 @@ class ChoosePaymentMode extends Component {
     this.getPaymentModes = this.getPaymentModes.bind(this)
     this.onOptionChange = this.onOptionChange.bind(this)
     this.saveAndGoNext = this.saveAndGoNext.bind(this)
+    console.log('orderIssue', props.orderIssue);
     this.state = {
       paymentType: Object.keys(props.orderIssue.refundOptions).length > 0 &&
-                    props.orderIssue.refundOptions['RETURN'].indexOf("BACK_TO_SOURCE") !== -1
+                    props.orderIssue.refundOptions[props.orderIssue.issueType].indexOf("BACK_TO_SOURCE") !== -1
                     ? 'Online' : 'Wallet'
     }
+  }
+  componentWillRecieveProps(nextProps) {
+    const { orderIssue,goToNextStep } = nextProps;
+
   }
   onOptionChange(e) {
     this.setState({
@@ -72,7 +79,7 @@ class ChoosePaymentMode extends Component {
     ]
 
     if (Object.keys(refundOptions).length > 0
-        && refundOptions['RETURN'].indexOf("BACK_TO_SOURCE") !== -1) {
+        && refundOptions[orderIssue.issueType].indexOf("BACK_TO_SOURCE") !== -1) {
       data.push(
         <RenderRadioInput
           key={'radio_2'}
@@ -86,8 +93,15 @@ class ChoosePaymentMode extends Component {
     return data;
   }
   render() {
-    const { orderDetails, orderIssue } = this.props;
+    const { orderDetails, orderIssue, goToNextStep } = this.props;
     const { paymentType } = this.state;
+    if(!Object.keys(orderIssue.refundOptions).length) {
+      return <div>Loading...</div>
+    }
+    if(Object.keys(orderIssue.refundOptions).length > 0
+     && orderIssue.refundOptions[orderIssue.issueType][0] === 'NIL') {
+       goToNextStep()
+     }
     return (
       <div>
         <h4 className={`${styles['fs-20']} ${styles['fontW400']} ${styles['pb-15']}`}>{ORDER_PAGE.CHOOSE_YOUR_MODE_OF_PAYMENT}</h4>

@@ -10,10 +10,13 @@ import SizeChart from '../includes/SizeChart/index';
 import { PanelGroup,Panel, Heading, Body, Title } from 'react-bootstrap';
 import lang from '../../../utils/language';
 
+import main_en from '../../../layout/main/main_en.styl';
+import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from '../product_en.styl';
 import styles_ar from '../product_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+
 
 const { PDP_PAGE } = languageDefinations();
 
@@ -28,8 +31,8 @@ const ProductDetails = ({ details, keyfeatures, isPreview, productInfo,variantId
               <Panel eventKey="1">
                 <Panel.Heading>
                   <Panel.Title toggle className={styles['key-feature-inn']}>
-                    <h4 className={`${styles['fs-14']} ${styles['fontW600']} ${styles['mb-5']} ${styles['mt-0']} ${styles['flx-space-bw']}`}>
-                      <span>{PDP_PAGE.PRODUCT_DETAILS}</span>
+                    <h4 className={`${styles['fs-12']} ${styles['fontW600']} ${styles['mb-5']} ${styles['mt-0']} ${styles['flx-space-bw']}`}>
+                      <span className={styles['text-uppercase']}>{PDP_PAGE.PRODUCT_DETAILS}</span>
                       <SVGCompoent clsName={`${styles['expand-icon']}`} src="icons/down-arrow/down-arrow" />
                     </h4>
                   </Panel.Title>
@@ -72,8 +75,8 @@ const ProductDetails = ({ details, keyfeatures, isPreview, productInfo,variantId
           <Panel eventKey="2">
             <Panel.Heading>
               <Panel.Title toggle className={styles['key-feature-inn']}>
-                <h4 className={`${styles['fs-14']} ${styles['fontW600']} ${styles['mb-5']} ${styles['mt-0']} ${styles['flx-space-bw']}`}>
-                  <span>{PDP_PAGE.KEY_FEATURES}</span>
+                <h4 className={`${styles['fs-12']} ${styles['fontW600']} ${styles['mb-5']} ${styles['mt-0']} ${styles['flx-space-bw']}`}>
+                  <span className={styles['text-uppercase']}>{PDP_PAGE.KEY_FEATURES}</span>
                   <SVGCompoent clsName={`${styles['expand-icon']}`} src="icons/down-arrow/down-arrow" />
                   {/* <span className={styles['fs-16']}>+</span> */}
                 </h4>

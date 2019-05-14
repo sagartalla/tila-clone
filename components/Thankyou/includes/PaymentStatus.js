@@ -7,10 +7,12 @@ import { languageDefinations } from '../../../utils/lang';
 
 import lang from '../../../utils/language';
 
+import main_en from '../../../layout/main/main_en.styl';
+import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from '../thankyou_en.styl';
 import styles_ar from '../thankyou_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 
 const { THANK_YOU_PAGE } = languageDefinations();
@@ -25,7 +27,7 @@ const PaymentStatus = props => {
   const subMessage = (props.status == "SUCCESSFUL") ? successMessage : (props.status == "FAILED") ? `${THANK_YOU_PAGE.ORDER_FAILURE_MESSAGE} 4 ${THANK_YOU_PAGE.WORKING_DAYS} ${THANK_YOU_PAGE.QUERIES_PLEASE_CONTACT}` : null;
 
   return (
-    <Grid className={styles['pt-75']}>
+    <Grid className={styles['pt-50']}>
       <Row className={`${styles['flex-center']} ${styles['m-0']}`}>
         <Col md={2} xs={2} sm={2}>
           <div className={styles['pb-25']}>

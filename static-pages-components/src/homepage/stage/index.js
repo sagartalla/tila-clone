@@ -222,6 +222,7 @@ function SamplePrevArrow(props) {
   return (
     <div
       className="leftArrow"
+      onMouseOver={onClick}
       onClick={onClick}
     >
       <img src="/static/img/landing-home/c-left.svg" alt="left" />
@@ -234,6 +235,7 @@ function SampleNextArrow(props) {
   return (
     <div
       className="rightArrow"
+      onMouseOver={onClick}
       onClick={onClick}
     >
       <img src="/static/img/landing-home/c-right.svg" alt="right" />
@@ -428,7 +430,7 @@ const HomePage = () => (
         {threeCols.map(col => (
           <Col md={4} xs={4} sm={4}>
             <a href={col.link}>
-              <img src={col.img} alt={col.title} />
+              <img className="resp-img-link" src={col.img} alt={col.title} />
             </a>
           </Col>
         ))}
@@ -509,7 +511,7 @@ const HomePage = () => (
       <Row className={`${styles['m-15']} ${styles['mt-40']} ${styles['mb-40']}`}>
         {twoCols.map(col => (
           <Col md={6} xs={6} sm={6}>
-            <img src={col.img} alt={col.title} />
+            <img className="resp-img-link" src={col.img} alt={col.title} />
           </Col>
         ))}
       </Row>
@@ -611,7 +613,7 @@ const HomePage = () => (
           {b_y_l.map(i => (
             <Col key={i} md={3} xs={3} sm={3}>
               <div className="image">
-                <img src={i.img} alt={i.img} />
+                <img className="resp-img-link" src={i.img} alt={i.img} />
               </div>
               <div className="b_l">
                 <img src={i.brandImg} width="80" height="30" alt={i.brandImg} />

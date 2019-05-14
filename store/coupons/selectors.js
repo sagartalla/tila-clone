@@ -5,5 +5,17 @@ const getCouponOffers = (store) => {
   }
 };
 
+const getAllOffers = (store) => {
+  if (store.couponOffersData.couponDataList) {
+    return store.couponOffersData.couponDataList;
+  }
+};
 
-export { getCouponOffers };
+const showLoader = (store) => {
+  if (store.couponOffersData.loader) {
+    return store.couponOffersData.loader;
+  }
+};
+
+
+export { getCouponOffers, getAllOffers, showLoader };

@@ -27,7 +27,7 @@
 }
   .hide
     display none
-  
+
   .pls-icon
     width: 20px
     height: 20px
@@ -76,7 +76,7 @@
       margin-bottom 30px
       border-radius 4px
       transition-timing-function ease-in-out;
-     
+      min-height 202px
       &..address-card-new
         min-height 195px
       &:hover
@@ -126,8 +126,8 @@
             width 14px
             height 16px
           .edit-icon-inn
-            width 16px
-            height 16px
+            width 14px
+            height 14px
             margin-right 5px
         cursor pointer
       &.address-selected
@@ -162,6 +162,62 @@
           .work-icon
             width: 22px;
             height: 19px;
+
+.openModal
+  height 100%
+  width 40%
+  position fixed
+  top 0
+  right -800px
+  z-index 2001
+  background-color white
+  animation-name slideOpen
+  animation-duration 0.5s
+  animation-fill-mode both
+
+.closeModal
+  height 100%
+  width 40%
+  position fixed
+  top 0
+  right 0px
+  z-index 2001
+  background-color white
+  animation-name slideClose
+  animation-duration 0.2s
+  animation-fill-mode both
+
+.modalContainer
+  height 100%
+  width 100%
+  top 0
+  left 0
+  .disabled
+    height 100%
+    width 100%
+    position fixed
+    top 0
+    left 0
+    z-index 2000
+    background-color grey
+    opacity 0.8
+
+.showDiv
+  display block
+
+.hideDiv
+  display none
+
+
+@keyframes slideOpen {
+  from {right: -800px;}
+  to {right: 0;}
+}
+@keyframes slideClose {
+  from {right: 0px;}
+  to {right: -800px;}
+}
+
 
 .map-input
   box-sizing border-box
@@ -200,11 +256,11 @@
   }
 }
 
-.fp-btn.fp-btn-primary:disabled {
+.address-button:disabled {
     background-color: generic-gray-color;
     color: white-color
 }
-       
+
 @media screen and (min-device-width: 320px) and (max-device-width: 736px) and (orientation : portrait){
   .addr-new-container {
     padding 0 0 30px 0

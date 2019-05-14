@@ -12,10 +12,12 @@ import { actionCreators, selectors } from '../../../../store/cam/personalDetails
 import SVGComponent from '../../../common/SVGComponet';
 import lang from '../../../../utils/language';
 
+import main_en from '../../../../layout/main/main_en.styl';
+import main_ar from '../../../../layout/main/main_ar.styl';
 import styles_en from '../profile_en.styl';
 import styles_ar from '../profile_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const { EDIT_PASSWORD_MODAL } = languageDefinations();
 
@@ -146,11 +148,10 @@ class EditPassword extends React.Component {
     }
     return (
       <div className={styles['editProfileModal']}>
-        <h4 className={`${styles['fs-20']} ${styles['fontW300']} ${styles['p-20']}`}>
+        <h4 className={`${styles['fs-20']} ${styles['fontW300']} ${styles['flx-space-bw']} ${styles['m-0']}`}>
+          <span className={`${styles['lgt-blue']}`}>{EDIT_PASSWORD_MODAL.HEADING}</span>
           <span onClick={this.handleClose}>X</span>
-          <span className={`${styles['pl-20']} ${styles['lgt-blue']}`}>{EDIT_PASSWORD_MODAL.HEADING}</span>
         </h4>
-
         <div>
           <div className={`${styles['flex-center']} ${styles['flex-colum']} ${styles['personal-info-main']}`}>
             <div className={`${styles['personal-info-img']} ${styles['flex']} ${styles['justify-center']}`}>

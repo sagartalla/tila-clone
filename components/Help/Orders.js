@@ -7,9 +7,16 @@ import { selectors as orderSelectors, actionCreators as orderActions} from '../.
 import { selectors, actionCreators as orderDetailActions } from '../../store/order';
 import constants from '../../constants';
 import { ContactTabs, Issues as issues } from './helpConstants';
-import { mergeCss } from '../../utils/cssUtil';
 
-const styles = mergeCss('components/Help/help');
+
+import lang from '../../utils/language';
+
+import main_en from '../../layout/main/main_en.styl';
+import main_ar from '../../layout/main/main_ar.styl';
+import styles_en from './help_en.styl';
+import styles_ar from './help_ar.styl';
+
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const cookies = new Cookies();
 
@@ -93,7 +100,7 @@ class Orders extends Component {
     const issueObj = {id, q, a, catId, parentId, orderRelated, issueId}
     return (
       orderRelated ?
-      <div key={id} 
+      <div key={id}
         className={`${styles['greyColor']} ${styles['fs-14p']} ${styles['pV-10']} ${styles['pH-10']} ${isSelected && styles['openBGColor']}`}
         onClick={this.selectIssue(issueObj)}>
         <h5 className={`${styles['pointer']} ${isSelected && `${styles['highlightColor']} ${styles['fwBolder']}`}`} dangerouslySetInnerHTML={{__html: q}} />
@@ -158,7 +165,7 @@ class Orders extends Component {
 
 }
 
-export default connect((state) => ({ 
+export default connect((state) => ({
   ordersData: state.ordersReducer.data,
   ordersDetailData: state.singleOrderReducer.data.orderDetails,
   issueData: state.helpSupportReducer.issueData

@@ -5,11 +5,12 @@ import {Grid, Row, Col} from 'react-bootstrap';
 
 import lang from '../../../utils/language';
 
+import main_en from '../../../layout/main/main_en.styl';
+import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from '../product_en.styl';
 import styles_ar from '../product_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
-
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const Catalog = ({ catalog }) => {
   return (
@@ -22,8 +23,8 @@ const Catalog = ({ catalog }) => {
               group.map((attributes) => {
                 return (
                   <Row key={attributes.display_string}>
-                    <Col xs={4} md={3}>{attributes.display_string}</Col>
-                    <Col xs={8} md={9}>{attributes.attribute_values.map((av) => av.value + " " +(av.qualifier_unit ? av.qualifier_unit : "")).join(', ')}</Col>
+                    <Col xs={4} md={4}>{attributes.display_string}</Col>
+                    <Col xs={8} md={8} className={styles['pl-0']}>{attributes.attribute_values.map((av) => av.value + " " +(av.qualifier_unit ? av.qualifier_unit : "")).join(', ')}</Col>
                   </Row>
                 )
               })

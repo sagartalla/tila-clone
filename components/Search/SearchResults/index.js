@@ -11,14 +11,17 @@ import SVGComponent from '../../common/SVGComponet';
 import { actionCreators, selectors } from '../../../store/search';
 import { actionCreators as cartActionCreators, selectors as cartSelector } from '../../../store/cart';
 import { actionCreators as wishlistActionCreators } from '../../../store/cam/wishlist';
+import { selectors as authSelectors } from '../../../store/auth'
 import { Router } from '../../../routes';
 
 import lang from '../../../utils/language';
 
+import main_en from '../../../layout/main/main_en.styl';
+import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from '../search_en.styl';
 import styles_ar from '../search_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const cookies = new Cookie();
 const { SEARCH_PAGE } = languageDefinations();
@@ -40,7 +43,11 @@ class SearchResults extends Component {
 
   componentDidMount() {
     this.props.resetAddtoCart();
-    this.props.getWishlist();
+    //console.log('searchlogin',this.props.isLoggedIn);
+    if(this.props.isLoggedIn) {
+      this.props.getWishlist();
+    }
+
   }
 
   async loadMore() {
@@ -152,6 +159,7 @@ const mapStateToProps = store => ({
   cartButtonLoaders: selectors.getCartButtonLoaders(store),
   isCategoryTree: selectors.getIsCategoryTree(store),
   choosenCategoryName: selectors.getChoosenCategoryName(store),
+  isLoggedIn:authSelectors.getLoggedInStatus(store)
 });
 
 const mapDispatchToProps = dispatch =>

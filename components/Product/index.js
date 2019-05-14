@@ -24,10 +24,12 @@ import Button from '../common/CommonButton';
 
 import lang from '../../utils/language';
 
+import main_en from '../../layout/main/main_en.styl';
+import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './product_en.styl';
 import styles_ar from './product_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const { PDP_PAGE } = languageDefinations();
 
@@ -64,8 +66,9 @@ const getProductComponent = (isPreview, taskCode) => {
           eventName: 'Product Viewed',
           ProductData: productData,
         });
-        if (offerInfo.price) {
-          const pr = offerInfo.price.split(' ');
+        if (offerInfo.offerPricing) {
+          const pr = offerInfo && offerInfo.offerPricing && offerInfo.offerPricing.sellingPrice && offerInfo.offerPricing.sellingPrice.display_value;
+          const cd = offerInfo && offerInfo.offerPricing && offerInfo.offerPricing.sellingPrice && offerInfo.offerPricing.sellingPrice.currency_code;
           const recentData = localStorage.getItem('rv');
           const arr = recentData ? JSON.parse(recentData) : [];
           const index = _.findIndex(arr, (o) => o.id == shippingInfo.listing_id);
@@ -82,8 +85,8 @@ const getProductComponent = (isPreview, taskCode) => {
             arr.unshift({
               nm: titleInfo.title,
               im: imgUrls[0].url,
-              pr: pr[0],
-              cd: pr[1],
+              pr,
+              cd,
               uri: location.href,
               id: shippingInfo.listing_id,
             });

@@ -2,10 +2,18 @@
 import React from 'react';
 import { ModalContainer } from 'react-router-modal';
 import { ToastContainer } from 'react-toastify';
-import { mergeCss } from '../../utils/cssUtil';
+import Cookie from 'universal-cookie';
+
 import Betalogo from '../../components/common/Beta'
 
-const styles = mergeCss('');
+const cookies = new Cookie();
+
+import lang from '../../utils/language';
+
+import styles_en from './main_en.styl';
+import styles_ar from './main_ar.styl';
+
+const styles = lang === 'en' ? styles_en : styles_ar;
 
 const Layout = ({ children }) => (
   <div>

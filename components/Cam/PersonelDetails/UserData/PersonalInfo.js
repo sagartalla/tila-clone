@@ -10,18 +10,20 @@ import SVGComponent from '../../../common/SVGComponet';
 
 import lang from '../../../../utils/language';
 
+import main_en from '../../../../layout/main/main_en.styl';
+import main_ar from '../../../../layout/main/main_ar.styl';
 import styles_en from '../profile_en.styl';
 import styles_ar from '../profile_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+
 
 class PersonalInfo extends React.Component {
 
   state = {
     show: false,
-    personalInfo: {}
+    personalInfo: {},
   };
-
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.userInfo.personalInfo) {
@@ -32,7 +34,7 @@ class PersonalInfo extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    const personalInfo= JSON.stringify(nextProps.userInfo.personalInfo);
+    const personalInfo = JSON.stringify(nextProps.userInfo.personalInfo);
     if (
       personalInfo !== JSON.stringify(this.props.userInfo.personalInfo) ||
       personalInfo !== JSON.stringify(this.state.personalInfo)  ||
@@ -43,13 +45,13 @@ class PersonalInfo extends React.Component {
     return false;
   }
 
-  handleShow = (value) => (e) => {
+  handleShow = value => (e) => {
     this.setState({ show: value });
   }
 
   render() {
     const { show } = this.state;
-    const { first_name, last_name, dob, gender } = this.state.personalInfo ? this.state.personalInfo : { first_name: "", last_name: "", dob: "", gender: "" };
+    const { first_name, last_name, dob, gender } = this.state.personalInfo ? this.state.personalInfo : { first_name: '', last_name: '', dob: '', gender: '' };
     const { PERSONAL_INFO_MODAL } = languageDefinations();
     return (
       <div>
@@ -80,7 +82,7 @@ class PersonalInfo extends React.Component {
             <span>{PERSONAL_INFO_MODAL.GENDER}</span>
           </Col>
           <Col xs={12} md={8} className={`${styles['p-0']}`}>
-            <span className={styles['pl-15']}>{gender == 'F' ? `${PERSONAL_INFO_MODAL.FEMALE}` : gender == "M" ? `${PERSONAL_INFO_MODAL.MALE}` : ""}</span>
+            <span className={styles['pl-15']}>{gender == 'F' ? `${PERSONAL_INFO_MODAL.FEMALE}` : gender == 'M' ? `${PERSONAL_INFO_MODAL.MALE}` : ''}</span>
           </Col>
         </div>
         <div className={show ? `${styles['modalContainer']} ${styles['showDiv']}` : `${styles['modalContainer']} ${styles['hideDiv']}`}>

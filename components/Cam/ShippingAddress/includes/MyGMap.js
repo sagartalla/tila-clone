@@ -7,11 +7,13 @@ import MyGoogleMap from './GoogleMap';
 
 import lang from '../../../../utils/language';
 
+import main_en from '../../../../layout/main/main_en.styl';
+import main_ar from '../../../../layout/main/main_ar.styl';
 import styles_en from '../address_en.styl';
 import styles_ar from '../address_ar.styl';
 
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const refs = {};
 class MyGMap extends React.Component {
@@ -132,7 +134,7 @@ class MyGMap extends React.Component {
       obj.city = curr.long_name;
     }
     if (curr.types.includes('postal_code')) {
-      obj.po_box = curr.long_name;
+      obj.postal_code = curr.long_name;
     }
     return obj;
   }, {});
@@ -155,7 +157,7 @@ class MyGMap extends React.Component {
   // <button onClick={this.onGetLocation.bind(this)}>LOCATE ME</button>
   render() {
     const {
-      refs, bounds, center, markers 
+      refs, bounds, center, markers
     } = this.state;
     const { clsName } = this.props;
     return (

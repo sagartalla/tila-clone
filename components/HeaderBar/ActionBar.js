@@ -22,10 +22,12 @@ import { languageDefinations } from '../../utils/lang';
 
 import lang from '../../utils/language';
 
+import main_en from '../../layout/main/main_en.styl';
+import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './header_en.styl';
 import styles_ar from './header_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const { HEADER_PAGE, PDP_PAGE } = languageDefinations();
 const cookies = new Cookie();
@@ -57,17 +59,28 @@ class ActionBar extends Component {
   }
 
   state = {
-    show: false,
+    show: false
   }
 
   componentDidMount() {
+    if(window.sessionStorage.getItem('TILuservisitcount') !== '1') {
+      this.props.displayLogin();
+    }
     this.props.getLoginInfo();
     this.props.getCartResults();
-    this.props.getWishlist();
+    //console.log('loggedin', this.props.isLoggedIn);
+    if(this.props.isLoggedIn) {
+      this.props.getWishlist();
+    }
+
   }
 
   componentWillReceiveProps(nextProps) {
-    let show = (!nextProps.isLoggedIn && (nextProps.isLoggedIn != this.props.isLoggedIn) && !this.state.logoutClicked) || this.state.loginClicked || !!nextProps.error || nextProps.loginInProgress || (!nextProps.isLoggedIn && nextProps.showLogin) || nextProps.showEmailVerificationScreen;
+    if(nextProps.isLoggedIn !== this.props.isLoggedIn) {
+      this.props.getWishlist();
+    }
+
+    let show = ((nextProps.isLoggedIn != this.props.isLoggedIn) && !this.state.logoutClicked) || this.state.loginClicked || !!nextProps.error || (!nextProps.isLoggedIn && nextProps.showLogin) || nextProps.loginInProgress || nextProps.showEmailVerificationScreen;
     if (window.location.pathname.indexOf('/payment') > -1) {
       show = false;
     }
@@ -206,12 +219,12 @@ class ActionBar extends Component {
                       <span className={styles['pl-20']}>{HEADER_PAGE.MY_ORDERS}</span>
                     </a>
                   </li>
-                  <li className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']}`}>
+                  {/* <li className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']}`}>
                   <a href={`/${country}/${language}/cam/notifications`} className={styles['flex-center']}>
                     <SVGComponent clsName={`${styles['profile-icon']}`} src="icons/notifications" />
                     <span className={styles['pl-20']}>{HEADER_PAGE.NOTIFICATIONS}</span>
                     </a>
-                  </li>
+                  </li> */}
                   <li className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']}`}>
                     <a href={`/${country}/${language}/help/faq`} target="_blank" className={styles['flex-center']}><span className={styles['support']}><span className={`${styles['flex-center']} ${styles['justify-center']}`}>?</span></span>
                       <span className={styles['pl-20']}>{HEADER_PAGE.HELP_SUPPORT}</span>
@@ -271,6 +284,7 @@ const mapDispatchToProps = (dispatch) => {
     {
       getLoginInfo: actionCreators.getLoginInfo,
       logout: actionCreators.userLogout,
+      displayLogin:actionCreators.showLogin,
       getCartResults: cartActionCreators.getCartResults,
       resetLoginError: actionCreators.resetLoginError,
       resetShowLogin: actionCreators.resetShowLogin,

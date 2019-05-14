@@ -13,10 +13,12 @@ import Button from '../../common/CommonButton';
 
 import lang from '../../../utils/language';
 
+import main_en from '../../../layout/main/main_en.styl';
+import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from '../product_en.styl';
 import styles_ar from '../product_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 
 const cookies = new Cookie();
@@ -80,7 +82,7 @@ class AddToCart extends Component {
       (
         <div className={`${styles['pt-25']} ${styles['flx-space-bw']} ${styles['addto-cart']} ${styles['ipad-p-0']} ${styles['border-t']}`}>
           <Button
-            className={`${styles['fs-16']} ${styles['ipad-fs-14']} ${styles['add-to-card-btn']} ${styles['flex']}`}
+            className={`${styles['fs-16']} ${styles['ipad-fs-14']} ${styles['add-to-card-btn']} ${styles['text-uppercase']} ${styles['flex']}`}
             disabled={isLoading || isAddedToCart}
             onClick={isAddedToCart === false && this.addToCart}
             btnLoading={btnLoading}
@@ -88,7 +90,7 @@ class AddToCart extends Component {
             showImage={isAddedToCart && 'icons/cart/added-cart-icon'}
           />
           <Button
-            className={`${styles['fs-16']} ${styles['ipad-fs-14']} ${styles['buy-now-btn']}`}
+            className={`${styles['fs-16']} ${styles['ipad-fs-14']} ${styles['text-uppercase']} ${styles['buy-now-btn']}`}
             onClick={this.buyNow}
             btnText={PDP_PAGE.BUY_NOW}
             hoverClassName="hoverBlueBackground"

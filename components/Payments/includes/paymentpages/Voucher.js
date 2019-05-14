@@ -10,10 +10,12 @@ import { languageDefinations } from '../../../../utils/lang/';
 
 import lang from '../../../../utils/language';
 
+import main_en from '../../../../layout/main/main_en.styl';
+import main_ar from '../../../../layout/main/main_ar.styl';
 import styles_en from '../../payment_en.styl';
 import styles_ar from '../../payment_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const { PAYMENT_PAGE } = languageDefinations();
 
@@ -56,21 +58,21 @@ class Voucher extends Component {
         <div className={`${styles.flex} ${styles['justify-between']}`}>
           <div className={`${styles.paymentBorder}`}>
             <span className={`${styles['success-green']} ${styles['fs-12']}`}>{PAYMENT_PAGE.TOTAL_AMOUNT_TO_PAY}</span>
-            <b className={`${styles['pt-5']} ${styles['fs-16']}`}>{total_amount} {currency_code}</b>
+            <b className={`${styles['pt-5']} ${styles['fs-16']}`}>{total_amount.display_value} {total_amount.currency_code}</b>
           </div>
           <div className={`${styles.flex} ${styles['align-center']} ${styles['thick-red-clr']}`}>
             <span>-</span>
           </div>
           <div className={`${styles.paymentBorder}`}>
-            <span className={balance < amount_to_pay ? `${styles['thick-red-clr']} ${styles['fs-12']}` : `${styles['success-green']} ${styles['fs-12']}`}>{PAYMENT_PAGE.MONEY_IN_WALLET}</span>
-            <b className={`${styles['pt-5']} ${styles['fs-16']}`}>{balance} {currency_code}</b>
+            <span className={balance.money_value < amount_to_pay.money_value ? `${styles['thick-red-clr']} ${styles['fs-12']}` : `${styles['success-green']} ${styles['fs-12']}`}>{PAYMENT_PAGE.MONEY_IN_WALLET}</span>
+            <b className={`${styles['pt-5']} ${styles['fs-16']}`}>{balance.display_value} {balance.currency_code}</b>
           </div>
           <div className={`${styles.flex} ${styles['align-center']}`}>
             <span>=</span>
           </div>
           <div className={`${styles.paymentBorder}`}>
-            <span className={balance >= amount_to_pay ? `${styles['success-green']} ${styles['fs-12']}` : `${styles['thick-red-clr']} ${styles['fs-12']}`}>{PAYMENT_PAGE.REMAINING_AMOUNT_TO_PAY}</span>
-            <b className={`${styles['pt-5']} ${styles['fs-16']}`}>{remaining_amount} {currency_code}</b>
+            <span className={balance.money_value >= amount_to_pay.money_value ? `${styles['success-green']} ${styles['fs-12']}` : `${styles['thick-red-clr']} ${styles['fs-12']}`}>{PAYMENT_PAGE.REMAINING_AMOUNT_TO_PAY}</span>
+            <b className={`${styles['pt-5']} ${styles['fs-16']}`}>{remaining_amount.display_value} {remaining_amount.currency_code}</b>
           </div>
 
         </div>
