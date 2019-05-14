@@ -593,6 +593,7 @@ export const AR_KEYWORDS = {
     'THIS_ITEM': 'هذا المنتج؟',
     'PLEASE_SELECT_SIZE_TO_CONTINUE': 'يرجى اختيار مقاس المنتج للمتابعه',
     'SUCCESS': 'نجاح',
+    'ORDER_DETAILS_SUMMERY': 'ملخص الطلب'
   },
   COUPON_OFFERS: {
     'VIEW_TERMS': 'استعرض الشروط والأحكام',
@@ -647,6 +648,9 @@ export const AR_KEYWORDS = {
    'SHIPPING_TO': 'الشحن إلى',
    'TRACK_ORDER': 'تتبع الطلب ...',
    'NO_ORDERS': 'عذراً! لا يوجد طلبات حتى الآن. ابدأ بالتسوَّق',
+   'REQUEST_INVOICE': 'Request Invoice',
+   'ORDER_TOTAL': 'Order Total',
+   'NEED_HELP': 'Need Help',
  },
  BETA: {
    'BETA': 'فترة تجريبية',

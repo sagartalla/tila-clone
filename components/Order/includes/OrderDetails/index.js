@@ -63,6 +63,7 @@ const OrderDetails = ({ query, orderData, thankyouPage }) => {
                   key={item.id}
                   payments={orderData.payments}
                   orderItem={item}
+                  showPriceInfo
                   needHelp
                   orderId={orderData.orderId}
                   thankyouPage={thankyouPage}
