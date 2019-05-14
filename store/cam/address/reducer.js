@@ -1,7 +1,9 @@
 import typeToReducer from 'type-to-reducer';
 import { actions } from './actions';
 
-const initialState = {};
+const initialState = {
+  data:{}
+};
 
 const shippingAddrReducer = typeToReducer({
   [actions.GET_SHIPPING_ADDR_RESULTS]: {
@@ -95,6 +97,12 @@ const shippingAddrReducer = typeToReducer({
       return Object.assign({}, state, { data: newData, ui: { loading: true } });
     },
   },
+  [actions.SELECT_DELIVER_TO_ADDRESS]: (state, action) => {
+    return {
+      ...state,
+      deliverToAddress: action.payload
+    }
+  }
 }, initialState);
 
 export default shippingAddrReducer;

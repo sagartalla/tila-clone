@@ -113,7 +113,7 @@ class OrderReturnExchange extends Component {
                         </Col>
                         <Col md={10}>
                           <h4 className={`${styles['fs-16']} ${styles['fontW600']}`}>{name}</h4>
-                          <span className={styles['fs-14']}>{CART_PAGE.QUANTITY}:</span>
+                          <span className={styles['fs-14']}>{CART_PAGE.QUANTITY}: {orderDetails && orderDetails.order_items && orderDetails.order_items[0].quantity}</span>
                         </Col>
                         <Col md={10} className={`${styles['mt-25']}`}>
                           <h4

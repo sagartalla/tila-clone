@@ -14,7 +14,7 @@ const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styl
 
 import {languageDefinations} from '../../../../utils/lang'
 const {HEADER_PAGE}=languageDefinations()
-const MaxItems = 5;
+const MaxItems = 4;
 
 const cookies = new Cookie();
 
@@ -58,9 +58,11 @@ class Leaves extends Component {
           isMoreButtonRequired
           ?
             <li>
-                <a className={`${styles['level-1-item']}`} onClick={this.toggleItems}>
-                  {maxRows === MaxItems ? HEADER_PAGE.VIEW_ALL : HEADER_PAGE.VIEW_LESS}
+              <Link route={`/${country}/${language}/srp/${parent.displayName.split(' ').join('-').toLowerCase()}?categoryTree=true&isListed=false&sid=${this.props.parentID}`}>
+                <a className={`${styles['level-1-item']}`}>
+                  {HEADER_PAGE.VIEW_ALL}
                 </a>
+              </Link>
             </li>
           :
           null

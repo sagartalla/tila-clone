@@ -133,6 +133,8 @@ export const AR_KEYWORDS = {
     'MAKE_DEFAULT': 'اجعله العنوان الرئيسي',
     'DELETE': 'حذف',
     'EDIT_ADDR': 'تعديل العنوان',
+    'MAKE_DEFAULT': 'Make Default',
+    'DELIVER_TO': 'Deliver To',
     'ADD_NEW_BTN': 'إضافة جديد',
     'ADD_NEW_ADDR': 'إضافة عنوان جديد',
     'ADD_NEW_ADDR_HEAD': 'إضافة عنوان توصيل جديد',
@@ -606,7 +608,8 @@ export const AR_KEYWORDS = {
     'APPLIED_IS_INVALID': 'المستخدم غير صالح للاستعمال',
     'ENTER_COUPON_CODE': 'ادخل كود الكوبون',
     'NO_COUPON_APPLIED': 'لا يوجد كوبون مضاف',
-    'COPY': 'COPY', 'COUPONS_AND_SAVINGS': 'Coupons and Savings',
+    'COPY': 'COPY',
+    'COUPONS_AND_SAVINGS': 'Coupons and Savings',
     'WE_BELIEVE_IN_THE_POWER': 'We believe in the power of purchase intelligence',
     'ACTIVE_COUPONS': 'Active Coupons',
     'EXPIRED_COUPONS': 'Expired Coupons',
@@ -660,7 +663,7 @@ export const AR_KEYWORDS = {
    'INSTANT_CHECKOUT': 'عملية الخروج الفوريه',
    'COUNTRY_CODE': 'رمز\كود  الدولة',
    'MOBILE_NO': 'رقم جوالك',
-   'AGREE_CASH_ON_DELIVERY': 'I agree to pay cash on delivery' // need arabic translation
+   'AGREE_CASH_ON_DELIVERY': 'أنا أوافق على الدفع نقداً عند التوصيل' // need arabic translation
  },
  API_TEXT: {
    'YOUR_EMAIL_IS_VERIFIED': 'تم تفعيل بريدك الالكتروني',
@@ -687,4 +690,11 @@ export const AR_KEYWORDS = {
    'ACCOUNT': 'account',
    'CART': 'cart',
  },
+ CAM: {
+    'MY_ORDERS': 'طلباتي',
+    'WISHLIST': 'الأماني',
+    'SHIPPING_ADDRESS': 'عنوان الشحن',
+    'CREDIT_CARDS_VOUCHERS_REWARD': 'والمكافآتبطاقات الائتمان والقسائم ',
+    'MY_COUPONS': 'قسائم بلدي'
+ }
 };

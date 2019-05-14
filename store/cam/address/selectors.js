@@ -25,6 +25,10 @@ const getAddrById = store => (addrId) => {
 };
 
 const getDefaultAddress = (store) => {
+  const ddA = store.shippingAddrReducer.data.deliverToAddress
+  if(ddA) {
+    return ddA;
+  }
   if (store.shippingAddrReducer.data && store.shippingAddrReducer.data.length > 0) {
     return _.filter(store.shippingAddrReducer.data, value => value.default);
   }
