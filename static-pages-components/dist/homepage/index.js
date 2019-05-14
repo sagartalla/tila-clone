@@ -721,7 +721,7 @@ const HomePage = () => React.createElement(
         React.createElement(
           'a',
           { href: col.link },
-          React.createElement('img', { src: col.img, alt: col.title })
+          React.createElement('img', { className: 'resp-img-link', src: col.img, alt: col.title })
         )
       ))
     ),
@@ -947,7 +947,7 @@ const HomePage = () => React.createElement(
       twoCols.map(col => React.createElement(
         Col,
         { md: 6, xs: 6, sm: 6 },
-        React.createElement('img', { src: col.img, alt: col.title })
+        React.createElement('img', { className: 'resp-img-link', src: col.img, alt: col.title })
       ))
     ),
     React.createElement(
@@ -1202,7 +1202,7 @@ const HomePage = () => React.createElement(
           React.createElement(
             'div',
             { className: 'image' },
-            React.createElement('img', { src: i.img, alt: i.img })
+            React.createElement('img', { className: 'resp-img-link', src: i.img, alt: i.img })
           ),
           React.createElement(
             'div',

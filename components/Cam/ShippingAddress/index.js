@@ -126,6 +126,7 @@ class ShippingAddress extends Component {
     this.addrTypeHandler = this.addrTypeHandler.bind(this);
     this.resetAddAdrressForm = this.resetAddAdrressForm.bind(this);
     this.selectCityFromSuggesstions = this.selectCityFromSuggesstions.bind(this);
+    this.selectDeliverToAddress = this.selectDeliverToAddress.bind(this);
   }
 
   componentDidMount() {
@@ -293,10 +294,14 @@ class ShippingAddress extends Component {
     this.setState({ addr });
   }
 
+  selectDeliverToAddress(addId) {
+    this.props.selectDeliverToAddress(addId)
+  }
+
   render() {
     // if standalone is true, it is stand alone address page else from payment page or any other pages.
     const {
-      results, standalone, handleShippingAddressContinue, miniAddress, isPdp, getAllCities, countriesData, cartResults, showNonShippable,
+      results, standalone, handleShippingAddressContinue, miniAddress, isPdp, getAllCities, countriesData, cartResults, showNonShippable, isPaymentPage
     } = this.props;
     const {
       showNewAddr, addr, showCitiesData, showCountriesData, validation, showSlider,
@@ -397,7 +402,9 @@ class ShippingAddress extends Component {
                     editAddress={this.editAddress}
                     makeDefaultAddress={this.makeDefaultAddress}
                     resetAddAdrressForm={this.resetAddAdrressForm}
+                    selectDeliverToAddress={this.selectDeliverToAddress}
                     standalone={standalone}
+                    isPaymentPage={isPaymentPage}
                   />
                 </Col>
                 <Col md={12} sm={12} xs={12}>
@@ -459,6 +466,7 @@ const mapDispatchToProps = dispatch =>
       autoCompleteCoutry: productActionCreators.autoCompleteCoutry,
       getCitiesByCountryCode: productActionCreators.getCitiesByCountryCode,
       getCountries: productActionCreators.getCountries,
+      selectDeliverToAddress: actionCreators.selectDeliverToAddress
     },
     dispatch,
   );

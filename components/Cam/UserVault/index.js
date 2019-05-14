@@ -152,6 +152,7 @@ class UserVault extends Component {
 const mapStateToProps = (store) => ({
   results: selectors.getCardResults(store),
   transactions: selectors.getTransactions(store),
+  tilaCredit: selectors.getTilaCredit(store),
 });
 
 const mapDispatchToProps = (dispatch) =>

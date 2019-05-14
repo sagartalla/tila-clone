@@ -10,7 +10,7 @@ const vaultReducer = typeToReducer({
     FULFILLED: (state, action) => Object.assign({}, state, {
       data: {
         savedCards: _.sortBy(action.payload.data.saved_cards, o => !o.default),
-        tilaCredit: action.payload.data.tila_credit,
+        tilaCredit: action.payload.data.balance_amount,
       },
       ui: { loading: true },
     }),

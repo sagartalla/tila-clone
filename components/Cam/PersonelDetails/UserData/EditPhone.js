@@ -304,7 +304,7 @@ class EditPhone extends React.Component {
                   {/* <Input type='number' placeholder={`${CONTACT_INFO_MODAL.ENTER} ${CONTACT_INFO_MODAL.OTP}`} val={otp} onChange={this.handleOTPChange} /> */}
                   <div className={styles['fp-input']}>
                     <input
-                      type="number"
+                      type="text"
                       value={otp}
                       className={styles['width100']}
                       onChange={this.handleOTPChange}

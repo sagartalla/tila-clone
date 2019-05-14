@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Cookie from 'universal-cookie';
 import Blocker from '../../../common/Blocker';
-import Button from '../../../common/Button';
+import Button from '../../../common/CommonButton';
 import Input from '../../../common/Input';
 import { languageDefinations } from '../../../../utils/lang/';
 import { actionCreators, selectors } from '../../../../store/cart';
@@ -23,7 +23,7 @@ import styles_ar from './index_ar.styl';
 const { COUPON_OFFERS } = languageDefinations();
 const cookies = new Cookie();
 
-const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
 class Coupon extends Component {
   constructor(props) {
@@ -35,12 +35,9 @@ class Coupon extends Component {
       copuonAttempted: false,
       appliedCoupon: '',
       couponCode: '',
-      documentTerms: '',
-      documentHowToUse: '',
-      couponDescription: '',
-      couponSelected: '',
       showLoader: false,
       showSlider: false,
+      coupons: '',
     };
   }
 
@@ -58,9 +55,9 @@ class Coupon extends Component {
     this.setState({
       couponApplied: this.state.copuonAttempted && cartData.coupon_applied,
     });
-    if (isCartLoading) {
-      return;
-    }
+    // if (isCartLoading) {
+    //   return;
+    // }
     if (LoadingState) {
       this.setState({
         showLoader: true,
@@ -88,16 +85,10 @@ class Coupon extends Component {
   }
 
   showPopup = (e) => {
-    const docTerms = e.target.getAttribute('data-terms');
-    const docUse = e.target.getAttribute('data-use');
-    const coupon = e.target.getAttribute('data-coupon');
-    const description = e.target.getAttribute('data-desc');
+    const data = JSON.parse(e.target.getAttribute('data-coupon'));
     const title = e.target.getAttribute('data-title');
     this.setState({
-      documentTerms: docTerms,
-      documentHowToUse: docUse,
-      couponSelected: coupon,
-      couponDescription: description,
+      coupons: data,
       title,
       showSlider: true,
     });
@@ -114,6 +105,7 @@ class Coupon extends Component {
       couponCode: e.target.value,
       appliedCoupon: '',
       copuonAttempted: false,
+      errorMsg: '',
     });
   }
   handleApply = (e) => {
@@ -162,32 +154,34 @@ class Coupon extends Component {
   }
 
   render() {
-    const { couponData } = this.props;
+    const { couponData, isCartLoading, couponLoading } = this.props;
     const {
       couponCode, errorMsg, couponApplied, copuonAttempted, appliedCoupon, showSlider,
-      documentTerms,
-      documentHowToUse,
-      couponDescription,
-      couponSelected,
       showLoader,
       title,
+      coupons,
     } = this.state;
     return (
-      showLoader ? <Blocker /> :
-      <div className={`${styles.flex} ${styles['flex-colum']}`}>
+      showLoader || couponLoading ? <Blocker /> :
+      <div className={`${styles.flex} ${styles['flex-colum']} ${styles['align-center']} ${styles.relative}`}>
         <div className={`${styles.couponApply} ${styles.flex}`}>
           <Input
             placeholder={` ${COUPON_OFFERS.ENTER_COUPON_CODE}`}
-            style={{
-            width: '350px', height: '60px', border: '0', paddingLeft: '10px',
-          }}
+            className={`${styles.input}`}
             onChange={this.enterCouponCode}
             val={couponCode || appliedCoupon}
           />
-          <Button className={`${styles.buttonStyle} ${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles.width35} ${styles['m-10']}`} btnText="Apply" onClick={this.handleInputApply(couponCode || appliedCoupon)} />
+          <Button
+            className={`${styles.buttonStyle} ${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles.width35} ${styles['m-10']}`}
+            btnText={COUPON_OFFERS.APPLY}
+            btnLoading={isCartLoading}
+            onClick={this.handleInputApply(couponCode || appliedCoupon)}
+          />
         </div>
         <div className={styles.errorStyle}>
-          {(copuonAttempted ? (couponApplied ? '' : <span className={styles['error-msg']}>This {appliedCoupon} {COUPON_OFFERS.IS_INVALID}</span>) : errorMsg ? <span className={styles['error-msg']}>{errorMsg}</span> : '')}
+          {!isCartLoading &&
+          (copuonAttempted ? (couponApplied ? '' : <span className={styles['error-msg']}>This {appliedCoupon} {COUPON_OFFERS.IS_INVALID}</span>) : errorMsg ? <span className={styles['error-msg']}>{errorMsg}</span> : '')
+        }
         </div>
         <div className={`${styles.applyCoupon} ${styles.applyCouponMargin} ${styles.flex} ${styles['flex-colum']}`}>
           <Coupons
@@ -205,14 +199,14 @@ class Coupon extends Component {
             style={{ background: 'none' }}
           >
             <div className={`${styles['flex-center']}`}>
-              <div className={`${styles.couponCodeCartTerms} ${styles.width35} ${styles.fontW600} ${styles['m-5']}`}>{couponSelected}</div>
-              <div className={`${styles['label-gry-clr']}`}>{couponDescription}</div>
+              <div className={`${styles.couponCodeCartTerms} ${styles.width35} ${styles.fontW600} ${styles['m-5']}`}>{coupons.coupon_code}</div>
+              <div className={`${styles['label-gry-clr']}`}>{coupons.description}</div>
             </div>
             <Tabs defaultActiveKey={1}>
               <Tab eventKey={title === 'terms' ? 1 : 2} title={COUPON_OFFERS.TERMS_AND_CONDITIONS}>
                 <iframe
                   title="TERMS"
-                  src={documentTerms}
+                  src={coupons.tc}
                   frameBorder="0"
                   width="440px"
                   height="550px"
@@ -221,7 +215,7 @@ class Coupon extends Component {
               <Tab eventKey={title === 'terms' ? 2 : 1} title={COUPON_OFFERS.HOW_TO_USE}>
                 <iframe
                   title="TERMS"
-                  src={documentHowToUse}
+                  src={coupons.how_to_use}
                   frameBorder="0"
                   width="440px"
                   height="550px"
@@ -244,7 +238,7 @@ const mapStateToProps = store => ({
   couponData: couponSelectors.getCouponOffers(store),
   cartData: selectors.getCartResults(store),
   isCartLoading: selectors.getLoadingStatus(store),
-  LoadingState: couponSelectors.showLoader(store),
+  couponLoading: couponSelectors.showLoader(store),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(
