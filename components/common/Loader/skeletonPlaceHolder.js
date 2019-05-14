@@ -14,7 +14,7 @@ import styles_ar from './loader_ar.styl';
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 export const searchPlaceHolder = (
-  <div style={{ overflow: 'hidden', maxHeight: '800px' }}>
+  <div>
     {/* <div className={`${styles.container}`} /> */}
     <div
       className={

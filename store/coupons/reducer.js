@@ -28,6 +28,7 @@ const couponOffersData = typeToReducer({
     PENDING: state => ({
       ...state,
       loader: true,
+      couponDataList: {},
     }),
     FULFILLED: (state, action) => {
       const { payload } = action;

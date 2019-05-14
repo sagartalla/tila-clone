@@ -128,6 +128,7 @@ export const AR_KEYWORDS = {
     MAKE_DEFAULT: 'اجعله العنوان الرئيسي',
     DELETE: 'حذف',
     EDIT_ADDR: 'تعديل العنوان',
+    DELIVER_TO: 'Deliver To',
     ADD_NEW_BTN: 'إضافة جديد',
     ADD_NEW_ADDR: 'إضافة عنوان جديد',
     ADD_NEW_ADDR_HEAD: 'إضافة عنوان توصيل جديد',
@@ -604,6 +605,7 @@ export const AR_KEYWORDS = {
     EXPIRED_COUPONS: 'Expired Coupons',
     TERMS_AND_CONDITIONS: 'Terms & Conditions',
     EXPIRED_ON: 'Expired on',
+    HOW_TO_USE: 'How to use',
     EMPTY_COUPON_BOX: 'You have found an empty Coupon box',
     NO_COUPONS_AVAILABLE: 'No coupons are available currently.',
     CHECK_BACK_LATER: 'Please Check back later',
@@ -670,13 +672,20 @@ export const AR_KEYWORDS = {
     ONLY_SIMILAR_ITEM_TYPES_CAN_BE_COMPARED: 'المنتجات المتطابقه فقط يمكن مقارنتها',
     ITEM_REMOVED_FROM_COMPARE: 'تم إزالة المنتج من المقارنة',
   },
-
   MOBILE_FOOTER: {
     HOME: 'home',
     CATEGORIES: 'categories',
     WISHLIST: 'wishlist',
     ACCOUNT: 'account',
     CART: 'cart',
+  },
+  CAM: {
+    MY_ORDERS: 'طلباتي',
+    WISHLIST: 'الأماني',
+    SHIPPING_ADDRESS: 'عنوان الشحن',
+    CREDIT_CARDS_VOUCHERS_REWARD: 'والمكافآتبطاقات الائتمان والقسائم ',
+    MY_COUPONS: 'قسائم بلدي',
+    PREFERENCES: 'تفضيلات',
   },
   PREFERENCES: {
     PAGE_TITLE: 'Notification and Communication Preferences',

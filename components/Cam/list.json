@@ -3,13 +3,13 @@
     "data": [
       {
         "icon": "icons/my-orders",
-        "display": "My Orders",
+        "display": "MY_ORDERS",
         "count": "1",
         "href": "/cam/orders"
       },
       {
         "icon": "icons/my-wishlist",
-        "display": "Wishlist",
+        "display": "WISHLIST",
         "count": "1",
         "href": "/cam/wishlist"
       }
@@ -19,12 +19,12 @@
     "data": [
       {
         "icon": "icons/shipping",
-        "display": "Shipping Address",
+        "display": "SHIPPING_ADDRESS",
         "href": "/cam/address"
       },
       {
         "icon": "icons/creditcards",
-        "display": "Credit Cards, Vouchers & Reward points",
+        "display": "CREDIT_CARDS_VOUCHERS_REWARD_POINTS",
         "href": "/cam/uservault"
       }
     ]
@@ -33,16 +33,16 @@
     "data": [
       {
         "icon": "icons/common-icon/coupon-code",
-        "display": "My Coupons",
+        "display": "MY_COUPONS",
         "href": "/cam/mycoupons"
       }
     ]
-	},
-	{
+  },
+  {
     "data": [
       {
         "icon": "icons/preferences",
-        "display": "Preferences",
+        "display": "PREFERENCES",
         "href": "/cam/preferences"
       }
     ]
