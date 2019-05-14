@@ -117,7 +117,7 @@ class Payments extends React.Component {
   componentWillReceiveProps(nextProps) {
     // if cart is empty redirect to cart page.
     // if user hits payment url directly and no cart items, this condition will execute.
-    if (nextProps.cartResults.items.length === 0 && nextProps.cartResults.ui.loaded) {
+    if (nextProps.cartResults.items.length === 0 && nextProps.cartResults.ui.loading) {
       Router.push(`/${country}/${language}/cart`);
     }
     const { loggedInFlag } = this.state;

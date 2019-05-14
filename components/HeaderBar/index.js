@@ -52,7 +52,7 @@ const HeaderBar = props => (
             :
             null
           } */}
-          <Col md={props.showFitlers ? 3 : 4 } sm={5}>
+          <Col md={4} sm={5}>
             <ActionBar />
           </Col>
         </Row>

@@ -79,7 +79,7 @@ const TilaVoucher = (props) => {
             // <div className={`${styles['vault-card-body']} ${styles['p-20-40']}`}>
             //     <h4 className={`${styles['pb-5']} ${styles['fontW300']} ${styles['lgt-blue']}`}>No voucher history</h4>
             // </div>
-            <div className={styles['no-result']}>
+            <div className={`${styles['no-result']} ${styles['align-center']} ${styles['flex-col']} ${styles['black-color']}`}>
                 <SVGComponent clsName={`${styles['wallet-img']}`} src="errors-img/group-2" />
                 <h3>No voucher history</h3>
             </div>

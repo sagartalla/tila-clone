@@ -135,6 +135,8 @@ export const EN_KEYWORDS = {
     'MAKE_DEFAULT': 'Make as Default',
     'DELETE': 'Delete',
     'EDIT_ADDR': 'Edit Address',
+    'MAKE_DEFAULT': 'Make Default',
+    'DELIVER_TO': 'Deliver To',
     'ADD_NEW_BTN': 'Add New',
     'ADD_NEW_ADDR': 'Add New Address',
     'ADD_NEW_ADDR_HEAD': 'Add New Delivery Address',
@@ -624,6 +626,9 @@ export const EN_KEYWORDS = {
     'TERMS_AND_CONDITIONS': 'Terms & Conditions',
     'HOW_TO_USE': 'How to use',
     'EXPIRED_ON': 'Expired on',
+    'EMPTY_COUPON_BOX': 'You have found an empty Coupon box',
+    'NO_COUPONS_AVAILABLE': 'No coupons are available currently.',
+    'CHECK_BACK_LATER': 'Please Check back later',
   },
  EMAIL_VERIFICATION: {
    'VERIFY_YOUR_EMAIL': 'Verify Your Email Address',
@@ -694,4 +699,11 @@ export const EN_KEYWORDS = {
    'ACCOUNT': 'account',
    'CART': 'cart',
  },
+ CAM: {
+    'MY_ORDERS': 'My Orders',
+    'WISHLIST': 'Wishlist',
+    'SHIPPING_ADDRESS': 'Shipping Address',
+    'CREDIT_CARDS_VOUCHERS_REWARD_POINTS': 'Credit Cards, Vouchers and Rewards',
+    'MY_COUPONS': 'My Coupons'
+ }
 };
