@@ -69,6 +69,7 @@ const Order = ({ order }) => {
               key={orderItem.id}
               orderItem={orderItem}
               orderId={order.id}
+              showPriceInfo={false}
               variantId={orderItem.variantId}
               isCancelable={orderItem.isCancelable}
               isReturnable={orderItem.isReturnable}
@@ -77,8 +78,8 @@ const Order = ({ order }) => {
           ))}
         </Col>
       </Row>
-      <Row>
-        <Col md={7} className={styles.flex}>
+      <Row className={styles['flex-center']}>
+        <Col md={7} className={styles['flex-center']}>
           <div className={`${styles['pr-10']} ${styles['thck-gry-rt-border']}`}>
             <span>
               Ordered on{' '}
@@ -90,7 +91,7 @@ const Order = ({ order }) => {
           <a href={`/${country}/${language}/help/answers/orders#${order.id}`}>
             <span className={`${styles['thick-blue']} ${styles['p-5']} ${styles['flex-center']} ${styles['ml-10']} ${styles.border} ${styles['border-radius4']}`}>
               <SVGComponent clsName={`${styles['help-icon']}`} src="icons/help-icon/help" />
-            &nbsp;&nbsp;Need Help?
+            &nbsp;&nbsp;{ORDERS.NEED_HELP}?
             </span>
           </a>
 
@@ -98,13 +99,13 @@ const Order = ({ order }) => {
         <Col md={5} className={styles['pl-0']}>
           <div className={`${styles['flx-space-bw']}`}>
             <span className={`${styles['flex']}`}>
-              <span className={styles['link-text']}>Request Invoice&nbsp;</span>
+              <span className={styles['link-text']}>{ORDERS.REQUEST_INVOICE}&nbsp;</span>
               <span>
                 <SVGComponent clsName={`${styles['down-arrow']}`} src="icons/down-arrow/down-arrow" />
               </span>
             </span>
             <span className={`${styles['ml-10']} ${styles['fs-16']}`}>
-              <span>Order Total:</span> <span className={`${styles['fontW600']} ${styles['light-gry-clr']}`}>{order.orderTotal}</span>
+              <span>{ORDERS.ORDER_TOTAL}:</span> <span className={`${styles['fontW600']} ${styles['light-gry-clr']}`}>{order.orderTotal}</span>
             </span>
           </div>
         </Col>

@@ -602,6 +602,7 @@ export const EN_KEYWORDS = {
     THIS_ITEM: 'this item?',
     PLEASE_SELECT_SIZE_TO_CONTINUE: 'Please Select The Size To continue',
     SUCCESS: 'Success',
+    ORDER_DETAILS_SUMMERY: 'Order Summary'
   },
   COUPON_OFFERS: {
     VIEW_TERMS: 'Terms & Conditions',
@@ -654,6 +655,9 @@ export const EN_KEYWORDS = {
     SHIPPING_TO: 'Shipping to',
     TRACK_ORDER: 'Track Order',
     NO_ORDERS: 'Oops! No orders yet. Start Shopping',
+    REQUEST_INVOICE: 'Request Invoice',
+    ORDER_TOTAL: 'Order Total',
+    NEED_HELP: 'Need Help',
   },
   BETA: {
     BETA: 'beta',
