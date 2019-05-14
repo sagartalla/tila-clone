@@ -214,7 +214,7 @@ class CartItem extends React.Component {
                       <p className={`${styles['mb-0']} ${styles['fs-12']} ${styles['flex']}`}>
                         <span className={styles['thick-gry-clr']}>Warranty : </span>
                         <span className={`${styles['pl-10']} ${styles['pr-10']}`}>
-                          {warranty_duration && Object.keys(warranty_duration).length > 0 ?
+                          {warranty_duration && Object.keys(warranty_duration).length > 0 || warranty_duration.duration !== 0 ?
                             <Warranty warranty={warranty_duration} />
                             : 'No Warranty'}
                         </span>
