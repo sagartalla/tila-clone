@@ -23,7 +23,13 @@ const vaultReducer = typeToReducer({
   [actions.MAKE_CARD_DEFAULT]: {
     PENDING: state => Object.assign({}, state, { ui: { loading: true } }),
     REJECTED: (state, action) => Object.assign({}, state, { error: action.payload.message, ui: { loading: false } }),
-    FULFILLED: (state, action) => Object.assign({}, state, { data: action.payload.data, ui: { loading: true } }),
+    FULFILLED: (state, action) => Object.assign({}, state, {
+      data: {
+        savedCards: _.sortBy(action.payload.data.saved_cards, o => !o.default),
+        tilaCredit: action.payload.data.balance_amount,
+      },
+      ui: { loading: true },
+    }),
   },
   [actions.DELETE_CARD]: {
     PENDING: state => Object.assign({}, state, { ui: { loading: true } }),
