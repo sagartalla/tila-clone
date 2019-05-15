@@ -169,7 +169,7 @@ class OrderItem extends Component {
                           </a>
                         </Link>
                         <div className={`${styles['flex-center']} ${styles['prod-sub-content']}`}>
-                          <Col md={8} sm={8} className={styles['p-0']}>
+                          <Col md={7} sm={7} className={styles['p-0']}>
                             <div className={`${styles.flex} ${styles['pt-15']} ${styles['pb-15']} ${styles['ipad-tp-5']} ${styles['ipad-tb-5']} ${styles['fs-12']} ${styles['thick-gry-clr']}`}>
                               {product.variantAttributes.length > 0 &&
                                 product.variantAttributes.map(attr => (
@@ -190,7 +190,7 @@ class OrderItem extends Component {
                           </Col>
                           {
                             showPriceInfo && 
-                            <Col md={4} sm={4} className={styles['ipad-pr-0']}>
+                            <Col md={5} sm={5} className={styles['ipad-pr-0']}>
                             {product.price &&
                             <span className={`${styles['justify-end']} ${styles['flex-center']} ${styles['fs-16']} ${styles.fontW600}`}>
                               {product.orderIds.length} x {final_price.display_value} {final_price.currency_code}
