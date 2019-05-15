@@ -238,7 +238,7 @@ export const EN_KEYWORDS = {
     PLEASE_SELECT_THE_STAR_RATING: 'Please rate this product',
     ANY_OTHER_SUGGESTIONS: 'Any Other Suggestions?Let Us Know',
     RATE_THE_PRODUCT: 'Rate The Product',
-    SUBMIT_FEEDBACK: 'submit FeedBack',
+    SUBMIT_FEEDBACK: 'Submit FeedBack',
     NO_REVIEWS_AVAILABLE: 'No reviews available for this product.',
     SHARE_YOUR_EXPERIENCE: 'Share your Experience',
     ALL_REVIEWS: 'All Reviews',
