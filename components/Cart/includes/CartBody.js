@@ -87,7 +87,7 @@ const CartBody = ({
         {
           flag > 0
             ?
-              <Col md={3} sm={12} xs={12} className={styles['pr-0']}>
+              <Col md={3} sm={12} xs={12} className={`${styles['pr-0']} ${styles['sidebar-position']}`}>
                 <div className={`${styles['box']}`}>
                   <RightBar
                     data={data}

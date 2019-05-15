@@ -27,7 +27,7 @@ class Language extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedItem: 'en'
+      selectedItem: 'en',
     };
     this.changeLanguage = this.changeLanguage.bind(this);
     this.storeLanguage = this.storeLanguage.bind(this);
@@ -37,7 +37,7 @@ class Language extends Component {
   	const language = cookies.get('language') || this.state.selectedItem;
   	if(language){
   	  this.setState({
-        selectedItem: language
+        selectedItem: language,
       });
   	}
     this.storeLanguage(language);
@@ -89,7 +89,7 @@ class Language extends Component {
 const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators(
 		{
-			setLanguage: actionCreators.setLanguage
+			setLanguage: actionCreators.setLanguage,
 		},
 		dispatch,
 	);

@@ -43,7 +43,7 @@ class ExpiredCoupons extends Component {
           <Coupons
             showExpiredCoupons
             couponData={couponDataList.coupon_dto_list}
-            isLoading={loadingState}
+            loading={loadingState}
           />
         </div>
         <Pagination
