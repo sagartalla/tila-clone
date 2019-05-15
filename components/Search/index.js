@@ -31,6 +31,10 @@ const country = cookies.get('country') || 'SAU';
 
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
+let oldY = 0;
+let tempSideBarTop = null;
+let tempContainerTop = null;
+let relativeTop = null;
 // const onClickMenuHandle = (e) => {
 //   const target = e.currentTarget;
 //   setTimeout(() => {
@@ -44,22 +48,96 @@ const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...s
 // }
 
 class Search extends Component {
-  componentWillUnmount() {
-    this.props.hideSearchBarFitlers();
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      sideBarPositionClass: '',
+      containerStyle: {}
+    };
+    this.handleScroll = this.handleScroll.bind(this);
+    this.upScroll = this.upScroll.bind(this);
+    this.downScroll = this.downScroll.bind(this);
+  }
+  componentDidMount() {
+    window.addEventListener('scroll', this.handleScroll);
   }
 
+  componentWillUnmount() {
+    this.props.hideSearchBarFitlers();
+    window.removeEventListener('scroll', this.handleScroll);
+  }
+
+  upScroll() {
+    const wh = window.innerHeight;
+    const { height: sideBarHeight, top: sideBarTop } = document.getElementById('sidebar-position').getBoundingClientRect();
+    const { top: footerTop } = document.getElementById('footer-container').getBoundingClientRect();
+    const sidebarBottom = sideBarTop + sideBarHeight;
+    tempSideBarTop = null;
+    tempContainerTop = null;
+    if(relativeTop) {
+      this.setState({
+        containerStyle: {}
+      });
+      relativeTop = null;
+    }
+    console.log('abc', parseInt(sidebarBottom), parseInt(footerTop));
+    if (parseInt(sidebarBottom) <= wh) {
+      this.setState({
+        sideBarPositionClass: wh >= parseInt(footerTop) ? 'footer-bottom' : 'fixed-bottom',
+      });
+    } else {
+      this.setState({
+        sideBarPositionClass: '',
+      });
+    }
+  }
+
+  downScroll() {
+    const {top: containerTop} = document.getElementById('search-container').getBoundingClientRect();
+    if(!tempSideBarTop) {
+      tempSideBarTop = parseInt(document.getElementById('sidebar-position').getBoundingClientRect().top);
+    }
+    if(!tempContainerTop) {
+      tempContainerTop = containerTop;
+    }
+    if (!relativeTop) {
+      relativeTop = parseInt(Math.abs(tempSideBarTop - containerTop));
+      this.setState({
+        containerStyle: {top: relativeTop},
+        sideBarPositionClass: 'relative'
+      });
+    }
+    console.log('downScroll', containerTop, tempContainerTop, parseInt(Math.abs(tempSideBarTop)), parseInt(Math.abs(containerTop - tempContainerTop)));
+    if (parseInt(Math.abs(containerTop - tempContainerTop)) > (parseInt(Math.abs(tempSideBarTop)) + 50)) {
+      this.setState({
+        containerStyle: {},
+        sideBarPositionClass: 'fixed-top'
+      });
+    }
+  }
+
+  handleScroll(e) {
+    if (oldY < window.scrollY) {
+      this.upScroll(e);
+    } else {
+      this.downScroll();
+    }
+    oldY = window.scrollY;
+  }
   render() {
     const { query, optionalParams } = this.props;
+    const { sideBarPositionClass, containerStyle } = this.state;
     return (
       <div>
         <HeaderBar />
-        <Grid className={styles['pt-20']}>
-          <Col md={2} className={`${styles['filter-panel']} ${styles['float-l']} ${styles['border-radius4']} ${styles['bg-white']} ${styles['p-0']}`}>
+        <Grid id="search-container" className={`${styles['pt-20']} ${styles.relative}`}>
+          <Col md={2} id="sidebar-position" className={`${styles['filter-panel']} ${styles['float-l']} ${styles['border-radius4']} ${styles['bg-white']} ${styles['p-0']} ${styles[sideBarPositionClass]}`} style={containerStyle}>
             <NoSSR>
               <CategoriesAndFacets />
             </NoSSR>
           </Col>
-          <Col md={10} className={`${styles['search-results']}`}>
+          <Col md={10} className={`${styles['search-results']} ${styles['fl-rt']}`}>
             <SearchDetailsBar optionalParams={optionalParams} />
             <SearchResults search={query.search} />
           </Col>

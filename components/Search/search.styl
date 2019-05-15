@@ -4,6 +4,7 @@
   width: 16%;
   border: 1px solid #e5e5e5;
   box-shadow: 0 2px 7px 0 rgba(0,0,0,0.03);
+  position: relative;
   li
     list-style none
 
@@ -15,7 +16,6 @@
 }
 
 .search-results
-  float left
   width calc(82% - 20px)
   padding 0 0 0 10px
   .no-search
@@ -547,4 +547,19 @@
     }
 
   }
+}
+
+.fixed-bottom {
+  position fixed
+  bottom 0
+}
+
+.footer-bottom {
+  position absolute
+  bottom 0
+}
+
+.fixed-top {
+  position fixed
+  top 60px;
 }
