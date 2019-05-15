@@ -32,7 +32,7 @@ export default class StarRating extends Component {
   }
 
   render() {
-    let { total,children,interactive,clsStyl,  ...restProps} = this.props
+    let { total,children,interactive,clsStyl,clsName,  ...restProps} = this.props
     let { rating, isRating } = this.state;
     children = Children.toArray(children)
 
@@ -52,7 +52,7 @@ export default class StarRating extends Component {
           children.length ? (
             React.cloneElement(children[i % children.length], starProps)
           ):(
-            <Star clsStyl={clsStyl} {...starProps} />
+            <Star clsStyl={clsStyl} clsName={clsName} {...starProps} />
           )
         }
 
@@ -87,11 +87,13 @@ StarRating.PropTypes = {
   total:PropTypes.number,
   rating:PropTypes.number,
   onRate:PropTypes.func,
-  onRating:PropTypes.func
+  onRating:PropTypes.func,
+  clsStyl:PropTypes.object
 }
 
 StarRating.defaultProps = {
   total:5,
   rating:0,
-  interactive:true
+  interactive:true,
+  clsStyl:{width:'25px', marginRight:'15px'}
 }
