@@ -94,7 +94,7 @@ class OrderHeader extends Component {
             <div className={`${styles.flex}`}>
               <Col md={3} xs={6} sm={3} className={`${styles['pb-20']} ${styles['pt-20']}`}>
                 <div className={styles['flx-space-bw']}>
-                  <h5 className={`${styles['mt-0']} ${styles['fs-16']} ${styles['light-gry-clr']} ${styles['mb-15']} ${styles['text-uppercase']}`}>{ORDER_PAGE.ADDRESS_DETAILS}</h5>
+                  <h5 className={`${styles['mt-0']} ${styles['fs-14']} ${styles['light-gry-clr']} ${styles['mb-15']} ${styles['text-uppercase']}`}>{ORDER_PAGE.ADDRESS_DETAILS}</h5>
                   {/* <h5 className={`${styles['mt-0']} ${styles['flex']}`}>
                     <a className={`${styles['pr-10']} ${styles['thick-blue']}`} onClick={this.pinAddress}>{ORDER_PAGE.PIN_ADDRESS}</a>
                     <SVGComponent clsName={`${styles['pin-map-icon']}`} src="icons/small-map-icon/small-map" />
@@ -107,7 +107,7 @@ class OrderHeader extends Component {
                 <Col md={5} xs={6} sm={5} className={`${styles['ipad-p-0']} ${styles['thick-border-left']} ${styles['pb-20']} ${styles['pt-20']} ${styles['thin-border-right']}`}>
                   <div>
                     <div className={`${styles['mt-0']} ${styles['flex-center']} ${styles['light-gry-clr']}  ${styles['mb-15']}`}>
-                      <Col md={6} sm={6} className={`${styles['text-uppercase']} ${styles['fs-16']}`}>{ORDER_PAGE.ORDER_DETAILS_SUMMERY}</Col>
+                      <Col md={6} sm={6} className={`${styles['text-uppercase']} ${styles['fs-14']}`}>{ORDER_PAGE.ORDER_DETAILS_SUMMERY}</Col>
                       <Col md={6} sm={6} className={`${styles['fs-14']}`}>{ORDER_PAGE.ORDER} # {orderId}</Col>
                     </div>
                   </div>
@@ -142,7 +142,7 @@ class OrderHeader extends Component {
               <Col md={4} xs={6} sm={4} className={`${styles['pb-20']} ${styles['pt-20']}`}>
                 {/* <Col md={12} xs={6} sm={12}> */}
                   <div className={`${styles['mt-0']} ${styles['light-gry-clr']} ${styles['flex-center']}  ${styles['mb-20']}`}>
-                    <Col md={6} sm={6} className={`${styles['ipad-pl-0']} ${styles['fs-16']}`}><span>{ORDER_PAGE.PAY_METHOD}</span></Col>
+                    <Col md={6} sm={6} className={`${styles['ipad-pl-0']} ${styles['fs-14']}`}><span>{ORDER_PAGE.PAY_METHOD}</span></Col>
                     <Col md={6} sm={6} className={`${styles['ipad-pr-0']} ${styles['fs-14']} ${styles['fontW600']}`}>
                       <span>{ORDER_PAGE.REQ_INVOICE}</span>
                     </Col>
