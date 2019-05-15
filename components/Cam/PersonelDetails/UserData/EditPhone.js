@@ -112,7 +112,7 @@ class EditPhone extends React.Component {
     const { countryCode, phoneNumber, otpCount } = this.state
     // let validation = this.validations.validate(this.state)
     // this.setState({ validation })
-    if (phoneNumber.length > 0) {
+    if (phoneNumber && phoneNumber.length > 0) {
       const params = {
         mobile_country_code: countryCode,
         mobile_no: phoneNumber,
@@ -120,6 +120,8 @@ class EditPhone extends React.Component {
       this.setState({
         otpCount: otpCount + 1,
       }, () => this.props.otpUserUpdate(params));
+    }else{
+      toast.error('Phone number is required for OTP');
     }
   }
   handleClose() {
@@ -279,9 +281,10 @@ class EditPhone extends React.Component {
                         : null
                     }
                     {/* <span className={styles['error']}>error message</span> */}
+                    {/^([0-9]){6,12}$/.test(phoneNumber) ?
                       <a className={`${styles['show-otp']} ${styles['fs-12']} ${styles['thick-blue']}`} onClick={this.fetchOtp}>
                        {otpCount ? `${CONTACT_INFO_MODAL.RESEND} ${CONTACT_INFO_MODAL.OTP}` : CONTACT_INFO_MODAL.SEND_OTP}
-                      </a>
+                      </a> : null}
                   </div>
                   {/* <Input
                     placeholder={`${CONTACT_INFO_MODAL.ENTER} ${CONTACT_INFO_MODAL.PHONE_NUMBER}`}

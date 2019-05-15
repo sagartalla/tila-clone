@@ -99,7 +99,8 @@ class OrderItem extends Component {
 
   render() {
     const {
-      payments = [{}], orderItem, orderId, thankyouPage, isCancelable, isReturnable, isExchangable, needHelp,
+      payments = [{}], orderItem, orderId, thankyouPage, isCancelable,
+      isReturnable, isExchangable, needHelp, showPriceInfo,
     } = this.props;
     const { showToolTip } = this.state;
     const btnType = (() => {
@@ -187,7 +188,9 @@ class OrderItem extends Component {
                               <span className={`${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pl-15']} ${styles['promo-code-label']} ${styles['ipad-tp-5']} ${styles['ipad-pl-0']}`} />
                             </div>
                           </Col>
-                          <Col md={4} sm={4} className={styles['ipad-pr-0']}>
+                          {
+                            showPriceInfo && 
+                            <Col md={4} sm={4} className={styles['ipad-pr-0']}>
                             {product.price &&
                             <span className={`${styles['justify-end']} ${styles['flex-center']} ${styles['fs-16']} ${styles.fontW600}`}>
                               {product.orderIds.length} x {final_price.display_value} {final_price.currency_code}
@@ -215,6 +218,7 @@ class OrderItem extends Component {
                               </span>
                             </span>}
                           </Col>
+                          }
                         </div>
                         {product.warranty_duration && Object.keys(product.warranty_duration).length > 0 ?
                           <p className={`${styles['mb-0']} ${styles['fs-12']} ${styles.flex}`}>

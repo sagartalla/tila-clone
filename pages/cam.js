@@ -1,9 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import NoSSR from 'react-no-ssr';
 import withRedux from 'next-redux-wrapper';
 import { bindActionCreators } from 'redux';
-import { configureUrlQuery } from 'react-url-query';
-import createHistory from 'history/createBrowserHistory';
 
 import makeStore from '../store';
 
@@ -13,12 +11,12 @@ import Cam from '../components/Cam';
 
 class CamPage extends Base {
   pageName = 'CAM';
-  render(){
+  render() {
     const { url } = this.props;
     return (
       <Layout>
         <NoSSR>
-          <Cam tabDetails={url.query.tabDetails} query={url.query}/>
+          <Cam tabDetails={url.query.tabDetails} query={url.query} />
         </NoSSR>
       </Layout>
     );
@@ -31,6 +29,6 @@ const mapDispatchToProps = dispatch =>
       ...baseActions,
     },
     dispatch,
-  )
+  );
 
 export default withRedux(makeStore, null, mapDispatchToProps)(CamPage);
