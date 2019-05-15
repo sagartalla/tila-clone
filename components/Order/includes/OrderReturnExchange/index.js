@@ -40,12 +40,12 @@ class OrderReturnExchange extends Component {
     const { orderId, orderItemId, returnExchangeType, variantId } = query;
 
     const params = {
-      orderId: orderId,
+      orderId,
       issueType: returnExchangeType,
       step: STEPS.REASONS,
       returnExchangeType: returnExchangeType
     };
-    if(orderIssue.orderId !== orderId) {      
+    if(orderIssue.orderId !== orderId) {
       getOrderDetails({ orderId });
     } else {
       params.selectedItem = getSelectedOrder(orderItemId);

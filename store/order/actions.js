@@ -22,6 +22,7 @@ const actions = {
   GET_REFUND_OPTIONS: 'GET_REFUND_OPTIONS',
   GET_TRACKING_DETAILS: 'GET_TRACKING_DETAILS',
   THANKYOU_PAGE_TRACK: 'THANKYOU_PAGE_TRACK',
+  SET_CANCEL_REFUNDMODE: 'SET_CANCEL_REFUNDMODE'
 };
 
 const actionCreators = {
@@ -76,6 +77,12 @@ const actionCreators = {
       data: {
         selectedItem: params.selectedItem,
       },
+    },
+  }),
+  setCancelRefundMode: param => ({
+    type:actions.SET_CANCEL_REFUNDMODE,
+    payload:{
+      data:param
     },
   }),
   getRefundOptions: params => ({

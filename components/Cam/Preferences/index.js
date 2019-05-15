@@ -36,9 +36,9 @@ class Preferences extends React.Component {
           <Tab eventKey={1} title={PREFERENCES.NOTIFICATION_PREFERENCES}>
             <NotificationPreferences />
           </Tab>
-          <Tab eventKey={2} title={PREFERENCES.CATEGORY_PREFERENCES}>
+          {/* <Tab eventKey={2} title={PREFERENCES.CATEGORY_PREFERENCES}>
             <div>category</div>
-          </Tab>
+          </Tab> */}
         </Tabs>
       </div>
     );
