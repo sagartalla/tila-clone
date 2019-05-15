@@ -126,7 +126,7 @@ const AddressNew = (props) => {
                       key={result.rescity_nameult}
                       className={`${styles['auto-suggestions']} ${styles['bg-white']}`}
                     >
-                      <div data-id={result.code} name="city_code" onClick={selectCityFromSuggesstions} className={`${styles.item} ${styles['fs-12']} ${styles['pl-5']} ${styles['ht-25']} ${styles.pointer}`}>{result.city_name}</div>
+                      <div data-id={result.city_code} name="city_code" onClick={selectCityFromSuggesstions} className={`${styles.item} ${styles['fs-12']} ${styles['pl-5']} ${styles['ht-25']} ${styles.pointer}`}>{result.city_name}</div>
                     </div>
                   ))}
                 </div>
