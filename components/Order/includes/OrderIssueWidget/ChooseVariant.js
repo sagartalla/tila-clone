@@ -26,7 +26,8 @@ class ChooseVariant extends Component {
     this.selectedSize = this.selectedSize.bind(this)
     this.sizeNotAvailable = this.sizeNotAvailable.bind(this)
     this.state = {
-      message: 'emptyMsg'
+      message: 'emptyMsg',
+      activeListing:''
     }
   }
 
@@ -53,7 +54,8 @@ class ChooseVariant extends Component {
   }
   sizeNotAvailable() {
     this.setState({
-      message:'errorMsg'
+      message:'errorMsg',
+      activeListing:''
     },() => {
       this.props.productNotAvailable()
     })
@@ -62,7 +64,8 @@ class ChooseVariant extends Component {
     const {listing_id,variant_id } = listing
 
     this.setState({
-      message:'successMsg'
+      message:'successMsg',
+      activeListing:listing_id
     }, () => {
       this.props.selectedVariant({listing_id,variant_id})
     })
@@ -74,10 +77,11 @@ class ChooseVariant extends Component {
     return  data[0].variant_details.attribute_map.size.attribute_values[0].value
   }
   renderExchangeVariants(variants) {
+    const { activeListing } = this.state
     const data = variants.map((el,index) => {
       if(el.listing.total_inventory_count > 0) {
         return <li key={'variant_'+index}
-          className={`${el.listing.total_inventory_count > 0 ? styles['productSize-Button'] : styles['product-StrikeButton']}`}
+          className={`${el.listing.total_inventory_count > 0 ? styles['productSize-Button'] : styles['product-StrikeButton']} ${activeListing === el.listing.listing_id ? styles['active-variant']: ''}`}
           onClick={el.listing.total_inventory_count > 0 ? this.choosedVariant(el.listing) : this.sizeNotAvailable}
           >
           {el.variant_details.attribute_map && el.variant_details.attribute_map.size && el.variant_details.attribute_map.size.attribute_values[0].value}
