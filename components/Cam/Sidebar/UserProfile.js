@@ -88,7 +88,7 @@ class UserProfile extends React.Component {
     return (
       <>
         <label className={`${styles['file-upload']}`}>
-          <input type='file' id='profile-pic' onChange={this.handleChange} />
+          <input type='file' className={`${styles['display-pic']}`} onChange={this.handleChange} />
         </label>
         <Link route={`/${country}/${language}/cam/profile`}>
           <a style={{ display: 'block' }}>
