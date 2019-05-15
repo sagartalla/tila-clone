@@ -194,7 +194,7 @@ class Compare extends Component {
               <div className={` ${styles['compare-background']} ${styles['flex-center']} ${styles['ht-100per']} ${styles['bg-white']} ${styles['justify-center']} ${styles['flex-colum']}`}>
                 <SVGComponent clsName={`${styles['add-icon']}`} src="icons/common-icon/plus" />
                 <div className={`${styles.width100} ${styles['p-10-40']}`}>
-                  <select className={styles.width100} value={selectedBrand} onChange={this.selectBrand}>
+                  <select className={`${styles.width100} ${styles['compare-selct']}`} value={selectedBrand} onChange={this.selectBrand}>
                     <option value="">{COMPARE.SELECT_BRAND}</option>
                     {brands.length > 0 &&
                     brands.map(brand => (
@@ -204,7 +204,7 @@ class Compare extends Component {
                 </div>
                 {productList.length > 0 &&
                 <div className={`${styles.width100} ${styles['p-10-40']}`}>
-                  <select className={styles.width100} onChange={this.selectProduct}>
+                  <select className={`${styles.width100} ${styles['compare-selct']}`} onChange={this.selectProduct}>
                     <option value="">{COMPARE.SELECT_PRODUCT}</option>
                     {productList.length > 0 &&
                       productList.map(product => (
