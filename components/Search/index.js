@@ -104,12 +104,18 @@ class Search extends Component {
     if (!relativeTop) {
       relativeTop = parseInt(Math.abs(tempSideBarTop - containerTop));
       this.setState({
-        containerStyle: {top: relativeTop},
+        containerStyle: {top: relativeTop - 25},
         sideBarPositionClass: 'relative'
       });
     }
-    console.log('downScroll', containerTop, tempContainerTop, parseInt(Math.abs(tempSideBarTop)), parseInt(Math.abs(containerTop - tempContainerTop)));
-    if (parseInt(Math.abs(containerTop - tempContainerTop)) > (parseInt(Math.abs(tempSideBarTop)) + 50)) {
+    if(containerTop >= 0) {
+      this.setState({
+        containerStyle: {},
+        sideBarPositionClass: ''
+      });
+      return;
+    }
+    if (parseInt(Math.abs(containerTop - tempContainerTop)) > (parseInt(Math.abs(tempSideBarTop)))) {
       this.setState({
         containerStyle: {},
         sideBarPositionClass: 'fixed-top'
@@ -118,6 +124,14 @@ class Search extends Component {
   }
 
   handleScroll(e) {
+    const {height: sideBarHeight} = document.getElementById('sidebar-position').getBoundingClientRect();
+    if(sideBarHeight < window.innerHeight -123) {
+      this.setState({
+        containerStyle: {},
+        sideBarPositionClass: 'sticky-top'
+      })
+      return;
+    }
     if (oldY < window.scrollY) {
       this.upScroll(e);
     } else {
