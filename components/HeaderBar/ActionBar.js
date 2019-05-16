@@ -175,6 +175,7 @@ class ActionBar extends Component {
         </div>
         <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']}`}>
           <Dropdown id="cart-toggle" className={`${styles['cart-inn']} ${styles['profile-login-inn']} ${styles['pr-20']}`}>
+            {/* <Dropdown.Toggle> */}
             <Link route={`/${country}/${language}/cart`}>
               <a style={{ dispaly: 'block' }}>
                 <span className={`${styles['flex-center']} ${styles['justify-center']} ${styles.relative}`} title={PDP_PAGE.GO_TO_CART}>
@@ -183,6 +184,7 @@ class ActionBar extends Component {
                 </span>
               </a>
             </Link>
+            {/* </Dropdown.Toggle> */}
             <Dropdown.Menu className={`${styles['cart-item']}`}>
               <span>
                 <Cart

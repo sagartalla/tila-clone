@@ -172,6 +172,7 @@ const getProductComponent = (isPreview, taskCode) => {
         catalog, titleInfo, keyfeatures, extraOffers, imgUrls, offerInfo, shippingInfo, isWishlisted,
         details, productDescription, catalogObj, categoryType = '', warranty, breadcrums, product_id, wishlistId,
       } = productData;
+      console.log(offerInfo);
       const { offerPricing } = offerInfo;
       const {
         stickyElements, recentlyViewed, notifyEmail, emailErr,
