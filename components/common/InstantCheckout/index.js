@@ -199,6 +199,7 @@ class InstantCheckout extends Component {
       checked,
       checkoutBtn,
     } = this.state;
+    console.log(totalPrice);
     return (
       <div>
         {
