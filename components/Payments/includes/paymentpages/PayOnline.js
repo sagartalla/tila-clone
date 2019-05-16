@@ -71,7 +71,7 @@ class PayOnline extends Component {
                 <iframe src={iframe_url} style={{ height: '426px', width: '500px', border: '0' }}></iframe>
                 <div className={styles['checkbox-material']}>
                   <input id="save-card" type="checkbox" onClick={this.saveCardHandler} disabled={disableSaveCard} />
-                  <label for="save-card"> {PAYMENT_PAGE.SAVE_THIS_CARD} </label>
+                  <label htmlFor="save-card"> {PAYMENT_PAGE.SAVE_THIS_CARD} </label>
                 </div>
               </div>
               :
