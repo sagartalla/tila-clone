@@ -37,7 +37,6 @@ class ChoosePaymentMode extends Component {
     this.getPaymentModes = this.getPaymentModes.bind(this)
     this.onOptionChange = this.onOptionChange.bind(this)
     this.saveAndGoNext = this.saveAndGoNext.bind(this)
-    console.log('orderIssue', props.orderIssue);
     this.state = {
       paymentType: Object.keys(props.orderIssue.refundOptions).length > 0 &&
                     props.orderIssue.refundOptions[props.orderIssue.issueType].indexOf("BACK_TO_SOURCE") !== -1
@@ -60,9 +59,8 @@ class ChoosePaymentMode extends Component {
     const { selectedReasons } = orderIssue
     var refundType = paymentType === 'Online' ? 'BACK_TO_SOURCE' : 'WALLET'
     const orderReturnParams = Object.assign({}, selectedReasons, { refund_mode: refundType })
-    if(issueType === 'RETURN') {
-      this.props.submitReturnRequest(orderReturnParams)
-    }
+    issueType === 'RETURN' ? this.props.submitReturnRequest(orderReturnParams) :
+                              this.props.setCancelRefundMode(refundType)
 
     goToNextStep()
   }
@@ -132,7 +130,8 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       setReturnOrder: actionCreators.setReturnOrder,
-      submitReturnRequest: actionCreators.submitReturnRequest
+      submitReturnRequest: actionCreators.submitReturnRequest,
+      setCancelRefundMode:actionCreators.setCancelRefundMode
     },
     dispatch
   )

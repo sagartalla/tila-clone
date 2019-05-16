@@ -21,7 +21,7 @@ const addCardDetailsApi = (params) => {
 }
 
 const makeCardDefaultApi = (card_token) => {
-  return axios.put(`${constants.VAULT_API_URL}/api/v1/vault/card/default/` + card_token).then(({ data }) => {
+  return axios.put(`${constants.VAULT_API_URL}/api/v1/user/wallet/defaultCard/` + card_token).then(({ data }) => {
 
     //after successfully added, get all card details again.
     return getCardResultsApi();

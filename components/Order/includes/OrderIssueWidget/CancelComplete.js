@@ -26,6 +26,7 @@ class CancelComplete extends Component {
       reason: selectedReasons.reason,
       comment: selectedReasons.comment,
       subReason: selectedReasons.subReason,
+      refund_mode:orderIssue.cancelRefundMode
     });
   }
 

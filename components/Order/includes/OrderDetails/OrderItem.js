@@ -169,7 +169,7 @@ class OrderItem extends Component {
                           </a>
                         </Link>
                         <div className={`${styles['flex-center']} ${styles['prod-sub-content']}`}>
-                          <Col md={8} sm={8} className={styles['p-0']}>
+                          <Col md={7} sm={7} className={styles['p-0']}>
                             <div className={`${styles.flex} ${styles['pt-15']} ${styles['pb-15']} ${styles['ipad-tp-5']} ${styles['ipad-tb-5']} ${styles['fs-12']} ${styles['thick-gry-clr']}`}>
                               {product.variantAttributes.length > 0 &&
                                 product.variantAttributes.map(attr => (
@@ -190,33 +190,33 @@ class OrderItem extends Component {
                           </Col>
                           {
                             showPriceInfo && 
-                            <Col md={4} sm={4} className={styles['ipad-pr-0']}>
-                            {product.price &&
-                            <span className={`${styles['justify-end']} ${styles['flex-center']} ${styles['fs-16']} ${styles.fontW600}`}>
-                              {product.orderIds.length} x {final_price.display_value} {final_price.currency_code}
-                              <span onMouseOver={this.showToolTip} onMouseLeave={this.hideToolTip} className={`${styles.relative} ${styles['tool-tip-parent']} ${styles['checkout-quat']} ${styles['fs-12']} ${styles['flex-center']} ${styles['justify-around']}`}>
-                                {'?'}
-                                {showToolTip &&
-                                <div className={styles['tool-tip']}>
-                                  <ul>
-                                    <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.MRP} : </span><span> {mrp.display_value} {product.currency_code}</span></li>
-                                    {product && product.offers && product.offers.length > 0 ?
-                                      product.offers.map(offer => <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{offer.coupon_code ? offer.coupon_code : offer.description} : </span><span>{'(-)'} {offer.discount} {product.currency_code}</span></li>)
-                                      :
-                                      <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.DISCOUNT} :</span><span>{'(-)'} {mrp.display_value - offer_price.display_value} {offer_price.currency_code}</span></li>
-                                    }
-                                    {offer_price &&
-                                    <li className={`${styles['flx-space-bw']} ${styles['b-t']}`}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.PRICE} :</span><span> {offer_price.display_value} {offer_price.currency_code}</span></li>}
-                                    {shipping_fees &&
-                                    <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.SHIPPING} : </span><span className={styles.flex}>{shipping_fees.display_value ? `(+) ${shipping_fees.display_value} ${shipping_fees.currency_code}` : <SVGComponent clsName={`${styles['ship-icon']}`} src="icons/free-shipping" />}</span></li>}
-                                    {product.gift_info && gift_charge &&
-                                      <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.GIFT_CHARGES} : </span><span>{gift_charge.display_value ? `(+) ${gift_charge.display_value} ${gift_charge.currency_code}` : 'FREE'}</span></li>}
-                                    {final_price &&
-                                    <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.TOTAL} : </span><span className={styles.fontW600}> {final_price.display_value} {final_price.currency_code}</span></li>}
-                                  </ul>
-                                </div>}
-                              </span>
-                            </span>}
+                            <Col md={5} sm={5} className={styles['ipad-pr-0']}>
+                              {product.price &&
+                              <span className={`${styles['justify-end']} ${styles['flex-center']} ${styles['fs-16']} ${styles.fontW600}`}>
+                                {product.orderIds.length} x {final_price.display_value} {final_price.currency_code}
+                                <span onMouseOver={this.showToolTip} onMouseLeave={this.hideToolTip} className={`${styles.relative} ${styles['tool-tip-parent']} ${styles['checkout-quat']} ${styles['fs-12']} ${styles['flex-center']} ${styles['justify-around']}`}>
+                                  {'?'}
+                                  {showToolTip &&
+                                  <div className={styles['tool-tip']}>
+                                    <ul>
+                                      <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.MRP} : </span><span> {mrp.display_value} {product.currency_code}</span></li>
+                                      {product && product.offers && product.offers.length > 0 ?
+                                        product.offers.map(offer => <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{offer.coupon_code ? offer.coupon_code : offer.description} : </span><span>{'(-)'} {offer.discount.display_value} {offer.discount.currency_code}</span></li>)
+                                        :
+                                        <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.DISCOUNT} :</span><span>{'(-)'} {mrp.display_value - offer_price.display_value} {offer_price.currency_code}</span></li>
+                                      }
+                                      {offer_price &&
+                                      <li className={`${styles['flx-space-bw']} ${styles['b-t']}`}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.PRICE} :</span><span> {offer_price.display_value} {offer_price.currency_code}</span></li>}
+                                      {shipping_fees &&
+                                      <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.SHIPPING} : </span><span className={styles.flex}>{shipping_fees.display_value ? `(+) ${shipping_fees.display_value} ${shipping_fees.currency_code}` : <SVGComponent clsName={`${styles['ship-icon']}`} src="icons/free-shipping" />}</span></li>}
+                                      {product.gift_info && gift_charge &&
+                                        <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.GIFT_CHARGES} : </span><span>{gift_charge.display_value ? `(+) ${gift_charge.display_value} ${gift_charge.currency_code}` : 'FREE'}</span></li>}
+                                      {final_price &&
+                                      <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.TOTAL} : </span><span className={styles.fontW600}> {final_price.display_value} {final_price.currency_code}</span></li>}
+                                    </ul>
+                                  </div>}
+                                </span>
+                              </span>}
                           </Col>
                           }
                         </div>

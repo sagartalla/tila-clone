@@ -29,6 +29,8 @@
 }
 .life-style-main .poular-cat .poular-icon {
   border-bottom: 2px solid transparent;
+  min-height: 120px;
+  text-align: center;
 }
 .life-style-main .poular-cat .poular-icon:hover {
   box-shadow: 0 2px 7px 0 rgba(0,0,0,0.08);
