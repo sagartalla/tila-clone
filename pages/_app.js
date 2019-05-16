@@ -35,7 +35,7 @@ class MyApp extends App {
   render() {
     const {Component,pageProps} = this.props
     const {storageEnabled} = this.state;
-    debugger;
+    
     if(!storageEnabled){
       return <EnableStorage />;
     }
