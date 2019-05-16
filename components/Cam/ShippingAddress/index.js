@@ -53,14 +53,14 @@ class ShippingAddress extends Component {
     this.validations = new FormValidator([
       {
         field: 'first_name',
-        method: this.validate,
-        message: 'Required First Name',
+        method: this.validateNames,
+        message: 'Should be between 3 to 20 characters',
         validWhen: false,
       },
       {
         field: 'last_name',
-        method: this.validate,
-        message: 'Required Last Name',
+        method: this.validateNames,
+        message: 'Should be between 3 to 20 characters',
         validWhen: false,
       },
       {
@@ -202,6 +202,10 @@ class ShippingAddress extends Component {
 
   mobileValidation = (fieldValue) => {
     return !(/^([0-9]){6,12}$/.test(fieldValue));
+  }
+
+  validateNames = (fieldValue) => {
+    return !(/^([a-zA-z0-9]){3,20}$/.test(fieldValue));
   }
 
   selectCityFromSuggesstions({ target }) {

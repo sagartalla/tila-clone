@@ -149,7 +149,7 @@ class GeoWidget extends Component {
                   key={result.rescity_nameult}
                   className={`${styles['auto-suggestions']} ${styles['pt-5']} ${styles['pl-10']} ${styles['bg-white']}`}
                 >
-                  <div data-id={result.city_name} data-code={result.code} onClick={this.selectCityFromSuggesstions} className={`${styles.item} ${styles['fs-12']} ${styles.pointer}`}>{result.city_name}</div>
+                  <div data-id={result.city_name} data-code={result.city_code} onClick={this.selectCityFromSuggesstions} className={`${styles.item} ${styles['fs-12']} ${styles.pointer}`}>{result.city_name}</div>
                 </div>
               ))}
             </div>

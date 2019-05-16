@@ -17,13 +17,13 @@
 .electronics-main-part .populat-cat-title .popular-cat-part-sub .popular-cat-part-inn {
   width: 15%;
   margin-bottom: 20px;
-  color: base-font;
+  color: #666;
 }
 .electronics-main-part .popular-cat-part .popular-cat-part-sub .popular-cat-part-inn-1,
 .electronics-main-part .populat-cat-title .popular-cat-part-sub .popular-cat-part-inn-1 {
   width: 27%;
   margin-bottom: 20px;
-  color: base-font;
+  color: #666;
 }
 .electronics-main-part .brand-part .brand-part-inn .price-details {
   top: 20px;
@@ -31,7 +31,7 @@
 }
 .electronics-main-part .top-selling-brands .top-selling-img {
   width: 100%;
-  border: solid 0.5px generic-gray-color;
+  border: solid 0.5px #ddd;
   border-radius: 8px;
   height: 322px;
 }

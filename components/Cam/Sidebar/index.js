@@ -19,7 +19,7 @@ const Sidebar = ({query}) => (
       <UserProfile query={query} />
     </div>
     <div>
-      <List query={query}  data={data} />
+      <List query={query} data={data} />
     </div>
   </div>
 );

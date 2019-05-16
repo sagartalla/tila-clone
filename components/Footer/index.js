@@ -94,7 +94,7 @@ const FooterBar = props => (
     </div>
     <div className={`${styles['footer-menu-items']} ${styles['pt-30']} ${styles['pb-30']} ${styles['bg-white']}`}>
       <Grid>
-        <div class={styles['flex']}>
+        <div className={styles['flex']}>
           <div className={`${styles['ipad-pr-0']} ${styles['footer-menu-inn']}`}>
             <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['flex-center']}`}>
               <SVGComponent clsName={`${styles['footer-list-icon']} ${styles['mr-10']}`} src="icons/footers-icons/fashion" />

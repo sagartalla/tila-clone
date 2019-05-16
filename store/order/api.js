@@ -15,6 +15,7 @@ const submitCancelRequest = params => axios.post(`${constants.ORDERS_API_URL}/ap
   reason: params.reason,
   comment: params.comment,
   sub_reasons: params.subReason,
+  refund_mode: params.refund_mode
 });
 
 const submitReturnRequest = params => axios.post(`${constants.ORDERS_API_URL}/api/v1/order/return`, params);

@@ -1,0 +1,79 @@
+.electronics-main-part .main-banner {
+  width: 100%;
+}
+.electronics-main-part .main-banner .img-responsive {
+  width: 100%;
+}
+.electronics-main-part .popular-cat-part,
+.electronics-main-part .populat-cat-title {
+  padding-bottom: 3px;
+}
+.electronics-main-part .popular-cat-part .popular-cat-part-sub,
+.electronics-main-part .populat-cat-title .popular-cat-part-sub {
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+.electronics-main-part .popular-cat-part .popular-cat-part-sub .popular-cat-part-inn,
+.electronics-main-part .populat-cat-title .popular-cat-part-sub .popular-cat-part-inn {
+  width: 15%;
+  margin-bottom: 20px;
+  color: #666;
+}
+.electronics-main-part .popular-cat-part .popular-cat-part-sub .popular-cat-part-inn-1,
+.electronics-main-part .populat-cat-title .popular-cat-part-sub .popular-cat-part-inn-1 {
+  width: 27%;
+  margin-bottom: 20px;
+  color: #666;
+}
+.electronics-main-part .brand-part .brand-part-inn .price-details {
+  top: 20px;
+  left: 20px;
+}
+.electronics-main-part .top-selling-brands .top-selling-img {
+  width: 100%;
+  border: solid 0.5px #ddd;
+  border-radius: 8px;
+  height: 322px;
+}
+.electronics-main-part .top-selling-brands .top-price-details .rating {
+  border-radius: 10px;
+  padding: 1px 8px;
+  background: #6b6262;
+}
+.electronics-main-part .top-selling-brands .top-price-details .wistlist-logo {
+  width: 17px;
+  height: 16px;
+}
+.electronics-main-part .home-kitchan-part .home-price-details {
+  top: 10px;
+  left: 15px;
+  line-height: 1.2;
+}
+.electronics-main-part .brands-love-part .brands-inn {
+  width: 100%;
+  height: 100px;
+  border: solid 1px #efeff4;
+}
+.electronics-main-part .brands-love-part .brands-inn .brand-apple {
+  height: 54px;
+}
+.electronics-main-part .brands-love-part .brands-inn .brand-samsung {
+  height: 24px;
+}
+.electronics-main-part .brands-love-part .brands-inn .brand-lg,
+.electronics-main-part .brands-love-part .brands-inn .brand-mi {
+  height: 44px;
+}
+.electronics-main-part .brands-love-part .brands-inn .brand-dell {
+  height: 52px;
+}
+.electronics-main-part .brands-love-part .brand-litem-list span {
+  border-radius: 2px;
+  padding: 3px 7px;
+  border: solid 0.8px #939393;
+  margin: 10px 10px 0 0;
+}
+.img-responsive {
+  max-width: 100%;
+  max-height: 100%;
+}
