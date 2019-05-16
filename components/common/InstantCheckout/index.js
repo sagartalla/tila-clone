@@ -199,7 +199,6 @@ class InstantCheckout extends Component {
       checked,
       checkoutBtn,
     } = this.state;
-    console.log(totalPrice);
     return (
       <div>
         {
@@ -348,7 +347,7 @@ class InstantCheckout extends Component {
                         <Button
                           className={`${styles['fp-btn']} ${styles['fp-btn-sucess']} ${styles['fontW600']} ${styles['instant-btn']} ${styles.width45}`}
                           onClick={this.callInstantCheckout}
-                          btnText={PAYMENT_PAGE.PAY + ' ' + totalPrice.display_value + ' ' + currency + ' ' + PAYMENT_PAGE.ON_DELIVERY}
+                          btnText={PAYMENT_PAGE.PAY + ' ' + totalPrice + ' ' + currency + ' ' + PAYMENT_PAGE.ON_DELIVERY}
                           disabled={btnLoader}
                           btnLoading={btnLoader}
                         />
