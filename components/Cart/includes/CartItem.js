@@ -316,7 +316,7 @@ class CartItem extends React.Component {
                     <div>{od.description}</div>
                   </div>
                   <div className={`${styles['t-rt']}`}>
-                    {`${od.discount} ${cur}`}
+                    {`${od.discount.display_value} ${cur}`}
                   </div>
                 </div>
               );
