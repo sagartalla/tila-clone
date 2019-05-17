@@ -185,7 +185,6 @@ class Search extends Component {
 
 Search.propTypes = {
   getSearchResults: PropTypes.func.isRequired,
-  searchText: PropTypes.string.isRequired,
   onChangeSearchText: PropTypes.func.isRequired,
 };
 
