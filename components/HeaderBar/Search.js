@@ -141,7 +141,7 @@ class Search extends Component {
         <form onSubmit={this.submitQuery}>
 
           <Dropdown id="search-toggle" className={`${styles['cart-inn']} ${styles.width100}`}>
-            <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
+            <Dropdown.Toggle id="dropdown-custom-components">
               <input
                 className={styles['search-input']}
                 placeholder={SEARCH_PAGE.SEARCH_YOUR_FAV_ITEM}
