@@ -47,7 +47,6 @@ class Search extends Component {
       suggestions: [],
       query: finalQuery,
       openImagesearch: false,
-      queryParam: '',
     };
     this.submitQuery = this.submitQuery.bind(this);
     this.onChangeSearchInput = this.onChangeSearchInput.bind(this);
@@ -59,7 +58,6 @@ class Search extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    debugger;
     const { isCategoryTree, choosenCategoryName, query: queryProp } = nextProps;
     const { query, searchInput } = this.state;
     const finalQuery = searchInput ? query : isCategoryTree ? choosenCategoryName : queryProp;
@@ -68,9 +66,8 @@ class Search extends Component {
       // query: isCategoryTree ? choosenCategoryName : searchInput ? query : queryProp,
       suggestions: nextProps.suggestions || [],
     });
-    if (!searchInput && (this.props.imageQuery !== nextProps.imageQuery)) {
-      console.log('this.state.queryParam', nextProps.imageQuery);
-      Router.pushRoute(`/${country}/${language}/srp?search=${nextProps.imageQuery}`);
+    if (this.props.imageQuery !== nextProps.imageQuery) {
+      Router.pushRoute(`/${country}/${language}/srp?search=${nextProps.imageQuery}&${Object.entries(this.props.optionalParams).map(([key, val]) => `${key}=${val}`).join('&')}`);
     }
   }
 
@@ -123,8 +120,6 @@ class Search extends Component {
   }
 
   handleUploadImage(file) {
-    const { queryParam } = this.state;
-    console.log('this.props.optionalParams', queryParam);
     this.props.fetchImageSearchData(file);
     this.setState({
       openImagesearch: false,

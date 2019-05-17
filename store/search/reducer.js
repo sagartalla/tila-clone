@@ -54,7 +54,8 @@ const searchReducer = typeToReducer({
       data: {
         ...state.data,
         spellCheckResponse: null,
-      }
+        query: '',
+      },
     }, { ui: { loading: true } }),
     FULFILLED: (state, action) => {      
       return Object.assign({}, state, {
@@ -62,7 +63,7 @@ const searchReducer = typeToReducer({
         data: {
           ...state.data,
           ...action.payload.data,
-          suggestions: null
+          suggestions: null,
         },
         ui: { loading: false } })
     },

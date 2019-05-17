@@ -119,7 +119,6 @@ class TitleInfo extends Component {
       totalInventoryCount, isPreview, listingId, listingCartData, comparable, cmpData, offerInfo, isLoggedIn,
     } = this.props;
     const { showCheckoutModal } = this.state;
-    console.log('showCheckoutModal', showCheckoutModal);
     return (
       <div className={styles['pb-10']}>
         <div className={`${styles.fontW300} ${styles['lgt-blue']} ${styles['flx-space-bw']}`}>
