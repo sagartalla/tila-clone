@@ -35,6 +35,9 @@ let oldY = 0;
 let tempSideBarTop = null;
 let tempContainerTop = null;
 let relativeTop = null;
+let searchContainer = null;
+let sidebarPosition = null;
+let footerContainer = null;
 // const onClickMenuHandle = (e) => {
 //   const target = e.currentTarget;
 //   setTimeout(() => {
@@ -69,9 +72,11 @@ class Search extends Component {
   }
 
   upScroll() {
+    sidebarPosition = sidebarPosition || document.getElementById('sidebar-position');
+    footerContainer = footerContainer || document.getElementById('footer-container');
     const wh = window.innerHeight;
-    const { height: sideBarHeight, top: sideBarTop } = document.getElementById('sidebar-position').getBoundingClientRect();
-    const { top: footerTop } = document.getElementById('footer-container').getBoundingClientRect();
+    const { height: sideBarHeight, top: sideBarTop } = sidebarPosition.getBoundingClientRect();
+    const { top: footerTop } = footerContainer.getBoundingClientRect();
     const sidebarBottom = sideBarTop + sideBarHeight;
     tempSideBarTop = null;
     tempContainerTop = null;
@@ -81,10 +86,9 @@ class Search extends Component {
       });
       relativeTop = null;
     }
-    console.log('abc', parseInt(sidebarBottom), parseInt(footerTop));
     if (parseInt(sidebarBottom) <= wh) {
       this.setState({
-        sideBarPositionClass: wh >= parseInt(footerTop) ? 'footer-bottom' : 'fixed-bottom',
+        sideBarPositionClass: wh >= parseInt(footerTop) ? 'footer-bottom' : (sidebarBottom <= wh) ? 'fixed-bottom' : '',
       });
     } else {
       this.setState({
@@ -94,9 +98,11 @@ class Search extends Component {
   }
 
   downScroll() {
-    const {top: containerTop} = document.getElementById('search-container').getBoundingClientRect();
+    searchContainer = searchContainer || document.getElementById('search-container');
+    sidebarPosition = sidebarPosition || document.getElementById('sidebar-position');
+    const {top: containerTop} = searchContainer.getBoundingClientRect();
     if(!tempSideBarTop) {
-      tempSideBarTop = parseInt(document.getElementById('sidebar-position').getBoundingClientRect().top);
+      tempSideBarTop = parseInt(sidebarPosition.getBoundingClientRect().top);
     }
     if(!tempContainerTop) {
       tempContainerTop = containerTop;
@@ -124,8 +130,9 @@ class Search extends Component {
   }
 
   handleScroll(e) {
-    const {height: sideBarHeight} = document.getElementById('sidebar-position').getBoundingClientRect();
-    if(sideBarHeight < window.innerHeight -123) {
+    sidebarPosition = sidebarPosition || document.getElementById('sidebar-position');
+    const {height: sideBarHeight} = sidebarPosition.getBoundingClientRect();
+    if(sideBarHeight < window.innerHeight - 123) {
       this.setState({
         containerStyle: {},
         sideBarPositionClass: 'sticky-top'
