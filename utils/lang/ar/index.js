@@ -50,7 +50,7 @@ export const AR_KEYWORDS = {
     THERE_IS: 'There is',
     THERE_ARE: 'There are',
     ITEM_IN_YOUR_WISHLIST: 'item in Your Wishlist',
-    ITEMS_IN_YOUR_WISH_LIST: 'items in Your Wishlist',
+    ITEMS_IN_YOUR_WISHLIST: 'items in Your Wishlist',
   },
   PAYMENT_PAGE: {
     SECURE_CHECKOUT: 'عملية خروج آمنة',

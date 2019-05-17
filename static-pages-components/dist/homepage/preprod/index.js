@@ -596,14 +596,14 @@ const HomePage = () => React.createElement(
     ),
     React.createElement(
       Row,
-      { className: `${styles['m-15']} ${styles['mt-40']} ${styles['mb-40']}` },
+      { className: `${styles['m-15']} ${styles['mt-40']} ${styles['mb-40']} brand-details-inn` },
       threeCols.map(col => React.createElement(
         Col,
         { md: 4, xs: 4, sm: 4 },
         React.createElement(
           'a',
           { href: col.link },
-          React.createElement('img', { src: col.img, alt: col.title })
+          React.createElement('img', { src: col.img, alt: col.title, className: 'img-responsive-in' })
         )
       ))
     ),
@@ -825,11 +825,11 @@ const HomePage = () => React.createElement(
     ),
     React.createElement(
       Row,
-      { className: `${styles['m-15']} ${styles['mt-40']} ${styles['mb-40']}` },
+      { className: `${styles['m-15']} ${styles['mt-40']} ${styles['mb-40']} brand-details-inn` },
       twoCols.map(col => React.createElement(
         Col,
         { md: 6, xs: 6, sm: 6 },
-        React.createElement('img', { src: col.img, alt: col.title })
+        React.createElement('img', { src: col.img, alt: col.title, className: 'img-responsive-in' })
       ))
     ),
     React.createElement(
