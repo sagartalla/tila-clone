@@ -132,7 +132,7 @@ class OrderItem extends Component {
         <div>
           <div className={styles['fs-12']}>{displayText()}</div>
           <div className={`${styles['ff-t']} ${styles['fs-24']} ${styles['ipad-fs-20']}`}>          
-            {(btnType === 'cancel' || orderItem.status === 'DELIVERED') ? moment(orderItem.products[0].promisedDeliveryDate).format('ddd, MMM Do') : this.getDate(orderItem.products[0].state_time_estimates)}
+            {btnType === 'cancel' ? moment(orderItem.products[0].promisedDeliveryDate).format('ddd, MMM Do') : this.getDate(orderItem.products[0].state_time_estimates)}
           </div>
         </div>
       </div>
