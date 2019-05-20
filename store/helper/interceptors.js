@@ -70,8 +70,7 @@ const notifySentry = (err) => {
 
 const errorInterceptor = (err) => {
   try {
-    if (err.response && err.response.status) {
-      if (err.response.status == '401') {
+    if (err.response && err.response.status && err.response.status == '401') {
         const { refresh_token } =  cookies.get('auth') || {};
         if(refresh_token) {
           return axios.post(`/api/refresh`, {
@@ -85,13 +84,12 @@ const errorInterceptor = (err) => {
         } else {
           cookies.remove('auth');
         }
-      } else {
-        if (err.response.status === '403') {
-          cookies.remove('auth');
-        }
-        toast.error(err.response.data.message || err.response.data.data.error.message);
-        notifySentry(err);
+    } else {
+      if (err.response.status === '403') {
+        cookies.remove('auth');
       }
+      toast.error(err.response.data.message || err.response.data.data.error.message);
+      notifySentry(err);
     }
   } catch (e) {
     console.log(e);
