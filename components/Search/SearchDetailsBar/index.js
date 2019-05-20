@@ -15,10 +15,13 @@ import { languageDefinations } from '../../../utils/lang';
 
 import lang from '../../../utils/language';
 
+import main_en from '../../../layout/main/main_en.styl';
+import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from '../search_en.styl';
 import styles_ar from '../search_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+
 
 const cookies = new Cookie();
 
@@ -61,26 +64,25 @@ class SearchDetailsBar extends Component {
         <div className={styles['search-results-wrap']}>
           <Fragment>
               <div className={`${styles['flx-space-bw']} ${styles['pb-15']} ${styles['items-list-show']} ${styles['ipad-flex-clm']}`}>
-                <div className={styles['flex-center']}>
-                  <h4 className={`${styles['meta-info']} ${styles['mt-0']} ${styles['mb-0']} ${styles['pr-10']} ${styles['fontW300']}`}>
+                <div className={`${styles['flex-center']} ${styles['search-val-part']}`}>
+                  <h4 className={`${styles['meta-info']} ${styles['mt-0']} ${styles['mb-0']} ${styles['pr-10']} ${styles['fs-14']} ${styles['fontW300']}`}>
                     {
-                    spellCheckResp ? 
-                    <a href="javascript: void(0)" onClick={this.querySearch} className={`${styles['black-color']} ${styles['fontW600']}`} data-querysearch={spellCheckResp[query]}>
-                      <b>{`${spellCheckResp[query]}`}</b>
-                      <span className={`${styles['fs-10']} ${styles['textColor']}`}>({ SEARCH_PAGE.AUTO_CORRECTED })</span>
-                    </a>
-                    : 
-                    <h1 className={styles['no-h1']}>{finalQuery && this.capitalize(finalQuery.split('-').join(' '))}</h1>
-                  }
-                  
-                    <span className={`${styles['pl-5']} ${styles['pr-5']}`}>({ results.totalCount.toLocaleString('en') } { SEARCH_PAGE.SEARCH_ITEMS } {SEARCH_PAGE.FOUND})</span>
+                      spellCheckResp ?
+                      <a href="javascript: void(0)" onClick={this.querySearch} className={`${styles['black-color']} ${styles['fontW600']}`} data-querysearch={spellCheckResp[query]}>
+                        <b className={styles['fs-14']}>{`${spellCheckResp[query]}`}</b>
+                        <span className={`${styles['fs-10']} ${styles['textColor']}`}>({ SEARCH_PAGE.AUTO_CORRECTED }):</span>
+                      </a>
+                      :
+                      <h1 className={`${styles['no-h1']} ${styles['fs-14']}`}>{finalQuery && this.capitalize(finalQuery.split('-').join(' '))}<span className={styles['fontW300']}>:</span> </h1>
+                    }
+                    <span className={`${styles['pl-5']} ${styles['fs-14']}`}>{ results.totalCount.toLocaleString('en') } { SEARCH_PAGE.SEARCH_ITEMS }</span>
                   </h4>
                   {
                     spellCheckResp &&
-                    <h4 className={`${styles['pl-10']} ${styles['sple-check-prt']}`}>
-                      <span>{ SEARCH_PAGE.YOUR_ENTERED } : </span>
+                    <h4 className={`${styles['pl-10']} ${styles['fs-14']} ${styles['sple-check-prt']}`}>
+                      <span>{ SEARCH_PAGE.YOUR_ENTERED }: </span>
                       <a href="javascript: void(0)" onClick={this.querySearch} className={`${styles['fontW600']} ${styles['lgt-blue']}`} data-querysearch={finalQuery.split('-').join(' ')}>
-                        "{finalQuery && this.capitalize(finalQuery.split('-').join(' '))}"
+                        {finalQuery && this.capitalize(finalQuery.split('-').join(' '))}
                       </a>
                     </h4>
                   }

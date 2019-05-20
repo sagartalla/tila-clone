@@ -13,10 +13,11 @@ import { ORDER_ISSUE_STEPS as STEPS,ORDER_ISSUE_TYPES } from '../../constants';
 import { Link } from '../../../../routes'
 import lang from '../../../../utils/language';
 
+import main_en from '../../../../layout/main/main_en.styl';
+import main_ar from '../../../../layout/main/main_ar.styl';
 import styles_en from '../../order_en.styl';
 import styles_ar from '../../order_ar.styl';
-
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 import { languageDefinations } from '../../../../utils/lang'
 import Cookie from 'universal-cookie';
@@ -27,6 +28,7 @@ const language = cookies.get('language') || 'en';
 const country = cookies.get('country') || 'SAU';
 
 class OrderReturnExchange extends Component {
+  state = { fetchRender:true}
   componentDidMount() {
     const {
       query,
@@ -36,17 +38,41 @@ class OrderReturnExchange extends Component {
       getOrderDetails
     } = this.props;
     const { orderId, orderItemId, returnExchangeType, variantId } = query;
+
+    const params = {
+      orderId,
+      issueType: returnExchangeType,
+      step: STEPS.REASONS,
+      returnExchangeType: returnExchangeType
+    };
+    if(orderIssue.orderId !== orderId) {
+      getOrderDetails({ orderId });
+    } else {
+      params.selectedItem = getSelectedOrder(orderItemId);
+      setOrderIssueData(params);
+    }
+
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { query, orderIssue, getSelectedOrder, setOrderIssueData,orderDetails } = nextProps;
+    const { orderId, orderItemId, returnExchangeType, variantId } = query;
     const params = {
       orderId: orderId,
       issueType: returnExchangeType,
       step: STEPS.REASONS,
       returnExchangeType: returnExchangeType
     };
-    if (!orderIssue.selectedItem) {
+    if(orderDetails.order_id === orderId && this.state.fetchRender) {
       params.selectedItem = getSelectedOrder(orderItemId);
+      this.setState({
+        fetchRender: false
+      },() => setOrderIssueData(params))
+
+
     }
-    setOrderIssueData(params);
-    getOrderDetails({ orderId });
+
+
   }
 
   render() {
@@ -86,8 +112,8 @@ class OrderReturnExchange extends Component {
                           <img src={`${constants.mediaDomain}/${img}`} />
                         </Col>
                         <Col md={10}>
-                          <h4 className={`${styles['fs-16']} ${styles['fontW600']}`}>{name}</h4>
-                          <span className={styles['fs-14']}>{CART_PAGE.QUANTITY}:</span>
+                          <h4 className={`${styles['fs-16']} ${styles['mt-0']} ${styles['fontW600']}`}>{name}</h4>
+                          <span className={styles['fs-14']}>{CART_PAGE.QUANTITY}: {orderDetails && orderDetails.order_items && orderDetails.order_items[0].quantity}</span>
                         </Col>
                         <Col md={10} className={`${styles['mt-25']}`}>
                           <h4

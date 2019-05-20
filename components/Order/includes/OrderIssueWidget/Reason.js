@@ -14,10 +14,12 @@ import { ORDER_ISSUE_TYPES, ORDER_ISSUE_STEPS as STEPS } from '../../constants';
 
 import lang from '../../../../utils/language';
 
+import main_en from '../../../../layout/main/main_en.styl';
+import main_ar from '../../../../layout/main/main_ar.styl';
 import styles_en from './orderIssue_en.styl';
 import styles_ar from './orderIssue_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 
 const { ORDER_PAGE } = languageDefinations();
@@ -43,7 +45,21 @@ class Reason extends Component {
     const orderId = {
       orderItemId: this.props.orderIssue.selectedItem.id,
     };
-    this.props.getReasons(orderId);
+    let reasonType;
+    switch(this.props.orderIssue.issueType) {
+      case 'RETURN' :
+        reasonType = 'return'
+        break;
+      case 'CANCEL' :
+        reasonType = 'cancel'
+        break;
+      case 'EXCHANGE' :
+        reasonType = 'exchange'
+        break;
+      default:
+       reasonType = 'return'
+    }
+    this.props.getReasons(orderId,reasonType);
     this.props.getExchangeVariants(orderId);
     this.props.getOrderDetails({ orderId:this.props.orderIssue.orderId });
   }
@@ -85,6 +101,9 @@ class Reason extends Component {
     const { goToNextStep, setReason, query, orderIssue, orderDetails } = this.props;
     const { orderId, returnExchangeType, issueType } = orderIssue;
     const { reason, subReason, selectedVariant, comment, variantId, selectedMode } = this.state
+
+    let listingObj = orderDetails.order_items.find((order) => order.order_id === orderId);
+
     const params = {
       orderId,
       issueType: issueType,
@@ -103,7 +122,7 @@ class Reason extends Component {
     }
 
     if (
-      (selectedMode === 'Return' || selectedMode === 'Cancel' )
+      (selectedMode === 'Return' || selectedMode === 'Cancel')
     ) {
       this.props.setOrderIssueData(params);
       this.props.setAddressData(reasonParams)
@@ -123,8 +142,8 @@ class Reason extends Component {
           comments: comment,
           reason,
           sub_reason: subReason,
-          new_listing_id: selectedVariant[0].listing_id,
-          variant_id: selectedVariant[0].variant_id,
+          new_listing_id: listingObj.listing_id,
+          variant_id: listingObj.variant_id,
           order_item_id: query.orderItemId
         })
         goToNextStep();
@@ -137,8 +156,8 @@ class Reason extends Component {
         comments: comment,
         reason,
         sub_reason: subReason,
-        new_listing_id: orderDetails.order_items[0].listing_id,
-        variant_id: orderDetails.order_items[0].variant_id,
+        new_listing_id: listingObj.listing_id,
+        variant_id: listingObj.variant_id,
         order_item_id: query.orderItemId
       })
       goToNextStep();

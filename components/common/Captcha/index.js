@@ -6,7 +6,6 @@ import Bin from './Bin';
 import Box from './Box';
 import { languageDefinations } from '../../../utils/lang';
 import SVGComponent from '../SVGComponet';
-import { mergeCss } from '../../../utils/cssUtil';
 import {actionCreators, selectors} from '../../../store/captcha';
 import { bindActionCreators } from 'redux';
 import HTML5Backend from 'react-dnd-html5-backend';
@@ -14,7 +13,16 @@ import { DragDropContext } from 'react-dnd';
 import { Router } from '../../../routes';
 
 const { PAYMENT_PAGE } = languageDefinations();
-const styles = mergeCss('components/Payments/payment');
+
+import lang from '../../../utils/language';
+
+import main_en from '../../../layout/main/main_en.styl';
+import main_ar from '../../../layout/main/main_ar.styl';
+import styles_en from './captcha_en.styl';
+import styles_ar from './captcha_ar.styl';
+
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+
 
 const initialState = {
   openBox: 'openbox',

@@ -14,17 +14,20 @@ import languageData from '../../../constants/languages';
 
 import lang from '../../../utils/language';
 
+import main_en from '../../../layout/main/main_en.styl';
+import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from '../header_en.styl';
 import styles_ar from '../header_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+
 const cookies = new Cookies();
 
 class Language extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedItem: 'en'
+      selectedItem: 'en',
     };
     this.changeLanguage = this.changeLanguage.bind(this);
     this.storeLanguage = this.storeLanguage.bind(this);
@@ -34,7 +37,7 @@ class Language extends Component {
   	const language = cookies.get('language') || this.state.selectedItem;
   	if(language){
   	  this.setState({
-        selectedItem: language
+        selectedItem: language,
       });
   	}
     this.storeLanguage(language);
@@ -86,7 +89,7 @@ class Language extends Component {
 const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators(
 		{
-			setLanguage: actionCreators.setLanguage
+			setLanguage: actionCreators.setLanguage,
 		},
 		dispatch,
 	);

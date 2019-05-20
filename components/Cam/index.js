@@ -8,21 +8,24 @@ import HeaderBar from '../HeaderBar/index';
 import Sidebar from './Sidebar';
 import UserInfo from './PersonelDetails';
 import ShippingAddress from './ShippingAddress';
-import Orders from './Orders'
+import Orders from './Orders';
 import Wishlist from './Wishlist';
 import Notifications from './Notifications';
 import UserVault from './UserVault';
 import Messages from './Messages';
-import FooterBar from '../Footer/index';
+import MyCoupons from './MyCoupons/MyCoupon';
+import FooterBar from '../Footer';
+import Preferences from './Preferences';
 import AuthWrapper from '../common/AuthWrapper';
 
 import lang from '../../utils/language';
 
+import main_en from '../../layout/main/main_en.styl';
+import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './cam_en.styl';
 import styles_ar from './cam_ar.styl';
 
-
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 class Cam extends React.Component {
   constructor(props){
@@ -43,6 +46,8 @@ class Cam extends React.Component {
           return <ShippingAddress standalone={true} />;
         case 'wishlist':
           return <Wishlist />;
+        case 'mycoupons':
+          return <MyCoupons />;
         case 'profile':
           return <UserInfo />;
         case 'messages':
@@ -51,6 +56,8 @@ class Cam extends React.Component {
           return <Notifications />;
         case 'uservault':
           return <UserVault />;
+        case 'preferences':
+          return <Preferences />;
         default:
           return <UserInfo />;
       }
@@ -62,7 +69,7 @@ class Cam extends React.Component {
           <AuthWrapper>
             <Grid>
               <Row className={styles['pt-30']}>
-                <Col xs={12} md={3} sm={3} className={styles['pr-0']}>
+                <Col xs={12} md={3} sm={3} className={`${styles['pr-0']} ${styles['sidebar-position']}`}>
                   <Sidebar query={query} />
                 </Col>
                 <Col xs={12} md={9} sm={9}>

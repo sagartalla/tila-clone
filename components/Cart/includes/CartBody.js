@@ -6,7 +6,7 @@ import Cookie from 'universal-cookie';
 import CartItem from './CartItem';
 import Blocker from '../../common/Blocker';
 import RightBar from '../CartPaymentSideBar';
-import Wishlist from '../../Cam/Wishlist/';
+import Wishlist from '../../Cam/Wishlist';
 import { languageDefinations } from '../../../utils/lang/';
 
 import { Router } from '../../../routes';
@@ -19,10 +19,13 @@ const country = cookies.get('country') || 'SAU';
 
 import lang from '../../../utils/language';
 
+import main_en from '../../../layout/main/main_en.styl';
+import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from '../cart_en.styl';
 import styles_ar from '../cart_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+
 
 const CartBody = ({
   showBlocker,
@@ -55,8 +58,8 @@ const CartBody = ({
       }
       <Row>
         <Col md={12} sm={12} xs={12}>
-          <h4 className={`${styles['mt-20']} ${styles['mb-20']} ${styles['fontW300']} ${styles['fs-20']} ${styles['light-gry-clr']} ${styles['text-capitalize']}`}>
-            { cnt===1 ? <span>{`${cnt} item`}</span> : cnt===0 ? <span>Your shopping cart is empty.</span> :<span>{`${cnt} ${CART_PAGE.ITEMS}`}</span> }
+          <h4 className={`${styles['mt-20']} ${styles['mb-20']} ${styles['fontW600']} ${styles['fs-20']} ${styles['light-gry-clr']} ${styles['text-capitalize']}`}>
+            { cnt===1 ? <span>{`${cnt} item`}</span> : cnt===0 ? <span>Your shopping cart is empty.</span> :<span>{`${cnt} ${CART_PAGE.ITEMS_IN_CART}`}</span> }
           </h4>
         </Col>
       </Row>
@@ -84,7 +87,7 @@ const CartBody = ({
         {
           flag > 0
             ?
-              <Col md={3} sm={12} xs={12} className={styles['pr-0']}>
+              <Col md={3} sm={12} xs={12} className={`${styles['pr-0']} ${styles['sidebar-position']}`}>
                 <div className={`${styles['box']}`}>
                   <RightBar
                     data={data}
@@ -118,4 +121,4 @@ CartBody.propTypes = {
   data: PropTypes.object.isRequired,
 };
 
-export default CartBody
+export default CartBody;

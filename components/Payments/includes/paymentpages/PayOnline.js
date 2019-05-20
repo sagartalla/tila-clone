@@ -10,10 +10,13 @@ import Button from '../../../common/CommonButton';
 
 import lang from '../../../../utils/language';
 
+import main_en from '../../../../layout/main/main_en.styl';
+import main_ar from '../../../../layout/main/main_ar.styl';
 import styles_en from '../../payment_en.styl';
 import styles_ar from '../../payment_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+
 
 const { PAYMENT_PAGE } = languageDefinations();
 
@@ -77,7 +80,7 @@ class PayOnline extends Component {
                 <Button
                   className={`${styles['text-uppercase']} ${styles['new-card-btn']} ${styles['fs-16']} ${styles['border-radius']} ${styles['ht-40']} ${styles.width55}`}
                   onClick={this.fetchIframe}
-                  btnText={PAYMENT_PAGE.PAY + ' ' + data.amount_to_pay + ' ' + data.currency_code + ' ' + PAYMENT_PAGE.USING_NEW_CARD}
+                  btnText={PAYMENT_PAGE.PAY + ' ' + data.amount_to_pay.display_value + ' ' + data.amount_to_pay.currency_code + ' ' + PAYMENT_PAGE.USING_NEW_CARD}
                   hoverClassName="hoverBlueBackground"
                   btnLoading={showLoading}
                 />

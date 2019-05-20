@@ -10,10 +10,12 @@ import SVGCompoent from '../SVGComponet';
 import { languageDefinations } from '../../../utils/lang';
 import lang from '../../../utils/language';
 
+import main_en from '../../../layout/main/main_en.styl';
+import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from './geoWidget_en.styl';
 import styles_ar from './geoWidget_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const { SEARCH_PAGE } = languageDefinations();
 const cookies = new Cookie();
@@ -128,7 +130,7 @@ class GeoWidget extends Component {
             ?
               <span className={`${styles['flex-center']} ${styles['delivery-part']}`}>
                 <SVGCompoent clsName={`${styles['map-icon']}`} src="icons/common-icon/black-map-location" />
-                <span className={`${styles.fontW600} ${styles['pl-5']} ${styles['pr-10']}`}>{SEARCH_PAGE.DELIVER_TO} :</span>
+                <span className={`${styles.fontW600} ${styles['pl-5']} ${styles['pr-5']}`}>{SEARCH_PAGE.DELIVER_TO}:</span>
 
               </span>
             :
@@ -138,7 +140,7 @@ class GeoWidget extends Component {
           className={styles['auto-suggestions-wrap']}
           ref={(el) => { this.filterRef = el; }}
         >
-          <input type="text" value={this.state.displayCity} className={`${styles['fs-12']} ${styles['delivery-input']}`} onChange={this.onChangeCity} />
+          <input type="text" value={this.state.displayCity} className={`${styles['fs-14']} ${styles['delivery-input']}`} onChange={this.onChangeCity} />
           {
             <div className={`${styles['auto-suggestions-list']}`}>
               {showCitiesData && getAllCities.map(result =>
@@ -147,7 +149,7 @@ class GeoWidget extends Component {
                   key={result.rescity_nameult}
                   className={`${styles['auto-suggestions']} ${styles['pt-5']} ${styles['pl-10']} ${styles['bg-white']}`}
                 >
-                  <div data-id={result.city_name} data-code={result.code} onClick={this.selectCityFromSuggesstions} className={`${styles.item} ${styles['fs-12']} ${styles.pointer}`}>{result.city_name}</div>
+                  <div data-id={result.city_name} data-code={result.city_code} onClick={this.selectCityFromSuggesstions} className={`${styles.item} ${styles['fs-12']} ${styles.pointer}`}>{result.city_name}</div>
                 </div>
               ))}
             </div>

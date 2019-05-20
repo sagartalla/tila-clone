@@ -9,11 +9,12 @@ import { languageDefinations } from '../../../../utils/lang/';
 
 import lang from '../../../../utils/language';
 
+import main_en from '../../../../layout/main/main_en.styl';
+import main_ar from '../../../../layout/main/main_ar.styl';
 import styles_en from '../orders_en.styl';
 import styles_ar from '../orders_ar.styl';
 
-
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const { ORDERS } = languageDefinations();
 const cookies = new Cookies();
@@ -35,7 +36,6 @@ const Order = ({ order }) => {
   const routeChange = () => {
     Router.push(`/${country}/${language}/cam/orders/${order.id}`);
   }
-
   return (
     <div className={`${styles['order-item-wrap']} ${styles['box-shadow']} ${styles['mt-20']} ${styles['mb-20']} ${styles['p-20']}`}>
       <div className={`${styles['flx-spacebw-alignc']}`}>
@@ -69,6 +69,7 @@ const Order = ({ order }) => {
               key={orderItem.id}
               orderItem={orderItem}
               orderId={order.id}
+              showPriceInfo={false}
               variantId={orderItem.variantId}
               isCancelable={orderItem.isCancelable}
               isReturnable={orderItem.isReturnable}
@@ -77,8 +78,8 @@ const Order = ({ order }) => {
           ))}
         </Col>
       </Row>
-      <Row>
-        <Col md={7} className={styles.flex}>
+      <Row className={styles['flex-center']}>
+        <Col md={7} className={styles['flex-center']}>
           <div className={`${styles['pr-10']} ${styles['thck-gry-rt-border']}`}>
             <span>
               Ordered on{' '}
@@ -90,21 +91,21 @@ const Order = ({ order }) => {
           <a href={`/${country}/${language}/help/answers/orders#${order.id}`}>
             <span className={`${styles['thick-blue']} ${styles['p-5']} ${styles['flex-center']} ${styles['ml-10']} ${styles.border} ${styles['border-radius4']}`}>
               <SVGComponent clsName={`${styles['help-icon']}`} src="icons/help-icon/help" />
-            &nbsp;&nbsp;Need Help?
+            &nbsp;&nbsp;{ORDERS.NEED_HELP}?
             </span>
           </a>
-         
+
         </Col>
         <Col md={5} className={styles['pl-0']}>
           <div className={`${styles['flx-space-bw']}`}>
             <span className={`${styles['flex']}`}>
-              <span className={styles['link-text']}>Request Invoice&nbsp;</span>
+              <span className={styles['link-text']}>{ORDERS.REQUEST_INVOICE}&nbsp;</span>
               <span>
                 <SVGComponent clsName={`${styles['down-arrow']}`} src="icons/down-arrow/down-arrow" />
               </span>
             </span>
             <span className={`${styles['ml-10']} ${styles['fs-16']}`}>
-              <span>Order Total:</span> <span className={`${styles['fontW600']} ${styles['light-gry-clr']}`}>{order.orderTotal}</span>
+              <span>{ORDERS.ORDER_TOTAL}:</span> <span className={`${styles['fontW600']} ${styles['light-gry-clr']}`}>{order.orderTotal}</span>
             </span>
           </div>
         </Col>

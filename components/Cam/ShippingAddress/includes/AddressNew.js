@@ -6,17 +6,19 @@ import SVGComponent from '../../../common/SVGComponet';
 import MyGMap from './MyGMap';
 import lang from '../../../../utils/language';
 
+import main_en from '../../../../layout/main/main_en.styl';
+import main_ar from '../../../../layout/main/main_ar.styl';
 import styles_en from '../address_en.styl';
 import styles_ar from '../address_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 // TODO validations is pending. SF-28
 // TODO country dropdown. SF-25
 const AddressNew = (props) => {
   const {
     data, inputOnChange, addrTypeHandler, setAsDefaultLocation, selectCountry,
-    saveBtnClickHandler, resetAddAdrressForm, countriesData, showCountriesData,
+    saveBtnClickHandler, resetAddAdrressForm, countriesData, showCountriesData, hideTitle,
     getDataFromMap, getAllCities, selectCityFromSuggesstions, showCitiesData, validation,
   } = props;
   const { DELIVERY_ADDR_PAGE } = languageDefinations();
@@ -25,7 +27,8 @@ const AddressNew = (props) => {
       <div className={styles['new-addr-inn']}>
         <Row>
           <Col md={10} sm={9} xs={12}>
-            <h1 className={`${styles['thick-blue']} ${styles['mb-20']} ${styles['fs-20']} ${styles.fontW300} ${styles['m-fs-16']}`}>{DELIVERY_ADDR_PAGE.ADD_NEW_ADDR_HEAD}</h1>
+            {!hideTitle &&
+            <h1 className={`${styles['thick-blue']} ${styles['mb-20']} ${styles['fs-20']} ${styles.fontW300} ${styles['m-fs-16']}`}>{DELIVERY_ADDR_PAGE.ADD_NEW_ADDR_HEAD}</h1>}
           </Col>
 
           <Col md={12} sm={12} xs={12}>
@@ -84,7 +87,7 @@ const AddressNew = (props) => {
           </Col>
           <Col md={6} sm={12} xs={12}>
             <div className={`${styles['fp-input']} ${styles['common-input-mb']}`}>
-              <input type="text" name="country_name" onChange={inputOnChange} value={data.country_name} className={styles.input} required />
+              <input type="text" name="country_name" onChange={inputOnChange} value={data.country_name} autoComplete={false} className={styles.input} required />
               <span className={styles.highlight} />
               <span className={styles.bar} />
               <label>{DELIVERY_ADDR_PAGE.COUNTRY}</label>
@@ -95,17 +98,16 @@ const AddressNew = (props) => {
                       key={result.country_id}
                       className={`${styles['auto-suggestions']} ${styles['bg-white']}`}
                     >
-                      <div data-id={result.code3} name="shipping_country_code" onClick={selectCountry} className={`${styles.item} ${styles['fs-12']} ${styles['pl-5']} ${styles['ht-25']} ${styles.pointer}`}>{result.country_name}</div>
+                      <div data-id={result.code3} data-code={result.country_phone_code} name="shipping_country_code" onClick={selectCountry} className={`${styles.item} ${styles['fs-12']} ${styles['pl-5']} ${styles['ht-25']} ${styles.pointer}`}>{result.country_name}</div>
                     </div>
                   ))}
                 </div>
               }
-              {
-                validation.country_name && validation.country_name.message
-                  ?
-                    <span className={`${styles['error-msg']}`}>{validation.country_name.message}</span>
-                  :
-                  null
+              {(validation.shipping_country_code && validation.shipping_country_code.message) || (validation.country_name && validation.country_name.message)
+                ?
+                  <span className={`${styles['error-msg']}`}>{validation.shipping_country_code.message || validation.country_name.message}</span>
+                :
+                null
               }
             </div>
           </Col>
@@ -119,20 +121,20 @@ const AddressNew = (props) => {
               <label>{DELIVERY_ADDR_PAGE.CITY}</label>
               {
                 <div className={`${styles['auto-suggestions-list']}`}>
-                  {showCitiesData && getAllCities.map(result =>(
+                  {showCitiesData && getAllCities.map(result => (
                     <div
                       key={result.rescity_nameult}
                       className={`${styles['auto-suggestions']} ${styles['bg-white']}`}
                     >
-                      <div data-id={result.code} name="city_code" onClick={selectCityFromSuggesstions} className={`${styles.item} ${styles['fs-12']} ${styles['pl-5']} ${styles['ht-25']} ${styles.pointer}`}>{result.city_name}</div>
+                      <div data-id={result.city_code} name="city_code" onClick={selectCityFromSuggesstions} className={`${styles.item} ${styles['fs-12']} ${styles['pl-5']} ${styles['ht-25']} ${styles.pointer}`}>{result.city_name}</div>
                     </div>
                   ))}
                 </div>
               }
               {
-                validation.city && validation.city.message
+                (validation.city && validation.city.message) || (validation.city_code && validation.city_code.message)
                   ?
-                    <span className={`${styles['error-msg']}`}>{validation.city.message}</span>
+                    <span className={`${styles['error-msg']}`}>{validation.city.message || validation.city_code.message}</span>
                   :
                   null
               }
@@ -163,7 +165,7 @@ const AddressNew = (props) => {
           </Col>
           <Col md={2} sm={4} xs={4} className={`${styles['pr-0']}`}>
             <div className={`${styles['fp-input']} ${styles['common-input-mb']}`}>
-              <input type="text" name="mobile_country_code" onChange={inputOnChange} value={data.mobile_country_code} className={styles.input} required />
+              <input type="number" name="mobile_country_code" value={data.mobile_country_code} className={styles.input} required />
               <span className={styles.highlight} />
               <span className={styles.bar} />
               <label>{DELIVERY_ADDR_PAGE.CODE}</label>
@@ -171,10 +173,17 @@ const AddressNew = (props) => {
           </Col>
           <Col md={4} sm={8} xs={8}>
             <div className={`${styles['fp-input']} ${styles['common-input-mb']}`}>
-              <input type="text" name="mobile_no" onChange={inputOnChange} value={data.mobile_no} className={styles.input} required />
+              <input type="number" name="mobile_no" onChange={inputOnChange} value={data.mobile_no} className={styles.input} required />
               <span className={styles.highlight} />
               <span className={styles.bar} />
               <label>{DELIVERY_ADDR_PAGE.MOBILE_NUMBER}</label>
+              {
+                validation.mobile_no && validation.mobile_no.message
+                  ?
+                    <span className={`${styles['error-msg']}`}>{validation.mobile_no.message}</span>
+                  :
+                  null
+              }
             </div>
           </Col>
           <Col md={6} sm={12} xs={12}>

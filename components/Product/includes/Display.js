@@ -15,11 +15,12 @@ import { actionCreators } from '../../../store/cam/wishlist';
 
 import lang from '../../../utils/language';
 
+import main_en from '../../../layout/main/main_en.styl';
+import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from '../product_en.styl';
 import styles_ar from '../product_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
-
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const cookies = new Cookies();
 const language = cookies.get('language') || 'en';
@@ -59,8 +60,8 @@ class Display extends Component {
         catalog_id: catalogObj.catalog_id,
         variant_id: catalogObj.variant_id,
         product_id,
-        wishlisted_price: offerPricing.showPrise,
-        wishlisted_currency: offerPricing.currency,
+        wishlisted_price: offerPricing.showPrise.display_value,
+        wishlisted_currency: offerPricing.currency.currency_code,
       });
     }
   }

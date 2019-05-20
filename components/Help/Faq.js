@@ -2,9 +2,16 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { actionCreators } from '../../store/helpsupport';
-import { mergeCss } from '../../utils/cssUtil';
 import { Link } from '../../routes';
-const styles = mergeCss('components/Help/help');
+
+import lang from '../../utils/language';
+
+import main_en from '../../layout/main/main_en.styl';
+import main_ar from '../../layout/main/main_ar.styl';
+import styles_en from './help_en.styl';
+import styles_ar from './help_ar.styl';
+
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const sort = (a,b) => a - b;
 
@@ -45,7 +52,7 @@ class Faq extends Component {
         <div className={`${styles['flex']} ${styles['flexWrap']} ${styles['justify-between']}`}>
           {questionTypeKeys.map(this.renderTopics)}
         </div>
-        {this.props.isLoggedIn ? 
+        {this.props.isLoggedIn ?
           <div>
             <h4>MY INCIDENTS</h4>
             <div className={styles['incidentContainer']}>

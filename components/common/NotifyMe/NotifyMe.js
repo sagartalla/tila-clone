@@ -5,9 +5,14 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { languageDefinations } from '../../../utils/lang/';
 import { actionCreators } from '../../../store/cam/wishlist';
-import { mergeCss } from '../../../utils/cssUtil';
 
-const styles = mergeCss('components/common/NotifyMe/notifyMe');
+import lang from '../../../utils/language';
+
+import main_en from '../../../layout/main/main_en.styl';
+import main_ar from '../../../layout/main/main_ar.styl';
+
+const styles = lang === 'en' ? main_en : main_ar;
+
 const { CONTACT_INFO_MODAL, PERSONAL_INFO_MODAL } = languageDefinations();
 class NotifyMe extends React.Component {
   constructor() {

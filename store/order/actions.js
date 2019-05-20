@@ -22,6 +22,7 @@ const actions = {
   GET_REFUND_OPTIONS: 'GET_REFUND_OPTIONS',
   GET_TRACKING_DETAILS: 'GET_TRACKING_DETAILS',
   THANKYOU_PAGE_TRACK: 'THANKYOU_PAGE_TRACK',
+  SET_CANCEL_REFUNDMODE: 'SET_CANCEL_REFUNDMODE'
 };
 
 const actionCreators = {
@@ -78,6 +79,12 @@ const actionCreators = {
       },
     },
   }),
+  setCancelRefundMode: param => ({
+    type:actions.SET_CANCEL_REFUNDMODE,
+    payload:{
+      data:param
+    },
+  }),
   getRefundOptions: params => ({
     type: actions.GET_REFUND_OPTIONS,
     payload: api.getRefundOptions(params),
@@ -95,9 +102,9 @@ const actionCreators = {
   resetOrderIssue: () => ({
     type: actions.RESET_ORDER_ISSUE,
   }),
-  getReasons: params => ({
+  getReasons: (params,reasonType) => ({
     type: actions.GET_REASONS,
-    payload: api.getReasons(params),
+    payload: api.getReasons(params,reasonType),
   }),
   submitCancelRequest: params => ({
     type: actions.SUBMIT_CANCEL_REQUEST,

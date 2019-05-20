@@ -7,6 +7,12 @@ const getCardResultsApi = () => {
   });
 };
 
+const getWalletTransactions = () => {
+  return axios.get(`${constants.VAULT_API_URL}/api/v1/user/wallet/transactions?page=0&size=10`).then(({data}) => {
+    return data;
+  });
+};
+
 const addCardDetailsApi = (params) => {
   return axios.post(`${constants.VAULT_API_URL}/api/v1/vault/add`, params).then(({ data }) => {
     //after successfully added, get all card details again.
@@ -15,7 +21,7 @@ const addCardDetailsApi = (params) => {
 }
 
 const makeCardDefaultApi = (card_token) => {
-  return axios.put(`${constants.VAULT_API_URL}/api/v1/vault/card/default/` + card_token).then(({ data }) => {
+  return axios.put(`${constants.VAULT_API_URL}/api/v1/user/wallet/defaultCard/` + card_token).then(({ data }) => {
 
     //after successfully added, get all card details again.
     return getCardResultsApi();
@@ -23,10 +29,10 @@ const makeCardDefaultApi = (card_token) => {
 }
 
 const deleteCardApi = (card_token) => {
-  return axios.delete(`${constants.VAULT_API_URL}//api/v1/user/wallet/deleteCard/${card_token}`).then(({ data }) => {
+  return axios.delete(`${constants.VAULT_API_URL}/api/v1/user/wallet/deleteCard/${card_token}`).then(({ data }) => {
     //after successfully added, get all card details again.
     return getCardResultsApi();
   });
 }
 
-export default { getCardResultsApi, addCardDetailsApi, makeCardDefaultApi, deleteCardApi };
+export default { getCardResultsApi, addCardDetailsApi, makeCardDefaultApi, deleteCardApi, getWalletTransactions };

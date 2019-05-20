@@ -1,23 +1,50 @@
-[{
-	"data": [{
-		"icon": "icons/my-orders",
-		"display": "My Orders",
-		"count": "1",
-		"href": "/cam/orders"
-	}, {
-		"icon": "icons/my-wishlist",
-		"display": "Wishlist",
-		"count": "1",
-		"href": "/cam/wishlist"
-	}]
-}, {
-	"data": [{
-		"icon": "icons/shipping",
-		"display": "Shipping Address",
-		"href": "/cam/address"
-	},{
-		"icon": "icons/creditcards",
-		"display": "Credit Cards, Vouchers & Reward points",
-		"href": "/cam/uservault"
-	}]
-}]
+[
+  {
+    "data": [
+      {
+        "icon": "icons/my-orders",
+        "display": "MY_ORDERS",
+        "count": "1",
+        "href": "/cam/orders"
+      },
+      {
+        "icon": "icons/my-wishlist",
+        "display": "WISHLIST",
+        "count": "1",
+        "href": "/cam/wishlist"
+      }
+    ]
+  },
+  {
+    "data": [
+      {
+        "icon": "icons/shipping",
+        "display": "SHIPPING_ADDRESS",
+        "href": "/cam/address"
+      },
+      {
+        "icon": "icons/creditcards",
+        "display": "CREDIT_CARDS_VOUCHERS_REWARD_POINTS",
+        "href": "/cam/uservault"
+      }
+    ]
+  },
+  {
+    "data": [
+      {
+        "icon": "icons/common-icon/coupon-code",
+        "display": "MY_COUPONS",
+        "href": "/cam/mycoupons"
+      }
+    ]
+  },
+  {
+    "data": [
+      {
+        "icon": "icons/preferences",
+        "display": "PREFERENCES",
+        "href": "/cam/preferences"
+      }
+    ]
+  }
+]

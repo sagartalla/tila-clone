@@ -17,10 +17,13 @@ import lang from '../../utils/language';
 
 import CustomToggle from './CustomToggle';
 
+import main_en from '../../layout/main/main_en.styl';
+import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './header_en.styl';
 import styles_ar from './header_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+
 const { SEARCH_PAGE } = languageDefinations();
 
 const urlPropsQueryConfig = {
@@ -101,7 +104,7 @@ class Search extends Component {
     this.setState({
       searchInput: false,
     });
-
+    window.scrollTo(0, 0);
     Router.pushRoute(`/${country}/${language}/srp?search=${this.state.query}&${Object.entries(this.props.optionalParams).map(([key, val]) => `${key}=${val}`).join('&')}`);
   }
 

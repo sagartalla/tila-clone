@@ -15,12 +15,12 @@ import Pagination from '../../common/Pagination';
 // import { isAddedToCart } from '../../../store/cart/selectors';
 import lang from '../../../utils/language';
 
+import main_en from '../../../layout/main/main_en.styl';
+import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from './wishlist_en.styl';
 import styles_ar from './wishlist_ar.styl';
 
-
-const styles = lang === 'en' ? styles_en : styles_ar;
-
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 class Wishlist extends Component {
   constructor(props) {
@@ -95,7 +95,7 @@ class Wishlist extends Component {
 
   render() {
     const {
-      results, cartMiniWishList, getPageDetails,
+      results, cartMiniWishList, getPageDetails, wishListCount,
     } = this.props;
     const { showCartPageBtmPopup, currentPage } = this.state;
     return (
@@ -105,12 +105,14 @@ class Wishlist extends Component {
             <Fragment>
               <CartMiniWishList
                 data={results}
+                wishListCount={wishListCount}
                 showCartPageBtmPopup={this.showCartPageBtmPopup}
               />
               {
                 showCartPageBtmPopup ?
                   <CartBottomPopup
                     data={results}
+                    notifyMe={this.notify}
                     addToCart={this.addToCart}
                     showCartPageBtmPopup={this.showCartPageBtmPopup}
                   />
@@ -144,6 +146,7 @@ class Wishlist extends Component {
 const mapStateToProps = store => ({
   results: selectors.getWishListResults(store),
   getPageDetails: selectors.getPaginationDetails(store),
+  wishListCount: selectors.getProductsDetails(store).length,
 });
 
 const mapDispatchToProps = dispatch =>

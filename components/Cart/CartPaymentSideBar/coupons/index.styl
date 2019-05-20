@@ -4,12 +4,10 @@
     width: 100%;
     overflow: auto;
     align-items: center;
-    margin-top: 20%;
-    max-height: 800px;
       .couponDiv {
         border: solid 0.9px border-color;
         min-height 170px;
-        width: 350px;
+        width: 340px;
         margin-top: 30px;
         box-shadow: 0 5px 9px 0 rgba(0, 0, 0, 0.05);
         border-radius: 5px;
@@ -18,43 +16,7 @@
         justify-content: space-between;
         }
 }
-
-.couponApply
-    top: 7%;
-    position: absolute;
-    border-radius: 2px;
-    box-shadow: 0 3px 9px 0 rgba(0, 0, 0, 0.07);
-    background-color: white;
-    border-bottom: 0;
-    display flex
-    align-items center
-    z-index 5;
-    left: 14%;
-
-.couponCodeListing
-    padding: 7px;
-    width: 50%;
-    margin-top: 10px;
-    height: 33px;
-    text-align: center;
-    left: -10px;
-    position: relative;
-    border: solid 1px listing-border;
-    background-color: listing-background-color;
-
-
-.couponCodeListing:after {
-    content: '';
-    display: block;
-    position: relative;
-    left: -8px;
-    width: 0;
-    border-bottom: 10px solid listing-triangle-color;
-    border-left: 10px solid transparent;
-    top: 27%;
-    transform: rotate(-90deg);
-}
-
+  
 .listingColor
     border: solid 1px listing-border;
     background-color: listing-background-color;
@@ -66,7 +28,6 @@
 .bankColor
    border: solid 1.3px bank-border;
    background-color: bank-background-color;
-
 
 .modalClassName
    position absolute
@@ -86,25 +47,49 @@
 .wordBreak
    word-break: break-all;
 
-.input
-  width 350px !important
-  height 60px
-  border 0 !important
+.apply-btn
+    color #000
+    border 1px solid #c8c7cc
+    padding 6px 20px
+    background-color #fff
+    border-radius: 5px;
 
-
-.border
-  border-right: 1px dotted;
-  margin-left: 30px;
-
-.errorStyle {
-    position: absolute;
-    top: 15%
-    left: 15%;
-}
-
-.apply-btn {
-    color: #000;
-    border: 1px solid #c8c7cc;
-    padding: 10px 25px;
+.copy-btn
+    color: navy-blue;
+    border: 1px solid navy-blue;
+    padding: 6px 20px;
     background-color: #fff;
-}
+    border-radius: 5px;
+
+
+.coupon-result
+    height 400px
+  .coupon-img
+       width 135px
+       height 140px
+.loader-div
+    width 50px
+    height 50px
+    z-index 14
+  .loader-styl
+    svg
+      animation rotate 1.4s linear infinite;
+      -webkit-animation rotate 1.4s linear infinite;
+      -moz-animation rotate 1.4s linear infinite;
+      @keyframes rotate {
+        to {
+          transform rotate(360deg);
+        }
+      }
+
+      @-webkit-keyframes rotate {
+        to {
+          -webkit-transform rotate(360deg);
+        }
+      }
+
+      @-moz-keyframes rotate {
+        to {
+          transform rotate(360deg);
+        }
+      }

@@ -19,7 +19,12 @@ import lang from '../../../../../utils/language';
 import styles_en from '../../../payment_en.styl';
 import styles_ar from '../../../payment_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+import main_en from '../../../../../layout/main/main_en.styl';
+import main_ar from '../../../../../layout/main/main_ar.styl';
+import styles_en from '../../../payment_en.styl';
+import styles_ar from '../../../payment_ar.styl';
+
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const initialState = {
   openBox: <SVGComponent clsName={`${styles['drop-box-icon']}`} src="icons/captcha-icons-list/box-icon" />,

@@ -20,6 +20,8 @@ import { reducer as instantCheckoutReducer } from './common/instantCheckout';
 import { reducer as landingReducer } from './landing';
 import { reducer as captchaReducer } from './captcha';
 import { reducer as helpSupportReducer } from './helpsupport';
+import { reducer as listingCartReducer } from './listingCart';
+import { reducer as preferencesReducer } from './cam/preferences';
 
 export default combineReducers({
   searchReducer,
@@ -35,6 +37,7 @@ export default combineReducers({
   wishlistReducer,
   notificationsReducer,
   vaultReducer,
+  preferencesReducer,
   messagesReducer,
   reviewRatingReducer,
   compareReducer,
@@ -43,4 +46,5 @@ export default combineReducers({
   captchaReducer,
   couponOffersData,
   helpSupportReducer,
+  listingCartReducer,
 });

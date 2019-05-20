@@ -18,13 +18,14 @@ import Coupon from '../Cart/CartPaymentSideBar/coupons';
 
 import lang from '../../utils/language';
 
+import main_en from '../../layout/main/main_en.styl';
+import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './cart_en.styl';
 import styles_ar from './cart_ar.styl';
 
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+
 const { CART_PAGE } = languageDefinations();
-
-const styles = lang === 'en' ? styles_en : styles_ar;
-
 const cookies = new Cookie();
 
 const language = cookies.get('language') || 'en';
@@ -59,8 +60,13 @@ class Cart extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    const { wishListCount, getWishlist } = this.props;
+    const { pathname } = window.location;
     if (nextProps.cartData.ui.loader && nextProps.cartData.ui.loader === 'hide') {
       this.setState({ showBlocker: false });
+    }
+    if (wishListCount !== nextProps.wishListCount && pathname.indexOf('/cart') > -1) {
+      getWishlist(0, nextProps.wishListCount);
     }
   }
 
@@ -217,6 +223,7 @@ class Cart extends Component {
 
 const mapStateToProps = store => ({
   cartData: selectors.getCartResults(store),
+  wishListCount: wishlistSelectors.getProductsDetails(store).length,
   isLoading: store.cartReducer.ui.loading,
 });
 
@@ -229,6 +236,7 @@ const mapDispatchToProps = dispatch =>
       addOrRemoveGift: actionCreators.addOrRemoveGift,
       cartItemInputCount: actionCreators.cartItemInputCount,
       addToWishlistAndFetch: wishlistActionCreators.addToWishlistAndFetch,
+      getWishlist: wishlistActionCreators.getWishlist,
       track: actionCreators.track,
     },
     dispatch,

@@ -1,3 +1,104 @@
-@import '../../../../layout/main/main_en.styl'
-
 @import './index.styl'
+
+
+.couponCodeListing
+    padding: 7px;
+    margin-top: 10px;
+    height: 33px;
+    left: -10px;
+    text-align: center;
+    position: relative;
+    border: solid 1px listing-border;
+    background-color: listing-background-color;
+
+
+.couponCodeListing:after {
+    content: '';
+    display: block;
+    position: relative;
+    left: -8px;
+    width: 0;
+    border-bottom: 10px solid listing-triangle-color;
+    border-left: 10px solid transparent;
+    top: 27%;
+    transform: rotate(-90deg);
+}
+
+.couponCodeTerms
+    padding: 7px;
+    margin-top: 10px;
+    height: 33px;
+    left: -30px;
+    text-align: center;
+    position: relative;
+    border: solid 1px listing-border;
+    background-color: listing-background-color;
+
+
+.couponCodeTerms:after {
+    content: '';
+    display: block;
+    position: relative;
+    left: -8px;
+    width: 0;
+    border-bottom: 10px solid listing-triangle-color;
+    border-left: 10px solid transparent;
+    top: 27%;
+    transform: rotate(-90deg);
+}
+
+.couponCodeCartTerms
+    padding: 7px;
+    margin-top: 10px;
+    height: 33px;
+    left: -15px;
+    text-align: center;
+    position: relative;
+    border: solid 1px listing-border;
+    background-color: listing-background-color;
+
+
+.couponCodeCartTerms:after {
+    content: '';
+    display: block;
+    position: relative;
+    left: -8px;
+    width: 0;
+    border-bottom: 10px solid listing-triangle-color;
+    border-left: 10px solid transparent;
+    top: 27%;
+    transform: rotate(-90deg);
+}
+
+.border
+  border-right 1px dotted
+  margin-left 15px
+
+.couponMargin
+    margin 2%
+    margin-right 4%
+.input
+    width 350px !important
+    height 60px !important
+    border 0 !important
+    padding-left 10px !important
+
+.couponApply
+    position relative
+    width 340px
+    border-radius 2px
+    box-shadow 0 3px 9px 0 rgba(0, 0, 0, 0.07)
+    background-color white
+    border-bottom 0
+    margin-right 20px
+
+.applyCouponMargin {
+   margin-top: 10%
+   height: calc(100vh - 180px);
+}
+
+.errorStyle {
+    position: absolute;
+    top: 10%
+    left: 10%;
+}

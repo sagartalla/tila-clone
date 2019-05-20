@@ -9,7 +9,7 @@ $shipment-wrap-border-color = #D8D8D8
 .order-item-wrap
   background white
 
-.cancel-btn 
+.cancel-btn
   .link-text
     padding 10px 15px
 
@@ -27,8 +27,8 @@ $shipment-wrap-border-color = #D8D8D8
         float left
 
 .shipment-wrap
-  border 1px solid $shipment-wrap-border-color
-  border-radius 6px
+  border 1px solid light-brdr
+  border-radius 4px
   .products-wrap
     .product-item
       .img-wrap, .text-wrap
@@ -41,6 +41,8 @@ $shipment-wrap-border-color = #D8D8D8
           object-fit scale-down
           max-width 100%
           max-height 100%
+          display: block;
+          margin: 0 auto;
 
   .widget-wrap
     clear both
@@ -77,11 +79,8 @@ $shipment-wrap-border-color = #D8D8D8
   .product-wrap
     img
       object-fit scale-down
-
-.help-position
-  right 20px
-  bottom 0px
-  border-bottom 0
+      width 100%
+      max-height 100%;
 
 .ship-icon
   width 80px
@@ -92,10 +91,6 @@ $shipment-wrap-border-color = #D8D8D8
   .track-img
     max-width 100%
     max-height 100%
-
-
-
-
 
 .state-times
   margin 15px
@@ -121,10 +116,11 @@ $shipment-wrap-border-color = #D8D8D8
       height 12px
   .activeP
     &::after
-      background generic-green-color      
+      background generic-green-color
   .status
     padding 0 20px 20px 20px
     position relative
+    width 90%
     &::before
       content ""
       position absolute

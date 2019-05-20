@@ -13,10 +13,12 @@ import Button from '../../../common/CommonButton';
 
 import lang from '../../../../utils/language';
 
+import main_en from '../../../../layout/main/main_en.styl';
+import main_ar from '../../../../layout/main/main_ar.styl';
 import styles_en from '../../payment_en.styl';
 import styles_ar from '../../payment_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 
 const { PAYMENT_PAGE } = languageDefinations();
@@ -122,7 +124,7 @@ class SavedCards extends Component {
         <Button
           className={`${styles['fs-16']} ${styles['text-uppercase']} ${styles['pay-btn']} ${styles['border-radius']} ${styles.width33} ${styles['ht-40']} ${styles['new-card-btn']}`}
           onClick={this.proceedToPayment}
-          btnText={PAYMENT_PAGE.PAY + ' ' + data.amount_to_pay + ' ' + data.currency_code}
+          btnText={PAYMENT_PAGE.PAY + ' ' + data.amount_to_pay.display_value + ' ' + data.amount_to_pay.currency_code}
           hoverClassName="hoverBlueBackground"
           btnLoading={showLoading}
         />

@@ -17,10 +17,12 @@ import AuthWrapper from '../../common/AuthWrapper';
 
 import lang from '../../../utils/language';
 
+import main_en from '../../../layout/main/main_en.styl';
+import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from '../product_en.styl';
 import styles_ar from '../product_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 class Review extends Component {
   state = {
@@ -57,7 +59,7 @@ class Review extends Component {
       openModal:false
     })
   }
-  submituserreview = (reviewObj) => {
+  submituserreview = (reviewObj) => {    
     this.setState({
       openModal:false
     }, () => this.props.submitUserReview(reviewObj))
@@ -75,11 +77,12 @@ class Review extends Component {
                </div>
               <div className={`${styles['pl-20']} ${styles['thick-gry-clr']}`}>
                 <h5 className={`${styles['mb-0']} ${styles['fontW600']}`}>{data.reviewer_name}</h5>
-                <div className={`${styles['flex']} ${styles['review-start-inn']} ${styles['pb-10']}`}>
+                <div className={`${styles['flex']} ${styles['review-start-inn']} ${styles['pb-5']} ${styles['pt-5']}`}>
                   <StarRating
                     interactive={false}
                     count= {5}
                     rating={data.ratings}
+                    clsStyl={{width:'15px', marginRight:'5px'}}
                   />
                 </div>
               </div>
