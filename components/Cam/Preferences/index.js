@@ -32,7 +32,7 @@ class Preferences extends React.Component {
             <span className={`${styles['dottes-gry-clr']} ${styles['fs-12']}`}>{PREFERENCES.SELECT_OPTION}</span>
           </div>
         </div>
-        <Tabs defaultActiveKey={1} onSelect={this.handleSelect}>
+        <Tabs defaultActiveKey={1} onSelect={this.handleSelect} id="preferences">
           <Tab eventKey={1} title={PREFERENCES.NOTIFICATION_PREFERENCES}>
             <NotificationPreferences />
           </Tab>

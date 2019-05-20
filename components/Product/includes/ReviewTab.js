@@ -22,7 +22,7 @@ const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styl
 const ReviewsTab = ({ tabs }) => {
   return (
     <div>
-      <Tabs defaultActiveKey={1}>
+      <Tabs defaultActiveKey={1} id="review-tab">
         <Tab eventKey={1} id="All Reviews" title={PDP_PAGE.ALL_REVIEWS}>
           <Review />
         </Tab>
