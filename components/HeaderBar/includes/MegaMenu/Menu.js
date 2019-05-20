@@ -87,6 +87,7 @@ class Menu extends Component {
 
   render() {
     const { selectedCategoryTree, colorScheme, parentID } =  this.props;
+    debugger;
     return (
       <div
         className={`${styles['pt-20']} ${styles['megamenu-dropdown']} ${styles[colorScheme]} ${this.state.viewAllMenu ? {} : styles['max-height']}`}
@@ -100,7 +101,7 @@ class Menu extends Component {
               <ul className={`${styles['megamenu-sub-child-list']}`}>
                 {brandImages.topBrands[colorScheme] &&
                 brandImages.topBrands[colorScheme].length > 0 && brandImages.topBrands[colorScheme].map(image => (
-                  <li className={`${styles.flex} ${styles['mb-10']} ${styles['brand-icon']}`}>
+                  <li className={`${styles.flex} ${styles['mb-10']} ${styles['brand-icon']}`} key={image}>
                     <img alt={image} src={`/static/img/bg-img/${image}.jpg`} className={`${styles['img-responsive']}`} />
                   </li>
                 ))}
@@ -115,7 +116,7 @@ class Menu extends Component {
               <ul className={`${styles['megamenu-sub-child-list']}`}>
                 {brandImages.trending[colorScheme] && brandImages.trending[colorScheme].length > 0 &&
                 brandImages.trending[colorScheme].map(image => (
-                  <li className={`${styles.flex} ${styles['mb-10']} ${styles['brand-icon']}`}>
+                  <li className={`${styles.flex} ${styles['mb-10']} ${styles['brand-icon']}`} key={image}>
                     <img alt={image} src={`/static/img/bg-img/${image}.jpg`} className={`${styles['img-responsive']}`} />
                   </li>
                 ))}
