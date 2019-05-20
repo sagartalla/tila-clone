@@ -203,13 +203,12 @@ class Coupon extends Component {
               <div className={`${styles['label-gry-clr']}`}>{coupons.description}</div>
             </div>
             <Tabs defaultActiveKey={1}>
-              <Tab eventKey={title === 'terms' ? 1 : 2} title={COUPON_OFFERS.TERMS_AND_CONDITIONS}>
+              <Tab eventKey={title === 'terms' ? 1 : 2} title={COUPON_OFFERS.VIEW_TERMS}>
                 <iframe
                   title="TERMS"
                   src={coupons.tc}
                   frameBorder="0"
-                  width="440px"
-                  height="550px"
+                  style={{ height: 'calc(100vh - 250px)', width: '440px' }}
                 />
               </Tab>
               <Tab eventKey={title === 'terms' ? 2 : 1} title={COUPON_OFFERS.HOW_TO_USE}>
@@ -217,8 +216,7 @@ class Coupon extends Component {
                   title="TERMS"
                   src={coupons.how_to_use}
                   frameBorder="0"
-                  width="440px"
-                  height="550px"
+                  style={{ height: 'calc(100vh - 250px)', width: '440px' }}
                 />
               </Tab>
             </Tabs>
