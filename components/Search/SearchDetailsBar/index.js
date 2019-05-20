@@ -81,7 +81,7 @@ class SearchDetailsBar extends Component {
                     spellCheckResp &&
                     <h4 className={`${styles['pl-10']} ${styles['fs-14']} ${styles['sple-check-prt']}`}>
                       <span>{ SEARCH_PAGE.YOUR_ENTERED }: </span>
-                      <a href="javascript: void(0)" onClick={this.querySearch} className={`${styles['fontW600']} ${styles['lgt-blue']}`} data-querysearch={finalQuery.split('-').join(' ')}>
+                      <a href="javascript: void(0)" onClick={this.querySearch} className={`${styles['fontW600']} ${styles['lgt-blue']}`} data-querysearch={finalQuery && finalQuery.split('-').join(' ')}>
                         {finalQuery && this.capitalize(finalQuery.split('-').join(' '))}
                       </a>
                     </h4>
