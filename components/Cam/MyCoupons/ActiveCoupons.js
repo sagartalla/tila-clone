@@ -97,7 +97,7 @@ class ActiveCoupons extends Component {
                 <div className={`${styles['label-gry-clr']}`}>{coupons.description}</div>
               </div>
               <Tabs defaultActiveKey={1}>
-                <Tab eventKey={title === 'terms' ? 1 : 2} title={COUPON_OFFERS.TERMS_AND_CONDITIONS}>
+                <Tab eventKey={title === 'terms' ? 1 : 2} title={COUPON_OFFERS.VIEW_TERMS}>
                   <iframe
                     title="TERMS"
                     src={coupons.tc}
