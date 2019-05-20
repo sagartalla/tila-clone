@@ -76,7 +76,7 @@ class TitleInfo extends Component {
 
   addToCompare({ target }) {
     const {
-      addToCompare, product_id, itemtype, media, title, categoryId, removeCompareData,
+      addToCompare, product_id, itemtype, media, title, categoryId, removeCompareData, catalogObj,
     } = this.props;
     const src = `${constants.mediaDomain}/${media}`;
     if (target.checked) {
@@ -86,6 +86,7 @@ class TitleInfo extends Component {
         src,
         displayName: title,
         categoryId,
+        catalogObj,
       });
     } else removeCompareData(product_id);
   }
