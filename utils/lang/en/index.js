@@ -623,7 +623,6 @@ export const EN_KEYWORDS = {
     WE_BELIEVE_IN_THE_POWER: 'We believe in the power of purchase intelligence',
     ACTIVE_COUPONS: 'Active Coupons',
     EXPIRED_COUPONS: 'Expired Coupons',
-    TERMS_AND_CONDITIONS: 'Terms & Conditions',
     EXPIRED_ON: 'Expired on',
     EMPTY_COUPON_BOX: 'You have found an empty Coupon box',
     NO_COUPONS_AVAILABLE: 'No coupons are available currently.',

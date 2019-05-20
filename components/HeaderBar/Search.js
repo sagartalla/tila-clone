@@ -92,7 +92,7 @@ class Search extends Component {
   }
 
   submitQuery(e) {
-    e.preventDefault();
+    e && e.preventDefault();
     if (!this.state.query) return false;
     // const { isCategoryTree } = this.props;
     digitalData.page.pageInfo.onsiteSearchTerm = this.state.query;
@@ -117,10 +117,12 @@ class Search extends Component {
   }
 
   handleUploadImage(file) {
-    this.props.fetchImageSearchData(file);
+    this.props.fetchImageSearchData(file).then(() => {
+      this.submitQuery();
+    });
     this.setState({
       openImagesearch: false,
-    }, () => Router.pushRoute(`/${country}/${language}/srp`));
+    });
   }
 
   fetchSuggestions() {

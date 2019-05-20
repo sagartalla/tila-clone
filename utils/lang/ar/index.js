@@ -50,7 +50,7 @@ export const AR_KEYWORDS = {
     THERE_IS: 'There is',
     THERE_ARE: 'There are',
     ITEM_IN_YOUR_WISHLIST: 'item in Your Wishlist',
-    ITEMS_IN_YOUR_WISH_LIST: 'items in Your Wishlist',
+    ITEMS_IN_YOUR_WISHLIST: 'items in Your Wishlist',
   },
   PAYMENT_PAGE: {
     SECURE_CHECKOUT: 'عملية خروج آمنة',
@@ -604,7 +604,6 @@ export const AR_KEYWORDS = {
     WE_BELIEVE_IN_THE_POWER: 'We believe in the power of purchase intelligence',
     ACTIVE_COUPONS: 'Active Coupons',
     EXPIRED_COUPONS: 'Expired Coupons',
-    TERMS_AND_CONDITIONS: 'Terms & Conditions',
     EXPIRED_ON: 'Expired on',
     HOW_TO_USE: 'طريقة الاستخدام',
     EMPTY_COUPON_BOX: 'You have found an empty Coupon box',

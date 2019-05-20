@@ -231,7 +231,7 @@ class CartItem extends React.Component {
                     </div>
                     <div data-id={item_id} className={`${styles['checkbox-material']} ${styles['mt-15']}`}>
                       <input data-id={item_id} id={"gift" + item_id} type="checkbox" checked={checked} onClick={this.giftChecked} />
-                      <label htmlFor={"gift" + item_id}> {CART_PAGE.SEND_GIFT} {gift_info ? "(" + gift_info.gift_rate + " " + cur + ")" : ''} </label>
+                      <label htmlFor={"gift" + item_id}> {CART_PAGE.SEND_GIFT} {(gift_info && gift_info.gift_rate) ? "(" + gift_info.gift_rate + " " + cur + ")" : ''} </label>
                     </div>
                     {checked && showMessage &&
                       <div>
@@ -316,7 +316,7 @@ class CartItem extends React.Component {
                     <div>{od.description}</div>
                   </div>
                   <div className={`${styles['t-rt']}`}>
-                    {`${od.discount} ${cur}`}
+                    {`${od.discount.display_value} ${cur}`}
                   </div>
                 </div>
               );
