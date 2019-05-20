@@ -41,8 +41,7 @@ const getSearchResultsApi = ({
   } else {
     options.categoryFilter = categoryFilter;
   }
-
-  return axios.get(`${constants.SEARCH_API_URL}/search${categoryTree ? '/browseByCatId/' : ''}?query=${escape(JSON.stringify(options))}`).then(({ data }) => {
+  return axios.get(`${constants.SEARCH_API_URL}/search${categoryTree ? '/browseByCatId/' : ''}?query=${encodeURIComponent(JSON.stringify(options))}`).then(({ data }) => {
     const { products, noOfProducts } = data.productResponse;
     const hasMore = (((pageNum - 1) * pageSize) + products.length) !== noOfProducts;
 
