@@ -246,7 +246,7 @@ class Product extends Component {
     const popover = (
       <Popover id={productId}>
         {variants.length > 0 && variants[selectedIndex].offersApplied &&
-          variants[selectedIndex].offersApplied.map(offer => <div>{offer}</div>)}
+          variants[selectedIndex].offersApplied.map((offer, index) => <div key={`${offer}${index}`}>{offer}</div>)}
       </Popover>
     );
 

@@ -3,8 +3,6 @@ import { Grid, Col } from 'react-bootstrap';
 import NoSSR from 'react-no-ssr';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import Cookie from 'universal-cookie';
-import { languageDefinations } from '../../utils/lang';
 import { actionCreators, selectors } from '../../store/search';
 import HeaderBar from '../HeaderBar/index';
 import FooterBar from '../Footer/index';
@@ -12,9 +10,6 @@ import CategoriesAndFacets from './CategoriesAndFacets';
 import SearchDetailsBar from './SearchDetailsBar';
 import SearchResults from './SearchResults';
 import CompareWidget from '../common/CompareWidget';
-import { Router } from '../../routes';
-
-
 import lang from '../../utils/language';
 
 import main_en from '../../layout/main/main_en.styl';
@@ -22,12 +17,6 @@ import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './search_en.styl';
 import styles_ar from './search_ar.styl';
 
-const { SEARCH_PAGE } = languageDefinations();
-
-const cookies = new Cookie();
-
-const language = cookies.get('language') || 'en';
-const country = cookies.get('country') || 'SAU';
 
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 

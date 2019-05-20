@@ -87,7 +87,6 @@ class Menu extends Component {
 
   render() {
     const { selectedCategoryTree, colorScheme, parentID } =  this.props;
-    debugger;
     return (
       <div
         className={`${styles['pt-20']} ${styles['megamenu-dropdown']} ${styles[colorScheme]} ${this.state.viewAllMenu ? {} : styles['max-height']}`}

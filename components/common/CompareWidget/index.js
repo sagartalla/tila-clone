@@ -48,7 +48,7 @@ class CompareWidget extends React.Component {
           <div className={styles['compare-items']}>
             <div style={{ width: `${cmpData.products.length * 180}px` }} className={`${styles['flex-center']} ${styles['justify-around']} ${styles['ht-240']}`}>
               {cmpData.products.map(data => (
-                <div className={styles.item}>
+                <div className={styles.item} key={data.productId}>
                   <div className={styles['item-image']}>
                     <img className={styles.image} src={data.src} alt="" />
                     <div>
