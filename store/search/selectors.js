@@ -215,7 +215,6 @@ const getCategoryId = store =>
   // return category.id;
   store.searchReducer.data.searchDetails.categoryFilter.id;
 const getQuery = store => store.searchReducer.data.searchDetails.query;
-const imageQuery = store => store.searchReducer.data.query;
 const getCategorySearchQuery = store => store.searchReducer.data.searchDetails.choosenCategoryName;
 const optionParams = (store) => {
   let isListed = store.searchReducer.data;
@@ -260,5 +259,5 @@ const getCartButtonLoaders = store => store.cartReducer.data.cartButtonLoaders |
 export {
   getSearchFilters, getSearchResutls, getPaginationDetails, getUIState, getCategoryId, getQuery, getCategorySearchQuery,
   getFacetfilters, optionParams, getSearchBarFilterState, addCartAndWishlistDetails, getIsCategoryTree, getChoosenCategoryName,
-  getAppliedFitlers, getSuggestions, getSpellCheckResponse, getUserDetails, getCartButtonLoaders, imageQuery,
+  getAppliedFitlers, getSuggestions, getSpellCheckResponse, getUserDetails, getCartButtonLoaders,
 };

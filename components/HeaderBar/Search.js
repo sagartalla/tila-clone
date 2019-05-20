@@ -66,9 +66,6 @@ class Search extends Component {
       // query: isCategoryTree ? choosenCategoryName : searchInput ? query : queryProp,
       suggestions: nextProps.suggestions || [],
     });
-    if (this.props.imageQuery !== nextProps.imageQuery) {
-      Router.pushRoute(`/${country}/${language}/srp?search=${nextProps.imageQuery}&${Object.entries(this.props.optionalParams).map(([key, val]) => `${key}=${val}`).join('&')}`);
-    }
   }
 
   onChangeSearchInput(e) {
@@ -95,7 +92,7 @@ class Search extends Component {
   }
 
   submitQuery(e) {
-    e.preventDefault();
+    e && e.preventDefault();
     if (!this.state.query) return false;
     // const { isCategoryTree } = this.props;
     digitalData.page.pageInfo.onsiteSearchTerm = this.state.query;
@@ -120,7 +117,9 @@ class Search extends Component {
   }
 
   handleUploadImage(file) {
-    this.props.fetchImageSearchData(file);
+    this.props.fetchImageSearchData(file).then(() => {
+      this.submitQuery();
+    });
     this.setState({
       openImagesearch: false,
     });
@@ -199,7 +198,6 @@ const mapStateToProps = store => ({
   choosenCategoryName: selectors.getChoosenCategoryName(store),
   optionalParams: selectors.optionParams(store),
   suggestions: selectors.getSuggestions(store),
-  imageQuery: selectors.imageQuery(store),
 });
 
 const mapDispatchToProps = dispatch =>

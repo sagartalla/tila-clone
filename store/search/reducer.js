@@ -57,7 +57,7 @@ const searchReducer = typeToReducer({
         query: '',
       },
     }, { ui: { loading: true } }),
-    FULFILLED: (state, action) => {      
+    FULFILLED: (state, action) => {
       return Object.assign({}, state, {
         ...state,
         data: {
@@ -105,6 +105,22 @@ const searchReducer = typeToReducer({
         data: {
           ...state.data,
           suggestions: action.payload.data
+        },
+        ui: { loading: false } })
+    },
+    REJECTED: (state, action) => Object.assign({}, state, { error: action.payload.message, ui: { loading: false } }),
+  },
+  [actions.GET_IMAGE_QUERY]: {
+    PENDING: state => Object.assign({}, state, { ui: { loading: true } }),
+    FULFILLED: (state, action) => {
+      return Object.assign({}, state, {
+        ...state,
+        data: {
+          ...state.data,
+          searchDetails: {
+            ...state.data.searchDetails,
+            ...action.payload.data,
+          }
         },
         ui: { loading: false } })
     },

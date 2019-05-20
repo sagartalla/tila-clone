@@ -7,6 +7,7 @@ const actions = {
   REMOVE_FILTERS: 'REMOVE_FILTERS',
   FETCH_SUGGESTIONS: 'FETCH_SUGGESTIONS',
   FETCH_IMAGESEARCHDATA: 'FETCH_IMAGESEARCHDATA',
+  GET_IMAGE_QUERY: 'GET_IMAGE_QUERY',
 };
 
 const actionCreators = {
@@ -48,9 +49,9 @@ const actionCreators = {
       payload: apis.fetchSuggestions(params)
     })
   },
-  fetchImageSearchData:(params) => {
-    return ({
-      type:actions.GET_SEARCH_RESULTS,
+  fetchImageSearchData:(params) => (dispatch, getState) => {
+    return dispatch({
+      type:actions.GET_IMAGE_QUERY,
       payload:apis.fetchImageSearchApi(params)
     })
   }
