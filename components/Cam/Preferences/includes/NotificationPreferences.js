@@ -38,7 +38,6 @@ class NotificationPreferences extends React.Component {
   }
 
   componentWillReceiveProps(newProps) {
-    console.log('daddw', newProps);
     const { notificationPreferences } = newProps;
     this.setState({
       notificationPreferences,
