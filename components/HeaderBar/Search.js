@@ -158,7 +158,7 @@ class Search extends Component {
         <form onSubmit={this.submitQuery}>
 
           <Dropdown id="search-toggle" className={`${styles['cart-inn']} ${styles.width100}`}>
-            <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
+            <Dropdown.Toggle id="dropdown-custom-components">
               <div className={styles.overlap}>
             {query.length < 1 ? '' : autoSearchValue || suggestions.length > 0 && (query === suggestions[0].data_edgengram.slice(0, query.length) ? suggestions[0].data_edgengram : '')}</div>
               <input
