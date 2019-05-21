@@ -72,8 +72,9 @@ class Search extends Component {
       return;
     }
     this.setState({
-      query: e.target.value.replace(/^\s+/g, ''),
+      query: e.target.value.toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ').replace(/^\s+/g, ''),
       searchInput: true,
+      autoSearchValue: '',
     }, () => {
       this.fetchSuggestions();
     });
@@ -85,6 +86,23 @@ class Search extends Component {
       suggestions: [],
     }, () => {
       this.submitQuery(e);
+    });
+  }
+
+
+  handleSearch = (e) => {
+    const { suggestions } = this.props;
+    if (e.keyCode === 9 || e.keyCode === 39) {
+      this.setState({
+        query: suggestions.length > 0 && suggestions[0].data_edgengram,
+      });
+    }
+  }
+  mouseOver = (e) => {
+    const searchValue = e.target.getAttribute('data');
+    this.setState({
+      query: searchValue,
+      autoSearchValue: searchValue,
     });
   }
 
@@ -133,25 +151,28 @@ class Search extends Component {
 
   render() {
     const {
-      suggestions, openImagesearch, query,
+      suggestions, openImagesearch, query, autoSearchValue,
     } = this.state;
     return (
       <div className={styles['search-wrapper']}>
         <form onSubmit={this.submitQuery}>
 
           <Dropdown id="search-toggle" className={`${styles['cart-inn']} ${styles.width100}`}>
-            <Dropdown.Toggle id="dropdown-custom-components">
+            <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
+              <div className={styles.overlap}>
+            {query.length < 1 ? '' : autoSearchValue || suggestions.length > 0 && (query === suggestions[0].data_edgengram.slice(0, query.length) ? suggestions[0].data_edgengram : '')}</div>
               <input
                 className={styles['search-input']}
                 placeholder={SEARCH_PAGE.SEARCH_YOUR_FAV_ITEM}
                 onChange={this.onChangeSearchInput}
                 value={query}
+                onKeyDown={this.handleSearch}
               />
             </Dropdown.Toggle>
             <Dropdown.Menu className={`${styles.width100} ${styles['p-0']} ${styles['m-0']}`}>
               {suggestions.length > 0 &&
                 suggestions.map((s, index) => (
-                  <MenuItem className={styles['search-suggestion']} onClick={this.setSearchText} eventKey={index + 1}>
+                  <MenuItem className={styles['search-suggestion']} onClick={this.setSearchText} data={s.data_edgengram} onFocus={this.mouseOver} eventKey={index + 1}>
                     <a className={`${styles['black-color']}`}>
                       <span>{s.data_edgengram}</span>
                     </a>

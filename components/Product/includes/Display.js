@@ -72,7 +72,7 @@ class Display extends Component {
     } = this.props;
     return (
       <div className={`${styles['ht-100per']} ${styles['mobile-slide-part']}`}>
-        {breadcrums.length > 0 &&
+        {breadcrums && breadcrums.length > 0 &&
           <div className={`${styles['breadcrums-part']} ${styles['fs-12']}`}>
             {breadcrums.map((crum, index) => (
               <span key={crum.id}>

@@ -29,7 +29,7 @@ const getCompareCount = () => {
 };
 
 const addToCompare = ({
-  itemtype, productId, src, displayName, categoryId,
+  itemtype, productId, src, displayName, categoryId, catalogObj,
 }) => {
   const compareItems = getItem();
   const index = _.findIndex(compareItems.products, item => item.productId === productId);
@@ -47,6 +47,7 @@ const addToCompare = ({
       productId,
       src,
       displayName,
+      catalogObj,
     }],
   };
   if (compareItems.products.length) {

@@ -189,7 +189,7 @@ class OrderItem extends Component {
                             </div>
                           </Col>
                           {
-                            showPriceInfo && 
+                            showPriceInfo &&
                             <Col md={5} sm={5} className={styles['ipad-pr-0']}>
                               {product.price &&
                               <span className={`${styles['justify-end']} ${styles['flex-center']} ${styles['fs-16']} ${styles.fontW600}`}>
