@@ -25,7 +25,6 @@ class PayOnline extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      disableSaveCard: false
     }
     this.saveCardHandler = this.saveCardHandler.bind(this);
     this.fetchIframe = this.fetchIframe.bind(this);
@@ -33,7 +32,6 @@ class PayOnline extends Component {
 
   saveCardHandler(e) {
     this.props.saveCard(e);
-    this.setState({ disableSaveCard: true });
   }
 
   fetchIframe() {
@@ -58,7 +56,7 @@ class PayOnline extends Component {
 
   render() {
     const { voucherData, data, processData, showLoading } = this.props;
-    const { disableSaveCard, iframe_url } = this.state
+    const { disableSaveCard, iframe_url } = this.state;
 
     return (
       <div className={`${styles['pay-online']}`}>
@@ -70,7 +68,7 @@ class PayOnline extends Component {
               <div className={`${styles['pt-20']} ${styles['pb-20']}`}>
                 <iframe src={iframe_url} style={{ height: '426px', width: '500px', border: '0' }}></iframe>
                 <div className={styles['checkbox-material']}>
-                  <input id="save-card" type="checkbox" onClick={this.saveCardHandler} disabled={disableSaveCard} />
+                  <input id="save-card" type="checkbox" onClick={this.saveCardHandler} />
                   <label for="save-card"> {PAYMENT_PAGE.SAVE_THIS_CARD} </label>
                 </div>
               </div>
