@@ -19,7 +19,7 @@ const getAddressWithNameAndPhone = (store) => {
 
 const getAddrById = store => (addrId) => {
   if (store.shippingAddrReducer.data && store.shippingAddrReducer.data.length > 0) {
-    return store.shippingAddrReducer.data.filter(value => value.address_id === parseInt(addrId, 10));
+    return store.shippingAddrReducer.data.filter(value => parseInt(value.address_id, 10) === parseInt(addrId, 10));
   }
   return false;
 };
