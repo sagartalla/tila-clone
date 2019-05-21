@@ -36,7 +36,7 @@ class Search extends Component {
   constructor(props) {
     super(props);
     const {
-      query, isCategoryTree, choosenCategoryName, searchText,
+      query, isCategoryTree, choosenCategoryName,
     } = props;
     let finalQuery = query || (isCategoryTree ? choosenCategoryName : '');
     finalQuery = finalQuery.split('-').join(' ');

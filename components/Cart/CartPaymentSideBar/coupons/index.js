@@ -50,7 +50,7 @@ class Coupon extends Component {
       closeSlider, openSlider,
     } = this.props;
     const {
-      isCartLoading, cartData, LoadingState,
+      cartData, LoadingState,
     } = nextProps;
     this.setState({
       couponApplied: this.state.copuonAttempted && cartData.coupon_applied,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, OverlayTrigger, Popover } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import moment from 'moment';
 import Cookie from 'universal-cookie';
 

@@ -221,12 +221,12 @@ class OrderItem extends Component {
                           }
                         </div>
                         {product.warranty_duration && Object.keys(product.warranty_duration).length > 0 ?
-                          <p className={`${styles['mb-0']} ${styles['fs-12']} ${styles.flex}`}>
+                          <div className={`${styles['mb-0']} ${styles['fs-12']} ${styles.flex}`}>
                             <span className={`${styles.flex} ${styles['p-10']} ${styles.lable}`}>
                               <span>Warranty : </span>
                               <span className={`${styles['pl-10']} ${styles['pr-10']}`}><Warranty warranty={product.warranty_duration} /></span>
                             </span>
-                          </p>
+                          </div>
                           : null}
                       </div>
                     </Col>

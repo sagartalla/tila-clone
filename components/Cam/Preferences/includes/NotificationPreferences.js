@@ -5,7 +5,6 @@ import { bindActionCreators } from 'redux';
 import { PanelGroup, Panel } from 'react-bootstrap';
 
 import lang from '../../../../utils/language';
-import { languageDefinations } from '../../../../utils/lang/';
 import { actionCreators, selectors } from '../../../../store/cam/preferences';
 import { Preferences, settingValues } from './notification';
 import Button from '../../../common/CommonButton';
@@ -17,8 +16,6 @@ import styles_en from '../preferences_en.styl';
 import styles_ar from '../preferences_ar.styl';
 
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
-
-const { PREFERENCES } = languageDefinations();
 
 
 class NotificationPreferences extends React.Component {
