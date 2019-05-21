@@ -197,9 +197,8 @@ class Product extends Component {
 
   addToCompare(checked) {
     const {
-      productId, itemtype, media, displayName, categoryId, addToCompare, removeCompareData,
+      productId, itemtype, media, displayName, categoryId, addToCompare, removeCompareData, catalogId: catalog_id, variantId: variant_id,
     } = this.props;
-
     const src = `${constants.mediaDomain}/${media[0]}`;
     if (!checked) {
       addToCompare({
@@ -208,6 +207,11 @@ class Product extends Component {
         src,
         displayName,
         categoryId,
+        catalogObj: {
+          product_id: productId,
+          catalog_id,
+          variant_id,
+        },
       });
     } else removeCompareData(productId);
   }
