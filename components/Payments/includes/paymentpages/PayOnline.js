@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Grid, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators, selectors } from '../../../../store/payments';
@@ -57,7 +55,7 @@ class PayOnline extends Component {
   }
 
   render() {
-    const { voucherData, data, processData, showLoading } = this.props;
+    const { voucherData, data, showLoading } = this.props;
     const { disableSaveCard, iframe_url } = this.state
 
     return (

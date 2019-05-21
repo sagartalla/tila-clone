@@ -14,7 +14,7 @@ import MyGMap from '../../../Cam/ShippingAddress/includes/MyGMap';
 import SVGComponent from '../../../common/SVGComponet';
 
 import { languageDefinations } from '../../../../utils/lang';
-const {ORDER_PAGE,CART_PAGE} = languageDefinations();
+const {ORDER_PAGE} = languageDefinations();
 
 import lang from '../../../../utils/language';
 
@@ -80,8 +80,8 @@ class OrderHeader extends Component {
   render() {
     const { showToolTip, showModal } = this.state;
     const {
-      name, address, phone, orderId, orderDate, price,
-      shippingTotal, payments, currency_code, order_type,
+      name, address, orderId, orderDate, price,
+      payments, order_type,
     } = this.props.orderDetails;
     const {
       total_mrp = {}, total_shipping = {}, total_offer_price = {}, total_price = {}, total_gift_charges = {}, total_discount = {},
@@ -150,8 +150,8 @@ class OrderHeader extends Component {
                 {/* </Col> */}
                 {/* <Col md={12} sm={12}> */}
                   {payments && payments.length > 0 &&
-                    payments.map(p => (
-                      <Fragment>
+                    payments.map((p, index) => (
+                      <Fragment key={index}>
                         <div className={`${styles['lne-ht2']} ${styles['fs-14']}`}>
                           <Col className={`${styles['thick-gry-clr']} ${styles['text-capitalize']}`} md={6}>{p.payment_mode.replace('_', ' ')}</Col>
                           <Col md={6}> {`${p.amount.display_value} ${p.currency_code}`}</Col>

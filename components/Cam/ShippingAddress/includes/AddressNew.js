@@ -87,7 +87,7 @@ const AddressNew = (props) => {
           </Col>
           <Col md={6} sm={12} xs={12}>
             <div className={`${styles['fp-input']} ${styles['common-input-mb']}`}>
-              <input type="text" name="country_name" onChange={inputOnChange} value={data.country_name} autoComplete={false} className={styles.input} required />
+              <input type="text" name="country_name" onChange={inputOnChange} value={data.country_name} autoComplete="off" className={styles.input} required />
               <span className={styles.highlight} />
               <span className={styles.bar} />
               <label>{DELIVERY_ADDR_PAGE.COUNTRY}</label>
@@ -165,7 +165,7 @@ const AddressNew = (props) => {
           </Col>
           <Col md={2} sm={4} xs={4} className={`${styles['pr-0']}`}>
             <div className={`${styles['fp-input']} ${styles['common-input-mb']}`}>
-              <input type="number" name="mobile_country_code" value={data.mobile_country_code} className={styles.input} required />
+              <input type="number" name="mobile_country_code" defaultValue={data.mobile_country_code} className={styles.input} required />
               <span className={styles.highlight} />
               <span className={styles.bar} />
               <label>{DELIVERY_ADDR_PAGE.CODE}</label>
