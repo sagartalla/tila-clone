@@ -153,7 +153,7 @@ class OrderHeader extends Component {
                     payments.map(p => (
                       <Fragment>
                         <div className={`${styles['lne-ht2']} ${styles['fs-14']}`}>
-                          <Col className={`${styles['thick-gry-clr']} ${styles['text-capitalize']}`} md={6}>{p.payment_mode_dispaly_name.replace('_', ' ')}</Col>
+                          <Col className={`${styles['thick-gry-clr']} ${styles['text-capitalize']}`} md={6}>{p.payment_mode_display_name.replace('_', ' ')}</Col>
                           <Col md={6}> {`${p.amount.display_value} ${p.currency_code}`}</Col>
                         </div>
                         {p.card_type &&
