@@ -121,9 +121,9 @@ const AddressNew = (props) => {
               <label>{DELIVERY_ADDR_PAGE.CITY}</label>
               {
                 <div className={`${styles['auto-suggestions-list']}`}>
-                  {showCitiesData && getAllCities.map(result => (
+                  {showCitiesData && getAllCities.map((result, index) => (
                     <div
-                      key={result.rescity_nameult}
+                      key={index}
                       className={`${styles['auto-suggestions']} ${styles['bg-white']}`}
                     >
                       <div data-id={result.city_code} name="city_code" onClick={selectCityFromSuggesstions} className={`${styles.item} ${styles['fs-12']} ${styles['pl-5']} ${styles['ht-25']} ${styles.pointer}`}>{result.city_name}</div>
