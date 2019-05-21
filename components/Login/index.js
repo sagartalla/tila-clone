@@ -192,7 +192,7 @@ class Login extends Component {
   }
 
   render() {
-    const { userCreds, loadingStatus } = this.props;
+    const { userCreds, loadingStatus, userInfo } = this.props;
     const { mode, error, validation, clicked, showVerifyScreen } = this.state;
     return (
       <Modal className={`react-router-modal__modal ${styles['login-reg-modal']} ${styles['p-20']}`} onBackdropClick={this.onBackdropClick}>
@@ -388,7 +388,7 @@ class Login extends Component {
           </Col> :
           <Col md={6} xs={6} className={`${styles.flex}`}>
             <VerifyEmail
-              email={userCreds && userCreds.username}
+              email={userInfo.email}
               onBackdropClick={this.onBackdropClick}
               loadingStatus={loadingStatus}
             />
@@ -413,6 +413,7 @@ const mapStateToProps = store => ({
   showEmailScreen: selectors.showEmailVerificationScreen(store),
   loading: selectors.getLoginProgressStatus(store),
   loadingStatus: selectors.getLoadingStatus(store),
+  userInfo: selectors.getUserInfo(store),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(
