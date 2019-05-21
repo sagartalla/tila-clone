@@ -5,7 +5,7 @@ import Cookies from 'universal-cookie';
 
 import SVGCompoent from '../SVGComponet';
 import { selectors, actionCreators } from '../../../store/compare';
-import { Router } from '../../../routes';
+import { Link, Router } from '../../../routes';
 
 import lang from '../../../utils/language';
 
@@ -47,21 +47,24 @@ class CompareWidget extends React.Component {
           </div>
           <div className={styles['compare-items']}>
             <div style={{ width: `${cmpData.products.length * 180}px` }} className={`${styles['flex-center']} ${styles['justify-around']} ${styles['ht-240']}`}>
-              {cmpData.products.map(data => (
-                <div className={styles.item}>
-                  <div className={styles['item-image']}>
-                    <img className={styles.image} src={data.src} alt="" />
-                    <div>
-                      <a href="javascript: void(0)" className={`${styles.ellips} ${styles.width100}`}>
-                        {data.displayName}
-                      </a>
+              {cmpData.products.map((data) => {
+                const { catalogObj = {} } = data;
+                return (
+                  <div className={styles.item}>
+                    <div className={styles['item-image']}>
+                      <img className={styles.image} src={data.src} alt="" />
+                      <div>
+                        <a title={data.displayName} className={`${styles.ellips} ${styles.width100}`} href={`/${country}/${language}/product?productId=${catalogObj.product_id}${catalogObj.variant_id ? `&variantId=${catalogObj.variant_id}` : ''}&catalogId=${catalogObj.catalog_id}&itemType=${cmpData.itemtype}`}>
+                          {data.displayName}
+                        </a>
+                      </div>
+                    </div>
+                    <div data-id={data.productId} onClick={this.removeData} className={styles.close}>
+                      <span>x</span>
                     </div>
                   </div>
-                  <div data-id={data.productId} onClick={this.removeData} className={styles.close}>
-                    <span>x</span>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>
