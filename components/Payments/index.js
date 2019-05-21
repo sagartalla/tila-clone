@@ -350,7 +350,7 @@ class Payments extends React.Component {
                 configJson={paymentConfigJson.payment}
               />
             </Col>
-            <Col md={3} xs={12} sm={12} className={`${styles['pl-5']} ${styles['landscape-pr-0']} ${styles['m-p-l-15']}`}>
+            <Col md={3} xs={12} sm={12} className={`${styles['pl-5']} ${styles['landscape-pr-0']} ${styles['sidebar-payment']} ${styles['m-p-l-15']}`}>
               <div>
                 {
                   cartResults && (cartResults.total_price.money_value === 0 || cartResults.total_price.money_value > 0) ?
