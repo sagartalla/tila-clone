@@ -217,8 +217,13 @@ const getProductComponent = (isPreview, taskCode) => {
                         {
                           isPreview ? null : <Shipping shippingInfo={shippingInfo} offerInfo={offerInfo} warranty={warranty} />
                         }
-                        {
-                          isPreview ? null : shippingInfo.shippable && <AddToCart offerInfo={offerInfo} productData={productData.product_id}/>
+                        {isPreview ? null :
+                            <AddToCart
+                              offerInfo={offerInfo}
+                              productData={productData.product_id}
+                              shippingInfo={shippingInfo}
+                              isPreview={isPreview}
+                            />
                         }
                         {
                           (offerInfo.stockError || offerInfo.availabilityError) && (Object.keys(shippingInfo).length === 0 || shippingInfo.shippable) &&

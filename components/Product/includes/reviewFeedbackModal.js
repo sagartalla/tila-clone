@@ -171,7 +171,7 @@ export default class FeedbackModal extends Component {
               <Button
                 variant="primary"
                 onClick={this.sumbitFeedBack}
-                className={`${styles['btn-style']} ${styles['fs-16']}`}
+                className={`${styles['btn-style']} ${styles['fs-16']} ${styles['text-uppercase']}`}
               >
               {PDP_PAGE.SUBMIT_FEEDBACK}
               </Button>

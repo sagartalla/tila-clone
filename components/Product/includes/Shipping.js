@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Cookie from 'universal-cookie';
 import moment from 'moment';
-import ProductPrice from '../includes/ProductPrice';
+// import ProductPrice from '../includes/ProductPrice';
 import GeoWidget from '../../common/GeoWidget';
 import { languageDefinations } from '../../../utils/lang';
 import { actionCreators, selectors } from '../../../store/product';
@@ -119,9 +119,9 @@ class Shipping extends Component {
             </p>
           }
         </div>
-        {
+        {/* {
           !isPreview && <ProductPrice offerInfo={offerInfo} />
-        }
+        } */}
       </div>
     );
   }
