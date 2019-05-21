@@ -26,7 +26,7 @@ class MyGMap extends React.Component {
     this.state = {
       bounds: null,
       center: {
-        lat: 24.7135517, lng: 46.6752957,
+        lat: 24.7135517, lng: 46.6752957, // TODO: fetch from Browser
       },
       markers: [],
     };
