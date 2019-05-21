@@ -80,7 +80,7 @@ class NotificationPreferences extends React.Component {
     const { notificationPreferences } = this.state;
     return (
       <div className={`${styles['m-40']} ${styles.border}`}>
-        <PanelGroup accordion>
+        <PanelGroup accordion id="notification-preference">
           {Object.keys(Preferences).map((k, index) => (
             <Panel key={Preferences[k].heading} eventKey={k} className={`${styles['border-b']}`}>
               <Panel.Heading className={`${styles['p-10-20']}`}>

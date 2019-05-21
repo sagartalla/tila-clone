@@ -145,7 +145,7 @@ class OrderItem extends Component {
               final_price = {}, gift_charge = {}, mrp = {}, offer_price = {}, shipping_fees = {},
             } = product.price;
             return (
-              <React.Fragment>
+              <React.Fragment key={product.id}>
                 <div className={`${styles.relative} ${styles['ht-100P']} ${styles['products-wrap']} ${styles.flex} ${styles['p-15']}`}>
                   <div key={product.id} className={`${styles['product-item']} ${styles.width100} ${styles.flex}`}>
                     <Col md={2} className={styles['p-0']}>
@@ -172,8 +172,8 @@ class OrderItem extends Component {
                           <Col md={7} sm={7} className={styles['p-0']}>
                             <div className={`${styles.flex} ${styles['pt-15']} ${styles['pb-15']} ${styles['ipad-tp-5']} ${styles['ipad-tb-5']} ${styles['fs-12']} ${styles['thick-gry-clr']}`}>
                               {product.variantAttributes.length > 0 &&
-                                product.variantAttributes.map(attr => (
-                                  <span className={styles['pr-20']}>
+                                product.variantAttributes.map((attr, index) => (
+                                  <span className={styles['pr-20']} key={index}>
                                     <span>{attr.display_string} : </span>
                                     <span>{attr.attribute_values[0].value}</span>
                                   </span>
