@@ -105,7 +105,7 @@ const getProduct = (store, variantId) => {
     catalog_id: product_details.catalog_details.catalog_id,
     item_type: product_details.catalog_details.item_type_name,
     product_id: product_details.product_id,
-    variant_id
+    variant_id,
   };
   const keyfeatures = _.map(productAttributeMap.calculated_highlights.attribute_values, (kf) => kf.value);
   const extraOffers = priceInfo ? priceInfo.pricing.extra_offers_detail : [];

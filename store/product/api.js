@@ -61,7 +61,7 @@ const track = (params) => {
           productID: params.ProductData.catalogObj.product_id,
           variantId: params.ProductData.catalogObj.variant_id,
           itemType: params.ProductData.catalogObj.item_type,
-          breadcrums: params.ProductData.breadcrums.map(item => item.display_name_en),
+          breadcrums: params.ProductData.breadcrums ? params.ProductData.breadcrums.map(item => item.display_name_en) : [],
           catalogId: params.ProductData.catalogObj.catalog_id,
           listingId: params.ProductData.titleInfo.listingId,
           brandTitle: params.ProductData.titleInfo.brand,
