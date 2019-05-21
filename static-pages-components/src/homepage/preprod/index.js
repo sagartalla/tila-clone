@@ -278,7 +278,7 @@ const b_d_b = {
   Perfumes: '/SAU/en/srp/fragrance?categoryTree=true&isListed=false&sid=932,958,964',
   Shoes: '/SAU/en/srp?search=Shoes&language=en&isListed=false',
   Lights: '/SAU/en/srp/light?categoryTree=true&isListed=false&sid=932,937,940',
-  lamps: 'SAU/en/srp/lamp?categoryTree=true&isListed=false&sid=932,937,939',
+  lamps: '/SAU/en/srp/lamp?categoryTree=true&isListed=false&sid=932,937,939',
   bedding: '/SAU/en/srp/bedding-set?categoryTree=true&isListed=false&sid=932,941,942',
   furniture: '/SAU/en/srp/home-furnishing?categoryTree=true&isListed=false&sid=932,941',
 }
