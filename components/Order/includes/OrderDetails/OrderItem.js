@@ -131,8 +131,8 @@ class OrderItem extends Component {
       <div className={`${styles['date-cont']} ${styles['flx-spacebw-alignc']}`}>
         <div>
           <div className={styles['fs-12']}>{displayText()}</div>
-          <div className={`${styles['ff-t']} ${styles['fs-24']} ${styles['ipad-fs-20']}`}>
-            {btnType === 'cancel' ? moment(orderItem.products[0].promisedDeliveryDate).format('ddd, MMM Do') : !thankyouPage ? this.getDate(orderItem.products[0].state_time_estimates) : null}
+          <div className={`${styles['ff-t']} ${styles['fs-24']} ${styles['ipad-fs-20']}`}>          
+            {btnType === 'cancel' ? moment(orderItem.products[0].promisedDeliveryDate).format('ddd, MMM Do') : this.getDate(orderItem.products[0].state_time_estimates)}
           </div>
         </div>
       </div>
@@ -189,7 +189,7 @@ class OrderItem extends Component {
                             </div>
                           </Col>
                           {
-                            showPriceInfo && 
+                            showPriceInfo &&
                             <Col md={5} sm={5} className={styles['ipad-pr-0']}>
                               {product.price &&
                               <span className={`${styles['justify-end']} ${styles['flex-center']} ${styles['fs-16']} ${styles.fontW600}`}>

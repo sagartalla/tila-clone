@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 const getShippingAddressResults = (store) => {
   if (store.shippingAddrReducer.data && store.shippingAddrReducer.data.length > 0) {
     return store.shippingAddrReducer.data;
@@ -19,14 +21,14 @@ const getAddressWithNameAndPhone = (store) => {
 
 const getAddrById = store => (addrId) => {
   if (store.shippingAddrReducer.data && store.shippingAddrReducer.data.length > 0) {
-    return store.shippingAddrReducer.data.filter(value => value.address_id === parseInt(addrId, 10));
+    return store.shippingAddrReducer.data.filter(value => value.address_id == addrId); // Don't change to ===
   }
   return false;
 };
 
 const getDefaultAddress = (store) => {
-  const ddA = store.shippingAddrReducer.data.deliverToAddress
-  if(ddA) {
+  const ddA = store.shippingAddrReducer.data.deliverToAddress;
+  if (ddA) {
     return ddA;
   }
   if (store.shippingAddrReducer.data && store.shippingAddrReducer.data.length > 0) {

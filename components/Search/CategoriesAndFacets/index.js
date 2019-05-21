@@ -53,7 +53,6 @@ class CategoriesAndFacets extends Component {
 
   render() {
     const { filters, facets } = this.props;
-    console.log(filters, facets);
     return (
       <PanelGroup accordion>
         {filters.category.map((filter, index) => (

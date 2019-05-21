@@ -76,7 +76,7 @@ class TitleInfo extends Component {
 
   addToCompare({ target }) {
     const {
-      addToCompare, product_id, itemtype, media, title, categoryId, removeCompareData,
+      addToCompare, product_id, itemtype, media, title, categoryId, removeCompareData, catalogObj,
     } = this.props;
     const src = `${constants.mediaDomain}/${media}`;
     if (target.checked) {
@@ -86,6 +86,7 @@ class TitleInfo extends Component {
         src,
         displayName: title,
         categoryId,
+        catalogObj,
       });
     } else removeCompareData(product_id);
   }
@@ -119,7 +120,6 @@ class TitleInfo extends Component {
       totalInventoryCount, isPreview, listingId, listingCartData, comparable, cmpData, offerInfo, isLoggedIn,
     } = this.props;
     const { showCheckoutModal } = this.state;
-    console.log('showCheckoutModal', showCheckoutModal);
     return (
       <div className={styles['pb-10']}>
         <div className={`${styles.fontW300} ${styles['lgt-blue']} ${styles['flx-space-bw']}`}>

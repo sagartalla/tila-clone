@@ -16,7 +16,6 @@ class PolicyPage extends Base {
   }
 
   render() {
-    console.log('PolicyPage')
     const { url } = this.props;
     return (
       <div>
