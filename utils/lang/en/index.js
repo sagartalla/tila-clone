@@ -706,6 +706,7 @@ export const EN_KEYWORDS = {
     CREDIT_CARDS_VOUCHERS_REWARD_POINTS: 'Credit Cards, Vouchers and Rewards',
     MY_COUPONS: 'My Coupons',
     PREFERENCES: 'Preferences',
+    REVIEWS_AND_RATINGS: 'My reviews & ratings',
   },
   PREFERENCES: {
     PAGE_TITLE: 'Notification and Communication Preferences',
@@ -722,5 +723,8 @@ export const EN_KEYWORDS = {
     SALE_EVENT_AND_CAMPAIGN_UPDATE_SUB: 'Signup to receive Flash sales, new launches and latest campaigns',
     FEEDBACK_SURVEY_AND_PRODUCT_REVIEW_HEADING: 'Feedback surveys and Product Reviews',
     FEEDBACK_SURVEY_AND_PRODUCT_REVIEW_SUB: 'Signup to receive personalized discounts and coupons',
+  },
+  REVIEWS: {
+
   },
 };

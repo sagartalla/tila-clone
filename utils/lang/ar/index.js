@@ -583,7 +583,7 @@ export const AR_KEYWORDS = {
     THIS_ITEM: 'هذا المنتج؟',
     PLEASE_SELECT_SIZE_TO_CONTINUE: 'يرجى اختيار مقاس المنتج للمتابعه',
     SUCCESS: 'نجاح',
-    ORDER_DETAILS_SUMMERY: 'ملخص الطلب'
+    ORDER_DETAILS_SUMMERY: 'ملخص الطلب',
   },
   COUPON_OFFERS: {
     VIEW_TERMS: 'استعرض الشروط والأحكام',
@@ -639,7 +639,8 @@ export const AR_KEYWORDS = {
     NO_ORDERS: 'عذراً! لا يوجد طلبات حتى الآن. ابدأ بالتسوَّق',
     REQUEST_INVOICE: 'Request Invoice',
     ORDER_TOTAL: 'Order Total',
-    NEED_HELP: 'Need Help',  },
+    NEED_HELP: 'Need Help',
+  },
   BETA: {
     BETA: 'فترة تجريبية',
   },
@@ -688,6 +689,7 @@ export const AR_KEYWORDS = {
     CREDIT_CARDS_VOUCHERS_REWARD: 'والمكافآتبطاقات الائتمان والقسائم ',
     MY_COUPONS: 'قسائم بلدي',
     PREFERENCES: 'تفضيلات',
+    REVIEWS_AND_RATINGS: 'بلدي الاستعراضات والتقييمات',
   },
   PREFERENCES: {
     PAGE_TITLE: 'Notification and Communication Preferences',
@@ -704,5 +706,8 @@ export const AR_KEYWORDS = {
     SALE_EVENT_AND_CAMPAIGN_UPDATE_SUB: 'Signup to receive Flash sales, new launches and latest campaigns',
     FEEDBACK_SURVEY_AND_PRODUCT_REVIEW_HEADING: 'Feedback surveys and Product Reviews',
     FEEDBACK_SURVEY_AND_PRODUCT_REVIEW_SUB: 'Signup to receive personalized discounts and coupons',
+  },
+  REVIEWS: {
+
   },
 };
