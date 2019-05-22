@@ -114,7 +114,7 @@ class CashOnDelivery extends React.Component {
       this.state.nextStep === 'captcha' && (
         <div className={styles['checkbox-material']}>
           <input id="pay-delivery" type="checkbox" onChange={ this.handleChange } checked={ this.state.checked }/>
-          <label for="pay-delivery"> {PAYMENT_PAGE.I_AGREE_TO_PAY_COD} </label>
+          <label htmlFor="pay-delivery"> {PAYMENT_PAGE.I_AGREE_TO_PAY_COD} </label>
         </div>
       )
     }

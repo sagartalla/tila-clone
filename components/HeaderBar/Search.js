@@ -14,9 +14,6 @@ import { Router } from '../../routes';
 import SVGComponent from '../common/SVGComponet';
 import DragDropUpload from '../common/DragDropUpload';
 import lang from '../../utils/language';
-
-import CustomToggle from './CustomToggle';
-
 import main_en from '../../layout/main/main_en.styl';
 import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './header_en.styl';
@@ -39,7 +36,7 @@ class Search extends Component {
   constructor(props) {
     super(props);
     const {
-      query, isCategoryTree, choosenCategoryName, searchText,
+      query, isCategoryTree, choosenCategoryName,
     } = props;
     let finalQuery = query || (isCategoryTree ? choosenCategoryName : '');
     finalQuery = finalQuery.split('-').join(' ');
@@ -215,7 +212,6 @@ class Search extends Component {
 
 Search.propTypes = {
   getSearchResults: PropTypes.func.isRequired,
-  searchText: PropTypes.string.isRequired,
   onChangeSearchText: PropTypes.func.isRequired,
 };
 

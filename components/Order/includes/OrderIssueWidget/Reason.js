@@ -235,14 +235,15 @@ class Reason extends Component {
                 className={styles['select-text']}
                 required
                 onChange={this.selectReason}
+                defaultValue={"default"}
               >
-                <option disabled selected>
+                <option disabled value="default">
                   {loadingStatus
                     ? ORDER_PAGE.LOADING
                     : ORDER_PAGE.SELECT_REASON}
                 </option>
-                {reasons.map(reason => (
-                  <option key={reason.id} value={reason.name}>
+                {reasons.map((reason, index) => (
+                  <option key={index} value={reason.name}>
                     {reason.name}
                   </option>
                 ))}
@@ -260,8 +261,9 @@ class Reason extends Component {
                 <select
                   className={styles['select-text']}
                   onChange={this.selectSubReason}
+                  defaultValue={"default"}
                 >
-                  <option disabled selected>
+                  <option disabled value="default">
                     {loadingStatus
                       ? ORDER_PAGE.LOADING
                       : ORDER_PAGE.SELECT_SUB_REASON}

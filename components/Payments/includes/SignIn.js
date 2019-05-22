@@ -106,9 +106,9 @@ class SignIn extends Component {
                 }
               </div>
               <div className={`${styles['fp-input']}`}>
-                <input type="password" name="password" onChange={props.inputOnChange} value={props.login.password} className={styles.input} required />
-                <span className={styles.highlight} />
-                <span className={styles.bar} />
+                <input type="password" name="password" onChange={props.inputOnChange} value={props.login.password || ''} className={styles.input} required />
+                <span className={styles['highlight']}></span>
+                <span className={styles['bar']}></span>
                 <label>{PAYMENT_PAGE.PASSWORD}</label>
                 {
                   props.validation.password.message

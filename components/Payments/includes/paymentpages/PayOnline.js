@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Grid, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators, selectors } from '../../../../store/payments';
@@ -68,8 +66,8 @@ class PayOnline extends Component {
               <div className={`${styles['pt-20']} ${styles['pb-20']}`}>
                 <iframe src={iframe_url} style={{ height: '426px', width: '500px', border: '0' }}></iframe>
                 <div className={styles['checkbox-material']}>
-                  <input id="save-card" type="checkbox" onClick={this.saveCardHandler} />
-                  <label for="save-card"> {PAYMENT_PAGE.SAVE_THIS_CARD} </label>
+                  <input id="save-card" type="checkbox" onClick={this.saveCardHandler} disabled={disableSaveCard} />
+                  <label htmlFor="save-card"> {PAYMENT_PAGE.SAVE_THIS_CARD} </label>
                 </div>
               </div>
               :

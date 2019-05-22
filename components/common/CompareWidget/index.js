@@ -5,7 +5,7 @@ import Cookies from 'universal-cookie';
 
 import SVGCompoent from '../SVGComponet';
 import { selectors, actionCreators } from '../../../store/compare';
-import { Link, Router } from '../../../routes';
+import { Router } from '../../../routes';
 
 import lang from '../../../utils/language';
 
@@ -50,7 +50,7 @@ class CompareWidget extends React.Component {
               {cmpData.products.map((data) => {
                 const { catalogObj = {} } = data;
                 return (
-                  <div className={styles.item}>
+                  <div className={styles.item} key={data.productId}>
                     <div className={styles['item-image']}>
                       <img className={styles.image} src={data.src} alt="" />
                       <div>

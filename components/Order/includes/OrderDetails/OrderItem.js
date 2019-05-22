@@ -145,7 +145,7 @@ class OrderItem extends Component {
               final_price = {}, gift_charge = {}, mrp = {}, offer_price = {}, shipping_fees = {}, discount = {},
             } = product.price;
             return (
-              <React.Fragment>
+              <React.Fragment key={product.id}>
                 <div className={`${styles.relative} ${styles['ht-100P']} ${styles['products-wrap']} ${styles.flex} ${styles['p-15']}`}>
                   <div key={product.id} className={`${styles['product-item']} ${styles.width100} ${styles.flex}`}>
                     <Col md={2} className={styles['p-0']}>
@@ -172,8 +172,8 @@ class OrderItem extends Component {
                           <Col md={7} sm={7} className={styles['p-0']}>
                             <div className={`${styles.flex} ${styles['pt-15']} ${styles['pb-15']} ${styles['ipad-tp-5']} ${styles['ipad-tb-5']} ${styles['fs-12']} ${styles['thick-gry-clr']}`}>
                               {product.variantAttributes.length > 0 &&
-                                product.variantAttributes.map(attr => (
-                                  <span className={styles['pr-20']}>
+                                product.variantAttributes.map((attr, index) => (
+                                  <span className={styles['pr-20']} key={index}>
                                     <span>{attr.display_string} : </span>
                                     <span>{attr.attribute_values[0].value}</span>
                                   </span>
@@ -221,12 +221,12 @@ class OrderItem extends Component {
                           }
                         </div>
                         {product.warranty_duration && Object.keys(product.warranty_duration).length > 0 ?
-                          <p className={`${styles['mb-0']} ${styles['fs-12']} ${styles.flex}`}>
+                          <div className={`${styles['mb-0']} ${styles['fs-12']} ${styles.flex}`}>
                             <span className={`${styles.flex} ${styles['p-10']} ${styles.lable}`}>
                               <span>Warranty : </span>
                               <span className={`${styles['pl-10']} ${styles['pr-10']}`}><Warranty warranty={product.warranty_duration} /></span>
                             </span>
-                          </p>
+                          </div>
                           : null}
                       </div>
                     </Col>

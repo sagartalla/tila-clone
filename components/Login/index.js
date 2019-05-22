@@ -94,13 +94,13 @@ class Login extends Component {
     this.props.onBackdropClick(showVerifyScreen);
   }
 
-  validateEmail = (fieldvalue, state) => {
+  validateEmail = (fieldvalue) => {
     const emailReg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (emailReg.test(fieldvalue)) return false;
     return true;
   }
 
-  validateLengthPassword = (fieldvalue, state) => {
+  validateLengthPassword = (fieldvalue) => {
     if (fieldvalue && fieldvalue.length >= 8) return false;
     return true;
   }

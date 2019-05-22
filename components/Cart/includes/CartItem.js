@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, OverlayTrigger, Popover } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import moment from 'moment';
 import Cookie from 'universal-cookie';
 
@@ -211,14 +211,14 @@ class CartItem extends React.Component {
                     ))}
                   <React.Fragment>
                     <div className={`${styles['warranty-part']} ${styles['p-10']} ${styles['light-gry-clr']}`}>
-                      <p className={`${styles['mb-0']} ${styles['fs-12']} ${styles['flex']}`}>
+                      <div className={`${styles['mb-0']} ${styles['fs-12']} ${styles['flex']}`}>
                         <span className={styles['thick-gry-clr']}>Warranty : </span>
                         <span className={`${styles['pl-10']} ${styles['pr-10']}`}>
                           {(warranty_duration && Object.keys(warranty_duration).length > 0) && warranty_duration.duration !== 0 ?
                             <Warranty warranty={warranty_duration} />
                             : 'No Warranty'}
                         </span>
-                      </p>
+                      </div>
                       {
                         shipping !== null && (shipping.shippable && (
                           <p className={`${styles['mb-0']} ${styles['fs-12']}`}>
@@ -230,7 +230,7 @@ class CartItem extends React.Component {
                       }
                     </div>
                     <div data-id={item_id} className={`${styles['checkbox-material']} ${styles['mt-15']}`}>
-                      <input data-id={item_id} id={"gift" + item_id} type="checkbox" checked={checked} onClick={this.giftChecked} />
+                      <input data-id={item_id} id={"gift" + item_id} type="checkbox" defaultChecked={checked} onClick={this.giftChecked} />
                       <label htmlFor={"gift" + item_id}> {CART_PAGE.SEND_GIFT} {(gift_info && gift_info.gift_rate) ? "(" + gift_info.gift_rate + " " + cur + ")" : ''} </label>
                     </div>
                     {checked && showMessage &&
