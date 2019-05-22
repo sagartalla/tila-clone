@@ -83,6 +83,12 @@ class Search extends Component {
     });
   }
 
+  setSelectionRange = () => {
+    const { query } = this.state;
+    const input = document.getElementById('text-box');
+    input.focus();
+    input.setSelectionRange(query.length, query.length);
+  }
   setSearchText(e) {
     this.setState({
       query: e.target.textContent,
@@ -162,15 +168,16 @@ class Search extends Component {
 
           <Dropdown id="search-toggle" className={`${styles['cart-inn']} ${styles.width100}`}>
             <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
-              <div className={styles.overlap}>
+              <div className={styles.overlap} tabIndex="0" contentEditable="true" onFocus={this.setSelectionRange}>
             {query.length < 1 ? '' : autoSearchValue || suggestions.length > 0 && (query === suggestions[0].data_edgengram.slice(0, query.length) ? suggestions[0].data_edgengram : '')}</div>
               <input
                 className={styles['search-input']}
+                id="text-box"
                 placeholder={SEARCH_PAGE.SEARCH_YOUR_FAV_ITEM}
                 onChange={this.onChangeSearchInput}
                 value={query}
                 onKeyDown={this.handleSearch}
-              />
+                />
             </Dropdown.Toggle>
             <Dropdown.Menu className={`${styles.width100} ${styles['p-0']} ${styles['m-0']}`}>
               {suggestions.length > 0 &&
