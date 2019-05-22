@@ -1,12 +1,9 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import { Tabs, Tab } from 'react-bootstrap';
 import Review from './Reviews';
 import OverView from './ElectronicsOverView';
 import Description from './ElectronicsDescription';
-import Specification from './ElectronicsSpecifications';
 // import Compare from './ElectronicsCompare';
-import SVGCompoent from '../../common/SVGComponet';
 
 import lang from '../../../utils/language';
 
@@ -20,7 +17,7 @@ const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styl
 const ElectronicsTab = ({ catalog, productDescription, catalogObj }) => {
   return (
     <div>
-      <Tabs defaultActiveKey={1}>
+      <Tabs defaultActiveKey={1} id="electronics-tab">
         <Tab eventKey={1} title="Overview">
           <OverView  catalog={catalog}/>
         </Tab>

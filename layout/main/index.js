@@ -2,11 +2,11 @@
 import React from 'react';
 import { ModalContainer } from 'react-router-modal';
 import { ToastContainer } from 'react-toastify';
-import Cookie from 'universal-cookie';
+// import Cookie from 'universal-cookie';
 
 import Betalogo from '../../components/common/Beta'
 
-const cookies = new Cookie();
+// const cookies = new Cookie();
 
 import lang from '../../utils/language';
 

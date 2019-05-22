@@ -169,7 +169,7 @@ class VaultAddNewCard extends Component {
                 <Col md={12} className={styles['pl-0']}>
                   <div className={`${styles['checkbox-material']} ${styles['flex-center']} ${styles['pb-30']} ${styles['mt-30']}`}>
                     <input id="card-check" type="checkbox" onClick={setAsDefaultCard} defaultChecked={checked} />
-                    <label for="card-check" className={styles['fs-12']}> {VAULT_PAGE.SAVE_CARD_MSG}</label>
+                    <label htmlFor="card-check" className={styles['fs-12']}> {VAULT_PAGE.SAVE_CARD_MSG}</label>
                   </div>
                 </Col>
               </Col>

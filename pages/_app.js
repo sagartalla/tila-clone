@@ -6,7 +6,7 @@ import EnableStorage from '../components/helpers/EnableStorage';
 class MyApp extends App {
 
   static async getInitialProps(initArgs) {
-    const { Component, router, ctx } = initArgs;
+    const { Component, ctx } = initArgs;
     const { query } = ctx;
     let pageProps = {}
     if(Component.getInitialProps) {

@@ -1,5 +1,4 @@
 import React, { Component,Fragment } from 'react';
-import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { Grid, Row, Col } from 'react-bootstrap';
 import getConfig from 'next/config';
@@ -55,13 +54,11 @@ const getURl = (page) => {
                 JS: 'https://static-dev.tila.com/tila-static-pages/fashion/index.js',
                 CSS: 'https://static-dev.tila.com/tila-static-pages/fashion/style.css'
               };
-              break;
           case 'preprod':
               return {
                 JS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/fashion/preprod/index.js',
                 CSS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/fashion/preprod/style.css',
               };
-              break;
         }
         break;
     case 'Electronics':
@@ -72,13 +69,11 @@ const getURl = (page) => {
                 JS: 'https://static-dev.tila.com/tila-static-pages/electronics/index.js',
                 CSS: 'https://static-dev.tila.com/tila-static-pages/electronics/style.css'
               };
-              break;
           case 'preprod':
               return {
                 JS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/electronics/preprod/index.js',
                 CSS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/electronics/preprod/style.css',
               };
-              break;
         }
         break;
     case 'Lifestyle':
@@ -89,13 +84,11 @@ const getURl = (page) => {
                 JS: 'https://static-dev.tila.com/tila-static-pages/lifestyle/index.js',
                 CSS: 'https://static-dev.tila.com/tila-static-pages/lifestyle/style.css'
               };
-              break;
           case 'preprod':
               return {
                 JS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/lifestyle/preprod/index.js',
                 CSS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/lifestyle/preprod/style.css',
               };
-              break;
         }
         break;
     case 'HomePage':
@@ -106,13 +99,11 @@ const getURl = (page) => {
                 JS: 'https://static-dev.tila.com/tila-static-pages/homepage/stage/index.js',
                 CSS: 'https://static-dev.tila.com/tila-static-pages/homepage/stage/style.css',
               };
-              break;
           case 'preprod':
               return {
                 JS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/homepage/preprod/index.js',
                 CSS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/homepage/preprod/style.css',
               };
-              break;
         }
 
         break;
@@ -194,7 +185,6 @@ class Landing extends Component {
   }
   render() {
     const { query } = this.props;
-    const { category } = query;
     return (
       <Fragment>
         <HeaderBar query={query} />

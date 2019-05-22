@@ -3,8 +3,6 @@ import _ from 'lodash';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Modal } from 'react-router-modal';
-
 import RightSideBar from '../../Cart/CartPaymentSideBar';
 import constants from '../../../constants';
 import { actionCreators as cartActionCreators, selectors as cartSelectors } from '../../../store/listingCart';
@@ -70,13 +68,13 @@ class TitleInfo extends Component {
   addToCart() {
     const { listingId, getCartResults } = this.props;
     this.props.addToCart({
-      listing_id: this.props.listingId,
-    }, this.props.listingId);
+      listing_id: listingId,
+    }, listingId);
   }
 
   addToCompare({ target }) {
     const {
-      addToCompare, product_id, itemtype, media, title, categoryId, removeCompareData,
+      addToCompare, product_id, itemtype, media, title, categoryId, removeCompareData, catalogObj,
     } = this.props;
     const src = `${constants.mediaDomain}/${media}`;
     if (target.checked) {
@@ -86,13 +84,14 @@ class TitleInfo extends Component {
         src,
         displayName: title,
         categoryId,
+        catalogObj,
       });
     } else removeCompareData(product_id);
   }
 
   checkoutInstantHandler() {
     const { showCheckoutModal } = this.state;
-    const { listingCartData, listingId, removeCartItem } = this.props;
+    const { listingCartData, removeCartItem } = this.props;
 
     if (!showCheckoutModal) { // adding item to cart
       this.addToCart();
@@ -115,11 +114,10 @@ class TitleInfo extends Component {
 
   render() {
     const {
-      brand, title, rating, reviews, price, originalPrice, discountPercent, product_id,
-      totalInventoryCount, isPreview, listingId, listingCartData, comparable, cmpData, offerInfo, isLoggedIn,
+      brand, title, rating, product_id,
+      totalInventoryCount, isPreview, listingCartData, comparable, cmpData, isLoggedIn,
     } = this.props;
     const { showCheckoutModal } = this.state;
-    console.log('showCheckoutModal', showCheckoutModal);
     return (
       <div className={styles['pb-10']}>
         <div className={`${styles.fontW300} ${styles['lgt-blue']} ${styles['flx-space-bw']}`}>

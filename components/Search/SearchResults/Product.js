@@ -197,9 +197,8 @@ class Product extends Component {
 
   addToCompare(checked) {
     const {
-      productId, itemtype, media, displayName, categoryId, addToCompare, removeCompareData,
+      productId, itemtype, media, displayName, categoryId, addToCompare, removeCompareData, catalogId: catalog_id, variantId: variant_id,
     } = this.props;
-
     const src = `${constants.mediaDomain}/${media[0]}`;
     if (!checked) {
       addToCompare({
@@ -208,6 +207,11 @@ class Product extends Component {
         src,
         displayName,
         categoryId,
+        catalogObj: {
+          product_id: productId,
+          catalog_id,
+          variant_id,
+        },
       });
     } else removeCompareData(productId);
   }
@@ -246,7 +250,7 @@ class Product extends Component {
     const popover = (
       <Popover id={productId}>
         {variants.length > 0 && variants[selectedIndex].offersApplied &&
-          variants[selectedIndex].offersApplied.map(offer => <div>{offer}</div>)}
+          variants[selectedIndex].offersApplied.map((offer, index) => <div key={`${offer}${index}`}>{offer}</div>)}
       </Popover>
     );
 
@@ -378,7 +382,7 @@ class Product extends Component {
                           checked={cmpData.products &&
                             _.findIndex(cmpData.products, o => o.productId === productId) > -1}
                         />
-                        <label for="add-to-compare-srp" className={`${styles['fs-12']}`}> {PDP_PAGE.ADD_TO_COMPARE}</label>
+                        <label htmlFor="add-to-compare-srp" className={`${styles['fs-12']}`}> {PDP_PAGE.ADD_TO_COMPARE}</label>
                       </div>
                       }
                   </div>

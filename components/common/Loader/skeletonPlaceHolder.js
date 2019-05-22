@@ -141,6 +141,7 @@ export const productPlaceHolder = (
         {
           [0, 1, 2].map((el, i) => (
             <Input
+              key={`rect_${i}`}
               style={{
                     height: '3em', width: '50%', marginRight: '20px',
                 }}
@@ -157,6 +158,7 @@ export const productPlaceHolder = (
         {
           [0, 1, 2].map((el, i) => (
             <Rectangle
+              key={`rect_${i}`}
               style={{
                   width: 400, marginBottom: 20, marginRight: 20, height: 76, marginTop: 20,
              }}
@@ -173,6 +175,7 @@ export const productPlaceHolder = (
         {
           [0, 1, 2].map((el, i) => (
             <Rectangle
+              key={`rect_${i}`}
               style={{
                   width: '400px', height: '200px',
                   }}

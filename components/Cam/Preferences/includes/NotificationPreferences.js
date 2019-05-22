@@ -5,7 +5,6 @@ import { bindActionCreators } from 'redux';
 import { PanelGroup, Panel } from 'react-bootstrap';
 
 import lang from '../../../../utils/language';
-import { languageDefinations } from '../../../../utils/lang/';
 import { actionCreators, selectors } from '../../../../store/cam/preferences';
 import { Preferences, settingValues } from './notification';
 import Button from '../../../common/CommonButton';
@@ -17,8 +16,6 @@ import styles_en from '../preferences_en.styl';
 import styles_ar from '../preferences_ar.styl';
 
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
-
-const { PREFERENCES } = languageDefinations();
 
 
 class NotificationPreferences extends React.Component {
@@ -38,7 +35,6 @@ class NotificationPreferences extends React.Component {
   }
 
   componentWillReceiveProps(newProps) {
-    console.log('daddw', newProps);
     const { notificationPreferences } = newProps;
     this.setState({
       notificationPreferences,
@@ -81,7 +77,7 @@ class NotificationPreferences extends React.Component {
     const { notificationPreferences } = this.state;
     return (
       <div className={`${styles['m-40']} ${styles.border}`}>
-        <PanelGroup accordion>
+        <PanelGroup accordion id="notification-preference">
           {Object.keys(Preferences).map((k, index) => (
             <Panel key={Preferences[k].heading} eventKey={k} className={`${styles['border-b']}`}>
               <Panel.Heading className={`${styles['p-10-20']}`}>
@@ -114,7 +110,7 @@ class NotificationPreferences extends React.Component {
                           data-group={k}
                           data-value={s.value}
                           onChange={this.changeSetting}
-                          checked={notificationPreferences && notificationPreferences[k] && notificationPreferences[k].setting_value &&
+                          defaultChecked={notificationPreferences && notificationPreferences[k] && notificationPreferences[k].setting_value &&
                             _.findIndex(notificationPreferences[k].setting_value, v => v === s.value) > -1}
                         />
                         <label htmlFor={`${k}-${s.value}`} className={`${styles['fs-12']}`}> {s.title}</label>
