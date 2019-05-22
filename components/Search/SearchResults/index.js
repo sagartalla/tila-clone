@@ -51,7 +51,6 @@ class SearchResults extends Component {
   }
 
   async loadMore() {
-    return;
     if (!this.props.pagiantionDetails.hasMore){
       return;
     }
