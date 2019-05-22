@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Modal } from 'react-router-modal';
 import NoSSR from 'react-no-ssr';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';

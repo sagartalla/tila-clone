@@ -110,7 +110,7 @@ class NotificationPreferences extends React.Component {
                           data-group={k}
                           data-value={s.value}
                           onChange={this.changeSetting}
-                          checked={notificationPreferences && notificationPreferences[k] && notificationPreferences[k].setting_value &&
+                          defaultChecked={notificationPreferences && notificationPreferences[k] && notificationPreferences[k].setting_value &&
                             _.findIndex(notificationPreferences[k].setting_value, v => v === s.value) > -1}
                         />
                         <label htmlFor={`${k}-${s.value}`} className={`${styles['fs-12']}`}> {s.title}</label>
