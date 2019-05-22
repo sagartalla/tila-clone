@@ -142,7 +142,7 @@ class OrderItem extends Component {
         <Col md={7} sm={7} className={`${styles['pl-0']} ${styles['pr-0']} ${styles.flex} ${styles['flex-colum']}`}>
           {orderItem.products.map((product) => {          
             const {
-              final_price = {}, gift_charge = {}, mrp = {}, offer_price = {}, shipping_fees = {},
+              final_price = {}, gift_charge = {}, mrp = {}, offer_price = {}, shipping_fees = {}, discount = {},
             } = product.price;
             return (
               <React.Fragment key={product.id}>
@@ -203,7 +203,7 @@ class OrderItem extends Component {
                                       {product && product.offers && product.offers.length > 0 ?
                                         product.offers.map(offer => <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{offer.coupon_code ? offer.coupon_code : offer.description} : </span><span>{'(-)'} {offer.discount.display_value} {offer.discount.currency_code}</span></li>)
                                         :
-                                        <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.DISCOUNT} :</span><span>{'(-)'} {mrp.display_value - offer_price.display_value} {offer_price.currency_code}</span></li>
+                                        <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.DISCOUNT} :</span><span>{'(-)'} {discount.display_value} {discount.currency_code}</span></li>
                                       }
                                       {offer_price &&
                                       <li className={`${styles['flx-space-bw']} ${styles['b-t']}`}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.PRICE} :</span><span> {offer_price.display_value} {offer_price.currency_code}</span></li>}

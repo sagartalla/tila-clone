@@ -23,7 +23,6 @@ class PayOnline extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      disableSaveCard: false
     }
     this.saveCardHandler = this.saveCardHandler.bind(this);
     this.fetchIframe = this.fetchIframe.bind(this);
@@ -31,7 +30,6 @@ class PayOnline extends Component {
 
   saveCardHandler(e) {
     this.props.saveCard(e);
-    this.setState({ disableSaveCard: true });
   }
 
   fetchIframe() {
@@ -55,8 +53,8 @@ class PayOnline extends Component {
   }
 
   render() {
-    const { voucherData, data, showLoading } = this.props;
-    const { disableSaveCard, iframe_url } = this.state
+    const { voucherData, data, processData, showLoading } = this.props;
+    const { disableSaveCard, iframe_url } = this.state;
 
     return (
       <div className={`${styles['pay-online']}`}>

@@ -19,12 +19,12 @@ const AddressBody = (props) => {
   const deleteAddr = (e) => {
     const confirmDelete = confirm("Are you sure you want to delete this address?");
     if (confirmDelete) {
-      props.deleteAddr(e.target.id || e.target.parentNode.id)
+      props.deleteAddr(e.currentTarget.id);
     }
   };
 
   const editAddress = (e) => {
-    props.editAddress(e.target.id || e.target.parentNode.id);
+    props.editAddress(e.currentTarget.id);
   }
 
   const makeDefaultAddress = (e) => {

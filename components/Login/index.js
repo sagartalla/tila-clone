@@ -188,11 +188,11 @@ class Login extends Component {
   }
 
   handleClick() {
-    this.setState({forgotPassword: true});
+    this.setState({ forgotPassword: true });
   }
 
   render() {
-    const { userCreds, loadingStatus } = this.props;
+    const { userCreds, loadingStatus, userInfo } = this.props;
     const { mode, error, validation, clicked, showVerifyScreen } = this.state;
     return (
       <Modal className={`react-router-modal__modal ${styles['login-reg-modal']} ${styles['p-20']}`} onBackdropClick={this.onBackdropClick}>
@@ -227,8 +227,8 @@ class Login extends Component {
               error
                 ?
                   <div className={`${styles['text-center']} ${styles['error-msg']}`}>
-                  <span>{error}</span>
-                </div>
+                    <span>{error}</span>
+                  </div>
                 :
                 null
             }
@@ -371,35 +371,33 @@ class Login extends Component {
               </div>
             </form>
             <div className={styles['pl-15']}>
-              {
-                this.state.mode === 'register'
-                  ?
-                    <h4 className={`${styles['ff-b']} ${styles['fs-14']} ${styles['m-fs-14']} ${styles['m-t-c']}`}>
-                    <span>{LOGIN_PAGE.HAVE_ACCOUNT}&nbsp;</span>
-                    <span className={styles['link-text']} onClick={this.toggleLoginSignUp}>{LOGIN_PAGE.SIGN_IN}</span>
-                  </h4>
-                  :
-                  <h4 className={`${styles['ff-b']} ${styles['fs-14']} ${styles['m-fs-14']} ${styles['m-t-c']}`}>
-                    <span>{LOGIN_PAGE.NO_ACCOUNT} &nbsp;</span>
-                    <span className={styles['link-text']} onClick={this.toggleLoginSignUp}>{LOGIN_PAGE.SIGN_UP}</span>
-                  </h4>
+              {this.state.mode === 'register' ?
+                <h4 className={`${styles['ff-b']} ${styles['fs-14']} ${styles['m-fs-14']} ${styles['m-t-c']}`}>
+                  <span>{LOGIN_PAGE.HAVE_ACCOUNT}&nbsp;</span>
+                  <span className={styles['link-text']} onClick={this.toggleLoginSignUp}>{LOGIN_PAGE.SIGN_IN}</span>
+                </h4>
+              :
+                <h4 className={`${styles['ff-b']} ${styles['fs-14']} ${styles['m-fs-14']} ${styles['m-t-c']}`}>
+                  <span>{LOGIN_PAGE.NO_ACCOUNT} &nbsp;</span>
+                  <span className={styles['link-text']} onClick={this.toggleLoginSignUp}>{LOGIN_PAGE.SIGN_UP}</span>
+                </h4>
               }
             </div>
           </Col> :
           <Col md={6} xs={6} className={`${styles.flex}`}>
             <VerifyEmail
-              email={userCreds && userCreds.username}
+              email={userInfo.email}
               onBackdropClick={this.onBackdropClick}
               loadingStatus={loadingStatus}
             />
           </Col>
           }
-          </div>
+        </div>
           :
-          <ForgotPassword
-            enteredEmail={this.state.email}
-          />
-          }
+        <ForgotPassword
+          enteredEmail={this.state.email}
+        />
+      }
 
         </Row>
       </Modal>
@@ -413,6 +411,7 @@ const mapStateToProps = store => ({
   showEmailScreen: selectors.showEmailVerificationScreen(store),
   loading: selectors.getLoginProgressStatus(store),
   loadingStatus: selectors.getLoadingStatus(store),
+  userInfo: selectors.getUserInfo(store),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(

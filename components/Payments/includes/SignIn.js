@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import NoSSR from 'react-no-ssr';
 import Terms from '../../common/terms';
-import { Modal } from "react-router-modal";
+import { Modal } from 'react-router-modal';
 import Privacy from '../../common/privacy';
 import SVGComponent from '../../common/SVGComponet';
 import { languageDefinations } from '../../../utils/lang/';
 import SocialLogin from '../../Login/SocialLogin';
+import ForgotPassword from '../../Login/ForgotPassword';
 
 import lang from '../../../utils/language';
 
@@ -15,10 +16,10 @@ import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from '../payment_en.styl';
 import styles_ar from '../payment_ar.styl';
 
-const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
 
-const { PAYMENT_PAGE, CONTACT_INFO_MODAL } = languageDefinations();
+const { PAYMENT_PAGE, CONTACT_INFO_MODAL, LOGIN_PAGE } = languageDefinations();
 
 class SignIn extends Component {
   constructor(props) {
@@ -26,6 +27,7 @@ class SignIn extends Component {
     this.state = {
       showTerms: false,
       showPrivacy: false,
+      showFP: false,
     }
 
     this.tcToggle = this.tcToggle.bind(this);
@@ -40,12 +42,16 @@ class SignIn extends Component {
     this.setState({ showPrivacy: !this.state.showPrivacy });
   }
 
+  toggleForgotPassword = () => {
+    this.setState({ showFP: !this.state.showFP });
+  }
+
   render() {
     const { props } = this;
-    const { showTerms, showPrivacy } = this.state;
+    const { showTerms, showPrivacy, showFP } = this.state;
     return (
-      <div className={`${styles['box']} ${styles['mb-20']} ${styles['relative']} ${styles['payment-signup']}`}>
-        <SVGComponent clsName={`${styles['profile']} ${props.configJson.done ? 'done' : ''} ${props.configJson.progress ? 'payment-active' : ''}`} src="icons/profile/profile" />
+      <div className={`${styles.box} ${styles['mb-20']} ${styles.relative} ${styles['payment-signup']}`}>
+        <SVGComponent clsName={`${styles.profile} ${props.configJson.done ? 'done' : ''} ${props.configJson.progress ? 'payment-active' : ''}`} src="icons/profile/profile" />
         <Row className={`${props.configJson.done ? '' : 'hide'} ${styles['flex-center']} ${styles['m-blk']}`}>
           <Col md={8} sm={12} xs={12}>
             <h4 className={styles['m-0']}>{`${PAYMENT_PAGE.REGISTER} or ${PAYMENT_PAGE.SIGN_IN}`}</h4>
@@ -57,7 +63,7 @@ class SignIn extends Component {
           </Col>
           {props.login.username ?
           <Col md={4} sm={12} xs={12} className={styles['t-rt']}>
-            <span className={`${styles['light-gry-clr']} ${styles['fontW600']}`}>{props.login.username}&emsp;</span>
+            <span className={`${styles['light-gry-clr']} ${styles.fontW600}`}>{props.login.username}&emsp;</span>
             <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']}`} onClick={props.onClickEdit}>
               {CONTACT_INFO_MODAL.EDIT}
             </button>
@@ -73,14 +79,14 @@ class SignIn extends Component {
                 <SocialLogin>
                   {([handleSocialLogin]) => {
                     return (
-                      <>
-                      <button onClick={handleSocialLogin('facebook')} className={`${styles['fp-btn']} ${styles['mb-20']} ${styles['fp-btn-primary']} ${styles['facebook-btn']}`}>{PAYMENT_PAGE.SIGN_IN_WITH_FACEBOOK}</button>
-                      <button onClick={handleSocialLogin('google')} className={`${styles['fp-btn']} ${styles['mb-20']} ${styles['fp-btn-danger']} ${styles['google-btn']}`}>{PAYMENT_PAGE.SIGN_IN_WITH_GOOGLE}</button>
-                      </>
-                    )
+                      <React.Fragment>
+                        <button onClick={handleSocialLogin('facebook')} className={`${styles['fp-btn']} ${styles['mb-20']} ${styles['fp-btn-primary']} ${styles['facebook-btn']}`}>{PAYMENT_PAGE.SIGN_IN_WITH_FACEBOOK}</button>
+                        <button onClick={handleSocialLogin('google')} className={`${styles['fp-btn']} ${styles['mb-20']} ${styles['fp-btn-danger']} ${styles['google-btn']}`}>{PAYMENT_PAGE.SIGN_IN_WITH_GOOGLE}</button>
+                      </React.Fragment>
+                    );
                   }}
                 </SocialLogin>
-             </NoSSR>
+              </NoSSR>
               {/* <button className={`${styles['fp-btn']} ${styles['fp-btn-sucess']} ${styles['regist-btn']}`}>{PAYMENT_PAGE.REGISTER_WITH_US}</button> */}
             </div>
           </Col>
@@ -89,16 +95,15 @@ class SignIn extends Component {
             <div className={styles['sign-part']}>
               <div className={`${styles['fp-input']}`}>
                 <input type="text" name="username" onChange={props.inputOnChange} value={props.login.username} className={styles.input} required />
-                <span className={styles['highlight']}></span>
-                <span className={styles['bar']}></span>
+                <span className={styles.highlight} />
+                <span className={styles.bar} />
                 <label>{PAYMENT_PAGE.EMAIL_OR_USERNAME}</label>
-                {
-                    props.validation.username.message
-                      ?
-                        <span className={`${styles['error-msg']}`}>{props.validation.username.message}</span>
-                      :
-                      null
-                  }
+                {props.validation.username.message
+                  ?
+                    <span className={`${styles['error-msg']}`}>{props.validation.username.message}</span>
+                  :
+                    null
+                }
               </div>
               <div className={`${styles['fp-input']}`}>
                 <input type="password" name="password" onChange={props.inputOnChange} value={props.login.password || ''} className={styles.input} required />
@@ -113,10 +118,15 @@ class SignIn extends Component {
                     null
                 }
               </div>
+              <a className={`${styles.flex} ${styles['pt-10']} ${styles['m-fs-14']} ${styles['m-justy-center']}`}>
+                <span onClick={this.toggleForgotPassword}>
+                  {this.state.mode !== 'register' && LOGIN_PAGE.FORGOT_PASSWORD}
+                </span>
+              </a>
               <div className={`${styles['mt-10']} ${styles['mb-10']}`}>
                 <input type="checkbox" defaultChecked="true" /> {PAYMENT_PAGE.AGREE_TO} <a onClick={this.tcToggle}>{PAYMENT_PAGE.TC}</a> {PAYMENT_PAGE.AND} <a onClick={this.privacyToggle}>{PAYMENT_PAGE.PRIVACY_POLICY}</a>
               </div>
-              <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles['fontW600']} ${styles['text-uppercase']}`} onClick={props.showAddressTab}>{PAYMENT_PAGE.CONTINUE}</button>
+              <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles.fontW600} ${styles['text-uppercase']}`} onClick={props.showAddressTab}>{PAYMENT_PAGE.CONTINUE}</button>
               {
                 props.signInLoader ? <span> {PAYMENT_PAGE.PLEASE_WAIT}...</span> : null
               }
@@ -144,7 +154,15 @@ class SignIn extends Component {
             </div>
             : null
         }
-
+        {showFP &&
+          <Modal className={`react-router-modal__modal ${styles['p-20']}`} onBackdropClick={this.toggleForgotPassword}>
+            <ForgotPassword
+              isCheckoutPage
+              enteredEmail={props.login.username}
+              toggleModal={this.toggleForgotPassword}
+            />
+          </Modal>
+        }
       </div>
     );
   }

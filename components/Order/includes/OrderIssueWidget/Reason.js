@@ -70,7 +70,7 @@ class Reason extends Component {
   };
   getReplaceData = (exchangeVariant) => {
     const { query } = this.props;
-    const findData = exchangeVariant.filter(el =>
+    const findData = exchangeVariant && exchangeVariant.filter(el =>
       el.listing.variant_id === query.variantId &&
       el.listing.total_inventory_count > 0);
 
@@ -103,7 +103,6 @@ class Reason extends Component {
     const { reason, subReason, selectedVariant, comment, variantId, selectedMode } = this.state
 
     let listingObj = orderDetails.order_items.find((order) => order.order_id === orderId);
-
     const params = {
       orderId,
       issueType: issueType,
@@ -125,8 +124,8 @@ class Reason extends Component {
       (selectedMode === 'Return' || selectedMode === 'Cancel')
     ) {
       this.props.setOrderIssueData(params);
-      this.props.setAddressData(reasonParams)
-      this.props.refundOptions(orderIssue.selectedItem.id)
+      this.props.setAddressData(reasonParams);
+      this.props.refundOptions(orderIssue.selectedItem.id, orderIssue.issueType);
       goToNextStep();
     }
     else if (

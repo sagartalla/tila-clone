@@ -33,14 +33,12 @@ const RenderRadioInput = ({ paymentType, value, onCallBack }) => {
 class ChoosePaymentMode extends Component {
   constructor(props) {
     super(props)
-
-    this.getPaymentModes = this.getPaymentModes.bind(this)
-    this.onOptionChange = this.onOptionChange.bind(this)
-    this.saveAndGoNext = this.saveAndGoNext.bind(this)
+    this.getPaymentModes = this.getPaymentModes.bind(this);
+    this.onOptionChange = this.onOptionChange.bind(this);
+    this.saveAndGoNext = this.saveAndGoNext.bind(this);
     this.state = {
-      paymentType: Object.keys(props.orderIssue.refundOptions).length > 0 &&
-                    props.orderIssue.refundOptions[props.orderIssue.issueType].indexOf("BACK_TO_SOURCE") !== -1
-                    ? 'Online' : 'Wallet'
+      paymentType: props.orderIssue && props.orderIssue.refundOptions && props.orderIssue.refundOptions.refund_modes && props.orderIssue.refundOptions.refund_modes.indexOf("BACK_TO_SOURCE") !== -1
+        ? 'Online' : 'Wallet',
     }
   }
   componentWillRecieveProps(nextProps) {
@@ -76,8 +74,7 @@ class ChoosePaymentMode extends Component {
     />
     ]
 
-    if (Object.keys(refundOptions).length > 0
-        && refundOptions[orderIssue.issueType].indexOf("BACK_TO_SOURCE") !== -1) {
+    if (refundOptions && refundOptions.refund_modes.indexOf("BACK_TO_SOURCE") !== -1) {
       data.push(
         <RenderRadioInput
           key={'radio_2'}
@@ -93,11 +90,10 @@ class ChoosePaymentMode extends Component {
   render() {
     const { orderDetails, orderIssue, goToNextStep } = this.props;
     const { paymentType } = this.state;
-    if(!Object.keys(orderIssue.refundOptions).length) {
+    if(!(orderIssue && orderIssue.refundOptions && orderIssue.refundOptions.refund_modes && orderIssue.refundOptions.refund_modes.length)) {
       return <div>Loading...</div>
     }
-    if(Object.keys(orderIssue.refundOptions).length > 0
-     && orderIssue.refundOptions[orderIssue.issueType][0] === 'NIL') {
+    if(!(orderIssue && orderIssue.refundOptions && orderIssue.refundOptions.refund_eligible) || (orderIssue && orderIssue.refundOptions && orderIssue.refundOptions.refund_modes && orderIssue.refundOptions.refund_modes[0] === 'NIL')) {
        goToNextStep()
      }
     return (
