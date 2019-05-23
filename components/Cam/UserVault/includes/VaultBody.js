@@ -39,7 +39,7 @@ class VaultBody extends Component {
 
   render() {
     const { VAULT_PAGE } = languageDefinations();
-    const { data, toggleAddCardBlock } = this.props;
+    const { data } = this.props;
     return (
       <div className={`${styles['vault-card-body']} ${styles['p-20-40']}`}>
         <h4 className={`${styles['pb-5']} ${styles['fontW300']} ${styles['lgt-blue']}`}>{VAULT_PAGE.MANAGE_SAVED_CARDS}</h4>
@@ -75,7 +75,7 @@ class VaultBody extends Component {
                         card.default ?
                           <div>
                             <label className={`${styles['fs-12']} ${styles['pr-5']}`}> {VAULT_PAGE.DEFAULT} </label>
-                            <input type="radio" className={`${styles['tickmark-radio']}`} name="make-default" checked="checked" onClick={this.makeCardDefault.bind(this, card_token)} />
+                            <input type="radio" className={styles['tickmark-radio']} name="make-default" defaultChecked="checked" onClick={this.makeCardDefault.bind(this, card_token)} />
                           </div>
                           :
                           <span>

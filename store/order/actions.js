@@ -85,9 +85,9 @@ const actionCreators = {
       data:param
     },
   }),
-  getRefundOptions: params => ({
+  getRefundOptions: (orderItemId, issueType) => ({
     type: actions.GET_REFUND_OPTIONS,
-    payload: api.getRefundOptions(params),
+    payload: api.getRefundOptions(orderItemId, issueType),
   }),
   setReason: params => ({
     type: actions.SET_REASON,

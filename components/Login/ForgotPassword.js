@@ -16,7 +16,7 @@ import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './login_en.styl';
 import styles_ar from './login_ar.styl';
 
-const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
 const { LOGIN_PAGE } = languageDefinations();
 
@@ -92,6 +92,14 @@ class ForgotPassword extends Component {
       showInput: '',
     });
   }
+
+  resetShowLogin = () => {
+    const { isCheckoutPage, resetShowLogin, toggleModal } = this.props;
+    if (isCheckoutPage) {
+      toggleModal();
+    } else resetShowLogin();
+  }
+
   render() {
     const {
       errorMsg, userNameError, email, showInput,
@@ -112,7 +120,7 @@ class ForgotPassword extends Component {
                 :
           <div>
             <VerifyStatus
-              resetLogin={this.props.resetShowLogin}
+              resetLogin={this.resetShowLogin}
               switchState={this.switchState}
               showInput={showInput}
               forgotPasswordStatus={this.props.forgotPasswordStatus}
@@ -147,4 +155,5 @@ ForgotPassword.defaultProps = {
   forgotPassword: f => f,
   forgotPasswordStatus: '',
 };
+
 export default connect(mapStateToProps, mapDispatchToProps)(ForgotPassword);

@@ -104,7 +104,7 @@ class SavedCards extends Component {
                     onClick={this.selectCard(card.card_token)}
                     checked={this.state.card_token ? (this.state.card_token === card.card_token) : card.default}
                   />
-                  <label for={`card-${index}`} className={`${styles['card-label']} ${styles['flex']} ${styles['justify-between']}`}>
+                  <label htmlFor={`card-${index}`} className={`${styles['card-label']} ${styles['flex']} ${styles['justify-between']}`}>
                     <span className={`${styles['flex']} ${styles['fontW300']}`}>
                       {
                         this.paymentIcons(card.provider_type) ?

@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Cookies from 'universal-cookie';
-import { languageDefinations } from '../../../utils/lang/';
 import { Link } from '../../../routes';
 import { selectors, actionCreators } from '../../../store/cam/personalDetails';
 import { bindActionCreators } from 'redux';
@@ -17,7 +16,6 @@ import styles_ar from './sidebar_ar.styl';
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const cookies = new Cookies();
-const { PERSONAL_INFO_MODAL } = languageDefinations();
 const language = cookies.get('language') || 'en';
 const country = cookies.get('country') || 'SAU';
 
