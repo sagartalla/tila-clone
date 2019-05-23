@@ -137,13 +137,11 @@ class CartItem extends React.Component {
     const {
       item,
       count,
-      routeChange,
       increaseItemCnt,
       decreaseItemCnt,
       addToWishlist,
       removeCartItem,
       cartStepperInputHandler,
-      addOrRemoveGift,
 
     } = this.props;
     const { gift_card_message, checked, showMessage } = this.state;
