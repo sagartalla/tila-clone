@@ -80,19 +80,19 @@ class Reason extends Component {
           <input
             className={styles['radio-btn']}
             type="radio"
-            value="Replace"
+            value={ORDER_PAGE.REPLACE}
             checked={this.state.selectedMode === 'Replace'}
             onChange={this.onOptionChange}
           />
-          <label className={styles['pl-10']}> Replace</label>
+          <label className={styles['pl-10']}> {ORDER_PAGE.REPLACE}</label>
         </div>,
       ];
     }
 
     return [
       <div key='replace-disable'>
-        <input type="radio" className={styles['radio-btn']} value="Replace" checked={false} disabled />
-        <label className={styles['pl-10']}>Replace</label>
+        <input type="radio" className={styles['radio-btn']} value={ORDER_PAGE.REPLACE} checked={false} disabled />
+        <label className={styles['pl-10']}>{ORDER_PAGE.REPLACE}</label>
       </div>,
     ];
   };
@@ -203,7 +203,6 @@ class Reason extends Component {
     const { selectedMode, displaySizeError } = this.state;
     const selectedReason = reasons.filter(reason => reason.name === this.state.reason)[0]
     const issueType_small = issueType.toLowerCase();
-    console.log(issueType_small);
     return (
       <div className={`${styles['reason-item-main']} ${styles['width100']}`}>
         <h4 className={`${styles['fs-20']} ${styles['fontW300']} ${styles['ml-20']} ${styles['mr-20']}`}>{ORDER_PAGE.WHY_DO_YOU_WANT_TO} {issueType_small} {ORDER_PAGE.THIS_ITEM}</h4>
