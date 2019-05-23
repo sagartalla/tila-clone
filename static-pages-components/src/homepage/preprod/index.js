@@ -432,7 +432,7 @@ const HomePage = () => (
       <Row className={`${styles['m-15']} ${styles['mt-40']} ${styles['mb-40']} brand-details-inn`}>
         {threeCols.map(col => (
           <Col md={4} xs={4} sm={4}>
-            <a href={col.link}>
+            <a href={col.link} key={col.title}>
               <img src={col.img} alt={col.title} className="img-responsive-in" />
             </a>
           </Col>
@@ -513,7 +513,7 @@ const HomePage = () => (
       </div>
       <Row className={`${styles['m-15']} ${styles['mt-40']} ${styles['mb-40']} brand-details-inn`}>
         {twoCols.map(col => (
-          <Col md={6} xs={6} sm={6}>
+          <Col md={6} xs={6} sm={6} key={col.title}>
             <img src={col.img} alt={col.title} className="img-responsive-in" />
           </Col>
         ))}
@@ -615,7 +615,7 @@ const HomePage = () => (
         >
           {b_y_l.map(i => (
             <Col key={i} md={3} xs={3} sm={3}>
-              <a href={i.links}>
+              <a href={i.links} key={i.title}>
                 <div className="image">
                   <img src={i.img} alt={i.img} />
                 </div>

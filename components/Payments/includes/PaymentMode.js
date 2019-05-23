@@ -1,20 +1,16 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 
 import Voucher from './paymentpages/Voucher';
-import GiftCard from './paymentpages/GiftCard';
 import SVGComponent from '../../common/SVGComponet';
 import PayOnline from './paymentpages/PayOnline';
-import NetBanking from './paymentpages/NetBanking';
-import RewardPoints from './paymentpages/RewardPoints';
 import CashOnDelivery from './paymentpages/CashOnDelivery';
 import SavedCards from './paymentpages/SavedCards';
 
-import { actionCreators, selectors } from '../../../store/payments';
+import { selectors } from '../../../store/payments';
 
 import {languageDefinations} from '../../../utils/lang'
 
@@ -226,6 +222,7 @@ class PaymentMode extends Component {
                               return showTab == key
                               ?
                                 <Page
+                                  key={key}
                                   saveCard={props.saveCard}
                                   voucherData={props.paymentModesData.voucherData}
                                   data={props.paymentModesData.paymentModes[key]}

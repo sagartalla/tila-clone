@@ -55,7 +55,7 @@ class ReturnExchange extends Component {
                </div>
                <div className={styles['ret-ex-radio']}>
                  <input onChange={this.setType} id="return-item" name="exch-retrn" type="radio" value={ORDER_ISSUE_TYPES.RETURN} />
-                 <label for="return-item">
+                 <label htmlFor="return-item">
                    {/* insert image here */}
                    <div>
                      <span>{ORDER_PAGE.RETURN}</span>
@@ -65,7 +65,7 @@ class ReturnExchange extends Component {
                </div>
                <div className={styles['ret-ex-radio']}>
                  <input onChange={this.setType} id="exch-item" name="exch-retrn" type="radio" value={ORDER_ISSUE_TYPES.EXCHANGE} />
-                 <label for="exch-item">
+                 <label htmlFor="exch-item">
                    {/* insert image here */}
                    <div>
                      <span>{ORDER_PAGE.EXCHANGE}</span>

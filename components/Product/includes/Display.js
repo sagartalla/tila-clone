@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import { Link } from '../../../routes';
-import { Grid, Row, Col } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 import constants from '../../../constants';
 import SVGComponent from '../../common/SVGComponet';
 // import userAgent from '../../../utils/user-agent';
@@ -72,11 +72,11 @@ class Display extends Component {
     } = this.props;
     return (
       <div className={`${styles['ht-100per']} ${styles['mobile-slide-part']}`}>
-        {breadcrums.length > 0 &&
+        {breadcrums && breadcrums.length > 0 &&
           <div className={`${styles['breadcrums-part']} ${styles['fs-12']}`}>
             {breadcrums.map((crum, index) => (
-              <span>
-                <Link route={this.getUrl(crum)}>{crum.display_name_en}</Link>
+              <span key={crum.id}>
+                <Link route={this.getUrl(crum)}><a>{crum.display_name_en}</a></Link>
                 {breadcrums.length - 1 !== index &&
                   <span className={`${styles['label-gry-clr']}`}>&nbsp;&nbsp;{'>'}&nbsp;&nbsp;</span>}
               </span>

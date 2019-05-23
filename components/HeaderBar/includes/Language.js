@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Dropdown, MenuItem } from "react-bootstrap";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import _ from 'lodash';
 import Cookies from 'universal-cookie';
-import { decode, encode, addUrlProps, replaceInUrlQuery } from 'react-url-query';
 
 import { actionCreators, selectors } from '../../../store/auth';
 
