@@ -241,6 +241,9 @@ export const AR_KEYWORDS = {
     GET_NOTIFIED: 'قم بإخباري',
     HIDE_OUT_OF_STOCK: 'اخفاء ما نفذت كميته',
     PLEASE_SELECT_PRODUCT_SIZE: 'يرجى  اختيار قياس المنتج',
+    THANKS_FOR_RATING: 'Thanks for Rating',
+    PDP_DONE: 'Done',
+    THANKS_DESCRIPTION: 'Thanks for taking your time to rate the product, this will help millions of users like you to make better purchase judgement',
   },
   VAULT_PAGE: {
     MANAGE_VAULT_HDR: 'التحكّم بالبطاقات والقسائم الشرائيه والمزيد',

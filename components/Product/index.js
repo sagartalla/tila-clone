@@ -260,7 +260,7 @@ const getProductComponent = (isPreview, taskCode) => {
                     }
                     </Col> */}
                     <Col md={8}>
-                      <ElectronicsTab catalog={catalog} catalogObj={catalogObj} productDescription={productDescription} />
+                      <ElectronicsTab titleInfo={titleInfo} catalog={catalog} catalogObj={catalogObj} productDescription={productDescription} />
                     </Col>
                   </Row>
                 </Grid>
