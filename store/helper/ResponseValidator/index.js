@@ -1,0 +1,83 @@
+import ResponseFormats from './ResponseFormats';
+
+function recurseAndCheckType(expectedFormat, exisitingFormat, canBeEmpty, isOptional) {
+  if(canBeEmpty && exisitingFormat.length === 0) {
+    return true;
+  }
+  if(isOptional && (typeof exisitingFormat === 'undefined')) {
+    return true;
+  }
+  // console.log('testing verify', expectedFormat, exisitingFormat, canBeEmpty, isOptional);
+  const temp = expectedFormat.constructor.name;
+  const expectedType = temp === 'String' ? expectedFormat : temp;
+  const exisitingType = exisitingFormat === null ? null : exisitingFormat.constructor.name;
+  // console.log('testing verify 1', expectedType, exisitingType);
+  let isValid = true;
+  if(expectedType !== exisitingType) {
+    return false;
+  }
+  if(expectedType === 'Object') {
+    const keys = Object.keys(expectedFormat);
+    for(var i = 0; i < keys.length; i++) {
+      // console.log('testing object for loop', i, keys[i]);
+      if(!isValid) {
+        break;
+      }
+      if(keys[i] === 'RANDOM_ID') {
+        const values = Object.values(exisitingFormat);
+        for(var j = 0; j < values.length; j++) {
+          if(!isValid) {
+            break;
+          }
+          isValid = isValid && recurseAndCheckType(expectedFormat[keys[i]].value, values[j], expectedFormat[keys[i]].canBeEmpty, expectedFormat[keys[i]].isOptional);
+        }
+      } else {
+        const expectedFormatValue = expectedFormat[keys[i]].value;
+        const passingValue = expectedFormatValue === 'RECURSE' ? {
+          "RANDOM_ID": {
+            canBeEmpty: expectedFormat[keys[i]].canBeEmpty,
+            value: expectedFormat
+          }
+        } : expectedFormatValue;
+        isValid = isValid && recurseAndCheckType(passingValue, exisitingFormat[keys[i]], expectedFormat[keys[i]].canBeEmpty, expectedFormat[keys[i]].isOptional);
+      }
+    }
+    return isValid;
+  } else if(expectedType === 'Array') {
+    for(var i = 0; i < exisitingFormat.length; i++) {
+      // console.log('testing array for loop', i, expectedFormat[i]);
+      if(!expectedFormat[i]) {
+        break;
+      }
+      isValid = isValid && recurseAndCheckType(expectedFormat[i], exisitingFormat[i], expectedFormat[i].canBeEmpty, expectedFormat[i].isOptional);
+    }
+    return isValid;
+  } else {
+     return true;
+  }
+}
+
+const validate = (type, payload) => {
+  if(ResponseFormats[type]) {
+    return recurseAndCheckType(ResponseFormats[type], payload);
+  }
+  return true;
+}
+
+const responseValidator = ({ getState }) => {
+  return next => action => {
+    if(!action.payload) {
+      return next(action);
+    }
+    const a = validate(action.type, action.payload.data)
+    // console.log('validation' , action.type, a);
+    if(a){
+      return next(action);
+    }
+    return next({
+      type: 'INVALID_API_RESPONSE'
+    });
+  }
+} 
+
+export default responseValidator;
