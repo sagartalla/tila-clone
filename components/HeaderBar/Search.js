@@ -104,7 +104,7 @@ class Search extends Component {
     const { suggestions } = this.props;
     if (e.keyCode === 9 || e.keyCode === 39) {
       this.setState({
-        query: suggestions.length > 0 && suggestions[0].data_edgengram,
+        query: suggestions && suggestions.length > 0 && suggestions[0].data_edgengram,
       });
     }
   }
@@ -170,7 +170,7 @@ class Search extends Component {
           <Dropdown id="search-toggle" className={`${styles['cart-inn']} ${styles.width100}`}>
             <Dropdown.Toggle id="dropdown-custom-components">
               <div className={styles.overlap} tabIndex="0" onFocus={this.setSelectionRange}>
-                {query.length < 1 ? '' : (autoSearchValue || suggestions.length > 0) && (query === suggestions[0].data_edgengram.slice(0, query.length) ? suggestions[0].data_edgengram : '')}
+                {query.length < 1 ? '' : (autoSearchValue || (suggestions.length > 0 && query === suggestions[0].data_edgengram.slice(0, query.length) ? suggestions[0].data_edgengram : ''))}
               </div>
               <SearchContext.Consumer>
                 {context => (
