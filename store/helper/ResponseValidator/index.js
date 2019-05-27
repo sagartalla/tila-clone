@@ -4,7 +4,7 @@ import Sentry from '../../../utils/sentryUtil';
 let stack = [];
 
 function recurseAndCheckType(expectedFormat, exisitingFormat, canBeEmpty, isOptional) {
-  // console.log('testing verify', expectedFormat, exisitingFormat, canBeEmpty, isOptional);
+  console.log('testing verify', expectedFormat, exisitingFormat, canBeEmpty, isOptional);
   stack.push(`testing verify expectedFormat:${expectedFormat}, exisitingFormat:${exisitingFormat}, canBeEmpty:${canBeEmpty}, isOptional:${isOptional}`);
   if(canBeEmpty && exisitingFormat.length === 0) {
     return true;
@@ -15,8 +15,8 @@ function recurseAndCheckType(expectedFormat, exisitingFormat, canBeEmpty, isOpti
   const temp = expectedFormat.constructor.name;
   const expectedType = temp === 'String' ? expectedFormat : temp;
   const exisitingType = exisitingFormat === null ? null : exisitingFormat.constructor.name;
-  // console.log('testing verify 1', expectedType, exisitingType);
-  stach.push(`testing verify type, expectedType: ${expectedType}, exisitingFormat: ${exisitingFormat}`);
+  console.log('testing verify 1', expectedType, exisitingType);
+  stack.push(`testing verify type, expectedType: ${expectedType}, exisitingFormat: ${exisitingFormat}`);
   let isValid = true;
   if(expectedType !== exisitingType) {
     return false;
@@ -24,7 +24,7 @@ function recurseAndCheckType(expectedFormat, exisitingFormat, canBeEmpty, isOpti
   if(expectedType === 'Object') {
     const keys = Object.keys(expectedFormat);
     for(var i = 0; i < keys.length; i++) {
-      // console.log('testing object for loop', i, keys[i], `isValid: ${isValid}`);
+      console.log('testing object for loop', i, keys[i], `isValid: ${isValid}`);
       stack.push(`testing object for loop, i:${i}, keys[i]:${keys[i]}, isValid: ${isValid}`);
       if(!isValid) {
         break;
@@ -51,7 +51,7 @@ function recurseAndCheckType(expectedFormat, exisitingFormat, canBeEmpty, isOpti
     return isValid;
   } else if(expectedType === 'Array') {
     for(var i = 0; i < exisitingFormat.length; i++) {
-      // console.log('testing array for loop', i, expectedFormat[i], `isValid: ${isValid}`);
+      console.log('testing array for loop', i, expectedFormat[i], `isValid: ${isValid}`);
       stack.push(`testing array for loop, i:${i}, expectedFormat[i]: ${expectedFormat[i]}, isValid: ${isValid}`);
       if(!expectedFormat[i]) {
         break;
@@ -66,6 +66,7 @@ function recurseAndCheckType(expectedFormat, exisitingFormat, canBeEmpty, isOpti
 
 const validate = (type, payload) => {
   stack = [];
+  console.log('ResponseFormats[type]', ResponseFormats[type]);
   if(ResponseFormats[type]) {
     return recurseAndCheckType(ResponseFormats[type], payload);
   }
@@ -84,9 +85,9 @@ const responseValidator = ({ getState }) => {
           Sentry.captureException(stack);
         }
     } catch (e) {
-      Sentry.captureException(err);
+      Sentry.captureException(e);
     }
-    if(a){
+    if(result){
       return next(action);
     }
     return next({

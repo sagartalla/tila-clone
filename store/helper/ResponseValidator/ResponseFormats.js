@@ -385,6 +385,7 @@ const formats = {
                                     "VALUE_TYPE": "Number"
                                 },
                                 "shipping": {
+                                    "isOptional": true,
                                     "VALUE_TYPE": {
                                         "listing_id": {
                                             "VALUE_TYPE": "String"
@@ -605,6 +606,43 @@ const formats = {
                                     }
                                 },
                                 "active": { "VALUE_TYPE": "Boolean" }
+                            }
+                        ]
+                    }
+                }
+            },
+            "tree": {
+                "VALUE_TYPE": {
+                    "finance": {
+                        "VALUE_TYPE": [
+                            {
+                                "id": {
+                                    "VALUE_TYPE": "Number"
+                                },
+                                "display_name_en": {
+                                    "VALUE_TYPE": "String"
+                                },
+                                "isLeaf": {
+                                    "VALUE_TYPE": "Boolean"
+                                },
+                                "finance_id": {
+                                    "VALUE_TYPE": "String"
+                                }
+                            }
+                        ]
+                    },
+                    "breadcrumb": {
+                        "VALUE_TYPE": [
+                            {
+                                "id": {
+                                    "VALUE_TYPE": "Number"
+                                },
+                                "display_name_en": {
+                                    "VALUE_TYPE": "String"
+                                },
+                                "isLeaf": {
+                                    "VALUE_TYPE": "Boolean"
+                                }
                             }
                         ]
                     }
