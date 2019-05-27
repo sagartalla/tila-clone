@@ -1,6 +1,8 @@
 import typeToReducer from 'type-to-reducer';
 
-const initialState = {};
+const initialState = {
+  isApiResponseInvalid: false
+};
 
 const instantCheckoutReducer = typeToReducer({
   "INVALID_API_RESPONSE" : (state) => {
