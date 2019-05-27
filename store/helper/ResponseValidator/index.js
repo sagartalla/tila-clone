@@ -1,17 +1,17 @@
 import ResponseFormats from './ResponseFormats';
 
 function recurseAndCheckType(expectedFormat, exisitingFormat, canBeEmpty, isOptional) {
+  console.log('testing verify', expectedFormat, exisitingFormat, canBeEmpty, isOptional);
   if(canBeEmpty && exisitingFormat.length === 0) {
     return true;
   }
-  if(isOptional && (typeof exisitingFormat === 'undefined')) {
+  if(isOptional && ((typeof exisitingFormat === 'undefined') || (exisitingFormat === null))) {
     return true;
   }
-  // console.log('testing verify', expectedFormat, exisitingFormat, canBeEmpty, isOptional);
   const temp = expectedFormat.constructor.name;
   const expectedType = temp === 'String' ? expectedFormat : temp;
   const exisitingType = exisitingFormat === null ? null : exisitingFormat.constructor.name;
-  // console.log('testing verify 1', expectedType, exisitingType);
+  console.log('testing verify 1', expectedType, exisitingType);
   let isValid = true;
   if(expectedType !== exisitingType) {
     return false;
@@ -19,7 +19,7 @@ function recurseAndCheckType(expectedFormat, exisitingFormat, canBeEmpty, isOpti
   if(expectedType === 'Object') {
     const keys = Object.keys(expectedFormat);
     for(var i = 0; i < keys.length; i++) {
-      // console.log('testing object for loop', i, keys[i]);
+      console.log('testing object for loop', i, keys[i], `isValid: ${isValid}`);
       if(!isValid) {
         break;
       }
@@ -29,14 +29,14 @@ function recurseAndCheckType(expectedFormat, exisitingFormat, canBeEmpty, isOpti
           if(!isValid) {
             break;
           }
-          isValid = isValid && recurseAndCheckType(expectedFormat[keys[i]].value, values[j], expectedFormat[keys[i]].canBeEmpty, expectedFormat[keys[i]].isOptional);
+          isValid = isValid && recurseAndCheckType(expectedFormat[keys[i]].VALUE_TYPE, values[j], expectedFormat[keys[i]].canBeEmpty, expectedFormat[keys[i]].isOptional);
         }
       } else {
-        const expectedFormatValue = expectedFormat[keys[i]].value;
+        const expectedFormatValue = expectedFormat[keys[i]].VALUE_TYPE;
         const passingValue = expectedFormatValue === 'RECURSE' ? {
           "RANDOM_ID": {
             canBeEmpty: expectedFormat[keys[i]].canBeEmpty,
-            value: expectedFormat
+            VALUE_TYPE: expectedFormat
           }
         } : expectedFormatValue;
         isValid = isValid && recurseAndCheckType(passingValue, exisitingFormat[keys[i]], expectedFormat[keys[i]].canBeEmpty, expectedFormat[keys[i]].isOptional);
@@ -45,7 +45,7 @@ function recurseAndCheckType(expectedFormat, exisitingFormat, canBeEmpty, isOpti
     return isValid;
   } else if(expectedType === 'Array') {
     for(var i = 0; i < exisitingFormat.length; i++) {
-      // console.log('testing array for loop', i, expectedFormat[i]);
+      console.log('testing array for loop', i, expectedFormat[i], `isValid: ${isValid}`);
       if(!expectedFormat[i]) {
         break;
       }
