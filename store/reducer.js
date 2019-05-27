@@ -22,6 +22,7 @@ import { reducer as captchaReducer } from './captcha';
 import { reducer as helpSupportReducer } from './helpsupport';
 import { reducer as listingCartReducer } from './listingCart';
 import { reducer as preferencesReducer } from './cam/preferences';
+import { reducer as commonReducer } from './common';
 
 export default combineReducers({
   searchReducer,
@@ -47,4 +48,5 @@ export default combineReducers({
   couponOffersData,
   helpSupportReducer,
   listingCartReducer,
+  commonReducer,
 });
