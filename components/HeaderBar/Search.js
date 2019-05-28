@@ -14,7 +14,7 @@ import { Router } from '../../routes';
 import SVGComponent from '../common/SVGComponet';
 import DragDropUpload from '../common/DragDropUpload';
 import lang from '../../utils/language';
-import { SearchContext } from '../../pages/search';
+import SearchContext from '../helpers/context/search';
 
 import main_en from '../../layout/main/main_en.styl';
 import main_ar from '../../layout/main/main_ar.styl';

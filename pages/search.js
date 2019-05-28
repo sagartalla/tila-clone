@@ -11,7 +11,7 @@ import { actionCreators as authActionsCreators, selectors as authSelectors } fro
 import Layout from '../layout/main';
 import Search from '../components/Search';
 
-const SearchContext = React.createContext();
+import SearchContext from '../components/helpers/context/search';
 
 const cookies = new Cookies();
 
@@ -89,5 +89,4 @@ const mapDispatchToProps = dispatch =>
   );
 
 export default withRedux(makeStore, mapStateToProps, mapDispatchToProps)(SearchPage);
-export { SearchContext };
 
