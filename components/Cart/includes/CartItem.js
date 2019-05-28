@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, OverlayTrigger, Popover } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import moment from 'moment';
 import Cookie from 'universal-cookie';
 
@@ -137,13 +137,11 @@ class CartItem extends React.Component {
     const {
       item,
       count,
-      routeChange,
       increaseItemCnt,
       decreaseItemCnt,
       addToWishlist,
       removeCartItem,
       cartStepperInputHandler,
-      addOrRemoveGift,
 
     } = this.props;
     const { gift_card_message, checked, showMessage } = this.state;

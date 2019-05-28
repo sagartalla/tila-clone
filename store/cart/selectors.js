@@ -22,6 +22,7 @@ const getCartResults = (store) => {
       newData.cart_shippable = data.cart_shippable;
       newData.applyCouponRequestCount = data.applyCouponRequestCount;
       data.items.map((item, index) => {
+        debugger;
         newData.items[index] = {
           item_id: item.cart_item_id,
           product_id: item.listing_info.product_id,
@@ -44,7 +45,7 @@ const getCartResults = (store) => {
           itemType: item.product_details.catalog_details.item_type_name,
           warranty_duration: item.listing_info.warranty_policy.preferred_policy ?
           item.listing_info.warranty_policy.policies[item.listing_info.warranty_policy.preferred_policy] : {},
-          discount: item.listing_info.pricing && item.listing_info.pricing.discount_per_mrp.display_value,
+          discount: item.listing_info.pricing && item.listing_info.pricing.discount_per_mrp,
           mrp: item.listing_info.pricing && item.listing_info.pricing.mrp.display_value,
           offerDiscounts: item.listing_info.pricing && item.listing_info.pricing.actions,
           total_discount: item.listing_info.pricing && item.listing_info.pricing.total_discount_mrp.display_value,
