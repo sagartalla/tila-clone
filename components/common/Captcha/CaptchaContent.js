@@ -7,7 +7,7 @@ import SVGComponent from '../SVGComponet';
 import Bin from './Bin';
 import Box from './Box';
 
-const { PAYMENT_PAGE } = languageDefinations();
+const { PAYMENT_PAGE, ORDER_PAGE } = languageDefinations();
 
 import lang from '../../../utils/language';
 
@@ -27,11 +27,11 @@ const boxObject = {
 
 const textObject = {
   errortext:<div style={{textAlign: "center"}}>
-    <span style={{color: '#dd1e31'}} className={`${styles['fs-16']} ${styles['pt-20']}`}>Error. Please Try Again</span><br/>
-    <span className={`${styles['fs-12']} ${styles['pt-20']}`}>Drop the answer icon into the box above</span>
+    <span style={{color: '#dd1e31'}} className={`${styles['fs-16']} ${styles['pt-20']}`}>{PAYMENT_PAGE.ERROR_PLEASE_TRY_AGAIN}</span><br/>
+    <span className={`${styles['fs-12']} ${styles['pt-20']}`}>{PAYMENT_PAGE.DROP_THE_ANSWER_INTO_THE_BOX}</span>
   </div>,
-  successtext:<span style={{color: '#99cc33'}} className={`${styles['fs-16']} ${styles['pt-20']}`}>&nbsp;Success</span>,
-  opentext:<span className={`${styles['fs-12']} ${styles['pt-20']}`}>Drop the answer icon into the box above</span>
+  successtext:<span style={{color: '#99cc33'}} className={`${styles['fs-16']} ${styles['pt-20']}`}>&nbsp;{ORDER_PAGE.SUCCESS}</span>,
+  opentext:<span className={`${styles['fs-12']} ${styles['pt-20']}`}>{PAYMENT_PAGE.DROP_THE_ANSWER_INTO_THE_BOX}</span>
 }
 const CaptchaContent = ({items,state,handleDrop,handleClick}) => {
   return (
@@ -56,7 +56,7 @@ const CaptchaContent = ({items,state,handleDrop,handleClick}) => {
                     return <Box image={image} index={image.image_id} handleDrop={(id) => handleDrop(id)}/>
                   }):
                 <div>
-                  Loading Captcha...
+                  {PAYMENT_PAGE.LOADING_CAPTCHA}
                 </div>
                 }
                 </div>

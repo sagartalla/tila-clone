@@ -29,7 +29,7 @@ import styles_ar from '../../order_ar.styl';
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 
-const { ORDER_PAGE, CART_PAGE } = languageDefinations();
+const { ORDER_PAGE, CART_PAGE, ORDERS } = languageDefinations();
 
 const cookies = new Cookies();
 
@@ -158,7 +158,7 @@ class OrderItem extends Component {
                       </div>
                       {product.order_type === 'EXCHANGE' && product.order_item_type === 'DELIVERY' &&
                       <div className={`${styles.flex} ${styles['justify-center']} ${styles['mt-15']}`}>
-                        <span className={styles['green-label']}>Exchange</span>
+                        <span className={styles['green-label']}>{ORDER_PAGE.EXCHANGE}</span>
                       </div>}
                     </Col>
                     <Col md={10} className={styles['ipad-pr-0']}>
@@ -223,7 +223,7 @@ class OrderItem extends Component {
                         {product.warranty_duration && Object.keys(product.warranty_duration).length > 0 ?
                           <div className={`${styles['mb-0']} ${styles['fs-12']} ${styles.flex}`}>
                             <span className={`${styles.flex} ${styles['p-10']} ${styles.lable}`}>
-                              <span>Warranty : </span>
+                              <span>{CART_PAGE.WARRENTY} : </span>
                               <span className={`${styles['pl-10']} ${styles['pr-10']}`}><Warranty warranty={product.warranty_duration} /></span>
                             </span>
                           </div>
@@ -235,25 +235,25 @@ class OrderItem extends Component {
                   <a href={`/${country}/${language}/help/answers/orders#${orderId}`}>
                     <span className={`${styles['help-position']} ${styles.absolute} ${styles['thick-blue']} ${styles['p-5']} ${styles['flex-center']} ${styles['ml-10']} ${styles.border} ${styles['border-radius4']}`}>
                       <SVGComponent clsName={`${styles['help-icon']}`} src="icons/help-icon/help" />
-                      &nbsp;&nbsp;Need Help?
+                      &nbsp;&nbsp;{ORDERS.NEED_HELP}
                     </span>
                   </a>
                     }
                 </div>
                 {product.order_type === 'EXCHANGE' && product.order_item_type === 'DELIVERY' &&
                   <div className={`${styles['pt-5']} ${styles['pb-5']} ${styles['pl-15']} ${styles['border-t']}`}>
-                    This is an exchange order on the item you have requested for exchange.
+                    {ORDER_PAGE.THERE_IS_AN_EXCHANGE_ORDER}
                     {/* To view the parent order please <a>Click here</a> */}
                   </div>}
                 {product.refunds && product.refunds.length > 0 &&
                   <div className={`${styles['pt-15']} ${styles['pb-5']} ${styles['pl-15']} ${styles['border-t']} ${styles.relative}`}>
-                    <div className={`${styles['bg-white']} ${styles['fs-12']} ${styles.absolute} ${styles['p-5']} ${styles['border-lg']} ${styles['refund-label']}`}>Refund Status</div>
-                    Refund Initiated.
+                    <div className={`${styles['bg-white']} ${styles['fs-12']} ${styles.absolute} ${styles['p-5']} ${styles['border-lg']} ${styles['refund-label']}`}>{ORDER_PAGE.REFUND_STATUS}</div>
+                    {ORDER_PAGE.REFUND_INITIATED}
                   </div>}
                 {product.gift_info &&
                   <div className={`${styles.flex} ${styles['fs-12']} ${styles.absolute} ${styles['p-5']} ${styles.right0} ${styles.top0} ${styles['thick-gry-clr']} ${styles['bg-light-gray']}`}>
                     <SVGComponent clsName={`${styles['help-icon']}`} src="icons/gift-blue" />
-                    <span className={styles['ml-5']}>This order contains gift. <a>View details</a></span>
+                    <span className={styles['ml-5']}>{ORDER_PAGE.THIS_ORDER_CONTAINS_A_GIFT} <a>{ORDER_PAGE.VIEW_DETAILS}</a></span>
                   </div>}
               </React.Fragment>
             );
@@ -261,7 +261,7 @@ class OrderItem extends Component {
         </Col>
         <Col md={5} sm={5} className={`${styles['thick-border-left']} ${styles['p-0']}`}>
           {payments && payments.length > 0 && payments[0].transaction_status === 'FAILED' ?
-            <div>Order Unsuccessful</div>
+            <div>{ORDER_PAGE.ORDER_UNSUCCESSFUL}</div>
             :
             <React.Fragment>
               <div className={`${styles['p-15']} ${styles['ipad-pl-0']} ${styles['ipad-pr-0']} ${styles['flx-space-bw']}`}>
