@@ -57,6 +57,7 @@ export const EN_KEYWORDS = {
     THERE_ARE: 'There are',
     ITEM_IN_YOUR_WISHLIST: 'item in Wishlist',
     ITEMS_IN_YOUR_WISHLIST: 'items in Wishlist',
+    MY_CART: 'My Cart',
 
   },
   PAYMENT_PAGE: {
@@ -124,6 +125,9 @@ export const EN_KEYWORDS = {
     PAY_USING_TILA_CREDIT: 'PAY USING TILA CREDIT',
     PAYMENT_MODE: 'Net banking, credit card, vouchers and etc....',
     ON_DELIVERY: 'on delivery',
+    DROP_THE_ANSWER_INTO_THE_BOX: 'Drop the answer icon into the box above',
+    LOADING_CAPTCHA: 'Loading Captcha...',
+    YOU_ARE_SIGNED_IN_AS: 'You have signed in as',
   },
   DELIVERY_ADDR_PAGE: {
     DELIVERY_ADDR: 'Delivery Address',
@@ -269,7 +273,7 @@ export const EN_KEYWORDS = {
     ADD_NEW_SUB_TXT: 'Add a new debit or credit card to enable express checkout.',
     ADD_NEW_BTN: 'ADD NEW',
     SAVE_CARD_MSG: 'Save this card for faster payments.',
-    ADD_NEW_CARD: 'ADD NEW CARD',
+    // ADD_NEW_CARD: 'ADD NEW CARD',
     CANCEL: 'CANCEL',
     ADD_NEW_CARD_HEADER: 'Credit - Debit - ATM Card',
     CARD_ERROR: 'Not valid card',
@@ -602,7 +606,17 @@ export const EN_KEYWORDS = {
     THIS_ITEM: 'this item?',
     PLEASE_SELECT_SIZE_TO_CONTINUE: 'Please Select The Size To continue',
     SUCCESS: 'Success',
-    ORDER_DETAILS_SUMMERY: 'Order Summary'
+    ORDER_DETAILS_SUMMERY: 'Order Summary',
+    THERE_IS_AN_EXCHANGE_ORDER: 'This is an exchange order on the item you have requested for exchange.',
+    REFUND_INITIATED: 'Refund Initiated.',
+    THIS_ORDER_CONTAINS_A_GIFT: 'This order contains gift.',
+    VIEW_DETAILS: 'View details',
+    ORDER_UNSUCCESSFUL: 'Order Unsuccessful',
+    REFUND_STATUS: 'Refund Status',
+    TO_VIEW_PARENT_ORDER: 'To view parent order please',
+    CLICK_HERE: 'Click here',
+    YOUR_ITEM_IS_OUT_FOR_DELIVERY: 'Your Item is out for delivery',
+    REPLACE: 'Replace',
   },
   COUPON_OFFERS: {
     VIEW_TERMS: 'Terms & Conditions',
@@ -623,10 +637,9 @@ export const EN_KEYWORDS = {
     WE_BELIEVE_IN_THE_POWER: 'We believe in the power of purchase intelligence',
     ACTIVE_COUPONS: 'Active Coupons',
     EXPIRED_COUPONS: 'Expired Coupons',
-    TERMS_AND_CONDITIONS: 'Terms & Conditions',
     EXPIRED_ON: 'Expired on',
     EMPTY_COUPON_BOX: 'You have found an empty Coupon box',
-    NO_COUPONS_AVAILABLE: 'No coupons are available currently.',
+    NO_COUPONS_AVAILABLE: 'No coupons are currently available.',
     CHECK_BACK_LATER: 'Please Check back later',
   },
   EMAIL_VERIFICATION: {
@@ -658,6 +671,7 @@ export const EN_KEYWORDS = {
     REQUEST_INVOICE: 'Request Invoice',
     ORDER_TOTAL: 'Order Total',
     NEED_HELP: 'Need Help',
+    ORDER: 'ORDER #',
   },
   BETA: {
     BETA: 'beta',

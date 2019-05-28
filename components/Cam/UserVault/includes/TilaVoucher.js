@@ -47,13 +47,13 @@ const TilaVoucher = (props) => {
                         Balance
                     </Col>
                 </Row>
-                {transactions.map((transaction) => {
+                {transactions.map((transaction, index) => {
                     const { created_date, transaction_description, transaction_type, amount, balance } = transaction;
                     const date_arr = created_date.split('.')[0];
                     const date = moment(date_arr).format('MMM D, YYYY')
                     const time = moment(date_arr).format('hh:mm A')
                     return (
-                        <div className={styles['bodyRow']}>
+                        <div className={styles['bodyRow']} key={index}>
                             <Row>
                                 <Col md={3}>
                                     {`${date}, ${time}`}

@@ -8,7 +8,6 @@ import { actionCreators, selectors } from '../../../store/search';
 import CheckboxFacet from './CheckboxFacet';
 import ExcludeOOS from './ExcludeOOS';
 import LinkFacet from './LinkFacet';
-import RangeFitler from './RangeFacet';
 
 import lang from '../../../utils/language';
 
@@ -53,9 +52,8 @@ class CategoriesAndFacets extends Component {
 
   render() {
     const { filters, facets } = this.props;
-    console.log(filters, facets);
     return (
-      <PanelGroup accordion>
+      <PanelGroup accordion id="categories-panel">
         {filters.category.map((filter, index) => (
           filter.children.length ? <Panel eventKey={`${`${index}l`}`} key={filter.id}><LinkFacet filter={filter} /></Panel> : null
         ))}
@@ -75,6 +73,7 @@ class CategoriesAndFacets extends Component {
               onChangeHandle={this.onChangeHandle(filter.attributeName, filter.type)}
               selectedFilters={selectedFilters}
               index={index}
+              key={filter.id}
             />
             : null;
         })
@@ -98,13 +97,13 @@ const mapDispatchToProps = dispatch =>
     dispatch,
   );
 
-function mapUrlToProps(url, props) {
+function mapUrlToProps(url) {
   return {
     facets: decode((d) => JSON.parse(d || '{}'), url.facets),
   };
 }
 
-const mapUrlChangeHandlersToProps = (props) => ({
+const mapUrlChangeHandlersToProps = () => ({
     onChangeFacets: (value) => replaceInUrlQuery('facets', encode((e) => {
       return JSON.stringify(e || {})
     }, value))

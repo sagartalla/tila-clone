@@ -54,7 +54,7 @@ class MyCoupons extends React.Component {
               </div>
             </div>
             <div className={`${styles['ml-55']}`}>
-              <Tabs defaultActiveKey={1} onSelect={this.handleSelect}>
+              <Tabs defaultActiveKey={1} onSelect={this.handleSelect} id="coupons">
                 <Tab eventKey={1} id="Active Coupons" title={COUPON_OFFERS.ACTIVE_COUPONS}>
                   <ActiveCoupons />
                 </Tab>

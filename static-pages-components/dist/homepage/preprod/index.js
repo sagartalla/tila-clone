@@ -251,7 +251,7 @@ const b_d_b = {
   Perfumes: '/SAU/en/srp/fragrance?categoryTree=true&isListed=false&sid=932,958,964',
   Shoes: '/SAU/en/srp?search=Shoes&language=en&isListed=false',
   Lights: '/SAU/en/srp/light?categoryTree=true&isListed=false&sid=932,937,940',
-  lamps: 'SAU/en/srp/lamp?categoryTree=true&isListed=false&sid=932,937,939',
+  lamps: '/SAU/en/srp/lamp?categoryTree=true&isListed=false&sid=932,937,939',
   bedding: '/SAU/en/srp/bedding-set?categoryTree=true&isListed=false&sid=932,941,942',
   furniture: '/SAU/en/srp/home-furnishing?categoryTree=true&isListed=false&sid=932,941'
 };
@@ -596,14 +596,14 @@ const HomePage = () => React.createElement(
     ),
     React.createElement(
       Row,
-      { className: `${styles['m-15']} ${styles['mt-40']} ${styles['mb-40']}` },
+      { className: `${styles['m-15']} ${styles['mt-40']} ${styles['mb-40']} brand-details-inn` },
       threeCols.map(col => React.createElement(
         Col,
         { md: 4, xs: 4, sm: 4 },
         React.createElement(
           'a',
-          { href: col.link },
-          React.createElement('img', { src: col.img, alt: col.title })
+          { href: col.link, key: col.title },
+          React.createElement('img', { src: col.img, alt: col.title, className: 'img-responsive-in' })
         )
       ))
     ),
@@ -825,11 +825,11 @@ const HomePage = () => React.createElement(
     ),
     React.createElement(
       Row,
-      { className: `${styles['m-15']} ${styles['mt-40']} ${styles['mb-40']}` },
+      { className: `${styles['m-15']} ${styles['mt-40']} ${styles['mb-40']} brand-details-inn` },
       twoCols.map(col => React.createElement(
         Col,
-        { md: 6, xs: 6, sm: 6 },
-        React.createElement('img', { src: col.img, alt: col.title })
+        { md: 6, xs: 6, sm: 6, key: col.title },
+        React.createElement('img', { src: col.img, alt: col.title, className: 'img-responsive-in' })
       ))
     ),
     React.createElement(
@@ -1083,7 +1083,7 @@ const HomePage = () => React.createElement(
           { key: i, md: 3, xs: 3, sm: 3 },
           React.createElement(
             'a',
-            { href: i.links },
+            { href: i.links, key: i.title },
             React.createElement(
               'div',
               { className: 'image' },
