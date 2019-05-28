@@ -91,7 +91,7 @@ class Display extends Component {
             lazyLoad
             className={`${styles['ht-100per']} ${styles.slick}`}
           >
-            {imgs.map(({ url }) => (
+            {imgs && imgs.map(({ url }) => (
               <div className={styles['selected-item-wrap']} key={url}>
                   <img src={`${constants.mediaDomain}/${url}`} />
                 </div>
@@ -103,14 +103,14 @@ class Display extends Component {
             <Slider
               asNavFor={this.state.nav1}
               ref={slider => (this.slider2 = slider)}
-              slidesToShow={imgs.length > 4 ? 4 : imgs.length}
+              slidesToShow={imgs && (imgs.length > 4 ? 4 : imgs.length)}
               swipeToSlide
               focusOnSelect
               lazyLoad
               className={`${styles['sub-slider']} ${styles.slick}`}
             >
               {
-                imgs.map(({ url }) => (
+                imgs && imgs.map(({ url }) => (
                   <div className={styles['carousel-item-wrap']} key={url}>
                     <img src={`${constants.mediaDomain}/${url}`} />
                   </div>
