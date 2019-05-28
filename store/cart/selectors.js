@@ -22,7 +22,6 @@ const getCartResults = (store) => {
       newData.cart_shippable = data.cart_shippable;
       newData.applyCouponRequestCount = data.applyCouponRequestCount;
       data.items.map((item, index) => {
-        debugger;
         newData.items[index] = {
           item_id: item.cart_item_id,
           product_id: item.listing_info.product_id,
