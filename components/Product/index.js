@@ -84,7 +84,7 @@ const getProductComponent = (isPreview, taskCode) => {
           if (index === -1) {
             arr.unshift({
               nm: titleInfo.title,
-              im: imgUrls[0].url,
+              im: imgUrls && imgUrls[0].url,
               pr,
               cd,
               uri: location.href,

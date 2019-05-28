@@ -14,7 +14,8 @@ import MyGMap from '../../../Cam/ShippingAddress/includes/MyGMap';
 import SVGComponent from '../../../common/SVGComponet';
 
 import { languageDefinations } from '../../../../utils/lang';
-const {ORDER_PAGE} = languageDefinations();
+
+const { ORDER_PAGE } = languageDefinations();
 
 import lang from '../../../../utils/language';
 
@@ -130,11 +131,11 @@ class OrderHeader extends Component {
                 <Col md={4} xs={6} sm={4} className={`${styles['ipad-p-0']} ${styles['pb-20']} ${styles['pt-20']} ${styles['thick-border-left']} ${styles['thin-border-right']}`}>
                   <div className={`${styles['pl-15']} ${styles['pr-15']}`}>
                     <div className={styles.flex}>
-                      <span className={styles['green-label']}>Exchange</span>
+                      <span className={styles['green-label']}>{ORDER_PAGE.EXCHANGE}</span>
                     </div>
                     <p className={`${styles['thick-gry-clr']} ${styles['mt-15']} ${styles['mr-50']}`}>
-                      This is an exchange order on the item you have requested for exchange. To view parent order please
-                      <a> Click here</a>
+                      {ORDER_PAGE.THERE_IS_AN_EXCHANGE_ORDER} {ORDER_PAGE.TO_VIEW_PARENT_ORDER}
+                      <a> {ORDER_PAGE.CLICK_HERE}</a>
                     </p>
                   </div>
                 </Col>}
