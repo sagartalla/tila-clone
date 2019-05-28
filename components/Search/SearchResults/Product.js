@@ -265,7 +265,7 @@ class Product extends Component {
         {discountValue > 5 &&
           <React.Fragment>
             <span className={`${styles['ml-5']} ${styles['label-gry-clr']} ${styles['fs-12']}`}>
-              <s>{variants[selectedIndex].mrp[0]}</s>
+              <s>{variants[selectedIndex].mrp[0]}&nbsp;{currency}</s>
             </span>
             {variants[selectedIndex].offersApplied &&
               variants[selectedIndex].offersApplied.length > 0 &&
