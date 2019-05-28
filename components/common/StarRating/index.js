@@ -83,7 +83,7 @@ export default class StarRating extends Component {
   }
 }
 
-StarRating.PropTypes = {
+StarRating.propTypes = {
   total:PropTypes.number,
   rating:PropTypes.number,
   onRate:PropTypes.func,

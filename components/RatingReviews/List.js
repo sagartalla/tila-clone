@@ -67,7 +67,7 @@ class List extends Component {
           </div>
           <div className={styles['float-r']}>
             <div className={styles['p-10']}>
-              <label for="rating-filter" >{PDP_PAGE.FILTER_BY}</label>
+              <label htmlFor="rating-filter" >{PDP_PAGE.FILTER_BY}</label>
               <select id="rating-filter" onChange={this.selectRating}>
                 <option>{PDP_PAGE.ALL_STARTS}</option>
                 {

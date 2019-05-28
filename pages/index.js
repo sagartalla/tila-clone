@@ -1,13 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Router from 'next/router';
-import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import withRedux from 'next-redux-wrapper';
 import makeStore from '../store';
 import Layout from '../layout/main'
 import Landing from '../components/Landing';
 import Base, { baseActions } from './base';
-import { actionCreators, selectors } from '../store/landing';
+import { actionCreators } from '../store/landing';
 
 class LandingPage extends Base {
   pageName = 'HOME';

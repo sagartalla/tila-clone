@@ -70,7 +70,7 @@ class Reason extends Component {
   };
   getReplaceData = (exchangeVariant) => {
     const { query } = this.props;
-    const findData = exchangeVariant.filter(el =>
+    const findData = exchangeVariant && exchangeVariant.filter(el =>
       el.listing.variant_id === query.variantId &&
       el.listing.total_inventory_count > 0);
 
@@ -103,7 +103,6 @@ class Reason extends Component {
     const { reason, subReason, selectedVariant, comment, variantId, selectedMode } = this.state
 
     let listingObj = orderDetails.order_items.find((order) => order.order_id === orderId);
-
     const params = {
       orderId,
       issueType: issueType,
@@ -125,8 +124,8 @@ class Reason extends Component {
       (selectedMode === 'Return' || selectedMode === 'Cancel')
     ) {
       this.props.setOrderIssueData(params);
-      this.props.setAddressData(reasonParams)
-      this.props.refundOptions(orderIssue.selectedItem.id)
+      this.props.setAddressData(reasonParams);
+      this.props.refundOptions(orderIssue.selectedItem.id, orderIssue.issueType);
       goToNextStep();
     }
     else if (
@@ -203,7 +202,6 @@ class Reason extends Component {
     const { selectedMode, displaySizeError } = this.state;
     const selectedReason = reasons.filter(reason => reason.name === this.state.reason)[0]
     const issueType_small = issueType.toLowerCase();
-    console.log(issueType_small);
     return (
       <div className={`${styles['reason-item-main']} ${styles['width100']}`}>
         <h4 className={`${styles['fs-20']} ${styles['fontW300']} ${styles['ml-20']} ${styles['mr-20']}`}>{ORDER_PAGE.WHY_DO_YOU_WANT_TO} {issueType_small} {ORDER_PAGE.THIS_ITEM}</h4>
@@ -237,14 +235,15 @@ class Reason extends Component {
                 className={styles['select-text']}
                 required
                 onChange={this.selectReason}
+                defaultValue={"default"}
               >
-                <option disabled selected>
+                <option disabled value="default">
                   {loadingStatus
                     ? ORDER_PAGE.LOADING
                     : ORDER_PAGE.SELECT_REASON}
                 </option>
-                {reasons.map(reason => (
-                  <option key={reason.id} value={reason.name}>
+                {reasons.map((reason, index) => (
+                  <option key={index} value={reason.name}>
                     {reason.name}
                   </option>
                 ))}
@@ -262,8 +261,9 @@ class Reason extends Component {
                 <select
                   className={styles['select-text']}
                   onChange={this.selectSubReason}
+                  defaultValue={"default"}
                 >
-                  <option disabled selected>
+                  <option disabled value="default">
                     {loadingStatus
                       ? ORDER_PAGE.LOADING
                       : ORDER_PAGE.SELECT_SUB_REASON}

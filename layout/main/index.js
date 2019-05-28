@@ -8,7 +8,7 @@ import Cookie from 'universal-cookie';
 import Betalogo from '../../components/common/Beta'
 import ErrorComp from '../../components/common/Error';
 
-const cookies = new Cookie();
+// const cookies = new Cookie();
 
 import lang from '../../utils/language';
 

@@ -14,9 +14,6 @@ import { Router } from '../../routes';
 import SVGComponent from '../common/SVGComponet';
 import DragDropUpload from '../common/DragDropUpload';
 import lang from '../../utils/language';
-
-import CustomToggle from './CustomToggle';
-
 import main_en from '../../layout/main/main_en.styl';
 import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './header_en.styl';
@@ -39,7 +36,7 @@ class Search extends Component {
   constructor(props) {
     super(props);
     const {
-      query, isCategoryTree, choosenCategoryName, searchText,
+      query, isCategoryTree, choosenCategoryName,
     } = props;
     let finalQuery = query || (isCategoryTree ? choosenCategoryName : '');
     finalQuery = finalQuery.split('-').join(' ');
@@ -83,6 +80,12 @@ class Search extends Component {
     });
   }
 
+  setSelectionRange = () => {
+    const { query } = this.state;
+    const input = document.getElementById('text-box');
+    input.focus();
+    input.setSelectionRange(query.length, query.length);
+  }
   setSearchText(e) {
     this.setState({
       query: e.target.textContent,
@@ -161,16 +164,17 @@ class Search extends Component {
         <form onSubmit={this.submitQuery}>
 
           <Dropdown id="search-toggle" className={`${styles['cart-inn']} ${styles.width100}`}>
-            <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
-              <div className={styles.overlap}>
+            <Dropdown.Toggle id="dropdown-custom-components">
+              <div className={styles.overlap} tabIndex="0" contentEditable="true" onFocus={this.setSelectionRange}>
             {query.length < 1 ? '' : autoSearchValue || suggestions.length > 0 && (query === suggestions[0].data_edgengram.slice(0, query.length) ? suggestions[0].data_edgengram : '')}</div>
               <input
                 className={styles['search-input']}
+                id="text-box"
                 placeholder={SEARCH_PAGE.SEARCH_YOUR_FAV_ITEM}
                 onChange={this.onChangeSearchInput}
                 value={query}
                 onKeyDown={this.handleSearch}
-              />
+                />
             </Dropdown.Toggle>
             <Dropdown.Menu className={`${styles.width100} ${styles['p-0']} ${styles['m-0']}`}>
               {suggestions.length > 0 &&
@@ -208,7 +212,6 @@ class Search extends Component {
 
 Search.propTypes = {
   getSearchResults: PropTypes.func.isRequired,
-  searchText: PropTypes.string.isRequired,
   onChangeSearchText: PropTypes.func.isRequired,
 };
 

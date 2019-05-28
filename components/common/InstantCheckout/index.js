@@ -272,7 +272,7 @@ class InstantCheckout extends Component {
                           onChange={this.handleChange}
                           checked={this.state.checked}
                         />
-                        <label for="pay-delivery" className={`${styles['fs-12']} ${styles['fw300']} ${styles['pl-10']} ${styles['pr-10']}`}>{INSTANT_CHECKOUT.AGREE_CASH_ON_DELIVERY}</label>
+                        <label htmlFor="pay-delivery" className={`${styles['fs-12']} ${styles['fw300']} ${styles['pl-10']} ${styles['pr-10']}`}>{INSTANT_CHECKOUT.AGREE_CASH_ON_DELIVERY}</label>
                       </div>
                       : null
                   }
