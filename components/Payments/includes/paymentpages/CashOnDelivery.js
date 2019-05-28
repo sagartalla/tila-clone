@@ -145,7 +145,7 @@ class CashOnDelivery extends React.Component {
           null
     }
     </Col>
-    <Col md={6} sm={12} xs={12}>
+    <Col md={10} sm={12} xs={12}>
       {
         this.state.showContinueButton &&
            (
