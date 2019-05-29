@@ -173,7 +173,7 @@ class Landing extends Component {
   }
   componentWillReceiveProps(newProps) {
     const { category } = newProps.query;
-    RemoteComponent.loadRemoteComponents([remoteComponents[category || 'homepage']])
+    RemoteComponent.loadRemoteComponents([remoteComponents['homepage']])
       .then((children) => {
         this.setState({
           children,

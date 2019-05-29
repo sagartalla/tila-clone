@@ -8,8 +8,6 @@ import Blocker from '../../common/Blocker';
 import RightBar from '../CartPaymentSideBar';
 import Wishlist from '../../Cam/Wishlist';
 import { languageDefinations } from '../../../utils/lang/';
-
-import { Router } from '../../../routes';
 import { cartPlaceHolder } from '../../common/Loader/skeletonPlaceHolder';
 
 const cookies = new Cookie();
@@ -40,10 +38,8 @@ const CartBody = ({
   count,
   isLoading,
   openSlider,
-  isError,
-  cartData,
 }) => {
-  const { items, error } = data;
+  const { items } = data;
   const flag = data && items && items.length;
   const cnt = flag > 0 ? items.length : 0;
   const { CART_PAGE } = languageDefinations();
@@ -67,7 +63,7 @@ const CartBody = ({
         <Col md={9} sm={12} xs={12} className={styles['pr-5']}>
           <div>
             {
-              items.map((item,index) => (
+              items.map((item) => (
                 <CartItem
                   key={item.item_id}
                   item={item}
