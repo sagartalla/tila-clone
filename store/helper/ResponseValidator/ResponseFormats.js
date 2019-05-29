@@ -472,30 +472,10 @@ const formats = {
                                             }
                                         },
                                         "discount_per_sp": {
-                                            "VALUE_TYPE": {
-                                                "currency_code": {
-                                                    "VALUE_TYPE": "String"
-                                                },
-                                                "money_value": {
-                                                    "VALUE_TYPE": "Number"
-                                                },
-                                                "display_value": {
-                                                    "VALUE_TYPE": "String"
-                                                }
-                                            }
+                                            "VALUE_TYPE": "Number"
                                         },
                                         "discount_per_mrp": {
-                                            "VALUE_TYPE": {
-                                                "currency_code": {
-                                                    "VALUE_TYPE": "String"
-                                                },
-                                                "money_value": {
-                                                    "VALUE_TYPE": "Number"
-                                                },
-                                                "display_value": {
-                                                    "VALUE_TYPE": "String"
-                                                }
-                                            }
+                                            "VALUE_TYPE": "Number"
                                         },
                                         "quantity": {
                                             "VALUE_TYPE": "Number"
