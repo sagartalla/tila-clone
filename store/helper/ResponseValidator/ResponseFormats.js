@@ -321,9 +321,6 @@ const formats = {
                                 "merchant_sku_id": {
                                     "VALUE_TYPE": "String"
                                 },
-                                "created_timestamp": {
-                                    "VALUE_TYPE": "String"
-                                },
                                 "inhouse_seller": {
                                     "VALUE_TYPE": "Boolean"
                                 },
