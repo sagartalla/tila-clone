@@ -68,7 +68,7 @@ class CheckboxFacet extends Component {
       <Panel eventKey={`${index + 'c'}`} key={filter.id}>
         <div className={`${styles['category-list']}`}>
           <Panel.Heading className={styles['category-list-head']}>
-            <Panel.Title toggle className={`${styles['category-list-title']} ${styles['black-color']} ${styles['fontW600']} ${styles['p-10-20']} ${styles['flx-spacebw-alignc']}`}>
+            <Panel.Title toggle className={`${styles['category-list-title']} ${styles['black-color']} ${styles['fontW600']} ${styles['flx-spacebw-alignc']}`}>
               {filter.name}
               <SVGCompoent clsName={`${styles['expand-icon']}`} src="icons/common-icon/down-arrow-circle" />
             </Panel.Title>
@@ -80,7 +80,7 @@ class CheckboxFacet extends Component {
                   <li key={childFitler.id} className={styles['category-sub-list-inn']}>
                     <div className={`${styles['checkbox-material']} ${styles['select-check-mate']}`}>
                       <input id={childFitler.name} type="checkbox" onChange={this.onChangeItem({ name: childFitler.name, param: childFitler.param })} checked={selectedItems.indexOf(childFitler.name) !== -1} />
-                      <label htmlFor={childFitler.name} className={`${styles['fs-12']} ${styles['category-label']}`}> <span className={styles['category-span']}>{childFitler.name}</span> <span>{childFitler.count ? `(${childFitler.count})` : ''}</span> </label>
+                      <label htmlFor={childFitler.name} className={`${styles['fs-12']} ${styles['category-label']}`}> <span className={styles['category-span']}>{childFitler.name}</span> <span className={styles['thick-gry-clr']}>{childFitler.count ? `${childFitler.count}` : ''}</span> </label>
                     </div>
                   </li>
                 ))

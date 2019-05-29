@@ -261,11 +261,11 @@ class Product extends Component {
         >
           {variants[selectedIndex].sellingPrice[0]}
         </span>&nbsp;
-        <span className={`${styles['fs-12']} ${styles['black-color']}`}>{currency}</span>
+        <span className={`${styles['fs-10']} ${styles['black-color']}`}>{currency}</span>
         {discountValue > 5 &&
           <React.Fragment>
             <span className={`${styles['ml-5']} ${styles['label-gry-clr']} ${styles['fs-12']}`}>
-              <s>{variants[selectedIndex].mrp[0]}&nbsp;{currency}</s>
+              <s>{variants[selectedIndex].mrp[0]}&nbsp;<s className={styles['fs-10']}>{currency}</s></s>
             </span>
             {variants[selectedIndex].offersApplied &&
               variants[selectedIndex].offersApplied.length > 0 &&
