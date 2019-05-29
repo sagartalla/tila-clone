@@ -220,7 +220,7 @@ const getProductComponent = (isPreview, taskCode) => {
                         {
                           isPreview ? null : shippingInfo.shippable && <AddToCart offerInfo={offerInfo} productData={productData.product_id}/>
                         }
-                        {
+                        {isPreview ? null :
                           (offerInfo.stockError || offerInfo.availabilityError) && (Object.keys(shippingInfo).length === 0 || shippingInfo.shippable) &&
                           <div className={`${styles['flx-space-bw']} ${styles['align-baseline']}`}>
                             {!userDetails.isLoggedIn &&
@@ -260,7 +260,7 @@ const getProductComponent = (isPreview, taskCode) => {
                     }
                     </Col> */}
                     <Col md={8}>
-                      <ElectronicsTab catalog={catalog} catalogObj={catalogObj} productDescription={productDescription} />
+                      <ElectronicsTab isPreview={isPreview} catalog={catalog} catalogObj={catalogObj} productDescription={productDescription} />
                     </Col>
                   </Row>
                 </Grid>
