@@ -61,7 +61,7 @@ const getProductComponent = (isPreview, taskCode) => {
         } = productData;
         digitalData.page.pageInfo.pageName = titleInfo.title;
         digitalData.page.category = { primaryCategory: productData.categoryType };
-        digitalData.page.pageInfo.breadCrumbs = productData.breadcrums ? productData.breadcrums.map(item => item.display_name_en) : [];
+        digitalData.page.pageInfo.breadCrumbs = productData.breadcrums.map(item => item.display_name_en);
         this.props.track({
           eventName: 'Product Viewed',
           ProductData: productData,
@@ -167,7 +167,7 @@ const getProductComponent = (isPreview, taskCode) => {
     }
 /* eslint-disable */
     render() {
-      const { productData, userDetails, showLoading, query } = this.props;
+      const { productData, userDetails, showLoading, query,variantId,productId, isSearchPreview } = this.props;
       const {
         catalog, titleInfo, keyfeatures, extraOffers, imgUrls, offerInfo, shippingInfo, isWishlisted,
         details, productDescription, catalogObj, categoryType = '', warranty, breadcrums, product_id, wishlistId,
@@ -176,11 +176,12 @@ const getProductComponent = (isPreview, taskCode) => {
       const {
         stickyElements, recentlyViewed, notifyEmail, emailErr,
       } = this.state;
+
       return (
         <Theme.Provider value={categoryType.toLowerCase()}>
           <div className={`${styles['pdp-wrap']} ${categoryType.toLowerCase()} ${styles[categoryType.toLowerCase()]}`}>
             {
-              isPreview ? null : <HeaderBar />
+              isPreview || isSearchPreview ? null : <HeaderBar />
             }
             <div className={`${styles.relative}`}>
               <div className={`${styles['page-details-slider']}`}>
@@ -203,14 +204,14 @@ const getProductComponent = (isPreview, taskCode) => {
                   <Col sm={12} className={`${styles['details-right-part']} ${styles[stickyElements.details]}`}>
                     <div className={`${styles['details-right-part-inn']}`}>
                       <div className={`${styles['ipad-details']} ${styles['ipad-pr-15']}`}>
-                        <TitleInfo {...titleInfo} catalogObj={catalogObj} isPreview={isPreview} offerInfo={offerInfo} />
+                        <TitleInfo {...titleInfo} isPreview={isPreview} offerInfo={offerInfo} />
                         <ProductDetails
                           details={details}
                           keyfeatures={keyfeatures}
                           isPreview={isPreview}
                           productInfo={productData}
-                          variantId={query.variantId}
-                          productId={query.productId}
+                          variantId={variantId}
+                          productId={productId}
                         />
                       </div>
                       <div className={`${styles['ipad-details']} ${styles['bdr-lt']} ${styles['ipad-pl-15']}`}>
@@ -246,30 +247,33 @@ const getProductComponent = (isPreview, taskCode) => {
                   </Col>
                 </Row>
               </div>
-              <div className={`${styles['bg-white']} ${styles['mt-30']}`}>
-                <Grid>
-                  <Row>
-                    <Col md={8}>
+              {
+                isSearchPreview ? null :
+                <div className={`${styles['bg-white']} ${styles['mt-30']}`}>
+                  <Grid>
+                    <Row>
+                      <Col md={8}>
+                        {
+                          isPreview ? null : <NoSSR> <RecentView recentlyViewed={recentlyViewed} shippingInfo={shippingInfo} /> </NoSSR>
+                        }
+                      </Col>
+                      {/* <Col md={8}>
                       {
-                        isPreview ? null : <NoSSR> <RecentView recentlyViewed={recentlyViewed} shippingInfo={shippingInfo} /> </NoSSR>
+                        isPreview ? null : <ReviewsTab />
                       }
-                    </Col>
-                    {/* <Col md={8}>
-                    {
-                      isPreview ? null : <ReviewsTab />
-                    }
-                    </Col> */}
-                    <Col md={8}>
-                      <ElectronicsTab catalog={catalog} catalogObj={catalogObj} productDescription={productDescription} />
-                    </Col>
-                  </Row>
-                </Grid>
-              </div>
+                      </Col> */}
+                      <Col md={8}>
+                        <ElectronicsTab catalog={catalog} catalogObj={catalogObj} productDescription={productDescription} />
+                      </Col>
+                    </Row>
+                  </Grid>
+                </div>
+              }
               <div className={styles['pdp-bottom-ref']} ref={this.bottomRef} />
             </div>
             <div className={`${styles['border-b']} ${styles['border-t']} ${styles['pb-30']} ${styles['pt-30']}`}>
               {
-                isPreview ? null : <FooterBar />
+                isPreview || isSearchPreview ? null : <FooterBar />
               }
             </div>
           </div>
@@ -297,7 +301,11 @@ const getProductComponent = (isPreview, taskCode) => {
 
   Product.propTypes = {
     productData: PropTypes.object.isRequired,
+    isSearchPreview: PropTypes.bool
   };
+  Product.defaultProps = {
+    isSearchPreview:false
+  }
 
   return connect(mapStateToProps, mapDispatchToProps)(Product);
 };

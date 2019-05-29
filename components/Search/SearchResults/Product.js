@@ -58,6 +58,7 @@ class Product extends Component {
     this.closeVariantTab = this.closeVariantTab.bind(this);
     this.showVariants = this.showVariants.bind(this);
     this.preventDefaultClick = this.preventDefaultClick.bind(this);
+    this.renderQuickView = this.renderQuickView.bind(this)
   }
 
   componentWillReceiveProps() {
@@ -194,7 +195,13 @@ class Product extends Component {
       this.addToCompare(e.target.previousSibling.checked);
     }
   }
-
+  renderQuickView(e) {
+    e.preventDefault();
+    const { selectedIndex } = this.state
+    const { row, itemNum, showQuickView, variants } = this.props
+    let vId = (variants.length > 0 && variants[selectedIndex].variantId)
+    showQuickView(itemNum,row, vId)
+  }
   addToCompare(checked) {
     const {
       productId, itemtype, media, displayName, categoryId, addToCompare, removeCompareData, catalogId: catalog_id, variantId: variant_id,
@@ -242,6 +249,8 @@ class Product extends Component {
       btnLoading,
       cmpData,
       wishlistId,
+      row,
+      itemNum
     } = this.props;
     const { showNotify, selectedIndex, showLoader } = this.state;
     const selectedProduct = selectedID.length > 0 && selectedID.includes(productId);
@@ -296,7 +305,10 @@ class Product extends Component {
                     <SVGCompoent clsName={`${styles['loader-styl']}`} src="icons/common-icon/circleLoader" />
                   </div> : null
                 }
-                <div className={`${styles['img-cont']} ${styles['border-radius4']} ${styles['relative']}`}>
+                <div
+                  className={`${styles['img-cont']} ${styles['border-radius4']} ${styles['relative']}`}
+                  onClick={this.renderQuickView}
+                 >
                   <div className={styles['image-div']}>
                     <Waypoint onEnter={this.setImg}>
                       <img src={this.state.src} />
@@ -414,7 +426,7 @@ class Product extends Component {
                 </div>
               </div> */}
                 </div>
-                
+
               </div>
             </a>
           </Link>

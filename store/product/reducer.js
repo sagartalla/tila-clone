@@ -9,7 +9,7 @@ const initialState = {
   reviews:[],
   reviewResponse:{},
   variantsData: {},
-  error: {},
+  error: null,
   searchCityKeyWord: '',
   searchCountryKeyWord: '',
   allCitiesData: [],
@@ -26,7 +26,7 @@ const productReducer = typeToReducer({
         variantsData: {
           selectedVariantId: Object.keys(action.payload.data[0].variant_preferred_listings || {})[0]
         },
-        ui: { loading: true }
+        ui: { loading: false, error: null },
       });
     },
     REJECTED: (state, action) => {

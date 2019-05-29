@@ -1,4 +1,6 @@
 // require('./deploy/env');
+
+
 if(process.env.npm_package_config_ENV) {
   process.env.ENV = process.env.npm_package_config_ENV;
 }
@@ -38,7 +40,7 @@ function sessionCookie(req, res, next) {
   }
   global.APP_LANGUAGE = ['en', 'ar'].indexOf(language) !== -1 ? language : (cookieLanguage ? cookieCountry : 'en');
   global.APP_COUNTRY = country ? country : (cookieCountry ? cookieCountry : 'SAU');
-  
+
   res.cookie('language', global.APP_LANGUAGE);
   res.cookie('country', global.APP_COUNTRY);
   next();

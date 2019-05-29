@@ -1,7 +1,7 @@
 {
   "name": "storefront",
   "scripts": {
-    "dev": "LOCAL=true ENV=stage node --inspect server.js",
+    "dev": "LOCAL=true ENV=preprod node --inspect server.js",
     "build": "version=$version node ./node_modules/next/dist/bin/next build",
     "start": "NODE_ENV=production ENV=dev node server.js",
     "start:ecs": "NODE_ENV=production node server.js",
@@ -45,6 +45,7 @@
     "react-router-modal": "^1.4.1",
     "react-slick": "^0.23.1",
     "react-toastify": "^4.5.2",
+    "react-transition-group": "^1.2.1",
     "react-url-query": "^1.4.0",
     "react-waypoint": "^8.0.3",
     "redux": "^3.7.2",

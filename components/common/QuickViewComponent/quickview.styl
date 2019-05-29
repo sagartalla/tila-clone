@@ -1,0 +1,45 @@
+@import '../../../layout/main/executables.styl';
+
+.render-view-main
+  width 100%
+  position relative
+  box-shadow 0 2px 18px 0 rgba(0, 0, 0, 0.15)
+  background-color #ffffff
+  overflow hidden
+  background-color #8a8a8f
+  height 0
+  transition height 0.8s
+  .example-enter
+    opacity 0.01
+  .example-enter.example-enter-active
+    opacity 1
+    transition opacity 500ms ease-in;
+  .example-leave
+    opacity 1
+  .example-leave.example-leave-active
+    opacity 0.01
+    transition opacity 300ms ease-in
+  .prev-styl
+    left 0
+    top 175px
+    z-index 999
+    width 45px
+    height 77px
+  .next-styl
+    right 0
+    top 175px
+    z-index 999
+    width 45px
+    height 77px
+  .close-styl
+    z-index 999
+    position absolute
+    right 26px
+    top 21px
+    color #484848
+.opacity-3
+    opacity 0.3
+.mr-20
+  margin 20px
+.animationClass
+  height 780px
