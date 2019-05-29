@@ -21,7 +21,7 @@ class RenderResults extends Component {
     }
   }
   scrollToRef = () => window.scrollTo(0, this.myRef.current.offsetTop);
-  
+
   componentDidMount() {
     const { options, getProduct } = this.props
 
@@ -31,15 +31,20 @@ class RenderResults extends Component {
         animationClass: 'animationClass'
       });
     }, 50);
-
+    
+    this.myRef.current.scrollIntoView({
+      behavior: 'smooth',
+      block: 'center',
+      inline: 'center',
+    });
 
   }
   componentWillReceiveProps(nextProps) {
-
     if(nextProps.renderQuickView
       &&
       nextProps.productId !== this.props.productId
     ){
+
       this.props.getProduct(nextProps.options)
     }
   }
