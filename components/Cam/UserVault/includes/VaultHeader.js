@@ -1,17 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
 import { Tabs, Tab } from 'react-bootstrap';
 import TilaVoucher from './TilaVoucher';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { actionCreators, selectors } from '../../../../store/cam/userVault';
-
+import { selectors } from '../../../../store/cam/userVault';
 import SVGComponent from '../../../common/SVGComponet';
 import { languageDefinations } from '../../../../utils/lang/';
-
 import lang from '../../../../utils/language';
-
 import main_en from '../../../../layout/main/main_en.styl';
 import main_ar from '../../../../layout/main/main_ar.styl';
 import styles_en from '../uservault_en.styl';
@@ -44,7 +39,7 @@ const VaultHeader = (props) => {
           {/* <ul className={`${styles['card-items-list']} ${styles['mb-0']} ${styles['pl-30']}`}>
             <li className={`${styles['pointer']} ${styles['p-10']} ${styles['thick-gry-clr']}`}>{VAULT_PAGE.SAVED_CARDS}</li>
           </ul> */}
-          <Tabs defaultActiveKey={1} className={`${styles['card-items-list']} ${styles['mb-0']} ${styles['pl-30']}`}>
+          <Tabs defaultActiveKey={1} className={`${styles['card-items-list']} ${styles['mb-0']} ${styles['pl-30']}`} id="vault-section">
             <Tab eventKey={1} title={VAULT_PAGE.SAVED_CARDS} className={`${styles['pointer']} ${styles['p-10']} ${styles['thick-gry-clr']}`}>
               {props.children}
             </Tab>

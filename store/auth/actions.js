@@ -1,7 +1,7 @@
 import Cookies from 'universal-cookie';
 import api from './api';
 // import loginReq from '../helper/loginReq';
-import refStore from '../refHandler';
+import refStore from '../helper/refHandler';
 import { actionCreators as cartActionCreators } from '../cart';
 import { actionCreators as shippingActionCreators } from '../cam/address'
 const cookies = new Cookies();

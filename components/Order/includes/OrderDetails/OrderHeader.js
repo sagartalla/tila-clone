@@ -14,7 +14,8 @@ import MyGMap from '../../../Cam/ShippingAddress/includes/MyGMap';
 import SVGComponent from '../../../common/SVGComponet';
 
 import { languageDefinations } from '../../../../utils/lang';
-const {ORDER_PAGE,CART_PAGE} = languageDefinations();
+
+const { ORDER_PAGE } = languageDefinations();
 
 import lang from '../../../../utils/language';
 
@@ -80,8 +81,8 @@ class OrderHeader extends Component {
   render() {
     const { showToolTip, showModal } = this.state;
     const {
-      name, address, phone, orderId, orderDate, price,
-      shippingTotal, payments, currency_code, order_type,
+      name, address, orderId, orderDate, price,
+      payments, order_type,
     } = this.props.orderDetails;
     const {
       total_mrp = {}, total_shipping = {}, total_offer_price = {}, total_price = {}, total_gift_charges = {}, total_discount = {},
@@ -130,11 +131,11 @@ class OrderHeader extends Component {
                 <Col md={4} xs={6} sm={4} className={`${styles['ipad-p-0']} ${styles['pb-20']} ${styles['pt-20']} ${styles['thick-border-left']} ${styles['thin-border-right']}`}>
                   <div className={`${styles['pl-15']} ${styles['pr-15']}`}>
                     <div className={styles.flex}>
-                      <span className={styles['green-label']}>Exchange</span>
+                      <span className={styles['green-label']}>{ORDER_PAGE.EXCHANGE}</span>
                     </div>
                     <p className={`${styles['thick-gry-clr']} ${styles['mt-15']} ${styles['mr-50']}`}>
-                      This is an exchange order on the item you have requested for exchange. To view parent order please
-                      <a> Click here</a>
+                      {ORDER_PAGE.THERE_IS_AN_EXCHANGE_ORDER} {ORDER_PAGE.TO_VIEW_PARENT_ORDER}
+                      <a> {ORDER_PAGE.CLICK_HERE}</a>
                     </p>
                   </div>
                 </Col>}
@@ -150,10 +151,10 @@ class OrderHeader extends Component {
                 {/* </Col> */}
                 {/* <Col md={12} sm={12}> */}
                   {payments && payments.length > 0 &&
-                    payments.map(p => (
-                      <Fragment>
+                    payments.map((p, index) => (
+                      <Fragment key={index}>
                         <div className={`${styles['lne-ht2']} ${styles['fs-14']}`}>
-                          <Col className={`${styles['thick-gry-clr']} ${styles['text-capitalize']}`} md={6}>{p.payment_mode_dispaly_name.replace('_', ' ')}</Col>
+                          <Col className={`${styles['thick-gry-clr']} ${styles['text-capitalize']}`} md={6}>{p.payment_mode_display_name.replace('_', ' ')}</Col>
                           <Col md={6}> {`${p.amount.display_value} ${p.currency_code}`}</Col>
                         </div>
                         {p.card_type &&

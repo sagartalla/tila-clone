@@ -250,7 +250,7 @@ class Product extends Component {
     const popover = (
       <Popover id={productId}>
         {variants.length > 0 && variants[selectedIndex].offersApplied &&
-          variants[selectedIndex].offersApplied.map(offer => <div>{offer}</div>)}
+          variants[selectedIndex].offersApplied.map((offer, index) => <div key={`${offer}${index}`}>{offer}</div>)}
       </Popover>
     );
 
@@ -265,7 +265,7 @@ class Product extends Component {
         {discountValue > 5 &&
           <React.Fragment>
             <span className={`${styles['ml-5']} ${styles['label-gry-clr']} ${styles['fs-12']}`}>
-              <s>{variants[selectedIndex].mrp[0]}</s>
+              <s>{variants[selectedIndex].mrp[0]}&nbsp;{currency}</s>
             </span>
             {variants[selectedIndex].offersApplied &&
               variants[selectedIndex].offersApplied.length > 0 &&
@@ -382,7 +382,7 @@ class Product extends Component {
                           checked={cmpData.products &&
                             _.findIndex(cmpData.products, o => o.productId === productId) > -1}
                         />
-                        <label for="add-to-compare-srp" className={`${styles['fs-12']}`}> {PDP_PAGE.ADD_TO_COMPARE}</label>
+                        <label htmlFor="add-to-compare-srp" className={`${styles['fs-12']}`}> {PDP_PAGE.ADD_TO_COMPARE}</label>
                       </div>
                       }
                   </div>

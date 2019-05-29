@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Cookie from 'universal-cookie';
@@ -7,7 +6,6 @@ import Cookie from 'universal-cookie';
 import { selectors, actionCreators } from '../../../store/cart';
 import { Router } from '../../../routes';
 import { languageDefinations } from '../../../utils/lang';
-import SVGCompoent from '../../common/SVGComponet';
 
 import Button from '../../common/CommonButton';
 
@@ -73,8 +71,8 @@ class AddToCart extends Component {
   }
 
   render() {
-    const { isLoading, error, isAddedToCart, offerInfo, btnLoading } = this.props;
-    const { price, listingAvailable, listingId, stockError, availabilityError } = offerInfo;
+    const { isLoading, isAddedToCart, offerInfo, btnLoading } = this.props;
+    const { stockError, availabilityError } = offerInfo;
     return (availabilityError || stockError)
       ?
       null

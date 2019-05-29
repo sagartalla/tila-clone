@@ -38,7 +38,7 @@ const MiniCartBody = (props) => {
         }
         <div>
           <h5 className={`${styles['mt-0']} ${styles['pb-15']} ${styles['fontW600']} ${styles['thick-gry-clr']} ${styles['mb-0']}`}>
-            <span>My cart ({cnt})</span>
+            <span>{CART_PAGE.MY_CART} ({cnt})</span>
           </h5>
         </div>
         <div>

@@ -46,9 +46,13 @@ const showEmailVerificationScreen = (store) => {
   return store.authReducer.ui.showEmailVerificationScreen;
 };
 
+const getUserInfo = (store) => {
+  return store.authReducer.data.userInfoData;
+};
+
 const getDomainCountries = store => store.authReducer.data.domainCountries;
 
 export {
   getErrorMessege, getCountry, getLoggedInStatus, getInstaCode, getUserCreds, getDeliveryCity, getDomainCountries,
-  getLoginProgressStatus, getShowLogin, getPTAToken, showEmailVerificationScreen, getLanguage, getLoadingStatus,
+  getLoginProgressStatus, getShowLogin, getPTAToken, showEmailVerificationScreen, getLanguage, getLoadingStatus, getUserInfo,
 };
