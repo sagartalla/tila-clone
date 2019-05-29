@@ -3,12 +3,12 @@ import React, { Component, Fragment } from 'react';
 import Cookie from 'universal-cookie';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import Slider from 'react-slick';
 import { bindActionCreators } from 'redux';
 import _ from 'lodash';
 import { Link, Router } from '../../../routes';
 import Waypoint from 'react-waypoint';
 import { OverlayTrigger, Modal, Popover } from 'react-bootstrap';
-
 import constants from '../../../constants';
 import { actionCreators } from '../../../store/cam/wishlist';
 import { actionCreators as compareActions } from '../../../store/compare/actions';
@@ -59,7 +59,6 @@ class Product extends Component {
     this.showVariants = this.showVariants.bind(this);
     this.preventDefaultClick = this.preventDefaultClick.bind(this);
   }
-
   componentWillReceiveProps() {
     this.setState({ showLoader: false });
   }
@@ -297,12 +296,28 @@ class Product extends Component {
                   </div> : null
                 }
                 <div className={`${styles['img-cont']} ${styles['border-radius4']} ${styles['relative']}`}>
-                  <div className={styles['image-div']}>
+                  <div className={`${styles['image-div']} ${styles['hover-show-date']}`}>
                     <Waypoint onEnter={this.setImg}>
-                      <img src={this.state.src} />
+                      <Slider
+                        className={`${styles['ht-100per']}`}
+                        autoplay
+                        arrows={false}
+                        dots
+                        autoplaySpeed={900}
+                      >
+                        {media && media.map(image => (
+                          <div>
+                            <img src={`${constants.mediaDomain}/${image}`} alt="imageURL" />
+                          </div>
+                        ))}
+                      </Slider>
                     </Waypoint>
                   </div>
-
+                  <div className={`${styles['image-div']} ${styles['hover-show-image']}`}>
+                    <Waypoint onEnter={this.setImg}>
+                      <img src={this.state.src} alt="imageURL" />
+                    </Waypoint>
+                  </div>
                   <span className={`${styles['variants-main']}`}></span>
                   <span className={styles['full-and-globe-main']}>
                     <span className={`${styles['fullfill-main']} ${styles['flex-center']}`}>

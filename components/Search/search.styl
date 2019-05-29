@@ -132,11 +132,11 @@
               transform-origin top
   .hover-show-date
     display none
-    z-index 9
     background-color white
     left 0
     border-radius 12px
     // bottom -20%
+  
     &.active-product,&.display-buttons
         display block
         z-index 9
@@ -355,6 +355,8 @@
       display none
     .hover-show-date
       display block
+    .hover-show-image
+      display none
   .discount-main
     position absolute
     top 0
@@ -406,7 +408,7 @@
 
 .search-results .hover-show-date .quick-view .add-loader
   padding: 6px 0 6px 0px;
-
+  
 .loader
   position absolute
   bottom 0
@@ -568,3 +570,9 @@
   position sticky
   top 80px
 }
+
+.hover-show-image
+  display block
+  background-color white
+  left 0
+  border-radius 12px
