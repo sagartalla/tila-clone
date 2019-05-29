@@ -11,7 +11,7 @@ const makeStore = (initialState) => {
 	return createStore(
 		reducers,
 		initialState,
-		composeWithDevTools(applyMiddleware(thunkMiddleware, promiseMiddleware(), refHandler, responseValidator)),
+		composeWithDevTools(applyMiddleware(thunkMiddleware, promiseMiddleware(), refHandler)),
 	);
 };
 
