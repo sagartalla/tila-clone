@@ -55,14 +55,15 @@ const OrderDetails = ({ query, orderData, thankyouPage }) => {
             </div>
           </Col>
         </Row>
-        <Row className={styles['m-0']}>
+        <Row className={`${styles['m-0']} ${styles['mb-40']}`}>
           <Col md={12}>
-            <div className={`${styles['box']} ${styles['p-20']} ${styles['mt-20']}`}>
+            <div className={`${styles.box} ${styles['p-20']} ${styles['mt-20']}`}>
               {orderData.orderItems.map(item => (
                 <OrderItem
                   key={item.id}
                   payments={orderData.payments}
                   orderItem={item}
+                  showPriceInfo
                   needHelp
                   orderId={orderData.orderId}
                   thankyouPage={thankyouPage}

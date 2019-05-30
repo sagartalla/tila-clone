@@ -183,15 +183,15 @@ const twoCols = [{
 
 const threeCols = [{
   img: '/static/img/landing-home/shoes.jpg',
-  link: 'https://storefront-stage.fptechscience.com/SAU/en/srp/footwear-1101/?isListed=false&language=en&search=Shoe',
+  link: '/SAU/en/srp?search=footwear&language=en&isListed=false',
   title: 'Shoes',
 }, {
   img: '/static/img/landing-home/ls2.jpg',
-  link: 'https://storefront-stage.fptechscience.com/SAU/en/srp?disableSpellCheck=true&isListed=false&language=en&search=helmet',
+  link: '/SAU/en/srp?search=LS2&language=en&isListed=false',
   title: 'LS2',
 }, {
   img: '/static/img/landing-home/furniture.jpg',
-  link: 'https://storefront-stage.fptechscience.com/SAU/en/srp?isListed=false&language=en&search=Furniture',
+  link: '/SAU/en/srp?search=Furniture&language=en&isListed=false',
   title: 'Furniture',
 }];
 
@@ -199,22 +199,27 @@ const b_y_l = [{
   img: '/static/img/landing-home/levis-m.jpg',
   brandImg: '/static/img/landing-home/levis.jpg',
   title: 'Levis',
+  links: '/SAU/en/srp?search=Levis&language=en&isListed=false'
 }, {
   img: '/static/img/landing-home/guess-m.jpg',
   brandImg: '/static/img/landing-home/guess.jpg',
   title: 'Guess',
+  links: 'SAU/en/srp?search=Guess&language=en&isListed=false'
 }, {
   img: '/static/img/landing-home/max-m.jpg',
   brandImg: '/static/img/landing-home/max.jpg',
   title: 'Max',
+  links: 'SAU/en/srp?search=Max&language=en&isListed=false'
 }, {
   img: '/static/img/landing-home/gucci-m.jpg',
   brandImg: '/static/img/landing-home/gucci.jpg',
   title: 'Gucci',
+  links: '/SAU/en/srp?search=Gucci&language=en&isListed=false'
 }, {
   img: '/static/img/landing-home/levis-m.jpg',
   brandImg: '/static/img/landing-home/levis.jpg',
   title: 'Levis',
+  links: '/SAU/en/srp?search=Levis&language=en&isListed=false'
 }];
 
 function SamplePrevArrow(props) {
@@ -222,7 +227,6 @@ function SamplePrevArrow(props) {
   return (
     <div
       className="leftArrow"
-      onMouseOver={onClick}
       onClick={onClick}
     >
       <img src="/static/img/landing-home/c-left.svg" alt="left" />
@@ -235,7 +239,6 @@ function SampleNextArrow(props) {
   return (
     <div
       className="rightArrow"
-      onMouseOver={onClick}
       onClick={onClick}
     >
       <img src="/static/img/landing-home/c-right.svg" alt="right" />
@@ -244,40 +247,40 @@ function SampleNextArrow(props) {
 }
 
 const b_d_b = {
-  Mobiles: 'https://storefront-stage.fptechscience.com/SAU/en/srp?search=Mobiles&language=en&isListed=false',
-  Clothing: 'https://storefront-stage.fptechscience.com/SAU/en/srp?isListed=false&language=en&search=Clothing',
-  'Clothing Accessories': 'https://storefront-stage.fptechscience.com/SAU/en/srp?search=Clothing&language=en&isListed=false',
-  Laptops: 'https://storefront-stage.fptechscience.com/SAU/en/srp/laptop-1173/?search=Laptops&language=en&isListed=false',
-  'Storage Devices': 'https://storefront-stage.fptechscience.com/SAU/en/srp?search=Storage&language=en&isListed=false',
-  Cameras: 'https://storefront-stage.fptechscience.com/SAU/en/srp?search=Camera&language=en&isListed=false',
-  Televisions: 'https://storefront-stage.fptechscience.com/SAU/en/srp/Televisions-878?categoryTree=true&isListed=false',
-  'Home Appliances': 'https://storefront-stage.fptechscience.com/SAU/en/srp?search=Home%20Appliances&language=en&isListed=false',
-  'Womens Clothing': 'https://storefront-stage.fptechscience.com/SAU/en/srp/Clothing-910?categoryTree=true&isListed=false',
-  'Mens Clothing': 'https://storefront-stage.fptechscience.com/SAU/en/srp/Clothing-899?categoryTree=true&isListed=false',
-  'Fashion Accessories': 'https://storefront-stage.fptechscience.com/SAU/en/srp?isListed=false&language=en&search=Fashion%20Accessories',
-  Watches: 'https://storefront-stage.fptechscience.com/SAU/en/srp/watches-1128/?isListed=false&language=en&search=Watch',
-  'Kitchen Appliances': 'https://storefront-stage.fptechscience.com/SAU/en/srp?isListed=false&language=en&search=Kitchen%20Appliances',
-  Speakers: 'https://storefront-stage.fptechscience.com/SAU/en/srp?isListed=false&language=en&search=Speaker',
-  'Microwave Ovens': 'https://storefront-stage.fptechscience.com/SAU/en/srp?isListed=false&language=en&search=Microwave%20oven',
-  'Smart Watch': 'https://storefront-stage.fptechscience.com/SAU/en/srp?isListed=false&language=en&search=Smart%20Watch',
-  'Mobile Accessories': 'https://storefront-stage.fptechscience.com/SAU/en/srp?isListed=false&language=en&search=Mobile%20Accessories\t\t\t\t\t\t\t\t\t\t\t\t\t',
-  "Kid's Fashion": 'https://storefront-stage.fptechscience.com/SAU/en/srp?isListed=false&language=en&search=Kids',
-  Footwear: 'https://storefront-stage.fptechscience.com/SAU/en/srp/Footwear-921?categoryTree=true&isListed=false&language=en',
-  "Men's Footwear": 'https://storefront-stage.fptechscience.com/SAU/en/srp/Footwear-921?categoryTree=true&isListed=false&language=en',
-  'Women Footwear': 'https://storefront-stage.fptechscience.com/SAU/en/srp/Footwear-921?categoryTree=true&isListed=false&language=en',
-  Bags: 'https://storefront-stage.fptechscience.com/SAU/en/srp/Backpack-926?categoryTree=true&isListed=false&language=en',
-  Eyewear: 'https://storefront-stage.fptechscience.com/SAU/en/srp?isListed=false&language=en&search=eyewear',
-  Jewellery: 'https://storefront-stage.fptechscience.com/SAU/en/srp?isListed=false&language=en&search=Jewellery',
-  GUESS: 'https://storefront-stage.fptechscience.com/SAU/en/srp/womens-clothing-1056/?isListed=false&language=en&search=guess',
+  Mobiles: 'SAU/en/srp/mobiles?categoryTree=true&isListed=false&sid=848,849',
+  Clothing: '/SAU/en/srp?isListed=false&language=en&search=Clothing',
+  'Clothing Accessories': '/SAU/en/srp?search=Clothing&language=en&isListed=false',
+  Laptops: '/SAU/en/srp/laptops?categoryTree=true&isListed=false&sid=848,864',
+  'Storage Devices': '/SAU/en/srp?search=Storage&language=en&isListed=false',
+  Cameras: '/SAU/en/srp/camera?categoryTree=true&isListed=false&sid=848,882',
+  Televisions: '/SAU/en/srp/televisions?categoryTree=true&isListed=false&sid=848,878',
+  'Home Appliances': '/SAU/en/srp/home-applaince?categoryTree=true&isListed=false&sid=932,935',
+  'Womens Clothing': '/SAU/en/srp/clothing?categoryTree=true&isListed=false&sid=892,910',
+  'Mens Clothing': '/SAU/en/srp/clothing?categoryTree=true&isListed=false&sid=892,899',
+  'Fashion Accessories': '/SAU/en/srp/fashion-accessories?categoryTree=true&isListed=false&sid=892,923',
+  Watches: '/SAU/en/srp/watch?categoryTree=true&isListed=false&sid=892,929',
+  'Kitchen Appliances': '/SAU/en/srp/kitchen-appliances?categoryTree=true&isListed=false&sid=932,945',
+  Speakers: '/SAU/en/srp?search=Speakers&language=en&isListed=false',
+  'Microwave Ovens': '/SAU/en/srp?search=Microwave%20Ovens&language=en&isListed=false',
+  'Smart Watch': '/SAU/en/srp/smart-watches?categoryTree=true&isListed=false&sid=848,860,861',
+  'Mobile Accessories': '/SAU/en/srp/mobile-accessories?categoryTree=true&isListed=false&sid=848,850',
+  "Kid's Fashion": '/SAU/en/srp/kid%27s?categoryTree=true&isListed=false&sid=892,893',
+  Footwear: '/SAU/en/srp?search=Footwear&language=en&isListed=false',
+  "Men's Footwear": '/SAU/en/srp/footwear?categoryTree=true&isListed=false&sid=892,907',
+  'Women Footwear': '/SAU/en/srp/footwear?categoryTree=true&isListed=false&sid=892,921',
+  Bags: '/SAU/en/srp/backpack?categoryTree=true&isListed=false&sid=892,926',
+  Eyewear: '/SAU/en/srp?search=Eyewear&language=en&isListed=false',
+  Jewellery: '/SAU/en/srp?search=Jewellery&language=en&isListed=false',
+  GUESS: '/SAU/en/srp/womens-clothing-1056/?isListed=false&language=en&search=guess',
   FENDI: 'https://storefront-stage.fptechscience.com/SAU/en/srp/watches-1128/?isListed=false&language=en&search=FENDI',
-  'MORPHY RICHARDS': 'https://storefront-stage.fptechscience.com/SAU/en/srp/home-kitchen-appliances-1010/?isListed=false&language=en&search=morphy%20richards',
-  SHIRTS: 'https://storefront-stage.fptechscience.com/SAU/en/srp?search=shirts&language=en&isListed=false',
-  Perfumes: 'https://storefront-stage.fptechscience.com/SAU/en/srp?disableSpellCheck=true&isListed=false&language=en&search=perfume',
-  Shoes: 'https://storefront-stage.fptechscience.com/SAU/en/srp/footwear-1101/?isListed=false&language=en&search=Shoe',
-  Lights: 'https://storefront-stage.fptechscience.com/SAU/en/srp?isListed=false&language=en&search=Lights',
-  lamps: 'https://storefront-stage.fptechscience.com/SAU/en/srp?isListed=false&language=en&search=lamps',
-  bedding: 'https://storefront-stage.fptechscience.com/SAU/en/srp?isListed=false&language=en&search=Bedding%20Set',
-  furniture: 'https://storefront-stage.fptechscience.com/SAU/en/srp?isListed=false&language=en&search=Furniture',
+  'MORPHY RICHARDS': '/SAU/en/srp?search=MORPHY%20RICHARDS%20&disableSpellCheck=true&language=en&isListed=false',
+  SHIRTS: '/SAU/en/srp?search=SHIRTS&language=en&isListed=false',
+  Perfumes: '/SAU/en/srp/fragrance?categoryTree=true&isListed=false&sid=932,958,964',
+  Shoes: '/SAU/en/srp?search=Shoes&language=en&isListed=false',
+  Lights: '/SAU/en/srp/light?categoryTree=true&isListed=false&sid=932,937,940',
+  lamps: '/SAU/en/srp/lamp?categoryTree=true&isListed=false&sid=932,937,939',
+  bedding: '/SAU/en/srp/bedding-set?categoryTree=true&isListed=false&sid=932,941,942',
+  furniture: '/SAU/en/srp/home-furnishing?categoryTree=true&isListed=false&sid=932,941',
 }
 
 const HomePage = () => (
@@ -352,56 +355,6 @@ const HomePage = () => (
           </Slider>
         </div>
       </div>
-      <Row className="d_items" >
-        <div className={`${styles['flex-center']} ${styles['mb-15']}`}>
-          <span className={`title ${styles['mr-15']} ${styles['fs-18']}`}>DEALS OF THE DAY</span>
-          <span className={`timer ${styles['flex-center']}`}>
-            <SVGComponent clsName="time" src="icons/common-icon/timer" />
-            <span className={`${styles['fs-12']}`}>
-              <span className={styles.fontW600}>ENDS IN:</span>  17 : 16 : 50
-            </span>
-          </span>
-        </div>
-        <Slider
-          asNavFor={sliderDODAY}
-          ref={slider => (sliderDODAY = slider)}
-          lazyLoad
-          centerMode
-          className={styles['ht-100per']}
-          slidesToShow={6}
-          responsive={responsive}
-          nextArrow={<SampleNextArrow />}
-          prevArrow={<SamplePrevArrow />}
-        >
-          {d_o_day.map(i => (
-            <div className={styles.relative}>
-              <div className="d_item" key={i}>
-                <div className="image">
-                  <img src={i.img} alt={i.title} />
-                </div>
-                <div className="t_n_p">
-                  <div>
-                    <span className={styles.fontW600}>{i.brand}</span>{' '}-{' '}
-                    <span>{i.title}</span>
-                  </div>
-                  <div>
-                    <span className={`${styles.fontW600} ${styles['fs-12']}`}>{i.currency}</span>&nbsp;
-                    <span className={`${styles.fontW600} ${styles['fs-18']}`}>{i.price}</span>&nbsp;&nbsp;
-                    <span className={styles['light-gray']}><s>{i.mrp}</s></span>
-                  </div>
-                </div>
-                <div className="b_n_c">
-                  <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} buy_now`}>BUY NOW</button>
-                  <button className={`${styles['fp-btn']} add_to_cart`}>ADD TO CART</button>
-                </div>
-              </div>
-              <div className="discount">
-                {Math.round(((i.price - i.mrp) / i.mrp) * 100)}%
-              </div>
-            </div>
-            ))}
-        </Slider>
-      </Row>
       <div className="display-t-i-f">
         <div className={`${styles['fs-20']} title`}>TOP IN FASHION</div>
         <div className="d1">
@@ -476,11 +429,11 @@ const HomePage = () => (
           </a>
         </div>
       </div>
-      <Row className={`${styles['m-15']} ${styles['mt-40']} ${styles['mb-40']}`}>
+      <Row className={`${styles['m-15']} ${styles['mt-40']} ${styles['mb-40']} brand-details-inn`}>
         {threeCols.map(col => (
           <Col md={4} xs={4} sm={4}>
-            <a href={col.link}>
-              <img className="resp-img-link" src={col.img} alt={col.title} />
+            <a href={col.link} key={col.title}>
+              <img src={col.img} alt={col.title} className="img-responsive-in" />
             </a>
           </Col>
         ))}
@@ -558,10 +511,10 @@ const HomePage = () => (
           </a>
         </div>
       </div>
-      <Row className={`${styles['m-15']} ${styles['mt-40']} ${styles['mb-40']}`}>
+      <Row className={`${styles['m-15']} ${styles['mt-40']} ${styles['mb-40']} brand-details-inn`}>
         {twoCols.map(col => (
-          <Col md={6} xs={6} sm={6}>
-            <img className="resp-img-link" src={col.img} alt={col.title} />
+          <Col md={6} xs={6} sm={6} key={col.title}>
+            <img src={col.img} alt={col.title} className="img-responsive-in" />
           </Col>
         ))}
       </Row>
@@ -662,108 +615,21 @@ const HomePage = () => (
         >
           {b_y_l.map(i => (
             <Col key={i} md={3} xs={3} sm={3}>
-              <div className="image">
-                <img className="resp-img-link" src={i.img} alt={i.img} />
-              </div>
-              <div className="b_l">
-                <img src={i.brandImg} width="80" height="30" alt={i.brandImg} />
-                <SVGComponent clsName="arrow arrow-black " src="icons/common-icon/arrow" />
-              </div>
+              <a href={i.links} key={i.title}>
+                <div className="image">
+                  <img src={i.img} alt={i.img} />
+                </div>
+                <div className="b_l">
+                  <img src={i.brandImg} width="80" height="30" alt={i.brandImg} />
+                  <SVGComponent clsName="arrow arrow-black " src="icons/common-icon/arrow" />
+                </div>
+              </a>
             </Col>
           ))}
         </Slider>
         <div className={`${styles.breadcrums} ${styles['mt-10']} ${styles.pointer}`}>
           <span>Zara  |  Guess  |  Max  |  Nike  |  Fossil  |  Levis  |  Wrangler  |  Shein  & more…</span>
         </div>
-      </Row>
-
-      <Row className="d_items" >
-        <div>
-          <span className={`title ${styles['fs-18']}`}>BEST SELLING</span>
-        </div>
-        <Slider
-          asNavFor={sliderBS}
-          ref={slider => (sliderBS = slider)}
-          lazyLoad
-          className={styles['ht-100per']}
-          centerMode
-          slidesToShow={6}
-          responsive={responsive}
-          nextArrow={<SampleNextArrow />}
-          prevArrow={<SamplePrevArrow />}
-        >
-          {d_o_day.map(i => (
-            <div className={styles.relative}>
-              <div className="d_item" key={i}>
-                <div className="image">
-                  <img src={i.img} alt={i.title} />
-                </div>
-                <div className="t_n_p">
-                  <div>
-                    <span className={styles.fontW600}>{i.brand}</span>{' '}-{' '}
-                    <span>{i.title}</span>
-                  </div>
-                  <div>
-                    <span className={`${styles.fontW600} ${styles['fs-12']}`}>{i.currency}</span>&nbsp;
-                    <span className={`${styles.fontW600} ${styles['fs-18']}`}>{i.price}</span>&nbsp;&nbsp;
-                    <span className={styles['light-gray']}><s>{i.mrp}</s></span>
-                  </div>
-                </div>
-                <div className="b_n_c">
-                  <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} buy_now`}>BUY NOW</button>
-                  <button className={`${styles['fp-btn']} add_to_cart`}>ADD TO CART</button>
-                </div>
-              </div>
-              <div className="sold">
-                {Math.round(Math.random() * 100)}+ Sold
-              </div>
-            </div>
-            ))}
-        </Slider>
-      </Row>
-      <Row className="d_items" >
-        <div>
-          <span className={`title ${styles['fs-18']}`}>RECENTLY VIEWED</span>
-        </div>
-        <Slider
-          asNavFor={sliderRV}
-          ref={slider => (sliderRV = slider)}
-          lazyLoad
-          className={styles['ht-100per']}
-          centerMode
-          slidesToShow={6}
-          responsive={responsive}
-          nextArrow={<SampleNextArrow />}
-          prevArrow={<SamplePrevArrow />}
-        >
-          {d_o_day.map(i => (
-            <div className={styles.relative}>
-              <div className="d_item" key={i}>
-                <div className="image">
-                  <img src={i.img} alt={i.title} />
-                </div>
-                <div className="t_n_p">
-                  <div>
-                    <span className={styles.fontW600}>{i.brand}</span>{' '}-{' '}
-                    <span>{i.title}</span>
-                  </div>
-                  <div>
-                    <span className={`${styles.fontW600} ${styles['fs-12']}`}>{i.currency}</span>&nbsp;
-                    <span className={`${styles.fontW600} ${styles['fs-18']}`}>{i.price}</span>&nbsp;&nbsp;
-                    <span className={styles['light-gray']}><s>{i.mrp}</s></span>
-                  </div>
-                </div>
-                <div className="b_n_c">
-                  <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} buy_now`}>BUY NOW</button>
-                  <button className={`${styles['fp-btn']} add_to_cart`}>ADD TO CART</button>
-                </div>
-              </div>
-              <div className="discount">
-                {Math.round(((i.price - i.mrp) / i.mrp) * 100)}%
-              </div>
-            </div>
-            ))}
-        </Slider>
       </Row>
     </div>
   </NoSSR>

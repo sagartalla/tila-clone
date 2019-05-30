@@ -14,7 +14,8 @@ import Notifications from './Notifications';
 import UserVault from './UserVault';
 import Messages from './Messages';
 import MyCoupons from './MyCoupons/MyCoupon';
-import FooterBar from '../Footer/index';
+import FooterBar from '../Footer';
+import Preferences from './Preferences';
 import AuthWrapper from '../common/AuthWrapper';
 
 import lang from '../../utils/language';
@@ -55,6 +56,8 @@ class Cam extends React.Component {
           return <Notifications />;
         case 'uservault':
           return <UserVault />;
+        case 'preferences':
+          return <Preferences />;
         default:
           return <UserInfo />;
       }
@@ -66,7 +69,7 @@ class Cam extends React.Component {
           <AuthWrapper>
             <Grid>
               <Row className={styles['pt-30']}>
-                <Col xs={12} md={3} sm={3} className={styles['pr-0']}>
+                <Col xs={12} md={3} sm={3} className={`${styles['pr-0']} ${styles['sidebar-position']}`}>
                   <Sidebar query={query} />
                 </Col>
                 <Col xs={12} md={9} sm={9}>

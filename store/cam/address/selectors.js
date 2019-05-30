@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 const getShippingAddressResults = (store) => {
   if (store.shippingAddrReducer.data && store.shippingAddrReducer.data.length > 0) {
     return store.shippingAddrReducer.data;
@@ -25,8 +27,8 @@ const getAddrById = store => (addrId) => {
 };
 
 const getDefaultAddress = (store) => {
-  const ddA = store.shippingAddrReducer.data.deliverToAddress
-  if(ddA) {
+  const ddA = store.shippingAddrReducer.data.deliverToAddress;
+  if (ddA) {
     return ddA;
   }
   if (store.shippingAddrReducer.data && store.shippingAddrReducer.data.length > 0) {

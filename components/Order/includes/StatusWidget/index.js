@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Row } from 'react-bootstrap';
 import orderStatusAttributes from '../OrderDetails/orderAttributes';
 import lang from '../../../../utils/language';
@@ -27,7 +26,7 @@ const StatusWidget = ({ currentStatus }) => {
                 barLen = pivot * k;
               }
               return (
-                <div className={`${styles['relative']}`}>
+                <div className={`${styles['relative']}`} key={k}>
                   <span className={`${styles['point']} ${actual_time ? (i.status == 'CANCELLED' ? styles['cancelled'] : styles['active']) : ''} `} style={{ left: `${k == 0 ? '0' : (pivot * k)}%` }}></span>
                   <span className={`${styles['pt-10']} ${styles['pb-10']} ${styles['flex']} ${styles['fs-12']}`}>{orderStatusAttributes[i.status]}</span>
                 </div>

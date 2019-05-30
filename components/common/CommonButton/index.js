@@ -11,36 +11,36 @@ const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styl
 
 /* eslint-disable */
 class Button extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      hover: false,
-    };
-  }
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     hover: false,
+  //   };
+  // }
 
-  onMouseEnter = value => () => {
-    let { hover } = this.state;
-    if (value) {
-        hover = true;
-    } else {
-        hover = false;
-    }
-    this.setState({
-        hover,
-    });
-  }
+  // onMouseEnter = value => () => {
+  //   let { hover } = this.state;
+  //   if (value) {
+  //       hover = true;
+  //   } else {
+  //       hover = false;
+  //   }
+  //   this.setState({
+  //       hover,
+  //   });
+  // }
   render() {
-    const { className, onClick, disabled, hoverClassName, showImage, btnText, id } = this.props;
+    const { className, onClick, disabled, showImage, btnText, id } = this.props;
     let { btnLoading } = this.props;
-    const { hover } = this.state;
+    // const { hover } = this.state;
     return (
     <button
-        className={hover ? ` ${styles['button-hoverstyl']} ${className} ${styles[hoverClassName]}` : `${styles['button-styl']} ${className}` }
+        className={`${styles['button-styl']} ${className}` }
         id={id}
         onClick={onClick}
         disabled={disabled}
-        onMouseOver={this.onMouseEnter(true)}
-        onMouseOut={this.onMouseEnter(false)}
+        // onMouseOver={this.onMouseEnter(true)}
+        // onMouseOut={this.onMouseEnter(false)}
     >
     {btnLoading ?
       <div className={`${styles['loader-div']}`} >
@@ -61,7 +61,7 @@ class Button extends Component {
 Button.propTypes = {
   onClick: PropTypes.func,
   btnText: PropTypes.string,
-  className: PropTypes.object,
+  // className: PropTypes.object,
   btnLoading: PropTypes.bool,
   disabled: PropTypes.bool,
   id: PropTypes.string,

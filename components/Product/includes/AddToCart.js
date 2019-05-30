@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Cookie from 'universal-cookie';
@@ -7,8 +6,8 @@ import Cookie from 'universal-cookie';
 import { selectors, actionCreators } from '../../../store/cart';
 import { Router } from '../../../routes';
 import { languageDefinations } from '../../../utils/lang';
-import SVGCompoent from '../../common/SVGComponet';
 import ProductPrice from '../includes/ProductPrice';
+
 import Button from '../../common/CommonButton';
 
 import lang from '../../../utils/language';

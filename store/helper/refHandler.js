@@ -1,4 +1,4 @@
-import { actions } from './auth';
+import { actions } from '../auth';
 
 const refStore = {};
 const refHandler = ({ getState }) => {

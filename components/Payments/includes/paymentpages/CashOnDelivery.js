@@ -113,8 +113,8 @@ class CashOnDelivery extends React.Component {
     {
       this.state.nextStep === 'captcha' && (
         <div className={styles['checkbox-material']}>
-          <input id="pay-delivery" type="checkbox" onChange={ this.handleChange } checked={ this.state.checked }/>
-          <label for="pay-delivery"> {PAYMENT_PAGE.I_AGREE_TO_PAY_COD} </label>
+          <input id="pay-delivery" type="checkbox" onChange={ this.handleChange } checked={ this.state.checked }/>&nbsp;
+          <label htmlFor="pay-delivery"> {PAYMENT_PAGE.I_AGREE_TO_PAY_COD} </label>
         </div>
       )
     }
@@ -145,7 +145,7 @@ class CashOnDelivery extends React.Component {
           null
     }
     </Col>
-    <Col md={6} sm={12} xs={12}>
+    <Col md={10} sm={12} xs={12}>
       {
         this.state.showContinueButton &&
            (

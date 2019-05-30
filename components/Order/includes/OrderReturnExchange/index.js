@@ -40,12 +40,12 @@ class OrderReturnExchange extends Component {
     const { orderId, orderItemId, returnExchangeType, variantId } = query;
 
     const params = {
-      orderId: orderId,
+      orderId,
       issueType: returnExchangeType,
       step: STEPS.REASONS,
       returnExchangeType: returnExchangeType
     };
-    if(orderIssue.orderId !== orderId) {      
+    if(orderIssue.orderId !== orderId) {
       getOrderDetails({ orderId });
     } else {
       params.selectedItem = getSelectedOrder(orderItemId);
@@ -112,7 +112,7 @@ class OrderReturnExchange extends Component {
                           <img src={`${constants.mediaDomain}/${img}`} />
                         </Col>
                         <Col md={10}>
-                          <h4 className={`${styles['fs-16']} ${styles['fontW600']}`}>{name}</h4>
+                          <h4 className={`${styles['fs-16']} ${styles['mt-0']} ${styles['fontW600']}`}>{name}</h4>
                           <span className={styles['fs-14']}>{CART_PAGE.QUANTITY}: {orderDetails && orderDetails.order_items && orderDetails.order_items[0].quantity}</span>
                         </Col>
                         <Col md={10} className={`${styles['mt-25']}`}>

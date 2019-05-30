@@ -155,7 +155,7 @@ export default class FeedbackModal extends Component {
                 <StarRating
                   rating={rating}
                   total={5}
-                  clsStyl={`${styles['star-icon']}`}
+                  clsName={`${styles['star-icon']}`}
                   onRate={this.retrieveRating}
                 />
               </div>

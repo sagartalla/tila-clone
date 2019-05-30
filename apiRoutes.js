@@ -101,24 +101,28 @@ apiRoutes
     res.json({});
   })
   .get('/googleApi', (req, res) => {
-    const {api, latitude, longitude} = req.query;
+    const {
+      api, latitude, longitude,
+    } = req.query;
     return axios
       .get(`${GOOGLE_MAPS_URL}${api}?key=${GOOGLE_KEY}&latlng=${latitude},${longitude}&sensor=true`)
-      .then(({data}) => {
+      .then(({ data }) => {
         const { results } = data;
-        const city = results.length ? _.filter(results[0].address_components, (ac) => {
-          return ac.types.indexOf('administrative_area_level_2') !== -1 || ac.types.indexOf('locality') !== -1
-        })[0].long_name : null;
-        const country = results.length ? _.filter(results[0].address_components, (ac) => {
-          return ac.types.indexOf('country') !== -1;
-        })[0].long_name : null;
-        const returnData = {
-          country,
-          city,
-          displayCity: `${city}, ${country}`,
-        };
-        req.universalCookies.set('shippingInfo', returnData);
-        res.json(returnData);
+        // const city = results.length ? _.filter(results[0].address_components, (ac) => {
+        //   return ac.types.indexOf('administrative_area_level_2') !== -1 || ac.types.indexOf('locality') !== -1
+        // })[0].long_name : null;
+        // const country = results.length ? _.filter(results[0].address_components, (ac) => {
+        //   return ac.types.indexOf('country') !== -1;
+        // })[0].long_name : null;
+        // const returnData = {
+        //   country,
+        //   city,
+        //   displayCity: `${city}, ${country}`,
+        // };
+        // if (updateCookie) {
+        //   req.universalCookies.set('shippingInfo', returnData);
+        // }
+        res.json(results[0]);
       });
   })
   .get('/autoCompleteCity', (req, res) => {

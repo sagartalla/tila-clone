@@ -19,9 +19,9 @@ const { COUPON_OFFERS } = languageDefinations();
 const coupons = props => (
     props.couponData && props.couponData.length > 0 ?
     <>
-        {props.couponData && props.couponData.length > 0 && props.couponData.map(data =>
+        {props.couponData && props.couponData.length > 0 && props.couponData.map((data, index) =>
         (
-          <div className={props.showCartCoupon ? `${styles.couponDiv}` : `${styles.couponDiv} ${styles.couponMargin} `}>
+          <div className={props.showCartCoupon ? `${styles.couponDiv}` : `${styles.couponDiv} ${styles.couponMargin} `} key={index}>
             <div className={props.showExpiredCoupons ? '' : `${styles.couponCodeListing} ${styles.width50} `}>
               <div className={props.showExpiredCoupons ? `${styles['p-10']}` : `${styles['justify-center']} ${styles.flex}`}>
                 <div className={`${styles.ellipsis} ${styles.fontW600}`} title={data.coupon_code}>{data.coupon_code}</div>

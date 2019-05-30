@@ -28,7 +28,7 @@ const getCartResults = (store) => {
           variant_id: item.listing_info.variant_id,
           listing_id: item.listing_info.listing_id,
           cart_item_id: item.cart_item_id,
-          name: item.product_details.product_details_vo.cached_product_details.attribute_map.calculated_display_name.attribute_values[0].value,
+          name: item.product_details && item.product_details.product_details_vo.cached_product_details.attribute_map.calculated_display_name.attribute_values[0].value,
           offer_price: item.listing_info.pricing && item.listing_info.pricing.offer_price.display_value,
           selling_price: item.listing_info.pricing && item.listing_info.pricing.price.display_value,
           total_amount: item.total_amount.display_value,
@@ -40,15 +40,15 @@ const getCartResults = (store) => {
           brand_name: item && item.product_details && item.product_details.catalog_details.attribute_map.brand.attribute_values[0].value,
           gift_info: item.gift_info,
           shipping: item.listing_info.shipping,
-          catalogId: item.product_details.catalog_details.catalog_id,
-          itemType: item.product_details.catalog_details.item_type_name,
+          catalogId: item.product_details && item.product_details.catalog_details.catalog_id,
+          itemType: item.product_details && item.product_details.catalog_details.item_type_name,
           warranty_duration: item.listing_info.warranty_policy.preferred_policy ?
           item.listing_info.warranty_policy.policies[item.listing_info.warranty_policy.preferred_policy] : {},
           discount: item.listing_info.pricing && item.listing_info.pricing.discount_per_mrp,
           mrp: item.listing_info.pricing && item.listing_info.pricing.mrp.display_value,
           offerDiscounts: item.listing_info.pricing && item.listing_info.pricing.actions,
           total_discount: item.listing_info.pricing && item.listing_info.pricing.total_discount_mrp.display_value,
-          variantAttributes: item.product_details.product_details_vo.cached_variant[item.listing_info.variant_id].attribute_map ?
+          variantAttributes: item.product_details && item.product_details.product_details_vo.cached_variant[item.listing_info.variant_id].attribute_map ?
             Object.values(item.product_details.product_details_vo.cached_variant[item.listing_info.variant_id].attribute_map)
               .filter(attr => attr.visible) : [],
         };

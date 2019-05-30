@@ -38,12 +38,15 @@
           overflow: hidden;
           margin-bottom: 0;
           color: #fff;
+          .level-sub-item:hover
+            color #fff
           li
             cursor pointer
             height 40px
             &:hover
               border-bottom 5px solid #fff
               box-sizing border-box
+              color #fff
 
 .profile-part
   .ple-icon
@@ -418,7 +421,15 @@ nav
     &:focus
       outline none
 
-
+.overlap {
+    position: absolute;
+    padding: 9px 21px;
+    font-size: 16px;
+    color: light-gray-clr;
+    opacity: 0.6;
+    z-index: 9999;
+    cursor: text;
+}
 @media screen and (min-device-width: 320px) and (max-device-width: 736px) and (orientation : portrait){
   .login-reg-modal {
     width 88%

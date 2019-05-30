@@ -87,7 +87,7 @@ const AddressNew = (props) => {
           </Col>
           <Col md={6} sm={12} xs={12}>
             <div className={`${styles['fp-input']} ${styles['common-input-mb']}`}>
-              <input type="text" name="country_name" onChange={inputOnChange} value={data.country_name} autoComplete={false} className={styles.input} required />
+              <input type="text" name="country_name" onChange={inputOnChange} value={data.country_name} autoComplete="off" className={styles.input} required />
               <span className={styles.highlight} />
               <span className={styles.bar} />
               <label>{DELIVERY_ADDR_PAGE.COUNTRY}</label>
@@ -121,12 +121,12 @@ const AddressNew = (props) => {
               <label>{DELIVERY_ADDR_PAGE.CITY}</label>
               {
                 <div className={`${styles['auto-suggestions-list']}`}>
-                  {showCitiesData && getAllCities.map(result => (
+                  {showCitiesData && getAllCities.map((result, index) => (
                     <div
-                      key={result.rescity_nameult}
+                      key={index}
                       className={`${styles['auto-suggestions']} ${styles['bg-white']}`}
                     >
-                      <div data-id={result.code} name="city_code" onClick={selectCityFromSuggesstions} className={`${styles.item} ${styles['fs-12']} ${styles['pl-5']} ${styles['ht-25']} ${styles.pointer}`}>{result.city_name}</div>
+                      <div data-id={result.city_code} name="city_code" onClick={selectCityFromSuggesstions} className={`${styles.item} ${styles['fs-12']} ${styles['pl-5']} ${styles['ht-25']} ${styles.pointer}`}>{result.city_name}</div>
                     </div>
                   ))}
                 </div>
@@ -165,7 +165,7 @@ const AddressNew = (props) => {
           </Col>
           <Col md={2} sm={4} xs={4} className={`${styles['pr-0']}`}>
             <div className={`${styles['fp-input']} ${styles['common-input-mb']}`}>
-              <input type="number" name="mobile_country_code" value={data.mobile_country_code} className={styles.input} required />
+              <input type="number" name="mobile_country_code" defaultValue={data.mobile_country_code} className={styles.input} required />
               <span className={styles.highlight} />
               <span className={styles.bar} />
               <label>{DELIVERY_ADDR_PAGE.CODE}</label>

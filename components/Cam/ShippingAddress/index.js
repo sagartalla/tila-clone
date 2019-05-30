@@ -53,14 +53,14 @@ class ShippingAddress extends Component {
     this.validations = new FormValidator([
       {
         field: 'first_name',
-        method: this.validate,
-        message: 'Required First Name',
+        method: this.validateNames,
+        message: 'Should be between 3 to 20 characters',
         validWhen: false,
       },
       {
         field: 'last_name',
-        method: this.validate,
-        message: 'Required Last Name',
+        method: this.validateNames,
+        message: 'Should be between 3 to 20 characters',
         validWhen: false,
       },
       {
@@ -143,7 +143,7 @@ class ShippingAddress extends Component {
   getDataFromMap(json) {
     const {
       lat, lng, cityCountryObj: {
-        country, address, postal_code,
+        country, address, postal_code, city,
       },
     } = json;
     const addr = { ...this.state.addr };
@@ -154,7 +154,8 @@ class ShippingAddress extends Component {
     addr.address_line_1 = address || '';
     addr.country_name = country.long_name || '';
     addr.shipping_country_code = country.short_name || '';
-    // addr.city = city || '';
+    addr.city = '';
+    addr.city_code = '';
     addr.postal_code = postal_code || '';
     countriesData.forEach((ctr) => {
       if (ctr.code === country.short_name) {
@@ -164,9 +165,16 @@ class ShippingAddress extends Component {
       }
     });
     if (addr.shipping_country_code) {
-      getCitiesByCountryCode(addr.shipping_country_code);
+      getCitiesByCountryCode(addr.shipping_country_code).then((res) => {
+        res.value.data.forEach((cityObj) => {
+          if (cityObj.city_name === city) {
+            addr.city = cityObj.city_name;
+            addr.city_code = cityObj.city_code;
+          }
+        });
+        this.setState({ addr });
+      });
     }
-    this.setState({ addr });
   }
 
   setAsDefaultLocation(e) {
@@ -202,6 +210,10 @@ class ShippingAddress extends Component {
 
   mobileValidation = (fieldValue) => {
     return !(/^([0-9]){6,12}$/.test(fieldValue));
+  }
+
+  validateNames = (fieldValue) => {
+    return !(/^([a-zA-z0-9]){3,20}$/.test(fieldValue));
   }
 
   selectCityFromSuggesstions({ target }) {

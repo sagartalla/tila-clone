@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Cookie from 'universal-cookie';
@@ -7,7 +6,6 @@ import moment from 'moment';
 // import ProductPrice from '../includes/ProductPrice';
 import GeoWidget from '../../common/GeoWidget';
 import { languageDefinations } from '../../../utils/lang';
-import { actionCreators, selectors } from '../../../store/product';
 import SVGCompoent from '../../common/SVGComponet';
 import Warranty from './Warranty';
 
@@ -30,7 +28,7 @@ class Shipping extends Component {
 
     const { shippingInfo, offerInfo } = this.props;
     const {
-      shipping_fees, shipping_days, shippable, acceptsReturns, maxDaysToReturn, isPreview,
+      shipping_days, shippable, acceptsReturns, maxDaysToReturn, isPreview,
     } = shippingInfo;
     const { availabilityError } = offerInfo;
 
@@ -126,10 +124,6 @@ class Shipping extends Component {
     );
   }
 }
-
-Shipping.PropTypes = {
-
-};
 
 const mapStateToProps = store => ({});
 

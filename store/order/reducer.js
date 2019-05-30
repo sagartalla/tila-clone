@@ -13,9 +13,10 @@ const initialState = {
         cancelStatus: {},
         exchangeVariants: [],
         selectedReasons:{},
-        refundOptions:[],
+        refundOptions:{},
         exchangeId:{},
-        refundInitiated:false
+        refundInitiated:false,
+        cancelRefundMode:{}
       },
     orderTracker: {},
   },
@@ -83,7 +84,7 @@ const productReducer = typeToReducer({
           ...state.data,
           orderIssue: {
             ...state.data.orderIssue,
-            refundOptions: action.payload.data
+            refundOptions: action.payload.data,
           }
         }
       }
@@ -138,6 +139,18 @@ const productReducer = typeToReducer({
         orderIssue: {
           ...state.data.orderIssue,
           selectedItem: action.payload.data.selectedItem
+        }
+      }
+    }
+  },
+  [actions.SET_CANCEL_REFUNDMODE] : (state,action) => {
+    return {
+      ...state,
+      data:{
+        ...state.data,
+        orderIssue:{
+          ...state.data.orderIssue,
+          cancelRefundMode:action.payload.data
         }
       }
     }

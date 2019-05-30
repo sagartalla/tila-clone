@@ -14,13 +14,14 @@ import { Router } from '../../routes';
 import SVGComponent from '../common/SVGComponet';
 import DragDropUpload from '../common/DragDropUpload';
 import lang from '../../utils/language';
-
-import CustomToggle from './CustomToggle';
+import SearchContext from '../helpers/context/search';
 
 import main_en from '../../layout/main/main_en.styl';
 import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './header_en.styl';
 import styles_ar from './header_ar.styl';
+
+
 
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
@@ -39,7 +40,7 @@ class Search extends Component {
   constructor(props) {
     super(props);
     const {
-      query, isCategoryTree, choosenCategoryName, searchText,
+      query, isCategoryTree, choosenCategoryName,
     } = props;
     let finalQuery = query || (isCategoryTree ? choosenCategoryName : '');
     finalQuery = finalQuery.split('-').join(' ');
@@ -75,25 +76,48 @@ class Search extends Component {
       return;
     }
     this.setState({
-      query: e.target.value.replace(/^\s+/g, ''),
+      query: e.target.value.toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ').replace(/^\s+/g, ''),
       searchInput: true,
+      autoSearchValue: '',
     }, () => {
       this.fetchSuggestions();
     });
   }
 
+  setSelectionRange = () => {
+    const { query } = this.state;
+    const input = document.getElementById('text-box');
+    input.focus();
+    input.setSelectionRange(query.length, query.length);
+  }
   setSearchText(e) {
     this.setState({
       query: e.target.textContent,
       suggestions: [],
     }, () => {
       this.submitQuery(e);
-      window.scrollTo(0, 0);
+    });
+  }
+
+
+  handleSearch = (e) => {
+    const { suggestions } = this.props;
+    if (e.keyCode === 9 || e.keyCode === 39) {
+      this.setState({
+        query: suggestions && suggestions.length > 0 && suggestions[0].data_edgengram,
+      });
+    }
+  }
+  mouseOver = (e) => {
+    const searchValue = e.target.getAttribute('data');
+    this.setState({
+      query: searchValue,
+      autoSearchValue: searchValue,
     });
   }
 
   submitQuery(e) {
-    e.preventDefault();
+    e && e.preventDefault();
     if (!this.state.query) return false;
     // const { isCategoryTree } = this.props;
     digitalData.page.pageInfo.onsiteSearchTerm = this.state.query;
@@ -105,7 +129,7 @@ class Search extends Component {
     this.setState({
       searchInput: false,
     });
-
+    window.scrollTo(0, 0);
     Router.pushRoute(`/${country}/${language}/srp?search=${this.state.query}&${Object.entries(this.props.optionalParams).map(([key, val]) => `${key}=${val}`).join('&')}`);
   }
 
@@ -118,10 +142,12 @@ class Search extends Component {
   }
 
   handleUploadImage(file) {
-    this.props.fetchImageSearchData(file);
+    this.props.fetchImageSearchData(file).then(() => {
+      this.submitQuery();
+    });
     this.setState({
       openImagesearch: false,
-    }, () => Router.pushRoute(`/${country}/${language}/srp`));
+    });
   }
 
   fetchSuggestions() {
@@ -135,25 +161,34 @@ class Search extends Component {
 
   render() {
     const {
-      suggestions, openImagesearch, query,
+      suggestions, openImagesearch, query, autoSearchValue, searchInput,
     } = this.state;
     return (
       <div className={styles['search-wrapper']}>
         <form onSubmit={this.submitQuery}>
 
           <Dropdown id="search-toggle" className={`${styles['cart-inn']} ${styles.width100}`}>
-            <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
-              <input
-                className={styles['search-input']}
-                placeholder={SEARCH_PAGE.SEARCH_YOUR_FAV_ITEM}
-                onChange={this.onChangeSearchInput}
-                value={query}
-              />
+            <Dropdown.Toggle id="dropdown-custom-components">
+              <div className={styles.overlap} tabIndex="0" onFocus={this.setSelectionRange}>
+                {query.length < 1 ? '' : (autoSearchValue || (suggestions.length > 0 && query === suggestions[0].data_edgengram.slice(0, query.length) ? suggestions[0].data_edgengram : ''))}
+              </div>
+              <SearchContext.Consumer>
+                {context => (
+                  <input
+                    className={styles['search-input']}
+                    id="text-box"
+                    placeholder={SEARCH_PAGE.SEARCH_YOUR_FAV_ITEM}
+                    onChange={this.onChangeSearchInput}
+                    value={(context === 'search') || searchInput ? query : ''}
+                    onKeyDown={this.handleSearch}
+                  />
+              )}
+              </SearchContext.Consumer>
             </Dropdown.Toggle>
             <Dropdown.Menu className={`${styles.width100} ${styles['p-0']} ${styles['m-0']}`}>
               {suggestions.length > 0 &&
                 suggestions.map((s, index) => (
-                  <MenuItem className={styles['search-suggestion']} onClick={this.setSearchText} eventKey={index + 1}>
+                  <MenuItem className={styles['search-suggestion']} onClick={this.setSearchText} data={s.data_edgengram} onFocus={this.mouseOver} eventKey={index + 1}>
                     <a className={`${styles['black-color']}`}>
                       <span>{s.data_edgengram}</span>
                     </a>
@@ -163,7 +198,7 @@ class Search extends Component {
           </Dropdown>
 
           <div className={`${styles['search-btn']} ${styles['r-40']}`} onClick={this.imageSearch}>
-           <SVGComponent clsName={`${styles['searching-icon']}`} src="icons/camera"/>
+            <SVGComponent clsName={`${styles['searching-icon']}`} src="icons/camera"/>
           </div>
           <button type="submit" className={styles['search-btn']}><SVGComponent clsName={`${styles['searching-icon']}`} src="icons/search/search-white-icon" /></button>
         </form>
@@ -186,7 +221,6 @@ class Search extends Component {
 
 Search.propTypes = {
   getSearchResults: PropTypes.func.isRequired,
-  searchText: PropTypes.string.isRequired,
   onChangeSearchText: PropTypes.func.isRequired,
 };
 

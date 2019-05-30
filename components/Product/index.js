@@ -63,7 +63,7 @@ const getProductComponent = (isPreview, taskCode) => {
         } = productData;
         digitalData.page.pageInfo.pageName = titleInfo.title;
         digitalData.page.category = { primaryCategory: productData.categoryType };
-        digitalData.page.pageInfo.breadCrumbs = productData.breadcrums.map(item => item.display_name_en);
+        digitalData.page.pageInfo.breadCrumbs = productData.breadcrums ? productData.breadcrums.map(item => item.display_name_en) : [];
         this.props.track({
           eventName: 'Product Viewed',
           ProductData: productData,
@@ -86,7 +86,7 @@ const getProductComponent = (isPreview, taskCode) => {
           if (index === -1) {
             arr.unshift({
               nm: titleInfo.title,
-              im: imgUrls[0].url,
+              im: imgUrls && imgUrls[0].url,
               pr,
               cd,
               uri: location.href,
@@ -197,7 +197,7 @@ const getProductComponent = (isPreview, taskCode) => {
                   <Col sm={12} className={`${styles['details-right-part']} ${styles[stickyElements.details]}`}>
                     <div className={`${styles['details-right-part-inn']}`}>
                       <div className={`${styles['ipad-details']} ${styles['ipad-pr-15']}`}>
-                        <TitleInfo {...titleInfo} isPreview={isPreview} offerInfo={offerInfo} />
+                        <TitleInfo {...titleInfo} catalogObj={catalogObj} isPreview={isPreview} offerInfo={offerInfo} />
                         <ProductDetails
                           details={details}
                           keyfeatures={keyfeatures}
