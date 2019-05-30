@@ -304,7 +304,7 @@ class Product extends Component {
                   </div> : null
                 }
                 <div className={`${styles['img-cont']} ${styles['border-radius4']} ${styles['relative']}`}>
-                      <div className={`${styles['image-div']} `}>
+                      <div className={`${styles['image-div']} srp-slider`}>
                         {src ?
                             <img src={src} alt="imageURL" />
                           :
