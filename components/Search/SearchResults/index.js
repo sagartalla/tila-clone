@@ -82,7 +82,7 @@ class SearchResults extends Component {
     }, loadMore);
   }
   renderQuickView(itemNum,row,vid) {
-    
+
     this.rowNumber = row;
     this.itemNum = itemNum
     this.variantId[`index${itemNum}`] = vid
@@ -158,8 +158,8 @@ class SearchResults extends Component {
     }
 
     let totalresults = product.map((item,index) => {
-      this.productIndex[`index${index}`] = this.productIndex[`index${index}`] || item.id
-      this.variantId[`index${index}`] = this.variantId[`index${index}`] || (item.variants.length > 0 && item.variants[0].variantId)
+      this.productIndex[`index${index}`] = item.id
+      this.variantId[`index${index}`] = (item.variants.length > 0 && item.variants[0].variantId)
       return (
         <>
           <Product
