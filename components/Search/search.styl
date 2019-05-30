@@ -156,10 +156,10 @@
       width 96%
       margin 0 auto
       .add-to-crt
-        border: 1px solid navy-blue
+        border: 1px solid tila-blk
         border-bottom-left-radius: 16px
         background-color white
-        color navy-blue
+        color tila-blk
         width 50%
         height 35px
         .cart-list
@@ -168,6 +168,7 @@
           width: 13px
           height: 11px
           margin-right: 5px
+          color tila-blk
       .buy-now-btn
         border-bottom-right-radius 16px
         color white
@@ -224,11 +225,11 @@
   .items-list-show
     align-items center
     .search-val-part
-      width 50%
+      width 45%
     .sple-check-prt
       border-left 1px solid lht-bdr
     .deliver-to-main
-      width 50%
+      width 55%
       justify-content flex-end
       align-items center
       .sort-part-inn
@@ -240,6 +241,28 @@
 
         .select-mn
           position relative
+          .sort-drop-down
+            left auto
+            right 0
+            border-radius inherit
+            box-shadow 0 0 5px rgba(0,0,0,0.1)
+            transition all 0.5s ease-in
+            list-style none
+            // opacity 0
+            right 0
+            border 0
+            &:before
+              content: ""
+              width 0
+              height 0
+              position absolute
+              bottom 100%
+              right 15px
+              border-width 0 6px 6px 6px
+              border-style solid
+              border-color white transparent
+              
+
           .select-text
             border 0
             background-color transparent
@@ -366,7 +389,7 @@
     width 100%
     .category-label
       display flex
-      width 88%
+      width 84%
       .category-span
         overflow hidden
         white-space nowrap
@@ -374,23 +397,23 @@
         text-overflow ellipsis
         width 80%
 
-.select-mn select
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  -webkit-appearance: none;
-  -moz-appearance: none;
+// .select-mn select
+//   -webkit-box-sizing: border-box;
+//   -moz-box-sizing: border-box;
+//   box-sizing: border-box;
+//   -webkit-appearance: none;
+//   -moz-appearance: none;
 
-.select-mn:after
-  content ''
-  background url(/static/img/icons/down-arrow/down-arrow.svg) no-repeat center
-  height 10px
-  width 10px
-  background-position center
-  background-color transparent
-  top 4px
-  position absolute
-  right 0
+// .select-mn:after
+//   content ''
+//   background url(/static/img/icons/down-arrow/down-arrow.svg) no-repeat center
+//   height 10px
+//   width 10px
+//   background-position center
+//   background-color transparent
+//   top 4px
+//   position absolute
+//   right 0
 
 
 .quick-view
@@ -465,13 +488,21 @@
         max-height 100%
         max-width 100%
         object-fit scale-down
-        display: block;
-        margin: 0 auto;
+        display block
+        margin 0 auto
+
+.category-list-title
+  padding 10px 15px
+
+.category-list-title
+  a[aria-expanded=true] .expand-icon
+    transform rotate(-90deg)
 
 .category-list
+  border-bottom 0.5px solid light-brdr
   .category-list-head
     .category-list-title
-      border-bottom 0.5px solid light-brdr
+      // border-bottom 0.5px solid light-brdr
       a
         display flex
         justify-content space-between

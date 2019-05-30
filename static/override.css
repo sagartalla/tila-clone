@@ -169,7 +169,7 @@
     display: none;
 }
 
-.btn-default.active.focus, .btn-default.active:focus, .btn-default.active:hover, .btn-default:active.focus, .btn-default:active:focus, .btn-default:active:hover, .open>.dropdown-toggle.btn-default.focus, .open>.dropdown-toggle.btn-default:focus, .open>.dropdown-toggle.btn-default:hover {
+.btn-default, .btn-default.active.focus, .btn-default.active:focus, .btn-default.active:hover, .btn-default:active.focus, .btn-default:active:focus, .btn-default:active:hover, .open>.dropdown-toggle.btn-default.focus, .open>.dropdown-toggle.btn-default:focus, .open>.dropdown-toggle.btn-default:hover {
     background-color: transparent;
     box-shadow: none;
 }
@@ -181,6 +181,18 @@
 .btn-default.active, .btn-default:active, .open>.dropdown-toggle.btn-default {
     background-color: transparent;
     box-shadow: none;
+}
+
+.dropdown-menu>li>a:focus {
+    outline: none;
+}
+
+#sort-toggle, #sort-toggle:hover, #sort-toggle:focus {
+    border-color: transparent;
+}
+
+#sort-toggle .cart {
+    display: block;
 }
 
 .slick-prev:before {

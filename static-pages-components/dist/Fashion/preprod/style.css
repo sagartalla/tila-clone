@@ -2,6 +2,10 @@
   width: 100%;
   height: 570px;
 }
+.fashion-main-part .fashion-banner-main img {
+  width: 100%;
+  object-fit: cover;
+}
 .fashion-main-part .fashion-banner-main .banner-label {
   right: 14%;
   top: 20%;
