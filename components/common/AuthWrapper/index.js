@@ -17,8 +17,8 @@ class AuthWrapper extends Component {
       return;
     }
     if (!nextProps.isLoginShown) {
-      this.props.popupClosed && this.props.popupClosed();
-    } else {
+      this.props.popupClosed && this.props.popupClosed;
+    } else {   
       this.props.popupOpened && this.props.popupOpened();
     }
   }

@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import ReviewThankYou from './ReviewThankYou';
 import { languageDefinations } from '../../../utils/lang';
+import { selectors as loginSelectors } from '../../../store/auth';
 const { PDP_PAGE } = languageDefinations();
 import ReviewFeedBackModal from './reviewFeedbackModal';
 import StarRating from '../../common/StarRating';
@@ -53,14 +54,16 @@ class Review extends Component {
     }));
   }
   popupClosed = () => {
+    let { openModal } = this.state;
+    const { isLoggedIn } = this.props;
     this.setState({
-      openModal: true,
+      openModal: isLoggedIn ? true : false,
     });
   }
   popupOpened = () => {
     this.setState({
-      openModal: false,
-    })
+      openModal: true,
+    });
   }
   submituserreview = (reviewObj) => {
     this.props.submitUserReview(reviewObj).then(() => {
@@ -189,7 +192,7 @@ class Review extends Component {
                                   feedbackSubmit={this.submituserreview}
                                 />
                                 :
-                                <ReviewThankYou closePopup={this.popupClosed} />
+                                <ReviewThankYou toggleReviewModal={this.toggleReviewModal} />
                               }
                             </div>
                           </div>
@@ -212,6 +215,7 @@ const mapStateToProps = (store) => {
   return ({
     reviewData: selectors.getReviewRatings(store),
     reviewResponse: selectors.getReviewResponse(store),
+    isLoggedIn: loginSelectors.getLoggedInStatus(store),
   });
 };
 const mapDispatchToProps = (dispatch) => {
