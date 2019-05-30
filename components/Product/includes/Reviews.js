@@ -53,18 +53,18 @@ class Review extends Component {
       showReviews: true,
     }));
   }
-  popupClosed = () => {
-    let { openModal } = this.state;
-    const { isLoggedIn } = this.props;
-    this.setState({
-      openModal: isLoggedIn ? true : false,
-    });
-  }
-  popupOpened = () => {
-    this.setState({
-      openModal: true,
-    });
-  }
+  // popupClosed = () => {
+  //   let { openModal } = this.state;
+  //   const { isLoggedIn } = this.props;
+  //   this.setState({
+  //     openModal: isLoggedIn ? true : false,
+  //   });
+  // }
+  // popupOpened = () => {
+  //   this.setState({
+  //     openModal: true,
+  //   });
+  // }
   submituserreview = (reviewObj) => {
     this.props.submitUserReview(reviewObj).then(() => {
       this.setState({
@@ -173,8 +173,8 @@ class Review extends Component {
                     // </AuthWrapper>
                     <React.Fragment>
                       <AuthWrapper
-                        popupClosed={this.popupClosed}
-                        popupOpened={this.popupOpened}
+                        // popupClosed={this.popupClosed}
+                        // popupOpened={this.popupOpened}
                       >
                         <div onClick={this.closeSlider} className={openModal ? `${styles['modalContainer']} ${styles['showDiv']}` : `${styles['modalContainer']} ${styles['hideDiv']}`}>
                           <div className={`${styles['disabled']}`} />
