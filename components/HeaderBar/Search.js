@@ -169,14 +169,15 @@ class Search extends Component {
 
           <Dropdown id="search-toggle" className={`${styles['cart-inn']} ${styles.width100}`}>
             <Dropdown.Toggle id="dropdown-custom-components">
-              <div className={styles.overlap} tabIndex="0" onFocus={this.setSelectionRange}>
-                {query.length < 1 ? '' : (autoSearchValue || (suggestions.length > 0 && query === suggestions[0].data_edgengram.slice(0, query.length) ? suggestions[0].data_edgengram : ''))}
+              <div className={styles.overlap} tabIndex="0" onFocus={query && this.setSelectionRange}>
+                {query && query.length < 1 ? '' : (autoSearchValue || (suggestions.length > 0 && query === suggestions[0].data_edgengram.slice(0, query.length) ? suggestions[0].data_edgengram : ''))}
               </div>
               <SearchContext.Consumer>
                 {context => (
                   <input
                     className={styles['search-input']}
                     id="text-box"
+                    autoComplete={false}
                     placeholder={SEARCH_PAGE.SEARCH_YOUR_FAV_ITEM}
                     onChange={this.onChangeSearchInput}
                     value={(context === 'search') || searchInput ? query : ''}

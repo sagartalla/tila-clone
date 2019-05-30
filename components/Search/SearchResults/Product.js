@@ -42,7 +42,7 @@ class Product extends Component {
     super(props);
     this.state = {
       showNotify: false,
-      src: '',
+      src: `${constants.mediaDomain}/${props.media[0]}` || '',
       selectedIndex: 0,
       showLoader: false,
       btnType: '',
@@ -58,6 +58,7 @@ class Product extends Component {
     this.closeVariantTab = this.closeVariantTab.bind(this);
     this.showVariants = this.showVariants.bind(this);
     this.preventDefaultClick = this.preventDefaultClick.bind(this);
+    this.leaveImg = this.leaveImg.bind(this);
   }
   componentWillReceiveProps() {
     this.setState({ showLoader: false });
@@ -80,6 +81,12 @@ class Product extends Component {
   }
 
   setImg() {
+    this.setState({
+      src: '',
+    });
+  }
+
+  leaveImg() {
     const { media = [] } = this.props;
     this.setState({
       src: `${constants.mediaDomain}/${media[0]}`,
@@ -242,6 +249,7 @@ class Product extends Component {
       cmpData,
       wishlistId,
     } = this.props;
+    const { src } = this.state;
     const { showNotify, selectedIndex, showLoader } = this.state;
     const selectedProduct = selectedID.length > 0 && selectedID.includes(productId);
     const discountValue = variants.length > 0 &&
@@ -289,35 +297,33 @@ class Product extends Component {
             onClick = {() => this.routeChange(productId,variantId,catalogId,itemtype,index,pageNum)}>
           <Link route={`/${country}/${language}/product?productId=${productId}${variants.length > 0 && variants[selectedIndex].variantId ? `&variantId=${variants[selectedIndex].variantId}` : ''}&catalogId=${catalogId}&itemType=${itemtype}`}>
             <a>
-              <div className={`${styles['product-items']}`}>
+              <div className={`${styles['product-items']}`} onMouseEnter={this.setImg} onMouseLeave={this.leaveImg}>
                 {
                   showLoader ? <div className={styles['loader-div']}>
                     <SVGCompoent clsName={`${styles['loader-styl']}`} src="icons/common-icon/circleLoader" />
                   </div> : null
                 }
                 <div className={`${styles['img-cont']} ${styles['border-radius4']} ${styles['relative']}`}>
-                  <div className={`${styles['image-div']} ${styles['hover-show-date']}`}>
-                    <Waypoint onEnter={this.setImg}>
-                      <Slider
-                        className={`${styles['ht-100per']}`}
-                        autoplay
-                        arrows={false}
-                        dots
-                        autoplaySpeed={900}
-                      >
-                        {media && media.map(image => (
-                          <div>
-                            <img src={`${constants.mediaDomain}/${image}`} alt="imageURL" />
-                          </div>
-                        ))}
-                      </Slider>
-                    </Waypoint>
-                  </div>
-                  <div className={`${styles['image-div']} ${styles['hover-show-image']}`}>
-                    <Waypoint onEnter={this.setImg}>
-                      <img src={this.state.src} alt="imageURL" />
-                    </Waypoint>
-                  </div>
+                      <div className={`${styles['image-div']} `}>
+                        {src ?
+                            <img src={src} alt="imageURL" />
+                          :
+                            <Slider
+                              className={`${styles['ht-100per']}`}
+                              autoplay
+                              arrows={false}
+                              dots
+                              autoplaySpeed={900}
+                              pauseOnHover={false}
+                            >
+                              {media && media.map(image => (
+                                <div>
+                                  <img src={`${constants.mediaDomain}/${image}`} alt="imageURL" />
+                                </div>
+                              ))}
+                            </Slider>
+                        }
+                      </div>
                   <span className={`${styles['variants-main']}`}></span>
                   <span className={styles['full-and-globe-main']}>
                     <span className={`${styles['fullfill-main']} ${styles['flex-center']}`}>

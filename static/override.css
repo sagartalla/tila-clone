@@ -220,3 +220,25 @@
   font-family: ProximaNova-SBold;
   color: #000000;
 }
+
+.slick-dots li button:before {
+    content: '';
+}
+
+.slick-dots {
+  display: flex !important;
+  justify-content: flex-end;
+  bottom: 0;
+  padding: 20px 10px;
+
+}
+.slick-dots li {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1px solid #8a8a8f;
+}
+
+.slick-dots li.slick-active {
+     background-color: #8a8a8f;
+  }
