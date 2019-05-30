@@ -21,7 +21,7 @@
 
 .page-details-slider
   background-color #F1F2F4
-  height calc(100vh - 125px)
+  height calc(100vh - 106px)
 
   .size-part
       position absolute
@@ -93,10 +93,6 @@
     .addto-cart
       background-color white
       padding 12px 35px
-      position absolute
-      bottom 0
-      left 0
-      right 0
       box-shadow 0 0 13px 0 rgba(212, 212, 212, 0.5)
       .add-to-card-btn
         border-radius 0
@@ -189,7 +185,7 @@
         input
           font-size 12px
   .display-item-wrap
-    height calc(100% - 85px)
+    height calc(100% - 38px)
     .wishlist-icon
       position absolute
       right 4%
@@ -328,7 +324,7 @@
 
 .bottom-slider
   background-color white
-  padding 8px 0
+  padding 18px 0
   align-items center
   margin 0 auto
   border-top-right-radius 4px
@@ -570,6 +566,19 @@
   width 100%
   overflow auto
 
+.pdp-img-prt
+  height: calc(100% - 106px);
+
+.absolute-style
+  position absolute
+  width 100%
+  bottom 0
+
+.fixed-style
+  position fixed
+  bottom 0
+  width 34%
+
 @media screen and (min-device-width: 320px) and (max-device-width: 767px) and (orientation : portrait) {
   .details-right-part {
     float left
@@ -581,10 +590,6 @@
     height auto !important
     display flex
     background-color white !important
-  }
-
-  .pdp-img-prt {
-    height auto
   }
 
   .pdp-img-prt .bottom-slider, .add-to-compare {
@@ -640,7 +645,7 @@
 
   .pdp-img-prt {
     padding-right 0
-
+    height: calc(100% - 106px);
     .bottom-slider {
       background-color light-gray-color
 
@@ -663,10 +668,6 @@
     border solid 0.2px #979797
     box-shadow none
     padding-bottom 1px
-  }
-
-  .pdp-img-prt {
-    height auto
   }
 
   .page-details-slider .details-right-part .addto-cart {

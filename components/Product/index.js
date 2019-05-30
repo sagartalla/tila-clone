@@ -32,6 +32,8 @@ import styles_ar from './product_ar.styl';
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const { PDP_PAGE } = languageDefinations();
+let btnY = null;
+let skipScroll = false;
 
 const getProductComponent = (isPreview, taskCode) => {
   class Product extends Component {
@@ -97,6 +99,15 @@ const getProductComponent = (isPreview, taskCode) => {
       }
 
       window.addEventListener('scroll', this.handleScroll);
+      setTimeout(() => {
+        const shippingContainer = document.getElementById('shipping-cont');
+        const buttonsCont = document.getElementById('cart-btn-cont');
+        const [{height: shippingHeight, top: shippingY}, {top: btnY}] = [shippingContainer.getBoundingClientRect(), buttonsCont.getBoundingClientRect()];
+        skipScroll = (shippingHeight + shippingY) < btnY;
+        this.setState({
+          defaultPosition: skipScroll ? 'absolute-style' : 'fixed-style'
+        });
+      });
     }
 
     componentWillUnmount() {
@@ -106,6 +117,20 @@ const getProductComponent = (isPreview, taskCode) => {
     onChangeField({ target }) {
       this.setState({
         notifyEmail: target.value,
+      });
+    }
+
+    handleScroll(e) {
+      if(skipScroll) {
+        return;
+      }
+      const shippingContainer = document.getElementById('shipping-cont');
+      const buttonsCont = document.getElementById('cart-btn-cont');
+      const [{height: shippingHeight, top: shippingY}] = [shippingContainer.getBoundingClientRect()];
+      btnY = btnY || document.getElementById('cart-btn-cont').getBoundingClientRect().top;
+      console.log('handleScroll', shippingHeight + shippingY, btnY);
+      this.setState({
+        positionStyle: (shippingHeight + shippingY) < btnY ? 'absolute-style' : 'fixed-style'
       });
     }
 
@@ -134,37 +159,6 @@ const getProductComponent = (isPreview, taskCode) => {
       });
     }
 
-    handleScroll(event) {
-      const scrollTop = event.currentTarget.pageYOffset;
-      const detailsRect = this.detailsRef.current.getBoundingClientRect();
-      const bottomRefRect = this.bottomRef.current.getBoundingClientRect();
-      if (bottomRefRect.top <= window.innerHeight && this.state.stickyElements.details !== 'stateBottom') {
-        this.setState({
-          stickyElements: {
-            ...this.state.stickyElements,
-            details: 'stateBottom',
-          },
-        });
-        return;
-      }
-      if (bottomRefRect.top > window.innerHeight && detailsRect.top <= 61 && this.state.stickyElements.details !== 'stateMiddle') {
-        this.setState({
-          stickyElements: {
-            ...this.state.stickyElements,
-            details: 'stateMiddle',
-          },
-        });
-        return;
-      }
-      if (detailsRect.top > 61) {
-        this.setState({
-          stickyElements: {
-            ...this.state.stickyElements,
-            details: 'stateTop',
-          },
-        });
-      }
-    }
 /* eslint-disable */
     render() {
       const { productData, userDetails, showLoading, query } = this.props;
@@ -174,7 +168,7 @@ const getProductComponent = (isPreview, taskCode) => {
       } = productData;
       const { offerPricing } = offerInfo;
       const {
-        stickyElements, recentlyViewed, notifyEmail, emailErr,
+        stickyElements, recentlyViewed, notifyEmail, emailErr, positionStyle, defaultPosition
       } = this.state;
       return (
         <Theme.Provider value={categoryType.toLowerCase()}>
@@ -223,6 +217,7 @@ const getProductComponent = (isPreview, taskCode) => {
                               productData={productData.product_id}
                               shippingInfo={shippingInfo}
                               isPreview={isPreview}
+                              styling={positionStyle || defaultPosition}
                             />
                         }
                         {
