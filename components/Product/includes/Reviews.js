@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Col } from 'react-bootstrap';
-import Theme from '../../helpers/context/theme';
-import { selectors, actionCreators } from '../../../store/product';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Theme from '../../helpers/context/theme';
+import { selectors, actionCreators } from '../../../store/product';
+import { selectors as personalDetailsSelectors } from '../../../store/cam/personalDetails';
 import ReviewThankYou from './ReviewThankYou';
 import { languageDefinations } from '../../../utils/lang';
-const { PDP_PAGE } = languageDefinations();
 import ReviewFeedBackModal from './reviewFeedbackModal';
 import StarRating from '../../common/StarRating';
 import AuthWrapper from '../../common/AuthWrapper';
@@ -17,6 +17,9 @@ import main_en from '../../../layout/main/main_en.styl';
 import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from '../product_en.styl';
 import styles_ar from '../product_ar.styl';
+
+const { PDP_PAGE } = languageDefinations();
+
 
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
@@ -38,7 +41,7 @@ class Review extends Component {
       page_no: 0,
       most_recent: true,
       most_relevant: true,
-      review_type: "USER",
+      review_type: 'USER',
     };
     this.props.getRatingsAndReviews(paramsobj);
   }
@@ -60,10 +63,14 @@ class Review extends Component {
   popupOpened = () => {
     this.setState({
       openModal: false,
-    })
+    });
   }
   submituserreview = (reviewObj) => {
-    this.props.submitUserReview(reviewObj).then(() => {
+    const { userInfo } = this.props;
+    this.props.submitUserReview({
+      ...reviewObj,
+      reviewer_name: userInfo.personalInfo.user_name,      
+    }).then(() => {
       this.setState({
         showReviews: false,
       });
@@ -208,19 +215,15 @@ class Review extends Component {
   }
 }
 
-const mapStateToProps = (store) => {
-  return ({
-    reviewData: selectors.getReviewRatings(store),
-    reviewResponse: selectors.getReviewResponse(store),
-  });
-};
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators(
-    {
-      getRatingsAndReviews: actionCreators.getRatingsAndReviews,
-      submitUserReview: actionCreators.submitUserReview,
-    },
-    dispatch,
-  );
-};
+const mapStateToProps = store => ({
+  reviewData: selectors.getReviewRatings(store),
+  reviewResponse: selectors.getReviewResponse(store),
+  userInfo: personalDetailsSelectors.getUserInfo(store),
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+  getRatingsAndReviews: actionCreators.getRatingsAndReviews,
+  submitUserReview: actionCreators.submitUserReview,
+}, dispatch);
+
 export default connect(mapStateToProps, mapDispatchToProps)(Review);

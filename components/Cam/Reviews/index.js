@@ -4,11 +4,14 @@ import { bindActionCreators } from 'redux';
 
 import SVGCompoent from '../../common/SVGComponet';
 import { actionCreators, selectors } from '../../../store/ratingReviews';
+import { actionCreators as productActionCreators } from '../../../store/product';
+import { selectors as personalDetailsSelectors } from '../../../store/cam/personalDetails';
 import constants from '../../../constants';
 import lang from '../../../utils/language';
 import { languageDefinations } from '../../../utils/lang/';
 import StarRating from '../../common/StarRating';
 import Button from '../../common/CommonButton';
+import Review from './Review';
 
 import main_en from '../../../layout/main/main_en.styl';
 import main_ar from '../../../layout/main/main_ar.styl';
@@ -27,6 +30,18 @@ class Reviews extends React.Component {
 
   componentDidMount() {
     this.props.getMyReviews();
+  }
+
+  deleteReview = ({ currentTarget }) => {
+    this.props.deleteReview(currentTarget.getAttribute('data-id'));
+  }
+
+  submitUserReview = (review) => {
+    const { userInfo } = this.props;
+    return this.props.submitUserReview({
+      ...review,
+      reviewer_name: userInfo.personalInfo.user_name,
+    });
   }
 
   render() {
@@ -49,28 +64,7 @@ class Reviews extends React.Component {
           <div>
             {userReviews.length > 0 &&
               userReviews.map(rev => (
-                <div key={rev.review_id} className={`${styles['pl-15']} ${styles['pr-15']} ${styles['pt-15']} ${styles['flex-center']}`}>
-                  <div>
-                    <img className={styles.icon} alt="" src={`${constants.mediaDomain}/${rev.product_image_url}`} />
-                  </div>
-                  <div className={`${styles['pl-15']} ${styles['pr-15']} ${styles['pt-15']} ${styles['pb-30']} ${styles['border-b']} ${styles.width100}`}>
-                    <div className={`${styles['pb-10']} ${styles['fs-14']} ${styles.fontW600}`}>{rev.title}</div>
-                    <StarRating
-                      interactive={false}
-                      count={5}
-                      rating={rev.ratings}
-                      clsStyl={{ width: '15px', marginRight: '5px' }}
-                    />
-                    <div className={`${styles['pt-10']} ${styles['fs-12']} ${styles['dottes-gry-clr']}`}>{rev.comment}</div>
-                    {!rev.comment &&
-                      <Button
-                        id={rev.review_id}
-                        className={`${styles.flex} ${styles['preference-save']} ${styles.fontW600} ${styles['fs-10']} ${styles['text-uppercase']}`}
-                        btnText="Write a review"
-                        onClick={this.savePreferences}
-                      />}
-                  </div>
-                </div>
+                <Review rev={rev} deleteReview={this.deleteReview} submitUserReview={this.submitUserReview} />
               ))}
           </div>
         </div>
@@ -81,11 +75,14 @@ class Reviews extends React.Component {
 
 const mapStateToProps = store => ({
   userReviews: selectors.getUserReviews(store),
+  userInfo: personalDetailsSelectors.getUserInfo(store),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(
   {
     getMyReviews: actionCreators.getMyReviews,
+    deleteReview: actionCreators.deleteReview,
+    submitUserReview: productActionCreators.submitUserReview,
     // postPreferences: actionCreators.postPreferences,
   },
   dispatch,

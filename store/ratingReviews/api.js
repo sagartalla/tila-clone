@@ -6,4 +6,6 @@ import constants from '../helper/constants';
 
 const getMyReviews = () => axios.get(`${constants.REVIEWS_API_URL}/api/v1/reviews/my`);
 
-export default { getMyReviews };
+const deleteReview = id => axios.put(`${constants.REVIEWS_API_URL}/api/v1/reviews/delete/${id}`).then(() => id);
+
+export default { getMyReviews, deleteReview };
