@@ -44,7 +44,7 @@ const getCartResults = (store) => {
           itemType: item.product_details && item.product_details.catalog_details.item_type_name,
           warranty_duration: item.listing_info.warranty_policy.preferred_policy ?
           item.listing_info.warranty_policy.policies[item.listing_info.warranty_policy.preferred_policy] : {},
-          discount: item.listing_info.pricing && item.listing_info.pricing.discount_per_mrp.display_value,
+          discount: item.listing_info.pricing && item.listing_info.pricing.discount_per_mrp,
           mrp: item.listing_info.pricing && item.listing_info.pricing.mrp.display_value,
           offerDiscounts: item.listing_info.pricing && item.listing_info.pricing.actions,
           total_discount: item.listing_info.pricing && item.listing_info.pricing.total_discount_mrp.display_value,

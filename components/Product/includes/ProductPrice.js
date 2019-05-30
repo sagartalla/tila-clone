@@ -1,9 +1,8 @@
-import React, { Component, Fragment } from 'react';
-import PropTypes from 'prop-types';
+import React, { Fragment } from 'react';
 import SVGComponent from '../../common/SVGComponet';
 
 import { languageDefinations } from '../../../utils/lang';
-import { OverlayTrigger, Popover } from 'react-bootstrap';
+import { OverlayTrigger } from 'react-bootstrap';
 
 import lang from '../../../utils/language';
 
