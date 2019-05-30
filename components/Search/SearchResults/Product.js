@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import _ from 'lodash';
-import { Link, Router } from '../../../routes';
+import { Link } from '../../../routes';
 import Waypoint from 'react-waypoint';
 import { OverlayTrigger, Modal, Popover } from 'react-bootstrap';
 
@@ -223,7 +223,6 @@ class Product extends Component {
 
   render() {
     const {
-      media = [],
       displayName,
       variants,
       productId,
@@ -234,14 +233,12 @@ class Product extends Component {
       brand,
       index,
       pageNum,
-      userDetails,
       selectedID,
       flags,
       addedToWishlist,
       cartButtonLoaders,
       btnLoading,
       cmpData,
-      wishlistId,
     } = this.props;
     const { showNotify, selectedIndex, showLoader } = this.state;
     const selectedProduct = selectedID.length > 0 && selectedID.includes(productId);
@@ -289,7 +286,6 @@ class Product extends Component {
             `${styles['product-items-main']} ${styles['p-0']} ${selectedProduct ? styles['active-product'] : ''}`}
             onClick = {() => this.routeChange(productId,variantId,catalogId,itemtype,index,pageNum)}>
           <Link route={`/${country}/${language}/product?productId=${productId}${variants.length > 0 && variants[selectedIndex].variantId ? `&variantId=${variants[selectedIndex].variantId}` : ''}&catalogId=${catalogId}&itemType=${itemtype}`}>
-            <a>
               <div className={`${styles['product-items']}`}>
                 {
                   showLoader ? <div className={styles['loader-div']}>
@@ -416,7 +412,6 @@ class Product extends Component {
                 </div>
                 
               </div>
-            </a>
           </Link>
         </div>
         <Modal show={showNotify} onHide={this.closeNotify}>
