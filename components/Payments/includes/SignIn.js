@@ -56,7 +56,7 @@ class SignIn extends Component {
           <Col md={8} sm={12} xs={12}>
             <h4 className={styles['m-0']}>{`${PAYMENT_PAGE.REGISTER} or ${PAYMENT_PAGE.SIGN_IN}`}</h4>
             {props.login.username ?
-            <small>{`You have signed in as ${props.login.username}`}</small>
+            <small>{PAYMENT_PAGE.YOU_ARE_SIGNED_IN_AS} {props.login.username}</small>
             :
             <small>{PAYMENT_PAGE.SIGN_IN_SIGN_UP_TO_CONTINUE}</small>
             }
