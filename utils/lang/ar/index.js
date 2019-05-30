@@ -726,6 +726,9 @@ export const AR_KEYWORDS = {
     FEEDBACK_SURVEY_AND_PRODUCT_REVIEW_SUB: 'انشئ حسابك لتحصل على  خصومات خاصة بك وكوبونات',
   },
   REVIEWS: {
-
+    TITLE: 'My Reviews & Ratings',
+    SUB_TITLE: 'All your reviews & ratings at one place',
+    RATED_REVIEWS: 'You have Rated & Reviewed',
+    ITEMS: 'items',
   },
 };

@@ -743,6 +743,9 @@ export const EN_KEYWORDS = {
     FEEDBACK_SURVEY_AND_PRODUCT_REVIEW_SUB: 'Signup to receive personalized discounts and coupons',
   },
   REVIEWS: {
-
+    TITLE: 'My Reviews & Ratings',
+    SUB_TITLE: 'All your reviews & ratings at one place',
+    RATED_REVIEWS: 'You have Rated & Reviewed',
+    ITEMS: 'items',
   },
 };

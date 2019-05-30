@@ -53,13 +53,13 @@ class Reviews extends React.Component {
             <SVGCompoent src="icons/illustration" clsName={styles.icon} />
           </div>
           <div className={`${styles['pl-30']}`}>
-            <h3 className={`${styles['fs-22']} ${styles['m-0']}`}>My Reviews & Ratings</h3>
-            <span className={`${styles['fs-12']} ${styles['dottes-gry-clr']}`}>All your reviews & ratings at one place</span>
+            <h3 className={`${styles['fs-22']} ${styles['m-0']}`}>{REVIEWS.TITLE}</h3>
+            <span className={`${styles['fs-12']} ${styles['dottes-gry-clr']}`}>{REVIEWS.SUB_TITLE}</span>
           </div>
         </div>
         <div className={styles['my-review-inn']}>
           <h2 className={`${styles['fs-18']} ${styles['pt-15']} ${styles['pb-15']} ${styles['pl-40']} ${styles['bg-light-gray']}  ${styles['m-0']}`}>
-            <span className={`${styles.fontW600}`}>You have Rated & Reviewed</span> <span className={`${styles['fs-12']}`}> {userReviews.length} items</span>
+            <span className={`${styles.fontW600}`}>{REVIEWS.RATED_REVIEWS}</span> <span className={`${styles['fs-12']}`}> {userReviews.length} {REVIEWS.ITEMS}</span>
           </h2>
           <div>
             {userReviews.length > 0 &&
