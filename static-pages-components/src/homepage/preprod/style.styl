@@ -6,7 +6,10 @@
 .main-title
   color #f26b6b
 
-.home-style-main  
+.home-style-main
+  .top-banner-slider
+    .item img 
+      width 100%
   .brand-details-inn
     .img-responsive-in
       width 100%
@@ -139,6 +142,10 @@
       display inline-block
     .d1, .d2, .d3
       position relative
+      display inline-flex
+      img 
+        width 100%
+        object-fit contain
       .shadow::after
         position absolute
         width calc(100% - 10px)
