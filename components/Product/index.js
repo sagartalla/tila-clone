@@ -138,7 +138,8 @@ const getProductComponent = (isPreview, taskCode) => {
       const scrollTop = event.currentTarget.pageYOffset;
       const detailsRect = this.detailsRef.current.getBoundingClientRect();
       const bottomRefRect = this.bottomRef.current.getBoundingClientRect();
-      if (bottomRefRect.top <= window.innerHeight && this.state.stickyElements.details !== 'stateBottom') {
+      const { isSearchPreview } = this.props;
+      if (!isSearchPreview && bottomRefRect.top <= window.innerHeight && this.state.stickyElements.details !== 'stateBottom') {
         this.setState({
           stickyElements: {
             ...this.state.stickyElements,
@@ -147,7 +148,7 @@ const getProductComponent = (isPreview, taskCode) => {
         });
         return;
       }
-      if (bottomRefRect.top > window.innerHeight && detailsRect.top <= 61 && this.state.stickyElements.details !== 'stateMiddle') {
+      if (!isSearchPreview && bottomRefRect.top > window.innerHeight && detailsRect.top <= 61 && this.state.stickyElements.details !== 'stateMiddle') {
         this.setState({
           stickyElements: {
             ...this.state.stickyElements,
