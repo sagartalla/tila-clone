@@ -90,7 +90,7 @@ const getProductComponent = (isPreview, taskCode) => {
               pr,
               cd,
               uri: location.href,
-              id: shippingInfo.listing_id,
+              id: offerInfo.listingId,
             });
             localStorage.setItem('rv', JSON.stringify(arr));
           }
@@ -212,7 +212,7 @@ const getProductComponent = (isPreview, taskCode) => {
                           isPreview ? null : <Shipping shippingInfo={shippingInfo} returnInfo={returnInfo} offerInfo={offerInfo} warranty={warranty} />
                         }
                         {isPreview ? null :
-                          (shippingInfo === null || shippingInfo.shippable) && 
+                          (shippingInfo === null || shippingInfo.shippable) &&
                             <AddToCart
                               offerInfo={offerInfo}
                               productData={productData.product_id}
