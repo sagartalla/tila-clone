@@ -221,7 +221,7 @@
 
 .top-banner-slider .slick-dots li {
   width: initial;
-  color: #444444;
+  color: #666;
 }
 
 .top-banner-slider .slick-slider button {
@@ -231,6 +231,11 @@
 .top-banner-slider .slick-dots li.slick-active {
   font-family: ProximaNova-SBold;
   color: #000000;
+}
+
+
+.top-banner-slider .slick-dots .slick-active {
+    border-bottom: 1px solid #101820;
 }
 
 .srp-slider .slick-dots li button:before {
@@ -254,3 +259,4 @@
 .srp-slider .slick-dots li.slick-active {
      background-color: #8a8a8f;
   }
+

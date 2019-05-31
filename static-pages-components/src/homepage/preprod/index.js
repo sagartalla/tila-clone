@@ -8,17 +8,23 @@ let sliderTBS,
 // const tie = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 const tbs = [{
-  img: '/static/img/landing-home/guess-banner.jpg',
-  title: 'GUESS',
+  img: `/static/img/landing-home/${lang === 'en' ? 'home-decor' : 'home-decor-ar'}.jpg`,
+  title: 'HOME DECOR',
 }, {
-  img: '/static/img/landing-home/fendi.jpg',
-  title: 'FENDI',
+  img: `/static/img/landing-home/${lang === 'en' ? 'laptops' : 'laptops-ar'}.jpg`,
+  title: 'LAPTOPS',
 }, {
-  img: '/static/img/landing-home/morphy-richards.jpg',
-  title: 'MORPHY RICHARDS',
+  img: `/static/img/landing-home/${lang === 'en' ? 'mens-clothing' : 'mens-clothing-ar'}.jpg`,
+  title: 'MENS CLOTHING',
 }, {
-  img: '/static/img/landing-home/shirt.jpg',
-  title: 'SHIRTS',
+  img: `/static/img/landing-home/${lang === 'en' ? 'mobile-accessories' : 'mobile-accessories-ar'}.jpg`,
+  title: 'MOBILE ACCESSORIES',
+}, {
+  img: `/static/img/landing-home/${lang === 'en' ? 'perfumes-for-women' : 'perfumes-for-women-ar'}.jpg`,
+  title: 'PERFUMES FOR WOMEN',
+}, {
+  img: `/static/img/landing-home/${lang === 'en' ? 'watches' : 'watches-ar'}.jpg`,
+  title: 'WATCHES',
 }];
 
 const tie = [{
@@ -313,7 +319,7 @@ const HomePage = () => (
       </div>
       <div className="ff-t-i">
         <div className="e">
-          <span className={`title ${styles['fs-18']}`}>TOP IN ELECTRONICS</span>
+          <span className={`title ${styles['fs-20']}`}>TOP IN ELECTRONICS</span>
           <Slider
             asNavFor={sliderTIE}
             ref={slider => (sliderTIE = slider)}
@@ -327,14 +333,14 @@ const HomePage = () => (
                   <a href={b_d_b[i.title]}>
                     <img src={i.img} alt={i.title} />
                   </a>
-                  <span>{i.title}</span>
+                  <span className={`${styles['fs-12']} ${styles['pt-10']} ${styles['flex']} ${styles['justify-center']} ${styles['lne-ht1_2']}`}>{i.title}</span>
                 </div>
               </div>
               ))}
           </Slider>
         </div>
         <div className="h-a-l">
-          <span className={`title ${styles['fs-18']}`}>TOP IN FASHION | HOME & LIVING</span>
+          <span className={`title ${styles['fs-20']}`}>TOP IN FASHION | HOME & LIVING</span>
           <Slider
             asNavFor={sliderHAL}
             ref={slider => (sliderHAL = slider)}
@@ -348,7 +354,7 @@ const HomePage = () => (
                     <a href={b_d_b[i.title]}>
                       <img src={i.img} />
                     </a>
-                    <span>{i.title}</span>
+                    <span className={`${styles['fs-12']} ${styles['pt-10']} ${styles['flex']} ${styles['justify-center']} ${styles['lne-ht1_2']}`}>{i.title}</span>
                   </div>
                 </div>
             ))}
@@ -359,7 +365,7 @@ const HomePage = () => (
         <div className={`${styles['fs-20']} title`}>TOP IN FASHION</div>
         <div className="d1">
           <div>
-            <span className={styles['fs-20']}><span className="lite">Kids Fashion</span><span className={styles.bold}>UP TO 50% OFF</span></span>
+            <span className={styles['fs-16']}><span className="lite">Kids Fashion</span></span>
             <a href={b_d_b["Kid's Fashion"]}>
               <div className="shadow">
                 <img src={d_tif[0]} className="img-responsive" />
@@ -367,11 +373,11 @@ const HomePage = () => (
             </a>
             <div className="btn">
               <span>SHOP NOW</span>
-              <SVGComponent clsName="arrow" src="icons/common-icon/arrow" />
+              
             </div>
           </div>
           <div>
-            <span className={styles['fs-20']}><span className="lite">Women's Clothing</span><span className={styles.bold}>UP TO 50% OFF</span></span>
+            <span className={styles['fs-16']}><span className="lite">Women's Clothing</span></span>
             <a href={b_d_b['Womens Clothing']}>
               <div className="shadow">
                 <img src={d_tif[1]} className="img-responsive" />
@@ -379,13 +385,13 @@ const HomePage = () => (
             </a>
             <div className="btn">
               <span>SHOP NOW</span>
-              <SVGComponent clsName="arrow" src="icons/common-icon/arrow" />
+              
             </div>
           </div>
         </div>
         <div className="d2">
           <div>
-            <span className={styles['fs-20']}><span className="lite">Shoes</span><span className={styles.bold}>UP TO 50% OFF</span></span>
+            <span className={styles['fs-16']}><span className="lite">Shoes</span></span>
             <a href={b_d_b.Shoes}>
               <div className="shadow">
                 <img src={d_tif[2]} className="img-responsive" />
@@ -393,11 +399,11 @@ const HomePage = () => (
             </a>
             <div className="btn">
               <span>SHOP NOW</span>
-              <SVGComponent clsName="arrow" src="icons/common-icon/arrow" />
+              
             </div>
           </div>
           <div>
-            <span className={styles['fs-20']}><span className="lite">Watches</span><span className={styles.bold}>UP TO 50% OFF</span></span>
+            <span className={styles['fs-16']}><span className="lite">Watches</span></span>
             <a href={b_d_b.Watches}>
               <div className="shadow">
                 <img src={d_tif[3]} className="img-responsive" />
@@ -405,13 +411,13 @@ const HomePage = () => (
             </a>
             <div className="btn">
               <span>SHOP NOW</span>
-              <SVGComponent clsName="arrow" src="icons/common-icon/arrow" />
+              
             </div>
           </div>
         </div>
         <div className={`d3 ${styles.right0}`}>
           <div>
-            <span className={styles['fs-20']}><span className="lite">Men's Clothing</span><span className={styles.bold}>UP TO 50% OFF</span></span>
+            <span className={styles['fs-16']}><span className="lite">Men's Clothing</span></span>
             <a href={b_d_b['Mens Clothing']}>
               <div className="shadow">
                 <img src={d_tif[4]} className="img-responsive" />
@@ -419,7 +425,7 @@ const HomePage = () => (
             </a>
             <div className="btn">
               <span>SHOP NOW</span>
-              <SVGComponent clsName="arrow" src="icons/common-icon/arrow" />
+              
             </div>
           </div>
         </div>
@@ -442,7 +448,7 @@ const HomePage = () => (
         <div className={`${styles['fs-20']} title`}>BEST OF HOME & LIVING</div>
         <div className="d1">
           <div>
-            <span className={styles['fs-20']}><span className="lite">Kids Furniture</span><span className={styles.bold}>UP TO 50% OFF</span></span>
+            <span className={styles['fs-16']}><span className="lite">Kids Furniture</span></span>
             <a href={b_d_b['furniture']}>
               <div className="shadow">
                 <img src={d_tihl[0]} className="img-responsive" />
@@ -450,24 +456,24 @@ const HomePage = () => (
             </a>
             <div className="btn">
               <span>SHOP NOW</span>
-              <SVGComponent clsName="arrow" src="icons/common-icon/arrow" />
+              
             </div>
           </div>
           <div>
-            <span className={styles['fs-20']}><span className="lite">Living Room Furniture</span><span className={styles.bold}>FROM SAR 200</span></span>
+            <span className={styles['fs-16']}><span className="lite">Living Room Furniture</span></span>
             <a href={b_d_b['furniture']}></a>
               <div className="shadow">
                 <img src={d_tihl[1]} className="img-responsive" />
               </div>
             <div className="btn">
               <span>SHOP NOW</span>
-              <SVGComponent clsName="arrow" src="icons/common-icon/arrow" />
+              
             </div>
           </div>
         </div>
         <div className="d2">
           <div>
-            <span className={styles['fs-20']}><span className="lite">Lamps</span><span className={styles.bold}>UP TO 50% OFF</span></span>
+            <span className={styles['fs-16']}><span className="lite">Lamps</span></span>
             <a href={b_d_b['lamps']}>
               <div className="shadow">
                 <img src={d_tihl[2]} className="img-responsive" />
@@ -475,11 +481,11 @@ const HomePage = () => (
             </a>
             <div className="btn">
               <span>SHOP NOW</span>
-              <SVGComponent clsName="arrow" src="icons/common-icon/arrow" />
+              
             </div>
           </div>
           <div>
-            <span className={styles['fs-20']}><span className="lite">Cushions</span><span className={styles.bold}>UP TO 50% OFF</span></span>
+            <span className={styles['fs-16']}><span className="lite">Cushions</span></span>
             <a href={b_d_b['bedding']}>
               <div className="shadow">
                 <img src={d_tihl[3]} className="img-responsive" />
@@ -487,13 +493,13 @@ const HomePage = () => (
             </a>
             <div className="btn">
               <span>SHOP NOW</span>
-              <SVGComponent clsName="arrow" src="icons/common-icon/arrow" />
+              
             </div>
           </div>
         </div>
         <div className={`d3 ${styles.right0}`}>
           <div>
-            <span className={styles['fs-20']}><span className="lite">Lights</span><span className={styles.bold}>FROM SAR 200</span></span>
+            <span className={styles['fs-16']}><span className="lite">Lights</span></span>
             <a href={b_d_b['Lights']}>
               <div className="shadow">
                 <img src={d_tihl[4]} className="img-responsive" />
@@ -501,7 +507,7 @@ const HomePage = () => (
             </a>
             <div className="btn">
               <span>SHOP NOW</span>
-              <SVGComponent clsName="arrow" src="icons/common-icon/arrow" />
+              
             </div>
           </div>
         </div>
@@ -526,7 +532,7 @@ const HomePage = () => (
         <div>
           <div className="d1">
             <div>
-              <span className={styles['fs-20']}><span className="lite">Laptops</span><span className={styles.bold}>UP TO 50% OFF</span></span>
+              <span className={styles['fs-16']}><span className="lite">Laptops</span></span>
               <a href={b_d_b.Laptops}>
                 <div className="shadow">
                   <img src={d_tie[0]} className="img-responsive" />
@@ -534,12 +540,12 @@ const HomePage = () => (
               </a>
               <div className="btn">
                 <span>SHOP NOW</span>
-                <SVGComponent clsName="arrow" src="icons/common-icon/arrow" />
+                
               </div>
             </div>
             <div>
-              <span className={styles['fs-20']}><span className="lite">Mobiles
-                                                </span><span className={styles.bold}>UP TO 50% OFF</span>
+              <span className={styles['fs-16']}><span className="lite">Mobiles
+                                                </span>
               </span>
               <a href={b_d_b.Mobiles}>
                 <div className="shadow">
@@ -548,13 +554,13 @@ const HomePage = () => (
               </a>
               <div className="btn">
                 <span>SHOP NOW</span>
-                <SVGComponent clsName="arrow" src="icons/common-icon/arrow" />
+                
               </div>
             </div>
           </div>
           <div className="d2">
             <div>
-              <span className={styles['fs-20']}><span className="lite">Camera</span><span className={styles.bold}>UP TO 50% OFF</span></span>
+              <span className={styles['fs-16']}><span className="lite">Camera</span></span>
               <a href={b_d_b.Cameras}>
                 <div className="shadow">
                   <img src={d_tie[2]} className="img-responsive" />
@@ -562,11 +568,11 @@ const HomePage = () => (
               </a>
               <div className="btn">
                 <span>SHOP NOW</span>
-                <SVGComponent clsName="arrow" src="icons/common-icon/arrow" />
+                
               </div>
             </div>
             <div>
-              <span className={styles['fs-20']}><span className="lite">Kitchen Appliances</span><span className={styles.bold}>UP TO 50% OFF</span></span>
+              <span className={styles['fs-16']}><span className="lite">Kitchen Appliances</span></span>
               <a href={b_d_b['Kitchen Appliances']}>
                 <div className="shadow">
                   <img src={d_tie[3]} className="img-responsive" />
@@ -574,13 +580,13 @@ const HomePage = () => (
               </a>
               <div className="btn">
                 <span>SHOP NOW</span>
-                <SVGComponent clsName="arrow" src="icons/common-icon/arrow" />
+                
               </div>
             </div>
           </div>
           <div className={`d3 ${styles.right0}`}>
             <div>
-              <span className={styles['fs-20']}><span className="lite">Audio Devices</span><span className={styles.bold}>UP TO 50% OFF</span></span>
+              <span className={styles['fs-16']}><span className="lite">Audio Devices</span></span>
               <a href={b_d_b.Speakers}>
                 <div className="shadow">
                   <img src={d_tie[4]} className="img-responsive" />
@@ -588,7 +594,7 @@ const HomePage = () => (
               </a>
               <div className="btn">
                 <span>SHOP NOW</span>
-                <SVGComponent clsName="arrow" src="icons/common-icon/arrow" />
+                
               </div>
             </div>
           </div>
