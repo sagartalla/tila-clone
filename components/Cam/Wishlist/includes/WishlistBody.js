@@ -94,7 +94,7 @@ const WishlistBody = (props) => {
                             data-cart-res={true}
                             data-wish-id={wishlist_id}
                             data-cart-res={true}
-                            className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['add-to-btn']}`}
+                            className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['left-radius']} ${styles['add-to-btn']}`}
                             onClick={buttonValue && addToCart}
                           >
                             {buttonValue ? WISH_LIST_PAGE.ADD_TO_CART_BTN : PDP_PAGE.IN_CART}
@@ -102,7 +102,7 @@ const WishlistBody = (props) => {
                           :
                           <button
                             data-product-id={product_id}
-                            className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['add-to-btn']}`}
+                            className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['left-radius']} ${styles['add-to-btn']}`}
                             onClick={notifyMe}
                           >
                             {WISH_LIST_PAGE.NOTIFY_ME_BTN}
