@@ -74,8 +74,7 @@ const getProductComponent = (isPreview, taskCode) => {
           const cd = offerInfo && offerInfo.offerPricing && offerInfo.offerPricing.sellingPrice && offerInfo.offerPricing.sellingPrice.currency_code;
           const recentData = localStorage.getItem('rv');
           const arr = recentData ? JSON.parse(recentData) : [];
-          const index = _.findIndex(arr, (o) => o.id == shippingInfo.listing_id);
-
+          const index = _.findIndex(arr, o => o.id == offerInfo.listingId);
 
           // if (index > -1 && arr.length <= 5) {
           //   arr = arr.slice(index, 1);
@@ -164,7 +163,7 @@ const getProductComponent = (isPreview, taskCode) => {
     render() {
       const { productData, userDetails, showLoading, query } = this.props;
       const {
-        catalog, titleInfo, keyfeatures, extraOffers, imgUrls, offerInfo, shippingInfo, isWishlisted,
+        catalog, titleInfo, keyfeatures, extraOffers, imgUrls, offerInfo, shippingInfo, isWishlisted, returnInfo,
         details, productDescription, catalogObj, categoryType = '', warranty, breadcrums, product_id, wishlistId,
       } = productData;
       const { offerPricing } = offerInfo;
@@ -210,9 +209,10 @@ const getProductComponent = (isPreview, taskCode) => {
                       </div>
                       <div className={`${styles['ipad-details']} ${styles['bdr-lt']} ${styles['ipad-pl-15']}`}>
                         {
-                          isPreview ? null : <Shipping shippingInfo={shippingInfo} offerInfo={offerInfo} warranty={warranty} />
+                          isPreview ? null : <Shipping shippingInfo={shippingInfo} returnInfo={returnInfo} offerInfo={offerInfo} warranty={warranty} />
                         }
                         {isPreview ? null :
+                          (shippingInfo === null || shippingInfo.shippable) && 
                             <AddToCart
                               offerInfo={offerInfo}
                               productData={productData.product_id}
