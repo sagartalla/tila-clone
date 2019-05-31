@@ -8,29 +8,10 @@ const Fashion = () => React.createElement(
     React.createElement(
       'div',
       { className: `${styles['flex']} fashion-banner-main ${styles['relative']}` },
-      React.createElement('img', { src: '/static/img/landing-page-fashion/fashion-banner.png', className: 'img-responsive' }),
       React.createElement(
-        'div',
-        { className: `${styles['absolute']} ${styles['flex']} ${styles['flex-colum']} banner-label` },
-        React.createElement(
-          'span',
-          { className: `main-quation ${styles['fs-44']}` },
-          'Up to 50% Off on Party Dresses'
-        ),
-        React.createElement(
-          'span',
-          { className: `banner-dec ${styles['fs-16']}` },
-          '\u201CYou can have anything you want in life if you dress for it.\u201D'
-        ),
-        React.createElement(
-          'span',
-          { className: `${styles['pt-25']} shop-now-btn` },
-          React.createElement(
-            'a',
-            { className: `${styles['fs-12']} ${styles['fontW600']} ${styles['border-radius4']}` },
-            'SHOP NOW'
-          )
-        )
+        'a',
+        { href: '/SAU/en/srp?search=dress&isListed=false' },
+        React.createElement('img', { src: `/static/img/landing-page-fashion/${lang === 'en' ? 'womens-clothing' : 'womens-clothing-ar'}.jpg`, className: 'img-responsive' })
       )
     )
   ),

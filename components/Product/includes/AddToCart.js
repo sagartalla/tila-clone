@@ -6,6 +6,7 @@ import Cookie from 'universal-cookie';
 import { selectors, actionCreators } from '../../../store/cart';
 import { Router } from '../../../routes';
 import { languageDefinations } from '../../../utils/lang';
+import ProductPrice from '../includes/ProductPrice';
 
 import Button from '../../common/CommonButton';
 
@@ -71,30 +72,39 @@ class AddToCart extends Component {
   }
 
   render() {
-    const { isLoading, isAddedToCart, offerInfo, btnLoading } = this.props;
-    const { stockError, availabilityError } = offerInfo;
-    return (availabilityError || stockError)
-      ?
-      null
-      :
-      (
-        <div className={`${styles['pt-25']} ${styles['flx-space-bw']} ${styles['addto-cart']} ${styles['ipad-p-0']} ${styles['border-t']}`}>
-          <Button
-            className={`${styles['fs-16']} ${styles['ipad-fs-14']} ${styles['add-to-card-btn']} ${styles['text-uppercase']} ${styles['flex']}`}
-            disabled={isLoading || isAddedToCart}
-            onClick={isAddedToCart === false && this.addToCart}
-            btnLoading={btnLoading}
-            btnText={isAddedToCart ? '' : PDP_PAGE.ADD_TO_CART}
-            showImage={isAddedToCart && 'icons/cart/added-cart-icon'}
-          />
-          <Button
-            className={`${styles['fs-16']} ${styles['ipad-fs-14']} ${styles['text-uppercase']} ${styles['buy-now-btn']}`}
-            onClick={this.buyNow}
-            btnText={PDP_PAGE.BUY_NOW}
-            hoverClassName="hoverBlueBackground"
-          />
-        </div>
-      );
+    const { isLoading, error, isAddedToCart, offerInfo, btnLoading, shippingInfo, isPreview, styling, top } = this.props;
+    const { price, listingAvailable, listingId, stockError, availabilityError } = offerInfo;
+    return (
+      <div id="cart-btn-cont" className={`${styles['addto-cart']} ${styles['addto-cart-lang']} ${styles[styling]}`} style={{top: `${top}px`}}>
+        <React.Fragment>
+          {!isPreview && <ProductPrice offerInfo={offerInfo} />}
+          {
+          (availabilityError || stockError) && (shippingInfo === null || shippingInfo.shippable)
+          ?
+          null
+          :
+          (
+            <div className={`${styles['pt-10']} ${styles['flx-space-bw']} ${styles['ipad-p-0']}`}>
+              <Button
+                className={`${styles['fs-16']} ${styles['ipad-fs-14']} ${styles['add-to-card-btn']} ${styles['text-uppercase']} ${styles['flex']}`}
+                disabled={isLoading || isAddedToCart}
+                onClick={isAddedToCart === false && this.addToCart}
+                btnLoading={btnLoading}
+                btnText={isAddedToCart ? '' : PDP_PAGE.ADD_TO_CART}
+                showImage={isAddedToCart && 'icons/cart/added-cart-icon'}
+              />
+              <Button
+                className={`${styles['fs-16']} ${styles['ipad-fs-14']} ${styles['text-uppercase']} ${styles['buy-now-btn']}`}
+                onClick={this.buyNow}
+                btnText={PDP_PAGE.BUY_NOW}
+                hoverClassName="hoverBlueBackground"
+              />
+            </div>
+          )
+          }
+        </React.Fragment>
+      </div>
+    );
   }
 }
 

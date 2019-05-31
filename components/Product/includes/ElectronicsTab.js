@@ -14,7 +14,7 @@ import styles_ar from '../product_ar.styl';
 
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
-const ElectronicsTab = ({ catalog, productDescription, catalogObj, isPreview }) => {
+const ElectronicsTab = ({ catalog, productDescription, catalogObj, isPreview, titleInfo }) => {
   return (
     <div>
       <Tabs defaultActiveKey={1} id="electronics-tab">
@@ -32,9 +32,9 @@ const ElectronicsTab = ({ catalog, productDescription, catalogObj, isPreview }) 
         <Tab eventKey={3} title="Specifications">
           <Specification />
         </Tab>*/}
-        {isPreview ? null : 
+        {isPreview ? null :
           <Tab eventKey={4} title="Reviews">
-            <Review catalogObj={catalogObj} />
+            <Review catalogObj={catalogObj} titleInfo={titleInfo} />
           </Tab>
         }
         {/* <Tab eventKey={5} title="Compare">

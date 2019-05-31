@@ -217,7 +217,7 @@ export const EN_KEYWORDS = {
     SOCIAL_INFLUENCER: 'Social Influencer',
     REVIEW_TITLE_PLACE: 'Review title goes here ',
     EASY_RETURN: 'easy return',
-    NO_SHIPPING_CITY: 'Currently not shipping to your city!',
+    NO_SHIPPING_CITY: 'Currently not shipping to your city',
     FREE_DELIVERY_BY: 'FREE Delivery By',
     FREE_DELIVERY_IN: 'Free delivery in',
     NON_RETURNABLE: 'Non returnable',
@@ -255,6 +255,9 @@ export const EN_KEYWORDS = {
     GET_NOTIFIED: 'Get Notified',
     HIDE_OUT_OF_STOCK: 'Hide Out of Stock',
     PLEASE_SELECT_PRODUCT_SIZE: 'Please Select Product Size',
+    PDP_DONE: 'Done',
+    THANKS_FOR_RATING: 'Thanks for Rating',
+    THANKS_DESCRIPTION: 'Thanks for taking your time to rate the product, this will help millions of users like you to make better purchase judgement',
   },
   VAULT_PAGE: {
     VOUCHER_HISTORY: 'Your gift voucher transaction history',
@@ -721,6 +724,7 @@ export const EN_KEYWORDS = {
     CREDIT_CARDS_VOUCHERS_REWARD_POINTS: 'Credit Cards, Vouchers and Rewards',
     MY_COUPONS: 'My Coupons',
     PREFERENCES: 'Preferences',
+    REVIEWS_AND_RATINGS: 'My reviews & ratings',
   },
   PREFERENCES: {
     PAGE_TITLE: 'Notification and Communication Preferences',
@@ -737,5 +741,12 @@ export const EN_KEYWORDS = {
     SALE_EVENT_AND_CAMPAIGN_UPDATE_SUB: 'Signup to receive Flash sales, new launches and latest campaigns',
     FEEDBACK_SURVEY_AND_PRODUCT_REVIEW_HEADING: 'Feedback surveys and Product Reviews',
     FEEDBACK_SURVEY_AND_PRODUCT_REVIEW_SUB: 'Signup to receive personalized discounts and coupons',
+  },
+  REVIEWS: {
+    TITLE: 'My Reviews & Ratings',
+    SUB_TITLE: 'All your reviews & ratings at one place',
+    RATED_REVIEWS: 'You have Rated & Reviewed',
+    ITEMS: 'items',
+    WRITE_A_REVIEW: 'Write a review',
   },
 };
