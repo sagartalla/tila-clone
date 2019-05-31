@@ -178,6 +178,7 @@ class Search extends Component {
                   <input
                     className={styles['search-input']}
                     id="text-box"
+                    autoComplete={false}
                     placeholder={SEARCH_PAGE.SEARCH_YOUR_FAV_ITEM}
                     onChange={this.onChangeSearchInput}
                     value={(context === 'search') || searchInput ? query : ''}
