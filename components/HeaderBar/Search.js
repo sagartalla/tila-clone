@@ -104,7 +104,7 @@ class Search extends Component {
     const { suggestions } = this.props;
     if (e.keyCode === 9 || e.keyCode === 39) {
       this.setState({
-        query: suggestions && suggestions.length > 0 && suggestions[0].data_edgengram,
+        query: suggestions && (suggestions.length > 0 && suggestions[0].data_edgengram),
       });
     }
   }

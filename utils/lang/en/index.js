@@ -255,6 +255,9 @@ export const EN_KEYWORDS = {
     GET_NOTIFIED: 'Get Notified',
     HIDE_OUT_OF_STOCK: 'Hide Out of Stock',
     PLEASE_SELECT_PRODUCT_SIZE: 'Please Select Product Size',
+    PDP_DONE: 'Done',
+    THANKS_FOR_RATING: 'Thanks for Rating',
+    THANKS_DESCRIPTION: 'Thanks for taking your time to rate the product, this will help millions of users like you to make better purchase judgement',
   },
   VAULT_PAGE: {
     VOUCHER_HISTORY: 'Your gift voucher transaction history',

@@ -432,7 +432,6 @@ class Product extends Component {
                 </div>
               </div> */}
                 </div>
-                
               </div>
             </a>
           </Link>

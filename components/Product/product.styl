@@ -335,6 +335,13 @@
     border-left 5px solid  border-gry-color
 
 .review-main
+  .share-review-img
+    height 100px
+    justify-content center
+    img
+      max-height 100%
+      max-width 100%
+      object-fit scale-down
   .review-no
     font-size 90px
     background: url(/static/img/bg-img/groupstar.png) no-repeat;
@@ -496,22 +503,32 @@
     justify-content space-between
 .review-block
   .review-textarea
+    width 100%
     resize none
-    border-radius  4px
-    border solid 1px #d1d1d1
-    background-color #ffffff
+    border-bottom-style solid
+    border-width 0 0 1px 0
+    border-color light-brdr
+    &:focus
+      outline none
+  .review-textarea::placeholder
+    font-size 12px
+
+.review-thak-you
+  .review-thankyou-icon
+    width 100px
 .review-rating-block
  border-bottom solid 1px #e4e4e4
  border-top solid 1px #e4e4e4
 .modal-headerStyl
   background-color #f0f7ff
   color #333333
-.btn-style
-  width 450px
-  background-color #45689a
-  border-color #45689a
-  height 50px
-  color #fff
+.btn-style.btn-style-override
+  width 100%
+  background-color transparent
+  border solid 1px lgt-black-clr
+  color lgt-black-clr
+  border-bottom-left-radius 14px
+  padding 12px
 .max-ht100
   max-height 100%
 .ht-40
@@ -567,6 +584,46 @@
   height 100%
   width 100%
   overflow auto
+
+.openModal
+  height 100%
+  width 40%
+  position fixed
+  top 0
+  right -800px
+  z-index 2001
+  background-color white
+  animation-name slideOpen
+  animation-duration 0.5s
+  animation-fill-mode both
+
+.closeModal
+  height 100%
+  width 40%
+  position fixed
+  top 0
+  right 0px
+  z-index 2001
+  background-color white
+  animation-name slideClose
+  animation-duration 0.2s
+  animation-fill-mode both
+
+.showDiv
+  display block
+
+.hideDiv
+  display none
+
+
+@keyframes slideOpen {
+  from {right: -800px;}
+  to {right: 0;}
+}
+@keyframes slideClose {
+  from {right: 0px;}
+  to {right: -800px;}
+}
 
 .pdp-img-prt
   height: calc(100% - 106px);
