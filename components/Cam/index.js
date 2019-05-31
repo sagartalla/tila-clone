@@ -1,9 +1,9 @@
 import React from 'react';
 import { Grid, Row, Col } from 'react-bootstrap';
-import { connect } from 'react-redux';
-import { selectors, actionCreators } from '../../store/cam/personalDetails';
 import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
+import { selectors, actionCreators } from '../../store/cam/personalDetails';
 import HeaderBar from '../HeaderBar/index';
 import Sidebar from './Sidebar';
 import UserInfo from './PersonelDetails';
@@ -16,6 +16,7 @@ import Messages from './Messages';
 import MyCoupons from './MyCoupons/MyCoupon';
 import FooterBar from '../Footer';
 import Preferences from './Preferences';
+import Reviews from './Reviews';
 import AuthWrapper from '../common/AuthWrapper';
 
 import lang from '../../utils/language';
@@ -25,25 +26,22 @@ import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './cam_en.styl';
 import styles_ar from './cam_ar.styl';
 
-const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
 class Cam extends React.Component {
-  constructor(props){
-    super(props);
-  }
   componentDidMount() {
     this.props.getUserProfileInfo();
   }
 
   render() {
-    const {tabDetails, query} = this.props;
+    const { tabDetails, query } = this.props;
     const [tab, ...queryParams] = tabDetails ? tabDetails.split('/') : [];
     const camComponent = ((tabName) => {
       switch (tabName) {
         case 'orders':
           return <Orders />;
         case 'address':
-          return <ShippingAddress standalone={true} />;
+          return <ShippingAddress standalone />;
         case 'wishlist':
           return <Wishlist />;
         case 'mycoupons':
@@ -58,10 +56,12 @@ class Cam extends React.Component {
           return <UserVault />;
         case 'preferences':
           return <Preferences />;
+        case 'reviews_ratings':
+          return <Reviews />;
         default:
           return <UserInfo />;
       }
-    })(tab)
+    })(tab);
     return (
       <div>
         <div className={styles['bg-color']}>
@@ -81,20 +81,20 @@ class Cam extends React.Component {
           <FooterBar />
         </div>
       </div>
-    )
+    );
   }
 }
 
-const mapDispatchToProps = (dispatch) =>
+const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      getUserProfileInfo: actionCreators.getUserProfileInfo
+      getUserProfileInfo: actionCreators.getUserProfileInfo,
     },
     dispatch,
   );
 
-const mapStateToProps = (store) => ({
-  userInfo: selectors.getUserInfo(store)
+const mapStateToProps = store => ({
+  userInfo: selectors.getUserInfo(store),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cam);

@@ -707,6 +707,7 @@ export const AR_KEYWORDS = {
     CREDIT_CARDS_VOUCHERS_REWARD_POINTS: 'Credit Cards, Vouchers and Rewards',
     MY_COUPONS: 'قسائم بلدي',
     PREFERENCES: 'تفضيلات',
+    REVIEWS_AND_RATINGS: 'بلدي الاستعراضات والتقييمات',
   },
   PREFERENCES: {
     PAGE_TITLE: 'الإشعارات والاتصال المفضل ',
@@ -723,5 +724,12 @@ export const AR_KEYWORDS = {
     SALE_EVENT_AND_CAMPAIGN_UPDATE_SUB: 'انشئ حسابك لتحصل على تخفيضات فلاش وإطلاقاتنا الجديدة وأحدث الحملات',
     FEEDBACK_SURVEY_AND_PRODUCT_REVIEW_HEADING: 'استطلاعات الرأي وتقييم المنتجات',
     FEEDBACK_SURVEY_AND_PRODUCT_REVIEW_SUB: 'انشئ حسابك لتحصل على  خصومات خاصة بك وكوبونات',
+  },
+  REVIEWS: {
+    TITLE: 'My Reviews & Ratings',
+    SUB_TITLE: 'All your reviews & ratings at one place',
+    RATED_REVIEWS: 'You have Rated & Reviewed',
+    ITEMS: 'items',
+    WRITE_A_REVIEW: 'Write a review',
   },
 };
