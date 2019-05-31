@@ -351,6 +351,8 @@ export const EN_KEYWORDS = {
     EXPERIANCE: 'more personalised Tila Experience',
     OR: 'or',
     USERNAME: 'Username',
+    CHOOSE_IMAGE: 'Choose an image',
+    IMAGE_UPDATED_SUCCESS: 'Your profile pic is successfully updated',
     UPDATE_PERSONAL_INFORMATION: 'Update Personal Information',
     TIME_LINE: 'Timeline Component',
     WE_WONT_SPAM: 'We wont Spam.Swear!',

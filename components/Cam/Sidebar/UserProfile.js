@@ -5,16 +5,15 @@ import { Link } from '../../../routes';
 import { selectors, actionCreators } from '../../../store/cam/personalDetails';
 import { bindActionCreators } from 'redux';
 import generateURL from '../../../utils/urlGenerator';
-import { toast } from 'react-toastify';
 import lang from '../../../utils/language';
-
+import { languageDefinations } from '../../../utils/lang/';
 import main_en from '../../../layout/main/main_en.styl';
 import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from './sidebar_en.styl';
 import styles_ar from './sidebar_ar.styl';
 
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
-
+const { PERSONAL_INFO_MODAL } = languageDefinations();
 const cookies = new Cookies();
 const language = cookies.get('language') || 'en';
 const country = cookies.get('country') || 'SAU';
@@ -63,7 +62,6 @@ class UserProfile extends React.Component {
           this.props.EditPersonalInfo({
             image_url: this.state.imgDocumentID, //As imgUrl is too long to store in image_url, storing documentID in image_url.
           })
-          toast.success("Your profile pic is successfully updated")
         })
       });
     }
@@ -79,7 +77,7 @@ class UserProfile extends React.Component {
     if (this.state.imgUrl) {
       imagePreview = (<img className={styles['prev-img']} src={this.state.imgUrl} />);
     } else {
-      imagePreview = (<div className={styles['edit-icon']}>Click to upload image</div>)
+      imagePreview = (<div className={styles['edit-icon']}>{PERSONAL_INFO_MODAL.CHOOSE_IMAGE}</div>)
     }
     let full_name = first_name || last_name ? first_name + " " + last_name : "";
     let name = full_name ? (full_name.length < 20 ? full_name : (full_name.slice(0, 20) + "...")) : "";

@@ -1,6 +1,9 @@
 import axios from 'axios';
 import constants from '../../helper/constants';
+import { toast } from 'react-toastify';
+import { languageDefinations } from '../../../utils/lang/';
 
+const { PERSONAL_INFO_MODAL } = languageDefinations();
 const getUserProfileInfo = () => {
   return Promise.all([
     axios.get(`${constants.CMS_API_URL}/api/v1/user/account/details`),
@@ -71,9 +74,11 @@ const editPersonalInfo = (body) => {
   return axios.put(`${constants.CMS_API_URL}/api/v1/user/account/edit`, body).then(({ data }) => {
     return axios.get(`${constants.CMS_API_URL}/api/v1/user/account/details`).then(userInfoResult=> [data,userInfoResult]);
   }).then(([personalInfoStatus, userInfoResult]) =>{
+    toast.success(PERSONAL_INFO_MODAL.IMAGE_UPDATED_SUCCESS)
     return {
       personalInfo:userInfoResult.data,
-      personalInfoStatus}
+      personalInfoStatus
+    }
   });
 }
 
