@@ -380,13 +380,7 @@ const HomePage = () => (
               </div>
             </a>
             <div className="btn">
-<<<<<<< HEAD
               <span>{lang === 'en' ? 'SHOP NOW' : 'تسوق الآن'}</span>
-              
-=======
-              <span>SHOP NOW</span>
-
->>>>>>> c72b1431e310f3d9b56b10c05481a3ffc4e8898c
             </div>
           </div>
           <div>
@@ -397,13 +391,7 @@ const HomePage = () => (
               </div>
             </a>
             <div className="btn">
-<<<<<<< HEAD
               <span>{lang === 'en' ? 'SHOP NOW' : 'تسوق الآن'}</span>
-              
-=======
-              <span>SHOP NOW</span>
-
->>>>>>> c72b1431e310f3d9b56b10c05481a3ffc4e8898c
             </div>
           </div>
         </div>
@@ -416,13 +404,7 @@ const HomePage = () => (
               </div>
             </a>
             <div className="btn">
-<<<<<<< HEAD
               <span>{lang === 'en' ? 'SHOP NOW' : 'تسوق الآن'}</span>
-              
-=======
-              <span>SHOP NOW</span>
-
->>>>>>> c72b1431e310f3d9b56b10c05481a3ffc4e8898c
             </div>
           </div>
           <div>
@@ -433,13 +415,7 @@ const HomePage = () => (
               </div>
             </a>
             <div className="btn">
-<<<<<<< HEAD
               <span>{lang === 'en' ? 'SHOP NOW' : 'تسوق الآن'}</span>
-              
-=======
-              <span>SHOP NOW</span>
-
->>>>>>> c72b1431e310f3d9b56b10c05481a3ffc4e8898c
             </div>
           </div>
         </div>
@@ -452,13 +428,7 @@ const HomePage = () => (
               </div>
             </a>
             <div className="btn">
-<<<<<<< HEAD
               <span>{lang === 'en' ? 'SHOP NOW' : 'تسوق الآن'}</span>
-              
-=======
-              <span>SHOP NOW</span>
-
->>>>>>> c72b1431e310f3d9b56b10c05481a3ffc4e8898c
             </div>
           </div>
         </div>
@@ -488,13 +458,7 @@ const HomePage = () => (
               </div>
             </a>
             <div className="btn">
-<<<<<<< HEAD
               <span>{lang === 'en' ? 'SHOP NOW' : 'تسوق الآن'}</span>
-              
-=======
-              <span>SHOP NOW</span>
-
->>>>>>> c72b1431e310f3d9b56b10c05481a3ffc4e8898c
             </div>
           </div>
           <div>
@@ -504,13 +468,7 @@ const HomePage = () => (
                 <img src={d_tihl[1]} className="img-responsive" />
               </div>
             <div className="btn">
-<<<<<<< HEAD
               <span>{lang === 'en' ? 'SHOP NOW' : 'تسوق الآن'}</span>
-              
-=======
-              <span>SHOP NOW</span>
-
->>>>>>> c72b1431e310f3d9b56b10c05481a3ffc4e8898c
             </div>
           </div>
         </div>
@@ -523,13 +481,7 @@ const HomePage = () => (
               </div>
             </a>
             <div className="btn">
-<<<<<<< HEAD
               <span>{lang === 'en' ? 'SHOP NOW' : 'تسوق الآن'}</span>
-              
-=======
-              <span>SHOP NOW</span>
-
->>>>>>> c72b1431e310f3d9b56b10c05481a3ffc4e8898c
             </div>
           </div>
           <div>
@@ -540,13 +492,7 @@ const HomePage = () => (
               </div>
             </a>
             <div className="btn">
-<<<<<<< HEAD
               <span>{lang === 'en' ? 'SHOP NOW' : 'تسوق الآن'}</span>
-              
-=======
-              <span>SHOP NOW</span>
-
->>>>>>> c72b1431e310f3d9b56b10c05481a3ffc4e8898c
             </div>
           </div>
         </div>
@@ -559,13 +505,7 @@ const HomePage = () => (
               </div>
             </a>
             <div className="btn">
-<<<<<<< HEAD
               <span>{lang === 'en' ? 'SHOP NOW' : 'تسوق الآن'}</span>
-              
-=======
-              <span>SHOP NOW</span>
-
->>>>>>> c72b1431e310f3d9b56b10c05481a3ffc4e8898c
             </div>
           </div>
         </div>
@@ -597,13 +537,7 @@ const HomePage = () => (
                 </div>
               </a>
               <div className="btn">
-<<<<<<< HEAD
                 <span>{lang === 'en' ? 'SHOP NOW' : 'تسوق الآن'}</span>
-                
-=======
-                <span>SHOP NOW</span>
-
->>>>>>> c72b1431e310f3d9b56b10c05481a3ffc4e8898c
               </div>
             </div>
             <div>
@@ -616,13 +550,7 @@ const HomePage = () => (
                 </div>
               </a>
               <div className="btn">
-<<<<<<< HEAD
                 <span>{lang === 'en' ? 'SHOP NOW' : 'تسوق الآن'}</span>
-                
-=======
-                <span>SHOP NOW</span>
-
->>>>>>> c72b1431e310f3d9b56b10c05481a3ffc4e8898c
               </div>
             </div>
           </div>
@@ -635,13 +563,7 @@ const HomePage = () => (
                 </div>
               </a>
               <div className="btn">
-<<<<<<< HEAD
                 <span>{lang === 'en' ? 'SHOP NOW' : 'تسوق الآن'}</span>
-                
-=======
-                <span>SHOP NOW</span>
-
->>>>>>> c72b1431e310f3d9b56b10c05481a3ffc4e8898c
               </div>
             </div>
             <div>
@@ -652,13 +574,7 @@ const HomePage = () => (
                 </div>
               </a>
               <div className="btn">
-<<<<<<< HEAD
                 <span>{lang === 'en' ? 'SHOP NOW' : 'تسوق الآن'}</span>
-                
-=======
-                <span>SHOP NOW</span>
-
->>>>>>> c72b1431e310f3d9b56b10c05481a3ffc4e8898c
               </div>
             </div>
           </div>
@@ -671,13 +587,7 @@ const HomePage = () => (
                 </div>
               </a>
               <div className="btn">
-<<<<<<< HEAD
                 <span>{lang === 'en' ? 'SHOP NOW' : 'تسوق الآن'}</span>
-                
-=======
-                <span>SHOP NOW</span>
-
->>>>>>> c72b1431e310f3d9b56b10c05481a3ffc4e8898c
               </div>
             </div>
           </div>
