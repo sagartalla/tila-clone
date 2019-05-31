@@ -219,7 +219,6 @@ class Incidents extends Component {
       <div key={threadSequence} className={`${styles['pV-20']} ${styles['bB']}`}>
         <div className={styles['threadContainer']}>
           <div className={`${styles['flex']} ${styles['align-center']}`}>
-            <div className={styles['userProfile']}/>
             <div>
               <div>{nameOfPerson || this.props.userInfo.personalInfo.first_name || HEADER_PAGE.TILA_CUSTOMER}</div>
             </div>

@@ -14,6 +14,7 @@ import main_en from '../../layout/main/main_en.styl';
 import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './help_en.styl';
 import styles_ar from './help_ar.styl';
+import SVGComponent from '../common/SVGComponet';
 
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
@@ -57,7 +58,9 @@ class Help extends Component {
   renderContactCard = (selectedOrder, selectedIssue) => (type, index) => {
     return (
     <div key={type.type} className={`${styles['flexCenterContainer']} ${styles['wh-200']} ${index !== 0 && styles['bL']}`}>
-      <div className={styles['contactIcon']}></div>
+      <div className={styles['contactIcon']}>
+        <SVGComponent src={`helpsupport/${type.type}`} />
+      </div>
       <div>
         <div className={`${styles['fs-13p']} ${styles['fwBolder']}`}>{type.text[0]}</div>
         <div className={`${styles['fs-12p']} ${styles['highlightColor']} ${type.isClickable && styles['pointer']}`} onClick={this.handleContactClick(type, selectedOrder, selectedIssue)}>{type.text[1]}</div>

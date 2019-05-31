@@ -3,13 +3,14 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { actionCreators } from '../../store/helpsupport';
 import { Link } from '../../routes';
-
+import { categoryImages } from './helpConstants';
 import lang from '../../utils/language';
 
 import main_en from '../../layout/main/main_en.styl';
 import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './help_en.styl';
 import styles_ar from './help_ar.styl';
+import SVGComponent from '../common/SVGComponet';
 
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
@@ -35,11 +36,14 @@ class Faq extends Component {
     const remaining = questionKeys.splice(4);
     return (
       <div key={topicKey} className={styles['topicContainer']}>
+        <div className={styles['faqIcon']}>
+          <SVGComponent src={`helpsupport/${categoryImages[topicKey]}`}/>
+        </div>
         <h4>{this.props.categoriesObj[topicKey].name}</h4>
         <div className={styles['ht-175']}>
           {questionKeys.map(this.renderQuestions(topicKey))}
         </div>
-        {remaining.length > 0 ? <Link route={`answers/${topicKey}`}><a className={`${styles['fs-13p']} ${styles['greyColor']} ${styles['as-flex-end']}`}>{`${remaining.length} more >`}</a></Link> : <div />}
+        {remaining.length > 0 ? <Link route={`answers/${topicKey}`}><a className={`${styles['viewMoreBtn']} ${styles['fs-13p']} ${styles['greyColor']} ${styles['as-flex-end']}`}>{`${remaining.length} more >`}</a></Link> : <div />}
       </div>
     )
   }
@@ -56,9 +60,14 @@ class Faq extends Component {
           <div>
             <h4>MY INCIDENTS</h4>
             <div className={styles['incidentContainer']}>
-              <div>
+              <div className={styles['fa']}>
+                <div className={styles['incidentIcon']}>
+                  <SVGComponent src="helpsupport/help_tickets"/>
+                </div>
+                <div>
                 <h4>MY TICKETS</h4>
                 <div className={`${styles['fs-13p']} ${styles['greyColor']}`} >All your tickets in one place.</div>
+                </div>
               </div>
               <div><Link route='incidents'><a className={styles['fs-13p']}>View More</a></Link></div>
             </div>
