@@ -305,7 +305,7 @@ const HomePage = () => React.createElement(
         { className: 'e' },
         React.createElement(
           'span',
-          { className: `title ${styles['fs-18']}` },
+          { className: `title ${styles['fs-20']}` },
           'TOP IN ELECTRONICS'
         ),
         React.createElement(
@@ -330,7 +330,7 @@ const HomePage = () => React.createElement(
               ),
               React.createElement(
                 'span',
-                null,
+                { className: `${styles['fs-12']} ${styles['pt-10']} ${styles['flex']} ${styles['justify-center']} ${styles['lne-ht1_2']}` },
                 i.title
               )
             )
@@ -342,7 +342,7 @@ const HomePage = () => React.createElement(
         { className: 'h-a-l' },
         React.createElement(
           'span',
-          { className: `title ${styles['fs-18']}` },
+          { className: `title ${styles['fs-20']}` },
           'TOP IN FASHION | HOME & LIVING'
         ),
         React.createElement(
@@ -367,7 +367,7 @@ const HomePage = () => React.createElement(
               ),
               React.createElement(
                 'span',
-                null,
+                { className: `${styles['fs-12']} ${styles['pt-10']} ${styles['flex']} ${styles['justify-center']} ${styles['lne-ht1_2']}` },
                 i.title
               )
             )
@@ -391,16 +391,11 @@ const HomePage = () => React.createElement(
           null,
           React.createElement(
             'span',
-            { className: styles['fs-20'] },
+            { className: styles['fs-16'] },
             React.createElement(
               'span',
               { className: 'lite' },
               'Kids Fashion'
-            ),
-            React.createElement(
-              'span',
-              { className: styles.bold },
-              'UP TO 50% OFF'
             )
           ),
           React.createElement(
@@ -419,8 +414,7 @@ const HomePage = () => React.createElement(
               'span',
               null,
               'SHOP NOW'
-            ),
-            React.createElement(SVGComponent, { clsName: 'arrow', src: 'icons/common-icon/arrow' })
+            )
           )
         ),
         React.createElement(
@@ -428,16 +422,11 @@ const HomePage = () => React.createElement(
           null,
           React.createElement(
             'span',
-            { className: styles['fs-20'] },
+            { className: styles['fs-16'] },
             React.createElement(
               'span',
               { className: 'lite' },
               'Women\'s Clothing'
-            ),
-            React.createElement(
-              'span',
-              { className: styles.bold },
-              'UP TO 50% OFF'
             )
           ),
           React.createElement(
@@ -456,8 +445,7 @@ const HomePage = () => React.createElement(
               'span',
               null,
               'SHOP NOW'
-            ),
-            React.createElement(SVGComponent, { clsName: 'arrow', src: 'icons/common-icon/arrow' })
+            )
           )
         )
       ),
@@ -469,16 +457,11 @@ const HomePage = () => React.createElement(
           null,
           React.createElement(
             'span',
-            { className: styles['fs-20'] },
+            { className: styles['fs-16'] },
             React.createElement(
               'span',
               { className: 'lite' },
               'Shoes'
-            ),
-            React.createElement(
-              'span',
-              { className: styles.bold },
-              'UP TO 50% OFF'
             )
           ),
           React.createElement(
@@ -497,8 +480,7 @@ const HomePage = () => React.createElement(
               'span',
               null,
               'SHOP NOW'
-            ),
-            React.createElement(SVGComponent, { clsName: 'arrow', src: 'icons/common-icon/arrow' })
+            )
           )
         ),
         React.createElement(
@@ -506,16 +488,11 @@ const HomePage = () => React.createElement(
           null,
           React.createElement(
             'span',
-            { className: styles['fs-20'] },
+            { className: styles['fs-16'] },
             React.createElement(
               'span',
               { className: 'lite' },
               'Watches'
-            ),
-            React.createElement(
-              'span',
-              { className: styles.bold },
-              'UP TO 50% OFF'
             )
           ),
           React.createElement(
@@ -534,8 +511,7 @@ const HomePage = () => React.createElement(
               'span',
               null,
               'SHOP NOW'
-            ),
-            React.createElement(SVGComponent, { clsName: 'arrow', src: 'icons/common-icon/arrow' })
+            )
           )
         )
       ),
@@ -547,16 +523,11 @@ const HomePage = () => React.createElement(
           null,
           React.createElement(
             'span',
-            { className: styles['fs-20'] },
+            { className: styles['fs-16'] },
             React.createElement(
               'span',
               { className: 'lite' },
               'Men\'s Clothing'
-            ),
-            React.createElement(
-              'span',
-              { className: styles.bold },
-              'UP TO 50% OFF'
             )
           ),
           React.createElement(
@@ -575,8 +546,7 @@ const HomePage = () => React.createElement(
               'span',
               null,
               'SHOP NOW'
-            ),
-            React.createElement(SVGComponent, { clsName: 'arrow', src: 'icons/common-icon/arrow' })
+            )
           )
         )
       ),
@@ -623,16 +593,11 @@ const HomePage = () => React.createElement(
           null,
           React.createElement(
             'span',
-            { className: styles['fs-20'] },
+            { className: styles['fs-16'] },
             React.createElement(
               'span',
               { className: 'lite' },
               'Kids Furniture'
-            ),
-            React.createElement(
-              'span',
-              { className: styles.bold },
-              'UP TO 50% OFF'
             )
           ),
           React.createElement(
@@ -651,8 +616,7 @@ const HomePage = () => React.createElement(
               'span',
               null,
               'SHOP NOW'
-            ),
-            React.createElement(SVGComponent, { clsName: 'arrow', src: 'icons/common-icon/arrow' })
+            )
           )
         ),
         React.createElement(
@@ -660,16 +624,11 @@ const HomePage = () => React.createElement(
           null,
           React.createElement(
             'span',
-            { className: styles['fs-20'] },
+            { className: styles['fs-16'] },
             React.createElement(
               'span',
               { className: 'lite' },
               'Living Room Furniture'
-            ),
-            React.createElement(
-              'span',
-              { className: styles.bold },
-              'FROM SAR 200'
             )
           ),
           React.createElement('a', { href: b_d_b['furniture'] }),
@@ -685,8 +644,7 @@ const HomePage = () => React.createElement(
               'span',
               null,
               'SHOP NOW'
-            ),
-            React.createElement(SVGComponent, { clsName: 'arrow', src: 'icons/common-icon/arrow' })
+            )
           )
         )
       ),
@@ -698,16 +656,11 @@ const HomePage = () => React.createElement(
           null,
           React.createElement(
             'span',
-            { className: styles['fs-20'] },
+            { className: styles['fs-16'] },
             React.createElement(
               'span',
               { className: 'lite' },
               'Lamps'
-            ),
-            React.createElement(
-              'span',
-              { className: styles.bold },
-              'UP TO 50% OFF'
             )
           ),
           React.createElement(
@@ -726,8 +679,7 @@ const HomePage = () => React.createElement(
               'span',
               null,
               'SHOP NOW'
-            ),
-            React.createElement(SVGComponent, { clsName: 'arrow', src: 'icons/common-icon/arrow' })
+            )
           )
         ),
         React.createElement(
@@ -735,16 +687,11 @@ const HomePage = () => React.createElement(
           null,
           React.createElement(
             'span',
-            { className: styles['fs-20'] },
+            { className: styles['fs-16'] },
             React.createElement(
               'span',
               { className: 'lite' },
               'Cushions'
-            ),
-            React.createElement(
-              'span',
-              { className: styles.bold },
-              'UP TO 50% OFF'
             )
           ),
           React.createElement(
@@ -763,8 +710,7 @@ const HomePage = () => React.createElement(
               'span',
               null,
               'SHOP NOW'
-            ),
-            React.createElement(SVGComponent, { clsName: 'arrow', src: 'icons/common-icon/arrow' })
+            )
           )
         )
       ),
@@ -776,16 +722,11 @@ const HomePage = () => React.createElement(
           null,
           React.createElement(
             'span',
-            { className: styles['fs-20'] },
+            { className: styles['fs-16'] },
             React.createElement(
               'span',
               { className: 'lite' },
               'Lights'
-            ),
-            React.createElement(
-              'span',
-              { className: styles.bold },
-              'FROM SAR 200'
             )
           ),
           React.createElement(
@@ -804,8 +745,7 @@ const HomePage = () => React.createElement(
               'span',
               null,
               'SHOP NOW'
-            ),
-            React.createElement(SVGComponent, { clsName: 'arrow', src: 'icons/common-icon/arrow' })
+            )
           )
         )
       ),
@@ -851,16 +791,11 @@ const HomePage = () => React.createElement(
             null,
             React.createElement(
               'span',
-              { className: styles['fs-20'] },
+              { className: styles['fs-16'] },
               React.createElement(
                 'span',
                 { className: 'lite' },
                 'Laptops'
-              ),
-              React.createElement(
-                'span',
-                { className: styles.bold },
-                'UP TO 50% OFF'
               )
             ),
             React.createElement(
@@ -879,8 +814,7 @@ const HomePage = () => React.createElement(
                 'span',
                 null,
                 'SHOP NOW'
-              ),
-              React.createElement(SVGComponent, { clsName: 'arrow', src: 'icons/common-icon/arrow' })
+              )
             )
           ),
           React.createElement(
@@ -888,16 +822,11 @@ const HomePage = () => React.createElement(
             null,
             React.createElement(
               'span',
-              { className: styles['fs-20'] },
+              { className: styles['fs-16'] },
               React.createElement(
                 'span',
                 { className: 'lite' },
                 'Mobiles'
-              ),
-              React.createElement(
-                'span',
-                { className: styles.bold },
-                'UP TO 50% OFF'
               )
             ),
             React.createElement(
@@ -916,8 +845,7 @@ const HomePage = () => React.createElement(
                 'span',
                 null,
                 'SHOP NOW'
-              ),
-              React.createElement(SVGComponent, { clsName: 'arrow', src: 'icons/common-icon/arrow' })
+              )
             )
           )
         ),
@@ -929,16 +857,11 @@ const HomePage = () => React.createElement(
             null,
             React.createElement(
               'span',
-              { className: styles['fs-20'] },
+              { className: styles['fs-16'] },
               React.createElement(
                 'span',
                 { className: 'lite' },
                 'Camera'
-              ),
-              React.createElement(
-                'span',
-                { className: styles.bold },
-                'UP TO 50% OFF'
               )
             ),
             React.createElement(
@@ -957,8 +880,7 @@ const HomePage = () => React.createElement(
                 'span',
                 null,
                 'SHOP NOW'
-              ),
-              React.createElement(SVGComponent, { clsName: 'arrow', src: 'icons/common-icon/arrow' })
+              )
             )
           ),
           React.createElement(
@@ -966,16 +888,11 @@ const HomePage = () => React.createElement(
             null,
             React.createElement(
               'span',
-              { className: styles['fs-20'] },
+              { className: styles['fs-16'] },
               React.createElement(
                 'span',
                 { className: 'lite' },
                 'Kitchen Appliances'
-              ),
-              React.createElement(
-                'span',
-                { className: styles.bold },
-                'UP TO 50% OFF'
               )
             ),
             React.createElement(
@@ -994,8 +911,7 @@ const HomePage = () => React.createElement(
                 'span',
                 null,
                 'SHOP NOW'
-              ),
-              React.createElement(SVGComponent, { clsName: 'arrow', src: 'icons/common-icon/arrow' })
+              )
             )
           )
         ),
@@ -1007,16 +923,11 @@ const HomePage = () => React.createElement(
             null,
             React.createElement(
               'span',
-              { className: styles['fs-20'] },
+              { className: styles['fs-16'] },
               React.createElement(
                 'span',
                 { className: 'lite' },
                 'Audio Devices'
-              ),
-              React.createElement(
-                'span',
-                { className: styles.bold },
-                'UP TO 50% OFF'
               )
             ),
             React.createElement(
@@ -1035,8 +946,7 @@ const HomePage = () => React.createElement(
                 'span',
                 null,
                 'SHOP NOW'
-              ),
-              React.createElement(SVGComponent, { clsName: 'arrow', src: 'icons/common-icon/arrow' })
+              )
             )
           )
         )
