@@ -383,7 +383,7 @@ export const AR_KEYWORDS = {
     LOADING: 'تحميل ...',
     SEARCH_RESULTS_FOR: 'عرض النتائج ل...',
     SEARCH_INSTEAD_FOR: 'البحث بدلاً عن ',
-    SEARCH_YOUR_FAV_ITEM: 'البحث عن المنتج المفضَّل لديك...', //
+    SEARCH_YOUR_FAV_ITEM: 'find products, brands and more...', // Need Arabic
     MAXIMUN_TEXT_EXCEEDED: 'لقد تخطيت الحد الأقصى للنص المسموح به للبحث',
     YOUR_ENTERED: 'تم تسجيل دخولك',
     AUTO_CORRECTED: 'تصحيح تلقائي',

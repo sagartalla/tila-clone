@@ -398,7 +398,7 @@ export const EN_KEYWORDS = {
     LOADING: 'Loading ...',
     SEARCH_RESULTS_FOR: 'Showing results for',
     SEARCH_INSTEAD_FOR: 'Search instead for',
-    SEARCH_YOUR_FAV_ITEM: 'Search your favourite items here!',
+    SEARCH_YOUR_FAV_ITEM: 'find products, brands and more...',
     MAXIMUN_TEXT_EXCEEDED: 'Maximum search text exceeded',
     YOUR_ENTERED: 'You entered',
     AUTO_CORRECTED: 'Auto corrected',

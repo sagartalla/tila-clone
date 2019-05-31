@@ -55,7 +55,7 @@ class MegaMenu extends Component {
         selectedCategory: item.id,
         colorScheme: (item.displayName || '').split(' ').join('').toLowerCase().replace('&', '-'),
       });
-    }
+    };
   }
 
   onExpandedHover() {
@@ -145,15 +145,6 @@ class MegaMenu extends Component {
               onMouseLeave={this.onHoverOut}
             >
             {
-              selectedCategoryTree.displayName === "Fashion"
-                ?
-                <SubMenu
-                  subMenuItems={selectedCategoryTree.childCategories}
-                  onLinkClick={this.onLinkClick}
-                  colorScheme={this.state.colorScheme}
-                  parentID={selectedCategory}
-                />
-                :
                 <Grid className={styles['megamenu-event-container']}>
                   <Menu
                     selectedCategoryTree={selectedCategoryTree}
