@@ -28,6 +28,7 @@ const Review = ({ rev, deleteReview, submitUserReview }) => {
     product_id: rev.product_id,
     variant_id: rev.variant_id,
     review_id: rev.review_id,
+    item_type: rev.item_type,
   };
 
   const titleInfo = {

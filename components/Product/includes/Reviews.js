@@ -196,7 +196,7 @@ class Review extends Component {
                                   feedbackSubmit={this.submituserreview}
                                 />
                                 :
-                                <ReviewThankYou closePopup={this.popupClosed} />
+                                <ReviewThankYou closePopup={this.toggleReviewModal} />
                               }
                             </div>
                           </div>
