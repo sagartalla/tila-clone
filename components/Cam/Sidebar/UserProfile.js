@@ -6,7 +6,6 @@ import { selectors, actionCreators } from '../../../store/cam/personalDetails';
 import { bindActionCreators } from 'redux';
 import generateURL from '../../../utils/urlGenerator';
 import lang from '../../../utils/language';
-import { languageDefinations } from '../../../utils/lang/';
 import SVGComponent from '../../common/SVGComponet';
 import main_en from '../../../layout/main/main_en.styl';
 import main_ar from '../../../layout/main/main_ar.styl';
@@ -14,7 +13,6 @@ import styles_en from './sidebar_en.styl';
 import styles_ar from './sidebar_ar.styl';
 
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
-const { PERSONAL_INFO_MODAL } = languageDefinations();
 const cookies = new Cookies();
 const language = cookies.get('language') || 'en';
 const country = cookies.get('country') || 'SAU';

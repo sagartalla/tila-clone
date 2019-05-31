@@ -338,7 +338,6 @@ export const AR_KEYWORDS = {
     EXPERIANCE: 'تجربة تيله بطابع شخصي',
     OR: 'أو',
     USERNAME: 'اسم المستخدم',
-    CHOOSE_IMAGE: 'Choose an image',
     IMAGE_UPDATED_SUCCESS: 'Your profile pic is successfully updated',
     UPDATE_PERSONAL_INFORMATION: 'قم بتحديث المعلومات الشخصية',
     TIME_LINE: 'محتويات الخط ',
