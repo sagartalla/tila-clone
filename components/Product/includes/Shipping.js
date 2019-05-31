@@ -44,7 +44,7 @@ const Shipping = (props) => {
         {
           shippingInfo && shippingInfo.shipping_days
             ?
-              <span className={`${styles['fs-12']} ${styles['pl-20']}`}>{PDP_PAGE.FREE_DELIVERY_BY} <span className={styles.fontW600}>{moment().add(shipping_days, 'days').format('ddd, hA')}</span> </span>
+              <span className={`${styles['fs-12']} ${styles['pl-20']}`}>{PDP_PAGE.FREE_DELIVERY_BY} <span className={styles.fontW600}>{moment().add(shippingInfo.shipping_days, 'days').format('ddd, hA')}</span> </span>
             :
             null
         }
@@ -67,10 +67,10 @@ const Shipping = (props) => {
                   `${PDP_PAGE.NON_RETURNABLE}`
               }
               </div>
-              {Object.keys(this.props.warranty).length > 0 ?
+              {Object.keys(props.warranty).length > 0 ?
                 <div className={`${styles['flex-center']} ${styles['warenty-part-inn']} ${styles['warenty-part-single']}`}>
                   <SVGCompoent clsName={`${styles['trust-icon']} ${styles['mr-10']}`} src="icons/common-icon/non-warnty" />
-                  <Warranty warranty={this.props.warranty} break />
+                  <Warranty warranty={props.warranty} break />
                 </div>
               :
                 <div className={`${styles['flex-center']} ${styles['warenty-part-inn']}`}>
@@ -80,7 +80,7 @@ const Shipping = (props) => {
             </div>
           </div>
           :
-          <p className={`${styles['flex']} ${styles['pt-15']} ${styles['justify-center']}`}>
+          <p className={`${styles.flex} ${styles['pt-15']} ${styles['justify-center']}`}>
             {availabilityError
               ?
               null
