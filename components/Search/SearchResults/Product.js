@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import Slider from 'react-slick';
 import { bindActionCreators } from 'redux';
 import _ from 'lodash';
-import { Link, Router } from '../../../routes';
+import { Link } from '../../../routes';
 import Waypoint from 'react-waypoint';
 import { OverlayTrigger, Modal, Popover } from 'react-bootstrap';
 import constants from '../../../constants';
@@ -229,7 +229,6 @@ class Product extends Component {
 
   render() {
     const {
-      media = [],
       displayName,
       variants,
       productId,
@@ -240,14 +239,12 @@ class Product extends Component {
       brand,
       index,
       pageNum,
-      userDetails,
       selectedID,
       flags,
       addedToWishlist,
       cartButtonLoaders,
       btnLoading,
       cmpData,
-      wishlistId,
     } = this.props;
     const { src } = this.state;
     const { showNotify, selectedIndex, showLoader } = this.state;
@@ -268,11 +265,11 @@ class Product extends Component {
         >
           {variants[selectedIndex].sellingPrice[0]}
         </span>&nbsp;
-        <span className={`${styles['fs-12']} ${styles['black-color']}`}>{currency}</span>
+        <span className={`${styles['fs-10']} ${styles['black-color']}`}>{currency}</span>
         {discountValue > 5 &&
           <React.Fragment>
             <span className={`${styles['ml-5']} ${styles['label-gry-clr']} ${styles['fs-12']}`}>
-              <s>{variants[selectedIndex].mrp[0]}&nbsp;{currency}</s>
+              <s>{variants[selectedIndex].mrp[0]}&nbsp;<s className={styles['fs-10']}>{currency}</s></s>
             </span>
             {variants[selectedIndex].offersApplied &&
               variants[selectedIndex].offersApplied.length > 0 &&
@@ -437,7 +434,6 @@ class Product extends Component {
                 </div>
                 
               </div>
-            </a>
           </Link>
         </div>
         <Modal show={showNotify} onHide={this.closeNotify}>

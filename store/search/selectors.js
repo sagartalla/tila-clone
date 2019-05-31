@@ -128,7 +128,7 @@ const getSearchResutls = (store) => {
     resutls.totalCount = store.searchReducer.data.productResponse.noOfProducts;
     resutls.items = store.searchReducer.data.productResponse.products.map((product,prodIndex) => {
       isNotifyMe = true
-      let variantInfo = product.variantAdapters.reduce((modifiedVaraints, v) => {
+      let variantInfo = (product.variantAdapters || []).reduce((modifiedVaraints, v) => {
         let modifiedVaraintsCopy = {}
         let { listingAdapters } = v;
         if (listingAdapters.length > 0) {
