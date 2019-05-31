@@ -72,10 +72,10 @@ class AddToCart extends Component {
   }
 
   render() {
-    const { isLoading, error, isAddedToCart, offerInfo, btnLoading, shippingInfo, isPreview, styling } = this.props;
+    const { isLoading, error, isAddedToCart, offerInfo, btnLoading, shippingInfo, isPreview, styling, top } = this.props;
     const { price, listingAvailable, listingId, stockError, availabilityError } = offerInfo;
     return (
-      <div id="cart-btn-cont" className={`${styles['addto-cart']} ${styles['addto-cart-lang']} ${styles[styling]}`}>
+      <div id="cart-btn-cont" className={`${styles['addto-cart']} ${styles['addto-cart-lang']} ${styles[styling]}`} style={{top: `${top}px`}}>
         <React.Fragment>
           {!isPreview && <ProductPrice offerInfo={offerInfo} />}
           {

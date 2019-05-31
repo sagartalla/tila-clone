@@ -47,6 +47,7 @@ const getProductComponent = (isPreview, taskCode) => {
         recentlyViewed: [],
         notifyEmail: null,
         emailErr: '',
+        // positionStyle: 'fixed-style'
       };
       this.detailsRef = React.createRef();
       this.bottomRef = React.createRef();
@@ -102,8 +103,8 @@ const getProductComponent = (isPreview, taskCode) => {
       setTimeout(() => {
         const shippingContainer = document.getElementById('shipping-cont');
         const buttonsCont = document.getElementById('cart-btn-cont');
-        const [{height: shippingHeight, top: shippingY}, {top: btnY}] = [shippingContainer.getBoundingClientRect(), buttonsCont.getBoundingClientRect()];
-        skipScroll = (shippingHeight + shippingY) < btnY;
+        const [{height: shippingHeight, top: shippingY}, {height: btnHeight}] = [shippingContainer.getBoundingClientRect(), buttonsCont.getBoundingClientRect()];
+        skipScroll = (shippingHeight + shippingY) < (window.innerHeight - btnHeight);
         this.setState({
           defaultPosition: skipScroll ? 'absolute-style' : 'fixed-style'
         });
@@ -128,9 +129,9 @@ const getProductComponent = (isPreview, taskCode) => {
       const buttonsCont = document.getElementById('cart-btn-cont');
       const [{height: shippingHeight, top: shippingY}] = [shippingContainer.getBoundingClientRect()];
       btnY = btnY || document.getElementById('cart-btn-cont').getBoundingClientRect().top;
-      console.log('handleScroll', shippingHeight + shippingY, btnY);
       this.setState({
-        positionStyle: (shippingHeight + shippingY) < btnY ? 'absolute-style' : 'fixed-style'
+        positionStyle: (shippingHeight + shippingY) < btnY ? 'absolute-style' : 'fixed-style',
+        positionTop: btnY
       });
     }
 
@@ -168,7 +169,7 @@ const getProductComponent = (isPreview, taskCode) => {
       } = productData;
       const { offerPricing } = offerInfo;
       const {
-        stickyElements, recentlyViewed, notifyEmail, emailErr, positionStyle, defaultPosition
+        stickyElements, recentlyViewed, notifyEmail, emailErr, positionStyle, positionTop, defaultPosition
       } = this.state;
       return (
         <Theme.Provider value={categoryType.toLowerCase()}>
@@ -218,6 +219,7 @@ const getProductComponent = (isPreview, taskCode) => {
                               shippingInfo={shippingInfo}
                               isPreview={isPreview}
                               styling={positionStyle || defaultPosition}
+                              top={positionStyle === 'absolute-style' ?  positionTop : null}
                             />
                         }
                         {
