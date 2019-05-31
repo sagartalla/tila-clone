@@ -123,6 +123,7 @@ let remoteComponents = {
       Slider,
       SVGComponent,
       styles: allStyles,
+      lang
     },
   },
   electronics: {
@@ -136,6 +137,7 @@ let remoteComponents = {
       Col,
       SVGComponent,
       styles: allStyles,
+      lang
     },
   },
   lifestyle: {
@@ -148,6 +150,7 @@ let remoteComponents = {
       Col,
       SVGComponent,
       styles: allStyles,
+      lang
     },
   },
   homepage: {
@@ -163,6 +166,7 @@ let remoteComponents = {
       NoSSR,
       SVGComponent,
       styles: allStyles,
+      lang
     },
   },
 };
