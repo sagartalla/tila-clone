@@ -170,7 +170,6 @@ const getProductComponent = (isPreview, taskCode) => {
       const {
         stickyElements, recentlyViewed, notifyEmail, emailErr, positionStyle, positionTop, defaultPosition
       } = this.state;
-      debugger;
       return (
         <Theme.Provider value={categoryType.toLowerCase()}>
           <div className={`${styles['pdp-wrap']} ${categoryType.toLowerCase()} ${styles[categoryType.toLowerCase()]}`}>
@@ -226,7 +225,8 @@ const getProductComponent = (isPreview, taskCode) => {
                             :
                             null
                         }
-                        {
+
+                        {isPreview ? null :
                           (offerInfo.stockError || offerInfo.availabilityError) && ((shippingInfo && Object.keys(shippingInfo).length === 0) || (shippingInfo === null || shippingInfo.shippable)) &&
                           <div className={`${styles['flx-space-bw']} ${styles['align-baseline']}`}>
                             {!userDetails.isLoggedIn &&
@@ -266,7 +266,7 @@ const getProductComponent = (isPreview, taskCode) => {
                     }
                     </Col> */}
                     <Col md={8}>
-                      <ElectronicsTab titleInfo={titleInfo} catalog={catalog} catalogObj={catalogObj} productDescription={productDescription} />
+                      <ElectronicsTab titleInfo={titleInfo} isPreview={isPreview} catalog={catalog} catalogObj={catalogObj} productDescription={productDescription} />
                     </Col>
                   </Row>
                 </Grid>
