@@ -79,7 +79,7 @@ class AddToCart extends Component {
         <React.Fragment>
           {!isPreview && <ProductPrice offerInfo={offerInfo} />}
           {
-          (availabilityError || stockError) && shippingInfo.shippable
+          (availabilityError || stockError) && (shippingInfo === null || shippingInfo.shippable)
           ?
           null
           :

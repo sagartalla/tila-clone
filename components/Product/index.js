@@ -170,6 +170,7 @@ const getProductComponent = (isPreview, taskCode) => {
       const {
         stickyElements, recentlyViewed, notifyEmail, emailErr, positionStyle, positionTop, defaultPosition
       } = this.state;
+      debugger;
       return (
         <Theme.Provider value={categoryType.toLowerCase()}>
           <div className={`${styles['pdp-wrap']} ${categoryType.toLowerCase()} ${styles[categoryType.toLowerCase()]}`}>
@@ -212,7 +213,8 @@ const getProductComponent = (isPreview, taskCode) => {
                           isPreview ? null : <Shipping shippingInfo={shippingInfo} returnInfo={returnInfo} offerInfo={offerInfo} warranty={warranty} />
                         }
                         {isPreview ? null :
-                          (shippingInfo === null || shippingInfo.shippable) &&
+                          (shippingInfo === null || shippingInfo.shippable)
+                            ?
                             <AddToCart
                               offerInfo={offerInfo}
                               productData={productData.product_id}
@@ -221,9 +223,11 @@ const getProductComponent = (isPreview, taskCode) => {
                               styling={positionStyle || defaultPosition}
                               top={positionStyle === 'absolute-style' ?  positionTop : null}
                             />
+                            :
+                            null
                         }
                         {
-                          (offerInfo.stockError || offerInfo.availabilityError) && (Object.keys(shippingInfo).length === 0 || shippingInfo.shippable) &&
+                          (offerInfo.stockError || offerInfo.availabilityError) && ((shippingInfo && Object.keys(shippingInfo).length === 0) || (shippingInfo === null || shippingInfo.shippable)) &&
                           <div className={`${styles['flx-space-bw']} ${styles['align-baseline']}`}>
                             {!userDetails.isLoggedIn &&
                             <div className={`${styles['mb-0']} ${styles['fp-input']} ${styles['pb-10']}`}>
