@@ -208,7 +208,7 @@ export const AR_KEYWORDS = {
     SOCIAL_INFLUENCER: 'مؤثر اجتماعي',
     REVIEW_TITLE_PLACE: 'مراجعة العنوان ستكون هنا ',
     EASY_RETURN: 'إرجاع بسهولة',
-    NO_SHIPPING_CITY: 'لا يشحن لمدينتك',
+    NO_SHIPPING_CITY: 'يرجى اختيار مدينتك',
     FREE_DELIVERY_BY: 'توصيل مجاني بواسطة',
     FREE_DELIVERY_IN: 'توصيل مجاني في',
     NON_RETURNABLE: 'غير قابل للأرجاع',

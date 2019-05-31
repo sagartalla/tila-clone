@@ -217,7 +217,7 @@ export const EN_KEYWORDS = {
     SOCIAL_INFLUENCER: 'Social Influencer',
     REVIEW_TITLE_PLACE: 'Review title goes here ',
     EASY_RETURN: 'easy return',
-    NO_SHIPPING_CITY: 'Currently not shipping to your city!',
+    NO_SHIPPING_CITY: 'Please select your city!',
     FREE_DELIVERY_BY: 'FREE Delivery By',
     FREE_DELIVERY_IN: 'Free delivery in',
     NON_RETURNABLE: 'Non returnable',
