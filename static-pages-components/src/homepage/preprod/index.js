@@ -8,22 +8,22 @@ let sliderTBS,
 // const tie = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 const tbs = [{
-  img: `/static/img/landing-home/${lang === 'en' ? 'home-decor.jpg' : 'home-decor-ar'}.jpg`,
+  img: `/static/img/landing-home/${lang === 'en' ? 'home-decor' : 'home-decor-ar'}.jpg`,
   title: 'HOME DECOR',
 }, {
-  img: `/static/img/landing-home/${lang === 'en' ? 'laptops.jpg' : 'laptops-ar'}.jpg`,
+  img: `/static/img/landing-home/${lang === 'en' ? 'laptops' : 'laptops-ar'}.jpg`,
   title: 'LAPTOPS',
 }, {
-  img: `/static/img/landing-home/${lang === 'en' ? 'mens-clothing.jpg' : 'mens-clothing-ar'}.jpg`,
+  img: `/static/img/landing-home/${lang === 'en' ? 'mens-clothing' : 'mens-clothing-ar'}.jpg`,
   title: 'MENS CLOTHING',
 }, {
-  img: `/static/img/landing-home/${lang === 'en' ? 'mobile-accessories.jpg' : 'mobile-accessories-ar'}.jpg`,
+  img: `/static/img/landing-home/${lang === 'en' ? 'mobile-accessories' : 'mobile-accessories-ar'}.jpg`,
   title: 'MOBILE ACCESSORIES',
 }, {
-  img: `/static/img/landing-home/${lang === 'en' ? 'perfumes-for-women.jpg' : 'perfumes-for-women-ar'}.jpg`,
+  img: `/static/img/landing-home/${lang === 'en' ? 'perfumes-for-women' : 'perfumes-for-women-ar'}.jpg`,
   title: 'PERFUMES FOR WOMEN',
 }, {
-  img: `/static/img/landing-home/${lang === 'en' ? 'watches.jpg' : 'watches-ar'}.jpg`,
+  img: `/static/img/landing-home/${lang === 'en' ? 'watches' : 'watches-ar'}.jpg`,
   title: 'WATCHES',
 }];
 
