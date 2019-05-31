@@ -118,7 +118,7 @@ const getProduct = (store, variantId) => {
     imgUrls,
     extraOffers,
     offerInfo,
-    shippingInfo: priceInfo.shipping,
+    shippingInfo: priceInfo ? priceInfo.shipping : null,
     returnInfo,
     product_id: product_details && product_details.product_id,
     productDescription,

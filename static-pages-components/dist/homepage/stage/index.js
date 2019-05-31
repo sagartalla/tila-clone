@@ -162,38 +162,43 @@ const twoCols = [{
 
 const threeCols = [{
   img: '/static/img/landing-home/shoes.jpg',
-  link: '/SAU/en/srp?search=footwear&language=en&isListed=false',
+  link: '/SAU/en/srp?search=footwear&isListed=false',
   title: 'Shoes'
 }, {
   img: '/static/img/landing-home/ls2.jpg',
-  link: '/SAU/en/srp?search=LS2&language=en&isListed=false',
+  link: '/SAU/en/srp?search=LS2&isListed=false',
   title: 'LS2'
 }, {
   img: '/static/img/landing-home/furniture.jpg',
-  link: '/SAU/en/srp?search=Furniture&language=en&isListed=false',
+  link: '/SAU/en/srp?search=Furniture&isListed=false',
   title: 'Furniture'
 }];
 
 const b_y_l = [{
   img: '/static/img/landing-home/levis-m.jpg',
   brandImg: '/static/img/landing-home/levis.jpg',
-  title: 'Levis'
+  title: 'Levis',
+  links: '/SAU/en/srp?search=Levis&isListed=false'
 }, {
   img: '/static/img/landing-home/guess-m.jpg',
   brandImg: '/static/img/landing-home/guess.jpg',
-  title: 'Guess'
+  title: 'Guess',
+  links: 'SAU/en/srp?search=Guess&isListed=false'
 }, {
   img: '/static/img/landing-home/max-m.jpg',
   brandImg: '/static/img/landing-home/max.jpg',
-  title: 'Max'
+  title: 'Max',
+  links: 'SAU/en/srp?search=Max&isListed=false'
 }, {
   img: '/static/img/landing-home/gucci-m.jpg',
   brandImg: '/static/img/landing-home/gucci.jpg',
-  title: 'Gucci'
+  title: 'Gucci',
+  links: '/SAU/en/srp?search=Gucci&isListed=false'
 }, {
   img: '/static/img/landing-home/levis-m.jpg',
   brandImg: '/static/img/landing-home/levis.jpg',
-  title: 'Levis'
+  title: 'Levis',
+  links: '/SAU/en/srp?search=Levis&isListed=false'
 }];
 
 function SamplePrevArrow(props) {
@@ -202,7 +207,6 @@ function SamplePrevArrow(props) {
     'div',
     {
       className: 'leftArrow',
-      onMouseOver: onClick,
       onClick: onClick
     },
     React.createElement('img', { src: '/static/img/landing-home/c-left.svg', alt: 'left' })
@@ -215,7 +219,6 @@ function SampleNextArrow(props) {
     'div',
     {
       className: 'rightArrow',
-      onMouseOver: onClick,
       onClick: onClick
     },
     React.createElement('img', { src: '/static/img/landing-home/c-right.svg', alt: 'right' })
@@ -223,40 +226,46 @@ function SampleNextArrow(props) {
 }
 
 const b_d_b = {
-  Mobiles: '/SAU/en/srp?search=Mobiles&language=en&isListed=false',
-  Clothing: '/SAU/en/srp?isListed=false&language=en&search=Clothing',
-  'Clothing Accessories': '/SAU/en/srp?search=Clothing&language=en&isListed=false',
-  Laptops: '/SAU/en/srp?search=Laptops&language=en&isListed=false',
-  'Storage Devices': '/SAU/en/srp?search=Storage&language=en&isListed=false',
-  Cameras: '/SAU/en/srp?search=Camera&language=en&isListed=false',
-  Televisions: '/SAU/en/srp?search=Televisions&language=en&isListed=false',
-  'Home Appliances': '/SAU/en/srp?search=Home%20Appliances&language=en&isListed=false',
-  'Womens Clothing': '/SAU/en/srp?search=Womens%20Clothing&language=en&isListed=false',
-  'Mens Clothing': '/SAU/en/srp?search=Mens%20Clothing&language=en&isListed=false',
-  'Fashion Accessories': '/SAU/en/srp?search=Accessories&language=en&isListed=false',
-  Watches: '/SAU/en/srp?search=Watches&language=en&isListed=false',
-  'Kitchen Appliances': '/SAU/en/srp?search=kitchen%20appliances&language=en&isListed=false',
-  Speakers: '/SAU/en/srp?search=Speakers&language=en&isListed=false',
-  'Microwave Ovens': '/SAU/en/srp?search=Microwave%20Ovens&language=en&isListed=false',
-  'Smart Watch': '/SAU/en/srp?search=Smart%20Watch&language=en&isListed=false',
-  'Mobile Accessories': '/SAU/en/srp?search=Mobile%20Accessories&language=en&isListed=false',
-  "Kid's Fashion": '/SAU/en/srp?search=Kid%27s%20Fashion&language=en&isListed=false',
-  Footwear: '/SAU/en/srp?search=Footwear&language=en&isListed=false',
-  "Men's Footwear": '/SAU/en/srp?search=Footwear&language=en&isListed=false',
-  'Women Footwear': '/SAU/en/srp?search=Footwear&language=en&isListed=false',
-  Bags: '/SAU/en/srp?search=Backpack&language=en&isListed=false',
-  Eyewear: '/SAU/en/srp?search=Eyewear&language=en&isListed=false',
-  Jewellery: '/SAU/en/srp?search=Jewellery&language=en&isListed=false',
-  GUESS: '/SAU/en/srp/womens-clothing-1056/?isListed=false&language=en&search=guess',
-  FENDI: 'https://storefront-stage.fptechscience.com/SAU/en/srp/watches-1128/?isListed=false&language=en&search=FENDI',
-  'MORPHY RICHARDS': '/SAU/en/srp?search=MORPHY%20RICHARDS%20&disableSpellCheck=true&language=en&isListed=false',
-  SHIRTS: '/SAU/en/srp?search=SHIRTS&language=en&isListed=false',
-  Perfumes: '/SAU/en/srp?search=Perfumes&language=en&isListed=false',
-  Shoes: '/SAU/en/srp?search=Shoes&language=en&isListed=false',
-  Lights: '/SAU/en/srp?search=Lights&language=en&isListed=false',
-  lamps: 'https://storefront-stage.fptechscience.com/SAU/en/srp?isListed=false&language=en&search=lamps',
-  bedding: '/SAU/en/srp?search=bedding&language=en&isListed=false',
-  furniture: '/SAU/en/srp?search=furniture&language=en&isListed=false'
+  Mobiles: 'SAU/en/srp/mobiles?categoryTree=true&isListed=false&sid=848,849',
+  Clothing: '/SAU/en/srp?isListed=false&&search=Clothing',
+  'Clothing Accessories': '/SAU/en/srp?search=Clothing&&isListed=false',
+  Laptops: '/SAU/en/srp/laptops?categoryTree=true&isListed=false&sid=848,864',
+  'Storage Devices': '/SAU/en/srp?search=Storage&&isListed=false',
+  Cameras: '/SAU/en/srp/camera?categoryTree=true&isListed=false&sid=848,882',
+  Televisions: '/SAU/en/srp/televisions?categoryTree=true&isListed=false&sid=848,878',
+  'Home Appliances': '/SAU/en/srp/home-applaince?categoryTree=true&isListed=false&sid=932,935',
+  'Womens Clothing': '/SAU/en/srp/clothing?categoryTree=true&isListed=false&sid=892,910',
+  'Mens Clothing': '/SAU/en/srp/clothing?categoryTree=true&isListed=false&sid=892,899',
+  'Fashion Accessories': '/SAU/en/srp/fashion-accessories?categoryTree=true&isListed=false&sid=892,923',
+  Watches: '/SAU/en/srp/watch?categoryTree=true&isListed=false&sid=892,929',
+  'Kitchen Appliances': '/SAU/en/srp/kitchen-appliances?categoryTree=true&isListed=false&sid=932,945',
+  Speakers: '/SAU/en/srp?search=Speakers&&isListed=false',
+  'Microwave Ovens': '/SAU/en/srp?search=Microwave%20Ovens&&isListed=false',
+  'Smart Watch': '/SAU/en/srp/smart-watches?categoryTree=true&isListed=false&sid=848,860,861',
+  'Mobile Accessories': '/SAU/en/srp/mobile-accessories?categoryTree=true&isListed=false&sid=848,850',
+  "Kid's Fashion": '/SAU/en/srp/kid%27s?categoryTree=true&isListed=false&sid=892,893',
+  Footwear: '/SAU/en/srp?search=Footwear&&isListed=false',
+  "Men's Footwear": '/SAU/en/srp/footwear?categoryTree=true&isListed=false&sid=892,907',
+  'Women Footwear': '/SAU/en/srp/footwear?categoryTree=true&isListed=false&sid=892,921',
+  Bags: '/SAU/en/srp/backpack?categoryTree=true&isListed=false&sid=892,926',
+  Eyewear: '/SAU/en/srp?search=Eyewear&&isListed=false',
+  Jewellery: '/SAU/en/srp?search=Jewellery&&isListed=false',
+  GUESS: '/SAU/en/srp/womens-clothing-1056/?isListed=false&&search=guess',
+  FENDI: 'https://storefront-stage.fptechscience.com/SAU/en/srp/watches-1128/?isListed=false&&search=FENDI',
+  'MORPHY RICHARDS': '/SAU/en/srp?search=MORPHY%20RICHARDS%20&disableSpellCheck=true&&isListed=false',
+  SHIRTS: '/SAU/en/srp?search=SHIRTS&&isListed=false',
+  Perfumes: '/SAU/en/srp/fragrance?categoryTree=true&isListed=false&sid=932,958,964',
+  Shoes: '/SAU/en/srp?search=Shoes&&isListed=false',
+  Lights: '/SAU/en/srp/light?categoryTree=true&isListed=false&sid=932,937,940',
+  lamps: '/SAU/en/srp/lamp?categoryTree=true&isListed=false&sid=932,937,939',
+  bedding: '/SAU/en/srp/bedding-set?categoryTree=true&isListed=false&sid=932,941,942',
+  furniture: '/SAU/en/srp/home-furnishing?categoryTree=true&isListed=false&sid=932,941',
+  'HOME DECOR': '/SAU/en/srp?search=HOME%20DECOR&isListed=false',
+  LAPTOPS: '/SAU/en/srp/laptops?categoryTree=true&isListed=false&sid=848,864',
+  'MENS CLOTHING': '/SAU/en/srp/clothing?categoryTree=true&isListed=false&sid=892,899',
+  'MOBILE ACCESSORIES': '/SAU/en/srp/mobile-accessories?categoryTree=true&isListed=false&sid=848,850',
+  'PERFUMES FOR WOMEN': '/SAU/en/srp?search=perfumes&categoryTree=true&isListed=false',
+  WATCHES: '/SAU/en/srp/watch?categoryTree=true&isListed=false&sid=892,929'
 };
 
 const HomePage = () => React.createElement(
@@ -346,7 +355,7 @@ const HomePage = () => React.createElement(
         React.createElement(
           'span',
           { className: `title ${styles['fs-20']}` },
-          'TOP IN FASHION | HOME & LIVING'
+          'TOP IN FASHION | LIFESTYLE'
         ),
         React.createElement(
           Slider,
@@ -569,14 +578,14 @@ const HomePage = () => React.createElement(
     ),
     React.createElement(
       Row,
-      { className: `${styles['m-15']} ${styles['mt-40']} ${styles['mb-40']}` },
+      { className: `${styles['m-15']} ${styles['mt-40']} ${styles['mb-40']} brand-details-inn` },
       threeCols.map(col => React.createElement(
         Col,
         { md: 4, xs: 4, sm: 4 },
         React.createElement(
           'a',
-          { href: col.link },
-          React.createElement('img', { className: 'resp-img-link', src: col.img, alt: col.title })
+          { href: col.link, key: col.title },
+          React.createElement('img', { src: col.img, alt: col.title, className: 'img-responsive-in' })
         )
       ))
     ),
@@ -586,7 +595,7 @@ const HomePage = () => React.createElement(
       React.createElement(
         'div',
         { className: `${styles['fs-20']} title` },
-        'BEST OF HOME & LIVING'
+        'BEST OF LIFESTYLE'
       ),
       React.createElement(
         'div',
@@ -601,11 +610,6 @@ const HomePage = () => React.createElement(
               'span',
               { className: 'lite' },
               'Kids Furniture'
-            ),
-            React.createElement(
-              'span',
-              { className: styles.bold },
-              'UP TO 50% OFF'
             )
           ),
           React.createElement(
@@ -762,7 +766,7 @@ const HomePage = () => React.createElement(
         { className: `${styles['breadcrums']} ${styles['mt-10']} ${styles['pointer']}` },
         React.createElement(
           'a',
-          { href: 'https://storefront-stage.fptechscience.com/SAU/en/landing/lifestyle?language=en' },
+          { href: 'https://storefront-stage.fptechscience.com/SAU/en/landing/lifestyle' },
           React.createElement(
             'span',
             null,
@@ -773,11 +777,11 @@ const HomePage = () => React.createElement(
     ),
     React.createElement(
       Row,
-      { className: `${styles['m-15']} ${styles['mt-40']} ${styles['mb-40']}` },
+      { className: `${styles['m-15']} ${styles['mt-40']} ${styles['mb-40']} brand-details-inn` },
       twoCols.map(col => React.createElement(
         Col,
-        { md: 6, xs: 6, sm: 6 },
-        React.createElement('img', { className: 'resp-img-link', src: col.img, alt: col.title })
+        { md: 6, xs: 6, sm: 6, key: col.title },
+        React.createElement('img', { src: col.img, alt: col.title, className: 'img-responsive-in' })
       ))
     ),
     React.createElement(
@@ -964,7 +968,7 @@ const HomePage = () => React.createElement(
         { className: `${styles.breadcrums} ${styles['mt-10']} ${styles.pointer}` },
         React.createElement(
           'a',
-          { href: 'https://storefront-stage.fptechscience.com/SAU/en/landing/electronics?language=en' },
+          { href: 'https://storefront-stage.fptechscience.com/SAU/en/landing/electronics' },
           React.createElement(
             'span',
             null,
@@ -1000,15 +1004,19 @@ const HomePage = () => React.createElement(
           Col,
           { key: i, md: 3, xs: 3, sm: 3 },
           React.createElement(
-            'div',
-            { className: 'image' },
-            React.createElement('img', { className: 'resp-img-link', src: i.img, alt: i.img })
-          ),
-          React.createElement(
-            'div',
-            { className: 'b_l' },
-            React.createElement('img', { src: i.brandImg, width: '80', height: '30', alt: i.brandImg }),
-            React.createElement(SVGComponent, { clsName: 'arrow arrow-black ', src: 'icons/common-icon/arrow' })
+            'a',
+            { href: i.links, key: i.title },
+            React.createElement(
+              'div',
+              { className: 'image' },
+              React.createElement('img', { src: i.img, alt: i.img })
+            ),
+            React.createElement(
+              'div',
+              { className: 'b_l' },
+              React.createElement('img', { src: i.brandImg, width: '80', height: '30', alt: i.brandImg }),
+              React.createElement(SVGComponent, { clsName: 'arrow arrow-black ', src: 'icons/common-icon/arrow' })
+            )
           )
         ))
       ),
