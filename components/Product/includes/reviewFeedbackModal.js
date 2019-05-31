@@ -39,8 +39,8 @@ export default class FeedbackModal extends Component {
     ]);
 
     this.state = {
-      textValue: '',
-      rating: 0,
+      textValue: props.comment || '',
+      rating: props.rating || 0,
       validation: this.validations.valid(),
       charsLeft: 300,
     };
@@ -73,13 +73,13 @@ export default class FeedbackModal extends Component {
   }
   sumbitFeedBack() {
 
-    let validation = this.validations.validate(this.state);
-    const { rating, textValue} = this.state;
+    const validation = this.validations.validate(this.state);
+    const { rating, textValue } = this.state;
 
     this.setState({ validation });
 
     if (validation.isValid) {
-      let textContent = textValue
+      const textContent = textValue
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;')
@@ -88,10 +88,10 @@ export default class FeedbackModal extends Component {
       const params = {
         ratings: rating,
         comment: textContent,
-        review_type: "USER",
+        review_type: 'USER',
       };
 
-      let paramsObj = Object.assign({}, this.props.catalogObj, params);
+      const paramsObj = Object.assign({}, this.props.catalogObj, params);
       this.props.feedbackSubmit(paramsObj);
     }
   }
