@@ -170,7 +170,6 @@ const getProductComponent = (isPreview, taskCode) => {
       const {
         stickyElements, recentlyViewed, notifyEmail, emailErr, positionStyle, positionTop, defaultPosition
       } = this.state;
-      console.log('dwadwq', shippingInfo);
       return (
         <Theme.Provider value={categoryType.toLowerCase()}>
           <div className={`${styles['pdp-wrap']} ${categoryType.toLowerCase()} ${styles[categoryType.toLowerCase()]}`}>
