@@ -386,7 +386,7 @@ export const AR_KEYWORDS = {
     LOADING: 'تحميل ...',
     SEARCH_RESULTS_FOR: 'عرض النتائج ل...',
     SEARCH_INSTEAD_FOR: 'البحث بدلاً عن ',
-    SEARCH_YOUR_FAV_ITEM: 'find products, brands and more...', // Need Arabic
+    SEARCH_YOUR_FAV_ITEM: 'اكتشف المنتجات والماركات التجارية والمزيد',
     MAXIMUN_TEXT_EXCEEDED: 'لقد تخطيت الحد الأقصى للنص المسموح به للبحث',
     YOUR_ENTERED: 'تم تسجيل دخولك',
     AUTO_CORRECTED: 'تصحيح تلقائي',
@@ -467,6 +467,8 @@ export const AR_KEYWORDS = {
     POLICY: 'السياسة',
     TERMS_CONDITION: 'شروط وأحكام المستخدمين',
     REFUND_POLICY: 'سياسة الاسترجاع والاستبدال',
+    CANCELLATION_POLICY: 'Cancellation policy',
+    PRIVACY_POLICY: 'سياسة الخصوصية',
     WARRENTY_POLICY: 'سياسة الضمان',
     SHIPPING_POLICY: 'سياسة الشحن ',
     SELL_ON_TILA: 'البيع على موقع تيله',
