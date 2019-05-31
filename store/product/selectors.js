@@ -81,7 +81,6 @@ const getProduct = (store, variantId) => {
     acceptsReturns: preferredPolicyData ? preferredPolicyData.allowed : false,
     maxDaysToReturn: preferredPolicyData ? preferredPolicyData.duration : 0,
   };
-  console.log('agfhty', priceInfo);
   const offerInfo = {
     price: priceInfo ? priceInfo.selling_price ? `${priceInfo.selling_price.display_value} ${priceInfo.selling_price.currency}` : priceInfo.selling_price : 'No listing',
     listingId: priceInfo ? priceInfo.listing_id : 'No Listing',

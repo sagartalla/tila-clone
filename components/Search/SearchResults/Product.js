@@ -434,6 +434,7 @@ class Product extends Component {
                 </div>
                 
               </div>
+            </a>
           </Link>
         </div>
         <Modal show={showNotify} onHide={this.closeNotify}>
