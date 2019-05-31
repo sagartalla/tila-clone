@@ -40,7 +40,7 @@ class CartBottomPopup extends Component {
                 <span className={styles['title-border']}></span>
               </h4>
             </div>
-            <a onClick={showCartPageBtmPopup} className={styles['fs-24']}>X</a>
+            <a onClick={showCartPageBtmPopup} className={`${styles['fs-24']} ${styles['lgt-blue']}`}>X</a>
           </div>
           <Slider {...settings} className={styles['cart-wishlist-popup-inn']}>
             {
