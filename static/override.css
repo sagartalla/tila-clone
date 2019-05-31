@@ -232,3 +232,25 @@
   font-family: ProximaNova-SBold;
   color: #000000;
 }
+
+.srp-slider .slick-dots li button:before {
+    content: '';
+}
+
+.srp-slider .slick-dots {
+  display: flex !important;
+  justify-content: flex-end;
+  bottom: 0;
+  padding: 20px 10px;
+
+}
+.srp-slider .slick-dots li {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1px solid #8a8a8f;
+}
+
+.srp-slider .slick-dots li.slick-active {
+     background-color: #8a8a8f;
+  }
