@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import { Col,Button } from 'react-bootstrap';
+import { Col, } from 'react-bootstrap';
+
 import SVGCompoent from '../../common/SVGComponet';
 import StarRating from '../../common/StarRating';
 
 import { languageDefinations } from '../../../utils/lang';
 import Theme from '../../helpers/context/theme';
 import FormValidator from '../../common/FormValidator';
-
+import Button from '../../common/CommonButton';
 import lang from '../../../utils/language';
+import constants from '../../../constants';
 
 import main_en from '../../../layout/main/main_en.styl';
 import main_ar from '../../../layout/main/main_ar.styl';
@@ -40,7 +42,7 @@ export default class FeedbackModal extends Component {
       textValue: '',
       rating: 0,
       validation: this.validations.valid(),
-      charsLeft:300
+      charsLeft: 300,
     };
     this.handleTextChange = this.handleTextChange.bind(this);
     this.retrieveRating = this.retrieveRating.bind(this);
@@ -60,82 +62,103 @@ export default class FeedbackModal extends Component {
     return false;
   }
 
-  handleTextChange({target:{value}}){
+  handleTextChange({target: {value}}){
     this.setState({
-      textValue:value,
-      charsLeft: 300 - value.length
-    })
+      textValue: value,
+      charsLeft: 300 - value.length,
+    });
   }
-  retrieveRating(e,rating){
-    this.setState({ rating })
+  retrieveRating(e, rating){
+    this.setState({ rating });
   }
   sumbitFeedBack() {
 
-    let validation = this.validations.validate(this.state)
-    const { rating, textValue} = this.state
+    let validation = this.validations.validate(this.state);
+    const { rating, textValue} = this.state;
 
-    this.setState({ validation })
+    this.setState({ validation });
 
-    if(validation.isValid) {
+    if (validation.isValid) {
       let textContent = textValue
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
 
-      let params = {
-        ratings:rating,
-        comment:textContent,
-        review_type:"USER"
-      }
+      const params = {
+        ratings: rating,
+        comment: textContent,
+        review_type: "USER",
+      };
 
-      let paramsObj = Object.assign({},this.props.catalogObj,params)
-      this.props.feedbackSubmit(paramsObj)
+      let paramsObj = Object.assign({}, this.props.catalogObj, params);
+      this.props.feedbackSubmit(paramsObj);
     }
-
-
   }
+
   render() {
-    const { rating,validation,charsLeft } = this.state;
+    const { rating, validation, charsLeft } = this.state;
+    const { titleInfo } = this.props;
+    const { title, media } = titleInfo;
     return (
       <Theme.Consumer>
-      {
+        {
         categoryType => (
           <div className={styles['review-main']}>
+            <div className={`${styles['share-review-img']} ${styles.flex}`}>
+              <img src={`${constants.mediaDomain}/${media}`} />
+            </div>
+            <h4 className={`${styles['fs-14']} ${styles.fontW600} ${styles['t-c']} ${styles['mb-15']}`}>{title}</h4>
             <div
-              className=
-              {`${styles['review-block']} ${styles['mt-20']} ${styles['mb-20']} ${styles['t-c']}`}
-              >
+              className={`${styles.flex} ${styles['review-start']} ${styles['justify-center']} ${styles['mt-5']}
+               ${styles['max-ht100']} ${styles['ht-25']}`}
+            >
+              <StarRating
+                rating={rating}
+                total={5}
+                clsName={`${styles['star-icon']}`}
+                onRate={this.retrieveRating}
+              />
+            </div>
+            {
+              validation.rating.isInValid ?
+                <div className={`${styles['fs-12']} ${styles['t-c']} ${styles['thick-red']}`}>
+                  <span>{validation.rating.message}</span>
+                </div> : null
+            }
+            <div className={`${styles['review-block']} ${styles['mt-35']} ${styles['t-c']}`}>
               <textarea
                 placeholder={PDP_PAGE.ANY_OTHER_SUGGESTIONS}
-                type='text'
-                name="message" rows='3' cols='70'
-                maxlength="300"
+                type="text"
+                name="message"
+                rows="3"
+                cols="70"
+                maxLength="300"
                 onChange={this.handleTextChange}
                 className={`${styles['review-textarea']}`}
-                >
+              >
                 {this.state.textValue}
               </textarea>
               {
                 validation.textValue.isInValid ?
-                <div className={`${styles['fs-12']} ${styles['thick-red']}`}>
-                  <span>{validation.textValue.message}</span>
-                </div>: null
+                  <div className={`${styles['fs-12']} ${styles['thick-red']}`}>
+                    <span>{validation.textValue.message}</span>
+                  </div> : null
               }
 
             </div>
-            <div className={`${styles['fl-rt']} ${styles['fs-12']}`}>
+            <div className={`${styles['fl-rt']} ${styles['fs-12']} ${styles['pb-20']} ${styles['pt-10']}`}>
               <span>maxLength</span>
               <span>{charsLeft}</span>
             </div>
-            <div className={styles['cl-bth']}></div>
-            <div
+            {/* <div className={styles['cl-bth']}></div> */}
+            {/* <div
               className={`${styles['flex-center']}
               ${styles['review-rating-block']}
               ${styles['space-between']} ${styles['mr-20']} ${styles['ml-20']}
-              ${styles['mt-20']} ${styles['mb-20']} ${styles['p-15']}`} >
+              ${styles['mt-20']} ${styles['mb-20']} ${styles['p-15']}`} > */}
 
-              <div className={`${styles['flex-center']}
+            {/* <div className={`${styles['flex-center']}
                 ${styles['p-10']} ${styles['ht-40']}`}
                 >
                 <div
@@ -147,8 +170,8 @@ export default class FeedbackModal extends Component {
                   />
                 </div>
                 <div className={`${styles['ml-15']} ${styles['mt-10']}`}>{PDP_PAGE.RATE_THE_PRODUCT}</div>
-              </div>
-              <div
+              </div> */}
+            {/* <div
               className =
               {`${styles['flex']} ${styles['review-start']} ${styles['mt-5']}
                ${styles['max-ht100']} ${styles['ht-25']} `}>
@@ -158,28 +181,26 @@ export default class FeedbackModal extends Component {
                   clsName={`${styles['star-icon']}`}
                   onRate={this.retrieveRating}
                 />
-              </div>
-            </div>
-            {
+              </div> */}
+            {/* </div> */}
+            {/* {
               validation.rating.isInValid ?
               <div className={`${styles['fs-12']} ${styles['t-rt']} ${styles['thick-red']}`}>
                 <span>{validation.rating.message}</span>
               </div> : null
-            }
+            } */}
 
             <div className={styles['t-c']}>
               <Button
-                variant="primary"
+                className={`${styles['btn-style']} ${styles['btn-style-override']} ${styles['fs-14']} ${styles['text-uppercase']}`}
+                btnText={PDP_PAGE.SUBMIT_FEEDBACK}
                 onClick={this.sumbitFeedBack}
-                className={`${styles['btn-style']} ${styles['fs-16']}`}
-              >
-              {PDP_PAGE.SUBMIT_FEEDBACK}
-              </Button>
+              />
             </div>
           </div>
         )
       }
       </Theme.Consumer>
-    )
+    );
   }
 }
