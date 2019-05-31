@@ -245,6 +245,7 @@ class Product extends Component {
       cartButtonLoaders,
       btnLoading,
       cmpData,
+      media
     } = this.props;
     const { src } = this.state;
     const { showNotify, selectedIndex, showLoader } = this.state;
