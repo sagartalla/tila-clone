@@ -255,7 +255,8 @@ class Product extends Component {
       cmpData,
       wishlistId,
       row,
-      itemNum
+      itemNum,
+      media,
     } = this.props;
     const { src } = this.state;
     const { showNotify, selectedIndex, showLoader } = this.state;
@@ -446,10 +447,6 @@ class Product extends Component {
                 </div>
               </div> */}
                 </div>
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/feature-branch
               </div>
             </a>
           </Link>
