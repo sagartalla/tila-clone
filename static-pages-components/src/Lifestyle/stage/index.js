@@ -3,12 +3,14 @@ const Lifestyle = () => (
   <div className="life-style-main">
     <Grid>
       <div className={`${styles['flex']} life-banner-inn ${styles['relative']}`}>
-        <img src="/static/img/landing-page-lifestyle/lifestyle-banner.jpg" className="img-responsive" />
-        <div className={`${styles['absolute']} ${styles['flex']} ${styles['flex-colum']} banner-label`}>
+        <a href="http://localhost:3000/SAU/en/srp/home-decor?categoryTree=true&isListed=false&sid=932,937">
+          <img src={`/static/img/landing-page-lifestyle/${lang === 'en' ? 'furnitures' : 'furnitures-ar'}.jpg`} className="img-responsive" />
+        </a>
+        {/* <div className={`${styles['absolute']} ${styles['flex']} ${styles['flex-colum']} banner-label`}>
           <span className={`main-quation ${styles['fs-36']} ${styles['fontW600']}`}>Home Decor & Furnishing</span>
           <span className={`banner-dec ${styles['fs-16']}`}>Everything has a place, and everything in its place.</span>
           <span className={`${styles['pt-25']} shop-now-white-btn  ${styles['flex']}`}><a className={`${styles['fs-12']} ${styles['white-color']} ${styles['p-10']} ${styles['border-radius4']}`}>SHOP NOW</a></span>
-        </div>
+        </div> */}
       </div>
       <div className={`sub-banner ${styles['flex']} ${styles['pt-20']}`}>
         <Col md={6} className={styles['pl-0']}>

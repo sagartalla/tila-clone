@@ -12,7 +12,7 @@ const Electronics = () => React.createElement(
       React.createElement(
         "a",
         { href: "#" },
-        React.createElement("img", { src: "/static/img/landing-page-tech-img/main-banner.jpg", className: "img-responsive" })
+        React.createElement("img", { src: `/static/img/landing-page-tech-img/${lang === 'en' ? 'appliances' : 'appliances-ar'}.jpg`, className: "img-responsive" })
       )
     ),
     React.createElement(

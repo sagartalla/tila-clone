@@ -337,7 +337,7 @@ const HomePage = () => (
           </Slider>
         </div>
         <div className="h-a-l">
-          <span className={`title ${styles['fs-20']}`}>TOP IN FASHION | HOME & LIVING</span>
+          <span className={`title ${styles['fs-20']}`}>TOP IN FASHION | LIFESTYLE</span>
           <Slider
             asNavFor={sliderHAL}
             ref={slider => (sliderHAL = slider)}
@@ -442,7 +442,7 @@ const HomePage = () => (
         ))}
       </Row>
       <div className="display-t-i-hl">
-        <div className={`${styles['fs-20']} title`}>BEST OF HOME & LIVING</div>
+        <div className={`${styles['fs-20']} title`}>BEST OF LIFESTYLE</div>
         <div className="d1">
           <div>
             <span className={styles['fs-16']}><span className="lite">Kids Furniture</span><span className={styles.bold}>UP TO 50% OFF</span></span>

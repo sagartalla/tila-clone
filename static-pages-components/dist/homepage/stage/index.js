@@ -346,7 +346,7 @@ const HomePage = () => React.createElement(
         React.createElement(
           'span',
           { className: `title ${styles['fs-20']}` },
-          'TOP IN FASHION | HOME & LIVING'
+          'TOP IN FASHION | LIFESTYLE'
         ),
         React.createElement(
           Slider,
@@ -586,7 +586,7 @@ const HomePage = () => React.createElement(
       React.createElement(
         'div',
         { className: `${styles['fs-20']} title` },
-        'BEST OF HOME & LIVING'
+        'BEST OF LIFESTYLE'
       ),
       React.createElement(
         'div',

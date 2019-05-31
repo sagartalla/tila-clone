@@ -8,29 +8,10 @@ const Lifestyle = () => React.createElement(
     React.createElement(
       'div',
       { className: `${styles['flex']} life-banner-inn ${styles['relative']}` },
-      React.createElement('img', { src: '/static/img/landing-page-lifestyle/lifestyle-banner.jpg', className: 'img-responsive' }),
       React.createElement(
-        'div',
-        { className: `${styles['absolute']} ${styles['flex']} ${styles['flex-colum']} banner-label` },
-        React.createElement(
-          'span',
-          { className: `main-quation ${styles['fs-36']} ${styles['fontW600']}` },
-          'Home Decor & Furnishing'
-        ),
-        React.createElement(
-          'span',
-          { className: `banner-dec ${styles['fs-16']}` },
-          'Everything has a place, and everything in its place.'
-        ),
-        React.createElement(
-          'span',
-          { className: `${styles['pt-25']} shop-now-white-btn  ${styles['flex']}` },
-          React.createElement(
-            'a',
-            { className: `${styles['fs-12']} ${styles['white-color']} ${styles['p-10']} ${styles['border-radius4']}` },
-            'SHOP NOW'
-          )
-        )
+        'a',
+        { href: 'http://localhost:3000/SAU/en/srp/home-decor?categoryTree=true&isListed=false&sid=932,937' },
+        React.createElement('img', { src: `/static/img/landing-page-lifestyle/${lang === 'en' ? 'furnitures' : 'furnitures-ar'}.jpg`, className: 'img-responsive' })
       )
     ),
     React.createElement(

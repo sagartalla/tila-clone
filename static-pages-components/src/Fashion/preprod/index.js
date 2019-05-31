@@ -4,13 +4,13 @@ const Fashion = () => (
     <Grid fluid={true} className={styles['p-0']}>
       <div className={`${styles['flex']} fashion-banner-main ${styles['relative']}`}>
         <a href="/SAU/en/srp?search=dress&language=en&isListed=false">
-          <img src="/static/img/landing-page-fashion/fashion-banner.png" className="img-responsive" />
+          <img src={`/static/img/landing-page-fashion/${lang === 'en' ? 'womens-clothing' : 'womens-clothing-ar'}.jpg`} className="img-responsive" />
         </a>
-        <div className={`${styles['absolute']} ${styles['flex']} ${styles['flex-colum']} banner-label`}>
+        {/* <div className={`${styles['absolute']} ${styles['flex']} ${styles['flex-colum']} banner-label`}>
           <span className={`main-quation ${styles['fs-44']}`}>Up to 50% Off on Party Dresses</span>
           <span className={`banner-dec ${styles['fs-16']}`}>“You can have anything you want in life if you dress for it.”</span>
           <span className={`${styles['pt-25']} shop-now-btn`}><a className={`${styles['fs-12']} ${styles['fontW600']} ${styles['border-radius4']}`}>SHOP NOW</a></span>
-        </div>
+        </div> */}
       </div>
     </Grid>
     <Grid>

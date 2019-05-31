@@ -11,8 +11,8 @@ const Electronics = () => React.createElement(
       { className: "main-banner" },
       React.createElement(
         "a",
-        { href: "/SAU/en/srp/headphones-&-headsets?categoryTree=true&facets=%7B\"brand\"%3A%5B%7B\"name\"%3A\"sony\"%2C\"param\"%3A\"brand_SOLR_en_ss_%3A%20%5C\"sony%5C\"\"%7D%5D%7D&isListed=false&sid=848%2C850%2C852" },
-        React.createElement("img", { src: "/static/img/landing-page-tech-img/main-banner.jpg", className: "img-responsive" })
+        { href: "#" },
+        React.createElement("img", { src: `/static/img/landing-page-tech-img/${lang === 'en' ? 'appliances' : 'appliances-ar'}.jpg`, className: "img-responsive" })
       )
     ),
     React.createElement(
