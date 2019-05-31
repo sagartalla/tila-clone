@@ -15,6 +15,8 @@ class Variant extends Component {
     super(props);
     this.state = {};
     this.onSelectVariant = this.onSelectVariant.bind(this);
+    this.sizeChart = ['S','XS','XXS','M','L','2XL','3XL','4XL','5XL','6XL','7XL']
+    this.chartValues = this.sortSizeChart(props.values)
   }
   onSelectVariant(e) {
     this.setState({
@@ -22,8 +24,18 @@ class Variant extends Component {
     })
     this.props.onSelectVariant(e);
   }
+  sortSizeChart(values) {
+    let result = []
+    this.sizeChart.forEach(item => {
+      if(values.indexOf(item) !== -1) {
+        result.push(item)
+      }
+    })
+    return result
+  }
   render() {
     const { displayName, values, onSelectVariant, id } = this.props;
+
     return (
       <div className={`${styles['pt-10']} ${styles['pb-10']} ${styles['pr-15']}`}>
         <div className={`${styles['flex-center']}`}>
@@ -31,7 +43,7 @@ class Variant extends Component {
           <div className={`${styles['flex-center']} ${styles['size-btn-main']}`}>
           <select id={id} data-key={id} onChange={this.onSelectVariant} className={`${styles['varient-select-part']} ${styles['fs-12']} ${styles['p-5']}`}>
           {
-            values.map((option) => (
+            this.chartValues.map((option) => (
               <option key={option} value={option}>{option}</option>
             ))
           }
