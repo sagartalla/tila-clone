@@ -2,6 +2,7 @@ import React,{ Component } from 'react'
 import { connect } from 'react-redux';
 import { selectors } from '../../../store/product'
 import lang from '../../../utils/language'
+import { languageDefinations } from '../../../utils/lang'
 import main_en from '../../../layout/main/main_en.styl';
 import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from './quickview_en.styl';
@@ -10,6 +11,8 @@ import getProductComponent from '../../Product'
 import SVGComponent from '../SVGComponet';
 
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+
+const { PDP_PAGE, PAYMENT_PAGE, SEARCH_PAGE } = languageDefinations()
 
 class QuickView extends Component {
   constructor(props){
@@ -27,13 +30,13 @@ class QuickView extends Component {
             onClose } = this.props
 
     if(!isProductLoaded.isProductLoaded) {
-      return <div>Please wait the product is Loading...</div>
+      return <div>{`${PAYMENT_PAGE.PLEASE_WAIT} ${PDP_PAGE.PRODUCT_DETAILS} ${PAYMENT_PAGE.LOADING}`}</div>
     }
     if(getErrorMessage) {
       return <div>{getErrorMessage}</div>
     }
     if(isProductLoaded.productDetails && isProductLoaded.productDetails.product_id !== productId) {
-      return <div>fetched result loading data</div>
+      return <div>{`${PAYMENT_PAGE.PLEASE_WAIT} ${SEARCH_PAGE.SEARCH_RESULTS_FOR} ${SEARCH_PAGE.DATA}`}</div>
     }
     const Product = this.product
 
