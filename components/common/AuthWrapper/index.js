@@ -16,11 +16,11 @@ class AuthWrapper extends Component {
     if (nextProps.isLoginShown === this.props.isLoginShown) {
       return;
     }
-    if (!nextProps.isLoginShown) {
-      this.props.popupClosed && this.props.popupClosed();
-    } else {
-      this.props.popupOpened && this.props.popupOpened();
-    }
+    // if (!nextProps.isLoginShown) {
+    //   this.props.popupClosed && this.props.popupClosed();
+    // } else {   
+    //   this.props.popupOpened && this.props.popupOpened();
+    // }
   }
 
   render () {

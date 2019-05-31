@@ -42,6 +42,9 @@ const Review = ({ rev, deleteReview, submitUserReview }) => {
     });
   };
 
+  const closeModal = () => setModal(false);
+  const showModal = () => setModal(true);
+
   return (
     <div key={rev.review_id} className={`${styles.relative} ${styles.review} ${styles['pl-15']} ${styles['pr-15']} ${styles['pt-15']} ${styles['flex-center']}`}>
       <div>
@@ -60,28 +63,28 @@ const Review = ({ rev, deleteReview, submitUserReview }) => {
           <Button
             id={rev.review_id}
             className={`${styles.flex} ${styles['preference-save']} ${styles.fontW600} ${styles['fs-10']} ${styles['text-uppercase']}`}
-            btnText="Write a review"
-            onClick={() => setModal(true)}
+            btnText={REVIEWS.WRITE_A_REVIEW}
+            onClick={showModal}
           />}
       </div>
       <div className={`${styles.absolute} ${styles.right30P} ${styles['icon-pos']}`}>
         <a data-id={rev.review_id} className={`${styles.flex}`} onClick={deleteReview}>
           <SVGCompoent src="icons/delete-icon/delete-icon" clsName={styles['del-icon']} />
         </a>
-        <a data-id={rev.review_id} className={`${styles.flex} ${styles['ml-10']}`} onClick={() => setModal(true)}>
+        <a data-id={rev.review_id} className={`${styles.flex} ${styles['ml-10']}`} onClick={showModal}>
           <SVGCompoent src="icons/edit-icon/edit-icon" clsName={styles['del-icon']} />
         </a>
       </div>
       <div>
         {openModal ?
           <React.Fragment>
-            <div onClick={() => setModal(false)} className={openModal ? `${styles.modalContainer} ${styles.showDiv}` : `${styles.modalContainer} ${styles.hideDiv}`}>
+            <div onClick={closeModal} className={openModal ? `${styles.modalContainer} ${styles.showDiv}` : `${styles.modalContainer} ${styles.hideDiv}`}>
               <div className={`${styles.disabled}`} />
             </div>
             <div className={`${styles['overflow-y-auto']} ${styles['p-30']} ${openModal ? `${styles.openModal}` : `${styles.closeModal}`}`}>
               <div className={styles['p-40']}>
                 <h4 className={`${styles.flex} ${styles['justify-flex-end']} ${styles['m-0']} ${styles['mb-20']}`}>
-                  <a onClick={() => setModal(false)} href className={`${styles['fs-22']} ${styles['black-color']}`}>X</a>
+                  <a onClick={closeModal} href className={`${styles['fs-22']} ${styles['black-color']}`}>X</a>
                 </h4>
                 <div>
                   {showReviews ?
@@ -93,7 +96,7 @@ const Review = ({ rev, deleteReview, submitUserReview }) => {
                       feedbackSubmit={postUserReview}
                     />
                     :
-                    <ReviewThankYou closePopup={() => setModal(false)} />
+                    <ReviewThankYou toggleReviewModal={closeModal} />
                   }
                 </div>
               </div>

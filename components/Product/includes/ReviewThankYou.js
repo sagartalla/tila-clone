@@ -23,7 +23,7 @@ const ReviewThankYou = props => (
     <p className={`${styles['fs-14']} ${styles['thick-gry-clr']} ${styles['pb-20']}`}>{PDP_PAGE.THANKS_DESCRIPTION}</p>
     <Button
       variant="primary"
-      onClick={props.closePopup}
+      onClick={props.toggleReviewModal}
       className={`${styles['btn-style']} ${styles['btn-style-override']} ${styles['fs-14']} ${styles['text-uppercase']}`}
     >
       {PDP_PAGE.PDP_DONE}

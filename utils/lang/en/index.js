@@ -747,5 +747,6 @@ export const EN_KEYWORDS = {
     SUB_TITLE: 'All your reviews & ratings at one place',
     RATED_REVIEWS: 'You have Rated & Reviewed',
     ITEMS: 'items',
+    WRITE_A_REVIEW: 'Write a review',
   },
 };
