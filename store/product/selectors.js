@@ -65,7 +65,7 @@ const getProduct = (store, variantId) => {
     reviews: {
       count: ''
     },
-    price: priceInfo ? priceInfo.selling_price + ' ' + priceInfo.selling_price_currency : 'Price Not available',
+    price: priceInfo ? priceInfo.selling_price ? `${priceInfo.selling_price.display_value} ${priceInfo.selling_price.currency}` : priceInfo.selling_price : 'Price Not available',
     originalPrice: '',
     discountPercent: '',
     listingId: priceInfo ? priceInfo.listing_id : 'No Listing',
@@ -81,10 +81,9 @@ const getProduct = (store, variantId) => {
     acceptsReturns: preferredPolicyData ? preferredPolicyData.allowed : false,
     maxDaysToReturn: preferredPolicyData ? preferredPolicyData.duration : 0,
   };
-  const shippingInfo = priceInfo ? {...priceInfo.shipping, ...returnInfo} : {};
   const offerInfo = {
-    price: priceInfo ? priceInfo.selling_price + ' ' + priceInfo.selling_price_currency : 'No listing',
-    listingId: priceInfo ? priceInfo.listing_id : 'No Listing',
+    price: priceInfo ? priceInfo.selling_price ? `${priceInfo.selling_price.display_value} ${priceInfo.selling_price.currency}` : priceInfo.selling_price : 'No listing',
+    listingId: priceInfo ? priceInfo.listing_id : '',
     listingAvailable: !!priceInfo,
     availabilityError,
     stockError,
@@ -119,7 +118,7 @@ const getProduct = (store, variantId) => {
     imgUrls,
     extraOffers,
     offerInfo,
-    shippingInfo,
+    shippingInfo: priceInfo.shipping,
     returnInfo,
     product_id: product_details && product_details.product_id,
     productDescription,
