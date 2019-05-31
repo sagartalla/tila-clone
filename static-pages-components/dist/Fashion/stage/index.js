@@ -8,7 +8,11 @@ const Fashion = () => React.createElement(
     React.createElement(
       'div',
       { className: `${styles['flex']} fashion-banner-main ${styles['relative']}` },
-      React.createElement('img', { src: `/static/img/landing-page-fashion/${lang === 'en' ? 'womens-clothing' : 'womens-clothing-ar'}.jpg`, className: 'img-responsive' })
+      React.createElement(
+        'a',
+        { href: '/SAU/en/srp?search=dress&isListed=false' },
+        React.createElement('img', { src: `/static/img/landing-page-fashion/${lang === 'en' ? 'womens-clothing' : 'womens-clothing-ar'}.jpg`, className: 'img-responsive' })
+      )
     )
   ),
   React.createElement(

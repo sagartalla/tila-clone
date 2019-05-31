@@ -10,7 +10,7 @@ const Lifestyle = () => React.createElement(
       { className: `${styles['flex']} life-banner-inn ${styles['relative']}` },
       React.createElement(
         'a',
-        { href: 'http://localhost:3000/SAU/en/srp/home-decor?categoryTree=true&isListed=false&sid=932,937' },
+        { href: '/SAU/en/srp?search=home%20decor&isListed=false' },
         React.createElement('img', { src: `/static/img/landing-page-lifestyle/${lang === 'en' ? 'furnitures' : 'furnitures-ar'}.jpg`, className: 'img-responsive' })
       )
     ),

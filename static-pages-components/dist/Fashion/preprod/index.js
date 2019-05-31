@@ -10,7 +10,7 @@ const Fashion = () => React.createElement(
       { className: `${styles['flex']} fashion-banner-main ${styles['relative']}` },
       React.createElement(
         'a',
-        { href: '/SAU/en/srp?search=dress&language=en&isListed=false' },
+        { href: '/SAU/en/srp?search=dress&isListed=false' },
         React.createElement('img', { src: `/static/img/landing-page-fashion/${lang === 'en' ? 'womens-clothing' : 'womens-clothing-ar'}.jpg`, className: 'img-responsive' })
       )
     )
@@ -239,7 +239,7 @@ const Fashion = () => React.createElement(
             { md: 8, className: `${styles['pl-0']} ${styles['pr-10']}` },
             React.createElement(
               'a',
-              { href: '/SAU/en/srp?search=rainware&language=en&isListed=false' },
+              { href: '/SAU/en/srp?search=rainware&isListed=false' },
               React.createElement('img', { src: '/static/img/landing-page-fashion/what-new.jpg', className: 'img-responsive' })
             )
           ),
@@ -251,7 +251,7 @@ const Fashion = () => React.createElement(
               { className: 'chinos-part' },
               React.createElement(
                 'a',
-                { href: '/SAU/en/srp?search=Chinos&language=en&isListed=false' },
+                { href: '/SAU/en/srp?search=Chinos&isListed=false' },
                 React.createElement('img', { src: '/static/img/landing-page-fashion/what-new1.jpg', className: 'img-responsive' })
               ),
               React.createElement(
@@ -363,7 +363,7 @@ const Fashion = () => React.createElement(
               { className: `new-brands ${styles['pb-10']}` },
               React.createElement(
                 'a',
-                { href: '/SAU/en/srp?search=Jewellery&language=en&isListed=false' },
+                { href: '/SAU/en/srp?search=Jewellery&isListed=false' },
                 React.createElement('img', { src: '/static/img/landing-page-fashion/what-new5.jpg', className: 'img-responsive' })
               ),
               React.createElement(
@@ -390,7 +390,7 @@ const Fashion = () => React.createElement(
               { className: `new-brands ${styles['pb-10']}` },
               React.createElement(
                 'a',
-                { href: '/SAU/en/srp?search=Handbags&language=en&isListed=false' },
+                { href: '/SAU/en/srp?search=Handbags&isListed=false' },
                 React.createElement('img', { src: '/static/img/landing-page-fashion/what-new6.jpg', className: 'img-responsive' })
               ),
               React.createElement(
@@ -520,7 +520,7 @@ const Fashion = () => React.createElement(
               null,
               React.createElement(
                 'a',
-                { href: '/SAU/en/srp?search=Handbags&language=en&isListed=false' },
+                { href: '/SAU/en/srp?search=Handbags&isListed=false' },
                 React.createElement('img', { src: '/static/img/landing-page-fashion/what-new6.jpg', className: 'img-responsive' })
               ),
               React.createElement(
@@ -571,7 +571,7 @@ const Fashion = () => React.createElement(
               { className: `canvali-logo ${styles['flex-center']}` },
               React.createElement(
                 'a',
-                { href: '/SAU/en/srp?search=just%20cavalli&language=en&isListed=false' },
+                { href: '/SAU/en/srp?search=just%20cavalli&isListed=false' },
                 React.createElement('img', { src: '/static/img/landing-page-fashion/top-brands1.jpg', className: 'img-responsive' })
               )
             ),
@@ -621,7 +621,7 @@ const Fashion = () => React.createElement(
               { className: `dg-logo ${styles['flex-center']}` },
               React.createElement(
                 'a',
-                { href: '/SAU/en/srp?search=DOLCE%20&%20GABBANA&language=en&isListed=false' },
+                { href: '/SAU/en/srp?search=DOLCE%20&%20GABBANA&isListed=false' },
                 React.createElement('img', { src: '/static/img/landing-page-fashion/top-brands2.jpg', className: 'img-responsive' })
               )
             ),
@@ -671,7 +671,7 @@ const Fashion = () => React.createElement(
               { className: `dg-logo ${styles['flex-center']}` },
               React.createElement(
                 'a',
-                { href: '/SAU/en/srp?search=gg&language=en&isListed=false' },
+                { href: '/SAU/en/srp?search=gg&isListed=false' },
                 React.createElement('img', { src: '/static/img/landing-page-fashion/top-brands3.jpg', className: 'img-responsive' })
               )
             ),
@@ -721,7 +721,7 @@ const Fashion = () => React.createElement(
               { className: `guc-logo ${styles['flex-center']}` },
               React.createElement(
                 'a',
-                { href: '/SAU/en/srp?search=gucci&language=en&isListed=false' },
+                { href: '/SAU/en/srp?search=gucci&isListed=false' },
                 React.createElement('img', { src: '/static/img/landing-page-fashion/top-brands5.jpg', className: 'img-responsive' })
               )
             ),
