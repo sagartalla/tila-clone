@@ -32,6 +32,8 @@ import styles_ar from './product_ar.styl';
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const { PDP_PAGE } = languageDefinations();
+let btnY = null;
+let skipScroll = false;
 
 const getProductComponent = (isPreview, taskCode) => {
   class Product extends Component {
@@ -45,6 +47,7 @@ const getProductComponent = (isPreview, taskCode) => {
         recentlyViewed: [],
         notifyEmail: null,
         emailErr: '',
+        // positionStyle: 'fixed-style'
       };
       this.detailsRef = React.createRef();
       this.bottomRef = React.createRef();
@@ -71,8 +74,7 @@ const getProductComponent = (isPreview, taskCode) => {
           const cd = offerInfo && offerInfo.offerPricing && offerInfo.offerPricing.sellingPrice && offerInfo.offerPricing.sellingPrice.currency_code;
           const recentData = localStorage.getItem('rv');
           const arr = recentData ? JSON.parse(recentData) : [];
-          const index = _.findIndex(arr, (o) => o.id == shippingInfo.listing_id);
-
+          const index = _.findIndex(arr, o => o.id == offerInfo.listingId);
 
           // if (index > -1 && arr.length <= 5) {
           //   arr = arr.slice(index, 1);
@@ -88,7 +90,7 @@ const getProductComponent = (isPreview, taskCode) => {
               pr,
               cd,
               uri: location.href,
-              id: shippingInfo.listing_id,
+              id: offerInfo.listingId,
             });
             localStorage.setItem('rv', JSON.stringify(arr));
           }
@@ -97,6 +99,15 @@ const getProductComponent = (isPreview, taskCode) => {
       }
 
       window.addEventListener('scroll', this.handleScroll);
+      setTimeout(() => {
+        const shippingContainer = document.getElementById('shipping-cont');
+        const buttonsCont = document.getElementById('cart-btn-cont');
+        const [{height: shippingHeight, top: shippingY}, {height: btnHeight}] = [shippingContainer.getBoundingClientRect(), buttonsCont.getBoundingClientRect()];
+        skipScroll = (shippingHeight + shippingY) < (window.innerHeight - btnHeight);
+        this.setState({
+          defaultPosition: skipScroll ? 'absolute-style' : 'fixed-style'
+        });
+      });
     }
 
     componentWillUnmount() {
@@ -106,6 +117,20 @@ const getProductComponent = (isPreview, taskCode) => {
     onChangeField({ target }) {
       this.setState({
         notifyEmail: target.value,
+      });
+    }
+
+    handleScroll(e) {
+      if(skipScroll) {
+        return;
+      }
+      const shippingContainer = document.getElementById('shipping-cont');
+      const buttonsCont = document.getElementById('cart-btn-cont');
+      const [{height: shippingHeight, top: shippingY}] = [shippingContainer.getBoundingClientRect()];
+      btnY = btnY || document.getElementById('cart-btn-cont').getBoundingClientRect().top;
+      this.setState({
+        positionStyle: (shippingHeight + shippingY) < btnY ? 'absolute-style' : 'fixed-style',
+        positionTop: btnY
       });
     }
 
@@ -134,47 +159,16 @@ const getProductComponent = (isPreview, taskCode) => {
       });
     }
 
-    handleScroll(event) {
-      const scrollTop = event.currentTarget.pageYOffset;
-      const detailsRect = this.detailsRef.current.getBoundingClientRect();
-      const bottomRefRect = this.bottomRef.current.getBoundingClientRect();
-      if (bottomRefRect.top <= window.innerHeight && this.state.stickyElements.details !== 'stateBottom') {
-        this.setState({
-          stickyElements: {
-            ...this.state.stickyElements,
-            details: 'stateBottom',
-          },
-        });
-        return;
-      }
-      if (bottomRefRect.top > window.innerHeight && detailsRect.top <= 61 && this.state.stickyElements.details !== 'stateMiddle') {
-        this.setState({
-          stickyElements: {
-            ...this.state.stickyElements,
-            details: 'stateMiddle',
-          },
-        });
-        return;
-      }
-      if (detailsRect.top > 61) {
-        this.setState({
-          stickyElements: {
-            ...this.state.stickyElements,
-            details: 'stateTop',
-          },
-        });
-      }
-    }
 /* eslint-disable */
     render() {
       const { productData, userDetails, showLoading, query } = this.props;
       const {
-        catalog, titleInfo, keyfeatures, extraOffers, imgUrls, offerInfo, shippingInfo, isWishlisted,
+        catalog, titleInfo, keyfeatures, extraOffers, imgUrls, offerInfo, shippingInfo, isWishlisted, returnInfo,
         details, productDescription, catalogObj, categoryType = '', warranty, breadcrums, product_id, wishlistId,
       } = productData;
       const { offerPricing } = offerInfo;
       const {
-        stickyElements, recentlyViewed, notifyEmail, emailErr,
+        stickyElements, recentlyViewed, notifyEmail, emailErr, positionStyle, positionTop, defaultPosition
       } = this.state;
       return (
         <Theme.Provider value={categoryType.toLowerCase()}>
@@ -215,13 +209,25 @@ const getProductComponent = (isPreview, taskCode) => {
                       </div>
                       <div className={`${styles['ipad-details']} ${styles['bdr-lt']} ${styles['ipad-pl-15']}`}>
                         {
-                          isPreview ? null : <Shipping shippingInfo={shippingInfo} offerInfo={offerInfo} warranty={warranty} />
+                          isPreview ? null : <Shipping shippingInfo={shippingInfo} returnInfo={returnInfo} offerInfo={offerInfo} warranty={warranty} />
                         }
-                        {
-                          isPreview ? null : shippingInfo.shippable && <AddToCart offerInfo={offerInfo} productData={productData.product_id}/>
+                        {isPreview ? null :
+                          (shippingInfo === null || shippingInfo.shippable)
+                            ?
+                            <AddToCart
+                              offerInfo={offerInfo}
+                              productData={productData.product_id}
+                              shippingInfo={shippingInfo}
+                              isPreview={isPreview}
+                              styling={positionStyle || defaultPosition}
+                              top={positionStyle === 'absolute-style' ?  positionTop : null}
+                            />
+                            :
+                            null
                         }
-                        {
-                          (offerInfo.stockError || offerInfo.availabilityError) && (Object.keys(shippingInfo).length === 0 || shippingInfo.shippable) &&
+
+                        {isPreview ? null :
+                          (offerInfo.stockError || offerInfo.availabilityError) && ((shippingInfo && Object.keys(shippingInfo).length === 0) || (shippingInfo === null || shippingInfo.shippable)) &&
                           <div className={`${styles['flx-space-bw']} ${styles['align-baseline']}`}>
                             {!userDetails.isLoggedIn &&
                             <div className={`${styles['mb-0']} ${styles['fp-input']} ${styles['pb-10']}`}>
@@ -260,7 +266,7 @@ const getProductComponent = (isPreview, taskCode) => {
                     }
                     </Col> */}
                     <Col md={8}>
-                      <ElectronicsTab catalog={catalog} catalogObj={catalogObj} productDescription={productDescription} />
+                      <ElectronicsTab titleInfo={titleInfo} isPreview={isPreview} catalog={catalog} catalogObj={catalogObj} productDescription={productDescription} />
                     </Col>
                   </Row>
                 </Grid>

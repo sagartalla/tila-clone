@@ -36,7 +36,7 @@ function sessionCookie(req, res, next) {
     req.universalCookies.set('sessionId', uuidv4());
     res.cookie('sessionId', req.universalCookies.get('sessionId'));
   }
-  global.APP_LANGUAGE = ['en', 'ar'].indexOf(language) !== -1 ? language : (cookieLanguage ? cookieCountry : 'en');
+  global.APP_LANGUAGE = ['en', 'ar'].indexOf(language) !== -1 ? language : (cookieLanguage ? cookieLanguage : 'en');
   global.APP_COUNTRY = country ? country : (cookieCountry ? cookieCountry : 'SAU');
   
   res.cookie('language', global.APP_LANGUAGE);

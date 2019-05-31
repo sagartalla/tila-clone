@@ -4,8 +4,8 @@ const Electronics = () => (
   <div className="electronics-main-part">
     <Grid>
       <div className="main-banner">
-        <a href="#">
-          <img src="/static/img/landing-page-tech-img/main-banner.jpg" className="img-responsive" />
+        <a href="/SAU/en/srp?search=electronics&isListed=false">
+          <img src={`/static/img/landing-page-tech-img/${lang === 'en' ? 'appliances' : 'appliances-ar'}.jpg`} className="img-responsive" />
         </a>
       </div>
       <Row className={`${styles['m-0']} ${styles['pt-10']}`}>

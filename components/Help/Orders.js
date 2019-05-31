@@ -22,7 +22,7 @@ const cookies = new Cookies();
 
 const language = cookies.get('language') || 'en';
 const country = cookies.get('country') || 'SAU';
-const orderRelatedCatId = [1,2,3,4,5,6,7];
+const orderRelatedCatId = [1,8,10,55];
 const sort = (a,b) => a - b;
 
 class Orders extends Component {

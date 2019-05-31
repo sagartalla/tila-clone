@@ -1,11 +1,9 @@
 import React, { Component, Fragment } from 'react';
-import { Row, Col } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators, selectors } from '../../../store/cam/wishlist';
-import { selectors as cartSelectors } from '../../../store/cart';
 
 import WishlistBody from './includes/WishlistBody';
 import CartBottomPopup from './includes/CartBottomPopup';

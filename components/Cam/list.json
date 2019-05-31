@@ -32,6 +32,11 @@
   {
     "data": [
       {
+        "icon": "icons/common-icon/myreviews",
+        "display": "REVIEWS_AND_RATINGS",
+        "href": "/cam/reviews_ratings"
+      },
+      {
         "icon": "icons/common-icon/coupon-code",
         "display": "MY_COUPONS",
         "href": "/cam/mycoupons"

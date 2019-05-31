@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="46" height="46" viewBox="0 0 46 46">
+    <defs>
+        <circle id="a" cx="23" cy="23" r="23"/>
+        <filter id="b" width="108.7%" height="108.7%" x="-4.3%" y="-4.3%" filterUnits="objectBoundingBox">
+            <feGaussianBlur in="SourceAlpha" result="shadowBlurInner1" stdDeviation="1.5"/>
+            <feOffset dy="1" in="shadowBlurInner1" result="shadowOffsetInner1"/>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" k2="-1" k3="1" operator="arithmetic" result="shadowInnerInner1"/>
+            <feColorMatrix in="shadowInnerInner1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.093558785 0"/>
+        </filter>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g opacity=".5">
+            <use fill="#F1F1F1" xlink:href="#a"/>
+            <use fill="#000" filter="url(#b)" xlink:href="#a"/>
+        </g>
+        <g fill-rule="nonzero">
+            <path fill="#000" d="M33.757 30.738c-.259 0-.389-.139-.648-.278l-3.113-3.325H18.193c-.908 0-1.557-.693-1.557-1.663v-10.81c0-.97.649-1.662 1.557-1.662h17.25c.908 0 1.557.693 1.557 1.663v10.67c0 .97-.778 1.663-1.556 1.663h-1.687l.779 2.494c.13.416 0 .832-.39.97 0 .139-.259.278-.389.278zM18.193 13.83c-.39 0-.778.278-.778.832v10.67c0 .416.389.832.778.832h12.322l3.242 3.603-1.167-3.603h2.854c.389 0 .778-.278.778-.832v-10.67c0-.416-.39-.832-.778-.832H18.193z"/>
+            <path fill="#FFF" d="M10.273 16.801h19.091v12.67H10.273z"/>
+            <path fill="#000" d="M12.284 34.538c-.13 0-.262 0-.394-.138-.394-.277-.525-.554-.394-.97l.788-2.494h-1.707c-.92 0-1.577-.693-1.577-1.663v-10.67c0-.97.788-1.802 1.577-1.802h17.21c.788 0 1.577.831 1.577 1.801v10.67c0 .97-.657 1.664-1.577 1.664H15.963l-3.022 3.325c-.262.277-.394.277-.657.277zm-1.707-16.767c-.395 0-.789.277-.789.831v10.67c0 .416.263.832.789.832h2.758l-1.05 3.464 3.153-3.464h12.218c.394 0 .788-.277.788-.831v-10.67c0-.416-.263-.832-.788-.832h-17.08z"/>
+            <path fill="#000" d="M14.09 21.869c-1.696 0-1.696 2.534 0 2.534 1.698 0 1.698-2.534 0-2.534zM19.182 21.869c-1.697 0-1.697 2.534 0 2.534s1.697-2.534 0-2.534zM24.273 21.869c-1.697 0-1.697 2.534 0 2.534s1.697-2.534 0-2.534z"/>
+        </g>
+    </g>
+</svg>
