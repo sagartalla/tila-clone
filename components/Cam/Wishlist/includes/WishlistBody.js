@@ -95,7 +95,7 @@ const WishlistBody = (props) => {
                             data-wish-id={wishlist_id}
                             data-cart-res={true}
                             className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['left-radius']} ${styles['add-to-btn']}`}
-                            onClick={buttonValue && addToCart}
+                            onClick={buttonValue ? addToCart : undefined}
                           >
                             {buttonValue ? WISH_LIST_PAGE.ADD_TO_CART_BTN : PDP_PAGE.IN_CART}
                           </button>
