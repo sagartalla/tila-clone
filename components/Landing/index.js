@@ -120,6 +120,7 @@ let remoteComponents = {
       Grid,
       Row,
       Col,
+      Slider,
       SVGComponent,
       styles: allStyles,
     },
@@ -173,7 +174,7 @@ class Landing extends Component {
   }
   componentWillReceiveProps(newProps) {
     const { category } = newProps.query;
-    RemoteComponent.loadRemoteComponents([remoteComponents['homepage']])
+    RemoteComponent.loadRemoteComponents([remoteComponents[category || 'homepage']])
       .then((children) => {
         this.setState({
           children,

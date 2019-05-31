@@ -3,17 +3,23 @@ let sliderTBS, sliderTIE, sliderHAL, sliderDODAY, sliderBS, sliderRV;
 // const tie = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 const tbs = [{
-  img: '/static/img/landing-home/guess-banner.jpg',
-  title: 'GUESS'
+  img: '/static/img/landing-home/home-decor.jpg',
+  title: 'HOME DECOR'
 }, {
-  img: '/static/img/landing-home/fendi.jpg',
-  title: 'FENDI'
+  img: '/static/img/landing-home/laptops.jpg',
+  title: 'LAPTOPS'
 }, {
-  img: '/static/img/landing-home/morphy-richards.jpg',
-  title: 'MORPHY RICHARDS'
+  img: '/static/img/landing-home/mens-clothing.jpg',
+  title: 'MENS CLOTHING'
 }, {
-  img: '/static/img/landing-home/shirt.jpg',
-  title: 'SHIRTS'
+  img: '/static/img/landing-home/mobile-accessories.jpg',
+  title: 'MOBILE ACCESSORIES'
+}, {
+  img: '/static/img/landing-home/perfumes-for-women.jpg',
+  title: 'PERFUMES FOR WOMEN'
+}, {
+  img: '/static/img/landing-home/watches.jpg',
+  title: 'WATCHES'
 }];
 
 const tie = [{
