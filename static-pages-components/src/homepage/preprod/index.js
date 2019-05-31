@@ -8,17 +8,23 @@ let sliderTBS,
 // const tie = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 const tbs = [{
-  img: '/static/img/landing-home/guess-banner.jpg',
-  title: 'GUESS',
+  img: `/static/img/landing-home/${lang === 'en' ? 'home-decor' : 'home-decor-ar'}.jpg`,
+  title: 'HOME DECOR',
 }, {
-  img: '/static/img/landing-home/fendi.jpg',
-  title: 'FENDI',
+  img: `/static/img/landing-home/${lang === 'en' ? 'laptops' : 'laptops-ar'}.jpg`,
+  title: 'LAPTOPS',
 }, {
-  img: '/static/img/landing-home/morphy-richards.jpg',
-  title: 'MORPHY RICHARDS',
+  img: `/static/img/landing-home/${lang === 'en' ? 'mens-clothing' : 'mens-clothing-ar'}.jpg`,
+  title: 'MENS CLOTHING',
 }, {
-  img: '/static/img/landing-home/shirt.jpg',
-  title: 'SHIRTS',
+  img: `/static/img/landing-home/${lang === 'en' ? 'mobile-accessories' : 'mobile-accessories-ar'}.jpg`,
+  title: 'MOBILE ACCESSORIES',
+}, {
+  img: `/static/img/landing-home/${lang === 'en' ? 'perfumes-for-women' : 'perfumes-for-women-ar'}.jpg`,
+  title: 'PERFUMES FOR WOMEN',
+}, {
+  img: `/static/img/landing-home/${lang === 'en' ? 'watches' : 'watches-ar'}.jpg`,
+  title: 'WATCHES',
 }];
 
 const tie = [{
