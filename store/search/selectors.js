@@ -161,7 +161,7 @@ const getSearchResutls = (store) => {
       }
       // const priceInfo = product.variantAdapters[0].listingAdapters.map((vla) => vla.attributes.sellingPrice);
       // const offers = product.variantAdapters[0].listingAdapters.map((vla) => vla.attributes.discount);
-      let currency = product.variantAdapters[0].listingAdapters || '';
+      let currency = product.variantAdapters ? product.variantAdapters[0].listingAdapters || '' : '';
       currency = currency[0] || '';
       currency = currency.attributes || '';
       currency = currency.currency || '';
