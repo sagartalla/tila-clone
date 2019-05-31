@@ -22,8 +22,8 @@ const getProduct = (store, variantId) => {
     return [...acc, ...val];
   }, []);
   listings = listings || [];
-  const catalogAttributeMap = product_details.catalog_details.attribute_map;
-  const productAttributeMap = product_details.product_details_vo.cached_product_details.attribute_map;
+  const catalogAttributeMap = product_details && product_details.catalog_details.attribute_map;
+  const productAttributeMap = product_details && product_details.product_details_vo && product_details.product_details_vo.cached_product_details.attribute_map;
   // let activeCount = 0, listingInventryCount = 0;
   let priceInfo = listings ? listings.filter((listing) => {
     // if(listing.total_inventory_count <= 0 ) {
@@ -54,10 +54,10 @@ const getProduct = (store, variantId) => {
     });
   }
 
-  const imgUrls = product_details.product_details_vo.cached_product_details.media.gallery_media;
+  const imgUrls = product_details && product_details.product_details_vo && product_details.product_details_vo.cached_product_details.media.gallery_media;
   const titleInfo = {
-    brand: product_details.catalog_details.attribute_map.brand.attribute_values[0].value,
-    title: productAttributeMap.calculated_display_name.attribute_values[0].value,
+    brand: product_details && product_details.catalog_details && product_details.catalog_details.attribute_map.brand.attribute_values[0].value,
+    title: productAttributeMap && productAttributeMap.calculated_display_name && productAttributeMap.calculated_display_name.attribute_values[0].value,
     rating: {
       rating: '',
       count: ''
@@ -65,26 +65,25 @@ const getProduct = (store, variantId) => {
     reviews: {
       count: ''
     },
-    price: priceInfo ? priceInfo.selling_price + ' ' + priceInfo.selling_price_currency : 'Price Not available',
+    price: priceInfo ? priceInfo.selling_price ? `${priceInfo.selling_price.display_value} ${priceInfo.selling_price.currency}` : priceInfo.selling_price : 'Price Not available',
     originalPrice: '',
     discountPercent: '',
     listingId: priceInfo ? priceInfo.listing_id : 'No Listing',
     totalInventoryCount: priceInfo ? priceInfo.total_inventory_count : 0,
-    product_id: product_details.product_id,
-    itemtype: product_details.catalog_details.item_type_name,
-    media: imgUrls[0].url,
+    product_id: product_details && product_details.product_id,
+    itemtype: product_details && product_details.catalog_details && product_details.catalog_details.item_type_name,
+    media: imgUrls && imgUrls[0].url,
     categoryId: tree && tree.breadcrumb && tree.breadcrumb[tree.breadcrumb.length - 1].id,
-    comparable: product_details.catalog_details.comparable,
+    comparable: product_details && product_details.catalog_details && product_details.catalog_details.comparable,
   };
   const preferredPolicyData = priceInfo ? priceInfo.return_policy ? priceInfo.return_policy.policies[priceInfo.return_policy.preferred_policy] : {} : {};
   const returnInfo = {
     acceptsReturns: preferredPolicyData ? preferredPolicyData.allowed : false,
     maxDaysToReturn: preferredPolicyData ? preferredPolicyData.duration : 0,
   };
-  const shippingInfo = priceInfo ? {...priceInfo.shipping, ...returnInfo} : {};
   const offerInfo = {
-    price: priceInfo ? priceInfo.selling_price + ' ' + priceInfo.selling_price_currency : 'No listing',
-    listingId: priceInfo ? priceInfo.listing_id : 'No Listing',
+    price: priceInfo ? priceInfo.selling_price ? `${priceInfo.selling_price.display_value} ${priceInfo.selling_price.currency}` : priceInfo.selling_price : 'No listing',
+    listingId: priceInfo ? priceInfo.listing_id : '',
     listingAvailable: !!priceInfo,
     availabilityError,
     stockError,
@@ -102,16 +101,16 @@ const getProduct = (store, variantId) => {
   const variant_id = variant_preferred_listings ? Object.keys(variant_preferred_listings)[0] : '';
 
   const catalogObj = {
-    catalog_id: product_details.catalog_details.catalog_id,
-    item_type: product_details.catalog_details.item_type_name,
-    product_id: product_details.product_id,
+    catalog_id: product_details && product_details.catalog_details && product_details.catalog_details.catalog_id,
+    item_type: product_details && product_details.catalog_details && product_details.catalog_details.item_type_name,
+    product_id: product_details && product_details.product_id,
     variant_id,
   };
-  const keyfeatures = _.map(productAttributeMap.calculated_highlights.attribute_values, (kf) => kf.value);
+  const keyfeatures = _.map(productAttributeMap && productAttributeMap.calculated_highlights && productAttributeMap.calculated_highlights.attribute_values, (kf) => kf.value);
   const extraOffers = priceInfo ? priceInfo.pricing.extra_offers_detail : [];
-  const details = catalogAttributeMap.description ? catalogAttributeMap.description.attribute_values.map((d) => d.value).join(', ') : null;
-  let productDescription = product_details.product_details_vo.cached_product_details.rich_product_desc;
-  productDescription = productDescription.length > 0 ? _.sortBy(productDescription,['order']) : null;
+  const details = catalogAttributeMap && catalogAttributeMap.description ? catalogAttributeMap.description.attribute_values.map((d) => d.value).join(', ') : null;
+  let productDescription = product_details && product_details.product_details_vo && product_details.product_details_vo.cached_product_details.rich_product_desc;
+  productDescription = productDescription && productDescription.length > 0 ? _.sortBy(productDescription,['order']) : null;
   return {
     titleInfo,
     details,
@@ -119,9 +118,9 @@ const getProduct = (store, variantId) => {
     imgUrls,
     extraOffers,
     offerInfo,
-    shippingInfo,
+    shippingInfo: priceInfo ? priceInfo.shipping : null,
     returnInfo,
-    product_id: product_details.product_id,
+    product_id: product_details && product_details.product_id,
     productDescription,
     catalogObj,
     sizeChart: {
@@ -200,7 +199,7 @@ const getVariantsAndSimilarProducts = (variantId,productId) => (store) => {
   const { variantsData } = store.productReducer;
   const { availableSimilarProducts } = variantsData || {};
   const { similar_products, product_details, variant_preferred_listings } = store.productReducer.data[0];
-  const { item_type_name: itemType, catalog_id: catalogId } = product_details.catalog_details;
+  const { item_type_name: itemType, catalog_id: catalogId } = product_details && product_details.catalog_details;
   const { product_id: productId, product_details_vo } = product_details;
   const { cached_product_details } = product_details_vo;
   const { attribute_map } = cached_product_details;

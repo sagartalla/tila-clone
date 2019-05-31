@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import SVGComponent from '../../../common/SVGComponet';
 import { selectors, actionCreators } from '../../../../store/order';
 import constants from '../../../../constants';
 
@@ -80,29 +79,28 @@ class Reason extends Component {
           <input
             className={styles['radio-btn']}
             type="radio"
-            value="Replace"
+            value={ORDER_PAGE.REPLACE}
             checked={this.state.selectedMode === 'Replace'}
             onChange={this.onOptionChange}
           />
-          <label className={styles['pl-10']}> Replace</label>
+          <label className={styles['pl-10']}> {ORDER_PAGE.REPLACE}</label>
         </div>,
       ];
     }
 
     return [
       <div key='replace-disable'>
-        <input type="radio" className={styles['radio-btn']} value="Replace" checked={false} disabled />
-        <label className={styles['pl-10']}>Replace</label>
+        <input type="radio" className={styles['radio-btn']} value={ORDER_PAGE.REPLACE} checked={false} disabled />
+        <label className={styles['pl-10']}>{ORDER_PAGE.REPLACE}</label>
       </div>,
     ];
   };
 
   saveAndGoNext() {
     const { goToNextStep, setReason, query, orderIssue, orderDetails } = this.props;
-    const { orderId, returnExchangeType, issueType } = orderIssue;
-    const { reason, subReason, selectedVariant, comment, variantId, selectedMode } = this.state
-
-    let listingObj = orderDetails.order_items.find((order) => order.order_id === orderId);
+    const { orderId, returnExchangeType, issueType, selectedItem} = orderIssue;
+    const { reason, subReason, comment, selectedMode } = this.state
+    let listingObj = orderDetails.order_items.find((order) => order.order_item_ids[0] === selectedItem.id);
     const params = {
       orderId,
       issueType: issueType,

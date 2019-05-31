@@ -5,7 +5,6 @@ const getWishListResults = (store) => {
     const { data } = store.wishlistReducer;
 
     const img_url = constants.mediaDomain;
-    const showLoading = store.wishlistReducer.ui.loading;
 
     const newData = [];
 
@@ -17,8 +16,7 @@ const getWishListResults = (store) => {
       const variant = item.variant_preferred_listings ? Object.keys(item.variant_preferred_listings)[0] : '';
       const variant_info = item.variant_preferred_listings ? item.variant_preferred_listings[variant][0] : {};
 
-      const values = store.cartReducer.data.items.map(e => e.product_details.product_id).indexOf(item.product_id);
-
+      const values = store.cartReducer && store.cartReducer.data && store.cartReducer.data.items && store.cartReducer.data.items.length > 0 && store.cartReducer.data.items.map(e => e.product_details && e.product_details.product_id).indexOf(item.product_id);
       newData.push({
         wishlist_id: item.wishlist_id,
         listing_id: variant_info.listing_id,
@@ -34,7 +32,7 @@ const getWishListResults = (store) => {
         catalog_id: item && item.product_details && item.product_details.catalog_details.catalog_id,
         itemType: item && item.product_details && item.product_details.catalog_details.item_type_name,
         inventory_count: variant_info.total_inventory_count,
-        buttonValue: values === -1,
+        buttonValue: (values === -1) || store.cartReducer.data.items.length === 0,
       });
     });
 

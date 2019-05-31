@@ -1,0 +1,94 @@
+@import '../../../layout/main/executables.styl';
+
+.icon
+  width 90px
+  height 75px
+  object-fit scale-down
+
+.preference-save
+  padding 5px 25px
+  border-bottom-left-radius 16px
+
+.review
+  &:hover .icon-pos
+    display flex
+
+.icon-pos
+  display none
+  top 30px
+  .del-icon
+    width 15px
+    height 15px
+
+
+.modalContainer
+  height 100%
+  width 100%
+  top 0
+  left 0
+  .disabled
+    height 100%
+    width 100%
+    position fixed
+    top 0
+    left 0
+    z-index 100
+    background-color grey
+    opacity 0.8
+
+.modal
+  height 100%
+  max-width: 500px;
+  width: 100%;
+  position fixed
+  top 0
+  right 0
+  z-index 101
+  background-color white
+  transition all 0.3s;
+
+.modalFill
+  height 100%
+  width 100%
+  overflow auto
+
+
+
+.openModal
+  height 100%
+  width 40%
+  position fixed
+  top 0
+  right -800px
+  z-index 2001
+  background-color white
+  animation-name slideOpen
+  animation-duration 0.5s
+  animation-fill-mode both
+
+.closeModal
+  height 100%
+  width 40%
+  position fixed
+  top 0
+  right 0px
+  z-index 2001
+  background-color white
+  animation-name slideClose
+  animation-duration 0.2s
+  animation-fill-mode both
+
+.showDiv
+  display block
+
+.hideDiv
+  display none
+
+@keyframes slideOpen {
+  from {right: -800px;}
+  to {right: 0;}
+}
+@keyframes slideClose {
+  from {right: 0px;}
+  to {right: -800px;}
+}

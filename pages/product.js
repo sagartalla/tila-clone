@@ -79,7 +79,7 @@ class ProductPage extends Base {
     return (
       <div>
         <Layout>
-          <Product  query={url.query} />
+          <Product query={url.query} />
         </Layout>
       </div>
     );

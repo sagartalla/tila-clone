@@ -11,6 +11,8 @@ import { actionCreators as authActionsCreators, selectors as authSelectors } fro
 import Layout from '../layout/main';
 import Search from '../components/Search';
 
+import SearchContext from '../components/helpers/context/search';
+
 const cookies = new Cookies();
 
 class SearchPage extends Base {
@@ -62,9 +64,11 @@ class SearchPage extends Base {
   render() {
     return (
       <div>
-        <Layout>
-          <Search query={this.props.url.query} />
-        </Layout>
+        <SearchContext.Provider value="search">
+          <Layout>
+            <Search query={this.props.url.query} />
+          </Layout>
+        </SearchContext.Provider>
       </div>
     );
   }
@@ -85,3 +89,4 @@ const mapDispatchToProps = dispatch =>
   );
 
 export default withRedux(makeStore, mapStateToProps, mapDispatchToProps)(SearchPage);
+

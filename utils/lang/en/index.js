@@ -57,6 +57,7 @@ export const EN_KEYWORDS = {
     THERE_ARE: 'There are',
     ITEM_IN_YOUR_WISHLIST: 'item in Wishlist',
     ITEMS_IN_YOUR_WISHLIST: 'items in Wishlist',
+    MY_CART: 'My Cart',
 
   },
   PAYMENT_PAGE: {
@@ -124,6 +125,9 @@ export const EN_KEYWORDS = {
     PAY_USING_TILA_CREDIT: 'PAY USING TILA CREDIT',
     PAYMENT_MODE: 'Net banking, credit card, vouchers and etc....',
     ON_DELIVERY: 'on delivery',
+    DROP_THE_ANSWER_INTO_THE_BOX: 'Drop the answer icon into the box above',
+    LOADING_CAPTCHA: 'Loading Captcha...',
+    YOU_ARE_SIGNED_IN_AS: 'You have signed in as',
   },
   DELIVERY_ADDR_PAGE: {
     DELIVERY_ADDR: 'Delivery Address',
@@ -213,7 +217,7 @@ export const EN_KEYWORDS = {
     SOCIAL_INFLUENCER: 'Social Influencer',
     REVIEW_TITLE_PLACE: 'Review title goes here ',
     EASY_RETURN: 'easy return',
-    NO_SHIPPING_CITY: 'Currently not shipping to your city!',
+    NO_SHIPPING_CITY: 'Currently not shipping to your city',
     FREE_DELIVERY_BY: 'FREE Delivery By',
     FREE_DELIVERY_IN: 'Free delivery in',
     NON_RETURNABLE: 'Non returnable',
@@ -248,9 +252,12 @@ export const EN_KEYWORDS = {
     COVERED_IN_WARRANTY: 'Covered in Warranty',
     NOT_COVERED_IN_WARRANTY: 'Not Covered in Warranty',
     ENTER_VALID_EMAIL: 'Enter Valid EmailID',
-    GET_NOTIFIED: 'GetNotified',
+    GET_NOTIFIED: 'Get Notified',
     HIDE_OUT_OF_STOCK: 'Hide Out of Stock',
     PLEASE_SELECT_PRODUCT_SIZE: 'Please Select Product Size',
+    PDP_DONE: 'Done',
+    THANKS_FOR_RATING: 'Thanks for Rating',
+    THANKS_DESCRIPTION: 'Thanks for taking your time to rate the product, this will help millions of users like you to make better purchase judgement',
   },
   VAULT_PAGE: {
     VOUCHER_HISTORY: 'Your gift voucher transaction history',
@@ -269,7 +276,7 @@ export const EN_KEYWORDS = {
     ADD_NEW_SUB_TXT: 'Add a new debit or credit card to enable express checkout.',
     ADD_NEW_BTN: 'ADD NEW',
     SAVE_CARD_MSG: 'Save this card for faster payments.',
-    ADD_NEW_CARD: 'ADD NEW CARD',
+    // ADD_NEW_CARD: 'ADD NEW CARD',
     CANCEL: 'CANCEL',
     ADD_NEW_CARD_HEADER: 'Credit - Debit - ATM Card',
     CARD_ERROR: 'Not valid card',
@@ -602,7 +609,17 @@ export const EN_KEYWORDS = {
     THIS_ITEM: 'this item?',
     PLEASE_SELECT_SIZE_TO_CONTINUE: 'Please Select The Size To continue',
     SUCCESS: 'Success',
-    ORDER_DETAILS_SUMMERY: 'Order Summary'
+    ORDER_DETAILS_SUMMERY: 'Order Summary',
+    THERE_IS_AN_EXCHANGE_ORDER: 'This is an exchange order on the item you have requested for exchange.',
+    REFUND_INITIATED: 'Refund Initiated.',
+    THIS_ORDER_CONTAINS_A_GIFT: 'This order contains gift.',
+    VIEW_DETAILS: 'View details',
+    ORDER_UNSUCCESSFUL: 'Order Unsuccessful',
+    REFUND_STATUS: 'Refund Status',
+    TO_VIEW_PARENT_ORDER: 'To view parent order please',
+    CLICK_HERE: 'Click here',
+    YOUR_ITEM_IS_OUT_FOR_DELIVERY: 'Your Item is out for delivery',
+    REPLACE: 'Replace',
   },
   COUPON_OFFERS: {
     VIEW_TERMS: 'Terms & Conditions',
@@ -625,7 +642,7 @@ export const EN_KEYWORDS = {
     EXPIRED_COUPONS: 'Expired Coupons',
     EXPIRED_ON: 'Expired on',
     EMPTY_COUPON_BOX: 'You have found an empty Coupon box',
-    NO_COUPONS_AVAILABLE: 'No coupons are available currently.',
+    NO_COUPONS_AVAILABLE: 'No coupons are currently available.',
     CHECK_BACK_LATER: 'Please Check back later',
   },
   EMAIL_VERIFICATION: {
@@ -657,6 +674,7 @@ export const EN_KEYWORDS = {
     REQUEST_INVOICE: 'Request Invoice',
     ORDER_TOTAL: 'Order Total',
     NEED_HELP: 'Need Help',
+    ORDER: 'ORDER #',
   },
   BETA: {
     BETA: 'beta',
@@ -706,6 +724,7 @@ export const EN_KEYWORDS = {
     CREDIT_CARDS_VOUCHERS_REWARD_POINTS: 'Credit Cards, Vouchers and Rewards',
     MY_COUPONS: 'My Coupons',
     PREFERENCES: 'Preferences',
+    REVIEWS_AND_RATINGS: 'My reviews & ratings',
   },
   PREFERENCES: {
     PAGE_TITLE: 'Notification and Communication Preferences',
@@ -722,5 +741,12 @@ export const EN_KEYWORDS = {
     SALE_EVENT_AND_CAMPAIGN_UPDATE_SUB: 'Signup to receive Flash sales, new launches and latest campaigns',
     FEEDBACK_SURVEY_AND_PRODUCT_REVIEW_HEADING: 'Feedback surveys and Product Reviews',
     FEEDBACK_SURVEY_AND_PRODUCT_REVIEW_SUB: 'Signup to receive personalized discounts and coupons',
+  },
+  REVIEWS: {
+    TITLE: 'My Reviews & Ratings',
+    SUB_TITLE: 'All your reviews & ratings at one place',
+    RATED_REVIEWS: 'You have Rated & Reviewed',
+    ITEMS: 'items',
+    WRITE_A_REVIEW: 'Write a review',
   },
 };

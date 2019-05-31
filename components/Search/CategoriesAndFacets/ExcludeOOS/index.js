@@ -39,7 +39,7 @@ class ExcludeOOS extends Component {
   render() {
     return (
       <Panel>
-        <div className={`${styles['category-list-title']} ${styles['black-color']} ${styles['fontW600']} ${styles['p-10-20']} ${styles['flx-spacebw-alignc']}`}>
+        <div className={`${styles['category-list-title']} ${styles['black-color']} ${styles['fontW600']} ${styles['flx-spacebw-alignc']}`}>
           <span>{PDP_PAGE.HIDE_OUT_OF_STOCK}</span>
           <ToggleBtn handleClick={this.handleClick} checked={this.props.excludeOOS === 'true'}/>
         </div>

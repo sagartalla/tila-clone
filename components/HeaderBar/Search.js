@@ -14,10 +14,14 @@ import { Router } from '../../routes';
 import SVGComponent from '../common/SVGComponet';
 import DragDropUpload from '../common/DragDropUpload';
 import lang from '../../utils/language';
+import SearchContext from '../helpers/context/search';
+
 import main_en from '../../layout/main/main_en.styl';
 import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './header_en.styl';
 import styles_ar from './header_ar.styl';
+
+
 
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
@@ -72,7 +76,7 @@ class Search extends Component {
       return;
     }
     this.setState({
-      query: e.target.value.toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ').replace(/^\s+/g, ''),
+      query: e.target.value.replace(/^\s+/g, ''),
       searchInput: true,
       autoSearchValue: '',
     }, () => {
@@ -100,7 +104,7 @@ class Search extends Component {
     const { suggestions } = this.props;
     if (e.keyCode === 9 || e.keyCode === 39) {
       this.setState({
-        query: suggestions.length > 0 && suggestions[0].data_edgengram,
+        query: suggestions && (suggestions.length > 0 && suggestions[0].data_edgengram),
       });
     }
   }
@@ -146,6 +150,7 @@ class Search extends Component {
     });
   }
 
+
   fetchSuggestions() {
     this.props.fetchSuggestions({ key: this.state.query.trim() });
   }
@@ -157,7 +162,7 @@ class Search extends Component {
 
   render() {
     const {
-      suggestions, openImagesearch, query, autoSearchValue,
+      suggestions, openImagesearch, query, autoSearchValue, searchInput,
     } = this.state;
     return (
       <div className={styles['search-wrapper']}>
@@ -165,16 +170,22 @@ class Search extends Component {
 
           <Dropdown id="search-toggle" className={`${styles['cart-inn']} ${styles.width100}`}>
             <Dropdown.Toggle id="dropdown-custom-components">
-              <div className={styles.overlap} tabIndex="0" contentEditable="true" onFocus={this.setSelectionRange}>
-            {query.length < 1 ? '' : autoSearchValue || suggestions.length > 0 && (query === suggestions[0].data_edgengram.slice(0, query.length) ? suggestions[0].data_edgengram : '')}</div>
-              <input
-                className={styles['search-input']}
-                id="text-box"
-                placeholder={SEARCH_PAGE.SEARCH_YOUR_FAV_ITEM}
-                onChange={this.onChangeSearchInput}
-                value={query}
-                onKeyDown={this.handleSearch}
-                />
+              <div className={styles.overlap} tabIndex="0" onFocus={this.setSelectionRange}>
+                {(query && query.length) < 2 ? '' : (autoSearchValue || (suggestions.length > 0 && query.toLowerCase() === suggestions[0].data_edgengram.slice(0, query.length).toLowerCase() ? (query.concat(suggestions[0].data_edgengram.substring(query.length))) : ''))}
+              </div>
+              <SearchContext.Consumer>
+                {context => (
+                  <input
+                    className={styles['search-input']}
+                    id="text-box"
+                    autoComplete="off"
+                    placeholder={SEARCH_PAGE.SEARCH_YOUR_FAV_ITEM}
+                    onChange={this.onChangeSearchInput}
+                    value={(context === 'search') || searchInput ? query : ''}
+                    onKeyDown={this.handleSearch}
+                  />
+              )}
+              </SearchContext.Consumer>
             </Dropdown.Toggle>
             <Dropdown.Menu className={`${styles.width100} ${styles['p-0']} ${styles['m-0']}`}>
               {suggestions.length > 0 &&
@@ -189,7 +200,7 @@ class Search extends Component {
           </Dropdown>
 
           <div className={`${styles['search-btn']} ${styles['r-40']}`} onClick={this.imageSearch}>
-           <SVGComponent clsName={`${styles['searching-icon']}`} src="icons/camera"/>
+            <SVGComponent clsName={`${styles['searching-icon']}`} src="icons/camera"/>
           </div>
           <button type="submit" className={styles['search-btn']}><SVGComponent clsName={`${styles['searching-icon']}`} src="icons/search/search-white-icon" /></button>
         </form>

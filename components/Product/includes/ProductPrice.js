@@ -1,9 +1,8 @@
-import React, { Component, Fragment } from 'react';
-import PropTypes from 'prop-types';
+import React, { Fragment } from 'react';
 import SVGComponent from '../../common/SVGComponet';
 
 import { languageDefinations } from '../../../utils/lang';
-import { OverlayTrigger, Popover } from 'react-bootstrap';
+import { OverlayTrigger } from 'react-bootstrap';
 
 import lang from '../../../utils/language';
 
@@ -65,7 +64,7 @@ const popover = ({strickedPrice: mrp, sellingPrice:sp, offerDiscounts, showPrise
           </div>
         </div>
         <div>
-          <div className={`${styles['p-5']} ${styles['mt-5']} ${styles['fs-12']} ${styles['overall-amount']}`}>{CART_PAGE.OVERALL_YOU_SAVE} {`${discountMrp.display_value} ${currency}`} {CART_PAGE.ON_THIS_PRODUCT}</div>
+          <div className={`${styles['p-5']} ${styles['mt-5']} ${styles['fs-12']} ${styles['overall-amount']}`}>{CART_PAGE.OVERALL_YOU_SAVE} {discountMrp && discountMrp.display_value && `${discountMrp.display_value} ${currency}`} {CART_PAGE.ON_THIS_PRODUCT}</div>
         </div>
       </div>
   );
@@ -74,25 +73,25 @@ const popover = ({strickedPrice: mrp, sellingPrice:sp, offerDiscounts, showPrise
 const ProductPrice = ({offerInfo}) => {
   const { price, listingAvailable, listingId, stockError, availabilityError, offerPricing } = offerInfo;
  return(
-  <div className={`${styles['p-10']} ${styles['product-price-bg']} ${styles['border-radius4']}`}>
+  <div className={`${styles['product-price-bg']} ${styles['border-radius4']}`}>
     {
       listingAvailable
       ?
         <Fragment>
           <div className={`${styles['flex']} ${styles['align-baseline']}`}>
             <div className={`${styles['flex']} ${styles['align-baseline']}`}>
-              <span className={`${styles['fs-24']} ${styles['fontW600']} ${styles['pr-5']}`}>{offerPricing.showPrise.display_value}</span>
-              <span className={`${styles['fs-12']} ${styles['pr-5']}`}>{offerPricing.showPrise.currency_code || offerPricing.currency}</span>
+              <span className={`${styles['fs-24']} ${styles['fontW600']} ${styles['pr-5']}`}>{offerPricing && offerPricing.showPrise && offerPricing.showPrise.display_value}</span>
+              <span className={`${styles['fs-12']} ${styles['pr-5']}`}>{(offerPricing && offerPricing.showPrise && offerPricing.showPrise.currency_code) || (offerPricing && offerPricing.currency)}</span>
             </div>
             <Fragment>
-              {offerPricing.showPrise.display_value !== offerPricing.strickedPrice.display_value && Math.floor(offerPricing.discount.display_value) > 5 &&
+              {offerPricing && offerPricing.showPrise && offerPricing.showPrise.display_value !== offerPricing && offerPricing.strickedPrice && offerPricing.strickedPrice.display_value && Math.floor(offerPricing && offerPricing.discount && offerPricing.discount.display_value) > 5 &&
               <div className={`${styles.flex} ${styles['align-baseline']} ${styles['cross-strike-red']} ${styles.relative} ${styles['ml-10']}`}>
-                <span className={`${styles['fs-16']} ${styles['pr-5']}`}>{offerPricing.strickedPrice.display_value}</span>
-                {/* <span className={`${styles['fs-12']} ${styles['pr-5']}`}>{offerPricing.currency}</span> */}
+                <span className={`${styles['fs-16']} ${styles['pr-5']}`}>{offerPricing && offerPricing.strickedPrice && offerPricing.strickedPrice.display_value}</span>
+                <span className={`${styles['fs-12']} ${styles['pr-5']}`}>{offerPricing && (offerPricing.strickedPrice.currency_code || offerPricing.currency)}</span>
               </div>}
               <div className={`${styles['flex']} ${styles['align-baseline']} ${styles['relative']} ${styles['ml-10']}`}>
-                {offerPricing.showPrise.display_value !== offerPricing.strickedPrice.display_value && Math.floor(offerPricing.discount.display_value) > 5 &&
-                <span className={`${styles['fs-12']} ${styles['pr-5']} ${styles['offers-applied']} `}>{`${Math.floor(offerPricing.discount.display_value)}% OFF`}</span>}
+                {offerPricing && offerPricing.showPrise && offerPricing.showPrise.display_value !== offerPricing && offerPricing.strickedPrice && offerPricing.strickedPrice.display_value && Math.floor(offerPricing && offerPricing.discount && offerPricing.discount.display_value) > 5 &&
+                <span className={`${styles['fs-12']} ${styles['pr-5']} ${styles['offers-applied']} `}>{`${Math.floor(offerPricing && offerPricing.discount && offerPricing.discount.display_value)}% OFF`}</span>}
                 <OverlayTrigger placement="bottom" overlay={popover(offerPricing)}>
                   <span className={`${styles['fs-12']} ${styles['pr-5']} ${styles['checkout-quat']} ${styles['flex-center']} ${styles['justify-center']}`}>
                     {/* <SVGCompoent clsName={`${styles['secure-icon']} ${styles['mr-10']} ${styles['pointer']}`} src="icons/common-icon/trust-secure" /> */}

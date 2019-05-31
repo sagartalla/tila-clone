@@ -8,17 +8,23 @@ let sliderTBS,
 // const tie = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 const tbs = [{
-  img: '/static/img/landing-home/guess-banner.jpg',
-  title: 'GUESS',
+  img: `/static/img/landing-home/${lang === 'en' ? 'home-decor' : 'home-decor-ar'}.jpg`,
+  title: 'HOME DECOR',
 }, {
-  img: '/static/img/landing-home/fendi.jpg',
-  title: 'FENDI',
+  img: `/static/img/landing-home/${lang === 'en' ? 'laptops' : 'laptops-ar'}.jpg`,
+  title: 'LAPTOPS',
 }, {
-  img: '/static/img/landing-home/morphy-richards.jpg',
-  title: 'MORPHY RICHARDS',
+  img: `/static/img/landing-home/${lang === 'en' ? 'mens-clothing' : 'mens-clothing-ar'}.jpg`,
+  title: 'MENS CLOTHING',
 }, {
-  img: '/static/img/landing-home/shirt.jpg',
-  title: 'SHIRTS',
+  img: `/static/img/landing-home/${lang === 'en' ? 'mobile-accessories' : 'mobile-accessories-ar'}.jpg`,
+  title: 'MOBILE ACCESSORIES',
+}, {
+  img: `/static/img/landing-home/${lang === 'en' ? 'perfumes-for-women' : 'perfumes-for-women-ar'}.jpg`,
+  title: 'PERFUMES FOR WOMEN',
+}, {
+  img: `/static/img/landing-home/${lang === 'en' ? 'watches' : 'watches-ar'}.jpg`,
+  title: 'WATCHES',
 }];
 
 const tie = [{
@@ -183,15 +189,15 @@ const twoCols = [{
 
 const threeCols = [{
   img: '/static/img/landing-home/shoes.jpg',
-  link: '/SAU/en/srp?search=footwear&language=en&isListed=false',
+  link: '/SAU/en/srp?search=footwear&isListed=false',
   title: 'Shoes',
 }, {
   img: '/static/img/landing-home/ls2.jpg',
-  link: '/SAU/en/srp?search=LS2&language=en&isListed=false',
+  link: '/SAU/en/srp?search=LS2&isListed=false',
   title: 'LS2',
 }, {
   img: '/static/img/landing-home/furniture.jpg',
-  link: '/SAU/en/srp?search=Furniture&language=en&isListed=false',
+  link: '/SAU/en/srp?search=Furniture&isListed=false',
   title: 'Furniture',
 }];
 
@@ -199,27 +205,27 @@ const b_y_l = [{
   img: '/static/img/landing-home/levis-m.jpg',
   brandImg: '/static/img/landing-home/levis.jpg',
   title: 'Levis',
-  links: '/SAU/en/srp?search=Levis&language=en&isListed=false'
+  links: '/SAU/en/srp?search=Levis&isListed=false'
 }, {
   img: '/static/img/landing-home/guess-m.jpg',
   brandImg: '/static/img/landing-home/guess.jpg',
   title: 'Guess',
-  links: 'SAU/en/srp?search=Guess&language=en&isListed=false'
+  links: 'SAU/en/srp?search=Guess&isListed=false'
 }, {
   img: '/static/img/landing-home/max-m.jpg',
   brandImg: '/static/img/landing-home/max.jpg',
   title: 'Max',
-  links: 'SAU/en/srp?search=Max&language=en&isListed=false'
+  links: 'SAU/en/srp?search=Max&isListed=false'
 }, {
   img: '/static/img/landing-home/gucci-m.jpg',
   brandImg: '/static/img/landing-home/gucci.jpg',
   title: 'Gucci',
-  links: '/SAU/en/srp?search=Gucci&language=en&isListed=false'
+  links: '/SAU/en/srp?search=Gucci&isListed=false'
 }, {
   img: '/static/img/landing-home/levis-m.jpg',
   brandImg: '/static/img/landing-home/levis.jpg',
   title: 'Levis',
-  links: '/SAU/en/srp?search=Levis&language=en&isListed=false'
+  links: '/SAU/en/srp?search=Levis&isListed=false'
 }];
 
 function SamplePrevArrow(props) {
@@ -248,10 +254,10 @@ function SampleNextArrow(props) {
 
 const b_d_b = {
   Mobiles: 'SAU/en/srp/mobiles?categoryTree=true&isListed=false&sid=848,849',
-  Clothing: '/SAU/en/srp?isListed=false&language=en&search=Clothing',
-  'Clothing Accessories': '/SAU/en/srp?search=Clothing&language=en&isListed=false',
+  Clothing: '/SAU/en/srp?isListed=false&&search=Clothing',
+  'Clothing Accessories': '/SAU/en/srp?search=Clothing&&isListed=false',
   Laptops: '/SAU/en/srp/laptops?categoryTree=true&isListed=false&sid=848,864',
-  'Storage Devices': '/SAU/en/srp?search=Storage&language=en&isListed=false',
+  'Storage Devices': '/SAU/en/srp?search=Storage&&isListed=false',
   Cameras: '/SAU/en/srp/camera?categoryTree=true&isListed=false&sid=848,882',
   Televisions: '/SAU/en/srp/televisions?categoryTree=true&isListed=false&sid=848,878',
   'Home Appliances': '/SAU/en/srp/home-applaince?categoryTree=true&isListed=false&sid=932,935',
@@ -260,27 +266,33 @@ const b_d_b = {
   'Fashion Accessories': '/SAU/en/srp/fashion-accessories?categoryTree=true&isListed=false&sid=892,923',
   Watches: '/SAU/en/srp/watch?categoryTree=true&isListed=false&sid=892,929',
   'Kitchen Appliances': '/SAU/en/srp/kitchen-appliances?categoryTree=true&isListed=false&sid=932,945',
-  Speakers: '/SAU/en/srp?search=Speakers&language=en&isListed=false',
-  'Microwave Ovens': '/SAU/en/srp?search=Microwave%20Ovens&language=en&isListed=false',
+  Speakers: '/SAU/en/srp?search=Speakers&&isListed=false',
+  'Microwave Ovens': '/SAU/en/srp?search=Microwave%20Ovens&&isListed=false',
   'Smart Watch': '/SAU/en/srp/smart-watches?categoryTree=true&isListed=false&sid=848,860,861',
   'Mobile Accessories': '/SAU/en/srp/mobile-accessories?categoryTree=true&isListed=false&sid=848,850',
   "Kid's Fashion": '/SAU/en/srp/kid%27s?categoryTree=true&isListed=false&sid=892,893',
-  Footwear: '/SAU/en/srp?search=Footwear&language=en&isListed=false',
+  Footwear: '/SAU/en/srp?search=Footwear&&isListed=false',
   "Men's Footwear": '/SAU/en/srp/footwear?categoryTree=true&isListed=false&sid=892,907',
   'Women Footwear': '/SAU/en/srp/footwear?categoryTree=true&isListed=false&sid=892,921',
   Bags: '/SAU/en/srp/backpack?categoryTree=true&isListed=false&sid=892,926',
-  Eyewear: '/SAU/en/srp?search=Eyewear&language=en&isListed=false',
-  Jewellery: '/SAU/en/srp?search=Jewellery&language=en&isListed=false',
-  GUESS: '/SAU/en/srp/womens-clothing-1056/?isListed=false&language=en&search=guess',
-  FENDI: 'https://storefront-stage.fptechscience.com/SAU/en/srp/watches-1128/?isListed=false&language=en&search=FENDI',
-  'MORPHY RICHARDS': '/SAU/en/srp?search=MORPHY%20RICHARDS%20&disableSpellCheck=true&language=en&isListed=false',
-  SHIRTS: '/SAU/en/srp?search=SHIRTS&language=en&isListed=false',
+  Eyewear: '/SAU/en/srp?search=Eyewear&&isListed=false',
+  Jewellery: '/SAU/en/srp?search=Jewellery&&isListed=false',
+  GUESS: '/SAU/en/srp/womens-clothing-1056/?isListed=false&&search=guess',
+  FENDI: 'https://storefront-stage.fptechscience.com/SAU/en/srp/watches-1128/?isListed=false&&search=FENDI',
+  'MORPHY RICHARDS': '/SAU/en/srp?search=MORPHY%20RICHARDS%20&disableSpellCheck=true&&isListed=false',
+  SHIRTS: '/SAU/en/srp?search=SHIRTS&&isListed=false',
   Perfumes: '/SAU/en/srp/fragrance?categoryTree=true&isListed=false&sid=932,958,964',
-  Shoes: '/SAU/en/srp?search=Shoes&language=en&isListed=false',
+  Shoes: '/SAU/en/srp?search=Shoes&&isListed=false',
   Lights: '/SAU/en/srp/light?categoryTree=true&isListed=false&sid=932,937,940',
-  lamps: 'SAU/en/srp/lamp?categoryTree=true&isListed=false&sid=932,937,939',
+  lamps: '/SAU/en/srp/lamp?categoryTree=true&isListed=false&sid=932,937,939',
   bedding: '/SAU/en/srp/bedding-set?categoryTree=true&isListed=false&sid=932,941,942',
   furniture: '/SAU/en/srp/home-furnishing?categoryTree=true&isListed=false&sid=932,941',
+  'HOME DECOR': '/SAU/en/srp?search=HOME%20DECOR&isListed=false',
+  LAPTOPS: '/SAU/en/srp/laptops?categoryTree=true&isListed=false&sid=848,864',
+  'MENS CLOTHING': '/SAU/en/srp/clothing?categoryTree=true&isListed=false&sid=892,899',
+  'MOBILE ACCESSORIES': '/SAU/en/srp/mobile-accessories?categoryTree=true&isListed=false&sid=848,850',
+  'PERFUMES FOR WOMEN': '/SAU/en/srp?search=perfumes&categoryTree=true&isListed=false',
+  WATCHES: '/SAU/en/srp/watch?categoryTree=true&isListed=false&sid=892,929',
 }
 
 const HomePage = () => (
@@ -313,7 +325,7 @@ const HomePage = () => (
       </div>
       <div className="ff-t-i">
         <div className="e">
-          <span className={`title ${styles['fs-18']}`}>TOP IN ELECTRONICS</span>
+          <span className={`title ${styles['fs-20']}`}>TOP IN ELECTRONICS</span>
           <Slider
             asNavFor={sliderTIE}
             ref={slider => (sliderTIE = slider)}
@@ -327,14 +339,14 @@ const HomePage = () => (
                   <a href={b_d_b[i.title]}>
                     <img src={i.img} alt={i.title} />
                   </a>
-                  <span>{i.title}</span>
+                  <span className={`${styles['fs-12']} ${styles['pt-10']} ${styles['flex']} ${styles['justify-center']} ${styles['lne-ht1_2']}`}>{i.title}</span>
                 </div>
               </div>
               ))}
           </Slider>
         </div>
         <div className="h-a-l">
-          <span className={`title ${styles['fs-18']}`}>TOP IN FASHION | HOME & LIVING</span>
+          <span className={`title ${styles['fs-20']}`}>TOP IN FASHION | LIFESTYLE</span>
           <Slider
             asNavFor={sliderHAL}
             ref={slider => (sliderHAL = slider)}
@@ -348,7 +360,7 @@ const HomePage = () => (
                     <a href={b_d_b[i.title]}>
                       <img src={i.img} />
                     </a>
-                    <span>{i.title}</span>
+                    <span className={`${styles['fs-12']} ${styles['pt-10']} ${styles['flex']} ${styles['justify-center']} ${styles['lne-ht1_2']}`}>{i.title}</span>
                   </div>
                 </div>
             ))}
@@ -359,7 +371,7 @@ const HomePage = () => (
         <div className={`${styles['fs-20']} title`}>TOP IN FASHION</div>
         <div className="d1">
           <div>
-            <span className={styles['fs-20']}><span className="lite">Kids Fashion</span><span className={styles.bold}>UP TO 50% OFF</span></span>
+            <span className={styles['fs-16']}><span className="lite">Kids Fashion</span></span>
             <a href={b_d_b["Kid's Fashion"]}>
               <div className="shadow">
                 <img src={d_tif[0]} className="img-responsive" />
@@ -367,11 +379,11 @@ const HomePage = () => (
             </a>
             <div className="btn">
               <span>SHOP NOW</span>
-              <SVGComponent clsName="arrow" src="icons/common-icon/arrow" />
+              
             </div>
           </div>
           <div>
-            <span className={styles['fs-20']}><span className="lite">Women's Clothing</span><span className={styles.bold}>UP TO 50% OFF</span></span>
+            <span className={styles['fs-16']}><span className="lite">Women's Clothing</span></span>
             <a href={b_d_b['Womens Clothing']}>
               <div className="shadow">
                 <img src={d_tif[1]} className="img-responsive" />
@@ -379,13 +391,13 @@ const HomePage = () => (
             </a>
             <div className="btn">
               <span>SHOP NOW</span>
-              <SVGComponent clsName="arrow" src="icons/common-icon/arrow" />
+              
             </div>
           </div>
         </div>
         <div className="d2">
           <div>
-            <span className={styles['fs-20']}><span className="lite">Shoes</span><span className={styles.bold}>UP TO 50% OFF</span></span>
+            <span className={styles['fs-16']}><span className="lite">Shoes</span></span>
             <a href={b_d_b.Shoes}>
               <div className="shadow">
                 <img src={d_tif[2]} className="img-responsive" />
@@ -393,11 +405,11 @@ const HomePage = () => (
             </a>
             <div className="btn">
               <span>SHOP NOW</span>
-              <SVGComponent clsName="arrow" src="icons/common-icon/arrow" />
+              
             </div>
           </div>
           <div>
-            <span className={styles['fs-20']}><span className="lite">Watches</span><span className={styles.bold}>UP TO 50% OFF</span></span>
+            <span className={styles['fs-16']}><span className="lite">Watches</span></span>
             <a href={b_d_b.Watches}>
               <div className="shadow">
                 <img src={d_tif[3]} className="img-responsive" />
@@ -405,13 +417,13 @@ const HomePage = () => (
             </a>
             <div className="btn">
               <span>SHOP NOW</span>
-              <SVGComponent clsName="arrow" src="icons/common-icon/arrow" />
+              
             </div>
           </div>
         </div>
         <div className={`d3 ${styles.right0}`}>
           <div>
-            <span className={styles['fs-20']}><span className="lite">Men's Clothing</span><span className={styles.bold}>UP TO 50% OFF</span></span>
+            <span className={styles['fs-16']}><span className="lite">Men's Clothing</span></span>
             <a href={b_d_b['Mens Clothing']}>
               <div className="shadow">
                 <img src={d_tif[4]} className="img-responsive" />
@@ -419,7 +431,7 @@ const HomePage = () => (
             </a>
             <div className="btn">
               <span>SHOP NOW</span>
-              <SVGComponent clsName="arrow" src="icons/common-icon/arrow" />
+              
             </div>
           </div>
         </div>
@@ -439,10 +451,10 @@ const HomePage = () => (
         ))}
       </Row>
       <div className="display-t-i-hl">
-        <div className={`${styles['fs-20']} title`}>BEST OF HOME & LIVING</div>
+        <div className={`${styles['fs-20']} title`}>BEST OF LIFESTYLE</div>
         <div className="d1">
           <div>
-            <span className={styles['fs-20']}><span className="lite">Kids Furniture</span><span className={styles.bold}>UP TO 50% OFF</span></span>
+            <span className={styles['fs-16']}><span className="lite">Kids Furniture</span></span>
             <a href={b_d_b['furniture']}>
               <div className="shadow">
                 <img src={d_tihl[0]} className="img-responsive" />
@@ -450,24 +462,24 @@ const HomePage = () => (
             </a>
             <div className="btn">
               <span>SHOP NOW</span>
-              <SVGComponent clsName="arrow" src="icons/common-icon/arrow" />
+              
             </div>
           </div>
           <div>
-            <span className={styles['fs-20']}><span className="lite">Living Room Furniture</span><span className={styles.bold}>FROM SAR 200</span></span>
+            <span className={styles['fs-16']}><span className="lite">Living Room Furniture</span></span>
             <a href={b_d_b['furniture']}></a>
               <div className="shadow">
                 <img src={d_tihl[1]} className="img-responsive" />
               </div>
             <div className="btn">
               <span>SHOP NOW</span>
-              <SVGComponent clsName="arrow" src="icons/common-icon/arrow" />
+              
             </div>
           </div>
         </div>
         <div className="d2">
           <div>
-            <span className={styles['fs-20']}><span className="lite">Lamps</span><span className={styles.bold}>UP TO 50% OFF</span></span>
+            <span className={styles['fs-16']}><span className="lite">Lamps</span></span>
             <a href={b_d_b['lamps']}>
               <div className="shadow">
                 <img src={d_tihl[2]} className="img-responsive" />
@@ -475,11 +487,11 @@ const HomePage = () => (
             </a>
             <div className="btn">
               <span>SHOP NOW</span>
-              <SVGComponent clsName="arrow" src="icons/common-icon/arrow" />
+              
             </div>
           </div>
           <div>
-            <span className={styles['fs-20']}><span className="lite">Cushions</span><span className={styles.bold}>UP TO 50% OFF</span></span>
+            <span className={styles['fs-16']}><span className="lite">Cushions</span></span>
             <a href={b_d_b['bedding']}>
               <div className="shadow">
                 <img src={d_tihl[3]} className="img-responsive" />
@@ -487,13 +499,13 @@ const HomePage = () => (
             </a>
             <div className="btn">
               <span>SHOP NOW</span>
-              <SVGComponent clsName="arrow" src="icons/common-icon/arrow" />
+              
             </div>
           </div>
         </div>
         <div className={`d3 ${styles.right0}`}>
           <div>
-            <span className={styles['fs-20']}><span className="lite">Lights</span><span className={styles.bold}>FROM SAR 200</span></span>
+            <span className={styles['fs-16']}><span className="lite">Lights</span></span>
             <a href={b_d_b['Lights']}>
               <div className="shadow">
                 <img src={d_tihl[4]} className="img-responsive" />
@@ -501,12 +513,12 @@ const HomePage = () => (
             </a>
             <div className="btn">
               <span>SHOP NOW</span>
-              <SVGComponent clsName="arrow" src="icons/common-icon/arrow" />
+              
             </div>
           </div>
         </div>
         <div className={`${styles['breadcrums']} ${styles['mt-10']} ${styles['pointer']}`}>
-          <a href="https://storefront-stage.fptechscience.com/SAU/en/landing/lifestyle?language=en">
+          <a href="https://storefront-stage.fptechscience.com/SAU/en/landing/lifestyle">
             <span>Bedsheets  |  Furniture  |  Cushions  |  Wall Decor  |  Lights  |  Living Room Furniture  |  Photo Frames  |  Rugs & Mats  & more…</span>
           </a>
         </div>
@@ -526,7 +538,7 @@ const HomePage = () => (
         <div>
           <div className="d1">
             <div>
-              <span className={styles['fs-20']}><span className="lite">Laptops</span><span className={styles.bold}>UP TO 50% OFF</span></span>
+              <span className={styles['fs-16']}><span className="lite">Laptops</span></span>
               <a href={b_d_b.Laptops}>
                 <div className="shadow">
                   <img src={d_tie[0]} className="img-responsive" />
@@ -534,12 +546,12 @@ const HomePage = () => (
               </a>
               <div className="btn">
                 <span>SHOP NOW</span>
-                <SVGComponent clsName="arrow" src="icons/common-icon/arrow" />
+                
               </div>
             </div>
             <div>
-              <span className={styles['fs-20']}><span className="lite">Mobiles
-                                                </span><span className={styles.bold}>UP TO 50% OFF</span>
+              <span className={styles['fs-16']}><span className="lite">Mobiles
+                                                </span>
               </span>
               <a href={b_d_b.Mobiles}>
                 <div className="shadow">
@@ -548,13 +560,13 @@ const HomePage = () => (
               </a>
               <div className="btn">
                 <span>SHOP NOW</span>
-                <SVGComponent clsName="arrow" src="icons/common-icon/arrow" />
+                
               </div>
             </div>
           </div>
           <div className="d2">
             <div>
-              <span className={styles['fs-20']}><span className="lite">Camera</span><span className={styles.bold}>UP TO 50% OFF</span></span>
+              <span className={styles['fs-16']}><span className="lite">Camera</span></span>
               <a href={b_d_b.Cameras}>
                 <div className="shadow">
                   <img src={d_tie[2]} className="img-responsive" />
@@ -562,11 +574,11 @@ const HomePage = () => (
               </a>
               <div className="btn">
                 <span>SHOP NOW</span>
-                <SVGComponent clsName="arrow" src="icons/common-icon/arrow" />
+                
               </div>
             </div>
             <div>
-              <span className={styles['fs-20']}><span className="lite">Kitchen Appliances</span><span className={styles.bold}>UP TO 50% OFF</span></span>
+              <span className={styles['fs-16']}><span className="lite">Kitchen Appliances</span></span>
               <a href={b_d_b['Kitchen Appliances']}>
                 <div className="shadow">
                   <img src={d_tie[3]} className="img-responsive" />
@@ -574,13 +586,13 @@ const HomePage = () => (
               </a>
               <div className="btn">
                 <span>SHOP NOW</span>
-                <SVGComponent clsName="arrow" src="icons/common-icon/arrow" />
+                
               </div>
             </div>
           </div>
           <div className={`d3 ${styles.right0}`}>
             <div>
-              <span className={styles['fs-20']}><span className="lite">Audio Devices</span><span className={styles.bold}>UP TO 50% OFF</span></span>
+              <span className={styles['fs-16']}><span className="lite">Audio Devices</span></span>
               <a href={b_d_b.Speakers}>
                 <div className="shadow">
                   <img src={d_tie[4]} className="img-responsive" />
@@ -588,13 +600,13 @@ const HomePage = () => (
               </a>
               <div className="btn">
                 <span>SHOP NOW</span>
-                <SVGComponent clsName="arrow" src="icons/common-icon/arrow" />
+                
               </div>
             </div>
           </div>
         </div>
         <div className={`${styles.breadcrums} ${styles['mt-10']} ${styles.pointer}`}>
-          <a href="https://storefront-stage.fptechscience.com/SAU/en/landing/electronics?language=en">
+          <a href="https://storefront-stage.fptechscience.com/SAU/en/landing/electronics">
             <span>Mobiles  |  Laptops  |  Speakers  |  Cameras  |  Microwave Ovens  |  Smartwatches  |  Lights & Lamps  & more…</span>
           </a>
         </div>
