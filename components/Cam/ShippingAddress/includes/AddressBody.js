@@ -118,7 +118,7 @@ const AddressBody = (props) => {
               </h4>
               <p className={`${styles['fs-12']} ${styles['thick-gry-clr']}`}>{DELIVERY_ADDR_PAGE.ADD_NEW_ADDR_TAG}</p>
               <p>
-                <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['small-btn']}`}>
+                <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']} ${styles['left-radius']} ${styles['small-btn']}`}>
                   {DELIVERY_ADDR_PAGE.ADD_NEW_BTN}
                 </button>
               </p>

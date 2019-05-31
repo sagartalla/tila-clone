@@ -43,7 +43,7 @@ const DeliveryAddress = props => {
           }
         </Col>
         <Col md={2} sm={12} xs={5} className={`${configJson.done ? '' : 'hide'} ${styles['t-rt']} ${styles['pl-0']}`}>
-          <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']}`} onClick={editAddressTab}>
+          <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['left-radius']} ${styles['text-uppercase']}`} onClick={editAddressTab}>
             {DELIVERY_ADDR_PAGE.EDIT}
           </button>
         </Col>
