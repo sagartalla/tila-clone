@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Cookie from 'universal-cookie';
 import moment from 'moment';
-import ProductPrice from '../includes/ProductPrice';
+// import ProductPrice from '../includes/ProductPrice';
 import GeoWidget from '../../common/GeoWidget';
 import { languageDefinations } from '../../../utils/lang';
 import SVGCompoent from '../../common/SVGComponet';
@@ -33,7 +33,7 @@ class Shipping extends Component {
     const { availabilityError } = offerInfo;
 
     return (
-      <div className={`${styles.box} ${styles['border-radius4']} ${styles['mt-5']} ${styles['mb-10']} ${styles['ipad-delivery-address-part']} ${styles['free-delivery-part']}`}>
+      <div id="shipping-cont" className={`${styles.box} ${styles['border-radius4']} ${styles['mt-5']} ${styles['mb-10']} ${styles['ipad-delivery-address-part']} ${styles['free-delivery-part']}`}>
         <div className={`${styles['free-delivery-list']} ${styles.flex}`}>
           <div className={styles['pdp-deliver-list']}>
             <GeoWidget hideLabel={!!shippingData.displayCity} />
@@ -117,9 +117,9 @@ class Shipping extends Component {
             </p>
           }
         </div>
-        {
+        {/* {
           !isPreview && <ProductPrice offerInfo={offerInfo} />
-        }
+        } */}
       </div>
     );
   }

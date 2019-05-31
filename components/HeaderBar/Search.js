@@ -76,7 +76,7 @@ class Search extends Component {
       return;
     }
     this.setState({
-      query: e.target.value.toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ').replace(/^\s+/g, ''),
+      query: e.target.value.replace(/^\s+/g, ''),
       searchInput: true,
       autoSearchValue: '',
     }, () => {
@@ -150,6 +150,7 @@ class Search extends Component {
     });
   }
 
+
   fetchSuggestions() {
     this.props.fetchSuggestions({ key: this.state.query.trim() });
   }
@@ -170,13 +171,14 @@ class Search extends Component {
           <Dropdown id="search-toggle" className={`${styles['cart-inn']} ${styles.width100}`}>
             <Dropdown.Toggle id="dropdown-custom-components">
               <div className={styles.overlap} tabIndex="0" onFocus={this.setSelectionRange}>
-                {query.length < 1 ? '' : (autoSearchValue || (suggestions.length > 0 && query === suggestions[0].data_edgengram.slice(0, query.length) ? suggestions[0].data_edgengram : ''))}
+                {(query && query.length) < 2 ? '' : (autoSearchValue || (suggestions.length > 0 && query.toLowerCase() === suggestions[0].data_edgengram.slice(0, query.length).toLowerCase() ? (query.concat(suggestions[0].data_edgengram.substring(query.length))) : ''))}
               </div>
               <SearchContext.Consumer>
                 {context => (
                   <input
                     className={styles['search-input']}
                     id="text-box"
+                    autoComplete={false}
                     placeholder={SEARCH_PAGE.SEARCH_YOUR_FAV_ITEM}
                     onChange={this.onChangeSearchInput}
                     value={(context === 'search') || searchInput ? query : ''}

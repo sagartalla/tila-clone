@@ -48,7 +48,7 @@ const Order = ({ order }) => {
         <div>
           <span>{ORDERS.SHIPPING_TO}</span>
           <div className={`${styles['flex']}`}>
-            <span className={`${styles['link-text']} ${styles['text-capitalize']}`}>{order.shippingTo.name}</span>
+            <span className={`${styles['text-capitalize']}`}>{order.shippingTo.name}</span>
             <OverlayTrigger placement="bottom" overlay={popover}>
               <span className={styles['ml-10']}>
                 <SVGComponent clsName={`${styles['down-arrow']}`} src="icons/down-arrow/down-arrow" />
@@ -57,7 +57,7 @@ const Order = ({ order }) => {
           </div>
         </div>
         <div>
-          <a href={`/${country}/${language}/cam/orders/${order.id}`} className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['text-uppercase']}`}>
+          <a href={`/${country}/${language}/cam/orders/${order.id}`} className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['left-radius']} ${styles['text-uppercase']}`}>
             {ORDERS.TRACK_ORDER}
           </a>
         </div>
@@ -89,7 +89,7 @@ const Order = ({ order }) => {
             </span>
           </div>
           <a href={`/${country}/${language}/help/answers/orders#${order.id}`}>
-            <span className={`${styles['thick-blue']} ${styles['p-5']} ${styles['flex-center']} ${styles['ml-10']} ${styles.border} ${styles['border-radius4']}`}>
+            <span className={`${styles['p-5']} ${styles['black-color']} ${styles['flex-center']} ${styles['ml-10']}`}>
               <SVGComponent clsName={`${styles['help-icon']}`} src="icons/help-icon/help" />
             &nbsp;&nbsp;{ORDERS.NEED_HELP}?
             </span>
@@ -99,7 +99,7 @@ const Order = ({ order }) => {
         <Col md={5} className={styles['pl-0']}>
           <div className={`${styles['flx-space-bw']}`}>
             <span className={`${styles['flex']}`}>
-              <span className={styles['link-text']}>{ORDERS.REQUEST_INVOICE}&nbsp;</span>
+              <span>{ORDERS.REQUEST_INVOICE}&nbsp;</span>
               <span>
                 <SVGComponent clsName={`${styles['down-arrow']}`} src="icons/down-arrow/down-arrow" />
               </span>

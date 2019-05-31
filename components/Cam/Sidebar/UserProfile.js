@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux';
 import generateURL from '../../../utils/urlGenerator';
 import { toast } from 'react-toastify';
 import lang from '../../../utils/language';
-
+import SVGComponent from '../../common/SVGComponet';
 import main_en from '../../../layout/main/main_en.styl';
 import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from './sidebar_en.styl';
@@ -79,7 +79,7 @@ class UserProfile extends React.Component {
     if (this.state.imgUrl) {
       imagePreview = (<img className={styles['prev-img']} src={this.state.imgUrl} />);
     } else {
-      imagePreview = (<div className={styles['edit-icon']}>Click to upload image</div>)
+      imagePreview = (<div className={styles['edit-icon']}><SVGComponent clsName={`${styles['profile-edit-icon']}`} src="icons/profile-camera" /></div>)
     }
     let full_name = first_name || last_name ? first_name + " " + last_name : "";
     let name = full_name ? (full_name.length < 20 ? full_name : (full_name.slice(0, 20) + "...")) : "";

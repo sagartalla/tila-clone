@@ -87,8 +87,7 @@ class OrderTracker extends React.Component {
             <div className={`${styles['border-b']} ${styles['p-20']} ${styles['pl-40']}`}>
               {showMsgAndDate}
             </div>
-
-            <ul className={`${styles['state-times']}`}>
+            <ul className={`${styles['state-times']} ${styles['scroll']}`}>
               {orderItem.state_time_estimates.length > 0 &&
                 orderItem.state_time_estimates.map(estimate => (
                   <li>
