@@ -77,7 +77,7 @@ class SortByWidget extends Component {
             </Dropdown.Toggle>
             <Dropdown.Menu className={`${styles.width100} ${styles['p-0']} ${styles['m-0']} ${styles['sort-drop-down']}`}>
               {sortValues.map((value, index) => (
-                  <MenuItem className={styles['search-suggestion']} data={value.text} value={value.value} onClick={this.sortSelect} eventKey={index + 1}>
+                  <MenuItem className={styles['search-suggestion']} data={value.text} value={value.value} onClick={this.sortSelect} eventKey={index + 1} key={value.value}>
                     <a className={`${styles['black-color']}`}>
                       <span>{value.text}</span>
                     </a>

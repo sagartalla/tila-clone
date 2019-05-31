@@ -209,8 +209,8 @@ const AddressNew = (props) => {
             </div>
           </Col>
           <Col md={12} sm={12} xs={12} className={styles['m-flx']}>
-            <Button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-x-large']} ${styles['m-fs-11']} ${styles['m-pad-10']}`} onClick={saveBtnClickHandler} > {DELIVERY_ADDR_PAGE.SAVE_DELIVER_BTN} </Button>
-            <Button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['m-fs-11']} ${styles['ml-10']} ${styles['m-pad-10']}`} onClick={resetAddAdrressForm}>{DELIVERY_ADDR_PAGE.CANCEL}</Button>
+            <Button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-x-large']} ${styles['m-fs-11']} ${styles['text-uppercase']} ${styles['left-radius']} ${styles['m-pad-10']}`} onClick={saveBtnClickHandler} > {DELIVERY_ADDR_PAGE.SAVE_DELIVER_BTN} </Button>
+            <Button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['m-fs-11']} ${styles['ml-10']} ${styles['text-uppercase']} ${styles['left-radius']} ${styles['m-pad-10']}`} onClick={resetAddAdrressForm}>{DELIVERY_ADDR_PAGE.CANCEL}</Button>
           </Col>
         </Row>
       </div>

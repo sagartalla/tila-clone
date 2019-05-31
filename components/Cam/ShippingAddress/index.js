@@ -446,7 +446,7 @@ class ShippingAddress extends Component {
                 {
                   standalone !== true ?
                     <Col md={12} sm={12} xs={12} className={`${styles['pl-15']}`}>
-                      <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['add-button']}`} disabled={cartResults.cart_shippable !== undefined && !cartResults.cart_shippable} onClick={handleShippingAddressContinue}>{DELIVERY_ADDR_PAGE.CONTINUE}</button>
+                      <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-x-large']} ${styles['left-radius']} ${styles['text-uppercase']} ${styles['add-button']}`} disabled={cartResults.cart_shippable !== undefined && !cartResults.cart_shippable} onClick={handleShippingAddressContinue}>{DELIVERY_ADDR_PAGE.CONTINUE}</button>
                     </Col>
                     : null
                 }

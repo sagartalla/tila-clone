@@ -64,7 +64,7 @@ class SignIn extends Component {
           {props.login.username ?
           <Col md={4} sm={12} xs={12} className={styles['t-rt']}>
             <span className={`${styles['light-gry-clr']} ${styles.fontW600}`}>{props.login.username}&emsp;</span>
-            <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']}`} onClick={props.onClickEdit}>
+            <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['left-radius']} ${styles['text-uppercase']}`} onClick={props.onClickEdit}>
               {CONTACT_INFO_MODAL.EDIT}
             </button>
           </Col> : null
@@ -80,8 +80,8 @@ class SignIn extends Component {
                   {([handleSocialLogin]) => {
                     return (
                       <React.Fragment>
-                        <button onClick={handleSocialLogin('facebook')} className={`${styles['fp-btn']} ${styles['mb-20']} ${styles['fp-btn-primary']} ${styles['facebook-btn']}`}>{PAYMENT_PAGE.SIGN_IN_WITH_FACEBOOK}</button>
-                        <button onClick={handleSocialLogin('google')} className={`${styles['fp-btn']} ${styles['mb-20']} ${styles['fp-btn-danger']} ${styles['google-btn']}`}>{PAYMENT_PAGE.SIGN_IN_WITH_GOOGLE}</button>
+                        <button onClick={handleSocialLogin('facebook')} className={`${styles['fp-btn']} ${styles['mb-20']} ${styles['fp-btn-primary']} ${styles['right-radius']} ${styles['facebook-btn']}`}>{PAYMENT_PAGE.SIGN_IN_WITH_FACEBOOK}</button>
+                        <button onClick={handleSocialLogin('google')} className={`${styles['fp-btn']} ${styles['mb-20']} ${styles['fp-btn-danger']} ${styles['right-radius']} ${styles['google-btn']}`}>{PAYMENT_PAGE.SIGN_IN_WITH_GOOGLE}</button>
                       </React.Fragment>
                     );
                   }}
@@ -126,7 +126,7 @@ class SignIn extends Component {
               <div className={`${styles['mt-10']} ${styles['mb-10']}`}>
                 <input type="checkbox" defaultChecked="true" /> {PAYMENT_PAGE.AGREE_TO} <a onClick={this.tcToggle}>{PAYMENT_PAGE.TC}</a> {PAYMENT_PAGE.AND} <a onClick={this.privacyToggle}>{PAYMENT_PAGE.PRIVACY_POLICY}</a>
               </div>
-              <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles.fontW600} ${styles['text-uppercase']}`} onClick={props.showAddressTab}>{PAYMENT_PAGE.CONTINUE}</button>
+              <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles.fontW600} ${styles['text-uppercase']} ${styles['left-radius']}`} onClick={props.showAddressTab}>{PAYMENT_PAGE.CONTINUE}</button>
               {
                 props.signInLoader ? <span> {PAYMENT_PAGE.PLEASE_WAIT}...</span> : null
               }
