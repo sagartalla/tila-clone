@@ -50,7 +50,7 @@ class Button extends Component {
       showImage ?
         <div className={`${styles.flex} ${styles['align-start']}`}>
           <SVGCompoent clsName={`${styles['image-icon']}`} src={showImage} />
-          <span>{btnText}</span>
+          <span className={`${styles['pl-5']}`}>{btnText}</span>
         </div> :
     btnText}
   </button>

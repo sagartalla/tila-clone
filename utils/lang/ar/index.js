@@ -154,6 +154,7 @@ export const AR_KEYWORDS = {
     MOBILE_NUMBER: 'رقم الجوال',
     NOT_SHIPPABLE: 'Not Shippable',
     UNFORTUNATELY_WE_CANNOT_DELIVER_REMOVE_ITEM: 'للأسف ، لا يمكننا تسليم بعض المنتجات إلى العنوان الذي حددته. يرجى إزالة المنتج من سلة التسوق الصغيرة على اليمين ، أو تغيير عنوان التسليم للمتابعة.',
+    LOCATE_ME: 'تحديد موقع لي  ',
   },
   WISH_LIST_PAGE: {
     WISHLIST_HEADER: 'المنتجات الموجوده في قائمة المفضلة',
