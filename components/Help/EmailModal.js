@@ -138,7 +138,8 @@ class EmailModal extends Component {
         },
         "text": this.state.msg
       },
-      "category": { "id": this.state.selectedIssue.catId },
+      "channel": { "id": 9},
+      ...(this.state.selectedIssue.catId && {"category": { "id": this.state.selectedIssue.catId }}),
       "customFields": {
         "c": {
           "incident_source_country": { "id": country },
