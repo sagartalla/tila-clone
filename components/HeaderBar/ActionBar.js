@@ -25,6 +25,7 @@ import main_en from '../../layout/main/main_en.styl';
 import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './header_en.styl';
 import styles_ar from './header_ar.styl';
+import ProfilePic from '../Cam/Sidebar/ProfilePic';
 
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
@@ -205,7 +206,8 @@ class ActionBar extends Component {
             <Dropdown.Menu className={`${styles.item}`}>
               <div className={styles['profile-part']}>
                 <div className={`${styles['flex-center']} ${styles['ple-icon']}`}>
-                  <span className={styles.icon} />
+                  {/* <span className={styles.icon} /> */}
+                  {/* <ProfilePic /> */}
                   <span className={styles['pl-15']}>{HEADER_PAGE.HELLO} {userInfo.personalInfo.first_name || `${HEADER_PAGE.TILA_CUSTOMER}` }</span>
                 </div>
                 <ul className={`${styles['pl-0']} ${styles['profile-inn']}`}>
