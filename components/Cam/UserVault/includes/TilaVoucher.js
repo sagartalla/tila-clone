@@ -42,7 +42,9 @@ const TilaVoucher = (props) => {
                     <Col md={2}>
                         Added
                     </Col>
-                    <Col md={2} />
+                    <Col md={2}>
+                        Used
+                    </Col>
                     <Col md={2}>
                         Balance
                     </Col>

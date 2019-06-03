@@ -36,7 +36,7 @@ const personalDetailsReducer = typeToReducer({
           ...passResetStatus,
         },
         ui: {
-          loading: true,
+          loading: false,
         },
       };
       return newState;
@@ -57,7 +57,7 @@ const personalDetailsReducer = typeToReducer({
           ...uploadPicStatus,
         },
         ui: {
-          loading: true
+          loading: false
         },
       };
       return newState;
@@ -101,7 +101,7 @@ const personalDetailsReducer = typeToReducer({
           ...action.payload,
         },
         ui: {
-          loading: true,
+          loading: false,
         },
       };
       return newState;
