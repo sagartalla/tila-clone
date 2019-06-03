@@ -161,6 +161,8 @@ export const EN_KEYWORDS = {
     MOBILE_NUMBER: 'Mobile Number',
     NOT_SHIPPABLE: 'Not Shippable',
     UNFORTUNATELY_WE_CANNOT_DELIVER_REMOVE_ITEM: 'Unfortunately, we cannot deliver Some of the item(s) to your selected Address. Please remove the item from your mini cart on the right, or change the delivery address to continue.',
+    NO_DELIVER_ADDRESS_TITLE: 'Where are all the saved addresses?',
+    NO_DELIVERY_ADDRESS_LABEL: 'Do tell us where you stay for faster Delivery',
   },
   WISH_LIST_PAGE: {
     WISHLIST_HEADER: 'items in wishlist',
@@ -169,6 +171,9 @@ export const EN_KEYWORDS = {
     FROM_YOUR_WISHLIST: 'From Your Wishlist',
     WHEN_ADDED_TO_WISHLIST: 'when added to Wish List',
     ITEM_WAS: 'Item was',
+    NO_WISHLIST_LABEL: 'So many products on Tila and yet you show no love :(',
+    DONT_WAIT: 'Dont wait no more!',
+    START_SHOPPING: 'Start shopping',
   },
   PDP_PAGE: {
     LOADING_REVIEWS: 'Loading Reviews...',
@@ -288,6 +293,9 @@ export const EN_KEYWORDS = {
     EXPIRY_MONTH: 'Expiry Month',
     EXPIRY_YEAR: 'Expiry Year',
     YOUR_TILA_CREDIT_BALANCE_IS: 'Your Tila credit Balance is',
+    NO_CART_LABEL: 'Where are all the saved Cards?',
+    NO_CARD_LABEL: 'Save your cards for faster checkouts.',
+    NO_VOCHER_LABEL: 'Save your cards for faster checkouts.',
   },
   // new page
   THANK_YOU_PAGE: {
@@ -677,6 +685,9 @@ export const EN_KEYWORDS = {
     ORDER_TOTAL: 'Order Total',
     NEED_HELP: 'Need Help',
     ORDER: 'ORDER #',
+    NO_WISHLIST_LABEL: 'You don’t have any orders yet',
+    DONT_WAIT: 'Dont wait no more!',
+    START_SHOPPING: 'Start shopping',
   },
   BETA: {
     BETA: 'beta',
@@ -750,5 +761,7 @@ export const EN_KEYWORDS = {
     RATED_REVIEWS: 'You have Rated & Reviewed',
     ITEMS: 'items',
     WRITE_A_REVIEW: 'Write a review',
+    NO_REVIEW_TITLE: 'Nothing here but me :(',
+    NO_REVIEW_LABEL: 'No reviews to show yet. Check back later',
   },
 };

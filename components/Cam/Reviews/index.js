@@ -46,7 +46,16 @@ class Reviews extends React.Component {
 
   render() {
     const { userReviews } = this.props;
-    return (
+    return (userReviews.length === 0 ?
+      (
+        <div className={styles['no-review-icon']}>
+          <div className={`${styles['flex']} ${styles['no-review-icon-inn']}`}>
+            <SVGCompoent clsName={`${styles['no-review-list-icon']}`} src="icons/common-icon/no-review-icon" />
+            <h4 className={`${styles['fs-26']} ${styles['t-c']} ${styles['pt-40']}`}>{REVIEWS.NO_REVIEW_TITLE}</h4>
+            <span className={`${styles['thick-gry-clr']} ${styles['pb-30']}`}>{REVIEWS.NO_REVIEW_LABEL}</span>
+          </div>
+        </div>
+      ) :
       <div className={`${styles.box} ${styles.flex} ${styles['flex-colum']} ${styles['my-review']}`}>
         <div className={`${styles['p-20-40']} ${styles['my-review-head']} ${styles['flex-center']}`}>
           <div className={`${styles.flex}`}>
