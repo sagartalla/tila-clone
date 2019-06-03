@@ -484,6 +484,8 @@ export const EN_KEYWORDS = {
     POLICY: 'POLICY',
     TERMS_CONDITION: 'User Terms and Conditions',
     REFUND_POLICY: 'Return and Exchange Policy',
+    CANCELLATION_POLICY: 'Cancellation Policy',
+    PRIVACY_POLICY: 'Privacy Policy',
     WARRENTY_POLICY: 'Warranty Policy',
     SHIPPING_POLICY: 'Shipping Policy ',
     SELL_ON_TILA: 'Selling on TiLa.com',
