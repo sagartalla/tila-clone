@@ -25,6 +25,7 @@ class UserProfile extends React.Component {
     this.state = {
       imgUrl: null,
       imgDocumentID: null,
+      loader: false,
     }
   }
 
@@ -44,9 +45,15 @@ class UserProfile extends React.Component {
         })
       })
     }
-    if (nextProps.getPictureDocumentId === this.props.getPictureDocumentId) {
-      return;
+    if((nextProps.loadingStatus !== this.props.loadingStatus)){
+      this.setState({
+        loader: nextProps.loadingStatus,
+      })
     }
+    
+    // if (nextProps.getPictureDocumentId === this.props.getPictureDocumentId) {
+    //   return;
+    // }
     if (nextProps.userInfo.personalInfo && Object.keys(nextProps.userInfo.personalInfo).length > 0 && this.state.imgDocumentID === null) {
       this.setState({
         imgDocumentID: image_url
@@ -71,13 +78,16 @@ class UserProfile extends React.Component {
 
   render() {
     const { props } = this;
-    const { query } = props;
+    const { query, userInfo } = props;
     const { tabDetails } = query;
     const { first_name, last_name } = props.userInfo.personalInfo;
     const [tab, ...queryParams] = tabDetails ? tabDetails.split('/') : [];
     let imagePreview = null;
-    if (this.state.imgUrl) {
-      imagePreview = (<img className={styles['prev-img']} src={this.state.imgUrl} />);
+    if(this.state.loader || (userInfo.personalInfo.image_url && props.imgUrl===null)){
+      imagePreview=<div className={styles['edit-icon']}>huha</div>
+    }
+    else if (props.imgUrl) {
+      imagePreview = (<img className={styles['prev-img']} src={props.imgUrl} />);
     } else {
       imagePreview = (<div className={styles['edit-icon']}><SVGComponent clsName={`${styles['profile-edit-icon']}`} src="icons/profile-camera" /></div>)
     }
@@ -107,7 +117,8 @@ class UserProfile extends React.Component {
 }
 const mapStateToProps = (store) => ({
   userInfo: selectors.getUserInfo(store),
-  getPictureDocumentId: selectors.getPictureDocumentId(store)
+  getPictureDocumentId: selectors.getPictureDocumentId(store),
+  loadingStatus: selectors.getLoadingStatus(store),
 });
 
 const mapDispatchToProps = (dispatch) =>

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import constants from '../../helper/constants';
+import generateURL from '../../../utils/urlGenerator';
 
 const getUserProfileInfo = () => {
   return Promise.all([
@@ -12,6 +13,12 @@ const getUserProfileInfo = () => {
     }
   })
 };
+
+const downloadPic = (imageId) => {
+  return generateURL(imageId).then((data)=>{
+    return data;
+  })
+}
 
 const uploadProfilePic = (body) => {
   return axios.request({
@@ -82,5 +89,5 @@ const deactivateUserProfile = () =>
 
 export default {
   getUserProfileInfo, changePassword, uploadProfilePic, forgotPassword, editPersonalInfo,
-  deactivateUserProfile, resetPassword, otpUserUpdate, verifyOtp,sendOtpToMobile
+  deactivateUserProfile, resetPassword, otpUserUpdate, verifyOtp,sendOtpToMobile, downloadPic
 };
