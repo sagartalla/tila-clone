@@ -20,8 +20,9 @@ import styles_ar from './index_ar.styl';
 const allStyles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const config = getConfig();
-const isLocal = config.publicRuntimeConfig.isLocal;
+const isLocal = false; //config.publicRuntimeConfig.isLocal;
 const env = config.publicRuntimeConfig.env
+const random = Math.floor(Math.random()*100);
 
 /*
 import Fashion from './includes/Fashion';
@@ -56,8 +57,8 @@ const getURl = (page) => {
               };
           case 'preprod':
               return {
-                JS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/fashion/preprod/index.js',
-                CSS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/fashion/preprod/style.css',
+                JS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/fashion/preprod/index.js?r=' + random,
+                CSS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/fashion/preprod/style.css?r=' + random,
               };
         }
         break;
@@ -71,8 +72,8 @@ const getURl = (page) => {
               };
           case 'preprod':
               return {
-                JS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/electronics/preprod/index.js',
-                CSS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/electronics/preprod/style.css',
+                JS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/electronics/preprod/index.js?r=' + random,
+                CSS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/electronics/preprod/style.css?r=' + random,
               };
         }
         break;
@@ -86,8 +87,8 @@ const getURl = (page) => {
               };
           case 'preprod':
               return {
-                JS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/lifestyle/preprod/index.js',
-                CSS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/lifestyle/preprod/style.css',
+                JS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/lifestyle/preprod/index.js?r=' + random,
+                CSS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/lifestyle/preprod/style.css?r=' + random,
               };
         }
         break;
@@ -101,8 +102,8 @@ const getURl = (page) => {
               };
           case 'preprod':
               return {
-                JS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/homepage/preprod/index.js',
-                CSS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/homepage/preprod/style.css',
+                JS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/homepage/preprod/index.js?r=' + random,
+                CSS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/homepage/preprod/style.css?r=' + random,
               };
         }
 

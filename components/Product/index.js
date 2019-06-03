@@ -179,7 +179,7 @@ const getProductComponent = (isPreview, taskCode) => {
             <div className={`${styles.relative}`}>
               <div className={`${styles['page-details-slider']}`}>
                 <Row className={`${styles['m-0']} ${styles['ht-100per']}`}>
-                  <Col xs={12} md={8} sm={12} className={`${styles['pl-0']} ${styles['ht-100per']} ${styles['pdp-img-prt']}`}>
+                  <Col xs={12} md={8} sm={12} className={`${styles['pl-0']} ${styles['pdp-img-prt']}`}>
                     <NoSSR>
                       <Display
                         product_id={product_id}
@@ -212,7 +212,8 @@ const getProductComponent = (isPreview, taskCode) => {
                           isPreview ? null : <Shipping shippingInfo={shippingInfo} returnInfo={returnInfo} offerInfo={offerInfo} warranty={warranty} />
                         }
                         {isPreview ? null :
-                          (shippingInfo === null || shippingInfo.shippable) &&
+                          (shippingInfo === null || shippingInfo.shippable)
+                            ?
                             <AddToCart
                               offerInfo={offerInfo}
                               productData={productData.product_id}
@@ -221,9 +222,12 @@ const getProductComponent = (isPreview, taskCode) => {
                               styling={positionStyle || defaultPosition}
                               top={positionStyle === 'absolute-style' ?  positionTop : null}
                             />
+                            :
+                            null
                         }
-                        {
-                          (offerInfo.stockError || offerInfo.availabilityError) && (Object.keys(shippingInfo).length === 0 || shippingInfo.shippable) &&
+
+                        {isPreview ? null :
+                          (offerInfo.stockError || offerInfo.availabilityError) && ((shippingInfo && Object.keys(shippingInfo).length === 0) || (shippingInfo === null || shippingInfo.shippable)) &&
                           <div className={`${styles['flx-space-bw']} ${styles['align-baseline']}`}>
                             {!userDetails.isLoggedIn &&
                             <div className={`${styles['mb-0']} ${styles['fp-input']} ${styles['pb-10']}`}>
@@ -262,7 +266,7 @@ const getProductComponent = (isPreview, taskCode) => {
                     }
                     </Col> */}
                     <Col md={8}>
-                      <ElectronicsTab titleInfo={titleInfo} catalog={catalog} catalogObj={catalogObj} productDescription={productDescription} />
+                      <ElectronicsTab titleInfo={titleInfo} isPreview={isPreview} catalog={catalog} catalogObj={catalogObj} productDescription={productDescription} />
                     </Col>
                   </Row>
                 </Grid>

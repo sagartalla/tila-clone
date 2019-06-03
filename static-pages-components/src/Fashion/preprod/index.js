@@ -3,14 +3,14 @@ const Fashion = () => (
   <div className="fashion-main-part">
     <Grid fluid={true} className={styles['p-0']}>
       <div className={`${styles['flex']} fashion-banner-main ${styles['relative']}`}>
-        <a href="/SAU/en/srp?search=dress&language=en&isListed=false">
-          <img src="/static/img/landing-page-fashion/fashion-banner.png" className="img-responsive" />
+        <a href="/SAU/en/srp?search=dress&isListed=false">
+          <img src={`/static/img/landing-page-fashion/${lang === 'en' ? 'womens-clothing' : 'womens-clothing-ar'}.jpg`} className="img-responsive" />
         </a>
-        <div className={`${styles['absolute']} ${styles['flex']} ${styles['flex-colum']} banner-label`}>
+        {/* <div className={`${styles['absolute']} ${styles['flex']} ${styles['flex-colum']} banner-label`}>
           <span className={`main-quation ${styles['fs-44']}`}>Up to 50% Off on Party Dresses</span>
           <span className={`banner-dec ${styles['fs-16']}`}>“You can have anything you want in life if you dress for it.”</span>
           <span className={`${styles['pt-25']} shop-now-btn`}><a className={`${styles['fs-12']} ${styles['fontW600']} ${styles['border-radius4']}`}>SHOP NOW</a></span>
-        </div>
+        </div> */}
       </div>
     </Grid>
     <Grid>
@@ -94,13 +94,13 @@ const Fashion = () => (
         <div>
           <Col md={6} className={`${styles['pl-0']} ${styles['pr-10']}`}>
             <Col md={8} className={`${styles['pl-0']} ${styles['pr-10']}`}>
-              <a href="/SAU/en/srp?search=rainware&language=en&isListed=false">
+              <a href="/SAU/en/srp?search=rainware&isListed=false">
                 <img src="/static/img/landing-page-fashion/what-new.jpg" className="img-responsive" />
               </a>
             </Col>
             <Col md={4} className={`${styles['pl-0']} ${styles['pr-10']}`}>
               <div className="chinos-part">
-                <a href="/SAU/en/srp?search=Chinos&language=en&isListed=false">
+                <a href="/SAU/en/srp?search=Chinos&isListed=false">
                   <img src="/static/img/landing-page-fashion/what-new1.jpg" className="img-responsive" />
                 </a>
                 <div className={`${styles['bg-white']} chinos-part-inn`}>
@@ -146,7 +146,7 @@ const Fashion = () => (
             </Col>
             <Col md={4} className={`${styles['pl-0']} ${styles['pr-10']}`}>
               <div className={`new-brands ${styles['pb-10']}`}>
-                <a href="/SAU/en/srp?search=Jewellery&language=en&isListed=false">
+                <a href="/SAU/en/srp?search=Jewellery&isListed=false">
                   <img src="/static/img/landing-page-fashion/what-new5.jpg" className="img-responsive" />
                 </a>
                 <div className={`${styles['bg-white']} chinos-part-inn`}>
@@ -157,7 +157,7 @@ const Fashion = () => (
             </Col>
             <Col md={4} className={`${styles['pl-0']} ${styles['pr-10']}`}>
               <div className={`new-brands ${styles['pb-10']}`}>
-                <a href="/SAU/en/srp?search=Handbags&language=en&isListed=false">
+                <a href="/SAU/en/srp?search=Handbags&isListed=false">
                   <img src="/static/img/landing-page-fashion/what-new6.jpg" className="img-responsive" />
                 </a>
                 <div className={`${styles['bg-white']} chinos-part-inn`}>
@@ -216,7 +216,7 @@ const Fashion = () => (
                 </div>
               </div>
               <div>
-                <a href="/SAU/en/srp?search=Handbags&language=en&isListed=false">
+                <a href="/SAU/en/srp?search=Handbags&isListed=false">
                   <img src="/static/img/landing-page-fashion/what-new6.jpg" className="img-responsive" />
                 </a>
                 <div className={`${styles['bg-white']} chinos-part-inn`}>
@@ -237,7 +237,7 @@ const Fashion = () => (
           <Col md={2} className={`${styles['pl-0']} ${styles['pr-10']}`}>
             <div className={`${styles['flex-center']}  ${styles['flex-colum']} ${styles['bg-white']} top-brand-part-inn ${styles['border-radius4']}`}>
               <div className={`canvali-logo ${styles['flex-center']}`}>
-                <a href="/SAU/en/srp?search=just%20cavalli&language=en&isListed=false">
+                <a href="/SAU/en/srp?search=just%20cavalli&isListed=false">
                   <img src="/static/img/landing-page-fashion/top-brands1.jpg" className="img-responsive" />
                 </a>
               </div>
@@ -255,7 +255,7 @@ const Fashion = () => (
           <Col md={2} className={`${styles['pl-0']} ${styles['pr-10']}`}>
             <div className={`${styles['flex-center']}  ${styles['flex-colum']} ${styles['bg-white']} top-brand-part-inn ${styles['border-radius4']}`}>
               <div className={`dg-logo ${styles['flex-center']}`}>
-                <a href="/SAU/en/srp?search=DOLCE%20&%20GABBANA&language=en&isListed=false">
+                <a href="/SAU/en/srp?search=DOLCE%20&%20GABBANA&isListed=false">
                   <img src="/static/img/landing-page-fashion/top-brands2.jpg" className="img-responsive" />
                 </a>
               </div>
@@ -273,7 +273,7 @@ const Fashion = () => (
           <Col md={2} className={`${styles['pl-0']} ${styles['pr-10']}`}>
             <div className={`${styles['flex-center']}  ${styles['flex-colum']} ${styles['bg-white']} top-brand-part-inn ${styles['border-radius4']}`}>
               <div className={`dg-logo ${styles['flex-center']}`}>
-                <a href="/SAU/en/srp?search=gg&language=en&isListed=false">
+                <a href="/SAU/en/srp?search=gg&isListed=false">
                   <img src="/static/img/landing-page-fashion/top-brands3.jpg" className="img-responsive" />
                 </a>
               </div>
@@ -291,7 +291,7 @@ const Fashion = () => (
           <Col md={2} className={`${styles['pl-0']} ${styles['pr-10']}`}>
             <div className={`${styles['flex-center']}  ${styles['flex-colum']} ${styles['bg-white']} top-brand-part-inn ${styles['border-radius4']}`}>
               <div className={`guc-logo ${styles['flex-center']}`}>
-                <a href="/SAU/en/srp?search=gucci&language=en&isListed=false">
+                <a href="/SAU/en/srp?search=gucci&isListed=false">
                   <img src="/static/img/landing-page-fashion/top-brands5.jpg" className="img-responsive" />
                 </a>
               </div>
