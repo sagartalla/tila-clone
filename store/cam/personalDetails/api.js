@@ -2,6 +2,7 @@ import axios from 'axios';
 import constants from '../../helper/constants';
 import { toast } from 'react-toastify';
 import { languageDefinations } from '../../../utils/lang/';
+import generateURL from '../../../utils/urlGenerator';
 
 const { PERSONAL_INFO_MODAL } = languageDefinations();
 const getUserProfileInfo = () => {
@@ -15,6 +16,12 @@ const getUserProfileInfo = () => {
     }
   })
 };
+
+const downloadPic = (imageId) => {
+  return generateURL(imageId).then((data)=>{
+    return data;
+  })
+}
 
 const uploadProfilePic = (body) => {
   return axios.request({
@@ -87,5 +94,5 @@ const deactivateUserProfile = () =>
 
 export default {
   getUserProfileInfo, changePassword, uploadProfilePic, forgotPassword, editPersonalInfo,
-  deactivateUserProfile, resetPassword, otpUserUpdate, verifyOtp,sendOtpToMobile
+  deactivateUserProfile, resetPassword, otpUserUpdate, verifyOtp,sendOtpToMobile, downloadPic
 };

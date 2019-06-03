@@ -33,6 +33,13 @@ class Cam extends React.Component {
     this.props.getUserProfileInfo();
   }
 
+  componentWillReceiveProps(nextProps){
+    if(nextProps.userInfo.personalInfo.image_url === this.props.userInfo.personalInfo.image_url){
+      return;
+    }
+    nextProps.userInfo.personalInfo.image_url && this.props.downloadPic(nextProps.userInfo.personalInfo.image_url);
+  }
+
   render() {
     const { tabDetails, query } = this.props;
     const [tab, ...queryParams] = tabDetails ? tabDetails.split('/') : [];
@@ -70,7 +77,7 @@ class Cam extends React.Component {
             <Grid>
               <Row className={styles['pt-30']}>
                 <Col xs={12} md={3} sm={3} className={`${styles['pr-0']} ${styles['sidebar-position']}`}>
-                  <Sidebar query={query} />
+                  <Sidebar query={query} imgUrl={this.props.imgSource}/>
                 </Col>
                 <Col xs={12} md={9} sm={9}>
                   {camComponent}
@@ -89,12 +96,14 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       getUserProfileInfo: actionCreators.getUserProfileInfo,
+      downloadPic: actionCreators.downloadPic
     },
     dispatch,
   );
 
 const mapStateToProps = store => ({
   userInfo: selectors.getUserInfo(store),
+  imgSource: selectors.getImageSource(store),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cam);

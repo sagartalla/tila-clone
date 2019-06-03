@@ -21,8 +21,8 @@ class UserProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      imgUrl: null,
       imgDocumentID: null,
+      loader: false,
     }
   }
 
@@ -35,11 +35,9 @@ class UserProfile extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     const {image_url} = nextProps.userInfo.personalInfo;
-    if(image_url){
-      generateURL(image_url).then((data) => {
-        this.setState({
-          imgUrl: data
-        })
+    if((nextProps.loadingStatus !== this.props.loadingStatus)){
+      this.setState({
+        loader: nextProps.loadingStatus,
       })
     }
     if (nextProps.getPictureDocumentId === this.props.getPictureDocumentId) {
@@ -54,27 +52,32 @@ class UserProfile extends React.Component {
       this.setState({
         imgDocumentID: nextProps.getPictureDocumentId
       }, () => {
-        generateURL(this.state.imgDocumentID).then((data) => {
-          this.setState({
-            imgUrl: data,
-          })
           this.props.EditPersonalInfo({
             image_url: this.state.imgDocumentID, //As imgUrl is too long to store in image_url, storing documentID in image_url.
           })
         })
-      });
+      };
     }
-  }
 
   render() {
     const { props } = this;
-    const { query } = props;
+    const { query, userInfo } = props;
     const { tabDetails } = query;
     const { first_name, last_name } = props.userInfo.personalInfo;
-    const [tab, ...queryParams] = tabDetails ? tabDetails.split('/') : [];
+    const [tab] = tabDetails ? tabDetails.split('/') : [];
     let imagePreview = null;
-    if (this.state.imgUrl) {
-      imagePreview = (<img className={styles['prev-img']} src={this.state.imgUrl} />);
+    if(this.state.loader || (userInfo.personalInfo.image_url && props.imgUrl===null)){
+      imagePreview=
+              <div className={styles['loader-div']}>
+                <SVGComponent
+                  clsName={styles['loader-styl']}
+                  src="icons/common-icon/circleLoader"
+                >
+                </SVGComponent>
+              </div>
+    }
+    else if (props.imgUrl) {
+      imagePreview = (<img className={styles['prev-img']} src={props.imgUrl} />);
     } else {
       imagePreview = (<div className={styles['edit-icon']}><SVGComponent clsName={`${styles['profile-edit-icon']}`} src="icons/profile-camera" /></div>)
     }
@@ -104,7 +107,8 @@ class UserProfile extends React.Component {
 }
 const mapStateToProps = (store) => ({
   userInfo: selectors.getUserInfo(store),
-  getPictureDocumentId: selectors.getPictureDocumentId(store)
+  getPictureDocumentId: selectors.getPictureDocumentId(store),
+  loadingStatus: selectors.getLoadingStatus(store),
 });
 
 const mapDispatchToProps = (dispatch) =>
