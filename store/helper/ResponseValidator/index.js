@@ -68,7 +68,6 @@ function recurseAndCheckType(expectedFormat, exisitingFormat, canBeEmpty, isOpti
 
 const validate = (type, payload) => {
   stack = [];
-  // console.log('ResponseFormats[type]', ResponseFormats[type]);
   if(ResponseFormats[type]) {
     return recurseAndCheckType(ResponseFormats[type], payload);
   }

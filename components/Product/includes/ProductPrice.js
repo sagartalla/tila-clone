@@ -74,7 +74,7 @@ const ProductPrice = ({offerInfo}) => {
   const { price, listingAvailable, listingId, stockError, availabilityError, offerPricing } = offerInfo;
   console.log('offerPricing', offerPricing );
  return(
-  <div className={`${styles['p-10']} ${styles['product-price-bg']} ${styles['border-radius4']}`}>
+  <div className={`${styles['product-price-bg']} ${styles['border-radius4']}`}>
     {
       listingAvailable
       ?

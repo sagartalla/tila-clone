@@ -210,7 +210,7 @@ class ActionBar extends Component {
                 </div>
                 <ul className={`${styles['pl-0']} ${styles['profile-inn']}`}>
                   <li className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']}`}>
-                    <a href={`/${country}/${language}/cam`} className={styles['flex-center']}>
+                    <a href={`/${country}/${language}/cam/profile`} className={styles['flex-center']}>
                       <SVGComponent clsName={`${styles['profile-icon']}`} src="icons/profile-icons/round-profile" />
                       <span className={styles['pl-20']}>{HEADER_PAGE.MY_ACCOUNT}</span>
                     </a>

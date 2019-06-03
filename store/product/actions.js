@@ -15,37 +15,29 @@ const actions = {
 };
 
 const actionCreators = {
-  getProduct: (params) => {
-    return ({
-      type: actions.GET_PRODUCT,
-      payload: api.getProduct(params),
-    })
-  },
-  getPreview: (params) => {
-    return ({
-      type: actions.GET_PREVIEW,
-      payload: api.getPreview(params),
-    })
-  },
-  getRatingsAndReviews:(params) => {
-    return ({
-      type:actions.GET_REVIEW_RATINGS,
-      payload:api.getReviewRatings(params)
-    })
-  },
-  submitUserReview:(params) => {
-    return ({
-      type:actions.SUBMIT_USER_REVIEW,
-      payload:api.submitUserReview(params)
-    })
-  },
-  setSelectedVariant: (params) => ({
-    type:actions.SET_SELECTED_VARIANT,
-    payload:api.setSelectedVariant(params)
+  getProduct: params => ({
+    type: actions.GET_PRODUCT,
+    payload: api.getProduct(params),
   }),
-  setSelectedProductData: (params) => ({
+  getPreview: params => ({
+    type: actions.GET_PREVIEW,
+    payload: api.getPreview(params),
+  }),
+  getRatingsAndReviews: params => ({
+    type: actions.GET_REVIEW_RATINGS,
+    payload: api.getReviewRatings(params),
+  }),
+  submitUserReview: params => ({
+    type: actions.SUBMIT_USER_REVIEW,
+    payload: api.submitUserReview(params),
+  }),
+  setSelectedVariant: params => ({
+    type: actions.SET_SELECTED_VARIANT,
+    payload: api.setSelectedVariant(params),
+  }),
+  setSelectedProductData: params => ({
     type: actions.SET_SELECTED_PRODUCT_DATA,
-    payload:params
+    payload: params,
   }),
   track: params => (dispatch, getState) => {
     const state = getState();
@@ -55,23 +47,18 @@ const actionCreators = {
       payload: api.track(params),
     };
   },
-
   getCountries: () => ({
     type: actions.GET_COUNTRIES,
     payload: api.getCountries(),
   }),
-  getCitiesByCountryCode: (code) => {
-    return ({
-      type: actions.GET_CITIES,
-      payload: api.getCities(code),
-    });
-  },
-  autoCompleteCity: (searchKeyWord) => {
-    return ({
-      type: actions.AUTOCOMPLETE_CITY,
-      searchKeyWord,
-    });
-  },
+  getCitiesByCountryCode: code => ({
+    type: actions.GET_CITIES,
+    payload: api.getCities(code),
+  }),
+  autoCompleteCity: searchKeyWord => ({
+    type: actions.AUTOCOMPLETE_CITY,
+    searchKeyWord,
+  }),
   autoCompleteCoutry: searchKeyWord => ({
     type: actions.AUTOCOMPLETE_COUNTRY,
     searchKeyWord,

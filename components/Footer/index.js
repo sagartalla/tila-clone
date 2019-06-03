@@ -13,32 +13,32 @@ import styles_ar from './footer_ar.styl';
 
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
-const f = [{"Women's Clothing":	"https://storefront-stage.fptechscience.com/srp/Clothing-910?categoryTree=true&isListed=false"},
-{"Men's Clothing":	"https://storefront-stage.fptechscience.com/srp/Clothing-899?categoryTree=true&isListed=false"},
-{"Kids Clothing":	"https://storefront-stage.fptechscience.com/srp?isListed=false&language=en&search=Kids"},
-{"Watches":	"https://storefront-stage.fptechscience.com/srp/watches-1128/?isListed=false&language=en&search=Watch"},
-{"Jewellery":	"https://storefront-stage.fptechscience.com/srp?isListed=false&language=en&search=Jewellery"},
-{"Men's Footwear":	"https://storefront-stage.fptechscience.com/srp/Footwear-921?categoryTree=true&isListed=false&language=en"},
-{"Women's Footwear":	"https://storefront-stage.fptechscience.com/srp/Footwear-921?categoryTree=true&isListed=false&language=en"},
-{"Bags":	"https://storefront-stage.fptechscience.com/srp/Backpack-926?categoryTree=true&isListed=false&language=en"}];
+const f = [{"Women's Clothing":	"/SAU/en/srp/clothing?categoryTree=true&isListed=false&sid=892,910"},
+{"Men's Clothing":	"SAU/en/srp/clothing?categoryTree=true&isListed=false&sid=892,910"},
+{"Kids Clothing":	"/SAU/en/srp?search=kids%20clothing&language=en&isListed=false"},
+{"Watches":	"/SAU/en/srp/watch?categoryTree=true&isListed=false&sid=892,929"},
+{"Jewellery":	"/SAU/en/srp?search=jewellery&language=en&isListed=false"},
+{"Men's Footwear":	"/SAU/en/srp/footwear?categoryTree=true&isListed=false&sid=892,907"},
+{"Women's Footwear":	"/SAU/en/srp/footwear?categoryTree=true&isListed=false&sid=892,921"},
+{"Bags":	"/SAU/en/srp?search=bags&language=en&isListed=false"}];
 
-const e = [{"Mobiles":"https://storefront-stage.fptechscience.com/srp?search=Mobiles&language=en&isListed=false"},
-{"Tablets":"https://storefront-stage.fptechscience.com/srp/Tablets-877?categoryTree=true&isListed=false&language=en"},
-{"Laptops":"https://storefront-stage.fptechscience.com/srp/laptop-1173/?search=Laptops&language=en&isListed=false"},
-{"Home Appliances":"https://storefront-stage.fptechscience.com/srp?search=Home%20Appliances&language=en&isListed=false"},
-{"Cameras":"https://storefront-stage.fptechscience.com/srp?search=Camera&language=en&isListed=false"},
-{"Televisions":"https://storefront-stage.fptechscience.com/srp/Televisions-878?categoryTree=true&isListed=false"},
-{"Speakers":"https://storefront-stage.fptechscience.com/srp?isListed=false&language=en&search=Speaker"},
-{"Storage Devices":"https://storefront-stage.fptechscience.com/srp?search=Storage&language=en&isListed=false"}];
+const e = [{"Mobiles":"/SAU/en/srp/mobiles?categoryTree=true&isListed=false&sid=848,2349"},
+{"Tablets":"/SAU/en/srp/tablets?categoryTree=true&isListed=false&sid=848,2350"},
+{"Laptops":"/SAU/en/srp/laptops?categoryTree=true&isListed=false&sid=848,2352"},
+{"Home Appliances":"/SAU/en/srp/home-applaince?categoryTree=true&isListed=false&sid=932,935"},
+{"Cameras":"/SAU/en/srp/camera?categoryTree=true&isListed=false&sid=848,882"},
+{"Televisions":"/SAU/en/srp/televisions?categoryTree=true&isListed=false&sid=848,2351"},
+{"Speakers":"/SAU/en/srp?search=speakers&language=en&isListed=false"},
+{"Storage Devices":"/SAU/en/srp/external-hard-disks?categoryTree=true&isListed=false&sid=848,872,873"}];
 
-const l = [{"Travel Accessories":	"https://storefront-stage.fptechscience.com/srp?isListed=false&language=en&search=travel%20accessories"},
-{"Photo Frames":	"https://storefront-stage.fptechscience.com/srp?isListed=false&language=en&search=Photo%20Frames"},
-{"Lights":	"https://storefront-stage.fptechscience.com/srp?isListed=false&language=en&search=Lights"}];
+const l = [{"Travel Accessories":	"/SAU/en/srp?search=travel%20accessories&language=en&isListed=false"},
+{"Photo Frames":	"/SAU/en/srp?search=Photo%20Frame&language=en&isListed=false"},
+{"Lights":	"/SAU/en/srp?search=lights&language=en&isListed=false"}];
 
-const b = [{"Perfumes":	"https://storefront-stage.fptechscience.com/srp?disableSpellCheck=true&isListed=false&language=en&search=perfume"},
-{"Eyewear":	"https://storefront-stage.fptechscience.com/srp?isListed=false&language=en&search=eyewear"},
-{"Men's grooming":	"https://storefront-stage.fptechscience.com/srp?isListed=false&language=en&search=mens%20grooming"},
-{"Personal Care":	"https://storefront-stage.fptechscience.com/srp/Personal%20Care-969?categoryTree=true&isListed=false&language=en"}];
+const b = [{"Perfumes":	"/SAU/en/srp/fragrance?categoryTree=true&isListed=false&sid=932,958,964"},
+{"Eyewear":	"/SAU/en/srp?search=eye%20wear&language=en&isListed=false"},
+{"Men's grooming":	"/SAU/en/srp?search=grooming&language=en&isListed=false"},
+{"Personal Care":	"/SAU/en/srp/personal-care?categoryTree=true&isListed=false&sid=932,958,969"}];
 
 const FooterBar = props => (
   <div id="footer-container" className={`${styles['footer-container']} ${styles['mt-25']}`}>
@@ -234,9 +234,11 @@ const FooterBar = props => (
             <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['black-color']}`}>{FOOTER_PAGE.POLICY}</h4>
             <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
               <li><a href="/SAU/en/policy/tc" target="_blank">{FOOTER_PAGE.TERMS_CONDITION}</a></li>
+              <li><a href="/SAU/en/policy/cp" target="_blank">{FOOTER_PAGE.CANCELLATION_POLICY}</a></li>
               <li><a href="/SAU/en/policy/re" target="_blank">{FOOTER_PAGE.REFUND_POLICY}</a></li>
               <li><a href="/SAU/en/policy/wp" target="_blank">{FOOTER_PAGE.WARRENTY_POLICY}</a></li>
               <li><a href="/SAU/en/policy/sp" target="_blank">{FOOTER_PAGE.SHIPPING_POLICY}</a></li>
+              <li><a href="/SAU/en/policy/pp" target="_blank">{FOOTER_PAGE.PRIVACY_POLICY}</a></li>
             </ul>
           </Col>
           {/*<Col md={2} sm={2} className={styles['ipad-pr-0']}>
