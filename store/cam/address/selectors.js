@@ -37,4 +37,10 @@ const getDefaultAddress = (store) => {
   return false;
 };
 
-export { getShippingAddressResults, getAddrById, getAddressWithNameAndPhone, getDefaultAddress };
+const getSelectedAddress = (store) => {
+  if (store.shippingAddrReducer.data && store.shippingAddrReducer.data.length > 0) {
+    return _.find(store.shippingAddrReducer.data, value => value.address_id === store.shippingAddrReducer.data.deliverToAddress);
+  }
+}
+
+export { getShippingAddressResults, getAddrById, getAddressWithNameAndPhone, getDefaultAddress, getSelectedAddress };

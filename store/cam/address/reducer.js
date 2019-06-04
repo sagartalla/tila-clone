@@ -38,6 +38,7 @@ const shippingAddrReducer = typeToReducer({
         state,
         {
           data: _.values(Object.assign({}, newData, { [Object.keys(tempState).length + 1]: addr_id_add })),
+          deliverToAddress: action.payload.data.address_id,
           ui: { loading: true }
         });
     },

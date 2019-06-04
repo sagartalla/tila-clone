@@ -18,7 +18,7 @@ const getDefaultAddress = (store) => {
   if (store.shippingAddrReducer.data && store.shippingAddrReducer.data.length > 0) {
     return _.filter(store.shippingAddrReducer.data, function (value, key) { return value.default; });
   }
-  return {};
+  return [{}];
 }
 
 const getPaymentModesData = (store) => {
@@ -71,4 +71,14 @@ const get3dSecureRedirectionUrl = (store) => {
   }
 }
 
-export { getPaymentOptions, getPaymentUrl, getDefaultAddress, getPaymentModesData, getProcessData, get3dSecureRedirectionUrl, getLoader };
+const getSelectedAddress = (store) => {
+  let selectedAddress;
+  if (store.shippingAddrReducer.data && store.shippingAddrReducer.data.length > 0) {
+    selectedAddress =  _.find(store.shippingAddrReducer.data, value => value.address_id === store.shippingAddrReducer.data.deliverToAddress);
+  }
+  if(!selectedAddress) {
+    return getDefaultAddress(store)[0];
+  }
+}
+
+export { getPaymentOptions, getPaymentUrl, getDefaultAddress, getPaymentModesData, getProcessData, get3dSecureRedirectionUrl, getLoader, getSelectedAddress };
