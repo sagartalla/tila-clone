@@ -299,11 +299,6 @@ const getProductComponent = (isPreview, taskCode) => {
                       {
                         isPreview ? null : <ReviewsTab />
                       }
-                    </Col>
-                    {/* <Col md={8}>
-                    {
-                      isPreview ? null : <ReviewsTab />
-                    }
                     </Col> */}
                     <Col md={8}>
                       <ElectronicsTab titleInfo={titleInfo} isPreview={isPreview} catalog={catalog} catalogObj={catalogObj} productDescription={productDescription} />
@@ -311,6 +306,7 @@ const getProductComponent = (isPreview, taskCode) => {
                   </Row>
                 </Grid>
               </div>
+            }
               <div className={styles['pdp-bottom-ref']} ref={this.bottomRef} />
             </div>
             <div className={`${styles['border-b']} ${styles['border-t']} ${styles['pb-30']} ${styles['pt-30']}`}>
