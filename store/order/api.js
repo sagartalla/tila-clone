@@ -56,6 +56,8 @@ const track = ({ event, orderData }) => {
 
 const getTrackingDetails = trackingId => axios.get(`${constants.LOGISTICS_URL}/api/shipment/v1/track/${trackingId}`);
 
+const getInvoice = orderId => axios.get(`${constants.ORDERS_API_URL}/api/v1/customer/order/${orderId}/invoice`);
+
 export default {
   getOrderDetails,
   getRefundOptions,
@@ -66,5 +68,6 @@ export default {
   getExchangeVariants,
   sendMapDataApi,
   setExchangeOrder,
+  getInvoice,
   track,
 };
