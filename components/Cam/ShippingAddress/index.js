@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import Cookie from 'universal-cookie';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Modal } from 'react-router-modal';
 import { selectors as productSelectors, actionCreators as productActionCreators } from '../../../store/product';
 import { selectors as cartSelectors } from '../../../store/cart';
 import AddressNew from './includes/AddressNew';
@@ -14,7 +13,6 @@ import AddressHeader from './includes/AddressHeader';
 import { languageDefinations } from '../../../utils/lang/';
 import { actionCreators, selectors } from '../../../store/cam/address';
 import FormValidator from '../../common/FormValidator';
-import Slider from '../../common/slider';
 
 import lang from '../../../utils/language';
 

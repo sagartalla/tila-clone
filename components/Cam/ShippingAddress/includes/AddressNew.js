@@ -28,7 +28,7 @@ const AddressNew = (props) => {
         <Row>
           <Col md={10} sm={9} xs={12}>
             {!hideTitle &&
-            <h1 className={`${styles['thick-blue']} ${styles['mb-20']} ${styles['fs-20']} ${styles.fontW300} ${styles['m-fs-16']}`}>{DELIVERY_ADDR_PAGE.ADD_NEW_ADDR_HEAD}</h1>}
+            <h1 className={`${styles['thick-blue']} ${styles['mb-20']} ${styles['fs-20']} ${styles.fontW300} ${styles['m-fs-16']}`}>{data.first_name ? DELIVERY_ADDR_PAGE.EDIT_ADDR : DELIVERY_ADDR_PAGE.ADD_NEW_ADDR_HEAD}</h1>}
           </Col>
 
           <Col md={12} sm={12} xs={12}>
