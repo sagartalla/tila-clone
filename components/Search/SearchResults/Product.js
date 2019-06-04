@@ -312,6 +312,14 @@ class Product extends Component {
                     <SVGCompoent clsName={`${styles['loader-styl']}`} src="icons/common-icon/circleLoader" />
                   </div> : null
                 }
+                {variants.length === 0 &&
+                  <div className={styles['notify-me-part']}>
+                    <h4 className={`${styles['fs-18']} ${styles['fontW600']} ${styles['black-color']}`}>{PDP_PAGE.OUT_OF_STOCK}</h4>
+                    <a className={`${styles['flex-center']} ${styles['notify-part-inn']} ${styles['white-color']} ${styles['fp-btn']} ${styles['right-radius']} ${styles['fp-btn-primary']}`} onClick={this.notify}>
+                      <span className={styles['pl-5']}>{PDP_PAGE.NOTIFY_ME}</span>
+                    </a>
+                  </div>
+                }
                 <div onClick={this.renderQuickView} className={`${styles['img-cont']} ${styles['border-radius4']} ${styles['relative']}`}>
                       <div className={`${styles['image-div']} srp-slider`}>
                         {src ?
@@ -387,11 +395,12 @@ class Product extends Component {
                         />
                       </div>
                       :
-                      <div className={`${styles['flex']} ${styles['justify-around']} ${styles['quick-view']} ${styles['border-radius4']}`}>
-                        <a className={`${styles['flex-center']} ${styles['buy-now-btn']} ${styles['notifyBackground']}`} onClick={this.notify}>
-                          <span className={styles['pl-5']}>{PDP_PAGE.NOTIFY_ME}</span>
-                        </a>
-                      </div>
+                        null
+                      // <div className={`${styles['flex']} ${styles['justify-around']} ${styles['quick-view']} ${styles['border-radius4']}`}>
+                      //   <a className={`${styles['flex-center']} ${styles['buy-now-btn']} ${styles['notifyBackground']}`} onClick={this.notify}>
+                      //     <span className={styles['pl-5']}>{PDP_PAGE.NOTIFY_ME}</span>
+                      //   </a>
+                      // </div>
                   }
                   <div className={`${styles['wish-list-part']} ${styles['flx-space-bw']}`}>
                     <span className={styles['flex']}>
