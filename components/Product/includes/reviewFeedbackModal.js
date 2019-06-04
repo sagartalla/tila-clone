@@ -148,7 +148,7 @@ export default class FeedbackModal extends Component {
 
             </div>
             <div className={`${styles['fl-rt']} ${styles['fs-12']} ${styles['pb-20']} ${styles['pt-10']}`}>
-              <span>maxLength</span>
+              <span>{PDP_PAGE.MAX_LENGTH} </span>
               <span>{charsLeft}</span>
             </div>
             {/* <div className={styles['cl-bth']}></div> */}

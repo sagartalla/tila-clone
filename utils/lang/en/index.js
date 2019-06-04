@@ -147,7 +147,7 @@ export const EN_KEYWORDS = {
     WORK: 'WORK',
     PREF_LOC: 'My preffered location',
     CANCEL: 'Cancel',
-    SAVE_DELIVER_BTN: 'Save and Deliver here',
+    SAVE_DELIVER_BTN: 'Save New Address',
     ENTER_LOC: 'Enter a location',
     ADD_NEW_ADDR_TAG: 'Add address where you want the orders to be delivered.',
     FIRST_NAME: 'First Name',
@@ -264,6 +264,7 @@ export const EN_KEYWORDS = {
     OUT_OF_STOCK: 'Out of stock',
     THANKS_FOR_RATING: 'Thanks for Rating',
     THANKS_DESCRIPTION: 'Thanks for taking your time to rate the product, this will help millions of users like you to make better purchase judgement',
+    MAX_LENGTH: 'Max Length',
   },
   VAULT_PAGE: {
     VOUCHER_HISTORY: 'Your gift voucher transaction history',

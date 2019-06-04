@@ -112,6 +112,7 @@ class ShippingAddress extends Component {
       validation: this.validations.valid(),
       showNewAddr: false,
       showSlider: true,
+      isEditAddr: false,
       showCitiesData: false,
       showCountriesData: false,
     };
@@ -256,6 +257,7 @@ class ShippingAddress extends Component {
     this.setState({
       showNewAddr: true,
       addr,
+      isEditAddr: true,
     });
   }
 
@@ -268,6 +270,7 @@ class ShippingAddress extends Component {
   resetAddAdrressForm() {
     this.setState({
       addr: initialAddrObj,
+      isEditAddr: false,
     });
     this.showAddAdrressForm();
   }
@@ -316,7 +319,7 @@ class ShippingAddress extends Component {
       results, standalone, handleShippingAddressContinue, miniAddress, isPdp, getAllCities, countriesData, cartResults, showNonShippable, isPaymentPage
     } = this.props;
     const {
-      showNewAddr, addr, showCitiesData, showCountriesData, validation, showSlider,
+      showNewAddr, addr, showCitiesData, showCountriesData, validation, showSlider, isEditAddr,
     } = this.state;
     const { DELIVERY_ADDR_PAGE } = languageDefinations();
     return (
@@ -356,6 +359,7 @@ class ShippingAddress extends Component {
                         validation={validation}
                         showCountriesData={showCountriesData}
                         selectCountry={this.selectCountry}
+                        isEditAddr={isEditAddr}
                       />
                     </div>
                     :
@@ -390,6 +394,7 @@ class ShippingAddress extends Component {
                               showCitiesData={showCitiesData}
                               showCountriesData={showCountriesData}
                               selectCountry={this.selectCountry}
+                              isEditAddr={isEditAddr}
                             />
                           </div>
                         </div>
@@ -440,6 +445,7 @@ class ShippingAddress extends Component {
                         showCitiesData={showCitiesData}
                         selectCountry={this.selectCountry}
                         showCountriesData={showCountriesData}
+                        isEditAddr={isEditAddr}
                       /> : ''
                   }
                 </Col>
