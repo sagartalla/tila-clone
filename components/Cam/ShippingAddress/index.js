@@ -261,8 +261,8 @@ class ShippingAddress extends Component {
 
   makeDefaultAddress(addrId) {
     const { toggleMiniAddress } = this.props;
-    if (toggleMiniAddress) toggleMiniAddress(addrId);
-    // this.props.makeDefaultAddress(addrId);
+    if (toggleMiniAddress) toggleMiniAddress();
+    this.props.makeDefaultAddress(addrId);
   }
 
   resetAddAdrressForm() {

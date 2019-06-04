@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { languageDefinations } from '../../../utils/lang/';
 import { actionCreators, selectors } from '../../../store/common/instantCheckout';
-import { selectors as paymentSelector } from '../../../store/payments';
+import { selectors as paymentSelector } from '../../../store/payments'
 import { actionCreators as addressActionCreators, selectors as addressSelectors } from '../../../store/cam/address';
 import { actionCreators as vaultActionCreators, selectors as vaultSelectors } from '../../../store/cam/userVault';
 import { actionCreators as camActionCreators, selectors as camSelectors } from '../../../store/cam/personalDetails';
@@ -57,9 +57,8 @@ class InstantCheckout extends Component {
       phoneNumber: '',
       checked: false,
       nextStep: 'captcha',
-      btnLoader: false,
-      preferredAddresses: [],
-    };
+      btnLoader: false
+    }
 
     this.updateCVV = this.updateCVV.bind(this);
     this.mobilehandler = this.mobilehandler.bind(this);
@@ -69,11 +68,11 @@ class InstantCheckout extends Component {
     this.doInstantCheckout = this.doInstantCheckout.bind(this);
     this.toggleMiniAddress = this.toggleMiniAddress.bind(this);
     this.creditCardClickHandler = this.creditCardClickHandler.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.closeModal = this.closeModal.bind(this);
-    this.onCaptchaSuccess = this.onCaptchaSuccess.bind(this);
-    this.afterSuccessOtpVerification = this.afterSuccessOtpVerification.bind(this);
-    this.callInstantCheckout = this.callInstantCheckout.bind(this);
+    this.handleChange = this.handleChange.bind(this)
+    this.closeModal = this.closeModal.bind(this)
+    this.onCaptchaSuccess = this.onCaptchaSuccess.bind(this)
+    this.afterSuccessOtpVerification = this.afterSuccessOtpVerification.bind(this)
+    this.callInstantCheckout = this.callInstantCheckout.bind(this)
   }
 
   componentDidMount() {
@@ -89,23 +88,16 @@ class InstantCheckout extends Component {
   }
   closeModal() {
     this.setState({
-      checked: false,
-    });
+      checked: false
+    })
   }
   handleChange() {
     this.setState(prevstate => ({
-      checked: !prevstate.checked,
-    }));
+      checked: !prevstate.checked
+    }))
   }
-  toggleMiniAddress = (addrId = null) => {
-    const { addressResults } = this.props;
-    const { showMiniAddress } = this.state;
-
-    this.setState({
-      showMiniAddress: !showMiniAddress,
-      showMiniVault: false,
-      preferredAddresses: addrId ? addressResults.filter(addr => parseInt(addr.address_id, 10) === parseInt(addrId, 10)) : [],
-    });
+  toggleMiniAddress() {
+    this.setState({ showMiniAddress: !this.state.showMiniAddress, showMiniVault: false });
   }
 
   toggleMiniVault() {
@@ -113,23 +105,20 @@ class InstantCheckout extends Component {
   }
   afterSuccessOtpVerification() {
     this.setState({
-      nextStep: 'checkoutBtn',
-    });
+      nextStep: 'checkoutBtn'
+    })
   }
 
   doInstantCheckout() {
     const {
-      creditDebitCard, cntryCode, phoneNumber, preferredAddresses,
+      creditDebitCard, cntryCode, phoneNumber,
     } = this.state;
-    const {
-      defaultCard, insnt_item_listing_id, doInstantCheckout, defaultAddr 
-    } = this.props;
+    const { defaultCard, insnt_item_listing_id, doInstantCheckout } = this.props;
 
     const params = {
       listing_ids: insnt_item_listing_id ? [insnt_item_listing_id] : [],
       payment_mode: creditDebitCard ? 'SAVED_CARD' : 'CASH_ON_DELIVERY',
       redirect_url: `${window.location.origin}/${country}/${language}`,
-      address_id: preferredAddresses.length > 0 ? preferredAddresses[0].address_id : defaultAddr[0].address_id,
     };
 
     if (creditDebitCard) {
@@ -173,16 +162,17 @@ class InstantCheckout extends Component {
     });
   }
   callInstantCheckout() {
-    const { doInstantCheckout } = this.props;
+    const { doInstantCheckout } = this.props
     const params = {
       listing_ids: [],
       payment_mode: 'CASH_ON_DELIVERY',
       redirect_url: `${window.location.origin}/${country}/${language}`,
-      request_id: this.state.captcha_request_id,
+      request_id: this.state.captcha_request_id
     };
     this.setState({
-      btnLoader: true,
-    }, () => doInstantCheckout(params));
+      btnLoader: true
+    }, () => doInstantCheckout(params))
+
   }
 
   render() {
@@ -208,109 +198,111 @@ class InstantCheckout extends Component {
       btnLoader,
       checked,
       checkoutBtn,
-      preferredAddresses,
     } = this.state;
     return (
       <div>
-        {defaultAddr.length > 0 && defaultCard.length > 0 ?
-          <div className={`${styles['instant-checkout']} ${styles['p-10']}`}>
-            <div className={`${styles['pr-10']} ${styles['pl-10']}`}>
-              {
-                showBlocker ?
-                  <div className={styles.blocker}>
+        {
+          defaultAddr.length > 0 && defaultCard.length > 0 ?
+            <div className={`${styles['instant-checkout']} ${styles['p-10']}`}>
+              <div className={`${styles['pr-10']} ${styles['pl-10']}`}>
+                {
+                  showBlocker ?
+                    <div className={styles['blocker']}>
 
-                  </div>
-                  : ''
-              }
-              <h4 className={`${styles.fontW600} ${styles['mb-0']} ${styles.flex}`}>
-                {INSTANT_CHECKOUT.CHECKOUT_WITH_ONE_CLICK}
-                {/* <span className={`${styles['checkout-quat']} ${styles['fs-12']} ${styles['flex-center']} ${styles['justify-around']}`}>?</span> */}
-              </h4>
-              <p className={`${styles['fs-10']} ${styles['thick-gry-clr']} ${styles['mb-5']}`}>{INSTANT_CHECKOUT.WITH_YOUR_PREFERRED_PAYMENT}</p>
-              <div className={`${styles.flex} ${styles['pt-5']} ${styles['pb-5']}`}>
-                <span className={`${styles['fs-12']} ${styles['pr-30']}`}><input type="radio" name="pay_type" className={styles['radio-btn']} checked={creditDebitCard} onChange={this.creditCardClickHandler} /> {INSTANT_CHECKOUT.CREDIT_DEDIT}</span>
-                <span className={styles['fs-12']}><input type="radio" name="pay_type" className={styles['radio-btn']} checked={cod} onChange={this.codClickHandler} /> {INSTANT_CHECKOUT.COD}</span>
-              </div>
-              <div className={`${styles.border} ${styles['border-radius2']} ${styles['bg-white']} ${styles.relative} ${styles['mt-10']}`}>
-                {
-                  defaultAddr.length > 0 ?
-                    <Fragment>
-                      <AddrCard
-                        defaultAddr={preferredAddresses.length > 0 ? preferredAddresses : defaultAddr}
-                        toggleMiniAddress={this.toggleMiniAddress}
-                      />
-                      {
-                        showMiniAddress ?
-                          <ShippingAddress
-                            miniAddress
-                            isPdp={isPdp}
-                            isFromCart={isFromCart}
-                            toggleMiniAddress={this.toggleMiniAddress}
-                          />
-                          : null
-                      }
-                    </Fragment>
-                    : null
+                    </div>
+                    : ''
                 }
-                {
-                  defaultCard.length && creditDebitCard > 0 ?
-                    <Fragment>
-                      <VaultCard
-                        defaultCard={defaultCard}
-                        updateCVV={this.updateCVV}
-                        toggleMiniVault={this.toggleMiniVault}
-                      />
-                      {
-                        showMiniVault ?
-                          <div>
-                            <UserVault
-                              miniVault={true}
-                              toggleMiniVault={this.toggleMiniVault}
-                            />
-                          </div>
-                          : null
-                      }
-                    </Fragment>
-                    : null
-                }
-                {cod ?
-                  <div className={styles['p-10']}>
-                    <input
-                      id="pay-delivery"
-                      type="checkbox"
-                      onChange={this.handleChange}
-                      checked={this.state.checked}
-                    />
-                    <label htmlFor="pay-delivery" className={`${styles['fs-12']} ${styles.fw300} ${styles['pl-10']} ${styles['pr-10']}`}>{INSTANT_CHECKOUT.AGREE_CASH_ON_DELIVERY}</label>
-                  </div>
-                  : null
-                }
-                {
-                  /* <div className={`${styles['p-10-20']}`}>
-                  <div className={styles['checkbox-material']}>
-                  <input id="checkout-label" type="checkbox" />
-                  <label for="checkout-label" className={`${styles['thick-gry-clr']} ${styles['fontW300']}`}> Don't call before delivery </label>
-                  </div>
-                  </div>
-                  */
-                }
-              </div>
-              {!cod &&
-                <div
-                  className={`${styles.flex} ${styles['justify-center']}`}
-                >
-                  <Button
-                    className={`${styles['fp-btn']} ${styles['fp-btn-sucess']} ${styles.fontW600} ${styles['instant-btn']}`}
-                    onClick={this.doInstantCheckout}
-                    btnText={INSTANT_CHECKOUT.INSTANT_CHECKOUT}
-                    showImage="icons/common-icon/instant-checkout"
-                    btnLoading={showLoading}
-                  />
+                <h4 className={`${styles['fontW600']} ${styles['mb-0']} ${styles['flex']}`}>
+                  {INSTANT_CHECKOUT.CHECKOUT_WITH_ONE_CLICK}
+                  {/* <span className={`${styles['checkout-quat']} ${styles['fs-12']} ${styles['flex-center']} ${styles['justify-around']}`}>?</span> */}
+                </h4>
+                <p className={`${styles['fs-10']} ${styles['thick-gry-clr']} ${styles['mb-5']}`}>{INSTANT_CHECKOUT.WITH_YOUR_PREFERRED_PAYMENT}</p>
+                <div className={`${styles['flex']} ${styles['pt-5']} ${styles['pb-5']}`}>
+                  <span className={`${styles['fs-12']} ${styles['pr-30']}`}><input type="radio" name="pay_type" className={styles['radio-btn']} checked={creditDebitCard} onChange={this.creditCardClickHandler} /> {INSTANT_CHECKOUT.CREDIT_DEDIT}</span>
+                  <span className={styles['fs-12']}><input type="radio" name="pay_type" className={styles['radio-btn']} checked={cod} onChange={this.codClickHandler} /> {INSTANT_CHECKOUT.COD}</span>
                 </div>
-              }
+                <div className={`${styles['border']} ${styles['border-radius2']} ${styles['bg-white']} ${styles['relative']} ${styles['mt-10']}`}>
+                  {
+                    defaultAddr.length > 0 ?
+                      <Fragment>
+                        <AddrCard
+                          defaultAddr={defaultAddr}
+                          toggleMiniAddress={this.toggleMiniAddress}
+                        />
+                        {
+                          showMiniAddress ?
+                            <ShippingAddress
+                              miniAddress={true}
+                              isPdp={isPdp}
+                              isFromCart={isFromCart}
+                              toggleMiniAddress={this.toggleMiniAddress}
+                            />
+                            : null
+                        }
+                      </Fragment>
+                      : null
+                  }
+                  {
+                    defaultCard.length && creditDebitCard > 0 ?
+                      <Fragment>
+                        <VaultCard
+                          defaultCard={defaultCard}
+                          updateCVV={this.updateCVV}
+                          toggleMiniVault={this.toggleMiniVault}
+                        />
+                        {
+                          showMiniVault ?
+                            <div>
+                              <UserVault
+                                miniVault={true}
+                                toggleMiniVault={this.toggleMiniVault}
+                              />
+                            </div>
+                            : null
+                        }
+                      </Fragment>
+                      : null
+                  }
+                  {
+                    cod ?
+                      <div className={styles['p-10']}>
+                        <input
+                          id="pay-delivery"
+                          type="checkbox"
+                          onChange={this.handleChange}
+                          checked={this.state.checked}
+                        />
+                        <label htmlFor="pay-delivery" className={`${styles['fs-12']} ${styles['fw300']} ${styles['pl-10']} ${styles['pr-10']}`}>{INSTANT_CHECKOUT.AGREE_CASH_ON_DELIVERY}</label>
+                      </div>
+                      : null
+                  }
+                  {
+                    /* <div className={`${styles['p-10-20']}`}>
+                    <div className={styles['checkbox-material']}>
+                    <input id="checkout-label" type="checkbox" />
+                    <label for="checkout-label" className={`${styles['thick-gry-clr']} ${styles['fontW300']}`}> Don't call before delivery </label>
+                    </div>
+                    </div>
+                    */
+                  }
+                </div>
+                {
+                  !cod &&
+                  <div
+                    className={`${styles['flex']} ${styles['justify-center']}`}
+                  >
+                    <Button
+                      className={`${styles['fp-btn']} ${styles['fp-btn-sucess']} ${styles['fontW600']} ${styles['instant-btn']}`}
+                      onClick={this.doInstantCheckout}
+                      btnText={INSTANT_CHECKOUT.INSTANT_CHECKOUT}
+                      showImage="icons/common-icon/instant-checkout"
+                      btnLoading={showLoading}
+                    />
+                  </div>
+                }
+              </div>
             </div>
-          </div>
-          : null
+            : null
         }
         <div>
           <Modal
@@ -333,34 +325,34 @@ class InstantCheckout extends Component {
                     captcha: <Captcha
                       onCaptchaSuccess={this.onCaptchaSuccess}
                       txnId={paymentModesData.transactionId}
-                      render={([items, state, handleClick, handleDrop]) => (
+                      render={([items, state, handleClick, handleDrop]) =>
                         <CaptchaContent
                           items={items}
                           state={state}
                           handleClick={handleClick}
                           handleDrop={handleDrop}
                         />
-                      )}
+                      }
                     />,
                     mobileVerification:
-                    <EditPhone
-                      afterSuccessOtpVerification={this.afterSuccessOtpVerification}
-                      mobileVerified={profileInfo.contactInfo.mobile_verified === 'V'}
-                      userData={profileInfo.contactInfo}
-                    />,
+                      <EditPhone
+                        afterSuccessOtpVerification={this.afterSuccessOtpVerification}
+                        mobileVerified = {profileInfo.contactInfo.mobile_verified === 'V'}
+                        userData = {profileInfo.contactInfo}
+                      />,
                     checkoutBtn:
                     <div>
-                      <div className={`${styles['success-green']} ${styles['mb-25']}`}>{CONTACT_INFO_MODAL.PLEASE_CONFIRM_YOUR_ORDER}</div>
+                    <div className={`${styles['success-green']} ${styles['mb-25']}`}>{CONTACT_INFO_MODAL.PLEASE_CONFIRM_YOUR_ORDER}</div>
                       <div>
                         <Button
-                          className={`${styles['fp-btn']} ${styles['fp-btn-sucess']} ${styles.fontW600} ${styles['instant-btn']} ${styles.width45}`}
+                          className={`${styles['fp-btn']} ${styles['fp-btn-sucess']} ${styles['fontW600']} ${styles['instant-btn']} ${styles.width45}`}
                           onClick={this.callInstantCheckout}
                           btnText={PAYMENT_PAGE.PAY + ' ' + totalPrice + ' ' + currency + ' ' + PAYMENT_PAGE.ON_DELIVERY}
                           disabled={btnLoader}
                           btnLoading={btnLoader}
                         />
                       </div>
-                    </div>,
+                      </div>
                   }[this.state.nextStep]
                   :
                   null
@@ -370,11 +362,11 @@ class InstantCheckout extends Component {
         </div>
       </div>
 
-    );
+    )
   }
 }
 
-const mapStateToProps = store => ({
+const mapStateToProps = (store) => ({
   addressResults: addressSelectors.getShippingAddressResults(store),
   defaultAddr: addressSelectors.getDefaultAddress(store),
   // getAddrById: selectors.getAddrById(store),
@@ -386,7 +378,7 @@ const mapStateToProps = store => ({
   showLoading: selectors.showLoading(store),
 });
 
-const mapDispatchToProps = dispatch =>
+const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       doInstantCheckout: actionCreators.doInstantCheckout,
