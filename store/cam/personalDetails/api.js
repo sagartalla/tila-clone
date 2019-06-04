@@ -32,6 +32,7 @@ const uploadProfilePic = (body) => {
       'tenant': 'profile-service',
     },
   }).then(({data}) => {
+    toast.success(PERSONAL_INFO_MODAL.IMAGE_UPDATED_SUCCESS)
     return data;
   }).catch((data) => {
     console.log(data);
@@ -81,7 +82,6 @@ const editPersonalInfo = (body) => {
   return axios.put(`${constants.CMS_API_URL}/api/v1/user/account/edit`, body).then(({ data }) => {
     return axios.get(`${constants.CMS_API_URL}/api/v1/user/account/details`).then(userInfoResult=> [data,userInfoResult]);
   }).then(([personalInfoStatus, userInfoResult]) =>{
-    toast.success(PERSONAL_INFO_MODAL.IMAGE_UPDATED_SUCCESS)
     return {
       personalInfo:userInfoResult.data,
       personalInfoStatus

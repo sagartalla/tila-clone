@@ -79,7 +79,10 @@ class ActionBar extends Component {
     if (nextProps.isLoggedIn !== this.props.isLoggedIn) {
       this.props.getWishlist();
     }
-
+    if(nextProps.userInfo.personalInfo.image_url === this.props.userInfo.personalInfo.image_url){
+      return;
+    }
+    nextProps.userInfo.personalInfo.image_url && this.props.downloadPic(nextProps.userInfo.personalInfo.image_url);
     let show = ((nextProps.isLoggedIn != this.props.isLoggedIn) && !this.state.logoutClicked) || this.state.loginClicked || !!nextProps.error || (!nextProps.isLoggedIn && nextProps.showLogin) || nextProps.loginInProgress || nextProps.showEmailVerificationScreen;
     if (window.location.pathname.indexOf('/payment') > -1) {
       show = false;
@@ -206,8 +209,7 @@ class ActionBar extends Component {
             <Dropdown.Menu className={`${styles.item}`}>
               <div className={styles['profile-part']}>
                 <div className={`${styles['flex-center']} ${styles['ple-icon']}`}>
-                  {/* <span className={styles.icon} /> */}
-                  {/* <ProfilePic /> */}
+                    <ProfilePic loader={false} userInfo={userInfo} imgUrl={this.props.imgSource}/>
                   <span className={styles['pl-15']}>{HEADER_PAGE.HELLO} {userInfo.personalInfo.first_name || `${HEADER_PAGE.TILA_CUSTOMER}` }</span>
                 </div>
                 <ul className={`${styles['pl-0']} ${styles['profile-inn']}`}>
@@ -279,6 +281,7 @@ const mapStateToProps = store => ({
   wishListCount: wishListSelectors.getProductsDetails(store).length,
   showEmailVerificationScreen: selectors.showEmailVerificationScreen(store),
   getEditDetails: cartSelectors.getEditDetails(store),
+  imgSource: personalSelectors.getImageSource(store),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(
@@ -293,6 +296,7 @@ const mapDispatchToProps = dispatch => bindActionCreators(
     userLogin: actionCreators.userLogin,
     getWishlist: wishListActionCreators.getWishlistProducts,
     getUserProfileInfo: personalActionCreators.getUserProfileInfo,
+    downloadPic: personalActionCreators.downloadPic,
   },
   dispatch,
 );

@@ -5,7 +5,6 @@ import { Link } from '../../../routes';
 import { selectors, actionCreators } from '../../../store/cam/personalDetails';
 import { bindActionCreators } from 'redux';
 import lang from '../../../utils/language';
-import SVGComponent from '../../common/SVGComponet';
 import main_en from '../../../layout/main/main_en.styl';
 import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from './sidebar_en.styl';
@@ -52,7 +51,7 @@ class UserProfile extends React.Component {
         imgDocumentID: nextProps.getPictureDocumentId
       }, () => {
           this.props.EditPersonalInfo({
-            image_url: this.state.imgDocumentID, //As imgUrl is too long to store in image_url, storing documentID in image_url.
+            image_url: this.state.imgDocumentID, //storing documentID in image_url.
           })
         })
       };
@@ -60,26 +59,10 @@ class UserProfile extends React.Component {
 
   render() {
     const { props } = this;
-    const { query, userInfo } = props;
+    const { query, userInfo, imgUrl } = props;
     const { tabDetails } = query;
     const { first_name, last_name } = props.userInfo.personalInfo;
     const [tab] = tabDetails ? tabDetails.split('/') : [];
-    // let imagePreview = null;
-    // if(this.state.loader || (userInfo.personalInfo.image_url && props.imgUrl===null)){
-    //   imagePreview=
-    //           <div className={styles['loader-div']}>
-    //             <SVGComponent
-    //               clsName={styles['loader-styl']}
-    //               src="icons/common-icon/circleLoader"
-    //             >
-    //             </SVGComponent>
-    //           </div>
-    // }
-    // else if (props.imgUrl) {
-    //   imagePreview = (<img className={styles['prev-img']} src={props.imgUrl} />);
-    // } else {
-    //   imagePreview = (<div className={styles['edit-icon']}><SVGComponent clsName={`${styles['profile-edit-icon']}`} src="icons/profile-camera" /></div>)
-    // }
     let full_name = first_name || last_name ? first_name + " " + last_name : "";
     let name = full_name ? (full_name.length < 20 ? full_name : (full_name.slice(0, 20) + "...")) : "";
     return (
@@ -90,11 +73,7 @@ class UserProfile extends React.Component {
         <Link route={`/${country}/${language}/cam/profile`}>
           <a style={{ display: 'block' }}>
             <div className={`${`/${country}/${language}/cam/profile` === `/${country}/${language}/cam/${tab}` ? styles['active'] : {}} ${styles['user-profile']} ${styles['p-10-20']}  ${styles['align-center']} ${styles['flex']}`}>
-              <div className={`${styles['profile-pic']} ${styles['pr-15']}`}>
-                <div className={styles['img-style']} >
-                  <ProfilePic loader={this.state.loader} userInfo={userInfo} imgUrl={props.imgUrl}/>
-                </div>
-              </div>
+                  <ProfilePic loader={this.state.loader} userInfo={userInfo} imgUrl={imgUrl}/>
               <div className={styles['profile-details']}>
                 <span className={`${styles['fs-12']} ${styles['light-gry-clr']}`}>Hello,</span>
                 <div>{name}</div>
@@ -121,4 +100,4 @@ const mapDispatchToProps = (dispatch) =>
     dispatch,
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserProfile);;
+export default connect(mapStateToProps, mapDispatchToProps)(UserProfile);

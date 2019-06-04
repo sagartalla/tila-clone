@@ -42,7 +42,7 @@ class Cam extends React.Component {
 
   render() {
     const { tabDetails, query } = this.props;
-    const [tab, ...queryParams] = tabDetails ? tabDetails.split('/') : [];
+    const [tab] = tabDetails ? tabDetails.split('/') : [];
     const camComponent = ((tabName) => {
       switch (tabName) {
         case 'orders':
