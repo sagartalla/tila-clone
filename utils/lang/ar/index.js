@@ -247,6 +247,7 @@ export const AR_KEYWORDS = {
     PLEASE_SELECT_PRODUCT_SIZE: 'يرجى  اختيار قياس المنتج',
     THANKS_FOR_RATING: 'Thanks for Rating',
     PDP_DONE: 'Done',
+    OUT_OF_STOCK: 'نفذت الكمية',
     THANKS_DESCRIPTION: 'Thanks for taking your time to rate the product, this will help millions of users like you to make better purchase judgement',
   },
   VAULT_PAGE: {
