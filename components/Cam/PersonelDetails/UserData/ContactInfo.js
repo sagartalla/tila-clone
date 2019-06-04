@@ -24,7 +24,6 @@ class ContactInfo extends React.Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    debugger;
     if (nextProps.userInfo.contactInfo) {
       this.setState({
         contactInfo: nextProps.userInfo.contactInfo
