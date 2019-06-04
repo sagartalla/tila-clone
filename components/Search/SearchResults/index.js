@@ -50,6 +50,7 @@ class SearchResults extends Component {
     this.renderNext = this.renderNext.bind(this)
     this.renderPrev = this.renderPrev.bind(this)
     this.onClose = this.onClose.bind(this)
+    this.renderProductPage = this.renderProductPage.bind(this)
     this.productIndex = {};
     this.variantId={};
     this.rowNumber = null;
@@ -98,6 +99,9 @@ class SearchResults extends Component {
     if(this.state.buyNow == true && (nextProps.isLastAddedToCartSuccess)){
        Router.pushRoute(`/${country}/${language}/payment`);
     }
+  }
+  renderProductPage() {
+    Router.pushRoute()
   }
   renderNext() {
     const { results } = this.props;
@@ -178,6 +182,7 @@ class SearchResults extends Component {
             row={Math.floor(index/4) + 1}
             itemNum={index}
             showQuickView={this.renderQuickView}
+            isQuickView={renderQuickView && this.itemNum === index}
           />
         {
           (renderQuickView && elementNo === index) ?
@@ -191,6 +196,7 @@ class SearchResults extends Component {
             next={this.renderNext}
             onClose={this.onClose}
             productId={productId}
+            renderProductPage={this.renderProductPage}
           /> : null
         }
         </>

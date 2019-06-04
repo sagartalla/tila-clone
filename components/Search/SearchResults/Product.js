@@ -256,6 +256,7 @@ class Product extends Component {
       row,
       itemNum,
       media,
+      isQuickView,
     } = this.props;
     const { src } = this.state;
     const { showNotify, selectedIndex, showLoader } = this.state;
@@ -301,7 +302,7 @@ class Product extends Component {
         <div
           className=
             {
-            `${styles['product-items-main']} ${styles['p-0']} ${selectedProduct ? styles['active-product'] : ''}`}
+            `${styles['product-items-main']} ${styles.relative} ${styles['p-0']} ${selectedProduct ? styles['active-product'] : ''}`}
             onClick = {() => this.routeChange(productId,variantId,catalogId,itemtype,index,pageNum)}>
           <Link route={`/${country}/${language}/product?productId=${productId}${variants.length > 0 && variants[selectedIndex].variantId ? `&variantId=${variants[selectedIndex].variantId}` : ''}&catalogId=${catalogId}&itemType=${itemtype}`}>
             <a>
@@ -443,10 +444,12 @@ class Product extends Component {
                 </div>
               </div> */}
                 </div>
-
               </div>
             </a>
           </Link>
+          {isQuickView &&
+            <div className={`${styles.absolute} ${styles.indication}`} />
+          }
         </div>
         <Modal show={showNotify} onHide={this.closeNotify}>
           <Modal.Header closeButton>

@@ -8,7 +8,6 @@ import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from './quickview_en.styl';
 import styles_ar from './quickview_ar.styl';
 import QuickViewContent from './quickView'
-import { TransitionGroup } from 'react-transition-group'
 
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
@@ -31,7 +30,7 @@ class RenderResults extends Component {
         animationClass: 'animationClass'
       });
     }, 50);
-    
+
     this.myRef.current.scrollIntoView({
       behavior: 'smooth',
       block: 'center',
@@ -60,7 +59,8 @@ class RenderResults extends Component {
       next,
       productVariantId,
       productId,
-      onClose
+      onClose,
+      renderProductPage
     } = this.props;
     const {
       animationClass
@@ -76,6 +76,7 @@ class RenderResults extends Component {
           onClose={onClose}
           productVariantId={productVariantId}
           productId={productId}
+          renderProductPage={renderProductPage}
         >
         </QuickViewContent>
       </div>

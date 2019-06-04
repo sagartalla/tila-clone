@@ -27,21 +27,21 @@ class QuickView extends Component {
             next,
             productVariantId,
             productId,
-            onClose } = this.props
+            onClose,renderProductPage } = this.props
 
     if(!isProductLoaded.isProductLoaded) {
-      return <div>{`${PAYMENT_PAGE.PLEASE_WAIT} ${PDP_PAGE.PRODUCT_DETAILS} ${PAYMENT_PAGE.LOADING}`}</div>
+      return <div className={`${styles['mr-20']} ${styles['quick-view']}`}>{`${PAYMENT_PAGE.PLEASE_WAIT} ${PDP_PAGE.PRODUCT_DETAILS} ${PAYMENT_PAGE.LOADING}`}</div>
     }
     if(getErrorMessage) {
-      return <div>{getErrorMessage}</div>
+      return <div className={`${styles['mr-20']} ${styles['quick-view']}`}>{getErrorMessage}</div>
     }
     if(isProductLoaded.productDetails && isProductLoaded.productDetails.product_id !== productId) {
-      return <div>{`${PAYMENT_PAGE.PLEASE_WAIT} ${SEARCH_PAGE.SEARCH_RESULTS_FOR} ${SEARCH_PAGE.DATA}`}</div>
+      return <div className={`${styles['mr-20']} ${styles['quick-view']}`}>{`${PAYMENT_PAGE.PLEASE_WAIT} ${SEARCH_PAGE.SEARCH_RESULTS_FOR} ${SEARCH_PAGE.DATA}`}</div>
     }
     const Product = this.product
 
     return (
-      <div className={`${styles['mr-20']}`}>
+      <div className={`${styles['mr-20']} ${styles['quick-view']}`}>
         <div
           onClick={onClose}
           className={
@@ -79,7 +79,18 @@ class QuickView extends Component {
           productId={productId}
           isSearchPreview={true}
         />
+      <div
+        className={
+          `${styles['fullPage-btn']}
+           ${styles['fs-18']}
+           ${styles['fontW800']}
+           ${styles['pointer']}`
+         }
+         onClick={renderProductPage}
+        >
+        VIEW AS A FULL PAGE
       </div>
+    </div>
     )
   }
 }
