@@ -105,7 +105,7 @@ class EmailModal extends Component {
     const order_number = this.state.selectedOrder ? `${baseCustomObjectUrl}.order_number/${this.state.selectedOrder.order_item_ids[0]}` : '';
     const countryCode = `${baseCustomObjectUrl}.incident_source_country/${country}`;
     const languageCode = `${baseCustomObjectUrl}.incident_source_language/${language}`;
-    const categoryCode = `/Incident.Category/${this.state.selectedIssue.category}`;
+    const categoryCode = this.state.selectedIssue.category ? `/Incident.Category/${Number(this.state.selectedIssue.category)}` : '';
     const chatURL = `${baseURL}${firstName}${lastName}${email}${categoryCode}${order_number}${countryCode}${languageCode}`;
     window.open(chatURL, '_blank');
   }
