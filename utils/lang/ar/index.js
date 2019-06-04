@@ -546,6 +546,7 @@ export const AR_KEYWORDS = {
     SAVE_PASSWORD: 'حفظ كلمة السر',
     PASSWORD_RESET_SUCCESSFULL: 'تمت تغير كلمة السر بنجاح',
     CONFIRM_PASSWORD: 'تأكيد كلمة السر',
+    PLEASE_ACCEPT_OUR_TERMS: 'Please accept out terms and conditions to proceed',    
   },
   ORDER_PAGE: {
     LOADING: 'تحميل',
