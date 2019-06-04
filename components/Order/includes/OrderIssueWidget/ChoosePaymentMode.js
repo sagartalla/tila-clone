@@ -90,11 +90,12 @@ class ChoosePaymentMode extends Component {
   render() {
     const { orderDetails, orderIssue, goToNextStep } = this.props;
     const { paymentType } = this.state;
-    if(!(orderIssue && orderIssue.refundOptions && orderIssue.refundOptions.refund_modes && orderIssue.refundOptions.refund_modes.length)) {
+    if (!(orderIssue &&  Object.keys(orderIssue.refundOptions).length > 0)) {
       return <div>Loading...</div>
     }
-    if(!(orderIssue && orderIssue.refundOptions && orderIssue.refundOptions.refund_eligible) || (orderIssue && orderIssue.refundOptions && orderIssue.refundOptions.refund_modes && orderIssue.refundOptions.refund_modes[0] === 'NIL')) {
-       goToNextStep()
+    if (!(orderIssue && orderIssue.refundOptions.refund_eligible) || (orderIssue && orderIssue.refundOptions && orderIssue.refundOptions.refund_modes && orderIssue.refundOptions.refund_modes[0] === 'NIL')) {
+        goToNextStep();
+        return null;
      }
     return (
       <div>
