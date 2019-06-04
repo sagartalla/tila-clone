@@ -56,7 +56,17 @@ const WishlistBody = (props) => {
     Router.push(`/${country}/${language}/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemType}`);
   };
 
-  return (
+  return (data.length === 0 ?
+    (
+      <div className={styles['no-wishlist-icon']}>
+        <div className={`${styles['flex']} ${styles['no-wishlist-icon-inn']}`}>
+          <SVGComponent clsName={`${styles['deleno-wish-list-icon']}`} src="icons/wish-list/no-wishlist" />
+          <h4 className={`${styles['fs-26']} ${styles['t-c']} ${styles['pt-40']}`}>{WISH_LIST_PAGE.NO_WISHLIST_LABEL}</h4>
+          <span className={styles['thick-gry-clr']}>{WISH_LIST_PAGE.DONT_WAIT}</span>
+          <a href={`/${country}/${language}`} className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-x-large']} ${styles['right-radius']} ${styles['text-uppercase']} ${styles['fontW600']} ${styles['mt-40']}`}>{WISH_LIST_PAGE.START_SHOPPING}</a>
+        </div>
+      </div>
+    ) :
     <div>
       <div className={`${styles['flex']}`}>
         <Col md={12} sm={12} xs={12} className={`${styles['pl-0']}`}>
