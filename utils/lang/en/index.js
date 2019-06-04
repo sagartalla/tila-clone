@@ -256,6 +256,7 @@ export const EN_KEYWORDS = {
     HIDE_OUT_OF_STOCK: 'Hide Out of Stock',
     PLEASE_SELECT_PRODUCT_SIZE: 'Please Select Product Size',
     PDP_DONE: 'Done',
+    OUT_OF_STOCK: 'Out of stock',
     THANKS_FOR_RATING: 'Thanks for Rating',
     THANKS_DESCRIPTION: 'Thanks for taking your time to rate the product, this will help millions of users like you to make better purchase judgement',
   },

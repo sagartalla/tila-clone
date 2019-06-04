@@ -91,7 +91,7 @@ class NotifyMe extends React.Component {
         </div>
         <div className={styles.flex}>
           <Button
-            className={`${styles['fp-btn']} ${styles['fp-btn-primary']}`}
+            className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-x-large']} ${styles['text-uppercase']} ${styles['right-radius']}`}
             onClick={this.notify}
           >
             {PERSONAL_INFO_MODAL.NOTIFY}
