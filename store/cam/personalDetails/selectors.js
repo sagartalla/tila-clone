@@ -23,7 +23,7 @@ const getUserInfo = (store) => {
         contactInfo.lastUpdated = `Last updated ${msg}`;
       }
       else
-        contactInfo.lastUpdated = 'Not Available';
+        contactInfo.lastUpdated = 'Never updated';
 
     }
     let personalInfo = {}
