@@ -26,14 +26,12 @@ import main_ar from '../../../../layout/main/main_ar.styl';
 import styles_en from '../../order_en.styl';
 import styles_ar from '../../order_ar.styl';
 
-const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
 
 const { ORDER_PAGE, CART_PAGE, ORDERS } = languageDefinations();
 
 const cookies = new Cookies();
-
-
 
 const language = cookies.get('language') || 'en';
 const country = cookies.get('country') || 'SAU';
@@ -139,7 +137,7 @@ class OrderItem extends Component {
 
     const refundStatus = refund => (
       <span className={`${refund.status === 'COMPLETED' ? styles['success-th'] : styles['progress-th']} ${styles['ml-10']} ${styles['mr-10']} ${styles['pl-10']} ${styles['pr-10']} ${styles['border-radius4']}`}>
-        {refund.status === 'COMPLETED' ? 'Completed' : 'In Process'}
+        {refund.status === 'COMPLETED' ? ORDER_PAGE.COMPLETED : ORDER_PAGE.IN_PROGRESS}
       </span>
     );
 
@@ -256,7 +254,7 @@ class OrderItem extends Component {
                     <div className={`${styles['bg-white']} ${styles['fs-12']} ${styles.absolute} ${styles['p-5']} ${styles['border-lg']} ${styles['refund-label']}`}>{ORDER_PAGE.REFUND_STATUS}</div>
                     {product.refunds.map(refund => (
                       <div className={`${styles['flex-center']} ${styles['fs-12']}`}>
-                        <span className={styles['thick-gry-clr']}>Refund to:<span className={`${styles['black-color']} ${styles['ml-10']}`}>{refund.refund_mode === 'WALLET' ? 'Tila Wallet' : 'Card'}</span></span>
+                        <span className={styles['thick-gry-clr']}>{ORDER_PAGE.REFUND_TO}:<span className={`${styles['black-color']} ${styles['ml-10']}`}>{refund.refund_mode === 'WALLET' ? 'Tila Wallet' : 'Card'}</span></span>
                         {refundStatus(refund)}
                         <span>{refund.amount.display_value} {refund.amount.currency_code}</span>
                       </div>
