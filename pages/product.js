@@ -79,14 +79,10 @@ class ProductPage extends Base {
     return (
       <div>
         <Layout>
-<<<<<<< HEAD
           <Product
             variantId={url.query.variantId}
-            productId={url.query.productId}            
+            productId={url.query.productId}
           />
-=======
-          <Product query={url.query} />
->>>>>>> 35d3616b256a7d91f88d9b0a0deb2f48a61984c4
         </Layout>
       </div>
     );
