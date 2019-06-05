@@ -52,10 +52,6 @@ const getURl = (page) => {
         switch(env) {
           case 'stage':
           case 'staging':
-              return {
-                JS: 'https://static-dev.tila.com/tila-static-pages/fashion/index.js',
-                CSS: 'https://static-dev.tila.com/tila-static-pages/fashion/style.css'
-              };
           case 'preprod':
               return {
                 JS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/fashion/preprod/index.js?r=' + random,
@@ -67,10 +63,6 @@ const getURl = (page) => {
         switch(env) {
           case 'stage':
           case 'staging':
-              return {
-                JS: 'https://static-dev.tila.com/tila-static-pages/electronics/index.js',
-                CSS: 'https://static-dev.tila.com/tila-static-pages/electronics/style.css'
-              };
           case 'preprod':
               return {
                 JS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/electronics/preprod/index.js?r=' + random,
@@ -82,10 +74,6 @@ const getURl = (page) => {
         switch(env) {
           case 'stage':
           case 'staging':
-              return {
-                JS: 'https://static-dev.tila.com/tila-static-pages/lifestyle/index.js',
-                CSS: 'https://static-dev.tila.com/tila-static-pages/lifestyle/style.css'
-              };
           case 'preprod':
               return {
                 JS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/lifestyle/preprod/index.js?r=' + random,
@@ -97,10 +85,6 @@ const getURl = (page) => {
         switch(env) {
           case 'stage':
           case 'staging':
-              return {
-                JS: 'https://static-dev.tila.com/tila-static-pages/homepage/stage/index.js',
-                CSS: 'https://static-dev.tila.com/tila-static-pages/homepage/stage/style.css',
-              };
           case 'preprod':
               return {
                 JS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/homepage/preprod/index.js?r=' + random,
