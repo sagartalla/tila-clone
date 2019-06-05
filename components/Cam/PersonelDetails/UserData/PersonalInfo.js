@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';

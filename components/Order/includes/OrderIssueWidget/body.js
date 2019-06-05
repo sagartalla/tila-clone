@@ -99,7 +99,7 @@ class Body extends Component {
   }
 
   goToNextStep() {
-    const { goToNextStep, resetOrderIssue, orderIssue } = this.props;
+    const { goToNextStep, resetOrderIssue, orderIssue, getOrderDetails, query } = this.props;
     const { exchangeId } = orderIssue
     const {
       step: currentStep,
@@ -123,6 +123,7 @@ class Body extends Component {
       }
       case STEPS.CANCEL_COMPLETE: {
         nextStep = null;
+        window.location.reload();
         break;
       }
       case STEPS.CHOOSE_RETURN_EXCHANGE: {
@@ -144,6 +145,7 @@ class Body extends Component {
         break;
       }
       default:
+
     }
     nextStep !== null
       ?
@@ -167,6 +169,7 @@ const mapDispatchToProps = dispatch =>
     {
       goToNextStep: actionCreators.goToNextStep,
       resetOrderIssue: actionCreators.resetOrderIssue,
+      getOrderDetails: actionCreators.getOrderDetails ,
     },
     dispatch,
   );

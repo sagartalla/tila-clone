@@ -25,6 +25,7 @@ import main_en from '../../layout/main/main_en.styl';
 import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './header_en.styl';
 import styles_ar from './header_ar.styl';
+import ProfilePic from '../Cam/Sidebar/ProfilePic';
 
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
@@ -78,7 +79,7 @@ class ActionBar extends Component {
     if (nextProps.isLoggedIn !== this.props.isLoggedIn) {
       this.props.getWishlist();
     }
-
+    nextProps.userInfo.personalInfo.image_url && this.props.downloadPic(nextProps.userInfo.personalInfo.image_url);
     let show = ((nextProps.isLoggedIn != this.props.isLoggedIn) && !this.state.logoutClicked) || this.state.loginClicked || !!nextProps.error || (!nextProps.isLoggedIn && nextProps.showLogin) || nextProps.loginInProgress || nextProps.showEmailVerificationScreen;
     if (window.location.pathname.indexOf('/payment') > -1) {
       show = false;
@@ -100,6 +101,9 @@ class ActionBar extends Component {
     } else if ((nextProps.instaCode !== this.props.instaCode) && nextProps.instaCode) {
       window.localStorage.removeItem('instagramCode');
       this.getTokenCall('instagram', nextProps.instaCode);
+    }
+    if(nextProps.userInfo.personalInfo.image_url === this.props.userInfo.personalInfo.image_url){
+      return;
     }
   }
 
@@ -202,10 +206,11 @@ class ActionBar extends Component {
                 <SVGComponent clsName={`${styles['profile-icon']}`} src="icons/profile-icons/round-profile" />
               </span>
             </Dropdown.Toggle>
+            { isLoggedIn ?
             <Dropdown.Menu className={`${styles.item}`}>
               <div className={styles['profile-part']}>
                 <div className={`${styles['flex-center']} ${styles['ple-icon']}`}>
-                  <span className={styles.icon} />
+                    <ProfilePic loader={false} userInfo={userInfo} imgUrl={this.props.imgSource}/>
                   <span className={styles['pl-15']}>{HEADER_PAGE.HELLO} {userInfo.personalInfo.first_name || `${HEADER_PAGE.TILA_CUSTOMER}` }</span>
                 </div>
                 <ul className={`${styles['pl-0']} ${styles['profile-inn']}`}>
@@ -233,22 +238,33 @@ class ActionBar extends Component {
                     </a>
                   </li>
                   <li className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']}`}>
-                    {isLoggedIn
-                      ?
-                        <span onClick={this.logoutClick} className={`${styles['flex-center']} ${styles['login-details-inn']} ${styles.pointer}`}>
-                          <SVGComponent clsName={`${styles['logout-icon']}`} src="icons/common-icon/icon-logout" />
-                          <span className={`${styles['pl-20']} `}>{HEADER_PAGE.LOGOUT}</span>
-                        </span>
-                      :
-                        <span onClick={this.loginClick} className={`${styles['flex-center']} ${styles['login-details-inn']} ${styles.pointer}`}>
-                          <SVGComponent clsName={`${styles['login-icon']}`} src="icons/common-icon/icon-login" />
-                          <span className={`${styles['pl-20']}`}>{HEADER_PAGE.LOGIN}</span>
-                        </span>
-                    }
+                      <span onClick={this.logoutClick} className={`${styles['flex-center']} ${styles['login-details-inn']} ${styles.pointer}`}>
+                        <SVGComponent clsName={`${styles['logout-icon']}`} src="icons/common-icon/icon-logout" />
+                        <span className={`${styles['pl-20']} `}>{HEADER_PAGE.LOGOUT}</span>
+                      </span>
                   </li>
                 </ul>
               </div>
             </Dropdown.Menu>
+            :
+            <Dropdown.Menu className={`${styles.item}`}>
+              <div className={styles['profile-part']}>
+              <ul className={`${styles['pl-0']} ${styles['profile-inn']}`}>
+                <li className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']}`}>
+                  <a href={`/${country}/${language}/help/faq`} target="_blank" className={styles['flex-center']}><span className={styles.support}><span className={`${styles['flex-center']} ${styles['justify-center']}`}>?</span></span>
+                    <span className={styles['pl-20']}>{HEADER_PAGE.HELP_SUPPORT}</span>
+                  </a>
+                </li>
+                <li className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']}`}>
+                  <span onClick={this.loginClick} className={`${styles['flex-center']} ${styles['login-details-inn']} ${styles.pointer}`}>
+                    <SVGComponent clsName={`${styles['login-icon']}`} src="icons/common-icon/icon-login" />
+                    <span className={`${styles['pl-20']}`}>{HEADER_PAGE.LOGIN}</span>
+                  </span>
+                </li>
+                </ul>
+              </div>
+            </Dropdown.Menu>
+            }
           </Dropdown>
         </div>
         {
@@ -277,6 +293,7 @@ const mapStateToProps = store => ({
   wishListCount: wishListSelectors.getProductsDetails(store).length,
   showEmailVerificationScreen: selectors.showEmailVerificationScreen(store),
   getEditDetails: cartSelectors.getEditDetails(store),
+  imgSource: personalSelectors.getImageSource(store),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(
@@ -291,6 +308,7 @@ const mapDispatchToProps = dispatch => bindActionCreators(
     userLogin: actionCreators.userLogin,
     getWishlist: wishListActionCreators.getWishlistProducts,
     getUserProfileInfo: personalActionCreators.getUserProfileInfo,
+    downloadPic: personalActionCreators.downloadPic,
   },
   dispatch,
 );

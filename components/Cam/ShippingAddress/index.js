@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import Cookie from 'universal-cookie';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Modal } from 'react-router-modal';
 import { selectors as productSelectors, actionCreators as productActionCreators } from '../../../store/product';
 import { selectors as cartSelectors } from '../../../store/cart';
 import AddressNew from './includes/AddressNew';
@@ -14,7 +13,6 @@ import AddressHeader from './includes/AddressHeader';
 import { languageDefinations } from '../../../utils/lang/';
 import { actionCreators, selectors } from '../../../store/cam/address';
 import FormValidator from '../../common/FormValidator';
-import Slider from '../../common/slider';
 
 import lang from '../../../utils/language';
 
@@ -112,6 +110,7 @@ class ShippingAddress extends Component {
       validation: this.validations.valid(),
       showNewAddr: false,
       showSlider: true,
+      isEditAddr: false,
       showCitiesData: false,
       showCountriesData: false,
     };
@@ -257,6 +256,7 @@ class ShippingAddress extends Component {
     this.setState({
       showNewAddr: true,
       addr,
+      isEditAddr: true,
     }, () => setTimeout(() => {
       document.getElementById('content').scrollIntoView({ behavior: 'smooth' });
     }, 500));
@@ -272,6 +272,7 @@ class ShippingAddress extends Component {
     window.scrollTo(0, 0);
     this.setState({
       addr: initialAddrObj,
+      isEditAddr: false,
       showNewAddr: false,
     }, () => this.showAddAdrressForm());
   }
@@ -301,7 +302,7 @@ class ShippingAddress extends Component {
     if (validation.isValid) {
       if (this.state.addr.address_id !== 0) {
         this.props.editAddressDetails(this.state.addr);
-      } else {    
+      } else {
         this.props.sendNewAddressDetails(this.state.addr);
       }
      validation.isValid ? window.scrollTo(0, 0) : document.getElementById('content').scrollIntoView({ behavior: 'smooth' });
@@ -327,10 +328,10 @@ class ShippingAddress extends Component {
   render() {
     // if standalone is true, it is stand alone address page else from payment page or any other pages.
     const {
-      results, standalone, handleShippingAddressContinue, miniAddress, isPdp, getAllCities, countriesData, cartResults, showNonShippable, isPaymentPage,
+      results, standalone, handleShippingAddressContinue, miniAddress, isPdp, getAllCities, countriesData, cartResults, showNonShippable, isPaymentPage, selectedAddress
     } = this.props;
     const {
-      showNewAddr, addr, showCitiesData, showCountriesData, validation, showSlider,
+      showNewAddr, addr, showCitiesData, showCountriesData, validation, showSlider, isEditAddr,
     } = this.state;
     const { DELIVERY_ADDR_PAGE } = languageDefinations();
     return (
@@ -372,6 +373,7 @@ class ShippingAddress extends Component {
                         validation={validation}
                         showCountriesData={showCountriesData}
                         selectCountry={this.selectCountry}
+                        isEditAddr={isEditAddr}
                       />
                     </div>
                     :
@@ -407,6 +409,7 @@ class ShippingAddress extends Component {
                               showCitiesData={showCitiesData}
                               showCountriesData={showCountriesData}
                               selectCountry={this.selectCountry}
+                              isEditAddr={isEditAddr}
                             />
                           </div>
                         </div>
@@ -435,6 +438,7 @@ class ShippingAddress extends Component {
                     selectDeliverToAddress={this.selectDeliverToAddress}
                     standalone={standalone}
                     isPaymentPage={isPaymentPage}
+                    selectedAddress={selectedAddress}
                   />
                 </Col>
                 <Col md={12} sm={12} xs={12} id="content">
@@ -459,6 +463,7 @@ class ShippingAddress extends Component {
                         showCitiesData={showCitiesData}
                         selectCountry={this.selectCountry}
                         showCountriesData={showCountriesData}
+                        isEditAddr={isEditAddr}
                       /> : ''
                   }
                 </Col>

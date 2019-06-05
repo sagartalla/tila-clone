@@ -20,6 +20,7 @@ import { actionCreators, selectors } from '../../store/payments';
 import { actionCreators as cartAction } from '../../store/cart'
 import { actionCreators as authActionCreators, selectors as authSelectors } from '../../store/auth';
 import { actionCreators as cartActionCreators, selectors as cartSelectors } from '../../store/cart';
+import { selectors as addressSelectors } from '../../store/cam/address'
 import Slider from '../common/slider';
 import Coupon from '../Cart/CartPaymentSideBar/coupons';
 import FormValidator from '../common/FormValidator';
@@ -93,6 +94,7 @@ class Payments extends React.Component {
       loggedInFlag: false,
       editCartDetails: true,
       showSlider: false,
+      showError: false,
     }
 
     this.saveCard = this.saveCard.bind(this);
@@ -106,6 +108,7 @@ class Payments extends React.Component {
     this.handleOffersDiscountsTab = this.handleOffersDiscountsTab.bind(this);
     this.handleShippingAddressContinue = this.handleShippingAddressContinue.bind(this);
     this.onClickEdit = this.onClickEdit.bind(this);
+    this.checkBoxChange = this.checkBoxChange.bind(this);
   }
 
   componentDidMount() {
@@ -156,12 +159,24 @@ class Payments extends React.Component {
     });
   }
 
+
+  checkBoxChange(e) {
+    let { showError } = this.state;
+    if (!e.target.checked) {
+      showError = true;
+    } else {
+      showError = false;
+    }
+    this.setState({
+      showError,
+    });
+  }
+
   inputOnChange(e) {
     const { login } = this.state;
     login[e.target.name] = e.target.value;
     this.setState({ login });
   }
-
   // onclick payment method tabs.
   showPaymentType(value) {
     /* method not used */
@@ -194,10 +209,9 @@ class Payments extends React.Component {
 
   handleShippingAddressContinue(e) {
     const { editCartDetails } = this.state;
-    if (this.props.defaultAddress[0]) {
-      const defaultAddrId = this.props.defaultAddress[0].address_id;
-      this.props.createOrder(defaultAddrId)
-
+    const selectedAddrId = this.props.selectedAddress.address_id;
+    if (selectedAddrId) {
+      this.props.createOrder(selectedAddrId)
       const paymentConfigJson = { ...this.state.paymentConfigJson };
       paymentConfigJson['address'] = { basic: false, progress: false, done: true };
       // paymentConfigJson['loyaltyPoints'] = { basic: false, progress: true, done: false };
@@ -206,10 +220,7 @@ class Payments extends React.Component {
       this.setState(
        { paymentConfigJson, editCartDetails: !editCartDetails }
       ,() => this.props.cartEditDetails(this.state.editCartDetails));
-    } else {
-      toast.info('Please add a delivery address.');
     }
-
   }
 
   handleLoyaltyBtn() {
@@ -260,7 +271,8 @@ class Payments extends React.Component {
   //TODO Show loader on clicking on login button.
   showAddressTab() {
     const validation = this.validations.validate(this.state.login);
-    if (validation.isValid) {
+    const { showError } = this.state;
+    if (validation.isValid && !showError) {
       const serverData = {
         channel: 'BASIC_AUTH',
         metadata: this.state.login,
@@ -302,8 +314,8 @@ class Payments extends React.Component {
     });
   }
   render() {
-    const { login, showTab, paymentConfigJson, editCartDetails, showSlider, validation } = this.state;
-    const { paymentOptions, defaultAddress, signInLoader, isLoggedIn, cartResults } = this.props;
+    const { login, showTab, paymentConfigJson, editCartDetails, showSlider, validation, showError } = this.state;
+    const { paymentOptions, selectedAddress, signInLoader, isLoggedIn, cartResults } = this.props;
     const { PAYMENT_PAGE, CART_PAGE } = languageDefinations();
 
     return (
@@ -325,9 +337,11 @@ class Payments extends React.Component {
                 configJson={paymentConfigJson.signIn}
                 onClickEdit={this.onClickEdit}
                 validation={validation}
+                checkBoxChange={this.checkBoxChange}
+                showError={showError}
               />
               <DeliveryAddress
-                defaultAddress={defaultAddress}
+                selectedAddress={selectedAddress}
                 editAddressTab={this.editAddressTab}
                 configJson={paymentConfigJson.address}
                 handleShippingAddressContinue={this.handleShippingAddressContinue}
@@ -398,9 +412,9 @@ const mapStateToprops = store => ({
   cartResults: cartSelectors.getCartResults(store),
   paymentOptions: selectors.getPaymentOptions(store),
   makePaymentOptions: selectors.getPaymentUrl(store),
-  defaultAddress: selectors.getDefaultAddress(store),
   isLoggedIn: authSelectors.getLoggedInStatus(store),
   signInLoader: authSelectors.getLoginProgressStatus(store),
+  selectedAddress: addressSelectors.getSelectedAddress(store),
 });
 
 const mapDispatchToProps = dispatch =>
