@@ -333,6 +333,7 @@ class ShippingAddress extends Component {
                 data={results}
                 makeDefaultAddress={this.makeDefaultAddress}
                 showAddAdrressForm={this.showAddAdrressForm}
+                selectDeliverToAddress={this.selectDeliverToAddress}
               />
               {
                 showNewAddr
