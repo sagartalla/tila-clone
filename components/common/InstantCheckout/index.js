@@ -204,7 +204,7 @@ class InstantCheckout extends Component {
     return (
       <div>
         {
-          selectedAddr && defaultCard.length > 0 ?
+          selectedAddr && selectedAddr.address_id && defaultCard.length > 0 ?
             <div className={`${styles['instant-checkout']} ${styles['p-10']}`}>
               <div className={`${styles['pr-10']} ${styles['pl-10']}`}>
                 {
@@ -225,7 +225,7 @@ class InstantCheckout extends Component {
                 </div>
                 <div className={`${styles['border']} ${styles['border-radius2']} ${styles['bg-white']} ${styles['relative']} ${styles['mt-10']}`}>
                   {
-                    selectedAddr ?
+                    selectedAddr && selectedAddr.address_id ?
                       <Fragment>
                         <AddrCard
                           selectedAddr={selectedAddr}

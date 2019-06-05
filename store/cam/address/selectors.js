@@ -49,7 +49,7 @@ const getSelectedAddress = (store) => {
   if(!selectedAddress) {
     selectedAddress = getDefaultAddress(store)[0];
   }
-  return selectedAddress
+  return selectedAddress || {};
 }
 
 export { getShippingAddressResults, getAddrById, getAddressWithNameAndPhone, getDefaultAddress, getSelectedAddress };

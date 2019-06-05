@@ -42,7 +42,7 @@ const AddressBody = (props) => {
       <Row className={`${styles['flex']} ${styles['flex-wrp']}`}>
         {
           props.data && props.data.map((val, id) => {
-            const isDefault = val.address_id === props.selectedAddress.address_id;
+            const isDefault = val.address_id === (props.selectedAddress || {}).address_id;
             const colLength = props.isPaymentPage && !isDefault ? 4 : 6;
             return (
               <Col md={4} sm={12} xs={12} key={id}>
