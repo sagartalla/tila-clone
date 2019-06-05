@@ -20,7 +20,7 @@ import styles_ar from './index_ar.styl';
 const allStyles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const config = getConfig();
-const isLocal = false; //config.publicRuntimeConfig.isLocal;
+const isLocal = config.publicRuntimeConfig.isLocal;
 const env = config.publicRuntimeConfig.env
 const random = Math.floor(Math.random()*100);
 
