@@ -133,7 +133,7 @@ class Review extends Component {
               </div>
               <React.Fragment>
                 {
-                  reviewData.length ? this.renderReviewDetails(reviewData, categoryType) : <div> {PDP_PAGE.NO_REVIEWS_AVAILABLE} </div>
+                  reviewData.length ? this.renderReviewDetails(reviewData, categoryType) : <div className={styles['pb-15']}> {PDP_PAGE.NO_REVIEWS_AVAILABLE} </div>
                 }
               </React.Fragment>
               <div>
