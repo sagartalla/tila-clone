@@ -22,7 +22,7 @@ const cookies = new Cookies();
 const language = cookies.get('language') || 'en';
 const country = cookies.get('country') || 'SAU';
 
-const Order = ({ order }) => {
+const Order = ({ order, getInvoice }) => {
   const popover = (
     <Popover id="popover-positioned-right">
       <div className={`${styles.flex} ${styles['justify-between']} ${styles['flex-colum']} ${styles['ht-100']}`}>
@@ -32,6 +32,8 @@ const Order = ({ order }) => {
       </div>
     </Popover>
   );
+
+  const fetchInvoice = () => getInvoice(order.id);
 
   const routeChange = () => {
     Router.push(`/${country}/${language}/cam/orders/${order.id}`);
@@ -47,7 +49,7 @@ const Order = ({ order }) => {
         </div>
         <div>
           <span>{ORDERS.SHIPPING_TO}</span>
-          <div className={`${styles['flex']}`}>
+          <div className={`${styles.flex}`}>
             <span className={`${styles['text-capitalize']}`}>{order.shippingTo.name}</span>
             <OverlayTrigger placement="bottom" overlay={popover}>
               <span className={styles['ml-10']}>
@@ -84,28 +86,32 @@ const Order = ({ order }) => {
             <span>
               Ordered on{' '}
             </span>
-            <span className={`${styles['fontW600']} ${styles['light-gry-clr']}`}>
+            <span className={`${styles.fontW600} ${styles['light-gry-clr']}`}>
               {order.orderDate}
             </span>
           </div>
           <a href={`/${country}/${language}/help/answers/orders#${order.id}`}>
             <span className={`${styles['p-5']} ${styles['black-color']} ${styles['flex-center']} ${styles['ml-10']}`}>
               <SVGComponent clsName={`${styles['help-icon']}`} src="icons/help-icon/help" />
-            &nbsp;&nbsp;{ORDERS.NEED_HELP}?
+              &nbsp;&nbsp;{ORDERS.NEED_HELP}?
             </span>
           </a>
 
         </Col>
         <Col md={5} className={styles['pl-0']}>
           <div className={`${styles['flx-space-bw']}`}>
-            <span className={`${styles['flex']}`}>
-              <span>{ORDERS.REQUEST_INVOICE}&nbsp;</span>
-              <span>
-                <SVGComponent clsName={`${styles['down-arrow']}`} src="icons/down-arrow/down-arrow" />
+            <span className={`${styles.flex} ${styles.pointer}`}>
+              {order.invoice_id &&
+              <span className={styles.flex} onClick={fetchInvoice}>
+                <span>{ORDERS.REQUEST_INVOICE}&nbsp;</span>
+                <span>
+                  <SVGComponent clsName={`${styles['down-arrow']}`} src="icons/down-arrow/down-arrow" />
+                </span>
               </span>
+              }
             </span>
             <span className={`${styles['ml-10']} ${styles['fs-16']}`}>
-              <span>{ORDERS.ORDER_TOTAL}:</span> <span className={`${styles['fontW600']} ${styles['light-gry-clr']}`}>{order.orderTotal}</span>
+              <span>{ORDERS.ORDER_TOTAL}:</span> <span className={`${styles.fontW600} ${styles['light-gry-clr']}`}>{order.orderTotal}</span>
             </span>
           </div>
         </Col>

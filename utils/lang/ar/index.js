@@ -574,7 +574,7 @@ export const AR_KEYWORDS = {
     TOTAL: 'الإجمالي',
     GRAND_TOTAL: 'المجموع الكلي',
     CHANGE_ADDRESS: 'تغيير العنوان',
-    REQ_INVOICE: 'طلب الفاتوره\الرسالة',
+    REQ_INVOICE: '< طلب الفاتوره\الرسالة',
     PAY_METHOD: 'طريقة الدفع',
     SUB_TOTAL: 'المبلغ الإجمالي',
     ORDER_DATE: 'تاريخ الطلب',
@@ -619,7 +619,7 @@ export const AR_KEYWORDS = {
     REFUND_STATUS: 'Refund Status',
     TO_VIEW_PARENT_ORDER: 'To view parent order please',
     CLICK_HERE: 'Click here',
-    YOUR_ITEM_IS_OUT_FOR_DELIVERY: 'Your Item is out for delivery',
+    YOUR_ITEM_IS_OUT_FOR_DELIVERY: 'البند الخاص بك هو خارج للتسليم',
     REPLACE: 'Replace',
   },
   COUPON_OFFERS: {

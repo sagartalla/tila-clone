@@ -585,7 +585,7 @@ export const EN_KEYWORDS = {
     TOTAL: 'Total',
     GRAND_TOTAL: 'Grand Total',
     CHANGE_ADDRESS: 'CHANGE ADDRESS',
-    REQ_INVOICE: 'Request Invoice',
+    REQ_INVOICE: 'Request Invoice >',
     PAY_METHOD: 'PAYMENT METHOD',
     SUB_TOTAL: 'Subtotal',
     ORDER_DATE: 'Order Date',
