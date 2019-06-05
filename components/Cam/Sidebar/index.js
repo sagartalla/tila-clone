@@ -13,10 +13,10 @@ import styles_ar from './sidebar_ar.styl';
 
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
-const Sidebar = ({query}) => (
+const Sidebar = ({query, imgUrl}) => (
   <div className={`${styles['sidebar-container']} hidden-xs`}>
     <div>
-      <UserProfile query={query} />
+      <UserProfile query={query} imgUrl={imgUrl}/>
     </div>
     <div>
       <List query={query} data={data} />
