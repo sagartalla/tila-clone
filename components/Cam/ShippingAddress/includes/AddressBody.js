@@ -112,7 +112,7 @@ const AddressBody = (props) => {
         <Col md={4} sm={12} xs={12}>
           <div className={`${styles['address-card']} ${styles['address-card-new']} ${styles['p-20']}`}>
             <div className={`${styles['flex-center']} ${styles['flex-wrap']}`}>
-              <h4 className={`${styles['m-0']} ${styles['mb-10']} ${styles['thick-blue']} ${styles['fontW600']} ${styles['flex-center']} ${styles['flex']}`}>
+              <h4 className={`${styles['m-0']} ${styles['mb-10']} ${styles['black-color']} ${styles['fontW600']} ${styles['flex-center']} ${styles['flex']}`}>
                 <SVGComponent clsName={`${styles['pls-icon']}`} src="icons/common-icon/plus-icon" />
                 <span className={styles['pl-10']}>{DELIVERY_ADDR_PAGE.ADD_NEW_ADDR}</span>
               </h4>
