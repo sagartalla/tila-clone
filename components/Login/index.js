@@ -273,7 +273,7 @@ class Login extends Component {
                     <label>{LOGIN_PAGE.PASSWORD}</label>
                   </div> */}
                   <div className={`${styles['fp-input']} ${styles['pb-10']}`}>
-                      <input onChange={this.onChangeField} className={`${styles['m-fs-16']} ${styles.width100}`} name="password" type={hide ? 'password' : 'input'} value={this.state.password} required />
+                      <input onChange={this.onChangeField} className={`${styles['m-fs-16']} ${styles.width100}`} name="password" type={hide ? 'password' : 'text'} value={this.state.password} required />
                       <span className={styles.highlight} />
                       <span className={styles.bar} />
                       <ShowHidePassword hide={this.state.hide} hideToggle={this.hideToggle}/>
