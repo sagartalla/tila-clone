@@ -155,6 +155,8 @@ export const AR_KEYWORDS = {
     NOT_SHIPPABLE: 'Not Shippable',
     UNFORTUNATELY_WE_CANNOT_DELIVER_REMOVE_ITEM: 'للأسف ، لا يمكننا تسليم بعض المنتجات إلى العنوان الذي حددته. يرجى إزالة المنتج من سلة التسوق الصغيرة على اليمين ، أو تغيير عنوان التسليم للمتابعة.',
     LOCATE_ME: 'تحديد موقع لي  ',
+    NO_DELIVER_ADDRESS_TITLE: 'Where are all the saved addresses?',
+    NO_DELIVERY_ADDRESS_LABEL: 'Do tell us where you stay for faster Delivery',
   },
   WISH_LIST_PAGE: {
     WISHLIST_HEADER: 'المنتجات الموجوده في قائمة المفضلة',
@@ -163,6 +165,9 @@ export const AR_KEYWORDS = {
     FROM_YOUR_WISHLIST: 'من قائمة المفضلة',
     WHEN_ADDED_TO_WISHLIST: 'عند إضافته إلى قائمة المفضلة',
     ITEM_WAS: 'المنتج كان',
+    NO_WISHLIST_LABEL: 'So many products on Tila and yet you show no love :(',
+    DONT_WAIT: 'Dont wait no more!',
+    START_SHOPPING: 'Start shopping',
   },
   PDP_PAGE: {
     LOADING_REVIEWS: 'تحميل تعليقات المستخدم',
@@ -248,6 +253,7 @@ export const AR_KEYWORDS = {
     PLEASE_SELECT_PRODUCT_SIZE: 'يرجى  اختيار قياس المنتج',
     THANKS_FOR_RATING: 'Thanks for Rating',
     PDP_DONE: 'Done',
+    OUT_OF_STOCK: 'نفذت الكمية',
     THANKS_DESCRIPTION: 'Thanks for taking your time to rate the product, this will help millions of users like you to make better purchase judgement',
   },
   VAULT_PAGE: {
@@ -277,6 +283,9 @@ export const AR_KEYWORDS = {
     EXPIRY_MONTH: 'شهر الإنتهاء',
     EXPIRY_YEAR: 'سنة \عام الانتهاء',
     YOUR_TILA_CREDIT_BALANCE_IS: 'رصيدك المتبقي لحساب تيله هو',
+    NO_CART_LABEL: 'Where are all the saved Cards?',
+    NO_CARD_LABEL: 'Save your cards for faster checkouts.',
+    NO_VOCHER_LABEL: 'Save your cards for faster checkouts.',
   },
   // new page
   THANK_YOU_PAGE: {
@@ -661,6 +670,9 @@ export const AR_KEYWORDS = {
     ORDER_TOTAL: 'مجموع الطلب',
     NEED_HELP: 'تحتاج مساعدة\ للمساعدة',
     ORDER: 'ORDER #',
+    NO_WISHLIST_LABEL: 'You don’t have any orders yet',
+    DONT_WAIT: 'Dont wait no more!',
+    START_SHOPPING: 'Start shopping',
   },
   BETA: {
     BETA: 'فترة تجريبية',
@@ -734,5 +746,7 @@ export const AR_KEYWORDS = {
     RATED_REVIEWS: 'You have Rated & Reviewed',
     ITEMS: 'items',
     WRITE_A_REVIEW: 'Write a review',
+    NO_REVIEW_TITLE: 'Nothing here but me :(',
+    NO_REVIEW_LABEL: 'No reviews to show yet. Check back later',
   },
 };
