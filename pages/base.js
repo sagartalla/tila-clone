@@ -9,11 +9,34 @@ import { actionCreators } from '../store/auth';
 
 // const cookies = new Cookies();
 
+import io from 'socket.io-client';
+
 class Base extends Component {
   componentWillMount() {
 
   }
   componentDidMount() {
+
+    this.socket = io();
+    this.socket.on('now', (data) => {
+      console.log('the socket data ::', data);
+    });
+
+    this.socket.on('connect', (data) =>{
+      console.log("Socket ON Connect Event");
+      this.socket.emit('join', 'Hello World from client');
+   });
+
+    this.socket.on('connectionSuccess',  (data) => {
+        console.log("socket connection success");
+        console.log(data.message);
+    });
+
+    this.socket.on('pagedataupdate', (data) => {
+      console.log('Page Data Update Message');
+      console.log(data.data);
+    })
+
     const history = createHistory();
     configureUrlQuery({ history });
     // window.elasticApm.setInitialPageLoadName(this.pageName);

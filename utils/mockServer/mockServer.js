@@ -76,7 +76,7 @@ net.createServer((sock) => {
 
     setInterval(() =>{
         myFunction();
-    }, 5000);
+    }, 10000);
 
 
 }).listen(config.port, config.host);
