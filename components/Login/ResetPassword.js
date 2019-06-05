@@ -13,6 +13,7 @@ import main_en from '../../layout/main/main_en.styl';
 import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './login_en.styl';
 import styles_ar from './login_ar.styl';
+import HeaderBar from '../HeaderBar';
 
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
@@ -60,6 +61,7 @@ class ResetPassword extends Component {
       const { password, confirmPassword } = this.state;
       return (
         <div>
+          <HeaderBar hideActionBar hideMegamenu hideSearch/>
             {!this.state.success ?
               <div className={`${styles.flex} ${styles['justify-center']} ${styles['ht-100vh']} ${styles['flex-center']} ${styles['bg-gray']}`}>
               <div className={styles['reset-password']}>
