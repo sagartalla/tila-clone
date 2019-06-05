@@ -71,7 +71,7 @@ class VerifyEmail extends Component {
     const { email, onBackdropClick, loadingStatus } = this.props;
     const { value, otpError } = this.state;
     return (
-      <div>
+      <div className={`${styles.width100}`}>
         <div className={`${styles.flex} ${styles['align-center']} ${styles['justify-between']}  ${styles['mt-15']}`}>
           <div className={`${styles['ff-b']} ${styles['fs-20']}`}>{EMAIL_VERIFICATION.VERIFY_YOUR_EMAIL}</div>
           <div className={`${styles.flex} ${styles.pointer}`} onClick={onBackdropClick}><SVGComponent clsName={`${styles['cross-icon']}`} src="icons/common-icon/cross-button" /></div>
@@ -82,7 +82,7 @@ class VerifyEmail extends Component {
               <SVGComponent clsName={`${styles['tickmark-icon']}`} src="icons/common-icon/blue-tick" />
               <div className={`${styles['ml-10']}`}>{EMAIL_VERIFICATION.OTP_SENT}</div>
             </div>
-            <div className={`${styles['ff-b']} ${styles['fs-16']} ${styles['ml-25']}`}>{email}</div>
+            <div className={`${styles['ff-b']} ${styles['fs-16']} ${styles.ellipsis} ${styles['ml-25']}`} title={email} >{email}</div>
           </div>
           <div className={`${styles.flex} ${styles['align-center']} ${styles['flex-col']}`}>
             <div>{EMAIL_VERIFICATION.ENTER_OTP}</div>

@@ -110,7 +110,7 @@ const AddressBody = (props) => {
           })
         }
         <Col md={4} sm={12} xs={12}>
-          <div className={`${styles['address-card']} ${styles['address-card-new']} ${styles['p-20']}`} onClick={props.resetAddAdrressForm}>
+          <div className={`${styles['address-card']} ${styles['address-card-new']} ${styles['p-20']}`}>
             <div className={`${styles['flex-center']} ${styles['flex-wrap']}`}>
               <h4 className={`${styles['m-0']} ${styles['mb-10']} ${styles['thick-blue']} ${styles['fontW600']} ${styles['flex-center']} ${styles['flex']}`}>
                 <SVGComponent clsName={`${styles['pls-icon']}`} src="icons/common-icon/plus-icon" />
@@ -118,7 +118,7 @@ const AddressBody = (props) => {
               </h4>
               <p className={`${styles['fs-12']} ${styles['thick-gry-clr']}`}>{DELIVERY_ADDR_PAGE.ADD_NEW_ADDR_TAG}</p>
               <p>
-                <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']} ${styles['left-radius']} ${styles['small-btn']}`}>
+                <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']} ${styles['left-radius']} ${styles['small-btn']}`} onClick={props.addAddressForm}>
                   {DELIVERY_ADDR_PAGE.ADD_NEW_BTN}
                 </button>
               </p>

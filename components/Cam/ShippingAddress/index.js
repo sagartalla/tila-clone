@@ -126,6 +126,7 @@ class ShippingAddress extends Component {
     this.resetAddAdrressForm = this.resetAddAdrressForm.bind(this);
     this.selectCityFromSuggesstions = this.selectCityFromSuggesstions.bind(this);
     this.selectDeliverToAddress = this.selectDeliverToAddress.bind(this);
+    this.addAddressForm = this.addAddressForm.bind(this);
   }
 
   componentDidMount() {
@@ -256,7 +257,9 @@ class ShippingAddress extends Component {
       showNewAddr: true,
       addr,
       isEditAddr: true,
-    });
+    }, () => setTimeout(() => {
+      document.getElementById('content').scrollIntoView({ behavior: 'smooth' });
+    }, 500));
   }
 
   makeDefaultAddress(addrId) {
@@ -266,17 +269,28 @@ class ShippingAddress extends Component {
   }
 
   resetAddAdrressForm() {
+    window.scrollTo(0, 0);
     this.setState({
       addr: initialAddrObj,
       isEditAddr: false,
-    });
-    this.showAddAdrressForm();
+      showNewAddr: false,
+    }, () => this.showAddAdrressForm());
   }
 
-  showAddAdrressForm() {
+  addAddressForm() {
+    this.setState({
+      addr: initialAddrObj,
+      showNewAddr: true,
+    }, () => setTimeout(() => {
+      this.showAddAdrressForm();
+      document.getElementById('content').scrollIntoView({ behavior: 'smooth' });
+    }, 100));
+  }
+
+  showAddAdrressForm = (key) => () => {
     const { isFromCart } = this.props;
     this.setState({
-      showNewAddr: isFromCart ? true : !this.state.showNewAddr,
+      showNewAddr: isFromCart ? true : (key === 'pdp' ? true :this.state.showNewAddr),
       validation: this.validations.valid(),
       showSlider: true,
     });
@@ -291,8 +305,8 @@ class ShippingAddress extends Component {
       } else {
         this.props.sendNewAddressDetails(this.state.addr);
       }
-      this.setState({ addr: initialAddrObj });
-      this.showAddAdrressForm();
+     validation.isValid ? window.scrollTo(0, 0) : document.getElementById('content').scrollIntoView({ behavior: 'smooth' });
+      this.setState({ addr: initialAddrObj, showNewAddr: false }, () => this.showAddAdrressForm());
     }
     this.setState({
       validation,
@@ -322,7 +336,7 @@ class ShippingAddress extends Component {
     const { DELIVERY_ADDR_PAGE } = languageDefinations();
     return (
       <div className={`${styles['address-container']} ${standalone !== true ? '' : `${styles.box} ${styles['ml-5']}`} `}>
-        {!cartResults.cart_shippable && (cartResults.cart_shippable !== undefined) && showNonShippable &&
+        {cartResults.address !== null && !cartResults.cart_shippable && (cartResults.cart_shippable !== undefined) && showNonShippable &&
         <div className={`${styles['not-shippable']} ${styles.flex} ${styles['mb-20']} ${styles['p-10']}`}>
           <Col md={2} sm={3} xs={3} className={`${styles['thick-red-clr']} ${styles.fontW600} ${styles['not-shipping-font']}`}>{DELIVERY_ADDR_PAGE.NOT_SHIPPABLE}</Col>
           <Col md={10} sm={9} xs={9} className={`${styles['fs-12']} ${styles.fontW600}`}>{DELIVERY_ADDR_PAGE.UNFORTUNATELY_WE_CANNOT_DELIVER_REMOVE_ITEM}</Col>
@@ -351,6 +365,7 @@ class ShippingAddress extends Component {
                         setAsDefaultLocation={this.setAsDefaultLocation}
                         addrTypeHandler={this.addrTypeHandler}
                         resetAddAdrressForm={this.resetAddAdrressForm}
+                        addAddressForm={this.addAddressForm}
                         getAllCities={getAllCities}
                         countriesData={countriesData}
                         selectCityFromSuggesstions={this.selectCityFromSuggesstions}
@@ -384,6 +399,7 @@ class ShippingAddress extends Component {
                               getDataFromMap={this.getDataFromMap}
                               setAsDefaultLocation={this.setAsDefaultLocation}
                               resetAddAdrressForm={this.resetAddAdrressForm}
+                              addAddressForm={this.addAddressForm}
                               addrTypeHandler={this.addrTypeHandler}
                               showAddAdrressForm={this.showAddAdrressForm}
                               getAllCities={getAllCities}
@@ -418,13 +434,14 @@ class ShippingAddress extends Component {
                     editAddress={this.editAddress}
                     makeDefaultAddress={this.makeDefaultAddress}
                     resetAddAdrressForm={this.resetAddAdrressForm}
+                    addAddressForm={this.addAddressForm}
                     selectDeliverToAddress={this.selectDeliverToAddress}
                     standalone={standalone}
                     isPaymentPage={isPaymentPage}
                     selectedAddress={selectedAddress}
                   />
                 </Col>
-                <Col md={12} sm={12} xs={12}>
+                <Col md={12} sm={12} xs={12} id="content">
                   {
                     showNewAddr ?
                       <AddressNew
@@ -437,6 +454,7 @@ class ShippingAddress extends Component {
                         setAsDefaultLocation={this.setAsDefaultLocation}
                         addrTypeHandler={this.addrTypeHandler}
                         resetAddAdrressForm={this.resetAddAdrressForm}
+                        addAddressForm={this.addAddressForm}
                         showAddAdrressForm={this.showAddAdrressForm}
                         getAllCities={getAllCities}
                         countriesData={countriesData}

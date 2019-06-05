@@ -7,4 +7,17 @@
     right: 0;
     z-index: 999;
     background: rgba(0,0,0,0.5);
+    animation-name: slideOpen;
+    animation-duration: 0.5s;
+    animation-fill-mode: both;
+}
+
+
+@keyframes slideOpen {
+  from {right: -800px;}
+  to {right: 0;}
+}
+@keyframes slideClose {
+  from {right: 0px;}
+  to {right: -800px;}
 }
