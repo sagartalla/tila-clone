@@ -23,6 +23,9 @@ const MiniAddress = (props) => {
   const selectDeliverToAddress = (e) => {
     props.selectDeliverToAddress(e.currentTarget.id);
   }
+  const showAddAdrress = (e) => {
+    showAddAdrressForm(e.target.getAttribute('data-page'));
+  }
   return (
     <div className={`${styles['absolute']} ${styles['bg-white']} ${styles['min-address-part']}`}>
       <div className={styles['min-address-list']}>
@@ -40,7 +43,7 @@ const MiniAddress = (props) => {
         }
       </div>
       <div className={`${styles['flex']} ${styles['justify-center']} ${styles['p-10']} ${styles['add-new-addres']}`}>
-        <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['fp-btn-large']}`} onClick={showAddAdrressForm('pdp')}> {DELIVERY_ADDR_PAGE.ADD_NEW_BTN} </button>
+        <button data-page="pdp" className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['fp-btn-large']}`} onClick={showAddAdrress}> {DELIVERY_ADDR_PAGE.ADD_NEW_BTN} </button>
       </div>
     </div>
   )

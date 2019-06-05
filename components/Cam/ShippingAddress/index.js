@@ -242,10 +242,13 @@ class ShippingAddress extends Component {
   }
 
   deleteAddr(addrId) {
-    this.props.deleteAddress(addrId);
+    this.props.deleteAddress(addrId).then(() => {
+      this.resetAddAdrressForm();
+    });
   }
 
   closeSlider = () => {
+    document.getElementsByTagName('BODY')[0].style.overflow = 'auto';
     this.setState({ showSlider: false });
   }
 
@@ -281,16 +284,20 @@ class ShippingAddress extends Component {
     this.setState({
       addr: initialAddrObj,
       showNewAddr: true,
+      isEditAddr: false,
     }, () => setTimeout(() => {
       this.showAddAdrressForm();
       document.getElementById('content').scrollIntoView({ behavior: 'smooth' });
     }, 100));
   }
 
-  showAddAdrressForm = (key) => () => {
+  showAddAdrressForm = (key) => {
     const { isFromCart } = this.props;
+    if (key === 'pdp') {
+      document.getElementsByTagName('BODY')[0].style.overflow = 'hidden';
+    }
     this.setState({
-      showNewAddr: isFromCart ? true : (key === 'pdp' ? true :this.state.showNewAddr),
+      showNewAddr: isFromCart ? true : (key === 'pdp' ? true : this.state.showNewAddr),
       validation: this.validations.valid(),
       showSlider: true,
     });
