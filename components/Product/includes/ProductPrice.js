@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import SVGComponent from '../../common/SVGComponet';
 
 import { languageDefinations } from '../../../utils/lang';
@@ -13,66 +13,19 @@ import styles_ar from '../product_ar.styl';
 
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
-const { PDP_PAGE, CART_PAGE, ORDER_PAGE, COUPON_OFFERS } = languageDefinations();
-
-const popover = ({strickedPrice: mrp, sellingPrice:sp, offerDiscounts, showPrise:total, totalDiscountMRP:discountMrp, currency}) => {
-  return (
-      <div className={`${styles['p-10']} ${styles['tool-tip']}`}>
-        <div className={`${styles['table']} ${styles['width100']}`}>
-          <div className={styles['t-row']}>
-            <div className={styles['t-cell']}>
-              <div className={styles['fs-12']}>{CART_PAGE.MAXIMUM_RETAIL_PRICE}</div>
-              <div className={styles['fs-12']}>({CART_PAGE.INCL_OF_ALL_TAXES})</div>
-            </div>
-            <div className={styles['t-cell']}>
-              <span className={styles['fs-12']}>{`${mrp.display_value} ${mrp.currency_code || currency}`}</span>
-            </div>
-          </div>
-          <div className={styles['t-row']}>
-            <div className={styles['t-cell']}>
-              <div className={styles['fs-12']}>{CART_PAGE.SELLING_PRICE}</div>
-            </div>
-            <div className={styles['t-cell']}>
-              <span className={styles['fs-12']}>{`${sp.display_value} ${sp.currency_code || currency}`}</span>
-            </div>
-          </div>
-          {
-            offerDiscounts.map((od) => {
-              return (
-                <div className={styles['t-row']}>
-                  <div className={styles['t-cell']}>
-                    <div className={styles['fs-12']}>{od.description}</div>
-                  </div>
-                  <div className={styles['t-cell']}>
-                    <span className={styles['fs-12']}>{`${od.discount.display_value} ${od.discount.currency_code || currency}`}</span>
-                  </div>
-                </div>
-              );
-            })
-          }
-          <div className={styles['t-row']}>
-            <div className={styles['t-cell']}>
-              <div className={styles['fs-12']}>{CART_PAGE.DELIVERY_CHARGES}</div>
-            </div>
-            <div className={`${styles['t-cell']} ${styles['fs-12']}`}>
-              <SVGComponent clsName={`${styles['ship-icon']}`} src="icons/free-shipping" />
-            </div>
-          </div>
-          <div className={`${styles['t-row']} ${styles['total-amount']}`}>
-            <div className={`${styles['t-cell']} ${styles['fs-12']}`}>{ORDER_PAGE.TOTAL}</div>
-            <div className={`${styles['t-cell']} ${styles['fs-12']}`}>{`${total.display_value} ${total.currency_code || currency}`}</div>
-          </div>
-        </div>
-        <div>
-          <div className={`${styles['p-5']} ${styles['mt-5']} ${styles['fs-12']} ${styles['overall-amount']}`}>{CART_PAGE.OVERALL_YOU_SAVE} {discountMrp && discountMrp.display_value && `${discountMrp.display_value} ${currency}`} {CART_PAGE.ON_THIS_PRODUCT}</div>
-        </div>
-      </div>
-  );
-}
+const {
+  PDP_PAGE, CART_PAGE, ORDER_PAGE, COUPON_OFFERS 
+} = languageDefinations();
 
 const ProductPrice = ({offerInfo}) => {
-  const { price, listingAvailable, listingId, stockError, availabilityError, offerPricing } = offerInfo;
- return(
+  const {
+    price, listingAvailable, listingId, stockError, availabilityError, offerPricing,
+  } = offerInfo;
+  const {
+    strickedPrice: mrp, sellingPrice: sp, offerDiscounts, showPrise: total, totalDiscountMRP: discountMrp, currency,
+  } = offerPricing;
+  const [showToolTip, toggleTooltip] = useState(false);
+  return(
   <div className={`${styles['product-price-bg']} ${styles['border-radius4']}`}>
     {
       listingAvailable
@@ -92,12 +45,66 @@ const ProductPrice = ({offerInfo}) => {
               <div className={`${styles['flex']} ${styles['align-baseline']} ${styles['relative']} ${styles['ml-10']}`}>
                 {offerPricing && offerPricing.showPrise && offerPricing.showPrise.display_value !== offerPricing && offerPricing.strickedPrice && offerPricing.strickedPrice.display_value && Math.floor(offerPricing && offerPricing.discount && offerPricing.discount.display_value) > 5 &&
                 <span className={`${styles['fs-12']} ${styles['pr-5']} ${styles['offers-applied']} `}>{`${Math.floor(offerPricing && offerPricing.discount && offerPricing.discount.display_value)}% OFF`}</span>}
-                <OverlayTrigger placement="bottom" overlay={popover(offerPricing)}>
-                  <span className={`${styles['fs-12']} ${styles['pr-5']} ${styles['checkout-quat']} ${styles['flex-center']} ${styles['justify-center']}`}>
+                <span onMouseOver={() => toggleTooltip(true)} onMouseLeave={() => toggleTooltip(false)}  className={`${styles.relative} ${styles['checkout-quat']} ${styles['fs-12']} ${styles['flex-center']} ${styles['justify-around']}`}>
+                  <span className={`${styles['fs-12']} ${styles['flex-center']} ${styles['justify-center']}`}>
                     {/* <SVGCompoent clsName={`${styles['secure-icon']} ${styles['mr-10']} ${styles['pointer']}`} src="icons/common-icon/trust-secure" /> */}
-                    ?
+                    {'?'}
+                    {
+                      showToolTip ?
+                      <div className={`${styles['p-10']} ${styles['tool-tip']}`}>
+                      <div className={`${styles['table']} ${styles['width100']}`}>
+                        <div className={styles['t-row']}>
+                          <div className={styles['t-cell']}>
+                            <div className={styles['fs-12']}>{CART_PAGE.MAXIMUM_RETAIL_PRICE}</div>
+                            <div className={styles['fs-12']}>({CART_PAGE.INCL_OF_ALL_TAXES})</div>
+                          </div>
+                          <div className={styles['t-cell']}>
+                            <span className={styles['fs-12']}>{`${mrp.display_value} ${mrp.currency_code || currency}`}</span>
+                          </div>
+                        </div>
+                        <div className={styles['t-row']}>
+                          <div className={styles['t-cell']}>
+                            <div className={styles['fs-12']}>{CART_PAGE.SELLING_PRICE}</div>
+                          </div>
+                          <div className={styles['t-cell']}>
+                            <span className={styles['fs-12']}>{`${sp.display_value} ${sp.currency_code || currency}`}</span>
+                          </div>
+                        </div>
+                        {
+                          offerDiscounts.map((od) => {
+                            return (
+                              <div className={styles['t-row']}>
+                                <div className={styles['t-cell']}>
+                                  <div className={styles['fs-12']}>{od.description}</div>
+                                </div>
+                                <div className={styles['t-cell']}>
+                                  <span className={styles['fs-12']}>{`${od.discount.display_value} ${od.discount.currency_code || currency}`}</span>
+                                </div>
+                              </div>
+                            );
+                          })
+                        }
+                        <div className={styles['t-row']}>
+                          <div className={styles['t-cell']}>
+                            <div className={styles['fs-12']}>{CART_PAGE.DELIVERY_CHARGES}</div>
+                          </div>
+                          <div className={`${styles['t-cell']} ${styles['fs-12']}`}>
+                            <SVGComponent clsName={`${styles['ship-icon']}`} src="icons/free-shipping" />
+                          </div>
+                        </div>
+                        <div className={`${styles['t-row']} ${styles['total-amount']}`}>
+                          <div className={`${styles['t-cell']} ${styles['fs-12']}`}>{ORDER_PAGE.TOTAL}</div>
+                          <div className={`${styles['t-cell']} ${styles['fs-12']}`}>{`${total.display_value} ${total.currency_code || currency}`}</div>
+                        </div>
+                      </div>
+                      <div>
+                        <div className={`${styles['p-5']} ${styles['mt-5']} ${styles['fs-12']} ${styles['overall-amount']}`}>{CART_PAGE.OVERALL_YOU_SAVE} {discountMrp && discountMrp.display_value && `${discountMrp.display_value} ${currency}`} {CART_PAGE.ON_THIS_PRODUCT}</div>
+                      </div>
+                    </div>
+                        : null
+                      }
                   </span>
-                </OverlayTrigger>
+                </span>
               </div>
             </Fragment>
           </div>
@@ -139,7 +146,7 @@ const ProductPrice = ({offerInfo}) => {
     }
 
   </div>
- );
+  );
 }
 
 export default ProductPrice;
