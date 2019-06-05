@@ -11,7 +11,7 @@ const cookiesMiddleware = require('universal-cookie-express');
 const routes = require('./routes');
 const apiRoutes = require('./apiRoutes');
 const uuidv4 = require('uuid/v4')
-require('./utils/error-handle');
+//require('./utils/error-handle');
 
 
 const server = express();

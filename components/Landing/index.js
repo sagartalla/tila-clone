@@ -16,11 +16,12 @@ import main_en from '../../layout/main/main_en.styl';
 import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './index_en.styl';
 import styles_ar from './index_ar.styl';
+import Theme from '../helpers/context/theme';
 
 const allStyles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const config = getConfig();
-const isLocal = false; //config.publicRuntimeConfig.isLocal;
+const isLocal = config.publicRuntimeConfig.isLocal;
 const env = config.publicRuntimeConfig.env
 const random = Math.floor(Math.random()*100);
 
@@ -51,10 +52,6 @@ const getURl = (page) => {
         switch(env) {
           case 'stage':
           case 'staging':
-              return {
-                JS: 'https://static-dev.tila.com/tila-static-pages/fashion/index.js',
-                CSS: 'https://static-dev.tila.com/tila-static-pages/fashion/style.css'
-              };
           case 'preprod':
               return {
                 JS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/fashion/preprod/index.js?r=' + random,
@@ -66,10 +63,6 @@ const getURl = (page) => {
         switch(env) {
           case 'stage':
           case 'staging':
-              return {
-                JS: 'https://static-dev.tila.com/tila-static-pages/electronics/index.js',
-                CSS: 'https://static-dev.tila.com/tila-static-pages/electronics/style.css'
-              };
           case 'preprod':
               return {
                 JS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/electronics/preprod/index.js?r=' + random,
@@ -81,10 +74,6 @@ const getURl = (page) => {
         switch(env) {
           case 'stage':
           case 'staging':
-              return {
-                JS: 'https://static-dev.tila.com/tila-static-pages/lifestyle/index.js',
-                CSS: 'https://static-dev.tila.com/tila-static-pages/lifestyle/style.css'
-              };
           case 'preprod':
               return {
                 JS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/lifestyle/preprod/index.js?r=' + random,
@@ -96,10 +85,6 @@ const getURl = (page) => {
         switch(env) {
           case 'stage':
           case 'staging':
-              return {
-                JS: 'https://static-dev.tila.com/tila-static-pages/homepage/stage/index.js',
-                CSS: 'https://static-dev.tila.com/tila-static-pages/homepage/stage/style.css',
-              };
           case 'preprod':
               return {
                 JS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/homepage/preprod/index.js?r=' + random,
@@ -192,13 +177,15 @@ class Landing extends Component {
   render() {
     const { query } = this.props;
     return (
-      <Fragment>
+      <Theme.Provider value={query && query.category && query.category.toLowerCase()}>
+        <Fragment>
         <HeaderBar query={query} />
         {
-          _.map(this.state.children, (child, index) => React.createElement(child.name, _.merge(child.props, {key: index})))
+          _.map(this.state.children, (child, index) => React.createElement(child.name, _.merge(child.props, {key: index })))
         }
         <FooterBar />
       </Fragment>
+      </Theme.Provider>
     );
   }
 }

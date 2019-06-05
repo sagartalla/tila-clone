@@ -15,7 +15,7 @@ import main_ar from '../../../../layout/main/main_ar.styl';
 import styles_en from '../wishlist_en.styl';
 import styles_ar from '../wishlist_ar.styl';
 
-const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
 const cookies = new Cookies();
 
@@ -55,27 +55,25 @@ const WishlistBody = (props) => {
   const routeChange = (variantId, productId, catalogId, itemType) => {
     Router.push(`/${country}/${language}/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemType}`);
   };
-
   return (data.length === 0 ?
-    (
-      <div className={styles['no-wishlist-icon']}>
-        <div className={`${styles['flex']} ${styles['no-wishlist-icon-inn']}`}>
-          <SVGComponent clsName={`${styles['deleno-wish-list-icon']}`} src="icons/wish-list/no-wishlist" />
-          <h4 className={`${styles['fs-26']} ${styles['t-c']} ${styles['pt-40']}`}>{WISH_LIST_PAGE.NO_WISHLIST_LABEL}</h4>
-          <span className={styles['thick-gry-clr']}>{WISH_LIST_PAGE.DONT_WAIT}</span>
-          <a href={`/${country}/${language}`} className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-x-large']} ${styles['right-radius']} ${styles['text-uppercase']} ${styles['fontW600']} ${styles['mt-40']}`}>{WISH_LIST_PAGE.START_SHOPPING}</a>
-        </div>
+    <div className={styles['no-wishlist-icon']}>
+      <div className={`${styles.flex} ${styles['no-wishlist-icon-inn']}`}>
+        <SVGComponent clsName={`${styles['deleno-wish-list-icon']}`} src="icons/wish-list/no-wishlist" />
+        <h4 className={`${styles['fs-26']} ${styles['t-c']} ${styles['pt-40']}`}>{WISH_LIST_PAGE.NO_WISHLIST_LABEL}</h4>
+        <span className={styles['thick-gry-clr']}>{WISH_LIST_PAGE.DONT_WAIT}</span>
+        <a href={`/${country}/${language}`} className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-x-large']} ${styles['right-radius']} ${styles['text-uppercase']} ${styles.fontW600} ${styles['mt-40']}`}>{WISH_LIST_PAGE.START_SHOPPING}</a>
       </div>
-    ) :
+    </div>
+    :
     <div>
-      <div className={`${styles['flex']}`}>
+      <div className={`${styles.flex}`}>
         <Col md={12} sm={12} xs={12} className={`${styles['pl-0']}`}>
-          <h4 className={`${styles['mt-0']} ${styles['mb-20']} ${styles['fontW300']}}`}>
+          <h4 className={`${styles['mt-0']} ${styles['mb-20']} ${styles.fontW300}}`}>
             <span>{`Showing ${(pageDetails.number * pageDetails.size) + 1}-${(pageDetails.number + 1) * pageDetails.size > pageDetails.total_elements ? pageDetails.total_elements : (pageDetails.number + 1) * pageDetails.size} of ${pageDetails.total_elements} ${WISH_LIST_PAGE.WISHLIST_HEADER}`}</span>
           </h4>
         </Col>
       </div>
-      <div className={`${styles['box']}`}>
+      <div className={`${styles.box}`}>
         {
           data.length > 0 && data.map((item, index) => {
             const {
@@ -90,7 +88,7 @@ const WishlistBody = (props) => {
                       className={`${styles['flex-center']} ${styles['justify-center']} ${styles.pointer} ${styles['mb-wishlist-part-img']}`}
                       onClick={() => routeChange(variant_id, product_id, catalog_id, itemType)}
                     >
-                      <img className={styles['img']} src={`${constants.mediaDomain}/${img}`} />
+                      <img className={styles.img} src={`${constants.mediaDomain}/${img}`} />
                     </div>
                   </Col>
                   <Col md={10} xs={10}>
@@ -103,15 +101,14 @@ const WishlistBody = (props) => {
                             id={listing_id}
                             data-cart-res={true}
                             data-wish-id={wishlist_id}
-                            data-cart-res={true}
                             className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['left-radius']} ${styles['add-to-btn']}`}
-                            onClick={buttonValue ? addToCart : undefined}
+                            onClick={buttonValue ? addToCart : () => {}}
                           >
                             {buttonValue ? WISH_LIST_PAGE.ADD_TO_CART_BTN : PDP_PAGE.IN_CART}
                           </button>
                           :
                           <button
-                            data-product-id={product_id}
+                            data-wish-id={wishlist_id}
                             className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['left-radius']} ${styles['add-to-btn']}`}
                             onClick={notifyMe}
                           >
@@ -121,20 +118,20 @@ const WishlistBody = (props) => {
                       </div>
                     </Col>
                     <Col md={4} xs={4} className={styles['m-p-0']}>
-                      <div className={`${styles['relative']} ${styles['flex']} ${styles['flex-colum']} ${styles['price-details']}`}>
-                        <span id={wishlist_id} className={`${styles['absolute']} ${styles['delete-icon-part']}`} onClick={deleteItem}>
+                      <div className={`${styles.relative} ${styles.flex} ${styles['flex-colum']} ${styles['price-details']}`}>
+                        <span id={wishlist_id} className={`${styles.absolute} ${styles['delete-icon-part']}`} onClick={deleteItem}>
                           <SVGComponent clsName={`${styles['delete-icon']}`} src="icons/delete-icon/delete-icon" />
                         </span>
-                        <h4 className={`${styles['fontW600']} ${styles['light-gry-clr']} ${styles['mt-25']} ${styles['ff-b']}`}><span className={`${styles['fs-20']} ${styles['m-fs-18']}`}>{price} {cur}</span></h4>
+                        <h4 className={`${styles.fontW600} ${styles['light-gry-clr']} ${styles['mt-25']} ${styles['ff-b']}`}><span className={`${styles['fs-20']} ${styles['m-fs-18']}`}>{price} {cur}</span></h4>
                         {
                           variant_id && percentage(price, mrp) <= -5 ?
-                          <span className={`${styles['flex']} ${styles['flex-center']}`}>
+                            <span className={`${styles.flex} ${styles['flex-center']}`}>
                             <span className={`${styles['success-green']} ${styles.flex}`}>{percentage(price, mrp)}%</span>&nbsp;&nbsp;&nbsp;
                             <strike className={`${styles['label-gry-clr']} ${styles['fs-12']}`}>{mrp} {cur}</strike>
                           </span> : ''
                         }
-                        {wishlisted_price > 0 && price && cur && getPriceAlert(price, wishlisted_price, cur)}
-                        {wishlisted_price > 0 &&
+                        {wishlisted_price && wishlisted_price > 0 && price && cur && wishlisted_price.toString() !== price && getPriceAlert(price, wishlisted_price, cur)}
+                        {wishlisted_price && wishlisted_price > 0 && wishlisted_price.toString() !== price &&
                         <span className={`${styles['thick-gry-clr']}`}>
                           {WISH_LIST_PAGE.ITEM_WAS} {wishlisted_price} {cur} {WISH_LIST_PAGE.WHEN_ADDED_TO_WISHLIST}
                         </span>}
@@ -143,13 +140,13 @@ const WishlistBody = (props) => {
                   </Col>
                 </Row>
               </div>
-            )
+            );
           })
         }
       </div>
     </div>
-  )
-}
+  );
+};
 
 WishlistBody.propTypes = {
   data: PropTypes.array,

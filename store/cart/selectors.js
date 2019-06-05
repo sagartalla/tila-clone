@@ -20,6 +20,7 @@ const getCartResults = (store) => {
       newData.coupon_code = data.coupon_code;
       newData.coupon_applied = data.coupon_applied;
       newData.cart_shippable = data.cart_shippable;
+      newData.address = data.address;
       newData.applyCouponRequestCount = data.applyCouponRequestCount;
       data.items.map((item, index) => {
         newData.items[index] = {

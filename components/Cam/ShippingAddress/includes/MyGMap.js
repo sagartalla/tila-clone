@@ -28,9 +28,10 @@ class MyGMap extends React.Component {
       center: {
         lat: 24.7135517, lng: 46.6752957, // TODO: fetch from Browser
       },
+      defaultZoom: 15,
       markers: [],
     };
-
+    this.locateMe = this.locateMe.bind(this);
     this.onMapMounted = this.onMapMounted.bind(this);
     this.markerLatlng = this.markerLatlng.bind(this);
     this.onPlacesChanged = this.onPlacesChanged.bind(this);
@@ -157,10 +158,8 @@ class MyGMap extends React.Component {
     });
   }
 
-  onMapClick = (marker) => {
+  deriveCityFromLatLng = (lng, lat) => {
     const { deriveCity, getDataFromMap } = this.props;
-    const lng = marker.latLng.lng();
-    const lat = marker.latLng.lat();
     deriveCity({
       longitude: lng,
       latitude: lat,
@@ -186,10 +185,34 @@ class MyGMap extends React.Component {
     });
   }
 
-  // <button onClick={this.onGetLocation.bind(this)}>LOCATE ME</button>
+  onMapClick = (marker) => {
+    const lng = marker.latLng.lng();
+    const lat = marker.latLng.lat();
+    this.deriveCityFromLatLng(lng, lat);
+  }
+
+  locateMe = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        const lat = position.coords.latitude;
+        const lng = position.coords.longitude;
+        this.setState({
+          center: {
+            lat, lng,
+          },
+        });
+        this.deriveCityFromLatLng(lng, lat);
+      }, (error) => {
+        console.log(error);
+      });
+    } else {
+      alert('Browser does not support');
+    }
+  }
+
   render() {
     const {
-      refs, bounds, center, markers
+      refs, bounds, center, markers, defaultZoom,
     } = this.state;
     const { clsName } = this.props;
     return (
@@ -199,12 +222,14 @@ class MyGMap extends React.Component {
           bounds={bounds}
           center={center}
           markers={markers}
+          defaultZoom={defaultZoom}
           onMapClick={this.onMapClick}
           onMapMounted={this.onMapMounted}
           onBoundsChanged={this.onBoundsChanged}
           onSearchBoxMounted={this.onSearchBoxMounted}
           onPlacesChanged={this.onPlacesChanged}
           markerLatlng={this.markerLatlng}
+          locateMe={this.locateMe}
           isMarkerShown
           googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDrVNKZshUspEprFsNnQD-sos6tvgFdijg&v=3.exp&libraries=geometry,drawing,places"
           loadingElement={<div style={{ height: '100%' }} />}

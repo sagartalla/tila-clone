@@ -78,12 +78,19 @@ class OrderHeader extends Component {
     this.setState({ showModal: false });
   }
 
+  fetchInvoice = () => {
+    const { orderId } = this.props.orderDetails;
+    const { getInvoice } = this.props;
+    getInvoice(orderId);
+  }
+
   render() {
     const { showToolTip, showModal } = this.state;
     const {
       name, address, orderId, orderDate, price,
-      payments, order_type,
+      payments, order_type, invoice_id,
     } = this.props.orderDetails;
+    const { getInvoice } = this.props;
     const {
       total_mrp = {}, total_shipping = {}, total_offer_price = {}, total_price = {}, total_gift_charges = {}, total_discount = {},
     } = price;
@@ -142,12 +149,12 @@ class OrderHeader extends Component {
               {order_type !== 'EXCHANGE' &&
               <Col md={4} xs={6} sm={4} className={`${styles['pb-20']} ${styles['pt-20']}`}>
                 {/* <Col md={12} xs={6} sm={12}> */}
-                  <div className={`${styles['mt-0']} ${styles['light-gry-clr']} ${styles['flex-center']}  ${styles['mb-20']}`}>
-                    <Col md={6} sm={6} className={`${styles['ipad-pl-0']} ${styles['fs-14']}`}><span>{ORDER_PAGE.PAY_METHOD}</span></Col>
-                    <Col md={6} sm={6} className={`${styles['ipad-pr-0']} ${styles['fs-14']} ${styles['fontW600']}`}>
-                      <span>{ORDER_PAGE.REQ_INVOICE}</span>
-                    </Col>
-                  </div>
+                <div className={`${styles['mt-0']} ${styles['light-gry-clr']} ${styles['flex-center']}  ${styles['mb-20']}`}>
+                  <Col md={6} sm={6} className={`${styles['ipad-pl-0']} ${styles['fs-14']}`}><span>{ORDER_PAGE.PAY_METHOD}</span></Col>
+                  <Col md={6} sm={6} className={`${styles['ipad-pr-0']} ${styles['fs-14']} ${styles.fontW600}`}>
+                    {invoice_id && <span onClick={this.fetchInvoice}>{ORDER_PAGE.REQ_INVOICE}</span>}
+                  </Col>
+                </div>
                 {/* </Col> */}
                 {/* <Col md={12} sm={12}> */}
                   {payments && payments.length > 0 &&
@@ -223,7 +230,7 @@ class OrderHeader extends Component {
                             {total_offer_price &&
                             <li className={`${styles['flx-space-bw']} ${styles['b-t']}`}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.T_PRICE} : </span><span> {total_offer_price.display_value} {total_offer_price.currency_code}</span></li>}
                             {total_shipping &&
-                            <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.T_SHIPPING} : </span><span className={styles.flex}>{total_shipping.display_value ? `(+) ${total_shipping.display_value} ${total_shipping.currency_code}` : <SVGComponent clsName={`${styles['ship-icon']}`} src="icons/free-shipping" />}</span></li>}
+                            <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.T_SHIPPING} : </span><span className={styles.flex}>{total_shipping.money_value ? `(+) ${total_shipping.display_value} ${total_shipping.currency_code}` : <SVGComponent clsName={`${styles['ship-icon']}`} src="icons/free-shipping" />}</span></li>}
                             {total_gift_charges && total_gift_charges.money_value > 0 &&
                               <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.T_GIFT_CHARGES} : </span><span>{total_gift_charges.display_value ? `(+) ${total_gift_charges.display_value} ${total_gift_charges.currency_code}` : 'FREE'}</span></li>}
                             {total_price &&
@@ -273,6 +280,7 @@ OrderHeader.propTypes = {
 const mapDispatchToProps = dispatch =>
   bindActionCreators({
     sendMapData: actionCreators.sendMapData,
+    getInvoice: actionCreators.getInvoice,
   }, dispatch);
 
 export default connect(null, mapDispatchToProps)(OrderHeader);

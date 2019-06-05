@@ -97,7 +97,7 @@ const getProduct = (store, variantId) => {
       offerDiscounts: priceInfo.pricing.actions ? priceInfo.pricing.actions : [],
       totalDiscountMRP: priceInfo.pricing.total_discount_mrp,
       currency: priceInfo.mrp_currency
-    } : 'No Listing'
+    } : {},
   };
   const variant_id = variant_preferred_listings ? Object.keys(variant_preferred_listings)[0] : '';
 

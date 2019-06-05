@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import Bin from './Bin';
 import Box from './Box';
@@ -10,7 +9,6 @@ import {actionCreators, selectors} from '../../../../../store/captcha';
 import { bindActionCreators } from 'redux';
 import HTML5Backend from 'react-dnd-html5-backend';
 import { DragDropContext } from 'react-dnd';
-import { Router } from '../../../../../routes';
 
 const { PAYMENT_PAGE, ORDER_PAGE } = languageDefinations();
 
