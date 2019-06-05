@@ -161,6 +161,7 @@ export const EN_KEYWORDS = {
     MOBILE_NUMBER: 'Mobile Number',
     NOT_SHIPPABLE: 'Not Shippable',
     UNFORTUNATELY_WE_CANNOT_DELIVER_REMOVE_ITEM: 'Unfortunately, we cannot deliver Some of the item(s) to your selected Address. Please remove the item from your mini cart on the right, or change the delivery address to continue.',
+    LOCATE_ME: '  Locate Me'
     NO_DELIVER_ADDRESS_TITLE: 'Where are all the saved addresses?',
     NO_DELIVERY_ADDRESS_LABEL: 'Do tell us where you stay for faster Delivery',
   },
