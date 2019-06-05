@@ -63,7 +63,7 @@ class ChoosePaymentMode extends Component {
     const { orderIssue,goToNextStep } = this.props
     const { issueType } = orderIssue
     const { selectedReasons } = orderIssue
-    var refundType = paymentMode === 'BACK_TO_SOURCE' ? 'BACK_TO_SOURCE' : 'WALLET'
+    let refundType = paymentMode;
     const orderReturnParams = Object.assign({}, selectedReasons, { refund_mode: refundType })
     issueType === 'RETURN' ? this.props.submitReturnRequest(orderReturnParams) :
                               this.props.setCancelRefundMode(refundType)
