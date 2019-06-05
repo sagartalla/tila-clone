@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators, selectors } from '../../../store/cam/wishlist';
-
+import SVGComponent from '../../common/SVGComponet';
 import WishlistBody from './includes/WishlistBody';
 import CartBottomPopup from './includes/CartBottomPopup';
 import CartMiniWishList from './includes/CartMiniWishList';
@@ -93,7 +93,7 @@ class Wishlist extends Component {
 
   render() {
     const {
-      results, cartMiniWishList, getPageDetails, wishListCount,
+      results, cartMiniWishList, getPageDetails, wishListCount, showLoader,
     } = this.props;
     const { showCartPageBtmPopup, currentPage } = this.state;
     return (
@@ -118,6 +118,16 @@ class Wishlist extends Component {
               }
             </Fragment>
             :
+            showLoader ?
+            <div className={`${styles['wishlist-result']} ${styles['flex-center']} ${styles['justify-center']} ${styles.width100}`}>
+            <div className={`${styles['loader-div']} ${styles['align-center']}`}>
+              <SVGComponent
+                clsName={styles['loader-styl']}
+                src="icons/common-icon/circleLoader"
+              >
+              </SVGComponent>
+            </div>
+            </div> :
             <WishlistBody
               data={results}
               deleteItem={this.deleteItem}
@@ -145,6 +155,7 @@ const mapStateToProps = store => ({
   results: selectors.getWishListResults(store),
   getPageDetails: selectors.getPaginationDetails(store),
   wishListCount: selectors.getProductsDetails(store).length,
+  showLoader: selectors.getLoader(store),
 });
 
 const mapDispatchToProps = dispatch =>
