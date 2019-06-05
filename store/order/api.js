@@ -23,7 +23,7 @@ const getExchangeVariants = params => axios.get(`${constants.ORDERS_API_URL}/api
 
 const sendMapDataApi = (order_id, params) => axios.post(`${constants.ORDERS_API_URL}/api/v1/order/${order_id}/address/geo`, params);
 
-const getRefundOptions = (orderItemId, issueType) => axios.get(`${constants.ORDERS_API_URL}/api/v1/order_item/${orderItemId}/refund_options/${issueType}`);
+const getRefundOptions = (orderItemId, issueType) => axios.get(`${constants.ORDERS_API_URL}/api/v1/order_item/${orderItemId}/refunds_options/${issueType}`);
 
 const setExchangeOrder = params => axios.post(`${constants.ORDERS_API_URL}/api/v1/order/exchange`, params);
 

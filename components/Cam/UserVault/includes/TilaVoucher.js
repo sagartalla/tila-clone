@@ -42,7 +42,9 @@ const TilaVoucher = (props) => {
                     <Col md={2}>
                         Added
                     </Col>
-                    <Col md={2} />
+                    <Col md={2}>
+                        Used
+                    </Col>
                     <Col md={2}>
                         Balance
                     </Col>
@@ -79,9 +81,11 @@ const TilaVoucher = (props) => {
             // <div className={`${styles['vault-card-body']} ${styles['p-20-40']}`}>
             //     <h4 className={`${styles['pb-5']} ${styles['fontW300']} ${styles['lgt-blue']}`}>No voucher history</h4>
             // </div>
-            <div className={`${styles['no-result']} ${styles['align-center']} ${styles['flex-col']} ${styles['black-color']}`}>
-                <SVGComponent clsName={`${styles['wallet-img']}`} src="errors-img/group-2" />
-                <h3>No voucher history</h3>
+            <div className={`${styles['no-vocher-icon']} ${styles['align-center']} ${styles['flex-col']} ${styles['black-color']}`}>
+                <div className={`${styles['no-wishlist-icon-inn']} ${styles['flex']}`}>
+                    <SVGComponent clsName={`${styles['no-cards-list-icon']}`} src="icons/common-icon/no-cars-vocher" />
+                    <h3 className={`${styles['fs-26']} ${styles['t-c']} ${styles['pt-40']}`}>{VAULT_PAGE.NO_VOCHER_LABEL}</h3>
+                </div>
             </div>
             }
         </div>

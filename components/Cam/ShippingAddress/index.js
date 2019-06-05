@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import Cookie from 'universal-cookie';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Modal } from 'react-router-modal';
 import { selectors as productSelectors, actionCreators as productActionCreators } from '../../../store/product';
 import { selectors as cartSelectors } from '../../../store/cart';
 import AddressNew from './includes/AddressNew';
@@ -14,7 +13,6 @@ import AddressHeader from './includes/AddressHeader';
 import { languageDefinations } from '../../../utils/lang/';
 import { actionCreators, selectors } from '../../../store/cam/address';
 import FormValidator from '../../common/FormValidator';
-import Slider from '../../common/slider';
 
 import lang from '../../../utils/language';
 
@@ -187,7 +185,7 @@ class ShippingAddress extends Component {
     const { autoCompleteCity, autoCompleteCoutry } = this.props;
     const addr = { ...this.state.addr };
     let { showCitiesData, showCountriesData } = this.state;
-    addr[target.name] = target.value;
+    addr[target.name] = target.value.replace(/^\s+/g, '');
     if (target.name === 'city') {
       showCitiesData = true;
       autoCompleteCity(target.value);
@@ -213,7 +211,7 @@ class ShippingAddress extends Component {
   }
 
   validateNames = (fieldValue) => {
-    return !(/^([a-zA-z0-9]){3,20}$/.test(fieldValue));
+    return !(/^([a-zA-z0-9\s]){3,20}$/.test(fieldValue));
   }
 
   selectCityFromSuggesstions({ target }) {
@@ -313,7 +311,7 @@ class ShippingAddress extends Component {
   render() {
     // if standalone is true, it is stand alone address page else from payment page or any other pages.
     const {
-      results, standalone, handleShippingAddressContinue, miniAddress, isPdp, getAllCities, countriesData, cartResults, showNonShippable, isPaymentPage
+      results, standalone, handleShippingAddressContinue, miniAddress, isPdp, getAllCities, countriesData, cartResults, showNonShippable, isPaymentPage, selectedAddress
     } = this.props;
     const {
       showNewAddr, addr, showCitiesData, showCountriesData, validation, showSlider,
@@ -333,6 +331,7 @@ class ShippingAddress extends Component {
                 data={results}
                 makeDefaultAddress={this.makeDefaultAddress}
                 showAddAdrressForm={this.showAddAdrressForm}
+                selectDeliverToAddress={this.selectDeliverToAddress}
               />
               {
                 showNewAddr
@@ -417,6 +416,7 @@ class ShippingAddress extends Component {
                     selectDeliverToAddress={this.selectDeliverToAddress}
                     standalone={standalone}
                     isPaymentPage={isPaymentPage}
+                    selectedAddress={selectedAddress}
                   />
                 </Col>
                 <Col md={12} sm={12} xs={12}>

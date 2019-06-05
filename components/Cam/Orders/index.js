@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Cookies from 'universal-cookie';
 
 import Order from './includes/Order';
 import OrderIssueWidget from '../../Order/includes/OrderIssueWidget';
@@ -8,6 +9,7 @@ import { selectors, actionCreators } from '../../../store/cam/orders';
 import { actionCreators as singleOrderActionCreators } from '../../../store/order';
 import Pagination from '../../common/Pagination';
 import { languageDefinations } from '../../../utils/lang/';
+import SVGComponent from '../../common/SVGComponet';
 
 import lang from '../../../utils/language';
 
@@ -17,6 +19,11 @@ import styles_en from './orders_en.styl';
 import styles_ar from './orders_ar.styl';
 
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
+
+const cookies = new Cookies();
+
+const language = cookies.get('language') || 'en';
+const country = cookies.get('country') || 'SAU';
 
 const { ORDERS } = languageDefinations();
 
@@ -60,7 +67,14 @@ class Orders extends Component {
           ?
           ordersData.map(order => <Order key={order.id} getInvoice={getInvoice} order={order} />)
           :
-          <div className={`${styles.box} ${styles['mt-20']} ${styles['mb-20']} ${styles['p-20']}`}>{ORDERS.NO_ORDERS}</div>
+            <div className={`${styles['no-order-part']}`}>
+              <div className={`${styles['flex']} ${styles['no-order-part-inn']}`}>
+                <SVGComponent clsName={`${styles['no-order-list-icon']}`} src="icons/common-icon/no-order-icon" />
+                <h4 className={`${styles['fs-26']} ${styles['t-c']} ${styles['pt-40']}`}>{ORDERS.NO_WISHLIST_LABEL}</h4>
+                <span className={styles['thick-gry-clr']}>{ORDERS.DONT_WAIT}</span>
+                <a href={`/${country}/${language}`} className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-x-large']} ${styles['right-radius']} ${styles['text-uppercase']} ${styles['fontW600']} ${styles['mt-40']}`}>{ORDERS.START_SHOPPING}</a>
+              </div>
+            </div>
         }
           <Pagination
             totalSize={pageDetails.total_pages > 1 ? (pageDetails.total_pages - 1) : 0}

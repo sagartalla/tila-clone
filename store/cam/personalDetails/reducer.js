@@ -36,7 +36,7 @@ const personalDetailsReducer = typeToReducer({
           ...passResetStatus,
         },
         ui: {
-          loading: true,
+          loading: false,
         },
       };
       return newState;
@@ -57,7 +57,28 @@ const personalDetailsReducer = typeToReducer({
           ...uploadPicStatus,
         },
         ui: {
-          loading: true
+          loading: false
+        },
+      };
+      return newState;
+    },
+    REJECTED: (state, action) => Object.assign({}, state, {
+      error: action.payload.data,
+      ui: { loading: false},
+    }),
+  },
+  [actions.DOWNLOAD_PROFILE_PIC]: {
+    PENDING: state => Object.assign({}, state, { ui: {loading: true} }),
+    FULFILLED: (state, action) => {
+      const downloadPic = { downloadPic: action.payload };
+      const newState = {
+        ...state,
+        data: {
+          ...state.data,
+          ...downloadPic,
+        },
+        ui: {
+          loading: false
         },
       };
       return newState;
@@ -101,7 +122,7 @@ const personalDetailsReducer = typeToReducer({
           ...action.payload,
         },
         ui: {
-          loading: true,
+          loading: false,
         },
       };
       return newState;
