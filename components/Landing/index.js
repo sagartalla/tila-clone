@@ -16,11 +16,12 @@ import main_en from '../../layout/main/main_en.styl';
 import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './index_en.styl';
 import styles_ar from './index_ar.styl';
+import Theme from '../helpers/context/theme';
 
 const allStyles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const config = getConfig();
-const isLocal = false; //config.publicRuntimeConfig.isLocal;
+const isLocal = config.publicRuntimeConfig.isLocal;
 const env = config.publicRuntimeConfig.env
 const random = Math.floor(Math.random()*100);
 
@@ -192,13 +193,15 @@ class Landing extends Component {
   render() {
     const { query } = this.props;
     return (
-      <Fragment>
+      <Theme.Provider value={query.category.toLowerCase()}>
+        <Fragment>
         <HeaderBar query={query} />
         {
-          _.map(this.state.children, (child, index) => React.createElement(child.name, _.merge(child.props, {key: index})))
+          _.map(this.state.children, (child, index) => React.createElement(child.name, _.merge(child.props, {key: index })))
         }
         <FooterBar />
       </Fragment>
+      </Theme.Provider>
     );
   }
 }
