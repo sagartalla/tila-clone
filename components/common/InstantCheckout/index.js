@@ -98,6 +98,7 @@ class InstantCheckout extends Component {
   }
   toggleMiniAddress() {
     this.setState({ showMiniAddress: !this.state.showMiniAddress, showMiniVault: false });
+    this.props.changeState();
   }
 
   toggleMiniVault() {
@@ -188,6 +189,7 @@ class InstantCheckout extends Component {
       profileInfo,
       showLoading,
       isFromCart,
+      selectedAddr,
     } = this.props;
     const {
       showMiniAddress,
@@ -202,7 +204,7 @@ class InstantCheckout extends Component {
     return (
       <div>
         {
-          defaultAddr.length > 0 && defaultCard.length > 0 ?
+          selectedAddr && defaultCard.length > 0 ?
             <div className={`${styles['instant-checkout']} ${styles['p-10']}`}>
               <div className={`${styles['pr-10']} ${styles['pl-10']}`}>
                 {
@@ -223,10 +225,10 @@ class InstantCheckout extends Component {
                 </div>
                 <div className={`${styles['border']} ${styles['border-radius2']} ${styles['bg-white']} ${styles['relative']} ${styles['mt-10']}`}>
                   {
-                    defaultAddr.length > 0 ?
+                    selectedAddr ?
                       <Fragment>
                         <AddrCard
-                          defaultAddr={defaultAddr}
+                          selectedAddr={selectedAddr}
                           toggleMiniAddress={this.toggleMiniAddress}
                         />
                         {
@@ -369,6 +371,7 @@ class InstantCheckout extends Component {
 const mapStateToProps = (store) => ({
   addressResults: addressSelectors.getShippingAddressResults(store),
   defaultAddr: addressSelectors.getDefaultAddress(store),
+  selectedAddr: addressSelectors.getSelectedAddress(store),
   // getAddrById: selectors.getAddrById(store),
   vaultResults: vaultSelectors.getCardResults(store),
   defaultCard: vaultSelectors.getDefaultCard(store),
@@ -390,6 +393,7 @@ const mapDispatchToProps = (dispatch) =>
       deleteCard: vaultActionCreators.deleteCard,
       makeCardDefault: vaultActionCreators.makeCardDefault,
       getUserProfileInfo: camActionCreators.getUserProfileInfo,
+      changeState: addressActionCreators.changeState,
     },
     dispatch,
   );

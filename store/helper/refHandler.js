@@ -11,7 +11,6 @@ const refHandler = ({ getState }) => {
         delete refStore.postLoginRef;
         break;
     }
-
     const returnValue = next(action)
     return returnValue
   }

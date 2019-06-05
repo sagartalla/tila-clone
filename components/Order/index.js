@@ -28,7 +28,7 @@ class Order extends Component {
   }
   
   render() {
-    const { query, orderData } = this.props;
+    const { query, orderData, getInvoice } = this.props;
     return (
       <div className={styles['bg-color']}>
         <HeaderBar />
@@ -50,17 +50,15 @@ class Order extends Component {
   }
 }
 
-const mapStateToProps = (store) => {
-  return ({
-    orderData: selectors.getOrderDetails(store)
-  })
-};
+const mapStateToProps = store => ({
+  orderData: selectors.getOrderDetails(store),
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators(
-    { getOrderDetails: actionCreators.getOrderDetails },
-    dispatch,
-  );
-};
+const mapDispatchToProps = dispatch => bindActionCreators(
+  {
+    getOrderDetails: actionCreators.getOrderDetails,
+  },
+  dispatch,
+);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Order);
