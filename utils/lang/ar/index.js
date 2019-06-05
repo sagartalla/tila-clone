@@ -140,7 +140,7 @@ export const AR_KEYWORDS = {
     WORK: 'العمل',
     PREF_LOC: 'العنوان المفضَّل',
     CANCEL: 'الغاء',
-    SAVE_DELIVER_BTN: 'احفظ هذا العنوان للتوصيل',
+    SAVE_DELIVER_BTN: 'Save New Address',
     ENTER_LOC: 'أدخل الموقع',
     ADD_NEW_ADDR_TAG: 'أضف عنوان جديد ترغب بتوصيل الطلبات إليه',
     FIRST_NAME: 'الاسم الأول',
@@ -255,6 +255,7 @@ export const AR_KEYWORDS = {
     PDP_DONE: 'Done',
     OUT_OF_STOCK: 'نفذت الكمية',
     THANKS_DESCRIPTION: 'Thanks for taking your time to rate the product, this will help millions of users like you to make better purchase judgement',
+    MAX_LENGTH: 'Max Length',
   },
   VAULT_PAGE: {
     MANAGE_VAULT_HDR: 'التحكّم بالبطاقات والقسائم الشرائيه والمزيد',

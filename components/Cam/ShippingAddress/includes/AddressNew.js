@@ -19,7 +19,7 @@ const AddressNew = (props) => {
   const {
     data, inputOnChange, addrTypeHandler, setAsDefaultLocation, selectCountry,
     saveBtnClickHandler, resetAddAdrressForm, countriesData, showCountriesData, hideTitle,
-    getDataFromMap, getAllCities, selectCityFromSuggesstions, showCitiesData, validation,
+    getDataFromMap, getAllCities, selectCityFromSuggesstions, showCitiesData, validation, isEditAddr,
   } = props;
   const { DELIVERY_ADDR_PAGE } = languageDefinations();
   return (
@@ -28,7 +28,13 @@ const AddressNew = (props) => {
         <Row>
           <Col md={10} sm={9} xs={12}>
             {!hideTitle &&
-            <h1 className={`${styles['thick-blue']} ${styles['mb-20']} ${styles['fs-20']} ${styles.fontW300} ${styles['m-fs-16']}`}>{data.first_name ? DELIVERY_ADDR_PAGE.EDIT_ADDR : DELIVERY_ADDR_PAGE.ADD_NEW_ADDR_HEAD}</h1>}
+            <h1 className={`${styles['thick-blue']} ${styles['mb-20']} ${styles['fs-20']} ${styles.fontW300} ${styles['m-fs-16']}`}>
+            {isEditAddr ?
+                `${DELIVERY_ADDR_PAGE.EDIT} ${DELIVERY_ADDR_PAGE.DELIVERY_ADDR}`
+                :
+                DELIVERY_ADDR_PAGE.ADD_NEW_ADDR_HEAD
+              }
+            </h1>}
           </Col>
 
           <Col md={12} sm={12} xs={12}>
@@ -209,7 +215,13 @@ const AddressNew = (props) => {
             </div>
           </Col>
           <Col md={12} sm={12} xs={12} className={styles['m-flx']}>
-            <Button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-x-large']} ${styles['m-fs-11']} ${styles['text-uppercase']} ${styles['left-radius']} ${styles['m-pad-10']}`} onClick={saveBtnClickHandler} > {DELIVERY_ADDR_PAGE.SAVE_DELIVER_BTN} </Button>
+            <Button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-x-large']} ${styles['m-fs-11']} ${styles['text-uppercase']} ${styles['left-radius']} ${styles['m-pad-10']}`} onClick={saveBtnClickHandler} >
+              {isEditAddr ?
+                DELIVERY_ADDR_PAGE.EDIT_ADDR
+                :
+                DELIVERY_ADDR_PAGE.SAVE_DELIVER_BTN
+              }
+            </Button>
             <Button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['m-fs-11']} ${styles['ml-10']} ${styles['text-uppercase']} ${styles['left-radius']} ${styles['m-pad-10']}`} onClick={resetAddAdrressForm}>{DELIVERY_ADDR_PAGE.CANCEL}</Button>
           </Col>
         </Row>
