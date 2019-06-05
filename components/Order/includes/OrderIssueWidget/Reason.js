@@ -249,7 +249,7 @@ class Reason extends Component {
               <span className={styles['select-highlight']} />
               <span className={styles['select-bar']} />
             </div>
-            {this.state.reason ? (
+            {this.state.reason && selectedReason.sub_reasons ? (
               <div
                 className={`${styles.select} ${styles['mt-20']} ${
                   styles['mb-10']
