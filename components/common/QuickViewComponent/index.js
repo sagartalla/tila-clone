@@ -39,6 +39,8 @@ class RenderResults extends Component {
 
   }
   componentWillReceiveProps(nextProps) {
+    debugger;
+    console.log('nextProps',nextProps.productId);
     if(nextProps.renderQuickView
       &&
       nextProps.productId !== this.props.productId
@@ -87,7 +89,7 @@ class RenderResults extends Component {
 const mapStateToProps = (store) => {
   return ({
     getLoadingStatus:selectors.getLoadingStatus(store),
-    getErrorMessage:selectors.getErrorMessage(store)
+    getErrorMessage:selectors.getErrorMessage(store),
   })
 }
 const mapDispatchToProps = (dispatch) => {

@@ -238,6 +238,7 @@ const getProductComponent = (isPreview, taskCode) => {
                           productInfo={productData}
                           variantId={variantId}
                           productId={productId}
+                          isSearchPreview={isSearchPreview}
                         />
                       </div>
                       <div className={`${styles['ipad-details']} ${styles['bdr-lt']} ${styles['ipad-pl-15']}`}>
@@ -252,8 +253,8 @@ const getProductComponent = (isPreview, taskCode) => {
                               productData={productData.product_id}
                               shippingInfo={shippingInfo}
                               isPreview={isPreview}
-                              styling={positionStyle || defaultPosition}
-                              top={positionStyle === 'absolute-style' ?  positionTop : null}
+                              styling={isSearchPreview ? null : positionStyle || defaultPosition}
+                              top={isSearchPreview ? null : positionStyle === 'absolute-style' ?  positionTop : null}
                             />
                             :
                             null

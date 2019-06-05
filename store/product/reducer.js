@@ -14,6 +14,8 @@ const initialState = {
   searchCountryKeyWord: '',
   allCitiesData: [],
   countriesData: [],
+  productId:null,
+  varaintId:null,
 };
 const productReducer = typeToReducer({
   [actions.GET_PRODUCT]: {
@@ -104,6 +106,12 @@ const productReducer = typeToReducer({
     }),
     REJECTED: state => Object.assign({}, state, { ui: { ...state.ui, loading: false } }),
   },
+  [actions.SET_PRODUCTID]:(state,action) => Object.assign({}, state, {
+    productId:action.id,
+  }),
+  [actions.SET_VARIANTID]:(state,action) => Object.assign({}, state, {
+    variantId:action.id
+  }),
   [actions.AUTOCOMPLETE_CITY]: (state, action) => Object.assign({}, state, {
     searchCityKeyWord: action.searchKeyWord,
   }),

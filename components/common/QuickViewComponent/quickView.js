@@ -17,7 +17,34 @@ const { PDP_PAGE, PAYMENT_PAGE, SEARCH_PAGE } = languageDefinations()
 class QuickView extends Component {
   constructor(props){
     super(props)
+    this.renderProductPage = this.renderProductPage.bind(this)
     this.product = getProductComponent(false,null)
+  }
+  findVariantId(id) {
+    const { isProductLoaded } = this.props;
+    if(isProductLoaded.productDetails.variant_preferred_listings[id]){
+      return true;
+    }
+    return false;
+  }
+  renderProductPage() {
+    const {
+      isProductLoaded,
+      productVariantId,
+      newVariantId,
+      renderProductPage
+    } = this.props;
+    const { productDetails } = isProductLoaded;
+    const { catalog_details, product_id } = productDetails.product_details
+    const { catalog_id, item_type_name } = catalog_details
+    let variantId = newVariantId ? (this.findVariantId(newVariantId) ? newVariantId : productVariantId) : productVariantId
+    const options = {
+      catalogId:catalog_id,
+      itemType:item_type_name,
+      productId:product_id,
+      variantId
+    }
+    renderProductPage(options)
   }
   render() {
     const {
@@ -27,7 +54,7 @@ class QuickView extends Component {
             next,
             productVariantId,
             productId,
-            onClose,renderProductPage } = this.props
+            onClose,renderProductPage, newproductId } = this.props
 
     if(!isProductLoaded.isProductLoaded) {
       return <div className={`${styles['mr-20']} ${styles['quick-view']}`}>{`${PAYMENT_PAGE.PLEASE_WAIT} ${PDP_PAGE.PRODUCT_DETAILS} ${PAYMENT_PAGE.LOADING}`}</div>
@@ -35,7 +62,7 @@ class QuickView extends Component {
     if(getErrorMessage) {
       return <div className={`${styles['mr-20']} ${styles['quick-view']}`}>{getErrorMessage}</div>
     }
-    if(isProductLoaded.productDetails && isProductLoaded.productDetails.product_id !== productId) {
+    if(isProductLoaded.productDetails && (isProductLoaded.productDetails.product_id !== productId && isProductLoaded.productDetails.product_id !== newproductId)) {
       return <div className={`${styles['mr-20']} ${styles['quick-view']}`}>{`${PAYMENT_PAGE.PLEASE_WAIT} ${SEARCH_PAGE.SEARCH_RESULTS_FOR} ${SEARCH_PAGE.DATA}`}</div>
     }
     const Product = this.product
@@ -86,7 +113,7 @@ class QuickView extends Component {
            ${styles['fontW800']}
            ${styles['pointer']}`
          }
-         onClick={renderProductPage}
+         onClick={this.renderProductPage}
         >
         VIEW AS A FULL PAGE
       </div>
@@ -97,7 +124,9 @@ class QuickView extends Component {
 const mapStateToProps = store => {
   return {
     isProductLoaded:selectors.isProductLoaded(store),
-    getErrorMessage:selectors.getErrorMessage(store)
+    getErrorMessage:selectors.getErrorMessage(store),
+    newproductId:selectors.getProductId(store),
+    newVariantId:selectors.getVariantId(store),
   }
 }
 

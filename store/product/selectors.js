@@ -146,6 +146,12 @@ const isProductLoaded = (store) => {
 const getLoadingStatus = (store) => {
   return store.productReducer.ui.loading
 }
+const getProductId = (store) => {
+  return store.productReducer.productId
+}
+const getVariantId = (store) => {
+  return store.productReducer.variantId
+}
 const getErrorMessage = (store) => {
   return store.productReducer.error
 }
@@ -479,5 +485,5 @@ const getAllCountries = (store) => {
 export {
   getProduct, getVariants, getPreview, getSelectedVariantId, getReviewRatings, getReviewResponse,
   getVariantsAndSimilarProducts, getSelectedPropductId, getSelectedVariantData, getAllCities, getAllCountries,
-  getLoadingStatus,getErrorMessage,isProductLoaded
+  getLoadingStatus,getErrorMessage,isProductLoaded,getProductId,getVariantId
 };

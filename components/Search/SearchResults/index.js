@@ -86,7 +86,8 @@ class SearchResults extends Component {
 
     this.rowNumber = row;
     this.itemNum = itemNum
-    this.variantId[`index${itemNum}`] = vid
+    let productId = this.productIndex[`index${this.itemNum}`]
+    this.variantId[productId] = vid
     this.setState({
       renderQuickView:true
     })
@@ -100,8 +101,8 @@ class SearchResults extends Component {
        Router.pushRoute(`/${country}/${language}/payment`);
     }
   }
-  renderProductPage() {
-    Router.pushRoute()
+  renderProductPage(options) {
+    window.open(`/${country}/${language}/product?productId=${options.productId}${options.variantId ? `&variantId=${options.variantId}`: ''}&catalogId=${options.catalogId}&itemType=${options.itemType}`)
   }
   renderNext() {
     const { results } = this.props;
@@ -141,7 +142,7 @@ class SearchResults extends Component {
       elementNo = product.length - 1
     }
     let productId = this.productIndex[`index${this.itemNum}`]
-    let productVariantId = this.variantId[`index${this.itemNum}`]
+    let productVariantId = this.variantId[productId]
     let productOptions = {
       city_code: shippingCity,
       country_code: country || 'SAU',
@@ -160,10 +161,9 @@ class SearchResults extends Component {
       ],
       size: 'LARGE',
     }
-
     let totalresults = product.map((item,index) => {
       this.productIndex[`index${index}`] = item.id
-      this.variantId[`index${index}`] = (item.variants.length > 0 && item.variants[0].variantId)
+      this.variantId[item.id] = this.variantId[item.id] || (item.variants.length > 0 && item.variants[0].variantId)
       return (
         <>
           <Product
@@ -289,7 +289,6 @@ const mapDispatchToProps = dispatch =>
       resetAddtoCart: cartActionCreators.resetAddtoCart,
       getWishlist: wishlistActionCreators.getWishlist,
       notifyMe: wishlistActionCreators.notifyMe,
-      getProduct:productActionCreators.getProduct
     },
     dispatch,
   );
