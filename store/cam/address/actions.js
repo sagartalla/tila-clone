@@ -8,6 +8,7 @@ const actions = {
   MAKE_DEFAULT_ADDR: 'MAKE_DEFAULT_ADDR',
   EDIT_ADDR_DETAILS: 'EDIT_ADDR_DETAILS',
   SELECT_DELIVER_TO_ADDRESS: 'SELECT_DELIVER_TO_ADDRESS',
+  CHANGE_STORE: 'CHANGE_STORE',
 };
 
 const actionCreators = {
@@ -62,6 +63,12 @@ const actionCreators = {
     dispatch(cartActionCreators.getCartResults({
       address_id: addId
     }));
+  },
+
+  changeState: () => {
+    return {
+      type: actions.CHANGE_STORE,
+    };
   }
 };
 

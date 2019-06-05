@@ -64,7 +64,7 @@ class SizeChart extends Component {
               </div>}
           >
             <div className={`${styles['size-chart-image']}`}>
-              <img src={this.imageUrl[productInfo.sizeChart.sizeChartImgName]} alt="image" />
+              <img src={this.imageUrl[productInfo.sizeChart.sizeChartImgName]} alt="image" style={{ width: '100%'}}/>
             </div>
           </Slider>
         }
