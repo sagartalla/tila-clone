@@ -100,7 +100,7 @@ class Reason extends Component {
     const { goToNextStep, setReason, query, orderIssue, orderDetails } = this.props;
     const { orderId, returnExchangeType, issueType, selectedItem} = orderIssue;
     const { reason, subReason, comment, selectedMode } = this.state
-    let listingObj = orderDetails.order_items.find((order) => order.order_item_ids[0] === selectedItem.id);
+    let listingObj = orderDetails && orderDetails.order_items && orderDetails.order_items.find((order) => order.order_item_ids[0] === selectedItem.id);
     const params = {
       orderId,
       issueType: issueType,
@@ -115,7 +115,7 @@ class Reason extends Component {
       sub_reason: subReason,
       comments: comment,
       order_item_id: orderIssue.selectedItem.id,
-      address_id: orderDetails.address.address_id
+      address_id: orderDetails && orderDetails.address.address_id,
     }
 
     if (
@@ -249,7 +249,7 @@ class Reason extends Component {
               <span className={styles['select-highlight']} />
               <span className={styles['select-bar']} />
             </div>
-            {this.state.reason ? (
+            {this.state.reason && selectedReason.sub_reasons ? (
               <div
                 className={`${styles.select} ${styles['mt-20']} ${
                   styles['mb-10']

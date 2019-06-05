@@ -42,7 +42,10 @@ const Review = ({ rev, deleteReview, submitUserReview }) => {
     });
   };
 
-  const closeModal = () => setModal(false);
+  const closeModal = () => {
+    setModal(false);
+    setReviews(true);
+  }
   const showModal = () => setModal(true);
 
   return (
