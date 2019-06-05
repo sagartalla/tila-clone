@@ -12,9 +12,9 @@ import lang from '../../../../utils/language';
 import main_en from '../../../../layout/main/main_en.styl';
 import main_ar from '../../../../layout/main/main_ar.styl';
 import styles_en from '../../order_en.styl';
-import styles_ar from '../../order_en.styl';
+import styles_ar from '../../order_ar.styl';
 
-const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
 const cookies = new Cookies();
 
@@ -35,13 +35,13 @@ const OrderDetails = ({ query, orderData, thankyouPage }) => {
             <div className={`${styles['mt-20']} ${styles['mb-20']}`}>
               {
                 thankyouPage ? '' :
-                  <Fragment>
-                    <span><a onClick={() => routeChange(`/${country}/${language}/cam/profile`)}>{ORDER_PAGE.MY_ACCOUNT}</a></span>
-                    <span> > </span>
-                    <span><a onClick={() => routeChange(`/${country}/${language}/cam/orders`)}>{ORDER_PAGE.ORDERS}</a></span>
-                    <span> > </span>
-                    <span>{query.orderId}</span>
-                  </Fragment>
+                <Fragment>
+                  <span><a onClick={() => routeChange(`/${country}/${language}/cam/profile`)}>{ORDER_PAGE.MY_ACCOUNT}</a></span>
+                  <span> > </span>
+                  <span><a onClick={() => routeChange(`/${country}/${language}/cam/orders`)}>{ORDER_PAGE.ORDERS}</a></span>
+                  <span> > </span>
+                  <span>{query.orderId}</span>
+                </Fragment>
               }
               {/* TODO Breadcrums */}
 
@@ -80,6 +80,6 @@ const OrderDetails = ({ query, orderData, thankyouPage }) => {
       <OrderIssueWidget />
     </div>
   );
-}
+};
 
 export default OrderDetails;

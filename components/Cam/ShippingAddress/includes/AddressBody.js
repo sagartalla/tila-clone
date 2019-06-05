@@ -42,23 +42,23 @@ const AddressBody = (props) => {
       <Row className={`${styles['flex']} ${styles['flex-wrp']}`}>
         {
           props.data && props.data.map((val, id) => {
-            const isDefault = val.default;
+            const isDefault = val.address_id === props.selectedAddress.address_id;
             const colLength = props.isPaymentPage && !isDefault ? 4 : 6;
             return (
               <Col md={4} sm={12} xs={12} key={id}>
-                <div className={`${styles['address-card']} ${val.default ? styles['address-selected'] : ''}`}>
+                <div className={`${styles['address-card']} ${isDefault ? styles['address-selected'] : ''}`}>
                   <div className={styles['address-card-head']}>
                     {
                       props.isPaymentPage ?
                         <span>
-                          <input id={val.address_id} name="addr_checkbox" type="radio" defaultChecked={val.default} className={styles['radio-btn']} onClick={selectDeliverToAddress} />
+                          <input id={val.address_id} name="addr_checkbox" type="radio" defaultChecked={isDefault} className={styles['radio-btn']} onClick={selectDeliverToAddress} />
                           <span className={`${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pl-10']}`}>{DELIVERY_ADDR_PAGE.DELIVER_TO} {val.first_name}</span>
                           <span className={`${styles['default-address-icon']} ${styles['float-r']}`}><SVGComponent clsName={`${styles['default-address-icon-inn']}`} src="icons/shipping-address-icons/home-icon" /></span>
                         </span>
                         :
                         isDefault ?
                           <span>
-                            <input id={val.address_id} name="addr_checkbox" type="radio" defaultChecked={val.default} className={styles['radio-btn']} />
+                            <input id={val.address_id} name="addr_checkbox" type="radio" defaultChecked={isDefault} className={styles['radio-btn']} />
                             <span className={`${styles['fontW600']} ${styles['pl-10']}`}>{DELIVERY_ADDR_PAGE.DEFAULT_ADDR}</span>
                             <span className={`${styles['default-address-icon']} ${styles['float-r']}`}><SVGComponent clsName={`${styles['default-address-icon-inn']}`} src="icons/shipping-address-icons/home-icon" /></span>
                           </span> :
@@ -110,7 +110,7 @@ const AddressBody = (props) => {
           })
         }
         <Col md={4} sm={12} xs={12}>
-          <div className={`${styles['address-card']} ${styles['address-card-new']} ${styles['p-20']}`} onClick={props.resetAddAdrressForm}>
+          <div className={`${styles['address-card']} ${styles['address-card-new']} ${styles['p-20']}`}>
             <div className={`${styles['flex-center']} ${styles['flex-wrap']}`}>
               <h4 className={`${styles['m-0']} ${styles['mb-10']} ${styles['thick-blue']} ${styles['fontW600']} ${styles['flex-center']} ${styles['flex']}`}>
                 <SVGComponent clsName={`${styles['pls-icon']}`} src="icons/common-icon/plus-icon" />
@@ -118,7 +118,7 @@ const AddressBody = (props) => {
               </h4>
               <p className={`${styles['fs-12']} ${styles['thick-gry-clr']}`}>{DELIVERY_ADDR_PAGE.ADD_NEW_ADDR_TAG}</p>
               <p>
-                <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']} ${styles['left-radius']} ${styles['small-btn']}`}>
+                <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']} ${styles['left-radius']} ${styles['small-btn']}`} onClick={props.addAddressForm}>
                   {DELIVERY_ADDR_PAGE.ADD_NEW_BTN}
                 </button>
               </p>

@@ -4,16 +4,19 @@ import HeaderBar from '../HeaderBar';
 import FooterBar from '../Footer';
 
 const url = {
-  tc: '/static/docs/tc.pdf',
-  re: '/static/docs/re.pdf',
-  wp: '/static/docs/wp.pdf',
-  sp: '/static/docs/sp.pdf',
-}[''];
+  tc: 'https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/policies-html/tnc/termsedited.html',
+  cp: 'https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/policies-html/policies/policies.html?#cancelationPolicy',
+  er: 'https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/policies-html/policies/policies.html?#exchangePolicy',
+  re: 'https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/policies-html/policies/policies.html?#returnPolicy',
+  wp: 'https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/policies-html/policies/policies.html?#warrantyPolicy',
+  // sp: '/static/docs/sp.pdf#toolbar=0&navpanes=0&view=FitH',
+  pp: 'https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/policies-html/privacy/Pravacylatest.html?#PrivacyPolicy',
+};
 
 const Policy = ({ query }) => (
   <Fragment>
     <HeaderBar />
-    <iframe src={`/static/docs/${query.name}.pdf#toolbar=0&navpanes=0&view=FitH`} title={query.name} style={{ height: '100vh', width: '100vw', border: '0' }} />
+    <iframe src={url[query.name]} title={query.name} style={{ height: '100vh', width: '100vw', border: '0' }} />
     <FooterBar />
   </Fragment>
 );

@@ -164,6 +164,9 @@ class PaymentMode extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    if(nextProps.configJson.basic) {
+      this.state = {}
+    }
     if(!this.state.showTab) {
       this.setState({
         showTab: Object.keys(nextProps.paymentModesData.paymentModes)[0]

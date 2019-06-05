@@ -64,6 +64,11 @@ const notifyMe = params => axios.post(`${constants.WISHLIST_API_URL}/api/v1/aler
   return res;
 });
 
+const wishlistNotify = wishlistId => axios.post(`${constants.WISHLIST_API_URL}/api/v1/wishlist/alert/stock/${wishlistId}`).then((res) => {
+  toast.success(API_TEXT.WILL_BE_NOTIFIED_SOON);
+  return res;
+});
+
 export default {
-  getWishlistApi, addToWishlistApi, deleteWishlistApi, notifyMe, track, getWishlistProducts,
+  getWishlistApi, addToWishlistApi, deleteWishlistApi, notifyMe, track, getWishlistProducts, wishlistNotify,
 };

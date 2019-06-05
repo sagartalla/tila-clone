@@ -57,13 +57,14 @@ class SizeChart extends Component {
           <Slider
             closeSlider={this.closeSlider}
             isOpen={showSlider}
+            width="580px"
             label={
               <div className={`${styles['black-color']}`}>
                 {`${productInfo.sizeChart.sizeChartImgName}` + ' ' + FOOTER_PAGE.SIZE_GUIDE}
               </div>}
           >
             <div className={`${styles['size-chart-image']}`}>
-              <img src={this.imageUrl[productInfo.sizeChart.sizeChartImgName]} alt="image" />
+              <img src={this.imageUrl[productInfo.sizeChart.sizeChartImgName]} alt="image" style={{ width: '100%'}}/>
             </div>
           </Slider>
         }
