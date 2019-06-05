@@ -150,6 +150,7 @@ class CartItem extends React.Component {
       brand_name, gift_info, shipping, warranty_duration, total_amount, total_discount,
       product_id, variant_id, itemType, catalogId, discount, mrp, variantAttributes, selling_price,
     } = item;
+    console.log('tyvg', shipping);
     return (
       <div key={item_id} className={`${styles['mb-20']} ${styles['box']}`}>
         {
@@ -326,7 +327,7 @@ class CartItem extends React.Component {
                 <div className={`${styles['pb-10']}`}>
                   <div>{CART_PAGE.DELIVERY_CHARGES}</div>
                 </div>
-                <div className={`${styles['t-rt']}`}>
+                <div className={`${styles['t-rt']} ${styles['flex']}`}>
                   {shipping.shipping_fees ?
                     `${shipping.shipping_fees} ${cur}`
                     : <SVGComponent clsName={`${styles['ship-icon']}`} src="icons/free-shipping" />}
@@ -347,13 +348,13 @@ class CartItem extends React.Component {
                       
                     {/* </OverlayTrigger> */}
                   </h4>
-                  {
+                  {/* {
                       shipping !== null
                       ?
                         <p className={`${styles['t-rt']}`}>{shipping.shipping_fees} <span className={`${styles['fs-12']}`}>{cur}</span></p>
                       :
                         null
-                  }
+                  } */}
                 </Col>
               </Row>
             </Col>
