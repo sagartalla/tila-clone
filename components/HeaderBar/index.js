@@ -49,13 +49,9 @@ const HeaderBar = props => (
             :
             null
           } */}
-          {props.hideActionBar ?
-          null
-          :
           <Col md={4} sm={5}>
-            <ActionBar />
+            <ActionBar hideLogin={props.hideLogin} />
           </Col>
-        }
         </Row>
       </Grid>
     </div>
