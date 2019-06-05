@@ -11,7 +11,7 @@ class Redirect extends Component {
     }
   }
   componentDidMount() {
-    this.props.getRedirect({encryptedString: props.encryptedString});
+    this.props.getRedirect({encryptedString: this.props.encryptedString});
   }
   render() {
     return 'loading...';
