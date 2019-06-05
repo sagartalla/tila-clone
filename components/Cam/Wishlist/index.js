@@ -86,9 +86,7 @@ class Wishlist extends Component {
 
   notify = ({ target }) => {
     const { notifyMe } = this.props;
-    notifyMe({
-      product_id: target.getAttribute('data-product-id'),
-    });
+    notifyMe(target.getAttribute('data-wish-id'));
   }
 
   render() {
@@ -164,7 +162,7 @@ const mapDispatchToProps = dispatch =>
       getWishlist: actionCreators.getWishlist,
       deleteWishlist: actionCreators.deleteWishlist,
       addToCart: actionCreators.addToCart,
-      notifyMe: actionCreators.notifyMe,
+      notifyMe: actionCreators.wishlistNotify,
       track: actionCreators.track,
     },
     dispatch,
