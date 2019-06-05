@@ -39,7 +39,7 @@ class ContactInfo extends React.Component {
   }
 
   render() {
-    const { mailId, email, mobile_no, lastUpdated, phoneNum, email_verified, mobile_verified } = this.state.contactInfo ? this.state.contactInfo : { mailId: "", email: "", mobile_no: "", lastUpdated: "Never updated", phoneNum: "", email_verified: "" };
+    const { mailId, email, mobile_no, lastUpdated, phoneNum, email_verified, mobile_verified } = this.state.contactInfo ? this.state.contactInfo : { mailId: "", email: "", mobile_no: "", lastUpdated: "not available", phoneNum: "", email_verified: "" };
     const { element, show } = this.state;
     const { CONTACT_INFO_MODAL } = languageDefinations();
     return (
