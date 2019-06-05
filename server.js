@@ -11,10 +11,35 @@ const apiRoutes = require('./apiRoutes');
 const uuidv4 = require('uuid/v4')
 //require('./utils/error-handle');
 
-
 const server = express();
 const port = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== 'production';
+
+const client = require('./utils/tcpConnection');
+//const io = require('socket.io')(server);
+
+client.on('data',(data)=>{
+  try{
+      console.log('Data recieved from tcp server :- ');
+      var str = data.toString('utf8');
+      var jobj =  JSON.parse(str);
+      var unflattened =  Object.unflatten(jobj);
+      //console.log(Object.unflatten(JSON.parse(data.toString('utf8'))));
+      console.log(JSON.stringify(unflattened));
+  }
+  catch(e){
+      console.log('err :', e);
+  }
+})
+
+/******** Connection ping from browser ********/
+// io.on('connection', function(client) {
+//   console.log('Browser Client connected ...');
+//   client.on('join', function (data) {
+//       console.log(data);
+//       io.emit('connectionSuccess', {message:'Socket Connected Successfully'});
+//   });
+// });
 
 function sessionCookie(req, res, next) {
   const htmlPage =
