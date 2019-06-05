@@ -193,7 +193,7 @@ class Landing extends Component {
   render() {
     const { query } = this.props;
     return (
-      <Theme.Provider value={query.category ? query.category.toLowerCase() : null}>
+      <Theme.Provider value={query && query.category && query.category.toLowerCase()}>
         <Fragment>
         <HeaderBar query={query} />
         {

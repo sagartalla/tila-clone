@@ -79,9 +79,6 @@ class ActionBar extends Component {
     if (nextProps.isLoggedIn !== this.props.isLoggedIn) {
       this.props.getWishlist();
     }
-    if(nextProps.userInfo.personalInfo.image_url === this.props.userInfo.personalInfo.image_url){
-      return;
-    }
     nextProps.userInfo.personalInfo.image_url && this.props.downloadPic(nextProps.userInfo.personalInfo.image_url);
     let show = ((nextProps.isLoggedIn != this.props.isLoggedIn) && !this.state.logoutClicked) || this.state.loginClicked || !!nextProps.error || (!nextProps.isLoggedIn && nextProps.showLogin) || nextProps.loginInProgress || nextProps.showEmailVerificationScreen;
     if (window.location.pathname.indexOf('/payment') > -1) {
@@ -104,6 +101,9 @@ class ActionBar extends Component {
     } else if ((nextProps.instaCode !== this.props.instaCode) && nextProps.instaCode) {
       window.localStorage.removeItem('instagramCode');
       this.getTokenCall('instagram', nextProps.instaCode);
+    }
+    if(nextProps.userInfo.personalInfo.image_url === this.props.userInfo.personalInfo.image_url){
+      return;
     }
   }
 
