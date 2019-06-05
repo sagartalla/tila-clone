@@ -313,7 +313,7 @@ class ShippingAddress extends Component {
   render() {
     // if standalone is true, it is stand alone address page else from payment page or any other pages.
     const {
-      results, standalone, handleShippingAddressContinue, miniAddress, isPdp, getAllCities, countriesData, cartResults, showNonShippable, isPaymentPage
+      results, standalone, handleShippingAddressContinue, miniAddress, isPdp, getAllCities, countriesData, cartResults, showNonShippable, isPaymentPage, selectedAddress
     } = this.props;
     const {
       showNewAddr, addr, showCitiesData, showCountriesData, validation, showSlider,
@@ -418,6 +418,7 @@ class ShippingAddress extends Component {
                     selectDeliverToAddress={this.selectDeliverToAddress}
                     standalone={standalone}
                     isPaymentPage={isPaymentPage}
+                    selectedAddress={selectedAddress}
                   />
                 </Col>
                 <Col md={12} sm={12} xs={12}>

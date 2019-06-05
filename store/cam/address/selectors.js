@@ -29,17 +29,16 @@ const getAddrById = store => (addrId) => {
 const getDefaultAddress = (store) => {
   let defaultAdd;
   if (store.shippingAddrReducer.data && store.shippingAddrReducer.data.length > 0) {
-    defaultAdd = _.filter(store.shippingAddrReducer.data, value => value.default);
+    defaultAdd = _.find(store.shippingAddrReducer.data, value => value.default);
   }
   if(!defaultAdd) {
     if(store.shippingAddrReducer.data && store.shippingAddrReducer.data.length > 0) {
-        return [store.shippingAddrReducer.data[0]];
+      defaultAdd = [store.shippingAddrReducer.data[0]];
     } else {
-      return [{}];
+      defaultAdd = [{}];
     }
-  } else {
-    return defaultAdd;
   }
+  return defaultAdd;
 };
 
 const getSelectedAddress = (store) => {

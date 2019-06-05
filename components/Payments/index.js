@@ -20,6 +20,7 @@ import { actionCreators, selectors } from '../../store/payments';
 import { actionCreators as cartAction } from '../../store/cart'
 import { actionCreators as authActionCreators, selectors as authSelectors } from '../../store/auth';
 import { actionCreators as cartActionCreators, selectors as cartSelectors } from '../../store/cart';
+import { selectors as addressSelectors } from '../../store/cam/address'
 import Slider from '../common/slider';
 import Coupon from '../Cart/CartPaymentSideBar/coupons';
 import FormValidator from '../common/FormValidator';
@@ -413,7 +414,7 @@ const mapStateToprops = store => ({
   makePaymentOptions: selectors.getPaymentUrl(store),
   isLoggedIn: authSelectors.getLoggedInStatus(store),
   signInLoader: authSelectors.getLoginProgressStatus(store),
-  selectedAddress: selectors.getSelectedAddress(store),
+  selectedAddress: addressSelectors.getSelectedAddress(store),
 });
 
 const mapDispatchToProps = dispatch =>

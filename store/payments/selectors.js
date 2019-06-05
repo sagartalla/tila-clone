@@ -15,11 +15,20 @@ const getPaymentUrl = (store) => {
 }
 
 const getDefaultAddress = (store) => {
+  let defaultAdd;
   if (store.shippingAddrReducer.data && store.shippingAddrReducer.data.length > 0) {
-    return _.filter(store.shippingAddrReducer.data, function (value, key) { return value.default; });
+    defaultAdd = _.find(store.shippingAddrReducer.data, value => value.default);
   }
-  return [{}];
-}
+  if(!defaultAdd) {
+    if(store.shippingAddrReducer.data && store.shippingAddrReducer.data.length > 0) {
+        return [store.shippingAddrReducer.data[0]];
+    } else {
+      return [{}];
+    }
+  } else {
+    return defaultAdd;
+  }
+};
 
 const getPaymentModesData = (store) => {
   /*

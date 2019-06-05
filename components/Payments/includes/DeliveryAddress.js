@@ -54,6 +54,7 @@ const DeliveryAddress = props => {
             <h4 className={`${styles['mb-20']} ${styles['mt-0']}`}>{DELIVERY_ADDR_PAGE.DELIVERY_ADDR}</h4>
             <ShippingAddress
               showNonShippable={showNonShippable}
+              selectedAddress={selectedAddress}
               handleShippingAddressContinue={handleShippingAddressContinue}
               isPaymentPage
             />
