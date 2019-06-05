@@ -1,12 +1,6 @@
 /*eslint-disable*/
 const orderRelatedCatId = {
-  1: true,
-  2: true,
-  3: true,
-  4: true,
-  5: true,
-  6: true,
-  7: true,
+  1: true,8: true,10: true, 55: true
 }
 const computeCategory = (categoryRes) => {
   if(categoryRes){
