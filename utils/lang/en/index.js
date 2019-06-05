@@ -58,7 +58,6 @@ export const EN_KEYWORDS = {
     ITEM_IN_YOUR_WISHLIST: 'item in Wishlist',
     ITEMS_IN_YOUR_WISHLIST: 'items in Wishlist',
     MY_CART: 'My Cart',
-
   },
   PAYMENT_PAGE: {
     SECURE_CHECKOUT: 'Secure Checkout',
@@ -566,6 +565,7 @@ export const EN_KEYWORDS = {
     SAVE_PASSWORD: 'SAVE PASSWORD',
     PASSWORD_RESET_SUCCESSFULL: 'Password Reset Successfully',
     CONFIRM_PASSWORD: 'Confirm Password',
+    PLEASE_ACCEPT_OUR_TERMS: 'Please accept out terms and conditions to proceed',    
   },
   ORDER_PAGE: {
     LOADING: 'Loading...',

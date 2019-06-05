@@ -124,7 +124,8 @@ class SignIn extends Component {
                 </span>
               </a>
               <div className={`${styles['mt-10']} ${styles['mb-10']}`}>
-                <input type="checkbox" defaultChecked="true" /> {PAYMENT_PAGE.AGREE_TO} <a onClick={this.tcToggle}>{PAYMENT_PAGE.TC}</a> {PAYMENT_PAGE.AND} <a onClick={this.privacyToggle}>{PAYMENT_PAGE.PRIVACY_POLICY}</a>
+                <input type="checkbox" defaultChecked="true" onChange={props.checkBoxChange} /> {PAYMENT_PAGE.AGREE_TO} <a onClick={this.tcToggle}>{PAYMENT_PAGE.TC}</a> {PAYMENT_PAGE.AND} <a onClick={this.privacyToggle}>{PAYMENT_PAGE.PRIVACY_POLICY}</a>
+                <div className={`${styles['thick-red-clr']} ${styles['ml-15']}`}>{props.showError ? LOGIN_PAGE.PLEASE_ACCEPT_OUR_TERMS : ''}</div>
               </div>
               <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles.fontW600} ${styles['text-uppercase']} ${styles['left-radius']}`} onClick={props.showAddressTab}>{PAYMENT_PAGE.CONTINUE}</button>
               {
