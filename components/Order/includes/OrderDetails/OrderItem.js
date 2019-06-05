@@ -26,14 +26,12 @@ import main_ar from '../../../../layout/main/main_ar.styl';
 import styles_en from '../../order_en.styl';
 import styles_ar from '../../order_ar.styl';
 
-const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
 
 const { ORDER_PAGE, CART_PAGE, ORDERS } = languageDefinations();
 
 const cookies = new Cookies();
-
-
 
 const language = cookies.get('language') || 'en';
 const country = cookies.get('country') || 'SAU';
@@ -112,7 +110,6 @@ class OrderItem extends Component {
       }
       return null;
     })();
-
     const displayText = () => {
       if (['SHIPPED', 'PLACED', 'PROCESSING'].indexOf(orderItem.status) !== -1) {
         return 'Delivery by';
@@ -137,6 +134,13 @@ class OrderItem extends Component {
         </div>
       </div>
     );
+
+    const refundStatus = refund => (
+      <span className={`${refund.status === 'COMPLETED' ? styles['success-th'] : styles['progress-th']} ${styles['ml-10']} ${styles['mr-10']} ${styles['pl-10']} ${styles['pr-10']} ${styles['border-radius4']}`}>
+        {refund.status === 'COMPLETED' ? ORDER_PAGE.COMPLETED : ORDER_PAGE.IN_PROGRESS}
+      </span>
+    );
+
     return (
       <div className={`${styles['shipment-wrap']} ${styles['mb-20']} ${styles['mt-20']} ${styles.flex}`}>
         <Col md={7} sm={7} className={`${styles['pl-0']} ${styles['pr-0']} ${styles.flex} ${styles['flex-colum']}`}>
@@ -248,7 +252,13 @@ class OrderItem extends Component {
                 {product.refunds && product.refunds.length > 0 &&
                   <div className={`${styles['pt-15']} ${styles['pb-5']} ${styles['pl-15']} ${styles['border-t']} ${styles.relative}`}>
                     <div className={`${styles['bg-white']} ${styles['fs-12']} ${styles.absolute} ${styles['p-5']} ${styles['border-lg']} ${styles['refund-label']}`}>{ORDER_PAGE.REFUND_STATUS}</div>
-                    {ORDER_PAGE.REFUND_INITIATED}
+                    {product.refunds.map(refund => (
+                      <div className={`${styles['flex-center']} ${styles['fs-12']}`}>
+                        <span className={styles['thick-gry-clr']}>{ORDER_PAGE.REFUND_TO}:<span className={`${styles['black-color']} ${styles['ml-10']}`}>{refund.refund_mode === 'WALLET' ? 'Tila Wallet' : 'Card'}</span></span>
+                        {refundStatus(refund)}
+                        <span>{refund.amount.display_value} {refund.amount.currency_code}</span>
+                      </div>
+                    ))}
                   </div>}
                 {product.gift_info &&
                   <div className={`${styles.flex} ${styles['fs-12']} ${styles.absolute} ${styles['p-5']} ${styles.right0} ${styles.top0} ${styles['thick-gry-clr']} ${styles['bg-light-gray']}`}>

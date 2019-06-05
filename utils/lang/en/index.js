@@ -650,6 +650,9 @@ export const EN_KEYWORDS = {
     CLICK_HERE: 'Click here',
     YOUR_ITEM_IS_OUT_FOR_DELIVERY: 'Your Item is out for delivery',
     REPLACE: 'Replace',
+    REFUND_TO: 'Refund to',
+    COMPLETED: 'Completed',
+    IN_PROGRESS: 'In Progress',
   },
   COUPON_OFFERS: {
     VIEW_TERMS: 'Terms & Conditions',

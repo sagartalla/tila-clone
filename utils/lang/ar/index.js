@@ -636,6 +636,9 @@ export const AR_KEYWORDS = {
     CLICK_HERE: 'Click here',
     YOUR_ITEM_IS_OUT_FOR_DELIVERY: 'البند الخاص بك هو خارج للتسليم',
     REPLACE: 'Replace',
+    REFUND_TO: 'Refund to',
+    COMPLETED: 'Completed',
+    IN_PROGRESS: 'In Progress',
   },
   COUPON_OFFERS: {
     VIEW_TERMS: 'استعرض الشروط والأحكام',
