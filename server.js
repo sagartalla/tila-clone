@@ -9,7 +9,7 @@ const cookiesMiddleware = require('universal-cookie-express');
 const routes = require('./routes');
 const apiRoutes = require('./apiRoutes');
 const uuidv4 = require('uuid/v4')
-require('./utils/error-handle');
+//require('./utils/error-handle');
 
 
 const server = express();
@@ -38,7 +38,7 @@ function sessionCookie(req, res, next) {
   }
   global.APP_LANGUAGE = ['en', 'ar'].indexOf(language) !== -1 ? language : (cookieLanguage ? cookieLanguage : 'en');
   global.APP_COUNTRY = country ? country : (cookieCountry ? cookieCountry : 'SAU');
-  
+
   res.cookie('language', global.APP_LANGUAGE);
   res.cookie('country', global.APP_COUNTRY);
   next();

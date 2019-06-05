@@ -10,7 +10,7 @@ const Fashion = () => React.createElement(
       { className: `${styles['flex']} fashion-banner-main ${styles['relative']}` },
       React.createElement(
         'a',
-        { href: '/SAU/en/srp?search=dress&isListed=false' },
+        { href: `/SAU/${lang}/srp?search=dress&isListed=false` },
         React.createElement('img', { src: `/static/img/landing-page-fashion/${lang === 'en' ? 'womens-clothing' : 'womens-clothing-ar'}.jpg`, className: 'img-responsive' })
       )
     )
@@ -26,7 +26,7 @@ const Fashion = () => React.createElement(
         { md: 3, className: styles['pl-0'] },
         React.createElement(
           'a',
-          { href: '/SAU/en/srp/shoe?categoryTree=true&isListed=false&sid=892,907,908' },
+          { href: `/SAU/${lang}/srp/shoe?categoryTree=true&isListed=false&sid=892,907,908` },
           React.createElement(
             'div',
             { className: `banner-sub-slider-inn ${styles['bg-white']} ${styles['p-10']} ${styles['flex-center']} ${styles['border-radius4']}` },
@@ -74,7 +74,7 @@ const Fashion = () => React.createElement(
         { md: 3, className: styles['pl-0'] },
         React.createElement(
           'a',
-          { href: '/SAU/en/srp/skirt?categoryTree=true&isListed=false&sid=892,910,912' },
+          { href: `/SAU/${lang}/srp/skirt?categoryTree=true&isListed=false&sid=892,910,912` },
           React.createElement(
             'div',
             { className: `banner-sub-slider-inn ${styles['bg-white']} ${styles['p-10']} ${styles['flex-center']} ${styles['border-radius4']}` },
@@ -122,7 +122,7 @@ const Fashion = () => React.createElement(
         { md: 3, className: styles['pl-0'] },
         React.createElement(
           'a',
-          { href: '/SAU/en/srp/smart-wearable-tech?categoryTree=true&isListed=false&sid=848,860' },
+          { href: `/SAU/${lang}/srp/smart-wearable-tech?categoryTree=true&isListed=false&sid=848,860` },
           React.createElement(
             'div',
             { className: `banner-sub-slider-inn ${styles['bg-white']} ${styles['p-10']} ${styles['flex-center']} ${styles['border-radius4']}` },
@@ -170,7 +170,7 @@ const Fashion = () => React.createElement(
         { md: 3, className: styles['pl-0'] },
         React.createElement(
           'a',
-          { href: '/SAU/en/srp/watch?categoryTree=true&isListed=false&sid=892,929' },
+          { href: `/SAU/${lang}/srp/watch?categoryTree=true&isListed=false&sid=892,929` },
           React.createElement(
             'div',
             { className: `banner-sub-slider-inn ${styles['bg-white']} ${styles['p-10']} ${styles['flex-center']} ${styles['border-radius4']}` },
@@ -239,7 +239,7 @@ const Fashion = () => React.createElement(
             { md: 8, className: `${styles['pl-0']} ${styles['pr-10']}` },
             React.createElement(
               'a',
-              { href: '/SAU/en/srp?search=rainware&isListed=false' },
+              { href: `/SAU/${lang}/srp?search=rainware&isListed=false` },
               React.createElement('img', { src: '/static/img/landing-page-fashion/what-new.jpg', className: 'img-responsive' })
             )
           ),
@@ -251,7 +251,7 @@ const Fashion = () => React.createElement(
               { className: 'chinos-part' },
               React.createElement(
                 'a',
-                { href: '/SAU/en/srp?search=Chinos&isListed=false' },
+                { href: `/SAU/${lang}/srp?search=Chinos&isListed=false` },
                 React.createElement('img', { src: '/static/img/landing-page-fashion/what-new1.jpg', className: 'img-responsive' })
               ),
               React.createElement(
@@ -282,7 +282,7 @@ const Fashion = () => React.createElement(
               { className: `new-brands ${styles['pb-10']}` },
               React.createElement(
                 'a',
-                { href: '/SAU/en/srp/sunglass?categoryTree=true&isListed=false&sid=892,928' },
+                { href: `/SAU/${lang}/srp/sunglass?categoryTree=true&isListed=false&sid=892,928` },
                 React.createElement('img', { src: '/static/img/landing-page-fashion/what-new2.jpg', className: 'img-responsive' })
               ),
               React.createElement(
@@ -309,7 +309,7 @@ const Fashion = () => React.createElement(
               { className: `new-brands ${styles['pb-10']}` },
               React.createElement(
                 'a',
-                { href: '/SAU/en/srp/kid%27s?categoryTree=true&isListed=false&sid=892,893' },
+                { href: `/SAU/${lang}/srp/kid%27s?categoryTree=true&isListed=false&sid=892,893` },
                 React.createElement('img', { src: '/static/img/landing-page-fashion/what-new3.jpg', className: 'img-responsive' })
               ),
               React.createElement(
@@ -336,7 +336,7 @@ const Fashion = () => React.createElement(
               { className: `new-brands ${styles['pb-10']}` },
               React.createElement(
                 'a',
-                { href: '/SAU/en/srp/fragrance?categoryTree=true&isListed=false&sid=932,958,964' },
+                { href: `/SAU/${lang}/srp/fragrance?categoryTree=true&isListed=false&sid=932,958,964` },
                 React.createElement('img', { src: '/static/img/landing-page-fashion/what-new4.jpg', className: 'img-responsive' })
               ),
               React.createElement(
@@ -363,7 +363,7 @@ const Fashion = () => React.createElement(
               { className: `new-brands ${styles['pb-10']}` },
               React.createElement(
                 'a',
-                { href: '/SAU/en/srp?search=Jewellery&isListed=false' },
+                { href: `/SAU/${lang}/srp?search=Jewellery&isListed=false` },
                 React.createElement('img', { src: '/static/img/landing-page-fashion/what-new5.jpg', className: 'img-responsive' })
               ),
               React.createElement(
@@ -390,7 +390,7 @@ const Fashion = () => React.createElement(
               { className: `new-brands ${styles['pb-10']}` },
               React.createElement(
                 'a',
-                { href: '/SAU/en/srp?search=Handbags&isListed=false' },
+                { href: `/SAU/${lang}/srp?search=Handbags&isListed=false` },
                 React.createElement('img', { src: '/static/img/landing-page-fashion/what-new6.jpg', className: 'img-responsive' })
               ),
               React.createElement(
@@ -417,7 +417,7 @@ const Fashion = () => React.createElement(
               null,
               React.createElement(
                 'a',
-                { href: '/SAU/en/srp/watch?categoryTree=true&isListed=false&sid=892,929' },
+                { href: `/SAU/${lang}/srp/watch?categoryTree=true&isListed=false&sid=892,929` },
                 React.createElement('img', { src: '/static/img/landing-page-fashion/what-new7.jpg', className: 'img-responsive' })
               )
             )
@@ -450,7 +450,7 @@ const Fashion = () => React.createElement(
             { md: 8, className: `${styles['pl-0']} ${styles['pr-10']}` },
             React.createElement(
               'a',
-              { href: '/SAU/en/srp/shirt?categoryTree=true&isListed=false&sid=892,899,902' },
+              { href: `/SAU/${lang}/srp/shirt?categoryTree=true&isListed=false&sid=892,899,902` },
               React.createElement('img', { src: '/static/img/landing-page-fashion/getting-img.jpg', className: 'img-responsive' })
             )
           ),
@@ -462,7 +462,7 @@ const Fashion = () => React.createElement(
               { className: styles['pb-10'] },
               React.createElement(
                 'a',
-                { href: '/SAU/en/srp/trousers?categoryTree=true&isListed=false&sid=892,899,2281' },
+                { href: `/SAU/${lang}/srp/trousers?categoryTree=true&isListed=false&sid=892,899,2281` },
                 React.createElement('img', { src: '/static/img/landing-page-fashion/getting-img2.jpg', className: 'img-responsive' })
               )
             ),
@@ -471,7 +471,7 @@ const Fashion = () => React.createElement(
               null,
               React.createElement(
                 'a',
-                { href: '/SAU/en/srp/shoe?categoryTree=true&isListed=false&sid=892,907,908' },
+                { href: `/SAU/${lang}/srp/shoe?categoryTree=true&isListed=false&sid=892,907,908` },
                 React.createElement('img', { src: '/static/img/landing-page-fashion/getting-img3.jpg', className: 'img-responsive' })
               )
             )
@@ -485,7 +485,7 @@ const Fashion = () => React.createElement(
             { md: 8, className: `${styles['pl-0']} ${styles['pr-10']}` },
             React.createElement(
               'a',
-              { href: '/SAU/en/srp/shirt?categoryTree=true&isListed=false&sid=892,910,916' },
+              { href: `/SAU/${lang}/srp/shirt?categoryTree=true&isListed=false&sid=892,910,916` },
               React.createElement('img', { src: '/static/img/landing-page-fashion/getting-img4.jpg', className: 'img-responsive' })
             )
           ),
@@ -497,7 +497,7 @@ const Fashion = () => React.createElement(
               { className: styles['pb-10'] },
               React.createElement(
                 'a',
-                { href: '/SAU/en/srp/shoe?categoryTree=true&isListed=false&sid=892,921,922' },
+                { href: `/SAU/${lang}/srp/shoe?categoryTree=true&isListed=false&sid=892,921,922` },
                 React.createElement('img', { src: '/static/img/landing-page-fashion/getting-img5.jpg', className: 'img-responsive' })
               ),
               React.createElement(
@@ -520,7 +520,7 @@ const Fashion = () => React.createElement(
               null,
               React.createElement(
                 'a',
-                { href: '/SAU/en/srp?search=Handbags&isListed=false' },
+                { href: `/SAU/${lang}/srp?search=Handbags&isListed=false` },
                 React.createElement('img', { src: '/static/img/landing-page-fashion/what-new6.jpg', className: 'img-responsive' })
               ),
               React.createElement(
@@ -571,7 +571,7 @@ const Fashion = () => React.createElement(
               { className: `canvali-logo ${styles['flex-center']}` },
               React.createElement(
                 'a',
-                { href: '/SAU/en/srp?search=just%20cavalli&isListed=false' },
+                { href: `/SAU/${lang}/srp?search=just%20cavalli&isListed=false` },
                 React.createElement('img', { src: '/static/img/landing-page-fashion/top-brands1.jpg', className: 'img-responsive' })
               )
             ),
@@ -621,7 +621,7 @@ const Fashion = () => React.createElement(
               { className: `dg-logo ${styles['flex-center']}` },
               React.createElement(
                 'a',
-                { href: '/SAU/en/srp?search=DOLCE%20&%20GABBANA&isListed=false' },
+                { href: `/SAU/${lang}/srp?search=DOLCE%20&%20GABBANA&isListed=false` },
                 React.createElement('img', { src: '/static/img/landing-page-fashion/top-brands2.jpg', className: 'img-responsive' })
               )
             ),
@@ -671,7 +671,7 @@ const Fashion = () => React.createElement(
               { className: `dg-logo ${styles['flex-center']}` },
               React.createElement(
                 'a',
-                { href: '/SAU/en/srp?search=gg&isListed=false' },
+                { href: `/SAU/${lang}/srp?search=gg&isListed=false` },
                 React.createElement('img', { src: '/static/img/landing-page-fashion/top-brands3.jpg', className: 'img-responsive' })
               )
             ),
@@ -721,7 +721,7 @@ const Fashion = () => React.createElement(
               { className: `guc-logo ${styles['flex-center']}` },
               React.createElement(
                 'a',
-                { href: '/SAU/en/srp?search=gucci&isListed=false' },
+                { href: `/SAU/${lang}/srp?search=gucci&isListed=false` },
                 React.createElement('img', { src: '/static/img/landing-page-fashion/top-brands5.jpg', className: 'img-responsive' })
               )
             ),

@@ -2,7 +2,8 @@ import typeToReducer from 'type-to-reducer';
 import { actions } from './actions';
 
 const initialState = {
-  data:{}
+  data: {},
+  changeValue: false
 };
 
 const shippingAddrReducer = typeToReducer({
@@ -102,6 +103,12 @@ const shippingAddrReducer = typeToReducer({
     return {
       ...state,
       deliverToAddress: action.payload
+    }
+  },
+  [actions.CHANGE_STORE]: (state, action) => {
+    return {
+      ...state,
+      changeValue: !state.changeValue
     }
   }
 }, initialState);

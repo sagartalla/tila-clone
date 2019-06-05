@@ -187,7 +187,7 @@ class ShippingAddress extends Component {
     const { autoCompleteCity, autoCompleteCoutry } = this.props;
     const addr = { ...this.state.addr };
     let { showCitiesData, showCountriesData } = this.state;
-    addr[target.name] = target.value;
+    addr[target.name] = target.value.replace(/^\s+/g, '');
     if (target.name === 'city') {
       showCitiesData = true;
       autoCompleteCity(target.value);
@@ -213,7 +213,7 @@ class ShippingAddress extends Component {
   }
 
   validateNames = (fieldValue) => {
-    return !(/^([a-zA-z0-9]){3,20}$/.test(fieldValue));
+    return !(/^([a-zA-z0-9\s]){3,20}$/.test(fieldValue));
   }
 
   selectCityFromSuggesstions({ target }) {
@@ -333,6 +333,7 @@ class ShippingAddress extends Component {
                 data={results}
                 makeDefaultAddress={this.makeDefaultAddress}
                 showAddAdrressForm={this.showAddAdrressForm}
+                selectDeliverToAddress={this.selectDeliverToAddress}
               />
               {
                 showNewAddr

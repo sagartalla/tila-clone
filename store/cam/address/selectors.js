@@ -27,19 +27,28 @@ const getAddrById = store => (addrId) => {
 };
 
 const getDefaultAddress = (store) => {
-  const ddA = store.shippingAddrReducer.data.deliverToAddress;
-  if (ddA) {
-    return ddA;
-  }
+  let defaultAdd;
   if (store.shippingAddrReducer.data && store.shippingAddrReducer.data.length > 0) {
-    return _.filter(store.shippingAddrReducer.data, value => value.default);
+    defaultAdd = _.filter(store.shippingAddrReducer.data, value => value.default);
   }
-  return false;
+  if(!defaultAdd) {
+    if(store.shippingAddrReducer.data && store.shippingAddrReducer.data.length > 0) {
+        return [store.shippingAddrReducer.data[0]];
+    } else {
+      return [{}];
+    }
+  } else {
+    return defaultAdd;
+  }
 };
 
 const getSelectedAddress = (store) => {
+  let selectedAddress;
   if (store.shippingAddrReducer.data && store.shippingAddrReducer.data.length > 0) {
-    return _.find(store.shippingAddrReducer.data, value => value.address_id === store.shippingAddrReducer.data.deliverToAddress);
+    selectedAddress =  _.find(store.shippingAddrReducer.data, value => value.address_id === store.shippingAddrReducer.data.deliverToAddress);
+  }
+  if(!selectedAddress) {
+    return getDefaultAddress(store)[0];
   }
 }
 
