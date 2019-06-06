@@ -69,7 +69,7 @@ class ResetPassword extends Component {
       const { password, confirmPassword, hide } = this.state;
       return (
         <div>
-          <HeaderBar hideActionBar hideMegamenu hideSearch/>
+          <HeaderBar hideLogin hideMegamenu hideSearch/>
             {!this.state.success ?
               <div className={`${styles.flex} ${styles['justify-center']} ${styles['ht-100vh']} ${styles['flex-center']} ${styles['bg-gray']}`}>
               <div className={styles['reset-password']}>
