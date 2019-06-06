@@ -335,7 +335,7 @@ export const AR_KEYWORDS = {
     ENTER_NEW_PASSWORD_MESSAGE: 'أدخل كلمة السر الجديدة',
     RE_ENTER_PASSWORD_MESSAGE: 'إعادة إدخال كلمة السر الجديدة',
     SUBMIT_BUTTON: 'قم بتغيير كلمة السر',
-    PASSWORD_LENGTH_MESSAGE: 'كلمة السر يجب أن تكون ٨ أحرف و مختلفة عن كلمةالسر السابقة',
+    PASSWORD_LENGTH_MESSAGE: 'Your password should be atleast 8 characters in length and should not be the same as your old password.',
     PASSWORD_LENGTH: 'كلمة السر يجب أن تكون ٨ أحرف على الأقل',
     SAME_PASSWORD_MESSAGE: 'يرجى التأكد من أن كلمة السر الجديدة وأنها تختلف عن كلمة السر السابقة التي استعملتها',
   },
