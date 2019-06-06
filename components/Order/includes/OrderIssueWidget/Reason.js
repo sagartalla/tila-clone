@@ -29,7 +29,8 @@ class Reason extends Component {
       selectedMode: ORDER_ISSUE_TYPES.RETURN === props.orderIssue.returnExchangeType ?
         'Return' : ORDER_ISSUE_TYPES.EXCHANGE ===  props.orderIssue.returnExchangeType ? 'Exchange' : 'Cancel',
       selectedVariant: [],
-      displaySizeError: false
+      displaySizeError: false,
+      showError: true,
     };
     this.selectReason = this.selectReason.bind(this);
     this.updateComment = this.updateComment.bind(this);
@@ -178,6 +179,7 @@ class Reason extends Component {
   selectReason(e) {
     this.setState({
       reason: e.target.value,
+      showError: false,
     });
   }
 
@@ -197,7 +199,7 @@ class Reason extends Component {
     const { orderIssue, loadingStatus, query } = this.props;
     const { selectedItem: itemData, reasons, returnExchangeType, issueType } = orderIssue;
     const { img, name } = itemData;
-    const { selectedMode, displaySizeError } = this.state;
+    const { selectedMode, displaySizeError, showError } = this.state;
     const selectedReason = reasons.filter(reason => reason.name === this.state.reason)[0]
     const issueType_small = issueType.toLowerCase();
     return (
@@ -225,7 +227,7 @@ class Reason extends Component {
         )}
         <div className={`${styles['reason-cont']} ${styles['pb-15']} ${styles['ml-20']} ${styles['mr-20']}`}>
           <span className={`${styles['instruction-txt']} ${styles['pb-20']} ${styles['pt-20']} ${styles['flex']} ${styles['fs-12']} ${styles['google-clr']}`}>
-            {issueType_small==='cancel' ? ORDER_PAGE.SELECT_CANCEL_REASON : (issueType_small==='return' ? ORDER_PAGE.SELECT_RETURN_REASON : ORDER_PAGE.SELECT_EXCHANGE_REASON)}
+            {showError ? (issueType_small==='cancel' ? ORDER_PAGE.SELECT_CANCEL_REASON : (issueType_small==='return' ? ORDER_PAGE.SELECT_RETURN_REASON : ORDER_PAGE.SELECT_EXCHANGE_REASON)): ''}
           </span>
           <div className={`${styles['dd-cont']}`}>
             <div className={`${styles.select} ${styles['mt-10']} ${styles['pb-10']}`}>

@@ -40,7 +40,7 @@ class ChoosePaymentMode extends Component {
     this.saveAndGoNext = this.saveAndGoNext.bind(this);
     this.state = {
       paymentType: (orderIssue && orderIssue.refundOptions && orderIssue.refundOptions.refund_modes) ? orderIssue.refundOptions.refund_modes[0].display_name : '',
-      paymentMode: '',
+      paymentMode: (orderIssue && orderIssue.refundOptions && orderIssue.refundOptions.refund_modes) ? orderIssue.refundOptions.refund_modes[0].name : '',
     }
   }
   componentWillReceiveProps(nextProps) {
@@ -49,6 +49,7 @@ class ChoosePaymentMode extends Component {
     if (orderIssue && orderIssue.refundOptions.refund_modes && orderIssue.refundOptions.refund_modes[0]) {
       this.setState({
         paymentType: orderIssue.refundOptions.refund_modes[0].display_name,
+        paymentMode: orderIssue.refundOptions.refund_modes[0].name,
       });
     }
   }
@@ -105,7 +106,7 @@ class ChoosePaymentMode extends Component {
         <div>
           <button
             onClick={this.saveAndGoNext}
-            className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['retun-btn-part']}`}
+            className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['retun-btn-part']} ${styles['text-uppercase']}`}
           >
             {`${paymentType} Transfer`}
           </button>
