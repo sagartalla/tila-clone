@@ -210,12 +210,12 @@ const b_y_l = [{
   img: '/static/img/landing-home/guess-m.jpg',
   brandImg: '/static/img/landing-home/guess.jpg',
   title: 'Guess',
-  links: 'SAU/en/srp?search=Guess&isListed=false'
+  links: '/SAU/en/srp?search=Guess&isListed=false'
 }, {
   img: '/static/img/landing-home/max-m.jpg',
   brandImg: '/static/img/landing-home/max.jpg',
   title: 'Max',
-  links: 'SAU/en/srp?search=Max&isListed=false'
+  links: '/SAU/en/srp?search=Max&isListed=false'
 }, {
   img: '/static/img/landing-home/gucci-m.jpg',
   brandImg: '/static/img/landing-home/gucci.jpg',
