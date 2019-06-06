@@ -56,7 +56,11 @@
   height: 50px;
 }
 .life-style-main .top-selling-part .top-selling-img {
-  max-height: 260px;
+  height: 260px;
+}
+.life-style-main .top-selling-part .top-selling-img img {
+  width: 100%;
+  height: 100%;
 }
 .life-style-main .dec {
   color: #939393;
@@ -69,8 +73,12 @@
   border-bottom: 2px solid #f26b6b;
 }
 .life-style-main .hobby-part .hobby-part-inn .hobby-part-img .hobby-part-img-inn {
-  max-height: 260px;
+  height: 260px;
   display: flex;
+}
+.life-style-main .hobby-part .hobby-part-inn .hobby-part-img .hobby-part-img-inn img {
+  height: 100%;
+  width: 100%;
 }
 .life-style-main .hobby-part .hobby-part-inn .hobby-part-img .bottom-label {
   bottom: 4px;
