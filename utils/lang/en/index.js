@@ -563,6 +563,7 @@ export const EN_KEYWORDS = {
     SIGN_UP: 'Sign up',
     SIGN_IN: 'Login!',
     SIGN_UP_WITH: 'Or sign up with',
+    SIGN_IN_WITH: 'Or sign in with',
     NO_ACCOUNT: 'New to Tila?',
     HAVE_ACCOUNT: 'Already have an Account?',
     EMAIL: 'Email',
