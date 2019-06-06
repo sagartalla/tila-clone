@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Checkbox, Panel, Heading, Body, Title } from 'react-bootstrap';
 import SVGCompoent from '../../../common/SVGComponet';
-
+// import Input from '../../../common/Input'
 import {languageDefinations} from '../../../../utils/lang';
 const {SEARCH_PAGE} = languageDefinations()
 const MaxItems = 3;
@@ -16,6 +16,37 @@ import styles_ar from '../../search_ar.styl';
 
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
+class RenderFilterBar extends Component {
+  constructor(props) {
+    super(props)
+    this.state={
+      inputVal : ''
+    }
+    this.onChangeData = this.onChangeData.bind(this);
+  }
+  onChangeData(e) {
+    const { onFilterData } = this.props;
+    this.setState({
+      inputVal:e.currentTarget.value
+    }, () => onFilterData(this.state.inputVal))
+
+  }
+  render() {
+    const { placeName } = this.props
+    const { inputVal } = this.state
+    return (
+      <div>
+        <input
+          type='text'
+          onChange={this.onChangeData}
+          placeholder={placeName}
+          value={inputVal}
+        />
+      </div>
+    )
+  }
+
+}
 class CheckboxFacet extends Component {
   constructor(props) {
     super(props);
@@ -24,11 +55,36 @@ class CheckboxFacet extends Component {
       selectedItems: props.selectedFilters || [],
       maxRows: MaxItems,
       isMoreButtonRequired: filter.children.length > MaxItems,
+      filterItems: props.selectedFilters.length > 0 ?
+      this.sortSelectedItems(props.selectedFilters): filter.children
     };
+
     this.onChangeItem = this.onChangeItem.bind(this);
     this.toggleMore = this.toggleMore.bind(this);
+    this.onFilterData = this.onFilterData.bind(this);
   }
+  sortSelectedItems(selectedItems) {
+    const { filter } = this.props
+    let children = filter.children.slice()
+    let splicedElem = []
 
+    children.forEach((item,index) => {
+      if(selectedItems.indexOf(item.name) !== -1) {
+          splicedElem.push(item)
+          children.splice(index,1)
+      }
+    })
+    return splicedElem.concat(children)
+  }
+  onFilterData(value) {
+    const { filter } = this.props;
+    let items = filter.children.filter((item) => {
+      return item.name.toLowerCase().indexOf(value) !== -1
+    })
+    this.setState({
+      filterItems:items
+    })
+  }
   onChangeItem(value) {
     return (e) => {
       const newSelectedItem = [...this.state.selectedItems];
@@ -46,8 +102,10 @@ class CheckboxFacet extends Component {
 
   toggleMore() {
     const { filter } = this.props;
+
     this.setState({
-      maxRows: this.state.maxRows === filter.children.length ? MaxItems : filter.children.length
+      maxRows: this.state.maxRows === filter.children.length ? MaxItems : filter.children.length,
+      filterItems:this.sortSelectedItems(this.state.selectedItems)
     });
   }
 
@@ -62,8 +120,8 @@ class CheckboxFacet extends Component {
 
   render() {
     const { filter, index, facets } = this.props;
-    const { selectedItems } = this.state;
-    
+    const { selectedItems, maxRows,filterItems } = this.state;
+
     return (
       <Panel eventKey={`${index + 'c'}`} key={filter.id}>
         <div className={`${styles['category-list']}`}>
@@ -74,9 +132,16 @@ class CheckboxFacet extends Component {
             </Panel.Title>
           </Panel.Heading>
           <Panel.Body collapsible className={`${styles['border-b']}`}>
+            { maxRows > 8  ?
+              <RenderFilterBar
+                onFilterData={this.onFilterData}
+                placeName={`search ${filter.name}`}
+              /> :
+              null
+            }
             <ul className={`${styles['category-sub-list']} ${styles['pl-20']} ${styles['pt-15']}`}>
               {
-                filter.children.slice(0, this.state.maxRows).map(childFitler => (
+                filterItems.slice(0, maxRows).map(childFitler => (
                   <li key={childFitler.id} className={styles['category-sub-list-inn']}>
                     <div className={`${styles['checkbox-material']} ${styles['select-check-mate']}`}>
                       <input id={childFitler.name} type="checkbox" onChange={this.onChangeItem({ name: childFitler.name, param: childFitler.param })} checked={selectedItems.indexOf(childFitler.name) !== -1} />
@@ -86,7 +151,7 @@ class CheckboxFacet extends Component {
                 ))
               }
               {
-                this.state.isMoreButtonRequired ? <li onClick={this.toggleMore}><a>{this.state.maxRows === filter.children.length ? `-${SEARCH_PAGE.SHOW_LESS}` : `+ ${SEARCH_PAGE.SHOW_MORE}`}</a></li> : null
+                this.state.isMoreButtonRequired ? <li onClick={this.toggleMore}><a>{maxRows === filter.children.length ? `-${SEARCH_PAGE.SHOW_LESS}` : `+ ${SEARCH_PAGE.SHOW_MORE}`}</a></li> : null
               }
             </ul>
           </Panel.Body>
