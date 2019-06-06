@@ -52,10 +52,10 @@ const tie = [{
 
 const hal = [{
   img: '/static/img/landing-home/womens-clothing.png',
-  title: 'Women\'s Clothing',
+  title: 'Womens Clothing',
 }, {
   img: '/static/img/landing-home/mens-clothing.png',
-  title: 'Men\'s Clothing',
+  title: 'Mens Clothing',
 }, {
   img: '/static/img/landing-home/jewellery.png',
   title: 'Jewellery',
