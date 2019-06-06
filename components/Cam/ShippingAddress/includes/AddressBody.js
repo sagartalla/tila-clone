@@ -42,16 +42,17 @@ const AddressBody = (props) => {
       <Row className={`${styles['flex']} ${styles['flex-wrp']}`}>
         {
           props.data && props.data.map((val, id) => {
-            const isDefault = val.address_id === (props.selectedAddress || {}).address_id;
+            const isDefault = val.default;
+            const isSelected = val.address_id === (props.selectedAddress || {}).address_id
             const colLength = props.isPaymentPage && !isDefault ? 4 : 6;
             return (
               <Col md={4} sm={12} xs={12} key={id}>
-                <div className={`${styles['address-card']} ${isDefault ? styles['address-selected'] : ''}`}>
+                <div className={`${styles['address-card']} ${isSelected ? styles['address-selected'] : ''}`}>
                   <div className={styles['address-card-head']}>
                     {
                       props.isPaymentPage ?
                         <span>
-                          <input id={val.address_id} name="addr_checkbox" type="radio" defaultChecked={isDefault} className={styles['radio-btn']} onClick={selectDeliverToAddress} />
+                          <input id={val.address_id} name="addr_checkbox" type="radio" defaultChecked={isSelected} className={styles['radio-btn']} onClick={selectDeliverToAddress} />
                           <span className={`${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pl-10']}`}>{DELIVERY_ADDR_PAGE.DELIVER_TO} {val.first_name}</span>
                           <span className={`${styles['default-address-icon']} ${styles['float-r']}`}><SVGComponent clsName={`${styles['default-address-icon-inn']}`} src="icons/shipping-address-icons/home-icon" /></span>
                         </span>
