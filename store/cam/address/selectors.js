@@ -47,7 +47,6 @@ const getSelectedAddress = (store) => {
   if(!selectedAddress) {
     selectedAddress = getDefaultAddress(store)[0];
   }
-  debugger;
   return selectedAddress || {};
 }
 

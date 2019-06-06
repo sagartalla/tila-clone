@@ -94,8 +94,10 @@ class TitleInfo extends Component {
     const { listingCartData, removeCartItem } = this.props;
 
     if (!showCheckoutModal) { // adding item to cart
+      document.getElementsByTagName('BODY')[0].style.overflow = 'hidden';
       this.addToCart();
     } else { // removing item from cart.
+      document.getElementsByTagName('BODY')[0].style.overflow = 'auto';
       removeCartItem(listingCartData.items[0].cart_item_id);
     }
   }
