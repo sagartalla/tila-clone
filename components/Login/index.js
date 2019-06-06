@@ -20,6 +20,7 @@ import main_en from '../../layout/main/main_en.styl';
 import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './login_en.styl';
 import styles_ar from './login_ar.styl';
+import ShowHidePassword from './ShowHidePassword';
 
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 const { LOGIN_PAGE } = languageDefinations();
@@ -52,6 +53,7 @@ class Login extends Component {
       validation: this.validations.valid(),
       clicked: false,
       showVerifyScreen: props.showEmailScreen || false,
+      hide: true,
     };
     this.login = this.login.bind(this);
     this.onChangeField = this.onChangeField.bind(this);
@@ -77,6 +79,12 @@ class Login extends Component {
     this.setState({
       showVerifyScreen: showEmailScreen,
     });
+  }
+
+  hideToggle = () => {
+    this.setState({
+      hide: !this.state.hide,
+    })
   }
 
   onChangeField(e) {
@@ -193,7 +201,7 @@ class Login extends Component {
 
   render() {
     const { userCreds, loadingStatus, userInfo } = this.props;
-    const { mode, error, validation, clicked, showVerifyScreen } = this.state;
+    const { mode, error, validation, clicked, showVerifyScreen, hide } = this.state;
     return (
       <Modal className={`react-router-modal__modal ${styles['login-reg-modal']} ${styles['p-20']}`} onBackdropClick={this.onBackdropClick}>
         <Row className={`${styles['bg-white']} ${styles['m-0']}`}>
@@ -265,9 +273,10 @@ class Login extends Component {
                     <label>{LOGIN_PAGE.PASSWORD}</label>
                   </div> */}
                   <div className={`${styles['fp-input']} ${styles['pb-10']}`}>
-                    <input onChange={this.onChangeField} className={styles['m-fs-16']} name="password" type="password" value={this.state.password} required />
-                    <span className={styles.highlight} />
-                    <span className={styles.bar} />
+                      <input onChange={this.onChangeField} className={`${styles['m-fs-16']} ${styles.width100}`} name="password" type={hide ? 'password' : 'text'} value={this.state.password} required />
+                      <span className={styles.highlight} />
+                      <span className={styles.bar} />
+                      <ShowHidePassword hide={this.state.hide} hideToggle={this.hideToggle}/>
                     <label>{LOGIN_PAGE.PASSWORD}</label>
                     {
                       validation.password.message

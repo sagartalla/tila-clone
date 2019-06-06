@@ -150,7 +150,7 @@ class ActionBar extends Component {
 
   render() {
     const {
-      isLoggedIn, cartResults, userInfo, wishListCount, getEditDetails, hideCountry,
+      isLoggedIn, cartResults, userInfo, wishListCount, getEditDetails, hideCountry, hideLogin
     } = this.props;
     return (
       <div className={styles['actionbar-wrapper']}>
@@ -268,6 +268,7 @@ class ActionBar extends Component {
           </Dropdown>
         </div>
         {
+          hideLogin ? null :
           (this.state.show)
             ?
             (
