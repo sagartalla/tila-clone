@@ -551,6 +551,7 @@ export const AR_KEYWORDS = {
     SIGN_UP: 'انشاء حساب',
     SIGN_IN: 'تسجيل دخول',
     SIGN_UP_WITH: 'أو سجل دخولك ب...',
+    SIGN_IN_WITH: 'Or sign in with',
     NO_ACCOUNT: 'ما عندك حسابt',
     HAVE_ACCOUNT: 'إذا كان لديك حساب، الرجاء.',
     EMAIL: 'بريدك الألكتروني',
