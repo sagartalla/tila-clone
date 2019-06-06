@@ -79,6 +79,18 @@ class UpdatePersonalInfoModal extends React.Component {
     this.setState({ user_gender: val });
   }
 
+  disabledDate = (current) => {
+    if (!current) {
+      // allow empty select
+      return false;
+    }
+    const date = moment();
+    date.hour(0);
+    date.minute(0);
+    date.second(0);
+    return current.valueOf() > date.valueOf() - 1;
+  }
+
   handleSubmit = () => {
     const { user_name, user_dob, user_gender } = this.state;
     this.setState({ responseState: false });
@@ -101,7 +113,7 @@ class UpdatePersonalInfoModal extends React.Component {
 
   render() {
     const calendar = (
-      <Calendar />
+      <Calendar disabledDate={this.disabledDate} />
     );
     const { user_name, user_dob, user_gender } = this.state;
     return (
