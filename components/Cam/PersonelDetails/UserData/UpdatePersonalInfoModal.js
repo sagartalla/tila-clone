@@ -1,13 +1,12 @@
 import Calendar from 'rc-calendar';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Row, Col } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 import DatePicker from 'rc-calendar/lib/Picker';
 import moment from 'moment';
 import { toast } from 'react-toastify';
 import { languageDefinations } from '../../../../utils/lang';
 import Btn from '../../../common/Button';
-import Input from '../../../common/Input';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators, selectors } from '../../../../store/cam/personalDetails';
