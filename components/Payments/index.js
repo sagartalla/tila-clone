@@ -5,14 +5,11 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Grid, Row, Col } from 'react-bootstrap';
 import Cookies from 'universal-cookie';
-import { toast } from 'react-toastify';
 
 import Cart from '../Cart';
 import SignIn from './includes/SignIn';
 import PaymentMode from './includes/PaymentMode';
 import HeaderBar from '../HeaderBar';
-import LoyaltyPoints from './includes/LoyaltyPoints';
-import OffersAndDiscounts from './includes/OffersAndDiscounts';
 import RightSideBar from '../Cart/CartPaymentSideBar';
 import { languageDefinations } from '../../utils/lang/';
 import DeliveryAddress from './includes/DeliveryAddress';
@@ -314,8 +311,8 @@ class Payments extends React.Component {
     });
   }
   render() {
-    const { login, showTab, paymentConfigJson, editCartDetails, showSlider, validation, showError } = this.state;
-    const { paymentOptions, selectedAddress, signInLoader, isLoggedIn, cartResults } = this.props;
+    const { login, paymentConfigJson, editCartDetails, showSlider, validation, showError } = this.state;
+    const { paymentOptions, selectedAddress, signInLoader, cartResults } = this.props;
     const { PAYMENT_PAGE, CART_PAGE } = languageDefinations();
 
     return (
