@@ -88,7 +88,7 @@ class UpdatePersonalInfoModal extends React.Component {
     date.hour(0);
     date.minute(0);
     date.second(0);
-    return current.valueOf() > date.valueOf() - 1;
+    return current.valueOf() > date.valueOf();
   }
 
   handleSubmit = () => {
