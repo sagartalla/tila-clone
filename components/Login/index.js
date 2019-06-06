@@ -360,7 +360,7 @@ class Login extends Component {
                     {this.state.mode !== 'register' && LOGIN_PAGE.FORGOT_PASSWORD}
                   </span>
                 </a>
-                <span className={`${styles['thick-gry-clr']} ${styles['pt-5']} ${styles['pb-5']} ${styles['flex']} ${styles['m-justy-center']} ${styles['m-fs-14']}`}>{LOGIN_PAGE.SIGN_UP_WITH}</span>
+                <span className={`${styles['thick-gry-clr']} ${styles['pt-5']} ${styles['pb-5']} ${styles['flex']} ${styles['m-justy-center']} ${styles['m-fs-14']}`}>{mode === 'register' ? LOGIN_PAGE.SIGN_UP_WITH : LOGIN_PAGE.SIGN_IN_WITH}</span>
                 <NoSSR>
                   <SocialLogin>
                     {([handleSocialLogin]) => {

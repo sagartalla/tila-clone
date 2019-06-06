@@ -82,7 +82,7 @@ const get3dSecureRedirectionUrl = (store) => {
 const getSelectedAddress = (store) => {
   let selectedAddress;
   if (store.shippingAddrReducer.data && store.shippingAddrReducer.data.length > 0) {
-    selectedAddress =  _.find(store.shippingAddrReducer.data, value => value.address_id === store.shippingAddrReducer.data.deliverToAddress);
+    selectedAddress =  _.find(store.shippingAddrReducer.data, value => value.address_id === store.shippingAddrReducer.deliverToAddress);
   }
   if(!selectedAddress) {
     selectedAddress = getDefaultAddress(store)[0];

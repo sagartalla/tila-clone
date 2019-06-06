@@ -79,7 +79,6 @@ class ActionBar extends Component {
     if (nextProps.isLoggedIn !== this.props.isLoggedIn) {
       this.props.getWishlist();
     }
-
     let show = ((nextProps.isLoggedIn != this.props.isLoggedIn) && !this.state.logoutClicked) || this.state.loginClicked || !!nextProps.error || (!nextProps.isLoggedIn && nextProps.showLogin) || nextProps.loginInProgress || nextProps.showEmailVerificationScreen;
     if (window.location.pathname.indexOf('/payment') > -1) {
       show = false;
