@@ -347,7 +347,7 @@ export const EN_KEYWORDS = {
     ENTER_NEW_PASSWORD_MESSAGE: 'Enter new password',
     RE_ENTER_PASSWORD_MESSAGE: 'Re-enter new password',
     SUBMIT_BUTTON: 'Change Password',
-    PASSWORD_LENGTH_MESSAGE: 'Your password should be 8 characters in length and should not be the same as your old password.',
+    PASSWORD_LENGTH_MESSAGE: 'Your password should be atleast 8 characters in length and should not be the same as your old password.',
     PASSWORD_LENGTH: 'Password must be atleast 8 characters',
     SAME_PASSWORD_MESSAGE: 'Make sure the new password is different from the password used before.',
   },
