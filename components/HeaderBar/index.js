@@ -1,7 +1,6 @@
 import { Grid, Row, Col } from 'react-bootstrap';
 import NoSSR from 'react-no-ssr';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
 import Logo from './Logo';
 import Search from './Search';
@@ -9,9 +8,7 @@ import ActionBar from './ActionBar';
 import MegaMenu from './includes/MegaMenu';
 // import SearchFilters from '../common/SearchFilters';
 // import Betalogo from '../../components/common/beta';
-
-import publicUrls from '../../constants';
-import { actionCreators, selectors } from '../../store/search';
+import { selectors } from '../../store/search';
 
 import lang from '../../utils/language';
 
@@ -53,7 +50,7 @@ const HeaderBar = props => (
             null
           } */}
           <Col md={4} sm={5}>
-            <ActionBar />
+            <ActionBar hideLogin={props.hideLogin} />
           </Col>
         </Row>
       </Grid>
