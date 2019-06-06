@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Checkbox, Panel, Heading, Body, Title } from 'react-bootstrap';
 import SVGCompoent from '../../../common/SVGComponet';
-// import Input from '../../../common/Input'
+
 import {languageDefinations} from '../../../../utils/lang';
 const {SEARCH_PAGE} = languageDefinations()
 const MaxItems = 3;
@@ -35,12 +35,17 @@ class RenderFilterBar extends Component {
     const { placeName } = this.props
     const { inputVal } = this.state
     return (
-      <div>
+      <div className={`${styles['search-header']} ${styles['flex']}`}>
+        <SVGCompoent
+          src="icons/search/search-icon"
+          clsName={`${styles['icon-search']}`}
+        />
         <input
           type='text'
           onChange={this.onChangeData}
           placeholder={placeName}
           value={inputVal}
+          className={`${styles['pl-18']}`}
         />
       </div>
     )
