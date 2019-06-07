@@ -46,7 +46,6 @@ client.once('connect', function(){
 //     catch(e){
 //         console.log('err :', e);
 //     }
-    
 // })
 
 client.on('close', () => {

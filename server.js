@@ -21,6 +21,7 @@ const dev = process.env.NODE_ENV !== 'production';
 const client = require('./utils/tcpConnection');
 const io = require('socket.io')(server);
 
+/******* Tcp client *******/
 client.on('data',(data)=>{
   try{
       console.log('Data recieved from tcp server :- ');
@@ -37,11 +38,15 @@ client.on('data',(data)=>{
 })
 
 /******** Connection ping from browser ********/
-io.on('connection', function(client) {
+io.on('connection', function(sock) {
   console.log('Browser Client connected ...');
-  client.on('join', function (data) {
+  sock.on('join', function (data) {
       console.log(data);
-      io.emit('connectionSuccess', {message:'Socket Connected Successfully'});
+      io.emit('connectionSuccess', {message:`Socket Connected :count :${io.engine.clientsCount}, length: ${Object.keys(io.sockets.connected).length}`});
+  });
+
+  sock.on('disconnect', function () {
+      io.emit('userdisconnected',{message:`Socket Disconnected  :count :${io.engine.clientsCount}, length: ${Object.keys(io.sockets.connected).length}`});
   });
 });
 

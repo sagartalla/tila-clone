@@ -24,14 +24,13 @@ class Base extends Component {
 
     this.socket.on('connect', (data) =>{
       console.log("Socket ON Connect Event");
-      this.socket.emit('join', 'Hello World from client');
+      this.socket.emit('join', 'Hello from client');
    });
 
     this.socket.on('connectionSuccess',  (data) => {
-        console.log("socket connection success");
-        console.log(data.message);
+        console.log("socket connection success :", data);
     });
-
+     
     this.socket.on('pagedataupdate', (data) => {
       console.log('Page Data Update Message');
       console.log(data.data);
