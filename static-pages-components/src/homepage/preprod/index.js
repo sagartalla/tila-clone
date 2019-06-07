@@ -10,69 +10,88 @@ let sliderTBS,
 const tbs = [{
   img: `/static/img/landing-home/${lang === 'en' ? 'home-decor' : 'home-decor-ar'}.jpg`,
   title: `${lang === 'en' ? 'HOME DECOR' : 'ديكورت البيت'}`,
+  key: 'HOME DECOR',
 }, {
   img: `/static/img/landing-home/${lang === 'en' ? 'laptops' : 'laptops-ar'}.jpg`,
   title: `${lang === 'en' ? 'LAPTOPS' : 'اللاب توبات'}`,
+  key: 'LAPTOPS',
 }, {
   img: `/static/img/landing-home/${lang === 'en' ? 'mens-clothing' : 'mens-clothing-ar'}.jpg`,
   title: `${lang === 'en' ? 'MENS CLOTHING' : 'ملابس رجالية'}`,
+  key: 'MENS CLOTHING',
 }, {
   img: `/static/img/landing-home/${lang === 'en' ? 'mobile-accessories' : 'mobile-accessories-ar'}.jpg`,
   title: `${lang === 'en' ? 'MOBILE ACCESSORIES' : 'مستلزمات \إكسسورات الجوال'}`,
+  key: 'MOBILE ACCESSORIES',
 }, {
   img: `/static/img/landing-home/${lang === 'en' ? 'perfumes-for-women' : 'perfumes-for-women-ar'}.jpg`,
   title: `${lang === 'en' ? 'PERFUMES FOR WOMEN' : 'عطور للنساء'}`,
+  key: 'PERFUMES FOR WOMEN',
 }, {
   img: `/static/img/landing-home/${lang === 'en' ? 'watches' : 'watches-ar'}.jpg`,
   title: `${lang === 'en' ? 'WATCHES' : 'ساعات اليد'}`,
+  key: 'WATCHES',
 }];
 
 const tie = [{
   img: '/static/img/landing-home/Mobiles.png',
   title: `${lang === 'en' ? 'Mobiles' : 'الجوالات'}`,
+  key: 'Mobiles',
 }, {
   img: '/static/img/landing-home/Laptops.png',
   title: `${lang === 'en' ? 'Laptops' : 'اللاب توبات'}`,
+  key: 'Laptops',
 }, {
   img: '/static/img/landing-home/storage-devices.png',
-  title: `${lang === 'en' ? 'Storage Devices' : 'أجهزة التخزين'}` ,
+  title: `${lang === 'en' ? 'Storage Devices' : 'أجهزة التخزين'}`,
+  key: 'Storage Devices',
 }, {
   img: '/static/img/landing-home/cameras.png',
   title: `${lang === 'en' ? 'Cameras' : 'كاميرات'}`,
+  key: 'Cameras',
 }, {
   img: '/static/img/landing-home/television.png',
-  title: `${lang === 'en' ? 'Televisions' : 'التلفزيونات'}` ,
+  title: `${lang === 'en' ? 'Televisions' : 'التلفزيونات'}`,
+  key: 'Televisions',
 }, {
   img: '/static/img/landing-home/home-appliances.png',
   title: `${lang === 'en' ? 'Home Appliances' : 'أجهزة المنزل'}`,
+  key: 'Home Appliances',
 }, {
   img: '/static/img/landing-home/storage-devices.png',
-  title: `${lang === 'en' ? 'Storage Devices' : 'أجهزة التخزين'}` ,
+  title: `${lang === 'en' ? 'Storage Devices' : 'أجهزة التخزين'}`,
+  key: 'Storage Devices',
 }];
 
 const hal = [{
   img: '/static/img/landing-home/womens-clothing.png',
   title: `${lang === 'en' ? 'Women\'s Clothing' : 'ملابس نسائية\نسائي'}`,
+  key: 'Womens Clothing',
 }, {
   img: '/static/img/landing-home/mens-clothing.png',
   title: `${lang === 'en' ? 'Men\'s Clothing' : 'ملابس رجالية'}`,
+  key: 'Mens Clothing',
 }, {
   img: '/static/img/landing-home/jewellery.png',
-  title: `${lang === 'en' ? 'Jewellery' :  'مجوهرات'}`,
+  title: `${lang === 'en' ? 'Jewellery' : 'مجوهرات'}`,
+  key: 'Jewellery',
 }, {
   img: '/static/img/landing-home/fashion-acessories.png',
   title: `${lang === 'en' ? 'Fashion Acc..' : 'أزياءمستلزمات'}`,
+  key: 'Fashion Acc..',
 }, {
   img: '/static/img/landing-home/watches.png',
   title: `${lang === 'en' ? 'Watches' : 'ساعات اليد'}`,
+  key: 'Watches',
 }, {
   img: '/static/img/landing-home/perfumes.png',
   title: `${lang === 'en' ? 'Perfumes' : 'عطور'}`,
+  key: 'Perfumes',
 }, {
   img: '/static/img/landing-home/jewellery.png',
-  title: `${lang === 'en' ? 'Jewellery' :  'مجوهرات'}`,
+  title: `${lang === 'en' ? 'Jewellery' : 'مجوهرات'}`,
+  key: 'Jewellery',
 }];
-
 
 
 const d_tie = [
@@ -183,23 +202,25 @@ const responsive = [
 
 const twoCols = [{
   img: '/static/img/landing-home/ps4.jpg',
+  link: `/SAU/${lang}/srp?search=PS4%20Pro&language=en&isListed=false`,
   title: 'PS4 Pro',
 }, {
   img: '/static/img/landing-home/alien.jpg',
+  link: `/SAU/${lang}/srp?search=Alienware&language=en&isListed=false`,
   title: 'Alienware',
 }];
 
 const threeCols = [{
   img: '/static/img/landing-home/shoes.jpg',
-  link: '/SAU/en/srp?search=footwear&isListed=false',
+  link: `/SAU/${lang}/srp?search=footwear&isListed=false`,
   title: 'Shoes',
 }, {
   img: '/static/img/landing-home/ls2.jpg',
-  link: '/SAU/en/srp?search=LS2&isListed=false',
+  link: `/SAU/${lang}/srp?search=LS2&isListed=false`,
   title: 'LS2',
 }, {
   img: '/static/img/landing-home/furniture.jpg',
-  link: '/SAU/en/srp?search=Furniture&isListed=false',
+  link: `/SAU/${lang}/srp?search=Furniture&isListed=false`,
   title: 'Furniture',
 }];
 
@@ -207,27 +228,27 @@ const b_y_l = [{
   img: '/static/img/landing-home/levis-m.jpg',
   brandImg: '/static/img/landing-home/levis.jpg',
   title: 'Levis',
-  links: '/SAU/en/srp?search=Levis&isListed=false'
+  links: `/SAU/${lang}/srp?search=Levis&isListed=false`,
 }, {
   img: '/static/img/landing-home/guess-m.jpg',
   brandImg: '/static/img/landing-home/guess.jpg',
   title: 'Guess',
-  links: 'SAU/en/srp?search=Guess&isListed=false'
+  links: `/SAU/${lang}/srp?search=Guess&isListed=false`,
 }, {
   img: '/static/img/landing-home/max-m.jpg',
   brandImg: '/static/img/landing-home/max.jpg',
   title: 'Max',
-  links: 'SAU/en/srp?search=Max&isListed=false'
+  links: `/SAU/${lang}/srp?search=Max&isListed=false`,
 }, {
   img: '/static/img/landing-home/gucci-m.jpg',
   brandImg: '/static/img/landing-home/gucci.jpg',
   title: 'Gucci',
-  links: '/SAU/en/srp?search=Gucci&isListed=false'
+  links: `/SAU/${lang}/srp?search=Gucci&isListed=false`,
 }, {
   img: '/static/img/landing-home/levis-m.jpg',
   brandImg: '/static/img/landing-home/levis.jpg',
   title: 'Levis',
-  links: '/SAU/en/srp?search=Levis&isListed=false'
+  links: `/SAU/${lang}/srp?search=Levis&isListed=false`,
 }];
 
 function SamplePrevArrow(props) {
@@ -267,7 +288,7 @@ const b_d_b = {
   'Mens Clothing': `/SAU/${lang}/srp/${lang === 'en' ? 'clothing' : 'ملابس'}?categoryTree=true&isListed=false&sid=892,899`,
   'Fashion Accessories': `/SAU/${lang}/srp/${lang === 'en' ? 'fashion-accessories' : 'الإكسسوارات'}?categoryTree=true&isListed=false&sid=892,923`,
   Watches: `/SAU/${lang}/srp/watch?categoryTree=true&isListed=false&sid=892,929`,
-  'Kitchen Appliances': `/SAU/${lang}/srp/${lang}/srp/${lang === 'en' ? 'kitchen-appliances' : 'أدوات-المطبخ'}?categoryTree=true&isListed=false&sid=932,945`,
+  'Kitchen Appliances': `/SAU/${lang}/srp/${lang === 'en' ? 'kitchen-appliances' : 'أدوات-المطبخ'}?categoryTree=true&isListed=false&sid=932,945`,
   Speakers: `/SAU/${lang}/srp?search=Speakers&&isListed=false`,
   'Microwave Ovens': `/SAU/${lang}/srp?search=Microwave%20Ovens&&isListed=false`,
   'Smart Watch': `/SAU/${lang}/srp?search=Smart%20Watches&language=en&isListed=false`,
@@ -293,7 +314,7 @@ const b_d_b = {
   LAPTOPS: `/SAU/${lang}/srp/${lang === 'en' ? 'laptops' : 'أجهزة-الكمبيوتر-المحمولة'}?categoryTree=true&isListed=false&sid=848,2352`,
   'MENS CLOTHING': `/SAU/${lang}/srp/${lang === 'en' ? 'clothing' : 'ملابس'}?categoryTree=true&isListed=false&sid=892,899`,
   'MOBILE ACCESSORIES': `/SAU/${lang}/srp/${lang === 'en' ? 'mobile-accessories' : 'ملحقات-الهاتف-المحمول'}?categoryTree=true&isListed=false&sid=848,850`,
-  'PERFUMES FOR WOMEN': `/SAU/${lang}/srp?search=perfumes&categoryTree=true&isListed=false`,
+  'PERFUMES FOR WOMEN': `/SAU/${lang}/srp?search=perfumes&language=en&isListed=false`,
   WATCHES: `/SAU/${lang}/srp/watch?categoryTree=true&isListed=false&sid=892,929`,
 };
 
@@ -303,7 +324,7 @@ const HomePage = () => (
       <div className={`${styles['mb-40']} top-banner-slider`}>
         <Slider
           dots
-          autoplay={true}
+          autoplay
           asNavFor={sliderTBS}
           ref={slider => (sliderTBS = slider)}
           lazyLoad={false}
@@ -316,7 +337,7 @@ const HomePage = () => (
         >
           {tbs.map(i => (
             <div>
-              <a href={b_d_b[i.title]}>
+              <a href={b_d_b[i.key]}>
                 <div className="item" key={i}>
                   <img src={i.img} />
                 </div>
@@ -338,10 +359,10 @@ const HomePage = () => (
             {tie.map(i => (
               <div>
                 <div className="item" key={i}>
-                  <a href={b_d_b[i.title]}>
+                  <a href={b_d_b[i.key]}>
                     <img src={i.img} alt={i.title} />
                   </a>
-                  <span className={`${styles['fs-12']} ${styles['pt-10']} ${styles['flex']} ${styles['justify-center']} ${styles['lne-ht1_2']}`}>{i.title}</span>
+                  <span className={`${styles['fs-12']} ${styles['pt-10']} ${styles.flex} ${styles['justify-center']} ${styles['lne-ht1_2']}`}>{i.title}</span>
                 </div>
               </div>
               ))}
@@ -356,13 +377,13 @@ const HomePage = () => (
             className={styles['ht-100per']}
             slidesToShow={6}
           >
-            {hal.map((i) => (
-                <div>
-                  <div className='item' key={i}>
-                    <a href={b_d_b[i.title]}>
+            {hal.map(i => (
+              <div>
+                  <div className="item" key={i}>
+                    <a href={b_d_b[i.key]}>
                       <img src={i.img} />
                     </a>
-                    <span className={`${styles['fs-12']} ${styles['pt-10']} ${styles['flex']} ${styles['justify-center']} ${styles['lne-ht1_2']}`}>{i.title}</span>
+                    <span className={`${styles['fs-12']} ${styles['pt-10']} ${styles.flex} ${styles['justify-center']} ${styles['lne-ht1_2']}`}>{i.title}</span>
                   </div>
                 </div>
             ))}
@@ -433,8 +454,8 @@ const HomePage = () => (
           </div>
         </div>
         <div className={`${styles.breadcrums} ${styles['mt-10']} ${styles.pointer}`}>
-          <a href="https://storefront-stage.fptechscience.com/SAU/en/landing/fashion">
-            <span>{lang === 'en' ? 'Men\'s Clothing' : 'ملابس رجالية'} | {lang === 'en' ? 'Women\'s Clothing' : 'ملابس نسائية\نسائي'} | {lang === 'en' ? 'Kids Fashion' : 'ملابس أطفال\أطفال'} | {lang === 'en' ? 'Footwear' :  'أحذية'} | {lang === 'en' ? 'Jewellery' :  'مجوهرات'} | {lang === 'en' ? 'Eyewear' :  'نظارات'}</span>
+          <a href={`/SAU/${lang}/landing/fashion`}>
+            <span>{lang === 'en' ? 'Men\'s Clothing' : 'ملابس رجالية'} | {lang === 'en' ? 'Women\'s Clothing' : 'ملابس نسائية\نسائي'} | {lang === 'en' ? 'Kids Fashion' : 'ملابس أطفال\أطفال'} | {lang === 'en' ? 'Footwear' : 'أحذية'} | {lang === 'en' ? 'Jewellery' : 'مجوهرات'} | {lang === 'en' ? 'Eyewear' : 'نظارات'}</span>
           </a>
         </div>
       </div>
@@ -452,7 +473,7 @@ const HomePage = () => (
         <div className="d1">
           <div>
             <span className={styles['fs-16']}><span className="lite">{lang === 'en' ? 'Kids Furniture' : 'أثاث الأطفال'}</span></span>
-            <a href={b_d_b['furniture']}>
+            <a href={b_d_b.furniture}>
               <div className="shadow">
                 <img src={d_tihl[0]} className="img-responsive" />
               </div>
@@ -463,10 +484,11 @@ const HomePage = () => (
           </div>
           <div>
             <span className={styles['fs-16']}><span className="lite">{lang === 'en' ? 'Living Room Furniture' : 'غرفة المعيشة الأثاث'}</span></span>
-            <a href={b_d_b['furniture']}></a>
+            <a href={b_d_b.furniture}>
               <div className="shadow">
                 <img src={d_tihl[1]} className="img-responsive" />
               </div>
+            </a>
             <div className="btn">
               <span>{lang === 'en' ? 'SHOP NOW' : 'تسوق الآن'}</span>
             </div>
@@ -475,7 +497,7 @@ const HomePage = () => (
         <div className="d2">
           <div>
             <span className={styles['fs-16']}><span className="lite">{lang === 'en' ? 'Lamps' : 'مصباح'} </span></span>
-            <a href={b_d_b['lamps']}>
+            <a href={b_d_b.lamps}>
               <div className="shadow">
                 <img src={d_tihl[2]} className="img-responsive" />
               </div>
@@ -486,7 +508,7 @@ const HomePage = () => (
           </div>
           <div>
             <span className={styles['fs-16']}><span className="lite">{lang === 'en' ? 'Cushions' : 'وسائد'}</span></span>
-            <a href={b_d_b['bedding']}>
+            <a href={b_d_b.bedding}>
               <div className="shadow">
                 <img src={d_tihl[3]} className="img-responsive" />
               </div>
@@ -499,7 +521,7 @@ const HomePage = () => (
         <div className={`d3 ${styles.right0}`}>
           <div>
             <span className={styles['fs-16']}><span className="lite">{lang === 'en' ? 'Lights' : 'الأنوار'}</span></span>
-            <a href={b_d_b['Lights']}>
+            <a href={b_d_b.Lights}>
               <div className="shadow">
                 <img src={d_tihl[4]} className="img-responsive" />
               </div>
@@ -509,16 +531,18 @@ const HomePage = () => (
             </div>
           </div>
         </div>
-        <div className={`${styles['breadcrums']} ${styles['mt-10']} ${styles['pointer']}`}>
-          <a href="https://storefront-stage.fptechscience.com/SAU/en/landing/lifestyle">
-            <span> {lang === 'en' ? 'Bedsheets' :  'غطاء\شرشف السرير'} | {lang === 'en' ? 'Furniture' :  'الأثاث'} | {lang === 'en' ? 'Cushions' : 'وسائد'} | {lang === 'en' ? 'Wall Decor' :  '  جدار ديكورت'} | {lang === 'en' ? 'Lights' : 'الأنوار'} | {lang === 'en' ? 'Living Room Furniture' : 'غرفة المعيشة الأثاث'} | {lang === 'en' ? 'Photo Frames' : 'إطارات صور'} </span>
+        <div className={`${styles.breadcrums} ${styles['mt-10']} ${styles.pointer}`}>
+          <a href={`/SAU/${lang}/landing/lifestyle`}>
+            <span> {lang === 'en' ? 'Bedsheets' : 'غطاء\شرشف السرير'} | {lang === 'en' ? 'Furniture' : 'الأثاث'} | {lang === 'en' ? 'Cushions' : 'وسائد'} | {lang === 'en' ? 'Wall Decor' : '  جدار ديكورت'} | {lang === 'en' ? 'Lights' : 'الأنوار'} | {lang === 'en' ? 'Living Room Furniture' : 'غرفة المعيشة الأثاث'} | {lang === 'en' ? 'Photo Frames' : 'إطارات صور'} </span>
           </a>
         </div>
       </div>
       <Row className={`${styles['m-15']} ${styles['mt-40']} ${styles['mb-40']} brand-details-inn`}>
         {twoCols.map(col => (
           <Col md={6} xs={6} sm={6} key={col.title}>
-            <img src={col.img} alt={col.title} className="img-responsive-in" />
+            <a href={col.link}>
+              <img src={col.img} alt={col.title} className="img-responsive-in" />
+            </a>
           </Col>
         ))}
       </Row>
@@ -526,7 +550,7 @@ const HomePage = () => (
         <div className={`${styles['fs-20']} title`}>{lang === 'en' ? 'TOP IN ELECTRONICS' : 'أعلى في الالكترونيات'}</div>
         {/* <div className={`${styles['']}`}>
           <span>See more</span><SVGComponent clsName={`${styles['arrow']}`} src="icons/common-icon/arrow" />
-        </div>*/}
+        </div> */}
         <div>
           <div className="d1">
             <div>
@@ -542,7 +566,7 @@ const HomePage = () => (
             </div>
             <div>
               <span className={styles['fs-16']}><span className="lite">{lang === 'en' ? 'Mobiles' : 'الجوالات'}
-                                                </span>
+              </span>
               </span>
               <a href={b_d_b.Mobiles}>
                 <div className="shadow">
@@ -593,7 +617,7 @@ const HomePage = () => (
           </div>
         </div>
         <div className={`${styles.breadcrums} ${styles['mt-10']} ${styles.pointer}`}>
-          <a href="https://storefront-stage.fptechscience.com/SAU/en/landing/electronics">
+          <a href={`/SAU/${lang}/landing/electronics`}>
             <span>{lang === 'en' ? 'Mobiles' : 'الجوالات'} | {lang === 'en' ? 'Laptops' : 'اللاب توبات'}  | {lang === 'en' ? 'Speakers' : 'مكبر الصوت'}  |  {lang === 'en' ? 'Cameras' : 'كاميرات'} | {lang === 'en' ? 'Microwave Ovens' : 'ميكرويفات '} | {lang === 'en' ? 'Smartwatches' : 'ساعات يد ذكية'} </span>
           </a>
         </div>

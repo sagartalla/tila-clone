@@ -177,7 +177,7 @@ class Compare extends Component {
                       <Button
                         className={product.addedToCart ? `${styles['p-10']} ${styles['flex-center']} ${styles['added-btn']}` : `${styles['p-10']} ${styles['flex-center']} ${styles['cart-btn']}`}
                         id={product.listing_id}
-                        onClick={product.addedToCart === false && this.addToCart}
+                        onClick={product.addedToCart ? () => {} : this.addToCart}
                         btnText={product.addedToCart ? PDP_PAGE.ADDED_TO_CART : PDP_PAGE.ADD_TO_CART}
                         showImage={product.addedToCart && 'icons/cart/added-cart-icon'}
                         btnLoading={cartButtonLoaders && cartButtonLoaders[product.listing_id]}
@@ -228,7 +228,7 @@ class Compare extends Component {
                     {
                       productFeature.attributes.map(attr => (
                         <Row key={attr.name} className={`${styles.flex} ${styles.parentBackground}`}>
-                          <Col md={3} className={`${styles.childBackground} ${styles['flex-center']} ${styles['p-25']}`}>
+                          <Col md={3} className={`${styles.childBackground} ${styles['flex-center']} ${styles['p-15']}`}>
                             <div className={`${styles['flex']} ${styles['flex-colum']} ${styles.fontW700}`}>
                               {/* <SVGCompoent clsName={`${styles['screen-icon']}`} src={ICONS[item.id]} /> */}
                               <span className={`${styles['fs-14']} ${styles['thick-gry-clr']}`}>{attr.name}</span>
@@ -236,7 +236,7 @@ class Compare extends Component {
                           </Col>
                           {
                             attr.items.map(item => (
-                              <Col key={item.id} md={3} className={`${styles.childBackground} ${styles['p-25']} ${styles['flex-center']} ${styles['justify-center']} `}>
+                              <Col key={item.id} md={3} className={`${styles.childBackground} ${styles['p-15']} ${styles['flex-center']} ${styles['justify-center']} `}>
                                 <div className={`${styles['flex-center']} ${styles['flex-colum']} ${styles.fontW600} ${styles['fs-14']}`}>
                                   <span>{item.value.map(i => i.value).join(' ')} {item.value[0].qualifier_unit}</span>
                                 </div>

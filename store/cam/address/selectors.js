@@ -27,19 +27,16 @@ const getAddrById = store => (addrId) => {
 };
 
 const getDefaultAddress = (store) => {
-  let defaultAdd;
+  let defaultAdd = [{}];
   if (store.shippingAddrReducer.data && store.shippingAddrReducer.data.length > 0) {
-    defaultAdd = _.filter(store.shippingAddrReducer.data, value => value.default);
+    defaultAdd = [_.find(store.shippingAddrReducer.data, value => value.default)];
   }
-  if(!defaultAdd) {
+  if(defaultAdd && defaultAdd.length === 0) {
     if(store.shippingAddrReducer.data && store.shippingAddrReducer.data.length > 0) {
-        return [store.shippingAddrReducer.data[0]];
-    } else {
-      return [{}];
+      defaultAdd = [store.shippingAddrReducer.data[0]];
     }
-  } else {
-    return defaultAdd;
   }
+  return defaultAdd;
 };
 
 const getSelectedAddress = (store) => {
@@ -47,13 +44,10 @@ const getSelectedAddress = (store) => {
   if (store.shippingAddrReducer.data && store.shippingAddrReducer.data.length > 0) {
     selectedAddress =  _.find(store.shippingAddrReducer.data, value => value.address_id === store.shippingAddrReducer.deliverToAddress);
   }
-  debugger;
   if(!selectedAddress) {
-    return getDefaultAddress(store)[0];
-  } else {
-    return selectedAddress;
+    selectedAddress = getDefaultAddress(store)[0];
   }
+  return selectedAddress || {};
 }
-
 
 export { getShippingAddressResults, getAddrById, getAddressWithNameAndPhone, getDefaultAddress, getSelectedAddress };

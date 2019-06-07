@@ -3,7 +3,6 @@ import React from 'react';
 import { ModalContainer } from 'react-router-modal';
 import { ToastContainer } from 'react-toastify';
 import { connect } from 'react-redux';
-import Cookie from 'universal-cookie';
 
 import Betalogo from '../../components/common/Beta'
 import ErrorComp from '../../components/common/Error';

@@ -22,12 +22,14 @@ const actionCreators = {
       payload: apis.getUserProfileInfo(),
     });
   },
-  changePassword: (body) => {
-    return ({
-      type: actions.CHANGE_PASSWORD,
-      payload: apis.changePassword(body),
-    });
-  },
+
+  changePassword: body => dispatch => dispatch({
+    type: actions.CHANGE_PASSWORD,
+    payload: apis.changePassword(body),
+  }).then(() => {
+    dispatch(actionCreators.getUserProfileInfo());
+  }),
+
   uploadProfilePic: (body) => {
     return ({
       type: actions.UPLOAD_PROFILE_PIC,

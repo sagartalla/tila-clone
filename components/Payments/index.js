@@ -5,14 +5,11 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Grid, Row, Col } from 'react-bootstrap';
 import Cookies from 'universal-cookie';
-import { toast } from 'react-toastify';
 
 import Cart from '../Cart';
 import SignIn from './includes/SignIn';
 import PaymentMode from './includes/PaymentMode';
 import HeaderBar from '../HeaderBar';
-import LoyaltyPoints from './includes/LoyaltyPoints';
-import OffersAndDiscounts from './includes/OffersAndDiscounts';
 import RightSideBar from '../Cart/CartPaymentSideBar';
 import { languageDefinations } from '../../utils/lang/';
 import DeliveryAddress from './includes/DeliveryAddress';
@@ -20,6 +17,7 @@ import { actionCreators, selectors } from '../../store/payments';
 import { actionCreators as cartAction } from '../../store/cart'
 import { actionCreators as authActionCreators, selectors as authSelectors } from '../../store/auth';
 import { actionCreators as cartActionCreators, selectors as cartSelectors } from '../../store/cart';
+import { selectors as addressSelectors } from '../../store/cam/address'
 import Slider from '../common/slider';
 import Coupon from '../Cart/CartPaymentSideBar/coupons';
 import FormValidator from '../common/FormValidator';
@@ -170,7 +168,7 @@ class Payments extends React.Component {
       showError,
     });
   }
-   
+
   inputOnChange(e) {
     const { login } = this.state;
     login[e.target.name] = e.target.value;
@@ -208,22 +206,18 @@ class Payments extends React.Component {
 
   handleShippingAddressContinue(e) {
     const { editCartDetails } = this.state;
-    if (this.props.defaultAddress[0]) {
-      const defaultAddrId = this.props.defaultAddress[0].address_id;
-      this.props.createOrder(defaultAddrId)
-
+    const selectedAddrId = this.props.selectedAddress.address_id;
+    if (selectedAddrId) {
+      this.props.createOrder(selectedAddrId)
       const paymentConfigJson = { ...this.state.paymentConfigJson };
       paymentConfigJson['address'] = { basic: false, progress: false, done: true };
       // paymentConfigJson['loyaltyPoints'] = { basic: false, progress: true, done: false };
       // paymentConfigJson['offersDiscounts'] = { basic: true, progress: false, done: false };
       paymentConfigJson['payment'] = { basic: false, progress: true, done: false };
       this.setState(
-        { paymentConfigJson, editCartDetails: !editCartDetails }
-        ,() => this.props.cartEditDetails(this.state.editCartDetails));
-    } else {
-      toast.info('Please add a delivery address.');
+       { paymentConfigJson, editCartDetails: !editCartDetails }
+      ,() => this.props.cartEditDetails(this.state.editCartDetails));
     }
-
   }
 
   handleLoyaltyBtn() {
@@ -317,8 +311,8 @@ class Payments extends React.Component {
     });
   }
   render() {
-    const { login, showTab, paymentConfigJson, editCartDetails, showSlider, validation, showError } = this.state;
-    const { paymentOptions, defaultAddress, signInLoader, isLoggedIn, cartResults } = this.props;
+    const { login, paymentConfigJson, editCartDetails, showSlider, validation, showError } = this.state;
+    const { paymentOptions, selectedAddress, signInLoader, cartResults } = this.props;
     const { PAYMENT_PAGE, CART_PAGE } = languageDefinations();
 
     return (
@@ -344,7 +338,7 @@ class Payments extends React.Component {
                 showError={showError}
               />
               <DeliveryAddress
-                defaultAddress={defaultAddress}
+                selectedAddress={selectedAddress}
                 editAddressTab={this.editAddressTab}
                 configJson={paymentConfigJson.address}
                 handleShippingAddressContinue={this.handleShippingAddressContinue}
@@ -415,9 +409,9 @@ const mapStateToprops = store => ({
   cartResults: cartSelectors.getCartResults(store),
   paymentOptions: selectors.getPaymentOptions(store),
   makePaymentOptions: selectors.getPaymentUrl(store),
-  defaultAddress: selectors.getDefaultAddress(store),
   isLoggedIn: authSelectors.getLoggedInStatus(store),
   signInLoader: authSelectors.getLoginProgressStatus(store),
+  selectedAddress: addressSelectors.getSelectedAddress(store),
 });
 
 const mapDispatchToProps = dispatch =>

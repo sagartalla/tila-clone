@@ -57,6 +57,7 @@ class SizeChart extends Component {
           <Slider
             closeSlider={this.closeSlider}
             isOpen={showSlider}
+            width="580px"
             label={
               <div className={`${styles['black-color']}`}>
                 {`${productInfo.sizeChart.sizeChartImgName}` + ' ' + FOOTER_PAGE.SIZE_GUIDE}

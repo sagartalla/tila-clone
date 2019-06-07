@@ -60,8 +60,8 @@ class Display extends Component {
         catalog_id: catalogObj.catalog_id,
         variant_id: catalogObj.variant_id,
         product_id,
-        wishlisted_price: offerPricing.showPrise.display_value,
-        wishlisted_currency: offerPricing.currency.currency_code,
+        wishlisted_price: offerPricing.showPrise ? offerPricing.showPrise.display_value : null,
+        wishlisted_currency: offerPricing.showPrise ? offerPricing.showPrise.currency_code : offerPricing.currency,
       });
     }
   }
