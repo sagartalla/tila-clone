@@ -322,7 +322,7 @@ class Product extends Component {
                               autoplaySpeed={1500}
                               pauseOnHover={false}
                             >
-                              {media && media.map(image => (
+                              {media && media.slice(0, 5).map(image => (
                                 <div>
                                   <img src={`${constants.mediaDomain}/${image}`} alt="imageURL" />
                                 </div>
