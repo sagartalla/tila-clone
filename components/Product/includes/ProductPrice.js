@@ -14,15 +14,10 @@ import styles_ar from '../product_ar.styl';
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const {
-  PDP_PAGE, CART_PAGE, ORDER_PAGE, COUPON_OFFERS 
+  PDP_PAGE, CART_PAGE, ORDER_PAGE, COUPON_OFFERS
 } = languageDefinations();
 
 const ProductPrice = ({offerInfo}) => {
-<<<<<<< HEAD
-  const { price, listingAvailable, listingId, stockError, availabilityError, offerPricing } = offerInfo;
-  console.log('offerPricing', offerPricing );
- return(
-=======
   const {
     price, listingAvailable, listingId, stockError, availabilityError, offerPricing,
   } = offerInfo;
@@ -31,7 +26,6 @@ const ProductPrice = ({offerInfo}) => {
   } = offerPricing;
   const [showToolTip, toggleTooltip] = useState(false);
   return(
->>>>>>> d4244d293e321691f7a261843dcbad9bdec7f0a0
   <div className={`${styles['product-price-bg']} ${styles['border-radius4']}`}>
     {
       listingAvailable
