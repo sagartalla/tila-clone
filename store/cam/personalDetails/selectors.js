@@ -18,8 +18,8 @@ const getUserInfo = (store) => {
         contactInfo.phoneNum=phoneNum;
       }
       if (contactInfo.pwd_updated_at) {
-        const lastUpdated = contactInfo.pwd_updated_at.split('[')[0];
-        const msg = moment(lastUpdated).subtract(new Date().getTimezoneOffset(), 'minutes').fromNow();
+        const lastUpdated = contactInfo.pwd_updated_at;
+        const msg = moment(lastUpdated).subtract(new Date().getTimezoneOffset()).fromNow();
         contactInfo.lastUpdated = `Last updated ${msg}`;
       }
       else
