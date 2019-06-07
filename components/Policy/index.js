@@ -10,7 +10,7 @@ const url = {
   re: 'https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/policies-html/policies/policies.html?#returnPolicy',
   wp: 'https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/policies-html/policies/policies.html?#warrantyPolicy',
   // sp: '/static/docs/sp.pdf#toolbar=0&navpanes=0&view=FitH',
-  pp: 'https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/policies-html/privacy/Pravacylatest.html?#PrivacyPolicy',
+  pp: 'https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/policies-html/privacy/Pravacylatest.html',
 };
 
 const Policy = ({ query }) => (
