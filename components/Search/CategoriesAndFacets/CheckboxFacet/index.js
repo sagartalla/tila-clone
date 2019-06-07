@@ -4,6 +4,8 @@ import { Checkbox, Panel, Heading, Body, Title } from 'react-bootstrap';
 import SVGCompoent from '../../../common/SVGComponet';
 
 import {languageDefinations} from '../../../../utils/lang';
+import RenderFilterBar from './searchInput';
+
 const {SEARCH_PAGE} = languageDefinations()
 const MaxItems = 3;
 
@@ -16,42 +18,7 @@ import styles_ar from '../../search_ar.styl';
 
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
-class RenderFilterBar extends Component {
-  constructor(props) {
-    super(props)
-    this.state={
-      inputVal : ''
-    }
-    this.onChangeData = this.onChangeData.bind(this);
-  }
-  onChangeData(e) {
-    const { onFilterData } = this.props;
-    this.setState({
-      inputVal:e.currentTarget.value
-    }, () => onFilterData(this.state.inputVal))
 
-  }
-  render() {
-    const { placeName } = this.props
-    const { inputVal } = this.state
-    return (
-      <div className={`${styles['search-header']} ${styles['flex']}`}>
-        <SVGCompoent
-          src="icons/search/search-icon"
-          clsName={`${styles['icon-search']}`}
-        />
-        <input
-          type='text'
-          onChange={this.onChangeData}
-          placeholder={placeName}
-          value={inputVal}
-          className={`${styles['pl-18']}`}
-        />
-      </div>
-    )
-  }
-
-}
 class CheckboxFacet extends Component {
   constructor(props) {
     super(props);
