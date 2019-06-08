@@ -80,4 +80,8 @@ const getPageDetails = (store) => {
   };
 };
 
-export { getOrdersData, getPageDetails };
+const getOrderLoadingState = (store) => {
+  return store.ordersReducer.ui.loading;
+};
+
+export { getOrdersData, getPageDetails, getOrderLoadingState };
