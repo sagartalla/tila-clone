@@ -80,7 +80,7 @@ const Lifestyle = () => React.createElement(
           { md: 1, className: `${styles['pl-0']} ${styles['pr-10']}` },
           React.createElement(
             'a',
-            { href: `/SAU/${lang}srp/home-furnishing?categoryTree=true&isListed=false&sid=932,941` },
+            { href: `/SAU/${lang}/srp/home-furnishing?categoryTree=true&isListed=false&sid=932,941` },
             React.createElement(
               'div',
               { className: `${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon` },
