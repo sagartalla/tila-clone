@@ -119,21 +119,21 @@ class Search extends Component {
   }
 
   handleScroll(e) {
-    sidebarPosition = sidebarPosition || document.getElementById('sidebar-position');
-    const {height: sideBarHeight} = sidebarPosition.getBoundingClientRect();
-    if(sideBarHeight < window.innerHeight - 123) {
-      this.setState({
-        containerStyle: {},
-        sideBarPositionClass: 'sticky-top'
-      })
-      return;
-    }
-    if (oldY < window.scrollY) {
-      this.upScroll(e);
-    } else {
-      this.downScroll();
-    }
-    oldY = window.scrollY;
+    // sidebarPosition = sidebarPosition || document.getElementById('sidebar-position');
+    // const {height: sideBarHeight} = sidebarPosition.getBoundingClientRect();
+    // if(sideBarHeight < window.innerHeight - 123) {
+    //   this.setState({
+    //     containerStyle: {},
+    //     sideBarPositionClass: 'sticky-top'
+    //   })
+    //   return;
+    // }
+    // if (oldY < window.scrollY) {
+    //   this.upScroll(e);
+    // } else {
+    //   this.downScroll();
+    // }
+    // oldY = window.scrollY;
   }
   render() {
     const { query, optionalParams } = this.props;
