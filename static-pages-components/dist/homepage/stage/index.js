@@ -47,10 +47,10 @@ const tie = [{
 
 const hal = [{
   img: '/static/img/landing-home/womens-clothing.png',
-  title: 'Women\'s Clothing'
+  title: 'Womens Clothing'
 }, {
   img: '/static/img/landing-home/mens-clothing.png',
-  title: 'Men\'s Clothing'
+  title: 'Mens Clothing'
 }, {
   img: '/static/img/landing-home/jewellery.png',
   title: 'Jewellery'
@@ -183,12 +183,12 @@ const b_y_l = [{
   img: '/static/img/landing-home/guess-m.jpg',
   brandImg: '/static/img/landing-home/guess.jpg',
   title: 'Guess',
-  links: 'SAU/en/srp?search=Guess&isListed=false'
+  links: '/SAU/en/srp?search=Guess&isListed=false'
 }, {
   img: '/static/img/landing-home/max-m.jpg',
   brandImg: '/static/img/landing-home/max.jpg',
   title: 'Max',
-  links: 'SAU/en/srp?search=Max&isListed=false'
+  links: '/SAU/en/srp?search=Max&isListed=false'
 }, {
   img: '/static/img/landing-home/gucci-m.jpg',
   brandImg: '/static/img/landing-home/gucci.jpg',

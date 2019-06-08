@@ -13,32 +13,128 @@ import styles_ar from './footer_ar.styl';
 
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
-const f = [{"Women's Clothing":	"/SAU/en/srp/clothing?categoryTree=true&isListed=false&sid=892,910"},
-{"Men's Clothing":	"SAU/en/srp/clothing?categoryTree=true&isListed=false&sid=892,910"},
-{"Kids Clothing":	"/SAU/en/srp?search=kids%20clothing&language=en&isListed=false"},
-{"Watches":	"/SAU/en/srp/watch?categoryTree=true&isListed=false&sid=892,929"},
-{"Jewellery":	"/SAU/en/srp?search=jewellery&language=en&isListed=false"},
-{"Men's Footwear":	"/SAU/en/srp/footwear?categoryTree=true&isListed=false&sid=892,907"},
-{"Women's Footwear":	"/SAU/en/srp/footwear?categoryTree=true&isListed=false&sid=892,921"},
-{"Bags":	"/SAU/en/srp?search=bags&language=en&isListed=false"}];
+const f = [
+  {
+    url: `/SAU/${lang}/srp/clothing?categoryTree=true&isListed=false&sid=892,910`,
+    title: FOOTER_PAGE.WOMEN_CLOTHING,
+  },
 
-const e = [{"Mobiles":"/SAU/en/srp/mobiles?categoryTree=true&isListed=false&sid=848,2349"},
-{"Tablets":"/SAU/en/srp/tablets?categoryTree=true&isListed=false&sid=848,2350"},
-{"Laptops":"/SAU/en/srp/laptops?categoryTree=true&isListed=false&sid=848,2352"},
-{"Home Appliances":"/SAU/en/srp/home-applaince?categoryTree=true&isListed=false&sid=932,935"},
-{"Cameras":"/SAU/en/srp/camera?categoryTree=true&isListed=false&sid=848,882"},
-{"Televisions":"/SAU/en/srp/televisions?categoryTree=true&isListed=false&sid=848,2351"},
-{"Speakers":"/SAU/en/srp?search=speakers&language=en&isListed=false"},
-{"Storage Devices":"/SAU/en/srp/external-hard-disks?categoryTree=true&isListed=false&sid=848,872,873"}];
+  {
+    url: `/SAU/${lang}/srp/clothing?categoryTree=true&isListed=false&sid=892,910`,
+    title: FOOTER_PAGE.MEN_CLOTHING,
+  },
 
-const l = [{"Travel Accessories":	"/SAU/en/srp?search=travel%20accessories&language=en&isListed=false"},
-{"Photo Frames":	"/SAU/en/srp?search=Photo%20Frame&language=en&isListed=false"},
-{"Lights":	"/SAU/en/srp?search=lights&language=en&isListed=false"}];
+  {
+    url: `/SAU/${lang}/srp?search=kids%20clothing&language=en&isListed=false`,
+    title: FOOTER_PAGE.KIDS_CLOTHING,
+  },
 
-const b = [{"Perfumes":	"/SAU/en/srp/fragrance?categoryTree=true&isListed=false&sid=932,958,964"},
-{"Eyewear":	"/SAU/en/srp?search=eye%20wear&language=en&isListed=false"},
-{"Men's grooming":	"/SAU/en/srp?search=grooming&language=en&isListed=false"},
-{"Personal Care":	"/SAU/en/srp/personal-care?categoryTree=true&isListed=false&sid=932,958,969"}];
+  {
+    url: `/SAU/${lang}/srp/watch?categoryTree=true&isListed=false&sid=892,929`,
+    title: FOOTER_PAGE.WATCHES,
+  },
+
+  {
+    url:	`/SAU/${lang}/srp?search=jewellery&language=en&isListed=false`,
+    title: FOOTER_PAGE.JEWELLERY,
+  },
+
+  {
+    url:	`/SAU/${lang}/srp/footwear?categoryTree=true&isListed=false&sid=892,907`,
+    title: FOOTER_PAGE.MENS_FOOTWEAR,
+  },
+
+  {
+   url:	`/SAU/${lang}/srp/footwear?categoryTree=true&isListed=false&sid=892,921`,
+   title: FOOTER_PAGE.WOMEN_FOOTWEAR,
+  },
+  
+  {
+    url:	`/SAU/${lang}/srp?search=bags&language=en&isListed=false`,
+    title: FOOTER_PAGE.BAGS,
+  },
+];
+
+const e = [
+  {
+    url: `/SAU/${lang}/srp/mobiles?categoryTree=true&isListed=false&sid=848,2349`,
+    title: FOOTER_PAGE.MOBILES,
+  },
+
+  {
+    url: `/SAU/${lang}/srp/tablets?categoryTree=true&isListed=false&sid=848,2350`,
+    title: FOOTER_PAGE.TABLETS,
+  },
+
+  {
+    url: `/SAU/${lang}/srp/laptops?categoryTree=true&isListed=false&sid=848,2352`,
+    title: FOOTER_PAGE.LAPTOPS,
+  },
+
+  {
+    url: `/SAU/${lang}/srp/home-applaince?categoryTree=true&isListed=false&sid=932,935`,
+    title: FOOTER_PAGE.HOME_APLLIANCES,
+  },
+
+  {
+    url: `/SAU/${lang}/srp/camera?categoryTree=true&isListed=false&sid=848,882`,
+    title: FOOTER_PAGE.CAMERAS,
+  },
+
+  {
+    url: `/SAU/${lang}/srp/televisions?categoryTree=true&isListed=false&sid=848,2351`,
+    title: FOOTER_PAGE.TELEVISIONS,
+  },
+
+  {
+    url: `/SAU/${lang}/srp?search=speakers&language=en&isListed=false`,
+    title: FOOTER_PAGE.SPEAKERS,
+  },
+
+  {
+    url: `/SAU/${lang}/srp/external-hard-disks?categoryTree=true&isListed=false&sid=848,872,873`,
+    title: FOOTER_PAGE.STORAGE_DEVICES,
+  },
+];
+
+const l = [
+  {
+    url:	`/SAU/${lang}/srp?search=travel%20accessories&language=en&isListed=false`,
+    title: FOOTER_PAGE.TRAVEL_ACCESSORIES,
+  },
+
+  {
+    url:	`/SAU/${lang}/srp?search=Photo%20Frame&language=en&isListed=false`,
+    title: FOOTER_PAGE.PHOTO_FRAMES,
+  },
+
+  {
+    url:	`/SAU/${lang}/srp?search=lights&language=en&isListed=false`,
+    title: FOOTER_PAGE.LIGHTS,
+  },
+];
+
+const b = [
+  {
+    url:	`/SAU/${lang}/srp/fragrance?categoryTree=true&isListed=false&sid=932,958,964`,
+    title: FOOTER_PAGE.PERFUMES,
+  },
+
+  {
+    url:	`/SAU/${lang}/srp?search=eye%20wear&language=en&isListed=false`,
+    title: FOOTER_PAGE.EYEWEAR,
+  },
+
+  {
+    url:	`/SAU/${lang}/srp?search=grooming&language=en&isListed=false`,
+    title: FOOTER_PAGE.MENS_GROOMING,
+  },
+
+  {
+    url:	`/SAU/${lang}/srp/personal-care?categoryTree=true&isListed=false&sid=932,958,969`,
+    title: FOOTER_PAGE.PERSONAL_CARE,
+  }
+];
 
 const FooterBar = props => (
   <div id="footer-container" className={`${styles['footer-container']} ${styles['mt-25']}`}>
@@ -98,10 +194,10 @@ const FooterBar = props => (
           <div className={`${styles['ipad-pr-0']} ${styles['footer-menu-inn']}`}>
             <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['flex-center']}`}>
               <SVGComponent clsName={`${styles['footer-list-icon']} ${styles['mr-10']}`} src="icons/footers-icons/fashion" />
-              <span className={styles['pointer']}>Fashion</span>
+              <span className={styles['pointer']}>{FOOTER_PAGE.FASHION}</span>
             </h4>
             <ul className={`${styles['pl-30']} ${styles['lne-ht2']}`}>
-              {f.map((i) => <li key={Object.keys(i)[0]}><a href={Object.values(i)[0]} target="_blank"><span className={styles['pointer']}>{Object.keys(i)[0]}</span></a></li>)}
+              {f.map((i) => <li key={i.title}><a href={i.url}><span className={styles['pointer']}>{i.title}</span></a></li>)}
               {/*<li><span className={styles['pointer']}>{`${FOOTER_PAGE.WOMENS} ${FOOTER_PAGE.FASHION}`}</span></li>
               <li><span className={styles['pointer']}>{`${FOOTER_PAGE.MENS} ${FOOTER_PAGE.FASHION}`}</span></li>
               <li><span className={styles['pointer']}>{`${FOOTER_PAGE.GIRLS} ${FOOTER_PAGE.FASHION}`}</span></li>
@@ -118,7 +214,7 @@ const FooterBar = props => (
               <span className={styles['pointer']}>{FOOTER_PAGE.ELECTRONICS}</span>
             </h4>
             <ul className={`${styles['pl-30']} ${styles['lne-ht2']}`}>
-              {e.map((i) => <li key={Object.keys(i)[0]}><a href={Object.values(i)[0]} target="_blank"><span className={styles['pointer']}>{Object.keys(i)[0]}</span></a></li>)}
+              {e.map((i) => <li key={i.title}><a href={i.url}><span className={styles['pointer']}>{i.title}</span></a></li>)}
               {/*<li><span className={styles['pointer']}>{FOOTER_PAGE.MOBILES}</span></li>
               <li><span className={styles['pointer']}>{FOOTER_PAGE.TABLETS}</span></li>
               <li><span className={styles['pointer']}>{FOOTER_PAGE.LAPTOPS}</span></li>
@@ -132,10 +228,10 @@ const FooterBar = props => (
           <div className={`${styles['ipad-pr-0']} ${styles['footer-menu-inn']}`}>
             <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['flex-center']}`}>
               <SVGComponent clsName={`${styles['footer-list-icon']} ${styles['mr-10']}`} src="icons/footers-icons/life-style" />
-              <span className={styles['pointer']}>Lifestyle</span>
+              <span className={styles['pointer']}>{FOOTER_PAGE.LIFESTYLE}</span>
             </h4>
             <ul className={`${styles['pl-30']} ${styles['lne-ht2']}`}>
-              {l.map((i) => <li key={Object.keys(i)[0]}><a href={Object.values(i)[0]} target="_blank"><span className={styles['pointer']}>{Object.keys(i)[0]}</span></a></li>)}
+              {l.map((i) => <li key={i.title}><a href={i.url}><span className={styles['pointer']}>{i.title}</span></a></li>)}
               {/*<li><span className={styles['pointer']}>{FOOTER_PAGE.HOME_DECOR}</span></li>
               <li><span className={styles['pointer']}>{`${FOOTER_PAGE.KITCHEN} & ${FOOTER_PAGE.DINING}`}</span></li>
               <li><span className={styles['pointer']}>{FOOTER_PAGE.BATH}</span></li>
@@ -152,7 +248,7 @@ const FooterBar = props => (
               <span className={styles['pointer']}>{`${FOOTER_PAGE.BEAUTY} & ${FOOTER_PAGE.MAKEUP}`}</span>
               </h4>
             <ul className={`${styles['pl-30']} ${styles['lne-ht2']}`}>
-              {b.map((i) => <li key={Object.keys(i)[0]}><a href={Object.values(i)[0]} target="_blank"><span className={styles['pointer']}>{Object.keys(i)[0]}</span></a></li>)}
+              {b.map((i) => <li key={i.title}><a href={i.url}><span className={styles['pointer']}>{i.title}</span></a></li>)}
               {/*<li><span className={styles['pointer']}>{FOOTER_PAGE.FRAGRANCE}</span></li>
               <li><span className={styles['pointer']}>{FOOTER_PAGE.MAKEUP}</span></li>
               <li><span className={styles['pointer']}>{FOOTER_PAGE.HAIRCARE}</span></li>
@@ -235,9 +331,10 @@ const FooterBar = props => (
             <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
               <li><a href="/SAU/en/policy/tc" target="_blank">{FOOTER_PAGE.TERMS_CONDITION}</a></li>
               <li><a href="/SAU/en/policy/cp" target="_blank">{FOOTER_PAGE.CANCELLATION_POLICY}</a></li>
+              <li><a href="/SAU/en/policy/er" target="_blank">{FOOTER_PAGE.EXCHANGE_REPLACEMENT_POLICY}</a></li>              
               <li><a href="/SAU/en/policy/re" target="_blank">{FOOTER_PAGE.REFUND_POLICY}</a></li>
               <li><a href="/SAU/en/policy/wp" target="_blank">{FOOTER_PAGE.WARRENTY_POLICY}</a></li>
-              <li><a href="/SAU/en/policy/sp" target="_blank">{FOOTER_PAGE.SHIPPING_POLICY}</a></li>
+              {/* <li><a href="/SAU/en/policy/sp" target="_blank">{FOOTER_PAGE.SHIPPING_POLICY}</a></li> */}
               <li><a href="/SAU/en/policy/pp" target="_blank">{FOOTER_PAGE.PRIVACY_POLICY}</a></li>
             </ul>
           </Col>

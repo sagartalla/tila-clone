@@ -17,9 +17,9 @@
     box-shadow 0 3px 4px 0 rgba(0, 0, 0, 0.09)
     position relative
     margin-top 61px
+    // z-index 99
     .header-megamenu-inn
       box-shadow 0 1px 1px 0 rgba(0, 0, 0, 0.09)
-      position absolute
       left 0
       right 0
       top 0
@@ -30,7 +30,7 @@
       filter blur(3px)
     .header-meganenu-sub
       position relative
-      z-index 8
+      z-index 43
       .submenu-head-wrap
         background: #4a4a4a;
         .submenu-head
@@ -49,9 +49,14 @@
               color #fff
 
 .profile-part
+
   .ple-icon
     padding: 10px 20px;
     border-bottom: 1px solid #efeff4
+    .profile-name
+      display flex
+      flex-direction column
+      word-break break-all
     .icon
       width 40px
       height 40px
@@ -103,6 +108,20 @@
     *
       display:inline
       white-space:nowrap
+
+  .search-btn-img
+    position absolute
+    right 4px
+    width 30px
+    height: 30px;
+    top 7px
+    display flex
+    align-items center
+    justify-content center
+    .searching-icon
+      width 23px
+      height 23px
+      cursor pointer
 
   .search-btn
     position absolute

@@ -4,17 +4,13 @@ import Cookies from 'universal-cookie';
 import { Link } from '../../../routes';
 import { selectors, actionCreators } from '../../../store/cam/personalDetails';
 import { bindActionCreators } from 'redux';
-import generateURL from '../../../utils/urlGenerator';
-import { toast } from 'react-toastify';
 import lang from '../../../utils/language';
-import SVGComponent from '../../common/SVGComponet';
 import main_en from '../../../layout/main/main_en.styl';
 import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from './sidebar_en.styl';
 import styles_ar from './sidebar_ar.styl';
-
+import ProfilePic from './ProfilePic';
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
-
 const cookies = new Cookies();
 const language = cookies.get('language') || 'en';
 const country = cookies.get('country') || 'SAU';
@@ -23,8 +19,8 @@ class UserProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      imgUrl: null,
       imgDocumentID: null,
+      loader: false,
     }
   }
 
@@ -37,11 +33,9 @@ class UserProfile extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     const {image_url} = nextProps.userInfo.personalInfo;
-    if(image_url){
-      generateURL(image_url).then((data) => {
-        this.setState({
-          imgUrl: data
-        })
+    if((nextProps.loadingStatus !== this.props.loadingStatus)){
+      this.setState({
+        loader: nextProps.loadingStatus,
       })
     }
     if (nextProps.getPictureDocumentId === this.props.getPictureDocumentId) {
@@ -56,31 +50,19 @@ class UserProfile extends React.Component {
       this.setState({
         imgDocumentID: nextProps.getPictureDocumentId
       }, () => {
-        generateURL(this.state.imgDocumentID).then((data) => {
-          this.setState({
-            imgUrl: data,
-          })
           this.props.EditPersonalInfo({
-            image_url: this.state.imgDocumentID, //As imgUrl is too long to store in image_url, storing documentID in image_url.
+            image_url: this.state.imgDocumentID, //storing documentID in image_url.
           })
-          toast.success("Your profile pic is successfully updated")
         })
-      });
+      };
     }
-  }
 
   render() {
     const { props } = this;
-    const { query } = props;
+    const { query, userInfo, imgUrl } = props;
     const { tabDetails } = query;
     const { first_name, last_name } = props.userInfo.personalInfo;
-    const [tab, ...queryParams] = tabDetails ? tabDetails.split('/') : [];
-    let imagePreview = null;
-    if (this.state.imgUrl) {
-      imagePreview = (<img className={styles['prev-img']} src={this.state.imgUrl} />);
-    } else {
-      imagePreview = (<div className={styles['edit-icon']}><SVGComponent clsName={`${styles['profile-edit-icon']}`} src="icons/profile-camera" /></div>)
-    }
+    const [tab] = tabDetails ? tabDetails.split('/') : [];
     let full_name = first_name || last_name ? first_name + " " + last_name : "";
     let name = full_name ? (full_name.length < 20 ? full_name : (full_name.slice(0, 20) + "...")) : "";
     return (
@@ -91,9 +73,7 @@ class UserProfile extends React.Component {
         <Link route={`/${country}/${language}/cam/profile`}>
           <a style={{ display: 'block' }}>
             <div className={`${`/${country}/${language}/cam/profile` === `/${country}/${language}/cam/${tab}` ? styles['active'] : {}} ${styles['user-profile']} ${styles['p-10-20']}  ${styles['align-center']} ${styles['flex']}`}>
-              <div className={`${styles['profile-pic']} ${styles['pr-15']}`}>
-                <div className={styles['img-style']} >{imagePreview}</div>
-              </div>
+                  <ProfilePic loader={this.state.loader} userInfo={userInfo} imgUrl={imgUrl}/>
               <div className={styles['profile-details']}>
                 <span className={`${styles['fs-12']} ${styles['light-gry-clr']}`}>Hello,</span>
                 <div>{name}</div>
@@ -107,7 +87,8 @@ class UserProfile extends React.Component {
 }
 const mapStateToProps = (store) => ({
   userInfo: selectors.getUserInfo(store),
-  getPictureDocumentId: selectors.getPictureDocumentId(store)
+  getPictureDocumentId: selectors.getPictureDocumentId(store),
+  loadingStatus: selectors.getLoadingStatus(store),
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -119,4 +100,4 @@ const mapDispatchToProps = (dispatch) =>
     dispatch,
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserProfile);;
+export default connect(mapStateToProps, mapDispatchToProps)(UserProfile);

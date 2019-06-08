@@ -116,8 +116,7 @@ class EditPassword extends React.Component {
     const { newPassword, rePassword, oldPassword } = this.state;
     let { error } = this.state;
     if (newPassword.length > 0 && oldPassword.length > 0 && newPassword === rePassword && newPassword !== oldPassword) {
-      const passreg = /^([a-zA-Z0-9_-]){8,30}$/;
-      const rechPassword = passreg.test(newPassword);
+      const rechPassword = newPassword.length >= 8 && newPassword.length <= 30;
       if (rechPassword) {
         this.props.changePassword({
           current_password: oldPassword,

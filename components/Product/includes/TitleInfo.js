@@ -69,7 +69,9 @@ class TitleInfo extends Component {
     const { listingId, getCartResults } = this.props;
     this.props.addToCart({
       listing_id: listingId,
-    }, listingId);
+    }, listingId).then(() => {
+      document.getElementsByTagName('BODY')[0].style.overflow = 'hidden';
+    });
   }
 
   addToCompare({ target }) {
@@ -96,6 +98,7 @@ class TitleInfo extends Component {
     if (!showCheckoutModal) { // adding item to cart
       this.addToCart();
     } else { // removing item from cart.
+      document.getElementsByTagName('BODY')[0].style.overflow = 'auto';
       removeCartItem(listingCartData.items[0].cart_item_id);
     }
   }

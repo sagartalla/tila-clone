@@ -15,6 +15,7 @@ const getOrdersData = (store) => {
         currency_code,
         order_items,
         order_type,
+        invoice_id,
       } = order;
       const orderItems = _.compose(
         _.reduce.convert({ cap: false })((acc, val, key) => acc.concat({
@@ -63,6 +64,7 @@ const getOrdersData = (store) => {
         orderTotal: `${total_amount.display_value} ${total_amount.currency_code}`,
         orderItems,
         order_type,
+        invoice_id: order_items.find(x => x.invoice_id !== '').invoice_id,
       };
     });
   }
@@ -78,4 +80,8 @@ const getPageDetails = (store) => {
   };
 };
 
-export { getOrdersData, getPageDetails };
+const getOrderLoadingState = (store) => {
+  return store.ordersReducer.ui.loading;
+};
+
+export { getOrdersData, getPageDetails, getOrderLoadingState };

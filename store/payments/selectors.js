@@ -15,11 +15,19 @@ const getPaymentUrl = (store) => {
 }
 
 const getDefaultAddress = (store) => {
+  let defaultAdd;
   if (store.shippingAddrReducer.data && store.shippingAddrReducer.data.length > 0) {
-    return _.filter(store.shippingAddrReducer.data, function (value, key) { return value.default; });
+    defaultAdd = [_.find(store.shippingAddrReducer.data, value => value.default)];
   }
-  return {};
-}
+  if(!defaultAdd) {
+    if(store.shippingAddrReducer.data && store.shippingAddrReducer.data.length > 0) {
+      defaultAdd = [store.shippingAddrReducer.data[0]];
+    } else {
+      defaultAdd = [{}];
+    }
+  }
+  return defaultAdd;
+};
 
 const getPaymentModesData = (store) => {
   /*
@@ -71,4 +79,16 @@ const get3dSecureRedirectionUrl = (store) => {
   }
 }
 
-export { getPaymentOptions, getPaymentUrl, getDefaultAddress, getPaymentModesData, getProcessData, get3dSecureRedirectionUrl, getLoader };
+const getSelectedAddress = (store) => {
+  let selectedAddress;
+  if (store.shippingAddrReducer.data && store.shippingAddrReducer.data.length > 0) {
+    selectedAddress =  _.find(store.shippingAddrReducer.data, value => value.address_id === store.shippingAddrReducer.deliverToAddress);
+  }
+  if(!selectedAddress) {
+    selectedAddress = getDefaultAddress(store)[0];
+  }
+  return selectedAddress
+}
+
+
+export { getPaymentOptions, getPaymentUrl, getDefaultAddress, getPaymentModesData, getProcessData, get3dSecureRedirectionUrl, getLoader, getSelectedAddress };

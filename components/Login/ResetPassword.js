@@ -13,6 +13,8 @@ import main_en from '../../layout/main/main_en.styl';
 import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './login_en.styl';
 import styles_ar from './login_ar.styl';
+import HeaderBar from '../HeaderBar';
+import ShowHidePassword from './ShowHidePassword';
 
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
@@ -25,12 +27,19 @@ class ResetPassword extends Component {
       success: false,
       password: '',
       confirmPassword: '',
+      hide: true,
     };
     this.passwordSuccess = this.passwordSuccess.bind(this);
   }
 
     onChange = (e) => {
       this.setState({ [e.target.name]: e.target.value });
+    }
+
+    hideToggle = () => {
+      this.setState({
+        hide: !this.state.hide,
+      })
     }
 
     passwordSuccess() {
@@ -57,9 +66,10 @@ class ResetPassword extends Component {
     }
 
     render() {
-      const { password, confirmPassword } = this.state;
+      const { password, confirmPassword, hide } = this.state;
       return (
         <div>
+          <HeaderBar hideLogin hideMegamenu hideSearch/>
             {!this.state.success ?
               <div className={`${styles.flex} ${styles['justify-center']} ${styles['ht-100vh']} ${styles['flex-center']} ${styles['bg-gray']}`}>
               <div className={styles['reset-password']}>
@@ -68,16 +78,20 @@ class ResetPassword extends Component {
                 {LOGIN_PAGE.PLEASE_SET_YOUR_SECURE_PASSWORD}
                 </div>
                 <form>
-                <div className={`${styles['mt-15']}`}>
+                <div className={`${styles['mt-15']} ${styles.relative}`}>
                     <label className={`${styles['lgt-blue']}`}>{LOGIN_PAGE.ENTER_YOUR_NEW_PASSWORD}</label>
+                    <div className={`${styles['reset_show']}`}>
                     <input
-                      type="password"
+                      type={hide ? 'password' : 'text'}
                       name="password"
+                      className={`${styles.width100}`}
                       placeholder={LOGIN_PAGE.PASSWORD}
                       value={password}
                       onChange={this.onChange}
                       required
                     />
+                    <ShowHidePassword hide={hide} hideToggle={this.hideToggle}/>
+                    </div>
                 </div>
                 <div className={`${styles['mt-15']}`}>
                     <label className={`${styles['lgt-blue']}`}>{LOGIN_PAGE.CONFIRM_YOUR_NEW_PASSWORD}</label>
