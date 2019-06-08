@@ -1,5 +1,5 @@
 import api from './api';
-import { selectors as addressSelectors } from '../cam/address'
+import * as addressSelectors from '../cam/address/selectors'
 const actions = {
   GET_CART_DETAILS: 'GET_CART_DETAILS',
   ADD_TO_CART: 'ADD_TO_CART',
