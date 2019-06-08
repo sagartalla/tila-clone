@@ -19,7 +19,7 @@ const getOrderDetails = (store) => {
       shippingTotal: total_shipping,
       payments,
       status,
-      invoice_id,
+      invoice_id: order_items.find(x => x.invoice_id !== '').invoice_id,
       //TODO move compose to common util
       orderItems: _.compose(
         _.reduce.convert({ 'cap': false })((acc, val, key) => {
