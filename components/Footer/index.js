@@ -73,7 +73,7 @@ const FooterBar = props => (
                 <SVGComponent clsName={`${styles['quation-bar-inn']}`} src="icons/common-icon/return" />
               </span>
               <div className={`${styles['flex']} ${styles['flex-colum']} ${styles['pl-20']}`}>
-                <span className={`${styles['fontW600']} ${styles['text-uppercase']}`}>{`${FOOTER_PAGE.RETURN_WITHIN} 30 ${FOOTER_PAGE.DAYS}`}</span>
+                <span className={`${styles['fontW600']} ${styles['text-uppercase']}`}>{`${FOOTER_PAGE.RETURN_WITHIN} 15 ${FOOTER_PAGE.DAYS}`}</span>
                 <span className={styles['footer-suport-title']}>{FOOTER_PAGE.PLACING_ORDER}</span>
               </div>
             </div>
