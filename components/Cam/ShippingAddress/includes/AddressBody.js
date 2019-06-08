@@ -82,13 +82,13 @@ const AddressBody = (props) => {
                   <div className={`${styles['address-card-actions']} ${styles['fs-12']}`}>
                     <Row>
                       <Col md={colLength} sm={colLength} xs={colLength} className={`${styles['thck-gry-rt-border']} ${styles['delete-action']} ${styles['flex']} ${styles['justify-center']}`}>
-                        <span id={val.address_id} onClick={deleteAddr} className={`${styles['delete-icon']} ${styles['flex-center']}`}>
+                        <span id={val.address_id} onClick={deleteAddr} className={`${styles['delete-icon']} ${styles['flex-center']} ${styles.pointer}`}>
                           <SVGComponent clsName={`${styles['delete-icon-inn']}`} src="icons/delete-icon/delete-icon" />
                           <span className={styles['pl-5']}>{DELIVERY_ADDR_PAGE.DELETE}</span>
                         </span>
                       </Col>
                       <Col md={colLength} sm={colLength} xs={colLength} className={`${styles['pl-0']} ${styles['edit-action']} ${styles['flex']} ${styles['justify-center']}`}>
-                        <span id={val.address_id} onClick={editAddress} className={styles['edit-icon']}>
+                        <span id={val.address_id} onClick={editAddress} className={`${styles['edit-icon']} ${styles.pointer}`}>
                           <SVGComponent clsName={`${styles['edit-icon-inn']}`} src="icons/common-icon/edit-icon" />
                           {DELIVERY_ADDR_PAGE.EDIT_ADDR}
                         </span>
@@ -96,7 +96,7 @@ const AddressBody = (props) => {
                       {
                           props.isPaymentPage && !isDefault ?
                             <Col md={colLength} sm={colLength} xs={colLength} className={`${styles['pl-0']} ${styles['edit-action']} ${styles['flex']} ${styles['justify-center']}`}>
-                              <span id={val.address_id} onClick={makeDefaultAddress} className={styles['edit-icon']}>
+                              <span id={val.address_id} onClick={makeDefaultAddress} className={`${styles['edit-icon']} ${styles.pointer}`}>
                                 {DELIVERY_ADDR_PAGE.MAKE_DEFAULT}
                               </span>
                             </Col>
