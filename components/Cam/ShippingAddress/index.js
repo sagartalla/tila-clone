@@ -136,10 +136,6 @@ class ShippingAddress extends Component {
     if (!this.props.miniAddress) { this.props.getShippingAddressResults(); }
   }
 
-  shouldComponentUpdate(nextProps) {
-    return true;
-  }
-
   getDataFromMap(json) {
     const {
       lat, lng, cityCountryObj: {
