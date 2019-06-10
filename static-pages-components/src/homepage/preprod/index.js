@@ -8,29 +8,25 @@ let sliderTBS,
 // const tie = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 const tbs = [{
-  img: `/static/img/landing-home/${lang === 'en' ? 'home-decor' : 'home-decor-ar'}.jpg`,
-  title: `${lang === 'en' ? 'HOME DECOR' : 'ديكورت البيت'}`,
-  key: 'HOME DECOR',
+  img: `/static/img/landing-home/${lang === 'en' ? 'main-Armani' : 'main-Armani-ar'}.png`,
+  title: 'Armani Sunglasses',
+  key: 'Armani Sunglasses',
 }, {
-  img: `/static/img/landing-home/${lang === 'en' ? 'laptops' : 'laptops-ar'}.jpg`,
-  title: `${lang === 'en' ? 'LAPTOPS' : 'اللاب توبات'}`,
-  key: 'LAPTOPS',
+  img: `/static/img/landing-home/${lang === 'en' ? 'main-Charger' : 'main-Charger-ar'}.png`,
+  title: 'Baseus Charger',
+  key: 'Baseus Charger',
 }, {
-  img: `/static/img/landing-home/${lang === 'en' ? 'mens-clothing' : 'mens-clothing-ar'}.jpg`,
-  title: `${lang === 'en' ? 'MENS CLOTHING' : 'ملابس رجالية'}`,
-  key: 'MENS CLOTHING',
+  img: `/static/img/landing-home/${lang === 'en' ? 'main-Joyroom' : 'main-Joyroom-ar'}.png`,
+  title: 'Joyroom',
+  key: 'Joyroom',
 }, {
-  img: `/static/img/landing-home/${lang === 'en' ? 'mobile-accessories' : 'mobile-accessories-ar'}.jpg`,
-  title: `${lang === 'en' ? 'MOBILE ACCESSORIES' : 'مستلزمات \إكسسورات الجوال'}`,
-  key: 'MOBILE ACCESSORIES',
+  img: `/static/img/landing-home/${lang === 'en' ? 'main-LDNIO' : 'main-LDNIO-ar'}.jpg`,
+  title: 'Ldnio',
+  key: 'Ldnio',
 }, {
-  img: `/static/img/landing-home/${lang === 'en' ? 'perfumes-for-women' : 'perfumes-for-women-ar'}.jpg`,
-  title: `${lang === 'en' ? 'PERFUMES FOR WOMEN' : 'عطور للنساء'}`,
-  key: 'PERFUMES FOR WOMEN',
-}, {
-  img: `/static/img/landing-home/${lang === 'en' ? 'watches' : 'watches-ar'}.jpg`,
-  title: `${lang === 'en' ? 'WATCHES' : 'ساعات اليد'}`,
-  key: 'WATCHES',
+  img: `/static/img/landing-home/${lang === 'en' ? 'main-RAYBAN' : 'main-RAYBAN-ar'}.jpg`,
+  title: 'Rayban',
+  key: 'Rayban',
 }];
 
 const tie = [{
@@ -95,19 +91,19 @@ const hal = [{
 
 
 const d_tie = [
-  '/static/img/landing-home/d-laptops.png',
-  '/static/img/landing-home/d-mobiles.png',
-  '/static/img/landing-home/d-cameras.png',
-  '/static/img/landing-home/d-kitchen.png',
-  '/static/img/landing-home/d-audio.png',
+  `/static/img/landing-home/${lang === 'en' ? 'laptop-stand' : 'laptop-stand-ar'}.jpg`,
+  `/static/img/landing-home/${lang === 'en' ? 'headphones' : 'headphones-ar'}.jpg`,
+  `/static/img/landing-home/${lang === 'en' ? 'mobile-case' : 'mobile-case-ar'}.jpg`,
+  `/static/img/landing-home/${lang === 'en' ? 'smart-band' : 'smart-band-ar'}.jpg`,
+  `/static/img/landing-home/${lang === 'en' ? 'USB-hub' : 'USB-hub-ar'}.jpg`,
 ];
 
 const d_tif = [
-  '/static/img/landing-home/kids-fashion.png',
-  '/static/img/landing-home/t-women-cloths.png',
-  '/static/img/landing-home/shoes.png',
-  '/static/img/landing-home/t-watches.png',
-  '/static/img/landing-home/t-mens-cloths.png',
+  `/static/img/landing-home/${lang === 'en' ? 'fashion-Banner-Small' : 'fashion-Banner-Small-ar'}.png`,
+  `/static/img/landing-home/${lang === 'en' ? 'fashion-Banner-Medium.png' : 'fashion-Banner-Medium-ar.jpg'}`,
+  `/static/img/landing-home/${lang === 'en' ? 'fashion-Banner-Medium-2' : 'fashion-Banner-Medium-2-ar'}.png`,
+  `/static/img/landing-home/${lang === 'en' ? 'fashion-Banner-Small-2' : 'fashion-Banner-Small-2-ar'}.png`,
+  `/static/img/landing-home/${lang === 'en' ? 'fashion-banner-large' : 'fashion-banner-large-ar'}.png`,
 ];
 
 const d_tihl = [
@@ -211,45 +207,42 @@ const twoCols = [{
 }];
 
 const threeCols = [{
-  img: '/static/img/landing-home/shoes.jpg',
-  link: `/SAU/${lang}/srp?search=footwear&isListed=false`,
-  title: 'Shoes',
+  img: `/static/img/landing-home/${lang === 'en' ? 'THIRD-LAPTOP-STAND' : 'THIRD-LAPTOP-STAND-ar'}.jpg`,
+  link: `/SAU/${lang}/srp?search=Laptop%20stand&language=en&isListed=false`,
+  title: 'LAPTOP STAND',
 }, {
-  img: '/static/img/landing-home/ls2.jpg',
-  link: `/SAU/${lang}/srp?search=LS2&isListed=false`,
-  title: 'LS2',
+  img: `/static/img/landing-home/${lang === 'en' ? 'THIRD-SMART-BAND' : 'THIRD-SMART-BAND-ar'}.jpg`,
+  link: `/SAU/${lang}/srp?search=Smart%20Band&language=en&isListed=false`,
+  title: 'SMART BAND',
 }, {
-  img: '/static/img/landing-home/furniture.jpg',
-  link: `/SAU/${lang}/srp?search=Furniture&isListed=false`,
-  title: 'Furniture',
+  img: `/static/img/landing-home/${lang === 'en' ? 'third-HEADPHONE' : 'third-HEADPHONE-ar'}.jpg`,
+  link: `/SAU/${lang}/srp?search=headphones&language=en&isListed=false`,
+  title: 'HEADPHONE',
 }];
 
 const b_y_l = [{
-  img: '/static/img/landing-home/levis-m.jpg',
-  brandImg: '/static/img/landing-home/levis.jpg',
-  title: 'Levis',
-  links: `/SAU/${lang}/srp?search=Levis&isListed=false`,
+  img: '/static/img/landing-home/Joyroom.jpg',
+  title: 'Joyroom',
+  links: `/SAU/${lang}/srp?search=Joyroom&language=en&isListed=false`,
 }, {
-  img: '/static/img/landing-home/guess-m.jpg',
-  brandImg: '/static/img/landing-home/guess.jpg',
-  title: 'Guess',
-  links: `/SAU/${lang}/srp?search=Guess&isListed=false`,
+  img: '/static/img/landing-home/LDNIO.jpg',
+  title: 'LDNIO',
+  links: `/SAU/${lang}/srp?search=LDNIO&language=en&isListed=false`,
 }, {
-  img: '/static/img/landing-home/max-m.jpg',
-  brandImg: '/static/img/landing-home/max.jpg',
-  title: 'Max',
-  links: `/SAU/${lang}/srp?search=Max&isListed=false`,
+  img: '/static/img/landing-home/Ray-Ban.jpg',
+  title: 'Ray-Ban',
+  links: `/SAU/${lang}/srp?search=Ryban&language=en&isListed=false`,
 }, {
-  img: '/static/img/landing-home/gucci-m.jpg',
-  brandImg: '/static/img/landing-home/gucci.jpg',
-  title: 'Gucci',
-  links: `/SAU/${lang}/srp?search=Gucci&isListed=false`,
-}, {
-  img: '/static/img/landing-home/levis-m.jpg',
-  brandImg: '/static/img/landing-home/levis.jpg',
-  title: 'Levis',
-  links: `/SAU/${lang}/srp?search=Levis&isListed=false`,
+  img: '/static/img/landing-home/Baseus.jpg',
+  title: 'Baseus',
+  links: `/SAU/${lang}/srp?search=Baseus&language=en&isListed=false`,
 }];
+// {
+//   img: '/static/img/landing-home/levis-m.jpg',
+//   brandImg: '/static/img/landing-home/levis.jpg',
+//   title: 'Levis',
+//   links: `/SAU/${lang}/srp?search=Levis&isListed=false`,
+// }];
 
 function SamplePrevArrow(props) {
   const { onClick } = props;
@@ -316,6 +309,21 @@ const b_d_b = {
   'MOBILE ACCESSORIES': `/SAU/${lang}/srp/${lang === 'en' ? 'mobile-accessories' : 'ملحقات-الهاتف-المحمول'}?categoryTree=true&isListed=false&sid=848,850`,
   'PERFUMES FOR WOMEN': `/SAU/${lang}/srp?search=perfumes&language=en&isListed=false`,
   WATCHES: `/SAU/${lang}/srp/watch?categoryTree=true&isListed=false&sid=892,929`,
+  'Laptop stand': `/SAU/${lang}/srp?search=Laptop%20stand&language=en&isListed=false`,
+  Headphones: `/SAU/${lang}/srp?search=headphones&language=en&isListed=false`,
+  'Mobiles Cases': `/SAU/${lang}/srp?search=Mobiles&language=en&isListed=false`,
+  'Smart Band': `/SAU/${lang}/srp?search=Smart%20Band&language=en&isListed=false`,
+  'USB Hub': `/SAU/${lang}/srp?search=USB%20Hub&language=en&isListed=false`,
+  Burberry: `/SAU/${lang}/srp?search=burberry&language=en&isListed=false`,
+  VERSACE: `/SAU/${lang}/srp?search=VERSACE&language=en&isListed=false`,
+  'Armani Exchange': `/SAU/${lang}/srp?search=Armani%20Exchange&language=en&isListed=false`,
+  Vogue: `/SAU/${lang}/srp?search=vogue&language=en&isListed=false`,
+  BVLGARI: `/SAU/${lang}/srp?search=BVLGARI&language=en&isListed=false`,
+  Ldnio: `/SAU/${lang}/srp?search=LDNIO&language=en&isListed=false`,
+  Rayban: `/SAU/${lang}/srp?search=Rayban&language=en&isListed=false`,
+  'Armani Sunglasses': `/SAU/${lang}/srp/sunglasses/?search=Armani&language=en&isListed=false&sid=1480&categoryFacet=true`,
+  'Baseus Charger': `/SAU/${lang}/srp?search=Baseus%20charger&language=en&isListed=false`,
+  Joyroom: `/SAU/${lang}/srp?search=Joyroom&language=en&isListed=false`,
 };
 
 const HomePage = () => (
@@ -394,63 +402,63 @@ const HomePage = () => (
         <div className={`${styles['fs-20']} title`}>{lang === 'en' ? 'TOP IN FASHION' : 'أعلى في الموضة'}</div>
         <div className="d1">
           <div>
-            <span className={styles['fs-16']}><span className="lite"> {lang === 'en' ? 'Kids Fashion' : 'ملابس أطفال\أطفال'}</span></span>
-            <a href={b_d_b["Kid's Fashion"]}>
-              <div className="shadow">
+            {/* <span className={styles['fs-16']}><span className="lite"> {lang === 'en' ? 'Kids Fashion' : 'ملابس أطفال\أطفال'}</span></span> */}
+            <a href={b_d_b.Burberry}>
+              <div className="d-sub">
                 <img src={d_tif[0]} className="img-responsive" />
               </div>
             </a>
-            <div className="btn">
+            {/* <div className="btn">
               <span>{lang === 'en' ? 'SHOP NOW' : 'تسوق الآن'}</span>
-            </div>
+            </div> */}
           </div>
           <div>
-            <span className={styles['fs-16']}><span className="lite"> {lang === 'en' ? 'Women\'s Clothing' : 'ملابس نسائية\نسائي'}</span></span>
-            <a href={b_d_b['Womens Clothing']}>
-              <div className="shadow">
+            {/* <span className={styles['fs-16']}><span className="lite"> {lang === 'en' ? 'Women\'s Clothing' : 'ملابس نسائية\نسائي'}</span></span> */}
+            <a href={b_d_b.VERSACE}>
+              <div className="d-sub">
                 <img src={d_tif[1]} className="img-responsive" />
               </div>
             </a>
-            <div className="btn">
+            {/* <div className="btn">
               <span>{lang === 'en' ? 'SHOP NOW' : 'تسوق الآن'}</span>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="d2">
           <div>
-            <span className={styles['fs-16']}><span className="lite">{lang === 'en' ? 'Shoes' : 'أحذية'}</span></span>
-            <a href={b_d_b.Shoes}>
-              <div className="shadow">
+            {/* <span className={styles['fs-16']}><span className="lite">{lang === 'en' ? 'Shoes' : 'أحذية'}</span></span> */}
+            <a href={b_d_b['Armani Exchange']}>
+              <div className="d-sub">
                 <img src={d_tif[2]} className="img-responsive" />
               </div>
             </a>
-            <div className="btn">
+            {/* <div className="btn">
               <span>{lang === 'en' ? 'SHOP NOW' : 'تسوق الآن'}</span>
-            </div>
+            </div> */}
           </div>
           <div>
-            <span className={styles['fs-16']}><span className="lite"> {lang === 'en' ? 'Watches' : 'ساعات اليد'}</span></span>
-            <a href={b_d_b.Watches}>
-              <div className="shadow">
+            {/* <span className={styles['fs-16']}><span className="lite"> {lang === 'en' ? 'Watches' : 'ساعات اليد'}</span></span> */}
+            <a href={b_d_b.Vogue}>
+              <div className="d-sub">
                 <img src={d_tif[3]} className="img-responsive" />
               </div>
             </a>
-            <div className="btn">
+            {/* <div className="btn">
               <span>{lang === 'en' ? 'SHOP NOW' : 'تسوق الآن'}</span>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className={`d3 ${styles.right0}`}>
           <div>
-            <span className={styles['fs-16']}><span className="lite"> {lang === 'en' ? 'Men\'s Clothing' : 'ملابس رجالية'}</span></span>
-            <a href={b_d_b['Mens Clothing']}>
-              <div className="shadow">
+            {/* <span className={styles['fs-16']}><span className="lite"> {lang === 'en' ? 'Men\'s Clothing' : 'ملابس رجالية'}</span></span> */}
+            <a href={b_d_b.BVLGARI}>
+              <div className="d3-sub">
                 <img src={d_tif[4]} className="img-responsive" />
               </div>
             </a>
-            <div className="btn">
+            {/* <div className="btn">
               <span>{lang === 'en' ? 'SHOP NOW' : 'تسوق الآن'}</span>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className={`${styles.breadcrums} ${styles['mt-10']} ${styles.pointer}`}>
@@ -461,7 +469,7 @@ const HomePage = () => (
       </div>
       <Row className={`${styles['m-15']} ${styles['mt-40']} ${styles['mb-40']} brand-details-inn`}>
         {threeCols.map(col => (
-          <Col md={4} xs={4} sm={4}>
+          <Col md={4} xs={4} sm={4} className={`${styles['pl-10']} ${styles['pr-10']}`}>
             <a href={col.link} key={col.title}>
               <img src={col.img} alt={col.title} className="img-responsive-in" />
             </a>
@@ -554,65 +562,65 @@ const HomePage = () => (
         <div>
           <div className="d1">
             <div>
-              <span className={styles['fs-16']}><span className="lite">{lang === 'en' ? 'Laptops' : 'اللاب توبات'} </span></span>
-              <a href={b_d_b.Laptops}>
-                <div className="shadow">
+              {/* <span className={styles['fs-16']}><span className="lite">{lang === 'en' ? 'Laptops' : 'اللاب توبات'} </span></span> */}
+              <a href={b_d_b['Laptop stand']}>
+                <div className="d-sub">
                   <img src={d_tie[0]} className="img-responsive" />
                 </div>
               </a>
-              <div className="btn">
+              {/* <div className="btn">
                 <span>{lang === 'en' ? 'SHOP NOW' : 'تسوق الآن'}</span>
-              </div>
+              </div> */}
             </div>
             <div>
-              <span className={styles['fs-16']}><span className="lite">{lang === 'en' ? 'Mobiles' : 'الجوالات'}
+              {/* <span className={styles['fs-16']}><span className="lite">{lang === 'en' ? 'Mobiles' : 'الجوالات'}
               </span>
-              </span>
-              <a href={b_d_b.Mobiles}>
-                <div className="shadow">
+              </span> */}
+              <a href={b_d_b.Headphones}>
+                <div className="d-sub">
                   <img src={d_tie[1]} className="img-responsive" />
                 </div>
               </a>
-              <div className="btn">
+              {/* <div className="btn">
                 <span>{lang === 'en' ? 'SHOP NOW' : 'تسوق الآن'}</span>
-              </div>
+              </div> */}
             </div>
           </div>
           <div className="d2">
             <div>
-              <span className={styles['fs-16']}><span className="lite">{lang === 'en' ? 'Cameras' : 'كاميرات'}</span></span>
-              <a href={b_d_b.Cameras}>
-                <div className="shadow">
+              {/* <span className={styles['fs-16']}><span className="lite">{lang === 'en' ? 'Cameras' : 'كاميرات'}</span></span> */}
+              <a href={b_d_b['Mobiles Cases']}>
+                <div className="d-sub">
                   <img src={d_tie[2]} className="img-responsive" />
                 </div>
               </a>
-              <div className="btn">
+              {/* <div className="btn">
                 <span>{lang === 'en' ? 'SHOP NOW' : 'تسوق الآن'}</span>
-              </div>
+              </div> */}
             </div>
             <div>
-              <span className={styles['fs-16']}><span className="lite">{lang === 'en' ? 'Kitchen Appliances' : ' أجهزة المطبخ'}</span></span>
-              <a href={b_d_b['Kitchen Appliances']}>
-                <div className="shadow">
+              {/* <span className={styles['fs-16']}><span className="lite">{lang === 'en' ? 'Kitchen Appliances' : ' أجهزة المطبخ'}</span></span> */}
+              <a href={b_d_b['Smart Band']}>
+                <div className="d-sub">
                   <img src={d_tie[3]} className="img-responsive" />
                 </div>
               </a>
-              <div className="btn">
+              {/* <div className="btn">
                 <span>{lang === 'en' ? 'SHOP NOW' : 'تسوق الآن'}</span>
-              </div>
+              </div> */}
             </div>
           </div>
           <div className={`d3 ${styles.right0}`}>
             <div>
-              <span className={styles['fs-16']}><span className="lite">{lang === 'en' ? 'Audio Devices' : 'أثاث الأطفال'}</span></span>
-              <a href={b_d_b.Speakers}>
-                <div className="shadow">
+              {/* <span className={styles['fs-16']}><span className="lite">{lang === 'en' ? 'Audio Devices' : 'أثاث الأطفال'}</span></span> */}
+              <a href={b_d_b['USB Hub']}>
+                <div className="d3-sub">
                   <img src={d_tie[4]} className="img-responsive" />
                 </div>
               </a>
-              <div className="btn">
+              {/* <div className="btn">
                 <span>{lang === 'en' ? 'SHOP NOW' : 'تسوق الآن'}</span>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -637,20 +645,20 @@ const HomePage = () => (
           prevArrow={<SamplePrevArrow />}
         >
           {b_y_l.map(i => (
-            <Col key={i} md={3} xs={3} sm={3}>
+            <Col key={i} md={3} xs={3} sm={3} className={styles['p-0']}>
               <a href={i.links} key={i.title}>
                 <div className="image">
                   <img src={i.img} alt={i.img} />
                 </div>
-                <div className="b_l">
+                {/* <div className="b_l">
                   <img src={i.brandImg} width="80" height="30" alt={i.brandImg} />
                   <SVGComponent clsName="arrow arrow-black " src="icons/common-icon/arrow" />
-                </div>
+                </div> */}
               </a>
             </Col>
           ))}
         </Slider>
-        <div className={`${styles.breadcrums} ${styles['mt-10']} ${styles.pointer}`}>
+        <div className={`${styles.breadcrums} ${styles['mt-20']} ${styles.pointer}`}>
           <span>Zara  |  Guess  |  Max  |  Nike  |  Fossil  |  Levis  |  Wrangler  |  Shein  & more…</span>
         </div>
       </Row>

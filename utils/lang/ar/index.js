@@ -411,7 +411,7 @@ export const AR_KEYWORDS = {
     GURANTEE_PRODUCTS_AT_TILA: 'ضمان شامل لجميع منتجات موقع تيله',
     RETURN_WITHIN: 'استرجاع ضمن',
     DAYS: 'الأيام',
-    PLACING_ORDER: 'إتمام طلبك',
+    PLACING_ORDER: 'تلقي طلبك',
     TRUST_PAY: 'دفع موثوق',
     SECURE_PAYMENTS_TILA: 'طرق دفع آمنة مع تيله',
     FASHION: 'الأزياء',

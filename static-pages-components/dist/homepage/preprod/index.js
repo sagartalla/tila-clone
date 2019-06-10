@@ -3,29 +3,25 @@ let sliderTBS, sliderTIE, sliderHAL, sliderDODAY, sliderBS, sliderRV;
 // const tie = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 const tbs = [{
-  img: `/static/img/landing-home/${lang === 'en' ? 'home-decor' : 'home-decor-ar'}.jpg`,
-  title: `${lang === 'en' ? 'HOME DECOR' : 'ديكورت البيت'}`,
-  key: 'HOME DECOR'
+  img: `/static/img/landing-home/${lang === 'en' ? 'main-Armani' : 'main-Armani-ar'}.png`,
+  title: 'Armani Sunglasses',
+  key: 'Armani Sunglasses'
 }, {
-  img: `/static/img/landing-home/${lang === 'en' ? 'laptops' : 'laptops-ar'}.jpg`,
-  title: `${lang === 'en' ? 'LAPTOPS' : 'اللاب توبات'}`,
-  key: 'LAPTOPS'
+  img: `/static/img/landing-home/${lang === 'en' ? 'main-Charger' : 'main-Charger-ar'}.png`,
+  title: 'Baseus Charger',
+  key: 'Baseus Charger'
 }, {
-  img: `/static/img/landing-home/${lang === 'en' ? 'mens-clothing' : 'mens-clothing-ar'}.jpg`,
-  title: `${lang === 'en' ? 'MENS CLOTHING' : 'ملابس رجالية'}`,
-  key: 'MENS CLOTHING'
+  img: `/static/img/landing-home/${lang === 'en' ? 'main-Joyroom' : 'main-Joyroom-ar'}.png`,
+  title: 'Joyroom',
+  key: 'Joyroom'
 }, {
-  img: `/static/img/landing-home/${lang === 'en' ? 'mobile-accessories' : 'mobile-accessories-ar'}.jpg`,
-  title: `${lang === 'en' ? 'MOBILE ACCESSORIES' : 'مستلزمات \إكسسورات الجوال'}`,
-  key: 'MOBILE ACCESSORIES'
+  img: `/static/img/landing-home/${lang === 'en' ? 'main-LDNIO' : 'main-LDNIO-ar'}.jpg`,
+  title: 'Ldnio',
+  key: 'Ldnio'
 }, {
-  img: `/static/img/landing-home/${lang === 'en' ? 'perfumes-for-women' : 'perfumes-for-women-ar'}.jpg`,
-  title: `${lang === 'en' ? 'PERFUMES FOR WOMEN' : 'عطور للنساء'}`,
-  key: 'PERFUMES FOR WOMEN'
-}, {
-  img: `/static/img/landing-home/${lang === 'en' ? 'watches' : 'watches-ar'}.jpg`,
-  title: `${lang === 'en' ? 'WATCHES' : 'ساعات اليد'}`,
-  key: 'WATCHES'
+  img: `/static/img/landing-home/${lang === 'en' ? 'main-RAYBAN' : 'main-RAYBAN-ar'}.jpg`,
+  title: 'Rayban',
+  key: 'Rayban'
 }];
 
 const tie = [{
@@ -88,9 +84,9 @@ const hal = [{
   key: 'Jewellery'
 }];
 
-const d_tie = ['/static/img/landing-home/d-laptops.png', '/static/img/landing-home/d-mobiles.png', '/static/img/landing-home/d-cameras.png', '/static/img/landing-home/d-kitchen.png', '/static/img/landing-home/d-audio.png'];
+const d_tie = [`/static/img/landing-home/${lang === 'en' ? 'laptop-stand' : 'laptop-stand-ar'}.jpg`, `/static/img/landing-home/${lang === 'en' ? 'headphones' : 'headphones-ar'}.jpg`, `/static/img/landing-home/${lang === 'en' ? 'mobile-case' : 'mobile-case-ar'}.jpg`, `/static/img/landing-home/${lang === 'en' ? 'smart-band' : 'smart-band-ar'}.jpg`, `/static/img/landing-home/${lang === 'en' ? 'USB-hub' : 'USB-hub-ar'}.jpg`];
 
-const d_tif = ['/static/img/landing-home/kids-fashion.png', '/static/img/landing-home/t-women-cloths.png', '/static/img/landing-home/shoes.png', '/static/img/landing-home/t-watches.png', '/static/img/landing-home/t-mens-cloths.png'];
+const d_tif = [`/static/img/landing-home/${lang === 'en' ? 'fashion-Banner-Small' : 'fashion-Banner-Small-ar'}.png`, `/static/img/landing-home/${lang === 'en' ? 'fashion-Banner-Medium.png' : 'fashion-Banner-Medium-ar.jpg'}`, `/static/img/landing-home/${lang === 'en' ? 'fashion-Banner-Medium-2' : 'fashion-Banner-Medium-2-ar'}.png`, `/static/img/landing-home/${lang === 'en' ? 'fashion-Banner-Small-2' : 'fashion-Banner-Small-2-ar'}.png`, `/static/img/landing-home/${lang === 'en' ? 'fashion-banner-large' : 'fashion-banner-large-ar'}.png`];
 
 const d_tihl = ['/static/img/landing-home/kids-furniture.png', '/static/img/landing-home/living-room-furniture.png', '/static/img/landing-home/tables.png', '/static/img/landing-home/cushions.png', '/static/img/landing-home/lights.png'];
 
@@ -183,45 +179,42 @@ const twoCols = [{
 }];
 
 const threeCols = [{
-  img: '/static/img/landing-home/shoes.jpg',
-  link: `/SAU/${lang}/srp?search=footwear&isListed=false`,
-  title: 'Shoes'
+  img: `/static/img/landing-home/${lang === 'en' ? 'THIRD-LAPTOP-STAND' : 'THIRD-LAPTOP-STAND-ar'}.jpg`,
+  link: `/SAU/${lang}/srp?search=Laptop%20stand&language=en&isListed=false`,
+  title: 'LAPTOP STAND'
 }, {
-  img: '/static/img/landing-home/ls2.jpg',
-  link: `/SAU/${lang}/srp?search=LS2&isListed=false`,
-  title: 'LS2'
+  img: `/static/img/landing-home/${lang === 'en' ? 'THIRD-SMART-BAND' : 'THIRD-SMART-BAND-ar'}.jpg`,
+  link: `/SAU/${lang}/srp?search=Smart%20Band&language=en&isListed=false`,
+  title: 'SMART BAND'
 }, {
-  img: '/static/img/landing-home/furniture.jpg',
-  link: `/SAU/${lang}/srp?search=Furniture&isListed=false`,
-  title: 'Furniture'
+  img: `/static/img/landing-home/${lang === 'en' ? 'third-HEADPHONE' : 'third-HEADPHONE-ar'}.jpg`,
+  link: `/SAU/${lang}/srp?search=headphones&language=en&isListed=false`,
+  title: 'HEADPHONE'
 }];
 
 const b_y_l = [{
-  img: '/static/img/landing-home/levis-m.jpg',
-  brandImg: '/static/img/landing-home/levis.jpg',
-  title: 'Levis',
-  links: `/SAU/${lang}/srp?search=Levis&isListed=false`
+  img: '/static/img/landing-home/Joyroom.jpg',
+  title: 'Joyroom',
+  links: `/SAU/${lang}/srp?search=Joyroom&language=en&isListed=false`
 }, {
-  img: '/static/img/landing-home/guess-m.jpg',
-  brandImg: '/static/img/landing-home/guess.jpg',
-  title: 'Guess',
-  links: `/SAU/${lang}/srp?search=Guess&isListed=false`
+  img: '/static/img/landing-home/LDNIO.jpg',
+  title: 'LDNIO',
+  links: `/SAU/${lang}/srp?search=LDNIO&language=en&isListed=false`
 }, {
-  img: '/static/img/landing-home/max-m.jpg',
-  brandImg: '/static/img/landing-home/max.jpg',
-  title: 'Max',
-  links: `/SAU/${lang}/srp?search=Max&isListed=false`
+  img: '/static/img/landing-home/Ray-Ban.jpg',
+  title: 'Ray-Ban',
+  links: `/SAU/${lang}/srp?search=Ryban&language=en&isListed=false`
 }, {
-  img: '/static/img/landing-home/gucci-m.jpg',
-  brandImg: '/static/img/landing-home/gucci.jpg',
-  title: 'Gucci',
-  links: `/SAU/${lang}/srp?search=Gucci&isListed=false`
-}, {
-  img: '/static/img/landing-home/levis-m.jpg',
-  brandImg: '/static/img/landing-home/levis.jpg',
-  title: 'Levis',
-  links: `/SAU/${lang}/srp?search=Levis&isListed=false`
+  img: '/static/img/landing-home/Baseus.jpg',
+  title: 'Baseus',
+  links: `/SAU/${lang}/srp?search=Baseus&language=en&isListed=false`
 }];
+// {
+//   img: '/static/img/landing-home/levis-m.jpg',
+//   brandImg: '/static/img/landing-home/levis.jpg',
+//   title: 'Levis',
+//   links: `/SAU/${lang}/srp?search=Levis&isListed=false`,
+// }];
 
 function SamplePrevArrow(props) {
   const { onClick } = props;
@@ -287,7 +280,22 @@ const b_d_b = {
   'MENS CLOTHING': `/SAU/${lang}/srp/${lang === 'en' ? 'clothing' : 'ملابس'}?categoryTree=true&isListed=false&sid=892,899`,
   'MOBILE ACCESSORIES': `/SAU/${lang}/srp/${lang === 'en' ? 'mobile-accessories' : 'ملحقات-الهاتف-المحمول'}?categoryTree=true&isListed=false&sid=848,850`,
   'PERFUMES FOR WOMEN': `/SAU/${lang}/srp?search=perfumes&language=en&isListed=false`,
-  WATCHES: `/SAU/${lang}/srp/watch?categoryTree=true&isListed=false&sid=892,929`
+  WATCHES: `/SAU/${lang}/srp/watch?categoryTree=true&isListed=false&sid=892,929`,
+  'Laptop stand': `/SAU/${lang}/srp?search=Laptop%20stand&language=en&isListed=false`,
+  Headphones: `/SAU/${lang}/srp?search=headphones&language=en&isListed=false`,
+  'Mobiles Cases': `/SAU/${lang}/srp?search=Mobiles&language=en&isListed=false`,
+  'Smart Band': `/SAU/${lang}/srp?search=Smart%20Band&language=en&isListed=false`,
+  'USB Hub': `/SAU/${lang}/srp?search=USB%20Hub&language=en&isListed=false`,
+  Burberry: `/SAU/${lang}/srp?search=burberry&language=en&isListed=false`,
+  VERSACE: `/SAU/${lang}/srp?search=VERSACE&language=en&isListed=false`,
+  'Armani Exchange': `/SAU/${lang}/srp?search=Armani%20Exchange&language=en&isListed=false`,
+  Vogue: `/SAU/${lang}/srp?search=vogue&language=en&isListed=false`,
+  BVLGARI: `/SAU/${lang}/srp?search=BVLGARI&language=en&isListed=false`,
+  Ldnio: `/SAU/${lang}/srp?search=LDNIO&language=en&isListed=false`,
+  Rayban: `/SAU/${lang}/srp?search=Rayban&language=en&isListed=false`,
+  'Armani Sunglasses': `/SAU/${lang}/srp/sunglasses/?search=Armani&language=en&isListed=false&sid=1480&categoryFacet=true`,
+  'Baseus Charger': `/SAU/${lang}/srp?search=Baseus%20charger&language=en&isListed=false`,
+  Joyroom: `/SAU/${lang}/srp?search=Joyroom&language=en&isListed=false`
 };
 
 const HomePage = () => React.createElement(
@@ -427,31 +435,12 @@ const HomePage = () => React.createElement(
           'div',
           null,
           React.createElement(
-            'span',
-            { className: styles['fs-16'] },
-            React.createElement(
-              'span',
-              { className: 'lite' },
-              ' ',
-              lang === 'en' ? 'Kids Fashion' : 'ملابس أطفال\أطفال'
-            )
-          ),
-          React.createElement(
             'a',
-            { href: b_d_b["Kid's Fashion"] },
+            { href: b_d_b.Burberry },
             React.createElement(
               'div',
-              { className: 'shadow' },
+              { className: 'd-sub' },
               React.createElement('img', { src: d_tif[0], className: 'img-responsive' })
-            )
-          ),
-          React.createElement(
-            'div',
-            { className: 'btn' },
-            React.createElement(
-              'span',
-              null,
-              lang === 'en' ? 'SHOP NOW' : 'تسوق الآن'
             )
           )
         ),
@@ -459,31 +448,12 @@ const HomePage = () => React.createElement(
           'div',
           null,
           React.createElement(
-            'span',
-            { className: styles['fs-16'] },
-            React.createElement(
-              'span',
-              { className: 'lite' },
-              ' ',
-              lang === 'en' ? 'Women\'s Clothing' : 'ملابس نسائية\نسائي'
-            )
-          ),
-          React.createElement(
             'a',
-            { href: b_d_b['Womens Clothing'] },
+            { href: b_d_b.VERSACE },
             React.createElement(
               'div',
-              { className: 'shadow' },
+              { className: 'd-sub' },
               React.createElement('img', { src: d_tif[1], className: 'img-responsive' })
-            )
-          ),
-          React.createElement(
-            'div',
-            { className: 'btn' },
-            React.createElement(
-              'span',
-              null,
-              lang === 'en' ? 'SHOP NOW' : 'تسوق الآن'
             )
           )
         )
@@ -495,30 +465,12 @@ const HomePage = () => React.createElement(
           'div',
           null,
           React.createElement(
-            'span',
-            { className: styles['fs-16'] },
-            React.createElement(
-              'span',
-              { className: 'lite' },
-              lang === 'en' ? 'Shoes' : 'أحذية'
-            )
-          ),
-          React.createElement(
             'a',
-            { href: b_d_b.Shoes },
+            { href: b_d_b['Armani Exchange'] },
             React.createElement(
               'div',
-              { className: 'shadow' },
+              { className: 'd-sub' },
               React.createElement('img', { src: d_tif[2], className: 'img-responsive' })
-            )
-          ),
-          React.createElement(
-            'div',
-            { className: 'btn' },
-            React.createElement(
-              'span',
-              null,
-              lang === 'en' ? 'SHOP NOW' : 'تسوق الآن'
             )
           )
         ),
@@ -526,31 +478,12 @@ const HomePage = () => React.createElement(
           'div',
           null,
           React.createElement(
-            'span',
-            { className: styles['fs-16'] },
-            React.createElement(
-              'span',
-              { className: 'lite' },
-              ' ',
-              lang === 'en' ? 'Watches' : 'ساعات اليد'
-            )
-          ),
-          React.createElement(
             'a',
-            { href: b_d_b.Watches },
+            { href: b_d_b.Vogue },
             React.createElement(
               'div',
-              { className: 'shadow' },
+              { className: 'd-sub' },
               React.createElement('img', { src: d_tif[3], className: 'img-responsive' })
-            )
-          ),
-          React.createElement(
-            'div',
-            { className: 'btn' },
-            React.createElement(
-              'span',
-              null,
-              lang === 'en' ? 'SHOP NOW' : 'تسوق الآن'
             )
           )
         )
@@ -562,31 +495,12 @@ const HomePage = () => React.createElement(
           'div',
           null,
           React.createElement(
-            'span',
-            { className: styles['fs-16'] },
-            React.createElement(
-              'span',
-              { className: 'lite' },
-              ' ',
-              lang === 'en' ? 'Men\'s Clothing' : 'ملابس رجالية'
-            )
-          ),
-          React.createElement(
             'a',
-            { href: b_d_b['Mens Clothing'] },
+            { href: b_d_b.BVLGARI },
             React.createElement(
               'div',
-              { className: 'shadow' },
+              { className: 'd3-sub' },
               React.createElement('img', { src: d_tif[4], className: 'img-responsive' })
-            )
-          ),
-          React.createElement(
-            'div',
-            { className: 'btn' },
-            React.createElement(
-              'span',
-              null,
-              lang === 'en' ? 'SHOP NOW' : 'تسوق الآن'
             )
           )
         )
@@ -620,7 +534,7 @@ const HomePage = () => React.createElement(
       { className: `${styles['m-15']} ${styles['mt-40']} ${styles['mb-40']} brand-details-inn` },
       threeCols.map(col => React.createElement(
         Col,
-        { md: 4, xs: 4, sm: 4 },
+        { md: 4, xs: 4, sm: 4, className: `${styles['pl-10']} ${styles['pr-10']}` },
         React.createElement(
           'a',
           { href: col.link, key: col.title },
@@ -864,31 +778,12 @@ const HomePage = () => React.createElement(
             'div',
             null,
             React.createElement(
-              'span',
-              { className: styles['fs-16'] },
-              React.createElement(
-                'span',
-                { className: 'lite' },
-                lang === 'en' ? 'Laptops' : 'اللاب توبات',
-                ' '
-              )
-            ),
-            React.createElement(
               'a',
-              { href: b_d_b.Laptops },
+              { href: b_d_b['Laptop stand'] },
               React.createElement(
                 'div',
-                { className: 'shadow' },
+                { className: 'd-sub' },
                 React.createElement('img', { src: d_tie[0], className: 'img-responsive' })
-              )
-            ),
-            React.createElement(
-              'div',
-              { className: 'btn' },
-              React.createElement(
-                'span',
-                null,
-                lang === 'en' ? 'SHOP NOW' : 'تسوق الآن'
               )
             )
           ),
@@ -896,30 +791,12 @@ const HomePage = () => React.createElement(
             'div',
             null,
             React.createElement(
-              'span',
-              { className: styles['fs-16'] },
-              React.createElement(
-                'span',
-                { className: 'lite' },
-                lang === 'en' ? 'Mobiles' : 'الجوالات'
-              )
-            ),
-            React.createElement(
               'a',
-              { href: b_d_b.Mobiles },
+              { href: b_d_b.Headphones },
               React.createElement(
                 'div',
-                { className: 'shadow' },
+                { className: 'd-sub' },
                 React.createElement('img', { src: d_tie[1], className: 'img-responsive' })
-              )
-            ),
-            React.createElement(
-              'div',
-              { className: 'btn' },
-              React.createElement(
-                'span',
-                null,
-                lang === 'en' ? 'SHOP NOW' : 'تسوق الآن'
               )
             )
           )
@@ -931,30 +808,12 @@ const HomePage = () => React.createElement(
             'div',
             null,
             React.createElement(
-              'span',
-              { className: styles['fs-16'] },
-              React.createElement(
-                'span',
-                { className: 'lite' },
-                lang === 'en' ? 'Cameras' : 'كاميرات'
-              )
-            ),
-            React.createElement(
               'a',
-              { href: b_d_b.Cameras },
+              { href: b_d_b['Mobiles Cases'] },
               React.createElement(
                 'div',
-                { className: 'shadow' },
+                { className: 'd-sub' },
                 React.createElement('img', { src: d_tie[2], className: 'img-responsive' })
-              )
-            ),
-            React.createElement(
-              'div',
-              { className: 'btn' },
-              React.createElement(
-                'span',
-                null,
-                lang === 'en' ? 'SHOP NOW' : 'تسوق الآن'
               )
             )
           ),
@@ -962,30 +821,12 @@ const HomePage = () => React.createElement(
             'div',
             null,
             React.createElement(
-              'span',
-              { className: styles['fs-16'] },
-              React.createElement(
-                'span',
-                { className: 'lite' },
-                lang === 'en' ? 'Kitchen Appliances' : ' أجهزة المطبخ'
-              )
-            ),
-            React.createElement(
               'a',
-              { href: b_d_b['Kitchen Appliances'] },
+              { href: b_d_b['Smart Band'] },
               React.createElement(
                 'div',
-                { className: 'shadow' },
+                { className: 'd-sub' },
                 React.createElement('img', { src: d_tie[3], className: 'img-responsive' })
-              )
-            ),
-            React.createElement(
-              'div',
-              { className: 'btn' },
-              React.createElement(
-                'span',
-                null,
-                lang === 'en' ? 'SHOP NOW' : 'تسوق الآن'
               )
             )
           )
@@ -997,30 +838,12 @@ const HomePage = () => React.createElement(
             'div',
             null,
             React.createElement(
-              'span',
-              { className: styles['fs-16'] },
-              React.createElement(
-                'span',
-                { className: 'lite' },
-                lang === 'en' ? 'Audio Devices' : 'أثاث الأطفال'
-              )
-            ),
-            React.createElement(
               'a',
-              { href: b_d_b.Speakers },
+              { href: b_d_b['USB Hub'] },
               React.createElement(
                 'div',
-                { className: 'shadow' },
+                { className: 'd3-sub' },
                 React.createElement('img', { src: d_tie[4], className: 'img-responsive' })
-              )
-            ),
-            React.createElement(
-              'div',
-              { className: 'btn' },
-              React.createElement(
-                'span',
-                null,
-                lang === 'en' ? 'SHOP NOW' : 'تسوق الآن'
               )
             )
           )
@@ -1076,7 +899,7 @@ const HomePage = () => React.createElement(
         },
         b_y_l.map(i => React.createElement(
           Col,
-          { key: i, md: 3, xs: 3, sm: 3 },
+          { key: i, md: 3, xs: 3, sm: 3, className: styles['p-0'] },
           React.createElement(
             'a',
             { href: i.links, key: i.title },
@@ -1084,19 +907,13 @@ const HomePage = () => React.createElement(
               'div',
               { className: 'image' },
               React.createElement('img', { src: i.img, alt: i.img })
-            ),
-            React.createElement(
-              'div',
-              { className: 'b_l' },
-              React.createElement('img', { src: i.brandImg, width: '80', height: '30', alt: i.brandImg }),
-              React.createElement(SVGComponent, { clsName: 'arrow arrow-black ', src: 'icons/common-icon/arrow' })
             )
           )
         ))
       ),
       React.createElement(
         'div',
-        { className: `${styles.breadcrums} ${styles['mt-10']} ${styles.pointer}` },
+        { className: `${styles.breadcrums} ${styles['mt-20']} ${styles.pointer}` },
         React.createElement(
           'span',
           null,
