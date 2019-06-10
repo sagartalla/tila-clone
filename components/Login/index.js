@@ -21,7 +21,7 @@ import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './login_en.styl';
 import styles_ar from './login_ar.styl';
 import ShowHidePassword from './ShowHidePassword';
-
+/* eslint-disable */
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 const { LOGIN_PAGE } = languageDefinations();
 class Login extends Component {
@@ -54,6 +54,7 @@ class Login extends Component {
       clicked: false,
       showVerifyScreen: props.showEmailScreen || false,
       hide: true,
+      showLoginSteps: true,
     };
     this.login = this.login.bind(this);
     this.onChangeField = this.onChangeField.bind(this);
@@ -61,7 +62,9 @@ class Login extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
   componentWillReceiveProps(nextProps) {
+    debugger;
     let { userCreds, error, showEmailScreen } = nextProps;
+    let { showVerifyScreen } = this.state;
     userCreds = userCreds || this.props.userCreds;
     if (error) {
       this.props.track('SignIn', error);
@@ -79,6 +82,7 @@ class Login extends Component {
     this.setState({
       showVerifyScreen: showEmailScreen,
     });
+    console.log('nextProps', nextProps);
   }
 
   hideToggle = () => {
@@ -136,6 +140,7 @@ class Login extends Component {
     const {
       email, password, phone, country, clicked,
     } = this.state;
+    let { showVerifyScreen } = this.state;
     const validation = this.validations.validate(this.state);
     if (email === '') {
       this.fireCustomEventClick('emptylogin');
@@ -196,28 +201,27 @@ class Login extends Component {
   }
 
   handleClick() {
-    this.setState({ forgotPassword: true });
+    this.setState({ forgotPassword: true, showLoginSteps: false, });
   }
 
   render() {
     const { userCreds, loadingStatus, userInfo } = this.props;
-    const { mode, error, validation, clicked, showVerifyScreen, hide } = this.state;
+    const { mode, error, validation, clicked, showVerifyScreen, hide, showLoginSteps, forgotPassword } = this.state;
     return (
-      <Modal className={`react-router-modal__modal ${styles['login-reg-modal']} ${styles['p-20']}`} onBackdropClick={this.onBackdropClick}>
+      <Modal className={`react-router-modal__modal ${styles['login-reg-modal']} ${styles['p-10']}`} onBackdropClick={this.onBackdropClick}>
         <Row className={`${styles['bg-white']} ${styles['m-0']}`}>
-          { !this.state.forgotPassword ?
         <div className={`${styles.flex}`}>
-          <Col md={6} xs={12} sm={6} className={`${styles['pl-0']} ${styles['m-hdn']}`}>
-            <div className={styles['image-placeholder']}>
-              <img className={styles['img-responsive']} src={`${constants.mediaDomain}/pim/15f45930-fecf-4f7b-a3d6-613d41196c20/workbench/image/a1ccb74a-1858-42dd-8c38-cfb103e85bb2/login-screen.jpeg`} />
+          <Col md={5} xs={11} sm={5} className={`${styles['pl-0']} ${styles['pr-10']} ${styles['m-hdn']}`}>
+            <div className={`${styles['image-placeholder']}`}>
+              <img className={`${styles['img-responsive']} ${styles['border-radius4']}`} src={`${constants.mediaDomain}/pim/15f45930-fecf-4f7b-a3d6-613d41196c20/workbench/image/a1ccb74a-1858-42dd-8c38-cfb103e85bb2/login-screen.jpeg`} />
             </div>
           </Col>
-          {!showVerifyScreen ?
-          <Col md={6} xs={12} sm={6}>
+          <Col md={7} xs={12} sm={7} className={`${styles['bg-white']} ${styles['border-radius4']}`}>
             <div className={`${styles.flex} ${styles['align-center']} ${styles['justify-between']} ${styles['flex-row']}`}>
-            <div className={`${styles.flex} ${styles.pointer}`} onClick={this.onBackdropClick}><SVGComponent clsName={`${styles['cross-icon']}`} src="icons/common-icon/cross-button" /></div>
-              <h3 className={`${styles['fs-26']} ${styles['mb-25']} ${styles['m-fs-20']}`}>
+            <div className={`${styles.flex} ${styles['mt-10']} ${styles.pointer}`} onClick={this.onBackdropClick}><SVGComponent clsName={`${styles['cross-icon']}`} src="icons/common-icon/cross-button" /></div>
+              {/* <h3 className={`${styles['fs-26']} ${styles['mb-25']} ${styles['m-fs-20']}`}>
                 <div>
+                  {showLoginSteps &&
                   <span className={`${styles['ff-b']} ${styles['pl-10']}`}>
                     {
                       mode === 'register'
@@ -227,10 +231,12 @@ class Login extends Component {
                         LOGIN_PAGE.TILA_COM
                     }
 
-                  </span>
+                  </span>}
                 </div>
-              </h3>
+              </h3> */}
             </div>
+            {showLoginSteps &&
+          <>
             {
               error
                 ?
@@ -392,22 +398,21 @@ class Login extends Component {
                 </h4>
               }
             </div>
-          </Col> :
-          <Col md={6} xs={6} className={`${styles.flex}`}>
+            </>
+            }
+            {showVerifyScreen &&
             <VerifyEmail
               email={userInfo.email}
               onBackdropClick={this.onBackdropClick}
               loadingStatus={loadingStatus}
+            />}
+            {forgotPassword &&
+            <ForgotPassword
+              userInfo={userInfo}
             />
+            }
           </Col>
-          }
         </div>
-          :
-        <ForgotPassword
-          enteredEmail={this.state.email}
-        />
-      }
-
         </Row>
       </Modal>
     );

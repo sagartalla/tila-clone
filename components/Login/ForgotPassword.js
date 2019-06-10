@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import { Col } from 'react-bootstrap';
-import Btn from '../common/Button';
+import Button from '../common/CommonButton';
 import { languageDefinations } from '../../utils/lang';
 import { selectors, actionCreators } from '../../store/cam/personalDetails';
 import { actionCreators as authActionCreators } from '../../store/auth';
@@ -20,7 +19,7 @@ const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...s
 
 const { LOGIN_PAGE } = languageDefinations();
 
-// eslint-disable-next-line
+/* eslint- disable */
 const emailPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 class ForgotPassword extends Component {
   constructor(props) {
@@ -30,10 +29,14 @@ class ForgotPassword extends Component {
       showInput: '',
       userNameError: false,
       errorMsg: '',
+      radioValue: '',
+      showModesToSelect: false,
+      showSecurityQuestions: true,
     };
     this.sendLink = this.sendLink.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.switchState = this.switchState.bind(this);
+    this.validatePassKey = this.validatePassKey.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -100,34 +103,91 @@ class ForgotPassword extends Component {
     } else resetShowLogin();
   }
 
+  handleChange = (e) => {
+    const value = e.target.getAttribute('data-id');
+    this.setState({
+      radioValue: value,
+    });
+  }
+
+  validatePassKey(e) {
+    const key = e.target.getAttribute('id');
+  }
+  showModesToSelect = () => {
+    this.setState({
+      showModesToSelect: true,
+      showSecurityQuestions: false,
+    });
+  }
+  handleForgotPassword = () => {
+    this.setState({
+      showInput: true, // just example change state
+    });
+  }
+
   render() {
     const {
-      errorMsg, userNameError, email, showInput,
+      showInput, radioValue, showModesToSelect, showSecurityQuestions,
     } = this.state;
+    const { userInfo } = this.props;
     return (
-      <div className={styles['forgot-password']}>
-        <h2><b>{LOGIN_PAGE.FORGOT_PASSWORD}</b></h2>
-        {showInput === '' ?
+      <div className={`${styles['forgot-password']} ${styles.flex} ${styles['flex-colum']} ${styles['justify-around']}`}>
+        <div>
+          <h3 className={`${styles['fs-22']} ${styles['mt-0']} ${styles['mb-10']} ${styles['ff-b']}`}>{LOGIN_PAGE.FORGOT_PASSWORD}</h3>
+          {showSecurityQuestions && <div className={`${styles['text-clr']}`}>Please answer the security questions below to reset the password</div>}
+        </div>
+        {showSecurityQuestions &&
+        <>
           <div>
-            <div className={`${styles['fp-input']} ${styles['pb-10']}`}>
-              <input name="email" type="email" onChange={this.handleChange} placeholder={LOGIN_PAGE.REGISTERED_EMAIL_ID} value={email} required />
-              {userNameError && <span className={`${styles['thick-red-clr']}`}>{errorMsg}</span>}
+            <label className={`${styles['label-light-grey']}`}>What is your Birth place?*</label>
+            <input name="input" type="text" autoComplete="off" />
+            <label className={`${styles['mt-40']} ${styles['label-light-grey']}`}>What i your mothers maiden name?*</label>
+            <input name="input" type="text" autoComplete="off" />
+          </div>
+          <Button
+            className={`${styles['flex-center']}  ${styles.width100} ${styles['fs-14']} ${styles['text-uppercase']} ${styles['button-radius']}`}
+            btnText="Next"
+            onClick={this.showModesToSelect}
+          />
+       </>}
+        {showModesToSelect && showInput === '' ?
+      <>
+        <span className={`${styles['radio-buttons']} ${styles.flex} ${styles['flex-colum']} ${styles['justify-around']}`}>
+          <div className={`${styles.flex}`}>
+            <input name="addr_checkbox" type="radio" className={`${styles['radio-btn']} ${styles['radio-margin']}`} data-id="email" onChange={this.handleChange} />
+            <span>
+              <div className={radioValue === 'email' && `${styles['ff-b']}`}>Reset Password by Email:</div>
+              <div className={radioValue === 'email' && `${styles['fs-14']} ${styles['ff-b']}`}>{userInfo.email || 'susmitha@gmail.com'}</div>
+            </span>
+          </div>
+          <div className={`${styles.border}`} />
+          <span>
+            <div className={`${styles.flex}`}>
+              <input name="addr_checkbox" type="radio" className={`${styles['radio-btn']} ${styles['radio-margin']}`} data-id="otp" onChange={this.handleChange} />
+              <span>
+                <div className={radioValue === 'otp' && `${styles['fs-14']} ${styles['ff-b']}`}>Reset by Mobile OTP:</div>
+                <div className={radioValue === 'otp' && `${styles['fs-14']} ${styles['ff-b']}`}>{userInfo.mobile_number || '121212112'}</div>
+              </span>
             </div>
-            <Col xs={12} md={12} className={`${styles['pt-30']}`}>
-              <Btn className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles['update-profile-btn']} ${styles['text-uppercase']}`} btnText={LOGIN_PAGE.SEND_VERIFICATION_LINK} onClick={this.sendLink} />
-            </Col>
-          </div>
-                :
-          <div>
-            <VerifyStatus
-              resetLogin={this.resetShowLogin}
-              switchState={this.switchState}
-              showInput={showInput}
-              forgotPasswordStatus={this.props.forgotPasswordStatus}
-              sendLink={this.sendLink}
-            />
-          </div>
-                }
+          </span>
+        </span>
+        <Button
+          className={`${styles['flex-center']}  ${styles.width100} ${styles['fs-14']} ${styles['text-uppercase']} ${styles['button-radius']}`}
+          disabled={radioValue === ''}
+          onClick={this.handleForgotPassword}
+          btnText="Next"
+        />
+      </> :
+      <VerifyStatus
+        resetLogin={this.resetShowLogin}
+        switchState={this.switchState}
+        showInput={showInput}
+        radioValue={radioValue}
+        forgotPasswordStatus={this.props.forgotPasswordStatus}
+        sendLink={this.sendLink}
+        validatePassKey={this.validatePassKey}
+      />
+        }
       </div>
     );
   }

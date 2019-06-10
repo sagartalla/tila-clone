@@ -4,7 +4,8 @@
   min-height: 423px;
   background: #ccc;
   .img-responsive
-    max-height 100%
+    object-fit cover
+    height 100%
     max-width 100%
 
 .tickmark-part
@@ -19,17 +20,35 @@
   text-align: center;
 
 .forgot-password
-  font-weight: bold;
   margin-left: 20px;
   margin-right: 20px;
   text-align: justify;
+  height: 90%;
+  .radio-margin
+   margin-right: 10px;
+  .radio-buttons
+   min-height: 150px;
+  .border
+    border: 0.5px solid #f2f2f2
   .reset-link
     background-color: light-card-green;
-    border: 1px solid generic-green-color;
     padding: 10px;
-    font-size: large;
     display: flex;
     justify-content: space-between;
+    flex-direction: column;
+    height: 200px;
+  .reset-link-mobile
+    background-color: light-card-green;
+    padding: 10px;
+  .inputOTP
+    border: none;
+    border-bottom: 1px solid;
+    width: 40px;
+    outline: none;
+    text-align: center;
+  .email-success-icon
+    width: 73px;
+    height: 69px;
   .bg-light-gray
     color: dark-gray;
   .invalid-email
@@ -89,17 +108,40 @@
   background: white;
   padding: 20px;
   border-radius 10px
-  width: 35%
+  height 90%
+  .reset-main
+   background light-brdr
+   border-radius 2px
+  .reset-password-icon
+   width 73px
+   height 71px
   .light-gray
-    color: dark-gray;
-    
+    color dark-gray
+
 .verify-email
     background-color: rgba(25, 197, 150, 0.08);
     border: 1px solid #19c596;
     .tickmark-icon
       width 16px
       height 16px
-
+      
+.complete-login
+  min-height 430px
+  .img-responsive
+    width 32px
+  .gender-select-main
+    .gender-or
+      width 24px
+      height 24px
+      border-radius 50%
+      background popup-header
+      color cam-lgt-gray
+    a
+      display flex
+      flex-direction column
+      .gender-select-inn
+        width 64px
+        height 64px
 @media screen and (min-device-width: 320px) and (max-device-width: 736px) and (orientation : portrait){
   .login-form {
     margin 20px 0 20px 0

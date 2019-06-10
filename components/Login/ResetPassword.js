@@ -1,12 +1,11 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Col } from 'react-bootstrap';
-import Btn from '../common/Button';
+import { Row, Col } from 'react-bootstrap';
 import { languageDefinations } from '../../utils/lang';
 import { actionCreators } from '../../store/cam/personalDetails';
 import SVGComponent from '../common/SVGComponet';
-
+import Button from '../common/CommonButton';
 import lang from '../../utils/language';
 
 import main_en from '../../layout/main/main_en.styl';
@@ -19,7 +18,7 @@ import ShowHidePassword from './ShowHidePassword';
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const { LOGIN_PAGE } = languageDefinations();
-
+/* eslint-disable */
 class ResetPassword extends Component {
   constructor(props) {
     super(props);
@@ -68,22 +67,24 @@ class ResetPassword extends Component {
     render() {
       const { password, confirmPassword, hide } = this.state;
       return (
-        <div>
-          <HeaderBar hideLogin hideMegamenu hideSearch/>
+        <>
             {!this.state.success ?
-              <div className={`${styles.flex} ${styles['justify-center']} ${styles['ht-100vh']} ${styles['flex-center']} ${styles['bg-gray']}`}>
-              <div className={styles['reset-password']}>
-                <div className={`${styles['fs-30']}`}><b>{LOGIN_PAGE.RESET_PASSWORD}</b></div>
-                <div className={`${styles['light-gray']} ${styles['fs-16']}`}>
+              <div className={`${styles['reset-password']} ${styles.flex} ${styles['justify-between']} ${styles['flex-colum']}`}>
+              <Row className={`${styles['reset-main']} ${styles['flex-center']} ${styles['p-10']}`}>
+                <Col md={7} className={`${styles['fs-20']}`}><b>{LOGIN_PAGE.RESET_PASSWORD}</b></Col>
+                <Col md={5} ><SVGComponent clsName={`${styles['reset-password-icon']}`} src="icons/common-icon/reset-password" /></Col>
+                </Row>
+                <h4 className={`${styles['fs-16']}`}>
                 {LOGIN_PAGE.PLEASE_SET_YOUR_SECURE_PASSWORD}
-                </div>
+                </h4>
                 <form>
                 <div className={`${styles['mt-15']} ${styles.relative}`}>
-                    <label className={`${styles['lgt-blue']}`}>{LOGIN_PAGE.ENTER_YOUR_NEW_PASSWORD}</label>
+                    <label className={`${styles['label-light-grey']}`}>{LOGIN_PAGE.ENTER_NEW_PASSWORD}</label>
                     <div className={`${styles['reset_show']}`}>
                     <input
                       type={hide ? 'password' : 'text'}
                       name="password"
+                      autoComplete="off"
                       className={`${styles.width100}`}
                       placeholder={LOGIN_PAGE.PASSWORD}
                       value={password}
@@ -93,34 +94,24 @@ class ResetPassword extends Component {
                     <ShowHidePassword hide={hide} hideToggle={this.hideToggle}/>
                     </div>
                 </div>
-                <div className={`${styles['mt-15']}`}>
-                    <label className={`${styles['lgt-blue']}`}>{LOGIN_PAGE.CONFIRM_YOUR_NEW_PASSWORD}</label>
-                    <input
-                      type="password"
-                      name="confirmPassword"
-                      placeholder={LOGIN_PAGE.CONFIRM_PASSWORD}
-                      value={confirmPassword}
-                      onChange={this.onChange}
-                      required
-                    />
-                </div>
                 </form>
-                <Col xs={12} md={12} className={`${styles['p-0']} ${styles['pt-30']}`}>
-                    <Btn className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles['update-profile-btn']} ${styles['text-uppercase']}`} btnText={LOGIN_PAGE.SAVE_PASSWORD} onClick={this.passwordSuccess} />
-                </Col>
-              </div>
+                <Button
+                    className={`${styles['flex-center']} ${styles.width100} ${styles['fs-14']} ${styles['text-uppercase']} ${styles['button-radius']}`}
+                    onClick={this.passwordSuccess}
+                    btnText={LOGIN_PAGE.NEXT}
+                />
               </div>
             :
                 <div className={`${styles.flex} ${styles['justify-center']} ${styles['ht-100vh']} ${styles['flex-center']} ${styles['flex-col']} ${styles['bg-gray']}`}>
                 <div className={`${styles['reset-password']} ${styles.flex} ${styles['justify-center']} ${styles['flex-center']} ${styles['flex-col']} ${styles['ht-240']}`}>
                     <Col xs={12} md={12} className={`${styles['flex-center']} ${styles['tickmark-part']}`}>
-                        <SVGComponent clsName={`${styles['tickmark-icon']}`} src="icons/common-icon/bg-tick-mark" />
+                        <SVGComponent clsName={`${styles['tickmark-icon']}`} src="icons/common-icon/reset-password" />
                     </Col>
                     <h2 className={styles['text-center']}><b>{LOGIN_PAGE.PASSWORD_RESET_SUCCESSFULL}</b></h2>
                     </div>
                 </div>
             }
-            </div>
+            </>
       );
     }
 }
