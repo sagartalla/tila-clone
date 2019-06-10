@@ -141,12 +141,19 @@
     .d1, .d2
       width 66.66%
       display inline-block
+      .d-sub
+        height 324px
+    .d3 .d3-sub
+      height 662px
+      img
+        object-fit fill
     .d1, .d2, .d3
       position relative
       display inline-flex
       img 
         width 100%
-        object-fit contain
+        height 100%
+        object-fit fill
       .shadow::after
         position absolute
         width calc(100% - 10px)

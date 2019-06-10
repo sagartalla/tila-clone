@@ -425,7 +425,7 @@ export const EN_KEYWORDS = {
     GURANTEE_PRODUCTS_AT_TILA: 'guarantee for all products at tila.com',
     RETURN_WITHIN: 'Return within',
     DAYS: 'days',
-    PLACING_ORDER: 'placing your order',
+    PLACING_ORDER: 'receiving your order',
     TRUST_PAY: 'Trust pay',
     SECURE_PAYMENTS_TILA: 'secure payments with tila',
     FASHION: 'fashion',

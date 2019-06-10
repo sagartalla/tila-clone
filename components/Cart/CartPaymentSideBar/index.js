@@ -39,7 +39,7 @@ class CartAndPaymentSideBar extends Component {
   }
   render() {
     const {
-      checkoutBtnHandler, showCheckoutBtn, showInstant, isFromCart,
+      checkoutBtnHandler, showCheckoutBtn, showInstant,
       hideUpSell, showStepper, increaseItemCnt, decreaseItemCnt,
       insnt_item_listing_id, isPdp, couponData, getCartResults, data, hideCouponCode,
     } = this.props;
@@ -85,7 +85,7 @@ class CartAndPaymentSideBar extends Component {
             <InstantCheckout
               insnt_item_listing_id={insnt_item_listing_id}
               isPdp={isPdp}
-              isFromCart={isFromCart}
+              // isFromCart={isFromCart}
               totalPrice={total_price.display_value}
               currency={currency}
               isMounted={false}

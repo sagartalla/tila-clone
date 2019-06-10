@@ -57,16 +57,26 @@ class Orders extends Component {
   }
 
   render() {
-    const { ordersData, pageDetails, getInvoice } = this.props;
+    const { ordersData, pageDetails, getInvoice, orderLoadingStatus } = this.props;
     const { currentPage } = this.state;
     return (
       <div>
         <div className={styles['orders-container']}>
           {
-          ordersData.length
+          ordersData.length > 0
           ?
           ordersData.map(order => <Order key={order.id} getInvoice={getInvoice} order={order} />)
           :
+          orderLoadingStatus ?
+          <div className={`${styles['order-result']} ${styles['flex-center']} ${styles['justify-center']} ${styles.width100}`}>
+            <div className={`${styles['loader-div']} ${styles['align-center']}`}>
+              <SVGComponent
+                clsName={styles['loader-styl']}
+                src="icons/common-icon/circleLoader"
+              >
+              </SVGComponent>
+            </div>
+            </div> :
             <div className={`${styles['no-order-part']}`}>
               <div className={`${styles['flex']} ${styles['no-order-part-inn']}`}>
                 <SVGComponent clsName={`${styles['no-order-list-icon']}`} src="icons/common-icon/no-order-icon" />
@@ -92,6 +102,7 @@ class Orders extends Component {
 const mapStateToProps = store => ({
   ordersData: selectors.getOrdersData(store),
   pageDetails: selectors.getPageDetails(store),
+  orderLoadingStatus: selectors.getOrderLoadingState(store),
 });
 
 const mapDispatchToProps = dispatch =>

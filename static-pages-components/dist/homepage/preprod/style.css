@@ -179,6 +179,24 @@
   width: 66.66%;
   display: inline-block;
 }
+.home-style-main .display-t-i-e .d1 .d-sub,
+.home-style-main .display-t-i-f .d1 .d-sub,
+.home-style-main .display-t-i-hl .d1 .d-sub,
+.home-style-main .display-t-i-e .d2 .d-sub,
+.home-style-main .display-t-i-f .d2 .d-sub,
+.home-style-main .display-t-i-hl .d2 .d-sub {
+  height: 324px;
+}
+.home-style-main .display-t-i-e .d3 .d3-sub,
+.home-style-main .display-t-i-f .d3 .d3-sub,
+.home-style-main .display-t-i-hl .d3 .d3-sub {
+  height: 662px;
+}
+.home-style-main .display-t-i-e .d3 .d3-sub img,
+.home-style-main .display-t-i-f .d3 .d3-sub img,
+.home-style-main .display-t-i-hl .d3 .d3-sub img {
+  object-fit: fill;
+}
 .home-style-main .display-t-i-e .d1,
 .home-style-main .display-t-i-f .d1,
 .home-style-main .display-t-i-hl .d1,
@@ -201,7 +219,8 @@
 .home-style-main .display-t-i-f .d3 img,
 .home-style-main .display-t-i-hl .d3 img {
   width: 100%;
-  object-fit: contain;
+  height: 100%;
+  object-fit: fill;
 }
 .home-style-main .display-t-i-e .d1 .shadow::after,
 .home-style-main .display-t-i-f .d1 .shadow::after,
