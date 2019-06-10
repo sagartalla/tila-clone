@@ -136,11 +136,14 @@ class Search extends Component {
     // oldY = window.scrollY;
   }
   render() {
-    const { query, optionalParams } = this.props;
+    const { query, optionalParams, isBrandPage } = this.props;
     const { sideBarPositionClass, containerStyle } = this.state;
     return (
       <div>
         <HeaderBar />
+        {
+          isBrandPage && <div>Brand</div>
+        }
         <Grid id="search-container" className={`${styles['pt-20']} ${styles.relative}`}>
           <Col md={2} id="sidebar-position" className={`${styles['filter-panel']} ${styles['float-l']} ${styles['border-radius4']} ${styles['bg-white']} ${styles['p-0']} ${styles[sideBarPositionClass]}`} style={containerStyle}>
             <NoSSR>
