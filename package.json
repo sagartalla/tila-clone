@@ -1,7 +1,7 @@
 {
   "name": "storefront",
   "scripts": {
-    "dev": "LOCAL=true ENV=preprod node --inspect server.js",
+    "dev": "LOCAL=true ENV=preprod node --inspect-brk server.js",
     "build": "version=$version node ./node_modules/next/dist/bin/next build",
     "start": "NODE_ENV=production ENV=dev node server.js",
     "start:ecs": "NODE_ENV=production node server.js",

@@ -27,10 +27,10 @@ client.on('data',(data)=>{
       console.log('Data recieved from tcp server :- ');
       var str = data.toString('utf8');
       var jobj =  JSON.parse(str);
-      var unflattened =  Object.unflatten(jobj);
+      // var unflattened =  Object.unflatten(jobj);
       //console.log(Object.unflatten(JSON.parse(data.toString('utf8'))));
       console.log(JSON.stringify(unflattened));
-      io.emit('pagedataupdate', {data:JSON.stringify(unflattened)});
+      io.emit('pagedataupdate', {data:JSON.stringify(jobj)});
   }
   catch(e){
       console.log('err :', e);

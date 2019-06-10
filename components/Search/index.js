@@ -9,6 +9,7 @@ import FooterBar from '../Footer/index';
 import CategoriesAndFacets from './CategoriesAndFacets';
 import SearchDetailsBar from './SearchDetailsBar';
 import SearchResults from './SearchResults';
+import Brand from './Brand';
 import CompareWidget from '../common/CompareWidget';
 import lang from '../../utils/language';
 
@@ -142,7 +143,13 @@ class Search extends Component {
       <div>
         <HeaderBar />
         {
-          isBrandPage && <div>Brand</div>
+          isBrandPage
+          ?
+            <Grid className={`${styles['pt-20']} ${styles.relative}`}>
+              <Brand />
+            </Grid>
+          :
+           null
         }
         <Grid id="search-container" className={`${styles['pt-20']} ${styles.relative}`}>
           <Col md={2} id="sidebar-position" className={`${styles['filter-panel']} ${styles['float-l']} ${styles['border-radius4']} ${styles['bg-white']} ${styles['p-0']} ${styles[sideBarPositionClass]}`} style={containerStyle}>
