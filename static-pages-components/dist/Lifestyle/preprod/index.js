@@ -10,7 +10,7 @@ const Lifestyle = () => React.createElement(
       { className: `${styles['flex']} life-banner-inn ${styles['relative']}` },
       React.createElement(
         'a',
-        { href: 'links_lang.img' },
+        { href: '/SAU/en/srp?search=home%20decor&isListed=false' },
         React.createElement('img', { src: `/static/img/landing-page-lifestyle/${lang === 'en' ? 'furnitures' : 'furnitures-ar'}.jpg`, className: 'img-responsive' })
       )
     ),
@@ -80,7 +80,7 @@ const Lifestyle = () => React.createElement(
           { md: 1, className: `${styles['pl-0']} ${styles['pr-10']}` },
           React.createElement(
             'a',
-            { href: `/SAU/${lang}srp/home-furnishing?categoryTree=true&isListed=false&sid=932,941` },
+            { href: `/SAU/${lang}/srp/home-furnishing?categoryTree=true&isListed=false&sid=932,941` },
             React.createElement(
               'div',
               { className: `${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon` },

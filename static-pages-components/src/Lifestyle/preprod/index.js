@@ -3,7 +3,7 @@ const Lifestyle = () => (
   <div className="life-style-main">
     <Grid>
       <div className={`${styles['flex']} life-banner-inn ${styles['relative']}`}>
-        <a href="links_lang.img">
+        <a href="/SAU/en/srp?search=home%20decor&isListed=false">
           <img src={`/static/img/landing-page-lifestyle/${lang === 'en' ? 'furnitures' : 'furnitures-ar'}.jpg`} className="img-responsive" />
         </a>
         {/* <div className={`${styles['absolute']} ${styles['flex']} ${styles['flex-colum']} banner-label`}>
@@ -37,7 +37,7 @@ const Lifestyle = () => (
         <h5 className={`main-title ${styles['fs-16']} ${styles['fontW600']}`}>Popular Category</h5>
         <div className={`${styles['flex']} ${styles['poular-cat-inn']}`}>
           <Col md={1} className={`${styles['pl-0']} ${styles['pr-10']}`}>
-            <a href={`/SAU/${lang}srp/home-furnishing?categoryTree=true&isListed=false&sid=932,941`}>
+            <a href={`/SAU/${lang}/srp/home-furnishing?categoryTree=true&isListed=false&sid=932,941`}>
               <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon`}>
                 <SVGComponent clsName="poular-cat" src="icons/landing-page-lifestyle/chair" />
                 <span className={`${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}`}>Furniture</span>

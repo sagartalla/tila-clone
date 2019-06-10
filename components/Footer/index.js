@@ -169,7 +169,7 @@ const FooterBar = props => (
                 <SVGComponent clsName={`${styles['quation-bar-inn']}`} src="icons/common-icon/return" />
               </span>
               <div className={`${styles['flex']} ${styles['flex-colum']} ${styles['pl-20']}`}>
-                <span className={`${styles['fontW600']} ${styles['text-uppercase']}`}>{`${FOOTER_PAGE.RETURN_WITHIN} 30 ${FOOTER_PAGE.DAYS}`}</span>
+                <span className={`${styles['fontW600']} ${styles['text-uppercase']}`}>{`${FOOTER_PAGE.RETURN_WITHIN} 15 ${FOOTER_PAGE.DAYS}`}</span>
                 <span className={styles['footer-suport-title']}>{FOOTER_PAGE.PLACING_ORDER}</span>
               </div>
             </div>
@@ -197,7 +197,7 @@ const FooterBar = props => (
               <span className={styles['pointer']}>{FOOTER_PAGE.FASHION}</span>
             </h4>
             <ul className={`${styles['pl-30']} ${styles['lne-ht2']}`}>
-              {f.map((i) => <li key={i.title}><a href={i.url} target="_blank"><span className={styles['pointer']}>{i.title}</span></a></li>)}
+              {f.map((i) => <li key={i.title}><a href={i.url}><span className={styles['pointer']}>{i.title}</span></a></li>)}
               {/*<li><span className={styles['pointer']}>{`${FOOTER_PAGE.WOMENS} ${FOOTER_PAGE.FASHION}`}</span></li>
               <li><span className={styles['pointer']}>{`${FOOTER_PAGE.MENS} ${FOOTER_PAGE.FASHION}`}</span></li>
               <li><span className={styles['pointer']}>{`${FOOTER_PAGE.GIRLS} ${FOOTER_PAGE.FASHION}`}</span></li>
@@ -214,7 +214,7 @@ const FooterBar = props => (
               <span className={styles['pointer']}>{FOOTER_PAGE.ELECTRONICS}</span>
             </h4>
             <ul className={`${styles['pl-30']} ${styles['lne-ht2']}`}>
-              {e.map((i) => <li key={i.title}><a href={i.url} target="_blank"><span className={styles['pointer']}>{i.title}</span></a></li>)}
+              {e.map((i) => <li key={i.title}><a href={i.url}><span className={styles['pointer']}>{i.title}</span></a></li>)}
               {/*<li><span className={styles['pointer']}>{FOOTER_PAGE.MOBILES}</span></li>
               <li><span className={styles['pointer']}>{FOOTER_PAGE.TABLETS}</span></li>
               <li><span className={styles['pointer']}>{FOOTER_PAGE.LAPTOPS}</span></li>
@@ -231,7 +231,7 @@ const FooterBar = props => (
               <span className={styles['pointer']}>{FOOTER_PAGE.LIFESTYLE}</span>
             </h4>
             <ul className={`${styles['pl-30']} ${styles['lne-ht2']}`}>
-              {l.map((i) => <li key={i.title}><a href={i.url} target="_blank"><span className={styles['pointer']}>{i.title}</span></a></li>)}
+              {l.map((i) => <li key={i.title}><a href={i.url}><span className={styles['pointer']}>{i.title}</span></a></li>)}
               {/*<li><span className={styles['pointer']}>{FOOTER_PAGE.HOME_DECOR}</span></li>
               <li><span className={styles['pointer']}>{`${FOOTER_PAGE.KITCHEN} & ${FOOTER_PAGE.DINING}`}</span></li>
               <li><span className={styles['pointer']}>{FOOTER_PAGE.BATH}</span></li>
@@ -248,7 +248,7 @@ const FooterBar = props => (
               <span className={styles['pointer']}>{`${FOOTER_PAGE.BEAUTY} & ${FOOTER_PAGE.MAKEUP}`}</span>
               </h4>
             <ul className={`${styles['pl-30']} ${styles['lne-ht2']}`}>
-              {b.map((i) => <li key={i.title}><a href={i.url} target="_blank"><span className={styles['pointer']}>{i.title}</span></a></li>)}
+              {b.map((i) => <li key={i.title}><a href={i.url}><span className={styles['pointer']}>{i.title}</span></a></li>)}
               {/*<li><span className={styles['pointer']}>{FOOTER_PAGE.FRAGRANCE}</span></li>
               <li><span className={styles['pointer']}>{FOOTER_PAGE.MAKEUP}</span></li>
               <li><span className={styles['pointer']}>{FOOTER_PAGE.HAIRCARE}</span></li>

@@ -1,13 +1,12 @@
 import Calendar from 'rc-calendar';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Row, Col } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 import DatePicker from 'rc-calendar/lib/Picker';
 import moment from 'moment';
 import { toast } from 'react-toastify';
 import { languageDefinations } from '../../../../utils/lang';
 import Btn from '../../../common/Button';
-import Input from '../../../common/Input';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators, selectors } from '../../../../store/cam/personalDetails';
@@ -80,6 +79,18 @@ class UpdatePersonalInfoModal extends React.Component {
     this.setState({ user_gender: val });
   }
 
+  disabledDate = (current) => {
+    if (!current) {
+      // allow empty select
+      return false;
+    }
+    const date = moment();
+    date.hour(0);
+    date.minute(0);
+    date.second(0);
+    return current.valueOf() > date.valueOf();
+  }
+
   handleSubmit = () => {
     const { user_name, user_dob, user_gender } = this.state;
     this.setState({ responseState: false });
@@ -102,7 +113,7 @@ class UpdatePersonalInfoModal extends React.Component {
 
   render() {
     const calendar = (
-      <Calendar />
+      <Calendar disabledDate={this.disabledDate} />
     );
     const { user_name, user_dob, user_gender } = this.state;
     return (
