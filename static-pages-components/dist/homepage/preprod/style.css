@@ -192,6 +192,11 @@
 .home-style-main .display-t-i-hl .d3 .d3-sub {
   height: 662px;
 }
+.home-style-main .display-t-i-e .d3 .d3-sub img,
+.home-style-main .display-t-i-f .d3 .d3-sub img,
+.home-style-main .display-t-i-hl .d3 .d3-sub img {
+  object-fit: fill;
+}
 .home-style-main .display-t-i-e .d1,
 .home-style-main .display-t-i-f .d1,
 .home-style-main .display-t-i-hl .d1,
