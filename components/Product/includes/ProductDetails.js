@@ -18,7 +18,7 @@ const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styl
 
 const { PDP_PAGE } = languageDefinations();
 
-const ProductDetails = ({ details, keyfeatures, isPreview, productInfo,variantId,productId }) => {
+const ProductDetails = ({ details, keyfeatures, isPreview, productInfo,variantId,productId,isSearchPreview }) => {
   return (
     <div className={`${styles['product-details-main']} ${styles['border-radius4']} ${styles['mb-5']} ${styles['box']}`}>
       {
@@ -50,6 +50,7 @@ const ProductDetails = ({ details, keyfeatures, isPreview, productInfo,variantId
           <VariantsAndSimilarProducts
             variantId={variantId}
             productId={productId}
+            isSearchPreview={isSearchPreview}
           />
         }
       </NoSSR>

@@ -348,7 +348,7 @@
     // position absolute
     // top 5px
     // right 10px
-    padding 6px 10px;
+    padding: 6px 10px;
     border-bottom-left-radius 20px
     // border-top-right-radius 12px
     &:hover
@@ -618,6 +618,18 @@
   position sticky !important
   top 80px !important
 }
+
+.indication {
+  z-index 99999
+  left calc(50% - 8px)
+  bottom -20px
+  width: 0;
+  height: 0;
+  border-left: 16px solid transparent;
+  border-right: 16px solid transparent;
+  border-bottom: 16px solid #f1f2f4;
+}
+
 .search-header
   width 84%
   margin-left 18px
