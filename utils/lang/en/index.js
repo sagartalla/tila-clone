@@ -574,7 +574,7 @@ export const EN_KEYWORDS = {
     SEND_VERIFICATION_LINK: 'SEND VERIFICATION LINK',
     REGISTERED_EMAIL_ID: 'Registered Email ID',
     REGISTER_WITH_TILA: 'Register with Tila',
-    I_WOULD_LIKE_TO_RECEIVE: 'I would like to receive',
+    I_WOULD_LIKE_TO_RECEIVE_OFFERS: 'I would like to receive all offers and discounts',
     DEALS_OFFERS: 'Deals and Offers.',
     RESET_PASSWORD: 'Reset Password',
     PLEASE_SET_YOUR_SECURE_PASSWORD: 'Please set your secure password.',

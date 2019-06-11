@@ -13,6 +13,7 @@ import SocialLogin from './SocialLogin';
 import { languageDefinations } from '../../utils/lang';
 import FormValidator from '../common/FormValidator';
 import VerifyEmail from './VerifyEmail';
+import LoginPage from './LoginPage';
 
 import lang from '../../utils/language';
 
@@ -211,14 +212,16 @@ class Login extends Component {
       <Modal className={`react-router-modal__modal ${styles['login-reg-modal']} ${styles['p-10']}`} onBackdropClick={this.onBackdropClick}>
         <Row className={`${styles['bg-white']} ${styles['m-0']}`}>
         <div className={`${styles.flex}`}>
-          <Col md={5} xs={11} sm={5} className={`${styles['pl-0']} ${styles['pr-10']} ${styles['m-hdn']}`}>
-            <div className={`${styles['image-placeholder']}`}>
-              <img className={`${styles['img-responsive']} ${styles['border-radius4']}`} src={`${constants.mediaDomain}/pim/15f45930-fecf-4f7b-a3d6-613d41196c20/workbench/image/a1ccb74a-1858-42dd-8c38-cfb103e85bb2/login-screen.jpeg`} />
+          <Col md={4} xs={12} sm={4} className={`${styles['pl-0']} ${styles['pr-10']} ${styles['m-hdn']}`}>
+            <div className={`${styles.flex} ${styles['image-placeholder']}`}>
+              <img src="../../static/img/icons/login-logo.png" className={`${styles['img-responsive']}`} alt=""/>
             </div>
           </Col>
-          <Col md={7} xs={12} sm={7} className={`${styles['bg-white']} ${styles['border-radius4']}`}>
+          <Col md={8} xs={12} sm={8} className={`${styles['bg-white']} ${styles['border-radius4']}`}>
             <div className={`${styles.flex} ${styles['align-center']} ${styles['justify-between']} ${styles['flex-row']}`}>
-            <div className={`${styles.flex} ${styles['mt-10']} ${styles.pointer}`} onClick={this.onBackdropClick}><SVGComponent clsName={`${styles['cross-icon']}`} src="icons/common-icon/cross-button" /></div>
+              <div className={`${styles.flex} ${styles['mt-10']} ${styles.pointer}`} onClick={this.onBackdropClick}>
+                <SVGComponent clsName={`${styles['cross-icon']}`} src="icons/common-icon/cross-button" />
+              </div>
               {/* <h3 className={`${styles['fs-26']} ${styles['mb-25']} ${styles['m-fs-20']}`}>
                 <div>
                   {showLoginSteps &&
@@ -235,182 +238,9 @@ class Login extends Component {
                 </div>
               </h3> */}
             </div>
-            {showLoginSteps &&
-          <>
-            {
-              error
-                ?
-                  <div className={`${styles['text-center']} ${styles['error-msg']}`}>
-                    <span>{error}</span>
-                  </div>
-                :
-                null
-            }
             <form className={`${styles['login-form']}`} onSubmit={this.login}>
-              <FormGroup controlId="formHorizontalEmail">
-                <Col md={12}>
-                  {/* <div className={styles['group']}>
-                    <input onChange={this.onChangeField} name="email" type="email" value={this.state.email} required />
-                    <span className={styles['highlight']}></span>
-                    <span className={styles['bar']}></span>
-                    <label>{LOGIN_PAGE.EMAIL}</label>
-                  </div> */}
-                  <div className={`${styles['fp-input']} ${styles['pb-10']}`}>
-                    <input onChange={this.onChangeField} className={styles['m-fs-16']} name="email" type="email" value={this.state.email} required />
-                    <span className={styles.highlight} />
-                    <span className={styles.bar} />
-                    <label>{LOGIN_PAGE.EMAIL}</label>
-                    {
-                      validation.email.message
-                        ?
-                          <span className={`${styles['error-msg']}`}>{validation.email.message}</span>
-                        :
-                        null
-                    }
-                  </div>
-                </Col>
-              </FormGroup>
-              <FormGroup controlId="formHorizontalPassword">
-                <Col md={12}>
-                  {/* <div className={styles['group']}>
-                    <input onChange={this.onChangeField} name="password" type="password" value={this.state.password} required />
-                    <span className={styles['highlight']}></span>
-                    <span className={styles['bar']}></span>
-                    <label>{LOGIN_PAGE.PASSWORD}</label>
-                  </div> */}
-                  <div className={`${styles['fp-input']} ${styles['pb-10']}`}>
-                      <input onChange={this.onChangeField} className={`${styles['m-fs-16']} ${styles.width100}`} name="password" type={hide ? 'password' : 'text'} value={this.state.password} required />
-                      <span className={styles.highlight} />
-                      <span className={styles.bar} />
-                      <ShowHidePassword hide={this.state.hide} hideToggle={this.hideToggle}/>
-                    <label>{LOGIN_PAGE.PASSWORD}</label>
-                    {
-                      validation.password.message
-                        ?
-                          <span className={`${styles['error-msg']}`}>{validation.password.message}</span>
-                        :
-                        null
-                    }
-                  </div>
-
-                </Col>
-              </FormGroup>
-              {/* <FormGroup controlId="formHorizontalCountry">
-                  <Col md={2} xs={2} className={styles['pr-0']}>
-              {
-                this.state.mode === 'register'
-                ?
-
-                    <div className={`${styles['fp-input']} ${styles['pb-10']}`}>
-                      <input onChange={this.onChangeField} name="country" type="text" value={this.state.country} required />
-                      <span className={styles['highlight']}></span>
-                      <span className={styles['bar']}></span>
-                      <label>+91</label>
-                    </div>
-
-                :
-                null
-              }
-                  </Col>
-              {
-                this.state.mode === 'register'
-                ?
-
-                    <Col md={9} xs={10} mdOffset={1}>
-                      <div className={`${styles['fp-input']} ${styles['pb-10']}`}>
-                        <input onChange={this.onChangeField} name="phone" type="text" value={this.state.phone} required />
-                        <span className={styles['highlight']}></span>
-                        <span className={styles['bar']}></span>
-                        <label>{LOGIN_PAGE.PHONE}</label>
-                      </div>
-                    </Col>
-
-                :
-                null
-              }
-              </FormGroup> */}
-              <FormGroup>
-                <Col md={12}>
-                  {
-                    this.state.mode === 'register'
-                      ?
-                        <div className={`${styles['checkbox-material']} ${styles.flex} ${styles['pb-15']}`}>
-                            <input id="deals-offers-reg" type="checkbox" onChange={this.acceptsOffers} checked={clicked} />
-                            <label htmlFor="deals-offers-reg">
-                              {LOGIN_PAGE.I_WOULD_LIKE_TO_RECEIVE_OFFERS}
-                            </label>
-                        </div>
-                      :
-                      null
-                  }
-                </Col>
-              </FormGroup>
-              <FormGroup>
-                <Col md={12}>
-                  {/* <Button className={`${styles['sign-in-btn']} ${styles['fontW700']}`} onClick={this.login}>{this.state.mode === 'register' ? `${LOGIN_PAGE.SIGN_UP}` : `${LOGIN_PAGE.SIGN_IN}`}</Button>  */}
-                  <input className={`${styles['sign-in-btn']} ${styles.fontW700}`} type="submit" value={this.state.mode === 'register' ? `${LOGIN_PAGE.SIGN_UP}` : `${LOGIN_PAGE.SIGN_IN}`} />
-                </Col>
-                <Col md={12}>
-                  {
-                    this.state.mode === 'register'
-                      ?
-                        <p className={`${styles['fs-12']} ${styles['termes-label']} ${styles['pt-10']} ${styles['mb-0']}`}>By signing up, you agree to our terms and conditions.</p>
-                      :
-                      null
-                  }
-                </Col>
-              </FormGroup>
-              <div className={`${styles['login-social-icon']} ${styles['pl-15']}`}>
-                <a className={`${styles['flex']} ${styles['pt-10']} ${styles['m-fs-14']} ${styles['m-justy-center']}`}>
-                  <span onClick={this.handleClick}>
-                    {this.state.mode !== 'register' && LOGIN_PAGE.FORGOT_PASSWORD}
-                  </span>
-                </a>
-                <span className={`${styles['thick-gry-clr']} ${styles['pt-5']} ${styles['pb-5']} ${styles['flex']} ${styles['m-justy-center']} ${styles['m-fs-14']}`}>{mode === 'register' ? LOGIN_PAGE.SIGN_UP_WITH : LOGIN_PAGE.SIGN_IN_WITH}</span>
-                <NoSSR>
-                  <SocialLogin>
-                    {([handleSocialLogin]) => {
-                      return (
-                        <NoSSR>
-                          <div className={`${styles['flex']} ${styles['social-icons']}`}>
-                            <a className={styles['flex']} onClick={handleSocialLogin('facebook')}><SVGComponent clsName={`${styles['bg-social-icon']} ${styles['mr-10']}`} src="icons/social-icons/bg-facebook" /></a>
-                            <a className={styles['flex']} onClick={handleSocialLogin('google')}><SVGComponent clsName={`${styles['bg-social-icon']} ${styles['mr-10']}`} src="icons/social-icons/bg-google" /></a>
-                            {/* <a className={styles['flex']} onClick={this.handleSocialLogin('twitter')}><SVGComponent clsName={`${styles['bg-social-icon']} ${styles['mr-10']}`} src="icons/social-icons/bg-twitter" /></a>
-                            <a className={styles['flex']} onClick={this.handleSocialLogin('instagram')}><SVGComponent clsName={`${styles['bg-social-icon']}`} src="icons/social-icons/bg-instagram" /></a> */}
-                          </div>
-                        </NoSSR>
-                      )
-                    }}
-                  </SocialLogin>
-                </NoSSR>
-              </div>
-            </form>
-            <div className={styles['pl-15']}>
-              {this.state.mode === 'register' ?
-                <h4 className={`${styles['ff-b']} ${styles['fs-14']} ${styles['m-fs-14']} ${styles['m-t-c']}`}>
-                  <span>{LOGIN_PAGE.HAVE_ACCOUNT}&nbsp;</span>
-                  <span className={styles['link-text']} onClick={this.toggleLoginSignUp}>{LOGIN_PAGE.SIGN_IN}</span>
-                </h4>
-              :
-                <h4 className={`${styles['ff-b']} ${styles['fs-14']} ${styles['m-fs-14']} ${styles['m-t-c']}`}>
-                  <span>{LOGIN_PAGE.NO_ACCOUNT} &nbsp;</span>
-                  <span className={styles['link-text']} onClick={this.toggleLoginSignUp}>{LOGIN_PAGE.SIGN_UP}</span>
-                </h4>
-              }
-            </div>
-            </>
-            }
-            {showVerifyScreen &&
-            <VerifyEmail
-              email={userInfo.email}
-              onBackdropClick={this.onBackdropClick}
-              loadingStatus={loadingStatus}
-            />}
-            {forgotPassword &&
-            <ForgotPassword
-              userInfo={userInfo}
-            />
-            }
+              <LoginPage />
+            </form>            
           </Col>
         </div>
         </Row>

@@ -4,6 +4,7 @@ import Btn from '../common/Button';
 import { languageDefinations } from '../../utils/lang';
 import lang from '../../utils/language';
 import Button from '../common/CommonButton';
+import OTPInput from './OTPInput';
 import main_en from '../../layout/main/main_en.styl';
 import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './login_en.styl';
@@ -61,9 +62,12 @@ const VerifyStatus = (props) => {
             </div>
           </div>
           <div className={`${styles.flex} ${styles['justify-center']} ${styles['mb-5']}`}>
-          {[0,1,2,3].map(x => (
-            <input type="text" id={x} className={`${styles.inputOTP} ${styles['mr-10']} ${styles['fs-20']}`} maxLength="1" onChange={props.validatePassKey} autoComplete="off" />
-          ))}
+            <OTPInput
+              containerStyle={`${styles['pl-15']}`}
+              inputStyle={`${styles['border-none']} ${styles['border-b']}`}
+              separator={<span>&nbsp;&nbsp;</span>}
+              onChange={otp => console.log(otp)}
+            />
           </div>
           <Button
             className={`${styles['flex-center']}  ${styles.width100} ${styles['fs-14']} ${styles['text-uppercase']} ${styles['button-radius']}`}
