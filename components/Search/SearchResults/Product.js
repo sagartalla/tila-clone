@@ -58,6 +58,7 @@ class Product extends Component {
     this.closeVariantTab = this.closeVariantTab.bind(this);
     this.showVariants = this.showVariants.bind(this);
     this.preventDefaultClick = this.preventDefaultClick.bind(this);
+    this.renderQuickView = this.renderQuickView.bind(this)
     this.leaveImg = this.leaveImg.bind(this);
   }
   componentWillReceiveProps() {
@@ -200,7 +201,13 @@ class Product extends Component {
       this.addToCompare(e.target.previousSibling.checked);
     }
   }
-
+  renderQuickView(e) {
+    e.preventDefault();
+    const { selectedIndex } = this.state
+    const { row, itemNum, showQuickView, variants } = this.props
+    let vId = (variants.length > 0 && variants[selectedIndex].variantId)
+    showQuickView(itemNum,row, vId)
+  }
   addToCompare(checked) {
     const {
       productId, itemtype, media, displayName, categoryId, addToCompare, removeCompareData, catalogId: catalog_id, variantId: variant_id,
@@ -245,7 +252,11 @@ class Product extends Component {
       cartButtonLoaders,
       btnLoading,
       cmpData,
+      wishlistId,
+      row,
+      itemNum,
       media,
+      isQuickView,
     } = this.props;
     const { src } = this.state;
     const { showNotify, selectedIndex, showLoader } = this.state;
@@ -291,7 +302,7 @@ class Product extends Component {
         <div
           className=
             {
-            `${styles['product-items-main']} ${styles['p-0']} ${selectedProduct ? styles['active-product'] : ''}`}
+            `${styles['product-items-main']} ${styles.relative} ${styles['p-0']} ${selectedProduct ? styles['active-product'] : ''}`}
             onClick = {() => this.routeChange(productId,variantId,catalogId,itemtype,index,pageNum)}>
           <Link route={`/${country}/${language}/product?productId=${productId}${variants.length > 0 && variants[selectedIndex].variantId ? `&variantId=${variants[selectedIndex].variantId}` : ''}&catalogId=${catalogId}&itemType=${itemtype}`}>
             <a>
@@ -309,7 +320,7 @@ class Product extends Component {
                     </a>
                   </div>
                 }
-                <div className={`${styles['img-cont']} ${styles['border-radius4']} ${styles['relative']}`}>
+                <div onClick={this.renderQuickView} className={`${styles['img-cont']} ${styles['border-radius4']} ${styles['relative']}`}>
                       <div className={`${styles['image-div']} srp-slider`}>
                         {src ?
                             <img src={src} alt="imageURL" />
@@ -445,6 +456,9 @@ class Product extends Component {
               </div>
             </a>
           </Link>
+          {isQuickView &&
+            <div className={`${styles.absolute} ${styles.indication}`} />
+          }
         </div>
         <Modal show={showNotify} onHide={this.closeNotify}>
           <Modal.Header closeButton>

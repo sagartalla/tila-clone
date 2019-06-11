@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Row, Col, Button } from 'react-bootstrap';
+import { Row, Col, Button, Dropdown, MenuItem } from 'react-bootstrap';
 import { languageDefinations } from '../../../../utils/lang/';
 import SVGComponent from '../../../common/SVGComponet';
 import MyGMap from './MyGMap';
@@ -93,62 +93,74 @@ const AddressNew = (props) => {
             </div>
           </Col>
           <Col md={6} sm={12} xs={12}>
-            <div className={`${styles['fp-input']} ${styles['common-input-mb']}`}>
-              <input type="text" name="country_name" onChange={inputOnChange} value={data.country_name} autoComplete="off" className={styles.input} required />
-              <span className={styles.highlight} />
-              <span className={styles.bar} />
-              <label>{DELIVERY_ADDR_PAGE.COUNTRY}</label>
-              {
-                <div className={`${styles['auto-suggestions-list']}`}>
-                  {showCountriesData && countriesData.map(result => (
-                    <div
-                      key={result.country_id}
-                      className={`${styles['auto-suggestions']} ${styles['bg-white']}`}
-                    >
-                      <div data-id={result.code3} data-code={result.country_phone_code} name="shipping_country_code" onClick={selectCountry} className={`${styles.item} ${styles['fs-12']} ${styles['pl-5']} ${styles['ht-25']} ${styles.pointer}`}>{result.country_name}</div>
-                    </div>
-                  ))}
+            <Dropdown id="search-toggle" className={`${styles.width100}`}>
+              <Dropdown.Toggle id="dropdown-custom-components">
+                <div className={`${styles['mb-0']} ${styles['fp-input']}`}>
+                  <input type="text" name="country_name" onChange={inputOnChange} value={data.country_name} autoComplete="off" className={styles.input} required />
+                  <label>{DELIVERY_ADDR_PAGE.COUNTRY}</label>
                 </div>
-              }
-              {(validation.shipping_country_code && validation.shipping_country_code.message) || (validation.country_name && validation.country_name.message)
-                ?
-                  <span className={`${styles['error-msg']}`}>{validation.shipping_country_code.message || validation.country_name.message}</span>
-                :
-                null
-              }
-            </div>
+              </Dropdown.Toggle>
+              {countriesData.length > 0 &&
+                <Dropdown.Menu className={`${styles.width100} ${styles['search-container']} ${styles['p-0']} ${styles['m-0']}`}>
+                  {showCountriesData && countriesData.map((result, index) => (
+                    <MenuItem
+                      className={styles['search-suggestion']}
+                      eventKey={index + 1}
+                    >
+                      <a
+                        className={`${styles['black-color']} ${styles['fs-12']} ${styles['pl-5']} ${styles['ht-25']} ${styles.pointer}`}
+                        data-id={result.code3}
+                        data-code={result.country_phone_code}
+                        name="shipping_country_code"
+                        onClick={selectCountry}
+                      >
+                        {result.country_name}
+                      </a>
+                    </MenuItem>
+                  ))}
+                </Dropdown.Menu>}
+            </Dropdown>
+            {(validation.shipping_country_code && validation.shipping_country_code.message) || (validation.country_name && validation.country_name.message)
+              ?
+                <span className={`${styles['error-msg']}`}>{validation.shipping_country_code.message || validation.country_name.message}</span>
+              :
+              null
+            }
           </Col>
           <Col md={6} sm={12} xs={12}>
-            <div
-              className={`${styles['fp-input']} ${styles['common-input-mb']}`}
-            >
-              <input type="text" name="city" onChange={inputOnChange} value={data.city} className={styles.input} disabled={!data.shipping_country_code} required />
-              <span className={styles.highlight} />
-              <span className={styles.bar} />
-              <label>{DELIVERY_ADDR_PAGE.CITY}</label>
-              {
-                <div className={`${styles['auto-suggestions-list']}`}>
+            <Dropdown disabled={!data.shipping_country_code} id="search-toggle" className={`${styles.width100}`}>
+              <Dropdown.Toggle id="dropdown-custom-components">
+                <div className={`${styles['mb-0']} ${styles['fp-input']}`}>
+                  <input type="text" name="city" onChange={inputOnChange} value={data.city} className={styles.input} disabled={!data.shipping_country_code} required />
+                  <label>{DELIVERY_ADDR_PAGE.CITY}</label>
+                </div>
+              </Dropdown.Toggle>
+              {getAllCities.length > 0 &&
+                <Dropdown.Menu className={`${styles.width100} ${styles['search-container']} ${styles['p-0']} ${styles['m-0']}`}>
                   {showCitiesData && getAllCities.map((result, index) => (
-                    <div
-                      key={index}
-                      className={`${styles['auto-suggestions']} ${styles['bg-white']}`}
+                    <MenuItem
+                      className={styles['search-suggestion']}
+                      eventKey={index + 1}
                     >
-                      <div data-id={result.city_code} name="city_code" onClick={selectCityFromSuggesstions} className={`${styles.item} ${styles['fs-12']} ${styles['pl-5']} ${styles['ht-25']} ${styles.pointer}`}>{result.city_name}</div>
-                    </div>
+                      <a
+                        data-id={result.city_code}
+                        name="city_code"
+                        onClick={selectCityFromSuggesstions}
+                        className={`${styles['black-color']} ${styles['fs-12']} ${styles['pl-5']} ${styles['ht-25']} ${styles.pointer}`}
+                      >
+                        {result.city_name}
+                      </a>
+                    </MenuItem>
                   ))}
-                </div>
-              }
-              {
-                (validation.city && validation.city.message) || (validation.city_code && validation.city_code.message)
-                  ?
-                    <span className={`${styles['error-msg']}`}>{validation.city.message || validation.city_code.message}</span>
-                  :
-                  null
-              }
-            </div>
+                </Dropdown.Menu>}
+            </Dropdown>
+            {(validation.city && validation.city.message) || (validation.city_code && validation.city_code.message) ?
+              <span className={`${styles['error-msg']}`}>{validation.city.message || validation.city_code.message}</span>
+              :
+              null}
           </Col>
           <Col md={6} sm={12} xs={12}>
-            <div className={`${styles['fp-input']} ${styles['common-input-mb']}`}>
+            <div className={`${styles['fp-input']} ${styles['mt-25']} ${styles['common-input-mb']}`}>
               <input type="text" name="address_line_2" onChange={inputOnChange} value={data.address_line_2} className={styles.input} required />
               <span className={styles.highlight} />
               <span className={styles.bar} />
@@ -163,7 +175,7 @@ const AddressNew = (props) => {
             </div>
           </Col>
           <Col md={6} sm={12} xs={12}>
-            <div className={`${styles['fp-input']} ${styles['common-input-mb']}`}>
+            <div className={`${styles['fp-input']} ${styles['mt-25']} ${styles['common-input-mb']}`}>
               <input type="text" name="postal_code" onChange={inputOnChange} value={data.postal_code} className={styles.input} required />
               <span className={styles.highlight} />
               <span className={styles.bar} />
