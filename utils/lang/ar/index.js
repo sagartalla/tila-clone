@@ -570,6 +570,8 @@ export const AR_KEYWORDS = {
     SAVE_PASSWORD: 'حفظ كلمة السر',
     PASSWORD_RESET_SUCCESSFULL: 'تمت تغير كلمة السر بنجاح',
     CONFIRM_PASSWORD: 'تأكيد كلمة السر',
+    I_WOULD_LIKE_TO_RECEIVE: 'I would like to receive',
+    DEALS_OFFERS: 'Deals and Offers.',
     PLEASE_ACCEPT_OUR_TERMS: 'Please accept out terms and conditions to proceed',
     COOKIE_POLICY: 'Cookie Policy',
     T_AND_C: 'T & C',

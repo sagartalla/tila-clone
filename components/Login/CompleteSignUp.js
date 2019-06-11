@@ -3,12 +3,14 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Row, Col, Dropdown, MenuItem } from 'react-bootstrap';
 import Cookie from 'universal-cookie';
+import PropTypes from 'prop-types';
 import { languageDefinations } from '../../utils/lang';
 import { actionCreators, selectors } from '../../store/product';
 import SVGComponent from '../common/SVGComponet';
 import Button from '../common/CommonButton';
 import lang from '../../utils/language';
 import Country from '../../components/HeaderBar/includes/Country';
+import countriesData from '../../constants/countries';
 
 import main_en from '../../layout/main/main_en.styl';
 import main_ar from '../../layout/main/main_ar.styl';
@@ -24,20 +26,75 @@ class ContinueLogin extends Component {
     super(props);
     this.state = {
       userGender: '',
+      displayCity: '',
+      DOB: {
+        day: '',
+        month: '',
+        year: '',
+      },
+      mobileNumber: '',
     };
+    this.onChangeCity = this.onChangeCity.bind(this);
+    this.selectCityFromSuggesstions = this.selectCityFromSuggesstions.bind(this);
   }
   componentDidMount() {
     const { getCitiesByCountryCode } = this.props;
     getCitiesByCountryCode(cookies.get('country'));
   }
 
+  onChangeCity(e) {
+    const { autoCompleteCity } = this.props;
+    const displayCity = e.target.value;
+    this.setState({
+      displayCity,
+    }, () => {
+      autoCompleteCity(displayCity);
+    });
+  }
   handleGenderChange = val => () => {
     this.setState({ userGender: val });
   }
 
+  selectCityFromSuggesstions(e) {
+    const displayCity = e.currentTarget.getAttribute('data-id');
+    this.setState({
+      displayCity,
+    });
+  }
+
+  handleMobileNumber = (e) => {
+    this.setState({
+      mobileNumber: e.target.value,
+    });
+  }
+  handleInputChange = val => (e) => {
+    const { DOB } = this.state;
+    if (val === 'day') DOB.day = e.target.value;
+    if (val === 'month') DOB.month = e.target.value;
+    if (val === 'year') DOB.year = e.target.value;
+    this.setState({
+      DOB,
+    });
+  }
+
+  dobSelect = (e) => {
+    const { DOB } = this.state;
+    const id = e.currentTarget.getAttribute('data-id');
+    const val = e.currentTarget.getAttribute('data-val');
+    if (id === 'day') DOB.day = val;
+    if (id === 'month') DOB.month = val;
+    if (id === 'year') DOB.year = val;
+    this.setState({
+      DOB,
+    });
+  }
+
   render() {
-    const { userGender } = this.state;
+    const {
+      userGender, displayCity, DOB, mobileNumber,
+    } = this.state;
     const { getAllCities } = this.props;
+    console.log('DOB', DOB);
     return (
       <div className={`${styles['complete-login']} ${styles.flex} ${styles['justify-between']} ${styles['flex-colum']}`}>
         <div>
@@ -47,41 +104,42 @@ class ContinueLogin extends Component {
         <Row className={`${styles.flex} ${styles['justify-between']}`}>
           <Col md={6}>
             <div className={`${styles['thick-gry-clr']} ${styles['fs-14']}`}>{LOGIN_PAGE.MOBILE_NUMBER}</div>
-            <div className={`${styles.flex}`}>
-              <Dropdown id="search-toggle">
-                <Dropdown.Toggle id="dropdown-custom-components">
-                  <input
-                    type="text"
-                    style={{ width: '65px', marginRight: '10px' }}
-                    value={this.state.displayCity}
-                    className={`${styles['fs-14']} ${styles['delivery-input']}`}
-                    onChange={this.onChangeCity}
-                  />
-                </Dropdown.Toggle>
-                <Dropdown.Menu className={`${styles['p-0']} ${styles['m-0']} ${styles['img-responsive']}`}>
+            <div className={`${styles.flex} ${styles['country-code']}`}>
+              {/* <Dropdown id="login-toggle"> */}
+              <div className={`${styles['flex-center']} ${styles['country-dropdown']}`}>
+                <img src={countriesData.SAU.img} alt="SAU FLAG" />
+                <input
+                  type="text"
+                  value="+966"
+                  readOnly
+                  style={{ width: '40px', border: 'none' }}
+                  className={`${styles['fs-14']} ${styles['ml-5']}`}
+                />
+              </div>
+              {/* <Dropdown.Menu id="country_toggle" className={`${styles['p-0']} ${styles['m-0']}`} onClick={this.changeCountry}>
                   <Country />
-                </Dropdown.Menu>
-              </Dropdown>
+                </Dropdown.Menu> */}
+              {/* </Dropdown> */}
               <input
                 type="text"
-                value={this.state.displayCity}
-                className={`${styles['fs-14']} ${styles['delivery-input']}`}
-                onChange={this.onChangeCity}
+                value={mobileNumber}
+                onChange={this.handleMobileNumber}
+                className={`${styles['fs-14']} ${styles['ml-10']}`}
               />
             </div>
           </Col>
           <Col md={6} className={`${styles.flex} ${styles['flex-colum']}`}>
             <div className={`${styles['thick-gry-clr']} ${styles['fs-14']}`}>{LOGIN_PAGE.SHIPPING_CITY}</div>
-            <Dropdown id="search-toggle">
+            <Dropdown id="login-toggle">
               <Dropdown.Toggle id="dropdown-custom-components">
                 <input
                   type="text"
-                  value={this.state.displayCity}
-                  className={`${styles['fs-14']} ${styles['delivery-input']}`}
+                  value={displayCity}
+                  className={`${styles['fs-14']}`}
                   onChange={this.onChangeCity}
                 />
               </Dropdown.Toggle>
-              <Dropdown.Menu className={`${styles['p-0']} ${styles['m-0']} ${styles['auto-suggestions-list']}`}>
+              <Dropdown.Menu id="country_toggle" className={`${styles['p-0']} ${styles['m-0']} ${styles['auto-suggestions-list']}`}>
                 {getAllCities && getAllCities.map((value, index) => (
                   <MenuItem data-id={value.city_name} data-code={value.city_code} onClick={this.selectCityFromSuggesstions} onFocus={this.mouseOver} eventKey={index + 1} key={value.city_name}>
                     <a className={`${styles['black-color']}`}>
@@ -98,90 +156,93 @@ class ContinueLogin extends Component {
             <div>{LOGIN_PAGE.DATE_OF_BIRTH}</div>
             <div className={`${styles.flex} ${styles['mt-20']}`}>
               <Col md={3} className={`${styles['pl-0']}`}>
-              <div className={`${styles['thick-gry-clr']} ${styles['fs-14']}`}>{LOGIN_PAGE.DATE}</div>
-                <Dropdown id="search-toggle">
+                <div className={`${styles['thick-gry-clr']} ${styles['fs-14']}`}>{LOGIN_PAGE.DATE}</div>
+                <Dropdown id="login-toggle">
                   <Dropdown.Toggle id="dropdown-custom-components">
                     <input
                       type="text"
-                      value={this.state.displayCity}
-                      className={`${styles['fs-14']} ${styles['delivery-input']}`}
-                      onChange={this.onChangeCity}
+                      value={DOB.day}
+                      onChange={this.handleInputChange('day')}
+                      placeholder="10"
+                      className={`${styles['fs-14']}`}
                     />
                   </Dropdown.Toggle>
-                  <Dropdown.Menu className={`${styles['p-0']} ${styles['m-0']} ${styles['auto-suggestions-list']}`}>
-                    {getAllCities && getAllCities.map((value, index) => (
-                      <MenuItem data-id={value.city_name} data-code={value.city_code} onClick={this.selectCityFromSuggesstions} onFocus={this.mouseOver} eventKey={index + 1} key={value.city_name}>
-                         <a className={`${styles['black-color']}`}>
-                             <span>{value.city_name}</span>
-                           </a>
-                       </MenuItem>))
+                  <Dropdown.Menu id="country_toggle" className={`${styles['p-0']} ${styles['m-0']} ${styles['auto-suggestions-list']}`}>
+                    {[0, 30].map((value, index) => (
+                      <MenuItem data-id="day" data-val={value} onClick={this.dobSelect} onFocus={this.mouseOver} eventKey={index + 1} key={value.city_name}>
+                        <a className={`${styles['black-color']}`}>
+                          <span>{value}</span>
+                        </a>
+                      </MenuItem>))
                     }
                   </Dropdown.Menu>
                 </Dropdown>
               </Col>
-              <Col md={3} className={`${styles['pl-0']}`}>
-              <div className={`${styles['thick-gry-clr']} ${styles['fs-14']}`}>{LOGIN_PAGE.MONTH}</div>
-                <Dropdown id="search-toggle">
+              <Col md={4} className={`${styles['pl-0']}`}>
+                <div className={`${styles['thick-gry-clr']} ${styles['fs-14']}`}>{LOGIN_PAGE.MONTH}</div>
+                <Dropdown id="login-toggle">
                   <Dropdown.Toggle id="dropdown-custom-components">
                     <input
                       type="text"
-                      value={this.state.displayCity}
-                      className={`${styles['fs-14']} ${styles['delivery-input']}`}
-                      onChange={this.onChangeCity}
+                      value={DOB.month}
+                      placeholder="SEP"
+                      onChange={this.handleInputChange('month')}
+                      className={`${styles['fs-14']}`}
                     />
                   </Dropdown.Toggle>
-                  <Dropdown.Menu className={`${styles['p-0']} ${styles['m-0']} ${styles['auto-suggestions-list']}`}>
-                    {getAllCities && getAllCities.map((value, index) => (
-                      <MenuItem data-id={value.city_name} data-code={value.city_code} onClick={this.selectCityFromSuggesstions} onFocus={this.mouseOver} eventKey={index + 1} key={value.city_name}>
-                         <a className={`${styles['black-color']}`}>
-                             <span>{value.city_name}</span>
-                           </a>
-                       </MenuItem>))
+                  <Dropdown.Menu id="country_toggle" className={`${styles['p-0']} ${styles['m-0']} ${styles['auto-suggestions-list']}`}>
+                    {[0, 12].map((value, index) => (
+                      <MenuItem data-id="month" data-val={value} onClick={this.dobSelect} onFocus={this.mouseOver} eventKey={index + 1} key={value.city_name}>
+                        <a className={`${styles['black-color']}`}>
+                          <span>{value}</span>
+                        </a>
+                      </MenuItem>))
                     }
                   </Dropdown.Menu>
                 </Dropdown>
               </Col>
-              <Col md={6} className={`${styles['pl-0']} ${styles['pr-0']}`}>
-              <div className={`${styles['thick-gry-clr']} ${styles['fs-14']}`}>{LOGIN_PAGE.YEAR}</div>
-                <Dropdown id="search-toggle">
+              <Col md={5} className={`${styles['pl-0']} ${styles['pr-0']}`}>
+                <div className={`${styles['thick-gry-clr']} ${styles['fs-14']}`}>{LOGIN_PAGE.YEAR}</div>
+                <Dropdown id="login-toggle">
                   <Dropdown.Toggle id="dropdown-custom-components">
                     <input
                       type="text"
-                      value={this.state.displayCity}
-                      className={`${styles['fs-14']} ${styles['delivery-input']}`}
-                      onChange={this.onChangeCity}
+                      value={DOB.year}
+                      placeholder="1998"
+                      onChange={this.handleInputChange('year')}
+                      className={`${styles['fs-14']}`}
                     />
                   </Dropdown.Toggle>
-                  <Dropdown.Menu className={`${styles['p-0']} ${styles['m-0']} ${styles['auto-suggestions-list']}`}>
-                    {getAllCities && getAllCities.map((value, index) => (
-                      <MenuItem data-id={value.city_name} data-code={value.city_code} onClick={this.selectCityFromSuggesstions} onFocus={this.mouseOver} eventKey={index + 1} key={value.city_name}>
-                         <a className={`${styles['black-color']}`}>
-                             <span>{value.city_name}</span>
-                           </a>
-                       </MenuItem>))
+                  <Dropdown.Menu id="country_toggle" className={`${styles['p-0']} ${styles['m-0']} ${styles['auto-suggestions-list']}`}>
+                    {[2018, 2019].map((value, index) => (
+                      <MenuItem data-id="year" data-val={value} onClick={this.dobSelect} onFocus={this.mouseOver} eventKey={index + 1} key={value.city_name}>
+                        <a className={`${styles['black-color']}`}>
+                          <span>{value}</span>
+                        </a>
+                      </MenuItem>))
                     }
                   </Dropdown.Menu>
                 </Dropdown>
               </Col>
             </div>
           </Col>
-            <Col md={6}>
-              <div className={`${styles['thick-gry-clr']} ${styles['fs-14']}`}>Gender</div>
-              <div className={`${styles['mt-5']} ${styles['gender-select-main']} ${styles['flex-center']} ${styles['justify-evenly']}`}>
+          <Col md={6}>
+            <div className={`${styles['thick-gry-clr']} ${styles['fs-14']}`}>Gender</div>
+            <div className={`${styles['mt-5']} ${styles['gender-select-main']} ${styles['flex-center']} ${styles['justify-evenly']}`}>
               <div className={styles['t-c']}>
-                <a onClick={this.handleGenderChange('M')}>
-                  <SVGComponent clsName={`${styles['gender-select-inn']} ${userGender == 'M' ? 'select-icon' : 'not-select-icon'}`} src="icons/common-icon/male" />
-                  <span className={`${styles['fs-12']} ${styles['label-gry-clr']}`}>{PERSONAL_INFO_MODAL.MALE}</span>
-                </a>
+                  <a onClick={this.handleGenderChange('M')}>
+                    <SVGComponent clsName={`${styles['gender-select-inn']} ${userGender === 'M' ? 'select-icon' : 'not-select-icon'}`} src="icons/common-icon/male" />
+                    <span className={userGender === 'M' ? `${styles['fs-12']} ${styles['black-color']}` : `${styles['fs-12']} ${styles['label-gry-clr']}`}>{PERSONAL_INFO_MODAL.MALE}</span>
+                  </a>
               </div>
               <div className={styles['t-c']} onClick={this.handleGenderChange('F')}>
-                <a onClick={this.handleGenderChange('M')}>
-                  <SVGComponent clsName={`${styles['gender-select-inn']} ${userGender == 'F' ? 'select-icon' : 'not-select-icon'}`} src="icons/common-icon/female" />
-                  <span className={`${styles['fs-12']} ${styles['label-gry-clr']}`}>{PERSONAL_INFO_MODAL.FEMALE}</span>
-                </a>
+                  <a onClick={this.handleGenderChange('M')}>
+                    <SVGComponent clsName={`${styles['gender-select-inn']} ${userGender === 'F' ? 'select-icon' : 'not-select-icon'}`} src="icons/common-icon/female" />
+                    <span className={userGender === 'F' ? `${styles['fs-12']} ${styles['black-color']}` : `${styles['fs-12']} ${styles['label-gry-clr']}`}>{PERSONAL_INFO_MODAL.FEMALE}</span>
+                  </a>
               </div>
             </div>
-            </Col>
+          </Col>
         </Row>
         <Button
           className={`${styles['flex-center']}  ${styles.width100} ${styles['fs-14']} ${styles['text-uppercase']} ${styles['button-radius']}`}
@@ -193,6 +254,15 @@ class ContinueLogin extends Component {
 }
 
 
+ContinueLogin.propTypes = {
+  getAllCities: PropTypes.instanceOf(Array),
+  autoCompleteCity: PropTypes.func,
+};
+
+ContinueLogin.defaultProps = {
+  getAllCities: [],
+  autoCompleteCity: f => f,
+};
 const mapStateToProps = store => ({
   getAllCities: selectors.getAllCities(store),
 });
@@ -200,6 +270,7 @@ const mapStateToProps = store => ({
 const mapDispatchToProps = dispatch => bindActionCreators(
   {
     getCitiesByCountryCode: actionCreators.getCitiesByCountryCode,
+    autoCompleteCity: actionCreators.autoCompleteCity,
   },
   dispatch,
 );
