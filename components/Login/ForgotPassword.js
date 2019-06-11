@@ -139,10 +139,14 @@ class ForgotPassword extends Component {
         {showSecurityQuestions &&
         <>
           <div>
-            <label className={`${styles['label-light-grey']}`}>What is your Birth place?*</label>
-            <input name="input" type="text" autoComplete="off" />
-            <label className={`${styles['mt-40']} ${styles['label-light-grey']}`}>What i your mothers maiden name?*</label>
-            <input name="input" type="text" autoComplete="off" />
+            <div className={`${styles['fp-input']} ${styles['pb-30']}`}>
+                    <input name="email" type="text" autoComplete="off" required />
+                    <label className={`${styles['label-light-grey']}`}>What is your Birth place?*</label>
+            </div>
+            <div className={`${styles['fp-input']} ${styles['pb-30']}`}>
+                    <input name="email" type="text" autoComplete="off" required />
+                    <label className={`${styles['label-light-grey']}`}>What i your mothers maiden name?*</label>
+            </div>
           </div>
           <Button
             className={`${styles['flex-center']}  ${styles.width100} ${styles['fs-14']} ${styles['text-uppercase']} ${styles['button-radius']}`}
@@ -155,7 +159,7 @@ class ForgotPassword extends Component {
         <span className={`${styles['radio-buttons']} ${styles.flex} ${styles['flex-colum']} ${styles['justify-around']}`}>
           <div className={`${styles.flex}`}>
             <input name="addr_checkbox" type="radio" className={`${styles['radio-btn']} ${styles['radio-margin']}`} data-id="email" onChange={this.handleChange} />
-            <span>
+            <span className={`${styles['ml-10']}`}>
               <div className={radioValue === 'email' && `${styles['ff-b']}`}>Reset Password by Email:</div>
               <div className={radioValue === 'email' && `${styles['fs-14']} ${styles['ff-b']}`}>{userInfo.email || 'susmitha@gmail.com'}</div>
             </span>
@@ -163,8 +167,8 @@ class ForgotPassword extends Component {
           <div className={`${styles.border}`} />
           <span>
             <div className={`${styles.flex}`}>
-              <input name="addr_checkbox" type="radio" className={`${styles['radio-btn']} ${styles['radio-margin']}`} data-id="otp" onChange={this.handleChange} />
-              <span>
+              <input name="addr_checkbox" type="radio" className={`${styles['radio-btn']}`} data-id="otp" onChange={this.handleChange} />
+              <span className={`${styles['ml-10']}`}>
                 <div className={radioValue === 'otp' && `${styles['fs-14']} ${styles['ff-b']}`}>Reset by Mobile OTP:</div>
                 <div className={radioValue === 'otp' && `${styles['fs-14']} ${styles['ff-b']}`}>{userInfo.mobile_number || '121212112'}</div>
               </span>

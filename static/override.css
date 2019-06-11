@@ -180,6 +180,21 @@
     display: none;
 }
 
+#login-toggle {
+    border: none;
+    padding: 0;
+    display: flex;
+}
+
+#login-toggle .caret {
+   margin-left: -10px;
+   margin-top: 12px;
+}
+
+#country_toggle.dropdown-menu {
+    min-width: 55px;
+}
+
 .btn-default, .btn-default.active.focus, .btn-default.active:focus, .btn-default.active:hover, .btn-default:active.focus, .btn-default:active:focus, .btn-default:active:hover, .open>.dropdown-toggle.btn-default.focus, .open>.dropdown-toggle.btn-default:focus, .open>.dropdown-toggle.btn-default:hover {
     background-color: transparent;
     box-shadow: none;
