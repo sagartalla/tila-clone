@@ -13,6 +13,10 @@
       box-shadow 0 0 5px rgba(0,0,0,0.1)
       transition all 0.5s ease-in
       background white
+      border 0
+      li
+        padding 2px  0
+        font-size 12px
 
   input[type=text]
     background transparent
@@ -28,7 +32,7 @@
   .map-icon
     width 10px
     height 15px
-.delivery-input
+input.delivery-input
   width 80%
   max-width initial
   white-space nowrap
@@ -36,7 +40,10 @@
   o-text-overflow ellipsis
   text-overflow ellipsis
   display inline-flex
-  border-bottom 0 !important
+  border-bottom 0
+
+input.pdp-border-btm
+  border-bottom 1px solid border-gray
 
 @media screen and (min-device-width: 320px) and (max-device-width: 767px) and (orientation : portrait) {
   .auto-suggestions-wrap {
