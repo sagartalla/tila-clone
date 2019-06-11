@@ -5,7 +5,6 @@ import { languageDefinations } from '../../../../utils/lang/';
 import SVGComponent from '../../../common/SVGComponet';
 import MyGMap from './MyGMap';
 import lang from '../../../../utils/language';
-// import Country from '../../../HeaderBar/includes/Country';
 import countriesImage from '../../../../constants/countries';
 import main_en from '../../../../layout/main/main_en.styl';
 import main_ar from '../../../../layout/main/main_ar.styl';
