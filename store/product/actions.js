@@ -12,6 +12,8 @@ const actions = {
   AUTOCOMPLETE_CITY: 'AUTOCOMPLETE_CITY',
   AUTOCOMPLETE_COUNTRY: 'AUTOCOMPLETE_COUNTRY',
   PDP_TRACK: 'PDP_TRACK',
+  SET_PRODUCTID: 'SET_PRODUCTID',
+  SET_VARIANTID: 'SET_VARIANTID'
 };
 
 const actionCreators = {
@@ -50,6 +52,14 @@ const actionCreators = {
   getCountries: () => ({
     type: actions.GET_COUNTRIES,
     payload: api.getCountries(),
+  }),
+  setProductId: (id) => ({
+    type:actions.SET_PRODUCTID,
+    id
+  }),
+  setVariantId:(id) => ({
+    type:actions.SET_VARIANTID,
+    id
   }),
   getCitiesByCountryCode: code => ({
     type: actions.GET_CITIES,

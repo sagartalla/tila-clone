@@ -10,9 +10,7 @@ import { actionCreators } from '../store/auth';
 // const cookies = new Cookies();
 
 class Base extends Component {
-  componentWillMount() {
 
-  }
   componentDidMount() {
     const history = createHistory();
     configureUrlQuery({ history });
