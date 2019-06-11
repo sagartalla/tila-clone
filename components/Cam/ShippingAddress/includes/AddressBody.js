@@ -85,14 +85,15 @@ const AddressBody = (props) => {
                           {DELIVERY_ADDR_PAGE.EDIT_ADDR}
                         </span>
                       </Col>
-                      {props.isPaymentPage && !isDefault ?
-                        <Col md={colLength} sm={colLength} xs={colLength} className={`${styles['pl-0']} ${styles['edit-action']} ${styles.flex} ${styles['justify-center']}`}>
-                          <span id={val.address_id} onClick={makeDefaultAddress} className={styles['edit-icon']}>
-                            {DELIVERY_ADDR_PAGE.MAKE_DEFAULT}
-                          </span>
-                        </Col>
-                        :
-                        null
+                      {
+                          props.isPaymentPage && !isDefault ?
+                            <Col md={colLength} sm={colLength} xs={colLength} className={`${styles['pl-0']} ${styles['edit-action']} ${styles['flex']} ${styles['justify-center']}`}>
+                              <span id={val.address_id} onClick={makeDefaultAddress} className={`${styles['edit-icon']} ${styles.pointer}`}>
+                                {DELIVERY_ADDR_PAGE.MAKE_DEFAULT}
+                              </span>
+                            </Col>
+                          :
+                            null
                       }
                     </Row>
                   </div>

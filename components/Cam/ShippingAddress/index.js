@@ -288,12 +288,12 @@ class ShippingAddress extends Component {
   }
 
   showAddAdrressForm = (key) => {
-    const { isFromCart } = this.props;
+    // const { isFromCart } = this.props;
     if (key === 'pdp') {
       document.getElementsByTagName('BODY')[0].style.overflow = 'hidden';
     }
     this.setState({
-      showNewAddr: isFromCart ? true : (key === 'pdp' ? true : this.state.showNewAddr),
+      showNewAddr: key === 'pdp' ? true : this.state.showNewAddr,
       validation: this.validations.valid(),
       showSlider: true,
     });

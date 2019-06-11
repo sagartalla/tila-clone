@@ -15,8 +15,9 @@ class Variant extends Component {
     super(props);
     this.sizeChart = ['S','XS','XXS','M','L','2XL','3XL','4XL','5XL','6XL','7XL'];
     this.state = {
+      [props.id]:props.values[0],
       chartValues: this.sortSizeChart(props.values)
-    };
+    }
     this.onSelectVariant = this.onSelectVariant.bind(this);
   }
 
@@ -52,7 +53,13 @@ class Variant extends Component {
           <select id={id} data-key={id} onChange={this.onSelectVariant} className={`${styles['varient-select-part']} ${styles['fs-12']} ${styles['p-5']}`}>
           {
             this.state.chartValues.map((option) => (
-              <option key={option} value={option}>{option}</option>
+              <option
+                key={option}
+                value={option}
+                selected={this.state[id] === option ? true: false}
+                >
+                {option}
+              </option>
             ))
           }
           </select>
