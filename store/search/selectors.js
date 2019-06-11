@@ -77,13 +77,13 @@ const getSearchFilters = (store) => {
             {
               canonicalId: _.kebabCase(value.name),
               id: value.id,
-              name: key,
+              name: value.name,
               children: _.reduce(value.child, (acc, value, key) => [
                 ...acc,
                 {
                   canonicalId: _.kebabCase(value.name),
                   id: value.id,
-                  name: key,
+                  name: value.name,
                 },
               ], []),
             }], []),

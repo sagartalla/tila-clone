@@ -15,7 +15,7 @@ const Electronics = () => (
           <div className={`${styles['flex']} popular-cat-part-sub ${styles['pt-20']} ${styles['pb-20']}`}>
             <div className={`popular-cat-part-inn ${styles['mr-35']}`}>
               <div className="popular-cat-inn-img">
-                <a href={`/SAU/${lang}/srp/mobiles?categoryTree=true&isListed=false&sid=848,849`}>
+                <a href={`/SAU/${lang}/srp/mobiles?categoryTree=true&isListed=false&sid=848,2349`}>
                   <img src="/static/img/landing-page-tech-img/popular-cat.png" className="img-responsive" />
                 </a>
               </div>
@@ -26,7 +26,7 @@ const Electronics = () => (
             </div>
             <div className={`popular-cat-part-inn-1 ${styles['mr-35']}`}>
               <div className="popular-cat-inn-img">
-                <a href={`/SAU/${lang}/srp/televisions?categoryTree=true&isListed=false&sid=848,878`}>
+                <a href={`/SAU/${lang}/srp/televisions?categoryTree=true&isListed=false&sid=848,2351`}>
                   <img src="/static/img/landing-page-tech-img/popular-cat1.png" className="img-responsive" />
                 </a>
               </div>
@@ -38,7 +38,7 @@ const Electronics = () => (
             <div className={`popular-cat-part-inn
              ${styles['mr-35']}`}>
               <div className="popular-cat-inn-img">
-                <a href={`/SAU/${lang}/srp/laptops?categoryTree=true&isListed=false&sid=848,864`}>
+                <a href={`/SAU/${lang}/srp/laptops?categoryTree=true&isListed=false&sid=848,2352`}>
                   <img src="/static/img/landing-page-tech-img/popular-cat2.png" className="img-responsive" />
                 </a>
               </div>
@@ -49,7 +49,7 @@ const Electronics = () => (
             </div>
             <div className={`popular-cat-part-inn ${styles['mr-35']}`}>
               <div className="popular-cat-inn-img">
-                <a href={`/SAU/${lang}/srp/tablets?categoryTree=true&isListed=false&sid=848,877`}>
+                <a href={`/SAU/${lang}/srp/tablets?categoryTree=true&isListed=false&sid=848,2350`}>
                   <img src="/static/img/landing-page-tech-img/popular-cat3.png" className="img-responsive" />
                 </a>
               </div>
@@ -71,7 +71,7 @@ const Electronics = () => (
             </div>
             <div className={`popular-cat-part-inn ${styles['mr-35']}`}>
               <div className="popular-cat-inn-img">
-                <a href={`/SAU/${lang}/srp/gaming-&-accessories?categoryTree=true&isListed=false&sid=848,866`}>
+                <a href={`/SAU/${lang}/srp?search=Gaming&language=en&isListed=false`}>
                   <img src="/static/img/landing-page-tech-img/popular-cat5.png" className="img-responsive" />
                 </a>
               </div>
@@ -115,7 +115,7 @@ const Electronics = () => (
             </div>
             <div className="popular-cat-part-inn-1">
               <div className="popular-cat-inn-img">
-                <a href={`/SAU/${lang}/srp/home-entertainment?categoryTree=true&isListed=false&sid=848,879`}>
+                <a href={`/SAU/${lang}/srp?search=Home%20Entertainment&language=en&isListed=false`}>
                   <img src="/static/img/landing-page-tech-img/popular-cat9.png" className="img-responsive" />
                 </a>
               </div>
@@ -171,7 +171,7 @@ const Electronics = () => (
           <Col md={6} className={styles['pl-0']}>
             <h4 className={`${styles['fontW600']} ${styles['text-uppercase']} ${styles['pb-10']}`}><span className={`populat-cat-title ${styles['bdr-btm-green-color']}`}>Gaming  </span>  Consoles</h4>
             <div>
-              <a href={`/SAU/${lang}/srp/gaming-console?categoryTree=true&isListed=false&sid=848,866,870`}>
+              <a href={`/SAU/${lang}/srp?search=Gaming&language=en&isListed=false`}>
                 <img src="/static/img/landing-page-tech-img/gaming-img.jpg" className="img-responsive" />
               </a>
             </div>
@@ -179,7 +179,7 @@ const Electronics = () => (
           <Col md={6} className={styles['pr-0']}>
             <h4 className={`${styles['fontW600']} ${styles['text-uppercase']} ${styles['pb-10']}`}><span className={`populat-cat-title ${styles['bdr-btm-green-color']}`}>RC Toys</span> </h4>
             <div>
-              <a href={`/SAU/${lang}/srp/gaming-&-accessories?categoryTree=true&isListed=false&sid=848,866`}>
+              <a href={`/SAU/${lang}/srp?search=gaming%20&%20accessories&language=en&isListed=false`}>
                 <img src="/static/img/landing-page-tech-img/gaming-img1.jpg" className="img-responsive" />
               </a>
             </div>
@@ -202,7 +202,7 @@ const Electronics = () => (
           </Col>
           <Col md={2} className={styles['pl-0']}>
             <div className={`${styles['mt-20']} ${styles['relative']} ${styles['home-kitchan-inn']}`}>
-              <a href={`/SAU/${lang}/srp/refrigerators?categoryTree=true&isListed=false&sid=932,945,2263`}>
+              <a href={`/SAU/${lang}/srp?search=Refrigerators&language=en&isListed=false`}>
                 <img src="/static/img/landing-page-tech-img/home-kitchen.jpg" className="img-responsive" />
               </a>
               <div className={`${styles['absolute']} home-price-details ${styles['white-color']} ${styles['flex']} ${styles['flex-colum']}`}>
@@ -214,7 +214,7 @@ const Electronics = () => (
           </Col>
           <Col md={2} className={styles['pl-0']}>
             <div className={`${styles['mt-20']} ${styles['relative']} ${styles['home-kitchan-inn']}`}>
-              <a href={`/SAU/${lang}/srp/mixer-grinder-juicers?categoryTree=true&isListed=false&sid=932,945,2259`}>
+              <a href={`/SAU/${lang}/srp?search=Mixer%20&%20Juicers&language=en&isListed=false`}>
                 <img src="/static/img/landing-page-tech-img/home-kitchen2.jpg" className="img-responsive" />
               </a>
               <div className={`${styles['absolute']} home-price-details ${styles['white-color']} ${styles['flex']} ${styles['flex-colum']}`}>
@@ -226,7 +226,7 @@ const Electronics = () => (
           </Col>
           <Col md={2} className={styles['pl-0']}>
             <div className={`${styles['mt-20']} ${styles['relative']} ${styles['home-kitchan-inn']}`}>
-              <a href={`/SAU/${lang}/srp/washing-machines?categoryTree=true&isListed=false&sid=932,935,2270`}>
+              <a href={`/SAU/${lang}/srp?search=washing%20Machines&language=en&isListed=false`}>
                 <img src="/static/img/landing-page-tech-img/home-kitchen3.jpg" className="img-responsive" />
               </a>
               <div className={`${styles['absolute']} home-price-details ${styles['white-color']} ${styles['flex']} ${styles['flex-colum']}`}>

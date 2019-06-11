@@ -42,7 +42,7 @@ const Electronics = () => React.createElement(
               { className: "popular-cat-inn-img" },
               React.createElement(
                 "a",
-                { href: `/SAU/${lang}/srp/mobiles?categoryTree=true&isListed=false&sid=848,849` },
+                { href: `/SAU/${lang}/srp/mobiles?categoryTree=true&isListed=false&sid=848,2349` },
                 React.createElement("img", { src: "/static/img/landing-page-tech-img/popular-cat.png", className: "img-responsive" })
               )
             ),
@@ -69,7 +69,7 @@ const Electronics = () => React.createElement(
               { className: "popular-cat-inn-img" },
               React.createElement(
                 "a",
-                { href: `/SAU/${lang}/srp/televisions?categoryTree=true&isListed=false&sid=848,878` },
+                { href: `/SAU/${lang}/srp/televisions?categoryTree=true&isListed=false&sid=848,2351` },
                 React.createElement("img", { src: "/static/img/landing-page-tech-img/popular-cat1.png", className: "img-responsive" })
               )
             ),
@@ -97,7 +97,7 @@ const Electronics = () => React.createElement(
               { className: "popular-cat-inn-img" },
               React.createElement(
                 "a",
-                { href: `/SAU/${lang}/srp/laptops?categoryTree=true&isListed=false&sid=848,864` },
+                { href: `/SAU/${lang}/srp/laptops?categoryTree=true&isListed=false&sid=848,2352` },
                 React.createElement("img", { src: "/static/img/landing-page-tech-img/popular-cat2.png", className: "img-responsive" })
               )
             ),
@@ -124,7 +124,7 @@ const Electronics = () => React.createElement(
               { className: "popular-cat-inn-img" },
               React.createElement(
                 "a",
-                { href: `/SAU/${lang}/srp/tablets?categoryTree=true&isListed=false&sid=848,877` },
+                { href: `/SAU/${lang}/srp/tablets?categoryTree=true&isListed=false&sid=848,2350` },
                 React.createElement("img", { src: "/static/img/landing-page-tech-img/popular-cat3.png", className: "img-responsive" })
               )
             ),
@@ -178,7 +178,7 @@ const Electronics = () => React.createElement(
               { className: "popular-cat-inn-img" },
               React.createElement(
                 "a",
-                { href: `/SAU/${lang}/srp/gaming-&-accessories?categoryTree=true&isListed=false&sid=848,866` },
+                { href: `/SAU/${lang}/srp?search=Gaming&language=en&isListed=false` },
                 React.createElement("img", { src: "/static/img/landing-page-tech-img/popular-cat5.png", className: "img-responsive" })
               )
             ),
@@ -286,7 +286,7 @@ const Electronics = () => React.createElement(
               { className: "popular-cat-inn-img" },
               React.createElement(
                 "a",
-                { href: `/SAU/${lang}/srp/home-entertainment?categoryTree=true&isListed=false&sid=848,879` },
+                { href: `/SAU/${lang}/srp?search=Home%20Entertainment&language=en&isListed=false` },
                 React.createElement("img", { src: "/static/img/landing-page-tech-img/popular-cat9.png", className: "img-responsive" })
               )
             ),
@@ -469,7 +469,7 @@ const Electronics = () => React.createElement(
             null,
             React.createElement(
               "a",
-              { href: `/SAU/${lang}/srp/gaming-console?categoryTree=true&isListed=false&sid=848,866,870` },
+              { href: `/SAU/${lang}/srp?search=Gaming&language=en&isListed=false` },
               React.createElement("img", { src: "/static/img/landing-page-tech-img/gaming-img.jpg", className: "img-responsive" })
             )
           )
@@ -492,7 +492,7 @@ const Electronics = () => React.createElement(
             null,
             React.createElement(
               "a",
-              { href: `/SAU/${lang}/srp/gaming-&-accessories?categoryTree=true&isListed=false&sid=848,866` },
+              { href: `/SAU/${lang}/srp?search=gaming%20&%20accessories&language=en&isListed=false` },
               React.createElement("img", { src: "/static/img/landing-page-tech-img/gaming-img1.jpg", className: "img-responsive" })
             )
           )
@@ -551,7 +551,7 @@ const Electronics = () => React.createElement(
             { className: `${styles['mt-20']} ${styles['relative']} ${styles['home-kitchan-inn']}` },
             React.createElement(
               "a",
-              { href: `/SAU/${lang}/srp/refrigerators?categoryTree=true&isListed=false&sid=932,945,2263` },
+              { href: `/SAU/${lang}/srp?search=Refrigerators&language=en&isListed=false` },
               React.createElement("img", { src: "/static/img/landing-page-tech-img/home-kitchen.jpg", className: "img-responsive" })
             ),
             React.createElement(
@@ -583,7 +583,7 @@ const Electronics = () => React.createElement(
             { className: `${styles['mt-20']} ${styles['relative']} ${styles['home-kitchan-inn']}` },
             React.createElement(
               "a",
-              { href: `/SAU/${lang}/srp/mixer-grinder-juicers?categoryTree=true&isListed=false&sid=932,945,2259` },
+              { href: `/SAU/${lang}/srp?search=Mixer%20&%20Juicers&language=en&isListed=false` },
               React.createElement("img", { src: "/static/img/landing-page-tech-img/home-kitchen2.jpg", className: "img-responsive" })
             ),
             React.createElement(
@@ -615,7 +615,7 @@ const Electronics = () => React.createElement(
             { className: `${styles['mt-20']} ${styles['relative']} ${styles['home-kitchan-inn']}` },
             React.createElement(
               "a",
-              { href: `/SAU/${lang}/srp/washing-machines?categoryTree=true&isListed=false&sid=932,935,2270` },
+              { href: `/SAU/${lang}/srp?search=washing%20Machines&language=en&isListed=false` },
               React.createElement("img", { src: "/static/img/landing-page-tech-img/home-kitchen3.jpg", className: "img-responsive" })
             ),
             React.createElement(
