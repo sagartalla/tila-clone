@@ -282,7 +282,7 @@ const Fashion = () => React.createElement(
               { className: `new-brands ${styles['pb-10']}` },
               React.createElement(
                 'a',
-                { href: `/SAU/${lang}/srp?search=sunglass&language=en&isListed=false` },
+                { href: `/SAU/${lang}/srp/sunglasses?categoryTree=true&isListed=false&sid=892,2439` },
                 React.createElement('img', { src: '/static/img/landing-page-fashion/what-new2.jpg', className: 'img-responsive' })
               ),
               React.createElement(
@@ -336,7 +336,7 @@ const Fashion = () => React.createElement(
               { className: `new-brands ${styles['pb-10']}` },
               React.createElement(
                 'a',
-                { href: `/SAU/${lang}/srp?search=Perfumes&language=en&isListed=false892,929` },
+                { href: `/SAU/${lang}/srp/fragrance?categoryTree=true&isListed=false&sid=932,958,964` },
                 React.createElement('img', { src: '/static/img/landing-page-fashion/what-new4.jpg', className: 'img-responsive' })
               ),
               React.createElement(
