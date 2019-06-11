@@ -5,7 +5,8 @@ import { languageDefinations } from '../../../../utils/lang/';
 import SVGComponent from '../../../common/SVGComponet';
 import MyGMap from './MyGMap';
 import lang from '../../../../utils/language';
-
+// import Country from '../../../HeaderBar/includes/Country';
+import countriesImage from '../../../../constants/countries';
 import main_en from '../../../../layout/main/main_en.styl';
 import main_ar from '../../../../layout/main/main_ar.styl';
 import styles_en from '../address_en.styl';
@@ -171,7 +172,8 @@ const AddressNew = (props) => {
           </Col>
           <Col md={2} sm={4} xs={4} className={`${styles['pr-0']}`}>
             <div className={`${styles['fp-input']} ${styles['common-input-mb']}`}>
-              <input type="number" name="mobile_country_code" defaultValue={data.mobile_country_code} className={styles.input} required />
+              <img src={countriesImage['SAU'].img} alt={'KSA'} title={'KSA'} className={styles['country-flag']}/>
+              <input type="number" name="mobile_country_code" defaultValue={data.mobile_country_code} className={`${styles.input} ${styles['padded']}`} required />
               <span className={styles.highlight} />
               <span className={styles.bar} />
               <label>{DELIVERY_ADDR_PAGE.CODE}</label>
