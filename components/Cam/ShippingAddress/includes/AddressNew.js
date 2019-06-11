@@ -21,6 +21,7 @@ const AddressNew = (props) => {
     saveBtnClickHandler, resetAddAdrressForm, countriesData, showCountriesData, hideTitle,
     getDataFromMap, getAllCities, selectCityFromSuggesstions, showCitiesData, validation, isEditAddr,
   } = props;
+  console.log(data);
   const { DELIVERY_ADDR_PAGE } = languageDefinations();
   return (
     <div className={`${styles['addr-new-container']} ${styles['pb-30']} ${styles['pr-30']} ${styles['pl-30']}`}>
@@ -171,7 +172,7 @@ const AddressNew = (props) => {
           </Col>
           <Col md={2} sm={4} xs={4} className={`${styles['pr-0']}`}>
             <div className={`${styles['fp-input']} ${styles['common-input-mb']}`}>
-              <img src={countriesImage['SAU'].img} alt={'KSA'} title={'KSA'} className={styles['country-flag']}/>
+              <img src={ countriesImage[data.shipping_country_code] && countriesImage[data.shipping_country_code].img} alt={""} title={data.shipping_country_code} className={styles['country-flag']}/>
               <input type="number" name="mobile_country_code" defaultValue={data.mobile_country_code} className={`${styles.input} ${styles['padded']}`} required />
               <span className={styles.highlight} />
               <span className={styles.bar} />
