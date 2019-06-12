@@ -164,7 +164,22 @@ const setVerfied = isVerified => axios.post('/api/setCookie', {
 
 const getDomainCountries = () => axios.get(`${constants.TRANSFORMER_API_URL}/fpts/domainCurrencyMapping`);
 
+
+// New Registration Flow API's
+
+const v2UserLogin = email => axios.get(`${constants.CMS_API_URL}/api/v1/user?email=${email}`).then(res => Object.assign({}, res, {
+  data: {
+    ...res.data,
+    email,
+  },
+}));
+
+
+
+
+
 export default {
   userLogin, userLogout, getLoginInfo, setCountry, setSessionID, deriveCity, setCity, getDomainCountries,
   removeCity, setLanguage, savePtaToken, verifyEmail, sendOtpToEmailId, getUserInfo, setVerfied, track,
+  v2UserLogin,
 };

@@ -52,7 +52,12 @@ const getUserInfo = (store) => {
 
 const getDomainCountries = store => store.authReducer.data.domainCountries;
 
+
+// new selectors
+const getActive = store => store.authReducer.v2.active;
+
 export {
   getErrorMessege, getCountry, getLoggedInStatus, getInstaCode, getUserCreds, getDeliveryCity, getDomainCountries,
   getLoginProgressStatus, getShowLogin, getPTAToken, showEmailVerificationScreen, getLanguage, getLoadingStatus, getUserInfo,
+  getActive,
 };

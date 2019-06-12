@@ -27,7 +27,10 @@ const actions = {
   VERIFY_RESEND_EMAIL: 'VERIFY_RESEND_EMAIL',
   GET_USER_INFO: 'GET_USER_INFO',
   GET_DOMAIN_COUNTRIES: 'GET_DOMAIN_COUNTRIES',
-  AUTH_TRACK: 'AUTH_TRACK'
+  AUTH_TRACK: 'AUTH_TRACK',
+  // new actions
+  V2_USER_LOGIN: 'V2_USER_LOGIN',
+
 };
 
 const actionCreators = {
@@ -152,6 +155,11 @@ const actionCreators = {
       }));
     });
   },
+  //new actions for registration flow
+  v2UserLogin: email => ({
+    type: actions.V2_USER_LOGIN,
+    payload: api.v2UserLogin(email),
+  }),
 };
 
 export { actions, actionCreators };

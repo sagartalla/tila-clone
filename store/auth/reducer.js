@@ -4,6 +4,18 @@ import { actions } from './actions';
 
 const cookies = new Cookies();
 
+const pageFlows = {
+  existing_user_login: {
+    password: {
+      activePage: 'password',
+      nextPage: null,
+    },
+  },
+  forgot_password: {
+
+  },
+};
+
 const initialState = {
   ui: {
     loading: false,
@@ -22,9 +34,37 @@ const initialState = {
     domainCountries: [],
   },
   error: '',
+  v2: {
+    data: {},
+    active: {
+      activePage: '',
+    },
+  },
 };
 
 const authReducer = typeToReducer({
+  // new reducers actions for Registration flow
+  [actions.V2_USER_LOGIN]: {
+    PENDING: state => state,
+    FULFILLED: (state, action) => {
+      const { data } = action.payload;
+      const { v2 } = state;
+      if (data.exist && data.last_social_login_used && data.last_social_login_used.length === 0) {
+        v2.active = pageFlows.existing_user_login.password;
+      }
+      return Object.assign({}, state, {
+        v2: {
+          ...state.v2,
+          ...v2,
+          data,
+        },
+      });
+    },
+    REJECTED: state => state,
+  },
+  // ///////////////////
+  // ///////////////////
+  // ///////////////////
   [actions.USER_LOGIN]: {
     PENDING: state => Object.assign({}, state, {
       ui: {
