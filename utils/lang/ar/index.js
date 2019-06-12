@@ -51,7 +51,7 @@ export const AR_KEYWORDS = {
     THERE_ARE: 'يوجد\موجود',
     ITEM_IN_YOUR_WISHLIST: 'المنتج في قائمك المفضلة ',
     ITEMS_IN_YOUR_WISHLIST: 'المنتج في قائمك المفضلة',
-    MY_CART: 'My Cart',
+    MY_CART: 'عربة التسوق',
   },
   PAYMENT_PAGE: {
     SECURE_CHECKOUT: 'عملية خروج آمنة',
@@ -510,7 +510,7 @@ export const AR_KEYWORDS = {
     MENS_FOOTWEAR: 'أحذية رجالية',
     WOMEN_FOOTWEAR: 'أحذية نسائية',
     BAGS: 'Bags',
-    CAMERAS: 'Cameras',
+    CAMERAS: 'كاميرات',
     SPEAKERS: 'مكبرات صوتيه',
     STORAGE_DEVICES: 'أجهزة التخزين',
     PHOTO_FRAMES: 'برواز الصور ',

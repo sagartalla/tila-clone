@@ -418,7 +418,7 @@ export const EN_KEYWORDS = {
     AUTO_CORRECTED: 'Auto corrected',
   },
   // adding new page content
-  OrderedE: {
+  FOOTER_PAGE: {
     GOT_QUESTION: 'Got a question?',
     WE_CARE_TILA: 'wecare@tila.com',
     ORIGINAL: 'ORIGINAL',
