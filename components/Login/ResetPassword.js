@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { Row, Col } from 'react-bootstrap';
 import { Modal } from 'react-router-modal';
 import { languageDefinations } from '../../utils/lang';
-import { actionCreators } from '../../store/cam/personalDetails';
+import { actionCreators, selectors } from '../../store/cam/personalDetails';
 import SVGComponent from '../common/SVGComponet';
 import Button from '../common/CommonButton';
 import lang from '../../utils/language';
@@ -28,6 +28,7 @@ class ResetPassword extends Component {
       password: '',
       confirmPassword: '',
       hide: true,
+      showModal: true,
     };
     this.passwordSuccess = this.passwordSuccess.bind(this);
   }
@@ -38,10 +39,9 @@ class ResetPassword extends Component {
 
 
   onBackdropClick = () => {
-    if (!window.sessionStorage.getItem('TILuservisitcount')) {
-      window.sessionStorage.setItem('TILuservisitcount', 1);
-    }
-    this.props.onBackdropClick();
+    this.setState({
+      showModal: false,
+    });
   }
 
   hideToggle = () => {
@@ -68,18 +68,18 @@ class ResetPassword extends Component {
     }
   }
   render() {
-    const { password, hide, success } = this.state;
+    const { password, hide, success, showModal } = this.state;
     return (
       <React.Fragment>
         {success ?
-          <div className={`${styles.flex} ${styles['justify-center']} ${styles['ht-100vh']} ${styles['flex-center']} ${styles['flex-col']} ${styles['bg-gray']}`}>
-            <div className={`${styles['reset-password']} ${styles.flex} ${styles['justify-center']} ${styles['flex-center']} ${styles['flex-col']} ${styles['ht-240']}`}>
-              <Col xs={12} md={12} className={`${styles['flex-center']} ${styles['tickmark-part']}`}>
-                <SVGComponent clsName={`${styles['tickmark-icon']}`} src="icons/common-icon/reset-password" />
+          <div className={`${styles.flex} ${styles['justify-center']}  ${styles['flex-center']} ${styles['flex-col']} ${styles['bg-gray']}`}>
+            <div className={`${styles.flex} ${styles['justify-center']} ${styles['flex-center']} ${styles['flex-col']} ${styles['ht-240']}`}>
+              <Col xs={12} md={12} className={`${styles['flex-center']} ${styles['reset-part']}`}>
+                <SVGComponent clsName={`${styles['reset-icon']}`} src="icons/common-icon/reset-success" />
               </Col>
-              <h2 className={styles['text-center']}><b>{LOGIN_PAGE.PASSWORD_RESET_SUCCESSFULL}</b></h2>
             </div>
           </div> :
+          showModal &&
           <Modal className={`react-router-modal__modal ${styles['login-reg-modal']} ${styles['p-10']}`} onBackdropClick={this.onBackdropClick}>
             <Row className={`${styles['bg-white']} ${styles['m-0']}`}>
               <div className={`${styles.flex}`}>
@@ -130,6 +130,9 @@ class ResetPassword extends Component {
   }
 }
 
+const mapStateToProps = store => ({
+});
+
 const mapDispatchToProps = dispatch => bindActionCreators(
   {
     resetPassword: actionCreators.resetPassword,
@@ -137,4 +140,4 @@ const mapDispatchToProps = dispatch => bindActionCreators(
   dispatch,
 );
 
-export default connect(null, mapDispatchToProps)(ResetPassword);
+export default connect(mapStateToProps, mapDispatchToProps)(ResetPassword);

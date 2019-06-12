@@ -20,7 +20,7 @@ const VerifyStatus = (props) => {
   const resetMobileLink = LOGIN_PAGE.OTP_SENT_TO_YOUR_REGISTERED_MAIL;
   return (
     <>
-      {props.showInput && props.radioValue === 'email' ?
+      {props.showOtpSuccess || props.showInput && props.radioValue === 'email' ?
         <React.Fragment>
           <div className={styles['reset-link']}>
           <Row className={`${styles.flex}`}>
@@ -40,7 +40,7 @@ const VerifyStatus = (props) => {
           </div>
           <Button
             className={`${styles['flex-center']}  ${styles.width100} ${styles['fs-14']} ${styles['text-uppercase']} ${styles['button-radius']}`}
-            btnText={LOGIN_PAGE.NEXT}
+            btnText="OK"
             onClick={props.resetLogin}
           />
         </React.Fragment>

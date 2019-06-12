@@ -13,6 +13,7 @@ const actions = {
   VERIFY_OTP:'VERIFY_OTP',
   UPLOAD_PROFILE_PIC: 'UPLOAD_PROFILE_PIC',
   DOWNLOAD_PROFILE_PIC: 'DOWNLOAD_PROFILE_PIC',
+  RESET_SHOW_LOGIN: 'RESET_SHOW_LOGIN',
 };
 
 const actionCreators = {
@@ -86,6 +87,9 @@ const actionCreators = {
       payload: apis.deactivateUserProfile(),
     });
   },
+  resetShowLogin: () => ({
+    type: actions.RESET_SHOW_LOGIN,
+  }),
 };
 
 export { actions, actionCreators };

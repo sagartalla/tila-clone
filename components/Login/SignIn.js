@@ -73,8 +73,8 @@ class SignIn extends Component {
               required
             />
             <label className={`${styles['label-light-grey']}`}>{mode === 'NewUser' ? LOGIN_PAGE.SET_PASSWORD : mode === 'ExistingUser' ? LOGIN_PAGE.ENTER_PASSWORD : LOGIN_PAGE.ENTER_YOUR_EMAIL_ID}</label>
+           {mode !== 'SocialLogin' && <ShowHidePassword hide={hide} hideToggle={this.hideToggle} />}   
           </div>
-          {mode !== 'SocialLogin' && <ShowHidePassword hide={hide} hideToggle={this.hideToggle} />}
         </div>
         {mode !== 'ExistingUser' &&
         <React.Fragment>

@@ -170,6 +170,10 @@ const personalDetailsReducer = typeToReducer({
     }),
     REJECTED: state => Object.assign({}, state, { ui: { loading: false } }),
   },
+  [actions.RESET_SHOW_LOGIN]: state => ({
+    ...state,
+    showOtpSuccess: false,
+  }),
 }, initialState);
 
 export default personalDetailsReducer;
