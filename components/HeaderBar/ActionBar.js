@@ -79,7 +79,7 @@ class ActionBar extends Component {
     if (nextProps.isLoggedIn !== this.props.isLoggedIn) {
       this.props.getWishlist();
     }
-    let show = ((nextProps.isLoggedIn != this.props.isLoggedIn) && !this.state.logoutClicked) || this.state.loginClicked || !!nextProps.error || (!nextProps.isLoggedIn && nextProps.showLogin) || nextProps.loginInProgress || nextProps.showEmailVerificationScreen;
+    let show = ((nextProps.isLoggedIn != this.props.isLoggedIn) && !this.state.logoutClicked) || this.state.loginClicked || !!nextProps.error || (!nextProps.isLoggedIn && nextProps.showLogin) || nextProps.loginInProgress || nextProps.showEmailVerificationScreen || nextProps.showOtpSuccess;
     if (window.location.pathname.indexOf('/payment') > -1) {
       show = false;
     }
@@ -88,6 +88,7 @@ class ActionBar extends Component {
       logoutClicked: false,
       loginClicked: false,
     });
+    console.log('show', show);
     if (nextProps.isLoggedIn) {
       if (nextProps.ptaToken) {
         this.props.savePtaToken(nextProps.ptaToken);
@@ -295,6 +296,7 @@ const mapStateToProps = store => ({
   showEmailVerificationScreen: selectors.showEmailVerificationScreen(store),
   getEditDetails: cartSelectors.getEditDetails(store),
   imgSource: personalSelectors.getImageSource(store),
+  showOtpSuccess: personalSelectors.forgotOtpsuccess(store),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(

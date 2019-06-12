@@ -4,6 +4,8 @@ import withRedux from 'next-redux-wrapper';
 import makeStore from '../store';
 import Base, { baseActions } from './base';
 import ResetPassword from '../components/Login/ResetPassword';
+import HeaderBar from '../components/HeaderBar/index';
+import FooterBar from '../components/Footer';
 import Layout from '../layout/main';
 
 class ResetPasswordPage extends Base {
@@ -25,7 +27,9 @@ class ResetPasswordPage extends Base {
     const { token } = this.state;
     return (
       <Layout>
+        <HeaderBar hideLogin />
         <ResetPassword token={token} />
+        <FooterBar />
       </Layout>
     );
   }

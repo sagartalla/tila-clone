@@ -9,7 +9,8 @@ const initialState = {
   useractive: true,
   error: '',
   otpResponse:{},
-  otpData:{}
+  otpData:{},
+  showOtpSuccess: false,
 };
 
 const personalDetailsReducer = typeToReducer({
@@ -105,11 +106,12 @@ const personalDetailsReducer = typeToReducer({
     })
   },
   [actions.FORGOT_PASSWORD]: {
-    PENDING: state => Object.assign({}, state, { ui: { loading: true } }),
-    FULFILLED: (state, action) => Object.assign({}, state, { data: action.payload, ui: { loading: false } }),
+    PENDING: state => Object.assign({}, state, { ui: { loading: true }, showOtpSuccess: false }),
+    FULFILLED: (state, action) => Object.assign({}, state, { data: action.payload, ui: { loading: false }, showOtpSuccess: true }),
     REJECTED: (state, action) => Object.assign({}, state, {
       error: action.payload.data,
       ui: { loading: false },
+      showOtpSuccess: false,
     }),
   },
   [actions.EDIT_PERSONAL_INFO]: {
