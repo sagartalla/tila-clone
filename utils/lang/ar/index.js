@@ -517,7 +517,7 @@ export const AR_KEYWORDS = {
     LIGHTS: 'مصابيح ضوئية',
     PERFUMES: 'عطور',
     MENS_GROOMING: 'العناية بالرجل',
-    LIFESTYLE: 'Lifestyle',
+    LIFESTYLE: 'لايف ستايل',
     TRAVEL_ACCESSORIES: 'إكسسوارات السفر',
 
   },
