@@ -6,6 +6,7 @@ import { Row, Col } from 'react-bootstrap';
 import { Modal } from 'react-router-modal';
 import SVGComponent from '../common/SVGComponet';
 import { selectors, actionCreators } from '../../store/auth';
+import { selectors as productSelectors } from '../../store/cam/personalDetails';
 import constants from '../../constants';
 import ForgotPassword from './ForgotPassword';
 import ResetPasswordPage from '../../pages/resetPassword';
@@ -211,7 +212,7 @@ class Login extends Component {
   }
 
   render() {
-    const { userCreds, loadingStatus, userInfo } = this.props;
+    const { userCreds, loadingStatus, userInfo, showOtpSuccess } = this.props;
     const { pathname } = window.location;
     const { mode, error, validation, clicked, showVerifyScreen, hide, showLoginSteps, forgotPassword } = this.state;
     return (
@@ -244,7 +245,11 @@ class Login extends Component {
                 </div>
               </h3> */}
             </div>
-            {forgotPassword ? <ForgotPassword /> :
+            {forgotPassword || showOtpSuccess ?
+            <ForgotPassword
+             loadingStatus={loadingStatus}
+             showOtpSuccess={showOtpSuccess}
+            /> :
             <LoginMainPage
               showForgotPassword={this.showForgotPassword}
             />}
@@ -261,8 +266,9 @@ const mapStateToProps = store => ({
   userCreds: selectors.getUserCreds(store),
   showEmailScreen: selectors.showEmailVerificationScreen(store),
   loading: selectors.getLoginProgressStatus(store),
-  loadingStatus: selectors.getLoadingStatus(store),
+  loadingStatus: productSelectors.getLoadingStatus(store),
   userInfo: selectors.getUserInfo(store),
+  showOtpSuccess: productSelectors.forgotOtpsuccess(store),  
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(

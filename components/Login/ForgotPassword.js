@@ -31,7 +31,7 @@ class ForgotPassword extends Component {
       errorMsg: '',
       radioValue: '',
       showModesToSelect: false,
-      showSecurityQuestions: true,
+      showSecurityQuestions: props.showOtpSuccess ? false : true,
       selectedValue: '',
     };
     this.sendLink = this.sendLink.bind(this);
@@ -73,13 +73,6 @@ class ForgotPassword extends Component {
     });
   }
 
-  resetShowLogin = () => {
-    const { isCheckoutPage, resetShowLogin, toggleModal } = this.props;
-    if (isCheckoutPage) {
-      toggleModal();
-    } else resetShowLogin();
-  }
-
   handleChange = (e) => {
     debugger;
     const key = e.target.getAttribute('data-id');
@@ -104,11 +97,17 @@ class ForgotPassword extends Component {
       showInput: true, // just example change state
     });
   }
-
+  resetShowLogin = () => {
+    debugger;
+    const { resetShowLogin } = this.props;
+    resetShowLogin();
+  }
   render() {
     const {
       showInput, radioValue, showModesToSelect, showSecurityQuestions,
     } = this.state;
+    const { loadingStatus, showOtpSuccess } = this.props;
+    console.log('loadingStatus', loadingStatus);
     return (
       <div className={`${styles['forgot-password']} ${styles.flex} ${styles['flex-colum']} ${styles['justify-around']}`}>
         <div>
@@ -160,17 +159,20 @@ class ForgotPassword extends Component {
               className={`${styles['flex-center']}  ${styles.width100} ${styles['fs-14']} ${styles['text-uppercase']} ${styles['button-radius']}`}
               disabled={radioValue === ''}
               onClick={this.sendLink}
+              btnLoading={loadingStatus}
               btnText="Next"
             />
           </React.Fragment> :
+          showOtpSuccess &&
           <VerifyStatus
-            resetLogin={this.resetShowLogin}
             switchState={this.switchState}
             showInput={showInput}
             radioValue={radioValue}
             forgotPasswordStatus={this.props.forgotPasswordStatus}
             sendLink={this.sendLink}
             validatePassKey={this.validatePassKey}
+            resetLogin={this.resetShowLogin}
+            showOtpSuccess={showOtpSuccess}
           />
         }
       </div>
@@ -184,7 +186,7 @@ const mapStateToProps = store => ({
 const mapDispatchToProps = dispatch => bindActionCreators(
   {
     forgotPassword: actionCreators.forgotPassword,
-    resetShowLogin: authActionCreators.resetShowLogin,
+    resetShowLogin: actionCreators.resetShowLogin,
   },
   dispatch,
 );
