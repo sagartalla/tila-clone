@@ -6,7 +6,6 @@ import { Row, Col } from 'react-bootstrap';
 import { Modal } from 'react-router-modal';
 import SVGComponent from '../common/SVGComponet';
 import { selectors, actionCreators } from '../../store/auth';
-import { selectors as productSelectors } from '../../store/cam/personalDetails';
 import constants from '../../constants';
 import ForgotPassword from './ForgotPassword';
 import ForgotSecurityPage from './ForgotSecurityQuestions';
@@ -219,9 +218,10 @@ class Login extends Component {
       case 'password':
         return <SignIn mode="ExistingUser" />;
       case 'forgotSecurityPage':
-        return <ForgotSecurityPage
-
-       /> ;
+        return <ForgotSecurityPage /> ;
+        return <SignIn mode="EXISTING_USER" />;
+      case 'password_new':
+        return <SignIn mode="NEW_USER" />;
       default:
         return <LoginPage />;
     }
@@ -279,7 +279,7 @@ const mapStateToProps = store => ({
   loading: selectors.getLoginProgressStatus(store),
   loadingStatus: selectors.getLoadingStatus(store),
   userInfo: selectors.getUserInfo(store),
-  showOtpSuccess: productSelectors.forgotOtpsuccess(store),
+  showOtpSuccess: selectors.forgotOtpsuccess(store),
   activeObj: selectors.getActive(store),
 });
 

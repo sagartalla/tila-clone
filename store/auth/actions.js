@@ -33,10 +33,22 @@ const actions = {
   RESET_PASSWORD: 'RESET_PASSWORD',
   FORGOT_PASSWORD: 'FORGOT_PASSWORD',
   SHOW_SECURITY_QUESTIONS: 'SHOW_SECURITY_QUESTIONS',
+  V2_NEW_USER_REGISTER: 'V2_NEW_USER_REGISTER',
+
 
 };
 
 const actionCreators = {
+  // new actions for registration flow
+  v2UserLogin: email => ({
+    type: actions.V2_USER_LOGIN,
+    payload: api.v2UserLogin(email),
+  }),
+  v2NewUserRegister: params => ({
+    type: actions.V2_NEW_USER_REGISTER,
+  }),
+
+  // ///////
   userLogin: params => (dispatch, getState) => dispatch({
     type: actions.USER_LOGIN,
     payload: api.userLogin(params),
@@ -158,6 +170,7 @@ const actionCreators = {
       }));
     });
   },
+
   //new actions for registration flow
   v2UserLogin: email => ({
     type: actions.V2_USER_LOGIN,
@@ -180,6 +193,7 @@ const actionCreators = {
     type: actions.SHOW_SECURITY_QUESTIONS,
     payload: 'security_questions_page',
   }),
+
 };
 
 export { actions, actionCreators };

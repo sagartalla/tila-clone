@@ -268,14 +268,10 @@ class ActionBar extends Component {
             }
           </Dropdown>
         </div>
-        {/* {
-          hideLogin ? null :
-          (this.state.show)
-            ?
-            ( */}
-        <Login mode={this.state.mode} onBackdropClick={this.onBackdropClick} />
-            {/* )
-            :
+        {/* {hideLogin ? null :
+          this.state.show ? */}
+        <Login onBackdropClick={this.onBackdropClick} />
+            {/* :
             null} */}
       </div>
     );

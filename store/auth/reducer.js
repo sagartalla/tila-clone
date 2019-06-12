@@ -11,11 +11,33 @@ const pageFlows = {
       nextPage: null,
     },
   },
+
   security_questions_page: {
     forgotSecurityPage: {
       activePage: 'forgotSecurityPage',
       nextPage: null,
     },
+
+  new_user_register: {
+    password_new: {
+      activePage: 'password_new',
+      nextPage: 'verify_email',
+    },
+    verify_email: {
+      activePage: 'verify_email',
+      nextPage: 'personal_details',
+    },
+    personal_details: {
+      activePage: 'personal_details',
+      nextPage: 'thank_you',
+    },
+    thank_you: {
+      activePage: 'thank_you',
+      nextPage: null,
+    },
+  },
+  forgot_password: {
+
   },
 };
 
@@ -43,6 +65,7 @@ const initialState = {
     active: {
       activePage: '',
     },
+    currentFlow: '',
   },
 };
 
@@ -55,6 +78,10 @@ const authReducer = typeToReducer({
       const { v2 } = state;
       if (data.exist && data.last_social_login_used && data.last_social_login_used.length === 0) {
         v2.active = pageFlows.existing_user_login.password;
+        v2.currentFlow = 'existing_user_login';
+      } else if (!data.exist && data.last_social_login_used && data.last_social_login_used.length === 0) {
+        v2.active = pageFlows.new_user_register.password_new;
+        v2.currentFlow = 'new_user_register';
       }
       return Object.assign({}, state, {
         v2: {
@@ -66,6 +93,12 @@ const authReducer = typeToReducer({
     },
     REJECTED: state => state,
   },
+  [actions.V2_NEW_USER_REGISTER]: state => Object.assign({}, state, {
+    v2: {
+      ...state.v2,
+      active: pageFlows[state.v2.currentFlow][state.v2.active.nextPage],
+    },
+  }),
   // ///////////////////
   // ///////////////////
   // ///////////////////
