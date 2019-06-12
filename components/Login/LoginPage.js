@@ -1,8 +1,11 @@
 import React from 'react';
 import NoSSR from 'react-no-ssr';
 import { Row, FormGroup, Col } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import SocialLogin from './SocialLogin';
+import { selectors, actionCreators } from '../../store/auth';
 import SVGComponent from '../common/SVGComponet';
 import lang from '../../utils/language';
 import { languageDefinations } from '../../utils/lang';
@@ -12,25 +15,51 @@ import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './login_en.styl';
 import styles_ar from './login_ar.styl';
 
-const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 const { LOGIN_PAGE } = languageDefinations();
 
 class LoginPage extends React.Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      email: '',
+      emailErr: false,
+    };
+  }
+
+  onChangeField = ({ target }) => {
+    this.setState({
+      email: target.value,
+    });
+  }
+
+  handleValidation = ({ target }) => {
+    const emailReg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    this.setState({
+      emailErr: !emailReg.test(target.value),
+    });
+  }
+
+  submit = () => {
+    const { email, emailErr } = this.state;
+    const { userLogin } = this.props;
+    if (!emailErr) {
+      userLogin(email);
+    }
   }
 
   render() {
+    const { email, emailErr } = this.state;
     return (
-      <div className={`${styles['flx-space-bw']} ${styles['mh-350']} ${styles['flex-colum']}`}>
+      <div className={`${styles['login-form']} ${styles['flx-space-bw']} ${styles['flex-colum']}`}>
         <div>
           <Row>
             <Col md={5} xs={12} sm={5}>
-              <h2 className={`${styles['fs-18']} ${styles.fontW600}`}>Login</h2>
+              <h2 className={`${styles['fs-18']} ${styles.fontW600}`}>{LOGIN_PAGE.LOGIN}</h2>
             </Col>
             <Col md={7} xs={12} sm={7}>
-              <h2 className={`${styles['fs-18']} ${styles.fontW600}`}>Enter Email</h2>
+              <h2 className={`${styles['fs-18']} ${styles.fontW600}`}>{LOGIN_PAGE.LOGIN_ENTER_EMAIL}</h2>
             </Col>
           </Row>
           <Row className={`${styles['pt-30']} ${styles.flex}`}>
@@ -48,7 +77,7 @@ class LoginPage extends React.Component {
                       <a className={`${styles.flex} ${styles['ml-15']}`}>
                         <SVGComponent clsName={`${styles['bg-google-icon']} ${styles['mr-10']}`} src="icons/social-icons/bg-google" />
                       </a>
-                      Gmail
+                      Google
                     </div>
                   </NoSSR>
                 )}
@@ -57,26 +86,44 @@ class LoginPage extends React.Component {
             </Col>
             <Col md={7} xs={12} sm={7} className={`${styles['pl-30']}`}>
               <div className={`${styles['fp-input']} ${styles['pb-10']}`}>
-                <input onChange={this.onChangeField} className={styles['m-fs-16']} name="email" type="email" value={this.state.email} required />
+                <input
+                  type="text"
+                  value={email}
+                  autoComplete={false}
+                  className={styles['m-fs-16']}
+                  onChange={this.onChangeField}
+                  onBlur={this.handleValidation}
+                  required
+                />
                 <span className={styles.highlight} />
                 <span className={styles.bar} />
-                <label>{LOGIN_PAGE.EMAIL}</label>
-                {/* {
-                  validation.email.message
-                    ?
-                      <span className={`${styles['error-msg']}`}>{validation.email.message}</span>
-                    :
-                    null
-                } */}
+                <label>{LOGIN_PAGE.LOGIN_INPUT_EMAIL_ENTER}</label>
+                {emailErr &&
+                  <span className={`${styles['error-msg']}`}>correct it</span>}
               </div>
-              <input className={`${styles['sign-in-btn']} ${styles.fontW700} ${styles['text-uppercase']}`} type="submit" value="Continue" />
+              <input
+                className={`${styles['sign-in-btn']} ${styles.fontW700} ${styles['text-uppercase']}`}
+                type="button"
+                value="Continue"
+                onClick={this.submit}
+              />
             </Col>
           </Row>
         </div>
-        <div className={`${styles['termes-label']} ${styles['fs-12']} ${styles['t-c']}`}>By signing up I understand and agree to tila <a href="">T&C, Privacy and Cookie policy</a></div>
+        <div className={`${styles['termes-label']} ${styles['mb-15']} ${styles['mt-10']} ${styles['fs-12']} ${styles['t-c']}`}>{LOGIN_PAGE.BY_LOGIN_I_AGREE_TO_TERMS} <a href="">{LOGIN_PAGE.T_AND_C}, {LOGIN_PAGE.PRIVACY} {LOGIN_PAGE.AND} {LOGIN_PAGE.COOKIE_POLICY}</a></div>
       </div>
     );
   }
 }
 
-export default LoginPage;
+const mapDispatchToProps = dispatch => bindActionCreators(
+  {
+    userLogin: actionCreators.v2UserLogin,
+    // getLoginInfo: actionCreators.getLoginInfo,
+    // resetLoginError: actionCreators.resetLoginError,
+    // track: actionCreators.track,
+  },
+  dispatch,
+);
+
+export default connect(null, mapDispatchToProps)(LoginPage);

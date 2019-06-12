@@ -78,7 +78,6 @@ return store.personalDetailsReducer;
 }
 
 const forgotOtpsuccess =(store) => {
-  debugger;
   return store.personalDetailsReducer.showOtpSuccess;
   }
 
