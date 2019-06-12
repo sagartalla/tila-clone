@@ -112,7 +112,7 @@ class ForgotPassword extends Component {
       <div className={`${styles['forgot-password']} ${styles.flex} ${styles['flex-colum']} ${styles['justify-around']}`}>
         <div>
           <h3 className={`${styles['fs-22']} ${styles['m-0']} ${styles['ff-b']}`}>{LOGIN_PAGE.FORGOT_PASSWORD}</h3>
-          {showSecurityQuestions && <div className={`${styles['text-clr']} ${styles['mt-5']}`}>Please answer the security questions below to reset the password</div>}
+          {showSecurityQuestions && <div className={`${styles['light-gry-clr']} ${styles['mt-5']}`}>Please answer the security questions below to reset the password</div>}
         </div>
         {showSecurityQuestions &&
         <React.Fragment>

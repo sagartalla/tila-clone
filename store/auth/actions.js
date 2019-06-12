@@ -30,10 +30,21 @@ const actions = {
   AUTH_TRACK: 'AUTH_TRACK',
   // new actions
   V2_USER_LOGIN: 'V2_USER_LOGIN',
+  V2_NEW_USER_REGISTER: 'V2_NEW_USER_REGISTER',
 
 };
 
 const actionCreators = {
+  // new actions for registration flow
+  v2UserLogin: email => ({
+    type: actions.V2_USER_LOGIN,
+    payload: api.v2UserLogin(email),
+  }),
+  v2NewUserRegister: params => ({
+    type: actions.V2_NEW_USER_REGISTER,
+  }),
+
+  // ///////
   userLogin: params => (dispatch, getState) => dispatch({
     type: actions.USER_LOGIN,
     payload: api.userLogin(params),
@@ -155,11 +166,6 @@ const actionCreators = {
       }));
     });
   },
-  //new actions for registration flow
-  v2UserLogin: email => ({
-    type: actions.V2_USER_LOGIN,
-    payload: api.v2UserLogin(email),
-  }),
 };
 
 export { actions, actionCreators };

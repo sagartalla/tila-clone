@@ -216,13 +216,9 @@ class Login extends Component {
     console.log('activeObj:::', activeObj);
     switch (activeObj.activePage) {
       case 'password':
-        return <SignIn mode="ExistingUser" />;
-      case 'forgot_password':
-        return 
-        <ForgotPassword
-        loadingStatus={loadingStatus}
-        showOtpSuccess={showOtpSuccess}
-       /> ;
+        return <SignIn mode="EXISTING_USER" />;
+      case 'password_new':
+        return <SignIn mode="NEW_USER" />;
       default:
         return <LoginPage />;
     }
