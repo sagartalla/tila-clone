@@ -24,7 +24,6 @@ class SignIn extends Component {
     this.state = {
       hide: false,
       clicked: false,
-      mode: 'ExistingUser',
     };
   }
 
@@ -53,9 +52,9 @@ class SignIn extends Component {
   // 3. User signup through social login
   render() {
     const {
-      hide, clicked, mode,
+      hide, clicked,
     } = this.state;
-    const { showForgotPassword } = this.props;
+    const { showForgotPassword, mode } = this.props;
     return (
       <div className={`${styles['main-signin']} ${styles.flex} ${styles['flex-colum']} ${styles['justify-evenly']}`}>
         <div className={`${styles['mb-10']}`}>

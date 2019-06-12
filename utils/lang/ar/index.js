@@ -599,6 +599,11 @@ export const AR_KEYWORDS = {
     YEAR: 'Year(optional)',
     COMPLETE_SIGN_UP: 'Complete Sign Up',
     OTP_SENT_TO_YOUR_REGISTERED_MAIL: 'OTP sent to your registered mobile number',
+    LOGIN: 'Login',
+    SOCIAL_LOGIN_WELCOME: 'Hi, Welcome Back!',
+    SOCIAL_LOGIN_CONTINUE_MESSAGE: 'You can continue log in using the below social media platform as you have linked it with your account.',
+    LOGIN_ENTER_EMAIL: 'Enter Email',
+    LOGIN_INPUT_EMAIL_ENTER: 'Enter your email ID*',
   },
   ORDER_PAGE: {
     LOADING: 'تحميل',
