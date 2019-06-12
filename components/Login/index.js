@@ -9,6 +9,7 @@ import { selectors, actionCreators } from '../../store/auth';
 import { selectors as productSelectors } from '../../store/cam/personalDetails';
 import constants from '../../constants';
 import ForgotPassword from './ForgotPassword';
+import ForgotSecurityPage from './ForgotSecurityQuestions';
 import ResetPasswordPage from '../../pages/resetPassword';
 import SocialLogin from './SocialLogin';
 import { languageDefinations } from '../../utils/lang';
@@ -217,11 +218,9 @@ class Login extends Component {
     switch (activeObj.activePage) {
       case 'password':
         return <SignIn mode="ExistingUser" />;
-      case 'forgot_password':
-        return 
-        <ForgotPassword
-        loadingStatus={loadingStatus}
-        showOtpSuccess={showOtpSuccess}
+      case 'forgotSecurityPage':
+        return <ForgotSecurityPage
+       
        /> ;
       default:
         return <LoginPage />;
@@ -278,9 +277,9 @@ const mapStateToProps = store => ({
   userCreds: selectors.getUserCreds(store),
   showEmailScreen: selectors.showEmailVerificationScreen(store),
   loading: selectors.getLoginProgressStatus(store),
-  loadingStatus: productSelectors.getLoadingStatus(store),
+  loadingStatus: selectors.getLoadingStatus(store),
   userInfo: selectors.getUserInfo(store),
-  showOtpSuccess: productSelectors.forgotOtpsuccess(store),  
+  showOtpSuccess: selectors.forgotOtpsuccess(store),  
   activeObj: selectors.getActive(store),
 });
 

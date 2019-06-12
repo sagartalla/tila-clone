@@ -56,8 +56,12 @@ const getDomainCountries = store => store.authReducer.data.domainCountries;
 // new selectors
 const getActive = store => store.authReducer.v2.active;
 
+const forgotOtpsuccess = (store) => {
+  return store.authReducer.showOtpSuccess;
+}
+
 export {
   getErrorMessege, getCountry, getLoggedInStatus, getInstaCode, getUserCreds, getDeliveryCity, getDomainCountries,
-  getLoginProgressStatus, getShowLogin, getPTAToken, showEmailVerificationScreen, getLanguage, getLoadingStatus, getUserInfo,
+  getLoginProgressStatus, getShowLogin, getPTAToken, showEmailVerificationScreen, getLanguage, getLoadingStatus, getUserInfo, forgotOtpsuccess,
   getActive,
 };

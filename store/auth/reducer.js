@@ -11,8 +11,11 @@ const pageFlows = {
       nextPage: null,
     },
   },
-  forgot_password: {
-
+  security_questions_page: {
+    forgotSecurityPage: {
+      activePage: 'forgotSecurityPage',
+      nextPage: null,
+    },
   },
 };
 
@@ -34,6 +37,7 @@ const initialState = {
     domainCountries: [],
   },
   error: '',
+  showOtpSuccess: false,
   v2: {
     data: {},
     active: {
@@ -346,6 +350,43 @@ const authReducer = typeToReducer({
       },
     }),
     REJECTED: state => state,
+  },
+
+  [actions.RESET_PASSWORD]: {
+    PENDING: state => Object.assign({}, state, { ui: { loading: true } }),
+    FULFILLED: (state, action) => Object.assign({}, state, { data: action.payload, ui: { loading: false } }),
+    REJECTED: (state, action) => Object.assign({}, state, {
+      error: action.payload.data,
+      ui: { loading: false },
+    }),
+  },
+
+  [actions.FORGOT_PASSWORD]: {
+    PENDING: state => Object.assign({}, state, { ui: { loading: true }, showOtpSuccess: false }),
+    FULFILLED: (state, action) => Object.assign({}, state, { data: action.payload, ui: { loading: false }, showOtpSuccess: true }),
+    REJECTED: (state, action) => Object.assign({}, state, {
+      error: action.payload.data,
+      ui: { loading: false },
+      showOtpSuccess: false,
+    }),
+  },
+
+  [actions.SHOW_SECURITY_QUESTIONS]: (state, action) => {
+    const { v2 } = state;
+    if (action && action.payload === 'security_questions_page') {
+      v2.active = pageFlows.security_questions_page.forgotSecurityPage;
+    }
+    return Object.assign({}, state, {
+      v2: {
+        ...state.v2,
+        ...v2,
+      },
+    });
+    // ...state,
+    // data: {
+    //   ...state.data,
+    //   showScreen: action.payload,
+    // },
   },
 }, initialState);
 
