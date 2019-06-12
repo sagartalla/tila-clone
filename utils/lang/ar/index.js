@@ -509,7 +509,7 @@ export const AR_KEYWORDS = {
     KIDS_CLOTHING: 'ملابس أطفال',
     MENS_FOOTWEAR: 'أحذية رجالية',
     WOMEN_FOOTWEAR: 'أحذية نسائية',
-    BAGS: 'Bags',
+    BAGS: 'شنط\حقائب‎',
     CAMERAS: 'كاميرات',
     SPEAKERS: 'مكبرات صوتيه',
     STORAGE_DEVICES: 'أجهزة التخزين',
