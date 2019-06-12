@@ -2,18 +2,19 @@ import React, { Component } from 'react';
 import NoSSR from 'react-no-ssr';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Row, FormGroup, Col } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import { Modal } from 'react-router-modal';
-
 import SVGComponent from '../common/SVGComponet';
 import { selectors, actionCreators } from '../../store/auth';
 import constants from '../../constants';
 import ForgotPassword from './ForgotPassword';
+import ResetPasswordPage from '../../pages/resetPassword';
 import SocialLogin from './SocialLogin';
 import { languageDefinations } from '../../utils/lang';
 import FormValidator from '../common/FormValidator';
 import VerifyEmail from './VerifyEmail';
-import LoginPage from './LoginPage';
+import LoginMainPage from './SignIn';
+import ShowHidePassword from './ShowHidePassword';
 
 import lang from '../../utils/language';
 
@@ -21,7 +22,6 @@ import main_en from '../../layout/main/main_en.styl';
 import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './login_en.styl';
 import styles_ar from './login_ar.styl';
-import ShowHidePassword from './ShowHidePassword';
 /* eslint-disable */
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 const { LOGIN_PAGE } = languageDefinations();
@@ -60,7 +60,6 @@ class Login extends Component {
     this.login = this.login.bind(this);
     this.onChangeField = this.onChangeField.bind(this);
     this.toggleLoginSignUp = this.toggleLoginSignUp.bind(this);
-    this.handleClick = this.handleClick.bind(this);
   }
   componentWillReceiveProps(nextProps) {
     debugger;
@@ -201,12 +200,19 @@ class Login extends Component {
     }, () => this.fireCustomEventClick(this.state.mode));
   }
 
-  handleClick() {
-    this.setState({ forgotPassword: true, showLoginSteps: false, });
+  // handleClick() {
+  //   this.setState({ forgotPassword: true, showLoginSteps: false, });
+  // }
+
+  showForgotPassword = () => {
+    this.setState({
+      forgotPassword: true,
+    })
   }
 
   render() {
     const { userCreds, loadingStatus, userInfo } = this.props;
+    const { pathname } = window.location;
     const { mode, error, validation, clicked, showVerifyScreen, hide, showLoginSteps, forgotPassword } = this.state;
     return (
       <Modal className={`react-router-modal__modal ${styles['login-reg-modal']} ${styles['p-10']}`} onBackdropClick={this.onBackdropClick}>
@@ -238,9 +244,10 @@ class Login extends Component {
                 </div>
               </h3> */}
             </div>
-            <form className={`${styles['login-form']}`} onSubmit={this.login}>
-              <LoginPage />
-            </form>            
+            {forgotPassword ? <ForgotPassword /> :
+            <LoginMainPage
+              showForgotPassword={this.showForgotPassword}
+            />}
           </Col>
         </div>
         </Row>

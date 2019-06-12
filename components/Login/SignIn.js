@@ -46,6 +46,7 @@ class SignIn extends Component {
       hide: !this.state.hide,
     });
   }
+
   // handling three cases
   // 1. New user
   // 2. existing user
@@ -54,50 +55,52 @@ class SignIn extends Component {
     const {
       hide, clicked, mode,
     } = this.state;
+    const { showForgotPassword } = this.props;
     return (
-      <div className={`${styles['main-signin']} ${styles.flex} ${styles['ht-100P']} ${styles['flex-colum']} ${styles['justify-evenly']}`}>
+      <div className={`${styles['main-signin']} ${styles.flex} ${styles['flex-colum']} ${styles['justify-evenly']}`}>
         <div className={`${styles['mb-10']}`}>
           <h3 className={`${styles['fs-22']} ${styles['mt-0']} ${styles['ff-b']}`}>{mode === 'ExistingUser' ? 'Hi, Welcome Back!' : 'Glad to have you here.' }</h3>
           <div>{mode === 'social media' ? 'Pls provide email ID to receive registration confirmation.' : 'aaa@gmail.com'}</div>
         </div>
-        <div>
-          <label className={`${styles['label-light-grey']}`}>{mode === 'NewUser' ? LOGIN_PAGE.SET_PASSWORD : mode === 'ExistingUser' ? LOGIN_PAGE.ENTER_PASSWORD : LOGIN_PAGE.ENTER_YOUR_EMAIL_ID}</label>
-          <div className={mode === 'ExistingUser' ? `${styles['login-show']}` : `${styles['signup-show']}`}>
+        <div className={mode === 'ExistingUser' ? `${styles['login-show']}` : `${styles['signup-show']}`}>
+          <div className={`${styles['fp-input']} ${styles['pb-10']}`}>
             <input
+              name="email"
               type={hide ? 'password' : 'text'}
+              className={`${styles.width100}`}
+              onChange={this.onChange}
+              autoComplete="off"
+              required
+            />
+            <label className={`${styles['label-light-grey']}`}>{mode === 'NewUser' ? LOGIN_PAGE.SET_PASSWORD : mode === 'ExistingUser' ? LOGIN_PAGE.ENTER_PASSWORD : LOGIN_PAGE.ENTER_YOUR_EMAIL_ID}</label>
+          </div>
+          {mode !== 'SocialLogin' && <ShowHidePassword hide={hide} hideToggle={this.hideToggle} />}
+        </div>
+        {mode !== 'ExistingUser' &&
+        <React.Fragment>
+          <div className={`${styles['fp-input']} ${styles['pb-10']}`}>
+            <input
+              type="text"
+              name="firstname"
               autoComplete="off"
               className={`${styles.width100}`}
               onChange={this.onChange}
               required
             />
-            {mode !== 'SocialLogin' && <ShowHidePassword hide={hide} hideToggle={this.hideToggle} />}
+            <label className={`${styles['label-light-grey']}`}>{LOGIN_PAGE.FIRST_NAME}</label>
           </div>
-        </div>
-        {mode !== 'ExistingUser' &&
-        <>
-        <div>
-          <label className={`${styles['label-light-grey']}`}>{LOGIN_PAGE.FIRST_NAME}</label>
-          <input
-            type="text"
-            name="firstname"
-            autoComplete="off"
-            className={`${styles.width100}`}
-            onChange={this.onChange}
-            required
-          />
-        </div>
-        <div>
-          <label className={`${styles['label-light-grey']}`}>{LOGIN_PAGE.LAST_NAME}</label>
-          <input
-            type="text"
-            name="lastname"
-            autoComplete="off"
-            className={`${styles.width100}`}
-            onChange={this.onChange}
-            required
-          />
-        </div>
-        </>
+          <div className={`${styles['fp-input']} ${styles['pb-10']}`}>
+            <input
+              type="text"
+              name="firstname"
+              autoComplete="off"
+              className={`${styles.width100}`}
+              onChange={this.onChange}
+              required
+            />
+            <label className={`${styles['label-light-grey']}`}>{LOGIN_PAGE.LAST_NAME}</label>
+          </div>
+        </React.Fragment>
         }
         {mode === 'ExistingUser' &&
         <Col md={12} className={`${styles['p-0']} ${styles.flex} ${styles['justify-between']}`}>
@@ -107,7 +110,7 @@ class SignIn extends Component {
               <span className={`${styles['register-policy-gray']}`}>{LOGIN_PAGE.REMEMBER_ME}</span>
             </label>
           </div>
-          <div className={`${styles['text-blue']}`}>
+          <div className={`${styles['text-blue']} ${styles.pointer}`} onClick={showForgotPassword}>
             {LOGIN_PAGE.FORGOT_PASSWORD}
           </div>
         </Col>}
@@ -123,10 +126,10 @@ class SignIn extends Component {
                   }
         </Col>}
         <Button
-          className={`${styles['flex-center']} ${styles.width100} ${styles['fs-14']} ${styles['text-uppercase']} ${styles['button-radius']}`}
+          className={`${styles['flex-center']} ${styles.width100} ${styles['fs-14']} ${styles['mt-20']} ${styles['text-uppercase']} ${styles['button-radius']}`}
           btnText={HEADER_PAGE.LOGIN}
         />
-        <span className={`${styles['m-20']} ${styles['fs-12']} ${styles['register-policy-gray']}`}>{LOGIN_PAGE.BY_LOGIN_I_AGREE_TO_TERMS} <span className={`${styles['text-blue']}`}>{LOGIN_PAGE.T_AND_C}, {LOGIN_PAGE.PRIVACY} {LOGIN_PAGE.AND} {LOGIN_PAGE.COOKIE_POLICY}</span></span>
+        <span className={`${styles['m-20']} ${styles['t-c']} ${styles['fs-12']} ${styles['register-policy-gray']}`}>{LOGIN_PAGE.BY_LOGIN_I_AGREE_TO_TERMS} <span className={`${styles['text-blue']}`}>{LOGIN_PAGE.T_AND_C}, {LOGIN_PAGE.PRIVACY} {LOGIN_PAGE.AND} {LOGIN_PAGE.COOKIE_POLICY}</span></span>
       </div>
     );
   }

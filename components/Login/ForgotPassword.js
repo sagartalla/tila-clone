@@ -32,6 +32,7 @@ class ForgotPassword extends Component {
       radioValue: '',
       showModesToSelect: false,
       showSecurityQuestions: true,
+      selectedValue: '',
     };
     this.sendLink = this.sendLink.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -48,43 +49,19 @@ class ForgotPassword extends Component {
   }
 
   sendLink() {
-    const { email } = this.state;
-    let { userNameError, errorMsg } = this.state;
+    const { selectedValue } = this.state;
+    const { userNameError, errorMsg } = this.state;
     const body = {
-      email,
+      email: selectedValue,
     };
-    if (email === '') {
-      userNameError = true;
-      errorMsg = 'Please enter email id';
-    } else if (!emailPattern.test(email)) {
-      userNameError = true;
-      errorMsg = 'Entered email is invalid';
-    } else {
-      this.props.forgotPassword(body).then((res) => {
-        if (res && res.value && res.value.Response === 'SUCCESS') {
-          this.setState({ showInput: true });
-        } else {
-          this.setState({ showInput: false });
-        }
-      });
-    }
-    this.setState({
-      userNameError,
-      errorMsg,
+    this.props.forgotPassword(body).then((res) => {
+      if (res && res.value && res.value.Response === 'SUCCESS') {
+        this.setState({ showInput: true });
+      } else {
+        this.setState({ showInput: false });
+      }
     });
-  }
-
-  handleChange(e) {
-    let { userNameError, errorMsg } = this.state;
-    if (!emailPattern.test(e.target.value)) {
-      userNameError = true;
-      errorMsg = 'Entered email is invalid';
-    } else {
-      userNameError = false;
-      errorMsg = '';
-    }
     this.setState({
-      email: e.target.value,
       userNameError,
       errorMsg,
     });
@@ -104,9 +81,12 @@ class ForgotPassword extends Component {
   }
 
   handleChange = (e) => {
-    const value = e.target.getAttribute('data-id');
+    debugger;
+    const key = e.target.getAttribute('data-id');
+    const value = e.target.getAttribute('data-val'); 
     this.setState({
-      radioValue: value,
+      radioValue: key,
+      selectedValue: value,
     });
   }
 
@@ -129,23 +109,22 @@ class ForgotPassword extends Component {
     const {
       showInput, radioValue, showModesToSelect, showSecurityQuestions,
     } = this.state;
-    const { userInfo } = this.props;
     return (
       <div className={`${styles['forgot-password']} ${styles.flex} ${styles['flex-colum']} ${styles['justify-around']}`}>
         <div>
-          <h3 className={`${styles['fs-22']} ${styles['mt-0']} ${styles['mb-10']} ${styles['ff-b']}`}>{LOGIN_PAGE.FORGOT_PASSWORD}</h3>
-          {showSecurityQuestions && <div className={`${styles['text-clr']}`}>Please answer the security questions below to reset the password</div>}
+          <h3 className={`${styles['fs-22']} ${styles['m-0']} ${styles['ff-b']}`}>{LOGIN_PAGE.FORGOT_PASSWORD}</h3>
+          {showSecurityQuestions && <div className={`${styles['text-clr']} ${styles['mt-5']}`}>Please answer the security questions below to reset the password</div>}
         </div>
         {showSecurityQuestions &&
-        <>
+        <React.Fragment>
           <div>
             <div className={`${styles['fp-input']} ${styles['pb-30']}`}>
-                    <input name="email" type="text" autoComplete="off" required />
-                    <label className={`${styles['label-light-grey']}`}>What is your Birth place?*</label>
+              <input name="email" type="text" autoComplete="off" required />
+              <label className={`${styles['label-light-grey']}`}>What is your Birth place?*</label>
             </div>
             <div className={`${styles['fp-input']} ${styles['pb-30']}`}>
-                    <input name="email" type="text" autoComplete="off" required />
-                    <label className={`${styles['label-light-grey']}`}>What i your mothers maiden name?*</label>
+              <input name="email" type="text" autoComplete="off" required />
+              <label className={`${styles['label-light-grey']}`}>What i your mothers maiden name?*</label>
             </div>
           </div>
           <Button
@@ -153,44 +132,46 @@ class ForgotPassword extends Component {
             btnText="Next"
             onClick={this.showModesToSelect}
           />
-       </>}
+        </React.Fragment>
+
+       }
         {showModesToSelect && showInput === '' ?
-      <>
-        <span className={`${styles['radio-buttons']} ${styles.flex} ${styles['flex-colum']} ${styles['justify-around']}`}>
-          <div className={`${styles.flex}`}>
-            <input name="addr_checkbox" type="radio" className={`${styles['radio-btn']} ${styles['radio-margin']}`} data-id="email" onChange={this.handleChange} />
-            <span className={`${styles['ml-10']}`}>
-              <div className={radioValue === 'email' && `${styles['ff-b']}`}>Reset Password by Email:</div>
-              <div className={radioValue === 'email' && `${styles['fs-14']} ${styles['ff-b']}`}>{userInfo.email || 'susmitha@gmail.com'}</div>
-            </span>
-          </div>
-          <div className={`${styles.border}`} />
-          <span>
-            <div className={`${styles.flex}`}>
-              <input name="addr_checkbox" type="radio" className={`${styles['radio-btn']}`} data-id="otp" onChange={this.handleChange} />
-              <span className={`${styles['ml-10']}`}>
-                <div className={radioValue === 'otp' && `${styles['fs-14']} ${styles['ff-b']}`}>Reset by Mobile OTP:</div>
-                <div className={radioValue === 'otp' && `${styles['fs-14']} ${styles['ff-b']}`}>{userInfo.mobile_number || '121212112'}</div>
+          <React.Fragment>
+            <span className={`${styles['radio-buttons']} ${styles.flex} ${styles['flex-colum']} ${styles['justify-around']}`}>
+              <div className={`${styles.flex}`}>
+                <input name="addr_checkbox" type="radio" className={`${styles['radio-btn']} ${styles['radio-margin']}`} data-id="email" data-val="susmithaCAM1@gmail.com" onChange={this.handleChange} />
+                <span className={`${styles['ml-10']}`}>
+                  <div className={radioValue === 'email' && `${styles['ff-b']}`}>Reset Password by Email:</div>
+                  <div className={radioValue === 'email' && `${styles['fs-14']} ${styles['ff-b']}`}>susmithaCAM1@gmail.com</div>
+                </span>
+              </div>
+              <div className={`${styles.border}`} />
+              <span>
+                <div className={`${styles.flex}`}>
+                  <input name="addr_checkbox" type="radio" className={`${styles['radio-btn']}`} data-id="otp" onChange={this.handleChange} />
+                  <span className={`${styles['ml-10']}`}>
+                    <div className={radioValue === 'otp' && `${styles['fs-14']} ${styles['ff-b']}`}>Reset by Mobile OTP:</div>
+                    <div className={radioValue === 'otp' && `${styles['fs-14']} ${styles['ff-b']}`}>121212112</div>
+                  </span>
+                </div>
               </span>
-            </div>
-          </span>
-        </span>
-        <Button
-          className={`${styles['flex-center']}  ${styles.width100} ${styles['fs-14']} ${styles['text-uppercase']} ${styles['button-radius']}`}
-          disabled={radioValue === ''}
-          onClick={this.handleForgotPassword}
-          btnText="Next"
-        />
-      </> :
-      <VerifyStatus
-        resetLogin={this.resetShowLogin}
-        switchState={this.switchState}
-        showInput={showInput}
-        radioValue={radioValue}
-        forgotPasswordStatus={this.props.forgotPasswordStatus}
-        sendLink={this.sendLink}
-        validatePassKey={this.validatePassKey}
-      />
+            </span>
+            <Button
+              className={`${styles['flex-center']}  ${styles.width100} ${styles['fs-14']} ${styles['text-uppercase']} ${styles['button-radius']}`}
+              disabled={radioValue === ''}
+              onClick={this.sendLink}
+              btnText="Next"
+            />
+          </React.Fragment> :
+          <VerifyStatus
+            resetLogin={this.resetShowLogin}
+            switchState={this.switchState}
+            showInput={showInput}
+            radioValue={radioValue}
+            forgotPasswordStatus={this.props.forgotPasswordStatus}
+            sendLink={this.sendLink}
+            validatePassKey={this.validatePassKey}
+          />
         }
       </div>
     );

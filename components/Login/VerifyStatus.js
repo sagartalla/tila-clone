@@ -61,9 +61,9 @@ const VerifyStatus = (props) => {
             <span>&nbsp;30 Mins</span>
             </div>
           </div>
-          <div className={`${styles.flex} ${styles['justify-center']} ${styles['mb-5']}`}>
+          <div className={`${styles.flex} ${styles['mb-5']}`}>
             <OTPInput
-              containerStyle={`${styles['pl-15']}`}
+              containerStyle={`${styles['justify-center']}`}
               inputStyle={`${styles['border-none']} ${styles['border-b']}`}
               separator={<span>&nbsp;&nbsp;</span>}
               onChange={otp => console.log(otp)}

@@ -163,7 +163,7 @@ class ContinueLogin extends Component {
                       type="text"
                       value={DOB.day}
                       onChange={this.handleInputChange('day')}
-                      placeholder="10"
+                      placeholder="DD"
                       className={`${styles['fs-14']}`}
                     />
                   </Dropdown.Toggle>
@@ -185,7 +185,7 @@ class ContinueLogin extends Component {
                     <input
                       type="text"
                       value={DOB.month}
-                      placeholder="SEP"
+                      placeholder="MM"
                       onChange={this.handleInputChange('month')}
                       className={`${styles['fs-14']}`}
                     />
@@ -208,7 +208,7 @@ class ContinueLogin extends Component {
                     <input
                       type="text"
                       value={DOB.year}
-                      placeholder="1998"
+                      placeholder="YYYY"
                       onChange={this.handleInputChange('year')}
                       className={`${styles['fs-14']}`}
                     />
