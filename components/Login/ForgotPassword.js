@@ -4,9 +4,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import Button from '../common/CommonButton';
 import { languageDefinations } from '../../utils/lang';
-import { selectors, actionCreators } from '../../store/cam/personalDetails';
-import { actionCreators as authActionCreators } from '../../store/auth';
-import VerifyStatus from './VerifyStatus';
+import { selectors, actionCreators } from '../../store/auth';
 
 import lang from '../../utils/language';
 
@@ -20,7 +18,7 @@ const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...s
 const { LOGIN_PAGE } = languageDefinations();
 
 /* eslint- disable */
-const emailPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
 class ForgotPassword extends Component {
   constructor(props) {
     super(props);
@@ -30,14 +28,11 @@ class ForgotPassword extends Component {
       userNameError: false,
       errorMsg: '',
       radioValue: '',
-      showModesToSelect: false,
-      showSecurityQuestions: props.showOtpSuccess ? false : true,
       selectedValue: '',
     };
     this.sendLink = this.sendLink.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.switchState = this.switchState.bind(this);
-    this.validatePassKey = this.validatePassKey.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -74,67 +69,34 @@ class ForgotPassword extends Component {
   }
 
   handleChange = (e) => {
-    debugger;
     const key = e.target.getAttribute('data-id');
-    const value = e.target.getAttribute('data-val'); 
+    const value = e.target.getAttribute('data-val');
     this.setState({
       radioValue: key,
       selectedValue: value,
     });
   }
 
-  validatePassKey(e) {
-    const key = e.target.getAttribute('id');
-  }
-  showModesToSelect = () => {
-    this.setState({
-      showModesToSelect: true,
-      showSecurityQuestions: false,
-    });
-  }
   handleForgotPassword = () => {
     this.setState({
       showInput: true, // just example change state
     });
   }
   resetShowLogin = () => {
-    debugger;
     const { resetShowLogin } = this.props;
     resetShowLogin();
   }
   render() {
     const {
-      showInput, radioValue, showModesToSelect, showSecurityQuestions,
+      showInput, radioValue,
     } = this.state;
-    const { loadingStatus, showOtpSuccess } = this.props;
+    const { loadingStatus } = this.props;
     console.log('loadingStatus', loadingStatus);
     return (
       <div className={`${styles['forgot-password']} ${styles.flex} ${styles['flex-colum']} ${styles['justify-around']}`}>
         <div>
           <h3 className={`${styles['fs-22']} ${styles['m-0']} ${styles['ff-b']}`}>{LOGIN_PAGE.FORGOT_PASSWORD}</h3>
-          {showSecurityQuestions && <div className={`${styles['text-clr']} ${styles['mt-5']}`}>Please answer the security questions below to reset the password</div>}
         </div>
-        {showSecurityQuestions &&
-        <React.Fragment>
-          <div>
-            <div className={`${styles['fp-input']} ${styles['pb-30']}`}>
-              <input name="email" type="text" autoComplete="off" required />
-              <label className={`${styles['label-light-grey']}`}>What is your Birth place?*</label>
-            </div>
-            <div className={`${styles['fp-input']} ${styles['pb-30']}`}>
-              <input name="email" type="text" autoComplete="off" required />
-              <label className={`${styles['label-light-grey']}`}>What i your mothers maiden name?*</label>
-            </div>
-          </div>
-          <Button
-            className={`${styles['flex-center']}  ${styles.width100} ${styles['fs-14']} ${styles['text-uppercase']} ${styles['button-radius']}`}
-            btnText="Next"
-            onClick={this.showModesToSelect}
-          />
-        </React.Fragment>
-
-       }
-        {showModesToSelect && showInput === '' ?
           <React.Fragment>
             <span className={`${styles['radio-buttons']} ${styles.flex} ${styles['flex-colum']} ${styles['justify-around']}`}>
               <div className={`${styles.flex}`}>
@@ -162,19 +124,7 @@ class ForgotPassword extends Component {
               btnLoading={loadingStatus}
               btnText="Next"
             />
-          </React.Fragment> :
-          showOtpSuccess &&
-          <VerifyStatus
-            switchState={this.switchState}
-            showInput={showInput}
-            radioValue={radioValue}
-            forgotPasswordStatus={this.props.forgotPasswordStatus}
-            sendLink={this.sendLink}
-            validatePassKey={this.validatePassKey}
-            resetLogin={this.resetShowLogin}
-            showOtpSuccess={showOtpSuccess}
-          />
-        }
+          </React.Fragment>
       </div>
     );
   }

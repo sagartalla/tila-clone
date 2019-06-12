@@ -12,6 +12,7 @@ import main_en from '../../layout/main/main_en.styl';
 import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './login_en.styl';
 import styles_ar from './login_ar.styl';
+import { actionCreators } from '../../store/auth';
 
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
@@ -46,6 +47,11 @@ class SignIn extends Component {
     });
   }
 
+  showForgotPassword = () => {
+    debugger;
+    const { showQuestionsPage } = this.props;
+    showQuestionsPage();
+  }
   // handling three cases
   // 1. New user
   // 2. existing user
@@ -54,7 +60,7 @@ class SignIn extends Component {
     const {
       hide, clicked,
     } = this.state;
-    const { showForgotPassword, mode } = this.props;
+    const { mode } = this.props;
     return (
       <div className={`${styles['main-signin']} ${styles.flex} ${styles['flex-colum']} ${styles['justify-evenly']}`}>
         <div className={`${styles['mb-10']}`}>
@@ -109,7 +115,7 @@ class SignIn extends Component {
               <span className={`${styles['register-policy-gray']}`}>{LOGIN_PAGE.REMEMBER_ME}</span>
             </label>
           </div>
-          <div className={`${styles['text-blue']} ${styles.pointer}`} onClick={showForgotPassword}>
+          <div className={`${styles['text-blue']} ${styles.pointer}`} onClick={this.showForgotPassword}>
             {LOGIN_PAGE.FORGOT_PASSWORD}
           </div>
         </Col>}
@@ -139,7 +145,7 @@ const mapStateToProps = store => ({
 });
 const mapDispatchToProps = dispatch => bindActionCreators(
   {
-
+    showQuestionsPage: actionCreators.showQuestionsPage,
   },
   dispatch,
 );

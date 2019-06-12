@@ -296,7 +296,7 @@ const mapStateToProps = store => ({
   showEmailVerificationScreen: selectors.showEmailVerificationScreen(store),
   getEditDetails: cartSelectors.getEditDetails(store),
   imgSource: personalSelectors.getImageSource(store),
-  showOtpSuccess: personalSelectors.forgotOtpsuccess(store),
+  showOtpSuccess: selectors.forgotOtpsuccess(store),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(

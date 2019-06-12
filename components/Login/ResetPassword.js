@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { Row, Col } from 'react-bootstrap';
 import { Modal } from 'react-router-modal';
 import { languageDefinations } from '../../utils/lang';
-import { actionCreators, selectors } from '../../store/cam/personalDetails';
+import { actionCreators, selectors } from '../../store/auth';
 import SVGComponent from '../common/SVGComponet';
 import Button from '../common/CommonButton';
 import lang from '../../utils/language';

@@ -174,12 +174,27 @@ const v2UserLogin = email => axios.get(`${constants.CMS_API_URL}/api/v1/user?ema
   },
 }));
 
+const resetPassword = (body) => {
+  return axios.post(`${constants.CMS_API_URL}/api/v1/user/password/reset`, body).then((data) => {
+    return data;
+  }).catch((error) => {
+    return error.response.data;
+  })
+}
 
+const forgotPassword = (body) => {
+  return axios.post(`${constants.CMS_API_URL}/api/v1/user/password/forgot`, body).then(({data}) => {
+    toast.success(API_TEXT.OTP_SENT_TO_YOUR_MAIL_ID)
+    return data;
+  }).catch((error) => {
+    return error.response.data;
+  });
+}
 
 
 
 export default {
   userLogin, userLogout, getLoginInfo, setCountry, setSessionID, deriveCity, setCity, getDomainCountries,
   removeCity, setLanguage, savePtaToken, verifyEmail, sendOtpToEmailId, getUserInfo, setVerfied, track,
-  v2UserLogin,
+  v2UserLogin, resetPassword, forgotPassword,
 };

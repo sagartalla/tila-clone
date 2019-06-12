@@ -30,6 +30,9 @@ const actions = {
   AUTH_TRACK: 'AUTH_TRACK',
   // new actions
   V2_USER_LOGIN: 'V2_USER_LOGIN',
+  RESET_PASSWORD: 'RESET_PASSWORD',
+  FORGOT_PASSWORD: 'FORGOT_PASSWORD',
+  SHOW_SECURITY_QUESTIONS: 'SHOW_SECURITY_QUESTIONS',
 
 };
 
@@ -159,6 +162,23 @@ const actionCreators = {
   v2UserLogin: email => ({
     type: actions.V2_USER_LOGIN,
     payload: api.v2UserLogin(email),
+  }),
+  resetPassword: (body) => {
+    return ({
+      type: actions.RESET_PASSWORD,
+      payload: api.resetPassword(body),
+    });
+  },
+  forgotPassword: (body) => {
+    return ({
+      type: actions.FORGOT_PASSWORD,
+      payload: api.forgotPassword(body),
+    });
+  },
+
+  showQuestionsPage: () => ({
+    type: actions.SHOW_SECURITY_QUESTIONS,
+    payload: 'security_questions_page',
   }),
 };
 
