@@ -37,7 +37,7 @@ const List = props => props.data.map((val, id) => {
             <div className={`${styles['list-item-left']} ${styles['pr-10']}`}>
               <SVGComponent src={itemVal.icon} />
             </div>
-            <div className={`${styles['list-items']} ${styles['fs-14']}`}>{CAM[itemVal.display]}</div>
+            <div className={`${styles['list-items']} ${styles['fs-14']} ${styles['pl-15']}`}>{CAM[itemVal.display]}</div>
             {/* {
               itemVal.count
               ?

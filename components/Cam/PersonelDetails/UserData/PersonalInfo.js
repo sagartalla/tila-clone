@@ -55,7 +55,7 @@ class PersonalInfo extends React.Component {
     const { PERSONAL_INFO_MODAL } = languageDefinations();
     return (
       <div>
-        <h4 className={`${styles['flx-space-bw']} ${styles['information-title']} ${styles['fontW600']} ${styles['mt-0']}`}>
+        <h4 className={`${styles['flx-space-bw']} ${styles['information-title']} ${styles['fontW600']} ${styles['mt-0']} ${styles['fs-20']}`}>
           <span>{PERSONAL_INFO_MODAL.HEADING}</span>
           <a className={`${styles['flex']}`} onClick={this.handleShow(true)}>
             <SVGComponent clsName={`${styles['edit-icon']}`} src="icons/common-icon/edit/edit-penc" />
@@ -63,7 +63,7 @@ class PersonalInfo extends React.Component {
         </h4>
         <div className={`${styles['flex-center']} ${styles['bb-dashed']} ${styles['pt-10']} ${styles['pb-10']}`}>
           <Col xs={12} md={3} className={`${styles['pl-0']} ${styles['pr-0']}`}>
-            <span>{PERSONAL_INFO_MODAL.NAME}</span>
+            <span className={`${styles['fs-14']} ${styles['thick-gry-clr']}`}>{PERSONAL_INFO_MODAL.NAME}</span>
           </Col>
           <Col xs={12} md={8} className={`${styles['p-0']}`}>
             <span className={styles['pl-15']}>{first_name} {last_name}</span>
@@ -71,7 +71,7 @@ class PersonalInfo extends React.Component {
         </div>
         <div className={`${styles['flex-center']} ${styles['bb-dashed']} ${styles['pt-10']} ${styles['pb-10']}`}>
           <Col xs={12} md={3} className={`${styles['pl-0']} ${styles['pr-0']}`}>
-            <span>{PERSONAL_INFO_MODAL.DOB}</span>
+            <span className={`${styles['fs-14']} ${styles['thick-gry-clr']}`}>{PERSONAL_INFO_MODAL.DOB}</span>
           </Col>
           <Col xs={12} md={8} className={`${styles['p-0']}`}>
             <span className={styles['pl-15']}>{dob}</span>
@@ -79,7 +79,7 @@ class PersonalInfo extends React.Component {
         </div>
         <div className={`${styles['flex-center']} ${styles['pt-10']} ${styles['pb-10']}`}>
           <Col xs={12} md={3} className={`${styles['pl-0']} ${styles['pr-0']}`}>
-            <span>{PERSONAL_INFO_MODAL.GENDER}</span>
+            <span className={`${styles['fs-14']} ${styles['thick-gry-clr']}`}>{PERSONAL_INFO_MODAL.GENDER}</span>
           </Col>
           <Col xs={12} md={8} className={`${styles['p-0']}`}>
             <span className={styles['pl-15']}>{gender == 'F' ? `${PERSONAL_INFO_MODAL.FEMALE}` : gender == 'M' ? `${PERSONAL_INFO_MODAL.MALE}` : ''}</span>
