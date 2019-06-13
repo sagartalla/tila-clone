@@ -69,7 +69,7 @@ const hal = [{
 }, {
   img: '/static/img/landing-home/fashion-acessories.png',
   title: `${lang === 'en' ? 'Fashion Acc..' : 'أزياءمستلزمات'}`,
-  key: 'Fashion Acc..'
+  key: 'Fashion Accessories'
 }, {
   img: '/static/img/landing-home/watches.png',
   title: `${lang === 'en' ? 'Watches' : 'ساعات اليد'}`,
@@ -372,7 +372,7 @@ const HomePage = () => React.createElement(
               ),
               React.createElement(
                 'span',
-                { className: `${styles['fs-12']} ${styles['pt-10']} ${styles.flex} ${styles['justify-center']} ${styles['lne-ht1_2']}` },
+                { className: `${styles['fs-12']} ${styles['pt-10']} ${styles.flex} ${styles['justify-center']} slider-elips ${styles['lne-ht1_2']}` },
                 i.title
               )
             )
@@ -412,7 +412,7 @@ const HomePage = () => React.createElement(
               ),
               React.createElement(
                 'span',
-                { className: `${styles['fs-12']} ${styles['pt-10']} ${styles.flex} ${styles['justify-center']} ${styles['lne-ht1_2']}` },
+                { className: `${styles['fs-12']} ${styles['pt-10']} ${styles['justify-center']} slider-elips ${styles['lne-ht1_2']}` },
                 i.title
               )
             )
@@ -765,10 +765,10 @@ const HomePage = () => React.createElement(
     ),
     React.createElement(
       Row,
-      { className: `${styles['m-15']} ${styles['mt-40']} ${styles['mb-40']} brand-details-inn home-two-nammers` },
+      { className: `${styles['m-15']} ${styles['mt-40']} ${styles['mb-40']} brand-details-inn` },
       b_y_l.map(col => React.createElement(
         Col,
-        { md: 3, xs: 3, sm: 3, key: col.title },
+        { md: 3, xs: 3, sm: 3, key: col.title, className: styles['pl-10'] },
         React.createElement(
           'a',
           { href: col.links },

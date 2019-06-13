@@ -54,12 +54,12 @@
   text-align: left;
 }
 .home-style-main .ff-t-i .item {
-  width: 100px;
   margin: 0 auto;
+  padding: 5px;
 }
 .home-style-main .ff-t-i .item img {
-  width: 87px;
-  height: 87px;
+  width: 100%;
+  height: 100%;
   margin: 0 auto;
 }
 .home-style-main .d_items {
@@ -444,6 +444,15 @@
 }
 .d_item:hover .b_n_c {
   display: flex !important;
+}
+.slider-elips {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  float: left;
+  display: inline-block;
 }
 @media screen and (max-width: 1280px) {
   .home-style-main .ff-t-i .e,
