@@ -37,12 +37,14 @@ class OrderTracker extends React.Component {
   }
 
   openSlider = () => {
+    document.getElementsByTagName('BODY')[0].style.overflow = 'hidden';
     this.setState({
       slider: true,
     });
   }
 
   closeSlider = () => {
+    document.getElementsByTagName('BODY')[0].style.overflow = 'auto';
     this.setState({
       slider: false,
     });
@@ -87,7 +89,7 @@ class OrderTracker extends React.Component {
             <div className={`${styles['border-b']} ${styles['p-20']} ${styles['pl-40']}`}>
               {showMsgAndDate}
             </div>
-            <ul className={`${styles['state-times']} ${styles['scroll']}`}>
+            <ul className={`${styles['state-times']}`}>
               {orderItem.state_time_estimates.length > 0 &&
                 orderItem.state_time_estimates.map(estimate => (
                   <li>
@@ -105,7 +107,7 @@ class OrderTracker extends React.Component {
                           {orderTracker[orderItem.trackingId].events.map(event => (
                             <li className={`${styles['flex-center']} ${styles['mt-5']}`}>
                               <span className={styles.dot} />
-                              <span className={styles['ml-5']}>{moment(event.date).format('hh:mm A')}</span>
+                              <span className={`${styles.width18} ${styles['ml-5']}`}>{moment(event.date).format('hh:mm A')}</span>
                               <span className={styles['ml-5']}>{event.event_message}</span>
                             </li>
                           ))}
