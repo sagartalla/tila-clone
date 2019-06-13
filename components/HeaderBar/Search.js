@@ -167,7 +167,6 @@ class Search extends Component {
     return (
       <div className={styles['search-wrapper']}>
         <form onSubmit={this.submitQuery}>
-
           <Dropdown id="search-toggle" className={`${styles['cart-inn']} ${styles.width100}`}>
             <Dropdown.Toggle id="dropdown-custom-components">
               <div className={styles.overlap} tabIndex="0" onFocus={this.setSelectionRange}>
