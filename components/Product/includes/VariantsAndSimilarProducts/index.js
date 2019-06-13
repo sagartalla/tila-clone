@@ -23,6 +23,8 @@ const cookies = new Cookies();
 
 const language = cookies.get('language') || 'en';
 const country = cookies.get('country') || 'SAU';
+const shippingData = cookies.get('shippingInfo');
+const { city: shippingCity, country: shippingCountry } = shippingData || {};
 
 class VariantsAndSimilarProducts extends Component {
   constructor(props){
@@ -53,11 +55,13 @@ class VariantsAndSimilarProducts extends Component {
         lastSelectionAttribute: key
       });
       this.props.setSelectedVariant({selectedVariantData, itemType, catalogId, variantId});
+      this.props.setVariantId(variantId)
     });
   }
 
   onSelectProduct(e) {
     const [key, val] = [e.target.id, e.target.value];
+
     this.setState({
       selectedProductData: {
         ...this.state.selectedProductData,
@@ -65,25 +69,51 @@ class VariantsAndSimilarProducts extends Component {
       }
     }, () => {
       const { selectedProductData } = this.state;
-      const productId = this.props.VariantsAndSimilarProducts.productId;
+      const { isSearchPreview, variantId, VariantsAndSimilarProducts } = this.props
+      const productId = VariantsAndSimilarProducts.productId;
       const pid = this.props.getSelectedPropductId({
         selectedProductData: this.state.selectedProductData,
-        map: this.props.VariantsAndSimilarProducts.similarProducts.map,
+        map: VariantsAndSimilarProducts.similarProducts.map,
         lastSelectionAttribute: key
       });
       if (!pid) {
         toast.warn('product not available!');
         return;
       }
+      const options = {
+        city_code: shippingCity,
+        country_code: country || 'SAU',
+        flags: {
+          catalog_details: true,
+          category_tree_bread_crumb: true,
+          category_tree_finance: true,
+          include_offers: true,
+          include_policies: true,
+          include_related_products: true,
+          shipping: true,
+        },
+        language,
+        product_ids: [
+          pid,
+        ],
+        size: 'LARGE',
+      };
       let newQuery = window.location.search;
       newQuery = newQuery.replace(productId, pid)
       this.props.setSelectedProductData({selectedProductData});
-      Router.pushRoute(`/${country}/${language}/product${newQuery}`);
+      if(isSearchPreview) {
+          this.props.getProduct(options);
+          this.props.setProductId(pid);
+          window.open(`/${country}/${language}/product?productId=${pid}${variantId ? `&variantId=${variantId}`: ''}&catalogId=${VariantsAndSimilarProducts.catalogId}&itemType=${VariantsAndSimilarProducts.itemtype}`)
+      } else {
+        Router.pushRoute(`/${country}/${language}/product${newQuery}`);
+      }
+
     });
   }
 
   render() {
-    const { VariantsAndSimilarProducts } = this.props;
+    const { VariantsAndSimilarProducts, isSearchPreview } = this.props;
     const { variants, itemType, similarProducts } = VariantsAndSimilarProducts;
     const { display: variantsDisplay } = variants;
     const { display: similarProductsDisplay } = similarProducts;
@@ -124,7 +154,10 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       setSelectedVariant: actionCreators.setSelectedVariant,
-      setSelectedProductData: actionCreators.setSelectedProductData
+      setSelectedProductData: actionCreators.setSelectedProductData,
+      getProduct:actionCreators.getProduct,
+      setProductId:actionCreators.setProductId,
+      setVariantId:actionCreators.setVariantId,
     },
     dispatch,
   );

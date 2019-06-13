@@ -107,11 +107,11 @@ const d_tif = [
 ];
 
 const d_tihl = [
-  '/static/img/landing-home/kids-furniture.png',
-  '/static/img/landing-home/living-room-furniture.png',
-  '/static/img/landing-home/tables.png',
-  '/static/img/landing-home/cushions.png',
-  '/static/img/landing-home/lights.png',
+  `/static/img/landing-home/${lang === 'en' ? 'kids-furniture' : 'kids-furniture-ar'}.png`,
+  `/static/img/landing-home/${lang === 'en' ? 'living-room-furniture' : 'living-room-furniture-ar'}.png`,
+  `/static/img/landing-home/${lang === 'en' ? 'tables' : 'tables-ar'}.png`,
+  `/static/img/landing-home/${lang === 'en' ? 'cushions' : 'cushions-ar'}.png`,
+  `/static/img/landing-home/${lang === 'en' ? 'lights' : 'lights-ar'}.png`,
 ];
 
 const d_o_day = [{
@@ -197,13 +197,13 @@ const responsive = [
 ];
 
 const twoCols = [{
-  img: '/static/img/landing-home/ps4.jpg',
-  link: `/SAU/${lang}/srp?search=PS4%20Pro&language=en&isListed=false`,
-  title: 'PS4 Pro',
+  img: `/static/img/landing-home/${lang === 'en' ? 'halfban_baseus_eng' : 'halfban_baseus_ara'}.jpg`,
+  link: `/SAU/${lang}/srp?search=Baseus&language=en&isListed=false`,
+  title: 'Baseus',
 }, {
-  img: '/static/img/landing-home/alien.jpg',
-  link: `/SAU/${lang}/srp?search=Alienware&language=en&isListed=false`,
-  title: 'Alienware',
+  img: `/static/img/landing-home/${lang === 'en' ? 'halfban_ldnio_eng' : 'halfban_ldnio_ara'}.jpg`,
+  link: `/SAU/${lang}/srp?search=LDNIO&language=en&isListed=false`,
+  title: 'LDNIO',
 }];
 
 const threeCols = [{
@@ -461,7 +461,7 @@ const HomePage = () => (
             </div> */}
           </div>
         </div>
-        <div className={`${styles.breadcrums} ${styles['mt-10']} ${styles.pointer}`}>
+        <div className={`${styles.breadcrums} ${styles['mt-10']} ${styles.pointer} bredcrums-part`}>
           <a href={`/SAU/${lang}/landing/fashion`}>
             <span>{lang === 'en' ? 'Men\'s Clothing' : 'ملابس رجالية'} | {lang === 'en' ? 'Women\'s Clothing' : 'ملابس نسائية\نسائي'} | {lang === 'en' ? 'Kids Fashion' : 'ملابس أطفال\أطفال'} | {lang === 'en' ? 'Footwear' : 'أحذية'} | {lang === 'en' ? 'Jewellery' : 'مجوهرات'} | {lang === 'en' ? 'Eyewear' : 'نظارات'}</span>
           </a>
@@ -480,72 +480,72 @@ const HomePage = () => (
         <div className={`${styles['fs-20']} title`}> {lang === 'en' ? 'BEST OF LIFESTYLE' : 'أفضل من لايف ستايل'}</div>
         <div className="d1">
           <div>
-            <span className={styles['fs-16']}><span className="lite">{lang === 'en' ? 'Kids Furniture' : 'أثاث الأطفال'}</span></span>
+            {/* <span className={styles['fs-16']}><span className="lite">{lang === 'en' ? 'Kids Furniture' : 'أثاث الأطفال'}</span></span> */}
             <a href={b_d_b.furniture}>
-              <div className="shadow">
+              {/* <div className="shadow"> */}
                 <img src={d_tihl[0]} className="img-responsive" />
-              </div>
+              {/* </div> */}
             </a>
-            <div className="btn">
+            {/* <div className="btn">
               <span>{lang === 'en' ? 'SHOP NOW' : 'تسوق الآن'}</span>
-            </div>
+            </div> */}
           </div>
           <div>
-            <span className={styles['fs-16']}><span className="lite">{lang === 'en' ? 'Living Room Furniture' : 'غرفة المعيشة الأثاث'}</span></span>
+            {/* <span className={styles['fs-16']}><span className="lite">{lang === 'en' ? 'Living Room Furniture' : 'غرفة المعيشة الأثاث'}</span></span> */}
             <a href={b_d_b.furniture}>
-              <div className="shadow">
+              {/* <div className="shadow"> */}
                 <img src={d_tihl[1]} className="img-responsive" />
-              </div>
+              {/* </div> */}
             </a>
-            <div className="btn">
+            {/* <div className="btn">
               <span>{lang === 'en' ? 'SHOP NOW' : 'تسوق الآن'}</span>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="d2">
           <div>
-            <span className={styles['fs-16']}><span className="lite">{lang === 'en' ? 'Lamps' : 'مصباح'} </span></span>
+            {/* <span className={styles['fs-16']}><span className="lite">{lang === 'en' ? 'Lamps' : 'مصباح'} </span></span> */}
             <a href={b_d_b.lamps}>
-              <div className="shadow">
+              {/* <div className="shadow"> */}
                 <img src={d_tihl[2]} className="img-responsive" />
-              </div>
+              {/* </div> */}
             </a>
-            <div className="btn">
+            {/* <div className="btn">
               <span>{lang === 'en' ? 'SHOP NOW' : 'تسوق الآن'}</span>
-            </div>
+            </div> */}
           </div>
           <div>
-            <span className={styles['fs-16']}><span className="lite">{lang === 'en' ? 'Cushions' : 'وسائد'}</span></span>
+            {/* <span className={styles['fs-16']}><span className="lite">{lang === 'en' ? 'Cushions' : 'وسائد'}</span></span> */}
             <a href={b_d_b.bedding}>
-              <div className="shadow">
+              {/* <div className="shadow"> */}
                 <img src={d_tihl[3]} className="img-responsive" />
-              </div>
+              {/* </div> */}
             </a>
-            <div className="btn">
+            {/* <div className="btn">
               <span>{lang === 'en' ? 'SHOP NOW' : 'تسوق الآن'}</span>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className={`d3 ${styles.right0}`}>
           <div>
-            <span className={styles['fs-16']}><span className="lite">{lang === 'en' ? 'Lights' : 'الأنوار'}</span></span>
+            {/* <span className={styles['fs-16']}><span className="lite">{lang === 'en' ? 'Lights' : 'الأنوار'}</span></span> */}
             <a href={b_d_b.Lights}>
-              <div className="shadow">
+              {/* <div className="shadow"> */}
                 <img src={d_tihl[4]} className="img-responsive" />
-              </div>
+              {/* </div> */}
             </a>
-            <div className="btn">
+            {/* <div className="btn">
               <span>{lang === 'en' ? 'SHOP NOW' : 'تسوق الآن'}</span>
-            </div>
+            </div> */}
           </div>
         </div>
-        <div className={`${styles.breadcrums} ${styles['mt-10']} ${styles.pointer}`}>
+        <div className={`${styles.breadcrums} ${styles['mt-10']} ${styles.pointer} bredcrums-part`}>
           <a href={`/SAU/${lang}/landing/lifestyle`}>
             <span> {lang === 'en' ? 'Bedsheets' : 'غطاء\شرشف السرير'} | {lang === 'en' ? 'Furniture' : 'الأثاث'} | {lang === 'en' ? 'Cushions' : 'وسائد'} | {lang === 'en' ? 'Wall Decor' : '  جدار ديكورت'} | {lang === 'en' ? 'Lights' : 'الأنوار'} | {lang === 'en' ? 'Living Room Furniture' : 'غرفة المعيشة الأثاث'} | {lang === 'en' ? 'Photo Frames' : 'إطارات صور'} </span>
           </a>
         </div>
       </div>
-      <Row className={`${styles['m-15']} ${styles['mt-40']} ${styles['mb-40']} brand-details-inn`}>
+      <Row className={`${styles['m-15']} ${styles['mt-40']} ${styles['mb-40']} brand-details-inn home-two-nammers`}>
         {twoCols.map(col => (
           <Col md={6} xs={6} sm={6} key={col.title}>
             <a href={col.link}>
@@ -624,14 +624,13 @@ const HomePage = () => (
             </div>
           </div>
         </div>
-        <div className={`${styles.breadcrums} ${styles['mt-10']} ${styles.pointer}`}>
+        <div className={`${styles.breadcrums} ${styles['mt-10']} ${styles.pointer} bredcrums-part`}>
           <a href={`/SAU/${lang}/landing/electronics`}>
             <span>{lang === 'en' ? 'Mobiles' : 'الجوالات'} | {lang === 'en' ? 'Laptops' : 'اللاب توبات'}  | {lang === 'en' ? 'Speakers' : 'مكبر الصوت'}  |  {lang === 'en' ? 'Cameras' : 'كاميرات'} | {lang === 'en' ? 'Microwave Ovens' : 'ميكرويفات '} | {lang === 'en' ? 'Smartwatches' : 'ساعات يد ذكية'} </span>
           </a>
         </div>
       </div>
-
-      <Row className="d_items" >
+      {/*<Row className="d_items" >
         <div>
           <span className={`title ${styles['fs-18']}`}>{lang === 'en' ? 'BRANDS YOU LOVE' : 'الماركات التي تحبها'}</span>
         </div>
@@ -645,22 +644,27 @@ const HomePage = () => (
           prevArrow={<SamplePrevArrow />}
         >
           {b_y_l.map(i => (
-            <Col key={i} md={3} xs={3} sm={3} className={styles['p-0']}>
+            <Col key={i} md={3} xs={3} sm={3} className={`${styles['pl-5']} brand-love-inn`}>
               <a href={i.links} key={i.title}>
                 <div className="image">
                   <img src={i.img} alt={i.img} />
                 </div>
-                {/* <div className="b_l">
-                  <img src={i.brandImg} width="80" height="30" alt={i.brandImg} />
-                  <SVGComponent clsName="arrow arrow-black " src="icons/common-icon/arrow" />
-                </div> */}
               </a>
             </Col>
           ))}
         </Slider>
-        <div className={`${styles.breadcrums} ${styles['mt-20']} ${styles.pointer}`}>
+        <div className={`${styles.breadcrums} ${styles['mt-20']} ${styles.pointer} bredcrums-part`}>
           <span>Zara  |  Guess  |  Max  |  Nike  |  Fossil  |  Levis  |  Wrangler  |  Shein  & more…</span>
         </div>
+      </Row>*/}
+      <Row className={`${styles['m-15']} ${styles['mt-40']} ${styles['mb-40']} brand-details-inn home-two-nammers`}>
+        {b_y_l.map(col => (
+          <Col md={3} xs={3} sm={3} key={col.title}>
+            <a href={col.links}>
+              <img src={col.img} alt={col.title} className="img-responsive-in" />
+            </a>
+          </Col>
+        ))}
       </Row>
     </div>
   </NoSSR>

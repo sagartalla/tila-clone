@@ -1,6 +1,7 @@
 import _ from 'lodash';
 
 const getProduct = (store, variantId) => {
+
   const {
     product_details, variant_preferred_listings, tree,
   } = store.productReducer.data[0];
@@ -135,7 +136,25 @@ const getProduct = (store, variantId) => {
     wishlistId,
   };
 };
+const isProductLoaded = (store) => {
+  //console.log('productdetails', store.productReducer.data[0]);
+  return { isProductLoaded:store.productReducer.data[0],
+           productDetails: store.productReducer.data[0]
+          }
 
+}
+const getLoadingStatus = (store) => {
+  return store.productReducer.ui.loading
+}
+const getProductId = (store) => {
+  return store.productReducer.productId
+}
+const getVariantId = (store) => {
+  return store.productReducer.variantId
+}
+const getErrorMessage = (store) => {
+  return store.productReducer.error
+}
 const getVariants = (store) => {
   // remove this method
   const { similar_products, product_details } = store.productReducer.data[0];
@@ -466,4 +485,5 @@ const getAllCountries = (store) => {
 export {
   getProduct, getVariants, getPreview, getSelectedVariantId, getReviewRatings, getReviewResponse,
   getVariantsAndSimilarProducts, getSelectedPropductId, getSelectedVariantData, getAllCities, getAllCountries,
+  getLoadingStatus,getErrorMessage,isProductLoaded,getProductId,getVariantId
 };

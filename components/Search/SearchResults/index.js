@@ -11,10 +11,13 @@ import SVGComponent from '../../common/SVGComponet';
 import { actionCreators, selectors } from '../../../store/search';
 import { actionCreators as cartActionCreators, selectors as cartSelector } from '../../../store/cart';
 import { actionCreators as wishlistActionCreators } from '../../../store/cam/wishlist';
+import { actionCreators as productActionCreators } from '../../../store/product'
 import { selectors as authSelectors } from '../../../store/auth'
 import { Router } from '../../../routes';
 
 import lang from '../../../utils/language';
+import QuickViewBase from '../../common/QuickViewComponent';
+import QuickViewContent from '../../common/QuickViewComponent/quickView';
 
 import main_en from '../../../layout/main/main_en.styl';
 import main_ar from '../../../layout/main/main_ar.styl';
@@ -28,17 +31,30 @@ const { SEARCH_PAGE } = languageDefinations();
 
 const language = cookies.get('language') || 'en';
 const country = cookies.get('country') || 'SAU';
+const shippingData = cookies.get('shippingInfo')
+const { city: shippingCity, country: shippingCountry } = shippingData || {};
 
 class SearchResults extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      productID:[]
+      productID:[],
+      renderQuickView:false
     };
     this.loadMore = this.loadMore.bind(this);
     this.buyNow = this.buyNow.bind(this);
     this.addToCart = this.addToCart.bind(this);
     this.selectedProduct = this.selectedProduct.bind(this)
+    this.fetchResults = this.fetchResults.bind(this)
+    this.renderQuickView = this.renderQuickView.bind(this)
+    this.renderNext = this.renderNext.bind(this)
+    this.renderPrev = this.renderPrev.bind(this)
+    this.onClose = this.onClose.bind(this)
+    this.renderProductPage = this.renderProductPage.bind(this)
+    this.productIndex = {};
+    this.variantId={};
+    this.rowNumber = null;
+    this.itemNum = null;
   }
 
   componentDidMount() {
@@ -49,7 +65,13 @@ class SearchResults extends Component {
     }
 
   }
-
+  onClose() {
+    this.rowNumber = null
+    this.itemNum = null
+    this.setState({
+      renderQuickView:false
+    })
+  }
   async loadMore() {
     if (!this.props.pagiantionDetails.hasMore){
       return;
@@ -60,7 +82,16 @@ class SearchResults extends Component {
       pageNum: pageNum + 1
     }, loadMore);
   }
+  renderQuickView(itemNum,row,vid) {
 
+    this.rowNumber = row;
+    this.itemNum = itemNum
+    let productId = this.productIndex[`index${this.itemNum}`]
+    this.variantId[productId] = vid
+    this.setState({
+      renderQuickView:true
+    })
+  }
   shouldComponentUpdate(nextProps) {
     return !nextProps.ui.loading
   }
@@ -70,7 +101,110 @@ class SearchResults extends Component {
        Router.pushRoute(`/${country}/${language}/payment`);
     }
   }
+  renderProductPage(options) {
+    window.open(`/${country}/${language}/product?productId=${options.productId}${options.variantId ? `&variantId=${options.variantId}`: ''}&catalogId=${options.catalogId}&itemType=${options.itemType}`)
+  }
+  renderNext() {
+    const { results } = this.props;
+    if(this.itemNum === results.items.length - 1) {
+      this.itemNum = results.items.length - 1
+    } else {
+      this.itemNum += 1
+      this.rowNumber = Math.floor(this.itemNum/4) + 1
+      this.setState({
+        renderQuickView: true
+      })
+    }
+  }
+  renderPrev()  {
+    if(this.itemNum === 0) {
+      this.itemNum = 0;
+    } else {
+      this.itemNum -= 1
+      this.rowNumber = Math.floor(this.itemNum/4) + 1
+      this.setState({
+        renderQuickView:true
+      })
+    }
 
+  }
+  fetchResults(product) {
+    const { search, isCategoryTree, choosenCategoryName } = this.props;
+    const { renderQuickView } = this.state;
+
+    const {
+      results, pagiantionDetails, userDetails, notifyMe, cartButtonLoaders, isLastAddedToCartSuccess,
+    } = this.props;
+    const { pageNum } = this.props.pagiantionDetails;
+    let options = {}
+    let elementNo = (this.rowNumber * 4) - 1;
+    if(elementNo > product.length - 1) {
+      elementNo = product.length - 1
+    }
+    let productId = this.productIndex[`index${this.itemNum}`]
+    let productVariantId = this.variantId[productId]
+    let productOptions = {
+      city_code: shippingCity,
+      country_code: country || 'SAU',
+      flags: {
+        catalog_details: true,
+        category_tree_bread_crumb: true,
+        category_tree_finance: true,
+        include_offers: true,
+        include_policies: true,
+        include_related_products: true,
+        shipping: true,
+      },
+      language,
+      product_ids: [
+        productId,
+      ],
+      size: 'LARGE',
+    }
+    let totalresults = product.map((item,index) => {
+      this.productIndex[`index${index}`] = item.id
+      this.variantId[item.id] = this.variantId[item.id] || (item.variants.length > 0 && item.variants[0].variantId)
+      return (
+        <>
+          <Product
+            key={item.id}
+            {...item}
+            buyNow={this.buyNow}
+            addToCart={this.addToCart}
+            index={`${item.id}_${index}`}
+            pageNum={pageNum}
+            cartButtonLoaders={cartButtonLoaders}
+            userDetails={userDetails}
+            notifyMe={notifyMe}
+            productID={item.id}
+            selectedProduct={this.selectedProduct}
+            selectedID={this.state.productID}
+            row={Math.floor(index/4) + 1}
+            itemNum={index}
+            showQuickView={this.renderQuickView}
+            isQuickView={renderQuickView && this.itemNum === index}
+          />
+        {
+          (renderQuickView && elementNo === index) ?
+          <QuickViewBase
+            elementNo = {this.itemNum}
+            renderQuickView ={renderQuickView}
+            index={index}
+            options={productOptions}
+            productVariantId={productVariantId}
+            prev={this.renderPrev}
+            next={this.renderNext}
+            onClose={this.onClose}
+            productId={productId}
+            renderProductPage={this.renderProductPage}
+          /> : null
+        }
+        </>
+      )
+    })
+
+    return totalresults
+  }
   selectedProduct(productID) {
     this.setState({
       productID
@@ -128,22 +262,7 @@ class SearchResults extends Component {
           className={`${styles['grid-cont']} ${styles['flex']} ${styles['flex-wrp']} ${styles['search-main-part']}`}
 
         >
-          {results.items.map((item,index) => (
-            <Product
-              key={item.id}
-              {...item}
-              buyNow={this.buyNow}
-              addToCart={this.addToCart}
-              index={`${item.id}_${index}`}
-              pageNum={pageNum}
-              cartButtonLoaders={cartButtonLoaders}
-              userDetails={userDetails}
-              notifyMe={notifyMe}
-              productID={item.id}
-              selectedProduct={this.selectedProduct}
-              selectedID={this.state.productID}
-            />
-          ))}
+         {this.fetchResults(results.items)}
         </InfiniteScroll>
       </div>
     );
