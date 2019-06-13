@@ -156,9 +156,12 @@
     .d1, .d2
       width 66.56%
       display inline-block
-      .d-sub
+      &>div
+        padding 2px 5px
         // height 324px
-    .d3 .d3-sub
+    .d3
+      &>div
+        padding 1px 5px
       // height 662px
       img
         object-fit fill
@@ -179,7 +182,7 @@
         content ''
       &>div
         display inline-block
-        padding 5px
+        // padding 2px 5px
         position relative
         &>span
           color #fff

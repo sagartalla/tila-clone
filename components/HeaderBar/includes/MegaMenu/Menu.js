@@ -24,12 +24,12 @@ const brandImages = {
   topBrands: {
     electronics: ['samsung-img', 'apple', 'sony', 'philips'],
     'home-living': ['samsung-img', 'apple', 'sony', 'philips'],
-    fashion: ['christy', 'tefal', 'adidas', 'lacoste'],
+    fashion: ['christy', 'adidas', 'lacoste'],
   },
   trending: {
     electronics: ['samsung-img', 'apple', 'sony', 'philips'],
     'home-living': ['samsung-img', 'apple', 'sony', 'philips'],
-    fashion: ['river_island', 'debenhams', 'sony', 'philips'],
+    fashion: ['river_island', 'debenhams'],
   },
 };
 
