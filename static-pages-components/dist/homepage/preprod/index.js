@@ -765,50 +765,16 @@ const HomePage = () => React.createElement(
     ),
     React.createElement(
       Row,
-      { className: 'd_items' },
-      React.createElement(
-        'div',
-        null,
+      { className: `${styles['m-15']} ${styles['mt-40']} ${styles['mb-40']} brand-details-inn home-two-nammers` },
+      b_y_l.map(col => React.createElement(
+        Col,
+        { md: 3, xs: 3, sm: 3, key: col.title },
         React.createElement(
-          'span',
-          { className: `title ${styles['fs-18']}` },
-          lang === 'en' ? 'BRANDS YOU LOVE' : 'الماركات التي تحبها'
+          'a',
+          { href: col.links },
+          React.createElement('img', { src: col.img, alt: col.title, className: 'img-responsive-in' })
         )
-      ),
-      React.createElement(
-        Slider,
-        {
-          asNavFor: sliderDODAY,
-          ref: slider => sliderDODAY = slider,
-          lazyLoad: true,
-          className: styles['ht-100per'],
-          slidesToShow: 4,
-          nextArrow: React.createElement(SampleNextArrow, null),
-          prevArrow: React.createElement(SamplePrevArrow, null)
-        },
-        b_y_l.map(i => React.createElement(
-          Col,
-          { key: i, md: 3, xs: 3, sm: 3, className: `${styles['pl-5']} brand-love-inn` },
-          React.createElement(
-            'a',
-            { href: i.links, key: i.title },
-            React.createElement(
-              'div',
-              { className: 'image' },
-              React.createElement('img', { src: i.img, alt: i.img })
-            )
-          )
-        ))
-      ),
-      React.createElement(
-        'div',
-        { className: `${styles.breadcrums} ${styles['mt-20']} ${styles.pointer} bredcrums-part` },
-        React.createElement(
-          'span',
-          null,
-          'Zara  |  Guess  |  Max  |  Nike  |  Fossil  |  Levis  |  Wrangler  |  Shein  & more\u2026'
-        )
-      )
+      ))
     )
   )
 );
