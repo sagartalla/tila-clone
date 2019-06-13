@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 
 import lang from '../../../../utils/language';
 
@@ -14,7 +13,7 @@ const VaultCard = props => {
   const { defaultCard, toggleMiniVault, updateCVV } = props;
   return (
     <div className={`${styles['p-10-20']} ${styles['border-b']} ${styles['instant-check-list-inn']}`} onClick={toggleMiniVault}>
-      <h5 className={`${styles['mt-5']} ${styles['mb-5']}`}>{defaultCard[0].masked_number.replace(/(.{4})/g, '$1 ')}</h5>
+      <h5 className={`${styles['mt-5']} ${styles['mb-5']} ${styles['card-number']}`}>{defaultCard[0].masked_number.replace(/(.{4})/g, '$1 ')}</h5>
       <div className={`${styles['flx-space-bw']} ${styles['fs-12']} ${styles['label-gry-clr']}`}>
         <span>{defaultCard[0].holder_name}</span> <span>{defaultCard[0].expiry_month}/{defaultCard[0].expiry_year}</span>
       </div>
