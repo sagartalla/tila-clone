@@ -630,8 +630,7 @@ const HomePage = () => (
           </a>
         </div>
       </div>
-
-      <Row className="d_items" >
+      {/*<Row className="d_items" >
         <div>
           <span className={`title ${styles['fs-18']}`}>{lang === 'en' ? 'BRANDS YOU LOVE' : 'الماركات التي تحبها'}</span>
         </div>
@@ -650,10 +649,6 @@ const HomePage = () => (
                 <div className="image">
                   <img src={i.img} alt={i.img} />
                 </div>
-                {/* <div className="b_l">
-                  <img src={i.brandImg} width="80" height="30" alt={i.brandImg} />
-                  <SVGComponent clsName="arrow arrow-black " src="icons/common-icon/arrow" />
-                </div> */}
               </a>
             </Col>
           ))}
@@ -661,6 +656,15 @@ const HomePage = () => (
         <div className={`${styles.breadcrums} ${styles['mt-20']} ${styles.pointer} bredcrums-part`}>
           <span>Zara  |  Guess  |  Max  |  Nike  |  Fossil  |  Levis  |  Wrangler  |  Shein  & more…</span>
         </div>
+      </Row>*/}
+      <Row className={`${styles['m-15']} ${styles['mt-40']} ${styles['mb-40']} brand-details-inn home-two-nammers`}>
+        {b_y_l.map(col => (
+          <Col md={3} xs={3} sm={3} key={col.title}>
+            <a href={col.links}>
+              <img src={col.img} alt={col.title} className="img-responsive-in" />
+            </a>
+          </Col>
+        ))}
       </Row>
     </div>
   </NoSSR>
