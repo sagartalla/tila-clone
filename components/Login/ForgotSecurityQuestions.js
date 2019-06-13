@@ -28,6 +28,13 @@ class ForgotSecurityQuestions extends Component {
     };
   }
 
+  showForgotPassword = () => {
+    const { activeObj } = this.props;
+    console.log('activeObj', activeObj);
+    const data = { currentFlow: 'forgot_password', activeTab: activeObj.nextPage };
+    const { showNextPage } = this.props;
+    showNextPage(data);
+  }
 
   render() {
     return (
@@ -50,7 +57,7 @@ class ForgotSecurityQuestions extends Component {
           <Button
             className={`${styles['flex-center']}  ${styles.width100} ${styles['fs-14']} ${styles['text-uppercase']} ${styles['button-radius']}`}
             btnText="Next"
-            onClick={this.showModesToSelect}
+            onClick={this.showForgotPassword}
           />
         </React.Fragment>
       </div>
@@ -63,7 +70,7 @@ const mapStateToProps = store => ({
 });
 const mapDispatchToProps = dispatch => bindActionCreators(
   {
-
+    showNextPage: authActionCreators.showNextPage,
   },
   dispatch,
 );

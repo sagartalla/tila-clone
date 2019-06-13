@@ -3,7 +3,7 @@ import { Row, Col } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { selectors, actionCreators } from '../../store/cam/personalDetails';
+import { selectors, actionCreators } from '../../store/auth';
 import { languageDefinations } from '../../utils/lang';
 import lang from '../../utils/language';
 import Button from '../common/CommonButton';
@@ -25,16 +25,9 @@ class VerifyStatus extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showInput: '',
+      selectedValue: 'susmithaCAM1@gmail.com',
     };
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.forgotPasswordStatus === 'SUCCESS') {
-      this.setState({ showInput: true });
-    } else {
-      this.setState({ showInput: false });
-    }
+    this.sendLink = this.sendLink.bind(this);
   }
 
   sendLink() {
@@ -43,32 +36,31 @@ class VerifyStatus extends React.Component {
     const body = {
       email: selectedValue,
     };
-    this.props.forgotPassword(body).then((res) => {
-      if (res && res.value && res.value.Response === 'SUCCESS') {
-        this.setState({ showInput: true });
-      } else {
-        this.setState({ showInput: false });
-      }
-    });
-    this.setState({
-      userNameError,
-      errorMsg,
-    });
+    this.props.forgotPassword(body);
   }
 
   resetShowLogin = () => {
     const { resetShowLogin } = this.props;
     resetShowLogin();
   }
+
+  closeSuccessScreen = () => {
+    const { activeObj } = this.props; 
+    const { showEmailSuccess } = this.props;
+    const data = { currentFlow: 'forgot_password', activeTab: 'close_screen' };
+    const { showNextPage } = this.props;
+    showNextPage(data);
+  }
+
   render() {
-    const { showOtpSuccess } = this.props;
     const { showInput } =this.state;
+    const { showEmailSuccess } = this.props;
     return (
     <div className={`${styles['forgot-password']} ${styles.flex} ${styles['flex-colum']} ${styles['justify-around']}`}>
        <div>
           <h3 className={`${styles['fs-22']} ${styles['m-0']} ${styles['ff-b']}`}>{LOGIN_PAGE.FORGOT_PASSWORD}</h3>
         </div>
-      {true ?
+      {showEmailSuccess ?
         <React.Fragment>
           <div className={styles['reset-link']}>
           <Row className={`${styles.flex}`}>
@@ -88,11 +80,10 @@ class VerifyStatus extends React.Component {
           <Button
             className={`${styles['flex-center']}  ${styles.width100} ${styles['fs-14']} ${styles['text-uppercase']} ${styles['button-radius']}`}
             btnText="OK"
-            onClick={this.resetLogin}
+            onClick={this.closeSuccessScreen}
           />
         </React.Fragment>
         :
-        showInput ?
         <React.Fragment>
            <div className={styles['reset-link-mobile']}> 
             <Row className={`${styles.flex}`}>
@@ -121,7 +112,7 @@ class VerifyStatus extends React.Component {
             btnText={LOGIN_PAGE.NEXT}
             onClick={this.resetShowLogin}
           />
-        </React.Fragment> : null
+        </React.Fragment>
       }
     </div>
   );
@@ -134,8 +125,8 @@ const mapStateToProps = store => ({
 });
 const mapDispatchToProps = dispatch => bindActionCreators(
   {
-    resetShowLogin: actionCreators.resetShowLogin,
-    forgotPassword: actionCreators.forgotPassword,    
+    forgotPassword: actionCreators.forgotPassword,   
+    showNextPage: actionCreators.showNextPage,  
   },
   dispatch,
 );

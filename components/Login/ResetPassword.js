@@ -24,18 +24,20 @@ class ResetPassword extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      success: false,
       password: '',
-      confirmPassword: '',
       hide: true,
       showModal: true,
+      errorMsg: false,
     };
     this.passwordSuccess = this.passwordSuccess.bind(this);
   }
 
-    onChange = (e) => {
-      this.setState({ [e.target.name]: e.target.value });
-    }
+  onChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
+      errorMsg: '',
+    });
+  }
 
 
   onBackdropClick = () => {
@@ -53,33 +55,35 @@ class ResetPassword extends Component {
 
   passwordSuccess() {
     const { password } = this.state;
-    if (password) {
+    let { errorMsg } = this.state;
+    if (password === '') {
+      errorMsg = 'Password should not be empty';
+    } else if (password.length < 8 || password.length > 30) {
+      errorMsg = 'Password must be atleast 8 characters';
+    } else {
       const body = {
         password,
         token: this.props.token,
       };
       this.props.resetPassword(body).then((res) => {
         if (res && res.value && res.value.data && res.value.data.Response === 'SUCCESS') {
-          this.setState({ success: true });
+          this.setState({ showModal: false });
         } else {
-          this.setState({ success: false });
+          this.setState({ showModal: true });
         }
       });
     }
+    this.setState({
+      errorMsg,
+    });
   }
   render() {
-    const { password, hide, success, showModal } = this.state;
+    const {
+      password, hide, showModal, errorMsg,
+    } = this.state;
     return (
       <React.Fragment>
-        {success ?
-          <div className={`${styles.flex} ${styles['justify-center']}  ${styles['flex-center']} ${styles['flex-col']} ${styles['bg-gray']}`}>
-            <div className={`${styles.flex} ${styles['justify-center']} ${styles['flex-center']} ${styles['flex-col']} ${styles['ht-240']}`}>
-              <Col xs={12} md={12} className={`${styles['flex-center']} ${styles['reset-part']}`}>
-                <SVGComponent clsName={`${styles['reset-icon']}`} src="icons/common-icon/reset-success" />
-              </Col>
-            </div>
-          </div> :
-          showModal &&
+        {showModal &&
           <Modal className={`react-router-modal__modal ${styles['login-reg-modal']} ${styles['p-10']}`} onBackdropClick={this.onBackdropClick}>
             <Row className={`${styles['bg-white']} ${styles['m-0']}`}>
               <div className={`${styles.flex}`}>
@@ -95,14 +99,14 @@ class ResetPassword extends Component {
                     </div>
                   </div>
                   <div className={`${styles['reset-password']} ${styles.flex} ${styles['justify-between']} ${styles['flex-colum']}`}>
-                    <Row className={`${styles['reset-main']} ${styles['m-0']} ${styles['flex-center']} ${styles['justify-between']} ${styles['p-10']} ${styles.width100}`}>
-                      <div className={`${styles['fs-22']}`}><b>{LOGIN_PAGE.RESET_PASSWORD}</b></div>
+                    <div className={`${styles['reset-main']} ${styles['m-0']} ${styles['flex-center']} ${styles['justify-around']} ${styles['p-10']} ${styles.width100}`}>
+                      <div className={`${styles['fs-20']} ${styles.width35}`}>{LOGIN_PAGE.RESET_PASSWORD}</div>
                       <div className={`${styles.flex}`}><SVGComponent clsName={`${styles['reset-password-icon']}`} src="icons/common-icon/reset-password" /></div>
-                    </Row>
-                    <h4 className={`${styles['fs-16']} ${styles['ff-b']}`}>
+                    </div>
+                    <h4 className={`${styles['fs-16']} ${styles.fontW600}`}>
                       {LOGIN_PAGE.PLEASE_SET_YOUR_SECURE_PASSWORD}
                     </h4>
-                    <div className={`${styles['mt-15']} ${styles.relative} ${styles.reset_show} ${styles['fp-input']}`}>
+                    <div className={`${styles['mt-15']} ${styles.relative} ${styles.reset_show} ${styles['fp-input']}`}>              
                       <input
                         type={hide ? 'password' : 'text'}
                         autoComplete="off"
@@ -114,6 +118,7 @@ class ResetPassword extends Component {
                       />
                       <label className={`${styles['label-light-grey']}`}>{LOGIN_PAGE.ENTER_NEW_PASSWORD}</label>
                       <ShowHidePassword hide={hide} hideToggle={this.hideToggle} />
+                      <div className={`${styles['thick-red']} ${styles['fs-12']}`}>{errorMsg}</div>                      
                     </div>
                     <Button
                       className={`${styles['flex-center']} ${styles.width100} ${styles['fs-14']} ${styles['text-uppercase']} ${styles['button-radius']}`}

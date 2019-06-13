@@ -56,12 +56,26 @@ const getDomainCountries = store => store.authReducer.data.domainCountries;
 // new selectors
 const getActive = store => store.authReducer.v2.active;
 
-const forgotOtpsuccess = (store) => {
-  return store.authReducer.showOtpSuccess;
+
+const getActiveEmailId = store => store.authReducer.v2.data.email || '';
+
+
+const forgotPasswordStatus = (store) => {
+  if(store.authReducer.data.Response){
+    return store.authReducer.data.Response;
+  }else if(store.authReducer.data.message){
+    return store.authReducer.data.message;
+  }
+}
+
+const showEmailSuccess = (store) => {
+  if (store.authReducer.data.showEmailSuccess) {
+    return store.authReducer.data.showEmailSuccess;
+  }
 }
 
 export {
   getErrorMessege, getCountry, getLoggedInStatus, getInstaCode, getUserCreds, getDeliveryCity, getDomainCountries,
-  getLoginProgressStatus, getShowLogin, getPTAToken, showEmailVerificationScreen, getLanguage, getLoadingStatus, getUserInfo, forgotOtpsuccess,
-  getActive,
-};
+  getLoginProgressStatus, getShowLogin, getPTAToken, showEmailVerificationScreen, getLanguage, getLoadingStatus, getUserInfo,
+  getActive, getActiveEmailId, forgotPasswordStatus, showEmailSuccess,
+}

@@ -32,7 +32,6 @@ class ForgotPassword extends Component {
     };
     this.sendLink = this.sendLink.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.switchState = this.switchState.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -44,29 +43,20 @@ class ForgotPassword extends Component {
   }
 
   sendLink() {
-    const { selectedValue } = this.state;
+    const { selectedValue, radioValue } = this.state;
     const { userNameError, errorMsg } = this.state;
     const body = {
       email: selectedValue,
     };
-    this.props.forgotPassword(body).then((res) => {
-      if (res && res.value && res.value.Response === 'SUCCESS') {
-        this.setState({ showInput: true });
-      } else {
-        this.setState({ showInput: false });
-      }
-    });
+    if (radioValue === 'email') {
+      this.props.forgotPassword(body);
+    }
     this.setState({
       userNameError,
       errorMsg,
     });
   }
 
-  switchState() {
-    this.setState({
-      showInput: '',
-    });
-  }
 
   handleChange = (e) => {
     const key = e.target.getAttribute('data-id');
@@ -91,19 +81,18 @@ class ForgotPassword extends Component {
       showInput, radioValue,
     } = this.state;
     const { loadingStatus } = this.props;
-    console.log('loadingStatus', loadingStatus);
     return (
       <div className={`${styles['forgot-password']} ${styles.flex} ${styles['flex-colum']} ${styles['justify-around']}`}>
         <div>
           <h3 className={`${styles['fs-22']} ${styles['m-0']} ${styles['ff-b']}`}>{LOGIN_PAGE.FORGOT_PASSWORD}</h3>
         </div>
-          <React.Fragment>
+        <React.Fragment>
             <span className={`${styles['radio-buttons']} ${styles.flex} ${styles['flex-colum']} ${styles['justify-around']}`}>
               <div className={`${styles.flex}`}>
                 <input name="addr_checkbox" type="radio" className={`${styles['radio-btn']} ${styles['radio-margin']}`} data-id="email" data-val="susmithaCAM1@gmail.com" onChange={this.handleChange} />
                 <span className={`${styles['ml-10']}`}>
-                  <div className={radioValue === 'email' && `${styles['ff-b']}`}>Reset Password by Email:</div>
-                  <div className={radioValue === 'email' && `${styles['fs-14']} ${styles['ff-b']}`}>susmithaCAM1@gmail.com</div>
+                  <div className={radioValue === 'email' ? `${styles['fs-12']} ${styles.fontW600}` : `${styles['fs-12']}`}>Reset Password by Email:</div>
+                  <div className={radioValue === 'email' ? `${styles['fs-12']} ${styles.fontW600}` : `${styles['fs-12']}`}>susmithaCAM1@gmail.com</div>
                 </span>
               </div>
               <div className={`${styles.border}`} />
@@ -111,8 +100,8 @@ class ForgotPassword extends Component {
                 <div className={`${styles.flex}`}>
                   <input name="addr_checkbox" type="radio" className={`${styles['radio-btn']}`} data-id="otp" onChange={this.handleChange} />
                   <span className={`${styles['ml-10']}`}>
-                    <div className={radioValue === 'otp' && `${styles['fs-14']} ${styles['ff-b']}`}>Reset by Mobile OTP:</div>
-                    <div className={radioValue === 'otp' && `${styles['fs-14']} ${styles['ff-b']}`}>121212112</div>
+                    <div className={radioValue === 'otp' ? `${styles['fs-12']} ${styles.fontW600}` : `${styles['fs-12']}`}>Reset by Mobile OTP:</div>
+                    <div className={radioValue === 'otp' ? `${styles['fs-12']} ${styles.fontW600}` : `${styles['fs-12']}`}>121212112</div>
                   </span>
                 </div>
               </span>
@@ -132,6 +121,7 @@ class ForgotPassword extends Component {
 
 const mapStateToProps = store => ({
   forgotPasswordStatus: selectors.forgotPasswordStatus(store),
+  activeObj: selectors.getActive(store),
 });
 const mapDispatchToProps = dispatch => bindActionCreators(
   {

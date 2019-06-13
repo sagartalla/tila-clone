@@ -41,7 +41,8 @@ class LoginPage extends React.Component {
     });
   }
 
-  submit = () => {
+  submit = (e) => {
+    e.preventDefault();
     const { email, emailErr } = this.state;
     const { userLogin } = this.props;
     if (!emailErr) {
@@ -85,28 +86,29 @@ class LoginPage extends React.Component {
               <span className={`${styles.absolute} ${styles['bg-white']} ${styles.right0} ${styles['p-5']} ${styles['fs-10']} ${styles['border-lg']} ${styles['or-tag']}`} >OR</span>
             </Col>
             <Col md={7} xs={12} sm={7} className={`${styles['pl-30']}`}>
-              <div className={`${styles['fp-input']} ${styles['pb-10']}`}>
+              <form onSubmit={this.submit}>
+                <div className={`${styles['fp-input']} ${styles['pb-10']}`}>
+                  <input
+                    type="text"
+                    value={email}
+                    autoComplete={false}
+                    className={styles['m-fs-16']}
+                    onChange={this.onChangeField}
+                    onBlur={this.handleValidation}
+                    required
+                  />
+                  <span className={styles.highlight} />
+                  <span className={styles.bar} />
+                  <label>{LOGIN_PAGE.LOGIN_INPUT_EMAIL_ENTER}</label>
+                  {emailErr &&
+                    <span className={`${styles['error-msg']}`}>correct it</span>}
+                </div>
                 <input
-                  type="text"
-                  value={email}
-                  autoComplete={false}
-                  className={styles['m-fs-16']}
-                  onChange={this.onChangeField}
-                  onBlur={this.handleValidation}
-                  required
+                  className={`${styles['sign-in-btn']} ${styles.fontW700} ${styles['text-uppercase']}`}
+                  type="submit"
+                  value="Continue"
                 />
-                <span className={styles.highlight} />
-                <span className={styles.bar} />
-                <label>{LOGIN_PAGE.LOGIN_INPUT_EMAIL_ENTER}</label>
-                {emailErr &&
-                  <span className={`${styles['error-msg']}`}>correct it</span>}
-              </div>
-              <input
-                className={`${styles['sign-in-btn']} ${styles.fontW700} ${styles['text-uppercase']}`}
-                type="button"
-                value="Continue"
-                onClick={this.submit}
-              />
+              </form>
             </Col>
           </Row>
         </div>

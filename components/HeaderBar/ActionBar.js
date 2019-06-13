@@ -79,16 +79,21 @@ class ActionBar extends Component {
     if (nextProps.isLoggedIn !== this.props.isLoggedIn) {
       this.props.getWishlist();
     }
-    let show = ((nextProps.isLoggedIn != this.props.isLoggedIn) && !this.state.logoutClicked) || this.state.loginClicked || !!nextProps.error || (!nextProps.isLoggedIn && nextProps.showLogin) || nextProps.loginInProgress || nextProps.showEmailVerificationScreen || nextProps.showOtpSuccess;
+    let show = ((nextProps.isLoggedIn != this.props.isLoggedIn) && !this.state.logoutClicked) || this.state.loginClicked || !!nextProps.error || (!nextProps.isLoggedIn && nextProps.showLogin) || nextProps.loginInProgress || nextProps.showEmailVerificationScreen;
     if (window.location.pathname.indexOf('/payment') > -1) {
       show = false;
+    }
+    if ((nextProps.activeObj.activePage !== 'thank_you' && nextProps.activeObj.activePage !== 'password') && nextProps.activeObj.nextPage === null) {
+      show = false;
+    } else {
+      show = true;
     }
     this.setState({
       show,
       logoutClicked: false,
       loginClicked: false,
     });
-    console.log('show', show);
+   
     if (nextProps.isLoggedIn) {
       if (nextProps.ptaToken) {
         this.props.savePtaToken(nextProps.ptaToken);
@@ -268,15 +273,10 @@ class ActionBar extends Component {
             }
           </Dropdown>
         </div>
-        {/* {
-          hideLogin ? null :
-          (this.state.show)
-            ?
-            ( */}
-        <Login mode={this.state.mode} onBackdropClick={this.onBackdropClick} />
-            {/* )
-            :
-            null} */}
+        {hideLogin  ? null :
+          this.state.show ?
+        <Login onBackdropClick={this.onBackdropClick} />
+             : null}
       </div>
     );
   }
@@ -296,7 +296,7 @@ const mapStateToProps = store => ({
   showEmailVerificationScreen: selectors.showEmailVerificationScreen(store),
   getEditDetails: cartSelectors.getEditDetails(store),
   imgSource: personalSelectors.getImageSource(store),
-  showOtpSuccess: selectors.forgotOtpsuccess(store),
+  activeObj: selectors.getActive(store),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(

@@ -4,19 +4,21 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Row, Col } from 'react-bootstrap';
 import { Modal } from 'react-router-modal';
+import { Router } from '../../routes';
 import SVGComponent from '../common/SVGComponet';
 import { selectors, actionCreators } from '../../store/auth';
 import { selectors as productSelectors } from '../../store/cam/personalDetails';
 import constants from '../../constants';
 import ForgotPassword from './ForgotPassword';
 import ForgotSecurityPage from './ForgotSecurityQuestions';
-import ResetPasswordPage from '../../pages/resetPassword';
 import SocialLogin from './SocialLogin';
 import { languageDefinations } from '../../utils/lang';
 import FormValidator from '../common/FormValidator';
+import VerifyStatus from './VerifyStatus';
 import VerifyEmail from './VerifyEmail';
 import LoginPage from './LoginPage';
 import SignIn from './SignIn';
+import ThankYou from './ThankYouPage';
 import ExistingSocialLogin from './ExistingSocialLogin';
 
 import lang from '../../utils/language';
@@ -66,7 +68,7 @@ class Login extends Component {
   }
   componentWillReceiveProps(nextProps) {
     let { userCreds, error, showEmailScreen, activeObj } = nextProps;
-    let { showVerifyScreen } = this.state;
+    let { showVerifyScreen, showThankyou } = this.state;
     userCreds = userCreds || this.props.userCreds;
     if (error) {
       this.props.track('SignIn', error);
@@ -81,8 +83,14 @@ class Login extends Component {
         password: userCreds.password,
       });
     }
+    if (activeObj.activePage === 'thank_you') {
+      showThankyou = true;
+    } else {
+      showThankyou = false;
+    }
     this.setState({
       showVerifyScreen: showEmailScreen,
+      showThankyou,
     });
   }
 
@@ -92,6 +100,9 @@ class Login extends Component {
     })
   }
 
+  componentDidUpdate(){
+    setTimeout(() => this.setState({ showThankyou: false }), 5000);
+  }
   onChangeField(e) {
     this.setState({
       ...this.state,
@@ -213,26 +224,32 @@ class Login extends Component {
 
 
   loadPage = () => {
-    const { activeObj } = this.props;
+    const { activeObj, showEmailSuccess } = this.props;
     console.log('activeObj:::', activeObj);
     switch (activeObj.activePage) {
       case 'password':
-        return <SignIn mode="ExistingUser" />;
-      case 'forgotSecurityPage':
-        return <ForgotSecurityPage
-       
-       /> ;
+        return <SignIn mode="EXISTING_USER" />;
+      case 'password_new':
+        return <SignIn mode="NEW_USER" />;
+      case 'security_page':
+        return <ForgotSecurityPage activeObj={activeObj} />;
+      case 'reset_type':
+        return <ForgotPassword />;
+      case 'success_screen':
+        return <VerifyStatus showEmailSuccess={showEmailSuccess} activeObj={activeObj}/>;
       default:
         return <LoginPage />;
     }
   }
 
   render() {
-    const { userCreds, loadingStatus, userInfo, showOtpSuccess } = this.props;
+    const { userCreds, loadingStatus, userInfo, activeObj } = this.props;
     const { pathname } = window.location;
-    const { mode, error, validation, clicked, showVerifyScreen, hide, showLoginSteps, forgotPassword } = this.state;
+    const { mode, error, validation, clicked, showVerifyScreen, hide, showLoginSteps, forgotPassword, showThankyou } = this.state;
     return (
-      <Modal className={`react-router-modal__modal ${styles['login-reg-modal']} ${styles['p-10']}`} onBackdropClick={this.onBackdropClick}>
+      <Modal className={activeObj.activePage === 'thank_you' ? `react-router-modal__modal ${styles['background-transparent']}  ${styles['border-none']} ${styles['p-10']}` : `react-router-modal__modal ${styles['login-reg-modal']} ${styles['p-10']}`} onBackdropClick={this.onBackdropClick}>
+       {(showThankyou && activeObj.activePage  === 'thank_you') ?
+       <ThankYou text={'Your password was reset successfully'}/> :
         <Row className={`${styles['m-0']}`}>
           <div className={`${styles.flex}`}>
             <Col md={4} xs={12} sm={4} className={`${styles['pl-0']} ${styles['pr-10']} ${styles['m-hdn']}`}>
@@ -266,7 +283,7 @@ class Login extends Component {
               </div>
             </Col>
           </div>
-        </Row>
+        </Row>}
       </Modal>
     );
   }
@@ -279,8 +296,8 @@ const mapStateToProps = store => ({
   loading: selectors.getLoginProgressStatus(store),
   loadingStatus: selectors.getLoadingStatus(store),
   userInfo: selectors.getUserInfo(store),
-  showOtpSuccess: selectors.forgotOtpsuccess(store),  
   activeObj: selectors.getActive(store),
+  showEmailSuccess: selectors.showEmailSuccess(store),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(
