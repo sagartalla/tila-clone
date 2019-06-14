@@ -25,14 +25,16 @@ class ContinueLogin extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userGender: '',
-      displayCity: '',
-      DOB: {
+      gender: '',
+      city: '',
+      city_code: '',
+      dob: {
         day: '',
         month: '',
         year: '',
       },
-      mobileNumber: '',
+      mobile_no: '',
+      mobile_country_code: '966',
     };
     this.onChangeCity = this.onChangeCity.bind(this);
     this.selectCityFromSuggesstions = this.selectCityFromSuggesstions.bind(this);
@@ -44,62 +46,77 @@ class ContinueLogin extends Component {
 
   onChangeCity(e) {
     const { autoCompleteCity } = this.props;
-    const displayCity = e.target.value;
+    const city = e.target.value;
     this.setState({
-      displayCity,
+      city,
     }, () => {
       autoCompleteCity(displayCity);
     });
   }
   handleGenderChange = val => () => {
-    this.setState({ userGender: val });
+    this.setState({ gender: val });
   }
 
   selectCityFromSuggesstions(e) {
-    const displayCity = e.currentTarget.getAttribute('data-id');
+    const city = e.currentTarget.getAttribute('data-id');
+    const city_code = e.currentTarget.getAttribute('data-id');
     this.setState({
-      displayCity,
+      city,
+      city_code,
     });
   }
 
   handleMobileNumber = (e) => {
     this.setState({
-      mobileNumber: e.target.value,
+      mobile_no: e.target.value,
     });
   }
+
   handleInputChange = val => (e) => {
-    const { DOB } = this.state;
-    if (val === 'day') DOB.day = e.target.value;
-    if (val === 'month') DOB.month = e.target.value;
-    if (val === 'year') DOB.year = e.target.value;
+    const { dob } = this.state;
+    if (val === 'day') dob.day = e.target.value;
+    if (val === 'month') dob.month = e.target.value;
+    if (val === 'year') dob.year = e.target.value;
     this.setState({
-      DOB,
+      dob,
     });
   }
 
   dobSelect = (e) => {
-    const { DOB } = this.state;
+    const { dob } = this.state;
     const id = e.currentTarget.getAttribute('data-id');
     const val = e.currentTarget.getAttribute('data-val');
-    if (id === 'day') DOB.day = val;
-    if (id === 'month') DOB.month = val;
-    if (id === 'year') DOB.year = val;
+    if (id === 'day') dob.day = val;
+    if (id === 'month') dob.month = val;
+    if (id === 'year') dob.year = val;
     this.setState({
-      DOB,
+      dob,
     });
+  }
+
+  submit = () => {
+    const {
+      gender,
+      city,
+      city_code,
+      dob,
+      mobile_no,
+      mobile_country_code,
+    } = this.state;
+
   }
 
   render() {
     const {
-      userGender, displayCity, DOB, mobileNumber,
+      gender, city, dob, mobile_no, mobile_country_code,
     } = this.state;
     const { getAllCities } = this.props;
-    console.log('DOB', DOB);
+    console.log('dob', dob);
     return (
       <div className={`${styles['complete-login']} ${styles.flex} ${styles['justify-between']} ${styles['flex-colum']}`}>
         <div>
-          <h3 className={`${styles['fs-22']} ${styles['mb-25']} ${styles['ff-b']}`}>{LOGIN_PAGE.ALMOST_DONE}</h3>
-          <div className={`${styles['thick-gry-clr']} ${styles['fs-14']}`}>{LOGIN_PAGE.CUSTOMIZE_TILA_EXPERIANCE}</div>
+          <h3 className={`${styles['fs-18']} ${styles['ff-b']}`}>{LOGIN_PAGE.ALMOST_DONE}</h3>
+          <div className={`${styles['thick-gry-clr']} ${styles['fs-12']}`}>{LOGIN_PAGE.CUSTOMIZE_TILA_EXPERIANCE}</div>
         </div>
         <Row className={`${styles.flex} ${styles['justify-between']}`}>
           <Col md={6}>
@@ -110,7 +127,7 @@ class ContinueLogin extends Component {
                 <img src={countriesData.SAU.img} alt="SAU FLAG" />
                 <input
                   type="text"
-                  value="+966"
+                  value={`+${mobile_country_code}`}
                   readOnly
                   style={{ width: '40px', border: 'none' }}
                   className={`${styles['fs-14']} ${styles['ml-5']}`}
@@ -122,19 +139,19 @@ class ContinueLogin extends Component {
               {/* </Dropdown> */}
               <input
                 type="text"
-                value={mobileNumber}
+                value={mobile_no}
                 onChange={this.handleMobileNumber}
-                className={`${styles['fs-14']} ${styles['ml-10']}`}
+                className={`${styles['mobile-input']} ${styles['fs-14']} ${styles['ml-10']}`}
               />
             </div>
           </Col>
           <Col md={6} className={`${styles.flex} ${styles['flex-colum']}`}>
             <div className={`${styles['thick-gry-clr']} ${styles['fs-14']}`}>{LOGIN_PAGE.SHIPPING_CITY}</div>
-            <Dropdown id="login-toggle">
+            <Dropdown id="login-toggle" className={`${styles['city-toggle']} ${styles.width100}`}>
               <Dropdown.Toggle id="dropdown-custom-components">
                 <input
                   type="text"
-                  value={displayCity}
+                  value={city}
                   className={`${styles['fs-14']}`}
                   onChange={this.onChangeCity}
                 />
@@ -161,10 +178,10 @@ class ContinueLogin extends Component {
                   <Dropdown.Toggle id="dropdown-custom-components">
                     <input
                       type="text"
-                      value={DOB.day}
+                      value={dob.day}
                       onChange={this.handleInputChange('day')}
                       placeholder="DD"
-                      className={`${styles['fs-14']}`}
+                      className={`${styles['mobile-input']}${styles['fs-14']}`}
                     />
                   </Dropdown.Toggle>
                   <Dropdown.Menu id="country_toggle" className={`${styles['p-0']} ${styles['m-0']} ${styles['auto-suggestions-list']}`}>
@@ -184,10 +201,10 @@ class ContinueLogin extends Component {
                   <Dropdown.Toggle id="dropdown-custom-components">
                     <input
                       type="text"
-                      value={DOB.month}
+                      value={dob.month}
                       placeholder="MM"
                       onChange={this.handleInputChange('month')}
-                      className={`${styles['fs-14']}`}
+                      className={`${styles['mobile-input']}${styles['fs-14']}`}
                     />
                   </Dropdown.Toggle>
                   <Dropdown.Menu id="country_toggle" className={`${styles['p-0']} ${styles['m-0']} ${styles['auto-suggestions-list']}`}>
@@ -207,10 +224,10 @@ class ContinueLogin extends Component {
                   <Dropdown.Toggle id="dropdown-custom-components">
                     <input
                       type="text"
-                      value={DOB.year}
+                      value={dob.year}
                       placeholder="YYYY"
                       onChange={this.handleInputChange('year')}
-                      className={`${styles['fs-14']}`}
+                      className={`${styles['mobile-input']}${styles['fs-14']}`}
                     />
                   </Dropdown.Toggle>
                   <Dropdown.Menu id="country_toggle" className={`${styles['p-0']} ${styles['m-0']} ${styles['auto-suggestions-list']}`}>
@@ -228,17 +245,17 @@ class ContinueLogin extends Component {
           </Col>
           <Col md={6}>
             <div className={`${styles['thick-gry-clr']} ${styles['fs-14']}`}>Gender</div>
-            <div className={`${styles['mt-5']} ${styles['gender-select-main']} ${styles['flex-center']} ${styles['justify-evenly']}`}>
+            <div className={`${styles['mt-5']} ${styles['gender-select-main']} ${styles['flex-center']}`}>
               <div className={styles['t-c']}>
                   <a onClick={this.handleGenderChange('M')}>
-                    <SVGComponent clsName={`${styles['gender-select-inn']} ${userGender === 'M' ? 'select-icon' : 'not-select-icon'}`} src="icons/common-icon/male" />
-                    <span className={userGender === 'M' ? `${styles['fs-12']} ${styles['black-color']}` : `${styles['fs-12']} ${styles['label-gry-clr']}`}>{PERSONAL_INFO_MODAL.MALE}</span>
+                    <SVGComponent clsName={`${styles['gender-select-inn']} ${gender === 'M' ? 'select-icon' : 'not-select-icon'}`} src="icons/common-icon/male" />
+                    <span className={`${styles['fs-12']} ${gender === 'M' ? `${styles['black-color']} ${styles.fontW600}` : styles['label-gry-clr']}`}>{PERSONAL_INFO_MODAL.MALE}</span>
                   </a>
               </div>
-              <div className={styles['t-c']} onClick={this.handleGenderChange('F')}>
+              <div className={`${styles['ml-20']} ${styles['t-c']}`} onClick={this.handleGenderChange('F')}>
                   <a onClick={this.handleGenderChange('M')}>
-                    <SVGComponent clsName={`${styles['gender-select-inn']} ${userGender === 'F' ? 'select-icon' : 'not-select-icon'}`} src="icons/common-icon/female" />
-                    <span className={userGender === 'F' ? `${styles['fs-12']} ${styles['black-color']}` : `${styles['fs-12']} ${styles['label-gry-clr']}`}>{PERSONAL_INFO_MODAL.FEMALE}</span>
+                    <SVGComponent clsName={`${styles['gender-select-inn']} ${gender === 'F' ? 'select-icon' : 'not-select-icon'}`} src="icons/common-icon/female" />
+                    <span className={`${styles['fs-12']} ${gender === 'F' ? `${styles['black-color']} ${styles.fontW600}` : styles['label-gry-clr']}`}>{PERSONAL_INFO_MODAL.FEMALE}</span>
                   </a>
               </div>
             </div>
@@ -247,7 +264,9 @@ class ContinueLogin extends Component {
         <Button
           className={`${styles['flex-center']}  ${styles.width100} ${styles['fs-14']} ${styles['text-uppercase']} ${styles['button-radius']}`}
           btnText={LOGIN_PAGE.COMPLETE_SIGN_UP}
+          onClick={this.submit}
         />
+        <a className={`${styles['t-c']} ${styles['mb-20']}`}>Skip and Continue</a>
       </div>
     );
   }

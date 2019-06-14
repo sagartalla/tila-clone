@@ -164,6 +164,7 @@ class ActionBar extends Component {
     const {
       isLoggedIn, cartResults, userInfo, wishListCount, getEditDetails, hideCountry, hideLogin
     } = this.props;
+    console.log(this.state.show, '.akslnfdjkab');
     return (
       <div className={styles['actionbar-wrapper']}>
         <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']} ${styles['country-code']}`}>
