@@ -280,3 +280,10 @@
      background-color: #8a8a8f;
   }
 
+.Toastify__toast {
+  min-height: inherit;
+  padding: 0;
+}
+.Toastify__toast-container {
+  width: 310px
+}

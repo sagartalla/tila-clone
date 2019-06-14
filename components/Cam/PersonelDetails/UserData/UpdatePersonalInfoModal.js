@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators, selectors } from '../../../../store/cam/personalDetails';
 import SVGComponent from '../../../common/SVGComponet';
-
+import ToastContent from '../../../common/ToastContent'
 import lang from '../../../../utils/language';
 
 import main_en from '../../../../layout/main/main_en.styl';
@@ -105,9 +105,19 @@ class UpdatePersonalInfoModal extends React.Component {
         image_url: ''
       });
       this.handleClose();
-      toast.success('Your personal information has been updated.');
+      toast(
+        <ToastContent
+          msg='Your personal information has been updated.'
+          msgType='success'
+        />
+      )
     } else {
-      toast.error('Fill in all the fields');
+      toast(
+        <ToastContent
+          msg='Fill in all the fields'
+          msgType='error'
+        />
+      )       
     }
   }
 

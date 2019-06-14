@@ -7,6 +7,7 @@ import { bindActionCreators } from 'redux';
 
 import Btn from '../../../common/Button';
 import Input from '../../../common/Input';
+import ToastContent from '../../../common/ToastContent'
 import { languageDefinations } from '../../../../utils/lang/';
 import { actionCreators, selectors } from '../../../../store/cam/personalDetails';
 import SVGComponent from '../../../common/SVGComponet';
@@ -47,7 +48,12 @@ class EditPassword extends React.Component {
       if (nextProps.passwordResetStatus.Response == "SUCCESS") {
         this.setState({ error: "" });
         this.handleClose();
-        toast.success(EDIT_PASSWORD_MODAL.PASSWORD_SUCCESS_MESSAGE);
+        toast(
+          <ToastContent
+            msg={EDIT_PASSWORD_MODAL.PASSWORD_SUCCESS_MESSAGE}
+            msgType='success'
+          />
+        )
       }
     }
 

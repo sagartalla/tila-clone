@@ -2,6 +2,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import constants from '../../helper/constants';
 import { languageDefinations } from '../../../utils/lang/';
+import ToastContent from '../../../components/common/ToastContent'
 
 const { API_TEXT } = languageDefinations();
 
@@ -46,26 +47,47 @@ const track = (params) => {
 };
 
 const addToWishlistApi = params => axios.put(`${constants.WISHLIST_API_URL}/api/v1/wishlist/create`, params).then(({ data }) => {
-  toast.success(API_TEXT.ITEM_ADDED_TO_WISHLIST);
+  toast(
+    <ToastContent
+      msg={API_TEXT.ITEM_ADDED_TO_WISHLIST}
+      msgType='success'
+    />
+  )
+  //toast.success(API_TEXT.ITEM_ADDED_TO_WISHLIST);
   return { data };
 });
 
 const deleteWishlistApi = (wishlist_id, toastObj = {}, currentPage) => axios.post(`${constants.WISHLIST_API_URL}/api/v1/wishlist/delete?wishlist_id=${wishlist_id}`, {}).then(({ data }) => {
   // return { data };
   if (toastObj.showToast) {
-    toast.success(API_TEXT.ITEM_REMOVED_FROM_WISHLIST);
+    toast(
+      <ToastContent
+        msg={API_TEXT.ITEM_REMOVED_FROM_WISHLIST}
+        msgType='success'
+      />
+    )
   }
   // getWishlistProducts();
   return getWishlistApi(currentPage);
 });
 
 const notifyMe = params => axios.post(`${constants.WISHLIST_API_URL}/api/v1/alert/stock/srp`, params).then((res) => {
-  toast.success(API_TEXT.WILL_BE_NOTIFIED_SOON);
+  toast(
+    <ToastContent
+      msg={API_TEXT.WILL_BE_NOTIFIED_SOON}
+      msgType='success'
+    />
+  )
   return res;
 });
 
 const wishlistNotify = wishlistId => axios.post(`${constants.WISHLIST_API_URL}/api/v1/wishlist/alert/stock/${wishlistId}`).then((res) => {
-  toast.success(API_TEXT.WILL_BE_NOTIFIED_SOON);
+  toast(
+    <ToastContent
+      msg={API_TEXT.WILL_BE_NOTIFIED_SOON}
+      msgType='success'
+    />
+  )
   return res;
 });
 
