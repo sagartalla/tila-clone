@@ -146,6 +146,7 @@ const savePtaToken = ptaToken => axios.post('/api/setCookie', {
     ptaToken,
   },
 }).then(() => ptaToken);
+
 const verifyEmail = body => axios.put(`${constants.CMS_API_URL}/api/v1/verification/email/otp`, body).then(({ data }) => {
   toast.success(API_TEXT.YOUR_EMAIL_IS_VERIFIED);
   return { data };

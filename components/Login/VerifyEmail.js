@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { actionCreators } from '../../store/auth';
+import { actionCreators, selectors } from '../../store/auth';
 import Input from '../common/Input';
 import Button from '../common/CommonButton';
 import SVGComponent from '../common/SVGComponet';
@@ -15,7 +15,7 @@ import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './login_en.styl';
 import styles_ar from './login_ar.styl';
 
-const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
 const { EMAIL_VERIFICATION } = languageDefinations();
 
@@ -58,7 +58,7 @@ class VerifyEmail extends Component {
     }
     const { verifyEmailId } = this.props;
     const body = {
-      "otp": Number(value),
+      otp: Number(value),
     };
     verifyEmailId(body);
   }
@@ -67,14 +67,14 @@ class VerifyEmail extends Component {
     const { sendOtpToEmailId } = this.props;
     sendOtpToEmailId();
   }
+
   render() {
-    const { email, onBackdropClick, loadingStatus } = this.props;
+    const { activeEmailId, onBackdropClick, loadingStatus } = this.props;
     const { value, otpError } = this.state;
     return (
       <div className={`${styles.width100}`}>
         <div className={`${styles.flex} ${styles['align-center']} ${styles['justify-between']}  ${styles['mt-15']}`}>
           <div className={`${styles['ff-b']} ${styles['fs-20']}`}>{EMAIL_VERIFICATION.VERIFY_YOUR_EMAIL}</div>
-          <div className={`${styles.flex} ${styles.pointer}`} onClick={onBackdropClick}><SVGComponent clsName={`${styles['cross-icon']}`} src="icons/common-icon/cross-button" /></div>
         </div>
         <div className={`${styles.flex} ${styles['justify-between']} ${styles['flex-col']} ${styles['email-form']} ${styles['mt-20']}`}>
           <div className={`${styles['verify-email']} ${styles['p-10']}`}>
@@ -82,7 +82,7 @@ class VerifyEmail extends Component {
               <SVGComponent clsName={`${styles['tickmark-icon']}`} src="icons/common-icon/blue-tick" />
               <div className={`${styles['ml-10']}`}>{EMAIL_VERIFICATION.OTP_SENT}</div>
             </div>
-            <div className={`${styles['ff-b']} ${styles['fs-16']} ${styles.ellipsis} ${styles['ml-25']}`} title={email} >{email}</div>
+            <div className={`${styles['ff-b']} ${styles['fs-16']} ${styles.ellipsis} ${styles['ml-25']}`} title={activeEmailId} >{activeEmailId}</div>
           </div>
           <div className={`${styles.flex} ${styles['align-center']} ${styles['flex-col']}`}>
             <div>{EMAIL_VERIFICATION.ENTER_OTP}</div>
@@ -115,6 +115,11 @@ class VerifyEmail extends Component {
     );
   }
 }
+
+const mapStateToProps = store => ({
+  activeEmailId: selectors.getActiveEmailId(store),
+});
+
 const mapDispatchToProps = dispatch => bindActionCreators(
   {
     verifyEmailId: actionCreators.verifyEmailId,
@@ -126,16 +131,16 @@ const mapDispatchToProps = dispatch => bindActionCreators(
 VerifyEmail.propTypes = {
   verifyEmailId: PropTypes.func,
   sendOtpToEmailId: PropTypes.func,
-  email: PropTypes.string,
+  activeEmailId: PropTypes.string,
   onBackdropClick: PropTypes.func,
   loadingStatus: PropTypes.bool,
 };
 VerifyEmail.defaultProps = {
   verifyEmailId: f => f,
   sendOtpToEmailId: f => f,
-  email: '',
+  activeEmailId: '',
   onBackdropClick: f => f,
   loadingStatus: false,
 };
 
-export default connect(null, mapDispatchToProps)(VerifyEmail);
+export default connect(mapStateToProps, mapDispatchToProps)(VerifyEmail);
