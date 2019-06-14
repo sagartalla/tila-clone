@@ -174,6 +174,10 @@ const v2UserLogin = email => axios.get(`${constants.CMS_API_URL}/api/v1/user?ema
   },
 }));
 
+const showUserInfo = (param) => {
+  return axios.get(`${constants.CMS_API_URL}/api/v1/user/password/forgot?email=${param}`);
+};
+
 const resetPassword = (body) => {
   return axios.post(`${constants.CMS_API_URL}/api/v1/user/password/reset`, body).then((data) => {
     return data;

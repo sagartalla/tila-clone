@@ -34,7 +34,8 @@ const actions = {
   FORGOT_PASSWORD: 'FORGOT_PASSWORD',
   SHOW_FORGOT_PASSWORD_SCREENS: 'SHOW_FORGOT_PASSWORD_SCREENS',
   V2_NEW_USER_REGISTER: 'V2_NEW_USER_REGISTER',
-
+  SHOW_LOGIN_SCREEN: 'SHOW_LOGIN_SCREEN',
+  SHOW_USER_INFO: 'SHOW_USER_INFO',
 };
 
 const actionCreators = {
@@ -191,6 +192,18 @@ const actionCreators = {
     type: actions.SHOW_FORGOT_PASSWORD_SCREENS,
     payload: data,
   }),
+
+  showLoginScreen: () => ({
+    type: actions.SHOW_LOGIN_SCREEN,
+  }),
+
+  showUserInfo: ([param]) => {
+    return ({
+      type: actions.SHOW_USER_INFO,
+      payload: api.showUserInfo(param),
+    });
+  },
+
 };
 
 export { actions, actionCreators };

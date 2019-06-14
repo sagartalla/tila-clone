@@ -4,8 +4,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import Button from '../common/CommonButton';
 import { languageDefinations } from '../../utils/lang';
-import { selectors, actionCreators } from '../../store/cam/personalDetails';
-import { actionCreators as authActionCreators } from '../../store/auth';
+import { actionCreators as authActionCreators, selectors } from '../../store/auth';
 import VerifyStatus from './VerifyStatus';
 
 import lang from '../../utils/language';
@@ -29,9 +28,10 @@ class ForgotSecurityQuestions extends Component {
   }
 
   showForgotPassword = () => {
-    const { activeObj } = this.props;
+    const { activeObj, showUserInfo, activeEmailId } = this.props;
+    showUserInfo(activeEmailId);
     console.log('activeObj', activeObj);
-    const data = { currentFlow: 'forgot_password', activeTab: activeObj.nextPage };
+    const data = activeObj.nextPage;
     const { showNextPage } = this.props;
     showNextPage(data);
   }
@@ -66,7 +66,8 @@ class ForgotSecurityQuestions extends Component {
 }
 
 const mapStateToProps = store => ({
-
+  activeObj: selectors.getActive(store),
+  activeEmailId: selectors.getActiveEmailId(store),
 });
 const mapDispatchToProps = dispatch => bindActionCreators(
   {

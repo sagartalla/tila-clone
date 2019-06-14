@@ -60,7 +60,6 @@ class Login extends Component {
       clicked: false,
       showVerifyScreen: props.showEmailScreen || false,
       hide: true,
-      showLoginSteps: true,
     };
     this.login = this.login.bind(this);
     this.onChangeField = this.onChangeField.bind(this);
@@ -83,26 +82,17 @@ class Login extends Component {
         password: userCreds.password,
       });
     }
-    if (activeObj.activePage === 'thank_you') {
-      showThankyou = true;
-    } else {
-      showThankyou = false;
-    }
     this.setState({
       showVerifyScreen: showEmailScreen,
-      showThankyou,
     });
   }
 
   hideToggle = () => {
     this.setState({
       hide: !this.state.hide,
-    })
+    });
   }
 
-  componentDidUpdate(){
-    setTimeout(() => this.setState({ showThankyou: false }), 5000);
-  }
   onChangeField(e) {
     this.setState({
       ...this.state,
@@ -212,9 +202,6 @@ class Login extends Component {
     }, () => this.fireCustomEventClick(this.state.mode));
   }
 
-  // handleClick() {
-  //   this.setState({ forgotPassword: true, showLoginSteps: false, });
-  // }
 
   showForgotPassword = () => {
     this.setState({
@@ -224,7 +211,7 @@ class Login extends Component {
 
 
   loadPage = () => {
-    const { activeObj, showEmailSuccess } = this.props;
+    const { activeObj, showEmailSuccess, onBackdropClick } = this.props;
     console.log('activeObj:::', activeObj);
     switch (activeObj.activePage) {
       case 'password':
@@ -232,23 +219,24 @@ class Login extends Component {
       case 'password_new':
         return <SignIn mode="NEW_USER" />;
       case 'security_page':
-        return <ForgotSecurityPage activeObj={activeObj} />;
+        return <ForgotSecurityPage />;
       case 'reset_type':
         return <ForgotPassword />;
       case 'success_screen':
-        return <VerifyStatus showEmailSuccess={showEmailSuccess} activeObj={activeObj}/>;
+        return <VerifyStatus showEmailSuccess={showEmailSuccess} onBackdropClick={onBackdropClick}/>;
       default:
         return <LoginPage />;
     }
   }
 
   render() {
+    console.log('activeObj', this.props.activeObj);
     const { userCreds, loadingStatus, userInfo, activeObj } = this.props;
     const { pathname } = window.location;
-    const { mode, error, validation, clicked, showVerifyScreen, hide, showLoginSteps, forgotPassword, showThankyou } = this.state;
+    const { mode, error, validation, clicked, showVerifyScreen, hide, forgotPassword, showThankyou } = this.state;
     return (
       <Modal className={activeObj.activePage === 'thank_you' ? `react-router-modal__modal ${styles['background-transparent']}  ${styles['border-none']} ${styles['p-10']}` : `react-router-modal__modal ${styles['login-reg-modal']} ${styles['p-10']}`} onBackdropClick={this.onBackdropClick}>
-       {(showThankyou && activeObj.activePage  === 'thank_you') ?
+       {activeObj.activePage  === 'thank_you' ?
        <ThankYou text={'Your password was reset successfully'}/> :
         <Row className={`${styles['m-0']}`}>
           <div className={`${styles.flex}`}>

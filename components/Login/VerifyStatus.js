@@ -45,11 +45,7 @@ class VerifyStatus extends React.Component {
   }
 
   closeSuccessScreen = () => {
-    const { activeObj } = this.props; 
-    const { showEmailSuccess } = this.props;
-    const data = { currentFlow: 'forgot_password', activeTab: 'close_screen' };
-    const { showNextPage } = this.props;
-    showNextPage(data);
+    this.props.onBackdropClick();
   }
 
   render() {
@@ -67,7 +63,7 @@ class VerifyStatus extends React.Component {
             <Col md={8} className={`${styles['fs-14']}`}>{resetEmailLink}</Col>
             <Col md={4} className={`${styles.flex}`}><SVGComponent clsName={`${styles['email-success-icon']}`} src="icons/common-icon/email-sent" /></Col>
             </Row>
-            <div className={`${styles['text-blue']} ${styles['fs-12']} ${styles.pointer}`} onClick={this.sendLink}>{EMAIL_VERIFICATION.RESEND_THE_LINK}</div>   
+            <a className={`${styles['text-blue']} ${styles['fs-12']} ${styles.pointer}`} onClick={this.sendLink}>{EMAIL_VERIFICATION.RESEND_THE_LINK}</a>   
             <div className={`${styles.border} ${styles['m-10']}`} />
             <div className={`${styles['fs-14']}`}>{EMAIL_VERIFICATION.PLEASE_CLICK_ON_EMAIL_LINK}</div>
             <span className={styles['bg-light-gray']}>
@@ -122,6 +118,7 @@ class VerifyStatus extends React.Component {
 
 const mapStateToProps = store => ({
   forgotPasswordStatus: selectors.forgotPasswordStatus(store),
+  activeObj: selectors.getActive(store),  
 });
 const mapDispatchToProps = dispatch => bindActionCreators(
   {

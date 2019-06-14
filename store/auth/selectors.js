@@ -74,8 +74,10 @@ const showEmailSuccess = (store) => {
   }
 }
 
+const showLogin = store => store.authReducer.data.showLoginScreen;
+
 export {
   getErrorMessege, getCountry, getLoggedInStatus, getInstaCode, getUserCreds, getDeliveryCity, getDomainCountries,
   getLoginProgressStatus, getShowLogin, getPTAToken, showEmailVerificationScreen, getLanguage, getLoadingStatus, getUserInfo,
-  getActive, getActiveEmailId, forgotPasswordStatus, showEmailSuccess,
+  getActive, getActiveEmailId, forgotPasswordStatus, showEmailSuccess, showLogin,
 }
