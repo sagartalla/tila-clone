@@ -363,7 +363,7 @@ export const EN_KEYWORDS = {
     ENTER_YOUR_NAME: 'Enter your Name, DOB and Gender for a ',
     EXPERIANCE: 'more personalised Tila Experience',
     OR: 'or',
-    USERNAME: 'Username',
+    USERNAME: 'Name',
     IMAGE_UPDATED_SUCCESS: 'Your profile pic is successfully updated',
     UPDATE_PERSONAL_INFORMATION: 'Update Personal Information',
     TIME_LINE: 'Timeline Component',
