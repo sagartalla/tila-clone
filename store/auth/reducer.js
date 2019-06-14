@@ -25,12 +25,12 @@ const pageFlows = {
     },
     verify_email: {
       activePage: 'verify_email',
-      nextPage: 'personal_details',
-    },
-    personal_details: {
-      activePage: 'personal_details',
       nextPage: 'thank_you',
     },
+    // personal_details: {
+    //   activePage: 'personal_details',
+    //   nextPage: 'thank_you',
+    // },
     thank_you: {
       activePage: 'thank_you',
       nextPage: null,
@@ -124,6 +124,27 @@ const authReducer = typeToReducer({
   // ///////////////////
   // ///////////////////
   // ///////////////////
+
+  [actions.GET_USER_INFO]: {
+    PENDING: state => Object.assign({}, state, { ui: { ...state.ui, loading: true, showEmailVerificationScreen: false } }),
+    FULFILLED: (state, action) => Object.assign({}, state, {
+      data: {
+        ...state.data,
+        userInfoData: action.payload && action.payload.data,
+      },
+      ui: {
+        ...state.ui,
+        loading: false,
+        showEmailVerificationScreen: !!(action.payload && action.payload.data.email_verified === 'NV'),
+      },
+      v2: {
+        ...state.v2,
+        active: pageFlows[state.v2.currentFlow][state.v2.active.nextPage],
+      },
+    }),
+    REJECTED: state =>
+      Object.assign({}, state, { ui: { ...state.ui, loading: false, showEmailVerificationScreen: false } }),
+  },
   [actions.USER_LOGIN]: {
     PENDING: state => Object.assign({}, state, {
       ui: {
@@ -384,8 +405,10 @@ const authReducer = typeToReducer({
           email_verified: 'V',
         }
       },
-      ui: {
-        ...state.ui, loading: false, showEmailVerificationScreen: false, showLogin: false,
+      ui: { ...state.ui, loading: false, showEmailVerificationScreen: false, showLogin: false },
+      v2: {
+        ...state.v2,
+        active: pageFlows[state.v2.currentFlow][state.v2.active.nextPage],
       },
     }),
     REJECTED: state =>
@@ -403,7 +426,6 @@ const authReducer = typeToReducer({
     REJECTED: state =>
       Object.assign({}, state, { ui: { ...state.ui, loading: false, showEmailVerificationScreen: true } }),
   },
-
   [actions.GET_USER_INFO]: {
     PENDING: state => Object.assign({}, state, { ui: { ...state.ui, loading: true, showEmailVerificationScreen: false } }),
     FULFILLED: (state, action) => Object.assign({}, state, {
@@ -458,10 +480,6 @@ const authReducer = typeToReducer({
   },
 
   [actions.FORGOT_PASSWORD]: {
-<<<<<<< HEAD
-    PENDING: state => Object.assign({}, state, { ui: { loading: true }, showOtpSuccess: false }),
-    FULFILLED: (state, action) => Object.assign({}, state, { data: action.payload, ui: { loading: false }, showOtpSuccess: true }),
-=======
     PENDING: state => Object.assign({}, state, {
       ui: {
         loading: true,
@@ -488,7 +506,6 @@ const authReducer = typeToReducer({
         },
       });
     },
->>>>>>> 16488a23... Added ApI to fetch user data
     REJECTED: (state, action) => Object.assign({}, state, {
       error: action.payload.data,
       ui: { loading: false },

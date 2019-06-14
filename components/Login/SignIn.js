@@ -25,7 +25,7 @@ class SignIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      hide: false,
+      hide: true,
       password: '',
       passwordErr: false,
       promotional_notification: false,
@@ -40,27 +40,9 @@ class SignIn extends Component {
     });
   }
 
-  acceptsOffers = ({ target }) => {
-    let { promotional_notification } = this.state;
-    if (target.checked) {
-      promotional_notification = true;
-    } else {
-      promotional_notification = false;
-    }
+  handleCheck = ({ target }) => {
     this.setState({
-      promotional_notification,
-    });
-  }
-
-  remember_me = ({ target }) => {
-    let { rememberMe } = this.state;
-    if (target.checked) {
-      rememberMe = true;
-    } else {
-      rememberMe = false;
-    }
-    this.setState({
-      rememberMe,
+      [target.name]: target.checked,
     });
   }
 
@@ -80,7 +62,9 @@ class SignIn extends Component {
   }
 
   login = () => {
-    const { password, rememberMe } = this.state;
+    const {
+      first_name, last_name, password, rememberMe, promotional_notification,
+    } = this.state;
     const {
       activeEmailId, userLogin, mode, newUserRegister,
     } = this.props;
@@ -101,7 +85,26 @@ class SignIn extends Component {
         });
       }
     } else if (mode === 'NEW_USER') {
-      newUserRegister();
+      if (password && first_name && last_name) {
+        const serverData = {
+          channel: 'BASIC_REGISTER',
+          metadata: {
+            username: activeEmailId,
+            password,
+            first_name,
+            last_name,
+            mobile_no: '',
+            mobile_country_code: '',
+            promotional_notification,
+          },
+          rememberMe,
+        };
+        userLogin(serverData, 'register');
+      } else {
+        this.setState({
+          passwordErr: true,
+        });
+      }
     }
   }
 
@@ -111,7 +114,7 @@ class SignIn extends Component {
   // 3. User signup through social login
   render() {
     const {
-      hide, promotional_notification, password, rememberMe, passwordErr, firstname, lastname,
+      hide, promotional_notification, password, rememberMe, passwordErr, first_name, last_name,
     } = this.state;
     const { showForgotPassword, mode, activeEmailId } = this.props;
 
@@ -149,11 +152,11 @@ class SignIn extends Component {
           <div className={`${styles['fp-input']} ${styles['pb-10']}`}>
             <input
               type="text"
-              name="firstname"
+              name="first_name"
               autoComplete="off"
               className={`${styles.width100}`}
               onChange={this.handleOnChange}
-              value={firstname}
+              value={first_name}
               required
             />
             <label className={`${styles['label-light-grey']}`}>{LOGIN_PAGE.FIRST_NAME}</label>
@@ -161,11 +164,11 @@ class SignIn extends Component {
           <div className={`${styles['fp-input']} ${styles['pb-10']}`}>
             <input
               type="text"
-              name="lastname"
+              name="last_name"
               autoComplete="off"
               className={`${styles.width100}`}
               onChange={this.handleOnChange}
-              value={lastname}
+              value={last_name}
               required
             />
             <label className={`${styles['label-light-grey']}`}>{LOGIN_PAGE.LAST_NAME}</label>
@@ -175,7 +178,7 @@ class SignIn extends Component {
         {mode === 'EXISTING_USER' &&
         <Col md={12} className={`${styles['p-0']} ${styles['fs-12']} ${styles.flex} ${styles['justify-between']}`}>
           <div className={`${styles['checkbox-material']} ${styles.flex} ${styles['p-0']}`}>
-            <input id="remember_me" type="checkbox" onChange={this.remember_me} checked={rememberMe} />
+            <input id="remember_me" name="rememberMe" type="checkbox" onChange={this.handleCheck} checked={rememberMe} />
             <label htmlFor="remember_me">
               <span className={`${styles['register-policy-gray']}`}>{LOGIN_PAGE.REMEMBER_ME}</span>
             </label>
@@ -188,7 +191,7 @@ class SignIn extends Component {
         <Col md={12} className={`${styles['p-0']} ${styles['mt-40']}  ${styles['mb-10']}`}>
           {
             <div className={`${styles['checkbox-material']} ${styles.flex} ${styles['p-0']}`}>
-              <input id="deals-offers-reg" type="checkbox" onChange={this.acceptsOffers} checked={promotional_notification} />
+              <input id="deals-offers-reg" name="promotional_notification" type="checkbox" onChange={this.handleCheck} checked={promotional_notification} />
               <label htmlFor="deals-offers-reg">
                 <span className={`${styles['light-gry-clr']} ${styles['fs-12']}`}><span>{LOGIN_PAGE.I_WOULD_LIKE_TO_RECEIVE}</span><span className={`${styles['yellow-clr']}`}>&nbsp;{LOGIN_PAGE.DEALS_OFFERS}</span></span>
               </label>

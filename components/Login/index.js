@@ -16,6 +16,8 @@ import FormValidator from '../common/FormValidator';
 import VerifyEmail from './VerifyEmail';
 import LoginPage from './LoginPage';
 import SignIn from './SignIn';
+import ThankYou from './ThankYouPage';
+import CompleteSignUp from './CompleteSignUp';
 import ExistingSocialLogin from './ExistingSocialLogin';
 
 import lang from '../../utils/language';
@@ -227,7 +229,10 @@ class Login extends Component {
         return <ForgotPassword />;
       case 'success_screen':
         return <VerifyStatus showEmailSuccess={showEmailSuccess} onBackdropClick={onBackdropClick}/>;
-
+      case 'verify_email':
+        return <VerifyEmail />;
+      case 'personal_details':
+        return <CompleteSignUp />;
       default:
         return <LoginPage />;
     }
@@ -300,5 +305,11 @@ const mapDispatchToProps = dispatch => bindActionCreators(
   },
   dispatch,
 );
+
+// Login.defaultProps = {
+//   activeObj: {
+//     activePage: 'personal_details',
+//   }
+// };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
