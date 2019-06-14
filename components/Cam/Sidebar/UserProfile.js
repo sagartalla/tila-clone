@@ -33,13 +33,13 @@ class UserProfile extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     const {image_url} = nextProps.userInfo.personalInfo;
+    if (nextProps.getPictureDocumentId === this.props.getPictureDocumentId) {
+      return;
+    }
     if((nextProps.loadingStatus !== this.props.loadingStatus)){
       this.setState({
         loader: nextProps.loadingStatus,
       })
-    }
-    if (nextProps.getPictureDocumentId === this.props.getPictureDocumentId) {
-      return;
     }
     if (nextProps.userInfo.personalInfo && Object.keys(nextProps.userInfo.personalInfo).length > 0 && this.state.imgDocumentID === null) {
       this.setState({
