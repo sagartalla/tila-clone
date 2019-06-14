@@ -127,7 +127,7 @@ class OrderItem extends Component {
     const showMsgAndDate = () => (
       <div className={`${styles['date-cont']} ${styles['flx-spacebw-alignc']}`}>
         <div>
-          <div className={styles['fs-12']}>{displayText()}</div>
+          <div className={`${styles['fs-14']} ${styles.fontW600}`}>{displayText()}</div>
           <div className={`${styles['ff-t']} ${styles['fs-24']} ${styles['ipad-fs-20']}`}>          
             {btnType === 'cancel' ? moment(orderItem.products[0].promisedDeliveryDate).format('ddd, MMM Do') : this.getDate(orderItem.products[0].state_time_estimates)}
           </div>
