@@ -53,6 +53,12 @@ const pageFlows = {
       nextPage: null,
     },
   },
+  existing_social_user: {
+    existing_social_login: {
+      activePage: 'existing_social_login',
+      nextPage: '',
+    },
+  },
 };
 
 const initialState = {
@@ -96,6 +102,9 @@ const authReducer = typeToReducer({
       } else if (!data.exist && data.last_social_login_used && data.last_social_login_used.length === 0) {
         v2.active = pageFlows.new_user_register.password_new;
         v2.currentFlow = 'new_user_register';
+      } else if (data.exist && data.last_social_login_used && data.last_social_login_used.length >= 1) {
+        v2.active = pageFlows.existing_social_user.existing_social_login;
+        v2.currentFlow = 'existing_social_user';
       }
       return Object.assign({}, state, {
         v2: {
@@ -107,12 +116,29 @@ const authReducer = typeToReducer({
     },
     REJECTED: state => state,
   },
-  [actions.V2_NEW_USER_REGISTER]: state => Object.assign({}, state, {
+  [actions.V2_SHOW_NEXT_PAGE]: state => Object.assign({}, state, {
     v2: {
       ...state.v2,
       active: pageFlows[state.v2.currentFlow][state.v2.active.nextPage],
     },
   }),
+  [actions.CHANGE_CURRENT_FLOW]: (state, action) => Object.assign({}, state, {
+    v2: {
+      ...state.v2,
+      active: pageFlows[action.payload.currentFlow][action.payload.nextPage],
+      currentFlow: action.payload.currentFlow,
+    },
+  }),
+  // [actions.V2_SHOW_NEXT_PAGE]: (state) => {
+  //   const { v2 } = state;
+  //   return Object.assign({}, state, {
+  //     ...state,
+  //     v2: {
+  //       ...state.v2,
+  //       active: pageFlows[state.v2.currentFlow][state.v2.active.nextPage]
+  //     },
+  //   });
+  // },
   // ///////////////////
   // ///////////////////
   // ///////////////////
@@ -490,7 +516,6 @@ const authReducer = typeToReducer({
       showLoginScreen: false,
     }),
   },
-
   [actions.SHOW_FORGOT_PASSWORD_SCREENS]: (state, action) => {
     const { v2 } = state;
     if (action && action.payload) {

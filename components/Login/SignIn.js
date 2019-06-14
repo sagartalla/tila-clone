@@ -213,7 +213,7 @@ const mapDispatchToProps = dispatch => bindActionCreators(
   {
     showNextPage: actionCreators.showNextPage,
     userLogin: actionCreators.userLogin,
-    newUserRegister: actionCreators.v2NewUserRegister,
+    newUserRegister: actionCreators.v2NextPage,
   },
   dispatch,
 );

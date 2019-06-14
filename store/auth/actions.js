@@ -34,7 +34,7 @@ const actions = {
   RESET_PASSWORD: 'RESET_PASSWORD',
   FORGOT_PASSWORD: 'FORGOT_PASSWORD',
   SHOW_FORGOT_PASSWORD_SCREENS: 'SHOW_FORGOT_PASSWORD_SCREENS',
-  V2_NEW_USER_REGISTER: 'V2_NEW_USER_REGISTER',
+  V2_SHOW_NEXT_PAGE: 'V2_SHOW_NEXT_PAGE',
   SHOW_LOGIN_SCREEN: 'SHOW_LOGIN_SCREEN',
   SHOW_USER_INFO: 'SHOW_USER_INFO',
   ClOSE_THANKYOU_SCREEN: 'ClOSE_THANKYOU_SCREEN',
@@ -46,8 +46,8 @@ const actionCreators = {
     type: actions.V2_USER_LOGIN,
     payload: api.v2UserLogin(email),
   }),
-  v2NewUserRegister: params => ({
-    type: actions.V2_NEW_USER_REGISTER,
+  v2NextPage: () => ({
+    type: actions.V2_SHOW_NEXT_PAGE,
   }),
 
   // ///////
