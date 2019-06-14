@@ -23,8 +23,6 @@ class ForgotPassword extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userNameError: false,
-      errorMsg: '',
       radioValue: '',
     };
     this.sendLink = this.sendLink.bind(this);
@@ -34,6 +32,7 @@ class ForgotPassword extends Component {
 
 
   sendLink() {
+<<<<<<< HEAD
 
     const { selectedValue, userNameError, errorMsg, radioValue } = this.state;
     const { activeEmailId } = this.props;
@@ -52,6 +51,16 @@ class ForgotPassword extends Component {
       userNameError,
       errorMsg,
     });
+=======
+    const { radioValue } = this.state;
+    const { activeEmailId, userData } = this.props;
+    const body = {
+      email: activeEmailId,
+    };
+    if (radioValue === 'email') {
+      this.props.forgotPassword(body);
+    }
+>>>>>>> 16488a23... Added ApI to fetch user data
   }
 
   switchState() {
@@ -67,17 +76,11 @@ class ForgotPassword extends Component {
     });
   }
 
-  resetShowLogin = () => {
-    const { resetShowLogin } = this.props;
-    resetShowLogin();
-  }
   render() {
     const {
       radioValue,
     } = this.state;
-
-    const { loadingStatus, activeEmailId } = this.props;
-
+    const { loadingStatus, activeEmailId, userData } = this.props;
     return (
       <div className={`${styles['forgot-password']} ${styles.flex} ${styles['flex-colum']} ${styles['justify-around']}`}>
         <div>
@@ -90,19 +93,26 @@ class ForgotPassword extends Component {
               <input name="addr_checkbox" type="radio" className={`${styles['radio-btn']} ${styles['radio-margin']}`} data-id="email" onChange={this.handleChange} />
               <span className={`${styles['ml-10']}`}>
                 <div className={radioValue === 'email' ? `${styles['fs-12']} ${styles.fontW600}` : `${styles['fs-12']}`}>Reset Password by Email:</div>
-                <div className={radioValue === 'email' ? `${styles['fs-14']} ${styles.fontW600}` : `${styles['fs-12']}`}>{activeEmailId}</div>
+                <div className={radioValue === 'email' ? `${styles['fs-14']} ${styles.fontW600}` : `${styles['fs-14']}`}>{userData && userData.email}</div>
               </span>
             </div>
-            <div className={`${styles.border}`} />
-            <span>
-              <div className={`${styles.flex}`}>
-                <input name="addr_checkbox" type="radio" className={`${styles['radio-btn']}`} data-id="otp" onChange={this.handleChange} />
-                <span className={`${styles['ml-10']}`}>
-                  <div className={radioValue === 'otp' ? `${styles['fs-12']} ${styles.fontW600}` : `${styles['fs-12']}`}>Reset by Mobile OTP:</div>
-                  <div className={radioValue === 'otp' ? `${styles['fs-14']} ${styles.fontW600}` : `${styles['fs-12']}`}>121212112</div>
-                </span>
-              </div>
-            </span>
+            {userData.mobile_country_code && userData.mobile_no &&
+            <React.Fragment>
+              <div className={`${styles.border}`} />
+              <span>
+                <div className={`${styles.flex}`}>
+                  <input name="addr_checkbox" type="radio" className={`${styles['radio-btn']}`} data-id="otp" onChange={this.handleChange} />
+                  <span className={`${styles['ml-10']}`}>
+                    <div className={radioValue === 'otp' ? `${styles['fs-12']} ${styles.fontW600}` : `${styles['fs-12']}`}>Reset by Mobile OTP:</div>
+                    <div className={radioValue === 'otp' ? `${styles.fontW600} ${styles.flex} ${styles['justify-between']}` : `${styles.flex} ${styles['justify-between']}`}>
+                      <div className={`${styles['fashion-color']} ${styles['fs-14']}`}>{userData && (`+${userData.mobile_country_code}`)}</div>
+                      <div className={`${styles['fs-14']}`}>{userData && userData.mobile_no}</div>
+                    </div>
+                  </span>
+                </div>
+              </span>
+            </React.Fragment>
+            }
           </span>
           <Button
             className={`${styles['flex-center']}  ${styles.width100} ${styles['fs-14']} ${styles['text-uppercase']} ${styles['button-radius']}`}
@@ -122,12 +132,11 @@ const mapStateToProps = store => ({
   activeObj: selectors.getActive(store),
   activeEmailId: selectors.getActiveEmailId(store),
   loadingStatus: selectors.getLoadingStatus(store),
-
+  userData: selectors.userData(store),
 });
 const mapDispatchToProps = dispatch => bindActionCreators(
   {
     forgotPassword: actionCreators.forgotPassword,
-    resetShowLogin: actionCreators.resetShowLogin,
   },
   dispatch,
 );

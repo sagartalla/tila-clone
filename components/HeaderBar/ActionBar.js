@@ -91,7 +91,6 @@ class ActionBar extends Component {
       logoutClicked: false,
       // showLoginScreen: nextProps.showLoginScreen,
       loginClicked: false,
-      showLoginPage: nextProps.showLoginPage,
     });
 
     if (nextProps.activeObj.nextPage === null) {
@@ -163,9 +162,9 @@ class ActionBar extends Component {
   }
 
   render() {
-    const { showLoginPage } = this.state;
+    // const { showLoginPage } = this.state;
     const {
-      isLoggedIn, cartResults, userInfo, wishListCount, getEditDetails, hideCountry, hideLogin
+      isLoggedIn, cartResults, userInfo, wishListCount, getEditDetails, hideCountry, hideLogin, showLoginPage
     } = this.props;
     return (
       <div className={styles['actionbar-wrapper']}>
