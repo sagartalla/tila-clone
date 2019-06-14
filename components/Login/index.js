@@ -233,6 +233,8 @@ class Login extends Component {
         return <VerifyEmail />;
       case 'personal_details':
         return <CompleteSignUp />;
+      case 'existing_social_login':
+        return <ExistingSocialLogin />
       default:
         return <LoginPage />;
     }

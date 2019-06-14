@@ -35,17 +35,11 @@ const actions = {
   FORGOT_PASSWORD: 'FORGOT_PASSWORD',
   SHOW_SECURITY_QUESTIONS: 'SHOW_SECURITY_QUESTIONS',
   V2_NEW_USER_REGISTER: 'V2_NEW_USER_REGISTER',
-<<<<<<< HEAD
-
-
-=======
+  SHOW_FORGOT_PASSWORD_SCREENS: 'SHOW_FORGOT_PASSWORD_SCREENS',
+  V2_SHOW_NEXT_PAGE: 'V2_SHOW_NEXT_PAGE',
   SHOW_LOGIN_SCREEN: 'SHOW_LOGIN_SCREEN',
   SHOW_USER_INFO: 'SHOW_USER_INFO',
-<<<<<<< HEAD
->>>>>>> 8e134af5... Changes in flow
-=======
   ClOSE_THANKYOU_SCREEN: 'ClOSE_THANKYOU_SCREEN',
->>>>>>> 16488a23... Added ApI to fetch user data
 };
 
 const actionCreators = {
@@ -54,8 +48,8 @@ const actionCreators = {
     type: actions.V2_USER_LOGIN,
     payload: api.v2UserLogin(email),
   }),
-  v2NewUserRegister: params => ({
-    type: actions.V2_NEW_USER_REGISTER,
+  v2NextPage: () => ({
+    type: actions.V2_SHOW_NEXT_PAGE,
   }),
 
   // ///////
@@ -197,7 +191,7 @@ const actionCreators = {
   closeThankYou: () => ({
     type: actions.ClOSE_THANKYOU_SCREEN,
   }),
-  
+
   forgotPassword: (body) => {
     return ({
       type: actions.FORGOT_PASSWORD,
