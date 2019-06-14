@@ -72,8 +72,11 @@ class SignIn extends Component {
 
 
   showForgotPassword = () => {
-    const { showQuestionsPage } = this.props;
-    showQuestionsPage();
+    const { activeObj } = this.props;
+    console.log('activeObj', activeObj);
+    const data = 'security_page';
+    const { showNextPage } = this.props;
+    showNextPage(data);
   }
 
   login = () => {
@@ -205,6 +208,7 @@ class SignIn extends Component {
 
 const mapStateToProps = store => ({
   activeEmailId: selectors.getActiveEmailId(store),
+  activeObj: selectors.getActive(store),
 });
 const mapDispatchToProps = dispatch => bindActionCreators(
   {

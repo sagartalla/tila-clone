@@ -39,6 +39,7 @@ class ResetPassword extends Component {
 
 
   onBackdropClick = () => {
+    this.props.resetShowLogin();
     this.setState({
       showModal: false,
     });
@@ -136,6 +137,7 @@ const mapStateToProps = store => ({
 const mapDispatchToProps = dispatch => bindActionCreators(
   {
     resetPassword: actionCreators.resetPassword,
+    resetShowLogin: actionCreators.resetShowLogin,
   },
   dispatch,
 );

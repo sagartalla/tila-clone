@@ -63,8 +63,10 @@ const forgotOtpsuccess = (store) => {
 
 const getActiveEmailId = store => store.authReducer.v2.data.email || '';
 
+const showLogin = store => store.authReducer.data.showLoginScreen;
+
 export {
   getErrorMessege, getCountry, getLoggedInStatus, getInstaCode, getUserCreds, getDeliveryCity, getDomainCountries,
-  getLoginProgressStatus, getShowLogin, getPTAToken, showEmailVerificationScreen, getLanguage, getLoadingStatus, getUserInfo, forgotOtpsuccess,
-  getActive, getActiveEmailId,
-};
+  getLoginProgressStatus, getShowLogin, getPTAToken, showEmailVerificationScreen, getLanguage, getLoadingStatus, getUserInfo,
+  getActive, getActiveEmailId, forgotPasswordStatus, showEmailSuccess, showLogin,
+}

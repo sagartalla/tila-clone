@@ -34,8 +34,13 @@ const actions = {
   FORGOT_PASSWORD: 'FORGOT_PASSWORD',
   SHOW_SECURITY_QUESTIONS: 'SHOW_SECURITY_QUESTIONS',
   V2_NEW_USER_REGISTER: 'V2_NEW_USER_REGISTER',
+<<<<<<< HEAD
 
 
+=======
+  SHOW_LOGIN_SCREEN: 'SHOW_LOGIN_SCREEN',
+  SHOW_USER_INFO: 'SHOW_USER_INFO',
+>>>>>>> 8e134af5... Changes in flow
 };
 
 const actionCreators = {
@@ -193,6 +198,18 @@ const actionCreators = {
     type: actions.SHOW_SECURITY_QUESTIONS,
     payload: 'security_questions_page',
   }),
+
+
+  showLoginScreen: () => ({
+    type: actions.SHOW_LOGIN_SCREEN,
+  }),
+
+  showUserInfo: ([param]) => {
+    return ({
+      type: actions.SHOW_USER_INFO,
+      payload: api.showUserInfo(param),
+    });
+  },
 
 };
 

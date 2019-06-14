@@ -59,7 +59,7 @@ class ActionBar extends Component {
   }
 
   state = {
-    show: false,
+    show: '',
   }
 
   componentDidMount() {
@@ -79,16 +79,29 @@ class ActionBar extends Component {
     if (nextProps.isLoggedIn !== this.props.isLoggedIn) {
       this.props.getWishlist();
     }
-    let show = ((nextProps.isLoggedIn != this.props.isLoggedIn) && !this.state.logoutClicked) || this.state.loginClicked || !!nextProps.error || (!nextProps.isLoggedIn && nextProps.showLogin) || nextProps.loginInProgress || nextProps.showEmailVerificationScreen || nextProps.showOtpSuccess;
-    if (window.location.pathname.indexOf('/payment') > -1) {
-      show = false;
-    }
+
+    // let show = ((nextProps.isLoggedIn != this.props.isLoggedIn) && !this.state.logoutClicked) || this.state.loginClicked || !!nextProps.error || (!nextProps.isLoggedIn && nextProps.showLogin) || nextProps.loginInProgress || nextProps.showEmailVerificationScreen;
+    // if (window.location.pathname.indexOf('/payment') > -1) {
+    //   show = false;
+    // }
+
+
     this.setState({
-      show,
+      // show,
       logoutClicked: false,
+      // showLoginScreen: nextProps.showLoginScreen,
       loginClicked: false,
+      showLoginPage: nextProps.showLoginPage,
     });
-    console.log('show', show);
+
+    if (nextProps.activeObj.nextPage === null) {
+      setTimeout(() => {
+        this.setState({
+          showLoginPage: false,
+        });
+      }, 3000);
+    }
+
     if (nextProps.isLoggedIn) {
       if (nextProps.ptaToken) {
         this.props.savePtaToken(nextProps.ptaToken);
@@ -119,19 +132,19 @@ class ActionBar extends Component {
   loginClick(e) {
     digitalData.page.pageInfo.pageType = 'Login Page';
     digitalData.page.pageInfo.pageName = 'Login Page';
-    const state = {};
-    state.loginClicked = true;
-    if (e.currentTarget.getAttribute('data-mode') === 'sign-up') {
-      state.mode = 'register';
-    } else {
-      state.mode = 'login';
-    }
-    state.show = true;
-    this.setState(state);
+
+    this.props.showLoginScreen();
+    // const state = {};
+    // state.loginClicked = true;
+    // if (e.currentTarget.getAttribute('data-mode') === 'sign-up') {
+    //   state.mode = 'register';
+    // } else {
+    //   state.mode = 'login';
+    // }
+    // state.show = true;
   }
 
   onBackdropClick(logoutRequired = false) {
-    this.setState({ show: false });
     this.props.resetLoginError();
     this.props.resetShowLogin();
     if (logoutRequired) {
@@ -150,6 +163,7 @@ class ActionBar extends Component {
   }
 
   render() {
+    const { showLoginPage } = this.state;
     const {
       isLoggedIn, cartResults, userInfo, wishListCount, getEditDetails, hideCountry, hideLogin
     } = this.props;
@@ -268,8 +282,8 @@ class ActionBar extends Component {
             }
           </Dropdown>
         </div>
-        {/* {hideLogin ? null :
-          this.state.show ? */}
+        {hideLogin  ? null :
+          showLoginPage ?
         <Login onBackdropClick={this.onBackdropClick} />
             {/* :
             null} */}
@@ -292,7 +306,8 @@ const mapStateToProps = store => ({
   showEmailVerificationScreen: selectors.showEmailVerificationScreen(store),
   getEditDetails: cartSelectors.getEditDetails(store),
   imgSource: personalSelectors.getImageSource(store),
-  showOtpSuccess: selectors.forgotOtpsuccess(store),
+  activeObj: selectors.getActive(store),
+  showLoginPage: selectors.showLogin(store),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(
@@ -308,6 +323,7 @@ const mapDispatchToProps = dispatch => bindActionCreators(
     getWishlist: wishListActionCreators.getWishlistProducts,
     getUserProfileInfo: personalActionCreators.getUserProfileInfo,
     downloadPic: personalActionCreators.downloadPic,
+    showLoginScreen: actionCreators.showLoginScreen,
   },
   dispatch,
 );
