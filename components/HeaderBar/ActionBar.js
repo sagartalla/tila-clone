@@ -89,16 +89,8 @@ class ActionBar extends Component {
       logoutClicked: false,
       // showLoginScreen: nextProps.showLoginScreen,
       loginClicked: false,
-      showLoginPage: nextProps.showLoginPage,
     });
 
-    if (nextProps.activeObj.nextPage === null) {
-      setTimeout(() => {
-        this.setState({
-          showLoginPage: false,
-        });
-      }, 3000);
-    }
     if (nextProps.isLoggedIn) {
       if (nextProps.ptaToken) {
         this.props.savePtaToken(nextProps.ptaToken);
@@ -160,9 +152,9 @@ class ActionBar extends Component {
   }
 
   render() {
-    const { showLoginPage } = this.state;
+    // const { showLoginPage } = this.state;
     const {
-      isLoggedIn, cartResults, userInfo, wishListCount, getEditDetails, hideCountry, hideLogin
+      isLoggedIn, cartResults, userInfo, wishListCount, getEditDetails, hideCountry, hideLogin, showLoginPage
     } = this.props;
     return (
       <div className={styles['actionbar-wrapper']}>

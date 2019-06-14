@@ -68,7 +68,9 @@ class ResetPassword extends Component {
       };
       this.props.resetPassword(body).then((res) => {
         if (res && res.value && res.value.data && res.value.data.Response === 'SUCCESS') {
-          this.setState({ showModal: false });
+          this.setState({ showModal: false }, () => setTimeout(() => {
+            this.props.closeThankYou();
+          }, 2000));
         } else {
           this.setState({ showModal: true });
         }
@@ -107,7 +109,7 @@ class ResetPassword extends Component {
                     <h4 className={`${styles['fs-16']} ${styles.fontW600}`}>
                       {LOGIN_PAGE.PLEASE_SET_YOUR_SECURE_PASSWORD}
                     </h4>
-                    <div className={`${styles['mt-15']} ${styles.relative} ${styles.reset_show} ${styles['fp-input']}`}>              
+                    <div className={`${styles['mt-15']} ${styles.relative} ${styles.reset_show} ${styles['fp-input']}`}>
                       <input
                         type={hide ? 'password' : 'text'}
                         autoComplete="off"
@@ -119,7 +121,7 @@ class ResetPassword extends Component {
                       />
                       <label className={`${styles['label-light-grey']}`}>{LOGIN_PAGE.ENTER_NEW_PASSWORD}</label>
                       <ShowHidePassword hide={hide} hideToggle={this.hideToggle} />
-                      <div className={`${styles['thick-red']} ${styles['fs-12']}`}>{errorMsg}</div>                      
+                      <div className={`${styles['thick-red']} ${styles['fs-12']}`}>{errorMsg}</div>
                     </div>
                     <Button
                       className={`${styles['flex-center']} ${styles.width100} ${styles['fs-14']} ${styles['text-uppercase']} ${styles['button-radius']}`}
@@ -143,6 +145,7 @@ const mapDispatchToProps = dispatch => bindActionCreators(
   {
     resetPassword: actionCreators.resetPassword,
     resetShowLogin: actionCreators.resetShowLogin,
+    closeThankYou: actionCreators.closeThankYou,
   },
   dispatch,
 );

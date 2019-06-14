@@ -200,5 +200,5 @@ const forgotPassword = (body) => {
 export default {
   userLogin, userLogout, getLoginInfo, setCountry, setSessionID, deriveCity, setCity, getDomainCountries,
   removeCity, setLanguage, savePtaToken, verifyEmail, sendOtpToEmailId, getUserInfo, setVerfied, track,
-  v2UserLogin, resetPassword, forgotPassword,
+  v2UserLogin, resetPassword, forgotPassword, showUserInfo,
 };

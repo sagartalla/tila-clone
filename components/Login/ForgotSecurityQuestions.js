@@ -23,20 +23,23 @@ class ForgotSecurityQuestions extends Component {
   constructor(props) {
     super(props);
     this.state = {
-     
+
     };
   }
 
   showForgotPassword = () => {
     const { activeObj, showUserInfo, activeEmailId } = this.props;
-    showUserInfo(activeEmailId);
-    console.log('activeObj', activeObj);
-    const data = activeObj.nextPage;
-    const { showNextPage } = this.props;
-    showNextPage(data);
+    showUserInfo(activeEmailId).then((res) => {
+      if (res.value.status === 200) {
+        const data = activeObj.nextPage;
+        const { showNextPage } = this.props;
+        showNextPage(data);
+      }
+    });
   }
 
   render() {
+    const { loadingStatus } = this.props;
     return (
       <div className={`${styles['forgot-password']} ${styles.flex} ${styles['flex-colum']} ${styles['justify-around']}`}>
         <div>
@@ -57,6 +60,7 @@ class ForgotSecurityQuestions extends Component {
           <Button
             className={`${styles['flex-center']}  ${styles.width100} ${styles['fs-14']} ${styles['text-uppercase']} ${styles['button-radius']}`}
             btnText="Next"
+            btnLoading={loadingStatus}
             onClick={this.showForgotPassword}
           />
         </React.Fragment>
@@ -68,10 +72,12 @@ class ForgotSecurityQuestions extends Component {
 const mapStateToProps = store => ({
   activeObj: selectors.getActive(store),
   activeEmailId: selectors.getActiveEmailId(store),
+  loadingStatus: selectors.getLoadingStatus(store),
 });
 const mapDispatchToProps = dispatch => bindActionCreators(
   {
     showNextPage: authActionCreators.showNextPage,
+    showUserInfo: authActionCreators.showUserInfo,
   },
   dispatch,
 );

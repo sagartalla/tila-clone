@@ -3,6 +3,7 @@ import api from './api';
 // import loginReq from '../helper/loginReq';
 import refStore from '../helper/refHandler';
 import { actionCreators as cartActionCreators } from '../cart';
+// import { actionCreators as cartActionCreators } from './';
 import { actionCreators as shippingActionCreators } from '../cam/address'
 const cookies = new Cookies();
 
@@ -36,6 +37,7 @@ const actions = {
   V2_NEW_USER_REGISTER: 'V2_NEW_USER_REGISTER',
   SHOW_LOGIN_SCREEN: 'SHOW_LOGIN_SCREEN',
   SHOW_USER_INFO: 'SHOW_USER_INFO',
+  ClOSE_THANKYOU_SCREEN: 'ClOSE_THANKYOU_SCREEN',
 };
 
 const actionCreators = {
@@ -175,12 +177,18 @@ const actionCreators = {
     type: actions.V2_USER_LOGIN,
     payload: api.v2UserLogin(email),
   }),
+
   resetPassword: (body) => {
     return ({
       type: actions.RESET_PASSWORD,
       payload: api.resetPassword(body),
     });
   },
+
+  closeThankYou: () => ({
+    type: actions.ClOSE_THANKYOU_SCREEN,
+  }),
+  
   forgotPassword: (body) => {
     return ({
       type: actions.FORGOT_PASSWORD,
@@ -197,7 +205,7 @@ const actionCreators = {
     type: actions.SHOW_LOGIN_SCREEN,
   }),
 
-  showUserInfo: ([param]) => {
+  showUserInfo: (param) => {
     return ({
       type: actions.SHOW_USER_INFO,
       payload: api.showUserInfo(param),

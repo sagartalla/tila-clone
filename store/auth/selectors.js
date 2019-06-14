@@ -59,6 +59,8 @@ const getActive = store => store.authReducer.v2.active;
 
 const getActiveEmailId = store => store.authReducer.v2.data.email || '';
 
+const userData = store => store.authReducer.data.userData;
+
 
 const forgotPasswordStatus = (store) => {
   if(store.authReducer.data.Response){
@@ -79,5 +81,5 @@ const showLogin = store => store.authReducer.data.showLoginScreen;
 export {
   getErrorMessege, getCountry, getLoggedInStatus, getInstaCode, getUserCreds, getDeliveryCity, getDomainCountries,
   getLoginProgressStatus, getShowLogin, getPTAToken, showEmailVerificationScreen, getLanguage, getLoadingStatus, getUserInfo,
-  getActive, getActiveEmailId, forgotPasswordStatus, showEmailSuccess, showLogin,
+  getActive, getActiveEmailId, forgotPasswordStatus, showEmailSuccess, showLogin, userData,
 }
