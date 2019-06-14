@@ -46,6 +46,11 @@ class PersonalInfo extends React.Component {
   }
 
   handleShow = value => (e) => {
+    if (value === true) {
+      document.getElementsByTagName('BODY')[0].style.overflow = 'hidden';
+    } else {
+      document.getElementsByTagName('BODY')[0].style.overflow = 'auto';
+    }
     this.setState({ show: value });
   }
 

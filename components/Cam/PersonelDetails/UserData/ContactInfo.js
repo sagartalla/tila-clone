@@ -32,6 +32,11 @@ class ContactInfo extends React.Component {
   }
 
   handleShow = (showVal, elem) => (e) => {
+    if (showVal === true) {
+      document.getElementsByTagName('BODY')[0].style.overflow = 'hidden';
+    } else {
+      document.getElementsByTagName('BODY')[0].style.overflow = 'auto';
+    }
     this.setState({
       show: showVal,
       element: elem
