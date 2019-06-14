@@ -269,6 +269,7 @@ class EditPhone extends React.Component {
                   <div className={styles['fp-input']}>
                     <input
                       type="text"
+                      required
                       value={phoneNumber}
                       onChange={this.handlePhoneNumberChange}
                     />
