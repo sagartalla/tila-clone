@@ -9,7 +9,7 @@ const initialState = {
   error: {},
 };
 const productReducer = typeToReducer({
-  [actions.GET_PAGES]: {
+  [actions.GET_PAGE]: {
     PENDING: state => {
       return Object.assign({}, state, { ui: { loading: true } });
     },

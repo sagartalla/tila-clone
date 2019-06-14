@@ -10,6 +10,7 @@ import { actionCreators, selectors } from '../store/search';
 import { actionCreators as authActionsCreators, selectors as authSelectors } from '../store/auth';
 import Layout from '../layout/main';
 import Search from '../components/Search';
+import { actionCreators as LandingactionCreators, selectors as LandingSelectors } from '../store/landing';
 
 import SearchContext from '../components/helpers/context/search';
 
@@ -33,7 +34,10 @@ class SearchPage extends Base {
         shippingCountry: (country || 'ARE').toUpperCase(),
       }
     }
-    await store.dispatch(actionCreators.getSearchResults(searchOptions));
+    await Promise.all([
+      store.dispatch(actionCreators.getSearchResults(searchOptions)),
+      store.dispatch(LandingactionCreators.getPage({page: 'brandPage', id: brandName}))
+    ]);
     return { isServer };
   }
 
