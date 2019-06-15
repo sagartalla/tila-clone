@@ -277,6 +277,10 @@ const authReducer = typeToReducer({
     }),
     FULFILLED: (state, action) => ({
       ...state,
+      ui: {
+        ...state.ui,
+        loading: false,
+      },
       data: {
         ...state.data,
         geoShippingDetails: {
@@ -307,6 +311,10 @@ const authReducer = typeToReducer({
       const { city, country, displayCity } = action.payload;
       return {
         ...state,
+        ui: {
+          ...state.ui,
+          loading: false,
+        },
         data: {
           ...state.data,
           geoShippingDetails: {
@@ -327,17 +335,12 @@ const authReducer = typeToReducer({
   },
   // [actions.SHOW_LOGIN]: (state, action) => ({
   //   ...state,
-  //   ui: {
-  //     ...state.ui,
-  //     showLogin: true,
-  //     showEmailVerificationScreen: false,
-  //   },
   //   data: {
   //     ...state.data,
-  //     isLoggedIn: (cookies.get('isVerified') && (cookies.get('isVerified') !== 'false')),
+  //     showLoginScreen: true,
+  //     // isLoggedIn: (cookies.get('isVerified') && (cookies.get('isVerified') !== 'false')),
   //   },
   // }),
-
   [actions.RESET_SHOW_LOGIN]: (state) => {
     const { v2 } = state;
     v2.active = '';
@@ -374,6 +377,10 @@ const authReducer = typeToReducer({
       data: {
         ...state.data,
         language: action.payload,
+      },
+      ui: {
+        ...state.ui,
+        loading: false,
       },
     }),
     REJECTED: (state, action) => Object.assign({}, state, {
