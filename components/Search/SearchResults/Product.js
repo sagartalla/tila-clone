@@ -419,7 +419,7 @@ class Product extends Component {
                       getPriceAndOffer()}
                     </span>
                     {/* <span className={`${styles['fs-12']} ${styles['black-color']}`}>{currency}</span> */}
-                    <div className={`${styles['flex']} ${styles['pt-5']}`}>
+                    {/*<div className={`${styles['flex']} ${styles['pt-5']}`}>
                       <span className={styles['flex']}>
                         <SVGCompoent clsName={`${styles['star-raing']}`} src="icons/common-icon/star-full-yellow" />
                         <SVGCompoent clsName={`${styles['star-raing']}`} src="icons/common-icon/star-full-yellow" />
@@ -428,7 +428,7 @@ class Product extends Component {
                         <SVGCompoent clsName={`${styles['star-raing']}`} src="icons/common-icon/star-full-yellow" />
                       </span>
                       <span className={`${styles['label-gry-clr']} ${styles['pl-5']}`}>(153) </span>
-                    </div>
+                    </div>*/}
                   </div>
                   {/* <div className={styles['desc-cont']}>
                 <div className={`${styles['prdt-name']} ${styles['fs-12']} ${styles['pt-15']} ${styles['pb-5']}`}>
