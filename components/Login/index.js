@@ -244,7 +244,7 @@ class Login extends Component {
     return (
       <Modal className={activeObj.activePage === 'thank_you' ? `react-router-modal__modal ${styles['background-transparent']}  ${styles['border-none']} ${styles['p-10']}` : `react-router-modal__modal ${styles['login-reg-modal']} ${styles['p-10']}`} onBackdropClick={this.onBackdropClick}>
        {activeObj.activePage  === 'thank_you' ?
-       <ThankYou text={'Your password was reset successfully'}/> :
+       <ThankYou /> :
         <Row className={`${styles['m-0']}`}>
           <div className={`${styles.flex}`}>
             <Col md={4} xs={12} sm={4} className={`${styles['pl-0']} ${styles['pr-10']} ${styles['m-hdn']}`}>
@@ -307,7 +307,7 @@ const mapDispatchToProps = dispatch => bindActionCreators(
 
 // Login.defaultProps = {
 //   activeObj: {
-//     activePage: 'personal_details',
+//     activePage: 'thank_you',
 //   }
 // };
 
