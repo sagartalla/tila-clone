@@ -32,14 +32,24 @@ class ForgotPassword extends Component {
 
   sendLink() {
     const { radioValue } = this.state;
-    const { activeEmailId, userData } = this.props;
+    const { activeEmailId, userData, v2NextPage } = this.props;
     const body = {
       email: activeEmailId,
     };
     if (radioValue === 'email') {
-      this.props.forgotPassword(body);
-    }
+      this.props.forgotPassword(body).then(res => {
+        if (res && res.value && res.value.Response && res.value.Response === 'SUCCESS') {
+          v2NextPage();
+        }
+    });
+  } else {
+    this.props.getMobileOtp(activeEmailId).then(res => {
+      if (res && res.value && res.value.data && res.value.data.Response === 'SUCCESS') {
+        v2NextPage();
+      }
+  });
   }
+}
 
 
   handleChange = (e) => {
@@ -54,7 +64,6 @@ class ForgotPassword extends Component {
       radioValue,
     } = this.state;
     const { loadingStatus, activeEmailId, userData } = this.props;
-    console.log('userData', userData);
     return (
       <div className={`${styles['forgot-password']} ${styles.flex} ${styles['flex-colum']} ${styles['justify-around']}`}>
         <div>
@@ -110,6 +119,8 @@ const mapStateToProps = store => ({
 const mapDispatchToProps = dispatch => bindActionCreators(
   {
     forgotPassword: actionCreators.forgotPassword,
+    v2NextPage: actionCreators.v2NextPage,
+    getMobileOtp: actionCreators.getMobileOtp,
   },
   dispatch,
 );

@@ -76,6 +76,7 @@ class ActionBar extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    const { closeThankYouScreen } = this.props;
     if (nextProps.isLoggedIn !== this.props.isLoggedIn) {
       this.props.getWishlist();
     }
@@ -90,6 +91,12 @@ class ActionBar extends Component {
       // showLoginScreen: nextProps.showLoginScreen,
       loginClicked: false,
     });
+
+    if (nextProps && nextProps.activeObj && nextProps.activeObj.nextPage === null) {
+      setTimeout(() => {
+        closeThankYouScreen();
+      }, 3000);
+    }
 
     if (nextProps.isLoggedIn) {
       if (nextProps.ptaToken) {
@@ -312,6 +319,7 @@ const mapDispatchToProps = dispatch => bindActionCreators(
     getUserProfileInfo: personalActionCreators.getUserProfileInfo,
     downloadPic: personalActionCreators.downloadPic,
     showLoginScreen: actionCreators.showLoginScreen,
+    closeThankYouScreen: actionCreators.closeThankYouScreen,
   },
   dispatch,
 );

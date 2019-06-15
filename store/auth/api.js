@@ -196,10 +196,26 @@ const forgotPassword = (body) => {
   });
 }
 
+const getMobileOtp = ( email ) => {
+  return axios.get(`${constants.CMS_API_URL}/api/v1/user/password/forgot/mobile/otp?email=${email}`).then((data) => {
+    toast.success('OTP sent to your mobile number');
+    return data;
+  }).catch((error) => {
+    return error.response.data;
+  });
+}
+
+const verifyResetOtp = (body) => {
+  return axios.post(`${constants.CMS_API_URL}/api/v1/user/password/forgot/mobile/otp`, body).then((data) => {
+    return data;
+  }).catch((error) => {
+    return error.response.data;
+  });
+}
 
 
 export default {
   userLogin, userLogout, getLoginInfo, setCountry, setSessionID, deriveCity, setCity, getDomainCountries,
   removeCity, setLanguage, savePtaToken, verifyEmail, sendOtpToEmailId, getUserInfo, setVerfied, track,
-  v2UserLogin, resetPassword, forgotPassword, showUserInfo,
+  v2UserLogin, resetPassword, forgotPassword, showUserInfo, getMobileOtp, verifyResetOtp,
 };

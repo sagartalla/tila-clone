@@ -31,9 +31,8 @@ class ForgotSecurityQuestions extends Component {
     const { activeObj, showUserInfo, activeEmailId } = this.props;
     showUserInfo(activeEmailId).then((res) => {
       if (res.value.status === 200) {
-        const data = activeObj.nextPage;
-        const { showNextPage } = this.props;
-        showNextPage(data);
+        const { v2NextPage } = this.props;
+        v2NextPage();
       }
     });
   }
@@ -44,7 +43,7 @@ class ForgotSecurityQuestions extends Component {
       <div className={`${styles['forgot-password']} ${styles.flex} ${styles['flex-colum']} ${styles['justify-around']}`}>
         <div>
           <h3 className={`${styles['fs-22']} ${styles['m-0']} ${styles['ff-b']}`}>{LOGIN_PAGE.FORGOT_PASSWORD}</h3>
-          <div className={`${styles['text-clr']} ${styles['mt-5']}`}>Please answer the security questions below to reset the password</div>
+          <div className={`${styles['text-clr']} ${styles['mt-5']}`}>{LOGIN_PAGE.PLEASE_ANSWER_SECURITY_QUESTIONS}</div>
         </div>
         <React.Fragment>
           <div>
@@ -59,7 +58,7 @@ class ForgotSecurityQuestions extends Component {
           </div>
           <Button
             className={`${styles['flex-center']}  ${styles.width100} ${styles['fs-14']} ${styles['text-uppercase']} ${styles['button-radius']}`}
-            btnText="Next"
+            btnText={LOGIN_PAGE.NEXT}
             btnLoading={loadingStatus}
             onClick={this.showForgotPassword}
           />
@@ -76,7 +75,7 @@ const mapStateToProps = store => ({
 });
 const mapDispatchToProps = dispatch => bindActionCreators(
   {
-    showNextPage: authActionCreators.showNextPage,
+    v2NextPage: authActionCreators.v2NextPage,
     showUserInfo: authActionCreators.showUserInfo,
   },
   dispatch,
