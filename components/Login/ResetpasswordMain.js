@@ -73,7 +73,7 @@ class ResetPasswordMain extends Component {
   }
   render() {
     const {
-      password, hide, errorMsg,
+      password, hide, errorMsg, loadingStatus,
     } = this.state;
     const { showCrossButton } = this.props;
     return (
@@ -111,6 +111,7 @@ class ResetPasswordMain extends Component {
                 <Button
                   className={`${styles['flex-center']} ${styles.width100} ${styles['fs-14']} ${styles['text-uppercase']} ${styles['button-radius']}`}
                   onClick={this.passwordSuccess}
+                  btnLoading={loadingStatus}
                   btnText={LOGIN_PAGE.NEXT}
                 />
               </div>
@@ -124,6 +125,7 @@ class ResetPasswordMain extends Component {
 
 const mapStateToProps = store => ({
   resetToken: selectors.resetToken(store),
+  loadingStatus: selectors.getLoadingStatus(store),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(
