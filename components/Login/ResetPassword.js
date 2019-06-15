@@ -38,10 +38,10 @@ class ResetPassword extends Component {
   }
 
   render() {
-    const { token } = this.props;
+    const { token, showResetScreen } = this.props;
     const { showModal } = this.state;
     return (
-      showModal &&
+      showResetScreen &&
       <Modal className={`react-router-modal__modal ${styles['login-reg-modal']} ${styles['p-10']}`} onBackdropClick={this.onBackdropClick}>
         <Row className={`${styles['bg-white']} ${styles['m-0']}`}>
           <div className={`${styles.flex}`}>
@@ -61,6 +61,7 @@ class ResetPassword extends Component {
 }
 
 const mapStateToProps = store => ({
+  showResetScreen: selectors.showResetScreen(store),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(

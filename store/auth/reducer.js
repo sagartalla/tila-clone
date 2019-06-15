@@ -23,6 +23,7 @@ const initialState = {
     },
     domainCountries: [],
     showLoginScreen: false,
+    showResetScreen: true,
   },
   error: '',
   v2: {
@@ -342,6 +343,7 @@ const authReducer = typeToReducer({
         ...state.data,
         isLoggedIn: (cookies.get('isVerified') && (cookies.get('isVerified') !== 'false')),
         showLoginScreen: false,
+        showResetScreen: false,
       },
       ui: {
         ...state.ui,
@@ -427,6 +429,7 @@ const authReducer = typeToReducer({
       return Object.assign({}, state, {
         data: {
           ...state.data,
+          showResetScreen: false,
         },
         ui: { loading: false },
         v2: {
