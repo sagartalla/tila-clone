@@ -25,21 +25,15 @@ class ResetPassword extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showMainModal: true,
-      showModal: true,
     };
   }
 
   onBackdropClick = () => {
     this.props.resetShowLogin();
-    this.setState({
-      showModal: false,
-    });
   }
 
   render() {
     const { token, showResetScreen } = this.props;
-    const { showModal } = this.state;
     return (
       showResetScreen &&
       <Modal className={`react-router-modal__modal ${styles['login-reg-modal']} ${styles['p-10']}`} onBackdropClick={this.onBackdropClick}>
