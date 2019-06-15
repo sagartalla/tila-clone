@@ -23,15 +23,15 @@ const { LOGIN_PAGE, HEADER_PAGE } = languageDefinations();
 class SignIn extends Component {
   constructor(props) {
     super(props);
+    const password = localStorage.getItem('remember') ? JSON.parse(localStorage.getItem('remember')).password : '';
     this.state = {
       hide: true,
-      password: '',
+      password,
       passwordErr: false,
       promotional_notification: false,
-      rememberMe: false,
+      rememberMe: !!localStorage.getItem('remember'),
     };
   }
-
 
   handleOnChange = ({ target }) => {
     this.setState({
@@ -64,6 +64,7 @@ class SignIn extends Component {
     // const { v2CurrentFlow } = this.props;
     // v2CurrentFlow(data);
   }
+
   login = () => {
     const {
       first_name, last_name, password, rememberMe, promotional_notification,
@@ -81,6 +82,11 @@ class SignIn extends Component {
           },
           rememberMe,
         };
+        if (rememberMe) {
+          localStorage.setItem('remember', JSON.stringify({ email: activeEmailId, password }));
+        } else {
+          localStorage.removeItem('remember');
+        }
         userLogin(serverData);
       } else {
         this.setState({
@@ -131,7 +137,7 @@ class SignIn extends Component {
           <div className={`${styles['light-gry-clr']} ${styles['fs-12']}`}>{mode === 'SOCIAL_LOGIN' ? 'Pls provide email ID to receive registration confirmation.' : activeEmailId}</div>
         </div>
         <div className={mode === 'EXISTING_USER' ? `${styles['login-show']}` : `${styles['signup-show']}`}>
-          <div className={`${styles['fp-input']} ${styles['pb-10']} ${styles['mt-30']}`}>
+          <div className={`${styles['fp-input']} ${styles['mt-30']}`}>
             <input
               name="password"
               type={hide ? 'password' : 'text'}

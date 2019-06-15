@@ -22,8 +22,9 @@ const { LOGIN_PAGE, ORDER_PAGE } = languageDefinations();
 class LoginPage extends React.Component {
   constructor() {
     super();
+    const email = localStorage.getItem('remember') ? JSON.parse(localStorage.getItem('remember')).email : '';
     this.state = {
-      email: '',
+      email,
       emailErr: false,
     };
   }
@@ -72,13 +73,13 @@ class LoginPage extends React.Component {
                   <NoSSR>
                     <div onClick={handleSocialLogin('facebook')} className={`${styles['flex-center']} ${styles.pointer} ${styles['border-lg']} ${styles['border-radius4']} ${styles['mb-5']} ${styles['p-5']}`}>
                       <a className={`${styles.flex} ${styles['ml-15']}`}>
-                        <SVGComponent clsName={`${styles['bg-fb-icon']} ${styles['mr-10']}`} src="icons/social-icons/bg-facebook" />
+                        <SVGComponent clsName={`${styles['bg-FB-icon']} ${styles['mr-10']}`} src="icons/social-icons/bg-facebook" />
                       </a>
                       Facebook
                     </div>
                     <div onClick={handleSocialLogin('google')} className={`${styles['flex-center']} ${styles.pointer} ${styles['border-lg']} ${styles['border-radius4']} ${styles['mb-5']} ${styles['p-5']}`}>
                       <a className={`${styles.flex} ${styles['ml-15']}`}>
-                        <SVGComponent clsName={`${styles['bg-google-icon']} ${styles['mr-10']}`} src="icons/social-icons/bg-google" />
+                        <SVGComponent clsName={`${styles['bg-GOOGLE-icon']} ${styles['mr-10']}`} src="icons/social-icons/bg-google" />
                       </a>
                       Google
                     </div>

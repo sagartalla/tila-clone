@@ -282,6 +282,7 @@ ContinueLogin.defaultProps = {
   getAllCities: [],
   autoCompleteCity: f => f,
 };
+
 const mapStateToProps = store => ({
   getAllCities: selectors.getAllCities(store),
 });

@@ -245,9 +245,9 @@ class Login extends Component {
     const { pathname } = window.location;
     const { mode, error, validation, clicked, showVerifyScreen, hide, forgotPassword, showThankyou } = this.state;
     return (
-      <Modal className={activeObj && activeObj.activePage && activeObj.activePage === 'thank_you' ? `react-router-modal__modal ${styles['background-transparent']}  ${styles['border-none']} ${styles['p-10']}` : `react-router-modal__modal ${styles['login-reg-modal']} ${styles['p-10']}`} onBackdropClick={this.onBackdropClick}>
-       {activeObj && activeObj.activePage && activeObj.activePage === 'thank_you' ?
-       <ThankYou text={'Your password was reset successfully'}/> :
+      <Modal className={activeObj.activePage === 'thank_you' ? `react-router-modal__modal ${styles['background-transparent']}  ${styles['border-none']} ${styles['p-10']}` : `react-router-modal__modal ${styles['login-reg-modal']} ${styles['p-10']}`} onBackdropClick={this.onBackdropClick}>
+       {activeObj.activePage  === 'thank_you' ?
+       <ThankYou /> :
         <Row className={`${styles['m-0']}`}>
           <div className={`${styles.flex}`}>
             <Col md={4} xs={12} sm={4} className={`${styles['pl-0']} ${styles['pr-10']} ${styles['m-hdn']}`}>
@@ -311,7 +311,7 @@ const mapDispatchToProps = dispatch => bindActionCreators(
 
 // Login.defaultProps = {
 //   activeObj: {
-//     activePage: 'personal_details',
+//     activePage: 'thank_you',
 //   }
 // };
 

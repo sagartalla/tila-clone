@@ -1,65 +1,9 @@
 import typeToReducer from 'type-to-reducer';
 import Cookies from 'universal-cookie';
+import pageFlows from '../../components/Login/pageFlows';
 import { actions } from './actions';
 
 const cookies = new Cookies();
-
-const pageFlows = {
-  existing_user_login: {
-    password: {
-      activePage: 'password',
-      nextPage: '',
-    },
-  },
-  new_user_register: {
-    password_new: {
-      activePage: 'password_new',
-      nextPage: 'verify_email',
-    },
-    verify_email: {
-      activePage: 'verify_email',
-      nextPage: 'thank_you',
-    },
-    // personal_details: {
-    //   activePage: 'personal_details',
-    //   nextPage: 'thank_you',
-    // },
-    thank_you: {
-      activePage: 'thank_you',
-      nextPage: null,
-    },
-  },
-  forgot_password: {
-    security_page: {
-      activePage: 'security_page',
-      nextPage: 'reset_type',
-    },
-    reset_type: {
-      activePage: 'reset_type',
-      nextPage: 'success_screen',
-    },
-    success_screen: {
-      activePage: 'success_screen',
-      nextPage: '',
-    },
-  },
-  forgot_password_reset: {
-    reset_screen: {
-      activePage: 'reset_screen',
-      nextPage: 'thank_you',
-    },
-    thank_you: {
-      activePage: 'thank_you',
-      nextPage: null,
-    },
-  },
-  existing_social_user: {
-    existing_social_login: {
-      activePage: 'existing_social_login',
-      nextPage: '',
-    },
-  },
-};
 
 const initialState = {
   ui: {
@@ -148,22 +92,38 @@ const authReducer = typeToReducer({
   // ///////////////////
 
   [actions.GET_USER_INFO]: {
-    PENDING: state => Object.assign({}, state, { ui: { ...state.ui, loading: true, showEmailVerificationScreen: false } }),
-    FULFILLED: (state, action) => Object.assign({}, state, {
-      data: {
-        ...state.data,
-        userInfoData: action.payload && action.payload.data,
-      },
-      ui: {
-        ...state.ui,
-        loading: false,
-        showEmailVerificationScreen: !!(action.payload && action.payload.data.email_verified === 'NV'),
-      },
-      v2: {
-        ...state.v2,
-        active: pageFlows[state.v2.currentFlow][state.v2.active.nextPage],
-      },
+    PENDING: state => Object.assign({}, state, {
+      ui: { ...state.ui, loading: true, showEmailVerificationScreen: false },
     }),
+    FULFILLED: (state, action) => {
+      let active;
+      let { currentFlow } = state.v2;
+      if (action.payload.data.email_verified === 'NV') {
+        active = pageFlows.new_user_register.verify_email;
+        currentFlow = 'new_user_register';
+      } else {
+        active = {
+          activePage: '',
+        };
+      }
+      return Object.assign({}, state, {
+        data: {
+          ...state.data,
+          userInfoData: action.payload && action.payload.data,
+          showLoginScreen: !!(action.payload && action.payload.data.email_verified === 'NV'),
+        },
+        ui: {
+          ...state.ui,
+          loading: false,
+          showEmailVerificationScreen: !!(action.payload && action.payload.data.email_verified === 'NV'),
+        },
+        v2: {
+          ...state.v2,
+          active,
+          currentFlow,
+        },
+      });
+    },
     REJECTED: state =>
       Object.assign({}, state, { ui: { ...state.ui, loading: false, showEmailVerificationScreen: false } }),
   },
