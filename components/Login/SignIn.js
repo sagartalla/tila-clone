@@ -125,7 +125,7 @@ class SignIn extends Component {
     const {
       hide, promotional_notification, password, rememberMe, passwordErr, first_name, last_name,
     } = this.state;
-    const { showForgotPassword, mode, activeEmailId } = this.props;
+    const { showForgotPassword, mode, activeEmailId, loadingStatus } = this.props;
     return (
       <div className={`${styles['main-signin']} ${styles.flex} ${styles['flex-colum']} ${styles['justify-evenly']}`}>
         <div className={`${styles['mb-10']}`}>
@@ -209,6 +209,7 @@ class SignIn extends Component {
         <Button
           className={`${styles['sign-in-btn']} ${styles['text-uppercase']}`}
           btnText={HEADER_PAGE.LOGIN}
+          loadingStatus={loadingStatus}       
           onClick={this.login}
         />
         <span className={`${styles['m-20']} ${styles['t-c']} ${styles['fs-12']} ${styles['register-policy-gray']}`}>{LOGIN_PAGE.BY_LOGIN_I_AGREE_TO_TERMS} <span className={`${styles['text-blue']}`}>{LOGIN_PAGE.T_AND_C}, {LOGIN_PAGE.PRIVACY} {LOGIN_PAGE.AND} {LOGIN_PAGE.COOKIE_POLICY}</span></span>
@@ -220,13 +221,14 @@ class SignIn extends Component {
 const mapStateToProps = store => ({
   activeEmailId: selectors.getActiveEmailId(store),
   activeObj: selectors.getActive(store),
+  loadingStatus: selectors.getLoadingStatus(store),
 });
 const mapDispatchToProps = dispatch => bindActionCreators(
   {
     v2CurrentFlow: actionCreators.v2CurrentFlow,
     userLogin: actionCreators.userLogin,
     newUserRegister: actionCreators.v2NextPage,
-    showUserInfo: actionCreators.showUserInfo, 
+    showUserInfo: actionCreators.showUserInfo,
   },
   dispatch,
 );
