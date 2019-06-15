@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators, selectors } from '../../store/auth';
 import Input from '../common/Input';
+import Timer from '../common/Timer';
 import Button from '../common/CommonButton';
 import SVGComponent from '../common/SVGComponet';
 import { languageDefinations } from '../../utils/lang';
@@ -89,18 +90,26 @@ class VerifyEmail extends Component {
             <Input
               type="text"
               autoFocus
-              style={{ border: '1px solid lightgray', width: '50%', margin: '15px' }}
+              style={{ border: '1px solid lightgray', width: '50%' }}
+              className={styles['otp-input']}
               val={value.trim()}
               onChange={this.enterOtp}
               onKeyPress={this.handleEnterKey}
             />
             {otpError ? <div className={`${styles['thick-red-clr']}`}>{EMAIL_VERIFICATION.PLEASE_ENTER_OTP_SENT}</div> : ''}
-            <div className={`${styles.flex}`}><div className={`${styles['otp-expire']}`}>{EMAIL_VERIFICATION.DIDNT_RECEIVE_OTP}&nbsp;</div>
-              <span
-                className={`${styles['lgt-blue']} ${styles.pointer}`}
-                onClick={this.sendOtpToEmailId}
-              >&nbsp;{EMAIL_VERIFICATION.RESEND}
-              </span>
+            <div className={`${styles['flex-colum']}`}>
+              <div className={`${styles['otp-expire']}`}>
+                {EMAIL_VERIFICATION.OTP_EXPIRE_IN}&nbsp;
+                <span className={styles['black-color']}><Timer time={30} /></span>
+              </div>
+              <div className={styles['t-c']}>
+                <span
+                  className={`${styles['lgt-blue']} ${styles.fontW600} ${styles.pointer}`}
+                  onClick={this.sendOtpToEmailId}
+                >
+                  {EMAIL_VERIFICATION.RESEND}
+                </span>
+              </div>
             </div>
           </div>
           <Button

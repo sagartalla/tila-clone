@@ -8,11 +8,12 @@ import { languageDefinations } from '../../utils/lang';
 import lang from '../../utils/language';
 import Button from '../common/CommonButton';
 import OTPInput from './OTPInput';
+import SVGComponent from '../common/SVGComponet';
+import Timer from '../common/Timer';
 import main_en from '../../layout/main/main_en.styl';
 import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './login_en.styl';
 import styles_ar from './login_ar.styl';
-import SVGComponent from '../common/SVGComponet';
 
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
@@ -113,8 +114,8 @@ class VerifyStatus extends React.Component {
           <div>
             <div>{LOGIN_PAGE.PLEASE_ENTER_FOUR_DIGIT_OTP}</div>
             <div className={`${styles['flex-center']}`}>
-              <span className={`${styles['otp-expire']} ${styles['fs-12']}`}>{LOGIN_PAGE.OTP_EXPIRE_IN}</span>
-              <span>&nbsp;30 Mins</span>
+              <span className={`${styles['otp-expire']} ${styles['fs-12']}`}>{LOGIN_PAGE.OTP_EXPIRE_IN}&nbsp;</span>
+              <span className={styles['black-color']}><Timer time={30} /></span>
             </div>
           </div>
           <div className={`${styles.flex} ${styles['mb-5']}`}>
