@@ -1,65 +1,10 @@
 import typeToReducer from 'type-to-reducer';
 import Cookies from 'universal-cookie';
+
 import { actions } from './actions';
+import pageFlows from '../../components/Login/pageFlows';
 
 const cookies = new Cookies();
-
-const pageFlows = {
-  existing_user_login: {
-    password: {
-      activePage: 'password',
-      nextPage: '',
-    },
-  },
-  new_user_register: {
-    password_new: {
-      activePage: 'password_new',
-      nextPage: 'verify_email',
-    },
-    verify_email: {
-      activePage: 'verify_email',
-      nextPage: 'thank_you',
-    },
-    // personal_details: {
-    //   activePage: 'personal_details',
-    //   nextPage: 'thank_you',
-    // },
-    thank_you: {
-      activePage: 'thank_you',
-      nextPage: null,
-    },
-  },
-  forgot_password: {
-    security_page: {
-      activePage: 'security_page',
-      nextPage: 'reset_type',
-    },
-    reset_type: {
-      activePage: 'reset_type',
-      nextPage: 'success_screen',
-    },
-    success_screen: {
-      activePage: 'success_screen',
-      nextPage: '',
-    },
-  },
-  forgot_password_reset: {
-    reset_screen: {
-      activePage: 'reset_screen',
-      nextPage: 'thank_you',
-    },
-    thank_you: {
-      activePage: 'thank_you',
-      nextPage: null,
-    },
-  },
-  existing_social_user: {
-    existing_social_login: {
-      activePage: 'existing_social_login',
-      nextPage: '',
-    },
-  },
-};
 
 const initialState = {
   ui: {
@@ -92,7 +37,7 @@ const initialState = {
 const authReducer = typeToReducer({
   // new reducers actions for Registration flow
   [actions.V2_USER_LOGIN]: {
-    PENDING: state => Object.assign({}, state, { ui: { ...state.ui, loading: true } }),
+    PENDING: state => state,
     FULFILLED: (state, action) => {
       const { data } = action.payload;
       const { v2 } = state;
@@ -112,13 +57,9 @@ const authReducer = typeToReducer({
           ...v2,
           data,
         },
-        ui: {
-          ...state.ui,
-          loading: false,
-        },
       });
     },
-    REJECTED: state => Object.assign({}, state, { ui: { ...state.ui, loading: false } }),
+    REJECTED: state => state,
   },
   [actions.V2_SHOW_NEXT_PAGE]: state => Object.assign({}, state, {
     v2: {
@@ -148,22 +89,38 @@ const authReducer = typeToReducer({
   // ///////////////////
 
   [actions.GET_USER_INFO]: {
-    PENDING: state => Object.assign({}, state, { ui: { ...state.ui, loading: true, showEmailVerificationScreen: false } }),
-    FULFILLED: (state, action) => Object.assign({}, state, {
-      data: {
-        ...state.data,
-        userInfoData: action.payload && action.payload.data,
-      },
-      ui: {
-        ...state.ui,
-        loading: false,
-        showEmailVerificationScreen: !!(action.payload && action.payload.data.email_verified === 'NV'),
-      },
-      v2: {
-        ...state.v2,
-        active: pageFlows[state.v2.currentFlow][state.v2.active.nextPage],
-      },
+    PENDING: state => Object.assign({}, state, {
+      ui: { ...state.ui, loading: true, showEmailVerificationScreen: false },
     }),
+    FULFILLED: (state, action) => {
+      let active;
+      let { currentFlow } = state.v2;
+      if (action.payload.data.email_verified === 'NV') {
+        active = pageFlows.new_user_register.verify_email;
+        currentFlow = 'new_user_register';
+      } else {
+        active = {
+          activePage: '',
+        };
+      }
+      return Object.assign({}, state, {
+        data: {
+          ...state.data,
+          userInfoData: action.payload && action.payload.data,
+          showLoginScreen: !!(action.payload && action.payload.data.email_verified === 'NV'),
+        },
+        ui: {
+          ...state.ui,
+          loading: false,
+          showEmailVerificationScreen: !!(action.payload && action.payload.data.email_verified === 'NV'),
+        },
+        v2: {
+          ...state.v2,
+          active,
+          currentFlow,
+        },
+      });
+    },
     REJECTED: state =>
       Object.assign({}, state, { ui: { ...state.ui, loading: false, showEmailVerificationScreen: false } }),
   },
@@ -172,7 +129,6 @@ const authReducer = typeToReducer({
       ui: {
         ...state.ui,
         loginLoading: true,
-        loading: true,
       },
     }),
     FULFILLED: (state, action) => Object.assign({}, state, {
@@ -180,12 +136,12 @@ const authReducer = typeToReducer({
         ...state.data,
         ...action.payload.data,
         isLoggedIn: true,
+        // showLoginScreen: false,
       },
       ui: {
         ...state.ui,
         loginLoading: false,
         showLogin: false,
-        loading: false,
       },
     }),
     REJECTED: (state, action) => {
@@ -199,7 +155,6 @@ const authReducer = typeToReducer({
         ui: {
           ...state.ui,
           loginLoading: false,
-          loading: false,
         },
       });
     },
@@ -291,10 +246,6 @@ const authReducer = typeToReducer({
             displayCity,
           },
         },
-        ui: {
-          ...state.ui,
-          loading: false,
-        },
       };
     },
     REJECTED: (state, action) => Object.assign({}, state, {
@@ -364,18 +315,18 @@ const authReducer = typeToReducer({
       },
     }),
   },
-  // [actions.SHOW_LOGIN]: (state, action) => ({
-  //   ...state,
-  //   ui: {
-  //     ...state.ui,
-  //     showLogin: true,
-  //     showEmailVerificationScreen: false,
-  //   },
-  //   data: {
-  //     ...state.data,
-  //     isLoggedIn: (cookies.get('isVerified') && (cookies.get('isVerified') !== 'false')),
-  //   },
-  // }),
+  [actions.SHOW_LOGIN]: (state, action) => ({
+    ...state,
+    ui: {
+      ...state.ui,
+      showLogin: true,
+      showEmailVerificationScreen: false,
+    },
+    data: {
+      ...state.data,
+      isLoggedIn: (cookies.get('isVerified') && (cookies.get('isVerified') !== 'false')),
+    },
+  }),
 
   [actions.RESET_SHOW_LOGIN]: (state) => {
     const { v2 } = state;
@@ -467,8 +418,10 @@ const authReducer = typeToReducer({
   [actions.RESET_PASSWORD]: {
     PENDING: state => Object.assign({}, state, { ui: { loading: true } }),
     FULFILLED: (state, action) => {
-      const { data } = state;
-      if (action && action.payload && action.payload.data && action.payload.data.Response && action.payload.data.Response === 200) {
+      const { v2, data } = state;
+      if (action && action.payload.status === 200) {
+        v2.active = pageFlows.forgot_password_reset.thank_you;
+        v2.currentFlow = 'forgot_password_reset';
         data.showLoginScreen = true;
       }
       return Object.assign({}, state, {
@@ -476,6 +429,10 @@ const authReducer = typeToReducer({
           ...state.data,
         },
         ui: { loading: false },
+        v2: {
+          ...state.v2,
+          ...v2,
+        },
       });
     },
     REJECTED: (state, action) => Object.assign({}, state, {
@@ -494,12 +451,21 @@ const authReducer = typeToReducer({
       },
     }),
     FULFILLED: (state, action) => {
+      const { v2 } = state;
+      if (action && action.payload.Response === 'SUCCESS') {
+        v2.active = pageFlows.forgot_password.success_screen;
+        v2.currentFlow = 'forgot_password';
+      }
       return Object.assign({}, state, {
         data: {
           ...state.data,
           showEmailSuccess: true,
         },
         ui: { loading: false },
+        v2: {
+          ...state.v2,
+          ...v2,
+        },
       });
     },
     REJECTED: (state, action) => Object.assign({}, state, {
@@ -508,9 +474,26 @@ const authReducer = typeToReducer({
       },
       error: action.payload.data,
       ui: { loading: false },
+      showLoginScreen: false,
     }),
   },
-
+  [actions.SHOW_FORGOT_PASSWORD_SCREENS]: (state, action) => {
+    const { v2 } = state;
+    if (action && action.payload) {
+      v2.active = pageFlows.forgot_password[action.payload];
+      v2.currentFlow = 'forgot_password';
+    }
+    return Object.assign({}, state, {
+      v2: {
+        ...state.v2,
+        ...v2,
+      },
+      ui: {
+        ...state.ui,
+        loading: false,
+      },
+    });
+  },
   [actions.SHOW_LOGIN_SCREEN]: (state) => {
     const { v2 } = state;
     v2.active = '';
@@ -561,60 +544,6 @@ const authReducer = typeToReducer({
           ...state.data,
           showLoginScreen: true,
           userData: action.payload.data,
-        },
-        ui: { loading: false },
-      });
-    },
-    REJECTED: (state, action) => Object.assign({}, state, {
-      data: {
-        ...state.data,
-      },
-      error: action.payload.data,
-      ui: { loading: false },
-    }),
-  },
-  [actions.GET_MOBILE_OTP]: {
-    PENDING: state => Object.assign({}, state, {
-      ui: {
-        loading: true,
-      },
-      data: {
-        ...state.data,
-      },
-    }),
-    FULFILLED: (state, action) => {
-
-      return Object.assign({}, state, {
-        data: {
-          ...state.data,
-          showOtpSuccess: true,
-          showEmailSuccess: false,
-        },
-        ui: { loading: false },
-      });
-    },
-    REJECTED: (state, action) => Object.assign({}, state, {
-      data: {
-        ...state.data,
-      },
-      error: action.payload.data,
-      ui: { loading: false },
-    }),
-  },
-  [actions.VERIFY_RESET_OTP]: {
-    PENDING: state => Object.assign({}, state, {
-      ui: {
-        loading: true,
-      },
-      data: {
-        ...state.data,
-      },
-    }),
-    FULFILLED: (state, action) => {
-      return Object.assign({}, state, {
-        data: {
-          ...state.data,
-          resetToken: action.payload && action.payload.data && action.payload.data.token && action.payload.data.token,
         },
         ui: { loading: false },
       });
