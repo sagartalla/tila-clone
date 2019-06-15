@@ -1,9 +1,9 @@
 import React from 'react';
 import { FormControl } from 'react-bootstrap';
 
-const Input = props => {
-  const val = props.val ? props.val : "";
-  const type = props.type ? props.type : "text";
+const Input = (props) => {
+  const val = props.val ? props.val : '';
+  const type = props.type ? props.type : 'text';
   return (
     <FormControl
       type={type}
@@ -17,6 +17,6 @@ const Input = props => {
       className={props.className}
     />
   );
-}
-//className={styles.input}
+};
+
 export default Input;
