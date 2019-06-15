@@ -54,11 +54,17 @@ class SignIn extends Component {
 
 
   showForgotPassword = () => {
-    const { activeObj } = this.props;
-    console.log('activeObj', activeObj);
-    const data = 'security_page';
-    const { showNextPage } = this.props;
-    showNextPage(data);
+    const { showUserInfo, activeEmailId, v2CurrentFlow } = this.props;
+    showUserInfo(activeEmailId).then((res) => {
+      if (res.value.status === 200) {
+        const data = { currentFlow: 'forgot_password', nextPage: 'reset_type' };
+        const { v2NextPage } = this.props;
+        v2CurrentFlow(data);
+      }
+    });
+    // const data = { currentFlow: 'forgot_password', nextPage: 'reset_type' };
+    // const { v2CurrentFlow } = this.props;
+    // v2CurrentFlow(data);
   }
 
   login = () => {
@@ -215,9 +221,10 @@ const mapStateToProps = store => ({
 });
 const mapDispatchToProps = dispatch => bindActionCreators(
   {
-    showQuestionsPage: actionCreators.showQuestionsPage,
+    v2CurrentFlow: actionCreators.v2CurrentFlow,
     userLogin: actionCreators.userLogin,
     newUserRegister: actionCreators.v2NextPage,
+    showUserInfo: actionCreators.showUserInfo,
   },
   dispatch,
 );

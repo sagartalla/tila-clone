@@ -33,13 +33,13 @@ const actions = {
   V2_USER_LOGIN: 'V2_USER_LOGIN',
   RESET_PASSWORD: 'RESET_PASSWORD',
   FORGOT_PASSWORD: 'FORGOT_PASSWORD',
-  SHOW_SECURITY_QUESTIONS: 'SHOW_SECURITY_QUESTIONS',
-  V2_NEW_USER_REGISTER: 'V2_NEW_USER_REGISTER',
-  SHOW_FORGOT_PASSWORD_SCREENS: 'SHOW_FORGOT_PASSWORD_SCREENS',
   V2_SHOW_NEXT_PAGE: 'V2_SHOW_NEXT_PAGE',
   SHOW_LOGIN_SCREEN: 'SHOW_LOGIN_SCREEN',
   SHOW_USER_INFO: 'SHOW_USER_INFO',
   ClOSE_THANKYOU_SCREEN: 'ClOSE_THANKYOU_SCREEN',
+  CHANGE_CURRENT_FLOW: 'CHANGE_CURRENT_FLOW',
+  GET_MOBILE_OTP: 'GET_MOBILE_OTP',
+  VERIFY_RESET_OTP: 'VERIFY_RESET_OTP',
 };
 
 const actionCreators = {
@@ -50,6 +50,10 @@ const actionCreators = {
   }),
   v2NextPage: () => ({
     type: actions.V2_SHOW_NEXT_PAGE,
+  }),
+  v2CurrentFlow: data => ({
+    type: actions.CHANGE_CURRENT_FLOW,
+    payload: data,
   }),
 
   // ///////
@@ -174,7 +178,6 @@ const actionCreators = {
       }));
     });
   },
-
   //new actions for registration flow
   v2UserLogin: email => ({
     type: actions.V2_USER_LOGIN,
@@ -188,22 +191,16 @@ const actionCreators = {
     });
   },
 
-  closeThankYou: () => ({
+  closeThankYouScreen: () => ({
     type: actions.ClOSE_THANKYOU_SCREEN,
   }),
-
+  
   forgotPassword: (body) => {
     return ({
       type: actions.FORGOT_PASSWORD,
       payload: api.forgotPassword(body),
     });
   },
-
-  showQuestionsPage: () => ({
-    type: actions.SHOW_SECURITY_QUESTIONS,
-    payload: 'security_questions_page',
-  }),
-
 
   showLoginScreen: () => ({
     type: actions.SHOW_LOGIN_SCREEN,
@@ -213,6 +210,21 @@ const actionCreators = {
     return ({
       type: actions.SHOW_USER_INFO,
       payload: api.showUserInfo(param),
+    });
+  },
+
+   
+  getMobileOtp: (body) => {
+    return ({
+      type: actions.GET_MOBILE_OTP,
+      payload: api.getMobileOtp(body),
+    });
+  },
+
+  verifyResetOtp: (body) => {
+    return ({
+      type: actions.VERIFY_RESET_OTP,
+      payload: api.verifyResetOtp(body),
     });
   },
 

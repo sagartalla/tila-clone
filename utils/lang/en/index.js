@@ -615,6 +615,7 @@ export const EN_KEYWORDS = {
     SOCIAL_LOGIN_CONTINUE_MESSAGE: 'You can continue log in using the below social media platform as you have linked it with your account.',
     LOGIN_ENTER_EMAIL: 'Enter Email',
     LOGIN_INPUT_EMAIL_ENTER: 'Enter your email ID*',
+    PLEASE_ANSWER_SECURITY_QUESTIONS: 'Please answer the security questions below to reset the password',
   },
   ORDER_PAGE: {
     LOADING: 'Loading...',

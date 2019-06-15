@@ -75,10 +75,18 @@ const forgotPasswordStatus = (store) => {
 
 const getActiveEmailId = store => store.authReducer.v2.data.email || '';
 
+const showOtpSuccess = (store) => {
+  if (store.authReducer.data.showOtpSuccess) {
+    return store.authReducer.data.showOtpSuccess;
+  }
+}
+
 const showLogin = store => store.authReducer.data.showLoginScreen;
+
+const resetToken = store => store.authReducer.data.resetToken;
 
 export {
   getErrorMessege, getCountry, getLoggedInStatus, getInstaCode, getUserCreds, getDeliveryCity, getDomainCountries,
   getLoginProgressStatus, getShowLogin, getPTAToken, showEmailVerificationScreen, getLanguage, getLoadingStatus, getUserInfo,
-  getActive, getActiveEmailId, forgotPasswordStatus, showEmailSuccess, showLogin, userData,
+  getActive, getActiveEmailId, forgotPasswordStatus, showEmailSuccess, showLogin, userData, showOtpSuccess, resetToken,
 }

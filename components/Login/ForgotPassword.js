@@ -32,36 +32,25 @@ class ForgotPassword extends Component {
 
 
   sendLink() {
-<<<<<<< HEAD
-
-    const { selectedValue, userNameError, errorMsg, radioValue } = this.state;
-    const { activeEmailId } = this.props;
-
-    const body = {
-      email: activeEmailId,
-    };
-    this.props.forgotPassword(body).then((res) => {
-      if (res && res.value && res.value.Response === 'SUCCESS') {
-        this.setState({ showInput: true });
-      } else {
-        this.setState({ showInput: false });
-      }
-    });
-    this.setState({
-      userNameError,
-      errorMsg,
-    });
-=======
     const { radioValue } = this.state;
-    const { activeEmailId, userData } = this.props;
+    const { activeEmailId, userData, v2NextPage } = this.props;
     const body = {
       email: activeEmailId,
     };
     if (radioValue === 'email') {
-      this.props.forgotPassword(body);
-    }
->>>>>>> 16488a23... Added ApI to fetch user data
+      this.props.forgotPassword(body).then(res => {
+        if (res && res.value && res.value.Response && res.value.Response === 'SUCCESS') {
+          v2NextPage();
+        }
+    });
+  } else {
+    this.props.getMobileOtp(activeEmailId).then(res => {
+      if (res && res.value && res.value.data && res.value.data.Response === 'SUCCESS') {
+        v2NextPage();
+      }
+    });
   }
+}
 
   switchState() {
     this.setState({
@@ -137,6 +126,8 @@ const mapStateToProps = store => ({
 const mapDispatchToProps = dispatch => bindActionCreators(
   {
     forgotPassword: actionCreators.forgotPassword,
+    v2NextPage: actionCreators.v2NextPage,
+    getMobileOtp: actionCreators.getMobileOtp,
   },
   dispatch,
 );

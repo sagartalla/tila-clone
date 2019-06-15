@@ -7,6 +7,7 @@ import { bindActionCreators } from 'redux';
 import SocialLogin from './SocialLogin';
 import { selectors, actionCreators } from '../../store/auth';
 import SVGComponent from '../common/SVGComponet';
+import Button from '../common/CommonButton';
 import lang from '../../utils/language';
 import { languageDefinations } from '../../utils/lang';
 
@@ -16,7 +17,7 @@ import styles_en from './login_en.styl';
 import styles_ar from './login_ar.styl';
 
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
-const { LOGIN_PAGE } = languageDefinations();
+const { LOGIN_PAGE, ORDER_PAGE } = languageDefinations();
 
 class LoginPage extends React.Component {
   constructor() {
@@ -51,6 +52,7 @@ class LoginPage extends React.Component {
   }
 
   render() {
+    const { loadingStatus } = this.props;
     const { email, emailErr } = this.state;
     return (
       <div className={`${styles['login-form']} ${styles['flx-space-bw']} ${styles['flex-colum']}`}>
@@ -103,10 +105,11 @@ class LoginPage extends React.Component {
                   {emailErr &&
                     <span className={`${styles['error-msg']}`}>correct it</span>}
                 </div>
-                <input
-                  className={`${styles['sign-in-btn']} ${styles.fontW700} ${styles['text-uppercase']}`}
-                  type="submit"
-                  value="Continue"
+                <Button
+                  className={`${styles['flex-center']} ${styles['sign-in-btn']} ${styles.fontW700} ${styles.width100} ${styles['fs-14']} ${styles['text-uppercase']}`}
+                  onClick={this.submit}
+                  btnLoading={loadingStatus}
+                  btnText={ORDER_PAGE.CONTINUE}
                 />
               </form>
             </Col>
@@ -118,6 +121,11 @@ class LoginPage extends React.Component {
   }
 }
 
+
+const mapStateToProps = store => ({
+  loadingStatus: selectors.getLoadingStatus(store),
+});
+
 const mapDispatchToProps = dispatch => bindActionCreators(
   {
     userLogin: actionCreators.v2UserLogin,
@@ -128,4 +136,4 @@ const mapDispatchToProps = dispatch => bindActionCreators(
   dispatch,
 );
 
-export default connect(null, mapDispatchToProps)(LoginPage);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
