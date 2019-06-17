@@ -3,7 +3,7 @@ import { Row, Col } from 'react-bootstrap';
 import moment from 'moment';
 import Cookie from 'universal-cookie';
 
-import { Link } from '../../../routes'
+import { Link } from '../../../routes';
 import Warranty from '../../Product/includes/Warranty';
 import CartStepper from './CartStepper';
 import SVGComponent from '../../common/SVGComponet';
@@ -19,7 +19,7 @@ import styles_ar from '../cart_ar.styl';
 
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
-const { CART_PAGE, ORDER_PAGE } = languageDefinations();
+const { PDP_PAGE, CART_PAGE, ORDER_PAGE } = languageDefinations();
 
 const cookies = new Cookie();
 
@@ -229,7 +229,7 @@ class CartItem extends React.Component {
                     </div>
                     <div data-id={item_id} className={`${styles['checkbox-material']} ${styles['mt-15']}`}>
                       <input data-id={item_id} id={"gift" + item_id} type="checkbox" defaultChecked={checked} onClick={this.giftChecked} />
-                      <label htmlFor={"gift" + item_id}> {CART_PAGE.SEND_GIFT} {(gift_info && gift_info.gift_rate) ? "(" + gift_info.gift_rate + " " + cur + ")" : ''} </label>
+                      <label className={styles['fontW300']} htmlFor={"gift" + item_id}> {CART_PAGE.SEND_GIFT} {(gift_info && gift_info.gift_rate) ? "(" + gift_info.gift_rate + " " + cur + ")" : ''} </label>
                     </div>
                     {checked && showMessage &&
                       <div>
@@ -251,7 +251,7 @@ class CartItem extends React.Component {
                         />
                         <button
                           data-id={item_id}
-                          className={`${styles['ml-5']} ${styles['bg-thick-blue']} ${styles['p-5']} ${styles['white-color']} ${styles['border-radius4']}`}
+                          className={`${styles['ml-20']} ${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['right-radius']} ${styles['text-uppercase']}`}
                           onClick={this.sendGiftPack}
                         >
                           {CART_PAGE.GIFT_PACK}
@@ -271,7 +271,7 @@ class CartItem extends React.Component {
                 <Col md={3} sm={3} className={`${styles['pr-5']} ${styles['landscape-cart-price']}`}>
                   {Math.floor(discount) > 5 &&
                     <p className={`${styles['mb-0']} ${styles['fs-12']} ${styles['flex']} ${styles['justify-end']}`}>
-                      <span className={styles['success-green']}>{`${Math.floor(discount)}% OFF`}</span>
+                      <span className={styles['success-green']}>{`${Math.floor(discount)}% ${PDP_PAGE.OFF}`}</span>
                       <span className={`${styles['cross-strike']} ${styles.relative} ${styles['ml-5']}`}>
                         <span className={styles['label-light-grey']}>
                           <span>{mrp}&nbsp;</span>

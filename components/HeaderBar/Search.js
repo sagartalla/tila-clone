@@ -15,7 +15,7 @@ import SVGComponent from '../common/SVGComponet';
 import DragDropUpload from '../common/DragDropUpload';
 import lang from '../../utils/language';
 import SearchContext from '../helpers/context/search';
-
+import ToastContent from '../common/ToastContent';
 import main_en from '../../layout/main/main_en.styl';
 import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './header_en.styl';
@@ -72,7 +72,12 @@ class Search extends Component {
   onChangeSearchInput(e) {
     const numberOfCharacters = /^[\s\S]{0,200}$/;
     if (!numberOfCharacters.test(e.target.value)) {
-      toast.error(SEARCH_PAGE.MAXIMUN_TEXT_EXCEEDED);
+      toast(
+        <ToastContent
+          msg={SEARCH_PAGE.MAXIMUN_TEXT_EXCEEDED}
+          msgType='error'
+        />
+      )
       return;
     }
     this.setState({

@@ -1,10 +1,12 @@
 import axios from 'axios';
-import constants from '../../helper/constants';
 import { toast } from 'react-toastify';
+import ToastContent from '../../../components/common/ToastContent';
+import constants from '../../helper/constants';
 import { languageDefinations } from '../../../utils/lang/';
 import generateURL from '../../../utils/urlGenerator';
 
-const { PERSONAL_INFO_MODAL } = languageDefinations();
+const { PERSONAL_INFO_MODAL, API_TEXT } = languageDefinations();
+
 const getUserProfileInfo = () => {
   return Promise.all([
     axios.get(`${constants.CMS_API_URL}/api/v1/user/account/details`),
@@ -32,7 +34,12 @@ const uploadProfilePic = (body) => {
       'tenant': 'profile-service',
     },
   }).then(({data}) => {
-    toast.success(PERSONAL_INFO_MODAL.IMAGE_UPDATED_SUCCESS)
+    toast(
+      <ToastContent
+        msg={PERSONAL_INFO_MODAL.IMAGE_UPDATED_SUCCESS}
+        msgType='success'
+      />
+    )
     return data;
   }).catch((data) => {
     console.log(data);
@@ -55,6 +62,7 @@ const resetPassword = (body) => {
 
 const forgotPassword = (body) => {
   return axios.post(`${constants.CMS_API_URL}/api/v1/user/password/forgot`, body).then(({data}) => {
+    toast.success(API_TEXT.OTP_SENT_TO_YOUR_MAIL_ID)
     return data;
   }).catch((error) => {
     return error.response.data;

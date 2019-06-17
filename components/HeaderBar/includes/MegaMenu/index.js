@@ -29,6 +29,8 @@ const country = cookies.get('country') || 'SAU';
 const {HEADER_PAGE} = languageDefinations()
 //TODO make it SEO friendly
 
+let timeoutCount = null;
+
 class MegaMenu extends Component {
   constructor(props) {
     super(props);
@@ -49,13 +51,16 @@ class MegaMenu extends Component {
   }
 
   onHoverCurry = item => () => {
-    setTimeout(() => {
-      this.setState({
-        ...this.state,
-        selectedCategory: item.id,
-        colorScheme: (item.displayName || '').split(' ').join('').toLowerCase().replace('&', '-'),
-      });
-    }, 200);
+    if(this.state.selectedCategory !== item.id) {
+      timeoutCount = setTimeout(() => {
+        this.setState({
+          ...this.state,
+          selectedCategory: item.id,
+          itemColor: item.itemColor,
+          hoverItem: item.id,
+        });
+      }, 300);
+    }
   }
 
   onExpandedHover() {
@@ -73,20 +78,27 @@ class MegaMenu extends Component {
   onHoverOut() {
     this.setState({
       selectedCategory: null,
-      viewAllMenu: false
+      viewAllMenu: false,
+      itemColor: null,
+      hoverItem: null
     });
     this.expandedHover = false;
   }
 
-  onHoverOutDelayed() {
-    setTimeout(() => {
-      if(!this.expandedHover){
-        this.setState({
-          selectedCategory: null,
-          viewAllMenu: false
-        })
-      }
-    });
+  onHoverOutDelayed(id) {
+    timeoutCount && clearTimeout(timeoutCount);
+    return () => {
+      setTimeout(() => {
+        if(!this.expandedHover){
+          this.setState({
+            selectedCategory: null,
+            viewAllMenu: false,
+            itemColor: null,
+            hoverItem: null,
+          })
+        }
+      });
+    }
   }
 
   getLandingPageLink(id) {
@@ -104,20 +116,30 @@ class MegaMenu extends Component {
   render() {
     const { megamenu, query={} } = this.props;
     const { category } = query;
-    const { selectedCategory } = this.state;
+    const {
+      selectedCategory,
+      itemColor,
+      hoverItem,
+    } = this.state;
     // const selectedCategory = 3245;
     // const selectedCategory = 3234;
+    // const selectedCategory = 848;
     const selectedCategoryTree = _.find(megamenu, { id: selectedCategory });
 
     return (
       <div>
         <Grid className={`${styles['pl-0']}`}>
-        <nav className={`${styles['megamenu-wrapper']} ${styles['flx-spacebw-alignc']} ${styles[this.state.colorScheme]}`}>
+        <nav className={`${styles['megamenu-wrapper']} ${styles['flx-spacebw-alignc']}`}>
           <ul className={styles['mb-0']}>
             {
               _.map(megamenu, (item) => {
                 return (
-                  <li key={item.id} onMouseEnter={this.onHoverCurry(item)} onMouseLeave={this.onHoverOutDelayed} className={`${styles[`${(item.displayName || '').split(' ').join('').toLowerCase().replace('&', '-')}-item`]} ${(!selectedCategoryTree && this.getLandingPageLink(item.id)) === `/landing/${category}` ? styles['active-menu-item']: {}}`}>
+                  <li key={item.id}
+                    onMouseEnter={this.onHoverCurry(item)}
+                    onMouseLeave={this.onHoverOutDelayed(item.id)}
+                    className={`${(hoverItem === item.id) ? styles['active-menu-item']: {}}`}
+                    style={ (itemColor && hoverItem === item.id) ? { borderBottom: `4px solid ${itemColor}` } : {} }
+                    >
                     <div>
                       {/* <Link route={`/category/${item.displayName}-${item.id}?categoryTree=true&isListed=false`}> */}
                       <Link route={`/${country}/${language}/${this.getLandingPageLink(item.id)}`}>
@@ -149,7 +171,7 @@ class MegaMenu extends Component {
                   <Menu
                     selectedCategoryTree={selectedCategoryTree}
                     parentID={selectedCategory}
-                    colorScheme={this.state.colorScheme}
+                    itemColor={itemColor}
                     onLinkClick={this.onLinkClick}
                   />
                 </Grid>
