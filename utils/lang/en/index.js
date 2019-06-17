@@ -137,7 +137,7 @@ export const EN_KEYWORDS = {
     DEFAULT_ADDR: 'Default Address',
     MAKE_DEFAULT: 'Make as Default',
     DELETE: 'Delete',
-    EDIT_ADDR: 'Edit Address',
+    EDIT_ADDR: 'Save Address',
     DELIVER_TO: 'Deliver To',
     ADD_NEW_BTN: 'Add New',
     ADD_NEW_ADDR: 'Add New Address',
@@ -174,6 +174,8 @@ export const EN_KEYWORDS = {
     NO_WISHLIST_LABEL: 'So many products on Tila and yet you show no love :(',
     DONT_WAIT: 'Dont wait no more!',
     START_SHOPPING: 'Start shopping',
+    PRICE_DECRECED_BY: 'Price Decreased by',
+    PRICE_INCREASED_BY: 'Price Increased by',
   },
   PDP_PAGE: {
     LOADING_REVIEWS: 'Loading Reviews...',

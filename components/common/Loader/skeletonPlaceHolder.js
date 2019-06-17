@@ -189,7 +189,16 @@ export const productPlaceHolder = (
 
 
 export const cartPlaceHolder = (
-  <div className={`${styles.flex} ${styles['pt-40']} ${styles.relative}`}>
+  <div className={`${styles.flex} ${styles['pt-40']} ${styles.relative}`} style={{
+      position: 'fixed',
+      zIndex: 26,
+      width: '100vw',
+      height: '100vh',
+      top: 0,
+      left: 0,
+      background: '#fff',
+      paddingTop: '130px',
+    }}>
     {/* <div className={`${styles.container}`} /> */}
     <div className={`${styles.flex} ${styles['p-20']} ${styles.width100}`}>
       <div style={{ width: '75%' }} className={`${styles.flex} ${styles['flex-colum']} ${styles.width63} ${styles['mr-20']}`}>
