@@ -168,6 +168,8 @@ export const AR_KEYWORDS = {
     NO_WISHLIST_LABEL: 'So many products on Tila and yet you show no love :(',
     DONT_WAIT: 'Dont wait no more!',
     START_SHOPPING: 'Start shopping',
+    PRICE_DECRECED_BY: 'Price Decreased by',
+    PRICE_INCREASED_BY: 'Price Increased by',
   },
   PDP_PAGE: {
     LOADING_REVIEWS: 'تحميل تعليقات المستخدم',
@@ -199,6 +201,7 @@ export const AR_KEYWORDS = {
     NO_WARRANTY: 'لا يوجد أي ضمان',
     WARRANTY: 'الضمان',
     PRODUCT_NOT_AVAILABLE: 'المنتج ليس متوفراً في دولتك',
+    OFF: 'خصم',
     PRODUCT_OUT_OF_STOCK: 'نفذ المنتج',
     NOT_AVAIALBLE: 'ليس متوفراً',
     BUY_EARN: 'اشتري وأحصل على',
@@ -571,7 +574,7 @@ export const AR_KEYWORDS = {
     SAVE_PASSWORD: 'حفظ كلمة السر',
     PASSWORD_RESET_SUCCESSFULL: 'تمت تغير كلمة السر بنجاح',
     CONFIRM_PASSWORD: 'تأكيد كلمة السر',
-    PLEASE_ACCEPT_OUR_TERMS: 'Please accept out terms and conditions to proceed',    
+    PLEASE_ACCEPT_OUR_TERMS: 'Please accept out terms and conditions to proceed',
   },
   ORDER_PAGE: {
     LOADING: 'تحميل',

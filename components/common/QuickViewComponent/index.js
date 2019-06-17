@@ -33,13 +33,12 @@ class RenderResults extends Component {
 
     this.myRef.current.scrollIntoView({
       behavior: 'smooth',
-      block: 'center',
-      inline: 'center',
+      block: 'start',
+      inline: 'nearest',
     });
 
   }
   componentWillReceiveProps(nextProps) {
-    debugger;
     console.log('nextProps',nextProps.productId);
     if(nextProps.renderQuickView
       &&

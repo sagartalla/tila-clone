@@ -21,6 +21,7 @@ const ProductPrice = ({offerInfo}) => {
   const {
     price, listingAvailable, listingId, stockError, availabilityError, offerPricing,
   } = offerInfo;
+  console.log(offerInfo);
   const {
     strickedPrice: mrp, sellingPrice: sp, offerDiscounts, showPrise: total, totalDiscountMRP: discountMrp, currency,
   } = offerPricing;
@@ -37,14 +38,14 @@ const ProductPrice = ({offerInfo}) => {
               <span className={`${styles['fs-12']} ${styles['pr-5']}`}>{(offerPricing && offerPricing.showPrise && offerPricing.showPrise.currency_code) || (offerPricing && offerPricing.currency)}</span>
             </div>
             <Fragment>
-              {offerPricing && offerPricing.showPrise && offerPricing.showPrise.display_value !== offerPricing && offerPricing.strickedPrice && offerPricing.strickedPrice.display_value && Math.floor(offerPricing && offerPricing.discount && offerPricing.discount.display_value) > 5 &&
+              {offerPricing && offerPricing.showPrise && offerPricing.showPrise.display_value !== offerPricing && offerPricing.strickedPrice && offerPricing.strickedPrice.display_value && Math.floor(offerPricing && offerPricing.discount && offerPricing.discount) > 5 &&
               <div className={`${styles.flex} ${styles['align-baseline']} ${styles['cross-strike-red']} ${styles.relative} ${styles['ml-10']}`}>
-                <span className={`${styles['fs-16']} ${styles['pr-5']}`}>{offerPricing && offerPricing.strickedPrice && offerPricing.strickedPrice.display_value}</span>
+                <span className={`${styles['fs-12']} ${styles['pr-5']}`}>{offerPricing && offerPricing.strickedPrice && offerPricing.strickedPrice.display_value}</span>
                 <span className={`${styles['fs-12']} ${styles['pr-5']}`}>{offerPricing && (offerPricing.strickedPrice.currency_code || offerPricing.currency)}</span>
               </div>}
               <div className={`${styles['flex']} ${styles['align-baseline']} ${styles['relative']} ${styles['ml-10']}`}>
-                {offerPricing && offerPricing.showPrise && offerPricing.showPrise.display_value !== offerPricing && offerPricing.strickedPrice && offerPricing.strickedPrice.display_value && Math.floor(offerPricing && offerPricing.discount && offerPricing.discount.display_value) > 5 &&
-                <span className={`${styles['fs-12']} ${styles['pr-5']} ${styles['offers-applied']} `}>{`${Math.floor(offerPricing && offerPricing.discount && offerPricing.discount.display_value)}% OFF`}</span>}
+                {offerPricing && offerPricing.showPrise && offerPricing.showPrise.display_value !== offerPricing && offerPricing.strickedPrice && offerPricing.strickedPrice.display_value && Math.floor(offerPricing && offerPricing.discount) > 5 &&
+                <span className={`${styles['fs-12']} ${styles['pr-5']} ${styles['offers-applied']} `}>{`${Math.floor(offerPricing && offerPricing.discount && offerPricing.discount)}% ${PDP_PAGE.OFF}`}</span>}
                 <span onMouseOver={() => toggleTooltip(true)} onMouseLeave={() => toggleTooltip(false)}  className={`${styles.relative} ${styles['checkout-quat']} ${styles['fs-12']} ${styles['flex-center']} ${styles['justify-around']}`}>
                   <span className={`${styles['fs-12']} ${styles['flex-center']} ${styles['justify-center']}`}>
                     {/* <SVGCompoent clsName={`${styles['secure-icon']} ${styles['mr-10']} ${styles['pointer']}`} src="icons/common-icon/trust-secure" /> */}
