@@ -126,7 +126,7 @@ class GeoWidget extends Component {
 
   render() {
     const {
-      geoShippingData, hideLabel, getAllCities,
+      geoShippingData, hideLabel, getAllCities, isPdp,
     } = this.props;
     const { showCitiesData } = this.state;
     return (
@@ -151,7 +151,7 @@ class GeoWidget extends Component {
               <input
                 type="text"
                 value={this.state.displayCity}
-                className={`${styles['fs-14']} ${styles['delivery-input']}`}
+                className={`${styles['fs-14']} ${styles['delivery-input']} ${isPdp ? styles['pdp-border-btm'] : ''}`}
                 onChange={this.onChangeCity}
               />
             </Dropdown.Toggle>
