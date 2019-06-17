@@ -25,7 +25,7 @@ class MiniVault extends Component {
               return (
                 <div className={`${styles['flex']} ${styles['flex-colum']} ${styles['valut-card-main-inn']} ${styles['p-10-20']} ${styles['pointer']}`} onClick={this.makeCardDefault.bind(this, card_token)} key={index}>
                   {/* <span>{bank_name}</span> */}
-                  <h5 className={`${styles['mt-5']} ${styles['mb-5']}`}>{masked_number.replace(/(.{4})/g, '$1 ')}</h5>
+                  <h5 className={`${styles['mt-5']} ${styles['mb-5']} ${styles['card-number']}`}>{masked_number.replace(/(.{4})/g, '$1 ')}</h5>
                   <div className={`${styles['flx-space-bw']}`}>
                     <span>{holder_name}</span>
                     <span> {expiry_month}/{expiry_year}</span>
