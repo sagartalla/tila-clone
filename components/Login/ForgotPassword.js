@@ -81,7 +81,7 @@ class ForgotPassword extends Component {
             <div className={`${styles.flex}`}>
               <input name="addr_checkbox" type="radio" className={`${styles['radio-btn']} ${styles['radio-margin']}`} data-id="email" onChange={this.handleChange} />
               <span className={`${styles['ml-10']}`}>
-                <div className={radioValue === 'email' ? `${styles['fs-12']} ${styles.fontW600}` : `${styles['fs-12']}`}>Reset Password by Email:</div>
+                <div className={radioValue === 'email' ? `${styles['fs-12']} ${styles.fontW600}` : `${styles['fs-12']}`}>{LOGIN_PAGE.RESET_PASSWORD_BY_EMAIL}</div>
                 <div className={radioValue === 'email' ? `${styles['fs-14']} ${styles.fontW600}` : `${styles['fs-14']}`}>{userData && userData.email}</div>
               </span>
             </div>
@@ -92,7 +92,7 @@ class ForgotPassword extends Component {
                 <div className={`${styles.flex}`}>
                   <input name="addr_checkbox" type="radio" className={`${styles['radio-btn']}`} data-id="otp" onChange={this.handleChange} />
                   <span className={`${styles['ml-10']}`}>
-                    <div className={radioValue === 'otp' ? `${styles['fs-12']} ${styles.fontW600}` : `${styles['fs-12']}`}>Reset by Mobile OTP:</div>
+                    <div className={radioValue === 'otp' ? `${styles['fs-12']} ${styles.fontW600}` : `${styles['fs-12']}`}>{LOGIN_PAGE.RESET_PASSWORD_BY_MOBILE}</div>
                     <div className={radioValue === 'otp' ? `${styles.fontW600} ${styles.flex} ${styles['justify-between']}` : `${styles.flex} ${styles['justify-between']}`}>
                       <div className={`${styles['fashion-color']} ${styles['fs-14']}`}>{userData && (`+${userData.mobile_country_code}`)}</div>
                       <div className={`${styles['fs-14']}`}>{userData && userData.mobile_no}</div>
@@ -108,7 +108,7 @@ class ForgotPassword extends Component {
             disabled={radioValue === ''}
             onClick={this.sendLink}
             btnLoading={loadingStatus}
-            btnText="Next"
+            btnText={LOGIN_PAGE.NEXT}
           />
         </React.Fragment>
       </div>
