@@ -73,9 +73,9 @@ class ResetPasswordMain extends Component {
   }
   render() {
     const {
-      password, hide, errorMsg, loadingStatus,
+      password, hide, errorMsg,
     } = this.state;
-    const { showCrossButton } = this.props;
+    const { showCrossButton, loadingStatus } = this.props;
     return (
         <React.Fragment>
             {showCrossButton &&
