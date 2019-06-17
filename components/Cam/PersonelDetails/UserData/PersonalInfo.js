@@ -46,6 +46,11 @@ class PersonalInfo extends React.Component {
   }
 
   handleShow = value => (e) => {
+    if (value === true) {
+      document.getElementsByTagName('BODY')[0].style.overflow = 'hidden';
+    } else {
+      document.getElementsByTagName('BODY')[0].style.overflow = 'auto';
+    }
     this.setState({ show: value });
   }
 
@@ -86,8 +91,7 @@ class PersonalInfo extends React.Component {
           </Col>
         </div>
         <div className={show ? `${styles['modalContainer']} ${styles['showDiv']}` : `${styles['modalContainer']} ${styles['hideDiv']}`}>
-          <div className={`${styles['disabled']}`}>
-          </div>
+          <div onClick={this.handleShow(false)} className={`${styles['disabled']}`} />
         </div>
         <div className={show ? `${styles['openModal']}` : `${styles['closeModal']}`}>
           <UpdatePersonalInfoModal

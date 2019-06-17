@@ -32,6 +32,11 @@ class ContactInfo extends React.Component {
   }
 
   handleShow = (showVal, elem) => (e) => {
+    if (showVal === true) {
+      document.getElementsByTagName('BODY')[0].style.overflow = 'hidden';
+    } else {
+      document.getElementsByTagName('BODY')[0].style.overflow = 'auto';
+    }
     this.setState({
       show: showVal,
       element: elem
@@ -98,7 +103,7 @@ class ContactInfo extends React.Component {
         </div>
         <div className={show ? `${styles['modalContainer']} ${styles['showDiv']}`
           : `${styles['modalContainer']} ${styles['hideDiv']}`}>
-          <div className={`${styles['disabled']}`}></div>
+          <div onClick={this.handleShow(false, '')} className={`${styles['disabled']}`} />
         </div>
         <div className={show ? `${styles['openModal']}` : `${styles['closeModal']}`}>
           <UpdateContactInfoModal
