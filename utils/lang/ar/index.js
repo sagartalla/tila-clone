@@ -268,6 +268,7 @@ export const AR_KEYWORDS = {
     REWARD_POINTS: 'نقاط إضافية',
     MANAGE_SAVED_CARDS: 'التحكّم بالبطاقات المحفوظة',
     MAKE_DEFAULT: 'اجعله رئيسي',
+    TILA_GIFT: 'هدايا تيله',
     DEFAULT: 'رئيسي',
     NAME: 'الاسم',
     EXPIRY: 'تاريخ انتهاء الصلاحية',
