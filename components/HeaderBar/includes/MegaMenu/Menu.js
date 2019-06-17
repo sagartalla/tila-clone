@@ -22,14 +22,15 @@ const { HEADER_PAGE } = languageDefinations()
 
 const brandImages = {
   topBrands: {
-    '#00C7B1': ['samsung-img', 'apple', 'sony', 'philips'],
-    '#EF6079': ['samsung-img', 'apple', 'sony', 'philips'],
-    '#888B8D': ['christy', 'tefal', 'adidas', 'lacoste'],
+
+    '#00C7B1': ['Samsung', 'Apple', 'Sony', 'Philips'],
+    '#EF6079': ['Pampers', 'Gucci', 'Omron', 'CalkinKlien'],
+    '#888B8D': ['Armani-exchange', 'Nike', 'Levis', 'Fossil'],
   },
   trending: {
-    '#00C7B1': ['samsung-img', 'apple', 'sony', 'philips'],
-    '#EF6079': ['samsung-img', 'apple', 'sony', 'philips'],
-    '#888B8D': ['river_island', 'debenhams', 'sony', 'philips'],
+    '#00C7B1': ['Baseus', 'JOYROOM', 'LDNIO', 'Microsoft'],
+    '#EF6079': ['Whey', 'DavidOff', 'Dermaroller', 'NYX'],
+    '#888B8D': ['RayBan', 'Reebok', 'Tomford', 'JBW'],
   },
 };
 
@@ -101,7 +102,7 @@ class Menu extends Component {
                 {brandImages.topBrands[itemColor] &&
                 brandImages.topBrands[itemColor].length > 0 && brandImages.topBrands[itemColor].map(image => (
                   <li className={`${styles.flex} ${styles['mb-10']} ${styles['brand-icon']}`} key={image}>
-                    <img alt={image} src={`/static/img/bg-img/${image}.jpg`} className={`${styles['img-responsive']}`} />
+                    <img alt={image} src={`/static/img/bg-img/${image}.png`} className={`${styles['img-responsive']}`} />
                   </li>
                 ))}
               </ul>
@@ -116,7 +117,7 @@ class Menu extends Component {
                 {brandImages.trending[itemColor] && brandImages.trending[itemColor].length > 0 &&
                 brandImages.trending[itemColor].map(image => (
                   <li className={`${styles.flex} ${styles['mb-10']} ${styles['brand-icon']}`} key={image}>
-                    <img alt={image} src={`/static/img/bg-img/${image}.jpg`} className={`${styles['img-responsive']}`} />
+                    <img alt={image} src={`/static/img/bg-img/${image}.png`} className={`${styles['img-responsive']}`} />
                   </li>
                 ))}
               </ul>
