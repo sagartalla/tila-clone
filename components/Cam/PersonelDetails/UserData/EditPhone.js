@@ -12,7 +12,7 @@ import { languageDefinations } from '../../../../utils/lang';
 import CountryDialCode from '../../../../constants/CountryDialCode';
 import FormValidator from '../../../common/FormValidator';
 import SVGCompoent from '../../../common/SVGComponet';
-
+import ToastContent from '../../../common/ToastContent';
 import lang from '../../../../utils/language';
 
 import main_en from '../../../../layout/main/main_en.styl';
@@ -121,7 +121,12 @@ class EditPhone extends React.Component {
         otpCount: otpCount + 1,
       }, () => this.props.otpUserUpdate(params));
     }else{
-      toast.error('Phone number is required for OTP');
+      toast(
+        <ToastContent
+          msg='Phone number is required for OTP'
+          msgType='error'
+        />
+      )
     }
   }
   handleClose() {
