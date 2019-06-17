@@ -10,10 +10,13 @@ import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from './sidebar_en.styl';
 import styles_ar from './sidebar_ar.styl';
 import ProfilePic from './ProfilePic';
+import { languageDefinations } from '../../../utils/lang';
+
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 const cookies = new Cookies();
 const language = cookies.get('language') || 'en';
 const country = cookies.get('country') || 'SAU';
+const { CAM } = languageDefinations();
 
 class UserProfile extends React.Component {
   constructor(props) {
@@ -21,6 +24,7 @@ class UserProfile extends React.Component {
     this.state = {
       imgDocumentID: null,
       loader: false,
+      mouseOver: false
     }
   }
 
@@ -29,6 +33,18 @@ class UserProfile extends React.Component {
     const formData = new FormData();
     formData.append('file', file);
     this.props.uploadProfilePic(formData);
+  }
+
+  handleMouseOver = () => {
+    this.setState({
+      mouseOver: true,
+    })
+  }
+
+  handleMouseOut = () => {
+    this.setState({
+      mouseOver: false,
+    })
   }
 
   componentWillReceiveProps(nextProps) {
@@ -67,13 +83,13 @@ class UserProfile extends React.Component {
     let name = full_name ? (full_name.length < 20 ? full_name : (full_name.slice(0, 20) + "...")) : "";
     return (
       <>
-        <label className={`${styles['file-upload']}`}>
-          <input type='file' className={`${styles['display-pic']}`} onChange={this.handleChange} />
+        <label className={`${styles['file-upload']}`} onMouseOver={this.handleMouseOver} onMouseOut={this.handleMouseOut}>
+          <input title={`${CAM.CHOOSE_PROFILE_PIC}`} type='file' className={`${styles['display-pic']}`} onChange={this.handleChange} />
         </label>
         <Link route={`/${country}/${language}/cam/profile`}>
           <a style={{ display: 'block' }}>
             <div className={`${`/${country}/${language}/cam/profile` === `/${country}/${language}/cam/${tab}` ? styles['active'] : {}} ${styles['user-profile']} ${styles['p-10-20']}  ${styles['align-center']} ${styles['flex']}`}>
-                  <ProfilePic loader={this.state.loader} userInfo={userInfo} imgUrl={imgUrl}/>
+                  <ProfilePic loader={this.state.loader} userInfo={userInfo} imgUrl={imgUrl} mouseOver={this.state.mouseOver}/>
               <div className={styles['profile-details']}>
                 <span className={`${styles['fs-12']} ${styles['light-gry-clr']}`}>Hello,</span>
                 <div>{name}</div>

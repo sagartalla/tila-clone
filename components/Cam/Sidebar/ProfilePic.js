@@ -10,7 +10,10 @@ const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styl
 
 const ProfilePic = (props) => {
     let imagePreview = null
-    if(props.loader || (props.userInfo.personalInfo.image_url && props.imgUrl===null)){
+    if(props.mouseOver){
+      imagePreview = (<div className={`${styles['edit-icon']} `}><SVGComponent clsName={`${styles['profile-edit-icon']}`} src="icons/profile-camera" /></div>)
+    }
+    else if(props.loader || (props.userInfo.personalInfo.image_url && props.imgUrl===null)){
         imagePreview=
                 <div className={styles['loader-div']}>
                   <SVGComponent
