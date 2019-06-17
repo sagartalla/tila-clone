@@ -130,7 +130,7 @@ class UpdatePersonalInfoModal extends React.Component {
       <div>
         <div className={styles['editProfileModal']}>
           <h4 className={`${styles['flx-spacebw-alignc']} ${styles['m-0']}`}>
-            <span>Personal Information</span>
+            <span className={`${styles['fs-20']}`}>Personal Information</span>
             <a onClick={this.handleClose} className={`${styles['fs-22']} ${styles['black-color']}`}>X</a>
           </h4>
           <div className={`${styles['flex-center']} ${styles['flex-colum']}`}>
