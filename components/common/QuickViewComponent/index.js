@@ -33,8 +33,8 @@ class RenderResults extends Component {
 
     this.myRef.current.scrollIntoView({
       behavior: 'smooth',
-      block: 'center',
-      inline: 'center',
+      block: 'start',
+      inline: 'nearest',
     });
 
   }
