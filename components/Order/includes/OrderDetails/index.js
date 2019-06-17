@@ -32,13 +32,13 @@ const OrderDetails = ({ query, orderData, thankyouPage }) => {
       <Grid>
         <Row className={styles['m-0']}>
           <Col md={12}>
-            <div className={`${styles['mt-20']} ${styles['mb-20']}`}>
+            <div className={`${styles['mt-20']} ${styles['mb-20']} ${styles['black-color']}`}>
               {
                 thankyouPage ? '' :
                 <Fragment>
-                  <span><a onClick={() => routeChange(`/${country}/${language}/cam/profile`)}>{ORDER_PAGE.MY_ACCOUNT}</a></span>
+                  <span><a className={`${styles['black-color']}`} onClick={() => routeChange(`/${country}/${language}/cam/profile`)}>{ORDER_PAGE.MY_ACCOUNT}</a></span>
                   <span> > </span>
-                  <span><a onClick={() => routeChange(`/${country}/${language}/cam/orders`)}>{ORDER_PAGE.ORDERS}</a></span>
+                  <span ><a className={`${styles['black-color']}`} onClick={() => routeChange(`/${country}/${language}/cam/orders`)}>{ORDER_PAGE.ORDERS}</a></span>
                   <span> > </span>
                   <span>{query.orderId}</span>
                 </Fragment>
