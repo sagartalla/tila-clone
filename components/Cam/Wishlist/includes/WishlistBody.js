@@ -32,21 +32,21 @@ const WishlistBody = (props) => {
 
   const getPriceAlert = (a, b, cur) => {
     if (a === b) return null;
-    let str = '';
+    let str = null;
     const percent = percentage(a, b);
     let priceVal = a - b;
     if (percent > 0) {
       str = (
         <span className={`${styles['thick-red-clr']} ${styles.flex}`}>
           <SVGComponent clsName={`${styles['alert-icon']}`} src="icons/increase/increase" />
-          {`Price Increased by ${priceVal.toFixed(2)} ${cur} (${percent}%)`}
+          {`${WISH_LIST_PAGE.PRICE_INCREASED_BY} ${priceVal.toFixed(2)} ${cur} (${percent}%)`}
         </span>
       );
-    } else {
+    } else if (percent < 0) {
       str = (
         <span className={`${styles['success-green']} ${styles.flex}`}>
           <SVGComponent clsName={`${styles['alert-icon']}`}src="icons/decrease/decrease" />
-          {`Price Decreased by ${priceVal.toFixed(2)} ${cur} (${percent}%)`}
+          {`${WISH_LIST_PAGE.PRICE_DECRECED_BY} ${priceVal.toFixed(2)} ${cur} (${percent}%)`}
         </span>
       );
     }

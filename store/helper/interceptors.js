@@ -7,7 +7,7 @@ import constants from './constants';
 import { pimServiceInstance } from './services';
 import Cookie from 'universal-cookie';
 import { toast } from 'react-toastify';
-
+import ToastContent from '../../components/common/ToastContent';
 import Sentry from '../../utils/sentryUtil';
 
 const config = getConfig()
@@ -85,7 +85,12 @@ const errorInterceptor = (err) => {
       if (err.response.status === '403') {
         cookies.remove('auth');
       }
-      toast.error(err.response.data.message || err.response.data.data.error.message);
+      toast(
+        <ToastContent
+          msg={err.response.data.message || err.response.data.data.error.message}
+          msgType='error'
+        />
+      )
       notifySentry(err);
     }
   } catch (e) {

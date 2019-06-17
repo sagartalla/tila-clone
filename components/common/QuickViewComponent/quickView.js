@@ -57,18 +57,18 @@ class QuickView extends Component {
             onClose,renderProductPage, newproductId } = this.props
 
     if(!isProductLoaded.isProductLoaded) {
-      return <div className={`${styles['mr-20']} ${styles['quick-view']}`}>{`${PAYMENT_PAGE.PLEASE_WAIT} ${PDP_PAGE.PRODUCT_DETAILS} ${PAYMENT_PAGE.LOADING}`}</div>
+      return <div className={`${styles['mr-12']} ${styles['quick-view']}`}>{`${PAYMENT_PAGE.PLEASE_WAIT} ${PDP_PAGE.PRODUCT_DETAILS} ${PAYMENT_PAGE.LOADING}`}</div>
     }
     if(getErrorMessage) {
-      return <div className={`${styles['mr-20']} ${styles['quick-view']}`}>{getErrorMessage}</div>
+      return <div className={`${styles['mr-12']} ${styles['quick-view']}`}>{getErrorMessage}</div>
     }
     if(isProductLoaded.productDetails && (isProductLoaded.productDetails.product_id !== productId && isProductLoaded.productDetails.product_id !== newproductId)) {
-      return <div className={`${styles['mr-20']} ${styles['quick-view']}`}>{`${PAYMENT_PAGE.PLEASE_WAIT} ${SEARCH_PAGE.SEARCH_RESULTS_FOR} ${SEARCH_PAGE.DATA}`}</div>
+      return <div className={`${styles['mr-12']} ${styles['quick-view']}`}>{`${PAYMENT_PAGE.PLEASE_WAIT} ${SEARCH_PAGE.SEARCH_RESULTS_FOR} ${SEARCH_PAGE.DATA}`}</div>
     }
     const Product = this.product
 
     return (
-      <div className={`${styles['mr-20']} ${styles['quick-view']}`}>
+      <div className={`${styles['mr-12']} ${styles['quick-view']}`}>
         <div
           onClick={onClose}
           className={
