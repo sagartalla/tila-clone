@@ -3,7 +3,7 @@ import { Row, Col } from 'react-bootstrap';
 import moment from 'moment';
 import Cookie from 'universal-cookie';
 
-import { Link } from '../../../routes'
+import { Link } from '../../../routes';
 import Warranty from '../../Product/includes/Warranty';
 import CartStepper from './CartStepper';
 import SVGComponent from '../../common/SVGComponet';

@@ -3,9 +3,9 @@ import Slider from "react-slick";
 import { Grid } from 'react-bootstrap';
 
 import constants from '../../../../constants';
-
+import { Link } from '../../../../routes';
 import { languageDefinations } from '../../../../utils/lang/';
-
+import Cookie from 'universal-cookie';
 import lang from '../../../../utils/language';
 
 import main_en from '../../../../layout/main/main_en.styl';
@@ -16,7 +16,10 @@ import styles_ar from '../wishlist_ar.styl';
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const { WISH_LIST_PAGE, PDP_PAGE } = languageDefinations();
+const cookies = new Cookie();
 
+const language = cookies.get('language') || 'en';
+const country = cookies.get('country') || 'SAU';
 
 class CartBottomPopup extends Component {
   render() {
@@ -44,12 +47,14 @@ class CartBottomPopup extends Component {
           <Slider {...settings} className={styles['cart-wishlist-popup-inn']}>
             {
               data.length > 0 && data.map((item, i) => {
-                const { product_id, wishlist_id, listing_id, name, img, price, cur, inventory_count, buttonValue } = item;
+                const { product_id, wishlist_id, listing_id, name, img, price, cur, inventory_count, buttonValue, variant_id, catalogId, itemType } = item;
                 return (
                   <div key={i} className={`${styles['item']} ${styles['flex']} ${styles['flex-colum']}`}>
-                    <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles['wish-pop-img']}`}><img className={styles['img']} src={`${constants.mediaDomain}/${img}`} /></div>
+                  <Link route={`/${country}/${language}/product?productId=${product_id}${variant_id ? `&variantId=${variant_id}` : ''}&catalogId=${catalogId}&itemType=${itemType}`}>
+                    <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles['wish-pop-img']}`}><img className={styles['img']} src={`${constants.mediaDomain}/${img}`} /></div></Link>
                     <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']}`}>
-                      <h5 className={`${styles['label-gry-clr']} ${styles['fs-12']} ${styles['t-c']} ${styles['cart-wishlist-title']}`}>{name}</h5>
+                    <Link route={`/${country}/${language}/product?productId=${product_id}${variant_id ? `&variantId=${variant_id}` : ''}&catalogId=${catalogId}&itemType=${itemType}`}>
+                      <h5 className={`${styles['label-gry-clr']} ${styles['fs-12']} ${styles['t-c']} ${styles['cart-wishlist-title']}`}>{name}</h5></Link>
                       <span className={`${styles['light-gry-clr']} ${styles['t-c']}`}>
                         <span className={styles['fs-20']}>{price}</span> <span className={styles['fs-14']}> {cur}</span>
                       </span>
