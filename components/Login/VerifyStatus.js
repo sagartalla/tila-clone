@@ -72,7 +72,7 @@ class VerifyStatus extends React.Component {
 
   render() {
     const { showInput } = this.state;
-    const { showEmailSuccess, showOtpSuccess, loadingStatus, userData } = this.props;
+    const { showEmailSuccess, showOtpSuccess, loadingStatus, userData, activeEmailId } = this.props;
     return (
       <div className={`${styles['forgot-password']} ${styles.flex} ${styles['flex-colum']} ${styles['justify-around']}`}>
         <div>
@@ -82,16 +82,16 @@ class VerifyStatus extends React.Component {
           <React.Fragment>
             <div className={styles['reset-link']}>
               <Row className={`${styles.flex}`}>
-                <Col md={8} className={`${styles['fs-14']}`}>{resetEmailLink}</Col>
-                <Col md={4} className={`${styles.flex}`}><SVGComponent clsName={`${styles['email-success-icon']}`} src="icons/common-icon/email-sent" /></Col>
+                <Col md={7} className={`${styles['fs-14']}`}><span className={`${styles.flex} ${styles['flex-colum']}`}><span>{resetEmailLink}</span><span>{userData && userData.email}</span></span></Col>
+                <Col md={5} className={`${styles.flex}`}><SVGComponent clsName={`${styles['email-success-icon']}`} src="icons/common-icon/email-sent" /></Col>
               </Row>
               <a className={`${styles['text-blue']} ${styles['fs-12']} ${styles.pointer}`} data-id="email" onClick={this.sendLink}>{EMAIL_VERIFICATION.RESEND_THE_LINK}</a>
-              <div className={`${styles.border} ${styles['m-10']}`} />
+              <div className={`${styles.border} ${styles['mt-10']} ${styles['mb-10']}`} />
               <div className={`${styles['fs-14']}`}>{EMAIL_VERIFICATION.PLEASE_CLICK_ON_EMAIL_LINK}</div>
               <span className={styles['bg-light-gray']}>
                 <div className={`${styles['fs-12']}`}>
                   {EMAIL_VERIFICATION.IF_YOU_DO_NOT_RECEIVE_YOUR_EMAIL}
-                  {EMAIL_VERIFICATION.CHECK_YOUR_SPAM_FOLDER}
+                  &nbsp;{EMAIL_VERIFICATION.CHECK_YOUR_SPAM_FOLDER}
                 </div>
               </span>
             </div>

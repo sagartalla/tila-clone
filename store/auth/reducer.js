@@ -439,11 +439,11 @@ const authReducer = typeToReducer({
       const { data } = state;
       if (action && action.payload && action.payload.data && action.payload.data.Response && action.payload.data.Response === 'SUCCESS') {
         data.showLoginScreen = true;
+        data.showResetScreen = false;
       }
       return Object.assign({}, state, {
         data: {
           ...state.data,
-          showResetScreen: false,
         },
         ui: { loading: false },
       });
@@ -464,10 +464,13 @@ const authReducer = typeToReducer({
       },
     }),
     FULFILLED: (state, action) => {
+      const { data } = state;
+      if (action && action.payload && action.payload.Response === 'SUCCESS') {
+        data.showEmailSuccess = true;
+      }
       return Object.assign({}, state, {
         data: {
           ...state.data,
-          showEmailSuccess: true,
         },
         ui: { loading: false },
       });
@@ -553,12 +556,14 @@ const authReducer = typeToReducer({
       },
     }),
     FULFILLED: (state, action) => {
-
+      const { data } = state;
+      if (action && action.payload && action.payload.data && action.payload.data.Response === 'SUCCESS') {
+        data.showEmailSuccess = false;
+        data.showOtpSuccess = true;
+      }
       return Object.assign({}, state, {
         data: {
           ...state.data,
-          showOtpSuccess: true,
-          showEmailSuccess: false,
         },
         ui: { loading: false },
       });
