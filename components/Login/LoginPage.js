@@ -8,6 +8,7 @@ import SocialLogin from './SocialLogin';
 import { selectors, actionCreators } from '../../store/auth';
 import SVGComponent from '../common/SVGComponet';
 import Button from '../common/CommonButton';
+import FormValidator from '../common/FormValidator';
 import lang from '../../utils/language';
 import { languageDefinations } from '../../utils/lang';
 
@@ -23,9 +24,24 @@ class LoginPage extends React.Component {
   constructor() {
     super();
     const email = localStorage.getItem('remember') ? JSON.parse(localStorage.getItem('remember')).email : '';
+    this.validations = new FormValidator([
+      {
+        field: 'email',
+        method: this.emptyEmail,
+        message: 'Please fill the email',
+        validWhen: false,
+      },
+      {
+        field: 'email',
+        method: this.checkValidation,
+        args: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+        validWhen: true,
+        message: 'Please enter valid email ID',
+      },
+    ]);
     this.state = {
       email,
-      emailErr: false,
+      validation: this.validations.valid(),
     };
   }
 
@@ -35,26 +51,37 @@ class LoginPage extends React.Component {
     });
   }
 
-  handleValidation = ({ target }) => {
-    const emailReg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-    this.setState({
-      emailErr: !emailReg.test(target.value),
-    });
+  emptyEmail = (fieldValue) => {
+    if (fieldValue === '') {
+      return true;
+    }
+    return false;
+  }
+
+  checkValidation = (fieldValue, state, args) => args.test(fieldValue)
+  
+  handleValidation = () => {
+    const { email } = this.state;
+    const validation = this.validations.validateOnBlur({ email });
+
+    this.setState({ validation });
   }
 
   submit = (e) => {
     e.preventDefault();
-    const { email, emailErr } = this.state;
+    const { email } = this.state;
+    const validation = this.validations.validate(this.state);
     const { userLogin } = this.props;
-    if (!emailErr) {
+    if (validation.isValid) {
       userLogin(email);
     }
+    this.setState({ validation });
   }
 
   render() {
     const { loadingStatus } = this.props;
-    const { email, emailErr } = this.state;
+    const { email, validation } = this.state;
     return (
       <div className={`${styles['login-form']} ${styles['flx-space-bw']} ${styles['flex-colum']}`}>
         <div>
@@ -103,8 +130,12 @@ class LoginPage extends React.Component {
                   <span className={styles.highlight} />
                   <span className={styles.bar} />
                   <label>{LOGIN_PAGE.LOGIN_INPUT_EMAIL_ENTER}</label>
-                  {emailErr &&
-                    <span className={`${styles['error-msg']}`}>correct it</span>}
+                  {
+                    validation.email && validation.email.isInValid ?
+                      <div>
+                        <span className={`${styles['error-msg']}`}>{validation.email.message}</span>
+                      </div> : null
+                  }
                 </div>
                 <Button
                   className={`${styles['flex-center']} ${styles['sign-in-btn']} ${styles.fontW700} ${styles.width100} ${styles['fs-14']} ${styles['text-uppercase']}`}

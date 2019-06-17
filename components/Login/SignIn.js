@@ -7,6 +7,7 @@ import Button from '../common/CommonButton';
 import { languageDefinations } from '../../utils/lang';
 import ShowHidePassword from './ShowHidePassword';
 import { selectors, actionCreators } from '../../store/auth';
+import FormValidator from '../common/FormValidator';
 
 import lang from '../../utils/language';
 
@@ -23,13 +24,52 @@ const { LOGIN_PAGE, HEADER_PAGE } = languageDefinations();
 class SignIn extends Component {
   constructor(props) {
     super(props);
-    const password = localStorage.getItem('remember') ? JSON.parse(localStorage.getItem('remember')).password : '';
+    this.validations = new FormValidator([
+      {
+        field: 'password',
+        method: this.emptyValue,
+        message: props.mode === 'NEW_USER' ? 'Please enter password' : 'Please enter your password',
+        validWhen: false,
+      },
+      {
+        field: 'password',
+        method: props.mode === 'NEW_USER' ? this.passwordValidation : () => false,
+        validWhen: false,
+        message: 'Please enter valid password',
+      },
+      {
+        field: 'first_name',
+        method: props.mode === 'NEW_USER' ? this.emptyValue : () => false,
+        message: 'Please enter firstname',
+        validWhen: false,
+      },
+      {
+        field: 'first_name',
+        method: props.mode === 'NEW_USER' ? this.checkNameValidation : () => false,
+        validWhen: false,
+        message: 'First name should not exceed 30 characteristics',
+      },
+      {
+        field: 'last_name',
+        method: props.mode === 'NEW_USER' ? this.emptyValue : () => false,
+        message: 'Please enter lastname',
+        validWhen: false,
+      },
+      {
+        field: 'last_name',
+        method: props.mode === 'NEW_USER' ? this.checkNameValidation : () => false,
+        validWhen: false,
+        message: 'Last name should not exceed 30 characteristics',
+      },
+    ]);
     this.state = {
       hide: true,
-      password,
-      passwordErr: false,
+      password: '',
+      first_name: '',
+      last_name: '',
       promotional_notification: false,
       rememberMe: !!localStorage.getItem('remember'),
+      validation: this.validations.valid(),
     };
   }
 
@@ -37,6 +77,23 @@ class SignIn extends Component {
     this.setState({
       [target.name]: target.value,
     });
+  }
+
+  handleValidation = ({ target }) => {
+    const validation = this.validations.validateOnBlur({ [target.name]: target.value });
+    this.setState({ validation });
+  }
+
+  emptyValue = fieldValue => fieldValue === '';
+
+  passwordValidation = (fieldValue) => {
+    if (fieldValue && fieldValue.length >= 8) return false;
+    return true;
+  }
+
+  checkNameValidation = (fieldValue) => {
+    if (fieldValue && fieldValue.length >= 30) return false;
+    return false;
   }
 
   handleCheck = ({ target }) => {
@@ -70,10 +127,13 @@ class SignIn extends Component {
       first_name, last_name, password, rememberMe, promotional_notification,
     } = this.state;
     const {
-      activeEmailId, userLogin, mode, newUserRegister,
+      activeEmailId, userLogin, mode,
     } = this.props;
+
+    const validation = this.validations.validate(this.state);
+    console.log(validation, 'wcchedgy');
     if (mode === 'EXISTING_USER') {
-      if (password) {
+      if (validation.isValid) {
         const serverData = {
           channel: 'BASIC_AUTH',
           metadata: {
@@ -88,13 +148,9 @@ class SignIn extends Component {
           localStorage.removeItem('remember');
         }
         userLogin(serverData);
-      } else {
-        this.setState({
-          passwordErr: true,
-        });
       }
     } else if (mode === 'NEW_USER') {
-      if (password && first_name && last_name) {
+      if (validation.isValid) {
         const serverData = {
           channel: 'BASIC_REGISTER',
           metadata: {
@@ -109,12 +165,9 @@ class SignIn extends Component {
           rememberMe,
         };
         userLogin(serverData, 'register');
-      } else {
-        this.setState({
-          passwordErr: true,
-        });
       }
     }
+    this.setState({ validation });
   }
 
   // handling three cases
@@ -123,7 +176,7 @@ class SignIn extends Component {
   // 3. User signup through social login
   render() {
     const {
-      hide, promotional_notification, password, rememberMe, passwordErr, first_name, last_name,
+      hide, promotional_notification, password, rememberMe, passwordErr, first_name, last_name, validation,
     } = this.state;
     const { showForgotPassword, mode, activeEmailId, loadingStatus } = this.props;
     return (
@@ -142,16 +195,21 @@ class SignIn extends Component {
               name="password"
               type={hide ? 'password' : 'text'}
               className={`${styles.width100}`}
-              onChange={this.handleOnChange}
               autoComplete="off"
               value={password}
+              onChange={this.handleOnChange}
+              onBlur={this.handleValidation}
               required
             />
             <label className={`${styles['label-light-grey']}`}>
               {mode === 'NEW_USER' ? LOGIN_PAGE.SET_PASSWORD : mode === 'EXISTING_USER' ? LOGIN_PAGE.ENTER_PASSWORD : LOGIN_PAGE.ENTER_YOUR_EMAIL_ID}
             </label>
-            {passwordErr &&
-              <span className={`${styles['error-msg']}`}>Required</span>}
+            {
+              validation.password && validation.password.isInValid ?
+                <div>
+                  <span className={`${styles['error-msg']}`}>{validation.password.message}</span>
+                </div> : null
+            }
             {mode !== 'SOCIAL_LOGIN' && <ShowHidePassword hide={hide} hideToggle={this.hideToggle} />}
           </div>
         </div>
@@ -164,10 +222,17 @@ class SignIn extends Component {
               autoComplete="off"
               className={`${styles.width100}`}
               onChange={this.handleOnChange}
+              onBlur={this.handleValidation}
               value={first_name}
               required
             />
             <label className={`${styles['label-light-grey']}`}>{LOGIN_PAGE.FIRST_NAME}</label>
+            {
+              validation.first_name && validation.first_name.isInValid ?
+                <div>
+                  <span className={`${styles['error-msg']}`}>{validation.first_name.message}</span>
+                </div> : null
+            }
           </div>
           <div className={`${styles['fp-input']} ${styles['pb-10']}`}>
             <input
@@ -176,10 +241,17 @@ class SignIn extends Component {
               autoComplete="off"
               className={`${styles.width100}`}
               onChange={this.handleOnChange}
+              onBlur={this.handleValidation}
               value={last_name}
               required
             />
             <label className={`${styles['label-light-grey']}`}>{LOGIN_PAGE.LAST_NAME}</label>
+            {
+              validation.last_name && validation.last_name.isInValid ?
+                <div>
+                  <span className={`${styles['error-msg']}`}>{validation.last_name.message}</span>
+                </div> : null
+            }
           </div>
         </React.Fragment>
         }

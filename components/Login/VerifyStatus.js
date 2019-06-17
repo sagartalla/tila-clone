@@ -10,6 +10,7 @@ import Button from '../common/CommonButton';
 import OTPInput from './OTPInput';
 import SVGComponent from '../common/SVGComponet';
 import Timer from '../common/Timer';
+import FormValidator from '../common/FormValidator';
 import main_en from '../../layout/main/main_en.styl';
 import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './login_en.styl';
@@ -25,8 +26,17 @@ const resetMobileLink = LOGIN_PAGE.OTP_SENT_TO_YOUR_REGISTERED_MAIL;
 class VerifyStatus extends React.Component {
   constructor(props) {
     super(props);
+    this.validations = new FormValidator([
+      {
+        field: 'otpValue',
+        method: this.emptyValue,
+        message: 'OTP should not be empty',
+        validWhen: false,
+      },
+    ]);
     this.state = {
       otpValue: '',
+      validation: this.validations.valid(),
     };
     this.sendLink = this.sendLink.bind(this);
   }
@@ -55,24 +65,40 @@ class VerifyStatus extends React.Component {
     });
   }
 
+
+  emptyValue = fieldValue => fieldValue === '';
+
+  otpValidation = (fieldValue) => {
+    if (fieldValue && fieldValue.length < 4) return false;
+    return true;
+  }
+
   sentOtpToReset = () => {
     const { verifyResetOtp, activeEmailId, v2CurrentFlow } = this.props;
     const { otpValue } = this.state;
-    const body = {
-      email: activeEmailId,
-      otp: Number(otpValue),
-    };
-    verifyResetOtp(body).then((res) => {
-      const data = { currentFlow: 'forgot_password_reset', nextPage: 'reset_screen' };
-      if (res && res.value && res.value.status && res.value.status === 200) {
-        v2CurrentFlow(data);
-      }
+    const validation = this.validations.validate(this.state);
+    if (validation.isValid) {
+      const body = {
+        email: activeEmailId,
+        otp: Number(otpValue),
+      };
+      verifyResetOtp(body).then((res) => {
+        const data = { currentFlow: 'forgot_password_reset', nextPage: 'reset_screen' };
+        if (res && res.value && res.value.status && res.value.status === 200) {
+          v2CurrentFlow(data);
+        }
+      });
+    }
+    this.setState({
+      validation,
     });
   }
 
   render() {
-    const { showInput } = this.state;
-    const { showEmailSuccess, showOtpSuccess, loadingStatus, userData, activeEmailId } = this.props;
+    const { validation } = this.state;
+    const {
+      showEmailSuccess, showOtpSuccess, loadingStatus, userData, activeEmailId,
+    } = this.props;
     return (
       <div className={`${styles['forgot-password']} ${styles.flex} ${styles['flex-colum']} ${styles['justify-around']}`}>
         <div>
@@ -118,14 +144,21 @@ class VerifyStatus extends React.Component {
               <span className={styles['black-color']}><Timer time={30} /></span>
             </div>
           </div>
-          <div className={`${styles.flex} ${styles['mb-5']}`}>
+          <div className={`${styles['flex-center']} ${styles['mb-5']} ${styles['flex-colum']}`}>
             <OTPInput
               containerStyle={`${styles['justify-center']}`}
               inputStyle={`${styles['border-none']} ${styles['border-b']}`}
               separator={<span>&nbsp;&nbsp;</span>}
               onChange={otp => this.saveOtp(otp)}
             />
+            {
+                    validation.otpValue && validation.otpValue.isInValid ?
+                      <div className={`${styles['mt-10']}`}>
+                        <span className={`${styles['error-msg']}`}>{validation.otpValue.message}</span>
+                      </div> : null
+                   }
           </div>
+
           <Button
             className={`${styles['flex-center']}  ${styles.width100} ${styles['fs-14']} ${styles['text-uppercase']} ${styles['button-radius']}`}
             btnText={LOGIN_PAGE.NEXT}

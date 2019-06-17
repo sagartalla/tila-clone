@@ -9,6 +9,7 @@ import SVGComponent from '../common/SVGComponet';
 import Button from '../common/CommonButton';
 import lang from '../../utils/language';
 import ShowHidePassword from './ShowHidePassword';
+import FormValidator from '../common/FormValidator';
 
 import main_en from '../../layout/main/main_en.styl';
 import main_ar from '../../layout/main/main_ar.styl';
@@ -23,11 +24,25 @@ const { LOGIN_PAGE } = languageDefinations();
 class ResetPasswordMain extends Component {
   constructor(props) {
     super(props);
+    this.validations = new FormValidator([
+      {
+        field: 'password',
+        method: this.emptyValue,
+        message: 'Password should not be empty',
+        validWhen: false,
+      },
+      {
+        field: 'password',
+        method: this.passwordValidation,
+        validWhen: false,
+        message: 'Password must be atleast 8 characters',
+      },
+    ]);
     this.state = {
       password: '',
       hide: true,
-      showModal: true,
       errorMsg: false,
+      validation: this.validations.valid(),
     };
     this.passwordSuccess = this.passwordSuccess.bind(this);
   }
@@ -35,8 +50,20 @@ class ResetPasswordMain extends Component {
   onChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value,
-      errorMsg: '',
     });
+  }
+
+
+  handleValidation = ({ target }) => {
+    const validation = this.validations.validateOnBlur({ [target.name]: target.value });
+    this.setState({ validation });
+  }
+
+  emptyValue = fieldValue => fieldValue === '';
+
+  passwordValidation = (fieldValue) => {
+    if (fieldValue && fieldValue.length >= 8) return false;
+    return true;
   }
 
   hideToggle = () => {
@@ -48,16 +75,12 @@ class ResetPasswordMain extends Component {
 
   passwordSuccess() {
     const { password } = this.state;
-    let { errorMsg } = this.state;
+    const validation = this.validations.validate(this.state);
     const { resetToken } = this.props;
-    if (password === '') {
-      errorMsg = 'Password should not be empty';
-    } else if (password.length < 8 || password.length > 30) {
-      errorMsg = 'Password must be atleast 8 characters';
-    } else {
+    if (validation.isValid) {
       const body = {
         password,
-        token: resetToken ? resetToken : this.props.token,
+        token: resetToken || this.props.token,
       };
       this.props.resetPassword(body).then((res) => {
         if (res && res.value && res.value.data && res.value.data.Response === 'SUCCESS') {
@@ -68,25 +91,25 @@ class ResetPasswordMain extends Component {
       });
     }
     this.setState({
-      errorMsg,
+      validation,
     });
   }
   render() {
     const {
-      password, hide, errorMsg,
+      password, hide, validation,
     } = this.state;
     const { showCrossButton, loadingStatus } = this.props;
     return (
-        <React.Fragment>
-            {showCrossButton &&
-          <div className={`${styles.flex} ${styles['align-center']} ${styles['justify-between']} ${styles['flex-row']}`}>
-            <div className={`${styles.flex} ${styles['mt-10']} ${styles.pointer}`} onClick={this.props.onBackdropClick}>
-              <SVGComponent clsName={`${styles['cross-icon']}`} src="icons/common-icon/cross-button" />
-            </div>
-          </div>}
-          <div className={`${styles.flex}`}>
-            <Col md={8} xs={12} sm={8} className={`${styles['bg-white']} ${styles.width100} ${styles['border-radius4']}`}>
-              <div className={`${styles['reset-password']} ${styles.flex} ${styles['justify-between']} ${styles['flex-colum']}`}>
+      <React.Fragment>
+        {showCrossButton &&
+        <div className={`${styles.flex} ${styles['align-center']} ${styles['justify-between']} ${styles['flex-row']}`}>
+          <div className={`${styles.flex} ${styles['mt-10']} ${styles.pointer}`} onClick={this.props.onBackdropClick}>
+                <SVGComponent clsName={`${styles['cross-icon']}`} src="icons/common-icon/cross-button" />
+              </div>
+        </div>}
+        <div className={`${styles.flex}`}>
+          <Col md={8} xs={12} sm={8} className={`${styles['bg-white']} ${styles.width100} ${styles['border-radius4']}`}>
+            <div className={`${styles['reset-password']} ${styles.flex} ${styles['justify-between']} ${styles['flex-colum']}`}>
                 <div className={`${styles['reset-main']} ${styles['m-0']} ${styles['flex-center']} ${styles['justify-around']} ${styles['p-10']} ${styles.width100}`}>
                   <div className={`${styles['fs-20']} ${styles.width35}`}>{LOGIN_PAGE.RESET_PASSWORD}</div>
                   <div className={`${styles.flex}`}><SVGComponent clsName={`${styles['reset-password-icon']}`} src="icons/common-icon/reset-password" /></div>
@@ -102,11 +125,17 @@ class ResetPasswordMain extends Component {
                     value={password}
                     className={`${styles.width100}`}
                     onChange={this.onChange}
+                    onBlur={this.handleValidation}
                     required
                   />
                   <label className={`${styles['label-light-grey']}`}>{LOGIN_PAGE.ENTER_NEW_PASSWORD}</label>
                   <ShowHidePassword hide={hide} hideToggle={this.hideToggle} />
-                  <div className={`${styles['thick-red']} ${styles['fs-12']}`}>{errorMsg}</div>
+                  {
+                    validation.password && validation.password.isInValid ?
+                      <div>
+                        <span className={`${styles['error-msg']}`}>{validation.password.message}</span>
+                      </div> : null
+                   }
                 </div>
                 <Button
                   className={`${styles['flex-center']} ${styles.width100} ${styles['fs-14']} ${styles['text-uppercase']} ${styles['button-radius']}`}
@@ -115,9 +144,9 @@ class ResetPasswordMain extends Component {
                   btnText={LOGIN_PAGE.NEXT}
                 />
               </div>
-            </Col>
-          </div>
-        </React.Fragment>
+          </Col>
+        </div>
+      </React.Fragment>
 
     );
   }
