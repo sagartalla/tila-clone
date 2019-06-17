@@ -174,15 +174,21 @@ class Compare extends Component {
                       </div>
                     </div>
                     <div className={`${styles.flex} ${styles['justify-center']}`}>
-                      <Button
-                        className={product.addedToCart ? `${styles['p-10']} ${styles['flex-center']} ${styles['added-btn']}` : `${styles['p-10']} ${styles['flex-center']} ${styles['cart-btn']}`}
-                        id={product.listing_id}
-                        onClick={product.addedToCart ? () => {} : this.addToCart}
-                        btnText={product.addedToCart ? PDP_PAGE.ADDED_TO_CART : PDP_PAGE.ADD_TO_CART}
-                        showImage={product.addedToCart && 'icons/cart/added-cart-icon'}
-                        btnLoading={cartButtonLoaders && cartButtonLoaders[product.listing_id]}
-                        hoverClassName="hoverBlueBackground"
-                      />
+                      {
+                        product.listing_id
+                        ?
+                          <Button
+                            className={product.addedToCart ? `${styles['p-10']} ${styles['flex-center']} ${styles['added-btn']}` : `${styles['p-10']} ${styles['flex-center']} ${styles['cart-btn']}`}
+                            id={product.listing_id}
+                            onClick={product.addedToCart ? () => {} : this.addToCart}
+                            btnText={product.addedToCart ? PDP_PAGE.ADDED_TO_CART : PDP_PAGE.ADD_TO_CART}
+                            showImage={product.addedToCart && 'icons/cart/added-cart-icon'}
+                            btnLoading={cartButtonLoaders && cartButtonLoaders[product.listing_id]}
+                            hoverClassName="hoverBlueBackground"
+                          />
+                        :
+                          <span>Out of Stock</span>
+                      }
                     </div>
                     {compareCount > 1 && <span className={`${styles['close-item']} ${styles.pointer}`} data-prod-id={product.id} onClick={this.removeItem}>x</span>}
                   </div>

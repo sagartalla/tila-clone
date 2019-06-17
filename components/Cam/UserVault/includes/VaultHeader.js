@@ -20,7 +20,7 @@ const VaultHeader = (props) => {
     <div className={`${styles['vault-card-header']}`}>
       <Row>
         <Col md={12} sm={12} xs={12}>
-          <div className={`${styles['flex']} ${styles['flex-center']} ${styles['p-20-40']}`}>
+          <div className={`${styles['flex']} ${styles['flex-center']} ${styles['p-15']}`}>
             <SVGComponent clsName={`${styles['cards-vocher']}`} src="icons/cam/uservault/manage-vault" />
             <div className={`${styles['pl-15']}`}>
               <h1 className={`${styles['fontW600']} ${styles['fs-20']} ${styles['m-0']}`}>{VAULT_PAGE.MANAGE_VAULT_HDR}</h1>
