@@ -244,7 +244,7 @@ class ContinueLogin extends Component {
             </div>
           </Col>
           <Col md={6}>
-            <div className={`${styles['thick-gry-clr']} ${styles['fs-14']}`}>Gender</div>
+            <div className={`${styles['thick-gry-clr']} ${styles['fs-14']}`}>{PERSONAL_INFO_MODAL.GENDER}</div>
             <div className={`${styles['mt-5']} ${styles['gender-select-main']} ${styles['flex-center']}`}>
               <div className={styles['t-c']}>
                   <a onClick={this.handleGenderChange('M')}>
@@ -266,7 +266,7 @@ class ContinueLogin extends Component {
           btnText={LOGIN_PAGE.COMPLETE_SIGN_UP}
           onClick={this.submit}
         />
-        <a className={`${styles['t-c']} ${styles['mb-20']}`}>Skip and Continue</a>
+        <a className={`${styles['t-c']} ${styles['mb-20']}`}>{LOGIN_PAGE.SKIP_AND_CONTINUE}</a>
       </div>
     );
   }

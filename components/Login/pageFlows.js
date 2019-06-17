@@ -8,8 +8,10 @@ import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './login_en.styl';
 import styles_ar from './login_ar.styl';
 
+// import { actionCreators } from './actions';
+
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
-const { LOGIN_PAGE } = languageDefinations();
+const { CONTACT_INFO_MODAL, LOGIN_PAGE } = languageDefinations();
 
 const pageFlows = {
   existing_user_login: {
@@ -25,8 +27,8 @@ const pageFlows = {
       activePage: 'thank_you',
       text: (
         <div>
-          <h2 className={`${styles.fontW600} ${styles['fs-22']} ${styles['mb-0']}`}>Thank you</h2>
-          <div>for Signing up with us!</div>
+          <h2 className={`${styles.fontW600} ${styles['fs-22']} ${styles['mb-0']}`}>{CONTACT_INFO_MODAL.THANK_YOU}</h2>
+          <div>{LOGIN_PAGE.FOR_SIGNING_UP_WITH_US}</div>
         </div>
       ),
       nextPage: null,
@@ -49,8 +51,8 @@ const pageFlows = {
       activePage: 'thank_you',
       text: (
         <div>
-          <h2 className={`${styles.fontW600} ${styles['fs-22']} ${styles['mb-0']}`}>Thank you</h2>
-          <div>for Signing up with us!</div>
+          <h2 className={`${styles.fontW600} ${styles['fs-22']} ${styles['mb-0']}`}>{CONTACT_INFO_MODAL.THANK_YOU}</h2>
+          <div>{LOGIN_PAGE.FOR_SIGNING_UP_WITH_US}</div>
         </div>
       ),
       nextPage: null,
@@ -78,7 +80,7 @@ const pageFlows = {
     thank_you: {
       activePage: 'thank_you',
       text: (
-        <div className={`${styles['fs-18']} ${styles.fontW600}`}>Your password was Reset successfully</div>
+        <div className={`${styles['fs-18']} ${styles.fontW600}`}>{LOGIN_PAGE.PASSWORD_RESET_SUCCESSFULL}</div>
       ),
       nextPage: null,
     },

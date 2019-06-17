@@ -75,13 +75,13 @@ class LoginPage extends React.Component {
                       <a className={`${styles.flex} ${styles['ml-15']}`}>
                         <SVGComponent clsName={`${styles['bg-FB-icon']} ${styles['mr-10']}`} src="icons/social-icons/bg-facebook" />
                       </a>
-                      Facebook
+                      {LOGIN_PAGE.FACEBOOK}
                     </div>
                     <div onClick={handleSocialLogin('google')} className={`${styles['flex-center']} ${styles.pointer} ${styles['border-lg']} ${styles['border-radius4']} ${styles['mb-5']} ${styles['p-5']}`}>
                       <a className={`${styles.flex} ${styles['ml-15']}`}>
                         <SVGComponent clsName={`${styles['bg-GOOGLE-icon']} ${styles['mr-10']}`} src="icons/social-icons/bg-google" />
                       </a>
-                      Google
+                      {LOGIN_PAGE.GOOGLE}
                     </div>
                   </NoSSR>
                 )}

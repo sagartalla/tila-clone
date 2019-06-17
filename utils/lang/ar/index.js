@@ -604,6 +604,12 @@ export const AR_KEYWORDS = {
     SOCIAL_LOGIN_CONTINUE_MESSAGE: 'You can continue log in using the below social media platform as you have linked it with your account.',
     LOGIN_ENTER_EMAIL: 'Enter Email',
     LOGIN_INPUT_EMAIL_ENTER: 'Enter your email ID*',
+    RESET_PASSWORD_BY_EMAIL: 'Reset Password by Email:',
+    RESET_PASSWORD_BY_MOBILE: 'Reset by Mobile OTP:',
+    SKIP_AND_CONTINUE: 'Skip and Continue',
+    FACEBOOK: 'Facebook',
+    GOOGLE: 'Google',
+    FOR_SIGNING_UP_WITH_US: 'for Signing up with us!',
   },
   ORDER_PAGE: {
     LOADING: 'تحميل',
