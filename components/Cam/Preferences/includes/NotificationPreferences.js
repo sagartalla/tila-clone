@@ -124,7 +124,7 @@ class NotificationPreferences extends React.Component {
                     />
                   </div>
                   <div className={`${styles['fs-12']} ${styles['pl-65']} ${styles['mt-10']}`}>
-                    <span className={`${styles.fontW600}`}>Note :</span> You will be unscubscribed for the above notifications if you uncheck the boxes.
+                    <span className={`${styles.fontW600}`}>Note :</span> You will be unsubscribed for the above notifications if you uncheck the boxes.
                   </div>
                 </div>
               </Panel.Body>

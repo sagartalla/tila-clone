@@ -32,6 +32,11 @@ class ContactInfo extends React.Component {
   }
 
   handleShow = (showVal, elem) => (e) => {
+    if (showVal === true) {
+      document.getElementsByTagName('BODY')[0].style.overflow = 'hidden';
+    } else {
+      document.getElementsByTagName('BODY')[0].style.overflow = 'auto';
+    }
     this.setState({
       show: showVal,
       element: elem
@@ -47,7 +52,7 @@ class ContactInfo extends React.Component {
         <h4 className={styles['fontW600']}>{CONTACT_INFO_MODAL.HEADING}</h4>
         <div className={`${styles['bb-dashed']} ${styles['flex-center']} ${styles['pt-10']} ${styles['pb-10']}`}>
           <Col xs={12} md={3} className={`${styles['pl-0']} ${styles['pr-0']}`}>
-            <span>{CONTACT_INFO_MODAL.EMAIL}</span>
+            <span className={`${styles['fs-14']} ${styles['thick-gry-clr']}`}>{CONTACT_INFO_MODAL.EMAIL}</span>
           </Col>
           <Col xs={6} md={8} className={`${styles['flex-center']} ${styles['tickmark-part']}`}>
             <span className={styles['pr-20']}>{email}</span>
@@ -63,7 +68,7 @@ class ContactInfo extends React.Component {
         </div>
         <div className={`${styles['flex-center']} ${styles['bb-dashed']} ${styles['pt-10']} ${styles['pb-10']}`}>
           <Col xs={12} md={3} className={`${styles['pl-0']} ${styles['pr-0']}`}>
-            <span>{CONTACT_INFO_MODAL.PASSWORD}</span>
+            <span className={`${styles['fs-14']} ${styles['thick-gry-clr']}`}>{CONTACT_INFO_MODAL.PASSWORD}</span>
           </Col>
           <Col xs={6} md={8}>
             <span> {lastUpdated}</span>
@@ -77,7 +82,7 @@ class ContactInfo extends React.Component {
         <div className={`${styles['flex-center']} ${styles['pt-10']} ${styles['pb-10']}`}>
 
           <Col xs={12} md={3} className={`${styles['pl-0']} ${styles['pr-0']}`}>
-            <span>{CONTACT_INFO_MODAL.PHONE_NUMBER}</span>
+            <span className={`${styles['fs-14']} ${styles['thick-gry-clr']}`}>{CONTACT_INFO_MODAL.PHONE_NUMBER}</span>
           </Col>
           <Col xs={6} md={8} className={`${styles['flex-center']} ${styles['tickmark-part']}`}>
             <span className={styles['pr-20']}>{phoneNum}</span>
@@ -98,7 +103,7 @@ class ContactInfo extends React.Component {
         </div>
         <div className={show ? `${styles['modalContainer']} ${styles['showDiv']}`
           : `${styles['modalContainer']} ${styles['hideDiv']}`}>
-          <div className={`${styles['disabled']}`}></div>
+          <div onClick={this.handleShow(false, '')} className={`${styles['disabled']}`} />
         </div>
         <div className={show ? `${styles['openModal']}` : `${styles['closeModal']}`}>
           <UpdateContactInfoModal
