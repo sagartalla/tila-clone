@@ -209,7 +209,7 @@ class SignIn extends Component {
         <Button
           className={`${styles['sign-in-btn']} ${styles['text-uppercase']}`}
           btnText={HEADER_PAGE.LOGIN}
-          loadingStatus={loadingStatus}       
+          btnLoading={loadingStatus}
           onClick={this.login}
         />
         <span className={`${styles['m-20']} ${styles['t-c']} ${styles['fs-12']} ${styles['register-policy-gray']}`}>{LOGIN_PAGE.BY_LOGIN_I_AGREE_TO_TERMS} <span className={`${styles['text-blue']}`}>{LOGIN_PAGE.T_AND_C}, {LOGIN_PAGE.PRIVACY} {LOGIN_PAGE.AND} {LOGIN_PAGE.COOKIE_POLICY}</span></span>
