@@ -39,7 +39,6 @@ class RenderResults extends Component {
 
   }
   componentWillReceiveProps(nextProps) {
-    debugger;
     console.log('nextProps',nextProps.productId);
     if(nextProps.renderQuickView
       &&
