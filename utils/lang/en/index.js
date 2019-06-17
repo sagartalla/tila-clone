@@ -551,7 +551,7 @@ export const EN_KEYWORDS = {
     MY_ACCOUNT: 'My Account',
     MY_ORDERS: 'My Orders',
     NOTIFICATIONS: 'Notification',
-    HELP_SUPPORT: 'Help & Support',
+    HELP_SUPPORT: 'Customer Support',
     LOGIN: 'Login',
     LOGOUT: 'Logout',
     SELL_WITH_TILA: 'Sell With Tila',
