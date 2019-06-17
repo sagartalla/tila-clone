@@ -207,6 +207,7 @@ export const EN_KEYWORDS = {
     NO_WARRANTY: 'NO WARRANTY',
     WARRANTY: 'WARRANTY',
     PRODUCT_NOT_AVAILABLE: 'Product not available in your country',
+    OFF: 'OFF',
     PRODUCT_OUT_OF_STOCK: 'Product out of stock',
     NOT_AVAIALBLE: 'Not Available',
     BUY_EARN: 'BUY & EARN',

@@ -199,6 +199,7 @@ export const AR_KEYWORDS = {
     NO_WARRANTY: 'لا يوجد أي ضمان',
     WARRANTY: 'الضمان',
     PRODUCT_NOT_AVAILABLE: 'المنتج ليس متوفراً في دولتك',
+    OFF: 'خصم',
     PRODUCT_OUT_OF_STOCK: 'نفذ المنتج',
     NOT_AVAIALBLE: 'ليس متوفراً',
     BUY_EARN: 'اشتري وأحصل على',
