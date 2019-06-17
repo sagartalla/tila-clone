@@ -50,11 +50,12 @@
         text-align: left;
       }
     .item
-      width: 100px;
+      // width: 100px;
       margin: 0 auto;
+      padding 5px
       img
-        width 87px
-        height 87px
+        width 100%
+        height 100%
         margin 0 auto
   .d_items
     padding 20px
@@ -154,6 +155,12 @@
     .d1, .d2
       width 66.56%
       display inline-block
+      &>div
+        padding 2px 5px
+        // height 324px
+    .d3
+      &>div
+        padding 1px 5px
       .d-sub
         // height 324px
     .d3 .d3-sub
@@ -177,7 +184,7 @@
         content ''
       &>div
         display inline-block
-        padding 5px
+        // padding 2px 5px
         position relative
         &>span
           color #fff
@@ -246,6 +253,7 @@
         .btn
           background-color #5c5b5b
 
+
   .display-t-i-hl
     .title
       color #f26b6b
@@ -279,6 +287,15 @@
 .d_item:hover .b_n_c {
   display: flex !important;
 }
+
+.slider-elips
+  width 100%
+  white-space nowrap
+  overflow hidden
+  o-text-overflow ellipsis
+  text-overflow ellipsis
+  float left
+  display inline-block
 
 @media screen and (max-width: 1280px) {
   .home-style-main {

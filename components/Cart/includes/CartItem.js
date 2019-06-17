@@ -19,7 +19,7 @@ import styles_ar from '../cart_ar.styl';
 
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
-const { CART_PAGE, ORDER_PAGE } = languageDefinations();
+const { PDP_PAGE, CART_PAGE, ORDER_PAGE } = languageDefinations();
 
 const cookies = new Cookie();
 
@@ -271,7 +271,7 @@ class CartItem extends React.Component {
                 <Col md={3} sm={3} className={`${styles['pr-5']} ${styles['landscape-cart-price']}`}>
                   {Math.floor(discount) > 5 &&
                     <p className={`${styles['mb-0']} ${styles['fs-12']} ${styles['flex']} ${styles['justify-end']}`}>
-                      <span className={styles['success-green']}>{`${Math.floor(discount)}% OFF`}</span>
+                      <span className={styles['success-green']}>{`${Math.floor(discount)}% ${PDP_PAGE.OFF}`}</span>
                       <span className={`${styles['cross-strike']} ${styles.relative} ${styles['ml-5']}`}>
                         <span className={styles['label-light-grey']}>
                           <span>{mrp}&nbsp;</span>

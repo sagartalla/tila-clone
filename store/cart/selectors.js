@@ -16,41 +16,42 @@ const getCartResults = (store) => {
       newData.total_gift_charges = data.total_gift_charges || {};
       newData.tax = 0;
       newData.item_cnt = data.items.length;
-      newData.currency = data.items[0].listing_info.selling_price_currency;
+      newData.currency = data.items[0].listing_info ? data.items[0].listing_info.selling_price_currency : '';
       newData.coupon_code = data.coupon_code;
       newData.coupon_applied = data.coupon_applied;
       newData.cart_shippable = data.cart_shippable;
       newData.address = data.address;
       newData.applyCouponRequestCount = data.applyCouponRequestCount;
       data.items.map((item, index) => {
+        const listingInfo = item.listing_info || {};
         newData.items[index] = {
           item_id: item.cart_item_id,
-          product_id: item.listing_info.product_id,
-          variant_id: item.listing_info.variant_id,
-          listing_id: item.listing_info.listing_id,
+          product_id: listingInfo.product_id,
+          variant_id: listingInfo.variant_id,
+          listing_id: listingInfo.listing_id,
           cart_item_id: item.cart_item_id,
           name: item.product_details && item.product_details.product_details_vo.cached_product_details.attribute_map.calculated_display_name.attribute_values[0].value,
-          offer_price: item.listing_info.pricing && item.listing_info.pricing.offer_price.display_value,
-          selling_price: item.listing_info.pricing && item.listing_info.pricing.price.display_value,
-          total_amount: item.total_amount.display_value,
-          cur: item.listing_info.selling_price_currency,
+          offer_price: listingInfo.pricing && listingInfo.pricing.offer_price.display_value,
+          selling_price: listingInfo.pricing && listingInfo.pricing.price.display_value,
+          total_amount: item.total_amount && item.total_amount.display_value,
+          cur: listingInfo.selling_price_currency,
           img: img_url + '/' + item && item.product_details && item.product_details.product_details_vo.cached_product_details.media.gallery_media[0].url,
           quantity: item.quantity,
-          inventory: item.listing_info.total_inventory_count,
-          max_limit: item.listing_info.max_limit_per_user,
+          inventory: listingInfo.total_inventory_count,
+          max_limit: listingInfo.max_limit_per_user,
           brand_name: item && item.product_details && item.product_details.catalog_details.attribute_map.brand.attribute_values[0].value,
           gift_info: item.gift_info,
-          shipping: item.listing_info.shipping,
+          shipping: listingInfo.shipping || {},
           catalogId: item.product_details && item.product_details.catalog_details.catalog_id,
           itemType: item.product_details && item.product_details.catalog_details.item_type_name,
-          warranty_duration: item.listing_info.warranty_policy.preferred_policy ?
-          item.listing_info.warranty_policy.policies[item.listing_info.warranty_policy.preferred_policy] : {},
-          discount: item.listing_info.pricing && item.listing_info.pricing.discount_per_mrp,
-          mrp: item.listing_info.pricing && item.listing_info.pricing.mrp.display_value,
-          offerDiscounts: item.listing_info.pricing && item.listing_info.pricing.actions,
-          total_discount: item.listing_info.pricing && item.listing_info.pricing.total_discount_mrp.display_value,
-          variantAttributes: item.product_details && item.product_details.product_details_vo.cached_variant[item.listing_info.variant_id].attribute_map ?
-            Object.values(item.product_details.product_details_vo.cached_variant[item.listing_info.variant_id].attribute_map)
+          warranty_duration: (listingInfo.warranty_policy && listingInfo.warranty_policy.preferred_policy) ?
+          listingInfo.warranty_policy.policies[listingInfo.warranty_policy.preferred_policy] : {},
+          discount: listingInfo.pricing && listingInfo.pricing.discount_per_mrp,
+          mrp: listingInfo.pricing && listingInfo.pricing.mrp.display_value,
+          offerDiscounts: (listingInfo.pricing && listingInfo.pricing.actions) || {},
+          total_discount: listingInfo.pricing && listingInfo.pricing.total_discount_mrp.display_value,
+          variantAttributes: listingInfo.variant_id && item.product_details && item.product_details.product_details_vo.cached_variant[listingInfo.variant_id].attribute_map ?
+            Object.values(item.product_details.product_details_vo.cached_variant[listingInfo.variant_id].attribute_map)
               .filter(attr => attr.visible) : [],
         };
       });
