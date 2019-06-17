@@ -1,14 +1,14 @@
 import api from './api';
 
 const actions = {
-  GET_PAGES: 'GET_PAGES',
+  GET_PAGE: 'GET_PAGE',
 };
 
 const actionCreators = {
-  getPages: (params) => {
+  getPage: (params) => {
     return ({
-      type: actions.GET_PAGES,
-      payload: api.getPages(params),
+      type: actions.GET_PAGE,
+      payload: api.getPage(params),
     })
   }
 };
