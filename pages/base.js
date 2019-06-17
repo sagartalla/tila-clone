@@ -9,30 +9,30 @@ import { actionCreators } from '../store/auth';
 
 // const cookies = new Cookies();
 
-import io from 'socket.io-client';
+//import io from 'socket.io-client';
 
 class Base extends Component {
 
   componentDidMount() {
 
-    this.socket = io();
-    this.socket.on('now', (data) => {
-      console.log('the socket data ::', data);
-    });
+  //   this.socket = io();
+  //   this.socket.on('now', (data) => {
+  //     console.log('the socket data ::', data);
+  //   });
 
-    this.socket.on('connect', (data) =>{
-      console.log("Socket ON Connect Event");
-      this.socket.emit('join', 'Hello from client');
-   });
+  //   this.socket.on('connect', (data) =>{
+  //     console.log("Socket ON Connect Event");
+  //     this.socket.emit('join', 'Hello from client');
+  //  });
 
-    this.socket.on('connectionSuccess',  (data) => {
-        console.log("socket connection success :", data);
-    });
+  //   this.socket.on('connectionSuccess',  (data) => {
+  //       console.log("socket connection success :", data);
+  //   });
      
-    this.socket.on('pagedataupdate', (data) => {
-      console.log('Page Data Update Message');
-      console.log(data.data);
-    })
+  //   this.socket.on('pagedataupdate', (data) => {
+  //     console.log('Page Data Update Message');
+  //     console.log(data.data);
+  //   })
 
     const history = createHistory();
     configureUrlQuery({ history });
