@@ -174,6 +174,8 @@ export const EN_KEYWORDS = {
     NO_WISHLIST_LABEL: 'So many products on Tila and yet you show no love :(',
     DONT_WAIT: 'Dont wait no more!',
     START_SHOPPING: 'Start shopping',
+    PRICE_DECRECED_BY: 'Price Decreased by',
+    PRICE_INCREASED_BY: 'Price Increased by',
   },
   PDP_PAGE: {
     LOADING_REVIEWS: 'Loading Reviews...',
