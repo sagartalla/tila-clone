@@ -149,7 +149,7 @@ class EditPassword extends React.Component {
       <div className={styles['editProfileModal']}>
         <h4 className={`${styles['fs-20']} ${styles['fontW300']} ${styles['flx-space-bw']} ${styles['m-0']}`}>
           <span className={`${styles['lgt-blue']}`}>{EDIT_PASSWORD_MODAL.HEADING}</span>
-          <span onClick={this.handleClose}>X</span>
+          <a className={`${styles['fs-22']} ${styles['black-color']}`} onClick={this.handleClose}>X</a>
         </h4>
         <div>
           <div className={`${styles['flex-center']} ${styles['flex-colum']} ${styles['personal-info-main']}`}>
