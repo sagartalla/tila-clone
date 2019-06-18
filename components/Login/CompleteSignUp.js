@@ -6,6 +6,7 @@ import Cookie from 'universal-cookie';
 import PropTypes from 'prop-types';
 import { languageDefinations } from '../../utils/lang';
 import { actionCreators, selectors } from '../../store/product';
+import { actionCreators as authActionCreators, selectors as authSelectors } from '../../store/auth';
 import SVGComponent from '../common/SVGComponet';
 import Button from '../common/CommonButton';
 import lang from '../../utils/language';
@@ -94,7 +95,13 @@ class ContinueLogin extends Component {
     });
   }
 
+  skipAndContinue = () => {
+    const { v2NextPage } = this.props;
+    v2NextPage();
+  }
+
   submit = () => {
+    const { v2NextPage } = this.props;
     const {
       gender,
       city,
@@ -103,7 +110,6 @@ class ContinueLogin extends Component {
       mobile_no,
       mobile_country_code,
     } = this.state;
-
   }
 
   render() {
@@ -266,7 +272,7 @@ class ContinueLogin extends Component {
           btnText={LOGIN_PAGE.COMPLETE_SIGN_UP}
           onClick={this.submit}
         />
-        <a className={`${styles['t-c']} ${styles['mb-20']}`}>{LOGIN_PAGE.SKIP_AND_CONTINUE}</a>
+        <a className={`${styles['t-c']} ${styles['mb-20']}`} onClick={this.skipAndContinue}>{LOGIN_PAGE.SKIP_AND_CONTINUE}</a>
       </div>
     );
   }
@@ -291,6 +297,7 @@ const mapDispatchToProps = dispatch => bindActionCreators(
   {
     getCitiesByCountryCode: actionCreators.getCitiesByCountryCode,
     autoCompleteCity: actionCreators.autoCompleteCity,
+    v2NextPage: authActionCreators.v2NextPage,
   },
   dispatch,
 );

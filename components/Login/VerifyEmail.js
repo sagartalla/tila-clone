@@ -50,6 +50,7 @@ class VerifyEmail extends Component {
     }
   }
   verifyEmail = () => {
+    const { v2NextPage } = this.props;
     const { value } = this.state;
     if (value === '') {
       this.setState({
@@ -62,6 +63,7 @@ class VerifyEmail extends Component {
       otp: Number(value),
     };
     verifyEmailId(body);
+    v2NextPage();
   }
 
   sendOtpToEmailId = () => {
@@ -133,6 +135,7 @@ const mapDispatchToProps = dispatch => bindActionCreators(
   {
     verifyEmailId: actionCreators.verifyEmailId,
     sendOtpToEmailId: actionCreators.sendOtpToEmailId,
+    v2NextPage: actionCreators.v2NextPage,
   },
   dispatch,
 );
