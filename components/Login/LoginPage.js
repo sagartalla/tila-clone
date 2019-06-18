@@ -68,7 +68,7 @@ class LoginPage extends React.Component {
           </Row>
           <Row className={`${styles['pt-30']} ${styles.flex}`}>
             <Col md={5} xs={12} sm={5} className={`${styles.relative} ${styles.flex} ${styles['flex-colum']} ${styles['justify-center']} ${styles['pr-20']} ${styles['border-rt']}`}>
-              <SocialLogin>
+              <SocialLogin v2CurrentFlow={this.props.v2CurrentFlow}>
                 {([handleSocialLogin]) => (
                   <NoSSR>
                     <div onClick={handleSocialLogin('facebook')} className={`${styles['flex-center']} ${styles.pointer} ${styles['border-lg']} ${styles['border-radius4']} ${styles['mb-5']} ${styles['p-5']}`}>
@@ -130,6 +130,7 @@ const mapStateToProps = store => ({
 const mapDispatchToProps = dispatch => bindActionCreators(
   {
     userLogin: actionCreators.v2UserLogin,
+    v2CurrentFlow: actionCreators.v2CurrentFlow,
     // getLoginInfo: actionCreators.getLoginInfo,
     // resetLoginError: actionCreators.resetLoginError,
     // track: actionCreators.track,

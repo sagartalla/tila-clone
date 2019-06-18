@@ -70,7 +70,7 @@ class SignIn extends Component {
       first_name, last_name, password, rememberMe, promotional_notification,
     } = this.state;
     const {
-      activeEmailId, userLogin, mode, newUserRegister,
+      activeEmailId, userLogin, mode, v2NextPage,
     } = this.props;
     if (mode === 'EXISTING_USER') {
       if (password) {
@@ -114,6 +114,8 @@ class SignIn extends Component {
           passwordErr: true,
         });
       }
+    } else {
+      v2NextPage();
     }
   }
 
@@ -227,7 +229,7 @@ const mapDispatchToProps = dispatch => bindActionCreators(
   {
     v2CurrentFlow: actionCreators.v2CurrentFlow,
     userLogin: actionCreators.userLogin,
-    newUserRegister: actionCreators.v2NextPage,
+    v2NextPage: actionCreators.v2NextPage,
     showUserInfo: actionCreators.showUserInfo,
   },
   dispatch,

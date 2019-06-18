@@ -91,6 +91,30 @@ const pageFlows = {
       nextPage: '',
     },
   },
+  not_accessable_social_user: {
+    details_screen: {
+      activePage: 'details_screen',
+      nextPage: 'verify_email',
+    },
+    verify_email: {
+      activePage: 'verify_email',
+      nextPage: 'shipping_to_page',
+    },
+    shipping_to_page: {
+      activePage: 'shipping_to_page',
+      nextPage: 'thank_you',
+    },
+    thank_you: {
+      activePage: 'thank_you',
+      text: (
+        <div>
+          <h2 className={`${styles.fontW600} ${styles['fs-22']} ${styles['mb-0']}`}>{CONTACT_INFO_MODAL.THANK_YOU}</h2>
+          <div>{LOGIN_PAGE.FOR_SIGNING_UP_WITH_US}</div>
+        </div>
+      ),
+      nextPage: null,
+    },
+  },
 };
 
 export default pageFlows;

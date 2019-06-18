@@ -227,6 +227,10 @@ class Login extends Component {
         return <ExistingSocialLogin />;
       case 'reset_screen':
         return <ResetpasswordMain onBackdropClick={this.onBackdropClick} />;
+      case 'details_screen':
+        return <SignIn />;
+      case 'shipping_to_page':
+        return <CompleteSignUp />;
       default:
         return <LoginPage />;
     }
