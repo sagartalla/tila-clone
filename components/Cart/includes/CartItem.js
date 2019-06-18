@@ -3,7 +3,7 @@ import { Row, Col } from 'react-bootstrap';
 import moment from 'moment';
 import Cookie from 'universal-cookie';
 
-import { Link } from '../../../routes'
+import { Link } from '../../../routes';
 import Warranty from '../../Product/includes/Warranty';
 import CartStepper from './CartStepper';
 import SVGComponent from '../../common/SVGComponet';
@@ -229,7 +229,7 @@ class CartItem extends React.Component {
                     </div>
                     <div data-id={item_id} className={`${styles['checkbox-material']} ${styles['mt-15']}`}>
                       <input data-id={item_id} id={"gift" + item_id} type="checkbox" defaultChecked={checked} onClick={this.giftChecked} />
-                      <label htmlFor={"gift" + item_id}> {CART_PAGE.SEND_GIFT} {(gift_info && gift_info.gift_rate) ? "(" + gift_info.gift_rate + " " + cur + ")" : ''} </label>
+                      <label className={styles['fontW300']} htmlFor={"gift" + item_id}> {CART_PAGE.SEND_GIFT} {(gift_info && gift_info.gift_rate) ? "(" + gift_info.gift_rate + " " + cur + ")" : ''} </label>
                     </div>
                     {checked && showMessage &&
                       <div>
@@ -251,7 +251,7 @@ class CartItem extends React.Component {
                         />
                         <button
                           data-id={item_id}
-                          className={`${styles['ml-5']} ${styles['bg-thick-blue']} ${styles['p-5']} ${styles['white-color']} ${styles['border-radius4']}`}
+                          className={`${styles['ml-20']} ${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['right-radius']} ${styles['text-uppercase']}`}
                           onClick={this.sendGiftPack}
                         >
                           {CART_PAGE.GIFT_PACK}

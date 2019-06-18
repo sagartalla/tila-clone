@@ -1,7 +1,7 @@
 // import styles from './main.styl';
 import React from 'react';
 import { ModalContainer } from 'react-router-modal';
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import { connect } from 'react-redux';
 
 import Betalogo from '../../components/common/Beta'
@@ -29,7 +29,7 @@ const Layout = ({ children, isApiResponseInvalid }) => (
       }
     </div>
     <ModalContainer />
-    <ToastContainer hideProgressBar autoClose={2000} />
+    <ToastContainer hideProgressBar autoClose={2000} closeButton={false} position={toast.POSITION.BOTTOM_CENTER} />
   </div>
 );
 

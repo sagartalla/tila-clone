@@ -2,7 +2,7 @@ import _ from 'lodash';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
 import { toast } from 'react-toastify';
-
+import ToastContent from '../../components/common/ToastContent'
 import constants from '../helper/constants';
 import { languageDefinations } from '../../utils/lang/';
 
@@ -34,7 +34,12 @@ const addToCompare = ({
   const compareItems = getItem();
   const index = _.findIndex(compareItems.products, item => item.productId === productId);
   if (index > -1) {
-    toast.error(API_TEXT.SAME_ITEM_CANNOT_BE_ADDED_TO_COMPARE);
+    toast(
+      <ToastContent
+        msg={API_TEXT.SAME_ITEM_CANNOT_BE_ADDED_TO_COMPARE}
+        msgType='error'
+      />
+    )
     return {
       count: compareItems.products.length,
       compareItems,
@@ -53,25 +58,45 @@ const addToCompare = ({
   if (compareItems.products.length) {
     if (compareItems.itemtype === itemtype && compareItems.products.length < maxEle) {
       setItem(product);
-      toast.success(API_TEXT.ITEM_ADDED_TO_COMPARE);
+      toast(
+        <ToastContent
+          msg={API_TEXT.ITEM_ADDED_TO_COMPARE}
+          msgType='success'
+        />
+      )
       return {
         count: product.products.length,
         compareItems: product,
       };
     } else if (compareItems.products.length >= maxEle) {
-      toast.error(API_TEXT.ONLY_FIVE_ITEMS_CAN_BE_COMPARED);
+      toast(
+        <ToastContent
+          msg={API_TEXT.ONLY_FIVE_ITEMS_CAN_BE_COMPARED}
+          msgType='error'
+        />
+      )
       return {
         count: maxEle,
         compareItems,
       };
     }
-    toast.error(API_TEXT.ONLY_SIMILAR_ITEM_TYPES_CAN_BE_COMPARED);
+    toast(
+      <ToastContent
+        msg={API_TEXT.ONLY_SIMILAR_ITEM_TYPES_CAN_BE_COMPARED}
+        msgType='error'
+      />
+    )
     return {
       count: compareItems.products.length,
       compareItems,
     };
   }
-  toast.success(API_TEXT.ITEM_ADDED_TO_COMPARE);
+  toast(
+    <ToastContent
+      msg={API_TEXT.ITEM_ADDED_TO_COMPARE}
+      msgType='success'
+    />
+  )
   setItem(product);
   return {
     count: 1,
@@ -118,7 +143,12 @@ const removeCompareData = (id) => {
   if (compareItems.products.length === 0) {
     compareItems = itemFormat;
   }
-  toast.success(API_TEXT.ITEM_REMOVED_FROM_COMPARE);
+  toast(
+    <ToastContent
+      msg={API_TEXT.ITEM_REMOVED_FROM_COMPARE}
+      msgType='success'
+    />
+  )
   setItem(compareItems);
   return {
     count: compareItems.length,

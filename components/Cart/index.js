@@ -197,14 +197,12 @@ class Cart extends Component {
                     addOrRemoveGift={this.addOrRemoveGift}
                     checkoutBtnHandler={this.checkoutBtnHandler}
                     cartStepperInputHandler={this.cartStepperInputHandler}
-                    cartData={cartData}
                   />
                 </Grid>
                 <FooterBar />
               </Fragment>
         }
-        {
-        showSlider &&
+        {showSlider &&
           <Slider
             closeSlider={this.closeSlider}
             isOpen={showSlider}

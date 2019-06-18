@@ -4,6 +4,7 @@ import constants from '../helper/constants';
 import Cookies from 'universal-cookie';
 import moment from 'moment';
 import { toast } from 'react-toastify';
+import ToastContent from '../../components/common/ToastContent';
 import { languageDefinations } from '../../utils/lang/';
 // import { actionCreators } from './actions';
 const { API_TEXT } = languageDefinations();
@@ -148,12 +149,22 @@ const savePtaToken = ptaToken => axios.post('/api/setCookie', {
 }).then(() => ptaToken);
 
 const verifyEmail = body => axios.put(`${constants.CMS_API_URL}/api/v1/verification/email/otp`, body).then(({ data }) => {
-  toast.success(API_TEXT.YOUR_EMAIL_IS_VERIFIED);
+  toast(
+    <ToastContent
+      msg={API_TEXT.YOUR_EMAIL_IS_VERIFIED}
+      msgType='success'
+    />
+  )
   return { data };
 });
 
 const sendOtpToEmailId = showToast => axios.post(`${constants.CMS_API_URL}/api/v1/verification/email`).then(({ data }) => {
-  if (showToast ? toast.success(API_TEXT.OTP_SENT_TO_YOUR_MAIL_ID) : '');
+  if (showToast ? toast(
+    <ToastContent
+      msg={API_TEXT.OTP_SENT_TO_YOUR_MAIL_ID}
+      msgType='success'
+    />
+  ) : '');
   return { data };
 });
 
