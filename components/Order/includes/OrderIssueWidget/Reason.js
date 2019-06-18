@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import SVGComponent from '../../../common/SVGComponet';
 import { selectors, actionCreators } from '../../../../store/order';
 import constants from '../../../../constants';
 
@@ -30,7 +29,8 @@ class Reason extends Component {
       selectedMode: ORDER_ISSUE_TYPES.RETURN === props.orderIssue.returnExchangeType ?
         'Return' : ORDER_ISSUE_TYPES.EXCHANGE ===  props.orderIssue.returnExchangeType ? 'Exchange' : 'Cancel',
       selectedVariant: [],
-      displaySizeError: false
+      displaySizeError: false,
+      showError: true,
     };
     this.selectReason = this.selectReason.bind(this);
     this.updateComment = this.updateComment.bind(this);
@@ -70,7 +70,7 @@ class Reason extends Component {
   };
   getReplaceData = (exchangeVariant) => {
     const { query } = this.props;
-    const findData = exchangeVariant.filter(el =>
+    const findData = exchangeVariant && exchangeVariant.filter(el =>
       el.listing.variant_id === query.variantId &&
       el.listing.total_inventory_count > 0);
 
@@ -80,27 +80,28 @@ class Reason extends Component {
           <input
             className={styles['radio-btn']}
             type="radio"
-            value="Replace"
+            value={ORDER_PAGE.REPLACE}
             checked={this.state.selectedMode === 'Replace'}
             onChange={this.onOptionChange}
           />
-          <label className={styles['pl-10']}> Replace</label>
+          <label className={styles['pl-10']}> {ORDER_PAGE.REPLACE}</label>
         </div>,
       ];
     }
 
     return [
       <div key='replace-disable'>
-        <input type="radio" className={styles['radio-btn']} value="Replace" checked={false} disabled />
-        <label className={styles['pl-10']}>Replace</label>
+        <input type="radio" className={styles['radio-btn']} value={ORDER_PAGE.REPLACE} checked={false} disabled />
+        <label className={styles['pl-10']}>{ORDER_PAGE.REPLACE}</label>
       </div>,
     ];
   };
 
   saveAndGoNext() {
     const { goToNextStep, setReason, query, orderIssue, orderDetails } = this.props;
-    const { orderId, returnExchangeType, issueType } = orderIssue;
-    const { reason, subReason, selectedVariant, comment, variantId, selectedMode } = this.state
+    const { orderId, returnExchangeType, issueType, selectedItem} = orderIssue;
+    const { reason, subReason, comment, selectedMode } = this.state
+    let listingObj = orderDetails && orderDetails.order_items && orderDetails.order_items.find((order) => order.order_item_ids[0] === selectedItem.id);
     const params = {
       orderId,
       issueType: issueType,
@@ -115,15 +116,15 @@ class Reason extends Component {
       sub_reason: subReason,
       comments: comment,
       order_item_id: orderIssue.selectedItem.id,
-      address_id: orderDetails.address.address_id
+      address_id: orderDetails && orderDetails.address.address_id,
     }
 
     if (
       (selectedMode === 'Return' || selectedMode === 'Cancel')
     ) {
       this.props.setOrderIssueData(params);
-      this.props.setAddressData(reasonParams)
-      this.props.refundOptions(orderIssue.selectedItem.id)
+      this.props.setAddressData(reasonParams);
+      this.props.refundOptions(orderIssue.selectedItem.id, orderIssue.issueType);
       goToNextStep();
     }
     else if (
@@ -139,8 +140,8 @@ class Reason extends Component {
           comments: comment,
           reason,
           sub_reason: subReason,
-          new_listing_id: selectedVariant[0].listing_id,
-          variant_id: selectedVariant[0].variant_id,
+          new_listing_id: listingObj.listing_id,
+          variant_id: listingObj.variant_id,
           order_item_id: query.orderItemId
         })
         goToNextStep();
@@ -153,8 +154,8 @@ class Reason extends Component {
         comments: comment,
         reason,
         sub_reason: subReason,
-        new_listing_id: orderDetails.order_items[0].listing_id,
-        variant_id: orderDetails.order_items[0].variant_id,
+        new_listing_id: listingObj.listing_id,
+        variant_id: listingObj.variant_id,
         order_item_id: query.orderItemId
       })
       goToNextStep();
@@ -178,6 +179,7 @@ class Reason extends Component {
   selectReason(e) {
     this.setState({
       reason: e.target.value,
+      showError: false,
     });
   }
 
@@ -197,10 +199,9 @@ class Reason extends Component {
     const { orderIssue, loadingStatus, query } = this.props;
     const { selectedItem: itemData, reasons, returnExchangeType, issueType } = orderIssue;
     const { img, name } = itemData;
-    const { selectedMode, displaySizeError } = this.state;
+    const { selectedMode, displaySizeError, showError } = this.state;
     const selectedReason = reasons.filter(reason => reason.name === this.state.reason)[0]
     const issueType_small = issueType.toLowerCase();
-    console.log(issueType_small);
     return (
       <div className={`${styles['reason-item-main']} ${styles['width100']}`}>
         <h4 className={`${styles['fs-20']} ${styles['fontW300']} ${styles['ml-20']} ${styles['mr-20']}`}>{ORDER_PAGE.WHY_DO_YOU_WANT_TO} {issueType_small} {ORDER_PAGE.THIS_ITEM}</h4>
@@ -226,7 +227,7 @@ class Reason extends Component {
         )}
         <div className={`${styles['reason-cont']} ${styles['pb-15']} ${styles['ml-20']} ${styles['mr-20']}`}>
           <span className={`${styles['instruction-txt']} ${styles['pb-20']} ${styles['pt-20']} ${styles['flex']} ${styles['fs-12']} ${styles['google-clr']}`}>
-            {issueType_small==='cancel' ? ORDER_PAGE.SELECT_CANCEL_REASON : (issueType_small==='return' ? ORDER_PAGE.SELECT_RETURN_REASON : ORDER_PAGE.SELECT_EXCHANGE_REASON)}
+            {showError ? (issueType_small==='cancel' ? ORDER_PAGE.SELECT_CANCEL_REASON : (issueType_small==='return' ? ORDER_PAGE.SELECT_RETURN_REASON : ORDER_PAGE.SELECT_EXCHANGE_REASON)): ''}
           </span>
           <div className={`${styles['dd-cont']}`}>
             <div className={`${styles.select} ${styles['mt-10']} ${styles['pb-10']}`}>
@@ -234,14 +235,15 @@ class Reason extends Component {
                 className={styles['select-text']}
                 required
                 onChange={this.selectReason}
+                defaultValue={"default"}
               >
-                <option disabled selected>
+                <option disabled value="default">
                   {loadingStatus
                     ? ORDER_PAGE.LOADING
                     : ORDER_PAGE.SELECT_REASON}
                 </option>
-                {reasons.map(reason => (
-                  <option key={reason.id} value={reason.name}>
+                {reasons.map((reason, index) => (
+                  <option key={index} value={reason.name}>
                     {reason.name}
                   </option>
                 ))}
@@ -249,7 +251,7 @@ class Reason extends Component {
               <span className={styles['select-highlight']} />
               <span className={styles['select-bar']} />
             </div>
-            {this.state.reason ? (
+            {this.state.reason && selectedReason.sub_reasons ? (
               <div
                 className={`${styles.select} ${styles['mt-20']} ${
                   styles['mb-10']
@@ -259,8 +261,9 @@ class Reason extends Component {
                 <select
                   className={styles['select-text']}
                   onChange={this.selectSubReason}
+                  defaultValue={"default"}
                 >
-                  <option disabled selected>
+                  <option disabled value="default">
                     {loadingStatus
                       ? ORDER_PAGE.LOADING
                       : ORDER_PAGE.SELECT_SUB_REASON}

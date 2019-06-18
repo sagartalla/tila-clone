@@ -57,7 +57,7 @@ class SearchDetailsBar extends Component {
   }
 
   render() {
-    const { results, query, categoryId,categoryQuery, spellCheckResp } = this.props;
+    const { results, query,categoryQuery, spellCheckResp } = this.props;
     const finalQuery = query || categoryQuery;
     return (
       <Waypoint onEnter={this.handleWaypointEnter} onLeave={this.handleWaypointLeave}>
@@ -73,7 +73,7 @@ class SearchDetailsBar extends Component {
                         <span className={`${styles['fs-10']} ${styles['textColor']}`}>({ SEARCH_PAGE.AUTO_CORRECTED }):</span>
                       </a>
                       :
-                      <h1 className={`${styles['no-h1']} ${styles['fs-14']}`}>{finalQuery && this.capitalize(finalQuery.split('-').join(' '))}<span className={styles['fontW300']}>:</span> </h1>
+                      <div className={`${styles['no-h1']} ${styles['fs-14']}`}>{finalQuery && this.capitalize(finalQuery.split('-').join(' '))}<span className={styles['fontW300']}>:</span> </div>
                     }
                     <span className={`${styles['pl-5']} ${styles['fs-14']}`}>{ results.totalCount.toLocaleString('en') } { SEARCH_PAGE.SEARCH_ITEMS }</span>
                   </h4>
@@ -81,7 +81,7 @@ class SearchDetailsBar extends Component {
                     spellCheckResp &&
                     <h4 className={`${styles['pl-10']} ${styles['fs-14']} ${styles['sple-check-prt']}`}>
                       <span>{ SEARCH_PAGE.YOUR_ENTERED }: </span>
-                      <a href="javascript: void(0)" onClick={this.querySearch} className={`${styles['fontW600']} ${styles['lgt-blue']}`} data-querysearch={finalQuery.split('-').join(' ')}>
+                      <a href="javascript: void(0)" onClick={this.querySearch} className={`${styles['fontW600']} ${styles['lgt-blue']}`} data-querysearch={finalQuery && finalQuery.split('-').join(' ')}>
                         {finalQuery && this.capitalize(finalQuery.split('-').join(' '))}
                       </a>
                     </h4>

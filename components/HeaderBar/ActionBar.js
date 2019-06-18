@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { Modal } from 'react-router-modal';
 import NoSSR from 'react-no-ssr';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Dropdown } from 'react-bootstrap';
 import Cookie from 'universal-cookie';
-import { selectors as personalSelectors } from '../../store/cam/personalDetails';
+import { selectors as personalSelectors, actionCreators as personalActionCreators } from '../../store/cam/personalDetails';
 import { actionCreators as wishListActionCreators, selectors as wishListSelectors } from '../../store/cam/wishlist';
 
 import Cart from '../Cart';
@@ -26,8 +25,9 @@ import main_en from '../../layout/main/main_en.styl';
 import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './header_en.styl';
 import styles_ar from './header_ar.styl';
+import ProfilePic from '../Cam/Sidebar/ProfilePic';
 
-const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
 const { HEADER_PAGE, PDP_PAGE } = languageDefinations();
 const cookies = new Cookie();
@@ -59,36 +59,45 @@ class ActionBar extends Component {
   }
 
   state = {
-    show: false
+    show: '',
   }
 
   componentDidMount() {
-    if(window.sessionStorage.getItem('TILuservisitcount') !== '1') {
+    if (window.sessionStorage.getItem('TILuservisitcount') !== '1') {
       this.props.displayLogin();
     }
+    this.props.getUserProfileInfo();
     this.props.getLoginInfo();
     this.props.getCartResults();
-    //console.log('loggedin', this.props.isLoggedIn);
-    if(this.props.isLoggedIn) {
+    // console.log('loggedin', this.props.isLoggedIn);
+    if (this.props.isLoggedIn) {
       this.props.getWishlist();
     }
-
   }
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.isLoggedIn !== this.props.isLoggedIn) {
+    const { closeThankYouScreen } = this.props;
+    if (nextProps.isLoggedIn !== this.props.isLoggedIn) {
       this.props.getWishlist();
     }
+    // let show = ((nextProps.isLoggedIn != this.props.isLoggedIn) && !this.state.logoutClicked) || this.state.loginClicked || !!nextProps.error || (!nextProps.isLoggedIn && nextProps.showLogin) || nextProps.loginInProgress || nextProps.showEmailVerificationScreen;
+    // if (window.location.pathname.indexOf('/payment') > -1) {
+    //   show = false;
+    // }
 
-    let show = ((nextProps.isLoggedIn != this.props.isLoggedIn) && !this.state.logoutClicked) || this.state.loginClicked || !!nextProps.error || (!nextProps.isLoggedIn && nextProps.showLogin) || nextProps.loginInProgress || nextProps.showEmailVerificationScreen;
-    if (window.location.pathname.indexOf('/payment') > -1) {
-      show = false;
-    }
     this.setState({
-      show,
+      // show,
       logoutClicked: false,
+      // showLoginScreen: nextProps.showLoginScreen,
       loginClicked: false,
     });
+
+    if (nextProps && nextProps.activeObj && nextProps.activeObj.nextPage === null) {
+      setTimeout(() => {
+        closeThankYouScreen();
+      }, 3000);
+    }
+
     if (nextProps.isLoggedIn) {
       if (nextProps.ptaToken) {
         this.props.savePtaToken(nextProps.ptaToken);
@@ -102,6 +111,10 @@ class ActionBar extends Component {
       window.localStorage.removeItem('instagramCode');
       this.getTokenCall('instagram', nextProps.instaCode);
     }
+    if(nextProps.userInfo.personalInfo.image_url === this.props.userInfo.personalInfo.image_url){
+      return;
+    }
+    nextProps.userInfo.personalInfo.image_url && this.props.downloadPic(nextProps.userInfo.personalInfo.image_url);
   }
 
   logoutClick() {
@@ -113,21 +126,21 @@ class ActionBar extends Component {
   }
 
   loginClick(e) {
-    digitalData.page.pageInfo[ 'pageType' ]= 'Login Page';
+    digitalData.page.pageInfo.pageType = 'Login Page';
     digitalData.page.pageInfo.pageName = 'Login Page';
-    const state = {};
-    state.loginClicked = true;
-    if (e.currentTarget.getAttribute('data-mode') === 'sign-up') {
-      state.mode = 'register';
-    } else {
-      state.mode = 'login';
-    }
-    state.show = true;
-    this.setState(state);
+
+    this.props.showLoginScreen();
+    // const state = {};
+    // state.loginClicked = true;
+    // if (e.currentTarget.getAttribute('data-mode') === 'sign-up') {
+    //   state.mode = 'register';
+    // } else {
+    //   state.mode = 'login';
+    // }
+    // state.show = true;
   }
 
   onBackdropClick(logoutRequired = false) {
-    this.setState({ show: false });
     this.props.resetLoginError();
     this.props.resetShowLogin();
     if (logoutRequired) {
@@ -146,7 +159,10 @@ class ActionBar extends Component {
   }
 
   render() {
-    const { isLoggedIn, cartResults, userInfo, wishListCount,getEditDetails } = this.props;
+    // const { showLoginPage } = this.state;
+    const {
+      isLoggedIn, cartResults, userInfo, wishListCount, getEditDetails, hideCountry, hideLogin, showLoginPage
+    } = this.props;
     return (
       <div className={styles['actionbar-wrapper']}>
         <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']} ${styles['country-code']}`}>
@@ -156,36 +172,37 @@ class ActionBar extends Component {
         </div>
         <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']} ${styles['country-code']}`}>
           <NoSSR>
-            {this.props.hideCountry ? null :
+            {hideCountry ? null :
             <Country />
             }
           </NoSSR>
         </div>
         <div className={`${styles['action-item']} ${styles['pr-20']} ${styles['pl-20']} ${styles['border-rt']} ${styles['flex-center']} ${styles['justify-center']}`}>
           <Link route={`/${country}/${language}/cam/wishlist`}>
-           <a style={{dispaly:'block'}}>
-            <span className={`${styles['flex-center']} ${styles['justify-center']} ${styles['relative']}`} title={PDP_PAGE.GO_TO_WISHLIST}>
-              <SVGComponent clsName={`${styles['wish-list-icon']}`} src="icons/wish-list/wish-list-icon" />
-              <span className={`${styles['absolute']} ${styles['cart-count']} ${styles['fs-10']} ${styles['white-color']}`}>{wishListCount}</span>
-            </span>
+            <a style={{ dispaly: 'block' }}>
+              <span className={`${styles['flex-center']} ${styles['justify-center']} ${styles.relative}`} title={PDP_PAGE.GO_TO_WISHLIST}>
+                <SVGComponent clsName={`${styles['wish-list-icon']}`} src="icons/wish-list/wish-list-icon" />
+                <span className={`${styles.absolute} ${styles['cart-count']} ${styles['fs-10']} ${styles['white-color']}`}>{wishListCount}</span>
+              </span>
             </a>
           </Link>
         </div>
         <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']}`}>
           <Dropdown id="cart-toggle" className={`${styles['cart-inn']} ${styles['profile-login-inn']} ${styles['pr-20']}`}>
-              <Link route={`/${country}/${language}/cart`}>
-                <a style={{dispaly:'block'}}>
-                  <span className={`${styles['flex-center']} ${styles['justify-center']} ${styles['relative']}`} title={PDP_PAGE.GO_TO_CART}>
-                    <SVGComponent clsName={`${styles['cart-icon']}`} src="icons/cart/cart-icon" />
-                    <span className={`${styles['absolute']} ${styles['cart-count']} ${styles['fs-10']} ${styles['white-color']}`}>{cartResults.items.length}</span>
-                  </span>
-                </a>
-              </Link>
+            <Dropdown.Toggle style={{ display: 'none' }}/>
+            <Link route={`/${country}/${language}/cart`}>
+              <a style={{ display: 'block' }}>
+                <span className={`${styles['flex-center']} ${styles['justify-center']} ${styles.relative}`} title={PDP_PAGE.GO_TO_CART}>
+                  <SVGComponent clsName={`${styles['cart-icon']}`} src="icons/cart/cart-icon" />
+                  <span className={`${styles.absolute} ${styles['cart-count']} ${styles['fs-10']} ${styles['white-color']}`}>{cartResults.items.length}</span>
+                </span>
+              </a>
+            </Link>
             <Dropdown.Menu className={`${styles['cart-item']}`}>
               <span>
                 <Cart
-                  showMiniCart={true}
-                  showCheckOutBtn={true}
+                  showMiniCart
+                  showCheckOutBtn
                   cartData={cartResults}
                   editCartDetails={getEditDetails}
                 />
@@ -193,24 +210,25 @@ class ActionBar extends Component {
             </Dropdown.Menu>
           </Dropdown>
         </div>
-        <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']} ${styles['relative']} ${styles['profile-login']}`}>
+        <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']} ${styles.relative} ${styles['profile-login']}`}>
           <Dropdown id="profile-login" className={styles['profile-login-inn']}>
             <Dropdown.Toggle>
               <span className={`${styles['flex-center']} ${styles['justify-center']} ${styles['profile-icon-main']}`}>
                 <SVGComponent clsName={`${styles['profile-icon']}`} src="icons/profile-icons/round-profile" />
               </span>
             </Dropdown.Toggle>
-            <Dropdown.Menu className={`${styles['item']}`}>
+            { isLoggedIn ?
+            <Dropdown.Menu className={`${styles.item}`}>
               <div className={styles['profile-part']}>
                 <div className={`${styles['flex-center']} ${styles['ple-icon']}`}>
-                  <span className={styles['icon']}></span>
-                  <span className={styles['pl-15']}>{HEADER_PAGE.HELLO} {userInfo.personalInfo.first_name || `${HEADER_PAGE.TILA_CUSTOMER}` }</span>
+                    <ProfilePic loader={false} userInfo={userInfo} imgUrl={this.props.imgSource}/>
+                  <span className={`${styles['pl-15']} ${styles['profile-name']}`}><span>{HEADER_PAGE.HELLO}</span> <span>{userInfo.personalInfo.first_name || `${HEADER_PAGE.TILA_CUSTOMER}` }</span></span>
                 </div>
                 <ul className={`${styles['pl-0']} ${styles['profile-inn']}`}>
                   <li className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']}`}>
-                    <a href={`/${country}/${language}/cam`} className={styles['flex-center']}>
-                    <SVGComponent clsName={`${styles['profile-icon']}`} src="icons/profile-icons/round-profile" />
-                    <span className={styles['pl-20']}>{HEADER_PAGE.MY_ACCOUNT}</span>
+                    <a href={`/${country}/${language}/cam/profile`} className={styles['flex-center']}>
+                      <SVGComponent clsName={`${styles['profile-icon']}`} src="icons/profile-icons/round-profile" />
+                      <span className={styles['pl-20']}>{HEADER_PAGE.MY_ACCOUNT}</span>
                     </a>
                   </li>
                   <li className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']}`}>
@@ -226,75 +244,85 @@ class ActionBar extends Component {
                     </a>
                   </li> */}
                   <li className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']}`}>
-                    <a href={`/${country}/${language}/help/faq`} target="_blank" className={styles['flex-center']}><span className={styles['support']}><span className={`${styles['flex-center']} ${styles['justify-center']}`}>?</span></span>
+                    <a href={`/${country}/${language}/help/faq`} target="_blank" className={styles['flex-center']}><span className={styles.support}><span className={`${styles['flex-center']} ${styles['justify-center']}`}>?</span></span>
                       <span className={styles['pl-20']}>{HEADER_PAGE.HELP_SUPPORT}</span>
                     </a>
                   </li>
                   <li className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']}`}>
-                    {isLoggedIn
-                      ?
-                      <span onClick={this.logoutClick} className={`${styles['flex-center']} ${styles['login-details-inn']} ${styles['pointer']}`}>
+                      <span onClick={this.logoutClick} className={`${styles['flex-center']} ${styles['login-details-inn']} ${styles.pointer}`}>
                         <SVGComponent clsName={`${styles['logout-icon']}`} src="icons/common-icon/icon-logout" />
                         <span className={`${styles['pl-20']} `}>{HEADER_PAGE.LOGOUT}</span>
                       </span>
-                      :
-                      <span onClick={this.loginClick} className={`${styles['flex-center']} ${styles['login-details-inn']} ${styles['pointer']}`}>
-                        <SVGComponent clsName={`${styles['login-icon']}`} src="icons/common-icon/icon-login" />
-                        <span className={`${styles['pl-20']}`}>{HEADER_PAGE.LOGIN}</span>
-                      </span>
-                    }
                   </li>
                 </ul>
               </div>
             </Dropdown.Menu>
+            :
+            <Dropdown.Menu className={`${styles.item}`}>
+              <div className={styles['profile-part']}>
+              <ul className={`${styles['pl-0']} ${styles['profile-inn']}`}>
+                <li className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']}`}>
+                  <a href={`/${country}/${language}/help/faq`} target="_blank" className={styles['flex-center']}><span className={styles.support}><span className={`${styles['flex-center']} ${styles['justify-center']}`}>?</span></span>
+                    <span className={styles['pl-20']}>{HEADER_PAGE.HELP_SUPPORT}</span>
+                  </a>
+                </li>
+                <li className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']}`}>
+                  <span onClick={this.loginClick} className={`${styles['flex-center']} ${styles['login-details-inn']} ${styles.pointer}`}>
+                    <SVGComponent clsName={`${styles['login-icon']}`} src="icons/common-icon/icon-login" />
+                    <span className={`${styles['pl-20']}`}>{HEADER_PAGE.LOGIN}</span>
+                  </span>
+                </li>
+                </ul>
+              </div>
+            </Dropdown.Menu>
+            }
           </Dropdown>
         </div>
-        {
-          (this.state.show)
-            ?
-            (
-              <Login mode={this.state.mode} onBackdropClick={this.onBackdropClick} />
-            )
-            :
-            null}
+        {hideLogin  ? null :
+          showLoginPage ?
+        <Login onBackdropClick={this.onBackdropClick} />
+             : null}
       </div>
     );
   }
 }
 
 
-const mapStateToProps = (store) => {
-  return ({
-    error: selectors.getErrorMessege(store),
-    isLoggedIn: selectors.getLoggedInStatus(store),
-    instaCode: selectors.getInstaCode(store),
-    cartResults: cartSelectors.getCartResults(store),
-    loginInProgress: selectors.getLoginProgressStatus(store),
-    userInfo: personalSelectors.getUserInfo(store),
-    showLogin: selectors.getShowLogin(store),
-    ptaToken: selectors.getPTAToken(store),
-    wishListCount: wishListSelectors.getProductsDetails(store).length,
-    showEmailVerificationScreen: selectors.showEmailVerificationScreen(store),
-    getEditDetails: cartSelectors.getEditDetails(store),
-  });
-};
+const mapStateToProps = store => ({
+  error: selectors.getErrorMessege(store),
+  isLoggedIn: selectors.getLoggedInStatus(store),
+  instaCode: selectors.getInstaCode(store),
+  cartResults: cartSelectors.getCartResults(store),
+  loginInProgress: selectors.getLoginProgressStatus(store),
+  userInfo: personalSelectors.getUserInfo(store),
+  showLogin: selectors.getShowLogin(store),
+  ptaToken: selectors.getPTAToken(store),
+  wishListCount: wishListSelectors.getProductsDetails(store).length,
+  showEmailVerificationScreen: selectors.showEmailVerificationScreen(store),
+  getEditDetails: cartSelectors.getEditDetails(store),
+  imgSource: personalSelectors.getImageSource(store),
+  activeObj: selectors.getActive(store),
+  showLoginPage: selectors.showLogin(store),
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators(
-    {
-      getLoginInfo: actionCreators.getLoginInfo,
-      logout: actionCreators.userLogout,
-      displayLogin:actionCreators.showLogin,
-      getCartResults: cartActionCreators.getCartResults,
-      resetLoginError: actionCreators.resetLoginError,
-      resetShowLogin: actionCreators.resetShowLogin,
-      savePtaToken: actionCreators.savePtaToken,
-      userLogin: actionCreators.userLogin,
-      getWishlist: wishListActionCreators.getWishlistProducts,
-    },
-    dispatch,
-  );
-};
+const mapDispatchToProps = dispatch => bindActionCreators(
+  {
+    getLoginInfo: actionCreators.getLoginInfo,
+    logout: actionCreators.userLogout,
+    displayLogin: actionCreators.showLogin,
+    getCartResults: cartActionCreators.getCartResults,
+    resetLoginError: actionCreators.resetLoginError,
+    resetShowLogin: actionCreators.resetShowLogin,
+    savePtaToken: actionCreators.savePtaToken,
+    userLogin: actionCreators.userLogin,
+    getWishlist: wishListActionCreators.getWishlistProducts,
+    getUserProfileInfo: personalActionCreators.getUserProfileInfo,
+    downloadPic: personalActionCreators.downloadPic,
+    showLoginScreen: actionCreators.showLoginScreen,
+    closeThankYouScreen: actionCreators.closeThankYouScreen,
+  },
+  dispatch,
+);
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(ActionBar);

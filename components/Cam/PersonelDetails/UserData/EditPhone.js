@@ -12,7 +12,7 @@ import { languageDefinations } from '../../../../utils/lang';
 import CountryDialCode from '../../../../constants/CountryDialCode';
 import FormValidator from '../../../common/FormValidator';
 import SVGCompoent from '../../../common/SVGComponet';
-
+import ToastContent from '../../../common/ToastContent';
 import lang from '../../../../utils/language';
 
 import main_en from '../../../../layout/main/main_en.styl';
@@ -112,7 +112,7 @@ class EditPhone extends React.Component {
     const { countryCode, phoneNumber, otpCount } = this.state
     // let validation = this.validations.validate(this.state)
     // this.setState({ validation })
-    if (phoneNumber.length > 0) {
+    if (phoneNumber && phoneNumber.length > 0) {
       const params = {
         mobile_country_code: countryCode,
         mobile_no: phoneNumber,
@@ -120,6 +120,13 @@ class EditPhone extends React.Component {
       this.setState({
         otpCount: otpCount + 1,
       }, () => this.props.otpUserUpdate(params));
+    }else{
+      toast(
+        <ToastContent
+          msg='Phone number is required for OTP'
+          msgType='error'
+        />
+      )
     }
   }
   handleClose() {
@@ -200,7 +207,7 @@ class EditPhone extends React.Component {
             //     X</a>
             //   </Col>
             // </Row>
-            <h4 className={`${styles['flx-spacebw-alignc']} ${styles['m-0']} ${styles['p-20']}`}>
+            <h4 className={`${styles['flx-spacebw-alignc']} ${styles['m-0']} ${styles['p-20']} ${styles['fs-18']}`}>
               <span>{CONTACT_INFO_MODAL.EDIT_PHONE_NUMBER}</span>
               <span onClick={this.handleClose} className={`${styles['fs-22']} ${styles['black-color']}`}>X</span>
             </h4>
@@ -267,6 +274,7 @@ class EditPhone extends React.Component {
                   <div className={styles['fp-input']}>
                     <input
                       type="text"
+                      required
                       value={phoneNumber}
                       onChange={this.handlePhoneNumberChange}
                     />
@@ -279,9 +287,10 @@ class EditPhone extends React.Component {
                         : null
                     }
                     {/* <span className={styles['error']}>error message</span> */}
+                    {/^([0-9]){6,12}$/.test(phoneNumber) ?
                       <a className={`${styles['show-otp']} ${styles['fs-12']} ${styles['thick-blue']}`} onClick={this.fetchOtp}>
                        {otpCount ? `${CONTACT_INFO_MODAL.RESEND} ${CONTACT_INFO_MODAL.OTP}` : CONTACT_INFO_MODAL.SEND_OTP}
-                      </a>
+                      </a> : null}
                   </div>
                   {/* <Input
                     placeholder={`${CONTACT_INFO_MODAL.ENTER} ${CONTACT_INFO_MODAL.PHONE_NUMBER}`}
@@ -304,7 +313,7 @@ class EditPhone extends React.Component {
                   {/* <Input type='number' placeholder={`${CONTACT_INFO_MODAL.ENTER} ${CONTACT_INFO_MODAL.OTP}`} val={otp} onChange={this.handleOTPChange} /> */}
                   <div className={styles['fp-input']}>
                     <input
-                      type="number"
+                      type="text"
                       value={otp}
                       className={styles['width100']}
                       onChange={this.handleOTPChange}

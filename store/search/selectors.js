@@ -77,13 +77,13 @@ const getSearchFilters = (store) => {
             {
               canonicalId: _.kebabCase(value.name),
               id: value.id,
-              name: key,
+              name: value.name,
               children: _.reduce(value.child, (acc, value, key) => [
                 ...acc,
                 {
                   canonicalId: _.kebabCase(value.name),
                   id: value.id,
-                  name: key,
+                  name: value.name,
                 },
               ], []),
             }], []),
@@ -128,7 +128,7 @@ const getSearchResutls = (store) => {
     resutls.totalCount = store.searchReducer.data.productResponse.noOfProducts;
     resutls.items = store.searchReducer.data.productResponse.products.map((product,prodIndex) => {
       isNotifyMe = true
-      let variantInfo = product.variantAdapters.reduce((modifiedVaraints, v) => {
+      let variantInfo = (product.variantAdapters || []).reduce((modifiedVaraints, v) => {
         let modifiedVaraintsCopy = {}
         let { listingAdapters } = v;
         if (listingAdapters.length > 0) {
@@ -161,7 +161,7 @@ const getSearchResutls = (store) => {
       }
       // const priceInfo = product.variantAdapters[0].listingAdapters.map((vla) => vla.attributes.sellingPrice);
       // const offers = product.variantAdapters[0].listingAdapters.map((vla) => vla.attributes.discount);
-      let currency = product.variantAdapters[0].listingAdapters || '';
+      let currency = product.variantAdapters ? product.variantAdapters[0].listingAdapters || '' : '';
       currency = currency[0] || '';
       currency = currency.attributes || '';
       currency = currency.currency || '';
@@ -184,7 +184,7 @@ const getSearchResutls = (store) => {
         productId: product.attributes.productId,
         catalogId: product.attributes.catalogId,
         itemtype: product.attributes.itemType,
-        displayName: product.attributes.calculated_display_name.join(','),
+        displayName: (product.attributes.calculated_display_name || []).join(','),
         brand: brand ? brand[0] : '',
         variants: variantInfo,
         // priceRange,

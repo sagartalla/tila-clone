@@ -39,7 +39,7 @@ class CartAndPaymentSideBar extends Component {
   }
   render() {
     const {
-      checkoutBtnHandler, showCheckoutBtn, showInstant, isFromCart,
+      checkoutBtnHandler, showCheckoutBtn, showInstant,
       hideUpSell, showStepper, increaseItemCnt, decreaseItemCnt,
       insnt_item_listing_id, isPdp, couponData, getCartResults, data, hideCouponCode,
     } = this.props;
@@ -85,8 +85,8 @@ class CartAndPaymentSideBar extends Component {
             <InstantCheckout
               insnt_item_listing_id={insnt_item_listing_id}
               isPdp={isPdp}
-              isFromCart={isFromCart}
-              totalPrice={total_price}
+              // isFromCart={isFromCart}
+              totalPrice={total_price.display_value}
               currency={currency}
               isMounted={false}
             />
@@ -119,8 +119,7 @@ class CartAndPaymentSideBar extends Component {
               </h5>
             </li>
             <li><span>{CART_PAGE.PRICE} ({`${item_cnt} ${CART_PAGE.ITEMS}`})</span><span> {`${total_offer_price.display_value} ${total_offer_price.currency_code || currency}`}</span></li>
-            {
-            showStepper ?
+            {showStepper ?
               <li>
                 <span>{CART_PAGE.QUANTITY}</span>
                 <span>
@@ -131,10 +130,13 @@ class CartAndPaymentSideBar extends Component {
                   />
                 </span>
               </li> : null
-          }
+            }
             <li>
               <span>{CART_PAGE.DELIVERY_CHARGES}</span>
-              <span>{total_shipping.display_value || 0} {total_shipping.currency_code || currency}</span>
+              {total_shipping.money_value > 0 ?
+                <span>{total_shipping.display_value || 0} {total_shipping.currency_code || currency}</span> :
+                <span className={`${styles.flex}`}><SVGComponent clsName={styles['ship-icon']} src="icons/free-shipping" /></span>
+              }
             </li>
             {total_gift_charges.display_value &&
             <li>
@@ -158,7 +160,6 @@ class CartAndPaymentSideBar extends Component {
                 }
               </span>
             </li>
-
           </ul>
         </div>
       </div>
@@ -172,7 +173,6 @@ CartAndPaymentSideBar.propTypes = {
   applyTheCoupon: PropTypes.func,
   openSlider: PropTypes.func,
   getCartResults: PropTypes.func,
-
 };
 
 CartAndPaymentSideBar.defaultProps = {

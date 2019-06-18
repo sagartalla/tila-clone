@@ -22,6 +22,8 @@ const actions = {
   GET_REFUND_OPTIONS: 'GET_REFUND_OPTIONS',
   GET_TRACKING_DETAILS: 'GET_TRACKING_DETAILS',
   THANKYOU_PAGE_TRACK: 'THANKYOU_PAGE_TRACK',
+  SET_CANCEL_REFUNDMODE: 'SET_CANCEL_REFUNDMODE',
+  GET_INVOICE_DETAILS: 'GET_INVOICE_DETAILS',
 };
 
 const actionCreators = {
@@ -78,9 +80,15 @@ const actionCreators = {
       },
     },
   }),
-  getRefundOptions: params => ({
+  setCancelRefundMode: param => ({
+    type:actions.SET_CANCEL_REFUNDMODE,
+    payload:{
+      data:param
+    },
+  }),
+  getRefundOptions: (orderItemId, issueType) => ({
     type: actions.GET_REFUND_OPTIONS,
-    payload: api.getRefundOptions(params),
+    payload: api.getRefundOptions(orderItemId, issueType),
   }),
   setReason: params => ({
     type: actions.SET_REASON,
@@ -158,6 +166,10 @@ const actionCreators = {
   getTrackingDetails: trackingId => ({
     type: actions.GET_TRACKING_DETAILS,
     payload: api.getTrackingDetails(trackingId),
+  }),
+  getInvoice: order_id => ({
+    type: actions.GET_INVOICE_DETAILS,
+    payload: api.getInvoice(order_id),
   }),
 };
 

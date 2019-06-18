@@ -12,6 +12,7 @@
 
 .checkbox-material {
   position: relative;
+  display flex
   // margin: 20px 0;
   // text-align: left;
 
@@ -27,7 +28,7 @@
     &:before {
       width-height-radius(16px, 16px, 2px)
       background white
-      border 1px solid light-border
+      border 1px solid tila-blk
       cursor pointer
       transition background .3s
     }
@@ -40,7 +41,7 @@
 
     &:checked {
       + label:before{
-        background navy-blue
+        background tila-blk
         border none
       }
       + label:after {

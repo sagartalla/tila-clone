@@ -23,8 +23,21 @@
   .card-details-name
     width 70%
   .cart-box
-    margin-bottom 0;
+    margin-bottom 0
     border-radius 4px 4px 0 0
+    .cart-price-toltp
+      .cart-tool-tip
+        right -8px
+        display none
+        text-align left
+        .table
+          line-height 1.6
+        &:before
+          right 12px
+          left auto
+      &:hover
+        .cart-tool-tip
+          display block
     .out-of-stock
       z-index 1
       width 96%
@@ -41,10 +54,9 @@
         margin: 0 auto;
     .quantity-title
       margin 0 8px
-      border 0.5px solid generic-green-color
-      padding 2px 12px
-      background-color generic-green-color
-      color white
+      border 1px solid tila-blk
+      padding 2px 0px
+      color tila-blk
 
     // .minus-disable
     //   background-color rgba(214, 214, 214, 0.3)
@@ -91,6 +103,8 @@
         height 100%
     .view-btn-list
       justify-content flex-end
+      a
+        padding 7px 15px
 
 .mini-cart
   max-height 330px
@@ -108,11 +122,10 @@
 
   .quantity-title
     margin 0 8px
-    border 0.5px solid generic-green-color
-    padding 2px 12px
-    background-color generic-green-color
-    color white
-    width 40px
+    border 1px solid tila-blk
+    padding 2px 0px
+    color tila-blk
+    width 45px
 
 .min-items-list
   &:hover
@@ -152,6 +165,10 @@
     // &:hover .view-more-label
     //   display block
 
+.sidebar-position
+  position sticky !important
+  top 80px
+
 @media screen and (min-device-width: 320px) and (max-device-width: 766px) and (orientation : portrait){
   .cart-price-label {
     justify-content initial
@@ -174,7 +191,6 @@
     padding 14px 10px
   }
 }
-
 
 @media screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation : portrait){
   .cart-container .cart-box .quantity-title {

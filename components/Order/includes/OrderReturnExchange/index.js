@@ -40,12 +40,12 @@ class OrderReturnExchange extends Component {
     const { orderId, orderItemId, returnExchangeType, variantId } = query;
 
     const params = {
-      orderId: orderId,
+      orderId,
       issueType: returnExchangeType,
       step: STEPS.REASONS,
       returnExchangeType: returnExchangeType
     };
-    if(orderIssue.orderId !== orderId) {      
+    if(orderIssue.orderId !== orderId) {
       getOrderDetails({ orderId });
     } else {
       params.selectedItem = getSelectedOrder(orderItemId);
@@ -112,21 +112,19 @@ class OrderReturnExchange extends Component {
                           <img src={`${constants.mediaDomain}/${img}`} />
                         </Col>
                         <Col md={10}>
-                          <h4 className={`${styles['fs-16']} ${styles['fontW600']}`}>{name}</h4>
-                          <span className={styles['fs-14']}>{CART_PAGE.QUANTITY}:</span>
+                          <h4 className={`${styles['fs-16']} ${styles['mt-0']} ${styles['fontW600']}`}>{name}</h4>
+                          <span className={styles['fs-14']}>{CART_PAGE.QUANTITY}: {orderDetails && orderDetails.order_items && orderDetails.order_items[0].quantity}</span>
                         </Col>
-                        <Col md={10} className={`${styles['mt-25']}`}>
+                        <Col md={10}>
                           <h4
                             className={
-                              `${styles['fs-16']} ${styles['fontW400']}
-                              ${styles['pb-15']}`}>Pickup Address
+                              `${styles['fs-14']} ${styles['fontW600']} ${styles['pt-20']}`}>{ORDER_PAGE.ADDRESS_PICKUP}
                           </h4>
                         </Col>
                         <Col
                           md={10}
-                          className={`${styles['bg-light-gray']}`}
                         >
-                          <div className={`${styles['p-10']}`}>
+                          <div className={`${styles['p-10']} ${styles['bg-light-gray']}`}>
                             <h4
                               className={
                                 `${styles['fs-16']} ${styles['fontW600']}

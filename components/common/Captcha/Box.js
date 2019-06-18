@@ -42,7 +42,7 @@ export class Box extends React.Component {
             fontSize: 25,
             fontWeight: 'bold',
             width: '47px', height: '43px',
-            cursor: 'move'}}><img id={this.props.index} src={this.props.image.url}/></span>
+            cursor: 'move'}}><img className={styles['captcha-icon']} id={this.props.index} src={this.props.image.url}/></span>
     );
   }
 }

@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import { Link } from '../../../routes';
-import { Grid, Row, Col } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 import constants from '../../../constants';
 import SVGComponent from '../../common/SVGComponet';
 // import userAgent from '../../../utils/user-agent';
@@ -60,8 +60,8 @@ class Display extends Component {
         catalog_id: catalogObj.catalog_id,
         variant_id: catalogObj.variant_id,
         product_id,
-        wishlisted_price: offerPricing.showPrise.display_value,
-        wishlisted_currency: offerPricing.currency.currency_code,
+        wishlisted_price: offerPricing.showPrise ? offerPricing.showPrise.display_value : null,
+        wishlisted_currency: offerPricing.showPrise ? offerPricing.showPrise.currency_code : offerPricing.currency,
       });
     }
   }
@@ -72,11 +72,11 @@ class Display extends Component {
     } = this.props;
     return (
       <div className={`${styles['ht-100per']} ${styles['mobile-slide-part']}`}>
-        {breadcrums.length > 0 &&
+        {breadcrums && breadcrums.length > 0 &&
           <div className={`${styles['breadcrums-part']} ${styles['fs-12']}`}>
             {breadcrums.map((crum, index) => (
-              <span>
-                <Link route={this.getUrl(crum)}>{crum.display_name_en}</Link>
+              <span key={crum.id}>
+                <Link route={this.getUrl(crum)}><a>{crum.display_name_en}</a></Link>
                 {breadcrums.length - 1 !== index &&
                   <span className={`${styles['label-gry-clr']}`}>&nbsp;&nbsp;{'>'}&nbsp;&nbsp;</span>}
               </span>
@@ -91,7 +91,7 @@ class Display extends Component {
             lazyLoad
             className={`${styles['ht-100per']} ${styles.slick}`}
           >
-            {imgs.map(({ url }) => (
+            {imgs && imgs.map(({ url }) => (
               <div className={styles['selected-item-wrap']} key={url}>
                   <img src={`${constants.mediaDomain}/${url}`} />
                 </div>
@@ -103,14 +103,14 @@ class Display extends Component {
             <Slider
               asNavFor={this.state.nav1}
               ref={slider => (this.slider2 = slider)}
-              slidesToShow={imgs.length > 4 ? 4 : imgs.length}
+              slidesToShow={imgs && (imgs.length > 4 ? 4 : imgs.length)}
               swipeToSlide
               focusOnSelect
               lazyLoad
               className={`${styles['sub-slider']} ${styles.slick}`}
             >
               {
-                imgs.map(({ url }) => (
+                imgs && imgs.map(({ url }) => (
                   <div className={styles['carousel-item-wrap']} key={url}>
                     <img src={`${constants.mediaDomain}/${url}`} />
                   </div>

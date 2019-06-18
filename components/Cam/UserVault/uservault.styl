@@ -1,6 +1,17 @@
 @import '../../../layout/main/executables.styl';
 
+.no-vocher-icon
+  .no-wishlist-icon-inn
+    height 100%
+    justify-content center
+    align-items center
+    padding-top 8%
+    flex-direction column
+    .no-cards-list-icon
+      width 220px
+      height 140px
 .vault-container
+
   .valut-card-main
     left 0
     right 0
@@ -33,9 +44,10 @@
           display block
           line-height 1
   .vault-card-item
-    background-color light-card-green
+    // background-color light-card-green
     color label-light
     position relative
+    border 1px solid light-brdr
     .vault-card
       width-height-radius(40px, 20px, 4px)
     .vault-card-delete-icon
@@ -46,12 +58,12 @@
       i
         width-height-radius(14px, 14px, 0)
   .make-default
-    position: absolute;
-    bottom: -10px;
-    right: 0;
-    background: white;
-    padding-left: 10px;
-    border-radius: 10px 0 0;
+    position absolute
+    bottom -10px
+    right 0
+    background light-gray-color
+    padding-left 10px
+    border-radius 10px 0 0
     label
       margin-bottom 3px
   .titleRow
@@ -59,12 +71,11 @@
     background-color #f9f9f9
     font-weight 600
     line-height 60px
-    width 996px
     font-size 16px
     color #000000
+    margin-right -10px
   .bodyRow
     height 75px
-    width 970px
     word-wrap break-word
     display flex
     justify-content center
@@ -86,9 +97,10 @@
       width-height-radius(15px, 15px, 0)
 
   .active-card
-    background-color thick-card-green
+    // background-color thick-card-green
     color black
     box-shadow 0 2px 4px 0 rgba(0,0,0,0.11)
+    border 1px solid tila-blk
     .make-default
       box-shadow 0 2px 4px 0 rgba(0,0,0,0.11)
   .no-result

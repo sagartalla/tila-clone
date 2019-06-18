@@ -8,8 +8,6 @@ import Blocker from '../../common/Blocker';
 import RightBar from '../CartPaymentSideBar';
 import Wishlist from '../../Cam/Wishlist';
 import { languageDefinations } from '../../../utils/lang/';
-
-import { Router } from '../../../routes';
 import { cartPlaceHolder } from '../../common/Loader/skeletonPlaceHolder';
 
 const cookies = new Cookie();
@@ -40,26 +38,25 @@ const CartBody = ({
   count,
   isLoading,
   openSlider,
-  isError,
-  cartData,
 }) => {
-  const { items, error } = data;
+  const { items } = data;
   const flag = data && items && items.length;
   const cnt = flag > 0 ? items.length : 0;
   const { CART_PAGE } = languageDefinations();
 
   return (
-    isLoading ?
-      cartPlaceHolder
-          :
+    <>
+    {
+      isLoading ? cartPlaceHolder : null
+    }
     <div className={styles['cart-container']}>
       {
         showBlocker ? <Blocker /> : ''
       }
       <Row>
         <Col md={12} sm={12} xs={12}>
-          <h4 className={`${styles['mt-20']} ${styles['mb-20']} ${styles['fontW300']} ${styles['fs-20']} ${styles['light-gry-clr']} ${styles['text-capitalize']}`}>
-            { cnt===1 ? <span>{`${cnt} item`}</span> : cnt===0 ? <span>Your shopping cart is empty.</span> :<span>{`${cnt} ${CART_PAGE.ITEMS}`}</span> }
+          <h4 className={`${styles['mt-20']} ${styles['mb-20']} ${styles['fontW600']} ${styles['fs-20']} ${styles['light-gry-clr']} ${styles['text-capitalize']}`}>
+            { cnt===1 ? <span>{`${cnt} item`}</span> : cnt===0 ? <span>Your shopping cart is empty.</span> :<span>{`${cnt} ${CART_PAGE.ITEMS_IN_CART}`}</span> }
           </h4>
         </Col>
       </Row>
@@ -67,7 +64,7 @@ const CartBody = ({
         <Col md={9} sm={12} xs={12} className={styles['pr-5']}>
           <div>
             {
-              items.map((item,index) => (
+              items.map((item) => (
                 <CartItem
                   key={item.item_id}
                   item={item}
@@ -87,12 +84,12 @@ const CartBody = ({
         {
           flag > 0
             ?
-              <Col md={3} sm={12} xs={12} className={styles['pr-0']}>
+              <Col md={3} sm={12} xs={12} className={`${styles['pr-0']} ${styles['sidebar-position']}`}>
                 <div className={`${styles['box']}`}>
                   <RightBar
                     data={data}
                     showInstant={true}
-                    isFromCart={true}
+                    // isFromCart={true}
                     showCheckoutBtn={true}
                     checkoutBtnHandler={checkoutBtnHandler}
                     openSlider={openSlider}
@@ -107,6 +104,7 @@ const CartBody = ({
         }
       </Row>
     </div>
+    </>
   );
 };
 

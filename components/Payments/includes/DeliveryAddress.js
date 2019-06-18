@@ -18,7 +18,7 @@ const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styl
 const { DELIVERY_ADDR_PAGE } = languageDefinations();
 
 const DeliveryAddress = props => {
-  const { configJson, defaultAddress, handleShippingAddressContinue, editAddressTab, showNonShippable } = props;
+  const { configJson, selectedAddress, handleShippingAddressContinue, editAddressTab, showNonShippable } = props;
 
   return (
     <div className={`${styles['delivery-adress-prt']} ${styles['box']} ${styles['mb-20']} ${styles['relative']}`}>
@@ -32,18 +32,18 @@ const DeliveryAddress = props => {
         </Col>
         <Col md={4} sm={12} xs={7} className={`${configJson.done ? '' : 'hide'} ${styles['t-rt']} ${styles['m-tn-l']} ${styles['thin-border-right']}`}>
           {
-            defaultAddress && defaultAddress.length > 0 ?
+            selectedAddress ?
               <div>
-                <div className={`${styles['light-gry-clr']} ${styles['fontW600']}`}>{defaultAddress[0].first_name + ' ' + defaultAddress[0].last_name} </div>
+                <div className={`${styles['light-gry-clr']} ${styles['fontW600']}`}>{selectedAddress.first_name + ' ' + selectedAddress.last_name} </div>
                 <small>
-                  {defaultAddress[0].address_line_1 + ', ' + defaultAddress[0].address_line_2 + ', ' + defaultAddress[0].city}
+                  {selectedAddress.address_line_1 + ', ' + selectedAddress.address_line_2 + ', ' + selectedAddress.city}
                 </small>
               </div>
               : null
           }
         </Col>
         <Col md={2} sm={12} xs={5} className={`${configJson.done ? '' : 'hide'} ${styles['t-rt']} ${styles['pl-0']}`}>
-          <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']}`} onClick={editAddressTab}>
+          <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['left-radius']} ${styles['text-uppercase']}`} onClick={editAddressTab}>
             {DELIVERY_ADDR_PAGE.EDIT}
           </button>
         </Col>
@@ -54,7 +54,9 @@ const DeliveryAddress = props => {
             <h4 className={`${styles['mb-20']} ${styles['mt-0']}`}>{DELIVERY_ADDR_PAGE.DELIVERY_ADDR}</h4>
             <ShippingAddress
               showNonShippable={showNonShippable}
+              selectedAddress={selectedAddress}
               handleShippingAddressContinue={handleShippingAddressContinue}
+              isPaymentPage
             />
           </div>
           : null
@@ -68,7 +70,6 @@ DeliveryAddress.propTypes = {
   handleShippingAddressContinue: PropTypes.func.isRequired,
   editAddressTab: PropTypes.func.isRequired,
   configJson: PropTypes.object.isRequired,
-  // defaultAddress: propTypes.object
 }
 
 DeliveryAddress.defaultProps = {

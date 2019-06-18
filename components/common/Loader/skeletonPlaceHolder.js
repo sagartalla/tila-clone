@@ -14,7 +14,7 @@ import styles_ar from './loader_ar.styl';
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 export const searchPlaceHolder = (
-  <div style={{ overflow: 'hidden', maxHeight: '800px' }}>
+  <div>
     {/* <div className={`${styles.container}`} /> */}
     <div
       className={
@@ -141,6 +141,7 @@ export const productPlaceHolder = (
         {
           [0, 1, 2].map((el, i) => (
             <Input
+              key={`rect_${i}`}
               style={{
                     height: '3em', width: '50%', marginRight: '20px',
                 }}
@@ -157,6 +158,7 @@ export const productPlaceHolder = (
         {
           [0, 1, 2].map((el, i) => (
             <Rectangle
+              key={`rect_${i}`}
               style={{
                   width: 400, marginBottom: 20, marginRight: 20, height: 76, marginTop: 20,
              }}
@@ -173,6 +175,7 @@ export const productPlaceHolder = (
         {
           [0, 1, 2].map((el, i) => (
             <Rectangle
+              key={`rect_${i}`}
               style={{
                   width: '400px', height: '200px',
                   }}
@@ -186,7 +189,16 @@ export const productPlaceHolder = (
 
 
 export const cartPlaceHolder = (
-  <div className={`${styles.flex} ${styles['pt-40']} ${styles.relative}`}>
+  <div className={`${styles.flex} ${styles['pt-40']} ${styles.relative}`} style={{
+      position: 'fixed',
+      zIndex: 26,
+      width: '100vw',
+      height: '100vh',
+      top: 0,
+      left: 0,
+      background: '#fff',
+      paddingTop: '130px',
+    }}>
     {/* <div className={`${styles.container}`} /> */}
     <div className={`${styles.flex} ${styles['p-20']} ${styles.width100}`}>
       <div style={{ width: '75%' }} className={`${styles.flex} ${styles['flex-colum']} ${styles.width63} ${styles['mr-20']}`}>

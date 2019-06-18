@@ -51,7 +51,7 @@ class Voucher extends Component {
         {
           isOnlyVocuher
             ?
-            <div>{PAYMENT_PAGE.ALL_OTHER_PAYMENT_METHODS_ARE_DISABLED} :)</div>
+            <div className={`${styles['pb-15']} ${styles['fs-14']}`}>{PAYMENT_PAGE.ALL_OTHER_PAYMENT_METHODS_ARE_DISABLED} :)</div>
             :
             null
         }
@@ -79,8 +79,8 @@ class Voucher extends Component {
         {
           isOnlyVocuher
             ?
-            <div>
-              <button onClick={this.proceedToPayment} className={`${styles['fp-btn-primary']} ${styles['fp-btn']} ${styles['border-radius']}`}>{PAYMENT_PAGE.PAY_USING_TILA_CREDIT}</button>
+            <div className={styles['mt-20']}>
+              <button onClick={this.proceedToPayment} className={`${styles['fp-btn-primary']} ${styles['fp-btn']} ${styles['border-radius']} ${styles['fp-btn-x-large']}`}>{PAYMENT_PAGE.PAY_USING_TILA_CREDIT}</button>
             </div>
             :
             null

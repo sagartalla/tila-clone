@@ -1,9 +1,10 @@
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import promiseMiddleware from 'redux-promise-middleware';
 import { composeWithDevTools } from 'redux-devtools-extension'
 import reducers from './reducer';
-import { refHandler } from './refHandler';
+import { refHandler } from './helper/refHandler';
+import responseValidator from './helper/ResponseValidator';
 import './helper/interceptors';
 
 const makeStore = (initialState) => {

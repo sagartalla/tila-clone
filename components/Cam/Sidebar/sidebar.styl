@@ -5,15 +5,42 @@
   height auto
   background-color white
   box-shadow 0 0 5px 0 rgba(0, 0, 0, 0.06), 0 5px 5px 0 rgba(0, 0, 0, 0.05)
+.loader-div
+  width 20px
+  margin-top 7px
+  z-index 14
+  .loader-styl
+    width 40px
+    height 40px
+    svg
+      animation rotate 1.4s linear infinite;
+      -webkit-animation rotate 1.4s linear infinite;
+      -moz-animation rotate 1.4s linear infinite;
+      @keyframes rotate {
+        to {
+          transform rotate(360deg);
+        }
+      }
 
+      @-webkit-keyframes rotate {
+        to {
+          -webkit-transform rotate(360deg);
+        }
+      }
+
+      @-moz-keyframes rotate {
+        to {
+          transform rotate(360deg);
+        }
+      }
  .user-profile
     border-bottom 1px solid cam-border-gray
     cursor pointer
     border-left 5px solid transparent
   &.active
     width 100%
-    border-left 5px solid navy-blue
-    background head-gray
+    border-left 5px solid tila-blk
+    background light-brdr
   .profile-pic
     display inline-block
    .img-style
@@ -29,28 +56,16 @@
       width: 50px
       height: 50px
     .edit-icon
+      text-align center
       width 30px
       height 30px
       top 20px
       font-size 9px
-      margin 0 auto
   .profile-details
     display inline-block
-
-  input[type=file]
-    visibility hidden
-    position absolute
+  .display-pic
     width 50px
     height 50px
-  .file-upload
-    height 50px
-    width 50px
-    left 40px
-    top 10px
-    opacity 0
-    border-radius 50%
-    margin 0 auto
-    position absolute
     .edit-butn
       position: absolute
       width: 20px
@@ -71,8 +86,8 @@
     display inline-block
   .list-item-left
     display inline-block
-    width 26px
-    height 18px
+    width 30px
+    height 20px
   .list-common
     width 10%
     font-size 12px
@@ -86,15 +101,15 @@
 
   .list-items-container
     cursor pointer
-    padding 15px 20px
+    padding: 15px 15px 15px 27px
     border-left 5px solid transparent
     &.active
       display flex
-      border-left 5px solid navy-blue
-      background head-gray
+      border-left 5px solid tila-blk
+      background light-brdr
       .list-common
         background-color navy-blue
         color white
         border 0
       .list-items
-        color navy-blue
+        color tila-blk

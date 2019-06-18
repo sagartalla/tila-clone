@@ -1,13 +1,11 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import NoSSR from 'react-no-ssr';
 import VariantsAndSimilarProducts from './VariantsAndSimilarProducts';
 import KeyFeatures from './KeyFeatures';
 import SVGCompoent from '../../common/SVGComponet';
-import Accordian from '../../common/Accordian';
 import { languageDefinations } from '../../../utils/lang';
 import SizeChart from '../includes/SizeChart/index';
-import { PanelGroup,Panel, Heading, Body, Title } from 'react-bootstrap';
+import { PanelGroup, Panel } from 'react-bootstrap';
 import lang from '../../../utils/language';
 
 import main_en from '../../../layout/main/main_en.styl';
@@ -20,14 +18,14 @@ const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styl
 
 const { PDP_PAGE } = languageDefinations();
 
-const ProductDetails = ({ details, keyfeatures, isPreview, productInfo,variantId,productId }) => {
+const ProductDetails = ({ details, keyfeatures, isPreview, productInfo,variantId,productId,isSearchPreview }) => {
   return (
     <div className={`${styles['product-details-main']} ${styles['border-radius4']} ${styles['mb-5']} ${styles['box']}`}>
       {
         details
           ?
           <div className={styles['border-b']}>
-            <PanelGroup accordion>
+            <PanelGroup accordion id="product-details">
               <Panel eventKey="1">
                 <Panel.Heading>
                   <Panel.Title toggle className={styles['key-feature-inn']}>
@@ -52,6 +50,7 @@ const ProductDetails = ({ details, keyfeatures, isPreview, productInfo,variantId
           <VariantsAndSimilarProducts
             variantId={variantId}
             productId={productId}
+            isSearchPreview={isSearchPreview}
           />
         }
       </NoSSR>
@@ -71,7 +70,7 @@ const ProductDetails = ({ details, keyfeatures, isPreview, productInfo,variantId
         </div>
       */}
       <div className={styles['pt-10']}>
-        <PanelGroup accordion defaultActiveKey="2">
+        <PanelGroup accordion defaultActiveKey="2" id="key-features">
           <Panel eventKey="2">
             <Panel.Heading>
               <Panel.Title toggle className={styles['key-feature-inn']}>

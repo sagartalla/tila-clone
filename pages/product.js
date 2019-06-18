@@ -79,7 +79,10 @@ class ProductPage extends Base {
     return (
       <div>
         <Layout>
-          <Product  query={url.query} />
+          <Product
+            variantId={url.query.variantId}
+            productId={url.query.productId}
+          />
         </Layout>
       </div>
     );

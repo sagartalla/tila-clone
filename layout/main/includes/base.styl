@@ -138,6 +138,7 @@ for i in range(10px, 46px, 2)
 
 .align-end
   align-items flex-end
+
 .justify-around
    justify-content space-around
 
@@ -146,6 +147,14 @@ for i in range(10px, 46px, 2)
 
 .justify-end
    justify-content flex-end
+
+.justify-center
+  justify-content center
+
+
+.justify-evenly
+   justify-content space-evenly
+
 
 .flex-col
    flex-direction column
@@ -159,6 +168,9 @@ for i in range(10px, 46px, 2)
 
 .lne-ht1
   line-height 1
+
+.lne-ht1_2
+  line-height 1.2
 
 .lne-ht2
   line-height 2
@@ -182,6 +194,9 @@ for i in range(10px, 46px, 2)
 .lgt-blue
   color navy-blue
 
+.dottes-gry-clr
+  color dottes-gry-clr
+
 .lgt-black
   color light-black
 
@@ -196,6 +211,9 @@ for i in range(10px, 46px, 2)
 
 .label-light-grey
   color label-light-grey
+
+.register-policy-gray
+  color register-policy-gray
 
 .facebook-clr
   color facebook-color
@@ -214,6 +232,7 @@ for i in range(10px, 46px, 2)
 
 .thck-gry-rt-border
   border-right 1px solid light-brdr
+
 .lgt-gry-clr
   color lgt-gry
 
@@ -223,8 +242,8 @@ for i in range(10px, 46px, 2)
 .twitter-clr
   color twitter-color
 
-.thck-gry-rt-border
-  border-right 1px solid light-brdr
+.yellow-clr
+  color yellow-clr
 
 //font-weight
 .fontW300
@@ -255,6 +274,9 @@ for i in range(10px, 46px, 2)
 .width45
   width 45%
 
+.width42
+  width 42%
+
 .width33
   width 33%
 
@@ -264,8 +286,14 @@ for i in range(10px, 46px, 2)
 .width21
   width 21%
 
+.width18
+  width 18%
+
 .width70
   width 70%
+
+.border-none
+  border none
 
 //border
 .border
@@ -280,15 +308,14 @@ for i in range(10px, 46px, 2)
 .border-lg
   border 1px solid light-brdr
 
-.border-rt
-  border-right 1px solid light-brdr
-
 .border-lt
   border-left 1px solid light-brdr
 
 .border-lt-green
   border-left 1px solid generic-green-color
 
+.border-green
+  border 1px solid generic-green-color
 
 .thick-border-btm
   border-bottom 1px solid light-brdr
@@ -298,9 +325,6 @@ for i in range(10px, 46px, 2)
 
 .thick-border-left
   border-left 1px solid light-brdr
-
-.thick-bdr-rgt
-  border-left 4px solid border-pink
 
 .thin-border-right
   border-right 1px solid light-brdr
@@ -352,6 +376,9 @@ for i in range(10px, 46px, 2)
 .border-radius12
   border-radius 12px
 
+.border-radius50P
+  border-radius 50%
+
 .border-rt-rb-0
   border-top-right-radius: 0 !important;
   border-bottom-right-radius: 0 !important;
@@ -372,9 +399,14 @@ for i in range(10px, 46px, 2)
 .alrt-message-bg
   background-color thin-yellow
 
+.bg-tila-blk
+  background-color tila-blk
+
 .bg-white
   background-color white
 
+.fashion-color
+  color fashion-color
 //text-uppercase
 .text-uppercase
   text-transform uppercase
@@ -392,18 +424,6 @@ for i in range(10px, 46px, 2)
 .fixed
   position fixed
 
-.electronics
-  .thick-bdr-rgt, .thick-border-bottom
-    border-color electronics-color
-
-.fashion
-  .thick-bdr-rgt, .thick-border-bottom
-    border-color fashion-color
-
-.lifestyle
-  .thick-bdr-rgt, .thick-border-bottom
-    border-color lifestyle-color
-
 .textColor
     color: ash-color
 
@@ -418,10 +438,10 @@ for i in range(10px, 46px, 2)
   border-top 1px solid thick-red-arrow
   width 100%
   position absolute
-  transform rotateZ(-15deg)
+  transform rotateZ(-4deg)
   transform-origin center center
-  top 16px
-  left -3px
+  top 8px
+  left -2px
 
 .table
   display table
@@ -431,12 +451,6 @@ for i in range(10px, 46px, 2)
 
 .t-cell
   display table-cell
-
-.total-amount
-  background light-gray-color
-  height 3em
-  div
-    vertical-align middle
 
 .overall-amount
   border-radius 3px
@@ -460,24 +474,19 @@ for i in range(10px, 46px, 2)
   height 17px
   width 17px
   margin-left 5px
-  color thick-blue
+  color tila-blk
   cursor pointer
 
 .hoverBlueBackground
    background-color light-navy-blue
 
 .notifyBackground
-   background-color navy-blue
-
-.right0
-  right 0
+   background-color tila-blk
 
 .help-icon
   width: 15px;
   height: 15px;
 
-.right0
-  right 0
 
 .left0
   left 0
@@ -498,6 +507,12 @@ for i in range(10px, 46px, 2)
   white-space: nowrap;
   max-width: 500px;
 }
+
+.text-blue
+  color text-blue
+
+.background-transparant
+  background transparant
 
 @media screen and (min-device-width: 1900px) and (max-device-width: 1024px) and (orientation : landscape){
   h1 {

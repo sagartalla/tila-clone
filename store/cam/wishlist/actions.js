@@ -48,13 +48,20 @@ const actionCreators = {
       eventName: 'WishList Added', params, type: 'WL_ADD',
     }));
   })),
-  notifyMe: loginReq(params => (dispatch, getState) => {
+  notifyMe: params => (dispatch, getState) => {
     dispatch(actionCreators.track({ eventName: 'Notify Me', type: 'NOTIFY', params }));
     dispatch({
       type: actions.NOTIFY_ME,
       payload: apis.notifyMe(params),
     });
-  }),
+  },
+  wishlistNotify: wishlistId => (dispatch) => {
+    dispatch(actionCreators.track({ eventName: 'Notify Me', type: 'NOTIFY', params: { wishlistId } }));
+    dispatch({
+      type: actions.NOTIFY_ME,
+      payload: apis.wishlistNotify(wishlistId),
+    });
+  },
   track: params => (dispatch, getState) => {
     const state = getState();
     params.postResult = state.wishlistReducer.products;

@@ -1,10 +1,5 @@
-import React, { Component, Fragment } from 'react';
-import { Row, Col } from 'react-bootstrap';
-
-import { languageDefinations } from '../../../../utils/lang/';
-
+import React, { Component } from 'react';
 import lang from '../../../../utils/language';
-
 import main_en from '../../../../layout/main/main_en.styl';
 import main_ar from '../../../../layout/main/main_ar.styl';
 import styles_en from '../uservault_en.styl';
@@ -19,19 +14,18 @@ class MiniVault extends Component {
   }
 
   render() {
-    const { VAULT_PAGE } = languageDefinations();
-    const { data, toggleAddCardBlock } = this.props;
+    const { data } = this.props;
 
     return (
       <div className={`${styles['absolute']} ${styles['valut-card-main']} ${styles['bg-white']}`}>
         <div className={`${styles['vault-card-item-inn']}`}>
           {
             data.length > 0 && data.map((card, index) => {
-              const { card_token, bank_name, masked_number, holder_name, expiry_month, expiry_year } = card;
+              const { card_token, masked_number, holder_name, expiry_month, expiry_year } = card;
               return (
-                <div className={`${styles['flex']} ${styles['flex-colum']} ${styles['valut-card-main-inn']} ${styles['p-10-20']} ${styles['pointer']}`} onClick={this.makeCardDefault.bind(this, card_token)}>
+                <div className={`${styles['flex']} ${styles['flex-colum']} ${styles['valut-card-main-inn']} ${styles['p-10-20']} ${styles['pointer']}`} onClick={this.makeCardDefault.bind(this, card_token)} key={index}>
                   {/* <span>{bank_name}</span> */}
-                  <h5 className={`${styles['mt-5']} ${styles['mb-5']}`}>{masked_number.replace(/(.{4})/g, '$1 ')}</h5>
+                  <h5 className={`${styles['mt-5']} ${styles['mb-5']} ${styles['card-number']}`}>{masked_number.replace(/(.{4})/g, '$1 ')}</h5>
                   <div className={`${styles['flx-space-bw']}`}>
                     <span>{holder_name}</span>
                     <span> {expiry_month}/{expiry_year}</span>

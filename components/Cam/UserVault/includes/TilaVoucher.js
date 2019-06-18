@@ -42,18 +42,20 @@ const TilaVoucher = (props) => {
                     <Col md={2}>
                         Added
                     </Col>
-                    <Col md={2} />
+                    <Col md={2}>
+                        Used
+                    </Col>
                     <Col md={2}>
                         Balance
                     </Col>
                 </Row>
-                {transactions.map((transaction) => {
+                {transactions.map((transaction, index) => {
                     const { created_date, transaction_description, transaction_type, amount, balance } = transaction;
                     const date_arr = created_date.split('.')[0];
                     const date = moment(date_arr).format('MMM D, YYYY')
                     const time = moment(date_arr).format('hh:mm A')
                     return (
-                        <div className={styles['bodyRow']}>
+                        <div className={styles['bodyRow']} key={index}>
                             <Row>
                                 <Col md={3}>
                                     {`${date}, ${time}`}
@@ -79,9 +81,11 @@ const TilaVoucher = (props) => {
             // <div className={`${styles['vault-card-body']} ${styles['p-20-40']}`}>
             //     <h4 className={`${styles['pb-5']} ${styles['fontW300']} ${styles['lgt-blue']}`}>No voucher history</h4>
             // </div>
-            <div className={`${styles['no-result']} ${styles['align-center']} ${styles['flex-col']} ${styles['black-color']}`}>
-                <SVGComponent clsName={`${styles['wallet-img']}`} src="errors-img/group-2" />
-                <h3>No voucher history</h3>
+            <div className={`${styles['no-vocher-icon']} ${styles['align-center']} ${styles['flex-col']} ${styles['black-color']}`}>
+                <div className={`${styles['no-wishlist-icon-inn']} ${styles['flex']}`}>
+                    <SVGComponent clsName={`${styles['no-cards-list-icon']}`} src="icons/common-icon/no-cars-vocher" />
+                    <h3 className={`${styles['fs-26']} ${styles['t-c']} ${styles['pt-40']}`}>{VAULT_PAGE.NO_VOCHER_LABEL}</h3>
+                </div>
             </div>
             }
         </div>

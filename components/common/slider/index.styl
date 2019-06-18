@@ -7,15 +7,17 @@
     right: 0;
     z-index: 999;
     background: rgba(0,0,0,0.5);
+    animation-name: slideOpen;
+    animation-duration: 0.5s;
+    animation-fill-mode: both;
 }
 
-.sliderInner {
-    border: 1px solid #fff;
-    border-radius: 6px;
-    z-index: 9999;
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.5);
-    background-color: #fff;
-    width: 440px;
-    height: 100vh;
-    right: 0;
+
+@keyframes slideOpen {
+  from {right: -800px;}
+  to {right: 0;}
+}
+@keyframes slideClose {
+  from {right: 0px;}
+  to {right: -800px;}
 }

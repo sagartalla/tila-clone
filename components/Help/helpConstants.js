@@ -37,4 +37,11 @@ const countryLanguageHelpCode = {
   "en": 3,
   "ar": 4
 }
-export {ContactTabs, helpComponents, Issues, countryLanguageHelpCode}
+
+const categoryImages = {
+  1: 'help_orders',
+  8: 'help_rer',
+  10: 'help_payments',
+  55: 'help_warranty'
+}
+export {ContactTabs, helpComponents, Issues, countryLanguageHelpCode, categoryImages}

@@ -1,18 +1,17 @@
 import Calendar from 'rc-calendar';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Row, Col } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 import DatePicker from 'rc-calendar/lib/Picker';
 import moment from 'moment';
 import { toast } from 'react-toastify';
 import { languageDefinations } from '../../../../utils/lang';
 import Btn from '../../../common/Button';
-import Input from '../../../common/Input';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators, selectors } from '../../../../store/cam/personalDetails';
 import SVGComponent from '../../../common/SVGComponet';
-
+import ToastContent from '../../../common/ToastContent'
 import lang from '../../../../utils/language';
 
 import main_en from '../../../../layout/main/main_en.styl';
@@ -80,6 +79,18 @@ class UpdatePersonalInfoModal extends React.Component {
     this.setState({ user_gender: val });
   }
 
+  disabledDate = (current) => {
+    if (!current) {
+      // allow empty select
+      return false;
+    }
+    const date = moment();
+    date.hour(0);
+    date.minute(0);
+    date.second(0);
+    return current.valueOf() > date.valueOf();
+  }
+
   handleSubmit = () => {
     const { user_name, user_dob, user_gender } = this.state;
     this.setState({ responseState: false });
@@ -94,22 +105,32 @@ class UpdatePersonalInfoModal extends React.Component {
         image_url: ''
       });
       this.handleClose();
-      toast.success('Your personal information has been updated.');
+      toast(
+        <ToastContent
+          msg='Your personal information has been updated.'
+          msgType='success'
+        />
+      )
     } else {
-      toast.error('Fill in all the fields');
+      toast(
+        <ToastContent
+          msg='Fill in all the fields'
+          msgType='error'
+        />
+      )       
     }
   }
 
   render() {
     const calendar = (
-      <Calendar />
+      <Calendar disabledDate={this.disabledDate} />
     );
     const { user_name, user_dob, user_gender } = this.state;
     return (
       <div>
         <div className={styles['editProfileModal']}>
           <h4 className={`${styles['flx-spacebw-alignc']} ${styles['m-0']}`}>
-            <span>Personal Information</span>
+            <span className={`${styles['fs-20']}`}>Personal Information</span>
             <a onClick={this.handleClose} className={`${styles['fs-22']} ${styles['black-color']}`}>X</a>
           </h4>
           <div className={`${styles['flex-center']} ${styles['flex-colum']}`}>

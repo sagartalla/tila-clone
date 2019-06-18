@@ -28,10 +28,7 @@ class ActiveCoupons extends Component {
     super(props);
     this.state = {
       showPopup: false,
-      documentTerms: '',
-      documentHowToUse: '',
-      couponCode: '',
-      couponDescription: '',
+      coupons: '',
       copiedCode: '',
       currentPage: 0,
     };
@@ -44,16 +41,10 @@ class ActiveCoupons extends Component {
     }, () => this.props.getCoupons(cookies.get('country'), currentPage, false));
   }
   showPopup = (e) => {
-    const docTerms = e.target.getAttribute('data-terms');
-    const docUse = e.target.getAttribute('data-use');
-    const coupon = e.target.getAttribute('data-coupon');
-    const description = e.target.getAttribute('data-desc');
+    const data = JSON.parse(e.target.getAttribute('data-coupon'));
     const title = e.target.getAttribute('data-title');
     this.setState({
-      documentTerms: docTerms,
-      documentHowToUse: docUse,
-      couponCode: coupon,
-      couponDescription: description,
+      coupons: data,
       title,
       showPopup: true,
     });
@@ -79,7 +70,7 @@ class ActiveCoupons extends Component {
   render() {
     const { couponDataList, loadingState } = this.props;
     const {
-      showPopup, documentTerms, currentPage, documentHowToUse, couponCode, couponDescription, title, copiedCode,
+      showPopup, currentPage, title, copiedCode, coupons,
     } = this.state;
     return (
       <div>
@@ -93,6 +84,7 @@ class ActiveCoupons extends Component {
             loading={loadingState}
           />
         </div>
+        {coupons &&
         <div>
           <Modal
             show={showPopup}
@@ -101,14 +93,14 @@ class ActiveCoupons extends Component {
           >
             <Modal.Body>
               <div className={`${styles['flex-center']}`}>
-                <div className={`${styles.couponCodeTerms} ${styles.width35} ${styles.fontW600} ${styles['m-5']}`}>{couponCode}</div>
-                <div className={`${styles['label-gry-clr']}`}>{couponDescription}</div>
+                <div className={`${styles.couponCodeTerms} ${styles.width35} ${styles.fontW600} ${styles['m-5']}`}>{coupons.coupon_code}</div>
+                <div className={`${styles['label-gry-clr']}`}>{coupons.description}</div>
               </div>
-              <Tabs defaultActiveKey={1}>
-                <Tab eventKey={title === 'terms' ? 1 : 2} title={COUPON_OFFERS.TERMS_AND_CONDITIONS}>
+              <Tabs defaultActiveKey={1} key={active-coupns}>
+                <Tab eventKey={title === 'terms' ? 1 : 2} title={COUPON_OFFERS.VIEW_TERMS}>
                   <iframe
                     title="TERMS"
-                    src={documentTerms}
+                    src={coupons.tc}
                     frameBorder="0"
                     width="560px"
                     height="400px"
@@ -117,7 +109,7 @@ class ActiveCoupons extends Component {
                 <Tab eventKey={title === 'terms' ? 2 : 1} title={COUPON_OFFERS.HOW_TO_USE}>
                   <iframe
                     title="TERMS"
-                    src={documentHowToUse}
+                    src={coupons.how_to_use}
                     frameBorder="0"
                     width="560px"
                     height="400px"
@@ -131,7 +123,7 @@ class ActiveCoupons extends Component {
               </button>
             </div>
           </Modal>
-        </div>
+        </div>}
         <Pagination
           totalSize={couponDataList && (couponDataList.total_pages > 1 ? couponDataList.total_pages - 1 : 0)}
           pageNeighbours={0}

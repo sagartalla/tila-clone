@@ -21,7 +21,7 @@ import styles_ar from '../../order_en.styl';
 
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
-const { CART_PAGE } = languageDefinations();
+const { CART_PAGE, ORDERS, ORDER_PAGE } = languageDefinations();
 
 class OrderTracker extends React.Component {
   constructor(props) {
@@ -37,12 +37,14 @@ class OrderTracker extends React.Component {
   }
 
   openSlider = () => {
+    document.getElementsByTagName('BODY')[0].style.overflow = 'hidden';
     this.setState({
       slider: true,
     });
   }
 
   closeSlider = () => {
+    document.getElementsByTagName('BODY')[0].style.overflow = 'auto';
     this.setState({
       slider: false,
     });
@@ -52,13 +54,13 @@ class OrderTracker extends React.Component {
     const { orderItem, showMsgAndDate, orderTracker } = this.props;
     return (
       <div className={`${styles['p-10']} ${styles['bg-light-gray']} ${styles['flex-center']} ${styles.relative} ${styles.pointer}`}>
-        <div>Your Item is out for delivery</div>
-        <a className={`${styles.fontW600} ${styles['ml-10']} ${styles['view-more-label']} ${styles['fs-12']}`} onClick={this.openSlider}>View More</a>
+        <div>{ORDER_PAGE.YOUR_ITEM_IS_OUT_FOR_DELIVERY}</div>
+        <a className={`${styles.fontW600} ${styles['ml-10']} ${styles['view-more-label']} ${styles['fs-12']}`} onClick={this.openSlider}>{CART_PAGE.VIEW_MORE}</a>
         {this.state.slider &&
         <Slider label="Order Tracking" isOpen={this.state.slider} closeSlider={this.closeSlider}>
           <div className={`${styles['ht-80per']} ${styles.width100}`}>
             <div className={`${styles.flex} ${styles['flex-colum']} ${styles['bg-light-gray']}`}>
-              <div className={`${styles['p-5']} ${styles['pl-35']} ${styles['border-b']}`}>ORDER # {orderItem.id}</div>
+              <div className={`${styles['p-5']} ${styles['pl-35']} ${styles['border-b']}`}>{ORDERS.ORDER} {orderItem.id}</div>
               <div className={`${styles.flex} ${styles['p-10']}`}>
                 <Col md={3}>
                   <a className={`${styles.width100} ${styles['track-img-wrap']} ${styles['inline-block']}`}>
@@ -87,7 +89,6 @@ class OrderTracker extends React.Component {
             <div className={`${styles['border-b']} ${styles['p-20']} ${styles['pl-40']}`}>
               {showMsgAndDate}
             </div>
-
             <ul className={`${styles['state-times']}`}>
               {orderItem.state_time_estimates.length > 0 &&
                 orderItem.state_time_estimates.map(estimate => (
@@ -106,7 +107,7 @@ class OrderTracker extends React.Component {
                           {orderTracker[orderItem.trackingId].events.map(event => (
                             <li className={`${styles['flex-center']} ${styles['mt-5']}`}>
                               <span className={styles.dot} />
-                              <span className={styles['ml-5']}>{moment(event.date).format('hh:mm A')}</span>
+                              <span className={`${styles.width18} ${styles['ml-5']}`}>{moment(event.date).format('hh:mm A')}</span>
                               <span className={styles['ml-5']}>{event.event_message}</span>
                             </li>
                           ))}

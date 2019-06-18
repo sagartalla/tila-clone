@@ -14,7 +14,8 @@ import MyGMap from '../../../Cam/ShippingAddress/includes/MyGMap';
 import SVGComponent from '../../../common/SVGComponet';
 
 import { languageDefinations } from '../../../../utils/lang';
-const {ORDER_PAGE,CART_PAGE} = languageDefinations();
+
+const { ORDER_PAGE } = languageDefinations();
 
 import lang from '../../../../utils/language';
 
@@ -77,12 +78,19 @@ class OrderHeader extends Component {
     this.setState({ showModal: false });
   }
 
+  fetchInvoice = () => {
+    const { orderId } = this.props.orderDetails;
+    const { getInvoice } = this.props;
+    getInvoice(orderId);
+  }
+
   render() {
     const { showToolTip, showModal } = this.state;
     const {
-      name, address, phone, orderId, orderDate, price,
-      shippingTotal, payments, currency_code, order_type,
+      name, address, orderId, orderDate, price,
+      payments, order_type, invoice_id,
     } = this.props.orderDetails;
+    const { getInvoice } = this.props;
     const {
       total_mrp = {}, total_shipping = {}, total_offer_price = {}, total_price = {}, total_gift_charges = {}, total_discount = {},
     } = price;
@@ -91,35 +99,35 @@ class OrderHeader extends Component {
         <Row className={styles['m-0']}>
           {/* <Col md={12} xs={12} sm={12}> */}
           <Col md={12} xs={12} sm={12} className={`${styles['border-btm-dottes']}`}>
-            <div className={`${styles['pb-25']} ${styles['pt-25']} ${styles.flex}`}>
-              <Col md={3} xs={6} sm={3}>
+            <div className={`${styles.flex}`}>
+              <Col md={3} xs={6} sm={3} className={`${styles['pb-20']} ${styles['pt-20']}`}>
                 <div className={styles['flx-space-bw']}>
-                  <h5 className={`${styles['mt-0']} ${styles['fs-16']} ${styles['light-gry-clr']} ${styles['mb-20']}`}>{ORDER_PAGE.ADDRESS_DETAILS}</h5>
+                  <h5 className={`${styles['mt-0']} ${styles['fs-14']} ${styles['light-gry-clr']} ${styles['mb-15']} ${styles['text-uppercase']}`}>{ORDER_PAGE.ADDRESS_DETAILS}</h5>
                   {/* <h5 className={`${styles['mt-0']} ${styles['flex']}`}>
                     <a className={`${styles['pr-10']} ${styles['thick-blue']}`} onClick={this.pinAddress}>{ORDER_PAGE.PIN_ADDRESS}</a>
                     <SVGComponent clsName={`${styles['pin-map-icon']}`} src="icons/small-map-icon/small-map" />
                   </h5> */}
                 </div>
-                <div className={`${styles['ff-sb']} ${styles['mb-10']} ${styles['text-capitalize']}`}>{name}</div>
-                <div className={styles['thick-gry-clr']}>{address}</div>
+                <div className={`${styles['ff-sb']} ${styles['mb-5']} ${styles['text-capitalize']}`}>{name}</div>
+                <div className={`${styles['thick-gry-clr']} ${styles['fs-14']}`}>{address}</div>
               </Col>
               {order_type !== 'EXCHANGE' ?
-                <Col md={5} xs={6} sm={5} className={`${styles['ipad-p-0']} ${styles['thick-border-left']} ${styles['thin-border-right']}`}>
+                <Col md={5} xs={6} sm={5} className={`${styles['ipad-p-0']} ${styles['thick-border-left']} ${styles['pb-20']} ${styles['pt-20']} ${styles['thin-border-right']}`}>
                   <div>
-                    <h5 className={`${styles['mt-0']} ${styles['fs-16']} ${styles['flex-center']} ${styles['light-gry-clr']}  ${styles['mb-20']}`}>
-                      <Col md={6} sm={6} className={styles['thick-gry-clr']}>{ORDER_PAGE.ORDER_SUMMARY}</Col>
-                      <Col md={6} sm={6}>{ORDER_PAGE.ORDER} # {orderId}</Col>
-                    </h5>
+                    <div className={`${styles['mt-0']} ${styles['flex-center']} ${styles['light-gry-clr']}  ${styles['mb-15']}`}>
+                      <Col md={6} sm={6} className={`${styles['text-uppercase']} ${styles['fs-14']}`}>{ORDER_PAGE.ORDER_DETAILS_SUMMERY}</Col>
+                      <Col md={6} sm={6} className={`${styles['fs-14']}`}>{ORDER_PAGE.ORDER} # {orderId}</Col>
+                    </div>
                   </div>
-                  <div>
-                    <p className={`${styles['flex-center']}`}>
+                  <div className={styles['lne-ht2']}>
+                    <div className={`${styles['flex-center']} ${styles['fs-14']}`}>
                       <Col md={6} sm={6} className={styles['thick-gry-clr']}>{ORDER_PAGE.ORDER_DATE}</Col>
                       <Col md={6} sm={6}>{moment(orderDate).format('MMMM DD, YYYY')}</Col>
-                    </p>
-                    <p className={`${styles['flex-center']}`}>
+                    </div>
+                    <div className={`${styles['flex-center']} ${styles['fs-14']}`}>
                       <Col md={6} sm={6} className={styles['thick-gry-clr']}>{ORDER_PAGE.ITEM_TOTAL}</Col>
                       {price && <Col md={6} sm={6}><span>{total_offer_price.display_value}</span> <span>{total_offer_price.currency_code}</span></Col>}
-                    </p>
+                    </div>
                     {/* <p className={`${styles['flex-center']}`}>
                       <Col md={6} sm={6}>{ORDER_PAGE.SHIPPING}</Col>
                       <Col md={6} ms={6}><span>{price.total_shipping}</span> <span>{currency_code}</span></Col>
@@ -127,43 +135,49 @@ class OrderHeader extends Component {
                   </div>
                 </Col>
                 :
-                <Col md={4} xs={6} sm={4} className={`${styles['ipad-p-0']} ${styles['thick-border-left']} ${styles['thin-border-right']}`}>
+                <Col md={4} xs={6} sm={4} className={`${styles['ipad-p-0']} ${styles['pb-20']} ${styles['pt-20']} ${styles['thick-border-left']} ${styles['thin-border-right']}`}>
                   <div className={`${styles['pl-15']} ${styles['pr-15']}`}>
                     <div className={styles.flex}>
-                      <span className={styles['green-label']}>Exchange</span>
+                      <span className={styles['green-label']}>{ORDER_PAGE.EXCHANGE}</span>
                     </div>
                     <p className={`${styles['thick-gry-clr']} ${styles['mt-15']} ${styles['mr-50']}`}>
-                      This is an exchange order on the item you have requested for exchange. To view parent order please
-                      <a> Click here</a>
+                      {ORDER_PAGE.THERE_IS_AN_EXCHANGE_ORDER} {ORDER_PAGE.TO_VIEW_PARENT_ORDER}
+                      <a> {ORDER_PAGE.CLICK_HERE}</a>
                     </p>
                   </div>
                 </Col>}
               {order_type !== 'EXCHANGE' &&
-              <Col md={4} xs={6} sm={4}>
-                <Col md={12} xs={6} sm={12}>
-                  <h5 className={`${styles['mt-0']} ${styles['fs-16']} ${styles['light-gry-clr']} ${styles['flex-center']}  ${styles['mb-20']}`}>
-                    <Col md={6} sm={6} className={`${styles['ipad-pl-0']} ${styles['thick-gry-clr']}`}><span>{ORDER_PAGE.PAY_METHOD}</span></Col>
-                    <Col md={6} sm={6} className={`${styles['ipad-pr-0']}`}>
-                      <a>{ORDER_PAGE.REQ_INVOICE}</a>
-                    </Col>
-                  </h5>
-                </Col>
-                <Col md={12} sm={12}>
+              <Col md={4} xs={6} sm={4} className={`${styles['pb-20']} ${styles['pt-20']}`}>
+                {/* <Col md={12} xs={6} sm={12}> */}
+                <div className={`${styles['mt-0']} ${styles['light-gry-clr']} ${styles['flex-center']}  ${styles['mb-20']}`}>
+                  <Col md={6} sm={6} className={`${styles['ipad-pl-0']} ${styles['fs-14']}`}><span>{ORDER_PAGE.PAY_METHOD}</span></Col>
+                  <Col md={6} sm={6} className={`${styles['ipad-pr-0']} ${styles['fs-14']} ${styles.fontW600}`}>
+                    {invoice_id && <span onClick={this.fetchInvoice}>{ORDER_PAGE.REQ_INVOICE}</span>}
+                  </Col>
+                </div>
+                {/* </Col> */}
+                {/* <Col md={12} sm={12}> */}
                   {payments && payments.length > 0 &&
-                    payments.map(p => (
-                      <Fragment>
-                        <Row>
-                          <Col className={`${styles['thick-gry-clr']}`} md={6}>{p.payment_mode.replace('_', ' ')}</Col>
+                    payments.map((p, index) => (
+                      <Fragment key={index}>
+                        <div className={`${styles['lne-ht2']} ${styles['fs-14']}`}>
+                          <Col className={`${styles['thick-gry-clr']} ${styles['text-capitalize']}`} md={6}>{p.payment_mode_display_name.replace('_', ' ')}</Col>
                           <Col md={6}> {`${p.amount.display_value} ${p.currency_code}`}</Col>
-                        </Row>
+                        </div>
                         {p.card_type &&
-                          <Row>
+                          <div className={`${styles['lne-ht2']} ${styles['fs-14']}`}>
                             <Col className={`${styles['thick-gry-clr']}`} md={6}>{p.card_type}</Col>
-                            <Col md={6}> {`${p.masked_card_first6}******${p.masked_card_last4}`}</Col>
-                          </Row>}
+                            {/* { p.amount && p.amount.display_value && */}
+                              <Col md={6}>
+                                {`${p.masked_card_first6}******${p.masked_card_last4}`}
+                                {/* {p.amount.display_value} {p.amount.currency_code} */}
+                              </Col>
+                            {/* } */}
+
+                          </div>}
                       </Fragment>
                     ))}
-                </Col>
+                {/* </Col> */}
               </Col>}
 
               {/*
@@ -197,10 +211,10 @@ class OrderHeader extends Component {
                 {/* <a>{ORDER_PAGE.CHANGE_ADDRESS}</a> */}
               </Col>
               <Col md={5} xs={6} sm={5}>
-                <Col md={6} sm={6}><span className={`${styles['light-gry-clr']}`}>{ORDER_PAGE.GRAND_TOTAL}</span></Col>
+                <Col md={6} sm={6}><span className={`${styles['thick-gry-clr']} ${styles['fs-14']}`}>{ORDER_PAGE.GRAND_TOTAL}</span></Col>
                 {price &&
                 <Col md={6} sm={6}>
-                  <span className={`${styles.fontW600} ${styles['light-gry-clr']} ${styles['flex-center']}`}>
+                  <span className={`${styles.fontW600} ${styles['light-gry-clr']} ${styles['flex-center']} ${styles['fs-14']}`}>
                     {total_price.display_value}&nbsp;{total_price.currency_code}
                     {/* (<a onMouseOver={this.showToolTip} onMouseLeave={this.hideToolTip}>i</a>) */}
                     <span onMouseOver={this.showToolTip} onMouseLeave={this.hideToolTip} className={`${styles.relative} ${styles['checkout-quat']} ${styles['fs-12']} ${styles['flex-center']} ${styles['justify-around']}`}>
@@ -216,7 +230,7 @@ class OrderHeader extends Component {
                             {total_offer_price &&
                             <li className={`${styles['flx-space-bw']} ${styles['b-t']}`}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.T_PRICE} : </span><span> {total_offer_price.display_value} {total_offer_price.currency_code}</span></li>}
                             {total_shipping &&
-                            <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.T_SHIPPING} : </span><span className={styles.flex}>{total_shipping.display_value ? `(+) ${total_shipping.display_value} ${total_shipping.currency_code}` : <SVGComponent clsName={`${styles['ship-icon']}`} src="icons/free-shipping" />}</span></li>}
+                            <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.T_SHIPPING} : </span><span className={styles.flex}>{total_shipping.money_value ? `(+) ${total_shipping.display_value} ${total_shipping.currency_code}` : <SVGComponent clsName={`${styles['ship-icon']}`} src="icons/free-shipping" />}</span></li>}
                             {total_gift_charges && total_gift_charges.money_value > 0 &&
                               <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.T_GIFT_CHARGES} : </span><span>{total_gift_charges.display_value ? `(+) ${total_gift_charges.display_value} ${total_gift_charges.currency_code}` : 'FREE'}</span></li>}
                             {total_price &&
@@ -266,6 +280,7 @@ OrderHeader.propTypes = {
 const mapDispatchToProps = dispatch =>
   bindActionCreators({
     sendMapData: actionCreators.sendMapData,
+    getInvoice: actionCreators.getInvoice,
   }, dispatch);
 
 export default connect(null, mapDispatchToProps)(OrderHeader);

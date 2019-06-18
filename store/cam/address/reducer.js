@@ -1,7 +1,10 @@
 import typeToReducer from 'type-to-reducer';
 import { actions } from './actions';
 
-const initialState = {};
+const initialState = {
+  data: {},
+  changeValue: false
+};
 
 const shippingAddrReducer = typeToReducer({
   [actions.GET_SHIPPING_ADDR_RESULTS]: {
@@ -26,18 +29,16 @@ const shippingAddrReducer = typeToReducer({
 
       // updating user added params/options to store.
       const addr_id_add = Object.assign({}, action.payload.options, { 'address_id': action.payload.data.address_id });
-      const tempState = state.data ? state.data : state;
-      const newData = tempState.map((val, index) => {
-        val.default = false;
-        return val;
+      // const tempState = state.data ? state.data : state;
+      // const newData = tempState.map((val, index) => {
+      //   val.default = false;
+      //   return val;
+      // });
+      return Object.assign({}, state, {
+        data: _.values(Object.assign({}, state.data, { [Object.keys(state.data).length + 1]: addr_id_add })),
+        deliverToAddress: action.payload.data.address_id,
+        ui: { loading: true },
       });
-      return Object.assign(
-        {},
-        state,
-        {
-          data: _.values(Object.assign({}, newData, { [Object.keys(tempState).length + 1]: addr_id_add })),
-          ui: { loading: true }
-        });
     },
   },
   [actions.EDIT_ADDR_DETAILS]: {
@@ -95,6 +96,18 @@ const shippingAddrReducer = typeToReducer({
       return Object.assign({}, state, { data: newData, ui: { loading: true } });
     },
   },
+  [actions.SELECT_DELIVER_TO_ADDRESS]: (state, action) => {
+    return {
+      ...state,
+      deliverToAddress: action.payload
+    }
+  },
+  [actions.CHANGE_STORE]: (state, action) => {
+    return {
+      ...state,
+      changeValue: !state.changeValue
+    }
+  }
 }, initialState);
 
 export default shippingAddrReducer;

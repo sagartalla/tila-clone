@@ -3,12 +3,12 @@ import React, { Component, Fragment } from 'react';
 import Cookie from 'universal-cookie';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import Slider from 'react-slick';
 import { bindActionCreators } from 'redux';
 import _ from 'lodash';
-import { Link, Router } from '../../../routes';
+import { Link } from '../../../routes';
 import Waypoint from 'react-waypoint';
 import { OverlayTrigger, Modal, Popover } from 'react-bootstrap';
-
 import constants from '../../../constants';
 import { actionCreators } from '../../../store/cam/wishlist';
 import { actionCreators as compareActions } from '../../../store/compare/actions';
@@ -42,7 +42,7 @@ class Product extends Component {
     super(props);
     this.state = {
       showNotify: false,
-      src: '',
+      src: `${constants.mediaDomain}/${props.media[0]}` || '',
       selectedIndex: 0,
       showLoader: false,
       btnType: '',
@@ -58,8 +58,9 @@ class Product extends Component {
     this.closeVariantTab = this.closeVariantTab.bind(this);
     this.showVariants = this.showVariants.bind(this);
     this.preventDefaultClick = this.preventDefaultClick.bind(this);
+    this.renderQuickView = this.renderQuickView.bind(this)
+    this.leaveImg = this.leaveImg.bind(this);
   }
-
   componentWillReceiveProps() {
     this.setState({ showLoader: false });
   }
@@ -81,6 +82,12 @@ class Product extends Component {
   }
 
   setImg() {
+    this.setState({
+      src: '',
+    });
+  }
+
+  leaveImg() {
     const { media = [] } = this.props;
     this.setState({
       src: `${constants.mediaDomain}/${media[0]}`,
@@ -194,12 +201,17 @@ class Product extends Component {
       this.addToCompare(e.target.previousSibling.checked);
     }
   }
-
+  renderQuickView(e) {
+    e.preventDefault();
+    const { selectedIndex } = this.state
+    const { row, itemNum, showQuickView, variants } = this.props
+    let vId = (variants.length > 0 && variants[selectedIndex].variantId)
+    showQuickView(itemNum,row, vId)
+  }
   addToCompare(checked) {
     const {
-      productId, itemtype, media, displayName, categoryId, addToCompare, removeCompareData,
+      productId, itemtype, media, displayName, categoryId, addToCompare, removeCompareData, catalogId: catalog_id, variantId: variant_id,
     } = this.props;
-
     const src = `${constants.mediaDomain}/${media[0]}`;
     if (!checked) {
       addToCompare({
@@ -208,6 +220,11 @@ class Product extends Component {
         src,
         displayName,
         categoryId,
+        catalogObj: {
+          product_id: productId,
+          catalog_id,
+          variant_id,
+        },
       });
     } else removeCompareData(productId);
   }
@@ -219,7 +236,6 @@ class Product extends Component {
 
   render() {
     const {
-      media = [],
       displayName,
       variants,
       productId,
@@ -230,7 +246,6 @@ class Product extends Component {
       brand,
       index,
       pageNum,
-      userDetails,
       selectedID,
       flags,
       addedToWishlist,
@@ -238,7 +253,12 @@ class Product extends Component {
       btnLoading,
       cmpData,
       wishlistId,
+      row,
+      itemNum,
+      media,
+      isQuickView,
     } = this.props;
+    const { src } = this.state;
     const { showNotify, selectedIndex, showLoader } = this.state;
     const selectedProduct = selectedID.length > 0 && selectedID.includes(productId);
     const discountValue = variants.length > 0 &&
@@ -246,7 +266,7 @@ class Product extends Component {
     const popover = (
       <Popover id={productId}>
         {variants.length > 0 && variants[selectedIndex].offersApplied &&
-          variants[selectedIndex].offersApplied.map(offer => <div>{offer}</div>)}
+          variants[selectedIndex].offersApplied.map((offer, index) => <div key={`${offer}${index}`}>{offer}</div>)}
       </Popover>
     );
 
@@ -257,11 +277,11 @@ class Product extends Component {
         >
           {variants[selectedIndex].sellingPrice[0]}
         </span>&nbsp;
-        <span className={`${styles['fs-12']} ${styles['black-color']}`}>{currency}</span>
+        <span className={`${styles['fs-10']} ${styles['black-color']}`}>{currency}</span>
         {discountValue > 5 &&
           <React.Fragment>
             <span className={`${styles['ml-5']} ${styles['label-gry-clr']} ${styles['fs-12']}`}>
-              <s>{variants[selectedIndex].mrp[0]}</s>
+              <s>{variants[selectedIndex].mrp[0]}&nbsp;<s className={styles['fs-10']}>{currency}</s></s>
             </span>
             {variants[selectedIndex].offersApplied &&
               variants[selectedIndex].offersApplied.length > 0 &&
@@ -282,23 +302,45 @@ class Product extends Component {
         <div
           className=
             {
-            `${styles['product-items-main']} ${styles['p-0']} ${selectedProduct ? styles['active-product'] : ''}`}
+            `${styles['product-items-main']} ${styles.relative} ${styles['p-0']} ${selectedProduct ? styles['active-product'] : ''}`}
             onClick = {() => this.routeChange(productId,variantId,catalogId,itemtype,index,pageNum)}>
           <Link route={`/${country}/${language}/product?productId=${productId}${variants.length > 0 && variants[selectedIndex].variantId ? `&variantId=${variants[selectedIndex].variantId}` : ''}&catalogId=${catalogId}&itemType=${itemtype}`}>
             <a>
-              <div className={`${styles['product-items']}`}>
+              <div className={`${styles['product-items']}`} onMouseEnter={this.setImg} onMouseLeave={this.leaveImg}>
                 {
                   showLoader ? <div className={styles['loader-div']}>
                     <SVGCompoent clsName={`${styles['loader-styl']}`} src="icons/common-icon/circleLoader" />
                   </div> : null
                 }
-                <div className={`${styles['img-cont']} ${styles['border-radius4']} ${styles['relative']}`}>
-                  <div className={styles['image-div']}>
-                    <Waypoint onEnter={this.setImg}>
-                      <img src={this.state.src} />
-                    </Waypoint>
+                {variants.length === 0 &&
+                  <div className={styles['notify-me-part']}>
+                    <h4 className={`${styles['fs-18']} ${styles['fontW600']} ${styles['black-color']}`}>{PDP_PAGE.OUT_OF_STOCK}</h4>
+                    <a className={`${styles['flex-center']} ${styles['notify-part-inn']} ${styles['white-color']} ${styles['fp-btn']} ${styles['right-radius']} ${styles['fp-btn-primary']}`} onClick={this.notify}>
+                      <span className={styles['pl-5']}>{PDP_PAGE.NOTIFY_ME}</span>
+                    </a>
                   </div>
-
+                }
+                <div onClick={this.renderQuickView} className={`${styles['img-cont']} ${styles['border-radius4']} ${styles['relative']}`}>
+                      <div className={`${styles['image-div']} srp-slider`}>
+                        {src ?
+                            <img src={src} alt="imageURL" />
+                          :
+                            <Slider
+                              className={`${styles['ht-100per']}`}
+                              autoplay
+                              arrows={false}
+                              dots
+                              autoplaySpeed={750}
+                              pauseOnHover={false}
+                            >
+                              {media && media.slice(0, 5).map(image => (
+                                <div>
+                                  <img src={`${constants.mediaDomain}/${image}`} alt="imageURL" />
+                                </div>
+                              ))}
+                            </Slider>
+                        }
+                      </div>
                   <span className={`${styles['variants-main']}`}></span>
                   <span className={styles['full-and-globe-main']}>
                     <span className={`${styles['fullfill-main']} ${styles['flex-center']}`}>
@@ -353,11 +395,12 @@ class Product extends Component {
                         />
                       </div>
                       :
-                      <div className={`${styles['flex']} ${styles['justify-around']} ${styles['quick-view']} ${styles['border-radius4']}`}>
-                        <a className={`${styles['flex-center']} ${styles['buy-now-btn']} ${styles['notifyBackground']}`} onClick={this.notify}>
-                          <span className={styles['pl-5']}>{PDP_PAGE.NOTIFY_ME}</span>
-                        </a>
-                      </div>
+                        null
+                      // <div className={`${styles['flex']} ${styles['justify-around']} ${styles['quick-view']} ${styles['border-radius4']}`}>
+                      //   <a className={`${styles['flex-center']} ${styles['buy-now-btn']} ${styles['notifyBackground']}`} onClick={this.notify}>
+                      //     <span className={styles['pl-5']}>{PDP_PAGE.NOTIFY_ME}</span>
+                      //   </a>
+                      // </div>
                   }
                   <div className={`${styles['wish-list-part']} ${styles['flx-space-bw']}`}>
                     <span className={styles['flex']}>
@@ -378,7 +421,7 @@ class Product extends Component {
                           checked={cmpData.products &&
                             _.findIndex(cmpData.products, o => o.productId === productId) > -1}
                         />
-                        <label for="add-to-compare-srp" className={`${styles['fs-12']}`}> {PDP_PAGE.ADD_TO_COMPARE}</label>
+                        <label htmlFor="add-to-compare-srp" className={`${styles['fs-12']}`}> {PDP_PAGE.ADD_TO_COMPARE}</label>
                       </div>
                       }
                   </div>
@@ -387,7 +430,7 @@ class Product extends Component {
                       getPriceAndOffer()}
                     </span>
                     {/* <span className={`${styles['fs-12']} ${styles['black-color']}`}>{currency}</span> */}
-                    <div className={`${styles['flex']} ${styles['pt-5']}`}>
+                    {/*<div className={`${styles['flex']} ${styles['pt-5']}`}>
                       <span className={styles['flex']}>
                         <SVGCompoent clsName={`${styles['star-raing']}`} src="icons/common-icon/star-full-yellow" />
                         <SVGCompoent clsName={`${styles['star-raing']}`} src="icons/common-icon/star-full-yellow" />
@@ -396,7 +439,7 @@ class Product extends Component {
                         <SVGCompoent clsName={`${styles['star-raing']}`} src="icons/common-icon/star-full-yellow" />
                       </span>
                       <span className={`${styles['label-gry-clr']} ${styles['pl-5']}`}>(153) </span>
-                    </div>
+                    </div>*/}
                   </div>
                   {/* <div className={styles['desc-cont']}>
                 <div className={`${styles['prdt-name']} ${styles['fs-12']} ${styles['pt-15']} ${styles['pb-5']}`}>
@@ -410,10 +453,12 @@ class Product extends Component {
                 </div>
               </div> */}
                 </div>
-                
               </div>
             </a>
           </Link>
+          {isQuickView &&
+            <div className={`${styles.absolute} ${styles.indication}`} />
+          }
         </div>
         <Modal show={showNotify} onHide={this.closeNotify}>
           <Modal.Header closeButton>

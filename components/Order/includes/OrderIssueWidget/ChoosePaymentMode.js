@@ -16,12 +16,13 @@ const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styl
 
 const { ORDER_PAGE } = languageDefinations();
 
-const RenderRadioInput = ({ paymentType, value, onCallBack }) => {
+const RenderRadioInput = ({ paymentType, value, onCallBack, name }) => {
   return (
     <div className={styles['pb-15']}>
       <input
         className={styles['radio-btn']}
         type="radio"
+        name={name}
         value={value}
         checked={paymentType === value}
         onChange={onCallBack}
@@ -32,75 +33,69 @@ const RenderRadioInput = ({ paymentType, value, onCallBack }) => {
 }
 class ChoosePaymentMode extends Component {
   constructor(props) {
-    super(props)
-
-    this.getPaymentModes = this.getPaymentModes.bind(this)
-    this.onOptionChange = this.onOptionChange.bind(this)
-    this.saveAndGoNext = this.saveAndGoNext.bind(this)
-    console.log('orderIssue', props.orderIssue);
+    super(props);
+    const { orderIssue } = props;
+    this.getPaymentModes = this.getPaymentModes.bind(this);
+    this.onOptionChange = this.onOptionChange.bind(this);
+    this.saveAndGoNext = this.saveAndGoNext.bind(this);
     this.state = {
-      paymentType: Object.keys(props.orderIssue.refundOptions).length > 0 &&
-                    props.orderIssue.refundOptions[props.orderIssue.issueType].indexOf("BACK_TO_SOURCE") !== -1
-                    ? 'Online' : 'Wallet'
+      paymentType: (orderIssue && orderIssue.refundOptions && orderIssue.refundOptions.refund_modes) ? orderIssue.refundOptions.refund_modes[0].display_name : '',
+      paymentMode: (orderIssue && orderIssue.refundOptions && orderIssue.refundOptions.refund_modes) ? orderIssue.refundOptions.refund_modes[0].name : '',
     }
   }
-  componentWillRecieveProps(nextProps) {
-    const { orderIssue,goToNextStep } = nextProps;
-
+  componentWillReceiveProps(nextProps) {
+    const { orderIssue } = nextProps;
+    let { paymentType } = this.state;
+    if (orderIssue && orderIssue.refundOptions.refund_modes && orderIssue.refundOptions.refund_modes[0]) {
+      this.setState({
+        paymentType: orderIssue.refundOptions.refund_modes[0].display_name,
+        paymentMode: orderIssue.refundOptions.refund_modes[0].name,
+      });
+    }
   }
   onOptionChange(e) {
     this.setState({
-      paymentType:e.currentTarget.value
+      paymentType: e.currentTarget.value,
+      paymentMode: e.currentTarget.name,
     })
   }
   saveAndGoNext() {
-    const { paymentType } = this.state
+    const { paymentMode } = this.state
     const { orderIssue,goToNextStep } = this.props
     const { issueType } = orderIssue
     const { selectedReasons } = orderIssue
-    var refundType = paymentType === 'Online' ? 'BACK_TO_SOURCE' : 'WALLET'
+    let refundType = paymentMode;
     const orderReturnParams = Object.assign({}, selectedReasons, { refund_mode: refundType })
-    if(issueType === 'RETURN') {
-      this.props.submitReturnRequest(orderReturnParams)
-    }
+    issueType === 'RETURN' ? this.props.submitReturnRequest(orderReturnParams) :
+                              this.props.setCancelRefundMode(refundType)
 
     goToNextStep()
   }
   getPaymentModes(payment) {
-    const { paymentType } = this.state
+    const { paymentType } = this.state;
+    let data = [];
     const { orderIssue } = this.props;
-    const { refundOptions } = orderIssue
-    var data = [<RenderRadioInput
-      key={'radio_1'}
-      value='Wallet'
-      onCallBack={this.onOptionChange}
-      paymentType={paymentType}
-    />
-    ]
-
-    if (Object.keys(refundOptions).length > 0
-        && refundOptions[orderIssue.issueType].indexOf("BACK_TO_SOURCE") !== -1) {
-      data.push(
-        <RenderRadioInput
-          key={'radio_2'}
-          value='Online'
+    const { refundOptions } = orderIssue;
+      refundOptions && refundOptions.refund_modes && refundOptions.refund_modes.length > 0 && refundOptions.refund_modes.map(options =>
+        data.push(<RenderRadioInput
+          key={'radio_1'}
+          name={options.name}
+          value={options.display_name}
           onCallBack={this.onOptionChange}
           paymentType={paymentType}
-        />
+        />)
       )
-    }
-
-    return data;
-  }
+      return data;
+}
   render() {
     const { orderDetails, orderIssue, goToNextStep } = this.props;
     const { paymentType } = this.state;
-    if(!Object.keys(orderIssue.refundOptions).length) {
+    if (!(orderIssue &&  Object.keys(orderIssue.refundOptions).length > 0)) {
       return <div>Loading...</div>
     }
-    if(Object.keys(orderIssue.refundOptions).length > 0
-     && orderIssue.refundOptions[orderIssue.issueType][0] === 'NIL') {
-       goToNextStep()
+    if (!(orderIssue && orderIssue.refundOptions.refund_eligible) || (orderIssue && orderIssue.refundOptions && orderIssue.refundOptions.refund_modes && orderIssue.refundOptions.refund_modes[0] === 'NIL')) {
+        goToNextStep();
+        return null;
      }
     return (
       <div>
@@ -111,7 +106,7 @@ class ChoosePaymentMode extends Component {
         <div>
           <button
             onClick={this.saveAndGoNext}
-            className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['retun-btn-part']}`}
+            className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['retun-btn-part']} ${styles['text-uppercase']}`}
           >
             {`${paymentType} Transfer`}
           </button>
@@ -132,7 +127,8 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       setReturnOrder: actionCreators.setReturnOrder,
-      submitReturnRequest: actionCreators.submitReturnRequest
+      submitReturnRequest: actionCreators.submitReturnRequest,
+      setCancelRefundMode:actionCreators.setCancelRefundMode
     },
     dispatch
   )

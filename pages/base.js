@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
 import { configureUrlQuery } from 'react-url-query';
 import createHistory from 'history/createBrowserHistory';
-import Cookies from 'universal-cookie';
+// import Cookies from 'universal-cookie';
 
 // import { uuidv4 } from '../store/helper/util';
-import { actionCreators, selectors } from '../store/auth';
-import makeStore from '../store';
+import { actionCreators } from '../store/auth';
+// import makeStore from '../store';
 
-const cookies = new Cookies();
+// const cookies = new Cookies();
 
 class Base extends Component {
-  componentWillMount() {
 
-  }
   componentDidMount() {
     const history = createHistory();
     configureUrlQuery({ history });

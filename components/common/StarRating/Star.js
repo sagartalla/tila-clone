@@ -1,31 +1,31 @@
-import React from 'react'
+import React from 'react';
 import SVGCompoent from '../SVGComponet';
 import Theme from '../../helpers/context/theme';
 
-const Star = ({isActive,willBeActive,clsStyl}) => {
-  return (
-    <Theme.Consumer>
+const Star = ({
+  isActive, willBeActive, clsStyl, clsName,
+}) => (
+  <Theme.Consumer>
     {
       categoryType => (
         <div
-          style={{width:'25px', marginRight:'5px'}}
+          style={clsStyl}
         >
           {
             willBeActive || isActive ?
-            <SVGCompoent
-              clsName={clsStyl}
-              src={`icons/common-icon/star/${categoryType}-star`}
-            /> :
-            <SVGCompoent
-              clsName={clsStyl}
-              src='icons/common-icon/star-no-rating'
-            />
+              <SVGCompoent
+                clsName={clsName}
+                src={`icons/common-icon/star/${categoryType}-star`}
+              /> :
+              <SVGCompoent
+                clsName={clsName}
+                src="icons/common-icon/star-no-rating"
+              />
           }
         </div>
       )
     }
-    </Theme.Consumer>
-  )
-}
+  </Theme.Consumer>
+);
 
-export default Star
+export default Star;

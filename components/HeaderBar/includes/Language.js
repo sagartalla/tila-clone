@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Dropdown, MenuItem } from "react-bootstrap";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import _ from 'lodash';
 import Cookies from 'universal-cookie';
-import { decode, encode, addUrlProps, replaceInUrlQuery } from 'react-url-query';
 
 import { actionCreators, selectors } from '../../../store/auth';
 
@@ -27,7 +24,7 @@ class Language extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedItem: 'en'
+      selectedItem: 'en',
     };
     this.changeLanguage = this.changeLanguage.bind(this);
     this.storeLanguage = this.storeLanguage.bind(this);
@@ -37,7 +34,7 @@ class Language extends Component {
   	const language = cookies.get('language') || this.state.selectedItem;
   	if(language){
   	  this.setState({
-        selectedItem: language
+        selectedItem: language,
       });
   	}
     this.storeLanguage(language);
@@ -62,7 +59,7 @@ class Language extends Component {
   render() {
     const { name, id } = languageData[this.state.selectedItem];
     return (
-      <div className={`${styles.pointer} ${styles['pr-20']} ${styles['border-rt']}`} onClick={this.changeLanguage} data-id={id}>
+      <div className={`${styles.pointer} ${styles['pr-20']} ${styles['pl-20']} ${styles['border-rt']}`} onClick={this.changeLanguage} data-id={id}>
         <span>{name}</span>
       </div>
     );
@@ -89,7 +86,7 @@ class Language extends Component {
 const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators(
 		{
-			setLanguage: actionCreators.setLanguage
+			setLanguage: actionCreators.setLanguage,
 		},
 		dispatch,
 	);

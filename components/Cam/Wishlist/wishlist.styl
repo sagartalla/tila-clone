@@ -4,6 +4,16 @@
   img
     height 120px
     object-fit scale-down
+    width 100%
+  .no-wishlist-icon-inn
+    height 100%
+    justify-content center
+    align-items center
+    padding-top 8%
+    flex-direction column
+    .deleno-wish-list-icon
+      width 150px
+      height 140px
   .cart-wishlist-popup
     position fixed
     left 0
@@ -16,6 +26,7 @@
     width 100%
 
     .cart-wishlist-title
+      cursor pointer
       overflow hidden
       text-overflow ellipsis
       display -webkit-box
@@ -135,3 +146,33 @@
     font-size 12px
   }
 }
+
+.wishlist-result 
+   height 400px
+  
+.loader-div
+    width 50px
+    height 50px
+    z-index 14
+  .loader-styl
+    svg
+      animation rotate 1.4s linear infinite
+      -webkit-animation rotate 1.4s linear infinite;
+      -moz-animation rotate 1.4s linear infinite;
+      @keyframes rotate {
+        to {
+          transform rotate(360deg);
+        }
+      }
+
+      @-webkit-keyframes rotate {
+        to {
+          -webkit-transform rotate(360deg);
+        }
+      }
+
+      @-moz-keyframes rotate {
+        to {
+          transform rotate(360deg);
+        }
+      }

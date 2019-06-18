@@ -105,7 +105,7 @@ class EmailModal extends Component {
     const order_number = this.state.selectedOrder ? `${baseCustomObjectUrl}.order_number/${this.state.selectedOrder.order_item_ids[0]}` : '';
     const countryCode = `${baseCustomObjectUrl}.incident_source_country/${country}`;
     const languageCode = `${baseCustomObjectUrl}.incident_source_language/${language}`;
-    const categoryCode = `/Incident.Category/${this.state.selectedIssue.category}`;
+    const categoryCode = this.state.selectedIssue.category ? `/Incident.Category/${Number(this.state.selectedIssue.category)}` : '';
     const chatURL = `${baseURL}${firstName}${lastName}${email}${categoryCode}${order_number}${countryCode}${languageCode}`;
     window.open(chatURL, '_blank');
   }
@@ -138,7 +138,8 @@ class EmailModal extends Component {
         },
         "text": this.state.msg
       },
-      "category": { "id": this.state.selectedIssue.catId },
+      "channel": { "id": 9},
+      ...(this.state.selectedIssue.catId && {"category": { "id": Number(this.state.selectedIssue.catId) }}),
       "customFields": {
         "c": {
           "incident_source_country": { "id": country },
@@ -199,7 +200,7 @@ class EmailModal extends Component {
     return (
       <div>
         <h4>Help is on the way</h4>
-        <div>Your query has been successfully created with reference - <a href={incidentsURL}>{this.state.referenceNumber}</a>. We will get back to you within 2 hrs</div>
+        <div>Your query has been successfully created with reference - <a href={incidentsURL}>{this.state.referenceNumber}</a>. We will get back to you within 48 hrs</div>
       </div>
     )
   }

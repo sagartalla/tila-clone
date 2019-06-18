@@ -12,6 +12,7 @@ const actions = {
   USER_UPDATE_FETCH_OTP:'USER_UPDATE_FETCH_OTP',
   VERIFY_OTP:'VERIFY_OTP',
   UPLOAD_PROFILE_PIC: 'UPLOAD_PROFILE_PIC',
+  DOWNLOAD_PROFILE_PIC: 'DOWNLOAD_PROFILE_PIC',
 };
 
 const actionCreators = {
@@ -21,19 +22,26 @@ const actionCreators = {
       payload: apis.getUserProfileInfo(),
     });
   },
-  changePassword: (body) => {
-    return ({
-      type: actions.CHANGE_PASSWORD,
-      payload: apis.changePassword(body),
-    });
-  },
+
+  changePassword: body => dispatch => dispatch({
+    type: actions.CHANGE_PASSWORD,
+    payload: apis.changePassword(body),
+  }).then(() => {
+    dispatch(actionCreators.getUserProfileInfo());
+  }),
+
   uploadProfilePic: (body) => {
     return ({
       type: actions.UPLOAD_PROFILE_PIC,
       payload: apis.uploadProfilePic(body),
     });
   },
-
+  downloadPic: (imageId) => {
+    return ({
+      type: actions.DOWNLOAD_PROFILE_PIC,
+      payload: apis.downloadPic(imageId),
+    })
+  },
   verifyOtp: params => dispatch => dispatch({
     type: actions.VERIFY_OTP,
     payload: apis.verifyOtp(params),

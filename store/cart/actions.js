@@ -1,5 +1,5 @@
 import api from './api';
-
+import * as addressSelectors from '../cam/address/selectors'
 const actions = {
   GET_CART_DETAILS: 'GET_CART_DETAILS',
   ADD_TO_CART: 'ADD_TO_CART',
@@ -20,8 +20,13 @@ const actionCreators = {
       payload: api.addToCart(params),
     };
   },
-  getCartResults: (params) => {
-    return ({
+  getCartResults: (params) => (dispatch, getState) => {
+    const store = getState();
+    params = {
+      ...params,
+      address_id: addressSelectors.getSelectedAddress(store).address_id
+    }
+    return dispatch({
       type: actions.GET_CART_DETAILS,
       payload: api.getCartDetailsApi(params),
     });

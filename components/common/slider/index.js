@@ -22,6 +22,7 @@ class Slider extends Component {
       children,
       label,
       style,
+      width,
     } = this.props;
     return (
       isOpen &&
@@ -29,6 +30,7 @@ class Slider extends Component {
         <div
           className={`${styles.sliderInner} ${styles['ht-100P']} ${styles.absolute} ${styles['align-center']} ${styles['justify-around']}`}
           onClick={this.handleChild}
+          style={{ width }}
         >
           <span
             className={`${styles.flex} ${styles['align-center']} ${styles['fs-40']} ${styles['justify-between']} ${styles.width100}`}

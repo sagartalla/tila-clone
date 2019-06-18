@@ -18,7 +18,7 @@ const AddressHeader = () => {
     <div className={styles['addr-header']}>
       <Row>
         <Col md={1} sm={3} xs={3}>
-          {/* <SVGComponent clsName={`${styles['map-icon']}`} src="icons/map/address" /> */}
+          <SVGComponent clsName={`${styles['map-icon']}`} src="icons/shipping-address-icons/shipping-title-icon" />
         </Col>
         <Col md={10} sm={9} xs={9}>
           <h1 className={`${styles['black-color']} ${styles['m-0']} ${styles['fs-20']} ${styles['fontW600']}`}>{DELIVERY_ADDR_PAGE.MANAGE_SHIP_ADDR}</h1>
