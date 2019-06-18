@@ -21,7 +21,6 @@ const AddressNew = (props) => {
     saveBtnClickHandler, resetAddAdrressForm, countriesData, showCountriesData, hideTitle,
     getDataFromMap, getAllCities, selectCityFromSuggesstions, showCitiesData, validation, isEditAddr,
   } = props;
-  console.log(data);
   const { DELIVERY_ADDR_PAGE } = languageDefinations();
   return (
     <div className={`${styles['addr-new-container']} ${styles['pb-30']} ${styles['pr-30']} ${styles['pl-30']}`}>
