@@ -602,6 +602,32 @@ const authReducer = typeToReducer({
       ui: { loading: false },
     }),
   },
+  [actions.SHIPPING_ACCOUNT]: {
+    PENDING: state => Object.assign({}, state, {
+      ui: {
+        loading: true,
+      },
+      data: {
+        ...state.data,
+      },
+    }),
+    FULFILLED: (state, action) => {
+      return Object.assign({}, state, {
+        data: {
+          ...state.data,
+          // resetToken: action.payload && action.payload.data && action.payload.data.token && action.payload.data.token,
+        },
+        ui: { loading: false },
+      });
+    },
+    REJECTED: (state, action) => Object.assign({}, state, {
+      data: {
+        ...state.data,
+      },
+      error: action.payload.data,
+      ui: { loading: false },
+    }),
+  },
 }, initialState);
 
 export default authReducer;
