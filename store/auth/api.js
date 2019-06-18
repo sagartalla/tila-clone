@@ -189,7 +189,12 @@ const resetPassword = (body) => {
 
 const forgotPassword = (body) => {
   return axios.post(`${constants.CMS_API_URL}/api/v1/user/password/forgot`, body).then(({data}) => {
-    toast.success(API_TEXT.OTP_SENT_TO_YOUR_MAIL_ID)
+    toast(
+      <ToastContent
+        msg={API_TEXT.OTP_SENT_TO_YOUR_MAIL_ID}
+        msgType='success'
+      />
+    )
     return data;
   }).catch((error) => {
     return error.response.data;
@@ -198,7 +203,12 @@ const forgotPassword = (body) => {
 
 const getMobileOtp = ( email ) => {
   return axios.get(`${constants.CMS_API_URL}/api/v1/user/password/forgot/mobile/otp?email=${email}`).then((data) => {
-    toast.success('OTP sent to your mobile number');
+    toast(
+      <ToastContent
+        msg='OTP sent to your mobile number'
+        msgType='success'
+      />
+    )
     return data;
   }).catch((error) => {
     return error.response.data;
