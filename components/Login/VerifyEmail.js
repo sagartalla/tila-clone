@@ -129,6 +129,7 @@ class VerifyEmail extends Component {
 
 const mapStateToProps = store => ({
   activeEmailId: selectors.getActiveEmailId(store),
+  loadingStatus: selectors.getLoadingStatus(store),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(

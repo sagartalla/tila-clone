@@ -213,9 +213,13 @@ const verifyResetOtp = (body) => {
   });
 }
 
+const shippingAccount = body => axios.put(`${constants.CMS_API_URL}/api/v1/user/account/edit`, body).then(({ data }) => {
+  return { data };
+});
+
 
 export default {
   userLogin, userLogout, getLoginInfo, setCountry, setSessionID, deriveCity, setCity, getDomainCountries,
   removeCity, setLanguage, savePtaToken, verifyEmail, sendOtpToEmailId, getUserInfo, setVerfied, track,
-  v2UserLogin, resetPassword, forgotPassword, showUserInfo, getMobileOtp, verifyResetOtp,
+  v2UserLogin, resetPassword, forgotPassword, showUserInfo, getMobileOtp, verifyResetOtp, shippingAccount,
 };

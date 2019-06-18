@@ -40,6 +40,7 @@ const actions = {
   CHANGE_CURRENT_FLOW: 'CHANGE_CURRENT_FLOW',
   GET_MOBILE_OTP: 'GET_MOBILE_OTP',
   VERIFY_RESET_OTP: 'VERIFY_RESET_OTP',
+  SHIPPING_ACCOUNT: 'SHIPPING_ACCOUNT',
 };
 
 const actionCreators = {
@@ -227,6 +228,14 @@ const actionCreators = {
       payload: api.verifyResetOtp(body),
     });
   },
+
+  shippingAccount: (body) => {
+    return ({
+      type: actions.SHIPPING_ACCOUNT,
+      payload: api.shippingAccount(body),
+    });
+  },
+  
 
 };
 
