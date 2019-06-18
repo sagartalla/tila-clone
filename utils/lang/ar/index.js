@@ -291,6 +291,7 @@ export const AR_KEYWORDS = {
     NO_CART_LABEL: 'Where are all the saved Cards?',
     NO_CARD_LABEL: 'Save your cards for faster checkouts.',
     NO_VOCHER_LABEL: 'Save your cards for faster checkouts.',
+    CREDIT: 'Credit',
   },
   // new page
   THANK_YOU_PAGE: {
