@@ -108,14 +108,14 @@ class VerifyStatus extends React.Component {
           <React.Fragment>
             <div className={styles['reset-link']}>
               <Row className={`${styles.flex}`}>
-                <Col md={7} className={`${styles['fs-14']}`}><span className={`${styles.flex} ${styles['flex-colum']}`}><span>{resetEmailLink}</span><span>{userData && userData.email}</span></span></Col>
+                <Col md={7} className={`${styles['fs-14']}`}><span className={`${styles.flex} ${styles['t-l']} ${styles['flex-colum']}`}><span>{resetEmailLink}</span><span>{userData && userData.email}</span></span></Col>
                 <Col md={5} className={`${styles.flex}`}><SVGComponent clsName={`${styles['email-success-icon']}`} src="icons/common-icon/email-sent" /></Col>
               </Row>
-              <a className={`${styles['text-blue']} ${styles['fs-12']} ${styles.pointer}`} data-id="email" onClick={this.sendLink}>{EMAIL_VERIFICATION.RESEND_THE_LINK}</a>
+              <a className={`${styles['text-blue']} ${styles['fs-14']} ${styles.pointer}`} data-id="email" onClick={this.sendLink}>{EMAIL_VERIFICATION.RESEND_THE_LINK}</a>
               <div className={`${styles.border} ${styles['mt-10']} ${styles['mb-10']}`} />
-              <div className={`${styles['fs-14']}`}>{EMAIL_VERIFICATION.PLEASE_CLICK_ON_EMAIL_LINK}</div>
+              <div className={`${styles['fs-14']} ${styles['t-l']}`}>{EMAIL_VERIFICATION.PLEASE_CLICK_ON_EMAIL_LINK}</div>
               <span className={styles['bg-light-gray']}>
-                <div className={`${styles['fs-12']}`}>
+                <div className={`${styles['fs-12']} ${styles['t-l']}`}>
                   {EMAIL_VERIFICATION.IF_YOU_DO_NOT_RECEIVE_YOUR_EMAIL}
                   &nbsp;{EMAIL_VERIFICATION.CHECK_YOUR_SPAM_FOLDER}
                 </div>
@@ -132,10 +132,10 @@ class VerifyStatus extends React.Component {
         <React.Fragment>
           <div className={styles['reset-link-mobile']}>
             <Row className={`${styles.flex}`}>
-              <Col md={8} className={`${styles['fs-14']}`}>{resetMobileLink}&nbsp;{userData && userData.mobile_no}</Col>
+              <Col md={8} className={`${styles['fs-14']} ${styles['t-l']}`}>{resetMobileLink}&nbsp;{userData && userData.mobile_no}</Col>
               <Col md={4} className={`${styles.flex}`}><SVGComponent clsName={`${styles['email-success-icon']}`} src="icons/common-icon/otp-sent" /></Col>
             </Row>
-            <div className={`${styles['text-blue']} ${styles['fs-12']} ${styles['mt-10']} ${styles.pointer}`} data-id="otp" onClick={this.sendLink}>{LOGIN_PAGE.RESEND_OTP}</div>
+            <div className={`${styles['text-blue']} ${styles['fs-14']} ${styles['mt-10']} ${styles.pointer}`} data-id="otp" onClick={this.sendLink}>{LOGIN_PAGE.RESEND_OTP}</div>
           </div>
           <div>
             <div>{LOGIN_PAGE.PLEASE_ENTER_FOUR_DIGIT_OTP}</div>
@@ -147,7 +147,6 @@ class VerifyStatus extends React.Component {
           <div className={`${styles['flex-center']} ${styles['mb-5']} ${styles['flex-colum']}`}>
             <OTPInput
               containerStyle={`${styles['justify-center']}`}
-              inputStyle={`${styles['border-none']} ${styles['border-b']}`}
               separator={<span>&nbsp;&nbsp;</span>}
               onChange={otp => this.saveOtp(otp)}
             />

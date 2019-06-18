@@ -30,13 +30,21 @@ class ContinueLogin extends Component {
         field: 'mobile_no',
         method: this.mobileValidation,
         validWhen: false,
-        message: 'Entered mobile number is invalid',
+        message: 'Entered mobile number should have 9 numbers',
+      },
+      {
+        field: 'mobile_no',
+        method: this.mobileWithZeroValidation,
+        validWhen: false,
+        message: 'Entered mobile number should have 10 numbers',
       },
     ]);
     this.state = {
-      gender: '',
-      city: '',
-      city_code: '',
+      data: {
+        gender: '',
+        shipping_city: '',
+        shipping_city_code: '',
+      },
       dob: {
         day: '',
         month: '',
@@ -55,34 +63,53 @@ class ContinueLogin extends Component {
   }
 
   onChangeCity(e) {
+    const { data } = this.state;
     const { autoCompleteCity } = this.props;
-    const city = e.target.value;
+    data.shipping_city = e.target.value;
     this.setState({
-      city,
+      data,
     }, () => {
       autoCompleteCity(displayCity);
     });
   }
   handleGenderChange = val => () => {
-    this.setState({ gender: val });
+    const { data } = this.state;
+    data.gender = val;
+    this.setState({ data });
   }
 
+  handleValidation = ({ target }) => {
+    const validation = this.validations.validateOnBlur({ [target.name]: target.value });
+    this.setState({ validation });
+  }
 
+  mobileWithZeroValidation = (fieldValue) => {
+    if (fieldValue === '' || fieldValue === undefined) {
+      return false;
+    } else if (Number(fieldValue[0]) === 0 && fieldValue.length === 10) {
+      return false;
+    } else if (Number(fieldValue[0]) !== 0) {
+      return false;
+    } return true;
+  }
   mobileValidation = (fieldValue) => {
-    if (fieldValue === '') {
+    if (fieldValue === '' || fieldValue === undefined) {
       return false;
-    } else if (fieldValue && fieldValue.length > 7 && fieldValue && fieldValue.length < 12) {
+    } else if (fieldValue.length === 9) {
       return false;
-    }
-    return true;
+    } else if (Number(fieldValue[0]) === 0) {
+      return false;
+    } return true;
   }
 
   selectCityFromSuggesstions(e) {
+    const { data } = this.state;
     const city = e.currentTarget.getAttribute('data-id');
-    const city_code = e.currentTarget.getAttribute('data-id');
+    const city_code = e.currentTarget.getAttribute('data-code');
+    data.shipping_city = city;
+    data.shipping_city_code = city_code;
     this.setState({
-      city,
-      city_code,
+      data,
     });
   }
 
@@ -119,19 +146,18 @@ class ContinueLogin extends Component {
     v2NextPage();
   }
 
-  submit = () => {
+  submit = (e) => {
+    e.preventDefault();
     const { v2NextPage, shippingAccount } = this.props;
     const {
-      gender,
-      city,
-      city_code,
-      dob,
+      data,
       mobile_no,
       mobile_country_code,
     } = this.state;
     const validation = this.validations.validate(this.state);
     if (validation.isValid) {
-      shippingAccount().then((res) => {
+      const body = Object.assign({}, data, { mobile_no }, { mobile_country_code }, { dob: '1995-06-15T06:55:50.790Z' });
+      shippingAccount(body).then(() => {
         v2NextPage();
       });
     }
@@ -142,10 +168,10 @@ class ContinueLogin extends Component {
 
   render() {
     const {
-      gender, city, dob, mobile_no, mobile_country_code, validation,
+      gender, city, mobile_no, mobile_country_code, validation, data, dob
     } = this.state;
     const { getAllCities } = this.props;
-    console.log('dob', dob);
+    console.log('data', data);
     return (
       <div className={`${styles['complete-login']} ${styles.flex} ${styles['justify-between']} ${styles['flex-colum']}`}>
         <div>
@@ -173,7 +199,9 @@ class ContinueLogin extends Component {
               {/* </Dropdown> */}
               <input
                 type="text"
+                name="mobile_no"
                 value={mobile_no}
+                onBlur={this.handleValidation}
                 onChange={this.handleMobileNumber}
                 className={`${styles['mobile-input']} ${styles['fs-14']} ${styles['ml-10']}`}
               />
@@ -191,7 +219,7 @@ class ContinueLogin extends Component {
               <Dropdown.Toggle id="dropdown-custom-components">
                 <input
                   type="text"
-                  value={city}
+                  value={data.shipping_city}
                   className={`${styles['fs-14']}`}
                   onChange={this.onChangeCity}
                 />
@@ -288,14 +316,14 @@ class ContinueLogin extends Component {
             <div className={`${styles['mt-5']} ${styles['gender-select-main']} ${styles['flex-center']}`}>
               <div className={styles['t-c']}>
                 <a onClick={this.handleGenderChange('M')}>
-                  <SVGComponent clsName={`${styles['gender-select-inn']} ${gender === 'M' ? 'select-icon' : 'not-select-icon'}`} src="icons/common-icon/male" />
-                  <span className={`${styles['fs-12']} ${gender === 'M' ? `${styles['black-color']} ${styles.fontW600}` : styles['label-gry-clr']}`}>{PERSONAL_INFO_MODAL.MALE}</span>
+                  <SVGComponent clsName={`${styles['gender-select-inn']} ${data.gender === 'M' ? 'select-icon' : 'not-select-icon'}`} src="icons/common-icon/male" />
+                  <span className={`${styles['fs-12']} ${data.gender === 'M' ? `${styles['black-color']} ${styles.fontW600}` : styles['label-gry-clr']}`}>{PERSONAL_INFO_MODAL.MALE}</span>
                 </a>
               </div>
               <div className={`${styles['ml-20']} ${styles['t-c']}`} onClick={this.handleGenderChange('F')}>
                 <a onClick={this.handleGenderChange('M')}>
-                  <SVGComponent clsName={`${styles['gender-select-inn']} ${gender === 'F' ? 'select-icon' : 'not-select-icon'}`} src="icons/common-icon/female" />
-                  <span className={`${styles['fs-12']} ${gender === 'F' ? `${styles['black-color']} ${styles.fontW600}` : styles['label-gry-clr']}`}>{PERSONAL_INFO_MODAL.FEMALE}</span>
+                  <SVGComponent clsName={`${styles['gender-select-inn']} ${data.gender === 'F' ? 'select-icon' : 'not-select-icon'}`} src="icons/common-icon/female" />
+                  <span className={`${styles['fs-12']} ${data.gender === 'F' ? `${styles['black-color']} ${styles.fontW600}` : styles['label-gry-clr']}`}>{PERSONAL_INFO_MODAL.FEMALE}</span>
                 </a>
               </div>
             </div>
