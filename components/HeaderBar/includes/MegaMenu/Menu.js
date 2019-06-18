@@ -59,7 +59,7 @@ class Menu extends Component {
     }
     return _.map(childCategory ? childCategory.childCategories : {}, (childItem) => {
       return (
-        <li className={`${styles['megamenu-sub-list']} ${depth === 2 ? styles['pl-20'] : null}`} key={childItem.id} onClick={this.props.onLinkClick}>
+        <li className={`${styles['megamenu-sub-list']} ${depth === 2 ? styles['pl-20'] : null}`} key={childItem.id} displayName={childItem.displayName} onClick={this.props.onLinkClick}>
           <span className={`${styles['flex']}`}>
             {
               isFirst
@@ -75,7 +75,7 @@ class Menu extends Component {
           {
             childItem.childCategories
             ?
-            <Leaves items={childItem.childCategories} parent={childItem} parentID={`${this.props.parentID},${childItem.id}`} />
+            <Leaves items={childItem.childCategories} colorScheme={this.props.colorScheme} parent={childItem} parentID={`${this.props.parentID},${childItem.id}`} />
             :
             null
           }

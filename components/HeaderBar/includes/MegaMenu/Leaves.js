@@ -40,6 +40,12 @@ class Leaves extends Component {
     });
   }
 
+  myFunction(name){
+    console.log('fsfsfs', this.props);
+
+
+  }
+
   render() {
     const { maxRows, isMoreButtonRequired } = this.state;
     const { items, parentID, parent } = this.props;
@@ -47,7 +53,8 @@ class Leaves extends Component {
       <ul className={`${styles['megamenu-sub-child-list']} ${styles['pl-20']}`}>
         {
           items.slice(0, maxRows).map(item => (item ? (
-            <li key={item.id} className={`${styles['pt-5']} ${styles['pb-5']}`}>
+            <li key={item.id} className={`${styles['pt-5']} ${styles['pb-5']}`} onClick={() => this.myFunction(item)}
+            >
               <Link route={`/${country}/${language}/srp/${item.displayName.split(' ').join('-').toLowerCase()}?categoryTree=true&isListed=false&sid=${parentID},${item.id}`}>
                 <a className={`${styles['level-1-item']}`}>{item.displayName}</a>
               </Link>
