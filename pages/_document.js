@@ -54,7 +54,7 @@ export default class MyDocument extends Document {
           </inlay-oracle-chat-embedded>
           <script
             id="oit-loader"
-            src="http://fptsuae.custhelp.com/s/oit/latest/common/v0/libs/oit/loader.js"
+            src="https://fptsuae.custhelp.com/s/oit/latest/common/v0/libs/oit/loader.js"
             data-oit-increment="true"
             data-oit-group="" async
           >
