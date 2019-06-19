@@ -129,7 +129,6 @@ class SearchResults extends Component {
 
   }
   fetchResults(product) {
-    const { search, isCategoryTree, choosenCategoryName } = this.props;
     const { renderQuickView } = this.state;
 
     const {
@@ -232,7 +231,7 @@ class SearchResults extends Component {
     let finalQuery = search ? search : isCategoryTree ? choosenCategoryName : '';
     finalQuery = finalQuery.split('-').join(' ');
     const {
-      results, pagiantionDetails, userDetails, notifyMe, cartButtonLoaders, isLastAddedToCartSuccess,
+      results, pagiantionDetails
     } = this.props;
     if(results.totalCount === 0) {
       return (
