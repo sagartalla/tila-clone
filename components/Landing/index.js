@@ -162,8 +162,8 @@ class Landing extends Component {
     super(props);
     this.state = {};
   }
-  componentWillReceiveProps(newProps) {
-    const { category } = newProps.query;
+  componentDidMount() {
+    const { category } = this.props.query;
     RemoteComponent.loadRemoteComponents([remoteComponents[category || 'homepage']])
       .then((children) => {
         this.setState({

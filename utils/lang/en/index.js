@@ -138,7 +138,7 @@ export const EN_KEYWORDS = {
     MAKE_DEFAULT: 'Make as Default',
     DELETE: 'Delete',
     EDIT_ADDR: 'Edit Address',
-    SAVE_ADDR: 'Save address',
+    SAVE_ADDR: 'Save Address',
     DELIVER_TO: 'Deliver To',
     ADD_NEW_BTN: 'Add New',
     ADD_NEW_ADDR: 'Add New Address',
@@ -376,6 +376,7 @@ export const EN_KEYWORDS = {
     MOBILE: 'Mobile',
     NOTIFY: 'Notify',
     NEXT: 'Next',
+    YOUR_PERSONAL :'Your personal information has been updated.'
   },
   NOTITICATION_INFO: {
     HEADING: 'New Notifications',

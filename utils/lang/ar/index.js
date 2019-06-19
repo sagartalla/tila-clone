@@ -365,6 +365,7 @@ export const AR_KEYWORDS = {
     MOBILE: 'رقم جوالك',
     NOTIFY: 'خبرني',
     NEXT: 'التالي',
+    YOUR_PERSONAL :'Your personal information has been updated.'
   },
   NOTITICATION_INFO: {
     HEADING: 'الإشعارات الجديدة',
