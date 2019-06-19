@@ -85,9 +85,11 @@ const errorInterceptor = (err) => {
       if (err.response.status === '403') {
         cookies.remove('auth');
       }
+      const msg = `${err.response.data.message}: ${err.response.data.sub_errors.map(e => e.message).join(' ')}`
+      console.log('asdasd', msg);
       toast(
         <ToastContent
-          msg={err.response.data.message || err.response.data.data.error.message}
+          msg={msg}
           msgType='error'
         />
       )
