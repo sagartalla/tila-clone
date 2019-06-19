@@ -137,7 +137,8 @@ export const EN_KEYWORDS = {
     DEFAULT_ADDR: 'Default Address',
     MAKE_DEFAULT: 'Make as Default',
     DELETE: 'Delete',
-    EDIT_ADDR: 'Save Address',
+    EDIT_ADDR: 'Edit Address',
+    SAVE_ADDR: 'Save Address',
     DELIVER_TO: 'Deliver To',
     ADD_NEW_BTN: 'Add New',
     ADD_NEW_ADDR: 'Add New Address',
@@ -145,7 +146,7 @@ export const EN_KEYWORDS = {
     HOME: 'HOME',
     WORK: 'WORK',
     PREF_LOC: 'My preffered location',
-    CANCEL: 'إلغاء',
+    CANCEL: 'CANCEL',
     SAVE_DELIVER_BTN: 'Save New Address',
     ENTER_LOC: 'Enter a location',
     ADD_NEW_ADDR_TAG: 'Add address where you want the orders to be delivered.',
@@ -375,6 +376,7 @@ export const EN_KEYWORDS = {
     MOBILE: 'Mobile',
     NOTIFY: 'Notify',
     NEXT: 'Next',
+    YOUR_PERSONAL :'Your personal information has been updated.'
   },
   NOTITICATION_INFO: {
     HEADING: 'New Notifications',
