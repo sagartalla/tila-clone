@@ -47,9 +47,18 @@ const subTypes = {
 
 const Brand = ({ pageData }) => {
   const { page_content } = pageData;
+  console.log("page_content ;", page_content);
+
   return (<>
   {
     page_content.map((item) => {
+      
+      if(!item.visible){
+        return (
+          null
+        )
+      }
+
       switch (item.sub_type) {
         case subTypes.CAROUSEL:
           return (
@@ -91,7 +100,7 @@ const Brand = ({ pageData }) => {
             </Row>
           );
         default: return(
-          <div></div>
+          null
         )
       }
     })
