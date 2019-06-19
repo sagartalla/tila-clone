@@ -48,7 +48,7 @@ class ContinueLogin extends Component {
       dob: {
         day: '',
         month: '',
-        year: '',
+        year: '1900',
       },
       mobile_no: '',
       mobile_country_code: '966',
@@ -151,12 +151,13 @@ class ContinueLogin extends Component {
     const { v2NextPage, shippingAccount } = this.props;
     const {
       data,
+      dob,
       mobile_no,
       mobile_country_code,
     } = this.state;
     const validation = this.validations.validate(this.state);
     if (validation.isValid) {
-      const body = Object.assign({}, data, { mobile_no }, { mobile_country_code }, { dob: '1995-06-15T06:55:50.790Z' });
+      const body = Object.assign({}, data, { mobile_no }, { mobile_country_code }, { dob: dob.year / dob.month / dob.day });
       shippingAccount(body).then(() => {
         v2NextPage();
       });

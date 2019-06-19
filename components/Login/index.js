@@ -207,12 +207,16 @@ class Login extends Component {
 
   loadPage = () => {
     const { activeObj, showEmailSuccess, showOtpSuccess } = this.props;
-
+    console.log('activeObj', activeObj);
     switch (activeObj && activeObj.activePage && activeObj.activePage) {
       case 'password':
         return <SignIn mode="EXISTING_USER" />;
       case 'password_new':
         return <SignIn mode="NEW_USER" />;
+      case 'social_login':
+        return <SignIn mode="SOCIAL_LOGIN" />;
+      case 'signin_page':
+        return <LoginPage />;
       case 'security_page':
         return <ForgotSecurityPage />;
       case 'reset_type':
@@ -227,8 +231,6 @@ class Login extends Component {
         return <ExistingSocialLogin />;
       case 'reset_screen':
         return <ResetpasswordMain onBackdropClick={this.onBackdropClick} />;
-      case 'details_screen':
-        return <SignIn />;
       case 'shipping_to_page':
         return <CompleteSignUp />;
       default:
@@ -241,8 +243,8 @@ class Login extends Component {
       activeObj,
     } = this.props;
     return (
-      <Modal className={activeObj.activePage === 'thank_you' ? `react-router-modal__modal ${styles['background-transparent']}  ${styles['border-none']} ${styles['p-10']}` : `react-router-modal__modal ${styles['login-reg-modal']} ${styles['p-10']}`} onBackdropClick={this.onBackdropClick}>
-        {activeObj.activePage === 'thank_you' ?
+      <Modal className={activeObj && activeObj.activePage && activeObj.activePage === 'thank_you' ? `react-router-modal__modal ${styles['background-transparent']}  ${styles['border-none']} ${styles['p-10']}` : `react-router-modal__modal ${styles['login-reg-modal']} ${styles['p-10']}`} onBackdropClick={this.onBackdropClick}>
+        {activeObj && activeObj.activePage && activeObj.activePage === 'thank_you' ?
           <ThankYou /> :
           <Row className={`${styles['m-0']}`}>
             <div className={`${styles.flex}`}>

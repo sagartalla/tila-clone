@@ -27,7 +27,7 @@ class SignIn extends Component {
     this.validations = new FormValidator([
       {
         field: 'password',
-        method: this.emptyValue,
+        method: props.mode === 'NEW_USER' || props.mode === 'EXISTING_USER' ? this.emptyValue : () => false,
         message: props.mode === 'NEW_USER' ? 'Please enter password' : 'Please enter your password',
         validWhen: false,
       },
@@ -38,26 +38,38 @@ class SignIn extends Component {
         message: 'Please enter valid password',
       },
       {
-        field: 'first_name',
-        method: props.mode === 'NEW_USER' ? this.emptyValue : () => false,
-        message: 'Please enter firstname',
+        field: 'email',
+        method: props.mode === 'SOCIAL_LOGIN' ? this.emptyValue : () => false,
+        message: 'Please enter email Id',
+        validWhen: false,
+      },
+      {
+        field: 'email',
+        method: props.mode === 'SOCIAL_LOGIN' ? this.checkEmailValidation : () => false,
+        message: 'Please enter correct email Id',
         validWhen: false,
       },
       {
         field: 'first_name',
-        method: props.mode === 'NEW_USER' ? this.checkNameValidation : () => false,
+        method: props.mode === 'NEW_USER' || props.mode === 'SOCIAL_LOGIN' ? this.emptyValue : () => false,
+        message: 'Please enter first name',
+        validWhen: false,
+      },
+      {
+        field: 'first_name',
+        method: props.mode === 'NEW_USER' || props.mode === 'SOCIAL_LOGIN' ? this.checkNameValidation : () => false,
         validWhen: false,
         message: 'First name should not exceed 30 characteristics',
       },
       {
         field: 'last_name',
-        method: props.mode === 'NEW_USER' ? this.emptyValue : () => false,
-        message: 'Please enter lastname',
+        method: props.mode === 'NEW_USER' || props.mode === 'SOCIAL_LOGIN' ? this.emptyValue : () => false,
+        message: 'Please enter last name',
         validWhen: false,
       },
       {
         field: 'last_name',
-        method: props.mode === 'NEW_USER' ? this.checkNameValidation : () => false,
+        method: props.mode === 'NEW_USER' || props.mode === 'SOCIAL_LOGIN' ? this.checkNameValidation : () => false,
         validWhen: false,
         message: 'Last name should not exceed 30 characteristics',
       },
@@ -65,10 +77,11 @@ class SignIn extends Component {
     this.state = {
       hide: true,
       password: '',
+      email: '',
       first_name: '',
       last_name: '',
       promotional_notification: false,
-      rememberMe: !!localStorage.getItem('remember'),
+      // rememberMe: !!localStorage.getItem('remember'),
       validation: this.validations.valid(),
     };
   }
@@ -83,7 +96,7 @@ class SignIn extends Component {
     const validation = this.validations.validateOnBlur({ [target.name]: target.value });
     this.setState({ validation });
   }
-
+  
   emptyValue = fieldValue => fieldValue === '';
 
   passwordValidation = (fieldValue) => {
@@ -94,6 +107,12 @@ class SignIn extends Component {
   checkNameValidation = (fieldValue) => {
     if (fieldValue && fieldValue.length >= 30) return false;
     return false;
+  }
+
+  checkEmailValidation = (fieldValue) => {
+    const emailReg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (emailReg.test(fieldValue)) return false;
+    return true;
   }
 
   handleCheck = ({ target }) => {
@@ -121,17 +140,20 @@ class SignIn extends Component {
     // const { v2CurrentFlow } = this.props;
     // v2CurrentFlow(data);
   }
+  goToPreviousPage = () => {
+    const { v2PreviousPage } = this.props;
+    v2PreviousPage();
+  }
 
   login = () => {
     const {
-      first_name, last_name, password, rememberMe, promotional_notification,
+      first_name, last_name, password, rememberMe, promotional_notification, email,
     } = this.state;
     const {
-      activeEmailId, userLogin, mode,
+      activeEmailId, userLogin, mode, v2NextPage,
     } = this.props;
 
     const validation = this.validations.validate(this.state);
-    console.log(validation, 'wcchedgy');
     if (mode === 'EXISTING_USER') {
       if (validation.isValid) {
         const serverData = {
@@ -140,13 +162,13 @@ class SignIn extends Component {
             username: activeEmailId,
             password,
           },
-          rememberMe,
+          rememberMe: false,
         };
-        if (rememberMe) {
-          localStorage.setItem('remember', JSON.stringify({ email: activeEmailId, password }));
-        } else {
-          localStorage.removeItem('remember');
-        }
+        // if (rememberMe) {
+        //   localStorage.setItem('remember', JSON.stringify({ email: activeEmailId, password }));
+        // } else {
+        //   localStorage.removeItem('remember');
+        // }
         userLogin(serverData);
       }
     } else if (mode === 'NEW_USER') {
@@ -162,10 +184,24 @@ class SignIn extends Component {
             mobile_country_code: '',
             promotional_notification,
           },
-          rememberMe,
+          rememberMe: false,
         };
         userLogin(serverData, 'register');
       }
+    } else if (mode === 'SOCIAL_LOGIN') {
+      // if (validation.isValid) {
+      //   const serverData = {
+      //     channel: 'SOCIAL_LOGIN_REGISTER',
+      //     metadata: {
+      //       username: email,
+      //       first_name,
+      //       last_name,
+      //     },
+      //   };
+      //   userLogin(serverData, 'register').then(() => {
+          v2NextPage();
+        // });
+      // }
     }
     this.setState({ validation });
   }
@@ -176,19 +212,23 @@ class SignIn extends Component {
   // 3. User signup through social login
   render() {
     const {
-      hide, promotional_notification, password, rememberMe, passwordErr, first_name, last_name, validation,
+      hide, promotional_notification, password, rememberMe, passwordErr, first_name, last_name, validation, email,
     } = this.state;
-    const { showForgotPassword, mode, activeEmailId, loadingStatus } = this.props;
+    const { showForgotPassword, mode, activeEmailId, loadingStatus, getActiveUser } = this.props;
     return (
       <div className={`${styles['main-signin']} ${styles.flex} ${styles['flex-colum']} ${styles['justify-evenly']}`}>
         <div className={`${styles['mb-10']}`}>
+        <div className={`${styles.flex}`}>
           <h3 className={`${styles['fs-18']} ${styles['mt-0']} ${styles['mb-0']} ${styles['ff-b']}`}>
             {mode === 'EXISTING_USER' ?
               'Hi, Welcome Back!' :
               mode === 'NEW_USER' ? 'Hi, New to Tila?' : 'Glad to have you here.' }
           </h3>
+          {mode !== 'SOCIAL_LOGIN' && <div className={`${styles['ml-20']} ${styles['fs-12']} ${styles['pl-10']} ${styles['pr-10']} ${styles.fontW600} ${styles['edit-button']} ${styles['border-radius2']} ${styles.pointer}`} onClick={this.goToPreviousPage}>EDIT</div>}
+          </div>       
           <div className={`${styles['light-gry-clr']} ${styles['fs-12']}`}>{mode === 'SOCIAL_LOGIN' ? 'Pls provide email ID to receive registration confirmation.' : activeEmailId}</div>
         </div>
+        {mode !== 'SOCIAL_LOGIN' &&
         <div className={mode === 'EXISTING_USER' ? `${styles['login-show']}` : `${styles['signup-show']}`}>
           <div className={`${styles['fp-input']} ${styles['mt-30']}`}>
             <input
@@ -210,12 +250,34 @@ class SignIn extends Component {
                   <span className={`${styles['error-msg']}`}>{validation.password.message}</span>
                 </div> : null
             }
-            {mode !== 'SOCIAL_LOGIN' && <ShowHidePassword hide={hide} hideToggle={this.hideToggle} />}
+            <ShowHidePassword hide={hide} hideToggle={this.hideToggle} />
           </div>
-        </div>
+        </div>}
+        {mode === 'SOCIAL_LOGIN' &&
+          <div className={`${styles['fp-input']} ${styles['mt-30']}`}>
+            <input
+              name="email"
+              type="text"
+              className={`${styles.width100}`}
+              autoComplete="off"
+              value={email}
+              onChange={this.handleOnChange}
+              onBlur={this.handleValidation}
+              required
+            />
+            <label className={`${styles['label-light-grey']}`}>
+              {LOGIN_PAGE.ENTER_YOUR_EMAIL_ID}
+            </label>
+            {
+              validation.email && validation.email.isInValid ?
+                <div>
+                  <span className={`${styles['error-msg']}`}>{validation.email.message}</span>
+                </div> : null
+            }
+          </div>}
         {mode !== 'EXISTING_USER' &&
         <React.Fragment>
-          <div className={`${styles['fp-input']} ${styles['pb-10']}`}>
+          <div className={`${styles['fp-input']} ${styles['pb-10']} ${styles['mt-10']}`}>
             <input
               type="text"
               name="first_name"
@@ -256,19 +318,19 @@ class SignIn extends Component {
         </React.Fragment>
         }
         {mode === 'EXISTING_USER' &&
-        <Col md={12} className={`${styles['p-0']} ${styles['fs-12']} ${styles.flex} ${styles['justify-between']}`}>
-          <div className={`${styles['checkbox-material']} ${styles.flex} ${styles['p-0']}`}>
+        <Col md={12} className={`${styles['p-0']} ${styles['fs-12']} ${styles.flex} ${styles['justify-end']}`}>
+          {/* <div className={`${styles['checkbox-material']} ${styles.flex} ${styles['p-0']}`}>
             <input id="remember_me" name="rememberMe" type="checkbox" onChange={this.handleCheck} checked={rememberMe} />
             <label htmlFor="remember_me">
               <span className={`${styles['register-policy-gray']}`}>{LOGIN_PAGE.REMEMBER_ME}</span>
             </label>
-          </div>
-          <div className={`${styles['text-blue']} ${styles.pointer}`} onClick={this.showForgotPassword}>
+          </div> */}
+          <div className={`${styles['text-blue']} ${styles['mb-10']} ${styles.pointer}`} onClick={this.showForgotPassword}>
             {LOGIN_PAGE.FORGOT_PASSWORD}
           </div>
         </Col>}
-        {mode !== 'SOCIAL_LOGIN' &&
-        <Col md={12} className={`${styles['p-0']} ${styles['mt-40']}  ${styles['mb-10']}`}>
+        {mode !== 'SOCIAL_LOGIN' && !getActiveUser.opted_for_deals &&
+        <Col md={12} className={`${styles['p-0']} ${styles['mt-20']}  ${styles['mb-10']}`}>
           {
             <div className={`${styles['checkbox-material']} ${styles.flex} ${styles['p-0']}`}>
               <input id="deals-offers-reg" name="promotional_notification" type="checkbox" onChange={this.handleCheck} checked={promotional_notification} />
@@ -280,11 +342,11 @@ class SignIn extends Component {
         </Col>}
         <Button
           className={`${styles['sign-in-btn']} ${styles['text-uppercase']}`}
-          btnText={HEADER_PAGE.LOGIN}
+          btnText={mode === 'EXISTING_USER' ? HEADER_PAGE.LOGIN : LOGIN_PAGE.SIGNUP}
           btnLoading={loadingStatus}
           onClick={this.login}
         />
-        <span className={`${styles['m-20']} ${styles['t-c']} ${styles['fs-12']} ${styles['register-policy-gray']}`}>{LOGIN_PAGE.BY_LOGIN_I_AGREE_TO_TERMS} <span className={`${styles['text-blue']}`}>{LOGIN_PAGE.T_AND_C}, {LOGIN_PAGE.PRIVACY} {LOGIN_PAGE.AND} {LOGIN_PAGE.COOKIE_POLICY}</span></span>
+        <span className={`${styles['m-20']} ${styles['t-c']} ${styles['fs-12']} ${styles['register-policy-gray']}`}>{mode === 'EXISTING_USER' ? LOGIN_PAGE.BY_LOGIN_I_AGREE_TO_TERMS : LOGIN_PAGE.BY_SIGNUP_I_AGREE_TO_TERMS } <span className={`${styles['text-blue']}`}>{LOGIN_PAGE.T_AND_C}, {LOGIN_PAGE.PRIVACY} {LOGIN_PAGE.AND} {LOGIN_PAGE.COOKIE_POLICY}</span></span>
       </div>
     );
   }
@@ -294,13 +356,15 @@ const mapStateToProps = store => ({
   activeEmailId: selectors.getActiveEmailId(store),
   activeObj: selectors.getActive(store),
   loadingStatus: selectors.getLoadingStatus(store),
+  getActiveUser: selectors.getActiveUser(store),
 });
 const mapDispatchToProps = dispatch => bindActionCreators(
   {
     v2CurrentFlow: actionCreators.v2CurrentFlow,
     userLogin: actionCreators.userLogin,
-    newUserRegister: actionCreators.v2NextPage,
+    v2NextPage: actionCreators.v2NextPage,
     showUserInfo: actionCreators.showUserInfo,
+    v2PreviousPage: actionCreators.v2PreviousPage,
   },
   dispatch,
 );
