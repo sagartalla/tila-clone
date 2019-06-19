@@ -792,7 +792,7 @@ export const AR_KEYWORDS = {
     MY_ORDERS: 'طلباتي',
     WISHLIST: 'الأماني',
     SHIPPING_ADDRESS: 'عنوان الشحن',
-    CREDIT_CARDS_VOUCHERS_REWARD_POINTS: 'بطاقه الائتمان\ القسيمه الشرائيه\ الجوائز',
+    CREDIT_CARDS_VOUCHERS_REWARD_POINTS:'البطاقات المحفوظة ورصيد تيله',
     MY_COUPONS: 'قسائم بلدي',
     PREFERENCES: 'تفضيلات',
     REVIEWS_AND_RATINGS: 'بلدي الاستعراضات والتقييمات',
