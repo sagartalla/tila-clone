@@ -802,7 +802,7 @@ export const EN_KEYWORDS = {
   },
   CAM: {
     MY_ORDERS: 'My Orders',
-    WISHLIST: 'Wishlist',
+    WISHLIST: 'My Wishlist',
     SHIPPING_ADDRESS: 'Delivery Address',
     CREDIT_CARDS_VOUCHERS_REWARD_POINTS: 'Saved Cards & Tila Credit',
     MY_COUPONS: 'My Coupons',
