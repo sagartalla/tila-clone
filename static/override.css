@@ -300,5 +300,7 @@
   padding: 0;
 }
 .Toastify__toast-container {
-  width: 310px
+  width: initial !important;
+  margin-left: 0 !important;
+  transform: translateX(-50%);
 }

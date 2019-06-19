@@ -376,6 +376,7 @@ export const EN_KEYWORDS = {
     MOBILE: 'Mobile',
     NOTIFY: 'Notify',
     NEXT: 'Next',
+    YOUR_PERSONAL :'Your personal information has been updated.'
   },
   NOTITICATION_INFO: {
     HEADING: 'New Notifications',
