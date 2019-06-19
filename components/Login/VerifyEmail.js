@@ -18,7 +18,7 @@ import styles_ar from './login_ar.styl';
 
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
-const { EMAIL_VERIFICATION } = languageDefinations();
+const { EMAIL_VERIFICATION, LOGIN_PAGE } = languageDefinations();
 
 class VerifyEmail extends Component {
   constructor(props) {
@@ -26,9 +26,17 @@ class VerifyEmail extends Component {
     this.state = {
       value: '',
       otpError: false,
+      seconds: 30 * 60,
     };
   }
 
+  getSeconds = (sec) => {
+    if (sec === 0) {
+      this.setState({
+        seconds: sec,
+      });
+    }
+  }
   enterOtp = (e) => {
     let { otpError, value } = this.state;
     if (e.target.value) {
@@ -68,18 +76,22 @@ class VerifyEmail extends Component {
 
   sendOtpToEmailId = () => {
     const { sendOtpToEmailId } = this.props;
-    sendOtpToEmailId();
+    sendOtpToEmailId().then(() => {
+      this.setState({
+        seconds: 30 * 60,
+      });
+    });
   }
 
   render() {
-    const { activeEmailId, onBackdropClick, loadingStatus } = this.props;
-    const { value, otpError } = this.state;
+    const { activeEmailId, loadingStatus } = this.props;
+    const { value, otpError, seconds } = this.state;
     return (
       <div className={`${styles.width100}`}>
-        <div className={`${styles.flex} ${styles['align-center']} ${styles['justify-between']}  ${styles['mt-15']}`}>
+        <div className={`${styles.flex} ${styles['align-center']} ${styles['justify-between']}`}>
           <div className={`${styles['ff-b']} ${styles['fs-20']}`}>{EMAIL_VERIFICATION.VERIFY_YOUR_EMAIL}</div>
         </div>
-        <div className={`${styles.flex} ${styles['justify-between']} ${styles['flex-col']} ${styles['email-form']} ${styles['mt-20']}`}>
+        <div className={`${styles.flex} ${styles['justify-between']} ${styles['flex-col']} ${styles['email-form']} ${styles['mt-20']} ${styles['mb-20']}`}>
           <div className={`${styles['verify-email']} ${styles['p-10']}`}>
             <div className={`${styles.flex} ${styles['align-center']}`}>
               <SVGComponent clsName={`${styles['tickmark-icon']}`} src="icons/common-icon/blue-tick" />
@@ -101,12 +113,12 @@ class VerifyEmail extends Component {
             {otpError ? <div className={`${styles['thick-red-clr']}`}>{EMAIL_VERIFICATION.PLEASE_ENTER_OTP_SENT}</div> : ''}
             <div className={`${styles['flex-colum']}`}>
               <div className={`${styles['otp-expire']}`}>
-                {EMAIL_VERIFICATION.OTP_EXPIRE_IN}&nbsp;
-                <span className={styles['black-color']}><Timer time={30} /></span>
+              {seconds === 0 ? <div>OTP has <span className={`${styles['thick-red']}`}>Expired</span>, Please click on the resend link below</div> : LOGIN_PAGE.OTP_EXPIRE_IN}&nbsp;
+              {seconds !== 0 && <span className={styles['black-color']}><Timer time={seconds} getSeconds={this.getSeconds} /></span>}
               </div>
               <div className={styles['t-c']}>
                 <span
-                  className={`${styles['lgt-blue']} ${styles.fontW600} ${styles.pointer}`}
+                  className={`${styles['text-blue']} ${styles.fontW600} ${styles.pointer}`}
                   onClick={this.sendOtpToEmailId}
                 >
                   {EMAIL_VERIFICATION.RESEND}

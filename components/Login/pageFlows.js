@@ -17,6 +17,7 @@ const pageFlows = {
   existing_user_login: {
     password: {
       activePage: 'password',
+      backpage: 'signin_page',
       nextPage: '',
     },
     verify_email: {
@@ -92,8 +93,8 @@ const pageFlows = {
     },
   },
   not_accessable_social_user: {
-    details_screen: {
-      activePage: 'details_screen',
+    social_login: {
+      activePage: 'social_login',
       nextPage: 'verify_email',
     },
     verify_email: {

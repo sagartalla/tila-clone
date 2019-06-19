@@ -41,6 +41,7 @@ const actions = {
   GET_MOBILE_OTP: 'GET_MOBILE_OTP',
   VERIFY_RESET_OTP: 'VERIFY_RESET_OTP',
   SHIPPING_ACCOUNT: 'SHIPPING_ACCOUNT',
+  V2_PREVIOUS_PAGE: 'V2_PREVIOUS_PAGE',
 };
 
 const actionCreators = {
@@ -51,6 +52,9 @@ const actionCreators = {
   }),
   v2NextPage: () => ({
     type: actions.V2_SHOW_NEXT_PAGE,
+  }),
+  v2PreviousPage: () => ({
+    type: actions.V2_PREVIOUS_PAGE,
   }),
   v2CurrentFlow: data => ({
     type: actions.CHANGE_CURRENT_FLOW,
