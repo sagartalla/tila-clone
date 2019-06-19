@@ -128,6 +128,9 @@ class CartItem extends React.Component {
   sendGiftPack = ({ target }) => {
     const { addOrRemoveGift } = this.props;
     const { gift_card_message } = this.state;
+    this.setState({
+      showMessage: true,
+    })
     addOrRemoveGift(target.getAttribute('data-id'), 'add', {
       gift_card_message,
     });
@@ -221,7 +224,7 @@ class CartItem extends React.Component {
                         shipping !== null && (shipping.shippable && (
                           <p className={`${styles['mb-0']} ${styles['fs-12']}`}>
                             <span className={styles['thick-gry-clr']}>{CART_PAGE.SHIPPING} :</span>
-                            <span className={`${styles['pl-10']} ${styles['pr-10']}`}>{CART_PAGE.REGULAR_SHIPPING} {shipping.shipping_fees ? `(${shipping.shipping_fees.display_value} ${shipping.shipping_fees.currency_code})` : ''} - <span className={`${styles['fs-12']} ${styles['base-font']}`}>{CART_PAGE.ETA_DELIVERY_BY} {moment().add(shipping.shipping_days, 'days').format('LL')}</span>
+                            <span className={`${styles['pl-10']} ${styles['pr-10']}`}>{CART_PAGE.REGULAR_SHIPPING} {shipping.shipping_fees ? `(${shipping.shipping_fees.display_value} ${cur})` : ''} - <span className={`${styles['fs-12']} ${styles['base-font']}`}>{CART_PAGE.ETA_DELIVERY_BY} {moment().add(shipping.shipping_days, 'days').format('LL')}</span>
                             </span>
                           </p>
                         ))
