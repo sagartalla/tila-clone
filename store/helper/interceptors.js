@@ -61,9 +61,6 @@ const notifySentry = (err) => {
       scope.setExtra(`statusCode`, err.response.status);
       scope.setExtra(`reqHeaders`, err.config.headers);
       scope.setExtra(`resHeaders`, err.response.headers);
-      if (req.user) {
-        scope.setUser({ id: req.user.id, email: req.user.email });
-      }
   });
   Sentry.captureException(err);
 };
