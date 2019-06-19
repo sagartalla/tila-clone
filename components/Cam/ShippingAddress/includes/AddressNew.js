@@ -231,7 +231,7 @@ const AddressNew = (props) => {
           <Col md={12} sm={12} xs={12} className={styles['m-flx']}>
             <Button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-x-large']} ${styles['m-fs-11']} ${styles['text-uppercase']} ${styles['left-radius']} ${styles['m-pad-10']}`} onClick={saveBtnClickHandler} >
               {isEditAddr ?
-                DELIVERY_ADDR_PAGE.EDIT_ADDR
+                DELIVERY_ADDR_PAGE.SAVE_ADDR
                 :
                 DELIVERY_ADDR_PAGE.SAVE_DELIVER_BTN
               }
