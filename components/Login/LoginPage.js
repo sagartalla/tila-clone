@@ -1,6 +1,6 @@
 import React from 'react';
 import NoSSR from 'react-no-ssr';
-import { Row, FormGroup, Col } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 

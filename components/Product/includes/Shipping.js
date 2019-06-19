@@ -85,7 +85,7 @@ const Shipping = (props) => {
               ?
               null
               :
-              PDP_PAGE.NO_SHIPPING_CITY
+              shippingInfo && shippingInfo.shippable === false ?  PDP_PAGE.NO_SHIPPING_CITY : PDP_PAGE.SELECT_YOUR_CITY
             }
           </p>
         }

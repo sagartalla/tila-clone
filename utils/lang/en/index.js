@@ -146,7 +146,7 @@ export const EN_KEYWORDS = {
     HOME: 'HOME',
     WORK: 'WORK',
     PREF_LOC: 'My preffered location',
-    CANCEL: 'إلغاء',
+    CANCEL: 'CANCEL',
     SAVE_DELIVER_BTN: 'Save New Address',
     ENTER_LOC: 'Enter a location',
     ADD_NEW_ADDR_TAG: 'Add address where you want the orders to be delivered.',
@@ -227,6 +227,7 @@ export const EN_KEYWORDS = {
     REVIEW_TITLE_PLACE: 'Review title goes here ',
     EASY_RETURN: 'easy return',
     NO_SHIPPING_CITY: 'Currently not shipping to your city',
+    SELECT_YOUR_CITY: 'Select Your City',
     FREE_DELIVERY_BY: 'FREE Delivery By',
     FREE_DELIVERY_IN: 'Free delivery in',
     NON_RETURNABLE: 'Non returnable',
@@ -376,6 +377,7 @@ export const EN_KEYWORDS = {
     MOBILE: 'Mobile',
     NOTIFY: 'Notify',
     NEXT: 'Next',
+    YOUR_PERSONAL :'Your personal information has been updated.'
   },
   NOTITICATION_INFO: {
     HEADING: 'New Notifications',

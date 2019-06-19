@@ -132,6 +132,7 @@ export const AR_KEYWORDS = {
     MAKE_DEFAULT: 'اجعله العنوان الرئيسي',
     DELETE: 'حذف',
     EDIT_ADDR: 'تعديل العنوان',
+    SAVE_ADDR: 'Save Address',
     DELIVER_TO: 'التوصيل إلى',
     ADD_NEW_BTN: 'إضافة جديد',
     ADD_NEW_ADDR: 'إضافة عنوان جديد',
@@ -364,6 +365,7 @@ export const AR_KEYWORDS = {
     MOBILE: 'رقم جوالك',
     NOTIFY: 'خبرني',
     NEXT: 'التالي',
+    YOUR_PERSONAL :'Your personal information has been updated.'
   },
   NOTITICATION_INFO: {
     HEADING: 'الإشعارات الجديدة',
@@ -790,7 +792,7 @@ export const AR_KEYWORDS = {
     MY_ORDERS: 'طلباتي',
     WISHLIST: 'الأماني',
     SHIPPING_ADDRESS: 'عنوان الشحن',
-    CREDIT_CARDS_VOUCHERS_REWARD_POINTS: 'بطاقه الائتمان\ القسيمه الشرائيه\ الجوائز',
+    CREDIT_CARDS_VOUCHERS_REWARD_POINTS:'البطاقات المحفوظة ورصيد تيله',
     MY_COUPONS: 'قسائم بلدي',
     PREFERENCES: 'تفضيلات',
     REVIEWS_AND_RATINGS: 'بلدي الاستعراضات والتقييمات',
