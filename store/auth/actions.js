@@ -151,7 +151,7 @@ const actionCreators = {
       dispatch(actionCreators.setVerfied(true));
     }, () => {
       dispatch(actionCreators.setVerfied(false));
-    })
+    });
   },
   sendOtpToEmailId: (status = true) => ({
     type: actions.VERIFY_RESEND_EMAIL,

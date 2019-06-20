@@ -589,7 +589,8 @@ export const EN_KEYWORDS = {
     T_AND_C: 'T & C',
     PRIVACY: 'Privacy',
     REMEMBER_ME: 'Remember Me',
-    BY_LOGIN_I_AGREE_TO_TERMS: 'By signing up I understand and agree to tila',
+    BY_SIGNUP_I_AGREE_TO_TERMS: 'By signing up I understand and agree to tila',
+    BY_LOGIN_I_AGREE_TO_TERMS: 'By logging in I understand and agree to tila',    
     AND: 'and',
     FIRST_NAME: 'First Name*',
     LAST_NAME: 'Last Name*',
@@ -623,6 +624,7 @@ export const EN_KEYWORDS = {
     FACEBOOK: 'Facebook',
     GOOGLE: 'Google',
     FOR_SIGNING_UP_WITH_US: 'for Signing up with us!',
+    SIGNUP: 'SIGNUP',
   },
   ORDER_PAGE: {
     LOADING: 'Loading...',
@@ -734,7 +736,7 @@ export const EN_KEYWORDS = {
     CHECK_YOUR_SPAM_FOLDER: 'check your spam folder.',
     DONE_THANKS: 'DONE, THANKS',
     TRY_AGAIN: 'TRY AGAIN',
-    RESET_PASSWORD_LINK_SENT: 'Reset password link sent to your registered email ID',
+    RESET_PASSWORD_LINK_SENT: 'Reset password link sent to your email ID',
   },
   MESSAGES: {
     MESSAGES: 'Messages',

@@ -399,20 +399,29 @@ const authReducer = typeToReducer({
   },
   [actions.VERIFY_EMAIL]: {
     PENDING: state => Object.assign({}, state, { ui: { ...state.ui, loading: true, showEmailVerificationScreen: true } }),
-    FULFILLED: (state, action) => Object.assign({}, state, {
-      data: {
-        ...state.data,
-        userInfoData: {
-          ...state.data.userInfoData,
-          email_verified: 'V',
+    FULFILLED: (state, action) => {
+      const { v2 } = state;
+      if (action && action.payload && action.payload.data && action.payload.data.Response === 'SUCCESS') {
+        v2.active = pageFlows[state.v2.currentFlow][state.v2.active.nextPage];
+      }
+      return Object.assign({}, state, {
+        data: {
+          ...state.data,
+          userInfoData: {
+            ...state.data.userInfoData,
+            email_verified: 'V',
+          },
         },
-      },
-      ui: { ...state.ui, loading: false, showEmailVerificationScreen: false, showLogin: false },
-      v2: {
-        ...state.v2,
-        active: pageFlows[state.v2.currentFlow][state.v2.active.nextPage],
-      },
-    }),
+        v2: {
+          ...state.v2,
+          ...v2,
+        },
+        ui: {
+          ...state.ui,
+          loading: false,
+        },
+      });
+    },
     REJECTED: state =>
       Object.assign({}, state, { ui: { ...state.ui, loading: false, showEmailVerificationScreen: true } }),
   },
@@ -621,7 +630,6 @@ const authReducer = typeToReducer({
       return Object.assign({}, state, {
         data: {
           ...state.data,
-          // resetToken: action.payload && action.payload.data && action.payload.data.token && action.payload.data.token,
         },
         ui: { loading: false },
       });
