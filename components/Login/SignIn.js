@@ -68,7 +68,7 @@ class SignIn extends Component {
       first_name: '',
       last_name: '',
       promotional_notification: false,
-      rememberMe: !!localStorage.getItem('remember'),
+      rememberMe: false,
       validation: this.validations.valid(),
     };
   }

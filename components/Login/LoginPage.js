@@ -1,4 +1,4 @@
-import React from 'react';
+./'import React from 'react';
 import NoSSR from 'react-no-ssr';
 import { Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
@@ -40,7 +40,7 @@ class LoginPage extends React.Component {
       },
     ]);
     this.state = {
-      email,
+      email: '',
       validation: this.validations.valid(),
     };
   }
@@ -80,7 +80,6 @@ class LoginPage extends React.Component {
   }
 
   render() {
-    const { loadingStatus } = this.props;
     const { email, validation } = this.state;
     return (
       <div className={`${styles['login-form']} ${styles['flx-space-bw']} ${styles['flex-colum']}`}>
