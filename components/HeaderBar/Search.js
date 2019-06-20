@@ -135,7 +135,7 @@ class Search extends Component {
       searchInput: false,
     });
     window.scrollTo(0, 0);
-    Router.pushRoute(`/${country}/${language}/srp?search=${this.state.query}&${Object.entries(this.props.optionalParams).map(([key, val]) => `${key}=${val}`).join('&')}`);
+    Router.pushRoute(`/${country}/${language}/srp?search=${this.state.query.trim()}&${Object.entries(this.props.optionalParams).map(([key, val]) => `${key}=${val}`).join('&')}`);
   }
 
   imageSearch() {

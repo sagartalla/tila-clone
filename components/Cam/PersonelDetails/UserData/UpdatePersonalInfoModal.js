@@ -101,19 +101,24 @@ class UpdatePersonalInfoModal extends React.Component {
         first_name: first_name || '',
         dob: user_dob.format('YYYY-MM-DD'),
         gender: user_gender,
-        last_name: second_name || '',
+        last_name: second_name ? second_name : '',
         image_url: '',
+      }).then(() => {
+        this.handleClose();
+        toast(
+          <ToastContent
+            msg={`${PERSONAL_INFO_MODAL.YOUR_PERSONAL}}`}
+            msgType="success"
+          />,
+        );
       });
-      this.handleClose();
-      toast(<ToastContent
-        msg="Your personal information has been updated."
-        msgType="success"
-      /> );
     } else {
-      toast(<ToastContent
-        msg="Fill in all the fields"
-        msgType="error"
-      /> );
+      toast(
+        <ToastContent
+          msg="Fill in all the fields"
+          msgType="error"
+        />,
+      );
     }
   }
 

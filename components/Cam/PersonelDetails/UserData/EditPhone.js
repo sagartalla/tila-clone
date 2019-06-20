@@ -1,12 +1,10 @@
 import React from 'react';
-import { Row, Col, Dropdown, Button } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { toast } from 'react-toastify';
 import Cookies from 'universal-cookie';
-import Btn from '../../../common/Button';
-import Input from '../../../common/Input';
 import { actionCreators, selectors } from '../../../../store/cam/personalDetails';
 import { languageDefinations } from '../../../../utils/lang';
 import CountryDialCode from '../../../../constants/CountryDialCode';

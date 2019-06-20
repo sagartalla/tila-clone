@@ -61,9 +61,6 @@ const notifySentry = (err) => {
       scope.setExtra(`statusCode`, err.response.status);
       scope.setExtra(`reqHeaders`, err.config.headers);
       scope.setExtra(`resHeaders`, err.response.headers);
-      if (req.user) {
-        scope.setUser({ id: req.user.id, email: req.user.email });
-      }
   });
   Sentry.captureException(err);
 };
@@ -88,9 +85,11 @@ const errorInterceptor = (err) => {
       if (err.response.status === '403') {
         cookies.remove('auth');
       }
+      const msg = `${err.response.data.message}: ${err.response.data.sub_errors.map(e => e.message).join(' ')}`
+      console.log('asdasd', msg);
       toast(
         <ToastContent
-          msg={err.response.data.message || err.response.data.data.error.message}
+          msg={msg}
           msgType='error'
         />
       )

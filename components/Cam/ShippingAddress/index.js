@@ -197,7 +197,13 @@ class ShippingAddress extends Component {
       addr,
       showCitiesData,
       showCountriesData,
-    });
+    }, () => {
+      if(this.state.isEditAddr){
+        const validation = this.validations.validate(this.state.addr);
+        this.setState({validation})
+      }
+    }
+    );
   }
 
   validate = (fieldvalue) => {
