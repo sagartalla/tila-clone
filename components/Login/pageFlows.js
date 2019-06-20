@@ -15,6 +15,11 @@ const { CONTACT_INFO_MODAL, LOGIN_PAGE } = languageDefinations();
 
 const pageFlows = {
   existing_user_login: {
+    signin_page: {
+      activePage: 'signin_page',
+      backpage: '',
+      nextPage: 'password',
+    },
     password: {
       activePage: 'password',
       backpage: 'signin_page',
@@ -36,6 +41,11 @@ const pageFlows = {
     },
   },
   new_user_register: {
+    signin_page: {
+      activePage: 'signin_page',
+      backpage: '',
+      nextPage: 'password_new',
+    },
     password_new: {
       activePage: 'password_new',
       nextPage: 'verify_email',

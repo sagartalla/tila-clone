@@ -207,7 +207,6 @@ class Login extends Component {
 
   loadPage = () => {
     const { activeObj, showEmailSuccess, showOtpSuccess } = this.props;
-    console.log('activeObj', activeObj);
     switch (activeObj && activeObj.activePage && activeObj.activePage) {
       case 'password':
         return <SignIn mode="EXISTING_USER" />;
@@ -243,14 +242,14 @@ class Login extends Component {
       activeObj,
     } = this.props;
     return (
-      <Modal className={activeObj && activeObj.activePage === 'thank_you' ? `react-router-modal__modal ${styles['background-transparent']}  ${styles['border-none']} ${styles['p-10']}` : `react-router-modal__modal ${styles['login-reg-modal']} ${styles['p-10']}`} onBackdropClick={this.onBackdropClick}>
-        {activeObj.activePage === 'thank_you' ?
+      <Modal className={activeObj && activeObj.activePage && activeObj.activePage === 'thank_you' ? `react-router-modal__modal ${styles['background-transparent']} ${styles['border-none']} ${styles['p-10']}` : `react-router-modal__modal ${styles['login-reg-modal']} ${styles['p-10']}`} onBackdropClick={this.onBackdropClick}>
+        {activeObj && activeObj.activePage && activeObj.activePage === 'thank_you' ?
           <ThankYou /> :
           <Row className={`${styles['m-0']}`}>
             <div className={`${styles.flex}`}>
               <Col md={4} xs={12} sm={4} className={`${styles['pl-0']} ${styles['pr-10']} ${styles['m-hdn']}`}>
                 <div className={`${styles.flex} ${styles['image-placeholder']}`}>
-                  <img src="/static/img/icons/login-logo.png" className={`${styles['img-responsive']}`} alt="" />
+                  <img src={lang === 'en' ? '/static/img/icons/login-logo-en.png' : '/static/img/icons/login-logo-ar.png'} className={`${styles['img-responsive']}`} alt="" />
                 </div>
               </Col>
               <Col md={8} xs={12} sm={8} className={`${styles['bg-white']} ${styles['border-radius4']}`}>
