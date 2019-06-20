@@ -165,7 +165,7 @@ class OrderItem extends Component {
                         <span className={styles['green-label']}>{ORDER_PAGE.EXCHANGE}</span>
                       </div>}
                     </Col>
-                    <Col md={10} className={styles['ipad-pr-0']}>
+                    <Col md={10} className={`${styles['ipad-pr-0']} ${styles['pt-15']}`}>
                       <div className={`${styles['text-wrap']}`}>
                         <Link route={`/${country}/${language}/product?productId=${product.productId}${product.variantId ? `&variantId=${product.variantId}` : ''}&catalogId=${product.catalogId}&itemType=${product.itemType}`}>
                           <a className={`${styles['width100']} ${styles['fs-14']} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
