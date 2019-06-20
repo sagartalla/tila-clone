@@ -179,7 +179,7 @@ const getDomainCountries = () => axios.get(`${constants.TRANSFORMER_API_URL}/fpt
 
 // New Registration Flow API's
 
-const v2UserLogin = email => axios.get(`${constants.CMS_API_URL}/api/v1/user?email=${email}`).then(res => Object.assign({}, res, {
+const v2UserLogin = email => axios.get(`${constants.CMS_API_URL}/api/v1/user/check?email=${email}`).then(res => Object.assign({}, res, {
   data: {
     ...res.data,
     email,
@@ -199,8 +199,13 @@ const resetPassword = (body) => {
 }
 
 const forgotPassword = (body) => {
-  return axios.post(`${constants.CMS_API_URL}/api/v1/user/password/forgot`, body).then(({data}) => {
-    toast.success(API_TEXT.OTP_SENT_TO_YOUR_MAIL_ID)
+  return axios.post(`${constants.CMS_API_URL}/api/v1/user/password/forgot/email`, body).then(({data}) => {
+    toast(
+      <ToastContent
+        msg={API_TEXT.OTP_SENT_TO_YOUR_MAIL_ID}
+        msgType='success'
+      />
+    )
     return data;
   }).catch((error) => {
     return error.response.data;
@@ -209,7 +214,12 @@ const forgotPassword = (body) => {
 
 const getMobileOtp = ( email ) => {
   return axios.get(`${constants.CMS_API_URL}/api/v1/user/password/forgot/mobile/otp?email=${email}`).then((data) => {
-    toast.success('OTP sent to your mobile number');
+    toast(
+      <ToastContent
+        msg='OTP sent to your mobile number'
+        msgType='success'
+      />
+    )
     return data;
   }).catch((error) => {
     return error.response.data;
@@ -217,16 +227,20 @@ const getMobileOtp = ( email ) => {
 }
 
 const verifyResetOtp = (body) => {
-  return axios.post(`${constants.CMS_API_URL}/api/v1/user/password/forgot/mobile/otp`, body).then((data) => {
+  return axios.post(`${constants.CMS_API_URL}/api/v1/user/password/forgot/verify`, body).then((data) => {
     return data;
   }).catch((error) => {
     return error.response.data;
   });
 }
 
+const shippingAccount = body => axios.put(`${constants.CMS_API_URL}/api/v1/user/account/edit`, body).then(({ data }) => {
+  return { data };
+});
+
 
 export default {
   userLogin, userLogout, getLoginInfo, setCountry, setSessionID, deriveCity, setCity, getDomainCountries,
   removeCity, setLanguage, savePtaToken, verifyEmail, sendOtpToEmailId, getUserInfo, setVerfied, track,
-  v2UserLogin, resetPassword, forgotPassword, showUserInfo, getMobileOtp, verifyResetOtp,
+  v2UserLogin, resetPassword, forgotPassword, showUserInfo, getMobileOtp, verifyResetOtp, shippingAccount,
 };

@@ -35,12 +35,21 @@ class VerifyStatus extends React.Component {
       },
     ]);
     this.state = {
+      seconds: 30 * 60,
       otpValue: '',
       validation: this.validations.valid(),
     };
     this.sendLink = this.sendLink.bind(this);
+    this.sentOtpToReset = this.sentOtpToReset.bind(this);
   }
 
+  getSeconds = (sec) => {
+    if (sec === 0) {
+      this.setState({
+        seconds: sec,
+      });
+    }
+  }
   sendLink(e) {
     const { selectedValue } = this.state;
     const { activeEmailId } = this.props;
@@ -50,7 +59,11 @@ class VerifyStatus extends React.Component {
       email: activeEmailId,
     };
     if (value === 'email') {
-      this.props.forgotPassword(body);
+      this.props.forgotPassword(body).then(() => {
+        this.setState({
+          seconds: 30 * 60,
+        });
+      });
     } else {
       this.props.getMobileOtp(activeEmailId);
     }
@@ -73,7 +86,7 @@ class VerifyStatus extends React.Component {
     return true;
   }
 
-  sentOtpToReset = () => {
+  sentOtpToReset = type => () => {
     const { verifyResetOtp, activeEmailId, v2CurrentFlow } = this.props;
     const { otpValue } = this.state;
     const validation = this.validations.validate(this.state);
@@ -81,6 +94,7 @@ class VerifyStatus extends React.Component {
       const body = {
         email: activeEmailId,
         otp: Number(otpValue),
+        verify_type: type,
       };
       verifyResetOtp(body).then((res) => {
         const data = { currentFlow: 'forgot_password_reset', nextPage: 'reset_screen' };
@@ -94,60 +108,67 @@ class VerifyStatus extends React.Component {
     });
   }
 
+
   render() {
-    const { validation } = this.state;
+    const { validation, seconds } = this.state;
+    console.log('seconds', seconds);
     const {
       showEmailSuccess, showOtpSuccess, loadingStatus, userData, activeEmailId,
     } = this.props;
+    console.log('this.state.seconds', this.state.seconds);
     return (
       <div className={`${styles['forgot-password']} ${styles.flex} ${styles['flex-colum']} ${styles['justify-around']}`}>
         <div>
           <h3 className={`${styles['fs-22']} ${styles['m-0']} ${styles['ff-b']}`}>{LOGIN_PAGE.FORGOT_PASSWORD}</h3>
         </div>
-        {showEmailSuccess ?
-          <React.Fragment>
-            <div className={styles['reset-link']}>
-              <Row className={`${styles.flex}`}>
-                <Col md={7} className={`${styles['fs-14']}`}><span className={`${styles.flex} ${styles['flex-colum']}`}><span>{resetEmailLink}</span><span>{userData && userData.email}</span></span></Col>
-                <Col md={5} className={`${styles.flex}`}><SVGComponent clsName={`${styles['email-success-icon']}`} src="icons/common-icon/email-sent" /></Col>
-              </Row>
-              <a className={`${styles['text-blue']} ${styles['fs-12']} ${styles.pointer}`} data-id="email" onClick={this.sendLink}>{EMAIL_VERIFICATION.RESEND_THE_LINK}</a>
-              <div className={`${styles.border} ${styles['mt-10']} ${styles['mb-10']}`} />
-              <div className={`${styles['fs-14']}`}>{EMAIL_VERIFICATION.PLEASE_CLICK_ON_EMAIL_LINK}</div>
-              <span className={styles['bg-light-gray']}>
-                <div className={`${styles['fs-12']}`}>
+        <React.Fragment>
+          {showEmailSuccess ?
+            <React.Fragment>
+              <div className={`${styles['reset-link']} ${styles.relative}`}>
+                <Row className={`${styles.flex}`}>
+                  <Col md={9} className={`${styles['fs-14']}`}><span className={`${styles.flex} ${styles['t-l']} ${styles['flex-colum']}`}><span>{resetEmailLink}&nbsp;<span className={`${styles['ff-b']}`}>{userData && userData.email}</span></span></span></Col>
+                  <Col md={3} className={`${styles.flex}`}><SVGComponent clsName={`${styles['email-success-icon']}`} src="icons/common-icon/email-sent" /></Col>
+                </Row>
+                <a className={`${styles['text-blue']} ${styles['fs-12']} ${styles['mt-10']} ${styles.pointer} ${styles.fontW600}`} data-id="email" onClick={this.sendLink}>{EMAIL_VERIFICATION.RESEND_THE_LINK}</a>
+                <div className={`${styles.border} ${styles['mt-10']} ${styles['mb-10']}`} />
+                <div className={`${styles['fs-14']} ${styles['t-l']}`}>{EMAIL_VERIFICATION.PLEASE_CLICK_ON_EMAIL_LINK}</div>
+                {/* <span className={styles['bg-light-gray']}>
+                <div className={`${styles['fs-12']} ${styles['t-l']}`}>
                   {EMAIL_VERIFICATION.IF_YOU_DO_NOT_RECEIVE_YOUR_EMAIL}
                   &nbsp;{EMAIL_VERIFICATION.CHECK_YOUR_SPAM_FOLDER}
                 </div>
-              </span>
+              </span> */}
+              </div>
+              <div className={`${styles['fs-14']} ${styles['pl-10']}`}>Or Please enter 4 digit OTP sent to your Email.</div>
+              {/* <div className={`${styles['flex-center']}`}>
+                  <span className={`${styles['otp-expire']} ${styles['fs-12']}`}>{LOGIN_PAGE.OTP_EXPIRE_IN}&nbsp;</span>
+                  {seconds !== '' && <span className={styles['black-color']}><Timer time={1} getSeconds={this.getSeconds} /></span>}
+                </div> */}
+            </React.Fragment> :
+            showOtpSuccess &&
+            <React.Fragment>
+              <div className={`${styles['reset-link']} ${styles.relative}`}>
+                <Row className={`${styles.flex}`}>
+                  <Col md={9} className={`${styles['fs-14']} ${styles['t-l']}`}><span>{resetMobileLink}&nbsp;<span className={`${styles['ff-b']}`}>{userData && userData.mobile_no}</span></span></Col>
+                  <Col md={3} className={`${styles.flex}`}><SVGComponent clsName={`${styles['email-success-icon']}`} src="icons/common-icon/otp-sent" /></Col>
+                </Row>
+                <div className={`${styles['text-blue']} ${styles['fs-12']} ${styles['mt-10']} ${styles.pointer} ${styles.fontW600}`} data-id="otp" onClick={this.sendLink}>{LOGIN_PAGE.RESEND_OTP}</div>
+              </div>
+              <div>
+                <div className={`${styles['pl-10']}`}>{LOGIN_PAGE.PLEASE_ENTER_FOUR_DIGIT_OTP}</div>
+                {/* <div className={`${styles['flex-center']}`}>
+                  <span className={`${styles['otp-expire']} ${styles['fs-12']}`}>{LOGIN_PAGE.OTP_EXPIRE_IN}&nbsp;</span>
+                  <span className={styles['black-color']}><Timer time={1} /></span>
+                </div> */}
+              </div>
+            </React.Fragment>}
+          <div className={`${styles['flex-center']}`}>
+              <span className={`${styles['otp-expire']} ${styles['fs-12']} ${styles['pl-10']}`}>{seconds === 0 ? <div>OTP has <span className={`${styles['thick-red']}`}>Expired</span>, Please click on the resend link above</div> : LOGIN_PAGE.OTP_EXPIRE_IN}&nbsp;</span>
+              {seconds !== 0 && <span className={styles['black-color']}><Timer time={seconds} getSeconds={this.getSeconds} /></span>}
             </div>
-            <Button
-              className={`${styles['flex-center']}  ${styles.width100} ${styles['fs-14']} ${styles['text-uppercase']} ${styles['button-radius']}`}
-              btnText="OK"
-              onClick={this.closeSuccessScreen}
-            />
-          </React.Fragment>
-        :
-        showOtpSuccess &&
-        <React.Fragment>
-          <div className={styles['reset-link-mobile']}>
-            <Row className={`${styles.flex}`}>
-              <Col md={8} className={`${styles['fs-14']}`}>{resetMobileLink}&nbsp;{userData && userData.mobile_no}</Col>
-              <Col md={4} className={`${styles.flex}`}><SVGComponent clsName={`${styles['email-success-icon']}`} src="icons/common-icon/otp-sent" /></Col>
-            </Row>
-            <div className={`${styles['text-blue']} ${styles['fs-12']} ${styles['mt-10']} ${styles.pointer}`} data-id="otp" onClick={this.sendLink}>{LOGIN_PAGE.RESEND_OTP}</div>
-          </div>
-          <div>
-            <div>{LOGIN_PAGE.PLEASE_ENTER_FOUR_DIGIT_OTP}</div>
-            <div className={`${styles['flex-center']}`}>
-              <span className={`${styles['otp-expire']} ${styles['fs-12']}`}>{LOGIN_PAGE.OTP_EXPIRE_IN}&nbsp;</span>
-              <span className={styles['black-color']}><Timer time={30} /></span>
-            </div>
-          </div>
           <div className={`${styles['flex-center']} ${styles['mb-5']} ${styles['flex-colum']}`}>
             <OTPInput
               containerStyle={`${styles['justify-center']}`}
-              inputStyle={`${styles['border-none']} ${styles['border-b']}`}
               separator={<span>&nbsp;&nbsp;</span>}
               onChange={otp => this.saveOtp(otp)}
             />
@@ -158,15 +179,12 @@ class VerifyStatus extends React.Component {
                       </div> : null
                    }
           </div>
-
           <Button
             className={`${styles['flex-center']}  ${styles.width100} ${styles['fs-14']} ${styles['text-uppercase']} ${styles['button-radius']}`}
             btnText={LOGIN_PAGE.NEXT}
-            onClick={this.sentOtpToReset}
-            btnLoading={loadingStatus}
+            onClick={this.sentOtpToReset(showEmailSuccess ? 'EMAIL' : 'MOBILE')}
           />
         </React.Fragment>
-      }
       </div>
     );
   }
