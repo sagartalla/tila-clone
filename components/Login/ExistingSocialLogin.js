@@ -35,6 +35,10 @@ const fullName = {
     value: 'twitter',
     text: 'Twitter',
   },
+  INSTAGRAM: {
+    value: 'instagram',
+    text: 'Instagram',
+  },
 };
 
 class ExistingSocialLogin extends React.Component {
