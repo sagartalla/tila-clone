@@ -15,8 +15,14 @@ const { CONTACT_INFO_MODAL, LOGIN_PAGE } = languageDefinations();
 
 const pageFlows = {
   existing_user_login: {
+    signin_page: {
+      activePage: 'signin_page',
+      backpage: '',
+      nextPage: 'password',
+    },
     password: {
       activePage: 'password',
+      backpage: 'signin_page',
       nextPage: '',
     },
     verify_email: {
@@ -35,6 +41,11 @@ const pageFlows = {
     },
   },
   new_user_register: {
+    signin_page: {
+      activePage: 'signin_page',
+      backpage: '',
+      nextPage: 'password_new',
+    },
     password_new: {
       activePage: 'password_new',
       nextPage: 'verify_email',
@@ -89,6 +100,30 @@ const pageFlows = {
     existing_social_login: {
       activePage: 'existing_social_login',
       nextPage: '',
+    },
+  },
+  not_accessable_social_user: {
+    social_login: {
+      activePage: 'social_login',
+      nextPage: 'verify_email',
+    },
+    verify_email: {
+      activePage: 'verify_email',
+      nextPage: 'shipping_to_page',
+    },
+    shipping_to_page: {
+      activePage: 'shipping_to_page',
+      nextPage: 'thank_you',
+    },
+    thank_you: {
+      activePage: 'thank_you',
+      text: (
+        <div>
+          <h2 className={`${styles.fontW600} ${styles['fs-22']} ${styles['mb-0']}`}>{CONTACT_INFO_MODAL.THANK_YOU}</h2>
+          <div>{LOGIN_PAGE.FOR_SIGNING_UP_WITH_US}</div>
+        </div>
+      ),
+      nextPage: null,
     },
   },
 };
