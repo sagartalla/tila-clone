@@ -40,6 +40,7 @@ class VerifyStatus extends React.Component {
       validation: this.validations.valid(),
     };
     this.sendLink = this.sendLink.bind(this);
+    this.sentOtpToReset = this.sentOtpToReset.bind(this);
   }
 
   getSeconds = (sec) => {
@@ -85,7 +86,7 @@ class VerifyStatus extends React.Component {
     return true;
   }
 
-  sentOtpToReset = () => {
+  sentOtpToReset = type => () => {
     const { verifyResetOtp, activeEmailId, v2CurrentFlow } = this.props;
     const { otpValue } = this.state;
     const validation = this.validations.validate(this.state);
@@ -93,6 +94,7 @@ class VerifyStatus extends React.Component {
       const body = {
         email: activeEmailId,
         otp: Number(otpValue),
+        verify_type: type,
       };
       verifyResetOtp(body).then((res) => {
         const data = { currentFlow: 'forgot_password_reset', nextPage: 'reset_screen' };
@@ -180,7 +182,7 @@ class VerifyStatus extends React.Component {
           <Button
             className={`${styles['flex-center']}  ${styles.width100} ${styles['fs-14']} ${styles['text-uppercase']} ${styles['button-radius']}`}
             btnText={LOGIN_PAGE.NEXT}
-            onClick={this.sentOtpToReset}
+            onClick={this.sentOtpToReset(showEmailSuccess ? 'EMAIL' : 'MOBILE')}
           />
         </React.Fragment>
       </div>

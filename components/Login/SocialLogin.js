@@ -36,18 +36,18 @@ class SocialLogin extends Component {
     super(props);
   }
 
-  handleSocialLogin = () => () => {
-    // switch(socialNetwork) {
-    //   case 'google': googleAuth2 ? this.checkGoogleResponse() : this.showErrorAlert(socialNetwork); break;
-    //   case 'facebook': FB ? this.fbLogin() : this.showErrorAlert(socialNetwork); break;
-    //   case 'instagram': this.instaLogin(); break;
-    //   default: console.log(socialNetwork)
-    // }
-    const { v2CurrentFlow } = this.props;
-    // showUserInfo(activeEmailId).then((res) => {
-    //   if (res.value.status === 200) {
-        const data = { currentFlow: 'not_accessable_social_user', nextPage: 'social_login' };
-        v2CurrentFlow(data);
+  handleSocialLogin = (socialNetwork) => (e) => {
+    switch(socialNetwork) {
+      case 'google': googleAuth2 ? this.checkGoogleResponse() : this.showErrorAlert(socialNetwork); break;
+      case 'facebook': FB ? this.fbLogin() : this.showErrorAlert(socialNetwork); break;
+      case 'instagram': this.instaLogin(); break;
+      default: console.log(socialNetwork)
+    }
+    // const { v2CurrentFlow } = this.props;
+    // // showUserInfo(activeEmailId).then((res) => {
+    // //   if (res.value.status === 200) {
+    //     const data = { currentFlow: 'not_accessable_social_user', nextPage: 'social_login' };
+    //     v2CurrentFlow(data);
     //   }
     // });
   }
