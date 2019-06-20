@@ -35,6 +35,10 @@ const fullName = {
     value: 'twitter',
     text: 'Twitter',
   },
+  INSTAGRAM: {
+    value: 'instagram',
+    text: 'Instagram',
+  },
 };
 
 class ExistingSocialLogin extends React.Component {
@@ -43,11 +47,19 @@ class ExistingSocialLogin extends React.Component {
     this.state = {};
   }
 
+  goToPreviousPage = () => {
+    const { v2PreviousPage } = this.props;
+    v2PreviousPage();
+  }
+
   render() {
     const { lastLogin, activeEmailId } = this.props;
     return (
       <div className={`${styles['login-form']} ${styles.flex} ${styles['flex-colum']}`}>
-        <h1 className={`${styles['fs-18']} ${styles.fontW600} ${styles['light-gry-clr']} ${styles['m-0']}`}>{LOGIN_PAGE.SOCIAL_LOGIN_WELCOME}</h1>
+        <div className={`${styles.flex}`}>
+          <h1 className={`${styles['fs-18']} ${styles.fontW600} ${styles['light-gry-clr']} ${styles['m-0']}`}>{LOGIN_PAGE.SOCIAL_LOGIN_WELCOME}</h1>
+          <div className={`${styles['ml-20']} ${styles['fs-12']} ${styles['pl-10']} ${styles['pr-10']} ${styles.fontW600} ${styles['edit-button']} ${styles['border-radius2']} ${styles.pointer}`} onClick={this.goToPreviousPage}>EDIT</div>
+        </div>
         <div className={`${styles['fs-12']} ${styles['light-gry-clr']}`}>{activeEmailId}</div>
         <p className={`${styles['fs-12']} ${styles['register-policy-gray']} ${styles['mt-30']}`}>{LOGIN_PAGE.SOCIAL_LOGIN_CONTINUE_MESSAGE}</p>
         <Row className={`${styles['mt-30']} ${styles['flex-colum']} ${styles['justify-center']}`}>
@@ -87,4 +99,11 @@ const mapStateToProps = store => ({
   lastLogin: selectors.getLastLogin(store),
 });
 
-export default connect(mapStateToProps, null)(ExistingSocialLogin);
+const mapDispatchToProps = dispatch => bindActionCreators(
+  {
+    v2PreviousPage: actionCreators.v2PreviousPage,
+  },
+  dispatch,
+);
+
+export default connect(mapStateToProps, mapDispatchToProps)(ExistingSocialLogin);
