@@ -10,6 +10,7 @@ import main_en from '../../layout/main/main_en.styl';
 import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './help_en.styl';
 import styles_ar from './help_ar.styl';
+import SVGComponent from '../common/SVGComponet';
 
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
@@ -26,12 +27,16 @@ class Answers extends Component {
     super(props);
     const [parentCategoryId, categoryId] = props.url;
     const answerId = window.location.hash ? window.location.hash.split('#')[1] : ''
+    const searchQuery = window.location.search.split('=')[1];
     this.state = {
       selectedCategory: categoryId || parentCategoryId,
       openedCategory: parentCategoryId,
       openedAnswer: answerId,
     }
-    parentCategoryId !== 'orders' && props.getAnswers(getIds(this.state.selectedCategory, props.categoriesObj[this.state.selectedCategory] ? props.categoriesObj[this.state.selectedCategory].child : []));
+    parentCategoryId !== 'orders' && !!!searchQuery ? 
+      props.getAnswers(getIds(this.state.selectedCategory, props.categoriesObj[this.state.selectedCategory] ? props.categoriesObj[this.state.selectedCategory].child : []))
+      : 
+      props.getAnswerByKeyword(searchQuery);
   }
   openCategory = (categoryId) => (e) => {
     this.setState({
@@ -40,7 +45,7 @@ class Answers extends Component {
   }
   openAnswer = (answerId) => (e) => {
     this.setState({
-      openedAnswer: answerId
+      openedAnswer: answerId === this.state.openedAnswer ? '' : answerId
     })
   }
   getUrl = (fromParent, categoryId, parentId, childId) => {
@@ -91,6 +96,9 @@ class Answers extends Component {
     const isOpened = id === this.state.openedAnswer;
     return (
       <div key={id} className={`${styles['ansContainer']} ${isOpened && styles['openBGColor']}`}>
+        <div className={`${styles['answerArrowIcon']}`}>
+        {isOpened ? <SVGComponent src={`helpsupport/upArrow`} /> : <SVGComponent src={`helpsupport/downArrow`} />}
+        </div>
         <div
           onClick={this.openAnswer(id)}
           dangerouslySetInnerHTML={{__html: question}}
@@ -112,7 +120,7 @@ class Answers extends Component {
     return (
       <a
         href={ordersUrl}
-        className={`${styles['categoryValue']} ${styles['fwBolder']} ${isSelected ? `${styles['selectedBG']} ${styles['whiteColor']}` : styles['blackColor']}`}
+        className={`${styles['categoryValue']} ${styles['fwBolder']} ${styles['bB']} ${isSelected ? `${styles['selectedBG']} ${styles['whiteColor']}` : styles['blackColor']}`}
       >
         Recent Orders
       </a>

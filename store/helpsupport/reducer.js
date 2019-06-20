@@ -80,6 +80,22 @@ const helpSupportData = typeToReducer({
         ...state,
       }),
   },
+  [actions.GET_ANSWER_BY_KEYWORD]: {
+    PENDING: state => ({
+      ...state, answerData: {},
+    }),
+    FULFILLED: (state, action) => {
+      const { payload } = action;
+      return {
+        ...state,
+        answerData: selectors.computeAnswer(payload.data),
+      };
+    },
+    REJECTED: state => (
+      {
+        ...state,
+      }),
+  },
   [actions.GET_ISSUES]: {
     PENDING: state => ({
       ...state, issueData: {},
