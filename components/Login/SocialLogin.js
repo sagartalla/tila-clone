@@ -97,6 +97,8 @@ class SocialLogin extends Component {
   render(){
     const callbackMethod = [this.handleSocialLogin]
     return this.props.children(callbackMethod)
+
+
   }
 }
 
