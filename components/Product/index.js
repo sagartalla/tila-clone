@@ -253,6 +253,12 @@ const getProductComponent = (isPreview, taskCode) => {
                               productData={productData.product_id}
                               shippingInfo={shippingInfo}
                               isPreview={isPreview}
+                              emailErr={emailErr}
+                              userDetails={userDetails}
+                              notifyEmail={notifyEmail}
+                              notify={this.notify}
+                              showLoading={showLoading}
+                              onChangeField={this.onChangeField}
                               styling={isSearchPreview ? null : positionStyle || defaultPosition}
                               top={isSearchPreview ? null : positionStyle === 'absolute-style' ?  positionTop : null}
                             />
@@ -260,7 +266,7 @@ const getProductComponent = (isPreview, taskCode) => {
                             null
                         }
 
-                        {isPreview ? null :
+                        {/* {isPreview ? null :
                           (offerInfo.stockError || offerInfo.availabilityError) && ((shippingInfo && Object.keys(shippingInfo).length === 0) || (shippingInfo === null || shippingInfo.shippable)) &&
                           <div className={`${styles['flx-space-bw']} ${styles['align-baseline']}`}>
                             {!userDetails.isLoggedIn &&
@@ -279,7 +285,7 @@ const getProductComponent = (isPreview, taskCode) => {
                               btnLoading={showLoading}
                             />
                           </div>
-                        }
+                        } */}
                       </div>
                     </div>
 

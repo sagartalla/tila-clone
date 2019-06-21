@@ -17,6 +17,7 @@ routes
   .add({ name: 'resetpassword', pattern: '/:country/:language/resetpassword', page: 'resetPassword' })
   .add({ name: '3dsecure', pattern: '/:country/:language/gateway/callback/:encryptedString', page: 'redirect' })
   .add({ name: 'help', pattern: '/:country/:language/help/(.*)', page: 'help' })
+  .add({ name: 'brand', pattern: '/:country/:language/brand/:brandName', page: 'brand' })
   .add({ name: 'default', pattern: '/:country?/:language?', page: 'index' });
 
 module.exports = routes;

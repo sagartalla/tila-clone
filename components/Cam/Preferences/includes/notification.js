@@ -3,15 +3,15 @@ import { languageDefinations } from '../../../../utils/lang/';
 const { PREFERENCES } = languageDefinations();
 
 export const settingValues = [{
-  title: 'Push Notifications',
+  title: 'Push notifications',
   value: 'PUSH',
 },
 {
-  title: 'Email Notifications',
+  title: 'Email notifications',
   value: 'EMAIL',
 },
 {
-  title: 'SMS Notifications',
+  title: 'SMS notifications',
   value: 'SMS',
 }];
 

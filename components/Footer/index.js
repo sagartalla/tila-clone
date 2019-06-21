@@ -1,4 +1,5 @@
 import { Grid, Row, Col } from 'react-bootstrap';
+import Cookie from 'universal-cookie';
 import SVGComponent from '../common/SVGComponet';
 import publicUrls from '../../constants';
 import lang from '../../utils/language';
@@ -10,6 +11,10 @@ import main_en from '../../layout/main/main_en.styl';
 import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './footer_en.styl';
 import styles_ar from './footer_ar.styl';
+
+const cookies = new Cookie();
+const country = cookies.get('country');
+
 
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
@@ -48,7 +53,7 @@ const f = [
    url:	`/SAU/${lang}/srp/footwear?categoryTree=true&isListed=false&sid=892,921`,
    title: FOOTER_PAGE.WOMEN_FOOTWEAR,
   },
-  
+
   {
     url:	`/SAU/${lang}/srp?search=bags&language=en&isListed=false`,
     title: FOOTER_PAGE.BAGS,
@@ -142,15 +147,19 @@ const FooterBar = props => (
       <Grid>
         <div className={styles['flx-space-bw']}>
           {/* <Col md={3}> */}
-            <div className={`${styles['flex-center']} ${styles['border-radius4']} ${styles['footer-suport-part']} ${styles['p-15']}`}>
-              <span className={`${styles['flex']} ${styles['quation-bar']}`}>
-                <SVGComponent clsName={`${styles['quation-bar-inn']}`} src="icons/common-icon/quation" />
-              </span>
-              <div className={`${styles['flex']} ${styles['flex-colum']} ${styles['pl-20']}`}>
-                <span className={`${styles['fontW600']} ${styles['text-uppercase']}`}>{FOOTER_PAGE.GOT_QUESTION}</span>
-                <span className={styles['footer-suport-title']}>{`${FOOTER_PAGE.WE_CARE_TILA} | 900-66666`}</span>
+
+              <div className={`${styles['flex-center']} ${styles['border-radius4']} ${styles['footer-suport-part']} ${styles['p-15']}`}>
+                <span className={`${styles['flex']} ${styles['quation-bar']}`}>
+                  <SVGComponent clsName={`${styles['quation-bar-inn']}`} src="icons/common-icon/quation" />
+                </span>
+                <a href={`/${country}/${lang}/help/faq`} target="_blank" className={styles['black']}>
+                <div className={`${styles['flex']} ${styles['flex-colum']} ${styles['pl-20']}`}>
+                  <span className={`${styles['fontW600']} ${styles['text-uppercase']}`}>{FOOTER_PAGE.GOT_QUESTION}</span>
+                  <span className={styles['footer-suport-title']}>{`${FOOTER_PAGE.WE_CARE_TILA} | 900-66666`}</span>
+                </div>
+                </a>
               </div>
-            </div>
+
           {/* </Col>
           <Col md={3}> */}
             <div className={`${styles['flex-center']} ${styles['border-radius4']} ${styles['footer-suport-part']} ${styles['p-15']}`}>
@@ -282,7 +291,7 @@ const FooterBar = props => (
         <Row>
           <Col md={3} sm={6} className={styles['pr-0']}>
             <h4 className={styles['flex-center']}>
-              <span className={`${styles['footer-social-title']} ${styles['mr-10']}`}><img src="/static/img/bg-img/bitmap-instgram.jpg" className={styles['img-responsive']} /></span>
+              <span className={`${styles['footer-social-title']} ${styles['mr-10']}`}><img src="/static/img/bg-img/snapchat.png" className={styles['img-responsive']} /></span>
               <span className={`${styles['fontW600']}`}>{FOOTER_PAGE.ON_SNAP}</span>
               <span className={`${styles['follow-sc-btn']} ${styles['fs-10']} ${styles['lne-ht2']}  ${styles['ml-10']} ${styles['pl-15']} ${styles['pr-15']}`}>{FOOTER_PAGE.FOLLOW}</span>
             </h4>
@@ -331,7 +340,7 @@ const FooterBar = props => (
             <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
               <li><a href="/SAU/en/policy/tc" target="_blank">{FOOTER_PAGE.TERMS_CONDITION}</a></li>
               <li><a href="/SAU/en/policy/cp" target="_blank">{FOOTER_PAGE.CANCELLATION_POLICY}</a></li>
-              <li><a href="/SAU/en/policy/er" target="_blank">{FOOTER_PAGE.EXCHANGE_REPLACEMENT_POLICY}</a></li>              
+              <li><a href="/SAU/en/policy/er" target="_blank">{FOOTER_PAGE.EXCHANGE_REPLACEMENT_POLICY}</a></li>
               <li><a href="/SAU/en/policy/re" target="_blank">{FOOTER_PAGE.REFUND_POLICY}</a></li>
               <li><a href="/SAU/en/policy/wp" target="_blank">{FOOTER_PAGE.WARRENTY_POLICY}</a></li>
               {/* <li><a href="/SAU/en/policy/sp" target="_blank">{FOOTER_PAGE.SHIPPING_POLICY}</a></li> */}

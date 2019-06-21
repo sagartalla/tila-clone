@@ -39,7 +39,7 @@ const Shipping = (props) => {
     <div id="shipping-cont" className={`${styles.box} ${styles['border-radius4']} ${styles['mt-5']} ${styles['mb-10']} ${styles['ipad-delivery-address-part']} ${styles['free-delivery-part']}`}>
       <div className={`${styles['free-delivery-list']} ${styles.flex}`}>
         <div className={styles['pdp-deliver-list']}>
-          <GeoWidget hideLabel={!!shippingData.displayCity} />
+          <GeoWidget isPdp hideLabel={!!shippingData.displayCity} />
         </div>
         {
           shippingInfo && shippingInfo.shipping_days
@@ -85,7 +85,7 @@ const Shipping = (props) => {
               ?
               null
               :
-              PDP_PAGE.NO_SHIPPING_CITY
+              shippingInfo && shippingInfo.shippable === false ?  PDP_PAGE.NO_SHIPPING_CITY : PDP_PAGE.SELECT_YOUR_CITY
             }
           </p>
         }

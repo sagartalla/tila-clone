@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators, selectors } from '../../../../store/cam/personalDetails';
 import SVGComponent from '../../../common/SVGComponet';
-
+import ToastContent from '../../../common/ToastContent'
 import lang from '../../../../utils/language';
 
 import main_en from '../../../../layout/main/main_en.styl';
@@ -103,11 +103,22 @@ class UpdatePersonalInfoModal extends React.Component {
         gender: user_gender,
         last_name: second_name ? second_name : '',
         image_url: ''
+      }).then(() => {
+        this.handleClose();
+        toast(
+          <ToastContent
+            msg={`${PERSONAL_INFO_MODAL.YOUR_PERSONAL}}`}
+            msgType='success'
+          />
+        )
       });
-      this.handleClose();
-      toast.success('Your personal information has been updated.');
     } else {
-      toast.error('Fill in all the fields');
+      toast(
+        <ToastContent
+          msg='Fill in all the fields'
+          msgType='error'
+        />
+      )
     }
   }
 
@@ -120,7 +131,7 @@ class UpdatePersonalInfoModal extends React.Component {
       <div>
         <div className={styles['editProfileModal']}>
           <h4 className={`${styles['flx-spacebw-alignc']} ${styles['m-0']}`}>
-            <span>Personal Information</span>
+            <span className={`${styles['fs-20']}`}>Personal Information</span>
             <a onClick={this.handleClose} className={`${styles['fs-22']} ${styles['black-color']}`}>X</a>
           </h4>
           <div className={`${styles['flex-center']} ${styles['flex-colum']}`}>

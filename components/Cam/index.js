@@ -76,7 +76,7 @@ class Cam extends React.Component {
           <AuthWrapper>
             <Grid>
               <Row className={styles['pt-30']}>
-                <Col xs={12} md={3} sm={3} className={`${styles['pr-0']} ${styles['sidebar-position']}`}>
+                <Col xs={12} md={3} sm={3} className={`${styles['pr-0']} ${styles['sidebar-position']} ${styles['cam-left-sidebar']}`}>
                   <Sidebar query={query} imgUrl={this.props.imgSource}/>
                 </Col>
                 <Col xs={12} md={9} sm={9}>
