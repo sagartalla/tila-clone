@@ -22,7 +22,6 @@ const { HEADER_PAGE } = languageDefinations()
 
 const brandImages = {
   topBrands: {
-
     '#00C7B1': ['Samsung', 'Apple', 'Sony', 'Philips'],
     '#EF6079': ['Pampers', 'Gucci', 'Omron', 'CalkinKlien'],
     '#888B8D': ['Armani-exchange', 'Nike', 'Levis', 'Fossil'],

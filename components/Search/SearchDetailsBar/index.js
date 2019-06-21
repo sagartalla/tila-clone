@@ -116,7 +116,6 @@ class SearchDetailsBar extends Component {
 
 
 const mapStateToProps = (store) => ({
-  categoryId: selectors.getCategoryId(store),
   query: selectors.getQuery(store),
   categoryQuery:selectors.getCategorySearchQuery(store),
   results: selectors.getSearchResutls(store),
