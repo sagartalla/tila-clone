@@ -6,17 +6,18 @@ import { Modal } from 'react-router-modal';
 import SVGComponent from '../common/SVGComponet';
 import { selectors, actionCreators } from '../../store/auth';
 // import { selectors as productSelectors } from '../../store/cam/personalDetails';
-import ForgotPassword from './ForgotPassword';
-import ForgotSecurityPage from './ForgotSecurityQuestions';
+// import ForgotPassword from './ForgotPassword';
+// import ForgotSecurityPage from './ForgotSecurityQuestions';
 import { languageDefinations } from '../../utils/lang';
-import VerifyStatus from './VerifyStatus';
-import VerifyEmail from './VerifyEmail';
-import LoginPage from './LoginPage';
-import SignIn from './SignIn';
+// import VerifyStatus from './VerifyStatus';
+// import VerifyEmail from './VerifyEmail';
+// import LoginPage from './LoginPage';
+// import SignIn from './SignIn';
 import ThankYou from './ThankYouPage';
-import CompleteSignUp from './CompleteSignUp';
-import ExistingSocialLogin from './ExistingSocialLogin';
-import ResetpasswordMain from './ResetpasswordMain';
+// import CompleteSignUp from './CompleteSignUp';
+// import ExistingSocialLogin from './ExistingSocialLogin';
+// import ResetpasswordMain from './ResetpasswordMain';
+import LoginFlow from './LoginFlow';
 
 import lang from '../../utils/language';
 
@@ -205,42 +206,43 @@ class Login extends Component {
   //   })
   // }
 
-  loadPage = () => {
-    const { activeObj, showEmailSuccess, showOtpSuccess } = this.props;
-    switch (activeObj && activeObj.activePage && activeObj.activePage) {
-      case 'password':
-        return <SignIn mode="EXISTING_USER" />;
-      case 'password_new':
-        return <SignIn mode="NEW_USER" />;
-      case 'social_login':
-        return <SignIn mode="SOCIAL_LOGIN" />;
-      case 'signin_page':
-        return <LoginPage />;
-      case 'security_page':
-        return <ForgotSecurityPage />;
-      case 'reset_type':
-        return <ForgotPassword />;
-      case 'success_screen':
-        return <VerifyStatus showEmailSuccess={showEmailSuccess} showOtpSuccess={showOtpSuccess} onBackdropClick={this.onBackdropClick} />;
-      case 'verify_email':
-        return <VerifyEmail />;
-      case 'personal_details':
-        return <CompleteSignUp />;
-      case 'existing_social_login':
-        return <ExistingSocialLogin />;
-      case 'reset_screen':
-        return <ResetpasswordMain onBackdropClick={this.onBackdropClick} />;
-      case 'shipping_to_page':
-        return <CompleteSignUp />;
-      default:
-        return <LoginPage />;
-    }
-  }
+  // loadPage = () => {
+  //   const { activeObj, showEmailSuccess, showOtpSuccess } = this.props;
+  //   switch (activeObj && activeObj.activePage && activeObj.activePage) {
+  //     case 'password':
+  //       return <SignIn mode="EXISTING_USER" />;
+  //     case 'password_new':
+  //       return <SignIn mode="NEW_USER" />;
+  //     case 'social_login':
+  //       return <SignIn mode="SOCIAL_LOGIN" />;
+  //     case 'signin_page':
+  //       return <LoginPage />;
+  //     case 'security_page':
+  //       return <ForgotSecurityPage />;
+  //     case 'reset_type':
+  //       return <ForgotPassword />;
+  //     case 'success_screen':
+  //       return <VerifyStatus showEmailSuccess={showEmailSuccess} showOtpSuccess={showOtpSuccess} onBackdropClick={this.onBackdropClick} />;
+  //     case 'verify_email':
+  //       return <VerifyEmail />;
+  //     case 'personal_details':
+  //       return <CompleteSignUp />;
+  //     case 'existing_social_login':
+  //       return <ExistingSocialLogin />;
+  //     case 'reset_screen':
+  //       return <ResetpasswordMain onBackdropClick={this.onBackdropClick} />;
+  //     case 'shipping_to_page':
+  //       return <CompleteSignUp />;
+  //     default:
+  //       return <LoginPage />;
+  //   }
+  // }
 
   render() {
     const {
       activeObj,
     } = this.props;
+    console.log('entered');
     return (
       <Modal className={activeObj && activeObj.activePage && activeObj.activePage === 'thank_you' ? `react-router-modal__modal ${styles['background-transparent']} ${styles['border-none']} ${styles['p-10']}` : `react-router-modal__modal ${styles['login-reg-modal']} ${styles['p-10']}`} onBackdropClick={this.onBackdropClick}>
         {activeObj && activeObj.activePage && activeObj.activePage === 'thank_you' ?
@@ -258,9 +260,7 @@ class Login extends Component {
                     <SVGComponent clsName={`${styles['cross-icon']}`} src="icons/common-icon/cross-button" />
                   </div>
                 </div>
-                <div className={`${styles['pl-40']} ${styles['pr-40']}`}>
-                  {this.loadPage()}
-                </div>
+                <LoginFlow />
               </Col>
             </div>
           </Row>}

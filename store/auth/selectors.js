@@ -27,6 +27,7 @@ const getInstaCode = (store) => {
 };
 
 const getUserCreds = (store) => {
+  console.log('store.authReducer.data.userCreds', store.authReducer.data.userCreds);
   return store.authReducer.data.userCreds;
 };
 
@@ -47,6 +48,7 @@ const showEmailVerificationScreen = (store) => {
 };
 
 const getUserInfo = (store) => {
+  console.log(store.authReducer.data.userInfoData);
   return store.authReducer.data.userInfoData;
 };
 
@@ -92,8 +94,11 @@ const getActiveText = store => store.authReducer && store.authReducer.v2 && stor
 
 const getLastLogin = store => store.authReducer.v2.data.last_social_login_used;
 
+const showCheckoutLogin = store => store.authReducer.ui.showCheckoutLogin;
+
 export {
   getErrorMessege, getCountry, getLoggedInStatus, getInstaCode, getUserCreds, getDeliveryCity, getDomainCountries,
   getLoginProgressStatus, getShowLogin, getPTAToken, showEmailVerificationScreen, getLanguage, getLoadingStatus, getUserInfo,
-  getActive, getActiveEmailId, forgotPasswordStatus, showEmailSuccess, showLogin, userData, showOtpSuccess, resetToken, getActiveText, getLastLogin, showResetScreen, getActiveUser,
+  getActive, getActiveEmailId, forgotPasswordStatus, showEmailSuccess, showLogin, userData, showOtpSuccess, resetToken, getActiveText,
+  getLastLogin, showResetScreen, getActiveUser, showCheckoutLogin,
 };

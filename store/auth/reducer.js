@@ -11,6 +11,7 @@ const initialState = {
     loginLoading: false,
     showLogin: false,
     showEmailVerificationScreen: false,
+    showCheckoutLogin: false,
   },
   data: {
     isLoggedIn: false,
@@ -153,6 +154,7 @@ const authReducer = typeToReducer({
         loginLoading: false,
         showLogin: false,
         loading: false,
+        showCheckoutLogin: false,
       },
     }),
     REJECTED: (state, action) => {
@@ -206,16 +208,36 @@ const authReducer = typeToReducer({
       },
     }),
   },
-  [actions.USER_LOGOUT]: state => ({
-    ...state,
-    data: {
-      ...state.data,
-      isLoggedIn: false,
-    },
-    ui: {
-      showLogin: false,
-    },
-  }),
+  [actions.USER_LOGOUT]: {
+    PENDING: state => Object.assign(
+      {}, state, {
+        error: '',
+      },
+      {
+        ui: {
+          ...state.ui,
+          loading: true,
+        },
+      },
+    ),
+    FULFILLED: (state, action) => Object.assign({}, state, {
+      data: {
+        ...state.data,
+        isLoggedIn: false,
+      },
+      ui: {
+        ...state.ui,
+        loading: false,
+        showCheckoutLogin: true,
+      },
+    }),
+    REJECTED: (state, action) => Object.assign({}, state, {
+      ui: {
+        ...state.ui,
+        loading: false,
+      },
+    }),
+  },
   [actions.USER_LOGIN_INFO]: (state, action) => ({
     ...state,
     data: {

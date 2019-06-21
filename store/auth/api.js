@@ -81,12 +81,8 @@ const userLogin = params =>
 ;
 
 const userLogout = () => {
-  axios.post('/api/logout')
-  .then((res) => {
-    if (res.status === 200) {
-      window.location = `${window.location.origin}/${cookies.get('country')}/${cookies.get('language')}`;
-    }
-  });
+  console.log('success');
+  return axios.post('/api/logout');
 };
 
 const getLoginInfo = () => {
@@ -168,15 +164,19 @@ const getDomainCountries = () => axios.get(`${constants.TRANSFORMER_API_URL}/fpt
 
 // New Registration Flow API's
 
-const v2UserLogin = email => axios.get(`${constants.CMS_API_URL}/api/v1/user/check?email=${email}`).then(res => Object.assign({}, res, {
-  data: {
-    ...res.data,
-    email,
-  },
-}));
+const v2UserLogin = (email) => {
+  const encodeEmail = encodeURIComponent(email);
+  return axios.get(`${constants.CMS_API_URL}/api/v1/user/check?email=${encodeEmail}`).then(res => Object.assign({}, res, {
+    data: {
+      ...res.data,
+      email,
+    },
+  }));
+};
 
 const showUserInfo = (param) => {
-  return axios.get(`${constants.CMS_API_URL}/api/v1/user/password/forgot?email=${param}`);
+  const encodeEmail = encodeURIComponent(param);
+  return axios.get(`${constants.CMS_API_URL}/api/v1/user/password/forgot?email=${encodeEmail}`);
 };
 
 const resetPassword = (body) => {
@@ -201,8 +201,9 @@ const forgotPassword = (body) => {
   });
 }
 
-const getMobileOtp = ( email ) => {
-  return axios.get(`${constants.CMS_API_URL}/api/v1/user/password/forgot/mobile/otp?email=${email}`).then((data) => {
+const getMobileOtp = (email) => {
+  const encodeEmail = encodeURIComponent(email);
+  return axios.get(`${constants.CMS_API_URL}/api/v1/user/password/forgot/mobile/otp?email=${encodeEmail}`).then((data) => {
     toast(
       <ToastContent
         msg='OTP sent to your mobile number'

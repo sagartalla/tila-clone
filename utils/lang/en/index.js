@@ -126,7 +126,8 @@ export const EN_KEYWORDS = {
     ON_DELIVERY: 'on delivery',
     DROP_THE_ANSWER_INTO_THE_BOX: 'Drop the answer icon into the box above',
     LOADING_CAPTCHA: 'Loading Captcha...',
-    YOU_ARE_SIGNED_IN_AS: 'You have signed in as',
+    YOU_ARE_SIGNED_IN_AS: 'Logged in as',
+    CHANGE: 'Change',
   },
   DELIVERY_ADDR_PAGE: {
     DELIVERY_ADDR: 'Delivery Address',

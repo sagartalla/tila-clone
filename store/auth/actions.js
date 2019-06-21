@@ -86,13 +86,18 @@ const actionCreators = {
       return res;
     });
   }),
-  userLogout: () => (dispatch) => {
+  // userLogout: () => (dispatch) => {
+  //   // dispatch(cartActionCreators.getCartResults());
+  //   dispatch({
+  //     type: actions.USER_LOGOUT,
+  //     payload: api.userLogout(),
+  //   });
+  // },
+  userLogout: () => ({
     // dispatch(cartActionCreators.getCartResults());
-    dispatch({
-      type: actions.USER_LOGOUT,
-      payload: api.userLogout(),
-    });
-  },
+    type: actions.USER_LOGOUT,
+    payload: api.userLogout(),
+  }),
   getLoginInfo: params => ({
     type: actions.USER_LOGIN_INFO,
     payload: api.getLoginInfo(params),

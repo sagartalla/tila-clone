@@ -21,9 +21,8 @@ const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...s
 const { LOGIN_PAGE, ORDER_PAGE } = languageDefinations();
 
 class LoginPage extends React.Component {
-  constructor() {
-    super();
-    const email = localStorage.getItem('remember') ? JSON.parse(localStorage.getItem('remember')).email : '';
+  constructor(props) {
+    super(props);
     this.validations = new FormValidator([
       {
         field: 'email',
@@ -40,7 +39,7 @@ class LoginPage extends React.Component {
       },
     ]);
     this.state = {
-      email,
+      email: props.activeEmailId || '',
       validation: this.validations.valid(),
     };
   }
@@ -62,6 +61,7 @@ class LoginPage extends React.Component {
   checkValidation = (fieldValue, state, args) => args.test(fieldValue)
   
   handleValidation = () => {
+    debugger;
     const { email } = this.state;
     const validation = this.validations.validateOnBlur({ email });
 
@@ -80,7 +80,7 @@ class LoginPage extends React.Component {
   }
 
   render() {
-    const { loadingStatus } = this.props;
+    const { loadingStatus, activeEmailId } = this.props;
     const { email, validation } = this.state;
     return (
       <div className={`${styles['login-form']} ${styles['flx-space-bw']} ${styles['flex-colum']}`}>
@@ -156,6 +156,7 @@ class LoginPage extends React.Component {
 
 const mapStateToProps = store => ({
   loadingStatus: selectors.getLoadingStatus(store),
+  activeEmailId: selectors.getActiveEmailId(store),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(

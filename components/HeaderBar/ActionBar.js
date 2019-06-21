@@ -89,16 +89,16 @@ class ActionBar extends Component {
 
     this.setState({
       // show,
-      logoutClicked: false,
+      // logoutClicked: false,
       // showLoginScreen: nextProps.showLoginScreen,
       loginClicked: false,
     });
 
-    if (nextProps && nextProps.activeObj && nextProps.activeObj.nextPage === null) {
-      setTimeout(() => {
-        closeThankYouScreen();
-      }, 3000);
-    }
+    // if (nextProps && nextProps.activeObj && nextProps.activeObj.nextPage === null) {
+    //   setTimeout(() => {
+    //     closeThankYouScreen();
+    //   }, 3000);
+    // }
 
     if (nextProps.isLoggedIn) {
       if (nextProps.ptaToken) {
@@ -119,28 +119,7 @@ class ActionBar extends Component {
     nextProps.userInfo.personalInfo.image_url && this.props.downloadPic(nextProps.userInfo.personalInfo.image_url);
   }
 
-  logoutClick() {
-    this.setState({
-      logoutClicked: true,
-    }, () => {
-      this.props.logout();
-    });
-  }
 
-  loginClick(e) {
-    digitalData.page.pageInfo.pageType = 'Login Page';
-    digitalData.page.pageInfo.pageName = 'Login Page';
-
-    this.props.showLoginScreen();
-    // const state = {};
-    // state.loginClicked = true;
-    // if (e.currentTarget.getAttribute('data-mode') === 'sign-up') {
-    //   state.mode = 'register';
-    // } else {
-    //   state.mode = 'login';
-    // }
-    // state.show = true;
-  }
 
   onBackdropClick(logoutRequired = false) {
     this.props.resetLoginError();
@@ -158,6 +137,28 @@ class ActionBar extends Component {
       },
     };
     this.props.userLogin(serverData);
+  }
+  logoutClick() {
+    this.props.logout().then((res) => {
+      if (res && res.value && res.value.status === 200) {
+        window.location = `${window.location.origin}/${cookies.get('country')}/${cookies.get('language')}`;
+      }
+    });
+  }
+  
+  loginClick(e) {
+    digitalData.page.pageInfo.pageType = 'Login Page';
+    digitalData.page.pageInfo.pageName = 'Login Page';
+
+    this.props.showLoginScreen();
+    // const state = {};
+    // state.loginClicked = true;
+    // if (e.currentTarget.getAttribute('data-mode') === 'sign-up') {
+    //   state.mode = 'register';
+    // } else {
+    //   state.mode = 'login';
+    // }
+    // state.show = true;
   }
 
   render() {

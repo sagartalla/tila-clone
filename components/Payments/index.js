@@ -92,6 +92,7 @@ class Payments extends React.Component {
       editCartDetails: true,
       showSlider: false,
       showError: false,
+      showLogout: false,
     }
 
     this.saveCard = this.saveCard.bind(this);
@@ -129,9 +130,10 @@ class Payments extends React.Component {
     // }
 
     // console.log(nextProps)
-
+    console.log('nextProps.userCreds', nextProps.userCreds);
     // if loggedin show address step directly.
     if (nextProps.isLoggedIn && !loggedInFlag) {
+      console.log('nextProps.isLoggedIn', nextProps.isLoggedIn);
       const login = nextProps.userCreds || this.state.login;
       const paymentConfigJson = { ...this.state.paymentConfigJson };
       paymentConfigJson['signIn'] = { basic: false, progress: false, done: true };
@@ -150,13 +152,30 @@ class Payments extends React.Component {
       progress: false,
       done: false,
     };
+    paymentConfigJson.payment = {
+      basic: true,
+      progress: false,
+      done: false,
+    };
     this.setState({
       paymentConfigJson,
       loggedInFlag: false,
+      showLogout: true,
     });
   }
 
-
+  continueCheckout = () => {
+    const paymentConfigJson = { ...this.state.paymentConfigJson };
+    paymentConfigJson.address = {
+      basic: true,
+      progress: true,
+      done: false,
+    };
+    this.setState({
+      paymentConfigJson,
+      showLogout: false,
+    });
+  }
   checkBoxChange(e) {
     let { showError } = this.state;
     if (!e.target.checked) {
@@ -310,8 +329,28 @@ class Payments extends React.Component {
       showSlider: false,
     });
   }
+
+  logoutClicked = () => {
+    const { logout } = this.props;
+    logout();
+    const paymentConfigJson = { ...this.state.paymentConfigJson };
+    paymentConfigJson.address = {
+      basic: true,
+      progress: false,
+      done: false,
+    };
+    paymentConfigJson.payment = {
+      basic: true,
+      progress: false,
+      done: false,
+    };
+    this.setState({
+      paymentConfigJson,
+      showLogout: true,
+    });
+  }
   render() {
-    const { login, paymentConfigJson, editCartDetails, showSlider, validation, showError } = this.state;
+    const { login, paymentConfigJson, editCartDetails, showSlider, validation, showError, showLogout } = this.state;
     const { paymentOptions, selectedAddress, signInLoader, cartResults } = this.props;
     const { PAYMENT_PAGE, CART_PAGE } = languageDefinations();
 
@@ -336,6 +375,9 @@ class Payments extends React.Component {
                 validation={validation}
                 checkBoxChange={this.checkBoxChange}
                 showError={showError}
+                showLogout={showLogout}
+                continueCheckout={this.continueCheckout}
+                logoutClicked={this.logoutClicked}
               />
               <DeliveryAddress
                 selectedAddress={selectedAddress}
@@ -424,7 +466,8 @@ const mapDispatchToProps = dispatch =>
       getLoginInfo: authActionCreators.getLoginInfo,
       getCartResults: cartActionCreators.getCartResults,
       emptyPaymentPaylod: actionCreators.emptyPaymentPaylod,
-      cartEditDetails:cartAction.cartEditDetails
+      cartEditDetails:cartAction.cartEditDetails,
+      logout: authActionCreators.userLogout,
     },
     dispatch,
   );
