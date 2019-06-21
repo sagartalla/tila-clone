@@ -59,7 +59,7 @@ class Language extends Component {
   render() {
     const { name, id } = languageData[this.state.selectedItem];
     return (
-      <div className={`${styles.pointer} ${styles['pr-20']} ${styles['pl-20']} ${styles['border-rt']}`} onClick={this.changeLanguage} data-id={id}>
+      <div className={`${styles.pointer} ${styles['pr-20']} ${styles['border-rt']}`} onClick={this.changeLanguage} data-id={id}>
         <span>{name}</span>
       </div>
     );
