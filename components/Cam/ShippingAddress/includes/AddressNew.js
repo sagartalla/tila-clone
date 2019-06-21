@@ -184,7 +184,7 @@ const AddressNew = (props) => {
           <Col md={2} sm={4} xs={4} className={`${styles['pr-0']}`}>
             <div className={`${styles['fp-input']} ${styles['common-input-mb']}`}>
               <img src={ countriesImage[data.shipping_country_code] && countriesImage[data.shipping_country_code].img} alt={""} title={data.shipping_country_code} className={styles['country-flag']}/>
-              <input type="number" name="mobile_country_code" defaultValue={data.mobile_country_code} className={`${styles.input} ${styles['padded']}`} required />
+              <input type="number" name="mobile_country_code" value={data.mobile_country_code} className={`${styles.input} ${styles['padded']}`} required />
               <span className={styles.highlight} />
               <span className={styles.bar} />
               <label>{DELIVERY_ADDR_PAGE.CODE}</label>
