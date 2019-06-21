@@ -30,116 +30,89 @@ const f = [
   },
 
   {
-    url: `/SAU/${lang}/srp?search=kids%20clothing&language=en&isListed=false`,
-    title: FOOTER_PAGE.KIDS_CLOTHING,
+    url: `/SAU/${lang}/srp/footwear?categoryTree=true&isListed=false&sid=892,907`,
+    title: FOOTER_PAGE.FOOT_WEAR,
+  },
+
+  // NEED TO CHANGE URLS
+  {
+    url: `/SAU/${lang}/srp?search=sunglass&language=en&isListed=false`,
+    title: FOOTER_PAGE.SUNGLASSES,
+  },
+
+  {
+    url: `/SAU/${lang}/srp?search=jewellery&language=en&isListed=false`,
+    title: FOOTER_PAGE.JEWELLERY,
   },
 
   {
     url: `/SAU/${lang}/srp/watch?categoryTree=true&isListed=false&sid=892,929`,
     title: FOOTER_PAGE.WATCHES,
   },
-
-  {
-    url:	`/SAU/${lang}/srp?search=jewellery&language=en&isListed=false`,
-    title: FOOTER_PAGE.JEWELLERY,
-  },
-
-  {
-    url:	`/SAU/${lang}/srp/footwear?categoryTree=true&isListed=false&sid=892,907`,
-    title: FOOTER_PAGE.MENS_FOOTWEAR,
-  },
-
-  {
-   url:	`/SAU/${lang}/srp/footwear?categoryTree=true&isListed=false&sid=892,921`,
-   title: FOOTER_PAGE.WOMEN_FOOTWEAR,
-  },
-
-  {
-    url:	`/SAU/${lang}/srp?search=bags&language=en&isListed=false`,
-    title: FOOTER_PAGE.BAGS,
-  },
 ];
 
 const e = [
   {
-    url: `/SAU/${lang}/srp/mobiles?categoryTree=true&isListed=false&sid=848,2349`,
+    url: `/SAU/${lang}/srp?search=mobiles&language=en&isListed=false`,
     title: FOOTER_PAGE.MOBILES,
   },
 
   {
-    url: `/SAU/${lang}/srp/tablets?categoryTree=true&isListed=false&sid=848,2350`,
-    title: FOOTER_PAGE.TABLETS,
+    url: `/SAU/${lang}/srp?search=laptops&language=en&isListed=false`,
+    title: FOOTER_PAGE.LAPTOPS,
   },
 
   {
-    url: `/SAU/${lang}/srp/laptops?categoryTree=true&isListed=false&sid=848,2352`,
-    title: FOOTER_PAGE.LAPTOPS,
+    url: `/SAU/${lang}/srp?search=cameras&language=en&isListed=false`,
+    title: FOOTER_PAGE.CAMERAS,
+  },
+
+  {
+    url: `/SAU/${lang}/srp?search=Televisions&language=en&isListed=false`,
+    title: FOOTER_PAGE.TELEVISIONS,
+  },
+
+  {
+    url: `/SAU/${lang}/srp?search=Storage%20Devices&language=en&isListed=false`,
+    title: FOOTER_PAGE.STORAGE_DEVICES,
   },
 
   {
     url: `/SAU/${lang}/srp/home-applaince?categoryTree=true&isListed=false&sid=932,935`,
     title: FOOTER_PAGE.HOME_APLLIANCES,
   },
-
-  {
-    url: `/SAU/${lang}/srp/camera?categoryTree=true&isListed=false&sid=848,882`,
-    title: FOOTER_PAGE.CAMERAS,
-  },
-
-  {
-    url: `/SAU/${lang}/srp/televisions?categoryTree=true&isListed=false&sid=848,2351`,
-    title: FOOTER_PAGE.TELEVISIONS,
-  },
-
-  {
-    url: `/SAU/${lang}/srp?search=speakers&language=en&isListed=false`,
-    title: FOOTER_PAGE.SPEAKERS,
-  },
-
-  {
-    url: `/SAU/${lang}/srp/external-hard-disks?categoryTree=true&isListed=false&sid=848,872,873`,
-    title: FOOTER_PAGE.STORAGE_DEVICES,
-  },
 ];
 
+// NEED TO CHANGE URLS
 const l = [
   {
-    url:	`/SAU/${lang}/srp?search=travel%20accessories&language=en&isListed=false`,
-    title: FOOTER_PAGE.TRAVEL_ACCESSORIES,
+    url: `/SAU/${lang}/srp?search=Beauty%20&%20Personal%20Care&language=en&isListed=false`,
+    title: FOOTER_PAGE.BEAUTY_AND_PERSONAL_CARE,
   },
 
   {
-    url:	`/SAU/${lang}/srp?search=Photo%20Frame&language=en&isListed=false`,
-    title: FOOTER_PAGE.PHOTO_FRAMES,
+    url: `/SAU/${lang}/srp?search=Home%20Furnishing&language=en&isListed=false`,
+    title: FOOTER_PAGE.HOME_FURNSHING,
   },
 
   {
-    url:	`/SAU/${lang}/srp?search=lights&language=en&isListed=false`,
-    title: FOOTER_PAGE.LIGHTS,
+    url: `/SAU/${lang}/srp?search=Home%20Appliances&language=en&isListed=false`,
+    title: FOOTER_PAGE.HOME_APLLIANCES,
+  },
+  {
+    url: `/SAU/${lang}/srp?search=Home%20Decor&language=en&isListed=false`,
+    title: FOOTER_PAGE.HOME_DECOR,
+  },
+  {
+    url: `/SAU/${lang}/srp?search=Baby%20Care&language=en&isListed=false`,
+    title: FOOTER_PAGE.BABY_CARE,
+  },
+  {
+    url: `/SAU/${lang}/srp?search=Health%20Care&language=en&isListed=false`,
+    title: FOOTER_PAGE.HEALTH_CARE,
   },
 ];
 
-const b = [
-  {
-    url:	`/SAU/${lang}/srp/fragrance?categoryTree=true&isListed=false&sid=932,958,964`,
-    title: FOOTER_PAGE.PERFUMES,
-  },
-
-  {
-    url:	`/SAU/${lang}/srp?search=eye%20wear&language=en&isListed=false`,
-    title: FOOTER_PAGE.EYEWEAR,
-  },
-
-  {
-    url:	`/SAU/${lang}/srp?search=grooming&language=en&isListed=false`,
-    title: FOOTER_PAGE.MENS_GROOMING,
-  },
-
-  {
-    url:	`/SAU/${lang}/srp/personal-care?categoryTree=true&isListed=false&sid=932,958,969`,
-    title: FOOTER_PAGE.PERSONAL_CARE,
-  }
-];
 
 const FooterBar = props => (
   <div id="footer-container" className={`${styles['footer-container']} ${styles['mt-25']}`}>
@@ -200,8 +173,8 @@ const FooterBar = props => (
     <div className={`${styles['footer-menu-items']} ${styles['pt-30']} ${styles['pb-30']} ${styles['bg-white']}`}>
       <Grid>
         <div className={styles['flex']}>
-          <div className={`${styles['ipad-pr-0']} ${styles['footer-menu-inn']}`}>
-            <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['flex-center']}`}>
+          <div className={`${styles['ipad-pr-0']} ${styles['footer-menu-inn']} `}>
+            <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['flex-center']} ${styles['mr-50']}`}>
               <SVGComponent clsName={`${styles['footer-list-icon']} ${styles['mr-10']}`} src="icons/footers-icons/fashion" />
               <span className={styles['pointer']}>{FOOTER_PAGE.FASHION}</span>
             </h4>
@@ -218,7 +191,7 @@ const FooterBar = props => (
             </ul>
           </div>
           <div className={`${styles['ipad-pr-0']} ${styles['footer-menu-inn']}`}>
-            <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['flex-center']}`}>
+            <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['flex-center']}  ${styles['mr-35']}`}>
               <SVGComponent clsName={`${styles['footer-list-icon']} ${styles['mr-10']}`} src="icons/common-icon/processor-icon" />
               <span className={styles['pointer']}>{FOOTER_PAGE.ELECTRONICS}</span>
             </h4>
@@ -235,11 +208,11 @@ const FooterBar = props => (
             </ul>
           </div>
           <div className={`${styles['ipad-pr-0']} ${styles['footer-menu-inn']}`}>
-            <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['flex-center']}`}>
+            <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['flex-center']} ${styles['mr-80']}`}>
               <SVGComponent clsName={`${styles['footer-list-icon']} ${styles['mr-10']}`} src="icons/footers-icons/life-style" />
               <span className={styles['pointer']}>{FOOTER_PAGE.LIFESTYLE}</span>
             </h4>
-            <ul className={`${styles['pl-30']} ${styles['lne-ht2']}`}>
+            <ul className={`${styles['pl-40']} ${styles['lne-ht2']}`}>
               {l.map((i) => <li key={i.title}><a href={i.url}><span className={styles['pointer']}>{i.title}</span></a></li>)}
               {/*<li><span className={styles['pointer']}>{FOOTER_PAGE.HOME_DECOR}</span></li>
               <li><span className={styles['pointer']}>{`${FOOTER_PAGE.KITCHEN} & ${FOOTER_PAGE.DINING}`}</span></li>
@@ -251,35 +224,20 @@ const FooterBar = props => (
               <li><span className={styles['pointer']}>{`${FOOTER_PAGE.PATIO}, ${FOOTER_PAGE.LAWN} & ${FOOTER_PAGE.GARDEN}`}</span></li>*/}
             </ul>
           </div>
-          <div className={`${styles['ipad-pr-0']} ${styles['footer-menu-inn']}`}>
-            <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['flex-center']}`}>
-              <SVGComponent clsName={`${styles['footer-list-icon']} ${styles['mr-10']}`} src="icons/footers-icons/beauty-makeup" />
-              <span className={styles['pointer']}>{`${FOOTER_PAGE.BEAUTY} & ${FOOTER_PAGE.MAKEUP}`}</span>
-              </h4>
-            <ul className={`${styles['pl-30']} ${styles['lne-ht2']}`}>
-              {b.map((i) => <li key={i.title}><a href={i.url}><span className={styles['pointer']}>{i.title}</span></a></li>)}
-              {/*<li><span className={styles['pointer']}>{FOOTER_PAGE.FRAGRANCE}</span></li>
-              <li><span className={styles['pointer']}>{FOOTER_PAGE.MAKEUP}</span></li>
-              <li><span className={styles['pointer']}>{FOOTER_PAGE.HAIRCARE}</span></li>
-              <li><span className={styles['pointer']}>{`${FOOTER_PAGE.SKINCARE}${FOOTER_PAGE.AUDIO} & ${FOOTER_PAGE.VIDEO}`}</span></li>
-              <li><span className={styles['pointer']}>{FOOTER_PAGE.PERSONAL_CARE}</span></li>
-              <li><span className={styles['pointer']}>{`${FOOTER_PAGE.TOOLS} & ${FOOTER_PAGE.ACCESSORIES}`}</span></li>
-              <li><span className={styles['pointer']}>{`${FOOTER_PAGE.MENS} ${FOOTER_PAGE.GROOMING}`}</span></li>*/}
-            </ul>
-          </div>
 
           <div className={`${styles['ipad-pr-0']} ${styles['footer-menu-inn']}`}>
             <h4 className={`${styles['fontW600']} ${styles['fs-16']}`}>
             <span className={styles['pointer']}>{FOOTER_PAGE.TOP_BRAND}</span>
             </h4>
             <ul className={`${styles['pl-0']} ${styles['lne-ht2']} ${styles['top-brands']}`}>
+              <li className={`${styles['flex']} ${styles['mb-20']} ${styles['apple-icon']}`}><img src="/static/img/bg-img/apple.png" className={styles['img-responsive']} /></li>
               <li className={`${styles['flex']} ${styles['mb-20']} ${styles['brand-icon']}`}>
-                <img src="/static/img/bg-img/samsung-img.jpg" className={styles['img-responsive']} />
+                <img src="/static/img/bg-img/Baseus.png" className={styles['img-responsive']} />
               </li>
-              <li className={`${styles['flex']} ${styles['mb-20']} ${styles['apple-icon']}`}><img src="/static/img/bg-img/apple.jpg" className={styles['img-responsive']} /></li>
-              <li className={`${styles['flex']} ${styles['mb-20']} ${styles['sony-icon']}`}><img src="/static/img/bg-img/sony.jpg" className={styles['img-responsive']} /></li>
-              <li className={`${styles['flex']} ${styles['mb-20']} ${styles['brand-icon']}`}><img src="/static/img/bg-img/philips.jpg" className={styles['img-responsive']} /></li>
-              <li className={`${styles['flex']} ${styles['mb-20']} ${styles['brand-icon']}`}><img src="/static/img/bg-img/microsoft.jpg" className={styles['img-responsive']} /></li>
+              <li className={`${styles['flex']} ${styles['mb-20']} ${styles['sony-icon']}`}><img src="/static/img/bg-img/RayBan.png" className={styles['img-responsive']} /></li>
+              <li className={`${styles['flex']} ${styles['mb-20']} ${styles['brand-icon']}`}><img src="/static/img/bg-img/Fossil.png" className={styles['img-responsive']} /></li>
+              <li className={`${styles['flex']} ${styles['mb-20']} ${styles['brand-icon']}`}><img src="/static/img/bg-img/Gucci.png" className={styles['img-responsive']} /></li>
+              <li className={`${styles['flex']} ${styles['mb-20']} ${styles['brand-icon']}`}><img src="/static/img/bg-img/Pampers.png" className={styles['img-responsive']} /></li>
             </ul>
           </div>
         </div>

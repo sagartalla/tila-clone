@@ -527,6 +527,7 @@ export const EN_KEYWORDS = {
     KIDS_CLOTHING: 'Kids Clothing',
     MENS_FOOTWEAR: 'Mens Footwear',
     WOMEN_FOOTWEAR: 'Womens Footwear',
+    FOOT_WEAR: 'Footwear',
     BAGS: 'Bags',
     CAMERAS: 'Cameras',
     SPEAKERS: 'Speakers',
@@ -538,7 +539,11 @@ export const EN_KEYWORDS = {
     MENS_GROOMING: 'Mens grooming',
     LIFESTYLE: 'Lifestyle',
     TRAVEL_ACCESSORIES: 'Travel Accessories',
-
+    SUNGLASSES: 'Sunglasses',
+    BEAUTY_AND_PERSONAL_CARE: 'Beauty & Personal Care',
+    HOME_FURNSHING: 'Home furnishing',
+    BABY_CARE: 'Baby Care',
+    HEALTH_CARE: 'Health Care',
   },
   COMPARE: {
     TILA_COMPARE_1: 'Tila comparing (',
