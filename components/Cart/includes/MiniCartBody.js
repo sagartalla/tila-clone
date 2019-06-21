@@ -29,7 +29,7 @@ const MiniCartBody = (props) => {
   const { items, error, total_offer_price, currency } = data;
   const flag = data && items && items.length;
   const cnt = flag > 0 ? items.length : 0;
-  const { CART_PAGE } = languageDefinations();
+  const { CART_PAGE, DELIVERY_ADDR_PAGE } = languageDefinations();
   return (
     <div>
       <div className={`${styles['cart-container']} ${styles['mini-cart']} ${styles['border-t']}`}>
@@ -94,10 +94,10 @@ const MiniCartBody = (props) => {
                       </div>
                     :
                       <div className={`${styles['mt-20']} ${styles['fs-12']}`}>
-                        <div>
-                          <span className={`${styles['white-color']} ${styles['pb-5']} ${styles['pt-5']} ${styles['pr-10']} ${styles['pl-10']} ${styles['bg-thick-red-clr']} ${styles['border-radius12']}`}>Not Shippable</span>
+                        <div className={`${styles['not-shippable']} ${styles.flex} ${styles['flex-colum']} ${styles['mb-20']} ${styles['p-10']}`}>
+                          <Col md={12} sm={12} xs={12} className={`${styles['thick-red-clr']} ${styles.fontW600} ${styles['p-0']} ${styles['not-shipping-font']}`}>{DELIVERY_ADDR_PAGE.NOT_SHIPPABLE}</Col>
+                          <Col md={12} sm={12} xs={12} className={`${styles['fs-12']} ${styles['p-0']}`}>{CART_PAGE.CANNOT_DELIVER}</Col>
                         </div>
-                        <p className={`${styles['mt-20']} ${styles['thick-red-clr']}`}>{CART_PAGE.CANNOT_DELIVER}</p>
                       </div>
                     }
                   </Col>
