@@ -46,10 +46,12 @@ const subTypes = {
 
 
 const Brand = ({ pageData }) => {
-  const { page_content } = pageData;
-  console.log("page_content ;", page_content);
-
+  const { page_content, id_attribute } = pageData;
   return (<>
+  <div>
+    <span className={`${styles['fs-30']} ${styles['fontW600']} ${styles['text-capitalize']}`}>{id_attribute}</span>
+    <span className={`${styles['fs-30']} ${styles['fontW300']}`}>&nbsp;Store</span>
+  </div>
   {
     page_content.map((item) => {
       
