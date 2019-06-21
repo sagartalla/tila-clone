@@ -59,8 +59,6 @@ const getActive = store => store.authReducer.v2.active;
 
 const getActiveEmailId = store => store.authReducer.v2.data.email || '';
 
-const getActiveUser = store => store.authReducer.v2.data;
-
 const userData = store => store.authReducer.data.userData;
 
 const showResetScreen = store => store.authReducer.data.showResetScreen;
@@ -88,12 +86,12 @@ const showOtpSuccess = (store) => {
 const showLogin = store => store.authReducer.data.showLoginScreen;
 
 const resetToken = store => store.authReducer.data.resetToken;
-const getActiveText = store => store.authReducer && store.authReducer.v2 && store.authReducer.v2.active && store.authReducer.v2.active.text;
+const getActiveText = store => store.authReducer.v2.active.text;
 
 const getLastLogin = store => store.authReducer.v2.data.last_social_login_used;
 
 export {
   getErrorMessege, getCountry, getLoggedInStatus, getInstaCode, getUserCreds, getDeliveryCity, getDomainCountries,
   getLoginProgressStatus, getShowLogin, getPTAToken, showEmailVerificationScreen, getLanguage, getLoadingStatus, getUserInfo,
-  getActive, getActiveEmailId, forgotPasswordStatus, showEmailSuccess, showLogin, userData, showOtpSuccess, resetToken, getActiveText, getLastLogin, showResetScreen, getActiveUser,
+  getActive, getActiveEmailId, forgotPasswordStatus, showEmailSuccess, showLogin, userData, showOtpSuccess, resetToken, getActiveText, getLastLogin, showResetScreen,
 };
