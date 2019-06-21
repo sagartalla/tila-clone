@@ -32,12 +32,12 @@ class CartMiniWishList extends Component {
 
     return (
       <div className={`${styles['view-wishlist-main']} ${styles['box']} ${styles['p-20']} ${styles['flex-center']}`}>
-        <Col md={4}>
+        <Col md={3}>
           <span className={styles['fs-12']}>
             {data.length === 1 ? `${CART_PAGE.THERE_IS} ${data.length} ${CART_PAGE.ITEM_IN_YOUR_WISHLIST}` : `${CART_PAGE.THERE_ARE} ${wishListCount} ${CART_PAGE.ITEMS_IN_YOUR_WISHLIST}`}
           </span>
         </Col>
-        <Col md={6}>
+        <Col md={7}>
           {
             data.length > 0 && data.slice(0, 6).map((item, i) => (
               <span key={i} className={`${styles['wishlist-img']} ${styles['mr-15']}`}>

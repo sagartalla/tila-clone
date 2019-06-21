@@ -57,7 +57,7 @@ class PayOnline extends Component {
     const { disableSaveCard, iframe_url } = this.state;
 
     return (
-      <div className={`${styles['pay-online']}`}>
+      <div className={`${styles['pay-online']} ${styles['pb-10']}`}>
         <Voucher voucherData={voucherData} />
         <div>
           {
