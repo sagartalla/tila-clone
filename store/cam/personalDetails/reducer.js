@@ -9,7 +9,7 @@ const initialState = {
   useractive: true,
   error: '',
   otpResponse:{},
-  otpData:{},
+  otpData:{}
 };
 
 const personalDetailsReducer = typeToReducer({

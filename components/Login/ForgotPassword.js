@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import Button from '../common/CommonButton';
+import { Col } from 'react-bootstrap';
+import Btn from '../common/Button';
 import { languageDefinations } from '../../utils/lang';
-import { selectors, actionCreators } from '../../store/auth';
+import { selectors, actionCreators } from '../../store/cam/personalDetails';
+import { actionCreators as authActionCreators } from '../../store/auth';
+import VerifyStatus from './VerifyStatus';
 
 import lang from '../../utils/language';
 
@@ -17,93 +20,114 @@ const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...s
 
 const { LOGIN_PAGE } = languageDefinations();
 
-/* eslint- disable */
-
+// eslint-disable-next-line
+const emailPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 class ForgotPassword extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      radioValue: '',
+      email: props.enteredEmail || '',
+      showInput: '',
+      userNameError: false,
+      errorMsg: '',
     };
     this.sendLink = this.sendLink.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.switchState = this.switchState.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.forgotPasswordStatus === 'SUCCESS') {
+      this.setState({ showInput: true });
+    } else {
+      this.setState({ showInput: false });
+    }
+  }
 
   sendLink() {
-    const { radioValue } = this.state;
-    const { activeEmailId, userData, v2NextPage } = this.props;
+    const { email } = this.state;
+    let { userNameError, errorMsg } = this.state;
     const body = {
-      email: activeEmailId,
+      email,
     };
-    if (radioValue === 'email') {
-      this.props.forgotPassword(body).then(res => {
-        if (res && res.value && res.value.Response && res.value.Response === 'SUCCESS') {
-          v2NextPage();
+    if (email === '') {
+      userNameError = true;
+      errorMsg = 'Please enter email id';
+    } else if (!emailPattern.test(email)) {
+      userNameError = true;
+      errorMsg = 'Entered email is invalid';
+    } else {
+      this.props.forgotPassword(body).then((res) => {
+        if (res && res.value && res.value.Response === 'SUCCESS') {
+          this.setState({ showInput: true });
+        } else {
+          this.setState({ showInput: false });
         }
-    });
-  } else {
-    this.props.getMobileOtp(activeEmailId).then(res => {
-      if (res && res.value && res.value.data && res.value.data.Response === 'SUCCESS') {
-        v2NextPage();
-      }
-  });
-  }
-}
-
-
-  handleChange = (e) => {
-    const key = e.target.getAttribute('data-id');
+      });
+    }
     this.setState({
-      radioValue: key,
+      userNameError,
+      errorMsg,
     });
+  }
+
+  handleChange(e) {
+    let { userNameError, errorMsg } = this.state;
+    if (!emailPattern.test(e.target.value)) {
+      userNameError = true;
+      errorMsg = 'Entered email is invalid';
+    } else {
+      userNameError = false;
+      errorMsg = '';
+    }
+    this.setState({
+      email: e.target.value,
+      userNameError,
+      errorMsg,
+    });
+  }
+
+  switchState() {
+    this.setState({
+      showInput: '',
+    });
+  }
+
+  resetShowLogin = () => {
+    const { isCheckoutPage, resetShowLogin, toggleModal } = this.props;
+    if (isCheckoutPage) {
+      toggleModal();
+    } else resetShowLogin();
   }
 
   render() {
     const {
-      radioValue,
+      errorMsg, userNameError, email, showInput,
     } = this.state;
-    const { loadingStatus, activeEmailId, userData } = this.props;
     return (
-      <div className={`${styles['forgot-password']} ${styles.flex} ${styles['flex-colum']} ${styles['justify-around']}`}>
-        <div>
-          <h3 className={`${styles['fs-22']} ${styles['m-0']} ${styles['ff-b']}`}>{LOGIN_PAGE.FORGOT_PASSWORD}</h3>
-        </div>
-        <React.Fragment>
-          <span className={`${styles['radio-buttons']} ${styles.flex} ${styles['flex-colum']} ${styles['justify-around']}`}>
-            <div className={`${styles.flex}`}>
-              <input name="addr_checkbox" type="radio" className={`${styles['radio-btn']} ${styles['radio-margin']}`} data-id="email" onChange={this.handleChange} />
-              <span className={`${styles['ml-10']}`}>
-                <div className={radioValue === 'email' ? `${styles['fs-12']} ${styles.fontW600}` : `${styles['fs-12']}`}>{LOGIN_PAGE.RESET_PASSWORD_BY_EMAIL}</div>
-                <div className={radioValue === 'email' ? `${styles['fs-14']} ${styles.fontW600}` : `${styles['fs-14']}`}>{userData && userData.email}</div>
-              </span>
+      <div className={styles['forgot-password']}>
+        <h2><b>{LOGIN_PAGE.FORGOT_PASSWORD}</b></h2>
+        {showInput === '' ?
+          <div>
+            <div className={`${styles['fp-input']} ${styles['pb-10']}`}>
+              <input name="email" type="email" onChange={this.handleChange} placeholder={LOGIN_PAGE.REGISTERED_EMAIL_ID} value={email} required />
+              {userNameError && <span className={`${styles['thick-red-clr']}`}>{errorMsg}</span>}
             </div>
-            {userData.mobile_country_code && userData.mobile_no &&
-            <React.Fragment>
-              <div className={`${styles.border}`} />
-              <span>
-                <div className={`${styles.flex}`}>
-                  <input name="addr_checkbox" type="radio" className={`${styles['radio-btn']}`} data-id="otp" onChange={this.handleChange} />
-                  <span className={`${styles['ml-10']}`}>
-                    <div className={radioValue === 'otp' ? `${styles['fs-12']} ${styles.fontW600}` : `${styles['fs-12']}`}>{LOGIN_PAGE.RESET_PASSWORD_BY_MOBILE}</div>
-                    <div className={radioValue === 'otp' ? `${styles.fontW600} ${styles.flex} ${styles['justify-between']}` : `${styles.flex} ${styles['justify-between']}`}>
-                      <div className={`${styles['fashion-color']} ${styles['fs-14']}`}>{userData && (`+${userData.mobile_country_code}`)}</div>
-                      <div className={`${styles['fs-14']}`}>{userData && userData.mobile_no}</div>
-                    </div>
-                  </span>
-                </div>
-              </span>
-            </React.Fragment>
-            }
-          </span>
-          <Button
-            className={`${styles['flex-center']}  ${styles.width100} ${styles['fs-14']} ${styles['text-uppercase']} ${styles['button-radius']}`}
-            disabled={radioValue === ''}
-            onClick={this.sendLink}
-            btnLoading={loadingStatus}
-            btnText={LOGIN_PAGE.NEXT}
-          />
-        </React.Fragment>
+            <Col xs={12} md={12} className={`${styles['pt-30']}`}>
+              <Btn className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles['update-profile-btn']} ${styles['text-uppercase']}`} btnText={LOGIN_PAGE.SEND_VERIFICATION_LINK} onClick={this.sendLink} />
+            </Col>
+          </div>
+                :
+          <div>
+            <VerifyStatus
+              resetLogin={this.resetShowLogin}
+              switchState={this.switchState}
+              showInput={showInput}
+              forgotPasswordStatus={this.props.forgotPasswordStatus}
+              sendLink={this.sendLink}
+            />
+          </div>
+                }
       </div>
     );
   }
@@ -111,28 +135,23 @@ class ForgotPassword extends Component {
 
 const mapStateToProps = store => ({
   forgotPasswordStatus: selectors.forgotPasswordStatus(store),
-  activeObj: selectors.getActive(store),
-  activeEmailId: selectors.getActiveEmailId(store),
-  loadingStatus: selectors.getLoadingStatus(store),
-  userData: selectors.userData(store),
 });
 const mapDispatchToProps = dispatch => bindActionCreators(
   {
     forgotPassword: actionCreators.forgotPassword,
-    v2NextPage: actionCreators.v2NextPage,
-    getMobileOtp: actionCreators.getMobileOtp,
+    resetShowLogin: authActionCreators.resetShowLogin,
   },
   dispatch,
 );
 
 ForgotPassword.propTypes = {
-  activeEmailId: PropTypes.string,
+  enteredEmail: PropTypes.string,
   forgotPassword: PropTypes.func,
   forgotPasswordStatus: PropTypes.string,
 };
 
 ForgotPassword.defaultProps = {
-  activeEmailId: '',
+  enteredEmail: '',
   forgotPassword: f => f,
   forgotPasswordStatus: '',
 };

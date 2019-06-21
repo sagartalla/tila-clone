@@ -16,7 +16,7 @@ const url = {
 const Policy = ({ query }) => (
   <Fragment>
     <HeaderBar />
-    <iframe src={url[query.name]} title={query.name} style={{ height: '100vh', width: '100%', border: '0' }} />
+    <iframe src={url[query.name]} title={query.name} style={{ height: '100vh', width: '100vw', border: '0' }} />
     <FooterBar />
   </Fragment>
 );

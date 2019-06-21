@@ -147,7 +147,6 @@ const savePtaToken = ptaToken => axios.post('/api/setCookie', {
     ptaToken,
   },
 }).then(() => ptaToken);
-
 const verifyEmail = body => axios.put(`${constants.CMS_API_URL}/api/v1/verification/email/otp`, body).then(({ data }) => {
   toast(
     <ToastContent
@@ -176,71 +175,7 @@ const setVerfied = isVerified => axios.post('/api/setCookie', {
 
 const getDomainCountries = () => axios.get(`${constants.TRANSFORMER_API_URL}/fpts/domainCurrencyMapping`);
 
-
-// New Registration Flow API's
-
-const v2UserLogin = email => axios.get(`${constants.CMS_API_URL}/api/v1/user/check?email=${email}`).then(res => Object.assign({}, res, {
-  data: {
-    ...res.data,
-    email,
-  },
-}));
-
-const showUserInfo = (param) => {
-  return axios.get(`${constants.CMS_API_URL}/api/v1/user/password/forgot?email=${param}`);
-};
-
-const resetPassword = (body) => {
-  return axios.post(`${constants.CMS_API_URL}/api/v1/user/password/reset`, body).then((data) => {
-    return data;
-  }).catch((error) => {
-    return error.response.data;
-  })
-}
-
-const forgotPassword = (body) => {
-  return axios.post(`${constants.CMS_API_URL}/api/v1/user/password/forgot/email`, body).then(({data}) => {
-    toast(
-      <ToastContent
-        msg={API_TEXT.OTP_SENT_TO_YOUR_MAIL_ID}
-        msgType='success'
-      />
-    )
-    return data;
-  }).catch((error) => {
-    return error.response.data;
-  });
-}
-
-const getMobileOtp = ( email ) => {
-  return axios.get(`${constants.CMS_API_URL}/api/v1/user/password/forgot/mobile/otp?email=${email}`).then((data) => {
-    toast(
-      <ToastContent
-        msg='OTP sent to your mobile number'
-        msgType='success'
-      />
-    )
-    return data;
-  }).catch((error) => {
-    return error.response.data;
-  });
-}
-
-const verifyResetOtp = (body) => {
-  return axios.post(`${constants.CMS_API_URL}/api/v1/user/password/forgot/verify`, body).then((data) => {
-    return data;
-  }).catch((error) => {
-    return error.response.data;
-  });
-}
-
-const shippingAccount = body => axios.put(`${constants.CMS_API_URL}/api/v1/user/account/edit`, body).then(({ data }) => {
-  return { data };
-});
-
-
 export default {
   userLogin, userLogout, getLoginInfo, setCountry, setSessionID, deriveCity, setCity, getDomainCountries,
   removeCity, setLanguage, savePtaToken, verifyEmail, sendOtpToEmailId, getUserInfo, setVerfied, track,
-  v2UserLogin, resetPassword, forgotPassword, showUserInfo, getMobileOtp, verifyResetOtp, shippingAccount,
 };
