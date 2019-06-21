@@ -3,18 +3,15 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Row, Col, Dropdown, MenuItem } from 'react-bootstrap';
 import Cookie from 'universal-cookie';
-import moment from 'moment';
 import PropTypes from 'prop-types';
 import { languageDefinations } from '../../utils/lang';
 import { actionCreators, selectors } from '../../store/product';
-import { actionCreators as authActionCreators, selectors as authSelectors } from '../../store/auth';
-import { actionCreators as personalActionCreators } from '../../store/cam/personalDetails';
 import SVGComponent from '../common/SVGComponet';
 import Button from '../common/CommonButton';
 import lang from '../../utils/language';
 import Country from '../../components/HeaderBar/includes/Country';
 import countriesData from '../../constants/countries';
-import FormValidator from '../common/FormValidator';
+
 import main_en from '../../layout/main/main_en.styl';
 import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './login_en.styl';
@@ -27,35 +24,17 @@ const { PERSONAL_INFO_MODAL, LOGIN_PAGE } = languageDefinations();
 class ContinueLogin extends Component {
   constructor(props) {
     super(props);
-    this.validations = new FormValidator([
-      {
-        field: 'mobile_no',
-        method: this.mobileValidation,
-        validWhen: false,
-        message: 'Entered mobile number should have 9 numbers',
-      },
-      {
-        field: 'mobile_no',
-        method: this.mobileWithZeroValidation,
-        validWhen: false,
-        message: 'Entered mobile number should have 10 numbers',
-      },
-    ]);
     this.state = {
-      data: {
-        gender: '',
-        shipping_city: '',
-        shipping_city_code: '',
+      gender: '',
+      city: '',
+      city_code: '',
+      dob: {
+        day: '',
+        month: '',
+        year: '',
       },
-      day: '',
-      month: '',
-      year: '',
       mobile_no: '',
       mobile_country_code: '966',
-      validation: this.validations.valid(),
-      errorMsg: '',
-      showDobError: false,
-      months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
     };
     this.onChangeCity = this.onChangeCity.bind(this);
     this.selectCityFromSuggesstions = this.selectCityFromSuggesstions.bind(this);
@@ -63,57 +42,27 @@ class ContinueLogin extends Component {
   componentDidMount() {
     const { getCitiesByCountryCode } = this.props;
     getCitiesByCountryCode(cookies.get('country'));
-    // this.daysInMonth(moment().month());
   }
 
   onChangeCity(e) {
-    const { data } = this.state;
     const { autoCompleteCity } = this.props;
-    data.shipping_city = e.target.value;
+    const city = e.target.value;
     this.setState({
-      data,
+      city,
     }, () => {
       autoCompleteCity(displayCity);
     });
   }
   handleGenderChange = val => () => {
-    const { data } = this.state;
-    data.gender = val;
-    this.setState({ data });
-  }
-
-  handleValidation = ({ target }) => {
-    const validation = this.validations.validateOnBlur({ [target.name]: target.value });
-    this.setState({ validation });
-  }
-
-  mobileWithZeroValidation = (fieldValue) => {
-    if (fieldValue === '' || fieldValue === undefined) {
-      return false;
-    } else if (Number(fieldValue[0]) === 0 && fieldValue.length === 10) {
-      return false;
-    } else if (Number(fieldValue[0]) !== 0) {
-      return false;
-    } return true;
-  }
-  mobileValidation = (fieldValue) => {
-    if (fieldValue === '' || fieldValue === undefined) {
-      return false;
-    } else if (fieldValue.length === 9) {
-      return false;
-    } else if (Number(fieldValue[0]) === 0) {
-      return false;
-    } return true;
+    this.setState({ gender: val });
   }
 
   selectCityFromSuggesstions(e) {
-    const { data } = this.state;
     const city = e.currentTarget.getAttribute('data-id');
-    const city_code = e.currentTarget.getAttribute('data-code');
-    data.shipping_city = city;
-    data.shipping_city_code = city_code;
+    const city_code = e.currentTarget.getAttribute('data-id');
     this.setState({
-      data,
+      city,
+      city_code,
     });
   }
 
@@ -124,96 +73,45 @@ class ContinueLogin extends Component {
   }
 
   handleInputChange = val => (e) => {
-    let { day, month, year } = this.state;
-    if (val === 'day') day = e.target.value;
-    if (val === 'month') month = e.target.value;
-    if (val === 'year') year = e.target.value;
+    const { dob } = this.state;
+    if (val === 'day') dob.day = e.target.value;
+    if (val === 'month') dob.month = e.target.value;
+    if (val === 'year') dob.year = e.target.value;
     this.setState({
-      day,
-      month,
-      year,
+      dob,
     });
   }
 
   dobSelect = (e) => {
-    let { day, month, year } = this.state;
+    const { dob } = this.state;
     const id = e.currentTarget.getAttribute('data-id');
     const val = e.currentTarget.getAttribute('data-val');
-    // if (id === 'month') {
-    //   const numberOfdays = [];
-    //   month = val;
-    //   day = '';
-    //   const count = moment().month(val).daysInMonth();
-    //   for (let i = 1; i < count + 1; i += 1) {
-    //     numberOfdays.push(moment().month(val).date(i).format('DD'));
-    //   }
-    //   this.setState({
-    //     numberOfdays,
-    //   });
-    // }
-    if (id === 'day') day = val;
-    if (id === 'year') year = val;
-    if (id === 'month') month = val;
+    if (id === 'day') dob.day = val;
+    if (id === 'month') dob.month = val;
+    if (id === 'year') dob.year = val;
     this.setState({
-      day,
-      month,
-      year,
+      dob,
     });
   }
 
-
-  skipAndContinue = () => {
-    const { v2NextPage } = this.props;
-    v2NextPage();
-  }
-
-  submit = (e) => {
-    e.preventDefault();
-    const { v2NextPage, shippingAccount } = this.props;
+  submit = () => {
     const {
-      data,
-      day,
-      month,
-      year,
+      gender,
+      city,
+      city_code,
+      dob,
       mobile_no,
       mobile_country_code,
     } = this.state;
-    if (day === '' && month !== '') {
-      this.setState({
-        showDobError: true,
-        errorMsg: 'Please select day',
-      });
-      return;
-    } else if (day !== '' && month === '') {
-      this.setState({
-        showDobError: true,
-        errorMsg: 'Please select month',
-      });
-      return;
-    }
-    this.setState({
-      showDobError: false,
-      errorMsg: '',
-    });
 
-    const validation = this.validations.validate(this.state);
-    if (validation.isValid) {
-      const body = Object.assign({}, data, { mobile_no }, { mobile_country_code }, { dob: `${year === '' ? '1900' : year}-${month}-${day}` });
-      shippingAccount(body).then(() => {
-        v2NextPage();
-      });
-    }
-    this.setState({
-      validation,
-    });
   }
 
   render() {
     const {
-      gender, city, mobile_no, mobile_country_code, validation, data, day,
-      month, year, showDobError, errorMsg, numberOfdays, months,
+      gender, city, dob, mobile_no, mobile_country_code,
     } = this.state;
     const { getAllCities } = this.props;
+    console.log('dob', dob);
     return (
       <div className={`${styles['complete-login']} ${styles.flex} ${styles['justify-between']} ${styles['flex-colum']}`}>
         <div>
@@ -222,7 +120,7 @@ class ContinueLogin extends Component {
         </div>
         <Row className={`${styles.flex} ${styles['justify-between']}`}>
           <Col md={6}>
-            <div className={` ${styles['text-lgt-gray']} ${styles['fs-12']}`}>{LOGIN_PAGE.MOBILE_NUMBER}</div>
+            <div className={`${styles['thick-gry-clr']} ${styles['fs-14']}`}>{LOGIN_PAGE.MOBILE_NUMBER}</div>
             <div className={`${styles.flex} ${styles['country-code']}`}>
               {/* <Dropdown id="login-toggle"> */}
               <div className={`${styles['flex-center']} ${styles['country-dropdown']}`}>
@@ -241,27 +139,19 @@ class ContinueLogin extends Component {
               {/* </Dropdown> */}
               <input
                 type="text"
-                name="mobile_no"
                 value={mobile_no}
-                onBlur={this.handleValidation}
                 onChange={this.handleMobileNumber}
                 className={`${styles['mobile-input']} ${styles['fs-14']} ${styles['ml-10']}`}
               />
             </div>
-            {
-                    validation.mobile_no && validation.mobile_no.isInValid ?
-                      <div>
-                        <span className={`${styles['error-msg']}`}>{validation.mobile_no.message}</span>
-                      </div> : null
-                   }
           </Col>
           <Col md={6} className={`${styles.flex} ${styles['flex-colum']}`}>
-            <div className={` ${styles['text-lgt-gray']} ${styles['fs-12']}`}>{LOGIN_PAGE.SHIPPING_CITY}</div>
+            <div className={`${styles['thick-gry-clr']} ${styles['fs-14']}`}>{LOGIN_PAGE.SHIPPING_CITY}</div>
             <Dropdown id="login-toggle" className={`${styles['city-toggle']} ${styles.width100}`}>
               <Dropdown.Toggle id="dropdown-custom-components">
                 <input
                   type="text"
-                  value={data.shipping_city}
+                  value={city}
                   className={`${styles['fs-14']}`}
                   onChange={this.onChangeCity}
                 />
@@ -280,23 +170,22 @@ class ContinueLogin extends Component {
         </Row>
         <Row>
           <Col md={6}>
-            <div className={`${styles['fs-12']}`}>{LOGIN_PAGE.DATE_OF_BIRTH}</div>
-            <div className={`${styles.flex} ${styles['mt-10']}`}>
-              <Col md={3} className={`${styles['pl-0']} ${styles['pr-10']}`}>
-                <div className={` ${styles['text-lgt-gray']} ${styles['fs-12']}`}>{LOGIN_PAGE.DATE}</div>
+            <div>{LOGIN_PAGE.DATE_OF_BIRTH}</div>
+            <div className={`${styles.flex} ${styles['mt-20']}`}>
+              <Col md={3} className={`${styles['pl-0']}`}>
+                <div className={`${styles['thick-gry-clr']} ${styles['fs-14']}`}>{LOGIN_PAGE.DATE}</div>
                 <Dropdown id="login-toggle">
                   <Dropdown.Toggle id="dropdown-custom-components">
                     <input
                       type="text"
-                      name="day"
-                      value={day}
+                      value={dob.day}
                       onChange={this.handleInputChange('day')}
                       placeholder="DD"
                       className={`${styles['mobile-input']}${styles['fs-14']}`}
                     />
                   </Dropdown.Toggle>
                   <Dropdown.Menu id="country_toggle" className={`${styles['p-0']} ${styles['m-0']} ${styles['auto-suggestions-list']}`}>
-                    {[2, 3].map((value, index) => (
+                    {[0, 30].map((value, index) => (
                       <MenuItem data-id="day" data-val={value} onClick={this.dobSelect} onFocus={this.mouseOver} eventKey={index + 1} key={value.city_name}>
                         <a className={`${styles['black-color']}`}>
                           <span>{value}</span>
@@ -306,21 +195,20 @@ class ContinueLogin extends Component {
                   </Dropdown.Menu>
                 </Dropdown>
               </Col>
-              <Col md={4} className={`${styles['pl-0']} ${styles['pr-10']}`}>
-                <div className={` ${styles['text-lgt-gray']} ${styles['fs-12']}`}>{LOGIN_PAGE.MONTH}</div>
+              <Col md={4} className={`${styles['pl-0']}`}>
+                <div className={`${styles['thick-gry-clr']} ${styles['fs-14']}`}>{LOGIN_PAGE.MONTH}</div>
                 <Dropdown id="login-toggle">
                   <Dropdown.Toggle id="dropdown-custom-components">
                     <input
                       type="text"
-                      name="month"
-                      value={month}
+                      value={dob.month}
                       placeholder="MM"
                       onChange={this.handleInputChange('month')}
                       className={`${styles['mobile-input']}${styles['fs-14']}`}
                     />
                   </Dropdown.Toggle>
                   <Dropdown.Menu id="country_toggle" className={`${styles['p-0']} ${styles['m-0']} ${styles['auto-suggestions-list']}`}>
-                    {months.map((value, index) => (
+                    {[0, 12].map((value, index) => (
                       <MenuItem data-id="month" data-val={value} onClick={this.dobSelect} onFocus={this.mouseOver} eventKey={index + 1} key={value.city_name}>
                         <a className={`${styles['black-color']}`}>
                           <span>{value}</span>
@@ -330,13 +218,13 @@ class ContinueLogin extends Component {
                   </Dropdown.Menu>
                 </Dropdown>
               </Col>
-              <Col md={5} className={`${styles['pl-0']} ${styles['pr-0']} ${styles['pr-10']}`}>
-                <div className={` ${styles['text-lgt-gray']} ${styles['fs-12']}`}>{LOGIN_PAGE.YEAR}</div>
+              <Col md={5} className={`${styles['pl-0']} ${styles['pr-0']}`}>
+                <div className={`${styles['thick-gry-clr']} ${styles['fs-14']}`}>{LOGIN_PAGE.YEAR}</div>
                 <Dropdown id="login-toggle">
                   <Dropdown.Toggle id="dropdown-custom-components">
                     <input
                       type="text"
-                      value={year}
+                      value={dob.year}
                       placeholder="YYYY"
                       onChange={this.handleInputChange('year')}
                       className={`${styles['mobile-input']}${styles['fs-14']}`}
@@ -354,22 +242,21 @@ class ContinueLogin extends Component {
                 </Dropdown>
               </Col>
             </div>
-            {showDobError && <div className={`${styles['error-msg']}`}>{errorMsg}</div>}
           </Col>
           <Col md={6}>
-            <div className={`${styles['text-lgt-gray']} ${styles['fs-12']}`}>{PERSONAL_INFO_MODAL.GENDER}</div>
+            <div className={`${styles['thick-gry-clr']} ${styles['fs-14']}`}>{PERSONAL_INFO_MODAL.GENDER}</div>
             <div className={`${styles['mt-5']} ${styles['gender-select-main']} ${styles['flex-center']}`}>
               <div className={styles['t-c']}>
-                <a onClick={this.handleGenderChange('M')}>
-                  <SVGComponent clsName={`${styles['gender-select-signin']} ${data.gender === 'M' ? 'select-icon' : 'not-select-icon'}`} src="icons/common-icon/male" />
-                  <span className={`${styles['fs-10']} ${data.gender === 'M' ? `${styles['black-color']} ${styles.fontW600}` : styles['label-gry-clr']}`}>{PERSONAL_INFO_MODAL.MALE}</span>
-                </a>
+                  <a onClick={this.handleGenderChange('M')}>
+                    <SVGComponent clsName={`${styles['gender-select-inn']} ${gender === 'M' ? 'select-icon' : 'not-select-icon'}`} src="icons/common-icon/male" />
+                    <span className={`${styles['fs-12']} ${gender === 'M' ? `${styles['black-color']} ${styles.fontW600}` : styles['label-gry-clr']}`}>{PERSONAL_INFO_MODAL.MALE}</span>
+                  </a>
               </div>
               <div className={`${styles['ml-20']} ${styles['t-c']}`} onClick={this.handleGenderChange('F')}>
-                <a onClick={this.handleGenderChange('M')}>
-                  <SVGComponent clsName={`${styles['gender-select-signin']} ${data.gender === 'F' ? 'select-icon' : 'not-select-icon'}`} src="icons/common-icon/female" />
-                  <span className={`${styles['fs-10']} ${data.gender === 'F' ? `${styles['black-color']} ${styles.fontW600}` : styles['label-gry-clr']}`}>{PERSONAL_INFO_MODAL.FEMALE}</span>
-                </a>
+                  <a onClick={this.handleGenderChange('M')}>
+                    <SVGComponent clsName={`${styles['gender-select-inn']} ${gender === 'F' ? 'select-icon' : 'not-select-icon'}`} src="icons/common-icon/female" />
+                    <span className={`${styles['fs-12']} ${gender === 'F' ? `${styles['black-color']} ${styles.fontW600}` : styles['label-gry-clr']}`}>{PERSONAL_INFO_MODAL.FEMALE}</span>
+                  </a>
               </div>
             </div>
           </Col>
@@ -379,8 +266,7 @@ class ContinueLogin extends Component {
           btnText={LOGIN_PAGE.COMPLETE_SIGN_UP}
           onClick={this.submit}
         />
-        <a className={`${styles['t-c']} ${styles['fs-14']}`} onClick={this.skipAndContinue}>{LOGIN_PAGE.SKIP_AND_CONTINUE}</a>
-        <div className={`${styles['termes-label']} ${styles['m-20']} ${styles['mt-0']} ${styles['fs-12']} ${styles['t-c']}`}>{LOGIN_PAGE.BY_SIGNUP_I_AGREE_TO_TERMS} <a href="/SAU/en/policy/tc">{LOGIN_PAGE.T_AND_C}</a>, <a href="/SAU/en/policy/pp" target="_blank">{LOGIN_PAGE.PRIVACY}</a> {LOGIN_PAGE.AND} <a href="/SAU/en/policy/pp" target="_blank">{LOGIN_PAGE.COOKIE_POLICY}</a></div>
+        <a className={`${styles['t-c']} ${styles['mb-20']}`}>{LOGIN_PAGE.SKIP_AND_CONTINUE}</a>
       </div>
     );
   }
@@ -405,8 +291,6 @@ const mapDispatchToProps = dispatch => bindActionCreators(
   {
     getCitiesByCountryCode: actionCreators.getCitiesByCountryCode,
     autoCompleteCity: actionCreators.autoCompleteCity,
-    v2NextPage: authActionCreators.v2NextPage,
-    shippingAccount: authActionCreators.shippingAccount,
   },
   dispatch,
 );

@@ -13,15 +13,7 @@ class Timer extends React.Component {
 
   componentDidMount() {
     this.intervalHandle = setInterval(this.tick, 1000);
-    this.secondsRemaining = this.props.time;
-  }
-
-  componentWillReceiveProps(newProps) {
-    if (this.props.time !== newProps.time) {
-      clearInterval(this.intervalHandle);
-      this.intervalHandle = setInterval(this.tick, 1000);
-      this.secondsRemaining = this.props.time;
-    }
+    this.secondsRemaining = this.props.time * 60;
   }
 
   componentWillUnmount() {
@@ -53,13 +45,12 @@ class Timer extends React.Component {
     }
 
     this.secondsRemaining -= 1;
-    this.props.getSeconds(this.secondsRemaining);
   };
 
   render() {
     const { min, seconds } = this.state;
     return <span>{min}:{seconds}</span>;
   }
-}
+};
 
 export default Timer;

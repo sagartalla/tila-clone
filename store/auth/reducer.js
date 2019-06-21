@@ -71,12 +71,6 @@ const authReducer = typeToReducer({
       active: pageFlows[state.v2.currentFlow][state.v2.active.nextPage],
     },
   }),
-  [actions.V2_PREVIOUS_PAGE]: state => Object.assign({}, state, {
-    v2: {
-      ...state.v2,
-      active: pageFlows[state.v2.currentFlow][state.v2.active.backpage],
-    },
-  }),
   [actions.CHANGE_CURRENT_FLOW]: (state, action) => Object.assign({}, state, {
     v2: {
       ...state.v2,
@@ -399,29 +393,20 @@ const authReducer = typeToReducer({
   },
   [actions.VERIFY_EMAIL]: {
     PENDING: state => Object.assign({}, state, { ui: { ...state.ui, loading: true, showEmailVerificationScreen: true } }),
-    FULFILLED: (state, action) => {
-      const { v2 } = state;
-      if (action && action.payload && action.payload.data && action.payload.data.Response === 'SUCCESS') {
-        v2.active = pageFlows[state.v2.currentFlow][state.v2.active.nextPage];
-      }
-      return Object.assign({}, state, {
-        data: {
-          ...state.data,
-          userInfoData: {
-            ...state.data.userInfoData,
-            email_verified: 'V',
-          },
+    FULFILLED: (state, action) => Object.assign({}, state, {
+      data: {
+        ...state.data,
+        userInfoData: {
+          ...state.data.userInfoData,
+          email_verified: 'V',
         },
-        v2: {
-          ...state.v2,
-          ...v2,
-        },
-        ui: {
-          ...state.ui,
-          loading: false,
-        },
-      });
-    },
+      },
+      ui: { ...state.ui, loading: false, showEmailVerificationScreen: false, showLogin: false },
+      v2: {
+        ...state.v2,
+        active: pageFlows[state.v2.currentFlow][state.v2.active.nextPage],
+      },
+    }),
     REJECTED: state =>
       Object.assign({}, state, { ui: { ...state.ui, loading: false, showEmailVerificationScreen: true } }),
   },
@@ -605,31 +590,6 @@ const authReducer = typeToReducer({
         data: {
           ...state.data,
           resetToken: action.payload && action.payload.data && action.payload.data.token && action.payload.data.token,
-        },
-        ui: { loading: false },
-      });
-    },
-    REJECTED: (state, action) => Object.assign({}, state, {
-      data: {
-        ...state.data,
-      },
-      error: action.payload.data,
-      ui: { loading: false },
-    }),
-  },
-  [actions.SHIPPING_ACCOUNT]: {
-    PENDING: state => Object.assign({}, state, {
-      ui: {
-        loading: true,
-      },
-      data: {
-        ...state.data,
-      },
-    }),
-    FULFILLED: (state, action) => {
-      return Object.assign({}, state, {
-        data: {
-          ...state.data,
         },
         ui: { loading: false },
       });

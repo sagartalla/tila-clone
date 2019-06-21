@@ -617,7 +617,6 @@ export const AR_KEYWORDS = {
     FACEBOOK: 'Facebook',
     GOOGLE: 'Google',
     FOR_SIGNING_UP_WITH_US: 'for Signing up with us!',
-    SIGNUP: 'SIGNUP',    
   },
   ORDER_PAGE: {
     LOADING: 'تحميل',
