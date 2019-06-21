@@ -218,7 +218,7 @@ class InstantCheckout extends Component {
                   {INSTANT_CHECKOUT.CHECKOUT_WITH_ONE_CLICK}
                   {/* <span className={`${styles['checkout-quat']} ${styles['fs-12']} ${styles['flex-center']} ${styles['justify-around']}`}>?</span> */}
                 </h4>
-                <p className={`${styles['fs-10']} ${styles['thick-gry-clr']} ${styles['mb-5']}`}>{INSTANT_CHECKOUT.WITH_YOUR_PREFERRED_PAYMENT}</p>
+                <p className={`${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['mb-5']}`}>{INSTANT_CHECKOUT.WITH_YOUR_PREFERRED_PAYMENT}</p>
                 <div className={`${styles['flex']} ${styles['pt-5']} ${styles['pb-5']}`}>
                   <span className={`${styles['fs-12']} ${styles['pr-30']}`}><input type="radio" name="pay_type" className={styles['radio-btn']} checked={creditDebitCard} onChange={this.creditCardClickHandler} /> {INSTANT_CHECKOUT.CREDIT_DEDIT}</span>
                   <span className={styles['fs-12']}><input type="radio" name="pay_type" className={styles['radio-btn']} checked={cod} onChange={this.codClickHandler} /> {INSTANT_CHECKOUT.COD}</span>
@@ -268,13 +268,15 @@ class InstantCheckout extends Component {
                   {
                     cod ?
                       <div className={styles['p-10']}>
-                        <input
-                          id="pay-delivery"
-                          type="checkbox"
-                          onChange={this.handleChange}
-                          checked={this.state.checked}
-                        />
-                        <label htmlFor="pay-delivery" className={`${styles['fs-12']} ${styles['fw300']} ${styles['pl-10']} ${styles['pr-10']}`}>{INSTANT_CHECKOUT.AGREE_CASH_ON_DELIVERY}</label>
+                        <div className={styles['checkbox-material']}>
+                          <input
+                            id="pay-delivery"
+                            type="checkbox"
+                            onChange={this.handleChange}
+                            checked={this.state.checked}
+                          />
+                          <label htmlFor="pay-delivery" className={`${styles['fs-12']} ${styles['fw300']} ${styles['pl-10']} ${styles['pr-10']}`}>{INSTANT_CHECKOUT.AGREE_CASH_ON_DELIVERY}</label>
+                        </div>
                       </div>
                       : null
                   }

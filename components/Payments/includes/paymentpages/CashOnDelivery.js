@@ -106,15 +106,15 @@ class CashOnDelivery extends React.Component {
   render() {
     const { data, showLoading, profileInfo } = this.props;
     return <div>
-        <div className={`${styles['cash-on-dly-points']}`}>
+        <div className={`${styles['cash-on-dly-points']} ${styles['pt-25']} ${styles['pb-15']}`}>
     <Row className={styles['pl-40']}>
       <Col md={12}>
         <h4 className={`${styles['fontW300']} ${styles['fs-20']} ${styles['lgt-blue']} ${styles['mt-0']} ${styles['pb-10']}`}>{PAYMENT_PAGE.PAY_ON_DELIVERY}</h4>
     {
       this.state.nextStep === 'captcha' && (
         <div className={styles['checkbox-material']}>
-          <input id="pay-delivery" type="checkbox" onChange={ this.handleChange } checked={ this.state.checked }/>&nbsp;
-          <label htmlFor="pay-delivery"> {PAYMENT_PAGE.I_AGREE_TO_PAY_COD} </label>
+          <input id="cod-delivery" type="checkbox" onChange={ this.handleChange } checked={ this.state.checked }/>&nbsp;
+          <label htmlFor="cod-delivery"> {PAYMENT_PAGE.I_AGREE_TO_PAY_COD} </label>
         </div>
       )
     }

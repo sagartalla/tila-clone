@@ -88,7 +88,7 @@ class SavedCards extends Component {
   render() {
     const { data, voucherData, showLoading } = this.props;
     return (
-      <div className={`${styles['saved-cards']}`}>
+      <div className={`${styles['saved-cards']} ${styles['pb-40']}`}>
         <Voucher voucherData={voucherData} />
         <h4 className={`${styles['lgt-blue']} ${styles['fontW300']} ${styles['fs-20']} ${styles['pt-25']}`}>{PAYMENT_PAGE.YOUR_SAVED_CREDIT_AND_DEBIT_CARDS}</h4>
         <ul className={`${styles['saved-cards-part']} ${styles['pl-0']}`}>

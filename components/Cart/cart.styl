@@ -141,6 +141,7 @@
     .secure-checkout
       width 17px
       height 21px
+      margin-right: 7px
 
 .cross-strike::after
   content ''
@@ -168,6 +169,15 @@
 .sidebar-position
   position sticky !important
   top 80px
+
+.not-shippable {
+  border 1px solid thick-red-arrow
+  background-color light-red-color
+  border-radius 3px
+  .not-shipping-font {
+    font-size 12px
+  }
+}
 
 @media screen and (min-device-width: 320px) and (max-device-width: 766px) and (orientation : portrait){
   .cart-price-label {
