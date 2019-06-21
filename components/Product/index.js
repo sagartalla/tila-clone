@@ -64,7 +64,7 @@ const getProductComponent = (isPreview, taskCode) => {
         } = productData;
         digitalData.page.pageInfo.pageName = titleInfo.title;
         digitalData.page.category = { primaryCategory: productData.categoryType };
-        digitalData.page.pageInfo.breadCrumbs = productData.breadcrums ? productData.breadcrums.map(item => item.display_name_en) : [];
+        digitalData.page.pageInfo.breadCrumbs = productData.breadcrums.map(item => item.display_name_en);
         this.props.track({
           eventName: 'Product Viewed',
           ProductData: productData,
@@ -159,9 +159,41 @@ const getProductComponent = (isPreview, taskCode) => {
       });
     }
 
+    handleScroll(event) {
+      const scrollTop = event.currentTarget.pageYOffset;
+      const detailsRect = this.detailsRef.current.getBoundingClientRect();
+      const bottomRefRect = this.bottomRef.current.getBoundingClientRect();
+      const { isSearchPreview } = this.props;
+      if (!isSearchPreview && bottomRefRect.top <= window.innerHeight && this.state.stickyElements.details !== 'stateBottom') {
+        this.setState({
+          stickyElements: {
+            ...this.state.stickyElements,
+            details: 'stateBottom',
+          },
+        });
+        return;
+      }
+      if (!isSearchPreview && bottomRefRect.top > window.innerHeight && detailsRect.top <= 61 && this.state.stickyElements.details !== 'stateMiddle') {
+        this.setState({
+          stickyElements: {
+            ...this.state.stickyElements,
+            details: 'stateMiddle',
+          },
+        });
+        return;
+      }
+      if (detailsRect.top > 61) {
+        this.setState({
+          stickyElements: {
+            ...this.state.stickyElements,
+            details: 'stateTop',
+          },
+        });
+      }
+    }
 /* eslint-disable */
     render() {
-      const { productData, userDetails, showLoading, query } = this.props;
+      const { productData, userDetails, showLoading, query,variantId,productId, isSearchPreview } = this.props;
       const {
         catalog, titleInfo, keyfeatures, extraOffers, imgUrls, offerInfo, shippingInfo, isWishlisted, returnInfo,
         details, productDescription, catalogObj, categoryType = '', warranty, breadcrums, product_id, wishlistId,
@@ -170,11 +202,12 @@ const getProductComponent = (isPreview, taskCode) => {
       const {
         stickyElements, recentlyViewed, notifyEmail, emailErr, positionStyle, positionTop, defaultPosition
       } = this.state;
+
       return (
         <Theme.Provider value={categoryType.toLowerCase()}>
           <div className={`${styles['pdp-wrap']} ${categoryType.toLowerCase()} ${styles[categoryType.toLowerCase()]}`}>
             {
-              isPreview ? null : <HeaderBar />
+              isPreview || isSearchPreview ? null : <HeaderBar />
             }
             <div className={`${styles.relative}`}>
               <div className={`${styles['page-details-slider']}`}>
@@ -197,14 +230,15 @@ const getProductComponent = (isPreview, taskCode) => {
                   <Col sm={12} className={`${styles['details-right-part']} ${styles[stickyElements.details]}`}>
                     <div className={`${styles['details-right-part-inn']}`}>
                       <div className={`${styles['ipad-details']} ${styles['ipad-pr-15']}`}>
-                        <TitleInfo {...titleInfo} catalogObj={catalogObj} isPreview={isPreview} offerInfo={offerInfo} />
+                        <TitleInfo {...titleInfo} isPreview={isPreview} offerInfo={offerInfo} />
                         <ProductDetails
                           details={details}
                           keyfeatures={keyfeatures}
                           isPreview={isPreview}
                           productInfo={productData}
-                          variantId={query.variantId}
-                          productId={query.productId}
+                          variantId={variantId}
+                          productId={productId}
+                          isSearchPreview={isSearchPreview}
                         />
                       </div>
                       <div className={`${styles['ipad-details']} ${styles['bdr-lt']} ${styles['ipad-pl-15']}`}>
@@ -219,14 +253,20 @@ const getProductComponent = (isPreview, taskCode) => {
                               productData={productData.product_id}
                               shippingInfo={shippingInfo}
                               isPreview={isPreview}
-                              styling={positionStyle || defaultPosition}
-                              top={positionStyle === 'absolute-style' ?  positionTop : null}
+                              emailErr={emailErr}
+                              userDetails={userDetails}
+                              notifyEmail={notifyEmail}
+                              notify={this.notify}
+                              showLoading={showLoading}
+                              onChangeField={this.onChangeField}
+                              styling={isSearchPreview ? null : positionStyle || defaultPosition}
+                              top={isSearchPreview ? null : positionStyle === 'absolute-style' ?  positionTop : null}
                             />
                             :
                             null
                         }
 
-                        {isPreview ? null :
+                        {/* {isPreview ? null :
                           (offerInfo.stockError || offerInfo.availabilityError) && ((shippingInfo && Object.keys(shippingInfo).length === 0) || (shippingInfo === null || shippingInfo.shippable)) &&
                           <div className={`${styles['flx-space-bw']} ${styles['align-baseline']}`}>
                             {!userDetails.isLoggedIn &&
@@ -245,25 +285,27 @@ const getProductComponent = (isPreview, taskCode) => {
                               btnLoading={showLoading}
                             />
                           </div>
-                        }
+                        } */}
                       </div>
                     </div>
 
                   </Col>
                 </Row>
               </div>
-              <div className={`${styles['bg-white']} ${styles['mt-30']}`}>
-                <Grid>
-                  <Row>
-                    <Col md={8}>
+              {
+                isSearchPreview ? null :
+                <div className={`${styles['bg-white']} ${styles['mt-30']}`}>
+                  <Grid>
+                    <Row>
+                      <Col md={8}>
+                        {
+                          isPreview ? null : <NoSSR> <RecentView recentlyViewed={recentlyViewed} shippingInfo={shippingInfo} /> </NoSSR>
+                        }
+                      </Col>
+                      {/* <Col md={8}>
                       {
-                        isPreview ? null : <NoSSR> <RecentView recentlyViewed={recentlyViewed} shippingInfo={shippingInfo} /> </NoSSR>
+                        isPreview ? null : <ReviewsTab />
                       }
-                    </Col>
-                    {/* <Col md={8}>
-                    {
-                      isPreview ? null : <ReviewsTab />
-                    }
                     </Col> */}
                     <Col md={8}>
                       <ElectronicsTab titleInfo={titleInfo} isPreview={isPreview} catalog={catalog} catalogObj={catalogObj} productDescription={productDescription} />
@@ -271,11 +313,12 @@ const getProductComponent = (isPreview, taskCode) => {
                   </Row>
                 </Grid>
               </div>
+            }
               <div className={styles['pdp-bottom-ref']} ref={this.bottomRef} />
             </div>
             <div className={`${styles['border-b']} ${styles['border-t']} ${styles['pb-30']} ${styles['pt-30']}`}>
               {
-                isPreview ? null : <FooterBar />
+                isPreview || isSearchPreview ? null : <FooterBar />
               }
             </div>
           </div>
@@ -303,7 +346,11 @@ const getProductComponent = (isPreview, taskCode) => {
 
   Product.propTypes = {
     productData: PropTypes.object.isRequired,
+    isSearchPreview: PropTypes.bool
   };
+  Product.defaultProps = {
+    isSearchPreview:false
+  }
 
   return connect(mapStateToProps, mapDispatchToProps)(Product);
 };

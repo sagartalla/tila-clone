@@ -1,6 +1,7 @@
 import axios from 'axios';
-import constants from '../../helper/constants';
 import { toast } from 'react-toastify';
+import ToastContent from '../../../components/common/ToastContent';
+import constants from '../../helper/constants';
 import { languageDefinations } from '../../../utils/lang/';
 import generateURL from '../../../utils/urlGenerator';
 
@@ -32,7 +33,12 @@ const uploadProfilePic = (body) => {
       'tenant': 'profile-service',
     },
   }).then(({data}) => {
-    toast.success(PERSONAL_INFO_MODAL.IMAGE_UPDATED_SUCCESS)
+    toast(
+      <ToastContent
+        msg={PERSONAL_INFO_MODAL.IMAGE_UPDATED_SUCCESS}
+        msgType='success'
+      />
+    )
     return data;
   }).catch((data) => {
     console.log(data);

@@ -48,6 +48,19 @@ export default class MyDocument extends Document {
           {/*<!-- End Google Tag Manager (noscript) -->*/}
           <Main />
           <NextScript />
+          <inlay-oracle-chat-embedded
+            class="inlay"
+            id="chatInlay"
+            site-url="fptsuae.widget.custhlep.com"
+          >
+          </inlay-oracle-chat-embedded>
+          <script
+            id="oit-loader"
+            src="https://fptsuae.widget.custhelp.com/s/oit/latest/common/v0/libs/oit/loader.js"
+            data-oit-increment="true"
+            data-oit-group="" async
+          >
+          </script>
         </body>
       </html>
     )

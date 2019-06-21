@@ -1,18 +1,16 @@
 import React from 'react';
-import { Row, Col, Dropdown, Button } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { toast } from 'react-toastify';
 import Cookies from 'universal-cookie';
-import Btn from '../../../common/Button';
-import Input from '../../../common/Input';
 import { actionCreators, selectors } from '../../../../store/cam/personalDetails';
 import { languageDefinations } from '../../../../utils/lang';
 import CountryDialCode from '../../../../constants/CountryDialCode';
 import FormValidator from '../../../common/FormValidator';
 import SVGCompoent from '../../../common/SVGComponet';
-
+import ToastContent from '../../../common/ToastContent';
 import lang from '../../../../utils/language';
 
 import main_en from '../../../../layout/main/main_en.styl';
@@ -121,7 +119,12 @@ class EditPhone extends React.Component {
         otpCount: otpCount + 1,
       }, () => this.props.otpUserUpdate(params));
     }else{
-      toast.error('Phone number is required for OTP');
+      toast(
+        <ToastContent
+          msg='Phone number is required for OTP'
+          msgType='error'
+        />
+      )
     }
   }
   handleClose() {
@@ -202,7 +205,7 @@ class EditPhone extends React.Component {
             //     X</a>
             //   </Col>
             // </Row>
-            <h4 className={`${styles['flx-spacebw-alignc']} ${styles['m-0']} ${styles['p-20']}`}>
+            <h4 className={`${styles['flx-spacebw-alignc']} ${styles['m-0']} ${styles['p-20']} ${styles['fs-18']}`}>
               <span>{CONTACT_INFO_MODAL.EDIT_PHONE_NUMBER}</span>
               <span onClick={this.handleClose} className={`${styles['fs-22']} ${styles['black-color']}`}>X</span>
             </h4>
@@ -269,6 +272,7 @@ class EditPhone extends React.Component {
                   <div className={styles['fp-input']}>
                     <input
                       type="text"
+                      required
                       value={phoneNumber}
                       onChange={this.handlePhoneNumberChange}
                     />

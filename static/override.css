@@ -30,6 +30,15 @@
   height: 100%;
 }
 
+.slick-slide div:focus, .slick-slide div a:focus {
+    outline: none;
+}
+
+.slick-slide div img {
+    cursor: pointer;
+}
+
+
 .slick-slider.sub-slider .slick-slide {
     width: 70px !important;
 }
@@ -271,3 +280,12 @@
      background-color: #8a8a8f;
   }
 
+.Toastify__toast {
+  min-height: inherit;
+  padding: 0;
+}
+.Toastify__toast-container {
+  width: initial !important;
+  margin-left: 0 !important;
+  transform: translateX(-50%);
+}

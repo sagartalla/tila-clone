@@ -29,6 +29,8 @@ const country = cookies.get('country') || 'SAU';
 const {HEADER_PAGE} = languageDefinations()
 //TODO make it SEO friendly
 
+let timeoutCount = null;
+
 class MegaMenu extends Component {
   constructor(props) {
     super(props);
@@ -50,7 +52,7 @@ class MegaMenu extends Component {
 
   onHoverCurry = item => () => {
     if(this.state.selectedCategory !== item.id) {
-      setTimeout(() => {
+      timeoutCount = setTimeout(() => {
         this.setState({
           ...this.state,
           selectedCategory: item.id,
@@ -84,6 +86,7 @@ class MegaMenu extends Component {
   }
 
   onHoverOutDelayed(id) {
+    timeoutCount && clearTimeout(timeoutCount);
     return () => {
       setTimeout(() => {
         if(!this.expandedHover){

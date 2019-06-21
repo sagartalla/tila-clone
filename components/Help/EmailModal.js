@@ -200,7 +200,7 @@ class EmailModal extends Component {
     return (
       <div>
         <h4>Help is on the way</h4>
-        <div>Your query has been successfully created with reference - <a href={incidentsURL}>{this.state.referenceNumber}</a>. We will get back to you within 2 hrs</div>
+        <div>Your query has been successfully created with reference - <a href={incidentsURL}>{this.state.referenceNumber}</a>. We will get back to you within 48 hrs</div>
       </div>
     )
   }
