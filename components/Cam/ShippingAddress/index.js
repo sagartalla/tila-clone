@@ -201,8 +201,10 @@ class ShippingAddress extends Component {
       showCountriesData,
     }, () => {
         const validation = this.validations.validateOnBlur({[target.name]: target.value});
-          validCountry = this.validations.validateOnBlur({'shipping_country_code': addr.shipping_country_code, 'city_code': addr.city_code})
+        if(target.name === 'country_name' || target.name === 'city'){
+          validCountry = this.validations.validateOnBlur({'shipping_country_code': addr.shipping_country_code})
           validCity = this.validations.validateOnBlur({'city_code': addr.city_code})
+        }
         this.setState({
           validation: Object.assign(
             {},
