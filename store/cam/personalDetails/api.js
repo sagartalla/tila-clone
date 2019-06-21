@@ -2,7 +2,6 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import ToastContent from '../../../components/common/ToastContent';
 import constants from '../../helper/constants';
-import { toast } from 'react-toastify';
 import { languageDefinations } from '../../../utils/lang/';
 import generateURL from '../../../utils/urlGenerator';
 
