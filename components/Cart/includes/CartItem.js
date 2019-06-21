@@ -19,7 +19,7 @@ import styles_ar from '../cart_ar.styl';
 
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
-const { PDP_PAGE, CART_PAGE, ORDER_PAGE } = languageDefinations();
+const { PDP_PAGE, CART_PAGE, ORDER_PAGE, DELIVERY_ADDR_PAGE } = languageDefinations();
 
 const cookies = new Cookie();
 
@@ -196,7 +196,7 @@ class CartItem extends React.Component {
                   <h5 className={`${styles['mt-0']} ${styles['mb-0']}`}>{brand_name}</h5>
                 </Col>
                 <Col md={9} sm={9} className={`${styles['landscape-cart-details']} ${styles['pr-0']}`}>
-                  <h4 className={`${styles['fontW600']} ${styles['m-fs-14']}`}>
+                  <h4 className={`${styles['fontW600']} ${styles['m-fs-14']} ${styles['fs-16']}`}>
                     <Link route={`/${country}/${language}/product?productId=${product_id}${variant_id ? `&variantId=${variant_id}` : ''}&catalogId=${catalogId}&itemType=${itemType}`}>
                       <a className={`${styles['width100']} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
                         {name}
@@ -211,10 +211,10 @@ class CartItem extends React.Component {
                       </div>
                     ))}
                   <React.Fragment>
-                    <div className={`${styles['warranty-part']} ${styles['p-10']} ${styles['light-gry-clr']}`}>
-                      <div className={`${styles['mb-0']} ${styles['fs-12']} ${styles['flex']}`}>
-                        <span className={styles['thick-gry-clr']}>Warranty : </span>
-                        <span className={`${styles['pl-10']} ${styles['pr-10']}`}>
+                    <div className={`${styles['warranty-part']} ${styles['p-10']} ${styles['black-color']}`}>
+                      <div className={`${styles['mb-0']} ${styles['flex']} ${styles['pb-5']}`}>
+                        <span className={`${styles['thick-gry-clr']} ${styles['fs-12']}`}>Warranty : </span>
+                        <span className={`${styles['pl-10']} ${styles['fs-15']} ${styles['pr-10']}`}>
                           {(warranty_duration && Object.keys(warranty_duration).length > 0) && warranty_duration.duration !== 0 ?
                             <Warranty warranty={warranty_duration} />
                             : 'No Warranty'}
@@ -222,9 +222,9 @@ class CartItem extends React.Component {
                       </div>
                       {
                         shipping !== null && (shipping.shippable && (
-                          <p className={`${styles['mb-0']} ${styles['fs-12']}`}>
-                            <span className={styles['thick-gry-clr']}>{CART_PAGE.SHIPPING} :</span>
-                            <span className={`${styles['pl-10']} ${styles['pr-10']}`}>{CART_PAGE.REGULAR_SHIPPING} {shipping.shipping_fees ? `(${shipping.shipping_fees.display_value} ${cur})` : ''} - <span className={`${styles['fs-12']} ${styles['base-font']}`}>{CART_PAGE.ETA_DELIVERY_BY} {moment().add(shipping.shipping_days, 'days').format('LL')}</span>
+                          <p className={`${styles['mb-0']}`}>
+                            <span className={`${styles['thick-gry-clr']} ${styles['fs-12']}`}>{CART_PAGE.SHIPPING} :</span>
+                            <span className={`${styles['pl-10']} ${styles['pr-10']} ${styles['fs-14']}`}>{CART_PAGE.REGULAR_SHIPPING} {shipping.shipping_fees ? `(${shipping.shipping_fees} ${cur})` : ''} - <span className={`${styles['fs-12']} ${styles['base-font']}`}>{CART_PAGE.ETA_DELIVERY_BY} {moment().add(shipping.shipping_days, 'days').format('LL')}</span>
                             </span>
                           </p>
                         ))
@@ -232,7 +232,7 @@ class CartItem extends React.Component {
                     </div>
                     <div data-id={item_id} className={`${styles['checkbox-material']} ${styles['mt-15']}`}>
                       <input data-id={item_id} id={"gift" + item_id} type="checkbox" defaultChecked={checked} onClick={this.giftChecked} />
-                      <label className={styles['fontW300']} htmlFor={"gift" + item_id}> {CART_PAGE.SEND_GIFT} {(gift_info && gift_info.gift_rate) ? "(" + gift_info.gift_rate + " " + cur + ")" : ''} </label>
+                      <label className={`${styles['fs-14']}`} htmlFor={"gift" + item_id}> {CART_PAGE.SEND_GIFT} {(gift_info && gift_info.gift_rate) ? "(" + gift_info.gift_rate + " " + cur + ")" : ''} </label>
                     </div>
                     {checked && showMessage &&
                       <div>
@@ -264,10 +264,11 @@ class CartItem extends React.Component {
                   {
                     shipping !== null && (!shipping.shippable &&
                     (<div className={`${styles['mt-20']} ${styles['fs-12']}`}>
-                      <div>
-                        <span className={`${styles['white-color']} ${styles['pb-5']} ${styles['pt-5']} ${styles['pr-10']} ${styles['pl-10']} ${styles['bg-thick-red-clr']} ${styles['border-radius12']}`}>Not Shippable</span>
+                       <div className={`${styles['not-shippable']} ${styles.flex} ${styles['mb-20']} ${styles['p-10']}`}>
+                        <Col md={2} sm={3} xs={3} className={`${styles['thick-red-clr']} ${styles.fontW600} ${styles['p-0']} ${styles['not-shipping-font']}`}>{DELIVERY_ADDR_PAGE.NOT_SHIPPABLE}</Col>
+                        <Col md={10} sm={9} xs={9} className={`${styles['fs-12']} ${styles['pr-0']}`}>{CART_PAGE.CANNOT_DELIVER}</Col>
                       </div>
-                      <p className={`${styles['mt-20']} ${styles['thick-red-clr']}`}>{CART_PAGE.CANNOT_DELIVER}</p>
+                      {/* <p className={`${styles['mt-20']} ${styles['thick-red-clr']}`}>{CART_PAGE.CANNOT_DELIVER}</p> */}
                     </div>))
                   }
                 </Col>
@@ -282,7 +283,7 @@ class CartItem extends React.Component {
                         </span>
                       </span>
                     </p>}
-                  <h4 className={`${styles.fontW600} ${styles['justify-flex-end']} ${styles['cart-price-label']} ${styles['light-gry-clr']} ${styles['flex-center']} ${styles['mt-10']} ${styles['t-rt']}`}>
+                  <h4 className={`${styles.fontW600} ${styles['justify-flex-end']} ${styles['cart-price-label']} ${styles['fs-16']} ${styles['light-gry-clr']} ${styles['flex-center']} ${styles['mt-10']} ${styles['t-rt']}`}>
                     {`${offer_price} ${cur}`}
                     {/* <OverlayTrigger trigger="click" placement="bottom" overlay={popover(item)}> */}
                       {/* <span className={`${styles['fs-12']} ${styles['pr-5']}`}>
@@ -291,53 +292,53 @@ class CartItem extends React.Component {
                       <div className={`${styles['relative']} ${styles['cart-price-toltp']}`}>
                         <span className={`${styles.question} ${styles['ml-5']} ${styles['flex-center']} ${styles['justify-center']} ${styles['default-shadow']} ${styles['fs-14']} ${styles.pointer}`}>  ? </span>
                         <div className={`${styles['p-10']} ${styles['tool-tip']} ${styles['cart-tool-tip']}`}>
-                          <div className={`${styles['table']} ${styles['width100']}`}>
-                            <div className={`${styles['flx-space-bw']} ${styles['fs-12']}`}>
-                              <div className={`${styles['pb-10']}`}>
-                                <div>{CART_PAGE.MAXIMUM_RETAIL_PRICE}</div>
-                                <div className={`${styles['fs-10']} ${styles['label-light-grey']}`}>({CART_PAGE.INCL_OF_ALL_TAXES})</div>
-                              </div>
-                              <div className={`${styles['t-rt']}`}>
-                                {`${mrp} ${cur}`}
-                              </div>
-                            </div>
-                            <div className={`${styles['flx-space-bw']} ${styles['fs-12']}`}>
-                              <div className={`${styles['pb-10']}`}>
-                                <div>{CART_PAGE.SELLING_PRICE}</div>
-                              </div>
-                              <div className={`${styles['t-rt']}`}>
-                                {`${selling_price} ${cur}`}
-                              </div>
-                            </div>
-                            {offerDiscounts.length > 0 &&
-                              offerDiscounts.map((od) => {
-                                return (
+                                <div className={`${styles['table']} ${styles['width100']}`}>
                                   <div className={`${styles['flx-space-bw']} ${styles['fs-12']}`}>
                                     <div className={`${styles['pb-10']}`}>
-                                      <div>{od.description}</div>
+                                      <div className={styles['thick-gry-clr']}>{CART_PAGE.MAXIMUM_RETAIL_PRICE}</div>
+                                      <div className={`${styles['fs-10']} ${styles['label-light-grey']}`}>({CART_PAGE.INCL_OF_ALL_TAXES})</div>
                                     </div>
                                     <div className={`${styles['t-rt']}`}>
-                                      {`${od.discount.display_value} ${cur}`}
+                                      {`${mrp} ${cur}`}
                                     </div>
                                   </div>
-                                );
-                              })
-                            }
-                            {
-                              shipping !== null ?
-                                <div className={`${styles['flx-space-bw']} ${styles['fs-12']}`}>
-                                  <div className={`${styles['pb-10']}`}>
-                                    <div>{CART_PAGE.DELIVERY_CHARGES}</div>
+                                  <div className={`${styles['flx-space-bw']} ${styles['fs-12']}`}>
+                                    <div className={`${styles['pb-10']}`}>
+                                      <div className={styles['thick-gry-clr']}>{CART_PAGE.SELLING_PRICE}</div>
+                                    </div>
+                                    <div className={`${styles['t-rt']}`}>
+                                      {`${selling_price} ${cur}`}
+                                    </div>
                                   </div>
-                                  <div className={`${styles['t-rt']} ${styles['flex']}`}>
-                                    {shipping.shipping_fees ?
-                                      `${shipping.shipping_fees.display_value} ${shipping.shipping_fees.currency_code}`
-                                      : <SVGComponent clsName={`${styles['ship-icon']}`} src="icons/free-shipping" />}
-                                  </div>
-                                </div>
-                              :
-                                null
-                            }
+                                  {offerDiscounts.length > 0 &&
+                                    offerDiscounts.map((od) => {
+                                      return (
+                                        <div className={`${styles['flx-space-bw']} ${styles['fs-12']}`}>
+                                          <div className={`${styles['pb-10']}`}>
+                                            <div className={styles['thick-gry-clr']}>{od.description}</div>
+                                          </div>
+                                          <div className={`${styles['t-rt']}`}>
+                                            {`${od.discount.display_value} ${cur}`}
+                                          </div>
+                                        </div>
+                                      );
+                                    })
+                                  }
+                                  {
+                                    shipping !== null ?
+                                      <div className={`${styles['flx-space-bw']} ${styles['fs-12']}`}>
+                                        <div className={`${styles['pb-10']}`}>
+                                          <div className={styles['thick-gry-clr']}>{CART_PAGE.DELIVERY_CHARGES}</div>
+                                        </div>
+                                        <div className={`${styles['t-rt']} ${styles['flex']}`}>
+                                          {shipping.shipping_fees ?
+                                            `${shipping.shipping_fees} ${cur}`
+                                            : <SVGComponent clsName={`${styles['ship-icon']}`} src="icons/free-shipping" />}
+                                        </div>
+                                      </div>
+                                    :
+                                      null
+                                  }
 
                             <div className={` ${styles['flx-space-bw']} ${styles['total-amount']} ${styles['fs-12']}`}>
                               <div>{ORDER_PAGE.TOTAL}</div>
