@@ -34,7 +34,6 @@ const f = [
     title: FOOTER_PAGE.FOOT_WEAR,
   },
 
-  // NEED TO CHANGE URLS
   {
     url: `/SAU/${lang}/srp?search=sunglass&language=en&isListed=false`,
     title: FOOTER_PAGE.SUNGLASSES,
@@ -83,7 +82,6 @@ const e = [
   },
 ];
 
-// NEED TO CHANGE URLS
 const l = [
   {
     url: `/SAU/${lang}/srp?search=Beauty%20&%20Personal%20Care&language=en&isListed=false`,
@@ -236,8 +234,6 @@ const FooterBar = props => (
               </li>
               <li className={`${styles['flex']} ${styles['mb-20']} ${styles['sony-icon']}`}><img src="/static/img/bg-img/RayBan.png" className={styles['img-responsive']} /></li>
               <li className={`${styles['flex']} ${styles['mb-20']} ${styles['brand-icon']}`}><img src="/static/img/bg-img/Fossil.png" className={styles['img-responsive']} /></li>
-              <li className={`${styles['flex']} ${styles['mb-20']} ${styles['brand-icon']}`}><img src="/static/img/bg-img/Gucci.png" className={styles['img-responsive']} /></li>
-              <li className={`${styles['flex']} ${styles['mb-20']} ${styles['brand-icon']}`}><img src="/static/img/bg-img/Pampers.png" className={styles['img-responsive']} /></li>
             </ul>
           </div>
         </div>
