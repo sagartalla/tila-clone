@@ -7,7 +7,7 @@ import Layout from '../layout/main'
 import Landing from '../components/Landing';
 import Base, { baseActions } from './base';
 import { actionCreators } from '../store/landing';
-
+import { actionCreators as PersonalActionCreator } from '../store/cam/personalDetails'
 class LandingPage extends Base {
   pageName = 'HOME';
   static async getInitialProps({ store, query, isServer, req, res }) {
@@ -24,9 +24,12 @@ class LandingPage extends Base {
         Router.push(`/${setCountry}/${setLanguage}`)
       }
     }
+
     return { isServer };
   }
-
+  componentDidMount() {
+    this.props.getUserProfileInfo()
+  }
   render() {
     const { url } = this.props;
     return (
@@ -38,5 +41,8 @@ class LandingPage extends Base {
     )
   }
 };
-
-export default withRedux(makeStore, null, null)(LandingPage);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({
+    getUserProfileInfo: PersonalActionCreator.getUserProfileInfo
+  },dispatch)
+export default withRedux(makeStore, null, mapDispatchToProps)(LandingPage);
