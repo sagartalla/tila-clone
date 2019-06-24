@@ -131,17 +131,26 @@ class Payments extends React.Component {
 
     // console.log(nextProps)
     console.log('nextProps.userCreds', nextProps.userCreds);
+    console.log('nextProps.isLoggedIn', nextProps.isLoggedIn);
     // if loggedin show address step directly.
     if (nextProps.isLoggedIn && !loggedInFlag) {
-      console.log('nextProps.isLoggedIn', nextProps.isLoggedIn);
       const login = nextProps.userCreds || this.state.login;
       const paymentConfigJson = { ...this.state.paymentConfigJson };
       paymentConfigJson['signIn'] = { basic: false, progress: false, done: true };
       paymentConfigJson['address'] = { basic: false, progress: true, done: false };
       this.setState({
         paymentConfigJson, login, loggedInFlag: true,
+        // showLogout: false,
       });
     }
+    // if (!nextProps.isLoggedIn) {
+    //   const paymentConfigJson = { ...this.state.paymentConfigJson };
+    //   paymentConfigJson['signIn'] = { basic: false, progress: false, done: true };
+    //   paymentConfigJson['address'] = { basic: true, progress: false, done: false };
+    //   this.setState({
+    //     paymentConfigJson,
+    //   });
+    // }
   }
 
   onClickEdit() {
@@ -159,7 +168,7 @@ class Payments extends React.Component {
     };
     this.setState({
       paymentConfigJson,
-      loggedInFlag: false,
+      // loggedInFlag: false,
       showLogout: true,
     });
   }
@@ -167,7 +176,7 @@ class Payments extends React.Component {
   continueCheckout = () => {
     const paymentConfigJson = { ...this.state.paymentConfigJson };
     paymentConfigJson.address = {
-      basic: true,
+      basic: false,
       progress: true,
       done: false,
     };
@@ -331,7 +340,7 @@ class Payments extends React.Component {
   }
 
   logoutClicked = () => {
-    const { logout } = this.props;
+    const { logout, getCartResults } = this.props;
     logout();
     const paymentConfigJson = { ...this.state.paymentConfigJson };
     paymentConfigJson.address = {
@@ -351,8 +360,9 @@ class Payments extends React.Component {
   }
   render() {
     const { login, paymentConfigJson, editCartDetails, showSlider, validation, showError, showLogout } = this.state;
-    const { paymentOptions, selectedAddress, signInLoader, cartResults } = this.props;
+    const { paymentOptions, selectedAddress, signInLoader, cartResults, isLoggedIn, activeEmailId } = this.props;
     const { PAYMENT_PAGE, CART_PAGE } = languageDefinations();
+    console.log('isLoggedInisLoggedIn', isLoggedIn);
 
     return (
       <div className={styles['payment']}>
@@ -366,7 +376,7 @@ class Payments extends React.Component {
           <Row>
             <Col md={9} xs={12} sm={12} className={`${styles['pl-30']}`}>
               <SignIn
-                login={login}
+                login={isLoggedIn ? login : ''}
                 signInLoader={signInLoader}
                 showAddressTab={this.showAddressTab}
                 inputOnChange={this.inputOnChange}
@@ -378,6 +388,8 @@ class Payments extends React.Component {
                 showLogout={showLogout}
                 continueCheckout={this.continueCheckout}
                 logoutClicked={this.logoutClicked}
+                isLoggedIn={isLoggedIn}
+                activeEmailId={isLoggedIn ? activeEmailId : ''}
               />
               <DeliveryAddress
                 selectedAddress={selectedAddress}
@@ -454,6 +466,7 @@ const mapStateToprops = store => ({
   isLoggedIn: authSelectors.getLoggedInStatus(store),
   signInLoader: authSelectors.getLoginProgressStatus(store),
   selectedAddress: addressSelectors.getSelectedAddress(store),
+  activeEmailId: authSelectors.getActiveEmailId(store),
 });
 
 const mapDispatchToProps = dispatch =>
@@ -466,8 +479,9 @@ const mapDispatchToProps = dispatch =>
       getLoginInfo: authActionCreators.getLoginInfo,
       getCartResults: cartActionCreators.getCartResults,
       emptyPaymentPaylod: actionCreators.emptyPaymentPaylod,
-      cartEditDetails:cartAction.cartEditDetails,
+      cartEditDetails: cartAction.cartEditDetails,
       logout: authActionCreators.userLogout,
+      getCartResults: cartAction.getCartResults,
     },
     dispatch,
   );

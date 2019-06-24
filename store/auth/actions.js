@@ -76,18 +76,18 @@ const actionCreators = {
       dispatch(actions.DELETE_POST_LOGIN_ACTION_INFO);
     }
     dispatch(actionCreators.getUserInfoData({initiateEmailVerification: params.channel === 'BASIC_REGISTER'})).then((res) => {
-      if(params.channel !== 'BASIC_REGISTER') {
+      // if(params.channel !== 'BASIC_REGISTER') {
         if (res && res.value && res.value.data && res.value.data.email_verified === 'NV') {
           dispatch(actionCreators.setVerfied(false));
         } else {
           dispatch(actionCreators.setVerfied(true));
-        }
+        // }
       }
       return res;
     });
   }),
   // userLogout: () => (dispatch) => {
-  //   // dispatch(cartActionCreators.getCartResults());
+  //   dispatch(cartActionCreators.getCartResults());
   //   dispatch({
   //     type: actions.USER_LOGOUT,
   //     payload: api.userLogout(),

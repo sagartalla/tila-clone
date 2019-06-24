@@ -146,7 +146,7 @@ export const EN_KEYWORDS = {
     HOME: 'HOME',
     WORK: 'WORK',
     PREF_LOC: 'My preffered location',
-    CANCEL: 'إلغاء',
+    CANCEL: 'Cancel',
     SAVE_DELIVER_BTN: 'Save New Address',
     ENTER_LOC: 'Enter a location',
     ADD_NEW_ADDR_TAG: 'Add address where you want the orders to be delivered.',

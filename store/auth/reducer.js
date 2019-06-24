@@ -10,8 +10,8 @@ const initialState = {
     loading: false,
     loginLoading: false,
     showLogin: false,
-    showEmailVerificationScreen: false,
     showCheckoutLogin: false,
+    showEmailVerificationScreen: false,
   },
   data: {
     isLoggedIn: false,
@@ -34,6 +34,9 @@ const initialState = {
     currentFlow: '',
   },
 };
+
+const language = cookies.get('language') || 'en';
+const country = cookies.get('country') || 'SAU';
 
 const authReducer = typeToReducer({
   // new reducers actions for Registration flow
@@ -115,15 +118,16 @@ const authReducer = typeToReducer({
         };
       }
       return Object.assign({}, state, {
-        data: {
-          ...state.data,
-          userInfoData: action.payload && action.payload.data,
-          showLoginScreen: !!(action.payload && action.payload.data.email_verified === 'NV'),
-        },
         ui: {
           ...state.ui,
           loading: false,
           showEmailVerificationScreen: !!(action.payload && action.payload.data.email_verified === 'NV'),
+          showCheckoutLogin: !!(action.payload && action.payload.data.email_verified === 'NV'),
+        },
+        data: {
+          ...state.data,
+          userInfoData: action.payload && action.payload.data,
+          showLoginScreen: window.location.href.split('/')[5] === 'payment' ? false : !!(action.payload && action.payload.data.email_verified === 'NV'),
         },
         v2: {
           ...state.v2,
@@ -143,20 +147,23 @@ const authReducer = typeToReducer({
         loading: true,
       },
     }),
-    FULFILLED: (state, action) => Object.assign({}, state, {
+    FULFILLED: (state, action) => {
+    return Object.assign({}, state, {
       data: {
         ...state.data,
         ...action.payload.data,
-        isLoggedIn: true,
+        isLoggedIn: action.payload.data.data.email_verified === 'V' ? true : false,
+        // showLoginScreen: action.payload.data.data.email_verified === 'V' ? false : true,
       },
       ui: {
         ...state.ui,
         loginLoading: false,
         showLogin: false,
         loading: false,
-        showCheckoutLogin: false,
+        // showCheckoutLogin: true,
       },
-    }),
+    });
+  },
     REJECTED: (state, action) => {
       const messege = action.payload.response ? ({ 403: 'username/password did not match' }[action.payload.response.status]) : '';
       return Object.assign({}, state, {
@@ -251,6 +258,7 @@ const authReducer = typeToReducer({
       // showLogin:!action.payload.isVerified
     },
   }),
+
   [actions.SET_COUNTRY]: (state, action) => ({
     ...state,
     data: {
@@ -422,9 +430,10 @@ const authReducer = typeToReducer({
   [actions.VERIFY_EMAIL]: {
     PENDING: state => Object.assign({}, state, { ui: { ...state.ui, loading: true, showEmailVerificationScreen: true } }),
     FULFILLED: (state, action) => {
-      const { v2 } = state;
+      const { v2, ui } = state;
       if (action && action.payload && action.payload.data && action.payload.data.Response === 'SUCCESS') {
         v2.active = pageFlows[state.v2.currentFlow][state.v2.active.nextPage];
+        ui.showCheckoutLogin = false;
       }
       return Object.assign({}, state, {
         data: {
@@ -433,6 +442,7 @@ const authReducer = typeToReducer({
             ...state.data.userInfoData,
             email_verified: 'V',
           },
+          isLoggedIn: true,
         },
         v2: {
           ...state.v2,

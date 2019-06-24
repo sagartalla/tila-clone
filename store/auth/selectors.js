@@ -19,6 +19,7 @@ const getLanguage = (store) => {
 };
 
 const getLoggedInStatus = (store) => {
+  console.log('store.authReducer.data.isLoggedIn', store.authReducer.data.isLoggedIn);
   return store.authReducer.data.isLoggedIn;
 };
 
@@ -94,7 +95,7 @@ const getActiveText = store => store.authReducer && store.authReducer.v2 && stor
 
 const getLastLogin = store => store.authReducer.v2.data.last_social_login_used;
 
-const showCheckoutLogin = store => store.authReducer.ui.showCheckoutLogin;
+const showCheckoutLogin = store => (store.authReducer.data.isLoggedIn ? false : store.authReducer.ui.showCheckoutLogin);
 
 export {
   getErrorMessege, getCountry, getLoggedInStatus, getInstaCode, getUserCreds, getDeliveryCity, getDomainCountries,

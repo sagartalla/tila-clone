@@ -61,7 +61,6 @@ class LoginPage extends React.Component {
   checkValidation = (fieldValue, state, args) => args.test(fieldValue)
   
   handleValidation = () => {
-    debugger;
     const { email } = this.state;
     const validation = this.validations.validateOnBlur({ email });
 

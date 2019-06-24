@@ -33,6 +33,7 @@ const userLogin = params =>
     type: 'RT',
     client_type: 'WEB',
   })).then(({ data, status }) => {
+    console.log('api', data);
     // cart merge
     if (status === 200) {
       const { username } = params.metadata;
@@ -81,7 +82,6 @@ const userLogin = params =>
 ;
 
 const userLogout = () => {
-  console.log('success');
   return axios.post('/api/logout');
 };
 

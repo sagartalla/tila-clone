@@ -163,6 +163,7 @@ class ActionBar extends Component {
 
   render() {
     // const { showLoginPage } = this.state;
+    console.log('showLoginPage', this.props.isLoggedIn);
     const {
       isLoggedIn, cartResults, userInfo, wishListCount, getEditDetails, hideCountry, hideLogin, showLoginPage
     } = this.props;

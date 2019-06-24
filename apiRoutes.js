@@ -37,6 +37,7 @@ apiRoutes
       res.json({
         data: {
           isLoggedIn,
+          data,
         }
       });
     }).catch(({response}) => {

@@ -71,7 +71,6 @@ class VerifyEmail extends Component {
       otp: Number(value),
     };
     verifyEmailId(body);
-    v2NextPage();
   }
 
   sendOtpToEmailId = () => {

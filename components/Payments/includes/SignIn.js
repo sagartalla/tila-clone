@@ -58,21 +58,21 @@ class SignIn extends Component {
     const { props } = this;
     const { showTerms, showPrivacy, showFP } = this.state;
     console.log('showCheckoutLogin', props.showCheckoutLogin);
+    console.log('showLoginPage', props.showLoginPage);
+    console.log('props.isLoggedIn', props.isLoggedIn);
     return (
       <div className={`${styles.box} ${styles['mb-20']} ${styles.relative} ${styles['payment-signup']}`}>
         <SVGComponent clsName={`${styles.profile} ${props.configJson.done ? 'done' : ''} ${props.configJson.progress ? 'payment-active' : ''}`} src="icons/profile/profile" />
         {
-       !props.showCheckoutLogin && props.login.username && !props.showLogout &&
+       !props.showCheckoutLogin && (props.activeEmailId || props.login.username) && !props.showLogout &&
        <Row>
           <Col md={8} sm={12} xs={12}>
             <h4 className={styles['m-0']}>{`${PAYMENT_PAGE.YOU_ARE_SIGNED_IN_AS}`}</h4>
-            {props.login.username &&
-            <small>{props.login.username}</small>
-            }
+            <small>{props.activeEmailId || props.login.username}</small>
           </Col>
-          {props.login.username &&
+          {(props.activeEmailId || props.login.username) &&
           <Col md={4} sm={12} xs={12} className={styles['t-rt']}>
-            <span className={`${styles['light-gry-clr']} ${styles.fontW600}`}>{props.login.username}&emsp;</span>
+            <span className={`${styles['light-gry-clr']} ${styles.fontW600}`}>{props.activeEmailId || props.login.username}&emsp;</span>
             <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['left-radius']} ${styles.pointer}`} onClick={props.onClickEdit}>
               {PAYMENT_PAGE.CHANGE}
             </button>
@@ -80,21 +80,21 @@ class SignIn extends Component {
           }
         </Row>}
         <Row >
-          <Col md={8} sm={5} xs={12} className={styles['landscape-socail-part']}>
-            {props.showLogout && !props.showCheckoutLogin &&
-            <div className={`${styles['continue-checkout']} ${styles['m-10']}`}>
+          <Col md={6} sm={5} xs={12} className={`${styles['landscape-socail-part']}`}>
+            {props.showLogout && !props.showCheckoutLogin && props.isLoggedIn &&
+            <div className={`${styles['continue-checkout']}`}>
               <div>
                 <div>Logged in as</div>
-                <div>{props.login.username}</div>
+                <div className={`${styles.fontW600} ${styles['mt-10']}`}>{props.activeEmailId || props.login.username}</div>
               </div>
               <Button
-                className={`${styles['flex-center']} ${styles.width35} ${styles['fs-14']} ${styles['text-uppercase']} ${styles['button-radius']}`}
+                className={`${styles['flex-center']} ${styles.width50} ${styles['fs-14']} ${styles['text-uppercase']} ${styles['button-radius']}`}
                 onClick={props.continueCheckout}
                 btnText="Continue To Checkout"
               />
               <div className={`${styles['text-blue']} ${styles.pointer}`} onClick={props.logoutClicked}>Logout &amp; Signin as different User</div>
             </div>}
-            {props.showCheckoutLogin &&
+            {(props.showCheckoutLogin || !props.isLoggedIn) &&
             <LoginFlow />}
           </Col>
         </Row>
@@ -104,9 +104,7 @@ class SignIn extends Component {
 }
 const mapStateToProps = store => ({
   showLoginPage: selectors.showLogin(store),
-  activeEmailId: selectors.getActiveEmailId(store),
   showCheckoutLogin: selectors.showCheckoutLogin(store),
-  showLoginPage: selectors.showLogin(store),
 });
 const mapDispatchToProps = dispatch => bindActionCreators(
   {
