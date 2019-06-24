@@ -320,7 +320,7 @@ class Product extends Component {
                     </a>
                   </div>
                 }
-                <div onClick={this.renderQuickView} className={`${styles['img-cont']} ${styles['border-radius4']} ${styles['relative']}`}>
+                <div className={`${styles['img-cont']} ${styles['border-radius4']} ${styles['relative']}`}>
                       <div className={`${styles['image-div']} srp-slider`}>
                         {src ?
                             <img src={src} alt="imageURL" />
