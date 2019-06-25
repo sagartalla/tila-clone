@@ -621,7 +621,7 @@ export const EN_KEYWORDS = {
     SUCCESSFULL_CANCEL: 'has been cancelled successfully.',
     YOUR_ORDER: 'Your Order',
     CANCEL_REFUND_MSG: 'We have cancelled your order. Your refund amount (if any) is being processed.',
-    INCONVENIENCE: 'We regret for the inconvenience caused.',
+    RETURN_ORDER_MSG: 'We have received your return request. Your refund amount will be processed once we receive the item.',
     DONE: 'Done',
     CONTINUE: 'Continue',
     ADDRESS_PICKUP: 'Address for pick up',
