@@ -57,6 +57,7 @@ export default class MyDocument extends Document {
           <script
             id="oit-loader"
             src="https://fptsuae.custhelp.com/s/oit/latest/common/v0/libs/oit/loader.js"
+            data-oit-theme-url="https://fptsuae.custhelp.com/s/oit/latest/themes/oracle/midnight/web/theme.css"
             data-oit-increment="true"
             data-oit-group="" async
           >
