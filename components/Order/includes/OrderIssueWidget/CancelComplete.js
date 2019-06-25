@@ -61,7 +61,7 @@ class CancelComplete extends Component {
                   <span>has been Cancelled Successfully</span>
                 </div> */}
                 <div className={`${styles['mt-20']} ${styles['pt-10']} ${styles['pb-10']} ${styles['t-c']} ${styles['cancel-success-text']}`}>
-                  <span className={styles['fs-12']}>{ORDER_PAGE.INCONVENIENCE}</span>
+                  <span className={styles['fs-12']}>{ORDER_PAGE.CANCEL_REFUND_MSG}</span>
                 </div>
               </div>
             }
