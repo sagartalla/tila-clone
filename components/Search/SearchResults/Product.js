@@ -305,7 +305,7 @@ class Product extends Component {
             `${styles['product-items-main']} ${styles.relative} ${styles['p-0']} ${selectedProduct ? styles['active-product'] : ''}`}
             onClick = {() => this.routeChange(productId,variantId,catalogId,itemtype,index,pageNum)}>
           <Link route={`/${country}/${language}/product?productId=${productId}${variants.length > 0 && variants[selectedIndex].variantId ? `&variantId=${variants[selectedIndex].variantId}` : ''}&catalogId=${catalogId}&itemType=${itemtype}`}>
-            <a>
+            <a target="_blank">
               <div className={`${styles['product-items']}`} onMouseEnter={this.setImg} onMouseLeave={this.leaveImg}>
                 {
                   showLoader ? <div className={styles['loader-div']}>
@@ -314,10 +314,10 @@ class Product extends Component {
                 }
                 {variants.length === 0 &&
                   <div className={styles['notify-me-part']}>
-                    <h4 className={`${styles['fs-18']} ${styles['fontW600']} ${styles['black-color']}`}>{PDP_PAGE.OUT_OF_STOCK}</h4>
-                    <a className={`${styles['flex-center']} ${styles['notify-part-inn']} ${styles['white-color']} ${styles['fp-btn']} ${styles['right-radius']} ${styles['fp-btn-primary']}`} onClick={this.notify}>
+                    <h4 className={`${styles['fs-10']} ${styles['m-5']} ${styles['pr-5']} ${styles['black-color']}`}>{PDP_PAGE.OUT_OF_STOCK}</h4>
+                    {/* <a className={`${styles['flex-center']} ${styles['notify-part-inn']} ${styles['white-color']} ${styles['fp-btn']} ${styles['right-radius']} ${styles['fp-btn-primary']}`} onClick={this.notify}>
                       <span className={styles['pl-5']}>{PDP_PAGE.NOTIFY_ME}</span>
-                    </a>
+                    </a> */}
                   </div>
                 }
                 <div className={`${styles['img-cont']} ${styles['border-radius4']} ${styles['relative']}`}>
@@ -395,7 +395,9 @@ class Product extends Component {
                         />
                       </div>
                       :
-                        null
+                      <a className={`${styles['flex-center']} ${styles['notify-part-inn']} ${styles['white-color']} ${styles['fp-btn']} ${styles['left-radius']} ${styles['fp-btn-primary']}`} onClick={this.notify}>
+                        <span className={styles['pl-5']}>{PDP_PAGE.NOTIFY_ME}</span>
+                      </a>
                       // <div className={`${styles['flex']} ${styles['justify-around']} ${styles['quick-view']} ${styles['border-radius4']}`}>
                       //   <a className={`${styles['flex-center']} ${styles['buy-now-btn']} ${styles['notifyBackground']}`} onClick={this.notify}>
                       //     <span className={styles['pl-5']}>{PDP_PAGE.NOTIFY_ME}</span>
