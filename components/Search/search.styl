@@ -4,7 +4,13 @@
   width: 215px;
   border: 1px solid #e5e5e5;
   box-shadow: 0 2px 7px 0 rgba(0,0,0,0.03);
-  position: relative;
+  overflow: scroll;
+  max-height: calc(100vh - 150px);
+  position: sticky !important;
+  top: 120px;
+  .bottom-absolute
+    position absolute
+    bottom 0
   li
     list-style none
 
