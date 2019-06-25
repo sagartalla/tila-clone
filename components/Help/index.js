@@ -30,7 +30,7 @@ class Help extends Component {
       modalType: '',
       selectedOrder: '',
       selectedIssue: '',
-      searchQuery: decodeURIComponent(window.location.search.split('=')[1])
+      searchQuery: window.location.search.split('=')[1] ? decodeURIComponent(window.location.search.split('=')[1]) : ''
     }
     this.props.getCategories();
   }
