@@ -27,7 +27,7 @@ class Answers extends Component {
     super(props);
     const [parentCategoryId, categoryId] = props.url;
     const answerId = window.location.hash ? window.location.hash.split('#')[1] : ''
-    this.searchQuery = window.location.search.split('=')[1];
+    this.searchQuery = decodeURIComponent(window.location.search.split('=')[1]);
     this.state = {
       selectedCategory: categoryId || parentCategoryId,
       openedCategory: parentCategoryId,
