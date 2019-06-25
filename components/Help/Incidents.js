@@ -192,7 +192,7 @@ class Incidents extends Component {
     const {id, createdTime, referenceNumber, subject, statusTiLa} = tkt;
     const isSelected = id === this.state.selectedIncident;
     return (
-      <div key={id} onClick={this.selectTicket(id)} className={`${styles['TktTitleContainer']} ${isSelected && styles['openBGColor']}`}>
+      <div key={id} onClick={this.selectTicket(id)} className={`${styles['TktTitleContainer']} ${isSelected && styles['openBGColor2']}`}>
         <div className={styles['fs-14p']} dangerouslySetInnerHTML={{__html: subject}} />
         <div className={`${styles['fs-13p']} ${styles['greyColor']}`}>{referenceNumber}</div>
         <div className={`${styles['fs-12p']} ${styles['greyColor']} ${styles['flex']} ${styles['justify-between']}`}>

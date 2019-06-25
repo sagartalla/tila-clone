@@ -30,6 +30,7 @@ class Help extends Component {
       modalType: '',
       selectedOrder: '',
       selectedIssue: '',
+      searchQuery: window.location.search.split('=')[1]
     }
     this.props.getCategories();
   }
@@ -47,6 +48,17 @@ class Help extends Component {
     this.setState({
       showModal: false,
       modalType: ''
+    })
+  }
+  handleSearch = (e) => {
+    e.preventDefault();
+    const { pathname } = window.location;
+    const url = pathname.replace(this.props.query[0], `answers?search=${this.state.searchQuery}`);
+    Router.pushRoute(url);
+  }
+  handleQueryChange = ({target: {name, value}}) => {
+    this.setState({
+      [name]: value
     })
   }
   renderModal = (isLoggedIn) => (
@@ -80,7 +92,11 @@ class Help extends Component {
             <div className={`${styles['flexCenterContainer']} ${styles['helpHeroContainer']}`}>
               <div className={`${styles['flexColCenterContainer']}`} style={{width: '100%'}}>
                 <h3>Hi, How can we help you today ?</h3>
-                {/* <div className={styles['searchContainer']}></div> */}
+                <div className={styles['searchContainer']}>
+                  <form className={styles['searchForm']} onSubmit={this.handleSearch}>
+                    <input className={styles['searchInput']} name="searchQuery" type='search' value={this.state.searchQuery} onChange={this.handleQueryChange} placeholder="Search for a topic or questions" />
+                  </form>
+                </div>
               </div>
               <div className={styles['contactContainer']}>
                 {ContactTabs.map(this.renderContactCard())}
