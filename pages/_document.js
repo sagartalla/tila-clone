@@ -23,9 +23,12 @@ export default class MyDocument extends Document {
           {
             props.__NEXT_DATA__.query.language === 'ar'
               ?
-              <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-rtl/3.4.0/css/bootstrap-rtl.css" />
+              <>
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-rtl/3.4.0/css/bootstrap-rtl.css" />
+                <link rel="stylesheet" href="/static/css/fonts_ar.css" />
+              </>
               :
-              null
+              <link rel="stylesheet" href="/static/css/fonts_en.css" />
           }
           <script type='text/javascript' src='/static/sociallogin.js'></script>
           <Meta />
