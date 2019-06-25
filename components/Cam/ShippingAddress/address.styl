@@ -76,7 +76,7 @@
         width 16px
     .address-card
       // border 1px solid light-gray-color
-      border: solid 1px light-border;
+      border: solid 1px light-brdr
       margin-bottom 30px
       border-radius 4px
       transition-timing-function ease-in-out;
@@ -89,7 +89,7 @@
         .address-card-head span
           font-weight 300
       .address-card-head
-        border-bottom 1px dashed rgba(151, 151, 151, 0.2)
+        border-bottom 1px solid light-brdr
         padding 9px 15px
         .default-address-icon
           display inline-flex
@@ -223,6 +223,27 @@
   to {right: -800px;}
 }
 
+// .address-card .default-tag-inn
+//   display none
+
+// .address-selected
+//   position relative
+//   .delivart-active
+//     color tila-blk
+//   .default-tag-inn
+//     display block
+//     border-radius 0px
+//     background-color tila-blk
+//     position absolute
+//     color white
+//     padding 5px 10px
+//     bottom -27px
+//     font-size 12px
+
+.address-selected .delivart-active
+  color tila-blk
+
+
 
 .map-input
   box-sizing border-box
@@ -252,11 +273,11 @@
     padding 10px
 
 .not-shippable {
-  border: 1px solid thick-red-arrow;
-  background-color: light-red-color;
-  border-radius: 3px;
+  border: 1px solid thick-red-arrow
+  background-color: light-red-color
+  border-radius: 3px
   .not-shipping-font {
-    font-size: 13px;
+    font-size: 12px
   }
 }
 

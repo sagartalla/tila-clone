@@ -116,8 +116,8 @@ class CheckboxFacet extends Component {
                 filterItems.slice(0, maxRows).map(childFitler => (
                   <li key={childFitler.id} className={styles['category-sub-list-inn']}>
                     <div className={`${styles['checkbox-material']} ${styles['select-check-mate']}`}>
-                      <input id={childFitler.name} type="checkbox" onChange={this.onChangeItem({ name: childFitler.name, param: childFitler.param })} checked={selectedItems.indexOf(childFitler.name) !== -1} />
-                      <label htmlFor={childFitler.name} className={`${styles['fs-12']} ${styles['category-label']}`}> <span className={styles['category-span']}>{childFitler.name}</span> <span className={styles['thick-gry-clr']}>{childFitler.count ? `${childFitler.count}` : ''}</span> </label>
+                      <input id={childFitler.param} type="checkbox" onChange={this.onChangeItem({ name: childFitler.name, param: childFitler.param })} checked={selectedItems.indexOf(childFitler.name) !== -1} />
+                      <label htmlFor={childFitler.param} className={`${styles['fs-12']} ${styles['category-label']}`}> <span className={styles['category-span']}>{childFitler.name}</span> <span className={styles['thick-gry-clr']}>{childFitler.count ? `${childFitler.count}` : ''}</span> </label>
                     </div>
                   </li>
                 ))

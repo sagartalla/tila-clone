@@ -30,6 +30,8 @@ export default class MyDocument extends Document {
               :
               <link rel="stylesheet" href="/static/css/fonts_en.css" />
           }
+          {/*<script type='text/javascript' src='//service.maxymiser.net/api/eu/fptechscience.com/3a077f/mmapi.js'> </script>*/}
+          {/* <script type='text/javascript' src='/static/fb.js'></script> */}
           <script type='text/javascript' src='/static/sociallogin.js'></script>
           <Meta />
           <script src="/static/scripts/dataLayer.js"></script>
@@ -52,12 +54,12 @@ export default class MyDocument extends Document {
           <inlay-oracle-chat-embedded
             class="inlay"
             id="chatInlay"
-            site-url="fptsuae.custhlep.com"
+            site-url="fptsuae.widget.custhlep.com"
           >
           </inlay-oracle-chat-embedded>
           <script
             id="oit-loader"
-            src="http://fptsuae.custhelp.com/s/oit/latest/common/v0/libs/oit/loader.js"
+            src="https://fptsuae.widget.custhelp.com/s/oit/latest/common/v0/libs/oit/loader.js"
             data-oit-increment="true"
             data-oit-group="" async
           >

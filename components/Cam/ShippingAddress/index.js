@@ -197,7 +197,13 @@ class ShippingAddress extends Component {
       addr,
       showCitiesData,
       showCountriesData,
-    });
+    }, () => {
+      if(this.state.isEditAddr){
+        const validation = this.validations.validate(this.state.addr);
+        this.setState({validation})
+      }
+    }
+    );
   }
 
   validate = (fieldvalue) => {
@@ -338,11 +344,11 @@ class ShippingAddress extends Component {
     } = this.state;
     const { DELIVERY_ADDR_PAGE } = languageDefinations();
     return (
-      <div className={`${styles['address-container']} ${standalone !== true ? '' : `${styles.box} ${styles['ml-5']}`} `}>
+      <div className={`${styles['address-container']} ${styles['pt-15']} ${standalone !== true ? '' : `${styles.box} ${styles['ml-5']}`} `}>
         {cartResults.address !== null && !cartResults.cart_shippable && (cartResults.cart_shippable !== undefined) && showNonShippable &&
         <div className={`${styles['not-shippable']} ${styles.flex} ${styles['mb-20']} ${styles['p-10']}`}>
           <Col md={2} sm={3} xs={3} className={`${styles['thick-red-clr']} ${styles.fontW600} ${styles['not-shipping-font']}`}>{DELIVERY_ADDR_PAGE.NOT_SHIPPABLE}</Col>
-          <Col md={10} sm={9} xs={9} className={`${styles['fs-12']} ${styles.fontW600}`}>{DELIVERY_ADDR_PAGE.UNFORTUNATELY_WE_CANNOT_DELIVER_REMOVE_ITEM}</Col>
+          <Col md={10} sm={9} xs={9} className={`${styles['fs-12']}`}>{DELIVERY_ADDR_PAGE.UNFORTUNATELY_WE_CANNOT_DELIVER_REMOVE_ITEM}</Col>
         </div>}
         {
           miniAddress ?

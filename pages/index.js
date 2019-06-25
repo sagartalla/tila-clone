@@ -39,20 +39,4 @@ class LandingPage extends Base {
   }
 };
 
-
-const mapStatetoProps = (state) => {
-  return {
-    allState: state,
-  }
-}
-
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(
-    {
-      ...baseActions,
-      getPages: actionCreators.getPages,
-    },
-    dispatch,
-  )
-
-export default withRedux(makeStore, mapStatetoProps, mapDispatchToProps)(LandingPage);
+export default withRedux(makeStore, null, null)(LandingPage);
