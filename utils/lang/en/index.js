@@ -620,7 +620,7 @@ export const EN_KEYWORDS = {
     ITEM_TOTAL: 'Item(s) Subtotal',
     SUCCESSFULL_CANCEL: 'has been cancelled successfully.',
     YOUR_ORDER: 'Your Order',
-    INCONVENIENCE: 'We regret for the inconvenience caused.',
+    INCONVENIENCE: 'We have cancelled your order. Your refund amount (if any) is being processed.',
     DONE: 'Done',
     CONTINUE: 'Continue',
     ADDRESS_PICKUP: 'Address for pick up',
