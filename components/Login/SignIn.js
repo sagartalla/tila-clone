@@ -78,8 +78,8 @@ class SignIn extends Component {
       hide: true,
       password: '',
       email: '',
-      first_name: '',
-      last_name: '',
+      first_name: props && props.loginResponse && props.loginResponse.data ? props.loginResponse.data.first_name : '',
+      last_name: props && props.loginResponse && props.loginResponse.data ? props.loginResponse.data.last_name : '',
       promotional_notification: false,
       // rememberMe: !!localStorage.getItem('remember'),
       validation: this.validations.valid(),
@@ -150,7 +150,7 @@ class SignIn extends Component {
       first_name, last_name, password, rememberMe, promotional_notification, email,
     } = this.state;
     const {
-      activeEmailId, userLogin, mode, v2NextPage,
+      activeEmailId, userLogin, mode, v2NextPage, loginResponse,
     } = this.props;
 
     const validation = this.validations.validate(this.state);
@@ -189,19 +189,18 @@ class SignIn extends Component {
         userLogin(serverData, 'register');
       }
     } else if (mode === 'SOCIAL_LOGIN') {
-      // if (validation.isValid) {
-      //   const serverData = {
-      //     channel: 'SOCIAL_LOGIN_REGISTER',
-      //     metadata: {
-      //       username: email,
-      //       first_name,
-      //       last_name,
-      //     },
-      //   };
-      //   userLogin(serverData, 'register').then(() => {
-          v2NextPage();
-        // });
-      // }
+      if (validation.isValid) {
+        const serverData = {
+          channel: 'SOCIAL_REGISTER',
+          metadata: {
+            email,
+            first_name,
+            last_name,
+            social_token: loginResponse.data.social_token,
+          },
+        };
+        userLogin(serverData, 'register');
+      }
     }
     this.setState({ validation });
   }
@@ -214,7 +213,7 @@ class SignIn extends Component {
     const {
       hide, promotional_notification, password, rememberMe, passwordErr, first_name, last_name, validation, email,
     } = this.state;
-    const { showForgotPassword, mode, activeEmailId, loadingStatus, getActiveUser } = this.props;
+    const { showForgotPassword, mode, activeEmailId, loadingStatus, getActiveUser, loginResponse } = this.props;
     return (
       <div className={`${styles['main-signin']} ${styles.flex} ${styles['flex-colum']} ${styles['justify-evenly']}`}>
         <div className={`${styles['mb-10']}`}>
@@ -357,6 +356,7 @@ const mapStateToProps = store => ({
   activeObj: selectors.getActive(store),
   loadingStatus: selectors.getLoadingStatus(store),
   getActiveUser: selectors.getActiveUser(store),
+  loginResponse: selectors.loginResponse(store),
 });
 const mapDispatchToProps = dispatch => bindActionCreators(
   {

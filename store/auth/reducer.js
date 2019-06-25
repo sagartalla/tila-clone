@@ -109,9 +109,9 @@ const authReducer = typeToReducer({
     FULFILLED: (state, action) => {
       let active;
       let { currentFlow } = state.v2;
+      console.log('currentFlow', currentFlow);
       if (action.payload.data.email_verified === 'NV') {
-        active = pageFlows.new_user_register.verify_email;
-        currentFlow = 'new_user_register';
+        active = pageFlows[currentFlow]['verify_email'];
       } else {
         active = {
           activePage: '',
@@ -148,11 +148,19 @@ const authReducer = typeToReducer({
       },
     }),
     FULFILLED: (state, action) => {
+      let active;
+      let { currentFlow } = state.v2;
+      if (action.payload.data.data.social_token) {
+        active = pageFlows.not_accessable_social_user.social_login;
+        currentFlow = 'not_accessable_social_user';
+      }
+      console.log('asasasasasas', currentFlow);
     return Object.assign({}, state, {
       data: {
         ...state.data,
         ...action.payload.data,
-        isLoggedIn: action.payload.data.data.email_verified === 'V' ? true : false,
+        isLoggedIn: (currentFlow === '' || currentFlow === 'existing_social_user') ? true : (action.payload.data.data.email_verified === 'V' ? true : false),
+        loginResponse: action.payload.data,
         // showLoginScreen: action.payload.data.data.email_verified === 'V' ? false : true,
       },
       ui: {
@@ -161,6 +169,11 @@ const authReducer = typeToReducer({
         showLogin: false,
         loading: false,
         // showCheckoutLogin: true,
+      },
+      v2: {
+        ...state.v2,
+        active,
+        currentFlow,
       },
     });
   },
@@ -430,10 +443,11 @@ const authReducer = typeToReducer({
   [actions.VERIFY_EMAIL]: {
     PENDING: state => Object.assign({}, state, { ui: { ...state.ui, loading: true, showEmailVerificationScreen: true } }),
     FULFILLED: (state, action) => {
+      console.log('v2', state.v2);
       const { v2, ui } = state;
       if (action && action.payload && action.payload.data && action.payload.data.Response === 'SUCCESS') {
         v2.active = pageFlows[state.v2.currentFlow][state.v2.active.nextPage];
-        ui.showCheckoutLogin = false;
+        ui.showCheckoutLogin = state.v2.active.nextPage === 'thank_you' ? false : true;
       }
       return Object.assign({}, state, {
         data: {
