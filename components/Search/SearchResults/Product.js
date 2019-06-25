@@ -364,7 +364,7 @@ class Product extends Component {
                 </div>
                 <div className={styles['desc-cont']}>
                   <div className={`${styles['pb-20']} ${styles['pl-20']} ${styles['pr-20']} ${styles['flex']} ${styles['flex-colum']}`}>
-                    <h5 className={`${styles['prdt-name']} ${styles['pt-15']} ${styles['pb-5']}  ${styles['m-0']} ${styles['ellips']}`}>
+                    <h5 className={`${styles['prdt-name']} ${styles['pt-15']} ${styles['pb-5']}  ${styles['m-0']}`}>
                       <span className={`${styles['fontW600']} ${styles['black-color']}`}>{brand}</span> <span className={`${styles['thick-gry-clr']} ${styles['fontW300']}`}>{displayName.replace(brand, '').trim()}</span>
                     </h5>
                     <span>
