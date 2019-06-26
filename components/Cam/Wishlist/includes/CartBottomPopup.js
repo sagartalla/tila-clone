@@ -35,9 +35,9 @@ class CartBottomPopup extends Component {
     return (
       <div className={`${styles['cart-wishlist-popup']} ${styles['mr-15']}`}>
         <Grid>
-          <div className={`${styles['flx-spacebw-alignc']}`}>
+          <div className={`${styles['flx-space-bw']} ${styles['align-baseline']}`}>
             <div className={`${styles.width100}`}>
-              <h4 className={`${styles['cart-wishlist-popup-title']} ${styles['fs-30']} ${styles['flex-center']} ${styles['justify-center']} ${styles['lgt-blue']} ${styles['mt-5']} ${styles['mb-15']} ${styles['fontW300']}`}>
+              <h4 className={`${styles['cart-wishlist-popup-title']} ${styles['fs-20']} ${styles['flex-center']} ${styles['justify-center']} ${styles['lgt-blue']} ${styles['mt-5']} ${styles['mb-15']} ${styles['fontW300']}`}>
                 <span className={`${styles['bg-white']} ${styles['title-label']}`}>{WISH_LIST_PAGE.FROM_YOUR_WISHLIST} </span>
                 <span className={styles['title-border']}></span>
               </h4>

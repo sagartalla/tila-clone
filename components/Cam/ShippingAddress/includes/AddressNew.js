@@ -95,7 +95,7 @@ const AddressNew = (props) => {
             <Dropdown id="search-toggle" className={`${styles.width100}`}>
               <Dropdown.Toggle id="dropdown-custom-components">
                 <div className={`${styles['mb-0']} ${styles['fp-input']}`}>
-                  <input type="text" name="country_name" onChange={inputOnChange} value={data.country_name} autoComplete="off" className={styles.input} required />
+                  <input type="text" name="country_name" onChange={inputOnChange} value={data.country_name} autoComplete="off" className={styles.input} required autoComplete='off' />
                   <label>{DELIVERY_ADDR_PAGE.COUNTRY}</label>
                 </div>
               </Dropdown.Toggle>
@@ -130,7 +130,7 @@ const AddressNew = (props) => {
             <Dropdown disabled={!data.shipping_country_code} id="search-toggle" className={`${styles.width100}`}>
               <Dropdown.Toggle id="dropdown-custom-components">
                 <div className={`${styles['mb-0']} ${styles['fp-input']}`}>
-                  <input type="text" name="city" onChange={inputOnChange} value={data.city} className={styles.input} disabled={!data.shipping_country_code} required />
+                  <input type="text" name="city" onChange={inputOnChange} value={data.city} className={styles.input} disabled={!data.shipping_country_code} required autoComplete='off'/>
                   <label>{DELIVERY_ADDR_PAGE.CITY}</label>
                 </div>
               </Dropdown.Toggle>
@@ -184,7 +184,7 @@ const AddressNew = (props) => {
           <Col md={2} sm={4} xs={4} className={`${styles['pr-0']}`}>
             <div className={`${styles['fp-input']} ${styles['common-input-mb']}`}>
               <img src={ countriesImage[data.shipping_country_code] && countriesImage[data.shipping_country_code].img} alt={""} title={data.shipping_country_code} className={styles['country-flag']}/>
-              <input type="number" name="mobile_country_code" defaultValue={data.mobile_country_code} className={`${styles.input} ${styles['padded']}`} required />
+              <input type="number" name="mobile_country_code" value={data.mobile_country_code} className={`${styles.input} ${styles['padded']}`} required />
               <span className={styles.highlight} />
               <span className={styles.bar} />
               <label>{DELIVERY_ADDR_PAGE.CODE}</label>

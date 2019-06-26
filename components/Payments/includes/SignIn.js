@@ -52,19 +52,19 @@ class SignIn extends Component {
     return (
       <div className={`${styles.box} ${styles['mb-20']} ${styles.relative} ${styles['payment-signup']}`}>
         <SVGComponent clsName={`${styles.profile} ${props.configJson.done ? 'done' : ''} ${props.configJson.progress ? 'payment-active' : ''}`} src="icons/profile/profile" />
-        <Row className={`${props.configJson.done ? '' : 'hide'} ${styles['flex-center']} ${styles['m-blk']}`}>
-          <Col md={8} sm={12} xs={12}>
-            <h4 className={styles['m-0']}>{`${PAYMENT_PAGE.REGISTER} or ${PAYMENT_PAGE.SIGN_IN}`}</h4>
+        <Row className={`${props.configJson.done ? '' : 'hide'} ${styles['flex-center']} ${styles.flex} ${styles['m-blk']}`}>
+          <Col md={6} sm={12} xs={12}>
+            <h4 className={`${styles['m-0']}`}>{`${PAYMENT_PAGE.REGISTER} or ${PAYMENT_PAGE.SIGN_IN}`}</h4>
             {props.login.username ?
-            <small>{PAYMENT_PAGE.YOU_ARE_SIGNED_IN_AS} {props.login.username}</small>
+            <small className={styles['thick-gry-clr']}>{PAYMENT_PAGE.YOU_ARE_SIGNED_IN_AS} {props.login.username}</small>
             :
-            <small>{PAYMENT_PAGE.SIGN_IN_SIGN_UP_TO_CONTINUE}</small>
+            <small className={styles['thick-gry-clr']}>{PAYMENT_PAGE.SIGN_IN_SIGN_UP_TO_CONTINUE}</small>
             }
           </Col>
           {props.login.username ?
-          <Col md={4} sm={12} xs={12} className={styles['t-rt']}>
-            <span className={`${styles['light-gry-clr']} ${styles.fontW600}`}>{props.login.username}&emsp;</span>
-            <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['left-radius']} ${styles['text-uppercase']}`} onClick={props.onClickEdit}>
+          <Col md={6} sm={12} xs={12} className={`${styles['t-rt']} ${styles['p-0']}`}>
+            <span className={`${styles['light-gry-clr']} ${styles.fontW600} ${styles['pr-5']} ${styles['user-login-name']}`}>{props.login.username}&emsp;</span>
+            <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['ml-15']} ${styles['left-radius']} ${styles['text-uppercase']}`} onClick={props.onClickEdit}>
               {CONTACT_INFO_MODAL.EDIT}
             </button>
           </Col> : null
@@ -72,7 +72,7 @@ class SignIn extends Component {
         </Row>
         <Row className={`${props.configJson.progress ? '' : 'hide'} ${styles['pb-5']} ${styles['pt-5']}`}>
           <Col md={4} sm={5} xs={12} className={styles['landscape-socail-part']}>
-            <h4 className={`${styles['mb-20']} ${styles['mt-0']} ${styles['light-gry-clr']}`}>{PAYMENT_PAGE.REGISTER}</h4>
+            <h4 className={`${styles['mb-20']} ${styles['mt-0']} ${styles['fontW600']} ${styles['light-gry-clr']}`}>{PAYMENT_PAGE.REGISTER}</h4>
             <div className={`${styles['thin-border-right']} ${styles['social-icons-list']}`}>
               <span className={`${styles['sub-title']} ${styles['fs-10']} ${styles['p-5']} ${styles['bg-white']}`}>{PAYMENT_PAGE.OR}</span>
               <NoSSR>
@@ -80,7 +80,7 @@ class SignIn extends Component {
                   {([handleSocialLogin]) => {
                     return (
                       <React.Fragment>
-                        <button onClick={handleSocialLogin('facebook')} className={`${styles['fp-btn']} ${styles['mb-20']} ${styles['fp-btn-primary']} ${styles['right-radius']} ${styles['facebook-btn']}`}>{PAYMENT_PAGE.SIGN_IN_WITH_FACEBOOK}</button>
+                        <button onClick={handleSocialLogin('facebook')} className={`${styles['fp-btn']} ${styles['mb-20']} ${styles['fp-btn-facebook-blue']} ${styles['right-radius']} ${styles['facebook-btn']}`}>{PAYMENT_PAGE.SIGN_IN_WITH_FACEBOOK}</button>
                         <button onClick={handleSocialLogin('google')} className={`${styles['fp-btn']} ${styles['mb-20']} ${styles['fp-btn-danger']} ${styles['right-radius']} ${styles['google-btn']}`}>{PAYMENT_PAGE.SIGN_IN_WITH_GOOGLE}</button>
                       </React.Fragment>
                     );

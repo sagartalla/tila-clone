@@ -4,9 +4,11 @@
   background-color body-color
   min-height 100vh
 
-  .payment-signup, .delivery-adress-prt, .pay-loyalty-main, .payment-mode-prt, .pay-offers-discounts
+  .payment-signup, .delivery-adress-prt, .pay-loyalty-main, .pay-offers-discounts
     padding 15px 35px
 
+  .payment-mode-prt
+    padding 0 35px
 
   .sign-part
     width 70%
@@ -35,7 +37,7 @@
       cursor pointer
     .active
       background-color white
-      box-shadow -4px 0 8px rgba(204, 204, 204, 0.8)
+      box-shadow -5px 0 4px 0 rgba(0, 0, 0, 0.06)
       border-right 5px solid tila-blk
       color black-color
     .payment-lists
@@ -47,7 +49,7 @@
         pointer-events: none;
 
   .right-bar
-    font-size font-size-14
+    font-size 14px
     .offer
       background-color black
       color white
@@ -73,10 +75,13 @@
     position absolute
     left -20px
     width-height-radius(40px, 40px, 0)
+    top 15px
     // & .done
     //     .icon-bg-fill
     //       fill generic-green-color
 
+.payment-edit
+  height 35px
 .default-logo
   width 74px
   height 34px
@@ -167,15 +172,19 @@
       border 1px dotted generic-gray-color
       border-radius 7px
       margin-right 15px
-.captcha-icon
-  width: 47px;
-  height: 43px;
 
-  .captch-inn
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.07);
-    border: solid 0.5px navy-blue;
+
+.captch-inn
+  border-bottom-left-radius: 4px
+  border-bottom-right-radius: 4px
+  box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.07)
+  border 1px solid tila-blk
+  .captcha-icon-part span
+    border 1px solid light-brdr
+    margin 10px
+    .captcha-icon
+      width 47px
+      height 43px
 
   .cash-tab
     li
@@ -215,7 +224,7 @@
   .saved-cards-part
     .saved-card-item
       // box-shadow 0 3px 3px 0 rgba(0, 0, 0, 0.07)
-      border 0.5px solid light-gry
+      border 1px solid light-brdr
       border-radius 4px
       .card-no
         letter-spacing 2px
@@ -228,7 +237,7 @@
 
 .saved-cards-part .saved-card-item.card-active
   box-shadow 0 3px 3px 0 rgba(0, 0, 0, 0.07)
-  border 0.5px solid navy-blue
+  border 1px solid tila-blk
 
 .voucher
   padding 20px 40px
@@ -435,19 +444,19 @@
     padding-right 0
   }
 }
+
 .voucher
-      background: aliceblue;
+  background rgba(187, 210, 241, 0.09)
 
 .paymentBorder
-     border 1px solid border-color
-     background white
-     width 28%
-     display flex
-     flex-direction column
-     align-items center
-     border-radius 4px
-     padding 10px
-     box-shadow 0 2px 4px 0 rgba(0, 0, 0, 0.08)
+  border 1px solid border-color
+  background white
+  width 28%
+  display flex
+  flex-direction column
+  border-radius 4px
+  padding 10px
+  box-shadow 0 2px 4px 0 rgba(0, 0, 0, 0.08)
 
 .border-radius
      border-bottom-right-radius 25px;
@@ -455,3 +464,6 @@
 .sidebar-payment
    position sticky !important
    top 80px
+
+.user-login-name
+  border-right 2px solid light-brdr

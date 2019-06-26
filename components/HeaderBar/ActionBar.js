@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Dropdown } from 'react-bootstrap';
 import Cookie from 'universal-cookie';
+
 import { selectors as personalSelectors, actionCreators as personalActionCreators } from '../../store/cam/personalDetails';
 import { actionCreators as wishListActionCreators, selectors as wishListSelectors } from '../../store/cam/wishlist';
-
 import Cart from '../Cart';
 import Login from '../Login';
 import { Link, Router } from '../../routes';
@@ -115,16 +115,12 @@ class ActionBar extends Component {
     });
   }
 
-  loginClick(e) {
+  loginClick() {
     digitalData.page.pageInfo.pageType = 'Login Page';
     digitalData.page.pageInfo.pageName = 'Login Page';
     const state = {};
     state.loginClicked = true;
-    if (e.currentTarget.getAttribute('data-mode') === 'sign-up') {
-      state.mode = 'register';
-    } else {
-      state.mode = 'login';
-    }
+    state.mode = 'login';
     state.show = true;
     this.setState(state);
   }
@@ -148,6 +144,15 @@ class ActionBar extends Component {
     this.props.userLogin(serverData);
   }
 
+  moveToWishlist = () => {
+    const { isLoggedIn } = this.props;
+    if (isLoggedIn) {
+      Router.push(`/${country}/${language}/cam/wishlist`);
+    } else {
+      this.loginClick();
+    }
+  }
+
   render() {
     const {
       isLoggedIn, cartResults, userInfo, wishListCount, getEditDetails, hideCountry, hideLogin
@@ -167,14 +172,12 @@ class ActionBar extends Component {
           </NoSSR>
         </div>
         <div className={`${styles['action-item']} ${styles['pr-20']} ${styles['pl-20']} ${styles['border-rt']} ${styles['flex-center']} ${styles['justify-center']}`}>
-          <Link route={`/${country}/${language}/cam/wishlist`}>
-            <a style={{ dispaly: 'block' }}>
-              <span className={`${styles['flex-center']} ${styles['justify-center']} ${styles.relative}`} title={PDP_PAGE.GO_TO_WISHLIST}>
-                <SVGComponent clsName={`${styles['wish-list-icon']}`} src="icons/wish-list/wish-list-icon" />
-                <span className={`${styles.absolute} ${styles['cart-count']} ${styles['fs-10']} ${styles['white-color']}`}>{wishListCount}</span>
-              </span>
-            </a>
-          </Link>
+          <a style={{ dispaly: 'block' }} onClick={this.moveToWishlist}>
+            <span className={`${styles['flex-center']} ${styles['justify-center']} ${styles.relative}`} title={PDP_PAGE.GO_TO_WISHLIST}>
+              <SVGComponent clsName={`${styles['wish-list-icon']}`} src="icons/wish-list/wish-list-icon" />
+              <span className={`${styles.absolute} ${styles['cart-count']} ${styles['fs-10']} ${styles['white-color']}`}>{wishListCount}</span>
+            </span>
+          </a>
         </div>
         <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']}`}>
           <Dropdown id="cart-toggle" className={`${styles['cart-inn']} ${styles['profile-login-inn']} ${styles['pr-20']}`}>
