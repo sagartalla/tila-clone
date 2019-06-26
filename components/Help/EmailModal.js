@@ -1,5 +1,5 @@
 /*eslint-disable*/
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { connect } from 'react-redux';
 import Cookies from 'universal-cookie';
 import { actionCreators as helpActions } from '../../store/helpsupport';
@@ -14,11 +14,12 @@ import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './help_en.styl';
 import styles_ar from './help_ar.styl';
 
-const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
 import constants from '../../constants';
 import { toast } from 'react-toastify';
 import ToastContent from '../common/ToastContent';
+import SVGComponent from '../common/SVGComponet';
 
 
 const cookies = new Cookies();
@@ -26,7 +27,67 @@ const cookies = new Cookies();
 const language = clCode[cookies.get('language') || 'en'];
 const country = clCode[cookies.get('country') || 'SAU'];
 const userCredentials = cookies.get('userCreds');
-const sort = (a,b) => a - b;
+const sort = (a, b) => a - b;
+
+const FileAttachment = (props) => {
+  const [msg, setMsg] = useState('');
+  const [files, setFiles] = useState({});
+  const handleMsg = (e) => setMsg(e.target.value);
+  const handleAttachements = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      if (file.size < 10485760) {
+        const reader = new FileReader();
+        reader.onload = () => { setFiles({ [file.name]: reader.result }) };
+        reader.onerror = (error) => { console.log('Error: ', error) };
+        reader.readAsDataURL(file);
+      } else {
+        alert('File size limit is 10MB')
+      }
+    }
+  }
+  const removeFile = (fileName) => (e) => {
+    const newFileObj = { ...files };
+    delete newFileObj[fileName]
+    setFiles(newFileObj);
+  }
+  const renderFiles = (fileName, index) => (
+    <div key={String(index)} className={`${styles['flex']} ${styles['justify-between']} ${styles['wh-250']}`}>
+      <div className={styles['fileNameCont']}>
+        <a href={files[fileName]} download={fileName}>{fileName}</a>
+      </div>
+      <div className={styles['fileNameDelete']} onClick={removeFile(fileName)}>x</div>
+    </div>
+  )
+  return (
+    <div>
+      <div className={styles['pV-10']}>
+        <div className={styles['fileUploadInputCont']}>
+          <input type="file" disabled={props.loading} onChange={handleAttachements} className={styles['fileInput']} />
+          <div>
+            <div className={styles['fa']}>
+              <div className={styles['fileAttachIcon']}>
+                <SVGComponent src={`helpsupport/hnsAttach`} />
+              </div>
+              <div>
+                Attach Files
+                      </div>
+            </div>
+            <div className={`${styles['fs-12p']} ${styles['greyColor']}`}>
+              Jpeg, Pdf, PNG less than 8 MB
+                    </div>
+          </div>
+        </div>
+      </div>
+      {Object.keys(files).length ?
+        <div className={styles['fs-12p']}>
+          <div>{`Attachments (${Object.keys(files).length})`}</div>
+          {Object.keys(files).map(renderFiles)}
+        </div>
+        : null}
+    </div>
+  )
+}
 
 
 class EmailModal extends Component {
@@ -140,8 +201,8 @@ class EmailModal extends Component {
         },
         "text": this.state.msg
       },
-      "channel": { "id": 9},
-      ...(this.state.selectedIssue.catId && {"category": { "id": Number(this.state.selectedIssue.catId) }}),
+      "channel": { "id": 9 },
+      ...(this.state.selectedIssue.catId && { "category": { "id": Number(this.state.selectedIssue.catId) } }),
       "customFields": {
         "c": {
           "incident_source_country": { "id": country },
@@ -170,13 +231,13 @@ class EmailModal extends Component {
     });
   }
   renderIssues = (issue, index) => {
-    const [ id, q, catId, parentId, orderRelated ] = this.props.allIssueData[issue];
-    const issueObj = {id, q, catId, parentId, orderRelated};
+    const [id, q, catId, parentId, orderRelated] = this.props.allIssueData[issue];
+    const issueObj = { id, q, catId, parentId, orderRelated };
     const isSelected = this.state.selectedIssue.id === id;
     return (
       <div onClick={this.handleIssueSelect(issueObj)} key={id}
-        className={`${styles['facp']} ${styles['ht-45']} ${index !== 0 && styles['bT']} ${ isSelected && styles['highlightColor']}`}
-        dangerouslySetInnerHTML={{__html: q}}
+        className={`${styles['facp']} ${styles['ht-45']} ${index !== 0 && styles['bT']} ${isSelected && styles['highlightColor']}`}
+        dangerouslySetInnerHTML={{ __html: q }}
       />
     )
   }
@@ -186,7 +247,7 @@ class EmailModal extends Component {
     const [order_item_id] = order_item_ids;
     const isSelected = this.state.selectedOrder ? this.state.selectedOrder.order_item_ids[0] === order_item_id : false;
     return (
-      <div key={order_item_id} className={`${styles['bB']} ${ index !== undefined && isSelected && styles['highlightColor']}`} onClick={this.selectOrder(orderItemObj)}>
+      <div key={order_item_id} className={`${styles['bB']} ${index !== undefined && isSelected && styles['highlightColor']}`} onClick={this.selectOrder(orderItemObj)}>
         <div className={styles['orderItemContainer']}>
           <div className={styles['orderImgContainer']}><img className={styles['imgContain']} src={`${constants.mediaDomain}/${image_url}`} /></div>
           <div className={styles['p-10-20']}>
@@ -253,7 +314,7 @@ class EmailModal extends Component {
                     className={styles['dropDownInput']}
                   >
                     <div className={styles['dropDownArrow']}>v</div>
-                    <div dangerouslySetInnerHTML={{__html: selectedIssue ? selectedIssue.q : ''}} />
+                    <div dangerouslySetInnerHTML={{ __html: selectedIssue ? selectedIssue.q : '' }} />
                   </div>
                   <div className={dropDownType !== 'issue' ? styles['dropDownBox-close'] : styles['dropDownBox-open']}
                   >
@@ -287,7 +348,10 @@ class EmailModal extends Component {
                     onChange={this.handleMsg}
                     className={styles['ModalTextArea']}
                   />
-                </div> : null}
+                </div>
+                : null
+              }
+              <FileAttachment updateIncident={() => {}} loading={false}/>
             </div>
             {this.props.type === "email" ?
               <div
@@ -306,13 +370,13 @@ class EmailModal extends Component {
             }
           </React.Fragment>
           : <React.Fragment>
-              <div className={styles['modalTitleContainer']}>
-                <h4>Incident Created</h4>
-                <h4 className={styles['pointer']} onClick={this.props.closeModal}>X</h4>
-              </div>
-              {this.renderPostIncidentCreation()}
-              </React.Fragment>
-            }
+            <div className={styles['modalTitleContainer']}>
+              <h4>Incident Created</h4>
+              <h4 className={styles['pointer']} onClick={this.props.closeModal}>X</h4>
+            </div>
+            {this.renderPostIncidentCreation()}
+          </React.Fragment>
+        }
 
       </div>
     )
