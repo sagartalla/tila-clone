@@ -64,7 +64,7 @@ const getProductComponent = (isPreview, taskCode) => {
         } = productData;
         digitalData.page.pageInfo.pageName = titleInfo.title;
         digitalData.page.category = { primaryCategory: productData.categoryType };
-        digitalData.page.pageInfo.breadCrumbs = productData.breadcrums.map(item => item.display_name_en);
+        digitalData.page.pageInfo.breadCrumbs = productData.breadcrums ? productData.breadcrums.map(item => item.display_name_en) : [];
         this.props.track({
           eventName: 'Product Viewed',
           ProductData: productData,

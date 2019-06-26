@@ -57,7 +57,7 @@ const OrderDetails = ({ query, orderData, thankyouPage }) => {
         </Row>
         <Row className={`${styles['m-0']} ${styles['mb-40']}`}>
           <Col md={12}>
-            <div className={`${styles.box} ${styles['p-20']} ${styles['mt-20']}`}>
+            <div className={`${styles.box} ${styles['p-20']} ${styles['mt-20']} ${styles['order-conf-part']}`}>
               {orderData.orderItems.map(item => (
                 <OrderItem
                   key={item.id}

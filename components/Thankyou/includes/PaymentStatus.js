@@ -30,8 +30,8 @@ const PaymentStatus = props => {
     <Grid className={styles['pt-50']}>
       <Row className={`${styles['flex-center']} ${styles['m-0']}`}>
         <Col md={2} xs={2} sm={2}>
-          <div className={styles['pb-25']}>
-            <SVGComponent clsName={`${styles['gift-card']}`} src="icons/gift-icon/gift-icon" />
+          <div className={`${styles['pb-25']} ${styles['pt-15']} ${styles['gift-img']}`}>
+            <SVGComponent clsName={`${styles['gift-card-icon']}`} src="icons/gift-icon/gift-icon" />
           </div>
         </Col>
         <Col md={10} xs={9} sm={9}>

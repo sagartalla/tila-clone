@@ -92,7 +92,7 @@ class UserProfile extends React.Component {
                   <ProfilePic loader={this.state.loader} userInfo={userInfo} imgUrl={imgUrl} mouseOver={this.state.mouseOver}/>
               <div className={styles['profile-details']}>
                 <span className={`${styles['fs-12']} ${styles['light-gry-clr']}`}>Hello,</span>
-                <div>{name}</div>
+                <div className={`${styles['profile-name']} ${styles['fontW600']}`}>{name}</div>
               </div>
             </div>
           </a>
