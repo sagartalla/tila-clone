@@ -3,6 +3,7 @@ import { Row, Col } from 'react-bootstrap';
 import NoSSR from 'react-no-ssr';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Cookies from 'universal-cookie';
 import Terms from '../../common/terms';
 import { Modal } from 'react-router-modal';
 import Privacy from '../../common/privacy';
@@ -14,6 +15,8 @@ import ForgotPassword from '../../Login/ForgotPassword';
 import LoginFlow from '../../Login/LoginFlow';
 import { selectors, actionCreators } from '../../../store/auth';
 import { selectors as paymentSelectors } from '../../../store/payments';
+import { actionCreators as personalActionCreators, selectors as camSelectors } from '../../../store/cam/personalDetails';
+
 
 
 import lang from '../../../utils/language';
@@ -28,6 +31,7 @@ const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...s
 
 const { PAYMENT_PAGE, CONTACT_INFO_MODAL, LOGIN_PAGE } = languageDefinations();
 
+const cookies = new Cookies();
 class SignIn extends Component {
   constructor(props) {
     super(props);
@@ -39,6 +43,9 @@ class SignIn extends Component {
 
     this.tcToggle = this.tcToggle.bind(this);
     this.privacyToggle = this.privacyToggle.bind(this);
+  }
+  componentDidMount() {
+    this.props.getUserInfoData();
   }
 
   tcToggle() {
@@ -55,24 +62,24 @@ class SignIn extends Component {
 
 
   render() {
+    debugger;
     const { props } = this;
     const { showTerms, showPrivacy, showFP } = this.state;
-    console.log('showCheckoutLogin', props.showCheckoutLogin);
-    console.log('showLoginPage', props.showLoginPage);
-    console.log('props.isLoggedIn', props.isLoggedIn);
+    const login = cookies.get('userCreds');
+    console.log('loginResponse', props.loginResponse);
     return (
       <div className={`${styles.box} ${styles['mb-20']} ${styles.relative} ${styles['payment-signup']}`}>
         <SVGComponent clsName={`${styles.profile} ${props.configJson.done ? 'done' : ''} ${props.configJson.progress ? 'payment-active' : ''}`} src="icons/profile/profile" />
         {
-       !props.showCheckoutLogin && (props.activeEmailId || props.login.username) && !props.showLogout &&
+       !props.showCheckoutLogin && (props.loginResponse && props.loginResponse.email) && !props.showLogout &&
        <Row>
           <Col md={8} sm={12} xs={12}>
             <h4 className={styles['m-0']}>{`${PAYMENT_PAGE.YOU_ARE_SIGNED_IN_AS}`}</h4>
-            <small>{props.activeEmailId || props.login.username}</small>
+            <small>{(props.loginResponse && props.loginResponse.email)}</small>
           </Col>
-          {(props.activeEmailId || props.login.username) &&
+          {(props.loginResponse && props.loginResponse.email) &&
           <Col md={4} sm={12} xs={12} className={styles['t-rt']}>
-            <span className={`${styles['light-gry-clr']} ${styles.fontW600}`}>{props.activeEmailId || props.login.username}&emsp;</span>
+            <span className={`${styles['light-gry-clr']} ${styles.fontW600}`}>{(props.loginResponse && props.loginResponse.email)}&emsp;</span>
             <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['left-radius']} ${styles.pointer}`} onClick={props.onClickEdit}>
               {PAYMENT_PAGE.CHANGE}
             </button>
@@ -85,7 +92,7 @@ class SignIn extends Component {
             <div className={`${styles['continue-checkout']}`}>
               <div>
                 <div>Logged in as</div>
-                <div className={`${styles.fontW600} ${styles['mt-10']}`}>{props.activeEmailId || props.login.username}</div>
+                <div className={`${styles.fontW600} ${styles['mt-10']}`}>{props.loginResponse && props.loginResponse.email}</div>
               </div>
               <Button
                 className={`${styles['flex-center']} ${styles.width50} ${styles['fs-14']} ${styles['text-uppercase']} ${styles['button-radius']}`}
@@ -105,9 +112,12 @@ class SignIn extends Component {
 const mapStateToProps = store => ({
   showLoginPage: selectors.showLogin(store),
   showCheckoutLogin: selectors.showCheckoutLogin(store),
+  loginResponse: selectors.loginResponse(store),
+  // profileInfo: camSelectors.getUserInfo(store),
 });
 const mapDispatchToProps = dispatch => bindActionCreators(
   {
+    getUserInfoData: actionCreators.getUserInfoData,
   },
   dispatch,
 );

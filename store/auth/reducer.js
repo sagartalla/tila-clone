@@ -24,6 +24,7 @@ const initialState = {
     domainCountries: [],
     showLoginScreen: false,
     showResetScreen: true,
+    loginResponse: {},
   },
   error: '',
   v2: {
@@ -109,7 +110,7 @@ const authReducer = typeToReducer({
     FULFILLED: (state, action) => {
       let active;
       let { currentFlow } = state.v2;
-      console.log('currentFlow', currentFlow);
+      const { data } = state;
       if (action.payload.data.email_verified === 'NV') {
         active = pageFlows[currentFlow]['verify_email'];
       } else {
@@ -126,8 +127,10 @@ const authReducer = typeToReducer({
         },
         data: {
           ...state.data,
+          isLoggedIn: (currentFlow === '' || currentFlow === 'existing_social_user') ? true : (action.payload.data.email_verified === 'V' ? true : false),       
           userInfoData: action.payload && action.payload.data,
           showLoginScreen: window.location.href.split('/')[5] === 'payment' ? false : !!(action.payload && action.payload.data.email_verified === 'NV'),
+          loginResponse: action.payload.data,
         },
         v2: {
           ...state.v2,
@@ -154,29 +157,27 @@ const authReducer = typeToReducer({
         active = pageFlows.not_accessable_social_user.social_login;
         currentFlow = 'not_accessable_social_user';
       }
-      console.log('asasasasasas', currentFlow);
-    return Object.assign({}, state, {
-      data: {
-        ...state.data,
-        ...action.payload.data,
-        isLoggedIn: (currentFlow === '' || currentFlow === 'existing_social_user') ? true : (action.payload.data.data.email_verified === 'V' ? true : false),
-        loginResponse: action.payload.data,
+      return Object.assign({}, state, {
+        data: {
+          ...state.data,
+          ...action.payload.data,
+        // loginResponse: action.payload.data,
         // showLoginScreen: action.payload.data.data.email_verified === 'V' ? false : true,
-      },
-      ui: {
-        ...state.ui,
-        loginLoading: false,
-        showLogin: false,
-        loading: false,
+        },
+        ui: {
+          ...state.ui,
+          loginLoading: false,
+          showLogin: false,
+          loading: false,
         // showCheckoutLogin: true,
-      },
-      v2: {
-        ...state.v2,
-        active,
-        currentFlow,
-      },
-    });
-  },
+        },
+        v2: {
+          ...state.v2,
+          active,
+          currentFlow,
+        },
+      });
+    },
     REJECTED: (state, action) => {
       const messege = action.payload.response ? ({ 403: 'username/password did not match' }[action.payload.response.status]) : '';
       return Object.assign({}, state, {
@@ -443,7 +444,6 @@ const authReducer = typeToReducer({
   [actions.VERIFY_EMAIL]: {
     PENDING: state => Object.assign({}, state, { ui: { ...state.ui, loading: true, showEmailVerificationScreen: true } }),
     FULFILLED: (state, action) => {
-      console.log('v2', state.v2);
       const { v2, ui } = state;
       if (action && action.payload && action.payload.data && action.payload.data.Response === 'SUCCESS') {
         v2.active = pageFlows[state.v2.currentFlow][state.v2.active.nextPage];

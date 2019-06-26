@@ -14,7 +14,6 @@ import { languageDefinations } from '../../utils/lang';
 // import LoginPage from './LoginPage';
 // import SignIn from './SignIn';
 import ThankYou from './ThankYouPage';
-// import CompleteSignUp from './CompleteSignUp';
 // import ExistingSocialLogin from './ExistingSocialLogin';
 // import ResetpasswordMain from './ResetpasswordMain';
 import LoginFlow from './LoginFlow';
@@ -271,7 +270,7 @@ class Login extends Component {
 
 const mapStateToProps = store => ({
   // error: selectors.getErrorMessege(store),
-  // userCreds: selectors.getUserCreds(store),
+  userCreds: selectors.getUserCreds(store),
   // showEmailScreen: selectors.showEmailVerificationScreen(store),
   // loading: selectors.getLoginProgressStatus(store),
   // loadingStatus: selectors.getLoadingStatus(store),

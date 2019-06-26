@@ -15,6 +15,7 @@ import lang from '../../utils/language';
 import Country from '../../components/HeaderBar/includes/Country';
 import countriesData from '../../constants/countries';
 import FormValidator from '../common/FormValidator';
+import months from './constants';
 import main_en from '../../layout/main/main_en.styl';
 import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './login_en.styl';
@@ -55,7 +56,6 @@ class ContinueLogin extends Component {
       validation: this.validations.valid(),
       errorMsg: '',
       showDobError: false,
-      months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
     };
     this.onChangeCity = this.onChangeCity.bind(this);
     this.selectCityFromSuggesstions = this.selectCityFromSuggesstions.bind(this);
@@ -64,6 +64,24 @@ class ContinueLogin extends Component {
     const { getCitiesByCountryCode } = this.props;
     getCitiesByCountryCode(cookies.get('country'));
     // this.daysInMonth(moment().month());
+    const minYear = 1900;
+    const maxYear = new Date().getFullYear() - 18;
+    const newYear = [];
+    for (let i = minYear; i <= maxYear; i += 1) {
+      newYear.push(i);
+      this.setState({
+        newYear,
+      });
+    }
+    const defaultMonth = 'Jan';
+    const numberOfdays = [];
+    const count = moment().month(defaultMonth).daysInMonth();
+    for (let i = 1; i < count + 1; i += 1) {
+      numberOfdays.push(moment().month(defaultMonth).date(i).format('DD'));
+    }
+    this.setState({
+      numberOfdays,
+    });
   }
 
   onChangeCity(e) {
@@ -138,22 +156,23 @@ class ContinueLogin extends Component {
   dobSelect = (e) => {
     let { day, month, year } = this.state;
     const id = e.currentTarget.getAttribute('data-id');
+    const mon = e.currentTarget.getAttribute('data-month') || 'Jan';
     const val = e.currentTarget.getAttribute('data-val');
-    // if (id === 'month') {
-    //   const numberOfdays = [];
-    //   month = val;
-    //   day = '';
-    //   const count = moment().month(val).daysInMonth();
-    //   for (let i = 1; i < count + 1; i += 1) {
-    //     numberOfdays.push(moment().month(val).date(i).format('DD'));
-    //   }
-    //   this.setState({
-    //     numberOfdays,
-    //   });
-    // }
+    if (id === 'month') {
+      const numberOfdays = [];
+      month = mon;
+      day = '';
+      const count = moment().month(mon).daysInMonth();
+      for (let i = 1; i < count + 1; i += 1) {
+        numberOfdays.push(moment().month(mon).date(i).format('DD'));
+      }
+      this.setState({
+        numberOfdays,
+        monthVal: val,
+      });
+    }
     if (id === 'day') day = val;
     if (id === 'year') year = val;
-    if (id === 'month') month = val;
     this.setState({
       day,
       month,
@@ -175,6 +194,7 @@ class ContinueLogin extends Component {
       day,
       month,
       year,
+      monthVal,
       mobile_no,
       mobile_country_code,
     } = this.state;
@@ -198,7 +218,7 @@ class ContinueLogin extends Component {
 
     const validation = this.validations.validate(this.state);
     if (validation.isValid) {
-      const body = Object.assign({}, data, { mobile_no }, { mobile_country_code }, { dob: `${year === '' ? '1900' : year}-${month}-${day}` });
+      const body = Object.assign({}, data, { mobile_no }, { mobile_country_code }, { dob: `${year === '' ? '1900' : year}-${monthVal}-${day}` });
       shippingAccount(body).then(() => {
         v2NextPage();
       });
@@ -211,15 +231,17 @@ class ContinueLogin extends Component {
   render() {
     const {
       gender, city, mobile_no, mobile_country_code, validation, data, day,
-      month, year, showDobError, errorMsg, numberOfdays, months,
+      month, year, showDobError, errorMsg, numberOfdays, newYear,
     } = this.state;
     const { getAllCities } = this.props;
+    console.log('newYear', newYear);
     return (
       <div className={`${styles['complete-login']} ${styles.flex} ${styles['justify-between']} ${styles['flex-colum']}`}>
         <div>
           <h3 className={`${styles['fs-18']} ${styles['ff-b']}`}>{LOGIN_PAGE.ALMOST_DONE}</h3>
           <div className={`${styles['thick-gry-clr']} ${styles['fs-12']}`}>{LOGIN_PAGE.CUSTOMIZE_TILA_EXPERIANCE}</div>
         </div>
+        <form onSubmit={this.submit}>
         <Row className={`${styles.flex} ${styles['justify-between']}`}>
           <Col md={6}>
             <div className={` ${styles['text-lgt-gray']} ${styles['fs-12']}`}>{LOGIN_PAGE.MOBILE_NUMBER}</div>
@@ -242,6 +264,7 @@ class ContinueLogin extends Component {
               <input
                 type="text"
                 name="mobile_no"
+                autoComplete="off"
                 value={mobile_no}
                 onBlur={this.handleValidation}
                 onChange={this.handleMobileNumber}
@@ -261,6 +284,7 @@ class ContinueLogin extends Component {
               <Dropdown.Toggle id="dropdown-custom-components">
                 <input
                   type="text"
+                  autoComplete="off"
                   value={data.shipping_city}
                   className={`${styles['fs-14']}`}
                   onChange={this.onChangeCity}
@@ -278,7 +302,7 @@ class ContinueLogin extends Component {
             </Dropdown>
           </Col>
         </Row>
-        <Row>
+        <Row className={`${styles['mt-30']}`}>
           <Col md={6}>
             <div className={`${styles['fs-12']}`}>{LOGIN_PAGE.DATE_OF_BIRTH}</div>
             <div className={`${styles.flex} ${styles['mt-10']}`}>
@@ -289,6 +313,8 @@ class ContinueLogin extends Component {
                     <input
                       type="text"
                       name="day"
+                      readOnly
+                      autoComplete="off"
                       value={day}
                       onChange={this.handleInputChange('day')}
                       placeholder="DD"
@@ -296,7 +322,7 @@ class ContinueLogin extends Component {
                     />
                   </Dropdown.Toggle>
                   <Dropdown.Menu id="country_toggle" className={`${styles['p-0']} ${styles['m-0']} ${styles['auto-suggestions-list']}`}>
-                    {[2, 3].map((value, index) => (
+                    {numberOfdays && numberOfdays.length > 0 && numberOfdays.map((value, index) => (
                       <MenuItem data-id="day" data-val={value} onClick={this.dobSelect} onFocus={this.mouseOver} eventKey={index + 1} key={value.city_name}>
                         <a className={`${styles['black-color']}`}>
                           <span>{value}</span>
@@ -313,6 +339,8 @@ class ContinueLogin extends Component {
                     <input
                       type="text"
                       name="month"
+                      readOnly
+                      autoComplete="off"
                       value={month}
                       placeholder="MM"
                       onChange={this.handleInputChange('month')}
@@ -321,9 +349,9 @@ class ContinueLogin extends Component {
                   </Dropdown.Toggle>
                   <Dropdown.Menu id="country_toggle" className={`${styles['p-0']} ${styles['m-0']} ${styles['auto-suggestions-list']}`}>
                     {months.map((value, index) => (
-                      <MenuItem data-id="month" data-val={value} onClick={this.dobSelect} onFocus={this.mouseOver} eventKey={index + 1} key={value.city_name}>
+                      <MenuItem data-id="month" data-month={value.month} data-val={value.value} onClick={this.dobSelect} onFocus={this.mouseOver} eventKey={index + 1} key={value.city_name}>
                         <a className={`${styles['black-color']}`}>
-                          <span>{value}</span>
+                          <span>{value.month}</span>
                         </a>
                       </MenuItem>))
                     }
@@ -336,6 +364,8 @@ class ContinueLogin extends Component {
                   <Dropdown.Toggle id="dropdown-custom-components">
                     <input
                       type="text"
+                      autoComplete="off"
+                      readOnly
                       value={year}
                       placeholder="YYYY"
                       onChange={this.handleInputChange('year')}
@@ -343,7 +373,7 @@ class ContinueLogin extends Component {
                     />
                   </Dropdown.Toggle>
                   <Dropdown.Menu id="country_toggle" className={`${styles['p-0']} ${styles['m-0']} ${styles['auto-suggestions-list']}`}>
-                    {[2018, 2019].map((value, index) => (
+                    {newYear && newYear.length > 0 && newYear.map((value, index) => (
                       <MenuItem data-id="year" data-val={value} onClick={this.dobSelect} onFocus={this.mouseOver} eventKey={index + 1} key={value.city_name}>
                         <a className={`${styles['black-color']}`}>
                           <span>{value}</span>
@@ -374,6 +404,7 @@ class ContinueLogin extends Component {
             </div>
           </Col>
         </Row>
+        </form>
         <Button
           className={`${styles['flex-center']}  ${styles.width100} ${styles['fs-14']} ${styles['text-uppercase']} ${styles['button-radius']}`}
           btnText={LOGIN_PAGE.COMPLETE_SIGN_UP}

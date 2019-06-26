@@ -376,7 +376,7 @@ class Payments extends React.Component {
           <Row>
             <Col md={9} xs={12} sm={12} className={`${styles['pl-30']}`}>
               <SignIn
-                login={isLoggedIn ? login : ''}
+                // login={isLoggedIn ? login : ''}
                 signInLoader={signInLoader}
                 showAddressTab={this.showAddressTab}
                 inputOnChange={this.inputOnChange}
@@ -466,7 +466,7 @@ const mapStateToprops = store => ({
   isLoggedIn: authSelectors.getLoggedInStatus(store),
   signInLoader: authSelectors.getLoginProgressStatus(store),
   selectedAddress: addressSelectors.getSelectedAddress(store),
-  activeEmailId: authSelectors.getActiveEmailId(store),
+  // activeEmailId: authSelectors.getActiveEmailId(store),
 });
 
 const mapDispatchToProps = dispatch =>

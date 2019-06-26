@@ -19,7 +19,6 @@ const getLanguage = (store) => {
 };
 
 const getLoggedInStatus = (store) => {
-  console.log('store.authReducer.data.isLoggedIn', store.authReducer.data.isLoggedIn);
   return store.authReducer.data.isLoggedIn;
 };
 
@@ -28,7 +27,6 @@ const getInstaCode = (store) => {
 };
 
 const getUserCreds = (store) => {
-  console.log('store.authReducer.data.userCreds', store.authReducer.data.userCreds);
   return store.authReducer.data.userCreds;
 };
 
@@ -49,7 +47,6 @@ const showEmailVerificationScreen = (store) => {
 };
 
 const getUserInfo = (store) => {
-  console.log(store.authReducer.data.userInfoData);
   return store.authReducer.data.userInfoData;
 };
 
@@ -97,7 +94,9 @@ const getLastLogin = store => store.authReducer.v2.data.last_social_login_used;
 
 const showCheckoutLogin = store => (store.authReducer.data.isLoggedIn ? false : store.authReducer.ui.showCheckoutLogin);
 
-const loginResponse = store => store.authReducer.data.loginResponse;
+const loginResponse = (store) => {
+  return store.authReducer.data.loginResponse;
+}
 
 export {
   getErrorMessege, getCountry, getLoggedInStatus, getInstaCode, getUserCreds, getDeliveryCity, getDomainCountries,

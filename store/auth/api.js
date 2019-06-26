@@ -35,7 +35,7 @@ const userLogin = params =>
   })).then(({ data, status }) => {
     console.log('api', data);
     // cart merge
-    if (status === 200) {
+    if (status === 200 || status === 202) {
       const { username } = params.metadata;
       if (params.channel === 'BASIC_REGISTER') {
         track('SignUp', 'Success');
@@ -74,6 +74,7 @@ const userLogin = params =>
         return data;
       });
     }
+    // return data;
   })
   // .catch((err) => {
   //   err.response && alert(err.response.data.data.error.message);

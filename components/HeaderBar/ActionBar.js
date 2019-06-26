@@ -94,11 +94,11 @@ class ActionBar extends Component {
       loginClicked: false,
     });
 
-    // if (nextProps && nextProps.activeObj && nextProps.activeObj.nextPage === null) {
-    //   setTimeout(() => {
-    //     closeThankYouScreen();
-    //   }, 3000);
-    // }
+    if (nextProps && nextProps.activeObj && nextProps.activeObj.nextPage === null) {
+      setTimeout(() => {
+        closeThankYouScreen();
+      }, 3000);
+    }
 
     if (nextProps.isLoggedIn) {
       if (nextProps.ptaToken) {

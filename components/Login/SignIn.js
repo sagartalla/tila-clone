@@ -18,7 +18,7 @@ import styles_ar from './login_ar.styl';
 
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
-const { LOGIN_PAGE, HEADER_PAGE } = languageDefinations();
+const { LOGIN_PAGE, HEADER_PAGE, CONTACT_INFO_MODAL } = languageDefinations();
 
 /* eslint- disable */
 class SignIn extends Component {
@@ -161,6 +161,7 @@ class SignIn extends Component {
           metadata: {
             username: activeEmailId,
             password,
+            promotional_notification,
           },
           rememberMe: false,
         };
@@ -220,12 +221,12 @@ class SignIn extends Component {
         <div className={`${styles.flex}`}>
           <h3 className={`${styles['fs-18']} ${styles['mt-0']} ${styles['mb-0']} ${styles['ff-b']}`}>
             {mode === 'EXISTING_USER' ?
-              'Hi, Welcome Back!' :
-              mode === 'NEW_USER' ? 'Hi, New to Tila?' : 'Glad to have you here.' }
+              LOGIN_PAGE.SOCIAL_LOGIN_WELCOME :
+              mode === 'NEW_USER' ? LOGIN_PAGE.NEW_TO_TILA : LOGIN_PAGE.GLAD_TO_HAVE_YOU_HERE }
           </h3>
-          {mode !== 'SOCIAL_LOGIN' && <div className={`${styles['ml-20']} ${styles['fs-12']} ${styles['pl-10']} ${styles['pr-10']} ${styles.fontW600} ${styles['edit-button']} ${styles['border-radius2']} ${styles.pointer}`} onClick={this.goToPreviousPage}>EDIT</div>}
+          {mode !== 'SOCIAL_LOGIN' && <div className={`${styles['ml-20']} ${styles['fs-12']} ${styles['pl-10']} ${styles['pr-10']} ${styles.fontW600} ${styles['edit-button']} ${styles['border-radius2']} ${styles.pointer}`} onClick={this.goToPreviousPage}>{CONTACT_INFO_MODAL.EDIT}</div>}
           </div>       
-          <div className={`${styles['light-gry-clr']} ${styles['fs-12']}`}>{mode === 'SOCIAL_LOGIN' ? 'Pls provide email ID to receive registration confirmation.' : activeEmailId}</div>
+          <div className={`${styles['light-gry-clr']} ${styles['fs-12']}`}>{mode === 'SOCIAL_LOGIN' ? LOGIN_PAGE.PLEASE_PROVIDE_EMAIL_ID_FOR_REGISTRATION : activeEmailId}</div>
         </div>
         {mode !== 'SOCIAL_LOGIN' &&
         <div className={mode === 'EXISTING_USER' ? `${styles['login-show']}` : `${styles['signup-show']}`}>
