@@ -17,6 +17,8 @@ import styles_ar from './help_ar.styl';
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 import constants from '../../constants';
+import { toast } from 'react-toastify';
+import ToastContent from '../common/ToastContent';
 
 
 const cookies = new Cookies();
@@ -105,7 +107,7 @@ class EmailModal extends Component {
     const order_number = this.state.selectedOrder ? `${baseCustomObjectUrl}.order_number/${this.state.selectedOrder.order_item_ids[0]}` : '';
     const countryCode = `${baseCustomObjectUrl}.incident_source_country/${country}`;
     const languageCode = `${baseCustomObjectUrl}.incident_source_language/${language}`;
-    const categoryCode = this.state.selectedIssue.category ? `/Incident.Category/${Number(this.state.selectedIssue.category)}` : '';
+    const categoryCode = this.state.selectedIssue.catId ? `/Incident.Category/${Number(this.state.selectedIssue.catId)}` : '';
     const chatURL = `${baseURL}${firstName}${lastName}${email}${categoryCode}${order_number}${countryCode}${languageCode}`;
     window.open(chatURL, '_blank');
   }
@@ -149,10 +151,21 @@ class EmailModal extends Component {
       }
     }
     this.props.raiseTicket(param, serverData).then(res => {
+      const { pathname } = window.location;
+      const incidentsURL = pathname.replace(this.props.query, `incidents#${this.state.incidentId}`)
       this.setState({
-        incidentCreated: true,
+        incidentCreated: false,
         referenceNumber: res.value.data.referenceNumber,
         incidentId: res.value.data.id
+      }, () => {
+        this.props.closeModal();
+        toast(
+          <ToastContent
+            msg={`Your query has been successfully created with reference - ${this.state.referenceNumber}. We will get back to you within 48 hrs`}
+            msgType='success'
+          />,
+          { autoClose: 5000 }
+        )
       })
     });
   }
@@ -248,7 +261,7 @@ class EmailModal extends Component {
                   </div>
                 </div>
               </div>
-              {selectedIssue && selectedIssue.orderRelated ?
+              {selectedIssue && selectedIssue.orderRelated && this.props.isLoggedIn ?
                 <div className={styles['pV-20']}>
                   <div className={styles['formLabel']}>Select an Order</div>
                   <div className={styles['relative']}>
