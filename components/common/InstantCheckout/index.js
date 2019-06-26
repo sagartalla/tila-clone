@@ -229,6 +229,7 @@ class InstantCheckout extends Component {
                       <Fragment>
                         <AddrCard
                           selectedAddr={selectedAddr}
+                          addressResults={addressResults}
                           toggleMiniAddress={this.toggleMiniAddress}
                         />
                         {
@@ -250,6 +251,7 @@ class InstantCheckout extends Component {
                         <VaultCard
                           defaultCard={defaultCard}
                           updateCVV={this.updateCVV}
+                          vaultResults={vaultResults}
                           toggleMiniVault={this.toggleMiniVault}
                         />
                         {

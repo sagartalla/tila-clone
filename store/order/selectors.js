@@ -73,42 +73,47 @@ const getOrderDetails = (store) => {
 
 const getOrderIssue = (store) => {
   return store.singleOrderReducer.data.orderIssue;
-}
+};
 const getOrderInfo = (store) => {
-  return store.singleOrderReducer.data.orderDetails
-}
+  return store.singleOrderReducer.data.orderDetails;
+};
 const getCancelStatus = (store) => {
   return store.singleOrderReducer.data.orderIssue.cancelStatus;
-}
+};
 
 const getErrorMessege = (store) => {
   return store.singleOrderReducer.error;
-}
+};
 
 const getLoadingStatus = (store) => {
   return store.singleOrderReducer.ui.loading;
-}
+};
 
-const getSelectedOrder = (store) => (orderItemId) => {
-  const item = store.singleOrderReducer.data.orderDetails.order_items.find((el,key) => {
-    return el.order_item_ids[0] === orderItemId
-  })
-  // const item = _.find([ 'order_item_ids',orderItemId ], store.singleOrderReducer.data.orderDetails.order_items);
-
-  var itemObj = {
+const getSelectedOrder = store => (orderItemId) => {
+  const item = store.singleOrderReducer.data.orderDetails.order_items.find((el) => {
+    return el.order_item_ids[0] === orderItemId;
+  });
+  const itemObj = {
     id: item.order_item_ids[0],
     img: item.variant_info.image_url,
     name: item.variant_info.title,
     item_tracking_id: item.item_tracking_id || shortid.generate(),
-    status: item.external_status
-  }
-  return itemObj
+    status: item.external_status,
+    item,
+  };
+  return itemObj;
+};
 
-}
+// const getSelectedOrderItem = store => (orderItemId) => {
+//   const item = store.singleOrderReducer.data.orderDetails.order_items.find((el) => {
+//     return el.order_item_ids[0] === orderItemId;
+//   });
+// }
+
 
 const getReturnStatus = (store) => {
   return store.singleOrderReducer.data.orderIssue.returnStatus;
-}
+};
 
 const getExchangeOptions = (store) => {
   const orderData = store.singleOrderReducer.data.orderIssue;
@@ -144,7 +149,7 @@ const getExchangeOptions = (store) => {
           name: displayString,
           attrValues: newValues,
         }
-      }
+      };
     }, attributeMap);
     return acc;
   }, {});
