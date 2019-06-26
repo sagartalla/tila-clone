@@ -1,0 +1,24 @@
+@font-face {
+  font-family:"ProximaNova-Bold";
+  src: url("/static/vendor/fonts_ar/NeoSansArabic-Black.ttf");
+}
+
+@font-face {
+  font-family: "ProximaNova-SBold";
+  src: url("/static/vendor/fonts_ar/NeoSansArabic-Black.ttf");
+}
+
+@font-face {
+  font-family: "ProximaNova-Light";
+  src: url("/static/vendor/fonts_ar/NeoSansArabic-Light.ttf");
+}
+
+@font-face {
+  font-family: "ProximaNova";
+  src: url("/static/vendor/fonts_ar/NeoSansArabic-Medium.ttf");
+}
+
+@font-face {
+  font-family: "ProximaNova-Thin";
+  src: url("/static/vendor/fonts_ar/NeoSansArabic-Light.ttf");
+}
