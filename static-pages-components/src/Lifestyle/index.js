@@ -68,7 +68,7 @@ const Lifestyle = () => (
           </Col>
           <Col md={1} className={`${styles['pl-0']} ${styles['pr-10']}`}>
             <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon`}>
-              <SVGComponent clsName="poular-cat2" src="icons/landing-page-lifestyle/sports-ball" />
+              <SVGComponent clsName="poular-cat2" src="icons/landing-page-lifestyle/sports-gloves" />
               <span className={`${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}`}>Sports</span>
             </div>
           </Col>
@@ -86,8 +86,8 @@ const Lifestyle = () => (
           </Col>
           <Col md={1} className={`${styles['pl-0']} ${styles['pr-10']}`}>
             <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon`}>
-              <SVGComponent clsName="poular-cat" src="icons/landing-page-lifestyle/health" />
-              <span className={`${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}`}>Health Care</span>
+              <SVGComponent clsName="poular-cat" src="icons/landing-page-lifestyle/kitchen-dining" />
+              <span className={`${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}`}>kitchen & dining</span>
             </div>
           </Col>
           <Col md={1} className={`${styles['pl-0']} ${styles['pr-10']}`}>
