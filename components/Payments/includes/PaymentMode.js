@@ -186,9 +186,9 @@ class PaymentMode extends Component {
     return (
       <div className={`${styles['payment-mode-prt']} ${styles['box']} ${styles['mb-20']} ${styles['relative']}`}>
         <SVGComponent clsName={`${styles['payment-icon']} ${props.configJson.progress ? 'payment-active' : ''}`} src="icons/payment-icon/payment-icon" />
-        <Row className={`${props.configJson.basic ? '' : 'hide'}`}>
+        <Row className={`${props.configJson.basic ? '' : 'hide'} ${styles['pt-15']} ${styles['pb-15']}`}>
           <Col md={12} sm={12} xs={12}>
-            <h4 className={styles['m-0']}>{PAYMENT_PAGE.MAKE_PAYMENT}</h4>
+            <h4 className={`${styles['m-0']}`}>{PAYMENT_PAGE.MAKE_PAYMENT}</h4>
             <p className={styles['mb-0']}>
               <small>{PAYMENT_PAGE.PAYMENT_MODE}</small>
             </p>
@@ -198,13 +198,13 @@ class PaymentMode extends Component {
           {
             props.data && props.data.orderRes ?
               <div>
-                <h4 className={`${styles['m-0']} ${styles['mb-10']}`}>{PAYMENT_PAGE.MAKE_PAYMENT}</h4>
                 {
                   Object.keys(props.paymentModesData.paymentModes).length
                     ?
                       <Row>
-                        <Col md={3} sm={12} xs={12} className={styles['payment-mode-inn']}>
-                          <ul className={` ${styles['pay-menu']} ${styles['m-0']} ${styles['pl-5']} ${styles['pt-5']}`}>
+                        <Col md={3} sm={12} xs={12} className={`${styles['payment-mode-inn']} ${styles['pt-15']} ${styles['pb-20']}`}>
+                          <h4 className={`${styles['m-0']} ${styles['mb-10']} ${styles['pb-20']} ${styles['pt-5']} ${styles['fontW600']}`}>{PAYMENT_PAGE.MAKE_PAYMENT}</h4>
+                          <ul className={` ${styles['pay-menu']} ${styles['m-0']} ${styles['pl-5']} ${styles['pb-5']} ${styles['pt-5']}`}>
                             {
                               _.map(props.paymentModesData.paymentModes, (val, key) => {
                                 return (
@@ -218,7 +218,7 @@ class PaymentMode extends Component {
                             }
                           </ul>
                         </Col>
-                        <Col md={9} sm={12} xs={12} className={styles['m-pd-0']}>
+                        <Col md={9} sm={12} xs={12} className={`${styles['m-pd-0']} ${styles['pr-0']}`}>
                           {
                             _.map(props.paymentModesData.paymentModes, (val, key) => {
                               const Page = paymentPageConfig[val.type];
@@ -254,7 +254,7 @@ class PaymentMode extends Component {
                 }
 
               </div>
-              : <div>{PAYMENT_PAGE.LOADING}</div>
+              : <div className={styles['p-15']}>{PAYMENT_PAGE.LOADING}</div>
           }
         </div>
       </div>

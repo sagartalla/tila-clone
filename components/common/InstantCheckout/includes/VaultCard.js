@@ -9,12 +9,12 @@ import styles_ar from '../instant_ar.styl';
 
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
-const VaultCard = props => {
-  const { defaultCard, toggleMiniVault, updateCVV } = props;
+const VaultCard = (props) => {
+  const { defaultCard, toggleMiniVault, updateCVV, vaultResults } = props;
   return (
-    <div className={`${styles['p-10-20']} ${styles['border-b']} ${styles['instant-check-list-inn']}`} onClick={toggleMiniVault}>
+    <div className={`${styles['p-10-20']} ${styles['border-b']} ${styles.relative} ${vaultResults.length > 1 && styles['instant-check-list-inn']}`} onClick={toggleMiniVault}>
       <h5 className={`${styles['mt-5']} ${styles['mb-5']} ${styles['card-number']}`}>{defaultCard[0].masked_number.replace(/(.{4})/g, '$1 ')}</h5>
-      <div className={`${styles['flx-space-bw']} ${styles['fs-12']} ${styles['label-gry-clr']}`}>
+      <div className={`${styles['flx-space-bw']} ${styles['fs-12']} ${styles['thick-gry-clr']}`}>
         <span>{defaultCard[0].holder_name}</span> <span>{defaultCard[0].expiry_month}/{defaultCard[0].expiry_year}</span>
       </div>
       {/* <div><input type="password" placeholder="Enter CVV" onChange={updateCVV} style={{ width: '100px' }} /></div> */}

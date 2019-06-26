@@ -147,7 +147,6 @@ const savePtaToken = ptaToken => axios.post('/api/setCookie', {
     ptaToken,
   },
 }).then(() => ptaToken);
-
 const verifyEmail = body => axios.put(`${constants.CMS_API_URL}/api/v1/verification/email/otp`, body).then(({ data }) => {
   toast(
     <ToastContent
@@ -176,57 +175,7 @@ const setVerfied = isVerified => axios.post('/api/setCookie', {
 
 const getDomainCountries = () => axios.get(`${constants.TRANSFORMER_API_URL}/fpts/domainCurrencyMapping`);
 
-
-// New Registration Flow API's
-
-const v2UserLogin = email => axios.get(`${constants.CMS_API_URL}/api/v1/user?email=${email}`).then(res => Object.assign({}, res, {
-  data: {
-    ...res.data,
-    email,
-  },
-}));
-
-const showUserInfo = (param) => {
-  return axios.get(`${constants.CMS_API_URL}/api/v1/user/password/forgot?email=${param}`);
-};
-
-const resetPassword = (body) => {
-  return axios.post(`${constants.CMS_API_URL}/api/v1/user/password/reset`, body).then((data) => {
-    return data;
-  }).catch((error) => {
-    return error.response.data;
-  })
-}
-
-const forgotPassword = (body) => {
-  return axios.post(`${constants.CMS_API_URL}/api/v1/user/password/forgot`, body).then(({data}) => {
-    toast.success(API_TEXT.OTP_SENT_TO_YOUR_MAIL_ID)
-    return data;
-  }).catch((error) => {
-    return error.response.data;
-  });
-}
-
-const getMobileOtp = ( email ) => {
-  return axios.get(`${constants.CMS_API_URL}/api/v1/user/password/forgot/mobile/otp?email=${email}`).then((data) => {
-    toast.success('OTP sent to your mobile number');
-    return data;
-  }).catch((error) => {
-    return error.response.data;
-  });
-}
-
-const verifyResetOtp = (body) => {
-  return axios.post(`${constants.CMS_API_URL}/api/v1/user/password/forgot/mobile/otp`, body).then((data) => {
-    return data;
-  }).catch((error) => {
-    return error.response.data;
-  });
-}
-
-
 export default {
   userLogin, userLogout, getLoginInfo, setCountry, setSessionID, deriveCity, setCity, getDomainCountries,
   removeCity, setLanguage, savePtaToken, verifyEmail, sendOtpToEmailId, getUserInfo, setVerfied, track,
-  v2UserLogin, resetPassword, forgotPassword, showUserInfo, getMobileOtp, verifyResetOtp,
 };

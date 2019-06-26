@@ -23,7 +23,8 @@ import styles_ar from './address_ar.styl';
 
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
-
+let validCountry = null;
+let validCity = null;
 const cookies = new Cookie();
 // TODO: better handling of cookie
 const initialAddrObj = {
@@ -190,6 +191,7 @@ class ShippingAddress extends Component {
     } else if (target.name === 'country_name') {
       showCountriesData = true;
       addr.city = '';
+      addr.city_code = '';
       addr.shipping_country_code = '';
       autoCompleteCoutry(target.value);
     }
@@ -198,10 +200,20 @@ class ShippingAddress extends Component {
       showCitiesData,
       showCountriesData,
     }, () => {
-      if(this.state.isEditAddr){
-        const validation = this.validations.validate(this.state.addr);
-        this.setState({validation})
-      }
+        const validation = this.validations.validateOnBlur({[target.name]: target.value});
+        if(target.name === 'country_name' || target.name === 'city'){
+          validCountry = this.validations.validateOnBlur({'shipping_country_code': addr.shipping_country_code})
+          validCity = this.validations.validateOnBlur({'city_code': addr.city_code})
+        }
+        this.setState({
+          validation: Object.assign(
+            {},
+            this.state.validation,
+            {...validation},
+            {...validCountry},
+            {...validCity},
+          )
+        })
     }
     );
   }
@@ -223,8 +235,16 @@ class ShippingAddress extends Component {
     addr[target.getAttribute('name')] = target.getAttribute('data-id') || '';
     addr.city = target.innerHTML;
     this.setState({ addr }, () => {
+      if(addr.city_code !== ''){
+        validCity = this.validations.validateOnBlur({'city_code': addr.city_code})
+      }
       this.setState({
         showCitiesData: false,
+        validation: Object.assign(
+          {},
+          this.state.validation,
+          {...validCity}
+        )
       });
     });
   }
@@ -239,6 +259,16 @@ class ShippingAddress extends Component {
       addr,
       showCountriesData: false,
     }, () => {
+      if(addr.shipping_country_code !== ''){
+        validCountry = this.validations.validateOnBlur({'shipping_country_code': addr.shipping_country_code})
+      }
+      this.setState({
+        validation: Object.assign(
+          {},
+          this.state.validation,
+          {...validCountry}
+        )
+      })
       getCitiesByCountryCode(target.getAttribute('data-id'));
     });
   }
@@ -344,11 +374,11 @@ class ShippingAddress extends Component {
     } = this.state;
     const { DELIVERY_ADDR_PAGE } = languageDefinations();
     return (
-      <div className={`${styles['address-container']} ${standalone !== true ? '' : `${styles.box} ${styles['ml-5']}`} `}>
+      <div className={`${styles['address-container']} ${styles['pt-15']} ${standalone !== true ? '' : `${styles.box} ${styles['ml-5']}`} `}>
         {cartResults.address !== null && !cartResults.cart_shippable && (cartResults.cart_shippable !== undefined) && showNonShippable &&
         <div className={`${styles['not-shippable']} ${styles.flex} ${styles['mb-20']} ${styles['p-10']}`}>
           <Col md={2} sm={3} xs={3} className={`${styles['thick-red-clr']} ${styles.fontW600} ${styles['not-shipping-font']}`}>{DELIVERY_ADDR_PAGE.NOT_SHIPPABLE}</Col>
-          <Col md={10} sm={9} xs={9} className={`${styles['fs-12']} ${styles.fontW600}`}>{DELIVERY_ADDR_PAGE.UNFORTUNATELY_WE_CANNOT_DELIVER_REMOVE_ITEM}</Col>
+          <Col md={10} sm={9} xs={9} className={`${styles['fs-12']}`}>{DELIVERY_ADDR_PAGE.UNFORTUNATELY_WE_CANNOT_DELIVER_REMOVE_ITEM}</Col>
         </div>}
         {
           miniAddress ?
