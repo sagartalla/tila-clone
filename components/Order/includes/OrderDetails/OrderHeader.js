@@ -228,7 +228,7 @@ class OrderHeader extends Component {
                             {total_discount &&
                             <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.T_DISCOUNT} : </span><span>{'(-)'} {total_discount.display_value} {total_discount.currency_code}</span></li>}
                             {total_offer_price &&
-                            <li className={`${styles['flx-space-bw']} ${styles['b-t']}`}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.T_PRICE} : </span><span> {total_offer_price.display_value} {total_offer_price.currency_code}</span></li>}
+                            <li className={`${styles['flx-space-bw']}`}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.T_PRICE} : </span><span> {total_offer_price.display_value} {total_offer_price.currency_code}</span></li>}
                             {total_shipping &&
                             <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.T_SHIPPING} : </span><span className={styles.flex}>{total_shipping.money_value ? `(+) ${total_shipping.display_value} ${total_shipping.currency_code}` : <SVGComponent clsName={`${styles['ship-icon']}`} src="icons/free-shipping" />}</span></li>}
                             {total_gift_charges && total_gift_charges.money_value > 0 &&

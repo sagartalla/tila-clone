@@ -95,7 +95,7 @@ const AddressNew = (props) => {
             <Dropdown id="search-toggle" className={`${styles.width100}`}>
               <Dropdown.Toggle id="dropdown-custom-components">
                 <div className={`${styles['mb-0']} ${styles['fp-input']}`}>
-                  <input type="text" name="country_name" onChange={inputOnChange} value={data.country_name} autoComplete="off" className={styles.input} required />
+                  <input type="text" name="country_name" onChange={inputOnChange} value={data.country_name} autoComplete="off" className={styles.input} required autoComplete='off' />
                   <label>{DELIVERY_ADDR_PAGE.COUNTRY}</label>
                 </div>
               </Dropdown.Toggle>
@@ -130,7 +130,7 @@ const AddressNew = (props) => {
             <Dropdown disabled={!data.shipping_country_code} id="search-toggle" className={`${styles.width100}`}>
               <Dropdown.Toggle id="dropdown-custom-components">
                 <div className={`${styles['mb-0']} ${styles['fp-input']}`}>
-                  <input type="text" name="city" onChange={inputOnChange} value={data.city} className={styles.input} disabled={!data.shipping_country_code} required />
+                  <input type="text" name="city" onChange={inputOnChange} value={data.city} className={styles.input} disabled={!data.shipping_country_code} required autoComplete='off'/>
                   <label>{DELIVERY_ADDR_PAGE.CITY}</label>
                 </div>
               </Dropdown.Toggle>

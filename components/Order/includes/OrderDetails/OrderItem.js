@@ -165,7 +165,7 @@ class OrderItem extends Component {
                         <span className={styles['green-label']}>{ORDER_PAGE.EXCHANGE}</span>
                       </div>}
                     </Col>
-                    <Col md={10} className={styles['ipad-pr-0']}>
+                    <Col md={10} className={`${styles['ipad-pr-0']} ${styles['pt-15']}`}>
                       <div className={`${styles['text-wrap']}`}>
                         <Link route={`/${country}/${language}/product?productId=${product.productId}${product.variantId ? `&variantId=${product.variantId}` : ''}&catalogId=${product.catalogId}&itemType=${product.itemType}`}>
                           <a className={`${styles['width100']} ${styles['fs-14']} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
@@ -210,7 +210,7 @@ class OrderItem extends Component {
                                         <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.DISCOUNT} :</span><span>{'(-)'} {discount.display_value} {discount.currency_code}</span></li>
                                       }
                                       {offer_price &&
-                                      <li className={`${styles['flx-space-bw']} ${styles['b-t']}`}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.PRICE} :</span><span> {offer_price.display_value} {offer_price.currency_code}</span></li>}
+                                      <li className={`${styles['flx-space-bw']}`}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.PRICE} :</span><span> {offer_price.display_value} {offer_price.currency_code}</span></li>}
                                       {shipping_fees &&
                                       <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.SHIPPING} : </span><span className={styles.flex}>{shipping_fees.display_value ? `(+) ${shipping_fees.display_value} ${shipping_fees.currency_code}` : <SVGComponent clsName={`${styles['ship-icon']}`} src="icons/free-shipping" />}</span></li>}
                                       {product.gift_info && gift_charge &&
@@ -237,7 +237,7 @@ class OrderItem extends Component {
                   </div>
                   {needHelp &&
                   <a href={`/${country}/${language}/help/answers/orders#${orderId}`}>
-                    <span className={`${styles['help-position']} ${styles.absolute} ${styles['thick-blue']} ${styles['p-5']} ${styles['flex-center']} ${styles['ml-10']} ${styles.border} ${styles['border-radius4']}`}>
+                    <span className={`${styles['help-position']} ${styles.absolute} ${styles['black-color']} ${styles['p-5']} ${styles['flex-center']} ${styles['ml-10']} ${styles.border} ${styles['border-radius4']}`}>
                       <SVGComponent clsName={`${styles['help-icon']}`} src="icons/help-icon/help" />
                       &nbsp;&nbsp;{ORDERS.NEED_HELP}
                     </span>
