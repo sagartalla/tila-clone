@@ -611,7 +611,7 @@ export const EN_KEYWORDS = {
     DATE: 'Date',
     MONTH: 'Month',
     YEAR: 'Year(optional)',
-    COMPLETE_SIGN_UP: 'Complete your sign up',
+    COMPLETE_SIGN_UP: 'Update Profile',
     OTP_SENT_TO_YOUR_REGISTERED_MAIL: 'OTP sent to your registered mobile number',
     LOGIN: 'Login',
     SOCIAL_LOGIN_WELCOME: 'Hi, Welcome Back!',
@@ -621,7 +621,7 @@ export const EN_KEYWORDS = {
     PLEASE_ANSWER_SECURITY_QUESTIONS: 'Please answer the security questions below to reset the password',
     RESET_PASSWORD_BY_EMAIL: 'Reset your password by e-mail:',
     RESET_PASSWORD_BY_MOBILE: 'Reset your password by mobile OTP:',
-    SKIP_AND_CONTINUE: 'Skip and Continue',
+    SKIP_AND_CONTINUE: 'Skip',
     FACEBOOK: 'Facebook',
     GOOGLE: 'Google',
     FOR_SIGNING_UP_WITH_US: 'for Signing up with us!',
@@ -629,6 +629,7 @@ export const EN_KEYWORDS = {
     NEW_TO_TILA: 'Hi, New to Tila?',
     GLAD_TO_HAVE_YOU_HERE: 'Glad to have you here.',
     PLEASE_PROVIDE_EMAIL_ID_FOR_REGISTRATION: 'Please provide your email ID to receive your registration confirmation.',
+    INSTAGRAM: 'Instagram',
 
   },
   ORDER_PAGE: {

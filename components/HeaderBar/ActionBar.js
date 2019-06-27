@@ -122,11 +122,17 @@ class ActionBar extends Component {
 
 
   onBackdropClick(logoutRequired = false) {
+    const { activeObj, closeThankYouScreen } = this.props;
     this.props.resetLoginError();
-    this.props.resetShowLogin();
     if (logoutRequired) {
       this.props.logout();
     }
+    if (((activeObj.activePage === 'verify_email' || activeObj.activePage === 'shipping_to_page') && activeObj.nextPage === 'thank_you') || ((activeObj.activePage === 'verify_email' && activeObj.nextPage === 'shipping_to_page'))) {
+      const data = { nextPage: 'thank_you' };
+      const { v2CurrentFlow } = this.props;
+      v2CurrentFlow(data);
+    }
+    this.props.resetShowLogin();
   }
 
   getTokenCall = (socialNetwork, token) => {
@@ -325,6 +331,8 @@ const mapDispatchToProps = dispatch => bindActionCreators(
     downloadPic: personalActionCreators.downloadPic,
     showLoginScreen: actionCreators.showLoginScreen,
     closeThankYouScreen: actionCreators.closeThankYouScreen,
+    v2CurrentFlow: actionCreators.v2CurrentFlow,
+    v2NextPage: actionCreators.v2NextPage,
   },
   dispatch,
 );

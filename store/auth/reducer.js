@@ -85,8 +85,8 @@ const authReducer = typeToReducer({
   [actions.CHANGE_CURRENT_FLOW]: (state, action) => Object.assign({}, state, {
     v2: {
       ...state.v2,
-      active: pageFlows[action.payload.currentFlow][action.payload.nextPage],
-      currentFlow: action.payload.currentFlow,
+      active: pageFlows[action.payload.currentFlow ? action.payload.currentFlow : state.v2.currentFlow][action.payload.nextPage],
+      currentFlow: action.payload.currentFlow ? action.payload.currentFlow : state.v2.currentFlow,
     },
   }),
   // [actions.V2_SHOW_NEXT_PAGE]: (state) => {
@@ -105,14 +105,18 @@ const authReducer = typeToReducer({
 
   [actions.GET_USER_INFO]: {
     PENDING: state => Object.assign({}, state, {
-      ui: { ...state.ui, loading: true, showEmailVerificationScreen: false },
+      ui: {
+        ...state.ui,
+        loading: true,
+        showEmailVerificationScreen: false,
+      },
     }),
     FULFILLED: (state, action) => {
       let active;
       let { currentFlow } = state.v2;
       const { data } = state;
       if (action.payload.data.email_verified === 'NV') {
-        active = pageFlows[currentFlow]['verify_email'];
+        active = currentFlow ? pageFlows[currentFlow]['verify_email'] : '';
       } else {
         active = {
           activePage: '',
@@ -127,10 +131,9 @@ const authReducer = typeToReducer({
         },
         data: {
           ...state.data,
-          isLoggedIn: (currentFlow === '' || currentFlow === 'existing_social_user') ? true : (action.payload.data.email_verified === 'V' ? true : false),       
+          // isLoggedIn: (currentFlow === '' || currentFlow === 'existing_social_user') ? true : true,
           userInfoData: action.payload && action.payload.data,
           showLoginScreen: window.location.href.split('/')[5] === 'payment' ? false : !!(action.payload && action.payload.data.email_verified === 'NV'),
-          loginResponse: action.payload.data,
         },
         v2: {
           ...state.v2,
@@ -153,6 +156,7 @@ const authReducer = typeToReducer({
     FULFILLED: (state, action) => {
       let active;
       let { currentFlow } = state.v2;
+      console.log('action.payload.data.data.social_token', action.payload.data.data.social_token);
       if (action.payload.data.data.social_token) {
         active = pageFlows.not_accessable_social_user.social_login;
         currentFlow = 'not_accessable_social_user';
@@ -161,8 +165,10 @@ const authReducer = typeToReducer({
         data: {
           ...state.data,
           ...action.payload.data,
-        // loginResponse: action.payload.data,
-        // showLoginScreen: action.payload.data.data.email_verified === 'V' ? false : true,
+          isLoggedIn: true,
+          loginResponse: action.payload.data,
+          showCheckoutLogin: !!(action.payload && action.payload.data.email_verified === 'NV'),
+          // showLoginScreen: window.location.href.split('/')[5] === 'payment' ? false : (action.payload && action.payload.data.email_verified === 'NV' ? true : false),
         },
         ui: {
           ...state.ui,
@@ -393,8 +399,8 @@ const authReducer = typeToReducer({
   // }),
   [actions.RESET_SHOW_LOGIN]: (state) => {
     const { v2 } = state;
-    v2.active = '';
-    v2.currentFlow = '';
+    // v2.active = '';
+    // v2.currentFlow = '';
     return Object.assign({}, state, {
       v2: {
         ...state.v2,
@@ -403,8 +409,8 @@ const authReducer = typeToReducer({
       ...state,
       data: {
         ...state.data,
-        isLoggedIn: (cookies.get('isVerified') && (cookies.get('isVerified') !== 'false')),
-        showLoginScreen: false,
+        // isLoggedIn: (cookies.get('isVerified') && (cookies.get('isVerified') !== 'false')),
+        showLoginScreen: state.v2.active.activePage === 'thank_you' ? true : false,
         showResetScreen: false,
       },
       ui: {
@@ -566,6 +572,20 @@ const authReducer = typeToReducer({
     });
   },
 
+  [actions.SKIP_AND_CONTINUE]: (state) => {
+    return Object.assign({}, state, {
+      ...state,
+      data: {
+        ...state.data,
+        showCheckoutLogin: false,
+      },
+      ui: {
+        ...state.ui,
+        loading: false,
+      },
+    });
+  },
+
   [actions.ClOSE_THANKYOU_SCREEN]: (state) => {
     return Object.assign({}, state, {
       ...state,
@@ -676,6 +696,7 @@ const authReducer = typeToReducer({
       return Object.assign({}, state, {
         data: {
           ...state.data,
+          showCheckoutLogin: false,
         },
         ui: { loading: false },
       });

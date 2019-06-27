@@ -56,6 +56,7 @@ class ContinueLogin extends Component {
       validation: this.validations.valid(),
       errorMsg: '',
       showDobError: false,
+      monthVal: '',
     };
     this.onChangeCity = this.onChangeCity.bind(this);
     this.selectCityFromSuggesstions = this.selectCityFromSuggesstions.bind(this);
@@ -183,6 +184,7 @@ class ContinueLogin extends Component {
 
   skipAndContinue = () => {
     const { v2NextPage } = this.props;
+    this.props.skipAndContinue();
     v2NextPage();
   }
 
@@ -438,6 +440,7 @@ const mapDispatchToProps = dispatch => bindActionCreators(
     autoCompleteCity: actionCreators.autoCompleteCity,
     v2NextPage: authActionCreators.v2NextPage,
     shippingAccount: authActionCreators.shippingAccount,
+    skipAndContinue: authActionCreators.skipAndContinue,
   },
   dispatch,
 );

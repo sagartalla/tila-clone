@@ -62,25 +62,22 @@ class SignIn extends Component {
 
 
   render() {
-    debugger;
     const { props } = this;
     const { showTerms, showPrivacy, showFP } = this.state;
-    const login = cookies.get('userCreds');
-    console.log('loginResponse', props.loginResponse);
     return (
       <div className={`${styles.box} ${styles['mb-20']} ${styles.relative} ${styles['payment-signup']}`}>
         <SVGComponent clsName={`${styles.profile} ${props.configJson.done ? 'done' : ''} ${props.configJson.progress ? 'payment-active' : ''}`} src="icons/profile/profile" />
         {
-       !props.showCheckoutLogin && (props.loginResponse && props.loginResponse.email) && !props.showLogout &&
+       !props.showCheckoutLogin && (props.userInfoData && props.userInfoData.email) && !props.showLogout &&
        <Row>
-          <Col md={8} sm={12} xs={12}>
+          <Col md={7} sm={12} xs={12}>
             <h4 className={styles['m-0']}>{`${PAYMENT_PAGE.YOU_ARE_SIGNED_IN_AS}`}</h4>
-            <small>{(props.loginResponse && props.loginResponse.email)}</small>
+            <small>{(props.userInfoData && props.userInfoData.email)}</small>
           </Col>
-          {(props.loginResponse && props.loginResponse.email) &&
-          <Col md={4} sm={12} xs={12} className={styles['t-rt']}>
-            <span className={`${styles['light-gry-clr']} ${styles.fontW600}`}>{(props.loginResponse && props.loginResponse.email)}&emsp;</span>
-            <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['left-radius']} ${styles.pointer}`} onClick={props.onClickEdit}>
+          {(props.userInfoData && props.userInfoData.email) &&
+          <Col md={5} sm={12} xs={12} className={styles['t-rt']}>
+            <span className={`${styles['light-gry-clr']} ${styles['user-login-name']} ${styles.fontW600}`}>{(props.userInfoData && props.userInfoData.email)}&emsp;</span>
+            <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['ml-15']} ${styles['left-radius']} ${styles.pointer}`} onClick={props.onClickEdit}>
               {PAYMENT_PAGE.CHANGE}
             </button>
           </Col>
@@ -92,7 +89,7 @@ class SignIn extends Component {
             <div className={`${styles['continue-checkout']}`}>
               <div>
                 <div>Logged in as</div>
-                <div className={`${styles.fontW600} ${styles['mt-10']}`}>{props.loginResponse && props.loginResponse.email}</div>
+                <div className={`${styles.fontW600} ${styles['mt-10']}`}>{props.userInfoData && props.userInfoData.email}</div>
               </div>
               <Button
                 className={`${styles['flex-center']} ${styles.width50} ${styles['fs-14']} ${styles['text-uppercase']} ${styles['button-radius']}`}
@@ -112,7 +109,7 @@ class SignIn extends Component {
 const mapStateToProps = store => ({
   showLoginPage: selectors.showLogin(store),
   showCheckoutLogin: selectors.showCheckoutLogin(store),
-  loginResponse: selectors.loginResponse(store),
+  userInfoData: selectors.getUserInfo(store),
   // profileInfo: camSelectors.getUserInfo(store),
 });
 const mapDispatchToProps = dispatch => bindActionCreators(

@@ -42,6 +42,7 @@ const actions = {
   VERIFY_RESET_OTP: 'VERIFY_RESET_OTP',
   SHIPPING_ACCOUNT: 'SHIPPING_ACCOUNT',
   V2_PREVIOUS_PAGE: 'V2_PREVIOUS_PAGE',
+  SKIP_AND_CONTINUE: 'SKIP_AND_CONTINUE',
 };
 
 const actionCreators = {
@@ -244,7 +245,12 @@ const actionCreators = {
       payload: api.shippingAccount(body),
     });
   },
-  
+
+  skipAndContinue: () => {
+    return ({
+      type: actions.SKIP_AND_CONTINUE,
+    });
+  },
 
 };
 

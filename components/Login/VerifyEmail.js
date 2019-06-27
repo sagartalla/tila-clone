@@ -83,7 +83,7 @@ class VerifyEmail extends Component {
   }
 
   render() {
-    const { activeEmailId, loadingStatus } = this.props;
+    const { activeEmailId, loadingStatus, userInfoData } = this.props;
     const { value, otpError, seconds } = this.state;
     return (
       <div className={`${styles.width100}`}>
@@ -96,7 +96,7 @@ class VerifyEmail extends Component {
               <SVGComponent clsName={`${styles['tickmark-icon']}`} src="icons/common-icon/blue-tick" />
               <div className={`${styles['ml-10']}`}>{EMAIL_VERIFICATION.OTP_SENT}</div>
             </div>
-            <div className={`${styles['ff-b']} ${styles['fs-16']} ${styles.ellipsis} ${styles['ml-25']}`} title={activeEmailId} >{activeEmailId}</div>
+            <div className={`${styles['ff-b']} ${styles['fs-16']} ${styles.ellipsis} ${styles['ml-25']}`} title={activeEmailId} >{(userInfoData && userInfoData.email) || activeEmailId}</div>
           </div>
           <div className={`${styles.flex} ${styles['align-center']} ${styles['flex-col']}`}>
             <div>{EMAIL_VERIFICATION.ENTER_OTP}</div>
@@ -141,6 +141,7 @@ class VerifyEmail extends Component {
 const mapStateToProps = store => ({
   activeEmailId: selectors.getActiveEmailId(store),
   loadingStatus: selectors.getLoadingStatus(store),
+  userInfoData: selectors.getUserInfo(store),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(

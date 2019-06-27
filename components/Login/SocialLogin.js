@@ -36,6 +36,12 @@ class SocialLogin extends Component {
     super(props);
   }
 
+  componentDidMount() {
+    window.onload = () => {
+      this.getTokenCall('instagram', location.search.code);
+    }
+  }
+
   handleSocialLogin = (socialNetwork) => (e) => {
     switch(socialNetwork) {
       case 'google': googleAuth2 ? this.googleSignIn() : this.showErrorAlert(socialNetwork); break;

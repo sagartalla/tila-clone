@@ -90,7 +90,7 @@ const getLoginInfo = () => {
   const userCreds = cookies.get('userCreds');
   return {
     userCreds: userCreds || null,
-    isLoggedIn: !!cookies.get('auth') && (cookies.get('isVerified') === 'true'),
+    isLoggedIn: !!cookies.get('auth'),
     ...(!cookies.get('auth') && { instagramCode: window.localStorage.getItem('instagramCode') || null }),
     isVerified: cookies.get('isVerified') === 'true',
   };
