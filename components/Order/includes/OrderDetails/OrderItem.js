@@ -263,7 +263,18 @@ class OrderItem extends Component {
                 {product.gift_info &&
                   <div className={`${styles.flex} ${styles['fs-12']} ${styles.absolute} ${styles['p-5']} ${styles.right0} ${styles.top0} ${styles['thick-gry-clr']} ${styles['bg-light-gray']}`}>
                     <SVGComponent clsName={`${styles['help-icon']}`} src="icons/gift-blue" />
-                    <span className={styles['ml-5']}>{ORDER_PAGE.THIS_ORDER_CONTAINS_A_GIFT} <a>{ORDER_PAGE.VIEW_DETAILS}</a></span>
+                    <span className={`${styles['ml-5']} ${styles.flex}`}>
+                      {ORDER_PAGE.THIS_ORDER_CONTAINS_A_GIFT}
+                      <a>
+                        <span className={`${styles.relative} ${styles['tooltip']} ${styles['mr-10']} ${styles['tool-tip-parent']} ${styles['checkout-quat']} ${styles['fs-12']} ${styles['flex-center']} ${styles['justify-around']}`}>
+                          {'!'}
+                          <div className={`${styles['tool-tip']} ${styles.rightM15} ${styles['p-15']}`}>
+                            <div className={styles.fontW600}>{ORDER_PAGE.MESSAGE}:</div>
+                            {product.gift_info.gift_card_message}
+                          </div>
+                        </span>
+                      </a>
+                    </span>
                   </div>}
               </React.Fragment>
             );
