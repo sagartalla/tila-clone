@@ -526,7 +526,11 @@ export const AR_KEYWORDS = {
     MENS_GROOMING: 'العناية بالرجل',
     LIFESTYLE: 'لايف ستايل',
     TRAVEL_ACCESSORIES: 'إكسسوارات السفر',
-
+    FOOT_WEAR:  'أحذية',
+    BEAUTY_AND_PERSONAL_CARE: 'الجمال والعناية الشخصية',
+    HOME_FURNSHING: 'ديكور المنزل',
+    BABY_CARE: 'عناية الطفل',
+    HEALTH_CARE: 'العناية بالصحة',
   },
   COMPARE: {
     TILA_COMPARE_1: 'تيله تقارن لك منتجاتك',

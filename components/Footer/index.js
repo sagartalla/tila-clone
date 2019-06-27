@@ -192,7 +192,7 @@ const FooterBar = props => (
     </div>
     <div className={`${styles['footer-menu-items']} ${styles['pt-30']} ${styles['pb-30']} ${styles['bg-white']}`}>
       <Grid>
-        <div className={styles.flex}>
+        <div className={`${styles.flex} ${styles['footer-menu-list']}`}>
           <div className={`${styles['ipad-pr-0']} ${styles['footer-menu-inn']} `}>
             <h4 className={`${styles.fontW600} ${styles['fs-16']} ${styles['flex-center']} ${styles['mr-50']}`}>
               <SVGComponent clsName={`${styles['footer-list-icon']} ${styles['mr-10']}`} src="icons/footers-icons/fashion" />
@@ -232,7 +232,7 @@ const FooterBar = props => (
               <SVGComponent clsName={`${styles['footer-list-icon']} ${styles['mr-10']}`} src="icons/footers-icons/life-style" />
               <span className={styles.pointer}>{FOOTER_PAGE.LIFESTYLE}</span>
             </h4>
-            <ul className={`${styles['pl-40']} ${styles['lne-ht2']}`}>
+            <ul className={`${styles['pl-30']} ${styles['lne-ht2']}`}>
               {l.map(i => <li key={i.title}><a href={i.url}><span className={styles.pointer}>{i.title}</span></a></li>)}
               {/* <li><span className={styles['pointer']}>{FOOTER_PAGE.HOME_DECOR}</span></li>
               <li><span className={styles['pointer']}>{`${FOOTER_PAGE.KITCHEN} & ${FOOTER_PAGE.DINING}`}</span></li>
