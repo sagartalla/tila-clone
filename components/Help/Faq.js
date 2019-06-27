@@ -40,7 +40,7 @@ class Faq extends Component {
           <SVGComponent src={`helpsupport/${categoryImages[topicKey]}`}/>
         </div>
         <h4>{this.props.categoriesObj[topicKey].name}</h4>
-        <div className={styles['ht-175']}>
+        <div className={styles['ht-185']}>
           {questionKeys.map(this.renderQuestions(topicKey))}
         </div>
         {remaining.length > 0 ? <Link route={`answers/${topicKey}`}><a className={`${styles['viewMoreBtn']} ${styles['fs-13p']} ${styles['greyColor']} ${styles['as-flex-end']}`}>{`${remaining.length} more >`}</a></Link> : <div />}

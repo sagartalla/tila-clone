@@ -30,15 +30,12 @@ const userCredentials = cookies.get('userCreds');
 const sort = (a, b) => a - b;
 
 const FileAttachment = (props) => {
-  const [msg, setMsg] = useState('');
-  const [files, setFiles] = useState({});
-  const handleMsg = (e) => setMsg(e.target.value);
   const handleAttachements = (e) => {
     const file = e.target.files[0];
     if (file) {
       if (file.size < 10485760) {
         const reader = new FileReader();
-        reader.onload = () => { setFiles({ [file.name]: reader.result }) };
+        reader.onload = () => { props.setFiles({ [file.name]: reader.result }) };
         reader.onerror = (error) => { console.log('Error: ', error) };
         reader.readAsDataURL(file);
       } else {
@@ -47,14 +44,14 @@ const FileAttachment = (props) => {
     }
   }
   const removeFile = (fileName) => (e) => {
-    const newFileObj = { ...files };
+    const newFileObj = { ...props.files };
     delete newFileObj[fileName]
-    setFiles(newFileObj);
+    props.setFiles(newFileObj);
   }
   const renderFiles = (fileName, index) => (
     <div key={String(index)} className={`${styles['flex']} ${styles['justify-between']} ${styles['wh-250']}`}>
       <div className={styles['fileNameCont']}>
-        <a href={files[fileName]} download={fileName}>{fileName}</a>
+        <a href={props.files[fileName]} download={fileName}>{fileName}</a>
       </div>
       <div className={styles['fileNameDelete']} onClick={removeFile(fileName)}>x</div>
     </div>
@@ -79,10 +76,10 @@ const FileAttachment = (props) => {
           </div>
         </div>
       </div>
-      {Object.keys(files).length ?
+      {Object.keys(props.files).length ?
         <div className={styles['fs-12p']}>
-          <div>{`Attachments (${Object.keys(files).length})`}</div>
-          {Object.keys(files).map(renderFiles)}
+          <div>{`Attachments (${Object.keys(props.files).length})`}</div>
+          {Object.keys(props.files).map(renderFiles)}
         </div>
         : null}
     </div>
@@ -107,7 +104,8 @@ class EmailModal extends Component {
       lastname: '',
       incidentCreated: false,
       referenceNumber: '',
-      incidentId: ''
+      incidentId: '',
+      files: {}
     }
     this.state.selectedIssue && this.state.selectedIssue.orderRelated && this.getOrders();
     props.getAllIssues();
@@ -185,6 +183,13 @@ class EmailModal extends Component {
       selectedOrder: orderObj
     })
   }
+
+  setFiles = (files) => {
+    this.setState({
+      files
+    })
+  }
+
   createIncident = () => {
     if (!this.state.email || !this.state.selectedIssue) {
       alert('Email and Issue is mandatory');
@@ -192,6 +197,14 @@ class EmailModal extends Component {
     }
     const param = {
       "emailId": this.state.email
+    }
+    const fileArr = Object.entries(this.state.files);
+    let contentType = '';
+    let data = '';
+    if(fileArr.length) {
+      const stringArr = fileArr[0][1].split(',');
+      data = stringArr[1];
+      contentType = stringArr[0].replace('data:','').replace(';base64','')
     }
     const serverData = {
       "subject": this.state.selectedIssue.q,
@@ -209,7 +222,14 @@ class EmailModal extends Component {
           "incident_source_language": { "id": language },
           ...(this.state.selectedOrder && { "order_number": this.state.selectedOrder.order_item_ids[0] })
         }
-      }
+      },
+      ...(fileArr.length && {
+        "fileAttachments": {
+          "fileName": fileArr[0][0],
+          data,
+          contentType
+        },
+      })
     }
     this.props.raiseTicket(param, serverData).then(res => {
       const { pathname } = window.location;
@@ -351,7 +371,7 @@ class EmailModal extends Component {
                 </div>
                 : null
               }
-              <FileAttachment updateIncident={() => {}} loading={false}/>
+              <FileAttachment setFiles={this.setFiles} files={this.state.files} />
             </div>
             {this.props.type === "email" ?
               <div
