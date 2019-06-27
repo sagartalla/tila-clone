@@ -371,7 +371,9 @@ class EmailModal extends Component {
                 </div>
                 : null
               }
-              <FileAttachment setFiles={this.setFiles} files={this.state.files} />
+              {this.props.type === "email" ?
+                <FileAttachment setFiles={this.setFiles} files={this.state.files} /> : null
+              }
             </div>
             {this.props.type === "email" ?
               <div
