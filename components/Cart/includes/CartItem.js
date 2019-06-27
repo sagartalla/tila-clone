@@ -290,7 +290,20 @@ class CartItem extends React.Component {
                         <SVGComponent clsName={`${styles['secure-icon']} ${styles['mr-10']} ${styles['pointer']}`} src="icons/common-icon/trust-secure" />
                       </span> */}
                       <div className={`${styles['relative']} ${styles['cart-price-toltp']}`}>
-                        <span className={`${styles.question} ${styles['ml-5']} ${styles['flex-center']} ${styles['justify-center']} ${styles['default-shadow']} ${styles['fs-14']} ${styles.pointer}`}>  ? </span>
+                        <span
+                          className={
+                            `${styles.question}
+                            ${styles['ml-5']}
+                            ${styles['flex-center']}
+                            ${styles['justify-center']}
+                            ${styles['default-shadow']}
+                            ${styles['fs-14']}
+                            ${styles.pointer}
+                            ${lang === 'en' ? '' : styles['flip-questionmark']}
+                            `
+                          }
+
+                          >  ? </span>
                         <div className={`${styles['p-10']} ${styles['tool-tip']} ${styles['cart-tool-tip']}`}>
                                 <div className={`${styles['table']} ${styles['width100']}`}>
                                   <div className={`${styles['flx-space-bw']} ${styles['fs-12']}`}>
@@ -348,7 +361,7 @@ class CartItem extends React.Component {
                           <div className={`${styles['p-5']} ${styles['mt-10']} ${styles['fs-12']} ${styles['overall-amount']}`}>{CART_PAGE.OVERALL_YOU_SAVE} {total_discount} {cur} {CART_PAGE.ON_THIS_PRODUCT}</div>
                         </div>
                       </div>
-                      
+
                     {/* </OverlayTrigger> */}
                   </h4>
                   {/* {
