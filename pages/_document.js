@@ -55,6 +55,7 @@ export default class MyDocument extends Document {
             class="inlay"
             id="chatInlay"
             site-url="fptsuae.widget.custhelp.com"
+            inlay-hidden="true"
           >
           </inlay-oracle-chat-embedded>
           <script
