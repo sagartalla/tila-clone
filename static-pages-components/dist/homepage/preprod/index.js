@@ -4,23 +4,26 @@ let sliderTBS, sliderTIE, sliderHAL, sliderDODAY, sliderBS, sliderRV;
 
 const tbs = [{
   img: `/static/img/landing-home/${lang === 'en' ? 'main-Armani' : 'main-Armani-ar'}.png`,
-  title: 'Armani Sunglasses',
+  title: `${lang === 'en' ? 'Armani Sunglasses' : ' نظارات شمسية ارماني'}`,
   key: 'Armani Sunglasses'
 }, {
   img: `/static/img/landing-home/${lang === 'en' ? 'main-Charger' : 'main-Charger-ar'}.png`,
-  title: 'Baseus Charger',
+  title: `${lang === 'en' ? 'Baseus Charger' : 'شاحن باسيوس '}`,
   key: 'Baseus Charger'
 }, {
   img: `/static/img/landing-home/${lang === 'en' ? 'main-Joyroom' : 'main-Joyroom-ar'}.png`,
   title: 'Joyroom',
+  title: `${lang === 'en' ? 'Joyroom' : 'جويرووم'}`,
   key: 'Joyroom'
 }, {
   img: `/static/img/landing-home/${lang === 'en' ? 'main-LDNIO' : 'main-LDNIO-ar'}.jpg`,
   title: 'Ldnio',
+  title: `${lang === 'en' ? 'Ldnio' : 'لدنيو'}`,
   key: 'Ldnio'
 }, {
   img: `/static/img/landing-home/${lang === 'en' ? 'main-RAYBAN' : 'main-RAYBAN-ar'}.jpg`,
   title: 'Rayban',
+  title: `${lang === 'en' ? 'Rayban' : 'راي بان'}`,
   key: 'Rayban'
 }];
 

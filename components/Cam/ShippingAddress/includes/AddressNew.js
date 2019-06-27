@@ -99,9 +99,9 @@ const AddressNew = (props) => {
                   <label>{DELIVERY_ADDR_PAGE.COUNTRY}</label>
                 </div>
               </Dropdown.Toggle>
-              {countriesData.length > 0 &&
+              {countriesData.length > 0 ?
                 <Dropdown.Menu className={`${styles.width100} ${styles['search-container']} ${styles['p-0']} ${styles['m-0']}`}>
-                  {showCountriesData && countriesData.map((result, index) => (
+                  {showCountriesData && countriesData.length > 0 && countriesData.map((result, index) => (
                     <MenuItem
                       className={styles['search-suggestion']}
                       eventKey={index + 1}
@@ -117,7 +117,7 @@ const AddressNew = (props) => {
                       </a>
                     </MenuItem>
                   ))}
-                </Dropdown.Menu>}
+                </Dropdown.Menu> : <Dropdown.Menu />}
             </Dropdown>
             {(validation.shipping_country_code && validation.shipping_country_code.message) || (validation.country_name && validation.country_name.message)
               ?
@@ -134,7 +134,7 @@ const AddressNew = (props) => {
                   <label>{DELIVERY_ADDR_PAGE.CITY}</label>
                 </div>
               </Dropdown.Toggle>
-              {getAllCities.length > 0 &&
+              {getAllCities.length > 0 ?
                 <Dropdown.Menu className={`${styles.width100} ${styles['search-container']} ${styles['p-0']} ${styles['m-0']}`}>
                   {showCitiesData && getAllCities.map((result, index) => (
                     <MenuItem
@@ -151,7 +151,7 @@ const AddressNew = (props) => {
                       </a>
                     </MenuItem>
                   ))}
-                </Dropdown.Menu>}
+                </Dropdown.Menu> : <Dropdown.Menu />}
             </Dropdown>
             {(validation.city && validation.city.message) || (validation.city_code && validation.city_code.message) ?
               <span className={`${styles['error-msg']}`}>{validation.city.message || validation.city_code.message}</span>

@@ -53,9 +53,12 @@ class Tree extends Component {
               } else {
                 queryString = `${queryString}&sid=${category.id}`;
               }
+              if(queryString.indexOf('categoryFacet') === -1) {
+                queryString = `${queryString}&categoryFacet=true`;
+              }
               return (
                 <li key={category.id} className={ first ? styles['main-sub-list'] : styles['category-sub-list-inn']}>
-                  <Link route={`/${country}/${language}/srp/${category.canonicalId}/${queryString}&categoryFacet=true`}><a className={`${styles['fs-12']}`}>{category.name}</a></Link>
+                  <Link route={`/${country}/${language}/srp/${category.canonicalId}/${queryString}`}><a className={`${styles['fs-12']}`}>{category.name}</a></Link>
                   {/*<ul className={`${styles['category-sub-order-list']} ${styles['pl-15']}`}>
                     {
                       category.children.map((subcategory) => {
