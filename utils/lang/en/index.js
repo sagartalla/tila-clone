@@ -276,7 +276,7 @@ export const EN_KEYWORDS = {
     MANAGE_VAULT_HDR: 'Manage Cards, Vouchers and More',
     SUB_TAG: 'Select a default card or add new card.',
     SAVED_CARDS: 'Saved Cards',
-    TILA_GIFT: 'Tila Gift',
+    TILA_GIFT: 'Tila Credit',
     VOUCHER: 'Vouchers',
     REWARD_POINTS: 'Reward Points',
     MANAGE_SAVED_CARDS: 'Manage Saved Cards',
@@ -303,6 +303,7 @@ export const EN_KEYWORDS = {
     NO_CART_LABEL: 'Where are all the saved Cards?',
     NO_CARD_LABEL: 'Save your cards for faster checkouts.',
     NO_VOCHER_LABEL: 'Save your cards for faster checkouts.',
+    CREDIT: 'Credit',
   },
   // new page
   THANK_YOU_PAGE: {
@@ -527,6 +528,7 @@ export const EN_KEYWORDS = {
     KIDS_CLOTHING: 'Kids Clothing',
     MENS_FOOTWEAR: 'Mens Footwear',
     WOMEN_FOOTWEAR: 'Womens Footwear',
+    FOOT_WEAR: 'Footwear',
     BAGS: 'Bags',
     CAMERAS: 'Cameras',
     SPEAKERS: 'Speakers',
@@ -538,7 +540,11 @@ export const EN_KEYWORDS = {
     MENS_GROOMING: 'Mens grooming',
     LIFESTYLE: 'Lifestyle',
     TRAVEL_ACCESSORIES: 'Travel Accessories',
-
+    SUNGLASSES: 'Sunglasses',
+    BEAUTY_AND_PERSONAL_CARE: 'Beauty & Personal Care',
+    HOME_FURNSHING: 'Home furnishing',
+    BABY_CARE: 'Baby Care',
+    HEALTH_CARE: 'Health Care',
   },
   COMPARE: {
     TILA_COMPARE_1: 'Tila comparing (',
@@ -764,8 +770,8 @@ export const EN_KEYWORDS = {
   },
   CAM: {
     MY_ORDERS: 'My Orders',
-    WISHLIST: 'Wishlist',
-    SHIPPING_ADDRESS: 'Shipping Address',
+    WISHLIST: 'My Wishlist',
+    SHIPPING_ADDRESS: 'Delivery Address',
     CREDIT_CARDS_VOUCHERS_REWARD_POINTS: 'Saved Cards & Tila Credit',
     MY_COUPONS: 'My Coupons',
     PREFERENCES: 'Preferences',

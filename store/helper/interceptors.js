@@ -85,14 +85,16 @@ const errorInterceptor = (err) => {
       if (err.response.status === '403') {
         cookies.remove('auth');
       }
-      const msg = `${err.response.data.message}: ${err.response.data.sub_errors.map(e => e.message).join(' ')}`
-      console.log('asdasd', msg);
-      toast(
-        <ToastContent
-          msg={msg}
-          msgType='error'
-        />
-      )
+      const subMessege = err.response.data.sub_errors && err.response.data.sub_errors.map(e => e.message).join(' ')
+      const msg = `${err.response.data.message || ''} ${subMessege ? `: ${subMessege}` : ''}`.trim();
+      if(msg) {
+        toast(
+          <ToastContent
+            msg={msg}
+            msgType='error'
+          />
+        )
+      }
       notifySentry(err);
     }
   } catch (e) {

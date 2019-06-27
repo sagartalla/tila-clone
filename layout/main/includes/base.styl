@@ -59,7 +59,7 @@ input[type=number]::-webkit-outer-spin-button
     margin 0
 /* font sizes */
 // it will generate fonts from fs-10, fs-12, fs-14, ...., to fs-40.
-for i in range(10px, 46px, 2)
+for i in range(10px, 46px,  2)
   .fs-{i}
     font-size (i)
 
@@ -120,6 +120,7 @@ for i in range(10px, 46px, 2)
 .main-layout
   min-height 100vh
   height 100px
+  padding-top 108px
 
 .ht-100vh
   height: 100vh
@@ -300,11 +301,9 @@ for i in range(10px, 46px, 2)
 .border-lg
   border 1px solid light-brdr
 
-.border-rt
-  border-right 1px solid light-brdr
 
-.border-lt
-  border-left 1px solid light-brdr
+// .border-lt
+//   border-left 1px solid light-brdr
 
 .border-lt-green
   border-left 1px solid generic-green-color
@@ -367,6 +366,9 @@ for i in range(10px, 46px, 2)
 
 .border-radius4
   border-radius 4px
+
+.border-bt-left-radius
+  border-bottom-left-radius: 12px;  
 
 .border-radius12
   border-radius 12px

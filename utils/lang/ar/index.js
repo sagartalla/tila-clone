@@ -161,7 +161,7 @@ export const AR_KEYWORDS = {
   },
   WISH_LIST_PAGE: {
     WISHLIST_HEADER: 'المنتجات الموجوده في قائمة المفضلة',
-    ADD_TO_CART_BTN: 'أضف إلى سلة التسوق',
+    ADD_TO_CART_BTN: 'أضف إلى العربة',
     NOTIFY_ME_BTN: 'خبرني',
     FROM_YOUR_WISHLIST: 'من قائمة المفضلة',
     WHEN_ADDED_TO_WISHLIST: 'عند إضافته إلى قائمة المفضلة',
@@ -189,7 +189,7 @@ export const AR_KEYWORDS = {
     FREE_DELIVERY: 'توصيل مجاني',
     DAYS: 'الأيام',
     PRODUCT_DETAILS: 'تفاصيل المنتج',
-    ADD_TO_CART: 'إضافة الى سلة التسوَّق',
+    ADD_TO_CART: 'أضف إلى العربة',
     BUY_NOW: 'اشتري الآن',
     NOTIFY_ME: 'خبرني',
     BUY_FOR: 'أشتري ل...',
@@ -292,6 +292,7 @@ export const AR_KEYWORDS = {
     NO_CART_LABEL: 'Where are all the saved Cards?',
     NO_CARD_LABEL: 'Save your cards for faster checkouts.',
     NO_VOCHER_LABEL: 'Save your cards for faster checkouts.',
+    CREDIT: 'Credit',
   },
   // new page
   THANK_YOU_PAGE: {
@@ -398,7 +399,7 @@ export const AR_KEYWORDS = {
     SHOW_LESS: 'استعرض أقل',
     SHOW_MORE: 'استعرض أكثر',
     ADDED_TO_CART: 'تم إضافته إلى سلة التسوَّق',
-    ADD_TO_CART: 'إضافة إلى سلة التسوق',
+    ADD_TO_CART:  'أضف إلى العربة',
     SORRY_NO_RESULTS: 'للأسف، لا يوجد نتائج',
     FOR: 'ل...',
     LOADING: 'تحميل ...',

@@ -87,7 +87,7 @@ class Orders extends Component {
         Feel free to talk to us about any queries or feedback. Customer satisfaction is our highest priority.
       </div>
       <div>
-        <div className={styles['contactContainer']} style={{position: 'static'}}>
+        <div className={styles['contactContainer2']} style={{position: 'static'}}>
           {ContactTabs.map(this.props.renderContactCard(this.state.selectedOrder, this.state.selectedIssue))}
         </div>
       </div>

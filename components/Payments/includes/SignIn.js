@@ -80,7 +80,7 @@ class SignIn extends Component {
                   {([handleSocialLogin]) => {
                     return (
                       <React.Fragment>
-                        <button onClick={handleSocialLogin('facebook')} className={`${styles['fp-btn']} ${styles['mb-20']} ${styles['fp-btn-primary']} ${styles['right-radius']} ${styles['facebook-btn']}`}>{PAYMENT_PAGE.SIGN_IN_WITH_FACEBOOK}</button>
+                        <button onClick={handleSocialLogin('facebook')} className={`${styles['fp-btn']} ${styles['mb-20']} ${styles['fp-btn-facebook-blue']} ${styles['right-radius']} ${styles['facebook-btn']}`}>{PAYMENT_PAGE.SIGN_IN_WITH_FACEBOOK}</button>
                         <button onClick={handleSocialLogin('google')} className={`${styles['fp-btn']} ${styles['mb-20']} ${styles['fp-btn-danger']} ${styles['right-radius']} ${styles['google-btn']}`}>{PAYMENT_PAGE.SIGN_IN_WITH_GOOGLE}</button>
                       </React.Fragment>
                     );
