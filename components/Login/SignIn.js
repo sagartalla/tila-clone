@@ -346,7 +346,7 @@ class SignIn extends Component {
           btnLoading={loadingStatus}
           onClick={this.login}
         />
-        <span className={`${styles['m-20']} ${styles['t-c']} ${styles['fs-12']} ${styles['register-policy-gray']}`}>{mode === 'EXISTING_USER' ? LOGIN_PAGE.BY_LOGIN_I_AGREE_TO_TERMS : LOGIN_PAGE.BY_SIGNUP_I_AGREE_TO_TERMS } <span className={`${styles['text-blue']}`}><a href="/SAU/en/policy/tc" target="_blank">{LOGIN_PAGE.T_AND_C}</a>, <a href="/SAU/en/policy/pp" >{LOGIN_PAGE.PRIVACY}</a> {LOGIN_PAGE.AND} <a href="/SAU/en/policy/pp" >{LOGIN_PAGE.COOKIE_POLICY}</a></span></span>
+        <span className={`${styles['m-20']} ${styles['t-c']} ${styles['fs-12']} ${styles['register-policy-gray']}`}>{mode === 'EXISTING_USER' ? LOGIN_PAGE.BY_LOGIN_I_AGREE_TO_TERMS : LOGIN_PAGE.BY_SIGNUP_I_AGREE_TO_TERMS } <span className={`${styles['text-blue']}`}><a href="/SAU/en/policy/tc" target="_blank">{LOGIN_PAGE.T_AND_C}</a>, <a href="/SAU/en/policy/pp" target="_blank">{LOGIN_PAGE.PRIVACY}</a> {LOGIN_PAGE.AND} <a href="/SAU/en/policy/pp" target="_blank">{LOGIN_PAGE.COOKIE_POLICY}</a></span></span>
       </div>
     );
   }

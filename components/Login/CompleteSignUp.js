@@ -162,7 +162,6 @@ class ContinueLogin extends Component {
     if (id === 'month') {
       const numberOfdays = [];
       month = mon;
-      day = '';
       const count = moment().month(mon).daysInMonth();
       for (let i = 1; i < count + 1; i += 1) {
         numberOfdays.push(moment().month(mon).date(i).format('DD'));
@@ -170,6 +169,16 @@ class ContinueLogin extends Component {
       this.setState({
         numberOfdays,
         monthVal: val,
+      }, () => {
+        if (numberOfdays.includes(day)) {
+          this.setState({
+            day,
+          });
+        } else {
+          this.setState({
+            day: '',
+          });
+        }
       });
     }
     if (id === 'day') day = val;
@@ -413,7 +422,7 @@ class ContinueLogin extends Component {
           onClick={this.submit}
         />
         <a className={`${styles['t-c']} ${styles['fs-14']}`} onClick={this.skipAndContinue}>{LOGIN_PAGE.SKIP_AND_CONTINUE}</a>
-        <div className={`${styles['termes-label']} ${styles['m-20']} ${styles['mt-0']} ${styles['fs-12']} ${styles['t-c']}`}>{LOGIN_PAGE.BY_SIGNUP_I_AGREE_TO_TERMS} <a href="/SAU/en/policy/tc">{LOGIN_PAGE.T_AND_C}</a>, <a href="/SAU/en/policy/pp" target="_blank">{LOGIN_PAGE.PRIVACY}</a> {LOGIN_PAGE.AND} <a href="/SAU/en/policy/pp" target="_blank">{LOGIN_PAGE.COOKIE_POLICY}</a></div>
+        <div className={`${styles['termes-label']} ${styles['m-20']} ${styles['mt-0']} ${styles['fs-12']} ${styles['t-c']}`}>{LOGIN_PAGE.BY_SIGNUP_I_AGREE_TO_TERMS} <a href="/SAU/en/policy/tc" target="_blank">{LOGIN_PAGE.T_AND_C}</a>, <a href="/SAU/en/policy/pp" target="_blank">{LOGIN_PAGE.PRIVACY}</a> {LOGIN_PAGE.AND} <a href="/SAU/en/policy/pp" target="_blank">{LOGIN_PAGE.COOKIE_POLICY}</a></div>
       </div>
     );
   }

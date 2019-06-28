@@ -93,7 +93,7 @@ class LoginPage extends React.Component {
             </Col>
           </Row>
           <Row className={`${styles['pt-30']} ${styles.flex}`}>
-            <Col md={5} xs={12} sm={5} className={`${styles.relative} ${styles.flex} ${styles['flex-colum']} ${styles['justify-center']} ${styles['pr-20']} ${styles['border-rt']}`}>
+            <Col md={5} xs={12} sm={5} className={`${styles.relative} ${styles.flex} ${styles['flex-colum']} ${styles['justify-center']} ${styles['pr-30']} ${styles['border-rt']}`}>
               <SocialLogin>
                 {([handleSocialLogin]) => (
                   <NoSSR>
@@ -152,7 +152,7 @@ class LoginPage extends React.Component {
             </Col>
           </Row>
         </div>
-        <span className={`${styles['m-20']} ${styles['mt-0']} ${styles['t-c']} ${styles['fs-12']} ${styles['register-policy-gray']}`}>{LOGIN_PAGE.BY_SIGNUP_I_AGREE_TO_TERMS } <span className={`${styles['text-blue']}`}><a href="/SAU/en/policy/tc" target="_blank">{LOGIN_PAGE.T_AND_C}</a>, <a href="/SAU/en/policy/pp" >{LOGIN_PAGE.PRIVACY}</a> {LOGIN_PAGE.AND} <a href="/SAU/en/policy/pp" >{LOGIN_PAGE.COOKIE_POLICY}</a></span></span>
+        <span className={`${styles['m-20']} ${styles['mt-0']} ${styles['t-c']} ${styles['fs-12']} ${styles['register-policy-gray']}`}>{LOGIN_PAGE.BY_SIGNUP_I_AGREE_TO_TERMS } <span className={`${styles['text-blue']}`}><a href="/SAU/en/policy/tc" target="_blank">{LOGIN_PAGE.T_AND_C}</a>, <a href="/SAU/en/policy/pp" target="_blank">{LOGIN_PAGE.PRIVACY}</a> {LOGIN_PAGE.AND} <a href="/SAU/en/policy/pp" target="_blank">{LOGIN_PAGE.COOKIE_POLICY}</a></span></span>
       </div>
     );
   }

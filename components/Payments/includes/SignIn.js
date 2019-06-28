@@ -45,7 +45,13 @@ class SignIn extends Component {
     this.privacyToggle = this.privacyToggle.bind(this);
   }
   componentDidMount() {
-    this.props.getUserInfoData();
+    const { userInfoData, isLoggedIn } = this.props;
+    console.log('userInfoData', userInfoData);
+    if (isLoggedIn && userInfoData && userInfoData.email_verified === 'NV') {
+      const data = { currentFlow: 'existing_user_login', nextPage: 'verify_email' };
+      const { v2CurrentFlow } = this.props;
+      v2CurrentFlow(data);
+    }
   }
 
   tcToggle() {
@@ -64,11 +70,13 @@ class SignIn extends Component {
   render() {
     const { props } = this;
     const { showTerms, showPrivacy, showFP } = this.state;
+    console.log('prodddps', props.userInfoData);
+    console.log('sdfghjk', props.personalUserInfo);
     return (
       <div className={`${styles.box} ${styles['mb-20']} ${styles.relative} ${styles['payment-signup']}`}>
         <SVGComponent clsName={`${styles.profile} ${props.configJson.done ? 'done' : ''} ${props.configJson.progress ? 'payment-active' : ''}`} src="icons/profile/profile" />
         {
-       !props.showCheckoutLogin && (props.userInfoData && props.userInfoData.email) && !props.showLogout &&
+       !props.showCheckoutLogin && (props.userInfoData && props.userInfoData.email) && !props.showLogout && props.isLoggedIn &&
        <Row>
           <Col md={7} sm={12} xs={12}>
             <h4 className={styles['m-0']}>{`${PAYMENT_PAGE.YOU_ARE_SIGNED_IN_AS}`}</h4>
@@ -109,12 +117,10 @@ class SignIn extends Component {
 const mapStateToProps = store => ({
   showLoginPage: selectors.showLogin(store),
   showCheckoutLogin: selectors.showCheckoutLogin(store),
-  userInfoData: selectors.getUserInfo(store),
-  // profileInfo: camSelectors.getUserInfo(store),
 });
 const mapDispatchToProps = dispatch => bindActionCreators(
   {
-    getUserInfoData: actionCreators.getUserInfoData,
+    v2CurrentFlow: actionCreators.v2CurrentFlow,
   },
   dispatch,
 );

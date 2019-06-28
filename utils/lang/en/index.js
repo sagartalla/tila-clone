@@ -737,7 +737,7 @@ export const EN_KEYWORDS = {
     VERIFY: 'Verify',
     PLEASE_ENTER_OTP_SENT: 'Please enter OTP sent to your mail id',
     PLEASE_CLICK_ON_EMAIL_LINK: 'Please click on the e-mail link to reset your password.',
-    RESEND_The_LINK: 'Resend e-mail',
+    RESEND_THE_LINK: 'Resend e-mail',
     IF_YOU_DO_NOT_RECEIVE_YOUR_EMAIL: 'Note: If you do not receive your email within five minutes',
     CHECK_YOUR_SPAM_FOLDER: 'check your spam folder.',
     DONE_THANKS: 'DONE, THANKS',

@@ -92,15 +92,19 @@ const getActiveText = store => store.authReducer && store.authReducer.v2 && stor
 
 const getLastLogin = store => store.authReducer.v2.data.last_social_login_used;
 
-const showCheckoutLogin = store => (store.authReducer.data.isLoggedIn ? false : store.authReducer.ui.showCheckoutLogin);
+const showCheckoutLogin = store => {
+  return store.authReducer.ui.showCheckoutLogin;
+}
 
 const loginResponse = (store) => {
   return store.authReducer.data.loginResponse;
 }
 
+const isVerified = store => store.authReducer.data.isVerified;
+
 export {
   getErrorMessege, getCountry, getLoggedInStatus, getInstaCode, getUserCreds, getDeliveryCity, getDomainCountries,
   getLoginProgressStatus, getShowLogin, getPTAToken, showEmailVerificationScreen, getLanguage, getLoadingStatus, getUserInfo,
   getActive, getActiveEmailId, forgotPasswordStatus, showEmailSuccess, showLogin, userData, showOtpSuccess, resetToken, getActiveText,
-  getLastLogin, showResetScreen, getActiveUser, showCheckoutLogin, loginResponse,
+  getLastLogin, showResetScreen, getActiveUser, showCheckoutLogin, loginResponse, isVerified,
 };
