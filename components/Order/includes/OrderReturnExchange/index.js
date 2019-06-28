@@ -114,11 +114,17 @@ class OrderReturnExchange extends Component {
                     <Col md={6}>
                       <div className={styles['product-wrap']}>
                         <Col md={2}>
-                          <img src={`${constants.mediaDomain}/${img}`} />
+                          <Link route={`/${country}/${language}/product?productId=${variant_info.product_id}${variant_id ? `&variantId=${variant_id}` : ''}&catalogId=${variant_info.catalog_id}&itemType=${variant_info.item_type}`}>
+                            <a target="_blank">
+                              <img src={`${constants.mediaDomain}/${img}`} alt="" />
+                            </a>
+                          </Link>
                         </Col>
                         <Col md={10}>
                           <Link route={`/${country}/${language}/product?productId=${variant_info.product_id}${variant_id ? `&variantId=${variant_id}` : ''}&catalogId=${variant_info.catalog_id}&itemType=${variant_info.item_type}`}>
-                            <h4 className={`${styles['fs-16']} ${styles['mt-0']} ${styles.fontW600} ${styles.pointer}`}>{name}</h4>
+                            <a target="_blank">
+                              <h4 className={`${styles['fs-16']} ${styles['mt-0']} ${styles.fontW600} ${styles.pointer}`}>{name}</h4>
+                            </a>
                           </Link>
                           <span className={styles['fs-14']}>{CART_PAGE.QUANTITY}: {orderDetails && orderDetails.order_items && orderDetails.order_items[0].quantity}</span>
                         </Col>

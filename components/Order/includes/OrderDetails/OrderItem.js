@@ -155,7 +155,7 @@ class OrderItem extends Component {
                     <Col md={2} className={styles['p-0']}>
                       <div className={`${styles['img-wrap']} ${styles['flex-center']} ${styles['justify-center']}`}>
                         <Link route={`/${country}/${language}/product?productId=${product.productId}${product.variantId ? `&variantId=${product.variantId}` : ''}&catalogId=${product.catalogId}&itemType=${product.itemType}`}>
-                          <a className={`${styles['width100']} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
+                          <a target="_blank" className={`${styles['width100']} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
                             <img className={`${styles['order-item-img']}`} src={`${constants.mediaDomain}/${product.img}`} alt={product.img} />
                           </a>
                         </Link>
@@ -168,7 +168,7 @@ class OrderItem extends Component {
                     <Col md={10} className={`${styles['ipad-pr-0']} ${styles['pt-15']}`}>
                       <div className={`${styles['text-wrap']}`}>
                         <Link route={`/${country}/${language}/product?productId=${product.productId}${product.variantId ? `&variantId=${product.variantId}` : ''}&catalogId=${product.catalogId}&itemType=${product.itemType}`}>
-                          <a className={`${styles['width100']} ${styles['fs-14']} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
+                          <a target="_blank" className={`${styles['width100']} ${styles['fs-14']} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
                             <span className={`${styles.fontW600}`}>{product.name}</span>
                           </a>
                         </Link>
