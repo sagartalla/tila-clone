@@ -342,12 +342,12 @@ class Product extends Component {
                         }
                       </div>
                   <span className={`${styles['variants-main']}`}></span>
-                  <span className={styles['full-and-globe-main']}>
+                  {/* <span className={styles['full-and-globe-main']}>
                     <span className={`${styles['fullfill-main']} ${styles['flex-center']}`}>
                       <span className={styles['fulfill-img']}></span>
                       <span className={`${styles['fs-12']} ${styles['fontW600']} ${styles['pl-10']} ${styles['fullfilled-label']}`}>{PDP_PAGE.FULLFILLED_BY_TILA}</span>
                     </span>
-                  </span>
+                  </span> */}
                   {discountValue >= 5 &&
                     <span className={`${styles.absolute} ${styles['offer-tag']} ${styles[this.getOfferClassName(discountValue)]}`}>
                       <span>{discountValue}%</span>
