@@ -612,6 +612,33 @@
   height auto
   margin 5px
 
+.loader-div
+          width 20px
+          height 20px
+          margin auto
+          .loader-styl
+            svg
+              animation rotate 1.4s linear infinite;
+              -webkit-animation rotate 1.4s linear infinite;
+              -moz-animation rotate 1.4s linear infinite;
+              @keyframes rotate {
+                to {
+                  transform rotate(360deg);
+                }
+              }
+
+              @-webkit-keyframes rotate {
+                to {
+                  -webkit-transform rotate(360deg);
+                }
+              }
+
+              @-moz-keyframes rotate {
+                to {
+                  transform rotate(360deg);
+                }
+              }
+
 @keyframes slideOpen {
   from {transform: translateX(800px)}
   to {transform: translateX(0px)}

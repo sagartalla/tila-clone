@@ -107,7 +107,7 @@ class Incidents extends Component {
         const [orderId, orderItemId] = orderNumberTiLa.split('-');
         this.props.getOrderDetails({orderId}).then(res => {
           const {data} = res.value;
-          const orderObj = data.order_items.filter(order => order.order_item_ids[0] === orderNumberTiLa)[0];
+          const orderObj = data && data.order_items ? data.order_items.filter(order => order.order_item_ids[0] === orderNumberTiLa)[0] : '';
           this.setState({
             tktOrder: orderObj
           })
