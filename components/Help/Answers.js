@@ -29,20 +29,49 @@ class Answers extends Component {
     const answerId = window.location.hash ? window.location.hash.split('#')[1] : ''
     this.searchQuery = window.location.search.split('=')[1] ? decodeURIComponent(window.location.search.split('=')[1]) : '';
     this.state = {
+      answerData: {},
       selectedCategory: categoryId || parentCategoryId,
       openedCategory: parentCategoryId,
       openedAnswer: answerId,
-      count: null
+      count: 0,
+      size: 15,
+      currentPage: 0,
+      totalPages: 1,
+      loading: true
     }
+    this.scrollTimeout = '';
     parentCategoryId !== 'orders' && !!!this.searchQuery ? 
       props.getAnswers(getIds(this.state.selectedCategory, props.categoriesObj[this.state.selectedCategory] ? props.categoriesObj[this.state.selectedCategory].child : []))
       : 
-      props.getAnswerByKeyword(this.searchQuery).then(this.handlePageCount);
+      this.getAnswerByKeyword();
   }
-  handlePageCount = (res) => {
-    this.setState({
-     count: res.value.data.items[0].count
+  getAnswerByKeyword = () => {
+    this.state.currentPage < this.state.totalPages && (() => {
+      this.setState({
+        loading: true
+      });
+      this.props.getAnswerByKeyword(this.searchQuery, {size: this.state.size, page: this.state.currentPage})
+        .then(this.handlePageCount(this.state.currentPage));
+    })()
+  }
+  handlePageCount = (currentPage) => (res) => {
+    !!!currentPage ?
+      this.setState({
+        count: res.value.data.items[0].count,
+        totalPages: Math.ceil(res.value.data.items[0].count/this.state.size),
+        currentPage: this.state.currentPage + 1
+      })
+    : this.setState({
+        currentPage: this.state.currentPage + 1
     })
+  }
+  componentWillReceiveProps(nextProps){
+    if(nextProps.answerData !== this.props.answerData){
+      this.setState({
+        answerData: {...this.state.answerData, ...nextProps.answerData},
+        loading: false
+      })
+    }
   }
   openCategory = (categoryId) => (e) => {
     this.setState({
@@ -60,6 +89,13 @@ class Answers extends Component {
       return pathname.replace(this.props.query, `answers/${categoryId}/${childId ? childId : ''}`);
     }
     return pathname.replace(this.props.query, `answers/${parentId}/${categoryId}`);
+  }
+  handleScroll = (e) => {
+    clearTimeout(this.scrollTimeout)
+    const { scrollHeight, scrollTop, offsetHeight } = e.target;
+    if ((scrollTop + 10 + offsetHeight) > scrollHeight) {
+      this.scrollTimeout = setTimeout(this.getAnswerByKeyword, 100)
+    }
   }
   renderCategories = (fromParent, parentId) => (categoryId, index) => {
     const categoryObj = this.props.categoriesObj[categoryId];
@@ -98,7 +134,7 @@ class Answers extends Component {
     return null
   }
   renderAnswers = (answerKey, index) => {
-    const [id, question, ans, categoryId, parentId] = this.props.answerData[answerKey];
+    const [id, question, ans, categoryId, parentId] = this.state.answerData[answerKey];
     const isOpened = (id === this.state.openedAnswer) || (index === 0 && !!this.searchQuery & !!!this.state.openedAnswer);
     return (
       <div key={id} className={`${styles['ansContainer']} ${isOpened && styles['openBGColor']}`}>
@@ -133,7 +169,7 @@ class Answers extends Component {
     )
   }
   render(){
-    const answerKeys = Object.keys(this.props.answerData).sort(sort);
+    const answerKeys = Object.keys(this.state.answerData).sort(sort);
     const { pathname } = window.location;
     const helpCenterUrl = pathname.replace(this.props.query, `faq`)
     return(
@@ -152,9 +188,18 @@ class Answers extends Component {
             {this.renderRecentOrderTab()}
             {Object.keys(this.props.categoriesObj).sort(sort).map(this.renderCategories(true, null))}
           </div>
-          <div className={styles['answersContainer']}>
+          <div className={styles['answersContainer']} onScroll={this.handleScroll}>
           { this.state.selectedCategory !== 'orders'
-            ? answerKeys.length > 0 ? answerKeys.map(this.renderAnswers) : <div> No Questions Available </div>
+            ? answerKeys.length > 0 ? 
+              <div>
+                {answerKeys.map(this.renderAnswers)}
+                { this.state.loading && 
+                    <div className={`${styles['loader-div']}`} >
+                      <SVGComponent clsName={`${styles['loader-styl']}`} src="icons/common-icon/circleLoader" />
+                    </div>
+                }
+              </div>
+            : <div>{this.state.loading ? 'Loading' : 'No Questions Available'}</div>
             :
               <div className={styles['ht-100P']}>
                 <Orders query={this.props.query} isLoggedIn={this.props.isLoggedIn} renderContactCard={this.props.renderContactCard} handleContactClick={this.props.handleContactClick}/>

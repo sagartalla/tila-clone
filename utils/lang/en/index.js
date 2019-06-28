@@ -668,6 +668,7 @@ export const EN_KEYWORDS = {
     REFUND_TO: 'Refund to',
     COMPLETED: 'Completed',
     IN_PROGRESS: 'In Progress',
+    MESSAGE: 'Message',
   },
   COUPON_OFFERS: {
     VIEW_TERMS: 'Terms & Conditions',
