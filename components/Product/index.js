@@ -331,7 +331,7 @@ const getProductComponent = (isPreview, taskCode) => {
   const mapStateToProps = store => ({
     productData: taskCode ? selectors.getPreview(store) : selectors.getProduct(store),
     userDetails: store.authReducer.data,
-    showLoading: wishListSelectors.getLoader(store),
+    showLoading: wishListSelectors.getNotifyLoading(store),
   });
 
   const mapDispatchToProps = dispatch =>
