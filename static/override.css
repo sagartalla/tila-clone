@@ -56,11 +56,11 @@
 }
 
 .progress .progress-bar-danger {
-    background-color: #E40A80;
+    background-color: #101820;
 }
 
 .nav-tabs>li.active {
-    border-bottom: 4px solid #e40a80;
+    border-bottom: 2px solid #101820;
 }
 
 .lifestyle .progress .progress-bar-danger {
@@ -88,9 +88,18 @@
 }
 
 .nav-tabs {
-    background: rgba(216, 216, 216, 0.1);
-    border: 0;
+    /* background: rgba(216, 216, 216, 0.1); */
+    border-bottom: 2px solid #efeff4;
 }
+
+#vault-section .nav-tabs {
+    padding-left: 35px;
+}
+
+#preferences .nav-tabs, #coupons .nav-tabs {
+    padding-left: 25px;
+}
+
 
 .panel-default>.panel-heading {
     background-color: #FFF;
