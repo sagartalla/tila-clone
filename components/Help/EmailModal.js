@@ -68,11 +68,11 @@ const FileAttachment = (props) => {
               </div>
               <div>
                 Attach Files
-                      </div>
+              </div>
             </div>
             <div className={`${styles['fs-12p']} ${styles['greyColor']}`}>
               Jpeg, Pdf, PNG less than 8 MB
-                    </div>
+            </div>
           </div>
         </div>
       </div>
@@ -154,7 +154,7 @@ class EmailModal extends Component {
     this.state.currentOrderPage < this.state.totalOrderPages && this.props.getOrderHistory(this.state.currentOrderPage);
   }
   openChat = () => {
-    const baseURL = `https://fptsuae.custhelp.com/app/chat/chat_landing`;
+    const baseURL = `https://tila-en.custhelp.com/app/chat/chat_landing`;
     if (!this.state.email || !this.state.selectedIssue) {
       alert('Email and Issue is mandatory');
       return
