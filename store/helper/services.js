@@ -10,7 +10,7 @@ export const pimServiceInstance = axios.create({
 });
 
 export const oracleServiceInstance = axios.create({
-  baseURL: 'https://fptsuae.custhelp.com/services/rest/connect/v1.3/',
+  baseURL: 'https://tila-en.custhelp.com/services/rest/connect/v1.3/',
   timeout: 30000,
   headers: {
     Authorization: 'Basic YWRtaW5pc3RyYXRvcjpGcHRzQDEyMzQ1Ng==',
