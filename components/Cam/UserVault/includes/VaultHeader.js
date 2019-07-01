@@ -43,7 +43,7 @@ const VaultHeader = (props) => {
             <Tab eventKey={1} title={VAULT_PAGE.SAVED_CARDS} className={`${styles['pointer']} ${styles['p-10']} ${styles['thick-gry-clr']}`}>
               {props.children}
             </Tab>
-            <Tab eventKey={2} title={`${VAULT_PAGE.TILA_GIFT} ${VAULT_PAGE.VOUCHER}`} className={`${styles['pointer']} ${styles['p-10']} ${styles['thick-gry-clr']}`}>
+            <Tab eventKey={2} title={`${VAULT_PAGE.TILA_GIFT} ${VAULT_PAGE.VOUCHER}`} className={`${styles['pointer']} ${styles['thick-gry-clr']}`}>
               <TilaVoucher transactions={props.transactions}/>
             </Tab>
           </Tabs>
