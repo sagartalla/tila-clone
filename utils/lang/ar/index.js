@@ -531,6 +531,7 @@ export const AR_KEYWORDS = {
     HOME_FURNSHING: 'ديكور المنزل',
     BABY_CARE: 'عناية الطفل',
     HEALTH_CARE: 'العناية بالصحة',
+    SUNGLASSES: 'نظارات شمسية‎',
   },
   COMPARE: {
     TILA_COMPARE_1: 'تيله تقارن لك منتجاتك',

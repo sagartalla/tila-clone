@@ -33,7 +33,7 @@ class Review extends Component {
   componentDidMount() {
     const { catalogObj } = this.props;
     const { catalog_id, product_id, item_type } = catalogObj;
-    let paramsobj = {
+    const paramsobj = {
       catalog_id,
       product_id,
       item_type,
@@ -50,6 +50,12 @@ class Review extends Component {
     this.setState({ reviewData });
   }
   toggleReviewModal = () => {
+    const { openModal } = this.state;
+    if (!openModal) {
+      document.getElementsByTagName('BODY')[0].style.overflow = 'hidden';
+    } else {
+      document.getElementsByTagName('BODY')[0].style.overflow = 'auto';
+    }
     this.setState(prevState => ({
       openModal: !prevState.openModal,
       showReviews: true,
@@ -60,7 +66,7 @@ class Review extends Component {
     const { userInfo } = this.props;
     this.props.submitUserReview({
       ...reviewObj,
-      reviewer_name: userInfo.personalInfo.user_name,      
+      reviewer_name: userInfo.personalInfo.user_name,
     }).then(() => {
       this.setState({
         showReviews: false,
@@ -68,8 +74,7 @@ class Review extends Component {
     });
   }
 
-  renderReviewDetails = (reviewData, categoryType) => {
-    return reviewData.map((data, i) => {
+  renderReviewDetails = (reviewData, categoryType) => reviewData.map((data, i) => {
       return (
         <Col md={12} key={`review_${i}`}>
           <Col md={4}>
@@ -97,8 +102,7 @@ class Review extends Component {
           </Col>
         </Col>
       );
-    });
-  }
+    })
 
   render() {
     const { reviewData, openModal, showReviews } = this.state;
