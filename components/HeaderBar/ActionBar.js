@@ -214,7 +214,9 @@ class ActionBar extends Component {
               <div className={styles['profile-part']}>
                 <div className={`${styles['flex-center']} ${styles['ple-icon']}`}>
                     <ProfilePic loader={false} userInfo={userInfo} imgUrl={this.props.imgSource}/>
-                  <span className={`${styles['pl-15']} ${styles['profile-name']}`}><span>{HEADER_PAGE.HELLO}</span> <span>{userInfo.personalInfo.first_name || `${HEADER_PAGE.TILA_CUSTOMER}` }</span></span>
+                  <span className={`${styles['profile-name']}`}>
+                    <span>{HEADER_PAGE.HELLO}</span> <span className={styles['prof-name']}>{userInfo.personalInfo.first_name || `${HEADER_PAGE.TILA_CUSTOMER}` }</span>
+                  </span>
                 </div>
                 <ul className={`${styles['pl-0']} ${styles['profile-inn']}`}>
                   <li className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']}`}>
