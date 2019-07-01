@@ -297,7 +297,7 @@ class Incidents extends Component {
         <div className={styles['tktContainer']}>
           <div className={styles['categoryContainer']}>{this.renderTicketColumn()}</div>
           <div className={styles['answersContainer']}>{this.renderTicketDetail()}</div>
-          <div><a href='https://tila-en.custhelp.com/app/chat/chat_landing' target="_blank" /></div>
+          <div><a href={lang === 'en' ? 'https://tila-en.custhelp.com/app/chat/chat_landing' : 'https://tila-ar.custhelp.com/app/chat/chat_landing'} target="_blank" /></div>
         </div>
       </div>
     )
