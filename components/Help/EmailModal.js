@@ -157,7 +157,7 @@ class EmailModal extends Component {
     this.state.currentOrderPage < this.state.totalOrderPages && this.props.getOrderHistory(this.state.currentOrderPage);
   }
   openChat = () => {
-    const baseURL = `https://tila-en.custhelp.com/app/chat/chat_landing`;
+    const baseURL = lang === 'en' ? `https://tila-en.custhelp.com/app/chat/chat_landing` : `https://tila-ar.custhelp.com/app/chat/chat_landing`;
     if (!this.state.email || !this.state.selectedIssue) {
       alert('Email and Issue is mandatory');
       return
