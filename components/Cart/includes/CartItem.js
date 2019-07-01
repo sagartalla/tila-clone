@@ -236,7 +236,7 @@ class CartItem extends React.Component {
                     </div>
                     {checked && showMessage &&
                       <div>
-                        <span className={styles.fontW600}>{CART_PAGE.MESSAGE}:&nbsp;</span><span>{gift_card_message}&nbsp;</span>
+                        <span className={styles.fontW600}>{CART_PAGE.MESSAGE}:&nbsp;</span><span className={styles['break-word']}>{gift_card_message}&nbsp;</span>
                         <span>{'('}<a onClick={this.toggleMessage}>{CART_PAGE.EDIT}</a>{')'}</span>
                       </div>
                     }
@@ -251,6 +251,7 @@ class CartItem extends React.Component {
                           placeholder={CART_PAGE.GIFT_MESSAGE_OPTIONAL}
                           value={gift_card_message}
                           onChange={this.updateMsg}
+                          maxLength="150"
                         />
                         <button
                           data-id={item_id}
