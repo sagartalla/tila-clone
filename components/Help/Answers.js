@@ -49,7 +49,7 @@ class Answers extends Component {
       this.getAnswerByKeyword();
   }
   getAnswerByKeyword = () => {
-    this.state.currentPage < this.state.totalPages && (() => {
+    !!this.searchQuery && this.state.currentPage < this.state.totalPages && (() => {
       this.setState({
         loading: true
       });
@@ -108,7 +108,7 @@ class Answers extends Component {
     if ((fromParent && !categoryObj.hasParent) || (!fromParent)) {
       return(
         <div key={categoryObj.id}
-          className={`${index !==0 && styles['bT']} ${isOpened && styles['openBGColor']}`}
+          className={`${index !==0 && styles['bT']} ${isOpened && styles[lang === 'en' ? 'openBGColor' : 'openBGColorAr']}`}
         >
           <div
             className={`${styles['categoryValue']} ${isSelected && styles['selectedBG']} ${fromParent && styles['fwBolder']}`}
@@ -140,7 +140,7 @@ class Answers extends Component {
     const [id, question, ans, categoryId, parentId] = this.state.answerData[answerKey];
     const isOpened = (id === this.state.openedAnswer) || (index === 0 && !!this.searchQuery & !!!this.state.openedAnswer);
     return (
-      <div key={id} className={`${styles['ansContainer']} ${isOpened && styles['openBGColor']}`}>
+      <div key={id} className={`${styles['ansContainer']} ${isOpened && styles[lang === 'en' ? 'openBGColor' : 'openBGColorAr']}`}>
         <div className={`${styles['answerArrowIcon']}`}>
         {isOpened ? <SVGComponent src={`helpsupport/upArrow`} /> : <SVGComponent src={`helpsupport/downArrow`} />}
         </div>

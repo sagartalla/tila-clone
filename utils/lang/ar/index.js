@@ -828,7 +828,7 @@ export const AR_KEYWORDS = {
     VIEW_DETAIL: 'View Detail',
     ALL_ATTACHMENTS: 'All Attachemnts',
     GET_ORDER_DETAIL: 'Getting order details of',
-    SEARCH_PLACEHOLDET: 'Search for a topic or questions',
+    SEARCH_PLACEHOLDER: 'Search for a topic or questions',
     ISSUE_NOT_RESOLVED: 'Issue still not resolved ?',
     ISSUE_NOT_RESOLVED_MSG: 'Feel free to talk to us about any queries or feedback. Customer satisfaction is our highest priority.',
     SELECT_YOUR_ISSUE: 'SELECT YOUR ISSUE',
