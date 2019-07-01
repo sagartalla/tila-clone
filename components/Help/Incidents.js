@@ -107,7 +107,7 @@ class Incidents extends Component {
         const [orderId, orderItemId] = orderNumberTiLa.split('-');
         this.props.getOrderDetails({orderId}).then(res => {
           const {data} = res.value;
-          const orderObj = data.order_items.filter(order => order.order_item_ids[0] === orderNumberTiLa)[0];
+          const orderObj = data && data.order_items ? data.order_items.filter(order => order.order_item_ids[0] === orderNumberTiLa)[0] : '';
           this.setState({
             tktOrder: orderObj
           })
@@ -192,7 +192,7 @@ class Incidents extends Component {
     const {id, createdTime, referenceNumber, subject, statusTiLa} = tkt;
     const isSelected = id === this.state.selectedIncident;
     return (
-      <div key={id} onClick={this.selectTicket(id)} className={`${styles['TktTitleContainer']} ${isSelected && styles['openBGColor']}`}>
+      <div key={id} onClick={this.selectTicket(id)} className={`${styles['TktTitleContainer']} ${isSelected && styles['openBGColor2']}`}>
         <div className={styles['fs-14p']} dangerouslySetInnerHTML={{__html: subject}} />
         <div className={`${styles['fs-13p']} ${styles['greyColor']}`}>{referenceNumber}</div>
         <div className={`${styles['fs-12p']} ${styles['greyColor']} ${styles['flex']} ${styles['justify-between']}`}>
@@ -297,7 +297,7 @@ class Incidents extends Component {
         <div className={styles['tktContainer']}>
           <div className={styles['categoryContainer']}>{this.renderTicketColumn()}</div>
           <div className={styles['answersContainer']}>{this.renderTicketDetail()}</div>
-          <div><a href='https://fptsuae.custhelp.com/app/chat/chat_landing' target="_blank" /></div>
+          <div><a href='https://tila-en.custhelp.com/app/chat/chat_landing' target="_blank" /></div>
         </div>
       </div>
     )

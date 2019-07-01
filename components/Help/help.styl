@@ -24,6 +24,14 @@
   padding 20px 10px 
   margin 0px 10px
 
+.answerArrowIcon
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  right: 25px;
+  top: 20px;
+  cursor: pointer
+
 .faqIcon
   height 100px
   width 100px
@@ -34,16 +42,22 @@
   padding 10px 20px
   color #000
   border-radius 0px 0px 0px 14px;
-  border solid 1px #101820;
-  background-color #ffffff;
+  border solid 1px #101820
+  background-color #ffffff
 
 .as-flex-end
   align-self flex-end
 
 .openBGColor
-  background-color #F8F8F8
+  background linear-gradient(90deg, #000 0.5%, #FFF 0%);
+  box-shadow 0px 0px 15px -5px #ccc
+  padding: 10px 25px 20px 25px !important;
+  margin-top: -10px;
+
+.openBGColor2
+  background linear-gradient(90deg, #000 1%, #FFF 0%);
 .selectedBG
-  background-color #45689A
+  background-color #000
 .whiteBG
   background-color  #ffffff
 .fwBolder
@@ -54,7 +68,7 @@
 .blackColor
   color #000000
 .highlightColor
-  color #44689A
+  color #000
 .greyColor
   color #848484
 
@@ -73,6 +87,8 @@
   height 110px
 .ht-175
   height 175px
+.ht-185
+  height 185px
 .ht-300
   height 300px
 
@@ -93,13 +109,13 @@
   font-size 14px
 
 .bT
- border-top 0.25px solid #f2f2f2
+ border-top 1px solid #efeff4
 .bB
- border-bottom 0.25px solid #f2f2f2
+ border-bottom 1px solid #efeff4
 .bR
- border-right 0.25px solid #f2f2f2
+ border-right 1px solid #efeff4
 .bL
- border-left 0.25px solid #f2f2f2
+ border-left 1px solid #efeff4
 
 .flexColCenterContainer
   @extend .flexCenterContainer
@@ -110,7 +126,7 @@
   overflow hidden
 
 .helpContentCont
-  height calc(100% - 110px)
+  height 100%
   overflow auto
 
 .helpHeroContainer 
@@ -131,12 +147,34 @@
 .searchContainer
   @extends .boxContainer 
   height 40px
+  overflow hidden
+
+.searchForm
+  width 100%
+  height 100%
+
+.searchInput
+  border none
+  outline none
+  width 100%
+  height 100%
+  padding 0px 10px !important
+  border none !important
+  font-size 14px !important
 
 .contactContainer
   @extends .boxContainer 
   height 65px
   position absolute
   bottom -30px
+
+.contactContainer2
+  @extends .contactContainer
+  background-color #F9F9F9
+  border 1px solid #ccc
+  box-shadow none
+  font-size 14px !important
+
 
 .helpContentContainer 
   margin auto
@@ -187,13 +225,13 @@
   width 25%
   height 100%
   overflow auto
-  border-right 0.25px solid #f2f2f2
-  border-left 0.25px solid #f2f2f2
+  border 1px solid #efeff4
+  
 
 .answersContainer
   width 75%
   overflow auto
-  padding 0px 20px
+  padding 10px 20px
 
 .showDiv
   display block
@@ -261,15 +299,17 @@
 
 .questionBox-open
   @extend .questionBox
-  color #45689A
+  color #000
   font-weight 800
   border-bottom 0
+  font-size: 16px
+  margin-bottom: 10px
 
 .questionBox-close
   @extend .questionBox
   color #000000
   font-weight 500
-  border-bottom 0.25px solid #f2f2f2
+  border-bottom 1px solid #efeff4
 
 .orderImgContainer
   flex-shrink 0
@@ -334,7 +374,7 @@
 .ModalTextArea
   @extends .textAreaBox
   margin 10px 0px
-  min-height 250px
+  min-height 120px
 
 .MsgTextArea
   @extends .textAreaBox
@@ -413,10 +453,11 @@
   justify-content space-evenly
 
 .ansContainer
-  padding 0px 10px
+  padding 10px 25px
+  position relative
+  transition all 0.15s
 
 .answers
-  margin 10px 0px
   font-size 13px
   border-bottom 0
   overflow hidden
@@ -424,7 +465,7 @@
 
 .openedAnswers
   height auto
-  border-bottom 0.25px solid #f2f2f2
+  color #333
 
 .openedAnswers ul li
   list-style initial
@@ -490,6 +531,7 @@
 .backHelp
   margin 1px
   font-size 13px
+  width: 25%
 
 .dropDownArrow
   position absolute
@@ -497,6 +539,23 @@
   right 0
   top 25%
   font-size 12px
+
+.answerNavContainer
+  display flex
+  align-items: flex-end
+
+.searchResultsTitleContainer
+  width: 75%
+  padding: 0px 25px
+
+.searchResultsTitle
+  font-weight: 800
+  font-size: 16px
+  padding: 5px 0px
+
+.searchResultsSummary
+  font-size: 14px
+  color: #333
 
 .fileNameCont
   width 90%
@@ -516,6 +575,7 @@
   right 0
   width 100%
   height 100%
+  cursor pointer
 
 .tktClmCont
   max-height 600px
@@ -542,6 +602,42 @@
   height 100%
   width 100%
   overflow auto
+
+.fileUploadInputCont
+  width 175px
+  position relative
+
+.fileAttachIcon
+  width 20px
+  height auto
+  margin 5px
+
+.loader-div
+          width 20px
+          height 20px
+          margin auto
+          .loader-styl
+            svg
+              animation rotate 1.4s linear infinite;
+              -webkit-animation rotate 1.4s linear infinite;
+              -moz-animation rotate 1.4s linear infinite;
+              @keyframes rotate {
+                to {
+                  transform rotate(360deg);
+                }
+              }
+
+              @-webkit-keyframes rotate {
+                to {
+                  -webkit-transform rotate(360deg);
+                }
+              }
+
+              @-moz-keyframes rotate {
+                to {
+                  transform rotate(360deg);
+                }
+              }
 
 @keyframes slideOpen {
   from {transform: translateX(800px)}

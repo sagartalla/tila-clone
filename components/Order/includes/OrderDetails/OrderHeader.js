@@ -217,7 +217,10 @@ class OrderHeader extends Component {
                   <span className={`${styles.fontW600} ${styles['light-gry-clr']} ${styles['flex-center']} ${styles['fs-14']}`}>
                     {total_price.display_value}&nbsp;{total_price.currency_code}
                     {/* (<a onMouseOver={this.showToolTip} onMouseLeave={this.hideToolTip}>i</a>) */}
-                    <span onMouseOver={this.showToolTip} onMouseLeave={this.hideToolTip} className={`${styles.relative} ${styles['checkout-quat']} ${styles['fs-12']} ${styles['flex-center']} ${styles['justify-around']}`}>
+                    <span
+                      onMouseOver={this.showToolTip}
+                      onMouseLeave={this.hideToolTip}
+                      className={`${styles.relative} ${styles['checkout-quat']} ${styles['fs-12']} ${styles['flex-center']} ${styles['justify-around']} ${lang === 'en' ? '' : styles['flip-questionmark']}`}>
                       {'?'}
                       {
                       showToolTip ?

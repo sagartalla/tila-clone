@@ -318,7 +318,7 @@ class Payments extends React.Component {
     return (
       <div className={styles['payment']}>
         <HeaderBar hideSearch hideMegamenu/>
-        <Grid className={styles['pt-50']}>
+        <Grid style={{ marginTop: '-20px' }}>
           <Row>
             <Col xs={12} md={12} sm={12}>
               <h4 className={`${styles['mt-30']} ${styles['mb-20']} ${styles['fontW600']} ${styles['light-gry-clr']}`}>{PAYMENT_PAGE.SECURE_CHECKOUT}</h4>

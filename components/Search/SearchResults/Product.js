@@ -320,7 +320,7 @@ class Product extends Component {
                     </a> */}
                   </div>
                 }
-                <div onClick={this.renderQuickView} className={`${styles['img-cont']} ${styles['border-radius4']} ${styles['relative']}`}>
+                <div className={`${styles['img-cont']} ${styles['border-radius4']} ${styles['relative']}`}>
                       <div className={`${styles['image-div']} srp-slider`}>
                         {src ?
                             <img src={src} alt="imageURL" />
@@ -364,8 +364,8 @@ class Product extends Component {
                 </div>
                 <div className={styles['desc-cont']}>
                   <div className={`${styles['pb-20']} ${styles['pl-20']} ${styles['pr-20']} ${styles['flex']} ${styles['flex-colum']}`}>
-                    <h5 className={`${styles['prdt-name']} ${styles['pt-15']} ${styles['pb-5']}  ${styles['m-0']} ${styles['ellips']}`}>
-                      <span className={`${styles['fontW600']} ${styles['black-color']}`}>{brand}</span> <span className={`${styles['thick-gry-clr']} ${styles['fontW300']}`}>{displayName.replace(brand, '').trim()}</span>
+                    <h5 className={`${styles['prdt-name']} ${styles['pt-15']} ${styles['pb-5']}  ${styles['m-0']}`}>
+                      <span className={`${styles['fontW600']} ${styles['black-color']}`}>{brand}</span> <span className={`${styles['thick-gry-clr']} ${styles['fontW300']}`}>{displayName.replace(brand, '').substr(0, 55).trim()}</span>
                     </h5>
                     <span>
                       <span className={`${styles['pr-5']}`}>{variants.length > 0 && variants[selectedIndex].sellingPrice && getPriceAndOffer()}</span>

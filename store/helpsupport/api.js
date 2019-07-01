@@ -1,6 +1,7 @@
 import axios from 'axios';
 import constants from '../helper/constants';
 
+const getAnswerByKeywordApi = (keyword, params) => axios.post(`${constants.HNS_URL}/answer/search-answers`, [keyword], { params });
 
 const getCategoriesApi = () => axios.get(`${constants.HNS_URL}/answer/get-all-categories`);
 
@@ -23,5 +24,15 @@ const updateTktApi = (params, data) => axios.patch(`${constants.HNS_URL}/ticket/
 const downloadFileAttachmentApi = (ticketNumber, fileId) => axios.get(`${constants.HNS_URL}/ticket/get-file/${ticketNumber}/${fileId}`);
 
 export default {
-  getCategoriesApi, getQuestionsApi, getAllIssuesApi, getAnswersApi, getIssuesApi, getAllTktsApi, getTktDetailApi, raiseTktApi, updateTktApi, downloadFileAttachmentApi,
+  getAnswerByKeywordApi,
+  getCategoriesApi,
+  getQuestionsApi,
+  getAllIssuesApi,
+  getAnswersApi,
+  getIssuesApi,
+  getAllTktsApi,
+  getTktDetailApi,
+  raiseTktApi,
+  updateTktApi,
+  downloadFileAttachmentApi,
 };
