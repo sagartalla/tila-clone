@@ -641,7 +641,7 @@ export const AR_KEYWORDS = {
     ORDER_DETAILS_SUMMERY: 'ملخص الطلب',
     THERE_IS_AN_EXCHANGE_ORDER: 'This is an exchange order on the item you have requested for exchange.',
     REFUND_INITIATED: 'Refund Initiated.',
-    THIS_ORDER_CONTAINS_A_GIFT: 'This order contains gift.',
+    THIS_ORDER_CONTAINS_A_GIFT: 'هذا الطلب يحتوي على هدية',
     VIEW_DETAILS: 'View details',
     ORDER_UNSUCCESSFUL: 'Order Unsuccessful',
     REFUND_STATUS: 'Refund Status',
@@ -652,6 +652,7 @@ export const AR_KEYWORDS = {
     REFUND_TO: 'Refund to',
     COMPLETED: 'Completed',
     IN_PROGRESS: 'In Progress',
+    MESSAGE: 'رسالة',
   },
   COUPON_OFFERS: {
     VIEW_TERMS: 'استعرض الشروط والأحكام',

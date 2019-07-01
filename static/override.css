@@ -209,8 +209,8 @@
 
 .dropdown-menu {
     border: none;
-    max-height: 300px;
-    overflow: auto;
+    /* max-height: 300px;
+    overflow: auto; */
 }
 
 #sort-toggle, #sort-toggle:hover, #sort-toggle:focus {

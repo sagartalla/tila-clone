@@ -25,10 +25,16 @@ const displayDescription = (count, el, index) => {
   return (
     <Col key={'desc_'+index} className={`${styles['elt-description-column']}`} md={ count === 3 ? 4 : count === 2 ? 6 : 12 }>
       <Row>
-        <Col className={styles['mb-5']} md={ count === 3 || count === 2 ? 12 : 8 }>
-          {renderVideoImage(el.media.url)[el.media.type]}
-        </Col>
-        <Col md={count === 3  || count === 2 ? 12 : 4 }>
+        {
+          el.media.url
+          ?
+            <Col className={styles['mb-5']} md={ count === 3 || count === 2 ? 12 : 8 }>
+              {renderVideoImage(el.media.url)[el.media.type]}
+            </Col>
+          :
+            null
+        }
+        <Col md={el.media.url ? (count === 3  || count === 2 ? 12 : 4) : 12 }>
           <h4>{el.title}</h4>
           <p className={styles['fs-16']}>{el.body}</p>
         </Col>

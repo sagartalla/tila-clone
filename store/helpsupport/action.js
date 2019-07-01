@@ -55,9 +55,9 @@ const actionCreators = {
     type: actions.DOWNLOAD_FILE_ATTACHMENT,
     payload: api.downloadFileAttachmentApi(ticketNumber, fileId),
   }),
-  getAnswerByKeyword: keyword => ({
+  getAnswerByKeyword: (keyword, params) => ({
     type: actions.GET_ANSWER_BY_KEYWORD,
-    payload: api.getAnswerByKeywordApi(keyword),
+    payload: api.getAnswerByKeywordApi(keyword, params),
   }),
 };
 

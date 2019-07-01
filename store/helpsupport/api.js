@@ -1,7 +1,7 @@
 import axios from 'axios';
 import constants from '../helper/constants';
 
-const getAnswerByKeywordApi = keyword => axios.post(`${constants.HNS_URL}/answer/search-answers`, [keyword]);
+const getAnswerByKeywordApi = (keyword, params) => axios.post(`${constants.HNS_URL}/answer/search-answers`, [keyword], { params });
 
 const getCategoriesApi = () => axios.get(`${constants.HNS_URL}/answer/get-all-categories`);
 
