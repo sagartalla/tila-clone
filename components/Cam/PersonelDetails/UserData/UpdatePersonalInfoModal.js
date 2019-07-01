@@ -107,7 +107,7 @@ class UpdatePersonalInfoModal extends React.Component {
         this.handleClose();
         toast(
           <ToastContent
-            msg={`${PERSONAL_INFO_MODAL.YOUR_PERSONAL}}`}
+            msg={`${PERSONAL_INFO_MODAL.YOUR_PERSONAL}`}
             msgType="success"
           />,
         );

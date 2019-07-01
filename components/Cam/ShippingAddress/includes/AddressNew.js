@@ -223,7 +223,7 @@ const AddressNew = (props) => {
         <Row>
           <Col md={12} sm={12} xs={12}>
             <div className={`${styles['checkbox-material']} ${styles['mt-25']} ${styles['mb-25']}`}>
-              <input id="prefer-loaction" type="checkbox" onClick={setAsDefaultLocation} defaultChecked={data.default} />
+              <input id="prefer-loaction" type="checkbox" onClick={setAsDefaultLocation} checked={data.default} />
               <label htmlFor="prefer-loaction" className={`${styles.fontW300} ${styles['thick-gry-clr']} ${styles['mb-0']}`}>{DELIVERY_ADDR_PAGE.PREF_LOC}</label>
             </div>
           </Col>
