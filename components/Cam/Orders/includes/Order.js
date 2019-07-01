@@ -93,7 +93,7 @@ const Order = ({ order, getInvoice }) => {
           <a href={`/${country}/${language}/help/answers/orders#${order.id}`}>
             <span className={`${styles['p-5']} ${styles['black-color']} ${styles['flex-center']} ${styles['ml-10']}`}>
               <SVGComponent clsName={`${styles['help-icon']}`} src="icons/help-icon/help" />
-              &nbsp;&nbsp;{ORDERS.NEED_HELP}?
+              &nbsp;&nbsp;{ORDERS.NEED_HELP} <span className={`${lang === 'en' ? '' : styles['flip-questionmark']}`}>?</span>
             </span>
           </a>
 
