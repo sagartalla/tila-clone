@@ -13,8 +13,11 @@ import main_en from '../../layout/main/main_en.styl';
 import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './help_en.styl';
 import styles_ar from './help_ar.styl';
+import { languageDefinations } from '../../utils/lang';
 
-const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+
+const languageLabel = languageDefinations();
 
 import constants from '../../constants';
 import { toast } from 'react-toastify';
@@ -39,7 +42,7 @@ const FileAttachment = (props) => {
         reader.onerror = (error) => { console.log('Error: ', error) };
         reader.readAsDataURL(file);
       } else {
-        alert('File size limit is 10MB')
+        alert(languageLabel['HNS']['FILE_SIZE_LIMIT'])
       }
     }
   }
@@ -67,18 +70,18 @@ const FileAttachment = (props) => {
                 <SVGComponent src={`helpsupport/hnsAttach`} />
               </div>
               <div>
-                Attach Files
+                {languageLabel['HNS']['ATTACH']}
               </div>
             </div>
             <div className={`${styles['fs-12p']} ${styles['greyColor']}`}>
-              Jpeg, Pdf, PNG less than 8 MB
+              {languageLabel['HNS']['ATTACH_FILE_TYPES']}
             </div>
           </div>
         </div>
       </div>
       {Object.keys(props.files).length ?
         <div className={styles['fs-12p']}>
-          <div>{`Attachments (${Object.keys(props.files).length})`}</div>
+          <div>{`${languageLabel['HNS']['ATTACHMENTS']} (${Object.keys(props.files).length})`}</div>
           {Object.keys(props.files).map(renderFiles)}
         </div>
         : null}
@@ -192,7 +195,7 @@ class EmailModal extends Component {
 
   createIncident = () => {
     if (!this.state.email || !this.state.selectedIssue) {
-      alert('Email and Issue is mandatory');
+      alert(languageLabel['HNS']['EMAIL_ISSUE_MANDATORY']);
       return
     }
     const param = {
@@ -242,7 +245,7 @@ class EmailModal extends Component {
         this.props.closeModal();
         toast(
           <ToastContent
-            msg={`Your query has been successfully created with reference - ${this.state.referenceNumber}. We will get back to you within 48 hrs`}
+            msg={`${languageLabel['HNS']['QUERY_SUCCESS']} - ${this.state.referenceNumber}. ${languageLabel['HNS']['QUERY_TIME']}`}
             msgType='success'
           />,
           { autoClose: 5000 }
@@ -272,7 +275,7 @@ class EmailModal extends Component {
           <div className={styles['orderImgContainer']}><img className={styles['imgContain']} src={`${constants.mediaDomain}/${image_url}`} /></div>
           <div className={styles['p-10-20']}>
             <div>{title}</div>
-            <div className={`${styles['mV-5']} ${styles['fs-12p']}`}>{`Order Status - ${status}`}</div>
+            <div className={`${styles['mV-5']} ${styles['fs-12p']}`}>{`${languageLabel['HNS']['ORDER_STATUS']} - ${status}`}</div>
           </div>
         </div>
       </div>
@@ -288,16 +291,6 @@ class EmailModal extends Component {
       </div>
     )
   }
-  renderPostIncidentCreation = () => {
-    const { pathname } = window.location;
-    const incidentsURL = pathname.replace(this.props.query, `incidents#${this.state.incidentId}`)
-    return (
-      <div>
-        <h4>Help is on the way</h4>
-        <div>Your query has been successfully created with reference - <a href={incidentsURL}>{this.state.referenceNumber}</a>. We will get back to you within 48 hrs</div>
-      </div>
-    )
-  }
   render() {
     const { dropDownType, orders, selectedOrder, selectedIssue, email, incidentCreated, referenceNumber, firstname, lastname } = this.state;
     const { allIssueData } = this.props;
@@ -307,28 +300,28 @@ class EmailModal extends Component {
         {!incidentCreated ?
           <React.Fragment>
             <div className={styles['modalTitleContainer']}>
-              <h4>WHAT CAN WE HELP YOU WITH</h4>
+              <h4>{languageLabel['HNS']['MODAL_TITLE_MSG']}</h4>
               <h4 className={styles['pointer']} onClick={this.props.closeModal}>X</h4>
             </div>
             <div className={styles['pV-40']}>
               <div className={styles['pV-10']}>
-                <div className={styles['formLabel']}>Enter Email ID</div>
+                <div className={styles['formLabel']}>{languageLabel['HNS']['ENTER_EMAIL']}</div>
                 <input type="text" name="email" value={email} onChange={this.handleUserInfoChange} />
               </div>
               {this.props.type === 'chat' &&
                 <div className={styles['pV-10']}>
-                  <div className={styles['formLabel']}>Enter Firstname</div>
+                  <div className={styles['formLabel']}>{languageLabel['HNS']['ENTER_FIRSTNAME']}</div>
                   <input type="text" name="firstname" value={firstname} onChange={this.handleUserInfoChange} />
                 </div>
               }
               {this.props.type === 'chat' &&
                 <div className={styles['pV-10']}>
-                  <div className={styles['formLabel']}>Enter Lastname</div>
+                  <div className={styles['formLabel']}>{languageLabel['HNS']['ENTER_LASTNAME']}</div>
                   <input type="text" name="lastname" value={lastname} onChange={this.handleUserInfoChange} />
                 </div>
               }
               <div className={styles['pV-20']}>
-                <div className={styles['formLabel']}>Select an Issue</div>
+                <div className={styles['formLabel']}>{languageLabel['HNS']['SELECT_ISSUE']}</div>
                 <div className={styles['relative']}>
                   <div tabIndex={0} onBlur={this.handleDropDown('')} onClick={this.handleDropDown('issue')}
                     className={styles['dropDownInput']}
@@ -344,7 +337,7 @@ class EmailModal extends Component {
               </div>
               {selectedIssue && selectedIssue.orderRelated && this.props.isLoggedIn ?
                 <div className={styles['pV-20']}>
-                  <div className={styles['formLabel']}>Select an Order</div>
+                  <div className={styles['formLabel']}>{languageLabel['HNS']['SELECT_ORDER']}</div>
                   <div className={styles['relative']}>
                     <div tabIndex={1} onBlur={this.handleDropDown('')} onClick={this.handleDropDown('order')}
                       className={styles['dropDownInput']}
@@ -355,14 +348,14 @@ class EmailModal extends Component {
                     <div className={dropDownType !== 'order' ? styles['dropDownBox-close'] : styles['dropDownBox-open']}
                       onScroll={this.handleOrdersScroll}
                     >
-                      {orders.length ? orders.map(this.renderOrders) : 'No Orders'}
+                      {orders.length ? orders.map(this.renderOrders) : languageLabel['HNS']['NO_ORDERS']}
                     </div>
                   </div>
                 </div>
                 : null}
               {this.props.type === "email" ?
                 <div className={styles['pV-20']}>
-                  <div className={styles['formLabel']}>Write a Message</div>
+                  <div className={styles['formLabel']}>{languageLabel['HNS']['WRITE_MSG']}</div>
                   <textarea
                     value={this.state.msg}
                     onChange={this.handleMsg}
@@ -380,24 +373,18 @@ class EmailModal extends Component {
                 onClick={this.createIncident}
                 className={styles['modalFormButton']}
               >
-                SEND EMAIL
+                {languageLabel['HNS']['SEND_EMAIL']}
           </div>
               :
               <div
                 onClick={this.openChat}
                 className={styles['modalFormButton']}
               >
-                START CHATTING
+                {languageLabel['HNS']['START_CHATTING']}
           </div>
             }
           </React.Fragment>
-          : <React.Fragment>
-            <div className={styles['modalTitleContainer']}>
-              <h4>Incident Created</h4>
-              <h4 className={styles['pointer']} onClick={this.props.closeModal}>X</h4>
-            </div>
-            {this.renderPostIncidentCreation()}
-          </React.Fragment>
+          : null
         }
 
       </div>
