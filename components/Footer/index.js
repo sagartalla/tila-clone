@@ -262,31 +262,37 @@ const FooterBar = props => (
         <Row className={styles['footer-social-list']}>
           <Col md={3} sm={6} className={`${styles['footer-social-list']} ${styles['pr-0']}`}>
             <h4 className={styles['flex-center']}>
-              <span className={`${styles['footer-social-title']} ${styles['mr-10']}`}><img src="/static/img/bg-img/snapchat.png" className={styles['img-responsive']} /></span>
-              <span className={`${styles.fontW600}`}>{FOOTER_PAGE.ON_SNAP}</span>
-              <span className={`${styles['follow-sc-btn']} ${styles['fs-10']} ${styles['lne-ht2']}  ${styles['ml-10']} ${styles['pl-15']} ${styles['pr-15']}`}>{FOOTER_PAGE.FOLLOW}</span>
+                <span className={`${styles['footer-social-title']} ${styles['mr-10']}`}><img src="/static/img/bg-img/snapchat.png" className={styles['img-responsive']} /></span>
+                <span className={`${styles.fontW600}`}>{FOOTER_PAGE.ON_SNAP}</span>
+                <span className={`${styles['follow-sc-btn']} ${styles['fs-10']} ${styles['lne-ht2']}  ${styles['ml-10']} ${styles['pl-15']} ${styles['pr-15']}`}>{FOOTER_PAGE.FOLLOW}</span>
             </h4>
           </Col>
           <Col md={3} sm={6} className={`${styles['footer-social-list']} ${styles['pr-0']}`}>
+          <a href="https://twitter.com/TilaSocial" target="_blank">
             <h4 className={styles['flex-center']}>
               <span className={`${styles['footer-social-title']} ${styles['mr-10']}`}><img src="/static/img/bg-img/bitmap-twitter.jpg" className={styles['img-responsive']} /></span>
               <span className={`${styles['twitter-clr']} ${styles.fontW600}`}>{FOOTER_PAGE.ON_TWITTER}</span>
               <span className={`${styles['follow-twi-btn']} ${styles['fs-10']} ${styles['lne-ht2']} ${styles['white-color']} ${styles['ml-10']} ${styles['pl-15']} ${styles['pr-15']}`}>{FOOTER_PAGE.FOLLOW}</span>
             </h4>
+          </a>
           </Col>
           <Col md={3} sm={6} className={`${styles['footer-social-list']} ${styles['pr-0']}`}>
+          <a href="https://www.instagram.com/tilasocial/" target="_blank">
             <h4 className={styles['flex-center']}>
               <span className={`${styles['footer-social-title']} ${styles['mr-10']}`}><img src="/static/img/bg-img/bitmap-instgram.jpg" className={styles['img-responsive']} /></span>
               <span className={`${styles.fontW600}`}>{FOOTER_PAGE.ON_INSTAGRAM}</span>
               <span className={`${styles['follow-inst-btn']} ${styles['fs-10']} ${styles['lne-ht2']} ${styles['white-color']} ${styles['ml-10']} ${styles['pl-15']} ${styles['pr-15']}`}>{FOOTER_PAGE.FOLLOW}</span>
             </h4>
+          </a>  
           </Col>
           <Col md={3} sm={6} className={`${styles['footer-social-list']} ${styles['pr-0']}`}>
+          <a href="https://www.facebook.com/TilaSocialKSA/" target="_blank">
             <h4 className={styles['flex-center']}>
               <span className={`${styles['footer-social-title']} ${styles['mr-10']}`}><img src="/static/img/bg-img/bitmap-social-fb.jpg" className={styles['img-responsive']} /></span>
               <span className={`${styles['lgt-blue']} ${styles.fontW600}`}>{FOOTER_PAGE.ON_FACEBOOK}</span>
               <span className={`${styles['follow-fb-btn']} ${styles['fs-10']} ${styles['lne-ht2']} ${styles['white-color']} ${styles['ml-10']} ${styles['pl-15']} ${styles['pr-15']}`}>{FOOTER_PAGE.FOLLOW}</span>
             </h4>
+          </a>  
           </Col>
         </Row>
       </Grid>
