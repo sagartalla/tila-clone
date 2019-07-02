@@ -11,8 +11,11 @@ import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './help_en.styl';
 import styles_ar from './help_ar.styl';
 import SVGComponent from '../common/SVGComponet';
+import { languageDefinations } from '../../utils/lang';
 
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+
+const languageLabel = languageDefinations();
 
 const getIds = (selectedId, childIds) => {
   let id = [selectedId];
@@ -46,7 +49,7 @@ class Answers extends Component {
       this.getAnswerByKeyword();
   }
   getAnswerByKeyword = () => {
-    this.state.currentPage < this.state.totalPages && (() => {
+    !!this.searchQuery && this.state.currentPage < this.state.totalPages && (() => {
       this.setState({
         loading: true
       });
@@ -105,7 +108,7 @@ class Answers extends Component {
     if ((fromParent && !categoryObj.hasParent) || (!fromParent)) {
       return(
         <div key={categoryObj.id}
-          className={`${index !==0 && styles['bT']} ${isOpened && styles['openBGColor']}`}
+          className={`${index !==0 && styles['bT']} ${isOpened && styles[lang === 'en' ? 'openBGColor' : 'openBGColorAr']}`}
         >
           <div
             className={`${styles['categoryValue']} ${isSelected && styles['selectedBG']} ${fromParent && styles['fwBolder']}`}
@@ -137,7 +140,7 @@ class Answers extends Component {
     const [id, question, ans, categoryId, parentId] = this.state.answerData[answerKey];
     const isOpened = (id === this.state.openedAnswer) || (index === 0 && !!this.searchQuery & !!!this.state.openedAnswer);
     return (
-      <div key={id} className={`${styles['ansContainer']} ${isOpened && styles['openBGColor']}`}>
+      <div key={id} className={`${styles['ansContainer']} ${isOpened && styles[lang === 'en' ? 'openBGColor' : 'openBGColorAr']}`}>
         <div className={`${styles['answerArrowIcon']}`}>
         {isOpened ? <SVGComponent src={`helpsupport/upArrow`} /> : <SVGComponent src={`helpsupport/downArrow`} />}
         </div>
@@ -164,7 +167,7 @@ class Answers extends Component {
         href={ordersUrl}
         className={`${styles['categoryValue']} ${styles['fwBolder']} ${styles['bB']} ${isSelected ? `${styles['selectedBG']} ${styles['whiteColor']}` : styles['blackColor']}`}
       >
-        Recent Orders
+        {languageLabel['HNS']['RECENT_ORDERS']}
       </a>
     )
   }
@@ -175,11 +178,11 @@ class Answers extends Component {
     return(
       <div>
         <div className={styles['answerNavContainer']}>
-        <a href={helpCenterUrl} className={styles['backHelp']}>Back to Help Center</a>
+        <a href={helpCenterUrl} className={styles['backHelp']}>{languageLabel['HNS']['BACK_TO_HELP']}</a>
         {this.searchQuery ?
             <div className={styles['searchResultsTitleContainer']}>
-              <div className={styles['searchResultsTitle']}>SEARCH RESULTS</div>
-              <div className={styles['searchResultsSummary']}>{`${this.state.count} results for ${this.searchQuery}`}</div>
+              <div className={styles['searchResultsTitle']}>{languageLabel['HNS']['SEARCH_RESULTS']}</div>
+              <div className={styles['searchResultsSummary']}>{`${this.state.count} ${languageLabel['HNS']['RESULTS_FOR']} ${this.searchQuery}`}</div>
             </div>
           : null}
         </div>
@@ -199,7 +202,7 @@ class Answers extends Component {
                     </div>
                 }
               </div>
-            : <div>{this.state.loading ? 'Loading' : 'No Questions Available'}</div>
+            : <div>{this.state.loading ? languageLabel['HNS']['LOADING'] : languageLabel['HNS']['NO_Q_AVAILABLE']}</div>
             :
               <div className={styles['ht-100P']}>
                 <Orders query={this.props.query} isLoggedIn={this.props.isLoggedIn} renderContactCard={this.props.renderContactCard} handleContactClick={this.props.handleContactClick}/>
