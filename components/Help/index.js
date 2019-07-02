@@ -15,6 +15,9 @@ import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './help_en.styl';
 import styles_ar from './help_ar.styl';
 import SVGComponent from '../common/SVGComponet';
+import { languageDefinations } from '../../utils/lang';
+
+const { HNS } = languageDefinations();
 
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
@@ -94,7 +97,7 @@ class Help extends Component {
                 <h3>Hi, How can we help you today ?</h3>
                 <div className={styles['searchContainer']}>
                   <form className={styles['searchForm']} onSubmit={this.handleSearch}>
-                    <input className={styles['searchInput']} name="searchQuery" type='search' value={this.state.searchQuery} onChange={this.handleQueryChange} placeholder="Search for a topic or questions" />
+                    <input className={styles['searchInput']} name="searchQuery" type='search' value={this.state.searchQuery} onChange={this.handleQueryChange} placeholder={HNS['SEARCH_PLACEHOLDER']} />
                   </form>
                 </div>
               </div>
