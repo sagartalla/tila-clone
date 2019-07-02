@@ -65,7 +65,7 @@ for i in range(10px, 46px, 2)
 
 /* Paddings and Margins*/
 // it will generate margin from m-5, m-10, m-15, ...., to m-40.
-mrgpad(types=margin padding margin-left margin-right margin-top margin-bottom  padding-left padding-right padding-top padding-bottom, n)
+mrgpad(types=margin padding margin-left margin-right margin-top margin-bottom  padding-left padding-right padding-top padding-bottom padding-vertical padding-horizontal margin-vertical margin-horizontal, n)
   padding unit(n/base-px, rem) if padding in types
   padding-left unit(n/base-px, rem) if padding-left in types
   padding-right unit(n/base-px, rem) if padding-right in types
@@ -76,6 +76,14 @@ mrgpad(types=margin padding margin-left margin-right margin-top margin-bottom  p
   margin-right unit(n/base-px, rem) if margin-right in types
   margin-top unit(n/base-px, rem) if margin-top in types
   margin-bottom unit(n/base-px, rem) if margin-bottom in types
+  margin-top unit(n/base-px, rem) if margin-vertical in types
+  margin-bottom unit(n/base-px, rem) if margin-vertical in types
+  padding-top unit(n/base-px, rem) if padding-vertical in types
+  padding-bottom unit(n/base-px, rem) if padding-vertical in types
+  padding-left unit(n/base-px, rem) if padding-horizontal in types
+  padding-right unit(n/base-px, rem) if padding-horizontal in types
+  margin-left unit(n/base-px, rem) if margin-horizontal in types
+  margin-right unit(n/base-px, rem) if margin-horizontal in types
 
 for x in range(0px, 80px, 5)
   .m-{x}
@@ -92,6 +100,18 @@ for x in range(0px, 80px, 5)
 
   .mb-{x}
     mrgpad(margin-bottom, x)
+  
+  .mH-{x}
+    mrgpad(margin-horizontal, x)
+
+  .mV-{x}
+    mrgpad(margin-vertical, x)
+
+  .pH-{x}
+    mrgpad(padding-horizontal, x)
+
+  .pV-{x}
+    mrgpad(padding-vertical, x)
 
   .p-{x}
     mrgpad(padding, x)
