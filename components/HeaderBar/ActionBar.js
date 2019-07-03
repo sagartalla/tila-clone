@@ -73,11 +73,13 @@ class ActionBar extends Component {
     // console.log('loggedin', this.props.isLoggedIn);
     if (this.props.isLoggedIn) {
       this.props.getWishlist();
+      this.props.getWishlistData();
     }
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.isLoggedIn !== this.props.isLoggedIn) {
+      this.props.getWishlistData();
       this.props.getWishlist();
     }
     let show = ((nextProps.isLoggedIn != this.props.isLoggedIn) && !this.state.logoutClicked) || this.state.loginClicked || !!nextProps.error || (!nextProps.isLoggedIn && nextProps.showLogin) || nextProps.loginInProgress || nextProps.showEmailVerificationScreen;
@@ -172,14 +174,14 @@ class ActionBar extends Component {
             }
           </NoSSR>
         </div>
-        <div className={`${styles['action-item']} ${styles['pr-20']} ${styles['pl-20']} ${styles['border-rt']} ${styles['flex-center']} ${styles['justify-center']}`}>
-        <Dropdown id="cart-toggle" className={`${styles['wishlist-inn']}`}>
-            <Dropdown.Toggle style={{ display: 'none' }}/>
+        <div className={`${styles['action-item']} ${styles['pr-15']} ${styles['pl-15']} ${styles['flex-center']} ${styles['justify-center']}`}>
+        <Dropdown id="cart-toggle" className={`${styles['wishlist-inn']} ${styles['round-shape']} ${styles['flex-center']} ${styles['justify-center']}`}>
+            <Dropdown.Toggle style={{ display: 'none' }} />
             <Link route={`/${country}/${language}/cam/wishlist`}>
             <a style={{ dispaly: 'block' }} onClick={this.moveToWishlist}>
             <span className={`${styles['flex-center']} ${styles['justify-center']} ${styles.relative}`} title={PDP_PAGE.GO_TO_WISHLIST}>
               <SVGComponent clsName={`${styles['wish-list-icon']}`} src="icons/wish-list/wish-list-icon" />
-              <span className={`${styles.absolute} ${styles['cart-count']} ${styles['fs-10']} ${styles['white-color']}`}>{wishListCount}</span>
+              <span className={`${styles.absolute} ${styles['cart-count']} ${styles['flex-center']} ${styles['justify-center']} ${styles['fs-10']} ${styles['white-color']}`}>{wishListCount}</span>
             </span>
           </a>
             </Link>
@@ -192,14 +194,14 @@ class ActionBar extends Component {
             </Dropdown.Menu>
           </Dropdown>
         </div>
-        <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']}`}>
-          <Dropdown id="cart-toggle" className={`${styles['cart-inn']} ${styles['profile-login-inn']} ${styles['pr-20']}`}>
-            <Dropdown.Toggle style={{ display: 'none' }}/>
+        <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']} ${styles['pr-15']} ${styles['pl-15']}`}>
+          <Dropdown id="cart-toggle" className={`${styles['cart-inn']} ${styles['round-shape']} ${styles['flex-center']} ${styles['justify-center']}`}>
+            <Dropdown.Toggle style={{ display: 'none' }} />
             <Link route={`/${country}/${language}/cart`}>
               <a style={{ display: 'block' }}>
                 <span className={`${styles['flex-center']} ${styles['justify-center']} ${styles.relative}`} title={PDP_PAGE.GO_TO_CART}>
                   <SVGComponent clsName={`${styles['cart-icon']}`} src="icons/cart/cart-icon" />
-                  <span className={`${styles.absolute} ${styles['cart-count']} ${styles['fs-10']} ${styles['white-color']}`}>{cartResults.items.length}</span>
+                  <span className={`${styles.absolute} ${styles['cart-count']} ${styles['flex-center']} ${styles['justify-center']} ${styles['fs-10']} ${styles['white-color']}`}>{cartResults.items.length}</span>
                 </span>
               </a>
             </Link>
@@ -216,8 +218,8 @@ class ActionBar extends Component {
           </Dropdown>
         </div>
         <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']} ${styles.relative}`}>
-          <Dropdown id="profile-login" className={`${styles['profile-login-inn']} ${styles['account-inn']}`}>
-            <Dropdown.Toggle style={{ display: 'none' }}/>
+          <Dropdown id="profile-login" className={`${styles['round-shape']} ${styles['account-inn']} ${styles['flex-center']} ${styles['justify-center']}`}>
+            <Dropdown.Toggle style={{ display: 'none' }} />
               <span className={`${styles['flex-center']} ${styles['justify-center']} ${styles['profile-icon-main']}`}>
                 <SVGComponent clsName={`${styles['profile-icon']}`} src="icons/profile-icons/account-icon" />
               </span>
@@ -269,7 +271,7 @@ class ActionBar extends Component {
               </div>
             </Dropdown.Menu>
             :
-            <Dropdown.Menu className={`${styles.item}`}>
+            <Dropdown.Menu className={`${styles['account-item']}`}>
               <div className={styles['profile-part']}>
               <ul className={`${styles['pl-0']} ${styles['profile-inn']}`}>
                 <li className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']}`}>
@@ -332,6 +334,7 @@ const mapDispatchToProps = dispatch => bindActionCreators(
     getWishlist: wishListActionCreators.getWishlistProducts,
     getUserProfileInfo: personalActionCreators.getUserProfileInfo,
     downloadPic: personalActionCreators.downloadPic,
+    getWishlistData: wishListActionCreators.getWishlist,
   },
   dispatch,
 );

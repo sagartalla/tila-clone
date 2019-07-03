@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
-import { languageDefinations } from '../../../../utils/lang/';
 import PropTypes from 'prop-types';
-import { Row, Col } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 import Cookies from 'universal-cookie';
+import { languageDefinations } from '../../../../utils/lang/';
 import Button from '../../../common/CommonButton';
 import lang from '../../../../utils/language';
 
@@ -12,7 +12,6 @@ import styles_en from '../wishlist_en.styl';
 import styles_ar from '../wishlist_ar.styl';
 import { Link } from '../../../../routes';
 import SVGComponent from '../../../common/SVGComponet';
-import Blocker from '../../../common/Blocker';
 import constants from '../../../../constants';
 
 const cookies = new Cookies();
@@ -23,11 +22,10 @@ const country = cookies.get('country') || 'SAU';
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
 const MiniWishlist = (props) => {
-  console.log('propsdddd', props.items);
   const {
     addToCart,
   } = props;
-  const { CART_PAGE, DELIVERY_ADDR_PAGE, WISH_LIST_PAGE } = languageDefinations();
+  const { WISH_LIST_PAGE, HEADER_PAGE, PDP_PAGE } = languageDefinations();
   return (
     <div className={`${styles['mini-wishlist']}`}>
       <div className={`${styles['wishlist-container']} ${styles['border-t']}`}>
@@ -67,12 +65,12 @@ const MiniWishlist = (props) => {
                         id={listing_id}
                         data-cart-res
                         data-wish-id={wishlist_id}
-                        className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fs-12']} ${styles['move-to-cart-btn']}`}
+                        className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fs-12']}  ${styles['mr-20']} ${styles['move-to-cart-btn']}`}
                         onClick={buttonValue ? addToCart : () => {}}
                       >
                         {buttonValue ? WISH_LIST_PAGE.ADD_TO_CART_BTN : PDP_PAGE.IN_CART}
                       </button>
-                          <span id={wishlist_id} className={`${styles['flex']} ${styles['pointer']} ${styles['pl-20']}`} onClick={props.deleteItem}>
+                          <span id={wishlist_id} className={`${styles['flex']} ${styles['pointer']}`} onClick={props.deleteItem}>
                               <SVGComponent clsName={`${styles['delete-icon']}`} src="icons/delete-icon/delete-icon" />
                           </span>
                     </div>
@@ -85,27 +83,27 @@ const MiniWishlist = (props) => {
         </div>
       </div>
         <Col md={12} className={`${styles['wishlist-background']} ${styles['pb-15']}`}>
-          <div className={`${styles['fs-14']} ${styles['p-10']} ${styles.fontW600} ${styles['t-c']}`}>{props.wishListCount && props.wishListCount > 0 && props.wishListCount - 2 } more items</div>
+          <div className={`${styles['fs-14']} ${styles['p-10']} ${styles.fontW600} ${styles['t-c']}`}>
+          {props.wishListCount && props.wishListCount > 0 ? <a href={`/${country}/${language}/cam/wishlist`} className={`${styles['black-color']}`}>{props.wishListCount - 2 + ' ' + HEADER_PAGE.MORE_ITEMS}</a> : HEADER_PAGE. NO_ITEMS}</div>
+          {props.wishListCount > 0 &&
           <Button
-              className={`${styles.flex} ${styles.width100} ${styles['go-to-wishlist']} ${styles.fontW600} ${styles['fs-14']} ${styles['text-uppercase']}`}
-              btnText="Go To Wishlist"
-              onClick={props.moveToWishlist}
-            />
+            className={`${styles.flex} ${styles.width100} ${styles['go-to-wishlist']} ${styles.fontW600} ${styles['fs-14']} ${styles['text-uppercase']}`}
+            btnText={HEADER_PAGE.GO_TO_WISHLIST}
+            onClick={props.moveToWishlist}
+          />}
         </Col>
-        </div>
+    </div>
   );
 };
 
 MiniWishlist.propTypes = {
-  removeCartItem: PropTypes.func.isRequired,
-  decreaseItemCnt: PropTypes.func.isRequired,
-  increaseItemCnt: PropTypes.func.isRequired,
-  showBlocker: PropTypes.bool.isRequired,
-  data: PropTypes.object.isRequired,
+  moveToWishlist: PropTypes.func,
+  addToCart: PropTypes.func,
 };
 
 MiniWishlist.defaultProps = {
-  showCheckOutBtn: false,
+  moveToWishlist: f => f,
+  addToCart: f => f,
 };
 
 export default MiniWishlist;

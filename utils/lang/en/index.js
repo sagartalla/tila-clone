@@ -572,6 +572,9 @@ export const EN_KEYWORDS = {
     MATCHING_ITEM: 'MATCHING ITEM',
     MATCHING_PRODUCTS: 'MATCHING PRODUCTS',
     HELLO: 'Hello',
+    NO_ITEMS: '0 items in wishlist',
+    MORE_ITEMS: 'more items',
+    GO_TO_WISHLIST: 'Go To Wishlist',    
   },
   LOGIN_PAGE: {
     SIGN_UP: 'Sign up',

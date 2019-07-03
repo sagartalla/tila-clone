@@ -554,6 +554,9 @@ export const AR_KEYWORDS = {
     MATCHING_ITEM: 'مطابقة المنتجات',
     MATCHING_PRODUCTS: 'مطابقة المنتجات',
     HELLO: 'هلا فيك',
+    NO_ITEMS: '0 items in wishlist',
+    MORE_ITEMS: 'more items',
+    GO_TO_WISHLIST: 'Go To Wishlist',    
   },
   LOGIN_PAGE: {
     SIGN_UP: 'انشاء حساب',
