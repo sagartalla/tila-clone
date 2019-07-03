@@ -169,7 +169,7 @@ class TitleInfo extends Component {
             <div className={`${styles['flex-center']} ${styles['checkout-instantly']} ${styles['pt-5']}`}>
               <div className={`${styles.flex}`}>
                 {totalInventoryCount > 0 && isLoggedIn &&
-                  <a className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['fs-14']} ${styles['mr-10']} ${styles['small-btn']} ${styles['checkout-instant-btn']}`} onClick={this.checkoutInstantHandler}>{PDP_PAGE.CHECKOUT_INSTANT}</a>}
+                  <a className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['fs-14']} ${styles['mr-10']} ${styles['small-btn']} ${styles['checkout-instant-btn']} ${styles['left-radius']}`} onClick={this.checkoutInstantHandler}>{PDP_PAGE.CHECKOUT_INSTANT}</a>}
               </div>
               <div className={styles['flex']}>
                 {

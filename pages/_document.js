@@ -23,10 +23,7 @@ export default class MyDocument extends Document {
           {
             props.__NEXT_DATA__.query.language === 'ar'
               ?
-              <>
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-rtl/3.4.0/css/bootstrap-rtl.css" />
-                <link rel="stylesheet" href="/static/css/fonts_ar.css" />
-              </>
+              <link rel="stylesheet" href="/static/css/fonts_ar.css" />
               :
               <link rel="stylesheet" href="/static/css/fonts_en.css" />
           }
@@ -54,12 +51,14 @@ export default class MyDocument extends Document {
           <inlay-oracle-chat-embedded
             class="inlay"
             id="chatInlay"
-            site-url="fptsuae.widget.custhlep.com"
+            site-url="fptsuae.widget.custhelp.com"
+            inlay-hidden="true"
           >
           </inlay-oracle-chat-embedded>
           <script
             id="oit-loader"
-            src="https://fptsuae.widget.custhelp.com/s/oit/latest/common/v0/libs/oit/loader.js"
+            src="https://tila-en.custhelp.com/s/oit/latest/common/v0/libs/oit/loader.js"
+            data-oit-theme-url="https://tila-en.custhelp.com/s/oit/latest/themes/oracle/midnight/web/theme.css"
             data-oit-increment="true"
             data-oit-group="" async
           >

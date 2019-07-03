@@ -114,7 +114,7 @@ const l = [
 const t = [
   {
     url: `/SAU/${lang}/srp?search=apple&language=en&isListed=false`,
-    title: '/static/img/bg-img/apple.png',
+    title: '/static/img/bg-img/Apple.png',
   },
 
   {

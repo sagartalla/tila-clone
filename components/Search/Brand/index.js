@@ -46,10 +46,21 @@ const subTypes = {
 
 
 const Brand = ({ pageData }) => {
-  const { page_content } = pageData;
+  const { page_content, id_attribute } = pageData;
   return (<>
+  <div>
+    <span className={`${styles['fs-30']} ${styles['fontW600']} ${styles['text-capitalize']}`}>{id_attribute}</span>
+    <span className={`${styles['fs-30']} ${styles['fontW300']}`}>&nbsp;Store</span>
+  </div>
   {
     page_content.map((item) => {
+      
+      if(!item.visible){
+        return (
+          null
+        )
+      }
+
       switch (item.sub_type) {
         case subTypes.CAROUSEL:
           return (
@@ -91,7 +102,7 @@ const Brand = ({ pageData }) => {
             </Row>
           );
         default: return(
-          <div></div>
+          null
         )
       }
     })

@@ -1,22 +1,24 @@
 @import '../../layout/main/executables.styl';
 
 .header-container
-  display block
-  // margin-bottom 10px
-  box-shadow 0 0 12px 0 rgba(0,0,0,.1)
+  display: block;
+  box-shadow: 0 0 12px 0 rgba(0,0,0,0.1);
+  position: fixed;
+  top: 0;
+  z-index: 99;
+  background: #fff;
+  width 100%
   .header-container-inn
     background-color white
-    position fixed
     width 100%
-    z-index 99
-    top 0
     &.faded
       background-color rgba(255,255,255, 0.95)
+    .header-inn-wrap
+      height 60px
 
   .header-megamenu
     box-shadow 0 3px 4px 0 rgba(0, 0, 0, 0.09)
     position relative
-    margin-top 61px
     // z-index 99
     .header-megamenu-inn
       box-shadow 0 1px 1px 0 rgba(0, 0, 0, 0.09)
@@ -80,7 +82,7 @@
       &:hover
         background-color white
         font-weight bold
-        border-left 2px solid thick-red-arrow
+        border-left 2px solid tila-blk
       a span
         color #000
     .profile-icon
@@ -179,8 +181,9 @@
       top -8px
       background generic-green-color 
       border-radius 50%
-      width 15px
-      height 15px
+      width 18px
+      height 18px
+      border 1px solid white
     
   .cart-inn
     border-right: 1px solid #e5e5e5;
