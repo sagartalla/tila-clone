@@ -66,16 +66,16 @@ class Product extends Component {
   }
 
   getOfferClassName = (offer) => {
-    if (offer > 5 && offer < 20) {
+    if (offer >= 5 && offer < 20) {
       return 'green';
     }
-    if (offer > 20 && offer < 40) {
+    if (offer >= 20 && offer < 40) {
       return 'yellow';
     }
-    if (offer > 40 && offer < 60) {
+    if (offer >= 40 && offer < 60) {
       return 'orange';
     }
-    if (offer > 60) {
+    if (offer >= 60) {
       return 'red';
     }
     return '';
