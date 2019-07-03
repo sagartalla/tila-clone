@@ -20,17 +20,17 @@ const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...s
 
 const f = [
   {
-    url: `/SAU/${lang}/srp/clothing?categoryTree=true&isListed=false&sid=892,910`,
+    url: `/SAU/${lang}/srp?search=Womens%20Clothing&language=en&isListed=false`,
     title: FOOTER_PAGE.WOMEN_CLOTHING,
   },
 
   {
-    url: `/SAU/${lang}/srp/clothing?categoryTree=true&isListed=false&sid=892,910`,
+    url: `/SAU/${lang}/srp?search=Mens%20Clothing&language=en&isListed=false`,
     title: FOOTER_PAGE.MEN_CLOTHING,
   },
 
   {
-    url: `/SAU/${lang}/srp/footwear?categoryTree=true&isListed=false&sid=892,907`,
+    url: `/SAU/${lang}/srp?search=Footwear&language=en&isListed=false`,
     title: FOOTER_PAGE.FOOT_WEAR,
   },
 
@@ -45,7 +45,7 @@ const f = [
   },
 
   {
-    url: `/SAU/${lang}/srp/watch?categoryTree=true&isListed=false&sid=892,929`,
+    url: `/SAU/${lang}/srp/watch?search=watches&language=en&isListed=false`,
     title: FOOTER_PAGE.WATCHES,
   },
 ];

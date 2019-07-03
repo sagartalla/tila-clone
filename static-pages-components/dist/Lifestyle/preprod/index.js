@@ -358,7 +358,7 @@ const Lifestyle = () => React.createElement(
       ),
       React.createElement(
         'div',
-        { className: `top-selling-part-inn ${styles['pt-10']}` },
+        { className: `top-selling-part-inn ${styles['pt-10']} ${styles.flex}` },
         React.createElement(
           Col,
           { md: 2, className: styles['pl-0'] },
@@ -529,7 +529,12 @@ const Lifestyle = () => React.createElement(
       React.createElement(
         'h5',
         { className: `main-title ${styles['fs-16']} ${styles['fontW600']}` },
-        'Popular Category'
+        'Sports Essentials'
+      ),
+      React.createElement(
+        'p',
+        null,
+        'Soccer, Badminton, Table Tennis, Lawn Tennis, Cricket & more...'
       ),
       React.createElement(
         'div',
@@ -543,11 +548,11 @@ const Lifestyle = () => React.createElement(
             React.createElement(
               'div',
               { className: `${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon` },
-              React.createElement(SVGComponent, { clsName: 'poular-cat', src: 'icons/landing-page-lifestyle/badminton' }),
+              React.createElement(SVGComponent, { clsName: 'poular-cat', src: 'icons/landing-page-lifestyle/soccer' }),
               React.createElement(
                 'span',
                 { className: `${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}` },
-                'Furniture'
+                'Soccer'
               )
             )
           )
@@ -561,11 +566,11 @@ const Lifestyle = () => React.createElement(
             React.createElement(
               'div',
               { className: `${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon` },
-              React.createElement(SVGComponent, { clsName: 'poular-cat', src: 'icons/landing-page-lifestyle/badminton' }),
+              React.createElement(SVGComponent, { clsName: 'popular-cat6', src: 'icons/landing-page-lifestyle/badminton' }),
               React.createElement(
                 'span',
                 { className: `${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}` },
-                'Kitchen Tools'
+                'Badminton'
               )
             )
           )
@@ -583,7 +588,7 @@ const Lifestyle = () => React.createElement(
               React.createElement(
                 'span',
                 { className: `${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}` },
-                'Health & Fitness'
+                'Table Tennis'
               )
             )
           )
@@ -597,11 +602,11 @@ const Lifestyle = () => React.createElement(
             React.createElement(
               'div',
               { className: `${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon` },
-              React.createElement(SVGComponent, { clsName: 'poular-cat', src: 'icons/landing-page-lifestyle/tennis' }),
+              React.createElement(SVGComponent, { clsName: 'popular-cat7', src: 'icons/landing-page-lifestyle/tennis' }),
               React.createElement(
                 'span',
                 { className: `${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}` },
-                'Sports & Fitness'
+                'Lawn Tennis'
               )
             )
           )
@@ -615,11 +620,11 @@ const Lifestyle = () => React.createElement(
             React.createElement(
               'div',
               { className: `${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon` },
-              React.createElement(SVGComponent, { clsName: 'poular-cat1', src: 'icons/landing-page-lifestyle/cricket' }),
+              React.createElement(SVGComponent, { clsName: 'popular-cat7', src: 'icons/landing-page-lifestyle/cricket' }),
               React.createElement(
                 'span',
                 { className: `${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}` },
-                'Baby Care'
+                'Cricket'
               )
             )
           )
@@ -633,11 +638,11 @@ const Lifestyle = () => React.createElement(
             React.createElement(
               'div',
               { className: `${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon` },
-              React.createElement(SVGComponent, { clsName: 'poular-cat4', src: 'icons/landing-page-lifestyle/basketball' }),
+              React.createElement(SVGComponent, { clsName: 'popular-cat8', src: 'icons/landing-page-lifestyle/basketball' }),
               React.createElement(
                 'span',
                 { className: `${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}` },
-                'Personal Care'
+                'Basketball'
               )
             )
           )
@@ -655,7 +660,7 @@ const Lifestyle = () => React.createElement(
               React.createElement(
                 'span',
                 { className: `${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}` },
-                'Sports'
+                'Baseball'
               )
             )
           )
@@ -673,7 +678,7 @@ const Lifestyle = () => React.createElement(
               React.createElement(
                 'span',
                 { className: `${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}` },
-                'Gardening'
+                'Swimming'
               )
             )
           )
@@ -691,7 +696,7 @@ const Lifestyle = () => React.createElement(
               React.createElement(
                 'span',
                 { className: `${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}` },
-                'Daily Needs'
+                'Cycling'
               )
             )
           )
@@ -709,7 +714,7 @@ const Lifestyle = () => React.createElement(
               React.createElement(
                 'span',
                 { className: `${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}` },
-                'kitchen & dining'
+                'River Rafting'
               )
             )
           )
@@ -727,7 +732,7 @@ const Lifestyle = () => React.createElement(
               React.createElement(
                 'span',
                 { className: `${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}` },
-                'Stationary'
+                'Snorkeling'
               )
             )
           )
@@ -745,7 +750,7 @@ const Lifestyle = () => React.createElement(
               React.createElement(
                 'span',
                 { className: `${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}` },
-                'Home Appliances'
+                'Boxing'
               )
             )
           )
