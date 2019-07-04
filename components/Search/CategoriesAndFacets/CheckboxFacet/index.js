@@ -37,16 +37,17 @@ class CheckboxFacet extends Component {
   }
   sortSelectedItems(selectedItems) {
     const { filter } = this.props
-    let children = filter.children.slice()
-    let splicedElem = []
+    let selectedChildren = []
+    let unSelectedChildren = []
 
-    children.forEach((item,index) => {
+    filter.children.forEach((item,index) => {
       if(selectedItems.indexOf(item.name) !== -1) {
-          splicedElem.push(item)
-          children.splice(index,1)
+          selectedChildren.push(item)          
+      } else {
+        unSelectedChildren.push(item)
       }
     })
-    return splicedElem.concat(children)
+    return selectedChildren.concat(unSelectedChildren)
   }
   onFilterData(value) {
     const { filter } = this.props;
