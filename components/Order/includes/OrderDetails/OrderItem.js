@@ -128,7 +128,7 @@ class OrderItem extends Component {
       <div className={`${styles['date-cont']} ${styles['flx-spacebw-alignc']}`}>
         <div>
           <div className={`${styles['fs-14']} ${styles.fontW600}`}>{displayText()}</div>
-          <div className={`${styles['ff-t']} ${styles['fs-24']} ${styles['ipad-fs-20']}`}>          
+          <div className={`${styles['ff-t']} ${styles['fs-24']} ${styles['ipad-fs-20']}`}>
             {btnType === 'cancel' ? moment(orderItem.products[0].promisedDeliveryDate).format('ddd, MMM Do') : this.getDate(orderItem.products[0].state_time_estimates)}
           </div>
         </div>
@@ -144,7 +144,7 @@ class OrderItem extends Component {
     return (
       <div className={`${styles['shipment-wrap']} ${styles['mb-20']} ${styles['mt-20']} ${styles.flex}`}>
         <Col md={7} sm={7} className={`${styles['pl-0']} ${styles['pr-0']} ${styles.flex} ${styles['flex-colum']}`}>
-          {orderItem.products.map((product) => {          
+          {orderItem.products.map((product) => {
             const {
               final_price = {}, gift_charge = {}, mrp = {}, offer_price = {}, shipping_fees = {}, discount = {},
             } = product.price;
@@ -155,7 +155,7 @@ class OrderItem extends Component {
                     <Col md={2} className={styles['p-0']}>
                       <div className={`${styles['img-wrap']} ${styles['flex-center']} ${styles['justify-center']}`}>
                         <Link route={`/${country}/${language}/product?productId=${product.productId}${product.variantId ? `&variantId=${product.variantId}` : ''}&catalogId=${product.catalogId}&itemType=${product.itemType}`}>
-                          <a className={`${styles['width100']} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
+                          <a target="_blank" className={`${styles['width100']} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
                             <img className={`${styles['order-item-img']}`} src={`${constants.mediaDomain}/${product.img}`} alt={product.img} />
                           </a>
                         </Link>
@@ -165,10 +165,10 @@ class OrderItem extends Component {
                         <span className={styles['green-label']}>{ORDER_PAGE.EXCHANGE}</span>
                       </div>}
                     </Col>
-                    <Col md={10} className={styles['ipad-pr-0']}>
+                    <Col md={10} className={`${styles['ipad-pr-0']} ${styles['pt-15']}`}>
                       <div className={`${styles['text-wrap']}`}>
                         <Link route={`/${country}/${language}/product?productId=${product.productId}${product.variantId ? `&variantId=${product.variantId}` : ''}&catalogId=${product.catalogId}&itemType=${product.itemType}`}>
-                          <a className={`${styles['width100']} ${styles['fs-14']} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
+                          <a target="_blank" className={`${styles['width100']} ${styles['fs-14']} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
                             <span className={`${styles.fontW600}`}>{product.name}</span>
                           </a>
                         </Link>
@@ -198,7 +198,7 @@ class OrderItem extends Component {
                               {product.price &&
                               <span className={`${styles['justify-end']} ${styles['flex-center']} ${styles['fs-16']} ${styles.fontW600}`}>
                                 {product.orderIds.length} x {final_price.display_value} {final_price.currency_code}
-                                <span onMouseOver={this.showToolTip} onMouseLeave={this.hideToolTip} className={`${styles.relative} ${styles['tool-tip-parent']} ${styles['checkout-quat']} ${styles['fs-12']} ${styles['flex-center']} ${styles['justify-around']}`}>
+                                <span onMouseOver={this.showToolTip} onMouseLeave={this.hideToolTip} className={`${styles.relative} ${styles['tool-tip-parent']} ${styles['checkout-quat']} ${styles['fs-12']} ${styles['flex-center']} ${styles['justify-around']} ${lang === 'en' ? '' : styles['flip-questionmark']}`}>
                                   {'?'}
                                   {showToolTip &&
                                   <div className={styles['tool-tip']}>
@@ -263,7 +263,18 @@ class OrderItem extends Component {
                 {product.gift_info &&
                   <div className={`${styles.flex} ${styles['fs-12']} ${styles.absolute} ${styles['p-5']} ${styles.right0} ${styles.top0} ${styles['thick-gry-clr']} ${styles['bg-light-gray']}`}>
                     <SVGComponent clsName={`${styles['help-icon']}`} src="icons/gift-blue" />
-                    <span className={styles['ml-5']}>{ORDER_PAGE.THIS_ORDER_CONTAINS_A_GIFT} <a>{ORDER_PAGE.VIEW_DETAILS}</a></span>
+                    <span className={`${styles['ml-5']} ${styles.flex}`}>
+                      {ORDER_PAGE.THIS_ORDER_CONTAINS_A_GIFT}
+                      <a>
+                        <span className={`${styles.relative} ${styles['tooltip']} ${styles['mr-10']} ${styles['tool-tip-parent']} ${styles['checkout-quat']} ${styles['fs-12']} ${styles['flex-center']} ${styles['justify-around']}`}>
+                          {'!'}
+                          <div className={`${styles['tool-tip']} ${styles.rightM15} ${styles['p-15']}`}>
+                            <div className={styles.fontW600}>{ORDER_PAGE.MESSAGE}:</div>
+                            {product.gift_info.gift_card_message}
+                          </div>
+                        </span>
+                      </a>
+                    </span>
                   </div>}
               </React.Fragment>
             );

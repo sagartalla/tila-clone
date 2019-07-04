@@ -27,11 +27,11 @@ const PaymentStatus = props => {
   const subMessage = (props.status == "SUCCESSFUL") ? successMessage : (props.status == "FAILED") ? `${THANK_YOU_PAGE.ORDER_FAILURE_MESSAGE} 4 ${THANK_YOU_PAGE.WORKING_DAYS} ${THANK_YOU_PAGE.QUERIES_PLEASE_CONTACT}` : null;
 
   return (
-    <Grid className={styles['pt-50']}>
+    <Grid style={{ marginTop: '-20px' }}>
       <Row className={`${styles['flex-center']} ${styles['m-0']}`}>
         <Col md={2} xs={2} sm={2}>
-          <div className={styles['pb-25']}>
-            <SVGComponent clsName={`${styles['gift-card']}`} src="icons/gift-icon/gift-icon" />
+          <div className={`${styles['pb-25']} ${styles['pt-15']} ${styles['gift-img']}`}>
+            <SVGComponent clsName={`${styles['gift-card-icon']}`} src={props.status == "SUCCESSFUL" ? "icons/gift-icon/gift-icon" : "icons/gift-icon/card-failed"} />
           </div>
         </Col>
         <Col md={10} xs={9} sm={9}>

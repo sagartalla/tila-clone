@@ -66,16 +66,16 @@ class Product extends Component {
   }
 
   getOfferClassName = (offer) => {
-    if (offer > 5 && offer < 20) {
+    if (offer >= 5 && offer < 20) {
       return 'green';
     }
-    if (offer > 20 && offer < 40) {
+    if (offer >= 20 && offer < 40) {
       return 'yellow';
     }
-    if (offer > 40 && offer < 60) {
+    if (offer >= 40 && offer < 60) {
       return 'orange';
     }
-    if (offer > 60) {
+    if (offer >= 60) {
       return 'red';
     }
     return '';
@@ -272,16 +272,16 @@ class Product extends Component {
 
     const getPriceAndOffer = () => (
       <span>
+        <span className={`${styles['fs-10']} ${styles['black-color']}`}>{currency}</span>&nbsp;
         <span
           className={`${styles['fs-16']} ${styles.fontW600} ${styles['black-color']}`}
         >
           {variants[selectedIndex].sellingPrice[0]}
-        </span>&nbsp;
-        <span className={`${styles['fs-10']} ${styles['black-color']}`}>{currency}</span>
+        </span>
         {discountValue > 5 &&
           <React.Fragment>
             <span className={`${styles['ml-5']} ${styles['label-gry-clr']} ${styles['fs-12']}`}>
-              <s>{variants[selectedIndex].mrp[0]}&nbsp;<s className={styles['fs-10']}>{currency}</s></s>
+              <s>{variants[selectedIndex].mrp[0]}</s>
             </span>
             {variants[selectedIndex].offersApplied &&
               variants[selectedIndex].offersApplied.length > 0 &&
@@ -305,7 +305,7 @@ class Product extends Component {
             `${styles['product-items-main']} ${styles.relative} ${styles['p-0']} ${selectedProduct ? styles['active-product'] : ''}`}
             onClick = {() => this.routeChange(productId,variantId,catalogId,itemtype,index,pageNum)}>
           <Link route={`/${country}/${language}/product?productId=${productId}${variants.length > 0 && variants[selectedIndex].variantId ? `&variantId=${variants[selectedIndex].variantId}` : ''}&catalogId=${catalogId}&itemType=${itemtype}`}>
-            <a>
+            <a target="_blank">
               <div className={`${styles['product-items']}`} onMouseEnter={this.setImg} onMouseLeave={this.leaveImg}>
                 {
                   showLoader ? <div className={styles['loader-div']}>
@@ -314,13 +314,13 @@ class Product extends Component {
                 }
                 {variants.length === 0 &&
                   <div className={styles['notify-me-part']}>
-                    <h4 className={`${styles['fs-18']} ${styles['fontW600']} ${styles['black-color']}`}>{PDP_PAGE.OUT_OF_STOCK}</h4>
-                    <a className={`${styles['flex-center']} ${styles['notify-part-inn']} ${styles['white-color']} ${styles['fp-btn']} ${styles['right-radius']} ${styles['fp-btn-primary']}`} onClick={this.notify}>
+                    <h4 className={`${styles['fs-10']} ${styles['m-5']} ${styles['pr-5']} ${styles['black-color']}`}>{PDP_PAGE.OUT_OF_STOCK}</h4>
+                    {/* <a className={`${styles['flex-center']} ${styles['notify-part-inn']} ${styles['white-color']} ${styles['fp-btn']} ${styles['right-radius']} ${styles['fp-btn-primary']}`} onClick={this.notify}>
                       <span className={styles['pl-5']}>{PDP_PAGE.NOTIFY_ME}</span>
-                    </a>
+                    </a> */}
                   </div>
                 }
-                <div onClick={this.renderQuickView} className={`${styles['img-cont']} ${styles['border-radius4']} ${styles['relative']}`}>
+                <div className={`${styles['img-cont']} ${styles['border-radius4']} ${styles['relative']}`}>
                       <div className={`${styles['image-div']} srp-slider`}>
                         {src ?
                             <img src={src} alt="imageURL" />
@@ -341,13 +341,13 @@ class Product extends Component {
                             </Slider>
                         }
                       </div>
-                  <span className={`${styles['variants-main']}`}></span>
-                  <span className={styles['full-and-globe-main']}>
+                  {/* <span className={`${styles['variants-main']}`}></span> */}
+                  {/* <span className={styles['full-and-globe-main']}>
                     <span className={`${styles['fullfill-main']} ${styles['flex-center']}`}>
                       <span className={styles['fulfill-img']}></span>
                       <span className={`${styles['fs-12']} ${styles['fontW600']} ${styles['pl-10']} ${styles['fullfilled-label']}`}>{PDP_PAGE.FULLFILLED_BY_TILA}</span>
                     </span>
-                  </span>
+                  </span> */}
                   {discountValue >= 5 &&
                     <span className={`${styles.absolute} ${styles['offer-tag']} ${styles[this.getOfferClassName(discountValue)]}`}>
                       <span>{discountValue}%</span>
@@ -364,8 +364,8 @@ class Product extends Component {
                 </div>
                 <div className={styles['desc-cont']}>
                   <div className={`${styles['pb-20']} ${styles['pl-20']} ${styles['pr-20']} ${styles['flex']} ${styles['flex-colum']}`}>
-                    <h5 className={`${styles['prdt-name']} ${styles['pt-15']} ${styles['pb-5']}  ${styles['m-0']} ${styles['ellips']}`}>
-                      <span className={`${styles['fontW600']} ${styles['black-color']}`}>{brand}</span> <span className={`${styles['thick-gry-clr']} ${styles['fontW300']}`}>{displayName.replace(brand, '').trim()}</span>
+                    <h5 className={`${styles['prdt-name']} ${styles['pt-15']} ${styles['pb-5']}  ${styles['m-0']}`}>
+                      <span className={`${styles['fontW600']} ${styles['black-color']}`}>{brand}</span> <span className={`${styles['thick-gry-clr']} ${styles['fontW300']}`}>{displayName.replace(brand, '').substr(0, 55).trim()}</span>
                     </h5>
                     <span>
                       <span className={`${styles['pr-5']}`}>{variants.length > 0 && variants[selectedIndex].sellingPrice && getPriceAndOffer()}</span>
@@ -395,7 +395,9 @@ class Product extends Component {
                         />
                       </div>
                       :
-                        null
+                      <a className={`${styles['flex-center']} ${styles['notify-part-inn']} ${styles['white-color']} ${styles['fp-btn']} ${styles['left-radius']} ${styles['fp-btn-primary']}`} onClick={this.notify}>
+                        <span className={styles['pl-5']}>{PDP_PAGE.NOTIFY_ME}</span>
+                      </a>
                       // <div className={`${styles['flex']} ${styles['justify-around']} ${styles['quick-view']} ${styles['border-radius4']}`}>
                       //   <a className={`${styles['flex-center']} ${styles['buy-now-btn']} ${styles['notifyBackground']}`} onClick={this.notify}>
                       //     <span className={styles['pl-5']}>{PDP_PAGE.NOTIFY_ME}</span>

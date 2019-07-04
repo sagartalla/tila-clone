@@ -22,7 +22,7 @@ import lang from '../../../../utils/language';
 import main_en from '../../../../layout/main/main_en.styl';
 import main_ar from '../../../../layout/main/main_ar.styl';
 import styles_en from '../../order_en.styl';
-import styles_ar from '../../order_en.styl';
+import styles_ar from '../../order_ar.styl';
 
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
@@ -169,7 +169,7 @@ class OrderHeader extends Component {
                             <Col className={`${styles['thick-gry-clr']}`} md={6}>{p.card_type}</Col>
                             {/* { p.amount && p.amount.display_value && */}
                               <Col md={6}>
-                                {`${p.masked_card_first6}******${p.masked_card_last4}`}
+                                <div className={`${styles['card-number']}`}>{`${p.masked_card_first6}******${p.masked_card_last4}`}</div>
                                 {/* {p.amount.display_value} {p.amount.currency_code} */}
                               </Col>
                             {/* } */}
@@ -217,7 +217,10 @@ class OrderHeader extends Component {
                   <span className={`${styles.fontW600} ${styles['light-gry-clr']} ${styles['flex-center']} ${styles['fs-14']}`}>
                     {total_price.display_value}&nbsp;{total_price.currency_code}
                     {/* (<a onMouseOver={this.showToolTip} onMouseLeave={this.hideToolTip}>i</a>) */}
-                    <span onMouseOver={this.showToolTip} onMouseLeave={this.hideToolTip} className={`${styles.relative} ${styles['checkout-quat']} ${styles['fs-12']} ${styles['flex-center']} ${styles['justify-around']}`}>
+                    <span
+                      onMouseOver={this.showToolTip}
+                      onMouseLeave={this.hideToolTip}
+                      className={`${styles.relative} ${styles['checkout-quat']} ${styles['fs-12']} ${styles['flex-center']} ${styles['justify-around']} ${lang === 'en' ? '' : styles['flip-questionmark']}`}>
                       {'?'}
                       {
                       showToolTip ?

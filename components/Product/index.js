@@ -62,7 +62,7 @@ const getProductComponent = (isPreview, taskCode) => {
         const {
           offerInfo, titleInfo, imgUrls, shippingInfo,
         } = productData;
-        digitalData.page.pageInfo.pageName = titleInfo.title;
+        digitalData.page.pageInfo.pageName = titleInfo.title.attribute_values[0].value;
         digitalData.page.category = { primaryCategory: productData.categoryType };
         digitalData.page.pageInfo.breadCrumbs = productData.breadcrums ? productData.breadcrums.map(item => item.display_name_en) : [];
         this.props.track({
@@ -85,7 +85,7 @@ const getProductComponent = (isPreview, taskCode) => {
 
           if (index === -1) {
             arr.unshift({
-              nm: titleInfo.title,
+              nm: titleInfo.title.attribute_values[0].value,
               im: imgUrls && imgUrls[0].url,
               pr,
               cd,
@@ -98,16 +98,16 @@ const getProductComponent = (isPreview, taskCode) => {
         }
       }
 
-      window.addEventListener('scroll', this.handleScroll);
-      setTimeout(() => {
-        const shippingContainer = document.getElementById('shipping-cont');
-        const buttonsCont = document.getElementById('cart-btn-cont');
-        const [{height: shippingHeight, top: shippingY}, {height: btnHeight}] = [shippingContainer.getBoundingClientRect(), buttonsCont.getBoundingClientRect()];
-        skipScroll = (shippingHeight + shippingY) < (window.innerHeight - btnHeight);
-        this.setState({
-          defaultPosition: skipScroll ? 'absolute-style' : 'fixed-style'
-        });
-      });
+      // window.addEventListener('scroll', this.handleScroll);
+      // setTimeout(() => {
+      //   const shippingContainer = document.getElementById('shipping-cont');
+      //   const buttonsCont = document.getElementById('cart-btn-cont');
+      //   const [{height: shippingHeight, top: shippingY}, {height: btnHeight}] = [shippingContainer.getBoundingClientRect(), buttonsCont.getBoundingClientRect()];
+      //   skipScroll = (shippingHeight + shippingY) < (window.innerHeight - btnHeight);
+      //   this.setState({
+      //     defaultPosition: skipScroll ? 'absolute-style' : 'fixed-style'
+      //   });
+      // });
     }
 
     componentWillUnmount() {
@@ -173,7 +173,7 @@ const getProductComponent = (isPreview, taskCode) => {
         });
         return;
       }
-      if (!isSearchPreview && bottomRefRect.top > window.innerHeight && detailsRect.top <= 61 && this.state.stickyElements.details !== 'stateMiddle') {
+      if (!isSearchPreview && bottomRefRect.top > window.innerHeight && detailsRect.top <= 108 && this.state.stickyElements.details !== 'stateMiddle') {
         this.setState({
           stickyElements: {
             ...this.state.stickyElements,
@@ -182,7 +182,7 @@ const getProductComponent = (isPreview, taskCode) => {
         });
         return;
       }
-      if (detailsRect.top > 61) {
+      if (detailsRect.top > 108) {
         this.setState({
           stickyElements: {
             ...this.state.stickyElements,
@@ -210,9 +210,72 @@ const getProductComponent = (isPreview, taskCode) => {
               isPreview || isSearchPreview ? null : <HeaderBar />
             }
             <div className={`${styles.relative}`}>
+              <Col md={4} sm={12} className={`${styles['details-right-part']} ${styles[stickyElements.details]} ${styles['p-0']}`}>
+                <div className={`${styles['details-right-part-inn']}`}>
+                  <div className={`${styles['ipad-details']} ${styles['ipad-pr-15']}`}>
+                    <TitleInfo {...titleInfo} isPreview={isPreview} offerInfo={offerInfo} />
+                    <ProductDetails
+                      details={details}
+                      keyfeatures={keyfeatures}
+                      isPreview={isPreview}
+                      productInfo={productData}
+                      variantId={variantId}
+                      productId={productId}
+                      isSearchPreview={isSearchPreview}
+                    />
+                  </div>
+                  <div className={`${styles['ipad-details']} ${styles['bdr-lt']} ${styles['ipad-pl-15']}`}>
+                    {
+                      isPreview ? null : <Shipping shippingInfo={shippingInfo} returnInfo={returnInfo} offerInfo={offerInfo} warranty={warranty} />
+                    }
+                    {isPreview ? null :
+                      (shippingInfo === null || shippingInfo.shippable)
+                        ?
+                        <AddToCart
+                          offerInfo={offerInfo}
+                          productData={productData.product_id}
+                          shippingInfo={shippingInfo}
+                          isPreview={isPreview}
+                          emailErr={emailErr}
+                          userDetails={userDetails}
+                          notifyEmail={notifyEmail}
+                          notify={this.notify}
+                          showLoading={showLoading}
+                          onChangeField={this.onChangeField}
+                          styling={isSearchPreview ? null : positionStyle || defaultPosition}
+                          top={isSearchPreview ? null : positionStyle === 'absolute-style' ?  positionTop : null}
+                        />
+                        :
+                        null
+                    }
+
+                    {/* {isPreview ? null :
+                      (offerInfo.stockError || offerInfo.availabilityError) && ((shippingInfo && Object.keys(shippingInfo).length === 0) || (shippingInfo === null || shippingInfo.shippable)) &&
+                      <div className={`${styles['flx-space-bw']} ${styles['align-baseline']}`}>
+                        {!userDetails.isLoggedIn &&
+                        <div className={`${styles['mb-0']} ${styles['fp-input']} ${styles['pb-10']}`}>
+                          <input onChange={this.onChangeField} name="notify" type="text" value={notifyEmail} required />
+                          <label>{PDP_PAGE.GET_NOTIFIED}</label>
+                          {emailErr &&
+                            <span className={styles['error-msg']}>{emailErr}</span>
+                          }
+                        </div>}
+                        <Button
+                          className={`${styles['flex-center']} ${styles.notify_me_btn} ${styles['fs-20']}`}
+                          btnText={PDP_PAGE.NOTIFY_ME}
+                          onClick={this.notify}
+                          hoverClassName="hoverBlueBackground"
+                          btnLoading={showLoading}
+                        />
+                      </div>
+                    } */}
+                  </div>
+                </div>
+
+              </Col>
               <div className={`${styles['page-details-slider']}`}>
                 <Row className={`${styles['m-0']} ${styles['ht-100per']}`}>
-                  <Col xs={12} md={8} sm={12} className={`${styles['pl-0']} ${styles['pdp-img-prt']}`}>
+                  <Col xs={12} md={8} sm={12} className={`${styles['pl-0']} ${styles['pdp-img-prt']} ${styles['p-0']}`}>
                     <NoSSR>
                       <Display
                         product_id={product_id}
@@ -259,8 +322,6 @@ const getProductComponent = (isPreview, taskCode) => {
                               notify={this.notify}
                               showLoading={showLoading}
                               onChangeField={this.onChangeField}
-                              styling={isSearchPreview ? null : positionStyle || defaultPosition}
-                              top={isSearchPreview ? null : positionStyle === 'absolute-style' ?  positionTop : null}
                             />
                             :
                             null
@@ -331,7 +392,7 @@ const getProductComponent = (isPreview, taskCode) => {
   const mapStateToProps = store => ({
     productData: taskCode ? selectors.getPreview(store) : selectors.getProduct(store),
     userDetails: store.authReducer.data,
-    showLoading: wishListSelectors.getLoader(store),
+    showLoading: wishListSelectors.getNotifyLoading(store),
   });
 
   const mapDispatchToProps = dispatch =>

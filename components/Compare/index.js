@@ -92,6 +92,16 @@ class Compare extends Component {
     });
   }
 
+  selectAllChecks = () => {
+    const { selectedGroups } = this.state;
+    Object.keys(selectedGroups).forEach((feature) => {
+      selectedGroups[feature] = true;
+    });
+    this.setState({
+      selectedGroups,
+    });
+  }
+
   selectBrand = ({ target }) => {
     if (target.value) {
       this.setState({
@@ -139,6 +149,7 @@ class Compare extends Component {
                 <div className={styles['compare-product-inn']}>
                   <h5 className={`${styles['flx-space-bw']}`}>
                     <span className={`${styles.fontW600} ${styles['fs-16']}`}>{COMPARE.FEATUERS}</span>
+                    <span className={`${styles['lgt-blue']} ${styles.pointer}`} onClick={this.selectAllChecks}>Select All</span>
                     <span className={`${styles['lgt-blue']} ${styles.pointer}`} onClick={this.clearAllChecks}>{COMPARE.CLEAR_ALL}</span>
                   </h5>
                   {

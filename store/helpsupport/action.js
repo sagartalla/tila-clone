@@ -10,6 +10,7 @@ const actions = {
   GET_TKT_DETAIL: 'GET_TKT_DETAIL',
   RAISE_TKT: 'RAISE_TKT',
   UPDATE_TKT: 'UPDATE_TKT',
+  GET_ANSWER_BY_KEYWORD: 'GET_ANSWER_BY_KEYWORD',
 };
 
 
@@ -53,6 +54,10 @@ const actionCreators = {
   downloadFileAttachment: (ticketNumber, fileId) => ({
     type: actions.DOWNLOAD_FILE_ATTACHMENT,
     payload: api.downloadFileAttachmentApi(ticketNumber, fileId),
+  }),
+  getAnswerByKeyword: (keyword, params) => ({
+    type: actions.GET_ANSWER_BY_KEYWORD,
+    payload: api.getAnswerByKeywordApi(keyword, params),
   }),
 };
 
