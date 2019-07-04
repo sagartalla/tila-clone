@@ -521,7 +521,7 @@ export const EN_KEYWORDS = {
     RETURN: 'Returns',
     CONSUMER_RIGHT: 'Consumer Rights',
     DOWNLOAD_APP: 'Download the app',
-    TILA_RIGHTS: '2018 www.tila.com. All rights reserved',
+    TILA_RIGHTS: '2019 www.tila.com. All rights reserved',
     SIZE_CHART: 'Size Chart',
     WOMEN_CLOTHING: 'Womens Clothing',
     MEN_CLOTHING: 'Mens Clothing',
@@ -572,6 +572,9 @@ export const EN_KEYWORDS = {
     MATCHING_ITEM: 'MATCHING ITEM',
     MATCHING_PRODUCTS: 'MATCHING PRODUCTS',
     HELLO: 'Hello',
+    NO_ITEMS: '0 items in wishlist',
+    MORE_ITEMS: 'more items',
+    GO_TO_WISHLIST: 'Go To Wishlist',    
   },
   LOGIN_PAGE: {
     SIGN_UP: 'Sign up',

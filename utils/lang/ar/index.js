@@ -526,7 +526,12 @@ export const AR_KEYWORDS = {
     MENS_GROOMING: 'العناية بالرجل',
     LIFESTYLE: 'لايف ستايل',
     TRAVEL_ACCESSORIES: 'إكسسوارات السفر',
-
+    FOOT_WEAR:  'أحذية',
+    BEAUTY_AND_PERSONAL_CARE: 'الجمال والعناية الشخصية',
+    HOME_FURNSHING: 'ديكور المنزل',
+    BABY_CARE: 'عناية الطفل',
+    HEALTH_CARE: 'العناية بالصحة',
+    SUNGLASSES: 'نظارات شمسية‎',
   },
   COMPARE: {
     TILA_COMPARE_1: 'تيله تقارن لك منتجاتك',
@@ -554,6 +559,9 @@ export const AR_KEYWORDS = {
     MATCHING_ITEM: 'مطابقة المنتجات',
     MATCHING_PRODUCTS: 'مطابقة المنتجات',
     HELLO: 'هلا فيك',
+    NO_ITEMS: '0 items in wishlist',
+    MORE_ITEMS: 'more items',
+    GO_TO_WISHLIST: 'Go To Wishlist',    
   },
   LOGIN_PAGE: {
     SIGN_UP: 'انشاء حساب',

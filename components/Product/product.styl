@@ -198,6 +198,155 @@
       z-index 1
       cursor pointer
 
+
+
+
+.details-right-part
+  background-color rgba(255, 255, 255, 0.7)
+  box-shadow 0 0 7px 0 rgba(225,225,225,0.5)
+  // z-index 99
+  right 0
+  bottom 0
+  top 0
+  height calc(100vh - 105px)
+  &.stateTop
+    position sticky
+    top 108px
+    float right
+  &.stateMiddle
+    position fixed
+    top 61px
+    z-index 1
+  &.stateBottom
+    position absolute
+    bottom 0
+    top auto
+  .details-right-part-inn
+    padding 10px 20px
+    height: 100%;
+    overflow: auto;
+    .notifyme-input
+      width 50%
+    .notify_me_btn
+      // background-color navy-blue
+      border-bottom-right-radius 16px
+      color white
+      width 40%
+      height 40px
+    // .product-price-bg
+    //   border-radius 5px
+    //   background-color rgba(144, 144, 144, 0.05)
+
+    .ti-reviews-wrap
+      span
+        &:nth-child(2)
+          border-right 1px solid dottes-gry-clr
+          border-left 1px solid dottes-gry-clr
+
+    .checkout-instantly
+      .checkout-instant-btn
+        padding 5px 17px
+  .addto-cart
+    background-color white
+    padding 12px 35px
+    box-shadow 0 0 13px 0 rgba(212, 212, 212, 0.5)
+    height 105px
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    .add-to-card-btn
+      border-radius 0
+      position relative
+      background-color white
+      color tila-blk
+      width 45%
+      padding 7px
+      border-bottom-left-radius 14px
+      i
+       width 18px
+       height 18px
+      .loader-div
+        width 30px
+        height 30px
+        z-index 14
+        margin 0 35px
+        .loader-styl
+          width 40px
+          height 40px
+          svg
+            animation rotate 1.4s linear infinite;
+            -webkit-animation rotate 1.4s linear infinite;
+            -moz-animation rotate 1.4s linear infinite;
+            @keyframes rotate {
+              to {
+                transform rotate(360deg);
+              }
+            }
+
+            @-webkit-keyframes rotate {
+              to {
+                -webkit-transform rotate(360deg);
+              }
+            }
+
+            @-moz-keyframes rotate {
+              to {
+                transform rotate(360deg);
+              }
+            }
+      // border-top-left-radius 20px
+      .added-cart-icon
+        width 24px
+        height 24px
+        margin 0 35px
+    .buy-now-btn
+      border-radius 0
+      border-bottom-left-radius 14px
+      width: 45%;
+      padding: 7px;
+  .buy-coupon
+    width 16px
+    height 16px
+  .offers-applied
+    color #99cc33
+  .warrenty-part
+    .warenty-part-single
+      .warranty-part
+        display inline-block
+      .view-more-label
+        display none
+        padding 6px 15px
+        box-shadow 0 0 7px 1px rgba(0,0,0,0.07)
+        position absolute
+      &:hover .view-more-label
+        display block
+    // color rgba(0, 0, 0, 0.5)
+    // justify-content: space-around
+    // border: solid 0.5px rgba(151, 151, 151, 0.3)
+    // border-radius 4px
+    .trust-icon
+      width 20px
+      height 20px
+    .return-icon
+      width 20px
+      height 20px
+    .secure-icon
+      width 13px
+      height 15px
+    .radio-btn-group label
+      padding 5px 13px
+
+    // .warenty-part-inn span
+    //   color fashion-color
+
+  .pdp-deliver-list
+    // width 60%
+    .auto-suggestions-wrap
+      // width 60%
+      input
+        font-size 12px
+
+
 .pdp-deliver-list .auto-suggestions-wrap input
   border-bottom 1px solid tila-clr
 

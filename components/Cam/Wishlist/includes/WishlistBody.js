@@ -66,7 +66,7 @@ const WishlistBody = (props) => {
       </div>
     </div>
     :
-    <div>
+    <div className={`${styles['pl-5']}`}>
       <div className={`${styles.flex}`}>
         <Col md={12} sm={12} xs={12} className={`${styles['pl-0']}`}>
           <h4 className={`${styles['mt-0']} ${styles['mb-20']} ${styles.fontW300}}`}>
