@@ -18,7 +18,7 @@ import NotifyMe from '../../common/NotifyMe/NotifyMe';
 import Button from '../../common/CommonButton';
 import { selectors as cartSelector } from '../../../store/cart';
 import { selectors as compareSelectors } from '../../../store/compare';
-
+import { ShowPriceFormat, StrickedPriceFormat } from '../../common/PriceFormat';
 import RenderVariants from './renderVariants';
 
 import lang from '../../../utils/language';
@@ -276,12 +276,12 @@ class Product extends Component {
         <span
           className={`${styles['fs-16']} ${styles.fontW600} ${styles['black-color']}`}
         >
-          {variants[selectedIndex].sellingPrice[0]}
+         <ShowPriceFormat showPrice={variants[selectedIndex].sellingPrice[0].toString()} strickedPrice={variants[selectedIndex].mrp[0].toString()}/>
         </span>
         {discountValue > 5 &&
           <React.Fragment>
             <span className={`${styles['ml-5']} ${styles['label-gry-clr']} ${styles['fs-12']}`}>
-              <s>{variants[selectedIndex].mrp[0]}</s>
+              <s><StrickedPriceFormat showPrice={variants[selectedIndex].sellingPrice[0].toString()} strickedPrice={variants[selectedIndex].mrp[0].toString()}/></s>
             </span>
             {variants[selectedIndex].offersApplied &&
               variants[selectedIndex].offersApplied.length > 0 &&
