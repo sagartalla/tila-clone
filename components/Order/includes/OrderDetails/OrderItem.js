@@ -268,7 +268,7 @@ class OrderItem extends Component {
                       <a>
                         <span className={`${styles.relative} ${styles['tooltip']} ${styles['mr-10']} ${styles['tool-tip-parent']} ${styles['checkout-quat']} ${styles['fs-12']} ${styles['flex-center']} ${styles['justify-around']}`}>
                           {'!'}
-                          <div className={`${styles['tool-tip']} ${styles.rightM15} ${styles['p-15']}`}>
+                          <div className={`${styles['tool-tip']} ${styles.rightM15} ${styles['p-15']} ${styles['break-word']}`}>
                             <div className={styles.fontW600}>{ORDER_PAGE.MESSAGE}:</div>
                             {product.gift_info.gift_card_message}
                           </div>
