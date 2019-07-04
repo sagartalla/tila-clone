@@ -3,7 +3,7 @@ import React, { Fragment, useState } from 'react';
 
 import SVGComponent from '../../common/SVGComponet';
 import Button from '../../common/CommonButton';
-
+import { ShowPriceFormat, StrickedPriceFormat } from '../../common/PriceFormat';
 import { languageDefinations } from '../../../utils/lang';
 
 import lang from '../../../utils/language';
@@ -44,14 +44,13 @@ const ProductPrice = ({
         <Fragment>
           <div className={`${styles['flex']} ${styles['align-baseline']}`}>
             <div className={`${styles['flex']} ${styles['align-baseline']}`}>
-              <span className={`${styles['fs-24']} ${styles['fontW600']} ${styles['pr-5']}`}>{offerPricing && offerPricing.showPrise && offerPricing.showPrise.display_value}</span>
-              <span className={`${styles['fs-12']} ${styles['pr-5']}`}>{(offerPricing && offerPricing.showPrise && offerPricing.showPrise.currency_code) || (offerPricing && offerPricing.currency)}</span>
+            <span className={`${styles['fs-12']} ${styles['pr-5']}`}>{(offerPricing && offerPricing.showPrise && offerPricing.showPrise.currency_code) || (offerPricing && offerPricing.currency)}</span>
+              {offerPricing && offerPricing.showPrise && <span className={`${styles['fs-24']} ${styles['fontW600']} ${styles['pr-5']}`}><ShowPriceFormat showPrice={offerPricing.showPrise.display_value} strickedPrice={offerPricing.strickedPrice.display_value}/></span>}
             </div>
             <Fragment>
               {offerPricing && offerPricing.showPrise && offerPricing.showPrise.display_value !== offerPricing && offerPricing.strickedPrice && offerPricing.strickedPrice.display_value && Math.floor(offerPricing && offerPricing.discount && offerPricing.discount) > 5 &&
               <div className={`${styles.flex} ${styles['align-baseline']} ${styles['cross-strike-red']} ${styles.relative} ${styles['ml-10']}`}>
-                <span className={`${styles['fs-12']} ${styles['pr-5']}`}>{offerPricing && offerPricing.strickedPrice && offerPricing.strickedPrice.display_value}</span>
-                <span className={`${styles['fs-12']} ${styles['pr-5']}`}>{offerPricing && (offerPricing.strickedPrice.currency_code || offerPricing.currency)}</span>
+                {offerPricing && offerPricing.strickedPrice && <span className={`${styles['fs-24']} ${styles['pr-5']}`}><StrickedPriceFormat showPrice={offerPricing.showPrise.display_value} strickedPrice={offerPricing.strickedPrice.display_value}/></span>}
               </div>}
               <div className={`${styles['flex']} ${styles['align-baseline']} ${styles['relative']} ${styles['ml-10']}`}>
                 {offerPricing && offerPricing.showPrise && offerPricing.showPrise.display_value !== offerPricing && offerPricing.strickedPrice && offerPricing.strickedPrice.display_value && Math.floor(offerPricing && offerPricing.discount) > 5 &&
