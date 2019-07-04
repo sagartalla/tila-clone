@@ -11,8 +11,11 @@ import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './help_en.styl';
 import styles_ar from './help_ar.styl';
 import SVGComponent from '../common/SVGComponet';
+import { languageDefinations } from '../../utils/lang';
 
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+
+const languageLabel = languageDefinations();
 
 const sort = (a,b) => a - b;
 
@@ -43,7 +46,7 @@ class Faq extends Component {
         <div className={styles['ht-185']}>
           {questionKeys.map(this.renderQuestions(topicKey))}
         </div>
-        {remaining.length > 0 ? <Link route={`answers/${topicKey}`}><a className={`${styles['viewMoreBtn']} ${styles['fs-13p']} ${styles['greyColor']} ${styles['as-flex-end']}`}>{`${remaining.length} more >`}</a></Link> : <div />}
+        {remaining.length > 0 ? <Link route={`answers/${topicKey}`}><a className={`${styles['viewMoreBtn']} ${styles['fs-13p']} ${styles['greyColor']} ${styles['as-flex-end']}`}>{`${remaining.length} ${languageLabel['HNS']['MORE']} >`}</a></Link> : <div />}
       </div>
     )
   }
@@ -52,24 +55,24 @@ class Faq extends Component {
     const questionTypeKeys = Object.keys(this.props.questionData).sort(sort);
     return(
       <div>
-        <h4>TOPICS</h4>
+        <h4>{languageLabel['HNS']['TOPICS']}</h4>
         <div className={`${styles['flex']} ${styles['flexWrap']} ${styles['justify-between']}`}>
           {questionTypeKeys.map(this.renderTopics)}
         </div>
         {this.props.isLoggedIn ?
           <div>
-            <h4>MY INCIDENTS</h4>
+            <h4>{languageLabel['HNS']['MY_INCIDENTS']}</h4>
             <div className={styles['incidentContainer']}>
               <div className={styles['fa']}>
                 <div className={styles['incidentIcon']}>
                   <SVGComponent src="helpsupport/help_tickets"/>
                 </div>
                 <div>
-                <h4>MY TICKETS</h4>
-                <div className={`${styles['fs-13p']} ${styles['greyColor']}`} >All your tickets in one place.</div>
+                <h4>{languageLabel['HNS']['MY_TICKETS']}</h4>
+                <div className={`${styles['fs-13p']} ${styles['greyColor']}`} >{languageLabel['HNS']['TKTS_ONE_PLACE']}</div>
                 </div>
               </div>
-              <div><Link route='incidents'><a className={styles['fs-13p']}>View More</a></Link></div>
+              <div><Link route='incidents'><a className={styles['fs-13p']}>{languageLabel['HNS']['VIEW_MORE']}</a></Link></div>
             </div>
           </div>
         : null}

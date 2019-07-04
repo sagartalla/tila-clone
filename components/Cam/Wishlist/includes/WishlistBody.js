@@ -22,12 +22,13 @@ const cookies = new Cookies();
 const language = cookies.get('language') || 'en';
 const country = cookies.get('country') || 'SAU';
 
-const percentage = (a, b) => Math.floor(((a - b) / b) * 100);
+const percentage = (a, b) => Math.floor(((b - a) / b) * 100);
 
 const WishlistBody = (props) => {
   const {
     data, deleteItem, addToCart, notifyMe, pageDetails,
   } = props;
+  console.log(data);
   const { WISH_LIST_PAGE, PDP_PAGE } = languageDefinations();
 
   const getPriceAlert = (a, b, cur) => {
@@ -65,7 +66,7 @@ const WishlistBody = (props) => {
       </div>
     </div>
     :
-    <div>
+    <div className={`${styles['pl-5']}`}>
       <div className={`${styles.flex}`}>
         <Col md={12} sm={12} xs={12} className={`${styles['pl-0']}`}>
           <h4 className={`${styles['mt-0']} ${styles['mb-20']} ${styles.fontW300}}`}>
@@ -124,7 +125,7 @@ const WishlistBody = (props) => {
                         </span>
                         <h4 className={`${styles.fontW600} ${styles['light-gry-clr']} ${styles['mt-25']} ${styles['ff-b']}`}><span className={`${styles['fs-20']} ${styles['m-fs-18']}`}>{price} {cur}</span></h4>
                         {
-                          variant_id && percentage(price, mrp) <= -5 ?
+                          variant_id && percentage(price, mrp) > 5 ?
                             <span className={`${styles.flex} ${styles['flex-center']}`}>
                             <span className={`${styles['success-green']} ${styles.flex}`}>{percentage(price, mrp)}%</span>&nbsp;&nbsp;&nbsp;
                             <strike className={`${styles['label-gry-clr']} ${styles['fs-12']}`}>{mrp} {cur}</strike>

@@ -258,8 +258,8 @@ class SearchResults extends Component {
           loadMore={this.loadMore}
           hasMore={pagiantionDetails.hasMore}
           loader={<div className={styles['loader']} key={0}>{SEARCH_PAGE.LOADING}</div>}
+          threshold={2000}
           className={`${styles['grid-cont']} ${styles['flex']} ${styles['flex-wrp']} ${styles['search-main-part']}`}
-
         >
          {this.fetchResults(results.items)}
         </InfiniteScroll>

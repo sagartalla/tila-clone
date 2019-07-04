@@ -107,7 +107,7 @@ class UpdatePersonalInfoModal extends React.Component {
         this.handleClose();
         toast(
           <ToastContent
-            msg={`${PERSONAL_INFO_MODAL.YOUR_PERSONAL}}`}
+            msg={`${PERSONAL_INFO_MODAL.YOUR_PERSONAL}`}
             msgType="success"
           />,
         );
@@ -131,7 +131,7 @@ class UpdatePersonalInfoModal extends React.Component {
       <div>
         <div className={styles.editProfileModal}>
           <h4 className={`${styles['flx-spacebw-alignc']} ${styles['m-0']}`}>
-            <span className={`${styles['fs-20']}`}>Personal Information</span>
+            <span className={`${styles['fs-20']}`}>{PERSONAL_INFO_MODAL.HEADING}</span>
             <a onClick={this.handleClose} className={`${styles['fs-22']} ${styles['black-color']}`}>X</a>
           </h4>
           <div className={`${styles['flex-center']} ${styles['flex-colum']}`}>
@@ -160,15 +160,8 @@ class UpdatePersonalInfoModal extends React.Component {
               <div className={`${styles['m-5']} ${styles['mt-20']} ${styles['update-profile-input']} ${styles.flex}`}>
                 <Col xs={12} md={12}>
                   <div className={styles['fp-input']}>
-                    <input
-                      className={styles['user-name']}
-                      type="text"
-                      value={user_name}
-                      onChange={this.handleNameChange}
-                      maxLength={40}
-                      required
-                    />
-                    <label className={`${styles['label-light-grey']}`}>{PERSONAL_INFO_MODAL.USERNAME}</label>
+                    <div className={`${styles['mb-0']} ${styles['fs-12']} ${styles['label-gry-clr']} ${styles['profile-dts']}`}>{PERSONAL_INFO_MODAL.USERNAME}</div>
+                    <input className={styles['user-name']} type="text" value={user_name === 'null null' ? '' : user_name} onChange={this.handleNameChange} maxLength={40}/>
                     {/* <span className={styles['highlight']}></span>
                   <span className={styles['bar']}></span>
                   <label>Email / Username</label> */}

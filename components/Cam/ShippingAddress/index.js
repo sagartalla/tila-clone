@@ -13,6 +13,7 @@ import AddressHeader from './includes/AddressHeader';
 import { languageDefinations } from '../../../utils/lang/';
 import { actionCreators, selectors } from '../../../store/cam/address';
 import FormValidator from '../../common/FormValidator';
+import Button from '../../common/CommonButton';
 
 import lang from '../../../utils/language';
 
@@ -509,7 +510,12 @@ class ShippingAddress extends Component {
                 {
                   standalone !== true ?
                     <Col md={12} sm={12} xs={12} className={`${styles['pl-15']}`}>
-                      <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-x-large']} ${styles['left-radius']} ${styles['text-uppercase']} ${styles['add-button']}`} disabled={cartResults.cart_shippable !== undefined && !cartResults.cart_shippable} onClick={handleShippingAddressContinue}>{DELIVERY_ADDR_PAGE.CONTINUE}</button>
+                      <Button
+                        className={`${styles['left-radius']} ${styles['text-uppercase']}`}
+                        btnText={DELIVERY_ADDR_PAGE.CONTINUE}
+                        disabled={cartResults.cart_shippable !== undefined && !cartResults.cart_shippable}
+                        onClick={handleShippingAddressContinue}
+                      />
                     </Col>
                     : null
                 }

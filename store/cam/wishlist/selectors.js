@@ -61,6 +61,12 @@ const getLoader = (store) => {
   }
 };
 
+const getNotifyLoading = (store) => {
+  if(store.wishlistReducer.ui.notifyLoading){
+    return store.wishlistReducer.ui.notifyLoading;
+  }
+}
+
 const getProductsDetails = store => store.wishlistReducer.products;
 
-export { getWishListResults, getPaginationDetails, getLoader, getProductsDetails };
+export { getWishListResults, getPaginationDetails, getLoader, getProductsDetails, getNotifyLoading };

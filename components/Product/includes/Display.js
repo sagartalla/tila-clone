@@ -11,7 +11,7 @@ import constants from '../../../constants';
 import SVGComponent from '../../common/SVGComponet';
 // import userAgent from '../../../utils/user-agent';
 
-import { actionCreators } from '../../../store/cam/wishlist';
+import { selectors, actionCreators } from '../../../store/cam/wishlist';
 
 import lang from '../../../utils/language';
 
@@ -51,18 +51,20 @@ class Display extends Component {
     e.preventDefault();
     const {
       product_id, catalogObj, addToWishlistAndFetch,
-      offerPricing, wishlistId, deleteWishlist,
+      offerPricing, wishlistId, deleteWishlist, loader,
     } = this.props;
-    if (wishlistId) {
-      deleteWishlist(wishlistId);
-    } else {
-      addToWishlistAndFetch({
-        catalog_id: catalogObj.catalog_id,
-        variant_id: catalogObj.variant_id,
-        product_id,
-        wishlisted_price: offerPricing.showPrise ? offerPricing.showPrise.display_value : null,
-        wishlisted_currency: offerPricing.showPrise ? offerPricing.showPrise.currency_code : offerPricing.currency,
-      });
+    if(!loader){
+      if (wishlistId) {
+        deleteWishlist(wishlistId);
+      } else {
+        addToWishlistAndFetch({
+          catalog_id: catalogObj.catalog_id,
+          variant_id: catalogObj.variant_id,
+          product_id,
+          wishlisted_price: offerPricing.showPrise ? offerPricing.showPrise.display_value : null,
+          wishlisted_currency: offerPricing.showPrise ? offerPricing.showPrise.currency_code : offerPricing.currency,
+        });
+      }
     }
   }
 
@@ -160,6 +162,10 @@ Display.propTypes = {
   imgs: PropTypes.array.isRequired,
 };
 
+const mapStateToProps = store => ({
+  loader: selectors.getLoader(store),
+})
+
 const mapDispatchToProps = dispatch => bindActionCreators(
   {
     deleteWishlist: actionCreators.deleteWishlist,
@@ -168,4 +174,4 @@ const mapDispatchToProps = dispatch => bindActionCreators(
   dispatch,
 );
 
-export default connect(null, mapDispatchToProps)(Display);
+export default connect(mapStateToProps, mapDispatchToProps)(Display);
