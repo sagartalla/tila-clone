@@ -32,7 +32,6 @@ const ProductPrice = ({
   const {
     price, listingAvailable, listingId, stockError, availabilityError, offerPricing,
   } = offerInfo;
-  console.log(offerInfo);
   const {
     strickedPrice: mrp, sellingPrice: sp, offerDiscounts, showPrise: total, totalDiscountMRP: discountMrp, currency,
   } = offerPricing;
