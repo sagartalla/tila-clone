@@ -62,7 +62,7 @@ const getProductComponent = (isPreview, taskCode) => {
         const {
           offerInfo, titleInfo, imgUrls, shippingInfo,
         } = productData;
-        digitalData.page.pageInfo.pageName = titleInfo.title;
+        digitalData.page.pageInfo.pageName = titleInfo.title.attribute_values[0].value;
         digitalData.page.category = { primaryCategory: productData.categoryType };
         digitalData.page.pageInfo.breadCrumbs = productData.breadcrums ? productData.breadcrums.map(item => item.display_name_en) : [];
         this.props.track({
@@ -85,7 +85,7 @@ const getProductComponent = (isPreview, taskCode) => {
 
           if (index === -1) {
             arr.unshift({
-              nm: titleInfo.title,
+              nm: titleInfo.title.attribute_values[0].value,
               im: imgUrls && imgUrls[0].url,
               pr,
               cd,
