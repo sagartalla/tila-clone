@@ -392,7 +392,7 @@ export const AR_KEYWORDS = {
     SUGGESTED_TAGS: 'التاغات المقترحة',
     FULFILLED_BY_TILA: 'تم بنجاح مع تيله',
     ALL_DEALS: 'جميع الصفقات',
-    APPLIED_FILTERS_TAGS: 'طريقة التصنيف \ تاغات',
+    APPLIED_FILTERS_TAGS: 'طريقة التصنيف',
     CLEAR_ALL: 'مسح الكل',
     PRICE_LOW_TO_HIGH: 'الأسعار من الرخيص إلى الغالي',
     PRICE_HIGH_TO_LOW: 'الأسعار من الغالي إلى الرخيص',
@@ -554,6 +554,9 @@ export const AR_KEYWORDS = {
     MATCHING_ITEM: 'مطابقة المنتجات',
     MATCHING_PRODUCTS: 'مطابقة المنتجات',
     HELLO: 'هلا فيك',
+    NO_ITEMS: '0 items in wishlist',
+    MORE_ITEMS: 'more items',
+    GO_TO_WISHLIST: 'Go To Wishlist',    
   },
   LOGIN_PAGE: {
     SIGN_UP: 'انشاء حساب',

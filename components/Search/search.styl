@@ -36,6 +36,7 @@
     width 25%
     padding-bottom 4px
     border-right 1px solid light-brdr
+    border-bottom 1px solid light-brdr
     a
       text-decoration none
       position relative
@@ -160,7 +161,7 @@
     .quick-view
       // background-color label-light
       // padding 10px 0
-      width 96%
+      width 85%
       margin 0 auto
       .add-to-crt
         border: 1px solid tila-blk
@@ -303,7 +304,15 @@
       background linear-gradient(to left, gray-light, white)
       border-radius: 15px
       margin 5px
+      padding 5px
       border 0.5px solid rgba(192, 192, 192, 0.3)
+      .close-part
+        display none
+        height 14px
+        align-items center
+      &:hover
+        .close-part
+          display flex
       .title
         padding 0px 10px
       .close-part
@@ -323,7 +332,7 @@
   // transition: width 2s;
   .notify-me-part
     position absolute
-    border-bottom-right-radius 14px
+    border-bottom-right-radius 10px
     box-shadow 0 2px 6px 0 rgba(189, 189, 189, 0.5)
     border solid 1px lgt-black-clr
     background-color white
@@ -495,16 +504,16 @@
     .offer-tag
       top: 0
       left: 0
-      padding: 6px 10px;
-      border-bottom-right-radius 26px
-      border-top-left-radius 10px
+      padding: 6px 10px
+      border-bottom-right-radius 14px
+      // border-top-left-radius 10px
       color white
       &.green
-        background generic-green-color
+        background thick-red-arrow
       &.yellow
-        background yellow-color
+        background thick-red-arrow
       &.orange
-        background orange
+        background thick-red-arrow
       &.red
         background thick-red-arrow
     .variants-main
@@ -533,7 +542,7 @@
 
 .category-list-title
   a[aria-expanded=true] .expand-icon
-    transform rotate(-90deg)
+    transform rotate(-180deg)
 
 .category-list
   border-bottom 0.5px solid light-brdr

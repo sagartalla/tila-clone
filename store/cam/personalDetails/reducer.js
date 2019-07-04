@@ -143,7 +143,7 @@ const personalDetailsReducer = typeToReducer({
         ...passResetStatus,
       },
       ui: {
-        loading: true,
+        loading: false,
       },
     };
     return newState;
