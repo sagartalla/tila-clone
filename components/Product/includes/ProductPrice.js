@@ -30,7 +30,7 @@ const ProductPrice = ({
   onChangeField,
 }) => {
   const {
-    price, listingAvailable, listingId, stockError, availabilityError, offerPricing,
+    listingAvailable, stockError, availabilityError, offerPricing,
   } = offerInfo;
   const {
     strickedPrice: mrp, sellingPrice: sp, offerDiscounts, showPrise: total, totalDiscountMRP: discountMrp, currency,
