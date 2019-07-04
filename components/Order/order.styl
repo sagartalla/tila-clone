@@ -53,7 +53,13 @@ $shipment-wrap-border-color = #D8D8D8
     width 14px
     height 15px
 
+.card-number
+  direction ltr
+.order-conf-part
+  box-shadow 0 0 35px 0 rgba(0, 0, 0, 0.06)
+
 .addres-dtls
+  box-shadow 0 0 35px 0 rgba(0, 0, 0, 0.06)
   .pin-map-icon
     width 20px
 
@@ -98,6 +104,7 @@ $shipment-wrap-border-color = #D8D8D8
   height 300px
 .state-times
   margin 15px
+  padding 0px
   &::after
     box-sizing border-box
   li
@@ -105,7 +112,6 @@ $shipment-wrap-border-color = #D8D8D8
   p
     position relative
     color light-gray-clr
-    padding 0 20px
     width 100px
     &::after
       content ""
@@ -148,3 +154,10 @@ $shipment-wrap-border-color = #D8D8D8
 .progress-th
   background light-yellow-color
   border 1px solid yellow-color
+
+.tooltip
+  &:hover .rightM15
+    display block
+
+.rightM15
+  display none

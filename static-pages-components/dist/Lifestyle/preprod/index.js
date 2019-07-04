@@ -80,7 +80,7 @@ const Lifestyle = () => React.createElement(
           { md: 1, className: `${styles['pl-0']} ${styles['pr-10']}` },
           React.createElement(
             'a',
-            { href: `/SAU/${lang}srp/home-furnishing?categoryTree=true&isListed=false&sid=932,941` },
+            { href: `/SAU/${lang}/srp/home-furnishing?categoryTree=true&isListed=false&sid=932,941` },
             React.createElement(
               'div',
               { className: `${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon` },
@@ -174,7 +174,7 @@ const Lifestyle = () => React.createElement(
             React.createElement(
               'div',
               { className: `${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon` },
-              React.createElement(SVGComponent, { clsName: 'poular-cat1', src: 'icons/landing-page-lifestyle/personal-care' }),
+              React.createElement(SVGComponent, { clsName: 'poular-cat4', src: 'icons/landing-page-lifestyle/personal-care' }),
               React.createElement(
                 'span',
                 { className: `${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}` },
@@ -192,7 +192,7 @@ const Lifestyle = () => React.createElement(
             React.createElement(
               'div',
               { className: `${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon` },
-              React.createElement(SVGComponent, { clsName: 'poular-cat2', src: 'icons/landing-page-lifestyle/sports-ball' }),
+              React.createElement(SVGComponent, { clsName: 'poular-cat2', src: 'icons/landing-page-lifestyle/sports-gloves' }),
               React.createElement(
                 'span',
                 { className: `${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}` },
@@ -228,7 +228,7 @@ const Lifestyle = () => React.createElement(
             React.createElement(
               'div',
               { className: `${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon` },
-              React.createElement(SVGComponent, { clsName: 'poular-cat', src: 'icons/landing-page-lifestyle/daily-needs' }),
+              React.createElement(SVGComponent, { clsName: 'popular-cat5', src: 'icons/landing-page-lifestyle/daily-needs' }),
               React.createElement(
                 'span',
                 { className: `${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}` },
@@ -246,11 +246,11 @@ const Lifestyle = () => React.createElement(
             React.createElement(
               'div',
               { className: `${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon` },
-              React.createElement(SVGComponent, { clsName: 'poular-cat', src: 'icons/landing-page-lifestyle/health' }),
+              React.createElement(SVGComponent, { clsName: 'poular-cat', src: 'icons/landing-page-lifestyle/kitchen-dining' }),
               React.createElement(
                 'span',
                 { className: `${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}` },
-                'Health Care'
+                'kitchen & dining'
               )
             )
           )

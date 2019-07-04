@@ -2,7 +2,10 @@
   width: 100%;
   height: 370px;
 }
-.fashion-main-part .fashion-banner-main img {
+.fashion-main-part .fashion-banner-main a {
+  width: 100%;
+}
+.fashion-main-part .fashion-banner-main a img {
   width: 100%;
   object-fit: cover;
 }
@@ -84,15 +87,15 @@
   width: 40%;
 }
 .shop-now-btn a {
-  border: solid 1px #939393;
+  border: solid 1px #000;
   display: inline-flex;
   padding: 6px 15px;
-  color: #939393;
+  color: #000;
 }
 .img-responsive {
   max-width: 100%;
   max-height: 100%;
 }
 .lobster-family {
-  font-family: Lobster;
+  color: #000;
 }

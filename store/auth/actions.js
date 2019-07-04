@@ -5,6 +5,7 @@ import refStore from '../helper/refHandler';
 import { actionCreators as cartActionCreators } from '../cart';
 // import { actionCreators as cartActionCreators } from './';
 import { actionCreators as shippingActionCreators } from '../cam/address'
+import { actionCreators as personalDetailsActionCreator } from '../cam/personalDetails'
 const cookies = new Cookies();
 
 const actions = {
@@ -67,6 +68,7 @@ const actionCreators = {
     type: actions.USER_LOGIN,
     payload: api.userLogin(params),
   }).then(() => {
+    dispatch(personalDetailsActionCreator.getUserProfileInfo())
     dispatch(cartActionCreators.getCartResults());
     dispatch(shippingActionCreators.getShippingAddressResults());
 

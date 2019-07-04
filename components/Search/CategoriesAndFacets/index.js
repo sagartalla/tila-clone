@@ -36,7 +36,7 @@ class CategoriesAndFacets extends Component {
       if (e.target.checked) {
         params[facetName].push(value);
       } else {
-        params[facetName].splice(params[facetName].indexOf(value), 1);
+        params[facetName] = params[facetName].filter((item) => item.name !== value.name)        
         if (!params[facetName].length) { delete params[facetName]; }
       }
       // }

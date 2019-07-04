@@ -68,7 +68,7 @@ class VaultBody extends Component {
                     </span>
                     <div className={`${styles['flex']} ${styles['flex-colum']} ${styles['vault-card-item-inn']}`}>
                       <span>{bank_name}</span>
-                      <span className={`${styles['pt-25']} ${styles['pb-25']} ${styles['fs-18']}`}>{masked_number.replace(/(.{4})/g, '$1 ')}</span>
+                      <span className={`${styles['pt-25']} ${styles['pb-25']} ${styles['fs-18']} ${styles['card-number']}`}>{masked_number.replace(/(.{4})/g, '$1 ')}</span>
                       <div className={`${styles['flx-space-bw']}`}>
                         <span className={`${styles['flex']} ${styles['flex-colum']}`}>
                           <span className={`${styles['fs-12']}`}>{VAULT_PAGE.NAME}: {holder_name}</span>

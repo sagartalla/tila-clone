@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import Button from '../common/CommonButton';
+import { Col } from 'react-bootstrap';
+import Btn from '../common/Button';
 import { languageDefinations } from '../../utils/lang';
 import { selectors, actionCreators } from '../../store/auth';
 
@@ -16,8 +17,6 @@ import styles_ar from './login_ar.styl';
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
 const { LOGIN_PAGE } = languageDefinations();
-
-/* eslint- disable */
 
 class ForgotPassword extends Component {
   constructor(props) {

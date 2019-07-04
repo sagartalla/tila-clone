@@ -7,7 +7,7 @@ import constants from './constants';
 import { pimServiceInstance } from './services';
 import Cookie from 'universal-cookie';
 import { toast } from 'react-toastify';
-
+import ToastContent from '../../components/common/ToastContent';
 import Sentry from '../../utils/sentryUtil';
 
 const config = getConfig()
@@ -61,9 +61,6 @@ const notifySentry = (err) => {
       scope.setExtra(`statusCode`, err.response.status);
       scope.setExtra(`reqHeaders`, err.config.headers);
       scope.setExtra(`resHeaders`, err.response.headers);
-      if (req.user) {
-        scope.setUser({ id: req.user.id, email: req.user.email });
-      }
   });
   Sentry.captureException(err);
 };
@@ -88,7 +85,16 @@ const errorInterceptor = (err) => {
       if (err.response.status === '403') {
         cookies.remove('auth');
       }
-      toast.error(err.response.data.message || err.response.data.data.error.message);
+      const subMessege = err.response.data.sub_errors && err.response.data.sub_errors.map(e => e.message).join(' ')
+      const msg = `${err.response.data.message || ''} ${subMessege ? `: ${subMessege}` : ''}`.trim();
+      if(msg) {
+        toast(
+          <ToastContent
+            msg={msg}
+            msgType='error'
+          />
+        )
+      }
       notifySentry(err);
     }
   } catch (e) {

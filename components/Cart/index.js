@@ -80,11 +80,13 @@ class Cart extends Component {
     this.props.cartItemInputCount(id, 'add', selelecItem.max_limit < count ? selelecItem.max_limit : count);
   }
   openSlider = () => {
+    document.getElementsByTagName('BODY')[0].style.overflow = 'hidden';
     this.setState({
       showSlider: true,
-    });
+    });{}
   }
   closeSlider = () => {
+    document.getElementsByTagName('BODY')[0].style.overflow = 'auto';
     this.setState({
       showSlider: false,
     });
@@ -197,14 +199,12 @@ class Cart extends Component {
                     addOrRemoveGift={this.addOrRemoveGift}
                     checkoutBtnHandler={this.checkoutBtnHandler}
                     cartStepperInputHandler={this.cartStepperInputHandler}
-                    cartData={cartData}
                   />
                 </Grid>
                 <FooterBar />
               </Fragment>
         }
-        {
-        showSlider &&
+        {showSlider &&
           <Slider
             closeSlider={this.closeSlider}
             isOpen={showSlider}

@@ -22,7 +22,7 @@ import lang from '../../../../utils/language';
 import main_en from '../../../../layout/main/main_en.styl';
 import main_ar from '../../../../layout/main/main_ar.styl';
 import styles_en from '../../order_en.styl';
-import styles_ar from '../../order_en.styl';
+import styles_ar from '../../order_ar.styl';
 
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
@@ -169,7 +169,7 @@ class OrderHeader extends Component {
                             <Col className={`${styles['thick-gry-clr']}`} md={6}>{p.card_type}</Col>
                             {/* { p.amount && p.amount.display_value && */}
                               <Col md={6}>
-                                {`${p.masked_card_first6}******${p.masked_card_last4}`}
+                                <div className={`${styles['card-number']}`}>{`${p.masked_card_first6}******${p.masked_card_last4}`}</div>
                                 {/* {p.amount.display_value} {p.amount.currency_code} */}
                               </Col>
                             {/* } */}
@@ -217,7 +217,10 @@ class OrderHeader extends Component {
                   <span className={`${styles.fontW600} ${styles['light-gry-clr']} ${styles['flex-center']} ${styles['fs-14']}`}>
                     {total_price.display_value}&nbsp;{total_price.currency_code}
                     {/* (<a onMouseOver={this.showToolTip} onMouseLeave={this.hideToolTip}>i</a>) */}
-                    <span onMouseOver={this.showToolTip} onMouseLeave={this.hideToolTip} className={`${styles.relative} ${styles['checkout-quat']} ${styles['fs-12']} ${styles['flex-center']} ${styles['justify-around']}`}>
+                    <span
+                      onMouseOver={this.showToolTip}
+                      onMouseLeave={this.hideToolTip}
+                      className={`${styles.relative} ${styles['checkout-quat']} ${styles['fs-12']} ${styles['flex-center']} ${styles['justify-around']} ${lang === 'en' ? '' : styles['flip-questionmark']}`}>
                       {'?'}
                       {
                       showToolTip ?
@@ -228,7 +231,7 @@ class OrderHeader extends Component {
                             {total_discount &&
                             <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.T_DISCOUNT} : </span><span>{'(-)'} {total_discount.display_value} {total_discount.currency_code}</span></li>}
                             {total_offer_price &&
-                            <li className={`${styles['flx-space-bw']} ${styles['b-t']}`}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.T_PRICE} : </span><span> {total_offer_price.display_value} {total_offer_price.currency_code}</span></li>}
+                            <li className={`${styles['flx-space-bw']}`}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.T_PRICE} : </span><span> {total_offer_price.display_value} {total_offer_price.currency_code}</span></li>}
                             {total_shipping &&
                             <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.T_SHIPPING} : </span><span className={styles.flex}>{total_shipping.money_value ? `(+) ${total_shipping.display_value} ${total_shipping.currency_code}` : <SVGComponent clsName={`${styles['ship-icon']}`} src="icons/free-shipping" />}</span></li>}
                             {total_gift_charges && total_gift_charges.money_value > 0 &&

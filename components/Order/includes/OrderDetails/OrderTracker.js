@@ -37,12 +37,14 @@ class OrderTracker extends React.Component {
   }
 
   openSlider = () => {
+    document.getElementsByTagName('BODY')[0].style.overflow = 'hidden';
     this.setState({
       slider: true,
     });
   }
 
   closeSlider = () => {
+    document.getElementsByTagName('BODY')[0].style.overflow = 'auto';
     this.setState({
       slider: false,
     });
@@ -87,33 +89,35 @@ class OrderTracker extends React.Component {
             <div className={`${styles['border-b']} ${styles['p-20']} ${styles['pl-40']}`}>
               {showMsgAndDate}
             </div>
-            <ul className={`${styles['state-times']} ${styles['scroll']}`}>
+            <ul className={`${styles['state-times']}`}>
               {orderItem.state_time_estimates.length > 0 &&
-                orderItem.state_time_estimates.map(estimate => (
-                  <li>
-                    <p className={`${estimate.actual_time ? styles.activeP : ''}`}>
-                      {estimate.actual_time ? moment(estimate.actual_time).format('D MMM') : ''}
-                      <div className={`${styles['fs-12']} ${styles['label-gry-clr']}`}>
-                        {estimate.actual_time ? moment(estimate.actual_time).format('hh:mm A') : ''}
-                      </div>
-                    </p>
-                    <span className={`${styles.status} ${estimate.actual_time ? styles['border-lt-green'] : styles['border-lt']}`}>
-                      <strong>{orderStatusAttributes[estimate.status]}</strong>
-                      {(estimate.status === 'SHIPPED' || estimate.status === 'SCHEDULED') &&
-                        orderTracker[orderItem.trackingId] && orderTracker[orderItem.trackingId].events.length > 0 &&
-                        <ul className={`${styles.events} ${styles['label-gry-clr']} ${styles['pl-10']} ${styles['fs-10']}`}>
-                          {orderTracker[orderItem.trackingId].events.map(event => (
-                            <li className={`${styles['flex-center']} ${styles['mt-5']}`}>
-                              <span className={styles.dot} />
-                              <span className={styles['ml-5']}>{moment(event.date).format('hh:mm A')}</span>
-                              <span className={styles['ml-5']}>{event.event_message}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      }
-                    </span>
-                  </li>
-                ))}
+                orderItem.state_time_estimates.filter(i => i.valid).map((estimate, index) => {
+                  return (
+                    <li>
+                      <p className={`${estimate.actual_time ? styles.activeP : ''}`}>
+                        {estimate.actual_time ? moment(estimate.actual_time).format('D MMM') : ''}
+                        <div className={`${styles['fs-12']} ${styles['label-gry-clr']}`}>
+                          {estimate.actual_time ? moment(estimate.actual_time).format('hh:mm A') : ''}
+                        </div>
+                      </p>
+                      <span className={`${styles.status} ${orderItem.state_time_estimates.filter(i => i.valid).length - 1 !== index ? estimate.actual_time ? styles['border-lt-green'] : styles['border-lt'] : ''}`}>
+                        <strong>{orderStatusAttributes[estimate.status]}</strong>
+                        {(estimate.status === 'SHIPPED' || estimate.status === 'SCHEDULED') &&
+                          orderTracker[orderItem.trackingId] && orderTracker[orderItem.trackingId].events.length > 0 &&
+                          <ul className={`${styles.events} ${styles['label-gry-clr']} ${styles['pl-10']} ${styles['fs-10']}`}>
+                            {orderTracker[orderItem.trackingId].events.map(event => (
+                              <li className={`${styles['flex-center']} ${styles['mt-5']}`}>
+                                <span className={styles.dot} />
+                                <span className={`${styles.width18} ${styles['ml-5']}`}>{moment(event.date).format('hh:mm A')}</span>
+                                <span className={styles['ml-5']}>{event.event_message}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        }
+                      </span>
+                    </li>
+                  );
+                })}
             </ul>
           </div>
         </Slider>}

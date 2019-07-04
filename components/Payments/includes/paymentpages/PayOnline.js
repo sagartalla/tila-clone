@@ -57,7 +57,7 @@ class PayOnline extends Component {
     const { disableSaveCard, iframe_url } = this.state;
 
     return (
-      <div className={`${styles['pay-online']}`}>
+      <div className={`${styles['pay-online']} ${styles['pb-10']}`}>
         <Voucher voucherData={voucherData} />
         <div>
           {
@@ -74,7 +74,7 @@ class PayOnline extends Component {
               <div className={`${styles['pt-30']} ${styles['pb-30']}`}>
                 <p className={`${styles['mb-25']} `}>{PAYMENT_PAGE.ONCE_YOU_CLICK_ON_ADD_NEW_CARD_THERE_IS_NO_GOING_BACK}</p>
                 <Button
-                  className={`${styles['text-uppercase']} ${styles['new-card-btn']} ${styles['fs-16']} ${styles['border-radius']} ${styles['ht-40']} ${styles.width55}`}
+                  className={`${styles['text-uppercase']} ${styles['new-card-btn']} ${styles['fs-16']} ${styles['border-radius']}`}
                   onClick={this.fetchIframe}
                   btnText={PAYMENT_PAGE.PAY + ' ' + data.amount_to_pay.display_value + ' ' + data.amount_to_pay.currency_code + ' ' + PAYMENT_PAGE.USING_NEW_CARD}
                   hoverClassName="hoverBlueBackground"

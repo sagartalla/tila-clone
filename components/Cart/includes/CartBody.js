@@ -45,9 +45,10 @@ const CartBody = ({
   const { CART_PAGE } = languageDefinations();
 
   return (
-    isLoading ?
-      cartPlaceHolder
-          :
+    <>
+    {
+      isLoading ? cartPlaceHolder : null
+    }
     <div className={styles['cart-container']}>
       {
         showBlocker ? <Blocker /> : ''
@@ -88,7 +89,7 @@ const CartBody = ({
                   <RightBar
                     data={data}
                     showInstant={true}
-                    isFromCart={true}
+                    // isFromCart={true}
                     showCheckoutBtn={true}
                     checkoutBtnHandler={checkoutBtnHandler}
                     openSlider={openSlider}
@@ -103,6 +104,7 @@ const CartBody = ({
         }
       </Row>
     </div>
+    </>
   );
 };
 

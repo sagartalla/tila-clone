@@ -9,6 +9,7 @@ import FooterBar from '../Footer/index';
 import CategoriesAndFacets from './CategoriesAndFacets';
 import SearchDetailsBar from './SearchDetailsBar';
 import SearchResults from './SearchResults';
+import Brand from './Brand';
 import CompareWidget from '../common/CompareWidget';
 import lang from '../../utils/language';
 
@@ -119,29 +120,38 @@ class Search extends Component {
   }
 
   handleScroll(e) {
-    sidebarPosition = sidebarPosition || document.getElementById('sidebar-position');
-    const {height: sideBarHeight} = sidebarPosition.getBoundingClientRect();
-    if(sideBarHeight < window.innerHeight - 123) {
-      this.setState({
-        containerStyle: {},
-        sideBarPositionClass: 'sticky-top'
-      })
-      return;
-    }
-    if (oldY < window.scrollY) {
-      this.upScroll(e);
-    } else {
-      this.downScroll();
-    }
-    oldY = window.scrollY;
+    // sidebarPosition = sidebarPosition || document.getElementById('sidebar-position');
+    // const {height: sideBarHeight} = sidebarPosition.getBoundingClientRect();
+    // if(sideBarHeight < window.innerHeight - 123) {
+    //   this.setState({
+    //     containerStyle: {},
+    //     sideBarPositionClass: 'sticky-top'
+    //   })
+    //   return;
+    // }
+    // if (oldY < window.scrollY) {
+    //   this.upScroll(e);
+    // } else {
+    //   this.downScroll();
+    // }
+    // oldY = window.scrollY;
   }
   render() {
-    const { query, optionalParams } = this.props;
+    const { query, optionalParams, isBrandPage } = this.props;
     const { sideBarPositionClass, containerStyle } = this.state;
     return (
       <div>
         <HeaderBar />
-        <Grid id="search-container" className={`${styles['pt-20']} ${styles.relative}`}>
+        {
+          isBrandPage
+          ?
+            <Grid className={`${styles['pt-20']} ${styles.relative}`}>
+              <Brand />
+            </Grid>
+          :
+           null
+        }
+        <Grid id="search-container" className={`${styles['pt-20']} ${styles.relative} ${styles['search-container-wrap']}`}>
           <Col md={2} id="sidebar-position" className={`${styles['filter-panel']} ${styles['float-l']} ${styles['border-radius4']} ${styles['bg-white']} ${styles['p-0']} ${styles[sideBarPositionClass]}`} style={containerStyle}>
             <NoSSR>
               <CategoriesAndFacets />

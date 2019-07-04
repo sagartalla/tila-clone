@@ -37,7 +37,7 @@ const Lifestyle = () => (
         <h5 className={`main-title ${styles['fs-16']} ${styles['fontW600']}`}>Popular Category</h5>
         <div className={`${styles['flex']} ${styles['poular-cat-inn']}`}>
           <Col md={1} className={`${styles['pl-0']} ${styles['pr-10']}`}>
-            <a href={`/SAU/${lang}srp/home-furnishing?categoryTree=true&isListed=false&sid=932,941`}>
+            <a href={`/SAU/${lang}/srp/home-furnishing?categoryTree=true&isListed=false&sid=932,941`}>
               <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon`}>
                 <SVGComponent clsName="poular-cat" src="icons/landing-page-lifestyle/chair" />
                 <span className={`${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}`}>Furniture</span>
@@ -79,7 +79,7 @@ const Lifestyle = () => (
           <Col md={1} className={`${styles['pl-0']} ${styles['pr-10']}`}>
             <a href={`/SAU/${lang}/srp/beauty-&-personal-care?categoryTree=true&isListed=false&sid=932,958`}>
               <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon`}>
-                <SVGComponent clsName="poular-cat1" src="icons/landing-page-lifestyle/personal-care" />
+                <SVGComponent clsName="poular-cat4" src="icons/landing-page-lifestyle/personal-care" />
                 <span className={`${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}`}>Personal Care</span>
               </div>
             </a>
@@ -87,7 +87,7 @@ const Lifestyle = () => (
           <Col md={1} className={`${styles['pl-0']} ${styles['pr-10']}`}>
             <a href={`/SAU/${lang}/srp?search=sports&language=en&isListed=false`}>
               <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon`}>
-                <SVGComponent clsName="poular-cat2" src="icons/landing-page-lifestyle/sports-ball" />
+                <SVGComponent clsName="poular-cat2" src="icons/landing-page-lifestyle/sports-gloves" />
                 <span className={`${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}`}>Sports</span>
               </div>
             </a>
@@ -103,7 +103,7 @@ const Lifestyle = () => (
           <Col md={1} className={`${styles['pl-0']} ${styles['pr-10']}`}>
             <a href={`/SAU/${lang}/srp?search=Daily%20Needs&language=en&isListed=false`}>
               <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon`}>
-                <SVGComponent clsName="poular-cat" src="icons/landing-page-lifestyle/daily-needs" />
+                <SVGComponent clsName="popular-cat5" src="icons/landing-page-lifestyle/daily-needs" />
                 <span className={`${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}`}>Daily Needs</span>
               </div>
             </a>
@@ -111,8 +111,8 @@ const Lifestyle = () => (
           <Col md={1} className={`${styles['pl-0']} ${styles['pr-10']}`}>
             <a href={`/SAU/${lang}/srp/health-care?categoryTree=true&isListed=false&sid=932,972`}>
               <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon`}>
-                <SVGComponent clsName="poular-cat" src="icons/landing-page-lifestyle/health" />
-                <span className={`${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}`}>Health Care</span>
+                <SVGComponent clsName="poular-cat" src="icons/landing-page-lifestyle/kitchen-dining" />
+                <span className={`${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}`}>kitchen & dining</span>
               </div>
             </a>
           </Col>

@@ -31,7 +31,7 @@ window.fbAsyncInit = function() {
     xfbml      : true,
     version    : 'v3.2'
   });
-  FB.AppEvents.logPageView();   
+  FB.AppEvents.logPageView();
 };
 
 function initialSocialLogin() {
@@ -65,7 +65,8 @@ function getSearchObj(queryString) {
   const queryArray = queryString.replace('?', '').split('&');
   const queryObj = queryArray.reduce((a,v,i) => {
     const [key, value] = v.split('=');
-    return {...a, [key]: value}
+    a[key] = value;
+    return a;
   }, {})
   return queryObj;
 }

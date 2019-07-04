@@ -29,7 +29,7 @@ const MiniCartBody = (props) => {
   const { items, error, total_offer_price, currency } = data;
   const flag = data && items && items.length;
   const cnt = flag > 0 ? items.length : 0;
-  const { CART_PAGE } = languageDefinations();
+  const { CART_PAGE, DELIVERY_ADDR_PAGE } = languageDefinations();
   return (
     <div>
       <div className={`${styles['cart-container']} ${styles['mini-cart']} ${styles['border-t']}`}>
@@ -38,7 +38,7 @@ const MiniCartBody = (props) => {
         }
         <div>
           <h5 className={`${styles['mt-0']} ${styles['pb-15']} ${styles['fontW600']} ${styles['thick-gry-clr']} ${styles['mb-0']}`}>
-            <span>{CART_PAGE.MY_CART} ({cnt})</span>
+            <span>{CART_PAGE.MY_CART} {cnt}</span>
           </h5>
         </div>
         <div>
@@ -94,10 +94,10 @@ const MiniCartBody = (props) => {
                       </div>
                     :
                       <div className={`${styles['mt-20']} ${styles['fs-12']}`}>
-                        <div>
-                          <span className={`${styles['white-color']} ${styles['pb-5']} ${styles['pt-5']} ${styles['pr-10']} ${styles['pl-10']} ${styles['bg-thick-red-clr']} ${styles['border-radius12']}`}>Not Shippable</span>
+                        <div className={`${styles['not-shippable']} ${styles.flex} ${styles['flex-colum']} ${styles['mb-20']} ${styles['p-10']}`}>
+                          <Col md={12} sm={12} xs={12} className={`${styles['thick-red-clr']} ${styles.fontW600} ${styles['p-0']} ${styles['not-shipping-font']}`}>{DELIVERY_ADDR_PAGE.NOT_SHIPPABLE}</Col>
+                          <Col md={12} sm={12} xs={12} className={`${styles['fs-12']} ${styles['p-0']}`}>{CART_PAGE.CANNOT_DELIVER}</Col>
                         </div>
-                        <p className={`${styles['mt-20']} ${styles['thick-red-clr']}`}>{CART_PAGE.CANNOT_DELIVER}</p>
                       </div>
                     }
                   </Col>
@@ -114,7 +114,7 @@ const MiniCartBody = (props) => {
             <div className={`${styles['flx-spacebw-alignc']} ${styles['pb-10']}`}>
               <span className={styles['fontW600']}>{CART_PAGE.TOTAL_AMOUNT} :</span><span className={`${styles['fs-16']} ${styles['fontW600']}`}> {total_offer_price.display_value + ' ' + currency}</span>
             </div>
-            <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles['fs-18']} ${styles['flex-center']} ${styles['justify-center']}`} onClick={checkoutBtnHandler}>
+            <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['right-radius']} ${styles['fp-btn-large']} ${styles['fs-18']} ${styles['flex-center']} ${styles['justify-center']}`} onClick={checkoutBtnHandler}>
               <SVGComponent clsName={`${styles['secure-checkout']}`} src="icons/common-icon/secure-checkout" />
               <span className={styles['pl-5']}>{CART_PAGE.SECURE_CHECKOUT}</span>
             </button>

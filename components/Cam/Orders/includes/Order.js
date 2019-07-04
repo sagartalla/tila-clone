@@ -41,7 +41,7 @@ const Order = ({ order, getInvoice }) => {
   return (
     <div className={`${styles['order-item-wrap']} ${styles['box-shadow']} ${styles['mt-20']} ${styles['mb-20']} ${styles['p-20']}`}>
       <div className={`${styles['flx-spacebw-alignc']}`}>
-        <div>
+        <div className={`${styles.width42}`}>
           <span>{ORDERS.ORDER_ID}</span>
           <div onClick={routeChange}>
             <span className={styles['link-text']}>{order.id}</span>
@@ -93,7 +93,7 @@ const Order = ({ order, getInvoice }) => {
           <a href={`/${country}/${language}/help/answers/orders#${order.id}`}>
             <span className={`${styles['p-5']} ${styles['black-color']} ${styles['flex-center']} ${styles['ml-10']}`}>
               <SVGComponent clsName={`${styles['help-icon']}`} src="icons/help-icon/help" />
-              &nbsp;&nbsp;{ORDERS.NEED_HELP}?
+              &nbsp;&nbsp;{ORDERS.NEED_HELP} <span className={`${lang === 'en' ? '' : styles['flip-questionmark']}`}>?</span>
             </span>
           </a>
 

@@ -39,7 +39,7 @@ class CartAndPaymentSideBar extends Component {
   }
   render() {
     const {
-      checkoutBtnHandler, showCheckoutBtn, showInstant, isFromCart,
+      checkoutBtnHandler, showCheckoutBtn, showInstant,
       hideUpSell, showStepper, increaseItemCnt, decreaseItemCnt,
       insnt_item_listing_id, isPdp, couponData, getCartResults, data, hideCouponCode,
     } = this.props;
@@ -72,7 +72,7 @@ class CartAndPaymentSideBar extends Component {
               <SVGComponent clsName={`${styles['coupon-code']}`} src="icons/common-icon/coupon-code" />
               <div className={`${styles.noCoupon} ${styles['ml-5']}`}>
                 <span className={`${styles['text-uppercase']} ${styles['pl-5']}`}>
-                  <div className={styles['fs-12']}>{COUPON_OFFERS.APPLY_COUPON}</div>
+                  <div className={styles['fs-14']}>{COUPON_OFFERS.APPLY_COUPON}</div>
                 </span>
               </div>
             </span>
@@ -85,7 +85,7 @@ class CartAndPaymentSideBar extends Component {
             <InstantCheckout
               insnt_item_listing_id={insnt_item_listing_id}
               isPdp={isPdp}
-              isFromCart={isFromCart}
+              // isFromCart={isFromCart}
               totalPrice={total_price.display_value}
               currency={currency}
               isMounted={false}
@@ -97,7 +97,7 @@ class CartAndPaymentSideBar extends Component {
         {
         showCheckoutBtn ?
           <div className={`${styles['pt-10']} ${styles['pb-10']} ${styles['pr-20']} ${styles['pl-20']}`}>
-            <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']} ${styles['fs-18']} ${styles['flex-center']} ${styles['justify-center']}`} onClick={checkoutBtnHandler}>
+            <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['right-radius']} ${styles['fp-btn-large']} ${styles['fs-18']} ${styles['flex-center']} ${styles['justify-center']}`} onClick={checkoutBtnHandler}>
               <SVGComponent clsName={`${styles['secure-checkout']}`} src="icons/common-icon/secure-checkout" />
               <span className={styles['pl-5']}>{CART_PAGE.SECURE_CHECKOUT}</span>
             </button>
@@ -111,18 +111,17 @@ class CartAndPaymentSideBar extends Component {
         </div>
       */}
 
-        <div className={styles['p-20']}>
+        <div className={styles['p-10-20']}>
           <ul className={`${styles['m-0']} ${styles['p-0']} ${styles['fs-12']}`}>
             <li>
-              <h5 className={`${styles['mb-15']} ${styles['mt-5']} ${styles['fs-16']} ${styles.fontW600} ${styles['light-gry-clr']}`}>
+              <h5 className={`${styles['mb-5']} ${styles['mt-5']} ${styles['fs-16']} ${styles.fontW600} ${styles['light-gry-clr']}`}>
                 {CART_PAGE.ORDER_SUMMARY}
               </h5>
             </li>
-            <li><span>{CART_PAGE.PRICE} ({`${item_cnt} ${CART_PAGE.ITEMS}`})</span><span> {`${total_offer_price.display_value} ${total_offer_price.currency_code || currency}`}</span></li>
-            {
-            showStepper ?
+            <li><span className={styles['thick-gry-clr']}>{CART_PAGE.PRICE} ({`${item_cnt} ${CART_PAGE.ITEMS}`})</span><span> {`${total_offer_price.display_value} ${total_offer_price.currency_code || currency}`}</span></li>
+            {showStepper ?
               <li>
-                <span>{CART_PAGE.QUANTITY}</span>
+                <span className={styles['thick-gry-clr']}>{CART_PAGE.QUANTITY}</span>
                 <span>
                   <CartStepper
                     item={items[0]}
@@ -131,20 +130,23 @@ class CartAndPaymentSideBar extends Component {
                   />
                 </span>
               </li> : null
-          }
+            }
             <li>
-              <span>{CART_PAGE.DELIVERY_CHARGES}</span>
-              <span>{total_shipping.display_value || 0} {total_shipping.currency_code || currency}</span>
+              <span className={styles['thick-gry-clr']}>{CART_PAGE.DELIVERY_CHARGES}</span>
+              {total_shipping.money_value > 0 ?
+                <span>{total_shipping.display_value || 0} {total_shipping.currency_code || currency}</span> :
+                <span className={`${styles.flex}`}><SVGComponent clsName={styles['ship-icon']} src="icons/free-shipping" /></span>
+              }
             </li>
             {total_gift_charges.display_value &&
             <li>
-              <span>{CART_PAGE.GIFT_CHARGES}</span>
+              <span className={styles['thick-gry-clr']}>{CART_PAGE.GIFT_CHARGES}</span>
               <span>{total_gift_charges.display_value} {total_gift_charges.currency_code || currency}</span>
             </li>}
             {
             tax !== 0 ?
               <li>
-                <span>{CART_PAGE.TAXES}</span>
+                <span className={styles['thick-gry-clr']}>{CART_PAGE.TAXES}</span>
                 <span>{currency}</span>
               </li> : null
             }
@@ -158,7 +160,6 @@ class CartAndPaymentSideBar extends Component {
                 }
               </span>
             </li>
-
           </ul>
         </div>
       </div>
@@ -172,7 +173,6 @@ CartAndPaymentSideBar.propTypes = {
   applyTheCoupon: PropTypes.func,
   openSlider: PropTypes.func,
   getCartResults: PropTypes.func,
-
 };
 
 CartAndPaymentSideBar.defaultProps = {

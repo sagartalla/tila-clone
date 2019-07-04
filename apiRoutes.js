@@ -45,8 +45,8 @@ apiRoutes
       res.json({
         data: {
           isLoggedIn: false,
-          error: response.data
-        }
+        },
+        ...response.data
       })
 
     });

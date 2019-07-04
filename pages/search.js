@@ -88,5 +88,5 @@ const mapDispatchToProps = dispatch =>
     dispatch,
   );
 
-export default withRedux(makeStore, mapStateToProps, mapDispatchToProps)(SearchPage);
+export default withRedux(makeStore, null, mapDispatchToProps)(SearchPage);
 
