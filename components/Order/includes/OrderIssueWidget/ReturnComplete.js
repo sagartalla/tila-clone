@@ -60,7 +60,7 @@ class ReturnComplete extends Component {
                         <span>
                           {
                             query.returnExchangeType === 'RETURN' ?
-                              ORDER_PAGE.INCONVENIENCE : ''
+                              ORDER_PAGE.RETURN_ORDER_MSG : ''
 
                           }
                         </span>
