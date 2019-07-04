@@ -84,7 +84,7 @@ class NotificationPreferences extends React.Component {
                 <Panel.Title toggle className={`${styles['preference-list']} ${styles['black-color']} ${styles['p-10-20']} ${styles['flx-spacebw-alignc']}`}>
                   <div className={` ${styles['flx-spacebw-alignc']} ${styles.width100}`}>
                     <div className={`${styles['flx-space-bw']}`}>
-                      <div className={`${styles['fs-12']} ${styles['p-10']} ${styles['thick-gry-clr']} ${styles['border-radius50P']} ${styles['bg-light-gray']}`}>{index + 1}</div>
+                      <div className={`${styles['fs-12']} ${styles['p-10']} ${styles['thick-gry-clr']} ${styles['perference-list-in-clr']} ${styles['bg-light-gray']}`}>{index + 1}</div>
                       <div className={`${styles['flx-space-bw']} ${styles['pl-20']} ${styles['flex-colum']}`}>
                         <div className={`${styles['fs-14']}`}>{Preferences[k].heading}</div>
                         <div className={`${styles['fs-12']} ${styles['thick-gry-clr']}`}>{Preferences[k].subheading}</div>

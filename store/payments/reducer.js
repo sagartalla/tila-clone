@@ -104,7 +104,7 @@ const paymentsReducer = typeToReducer({
         ui: { loading: false },
       });
     },
-  }
+  },
 }, initialState);
 
 export default paymentsReducer;
