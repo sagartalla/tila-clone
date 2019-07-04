@@ -10,7 +10,7 @@ const getSearchResultsApi = ({
   categoryFilter,
   country,
   pageSize,
-  query,
+  query='*',
   language,
   facetFilters,
   facetFiltersCopyWithNames,
@@ -41,7 +41,7 @@ const getSearchResultsApi = ({
   } else {
     options.categoryFilter = categoryFilter;
   }
-  return axios.get(`${constants.SEARCH_API_URL}/search${categoryTree ? '/browseByCatId/' : ''}?query=${encodeURIComponent(JSON.stringify(options))}`).then(({ data }) => {
+  return axios.get(`${constants.SEARCH_API_URL}/search${categoryTree && !categoryFacet ? '/browseByCatId/' : ''}?query=${encodeURIComponent(JSON.stringify(options))}`).then(({ data }) => {
     const { products, noOfProducts } = data.productResponse;
     const hasMore = (((pageNum - 1) * pageSize) + products.length) !== noOfProducts;
 
@@ -58,6 +58,7 @@ const getSearchResultsApi = ({
       shippingDetails,
       sort,
       categoryTree,
+      categoryFacet,
       choosenCategoryName,
     };
     data.geoDetails = {

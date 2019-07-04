@@ -23,14 +23,8 @@ const ToastContent = ({ closeToast, msg, msgType}) => {
         >
         {{
           warn:<span>warn</span>,
-          success:<SVGComponent
-                  src={'icons/common-icon/icon-tick'}
-                  clsName={`${styles['icon-styl']}`}
-                />,
-          error:<SVGComponent
-                  src={'icons/common-icon/icon-close'}
-                  clsName={`${styles['icon-styl']}`}
-                />,
+          success:<img className={styles['img-responsive']} src={"/static/img/bg-img/icon-tick.png"} />,
+          error:<img className={styles['img-responsive']} src={"/static/img/bg-img/icon-close.png"} />,
         }[msgType]}
       </div>
       <div
@@ -65,3 +59,14 @@ const ToastContent = ({ closeToast, msg, msgType}) => {
 }
 
 export default ToastContent
+
+
+// <SVGComponent
+//         src={'icons/common-icon/icon-tick'}
+//         clsName={`${styles['icon-styl']}`}
+//       />
+
+// <SVGComponent
+//         src={'icons/common-icon/icon-close'}
+//         clsName={`${styles['icon-styl']}`}
+//       />

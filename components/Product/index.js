@@ -62,7 +62,7 @@ const getProductComponent = (isPreview, taskCode) => {
         const {
           offerInfo, titleInfo, imgUrls, shippingInfo,
         } = productData;
-        digitalData.page.pageInfo.pageName = titleInfo.title;
+        digitalData.page.pageInfo.pageName = titleInfo.title.attribute_values[0].value;
         digitalData.page.category = { primaryCategory: productData.categoryType };
         digitalData.page.pageInfo.breadCrumbs = productData.breadcrums ? productData.breadcrums.map(item => item.display_name_en) : [];
         this.props.track({
@@ -85,7 +85,7 @@ const getProductComponent = (isPreview, taskCode) => {
 
           if (index === -1) {
             arr.unshift({
-              nm: titleInfo.title,
+              nm: titleInfo.title.attribute_values[0].value,
               im: imgUrls && imgUrls[0].url,
               pr,
               cd,
@@ -173,7 +173,7 @@ const getProductComponent = (isPreview, taskCode) => {
         });
         return;
       }
-      if (!isSearchPreview && bottomRefRect.top > window.innerHeight && detailsRect.top <= 61 && this.state.stickyElements.details !== 'stateMiddle') {
+      if (!isSearchPreview && bottomRefRect.top > window.innerHeight && detailsRect.top <= 108 && this.state.stickyElements.details !== 'stateMiddle') {
         this.setState({
           stickyElements: {
             ...this.state.stickyElements,
@@ -182,7 +182,7 @@ const getProductComponent = (isPreview, taskCode) => {
         });
         return;
       }
-      if (detailsRect.top > 61) {
+      if (detailsRect.top > 108) {
         this.setState({
           stickyElements: {
             ...this.state.stickyElements,
@@ -212,7 +212,7 @@ const getProductComponent = (isPreview, taskCode) => {
             <div className={`${styles.relative}`}>
               <div className={`${styles['page-details-slider']}`}>
                 <Row className={`${styles['m-0']} ${styles['ht-100per']}`}>
-                  <Col xs={12} md={8} sm={12} className={`${styles['pl-0']} ${styles['pdp-img-prt']}`}>
+                  <Col xs={12} md={8} sm={12} className={`${styles['pl-0']} ${styles['pdp-img-prt']} ${styles['p-0']}`}>
                     <NoSSR>
                       <Display
                         product_id={product_id}
@@ -259,8 +259,6 @@ const getProductComponent = (isPreview, taskCode) => {
                               notify={this.notify}
                               showLoading={showLoading}
                               onChangeField={this.onChangeField}
-                              styling={isSearchPreview ? null : positionStyle || defaultPosition}
-                              top={isSearchPreview ? null : positionStyle === 'absolute-style' ?  positionTop : null}
                             />
                             :
                             null
@@ -331,7 +329,7 @@ const getProductComponent = (isPreview, taskCode) => {
   const mapStateToProps = store => ({
     productData: taskCode ? selectors.getPreview(store) : selectors.getProduct(store),
     userDetails: store.authReducer.data,
-    showLoading: wishListSelectors.getLoader(store),
+    showLoading: wishListSelectors.getNotifyLoading(store),
   });
 
   const mapDispatchToProps = dispatch =>

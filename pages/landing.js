@@ -23,4 +23,4 @@ class LandingPage extends Base {
   }
 };
 
-export default withRedux(makeStore, null, null)(LandingPage);
+export default React.memo(withRedux(makeStore, null, null)(LandingPage));

@@ -4,7 +4,13 @@
   width: 215px;
   border: 1px solid #e5e5e5;
   box-shadow: 0 2px 7px 0 rgba(0,0,0,0.03);
-  position: relative;
+  overflow: auto;
+  max-height: calc(100vh - 150px);
+  position: sticky !important;
+  top: 120px;
+  .bottom-absolute
+    position absolute
+    bottom 0
   li
     list-style none
 
@@ -30,6 +36,7 @@
     width 25%
     padding-bottom 4px
     border-right 1px solid light-brdr
+    border-bottom 1px solid light-brdr
     a
       text-decoration none
       position relative
@@ -154,7 +161,7 @@
     .quick-view
       // background-color label-light
       // padding 10px 0
-      width 96%
+      width 85%
       margin 0 auto
       .add-to-crt
         border: 1px solid tila-blk
@@ -222,9 +229,7 @@
           height 15px
           top 0px
 
-
   .items-list-show
-    align-items center
     .search-val-part
       width 45%
     .sple-check-prt
@@ -299,7 +304,15 @@
       background linear-gradient(to left, gray-light, white)
       border-radius: 15px
       margin 5px
+      padding 5px
       border 0.5px solid rgba(192, 192, 192, 0.3)
+      .close-part
+        display none
+        height 14px
+        align-items center
+      &:hover
+        .close-part
+          display flex
       .title
         padding 0px 10px
       .close-part
@@ -319,20 +332,24 @@
   // transition: width 2s;
   .notify-me-part
     position absolute
-    top 0
-    bottom 0
-    background rgba(255, 255, 255, 0.6)
-    right 0
+    border-bottom-right-radius 10px
+    box-shadow 0 2px 6px 0 rgba(189, 189, 189, 0.5)
+    border solid 1px lgt-black-clr
+    background-color white
+    z-index 5
+    top 10px
     left 0
-    z-index 14
-    display flex
-    flex-direction column
-    align-items center
-    justify-content center
-    .notify-part-inn
-      width 50%
-      justify-content center
-      text-transform uppercase
+    // top 0
+    // bottom 0
+    // background rgba(255, 255, 255, 0.6)
+    // right 0
+    // left 0
+    // z-index 14
+    // display flex
+    // flex-direction column
+    // align-items center
+    // justify-content center
+
   .desc-cont
     .prdt-name
       width 100%
@@ -394,12 +411,23 @@
     .desc-cont
       display none
     .hover-show-date
-      display block
+      display flex
+      flex-direction column
   .discount-main
     position absolute
     top 0
     left 0
     padding 7px 18px
+
+.search-results .product-items-main a.notify-part-inn
+  display flex
+  align-items center
+  justify-content center
+  text-transform uppercase
+  margin-bottom 5px
+  width 80%
+  margin 0 auto
+
 .category-sub-list-inn
   .select-check-mate
     display flex
@@ -461,7 +489,6 @@
   box-shadow 0 2px 7px 0 rgba(0,0,0,0.03)
   background-color white
   border-radius 10px
-
   .img-cont
     height 398px
     display flex
@@ -477,16 +504,16 @@
     .offer-tag
       top: 0
       left: 0
-      padding: 6px 10px;
-      border-bottom-right-radius 26px
-      border-top-left-radius 10px
+      padding: 6px 10px
+      border-bottom-right-radius 14px
+      // border-top-left-radius 10px
       color white
       &.green
-        background generic-green-color
+        background thick-red-arrow
       &.yellow
-        background yellow-color
+        background thick-red-arrow
       &.orange
-        background orange
+        background thick-red-arrow
       &.red
         background thick-red-arrow
     .variants-main
@@ -515,7 +542,7 @@
 
 .category-list-title
   a[aria-expanded=true] .expand-icon
-    transform rotate(-90deg)
+    transform rotate(-180deg)
 
 .category-list
   border-bottom 0.5px solid light-brdr
@@ -619,14 +646,14 @@
   top 80px !important
 }
 .indication {
-  z-index 99999
+  z-index 9
   left calc(50% - 8px)
-  bottom -14px
+  bottom -12px
   width: 0;
   height: 0;
-  border-left: 16px solid transparent;
-  border-right: 16px solid transparent;
-  border-bottom: 16px solid #f1f2f4;
+  border-left: 13px solid transparent;
+  border-right: 13px solid transparent;
+  border-bottom: 13px solid #f1f2f4;
 }
 .search-header
   width 84%

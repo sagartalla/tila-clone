@@ -1,15 +1,33 @@
 @import './header.styl'
 
 .actionbar-wrapper
-  .profile-login, .cart-inn
-    margin 0
-    padding-right 20px
-    .item, .cart-item
-      left 0
+  .action-item
+    &:last-child
+      padding-right 15px
+  .account-inn
+   .account-item
+      left -22px
       right auto
       &:before
-        left 8%
+        left 12%
         right auto
+  .cart-inn
+    margin 0
+    .cart-item
+      left -80px
+      right auto
+      &:before
+        left 26%
+        right auto
+  .wishlist-inn
+    margin 0
+    .wishlist-item
+      left -60px
+      right auto
+      &:before
+        left 20%
+        right auto
+        
 
 .search-wrapper .search-btn
   left 4px
@@ -23,11 +41,8 @@
   left 0
   margin-left 10px
 
-.action-item .wish-list-icon
-  margin-left 10px
-
 .profile-part .profile-inn li
   border-right 2px solid transparent
   &:hover
-    border-right 2px solid thick-red-arrow
+    border-right 2px solid tila-blk
     border-left 0

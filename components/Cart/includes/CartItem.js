@@ -224,7 +224,7 @@ class CartItem extends React.Component {
                         shipping !== null && (shipping.shippable && (
                           <p className={`${styles['mb-0']}`}>
                             <span className={`${styles['thick-gry-clr']} ${styles['fs-12']}`}>{CART_PAGE.SHIPPING} :</span>
-                            <span className={`${styles['pl-10']} ${styles['pr-10']} ${styles['fs-14']}`}>{CART_PAGE.REGULAR_SHIPPING} {shipping.shipping_fees ? `(${shipping.shipping_fees} ${cur})` : ''} - <span className={`${styles['fs-12']} ${styles['base-font']}`}>{CART_PAGE.ETA_DELIVERY_BY} {moment().add(shipping.shipping_days, 'days').format('LL')}</span>
+                            <span className={`${styles['pl-10']} ${styles['pr-10']} ${styles['fs-14']}`}>{CART_PAGE.REGULAR_SHIPPING} {shipping.shipping_fees.display_value ? `(${shipping.shipping_fees.display_value} ${cur})` : ''} - <span className={`${styles['fs-12']} ${styles['base-font']}`}>{CART_PAGE.ETA_DELIVERY_BY} {moment().add(shipping.shipping_days, 'days').format('LL')}</span>
                             </span>
                           </p>
                         ))
@@ -236,7 +236,7 @@ class CartItem extends React.Component {
                     </div>
                     {checked && showMessage &&
                       <div>
-                        <span className={styles.fontW600}>{CART_PAGE.MESSAGE}:&nbsp;</span><span>{gift_card_message}&nbsp;</span>
+                        <span className={styles.fontW600}>{CART_PAGE.MESSAGE}:&nbsp;</span><span className={styles['break-word']}>{gift_card_message}&nbsp;</span>
                         <span>{'('}<a onClick={this.toggleMessage}>{CART_PAGE.EDIT}</a>{')'}</span>
                       </div>
                     }
@@ -251,6 +251,7 @@ class CartItem extends React.Component {
                           placeholder={CART_PAGE.GIFT_MESSAGE_OPTIONAL}
                           value={gift_card_message}
                           onChange={this.updateMsg}
+                          maxLength="150"
                         />
                         <button
                           data-id={item_id}
@@ -290,7 +291,20 @@ class CartItem extends React.Component {
                         <SVGComponent clsName={`${styles['secure-icon']} ${styles['mr-10']} ${styles['pointer']}`} src="icons/common-icon/trust-secure" />
                       </span> */}
                       <div className={`${styles['relative']} ${styles['cart-price-toltp']}`}>
-                        <span className={`${styles.question} ${styles['ml-5']} ${styles['flex-center']} ${styles['justify-center']} ${styles['default-shadow']} ${styles['fs-14']} ${styles.pointer}`}>  ? </span>
+                        <span
+                          className={
+                            `${styles.question}
+                            ${styles['ml-5']}
+                            ${styles['flex-center']}
+                            ${styles['justify-center']}
+                            ${styles['default-shadow']}
+                            ${styles['fs-14']}
+                            ${styles.pointer}
+                            ${lang === 'en' ? '' : styles['flip-questionmark']}
+                            `
+                          }
+
+                          >  ? </span>
                         <div className={`${styles['p-10']} ${styles['tool-tip']} ${styles['cart-tool-tip']}`}>
                                 <div className={`${styles['table']} ${styles['width100']}`}>
                                   <div className={`${styles['flx-space-bw']} ${styles['fs-12']}`}>
@@ -332,7 +346,7 @@ class CartItem extends React.Component {
                                         </div>
                                         <div className={`${styles['t-rt']} ${styles['flex']}`}>
                                           {shipping.shipping_fees ?
-                                            `${shipping.shipping_fees} ${cur}`
+                                            `${shipping.shipping_fees.display_value} ${cur}`
                                             : <SVGComponent clsName={`${styles['ship-icon']}`} src="icons/free-shipping" />}
                                         </div>
                                       </div>
@@ -348,7 +362,7 @@ class CartItem extends React.Component {
                           <div className={`${styles['p-5']} ${styles['mt-10']} ${styles['fs-12']} ${styles['overall-amount']}`}>{CART_PAGE.OVERALL_YOU_SAVE} {total_discount} {cur} {CART_PAGE.ON_THIS_PRODUCT}</div>
                         </div>
                       </div>
-                      
+
                     {/* </OverlayTrigger> */}
                   </h4>
                   {/* {
