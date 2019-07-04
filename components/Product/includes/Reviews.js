@@ -123,7 +123,7 @@ class Review extends Component {
                       <StarRating interactive={false} total={5} />
                     </div>
                     <a
-                      className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['wrt-btn']} ${styles['small-btn']}`}
+                      className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['wrt-btn']} ${styles['left-radius']} ${styles['small-btn']}`}
                       onClick={this.toggleReviewModal}
                     >
                       {PDP_PAGE.WRITE_REVIEW}
