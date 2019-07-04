@@ -173,7 +173,7 @@ const getProductComponent = (isPreview, taskCode) => {
         });
         return;
       }
-      if (!isSearchPreview && bottomRefRect.top > window.innerHeight && detailsRect.top <= 61 && this.state.stickyElements.details !== 'stateMiddle') {
+      if (!isSearchPreview && bottomRefRect.top > window.innerHeight && detailsRect.top <= 108 && this.state.stickyElements.details !== 'stateMiddle') {
         this.setState({
           stickyElements: {
             ...this.state.stickyElements,
@@ -182,7 +182,7 @@ const getProductComponent = (isPreview, taskCode) => {
         });
         return;
       }
-      if (detailsRect.top > 61) {
+      if (detailsRect.top > 108) {
         this.setState({
           stickyElements: {
             ...this.state.stickyElements,
@@ -259,8 +259,6 @@ const getProductComponent = (isPreview, taskCode) => {
                               notify={this.notify}
                               showLoading={showLoading}
                               onChangeField={this.onChangeField}
-                              styling={isSearchPreview ? null : positionStyle || defaultPosition}
-                              top={isSearchPreview ? null : positionStyle === 'absolute-style' ?  positionTop : null}
                             />
                             :
                             null

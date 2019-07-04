@@ -48,6 +48,7 @@ class Tree extends Component {
           filter
             ?
             filter.children.slice(0, this.state.maxRows).map((category) => {
+              queryString = queryString.replace(/facets=.*?\&/, '');
               if(queryString.indexOf('sid') !== -1) {
                 queryString = queryString.replace(/sid=.*/, `sid=${category.id}`);
               } else {
