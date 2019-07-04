@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { Col } from 'react-bootstrap';
-import Btn from '../common/Button';
+import Button  from '../common/CommonButton';
 import { languageDefinations } from '../../utils/lang';
 import { selectors, actionCreators } from '../../store/auth';
 

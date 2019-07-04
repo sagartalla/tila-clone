@@ -111,11 +111,9 @@ class VerifyStatus extends React.Component {
 
   render() {
     const { validation, seconds } = this.state;
-    console.log('seconds', seconds);
     const {
       showEmailSuccess, showOtpSuccess, loadingStatus, userData, activeEmailId,
     } = this.props;
-    console.log('this.state.seconds', this.state.seconds);
     return (
       <div className={`${styles['forgot-password']} ${styles.flex} ${styles['flex-colum']} ${styles['justify-around']}`}>
         <div>
