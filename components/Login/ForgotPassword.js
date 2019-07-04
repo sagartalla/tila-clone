@@ -27,7 +27,6 @@ class ForgotPassword extends Component {
     };
     this.sendLink = this.sendLink.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.switchState = this.switchState.bind(this);
   }
 
 
@@ -48,15 +47,10 @@ class ForgotPassword extends Component {
       if (res && res.value && res.value.data && res.value.data.Response === 'SUCCESS') {
         v2NextPage();
       }
-    });
+  });
   }
 }
 
-  switchState() {
-    this.setState({
-      showInput: '',
-    });
-  }
 
   handleChange = (e) => {
     const key = e.target.getAttribute('data-id');
@@ -74,7 +68,6 @@ class ForgotPassword extends Component {
       <div className={`${styles['forgot-password']} ${styles.flex} ${styles['flex-colum']} ${styles['justify-around']}`}>
         <div>
           <h3 className={`${styles['fs-22']} ${styles['m-0']} ${styles['ff-b']}`}>{LOGIN_PAGE.FORGOT_PASSWORD}</h3>
-          {showSecurityQuestions && <div className={`${styles['light-gry-clr']} ${styles['mt-5']}`}>Please answer the security questions below to reset the password</div>}
         </div>
         <React.Fragment>
           <span className={`${styles['radio-buttons']} ${styles.flex} ${styles['flex-colum']} ${styles['justify-around']}`}>

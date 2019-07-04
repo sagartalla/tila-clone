@@ -291,8 +291,7 @@ class ActionBar extends Component {
         {hideLogin  ? null :
           showLoginPage ?
         <Login onBackdropClick={this.onBackdropClick} />
-            {/* :
-            null} */}
+             : null}
       </div>
     );
   }
