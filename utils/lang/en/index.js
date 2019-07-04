@@ -405,7 +405,7 @@ export const EN_KEYWORDS = {
     SUGGESTED_TAGS: 'Suggested Tags',
     FULFILLED_BY_TILA: 'Fulfilled by Tila',
     ALL_DEALS: 'All Deals',
-    APPLIED_FILTERS_TAGS: 'Applied Filters / Tags',
+    APPLIED_FILTERS_TAGS: 'Applied Filters',
     CLEAR_ALL: 'CLEAR ALL',
     PRICE_LOW_TO_HIGH: 'Price - Low to High',
     PRICE_HIGH_TO_LOW: 'Price - High to Low',
@@ -572,6 +572,9 @@ export const EN_KEYWORDS = {
     MATCHING_ITEM: 'MATCHING ITEM',
     MATCHING_PRODUCTS: 'MATCHING PRODUCTS',
     HELLO: 'Hello',
+    NO_ITEMS: '0 items in wishlist',
+    MORE_ITEMS: 'more items',
+    GO_TO_WISHLIST: 'Go To Wishlist',    
   },
   LOGIN_PAGE: {
     SIGN_UP: 'Sign up',

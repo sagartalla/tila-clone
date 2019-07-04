@@ -69,6 +69,7 @@ class TitleInfo extends Component {
     const { listingId, getCartResults } = this.props;
     this.props.addToCart({
       listing_id: listingId,
+      instant_checkout: true,
     }, listingId).then(() => {
       document.getElementsByTagName('BODY')[0].style.overflow = 'hidden';
     });
