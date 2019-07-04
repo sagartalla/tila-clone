@@ -79,7 +79,7 @@ const authReducer = typeToReducer({
   [actions.V2_PREVIOUS_PAGE]: state => Object.assign({}, state, {
     v2: {
       ...state.v2,
-      active: pageFlows[state.v2.currentFlow][state.v2.active.backpage],
+      active: '',
     },
   }),
   [actions.CHANGE_CURRENT_FLOW]: (state, action) => Object.assign({}, state, {
