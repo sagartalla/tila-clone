@@ -392,7 +392,7 @@ export const AR_KEYWORDS = {
     SUGGESTED_TAGS: 'التاغات المقترحة',
     FULFILLED_BY_TILA: 'تم بنجاح مع تيله',
     ALL_DEALS: 'جميع الصفقات',
-    APPLIED_FILTERS_TAGS: 'طريقة التصنيف \ تاغات',
+    APPLIED_FILTERS_TAGS: 'طريقة التصنيف',
     CLEAR_ALL: 'مسح الكل',
     PRICE_LOW_TO_HIGH: 'الأسعار من الرخيص إلى الغالي',
     PRICE_HIGH_TO_LOW: 'الأسعار من الغالي إلى الرخيص',

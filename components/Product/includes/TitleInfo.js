@@ -84,7 +84,7 @@ class TitleInfo extends Component {
         itemtype,
         productId: product_id,
         src,
-        displayName: title,
+        displayName: title.attribute_values[0].value,
         categoryId,
         catalogObj,
       });
@@ -124,7 +124,7 @@ class TitleInfo extends Component {
     return (
       <div className={styles['pb-10']}>
         <div className={`${styles.fontW300} ${styles['lgt-blue']} ${styles['flx-space-bw']}`}>
-          <span>{brand}</span>
+          <span>{brand.attribute_values[0].value}</span>
           {/* eslint-disable-next-line no-nested-ternary */}
           {isPreview ? null : comparable ?
             <div className={`${styles['checkbox-material']} ${styles['add-to-compare']}`}>
@@ -149,7 +149,7 @@ class TitleInfo extends Component {
             ))
           } */}
         </div>
-        <h1 className={`${styles['fs-18']} ${styles.fontW700} ${styles['black-color']} ${styles['mt-0']} ${styles['mb-0']}`}>{title}</h1>
+        <h1 className={`${styles['fs-18']} ${styles.fontW700} ${styles['black-color']} ${styles['mt-0']} ${styles['mb-0']} ${!title.translation ? styles['direction-ir'] : ''}`}>{title.attribute_values[0].value}</h1>
         {
           isPreview
             ?
@@ -169,7 +169,7 @@ class TitleInfo extends Component {
             <div className={`${styles['flex-center']} ${styles['checkout-instantly']} ${styles['pt-5']}`}>
               <div className={`${styles.flex}`}>
                 {totalInventoryCount > 0 && isLoggedIn &&
-                  <a className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['fs-14']} ${styles['mr-10']} ${styles['small-btn']} ${styles['checkout-instant-btn']}`} onClick={this.checkoutInstantHandler}>{PDP_PAGE.CHECKOUT_INSTANT}</a>}
+                  <a className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['fs-14']} ${styles['mr-10']} ${styles['small-btn']} ${styles['checkout-instant-btn']} ${styles['left-radius']}`} onClick={this.checkoutInstantHandler}>{PDP_PAGE.CHECKOUT_INSTANT}</a>}
               </div>
               <div className={styles['flex']}>
                 {

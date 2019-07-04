@@ -62,7 +62,7 @@ const getProductComponent = (isPreview, taskCode) => {
         const {
           offerInfo, titleInfo, imgUrls, shippingInfo,
         } = productData;
-        digitalData.page.pageInfo.pageName = titleInfo.title;
+        digitalData.page.pageInfo.pageName = titleInfo.title.attribute_values[0].value;
         digitalData.page.category = { primaryCategory: productData.categoryType };
         digitalData.page.pageInfo.breadCrumbs = productData.breadcrums ? productData.breadcrums.map(item => item.display_name_en) : [];
         this.props.track({
@@ -85,7 +85,7 @@ const getProductComponent = (isPreview, taskCode) => {
 
           if (index === -1) {
             arr.unshift({
-              nm: titleInfo.title,
+              nm: titleInfo.title.attribute_values[0].value,
               im: imgUrls && imgUrls[0].url,
               pr,
               cd,
@@ -173,7 +173,7 @@ const getProductComponent = (isPreview, taskCode) => {
         });
         return;
       }
-      if (!isSearchPreview && bottomRefRect.top > window.innerHeight && detailsRect.top <= 61 && this.state.stickyElements.details !== 'stateMiddle') {
+      if (!isSearchPreview && bottomRefRect.top > window.innerHeight && detailsRect.top <= 108 && this.state.stickyElements.details !== 'stateMiddle') {
         this.setState({
           stickyElements: {
             ...this.state.stickyElements,
@@ -182,7 +182,7 @@ const getProductComponent = (isPreview, taskCode) => {
         });
         return;
       }
-      if (detailsRect.top > 61) {
+      if (detailsRect.top > 108) {
         this.setState({
           stickyElements: {
             ...this.state.stickyElements,
@@ -259,8 +259,6 @@ const getProductComponent = (isPreview, taskCode) => {
                               notify={this.notify}
                               showLoading={showLoading}
                               onChangeField={this.onChangeField}
-                              styling={isSearchPreview ? null : positionStyle || defaultPosition}
-                              top={isSearchPreview ? null : positionStyle === 'absolute-style' ?  positionTop : null}
                             />
                             :
                             null
