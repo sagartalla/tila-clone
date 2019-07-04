@@ -212,7 +212,7 @@ class OrderItem extends Component {
                                       {offer_price &&
                                       <li className={`${styles['flx-space-bw']}`}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.PRICE} :</span><span> {offer_price.display_value} {offer_price.currency_code}</span></li>}
                                       {shipping_fees &&
-                                      <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.SHIPPING} : </span><span className={styles.flex}>{shipping_fees.display_value ? `(+) ${shipping_fees.display_value} ${shipping_fees.currency_code}` : <SVGComponent clsName={`${styles['ship-icon']}`} src="icons/free-shipping" />}</span></li>}
+                                      <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.SHIPPING} : </span><span className={styles.flex}>{shipping_fees.display_value ? `(+) ${shipping_fees.display_value} ${shipping_fees.currency_code}` : <SVGComponent clsName={`${styles['ship-icon']}`} src={lang === 'en' ? "icons/free-shipping" : "icons/Arabic-Freeshipping" } />}</span></li>}
                                       {product.gift_info && gift_charge &&
                                         <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.GIFT_CHARGES} : </span><span>{gift_charge.display_value ? `(+) ${gift_charge.display_value} ${gift_charge.currency_code}` : 'FREE'}</span></li>}
                                       {final_price &&

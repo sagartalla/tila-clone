@@ -101,7 +101,7 @@ const ProductPrice = ({
                             <div className={styles['fs-12']}>{CART_PAGE.DELIVERY_CHARGES}</div>
                           </div>
                           <div className={`${styles['t-cell']} ${styles['fs-12']}`}>
-                            <SVGComponent clsName={`${styles['ship-icon']}`} src="icons/free-shipping" />
+                            <SVGComponent clsName={`${styles['ship-icon']}`} src={lang === 'en' ? "icons/free-shipping" : "icons/Arabic-Freeshipping" } />
                           </div>
                         </div>
                         <div className={`${styles['t-row']} ${styles['total-amount']}`}>
