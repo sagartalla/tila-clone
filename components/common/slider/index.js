@@ -40,6 +40,7 @@ class Slider extends Component {
               role="button"
               onClick={closeSlider}
               tabIndex="0"
+              className={`${styles['mr-10']}`}
             >
               &times;
             </span>

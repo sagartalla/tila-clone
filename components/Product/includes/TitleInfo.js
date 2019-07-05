@@ -10,6 +10,8 @@ import { actionCreators as compareActions, selectors } from '../../../store/comp
 import { selectors as authSelectors } from '../../../store/auth';
 import { languageDefinations } from '../../../utils/lang';
 import lang from '../../../utils/language';
+import { actionCreators, selectors as paymentSelectors } from '../../../store/payments';
+import { selectors as addressSelectors } from '../../../store/cam/address';
 
 import main_en from '../../../layout/main/main_en.styl';
 import main_ar from '../../../layout/main/main_ar.styl';
@@ -170,7 +172,8 @@ class TitleInfo extends Component {
             <div className={`${styles['flex-center']} ${styles['checkout-instantly']} ${styles['pt-5']}`}>
               <div className={`${styles.flex}`}>
                 {totalInventoryCount > 0 && isLoggedIn &&
-                  <a className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['fs-14']} ${styles['mr-10']} ${styles['small-btn']} ${styles['checkout-instant-btn']} ${styles['left-radius']}`} onClick={this.checkoutInstantHandler}>{PDP_PAGE.CHECKOUT_INSTANT}</a>}
+                    <a className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['fs-14']} ${styles['mr-10']} ${styles['small-btn']} ${styles['checkout-instant-btn']} ${styles['left-radius']}`} onClick={this.checkoutInstantHandler}>{PDP_PAGE.CHECKOUT_INSTANT}</a>                
+                }
               </div>
               <div className={styles['flex']}>
                 {
