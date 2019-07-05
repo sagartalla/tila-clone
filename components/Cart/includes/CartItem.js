@@ -347,7 +347,7 @@ class CartItem extends React.Component {
                                         <div className={`${styles['t-rt']} ${styles['flex']}`}>
                                           {shipping.shipping_fees ?
                                             `${shipping.shipping_fees.display_value} ${cur}`
-                                            : <SVGComponent clsName={`${styles['ship-icon']}`} src="icons/free-shipping" />}
+                                            : <SVGComponent clsName={`${styles['ship-icon']}`} src={lang === 'en' ? "icons/free-shipping" : "icons/Arabic-Freeshipping" } />}
                                         </div>
                                       </div>
                                     :

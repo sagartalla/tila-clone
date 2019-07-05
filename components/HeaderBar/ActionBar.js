@@ -60,7 +60,7 @@ class ActionBar extends Component {
   }
 
   state = {
-    show: false,
+    show: '',
   }
 
   componentDidMount() {
@@ -78,19 +78,31 @@ class ActionBar extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    const { closeThankYouScreen } = this.props;
     if (nextProps.isLoggedIn !== this.props.isLoggedIn) {
       this.props.getWishlistData();
       this.props.getWishlist();
     }
-    let show = ((nextProps.isLoggedIn != this.props.isLoggedIn) && !this.state.logoutClicked) || this.state.loginClicked || !!nextProps.error || (!nextProps.isLoggedIn && nextProps.showLogin) || nextProps.loginInProgress || nextProps.showEmailVerificationScreen;
-    if (window.location.pathname.indexOf('/payment') > -1) {
-      show = false;
-    }
+
+    // let show = ((nextProps.isLoggedIn != this.props.isLoggedIn) && !this.state.logoutClicked) || this.state.loginClicked || !!nextProps.error || (!nextProps.isLoggedIn && nextProps.showLogin) || nextProps.loginInProgress || nextProps.showEmailVerificationScreen;
+    // if (window.location.pathname.indexOf('/payment') > -1) {
+    //   show = false;
+    // }
+
+
     this.setState({
-      show,
-      logoutClicked: false,
+      // show,
+      // logoutClicked: false,
+      // showLoginScreen: nextProps.showLoginScreen,
       loginClicked: false,
     });
+
+    if (nextProps && nextProps.activeObj && nextProps.activeObj.nextPage === null) {
+      setTimeout(() => {
+        closeThankYouScreen();
+      }, 3000);
+    }
+
     if (nextProps.isLoggedIn) {
       if (nextProps.ptaToken) {
         this.props.savePtaToken(nextProps.ptaToken);
@@ -110,13 +122,6 @@ class ActionBar extends Component {
     nextProps.userInfo.personalInfo.image_url && this.props.downloadPic(nextProps.userInfo.personalInfo.image_url);
   }
 
-  logoutClick() {
-    this.setState({
-      logoutClicked: true,
-    }, () => {
-      this.props.logout();
-    });
-  }
 
   loginClick() {
     digitalData.page.pageInfo.pageType = 'Login Page';
@@ -128,13 +133,19 @@ class ActionBar extends Component {
     this.setState(state);
   }
 
+
   onBackdropClick(logoutRequired = false) {
-    this.setState({ show: false });
+    const { activeObj, closeThankYouScreen } = this.props;
     this.props.resetLoginError();
-    this.props.resetShowLogin();
     if (logoutRequired) {
       this.props.logout();
     }
+    if (((activeObj.activePage === 'verify_email' || activeObj.activePage === 'shipping_to_page') && activeObj.nextPage === 'thank_you') || ((activeObj.activePage === 'verify_email' && activeObj.nextPage === 'shipping_to_page'))) {
+      const data = { nextPage: 'thank_you' };
+      const { v2CurrentFlow } = this.props;
+      v2CurrentFlow(data);
+    }
+    this.props.resetShowLogin();
   }
 
   getTokenCall = (socialNetwork, token) => {
@@ -145,6 +156,28 @@ class ActionBar extends Component {
       },
     };
     this.props.userLogin(serverData);
+  }
+  logoutClick() {
+    this.props.logout().then((res) => {
+      if (res && res.value && res.value.status === 200) {
+        window.location = `${window.location.origin}/${cookies.get('country')}/${cookies.get('language')}`;
+      }
+    });
+  }
+
+  loginClick(e) {
+    digitalData.page.pageInfo.pageType = 'Login Page';
+    digitalData.page.pageInfo.pageName = 'Login Page';
+
+    this.props.showLoginScreen();
+    // const state = {};
+    // state.loginClicked = true;
+    // if (e.currentTarget.getAttribute('data-mode') === 'sign-up') {
+    //   state.mode = 'register';
+    // } else {
+    //   state.mode = 'login';
+    // }
+    // state.show = true;
   }
 
   moveToWishlist = () => {
@@ -157,8 +190,10 @@ class ActionBar extends Component {
   }
 
   render() {
+    // const { showLoginPage } = this.state;
+    console.log('showLoginPage', this.props.isLoggedIn);
     const {
-      isLoggedIn, cartResults, userInfo, wishListCount, getEditDetails, hideCountry, hideLogin
+      isLoggedIn, cartResults, userInfo, wishListCount, getEditDetails, hideCountry, hideLogin, showLoginPage
     } = this.props;
     return (
       <div className={styles['actionbar-wrapper']}>
@@ -291,15 +326,10 @@ class ActionBar extends Component {
             }
           </Dropdown>
         </div>
-        {
-          hideLogin ? null :
-          (this.state.show)
-            ?
-            (
-              <Login mode={this.state.mode} onBackdropClick={this.onBackdropClick} />
-            )
-            :
-            null}
+        {hideLogin  ? null :
+          showLoginPage ?
+        <Login onBackdropClick={this.onBackdropClick} />
+             : null}
       </div>
     );
   }
@@ -319,6 +349,8 @@ const mapStateToProps = store => ({
   showEmailVerificationScreen: selectors.showEmailVerificationScreen(store),
   getEditDetails: cartSelectors.getEditDetails(store),
   imgSource: personalSelectors.getImageSource(store),
+  activeObj: selectors.getActive(store),
+  showLoginPage: selectors.showLogin(store),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(
@@ -334,7 +366,12 @@ const mapDispatchToProps = dispatch => bindActionCreators(
     getWishlist: wishListActionCreators.getWishlistProducts,
     getUserProfileInfo: personalActionCreators.getUserProfileInfo,
     downloadPic: personalActionCreators.downloadPic,
+    showLoginScreen: actionCreators.showLoginScreen,
+    closeThankYouScreen: actionCreators.closeThankYouScreen,
+    v2CurrentFlow: actionCreators.v2CurrentFlow,
+    v2NextPage: actionCreators.v2NextPage,
     getWishlistData: wishListActionCreators.getWishlist,
+
   },
   dispatch,
 );
