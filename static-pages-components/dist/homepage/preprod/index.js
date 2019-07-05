@@ -206,7 +206,7 @@ const b_y_l = [{
 }, {
   img: '/static/img/landing-home/Ray-Ban.jpg',
   title: 'Ray-Ban',
-  links: `/SAU/${lang}/srp?search=Ryban&language=en&isListed=false`
+  links: `/SAU/${lang}/srp?search=Rayban&language=en&isListed=false`
 }, {
   img: '/static/img/landing-home/Baseus.jpg',
   title: 'Baseus',
