@@ -156,8 +156,7 @@ const authReducer = typeToReducer({
     FULFILLED: (state, action) => {
       let active;
       let { currentFlow } = state.v2;
-      console.log('action.payload.data.data.social_token', action.payload.data.data.social_token);
-      if (action.payload.data.data.social_token) {
+      if (action && action.payload && action.payload.data && action.payload.data.data && action.payload.data.data.social_token && action.payload.data.data.social_token) {
         active = pageFlows.not_accessable_social_user.social_login;
         currentFlow = 'not_accessable_social_user';
       }
