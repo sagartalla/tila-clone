@@ -24,6 +24,7 @@ const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...s
 const MiniWishlist = (props) => {
   const {
     addToCart,
+    notifyMe,
   } = props;
   const { WISH_LIST_PAGE, HEADER_PAGE, PDP_PAGE } = languageDefinations();
   return (
@@ -95,7 +96,7 @@ const MiniWishlist = (props) => {
         <Col md={12} className={`${styles['wishlist-background']} ${styles['pb-15']}`}>
           <div className={`${styles['fs-14']} ${styles['p-10']} ${styles.fontW600} ${styles['t-c']}`}>
         {<a href={`/${country}/${language}/cam/wishlist`} className={`${styles['black-color']}`}>
-        {props.wishListCount && props.wishListCount > 2 ? props.wishListCount - 2 + ' ' + HEADER_PAGE.MORE_ITEMS : props.wishListCount < 3 ? '' : props.wishListCount + ' ' + HEADER_PAGE.MORE_ITEMS}</a>}</div>
+        {props.wishListCount &&  props.wishListCount === 3 ? props.wishListCount - 2 + ' ' + HEADER_PAGE.MORE_ITEM : props.wishListCount > 2 ? props.wishListCount - 2 + ' ' + HEADER_PAGE.MORE_ITEMS : props.wishListCount < 3 && ''}</a>}</div>
           <Button
             className={`${styles.flex} ${styles.width100} ${styles['go-to-wishlist']} ${styles.fontW600} ${styles['fs-14']} ${styles['text-uppercase']}`}
             btnText={HEADER_PAGE.GO_TO_WISHLIST}
