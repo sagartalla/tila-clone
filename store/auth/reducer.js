@@ -79,7 +79,7 @@ const authReducer = typeToReducer({
   [actions.V2_PREVIOUS_PAGE]: state => Object.assign({}, state, {
     v2: {
       ...state.v2,
-      active: pageFlows[state.v2.currentFlow][state.v2.active.backpage],
+      active: '',
     },
   }),
   [actions.CHANGE_CURRENT_FLOW]: (state, action) => Object.assign({}, state, {
@@ -506,13 +506,14 @@ const authReducer = typeToReducer({
     PENDING: state => Object.assign({}, state, { ui: { loading: true } }),
     FULFILLED: (state, action) => {
       const { data } = state;
-      if (action && action.payload && action.payload.data && action.payload.data.Response && action.payload.data.Response === 'SUCCESS') {
+      if (action && action.payload && action.payload.status === 200) {
         data.showLoginScreen = true;
         data.showResetScreen = false;
       }
       return Object.assign({}, state, {
         data: {
           ...state.data,
+          isLoggedIn: true,
         },
         ui: { loading: false },
       });

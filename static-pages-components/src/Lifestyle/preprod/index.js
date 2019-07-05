@@ -159,7 +159,7 @@ const Lifestyle = () => (
       <div className={`top-selling-part ${styles['pt-10']}`}>
         <h5 className={`main-title ${styles['fs-16']} ${styles['fontW600']}  ${styles['mb-0']}`}>Home Essentials</h5>
         <span className={`dec ${styles['fs-12']}`}>Kitchen tools, Gardening tools, Cutlery, Table Tennis, Boxing  </span>
-        <div className={`top-selling-part-inn ${styles['pt-10']}`}>
+        <div className={`top-selling-part-inn ${styles['pt-10']} ${styles.flex}`}>
           <Col md={2} className={styles['pl-0']}>
             <div className={`top-selling-img ${styles['flex']}`}>
               <a href={`/SAU/${lang}/srp?search=Cutlery&language=en&isListed=false`}>
@@ -229,51 +229,105 @@ const Lifestyle = () => (
         </div>
       </div>
       {/* sports start */}
-      <div className={`top-selling-part sports-part' ${styles['pt-40']} ${styles['pb-20']} ${styles['clear-b']}`}>
-        <h5 className={`main-title ${styles['fs-16']} ${styles['fontW600']}  ${styles['mb-0']}`}>Sports Essentials</h5>
-        <span className={`dec ${styles['fs-12']}`}>Cricket, Soccer, Basketball, Table Tennis, Boxing, Lawn tennis, badminton & more… </span>
-        <div className={`top-selling-part-inn ${styles['pt-10']} ${styles['flex']}`}>
-          <Col md={2} className={styles['pl-0']}>
-            <div className={`top-selling-img ${styles['flex']} ${styles['p-35']} ${styles['bg-white']}`}>
-              <a href={`/SAU/${lang}/srp?search=ssoccer&language=en&isListed=false`}>
-                <img src="/static/img/landing-page-lifestyle/sports.jpg" className="img-responsive" />
-              </a>
-            </div>
+      <div className={`poular-cat ${styles['pt-30']} ${styles['pb-30']}`}>
+        <h5 className={`main-title ${styles['fs-16']} ${styles['fontW600']}`}>Sports Essentials</h5>
+        <p>Soccer, Badminton, Table Tennis, Lawn Tennis, Cricket & more...</p>
+        <div className={`${styles['flex']} ${styles['poular-cat-inn']}`}>
+          <Col md={1} className={`${styles['pl-0']} ${styles['pr-10']}`}>
+            <a href={`/SAU/${lang}/srp/home-furnishing?categoryTree=true&isListed=false&sid=932,941`}>
+              <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon`}>
+                <SVGComponent clsName="poular-cat" src="icons/landing-page-lifestyle/soccer"/>
+                <span className={`${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}`}>Soccer</span>
+              </div>
+            </a>
           </Col>
-          <Col md={2} className={styles['pl-0']}>
-            <div className={`top-selling-img ${styles['flex']} ${styles['p-35']} ${styles['bg-white']}`}>
-              <a href={`/SAU/${lang}/srp?search=badminton&language=en&isListed=false`}>
-                <img src="/static/img/landing-page-lifestyle/sports1.jpg" className="img-responsive" />
-              </a>
-            </div>
+          <Col md={1} className={`${styles['pl-0']} ${styles['pr-10']}`}>
+            <a href={`/SAU/${lang}/srp/kitchen-appliances?categoryTree=true&isListed=false&sid=932,945`}>
+              <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon`}>
+                <SVGComponent clsName="popular-cat6" src="icons/landing-page-lifestyle/badminton" />
+                <span className={`${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}`}>Badminton</span>
+              </div>
+            </a>
           </Col>
-          <Col md={2} className={styles['pl-0']}>
-            <div className={`top-selling-img ${styles['flex']} ${styles['p-35']} ${styles['bg-white']}`}>
-              <a href={`/SAU/${lang}/srp?search=table%20tennis&language=en&isListed=false`}>
-                <img src="/static/img/landing-page-lifestyle/sports2.jpg" className="img-responsive" />
-              </a>
-            </div>
+          <Col md={1} className={`${styles['pl-0']} ${styles['pr-10']}`}>
+            <a href={`/SAU/${lang}/srp/health-care?categoryTree=true&isListed=false&sid=932,972`}>
+              <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon`}>
+                <SVGComponent clsName="poular-cat" src="icons/landing-page-lifestyle/tabletennis" />
+                <span className={`${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}`}>Table Tennis</span>
+              </div>
+            </a>
           </Col>
-          <Col md={2} className={styles['pl-0']}>
-            <div className={`top-selling-img ${styles['flex']} ${styles['p-35']} ${styles['bg-white']}`}>
-              <a href={`/SAU/${lang}/srp?search=lawn%20tennis&language=en&isListed=false`}>
-                <img src="/static/img/landing-page-lifestyle/sports3.jpg" className="img-responsive" />
-              </a>
-            </div>
+          <Col md={1} className={`${styles['pl-0']} ${styles['pr-10']}`}>
+            <a href={`/SAU/${lang}/srp?search=Fitness&language=en&isListed=false`}>
+              <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon`}>
+                <SVGComponent clsName="popular-cat7" src="icons/landing-page-lifestyle/tennis" />
+                <span className={`${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}`}>Lawn Tennis</span>
+              </div>
+            </a>
           </Col>
-          <Col md={2} className={styles['pl-0']}>
-            <div className={`top-selling-img ${styles['flex']} ${styles['p-35']} ${styles['bg-white']}`}>
-              <a href={`/SAU/${lang}/srp?search=cricket&language=en&isListed=false`}>
-                <img src="/static/img/landing-page-lifestyle/sports4.jpg" className="img-responsive" />
-              </a>
-            </div>
+          <Col md={1} className={`${styles['pl-0']} ${styles['pr-10']}`}>
+            <a href={`/SAU/${lang}/srp/baby-care?categoryTree=true&isListed=false&sid=932,955`}>
+              <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon`}>
+                <SVGComponent clsName="popular-cat7" src="icons/landing-page-lifestyle/cricket" />
+                <span className={`${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}`}>Cricket</span>
+              </div>
+            </a>
           </Col>
-          <Col md={2} className={styles['pl-0']}>
-            <div className={`top-selling-img ${styles['flex']} ${styles['p-35']} ${styles['bg-white']}`}>
-              <a href={`/SAU/${lang}/srp?search=basketball&language=en&isListed=false`}>
-                <img src="/static/img/landing-page-lifestyle/sports5.jpg" className="img-responsive" />
-              </a>
-            </div>
+          <Col md={1} className={`${styles['pl-0']} ${styles['pr-10']}`}>
+            <a href={`/SAU/${lang}/srp/beauty-&-personal-care?categoryTree=true&isListed=false&sid=932,958`}>
+              <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon`}>
+                <SVGComponent clsName="popular-cat8" src="icons/landing-page-lifestyle/basketball" />
+                <span className={`${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}`}>Basketball</span>
+              </div>
+            </a>
+          </Col>
+          <Col md={1} className={`${styles['pl-0']} ${styles['pr-10']}`}>
+            <a href={`/SAU/${lang}/srp?search=sports&language=en&isListed=false`}>
+              <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon`}>
+                <SVGComponent clsName="poular-cat2" src="icons/landing-page-lifestyle/baseball" />
+                <span className={`${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}`}>Baseball</span>
+              </div>
+            </a>
+          </Col>
+          <Col md={1} className={`${styles['pl-0']} ${styles['pr-10']}`}>
+            <a href={`/SAU/${lang}/srp?search=Gardening&language=en&isListed=false`}>
+              <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon`}>
+                <SVGComponent clsName="poular-cat3" src="icons/landing-page-lifestyle/swimming" />
+                <span className={`${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}`}>Swimming</span>
+              </div>
+            </a>
+          </Col>
+          <Col md={1} className={`${styles['pl-0']} ${styles['pr-10']}`}>
+            <a href={`/SAU/${lang}/srp?search=Daily%20Needs&language=en&isListed=false`}>
+              <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon`}>
+                <SVGComponent clsName="popular-cat5" src="icons/landing-page-lifestyle/cycling" />
+                <span className={`${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}`}>Cycling</span>
+              </div>
+            </a>
+          </Col>
+          <Col md={1} className={`${styles['pl-0']} ${styles['pr-10']}`}>
+            <a href={`/SAU/${lang}/srp/health-care?categoryTree=true&isListed=false&sid=932,972`}>
+              <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon`}>
+                <SVGComponent clsName="poular-cat" src="icons/landing-page-lifestyle/riverrafting" />
+                <span className={`${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}`}>River Rafting</span>
+              </div>
+            </a>
+          </Col>
+          <Col md={1} className={`${styles['pl-0']} ${styles['pr-10']}`}>
+            <a href={`/SAU/${lang}/srp/office-supplies?categoryTree=true&isListed=false&sid=932,979`}>
+              <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon`}>
+                <SVGComponent clsName="poular-cat" src="icons/landing-page-lifestyle/snorkeling" />
+                <span className={`${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}`}>Snorkeling</span>
+              </div>
+            </a>
+          </Col>
+          <Col md={1} className={`${styles['pl-0']} ${styles['pr-10']}`}>
+            <a href={`/SAU/${lang}/srp/home-applaince?categoryTree=true&isListed=false&sid=932,935`}>
+              <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon`}>
+                <SVGComponent clsName="poular-cat" src="icons/landing-page-lifestyle/boxing" />
+                <span className={`${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}`}>Boxing</span>
+              </div>
+            </a>
           </Col>
         </div>
       </div>
