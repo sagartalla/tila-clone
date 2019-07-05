@@ -123,15 +123,16 @@ class ActionBar extends Component {
   }
 
 
-  loginClick() {
-    digitalData.page.pageInfo.pageType = 'Login Page';
-    digitalData.page.pageInfo.pageName = 'Login Page';
-    const state = {};
-    state.loginClicked = true;
-    state.mode = 'login';
-    state.show = true;
-    this.setState(state);
-  }
+  // loginClick() {
+  //   debugger;
+  //   digitalData.page.pageInfo.pageType = 'Login Page';
+  //   digitalData.page.pageInfo.pageName = 'Login Page';
+  //   const state = {};
+  //   state.loginClicked = true;
+  //   state.mode = 'login';
+  //   state.show = true;
+  //   this.setState(state);
+  // }
 
 
   onBackdropClick(logoutRequired = false) {
@@ -253,7 +254,7 @@ class ActionBar extends Component {
           </Dropdown>
         </div>
         <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']} ${styles.relative}`}>
-          <Dropdown id="profile-login" className={`${styles['round-shape']} ${styles['account-inn']} ${styles['flex-center']} ${styles['justify-center']}`}>
+          <Dropdown id="profile-login" className={`${styles['round-shape']} ${styles['account-inn']} ${styles['flex-center']} ${styles['justify-center']} ${styles.pointer}`}>
             <Dropdown.Toggle style={{ display: 'none' }} />
               <span className={`${styles['flex-center']} ${styles['justify-center']} ${styles['profile-icon-main']}`}>
                 <SVGComponent clsName={`${styles['profile-icon']}`} src="icons/profile-icons/account-icon" />
@@ -268,7 +269,7 @@ class ActionBar extends Component {
                   {userInfo.personalInfo.first_name ?
                   <span>
                     <span className={`${styles['user-name']}`}>{userInfo.personalInfo.first_name}</span> &nbsp;
-                    <span>{userInfo.personalInfo.last_name.charAt(0)}</span>
+                    <span>{userInfo.personalInfo.first_name.length < 15 && userInfo.personalInfo.last_name.charAt(0)}</span>
                     </span> : <span>{`${HEADER_PAGE.TILA_CUSTOMER}` }</span>}
                     </span>
                 </div>

@@ -131,9 +131,6 @@ class Payments extends React.Component {
     //   location.href = nextProps.makePaymentOptions.redirect_url;
     // }
 
-    // console.log(nextProps)
-    console.log('nextProps.userCreds', nextProps.userCreds);
-    console.log('nextProps.isLoggedIn', nextProps.isLoggedIn);
     // if loggedin show address step directly.
     if (nextProps.isLoggedIn && !loggedInFlag) {
       const login = nextProps.userCreds || this.state.login;
@@ -142,30 +139,6 @@ class Payments extends React.Component {
       paymentConfigJson['address'] = { basic: false, progress: true, done: false };
       this.setState({
         paymentConfigJson, login, loggedInFlag: true,
-      });
-    }
-    if (nextProps.isLoggedIn && nextProps.userInfoData.email_verified === 'V') {
-      const paymentConfigJson = { ...this.state.paymentConfigJson };
-      paymentConfigJson['signIn'] = { basic: false, progress: true, done: false };
-      paymentConfigJson['address'] = { basic: false, progress: true, done: false };
-      this.setState({
-        paymentConfigJson,
-      });
-    }
-    if (!nextProps.isLoggedIn) {
-      const paymentConfigJson = { ...this.state.paymentConfigJson };
-      paymentConfigJson['signIn'] = { basic: false, progress: true, done: false };
-      paymentConfigJson['address'] = { basic: true, progress: false, done: false };
-      this.setState({
-        paymentConfigJson,
-      });
-    }
-    if (nextProps.isLoggedIn && nextProps.userInfoData.email_verified === 'NV') {
-      const paymentConfigJson = { ...this.state.paymentConfigJson };
-      paymentConfigJson['signIn'] = { basic: false, progress: true, done: false };
-      paymentConfigJson['address'] = { basic: true, progress: false, done: false };
-      this.setState({
-        paymentConfigJson,
       });
     }
   }
@@ -192,9 +165,19 @@ class Payments extends React.Component {
 
   continueCheckout = () => {
     const paymentConfigJson = { ...this.state.paymentConfigJson };
+    paymentConfigJson.signIn = {
+      basic: false,
+      progress: false,
+      done: true,
+    };
     paymentConfigJson.address = {
       basic: false,
       progress: true,
+      done: false,
+    };
+    paymentConfigJson.payment = {
+      basic: true,
+      progress: false,
       done: false,
     };
     this.setState({
@@ -260,7 +243,7 @@ class Payments extends React.Component {
       // paymentConfigJson['offersDiscounts'] = { basic: true, progress: false, done: false };
       paymentConfigJson['payment'] = { basic: false, progress: true, done: false };
       this.setState(
-       { paymentConfigJson, editCartDetails: !editCartDetails }
+       { paymentConfigJson, editCartDetails: !editCartDetails, showLogout: false, loggedInFlag: true }
       ,() => this.props.cartEditDetails(this.state.editCartDetails));
     }
   }
@@ -372,7 +355,6 @@ class Payments extends React.Component {
     };
     this.setState({
       paymentConfigJson,
-      showLogout: true,
     });
   }
   render() {
