@@ -37,7 +37,7 @@ const MiniWishlist = (props) => {
                     wishlisted_price, mrp, variant_id, product_id, catalog_id, itemType, buttonValue,
                   } = item;
               return (
-                <div className={`${styles.flex} ${styles['pt-15']} ${styles['pb-15']} ${styles['border-b']} ${styles['min-items-list']}`}>
+                <div key={wishlist_id} className={`${styles.flex} ${styles['pt-15']} ${styles['pb-15']} ${styles['border-b']} ${styles['min-items-list']}`}>
                   <Col md={2} sm={2} xs={2} className={`${styles['pl-0']} ${styles['pr-0']}`}>
                     <div className={`${styles['wishlist-container-img']} ${styles.flex} ${styles['justify-center']}`}>
                       <Link route={`/${country}/${language}/product?productId=${product_id}${variant_id ? `&variantId=${variant_id}` : ''}&catalogId=${catalog_id}&itemType=${itemType}`}>
