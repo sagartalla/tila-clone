@@ -199,7 +199,6 @@ const resetPassword = (body) => {
     "tenant": "CUSTOMER",
   }
   return axios.post(`${constants.AUTH_API_URL}/api/v1/password/reset`, body).then((data) => {
-    console.log('data', data);
     if (data.status === 200) {
       axios.post('/api/setCookie', {
         data: {
@@ -210,7 +209,7 @@ const resetPassword = (body) => {
     return data;
   }).catch((error) => {
     return error.response.data;
-  })
+  });
 }
 
 const forgotPassword = (body) => {

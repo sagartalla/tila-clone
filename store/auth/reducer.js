@@ -507,13 +507,14 @@ const authReducer = typeToReducer({
     PENDING: state => Object.assign({}, state, { ui: { loading: true } }),
     FULFILLED: (state, action) => {
       const { data } = state;
-      if (action && action.payload && action.payload.data && action.payload.data.Response && action.payload.data.Response === 'SUCCESS') {
+      if (action && action.payload && action.payload.status === 200) {
         data.showLoginScreen = true;
         data.showResetScreen = false;
       }
       return Object.assign({}, state, {
         data: {
           ...state.data,
+          isLoggedIn: true,
         },
         ui: { loading: false },
       });
