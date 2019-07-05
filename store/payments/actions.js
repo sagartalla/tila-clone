@@ -51,7 +51,7 @@ const actionCreators = {
       type: actions.GET_REDIRECT,
       payload: apis.getRedirectApi(params)
     }
-  }
+  },
 
 };
 
