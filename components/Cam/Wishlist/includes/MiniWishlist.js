@@ -91,17 +91,21 @@ const MiniWishlist = (props) => {
 
         </div>
       </div>
-      <Col md={12} className={`${styles['wishlist-background']} ${styles['pb-15']}`}>
-        <div className={`${styles['fs-14']} ${styles['p-10']} ${styles.fontW600} ${styles['t-c']}`}>
-          {props.wishListCount && props.wishListCount > 0 ? <a href={`/${country}/${language}/cam/wishlist`} className={`${styles['black-color']}`}>{`${props.wishListCount - 2} ${HEADER_PAGE.MORE_ITEMS}`}</a> : HEADER_PAGE.NO_ITEMS}
-        </div>
-        {props.wishListCount > 0 &&
+      {props.wishListCount && props.wishListCount > 0 ?
+        <Col md={12} className={`${styles['wishlist-background']} ${styles['pb-15']}`}>
+          <div className={`${styles['fs-14']} ${styles['p-10']} ${styles.fontW600} ${styles['t-c']}`}>
+        {<a href={`/${country}/${language}/cam/wishlist`} className={`${styles['black-color']}`}>
+        {props.wishListCount && props.wishListCount > 2 ? props.wishListCount - 2 + ' ' + HEADER_PAGE.MORE_ITEMS : props.wishListCount < 3 ? '' : props.wishListCount + ' ' + HEADER_PAGE.MORE_ITEMS}</a>}</div>
           <Button
             className={`${styles.flex} ${styles.width100} ${styles['go-to-wishlist']} ${styles.fontW600} ${styles['fs-14']} ${styles['text-uppercase']}`}
             btnText={HEADER_PAGE.GO_TO_WISHLIST}
             onClick={props.moveToWishlist}
-          />}
-      </Col>
+          />
+        </Col>
+        :
+        <h5 className={`${styles['mt-0']} ${styles['pb-15']} ${styles['pl-15']} ${styles['fontW600']} ${styles['thick-gry-clr']} ${styles['mb-0']}`}>
+            <span>{HEADER_PAGE.NO_ITEMS}</span>
+          </h5>}
     </div>
   );
 };
