@@ -75,8 +75,9 @@ const getCompareInfo = (store) => {
     compareCount: compareInfo.length,
     features: _.uniqBy(_.map(compareInfo[0].product_details.catalog_details.attribute_map, (attr, key) => ({
       key: attr.attribute_category_name.split(' ').join('_').toLowerCase(),
-      value: attr.attribute_category_name
-    })), 'value'),
+      value: attr.attribute_category_name,
+      visible: attr.visible,
+    })).filter((a) => a.visible), 'value'),
     products: _.map(compareInfo, (product) => {
       const variant = product.variant_preferred_listings ? Object.keys(product.variant_preferred_listings)[0] : [];
       const variant_info = product.variant_preferred_listings ? product.variant_preferred_listings[variant][0] : {};

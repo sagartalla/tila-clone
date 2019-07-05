@@ -192,11 +192,24 @@ const showUserInfo = (param) => {
 };
 
 const resetPassword = (body) => {
-  return axios.post(`${constants.CMS_API_URL}/api/v1/user/password/reset`, body).then((data) => {
+  body = {
+    ...body,
+    "channel": "BASIC_REGISTER",
+    "client_type": "WEB",
+    "tenant": "CUSTOMER",
+  }
+  return axios.post(`${constants.AUTH_API_URL}/api/v1/password/reset`, body).then((data) => {
+    if (data.status === 200) {
+      axios.post('/api/setCookie', {
+        data: {
+          auth: data.data,
+        },
+      });
+    }
     return data;
   }).catch((error) => {
     return error.response.data;
-  })
+  });
 }
 
 const forgotPassword = (body) => {
