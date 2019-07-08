@@ -24,6 +24,7 @@ const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...s
 const MiniWishlist = (props) => {
   const {
     addToCart,
+    notifyMe,
   } = props;
   const { WISH_LIST_PAGE, HEADER_PAGE, PDP_PAGE, CART_PAGE } = languageDefinations();
   return (
@@ -61,18 +62,27 @@ const MiniWishlist = (props) => {
                       <div className={`${styles.fontW600} ${styles['pt-10']} ${styles['fs-14']}`}>{price} {cur}</div>
                     </div>
                     <div className={`${styles['flex-center']} ${styles['pt-10']}`}>
-                      <button
-                        id={listing_id}
-                        data-cart-res
-                        data-wish-id={wishlist_id}
-                        className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fs-12']}  ${styles['mr-20']} ${styles['move-to-cart-btn']}`}
-                        onClick={buttonValue ? addToCart : () => {}}
-                      >
-                        {buttonValue ? WISH_LIST_PAGE.ADD_TO_CART_BTN : PDP_PAGE.IN_CART}
-                      </button>
-                          <span id={wishlist_id} className={`${styles['flex']} ${styles['pointer']}`} onClick={props.deleteItem}>
-                              <SVGComponent clsName={`${styles['delete-icon']}`} src="icons/delete-icon/delete-icon" />
-                          </span>
+                      {inventory_count > 0 ?
+                        <button
+                          id={listing_id}
+                          data-cart-res
+                          data-wish-id={wishlist_id}
+                          className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fs-12']} ${styles['mr-20']} ${styles['move-to-cart-btn']}`}
+                          onClick={buttonValue ? addToCart : () => {}}
+                        >
+                          {buttonValue ? WISH_LIST_PAGE.ADD_TO_CART_BTN : PDP_PAGE.IN_CART}
+                        </button>
+                      :
+                        <button
+                          data-wish-id={wishlist_id}
+                          className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['mr-20']} ${styles['fs-12']} ${styles['move-to-cart-btn']}`}
+                          onClick={notifyMe}
+                        >
+                          {WISH_LIST_PAGE.NOTIFY_ME_BTN}
+                        </button>}
+                      <span id={wishlist_id} className={`${styles.flex} ${styles.pointer}`} onClick={props.deleteItem}>
+                        <SVGComponent clsName={`${styles['delete-icon']}`} src="icons/delete-icon/delete-icon" />
+                      </span>
                     </div>
                   </Col>
                 </div>
@@ -85,7 +95,8 @@ const MiniWishlist = (props) => {
       {props.wishListCount && props.wishListCount > 0 ?
         <Col md={12} className={`${styles['wishlist-background']} ${styles['pb-15']}`}>
           <div className={`${styles['fs-14']} ${styles['p-10']} ${styles.fontW600} ${styles['t-c']}`}>
-        {<a href={`/${country}/${language}/cam/wishlist`} className={`${styles['black-color']}`}>{props.wishListCount - 2 + ' ' + HEADER_PAGE.MORE_ITEMS}</a>}</div>
+        {<a href={`/${country}/${language}/cam/wishlist`} className={`${styles['black-color']}`}>
+        {props.wishListCount &&  props.wishListCount === 3 ? props.wishListCount - 2 + ' ' + HEADER_PAGE.MORE_ITEM : props.wishListCount > 2 ? props.wishListCount - 2 + ' ' + HEADER_PAGE.MORE_ITEMS : props.wishListCount < 3 && ''}</a>}</div>
           <Button
             className={`${styles.flex} ${styles.width100} ${styles['go-to-wishlist']} ${styles.fontW600} ${styles['fs-14']} ${styles['text-uppercase']}`}
             btnText={HEADER_PAGE.GO_TO_WISHLIST}

@@ -17,10 +17,12 @@ const actionCreators = {
     type: actions.GET_WISHLIST,
     payload: apis.getWishlistApi(currentPage, size),
   })),
-  addToWishlist: loginReq(params => ({
-    type: actions.ADD_TO_WISHLIST,
-    payload: apis.addToWishlistApi(params),
-  })),
+  addToWishlist: loginReq(params => (dispatch) => {
+    return dispatch({
+      type: actions.ADD_TO_WISHLIST,
+      payload: apis.addToWishlistApi(params),
+    }).then(() => dispatch(actionCreators.getWishlist()));
+  }),
   deleteWishlist: loginReq((wishlist_id, showToast, currentPage) => (dispatch, getState) => {
     dispatch(actionCreators.track({ eventName: 'WishList Remove', wishlistId: wishlist_id }));
     return dispatch({

@@ -575,6 +575,7 @@ export const EN_KEYWORDS = {
     HELLO: 'Hello',
     MORE_ITEMS: 'more items',
     GO_TO_WISHLIST: 'Go To Wishlist',
+    MORE_ITEM: 'more item',
   },
   LOGIN_PAGE: {
     SIGN_UP: 'Sign up',

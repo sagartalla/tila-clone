@@ -119,7 +119,8 @@ class Wishlist extends Component {
               addToCart={this.addToCart}
               wishListCount={wishListCount}
               moveToWishlist={this.moveToWishlist} 
-              deleteItem={this.deleteItem}                                       
+              deleteItem={this.deleteItem}
+              notifyMe={this.notify}                                                     
             /> :
           cartMiniWishList ?
             <Fragment>
