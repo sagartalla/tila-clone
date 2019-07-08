@@ -35,7 +35,6 @@ const uploadProfilePic = (body) => {
       'tenant': 'profile-service',
     },
   }).then(({data}) => {
-    debugger;
     toast(
       <ToastContent
         msg={PERSONAL_INFO_MODAL.IMAGE_UPDATED_SUCCESS}

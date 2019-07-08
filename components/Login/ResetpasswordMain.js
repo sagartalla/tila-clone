@@ -20,7 +20,6 @@ import HeaderBar from '../HeaderBar';
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
 const { LOGIN_PAGE } = languageDefinations();
-
 class ResetPasswordMain extends Component {
   constructor(props) {
     super(props);
@@ -83,7 +82,7 @@ class ResetPasswordMain extends Component {
         token: resetToken || this.props.token,
       };
       this.props.resetPassword(body).then((res) => {
-        if (res && res.value && res.value.data && res.value.data.Response === 'SUCCESS') {
+        if (res && res.value && res.value.status && res.value.status === 200) {
           const data = { currentFlow: 'forgot_password_reset', nextPage: 'thank_you' };
           const { v2CurrentFlow } = this.props;
           v2CurrentFlow(data);
