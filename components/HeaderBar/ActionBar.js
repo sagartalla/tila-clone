@@ -100,7 +100,6 @@ class ActionBar extends Component {
     if (nextProps && nextProps.activeObj && nextProps.activeObj.nextPage === null) {
       setTimeout(() => {
         closeThankYouScreen();
-        this.props.getUserInfoData({initiateEmailVerification: false });
       }, 3000);
     }
 
