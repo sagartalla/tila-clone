@@ -11,6 +11,7 @@ import Waypoint from 'react-waypoint';
 import { OverlayTrigger, Modal, Popover } from 'react-bootstrap';
 import constants from '../../../constants';
 import { actionCreators } from '../../../store/cam/wishlist';
+import { actionCreators as authActionCreators } from '../../../store/auth';
 import { actionCreators as compareActions } from '../../../store/compare/actions';
 import SVGCompoent from '../../common/SVGComponet';
 import { languageDefinations } from '../../../utils/lang';
@@ -99,10 +100,12 @@ class Product extends Component {
     e.preventDefault();
     const {
       productId: product_id, catalogId: catalog_id, variantId: variant_id,
-      variants, currency, addToWishlistAndFetch, wishlistId, deleteWishlist,
+      variants, currency, addToWishlistAndFetch, wishlistId, deleteWishlist, userDetails,
     } = this.props;
     const { selectedIndex } = this.state;
-    if (wishlistId) {
+    if (!userDetails.isLoggedIn) {
+      this.props.showLoginScreen();
+    } else if (wishlistId) {
       deleteWishlist(wishlistId);
     } else {
       addToWishlistAndFetch({
@@ -501,6 +504,7 @@ const mapDispatchToProps = (dispatch) => {
       addToCompare: compareActions.addToCompare,
       removeCompareData: compareActions.removeCompareData,
       deleteWishlist: actionCreators.deleteWishlist,
+      showLoginScreen: authActionCreators.showLoginScreen,
     },
     dispatch,
   );
