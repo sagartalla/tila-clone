@@ -573,6 +573,7 @@ export const EN_KEYWORDS = {
     NO_ITEMS: '0 items in wishlist',
     MORE_ITEMS: 'more items',
     GO_TO_WISHLIST: 'Go To Wishlist',
+    MORE_ITEM: 'more item',
   },
   LOGIN_PAGE: {
     SIGN_UP: 'Sign up',
