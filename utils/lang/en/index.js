@@ -573,7 +573,6 @@ export const EN_KEYWORDS = {
     MATCHING_ITEM: 'MATCHING ITEM',
     MATCHING_PRODUCTS: 'MATCHING PRODUCTS',
     HELLO: 'Hello',
-    NO_ITEMS: '0 items in wishlist',
     MORE_ITEMS: 'more items',
     GO_TO_WISHLIST: 'Go To Wishlist',
   },
@@ -646,6 +645,7 @@ export const EN_KEYWORDS = {
     GLAD_TO_HAVE_YOU_HERE: 'Glad to have you here.',
     PLEASE_PROVIDE_EMAIL_ID_FOR_REGISTRATION: 'Please provide your email ID to receive your registration confirmation.',
     INSTAGRAM: 'Instagram',
+    EDIT: 'EDIT',
   },
   ORDER_PAGE: {
     LOADING: 'Loading...',

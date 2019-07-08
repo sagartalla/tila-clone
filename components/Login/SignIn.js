@@ -224,7 +224,7 @@ class SignIn extends Component {
               LOGIN_PAGE.SOCIAL_LOGIN_WELCOME :
               mode === 'NEW_USER' ? LOGIN_PAGE.NEW_TO_TILA : LOGIN_PAGE.GLAD_TO_HAVE_YOU_HERE }
           </h3>
-          {mode !== 'SOCIAL_LOGIN' && <div className={`${styles['ml-20']} ${styles['fs-12']} ${styles['pl-10']} ${styles['pr-10']} ${styles.fontW600} ${styles['edit-button']} ${styles['border-radius2']} ${styles.pointer}`} onClick={this.goToPreviousPage}>{CONTACT_INFO_MODAL.EDIT}</div>}
+          {mode !== 'SOCIAL_LOGIN' && <div className={`${styles['ml-20']} ${styles['fs-12']} ${styles['pl-10']} ${styles['pr-10']} ${styles.fontW600} ${styles['edit-button']} ${styles['border-radius2']} ${styles.pointer}`} onClick={this.goToPreviousPage}>{LOGIN_PAGE.EDIT}</div>}
           </div>       
           <div className={`${styles['light-gry-clr']} ${styles['fs-12']}`}>{mode === 'SOCIAL_LOGIN' ? LOGIN_PAGE.PLEASE_PROVIDE_EMAIL_ID_FOR_REGISTRATION : activeEmailId}</div>
         </div>
@@ -346,7 +346,7 @@ class SignIn extends Component {
           btnLoading={loadingStatus}
           onClick={this.login}
         />
-        <span className={`${styles['m-20']} ${styles['t-c']} ${styles['fs-12']} ${styles['register-policy-gray']}`}>{mode === 'EXISTING_USER' ? LOGIN_PAGE.BY_LOGIN_I_AGREE_TO_TERMS : LOGIN_PAGE.BY_SIGNUP_I_AGREE_TO_TERMS } <span className={`${styles['text-blue']}`}><a href="/SAU/en/policy/tc" target="_blank">{LOGIN_PAGE.T_AND_C}</a>, <a href="/SAU/en/policy/pp" target="_blank">{LOGIN_PAGE.PRIVACY}</a> {LOGIN_PAGE.AND} <a href="/SAU/en/policy/pp" target="_blank">{LOGIN_PAGE.COOKIE_POLICY}</a></span></span>
+        <span className={`${styles['m-20']} ${styles['t-c']} ${styles['fs-12']} ${styles['register-policy-gray']}`}>{mode === 'EXISTING_USER' ? LOGIN_PAGE.BY_LOGIN_I_AGREE_TO_TERMS : LOGIN_PAGE.BY_SIGNUP_I_AGREE_TO_TERMS } <span className={`${styles['text-blue']} ${styles.fontW600}`}><a href="/SAU/en/policy/tc" target="_blank">{LOGIN_PAGE.T_AND_C}</a>, <a href="/SAU/en/policy/pp" target="_blank">{LOGIN_PAGE.PRIVACY}</a> {LOGIN_PAGE.AND} <a href="/SAU/en/policy/pp" target="_blank">{LOGIN_PAGE.COOKIE_POLICY}</a></span></span>
       </div>
     );
   }
