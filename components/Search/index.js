@@ -157,7 +157,7 @@ class Search extends Component {
               <CategoriesAndFacets />
             </NoSSR>
           </Col>
-          <Col md={10} className={`${styles['search-results']} ${styles['fl-rt']}`}>
+          <Col md={10} className={`${styles['search-results']} ${styles['fl-rt']} ${styles['pr-0']}`}>
             <SearchDetailsBar optionalParams={optionalParams} />
             <SearchResults search={query.search} />
           </Col>

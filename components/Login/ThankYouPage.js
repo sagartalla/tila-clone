@@ -23,7 +23,7 @@ const ThankYou = ({ text }) => (
         <SVGComponent clsName={styles['logo-icon']} src={`icons/logos/default-logo-${lang}`} />
       </div>
     </div>
-    <SVGComponent clsName={`${styles['reset-icon']}`} src="icons/common-icon/thankyou" />
+    <img className={`${styles['reset-icon']}`} src="/static/img/icons/common-icon/thanksimg.png" alt="thankyou" />
   </div>
 );
 
