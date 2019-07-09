@@ -230,33 +230,51 @@ const Fashion = () => React.createElement(
       ),
       React.createElement(
         'div',
-        null,
+        { className: styles['flex'] },
         React.createElement(
           Col,
-          { md: 6, className: `${styles['pl-0']} ${styles['pr-10']}` },
+          { md: 6, className: `${styles['pl-0']} ${styles['pr-0']} ${styles['flex']}` },
           React.createElement(
             Col,
-            { md: 8, className: `${styles['pl-0']} ${styles['pr-10']}` },
+            { md: 8, className: `${styles['p-0']} ${styles['mr-10']} ${styles['bg-white']}` },
             React.createElement(
-              'a',
-              { href: `/SAU/${lang}/srp?search=rainware&isListed=false` },
-              React.createElement('img', { src: '/static/img/landing-page-fashion/what-new.jpg', className: 'img-responsive' })
+              'div',
+              { className: 'chinos-part' },
+              React.createElement(
+                'a',
+                { href: `/SAU/${lang}/srp?search=rainware&isListed=false` },
+                React.createElement('img', { src: '/static/img/landing-page-fashion/rainwear.png', className: 'img-responsive' })
+              ),
+              React.createElement(
+                'div',
+                { className: `${styles['bg-white']} chinos-part-inn what-new-inn` },
+                React.createElement(
+                  'h6',
+                  { className: `${styles['m-0']} ${styles['fs-14']} ${styles['fontW600']}` },
+                  'Rainwear For All Ages'
+                ),
+                React.createElement(
+                  'span',
+                  { className: 'disc' },
+                  'Up to 50% Off'
+                )
+              )
             )
           ),
           React.createElement(
             Col,
-            { md: 4, className: `${styles['pl-0']} ${styles['pr-10']}` },
+            { md: 4, className: `${styles['p-0']} ${styles['mr-10']} ${styles['bg-white']}` },
             React.createElement(
               'div',
               { className: 'chinos-part' },
               React.createElement(
                 'a',
                 { href: `/SAU/${lang}/srp?search=Chinos&language=en&isListed=false` },
-                React.createElement('img', { src: '/static/img/landing-page-fashion/what-new1.jpg', className: 'img-responsive' })
+                React.createElement('img', { src: '/static/img/landing-page-fashion/what-new1.png', className: 'img-responsive' })
               ),
               React.createElement(
                 'div',
-                { className: `${styles['bg-white']} chinos-part-inn` },
+                { className: `${styles['bg-white']} chinos-part-inn what-new-inn` },
                 React.createElement(
                   'h6',
                   { className: `${styles['m-0']} ${styles['fs-14']} ${styles['fontW600']}` },
@@ -273,7 +291,7 @@ const Fashion = () => React.createElement(
         ),
         React.createElement(
           Col,
-          { md: 6, className: `${styles['pl-0']} ${styles['pr-10']}` },
+          { md: 6, className: `${styles['p-0']}` },
           React.createElement(
             Col,
             { md: 4, className: `${styles['pl-0']} ${styles['pr-10']}` },
@@ -360,7 +378,7 @@ const Fashion = () => React.createElement(
             { md: 4, className: `${styles['pl-0']} ${styles['pr-10']}` },
             React.createElement(
               'div',
-              { className: `new-brands ${styles['pb-10']}` },
+              { className: `new-brands ${styles['pb-10']} ${styles['bg-white']}` },
               React.createElement(
                 'a',
                 { href: `/SAU/${lang}/srp?search=Jewellery&isListed=false` },
@@ -387,7 +405,7 @@ const Fashion = () => React.createElement(
             { md: 4, className: `${styles['pl-0']} ${styles['pr-10']}` },
             React.createElement(
               'div',
-              { className: `new-brands ${styles['pb-10']}` },
+              { className: `new-brands ${styles['pb-10']} ${styles['bg-white']}` },
               React.createElement(
                 'a',
                 { href: `/SAU/${lang}/srp?search=Handbags&isListed=false` },
@@ -414,11 +432,25 @@ const Fashion = () => React.createElement(
             { md: 4, className: `${styles['pl-0']} ${styles['pr-10']}` },
             React.createElement(
               'div',
-              null,
+              { className: `new-brands ${styles['pb-10']} ${styles['bg-white']}` },
               React.createElement(
                 'a',
                 { href: `/SAU/${lang}/srp?search=watch&language=en&isListed=false` },
-                React.createElement('img', { src: '/static/img/landing-page-fashion/what-new7.jpg', className: 'img-responsive' })
+                React.createElement('img', { src: '/static/img/landing-page-fashion/bitmap.png', className: 'img-responsive' })
+              ),
+              React.createElement(
+                'div',
+                { className: `${styles['bg-white']} chinos-part-inn` },
+                React.createElement(
+                  'h6',
+                  { className: `${styles['m-0']} ${styles['fs-13']} ${styles['fontW600']}` },
+                  'Men\'s & Womens Watches '
+                ),
+                React.createElement(
+                  'span',
+                  { className: 'disc' },
+                  'Up to 50% Off'
+                )
               )
             )
           )
@@ -441,17 +473,31 @@ const Fashion = () => React.createElement(
       ),
       React.createElement(
         'div',
-        null,
+        { className: styles['flex'] },
         React.createElement(
           Col,
-          { md: 6, className: `${styles['pl-0']} ${styles['pr-10']}` },
+          { md: 6, className: `${styles['pl-0']} ${styles['pr-0']} ${styles['flex']}` },
           React.createElement(
             Col,
-            { md: 8, className: `${styles['pl-0']} ${styles['pr-10']}` },
+            { md: 8, className: `${styles['p-0']} ${styles['mr-10']} ${styles['bg-white']}` },
             React.createElement(
               'a',
               { href: `/SAU/${lang}/srp?search=men%20formal%20shirts&language=en&isListed=false` },
               React.createElement('img', { src: '/static/img/landing-page-fashion/getting-img.jpg', className: 'img-responsive' })
+            ),
+            React.createElement(
+              'div',
+              { className: `${styles['bg-white']} chinos-part-inn` },
+              React.createElement(
+                'h6',
+                { className: `${styles['m-0']} ${styles['fs-14']} ${styles['fontW600']}` },
+                'Mens Formal Shirts'
+              ),
+              React.createElement(
+                'span',
+                { className: 'disc' },
+                'Up to 50% Off'
+              )
             )
           ),
           React.createElement(
@@ -459,34 +505,76 @@ const Fashion = () => React.createElement(
             { md: 4, className: `${styles['pl-0']} ${styles['pr-10']}` },
             React.createElement(
               'div',
-              { className: styles['pb-10'] },
+              { className: `${styles['mb-10']} ${styles['bg-white']}` },
               React.createElement(
                 'a',
                 { href: `/SAU/${lang}/srp?search=mens%20trousers&language=en&isListed=false` },
                 React.createElement('img', { src: '/static/img/landing-page-fashion/getting-img2.jpg', className: 'img-responsive' })
+              ),
+              React.createElement(
+                'div',
+                { className: `${styles['bg-white']} chinos-part-inn` },
+                React.createElement(
+                  'h6',
+                  { className: `${styles['m-0']} ${styles['fs-14']} ${styles['fontW600']}` },
+                  'Mens Trousrs'
+                ),
+                React.createElement(
+                  'span',
+                  { className: 'disc' },
+                  'Up to 50% Off'
+                )
               )
             ),
             React.createElement(
               'div',
-              null,
+              { className: `${styles['pb-10']} ${styles['bg-white']}` },
               React.createElement(
                 'a',
                 { href: `/SAU/${lang}/srp/srp?search=shoe&language=en&isListed=false` },
                 React.createElement('img', { src: '/static/img/landing-page-fashion/getting-img3.jpg', className: 'img-responsive' })
+              ),
+              React.createElement(
+                'div',
+                { className: `${styles['bg-white']} chinos-part-inn` },
+                React.createElement(
+                  'h6',
+                  { className: `${styles['m-0']} ${styles['fs-14']} ${styles['fontW600']}` },
+                  'Mens Formal Shoes'
+                ),
+                React.createElement(
+                  'span',
+                  { className: 'disc' },
+                  'Up to 50% Off'
+                )
               )
             )
           )
         ),
         React.createElement(
           Col,
-          { md: 6, className: `${styles['pl-0']} ${styles['pr-10']}` },
+          { md: 6, className: `${styles['pl-0']} ${styles['pr-0']} ${styles['flex']}` },
           React.createElement(
             Col,
-            { md: 8, className: `${styles['pl-0']} ${styles['pr-10']}` },
+            { md: 8, className: `${styles['p-0']} ${styles['mr-10']} ${styles['bg-white']}` },
             React.createElement(
               'a',
               { href: `/SAU/${lang}/srp/srp?search=womens%20tops&language=en&isListed=false` },
               React.createElement('img', { src: '/static/img/landing-page-fashion/getting-img4.jpg', className: 'img-responsive' })
+            ),
+            React.createElement(
+              'div',
+              { className: `${styles['bg-white']} chinos-part-inn` },
+              React.createElement(
+                'h6',
+                { className: `${styles['m-0']} ${styles['fs-14']} ${styles['fontW600']}` },
+                'Women\'s Formal Tops'
+              ),
+              React.createElement(
+                'span',
+                { className: 'disc' },
+                'Up to 50% Off'
+              )
             )
           ),
           React.createElement(
@@ -494,7 +582,7 @@ const Fashion = () => React.createElement(
             { md: 4, className: `${styles['pl-0']} ${styles['pr-10']}` },
             React.createElement(
               'div',
-              { className: styles['pb-10'] },
+              { className: `${styles['mb-10']} ${styles['bg-white']}` },
               React.createElement(
                 'a',
                 { href: `/SAU/${lang}/srp/footwear?categoryTree=true&isListed=false&sid=892,909,921` },
@@ -517,7 +605,7 @@ const Fashion = () => React.createElement(
             ),
             React.createElement(
               'div',
-              null,
+              { className: `${styles['pb-10']} ${styles['bg-white']}` },
               React.createElement(
                 'a',
                 { href: `/SAU/${lang}/srp?search=Handbags&isListed=false` },
