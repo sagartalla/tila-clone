@@ -25,6 +25,7 @@ const initialState = {
     showLoginScreen: false,
     showResetScreen: true,
     loginResponse: {},
+    showUserInfo: false,
   },
   error: '',
   v2: {
@@ -509,6 +510,7 @@ const authReducer = typeToReducer({
       if (action && action.payload && action.payload.status === 200) {
         data.showLoginScreen = true;
         data.showResetScreen = false;
+        data.showUserInfo = true;
       }
       return Object.assign({}, state, {
         data: {

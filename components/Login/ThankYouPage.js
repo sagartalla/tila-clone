@@ -1,6 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { selectors } from '../../store/auth';
+import { bindActionCreators } from 'redux';
+
+import { actionCreators, selectors } from '../../store/auth';
+import { actionCreators as personalActionCreators } from '../../store/cam/personalDetails';
 
 import { languageDefinations } from '../../utils/lang';
 import SVGComponent from '../common/SVGComponet';
@@ -15,20 +18,47 @@ const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...s
 
 const { EMAIL_VERIFICATION, LOGIN_PAGE } = languageDefinations();
 
-const ThankYou = ({ text }) => (
-  <div className={`${styles['reset-part']} ${styles.relative}`}>
-    <div className={`${styles['t-c']} ${styles.absolute} ${styles['success-text']}`}>
-      {text}
-      <div className={`${styles.flex} ${styles['justify-center']} ${styles['mt-25']}`}>
-        <SVGComponent clsName={styles['logo-icon']} src={`icons/logos/default-logo-${lang}`} />
+class ThankYou extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  componentWillUnmount() {
+    if (this.props.showUserInfo) {
+      this.props.getUserInfoData({ initiateEmailVerification: false });
+      this.props.getUserProfileInfo();
+    }
+  }
+
+  render() {
+    const { text } = this.props;
+    return (
+      <div className={`${styles['reset-part']} ${styles.relative}`}>
+        <div className={`${styles['t-c']} ${styles.absolute} ${styles['success-text']}`}>
+          {text}
+          <div className={`${styles.flex} ${styles['justify-center']} ${styles['mt-25']}`}>
+            <SVGComponent clsName={styles['logo-icon']} src={`icons/logos/default-logo-${lang}`} />
+          </div>
+        </div>
+        <SVGComponent clsName={`${styles['reset-icon']}`} src="icons/common-icon/thankyou" />
       </div>
-    </div>
-    <SVGComponent clsName={`${styles['reset-icon']}`} src="icons/common-icon/thankyou" />
-  </div>
-);
+    );
+  }
+}
+
 
 const mapStateToProps = store => ({
   text: selectors.getActiveText(store),
+  showUserInfo: selectors.showUserInfo(store),
 });
 
-export default connect(mapStateToProps, null)(ThankYou);
+const mapDispatchToProps = dispatch => bindActionCreators(
+  {
+    getUserInfoData: actionCreators.getUserInfoData,
+    getUserProfileInfo: personalActionCreators.getUserProfileInfo,
+  },
+  dispatch,
+);
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(ThankYou);

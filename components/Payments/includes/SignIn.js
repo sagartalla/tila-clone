@@ -76,12 +76,12 @@ class SignIn extends Component {
         {
        !props.showCheckoutLogin && (props.userInfoData && props.userInfoData.email) && !props.showLogout && props.isLoggedIn &&
        <Row>
-          <Col md={7} sm={12} xs={12}>
+          <Col md={6} sm={12} xs={12}>
             <h4 className={styles['m-0']}>{`${PAYMENT_PAGE.YOU_ARE_SIGNED_IN_AS}`}</h4>
             <small>{(props.userInfoData && props.userInfoData.email)}</small>
           </Col>
           {(props.userInfoData && props.userInfoData.email) &&
-          <Col md={5} sm={12} xs={12} className={styles['t-rt']}>
+          <Col md={6} sm={12} xs={12} className={styles['t-rt']}>
             <span className={`${styles['light-gry-clr']} ${styles['user-login-name']} ${styles.fontW600}`}>{(props.userInfoData && props.userInfoData.email)}&emsp;</span>
             <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['ml-15']} ${styles['left-radius']} ${styles.pointer}`} onClick={props.onClickEdit}>
               {PAYMENT_PAGE.CHANGE}
@@ -90,7 +90,7 @@ class SignIn extends Component {
           }
         </Row>}
         <Row >
-          <Col md={6} sm={5} xs={12} className={`${styles['landscape-socail-part']}`}>
+          <Col md={7} sm={5} xs={12} className={`${styles['landscape-socail-part']}`}>
             {props.showLogout && !props.showCheckoutLogin && props.isLoggedIn &&
             <div className={`${styles['continue-checkout']}`}>
               <div>
