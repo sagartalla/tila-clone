@@ -43,10 +43,15 @@ const Review = ({ rev, deleteReview, submitUserReview }) => {
   };
 
   const closeModal = () => {
+    document.getElementsByTagName('BODY')[0].style.overflow = 'auto';
     setModal(false);
     setReviews(true);
-  }
-  const showModal = () => setModal(true);
+  };
+
+  const showModal = () => {
+    document.getElementsByTagName('BODY')[0].style.overflow = 'hidden';
+    setModal(true);
+  };
 
   return (
     <div key={rev.review_id} className={`${styles.relative} ${styles.review} ${styles['pl-15']} ${styles['pr-15']} ${styles['pt-15']} ${styles['flex-center']}`}>
@@ -110,6 +115,6 @@ const Review = ({ rev, deleteReview, submitUserReview }) => {
       </div>
     </div>
   );
-}
+};
 
 export default Review;
