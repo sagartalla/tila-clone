@@ -26,7 +26,7 @@ const MiniWishlist = (props) => {
     addToCart,
     notifyMe,
   } = props;
-  const { WISH_LIST_PAGE, HEADER_PAGE, PDP_PAGE } = languageDefinations();
+  const { WISH_LIST_PAGE, HEADER_PAGE, PDP_PAGE, CART_PAGE } = languageDefinations();
   return (
     <div className={`${styles['mini-wishlist']}`}>
       <div className={`${styles['wishlist-container']} ${styles['border-t']}`}>
@@ -105,7 +105,7 @@ const MiniWishlist = (props) => {
         </Col>
         :
         <h5 className={`${styles['mt-0']} ${styles['pb-15']} ${styles['pl-15']} ${styles['fontW600']} ${styles['thick-gry-clr']} ${styles['mb-0']}`}>
-            <span>{HEADER_PAGE.NO_ITEMS}</span>
+            <span>{props.wishListCount} {CART_PAGE.ITEMS_IN_YOUR_WISHLIST}</span>
           </h5>}
     </div>
   );

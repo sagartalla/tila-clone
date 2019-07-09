@@ -241,7 +241,6 @@ class Login extends Component {
     const {
       activeObj,
     } = this.props;
-    console.log('entered');
     return (
       <Modal className={activeObj && activeObj.activePage && activeObj.activePage === 'thank_you' ? `react-router-modal__modal ${styles['background-transparent']} ${styles['border-none']} ${styles['p-10']}` : `react-router-modal__modal ${styles['login-reg-modal']} ${styles['p-10']}`} onBackdropClick={this.onBackdropClick}>
         {activeObj && activeObj.activePage && activeObj.activePage === 'thank_you' ?

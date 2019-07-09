@@ -70,8 +70,6 @@ class SignIn extends Component {
   render() {
     const { props } = this;
     const { showTerms, showPrivacy, showFP } = this.state;
-    console.log('prodddps', props.userInfoData);
-    console.log('sdfghjk', props.personalUserInfo);
     return (
       <div className={`${styles.box} ${styles['mb-20']} ${styles.relative} ${styles['payment-signup']}`}>
         <SVGComponent clsName={`${styles.profile} ${props.configJson.done ? 'done' : ''} ${props.configJson.progress ? 'payment-active' : ''}`} src="icons/profile/profile" />
