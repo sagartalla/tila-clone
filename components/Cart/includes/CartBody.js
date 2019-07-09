@@ -43,12 +43,8 @@ const CartBody = ({
   const flag = data && items && items.length;
   const cnt = flag > 0 ? items.length : 0;
   const { CART_PAGE } = languageDefinations();
-
   return (
     <>
-    {
-      isLoading ? cartPlaceHolder : null
-    }
     <div className={styles['cart-container']}>
       {
         showBlocker ? <Blocker /> : ''
