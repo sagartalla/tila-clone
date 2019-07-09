@@ -110,7 +110,7 @@ const Fashion = () => (
               <div className={`new-brands ${styles['pb-10']}`}>
                 <img src="/static/img/landing-page-fashion/what-new3.jpg" className="img-responsive" />
                 <div className={`${styles['bg-white']} chinos-part-inn`}>
-                  <h6 className={`${styles['m-0']} ${styles['fs-14']} ${styles['fontW600']}`}>Kids Wear</h6>
+                  <h6 className={`${styles['m-0']} ${styles['fs-14']} ${styles['fontW600']}`}>Kids' Wear</h6>
                   <span className="disc">Up to 50% Off</span>
                 </div>
               </div>
