@@ -91,6 +91,10 @@
   display: inline-flex;
   padding: 6px 15px;
   color: #000;
+  text-transform: uppercase;
+}
+.fs-13 {
+  font-size: 13px;
 }
 .img-responsive {
   max-width: 100%;
