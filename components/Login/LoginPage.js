@@ -113,7 +113,7 @@ class LoginPage extends React.Component {
                       <a className={`${styles.flex} ${styles['ml-15']}`}>
                         <SVGComponent clsName={`${styles['bg-GOOGLE-icon']} ${styles['mr-10']}`} src="icons/social-icons/bg-instagram" />
                       </a>
-                      Instagram
+                      {LOGIN_PAGE.INSTAGRAM}
                     </div>
                   </NoSSR>
                 )}
@@ -152,7 +152,7 @@ class LoginPage extends React.Component {
             </Col>
           </Row>
         </div>
-        <span className={`${styles['m-20']} ${styles['mt-0']} ${styles['t-c']} ${styles['fs-12']} ${styles['register-policy-gray']}`}>{LOGIN_PAGE.BY_SIGNUP_I_AGREE_TO_TERMS } <span className={`${styles['text-blue']}`}><a href="/SAU/en/policy/tc" target="_blank">{LOGIN_PAGE.T_AND_C}</a>, <a href="/SAU/en/policy/pp" target="_blank">{LOGIN_PAGE.PRIVACY}</a> {LOGIN_PAGE.AND} <a href="/SAU/en/policy/pp" target="_blank">{LOGIN_PAGE.COOKIE_POLICY}</a></span></span>
+        <span className={`${styles['m-20']} ${styles['mt-0']} ${styles['t-c']} ${styles['fs-12']} ${styles['register-policy-gray']}`}>{LOGIN_PAGE.BY_SIGNUP_I_AGREE_TO_TERMS } <span className={`${styles['text-blue']} ${styles.fontW600}`}><a href="/SAU/en/policy/tc" target="_blank">{LOGIN_PAGE.T_AND_C}</a>, <a href="/SAU/en/policy/pp" target="_blank">{LOGIN_PAGE.PRIVACY}</a> {LOGIN_PAGE.AND} <a href="/SAU/en/policy/pp" target="_blank">{LOGIN_PAGE.COOKIE_POLICY}</a></span></span>
       </div>
     );
   }

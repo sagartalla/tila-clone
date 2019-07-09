@@ -191,8 +191,6 @@ class ActionBar extends Component {
   }
 
   render() {
-    // const { showLoginPage } = this.state;
-    console.log('showLoginPage', this.props.isLoggedIn);
     const {
       isLoggedIn, cartResults, userInfo, wishListCount, getEditDetails, hideCountry, hideLogin, showLoginPage
     } = this.props;
@@ -372,6 +370,7 @@ const mapDispatchToProps = dispatch => bindActionCreators(
     v2CurrentFlow: actionCreators.v2CurrentFlow,
     v2NextPage: actionCreators.v2NextPage,
     getWishlistData: wishListActionCreators.getWishlist,
+    getUserInfoData: actionCreators.getUserInfoData,
 
   },
   dispatch,

@@ -559,9 +559,9 @@ export const AR_KEYWORDS = {
     MATCHING_ITEM: 'مطابقة المنتجات',
     MATCHING_PRODUCTS: 'مطابقة المنتجات',
     HELLO: 'هلا فيك',
-    NO_ITEMS: '0 items in wishlist',
     MORE_ITEMS: 'more items',
     GO_TO_WISHLIST: 'Go To Wishlist',
+    MORE_ITEM: 'more item',    
   },
   LOGIN_PAGE: {
     SIGN_UP: 'انشاء حساب',
@@ -631,6 +631,7 @@ export const AR_KEYWORDS = {
     GLAD_TO_HAVE_YOU_HERE: 'سعيدين بوجودك معانا.',
     PLEASE_PROVIDE_EMAIL_ID_FOR_REGISTRATION: 'من فضلك اكتب ايميلك عشان تستلم تأكيد تسجيلك ',
     INSTAGRAM: 'Instagram',
+    EDIT: 'EDIT',    
   },
   ORDER_PAGE: {
     LOADING: 'تحميل',
