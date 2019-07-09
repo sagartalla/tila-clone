@@ -2,7 +2,7 @@ import React from 'react';
 import Slider from 'react-slick';
 
 import lang from '../../../utils/language';
-
+import DT from './includes/DT';
 import main_en from '../../../layout/main/main_en.styl';
 import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from './pageData_en.styl';
@@ -118,6 +118,7 @@ class PageData extends React.Component {
       case 'BT2':
         return (
           <div className={`${styles['mb-40']} top-banner-slider`}>
+            <h3>{content.data[lang].title}</h3>
             <Slider
               dots
               autoplay
@@ -132,7 +133,7 @@ class PageData extends React.Component {
                   <div key={i.display_name}>
                     <a href={i.link}>
                       <div className="item" key={i.display_name}>
-                        <img src={i.img} />
+                        <img src={i.img} width={i.config.width} height={i.config.height} alt={i.display_name} />
                       </div>
                     </a>
                   </div>
@@ -144,7 +145,7 @@ class PageData extends React.Component {
       case 'BT9':
         return (
           <div className={styles['ff-t-i']}>
-            <div className={styles.e}>
+            <div className={`${styles.e} ${styles['mr-5']}`}>
               <span className={`${styles.title} ${styles['fs-20']}`}>TOP IN ELECTRONICS</span>
               <Slider
                 asNavFor={sliderTIE}
@@ -163,7 +164,7 @@ class PageData extends React.Component {
                 ))}
               </Slider>
             </div>
-            <div className={styles['h-a-l']}>
+            <div className={`${styles['h-a-l']} ${styles['ml-5']}`}>
               <span className={`${styles.title} ${styles['fs-20']}`}>TOP IN FASHION | LIFESTYLE</span>
               <Slider
                 asNavFor={sliderHAL}
@@ -186,13 +187,17 @@ class PageData extends React.Component {
         );
       case 'DT1':
         return (
-          <div>APBD</div>
+          <DT content={content} />
         );
       default: return null;
     }
   }
 
   render() {
+    const { content } = this.props;
+
+    if (!content.visible) return null;
+
     return (
       <div>{this.getContent()}</div>
     );

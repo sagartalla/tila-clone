@@ -16,7 +16,7 @@ class FirstTimeBuyer extends Base {
     store, isServer,
   }) {
     await Promise.all([
-      store.dispatch(LandingactionCreators.getPage({ page: 'propertyPage', id: 'first_time_buyer', published: false })),
+      store.dispatch(LandingactionCreators.getPage({ page: 'propertyPage', id: 'first_time_buyer' })),
     ]);
     return { isServer };
   }
