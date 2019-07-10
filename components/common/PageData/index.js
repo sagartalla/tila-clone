@@ -1,13 +1,14 @@
 import React from 'react';
 import Slider from 'react-slick';
 
-import lang from '../../../utils/language';
 import DT from './includes/DT';
+import { Row, Col } from 'react-bootstrap';
+import lang from '../../../utils/language';
+
 import main_en from '../../../layout/main/main_en.styl';
 import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from './pageData_en.styl';
 import styles_ar from './pageData_ar.styl';
-
 
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
@@ -113,7 +114,6 @@ class PageData extends React.Component {
 
   getContent = () => {
     const { content } = this.props;
-    console.log('dfeced', content);
     switch (content.layout_id) {
       case 'BT2':
         return (
@@ -128,17 +128,15 @@ class PageData extends React.Component {
               className={styles['ht-100per']}
               customPaging={i => <span className={`${styles['fs-10']}`}>{content.data[lang].banners[i].display_name}</span>}
             >
-              {
-                content.data[lang].banners.map(i => (
-                  <div key={i.display_name}>
-                    <a href={i.link}>
-                      <div className="item" key={i.display_name}>
-                        <img src={i.img} width={i.config.width} height={i.config.height} alt={i.display_name} />
-                      </div>
-                    </a>
-                  </div>
-                ))
-              }
+              {content.data[lang].banners.map(i => (
+                <div key={i.display_name}>
+                  <a href={i.link}>
+                    <div className="item" key={i.display_name}>
+                      <img src={i.img} width={i.config.width} height={i.config.height} alt={i.display_name} />
+                    </div>
+                  </a>
+                </div>
+              ))}
             </Slider>
           </div>
         );
@@ -185,6 +183,22 @@ class PageData extends React.Component {
             </div>
           </div>
         );
+      case 'BT7': {
+        const { banners, title } = content.data[lang];
+        return (
+          <Row>
+            {title && <h2>{title}</h2>}
+            {banners.length > 0 &&
+              banners.map(banner => (
+                <Col xs={12 / banners.length} md={12 / banners.length} sm={12 / banners.length}>
+                  <a href={banner.link} target="_blank">
+                    <img src={banner.img} width={banner.config.width} height={banner.config.height} alt={banner.display_name} />
+                  </a>
+                </Col>
+              ))}
+          </Row>
+        );
+      }
       case 'DT1':
         return (
           <DT content={content} />
