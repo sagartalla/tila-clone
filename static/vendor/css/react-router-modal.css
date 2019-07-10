@@ -58,3 +58,16 @@
     width: 730px !important;
   }
 }
+
+.test-class-name {
+  width: 650px;
+  overflow: scroll;
+  height: 100vh;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(23%, -50%);
+  background-color: white;
+  border-radius: 5px;
+  border: 1px solid #777;
+}

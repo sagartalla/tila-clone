@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import Cookie from 'universal-cookie';
+import { Modal } from 'react-router-modal';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { selectors as productSelectors, actionCreators as productActionCreators } from '../../../store/product';
@@ -118,6 +119,7 @@ class ShippingAddress extends Component {
       isEditAddr: false,
       showCitiesData: false,
       showCountriesData: false,
+      slider: false,
     };
     this.inputOnChange = this.inputOnChange.bind(this);
     this.saveBtnClickHandler = this.saveBtnClickHandler.bind(this);
@@ -335,7 +337,7 @@ class ShippingAddress extends Component {
     this.setState({
       showNewAddr: key === 'pdp' ? true : this.state.showNewAddr,
       validation: this.validations.valid(),
-      showSlider: true,
+      slider: true,
     });
   }
 
@@ -368,13 +370,27 @@ class ShippingAddress extends Component {
     this.props.selectDeliverToAddress(addId)
   }
 
+  openSlider = () => {
+    document.getElementsByTagName('BODY')[0].style.overflow = 'hidden';
+    this.setState({
+      slider: true,
+    });
+  }
+
+  closeSlider = () => {
+    document.getElementsByTagName('BODY')[0].style.overflow = 'auto';
+    this.setState({
+      slider: false,
+    });
+  }
+
   render() {
     // if standalone is true, it is stand alone address page else from payment page or any other pages.
     const {
       results, standalone, handleShippingAddressContinue, miniAddress, isPdp, getAllCities, countriesData, cartResults, showNonShippable, isPaymentPage, selectedAddress
     } = this.props;
     const {
-      showNewAddr, addr, showCitiesData, showCountriesData, validation, showSlider, isEditAddr,
+      showNewAddr, addr, showCitiesData, showCountriesData, validation, showSlider, isEditAddr, slider,
     } = this.state;
     const { DELIVERY_ADDR_PAGE } = languageDefinations();
     return (
@@ -421,42 +437,36 @@ class ShippingAddress extends Component {
                     </div>
                     :
                     <>
-                      <div onClick={this.closeSlider} className={showSlider ? `${styles['modalContainer']} ${styles['showDiv']}` : `${styles['modalContainer']} ${styles['hideDiv']}`}>
-                        <div className={`${styles['disabled']}`}>
-                        </div>
-                      </div>
-                      <div className={`${styles['overflow-y-auto']} ${showSlider ? `${styles['openModal']}` : `${styles['closeModal']}`}`}>
-                        <div className={styles['p-40']}>
-                          <h4 className={`${styles['flx-spacebw-alignc']} ${styles['m-0']} ${styles['mb-20']}`}>
-                            <span>{DELIVERY_ADDR_PAGE.ADD_NEW_ADDR_HEAD}</span>
-                            <a onClick={this.closeSlider} className={`${styles['fs-22']} ${styles['black-color']}`}>X</a>
-                          </h4>
-                          <div>
-                            <AddressNew
-                              hideTitle
-                              inputOnChange={this.inputOnChange}
-                              saveBtnClickHandler={this.saveBtnClickHandler}
-                              data={addr}
-                              showNewAddr={showNewAddr}
-                              homeButton={this.homeButton}
-                              getDataFromMap={this.getDataFromMap}
-                              setAsDefaultLocation={this.setAsDefaultLocation}
-                              resetAddAdrressForm={this.resetAddAdrressForm}
-                              addAddressForm={this.addAddressForm}
-                              addrTypeHandler={this.addrTypeHandler}
-                              showAddAdrressForm={this.showAddAdrressForm}
-                              getAllCities={getAllCities}
-                              countriesData={countriesData}
-                              validation={validation}
-                              selectCityFromSuggesstions={this.selectCityFromSuggesstions}
-                              showCitiesData={showCitiesData}
-                              showCountriesData={showCountriesData}
-                              selectCountry={this.selectCountry}
-                              isEditAddr={isEditAddr}
-                            />
-                          </div>
-                        </div>
-                      </div>
+                      {slider &&
+                      <Modal
+                        label={DELIVERY_ADDR_PAGE.ADD_NEW_ADDR_HEAD}
+                        isOpen={this.state.slider}
+                        onBackdropClick={this.closeSlider}
+                        className="test-class-name"
+                      >
+                      <AddressNew
+                          hideTitle
+                          inputOnChange={this.inputOnChange}
+                          saveBtnClickHandler={this.saveBtnClickHandler}
+                          data={addr}
+                          showNewAddr={showNewAddr}
+                          homeButton={this.homeButton}
+                          getDataFromMap={this.getDataFromMap}
+                          setAsDefaultLocation={this.setAsDefaultLocation}
+                          resetAddAdrressForm={this.resetAddAdrressForm}
+                          addAddressForm={this.addAddressForm}
+                          addrTypeHandler={this.addrTypeHandler}
+                          showAddAdrressForm={this.showAddAdrressForm}
+                          getAllCities={getAllCities}
+                          countriesData={countriesData}
+                          validation={validation}
+                          selectCityFromSuggesstions={this.selectCityFromSuggesstions}
+                          showCitiesData={showCitiesData}
+                          showCountriesData={showCountriesData}
+                          selectCountry={this.selectCountry}
+                          isEditAddr={isEditAddr}
+                        />
+                      </Modal>}
                     </>
                   : ''
               }
