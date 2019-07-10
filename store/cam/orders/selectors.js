@@ -48,6 +48,7 @@ const getOrdersData = (store) => {
           order_item_type: i.order_item_type,
           order_status: i.status,
           refunds: i.refunds,
+          gift_info: i.gift_info,
           variantAttributes: i.variant_info && i.variant_info.variant_details && i.variant_info.variant_details.attribute_map ?
             Object.values(i.variant_info.variant_details.attribute_map).filter(attr => attr.visible) : [],
         })),

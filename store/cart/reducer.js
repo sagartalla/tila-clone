@@ -3,7 +3,7 @@ import { actions } from './actions';
 
 const initialState = {
   ui: {
-    loading: false,
+    loading: true,
     btnLoading: false,
   },
   data: {

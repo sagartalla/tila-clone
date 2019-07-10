@@ -114,7 +114,7 @@ class Payments extends React.Component {
     // TODO move it to base component later after discussion on login.
     this.props.getLoginInfo();
     this.props.getCartResults();
-    this.props.getUserInfoData({initiateEmailVerification: this.props.isVerified ? false : true });
+    this.props.getUserInfoData({initiateEmailVerification: false });
     }
 
   componentWillReceiveProps(nextProps) {

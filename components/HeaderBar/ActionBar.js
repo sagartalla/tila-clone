@@ -353,6 +353,7 @@ const mapStateToProps = store => ({
   activeObj: selectors.getActive(store),
   showLoginPage: selectors.showLogin(store),
   userData: selectors.userInfo(store),
+  showUserInfo: selectors.showUserInfo(store),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(
@@ -373,7 +374,6 @@ const mapDispatchToProps = dispatch => bindActionCreators(
     v2CurrentFlow: actionCreators.v2CurrentFlow,
     v2NextPage: actionCreators.v2NextPage,
     getWishlistData: wishListActionCreators.getWishlist,
-    getUserInfoData: actionCreators.getUserInfoData,
 
   },
   dispatch,
