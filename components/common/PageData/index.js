@@ -187,12 +187,13 @@ class PageData extends React.Component {
         const { banners, title } = content.data[lang];
         return (
           <Row>
-            {title && <h2>{title}</h2>}
+            {/* {title &&
+              <Col xs={12} md={12} sm={12}><h2 className={`${styles['fs-20']} ${styles.fontW600} ${styles['text-uppercase']} ${styles['mb-5']} ${styles['m-0']}`}>{title}</h2></Col>} */}
             {banners.length > 0 &&
               banners.map(banner => (
                 <Col xs={12 / banners.length} md={12 / banners.length} sm={12 / banners.length}>
                   <a href={banner.link} target="_blank">
-                    <img src={banner.img} width={banner.config.width} height={banner.config.height} alt={banner.display_name} />
+                    <img src={banner.img} className={styles['border-radius4']} width={banner.config.width} height={banner.config.height} alt={banner.display_name} />
                   </a>
                 </Col>
               ))}
@@ -212,9 +213,7 @@ class PageData extends React.Component {
 
     if (!content.visible) return null;
 
-    return (
-      <div>{this.getContent()}</div>
-    );
+    return this.getContent();
   }
 }
 

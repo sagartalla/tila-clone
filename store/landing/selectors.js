@@ -2,6 +2,13 @@ import _ from 'lodash';
 
 const getPage = store => store.landingReducer.data;
 
+const getCartStatus = (store, listingId) => {
+  const selectedCartItem = _.find(store.cartReducer.data.items, ({ listing_id }) => {
+    return listingId === listing_id;
+  });
+  return !!selectedCartItem;
+};
+
 const getListings = (store) => {
   return store.landingReducer.listings.map((product) => {
     const { product_details, listing_info } = product;
@@ -20,11 +27,15 @@ const getListings = (store) => {
       image: cached_product_details.media.gallery_media[0].url,
       brand: catalog_details && catalog_details.attribute_map.brand.attribute_values[0].value,
       name: cached_product_details.attribute_map.calculated_display_name.attribute_values[0].value,
+      isAddedToCart: getCartStatus(store, listingId),
     };
   });
 };
 
+const getIsListingLoading = store => store.landingReducer.ui.isListingLoading;
+
 export {
   getPage,
   getListings,
+  getIsListingLoading,
 };

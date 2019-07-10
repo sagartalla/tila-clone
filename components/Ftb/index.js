@@ -26,7 +26,7 @@ class FTB extends React.Component {
     return (
       <div>
         <HeaderBar />
-        <div className={`${styles['pl-20']} ${styles['pr-20']}`}>
+        <div className={`${styles['pl-20']} ${styles['pr-20']} container`}>
           {pageData && pageData.page_content.length > 0 &&
             pageData.page_content.map(content => <PageData key={content} content={content} />)}
         </div>

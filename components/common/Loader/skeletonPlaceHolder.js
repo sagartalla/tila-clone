@@ -283,3 +283,24 @@ export const couponPlaceHolder = (
     </div>
   </div>
 );
+
+export const ftbSkeletonLoader = (
+  <div className={`${styles['grid-cont']} ${styles['flex-wrp']} ${styles.flx} result-box`} >
+    {[0, 1, 2, 3].map(() => [0, 1, 2, 3].map((el, i) => (
+      <div key={`rect_${i}`}>
+        <Rectangle />
+        <Input
+          style={{
+            marginTop: 0, marginBottom: 5, marginLeft: 5, height: '2em', width: '86%',
+          }}
+        />
+        <Input
+          style={{
+            marginTop: 0, marginBottom: 35, marginLeft: 5, width: '75%',
+          }}
+        />
+      </div>
+        )))
+    }
+  </div>
+);
