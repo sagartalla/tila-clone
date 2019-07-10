@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { searchPlaceHolder, productPlaceHolder, couponPlaceHolder } from './skeletonPlaceHolder';
+import { searchPlaceHolder, productPlaceHolder, couponPlaceHolder, cartPlaceHolder, camProfileHolder } from './skeletonPlaceHolder';
 import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
