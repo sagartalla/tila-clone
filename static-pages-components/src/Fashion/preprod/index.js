@@ -91,26 +91,37 @@ const Fashion = () => (
       {/* what new start */}
       <div className="what-new-part">
         <h3 className={`${styles['flex-center']} what-title ${styles['justify-center']} ${styles['relative']} lobster-family ${styles['pt-20']} ${styles['pb-20']}`}><span className={`${styles['fs-36']} ${styles['lable']} ${styles['pl-10']} ${styles['pr-10']}`}>Whats New</span> <span className={`${styles['absolute']} border`}></span></h3>
-        <div>
-          <Col md={6} className={`${styles['pl-0']} ${styles['pr-10']}`}>
-            <Col md={8} className={`${styles['pl-0']} ${styles['pr-10']}`}>
+        <div className={styles['flex']}>
+          <Col md={6} className={`${styles['pl-0']} ${styles['pr-0']} ${styles['flex']}`}>
+            {/* <Col md={8} className={`${styles['pl-0']} ${styles['pr-10']}`}>
               <a href={`/SAU/${lang}/srp?search=rainware&isListed=false`}>
                 <img src="/static/img/landing-page-fashion/what-new.jpg" className="img-responsive" />
               </a>
+            </Col> */}
+            <Col md={8} className={`${styles['p-0']} ${styles['mr-10']} ${styles['bg-white']}`}>
+              <div className="chinos-part">
+                <a href={`/SAU/${lang}/srp?search=rainware&isListed=false`}>
+                  <img src="/static/img/landing-page-fashion/rainwear.png" className="img-responsive" />
+                </a>
+                <div className={`${styles['bg-white']} chinos-part-inn what-new-inn`}>
+                  <h6 className={`${styles['m-0']} ${styles['fs-14']} ${styles['fontW600']}`}>Rainwear For All Ages</h6>
+                  <span className="disc">Up to 50% Off</span>
+                </div>
+              </div>
             </Col>
-            <Col md={4} className={`${styles['pl-0']} ${styles['pr-10']}`}>
+            <Col md={4} className={`${styles['p-0']} ${styles['mr-10']} ${styles['bg-white']}`}>
               <div className="chinos-part">
                 <a href={`/SAU/${lang}/srp?search=Chinos&language=en&isListed=false`}>
-                  <img src="/static/img/landing-page-fashion/what-new1.jpg" className="img-responsive" />
+                  <img src="/static/img/landing-page-fashion/what-new1.png" className="img-responsive" />
                 </a>
-                <div className={`${styles['bg-white']} chinos-part-inn`}>
+                <div className={`${styles['bg-white']} chinos-part-inn what-new-inn`}>
                   <h6 className={`${styles['m-0']} ${styles['fs-14']} ${styles['fontW600']}`}>Chinos</h6>
                   <span className="disc">Up to 50% Off</span>
                 </div>
               </div>
             </Col>
           </Col>
-          <Col md={6} className={`${styles['pl-0']} ${styles['pr-10']}`}>
+          <Col md={6} className={`${styles['p-0']}`}>
             <Col md={4} className={`${styles['pl-0']} ${styles['pr-10']}`}>
               <div className={`new-brands ${styles['pb-10']}`}>
                 <a href={`/SAU/${lang}/srp/sunglasses?categoryTree=true&isListed=false&sid=892,2439`}>
@@ -145,7 +156,7 @@ const Fashion = () => (
               </div>
             </Col>
             <Col md={4} className={`${styles['pl-0']} ${styles['pr-10']}`}>
-              <div className={`new-brands ${styles['pb-10']}`}>
+              <div className={`new-brands ${styles['pb-10']} ${styles['bg-white']}`}>
                 <a href={`/SAU/${lang}/srp?search=Jewellery&isListed=false`}>
                   <img src="/static/img/landing-page-fashion/what-new5.jpg" className="img-responsive" />
                 </a>
@@ -156,7 +167,7 @@ const Fashion = () => (
               </div>
             </Col>
             <Col md={4} className={`${styles['pl-0']} ${styles['pr-10']}`}>
-              <div className={`new-brands ${styles['pb-10']}`}>
+              <div className={`new-brands ${styles['pb-10']} ${styles['bg-white']}`}>
                 <a href={`/SAU/${lang}/srp?search=Handbags&isListed=false`}>
                   <img src="/static/img/landing-page-fashion/what-new6.jpg" className="img-responsive" />
                 </a>
@@ -167,10 +178,14 @@ const Fashion = () => (
               </div>
             </Col>
             <Col md={4} className={`${styles['pl-0']} ${styles['pr-10']}`}>
-              <div>
+              <div className={`new-brands ${styles['pb-10']} ${styles['bg-white']}`}>
                 <a href={`/SAU/${lang}/srp?search=watch&language=en&isListed=false`}>
-                  <img src="/static/img/landing-page-fashion/what-new7.jpg" className="img-responsive" />
+                  <img src="/static/img/landing-page-fashion/bitmap.png" className="img-responsive" />
                 </a>
+                <div className={`${styles['bg-white']} chinos-part-inn`}>
+                  <h6 className={`${styles['m-0']} ${styles['fs-13']} ${styles['fontW600']}`}>Men's & Womens Watches </h6>
+                  <span className="disc">Up to 50% Off</span>
+                </div>
               </div>
             </Col>
           </Col>
@@ -179,34 +194,50 @@ const Fashion = () => (
       {/* getting ready to office */}
       <div className={`getting-ready-part ${styles['clear-b']}`}>
         <h3 className={`${styles['flex-center']} what-title ${styles['justify-center']} ${styles['relative']} lobster-family ${styles['pt-40']} ${styles['pb-20']}`}><span className={`${styles['fs-36']} ${styles['lable']} ${styles['pl-10']} ${styles['pr-10']}`}>Getting Ready to Office</span> <span className={`${styles['absolute']} border`}></span></h3>
-        <div>
-          <Col md={6} className={`${styles['pl-0']} ${styles['pr-10']}`}>
-            <Col md={8} className={`${styles['pl-0']} ${styles['pr-10']}`}>
+        <div className={styles['flex']}>
+          <Col md={6} className={`${styles['pl-0']} ${styles['pr-0']} ${styles['flex']}`}>
+            <Col md={8} className={`${styles['p-0']} ${styles['mr-10']} ${styles['bg-white']}`}>
               <a href={`/SAU/${lang}/srp?search=men%20formal%20shirts&language=en&isListed=false`}>
                 <img src="/static/img/landing-page-fashion/getting-img.jpg" className="img-responsive" />
               </a>
+              <div className={`${styles['bg-white']} chinos-part-inn`}>
+                <h6 className={`${styles['m-0']} ${styles['fs-14']} ${styles['fontW600']}`}>Mens Formal Shirts</h6>
+                <span className="disc">Up to 50% Off</span>
+              </div>
             </Col>
             <Col md={4} className={`${styles['pl-0']} ${styles['pr-10']}`}>
-              <div className={styles['pb-10']}>
+              <div className={`${styles['mb-10']} ${styles['bg-white']}`}>
                 <a href={`/SAU/${lang}/srp?search=mens%20trousers&language=en&isListed=false`}>
                   <img src="/static/img/landing-page-fashion/getting-img2.jpg" className="img-responsive" />
                 </a>
+                <div className={`${styles['bg-white']} chinos-part-inn`}>
+                  <h6 className={`${styles['m-0']} ${styles['fs-14']} ${styles['fontW600']}`}>Mens Trousrs</h6>
+                  <span className="disc">Up to 50% Off</span>
+                </div>
               </div>
-              <div>
+              <div className={`${styles['pb-10']} ${styles['bg-white']}`}>
                 <a href={`/SAU/${lang}/srp/srp?search=shoe&language=en&isListed=false`}>
                   <img src="/static/img/landing-page-fashion/getting-img3.jpg" className="img-responsive" />
                 </a>
+                <div className={`${styles['bg-white']} chinos-part-inn`}>
+                  <h6 className={`${styles['m-0']} ${styles['fs-14']} ${styles['fontW600']}`}>Mens Formal Shoes</h6>
+                  <span className="disc">Up to 50% Off</span>
+                </div>
               </div>
             </Col>
           </Col>
-          <Col md={6} className={`${styles['pl-0']} ${styles['pr-10']}`}>
-            <Col md={8} className={`${styles['pl-0']} ${styles['pr-10']}`}>
+          <Col md={6} className={`${styles['pl-0']} ${styles['pr-0']} ${styles['flex']}`}>
+            <Col md={8} className={`${styles['p-0']} ${styles['mr-10']} ${styles['bg-white']}`}>
               <a href={`/SAU/${lang}/srp/srp?search=womens%20tops&language=en&isListed=false`}>
                 <img src="/static/img/landing-page-fashion/getting-img4.jpg" className="img-responsive" />
               </a>
+              <div className={`${styles['bg-white']} chinos-part-inn`}>
+                <h6 className={`${styles['m-0']} ${styles['fs-14']} ${styles['fontW600']}`}>Women's Formal Tops</h6>
+                <span className="disc">Up to 50% Off</span>
+              </div>
             </Col>
             <Col md={4} className={`${styles['pl-0']} ${styles['pr-10']}`}>
-              <div className={styles['pb-10']}>
+              <div className={`${styles['mb-10']} ${styles['bg-white']}`}>
                 <a href={`/SAU/${lang}/srp/footwear?categoryTree=true&isListed=false&sid=892,909,921`}>
                   <img src="/static/img/landing-page-fashion/getting-img5.jpg" className="img-responsive" />
                 </a>
@@ -215,7 +246,7 @@ const Fashion = () => (
                   <span className="disc">Up to 50% Off</span>
                 </div>
               </div>
-              <div>
+              <div className={`${styles['pb-10']} ${styles['bg-white']}`}>
                 <a href={`/SAU/${lang}/srp?search=Handbags&isListed=false`}>
                   <img src="/static/img/landing-page-fashion/what-new6.jpg" className="img-responsive" />
                 </a>
