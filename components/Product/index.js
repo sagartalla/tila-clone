@@ -135,10 +135,11 @@ const getProductComponent = (isPreview, taskCode) => {
     }
 
     notify() {
-      const { productData, userDetails, notifyMe } = this.props;
+      const { productData, userDetails, notifyMe, variantId } = this.props;
       let { emailErr, notifyEmail } = this.state;
       const params = {
         product_id: productData.product_id,
+        variant_id: variantId,
       };
       const emailReg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       if (!userDetails.isLoggedIn) {

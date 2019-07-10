@@ -121,10 +121,11 @@ class Product extends Component {
   notify(e) {
     e.stopPropagation();
     e.preventDefault();
-    const { userDetails, productId, notifyMe } = this.props;
+    const { userDetails, productId, notifyMe, variantId } = this.props;
     if (userDetails.isLoggedIn) {
       notifyMe({
         product_id: productId,
+        variant_id: variantId,
         email: userDetails.userCreds && userDetails.userCreds.username,
       });
     } else {
@@ -473,6 +474,7 @@ class Product extends Component {
             <NotifyMe
               pId={productId}
               closeNotify={this.closeNotify}
+              variantId={variantId}
             />
           </Modal.Body>
         </Modal>
