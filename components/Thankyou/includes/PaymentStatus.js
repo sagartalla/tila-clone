@@ -40,7 +40,7 @@ const PaymentStatus = props => {
             {
               props.status == "SUCCESSFUL" ?
                 <a href={`/${country}/${language}/cam/orders`} className={styles['mb-20']}>
-                  <button className={`${styles['fp-btn']} ${styles['fp-btn-default']}`}>{THANK_YOU_PAGE.TRACK_ORDERS}</button>
+                  <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['left-radius']}`}>{THANK_YOU_PAGE.TRACK_ORDERS}</button>
                 </a>
                 : null
             }

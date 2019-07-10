@@ -110,8 +110,8 @@ class LoginPage extends React.Component {
                       {LOGIN_PAGE.GOOGLE}
                     </div>
                     <div onClick={handleSocialLogin('instagram')} className={`${styles['flex-center']} ${styles.pointer} ${styles['border-lg']} ${styles['border-radius4']} ${styles['mb-5']} ${styles['p-5']}`}>
-                      <a className={`${styles.flex} ${styles['ml-15']}`}>
-                        <SVGComponent clsName={`${styles['bg-GOOGLE-icon']} ${styles['mr-10']}`} src="icons/social-icons/bg-instagram" />
+                      <a className={`${styles.flex} ${styles['ml-15']} ${styles['pr-10']}`}>
+                        <img clsName={`${styles['bg-GOOGLE-icon']} ${styles['mr-10']}`} src="/static/img/bg-img/instagram.png" />
                       </a>
                       {LOGIN_PAGE.INSTAGRAM}
                     </div>

@@ -50,12 +50,15 @@ const MiniWishlist = (props) => {
                   </Col>
                   <Col md={10} sm={10} xs={10} className={`${styles['pr-0']} ${styles['wishlist-details-labels']} ${styles.flex} ${styles['justify-between']} ${styles['flex-colum']}`}>
                     <div className={`${styles['flx-space-bw']}`}>
-                      <h6 className={`${styles['m-0']} ${styles['wishlist-details-name']}`}>
+                      <h6 className={`${styles['m-0']} ${styles['wishlist-details-name']} ${styles.flex}`}>
                         <Link route={`/${country}/${language}/product?productId=${product_id}${variant_id ? `&variantId=${variant_id}` : ''}&catalogId=${catalog_id}&itemType=${itemType}`}>
                           <a className={`${styles.width100} ${styles['ht-100P']} ${styles['fs-12']} ${styles['light-gry-clr']}`}>
                             {name}
                           </a>
                         </Link>
+                        <span id={wishlist_id} className={`${styles.flex} ${styles.pointer}`} onClick={props.deleteItem}>
+                          <SVGComponent clsName={`${styles['delete-icon']}`} src="icons/delete-icon/delete-icon" />
+                        </span>
                       </h6>
                     </div>
                     <div>
@@ -80,9 +83,6 @@ const MiniWishlist = (props) => {
                         >
                           {WISH_LIST_PAGE.NOTIFY_ME_BTN}
                         </button>}
-                      <span id={wishlist_id} className={`${styles.flex} ${styles.pointer}`} onClick={props.deleteItem}>
-                        <SVGComponent clsName={`${styles['delete-icon']}`} src="icons/delete-icon/delete-icon" />
-                      </span>
                     </div>
                   </Col>
                 </div>

@@ -140,29 +140,41 @@ export const productPlaceHolder = (
       >
         {
           [0, 1, 2].map((el, i) => (
-            <Input
-              key={`rect_${i}`}
-              style={{
-                    height: '3em', width: '50%', marginRight: '20px',
-                }}
-            />
+            <div style={{
+                height: '3em', width: '50%', padding: '10px', backgroundColor: '#fff', marginRight: '20px',
+            }}
+            >
+              <Input
+                key={`rect_${i}`}
+                style={{
+                      height: '1.5em', width: '100%', backgroundColor: '#f7f5f5',
+                  }}
+              />
+            </div>
               ))
           }
       </div>
-      <Rectangle
-        style={{
-                  width: '100%', height: '85%',
-                  }}
-      />
+      <div style={{width: '100%', height: '85%', backgroundColor: '#fff', padding: '20px'}}>
+        <Rectangle
+          style={{
+                    width: '100%', height: '100%', backgroundColor: '#f7f5f5',
+                    }}
+        />
+      </div>
       <div className={`${styles.flx} ${styles['align-center']}`}>
         {
           [0, 1, 2].map((el, i) => (
-            <Rectangle
-              key={`rect_${i}`}
-              style={{
-                  width: 400, marginBottom: 20, marginRight: 20, height: 76, marginTop: 20,
-             }}
-            />
+            <div style={{
+              width: 400, marginBottom: 20, marginRight: 20, height: 76, marginTop: 20, padding: 10, backgroundColor: '#fff',
+            }}
+            >
+              <Rectangle
+                key={`rect_${i}`}
+                style={{
+                    width: '100%', height: '100%', backgroundColor: '#f7f5f5',
+              }}
+              />
+            </div>
               ))
           }
       </div>
@@ -174,12 +186,17 @@ export const productPlaceHolder = (
       >
         {
           [0, 1, 2].map((el, i) => (
-            <Rectangle
-              key={`rect_${i}`}
-              style={{
-                  width: '400px', height: '200px',
-                  }}
-            />
+            <div style={{
+              width: 400, height: '200px', backgroundColor: '#fff', padding: '20px',
+            }}
+            >
+              <Rectangle
+                key={`rect_${i}`}
+                style={{
+                    width: '360px', height: '160px', backgroundColor: '#f7f5f5',
+                    }}
+              />
+            </div>
               ))
           }
       </div>
@@ -189,38 +206,54 @@ export const productPlaceHolder = (
 
 
 export const cartPlaceHolder = (
-  <div className={`${styles.flex} ${styles['pt-40']} ${styles.relative}`} style={{
+  <div className={`${styles.flex} ${styles.relative}`} style={{
       position: 'fixed',
       zIndex: 26,
       width: '100vw',
       height: '100vh',
       top: 0,
       left: 0,
-      background: '#fff',
-      paddingTop: '130px',
+      // background: '#fff',
+      // paddingTop: '130px',
     }}>
     {/* <div className={`${styles.container}`} /> */}
     <div className={`${styles.flex} ${styles['p-20']} ${styles.width100}`}>
       <div style={{ width: '75%' }} className={`${styles.flex} ${styles['flex-colum']} ${styles.width63} ${styles['mr-20']}`}>
-        <Rectangle
-          style={{
-            width: '100%',
-            height: '300px',
-            marginBottom: '20px',
+        <div style={{
+              width: '100%', height: '300px', backgroundColor: '#fff', padding: '20px', marginBottom: '20px',
           }}
-        />
+        >
+          <Rectangle
+            style={{
+              width: '100%',
+              height: '100%',
+              backgroundColor: '#f7f5f5',
+            }}
+          />
+        </div>
+        <div style={{
+              width: '100%', height: '100px', backgroundColor: '#fff', padding: '20px', marginBottom: '20px',
+          }}
+        >
+          <Rectangle
+            style={{
+              width: '100%',
+              height: '100%',
+              backgroundColor: '#f7f5f5',
+            }}
+          />
+        </div>
+      </div>
+      <div style={{
+              width: '25%', height: '600px', backgroundColor: '#fff', padding: '20px', marginBottom: '20px',
+          }}
+      >
         <Rectangle
           style={{
-            width: '100%',
-            height: '100px',
+            width: '100%', height: '100%', backgroundColor: '#f7f5f5',
           }}
         />
       </div>
-      <Rectangle
-        style={{
-          width: '25%', height: '600px',
-        }}
-      />
     </div>
   </div>
 );
@@ -304,3 +337,63 @@ export const ftbSkeletonLoader = (
     }
   </div>
 );
+
+export const camProfileHolder = (
+  <div style={{ overflow: 'hidden', maxHeight: '800px' }}>
+    {/* <div className={`${styles.container}`} /> */}
+    <div
+      className={
+        `${styles['filter-panel']} ${styles['border-radius4']}
+          ${styles['bg-white']} col-md-2 col-sm-4`
+      }
+    >
+      <div className={`${styles.flex} ${styles['flex-center']} ${styles['m-5']}`}>
+        <Round />
+        <div className={`${styles['flex-colum']} ${styles['ml-10']}`}>
+          <Input style={{ height: 15, width: '100px' }} />
+          <Input style={{ height: 15, width: '100px' }} />
+        </div>
+      </div>
+      {
+          [0, 1, 2, 3, 4, 5].map((el, i) => (
+            <div>
+              <div key={`rect_${i}`}>
+                <Input style={{ height: 40 }} />
+              </div>
+              <div style={{ borderBottom: '1px solid #f7f5f5', marginBottom: '5px' }} />
+            </div>
+              ))
+          }
+    </div>
+    <div className={`${styles['search-results']} ${styles['p-0']} col-md-10 col-sm-8`}>
+      <div className={`${styles['grid-cont']} ${styles['mt-15']} ${styles['flex-wrp']} ${styles.flx} result-box`} >
+        <div style={{ height: '100%' }} className={`${styles.couponHeader} ${styles['p-25']}`}>
+          <div className={`${styles['flex-center']} ${styles.flex} ${styles['m-5']}`}>
+            <Round style={{ backgroundColor: '#fff' }} />
+            <div className={`${styles['flex-colum']} ${styles['ml-10']}`}>
+              <Input style={{ height: 20, width: '300px', backgroundColor: '#fff' }} />
+              <Input style={{ height: 20, width: '300px', backgroundColor: '#fff' }} />
+            </div>
+          </div>
+          <div className={`${styles.flex} ${styles['mt-40']}`}>
+            <Input style={{ height: 30, width: '150px', backgroundColor: '#fff', marginRight: '10px' }} />
+            <Input style={{ height: 30, width: '150px', backgroundColor: '#fff' }} />
+          </div>
+          <div className={`${styles.flex} ${styles['mt-40']}`}>
+            <Input style={{ height: 30, width: '150px', backgroundColor: '#fff', marginRight: '10px' }} />
+            <Input style={{ height: 30, width: '150px', backgroundColor: '#fff' }} />
+          </div>
+          <div className={`${styles.flex} ${styles['mt-40']}`}>
+            <Input style={{ height: 30, width: '150px', backgroundColor: '#fff', marginRight: '10px' }} />
+            <Input style={{ height: 30, width: '150px', backgroundColor: '#fff' }} />
+          </div>
+          <div className={`${styles.flex} ${styles['mt-40']}`}>
+            <Input style={{ height: 30, width: '150px', backgroundColor: '#fff', marginRight: '10px' }} />
+            <Input style={{ height: 30, width: '150px', backgroundColor: '#fff' }} />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+

@@ -20,6 +20,8 @@ import Theme from '../helpers/context/theme';
 import CompareWidget from '../common/CompareWidget';
 import { actionCreators, selectors } from '../../store/product';
 import { actionCreators as wishlistActionCreators, selectors as wishListSelectors } from '../../store/cam/wishlist';
+import { actionCreators as addressActionCreators, selectors as addressSelectors } from '../../store/cam/address';
+import { actionCreators as paymentActionCreators } from '../../store/payments';
 import Button from '../common/CommonButton';
 
 import lang from '../../utils/language';
@@ -97,7 +99,12 @@ const getProductComponent = (isPreview, taskCode) => {
           this.setState({ recentlyViewed: arr });
         }
       }
-
+      this.props.getShippingAddressResults().then(() => {
+        const selectedAddrId = this.props.selectedAddress.address_id;
+        if (selectedAddrId) {
+          this.props.createOrder(selectedAddrId);
+        }
+      });
       window.addEventListener('scroll', this.handleScroll);
       setTimeout(() => {
         const shippingContainer = document.getElementById('shipping-cont');
@@ -135,10 +142,11 @@ const getProductComponent = (isPreview, taskCode) => {
     }
 
     notify() {
-      const { productData, userDetails, notifyMe } = this.props;
+      const { productData, userDetails, notifyMe, variantId } = this.props;
       let { emailErr, notifyEmail } = this.state;
       const params = {
         product_id: productData.product_id,
+        variant_id: variantId,
       };
       const emailReg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       if (!userDetails.isLoggedIn) {
@@ -330,6 +338,7 @@ const getProductComponent = (isPreview, taskCode) => {
     productData: taskCode ? selectors.getPreview(store) : selectors.getProduct(store),
     userDetails: store.authReducer.data,
     showLoading: wishListSelectors.getNotifyLoading(store),
+    selectedAddress: addressSelectors.getSelectedAddress(store),    
   });
 
   const mapDispatchToProps = dispatch =>
@@ -337,6 +346,8 @@ const getProductComponent = (isPreview, taskCode) => {
       {
         notifyMe: wishlistActionCreators.notifyMe,
         track: actionCreators.track,
+        getShippingAddressResults: addressActionCreators.getShippingAddressResults,
+        createOrder: paymentActionCreators.createOrder,
 
       },
       dispatch,
