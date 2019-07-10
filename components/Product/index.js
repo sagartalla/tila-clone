@@ -20,6 +20,8 @@ import Theme from '../helpers/context/theme';
 import CompareWidget from '../common/CompareWidget';
 import { actionCreators, selectors } from '../../store/product';
 import { actionCreators as wishlistActionCreators, selectors as wishListSelectors } from '../../store/cam/wishlist';
+import { actionCreators as addressActionCreators, selectors as addressSelectors } from '../../store/cam/address';
+import { actionCreators as paymentActionCreators } from '../../store/payments';
 import Button from '../common/CommonButton';
 
 import lang from '../../utils/language';
@@ -97,7 +99,12 @@ const getProductComponent = (isPreview, taskCode) => {
           this.setState({ recentlyViewed: arr });
         }
       }
-
+      this.props.getShippingAddressResults().then(() => {
+        const selectedAddrId = this.props.selectedAddress.address_id;
+        if (selectedAddrId) {
+          this.props.createOrder(selectedAddrId);
+        }
+      });
       window.addEventListener('scroll', this.handleScroll);
       setTimeout(() => {
         const shippingContainer = document.getElementById('shipping-cont');
@@ -330,6 +337,7 @@ const getProductComponent = (isPreview, taskCode) => {
     productData: taskCode ? selectors.getPreview(store) : selectors.getProduct(store),
     userDetails: store.authReducer.data,
     showLoading: wishListSelectors.getNotifyLoading(store),
+    selectedAddress: addressSelectors.getSelectedAddress(store),    
   });
 
   const mapDispatchToProps = dispatch =>
@@ -337,6 +345,8 @@ const getProductComponent = (isPreview, taskCode) => {
       {
         notifyMe: wishlistActionCreators.notifyMe,
         track: actionCreators.track,
+        getShippingAddressResults: addressActionCreators.getShippingAddressResults,
+        createOrder: paymentActionCreators.createOrder,
 
       },
       dispatch,

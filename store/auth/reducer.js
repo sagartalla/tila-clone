@@ -47,7 +47,7 @@ const authReducer = typeToReducer({
     FULFILLED: (state, action) => {
       const { data } = action.payload;
       const { v2 } = state;
-      if (data.exist && data.last_social_login_used && data.last_social_login_used.length === 0) {
+      if (data.exist && data.password_exists) {
         v2.active = pageFlows.existing_user_login.password;
         v2.currentFlow = 'existing_user_login';
       } else if (!data.exist && data.last_social_login_used && data.last_social_login_used.length === 0) {

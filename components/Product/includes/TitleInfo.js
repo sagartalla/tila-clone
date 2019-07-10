@@ -11,7 +11,6 @@ import { selectors as authSelectors } from '../../../store/auth';
 import { languageDefinations } from '../../../utils/lang';
 import lang from '../../../utils/language';
 import { actionCreators, selectors as paymentSelectors } from '../../../store/payments';
-import { selectors as addressSelectors } from '../../../store/cam/address';
 
 import main_en from '../../../layout/main/main_en.styl';
 import main_ar from '../../../layout/main/main_ar.styl';
@@ -121,7 +120,7 @@ class TitleInfo extends Component {
   render() {
     const {
       brand, title, rating, product_id,
-      totalInventoryCount, isPreview, listingCartData, comparable, cmpData, isLoggedIn,
+      totalInventoryCount, isPreview, listingCartData, comparable, cmpData, isLoggedIn, paymentModesData,
     } = this.props;
     const { showCheckoutModal } = this.state;
     return (
@@ -172,7 +171,10 @@ class TitleInfo extends Component {
             <div className={`${styles['flex-center']} ${styles['checkout-instantly']} ${styles['pt-5']}`}>
               <div className={`${styles.flex}`}>
                 {totalInventoryCount > 0 && isLoggedIn &&
-                    <a className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['fs-14']} ${styles['mr-10']} ${styles['small-btn']} ${styles['checkout-instant-btn']} ${styles['left-radius']}`} onClick={this.checkoutInstantHandler}>{PDP_PAGE.CHECKOUT_INSTANT}</a>                
+                paymentModesData && paymentModesData.paymentModes && paymentModesData.paymentModes['SAVED_CARD'] && paymentModesData.paymentModes['SAVED_CARD'].cards_list.length > 0 ?
+                    <a className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['fs-14']} ${styles['mr-10']} ${styles['small-btn']} ${styles['checkout-instant-btn']} ${styles['left-radius']}`} onClick={this.checkoutInstantHandler}>{PDP_PAGE.CHECKOUT_INSTANT}</a>
+                    :
+                    <a className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['fs-14']} ${styles['mr-10']} ${styles['small-btn']} ${styles['disable-checkout-instant-btn']} ${styles['left-radius']}`}>{PDP_PAGE.CHECKOUT_INSTANT}</a>                                                    
                 }
               </div>
               <div className={styles['flex']}>
@@ -240,6 +242,8 @@ const mapStateToProps = store => ({
   listingCartData: cartSelectors.getListingCartResults(store),
   isLoggedIn: authSelectors.getLoggedInStatus(store),
   cmpData: selectors.getCmpData(store),
+  paymentModesData: paymentSelectors.getPaymentModesData(store),
+
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
