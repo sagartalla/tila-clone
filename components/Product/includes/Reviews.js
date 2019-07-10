@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Cookies from 'universal-cookie';
 import Theme from '../../helpers/context/theme';
 import { selectors, actionCreators } from '../../../store/product';
+import { selectors as authSelectors, actionCreators as authActionCreators } from '../../../store/auth';
 import { selectors as personalDetailsSelectors } from '../../../store/cam/personalDetails';
 import ReviewThankYou from './ReviewThankYou';
 import { languageDefinations } from '../../../utils/lang';
@@ -19,7 +21,7 @@ import styles_en from '../product_en.styl';
 import styles_ar from '../product_ar.styl';
 
 const { PDP_PAGE } = languageDefinations();
-
+ const cookies = new Cookies();
 
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
@@ -46,20 +48,39 @@ class Review extends Component {
     this.props.getRatingsAndReviews(paramsobj);
   }
   componentWillReceiveProps(nextProps) {
-    const { reviewData } = nextProps;
+    const { reviewData, userInfoData } = nextProps;
     this.setState({ reviewData });
+    if ((this.props.userInfoData.email_verified !== nextProps.userInfoData.email_verified && nextProps.userInfoData.email_verified === 'V')) {
+      setTimeout(() => {
+        this.setState(prevState => ({
+          openModal: !prevState.openModal,
+          showReviews: true,
+        }));
+      }, 3001);
+    }
   }
   toggleReviewModal = () => {
     const { openModal } = this.state;
-    if (!openModal) {
-      document.getElementsByTagName('BODY')[0].style.overflow = 'hidden';
-    } else {
-      document.getElementsByTagName('BODY')[0].style.overflow = 'auto';
+    const { isLoggedIn, userInfoData, v2CurrentFlow, userInfo } = this.props;  
+    if (!isLoggedIn) {
+      this.props.showLoginScreen();
+    } else if (isLoggedIn && (cookies.get('isVerified') === 'false')) {
+      this.props.showLoginScreen();
+      const data = { currentFlow: 'existing_user_login', nextPage: 'verify_email' };
+      const { v2CurrentFlow } = this.props;
+      v2CurrentFlow(data);
+    } else if (isLoggedIn && (cookies.get('isVerified') === 'true')) {
+      this.setState(prevState => ({
+        openModal: !prevState.openModal,
+        showReviews: true,
+      }), () => {
+        if (!openModal) {
+          document.getElementsByTagName('BODY')[0].style.overflow = 'hidden';
+        } else {
+          document.getElementsByTagName('BODY')[0].style.overflow = 'auto';
+        }
+      });
     }
-    this.setState(prevState => ({
-      openModal: !prevState.openModal,
-      showReviews: true,
-    }));
   }
 
   submituserreview = (reviewObj) => {
@@ -75,7 +96,7 @@ class Review extends Component {
   }
 
   renderReviewDetails = (reviewData, categoryType) => reviewData.map((data, i) => {
-      return (
+    return (
         <Col md={12} key={`review_${i}`}>
           <Col md={4}>
             <div className={`${styles['mb-10']} ${styles['flex-center']}`}>
@@ -101,8 +122,8 @@ class Review extends Component {
             </p>
           </Col>
         </Col>
-      );
-    })
+    );
+  })
 
   render() {
     const { reviewData, openModal, showReviews } = this.state;
@@ -180,11 +201,15 @@ const mapStateToProps = store => ({
   reviewData: selectors.getReviewRatings(store),
   reviewResponse: selectors.getReviewResponse(store),
   userInfo: personalDetailsSelectors.getUserInfo(store),
+  isLoggedIn: authSelectors.getLoggedInStatus(store),
+  userInfoData: authSelectors.getUserInfo(store),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   getRatingsAndReviews: actionCreators.getRatingsAndReviews,
   submitUserReview: actionCreators.submitUserReview,
+  showLoginScreen: authActionCreators.showLoginScreen,
+  v2CurrentFlow: authActionCreators.v2CurrentFlow,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Review);

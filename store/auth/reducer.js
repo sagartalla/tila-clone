@@ -25,6 +25,7 @@ const initialState = {
     showLoginScreen: false,
     showResetScreen: true,
     loginResponse: {},
+    userInfo: {},
   },
   error: '',
   v2: {
@@ -61,6 +62,10 @@ const authReducer = typeToReducer({
           ...state.v2,
           ...v2,
           data,
+        },
+        data: {
+          ...state.data,
+          userInfo: action.payload.data,
         },
         ui: {
           ...state.ui,

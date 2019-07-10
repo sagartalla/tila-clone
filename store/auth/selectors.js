@@ -102,9 +102,13 @@ const loginResponse = (store) => {
 
 const isVerified = store => store.authReducer.data.isVerified;
 
+const userInfo = store => {
+  return store.authReducer.data.userInfo;
+}
+
 export {
   getErrorMessege, getCountry, getLoggedInStatus, getInstaCode, getUserCreds, getDeliveryCity, getDomainCountries,
   getLoginProgressStatus, getShowLogin, getPTAToken, showEmailVerificationScreen, getLanguage, getLoadingStatus, getUserInfo,
   getActive, getActiveEmailId, forgotPasswordStatus, showEmailSuccess, showLogin, userData, showOtpSuccess, resetToken, getActiveText,
-  getLastLogin, showResetScreen, getActiveUser, showCheckoutLogin, loginResponse, isVerified,
+  getLastLogin, showResetScreen, getActiveUser, showCheckoutLogin, loginResponse, isVerified, userInfo,
 };

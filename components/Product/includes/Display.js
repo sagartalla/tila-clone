@@ -12,6 +12,7 @@ import SVGComponent from '../../common/SVGComponet';
 // import userAgent from '../../../utils/user-agent';
 
 import { selectors, actionCreators } from '../../../store/cam/wishlist';
+import { selectors as authSelectors, actionCreators as authActionCreators } from '../../../store/auth';
 
 import lang from '../../../utils/language';
 
@@ -51,10 +52,12 @@ class Display extends Component {
     e.preventDefault();
     const {
       product_id, catalogObj, addToWishlistAndFetch,
-      offerPricing, wishlistId, deleteWishlist, loader,
+      offerPricing, wishlistId, deleteWishlist, loader, isLoggedIn,
     } = this.props;
     if(!loader){
-      if (wishlistId) {
+      if (!isLoggedIn) {
+        this.props.showLoginScreen();
+      } else if (wishlistId) {
         deleteWishlist(wishlistId);
       } else {
         addToWishlistAndFetch({
@@ -164,12 +167,14 @@ Display.propTypes = {
 
 const mapStateToProps = store => ({
   loader: selectors.getLoader(store),
+  isLoggedIn: authSelectors.getLoggedInStatus(store),
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators(
   {
     deleteWishlist: actionCreators.deleteWishlist,
     addToWishlistAndFetch: actionCreators.addToWishlistAndFetch,
+    showLoginScreen: authActionCreators.showLoginScreen,
   },
   dispatch,
 );
