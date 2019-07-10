@@ -102,7 +102,7 @@ class AddToCart extends Component {
               <Button
                 className={`${styles['fs-16']} ${styles['ipad-fs-14']} ${styles['add-to-card-btn']} ${styles['text-uppercase']} ${styles['flex']}`}
                 disabled={isLoading || isAddedToCart}
-                onClick={isAddedToCart === false && this.addToCart}
+                onClick={isAddedToCart === false ? this.addToCart : undefined}
                 btnLoading={btnLoading}
                 btnText={isAddedToCart ? '' : PDP_PAGE.ADD_TO_CART}
                 showImage={isAddedToCart && 'icons/cart/added-cart-icon'}

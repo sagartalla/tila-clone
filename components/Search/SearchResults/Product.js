@@ -336,9 +336,9 @@ class Product extends Component {
                               autoplaySpeed={750}
                               pauseOnHover={false}
                             >
-                              {media && media.slice(0, 5).map(image => (
+                              {media && media.slice(0, 5).map((image,index) => (
                                 <div>
-                                  <img src={`${constants.mediaDomain}/${image}`} alt="imageURL" />
+                                  <img src={`${constants.mediaDomain}/${image}`} alt="imageURL" key={index} />
                                 </div>
                               ))}
                             </Slider>
