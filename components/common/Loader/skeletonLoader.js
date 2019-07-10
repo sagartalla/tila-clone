@@ -9,21 +9,38 @@ const country = cookies.get('country') || 'SAU';
 
 class SkeletonLoader extends Component {
   getPlaceHolder = (pathname) => {
-    if (pathname.split('?')[0] === `/${country}/${language}/search`) {
-      return searchPlaceHolder;
-    } else if (pathname.split('?')[0] === `/${country}/${language}/product`) {
-      return productPlaceHolder;
-    } else if (pathname.split('?')[0] === `/${country}/${language}/srp`) {
-      return searchPlaceHolder;
-    } else if (pathname.split('?')[0] === `/${country}/${language}/cam/mycoupons`) {
-      return couponPlaceHolder;
-    } else if (pathname.split('?')[0] === `/${country}/${language}/cart`) {
-      return cartPlaceHolder;
-    } else if (pathname.split('?')[0] === `/${country}/${language}/payment`) {
-      return cartPlaceHolder;
-    } else if (pathname.split('?')[0] === `/${country}/${language}/cam/profile`) {
-      return camProfileHolder;
+    switch (pathname.split('?')[0]) {
+      case `/${country}/${language}/search`:
+        return searchPlaceHolder
+        break;
+      case `/${country}/${language}/product`:
+        return productPlaceHolder
+        break;
+      case `/search`:
+        return searchPlaceHolder
+        break;
+      case `/${country}/${language}/srp`:
+        return searchPlaceHolder
+        break;
+      case `/${country}/${language}/cam/mycoupons`:
+        return couponPlaceHolder
+        break;
+      case `/product`:
+        return productPlaceHolder
+        break;
+      case `/${country}/${language}/cart`:
+        return cartPlaceHolder
+        break;
+      case `/${country}/${language}/payment`:
+        return cartPlaceHolder
+        break;
+      case `/${country}/${language}/cam/profile`:
+        return camProfileHolder
+        break;
+      default:
+
     }
+    
   }
 
   render() {
