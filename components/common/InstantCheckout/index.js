@@ -14,12 +14,13 @@ import { actionCreators as vaultActionCreators, selectors as vaultSelectors } fr
 import { actionCreators as camActionCreators, selectors as camSelectors } from '../../../store/cam/personalDetails';
 
 import Button from '../CommonButton';
+import dynamic from 'next/dynamic';
 import ShippingAddress from '../../Cam/ShippingAddress';
 import UserVault from '../../Cam/UserVault';
 import { Modal } from 'react-bootstrap';
 import Captcha from '../Captcha';
 import CaptchaContent from '../Captcha/CaptchaContent';
-import EditPhone from '../../Cam/PersonelDetails/UserData/EditPhone';
+//import EditPhone from '../../Cam/PersonelDetails/UserData/EditPhone';
 import AddrCard from './includes/AddrCard';
 import VaultCard from './includes/VaultCard';
 import CodCard from './includes/CodCard';
@@ -30,6 +31,8 @@ import main_en from '../../../layout/main/main_en.styl';
 import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from './instant_en.styl';
 import styles_ar from './instant_ar.styl';
+
+const EditPhone = dynamic(import('../../Cam/PersonelDetails/UserData/EditPhone'));
 
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
