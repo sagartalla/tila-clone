@@ -96,7 +96,7 @@ class ForgotPassword extends Component {
             }
           </span>
           <Button
-            className={`${styles['flex-center']}  ${styles.width100} ${styles['fs-14']} ${styles['text-uppercase']} ${styles['button-radius']}`}
+            className={`${styles['flex-center']}  ${styles.width100} ${styles['fs-14']} ${styles['text-uppercase']} ${styles['button-radius']} ${styles['disabled-button']}`}
             disabled={radioValue === ''}
             onClick={this.sendLink}
             btnLoading={loadingStatus}

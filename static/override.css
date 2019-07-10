@@ -319,3 +319,7 @@
   margin-left: 0 !important;
   transform: translateX(-50%);
 }
+
+[role=button]:focus {
+    outline: none;
+}
