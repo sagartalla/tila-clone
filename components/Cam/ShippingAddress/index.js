@@ -514,7 +514,7 @@ class ShippingAddress extends Component {
                   standalone !== true ?
                     <Col md={12} sm={12} xs={12} className={`${styles['pl-15']}`}>
                       <Button
-                        className={`${styles['left-radius']} ${styles['text-uppercase']}`}
+                        className={`${styles['left-radius']} ${styles['text-uppercase']} ${styles['disable-button']}`}
                         btnText={DELIVERY_ADDR_PAGE.CONTINUE}
                         disabled={cartResults.cart_shippable !== undefined && !cartResults.cart_shippable}
                         onClick={handleShippingAddressContinue}
