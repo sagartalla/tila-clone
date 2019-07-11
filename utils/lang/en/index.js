@@ -604,6 +604,7 @@ export const EN_KEYWORDS = {
     PRIVACY: 'privacy',
     REMEMBER_ME: 'Remember Me',
     BY_SIGNUP_I_AGREE_TO_TERMS: "By signing up, I understand and agree to Tila's",
+    BY_SIGNUP_IN_I_AGREE_TO_TERMS: "By signing in/up, I understand and agree to Tila's",
     BY_LOGIN_I_AGREE_TO_TERMS: "By logging in I understand and agree to Tila's",
     AND: 'and',
     FIRST_NAME: 'First Name*',
@@ -843,6 +844,8 @@ export const EN_KEYWORDS = {
     SALE_EVENT_AND_CAMPAIGN_UPDATE_SUB: 'Signup to receive flash sales, new launches and latest campaigns',
     FEEDBACK_SURVEY_AND_PRODUCT_REVIEW_HEADING: 'Feedback surveys and product reviews',
     FEEDBACK_SURVEY_AND_PRODUCT_REVIEW_SUB: 'Signup to receive personalized discounts and coupons',
+    NOTE: 'Note :',
+    YOU_WILL_BE_UNSUBSCRIBED: 'You will be unsubscribed for the above notifications if you uncheck the boxes.',
   },
   REVIEWS: {
     TITLE: 'My Reviews & Ratings',
