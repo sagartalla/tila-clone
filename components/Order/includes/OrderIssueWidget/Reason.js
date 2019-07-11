@@ -237,7 +237,7 @@ class Reason extends Component {
                 onChange={this.selectReason}
                 defaultValue={"default"}
               >
-                <option disabled value="default">
+                <option value="default" style={{ display: 'none' }}>
                   {loadingStatus
                     ? ORDER_PAGE.LOADING
                     : ORDER_PAGE.SELECT_REASON}
