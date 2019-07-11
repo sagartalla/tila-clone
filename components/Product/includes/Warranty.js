@@ -41,31 +41,34 @@ class Warranty extends React.Component {
   render() {
     const warranty = this.props.warranty || {};
     const warranty_display = `${warranty.duration} ${_.startCase(_.toLower(warranty.duration_unit))} ${PDP_PAGE.WARRANTY}`;
+    const warranty_time = warranty.duration;
     return (
       <div className={`${styles['flex-center']} ${styles['warranty-part']}  ${styles.relative} ${styles.pointer}`}>
         <span className={`${styles['flex-center']}`}><span>{warranty_display}</span></span>
-        <a className={`${styles.fontW600} ${styles['ml-20']} ${styles['view-more-label']} ${styles['fs-12']}`} onClick={this.openSlider}>{CART_PAGE.VIEW_MORE}</a>
+        <a className={`${styles.fontW600} ${styles['ml-20']} ${styles['view-more-label']} ${styles['fs-12']}`} onClick={this.openSlider}>{warranty_time > 0 ? CART_PAGE.VIEW_MORE : ''}</a>
         {this.state.slider &&
         <Slider label="Warranty" isOpen={this.state.slider} closeSlider={this.closeSlider}>
           <div className={`${styles['warranty-modal']}`}>
-            <hr />
-            <div className={`${styles['fs-20']} ${styles['ml-20']}`}>{PDP_PAGE.WARRANTY_SUMMARY}
-              <ul>
+            {warranty.summary &&
+            <div className={`${styles['fs-16']}`}>{PDP_PAGE.WARRANTY_SUMMARY}
+              <ul className={`${styles['mt-5']}`}>
                 <li>{warranty.summary}</li>
               </ul>
-            </div>
+            </div>}
             <hr />
-            <div className={`${styles['fs-20']} ${styles['ml-20']}`}>{PDP_PAGE.COVERED_IN_WARRANTY}
-              <ul>
+            {warranty.covered &&
+            <div className={`${styles['fs-16']}`}>{PDP_PAGE.COVERED_IN_WARRANTY}
+              <ul className={`${styles['mt-5']}`}>
                 <li>{warranty.covered}</li>
               </ul>
-            </div>
+            </div>}
             <hr />
-            <div className={`${styles['fs-20']} ${styles['ml-20']}`}>{PDP_PAGE.NOT_COVERED_IN_WARRANTY}
-              <ul>
+            {warranty.not_covered &&
+            <div className={`${styles['fs-16']}`}>{PDP_PAGE.NOT_COVERED_IN_WARRANTY}
+              <ul className={`${styles['mt-5']}`}>
                 <li>{warranty.not_covered}</li>
               </ul>
-            </div>
+            </div>}
           </div>
         </Slider>}
       </div>);

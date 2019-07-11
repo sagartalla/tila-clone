@@ -90,8 +90,6 @@ export default class StarRating extends Component {
 StarRating.propTypes = {
   total: PropTypes.number,
   rating: PropTypes.number,
-  onRate: PropTypes.func.isRequired,
-  onRating: PropTypes.func.isRequired,
   clsStyl: PropTypes.object,
   interactive: PropTypes.bool,
 };

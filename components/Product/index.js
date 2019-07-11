@@ -215,7 +215,10 @@ const getProductComponent = (isPreview, taskCode) => {
         <Theme.Provider value={categoryType.toLowerCase()}>
           <div className={`${styles['pdp-wrap']} ${categoryType.toLowerCase()} ${styles[categoryType.toLowerCase()]}`}>
             {
-              isPreview || isSearchPreview ? null : <HeaderBar />
+              isPreview || isSearchPreview ? null :
+                <HeaderBar
+                 hideThankyou
+                />
             }
             <div className={`${styles.relative}`}>
               <div className={`${styles['page-details-slider']}`}>
@@ -238,7 +241,7 @@ const getProductComponent = (isPreview, taskCode) => {
                   <Col sm={12} className={`${styles['details-right-part']} ${styles[stickyElements.details]}`}>
                     <div className={`${styles['details-right-part-inn']}`}>
                       <div className={`${styles['ipad-details']} ${styles['ipad-pr-15']}`}>
-                        <TitleInfo {...titleInfo} isPreview={isPreview} offerInfo={offerInfo} />
+                        <TitleInfo {...titleInfo} isPreview={isPreview} offerInfo={offerInfo} shippingInfo={shippingInfo} />
                         <ProductDetails
                           details={details}
                           keyfeatures={keyfeatures}

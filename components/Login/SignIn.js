@@ -28,14 +28,14 @@ class SignIn extends Component {
       {
         field: 'password',
         method: props.mode === 'NEW_USER' || props.mode === 'EXISTING_USER' ? this.emptyValue : () => false,
-        message: props.mode === 'NEW_USER' ? 'Please enter password' : 'Please enter your password',
+        message: props.mode === 'NEW_USER' ? 'Please enter password' : 'Please enter password',
         validWhen: false,
       },
       {
         field: 'password',
         method: props.mode === 'NEW_USER' ? this.passwordValidation : () => false,
         validWhen: false,
-        message: 'Please enter valid password',
+        message: 'Your password must be atleast 8 characters long',
       },
       {
         field: 'email',
