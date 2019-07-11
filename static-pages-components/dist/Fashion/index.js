@@ -305,7 +305,7 @@ const Fashion = () => React.createElement(
                 React.createElement(
                   'h6',
                   { className: `${styles['m-0']} ${styles['fs-14']} ${styles['fontW600']}` },
-                  'Kids Wear'
+                  'Kids\' Wear'
                 ),
                 React.createElement(
                   'span',

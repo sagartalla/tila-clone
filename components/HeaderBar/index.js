@@ -50,7 +50,7 @@ const HeaderBar = props => (
             null
           } */}
           <Col md={4} sm={5}>
-            <ActionBar hideLogin={props.hideLogin} />
+            <ActionBar hideLogin={props.hideLogin} hideThankyou={props.hideThankyou}/>
           </Col>
         </Row>
       </Grid>

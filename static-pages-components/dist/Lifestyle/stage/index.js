@@ -248,7 +248,7 @@ const Lifestyle = () => React.createElement(
       React.createElement(
         'span',
         { className: `dec ${styles['fs-12']}` },
-        'Trolley bags, Shoes, Perfumes, Makeup kit, Grooming kit, Trimmers, Slippers, & more\u2026 '
+        'Trolley bags, Shoes, Perfumes, Make-up kit, Grooming kit, Trimmers, Slippers, & more\u2026 '
       ),
       React.createElement(
         'div',

@@ -215,7 +215,10 @@ const getProductComponent = (isPreview, taskCode) => {
         <Theme.Provider value={categoryType.toLowerCase()}>
           <div className={`${styles['pdp-wrap']} ${categoryType.toLowerCase()} ${styles[categoryType.toLowerCase()]}`}>
             {
-              isPreview || isSearchPreview ? null : <HeaderBar />
+              isPreview || isSearchPreview ? null :
+                <HeaderBar
+                 hideThankyou
+                />
             }
             <div className={`${styles.relative}`}>
               <div className={`${styles['page-details-slider']}`}>

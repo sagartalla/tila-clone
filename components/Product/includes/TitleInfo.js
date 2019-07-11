@@ -229,8 +229,8 @@ class TitleInfo extends Component {
 }
 
 TitleInfo.propTypes = {
-  brand: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
+  brand: PropTypes.object.isRequired,
+  title: PropTypes.object.isRequired,
   rating: PropTypes.object.isRequired,
   reviews: PropTypes.object.isRequired,
   price: PropTypes.string.isRequired,

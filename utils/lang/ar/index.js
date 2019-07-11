@@ -509,7 +509,7 @@ export const AR_KEYWORDS = {
     RETURN: 'الإرجاع',
     CONSUMER_RIGHT: 'حقوق المستهلك',
     DOWNLOAD_APP: 'حمّل التطبيق',
-    TILA_RIGHTS: 'جميع الحقوق محفوظة. لموقع تيله 2018',
+    TILA_RIGHTS: 'جميع الحقوق محفوظة. لموقع تيله 2019',
     SIZE_CHART: 'جدول القياسات',
     WOMEN_CLOTHING: 'ملابس نسائيه',
     MEN_CLOTHING: 'ملابس رجالية',
@@ -633,6 +633,7 @@ export const AR_KEYWORDS = {
     PLEASE_PROVIDE_EMAIL_ID_FOR_REGISTRATION: 'من فضلك اكتب ايميلك عشان تستلم تأكيد تسجيلك ',
     INSTAGRAM: 'Instagram',
     EDIT: 'EDIT',
+    BY_SIGNUP_IN_I_AGREE_TO_TERMS: "By signing in/up, I understand and agree to Tila's",
   },
   ORDER_PAGE: {
     LOADING: 'تحميل',
@@ -830,6 +831,8 @@ export const AR_KEYWORDS = {
     SALE_EVENT_AND_CAMPAIGN_UPDATE_SUB: 'انشئ حسابك لتحصل على تخفيضات فلاش وإطلاقاتنا الجديدة وأحدث الحملات',
     FEEDBACK_SURVEY_AND_PRODUCT_REVIEW_HEADING: 'استطلاعات الرأي وتقييم المنتجات',
     FEEDBACK_SURVEY_AND_PRODUCT_REVIEW_SUB: 'انشئ حسابك لتحصل على  خصومات خاصة بك وكوبونات',
+    NOTE: 'Note :',
+    YOU_WILL_BE_UNSUBSCRIBED: 'You will be unsubscribed for the above notifications if you uncheck the boxes.',
   },
   REVIEWS: {
     TITLE: 'My Reviews & Ratings',
