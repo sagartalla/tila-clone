@@ -130,9 +130,25 @@ class Payments extends React.Component {
     // if (nextProps && nextProps.makePaymentOptions && nextProps.makePaymentOptions.redirect_url) {
     //   location.href = nextProps.makePaymentOptions.redirect_url;
     // }
-
     // if loggedin show address step directly.
-    if (nextProps.isLoggedIn && !loggedInFlag) {
+    // if (nextProps.isLoggedIn && !loggedInFlag) {
+    //   const login = nextProps.userCreds || this.state.login;
+    //   const paymentConfigJson = { ...this.state.paymentConfigJson };
+    //   paymentConfigJson['signIn'] = { basic: false, progress: false, done: true };
+    //   paymentConfigJson['address'] = { basic: false, progress: true, done: false };
+    //   this.setState({
+    //     paymentConfigJson, login, loggedInFlag: true,
+    //   });
+    // }
+    if (nextProps.isLoggedIn && !loggedInFlag && nextProps.userInfoData.email_verified === 'NV') {
+      const login = nextProps.userCreds || this.state.login;
+      const paymentConfigJson = { ...this.state.paymentConfigJson };
+      paymentConfigJson['signIn'] = { basic: false, progress: true, done: false };
+      paymentConfigJson['address'] = { basic: true, progress: false, done: false };
+      this.setState({
+        paymentConfigJson, login,
+      });
+    } else if (nextProps.isLoggedIn && !loggedInFlag && nextProps.userInfoData.email_verified === 'V') {
       const login = nextProps.userCreds || this.state.login;
       const paymentConfigJson = { ...this.state.paymentConfigJson };
       paymentConfigJson['signIn'] = { basic: false, progress: false, done: true };

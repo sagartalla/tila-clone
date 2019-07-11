@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators, selectors } from '../../store/auth';
+import { selectors as camSelectors } from '../../store/cam/personalDetails';
 import Input from '../common/Input';
 import Timer from '../common/Timer';
 import Button from '../common/CommonButton';
@@ -83,7 +84,7 @@ class VerifyEmail extends Component {
   }
 
   render() {
-    const { activeEmailId, loadingStatus, userInfoData } = this.props;
+    const { activeEmailId, loadingStatus, userInfoData, profileInfo } = this.props;
     const { value, otpError, seconds } = this.state;
     return (
       <div className={`${styles.width100}`}>
@@ -96,7 +97,7 @@ class VerifyEmail extends Component {
               <SVGComponent clsName={`${styles['tickmark-icon']}`} src="icons/common-icon/blue-tick" />
               <div className={`${styles['ml-10']}`}>{EMAIL_VERIFICATION.OTP_SENT}</div>
             </div>
-            <div className={`${styles['ff-b']} ${styles['fs-16']} ${styles.ellipsis} ${styles['ml-25']}`} title={activeEmailId} >{(userInfoData && userInfoData.email) || activeEmailId}</div>
+            <div className={`${styles['ff-b']} ${styles['fs-16']} ${styles.ellipsis} ${styles['ml-25']}`} title={activeEmailId} >{(userInfoData && userInfoData.email) || activeEmailId || (profileInfo && profileInfo.contactInfo && profileInfo.contactInfo.email)}</div>
           </div>
           <div className={`${styles.flex} ${styles['align-center']} ${styles['flex-col']}`}>
             <div>{EMAIL_VERIFICATION.ENTER_OTP}</div>
@@ -142,6 +143,7 @@ const mapStateToProps = store => ({
   activeEmailId: selectors.getActiveEmailId(store),
   loadingStatus: selectors.getLoadingStatus(store),
   userInfoData: selectors.getUserInfo(store),
+  profileInfo: camSelectors.getUserInfo(store),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(
