@@ -27,7 +27,7 @@ class LoginPage extends React.Component {
       {
         field: 'email',
         method: this.emptyEmail,
-        message: 'Please fill the email',
+        message: 'Please enter email ID',
         validWhen: false,
       },
       {
