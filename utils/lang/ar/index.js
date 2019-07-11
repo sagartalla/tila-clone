@@ -593,7 +593,8 @@ export const AR_KEYWORDS = {
     T_AND_C: 'T & C',
     PRIVACY: 'Privacy',
     REMEMBER_ME: 'Remember Me',
-    BY_LOGIN_I_AGREE_TO_TERMS: 'By login I understand and agree to Tila',
+    BY_SIGNUP_I_AGREE_TO_TERMS: "By signing up, I understand and agree to Tila's",
+    BY_LOGIN_I_AGREE_TO_TERMS: "By logging in I understand and agree to Tila's", 
     AND: 'and',
     FIRST_NAME: 'الأسم الأول*',
     LAST_NAME: 'اسم العائلة*',
@@ -631,7 +632,7 @@ export const AR_KEYWORDS = {
     GLAD_TO_HAVE_YOU_HERE: 'سعيدين بوجودك معانا.',
     PLEASE_PROVIDE_EMAIL_ID_FOR_REGISTRATION: 'من فضلك اكتب ايميلك عشان تستلم تأكيد تسجيلك ',
     INSTAGRAM: 'Instagram',
-    EDIT: 'EDIT',    
+    EDIT: 'EDIT',
   },
   ORDER_PAGE: {
     LOADING: 'تحميل',
