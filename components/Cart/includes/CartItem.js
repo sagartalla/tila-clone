@@ -204,8 +204,8 @@ class CartItem extends React.Component {
                     </Link>
                   </h4>
                   {variantAttributes.length > 0 &&
-                    variantAttributes.map(attr => (
-                      <div className={`${styles['thick-gry-clr']} ${styles['fs-12']} ${styles['mb-15']}`}>
+                    variantAttributes.map((attr,index) => (
+                      <div className={`${styles['thick-gry-clr']} ${styles['fs-12']} ${styles['mb-15']}`} key={index}>
                         <span>{attr.display_string} : </span>
                         <span>{attr.attribute_values[0].value}</span>
                       </div>

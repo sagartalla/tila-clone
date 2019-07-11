@@ -23,14 +23,14 @@ export const searchPlaceHolder = (
       }
     >
       <Input style={{ height: 80 }} />
-      <div style={{ borderBottom: '1px solid #f7f5f5', marginBottom: '5px' }} />
+      <div style={{ marginBottom: '5px' }} />
       {
           [0, 1, 2, 3, 4, 5, 6, 7].map((el, i) => (
             <div>
               <div key={`rect_${i}`}>
                 <Input />
               </div>
-              <div style={{ borderBottom: '1px solid #f7f5f5', marginBottom: '5px' }} />
+              <div style={{marginBottom: '5px' }} />
             </div>
               ))
           }
@@ -280,7 +280,7 @@ export const couponPlaceHolder = (
               <div key={`rect_${i}`}>
                 <Input style={{ height: 40 }} />
               </div>
-              <div style={{ borderBottom: '1px solid #f7f5f5', marginBottom: '5px' }} />
+              <div style={{marginBottom: '5px' }} />
             </div>
               ))
           }
@@ -360,7 +360,7 @@ export const camProfileHolder = (
               <div key={`rect_${i}`}>
                 <Input style={{ height: 40 }} />
               </div>
-              <div style={{ borderBottom: '1px solid #f7f5f5', marginBottom: '5px' }} />
+              <div style={{marginBottom: '5px' }} />
             </div>
               ))
           }
@@ -391,6 +391,80 @@ export const camProfileHolder = (
             <Input style={{ height: 30, width: '150px', backgroundColor: '#fff', marginRight: '10px' }} />
             <Input style={{ height: 30, width: '150px', backgroundColor: '#fff' }} />
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
+export const camOrdersHolder = (
+  <div style={{ overflow: 'hidden', maxHeight: '800px' }}>
+    {/* <div className={`${styles.container}`} /> */}
+    <div
+      className={
+        `${styles['filter-panel']} ${styles['border-radius4']}
+          ${styles['bg-white']} col-md-2 col-sm-4`
+      }
+    >
+      <div className={`${styles.flex} ${styles['flex-center']} ${styles['m-5']}`}>
+        <Round />
+        <div className={`${styles['flex-colum']} ${styles['ml-10']}`}>
+          <Input style={{ height: 15, width: '100px' }} />
+          <Input style={{ height: 15, width: '100px' }} />
+        </div>
+      </div>
+      {
+          [0, 1, 2, 3, 4, 5].map((el, i) => (
+            <div>
+              <div key={`rect_${i}`}>
+                <Input style={{ height: 40 }} />
+              </div>
+              <div style={{ marginBottom: '5px' }} />
+            </div>
+              ))
+          }
+    </div>
+    <div className={`${styles['search-results']} ${styles['p-0']} col-md-10 col-sm-8`}>
+      <div className={`${styles['grid-cont']} ${styles['mt-15']} ${styles['flex-colum']} ${styles.flx} result-box`} >
+        {/* <div style={{ height: '100%' }} className={`${styles.couponHeader} ${styles['p-25']}`}> */}
+          {
+            [0, 1, 2].map(() => [0, 1, 2].map((el, i) => (
+              <div key={`rect_${i}`}>
+                <Rectangle style={{
+                 width: '100%',
+                 height: '170px',
+               }}
+                />
+              </div>
+            )))
+          }
+        {/* </div> */}
+      </div>
+    </div>
+  </div>
+);
+
+export const homePageHolder = (
+  <div style={{ overflow: 'hidden', maxHeight: '800px' }}>
+    {/* <div className={`${styles.container}`} /> */}
+    
+    <div className={`${styles['p-0']} col-md-12 col-sm-12`}>
+      <div className={`${styles['grid-cont']} ${styles['mt-20']} ${styles['flex-wrp']} ${styles.flx} result-box`} >
+        <div style={{ height: '200px' }} className={`${styles.couponHeader} ${styles['p-25']}`}>
+        </div>
+      </div>
+      <div className={`${styles['grid-cont']} ${styles['mt-20']} ${styles.flx} result-box`}>
+        <div style={{ height: '200px', width: '45%'}} className={`${styles.couponHeader} ${styles['p-25']}`}>
+        </div>
+        <div style={{ height: '200px', width: '45%'}} className={`${styles.couponHeader} ${styles['p-25']}`}>
+        </div>
+      </div>
+      <div className={`${styles['grid-cont']} ${styles['mt-20']} ${styles.flx} result-box`}>
+        <div style={{ height: '200px', width: '30%'}} className={`${styles.couponHeader} ${styles['p-25']}`}>
+        </div>
+        <div style={{ height: '200px', width: '30%'}} className={`${styles.couponHeader} ${styles['p-25']}`}>
+        </div>
+        <div style={{ height: '200px', width: '30%'}} className={`${styles.couponHeader} ${styles['p-25']}`}>
         </div>
       </div>
     </div>

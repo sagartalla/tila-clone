@@ -20,7 +20,7 @@ const KeyFeatures = ({ features }) => (
 );
 
 KeyFeatures.propTypes = {
-  features: PropTypes.array.isRequired,
+  features: PropTypes.object.isRequired,
 };
 
 export default KeyFeatures;

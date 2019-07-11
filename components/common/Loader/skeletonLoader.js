@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { searchPlaceHolder, productPlaceHolder, couponPlaceHolder, cartPlaceHolder, camProfileHolder } from './skeletonPlaceHolder';
+import { searchPlaceHolder, productPlaceHolder, couponPlaceHolder, cartPlaceHolder, camProfileHolder, camOrdersHolder, homePageHolder } from './skeletonPlaceHolder';
 import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
@@ -37,10 +37,34 @@ class SkeletonLoader extends Component {
       case `/${country}/${language}/cam/profile`:
         return camProfileHolder
         break;
-      default:
-
+      case `/profile`:
+          return camProfileHolder
+          break;
+      case `/cam`:
+          return camProfileHolder
+          break;
+      case `/cart`:
+          return cartPlaceHolder
+          break;
+      case `/${country}/${language}`:
+        return homePageHolder
+        break;
+      case `/${country}/${language}/landing/electronics`:
+        return homePageHolder
+        break;
+      case `/${country}/${language}/landing/fashion`:
+        return homePageHolder
+        break;
+      case `/${country}/${language}/landing/lifestyle`:
+        return homePageHolder
+        break;
+      case `/`:
+          return homePageHolder
+          break;
+      // case `/${country}/${language}/cam/orders`:
+      //   return camOrdersHolder
+      //   break;
     }
-    
   }
 
   render() {
