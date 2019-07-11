@@ -52,10 +52,11 @@ const Card = ({ listing, isLoggedIn, addToCart }) => (
             </s>
           </div>
         </div>
-        <div className={styles.flex} data-lId={listing.listingId} data-pId={listing.productId} onClick={addToCart}>
+        <div className={styles.flex} data-lId={listing.listingId} data-isAddedToCart={listing.isAddedToCart} data-pId={listing.productId} onClick={addToCart}>
           <SVGComponent src={!listing.isAddedToCart ? 'icons/cart/blue-cart-icon' : 'icons/cart/added-cart-icon'} clsName={styles['img-icon']} />
         </div>
       </div>
+      <div className={`${styles.absolute} ${styles['pr-10']} ${styles['pl-10']} ${styles['pt-5']} ${styles['pb-5']} ${styles['google-bg-clr']} ${styles['white-color']} ${styles['border-bt-right-radius']}`}>Free</div>
     </div>
   </div>
 );

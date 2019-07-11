@@ -38,11 +38,14 @@ class DT extends React.Component {
     e.stopPropagation();
     const pId = e.currentTarget.getAttribute('data-pId');
     const lId = e.currentTarget.getAttribute('data-lId');
+    const isAddedToCart = e.currentTarget.getAttribute('data-isAddedToCart');
     const { addToCartAndFetch } = this.props;
-    addToCartAndFetch({
-      listing_id: lId,
-      product_id: pId,
-    });
+    if (isAddedToCart === 'false') {
+      addToCartAndFetch({
+        listing_id: lId,
+        product_id: pId,
+      });
+    }
   }
 
   render() {
@@ -61,7 +64,7 @@ class DT extends React.Component {
         {listingsArr.length > 0 && listingsArr.map((listings, index) => {
           return (
             <React.Fragment>
-              <Row className={`${styles['mb-20']}`}>
+              <Row className={`${styles['mb-20']} ${styles['mt-20']}`}>
                 <Col md={12} sm={12} xs={12} className={`${styles.flex} ${styles['flex-wrp']}`}>
                   {listings.length > 0 &&
                     listings.map(listing => (
