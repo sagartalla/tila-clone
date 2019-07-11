@@ -241,7 +241,7 @@ const getProductComponent = (isPreview, taskCode) => {
                   <Col sm={12} className={`${styles['details-right-part']} ${styles[stickyElements.details]}`}>
                     <div className={`${styles['details-right-part-inn']}`}>
                       <div className={`${styles['ipad-details']} ${styles['ipad-pr-15']}`}>
-                        <TitleInfo {...titleInfo} isPreview={isPreview} offerInfo={offerInfo} />
+                        <TitleInfo {...titleInfo} isPreview={isPreview} offerInfo={offerInfo} shippingInfo={shippingInfo} />
                         <ProductDetails
                           details={details}
                           keyfeatures={keyfeatures}
