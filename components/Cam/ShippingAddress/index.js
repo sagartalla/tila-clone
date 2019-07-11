@@ -6,8 +6,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { selectors as productSelectors, actionCreators as productActionCreators } from '../../../store/product';
 import { selectors as cartSelectors } from '../../../store/cart';
-import AddressNew from './includes/AddressNew';
-import AddressBody from './includes/AddressBody';
+//import AddressNew from './includes/AddressNew';
+import dynamic from 'next/dynamic';
+//import AddressBody from './includes/AddressBody';
 import MiniAddress from './includes/MiniAddress';
 import AddressHeader from './includes/AddressHeader';
 import { languageDefinations } from '../../../utils/lang/';
@@ -22,6 +23,8 @@ import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from './address_en.styl';
 import styles_ar from './address_ar.styl';
 
+const AddressBody = dynamic(import('./includes/AddressBody'));
+const AddressNew = dynamic(import('./includes/AddressNew'));
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 let validCountry = null;
