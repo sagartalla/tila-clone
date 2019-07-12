@@ -27,6 +27,6 @@ const mapDispatchToProps = dispatch =>
       ...baseActions,
     },
     dispatch,
-  )
+  );
 
 export default withRedux(makeStore, null, mapDispatchToProps)(CartPage);
