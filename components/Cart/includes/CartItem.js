@@ -195,7 +195,7 @@ class CartItem extends React.Component {
                 <Col md={12}>
                   <h5 className={`${styles['mt-0']} ${styles['mb-0']}`}>{brand_name}</h5>
                 </Col>
-                <Col md={9} sm={9} className={`${styles['landscape-cart-details']} ${styles['pr-0']}`}>
+                <Col md={8} sm={8} className={`${styles['landscape-cart-details']} ${styles['pr-0']}`}>
                   <h4 className={`${styles['fontW600']} ${styles['m-fs-14']} ${styles['fs-16']}`}>
                     <Link route={`/${country}/${language}/product?productId=${product_id}${variant_id ? `&variantId=${variant_id}` : ''}&catalogId=${catalogId}&itemType=${itemType}`}>
                       <a className={`${styles['width100']} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
@@ -273,7 +273,7 @@ class CartItem extends React.Component {
                     </div>))
                   }
                 </Col>
-                <Col md={3} sm={3} className={`${styles['pr-5']} ${styles['landscape-cart-price']}`}>
+                <Col md={4} sm={4} className={`${styles['pr-5']} ${styles['landscape-cart-price']}`}>
                   {Math.floor(discount) > 5 &&
                     <p className={`${styles['mb-0']} ${styles['fs-12']} ${styles['flex']} ${styles['justify-end']}`}>
                       <span className={styles['success-green']}>{`${Math.floor(discount)}% ${PDP_PAGE.OFF}`}</span>
