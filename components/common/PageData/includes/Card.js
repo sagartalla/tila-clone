@@ -35,7 +35,7 @@ const Card = ({ listing, isLoggedIn, addToCart }) => (
       <div className={`${styles['flx-spacebw-alignc']} ${styles['pl-10']} ${styles['pr-10']} ${styles['pb-30']} ${styles['pt-15']}`}>
         <div>
           <div>
-            {isLoggedIn ?
+            {isLoggedIn && listing.sellingPrice.money_value === 0 ?
               <span className={`${styles.fontW600} ${styles['fs-14']}`}>FREE</span>
               :
               <React.Fragment>
@@ -46,7 +46,7 @@ const Card = ({ listing, isLoggedIn, addToCart }) => (
           </div>
           <div className={`${styles['fs-12']} ${styles['dark-gray']}`}>
             <s>
-              {isLoggedIn && <span>{listing.mrp.currency_code}&nbsp;&nbsp;</span>}
+              {listing.sellingPrice.money_value === 0 && <span>{listing.mrp.currency_code}&nbsp;&nbsp;</span>}
               <span>{listing.mrp.display_value.split('.')[0]}.</span>
               <span>{listing.mrp.display_value.split('.')[1]}</span>
             </s>
@@ -56,7 +56,10 @@ const Card = ({ listing, isLoggedIn, addToCart }) => (
           <SVGComponent src={!listing.isAddedToCart ? 'icons/cart/blue-cart-icon' : 'icons/cart/added-cart-icon'} clsName={styles['img-icon']} />
         </div>
       </div>
-      <div className={`${styles.absolute} ${styles['pr-10']} ${styles['pl-10']} ${styles['pt-5']} ${styles['pb-5']} ${styles['google-bg-clr']} ${styles['white-color']} ${styles['border-bt-right-radius']}`}>Free</div>
+      {listing.discountPerMrp > 0 &&
+        <div className={`${styles.absolute} ${styles['pr-10']} ${styles['pl-10']} ${styles['pt-5']} ${styles['pb-5']} ${styles['google-bg-clr']} ${styles['white-color']} ${styles['border-bt-right-radius']}`}>
+          {listing.discountPerMrp === 100 ? 'FREE' : `-${listing.discountPerMrp}%`}
+        </div>}
     </div>
   </div>
 );
