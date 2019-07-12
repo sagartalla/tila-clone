@@ -378,7 +378,7 @@ class CartItem extends React.Component {
           </Row>
         </div>
         <div className={`${styles['cart-box-btm']} ${styles['flex']} ${styles['p-14-22']}`}>
-          <Col md={9} sm={9} xs={9} className={`${styles['flex']} ${styles['m-pd-r-0']}`}>
+          <Col md={8} sm={8} xs={8} className={`${styles['flex']} ${styles['m-pd-r-0']}`}>
             <span className={styles['width21']}>
               {
                 inventory <= 10 && inventory != 0 ?
@@ -400,7 +400,7 @@ class CartItem extends React.Component {
               <span className={styles['pl-10']}>{CART_PAGE.REMOVE}</span>
             </span>
           </Col>
-          <Col md={3} sm={3} xs={3} className={`${styles['t-rt']} ${styles['pr-0']} ${styles['m-pad-5']}`}>
+          <Col md={4} sm={4} xs={4} className={`${styles['t-rt']} ${styles['pr-0']} ${styles['m-pad-5']}`}>
             <span>{ORDER_PAGE.TOTAL} : </span><span className={`${styles['fs-16']} ${styles['fontW600']}`}>{total_amount + ' ' + cur}</span>
           </Col>
         </div>
