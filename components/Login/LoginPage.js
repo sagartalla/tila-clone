@@ -85,12 +85,12 @@ class LoginPage extends React.Component {
       <div className={`${styles['login-form']} ${styles['flx-space-bw']} ${styles['flex-colum']}`}>
         <div>
           <Row>
-            <Col md={5} xs={12} sm={5}>
-              <h2 className={`${styles['fs-18']} ${styles.fontW600}`}>{LOGIN_PAGE.LOGIN}</h2>
+            <Col md={12} xs={12} sm={5}>
+              <h2 className={`${styles['fs-18']} ${styles['t-c']} ${styles.fontW600}`}>{LOGIN_PAGE.LOGIN_SIGNUP}</h2>
             </Col>
-            <Col md={7} xs={12} sm={7}>
+            {/* <Col md={7} xs={12} sm={7}>
               <h2 className={`${styles['fs-18']} ${styles.fontW600}`}>{LOGIN_PAGE.LOGIN_ENTER_EMAIL}</h2>
-            </Col>
+            </Col> */}
           </Row>
           <Row className={`${styles['pt-30']} ${styles.flex}`}>
             <Col md={5} xs={12} sm={5} className={`${styles.relative} ${styles.flex} ${styles['flex-colum']} ${styles['justify-center']} ${styles['pr-30']} ${styles['border-rt']}`}>
