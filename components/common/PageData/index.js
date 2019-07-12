@@ -1,5 +1,6 @@
 import React from 'react';
 import Slider from 'react-slick';
+import Cookies from 'universal-cookie';
 
 import DT from './includes/DT';
 import { Row, Col } from 'react-bootstrap';
@@ -12,6 +13,10 @@ import styles_ar from './pageData_ar.styl';
 
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
+const cookies = new Cookies();
+
+const country = cookies.get('country') || 'SAU';
+
 let sliderTBS = '';
 let sliderTIE = '';
 let sliderHAL = '';
@@ -19,92 +24,62 @@ let sliderHAL = '';
 const tie = [{
   img: '/static/img/landing-home/Mobiles.png',
   title: 'Mobiles',
+  link: `/${country}/${lang}/srp/mobiles?categoryTree=true&isListed=false&sid=848,849`,
 }, {
   img: '/static/img/landing-home/Laptops.png',
   title: 'Laptops',
+  link: `/${country}/${lang}/srp/laptops?categoryTree=true&isListed=false&sid=848,864`,
 }, {
   img: '/static/img/landing-home/storage-devices.png',
   title: 'Storage Devices',
+  link: `/${country}/${lang}/srp?search=Storage&&isListed=false`,
 }, {
   img: '/static/img/landing-home/cameras.png',
   title: 'Cameras',
+  link: `/${country}/${lang}/srp/camera?categoryTree=true&isListed=false&sid=848,882`,
 }, {
   img: '/static/img/landing-home/television.png',
   title: 'Televisions',
+  link: `/${country}/${lang}/srp/televisions?categoryTree=true&isListed=false&sid=848,878`,
 }, {
   img: '/static/img/landing-home/home-appliances.png',
   title: 'Home Appliances',
+  link: `/${country}/${lang}/srp/home-applaince?categoryTree=true&isListed=false&sid=932,935`,
 }, {
   img: '/static/img/landing-home/storage-devices.png',
   title: 'Storage Devices',
+  link: `/${country}/${lang}/srp?search=Storage&&isListed=false`,
 }];
 
 const hal = [{
   img: '/static/img/landing-home/womens-clothing.png',
   title: 'Womens Clothing',
+  link: `/${country}/${lang}/srp/clothing?categoryTree=true&isListed=false&sid=892,910`,
 }, {
   img: '/static/img/landing-home/mens-clothing.png',
   title: 'Mens Clothing',
+  link: `/${country}/${lang}/srp/clothing?categoryTree=true&isListed=false&sid=892,899`,
 }, {
   img: '/static/img/landing-home/jewellery.png',
   title: 'Jewellery',
+  link: `/${country}/${lang}/srp?search=Jewellery&&isListed=false`,
 }, {
   img: '/static/img/landing-home/fashion-acessories.png',
   title: 'Fashion Accessories',
+  link: `/${country}/${lang}/srp/fashion-accessories?categoryTree=true&isListed=false&sid=892,923`,
 }, {
   img: '/static/img/landing-home/watches.png',
   title: 'Watches',
+  link: `/${country}/${lang}/srp/watch?categoryTree=true&isListed=false&sid=892,929`,
 }, {
   img: '/static/img/landing-home/perfumes.png',
   title: 'Perfumes',
+  link: `/${country}/${lang}/srp/fragrance?categoryTree=true&isListed=false&sid=932,958,964`,
 }, {
   img: '/static/img/landing-home/jewellery.png',
   title: 'Jewellery',
+  link: `/${country}/${lang}/srp?search=Jewellery&&isListed=false`,
 }];
-
-const b_d_b = {
-  Mobiles: 'SAU/en/srp/mobiles?categoryTree=true&isListed=false&sid=848,849',
-  Clothing: '/SAU/en/srp?isListed=false&&search=Clothing',
-  'Clothing Accessories': '/SAU/en/srp?search=Clothing&&isListed=false',
-  Laptops: '/SAU/en/srp/laptops?categoryTree=true&isListed=false&sid=848,864',
-  'Storage Devices': '/SAU/en/srp?search=Storage&&isListed=false',
-  Cameras: '/SAU/en/srp/camera?categoryTree=true&isListed=false&sid=848,882',
-  Televisions: '/SAU/en/srp/televisions?categoryTree=true&isListed=false&sid=848,878',
-  'Home Appliances': '/SAU/en/srp/home-applaince?categoryTree=true&isListed=false&sid=932,935',
-  'Womens Clothing': '/SAU/en/srp/clothing?categoryTree=true&isListed=false&sid=892,910',
-  'Mens Clothing': '/SAU/en/srp/clothing?categoryTree=true&isListed=false&sid=892,899',
-  'Fashion Accessories': '/SAU/en/srp/fashion-accessories?categoryTree=true&isListed=false&sid=892,923',
-  Watches: '/SAU/en/srp/watch?categoryTree=true&isListed=false&sid=892,929',
-  'Kitchen Appliances': '/SAU/en/srp/kitchen-appliances?categoryTree=true&isListed=false&sid=932,945',
-  Speakers: '/SAU/en/srp?search=Speakers&&isListed=false',
-  'Microwave Ovens': '/SAU/en/srp?search=Microwave%20Ovens&&isListed=false',
-  'Smart Watch': '/SAU/en/srp/smart-watches?categoryTree=true&isListed=false&sid=848,860,861',
-  'Mobile Accessories': '/SAU/en/srp/mobile-accessories?categoryTree=true&isListed=false&sid=848,850',
-  "Kid's Fashion": '/SAU/en/srp/kid%27s?categoryTree=true&isListed=false&sid=892,893',
-  Footwear: '/SAU/en/srp?search=Footwear&&isListed=false',
-  "Men's Footwear": '/SAU/en/srp/footwear?categoryTree=true&isListed=false&sid=892,907',
-  'Women Footwear': '/SAU/en/srp/footwear?categoryTree=true&isListed=false&sid=892,921',
-  Bags: '/SAU/en/srp/backpack?categoryTree=true&isListed=false&sid=892,926',
-  Eyewear: '/SAU/en/srp?search=Eyewear&&isListed=false',
-  Jewellery: '/SAU/en/srp?search=Jewellery&&isListed=false',
-  GUESS: '/SAU/en/srp/womens-clothing-1056/?isListed=false&&search=guess',
-  FENDI: 'https://storefront-stage.fptechscience.com/SAU/en/srp/watches-1128/?isListed=false&&search=FENDI',
-  'MORPHY RICHARDS': '/SAU/en/srp?search=MORPHY%20RICHARDS%20&disableSpellCheck=true&&isListed=false',
-  SHIRTS: '/SAU/en/srp?search=SHIRTS&&isListed=false',
-  Perfumes: '/SAU/en/srp/fragrance?categoryTree=true&isListed=false&sid=932,958,964',
-  Shoes: '/SAU/en/srp?search=Shoes&&isListed=false',
-  Lights: '/SAU/en/srp/light?categoryTree=true&isListed=false&sid=932,937,940',
-  lamps: '/SAU/en/srp/lamp?categoryTree=true&isListed=false&sid=932,937,939',
-  bedding: '/SAU/en/srp/bedding-set?categoryTree=true&isListed=false&sid=932,941,942',
-  furniture: '/SAU/en/srp/home-furnishing?categoryTree=true&isListed=false&sid=932,941',
-  'HOME DECOR': '/SAU/en/srp?search=HOME%20DECOR&isListed=false',
-  LAPTOPS: '/SAU/en/srp/laptops?categoryTree=true&isListed=false&sid=848,864',
-  'MENS CLOTHING': '/SAU/en/srp/clothing?categoryTree=true&isListed=false&sid=892,899',
-  'MOBILE ACCESSORIES': '/SAU/en/srp/mobile-accessories?categoryTree=true&isListed=false&sid=848,850',
-  'PERFUMES FOR WOMEN': '/SAU/en/srp?search=perfumes&categoryTree=true&isListed=false',
-  WATCHES: '/SAU/en/srp/watch?categoryTree=true&isListed=false&sid=892,929',
-};
-
 
 class PageData extends React.Component {
   constructor() {
@@ -154,7 +129,7 @@ class PageData extends React.Component {
               >
                 {tie.map(i => (
                   <div className={styles.item} key={i}>
-                    <a href={b_d_b[i.title]}>
+                    <a href={i.link}>
                       <img src={i.img} alt={i.title} />
                     </a>
                     <span className={`${styles['fs-12']} ${styles['pt-10']} ${styles.flex} ${styles['justify-center']} ${styles['slider-elips']} ${styles['lne-ht1_2']}`}>{i.title}</span>
@@ -173,7 +148,7 @@ class PageData extends React.Component {
               >
                 {hal.map(i => (
                   <div className={styles.item} key={i}>
-                    <a href={b_d_b[i.title]}>
+                    <a href={i.link}>
                       <img src={i.img} />
                     </a>
                     <span className={`${styles['fs-12']} ${styles['pt-10']} ${styles.flex} ${styles['justify-center']} ${styles['slider-elips']} ${styles['lne-ht1_2']}`}>{i.title}</span>
