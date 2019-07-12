@@ -339,7 +339,7 @@ export const ftbSkeletonLoader = (
 );
 
 export const camProfileHolder = (
-  <div style={{ overflow: 'hidden', maxHeight: '800px' }}>
+  <div className={`${styles.flex}`} style={{ overflow: 'hidden', maxHeight: '800px', }}>
     {/* <div className={`${styles.container}`} /> */}
     <div
       className={
