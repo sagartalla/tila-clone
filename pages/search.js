@@ -49,12 +49,15 @@ class SearchPage extends Base {
       disableSpellCheck,
       choosenCategoryName: category || subCategory,
     };
+
     if (shippingCity) {
       searchOptions.shippingDetails = {
         shippingCity: shippingCity.toUpperCase(),
         shippingCountry: (country || 'ARE').toUpperCase(),
       }
-    }
+    } else {
+      searchOptions.shippingDetails = undefined
+    }    
     await store.dispatch(actionCreators.getSearchResults(searchOptions))
     return { isServer };
   }
@@ -89,4 +92,3 @@ const mapDispatchToProps = dispatch =>
   );
 
 export default withRedux(makeStore, null, mapDispatchToProps)(SearchPage);
-
