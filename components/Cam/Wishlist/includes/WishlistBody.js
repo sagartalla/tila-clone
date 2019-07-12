@@ -28,7 +28,6 @@ const WishlistBody = (props) => {
   const {
     data, deleteItem, addToCart, notifyMe, pageDetails,
   } = props;
-  console.log(data);
   const { WISH_LIST_PAGE, PDP_PAGE } = languageDefinations();
 
   const getPriceAlert = (a, b, cur) => {

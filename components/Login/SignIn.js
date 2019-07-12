@@ -226,7 +226,7 @@ class SignIn extends Component {
           </h3>
           </div>   
           <div className={`${styles.flex} ${styles['mt-5']}`}>
-          <div className={`${styles['light-gry-clr']} ${styles['edit-button']}  ${styles['pr-10']} ${styles['fs-12']}`}>{mode === 'SOCIAL_LOGIN' ? LOGIN_PAGE.PLEASE_PROVIDE_EMAIL_ID_FOR_REGISTRATION : activeEmailId}</div>
+          <div className={mode === 'SOCIAL_LOGIN' ? `${styles['light-gry-clr']} ${styles['pr-10']} ${styles['fs-12']}` : `${styles['light-gry-clr']} ${styles['edit-button']}  ${styles['pr-10']} ${styles['fs-12']}`}>{mode === 'SOCIAL_LOGIN' ? LOGIN_PAGE.PLEASE_PROVIDE_EMAIL_ID_FOR_REGISTRATION : activeEmailId}</div>
           {mode !== 'SOCIAL_LOGIN' && <div className={`${styles['fs-12']} ${styles['pl-10']} ${styles['border-radius2']} ${styles['text-blue']} ${styles.pointer}`} onClick={this.goToPreviousPage}>{LOGIN_PAGE.NOT_YOU}</div>}
           </div>          
         </div>
@@ -348,7 +348,7 @@ class SignIn extends Component {
           btnLoading={loadingStatus}
           onClick={this.login}
         />
-        <span className={`${styles['m-20']} ${styles['t-c']} ${styles['fs-12']} ${styles['register-policy-gray']}`}>{mode === 'EXISTING_USER' ? LOGIN_PAGE.BY_LOGIN_I_AGREE_TO_TERMS : LOGIN_PAGE.BY_SIGNUP_I_AGREE_TO_TERMS } <span className={`${styles['text-blue']} ${styles.fontW600}`}><a href="/SAU/en/policy/tc" target="_blank">{LOGIN_PAGE.T_AND_C}</a>, <a href="/SAU/en/policy/pp" target="_blank">{LOGIN_PAGE.PRIVACY}</a> {LOGIN_PAGE.AND} <a href="/SAU/en/policy/pp" target="_blank">{LOGIN_PAGE.COOKIE_POLICY}</a></span></span>
+        <span className={`${styles['m-20']} ${styles['t-c']} ${styles['fs-12']} ${styles['register-policy-gray']}`}>{mode === 'EXISTING_USER' ? LOGIN_PAGE.BY_LOGIN_I_AGREE_TO_TERMS : LOGIN_PAGE.BY_SIGNUP_I_AGREE_TO_TERMS } <span className={`${styles['text-blue']} ${styles.fontW600}`}><a href="/SAU/en/policy/tc" target="_blank">{LOGIN_PAGE.T_AND_C}</a></span>, <span className={`${styles['text-blue']} ${styles.fontW600}`}><a href="/SAU/en/policy/pp" target="_blank">{LOGIN_PAGE.PRIVACY}</a></span> {LOGIN_PAGE.AND} <span className={`${styles['text-blue']} ${styles.fontW600}`}><a href="/SAU/en/policy/pp" target="_blank">{LOGIN_PAGE.COOKIE_POLICY}</a></span></span>
       </div>
     );
   }

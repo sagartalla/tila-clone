@@ -86,7 +86,7 @@ class ForgotPassword extends Component {
                   <span className={`${styles['ml-10']}`}>
                     <div className={radioValue === 'otp' ? `${styles['fs-12']} ${styles.fontW600}` : `${styles['fs-12']}`}>{LOGIN_PAGE.RESET_PASSWORD_BY_MOBILE}</div>
                     <div className={radioValue === 'otp' ? `${styles.fontW600} ${styles.width50} ${styles.flex} ${styles['justify-between']}` : `${styles.flex} ${styles.width50} ${styles['justify-between']}`}>
-                      <div className={`${styles['fashion-color']} ${styles['fs-14']}`}>{userData && (`+${userData.mobile_country_code}`)}</div>
+                      <div className={`${styles['fashion-color']} ${styles['fs-14']}`}>{userData && (userData.mobile_country_code)}</div>
                       <div className={`${styles['fs-14']}`}>{userData && userData.mobile_no}</div>
                     </div>
                   </span>

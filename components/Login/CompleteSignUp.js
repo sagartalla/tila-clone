@@ -33,13 +33,13 @@ class ContinueLogin extends Component {
         field: 'mobile_no',
         method: this.mobileValidation,
         validWhen: false,
-        message: 'Entered mobile number should have 9 numbers',
+        message: 'Enter valid mobile number',
       },
       {
         field: 'mobile_no',
         method: this.mobileWithZeroValidation,
         validWhen: false,
-        message: 'Entered mobile number should have 10 numbers',
+        message: 'Enter valid mobile number',
       },
     ]);
     this.state = {
@@ -60,6 +60,7 @@ class ContinueLogin extends Component {
     };
     this.onChangeCity = this.onChangeCity.bind(this);
     this.selectCityFromSuggesstions = this.selectCityFromSuggesstions.bind(this);
+    this.handleMobileNumber = this.handleMobileNumber.bind(this);
   }
   componentDidMount() {
     const { getCitiesByCountryCode } = this.props;
@@ -109,7 +110,7 @@ class ContinueLogin extends Component {
   mobileWithZeroValidation = (fieldValue) => {
     if (fieldValue === '' || fieldValue === undefined) {
       return false;
-    } else if (Number(fieldValue[0]) === 0 && fieldValue.length === 10) {
+    } else if (Number(fieldValue[0]) === 0 && Number(fieldValue[1]) === 5 && fieldValue.length === 10) {
       return false;
     } else if (Number(fieldValue[0]) !== 0) {
       return false;
@@ -118,7 +119,7 @@ class ContinueLogin extends Component {
   mobileValidation = (fieldValue) => {
     if (fieldValue === '' || fieldValue === undefined) {
       return false;
-    } else if (fieldValue.length === 9) {
+    } else if (Number(fieldValue[0]) === 5 && fieldValue.length === 9) {
       return false;
     } else if (Number(fieldValue[0]) === 0) {
       return false;
@@ -136,10 +137,19 @@ class ContinueLogin extends Component {
     });
   }
 
-  handleMobileNumber = (e) => {
-    this.setState({
-      mobile_no: e.target.value,
-    });
+  handleMobileNumber({ target }) {
+    if (/^[0-9]*$/gm.test(target.value)) {    
+      this.setState({
+        mobile_no: target.value,
+      }, () => {
+        const validation = this.validations.validateOnBlur({ [target.name]: target.value });
+        this.setState({ validation });
+      });
+    } else {
+      this.setState({
+        mobile_no: '',
+      });
+    }
   }
 
   handleInputChange = val => (e) => {
@@ -277,7 +287,6 @@ class ContinueLogin extends Component {
                 name="mobile_no"
                 autoComplete="off"
                 value={mobile_no}
-                onBlur={this.handleValidation}
                 onChange={this.handleMobileNumber}
                 className={`${styles['mobile-input']} ${styles['fs-14']} ${styles['ml-10']}`}
               />
@@ -422,7 +431,7 @@ class ContinueLogin extends Component {
           onClick={this.submit}
         />
         <a className={`${styles['t-c']} ${styles['fs-14']}`} onClick={this.skipAndContinue}>{LOGIN_PAGE.SKIP_AND_CONTINUE}</a>
-        <span className={`${styles['m-20']} ${styles['t-c']} ${styles['fs-12']} ${styles['register-policy-gray']}`}>{LOGIN_PAGE.BY_SIGNUP_I_AGREE_TO_TERMS } <span className={`${styles['text-blue']} ${styles.fontW600}`}><a href="/SAU/en/policy/tc" target="_blank">{LOGIN_PAGE.T_AND_C}</a>, <a href="/SAU/en/policy/pp" target="_blank">{LOGIN_PAGE.PRIVACY}</a> {LOGIN_PAGE.AND} <a href="/SAU/en/policy/pp" target="_blank">{LOGIN_PAGE.COOKIE_POLICY}</a></span></span>
+        <span className={`${styles['m-20']} ${styles['t-c']} ${styles['fs-12']} ${styles['register-policy-gray']}`}>{LOGIN_PAGE.BY_SIGNUP_I_AGREE_TO_TERMS } <span className={`${styles['text-blue']} ${styles.fontW600}`}><a href="/SAU/en/policy/tc" target="_blank">{LOGIN_PAGE.T_AND_C}</a></span>, <span className={`${styles['text-blue']} ${styles.fontW600}`}><a href="/SAU/en/policy/pp" target="_blank">{LOGIN_PAGE.PRIVACY}</a></span> {LOGIN_PAGE.AND} <span className={`${styles['text-blue']} ${styles.fontW600}`}><a href="/SAU/en/policy/pp" target="_blank">{LOGIN_PAGE.COOKIE_POLICY}</a></span></span>
       </div>
     );
   }
