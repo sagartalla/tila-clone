@@ -25,7 +25,7 @@ class ThankYou extends React.Component {
 
   componentWillUnmount() {
     if (this.props.showUserInfo) {
-      this.props.getUserInfoData({ initiateEmailVerification: false });
+      this.props.getUserInfoData();
       this.props.getUserProfileInfo();
     }
   }

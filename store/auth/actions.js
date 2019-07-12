@@ -78,7 +78,7 @@ const actionCreators = {
       dispatch(refStore.postLoginRef);
       dispatch(actions.DELETE_POST_LOGIN_ACTION_INFO);
     }
-    dispatch(actionCreators.getUserInfoData({initiateEmailVerification: params.channel === 'BASIC_REGISTER'})).then((res) => {
+    dispatch(actionCreators.getUserInfoData()).then((res) => {
       // if(params.channel !== 'BASIC_REGISTER') {
         if (res && res.value && res.value.data && res.value.data.email_verified === 'NV') {
           dispatch(actionCreators.setVerfied(false));

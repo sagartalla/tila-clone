@@ -65,6 +65,7 @@ class Review extends Component {
     if (!isLoggedIn) {
       this.props.showLoginScreen();
     } else if (isLoggedIn && (cookies.get('isVerified') === 'false')) {
+      this.props.getUserInfoData({ initiateEmailVerification: true });
       this.props.showLoginScreen();
       const data = { currentFlow: 'existing_user_login', nextPage: 'verify_email' };
       const { v2CurrentFlow } = this.props;
@@ -210,6 +211,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   submitUserReview: actionCreators.submitUserReview,
   showLoginScreen: authActionCreators.showLoginScreen,
   v2CurrentFlow: authActionCreators.v2CurrentFlow,
+  getUserInfoData: authActionCreators.getUserInfoData,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Review);

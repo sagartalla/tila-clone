@@ -29,7 +29,7 @@ import styles_ar from '../payment_ar.styl';
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
 
-const { PAYMENT_PAGE, CONTACT_INFO_MODAL, LOGIN_PAGE } = languageDefinations();
+const { PAYMENT_PAGE, HEADER_PAGE } = languageDefinations();
 
 const cookies = new Cookies();
 class SignIn extends Component {
@@ -92,17 +92,19 @@ class SignIn extends Component {
         <Row >
           <Col md={7} sm={5} xs={12} className={`${styles['landscape-socail-part']}`}>
             {props.showLogout && !props.showCheckoutLogin && props.isLoggedIn &&
-            <div className={`${styles['continue-checkout']}`}>
+            <div className={`${styles['continue-checkout']} ${styles['m-20']}`}>
               <div>
-                <div>Logged in as</div>
-                <div className={`${styles.fontW600} ${styles['mt-10']}`}>{props.userInfoData && props.userInfoData.email}</div>
+                <div className={`${styles['fs-16']}`}>{PAYMENT_PAGE.YOU_ARE_SIGNED_IN_AS}</div>
+                <div className={`${styles.fontW600} ${styles['mt-5']}`}>{props.userInfoData && props.userInfoData.email}</div>
               </div>
+              <div>
               <Button
                 className={`${styles['flex-center']} ${styles.width50} ${styles['fs-14']} ${styles['text-uppercase']} ${styles['button-radius']}`}
                 onClick={props.continueCheckout}
-                btnText="Continue To Checkout"
+                btnText={PAYMENT_PAGE.CONTINUE_TO_CHECKOUt}
               />
-              <div className={`${styles['text-blue']} ${styles.pointer}`} onClick={props.logoutClicked}>Logout &amp; Signin as different User</div>
+              <div className={`${styles['text-blue']} ${styles['m-30']} ${styles.pointer}`} onClick={props.logoutClicked}>{HEADER_PAGE.LOGOUT} &amp; {PAYMENT_PAGE.SIGN_IN_AS_DIFF_USER}</div>
+              </div>
             </div>}
             {(props.showCheckoutLogin || !props.isLoggedIn) &&
             <LoginFlow />}
