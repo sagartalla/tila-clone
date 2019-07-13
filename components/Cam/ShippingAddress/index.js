@@ -241,18 +241,14 @@ class ShippingAddress extends Component {
   }
 
   mobileWithZeroValidation = (fieldValue) => {
-    if (fieldValue === '' || fieldValue === undefined) {
-      return false;
-    } else if (Number(fieldValue[0]) === 0 && Number(fieldValue[1]) === 5 && fieldValue.length === 10) {
+    if (Number(fieldValue[0]) === 0 && Number(fieldValue[1]) === 5 && fieldValue.length === 10) {
       return false;
     } else if (Number(fieldValue[0]) !== 0) {
       return false;
     } return true;
   }
   mobileValidation = (fieldValue) => {
-    if (fieldValue === '' || fieldValue === undefined) {
-      return false;
-    } else if (Number(fieldValue[0]) === 5 && fieldValue.length === 9) {
+    if (Number(fieldValue[0]) === 5 && fieldValue.length === 9) {
       return false;
     } else if (Number(fieldValue[0]) === 0) {
       return false;
