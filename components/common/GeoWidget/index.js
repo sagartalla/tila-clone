@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Dropdown, MenuItem } from 'react-bootstrap';
 import { bindActionCreators } from 'redux';
+import { Router } from '../../../routes';
 import _ from 'lodash';
 import Cookie from 'universal-cookie';
 import { selectors as productSelectors, actionCreators as productActionCreators } from '../../../store/product';
@@ -71,7 +72,7 @@ class GeoWidget extends Component {
       country,
       displayCity,
     }).then(() => {
-      location.reload();
+      Router.pushRoute(`${window.location.pathname}${window.location.search}`)
     });
   }
 
@@ -119,8 +120,8 @@ class GeoWidget extends Component {
     this.setState({
       displayCity: null,
     });
-    this.props.removeCity().then(() => {
-      location.reload();
+    this.props.removeCity().then(() => {    
+      Router.pushRoute(`${window.location.pathname}${window.location.search}`)
     });
   }
 
