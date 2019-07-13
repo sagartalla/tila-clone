@@ -909,5 +909,25 @@ export const EN_KEYWORDS = {
     SELECT_ORDER_WITH_ISSUE: 'SELECT ORDER WITH ISSUE',
     MY_ORDERS: 'MY ORDERS',
     SIGN_IN_MSG: 'Please sign in to view your orders'
-  }
+  },
+  SEO_CONTENT: {
+    HOME_H1_CONTENT: 'Online Shopping Store in Saudi',
+    HOME_H2_CONTENT: 'Shop for Latest Products online at Tila.com SAUDI',
+    HOME_META_CONTENT: 'Tila.com is the best ecommerce site in Middle East region we have huge collections of electronics fashion and lifestyle accessories products available at best prices.',
+    HOME_META_KEYWORD: 'Online shopping,Online shopping site,Best online shopping site in Saudi',
+    HOME_TITLE: 'Tila.com - Best Online Shopping site in SAUDI | electronics,fashion ,lifestyle accessories and many more at best prices in Saudi',
+    LANDING_H2_CONTENT: 'Buy Latest',
+    LANDING_H2: 'online at best prices in',
+    LANDING_TILA: '@ Tila.com',
+    PDP_H2: 'Buy',
+    PDP_H2_CONTENT: 'Online at Best Prices',
+    PDP_H2_TITLE: 'online at the best prices with great offers only on Tila.com',
+    LANDING_META_CONTENT1: 'at best discounted Prices - Buy branded',
+    LANDING_META_CONTENT2:'online in',
+    LANDING_META_CONTENT3: 'at tila.com/en . 100 % Genuine products ✓ Free Shipping Across {Country} Sub Regions ✓ Free Returns ✓ 15 Days Return✓ COD ✓ Superfast delivery.',
+    LANDING_META_KEYWORD1: ',Buy',
+    LANDING_META_KEYWORD2: 'Online',
+    BRAND_H2: 'Shop for the latest',
+    BRAND_H2_TITLE: 'Buy the latest Lenovo products at best deals on Tila.com',
+  },
 };

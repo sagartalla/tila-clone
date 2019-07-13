@@ -4,8 +4,10 @@ import withRedux from 'next-redux-wrapper';
 import { configureUrlQuery } from 'react-url-query';
 import Cookies from 'universal-cookie';
 import createHistory from 'history/createBrowserHistory';
+import { Head } from 'next/document';
 import Base, { baseActions } from './base';
 import makeStore from '../store';
+import { languageDefinations } from '../utils/lang';
 import { actionCreators, selectors } from '../store/search';
 import { actionCreators as authActionsCreators, selectors as authSelectors } from '../store/auth';
 import Layout from '../layout/main';
@@ -14,6 +16,8 @@ import Search from '../components/Search';
 import SearchContext from '../components/helpers/context/search';
 
 const cookies = new Cookies();
+
+const { SEO_CONTENT } = languageDefinations();
 
 class SearchPage extends Base {
   static async getInitialProps({ store, isServer, query, req }) {
@@ -67,6 +71,11 @@ class SearchPage extends Base {
   render() {
     return (
       <div>
+        <Head>
+          <meta name="description" content={SEO_CONTENT.META_CONTENT} />
+          <meta name="keywords" content={SEO_CONTENT.HOME_META_KEYWORD} />
+          <title>{SEO_CONTENT.HOME_TITLE}</title>
+        </Head>
         <SearchContext.Provider value="search">
           <Layout>
             <Search query={this.props.url.query} />

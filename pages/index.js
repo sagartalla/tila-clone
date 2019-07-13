@@ -3,11 +3,15 @@ import Router from 'next/router';
 import { bindActionCreators } from 'redux';
 import withRedux from 'next-redux-wrapper';
 import makeStore from '../store';
-import Layout from '../layout/main'
+import { languageDefinations } from '../utils/lang';
+import Layout from '../layout/main';
 import Landing from '../components/Landing';
 import Base, { baseActions } from './base';
 import { actionCreators } from '../store/landing';
-import { actionCreators as PersonalActionCreator } from '../store/cam/personalDetails'
+import { actionCreators as PersonalActionCreator } from '../store/cam/personalDetails';
+
+
+const { SEO_CONTENT } = languageDefinations();
 class LandingPage extends Base {
   pageName = 'HOME';
   static async getInitialProps({ store, query, isServer, req, res }) {
@@ -19,7 +23,7 @@ class LandingPage extends Base {
         res.writeHead(302, {
           Location: `/${setCountry}/${setLanguage}`
         })
-        res.end();
+        res.end();{}
       } else {
         Router.push(`/${setCountry}/${setLanguage}`)
       }
@@ -28,12 +32,14 @@ class LandingPage extends Base {
     return { isServer };
   }
   componentDidMount() {
-    this.props.getUserProfileInfo()
+    this.props.getUserProfileInfo();
   }
   render() {
     const { url } = this.props;
     return (
       <div>
+        <h1>{SEO_CONTENT.HOME_H1_CONTENT}</h1>
+        <h2>{SEO_CONTENT.HOME_H2_CONTENT}</h2>
         <Layout>
           <Landing query={url.query} />
         </Layout>

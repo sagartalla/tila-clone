@@ -1,9 +1,11 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
+import { Head } from 'next/document';
 import withRedux from 'next-redux-wrapper';
 import Cookies from 'universal-cookie';
 import Base, { baseActions } from './base';
 import makeStore from '../store';
+import { languageDefinations } from '../utils/lang';
 import { actionCreators } from '../store/search';
 import Layout from '../layout/main';
 import Search from '../components/Search';
@@ -12,6 +14,9 @@ import { actionCreators as LandingactionCreators } from '../store/landing';
 import SearchContext from '../components/helpers/context/search';
 
 const cookies = new Cookies();
+
+const { SEO_CONTENT } = languageDefinations();
+
 
 class SearchPage extends Base {
   static async getInitialProps({
@@ -51,6 +56,13 @@ class SearchPage extends Base {
     return (
       <div>
         <SearchContext.Provider value="search">
+          <Head>
+            <meta name="description" content={`${this.props.url.query} ${SEO_CONTENT.LANDING_META_CONTENT1} ${this.props.url.query} ${SEO_CONTENT.LANDING_META_CONTENT2} ${cookies.get('country')} ${SEO_CONTENT.LANDING_META_CONTENT3}`} />
+            <meta name="keywords" content={`${this.props.url.query} ${SEO_CONTENT.LANDING_META_KEYWORD1} ${this.props.url.query} ${SEO_CONTENT.LANDING_META_KEYWORD2}`} />
+            <title>{this.props.url.query} {SEO_CONTENT.BRAND_H2_TITLE} </title>
+          </Head>
+          <h1>{this.props.url.query}</h1>
+          <h2>{SEO_CONTENT.BRAND_H2} {this.props.url.query}</h2>
           <Layout>
             <Search query={this.props.url.query} isBrandPage />
           </Layout>

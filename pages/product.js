@@ -1,8 +1,9 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import withRedux from 'next-redux-wrapper';
+import { Head } from 'next/document';
 import Cookies from 'universal-cookie';
-
+import { languageDefinations } from '../utils/lang';
 import Base, { baseActions } from './base';
 import makeStore from '../store';
 import { actionCreators } from '../store/product';
@@ -10,6 +11,8 @@ import { actionCreators } from '../store/product';
 
 import Layout from '../layout/main';
 import getProductComponent from '../components/Product';
+
+const { SEO_CONTENT } = languageDefinations();
 
 const cookies = new Cookies();
 
@@ -78,6 +81,13 @@ class ProductPage extends Base {
     const { url } = this.props;
     return (
       <div>
+        <Head>
+          <meta name="description" content={`${url.query.productId} ${SEO_CONTENT.LANDING_META_CONTENT1} ${url.query.productId} ${SEO_CONTENT.LANDING_META_CONTENT2} ${cookies.get('country')} ${SEO_CONTENT.LANDING_META_CONTENT3}`} />
+          <meta name="keywords" content={`${url.query.productId} ${SEO_CONTENT.LANDING_META_KEYWORD1} ${url.query.productId} ${url.query.category} ${SEO_CONTENT.LANDING_META_KEYWORD2}`} />
+          <title>{url.query.productId} {SEO_CONTENT.PDP_H2_TITLE} </title>
+        </Head>
+        <h1>{url.query.productId}</h1>
+        <h2>{SEO_CONTENT.PDP_H2} {url.query.productId} {SEO_CONTENT.PDP_H2_CONTENT}</h2>
         <Layout>
           <Product
             variantId={url.query.variantId}
