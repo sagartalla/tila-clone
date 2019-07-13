@@ -213,7 +213,7 @@ class OrderHeader extends Component {
               <Col md={5} xs={6} sm={5}>
                 <Col md={6} sm={6}><span className={`${styles['thick-gry-clr']} ${styles['fs-14']}`}>{ORDER_PAGE.GRAND_TOTAL}</span></Col>
                 {price &&
-                <Col md={6} sm={6}>
+                <Col md={6} sm={6} className={styles['tool-tip-style']}>
                   <span className={`${styles.fontW600} ${styles['light-gry-clr']} ${styles['flex-center']} ${styles['fs-14']}`}>
                     {total_price.display_value}&nbsp;{total_price.currency_code}
                     {/* (<a onMouseOver={this.showToolTip} onMouseLeave={this.hideToolTip}>i</a>) */}
@@ -233,7 +233,7 @@ class OrderHeader extends Component {
                             {total_offer_price &&
                             <li className={`${styles['flx-space-bw']}`}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.T_PRICE} : </span><span> {total_offer_price.display_value} {total_offer_price.currency_code}</span></li>}
                             {total_shipping &&
-                            <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.T_SHIPPING} : </span><span className={styles.flex}>{total_shipping.money_value ? `(+) ${total_shipping.display_value} ${total_shipping.currency_code}` : <SVGComponent clsName={`${styles['ship-icon']}`} src="icons/free-shipping" />}</span></li>}
+                            <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.T_SHIPPING} : </span><span className={styles.flex}>{total_shipping.money_value ? `(+) ${total_shipping.display_value} ${total_shipping.currency_code}` : <SVGComponent clsName={`${styles['ship-icon']}`} src={lang === 'en' ? "icons/free-shipping" : "icons/Arabic-Freeshipping" } />}</span></li>}
                             {total_gift_charges && total_gift_charges.money_value > 0 &&
                               <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.T_GIFT_CHARGES} : </span><span>{total_gift_charges.display_value ? `(+) ${total_gift_charges.display_value} ${total_gift_charges.currency_code}` : 'FREE'}</span></li>}
                             {total_price &&

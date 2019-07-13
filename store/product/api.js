@@ -8,7 +8,7 @@ import constants from '../helper/constants';
 const cookies = new Cookies();
 
 const getProduct = (options) => {
-  return axios.post(`${constants.LISTING_API_URL}/api/v1/listing/`,options);
+  return axios.post(`${constants.LISTING_API_URL}/api/v1/listing/`, options);
 };
 
 const getPreview = (options) => {

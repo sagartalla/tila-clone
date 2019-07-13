@@ -31,7 +31,7 @@ const PaymentStatus = props => {
       <Row className={`${styles['flex-center']} ${styles['m-0']}`}>
         <Col md={2} xs={2} sm={2}>
           <div className={`${styles['pb-25']} ${styles['pt-15']} ${styles['gift-img']}`}>
-            <SVGComponent clsName={`${styles['gift-card-icon']}`} src="icons/gift-icon/gift-icon" />
+            <SVGComponent clsName={`${styles['gift-card-icon']}`} src={props.status == "SUCCESSFUL" ? "icons/gift-icon/gift-icon" : "icons/gift-icon/card-failed"} />
           </div>
         </Col>
         <Col md={10} xs={9} sm={9}>
@@ -40,7 +40,7 @@ const PaymentStatus = props => {
             {
               props.status == "SUCCESSFUL" ?
                 <a href={`/${country}/${language}/cam/orders`} className={styles['mb-20']}>
-                  <button className={`${styles['fp-btn']} ${styles['fp-btn-default']}`}>{THANK_YOU_PAGE.TRACK_ORDERS}</button>
+                  <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['left-radius']}`}>{THANK_YOU_PAGE.TRACK_ORDERS}</button>
                 </a>
                 : null
             }

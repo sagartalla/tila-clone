@@ -195,7 +195,7 @@ class CartItem extends React.Component {
                 <Col md={12}>
                   <h5 className={`${styles['mt-0']} ${styles['mb-0']}`}>{brand_name}</h5>
                 </Col>
-                <Col md={9} sm={9} className={`${styles['landscape-cart-details']} ${styles['pr-0']}`}>
+                <Col md={8} sm={8} className={`${styles['landscape-cart-details']} ${styles['pr-0']}`}>
                   <h4 className={`${styles['fontW600']} ${styles['m-fs-14']} ${styles['fs-16']}`}>
                     <Link route={`/${country}/${language}/product?productId=${product_id}${variant_id ? `&variantId=${variant_id}` : ''}&catalogId=${catalogId}&itemType=${itemType}`}>
                       <a className={`${styles['width100']} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
@@ -204,8 +204,8 @@ class CartItem extends React.Component {
                     </Link>
                   </h4>
                   {variantAttributes.length > 0 &&
-                    variantAttributes.map(attr => (
-                      <div className={`${styles['thick-gry-clr']} ${styles['fs-12']} ${styles['mb-15']}`}>
+                    variantAttributes.map((attr,index) => (
+                      <div className={`${styles['thick-gry-clr']} ${styles['fs-12']} ${styles['mb-15']}`} key={index}>
                         <span>{attr.display_string} : </span>
                         <span>{attr.attribute_values[0].value}</span>
                       </div>
@@ -224,7 +224,7 @@ class CartItem extends React.Component {
                         shipping !== null && (shipping.shippable && (
                           <p className={`${styles['mb-0']}`}>
                             <span className={`${styles['thick-gry-clr']} ${styles['fs-12']}`}>{CART_PAGE.SHIPPING} :</span>
-                            <span className={`${styles['pl-10']} ${styles['pr-10']} ${styles['fs-14']}`}>{CART_PAGE.REGULAR_SHIPPING} {shipping.shipping_fees ? `(${shipping.shipping_fees} ${cur})` : ''} - <span className={`${styles['fs-12']} ${styles['base-font']}`}>{CART_PAGE.ETA_DELIVERY_BY} {moment().add(shipping.shipping_days, 'days').format('LL')}</span>
+                            <span className={`${styles['pl-10']} ${styles['pr-10']} ${styles['fs-14']}`}>{CART_PAGE.REGULAR_SHIPPING} {shipping && shipping.shipping_fees && shipping.shipping_fees.display_value && shipping.shipping_fees.display_value ? `(${shipping.shipping_fees.display_value} ${cur})` : ''} - <span className={`${styles['fs-12']} ${styles['base-font']}`}>{CART_PAGE.ETA_DELIVERY_BY} {moment().add(shipping.shipping_days, 'days').format('LL')}</span>
                             </span>
                           </p>
                         ))
@@ -236,7 +236,7 @@ class CartItem extends React.Component {
                     </div>
                     {checked && showMessage &&
                       <div>
-                        <span className={styles.fontW600}>{CART_PAGE.MESSAGE}:&nbsp;</span><span>{gift_card_message}&nbsp;</span>
+                        <span className={styles.fontW600}>{CART_PAGE.MESSAGE}:&nbsp;</span><span className={styles['break-word']}>{gift_card_message}&nbsp;</span>
                         <span>{'('}<a onClick={this.toggleMessage}>{CART_PAGE.EDIT}</a>{')'}</span>
                       </div>
                     }
@@ -251,6 +251,7 @@ class CartItem extends React.Component {
                           placeholder={CART_PAGE.GIFT_MESSAGE_OPTIONAL}
                           value={gift_card_message}
                           onChange={this.updateMsg}
+                          maxLength="150"
                         />
                         <button
                           data-id={item_id}
@@ -272,7 +273,7 @@ class CartItem extends React.Component {
                     </div>))
                   }
                 </Col>
-                <Col md={3} sm={3} className={`${styles['pr-5']} ${styles['landscape-cart-price']}`}>
+                <Col md={4} sm={4} className={`${styles['pr-5']} ${styles['landscape-cart-price']}`}>
                   {Math.floor(discount) > 5 &&
                     <p className={`${styles['mb-0']} ${styles['fs-12']} ${styles['flex']} ${styles['justify-end']}`}>
                       <span className={styles['success-green']}>{`${Math.floor(discount)}% ${PDP_PAGE.OFF}`}</span>
@@ -345,8 +346,8 @@ class CartItem extends React.Component {
                                         </div>
                                         <div className={`${styles['t-rt']} ${styles['flex']}`}>
                                           {shipping.shipping_fees ?
-                                            `${shipping.shipping_fees} ${cur}`
-                                            : <SVGComponent clsName={`${styles['ship-icon']}`} src="icons/free-shipping" />}
+                                            `${shipping.shipping_fees.display_value} ${cur}`
+                                            : <SVGComponent clsName={`${styles['ship-icon']}`} src={lang === 'en' ? "icons/free-shipping" : "icons/Arabic-Freeshipping" } />}
                                         </div>
                                       </div>
                                     :
@@ -377,7 +378,7 @@ class CartItem extends React.Component {
           </Row>
         </div>
         <div className={`${styles['cart-box-btm']} ${styles['flex']} ${styles['p-14-22']}`}>
-          <Col md={9} sm={9} xs={9} className={`${styles['flex']} ${styles['m-pd-r-0']}`}>
+          <Col md={8} sm={8} xs={8} className={`${styles['flex']} ${styles['m-pd-r-0']}`}>
             <span className={styles['width21']}>
               {
                 inventory <= 10 && inventory != 0 ?
@@ -399,7 +400,7 @@ class CartItem extends React.Component {
               <span className={styles['pl-10']}>{CART_PAGE.REMOVE}</span>
             </span>
           </Col>
-          <Col md={3} sm={3} xs={3} className={`${styles['t-rt']} ${styles['pr-0']} ${styles['m-pad-5']}`}>
+          <Col md={4} sm={4} xs={4} className={`${styles['t-rt']} ${styles['pr-0']} ${styles['m-pad-5']}`}>
             <span>{ORDER_PAGE.TOTAL} : </span><span className={`${styles['fs-16']} ${styles['fontW600']}`}>{total_amount + ' ' + cur}</span>
           </Col>
         </div>

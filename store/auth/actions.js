@@ -3,6 +3,7 @@ import api from './api';
 // import loginReq from '../helper/loginReq';
 import refStore from '../helper/refHandler';
 import { actionCreators as cartActionCreators } from '../cart';
+// import { actionCreators as cartActionCreators } from './';
 import { actionCreators as shippingActionCreators } from '../cam/address'
 import { actionCreators as personalDetailsActionCreator } from '../cam/personalDetails'
 const cookies = new Cookies();
@@ -28,10 +29,41 @@ const actions = {
   VERIFY_RESEND_EMAIL: 'VERIFY_RESEND_EMAIL',
   GET_USER_INFO: 'GET_USER_INFO',
   GET_DOMAIN_COUNTRIES: 'GET_DOMAIN_COUNTRIES',
-  AUTH_TRACK: 'AUTH_TRACK'
+  AUTH_TRACK: 'AUTH_TRACK',
+  // new actions
+  V2_USER_LOGIN: 'V2_USER_LOGIN',
+  RESET_PASSWORD: 'RESET_PASSWORD',
+  FORGOT_PASSWORD: 'FORGOT_PASSWORD',
+  V2_SHOW_NEXT_PAGE: 'V2_SHOW_NEXT_PAGE',
+  SHOW_LOGIN_SCREEN: 'SHOW_LOGIN_SCREEN',
+  SHOW_USER_INFO: 'SHOW_USER_INFO',
+  ClOSE_THANKYOU_SCREEN: 'ClOSE_THANKYOU_SCREEN',
+  CHANGE_CURRENT_FLOW: 'CHANGE_CURRENT_FLOW',
+  GET_MOBILE_OTP: 'GET_MOBILE_OTP',
+  VERIFY_RESET_OTP: 'VERIFY_RESET_OTP',
+  SHIPPING_ACCOUNT: 'SHIPPING_ACCOUNT',
+  V2_PREVIOUS_PAGE: 'V2_PREVIOUS_PAGE',
+  SKIP_AND_CONTINUE: 'SKIP_AND_CONTINUE',
 };
 
 const actionCreators = {
+  // new actions for registration flow
+  v2UserLogin: email => ({
+    type: actions.V2_USER_LOGIN,
+    payload: api.v2UserLogin(email),
+  }),
+  v2NextPage: () => ({
+    type: actions.V2_SHOW_NEXT_PAGE,
+  }),
+  v2PreviousPage: () => ({
+    type: actions.V2_PREVIOUS_PAGE,
+  }),
+  v2CurrentFlow: data => ({
+    type: actions.CHANGE_CURRENT_FLOW,
+    payload: data,
+  }),
+
+  // ///////
   userLogin: params => (dispatch, getState) => dispatch({
     type: actions.USER_LOGIN,
     payload: api.userLogin(params),
@@ -46,24 +78,29 @@ const actionCreators = {
       dispatch(refStore.postLoginRef);
       dispatch(actions.DELETE_POST_LOGIN_ACTION_INFO);
     }
-    dispatch(actionCreators.getUserInfoData({initiateEmailVerification: params.channel === 'BASIC_REGISTER'})).then((res) => {
-      if(params.channel !== 'BASIC_REGISTER') {
+    dispatch(actionCreators.getUserInfoData()).then((res) => {
+      // if(params.channel !== 'BASIC_REGISTER') {
         if (res && res.value && res.value.data && res.value.data.email_verified === 'NV') {
           dispatch(actionCreators.setVerfied(false));
         } else {
           dispatch(actionCreators.setVerfied(true));
-        }
+        // }
       }
       return res;
     });
   }),
-  userLogout: () => (dispatch) => {
+  // userLogout: () => (dispatch) => {
+  //   dispatch(cartActionCreators.getCartResults());
+  //   dispatch({
+  //     type: actions.USER_LOGOUT,
+  //     payload: api.userLogout(),
+  //   });
+  // },
+  userLogout: () => ({
     // dispatch(cartActionCreators.getCartResults());
-    dispatch({
-      type: actions.USER_LOGOUT,
-      payload: api.userLogout(),
-    });
-  },
+    type: actions.USER_LOGOUT,
+    payload: api.userLogout(),
+  }),
   getLoginInfo: params => ({
     type: actions.USER_LOGIN_INFO,
     payload: api.getLoginInfo(params),
@@ -122,7 +159,7 @@ const actionCreators = {
       dispatch(actionCreators.setVerfied(true));
     }, () => {
       dispatch(actionCreators.setVerfied(false));
-    })
+    });
   },
   sendOtpToEmailId: (status = true) => ({
     type: actions.VERIFY_RESEND_EMAIL,
@@ -154,6 +191,69 @@ const actionCreators = {
       }));
     });
   },
+  //new actions for registration flow
+  v2UserLogin: email => ({
+    type: actions.V2_USER_LOGIN,
+    payload: api.v2UserLogin(email),
+  }),
+
+  resetPassword: (body) => {
+    return ({
+      type: actions.RESET_PASSWORD,
+      payload: api.resetPassword(body),
+    });
+  },
+
+  closeThankYouScreen: () => ({
+    type: actions.ClOSE_THANKYOU_SCREEN,
+  }),
+  
+  forgotPassword: (body) => {
+    return ({
+      type: actions.FORGOT_PASSWORD,
+      payload: api.forgotPassword(body),
+    });
+  },
+
+  showLoginScreen: () => ({
+    type: actions.SHOW_LOGIN_SCREEN,
+  }),
+
+  showUserInfo: (param) => {
+    return ({
+      type: actions.SHOW_USER_INFO,
+      payload: api.showUserInfo(param),
+    });
+  },
+
+   
+  getMobileOtp: (body) => {
+    return ({
+      type: actions.GET_MOBILE_OTP,
+      payload: api.getMobileOtp(body),
+    });
+  },
+
+  verifyResetOtp: (body) => {
+    return ({
+      type: actions.VERIFY_RESET_OTP,
+      payload: api.verifyResetOtp(body),
+    });
+  },
+
+  shippingAccount: (body) => {
+    return ({
+      type: actions.SHIPPING_ACCOUNT,
+      payload: api.shippingAccount(body),
+    });
+  },
+
+  skipAndContinue: () => {
+    return ({
+      type: actions.SKIP_AND_CONTINUE,
+    });
+  },
+
 };
 
 export { actions, actionCreators };

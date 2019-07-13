@@ -4,6 +4,7 @@ import { actions } from './actions';
 const initialState = {
   ui: {
     loading: false,
+    notifyLoading: false,
   },
   data: [],
   products: [],
@@ -47,13 +48,13 @@ const wishlistReducer = typeToReducer({
   },
   [actions.NOTIFY_ME]: {
     PENDING: (state) => {
-      return Object.assign({}, state, { ui: { loading: true } });
+      return Object.assign({}, state, { ui: { notifyLoading: true } });
     },
     REJECTED: (state) => {
-      return Object.assign({}, state, { ui: { loading: false } });
+      return Object.assign({}, state, { ui: { notifyLoading: false } });
     },
     FULFILLED: (state) => {
-      return Object.assign({}, state, { ui: { loading: false } });
+      return Object.assign({}, state, { ui: { notifyLoading: false } });
     },
   },
   [actions.WISHLIST_PRODUCTS]: {

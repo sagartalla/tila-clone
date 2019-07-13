@@ -135,14 +135,14 @@ class MegaMenu extends Component {
       <div>
         <Grid className={`${styles['pl-0']}`}>
         <nav className={`${styles['megamenu-wrapper']} ${styles['flx-spacebw-alignc']}`}>
-          <ul className={styles['mb-0']}>
+          <ul className={`${styles['mb-0']} ${styles.flex}`}>
             {
               _.map(megamenu, (item) => {
                 return (
                   <li key={item.id}
                     onMouseEnter={this.onHoverCurry(item)}
                     onMouseLeave={this.onHoverOutDelayed(item.id)}
-                    className={`${(hoverItem === item.id) ? styles['active-menu-item']: {}}`}
+                    className={`${(hoverItem === item.id) ? styles['active-menu-item'] : ''}`}
                     style={ (itemColor && hoverItem === item.id) ? { borderBottom: `4px solid ${itemColor}` } : {} }
                     >
                     <div>

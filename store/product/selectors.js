@@ -1,7 +1,6 @@
 import _ from 'lodash';
 
 const getProduct = (store, variantId) => {
-
   const {
     product_details, variant_preferred_listings, tree,
   } = store.productReducer.data[0];
@@ -57,8 +56,8 @@ const getProduct = (store, variantId) => {
 
   const imgUrls = product_details && product_details.product_details_vo && product_details.product_details_vo.cached_product_details.media.gallery_media;
   const titleInfo = {
-    brand: product_details && product_details.catalog_details && product_details.catalog_details.attribute_map.brand.attribute_values[0].value,
-    title: productAttributeMap && productAttributeMap.calculated_display_name && productAttributeMap.calculated_display_name.attribute_values[0].value,
+    brand: product_details && product_details.catalog_details && product_details.catalog_details.attribute_map.brand,
+    title: productAttributeMap && productAttributeMap.calculated_display_name && productAttributeMap.calculated_display_name,
     rating: {
       rating: '',
       count: ''
@@ -107,7 +106,7 @@ const getProduct = (store, variantId) => {
     product_id: product_details && product_details.product_id,
     variant_id,
   };
-  const keyfeatures = _.map(productAttributeMap && productAttributeMap.calculated_highlights && productAttributeMap.calculated_highlights.attribute_values, (kf) => kf.value);
+  const keyfeatures = productAttributeMap && productAttributeMap.calculated_highlights;
   const extraOffers = priceInfo ? priceInfo.pricing.extra_offers_detail : [];
   const details = catalogAttributeMap && catalogAttributeMap.description ? catalogAttributeMap.description.attribute_values.map((d) => d.value).join(', ') : null;
   let productDescription = product_details && product_details.product_details_vo && product_details.product_details_vo.cached_product_details.rich_product_desc;

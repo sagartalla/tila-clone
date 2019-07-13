@@ -9,7 +9,7 @@ const initialState = {
   useractive: true,
   error: '',
   otpResponse:{},
-  otpData:{}
+  otpData:{},
 };
 
 const personalDetailsReducer = typeToReducer({
@@ -143,7 +143,7 @@ const personalDetailsReducer = typeToReducer({
         ...passResetStatus,
       },
       ui: {
-        loading: true,
+        loading: false,
       },
     };
     return newState;

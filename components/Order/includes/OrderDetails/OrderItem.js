@@ -159,7 +159,7 @@ class OrderItem extends Component {
                     <Col md={2} className={styles['p-0']}>
                       <div className={`${styles['img-wrap']} ${styles['flex-center']} ${styles['justify-center']}`}>
                         <Link route={`/${country}/${language}/product?productId=${product.productId}${product.variantId ? `&variantId=${product.variantId}` : ''}&catalogId=${product.catalogId}&itemType=${product.itemType}`}>
-                          <a className={`${styles['width100']} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
+                          <a target="_blank" className={`${styles['width100']} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
                             <img className={`${styles['order-item-img']}`} src={`${constants.mediaDomain}/${product.img}`} alt={product.img} />
                           </a>
                         </Link>
@@ -172,7 +172,7 @@ class OrderItem extends Component {
                     <Col md={10} className={`${styles['ipad-pr-0']} ${styles['pt-15']}`}>
                       <div className={`${styles['text-wrap']}`}>
                         <Link route={`/${country}/${language}/product?productId=${product.productId}${product.variantId ? `&variantId=${product.variantId}` : ''}&catalogId=${product.catalogId}&itemType=${product.itemType}`}>
-                          <a className={`${styles['width100']} ${styles['fs-14']} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
+                          <a target="_blank" className={`${styles['width100']} ${styles['fs-14']} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
                             <span className={`${styles.fontW600}`}>{product.name}</span>
                           </a>
                         </Link>
@@ -216,7 +216,7 @@ class OrderItem extends Component {
                                       {offer_price &&
                                       <li className={`${styles['flx-space-bw']}`}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.PRICE} :</span><span> {offer_price.display_value} {offer_price.currency_code}</span></li>}
                                       {shipping_fees &&
-                                      <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.SHIPPING} : </span><span className={styles.flex}>{shipping_fees.display_value ? `(+) ${shipping_fees.display_value} ${shipping_fees.currency_code}` : <SVGComponent clsName={`${styles['ship-icon']}`} src="icons/free-shipping" />}</span></li>}
+                                      <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.SHIPPING} : </span><span className={styles.flex}>{shipping_fees.display_value ? `(+) ${shipping_fees.display_value} ${shipping_fees.currency_code}` : <SVGComponent clsName={`${styles['ship-icon']}`} src={lang === 'en' ? "icons/free-shipping" : "icons/Arabic-Freeshipping" } />}</span></li>}
                                       {product.gift_info && gift_charge &&
                                         <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.GIFT_CHARGES} : </span><span>{gift_charge.display_value ? `(+) ${gift_charge.display_value} ${gift_charge.currency_code}` : 'FREE'}</span></li>}
                                       {final_price &&
@@ -272,7 +272,7 @@ class OrderItem extends Component {
                       <a>
                         <span className={`${styles.relative} ${styles['tooltip']} ${styles['mr-10']} ${styles['tool-tip-parent']} ${styles['checkout-quat']} ${styles['fs-12']} ${styles['flex-center']} ${styles['justify-around']}`}>
                           {'!'}
-                          <div className={`${styles['tool-tip']} ${styles.rightM15} ${styles['p-15']}`}>
+                          <div className={`${styles['tool-tip']} ${styles.rightM15} ${styles['p-15']} ${styles['break-word']}`}>
                             <div className={styles.fontW600}>{ORDER_PAGE.MESSAGE}:</div>
                             {product.gift_info.gift_card_message}
                           </div>

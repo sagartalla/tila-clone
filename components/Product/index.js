@@ -15,11 +15,14 @@ import AddToCart from './includes/AddToCart';
 import RecentView from './includes/RecentView';
 import ElectronicsTab from './includes/ElectronicsTab';
 import ProductDetails from './includes/ProductDetails';
+import { actionCreators as userVaultActionCreators, selectors as userVaultSelectors } from '../../store/cam/userVault';
 import FooterBar from '../Footer/index';
 import Theme from '../helpers/context/theme';
 import CompareWidget from '../common/CompareWidget';
 import { actionCreators, selectors } from '../../store/product';
 import { actionCreators as wishlistActionCreators, selectors as wishListSelectors } from '../../store/cam/wishlist';
+import { actionCreators as addressActionCreators, selectors as addressSelectors } from '../../store/cam/address';
+import { actionCreators as paymentActionCreators } from '../../store/payments';
 import Button from '../common/CommonButton';
 
 import lang from '../../utils/language';
@@ -62,7 +65,7 @@ const getProductComponent = (isPreview, taskCode) => {
         const {
           offerInfo, titleInfo, imgUrls, shippingInfo,
         } = productData;
-        digitalData.page.pageInfo.pageName = titleInfo.title;
+        digitalData.page.pageInfo.pageName = titleInfo.title.attribute_values[0].value;
         digitalData.page.category = { primaryCategory: productData.categoryType };
         digitalData.page.pageInfo.breadCrumbs = productData.breadcrums ? productData.breadcrums.map(item => item.display_name_en) : [];
         this.props.track({
@@ -85,7 +88,7 @@ const getProductComponent = (isPreview, taskCode) => {
 
           if (index === -1) {
             arr.unshift({
-              nm: titleInfo.title,
+              nm: titleInfo.title.attribute_values[0].value,
               im: imgUrls && imgUrls[0].url,
               pr,
               cd,
@@ -97,7 +100,7 @@ const getProductComponent = (isPreview, taskCode) => {
           this.setState({ recentlyViewed: arr });
         }
       }
-
+      this.props.getCardResults();
       window.addEventListener('scroll', this.handleScroll);
       setTimeout(() => {
         const shippingContainer = document.getElementById('shipping-cont');
@@ -135,10 +138,11 @@ const getProductComponent = (isPreview, taskCode) => {
     }
 
     notify() {
-      const { productData, userDetails, notifyMe } = this.props;
+      const { productData, userDetails, notifyMe, variantId } = this.props;
       let { emailErr, notifyEmail } = this.state;
       const params = {
         product_id: productData.product_id,
+        variant_id: variantId,
       };
       const emailReg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       if (!userDetails.isLoggedIn) {
@@ -173,7 +177,7 @@ const getProductComponent = (isPreview, taskCode) => {
         });
         return;
       }
-      if (!isSearchPreview && bottomRefRect.top > window.innerHeight && detailsRect.top <= 61 && this.state.stickyElements.details !== 'stateMiddle') {
+      if (!isSearchPreview && bottomRefRect.top > window.innerHeight && detailsRect.top <= 108 && this.state.stickyElements.details !== 'stateMiddle') {
         this.setState({
           stickyElements: {
             ...this.state.stickyElements,
@@ -182,7 +186,7 @@ const getProductComponent = (isPreview, taskCode) => {
         });
         return;
       }
-      if (detailsRect.top > 61) {
+      if (detailsRect.top > 108) {
         this.setState({
           stickyElements: {
             ...this.state.stickyElements,
@@ -193,7 +197,7 @@ const getProductComponent = (isPreview, taskCode) => {
     }
 /* eslint-disable */
     render() {
-      const { productData, userDetails, showLoading, query,variantId,productId, isSearchPreview } = this.props;
+      const { productData, userDetails, showLoading, query,variantId,productId, isSearchPreview, savedCardsData } = this.props;
       const {
         catalog, titleInfo, keyfeatures, extraOffers, imgUrls, offerInfo, shippingInfo, isWishlisted, returnInfo,
         details, productDescription, catalogObj, categoryType = '', warranty, breadcrums, product_id, wishlistId,
@@ -207,12 +211,15 @@ const getProductComponent = (isPreview, taskCode) => {
         <Theme.Provider value={categoryType.toLowerCase()}>
           <div className={`${styles['pdp-wrap']} ${categoryType.toLowerCase()} ${styles[categoryType.toLowerCase()]}`}>
             {
-              isPreview || isSearchPreview ? null : <HeaderBar />
+              isPreview || isSearchPreview ? null :
+                <HeaderBar
+                 hideThankyou
+                />
             }
             <div className={`${styles.relative}`}>
               <div className={`${styles['page-details-slider']}`}>
                 <Row className={`${styles['m-0']} ${styles['ht-100per']}`}>
-                  <Col xs={12} md={8} sm={12} className={`${styles['pl-0']} ${styles['pdp-img-prt']}`}>
+                  <Col xs={12} md={8} sm={12} className={`${styles['pl-0']} ${styles['pdp-img-prt']} ${styles['p-0']}`}>
                     <NoSSR>
                       <Display
                         product_id={product_id}
@@ -230,7 +237,7 @@ const getProductComponent = (isPreview, taskCode) => {
                   <Col sm={12} className={`${styles['details-right-part']} ${styles[stickyElements.details]}`}>
                     <div className={`${styles['details-right-part-inn']}`}>
                       <div className={`${styles['ipad-details']} ${styles['ipad-pr-15']}`}>
-                        <TitleInfo {...titleInfo} isPreview={isPreview} offerInfo={offerInfo} />
+                        <TitleInfo {...titleInfo} isPreview={isPreview} offerInfo={offerInfo} shippingInfo={shippingInfo} savedCardsData={savedCardsData}/>
                         <ProductDetails
                           details={details}
                           keyfeatures={keyfeatures}
@@ -259,8 +266,6 @@ const getProductComponent = (isPreview, taskCode) => {
                               notify={this.notify}
                               showLoading={showLoading}
                               onChangeField={this.onChangeField}
-                              styling={isSearchPreview ? null : positionStyle || defaultPosition}
-                              top={isSearchPreview ? null : positionStyle === 'absolute-style' ?  positionTop : null}
                             />
                             :
                             null
@@ -331,7 +336,9 @@ const getProductComponent = (isPreview, taskCode) => {
   const mapStateToProps = store => ({
     productData: taskCode ? selectors.getPreview(store) : selectors.getProduct(store),
     userDetails: store.authReducer.data,
-    showLoading: wishListSelectors.getLoader(store),
+    showLoading: wishListSelectors.getNotifyLoading(store),
+    selectedAddress: addressSelectors.getSelectedAddress(store),
+    savedCardsData: userVaultSelectors.getCardResults(store),      
   });
 
   const mapDispatchToProps = dispatch =>
@@ -339,6 +346,9 @@ const getProductComponent = (isPreview, taskCode) => {
       {
         notifyMe: wishlistActionCreators.notifyMe,
         track: actionCreators.track,
+        getShippingAddressResults: addressActionCreators.getShippingAddressResults,
+        createOrder: paymentActionCreators.createOrder,
+        getCardResults: userVaultActionCreators.getCardResults,
 
       },
       dispatch,

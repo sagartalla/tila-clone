@@ -10,7 +10,8 @@ import CategoriesAndFacets from './CategoriesAndFacets';
 import SearchDetailsBar from './SearchDetailsBar';
 import SearchResults from './SearchResults';
 import Brand from './Brand';
-import CompareWidget from '../common/CompareWidget';
+import dynamic from 'next/dynamic';
+//import CompareWidget from '../common/CompareWidget';
 import lang from '../../utils/language';
 
 import main_en from '../../layout/main/main_en.styl';
@@ -18,6 +19,7 @@ import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './search_en.styl';
 import styles_ar from './search_ar.styl';
 
+const CompareWidget = dynamic(import('../common/CompareWidget'));
 
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
@@ -157,7 +159,7 @@ class Search extends Component {
               <CategoriesAndFacets />
             </NoSSR>
           </Col>
-          <Col md={10} className={`${styles['search-results']} ${styles['fl-rt']}`}>
+          <Col md={10} className={`${styles['search-results']} ${styles['fl-rt']} ${styles['pr-0']}`}>
             <SearchDetailsBar optionalParams={optionalParams} />
             <SearchResults search={query.search} />
           </Col>

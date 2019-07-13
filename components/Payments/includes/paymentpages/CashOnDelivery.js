@@ -12,8 +12,8 @@ import { Router } from '../../../../routes';
 
 import Captcha from '../../../common/Captcha';
 import CaptchaContent from '../../../common/Captcha/CaptchaContent'
-
-import EditPhone from '../../../Cam/PersonelDetails/UserData/EditPhone';
+import dynamic from 'next/dynamic';
+//import EditPhone from '../../../Cam/PersonelDetails/UserData/EditPhone';
 import Button from '../../../common/CommonButton';
 
 const { PAYMENT_PAGE } = languageDefinations();
@@ -26,6 +26,7 @@ import styles_en from '../../payment_en.styl';
 import styles_ar from '../../payment_ar.styl';
 
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+const EditPhone = dynamic(import('../../../Cam/PersonelDetails/UserData/EditPhone'));
 
 class CashOnDelivery extends React.Component {
   constructor() {

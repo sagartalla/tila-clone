@@ -17,6 +17,7 @@ import { actionCreators, selectors } from '../../store/payments';
 import { actionCreators as cartAction } from '../../store/cart'
 import { actionCreators as authActionCreators, selectors as authSelectors } from '../../store/auth';
 import { actionCreators as cartActionCreators, selectors as cartSelectors } from '../../store/cart';
+import { actionCreators as personalActionCreators } from '../../store/cam/personalDetails';
 import { selectors as addressSelectors } from '../../store/cam/address'
 import Slider from '../common/slider';
 import Coupon from '../Cart/CartPaymentSideBar/coupons';
@@ -92,6 +93,7 @@ class Payments extends React.Component {
       editCartDetails: true,
       showSlider: false,
       showError: false,
+      showLogout: false,
     }
 
     this.saveCard = this.saveCard.bind(this);
@@ -112,7 +114,8 @@ class Payments extends React.Component {
     // TODO move it to base component later after discussion on login.
     this.props.getLoginInfo();
     this.props.getCartResults();
-  }
+    this.props.getUserInfoData();
+    }
 
   componentWillReceiveProps(nextProps) {
     // if cart is empty redirect to cart page.
@@ -127,11 +130,25 @@ class Payments extends React.Component {
     // if (nextProps && nextProps.makePaymentOptions && nextProps.makePaymentOptions.redirect_url) {
     //   location.href = nextProps.makePaymentOptions.redirect_url;
     // }
-
-    // console.log(nextProps)
-
     // if loggedin show address step directly.
-    if (nextProps.isLoggedIn && !loggedInFlag) {
+    // if (nextProps.isLoggedIn && !loggedInFlag) {
+    //   const login = nextProps.userCreds || this.state.login;
+    //   const paymentConfigJson = { ...this.state.paymentConfigJson };
+    //   paymentConfigJson['signIn'] = { basic: false, progress: false, done: true };
+    //   paymentConfigJson['address'] = { basic: false, progress: true, done: false };
+    //   this.setState({
+    //     paymentConfigJson, login, loggedInFlag: true,
+    //   });
+    // }
+    if (nextProps.isLoggedIn && !loggedInFlag && nextProps.userInfoData.email_verified === 'NV') {
+      const login = nextProps.userCreds || this.state.login;
+      const paymentConfigJson = { ...this.state.paymentConfigJson };
+      paymentConfigJson['signIn'] = { basic: false, progress: true, done: false };
+      paymentConfigJson['address'] = { basic: true, progress: false, done: false };
+      this.setState({
+        paymentConfigJson, login,
+      });
+    } else if (nextProps.isLoggedIn && !loggedInFlag && nextProps.userInfoData.email_verified === 'V') {
       const login = nextProps.userCreds || this.state.login;
       const paymentConfigJson = { ...this.state.paymentConfigJson };
       paymentConfigJson['signIn'] = { basic: false, progress: false, done: true };
@@ -150,13 +167,40 @@ class Payments extends React.Component {
       progress: false,
       done: false,
     };
+    paymentConfigJson.payment = {
+      basic: true,
+      progress: false,
+      done: false,
+    };
     this.setState({
       paymentConfigJson,
-      loggedInFlag: false,
+      // loggedInFlag: false,
+      showLogout: true,
     });
   }
 
-
+  continueCheckout = () => {
+    const paymentConfigJson = { ...this.state.paymentConfigJson };
+    paymentConfigJson.signIn = {
+      basic: false,
+      progress: false,
+      done: true,
+    };
+    paymentConfigJson.address = {
+      basic: false,
+      progress: true,
+      done: false,
+    };
+    paymentConfigJson.payment = {
+      basic: true,
+      progress: false,
+      done: false,
+    };
+    this.setState({
+      paymentConfigJson,
+      showLogout: false,
+    });
+  }
   checkBoxChange(e) {
     let { showError } = this.state;
     if (!e.target.checked) {
@@ -215,7 +259,7 @@ class Payments extends React.Component {
       // paymentConfigJson['offersDiscounts'] = { basic: true, progress: false, done: false };
       paymentConfigJson['payment'] = { basic: false, progress: true, done: false };
       this.setState(
-       { paymentConfigJson, editCartDetails: !editCartDetails }
+       { paymentConfigJson, editCartDetails: !editCartDetails, showLogout: false, loggedInFlag: true }
       ,() => this.props.cartEditDetails(this.state.editCartDetails));
     }
   }
@@ -310,11 +354,29 @@ class Payments extends React.Component {
       showSlider: false,
     });
   }
-  render() {
-    const { login, paymentConfigJson, editCartDetails, showSlider, validation, showError } = this.state;
-    const { paymentOptions, selectedAddress, signInLoader, cartResults } = this.props;
-    const { PAYMENT_PAGE, CART_PAGE } = languageDefinations();
 
+  logoutClicked = () => {
+    const { logout, getCartResults } = this.props;
+    logout();
+    const paymentConfigJson = { ...this.state.paymentConfigJson };
+    paymentConfigJson.address = {
+      basic: true,
+      progress: false,
+      done: false,
+    };
+    paymentConfigJson.payment = {
+      basic: true,
+      progress: false,
+      done: false,
+    };
+    this.setState({
+      paymentConfigJson,
+    });
+  }
+  render() {
+    const { login, paymentConfigJson, editCartDetails, showSlider, validation, showError, showLogout } = this.state;
+    const { paymentOptions, selectedAddress, signInLoader, cartResults, isLoggedIn, activeEmailId, userInfoData } = this.props;
+    const { PAYMENT_PAGE, CART_PAGE } = languageDefinations();
     return (
       <div className={styles['payment']}>
         <HeaderBar hideSearch hideMegamenu/>
@@ -327,7 +389,7 @@ class Payments extends React.Component {
           <Row>
             <Col md={9} xs={12} sm={12} className={`${styles['pl-30']}`}>
               <SignIn
-                login={login}
+                // login={isLoggedIn ? login : ''}
                 signInLoader={signInLoader}
                 showAddressTab={this.showAddressTab}
                 inputOnChange={this.inputOnChange}
@@ -336,6 +398,12 @@ class Payments extends React.Component {
                 validation={validation}
                 checkBoxChange={this.checkBoxChange}
                 showError={showError}
+                showLogout={showLogout}
+                continueCheckout={this.continueCheckout}
+                logoutClicked={this.logoutClicked}
+                isLoggedIn={isLoggedIn}
+                activeEmailId={isLoggedIn ? activeEmailId : ''}
+                userInfoData={userInfoData}
               />
               <DeliveryAddress
                 selectedAddress={selectedAddress}
@@ -412,6 +480,9 @@ const mapStateToprops = store => ({
   isLoggedIn: authSelectors.getLoggedInStatus(store),
   signInLoader: authSelectors.getLoginProgressStatus(store),
   selectedAddress: addressSelectors.getSelectedAddress(store),
+  isVerified: authSelectors.isVerified(store),
+  userInfoData: authSelectors.getUserInfo(store),  
+  // activeEmailId: authSelectors.getActiveEmailId(store),
 });
 
 const mapDispatchToProps = dispatch =>
@@ -424,7 +495,11 @@ const mapDispatchToProps = dispatch =>
       getLoginInfo: authActionCreators.getLoginInfo,
       getCartResults: cartActionCreators.getCartResults,
       emptyPaymentPaylod: actionCreators.emptyPaymentPaylod,
-      cartEditDetails:cartAction.cartEditDetails
+      cartEditDetails: cartAction.cartEditDetails,
+      logout: authActionCreators.userLogout,
+      getCartResults: cartAction.getCartResults,
+      getUserInfoData: authActionCreators.getUserInfoData,
+      getUserProfileInfo: personalActionCreators.getUserProfileInfo,
     },
     dispatch,
   );

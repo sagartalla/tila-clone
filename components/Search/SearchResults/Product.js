@@ -11,6 +11,7 @@ import Waypoint from 'react-waypoint';
 import { OverlayTrigger, Modal, Popover } from 'react-bootstrap';
 import constants from '../../../constants';
 import { actionCreators } from '../../../store/cam/wishlist';
+import { actionCreators as authActionCreators } from '../../../store/auth';
 import { actionCreators as compareActions } from '../../../store/compare/actions';
 import SVGCompoent from '../../common/SVGComponet';
 import { languageDefinations } from '../../../utils/lang';
@@ -18,7 +19,7 @@ import NotifyMe from '../../common/NotifyMe/NotifyMe';
 import Button from '../../common/CommonButton';
 import { selectors as cartSelector } from '../../../store/cart';
 import { selectors as compareSelectors } from '../../../store/compare';
-
+import { ShowPriceFormat, StrickedPriceFormat } from '../../common/PriceFormat';
 import RenderVariants from './renderVariants';
 
 import lang from '../../../utils/language';
@@ -66,16 +67,16 @@ class Product extends Component {
   }
 
   getOfferClassName = (offer) => {
-    if (offer > 5 && offer < 20) {
+    if (offer >= 5 && offer < 20) {
       return 'green';
     }
-    if (offer > 20 && offer < 40) {
+    if (offer >= 20 && offer < 40) {
       return 'yellow';
     }
-    if (offer > 40 && offer < 60) {
+    if (offer >= 40 && offer < 60) {
       return 'orange';
     }
-    if (offer > 60) {
+    if (offer >= 60) {
       return 'red';
     }
     return '';
@@ -99,10 +100,12 @@ class Product extends Component {
     e.preventDefault();
     const {
       productId: product_id, catalogId: catalog_id, variantId: variant_id,
-      variants, currency, addToWishlistAndFetch, wishlistId, deleteWishlist,
+      variants, currency, addToWishlistAndFetch, wishlistId, deleteWishlist, userDetails,
     } = this.props;
     const { selectedIndex } = this.state;
-    if (wishlistId) {
+    if (!userDetails.isLoggedIn) {
+      this.props.showLoginScreen();
+    } else if (wishlistId) {
       deleteWishlist(wishlistId);
     } else {
       addToWishlistAndFetch({
@@ -118,10 +121,11 @@ class Product extends Component {
   notify(e) {
     e.stopPropagation();
     e.preventDefault();
-    const { userDetails, productId, notifyMe } = this.props;
+    const { userDetails, productId, notifyMe, variantId } = this.props;
     if (userDetails.isLoggedIn) {
       notifyMe({
         product_id: productId,
+        variant_id: variantId,
         email: userDetails.userCreds && userDetails.userCreds.username,
       });
     } else {
@@ -272,16 +276,16 @@ class Product extends Component {
 
     const getPriceAndOffer = () => (
       <span>
+        <span className={`${styles['fs-10']} ${styles['black-color']}`}>{currency}</span>&nbsp;
         <span
           className={`${styles['fs-16']} ${styles.fontW600} ${styles['black-color']}`}
         >
-          {variants[selectedIndex].sellingPrice[0]}
-        </span>&nbsp;
-        <span className={`${styles['fs-10']} ${styles['black-color']}`}>{currency}</span>
+         <ShowPriceFormat showPrice={variants[selectedIndex].sellingPrice[0].toString()} strickedPrice={variants[selectedIndex].mrp[0].toString()}/>
+        </span>
         {discountValue > 5 &&
           <React.Fragment>
             <span className={`${styles['ml-5']} ${styles['label-gry-clr']} ${styles['fs-12']}`}>
-              <s>{variants[selectedIndex].mrp[0]}&nbsp;<s className={styles['fs-10']}>{currency}</s></s>
+              <s><StrickedPriceFormat showPrice={variants[selectedIndex].sellingPrice[0].toString()} strickedPrice={variants[selectedIndex].mrp[0].toString()}/></s>
             </span>
             {variants[selectedIndex].offersApplied &&
               variants[selectedIndex].offersApplied.length > 0 &&
@@ -333,24 +337,24 @@ class Product extends Component {
                               autoplaySpeed={750}
                               pauseOnHover={false}
                             >
-                              {media && media.slice(0, 5).map(image => (
+                              {media && media.slice(0, 5).map((image,index) => (
                                 <div>
-                                  <img src={`${constants.mediaDomain}/${image}`} alt="imageURL" />
+                                  <img src={`${constants.mediaDomain}/${image}`} alt="imageURL" key={index} />
                                 </div>
                               ))}
                             </Slider>
                         }
                       </div>
-                  <span className={`${styles['variants-main']}`}></span>
-                  <span className={styles['full-and-globe-main']}>
+                  {/* <span className={`${styles['variants-main']}`}></span> */}
+                  {/* <span className={styles['full-and-globe-main']}>
                     <span className={`${styles['fullfill-main']} ${styles['flex-center']}`}>
                       <span className={styles['fulfill-img']}></span>
                       <span className={`${styles['fs-12']} ${styles['fontW600']} ${styles['pl-10']} ${styles['fullfilled-label']}`}>{PDP_PAGE.FULLFILLED_BY_TILA}</span>
                     </span>
-                  </span>
+                  </span> */}
                   {discountValue >= 5 &&
                     <span className={`${styles.absolute} ${styles['offer-tag']} ${styles[this.getOfferClassName(discountValue)]}`}>
-                      <span>{discountValue}%</span>
+                      <span>{discountValue}% {PDP_PAGE.OFF}</span>
                     </span>}
                   {
                     variants.length > 1 &&
@@ -470,6 +474,7 @@ class Product extends Component {
             <NotifyMe
               pId={productId}
               closeNotify={this.closeNotify}
+              variantId={variantId}
             />
           </Modal.Body>
         </Modal>
@@ -501,6 +506,7 @@ const mapDispatchToProps = (dispatch) => {
       addToCompare: compareActions.addToCompare,
       removeCompareData: compareActions.removeCompareData,
       deleteWishlist: actionCreators.deleteWishlist,
+      showLoginScreen: authActionCreators.showLoginScreen,
     },
     dispatch,
   );

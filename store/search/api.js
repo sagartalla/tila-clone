@@ -11,13 +11,13 @@ const getSearchResultsApi = ({
   country,
   pageSize,
   query,
+  choosenCategoryName,
   language,
   facetFilters,
   facetFiltersCopyWithNames,
   pageNum,
   isListed,
   categoryTree,
-  choosenCategoryName,
   shippingDetails,
   sort,
   disableSpellCheck,
@@ -28,7 +28,7 @@ const getSearchResultsApi = ({
     language,
     pageNum,
     pageSize,
-    query,
+    query: query || choosenCategoryName.split('-').join(' '),
     fl: '*',
     isListed,
     shippingDetails,
@@ -41,7 +41,7 @@ const getSearchResultsApi = ({
   } else {
     options.categoryFilter = categoryFilter;
   }
-  return axios.get(`${constants.SEARCH_API_URL}/search${categoryTree ? '/browseByCatId/' : ''}?query=${encodeURIComponent(JSON.stringify(options))}`).then(({ data }) => {
+  return axios.get(`${constants.SEARCH_API_URL}/search${categoryTree && !categoryFacet ? '/browseByCatId/' : ''}?query=${encodeURIComponent(JSON.stringify(options))}`).then(({ data }) => {
     const { products, noOfProducts } = data.productResponse;
     const hasMore = (((pageNum - 1) * pageSize) + products.length) !== noOfProducts;
 

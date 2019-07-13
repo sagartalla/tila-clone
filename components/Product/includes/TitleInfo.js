@@ -10,6 +10,7 @@ import { actionCreators as compareActions, selectors } from '../../../store/comp
 import { selectors as authSelectors } from '../../../store/auth';
 import { languageDefinations } from '../../../utils/lang';
 import lang from '../../../utils/language';
+import { actionCreators, selectors as paymentSelectors } from '../../../store/payments';
 
 import main_en from '../../../layout/main/main_en.styl';
 import main_ar from '../../../layout/main/main_ar.styl';
@@ -69,6 +70,7 @@ class TitleInfo extends Component {
     const { listingId, getCartResults } = this.props;
     this.props.addToCart({
       listing_id: listingId,
+      instant_checkout: true,
     }, listingId).then(() => {
       document.getElementsByTagName('BODY')[0].style.overflow = 'hidden';
     });
@@ -84,7 +86,7 @@ class TitleInfo extends Component {
         itemtype,
         productId: product_id,
         src,
-        displayName: title,
+        displayName: title.attribute_values[0].value,
         categoryId,
         catalogObj,
       });
@@ -117,14 +119,14 @@ class TitleInfo extends Component {
 
   render() {
     const {
-      brand, title, rating, product_id,
-      totalInventoryCount, isPreview, listingCartData, comparable, cmpData, isLoggedIn,
+      brand, title, rating, product_id, shippingInfo,
+      totalInventoryCount, isPreview, listingCartData, comparable, cmpData, isLoggedIn, savedCardsData,
     } = this.props;
     const { showCheckoutModal } = this.state;
     return (
       <div className={styles['pb-10']}>
         <div className={`${styles.fontW300} ${styles['lgt-blue']} ${styles['flx-space-bw']}`}>
-          <span>{brand}</span>
+          <span>{brand.attribute_values[0].value}</span>
           {/* eslint-disable-next-line no-nested-ternary */}
           {isPreview ? null : comparable ?
             <div className={`${styles['checkbox-material']} ${styles['add-to-compare']}`}>
@@ -149,7 +151,7 @@ class TitleInfo extends Component {
             ))
           } */}
         </div>
-        <h1 className={`${styles['fs-18']} ${styles.fontW700} ${styles['black-color']} ${styles['mt-0']} ${styles['mb-0']}`}>{title}</h1>
+        <h1 className={`${styles['fs-18']} ${styles.fontW700} ${styles['black-color']} ${styles['mt-0']} ${styles['mb-0']} ${!title.translation ? styles['direction-ir'] : ''}`}>{title.attribute_values[0].value}</h1>
         {
           isPreview
             ?
@@ -169,7 +171,11 @@ class TitleInfo extends Component {
             <div className={`${styles['flex-center']} ${styles['checkout-instantly']} ${styles['pt-5']}`}>
               <div className={`${styles.flex}`}>
                 {totalInventoryCount > 0 && isLoggedIn &&
-                  <a className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['fs-14']} ${styles['mr-10']} ${styles['small-btn']} ${styles['checkout-instant-btn']}`} onClick={this.checkoutInstantHandler}>{PDP_PAGE.CHECKOUT_INSTANT}</a>}
+                savedCardsData && savedCardsData.length > 0 && shippingInfo && shippingInfo.shippable ?
+                    <a className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['fs-14']} ${styles['mr-10']} ${styles['small-btn']} ${styles['checkout-instant-btn']} ${styles['left-radius']}`} onClick={this.checkoutInstantHandler}>{PDP_PAGE.CHECKOUT_INSTANT}</a>
+                    :
+                    <a className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['fs-14']} ${styles['mr-10']} ${styles['small-btn']} ${styles['disable-checkout-instant-btn']} ${styles['left-radius']}`}>{PDP_PAGE.CHECKOUT_INSTANT}</a>                                                     
+                }
               </div>
               <div className={styles['flex']}>
                 {
@@ -223,8 +229,8 @@ class TitleInfo extends Component {
 }
 
 TitleInfo.propTypes = {
-  brand: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
+  brand: PropTypes.object.isRequired,
+  title: PropTypes.object.isRequired,
   rating: PropTypes.object.isRequired,
   reviews: PropTypes.object.isRequired,
   price: PropTypes.string.isRequired,
@@ -236,6 +242,7 @@ const mapStateToProps = store => ({
   listingCartData: cartSelectors.getListingCartResults(store),
   isLoggedIn: authSelectors.getLoggedInStatus(store),
   cmpData: selectors.getCmpData(store),
+
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({

@@ -3,10 +3,6 @@
 .address-container
   .common-input-mb
     margin-bottom 25px
-    .country-flag
-      width 20px
-      position absolute
-      bottom 6px
   .auto-suggestions-list {
       position: absolute;
       z-index: 999;
@@ -17,6 +13,12 @@
       overflow-x: hidden;
       width: 100%;
   }
+
+.common-input-mb
+  .country-flag
+    width: 23px;
+    position: absolute;
+    top: 11px;
 
 .auto-suggestions {
    z-index: 1;
@@ -43,7 +45,7 @@
     z-index 9
     .min-address-list
       max-height 200px
-      overflow scroll
+      overflow auto
     .min-address-part-inn
       border-bottom: 1px dashed border-light-gray
       .address-radio-btn
@@ -314,3 +316,14 @@
 
 .mb-0
   margin-bottom 0
+
+.left-radius
+  padding 10px 50px
+  border-bottom-left-radius 16px
+  margin-bottom 0
+
+.disable-button
+ &:disabled
+    color white
+    background-color suggest-label-gray
+    border suggest-label-gray 
