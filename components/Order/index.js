@@ -23,6 +23,7 @@ const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styl
 
 class Order extends Component {
   componentDidMount() {
+    console.log("props")
     const { query, getOrderDetails } = this.props;
     getOrderDetails({ orderId: query.orderId });
   }

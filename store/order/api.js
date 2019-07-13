@@ -28,32 +28,53 @@ const getRefundOptions = (orderItemId, issueType) => axios.get(`${constants.ORDE
 const setExchangeOrder = params => axios.post(`${constants.ORDERS_API_URL}/api/v1/order/exchange`, params);
 
 const track = ({ event, orderData }) => {
-  window.dataLayer.push({ event: 'purchase' });
-  window.appEventData.push({
-    event,
-    transaction: {
-      transactionID: orderData.payment_id,
-      total: {
-        currency: orderData.currency_code,
-        salesTax: '',
-      },
-      profile: {
-        address: {
-          stateProvince: orderData.address.city,
-          postalCode: orderData.address.postal_code,
+  switch (event) {
+    case 'purchase':
+    window.appEventData.push({
+      event,
+      transaction: {
+        transactionID: orderData.payment_id,
+        total: {
+          currency: orderData.currency_code,
+          salesTax: '',
+        },
+        profile: {
+          address: {
+            stateProvince: orderData.address.city,
+            postalCode: orderData.address.postal_code,
+          },
+        },
+        // Collection of Payment Objects
+        payment: {
+          paymentMethod: orderData.payments.map(payment => payment.payment_mode).join(','),
+          paymentAmount: orderData.payments.map(payment => payment.amount.display_value).join(','),
+        },
+        // Collection of Item Objects
+        productInfo:{
+          item: orderData.order_items.map(item => item.variant_info.product_id),
         },
       },
-      // Collection of Payment Objects
-      payment: {
-        paymentMethod: orderData.payments.map(payment => payment.payment_mode).join(','),
-        paymentAmount: orderData.payments.map(payment => payment.amount).join(','),
-      },
-      // Collection of Item Objects
-      item: orderData.order_items.map(item => item.variant_info.product_id),
-    },
-  });
-};
-
+    });
+      break;
+    case 'CANCEL_ORDER' :
+    window.dataLayer.push({ event: 'purchase' });
+    console.log(orderData);
+    window.appEventData.push({
+      event,
+      product: [
+        {
+          productInfo: {
+            productID: orderData,
+          },
+        },
+      ],
+    });
+      break;
+      default :
+      break;
+  }
+}
+      
 const getTrackingDetails = trackingId => axios.get(`${constants.LOGISTICS_URL}/api/shipment/v1/track/${trackingId}`);
 
 const getInvoice = orderId => axios.get(`${constants.ORDERS_API_URL}/api/v1/customer/order/${orderId}/invoice`);

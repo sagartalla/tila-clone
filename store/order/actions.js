@@ -22,6 +22,7 @@ const actions = {
   GET_REFUND_OPTIONS: 'GET_REFUND_OPTIONS',
   GET_TRACKING_DETAILS: 'GET_TRACKING_DETAILS',
   THANKYOU_PAGE_TRACK: 'THANKYOU_PAGE_TRACK',
+  CANCEL_ORDER_TRACK: 'CANCEL_ORDER_TRACK',
   SET_CANCEL_REFUNDMODE: 'SET_CANCEL_REFUNDMODE',
   GET_INVOICE_DETAILS: 'GET_INVOICE_DETAILS',
 };
@@ -65,6 +66,7 @@ const actionCreators = {
     });
   },
   track: params => (dispatch, getState) => {
+    console.log(params);
     const state = getState();
     params.postResult = state.cartReducer.data.items;
     return {
@@ -72,6 +74,15 @@ const actionCreators = {
       payload: api.track(params),
     };
   },
+  // cancelOrderTrack: params => (dispatch, getState) => {
+  //   console.log(params);
+  //   const state = getState();
+  //   params.postResult = state.cartReducer.data.items;
+  //   return {
+  //     type: actions.CANCEL_ORDER_TRACK,
+  //     payload: api.cancelTrack(params),
+  //   };
+  // },
   setSelectedItem: params => ({
     type: actions.SET_SELECTED_ITEM,
     payload: {
