@@ -16,11 +16,29 @@ import styles_ar from '../profile_ar.styl';
 
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
+const sociaImages = {
+  FB: {
+    value: 'facebook',
+  },
+  GOOGLE: {
+    value: 'google',
+  },
+  LKD: {
+    value: 'linkedIn',
+  },
+  TWITTER: {
+    value: 'twitter',
+  },
+  INSTAGRAM: {
+    value: 'instagram',
+  },
+};
 class ContactInfo extends React.Component {
   state = {
     show: false,
     element: "",
-    contactInfo: {}
+    contactInfo: {},
+    showToolTip: false,
   };
 
   componentWillReceiveProps(nextProps) {
@@ -43,9 +61,19 @@ class ContactInfo extends React.Component {
     });
   }
 
+
+  showToolTip = () => {
+    this.setState({ showToolTip: true });
+  }
+
+  hideToolTip = () => {
+    this.setState({ showToolTip: false });
+  }
+
   render() {
-    const { mailId, email, mobile_no, lastUpdated, phoneNum, email_verified, mobile_verified } = this.state.contactInfo ? this.state.contactInfo : { mailId: "", email: "", mobile_no: "", lastUpdated: "not available", phoneNum: "", email_verified: "" };
-    const { element, show } = this.state;
+    const { mailId, email, mobile_no, lastUpdated, phoneNum, email_verified, mobile_verified, password_exists, social_accounts } = this.state.contactInfo ? this.state.contactInfo : { mailId: "", email: "", mobile_no: "", lastUpdated: "not available", phoneNum: "", email_verified: "" };
+    const { element, show, showToolTip } = this.state;
+    console.log('userInfo', social_accounts);
     const { CONTACT_INFO_MODAL } = languageDefinations();
     return (
       <div className={`${styles['mb-10']}`}>
@@ -70,8 +98,41 @@ class ContactInfo extends React.Component {
           <Col xs={12} md={3} className={`${styles['pl-0']} ${styles['pr-0']}`}>
             <span className={`${styles['fs-14']} ${styles['thick-gry-clr']}`}>{CONTACT_INFO_MODAL.PASSWORD}</span>
           </Col>
-          <Col xs={6} md={8}>
-            <span> {lastUpdated}</span>
+          <Col xs={6} md={8} className={`${styles.flex}`}>
+            {password_exists ? lastUpdated :
+          <React.Fragment>            
+            <span onClick={this.handleShow(true, `password`)} className={`${styles['p-0']} ${styles['text-blue']}`}>Set Password</span>
+            <div className={`${styles['relative']} ${styles['cart-price-toltp']}`}>
+                        <span
+                          className={
+                            `${styles.question}
+                            ${styles['ml-5']}
+                            ${styles['flex-center']}
+                            ${styles['justify-center']}
+                            ${styles['default-shadow']}
+                            ${styles['fs-14']}
+                            ${styles.pointer}
+                            ${lang === 'en' ? '' : styles['flip-questionmark']}
+                            `
+                          }
+
+                          >  ? </span>
+                        <div className={`${styles['p-10']} ${styles['tool-tip']} ${styles['cart-tool-tip']}`}>
+                                Your account is connected using
+                                <Col md={12} xs={12} sm={12}>
+                  {social_accounts && social_accounts.length > 0 &&
+                  social_accounts.map(ll => (
+                    <div className={`${styles['flex-center']} ${styles.pointer} ${styles['border-lg']} ${styles['mt-20']} ${styles['border-radius4']} ${styles['mb-10']} ${styles['p-5']}`}>
+                      <a className={`${styles.flex} ${styles['ml-37P']}`}>
+                        <SVGComponent clsName={`${styles[`bg-${ll}-icon`]} ${styles['mr-10']}`} src={`icons/social-icons/bg-${sociaImages[ll].value}`} />
+                      </a>
+                    </div>
+                  ))}
+          </Col>
+
+                        </div>
+                      </div></React.Fragment>
+          }
           </Col>
           <Col xs={6} md={1} className={styles['pr-0']}>
             <span onClick={this.handleShow(true, `password`)} className={`${styles['float-r']} ${styles['flex']} ${styles['p-0']} ${styles['ml-5']}`}>
@@ -124,7 +185,7 @@ ContactInfo.propTypes = {
 
 
 const mapStateToProps = (store) => ({
-  userInfo: selectors.getUserInfo(store)
+  userInfo: selectors.getUserInfo(store),
 });
 
 
