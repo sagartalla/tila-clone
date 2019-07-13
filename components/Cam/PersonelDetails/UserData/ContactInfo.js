@@ -101,7 +101,7 @@ class ContactInfo extends React.Component {
           <Col xs={6} md={8} className={`${styles.flex}`}>
             {password_exists ? lastUpdated :
           <React.Fragment>            
-            <span onClick={this.handleShow(true, `password`)} className={`${styles['p-0']} ${styles['text-blue']}`}>Set Password</span>
+            <a onClick={this.handleShow(true, `setPassword`)} className={`${styles['p-0']} ${styles['text-blue']}`}>Set Password</a>
             <div className={`${styles['relative']} ${styles['cart-price-toltp']}`}>
                         <span
                           className={
@@ -117,18 +117,20 @@ class ContactInfo extends React.Component {
                           }
 
                           >  ? </span>
-                        <div className={`${styles['p-10']} ${styles['tool-tip']} ${styles['cart-tool-tip']}`}>
-                                Your account is connected using
+                        <div className={`${styles['p-20']} ${styles['tool-tip']} ${styles['justify-between']} ${styles['flex-colum']} ${styles['cart-tool-tip']}`}>
+                                <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles.fontW600}`}>Your account is connected using</div>
                                 <Col md={12} xs={12} sm={12}>
                   {social_accounts && social_accounts.length > 0 &&
                   social_accounts.map(ll => (
-                    <div className={`${styles['flex-center']} ${styles.pointer} ${styles['border-lg']} ${styles['mt-20']} ${styles['border-radius4']} ${styles['mb-10']} ${styles['p-5']}`}>
-                      <a className={`${styles.flex} ${styles['ml-37P']}`}>
+                    <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles.pointer} ${styles['mt-20']} ${styles['border-radius4']} ${styles['mb-20']} ${styles['p-5']}`}>
                         <SVGComponent clsName={`${styles[`bg-${ll}-icon`]} ${styles['mr-10']}`} src={`icons/social-icons/bg-${sociaImages[ll].value}`} />
-                      </a>
                     </div>
                   ))}
           </Col>
+          <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']}`}>
+                  To set your Tila password<br/>
+                    <a onClick={this.handleShow(true, `setPassword`)}>Click here</a>
+                   </div>
 
                         </div>
                       </div></React.Fragment>
