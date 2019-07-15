@@ -53,6 +53,10 @@ export const AR_KEYWORDS = {
     'COUPONS': 'Coupons',
     'GIFT_MESSAGE_OPTIONAL': 'Gift Message (optional)',
     'CANNOT_DELIVER': 'Unfortunately, we cannot deliver this item to your selected Address. Please remove the item or move it to your wishlist to continue.',
+    'THERE_IS': 'There is',
+    'THERE_ARE': 'There are',
+    'ITEM_IN_YOUR_WISHLIST': 'item in Your Wishlist',
+    'ITEMS_IN_YOUR_WISH_LIST': 'items in Your Wishlist',
   },
   PAYMENT_PAGE: {
     'SECURE_CHECKOUT': 'الدفع الآمن',
@@ -118,6 +122,7 @@ export const AR_KEYWORDS = {
     'REMAINING_AMOUNT_TO_PAY': 'Remaining amount to pay',
     'PAY_USING_TILA_CREDIT': 'PAY USING TILA CREDIT',
     'PAYMENT_MODE': 'Net banking, credit card, vouchers and etc....',
+    'ON_DELIVERY': 'on delivery',
   },
   DELIVERY_ADDR_PAGE: {
     'DELIVERY_ADDR': 'عنوان التوصيل',
@@ -179,6 +184,7 @@ export const AR_KEYWORDS = {
     'NOTIFY_ME': 'Notify Me',
     'BUY_FOR': 'BUY FOR',
     'ADDED_TO_CART': 'أضف إلى سلة المشتريات',
+    'IN_CART' : 'IN CART',    
     // //New keys
     'GO_TO_CART': 'Go To Cart',
     'LIKE': 'Like',
@@ -300,6 +306,7 @@ export const AR_KEYWORDS = {
     'SEND_OTP': 'Send OTP',
     'VERIFY_MOBILE_NUMBER': 'Verify Mobile Number',
     'ENTER_VALID_OTP': 'please enter valid otp',
+    'PLEASE_CONFIRM_YOUR_ORDER': 'Your Mobile Number is already Verified, Please confirm your order',
   },
   EDIT_PASSWORD_MODAL: {
     'PASSWORD_SUCCESS_MESSAGE': 'تم تغيير كلمة المرور الخاصة بك بنجاح!',

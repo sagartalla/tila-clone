@@ -163,6 +163,9 @@ for x in range(0px, 80px, 5)
 .main-layout
   min-height 100vh
   height 100px
+
+.ht-100vh
+  height: 100vh
 .fl-rt
   float right
 .cl-bth
@@ -276,7 +279,7 @@ for x in range(0px, 80px, 5)
   font-family ProximaNova
 
 .fontW600
-  font-family ProximaNova-SemiBold
+  font-family ProximaNova-SBold
 
 .fontW800
   font-family ProximaNova-Bold
@@ -293,6 +296,9 @@ for x in range(0px, 80px, 5)
 
 .width50
   width 50%
+  
+.width45
+  width 45%
 
 .width33
   width 33%
@@ -361,6 +367,9 @@ for x in range(0px, 80px, 5)
 
 .bg-light-gray
   background light-gray-color
+
+.bg-gray
+  background login-bg-gray
 
 .bg-thick-blue
   background thick-blue
@@ -490,7 +499,7 @@ for x in range(0px, 80px, 5)
 
 .no-h1
   font-size: initial;
-  display: inline;
+  display: inline-block;
   font-family: ProximaNova-Bold;
 
 
@@ -529,3 +538,11 @@ for x in range(0px, 80px, 5)
 
 .bottom0
   bottom 0
+
+
+.ellipsis {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 500px;
+}

@@ -55,7 +55,7 @@ class EditPhone extends React.Component {
       }
     ])
     this.state = {
-      phoneNumber: "",
+      phoneNumber: "" || props.userData && props.userData.mobile_no,
       otp: '',
       error: "",
       show: false,
@@ -154,7 +154,7 @@ class EditPhone extends React.Component {
 
   render() {
     const { phoneNumber, error, otp, countryCode, validation, otpResponse, otpCount } = this.state;
-    const { isLoading, isPopup } = this.props
+    const { isLoading, isPopup, mobileVerified } = this.props;
     if (otpResponse === 'SUCCESS') {
       return (
         <div className={styles['edit-mobile-no-succ']}>
@@ -208,6 +208,7 @@ class EditPhone extends React.Component {
             :
             null
         }
+        {!mobileVerified ?
         <div className={styles['editProfileModal']}>
           {
             isLoading ?
@@ -257,7 +258,7 @@ class EditPhone extends React.Component {
                   <div className={styles['fp-input']}>
                     <input
                       type="text"
-                      val={phoneNumber}
+                      value={phoneNumber}
                       onChange={this.handlePhoneNumberChange}
                     />
                     <span className={styles['highlight']}></span>
@@ -295,7 +296,7 @@ class EditPhone extends React.Component {
                   <div className={styles['fp-input']}>
                     <input
                       type="number"
-                      val={otp}
+                      value={otp}
                       className={styles['width100']}
                       onChange={this.handleOTPChange}
                       required
@@ -334,7 +335,9 @@ class EditPhone extends React.Component {
               }[otpResponse]}
             </div>
           </div>
-        </div>
+        </div> :
+       <div className={`${styles['success-green']} ${styles['mb-25']}`}>{CONTACT_INFO_MODAL.PLEASE_CONFIRM_YOUR_ORDER}</div>
+      }
       </div>
 
     );
