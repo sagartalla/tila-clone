@@ -23,22 +23,22 @@ const pageFlows = {
     password: {
       activePage: 'password',
       backpage: 'signin_page',
-      nextPage: '',
+      nextPage: 'verify_email',
     },
-    // verify_email: {
-    //   activePage: 'verify_email',
-    //   nextPage: 'thank_you',
-    // },
-    // thank_you: {
-    //   activePage: 'thank_you',
-    //   text: (
-    //     <div>
-    //       <h2 className={`${styles.fontW600} ${styles['fs-22']} ${styles['mb-0']}`}>{CONTACT_INFO_MODAL.THANK_YOU}</h2>
-    //       <div>{LOGIN_PAGE.FOR_SIGNING_UP_WITH_US}</div>
-    //     </div>
-    //   ),
-    //   nextPage: null,
-    // },
+    verify_email: {
+      activePage: 'verify_email',
+      nextPage: 'thank_you',
+    },
+    thank_you: {
+      activePage: '',
+      text: (
+        <div>
+          <h2 className={`${styles.fontW600} ${styles['fs-22']} ${styles['mb-0']}`}>{CONTACT_INFO_MODAL.THANK_YOU}</h2>
+          <div>{LOGIN_PAGE.FOR_SIGNING_UP_WITH_US}</div>
+        </div>
+      ),
+      nextPage: null,
+    },
   },
   new_user_register: {
     signin_page: {

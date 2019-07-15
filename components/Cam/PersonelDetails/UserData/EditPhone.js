@@ -200,7 +200,6 @@ class EditPhone extends React.Component {
   render() {
     const { phoneNumber, error, otp, countryCode, validation, otpResponse, otpCount, mobile_country_code } = this.state;
     const { isLoading, isPopup, mobileVerified } = this.props;
-    console.log('validation', validation);
     if (otpResponse === 'SUCCESS') {
       return (
         <div className={styles['edit-mobile-no-succ']}>

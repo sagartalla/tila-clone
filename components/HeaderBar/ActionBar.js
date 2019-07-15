@@ -137,13 +137,13 @@ class ActionBar extends Component {
 
   onBackdropClick(logoutRequired = false) {
     const {
-      activeObj, closeThankYouScreen, userInfo, userData, isLoggedIn, hideThankyou,
+      activeObj, closeThankYouScreen, userInfo, userData, isLoggedIn,
     } = this.props;
     this.props.resetLoginError();
     if (logoutRequired) {
       this.props.logout();
     }
-    if (!hideThankyou && (((activeObj.activePage === 'verify_email' || activeObj.activePage === 'shipping_to_page') && activeObj.nextPage === 'thank_you') || ((activeObj.activePage === 'verify_email' && activeObj.nextPage === 'shipping_to_page')))) {
+    if ((((activeObj.activePage === 'verify_email' || activeObj.activePage === 'shipping_to_page') && activeObj.nextPage === 'thank_you') || ((activeObj.activePage === 'verify_email' && activeObj.nextPage === 'shipping_to_page')))) {
       const data = { nextPage: 'thank_you' };
       const { v2CurrentFlow } = this.props;
       v2CurrentFlow(data);
@@ -196,6 +196,7 @@ class ActionBar extends Component {
     const {
       isLoggedIn, cartResults, userInfo, wishListCount, getEditDetails, hideCountry, hideLogin, showLoginPage,
     } = this.props;
+    console.log('showLoginPage', showLoginPage);    
     return (
       <div className={styles['actionbar-wrapper']}>
         <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']} ${styles['country-code']}`}>
@@ -216,16 +217,16 @@ class ActionBar extends Component {
             <Link route={`/${country}/${language}/cam/wishlist`}>
               <a style={{ dispaly: 'block' }} onClick={this.moveToWishlist}>
                 <span className={`${styles['flex-center']} ${styles['justify-center']} ${styles.relative}`} title={PDP_PAGE.GO_TO_WISHLIST}>
-                <SVGComponent clsName={`${styles['wish-list-icon']}`} src="icons/wish-list/wish-list-icon" />
-                <span className={`${styles.absolute} ${styles['cart-count']} ${styles['flex-center']} ${styles['justify-center']} ${styles['fs-10']} ${styles['white-color']}`}>{wishListCount}</span>
-              </span>
+                  <SVGComponent clsName={`${styles['wish-list-icon']}`} src="icons/wish-list/wish-list-icon" />
+                  <span className={`${styles.absolute} ${styles['cart-count']} ${styles['flex-center']} ${styles['justify-center']} ${styles['fs-10']} ${styles['white-color']}`}>{wishListCount}</span>
+                </span>
               </a>
             </Link>
             <Dropdown.Menu className={`${styles['wishlist-item']}`}>
               <span>
                 <Wishlist
-                showMiniWishlist
-              />
+                  showMiniWishlist
+                />
               </span>
             </Dropdown.Menu>
           </Dropdown>
@@ -265,44 +266,47 @@ class ActionBar extends Component {
                   <div className={`${styles['flex-center']} ${styles['ple-icon']}`}>
                     <ProfilePic loader={false} userInfo={userInfo} imgUrl={this.props.imgSource} />
                     <span className={`${styles['profile-name']}`}>
-                    <span className={`${styles['hello-text-clr']}`}>{HEADER_PAGE.HELLO}</span>
-                    {userInfo.personalInfo.first_name ?
-                      <span>
-                        <span className={`${styles['user-name']}`}>{userInfo.personalInfo.first_name}</span> &nbsp;
-                        <span>{userInfo.personalInfo.first_name.length < 15 && userInfo.personalInfo.last_name.charAt(0)}</span>
-                      </span> : <span>{`${HEADER_PAGE.TILA_CUSTOMER}` }</span>}
-                  </span>
+                      <span className={`${styles['hello-text-clr']}`}>{HEADER_PAGE.HELLO}</span>
+                      {userInfo.personalInfo.first_name ?
+                        <span>
+                          <span className={`${styles['user-name']}`}>{userInfo.personalInfo.first_name}</span> &nbsp;
+                          <span>{userInfo.personalInfo.first_name.length < 15 && userInfo.personalInfo.last_name.charAt(0)}</span>
+                        </span> : <span>{`${HEADER_PAGE.TILA_CUSTOMER}` }</span>}
+                    </span>
                   </div>
                   <ul className={`${styles['pl-0']} ${styles['profile-inn']}`}>
-                    <li className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']}`}>
-                    <a href={`/${country}/${language}/cam/profile`} className={styles['flex-center']}>
-                      <SVGComponent clsName={`${styles['profile-icon']}`} src="icons/profile-icons/round-profile" />
-                      <span className={styles['pl-25']}>{HEADER_PAGE.MY_ACCOUNT}</span>
-                    </a>
-                  </li>
-                    <li className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']}`}>
-                    <a href={`/${country}/${language}/cam/orders`} className={styles['flex-center']}>
-                      <SVGComponent clsName={`${styles['profile-icon']}`} src="icons/my-orders" />
-                      <span className={styles['pl-25']}>{HEADER_PAGE.MY_ORDERS}</span>
-                    </a>
-                  </li>
+                    <li >
+                      <a href={`/${country}/${language}/cam/profile`} className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']} ${styles.width100}`}>
+                        <SVGComponent clsName={`${styles['profile-icon']}`} src="icons/profile-icons/round-profile" />
+                        <span className={styles['pl-25']}>{HEADER_PAGE.MY_ACCOUNT}</span>
+                      </a>
+                    </li>
+                    <li >
+                      <a href={`/${country}/${language}/cam/orders`} className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']} ${styles.width100}`}>
+                        <SVGComponent clsName={`${styles['profile-icon']}`} src="icons/my-orders" />
+                        <span className={styles['pl-25']}>{HEADER_PAGE.MY_ORDERS}</span>
+                      </a>
+                    </li>
                     {/* <li className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']}`}>
                   <a href={`/${country}/${language}/cam/notifications`} className={styles['flex-center']}>
                     <SVGComponent clsName={`${styles['profile-icon']}`} src="icons/notifications" />
                     <span className={styles['pl-20']}>{HEADER_PAGE.NOTIFICATIONS}</span>
                     </a>
                   </li> */}
-                    <li className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']}`}>
-                    <a href={`/${country}/${language}/help/faq`} target="_blank" className={styles['flex-center']}><span className={styles.support}><span className={`${styles['flex-center']} ${styles['justify-center']}`}>?</span></span>
-                      <span className={styles['pl-25']}>{HEADER_PAGE.HELP_SUPPORT}</span>
-                    </a>
-                  </li>
-                    <li className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']}`}>
-                    <span onClick={this.logoutClick} className={`${styles['flex-center']} ${styles['login-details-inn']} ${styles.pointer}`}>
-                      <SVGComponent clsName={`${styles['logout-icon']}`} src="icons/common-icon/icon-logout" />
-                      <span className={`${styles['pl-25']} `}>{HEADER_PAGE.LOGOUT}</span>
-                    </span>
-                  </li>
+                    <li >
+                      <a href={`/${country}/${language}/help/faq`} target="_blank" className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']} ${styles['width-100']}`}>
+                        <span className={styles.support}>
+                          <span className={`${styles['flex-center']} ${styles['justify-center']}`}>?</span>
+                        </span>
+                        <span className={styles['pl-25']}>{HEADER_PAGE.HELP_SUPPORT}</span>
+                      </a>
+                    </li>
+                    <li onClick={this.logoutClick} className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']}`}>
+                      <span className={`${styles['flex-center']} ${styles['login-details-inn']} ${styles.pointer}`}>
+                        <SVGComponent clsName={`${styles['logout-icon']}`} src="icons/common-icon/icon-logout" />
+                        <span className={`${styles['pl-25']} `}>{HEADER_PAGE.LOGOUT}</span>
+                      </span>
+                    </li>
                   </ul>
                 </div>
               </Dropdown.Menu>
@@ -310,18 +314,21 @@ class ActionBar extends Component {
               <Dropdown.Menu className={`${styles['account-item']}`}>
                 <div className={styles['profile-part']}>
                   <ul className={`${styles['pl-0']} ${styles['profile-inn']}`}>
-                  <li className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']}`}>
-                    <a href={`/${country}/${language}/help/faq`} target="_blank" className={styles['flex-center']}><span className={styles.support}><span className={`${styles['flex-center']} ${styles['justify-center']}`}>?</span></span>
-                      <span className={styles['pl-20']}>{HEADER_PAGE.HELP_SUPPORT}</span>
-                    </a>
-                  </li>
-                  <li className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']}`}>
-                    <span onClick={this.loginClick} className={`${styles['flex-center']} ${styles['login-details-inn']} ${styles.pointer}`}>
-                      <SVGComponent clsName={`${styles['login-icon']}`} src="icons/common-icon/icon-login" />
-                      <span className={`${styles['pl-20']}`}>{HEADER_PAGE.LOGIN}</span>
-                    </span>
-                  </li>
-                </ul>
+                    <li >
+                      <a href={`/${country}/${language}/help/faq`} target="_blank" className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']} ${styles['width-100']}`}>
+                        <span className={styles.support}>
+                          <span className={`${styles['flex-center']} ${styles['justify-center']}`}>?</span>
+                        </span>
+                        <span className={styles['pl-25']}>{HEADER_PAGE.HELP_SUPPORT}</span>
+                      </a>
+                    </li>
+                    <li onClick={this.loginClick} className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']}`}>
+                      <span className={`${styles['flex-center']} ${styles['login-details-inn']} ${styles.pointer}`}>
+                        <SVGComponent clsName={`${styles['login-icon']}`} src="icons/common-icon/icon-login" />
+                        <span className={`${styles['pl-20']}`}>{HEADER_PAGE.LOGIN}</span>
+                      </span>
+                    </li>
+                  </ul>
                 </div>
               </Dropdown.Menu>
             }
@@ -354,6 +361,7 @@ const mapStateToProps = store => ({
   showLoginPage: selectors.showLogin(store),
   userData: selectors.userInfo(store),
   showUserInfo: selectors.showUserInfo(store),
+  currentFlow: selectors.currentFlow(store),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(

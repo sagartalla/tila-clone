@@ -347,6 +347,13 @@ export const AR_KEYWORDS = {
     PASSWORD_LENGTH_MESSAGE: 'Your password should be atleast 8 characters in length and should not be the same as your old password.',
     PASSWORD_LENGTH: 'كلمة السر يجب أن تكون ٨ أحرف على الأقل',
     SAME_PASSWORD_MESSAGE: 'يرجى التأكد من أن كلمة السر الجديدة وأنها تختلف عن كلمة السر السابقة التي استعملتها',
+    THANK_YOU: 'Thank You!',
+    PASSWORD_UPDATE_SUCCESS: 'Your password has been updated successfully.',
+    YOU_CAN_LOGIN_WITH_PASSWORD: 'You can login with your email id and password from next time onwards',
+    PASSWORD_TILA_ACCOUNT: 'Please set password for your Tila Account',
+    CONFIRM: 'CONFIRM',
+    ACCOUNT_CONNECTED_USING: 'Your account is connected using',
+    TO_SET_PASSWORD: 'To set your Tila password',
   },
   PERSONAL_INFO_MODAL: {
     HEADING: 'معلومات شخصية',

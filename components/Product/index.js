@@ -213,7 +213,6 @@ const getProductComponent = (isPreview, taskCode) => {
             {
               isPreview || isSearchPreview ? null :
                 <HeaderBar
-                 hideThankyou
                 />
             }
             <div className={`${styles.relative}`}>

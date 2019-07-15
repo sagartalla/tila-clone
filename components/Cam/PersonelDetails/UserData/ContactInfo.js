@@ -14,7 +14,9 @@ import main_ar from '../../../../layout/main/main_ar.styl';
 import styles_en from '../profile_en.styl';
 import styles_ar from '../profile_ar.styl';
 
-const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+const { CONTACT_INFO_MODAL, EDIT_PASSWORD_MODAL, ORDER_PAGE } = languageDefinations();
+
+const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
 const sociaImages = {
   FB: {
@@ -36,7 +38,7 @@ const sociaImages = {
 class ContactInfo extends React.Component {
   state = {
     show: false,
-    element: "",
+    element: '',
     contactInfo: {},
     showToolTip: false,
   };
@@ -44,7 +46,7 @@ class ContactInfo extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.userInfo.contactInfo) {
       this.setState({
-        contactInfo: nextProps.userInfo.contactInfo
+        contactInfo: nextProps.userInfo.contactInfo,
       });
     }
   }
@@ -57,7 +59,7 @@ class ContactInfo extends React.Component {
     }
     this.setState({
       show: showVal,
-      element: elem
+      element: elem,
     });
   }
 
@@ -71,21 +73,23 @@ class ContactInfo extends React.Component {
   }
 
   render() {
-    const { mailId, email, mobile_no, lastUpdated, phoneNum, email_verified, mobile_verified, password_exists, social_accounts } = this.state.contactInfo ? this.state.contactInfo : { mailId: "", email: "", mobile_no: "", lastUpdated: "not available", phoneNum: "", email_verified: "" };
+    const {
+      mailId, email, mobile_no, lastUpdated, phoneNum, email_verified, mobile_verified, password_exists, social_accounts,
+    } = this.state.contactInfo ? this.state.contactInfo : {
+      mailId: '', email: '', mobile_no: '', lastUpdated: 'not available', phoneNum: '', email_verified: '',
+    };
     const { element, show, showToolTip } = this.state;
-    console.log('userInfo', social_accounts);
-    const { CONTACT_INFO_MODAL } = languageDefinations();
     return (
       <div className={`${styles['mb-10']}`}>
-        <h4 className={styles['fontW600']}>{CONTACT_INFO_MODAL.HEADING}</h4>
+        <h4 className={styles.fontW600}>{CONTACT_INFO_MODAL.HEADING}</h4>
         <div className={`${styles['bb-dashed']} ${styles['flex-center']} ${styles['pt-10']} ${styles['pb-10']}`}>
           <Col xs={12} md={3} className={`${styles['pl-0']} ${styles['pr-0']}`}>
             <span className={`${styles['fs-14']} ${styles['thick-gry-clr']}`}>{CONTACT_INFO_MODAL.EMAIL}</span>
           </Col>
           <Col xs={6} md={8} className={`${styles['flex-center']} ${styles['tickmark-part']}`}>
             <span className={styles['pr-20']}>{email}</span>
-            <span className={email_verified !== 'NV' ? `${styles['showDiv']}` : `${styles['hideDiv']}`}>
-              <span className={styles['flex']}><SVGComponent clsName={`${styles['tickmark-icon']}`} src="icons/common-icon/bg-tick-mark" /></span>
+            <span className={email_verified !== 'NV' ? `${styles.showDiv}` : `${styles.hideDiv}`}>
+              <span className={styles.flex}><SVGComponent clsName={`${styles['tickmark-icon']}`} src="icons/common-icon/bg-tick-mark" /></span>
             </span>
           </Col>
           <Col xs={3} md={1} className={styles['pr-0']}>
@@ -100,13 +104,12 @@ class ContactInfo extends React.Component {
           </Col>
           <Col xs={6} md={8} className={`${styles.flex}`}>
             {password_exists ? lastUpdated :
-          <React.Fragment>            
-            <a onClick={this.handleShow(true, `setPassword`)} className={`${styles['p-0']} ${styles['text-blue']}`}>Set Password</a>
-            <div className={`${styles['relative']} ${styles['cart-price-toltp']}`}>
-                        <span
-                          className={
+            <React.Fragment>
+              <a onClick={this.handleShow(true, 'setPassword')} className={`${styles['p-0']} ${styles['text-blue']}`}>Set Password</a>
+              <div className={`${styles.relative} ${styles['cart-price-toltp']} ${styles['ml-10']}`}>
+                <span
+                  className={
                             `${styles.question}
-                            ${styles['ml-5']}
                             ${styles['flex-center']}
                             ${styles['justify-center']}
                             ${styles['default-shadow']}
@@ -115,29 +118,30 @@ class ContactInfo extends React.Component {
                             ${lang === 'en' ? '' : styles['flip-questionmark']}
                             `
                           }
-
-                          >  ? </span>
-                        <div className={`${styles['p-20']} ${styles['tool-tip']} ${styles['justify-between']} ${styles['flex-colum']} ${styles['cart-tool-tip']}`}>
-                                <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles.fontW600}`}>Your account is connected using</div>
-                                <Col md={12} xs={12} sm={12}>
-                  {social_accounts && social_accounts.length > 0 &&
+                >  ?
+                </span>
+                <div className={`${styles['p-20']} ${styles['tool-tip']} ${styles['justify-between']} ${styles['flex-colum']} ${styles['cart-tool-tip']}`}>
+                  <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles.fontW600}`}>{EDIT_PASSWORD_MODAL.ACCOUNT_CONNECTED_USING}</div>
+                  <Col md={12} xs={12} sm={12}>
+                    {social_accounts && social_accounts.length > 0 &&
                   social_accounts.map(ll => (
                     <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles.pointer} ${styles['mt-20']} ${styles['border-radius4']} ${styles['mb-20']} ${styles['p-5']}`}>
-                        <SVGComponent clsName={`${styles[`bg-${ll}-icon`]} ${styles['mr-10']}`} src={`icons/social-icons/bg-${sociaImages[ll].value}`} />
+                      <SVGComponent clsName={`${styles[`bg-${ll}-icon`]} ${styles['mr-10']}`} src={`icons/social-icons/bg-${sociaImages[ll].value}`} />
                     </div>
                   ))}
-          </Col>
-          <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']}`}>
-                  To set your Tila password<br/>
-                    <a onClick={this.handleShow(true, `setPassword`)}>Click here</a>
-                   </div>
+                  </Col>
+                  <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']}`}>
+                    {EDIT_PASSWORD_MODAL.TO_SET_PASSWORD}<br />
+                    <a style={{ 'text-decoration': 'underline' }} onClick={this.handleShow(true, 'setPassword')}>{ORDER_PAGE.CLICK_HERE}</a>
+                  </div>
 
-                        </div>
-                      </div></React.Fragment>
+                </div>
+              </div>
+            </React.Fragment>
           }
           </Col>
           <Col xs={6} md={1} className={styles['pr-0']}>
-            <span onClick={this.handleShow(true, `password`)} className={`${styles['float-r']} ${styles['flex']} ${styles['p-0']} ${styles['ml-5']}`}>
+            <span onClick={this.handleShow(true, password_exists ? 'password' : 'setPassword')} className={`${styles['float-r']} ${styles.flex} ${styles['p-0']} ${styles['ml-5']}`}>
               <SVGComponent clsName={`${styles['edit-icon']}`} src="icons/common-icon/edit/edit-penc" />
             </span>
           </Col>
@@ -149,14 +153,15 @@ class ContactInfo extends React.Component {
           </Col>
           <Col xs={6} md={8} className={`${styles['flex-center']} ${styles['tickmark-part']}`}>
             <span className={styles['pr-20']}>{phoneNum}</span>
-            <span className={mobile_verified !== 'NV' ? `${styles['showDiv']}` : `${styles['hideDiv']}`}>
-              <span className={styles['flex']}><SVGComponent clsName={`${styles['tickmark-icon']}`} src="icons/common-icon/bg-tick-mark" /></span>
+            <span className={mobile_verified !== 'NV' ? `${styles.showDiv}` : `${styles.hideDiv}`}>
+              <span className={styles.flex}><SVGComponent clsName={`${styles['tickmark-icon']}`} src="icons/common-icon/bg-tick-mark" /></span>
             </span>
           </Col>
           <Col xs={6} md={1} className={styles['pr-0']}>
             <span
-              onClick={this.handleShow(true, `phone`)}
-              className={`${styles['float-r']} ${styles['pointer']} ${styles['flex']} ${styles['p-0']} ${styles['ml-5']}`}>
+              onClick={this.handleShow(true, 'phone')}
+              className={`${styles['float-r']} ${styles.pointer} ${styles.flex} ${styles['p-0']} ${styles['ml-5']}`}
+            >
               <SVGComponent
                 clsName={`${styles['edit-icon']}`}
                 src="icons/common-icon/edit/edit-penc"
@@ -164,11 +169,12 @@ class ContactInfo extends React.Component {
             </span>
           </Col>
         </div>
-        <div className={show ? `${styles['modalContainer']} ${styles['showDiv']}`
-          : `${styles['modalContainer']} ${styles['hideDiv']}`}>
-          <div onClick={this.handleShow(false, '')} className={`${styles['disabled']}`} />
+        <div className={show ? `${styles.modalContainer} ${styles.showDiv}`
+          : `${styles.modalContainer} ${styles.hideDiv}`}
+        >
+          <div onClick={this.handleShow(false, '')} className={`${styles.disabled}`} />
         </div>
-        <div className={show ? `${styles['openModal']}` : `${styles['closeModal']}`}>
+        <div className={show ? `${styles.openModal}` : `${styles.closeModal}`}>
           <UpdateContactInfoModal
             handleShow={this.handleShow}
             show={show}
@@ -182,14 +188,13 @@ class ContactInfo extends React.Component {
 
 
 ContactInfo.propTypes = {
-  userInfo: PropTypes.object
+  userInfo: PropTypes.object,
 };
 
 
-const mapStateToProps = (store) => ({
+const mapStateToProps = store => ({
   userInfo: selectors.getUserInfo(store),
 });
-
 
 
 export default connect(mapStateToProps)(ContactInfo);
