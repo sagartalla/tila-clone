@@ -8,7 +8,8 @@ const actions = {
   GET_BRANDS: 'GET_BRANDS',
   GET_PRODUCTS_TO_COMPARE: 'GET_PRODUCTS_TO_COMPARE',
   ADD_PRODUCT_TO_COMPARE: 'ADD_PRODUCT_TO_COMPARE',
-  COMPARE_TRACK: 'COMPARE_TRACK'
+  COMPARE_TRACK: 'COMPARE_TRACK',
+  REMOVE_ALL_ITEMS: 'REMOVE_ALL_ITEMS',
 };
 
 const actionCreators = {
@@ -51,6 +52,10 @@ const actionCreators = {
   removeCompareItem: id => ({
     type: actions.REMOVE_COMPARE_ITEM,
     payload: api.removeCompareData(id),
+  }),
+  removeAll: () => ({
+    type: actions.REMOVE_ALL_ITEMS,
+    payload: api.removeAllCompareItems(),
   }),
   track: params => (dispatch, getState) => {
     const state = getState();
