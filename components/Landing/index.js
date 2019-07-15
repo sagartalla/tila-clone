@@ -53,6 +53,7 @@ const getURl = (page) => {
           case 'stage':
           case 'staging':
           case 'preprod':
+          default:
               return {
                 JS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/fashion/preprod/index.js?r=' + random,
                 CSS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/fashion/preprod/style.css?r=' + random,
@@ -64,6 +65,7 @@ const getURl = (page) => {
           case 'stage':
           case 'staging':
           case 'preprod':
+          default:
               return {
                 JS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/electronics/preprod/index.js?r=' + random,
                 CSS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/electronics/preprod/style.css?r=' + random,
@@ -75,6 +77,7 @@ const getURl = (page) => {
           case 'stage':
           case 'staging':
           case 'preprod':
+          default:
               return {
                 JS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/lifestyle/preprod/index.js?r=' + random,
                 CSS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/lifestyle/preprod/style.css?r=' + random,
@@ -86,6 +89,7 @@ const getURl = (page) => {
           case 'stage':
           case 'staging':
           case 'preprod':
+          default:
               return {
                 JS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/homepage/preprod/index.js?r=' + random,
                 CSS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/homepage/preprod/style.css?r=' + random,
