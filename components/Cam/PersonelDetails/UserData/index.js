@@ -11,10 +11,13 @@ import { languageDefinations } from '../../../../utils/lang';
 
 import lang from '../../../../utils/language';
 
+import main_en from '../../../../layout/main/main_en.styl';
+import main_ar from '../../../../layout/main/main_ar.styl';
 import styles_en from '../profile_en.styl';
 import styles_ar from '../profile_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+
 
 const { CONTACT_INFO_MODAL } = languageDefinations();
 
@@ -32,7 +35,7 @@ const UserData = ({
   }
   getUserProfileInfo();
   return (
-    <div className={`${styles.box} ${styles['mb-20']} ${styles['ipad-mb-15']}`}>
+    <div className={`${styles.box} ${styles['mb-20']} ${styles['ipad-mb-15']} ${styles['right-part-cam']}`}>
       <Row className={`${styles['p-30']} ${styles['m-0']}`}>
         <Col xs={12} md={7}>
           <PersonalInfo />

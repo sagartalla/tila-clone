@@ -7,10 +7,13 @@ import { selectors, actionCreators } from '../../store/auth';
 
 import lang from '../../utils/language';
 
+import main_en from '../../layout/main/main_en.styl';
+import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './login_en.styl';
 import styles_ar from './login_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+
 
 const snMetaObj = {
   'google': {
@@ -33,13 +36,26 @@ class SocialLogin extends Component {
     super(props);
   }
 
+  componentDidMount() {
+    window.onload = () => {
+      this.getTokenCall('instagram', location.search.code);
+    }
+  }
+
   handleSocialLogin = (socialNetwork) => (e) => {
     switch(socialNetwork) {
-      case 'google': googleAuth2 ? this.checkGoogleResponse() : this.showErrorAlert(socialNetwork); break;
+      case 'google': googleAuth2 ? this.googleSignIn() : this.showErrorAlert(socialNetwork); break;
       case 'facebook': FB ? this.fbLogin() : this.showErrorAlert(socialNetwork); break;
       case 'instagram': this.instaLogin(); break;
       default: console.log(socialNetwork)
     }
+    // const { v2CurrentFlow } = this.props;
+    // // showUserInfo(activeEmailId).then((res) => {
+    // //   if (res.value.status === 200) {
+    //     const data = { currentFlow: 'not_accessable_social_user', nextPage: 'social_login' };
+    //     v2CurrentFlow(data);
+    //   }
+    // });
   }
 
   getTokenCall = (socialNetwork, token) => {
@@ -47,7 +63,7 @@ class SocialLogin extends Component {
       "channel": snMetaObj[socialNetwork].channel,
       "metadata": {
         [snMetaObj[socialNetwork].metadata]: token
-      }
+      },
     }
     this.props.userLogin(serverData)
   }
@@ -94,8 +110,6 @@ class SocialLogin extends Component {
   render(){
     const callbackMethod = [this.handleSocialLogin]
     return this.props.children(callbackMethod)
-
-
   }
 }
 

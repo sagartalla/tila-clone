@@ -1,26 +1,26 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import { languageDefinations } from '../../../utils/lang';
 import { Tabs, Tab } from 'react-bootstrap';
 
 import Review from './Reviews';
-import SVGCompoent from '../../common/SVGComponet';
 
 
 const { PDP_PAGE } = languageDefinations();
 
 import lang from '../../../utils/language';
 
+import main_en from '../../../layout/main/main_en.styl';
+import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from '../product_en.styl';
 import styles_ar from '../product_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 
-const ReviewsTab = ({ tabs }) => {
+const ReviewsTab = () => {
   return (
     <div>
-      <Tabs defaultActiveKey={1}>
+      <Tabs defaultActiveKey={1} id="review-tab">
         <Tab eventKey={1} id="All Reviews" title={PDP_PAGE.ALL_REVIEWS}>
           <Review />
         </Tab>

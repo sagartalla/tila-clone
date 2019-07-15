@@ -5,16 +5,18 @@ import constants from '../../../constants';
 import SVGCompoent from '../../common/SVGComponet';
 import lang from '../../../utils/language';
 
+import main_en from '../../../layout/main/main_en.styl';
+import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from '../product_en.styl';
 import styles_ar from '../product_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 
 const Compare = ({ catalog }) => {
   return (
     <div className={`${styles['compare-main']} ${styles['pt-25']} ${styles['pb-25']}`}>
-      <h4 className={`${styles['fs-16']} ${styles['fontW600']}`}>Tila Comparing (4 items) for you</h4>
+      <h4 className={`${styles['fs-16']} ${styles['fontW600']}`}>Tila comparing (4 items) for you!</h4>
       <Row className={styles['feature-part']}>
         <Col md={3} sm={3}>
           <div className={styles['compare-product']}>

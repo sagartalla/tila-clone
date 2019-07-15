@@ -1,0 +1,118 @@
+.img-responsive {
+  max-height: 100%;
+  max-width: 100%;
+}
+.main-title {
+  color: #f26b6b;
+}
+.life-style-main .life-banner-inn {
+  height: 370px;
+}
+.life-style-main .life-banner-inn .banner-label {
+  color: #68462d;
+  width: 19%;
+  top: 25%;
+  left: 10%;
+}
+.life-style-main .life-banner-inn .banner-label .main-quation {
+  line-height: 1;
+  padding-bottom: 10px;
+}
+.life-style-main .life-banner-inn .banner-label .shop-now-white-btn a {
+  background-color: #f26b6b;
+}
+.life-style-main .sub-banner .sub-banner-title .dec {
+  color: #939393;
+}
+.life-style-main .sub-banner .sub-banner-title .title {
+  color: #f26b6b;
+}
+.life-style-main .poular-cat .poular-icon {
+  border-bottom: 2px solid transparent;
+  min-height: 120px;
+  text-align: center;
+  height: 52px;
+}
+.life-style-main .poular-cat .poular-icon:hover {
+  box-shadow: 0 2px 7px 0 rgba(0,0,0,0.08);
+  border-bottom: 2px solid #f26b6b;
+}
+.life-style-main .poular-cat .poular-icon:hover .pop-title {
+  color: #f26b6b;
+}
+.life-style-main .poular-cat .poular-icon .poular-cat {
+  width: 46px;
+  height: 50px;
+}
+.life-style-main .poular-cat .poular-icon .poular-cat1 {
+  height: 50px;
+  width: 47px;
+}
+.life-style-main .poular-cat .poular-icon .poular-cat2 {
+  width: 41px;
+}
+.life-style-main .poular-cat .poular-icon .poular-cat3 {
+  width: 39px;
+  height: 50px;
+}
+.life-style-main .poular-cat .poular-icon .poular-cat4 {
+  width: 22.5px;
+  height: 45px;
+}
+.life-style-main .poular-cat .poular-icon .popular-cat5 {
+  width: 36px;
+  height: 45px;
+}
+.life-style-main .poular-cat .poular-icon .popular-cat6 {
+  width: 26px;
+  height: 50px;
+}
+.life-style-main .poular-cat .poular-icon .popular-cat7 {
+  width: 37px;
+  height: 50px;
+}
+.life-style-main .poular-cat .poular-icon .popular-cat8 {
+  width: 52px;
+  height: 50px;
+}
+.life-style-main .top-selling-part .top-selling-img {
+  height: 260px;
+}
+.life-style-main .top-selling-part .top-selling-img img {
+  width: 100%;
+  height: 100%;
+}
+.life-style-main .dec {
+  color: #939393;
+}
+.life-style-main .sports-part .top-selling-img {
+  border-bottom: 2px solid transparent;
+}
+.life-style-main .sports-part .top-selling-img:hover {
+  box-shadow: 0 2px 7px 0 rgba(0,0,0,0.08);
+  border-bottom: 2px solid #f26b6b;
+}
+.life-style-main .hobby-part .hobby-part-inn .hobby-part-img .hobby-part-img-inn {
+  height: 260px;
+  display: flex;
+}
+.life-style-main .hobby-part .hobby-part-inn .hobby-part-img .hobby-part-img-inn img {
+  height: 100%;
+  width: 100%;
+}
+.life-style-main .hobby-part .hobby-part-inn .hobby-part-img .bottom-label {
+  bottom: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.life-style-main .popular-part .hobby-part-img {
+  max-height: 260px;
+  border-bottom: 2px solid transparent;
+  display: flex;
+}
+.life-style-main .popular-part .hobby-part-img:hover {
+  box-shadow: 0 2px 7px 0 rgba(0,0,0,0.08);
+  border-bottom: 2px solid #f26b6b;
+}

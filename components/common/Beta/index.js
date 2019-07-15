@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { languageDefinations } from '../../../utils/lang/';
+import { languageDefinations } from '../../../utils/lang';
 
 import lang from '../../../utils/language';
 

@@ -3,7 +3,7 @@ import { actions } from './actions';
 
 const initialState = {
   ui: {
-    loading: false,
+    loading: true,
     btnLoading: false,
   },
   data: {
@@ -12,6 +12,7 @@ const initialState = {
     cartButtonLoaders: {},
   },
   error: '',
+  editDetails: true
 };
 
 const cartReducer = typeToReducer({
@@ -82,6 +83,11 @@ const cartReducer = typeToReducer({
         }
       });
     },
+  },
+  [actions.GET_CART_EDIT_DETAILS]: (state,action) => {
+    return {
+      ...state, editDetails:action.payload
+    }
   },
   [actions.CART_ITEM_COUNT]: {
     PENDING: state => Object.assign({}, state, {

@@ -2,7 +2,9 @@ import fp, * as _ from 'lodash/fp';
 import shortid from 'shortid';
 
 const getOrderDetails = (store) => {
-  const { created_by, customer_account_id, status, address, order_id, created_at, order_items, price, total_shipping, currency_code, payments, order_type } = store.singleOrderReducer.data.orderDetails;
+  const {
+    created_by, customer_account_id, status, address, order_id, created_at, order_items, price, invoice_id, total_shipping, currency_code, payments, order_type,
+  } = store.singleOrderReducer.data.orderDetails;
   if (order_id) {
     return {
       name: address ? `${address.first_name} ${address.last_name}` : 'No Name',
@@ -17,6 +19,7 @@ const getOrderDetails = (store) => {
       shippingTotal: total_shipping,
       payments,
       status,
+      invoice_id: order_items.find(x => x.invoice_id !== '').invoice_id,
       //TODO move compose to common util
       orderItems: _.compose(
         _.reduce.convert({ 'cap': false })((acc, val, key) => {
@@ -51,6 +54,7 @@ const getOrderDetails = (store) => {
           order_type: i.order_type,
           order_item_type: i.order_item_type,
           order_status: i.status,
+          refunds: i.refunds,
           trackingId: i.item_tracking_id || null,
           warranty_duration: i.warranty_policy && i.warranty_policy.preferred_policy ?
             i.warranty_policy.policies[i.warranty_policy.preferred_policy] : {},
@@ -63,48 +67,53 @@ const getOrderDetails = (store) => {
   }
   return {
     paymentDetals: [],
-    orderItems: []
+    orderItems: [],
   };
 };
 
 const getOrderIssue = (store) => {
   return store.singleOrderReducer.data.orderIssue;
-}
+};
 const getOrderInfo = (store) => {
-  return store.singleOrderReducer.data.orderDetails
-}
+  return store.singleOrderReducer.data.orderDetails;
+};
 const getCancelStatus = (store) => {
   return store.singleOrderReducer.data.orderIssue.cancelStatus;
-}
+};
 
 const getErrorMessege = (store) => {
   return store.singleOrderReducer.error;
-}
+};
 
 const getLoadingStatus = (store) => {
   return store.singleOrderReducer.ui.loading;
-}
+};
 
-const getSelectedOrder = (store) => (orderItemId) => {
-  const item = store.singleOrderReducer.data.orderDetails.order_items.find((el,key) => {
-    return el.order_item_ids[0] === orderItemId
-  })
-  // const item = _.find([ 'order_item_ids',orderItemId ], store.singleOrderReducer.data.orderDetails.order_items);
-
-  var itemObj = {
+const getSelectedOrder = store => (orderItemId) => {
+  const item = store.singleOrderReducer.data.orderDetails.order_items.find((el) => {
+    return el.order_item_ids[0] === orderItemId;
+  });
+  const itemObj = {
     id: item.order_item_ids[0],
     img: item.variant_info.image_url,
     name: item.variant_info.title,
     item_tracking_id: item.item_tracking_id || shortid.generate(),
-    status: item.external_status
-  }
-  return itemObj
+    status: item.external_status,
+    item,
+  };
+  return itemObj;
+};
 
-}
+// const getSelectedOrderItem = store => (orderItemId) => {
+//   const item = store.singleOrderReducer.data.orderDetails.order_items.find((el) => {
+//     return el.order_item_ids[0] === orderItemId;
+//   });
+// }
+
 
 const getReturnStatus = (store) => {
   return store.singleOrderReducer.data.orderIssue.returnStatus;
-}
+};
 
 const getExchangeOptions = (store) => {
   const orderData = store.singleOrderReducer.data.orderIssue;
@@ -140,7 +149,7 @@ const getExchangeOptions = (store) => {
           name: displayString,
           attrValues: newValues,
         }
-      }
+      };
     }, attributeMap);
     return acc;
   }, {});

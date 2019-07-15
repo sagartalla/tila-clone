@@ -1,7 +1,7 @@
 @import '../../../layout/main/executables.styl';
 
 .right-bar
-    font-size font-size-14
+    font-size 14px
     .offer
       background-color black
       color white
@@ -12,8 +12,8 @@
     ul
       li
         margin-bottom px-10
-        span
-          float right
+        display flex
+        justify-content space-between
 
   .coupon-code-main
     h4
@@ -24,7 +24,7 @@
     .buy-coupon-code
       height 17px
       width 20px
-        
+
     .apply-coupon
       border 0.5px dashed light-gray-clr-transparent
 
@@ -32,12 +32,14 @@
       border 0.5px dashed light-gray-clr-transparent
 
     .coupon-code
-      width 24px
-      height 24px
-     
+      width 20px
+      height 20px
+      margin-right 7px
+
   .secure-checkout
-    width 20px
-    height 20px
+    width 17px
+    height 21px
+    margin-right 7px
 
   .view-r-wishlist
     margin 15px 20px 0 20px
@@ -45,7 +47,9 @@
 
   .noCoupon
     line-height: 12px;
-    margin-left: 5px;
 
   .applied
    color: generic-green-color;
+.ship-icon
+  width 100px
+  height 25px

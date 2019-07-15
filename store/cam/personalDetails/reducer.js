@@ -9,7 +9,7 @@ const initialState = {
   useractive: true,
   error: '',
   otpResponse:{},
-  otpData:{}
+  otpData:{},
 };
 
 const personalDetailsReducer = typeToReducer({
@@ -36,7 +36,7 @@ const personalDetailsReducer = typeToReducer({
           ...passResetStatus,
         },
         ui: {
-          loading: true,
+          loading: false,
         },
       };
       return newState;
@@ -44,6 +44,48 @@ const personalDetailsReducer = typeToReducer({
     REJECTED: (state, action) => Object.assign({}, state, {
       error: action.payload.response.data.message,
       ui: { loading: false },
+    }),
+  },
+  [actions.UPLOAD_PROFILE_PIC]: {
+    PENDING: state => Object.assign({}, state, { ui: {loading: true} }),
+    FULFILLED: (state, action) => {
+      const uploadPicStatus = { uploadPicStatus: action.payload };
+      const newState = {
+        ...state,
+        data: {
+          ...state.data,
+          ...uploadPicStatus,
+        },
+        ui: {
+          loading: false
+        },
+      };
+      return newState;
+    },
+    REJECTED: (state, action) => Object.assign({}, state, {
+      error: action.payload.data,
+      ui: { loading: false},
+    }),
+  },
+  [actions.DOWNLOAD_PROFILE_PIC]: {
+    PENDING: state => Object.assign({}, state, { ui: {loading: true} }),
+    FULFILLED: (state, action) => {
+      const downloadPic = { downloadPic: action.payload };
+      const newState = {
+        ...state,
+        data: {
+          ...state.data,
+          ...downloadPic,
+        },
+        ui: {
+          loading: false
+        },
+      };
+      return newState;
+    },
+    REJECTED: (state, action) => Object.assign({}, state, {
+      error: action.payload.data,
+      ui: { loading: false},
     }),
   },
   [actions.RESET_PASSWORD]: {
@@ -80,7 +122,7 @@ const personalDetailsReducer = typeToReducer({
           ...action.payload,
         },
         ui: {
-          loading: true,
+          loading: false,
         },
       };
       return newState;
@@ -101,7 +143,7 @@ const personalDetailsReducer = typeToReducer({
         ...passResetStatus,
       },
       ui: {
-        loading: true,
+        loading: false,
       },
     };
     return newState;
@@ -110,7 +152,8 @@ const personalDetailsReducer = typeToReducer({
     PENDING: state => Object.assign({}, state, { ui: { loading: true }}),
     FULFILLED: (state,action) => Object.assign({}, state, {
       ui: { loading:false },
-      otpResponse:action.payload.data
+      otpResponse:action.payload.data,
+      otpData:{Response:'RESET'}
     }),
     REJECTED: (state, action) => Object.assign({}, state,
       { error: action.payload.data, ui: {loading: false }

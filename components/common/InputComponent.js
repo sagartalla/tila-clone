@@ -1,8 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { mergeCss } from '../../utils/cssUtil';
-const styles = mergeCss('');
+import lang from '../../utils/language';
+
+import main_en from '../../layout/main/main_en.styl';
+import main_ar from '../../layout/main/main_ar.styl';
+
+const styles = lang === 'en' ? main_en : main_ar;
 
 const InputComponent = (props) => (
   <div className={`${styles['fp-input']}`}>

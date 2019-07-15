@@ -18,8 +18,8 @@ const getUserInfo = (store) => {
         contactInfo.phoneNum=phoneNum;
       }
       if (contactInfo.pwd_updated_at) {
-        const lastUpdated = contactInfo.pwd_updated_at.split('[')[0];
-        const msg = moment(lastUpdated).subtract(new Date().getTimezoneOffset(), 'minutes').fromNow();
+        const lastUpdated = contactInfo.pwd_updated_at;
+        const msg = moment(lastUpdated).subtract(new Date().getTimezoneOffset()).fromNow();
         contactInfo.lastUpdated = `Last updated ${msg}`;
       }
       else
@@ -51,6 +51,19 @@ const getEditPersonalInfoStatus = (store) => {
   return {};
 }
 
+const getImageSource = (store) => {
+  if(store.personalDetailsReducer.data.downloadPic){
+    return store.personalDetailsReducer.data.downloadPic
+  }
+}
+
+const getPictureDocumentId = (store) => {
+  if(store.personalDetailsReducer.data.uploadPicStatus) {
+    return store.personalDetailsReducer.data.uploadPicStatus.documentId;
+  }
+  return null;
+}
+
 const getErrorMessege = (store) => {
   return store.personalDetailsReducer.error ? store.personalDetailsReducer.error : "";
 }
@@ -73,4 +86,4 @@ const forgotPasswordStatus = (store) => {
 }
 
 
-export { getUserInfo, getPasswordResetStatus, getLoadingStatus, getErrorMessege, getEditPersonalInfoStatus , forgotPasswordStatus, resetPasswordStatus, getOtpData};
+export { getUserInfo, getPasswordResetStatus, getLoadingStatus, getPictureDocumentId, getErrorMessege, getEditPersonalInfoStatus , getImageSource, forgotPasswordStatus, resetPasswordStatus, getOtpData};

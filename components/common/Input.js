@@ -1,11 +1,9 @@
 import React from 'react';
 import { FormControl } from 'react-bootstrap';
 
-// import styles from './rightBar.styl';
-
-const Input = props => {
-  const val = props.val ? props.val : "";
-  const type = props.type ? props.type : "text";
+const Input = (props) => {
+  const val = props.val ? props.val : '';
+  const type = props.type ? props.type : 'text';
   return (
     <FormControl
       type={type}
@@ -16,8 +14,9 @@ const Input = props => {
       onBlur={props.onBlur}
       autoFocus={props.autoFocus}
       onKeyPress={props.onKeyPress}
+      className={props.className}
     />
   );
-}
-//className={styles.input}
+};
+
 export default Input;

@@ -1,26 +1,33 @@
 import React, { Component, Fragment } from 'react';
-import { Row, Col } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Cookie from 'universal-cookie';
 import { actionCreators, selectors } from '../../../store/cam/wishlist';
-import { selectors as cartSelectors } from '../../../store/cart';
-
+import { selectors as cartSelectors } from '../../../store/auth';
+import SVGComponent from '../../common/SVGComponet';
 import WishlistBody from './includes/WishlistBody';
 import CartBottomPopup from './includes/CartBottomPopup';
 import CartMiniWishList from './includes/CartMiniWishList';
 import Pagination from '../../common/Pagination';
+import MiniWishlist from './includes/MiniWishlist';
+import { Link, Router } from '../../../routes';
 
 // import { isAddedToCart } from '../../../store/cart/selectors';
 import lang from '../../../utils/language';
 
+import main_en from '../../../layout/main/main_en.styl';
+import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from './wishlist_en.styl';
 import styles_ar from './wishlist_ar.styl';
 
+const cookies = new Cookie();
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const language = cookies.get('language') || 'en';
+const country = cookies.get('country') || 'SAU';
 
+const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
 class Wishlist extends Component {
   constructor(props) {
@@ -79,36 +86,54 @@ class Wishlist extends Component {
   }
 
   addToCart(e) {
-    this.props.addToCart({
-      listing_id: e.target.id,
-    }, e.target.getAttribute('data-wish-id'), e.target.getAttribute('data-cart-res'));
+    if (e.target.id) {
+      this.props.addToCart({
+        listing_id: e.target.id,
+      }, e.target.getAttribute('data-wish-id'), e.target.getAttribute('data-cart-res'));
+    }
   }
 
   notify = ({ target }) => {
     const { notifyMe } = this.props;
-    notifyMe({
-      product_id: target.getAttribute('data-product-id'),
-    });
+    notifyMe(target.getAttribute('data-wish-id'));
+  }
+
+  moveToWishlist = () => {
+    const { isLoggedIn } = this.props;
+    if (isLoggedIn) {
+      Router.push(`/${country}/${language}/cam/wishlist`);
+    }
   }
 
   render() {
     const {
-      results, cartMiniWishList, getPageDetails,
+      results, cartMiniWishList, getPageDetails, wishListCount, showLoader, showMiniWishlist,
     } = this.props;
     const { showCartPageBtmPopup, currentPage } = this.state;
     return (
-      <div className={`${styles.wishlist} ${styles['pl-5']}`}>
+      <div className={`${styles.wishlist}`}>
         {
+          showMiniWishlist ?
+            <MiniWishlist
+              items={results}
+              addToCart={this.addToCart}
+              wishListCount={wishListCount}
+              moveToWishlist={this.moveToWishlist} 
+              deleteItem={this.deleteItem}
+              notifyMe={this.notify}                                                     
+            /> :
           cartMiniWishList ?
             <Fragment>
               <CartMiniWishList
                 data={results}
+                wishListCount={wishListCount}
                 showCartPageBtmPopup={this.showCartPageBtmPopup}
               />
               {
                 showCartPageBtmPopup ?
                   <CartBottomPopup
                     data={results}
+                    notifyMe={this.notify}
                     addToCart={this.addToCart}
                     showCartPageBtmPopup={this.showCartPageBtmPopup}
                   />
@@ -116,6 +141,15 @@ class Wishlist extends Component {
               }
             </Fragment>
             :
+            showLoader ?
+              <div className={`${styles['wishlist-result']} ${styles['flex-center']} ${styles['justify-center']} ${styles.width100}`}>
+              <div className={`${styles['loader-div']} ${styles['align-center']}`}>
+              <SVGComponent
+                clsName={styles['loader-styl']}
+                src="icons/common-icon/circleLoader"
+               />
+            </div>
+            </div> :
             <WishlistBody
               data={results}
               deleteItem={this.deleteItem}
@@ -125,14 +159,13 @@ class Wishlist extends Component {
             />
         }
         {
-          !cartMiniWishList &&
+          !cartMiniWishList && !showMiniWishlist &&
           <Pagination
-            totalSize={getPageDetails.total_pages > 1 ? (getPageDetails.total_pages - 1): 0}
+            totalSize={getPageDetails.total_pages > 1 ? (getPageDetails.total_pages - 1) : 0}
             pageNeighbours={0}
-            onPageChanged = {this.onPageChanged}
+            onPageChanged= {this.onPageChanged}
             currentPage={currentPage}
-          >
-          </Pagination>
+           />
         }
       </div>
     );
@@ -142,6 +175,9 @@ class Wishlist extends Component {
 const mapStateToProps = store => ({
   results: selectors.getWishListResults(store),
   getPageDetails: selectors.getPaginationDetails(store),
+  wishListCount: selectors.getProductsDetails(store).length,
+  showLoader: selectors.getLoader(store),
+  isLoggedIn: cartSelectors.getLoggedInStatus(store),
 });
 
 const mapDispatchToProps = dispatch =>
@@ -150,7 +186,7 @@ const mapDispatchToProps = dispatch =>
       getWishlist: actionCreators.getWishlist,
       deleteWishlist: actionCreators.deleteWishlist,
       addToCart: actionCreators.addToCart,
-      notifyMe: actionCreators.notifyMe,
+      notifyMe: actionCreators.wishlistNotify,
       track: actionCreators.track,
     },
     dispatch,

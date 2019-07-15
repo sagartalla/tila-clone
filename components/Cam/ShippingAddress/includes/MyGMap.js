@@ -1,17 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import _ from 'lodash';
 import { Row, Col } from 'react-bootstrap';
 
 import MyGoogleMap from './GoogleMap';
+import { actionCreators } from '../../../../store/auth';
 
 import lang from '../../../../utils/language';
 
+import main_en from '../../../../layout/main/main_en.styl';
+import main_ar from '../../../../layout/main/main_ar.styl';
 import styles_en from '../address_en.styl';
 import styles_ar from '../address_ar.styl';
 
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const refs = {};
 class MyGMap extends React.Component {
@@ -21,11 +26,12 @@ class MyGMap extends React.Component {
     this.state = {
       bounds: null,
       center: {
-        lat: 41.9, lng: -87.624,
+        lat: 24.7135517, lng: 46.6752957, // TODO: fetch from Browser
       },
+      defaultZoom: 15,
       markers: [],
     };
-
+    this.locateMe = this.locateMe.bind(this);
     this.onMapMounted = this.onMapMounted.bind(this);
     this.markerLatlng = this.markerLatlng.bind(this);
     this.onPlacesChanged = this.onPlacesChanged.bind(this);
@@ -132,7 +138,7 @@ class MyGMap extends React.Component {
       obj.city = curr.long_name;
     }
     if (curr.types.includes('postal_code')) {
-      obj.po_box = curr.long_name;
+      obj.postal_code = curr.long_name;
     }
     return obj;
   }, {});
@@ -152,26 +158,78 @@ class MyGMap extends React.Component {
     });
   }
 
-  // <button onClick={this.onGetLocation.bind(this)}>LOCATE ME</button>
+  deriveCityFromLatLng = (lng, lat) => {
+    const { deriveCity, getDataFromMap } = this.props;
+    deriveCity({
+      longitude: lng,
+      latitude: lat,
+      api: '/geocode/json',
+    }).then((res) => {
+      if (res.value) {
+        const cityCountryObj = this.fetchCountryName(res.value.address_components);
+
+        cityCountryObj.address = res.value.formatted_address;
+
+        getDataFromMap({
+          lat, lng, cityCountryObj,
+        });
+        this.setState({
+          markers: [{
+            position: {
+              lat,
+              lng,
+            },
+          }],
+        });
+      }
+    });
+  }
+
+  onMapClick = (marker) => {
+    const lng = marker.latLng.lng();
+    const lat = marker.latLng.lat();
+    this.deriveCityFromLatLng(lng, lat);
+  }
+
+  locateMe = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        const lat = position.coords.latitude;
+        const lng = position.coords.longitude;
+        this.setState({
+          center: {
+            lat, lng,
+          },
+        });
+        this.deriveCityFromLatLng(lng, lat);
+      }, (error) => {
+        console.log(error);
+      });
+    } else {
+      alert('Browser does not support');
+    }
+  }
+
   render() {
     const {
-      refs, bounds, center, markers 
+      refs, bounds, center, markers, defaultZoom,
     } = this.state;
     const { clsName } = this.props;
     return (
       <div>
-
         <MyGoogleMap
           refs={refs}
           bounds={bounds}
           center={center}
           markers={markers}
+          defaultZoom={defaultZoom}
+          onMapClick={this.onMapClick}
           onMapMounted={this.onMapMounted}
           onBoundsChanged={this.onBoundsChanged}
           onSearchBoxMounted={this.onSearchBoxMounted}
           onPlacesChanged={this.onPlacesChanged}
           markerLatlng={this.markerLatlng}
-
+          locateMe={this.locateMe}
           isMarkerShown
           googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDrVNKZshUspEprFsNnQD-sos6tvgFdijg&v=3.exp&libraries=geometry,drawing,places"
           loadingElement={<div style={{ height: '100%' }} />}
@@ -192,4 +250,13 @@ MyGoogleMap.defaultProps = {
 
 };
 
-export default MyGMap;
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      deriveCity: actionCreators.deriveCity,
+    },
+    dispatch,
+  );
+
+export default connect(null, mapDispatchToProps)(MyGMap);

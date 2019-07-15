@@ -1,15 +1,20 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 
-import { mergeCss } from '../../../../utils/cssUtil';
-const styles = mergeCss('components/common/InstantCheckout/instant');
+import lang from '../../../../utils/language';
 
-const VaultCard = props => {
-  const { defaultCard, toggleMiniVault, updateCVV } = props;
+import main_en from '../../../../layout/main/main_en.styl';
+import main_ar from '../../../../layout/main/main_ar.styl';
+import styles_en from '../instant_en.styl';
+import styles_ar from '../instant_ar.styl';
+
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+
+const VaultCard = (props) => {
+  const { defaultCard, toggleMiniVault, updateCVV, vaultResults } = props;
   return (
-    <div className={`${styles['p-10-20']} ${styles['border-b']} ${styles['instant-check-list-inn']}`} onClick={toggleMiniVault}>
-      <h5 className={`${styles['mt-5']} ${styles['mb-5']}`}>{defaultCard[0].masked_number.replace(/(.{4})/g, '$1 ')}</h5>
-      <div className={`${styles['flx-space-bw']} ${styles['fs-12']} ${styles['label-gry-clr']}`}>
+    <div className={`${styles['p-10-20']} ${styles['border-b']} ${styles.relative} ${vaultResults.length > 1 && styles['instant-check-list-inn']}`} onClick={toggleMiniVault}>
+      <h5 className={`${styles['mt-5']} ${styles['mb-5']} ${styles['card-number']}`}>{defaultCard[0].masked_number.replace(/(.{4})/g, '$1 ')}</h5>
+      <div className={`${styles['flx-space-bw']} ${styles['fs-12']} ${styles['thick-gry-clr']}`}>
         <span>{defaultCard[0].holder_name}</span> <span>{defaultCard[0].expiry_month}/{defaultCard[0].expiry_year}</span>
       </div>
       {/* <div><input type="password" placeholder="Enter CVV" onChange={updateCVV} style={{ width: '100px' }} /></div> */}
@@ -26,4 +31,3 @@ VaultCard.defaultProps = {
 };
 
 export default VaultCard;
-

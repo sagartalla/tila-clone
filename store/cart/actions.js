@@ -1,4 +1,5 @@
 import api from './api';
+import * as addressSelectors from '../cam/address/selectors'
 
 const actions = {
   GET_CART_DETAILS: 'GET_CART_DETAILS',
@@ -9,7 +10,8 @@ const actions = {
   RESET_ADD_TO_CART: 'RESET_ADD_TO_CART',
   SHOW_CART_BUTTON_LOADER: 'SHOW_CART_BUTTON_LOADER',
   HIDE_CART_BUTTON_LOADER: 'HIDE_CART_BUTTON_LOADER',
-  CART_TRACK: 'CART_TRACK',
+  GET_CART_EDIT_DETAILS: 'GET_CART_EDIT_DETAILS',
+  CART_TRACK: 'CART_TRACK'
 };
 
 const actionCreators = {
@@ -19,14 +21,24 @@ const actionCreators = {
       payload: api.addToCart(params),
     };
   },
-  getCartResults: (params) => {
-    return ({
+  getCartResults: (params) => (dispatch, getState) => {
+    const store = getState();
+    params = {
+      ...params,
+      address_id: addressSelectors.getSelectedAddress(store).address_id
+    }
+    return dispatch({
       type: actions.GET_CART_DETAILS,
       payload: api.getCartDetailsApi(params),
     });
   },
-  removeCartItem: (cartId, showToast) => (dispatch,getState) => {
-    dispatch(actionCreators.track({ eventName: 'CART_REMOVE', cartId }));
+  cartEditDetails: (bool) => {
+    return ({
+      type:actions.GET_CART_EDIT_DETAILS,
+      payload:bool
+    })
+  },
+  removeCartItem: (cartId, showToast) => (dispatch) => {
     const params = {
       cart_item_id: cartId,
     };

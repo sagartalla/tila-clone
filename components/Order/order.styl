@@ -9,7 +9,7 @@ $shipment-wrap-border-color = #D8D8D8
 .order-item-wrap
   background white
 
-.cancel-btn 
+.cancel-btn
   .link-text
     padding 10px 15px
 
@@ -27,8 +27,8 @@ $shipment-wrap-border-color = #D8D8D8
         float left
 
 .shipment-wrap
-  border 1px solid $shipment-wrap-border-color
-  border-radius 6px
+  border 1px solid light-brdr
+  border-radius 4px
   .products-wrap
     .product-item
       .img-wrap, .text-wrap
@@ -41,6 +41,9 @@ $shipment-wrap-border-color = #D8D8D8
           object-fit scale-down
           max-width 100%
           max-height 100%
+          display: block;
+          margin: 0 auto;
+          overflow: hidden;
 
   .widget-wrap
     clear both
@@ -50,7 +53,13 @@ $shipment-wrap-border-color = #D8D8D8
     width 14px
     height 15px
 
+.card-number
+  direction ltr
+.order-conf-part
+  box-shadow 0 0 35px 0 rgba(0, 0, 0, 0.06)
+
 .addres-dtls
+  box-shadow 0 0 35px 0 rgba(0, 0, 0, 0.06)
   .pin-map-icon
     width 20px
 
@@ -66,6 +75,9 @@ $shipment-wrap-border-color = #D8D8D8
     border-radius 4px
     box-shadow 0 2px 4px 0 rgba(0, 0, 0, 0.09)
 
+ .break-word
+    word-wrap break-word
+
 .ret-exch-wrap
   .breadcrums
     padding 15px 20px
@@ -73,15 +85,13 @@ $shipment-wrap-border-color = #D8D8D8
     background-color white
     box-shadow 0 0 5px 0 rgba(0, 0, 0, 0.06)
     margin 0 20px
+    overflow-x hidden
 
   .product-wrap
     img
       object-fit scale-down
-
-.help-position
-  right 20px
-  bottom 0px
-  border-bottom 0
+      width 100%
+      max-height 100%;
 
 .ship-icon
   width 80px
@@ -92,13 +102,12 @@ $shipment-wrap-border-color = #D8D8D8
   .track-img
     max-width 100%
     max-height 100%
-
-
-
-
-
+.scroll
+  overflow-y scroll
+  height 300px
 .state-times
   margin 15px
+  padding 0px
   &::after
     box-sizing border-box
   li
@@ -106,7 +115,6 @@ $shipment-wrap-border-color = #D8D8D8
   p
     position relative
     color light-gray-clr
-    padding 0 20px
     width 100px
     &::after
       content ""
@@ -121,10 +129,11 @@ $shipment-wrap-border-color = #D8D8D8
       height 12px
   .activeP
     &::after
-      background generic-green-color      
+      background generic-green-color
   .status
     padding 0 20px 20px 20px
     position relative
+    width 90%
     &::before
       content ""
       position absolute
@@ -140,3 +149,22 @@ $shipment-wrap-border-color = #D8D8D8
   strong
    display block
    font-weight 600
+
+.success-th
+  background green-bg
+  border 1px solid generic-green-color
+
+.progress-th
+  background light-yellow-color
+  border 1px solid yellow-color
+
+.tooltip
+  &:hover .rightM15
+    display block
+
+.rightM15
+  display none
+
+.tool-tip-style 
+  position: relative;
+  z-index: 99999; 

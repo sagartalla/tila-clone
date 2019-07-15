@@ -4,10 +4,12 @@ import { actions } from './actions';
 const initialState = {
   ui: {
     loading: false,
+    notifyLoading: false,
   },
   data: [],
+  products: [],
   error: '',
-  paginationData:{}
+  paginationData: {},
 };
 
 const wishlistReducer = typeToReducer({
@@ -46,14 +48,22 @@ const wishlistReducer = typeToReducer({
   },
   [actions.NOTIFY_ME]: {
     PENDING: (state) => {
-      return Object.assign({}, state, { ui: { loading: true } });
+      return Object.assign({}, state, { ui: { notifyLoading: true } });
     },
     REJECTED: (state) => {
-      return Object.assign({}, state, { ui: { loading: false } });
+      return Object.assign({}, state, { ui: { notifyLoading: false } });
     },
     FULFILLED: (state) => {
-      return Object.assign({}, state, { ui: { loading: false } });
+      return Object.assign({}, state, { ui: { notifyLoading: false } });
     },
+  },
+  [actions.WISHLIST_PRODUCTS]: {
+    PENDING: state => Object.assign({}, state, { ui: { loading: true } }),
+    REJECTED: state => Object.assign({}, state, { ui: { loading: false } }),
+    FULFILLED: (state, action) => Object.assign({}, state, {
+      ui: { loading: false },
+      products: action.payload && action.payload.data,
+    }),
   },
 }, initialState);
 

@@ -19,10 +19,12 @@ import { selectors, actionCreators } from '../../../../store/order';
 
 import lang from '../../../../utils/language';
 
+import main_en from '../../../../layout/main/main_en.styl';
+import main_ar from '../../../../layout/main/main_ar.styl';
 import styles_en from './orderIssue_en.styl';
 import styles_ar from './orderIssue_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const cookies = new Cookie();
 
@@ -97,7 +99,7 @@ class Body extends Component {
   }
 
   goToNextStep() {
-    const { goToNextStep, resetOrderIssue, orderIssue } = this.props;
+    const { goToNextStep, resetOrderIssue, orderIssue, getOrderDetails, query } = this.props;
     const { exchangeId } = orderIssue
     const {
       step: currentStep,
@@ -121,6 +123,7 @@ class Body extends Component {
       }
       case STEPS.CANCEL_COMPLETE: {
         nextStep = null;
+        window.location.reload();
         break;
       }
       case STEPS.CHOOSE_RETURN_EXCHANGE: {
@@ -142,6 +145,7 @@ class Body extends Component {
         break;
       }
       default:
+
     }
     nextStep !== null
       ?
@@ -165,6 +169,7 @@ const mapDispatchToProps = dispatch =>
     {
       goToNextStep: actionCreators.goToNextStep,
       resetOrderIssue: actionCreators.resetOrderIssue,
+      getOrderDetails: actionCreators.getOrderDetails ,
     },
     dispatch,
   );

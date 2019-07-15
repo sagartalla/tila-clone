@@ -2,11 +2,18 @@ import _ from 'lodash';
 
 const getProduct = (store, variantId) => {
   const {
-    product_details, variant_preferred_listings, tree, product_id,
+    product_details, variant_preferred_listings, tree,
   } = store.productReducer.data[0];
 
-  const { data = [] } = store.wishlistReducer;
-  const wishListProductIds = data && data.length > 0 && (data.map(w => w.product_id) || []);
+  const { products = [] } = store.wishlistReducer;
+  const wishListProductIds = products && products.length > 0 && (products.map(w => w.product_id) || []);
+  let wishlistId = '';
+
+  products.forEach((p) => {
+    if (p.product_id === product_details.product_id) {
+      wishlistId = p.wishlist_id;
+    }
+  });
 
   variantId = store.productReducer.variantsData.selectedVariantId || variantId;
   variantId = variantId || Object.keys(variant_preferred_listings || {})[0];
@@ -15,8 +22,8 @@ const getProduct = (store, variantId) => {
     return [...acc, ...val];
   }, []);
   listings = listings || [];
-  const catalogAttributeMap = product_details.catalog_details.attribute_map;
-  const productAttributeMap = product_details.product_details_vo.cached_product_details.attribute_map;
+  const catalogAttributeMap = product_details && product_details.catalog_details.attribute_map;
+  const productAttributeMap = product_details && product_details.product_details_vo && product_details.product_details_vo.cached_product_details.attribute_map;
   // let activeCount = 0, listingInventryCount = 0;
   let priceInfo = listings ? listings.filter((listing) => {
     // if(listing.total_inventory_count <= 0 ) {
@@ -27,6 +34,7 @@ const getProduct = (store, variantId) => {
     // }
     return listing.total_inventory_count > 0 && listing.active;
   }) : [];
+
   const warranty = priceInfo.length && priceInfo[0].warranty_policy && priceInfo[0].warranty_policy.preferred_policy ?
     priceInfo[0].warranty_policy.policies[priceInfo[0].warranty_policy.preferred_policy] : {};
   priceInfo = priceInfo.length ? priceInfo[0] : null;
@@ -46,10 +54,10 @@ const getProduct = (store, variantId) => {
     });
   }
 
-  const imgUrls = product_details.product_details_vo.cached_product_details.media.gallery_media;
+  const imgUrls = product_details && product_details.product_details_vo && product_details.product_details_vo.cached_product_details.media.gallery_media;
   const titleInfo = {
-    brand: product_details.catalog_details.attribute_map.brand.attribute_values[0].value,
-    title: productAttributeMap.calculated_display_name.attribute_values[0].value,
+    brand: product_details && product_details.catalog_details && product_details.catalog_details.attribute_map.brand,
+    title: productAttributeMap && productAttributeMap.calculated_display_name && productAttributeMap.calculated_display_name,
     rating: {
       rating: '',
       count: ''
@@ -57,25 +65,25 @@ const getProduct = (store, variantId) => {
     reviews: {
       count: ''
     },
-    price: priceInfo ? priceInfo.selling_price + ' ' + priceInfo.selling_price_currency : 'Price Not available',
+    price: priceInfo ? priceInfo.selling_price ? `${priceInfo.selling_price.display_value} ${priceInfo.selling_price.currency}` : priceInfo.selling_price : 'Price Not available',
     originalPrice: '',
     discountPercent: '',
     listingId: priceInfo ? priceInfo.listing_id : 'No Listing',
     totalInventoryCount: priceInfo ? priceInfo.total_inventory_count : 0,
-    product_id: product_details.product_id,
-    itemtype: product_details.catalog_details.item_type_name,
-    media: imgUrls[0].url,
-    categoryId: tree.breadcrumb[tree.breadcrumb.length - 1].id,
-    comparable: product_details.catalog_details.comparable,
+    product_id: product_details && product_details.product_id,
+    itemtype: product_details && product_details.catalog_details && product_details.catalog_details.item_type_name,
+    media: imgUrls && imgUrls[0].url,
+    categoryId: tree && tree.breadcrumb && tree.breadcrumb[tree.breadcrumb.length - 1].id,
+    comparable: product_details && product_details.catalog_details && product_details.catalog_details.comparable,
   };
+  const preferredPolicyData = priceInfo ? priceInfo.return_policy ? priceInfo.return_policy.policies[priceInfo.return_policy.preferred_policy] : {} : {};
   const returnInfo = {
-    acceptsReturns: priceInfo ? priceInfo.accepts_returns : false,
-    maxDaysToReturn: priceInfo ? priceInfo.max_days_to_return : 0,
+    acceptsReturns: preferredPolicyData ? preferredPolicyData.allowed : false,
+    maxDaysToReturn: preferredPolicyData ? preferredPolicyData.duration : 0,
   };
-  const shippingInfo = priceInfo ? {...priceInfo.shipping, ...returnInfo} : {};
   const offerInfo = {
-    price: priceInfo ? priceInfo.selling_price + ' ' + priceInfo.selling_price_currency : 'No listing',
-    listingId: priceInfo ? priceInfo.listing_id : 'No Listing',
+    price: priceInfo ? priceInfo.selling_price ? `${priceInfo.selling_price.display_value} ${priceInfo.selling_price.currency}` : priceInfo.selling_price : 'No listing',
+    listingId: priceInfo ? priceInfo.listing_id : '',
     listingAvailable: !!priceInfo,
     availabilityError,
     stockError,
@@ -88,21 +96,21 @@ const getProduct = (store, variantId) => {
       offerDiscounts: priceInfo.pricing.actions ? priceInfo.pricing.actions : [],
       totalDiscountMRP: priceInfo.pricing.total_discount_mrp,
       currency: priceInfo.mrp_currency
-    } : 'No Listing'
+    } : {},
   };
   const variant_id = variant_preferred_listings ? Object.keys(variant_preferred_listings)[0] : '';
 
   const catalogObj = {
-    catalog_id: product_details.catalog_details.catalog_id,
-    item_type: product_details.catalog_details.item_type_name,
-    product_id: product_details.product_id,
-    variant_id
+    catalog_id: product_details && product_details.catalog_details && product_details.catalog_details.catalog_id,
+    item_type: product_details && product_details.catalog_details && product_details.catalog_details.item_type_name,
+    product_id: product_details && product_details.product_id,
+    variant_id,
   };
-  const keyfeatures = _.map(productAttributeMap.calculated_highlights.attribute_values, (kf) => kf.value);
+  const keyfeatures = productAttributeMap && productAttributeMap.calculated_highlights;
   const extraOffers = priceInfo ? priceInfo.pricing.extra_offers_detail : [];
-  const details = catalogAttributeMap.description ? catalogAttributeMap.description.attribute_values.map((d) => d.value).join(', ') : null;
-  let productDescription = product_details.product_details_vo.cached_product_details.rich_product_desc;
-  productDescription = productDescription.length > 0 ? _.sortBy(productDescription,['order']) : null;
+  const details = catalogAttributeMap && catalogAttributeMap.description ? catalogAttributeMap.description.attribute_values.map((d) => d.value).join(', ') : null;
+  let productDescription = product_details && product_details.product_details_vo && product_details.product_details_vo.cached_product_details.rich_product_desc;
+  productDescription = productDescription && productDescription.length > 0 ? _.sortBy(productDescription,['order']) : null;
   return {
     titleInfo,
     details,
@@ -110,9 +118,9 @@ const getProduct = (store, variantId) => {
     imgUrls,
     extraOffers,
     offerInfo,
-    shippingInfo,
+    shippingInfo: priceInfo ? priceInfo.shipping : null,
     returnInfo,
-    product_id,
+    product_id: product_details && product_details.product_id,
     productDescription,
     catalogObj,
     sizeChart: {
@@ -123,10 +131,29 @@ const getProduct = (store, variantId) => {
     warranty,
     categoryType: tree.finance ? tree.finance[0].display_name_en : '',
     catalog: _.groupBy(_.filter(catalogAttributeMap, (val) => val.visible), (attrMap) => attrMap.attribute_category_name),
-    isWishlisted: wishListProductIds && wishListProductIds.indexOf(product_id) !== -1,
+    isWishlisted: wishListProductIds && wishListProductIds.indexOf(product_details.product_id) !== -1,
+    wishlistId,
   };
 };
+const isProductLoaded = (store) => {
+  //console.log('productdetails', store.productReducer.data[0]);
+  return { isProductLoaded:store.productReducer.data[0],
+           productDetails: store.productReducer.data[0]
+          }
 
+}
+const getLoadingStatus = (store) => {
+  return store.productReducer.ui.loading
+}
+const getProductId = (store) => {
+  return store.productReducer.productId
+}
+const getVariantId = (store) => {
+  return store.productReducer.variantId
+}
+const getErrorMessage = (store) => {
+  return store.productReducer.error
+}
 const getVariants = (store) => {
   // remove this method
   const { similar_products, product_details } = store.productReducer.data[0];
@@ -186,11 +213,11 @@ const getVariants = (store) => {
   };
 };
 
-const getVariantsAndSimilarProducts = (store) => {
+const getVariantsAndSimilarProducts = (variantId,productId) => (store) => {
   const { variantsData } = store.productReducer;
   const { availableSimilarProducts } = variantsData || {};
   const { similar_products, product_details, variant_preferred_listings } = store.productReducer.data[0];
-  const { item_type_name: itemType, catalog_id: catalogId } = product_details.catalog_details;
+  const { item_type_name: itemType, catalog_id: catalogId } = product_details && product_details.catalog_details;
   const { product_id: productId, product_details_vo } = product_details;
   const { cached_product_details } = product_details_vo;
   const { attribute_map } = cached_product_details;
@@ -213,7 +240,19 @@ const getVariantsAndSimilarProducts = (store) => {
   //     }
   //   }]
   // }
-  const variants = _.reduce(product_details.product_details_vo.cached_variant, (acc, value, key) => {
+
+  let variantProducts = []
+  _.forIn(product_details.product_details_vo.cached_variant,(value,key) => {
+    value['key'] = key
+    if(key === variantId) {
+      variantProducts.unshift(value)
+    } else {
+      variantProducts.push(value)
+    }
+  })
+
+  const variants = _.reduce(variantProducts, (acc, value) => {
+    const key = value.key
     const display = {
       ...acc.display
     };
@@ -228,16 +267,16 @@ const getVariantsAndSimilarProducts = (store) => {
       if(!display[attKey]) {
         display[attKey] = {
           displayName: attVal.display_string,
-          values: []
+          values: [],
         };
       }
-      display[attKey].values = _.uniq([...display[attKey].values, ...(attVal.attribute_values.map((i) => i.value))]);
-      if(!map[key][attKey]) {
+      display[attKey].values = _.uniq([...display[attKey].values, ...(attVal.attribute_values.map(i => `${i.value}${i.qualifier_unit ? ` ${i.qualifier_unit}` : ''}`))]);
+      if (!map[key][attKey]) {
         map[key][attKey] = [];
       }
       map[key] = {
         ...map[key],
-        [attKey]: [...map[key][attKey], ...(attVal.attribute_values.map((i) => i.value))]
+        [attKey]: [...map[key][attKey], ...(attVal.attribute_values.map(i => `${i.value}${i.qualifier_unit ? ` ${i.qualifier_unit}` : ''}`))]
       };
     });
     return {
@@ -265,7 +304,17 @@ const getVariantsAndSimilarProducts = (store) => {
   //     }
   //   }]
   // }
-  const similarProducts = similar_products ? _.reduce([product_details, ...similar_products], (acc, product) => {
+
+  let modifiedProducts = []
+  similar_products.forEach(product => {
+    if(product.listing.product_id === productId.trim()) {
+      modifiedProducts.unshift(product)
+    } else {
+      modifiedProducts.push(product)
+    }
+  })
+  const similarProducts = similar_products ? _.reduce([product_details, ...modifiedProducts], (acc, product) => {
+
     if(availableSimilarProducts && !availableSimilarProducts[product.product_details_vo.cached_product_details.product_id]) return acc;
     const key = product.product_details_vo.cached_product_details.product_id;
     const display = {
@@ -285,13 +334,14 @@ const getVariantsAndSimilarProducts = (store) => {
           values: []
         };
       }
-      display[attKey].values = _.uniq([...display[attKey].values, ...(attVal.attribute_values.map((i) => i.value))]);
+
+      display[attKey].values = _.uniq([...display[attKey].values, ...(attVal.attribute_values.map(i => `${i.value}${i.qualifier_unit ? ` ${i.qualifier_unit}` : ''}`))]);
       if(!map[key][attKey]) {
         map[key][attKey] = [];
       }
       map[key] = {
         ...map[key],
-        [attKey]: [...map[key][attKey], ...(attVal.attribute_values.map((i) => i.value))]
+        [attKey]: [...map[key][attKey], ...(attVal.attribute_values.map(i => `${i.value}${i.qualifier_unit ? ` ${i.qualifier_unit}` : ''}`))]
       };
     });
     return {
@@ -434,4 +484,5 @@ const getAllCountries = (store) => {
 export {
   getProduct, getVariants, getPreview, getSelectedVariantId, getReviewRatings, getReviewResponse,
   getVariantsAndSimilarProducts, getSelectedPropductId, getSelectedVariantData, getAllCities, getAllCountries,
+  getLoadingStatus,getErrorMessage,isProductLoaded,getProductId,getVariantId
 };

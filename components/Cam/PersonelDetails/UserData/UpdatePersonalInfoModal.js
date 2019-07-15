@@ -1,24 +1,25 @@
 import Calendar from 'rc-calendar';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Row, Col } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 import DatePicker from 'rc-calendar/lib/Picker';
 import moment from 'moment';
 import { toast } from 'react-toastify';
 import { languageDefinations } from '../../../../utils/lang';
 import Btn from '../../../common/Button';
-import Input from '../../../common/Input';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators, selectors } from '../../../../store/cam/personalDetails';
 import SVGComponent from '../../../common/SVGComponet';
-
+import ToastContent from '../../../common/ToastContent';
 import lang from '../../../../utils/language';
 
+import main_en from '../../../../layout/main/main_en.styl';
+import main_ar from '../../../../layout/main/main_ar.styl';
 import styles_en from '../profile_en.styl';
 import styles_ar from '../profile_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
 const { PERSONAL_INFO_MODAL } = languageDefinations();
 
@@ -29,7 +30,7 @@ class UpdatePersonalInfoModal extends React.Component {
     user_gender: '',
     user_dob: moment(new Date()),
     show: this.props.show,
-    responseState: false
+    responseState: false,
   };
 
   componentWillReceiveProps(nextProps) {
@@ -38,8 +39,8 @@ class UpdatePersonalInfoModal extends React.Component {
         user_name: nextProps.userInfo.personalInfo.user_name,
         user_gender: nextProps.userInfo.personalInfo.gender,
         user_dob: nextProps.userInfo.personalInfo.dob != '' && nextProps.userInfo.personalInfo.dob ? moment(new Date(nextProps.userInfo.personalInfo.dob)) : moment(new Date()),
-        show: nextProps.show
-      })
+        show: nextProps.show,
+      });
     }
     if (nextProps.getEditPersonalInfoStatus && nextProps.getEditPersonalInfoStatus.Response == 'SUCCESS' && nextProps.userInfo.personalInfo && !this.state.responseState) {
       this.setState({
@@ -47,8 +48,8 @@ class UpdatePersonalInfoModal extends React.Component {
         user_gender: nextProps.userInfo.personalInfo.gender,
         user_dob: nextProps.userInfo.personalInfo.dob != '' && nextProps.userInfo.personalInfo.dob ? moment(new Date(nextProps.userInfo.personalInfo.dob)) : moment(new Date()),
         show: nextProps.show,
-        responseState: true
-      })
+        responseState: true,
+      });
     }
   }
 
@@ -57,25 +58,37 @@ class UpdatePersonalInfoModal extends React.Component {
       user_dob: moment(new Date()),
       user_name: '',
       user_gender: '',
-      show: false
+      show: false,
     });
     this.props.handleShow(false)();
   }
 
   handleNameChange = (e) => {
     this.setState({
-      user_name: e.target.value
+      user_name: e.target.value,
     });
   }
 
   handleDobChange = (value) => {
     this.setState({
-      user_dob: moment(new Date(value))
-    })
+      user_dob: moment(new Date(value)),
+    });
   }
 
-  handleGenderChange = (val) => (e) => {
+  handleGenderChange = val => (e) => {
     this.setState({ user_gender: val });
+  }
+
+  disabledDate = (current) => {
+    if (!current) {
+      // allow empty select
+      return false;
+    }
+    const date = moment();
+    date.hour(0);
+    date.minute(0);
+    date.second(0);
+    return current.valueOf() > date.valueOf();
   }
 
   handleSubmit = () => {
@@ -85,34 +98,45 @@ class UpdatePersonalInfoModal extends React.Component {
     second_name = second_name.join(' ');
     if (user_name && user_dob && user_gender) {
       this.props.EditPersonalInfo({
-        first_name: first_name ? first_name : '',
+        first_name: first_name || '',
         dob: user_dob.format('YYYY-MM-DD'),
         gender: user_gender,
         last_name: second_name ? second_name : '',
-        image_url: ''
+        image_url: '',
+      }).then(() => {
+        this.handleClose();
+        toast(
+          <ToastContent
+            msg={`${PERSONAL_INFO_MODAL.YOUR_PERSONAL}`}
+            msgType="success"
+          />,
+        );
       });
-      this.handleClose();
-      toast.success('Your personal information has been updated.');
     } else {
-      toast.error('Fill in all the fields');
+      toast(
+        <ToastContent
+          msg="Fill in all the fields"
+          msgType="error"
+        />,
+      );
     }
   }
 
   render() {
     const calendar = (
-      <Calendar />
+      <Calendar disabledDate={this.disabledDate} />
     );
     const { user_name, user_dob, user_gender } = this.state;
     return (
       <div>
-        <div className={styles['editProfileModal']}>
+        <div className={styles.editProfileModal}>
           <h4 className={`${styles['flx-spacebw-alignc']} ${styles['m-0']}`}>
-            <span className={styles['lgt-blue']}>Personal Information</span>
-            <a onClick={this.handleClose} className={styles['fs-24']}>X</a>
+            <span className={`${styles['fs-20']}`}>{PERSONAL_INFO_MODAL.HEADING}</span>
+            <a onClick={this.handleClose} className={`${styles['fs-22']} ${styles['black-color']}`}>X</a>
           </h4>
           <div className={`${styles['flex-center']} ${styles['flex-colum']}`}>
             <div className={`${styles['flex-center']} ${styles['flex-colum']} ${styles['personal-info-main']}`}>
-              <div className={`${styles['personal-info-img']} ${styles['flex']} ${styles['justify-center']}`}>
+              <div className={`${styles['personal-info-img']} ${styles.flex} ${styles['justify-center']}`}>
                 <SVGComponent clsName={`${styles['personal-info-img-icon']}`} src="icons/common-icon/personal-info-mobile" />
               </div>
               <p className={`${styles['thick-gry-clr']} ${styles['fs-12']} ${styles['t-c']}`}>{PERSONAL_INFO_MODAL.ENTER_YOUR_NAME}{PERSONAL_INFO_MODAL.EXPERIANCE}</p>
@@ -132,12 +156,12 @@ class UpdatePersonalInfoModal extends React.Component {
                 </a>
               </div>
             </div>
-            <div className={`${styles['personal-info-upadate-main']} ${styles['flex']} ${styles['flex-colum']}`}>
-              <div className={`${styles['m-5']} ${styles['mt-20']} ${styles['update-profile-input']} ${styles['flex']}`}>
+            <div className={`${styles['personal-info-upadate-main']} ${styles.flex} ${styles['flex-colum']}`}>
+              <div className={`${styles['m-5']} ${styles['mt-20']} ${styles['update-profile-input']} ${styles.flex}`}>
                 <Col xs={12} md={12}>
                   <div className={styles['fp-input']}>
-                    <div className={`${styles['mb-0']} ${styles['fs-12']} ${styles['label-gry-clr']}`}>{PERSONAL_INFO_MODAL.USERNAME}</div>
-                    <input className={styles['user-name']} type="text" value={user_name} onChange={this.handleNameChange} maxLength={40}/>
+                    <div className={`${styles['mb-0']} ${styles['fs-12']} ${styles['label-gry-clr']} ${styles['profile-dts']}`}>{PERSONAL_INFO_MODAL.USERNAME}</div>
+                    <input className={styles['user-name']} type="text" value={user_name === 'null null' ? '' : user_name} onChange={this.handleNameChange} name="username" maxLength={40}/>
                     {/* <span className={styles['highlight']}></span>
                   <span className={styles['bar']}></span>
                   <label>Email / Username</label> */}
@@ -146,23 +170,22 @@ class UpdatePersonalInfoModal extends React.Component {
                 <Input placeholder="Enter Name" val={user_name} onChange={this.handleNameChange}  /> */}
                 </Col>
               </div>
-              <div className={`${styles['m-5']} ${styles['mt-20']} ${styles['flex']}`}>
+              <div className={`${styles['m-5']} ${styles['mt-20']} ${styles.flex}`}>
                 <Col xs={12} md={12}>
                   <div className={`${styles['fp-input']} ${styles['date-dob-caldr']}`}>
-                    <div className={`${styles['mb-0']} ${styles['fs-12']} ${styles['label-gry-clr']}`}>{PERSONAL_INFO_MODAL.DOB}</div>
+                    <div className={`${styles['mb-0']} ${styles['fs-12']} ${styles['label-gry-clr']} ${styles['profile-dts']}`}>{PERSONAL_INFO_MODAL.DOB}</div>
                     <DatePicker
                       animation="slide-up"
                       value={user_dob}
                       disabled={false}
                       calendar={calendar}
-                      onChange={(value) => this.handleDobChange(value)}
+                      onChange={value => this.handleDobChange(value)}
                     >{
-                        ({ value }) => {
-                          return (
-                            <input value={value ? value.format('YYYY-MM-DD') : ''} readOnly />
+                        ({ value }) => (
+                          <input value={value ? value.format('YYYY-MM-DD') : ''} readOnly />
                           )
-                        }
-                      }</DatePicker>
+                      }
+                    </DatePicker>
                   </div>
                 </Col>
               </div>
@@ -181,16 +204,16 @@ class UpdatePersonalInfoModal extends React.Component {
   }
 }
 
-const mapStateToProps = (store) => ({
+const mapStateToProps = store => ({
   getEditPersonalInfoStatus: selectors.getEditPersonalInfoStatus(store),
   errorMessege: selectors.getErrorMessege(store),
-  userInfo: selectors.getUserInfo(store)
+  userInfo: selectors.getUserInfo(store),
 });
 
-const mapDispatchToProps = (dispatch) =>
+const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      EditPersonalInfo: actionCreators.EditPersonalInfo
+      EditPersonalInfo: actionCreators.EditPersonalInfo,
     },
     dispatch,
   );
@@ -201,7 +224,7 @@ UpdatePersonalInfoModal.propTypes = {
   userInfo: PropTypes.object,
   getEditPersonalInfoStatus: PropTypes.object,
   errorMessege: PropTypes.string,
-  EditPersonalInfo: PropTypes.func
+  EditPersonalInfo: PropTypes.func,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(UpdatePersonalInfoModal);

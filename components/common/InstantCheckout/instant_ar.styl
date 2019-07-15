@@ -1,0 +1,34 @@
+.instant-checkout
+  background-color #fbfbfb
+  position relative
+  .instant-check-list-inn
+    position relative
+    &:after
+      content ''
+      position absolute
+      background url(/static/img/icons/down-arrow/down-arrow.svg) no-repeat
+      height 7px
+      width 10px
+      left 15px
+      top 33%
+    .card-number
+      direction ltr
+      text-align right
+
+  .instant-btn
+    color: #fff;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 14px;
+    width 100%
+    i
+     width 17px
+     height 20px
+
+  .blocker
+    position absolute
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;

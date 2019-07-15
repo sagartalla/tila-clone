@@ -12,18 +12,21 @@ import { Router } from '../../../../routes';
 
 import Captcha from '../../../common/Captcha';
 import CaptchaContent from '../../../common/Captcha/CaptchaContent'
-
-import EditPhone from '../../../Cam/PersonelDetails/UserData/EditPhone';
+import dynamic from 'next/dynamic';
+//import EditPhone from '../../../Cam/PersonelDetails/UserData/EditPhone';
 import Button from '../../../common/CommonButton';
 
 const { PAYMENT_PAGE } = languageDefinations();
 
 import lang from '../../../../utils/language';
 
+import main_en from '../../../../layout/main/main_en.styl';
+import main_ar from '../../../../layout/main/main_ar.styl';
 import styles_en from '../../payment_en.styl';
 import styles_ar from '../../payment_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+const EditPhone = dynamic(import('../../../Cam/PersonelDetails/UserData/EditPhone'));
 
 class CashOnDelivery extends React.Component {
   constructor() {
@@ -82,8 +85,8 @@ class CashOnDelivery extends React.Component {
 
   afterSuccessOtpVerification() {
     this.setState({
-      showPayBtn: true,
-    });
+        showPayBtn: true,
+      });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -104,15 +107,15 @@ class CashOnDelivery extends React.Component {
   render() {
     const { data, showLoading, profileInfo } = this.props;
     return <div>
-        <div className={`${styles['cash-on-dly-points']}`}>
+        <div className={`${styles['cash-on-dly-points']} ${styles['pt-25']} ${styles['pb-15']}`}>
     <Row className={styles['pl-40']}>
       <Col md={12}>
         <h4 className={`${styles['fontW300']} ${styles['fs-20']} ${styles['lgt-blue']} ${styles['mt-0']} ${styles['pb-10']}`}>{PAYMENT_PAGE.PAY_ON_DELIVERY}</h4>
     {
       this.state.nextStep === 'captcha' && (
         <div className={styles['checkbox-material']}>
-          <input id="pay-delivery" type="checkbox" onChange={ this.handleChange } checked={ this.state.checked }/>
-          <label for="pay-delivery"> {PAYMENT_PAGE.I_AGREE_TO_PAY_COD} </label>
+          <input id="cod-delivery" type="checkbox" onChange={ this.handleChange } checked={ this.state.checked }/>&nbsp;
+          <label htmlFor="cod-delivery"> {PAYMENT_PAGE.I_AGREE_TO_PAY_COD} </label>
         </div>
       )
     }
@@ -143,7 +146,7 @@ class CashOnDelivery extends React.Component {
           null
     }
     </Col>
-    <Col md={6} sm={12} xs={12}>
+    <Col md={10} sm={12} xs={12}>
       {
         this.state.showContinueButton &&
            (
@@ -162,7 +165,7 @@ class CashOnDelivery extends React.Component {
               <Button
                 className={`${styles['fs-16']} ${styles['fontW600']} ${styles['new-card-btn']} ${styles['border-radius']} ${styles['ht-40']} ${styles.width70}`}
                 onClick={this.proceedToPayment}
-                btnText={PAYMENT_PAGE.PAY + ' ' + data.amount_to_pay + ' ' + data.currency_code + ' ' + PAYMENT_PAGE.ON_DELIVERY}
+                btnText={PAYMENT_PAGE.PAY + ' ' + data.amount_to_pay.display_value + ' ' + data.amount_to_pay.currency_code + ' ' + PAYMENT_PAGE.ON_DELIVERY}
                 hoverClassName="hoverBlueBackground"
                 btnLoading={showLoading}
 

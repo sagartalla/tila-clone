@@ -9,11 +9,12 @@ import { Router } from '../../../../routes';
 
 import lang from '../../../../utils/language';
 
+import main_en from '../../../../layout/main/main_en.styl';
+import main_ar from '../../../../layout/main/main_ar.styl';
 import styles_en from '../../order_en.styl';
 import styles_ar from '../../order_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
-
+const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
 const cookies = new Cookies();
 
@@ -31,16 +32,16 @@ const OrderDetails = ({ query, orderData, thankyouPage }) => {
       <Grid>
         <Row className={styles['m-0']}>
           <Col md={12}>
-            <div className={`${styles['mt-20']} ${styles['mb-20']}`}>
+            <div className={`${styles['mt-20']} ${styles['mb-20']} ${styles['black-color']}`}>
               {
                 thankyouPage ? '' :
-                  <Fragment>
-                    <span><a onClick={() => routeChange(`/${country}/${language}/cam/profile`)}>{ORDER_PAGE.MY_ACCOUNT}</a></span>
-                    <span> > </span>
-                    <span><a onClick={() => routeChange(`/${country}/${language}/cam/orders`)}>{ORDER_PAGE.ORDERS}</a></span>
-                    <span> > </span>
-                    <span>{query.orderId}</span>
-                  </Fragment>
+                <Fragment>
+                  <span><a className={`${styles['black-color']}`} onClick={() => routeChange(`/${country}/${language}/cam/profile`)}>{ORDER_PAGE.MY_ACCOUNT}</a></span>
+                  <span> > </span>
+                  <span ><a className={`${styles['black-color']}`} onClick={() => routeChange(`/${country}/${language}/cam/orders`)}>{ORDER_PAGE.ORDERS}</a></span>
+                  <span> > </span>
+                  <span>{query.orderId}</span>
+                </Fragment>
               }
               {/* TODO Breadcrums */}
 
@@ -54,14 +55,15 @@ const OrderDetails = ({ query, orderData, thankyouPage }) => {
             </div>
           </Col>
         </Row>
-        <Row className={styles['m-0']}>
+        <Row className={`${styles['m-0']} ${styles['mb-40']}`}>
           <Col md={12}>
-            <div className={`${styles['box']} ${styles['p-20']} ${styles['mt-20']}`}>
+            <div className={`${styles.box} ${styles['p-20']} ${styles['mt-20']} ${styles['order-conf-part']}`}>
               {orderData.orderItems.map(item => (
                 <OrderItem
                   key={item.id}
                   payments={orderData.payments}
                   orderItem={item}
+                  showPriceInfo
                   needHelp
                   orderId={orderData.orderId}
                   thankyouPage={thankyouPage}
@@ -78,6 +80,6 @@ const OrderDetails = ({ query, orderData, thankyouPage }) => {
       <OrderIssueWidget />
     </div>
   );
-}
+};
 
 export default OrderDetails;

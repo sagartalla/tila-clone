@@ -23,8 +23,21 @@
   .card-details-name
     width 70%
   .cart-box
-    margin-bottom 0;
+    margin-bottom 0
     border-radius 4px 4px 0 0
+    .cart-price-toltp
+      .cart-tool-tip
+        right -8px
+        display none
+        text-align left
+        .table
+          line-height 1.6
+        &:before
+          right 12px
+          left auto
+      &:hover
+        .cart-tool-tip
+          display block
     .out-of-stock
       z-index 1
       width 96%
@@ -37,12 +50,13 @@
         max-height 100%
         max-width 100%
         object-fit scale-down
+        display: block;
+        margin: 0 auto;
     .quantity-title
       margin 0 8px
-      border 0.5px solid generic-green-color
-      padding 2px 12px
-      background-color generic-green-color
-      color white
+      border 1px solid tila-blk
+      padding 2px 0px
+      color tila-blk
 
     // .minus-disable
     //   background-color rgba(214, 214, 214, 0.3)
@@ -70,12 +84,12 @@
         width 16px
         height 16px
 
-    .move-to-wishlist
-      border-right 1px solid rgba(151,151,151,0.3);
-
   .alrt-message-part
     border-radius: 4px 4px 0 0;
 
+  .break-word
+    word-wrap break-word
+  
   .warranty-part
     background-color: rgba(249, 249, 249, 0.8);
 
@@ -89,10 +103,12 @@
         height 100%
     .view-btn-list
       justify-content flex-end
+      a
+        padding 7px 15px
 
 .mini-cart
-  max-height 300px
-  overflow-y scroll
+  max-height 330px
+  overflow-y auto
 
 .cart-stepper
   .minus-disable
@@ -106,11 +122,10 @@
 
   .quantity-title
     margin 0 8px
-    border 0.5px solid generic-green-color
-    padding 2px 12px
-    background-color generic-green-color
-    color white
-    width 40px
+    border 1px solid tila-blk
+    padding 2px 0px
+    color tila-blk
+    width 45px
 
 .min-items-list
   &:hover
@@ -124,8 +139,9 @@
   button
     border-bottom-right-radius 20px
     .secure-checkout
-      width 20px
-      height 19px
+      width 17px
+      height 21px
+      margin-right: 7px
 
 .cross-strike::after
   content ''
@@ -150,6 +166,19 @@
     // &:hover .view-more-label
     //   display block
 
+.sidebar-position
+  position sticky !important
+  top 80px
+
+.not-shippable {
+  border 1px solid thick-red-arrow
+  background-color light-red-color
+  border-radius 3px
+  .not-shipping-font {
+    font-size 12px
+  }
+}
+
 @media screen and (min-device-width: 320px) and (max-device-width: 766px) and (orientation : portrait){
   .cart-price-label {
     justify-content initial
@@ -172,7 +201,6 @@
     padding 14px 10px
   }
 }
-
 
 @media screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation : portrait){
   .cart-container .cart-box .quantity-title {

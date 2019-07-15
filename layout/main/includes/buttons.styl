@@ -18,16 +18,22 @@
   padding 5px 0
   color white
   border 0
-  border-radius 4px
+  // border-radius 4px
   &:focus
     outline none
 
+  &.left-radius
+    border-bottom-left-radius 14px
+
+  &.right-radius
+    border-bottom-right-radius 14px
+
   &.fp-btn-primary
-    background-color navy-blue
+    background-color tila-blk
     // min-width 200px
     padding 10px 15px
     &:hover
-      background-color light-navy-blue
+      background-color tila-blk
       color @color
     &:focus
       color white
@@ -40,11 +46,11 @@
     padding 10px 50px
 
   &.fp-btn-default
-    color navy-blue
+    color tila-blk
     font-weight 600
-    border 1px solid navy-blue
+    border 1px solid tila-blk
     // @extends .common-btn-style
-    padding 10px 25px
+    padding 7px 25px
     background-color white
     
   &.default-small
@@ -59,9 +65,13 @@
     background-color danger-color
     padding 10px 24px
 
+  &.fp-btn-facebook-blue
+    background-color #3C5A99
+    padding 10px 15px
+    
   &.fp-btn-sucess
     background-color generic-green-color
-    padding 10px 34px
+    padding 10px 20px
     border 1px solid generic-green-color
   
   &.fp-btn-disabled

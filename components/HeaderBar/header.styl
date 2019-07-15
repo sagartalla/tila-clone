@@ -1,25 +1,27 @@
 @import '../../layout/main/executables.styl';
 
 .header-container
-  display block
-  // margin-bottom 10px
-  box-shadow 0 0 12px 0 rgba(0,0,0,.1)
+  display: block;
+  box-shadow: 0 0 12px 0 rgba(0,0,0,0.1);
+  position: fixed;
+  top: 0;
+  z-index: 99;
+  background: #fff;
+  width 100%
   .header-container-inn
     background-color white
-    position fixed
     width 100%
-    z-index 99
-    top 0
     &.faded
       background-color rgba(255,255,255, 0.95)
+    .header-inn-wrap
+      height 60px
 
   .header-megamenu
     box-shadow 0 3px 4px 0 rgba(0, 0, 0, 0.09)
     position relative
-    margin-top 61px
+    // z-index 99
     .header-megamenu-inn
       box-shadow 0 1px 1px 0 rgba(0, 0, 0, 0.09)
-      position absolute
       left 0
       right 0
       top 0
@@ -30,7 +32,9 @@
       filter blur(3px)
     .header-meganenu-sub
       position relative
-      z-index 8
+      z-index 43
+      background-color tila-blk
+      color white
       .submenu-head-wrap
         background: #4a4a4a;
         .submenu-head
@@ -38,17 +42,32 @@
           overflow: hidden;
           margin-bottom: 0;
           color: #fff;
+          .level-sub-item:hover
+            color #fff
           li
             cursor pointer
             height 40px
             &:hover
               border-bottom 5px solid #fff
               box-sizing border-box
+              color #fff
 
 .profile-part
+
   .ple-icon
     padding: 10px 20px;
     border-bottom: 1px solid #efeff4
+    .profile-name
+      display flex
+      flex-direction column
+    .hello-text-clr
+      color label-light
+    .user-name
+      max-width 130px
+      text-overflow ellipsis
+      overflow hidden
+      white-space nowrap
+      float left
     .icon
       width 40px
       height 40px
@@ -63,7 +82,7 @@
       &:hover
         background-color white
         font-weight bold
-        border-left 2px solid thick-red-arrow
+        border-left 2px solid tila-blk
       a span
         color #000
     .profile-icon
@@ -101,6 +120,20 @@
       display:inline
       white-space:nowrap
 
+  .search-btn-img
+    position absolute
+    right 4px
+    width 30px
+    height: 30px;
+    top 7px
+    display flex
+    align-items center
+    justify-content center
+    .searching-icon
+      width 23px
+      height 23px
+      cursor pointer
+
   .search-btn
     position absolute
     right 4px
@@ -111,7 +144,6 @@
     display flex
     align-items center
     justify-content center
-    background suggest-label-gray
     border 0
     bottom 4px
     .searching-icon
@@ -147,22 +179,22 @@
     .cart-count
       right -12px
       top -8px
-      background pink-color
-      padding 0 4px
-      border-radius 4px
-
+      background generic-green-color 
+      border-radius 50%
+      width 18px
+      height 18px
+      border 1px solid white
+    
   .cart-inn
-    border-right: 1px solid #e5e5e5;
-    border-radius: 0;
-    margin: 0px 0 0 22px;
+    // border-right: 1px solid #e5e5e5;
     .cart-item
       padding: 0;
       box-shadow: 0 0 7px 1px rgba(0,0,0,0.07);
-      right: -5%;
+      right: -65px;
       border: 0;
       width: 340px;
       left: auto;
-      top: 27px;
+      top: 38px;
       margin: 0;
       &:before
         content ''
@@ -170,8 +202,8 @@
         height: 15px;
         width: 15px;
         position: absolute;
-        right: 7%;
-        top: -8px;
+        right: 21%;
+        top: -7px;
         transform: rotate(45deg);
         border: 1px solid border-gray;
         border-bottom: 0;
@@ -182,24 +214,23 @@
     &:hover .cart-item
       display block
 
-  .profile-login
-    .item
+  .account-inn
+    .account-item
       padding: 0;
-      box-shadow: 0 0 7px 1px rgba(0, 0, 0, 0.07);
-      min-width auto
-      right -5%
-      border 0
-      width 230px
-      left auto
-      top 32px
-      // border: 1px solid border-gray;
+      box-shadow: 0 0 7px 1px rgba(0,0,0,0.07);
+      right: -7px;
+      border: 0;
+      width: 230px;
+      left: auto;
+      top: 39px;
+      margin: 0;
       &:before
         content ''
         background-color: white;
         height: 15px;
         width: 15px;
         position: absolute;
-        right: 7%;
+        right: 6%;
         top: -8px;
         transform: rotate(45deg);
         border: 1px solid border-gray;
@@ -208,13 +239,39 @@
         border-left: 1px solid border-gray;
         border-top: 1px solid border-gray;
 
-      // .login-details-inn
-      //   border: 1px solid border-gray;
-      //   padding: 7px 15px;
+    &:hover .account-item
+      display block
 
-      .logout-icon, .login-icon
-        width 16px
-        height 34px
+    .logout-icon, .login-icon
+      width 16px
+      height 34px
+  .wishlist-inn
+    .wishlist-item
+      padding: 0;
+      box-shadow: 0 0 7px 1px rgba(0,0,0,0.07);
+      right: -65px;
+      border: 0;
+      width: 340px;
+      left: auto;
+      top: 38px;
+      margin: 0;     
+      &:before
+        content ''
+        background-color: white;
+        height: 15px;
+        width: 15px;
+        position: absolute;
+        right: 21%;
+        top: -7px;
+        transform: rotate(45deg);
+        border: 1px solid border-gray;
+        border-bottom: 0;
+        border-right: 0;
+        border-left: 1px solid border-gray;
+        border-top: 1px solid border-gray;
+
+    &:hover .wishlist-item
+      display block
 
     .profile-edit
       position absolute
@@ -232,7 +289,12 @@
         border-right 9px solid transparent
         border-bottom 12px solid white
         top -10px
-
+.round-shape
+    border-radius: 50%;
+    border: 1px solid #dddddd;
+    width: 30px;
+    height: 30px;
+  
   .profile-icon-main
     .profile-icon
       width 16px
@@ -255,6 +317,9 @@
   max-height 620px
   padding 10px
   background-color login-bg-gray
+
+.megamenu-wrapper ul li a:hover
+  color white
 
 .megamenu-wrapper
   overflow hidden
@@ -280,6 +345,8 @@
     border-bottom: 4px solid transparent
     margin 0 5px
     padding 10px
+    cursor pointer
+    border-top 4px solid transparent
     &:hover
       div a
         font-weight 600
@@ -287,7 +354,6 @@
     &:active, &:focus
       text-decoration: none;
       color inherit
-
   .electronics-item.active-menu-item
     border-bottom: 4px solid electronics-color
   .fashion-item.active-menu-item
@@ -307,7 +373,7 @@
   z-index 1
   display flex
   &.max-height
-    max-height 500px
+    max-height 410px
     overflow hidden
   &.electronics
     .megamenu-sub-drop-down
@@ -328,12 +394,12 @@
     display flex
     flex-wrap wrap
     align-content flex-start
-    width 80%
+    width 79%
     flex-direction column
     >.megamenu-sub-list
-      width 25%
+      width 26%
       float left
-      min-height 110px
+      height 185px
       >span a
         font-size 16px
       .megamenu-sub-child-list
@@ -344,7 +410,7 @@
   .top-brands-trending-wrap
     width 20%
     .top-brands-wrap
-      height 260px
+      // height 260px
       width 100%
       .megamenu-sub-list
         width 100%
@@ -381,6 +447,7 @@ nav
     width 16px
     height 20px
 
+
 .logos-part
   .default-logo
     width 74px
@@ -407,11 +474,26 @@ nav
 .mini-cart
   height: auto;
 
-.search-suggestions
-  position absolute
-  width 100%
-  background #fff
+.search-suggestion
+  display flex
+  a
+    line-height 2
+    width 100%
+    display flex
+    &:hover
+      color black
+    &:focus
+      outline none
 
+.overlap {
+    position: absolute;
+    padding: 9px 21px;
+    font-size: 16px;
+    color: light-gray-clr;
+    opacity: 0.6;
+    z-index: 9999;
+    cursor: text;
+}
 @media screen and (min-device-width: 320px) and (max-device-width: 736px) and (orientation : portrait){
   .login-reg-modal {
     width 88%

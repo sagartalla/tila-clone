@@ -9,10 +9,12 @@ import { Router } from '../../../routes';
 
 import lang from '../../../utils/language';
 
+import main_en from '../../../layout/main/main_en.styl';
+import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from './compareWidget_en.styl';
 import styles_ar from './compareWidget_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const cookies = new Cookies();
 
@@ -45,21 +47,24 @@ class CompareWidget extends React.Component {
           </div>
           <div className={styles['compare-items']}>
             <div style={{ width: `${cmpData.products.length * 180}px` }} className={`${styles['flex-center']} ${styles['justify-around']} ${styles['ht-240']}`}>
-              {cmpData.products.map(data => (
-                <div className={styles.item}>
-                  <div className={styles['item-image']}>
-                    <img className={styles.image} src={data.src} alt="" />
-                    <div>
-                      <a href="javascript: void(0)" className={`${styles.ellips} ${styles.width100}`}>
-                        {data.displayName}
-                      </a>
+              {cmpData.products.map((data) => {
+                const { catalogObj = {} } = data;
+                return (
+                  <div className={styles.item} key={data.productId}>
+                    <div className={styles['item-image']}>
+                      <img className={styles.image} src={data.src} alt="" />
+                      <div>
+                        <a title={data.displayName} className={`${styles.ellips} ${styles.width100}`} href={`/${country}/${language}/product?productId=${catalogObj.product_id}${catalogObj.variant_id ? `&variantId=${catalogObj.variant_id}` : ''}&catalogId=${catalogObj.catalog_id}&itemType=${cmpData.itemtype}`}>
+                          {data.displayName}
+                        </a>
+                      </div>
+                    </div>
+                    <div data-id={data.productId} onClick={this.removeData} className={styles.close}>
+                      <span>x</span>
                     </div>
                   </div>
-                  <div data-id={data.productId} onClick={this.removeData} className={styles.close}>
-                    <span>x</span>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>

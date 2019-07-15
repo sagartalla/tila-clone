@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { mergeCss } from '../../../utils/cssUtil';
 
-const styles = mergeCss('components/common/commonInput/index');
-
+import styles from './index.styl'
 
 const Input = props => (
   <div

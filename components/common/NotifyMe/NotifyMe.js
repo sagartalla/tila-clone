@@ -5,9 +5,14 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { languageDefinations } from '../../../utils/lang/';
 import { actionCreators } from '../../../store/cam/wishlist';
-import { mergeCss } from '../../../utils/cssUtil';
 
-const styles = mergeCss('components/common/NotifyMe/notifyMe');
+import lang from '../../../utils/language';
+
+import main_en from '../../../layout/main/main_en.styl';
+import main_ar from '../../../layout/main/main_ar.styl';
+
+const styles = lang === 'en' ? main_en : main_ar;
+
 const { CONTACT_INFO_MODAL, PERSONAL_INFO_MODAL } = languageDefinations();
 class NotifyMe extends React.Component {
   constructor() {
@@ -28,7 +33,7 @@ class NotifyMe extends React.Component {
   }
 
   notify = () => {
-    const { pId, notifyMe, closeNotify } = this.props;
+    const { pId, notifyMe, closeNotify, variantId } = this.props;
     let {
       email, mobile, emailErr, mobileErr,
     } = this.state;
@@ -36,6 +41,7 @@ class NotifyMe extends React.Component {
     const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     let params = {
       product_id: pId,
+      variant_id: variantId,
     };
     if (email) {
       if (emailRegex.test(email)) {
@@ -86,7 +92,7 @@ class NotifyMe extends React.Component {
         </div>
         <div className={styles.flex}>
           <Button
-            className={`${styles['fp-btn']} ${styles['fp-btn-primary']}`}
+            className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-x-large']} ${styles['text-uppercase']} ${styles['right-radius']}`}
             onClick={this.notify}
           >
             {PERSONAL_INFO_MODAL.NOTIFY}

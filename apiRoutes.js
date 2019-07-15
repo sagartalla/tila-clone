@@ -4,7 +4,6 @@ const axios = require('axios');
 const Cookies = require('universal-cookie');
 const _ = require('lodash');
 const constants = require('./store/helper/constants/constants');
-console.log('constants', constants);
 //TODO SF-101 //remove constants from here
 // const constants.AUTH_API_URL = 'http://gateway-dev.fptechscience.com/auth-service';
 const GOOGLE_MAPS_URL = 'https://maps.googleapis.com/maps/api';
@@ -38,6 +37,7 @@ apiRoutes
       res.json({
         data: {
           isLoggedIn,
+          data,
         }
       });
     }).catch(({response}) => {
@@ -45,8 +45,8 @@ apiRoutes
       res.json({
         data: {
           isLoggedIn: false,
-          error: response.data
-        }
+        },
+        ...response.data
       })
 
     });
@@ -102,24 +102,28 @@ apiRoutes
     res.json({});
   })
   .get('/googleApi', (req, res) => {
-    const {api, latitude, longitude} = req.query;
+    const {
+      api, latitude, longitude,
+    } = req.query;
     return axios
       .get(`${GOOGLE_MAPS_URL}${api}?key=${GOOGLE_KEY}&latlng=${latitude},${longitude}&sensor=true`)
-      .then(({data}) => {
+      .then(({ data }) => {
         const { results } = data;
-        const city = results.length ? _.filter(results[0].address_components, (ac) => {
-          return ac.types.indexOf('administrative_area_level_2') !== -1 || ac.types.indexOf('locality') !== -1
-        })[0].long_name : null;
-        const country = results.length ? _.filter(results[0].address_components, (ac) => {
-          return ac.types.indexOf('country') !== -1;
-        })[0].long_name : null;
-        const returnData = {
-          country,
-          city,
-          displayCity: `${city}, ${country}`,
-        };
-        req.universalCookies.set('shippingInfo', returnData);
-        res.json(returnData);
+        // const city = results.length ? _.filter(results[0].address_components, (ac) => {
+        //   return ac.types.indexOf('administrative_area_level_2') !== -1 || ac.types.indexOf('locality') !== -1
+        // })[0].long_name : null;
+        // const country = results.length ? _.filter(results[0].address_components, (ac) => {
+        //   return ac.types.indexOf('country') !== -1;
+        // })[0].long_name : null;
+        // const returnData = {
+        //   country,
+        //   city,
+        //   displayCity: `${city}, ${country}`,
+        // };
+        // if (updateCookie) {
+        //   req.universalCookies.set('shippingInfo', returnData);
+        // }
+        res.json(results[0]);
       });
   })
   .get('/autoCompleteCity', (req, res) => {

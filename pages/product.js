@@ -53,11 +53,11 @@ class ProductPage extends Base {
         size: 'LARGE',
       };
 
-      if (variantId) {
-        options.variant_ids = [
-          variantId,
-        ];
-      }
+      // if (variantId) {
+      //   options.variant_ids = [
+      //     variantId,
+      //   ];
+      // }
 
       await Promise.all([
         store.dispatch(actionCreators.getProduct(options)),
@@ -75,10 +75,14 @@ class ProductPage extends Base {
 
   render() {
     const Product = this.product;
+    const { url } = this.props;
     return (
       <div>
         <Layout>
-          <Product />
+          <Product
+            variantId={url.query.variantId}
+            productId={url.query.productId}
+          />
         </Layout>
       </div>
     );

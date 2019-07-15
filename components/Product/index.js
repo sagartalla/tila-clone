@@ -15,21 +15,28 @@ import AddToCart from './includes/AddToCart';
 import RecentView from './includes/RecentView';
 import ElectronicsTab from './includes/ElectronicsTab';
 import ProductDetails from './includes/ProductDetails';
+import { actionCreators as userVaultActionCreators, selectors as userVaultSelectors } from '../../store/cam/userVault';
 import FooterBar from '../Footer/index';
 import Theme from '../helpers/context/theme';
 import CompareWidget from '../common/CompareWidget';
 import { actionCreators, selectors } from '../../store/product';
 import { actionCreators as wishlistActionCreators, selectors as wishListSelectors } from '../../store/cam/wishlist';
+import { actionCreators as addressActionCreators, selectors as addressSelectors } from '../../store/cam/address';
+import { actionCreators as paymentActionCreators } from '../../store/payments';
 import Button from '../common/CommonButton';
 
 import lang from '../../utils/language';
 
+import main_en from '../../layout/main/main_en.styl';
+import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './product_en.styl';
 import styles_ar from './product_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const { PDP_PAGE } = languageDefinations();
+let btnY = null;
+let skipScroll = false;
 
 const getProductComponent = (isPreview, taskCode) => {
   class Product extends Component {
@@ -43,6 +50,7 @@ const getProductComponent = (isPreview, taskCode) => {
         recentlyViewed: [],
         notifyEmail: null,
         emailErr: '',
+        // positionStyle: 'fixed-style'
       };
       this.detailsRef = React.createRef();
       this.bottomRef = React.createRef();
@@ -57,19 +65,19 @@ const getProductComponent = (isPreview, taskCode) => {
         const {
           offerInfo, titleInfo, imgUrls, shippingInfo,
         } = productData;
-        digitalData.page.pageInfo.pageName = titleInfo.title;
+        digitalData.page.pageInfo.pageName = titleInfo.title.attribute_values[0].value;
         digitalData.page.category = { primaryCategory: productData.categoryType };
-        digitalData.page.pageInfo.breadCrumbs = productData.breadcrums.map(item => item.display_name_en);
+        digitalData.page.pageInfo.breadCrumbs = productData.breadcrums ? productData.breadcrums.map(item => item.display_name_en) : [];
         this.props.track({
           eventName: 'Product Viewed',
           ProductData: productData,
         });
-        if (offerInfo.price) {
-          const pr = offerInfo.price.split(' ');
+        if (offerInfo.offerPricing) {
+          const pr = offerInfo && offerInfo.offerPricing && offerInfo.offerPricing.sellingPrice && offerInfo.offerPricing.sellingPrice.display_value;
+          const cd = offerInfo && offerInfo.offerPricing && offerInfo.offerPricing.sellingPrice && offerInfo.offerPricing.sellingPrice.currency_code;
           const recentData = localStorage.getItem('rv');
           const arr = recentData ? JSON.parse(recentData) : [];
-          const index = _.findIndex(arr, (o) => o.id == shippingInfo.listing_id);
-
+          const index = _.findIndex(arr, o => o.id == offerInfo.listingId);
 
           // if (index > -1 && arr.length <= 5) {
           //   arr = arr.slice(index, 1);
@@ -80,20 +88,29 @@ const getProductComponent = (isPreview, taskCode) => {
 
           if (index === -1) {
             arr.unshift({
-              nm: titleInfo.title,
-              im: imgUrls[0].url,
-              pr: pr[0],
-              cd: pr[1],
+              nm: titleInfo.title.attribute_values[0].value,
+              im: imgUrls && imgUrls[0].url,
+              pr,
+              cd,
               uri: location.href,
-              id: shippingInfo.listing_id,
+              id: offerInfo.listingId,
             });
             localStorage.setItem('rv', JSON.stringify(arr));
           }
           this.setState({ recentlyViewed: arr });
         }
       }
-
+      this.props.getCardResults();
       window.addEventListener('scroll', this.handleScroll);
+      setTimeout(() => {
+        const shippingContainer = document.getElementById('shipping-cont');
+        const buttonsCont = document.getElementById('cart-btn-cont');
+        const [{height: shippingHeight, top: shippingY}, {height: btnHeight}] = [shippingContainer.getBoundingClientRect(), buttonsCont.getBoundingClientRect()];
+        skipScroll = (shippingHeight + shippingY) < (window.innerHeight - btnHeight);
+        this.setState({
+          defaultPosition: skipScroll ? 'absolute-style' : 'fixed-style'
+        });
+      });
     }
 
     componentWillUnmount() {
@@ -106,11 +123,26 @@ const getProductComponent = (isPreview, taskCode) => {
       });
     }
 
+    handleScroll(e) {
+      if(skipScroll) {
+        return;
+      }
+      const shippingContainer = document.getElementById('shipping-cont');
+      const buttonsCont = document.getElementById('cart-btn-cont');
+      const [{height: shippingHeight, top: shippingY}] = [shippingContainer.getBoundingClientRect()];
+      btnY = btnY || document.getElementById('cart-btn-cont').getBoundingClientRect().top;
+      this.setState({
+        positionStyle: (shippingHeight + shippingY) < btnY ? 'absolute-style' : 'fixed-style',
+        positionTop: btnY
+      });
+    }
+
     notify() {
-      const { productData, userDetails, notifyMe } = this.props;
+      const { productData, userDetails, notifyMe, variantId } = this.props;
       let { emailErr, notifyEmail } = this.state;
       const params = {
         product_id: productData.product_id,
+        variant_id: variantId,
       };
       const emailReg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       if (!userDetails.isLoggedIn) {
@@ -135,7 +167,8 @@ const getProductComponent = (isPreview, taskCode) => {
       const scrollTop = event.currentTarget.pageYOffset;
       const detailsRect = this.detailsRef.current.getBoundingClientRect();
       const bottomRefRect = this.bottomRef.current.getBoundingClientRect();
-      if (bottomRefRect.top <= window.innerHeight && this.state.stickyElements.details !== 'stateBottom') {
+      const { isSearchPreview } = this.props;
+      if (!isSearchPreview && bottomRefRect.top <= window.innerHeight && this.state.stickyElements.details !== 'stateBottom') {
         this.setState({
           stickyElements: {
             ...this.state.stickyElements,
@@ -144,7 +177,7 @@ const getProductComponent = (isPreview, taskCode) => {
         });
         return;
       }
-      if (bottomRefRect.top > window.innerHeight && detailsRect.top <= 61 && this.state.stickyElements.details !== 'stateMiddle') {
+      if (!isSearchPreview && bottomRefRect.top > window.innerHeight && detailsRect.top <= 108 && this.state.stickyElements.details !== 'stateMiddle') {
         this.setState({
           stickyElements: {
             ...this.state.stickyElements,
@@ -153,7 +186,7 @@ const getProductComponent = (isPreview, taskCode) => {
         });
         return;
       }
-      if (detailsRect.top > 61) {
+      if (detailsRect.top > 108) {
         this.setState({
           stickyElements: {
             ...this.state.stickyElements,
@@ -164,35 +197,39 @@ const getProductComponent = (isPreview, taskCode) => {
     }
 /* eslint-disable */
     render() {
-      const { productData, userDetails, showLoading } = this.props;
+      const { productData, userDetails, showLoading, query,variantId,productId, isSearchPreview, savedCardsData } = this.props;
       const {
-        catalog, titleInfo, keyfeatures, extraOffers, imgUrls, offerInfo, shippingInfo, isWishlisted,
-        details, productDescription, catalogObj, categoryType = '', warranty, breadcrums, product_id,
+        catalog, titleInfo, keyfeatures, extraOffers, imgUrls, offerInfo, shippingInfo, isWishlisted, returnInfo,
+        details, productDescription, catalogObj, categoryType = '', warranty, breadcrums, product_id, wishlistId,
       } = productData;
       const { offerPricing } = offerInfo;
       const {
-        stickyElements, recentlyViewed, notifyEmail, emailErr,
+        stickyElements, recentlyViewed, notifyEmail, emailErr, positionStyle, positionTop, defaultPosition
       } = this.state;
-      console.log('guygbut', (offerInfo.stockError || offerInfo.availabilityError) || Object.keys(shippingInfo).length === 0 || !shippingInfo.shippable);
+
       return (
         <Theme.Provider value={categoryType.toLowerCase()}>
           <div className={`${styles['pdp-wrap']} ${categoryType.toLowerCase()} ${styles[categoryType.toLowerCase()]}`}>
             {
-              isPreview ? null : <HeaderBar />
+              isPreview || isSearchPreview ? null :
+                <HeaderBar
+                 hideThankyou
+                />
             }
             <div className={`${styles.relative}`}>
               <div className={`${styles['page-details-slider']}`}>
                 <Row className={`${styles['m-0']} ${styles['ht-100per']}`}>
-                  <Col xs={12} md={8} sm={12} className={`${styles['pl-0']} ${styles['ht-100per']} ${styles['pdp-img-prt']}`}>
+                  <Col xs={12} md={8} sm={12} className={`${styles['pl-0']} ${styles['pdp-img-prt']} ${styles['p-0']}`}>
                     <NoSSR>
                       <Display
                         product_id={product_id}
                         offerPricing={offerPricing}
-                        catalog_id={catalogObj.catalog_id}
+                        catalogObj={catalogObj}
                         imgs={imgUrls}
                         isWishlisted={isWishlisted}
                         extraOffers={extraOffers}
                         breadcrums={breadcrums}
+                        wishlistId={wishlistId}
                       />
                     </NoSSR>
                   </Col>
@@ -200,18 +237,42 @@ const getProductComponent = (isPreview, taskCode) => {
                   <Col sm={12} className={`${styles['details-right-part']} ${styles[stickyElements.details]}`}>
                     <div className={`${styles['details-right-part-inn']}`}>
                       <div className={`${styles['ipad-details']} ${styles['ipad-pr-15']}`}>
-                        <TitleInfo {...titleInfo} isPreview={isPreview} />
-                        <ProductDetails details={details} keyfeatures={keyfeatures} isPreview={isPreview} productInfo={productData}/>
+                        <TitleInfo {...titleInfo} isPreview={isPreview} offerInfo={offerInfo} shippingInfo={shippingInfo} savedCardsData={savedCardsData}/>
+                        <ProductDetails
+                          details={details}
+                          keyfeatures={keyfeatures}
+                          isPreview={isPreview}
+                          productInfo={productData}
+                          variantId={variantId}
+                          productId={productId}
+                          isSearchPreview={isSearchPreview}
+                        />
                       </div>
                       <div className={`${styles['ipad-details']} ${styles['bdr-lt']} ${styles['ipad-pl-15']}`}>
                         {
-                          isPreview ? null : <Shipping shippingInfo={shippingInfo} offerInfo={offerInfo} warranty={warranty} />
+                          isPreview ? null : <Shipping shippingInfo={shippingInfo} returnInfo={returnInfo} offerInfo={offerInfo} warranty={warranty} />
                         }
-                        {
-                          isPreview ? null : <AddToCart offerInfo={offerInfo} productData={productData.product_id}/>
+                        {isPreview ? null :
+                          (shippingInfo === null || shippingInfo.shippable)
+                            ?
+                            <AddToCart
+                              offerInfo={offerInfo}
+                              productData={productData.product_id}
+                              shippingInfo={shippingInfo}
+                              isPreview={isPreview}
+                              emailErr={emailErr}
+                              userDetails={userDetails}
+                              notifyEmail={notifyEmail}
+                              notify={this.notify}
+                              showLoading={showLoading}
+                              onChangeField={this.onChangeField}
+                            />
+                            :
+                            null
                         }
-                        {
-                          ((offerInfo.stockError || offerInfo.availabilityError) || Object.keys(shippingInfo).length === 0 || !shippingInfo.shippable) &&
+
+                        {/* {isPreview ? null :
+                          (offerInfo.stockError || offerInfo.availabilityError) && ((shippingInfo && Object.keys(shippingInfo).length === 0) || (shippingInfo === null || shippingInfo.shippable)) &&
                           <div className={`${styles['flx-space-bw']} ${styles['align-baseline']}`}>
                             {!userDetails.isLoggedIn &&
                             <div className={`${styles['mb-0']} ${styles['fp-input']} ${styles['pb-10']}`}>
@@ -229,37 +290,40 @@ const getProductComponent = (isPreview, taskCode) => {
                               btnLoading={showLoading}
                             />
                           </div>
-                        }
+                        } */}
                       </div>
                     </div>
 
                   </Col>
                 </Row>
               </div>
-              <div className={`${styles['bg-white']} ${styles['mt-30']}`}>
-                <Grid>
-                  <Row>
-                    <Col md={8}>
+              {
+                isSearchPreview ? null :
+                <div className={`${styles['bg-white']} ${styles['mt-30']}`}>
+                  <Grid>
+                    <Row>
+                      <Col md={8}>
+                        {
+                          isPreview ? null : <NoSSR> <RecentView recentlyViewed={recentlyViewed} shippingInfo={shippingInfo} /> </NoSSR>
+                        }
+                      </Col>
+                      {/* <Col md={8}>
                       {
-                        isPreview ? null : <NoSSR> <RecentView recentlyViewed={recentlyViewed} shippingInfo={shippingInfo} /> </NoSSR>
+                        isPreview ? null : <ReviewsTab />
                       }
-                    </Col>
-                    {/* <Col md={8}>
-                    {
-                      isPreview ? null : <ReviewsTab />
-                    }
                     </Col> */}
                     <Col md={8}>
-                      <ElectronicsTab catalog={catalog} catalogObj={catalogObj} productDescription={productDescription} />
+                      <ElectronicsTab titleInfo={titleInfo} isPreview={isPreview} catalog={catalog} catalogObj={catalogObj} productDescription={productDescription} />
                     </Col>
                   </Row>
                 </Grid>
               </div>
+            }
               <div className={styles['pdp-bottom-ref']} ref={this.bottomRef} />
             </div>
             <div className={`${styles['border-b']} ${styles['border-t']} ${styles['pb-30']} ${styles['pt-30']}`}>
               {
-                isPreview ? null : <FooterBar />
+                isPreview || isSearchPreview ? null : <FooterBar />
               }
             </div>
           </div>
@@ -272,7 +336,9 @@ const getProductComponent = (isPreview, taskCode) => {
   const mapStateToProps = store => ({
     productData: taskCode ? selectors.getPreview(store) : selectors.getProduct(store),
     userDetails: store.authReducer.data,
-    showLoading: wishListSelectors.getLoader(store),
+    showLoading: wishListSelectors.getNotifyLoading(store),
+    selectedAddress: addressSelectors.getSelectedAddress(store),
+    savedCardsData: userVaultSelectors.getCardResults(store),      
   });
 
   const mapDispatchToProps = dispatch =>
@@ -280,6 +346,9 @@ const getProductComponent = (isPreview, taskCode) => {
       {
         notifyMe: wishlistActionCreators.notifyMe,
         track: actionCreators.track,
+        getShippingAddressResults: addressActionCreators.getShippingAddressResults,
+        createOrder: paymentActionCreators.createOrder,
+        getCardResults: userVaultActionCreators.getCardResults,
 
       },
       dispatch,
@@ -287,7 +356,11 @@ const getProductComponent = (isPreview, taskCode) => {
 
   Product.propTypes = {
     productData: PropTypes.object.isRequired,
+    isSearchPreview: PropTypes.bool
   };
+  Product.defaultProps = {
+    isSearchPreview:false
+  }
 
   return connect(mapStateToProps, mapDispatchToProps)(Product);
 };

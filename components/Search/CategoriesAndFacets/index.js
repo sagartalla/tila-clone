@@ -3,19 +3,20 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import _ from 'lodash';
 import { decode, encode, addUrlProps, replaceInUrlQuery } from 'react-url-query';
-import { actionCreators, selectors } from '../../../store/search';
 import { PanelGroup, Panel } from 'react-bootstrap';
+import { actionCreators, selectors } from '../../../store/search';
 import CheckboxFacet from './CheckboxFacet';
 import ExcludeOOS from './ExcludeOOS';
 import LinkFacet from './LinkFacet';
-import RangeFitler from './RangeFacet';
 
 import lang from '../../../utils/language';
 
+import main_en from '../../../layout/main/main_en.styl';
+import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from '../search_en.styl';
 import styles_ar from '../search_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
 class CategoriesAndFacets extends Component {
   constructor(props) {
@@ -26,22 +27,22 @@ class CategoriesAndFacets extends Component {
 
   onChangeHandle(facetName, facetType) {
     const curryHandler = (value, e) => {
-      const params = JSON.parse(decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent('facets').replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1")) || '{}');
+      const params = JSON.parse(decodeURIComponent(window.location.search.replace(new RegExp('^(?:.*[&\\?]' + encodeURIComponent('facets').replace(/[\.\+\*]/g, '\\$&') + '(?:\\=([^&]*))?)?.*$', 'i'), '$1')) || '{}');
       params[facetName] = params[facetName] || [];
-      digitalData.filter['leftnavfilters'] = `${facetName}:${value.name}`
+      digitalData.filter.leftnavfilters = `${facetName}:${value.name}`;
       // if (facetType === 'PERCENTILE') {
       //   params[facetName] = [value];
       // } else {
       if (e.target.checked) {
         params[facetName].push(value);
       } else {
-        params[facetName].splice(params[facetName].indexOf(value), 1);
+        params[facetName] = params[facetName].filter((item) => item.name !== value.name)        
         if (!params[facetName].length) { delete params[facetName]; }
       }
       // }
       this.props.onChangeFacets(params);
       this.submitQuery(params);
-    }
+    };
     return curryHandler;
   }
 
@@ -52,30 +53,38 @@ class CategoriesAndFacets extends Component {
   render() {
     const { filters, facets } = this.props;
     return (
-      <PanelGroup accordion>
-      {
-        filters.category.map((filter, index) => {
-          return filter.children.length ? <Panel eventKey={`${index + 'l'}`} key={filter.id}><LinkFacet filter={filter} /></Panel> : null;
-        })
-      }
-      {
+      <PanelGroup accordion id="categories-panel">
+        {filters.category.map((filter, index) => (
+          filter.children.length ? <Panel eventKey={`${`${index}l`}`} key={filter.id}><LinkFacet filter={filter} /></Panel> : null
+        ))}
+        {
         filters.facets.map((filter, index) => {
           // if (filter.type === 'PERCENTILE') {
           //   let selectedFilters = facets[filter.attributeName];
           //   return filter.children.length ? <RangeFitler filter={filter} key={filter.id} onChangeHandle={this.onChangeHandle(filter.attributeName, filter.type)} selectedFilters={selectedFilters || []}/> : null;
           // }
           let selectedFilters = facets[filter.attributeName];
-          selectedFilters = selectedFilters ? selectedFilters.map((item) => item.name) : [];
-          return filter.children.length ? <CheckboxFacet attributeName={filter.attributeName} facets={facets} filter={filter} onChangeHandle={this.onChangeHandle(filter.attributeName, filter.type)} selectedFilters={selectedFilters} index={index}/> : null;
+          selectedFilters = selectedFilters ? selectedFilters.map(item => item.name) : [];
+          return filter.children.length ?
+            <CheckboxFacet
+              attributeName={filter.attributeName}
+              facets={facets}
+              filter={filter}
+              onChangeHandle={this.onChangeHandle(filter.attributeName, filter.type)}
+              selectedFilters={selectedFilters}
+              index={index}
+              key={filter.id}
+            />
+            : null;
         })
       }
-      <ExcludeOOS />
+        <ExcludeOOS />
       </PanelGroup>
     );
   }
 }
 
-const mapStateToProps = (store) => ({
+const mapStateToProps = store => ({
   filters: selectors.getSearchFilters(store),
   getFacetfilters: selectors.getFacetfilters(store),
 });
@@ -83,25 +92,21 @@ const mapStateToProps = (store) => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      getSearchResults: actionCreators.getSearchResults
+      getSearchResults: actionCreators.getSearchResults,
     },
     dispatch,
   );
 
-function mapUrlToProps(url, props) {
+function mapUrlToProps(url) {
   return {
-    facets: decode((d) => {
-      return JSON.parse(d || '{}')
-    }, url.facets),
+    facets: decode((d) => JSON.parse(d || '{}'), url.facets),
   };
 }
 
-const mapUrlChangeHandlersToProps = (props) => {
-  return {
+const mapUrlChangeHandlersToProps = () => ({
     onChangeFacets: (value) => replaceInUrlQuery('facets', encode((e) => {
       return JSON.stringify(e || {})
     }, value))
-  };
-}
+  });
 
 export default addUrlProps({ mapUrlToProps, mapUrlChangeHandlersToProps })(connect(mapStateToProps, mapDispatchToProps)(CategoriesAndFacets));

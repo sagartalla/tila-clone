@@ -1,7 +1,14 @@
 import { DragSource } from 'react-dnd';
-import { mergeCss } from '../../../utils/cssUtil';
 
-const styles = mergeCss('components/Payments/payment');
+import lang from '../../../utils/language';
+
+import main_en from '../../../layout/main/main_en.styl';
+import main_ar from '../../../layout/main/main_ar.styl';
+import styles_en from './captcha_en.styl';
+import styles_ar from './captcha_ar.styl';
+
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+
 const Types = {
     ITEM: 'type'
 }
@@ -12,7 +19,10 @@ const boxSource = {
         index: props.index
     }
   },
-  endDrag(props){
+  endDrag(props, monitor){
+    if(!monitor.didDrop()){
+      return;
+    }
     return props.handleDrop(props.index);
   }
 };
@@ -32,7 +42,7 @@ export class Box extends React.Component {
             fontSize: 25,
             fontWeight: 'bold',
             width: '47px', height: '43px',
-            cursor: 'move'}}><img id={this.props.index} src={this.props.image.url}/></span>
+            cursor: 'move'}}><img className={styles['captcha-icon']} id={this.props.index} src={this.props.image.url}/></span>
     );
   }
 }

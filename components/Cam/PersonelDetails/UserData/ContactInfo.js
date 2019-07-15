@@ -9,11 +9,12 @@ import UpdateContactInfoModal from './UpdateContactInfoModal';
 import SVGComponent from '../../../common/SVGComponet';
 import lang from '../../../../utils/language';
 
+import main_en from '../../../../layout/main/main_en.styl';
+import main_ar from '../../../../layout/main/main_ar.styl';
 import styles_en from '../profile_en.styl';
 import styles_ar from '../profile_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
-
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 class ContactInfo extends React.Component {
   state = {
@@ -31,6 +32,11 @@ class ContactInfo extends React.Component {
   }
 
   handleShow = (showVal, elem) => (e) => {
+    if (showVal === true) {
+      document.getElementsByTagName('BODY')[0].style.overflow = 'hidden';
+    } else {
+      document.getElementsByTagName('BODY')[0].style.overflow = 'auto';
+    }
     this.setState({
       show: showVal,
       element: elem
@@ -38,7 +44,7 @@ class ContactInfo extends React.Component {
   }
 
   render() {
-    const { mailId, email, mobile_no, lastUpdated, phoneNum, email_verified } = this.state.contactInfo ? this.state.contactInfo : { mailId: "", email: "", mobile_no: "", lastUpdated: "not available", phoneNum: "", email_verified: "" };
+    const { mailId, email, mobile_no, lastUpdated, phoneNum, email_verified, mobile_verified } = this.state.contactInfo ? this.state.contactInfo : { mailId: "", email: "", mobile_no: "", lastUpdated: "not available", phoneNum: "", email_verified: "" };
     const { element, show } = this.state;
     const { CONTACT_INFO_MODAL } = languageDefinations();
     return (
@@ -46,7 +52,7 @@ class ContactInfo extends React.Component {
         <h4 className={styles['fontW600']}>{CONTACT_INFO_MODAL.HEADING}</h4>
         <div className={`${styles['bb-dashed']} ${styles['flex-center']} ${styles['pt-10']} ${styles['pb-10']}`}>
           <Col xs={12} md={3} className={`${styles['pl-0']} ${styles['pr-0']}`}>
-            <span>{CONTACT_INFO_MODAL.EMAIL}</span>
+            <span className={`${styles['fs-14']} ${styles['thick-gry-clr']}`}>{CONTACT_INFO_MODAL.EMAIL}</span>
           </Col>
           <Col xs={6} md={8} className={`${styles['flex-center']} ${styles['tickmark-part']}`}>
             <span className={styles['pr-20']}>{email}</span>
@@ -62,7 +68,7 @@ class ContactInfo extends React.Component {
         </div>
         <div className={`${styles['flex-center']} ${styles['bb-dashed']} ${styles['pt-10']} ${styles['pb-10']}`}>
           <Col xs={12} md={3} className={`${styles['pl-0']} ${styles['pr-0']}`}>
-            <span>{CONTACT_INFO_MODAL.PASSWORD}</span>
+            <span className={`${styles['fs-14']} ${styles['thick-gry-clr']}`}>{CONTACT_INFO_MODAL.PASSWORD}</span>
           </Col>
           <Col xs={6} md={8}>
             <span> {lastUpdated}</span>
@@ -76,10 +82,13 @@ class ContactInfo extends React.Component {
         <div className={`${styles['flex-center']} ${styles['pt-10']} ${styles['pb-10']}`}>
 
           <Col xs={12} md={3} className={`${styles['pl-0']} ${styles['pr-0']}`}>
-            <span>{CONTACT_INFO_MODAL.PHONE_NUMBER}</span>
+            <span className={`${styles['fs-14']} ${styles['thick-gry-clr']}`}>{CONTACT_INFO_MODAL.PHONE_NUMBER}</span>
           </Col>
-          <Col xs={6} md={8}>
-            <span>{phoneNum}</span>
+          <Col xs={6} md={8} className={`${styles['flex-center']} ${styles['tickmark-part']}`}>
+            <span className={styles['pr-20']}>{phoneNum}</span>
+            <span className={mobile_verified !== 'NV' ? `${styles['showDiv']}` : `${styles['hideDiv']}`}>
+              <span className={styles['flex']}><SVGComponent clsName={`${styles['tickmark-icon']}`} src="icons/common-icon/bg-tick-mark" /></span>
+            </span>
           </Col>
           <Col xs={6} md={1} className={styles['pr-0']}>
             <span
@@ -94,7 +103,7 @@ class ContactInfo extends React.Component {
         </div>
         <div className={show ? `${styles['modalContainer']} ${styles['showDiv']}`
           : `${styles['modalContainer']} ${styles['hideDiv']}`}>
-          <div className={`${styles['disabled']}`}></div>
+          <div onClick={this.handleShow(false, '')} className={`${styles['disabled']}`} />
         </div>
         <div className={show ? `${styles['openModal']}` : `${styles['closeModal']}`}>
           <UpdateContactInfoModal

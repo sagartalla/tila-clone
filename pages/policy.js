@@ -6,17 +6,15 @@ import makeStore from '../store';
 import Layout from '../layout/main'
 import Policy from '../components/Policy';
 import Base, { baseActions } from './base';
-import { actionCreators, selectors } from '../store/landing';
 
 class PolicyPage extends Base {
   pageName = 'POLICY';
   static async getInitialProps({ store, query, isServer, req }) {
-    // await store.dispatch(actionCreators.getPages());
+    // await store.dispatch(actionCreators.getPage());
     return { isServer };
   }
 
   render() {
-    console.log('PolicyPage')
     const { url } = this.props;
     return (
       <div>
@@ -39,7 +37,6 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       ...baseActions,
-      getPages: actionCreators.getPages,
     },
     dispatch,
   )

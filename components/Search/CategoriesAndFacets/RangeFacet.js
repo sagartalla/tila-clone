@@ -6,10 +6,12 @@ import SVGCompoent from '../../common/SVGComponet';
 
 import lang from '../../../utils/language';
 
+import main_en from '../../../layout/main/main_en.styl';
+import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from '../search_en.styl';
 import styles_ar from '../search_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 class RangeFitler extends Component {
   static getClosest(values, goal) {
@@ -82,12 +84,12 @@ class RangeFitler extends Component {
     return (
       <Panel eventKey="6" key={filter.id}>
       <li className={`${styles['category-list']}`}>
-        <Panel.Heading>
+        <Panel.Heading className={styles['category-list-head']}>
         {/* <Panel.Title toggle className={`${styles['category-list-title']} ${styles['black-color']} ${styles['fontW600']} ${styles['p-10-20']} ${styles['flx-spacebw-alignc']}`}>
             {filter.name}
             <SVGCompoent clsName={`${styles['expand-icon']}`} src="icons/common-icon/down-arrow-circle" />
           </Panel.Title> */}
-        <Panel.Title toggle className={`${styles['category-list-title']} ${styles['black-color']} ${styles['fontW600']} ${styles['p-10-20']} ${styles['flx-spacebw-alignc']}`}>
+        <Panel.Title toggle className={`${styles['category-list-title']} ${styles['black-color']} ${styles['fontW600']} ${styles['flx-spacebw-alignc']}`}>
           {filter.name}
           <SVGCompoent clsName={`${styles['expand-icon']}`} src="icons/common-icon/down-arrow-circle" />
         </Panel.Title>

@@ -11,7 +11,7 @@ const getAddToCartDetails = (store, results) => {
   if (!items.length) {
     return results;
   }
-  const cartListingIds = items.map(i => i.listing_id) || [];  
+  const cartListingIds = items.map(i => i.listing_id) || [];
   return {
     ...results,
     products: results.products.map((product) => {
@@ -37,7 +37,15 @@ const getCompareInfo = (store) => {
 
   const b = _.uniq(compareInfo.reduce((acc, map) => {
       return [...acc, ...Object.keys((map.product_details.catalog_details.attribute_map))];
-    }, [])).map((attrName) => {
+    }, [])).filter((attrName) => {
+      let include = true;
+      let attValue;
+      for (const index in compareInfo) {
+        attValue = compareInfo[index].product_details.catalog_details.attribute_map[attrName];
+        include = include && (attValue ? attValue.visible : true);
+      }
+      return include;
+    }).map((attrName) => {
     let attributeCategoryName = '';
     let displayString = '';
     for (const index in compareInfo) {
@@ -50,7 +58,7 @@ const getCompareInfo = (store) => {
         displayString = display_string;
       }
     }
-      
+
     return {
       name: displayString,
       items: compareInfo.map((map) => {
@@ -67,8 +75,9 @@ const getCompareInfo = (store) => {
     compareCount: compareInfo.length,
     features: _.uniqBy(_.map(compareInfo[0].product_details.catalog_details.attribute_map, (attr, key) => ({
       key: attr.attribute_category_name.split(' ').join('_').toLowerCase(),
-      value: attr.attribute_category_name
-    })), 'value'),
+      value: attr.attribute_category_name,
+      visible: attr.visible,
+    })).filter((a) => a.visible), 'value'),
     products: _.map(compareInfo, (product) => {
       const variant = product.variant_preferred_listings ? Object.keys(product.variant_preferred_listings)[0] : [];
       const variant_info = product.variant_preferred_listings ? product.variant_preferred_listings[variant][0] : {};

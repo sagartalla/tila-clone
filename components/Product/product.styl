@@ -1,6 +1,3 @@
-
-@import '/static/vendor/css/slick.min.css';
-@import '/static/vendor/css/slick-theme.min.css';
 @import '../../layout/main/executables.styl';
 
 .ship-icon
@@ -22,9 +19,11 @@
     &:last-child
       color navy-blue
 
+.bottom-pos
+  bottom 5px
 .page-details-slider
   background-color #F1F2F4
-  height calc(100vh - 125px)
+  height calc(100vh - 106px)
 
   .size-part
       position absolute
@@ -34,13 +33,13 @@
       top 10%
 
   .varient-select-part
-    border: 1px solid rgba(0, 0, 0, 0.5)
+    border: 1px solid light-brdr;
     background-color: white
     border-radius: 4px
     -webkit-appearance: none
     -moz-appearance: none
     appearance: none
-    padding: 5px 14px 5px 8px
+    padding: 5px 20px 5px 8px
     position relative
     &:focus
       outline none
@@ -59,13 +58,13 @@
     right 0
     bottom 0
     top 0
-    height calc(100vh - 103px)
+    height calc(100vh - 105px)
     &.stateTop
       position absolute
       top 0
     &.stateMiddle
       position fixed
-      top 61px
+      top 108px
       z-index 1
     &.stateBottom
       position absolute
@@ -74,15 +73,17 @@
     .details-right-part-inn
       padding 10px 20px
 
+      .notifyme-input
+        width 50%
       .notify_me_btn
         // background-color navy-blue
         border-bottom-right-radius 16px
         color white
-        width: 40%;
-        height: 50px;
-      .product-price-bg
-        border-radius 5px
-        background-color rgba(144, 144, 144, 0.05)
+        width 40%
+        height 40px
+      // .product-price-bg
+      //   border-radius 5px
+      //   background-color rgba(144, 144, 144, 0.05)
 
       .ti-reviews-wrap
         span
@@ -92,23 +93,29 @@
 
       .checkout-instantly
         .checkout-instant-btn
-          padding 5px 25px
-        div
-          flex 1
+          padding 5px 17px
+        .disable-checkout-instant-btn
+            color white
+            background-color suggest-label-gray
+            border suggest-label-gray 
+            cursor not-allowed
+           
     .addto-cart
       background-color white
       padding 12px 35px
-      position absolute
-      bottom 0
-      left 0
-      right 0
+      box-shadow 0 0 13px 0 rgba(212, 212, 212, 0.5)
+      height auto
       .add-to-card-btn
         border-radius 0
         position relative
         background-color white
-        color: navy-blue
-        width: 45%;
-        padding: 10px;
+        color tila-blk
+        width 45%
+        padding 7px
+        border-bottom-left-radius 14px
+        i
+         width 18px
+         height 18px
         .loader-div
           width 30px
           height 30px
@@ -145,9 +152,9 @@
           margin 0 35px
       .buy-now-btn
         border-radius 0
-        border-bottom-right-radius 20px
+        border-bottom-left-radius 14px
         width: 45%;
-        padding: 10px;
+        padding: 7px;
     .buy-coupon
       width 16px
       height 16px
@@ -190,7 +197,7 @@
         input
           font-size 12px
   .display-item-wrap
-    height calc(100% - 85px)
+    height calc(100% - 38px)
     .wishlist-icon
       position absolute
       right 4%
@@ -199,11 +206,160 @@
       z-index 1
       cursor pointer
 
+
+
+
+.details-right-part
+  background-color rgba(255, 255, 255, 0.7)
+  box-shadow 0 0 7px 0 rgba(225,225,225,0.5)
+  // z-index 99
+  right 0
+  bottom 0
+  top 0
+  height calc(100vh - 105px)
+  &.stateTop
+    position sticky
+    top 108px
+    float right
+  &.stateMiddle
+    position fixed
+    top 61px
+    z-index 1
+  &.stateBottom
+    position absolute
+    bottom 0
+    top auto
+  .details-right-part-inn
+    padding 10px 20px
+    height: 100%;
+    overflow: auto;
+    .notifyme-input
+      width 50%
+    .notify_me_btn
+      // background-color navy-blue
+      border-bottom-right-radius 16px
+      color white
+      width 40%
+      height 40px
+    // .product-price-bg
+    //   border-radius 5px
+    //   background-color rgba(144, 144, 144, 0.05)
+
+    .ti-reviews-wrap
+      span
+        &:nth-child(2)
+          border-right 1px solid dottes-gry-clr
+          border-left 1px solid dottes-gry-clr
+
+    .checkout-instantly
+      .checkout-instant-btn
+        padding 5px 17px
+  .addto-cart
+    background-color white
+    padding 12px 35px
+    box-shadow 0 0 13px 0 rgba(212, 212, 212, 0.5)
+    height 105px
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    .add-to-card-btn
+      border-radius 0
+      position relative
+      background-color white
+      color tila-blk
+      width 45%
+      padding 7px
+      border-bottom-left-radius 14px
+      i
+       width 18px
+       height 18px
+      .loader-div
+        width 30px
+        height 30px
+        z-index 14
+        margin 0 35px
+        .loader-styl
+          width 40px
+          height 40px
+          svg
+            animation rotate 1.4s linear infinite;
+            -webkit-animation rotate 1.4s linear infinite;
+            -moz-animation rotate 1.4s linear infinite;
+            @keyframes rotate {
+              to {
+                transform rotate(360deg);
+              }
+            }
+
+            @-webkit-keyframes rotate {
+              to {
+                -webkit-transform rotate(360deg);
+              }
+            }
+
+            @-moz-keyframes rotate {
+              to {
+                transform rotate(360deg);
+              }
+            }
+      // border-top-left-radius 20px
+      .added-cart-icon
+        width 24px
+        height 24px
+        margin 0 35px
+    .buy-now-btn
+      border-radius 0
+      border-bottom-left-radius 14px
+      width: 45%;
+      padding: 7px;
+  .buy-coupon
+    width 16px
+    height 16px
+  .offers-applied
+    color #99cc33
+  .warrenty-part
+    .warenty-part-single
+      .warranty-part
+        display inline-block
+      .view-more-label
+        display none
+        padding 6px 15px
+        box-shadow 0 0 7px 1px rgba(0,0,0,0.07)
+        position absolute
+      &:hover .view-more-label
+        display block
+    // color rgba(0, 0, 0, 0.5)
+    // justify-content: space-around
+    // border: solid 0.5px rgba(151, 151, 151, 0.3)
+    // border-radius 4px
+    .trust-icon
+      width 20px
+      height 20px
+    .return-icon
+      width 20px
+      height 20px
+    .secure-icon
+      width 13px
+      height 15px
+    .radio-btn-group label
+      padding 5px 13px
+
+    // .warenty-part-inn span
+    //   color fashion-color
+
+  .pdp-deliver-list
+    // width 60%
+    .auto-suggestions-wrap
+      // width 60%
+      input
+        font-size 12px
+
+
+.pdp-deliver-list .auto-suggestions-wrap input
+  border-bottom 1px solid tila-clr
+
 .warranty-modal
-  width 65vh
-  height 85vh
-  margin-left 30px
-  margin-right 30px
+  margin 25px
   ul li {
     list-style-type: disc
     font-size: 14px
@@ -247,27 +403,60 @@
 .slick-slide
   width: 128px;
 
+.product-details-main a[aria-expanded=true] .expand-icon
+  transform rotate(-180deg)
+
+.addto-cart .tool-tip
+  bottom 30px
+  position absolute
+  background white
+  z-index 99
+  border-radius 4px
+  box-shadow 0 0 8px 0 rgba(0,0,0,0.1)
+  width 250px
+  padding 10px
+  &:before
+    content ''
+    background-color #fff
+    height 15px
+    width 15px
+    position absolute
+    left 47%
+    transform rotate(45deg)
+    box-shadow 0 -6px 10px -17px
+    bottom -7px
+    z-index -1
+
 .product-details-main
   // background-color white
   // box-shadow: 0 0 4px 0 rgba(212,212,212,0.5)
   padding 10px 15px
-  .kf-list li::before
-    content "•"
-    color thck-gry-clr
-    display inline-block
-    width 10px
-    font-weight 600
-    font-size 20px
-    height 0px
+  .kf-list
+    // overflow hidden
+    // text-overflow ellipsis
+    line-height 16px
+    // max-height 58px
+    color base-font
 
   .expand-icon
     width 10px
     height 10px
-  .sub-decryption
-    overflow hidden
-    line-height 1.5em
-    max-height 3em
-
+  // .sub-decryption
+  //   overflow hidden
+  //   line-height 1.5em
+  //   max-height 3em
+  //   position relative
+  //   &:after
+  //     content ""
+  //     position absolute
+  //     bottom 0
+  //     z-index 9
+  //     width 100%
+  //     height 20px
+  //     left 0
+  //     filter blur(5px)
+  //     background-size cover
+  //     background-image linear-gradient(to bottom, rgba(255, 255, 255, 0.78), white)
   .size-btn-main
     position relative
     &:after
@@ -276,7 +465,7 @@
       background url(/static/img/icons/down-arrow/down-arrow.svg) no-repeat
       height 7px
       width 10px
-      right 3px
+      right 5px
 
     .size-btn
       display none
@@ -312,7 +501,7 @@
 
 .bottom-slider
   background-color white
-  padding 8px 0
+  padding 16px 0
   align-items center
   margin 0 auto
   border-top-right-radius 4px
@@ -321,6 +510,13 @@
     border-left 5px solid  border-gry-color
 
 .review-main
+  .share-review-img
+    height 100px
+    justify-content center
+    img
+      max-height 100%
+      max-width 100%
+      object-fit scale-down
   .review-no
     font-size 90px
     background: url(/static/img/bg-img/groupstar.png) no-repeat;
@@ -366,7 +562,7 @@
   .recent-title
     background: rgba(216, 216, 216, 0.1)
     span
-      border-left 4px solid border-pink
+      border-left 4px solid tila-blk
 
 .elt-overview-main
   .overview-inn
@@ -392,9 +588,7 @@
   margin-bottom 30px;
 .elt-description-column
   display inline-block
-  width 32.33%;
   vertical-align top;
-  margin-right 8px;
   text-align left;
   margin-bottom 20px;
 .compare-main
@@ -447,7 +641,7 @@
 .free-delivery-part
   padding 10px 15px
   .free-delivery-list
-    align-items flex-end
+    align-items center
   .radio-btn-group
     border solid 0.5px dottes-gry-clr
     display inline-block
@@ -482,33 +676,38 @@
     justify-content space-between
 .review-block
   .review-textarea
+    width 100%
     resize none
-    border-radius  4px
-    border solid 1px #d1d1d1
-    background-color #ffffff
+    border-bottom-style solid
+    border-width 0 0 1px 0
+    border-color light-brdr
+    &:focus
+      outline none
+  .review-textarea::placeholder
+    font-size 12px
+
+.review-thak-you
+  .review-thankyou-icon
+    width 100px
 .review-rating-block
  border-bottom solid 1px #e4e4e4
  border-top solid 1px #e4e4e4
 .modal-headerStyl
   background-color #f0f7ff
   color #333333
-.btn-style
-  width 450px
-  background-color #45689a
-  border-color #45689a
-  height 50px
-  color #fff
+.btn-style.btn-style-override
+  width 100%
+  background-color transparent
+  border solid 1px lgt-black-clr
+  color lgt-black-clr
+  border-bottom-left-radius 14px
+  padding 12px
 .max-ht100
   max-height 100%
 .ht-40
   height 40px
 .ht-25
   height:25px
-
-.slick
-  left: 4%;
-  width: 93%;
-
 
 .showDiv
   display block
@@ -554,6 +753,59 @@
   width 100%
   overflow auto
 
+.openModal
+  height 100%
+  width 40%
+  position fixed
+  top 0
+  right -800px
+  z-index 2001
+  background-color white
+  animation-name slideOpen
+  animation-duration 0.5s
+  animation-fill-mode both
+
+.closeModal
+  height 100%
+  width 40%
+  position fixed
+  top 0
+  right 0px
+  z-index 2001
+  background-color white
+  animation-name slideClose
+  animation-duration 0.2s
+  animation-fill-mode both
+
+.showDiv
+  display block
+
+.hideDiv
+  display none
+
+
+@keyframes slideOpen {
+  from {right: -800px;}
+  to {right: 0;}
+}
+@keyframes slideClose {
+  from {right: 0px;}
+  to {right: -800px;}
+}
+
+.pdp-img-prt
+  height: calc(100% - 106px);
+
+.absolute-style
+  position absolute
+  width 100%
+  bottom 0
+
+.fixed-style
+  position fixed
+  bottom 0
+  width 34%
+
 @media screen and (min-device-width: 320px) and (max-device-width: 767px) and (orientation : portrait) {
   .details-right-part {
     float left
@@ -565,10 +817,6 @@
     height auto !important
     display flex
     background-color white !important
-  }
-
-  .pdp-img-prt {
-    height auto
   }
 
   .pdp-img-prt .bottom-slider, .add-to-compare {
@@ -624,7 +872,7 @@
 
   .pdp-img-prt {
     padding-right 0
-
+    height: calc(100% - 106px);
     .bottom-slider {
       background-color light-gray-color
 
@@ -647,10 +895,6 @@
     border solid 0.2px #979797
     box-shadow none
     padding-bottom 1px
-  }
-
-  .pdp-img-prt {
-    height auto
   }
 
   .page-details-slider .details-right-part .addto-cart {

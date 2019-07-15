@@ -1,34 +1,33 @@
 import { Grid, Row, Col } from 'react-bootstrap';
 import NoSSR from 'react-no-ssr';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
 import Logo from './Logo';
 import Search from './Search';
 import ActionBar from './ActionBar';
 import MegaMenu from './includes/MegaMenu';
-import SearchFilters from '../common/SearchFilters';
+// import SearchFilters from '../common/SearchFilters';
 // import Betalogo from '../../components/common/beta';
-
-import publicUrls from '../../constants';
-import { actionCreators, selectors } from '../../store/search';
+import { selectors } from '../../store/search';
 
 import lang from '../../utils/language';
 
+import main_en from '../../layout/main/main_en.styl';
+import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './header_en.styl';
 import styles_ar from './header_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const HeaderBar = props => (
   <div className={`${styles['header-container']}`}>
     <div className={`${styles['header-container-inn']} ${ props.showFitlers ? styles['faded'] : {} }`}>
       <Grid>
-        <Row className={`${styles['flex-center']} ${styles['pb-10']} ${styles['pt-10']} ${styles['border-b']}`}>
+        <Row className={`${styles['flex-center']} ${styles['pb-10']} ${styles['pt-10']} ${styles['border-b']} ${styles['header-inn-wrap']}`}>
           <Col md={1} sm={2}>
             <Logo />
           </Col>
-          <Col md={props.showFitlers ? 6 : 7} sm={5}>
+          <Col md={7} sm={5}>
             {
               props.hideSearch
                 ?
@@ -39,7 +38,7 @@ const HeaderBar = props => (
                 </NoSSR>
             }
           </Col>
-          {
+          {/* {
             props.showFitlers
             ?
             <Col md={4}>
@@ -49,9 +48,9 @@ const HeaderBar = props => (
             </Col>
             :
             null
-          }
-          <Col md={props.showFitlers ? 3 : 4 } sm={5}>
-            <ActionBar />
+          } */}
+          <Col md={4} sm={5}>
+            <ActionBar hideLogin={props.hideLogin} hideThankyou={props.hideThankyou}/>
           </Col>
         </Row>
       </Grid>

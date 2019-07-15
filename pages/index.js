@@ -1,14 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Router from 'next/router';
-import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import withRedux from 'next-redux-wrapper';
 import makeStore from '../store';
 import Layout from '../layout/main'
 import Landing from '../components/Landing';
 import Base, { baseActions } from './base';
-import { actionCreators, selectors } from '../store/landing';
-
+import { actionCreators } from '../store/landing';
+import { actionCreators as PersonalActionCreator } from '../store/cam/personalDetails'
 class LandingPage extends Base {
   pageName = 'HOME';
   static async getInitialProps({ store, query, isServer, req, res }) {
@@ -25,9 +24,12 @@ class LandingPage extends Base {
         Router.push(`/${setCountry}/${setLanguage}`)
       }
     }
+
     return { isServer };
   }
-
+  componentDidMount() {
+    this.props.getUserProfileInfo()
+  }
   render() {
     const { url } = this.props;
     return (
@@ -39,21 +41,8 @@ class LandingPage extends Base {
     )
   }
 };
-
-
-const mapStatetoProps = (state) => {
-  return {
-    allState: state,
-  }
-}
-
 const mapDispatchToProps = dispatch =>
-  bindActionCreators(
-    {
-      ...baseActions,
-      getPages: actionCreators.getPages,
-    },
-    dispatch,
-  )
-
-export default withRedux(makeStore, mapStatetoProps, mapDispatchToProps)(LandingPage);
+  bindActionCreators({
+    getUserProfileInfo: PersonalActionCreator.getUserProfileInfo
+  },dispatch)
+export default withRedux(makeStore, null, mapDispatchToProps)(LandingPage);

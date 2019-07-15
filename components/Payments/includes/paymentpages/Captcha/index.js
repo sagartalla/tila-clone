@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import Bin from './Bin';
 import Box from './Box';
@@ -10,16 +9,20 @@ import {actionCreators, selectors} from '../../../../../store/captcha';
 import { bindActionCreators } from 'redux';
 import HTML5Backend from 'react-dnd-html5-backend';
 import { DragDropContext } from 'react-dnd';
-import { Router } from '../../../../../routes';
 
 const { PAYMENT_PAGE, ORDER_PAGE } = languageDefinations();
 
 import lang from '../../../../../utils/language';
 
+// import styles_en from '../../../payment_en.styl';
+// import styles_ar from '../../../payment_ar.styl';
+
+import main_en from '../../../../../layout/main/main_en.styl';
+import main_ar from '../../../../../layout/main/main_ar.styl';
 import styles_en from '../../../payment_en.styl';
 import styles_ar from '../../../payment_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const initialState = {
   openBox: <SVGComponent clsName={`${styles['drop-box-icon']}`} src="icons/captcha-icons-list/box-icon" />,
@@ -86,13 +89,13 @@ class Captcha extends React.Component {
       items
         ?
           <div className={`${styles['flx-spacebw-alignc']} ${styles['pt-30']} ${styles['pb-30']}`}>
-              <div>
+              <div className={styles['pr-10']}>
                 <ul className={`${styles['pl-0']} ${styles['m-0']} ${styles['cash-tab']}`}>
                   <li>Visual</li>
                 </ul>
                 <div className={`${styles['captch-inn']} ${styles['p-20']}`}>
                   <span className={`${styles['flx-spacebw-alignc']} ${styles['refresh-part']} ${styles['pb-20']}`}>
-                    <span className={styles['fs-12']}>{items.question}</span>
+                    <span className={styles['fs-14']}>{items.question}</span>
                       <span onClick={this.handleClick} className={`${styles['flex']} ${styles['refresh-part-inn']} ${styles['p-5']}`}>
                         <SVGComponent clsName={`${styles['refresh-icon']}`} src="icons/captcha-icons-list/refresh-icon" />
                       </span>

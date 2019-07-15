@@ -25,7 +25,7 @@ const filterVariants = (cartListingId,variants) => {
 }
 const addCartAndWishlistDetails = (store, results) => {
   const { items = [] } = store.cartReducer.data;
-  const { data = [] } = store.wishlistReducer;
+  const { products = [] } = store.wishlistReducer;
 
   if (items === null) {
     return results;
@@ -37,13 +37,20 @@ const addCartAndWishlistDetails = (store, results) => {
   //   return resutls;
   // }
   const cartListingIds = items.map(i => i.listing_id) || [];
-  const wishListProductIds = data && data.length > 0 && (data.map(w => w.product_id) || []);
+  const wishListProductIds = products && products.length > 0 && (products.map(w => w.product_id) || []);
+
+  const wishlistItems = {};
+  products.forEach((p) => {
+    wishlistItems[p.product_id] = p.wishlist_id;
+  });
+
   return {
     ...results,
     items: results.items.map((i) => {
       return ({
         ...i,
-        variants:filterVariants(cartListingIds,i.variants),
+        wishlistId: wishlistItems[i.productId] || '',
+        variants: filterVariants(cartListingIds, i.variants),
         addedToWishlist: wishListProductIds && wishListProductIds.indexOf(i.productId) !== -1,
       });
     }),
@@ -70,13 +77,13 @@ const getSearchFilters = (store) => {
             {
               canonicalId: _.kebabCase(value.name),
               id: value.id,
-              name: key,
+              name: value.name,
               children: _.reduce(value.child, (acc, value, key) => [
                 ...acc,
                 {
                   canonicalId: _.kebabCase(value.name),
                   id: value.id,
-                  name: key,
+                  name: value.name,
                 },
               ], []),
             }], []),
@@ -121,7 +128,7 @@ const getSearchResutls = (store) => {
     resutls.totalCount = store.searchReducer.data.productResponse.noOfProducts;
     resutls.items = store.searchReducer.data.productResponse.products.map((product,prodIndex) => {
       isNotifyMe = true
-      let variantInfo = product.variantAdapters.reduce((modifiedVaraints, v) => {
+      let variantInfo = (product.variantAdapters || []).reduce((modifiedVaraints, v) => {
         let modifiedVaraintsCopy = {}
         let { listingAdapters } = v;
         if (listingAdapters.length > 0) {
@@ -133,6 +140,7 @@ const getSearchResutls = (store) => {
            // modifiedVaraintsCopy = Object.assign(modifiedVaraints);
           modifiedVaraintsCopy['productSize'] = Object.values(v.attributes)[0]
           modifiedVaraintsCopy['productAvailable'] = true
+          modifiedVaraintsCopy['variantId'] = v.id
           _.forEach(attributesData, (val, key) => {
             modifiedVaraintsCopy[key] = modifiedVaraintsCopy[key] || [];
             modifiedVaraintsCopy[key] = modifiedVaraintsCopy[key].concat(val);
@@ -140,6 +148,7 @@ const getSearchResutls = (store) => {
         } else {
           modifiedVaraintsCopy['productSize'] = Object.values(v.attributes)[0]
           modifiedVaraintsCopy['productAvailable'] = false
+          modifiedVaraintsCopy['variantId'] = v.id
         }
 
         modifiedVaraints.push(modifiedVaraintsCopy)
@@ -152,7 +161,7 @@ const getSearchResutls = (store) => {
       }
       // const priceInfo = product.variantAdapters[0].listingAdapters.map((vla) => vla.attributes.sellingPrice);
       // const offers = product.variantAdapters[0].listingAdapters.map((vla) => vla.attributes.discount);
-      let currency = product.variantAdapters[0].listingAdapters || '';
+      let currency = product.variantAdapters ? product.variantAdapters[0].listingAdapters || '' : '';
       currency = currency[0] || '';
       currency = currency.attributes || '';
       currency = currency.currency || '';
@@ -175,13 +184,13 @@ const getSearchResutls = (store) => {
         productId: product.attributes.productId,
         catalogId: product.attributes.catalogId,
         itemtype: product.attributes.itemType,
-        displayName: product.attributes.calculated_display_name.join(','),
+        displayName: (product.attributes.calculated_display_name || []).join(','),
         brand: brand ? brand[0] : '',
         variants: variantInfo,
         // priceRange,
         currency,
         categoryId,
-        flags: product.flags
+        flags: product.flags,
       };
     });
   }

@@ -1,14 +1,4 @@
-@import '../../layout/main/main_ar.styl'
-
 @import './search.styl'
-
-.filter-panel
-  margin-right 0
-  position sticky !important
-  margin 0 !important
-  // float right
-  // padding-left 0 !important
-  // padding-right 0 !important
 
 .category-sub-list
   .checkbox-material
@@ -24,4 +14,36 @@
 
 .search-results .hover-show-date .quick-view .buy-now-btn
   border-bottom-right-radius 0
-  border-bottom-left-radius 16px
+  border-bottom-left-radius 14px
+
+.search-results .items-list-show .deliver-to-main .sort-part-inn .select-mn .sort-drop-down
+  left 0
+  right auto
+  min-width 200px
+  &:before
+    left 15px
+    right auto
+
+.notify-me-part
+  position absolute
+  border-bottom-right-radius 14px
+  box-shadow 0 2px 6px 0 rgba(189, 189, 189, 0.5)
+  border solid 1px lgt-black-clr
+  background-color white
+  z-index 5
+  top 10px
+  right auto
+  left 0
+
+.items-list-show .search-val-part .sple-check-prt
+  border-right 1px solid lht-bdr
+
+.items-list-show
+  .search-val-part
+    width 40%
+  .deliver-to-main
+    width 60%
+    justify-content flex-end
+    align-items center
+    .sort-part-inn
+      border-right 1px solid light-brdr

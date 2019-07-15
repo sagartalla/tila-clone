@@ -11,11 +11,12 @@ import { selectors, actionCreators } from '../../../../store/order';
 
 import lang from '../../../../utils/language';
 
+import main_en from '../../../../layout/main/main_en.styl';
+import main_ar from '../../../../layout/main/main_ar.styl';
 import styles_en from './orderIssue_en.styl';
 import styles_ar from './orderIssue_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
-
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const OrderIssueWidget = ({orderIssue, resetOrderIssue}) => {
   const { step,issueType } = orderIssue;
@@ -24,20 +25,16 @@ const OrderIssueWidget = ({orderIssue, resetOrderIssue}) => {
       const { issueType } = orderIssue;
       switch(step) {
         case STEPS.LIST: {
-          return `Choose an order to ${issueType ? 'Cancel': 'Return/Exchange'}`;
-          break;
+          return `Choose an order to ${issueType ? 'cancel': 'Return/Exchange'}`;
         }
         case STEPS.REASONS: {
           return 'Choose a reason';
-          break;
         }
         case STEPS.CANCEL_COMPLETE: {
           return 'Cancellation Status';
-          break;
         }
         case STEPS.CHOOSE_RETURN_EXCHANGE: {
           return 'Chose Return or Exchange';
-          break;
         }
       }
     }

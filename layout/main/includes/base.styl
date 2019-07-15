@@ -7,7 +7,7 @@ html
   font-family ProximaNova
 
 body
-  font-size 1rem
+  font-size 14px
   font-family ProximaNova
   background light-gray-color
   color black
@@ -31,6 +31,7 @@ ul li
 a
   cursor pointer
   color navy-blue
+  text-decoration none
 
 a:hover
   text-decoration none
@@ -49,7 +50,7 @@ input[type=text],input[type=password], input[type=email]
   padding px-5 0
   outline none !important
   width 100%
-  border-bottom 1px solid light-border
+  border-bottom 1px solid light-brdr
   // box-shadow none !important
   border-radius 0 !important
 input[type=number]::-webkit-inner-spin-button,
@@ -58,54 +59,10 @@ input[type=number]::-webkit-outer-spin-button
     margin 0
 /* font sizes */
 // it will generate fonts from fs-10, fs-12, fs-14, ...., to fs-40.
-for i in range(10px, 46px, 2)
+for i in range(10px, 46px,  2)
   .fs-{i}
-    font-size (i/base-px)rem
+    font-size (i)
 
-/* Paddings and Margins*/
-// it will generate margin from m-5, m-10, m-15, ...., to m-40.
-mrgpad(types=margin padding margin-left margin-right margin-top margin-bottom  padding-left padding-right padding-top padding-bottom, n)
-  padding unit(n/base-px, rem) if padding in types
-  padding-left unit(n/base-px, rem) if padding-left in types
-  padding-right unit(n/base-px, rem) if padding-right in types
-  padding-top unit(n/base-px, rem) if padding-top in types
-  padding-bottom unit(n/base-px, rem) if padding-bottom in types
-  margin unit(n/base-px, rem) if margin in types
-  margin-left unit(n/base-px, rem) if margin-left in types
-  margin-right unit(n/base-px, rem) if margin-right in types
-  margin-top unit(n/base-px, rem) if margin-top in types
-  margin-bottom unit(n/base-px, rem) if margin-bottom in types
-
-for x in range(0px, 80px, 5)
-  .m-{x}
-    mrgpad(margin, x)
-
-  .ml-{x}
-    mrgpad(margin-left, x)
-
-  .mr-{x}
-    mrgpad(margin-right, x)
-
-  .mt-{x}
-    mrgpad(margin-top, x)
-
-  .mb-{x}
-    mrgpad(margin-bottom, x)
-
-  .p-{x}
-    mrgpad(padding, x)
-
-  .pl-{x}
-    mrgpad(padding-left, x)
-
-  .pr-{x}
-    mrgpad(padding-right, x)
-
-  .pt-{x}
-    mrgpad(padding-top, x)
-
-  .pb-{x}
-    mrgpad(padding-bottom, x)
 
 .p-10-20
   padding 10px 20px
@@ -163,19 +120,22 @@ for x in range(0px, 80px, 5)
 .main-layout
   min-height 100vh
   height 100px
+  padding-top 108px
 
 .ht-100vh
   height: 100vh
-.fl-rt
-  float right
+
 .cl-bth
   clear both
-.t-rt
-  text-align right
-.t-lt
-  text-align left
+
 .t-c
   text-align center
+
+.t-l
+  text-align left
+
+.align-start
+  align-items start
 
 .align-center
   align-items center
@@ -191,6 +151,13 @@ for x in range(0px, 80px, 5)
 .justify-end
    justify-content flex-end
 
+.justify-center
+  justify-content center
+
+
+.justify-evenly
+   justify-content space-evenly
+
 .flex-col
    flex-direction column
 
@@ -203,6 +170,9 @@ for x in range(0px, 80px, 5)
 
 .lne-ht1
   line-height 1
+
+.lne-ht1_2
+  line-height 1.2
 
 .lne-ht2
   line-height 2
@@ -226,6 +196,9 @@ for x in range(0px, 80px, 5)
 .lgt-blue
   color navy-blue
 
+.dottes-gry-clr
+  color dottes-gry-clr
+
 .lgt-black
   color light-black
 
@@ -241,6 +214,9 @@ for x in range(0px, 80px, 5)
 .label-light-grey
   color label-light-grey
 
+.register-policy-gray
+  color register-policy-gray
+  
 .facebook-clr
   color facebook-color
 
@@ -253,11 +229,14 @@ for x in range(0px, 80px, 5)
 .google-clr
  color google-red
 
+.google-bg-clr
+  background google-red
+
 .success-green
   color generic-green-color
 
 .thck-gry-rt-border
-  border-right 1px solid dottes-gry-clr
+  border-right 1px solid light-brdr
 
 .lgt-gry-clr
   color lgt-gry
@@ -265,11 +244,14 @@ for x in range(0px, 80px, 5)
 .label-gry-clr
   color label-light
 
+.yellow-clr
+  color yellow-clr
+
 .twitter-clr
   color twitter-color
 
-.thck-gry-rt-border
-  border-right 1px solid thck-gry-clr
+.dark-gray
+  color dark-gray
 
 //font-weight
 .fontW300
@@ -296,9 +278,12 @@ for x in range(0px, 80px, 5)
 
 .width50
   width 50%
-  
+
 .width45
   width 45%
+
+.width42
+  width 42%
 
 .width33
   width 33%
@@ -309,58 +294,55 @@ for x in range(0px, 80px, 5)
 .width21
   width 21%
 
+.width18
+  width 18%
+
 .width70
   width 70%
 
+.border-none
+  border none
+
 //border
 .border
-  border 1px solid border-light-gray
+  border 1px solid light-brdr
 
 .border-t
-  border-top 1px solid border-light-gray
+  border-top 1px solid light-brdr
 
 .border-b
-  border-bottom 1px solid border-light-gray
+  border-bottom 1px solid light-brdr
 
 .border-lg
-  border 1px solid light-gray
+  border 1px solid light-brdr
 
-.border-rt
-  border-right 1px solid light-gray
 
-.border-lt
-  border-left 1px solid light-gray
+// .border-lt
+//   border-left 1px solid light-brdr
 
 .border-lt-green
   border-left 1px solid generic-green-color
 
+.border-green
+  border 1px solid generic-green-color
 
 .thick-border-btm
-  border-bottom 1px solid light-gray-color
+  border-bottom 1px solid light-brdr
 
 .thick-border-bottom
-  border-bottom 4px solid #fff;
+  border-bottom 4px solid white;
 
 .thick-border-left
-  border-left 1px solid thck-gry-clr
-
-.thick-border-top
-  border-top 1px solid thck-gry-clr
-
-.thick-border-right
-  border-right 1px solid thck-gry-clr
-
-.thick-bdr-rgt
-  border-left 4px solid border-pink
+  border-left 1px solid light-brdr
 
 .thin-border-right
-  border-right 1px solid generic-gray-color
+  border-right 1px solid light-brdr
 
 .border-btm-dottes
-  border-bottom 1px dotted generic-gray-color
+  border-bottom 1px dotted light-brdr
 
 .bb-dashed
-  border-bottom 1px dashed generic-gray-color
+  border-bottom 1px dashed light-brdr
 
 .bg-mauve
   background mauve-light
@@ -386,6 +368,9 @@ for x in range(0px, 80px, 5)
 .bdr-btm-green-color
   border-bottom 3px solid elct-green-color
 
+.text-lgt-gray
+  color label-light
+  
 //list style
 .no-lst
   list-style-type none
@@ -400,8 +385,14 @@ for x in range(0px, 80px, 5)
 .border-radius4
   border-radius 4px
 
+.border-bt-left-radius
+  border-bottom-left-radius: 12px;
+
 .border-radius12
   border-radius 12px
+
+.border-radius50P
+  border-radius 50%
 
 .border-rt-rb-0
   border-top-right-radius: 0 !important;
@@ -423,9 +414,14 @@ for x in range(0px, 80px, 5)
 .alrt-message-bg
   background-color thin-yellow
 
+.bg-tila-blk
+  background-color tila-blk
+
 .bg-white
   background-color white
 
+.fashion-color
+  color fashion-color
 //text-uppercase
 .text-uppercase
   text-transform uppercase
@@ -443,21 +439,10 @@ for x in range(0px, 80px, 5)
 .fixed
   position fixed
 
-.electronics
-  .thick-bdr-rgt, .thick-border-bottom
-    border-color electronics-color
-
-.fashion
-  .thick-bdr-rgt, .thick-border-bottom
-    border-color fashion-color
-
-.lifestyle
-  .thick-bdr-rgt, .thick-border-bottom
-    border-color lifestyle-color
-
 .textColor
     color: ash-color
-
+.black-color
+    color tila-blk
 .object-scale-down
   object-fit scale-down;
 
@@ -469,11 +454,13 @@ for x in range(0px, 80px, 5)
   border-top 1px solid thick-red-arrow
   width 100%
   position absolute
-  transform rotateZ(-15deg)
+  transform rotateZ(-20deg)
   transform-origin center center
-  top 16px
-  left -3px
-
+  top 15px
+  left -2px
+.flip-questionmark
+  transform scale(-1, 1)
+  z-index 1
 .table
   display table
 
@@ -482,12 +469,6 @@ for x in range(0px, 80px, 5)
 
 .t-cell
   display table-cell
-
-.total-amount
-  background light-gray-color
-  height 3em
-  div
-    vertical-align middle
 
 .overall-amount
   border-radius 3px
@@ -500,35 +481,30 @@ for x in range(0px, 80px, 5)
 .no-h1
   font-size: initial;
   display: inline-block;
-  font-family: ProximaNova-Bold;
+  font-family: ProximaNova-SBold;
 
 
 .checkout-quat
   background white
-  box-shadow 0 0.5px 0.5px rgba(0,0,0,0.5)
+  box-shadow 0 1px 1px rgba(0,0,0,0.5)
   padding 5px
   border-radius 17px
   height 17px
   width 17px
   margin-left 5px
-  color thick-blue
+  color tila-blk
   cursor pointer
 
 .hoverBlueBackground
    background-color light-navy-blue
 
 .notifyBackground
-   background-color navy-blue
-
-.right0
-  right 0
+   background-color tila-blk
 
 .help-icon
   width: 15px;
   height: 15px;
 
-.right0
-  right 0
 
 .left0
   left 0
@@ -539,10 +515,26 @@ for x in range(0px, 80px, 5)
 .bottom0
   bottom 0
 
+.overflow-y-auto
+  overflow-y auto
+
 
 .ellipsis {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
   max-width: 500px;
+}
+
+.text-blue
+  color text-blue
+
+.background-transparant
+  background transparant
+
+@media screen and (min-device-width: 1900px) and (max-device-width: 1024px) and (orientation : landscape){
+  h1 {
+    font-size 22px
+  }
+
 }

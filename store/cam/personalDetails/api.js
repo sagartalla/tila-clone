@@ -1,5 +1,11 @@
 import axios from 'axios';
+import { toast } from 'react-toastify';
+import ToastContent from '../../../components/common/ToastContent';
 import constants from '../../helper/constants';
+import { languageDefinations } from '../../../utils/lang/';
+import generateURL from '../../../utils/urlGenerator';
+
+const { PERSONAL_INFO_MODAL, API_TEXT } = languageDefinations();
 
 const getUserProfileInfo = () => {
   return Promise.all([
@@ -12,6 +18,34 @@ const getUserProfileInfo = () => {
     }
   })
 };
+
+const downloadPic = (imageId) => {
+  return
+  return generateURL(imageId).then((data)=>{
+    return data;
+  })
+}
+
+const uploadProfilePic = (body) => {
+  return axios.request({
+    method: 'POST',
+    url: `${constants.TRANSFORMER_API_URL}/fpts/document-service/upload`,
+    data: body,
+    headers: {
+      'tenant': 'profile-service',
+    },
+  }).then(({data}) => {
+    toast(
+      <ToastContent
+        msg={PERSONAL_INFO_MODAL.IMAGE_UPDATED_SUCCESS}
+        msgType='success'
+      />
+    )
+    return data;
+  }).catch((data) => {
+    console.log(data);
+  })
+}
 
 const changePassword = (body) => {
   return axios.put(`${constants.CMS_API_URL}/api/v1/user/password/set`, body).then(({ data }) => {
@@ -29,6 +63,7 @@ const resetPassword = (body) => {
 
 const forgotPassword = (body) => {
   return axios.post(`${constants.CMS_API_URL}/api/v1/user/password/forgot`, body).then(({data}) => {
+    toast.success(API_TEXT.OTP_SENT_TO_YOUR_MAIL_ID)
     return data;
   }).catch((error) => {
     return error.response.data;
@@ -58,7 +93,8 @@ const editPersonalInfo = (body) => {
   }).then(([personalInfoStatus, userInfoResult]) =>{
     return {
       personalInfo:userInfoResult.data,
-      personalInfoStatus}
+      personalInfoStatus
+    }
   });
 }
 
@@ -66,6 +102,6 @@ const deactivateUserProfile = () =>
   axios.put(`${constants.CMS_API_URL}/api/v1/user/deactivate/`);
 
 export default {
-  getUserProfileInfo, changePassword, forgotPassword, editPersonalInfo,
-  deactivateUserProfile, resetPassword, otpUserUpdate, verifyOtp,sendOtpToMobile
+  getUserProfileInfo, changePassword, uploadProfilePic, forgotPassword, editPersonalInfo,
+  deactivateUserProfile, resetPassword, otpUserUpdate, verifyOtp,sendOtpToMobile, downloadPic
 };

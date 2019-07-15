@@ -3,20 +3,20 @@ import constants from '../../../constants';
 const getWishListResults = (store) => {
   if (store.wishlistReducer.data) {
     const { data } = store.wishlistReducer;
+
     const img_url = constants.mediaDomain;
-    const showLoading = store.wishlistReducer.ui.loading;
 
     const newData = [];
 
     data && data.length > 0 && data.forEach((item) => {
+      //console.log('wishlistItem', item);
       // const variant = Object.keys(item.product_details.product_details_vo.cached_variant)[0];
       // const variant_info = item.variant_preferred_listings[variant][0];
 
       const variant = item.variant_preferred_listings ? Object.keys(item.variant_preferred_listings)[0] : '';
       const variant_info = item.variant_preferred_listings ? item.variant_preferred_listings[variant][0] : {};
 
-      const values = store.cartReducer.data.items.map(e => e.product_details.product_id).indexOf(item.product_id);
-
+      const values = store.cartReducer && store.cartReducer.data && store.cartReducer.data.items && store.cartReducer.data.items.length > 0 && store.cartReducer.data.items.map(e => e.product_details && e.product_details.product_id).indexOf(item.product_id);
       newData.push({
         wishlist_id: item.wishlist_id,
         listing_id: variant_info.listing_id,
@@ -26,13 +26,13 @@ const getWishListResults = (store) => {
         brand_name: item && item.product_details && item.product_details.catalog_details.attribute_map.brand.attribute_values[0].value,
         img: `${img_url}/${item}` && item.product_details && item.product_details.product_details_vo.cached_product_details.media.gallery_media[0].url,
         cur: variant_info.selling_price_currency,
-        price: variant_info.selling_price,
-        mrp: variant_info.mrp,
+        price: variant_info.selling_price && variant_info.selling_price.display_value,
+        mrp: variant_info.mrp && variant_info.mrp.display_value,
         wishlisted_price: item.wishlisted_price,
         catalog_id: item && item.product_details && item.product_details.catalog_details.catalog_id,
         itemType: item && item.product_details && item.product_details.catalog_details.item_type_name,
         inventory_count: variant_info.total_inventory_count,
-        buttonValue: values === -1,
+        buttonValue: (values === -1) || store.cartReducer.data.items.length === 0,
       });
     });
 
@@ -60,4 +60,13 @@ const getLoader = (store) => {
     return store.wishlistReducer.ui.loading;
   }
 };
-export { getWishListResults, getPaginationDetails, getLoader };
+
+const getNotifyLoading = (store) => {
+  if(store.wishlistReducer.ui.notifyLoading){
+    return store.wishlistReducer.ui.notifyLoading;
+  }
+}
+
+const getProductsDetails = store => store.wishlistReducer.products;
+
+export { getWishListResults, getPaginationDetails, getLoader, getProductsDetails, getNotifyLoading };

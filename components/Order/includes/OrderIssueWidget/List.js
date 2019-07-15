@@ -10,10 +10,12 @@ import {languageDefinations} from '../../../../utils/lang'
 
 import lang from '../../../../utils/language';
 
+import main_en from '../../../../layout/main/main_en.styl';
+import main_ar from '../../../../layout/main/main_ar.styl';
 import styles_en from './orderIssue_en.styl';
 import styles_ar from './orderIssue_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 
 const {ORDER_PAGE} = languageDefinations()
@@ -25,7 +27,16 @@ const List = ({ orderIssue, goToNextStep, setSelectedItem }) => {
       selectedItem: _.find(orderIssue.items, { id: e.target.value })
     });
   }
-
+  // this condition is to take user directly to reason page if given item length
+  // equals to one
+  
+  if(items.length === 1) {
+    setSelectedItem({
+      selectedItem: items[0]
+    });
+    goToNextStep();
+    return null;
+  }
   return (
     <div className={`${styles['width100']}`}>
       <div className={styles['widget-body']}>

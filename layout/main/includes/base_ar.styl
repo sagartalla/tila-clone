@@ -1,4 +1,5 @@
 @import '../executables.styl';
+@import './base.styl';
 
 * { box-sizing:border-box; }
 
@@ -7,7 +8,7 @@ html
   font-family ProximaNova
 
 body
-  font-size 1rem
+  font-size 14px
   font-family ProximaNova
   background light-gray-color
   color black
@@ -64,7 +65,7 @@ for i in range(10px, 46px, 2)
 
 /* Paddings and Margins*/
 // it will generate margin from m-5, m-10, m-15, ...., to m-40.
-mrgpad(types=margin padding margin-left margin-right margin-top margin-bottom  padding-left padding-right padding-top padding-bottom, n)
+mrgpad(types=margin padding margin-left margin-right margin-top margin-bottom  padding-left padding-right padding-top padding-bottom padding-vertical padding-horizontal margin-vertical margin-horizontal, n)
   padding unit(n/base-px, rem) if padding in types
   padding-left unit(n/base-px, rem) if padding-left in types
   padding-right unit(n/base-px, rem) if padding-right in types
@@ -75,6 +76,14 @@ mrgpad(types=margin padding margin-left margin-right margin-top margin-bottom  p
   margin-right unit(n/base-px, rem) if margin-right in types
   margin-top unit(n/base-px, rem) if margin-top in types
   margin-bottom unit(n/base-px, rem) if margin-bottom in types
+  margin-top unit(n/base-px, rem) if margin-vertical in types
+  margin-bottom unit(n/base-px, rem) if margin-vertical in types
+  padding-top unit(n/base-px, rem) if padding-vertical in types
+  padding-bottom unit(n/base-px, rem) if padding-vertical in types
+  padding-left unit(n/base-px, rem) if padding-horizontal in types
+  padding-right unit(n/base-px, rem) if padding-horizontal in types
+  margin-left unit(n/base-px, rem) if margin-horizontal in types
+  margin-right unit(n/base-px, rem) if margin-horizontal in types
 
 for x in range(0px, 80px, 5)
   .m-{x}
@@ -91,6 +100,18 @@ for x in range(0px, 80px, 5)
 
   .mb-{x}
     mrgpad(margin-bottom, x)
+  
+  .mH-{x}
+    mrgpad(margin-horizontal, x)
+
+  .mV-{x}
+    mrgpad(margin-vertical, x)
+
+  .pH-{x}
+    mrgpad(padding-horizontal, x)
+
+  .pV-{x}
+    mrgpad(padding-vertical, x)
 
   .p-{x}
     mrgpad(padding, x)
@@ -157,10 +178,6 @@ for x in range(0px, 80px, 5)
 .ht-100per
   height 100%
 
-.main-layout
-  min-height 100vh
-  height 100px
-
 .t-rt
   text-align left
 .t-lt
@@ -215,7 +232,7 @@ for x in range(0px, 80px, 5)
   color pink-color
 
 .lgt-blue
-  color navy-blue
+  color tila-blk
 
 .lgt-black
   color light-black
@@ -270,7 +287,7 @@ for x in range(0px, 80px, 5)
   font-family ProximaNova
 
 .fontW600
-  font-family ProximaNova-Bold
+  font-family ProximaNova-SBold
 
 //width list
 .width100
@@ -314,7 +331,11 @@ for x in range(0px, 80px, 5)
   border 1px solid light-gray
 
 .border-rt
-  border-right 1px solid light-gray
+  border-left 1px solid light-gray
+
+.border-lt
+  border-right 1px solid light-brdr
+
 
 .thick-border-btm
   border-bottom 1px solid light-gray-color
@@ -323,10 +344,10 @@ for x in range(0px, 80px, 5)
   border-bottom 4px solid #fff;
 
 .thick-border-left
-  border-left 1px solid thck-gry-clr
+  border-right 1px solid thck-gry-clr
 
 .thick-bdr-rgt
-  border-left 4px solid border-pink
+  border-right 4px solid border-pink
 
 .thin-border-right
   border-right 1px solid generic-gray-color
@@ -435,10 +456,10 @@ for x in range(0px, 80px, 5)
   border-top 1px solid thick-red-arrow
   width 100%
   position absolute
-  transform rotateZ(-15deg)
+  transform rotateZ(-20deg)
   transform-origin center center
-  top 16px
-  left -3px
+  top 15px
+  left 3px
 
 .table
   display table
@@ -449,11 +470,6 @@ for x in range(0px, 80px, 5)
 .t-cell
   display table-cell
 
-.total-amount
-  background light-gray-color
-  height 3em
-  div
-    vertical-align middle
 
 .overall-amount
   border-radius 3px
@@ -466,25 +482,35 @@ for x in range(0px, 80px, 5)
 .no-h1
   font-size: initial;
   display: inline;
-  font-family: ProximaNova-Bold;
+  font-family: ProximaNova-SBold;
 
 
 .checkout-quat
   background white
-  box-shadow 0 0.5px 0.5px rgba(0,0,0,0.5)
+  box-shadow 0 1px 1px rgba(0,0,0,0.5)
   padding 5px
   border-radius 17px
   height 17px
   width 17px
-  margin-left 5px
-  color thick-blue
+  margin-right 5px
+  color tila-blk
   cursor pointer
 
 .hoverBlueBackground
    background-color light-navy-blue
 
 .notifyBackground
-   background-color navy-blue
+   background-color tila-blk
 
 .right0
   left 0
+
+.right30P
+  left 30px
+
+.direction-ir
+  direction initial
+  text-align right
+
+.border-bt-right-radius
+  border-bottom-left-radius: 12px;

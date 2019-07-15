@@ -11,6 +11,8 @@ import { actionCreators as authActionsCreators, selectors as authSelectors } fro
 import Layout from '../layout/main';
 import Search from '../components/Search';
 
+import SearchContext from '../components/helpers/context/search';
+
 const cookies = new Cookies();
 
 class SearchPage extends Base {
@@ -47,12 +49,15 @@ class SearchPage extends Base {
       disableSpellCheck,
       choosenCategoryName: category || subCategory,
     };
+
     if (shippingCity) {
       searchOptions.shippingDetails = {
         shippingCity: shippingCity.toUpperCase(),
         shippingCountry: (country || 'ARE').toUpperCase(),
       }
-    }
+    } else {
+      searchOptions.shippingDetails = undefined
+    }    
     await store.dispatch(actionCreators.getSearchResults(searchOptions))
     return { isServer };
   }
@@ -62,9 +67,11 @@ class SearchPage extends Base {
   render() {
     return (
       <div>
-        <Layout>
-          <Search query={this.props.url.query} />
-        </Layout>
+        <SearchContext.Provider value="search">
+          <Layout>
+            <Search query={this.props.url.query} />
+          </Layout>
+        </SearchContext.Provider>
       </div>
     );
   }
@@ -84,4 +91,4 @@ const mapDispatchToProps = dispatch =>
     dispatch,
   );
 
-export default withRedux(makeStore, mapStateToProps, mapDispatchToProps)(SearchPage);
+export default withRedux(makeStore, null, mapDispatchToProps)(SearchPage);

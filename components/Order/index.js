@@ -14,19 +14,21 @@ const { ORDER_PAGE } = languageDefinations();
 
 import lang from '../../utils/language';
 
+import main_en from '../../layout/main/main_en.styl';
+import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './order_en.styl';
 import styles_ar from './order_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 class Order extends Component {
   componentDidMount() {
     const { query, getOrderDetails } = this.props;
     getOrderDetails({ orderId: query.orderId });
   }
-
+  
   render() {
-    const { query, orderData } = this.props;
+    const { query, orderData, getInvoice } = this.props;
     return (
       <div className={styles['bg-color']}>
         <HeaderBar />
@@ -48,17 +50,15 @@ class Order extends Component {
   }
 }
 
-const mapStateToProps = (store) => {
-  return ({
-    orderData: selectors.getOrderDetails(store)
-  })
-};
+const mapStateToProps = store => ({
+  orderData: selectors.getOrderDetails(store),
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators(
-    { getOrderDetails: actionCreators.getOrderDetails },
-    dispatch,
-  );
-};
+const mapDispatchToProps = dispatch => bindActionCreators(
+  {
+    getOrderDetails: actionCreators.getOrderDetails,
+  },
+  dispatch,
+);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Order);

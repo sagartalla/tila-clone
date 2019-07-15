@@ -9,10 +9,12 @@ import { ORDER_ISSUE_TYPES } from '../../constants';
 
 import lang from '../../../../utils/language';
 
+import main_en from '../../../../layout/main/main_en.styl';
+import main_ar from '../../../../layout/main/main_ar.styl';
 import styles_en from './orderIssue_en.styl';
 import styles_ar from './orderIssue_ar.styl';
 
-const styles = lang === 'en' ? styles_en : styles_ar;
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 import {languageDefinations} from '../../../../utils/lang'
 const {ORDER_PAGE} = languageDefinations()
@@ -53,7 +55,7 @@ class ReturnExchange extends Component {
                </div>
                <div className={styles['ret-ex-radio']}>
                  <input onChange={this.setType} id="return-item" name="exch-retrn" type="radio" value={ORDER_ISSUE_TYPES.RETURN} />
-                 <label for="return-item">
+                 <label htmlFor="return-item">
                    {/* insert image here */}
                    <div>
                      <span>{ORDER_PAGE.RETURN}</span>
@@ -63,7 +65,7 @@ class ReturnExchange extends Component {
                </div>
                <div className={styles['ret-ex-radio']}>
                  <input onChange={this.setType} id="exch-item" name="exch-retrn" type="radio" value={ORDER_ISSUE_TYPES.EXCHANGE} />
-                 <label for="exch-item">
+                 <label htmlFor="exch-item">
                    {/* insert image here */}
                    <div>
                      <span>{ORDER_PAGE.EXCHANGE}</span>

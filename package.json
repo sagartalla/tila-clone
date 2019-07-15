@@ -2,7 +2,7 @@
   "name": "storefront",
   "scripts": {
     "dev": "LOCAL=true ENV=stage node --inspect server.js",
-    "build": "version=$version next build",
+    "build": "version=$version node ./node_modules/next/dist/bin/next build",
     "start": "NODE_ENV=production ENV=dev node server.js",
     "start:ecs": "NODE_ENV=production node server.js",
     "start:stage": "PORT=3000 NODE_ENV=production ENV=stage node --inspect server.js",
@@ -24,6 +24,7 @@
     "history": "^4.7.2",
     "lodash": "^4.17.10",
     "moment": "^2.22.2",
+    "net": "^1.0.2",
     "next": "^8.0.3",
     "next-redux-wrapper": "^1.3.5",
     "next-router-events": "^2.1.0",
@@ -55,6 +56,8 @@
     "sha.js": "^2.4.11",
     "shortid": "^2.2.12",
     "slick-carousel": "^1.8.1",
+    "socket.io": "^2.2.0",
+    "socket.io-client": "^2.2.0",
     "stylus": "^0.54.5",
     "type-to-reducer": "^1.1.0",
     "universal-cookie": "^3.1.0",
@@ -77,6 +80,7 @@
     "react-dev-utils": "^5.0.1",
     "svg-inline-loader": "^0.8.0",
     "svg-inline-react": "^3.1.0",
-    "webpack-bundle-analyzer": "^3.0.3"
+    "webpack-bundle-analyzer": "^3.0.3",
+    "webpack-filter-warnings-plugin": "^1.2.1"
   }
 }
