@@ -1,14 +1,22 @@
 import React from 'react';
+import Head from 'next/head';
 import Router from 'next/router';
 import { bindActionCreators } from 'redux';
 import withRedux from 'next-redux-wrapper';
 import makeStore from '../store';
+import lang from '../utils/language';
 import { languageDefinations } from '../utils/lang';
 import Layout from '../layout/main';
 import Landing from '../components/Landing';
 import Base, { baseActions } from './base';
 import { actionCreators } from '../store/landing';
 import { actionCreators as PersonalActionCreator } from '../store/cam/personalDetails';
+import main_en from '../layout/main/main_en.styl';
+import main_ar from '../layout/main/main_ar.styl';
+import styles_en from '../components/Product/product_en.styl';
+import styles_ar from '../components/Product/product_ar.styl';
+
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 
 const { SEO_CONTENT } = languageDefinations();
@@ -38,8 +46,12 @@ class LandingPage extends Base {
     const { url } = this.props;
     return (
       <div>
-        <h1>{SEO_CONTENT.HOME_H1_CONTENT}</h1>
-        <h2>{SEO_CONTENT.HOME_H2_CONTENT}</h2>
+        <Head>
+          <meta name="description" content={SEO_CONTENT.HOME_META_CONTENT} />
+          <title>{SEO_CONTENT.HOME_TITLE}</title>
+        </Head>
+        <h1 className={`${styles.display_none}`}>{SEO_CONTENT.HOME_H1_CONTENT}</h1>
+        <h2 className={`${styles.display_none}`}>{SEO_CONTENT.HOME_H2_CONTENT}</h2>
         <Layout>
           <Landing query={url.query} />
         </Layout>

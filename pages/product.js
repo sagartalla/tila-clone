@@ -1,8 +1,9 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import withRedux from 'next-redux-wrapper';
-import { Head } from 'next/document';
+import Head from 'next/head';
 import Cookies from 'universal-cookie';
+import lang from '../utils/language';
 import { languageDefinations } from '../utils/lang';
 import Base, { baseActions } from './base';
 import makeStore from '../store';
@@ -11,6 +12,13 @@ import { actionCreators } from '../store/product';
 
 import Layout from '../layout/main';
 import getProductComponent from '../components/Product';
+
+import main_en from '../layout/main/main_en.styl';
+import main_ar from '../layout/main/main_ar.styl';
+import styles_en from '../components/Product/product_en.styl';
+import styles_ar from '../components/Product/product_ar.styl';
+
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const { SEO_CONTENT } = languageDefinations();
 
@@ -78,16 +86,15 @@ class ProductPage extends Base {
 
   render() {
     const Product = this.product;
-    const { url } = this.props;
+    const { url, allState } = this.props;
+    
     return (
       <div>
         <Head>
-          <meta name="description" content={`${url.query.productId} ${SEO_CONTENT.LANDING_META_CONTENT1} ${url.query.productId} ${SEO_CONTENT.LANDING_META_CONTENT2} ${cookies.get('country')} ${SEO_CONTENT.LANDING_META_CONTENT3}`} />
-          <meta name="keywords" content={`${url.query.productId} ${SEO_CONTENT.LANDING_META_KEYWORD1} ${url.query.productId} ${url.query.category} ${SEO_CONTENT.LANDING_META_KEYWORD2}`} />
-          <title>{url.query.productId} {SEO_CONTENT.PDP_H2_TITLE} </title>
+          <meta name="description" content={`${allState.productReducer && allState.productReducer.data && allState.productReducer.data[0].product_details && allState.productReducer.data[0].product_details.product_details_vo && allState.productReducer.data[0].product_details.product_details_vo.cached_product_details.attribute_map.calculated_display_name.attribute_values[0].value} ${SEO_CONTENT.PDP_META_CONTENT} ${SEO_CONTENT.PDP_META_CONTENT2}`} />
+          <title>{SEO_CONTENT.PDP_H2} {allState.productReducer && allState.productReducer.data && allState.productReducer.data[0].product_details && allState.productReducer.data[0].product_details.product_details_vo && allState.productReducer.data[0].product_details.product_details_vo.cached_product_details.attribute_map.calculated_display_name.attribute_values[0].value} {SEO_CONTENT.PDP_H2_TITLE}</title>
         </Head>
-        <h1>{url.query.productId}</h1>
-        <h2>{SEO_CONTENT.PDP_H2} {url.query.productId} {SEO_CONTENT.PDP_H2_CONTENT}</h2>
+        <h1 className={`${styles.display_none}`}>{allState.productReducer && allState.productReducer.data && allState.productReducer.data[0].product_details && allState.productReducer.data[0].product_details.product_details_vo && allState.productReducer.data[0].product_details.product_details_vo.cached_product_details.attribute_map.calculated_display_name.attribute_values[0].value}</h1>
         <Layout>
           <Product
             variantId={url.query.variantId}

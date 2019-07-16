@@ -1,18 +1,27 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import withRedux from 'next-redux-wrapper';
-import { Head } from 'next/document';
+import Head from 'next/head';
 import makeStore from '../store';
+import lang from '../utils/language';
 import { languageDefinations } from '../utils/lang';
 import Layout from '../layout/main';
 import Landing from '../components/Landing';
+import main_en from '../layout/main/main_en.styl';
+import main_ar from '../layout/main/main_ar.styl';
+import styles_en from '../components/Product/product_en.styl';
+import styles_ar from '../components/Product/product_ar.styl';
+
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const { SEO_CONTENT } = languageDefinations();
 const cookies = new Cookie();
 
 class LandingPage extends Base {
   pageName = 'HOME';
-  static async getInitialProps({ store, query, isServer, req }) {
+  static async getInitialProps({
+    store, query, isServer, req,
+  }) {
     return { isServer };
   }
 
@@ -22,18 +31,19 @@ class LandingPage extends Base {
       <div>
         <Head>
           <meta
-            name="description" content={`${url.query.category} ${SEO_CONTENT.LANDING_META_CONTENT1} ${url.query.category} ${SEO_CONTENT.LANDING_META_CONTENT2} ${cookies.get('country')} ${SEO_CONTENT.LANDING_META_CONTENT3}`}
+            name="description"
+            content={`${SEO_CONTENT.LANDING_META_CONTENT1}`}
           />
           <title>{url.query.category} {SEO_CONTENT.LANDING_H2_CONTENT} {url.query.category} {SEO_CONTENT.LANDING_H2} {cookies.get('country')} {SEO_CONTENT.LANDING_TILA}</title>
         </Head>
-        <h1>{url.query.category}</h1>
-        <h2>{SEO_CONTENT.LANDING_H2_CONTENT} {url.query.category} {SEO_CONTENT.LANDING_H2}</h2>
+        <h1 className={`${styles.display_none}`}>{url.query.category}</h1>
+        <h2 className={`${styles.display_none}`}>{SEO_CONTENT.LANDING_H2_CONTENT} {url.query.category} {SEO_CONTENT.LANDING_H2}</h2>
         <Layout>
           <Landing query={url.query} />
         </Layout>
       </div>
-    )
+    );
   }
-};
+}
 
 export default React.memo(withRedux(makeStore, null, null)(LandingPage));

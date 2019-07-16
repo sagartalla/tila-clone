@@ -1,17 +1,24 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
-import { Head } from 'next/document';
+import Head from 'next/head';
 import withRedux from 'next-redux-wrapper';
 import Cookies from 'universal-cookie';
 import Base, { baseActions } from './base';
 import makeStore from '../store';
+import lang from '../utils/language';
 import { languageDefinations } from '../utils/lang';
 import { actionCreators } from '../store/search';
 import Layout from '../layout/main';
 import Search from '../components/Search';
-import { actionCreators as LandingactionCreators } from '../store/landing';
-
 import SearchContext from '../components/helpers/context/search';
+import { actionCreators as LandingactionCreators } from '../store/landing';
+import main_en from '../layout/main/main_en.styl';
+import main_ar from '../layout/main/main_ar.styl';
+import styles_en from '../components/Product/product_en.styl';
+import styles_ar from '../components/Product/product_ar.styl';
+
+const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
+
 
 const cookies = new Cookies();
 
@@ -57,12 +64,11 @@ class SearchPage extends Base {
       <div>
         <SearchContext.Provider value="search">
           <Head>
-            <meta name="description" content={`${this.props.url.query} ${SEO_CONTENT.LANDING_META_CONTENT1} ${this.props.url.query} ${SEO_CONTENT.LANDING_META_CONTENT2} ${cookies.get('country')} ${SEO_CONTENT.LANDING_META_CONTENT3}`} />
-            <meta name="keywords" content={`${this.props.url.query} ${SEO_CONTENT.LANDING_META_KEYWORD1} ${this.props.url.query} ${SEO_CONTENT.LANDING_META_KEYWORD2}`} />
-            <title>{this.props.url.query} {SEO_CONTENT.BRAND_H2_TITLE} </title>
+            <meta name="description" content={`${SEO_CONTENT.BRAND_META_CONTENT} ${this.props.url.query} ${SEO_CONTENT.BRAND_META_CONTENT2} `} />
+            <title>{this.props.url.query} {SEO_CONTENT.LANDING_H2_CONTENT} {this.props.url.query} {SEO_CONTENT.BRAND_H2_TITLE}</title>
           </Head>
-          <h1>{this.props.url.query}</h1>
-          <h2>{SEO_CONTENT.BRAND_H2} {this.props.url.query}</h2>
+          <h1 className={`${styles.display_none}`}>{this.props.url.query}</h1>
+          <h2 className={`${styles.display_none}`}>{SEO_CONTENT.BRAND_H2} {this.props.url.query}</h2>
           <Layout>
             <Search query={this.props.url.query} isBrandPage />
           </Layout>

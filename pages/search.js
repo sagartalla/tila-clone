@@ -4,7 +4,6 @@ import withRedux from 'next-redux-wrapper';
 import { configureUrlQuery } from 'react-url-query';
 import Cookies from 'universal-cookie';
 import createHistory from 'history/createBrowserHistory';
-import { Head } from 'next/document';
 import Base, { baseActions } from './base';
 import makeStore from '../store';
 import { languageDefinations } from '../utils/lang';
@@ -71,10 +70,6 @@ class SearchPage extends Base {
   render() {
     return (
       <div>
-        <Head>
-          <meta name="description" content={SEO_CONTENT.HOME_META_CONTENT} />
-          <title>{SEO_CONTENT.HOME_TITLE}</title>
-        </Head>
         <SearchContext.Provider value="search">
           <Layout>
             <Search query={this.props.url.query} />
