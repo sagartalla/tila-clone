@@ -222,6 +222,7 @@ export const AR_KEYWORDS = {
     REVIEW_TITLE_PLACE: 'مراجعة العنوان ستكون هنا ',
     EASY_RETURN: 'إرجاع بسهولة',
     NO_SHIPPING_CITY: 'لا يشحن لمدينتك',
+    SELECT_YOUR_CITY: 'Select Your City',    
     FREE_DELIVERY_BY: 'توصيل مجاني بواسطة',
     FREE_DELIVERY_IN: 'توصيل مجاني في',
     NON_RETURNABLE: 'غير قابل للأرجاع',
