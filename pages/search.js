@@ -72,8 +72,7 @@ class SearchPage extends Base {
     return (
       <div>
         <Head>
-          <meta name="description" content={SEO_CONTENT.META_CONTENT} />
-          <meta name="keywords" content={SEO_CONTENT.HOME_META_KEYWORD} />
+          <meta name="description" content={SEO_CONTENT.HOME_META_CONTENT} />
           <title>{SEO_CONTENT.HOME_TITLE}</title>
         </Head>
         <SearchContext.Provider value="search">

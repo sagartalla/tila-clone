@@ -24,13 +24,10 @@ class LandingPage extends Base {
           <meta
             name="description" content={`${url.query.category} ${SEO_CONTENT.LANDING_META_CONTENT1} ${url.query.category} ${SEO_CONTENT.LANDING_META_CONTENT2} ${cookies.get('country')} ${SEO_CONTENT.LANDING_META_CONTENT3}`}
           />
-          <meta
-            name="keywords" content={`${url.query.category} ${SEO_CONTENT.LANDING_META_KEYWORD1} ${url.query.category} ${url.query.category} ${SEO_CONTENT.LANDING_META_KEYWORD2}`}
-          />
           <title>{url.query.category} {SEO_CONTENT.LANDING_H2_CONTENT} {url.query.category} {SEO_CONTENT.LANDING_H2} {cookies.get('country')} {SEO_CONTENT.LANDING_TILA}</title>
         </Head>
         <h1>{url.query.category}</h1>
-        <h2>{SEO_CONTENT.LANDING_H2_CONTENT} {url.query.category} {SEO_CONTENT.LANDING_H2} {cookies.get('country')} {SEO_CONTENT.LANDING_TILA}</h2>
+        <h2>{SEO_CONTENT.LANDING_H2_CONTENT} {url.query.category} {SEO_CONTENT.LANDING_H2}</h2>
         <Layout>
           <Landing query={url.query} />
         </Layout>
