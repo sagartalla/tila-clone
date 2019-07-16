@@ -32,11 +32,9 @@ export default class MyDocument extends Document {
           <script src="/static/scripts/dataLayer.js"></script>
           <link rel="alternate" hreflang="ar-SA" href="https://www.tila.com/ar/" />
             <link rel="alternate" hreflang="en-SA" href="https://www.tila.com/en/" />
-            DEFAULT ON ALL PAGES:
               <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
               <meta name="robots" content="noodp" />
               <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-
         </Head>
         <body>
           {
