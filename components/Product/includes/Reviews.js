@@ -118,7 +118,7 @@ class Review extends Component {
             </div>
           </Col>
           <Col md={8} className={styles['p-0']}>
-            <p className={`${styles['fs-12']} ${styles['thick-gry-clr']}`}>
+            <p className={`${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['break-word']}`}>
               {data.comment}
             </p>
           </Col>
