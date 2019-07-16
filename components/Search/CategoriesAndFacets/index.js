@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Cookie from 'universal-cookie';
 import _ from 'lodash';
 import { decode, encode, addUrlProps, replaceInUrlQuery } from 'react-url-query';
 import { PanelGroup, Panel } from 'react-bootstrap';
@@ -16,6 +17,11 @@ import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from '../search_en.styl';
 import styles_ar from '../search_ar.styl';
 
+const cookies = new Cookie();
+
+const language = cookies.get('language') || 'en';
+const country = cookies.get('country') || 'SAU';
+
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
 class CategoriesAndFacets extends Component {
@@ -26,8 +32,10 @@ class CategoriesAndFacets extends Component {
   }
 
   onChangeHandle(facetName, facetType) {
+    debugger;
     const curryHandler = (value, e) => {
-      const params = JSON.parse(decodeURIComponent(window.location.search.replace(new RegExp('^(?:.*[&\\?]' + encodeURIComponent('facets').replace(/[\.\+\*]/g, '\\$&') + '(?:\\=([^&]*))?)?.*$', 'i'), '$1')) || '{}');
+      // const params = JSON.parse(decodeURIComponent(window.location.search.replace(new RegExp('^(?:.*[&\\?]' + encodeURIComponent('facets').replace(/[\.\+\*]/g, '\\$&') + '(?:\\=([^&]*))?)?.*$', 'i'), '$1')) || '{}');
+      const params = `/${country}/${language}/srp?facets${facetName}=${value.name}&${Object.entries(this.props.optionalParams).map(([key, val]) => `${key}=${val}`).join('&')}&search=mens`;
       params[facetName] = params[facetName] || [];
       digitalData.filter.leftnavfilters = `${facetName}:${value.name}`;
       // if (facetType === 'PERCENTILE') {
@@ -87,6 +95,7 @@ class CategoriesAndFacets extends Component {
 const mapStateToProps = store => ({
   filters: selectors.getSearchFilters(store),
   getFacetfilters: selectors.getFacetfilters(store),
+  optionalParams: selectors.optionParams(store),
 });
 
 const mapDispatchToProps = dispatch =>
