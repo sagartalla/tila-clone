@@ -106,7 +106,7 @@ class ContactInfo extends React.Component {
             {password_exists ? lastUpdated :
             <React.Fragment>
               <a onClick={this.handleShow(true, 'setPassword')} className={`${styles['p-0']} ${styles['text-blue']}`}>Set Password</a>
-              <div className={`${styles.relative} ${styles['cart-price-toltp']} ${styles['ml-10']}`}>
+              <div className={`${styles.relative} ${styles['set-password-toltp']} ${styles['ml-10']}`}>
                 <span
                   className={
                             `${styles.question}
@@ -120,7 +120,7 @@ class ContactInfo extends React.Component {
                           }
                 >  ?
                 </span>
-                <div className={`${styles['p-20']} ${styles['tool-tip']} ${styles['justify-between']} ${styles['flex-colum']} ${styles['cart-tool-tip']}`}>
+                <div className={`${styles['p-20']} ${styles['tool-tip']} ${styles['justify-between']} ${styles['flex-colum']} ${styles['setpassword-tool-tip']}`}>
                   <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles.fontW600}`}>{EDIT_PASSWORD_MODAL.ACCOUNT_CONNECTED_USING}</div>
                   <Col md={12} xs={12} sm={12}>
                     {social_accounts && social_accounts.length > 0 &&
