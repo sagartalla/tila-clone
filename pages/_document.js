@@ -4,7 +4,7 @@ import getConfig from 'next/config';
 import Meta from '../components/helpers/Meta';
 import Script from '../components/helpers/Script';
 import adobeTags from '../constants/adobeLinks';
-
+import newrelicTags from '../constants/newrelicLinks'
 
 const config = getConfig();
 const env = config.publicRuntimeConfig.env;
@@ -19,7 +19,15 @@ export default class MyDocument extends Document {
           <script src="/static/scripts/googleTagManager.js"></script>
           {/*<!-- End Google Tag Manager -->*/}
           {/*<!-- Adobe Launch Tags -->*/}
+          {
+            newrelicTags[env]
+              ?
+              <script src={newrelicTags[env]} ></script>
+              :
+              null
+          }
           <script src={adobeTags[env]} async></script>
+
           {
             props.__NEXT_DATA__.query.language === 'ar'
               ?
