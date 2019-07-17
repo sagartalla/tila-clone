@@ -26,7 +26,7 @@ class SkeletonLoader extends Component {
         return cartPlaceHolder
       case `/${country}/${language}/payment`:
         return cartPlaceHolder
-      case `/${country}/${language}/cam/profile`:
+      case `/${country}/${language}/customer/profile`:
         return camProfileHolder
       case `/profile`:
           return camProfileHolder
