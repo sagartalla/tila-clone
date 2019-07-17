@@ -66,7 +66,6 @@ const actionCreators = {
     });
   },
   track: params => (dispatch, getState) => {
-    console.log(params);
     const state = getState();
     params.postResult = state.cartReducer.data.items;
     return {

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import constants from '../helper/constants';
+import orderReducer from '../cam/orders/reducer';
 
 const getOrderDetails = ({ orderId }) => axios.get(`${constants.ORDERS_API_URL}/api/v1/customer/order/details/${orderId}?include_state_times=true&include_payments=true&grouped=true&include_item_history=true&include_refunds=true&include_return_exchange=true`);
 
@@ -29,38 +30,35 @@ const setExchangeOrder = params => axios.post(`${constants.ORDERS_API_URL}/api/v
 
 const track = ({ event, orderData }) => {
   switch (event) {
-    case 'purchase':
-    window.appEventData.push({
-      event,
-      transaction: {
-        transactionID: orderData.payment_id,
-        total: {
-          currency: orderData.currency_code,
-          salesTax: '',
-        },
-        profile: {
-          address: {
-            stateProvince: orderData.address.city,
-            postalCode: orderData.address.postal_code,
-          },
-        },
-        // Collection of Payment Objects
-        payment: {
-          paymentMethod: orderData.payments.map(payment => payment.payment_mode).join(','),
-          paymentAmount: orderData.payments.map(payment => payment.amount.display_value).join(','),
-        },
-        // Collection of Item Objects
-        productInfo:{
-          item: orderData.order_items.map(item => item.variant_info.product_id),
+    case 'Order Placed':
+orderData.payments[0].trasactionId = orderData.payment_id;
+  window.appEventData.push({
+    event: event,
+    transaction: {
+      transactionID: orderData.payment_id,
+      total: {
+        currency: orderData.currency_code,
+        salesTax: '',
+      },
+      profile: {
+        address: {
+          stateProvince: orderData.address.city,
+          postalCode: orderData.address.postal_code,
         },
       },
-    });
+      // Collection of Payment Objects
+      payment:orderData.payments,
+      // Collection of Item Objects
+      item: orderData.order_items,
+    },
+  });
+
+
       break;
     case 'CANCEL_ORDER' :
-    window.dataLayer.push({ event: 'purchase' });
-    console.log(orderData);
+
     window.appEventData.push({
-      event,
+      event: event,
       product: [
         {
           productInfo: {
@@ -70,6 +68,16 @@ const track = ({ event, orderData }) => {
       ],
     });
       break;
+
+      case 'CANCEL_REASON' :
+      window.appEventData.push({
+        event: event,
+        reason:
+          {
+              cancelReason: orderData,
+            },
+      });
+       break;
       default :
       break;
   }

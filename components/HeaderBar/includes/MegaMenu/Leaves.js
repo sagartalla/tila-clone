@@ -39,10 +39,6 @@ class Leaves extends Component {
       maxRows: maxRows === MaxItems ? items.length : MaxItems,
     });
   }
-  myFunction(name){
-    console.log("ashok")
-    console.log('fsfsfs', this.props);
-  }
 
   render() {
     const { maxRows, isMoreButtonRequired } = this.state;

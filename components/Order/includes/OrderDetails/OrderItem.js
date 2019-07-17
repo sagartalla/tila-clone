@@ -75,8 +75,8 @@ class OrderItem extends Component {
   cancelOrder = () => {
     const { raiseOrderIssue, orderItem, orderId } = this.props;
     this.props.track({
-      eventName: 'CANCEL_ORDER',
-      cancelData: this.props,
+      event: 'CANCEL_ORDER',
+      orderData: this.props,
     });
     const { products } = orderItem;
     raiseOrderIssue({
