@@ -83,8 +83,8 @@ class CheckboxFacet extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { filter, attributeName } = this.props;
-    const facets = JSON.parse(decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent('facets').replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1")) || '{}');
+    const { filter, attributeName, facets } = this.props;
+    // const facets = JSON.parse(decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent('facets').replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1")) || '{}');
     this.setState({
       isMoreButtonRequired: filter.children.length > MaxItems,
       selectedItems: (facets[attributeName] || []).map((f) => f.name),

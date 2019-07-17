@@ -27,11 +27,12 @@ class AppliedFilters extends Component {
   }
 
   removeFilter(e) {
+    const { facets } = this.props;
     const target = e.currentTarget;
     const facetName = target.getAttribute('data-parentKey');
     const name = target.getAttribute('data-name');
     const value = target.getAttribute('data-key');
-    const facets = JSON.parse(decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent('facets').replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1")) || '{}');
+    // const facets = JSON.parse(decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent('facets').replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1")) || '{}');
     const params = facets || {};
     params[facetName] = params[facetName] || [];
     params[facetName].splice(_.findIndex(params[facetName], { name: name }), 1);

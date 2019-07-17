@@ -226,12 +226,32 @@ const optionParams = (store) => {
     isListed,
   };
 };
-
-const getFacetfilters = () => (queryObject) => {
-  const facetFilters = _.reduce(queryObject, (facetFilters, fitlerTypeValues, fitlerTypeKey) => {
-    facetFilters[fitlerTypeKey] = fitlerTypeValues.map(fitlerTypeValue => fitlerTypeValue.param);
-    return facetFilters;
-  }, {});
+/* eslint-disable */
+const getFacetfilters = store => (queryObject) => {
+  const facetFilters = {};
+  const newData = [];
+  debugger;
+  store && store.searchReducer && store.searchReducer.data && store.searchReducer.data.facetResponse && store.searchReducer.data.facetResponse.facets.map(storeValue => {
+    Object.keys(queryObject).map((queryKey, index) => {
+      if (storeValue.attributeName === queryKey) {
+        storeValue.Values.map(val => {
+          Object.values(queryObject).map((item, index) => {
+          if (val.attributeValue === item[index]) {
+            debugger;
+            facetFilters[queryKey] = [val.Param];
+            console.log('true');
+          }
+          })
+        });
+        console.log('Object.values', Object.values(queryObject))
+      }
+    })
+  })
+  console.log('facetFilters', newData, facetFilters);
+  // const facetFilters = _.reduce(queryObject, (facetFilters, fitlerTypeValues, fitlerTypeKey) => {
+  //   facetFilters[fitlerTypeKey] = fitlerTypeValues.map(fitlerTypeValue => fitlerTypeValue);
+  //   return facetFilters;
+  // }, {});
   const facetFiltersCopyWithNames = _.reduce(queryObject, (facetFilters, fitlerTypeValues, fitlerTypeKey) => {
     facetFilters[fitlerTypeKey] = fitlerTypeValues;
     return facetFilters;

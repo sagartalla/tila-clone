@@ -17,7 +17,8 @@ const cookies = new Cookies();
 
 class SearchPage extends Base {
   static async getInitialProps({ store, isServer, query, req }) {
-    const { country, language, search, facets, category, subCategory, isListed, disableSpellCheck, sid } = query
+    debugger;
+    const { country, language, q, search, facets, category, subCategory, isListed, disableSpellCheck, sid } = query
     const categoryTree = query.categoryTree === 'true'; //TODO need better way to identify category tree
     const categoryFacet = query.categoryFacet === 'true';
     //TODO SF-37 better handling of country
@@ -32,14 +33,14 @@ class SearchPage extends Base {
       id: sid ? sid.split(',').pop() : null,
     };
     const { facetFilters, facetFiltersCopyWithNames } = selectors.getFacetfilters(store.getState())(JSON.parse(facets || '{}'));
-    const shippingData = req ? req.universalCookies.get('shippingInfo') : cookies.get('shippingInfo');;
+    const shippingData = req ? req.universalCookies.get('shippingInfo') : cookies.get('shippingInfo');
     const { city: shippingCity, country: shippingCountry } = shippingData || {};
     const searchOptions = {
       categoryFilter,
       categoryFacet,
       country: country || undefined,
       pageSize: 25,
-      query: search,
+      query: q || search,
       language: language || 'en',
       facetFilters,
       facetFiltersCopyWithNames,
