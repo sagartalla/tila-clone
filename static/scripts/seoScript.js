@@ -1,6 +1,6 @@
 
   {{
-    '@context': 'http://schema.org'
+    '@context': 'http://schema.org',
     '@type': 'WebSite',
     url: 'https://www.tila.com/en/',
     potentialAction: [{
