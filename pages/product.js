@@ -87,12 +87,21 @@ class ProductPage extends Base {
   render() {
     const Product = this.product;
     const { url, allState } = this.props;
-    
+    console.log('allstate', allState);
     return (
       <div>
         <Head>
-          <meta name="description" content={`${allState.productReducer && allState.productReducer.data && allState.productReducer.data[0].product_details && allState.productReducer.data[0].product_details.product_details_vo && allState.productReducer.data[0].product_details.product_details_vo.cached_product_details.attribute_map.calculated_display_name.attribute_values[0].value} ${SEO_CONTENT.PDP_META_CONTENT} ${SEO_CONTENT.PDP_META_CONTENT2}`} />
+          <meta property="og:title" content={`${SEO_CONTENT.PDP_H2} ${allState.productReducer && allState.productReducer.data && allState.productReducer.data[0].product_details && allState.productReducer.data[0].product_details.product_details_vo && allState.productReducer.data[0].product_details.product_details_vo.cached_product_details.attribute_map.calculated_display_name.attribute_values[0].value} ${SEO_CONTENT.PDP_H2_TITLE}`} />
+          <meta property="og:site_name" content="Tila" />
+          <meta property="fb:app_id" content=" " />
+          <meta property="og:url" content={window.location.toString()} />
+          <meta property="og:description" content={`${SEO_CONTENT.PDP_META_CONTENT} ${allState.productReducer && allState.productReducer.data && allState.productReducer.data[0].product_details && allState.productReducer.data[0].product_details.product_details_vo && allState.productReducer.data[0].product_details.product_details_vo.cached_product_details.attribute_map.calculated_display_name.attribute_values[0].value} ${SEO_CONTENT.PDP_META_CONTENT2}`} />
+          <meta property="og:locale:locale" content="en_SA" />
+          <meta property="og:locale:alternate" content="ar_SA" />
+          <meta property="og:type" content="website" />
+          <meta property="og:image" content=" logo image url" />
           <title>{SEO_CONTENT.PDP_H2} {allState.productReducer && allState.productReducer.data && allState.productReducer.data[0].product_details && allState.productReducer.data[0].product_details.product_details_vo && allState.productReducer.data[0].product_details.product_details_vo.cached_product_details.attribute_map.calculated_display_name.attribute_values[0].value} {SEO_CONTENT.PDP_H2_TITLE}</title>
+          <meta name="description" content={`${allState.productReducer && allState.productReducer.data && allState.productReducer.data[0].product_details && allState.productReducer.data[0].product_details.product_details_vo && allState.productReducer.data[0].product_details.product_details_vo.cached_product_details.attribute_map.calculated_display_name.attribute_values[0].value} ${SEO_CONTENT.PDP_META_CONTENT} ${SEO_CONTENT.PDP_META_CONTENT2}`} />
         </Head>
         <h1 className={`${styles.display_none}`}>{allState.productReducer && allState.productReducer.data && allState.productReducer.data[0].product_details && allState.productReducer.data[0].product_details.product_details_vo && allState.productReducer.data[0].product_details.product_details_vo.cached_product_details.attribute_map.calculated_display_name.attribute_values[0].value}</h1>
         <Layout>
