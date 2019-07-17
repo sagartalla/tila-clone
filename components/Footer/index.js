@@ -315,13 +315,13 @@ const FooterBar = props => (
             <div className={styles['ipad-pr-0']}>
               <h4 className={`${styles.fontW600} ${styles['fs-16']} ${styles['black-color']}`}>{FOOTER_PAGE.POLICY}</h4>
               <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
-                <li><a href="/SAU/en/policy/tc" target="_blank">{FOOTER_PAGE.TERMS_CONDITION}</a></li>
-                <li><a href="/SAU/en/policy/cp" target="_blank">{FOOTER_PAGE.CANCELLATION_POLICY}</a></li>
-                <li><a href="/SAU/en/policy/er" target="_blank">{FOOTER_PAGE.EXCHANGE_REPLACEMENT_POLICY}</a></li>
-                <li><a href="/SAU/en/policy/re" target="_blank">{FOOTER_PAGE.REFUND_POLICY}</a></li>
-                <li><a href="/SAU/en/policy/wp" target="_blank">{FOOTER_PAGE.WARRENTY_POLICY}</a></li>
+                <li><a href="/SAU/en/policy/user-terms-and-conditions" target="_blank">{FOOTER_PAGE.TERMS_CONDITION}</a></li>
+                <li><a href="/SAU/en/policy/cancellation-policy" target="_blank">{FOOTER_PAGE.CANCELLATION_POLICY}</a></li>
+                <li><a href="/SAU/en/policy/exchange-replacement-policy" target="_blank">{FOOTER_PAGE.EXCHANGE_REPLACEMENT_POLICY}</a></li>
+                <li><a href="/SAU/en/policy/return-refund-policy" target="_blank">{FOOTER_PAGE.REFUND_POLICY}</a></li>
+                <li><a href="/SAU/en/policy/warranty-policy" target="_blank">{FOOTER_PAGE.WARRENTY_POLICY}</a></li>
                 {/* <li><a href="/SAU/en/policy/sp" target="_blank">{FOOTER_PAGE.SHIPPING_POLICY}</a></li> */}
-                <li><a href="/SAU/en/policy/pp" target="_blank">{FOOTER_PAGE.PRIVACY_POLICY}</a></li>
+                <li><a href="/SAU/en/policy/privacy-policy" target="_blank">{FOOTER_PAGE.PRIVACY_POLICY}</a></li>
               </ul>
             </div>
             {/* <Col md={2} sm={2} className={styles['ipad-pr-0']}>
