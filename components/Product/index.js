@@ -62,8 +62,6 @@ const getProductComponent = (isPreview, taskCode) => {
     componentDidMount() {
       if (window.localStorage && !isPreview) {
         const { productData } = this.props;
-        console.log("productViewed");
-        console.log(productData);
         const {
           offerInfo, titleInfo, imgUrls, shippingInfo,
         } = productData;

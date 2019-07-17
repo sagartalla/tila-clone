@@ -73,15 +73,6 @@ const actionCreators = {
       payload: api.track(params),
     };
   },
-  // cancelOrderTrack: params => (dispatch, getState) => {
-  //   console.log(params);
-  //   const state = getState();
-  //   params.postResult = state.cartReducer.data.items;
-  //   return {
-  //     type: actions.CANCEL_ORDER_TRACK,
-  //     payload: api.cancelTrack(params),
-  //   };
-  // },
   setSelectedItem: params => ({
     type: actions.SET_SELECTED_ITEM,
     payload: {

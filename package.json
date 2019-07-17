@@ -6,7 +6,7 @@
     "start": "NODE_ENV=production ENV=dev node server.js",
     "start:ecs": "NODE_ENV=production node server.js",
     "start:stage": "PORT=3000 NODE_ENV=production ENV=stage node --inspect server.js",
-    "start:preprod": "PORT=3000 NODE_ENV=production ENV=stage node server.js",
+    "start:preprod": "PORT=3000 NODE_ENV=production ENV=preprod node server.js",
     "start:prod": "NODE_ENV=production ENV=production node server.js"
   },
   "dependencies": {
