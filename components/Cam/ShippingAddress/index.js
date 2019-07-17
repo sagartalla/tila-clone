@@ -99,9 +99,21 @@ class ShippingAddress extends Component {
       },
       {
         field: 'mobile_no',
-        method: this.mobileValidation,
-        message: 'Minimum 6 and maximum 12 digits',
+        method: this.validate,
         validWhen: false,
+        message: 'Phone Number cannot be empty',
+      },
+      {
+        field: 'mobile_no',
+        method: this.mobileValidation,
+        validWhen: false,
+        message: 'Enter valid mobile number',
+      },
+      {
+        field: 'mobile_no',
+        method: this.mobileWithZeroValidation,
+        validWhen: false,
+        message: 'Enter valid mobile number',
       },
       // {
       //   field: 'mobile_no',
@@ -228,8 +240,23 @@ class ShippingAddress extends Component {
     return fieldvalue === '';
   }
 
+  mobileWithZeroValidation = (fieldValue) => {
+    if (fieldValue === '' || fieldValue === undefined) {
+      return false;
+    } else if (Number(fieldValue[0]) === 0 && Number(fieldValue[1]) === 5 && fieldValue.length === 10) {
+      return false;
+    } else if (Number(fieldValue[0]) !== 0) {
+      return false;
+    } return true;
+  }
   mobileValidation = (fieldValue) => {
-    return !(/^([0-9]){6,12}$/.test(fieldValue));
+    if (fieldValue === '' || fieldValue === undefined) {
+      return false;
+    } else if (Number(fieldValue[0]) === 5 && fieldValue.length === 9) {
+      return false;
+    } else if (Number(fieldValue[0]) === 0) {
+      return false;
+    } return true;
   }
 
   validateNames = (fieldValue) => {

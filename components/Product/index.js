@@ -15,6 +15,7 @@ import AddToCart from './includes/AddToCart';
 import RecentView from './includes/RecentView';
 import ElectronicsTab from './includes/ElectronicsTab';
 import ProductDetails from './includes/ProductDetails';
+import { actionCreators as userVaultActionCreators, selectors as userVaultSelectors } from '../../store/cam/userVault';
 import FooterBar from '../Footer/index';
 import Theme from '../helpers/context/theme';
 import CompareWidget from '../common/CompareWidget';
@@ -99,12 +100,7 @@ const getProductComponent = (isPreview, taskCode) => {
           this.setState({ recentlyViewed: arr });
         }
       }
-      this.props.getShippingAddressResults().then(() => {
-        const selectedAddrId = this.props.selectedAddress.address_id;
-        if (selectedAddrId) {
-          this.props.createOrder(selectedAddrId);
-        }
-      });
+      this.props.getCardResults();
       window.addEventListener('scroll', this.handleScroll);
       setTimeout(() => {
         const shippingContainer = document.getElementById('shipping-cont');
@@ -201,7 +197,7 @@ const getProductComponent = (isPreview, taskCode) => {
     }
 /* eslint-disable */
     render() {
-      const { productData, userDetails, showLoading, query,variantId,productId, isSearchPreview } = this.props;
+      const { productData, userDetails, showLoading, query,variantId,productId, isSearchPreview, savedCardsData } = this.props;
       const {
         catalog, titleInfo, keyfeatures, extraOffers, imgUrls, offerInfo, shippingInfo, isWishlisted, returnInfo,
         details, productDescription, catalogObj, categoryType = '', warranty, breadcrums, product_id, wishlistId,
@@ -241,7 +237,7 @@ const getProductComponent = (isPreview, taskCode) => {
                   <Col sm={12} className={`${styles['details-right-part']} ${styles[stickyElements.details]}`}>
                     <div className={`${styles['details-right-part-inn']}`}>
                       <div className={`${styles['ipad-details']} ${styles['ipad-pr-15']}`}>
-                        <TitleInfo {...titleInfo} isPreview={isPreview} offerInfo={offerInfo} shippingInfo={shippingInfo} />
+                        <TitleInfo {...titleInfo} isPreview={isPreview} offerInfo={offerInfo} shippingInfo={shippingInfo} savedCardsData={savedCardsData}/>
                         <ProductDetails
                           details={details}
                           keyfeatures={keyfeatures}
@@ -341,7 +337,8 @@ const getProductComponent = (isPreview, taskCode) => {
     productData: taskCode ? selectors.getPreview(store) : selectors.getProduct(store),
     userDetails: store.authReducer.data,
     showLoading: wishListSelectors.getNotifyLoading(store),
-    selectedAddress: addressSelectors.getSelectedAddress(store),    
+    selectedAddress: addressSelectors.getSelectedAddress(store),
+    savedCardsData: userVaultSelectors.getCardResults(store),      
   });
 
   const mapDispatchToProps = dispatch =>
@@ -351,6 +348,7 @@ const getProductComponent = (isPreview, taskCode) => {
         track: actionCreators.track,
         getShippingAddressResults: addressActionCreators.getShippingAddressResults,
         createOrder: paymentActionCreators.createOrder,
+        getCardResults: userVaultActionCreators.getCardResults,
 
       },
       dispatch,

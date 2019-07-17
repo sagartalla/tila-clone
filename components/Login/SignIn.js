@@ -218,15 +218,17 @@ class SignIn extends Component {
     return (
       <div className={`${styles['main-signin']} ${styles.flex} ${styles['flex-colum']} ${styles['justify-evenly']}`}>
         <div className={`${styles['mb-10']}`}>
-        <div className={`${styles.flex}`}>
+        <div>
           <h3 className={`${styles['fs-18']} ${styles['mt-0']} ${styles['mb-0']} ${styles['ff-b']}`}>
             {mode === 'EXISTING_USER' ?
               LOGIN_PAGE.SOCIAL_LOGIN_WELCOME :
               mode === 'NEW_USER' ? LOGIN_PAGE.NEW_TO_TILA : LOGIN_PAGE.GLAD_TO_HAVE_YOU_HERE }
           </h3>
-          {mode !== 'SOCIAL_LOGIN' && <div className={`${styles['ml-20']} ${styles['fs-12']} ${styles['pl-10']} ${styles['pr-10']} ${styles.fontW600} ${styles['edit-button']} ${styles['border-radius2']} ${styles.pointer}`} onClick={this.goToPreviousPage}>{LOGIN_PAGE.EDIT}</div>}
-          </div>       
-          <div className={`${styles['light-gry-clr']} ${styles['fs-12']}`}>{mode === 'SOCIAL_LOGIN' ? LOGIN_PAGE.PLEASE_PROVIDE_EMAIL_ID_FOR_REGISTRATION : activeEmailId}</div>
+          </div>   
+          <div className={`${styles.flex} ${styles['mt-5']}`}>
+          <div className={mode === 'SOCIAL_LOGIN' ? `${styles['light-gry-clr']} ${styles['pr-10']} ${styles['fs-12']}` : `${styles['light-gry-clr']} ${styles['edit-button']}  ${styles['pr-10']} ${styles['fs-12']}`}>{mode === 'SOCIAL_LOGIN' ? LOGIN_PAGE.PLEASE_PROVIDE_EMAIL_ID_FOR_REGISTRATION : activeEmailId}</div>
+          {mode !== 'SOCIAL_LOGIN' && <div className={`${styles['fs-12']} ${styles['pl-10']} ${styles['border-radius2']} ${styles['text-blue']} ${styles.pointer}`} onClick={this.goToPreviousPage}>{LOGIN_PAGE.NOT_YOU}</div>}
+          </div>          
         </div>
         {mode !== 'SOCIAL_LOGIN' &&
         <div className={mode === 'EXISTING_USER' ? `${styles['login-show']}` : `${styles['signup-show']}`}>
@@ -346,7 +348,7 @@ class SignIn extends Component {
           btnLoading={loadingStatus}
           onClick={this.login}
         />
-        <span className={`${styles['m-20']} ${styles['t-c']} ${styles['fs-12']} ${styles['register-policy-gray']}`}>{mode === 'EXISTING_USER' ? LOGIN_PAGE.BY_LOGIN_I_AGREE_TO_TERMS : LOGIN_PAGE.BY_SIGNUP_I_AGREE_TO_TERMS } <span className={`${styles['text-blue']} ${styles.fontW600}`}><a href="/SAU/en/policy/tc" target="_blank">{LOGIN_PAGE.T_AND_C}</a>, <a href="/SAU/en/policy/pp" target="_blank">{LOGIN_PAGE.PRIVACY}</a> {LOGIN_PAGE.AND} <a href="/SAU/en/policy/pp" target="_blank">{LOGIN_PAGE.COOKIE_POLICY}</a></span></span>
+        <span className={`${styles['m-20']} ${styles['t-c']} ${styles['fs-12']} ${styles['register-policy-gray']}`}>{mode === 'EXISTING_USER' ? LOGIN_PAGE.BY_LOGIN_I_AGREE_TO_TERMS : LOGIN_PAGE.BY_SIGNUP_I_AGREE_TO_TERMS } <span className={`${styles['text-blue']} ${styles.fontW600}`}><a href="/SAU/en/policy/tc" target="_blank">{LOGIN_PAGE.T_AND_C}</a></span>, <span className={`${styles['text-blue']} ${styles.fontW600}`}><a href="/SAU/en/policy/pp" target="_blank">{LOGIN_PAGE.PRIVACY}</a></span> {LOGIN_PAGE.AND} <span className={`${styles['text-blue']} ${styles.fontW600}`}><a href="/SAU/en/policy/pp" target="_blank">{LOGIN_PAGE.COOKIE_POLICY}</a></span></span>
       </div>
     );
   }
