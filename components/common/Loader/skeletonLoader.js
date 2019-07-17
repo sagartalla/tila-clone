@@ -18,7 +18,7 @@ class SkeletonLoader extends Component {
         return searchPlaceHolder
       case `/${country}/${language}/srp`:
         return searchPlaceHolder
-      case `/${country}/${language}/cam/mycoupons`:
+      case `/${country}/${language}/customer/mycoupons`:
         return couponPlaceHolder
       case `/product`:
         return productPlaceHolder
@@ -30,7 +30,7 @@ class SkeletonLoader extends Component {
         return camProfileHolder
       case `/profile`:
           return camProfileHolder
-      case `/cam`:
+      case `/customer`:
           return camProfileHolder
       case `/cart`:
           return cartPlaceHolder
@@ -44,7 +44,7 @@ class SkeletonLoader extends Component {
         return homePageHolder
       case `/`:
         return homePageHolder
-      // case `/${country}/${language}/cam/orders`:
+      // case `/${country}/${language}/customer/orders`:
       //   return camOrdersHolder
       //   break;
     }

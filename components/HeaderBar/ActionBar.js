@@ -186,7 +186,7 @@ class ActionBar extends Component {
   moveToWishlist = () => {
     const { isLoggedIn } = this.props;
     if (isLoggedIn) {
-      Router.push(`/${country}/${language}/cam/wishlist`);
+      Router.push(`/${country}/${language}/customer/wishlist`);
     } else {
       this.loginClick();
     }
@@ -213,7 +213,7 @@ class ActionBar extends Component {
         <div className={`${styles['action-item']} ${styles['wishlist-inn']} ${styles['pt-10']} ${styles['pb-10']} ${styles['mr-15']} ${styles['ml-15']} ${styles['flex-center']} ${styles['justify-center']}`}>
           <Dropdown id="cart-toggle" className={`${styles['round-shape']} ${styles['flex-center']} ${styles['justify-center']}`}>
             <Dropdown.Toggle style={{ display: 'none' }} />
-            <Link route={`/${country}/${language}/cam/wishlist`}>
+            <Link route={`/${country}/${language}/customer/wishlist`}>
               <a style={{ dispaly: 'block' }} onClick={this.moveToWishlist}>
                 <span className={`${styles['flex-center']} ${styles['justify-center']} ${styles.relative}`} title={PDP_PAGE.GO_TO_WISHLIST}>
                 <SVGComponent clsName={`${styles['wish-list-icon']}`} src="icons/wish-list/wish-list-icon" />
@@ -281,13 +281,13 @@ class ActionBar extends Component {
                     </a>
                   </li>
                     <li className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']}`}>
-                    <a href={`/${country}/${language}/cam/orders`} className={styles['flex-center']}>
+                    <a href={`/${country}/${language}/customer/orders`} className={styles['flex-center']}>
                       <SVGComponent clsName={`${styles['profile-icon']}`} src="icons/my-orders" />
                       <span className={styles['pl-25']}>{HEADER_PAGE.MY_ORDERS}</span>
                     </a>
                   </li>
                     {/* <li className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']}`}>
-                  <a href={`/${country}/${language}/cam/notifications`} className={styles['flex-center']}>
+                  <a href={`/${country}/${language}/customer/notifications`} className={styles['flex-center']}>
                     <SVGComponent clsName={`${styles['profile-icon']}`} src="icons/notifications" />
                     <span className={styles['pl-20']}>{HEADER_PAGE.NOTIFICATIONS}</span>
                     </a>
