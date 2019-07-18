@@ -6,7 +6,7 @@ const getCartResults = (store) => {
     const data = store.cartReducer.data;
     const ui = store.cartReducer.ui
     const img_url = constants.mediaDomain;
-    const newData = { items: [], total_price: 0, ui };
+    const newData = { items:[], total_price: 0, ui };
 
     if (data.items !== null && data.items.length) {
       newData.total_price = data.total_price || {};
