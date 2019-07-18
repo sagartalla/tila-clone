@@ -36,24 +36,36 @@ const tie = [{
   title: `${lang === 'en' ? 'Laptops' : 'اللاب توبات'}`,
   key: 'Laptops'
 }, {
-  img: '/static/img/landing-home/storage-devices.png',
-  title: `${lang === 'en' ? 'Storage Devices' : 'أجهزة التخزين'}`,
-  key: 'Storage Devices'
+  img: '/static/img/landing-home/memory.png',
+  title: `${lang === 'en' ? 'Memory' : 'اللاب توبات'}`,
+  key: 'Laptops'
 }, {
   img: '/static/img/landing-home/cameras.png',
   title: `${lang === 'en' ? 'Cameras' : 'كاميرات'}`,
   key: 'Cameras'
 }, {
   img: '/static/img/landing-home/television.png',
-  title: `${lang === 'en' ? 'Televisions' : 'التلفزيونات'}`,
+  title: `${lang === 'en' ? 'TVs' : 'التلفزيونات'}`,
   key: 'Televisions'
 }, {
+  img: '/static/img/landing-home/mobileaccess.png',
+  title: `${lang === 'en' ? 'Mobile Accessories' : 'أجهزة التخزين'}`,
+  key: 'Storage Devices'
+}, {
+  img: '/static/img/landing-home/tablets.png',
+  title: `${lang === 'en' ? 'Tablets' : 'أجهزة التخزين'}`,
+  key: 'Storage Devices'
+}, {
   img: '/static/img/landing-home/home-appliances.png',
-  title: `${lang === 'en' ? 'Home Appliances' : 'أجهزة المنزل'}`,
+  title: `${lang === 'en' ? 'Home Appliances' : 'أجهزة التخزين'}`,
+  key: 'Storage Devices'
+}, {
+  img: '/static/img/landing-home/smartwatch.png',
+  title: `${lang === 'en' ? 'Smart Watch' : 'أجهزة المنزل'}`,
   key: 'Home Appliances'
 }, {
-  img: '/static/img/landing-home/storage-devices.png',
-  title: `${lang === 'en' ? 'Storage Devices' : 'أجهزة التخزين'}`,
+  img: '/static/img/landing-home/homeentertainment.png',
+  title: `${lang === 'en' ? 'Home Entertainment' : 'أجهزة التخزين'}`,
   key: 'Storage Devices'
 }];
 
@@ -70,20 +82,32 @@ const hal = [{
   title: `${lang === 'en' ? 'Jewellery' : 'مجوهرات'}`,
   key: 'Jewellery'
 }, {
-  img: '/static/img/landing-home/fashion-acessories.png',
-  title: `${lang === 'en' ? 'Fashion Acc..' : 'أزياءمستلزمات'}`,
-  key: 'Fashion Accessories'
-}, {
   img: '/static/img/landing-home/watches.png',
   title: `${lang === 'en' ? 'Watches' : 'ساعات اليد'}`,
   key: 'Watches'
 }, {
-  img: '/static/img/landing-home/perfumes.png',
-  title: `${lang === 'en' ? 'Perfumes' : 'عطور'}`,
+  img: '/static/img/landing-home/shoes_home.png',
+  title: `${lang === 'en' ? 'Footwear' : 'أزياءمستلزمات'}`,
+  key: 'Fashion Accessories'
+}, {
+  img: '/static/img/landing-home/sunglasse_home.png',
+  title: `${lang === 'en' ? 'Sunglasses' : 'أزياءمستلزمات'}`,
+  key: 'Fashion Accessories'
+}, {
+  img: '/static/img/landing-home/sports_home.png',
+  title: `${lang === 'en' ? 'Sports' : 'أزياءمستلزمات'}`,
+  key: 'Fashion Accessories'
+}, {
+  img: '/static/img/landing-home/fitness_home.png',
+  title: `${lang === 'en' ? 'Fitness' : 'عطور'}`,
   key: 'Perfumes'
 }, {
-  img: '/static/img/landing-home/jewellery.png',
-  title: `${lang === 'en' ? 'Jewellery' : 'مجوهرات'}`,
+  img: '/static/img/landing-home/toys_home.png',
+  title: `${lang === 'en' ? 'Toys' : 'عطور'}`,
+  key: 'Perfumes'
+}, {
+  img: '/static/img/landing-home/beauty_and_health.png',
+  title: `${lang === 'en' ? 'Beauty & Health' : 'مجوهرات'}`,
   key: 'Jewellery'
 }];
 
@@ -360,7 +384,7 @@ const HomePage = () => React.createElement(
             ref: slider => sliderTIE = slider,
             lazyLoad: true,
             className: styles['ht-100per'],
-            slidesToShow: 6
+            slidesToShow: 10
           },
           tie.map(i => React.createElement(
             'div',
@@ -400,7 +424,7 @@ const HomePage = () => React.createElement(
             ref: slider => sliderHAL = slider,
             lazyLoad: true,
             className: styles['ht-100per'],
-            slidesToShow: 6
+            slidesToShow: 10
           },
           hal.map(i => React.createElement(
             'div',

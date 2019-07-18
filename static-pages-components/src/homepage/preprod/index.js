@@ -389,7 +389,7 @@ const HomePage = () => (
             ref={slider => (sliderTIE = slider)}
             lazyLoad
             className={styles['ht-100per']}
-            slidesToShow={6}
+            slidesToShow={10}
           >
             {tie.map(i => (
               <div>
@@ -410,7 +410,7 @@ const HomePage = () => (
             ref={slider => (sliderHAL = slider)}
             lazyLoad
             className={styles['ht-100per']}
-            slidesToShow={6}
+            slidesToShow={10}
           >
             {hal.map(i => (
               <div>
