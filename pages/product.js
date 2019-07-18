@@ -10,7 +10,7 @@ import { actionCreators } from '../store/product';
 
 import Layout from '../layout/main';
 import getProductComponent from '../components/Product';
-
+import { actionCreators as MegamenuActionsCreators } from '../store/megamenu';
 const cookies = new Cookies();
 
 class ProductPage extends Base {
@@ -61,6 +61,7 @@ class ProductPage extends Base {
 
       await Promise.all([
         store.dispatch(actionCreators.getProduct(options)),
+        store.dispatch(MegamenuActionsCreators.getMegamenu()),
         // TODO  SF-96
         // await store.dispatch(reviewRatingActionCreators.getRatingsAndReviews({
         //   itemType: query.itemType,
@@ -75,13 +76,14 @@ class ProductPage extends Base {
 
   render() {
     const Product = this.product;
-    const { url } = this.props;
+    const { url, loaderProps} = this.props;
     return (
       <div>
         <Layout>
           <Product
             variantId={url.query.variantId}
             productId={url.query.productId}
+            loaderProps={loaderProps}
           />
         </Layout>
       </div>
