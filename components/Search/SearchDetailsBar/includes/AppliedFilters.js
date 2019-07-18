@@ -27,6 +27,7 @@ class AppliedFilters extends Component {
   }
 
   removeFilter(e) {
+    debugger;
     const { facets } = this.props;
     const target = e.currentTarget;
     const facetName = target.getAttribute('data-parentKey');
@@ -35,7 +36,7 @@ class AppliedFilters extends Component {
     // const facets = JSON.parse(decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent('facets').replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1")) || '{}');
     const params = facets || {};
     params[facetName] = params[facetName] || [];
-    params[facetName].splice(_.findIndex(params[facetName], { name: name }), 1);
+    params[facetName].splice(_.findIndex(params[facetName], param => param === name), 1);
     if (!params[facetName].length) { delete params[facetName]; }
     this.props.onChangeFacets(params);
     this.submitQuery(params);

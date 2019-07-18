@@ -47,13 +47,12 @@ class CategoriesAndFacets extends Component {
       if (e.target.checked) {
         params[facetName].push(value.name);
       } else {
-        params[facetName] = params[facetName].filter((item) => item.name !== value.name)
+        params[facetName] = params[facetName].filter((item) => item !== value.name)
         if (!params[facetName].length) { delete params[facetName]; }
       }
       // }
       this.props.onChangeFacets(params);
       this.submitQuery(params);
-      console.log('params', params);
     };
     return curryHandler;
   }
@@ -64,7 +63,7 @@ class CategoriesAndFacets extends Component {
 
   render() {
     const { filters, facets, search } = this.props;
-    console.log('facets', facets);
+    console.log('ihikd', filters, facets);
     return (
       <PanelGroup accordion id="categories-panel">
         {filters.category.map((filter, index) => (
@@ -76,8 +75,7 @@ class CategoriesAndFacets extends Component {
           //   let selectedFilters = facets[filter.attributeName];
           //   return filter.children.length ? <RangeFitler filter={filter} key={filter.id} onChangeHandle={this.onChangeHandle(filter.attributeName, filter.type)} selectedFilters={selectedFilters || []}/> : null;
           // }
-          let selectedFilters = facets[filter.attributeName];
-          selectedFilters = selectedFilters ? selectedFilters.map(item => item.name) : [];
+          const selectedFilters = facets[filter.attributeName];
           return filter.children.length ?
             <CheckboxFacet
               attributeName={filter.attributeName}
@@ -113,7 +111,6 @@ const mapDispatchToProps = dispatch =>
   );
 
 function mapUrlToProps(url) {
-  console.log('url', url);
   return {
     facets: decode((d) => JSON.parse(d || '{}'), url.facets),
   };

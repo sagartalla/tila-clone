@@ -58,7 +58,7 @@ const searchReducer = typeToReducer({
       },
     }, { ui: { loading: true } }),
     FULFILLED: (state, action) => {
-      return Object.assign({}, state, {
+      state = Object.assign({}, state, {
         ...state,
         data: {
           ...state.data,
@@ -66,6 +66,7 @@ const searchReducer = typeToReducer({
           suggestions: null,
         },
         ui: { loading: false } })
+        return state;
     },
     REJECTED: (state, action) => Object.assign({}, state, { error: action.payload.message, ui: { loading: false } }),
   },
