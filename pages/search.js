@@ -8,6 +8,7 @@ import Base, { baseActions } from './base';
 import makeStore from '../store';
 import { actionCreators, selectors } from '../store/search';
 import { actionCreators as authActionsCreators, selectors as authSelectors } from '../store/auth';
+import { actionCreators as megamenuActionsCreators } from '../store/megamenu';
 import Layout from '../layout/main';
 import Search from '../components/Search';
 
@@ -57,19 +58,23 @@ class SearchPage extends Base {
       }
     } else {
       searchOptions.shippingDetails = undefined
-    }    
-    await store.dispatch(actionCreators.getSearchResults(searchOptions))
+    }
+    await Promise.all([
+      store.dispatch(actionCreators.getSearchResults(searchOptions)),
+      store.dispatch(megamenuActionsCreators.getMegamenu())
+    ])
     return { isServer };
   }
 
   pageName = 'SEARCH';
 
   render() {
+    const {url, loaderProps} = this.props;
     return (
       <div>
         <SearchContext.Provider value="search">
           <Layout>
-            <Search query={this.props.url.query} />
+            <Search query={url.query} loaderProps={loaderProps}/>
           </Layout>
         </SearchContext.Provider>
       </div>
