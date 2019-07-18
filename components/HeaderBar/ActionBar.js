@@ -237,7 +237,7 @@ class ActionBar extends Component {
               <a style={{ display: 'block' }}>
                 <span className={`${styles['flex-center']} ${styles['justify-center']} ${styles.relative}`} title={PDP_PAGE.GO_TO_CART}>
                   <SVGComponent clsName={`${styles['cart-icon']}`} src="icons/cart/cart-icon" />
-                  <span className={`${styles.absolute} ${styles['cart-count']} ${styles['flex-center']} ${styles['justify-center']} ${styles['fs-10']} ${styles['white-color']}`}>{cartResults.items && cartResults.items.length || 0}</span>
+                  <span className={`${styles.absolute} ${styles['cart-count']} ${styles['flex-center']} ${styles['justify-center']} ${styles['fs-10']} ${styles['white-color']}`}>{cartResults.items.length}</span>
                 </span>
               </a>
             </Link>
