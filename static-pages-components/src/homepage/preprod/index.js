@@ -41,25 +41,53 @@ const tie = [{
   title: `${lang === 'en' ? 'Laptops' : 'اللاب توبات'}`,
   key: 'Laptops',
 }, {
-  img: '/static/img/landing-home/storage-devices.png',
-  title: `${lang === 'en' ? 'Storage Devices' : 'أجهزة التخزين'}`,
-  key: 'Storage Devices',
+  img: '/static/img/landing-home/memory.png',
+  title: `${lang === 'en' ? 'Memory' : 'اللاب توبات'}`,
+  key: 'Laptops',
 }, {
   img: '/static/img/landing-home/cameras.png',
   title: `${lang === 'en' ? 'Cameras' : 'كاميرات'}`,
   key: 'Cameras',
 }, {
   img: '/static/img/landing-home/television.png',
-  title: `${lang === 'en' ? 'Televisions' : 'التلفزيونات'}`,
+  title: `${lang === 'en' ? 'TVs' : 'التلفزيونات'}`,
   key: 'Televisions',
 }, {
-  img: '/static/img/landing-home/home-appliances.png',
-  title: `${lang === 'en' ? 'Home Appliances' : 'أجهزة المنزل'}`,
-  key: 'Home Appliances',
+  img: '/static/img/landing-home/mobileaccess.png',
+  title: `${lang === 'en' ? 'Mobile Accessories' : 'أجهزة التخزين'}`,
+  key: 'Mobile Accessories',
 }, {
-  img: '/static/img/landing-home/storage-devices.png',
-  title: `${lang === 'en' ? 'Storage Devices' : 'أجهزة التخزين'}`,
-  key: 'Storage Devices',
+  img: '/static/img/landing-home/tablets.png',
+  title: `${lang === 'en' ? 'Tablets' : 'أجهزة التخزين'}`,
+  key: 'Tablets',
+}, {
+  img: '/static/img/landing-home/Kitchen-appliances.png',
+  title: `${lang === 'en' ? 'Kitchen Appliances' : 'أجهزة التخزين'}`,
+  key: 'Kitchen Appliances',
+}, {
+  img: '/static/img/landing-home/smartwatch.png',
+  title: `${lang === 'en' ? 'Smart Watch' : 'أجهزة المنزل'}`,
+  key: 'Smart Watch',
+}, {
+  img: '/static/img/landing-home/homeentertainment.png',
+  title: `${lang === 'en' ? 'Home Entertainment' : 'أجهزة التخزين'}`,
+  key: 'Home Entertainment',
+}, {
+  img: '/static/img/landing-home/routers.png',
+  title: `${lang === 'en' ? 'Routers' : 'أجهزة التخزين'}`,
+  key: 'Routers',
+}, {
+  img: '/static/img/landing-home/computerperepherals.png',
+  title: `${lang === 'en' ? 'computer perepherals' : 'أجهزة التخزين'}`,
+  key: 'computer perepherals',
+}, {
+  img: '/static/img/landing-home/printers_home.png',
+  title: `${lang === 'en' ? 'Printers' : 'أجهزة التخزين'}`,
+  key: 'Printers',
+}, {
+  img: '/static/img/landing-home/Home_appliances.png',
+  title: `${lang === 'en' ? 'Home Appliances' : 'أجهزة التخزين'}`,
+  key: 'Home Appliances',
 }];
 
 const hal = [{
@@ -75,21 +103,49 @@ const hal = [{
   title: `${lang === 'en' ? 'Jewellery' : 'مجوهرات'}`,
   key: 'Jewellery',
 }, {
-  img: '/static/img/landing-home/fashion-acessories.png',
-  title: `${lang === 'en' ? 'Fashion Acc..' : 'أزياءمستلزمات'}`,
-  key: 'Fashion Accessories',
-}, {
   img: '/static/img/landing-home/watches.png',
   title: `${lang === 'en' ? 'Watches' : 'ساعات اليد'}`,
   key: 'Watches',
 }, {
-  img: '/static/img/landing-home/perfumes.png',
-  title: `${lang === 'en' ? 'Perfumes' : 'عطور'}`,
-  key: 'Perfumes',
+  img: '/static/img/landing-home/shoes_home.png',
+  title: `${lang === 'en' ? 'Footwear' : 'أزياءمستلزمات'}`,
+  key: 'Fashion Accessories',
 }, {
-  img: '/static/img/landing-home/jewellery.png',
-  title: `${lang === 'en' ? 'Jewellery' : 'مجوهرات'}`,
-  key: 'Jewellery',
+  img: '/static/img/landing-home/sunglasse_home.png',
+  title: `${lang === 'en' ? 'Sunglasses' : 'أزياءمستلزمات'}`,
+  key: 'Footwear',
+}, {
+  img: '/static/img/landing-home/sports_home.png',
+  title: `${lang === 'en' ? 'Sports' : 'أزياءمستلزمات'}`,
+  key: 'Sports',
+}, {
+  img: '/static/img/landing-home/fitness_home.png',
+  title: `${lang === 'en' ? 'Fitness' : 'عطور'}`,
+  key: 'Fitness',
+}, {
+  img: '/static/img/landing-home/toys_home.png',
+  title: `${lang === 'en' ? 'Toys' : 'عطور'}`,
+  key: 'Toys',
+}, {
+  img: '/static/img/landing-home/beauty_and_health.png',
+  title: `${lang === 'en' ? 'Beauty & Health' : 'مجوهرات'}`,
+  key: 'Beauty & Health',
+}, {
+  img: '/static/img/landing-home/cushion_squilts.png',
+  title: `${lang === 'en' ? 'Cushions & Quilts' : 'مجوهرات'}`,
+  key: 'Cushions & Quilts',
+}, {
+  img: '/static/img/landing-home/home_sweet_home.png',
+  title: `${lang === 'en' ? 'Door Mats' : 'مجوهرات'}`,
+  key: 'Door Mats',
+}, {
+  img: '/static/img/landing-home/car_freshners.png',
+  title: `${lang === 'en' ? 'Car Freshner' : 'مجوهرات'}`,
+  key: 'Car Freshner',
+}, {
+  img: '/static/img/landing-home/photo_frames.png',
+  title: `${lang === 'en' ? 'Photo Frames' : 'مجوهرات'}`,
+  key: 'Photo Frames',
 }];
 
 
@@ -360,12 +416,13 @@ const HomePage = () => (
       <div className="ff-t-i">
         <div className="e">
           <span className={`title ${styles['fs-20']}`}>{lang === 'en' ? 'TOP IN ELECTRONICS' : 'أعلى في الالكترونيات'}</span>
+          <div className="home-slider">
           <Slider
             asNavFor={sliderTIE}
             ref={slider => (sliderTIE = slider)}
             lazyLoad
-            className={styles['ht-100per']}
-            slidesToShow={6}
+            className={`${styles['ht-100per']}`}
+            slidesToShow={10}
           >
             {tie.map(i => (
               <div>
@@ -373,20 +430,22 @@ const HomePage = () => (
                   <a href={b_d_b[i.key]}>
                     <img src={i.img} alt={i.title} />
                   </a>
-                  <span className={`${styles['fs-12']} ${styles['pt-10']} ${styles.flex} ${styles['justify-center']} slider-elips ${styles['lne-ht1_2']}`}>{i.title}</span>
+                  <span className={`${styles['fs-10']} ${styles['pt-10']} ${styles.flex} ${styles['justify-center']} slider-elips ${styles['lne-ht1_2']}`}>{i.title}</span>
                 </div>
               </div>
               ))}
           </Slider>
+          </div>
         </div>
         <div className="h-a-l">
           <span className={`title ${styles['fs-20']}`}> {lang === 'en' ? 'TOP IN FASHION' : 'أعلى في الموضة'} | {lang === 'en' ? 'LIFESTYLE' : 'لايف ستايل'}</span>
+          <div className="home-slider">
           <Slider
             asNavFor={sliderHAL}
             ref={slider => (sliderHAL = slider)}
             lazyLoad
             className={styles['ht-100per']}
-            slidesToShow={6}
+            slidesToShow={10}
           >
             {hal.map(i => (
               <div>
@@ -394,11 +453,12 @@ const HomePage = () => (
                     <a href={b_d_b[i.key]}>
                       <img src={i.img} />
                     </a>
-                    <span className={`${styles['fs-12']} ${styles['pt-10']} ${styles['justify-center']} slider-elips ${styles['lne-ht1_2']}`}>{i.title}</span>
+                    <span className={`${styles['fs-10']} ${styles['pt-10']} ${styles['justify-center']} slider-elips ${styles['lne-ht1_2']}`}>{i.title}</span>
                   </div>
                 </div>
             ))}
           </Slider>
+          </div>
         </div>
       </div>
       <div className="display-t-i-f">
