@@ -57,13 +57,13 @@ const getProduct = (store, variantId) => {
   const imgUrls = product_details && product_details.product_details_vo && product_details.product_details_vo.cached_product_details.media.gallery_media;
   const titleInfo = {
     brand: product_details && product_details.catalog_details && product_details.catalog_details.attribute_map.brand,
-    title: productAttributeMap && productAttributeMap.calculated_display_name && productAttributeMap.calculated_display_name,
+    title: productAttributeMap && productAttributeMap.calculated_display_name && productAttributeMap.calculated_titles,
     rating: {
       rating: '',
-      count: ''
+      count: '',
     },
     reviews: {
-      count: ''
+      count: '',
     },
     price: priceInfo ? priceInfo.selling_price ? `${priceInfo.selling_price.display_value} ${priceInfo.selling_price.currency}` : priceInfo.selling_price : 'Price Not available',
     originalPrice: '',
@@ -95,7 +95,7 @@ const getProduct = (store, variantId) => {
       offerMesseges: priceInfo.pricing.actions ? priceInfo.pricing.actions.map((a) => a.description) : [],
       offerDiscounts: priceInfo.pricing.actions ? priceInfo.pricing.actions : [],
       totalDiscountMRP: priceInfo.pricing.total_discount_mrp,
-      currency: priceInfo.mrp_currency
+      currency: priceInfo.mrp_currency,
     } : {},
   };
   const variant_id = variant_preferred_listings ? Object.keys(variant_preferred_listings)[0] : '';
@@ -110,7 +110,7 @@ const getProduct = (store, variantId) => {
   const extraOffers = priceInfo ? priceInfo.pricing.extra_offers_detail : [];
   const details = catalogAttributeMap && catalogAttributeMap.description ? catalogAttributeMap.description.attribute_values.map((d) => d.value).join(', ') : null;
   let productDescription = product_details && product_details.product_details_vo && product_details.product_details_vo.cached_product_details.rich_product_desc;
-  productDescription = productDescription && productDescription.length > 0 ? _.sortBy(productDescription,['order']) : null;
+  productDescription = productDescription && productDescription.length > 0 ? _.sortBy(productDescription, ['order']) : null;
   return {
     titleInfo,
     details,
@@ -138,7 +138,7 @@ const getProduct = (store, variantId) => {
 const isProductLoaded = (store) => {
   //console.log('productdetails', store.productReducer.data[0]);
   return { isProductLoaded:store.productReducer.data[0],
-           productDetails: store.productReducer.data[0]
+           productDetails: store.productReducer.data[0],
           }
 
 }
@@ -170,7 +170,7 @@ const getVariants = (store) => {
         };
       }
       return {
-        ...acc
+        ...acc,
       };
     }, obj);
     obj.pId = product.product_details_vo.cached_product_details.product_id;
@@ -186,7 +186,7 @@ const getVariants = (store) => {
       };
     }
     return {
-      ...acc
+      ...acc,
     };
   }, {});
   obj.pId = product_details.product_details_vo.cached_product_details.product_id;
@@ -198,7 +198,7 @@ const getVariants = (store) => {
       ...acc,
       [attrName]: product_details.product_details_vo.cached_product_details.attribute_map[attrName].display_string,
     };
-  },{});
+  }, {});
 
   const variantsForDisplay = identityAttr.reduce((acc, attrName) => {
     return acc.concat({
@@ -213,7 +213,7 @@ const getVariants = (store) => {
   };
 };
 
-const getVariantsAndSimilarProducts = (variantId,productId) => (store) => {
+const getVariantsAndSimilarProducts = (variantId, productId) => (store) => {
   const { variantsData } = store.productReducer;
   const { availableSimilarProducts } = variantsData || {};
   const { similar_products, product_details, variant_preferred_listings } = store.productReducer.data[0];
@@ -242,7 +242,7 @@ const getVariantsAndSimilarProducts = (variantId,productId) => (store) => {
   // }
 
   let variantProducts = []
-  _.forIn(product_details.product_details_vo.cached_variant,(value,key) => {
+  _.forIn(product_details.product_details_vo.cached_variant, (value, key) => {
     value['key'] = key
     if(key === variantId) {
       variantProducts.unshift(value)
@@ -254,10 +254,10 @@ const getVariantsAndSimilarProducts = (variantId,productId) => (store) => {
   const variants = _.reduce(variantProducts, (acc, value) => {
     const key = value.key
     const display = {
-      ...acc.display
+      ...acc.display,
     };
     const map = {
-      ...acc.map
+      ...acc.map,
     };
     map[key] =  map[key] || {};
     _.forEach(value.attribute_map, (attVal, attKey) => {
@@ -276,13 +276,13 @@ const getVariantsAndSimilarProducts = (variantId,productId) => (store) => {
       }
       map[key] = {
         ...map[key],
-        [attKey]: [...map[key][attKey], ...(attVal.attribute_values.map(i => `${i.value}${i.qualifier_unit ? ` ${i.qualifier_unit}` : ''}`))]
+        [attKey]: [...map[key][attKey], ...(attVal.attribute_values.map(i => `${i.value}${i.qualifier_unit ? ` ${i.qualifier_unit}` : ''}`))],
       };
     });
     return {
       ...acc,
       display,
-      map
+      map,
     };
   }, { display: {}, map: [] });
   // sample output
@@ -318,10 +318,10 @@ const getVariantsAndSimilarProducts = (variantId,productId) => (store) => {
     if(availableSimilarProducts && !availableSimilarProducts[product.product_details_vo.cached_product_details.product_id]) return acc;
     const key = product.product_details_vo.cached_product_details.product_id;
     const display = {
-      ...acc.display
+      ...acc.display,
     };
     const map = {
-      ...acc.map
+      ...acc.map,
     };
     map[key] =  map[key] || {};
     _.forEach(product.product_details_vo.cached_product_details.attribute_map, (attVal, attKey) => {
@@ -331,7 +331,7 @@ const getVariantsAndSimilarProducts = (variantId,productId) => (store) => {
       if(!display[attKey]) {
         display[attKey] = {
           displayName: attVal.display_string,
-          values: []
+          values: [],
         };
       }
 
@@ -341,17 +341,17 @@ const getVariantsAndSimilarProducts = (variantId,productId) => (store) => {
       }
       map[key] = {
         ...map[key],
-        [attKey]: [...map[key][attKey], ...(attVal.attribute_values.map(i => `${i.value}${i.qualifier_unit ? ` ${i.qualifier_unit}` : ''}`))]
+        [attKey]: [...map[key][attKey], ...(attVal.attribute_values.map(i => `${i.value}${i.qualifier_unit ? ` ${i.qualifier_unit}` : ''}`))],
       };
     });
     return {
       ...acc,
       display,
-      map
+      map,
     };
   }, { display: {}, map: [] }) : { display: {}, map: [] };
   return {
-    variants, similarProducts, itemType, catalogId, productId
+    variants, similarProducts, itemType, catalogId, productId,
   };
 };
 
@@ -426,12 +426,12 @@ const getReviewResponse = (store) => {
 };
 const getSelectedPropductId = store => ({ selectedProductData, map }) => {
   const exisitingProductData = _.reduce(store.productReducer.data[0].product_details.product_details_vo.cached_product_details.attribute_map, (acc, val, key) => {
-    if(val.attribute_group_name !== 'IDENTITY' || !val.searchable) {
+    if (val.attribute_group_name !== 'IDENTITY' || !val.searchable) {
       return acc;
     }
     return {
       ...acc,
-      [key]: val.attribute_values[0].value
+      [key]: val.attribute_values[0].value,
     };
   }, {});
   selectedProductData = {
@@ -443,18 +443,18 @@ const getSelectedPropductId = store => ({ selectedProductData, map }) => {
     count = 0;
     match = _.reduce(selectedProductData, (acc, selectedValue, selectedKey) => {
       const temp = mapValues[selectedKey] && mapValues[selectedKey].indexOf(selectedValue) !== -1;
-      if(temp) {
+      if (temp) {
         count++;
         pids[count] = pid;
       }
       return acc && temp;
     }, true);
-    if(match) {
+    if (match) {
       matchPid = pid;
     }
   });
-  for(var i = Object.keys(selectedProductData).length; i >= 0 ; i--) {
-    if(pids[i]) {
+  for (let i = Object.keys(selectedProductData).length; i >= 0 ; i--) {
+    if (pids[i]) {
       matchPid = pids[i];
       break;
     }
@@ -484,5 +484,5 @@ const getAllCountries = (store) => {
 export {
   getProduct, getVariants, getPreview, getSelectedVariantId, getReviewRatings, getReviewResponse,
   getVariantsAndSimilarProducts, getSelectedPropductId, getSelectedVariantData, getAllCities, getAllCountries,
-  getLoadingStatus,getErrorMessage,isProductLoaded,getProductId,getVariantId
+  getLoadingStatus, getErrorMessage, isProductLoaded, getProductId, getVariantId,
 };

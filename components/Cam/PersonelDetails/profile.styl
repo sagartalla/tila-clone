@@ -59,6 +59,9 @@
     padding 40px 0
     .personal-info-img-icon
       width 90px
+    .personal-info-set-img-icon
+      width 195px
+      height 175px
   .personal-info-main
     p
       width 60%
@@ -225,6 +228,9 @@
   .mobiletick-icon-styl
     width 101px
     height 146px
+  .setpasword-mobiletick-icon-styl
+     width 195px
+     height 175px
 @keyframes slideOpen {
   from {right: -800px;}
   to {right: 0;}
@@ -239,3 +245,29 @@
 
 .hideDiv
   display none
+
+.set-password-toltp
+  .question
+    width-height-radius(20px, 20px, 50%)
+    border 0.25px solid generic-gray-color
+  .setpassword-tool-tip
+      right -115px
+      display none
+      text-align left
+      .table
+        line-height 1.6
+      &:before
+          right 117px
+          left auto
+    &:hover
+        .setpassword-tool-tip
+          display flex
+
+
+.bg-FB-icon
+  width 10px
+  height 16px
+
+.bg-GOOGLE-icon
+  width 16px
+  height 16px

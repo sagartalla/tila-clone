@@ -9,7 +9,7 @@ import { languageDefinations } from '../../utils/lang/';
 const { API_TEXT } = languageDefinations();
 const cookies = new Cookies();
 
-const maxEle = 5;
+const maxEle = 4;
 
 const itemFormat = {
   categoryId: '',
@@ -203,11 +203,20 @@ const track = (params) => {
   });
 };
 
+const removeAllCompareItems = () => {
+  setItem(itemFormat);
+  return {
+    count: 0,
+    compareItems: itemFormat,
+  };
+};
+
 export default {
   addToCompare,
   getCompareItemsData,
   getCompareCount,
   removeCompareData,
+  removeAllCompareItems,
   getBrands,
   getProducts,
   track,

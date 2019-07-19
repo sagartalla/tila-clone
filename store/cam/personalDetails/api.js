@@ -10,7 +10,7 @@ const { PERSONAL_INFO_MODAL, API_TEXT } = languageDefinations();
 const getUserProfileInfo = () => {
   return Promise.all([
     axios.get(`${constants.CMS_API_URL}/api/v1/user/account/details`),
-    axios.post(`${constants.CMS_API_URL}/api/v1/user/info`)
+    axios.post(`${constants.CMS_API_URL}/api/v1/user/info?includeSocialAccounts=${true}`)
   ]).then(([data1, data2]) => {
     return {
       personalInfo: data1.data,

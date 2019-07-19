@@ -108,9 +108,13 @@ const userInfo = store => {
   return store.authReducer.data.userInfo;
 }
 
+const currentFlow = store => {
+  return store.authReducer.v2.currentFlow;
+}
+
 export {
   getErrorMessege, getCountry, getLoggedInStatus, getInstaCode, getUserCreds, getDeliveryCity, getDomainCountries,
   getLoginProgressStatus, getShowLogin, getPTAToken, showEmailVerificationScreen, getLanguage, getLoadingStatus, getUserInfo,
   getActive, getActiveEmailId, forgotPasswordStatus, showEmailSuccess, showLogin, userData, showOtpSuccess, resetToken, getActiveText,
-  getLastLogin, showResetScreen, getActiveUser, showCheckoutLogin, loginResponse, isVerified, userInfo, showUserInfo,
+  getLastLogin, showResetScreen, getActiveUser, showCheckoutLogin, loginResponse, isVerified, userInfo, showUserInfo, currentFlow,
 };

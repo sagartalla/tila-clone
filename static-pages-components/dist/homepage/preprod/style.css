@@ -447,10 +447,6 @@
 }
 .slider-elips {
   width: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-  o-text-overflow: ellipsis;
-  text-overflow: ellipsis;
   float: left;
   display: inline-block;
 }
