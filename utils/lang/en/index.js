@@ -916,5 +916,22 @@ export const EN_KEYWORDS = {
     SELECT_ORDER_WITH_ISSUE: 'SELECT ORDER WITH ISSUE',
     MY_ORDERS: 'MY ORDERS',
     SIGN_IN_MSG: 'Please sign in to view your orders'
-  }
+  },
+  SEO_CONTENT: {
+    HOME_H1_CONTENT: 'Online Shopping Store in Saudi',
+    HOME_H2_CONTENT: 'Shop for the latest products online at Tila.com Saudi',
+    HOME_META_CONTENT: 'Tila.com is the best e-commerce site in the Middle East region. We have huge collections of electronics, fashion and lifestyle products at the best prices.',
+    HOME_TITLE: 'Tila Saudi - Best online shopping site | Electronics,fashion ,lifestyle accessories and many more at best prices at Tila',
+    LANDING_H2_CONTENT: 'Buy Latest',
+    LANDING_H2: 'online at best prices at Tila.com Saudi',
+    LANDING_META_CONTENT1: 'Shop latest Mobile Phones at the best prices and much more online in Riyadh, Jeddah and all SAUDI region (OR KSA) | enjoy 100 % Genuine products ✦ Free shipping across ✦ Cash On Delivery ✦ Superfast delivery',
+    PDP_H2: 'Buy',
+    PDP_H2_TITLE: 'online | TILA SAUDI',
+    PDP_META_CONTENT: 'Shop for',
+    PDP_META_CONTENT2: 'online in Riyadh, Jeddah and All SAUDI region (OR KSA) | enjoy 100 % Genuine products ✦ Free shipping across ✦ Cash On Delivery ✦ Superfast delivery.',
+    BRAND_H2: 'Shop for the latest',
+    BRAND_H2_TITLE: ' online at the best deals on TILA SAUDI',
+    BRAND_META_CONTENT: 'Get latest',
+    BRAND_META_CONTENT2: 'online at the best deals in Riyadh, Jeddah and All SAUDI region (OR KSA) | enjoy 100 % Genuine products ✦ Free shipping across ✦ Cash On Delivery ✦ Superfast delivery',
+  },
 };
