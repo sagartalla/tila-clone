@@ -416,11 +416,12 @@ const HomePage = () => (
       <div className="ff-t-i">
         <div className="e">
           <span className={`title ${styles['fs-20']}`}>{lang === 'en' ? 'TOP IN ELECTRONICS' : 'أعلى في الالكترونيات'}</span>
+          <div className="home-slider">
           <Slider
             asNavFor={sliderTIE}
             ref={slider => (sliderTIE = slider)}
             lazyLoad
-            className={styles['ht-100per']}
+            className={`${styles['ht-100per']}`}
             slidesToShow={10}
           >
             {tie.map(i => (
@@ -429,14 +430,16 @@ const HomePage = () => (
                   <a href={b_d_b[i.key]}>
                     <img src={i.img} alt={i.title} />
                   </a>
-                  <span className={`${styles['fs-12']} ${styles['pt-10']} ${styles.flex} ${styles['justify-center']} slider-elips ${styles['lne-ht1_2']}`}>{i.title}</span>
+                  <span className={`${styles['fs-10']} ${styles['pt-10']} ${styles.flex} ${styles['justify-center']} slider-elips ${styles['lne-ht1_2']}`}>{i.title}</span>
                 </div>
               </div>
               ))}
           </Slider>
+          </div>
         </div>
         <div className="h-a-l">
           <span className={`title ${styles['fs-20']}`}> {lang === 'en' ? 'TOP IN FASHION' : 'أعلى في الموضة'} | {lang === 'en' ? 'LIFESTYLE' : 'لايف ستايل'}</span>
+          <div className="home-slider">
           <Slider
             asNavFor={sliderHAL}
             ref={slider => (sliderHAL = slider)}
@@ -450,11 +453,12 @@ const HomePage = () => (
                     <a href={b_d_b[i.key]}>
                       <img src={i.img} />
                     </a>
-                    <span className={`${styles['fs-12']} ${styles['pt-10']} ${styles['justify-center']} slider-elips ${styles['lne-ht1_2']}`}>{i.title}</span>
+                    <span className={`${styles['fs-10']} ${styles['pt-10']} ${styles['justify-center']} slider-elips ${styles['lne-ht1_2']}`}>{i.title}</span>
                   </div>
                 </div>
             ))}
           </Slider>
+          </div>
         </div>
       </div>
       <div className="display-t-i-f">

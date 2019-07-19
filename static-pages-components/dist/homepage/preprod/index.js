@@ -410,32 +410,36 @@ const HomePage = () => React.createElement(
           lang === 'en' ? 'TOP IN ELECTRONICS' : 'أعلى في الالكترونيات'
         ),
         React.createElement(
-          Slider,
-          {
-            asNavFor: sliderTIE,
-            ref: slider => sliderTIE = slider,
-            lazyLoad: true,
-            className: styles['ht-100per'],
-            slidesToShow: 10
-          },
-          tie.map(i => React.createElement(
-            'div',
-            null,
-            React.createElement(
+          'div',
+          { className: 'home-slider' },
+          React.createElement(
+            Slider,
+            {
+              asNavFor: sliderTIE,
+              ref: slider => sliderTIE = slider,
+              lazyLoad: true,
+              className: `${styles['ht-100per']}`,
+              slidesToShow: 10
+            },
+            tie.map(i => React.createElement(
               'div',
-              { className: 'item', key: i },
+              null,
               React.createElement(
-                'a',
-                { href: b_d_b[i.key] },
-                React.createElement('img', { src: i.img, alt: i.title })
-              ),
-              React.createElement(
-                'span',
-                { className: `${styles['fs-12']} ${styles['pt-10']} ${styles.flex} ${styles['justify-center']} slider-elips ${styles['lne-ht1_2']}` },
-                i.title
+                'div',
+                { className: 'item', key: i },
+                React.createElement(
+                  'a',
+                  { href: b_d_b[i.key] },
+                  React.createElement('img', { src: i.img, alt: i.title })
+                ),
+                React.createElement(
+                  'span',
+                  { className: `${styles['fs-10']} ${styles['pt-10']} ${styles.flex} ${styles['justify-center']} slider-elips ${styles['lne-ht1_2']}` },
+                  i.title
+                )
               )
-            )
-          ))
+            ))
+          )
         )
       ),
       React.createElement(
@@ -450,32 +454,36 @@ const HomePage = () => React.createElement(
           lang === 'en' ? 'LIFESTYLE' : 'لايف ستايل'
         ),
         React.createElement(
-          Slider,
-          {
-            asNavFor: sliderHAL,
-            ref: slider => sliderHAL = slider,
-            lazyLoad: true,
-            className: styles['ht-100per'],
-            slidesToShow: 10
-          },
-          hal.map(i => React.createElement(
-            'div',
-            null,
-            React.createElement(
+          'div',
+          { className: 'home-slider' },
+          React.createElement(
+            Slider,
+            {
+              asNavFor: sliderHAL,
+              ref: slider => sliderHAL = slider,
+              lazyLoad: true,
+              className: styles['ht-100per'],
+              slidesToShow: 10
+            },
+            hal.map(i => React.createElement(
               'div',
-              { className: 'item', key: i },
+              null,
               React.createElement(
-                'a',
-                { href: b_d_b[i.key] },
-                React.createElement('img', { src: i.img })
-              ),
-              React.createElement(
-                'span',
-                { className: `${styles['fs-12']} ${styles['pt-10']} ${styles['justify-center']} slider-elips ${styles['lne-ht1_2']}` },
-                i.title
+                'div',
+                { className: 'item', key: i },
+                React.createElement(
+                  'a',
+                  { href: b_d_b[i.key] },
+                  React.createElement('img', { src: i.img })
+                ),
+                React.createElement(
+                  'span',
+                  { className: `${styles['fs-10']} ${styles['pt-10']} ${styles['justify-center']} slider-elips ${styles['lne-ht1_2']}` },
+                  i.title
+                )
               )
-            )
-          ))
+            ))
+          )
         )
       )
     ),
