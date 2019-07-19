@@ -139,7 +139,6 @@ const authReducer = typeToReducer({
           ...state.data,
           // isLoggedIn: (currentFlow === '' || currentFlow === 'existing_social_user') ? true : true,
           userInfoData: action.payload && action.payload.data,
-          showLoginScreen: window.location.href.split('/')[5] === 'payment' ? false : !!(action.payload && action.payload.data.email_verified === 'NV'),
         },
         v2: {
           ...state.v2,
@@ -173,6 +172,11 @@ const authReducer = typeToReducer({
           isLoggedIn: true,
           loginResponse: action.payload.data,
           showCheckoutLogin: !!(action.payload && action.payload.data.email_verified === 'NV'),
+          showLoginScreen: currentFlow === 'existing_user_login' ?
+            false : currentFlow === 'not_accessable_social_user' ? true:
+            window.location.href.split('/')[5] === 'payment' ? false :
+            currentFlow === 'new_user_register' ? true : !!(action.payload && action.payload.data.email_verified === 'NV'),  
+          // Dont show verify for existing_user_login after login, show verify for new_user_register after signup
         },
         ui: {
           ...state.ui,

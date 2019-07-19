@@ -356,6 +356,13 @@ export const EN_KEYWORDS = {
     PASSWORD_LENGTH_MESSAGE: 'Your password should be atleast 8 characters in length and should not be the same as your old password.',
     PASSWORD_LENGTH: 'Password must be atleast 8 characters',
     SAME_PASSWORD_MESSAGE: 'Make sure the new password is different from the password used before.',
+    THANK_YOU: 'Thank You!',
+    PASSWORD_UPDATE_SUCCESS: 'Your password has been updated successfully.',
+    YOU_CAN_LOGIN_WITH_PASSWORD: 'You can login with your email id and password from next time onwards',
+    PASSWORD_TILA_ACCOUNT: 'Please set password for your Tila Account',
+    CONFIRM: 'CONFIRM',
+    ACCOUNT_CONNECTED_USING: 'Your account is connected using',
+    TO_SET_PASSWORD: 'To set your Tila password',
   },
   PERSONAL_INFO_MODAL: {
     HEADING: 'Personal Information',
