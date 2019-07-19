@@ -55,6 +55,7 @@ export const EN_KEYWORDS = {
     ITEM_IN_YOUR_WISHLIST: 'item in Wishlist',
     ITEMS_IN_YOUR_WISHLIST: 'items in Wishlist',
     MY_CART: 'My Cart',
+    MY_CART_EMPTY: 'So many products on Tila and yet i Feel Empty',
   },
   PAYMENT_PAGE: {
     SECURE_CHECKOUT: 'Secure Checkout',

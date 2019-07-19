@@ -52,6 +52,7 @@ export const AR_KEYWORDS = {
     ITEM_IN_YOUR_WISHLIST: 'المنتج في قائمك المفضلة ',
     ITEMS_IN_YOUR_WISHLIST: 'المنتج في قائمك المفضلة',
     MY_CART: 'عربة التسوق',
+    MY_CART_EMPTY: 'So many products on Tila and yet i Feel Empty',
   },
   PAYMENT_PAGE: {
     SECURE_CHECKOUT: 'عملية خروج آمنة',
