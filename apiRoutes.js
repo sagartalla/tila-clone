@@ -53,10 +53,7 @@ apiRoutes
   })
   .post('/refresh', (req, res) => {
     const auth = req.universalCookies.get('auth');
-    return axios.post(`${constants.AUTH_API_URL}/api/v1/refresh`, {
-        'auth_version': 'V1',
-        'refresh_token': auth.refresh_token
-      }).then((data) => {
+    return axios.post(`${constants.AUTH_API_URL}/api/v1/refresh`, req.body).then((data) => {
         auth.access_token = data.data.access_token
         req.universalCookies.set('auth', auth, { path: '/' });
         return res.json({});
