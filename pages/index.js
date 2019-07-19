@@ -30,6 +30,7 @@ class LandingPage extends Base {
     return { isServer };
   }
   componentDidMount() {
+    Base.prototype.componentDidMount();
     this.props.getUserProfileInfo()
     //this.props.getMegamenu()
   }
