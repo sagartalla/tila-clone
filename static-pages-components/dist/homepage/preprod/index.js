@@ -50,23 +50,39 @@ const tie = [{
 }, {
   img: '/static/img/landing-home/mobileaccess.png',
   title: `${lang === 'en' ? 'Mobile Accessories' : 'أجهزة التخزين'}`,
-  key: 'Storage Devices'
+  key: 'Mobile Accessories'
 }, {
   img: '/static/img/landing-home/tablets.png',
   title: `${lang === 'en' ? 'Tablets' : 'أجهزة التخزين'}`,
-  key: 'Storage Devices'
+  key: 'Tablets'
 }, {
-  img: '/static/img/landing-home/home-appliances.png',
-  title: `${lang === 'en' ? 'Home Appliances' : 'أجهزة التخزين'}`,
-  key: 'Storage Devices'
+  img: '/static/img/landing-home/Kitchen-appliances.png',
+  title: `${lang === 'en' ? 'Kitchen Appliances' : 'أجهزة التخزين'}`,
+  key: 'Kitchen Appliances'
 }, {
   img: '/static/img/landing-home/smartwatch.png',
   title: `${lang === 'en' ? 'Smart Watch' : 'أجهزة المنزل'}`,
-  key: 'Home Appliances'
+  key: 'Smart Watch'
 }, {
   img: '/static/img/landing-home/homeentertainment.png',
   title: `${lang === 'en' ? 'Home Entertainment' : 'أجهزة التخزين'}`,
-  key: 'Storage Devices'
+  key: 'Home Entertainment'
+}, {
+  img: '/static/img/landing-home/routers.png',
+  title: `${lang === 'en' ? 'Routers' : 'أجهزة التخزين'}`,
+  key: 'Routers'
+}, {
+  img: '/static/img/landing-home/computerperepherals.png',
+  title: `${lang === 'en' ? 'computer perepherals' : 'أجهزة التخزين'}`,
+  key: 'computer perepherals'
+}, {
+  img: '/static/img/landing-home/printers_home.png',
+  title: `${lang === 'en' ? 'Printers' : 'أجهزة التخزين'}`,
+  key: 'Printers'
+}, {
+  img: '/static/img/landing-home/Home_appliances.png',
+  title: `${lang === 'en' ? 'Home Appliances' : 'أجهزة التخزين'}`,
+  key: 'Home Appliances'
 }];
 
 const hal = [{
@@ -92,23 +108,39 @@ const hal = [{
 }, {
   img: '/static/img/landing-home/sunglasse_home.png',
   title: `${lang === 'en' ? 'Sunglasses' : 'أزياءمستلزمات'}`,
-  key: 'Fashion Accessories'
+  key: 'Footwear'
 }, {
   img: '/static/img/landing-home/sports_home.png',
   title: `${lang === 'en' ? 'Sports' : 'أزياءمستلزمات'}`,
-  key: 'Fashion Accessories'
+  key: 'Sports'
 }, {
   img: '/static/img/landing-home/fitness_home.png',
   title: `${lang === 'en' ? 'Fitness' : 'عطور'}`,
-  key: 'Perfumes'
+  key: 'Fitness'
 }, {
   img: '/static/img/landing-home/toys_home.png',
   title: `${lang === 'en' ? 'Toys' : 'عطور'}`,
-  key: 'Perfumes'
+  key: 'Toys'
 }, {
   img: '/static/img/landing-home/beauty_and_health.png',
   title: `${lang === 'en' ? 'Beauty & Health' : 'مجوهرات'}`,
-  key: 'Jewellery'
+  key: 'Beauty & Health'
+}, {
+  img: '/static/img/landing-home/cushion_squilts.png',
+  title: `${lang === 'en' ? 'Cushions & Quilts' : 'مجوهرات'}`,
+  key: 'Cushions & Quilts'
+}, {
+  img: '/static/img/landing-home/home_sweet_home.png',
+  title: `${lang === 'en' ? 'Door Mats' : 'مجوهرات'}`,
+  key: 'Door Mats'
+}, {
+  img: '/static/img/landing-home/car_freshners.png',
+  title: `${lang === 'en' ? 'Car Freshner' : 'مجوهرات'}`,
+  key: 'Car Freshner'
+}, {
+  img: '/static/img/landing-home/photo_frames.png',
+  title: `${lang === 'en' ? 'Photo Frames' : 'مجوهرات'}`,
+  key: 'Photo Frames'
 }];
 
 const d_tie = [`/static/img/landing-home/${lang === 'en' ? 'laptop-stand' : 'laptop-stand-ar'}.jpg`, `/static/img/landing-home/${lang === 'en' ? 'headphones' : 'headphones-ar'}.jpg`, `/static/img/landing-home/${lang === 'en' ? 'mobile-case' : 'mobile-case-ar'}.jpg`, `/static/img/landing-home/${lang === 'en' ? 'smart-band' : 'smart-band-ar'}.jpg`, `/static/img/landing-home/${lang === 'en' ? 'USB-hub' : 'USB-hub-ar'}.jpg`];
