@@ -23,7 +23,9 @@ class MyApp extends App {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      storageEnabled: true
+    };
   }
 
   componentDidMount() {
@@ -33,14 +35,14 @@ class MyApp extends App {
   }
 
   render() {
-    const {Component,pageProps} = this.props
+    const {Component,pageProps, loaderProps} = this.props
     const {storageEnabled} = this.state;
     if(!storageEnabled){
       return <EnableStorage />;
     }
     return (
       <Container>
-        <Component {...pageProps} />
+        <Component {...pageProps} loaderProps={loaderProps}/>
       </Container>
     )
   }

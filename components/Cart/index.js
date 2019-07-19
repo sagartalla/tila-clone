@@ -15,7 +15,8 @@ import MiniCartBody from './includes/MiniCartBody';
 import FooterBar from '../Footer/index';
 import Slider from '../common/slider';
 import Coupon from '../Cart/CartPaymentSideBar/coupons';
-
+import LoadingBar from '../common/Loader/skeletonLoader';
+import LoaderBarContext from '../helpers/context/loaderBarContext';
 import lang from '../../utils/language';
 
 import main_en from '../../layout/main/main_en.styl';
@@ -166,6 +167,8 @@ class Cart extends Component {
       cartData, editCartDetails, showCheckOutBtn, isLoading, couponData, getCartResults,
     } = this.props;
     return (
+      <LoaderBarContext.Consumer>
+        {context => (
       <div>
         {
           this.props.showMiniCart
@@ -185,22 +188,26 @@ class Cart extends Component {
             :
               <Fragment>
                 <HeaderBar />
-                <Grid>
-                  <CartBody
-                    count={count}
-                    data={cartData}
-                    showBlocker={showBlocker}
-                    isLoading={isLoading}
-                    addToWishlist={this.addToWishlist}
-                    openSlider={this.openSlider}
-                    removeCartItem={this.removeCartItem}
-                    increaseItemCnt={this.increaseItemCnt}
-                    decreaseItemCnt={this.decreaseItemCnt}
-                    addOrRemoveGift={this.addOrRemoveGift}
-                    checkoutBtnHandler={this.checkoutBtnHandler}
-                    cartStepperInputHandler={this.cartStepperInputHandler}
-                  />
-                </Grid>
+                    <LoadingBar loadComponent={context.loadComponent}
+                      pathname={context.pathname}
+                    >
+                      <Grid>
+                        <CartBody
+                          count={count}
+                          data={cartData}
+                          showBlocker={showBlocker}
+                          isLoading={isLoading}
+                          addToWishlist={this.addToWishlist}
+                          openSlider={this.openSlider}
+                          removeCartItem={this.removeCartItem}
+                          increaseItemCnt={this.increaseItemCnt}
+                          decreaseItemCnt={this.decreaseItemCnt}
+                          addOrRemoveGift={this.addOrRemoveGift}
+                          checkoutBtnHandler={this.checkoutBtnHandler}
+                          cartStepperInputHandler={this.cartStepperInputHandler}
+                        />
+                      </Grid>
+                  </LoadingBar>
                 <FooterBar />
               </Fragment>
         }
@@ -217,6 +224,8 @@ class Cart extends Component {
           </Slider>
         }
       </div>
+      )}
+      </LoaderBarContext.Consumer>
     );
   }
 }
