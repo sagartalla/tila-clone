@@ -8,6 +8,7 @@ import { languageDefinations } from '../utils/lang';
 import Base, { baseActions } from './base';
 import makeStore from '../store';
 import { actionCreators } from '../store/product';
+import { actionCreators as MegamenuActionsCreators } from '../store/megamenu';
 // import { actionCreators as reviewRatingActionCreators } from '../store/ratingReviews';
 
 import Layout from '../layout/main';
@@ -87,14 +88,14 @@ class ProductPage extends Base {
 
   render() {
     const Product = this.product;
-    const { url, loaderProps} = this.props;
+    const { url, loaderProps, allState } = this.props;
     return (
       <div>
         <Head>
           <meta property="og:title" content={`${SEO_CONTENT.PDP_H2} ${allState.productReducer && allState.productReducer.data && allState.productReducer.data[0].product_details && allState.productReducer.data[0].product_details.product_details_vo && allState.productReducer.data[0].product_details.product_details_vo.cached_product_details.attribute_map.calculated_display_name.attribute_values[0].value} ${SEO_CONTENT.PDP_H2_TITLE}`} />
           <meta property="og:site_name" content="Tila" />
           <meta property="fb:app_id" content=" " />
-          <meta property="og:url" content={window.location.toString()} />
+          {/* <meta property="og:url" content={window.location.toString()} /> */}
           <meta property="og:description" content={`${SEO_CONTENT.PDP_META_CONTENT} ${allState.productReducer && allState.productReducer.data && allState.productReducer.data[0].product_details && allState.productReducer.data[0].product_details.product_details_vo && allState.productReducer.data[0].product_details.product_details_vo.cached_product_details.attribute_map.calculated_display_name.attribute_values[0].value} ${SEO_CONTENT.PDP_META_CONTENT2}`} />
           <meta property="og:locale:locale" content="en_SA" />
           <meta property="og:locale:alternate" content="ar_SA" />

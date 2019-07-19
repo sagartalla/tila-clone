@@ -12,6 +12,7 @@ import LoaderBarContext from '../components/helpers/context/loaderBarContext';
 import Base, { baseActions } from './base';
 import { actionCreators } from '../store/landing';
 import { actionCreators as PersonalActionCreator } from '../store/cam/personalDetails';
+import { actionCreators as MegamenuActionsCreators } from '../store/megamenu';
 import main_en from '../layout/main/main_en.styl';
 import main_ar from '../layout/main/main_ar.styl';
 import styles_en from '../components/Product/product_en.styl';
@@ -21,8 +22,6 @@ const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styl
 
 
 const { SEO_CONTENT } = languageDefinations();
-import { actionCreators as PersonalActionCreator } from '../store/cam/personalDetails';
-import { actionCreators as MegamenuActionsCreators } from '../store/megamenu';
 class LandingPage extends Base {
   pageName = 'HOME';
   static async getInitialProps({ store, query, isServer, req, res }) {
