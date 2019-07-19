@@ -466,7 +466,7 @@ const HomePage = () => (
         </div>
         <div className={`${styles.breadcrums} ${styles['mt-10']} ${styles.pointer} bredcrums-part`}>
           <a href={`/SAU/${lang}/landing/fashion`}>
-            <span>{lang === 'en' ? 'Men\'s Clothing' : 'ملابس رجالية'} | {lang === 'en' ? 'Women\'s Clothing' : 'ملابس نسائية\نسائي'} | {lang === 'en' ? 'Kids Fashion' : 'ملابس أطفال\أطفال'} | {lang === 'en' ? 'Footwear' : 'أحذية'} | {lang === 'en' ? 'Jewellery' : 'مجوهرات'} | {lang === 'en' ? 'Eyewear' : 'نظارات'}</span>
+            <span>{lang === 'en' ? 'Men\'s Clothing' : 'ملابس رجالية'} &nbsp; | &nbsp; {lang === 'en' ? 'Women\'s Clothing' : 'ملابس نسائية\نسائي'} &nbsp; | &nbsp; {lang === 'en' ? 'Kids Fashion' : 'ملابس أطفال\أطفال'} &nbsp; | &nbsp; {lang === 'en' ? 'Footwear' : 'أحذية'} &nbsp; | &nbsp; {lang === 'en' ? 'Jewellery' : 'مجوهرات'} &nbsp; | &nbsp; {lang === 'en' ? 'Eyewear' : 'نظارات'}</span>
           </a>
         </div>
       </div>
@@ -544,7 +544,7 @@ const HomePage = () => (
         </div>
         <div className={`${styles.breadcrums} ${styles['mt-10']} ${styles.pointer} bredcrums-part`}>
           <a href={`/SAU/${lang}/landing/lifestyle`}>
-            <span> {lang === 'en' ? 'Bedsheets' : 'غطاء\شرشف السرير'} | {lang === 'en' ? 'Furniture' : 'الأثاث'} | {lang === 'en' ? 'Cushions' : 'وسائد'} | {lang === 'en' ? 'Wall Decor' : '  جدار ديكورت'} | {lang === 'en' ? 'Lights' : 'الأنوار'} | {lang === 'en' ? 'Living Room Furniture' : 'غرفة المعيشة الأثاث'} | {lang === 'en' ? 'Photo Frames' : 'إطارات صور'} </span>
+            <span> {lang === 'en' ? 'Bedsheets' : 'غطاء\شرشف السرير'} &nbsp; | &nbsp; {lang === 'en' ? 'Furniture' : 'الأثاث'} &nbsp;| &nbsp; {lang === 'en' ? 'Cushions' : 'وسائد'} &nbsp; | &nbsp; {lang === 'en' ? 'Wall Decor' : '  جدار ديكورت'} &nbsp; | &nbsp; {lang === 'en' ? 'Lights' : 'الأنوار'} &nbsp; | &nbsp; {lang === 'en' ? 'Living Room Furniture' : 'غرفة المعيشة الأثاث'} &nbsp; | &nbsp; {lang === 'en' ? 'Photo Frames' : 'إطارات صور'} </span>
           </a>
         </div>
       </div>
@@ -629,7 +629,7 @@ const HomePage = () => (
         </div>
         <div className={`${styles.breadcrums} ${styles['mt-10']} ${styles.pointer} bredcrums-part`}>
           <a href={`/SAU/${lang}/landing/electronics`}>
-            <span>{lang === 'en' ? 'Mobiles' : 'الجوالات'} | {lang === 'en' ? 'Laptops' : 'اللاب توبات'}  | {lang === 'en' ? 'Speakers' : 'مكبر الصوت'}  |  {lang === 'en' ? 'Cameras' : 'كاميرات'} | {lang === 'en' ? 'Microwave Ovens' : 'ميكرويفات '} | {lang === 'en' ? 'Smartwatches' : 'ساعات يد ذكية'} </span>
+            <span>{lang === 'en' ? 'Mobiles' : 'الجوالات'} &nbsp; | &nbsp; {lang === 'en' ? 'Laptops' : 'اللاب توبات'}  &nbsp; | &nbsp; {lang === 'en' ? 'Speakers' : 'مكبر الصوت'}  &nbsp; |  &nbsp; {lang === 'en' ? 'Cameras' : 'كاميرات'} &nbsp; | &nbsp; {lang === 'en' ? 'Microwave Ovens' : 'ميكرويفات '} &nbsp; | &nbsp; {lang === 'en' ? 'Smartwatches' : 'ساعات يد ذكية'} </span>
           </a>
         </div>
       </div>
