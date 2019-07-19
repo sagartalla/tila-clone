@@ -8,6 +8,7 @@ import lang from '../utils/language';
 import { languageDefinations } from '../utils/lang';
 import Layout from '../layout/main';
 import Landing from '../components/Landing';
+import LoaderBarContext from '../components/helpers/context/loaderBarContext';
 import Base, { baseActions } from './base';
 import { actionCreators } from '../store/landing';
 import { actionCreators as PersonalActionCreator } from '../store/cam/personalDetails';
@@ -20,12 +21,15 @@ const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styl
 
 
 const { SEO_CONTENT } = languageDefinations();
+import { actionCreators as PersonalActionCreator } from '../store/cam/personalDetails';
+import { actionCreators as MegamenuActionsCreators } from '../store/megamenu';
 class LandingPage extends Base {
   pageName = 'HOME';
   static async getInitialProps({ store, query, isServer, req, res }) {
     const { country, language } = query;
     const setCountry = country || 'SAU'
     const setLanguage = language || 'en'
+    store.dispatch(MegamenuActionsCreators.getMegamenu())
     if(!country || !language) {
       if(res) {
         res.writeHead(302, {
@@ -36,14 +40,13 @@ class LandingPage extends Base {
         Router.push(`/${setCountry}/${setLanguage}`)
       }
     }
-
     return { isServer };
   }
   componentDidMount() {
     this.props.getUserProfileInfo();
   }
   render() {
-    const { url } = this.props;
+    const { url, loaderProps } = this.props;
     return (
       <div>
         <Head>
@@ -64,12 +67,18 @@ class LandingPage extends Base {
         <Layout>
           <Landing query={url.query} />
         </Layout>
+        <LoaderBarContext.Provider value={loaderProps}>
+          <Layout>
+            <Landing query={url.query} />
+          </Layout>
+        </LoaderBarContext.Provider>
       </div>
     )
   }
 };
 const mapDispatchToProps = dispatch =>
   bindActionCreators({
-    getUserProfileInfo: PersonalActionCreator.getUserProfileInfo
+    getUserProfileInfo: PersonalActionCreator.getUserProfileInfo,
+    getMegamenu: MegamenuActionsCreators.getMegamenu,
   },dispatch)
 export default withRedux(makeStore, null, mapDispatchToProps)(LandingPage);

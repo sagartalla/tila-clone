@@ -26,10 +26,13 @@ const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styl
 
 const MiniCartBody = (props) => {
   const { showBlocker, increaseItemCnt, decreaseItemCnt, data, removeCartItem, editCartDetails, showCheckOutBtn, checkoutBtnHandler } = props;
-  const { items, error, total_offer_price, currency } = data;
+  const { items, error, total_offer_price, currency } = data;  
   const flag = data && items && items.length;
   const cnt = flag > 0 ? items.length : 0;
   const { CART_PAGE, DELIVERY_ADDR_PAGE } = languageDefinations();
+  if(data.ui.loading) {
+    return <div>Please Wait Fetching Cart Items</div>
+  }
   return (
     <div>
       <div className={`${styles['cart-container']} ${styles['mini-cart']} ${styles['border-t']}`}>
