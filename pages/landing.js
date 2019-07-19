@@ -26,7 +26,7 @@ class LandingPage extends Base {
   }
 
   render() {
-    const { url } = this.props;
+    const { url, loaderProps } = this.props;
     return (
       <div>
         <Head>
@@ -47,9 +47,11 @@ class LandingPage extends Base {
         </Head>
         <h1 className={`${styles.display_none}`}>{url.query.category}</h1>
         <h2 className={`${styles.display_none}`}>{SEO_CONTENT.LANDING_H2_CONTENT} {url.query.category} {SEO_CONTENT.LANDING_H2}</h2>
-        <Layout>
-          <Landing query={url.query} />
-        </Layout>
+        <LoaderBarContext.Provider value={loaderProps}>
+          <Layout>
+            <Landing query={url.query} />
+          </Layout>
+        </LoaderBarContext.Provider>
       </div>
     );
   }
