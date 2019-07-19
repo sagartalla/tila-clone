@@ -1,5 +1,6 @@
 import axios from 'axios';
 import constants from '../helper/constants';
+import orderReducer from '../cam/orders/reducer';
 
 const getOrderDetails = ({ orderId }) => axios.get(`${constants.ORDERS_API_URL}/api/v1/customer/order/details/${orderId}?include_state_times=true&include_payments=true&grouped=true&include_item_history=true&include_refunds=true&include_return_exchange=true`);
 
@@ -28,9 +29,11 @@ const getRefundOptions = (orderItemId, issueType) => axios.get(`${constants.ORDE
 const setExchangeOrder = params => axios.post(`${constants.ORDERS_API_URL}/api/v1/order/exchange`, params);
 
 const track = ({ event, orderData }) => {
-  window.dataLayer.push({ event: 'purchase' });
+  switch (event) {
+    case 'Order Placed':
+orderData.payments[0].trasactionId = orderData.payment_id;
   window.appEventData.push({
-    event,
+    event: event,
     transaction: {
       transactionID: orderData.payment_id,
       total: {
@@ -44,16 +47,42 @@ const track = ({ event, orderData }) => {
         },
       },
       // Collection of Payment Objects
-      payment: {
-        paymentMethod: orderData.payments.map(payment => payment.payment_mode).join(','),
-        paymentAmount: orderData.payments.map(payment => payment.amount).join(','),
-      },
+      payment:orderData.payments,
       // Collection of Item Objects
-      item: orderData.order_items.map(item => item.variant_info.product_id),
+      item: orderData.order_items,
     },
   });
-};
 
+
+      break;
+    case 'CANCEL_ORDER' :
+
+    window.appEventData.push({
+      event: event,
+      product: [
+        {
+          productInfo: {
+            productID: orderData,
+          },
+        },
+      ],
+    });
+      break;
+
+      case 'CANCEL_REASON' :
+      window.appEventData.push({
+        event: event,
+        reason:
+          {
+              cancelReason: orderData,
+            },
+      });
+       break;
+      default :
+      break;
+  }
+}
+      
 const getTrackingDetails = trackingId => axios.get(`${constants.LOGISTICS_URL}/api/shipment/v1/track/${trackingId}`);
 
 const getInvoice = orderId => axios.get(`${constants.ORDERS_API_URL}/api/v1/customer/order/${orderId}/invoice`);
