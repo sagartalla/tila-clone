@@ -40,7 +40,7 @@ class Warranty extends React.Component {
 
   render() {
     const warranty = this.props.warranty || {};
-    const warranty_display = `${warranty.duration} ${warranty.duration_unit} ${PDP_PAGE.WARRANTY}`;
+    const warranty_display = `${warranty.duration} ${_.startCase(_.toLower(warranty.duration_unit))} ${PDP_PAGE.WARRANTY}`;
     const warranty_time = warranty.duration;
     return (
       <div className={`${styles['flex-center']} ${styles['warranty-part']}  ${styles.relative} ${styles.pointer}`}>

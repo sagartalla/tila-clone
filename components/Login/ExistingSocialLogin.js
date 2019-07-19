@@ -57,15 +57,17 @@ class ExistingSocialLogin extends React.Component {
     return (
       <div className={`${styles['login-form']} ${styles.flex} ${styles['flex-colum']} ${styles['justify-between']}`}>
         <div>
-          <div className={`${styles.flex}`}>
+          <div>
             <h1 className={`${styles['fs-18']} ${styles.fontW600} ${styles['light-gry-clr']} ${styles['m-0']}`}>{LOGIN_PAGE.SOCIAL_LOGIN_WELCOME}</h1>
-            <div className={`${styles['ml-20']} ${styles['flex-center']} ${styles['fs-12']} ${styles['pl-10']} ${styles['pr-10']} ${styles.fontW600} ${styles['edit-button']} ${styles['border-radius2']} ${styles.pointer}`} onClick={this.goToPreviousPage}>{LOGIN_PAGE.EDIT}</div>
           </div>
-          <div className={`${styles['fs-12']} ${styles['light-gry-clr']}`}>{activeEmailId}</div>
+          <div className={`${styles.flex} ${styles['mt-5']}`}>
+            <div className={`${styles['fs-12']} ${styles['pr-10']} ${styles['edit-button']} ${styles['light-gry-clr']}`}>{activeEmailId}</div>
+            <div className={`${styles['flex-center']} ${styles['fs-12']} ${styles['pl-10']} ${styles['text-blue']} ${styles['border-radius2']} ${styles.pointer}`} onClick={this.goToPreviousPage}>{LOGIN_PAGE.NOT_YOU}</div>
+          </div>
         </div>
         <div>
-        <p className={`${styles['fs-12']} ${styles['register-policy-gray']}`}>{LOGIN_PAGE.SOCIAL_LOGIN_CONTINUE_MESSAGE}</p>
-        <Row className={`${styles['flex-colum']} ${styles['justify-center']}`}>
+          <p className={`${styles['fs-12']} ${styles['register-policy-gray']}`}>{LOGIN_PAGE.SOCIAL_LOGIN_CONTINUE_MESSAGE}</p>
+          <Row className={`${styles['flex-colum']} ${styles['justify-center']}`}>
           <Col md={12} xs={12} sm={12}>
             <SocialLogin>
               {([handleSocialLogin]) => (
@@ -92,7 +94,7 @@ class ExistingSocialLogin extends React.Component {
         </Row>
         </div>
         {/* <input className={`${styles['mt-50']} ${styles['sign-in-btn']} ${styles.fontW700} ${styles['text-uppercase']}`} type="button" value={LOGIN_PAGE.LOGIN} /> */}
-        <span className={`${styles['m-20']} ${styles['t-c']} ${styles['fs-12']} ${styles['register-policy-gray']}`}>{LOGIN_PAGE.BY_LOGIN_I_AGREE_TO_TERMS } <span className={`${styles['text-blue']} ${styles.fontW600}`}><a href="/SAU/en/policy/tc" target="_blank">{LOGIN_PAGE.T_AND_C}</a>, <a href="/SAU/en/policy/pp" target="_blank">{LOGIN_PAGE.PRIVACY}</a> {LOGIN_PAGE.AND} <a href="/SAU/en/policy/pp" target="_blank">{LOGIN_PAGE.COOKIE_POLICY}</a></span></span>
+        <span className={`${styles['m-20']} ${styles['t-c']} ${styles['fs-12']} ${styles['register-policy-gray']}`}>{LOGIN_PAGE.BY_LOGIN_I_AGREE_TO_TERMS } <span className={`${styles['text-blue']} ${styles.fontW600}`}><a href="/SAU/en/policy/tc" target="_blank">{LOGIN_PAGE.T_AND_C}</a></span>, <span className={`${styles['text-blue']} ${styles.fontW600}`}><a href="/SAU/en/policy/pp" target="_blank">{LOGIN_PAGE.PRIVACY}</a></span> {LOGIN_PAGE.AND} <span className={`${styles['text-blue']} ${styles.fontW600}`}><a href="/SAU/en/policy/pp" target="_blank">{LOGIN_PAGE.COOKIE_POLICY}</a></span></span>
       </div>
     );
   }

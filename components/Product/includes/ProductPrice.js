@@ -55,7 +55,7 @@ const ProductPrice = ({
               <div className={`${styles['flex']} ${styles['align-baseline']} ${styles['relative']} ${styles['ml-10']}`}>
                 {offerPricing && offerPricing.showPrise && offerPricing.showPrise.display_value !== offerPricing && offerPricing.strickedPrice && offerPricing.strickedPrice.display_value && Math.floor(offerPricing && offerPricing.discount) > 5 &&
                 <span className={`${styles['fs-12']} ${styles['pr-5']} ${styles['offers-applied']} `}>{`${Math.floor(offerPricing && offerPricing.discount && offerPricing.discount)}% ${PDP_PAGE.OFF}`}</span>}
-                <span onMouseOver={() => toggleTooltip(true)} onMouseLeave={() => toggleTooltip(false)}  className={`${styles.relative} ${styles['checkout-quat']} ${styles['fs-12']} ${styles['flex-center']} ${styles['justify-around']}`}>
+                <span onMouseOver={() => toggleTooltip(true)} onMouseLeave={() => toggleTooltip(false)}  className={`${styles.relative} ${styles['checkout-quat']} ${styles['bottom-pos']} ${styles['fs-12']} ${styles['flex-center']} ${styles['justify-around']}`}>
                   <span
                     className={`${styles['fs-12']} ${styles['flex-center']} ${styles['justify-center']}`}>
                     {/* <SVGCompoent clsName={`${styles['secure-icon']} ${styles['mr-10']} ${styles['pointer']}`} src="icons/common-icon/trust-secure" /> */}
@@ -160,7 +160,7 @@ const ProductPrice = ({
       <div className={`${styles['flx-space-bw']} ${styles['align-baseline']}`}>
         {!userDetails.isLoggedIn &&
         <div className={`${styles['mb-0']} ${styles['fp-input']} ${styles['notifyme-input']} ${styles['pb-10']}`}>
-          <input onChange={onChangeField} name="notify" type="text" value={notifyEmail} required />
+          <input onChange={onChangeField} name="notify" type="text" value={notifyEmail || ''} required />
           <label>{PDP_PAGE.GET_NOTIFIED}</label>
           {emailErr &&
             <span className={styles['error-msg']}>{emailErr}</span>

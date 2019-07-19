@@ -11,7 +11,7 @@ const { API_TEXT } = languageDefinations();
 
 const cookies = new Cookies();
 
-const getUserInfo = ({ initiateEmailVerification }) => axios.post(`${constants.CMS_API_URL}/api/v1/user/info?initiateEmailVerification=${initiateEmailVerification}`);
+const getUserInfo = ({ initiateEmailVerification }) => axios.post(`${constants.CMS_API_URL}/api/v1/user/info?initiateEmailVerification=${initiateEmailVerification ? initiateEmailVerification : false}`);
 
 const track = (event, status) => {
   window.appEventData.push({
@@ -34,7 +34,6 @@ const userLogin = params =>
     type: 'RT',
     client_type: 'WEB',
   })).then(({ data, status }) => {
-    console.log('api', data);
     // cart merge
     if (status === 200 || status === 202) {
       const { username } = params.metadata;
