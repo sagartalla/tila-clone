@@ -210,7 +210,7 @@ class ActionBar extends Component {
             }
           </NoSSR>
         </div>
-        <div className={`${styles['action-item']} ${styles['wishlist-inn']} ${styles['pt-10']} ${styles['pb-10']} ${styles['mr-15']} ${styles['ml-15']} ${styles['flex-center']} ${styles['justify-center']}`}>
+        <div className={`${styles['action-item']} ${styles['wishlist-inn']} ${styles['pt-10']} ${styles['pb-10']} ${styles['pr-15']} ${styles['pl-15']} ${styles['flex-center']} ${styles['justify-center']}`}>
           <Dropdown id="cart-toggle" className={`${styles['round-shape']} ${styles['flex-center']} ${styles['justify-center']}`}>
             <Dropdown.Toggle style={{ display: 'none' }} />
             <Link route={`/${country}/${language}/cam/wishlist`}>
@@ -230,7 +230,7 @@ class ActionBar extends Component {
             </Dropdown.Menu>
           </Dropdown>
         </div>
-        <div className={`${styles['action-item']} ${styles['cart-inn']} ${styles['pt-10']} ${styles['pb-10']} ${styles['flex-center']} ${styles['justify-center']} ${styles['mr-15']} ${styles['ml-15']}`}>
+        <div className={`${styles['action-item']} ${styles['cart-inn']} ${styles['pt-10']} ${styles['pb-10']} ${styles['flex-center']} ${styles['justify-center']} ${styles['pr-15']} ${styles['pl-15']}`}>
           <Dropdown id="cart-toggle" className={`${styles['round-shape']} ${styles['flex-center']} ${styles['justify-center']}`}>
             <Dropdown.Toggle style={{ display: 'none' }} />
             <Link route={`/${country}/${language}/cart`}>
