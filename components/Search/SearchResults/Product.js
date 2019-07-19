@@ -210,7 +210,7 @@ class Product extends Component {
     const { selectedIndex } = this.state
     const { row, itemNum, showQuickView, variants } = this.props
     let vId = (variants.length > 0 && variants[selectedIndex].variantId)
-    showQuickView(itemNum,row, vId)
+    showQuickView(itemNum, row, vId)
   }
   addToCompare(checked) {
     const {
@@ -280,7 +280,7 @@ class Product extends Component {
         <span
           className={`${styles['fs-16']} ${styles.fontW600} ${styles['black-color']}`}
         >
-         <ShowPriceFormat showPrice={variants[selectedIndex].sellingPrice[0].toString()} strickedPrice={variants[selectedIndex].mrp[0].toString()}/>
+          <ShowPriceFormat showPrice={variants[selectedIndex].sellingPrice[0].toString()} strickedPrice={variants[selectedIndex].mrp[0].toString()} />
         </span>
         {discountValue > 5 &&
           <React.Fragment>
@@ -304,15 +304,14 @@ class Product extends Component {
     return (
       <Fragment>
         <div
-          className=
-            {
-            `${styles['product-items-main']} ${styles.relative} ${styles['p-0']} ${selectedProduct ? styles['active-product'] : ''}`}
-            onClick = {() => this.routeChange(productId,variantId,catalogId,itemtype,index,pageNum)}>
+          className={`${styles['product-items-main']} ${styles.relative} ${styles['p-0']} ${selectedProduct ? styles['active-product'] : ''}`}
+          onClick={() => this.routeChange(productId, variantId, catalogId, itemtype, index, pageNum)}
+        >
           <Link route={`/${country}/${language}/product?productId=${productId}${variants.length > 0 && variants[selectedIndex].variantId ? `&variantId=${variants[selectedIndex].variantId}` : ''}&catalogId=${catalogId}&itemType=${itemtype}`}>
             <a target="_blank">
               <div className={`${styles['product-items']}`} onMouseEnter={this.setImg} onMouseLeave={this.leaveImg}>
-                {
-                  showLoader ? <div className={styles['loader-div']}>
+                {showLoader ?
+                  <div className={styles['loader-div']}>
                     <SVGCompoent clsName={`${styles['loader-styl']}`} src="icons/common-icon/circleLoader" />
                   </div> : null
                 }
@@ -324,27 +323,27 @@ class Product extends Component {
                     </a> */}
                   </div>
                 }
-                <div className={`${styles['img-cont']} ${styles['border-radius4']} ${styles['relative']}`}>
-                      <div className={`${styles['image-div']} srp-slider`}>
-                        {src ?
-                            <img src={src} alt="imageURL" />
-                          :
-                            <Slider
-                              className={`${styles['ht-100per']}`}
-                              autoplay
-                              arrows={false}
-                              dots
-                              autoplaySpeed={750}
-                              pauseOnHover={false}
-                            >
-                              {media && media.slice(0, 5).map((image,index) => (
-                                <div>
-                                  <img src={`${constants.mediaDomain}/${image}`} alt="imageURL" key={index} />
-                                </div>
-                              ))}
-                            </Slider>
-                        }
-                      </div>
+                <div className={`${styles['img-cont']} ${styles['border-radius4']} ${styles.relative}`}>
+                  <div className={`${styles['image-div']} srp-slider`}>
+                    {src ?
+                      <img src={src} alt="imageURL" />
+                      :
+                      <Slider
+                        className={`${styles['ht-100per']}`}
+                        autoplay
+                        arrows={false}
+                        dots
+                        autoplaySpeed={750}
+                        pauseOnHover={false}
+                      >
+                        {media && media.slice(0, 5).map((image, index) => (
+                          <div>
+                            <img src={`${constants.mediaDomain}/${image}`} alt="imageURL" key={index} />
+                          </div>
+                        ))}
+                      </Slider>
+                    }
+                  </div>
                   {/* <span className={`${styles['variants-main']}`}></span> */}
                   {/* <span className={styles['full-and-globe-main']}>
                     <span className={`${styles['fullfill-main']} ${styles['flex-center']}`}>
@@ -367,9 +366,9 @@ class Product extends Component {
                   }
                 </div>
                 <div className={styles['desc-cont']}>
-                  <div className={`${styles['pb-20']} ${styles['pl-20']} ${styles['pr-20']} ${styles['flex']} ${styles['flex-colum']}`}>
+                  <div className={`${styles['pb-20']} ${styles['pl-20']} ${styles['pr-20']} ${styles.flex} ${styles['flex-colum']}`}>
                     <h5 className={`${styles['prdt-name']} ${styles['pt-15']} ${styles['pb-5']}  ${styles['m-0']}`}>
-                      <span className={`${styles['fontW600']} ${styles['black-color']}`}>{brand}</span> <span className={`${styles['thick-gry-clr']} ${styles['fontW300']}`}>{displayName.replace(brand, '').substr(0, 55).trim()}</span>
+                      <span className={`${styles.fontW600} ${styles['black-color']}`}>{brand}</span> <span className={`${styles['thick-gry-clr']} ${styles.fontW300}`}>{displayName.replace(brand, '').substr(0, 55).trim()}</span>
                     </h5>
                     <span>
                       <span className={`${styles['pr-5']}`}>{variants.length > 0 && variants[selectedIndex].sellingPrice && getPriceAndOffer()}</span>
@@ -377,12 +376,12 @@ class Product extends Component {
                     </span>
                   </div>
                 </div>
-                <div className={`${selectedProduct ? `${styles['display-buttons']} ${styles['active-product']}` : ''}  ${styles['hover-show-date']} ${styles['pb-10']} ${styles['relative']}`}>
+                <div className={`${selectedProduct ? `${styles['display-buttons']} ${styles['active-product']}` : ''}  ${styles['hover-show-date']} ${styles['pb-10']} ${styles.relative}`}>
                   {
                     variants.length > 0 ?
-                      <div className={`${styles['flex']} ${styles['justify-around']} ${styles['quick-view']} ${styles['border-radius4']}`}>
+                      <div className={`${styles.flex} ${styles['justify-around']} ${styles['quick-view']} ${styles['border-radius4']}`}>
                         <Button
-                          className={`${styles['flex']} ${styles['add-to-crt']} ${styles['fontW600']} ${styles['fs-10']} ${styles['text-uppercase']}`}
+                          className={`${styles.flex} ${styles['add-to-crt']} ${styles.fontW600} ${styles['fs-10']} ${styles['text-uppercase']}`}
                           onClick={this.showVariants('ADD_TO_CART')}
                           disabled={btnLoading}
                           btnText={PDP_PAGE.ADD_TO_CART}
@@ -390,7 +389,7 @@ class Product extends Component {
                           btnLoading={variants[selectedIndex].listingId && cartButtonLoaders[variants[selectedIndex].listingId[0]]}
                         />
                         <Button
-                          className={`${styles['flex-center']} ${styles['buy-now-btn']} ${styles['fontW600']} ${styles['fs-10']} ${styles['text-uppercase']}`}
+                          className={`${styles['flex-center']} ${styles['buy-now-btn']} ${styles.fontW600} ${styles['fs-10']} ${styles['text-uppercase']}`}
                           onClick={this.showVariants('BUY_NOW')}
                           btnText={PDP_PAGE.BUY_NOW}
                           showImage="icons/cart/buy-icon"
@@ -409,7 +408,7 @@ class Product extends Component {
                       // </div>
                   }
                   <div className={`${styles['wish-list-part']} ${styles['flx-space-bw']}`}>
-                    <span className={styles['flex']}>
+                    <span className={styles.flex}>
                       <a className={styles['flex-center']} onClick={this.addToWishlist}>
                         <SVGCompoent clsName={`${styles['wish-list']}`} src={addedToWishlist ? "icons/wish-list/wish-list-icon-red" : "icons/wish-list/wish-list-icon"} />
                         <span className={`${styles['pl-5']} ${styles['fs-12']}`} disabled={addedToWishlist}>{addedToWishlist ? `${PDP_PAGE.ADDED_TO_WISHLIST}` : `${PDP_PAGE.ADD_TO_WISHLIST}`}</span>
@@ -417,7 +416,7 @@ class Product extends Component {
                     </span>
                     {(flags && flags.comparable) &&
                       <div
-                        className={`${styles['checkbox-material']} ${styles['flex']} ${styles['add-to-compare']}`}
+                        className={`${styles['checkbox-material']} ${styles.flex} ${styles['add-to-compare']}`}
                         onClick={this.preventDefaultClick}
                       >
                         <input
@@ -436,7 +435,7 @@ class Product extends Component {
                       getPriceAndOffer()}
                     </span>
                     {/* <span className={`${styles['fs-12']} ${styles['black-color']}`}>{currency}</span> */}
-                    {/*<div className={`${styles['flex']} ${styles['pt-5']}`}>
+                    {/* <div className={`${styles['flex']} ${styles['pt-5']}`}>
                       <span className={styles['flex']}>
                         <SVGCompoent clsName={`${styles['star-raing']}`} src="icons/common-icon/star-full-yellow" />
                         <SVGCompoent clsName={`${styles['star-raing']}`} src="icons/common-icon/star-full-yellow" />
@@ -445,7 +444,7 @@ class Product extends Component {
                         <SVGCompoent clsName={`${styles['star-raing']}`} src="icons/common-icon/star-full-yellow" />
                       </span>
                       <span className={`${styles['label-gry-clr']} ${styles['pl-5']}`}>(153) </span>
-                    </div>*/}
+                    </div> */}
                   </div>
                   {/* <div className={styles['desc-cont']}>
                 <div className={`${styles['prdt-name']} ${styles['fs-12']} ${styles['pt-15']} ${styles['pb-5']}`}>
