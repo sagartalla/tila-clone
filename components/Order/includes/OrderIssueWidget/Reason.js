@@ -177,10 +177,6 @@ class Reason extends Component {
     })
   }
   selectReason(e) {
-   this.props.track({
-      event: 'CANCEL_REASON',
-      orderData: e.target.value,
-    });
     this.setState({
       reason: e.target.value,
       showError: false,
@@ -372,8 +368,7 @@ const mapDispatchToProps = dispatch =>
       setExchangeOrder: actionCreators.setExchangeOrder,
       setAddressData: actionCreators.setAddressData,
       refundOptions:actionCreators.getRefundOptions,
-      getOrderDetails:actionCreators.getOrderDetails,
-      track:actionCreators.track
+      getOrderDetails:actionCreators.getOrderDetails
     },
     dispatch,
   );
