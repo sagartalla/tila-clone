@@ -161,7 +161,7 @@ class Search extends Component {
           </Col>
           <Col md={10} className={`${styles['search-results']} ${styles['fl-rt']} ${styles['pr-0']}`}>
             <SearchDetailsBar optionalParams={optionalParams} />
-            <SearchResults search={query.search} />
+            <SearchResults search={query.q} />
           </Col>
         </Grid>
         <CompareWidget />

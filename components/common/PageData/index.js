@@ -32,7 +32,7 @@ const tie = [{
 }, {
   img: '/static/img/landing-home/storage-devices.png',
   title: 'Storage Devices',
-  link: `/${country}/${lang}/srp?search=Storage&&isListed=false`,
+  link: `/${country}/${lang}/search?q=Storage&&isListed=false`,
 }, {
   img: '/static/img/landing-home/cameras.png',
   title: 'Cameras',
@@ -48,7 +48,7 @@ const tie = [{
 }, {
   img: '/static/img/landing-home/storage-devices.png',
   title: 'Storage Devices',
-  link: `/${country}/${lang}/srp?search=Storage&&isListed=false`,
+  link: `/${country}/${lang}/search?q=Storage&&isListed=false`,
 }];
 
 const hal = [{
@@ -62,7 +62,7 @@ const hal = [{
 }, {
   img: '/static/img/landing-home/jewellery.png',
   title: 'Jewellery',
-  link: `/${country}/${lang}/srp?search=Jewellery&&isListed=false`,
+  link: `/${country}/${lang}/search?q=Jewellery&&isListed=false`,
 }, {
   img: '/static/img/landing-home/fashion-acessories.png',
   title: 'Fashion Accessories',
@@ -78,7 +78,7 @@ const hal = [{
 }, {
   img: '/static/img/landing-home/jewellery.png',
   title: 'Jewellery',
-  link: `/${country}/${lang}/srp?search=Jewellery&&isListed=false`,
+  link: `/${country}/${lang}/search?q=Jewellery&&isListed=false`,
 }];
 
 class PageData extends React.Component {

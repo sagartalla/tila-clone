@@ -228,18 +228,13 @@ const optionParams = (store) => {
 };
 /* eslint-disable */
 const getFacetfilters = store => (queryObject) => {
-console.log('queryObject', queryObject);
   const facetFilters = {};
   const res = [];
   const facetFiltersCopyWithNames = {};
   const storeValue = store && store.searchReducer && store.searchReducer.data && store.searchReducer.data.facetResponse && store.searchReducer.data.facetResponse.facets;
-  // const newObject = Object.keys(queryObject).length > 0 ?
-  //   storeValue.filter(facetVal => Object.keys(queryObject).includes(facetVal.attributeName))
-  //   : [];
-    
     storeValue && Object.keys(queryObject).forEach(attributeName => {
       const filtered = storeValue.find(facet => facet.attributeName === attributeName);
-      filtered.Values.forEach(param => {
+      filtered && filtered.Values && filtered.Values.length > 0 && filtered.Values.forEach(param => {
         if (queryObject[attributeName].includes(param.attributeValue)) {
           res.push(param);
           if (!facetFilters[attributeName] || !facetFiltersCopyWithNames[attributeName]) {
@@ -251,12 +246,6 @@ console.log('queryObject', queryObject);
         }
       })
     })
-  // const abc = Object.keys(queryObject).map(k => {
-  //   if (facetFilters[k]) {
-  //     facetFilters[k] = [];
-  //   }
-  //   newObject.find(v => v.attributeName === k).
-  // })
   // store && store.searchReducer && store.searchReducer.data && store.searchReducer.data.facetResponse && store.searchReducer.data.facetResponse.facets.map(storeValue => {
   //   Object.keys(queryObject).map((queryKey, index) => {
   //     if (storeValue.attributeName === queryKey) {
@@ -275,7 +264,6 @@ console.log('queryObject', queryObject);
   //     }
   //   })
   // })
-  console.log('facetFilters123', facetFilters, '=====>', facetFiltersCopyWithNames, 'queryObject', queryObject,  'sdfsdfds', res);
   // const facetFilters = _.reduce(queryObject, (facetFilters, fitlerTypeValues, fitlerTypeKey) => {
   //   facetFilters[fitlerTypeKey] = fitlerTypeValues.map(fitlerTypeValue => fitlerTypeValue.param);
   //   return facetFilters;

@@ -17,8 +17,7 @@ const cookies = new Cookies();
 
 class SearchPage extends Base {
   static async getInitialProps({ store, isServer, query, req }) {
-    debugger;
-    const { country, language, q, search, facets, category, subCategory, isListed, disableSpellCheck, sid } = query
+    const { country, language, q, facets, category, subCategory, isListed, disableSpellCheck, sid } = query
     const categoryTree = query.categoryTree === 'true'; //TODO need better way to identify category tree
     const categoryFacet = query.categoryFacet === 'true';
     //TODO SF-37 better handling of country
@@ -40,7 +39,7 @@ class SearchPage extends Base {
       categoryFacet,
       country: country || undefined,
       pageSize: 25,
-      query: q || search,
+      query: q,
       language: language || 'en',
       facetFilters,
       facetFiltersCopyWithNames,
@@ -66,6 +65,7 @@ class SearchPage extends Base {
   pageName = 'SEARCH';
 
   render() {
+    console.log('pagessearch', this.props.url.query);
     return (
       <div>
         <SearchContext.Provider value="search">

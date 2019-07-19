@@ -42,6 +42,7 @@ class Search extends Component {
     const {
       query, isCategoryTree, choosenCategoryName,
     } = props;
+    console.log('hgfhgfhgf', query);
     let finalQuery = query || (isCategoryTree ? choosenCategoryName : '');
     finalQuery = finalQuery.split('-').join(' ');
     this.state = {
@@ -173,6 +174,7 @@ class Search extends Component {
     const {
       suggestions, openImagesearch, query, autoSearchValue, searchInput,
     } = this.state;
+    console.log('query123', query);
     return (
       <div className={styles['search-wrapper']}>
         <form onSubmit={this.submitQuery}>
