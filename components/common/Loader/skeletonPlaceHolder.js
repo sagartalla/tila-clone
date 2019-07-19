@@ -207,7 +207,7 @@ export const productPlaceHolder = (
 
 export const cartPlaceHolder = (
   <div className={`${styles.flex} ${styles.relative}`} style={{
-      position: 'fixed',
+      //position: 'fixed',
       zIndex: 26,
       width: '100vw',
       height: '100vh',
@@ -447,7 +447,7 @@ export const camOrdersHolder = (
 export const homePageHolder = (
   <div style={{ overflow: 'hidden', maxHeight: '800px' }}>
     {/* <div className={`${styles.container}`} /> */}
-    
+
     <div className={`${styles['p-0']} col-md-12 col-sm-12`}>
       <div className={`${styles['grid-cont']} ${styles['mt-20']} ${styles['flex-wrp']} ${styles.flx} result-box`} >
         <div style={{ height: '200px' }} className={`${styles.couponHeader} ${styles['p-25']}`}>
@@ -470,4 +470,3 @@ export const homePageHolder = (
     </div>
   </div>
 );
-
