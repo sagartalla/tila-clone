@@ -141,15 +141,17 @@ class ContinueLogin extends Component {
     if (/^[0-9]*$/gm.test(target.value)) {    
       this.setState({
         mobile_no: target.value,
-      }, () => {
-        const validation = this.validations.validateOnBlur({ [target.name]: target.value });
-        this.setState({ validation });
       });
     } else {
       this.setState({
         mobile_no: '',
       });
     }
+  }
+
+  handleValidation({ target }) {
+    const validation = this.validations.validateOnBlur({ [target.name]: target.value });
+    this.setState({ validation });
   }
 
   handleInputChange = val => (e) => {
@@ -288,6 +290,7 @@ class ContinueLogin extends Component {
                 autoComplete="off"
                 value={mobile_no}
                 onChange={this.handleMobileNumber}
+                onBlur={this.handleValidation}
                 className={`${styles['mobile-input']} ${styles['fs-14']} ${styles['ml-10']}`}
               />
             </div>
