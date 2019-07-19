@@ -14,10 +14,10 @@ function inactiveMonitor() {
     function refresh() {
       const { refresh_token } =  cookies.get('auth') || {};
       if(!refresh_token) return;
-      alert('inactive after login');
       return axios.post(`/api/refresh`, {
         'auth_version': 'V1',
-        'refresh_token': refresh_token
+        'refresh_token': refresh_token,
+        'user_inactive': true,
       });
     }
 
