@@ -17,7 +17,8 @@ import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './index_en.styl';
 import styles_ar from './index_ar.styl';
 import Theme from '../helpers/context/theme';
-
+import LoadingBar from '../common/Loader/skeletonLoader';
+import LoaderBarContext from '../helpers/context/loaderBarContext';
 const allStyles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const config = getConfig();
@@ -53,6 +54,7 @@ const getURl = (page) => {
           case 'stage':
           case 'staging':
           case 'preprod':
+          default:
               return {
                 JS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/fashion/preprod/index.js?r=' + random,
                 CSS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/fashion/preprod/style.css?r=' + random,
@@ -64,6 +66,7 @@ const getURl = (page) => {
           case 'stage':
           case 'staging':
           case 'preprod':
+          default:
               return {
                 JS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/electronics/preprod/index.js?r=' + random,
                 CSS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/electronics/preprod/style.css?r=' + random,
@@ -75,6 +78,7 @@ const getURl = (page) => {
           case 'stage':
           case 'staging':
           case 'preprod':
+          default:
               return {
                 JS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/lifestyle/preprod/index.js?r=' + random,
                 CSS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/lifestyle/preprod/style.css?r=' + random,
@@ -86,6 +90,7 @@ const getURl = (page) => {
           case 'stage':
           case 'staging':
           case 'preprod':
+          default:
               return {
                 JS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/homepage/preprod/index.js?r=' + random,
                 CSS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/homepage/preprod/style.css?r=' + random,
@@ -178,13 +183,24 @@ class Landing extends Component {
     const { query } = this.props;
     return (
       <Theme.Provider value={query && query.category && query.category.toLowerCase()}>
-        <Fragment>
-        <HeaderBar query={query} />
-        {
-          _.map(this.state.children, (child, index) => React.createElement(child.name, _.merge(child.props, {key: index })))
-        }
-        <FooterBar />
-      </Fragment>
+        <LoaderBarContext.Consumer>
+          {
+            (context) => (
+              <Fragment>
+                <HeaderBar query={query} />
+                  <LoadingBar loadComponent={context.loadComponent}
+                    pathname={context.pathname}>
+                    {
+                      _.map(this.state.children, (child, index) => React.createElement(child.name, _.merge(child.props, {key: index })))
+                    }
+                    <FooterBar />
+                  </LoadingBar>
+
+            </Fragment>
+            )
+          }
+        </LoaderBarContext.Consumer>
+
       </Theme.Provider>
     );
   }

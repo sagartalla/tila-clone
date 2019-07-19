@@ -25,6 +25,7 @@ const UserData = ({
   getUserProfileInfo,
   deactivateUserProfile,
   useractive,
+  getUserInfo,
 }) => {
   if (!useractive) {
     window.location.href = '/';

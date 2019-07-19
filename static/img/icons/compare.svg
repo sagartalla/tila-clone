@@ -1,9 +1,3 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="17" height="21" viewBox="0 0 17 21">
-    <g fill="none" fill-rule="evenodd" transform="translate(1 .5)">
-        <rect width="14.733" height="14.783" y="2.239" stroke="#FFF" rx="1"/>
-        <path fill="#FFF" fill-rule="nonzero" stroke="#FFF" stroke-width=".5" d="M7.367 17.022V2.239H.442A.443.443 0 0 0 0 2.683v13.895c0 .245.198.444.442.444h6.925z"/>
-        <path stroke="#FFF" stroke-dasharray="0.7526400211906434,0.2508800167989733,0.2508800167989733" stroke-linecap="square" stroke-width=".5" d="M7.367 0v20"/>
-        <path stroke="#2AC497" stroke-dasharray=".502" stroke-linecap="square" stroke-width=".5" d="M1 16.5h5.157"/>
-        <path stroke="#FFF" stroke-dasharray=".502" stroke-linecap="square" stroke-width=".5" d="M8 3.5h5.157"/>
-    </g>
+    <path fill="#FFF" fill-rule="nonzero" d="M8.125 19.875c0 .345-.28.625-.625.625H6.25a.625.625 0 0 1-.625-.625v-1.25h-3.75A1.875 1.875 0 0 1 0 16.75V4.25c0-1.036.84-1.875 1.875-1.875h3.75v-1.25c0-.345.28-.625.625-.625H7.5c.345 0 .625.28.625.625v18.75zm2.5-3.75a.625.625 0 0 0-.625.625V18c0 .345.28.625.625.625h3.75c1.036 0 1.875-.84 1.875-1.875V4.25c0-1.036-.84-1.875-1.875-1.875h-3.75A.625.625 0 0 0 10 3v1.25c0 .345.28.625.625.625h3.125v11.25h-3.125z"/>
 </svg>
