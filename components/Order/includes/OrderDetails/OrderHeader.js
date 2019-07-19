@@ -220,8 +220,8 @@ class OrderHeader extends Component {
                     <span
                       onMouseOver={this.showToolTip}
                       onMouseLeave={this.hideToolTip}
-                      className={`${styles.relative} ${styles['checkout-quat']} ${styles['fs-12']} ${styles['flex-center']} ${styles['justify-around']} ${lang === 'en' ? '' : styles['flip-questionmark']}`}>
-                      {'?'}
+                      className={`${styles.relative} ${styles['checkout-quat']} ${styles['fs-12']} ${styles['flex-center']} ${styles['justify-around']}`}>
+                      <span className={`${lang === 'en' ? '' : styles['flip-questionmark']}`}>?</span>
                       {
                       showToolTip ?
                         <div className={styles['tool-tip']}>
