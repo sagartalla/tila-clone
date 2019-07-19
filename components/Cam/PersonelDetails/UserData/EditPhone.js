@@ -85,6 +85,7 @@ class EditPhone extends React.Component {
     this.fetchOtp = this.fetchOtp.bind(this)
     this.handlePhoneNumberChange = this.handlePhoneNumberChange.bind(this)
     this.handleOTPChange = this.handleOTPChange.bind(this)
+    this.handleValidation = this.handleValidation.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -121,43 +122,40 @@ class EditPhone extends React.Component {
     return false
   }
   mobileWithZeroValidation = (fieldValue) => {
-    if (fieldValue === '' || fieldValue === undefined) {
-      return false;
-    } else if (Number(fieldValue[0]) === 0 && Number(fieldValue[1]) === 5 && fieldValue.length === 10) {
+    if (Number(fieldValue[0]) === 0 && Number(fieldValue[1]) === 5 && fieldValue.length === 10) {
       return false;
     } else if (Number(fieldValue[0]) !== 0) {
       return false;
     } return true;
   }
   mobileValidation = (fieldValue) => {
-    if (fieldValue === '' || fieldValue === undefined) {
-      return false;
-    } else if (Number(fieldValue[0]) === 5 && fieldValue.length === 9) {
+    if (Number(fieldValue[0]) === 5 && fieldValue.length === 9) {
       return false;
     } else if (Number(fieldValue[0]) === 0) {
       return false;
     } return true;
   }
   fetchOtp() {
-    const { countryCode, phoneNumber, otpCount, mobile_country_code } = this.state
+    const { countryCode, phoneNumber, otpCount, mobile_country_code, validation } = this.state
     // let validation = this.validations.validate(this.state)
     // this.setState({ validation })
-    if (phoneNumber && phoneNumber.length > 0) {
-      const params = {
-        mobile_country_code,
-        mobile_no: phoneNumber,
-      };
-      this.setState({
-        otpCount: otpCount + 1,
-      }, () => this.props.otpUserUpdate(params));
-    }else{
-      toast(
+    if (validation.isValid) {
+      if (phoneNumber && phoneNumber.length > 0) {
+        const params = {
+          mobile_country_code,
+          mobile_no: phoneNumber,
+        };
+        this.setState({
+          otpCount: otpCount + 1,
+        }, () => this.props.otpUserUpdate(params));
+      } else {
+        toast(
         <ToastContent
           msg='Phone number is required for OTP'
           msgType='error'
         />
-      )
-    }
+        )
+      }}
   }
   handleClose() {
     this.setState({
@@ -172,13 +170,15 @@ class EditPhone extends React.Component {
 
   handlePhoneNumberChange({ target }) {
     if (/^[0-9]*$/gm.test(target.value)) {
-      this.setState({ phoneNumber: target.value }, () => {
-        const validation = this.validations.validateOnBlur({[target.name]: target.value});
-        this.setState({ validation });
-      });
+      this.setState({ phoneNumber: target.value });
     } else {
       this.setState({ phoneNumber: '' });
     }
+  }
+
+  handleValidation({ target }) {
+    const validation = this.validations.validateOnBlur({[target.name]: target.value});
+    this.setState({ validation });
   }
   handleOTPChange(e) {
     if (/^[0-9]*$/gm.test(e.target.value)) {
@@ -311,6 +311,7 @@ class EditPhone extends React.Component {
                       required
                       value={phoneNumber}
                       onChange={this.handlePhoneNumberChange}
+                      onBlur={this.handleValidation}
                     />
                     <span className={styles['highlight']}></span>
                     <span className={styles['bar']}></span>
@@ -321,10 +322,10 @@ class EditPhone extends React.Component {
                         : null
                     }
                     {/* <span className={styles['error']}>error message</span> */}
-                    {((Number(phoneNumber && phoneNumber[0]) === 5 && phoneNumber.length === 9) || (Number(phoneNumber && phoneNumber[0]) === 0 && Number(phoneNumber[1]) === 5 && phoneNumber.length === 10)) ?
+                    {/* {((Number(phoneNumber && phoneNumber[0]) === 5 && phoneNumber.length === 9) || (Number(phoneNumber && phoneNumber[0]) === 0 && Number(phoneNumber[1]) === 5 && phoneNumber.length === 10)) ? */}
                       <a className={`${styles['show-otp']} ${styles['fs-12']} ${styles['thick-blue']}`} onClick={this.fetchOtp}>
                        {otpCount ? `${CONTACT_INFO_MODAL.RESEND} ${CONTACT_INFO_MODAL.OTP}` : CONTACT_INFO_MODAL.SEND_OTP}
-                      </a> : null}
+                      </a>
                   </div>
                   {/* <Input
                     placeholder={`${CONTACT_INFO_MODAL.ENTER} ${CONTACT_INFO_MODAL.PHONE_NUMBER}`}
