@@ -67,12 +67,7 @@ class MegaMenu extends Component {
     this.expandedHover = true;
   }
 
-  onLinkClick(e) {
-    let fields = e.target.getAttribute('href').split('=');
-    this.props.track({
-      eventName: 'MEGA_MENU',
-      tree: 'MM-MEGAMENU:'+fields[3],
-    }),
+  onLinkClick() {
     this.setState({
       selectedCategory: null,
       viewAllMenu: false,
@@ -201,7 +196,6 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       getMegamenu: actionCreators.getMegamenu,
-      track: actionCreators.track,
     },
     dispatch,
   );

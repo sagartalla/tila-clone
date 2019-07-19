@@ -74,10 +74,6 @@ class OrderItem extends Component {
 
   cancelOrder = () => {
     const { raiseOrderIssue, orderItem, orderId } = this.props;
-    this.props.track({
-      event: 'CANCEL_ORDER',
-      orderData: this.props,
-    });
     const { products } = orderItem;
     raiseOrderIssue({
       issueType: ORDER_ISSUE_TYPES.CANCEL,
@@ -334,7 +330,6 @@ class OrderItem extends Component {
 const mapDispatchToProps = dispatch => bindActionCreators({
   raiseOrderIssue: actionCreators.raiseOrderIssue,
   getOrderDetails: actionCreators.getOrderDetails,
-  track: actionCreators.track
 }, dispatch);
 
 OrderItem.propTypes = {

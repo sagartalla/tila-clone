@@ -10,16 +10,7 @@ const actionCreators = {
       type: actions.GET_MEGAMENU,
       payload: apis.getMegamenu()
     }
-  },
-  track: params => (dispatch, getState) => {
-    const state = getState();
-    params.postResult = state.wishlistReducer.products;
-    return {
-      type: actions.MEGAMENU_TRACK,
-      payload: apis.track(params),
-    };
-  },
-
+  }
 };
 
 export { actions, actionCreators };
