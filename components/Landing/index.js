@@ -185,22 +185,21 @@ class Landing extends Component {
       <Theme.Provider value={query && query.category && query.category.toLowerCase()}>
         <LoaderBarContext.Consumer>
           {
-            (context) => (
+            (context) => {
+              return (
               <Fragment>
                 <HeaderBar query={query} />
-                  <LoadingBar loadComponent={context.loadComponent}
-                    pathname={context.pathname}>
-                    {
-                      _.map(this.state.children, (child, index) => React.createElement(child.name, _.merge(child.props, {key: index })))
-                    }
-                    <FooterBar />
-                  </LoadingBar>
-
-            </Fragment>
-            )
+                <LoadingBar loadComponent={context.loadComponent}
+                  pathname={context.pathname}>
+                  {
+                    _.map(this.state.children, (child, index) => React.createElement(child.name, _.merge(child.props, {key: index })))
+                  }
+                  <FooterBar />
+                </LoadingBar>
+              </Fragment>
+            )}
           }
         </LoaderBarContext.Consumer>
-
       </Theme.Provider>
     );
   }

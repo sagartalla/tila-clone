@@ -1,28 +1,26 @@
 import shortid from 'shortid';
 import _ from 'lodash';
 
-const filterVariants = (cartListingId,variants) => {
-
+const filterVariants = (cartListingId, variants) => {
   // if(!variants.length > 1) {
   //   return cartListingIds.indexOf(variants.listingId[0]) !== -1
   // }
-    let variantList;
-    if(variants.length === 0) {
-      return variants
-    }
-    if(variants.length >= 1) {
-        variantList = variants.reduce((acc,curr) => {
-          if(curr.productAvailable) {
-            curr['addedToCart'] = cartListingId.indexOf(curr.listingId[0]) !== -1
-          }
-          acc.push(curr);
-          return acc
-        },[])
-    }
+  let variantList;
+  if (variants.length === 0) {
+    return variants;
+  }
+  if (variants.length >= 1) {
+    variantList = variants.reduce((acc, curr) => {
+      if (curr.productAvailable) {
+        curr.addedToCart = cartListingId.indexOf(curr.listingId[0]) !== -1;
+      }
+      acc.push(curr);
+      return acc;
+    }, []);
+  }
 
-  return variantList
-
-}
+  return variantList;
+};
 const addCartAndWishlistDetails = (store, results) => {
   const { items = [] } = store.cartReducer.data;
   const { products = [] } = store.wishlistReducer;
@@ -46,14 +44,12 @@ const addCartAndWishlistDetails = (store, results) => {
 
   return {
     ...results,
-    items: results.items.map((i) => {
-      return ({
+    items: results.items.map((i) => ({
         ...i,
         wishlistId: wishlistItems[i.productId] || '',
         variants: filterVariants(cartListingIds, i.variants),
         addedToWishlist: wishListProductIds && wishListProductIds.indexOf(i.productId) !== -1,
-      });
-    }),
+      })),
   };
 };
 
@@ -109,7 +105,7 @@ const getSearchFilters = (store) => {
         // if (item.Type === 'PERCENTILE') {
         //   attrObj.values = value.attributeValue;
         // } else {
-          attrObj.name = value.attributeValue;
+        attrObj.name = value.attributeValue;
         // }
         return attrObj;
       }),
@@ -126,38 +122,37 @@ const getSearchResutls = (store) => {
   let isNotifyMe;
   if (store.searchReducer.data.productResponse) {
     resutls.totalCount = store.searchReducer.data.productResponse.noOfProducts;
-    resutls.items = store.searchReducer.data.productResponse.products.map((product,prodIndex) => {
-      isNotifyMe = true
+    resutls.items = store.searchReducer.data.productResponse.products.map((product) => {
+      isNotifyMe = true;
       let variantInfo = (product.variantAdapters || []).reduce((modifiedVaraints, v) => {
-        let modifiedVaraintsCopy = {}
-        let { listingAdapters } = v;
+        const modifiedVaraintsCopy = {};
+        const { listingAdapters } = v;
         if (listingAdapters.length > 0) {
-          const activeInStockListing = _.find(listingAdapters, (l) => l.attributes.isActive && l.attributes.inStock);
+          const activeInStockListing = _.find(listingAdapters, l => l.attributes.isActive && l.attributes.inStock);
           isNotifyMe = typeof activeInStockListing === 'undefined' && isNotifyMe;
-          const attributesData = {...listingAdapters[0].attributes};
+          const attributesData = { ...listingAdapters[0].attributes };
           delete attributesData.type;
           delete attributesData.variantId;
-           // modifiedVaraintsCopy = Object.assign(modifiedVaraints);
-          modifiedVaraintsCopy['productSize'] = Object.values(v.attributes)[0]
-          modifiedVaraintsCopy['productAvailable'] = true
-          modifiedVaraintsCopy['variantId'] = v.id
+          // modifiedVaraintsCopy = Object.assign(modifiedVaraints);
+          modifiedVaraintsCopy.productSize = Object.values(v.attributes)[0];
+          modifiedVaraintsCopy.productAvailable = true;
+          modifiedVaraintsCopy.variantId = v.id;
           _.forEach(attributesData, (val, key) => {
             modifiedVaraintsCopy[key] = modifiedVaraintsCopy[key] || [];
             modifiedVaraintsCopy[key] = modifiedVaraintsCopy[key].concat(val);
           });
         } else {
-          modifiedVaraintsCopy['productSize'] = Object.values(v.attributes)[0]
-          modifiedVaraintsCopy['productAvailable'] = false
-          modifiedVaraintsCopy['variantId'] = v.id
+          modifiedVaraintsCopy.productSize = Object.values(v.attributes)[0];
+          modifiedVaraintsCopy.productAvailable = false;
+          modifiedVaraintsCopy.variantId = v.id;
         }
 
-        modifiedVaraints.push(modifiedVaraintsCopy)
+        modifiedVaraints.push(modifiedVaraintsCopy);
 
         return modifiedVaraints;
-    }, []);
-
-      if(isNotifyMe) {
-        variantInfo = []
+      }, []);
+      if (isNotifyMe) {
+        variantInfo = [];
       }
       // const priceInfo = product.variantAdapters[0].listingAdapters.map((vla) => vla.attributes.sellingPrice);
       // const offers = product.variantAdapters[0].listingAdapters.map((vla) => vla.attributes.discount);
@@ -186,7 +181,7 @@ const getSearchResutls = (store) => {
         itemtype: product.attributes.itemType,
         displayName: (product.attributes.calculated_display_name || []).join(','),
         brand: brand ? brand[0] : '',
-        variants: variantInfo,
+        variants: variantInfo.sort((a, b) => a.productSize[0] - b.productSize[0]),
         // priceRange,
         currency,
         categoryId,
@@ -257,7 +252,9 @@ const getSuggestions = store => store.searchReducer.data.suggestions;
 const getCartButtonLoaders = store => store.cartReducer.data.cartButtonLoaders || {};
 
 export {
-  getSearchFilters, getSearchResutls, getPaginationDetails, getUIState, getCategoryId, getQuery, getCategorySearchQuery,
-  getFacetfilters, optionParams, getSearchBarFilterState, addCartAndWishlistDetails, getIsCategoryTree, getChoosenCategoryName,
-  getAppliedFitlers, getSuggestions, getSpellCheckResponse, getUserDetails, getCartButtonLoaders,
+  getSearchFilters, getSearchResutls, getPaginationDetails, getUIState,
+  getCategoryId, getQuery, getCategorySearchQuery, getChoosenCategoryName,
+  getFacetfilters, optionParams, getSearchBarFilterState, addCartAndWishlistDetails,
+  getIsCategoryTree, getAppliedFitlers, getSuggestions, getSpellCheckResponse,
+  getUserDetails, getCartButtonLoaders,
 };

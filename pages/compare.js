@@ -13,6 +13,7 @@ class ComparePage extends Base {
   pageName = 'COMPARE';
 
   componentDidMount() {
+    Base.prototype.componentDidMount();
     const { compareItems } = this.props;
     if (!compareItems.products.length) {
       window.location = '/';

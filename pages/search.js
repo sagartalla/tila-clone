@@ -6,6 +6,7 @@ import Cookies from 'universal-cookie';
 import createHistory from 'history/createBrowserHistory';
 import Base, { baseActions } from './base';
 import makeStore from '../store';
+import { languageDefinations } from '../utils/lang';
 import { actionCreators, selectors } from '../store/search';
 import { actionCreators as authActionsCreators, selectors as authSelectors } from '../store/auth';
 import { actionCreators as megamenuActionsCreators } from '../store/megamenu';
@@ -15,6 +16,8 @@ import Search from '../components/Search';
 import SearchContext from '../components/helpers/context/search';
 
 const cookies = new Cookies();
+
+const { SEO_CONTENT } = languageDefinations();
 
 class SearchPage extends Base {
   static async getInitialProps({ store, isServer, query, req }) {

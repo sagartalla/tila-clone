@@ -214,7 +214,6 @@ const getProductComponent = (isPreview, taskCode) => {
             {
               isPreview || isSearchPreview ? null :
                 <HeaderBar
-                 hideThankyou
                 />
             }
             <LoadingBar loadComponent={loadComponent} pathname={pathname}>
