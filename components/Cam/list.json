@@ -5,13 +5,13 @@
         "icon": "icons/my-orders",
         "display": "MY_ORDERS",
         "count": "1",
-        "href": "/cam/orders"
+        "href": "/customer/orders"
       },
       {
         "icon": "icons/my-wishlist",
         "display": "WISHLIST",
         "count": "1",
-        "href": "/cam/wishlist"
+        "href": "/customer/wishlist"
       }
     ]
   },
@@ -20,12 +20,12 @@
       {
         "icon": "icons/shipping",
         "display": "SHIPPING_ADDRESS",
-        "href": "/cam/address"
+        "href": "/customer/address"
       },
       {
         "icon": "icons/creditcards",
         "display": "CREDIT_CARDS_VOUCHERS_REWARD_POINTS",
-        "href": "/cam/uservault"
+        "href": "/customer/uservault"
       }
     ]
   },
@@ -34,12 +34,12 @@
       {
         "icon": "icons/common-icon/myreviews",
         "display": "REVIEWS_AND_RATINGS",
-        "href": "/cam/reviews_ratings"
+        "href": "/customer/reviews_ratings"
       },
       {
         "icon": "icons/common-icon/coupon-code",
         "display": "MY_COUPONS",
-        "href": "/cam/mycoupons"
+        "href": "/customer/mycoupons"
       }
     ]
   },
@@ -48,7 +48,7 @@
       {
         "icon": "icons/preferences",
         "display": "PREFERENCES",
-        "href": "/cam/preferences"
+        "href": "/customer/preferences"
       }
     ]
   }

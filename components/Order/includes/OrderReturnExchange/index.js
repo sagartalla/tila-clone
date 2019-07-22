@@ -90,19 +90,19 @@ class OrderReturnExchange extends Component {
           <Row>
             <div className={`${styles['ret-exch-wrap']} ${styles['mt-20']}`}>
               <div className={`${styles.breadcrums} ${styles['fs-12']}`}>
-                <Link route={`/${country}/${language}/cam`}>
+                <Link route={`/${country}/${language}/customer`}>
                   <a>
                     <span className={`${styles['thick-gry-clr']}`}>{ORDER_PAGE.MY_ACCOUNT}</span>
                   </a>
                 </Link>
                 <span> > </span>
-                <Link route={`/${country}/${language}/cam/orders`}>
+                <Link route={`/${country}/${language}/customer/orders`}>
                   <a>
                     <span className={`${styles['thick-gry-clr']}`}>{ORDER_PAGE.ORDERS}</span>
                   </a>
                 </Link>
                 <span> > </span>
-                <Link route={`/${country}/${language}/cam/orders/${orderId}`}>
+                <Link route={`/${country}/${language}/customer/orders/${orderId}`}>
                   <a>
                     <span className={`${styles['black-color']}`}>{orderId}</span>
                   </a>

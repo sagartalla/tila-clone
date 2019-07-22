@@ -160,12 +160,12 @@ class Search extends Component {
           <Grid id="search-container" className={`${styles['pt-20']} ${styles.relative} ${styles['search-container-wrap']}`}>
             <Col md={2} id="sidebar-position" className={`${styles['filter-panel']} ${styles['float-l']} ${styles['border-radius4']} ${styles['bg-white']} ${styles['p-0']} ${styles[sideBarPositionClass]}`} style={containerStyle}>
               <NoSSR>
-                <CategoriesAndFacets />
+                <CategoriesAndFacets search={query} />
               </NoSSR>
             </Col>
             <Col md={10} className={`${styles['search-results']} ${styles['fl-rt']} ${styles['pr-0']}`}>
               <SearchDetailsBar optionalParams={optionalParams} />
-              <SearchResults search={query.search} />
+              <SearchResults search={query.q} />
             </Col>
           </Grid>
           <CompareWidget />

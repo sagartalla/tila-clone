@@ -12,56 +12,39 @@ class SkeletonLoader extends Component {
     switch (pathname.split('?')[0]) {
       case `/${country}/${language}/search`:
         return searchPlaceHolder
-        break;
       case `/${country}/${language}/product`:
         return productPlaceHolder
-        break;
       case `/search`:
         return searchPlaceHolder
-        break;
       case `/${country}/${language}/srp`:
         return searchPlaceHolder
-        break;
-      case `/${country}/${language}/cam/mycoupons`:
+      case `/${country}/${language}/customer/mycoupons`:
         return couponPlaceHolder
-        break;
       case `/product`:
         return productPlaceHolder
-        break;
       case `/${country}/${language}/cart`:
         return cartPlaceHolder
-        break;
       case `/${country}/${language}/payment`:
         return cartPlaceHolder
-        break;
-      case `/${country}/${language}/cam/profile`:
+      case `/${country}/${language}/customer/profile`:
         return camProfileHolder
-        break;
       case `/profile`:
           return camProfileHolder
-          break;
-      case `/cam`:
+      case `/customer`:
           return camProfileHolder
-          break;
       case `/cart`:
           return cartPlaceHolder
-          break;
       case `/${country}/${language}`:
         return homePageHolder
-        break;
       case `/${country}/${language}/landing/electronics`:
         return homePageHolder
-        break;
       case `/${country}/${language}/landing/fashion`:
         return homePageHolder
-        break;
       case `/${country}/${language}/landing/lifestyle`:
         return homePageHolder
-        break;
       case `/`:
-          return homePageHolder
-          break;
-      // case `/${country}/${language}/cam/orders`:
+        return homePageHolder
+      // case `/${country}/${language}/customer/orders`:
       //   return camOrdersHolder
       //   break;
     }

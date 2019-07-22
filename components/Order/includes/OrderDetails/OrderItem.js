@@ -88,7 +88,7 @@ class OrderItem extends Component {
       orderId, orderItem, variantId, getOrderDetails,
     } = this.props;
     getOrderDetails({ orderId });
-    Router.pushRoute(`/${country}/${language}/cam/orders/${orderId}/issue/${OrderType}/item/${orderItem.id}/${variantId}`);
+    Router.pushRoute(`/${country}/${language}/customer/orders/${orderId}/issue/${OrderType}/item/${orderItem.id}/${variantId}`);
     // raiseOrderIssue({
     //   issueType: null,
     //   items: products,

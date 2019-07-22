@@ -36,7 +36,7 @@ const Order = ({ order, getInvoice }) => {
   const fetchInvoice = () => getInvoice(order.id);
 
   const routeChange = () => {
-    Router.push(`/${country}/${language}/cam/orders/${order.id}`);
+    Router.push(`/${country}/${language}/customer/orders/${order.id}`);
   }
   return (
     <div className={`${styles['order-item-wrap']} ${styles['box-shadow']} ${styles['mt-20']} ${styles['mb-20']} ${styles['p-20']}`}>
@@ -59,7 +59,7 @@ const Order = ({ order, getInvoice }) => {
           </div>
         </div>
         <div>
-          <a href={`/${country}/${language}/cam/orders/${order.id}`} className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['left-radius']} ${styles['text-uppercase']}`}>
+          <a href={`/${country}/${language}/customer/orders/${order.id}`} className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['left-radius']} ${styles['text-uppercase']}`}>
             {ORDERS.TRACK_ORDER}
           </a>
         </div>

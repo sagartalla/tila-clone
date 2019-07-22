@@ -101,7 +101,7 @@ class Wishlist extends Component {
   moveToWishlist = () => {
     const { isLoggedIn } = this.props;
     if (isLoggedIn) {
-      Router.push(`/${country}/${language}/cam/wishlist`);
+      Router.push(`/${country}/${language}/customer/wishlist`);
     }
   }
 
