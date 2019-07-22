@@ -42,12 +42,14 @@ class Search extends Component {
     const {
       query, isCategoryTree, choosenCategoryName,
     } = props;
+    console.log('hgfhgfhgf', query);
     let finalQuery = query || (isCategoryTree ? choosenCategoryName : '');
     finalQuery = finalQuery.split('-').join(' ');
     this.state = {
       suggestions: [],
       query: finalQuery,
       openImagesearch: false,
+      searchPosition: '',
     };
     this.submitQuery = this.submitQuery.bind(this);
     this.onChangeSearchInput = this.onChangeSearchInput.bind(this);
@@ -96,9 +98,11 @@ class Search extends Component {
     input.setSelectionRange(query.length, query.length);
   }
   setSearchText(e) {
+    const searchPosition = e.target.getAttribute('index');
     this.setState({
       query: e.target.textContent,
       suggestions: [],
+      searchPosition,
     }, () => {
       this.submitQuery(e);
     });
@@ -122,6 +126,7 @@ class Search extends Component {
   }
 
   submitQuery(e) {
+    const { searchPosition } = this.state;
     e && e.preventDefault();
     if (!this.state.query) return false;
     // const { isCategoryTree } = this.props;
@@ -135,7 +140,7 @@ class Search extends Component {
       searchInput: false,
     });
     window.scrollTo(0, 0);
-    Router.pushRoute(`/${country}/${language}/srp?search=${encodeURIComponent(this.state.query.trim())}&${Object.entries(this.props.optionalParams).map(([key, val]) => `${key}=${val}`).join('&')}`);
+    Router.pushRoute(`/${country}/${language}/search?q=${encodeURIComponent(this.state.query.trim())}&qs=${this.state.query ? true : false}&POS=${searchPosition ? searchPosition : null}&${Object.entries(this.props.optionalParams).map(([key, val]) => `${key}=${val}`).join('&')}`);
   }
 
   imageSearch() {
@@ -169,6 +174,7 @@ class Search extends Component {
     const {
       suggestions, openImagesearch, query, autoSearchValue, searchInput,
     } = this.state;
+    console.log('query123', query);
     return (
       <div className={styles['search-wrapper']}>
         <form onSubmit={this.submitQuery}>
@@ -194,7 +200,7 @@ class Search extends Component {
             <Dropdown.Menu className={`${styles.width100} ${styles['p-0']} ${styles['m-0']}`}>
               {suggestions.length > 0 &&
                 suggestions.map((s, index) => (
-                  <MenuItem className={styles['search-suggestion']} onClick={this.setSearchText} data={s.data_edgengram} onFocus={this.mouseOver} eventKey={index + 1}>
+                  <MenuItem className={styles['search-suggestion']} onClick={this.setSearchText} data={s.data_edgengram} onFocus={this.mouseOver} index={index} eventKey={index + 1}>
                     <a className={`${styles['black-color']}`}>
                       <span>{s.data_edgengram}</span>
                     </a>

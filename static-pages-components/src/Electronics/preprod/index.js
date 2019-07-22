@@ -4,7 +4,7 @@ const Electronics = () => (
   <div className="electronics-main-part">
     <Grid>
       <div className="main-banner">
-        <a href={`/SAU/${lang}/srp?search=electronics&isListed=false`}>
+        <a href={`/SAU/${lang}/search?q=electronics&isListed=false`}>
           <img src={`/static/img/landing-page-tech-img/${lang === 'en' ? 'appliances' : 'appliances-ar'}.jpg`} className="img-responsive" />
         </a>
       </div>
@@ -71,7 +71,7 @@ const Electronics = () => (
             </div>
             <div className={`popular-cat-part-inn ${styles['mr-35']}`}>
               <div className="popular-cat-inn-img">
-                <a href={`/SAU/${lang}/srp?search=Gaming&language=en&isListed=false`}>
+                <a href={`/SAU/${lang}/search?q=Gaming&language=en&isListed=false`}>
                   <img src="/static/img/landing-page-tech-img/popular-cat5.png" className="img-responsive" />
                 </a>
               </div>
@@ -115,7 +115,7 @@ const Electronics = () => (
             </div>
             <div className="popular-cat-part-inn-1">
               <div className="popular-cat-inn-img">
-                <a href={`/SAU/${lang}/srp?search=Home%20Entertainment&language=en&isListed=false`}>
+                <a href={`/SAU/${lang}/search?q=Home%20Entertainment&language=en&isListed=false`}>
                   <img src="/static/img/landing-page-tech-img/popular-cat9.png" className="img-responsive" />
                 </a>
               </div>
@@ -132,7 +132,7 @@ const Electronics = () => (
           <Col md={4} className={styles['pl-0']}>
             <h4 className={styles['fontW600']}><span className={`populat-cat-title ${styles['bdr-btm-green-color']}`}>NEW</span></h4>
             <div className={`${styles['mt-20']} ${styles['relative']} brand-part-inn`}>
-              <a href={`/SAU/${lang}/srp?search=samsung&language=en&isListed=false`}>
+              <a href={`/SAU/${lang}/search?q=samsung&language=en&isListed=false`}>
                 <img src="/static/img/landing-page-tech-img/samsung.jpg" className="img-responsive" />
               </a>
               <div className={`${styles['absolute']} price-details ${styles['flex']} ${styles['flex-colum']}`}>
@@ -144,7 +144,7 @@ const Electronics = () => (
           <Col md={4} className={styles['pl-0']}>
             <h4 className={`${styles['fontW600']} ${styles['text-uppercase']}`}><span className={`populat-cat-title ${styles['bdr-btm-green-color']}`}>Exclusive</span> </h4>
             <div className={`${styles['mt-20']} ${styles['relative']} brand-part-inn`}>
-              <a href={`/SAU/${lang}/srp?search=MI%20A1&language=en&isListed=false`}>
+              <a href={`/SAU/${lang}/search?q=MI%20A1&language=en&isListed=false`}>
                 <img src="/static/img/landing-page-tech-img/mi-brand-img.jpg" className="img-responsive" />
               </a>
               <div className={`${styles['absolute']} price-details ${styles['flex']} ${styles['flex-colum']} ${styles['white-color']}`}>
@@ -156,7 +156,7 @@ const Electronics = () => (
           <Col md={4} className={styles['pl-0']}>
             <h4 className={`${styles['fontW600']}`}><span className={`populat-cat-title ${styles['bdr-btm-green-color']} ${styles['text-uppercase']}`}>Apple</span>  - Its always a good idea!</h4>
             <div className={`${styles['mt-20']} ${styles['relative']} brand-part-inn`}>
-              <a href={`/SAU/${lang}/srp?search=apple&language=en&isListed=false`}>
+              <a href={`/SAU/${lang}/search?q=apple&language=en&isListed=false`}>
                 <img src="/static/img/landing-page-tech-img/apple-brand-img.jpg" className="img-responsive" />
               </a>
               <div className={`${styles['absolute']} price-details ${styles['flex']} ${styles['flex-colum']} ${styles['white-color']}`}>
@@ -171,7 +171,7 @@ const Electronics = () => (
           <Col md={6} className={styles['pl-0']}>
             <h4 className={`${styles['fontW600']} ${styles['text-uppercase']} ${styles['pb-10']}`}><span className={`populat-cat-title ${styles['bdr-btm-green-color']}`}>Gaming  </span>  Consoles</h4>
             <div>
-              <a href={`/SAU/${lang}/srp?search=Gaming&language=en&isListed=false`}>
+              <a href={`/SAU/${lang}/search?q=Gaming&language=en&isListed=false`}>
                 <img src="/static/img/landing-page-tech-img/gaming-img.jpg" className="img-responsive" />
               </a>
             </div>
@@ -179,7 +179,7 @@ const Electronics = () => (
           <Col md={6} className={styles['pr-0']}>
             <h4 className={`${styles['fontW600']} ${styles['text-uppercase']} ${styles['pb-10']}`}><span className={`populat-cat-title ${styles['bdr-btm-green-color']}`}>RC Toys</span> </h4>
             <div>
-              <a href={`/SAU/${lang}/srp?search=gaming%20&%20accessories&language=en&isListed=false`}>
+              <a href={`/SAU/${lang}/search?q=gaming%20&%20accessories&language=en&isListed=false`}>
                 <img src="/static/img/landing-page-tech-img/gaming-img1.jpg" className="img-responsive" />
               </a>
             </div>
@@ -190,7 +190,7 @@ const Electronics = () => (
           <h4 className={`${styles['fontW600']} ${styles['text-uppercase']} ${styles['pb-10']}`}><span className={`populat-cat-title ${styles['bdr-btm-green-color']}`}>Home & Kitchen  </span>  Appliances</h4>
           <Col md={2} className={styles['pl-0']}>
             <div className={`${styles['mt-20']} ${styles['relative']} ${styles['home-kitchan-inn']}`}>
-              <a href={`/SAU/${lang}/srp?search=Iron&language=en&isListed=false`}>
+              <a href={`/SAU/${lang}/search?q=Iron&language=en&isListed=false`}>
                 <img src="/static/img/landing-page-tech-img/home-kitchen1.jpg" className="img-responsive" />
               </a>
               <div className={`${styles['absolute']} home-price-details ${styles['white-color']} ${styles['flex']} ${styles['flex-colum']}`}>
@@ -202,7 +202,7 @@ const Electronics = () => (
           </Col>
           <Col md={2} className={styles['pl-0']}>
             <div className={`${styles['mt-20']} ${styles['relative']} ${styles['home-kitchan-inn']}`}>
-              <a href={`/SAU/${lang}/srp?search=Refrigerators&language=en&isListed=false`}>
+              <a href={`/SAU/${lang}/search?q=Refrigerators&language=en&isListed=false`}>
                 <img src="/static/img/landing-page-tech-img/home-kitchen.jpg" className="img-responsive" />
               </a>
               <div className={`${styles['absolute']} home-price-details ${styles['white-color']} ${styles['flex']} ${styles['flex-colum']}`}>
@@ -214,7 +214,7 @@ const Electronics = () => (
           </Col>
           <Col md={2} className={styles['pl-0']}>
             <div className={`${styles['mt-20']} ${styles['relative']} ${styles['home-kitchan-inn']}`}>
-              <a href={`/SAU/${lang}/srp?search=Mixer%20&%20Juicers&language=en&isListed=false`}>
+              <a href={`/SAU/${lang}/search?q=Mixer%20&%20Juicers&language=en&isListed=false`}>
                 <img src="/static/img/landing-page-tech-img/home-kitchen2.jpg" className="img-responsive" />
               </a>
               <div className={`${styles['absolute']} home-price-details ${styles['white-color']} ${styles['flex']} ${styles['flex-colum']}`}>
@@ -226,7 +226,7 @@ const Electronics = () => (
           </Col>
           <Col md={2} className={styles['pl-0']}>
             <div className={`${styles['mt-20']} ${styles['relative']} ${styles['home-kitchan-inn']}`}>
-              <a href={`/SAU/${lang}/srp?search=washing%20Machines&language=en&isListed=false`}>
+              <a href={`/SAU/${lang}/search?q=washing%20Machines&language=en&isListed=false`}>
                 <img src="/static/img/landing-page-tech-img/home-kitchen3.jpg" className="img-responsive" />
               </a>
               <div className={`${styles['absolute']} home-price-details ${styles['white-color']} ${styles['flex']} ${styles['flex-colum']}`}>
@@ -238,7 +238,7 @@ const Electronics = () => (
           </Col>
           <Col md={2} className={styles['pl-0']}>
             <div className={`${styles['mt-20']} ${styles['relative']} ${styles['home-kitchan-inn']}`}>
-              <a href={`/SAU/${lang}/srp?search=Vaccum%20Cleaners&language=en&isListed=false`}>
+              <a href={`/SAU/${lang}/search?q=Vaccum%20Cleaners&language=en&isListed=false`}>
                 <img src="/static/img/landing-page-tech-img/home-kitchen4.jpg" className="img-responsive" />
               </a>
               <div className={`${styles['absolute']} home-price-details ${styles['white-color']} ${styles['flex']} ${styles['flex-colum']}`}>
@@ -250,7 +250,7 @@ const Electronics = () => (
           </Col>
           <Col md={2} className={styles['pl-0']}>
             <div className={`${styles['mt-20']} ${styles['relative']} ${styles['home-kitchan-inn']}`}>
-              <a href={`/SAU/${lang}/srp?search=Iron&language=en&isListed=false`}>
+              <a href={`/SAU/${lang}/search?q=Iron&language=en&isListed=false`}>
                 <img src="/static/img/landing-page-tech-img/home-kitchen1.jpg" className="img-responsive" />
               </a>
               <div className={`${styles['absolute']} home-price-details ${styles['white-color']} ${styles['flex']} ${styles['flex-colum']}`}>
@@ -267,7 +267,7 @@ const Electronics = () => (
           <div className={styles['mt-25']}>
             <Col md={2} className={styles['pl-0']}>
               <div className={`brands-inn ${styles['flex-center']} ${styles['justify-center']} ${styles['bg-white']}`}>
-                <a href={`/SAU/${lang}/srp?search=apple&language=en&isListed=false`}>
+                <a href={`/SAU/${lang}/search?q=apple&language=en&isListed=false`}>
                   <img src="/static/img/landing-page-tech-img/brands5.jpg" className="brand-apple" />
                 </a>
               </div>
@@ -281,7 +281,7 @@ const Electronics = () => (
             </Col>
             <Col md={2} className={styles['pl-0']}>
               <div className={`brands-inn ${styles['flex-center']} ${styles['justify-center']} ${styles['bg-white']}`}>
-                <a href={`/SAU/${lang}/srp?search=samsung&language=en&isListed=false`}>
+                <a href={`/SAU/${lang}/search?q=samsung&language=en&isListed=false`}>
                   <img src="/static/img/landing-page-tech-img/brands.jpg" className="brand-samsung" />
                 </a>
               </div>
@@ -295,7 +295,7 @@ const Electronics = () => (
             </Col>
             <Col md={2} className={styles['pl-0']}>
               <div className={`brands-inn ${styles['flex-center']} ${styles['justify-center']} ${styles['bg-white']}`}>
-                <a href={`/SAU/${lang}/srp?search=sony&language=en&isListed=false`}>
+                <a href={`/SAU/${lang}/search?q=sony&language=en&isListed=false`}>
                   <img src="/static/img/landing-page-tech-img/brands1.jpg" className="brand-samsung" />
                 </a>
               </div>
@@ -310,7 +310,7 @@ const Electronics = () => (
             </Col>
             <Col md={2} className={styles['pl-0']}>
               <div className={`brands-inn ${styles['flex-center']} ${styles['justify-center']} ${styles['bg-white']}`}>
-                <a href={`/SAU/${lang}/srp?search=LG&language=en&isListed=false`}>
+                <a href={`/SAU/${lang}/search?q=LG&language=en&isListed=false`}>
                   <img src="/static/img/landing-page-tech-img/brands2.jpg" className="brand-lg" />
                 </a>
               </div>
@@ -325,7 +325,7 @@ const Electronics = () => (
             </Col>
             <Col md={2} className={styles['pl-0']}>
               <div className={`brands-inn ${styles['flex-center']} ${styles['justify-center']} ${styles['bg-white']}`}>
-                <a href={`/SAU/${lang}/srp?search=dell&language=en&isListed=false`}>
+                <a href={`/SAU/${lang}/search?q=dell&language=en&isListed=false`}>
                   <img src="/static/img/landing-page-tech-img/brands3.jpg" className="brand-dell" />
                 </a>
               </div>
@@ -336,7 +336,7 @@ const Electronics = () => (
             </Col>
             <Col md={2} className={styles['pl-0']}>
               <div className={`brands-inn ${styles['flex-center']} ${styles['justify-center']} ${styles['bg-white']}`}>
-                <a href={`/SAU/${lang}/srp?search=mi&language=en&isListed=false`}>
+                <a href={`/SAU/${lang}/search?q=mi&language=en&isListed=false`}>
                   <img src="/static/img/landing-page-tech-img/brands4.jpg" className="brand-mi" />
                 </a>
               </div>
