@@ -54,7 +54,6 @@ class LandingPage extends Base {
           <meta property="og:title" content={SEO_CONTENT.HOME_TITLE} />
           <meta property="og:site_name" content="Tila" />
           <meta property="fb:app_id" content=" " />
-          <meta property="og:url" content={window.location.toString()} />
           <meta property="og:description" content={SEO_CONTENT.HOME_META_CONTENT} />
           <meta property="og:locale:locale" content="en_SA" />
           <meta property="og:locale:alternate" content="ar_SA" />
@@ -65,9 +64,6 @@ class LandingPage extends Base {
         </Head>
         <h1 className={`${styles.display_none}`}>{SEO_CONTENT.HOME_H1_CONTENT}</h1>
         <h2 className={`${styles.display_none}`}>{SEO_CONTENT.HOME_H2_CONTENT}</h2>
-        <Layout>
-          <Landing query={url.query} />
-        </Layout>
         <LoaderBarContext.Provider value={loaderProps}>
           <Layout>
             <Landing query={url.query} />
