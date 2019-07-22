@@ -655,6 +655,9 @@ export const EN_KEYWORDS = {
     PLEASE_PROVIDE_EMAIL_ID_FOR_REGISTRATION: 'Please provide your email ID to receive your registration confirmation.',
     INSTAGRAM: 'Instagram',
     NOT_YOU: 'Not you?',
+    SHOW: 'Show',
+    HIDE: 'Hide',
+    PASSWORD: 'Password',
   },
   ORDER_PAGE: {
     LOADING: 'Loading...',
