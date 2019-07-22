@@ -51,11 +51,9 @@ class CartBottomPopup extends Component {
                 return (
                   <div key={i} className={`${styles['item']} ${styles['flex']} ${styles['flex-colum']}`}>
                   <Link route={`/${country}/${language}/product?productId=${product_id}${variant_id ? `&variantId=${variant_id}` : ''}&catalogId=${catalogId}&itemType=${itemType}`}>
-                  {/* <Link route={`/${country}/${language}/pdp/${name.split(' ').join('-').toLowerCase()}/c/${catalog_id}/p/${product_id}${variant_id ? `&variantId=${variant_id}` : ''}/l/${listing_id}`}> */}
                     <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles['wish-pop-img']}`}><img className={styles['img']} src={`${constants.mediaDomain}/${img}`} /></div></Link>
                     <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']}`}>
                     <Link route={`/${country}/${language}/product?productId=${product_id}${variant_id ? `&variantId=${variant_id}` : ''}&catalogId=${catalogId}&itemType=${itemType}`}>
-                    {/* <Link route={`/${country}/${language}/pdp/${name.split(' ').join('-').toLowerCase()}/c/${catalog_id}/p/${product_id}${variant_id ? `&variantId=${variant_id}` : ''}/l/${listing_id}`}> */}
                       <h5 className={`${styles['label-gry-clr']} ${styles['fs-12']} ${styles['t-c']} ${styles['cart-wishlist-title']}`}>{name}</h5></Link>
                       <span className={`${styles['light-gry-clr']} ${styles['t-c']}`}>
                         <span className={styles['fs-20']}>{price}</span> <span className={styles['fs-14']}> {cur}</span>
