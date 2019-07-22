@@ -9,13 +9,13 @@ import styles_ar from './login_ar.styl';
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const ShowHidePassword = (props) => {
-    const { hide, hideToggle } = props;
+    const { hide, hideToggle, hideContent } = props;
     return (
             <div onClick={hideToggle} className={`${styles.passwordeye}`}>
                 <div className={`${styles['password-eye-icon']}`}>
                     <SVGComponent src={hide ? "icons/profile/eye-show" : "icons/profile/eye-hide"}/>
                 </div>&nbsp;
-                <span>{`${hide ? 'Show' : 'Hide'} ${'Password'}`}</span>
+                <span>{hideContent ? '' : `${hide ? 'Show' : 'Hide'} ${'Password'}`}</span>
             </div>
     );
 }

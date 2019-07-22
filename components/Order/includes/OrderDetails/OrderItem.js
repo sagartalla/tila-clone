@@ -84,8 +84,10 @@ class OrderItem extends Component {
   }
 
   exchangeReturnOrder = OrderType => () => {
-    const { orderId, orderItem, variantId, getOrderDetails } = this.props;
-    getOrderDetails({ orderId })
+    const {
+      orderId, orderItem, variantId, getOrderDetails,
+    } = this.props;
+    getOrderDetails({ orderId });
     Router.pushRoute(`/${country}/${language}/customer/orders/${orderId}/issue/${OrderType}/item/${orderItem.id}/${variantId}`);
     // raiseOrderIssue({
     //   issueType: null,
@@ -155,7 +157,7 @@ class OrderItem extends Component {
                     <Col md={2} className={styles['p-0']}>
                       <div className={`${styles['img-wrap']} ${styles['flex-center']} ${styles['justify-center']}`}>
                         <Link route={`/${country}/${language}/product?productId=${product.productId}${product.variantId ? `&variantId=${product.variantId}` : ''}&catalogId=${product.catalogId}&itemType=${product.itemType}`}>
-                          <a target="_blank" className={`${styles['width100']} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
+                          <a target="_blank" className={`${styles.width100} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
                             <img className={`${styles['order-item-img']}`} src={`${constants.mediaDomain}/${product.img}`} alt={product.img} />
                           </a>
                         </Link>
@@ -168,7 +170,7 @@ class OrderItem extends Component {
                     <Col md={10} className={`${styles['ipad-pr-0']} ${styles['pt-15']}`}>
                       <div className={`${styles['text-wrap']}`}>
                         <Link route={`/${country}/${language}/product?productId=${product.productId}${product.variantId ? `&variantId=${product.variantId}` : ''}&catalogId=${product.catalogId}&itemType=${product.itemType}`}>
-                          <a target="_blank" className={`${styles['width100']} ${styles['fs-14']} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
+                          <a target="_blank" className={`${styles.width100} ${styles['fs-14']} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
                             <span className={`${styles.fontW600}`}>{product.name}</span>
                           </a>
                         </Link>
@@ -194,12 +196,12 @@ class OrderItem extends Component {
                           </Col>
                           {
                             showPriceInfo &&
-                            <Col md={5} sm={5} className={styles['ipad-pr-0']}>
+                            <Col md={5} sm={5} className={`${styles['ipad-pr-0']}`}>
                               {product.price &&
                               <span className={`${styles['justify-end']} ${styles['flex-center']} ${styles['fs-16']} ${styles.fontW600}`}>
                                 {product.orderIds.length} x {final_price.display_value} {final_price.currency_code}
-                                <span onMouseOver={this.showToolTip} onMouseLeave={this.hideToolTip} className={`${styles.relative} ${styles['tool-tip-parent']} ${styles['checkout-quat']} ${styles['fs-12']} ${styles['flex-center']} ${styles['justify-around']} ${lang === 'en' ? '' : styles['flip-questionmark']}`}>
-                                  {'?'}
+                                <span onMouseOver={this.showToolTip} onMouseLeave={this.hideToolTip} className={`${styles.relative} ${styles['tool-tip-parent']} ${styles['checkout-quat']} ${styles['fs-12']} ${styles['flex-center']} ${styles['justify-around']}`}>
+                                  <span className={`${lang === 'en' ? '' : styles['flip-questionmark']}`}>?</span>
                                   {showToolTip &&
                                   <div className={styles['tool-tip']}>
                                     <ul>
@@ -212,7 +214,7 @@ class OrderItem extends Component {
                                       {offer_price &&
                                       <li className={`${styles['flx-space-bw']}`}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.PRICE} :</span><span> {offer_price.display_value} {offer_price.currency_code}</span></li>}
                                       {shipping_fees &&
-                                      <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.SHIPPING} : </span><span className={styles.flex}>{shipping_fees.display_value ? `(+) ${shipping_fees.display_value} ${shipping_fees.currency_code}` : <SVGComponent clsName={`${styles['ship-icon']}`} src={lang === 'en' ? "icons/free-shipping" : "icons/Arabic-Freeshipping" } />}</span></li>}
+                                      <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.SHIPPING} : </span><span className={styles.flex}>{shipping_fees.display_value ? `(+) ${shipping_fees.display_value} ${shipping_fees.currency_code}` : <SVGComponent clsName={`${styles['ship-icon']}`} src={lang === 'en' ? 'icons/free-shipping' : 'icons/Arabic-Freeshipping'} />}</span></li>}
                                       {product.gift_info && gift_charge &&
                                         <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.GIFT_CHARGES} : </span><span>{gift_charge.display_value ? `(+) ${gift_charge.display_value} ${gift_charge.currency_code}` : 'FREE'}</span></li>}
                                       {final_price &&
@@ -221,7 +223,7 @@ class OrderItem extends Component {
                                   </div>}
                                 </span>
                               </span>}
-                          </Col>
+                            </Col>
                           }
                         </div>
                         {product.warranty_duration && Object.keys(product.warranty_duration).length > 0 ?
@@ -265,15 +267,18 @@ class OrderItem extends Component {
                     <SVGComponent clsName={`${styles['help-icon']}`} src="icons/gift-blue" />
                     <span className={`${styles['ml-5']} ${styles.flex}`}>
                       {ORDER_PAGE.THIS_ORDER_CONTAINS_A_GIFT}
-                      <a>
-                        <span className={`${styles.relative} ${styles['tooltip']} ${styles['mr-10']} ${styles['tool-tip-parent']} ${styles['checkout-quat']} ${styles['fs-12']} ${styles['flex-center']} ${styles['justify-around']}`}>
-                          {'!'}
-                          <div className={`${styles['tool-tip']} ${styles.rightM15} ${styles['p-15']} ${styles['break-word']}`}>
-                            <div className={styles.fontW600}>{ORDER_PAGE.MESSAGE}:</div>
-                            {product.gift_info.gift_card_message}
-                          </div>
-                        </span>
-                      </a>
+                      {
+                        product.gift_info.gift_card_message &&
+                        <a>
+                          <span className={`${styles.relative} ${styles['tooltip']} ${styles['mr-10']} ${styles['tool-tip-parent']} ${styles['checkout-quat']} ${styles['fs-12']} ${styles['flex-center']} ${styles['justify-around']}`}>
+                            {'!'}
+                            <div className={`${styles['tool-tip']} ${styles.rightM15} ${styles['p-15']} ${styles['break-word']}`}>
+                              <div className={styles.fontW600}>{ORDER_PAGE.MESSAGE}:</div>
+                              {product.gift_info.gift_card_message}
+                            </div>
+                          </span>
+                        </a>
+                      }
                     </span>
                   </div>}
               </React.Fragment>
@@ -324,7 +329,7 @@ class OrderItem extends Component {
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   raiseOrderIssue: actionCreators.raiseOrderIssue,
-  getOrderDetails: actionCreators.getOrderDetails
+  getOrderDetails: actionCreators.getOrderDetails,
 }, dispatch);
 
 OrderItem.propTypes = {

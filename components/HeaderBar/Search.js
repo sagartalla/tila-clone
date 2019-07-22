@@ -59,9 +59,9 @@ class Search extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { isCategoryTree, choosenCategoryName, query: queryProp } = nextProps;
+    const { isCategoryTree, choosenCategoryName  } = nextProps;
     const { query, searchInput } = this.state;
-    const finalQuery = searchInput ? query : isCategoryTree ? choosenCategoryName : queryProp;
+    const finalQuery = searchInput ? query : isCategoryTree ? choosenCategoryName : query;
     this.setState({
       query: finalQuery ? finalQuery.split('-').join(' ') : '',
       // query: isCategoryTree ? choosenCategoryName : searchInput ? query : queryProp,
@@ -135,7 +135,7 @@ class Search extends Component {
       searchInput: false,
     });
     window.scrollTo(0, 0);
-    Router.pushRoute(`/${country}/${language}/srp?search=${this.state.query.trim()}&${Object.entries(this.props.optionalParams).map(([key, val]) => `${key}=${val}`).join('&')}`);
+    Router.pushRoute(`/${country}/${language}/srp?search=${encodeURIComponent(this.state.query.trim())}&${Object.entries(this.props.optionalParams).map(([key, val]) => `${key}=${val}`).join('&')}`);
   }
 
   imageSearch() {

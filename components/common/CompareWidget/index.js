@@ -36,28 +36,29 @@ class CompareWidget extends React.Component {
   }
 
   render() {
-    const { cmpData } = this.props;
+    const { cmpData, removeAll } = this.props;
     return (cmpData.products.length > 0 &&
       <div className={styles['compare-fixed']}>
         <div className={styles['compare-container']}>
           <div className={styles['compare-icon-com']} onClick={this.showComparePage}>
             <a className={styles['compare-icon-holder']} href="javascript: void(0)">
               <SVGCompoent clsName={`${styles['compare-icon']}`} src="icons/compare" />
+              <span className={`${styles['pl-5']} ${styles['fs-10']}`}><span className={styles['pr-5']}>Compare</span><span className={`${styles['comp-length']}`}>{cmpData.products.length}</span></span>
             </a>
           </div>
           <div className={styles['compare-items']}>
-            <div style={{ width: `${cmpData.products.length * 180}px` }} className={`${styles['flex-center']} ${styles['justify-around']} ${styles['ht-240']}`}>
+            <div style={{ width: `${cmpData.products.length * 160}px` }} className={`${styles['flex-center']} ${styles['justify-around']} ${styles['ht-210']}`}>
               {cmpData.products.map((data) => {
                 const { catalogObj = {} } = data;
                 return (
                   <div className={styles.item} key={data.productId}>
                     <div className={styles['item-image']}>
                       <img className={styles.image} src={data.src} alt="" />
-                      <div>
-                        <a title={data.displayName} className={`${styles.ellips} ${styles.width100}`} href={`/${country}/${language}/product?productId=${catalogObj.product_id}${catalogObj.variant_id ? `&variantId=${catalogObj.variant_id}` : ''}&catalogId=${catalogObj.catalog_id}&itemType=${cmpData.itemtype}`}>
-                          {data.displayName}
-                        </a>
-                      </div>
+                    </div>
+                    <div className={styles['item-label']}>
+                      <a title={data.displayName} className={`${styles.ellips} ${styles.width100} ${styles['black-color']} ${styles['fs-12']}`} href={`/${country}/${language}/product?productId=${catalogObj.product_id}${catalogObj.variant_id ? `&variantId=${catalogObj.variant_id}` : ''}&catalogId=${catalogObj.catalog_id}&itemType=${cmpData.itemtype}`}>
+                        {data.displayName}
+                      </a>
                     </div>
                     <div data-id={data.productId} onClick={this.removeData} className={styles.close}>
                       <span>x</span>
@@ -66,6 +67,7 @@ class CompareWidget extends React.Component {
                 );
               })}
             </div>
+            <a onClick={removeAll} className={`${styles['fs-12']} ${styles['black-color']} ${styles['flex']} ${styles['justify-center']} ${styles['pt-15']}`}>Remove All</a>
           </div>
         </div>
       </div>
@@ -81,6 +83,7 @@ const mapDispatchToProps = dispatch => bindActionCreators(
   {
     getCompareCount: actionCreators.getCompareCount,
     removeCompareData: actionCreators.removeCompareData,
+    removeAll: actionCreators.removeAll,
   },
   dispatch,
 );
