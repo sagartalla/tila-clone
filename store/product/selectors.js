@@ -57,7 +57,9 @@ const getProduct = (store, variantId) => {
   const imgUrls = product_details && product_details.product_details_vo && product_details.product_details_vo.cached_product_details.media.gallery_media;
   const titleInfo = {
     brand: product_details && product_details.catalog_details && product_details.catalog_details.attribute_map.brand,
-    title: productAttributeMap && productAttributeMap.calculated_display_name && productAttributeMap.calculated_titles,
+    title: productAttributeMap && productAttributeMap.calculated_titles
+      && productAttributeMap.calculated_titles.attribute_values.length > 0
+      ? productAttributeMap.calculated_titles : productAttributeMap.calculated_display_name,
     rating: {
       rating: '',
       count: '',
