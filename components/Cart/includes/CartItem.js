@@ -247,7 +247,7 @@ class CartItem extends React.Component {
                           id={item_id}
                           cols="30"
                           rows="2"
-                          className={styles['resize-none']}
+                          className={`${styles['resize-none']} ${styles['outline-none']}`}
                           placeholder={CART_PAGE.GIFT_MESSAGE_OPTIONAL}
                           value={gift_card_message}
                           onChange={this.updateMsg}
