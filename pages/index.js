@@ -28,7 +28,7 @@ class LandingPage extends Base {
     const { country, language } = query;
     const setCountry = country || 'SAU'
     const setLanguage = language || 'en'
-    store.dispatch(MegamenuActionsCreators.getMegamenu())
+    await store.dispatch(MegamenuActionsCreators.getMegamenu())
     if(!country || !language) {
       if(res) {
         res.writeHead(302, {
