@@ -90,19 +90,19 @@ class OrderReturnExchange extends Component {
           <Row>
             <div className={`${styles['ret-exch-wrap']} ${styles['mt-20']}`}>
               <div className={`${styles.breadcrums} ${styles['fs-12']}`}>
-                <Link route={`/${country}/${language}/cam`}>
+                <Link route={`/${language}/customer`}>
                   <a>
                     <span className={`${styles['thick-gry-clr']}`}>{ORDER_PAGE.MY_ACCOUNT}</span>
                   </a>
                 </Link>
                 <span> > </span>
-                <Link route={`/${country}/${language}/cam/orders`}>
+                <Link route={`/${language}/customer/orders`}>
                   <a>
                     <span className={`${styles['thick-gry-clr']}`}>{ORDER_PAGE.ORDERS}</span>
                   </a>
                 </Link>
                 <span> > </span>
-                <Link route={`/${country}/${language}/cam/orders/${orderId}`}>
+                <Link route={`/${language}/customer/orders/${orderId}`}>
                   <a>
                     <span className={`${styles['black-color']}`}>{orderId}</span>
                   </a>
@@ -114,14 +114,14 @@ class OrderReturnExchange extends Component {
                     <Col md={6}>
                       <div className={styles['product-wrap']}>
                         <Col md={2}>
-                          <Link route={`/${country}/${language}/product?productId=${variant_info.product_id}${variant_id ? `&variantId=${variant_id}` : ''}&catalogId=${variant_info.catalog_id}&itemType=${variant_info.item_type}`}>
+                          <Link route={`/${language}/product?productId=${variant_info.product_id}${variant_id ? `&variantId=${variant_id}` : ''}&catalogId=${variant_info.catalog_id}&itemType=${variant_info.item_type}`}>
                             <a target="_blank">
                               <img src={`${constants.mediaDomain}/${img}`} alt="" />
                             </a>
                           </Link>
                         </Col>
                         <Col md={10}>
-                          <Link route={`/${country}/${language}/product?productId=${variant_info.product_id}${variant_id ? `&variantId=${variant_id}` : ''}&catalogId=${variant_info.catalog_id}&itemType=${variant_info.item_type}`}>
+                          <Link route={`/${language}/product?productId=${variant_info.product_id}${variant_id ? `&variantId=${variant_id}` : ''}&catalogId=${variant_info.catalog_id}&itemType=${variant_info.item_type}`}>
                             <a target="_blank">
                               <h4 className={`${styles['fs-16']} ${styles['mt-0']} ${styles.fontW600} ${styles.pointer}`}>{name}</h4>
                             </a>

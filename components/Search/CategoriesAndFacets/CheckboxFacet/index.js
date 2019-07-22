@@ -83,17 +83,19 @@ class CheckboxFacet extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { filter, attributeName } = this.props;
-    const facets = JSON.parse(decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent('facets').replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1")) || '{}');
+    const { filter, attributeName, facets } = nextProps;
+    // const facets = JSON.parse(decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent('facets').replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1")) || '{}');
     this.setState({
       isMoreButtonRequired: filter.children.length > MaxItems,
-      selectedItems: (facets[attributeName] || []).map((f) => f.name),
+      selectedItems: (facets[attributeName] || []).map(f => f),
+      filterItems: nextProps.selectedFilters.length > 0 ?
+        this.sortSelectedItems(nextProps.selectedFilters) : filter.children,
     });
   }
 
   render() {
     const { filter, index, facets } = this.props;
-    const { selectedItems, maxRows,filterItems } = this.state;
+    const { selectedItems, maxRows, filterItems } = this.state;
     return (
       <Panel eventKey={`${index + 'c'}`} key={filter.id}>
         <div className={`${styles['category-list']}`}>
@@ -107,7 +109,7 @@ class CheckboxFacet extends Component {
             { maxRows > 8  ?
               <RenderFilterBar
                 onFilterData={this.onFilterData}
-                placeName={`search ${filter.name}`}
+                placeName={`Search ${filter.name}`}
               /> :
               null
             }

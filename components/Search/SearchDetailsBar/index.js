@@ -41,7 +41,7 @@ class SearchDetailsBar extends Component {
 
   querySearch = (e) => {
     let dataSearchQuery = e.currentTarget.dataset.querysearch;
-    Router.pushRoute(`/${country}/${language}/srp?search=${dataSearchQuery}&disableSpellCheck=true&${Object.entries(this.props.optionalParams).map(([key, val]) => `${key}=${val}`).join('&')}`);
+    Router.pushRoute(`/${language}/search?q=${dataSearchQuery}&disableSpellCheck=true&${Object.entries(this.props.optionalParams).map(([key, val]) => `${key}=${val}`).join('&')}`);
   }
 
   handleWaypointEnter() {
