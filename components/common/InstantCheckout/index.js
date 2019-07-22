@@ -207,7 +207,7 @@ class InstantCheckout extends Component {
     return (
       <div>
         {
-          selectedAddr && selectedAddr.address_id && defaultCard.length > 0 ?
+          
             <div className={`${styles['instant-checkout']} ${styles['p-10']}`}>
               <div className={`${styles['pr-10']} ${styles['pl-10']}`}>
                 {
@@ -217,6 +217,8 @@ class InstantCheckout extends Component {
                     </div>
                     : ''
                 }
+                {selectedAddr && selectedAddr.address_id && defaultCard.length > 0 &&
+                <React.Fragment>
                 <h4 className={`${styles['fontW600']} ${styles['mb-0']} ${styles['flex']}`}>
                   {INSTANT_CHECKOUT.CHECKOUT_WITH_ONE_CLICK}
                   {/* <span className={`${styles['checkout-quat']} ${styles['fs-12']} ${styles['flex-center']} ${styles['justify-around']}`}>?</span> */}
@@ -226,6 +228,8 @@ class InstantCheckout extends Component {
                   <span className={`${styles['fs-12']} ${styles['pr-30']}`}><input type="radio" name="pay_type" className={styles['radio-btn']} checked={creditDebitCard} onChange={this.creditCardClickHandler} /> {INSTANT_CHECKOUT.CREDIT_DEDIT}</span>
                   <span className={styles['fs-12']}><input type="radio" name="pay_type" className={styles['radio-btn']} checked={cod} onChange={this.codClickHandler} /> {INSTANT_CHECKOUT.COD}</span>
                 </div>
+                </React.Fragment>
+                }
                 <div className={`${styles['border']} ${styles['border-radius2']} ${styles['bg-white']} ${styles['relative']} ${styles['mt-10']}`}>
                   {
                     selectedAddr && selectedAddr.address_id ?
@@ -295,23 +299,21 @@ class InstantCheckout extends Component {
                     */
                   }
                 </div>
-                {
-                  !cod &&
+                {cod ? '' :
                   <div
                     className={`${styles['flex']} ${styles['justify-center']}`}
                   >
                     <Button
                       className={`${styles['fp-btn']} ${styles['fp-btn-sucess']} ${styles['fontW600']} ${styles['instant-btn']}`}
                       onClick={this.doInstantCheckout}
+                      disabled={vaultResults.length === 0}
                       btnText={INSTANT_CHECKOUT.INSTANT_CHECKOUT}
                       showImage="icons/common-icon/instant-checkout"
                       btnLoading={showLoading}
                     />
-                  </div>
-                }
+                  </div>}
               </div>
             </div>
-            : null
         }
         <div>
           <Modal

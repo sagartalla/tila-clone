@@ -17,6 +17,7 @@ class ResetPasswordPage extends Base {
   }
   pageName = 'RESETPASSWORD';
   componentDidMount() {
+    Base.prototype.componentDidMount();
     let token = this.props.url.query.token;
     this.setState({
       token,

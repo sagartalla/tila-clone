@@ -20,59 +20,59 @@ const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...s
 
 const f = [
   {
-    url: `/SAU/${lang}/srp?search=Womens%20Clothing&language=en&isListed=false`,
+    url: `/SAU/${lang}/search?q=Womens%20Clothing&language=en&isListed=false`,
     title: FOOTER_PAGE.WOMEN_CLOTHING,
   },
 
   {
-    url: `/SAU/${lang}/srp?search=Mens%20Clothing&language=en&isListed=false`,
+    url: `/SAU/${lang}/search?q=Mens%20Clothing&language=en&isListed=false`,
     title: FOOTER_PAGE.MEN_CLOTHING,
   },
 
   {
-    url: `/SAU/${lang}/srp?search=Footwear&language=en&isListed=false`,
+    url: `/SAU/${lang}/search?q=Footwear&language=en&isListed=false`,
     title: FOOTER_PAGE.FOOT_WEAR,
   },
 
   {
-    url: `/SAU/${lang}/srp?search=sunglass&language=en&isListed=false`,
+    url: `/SAU/${lang}/search?q=sunglass&language=en&isListed=false`,
     title: FOOTER_PAGE.SUNGLASSES,
   },
 
   {
-    url: `/SAU/${lang}/srp?search=jewellery&language=en&isListed=false`,
+    url: `/SAU/${lang}/search?q=jewellery&language=en&isListed=false`,
     title: FOOTER_PAGE.JEWELLERY,
   },
 
   {
-    url: `/SAU/${lang}/srp/watch?search=watches&language=en&isListed=false`,
+    url: `/SAU/${lang}/search/watch?q=watches&language=en&isListed=false`,
     title: FOOTER_PAGE.WATCHES,
   },
 ];
 
 const e = [
   {
-    url: `/SAU/${lang}/srp?search=mobiles&language=en&isListed=false`,
+    url: `/SAU/${lang}/search?q=mobiles&language=en&isListed=false`,
     title: FOOTER_PAGE.MOBILES,
   },
 
   {
-    url: `/SAU/${lang}/srp?search=laptops&language=en&isListed=false`,
+    url: `/SAU/${lang}/search?q=laptops&language=en&isListed=false`,
     title: FOOTER_PAGE.LAPTOPS,
   },
 
   {
-    url: `/SAU/${lang}/srp?search=cameras&language=en&isListed=false`,
+    url: `/SAU/${lang}/search?q=cameras&language=en&isListed=false`,
     title: FOOTER_PAGE.CAMERAS,
   },
 
   {
-    url: `/SAU/${lang}/srp?search=Televisions&language=en&isListed=false`,
+    url: `/SAU/${lang}/search?q=Televisions&language=en&isListed=false`,
     title: FOOTER_PAGE.TELEVISIONS,
   },
 
   {
-    url: `/SAU/${lang}/srp?search=Storage%20Devices&language=en&isListed=false`,
+    url: `/SAU/${lang}/search?q=Storage%20Devices&language=en&isListed=false`,
     title: FOOTER_PAGE.STORAGE_DEVICES,
   },
 
@@ -84,51 +84,51 @@ const e = [
 
 const l = [
   {
-    url: `/SAU/${lang}/srp?search=Beauty%20&%20Personal%20Care&language=en&isListed=false`,
+    url: `/SAU/${lang}/search?q=Beauty%20&%20Personal%20Care&language=en&isListed=false`,
     title: FOOTER_PAGE.BEAUTY_AND_PERSONAL_CARE,
   },
 
   {
-    url: `/SAU/${lang}/srp?search=Home%20Furnishing&language=en&isListed=false`,
+    url: `/SAU/${lang}/search?q=Home%20Furnishing&language=en&isListed=false`,
     title: FOOTER_PAGE.HOME_FURNSHING,
   },
 
   {
-    url: `/SAU/${lang}/srp?search=Home%20Appliances&language=en&isListed=false`,
+    url: `/SAU/${lang}/search?q=Home%20Appliances&language=en&isListed=false`,
     title: FOOTER_PAGE.HOME_APLLIANCES,
   },
   {
-    url: `/SAU/${lang}/srp?search=Home%20Decor&language=en&isListed=false`,
+    url: `/SAU/${lang}/search?q=Home%20Decor&language=en&isListed=false`,
     title: FOOTER_PAGE.HOME_DECOR,
   },
   {
-    url: `/SAU/${lang}/srp?search=Baby%20Care&language=en&isListed=false`,
+    url: `/SAU/${lang}/search?q=Baby%20Care&language=en&isListed=false`,
     title: FOOTER_PAGE.BABY_CARE,
   },
   {
-    url: `/SAU/${lang}/srp?search=Health%20Care&language=en&isListed=false`,
+    url: `/SAU/${lang}/search?q=Health%20Care&language=en&isListed=false`,
     title: FOOTER_PAGE.HEALTH_CARE,
   },
 ];
 
 const t = [
   {
-    url: `/SAU/${lang}/srp?search=apple&language=en&isListed=false`,
+    url: `/SAU/${lang}/search?q=apple&language=en&isListed=false`,
     title: '/static/img/bg-img/Apple.png',
   },
 
   {
-    url: `/SAU/${lang}/srp?search=baseus&language=en&isListed=false`,
+    url: `/SAU/${lang}/search?q=baseus&language=en&isListed=false`,
     title: '/static/img/bg-img/Baseus.png',
   },
 
   {
-    url: `/SAU/${lang}/srp?search=ray%20ban&language=en&isListed=false`,
+    url: `/SAU/${lang}/search?q=ray%20ban&language=en&isListed=false`,
     title: '/static/img/bg-img/RayBan.png',
   },
 
   {
-    url: `/SAU/${lang}/srp?search=fossil&language=en&isListed=false`,
+    url: `/SAU/${lang}/search?q=fossil&language=en&isListed=false`,
     title: '/static/img/bg-img/Fossil.png',
   },
 ];

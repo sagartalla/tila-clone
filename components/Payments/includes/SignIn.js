@@ -46,7 +46,6 @@ class SignIn extends Component {
   }
   componentDidMount() {
     const { userInfoData, isLoggedIn } = this.props;
-    console.log('userInfoData', userInfoData);
     if (isLoggedIn && userInfoData && userInfoData.email_verified === 'NV') {
       const data = { currentFlow: 'existing_user_login', nextPage: 'verify_email' };
       const { v2CurrentFlow } = this.props;

@@ -35,7 +35,7 @@ const CaptchaContent = ({items,state,handleDrop,handleClick}) => {
   return (
     items
       ?
-        <div className={`${styles['flx-spacebw-alignc']} ${styles['flex-wrp']} ${styles['fw700']} ${styles['pt-30']} ${styles['pb-30']}`}>
+        <div className={`${styles['flx-spacebw-alignc']} ${styles['fw700']} ${styles['pt-30']} ${styles['pb-30']}`}>
             <div className={`${styles['pr-10']} ${styles['pb-20']}`}>
               {/* <ul className={`${styles['pl-0']} ${styles['m-0']} ${styles['cash-tab']}`}>
                 <li>Visual</li>

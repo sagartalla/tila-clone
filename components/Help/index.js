@@ -33,9 +33,13 @@ class Help extends Component {
       modalType: '',
       selectedOrder: '',
       selectedIssue: '',
-      searchQuery: window.location.search.split('=')[1] ? decodeURIComponent(window.location.search.split('=')[1]) : ''
     }
     this.props.getCategories();
+  }
+  componentDidMount() {
+    this.setState({
+      searchQuery: window.location.search.split('=')[1] ? decodeURIComponent(window.location.search.split('=')[1]) : ''
+    })
   }
   handleContactClick = ({type, isClickable}, selectedOrder, selectedIssue) => (e) => {
     if(isClickable) {

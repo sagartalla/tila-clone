@@ -3,7 +3,7 @@ const Fashion = () => (
   <div className="fashion-main-part">
     <Grid fluid={true} className={styles['p-0']}>
       <div className={`${styles['flex']} fashion-banner-main ${styles['relative']}`}>
-        <a href="/SAU/en/srp?search=dress&isListed=false">
+        <a href="/SAU/en/search?q=dress&isListed=false">
           <img src={`/static/img/landing-page-fashion/${lang === 'en' ? 'womens-clothing' : 'womens-clothing-ar'}.jpg`} className="img-responsive" />
         </a>
         {/* <div className={`${styles['absolute']} ${styles['flex']} ${styles['flex-colum']} banner-label`}>

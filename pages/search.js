@@ -6,6 +6,7 @@ import Cookies from 'universal-cookie';
 import createHistory from 'history/createBrowserHistory';
 import Base, { baseActions } from './base';
 import makeStore from '../store';
+import { languageDefinations } from '../utils/lang';
 import { actionCreators, selectors } from '../store/search';
 import { actionCreators as authActionsCreators, selectors as authSelectors } from '../store/auth';
 import { actionCreators as megamenuActionsCreators } from '../store/megamenu';
@@ -16,9 +17,11 @@ import SearchContext from '../components/helpers/context/search';
 
 const cookies = new Cookies();
 
+const { SEO_CONTENT } = languageDefinations();
+
 class SearchPage extends Base {
   static async getInitialProps({ store, isServer, query, req }) {
-    const { country, language, search, facets, category, subCategory, isListed, disableSpellCheck, sid } = query
+    const { country, language, q, facets, category, subCategory, isListed, disableSpellCheck, sid } = query
     const categoryTree = query.categoryTree === 'true'; //TODO need better way to identify category tree
     const categoryFacet = query.categoryFacet === 'true';
     //TODO SF-37 better handling of country
@@ -33,14 +36,14 @@ class SearchPage extends Base {
       id: sid ? sid.split(',').pop() : null,
     };
     const { facetFilters, facetFiltersCopyWithNames } = selectors.getFacetfilters(store.getState())(JSON.parse(facets || '{}'));
-    const shippingData = req ? req.universalCookies.get('shippingInfo') : cookies.get('shippingInfo');;
+    const shippingData = req ? req.universalCookies.get('shippingInfo') : cookies.get('shippingInfo');
     const { city: shippingCity, country: shippingCountry } = shippingData || {};
     const searchOptions = {
       categoryFilter,
       categoryFacet,
       country: country || undefined,
       pageSize: 25,
-      query: search,
+      query: q,
       language: language || 'en',
       facetFilters,
       facetFiltersCopyWithNames,
