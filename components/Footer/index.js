@@ -145,7 +145,7 @@ const FooterBar = props => (
             <span className={`${styles.flex} ${styles['quation-bar']}`}>
               <SVGComponent clsName={`${styles['quation-bar-inn']}`} src="icons/common-icon/quation" />
             </span>
-            <a href={`/${country}/${lang}/help/faq`} target="_blank" className={styles.black}>
+            <a href={`/${lang}/help/faq`} target="_blank" className={styles.black}>
               <div className={`${styles.flex} ${styles['flex-colum']} ${styles['pl-20']}`}>
                     <span className={`${styles.fontW600} ${styles['text-uppercase']}`}>{FOOTER_PAGE.GOT_QUESTION}</span>
                     <span className={styles['footer-suport-title']}>{`${FOOTER_PAGE.WE_CARE_TILA} | 900-66666`}</span>

@@ -120,7 +120,7 @@ class Orders extends Component {
     const { title, image_url } = variant_info;
     const [order_item_id] = order_item_ids;
     const isSelected = this.state.selectedOrder ? this.state.selectedOrder.order_item_ids[0] === order_item_id : false;
-    const orderURL =`/${country}/${language}/customer/orders/${order_id}`
+    const orderURL =`/${language}/customer/orders/${order_id}`
     return (
       <div key={order_item_id} className={styles['bB']} onClick={this.selectOrder(orderItemObj)}>
         <div className={`${styles['facp']} ${styles['ht-110']} ${styles['p-10']}`}>
@@ -155,7 +155,7 @@ class Orders extends Component {
         <div onScroll={this.handleOrdersScroll} className={styles['ordersContentContainer']}>
           <div className={styles['orderContents']}>
             <h4>{HNS['SELECT_ORDER_WITH_ISSUE']}</h4>
-            <a href={`/${country}/${language}/customer/orders/`} className={styles['myOrderBtn']}>
+            <a href={`/${language}/customer/orders/`} className={styles['myOrderBtn']}>
               {HNS['MY_ORDERS']}
             </a>
           </div>

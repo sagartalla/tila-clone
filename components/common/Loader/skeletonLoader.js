@@ -10,23 +10,23 @@ const country = cookies.get('country') || 'SAU';
 class SkeletonLoader extends Component {
   getPlaceHolder = (pathname) => {
     switch (pathname.split('?')[0]) {
-      case `/${country}/${language}/search`:
+      case `/${language}/search`:
         return searchPlaceHolder
-      case `/${country}/${language}/product`:
+      case `/${language}/product`:
         return productPlaceHolder
       case `/search`:
         return searchPlaceHolder
-      case `/${country}/${language}/srp`:
+      case `/${language}/srp`:
         return searchPlaceHolder
-      case `/${country}/${language}/customer/mycoupons`:
+      case `/${language}/customer/mycoupons`:
         return couponPlaceHolder
       case `/product`:
         return productPlaceHolder
-      case `/${country}/${language}/cart`:
+      case `/${language}/cart`:
         return cartPlaceHolder
-      case `/${country}/${language}/payment`:
+      case `/${language}/payment`:
         return cartPlaceHolder
-      case `/${country}/${language}/customer/profile`:
+      case `/${language}/customer/profile`:
         return camProfileHolder
       case `/profile`:
           return camProfileHolder
@@ -34,17 +34,17 @@ class SkeletonLoader extends Component {
           return camProfileHolder
       case `/cart`:
           return cartPlaceHolder
-      case `/${country}/${language}`:
+      case `/${language}`:
         return homePageHolder
-      case `/${country}/${language}/landing/electronics`:
+      case `/${language}/landing/electronics`:
         return homePageHolder
-      case `/${country}/${language}/landing/fashion`:
+      case `/${language}/landing/fashion`:
         return homePageHolder
-      case `/${country}/${language}/landing/lifestyle`:
+      case `/${language}/landing/lifestyle`:
         return homePageHolder
       case `/`:
         return homePageHolder
-      // case `/${country}/${language}/customer/orders`:
+      // case `/${language}/customer/orders`:
       //   return camOrdersHolder
       //   break;
     }
