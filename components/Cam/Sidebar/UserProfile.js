@@ -86,7 +86,7 @@ class UserProfile extends React.Component {
         <label className={`${styles['file-upload']}`} onMouseOver={this.handleMouseOver} onMouseOut={this.handleMouseOut}>
           <input title={`${CAM.CHOOSE_PROFILE_PIC}`} type='file' className={`${styles['display-pic']}`} onChange={this.handleChange} />
         </label>
-        <Link route={`/${country}/${language}/cam/profile`}>
+        <Link route={`/${country}/${language}/customer/profile`}>
           <a style={{ display: 'block' }}>
             <div className={`${`/${country}/${language}/cam/profile` === `/${country}/${language}/cam/${tab}` ? styles['active'] : {}} ${styles['user-profile']} ${styles['p-10-20']}  ${styles['align-center']} ${styles['flex']}`}>
                   <ProfilePic loader={this.state.loader} userInfo={userInfo} imgUrl={imgUrl} mouseOver={this.state.mouseOver}/>

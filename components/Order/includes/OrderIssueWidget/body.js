@@ -140,8 +140,8 @@ class Body extends Component {
       }
       case STEPS.RETURN_COMPLETE: {
         nextStep = null;
-        issueType == 'EXCHANGE' ? Router.pushRoute(`/${country}/${language}/cam/orders/${exchangeId.order_id}`):
-                      Router.pushRoute(`/${country}/${language}/cam/orders`)
+        issueType == 'EXCHANGE' ? Router.pushRoute(`/${country}/${language}/customer/orders/${exchangeId.order_id}`):
+                      Router.pushRoute(`/${country}/${language}/customer/orders`)
         break;
       }
       default:

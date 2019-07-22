@@ -248,7 +248,7 @@ class Incidents extends Component {
     const {order_item_ids, status, variant_info, order_id} = orderItemObj;
     const { title, image_url } = variant_info;
     const [order_item_id] = order_item_ids;
-    const orderURL =`/${country}/${language}/cam/orders/${order_id}`
+    const orderURL =`/${country}/${language}/customer/orders/${order_id}`
     return (
       <div key={order_item_id} className={`${styles['bB']} ${styles['bT']}`}>
         <div className={`${styles['facp']} ${styles['ht-110']} ${styles['p-10']}`}>

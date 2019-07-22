@@ -36,9 +36,9 @@ const OrderDetails = ({ query, orderData, thankyouPage }) => {
               {
                 thankyouPage ? '' :
                 <Fragment>
-                  <span><a className={`${styles['black-color']}`} onClick={() => routeChange(`/${country}/${language}/cam/profile`)}>{ORDER_PAGE.MY_ACCOUNT}</a></span>
+                  <span><a className={`${styles['black-color']}`} onClick={() => routeChange(`/${country}/${language}/customer/profile`)}>{ORDER_PAGE.MY_ACCOUNT}</a></span>
                   <span> > </span>
-                  <span ><a className={`${styles['black-color']}`} onClick={() => routeChange(`/${country}/${language}/cam/orders`)}>{ORDER_PAGE.ORDERS}</a></span>
+                  <span ><a className={`${styles['black-color']}`} onClick={() => routeChange(`/${country}/${language}/customer/orders`)}>{ORDER_PAGE.ORDERS}</a></span>
                   <span> > </span>
                   <span>{query.orderId}</span>
                 </Fragment>
