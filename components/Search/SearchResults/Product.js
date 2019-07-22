@@ -196,7 +196,7 @@ class Product extends Component {
 
   routeChange(productId, variantId, catalogId, itemtype, index, pageNum) {
     this.itemNumberClick(index, pageNum);
-    // Router.pushRoute(`/${country}/${language}/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemtype}`)
+    // Router.pushRoute(`/${language}/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemtype}`)
   }
 
   preventDefaultClick(e) {
@@ -307,7 +307,7 @@ class Product extends Component {
           className={`${styles['product-items-main']} ${styles.relative} ${styles['p-0']} ${selectedProduct ? styles['active-product'] : ''}`}
           onClick={() => this.routeChange(productId, variantId, catalogId, itemtype, index, pageNum)}
         >
-          <Link route={`/${country}/${language}/product?productId=${productId}${variants.length > 0 && variants[selectedIndex].variantId ? `&variantId=${variants[selectedIndex].variantId}` : ''}&catalogId=${catalogId}&itemType=${itemtype}`}>
+          <Link route={`/${language}/product?productId=${productId}${variants.length > 0 && variants[selectedIndex].variantId ? `&variantId=${variants[selectedIndex].variantId}` : ''}&catalogId=${catalogId}&itemType=${itemtype}`}>
             <a target="_blank">
               <div className={`${styles['product-items']}`} onMouseEnter={this.setImg} onMouseLeave={this.leaveImg}>
                 {showLoader ?

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Cookie from 'universal-cookie';
 import _ from 'lodash';
+import { Router } from '../../../routes';
 import { decode, encode, addUrlProps, replaceInUrlQuery } from 'react-url-query';
 import { PanelGroup, Panel } from 'react-bootstrap';
 import { actionCreators, selectors } from '../../../store/search';
@@ -16,6 +18,11 @@ import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from '../search_en.styl';
 import styles_ar from '../search_ar.styl';
 
+const cookies = new Cookie();
+
+const language = cookies.get('language') || 'en';
+const country = cookies.get('country') || 'SAU';
+
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
 class CategoriesAndFacets extends Component {
@@ -26,17 +33,21 @@ class CategoriesAndFacets extends Component {
   }
 
   onChangeHandle(facetName, facetType) {
+    const { search, facets } = this.props;
     const curryHandler = (value, e) => {
-      const params = JSON.parse(decodeURIComponent(window.location.search.replace(new RegExp('^(?:.*[&\\?]' + encodeURIComponent('facets').replace(/[\.\+\*]/g, '\\$&') + '(?:\\=([^&]*))?)?.*$', 'i'), '$1')) || '{}');
+      // Router.pushRoute(`/${language}/srp?facets.${facetName}=${value.name}&search=${search.q}&${Object.entries(this.props.optionalParams).map(([key, val]) => `${key}=${val}`).join('&')}`);
+      // const params = JSON.parse(decodeURIComponent(window.location.search.replace(new RegExp('^(?:.*[&\\?]' + encodeURIComponent('facets').replace(/[\.\+\*]/g, '\\$&') + '(?:\\=([^&]*))?)?.*$', 'i'), '$1')) || '{}');
+      const params = facets;
+      // const params = `/${language}/srp?facets`;
       params[facetName] = params[facetName] || [];
       digitalData.filter.leftnavfilters = `${facetName}:${value.name}`;
       // if (facetType === 'PERCENTILE') {
       //   params[facetName] = [value];
       // } else {
       if (e.target.checked) {
-        params[facetName].push(value);
+        params[facetName].push(value.name);
       } else {
-        params[facetName] = params[facetName].filter((item) => item.name !== value.name)        
+        params[facetName] = params[facetName].filter((item) => item !== value.name)
         if (!params[facetName].length) { delete params[facetName]; }
       }
       // }
@@ -51,7 +62,8 @@ class CategoriesAndFacets extends Component {
   }
 
   render() {
-    const { filters, facets } = this.props;
+    const { filters, facets, search } = this.props;
+    console.log('ihikd', filters, facets);
     return (
       <PanelGroup accordion id="categories-panel">
         {filters.category.map((filter, index) => (
@@ -63,13 +75,13 @@ class CategoriesAndFacets extends Component {
           //   let selectedFilters = facets[filter.attributeName];
           //   return filter.children.length ? <RangeFitler filter={filter} key={filter.id} onChangeHandle={this.onChangeHandle(filter.attributeName, filter.type)} selectedFilters={selectedFilters || []}/> : null;
           // }
-          let selectedFilters = facets[filter.attributeName];
-          selectedFilters = selectedFilters ? selectedFilters.map(item => item.name) : [];
+          const selectedFilters = facets[filter.attributeName];
           return filter.children.length ?
             <CheckboxFacet
               attributeName={filter.attributeName}
               facets={facets}
               filter={filter}
+              search={search}
               onChangeHandle={this.onChangeHandle(filter.attributeName, filter.type)}
               selectedFilters={selectedFilters}
               index={index}
@@ -87,6 +99,7 @@ class CategoriesAndFacets extends Component {
 const mapStateToProps = store => ({
   filters: selectors.getSearchFilters(store),
   getFacetfilters: selectors.getFacetfilters(store),
+  optionalParams: selectors.optionParams(store),
 });
 
 const mapDispatchToProps = dispatch =>
@@ -104,9 +117,9 @@ function mapUrlToProps(url) {
 }
 
 const mapUrlChangeHandlersToProps = () => ({
-    onChangeFacets: (value) => replaceInUrlQuery('facets', encode((e) => {
-      return JSON.stringify(e || {})
-    }, value))
-  });
+  onChangeFacets: (value) => replaceInUrlQuery('facets', encode((e) => {
+    return JSON.stringify(e || {})
+  }, value))
+});
 
 export default addUrlProps({ mapUrlToProps, mapUrlChangeHandlersToProps })(connect(mapStateToProps, mapDispatchToProps)(CategoriesAndFacets));

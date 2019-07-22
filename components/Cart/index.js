@@ -102,7 +102,7 @@ class Cart extends Component {
       this.props.track({
         eventName: 'Checkout Started',
       });
-      Router.pushRoute(`/${country}/${language}/payment`);
+      Router.pushRoute(`/${language}/payment`);
     }
   }
 

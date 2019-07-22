@@ -63,8 +63,8 @@ function sessionCookie(req, res, next) {
     return;
   }
   const pathSplit = req.path.split('/');
-  const country = pathSplit[1];
-  const language = pathSplit[2];
+  // const country = pathSplit[1];
+  const language = pathSplit[1];
   const cookieCountry = req.universalCookies.get('country');
   const cookieLanguage = req.universalCookies.get('language');
   const sid = req.universalCookies.get('sessionId');
@@ -73,7 +73,7 @@ function sessionCookie(req, res, next) {
     res.cookie('sessionId', req.universalCookies.get('sessionId'));
   }
   global.APP_LANGUAGE = ['en', 'ar'].indexOf(language) !== -1 ? language : (cookieLanguage ? cookieLanguage : 'en');
-  global.APP_COUNTRY = country ? country : (cookieCountry ? cookieCountry : 'SAU');
+  global.APP_COUNTRY = cookieCountry ? cookieCountry : 'SAU';
 
   res.cookie('language', global.APP_LANGUAGE);
   res.cookie('country', global.APP_COUNTRY);
