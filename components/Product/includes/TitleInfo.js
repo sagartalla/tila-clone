@@ -151,8 +151,14 @@ class TitleInfo extends Component {
             ))
           } */}
         </div>
-        <h1 className={`${styles['fs-18']} ${styles.fontW700} ${styles['black-color']} ${styles['mt-0']} ${styles['mb-0']} ${!title.translation ? styles['direction-ir'] : ''}`}>{title.attribute_values[0].value}</h1>
-        <h1 className={`${styles['fs-16']} ${styles.fontW700} ${styles['black-color']} ${styles['mt-0']} ${styles['mb-0']} ${!title.translation ? styles['direction-ir'] : ''}`}>{title.attribute_values[1].value}</h1>
+        <h1 className={`${styles['fs-18']} ${styles.fontW700} ${styles['black-color']} ${styles['mt-0']} ${styles['mb-0']} ${!title.translation ? styles['direction-ir'] : ''}`}>
+          {title.attribute_values && title.attribute_values.length > 0
+            && title.attribute_values[0].value}
+        </h1>
+        <h1 className={`${styles['fs-16']} ${styles.fontW700} ${styles['black-color']} ${styles['mt-5']} ${styles['mb-0']} ${!title.translation ? styles['direction-ir'] : ''}`}>
+          {title.attribute_values && title.attribute_values.length > 1
+            && title.attribute_values[1].value}
+        </h1>
         {
           isPreview
             ?
