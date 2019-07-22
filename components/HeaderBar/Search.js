@@ -100,7 +100,7 @@ class Search extends Component {
     const { query } = this.state;
     const input = document.getElementById('text-box');
     input.focus();
-    input.setSelectionRange(query.length, query.length);
+    input.setSelectionRange(query && query.length, query && query.length);
   }
   setSearchText(e) {
     const searchPosition = e.target.getAttribute('index');
@@ -167,7 +167,7 @@ class Search extends Component {
 
 
   fetchSuggestions() {
-    this.props.fetchSuggestions({ key: this.state.query.trim() });
+    this.props.fetchSuggestions({ key: this.state.query && this.state.query.trim() });
   }
 
   fireCustomEventClick = () => {
@@ -179,7 +179,6 @@ class Search extends Component {
     const {
       suggestions, openImagesearch, query, autoSearchValue, searchInput,
     } = this.state;
-    console.log('query123', query);
     return (
       <div className={styles['search-wrapper']}>
         <form onSubmit={this.submitQuery}>
