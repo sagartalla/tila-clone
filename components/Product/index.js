@@ -63,7 +63,7 @@ const getProductComponent = (isPreview, taskCode) => {
       if (window.localStorage && !isPreview) {
         const { productData } = this.props;
         const {
-          offerInfo, titleInfo, imgUrls, shippingInfo,
+          offerInfo, titleInfo, imgUrls,
         } = productData;
         digitalData.page.pageInfo.pageName = titleInfo.title.attribute_values[0].value;
         digitalData.page.category = { primaryCategory: productData.categoryType };
