@@ -173,7 +173,7 @@ export const AR_KEYWORDS = {
     NO_WISHLIST_LABEL: 'So many products on Tila and yet you show no love :(',
     DONT_WAIT: 'Dont wait no more!',
     START_SHOPPING: 'Start shopping',
-    PRICE_DECRECED_BY: 'Price Decreased by',
+    PRICE_DECRECED_BY: 'انخفض السعر بنسبة',
     PRICE_INCREASED_BY: 'Price Increased by',
   },
   PDP_PAGE: {
@@ -198,7 +198,7 @@ export const AR_KEYWORDS = {
     NOTIFY_ME: 'خبرني',
     BUY_FOR: 'أشتري ل...',
     ADDED_TO_CART: 'في سلة التسوق',
-    IN_CART: 'IN CART',
+    IN_CART: 'في عربة التسوق',
     // //New keys
     GO_TO_CART: 'الذهاب إلى سلة التسوق',
     OFFERS: 'العروض',
@@ -848,8 +848,8 @@ export const AR_KEYWORDS = {
     SALE_EVENT_AND_CAMPAIGN_UPDATE_SUB: 'انشئ حسابك لتحصل على تخفيضات فلاش وإطلاقاتنا الجديدة وأحدث الحملات',
     FEEDBACK_SURVEY_AND_PRODUCT_REVIEW_HEADING: 'استطلاعات الرأي وتقييم المنتجات',
     FEEDBACK_SURVEY_AND_PRODUCT_REVIEW_SUB: 'انشئ حسابك لتحصل على  خصومات خاصة بك وكوبونات',
-    NOTE: 'Note :',
-    YOU_WILL_BE_UNSUBSCRIBED: 'You will be unsubscribed for the above notifications if you uncheck the boxes.',
+    NOTE: ': ملاحظة',
+    YOU_WILL_BE_UNSUBSCRIBED: 'حتسير غير مشترك للإشعارات اللي في الأعلى لو ما شيكت على الصناديق ',
   },
   REVIEWS: {
     TITLE: 'My Reviews & Ratings',
