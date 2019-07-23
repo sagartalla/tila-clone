@@ -163,7 +163,7 @@ class ActionBar extends Component {
   logoutClick() {
     this.props.logout().then((res) => {
       if (res && res.value && res.value.status === 200) {
-        window.location = `${window.location.origin}/${cookies.get('country')}/${cookies.get('language')}`;
+        window.location = `${window.location.origin}/${cookies.get('language')}`;
       }
     });
   }
