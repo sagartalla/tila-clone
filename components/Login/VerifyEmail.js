@@ -28,6 +28,7 @@ class VerifyEmail extends Component {
       value: '',
       otpError: false,
       seconds: 30 * 60,
+      resendClicked: false,
     };
   }
 
@@ -81,11 +82,14 @@ class VerifyEmail extends Component {
         seconds: 30 * 60,
       });
     });
+    this.setState({
+      resendClicked: true,
+    });
   }
 
   render() {
     const { activeEmailId, loadingStatus, userInfoData, profileInfo } = this.props;
-    const { value, otpError, seconds } = this.state;
+    const { value, otpError, seconds, resendClicked } = this.state;
     return (
       <div className={`${styles.width100}`}>
         <div className={`${styles.flex} ${styles['align-center']} ${styles['justify-between']}`}>
@@ -114,7 +118,7 @@ class VerifyEmail extends Component {
             <div className={`${styles['flex-colum']}`}>
               <div className={`${styles['otp-expire']}`}>
               {seconds === 0 ? <div>{EMAIL_VERIFICATION.OTP_HAS} <span className={`${styles['thick-red']}`}>{EMAIL_VERIFICATION.OTP_EXPIRED}</span>, {EMAIL_VERIFICATION.PLEASE_CLICK_ON_THE_LINK}</div> : LOGIN_PAGE.OTP_EXPIRE_IN}&nbsp;
-              {seconds !== 0 && <span className={styles['black-color']}><Timer time={seconds} getSeconds={this.getSeconds} /></span>}
+              {seconds !== 0 && <span className={styles['black-color']}><Timer time={seconds} getSeconds={this.getSeconds} resendClicked={resendClicked}/></span>}
               </div>
               <div className={styles['t-c']}>
                 <span
