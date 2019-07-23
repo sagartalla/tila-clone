@@ -113,7 +113,7 @@ class VerifyEmail extends Component {
             {otpError ? <div className={`${styles['thick-red-clr']}`}>{EMAIL_VERIFICATION.PLEASE_ENTER_OTP_SENT}</div> : ''}
             <div className={`${styles['flex-colum']}`}>
               <div className={`${styles['otp-expire']}`}>
-              {seconds === 0 ? <div>OTP has <span className={`${styles['thick-red']}`}>Expired</span>, Please click on the resend link below</div> : LOGIN_PAGE.OTP_EXPIRE_IN}&nbsp;
+              {seconds === 0 ? <div>{EMAIL_VERIFICATION.OTP_HAS} <span className={`${styles['thick-red']}`}>{EMAIL_VERIFICATION.OTP_EXPIRED}</span>, {EMAIL_VERIFICATION.PLEASE_CLICK_ON_THE_LINK}</div> : LOGIN_PAGE.OTP_EXPIRE_IN}&nbsp;
               {seconds !== 0 && <span className={styles['black-color']}><Timer time={seconds} getSeconds={this.getSeconds} /></span>}
               </div>
               <div className={styles['t-c']}>

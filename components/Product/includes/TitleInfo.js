@@ -178,10 +178,8 @@ class TitleInfo extends Component {
             <div className={`${styles['flex-center']} ${styles['checkout-instantly']} ${styles['pt-5']}`}>
               <div className={`${styles.flex}`}>
                 {totalInventoryCount > 0 && isLoggedIn &&
-                savedCardsData && savedCardsData.length > 0 && shippingInfo && shippingInfo.shippable ?
-                    <a className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['fs-14']} ${styles['mr-10']} ${styles['small-btn']} ${styles['checkout-instant-btn']} ${styles['left-radius']}`} onClick={this.checkoutInstantHandler}>{PDP_PAGE.CHECKOUT_INSTANT}</a>
-                    :
-                    <a className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['fs-14']} ${styles['mr-10']} ${styles['small-btn']} ${styles['disable-checkout-instant-btn']} ${styles['left-radius']}`}>{PDP_PAGE.CHECKOUT_INSTANT}</a>                                                     
+                savedCardsData && savedCardsData.length > 0 && shippingInfo && shippingInfo.shippable &&
+                    <a className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['fs-14']} ${styles['mr-10']} ${styles['small-btn']} ${styles['checkout-instant-btn']} ${styles['left-radius']}`} onClick={this.checkoutInstantHandler}>{PDP_PAGE.CHECKOUT_INSTANT}</a>                                                     
                 }
               </div>
               <div className={styles['flex']}>
