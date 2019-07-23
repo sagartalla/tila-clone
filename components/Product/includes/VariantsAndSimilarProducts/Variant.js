@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import _ from 'lodash';
 import lang from '../../../../utils/language';
 
@@ -43,7 +42,7 @@ class Variant extends Component {
   }
 
   render() {
-    const { displayName, values, onSelectVariant, id } = this.props;
+    const { displayName, id } = this.props;
 
     return (
       <div className={`${styles['pt-10']} ${styles['pb-10']} ${styles['pr-15']}`}>

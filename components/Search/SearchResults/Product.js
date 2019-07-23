@@ -337,7 +337,7 @@ class Product extends Component {
                         pauseOnHover={false}
                       >
                         {media && media.slice(0, 5).map((image, index) => (
-                          <div>
+                          <div key={index}>
                             <img src={`${constants.mediaDomain}/${image}`} alt="imageURL" key={index} />
                           </div>
                         ))}
@@ -485,7 +485,6 @@ class Product extends Component {
 Product.propTypes = {
   media: PropTypes.array.isRequired,
   displayName: PropTypes.string.isRequired,
-  variants: PropTypes.object.isRequired,
 };
 
 Product.defaultProps = {
