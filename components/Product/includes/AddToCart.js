@@ -50,7 +50,7 @@ class AddToCart extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (this.state.buyNow == true && nextProps.isAddedToCart) {
-      Router.pushRoute(`/${country}/${language}/payment`);
+      Router.pushRoute(`/${language}/payment`);
     }
   }
 

@@ -41,7 +41,7 @@ const MiniWishlist = (props) => {
                 <div key={wishlist_id} className={`${styles.flex} ${styles['pt-15']} ${styles['pb-15']} ${styles['border-b']} ${styles['min-items-list']}`}>
                   <Col md={2} sm={2} xs={2} className={`${styles['pl-0']} ${styles['pr-0']}`}>
                     <div className={`${styles['wishlist-container-img']} ${styles.flex} ${styles['justify-center']}`}>
-                      <Link route={`/${country}/${language}/product?productId=${product_id}${variant_id ? `&variantId=${variant_id}` : ''}&catalogId=${catalog_id}&itemType=${itemType}`}>
+                      <Link route={`/${language}/product?productId=${product_id}${variant_id ? `&variantId=${variant_id}` : ''}&catalogId=${catalog_id}&itemType=${itemType}`}>
                         <a className={`${styles.width100} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
                           <img className={styles.img} src={`${constants.mediaDomain}/${img}`} />
                         </a>
@@ -51,7 +51,7 @@ const MiniWishlist = (props) => {
                   <Col md={10} sm={10} xs={10} className={`${styles['pr-0']} ${styles['wishlist-details-labels']} ${styles.flex} ${styles['justify-between']} ${styles['flex-colum']}`}>
                     <div className={`${styles['flx-space-bw']}`}>
                       <h6 className={`${styles['m-0']} ${styles['wishlist-details-name']} ${styles.flex}`}>
-                        <Link route={`/${country}/${language}/product?productId=${product_id}${variant_id ? `&variantId=${variant_id}` : ''}&catalogId=${catalog_id}&itemType=${itemType}`}>
+                        <Link route={`/${language}/product?productId=${product_id}${variant_id ? `&variantId=${variant_id}` : ''}&catalogId=${catalog_id}&itemType=${itemType}`}>
                           <a className={`${styles.width100} ${styles['ht-100P']} ${styles['fs-12']} ${styles['light-gry-clr']}`}>
                             {name}
                           </a>
@@ -95,7 +95,7 @@ const MiniWishlist = (props) => {
       {props.wishListCount && props.wishListCount > 0 ?
         <Col md={12} className={`${styles['wishlist-background']} ${styles['pb-15']}`}>
           <div className={`${styles['fs-14']} ${styles['p-10']} ${styles.fontW600} ${styles['t-c']}`}>
-        {<a href={`/${country}/${language}/customer/wishlist`} className={`${styles['black-color']}`}>
+        {<a href={`/${language}/customer/wishlist`} className={`${styles['black-color']}`}>
         {props.wishListCount &&  props.wishListCount === 3 ? props.wishListCount - 2 + ' ' + HEADER_PAGE.MORE_ITEM : props.wishListCount > 2 ? props.wishListCount - 2 + ' ' + HEADER_PAGE.MORE_ITEMS : props.wishListCount < 3 && ''}</a>}</div>
           <Button
             className={`${styles.flex} ${styles.width100} ${styles['go-to-wishlist']} ${styles.fontW600} ${styles['fs-14']} ${styles['text-uppercase']}`}

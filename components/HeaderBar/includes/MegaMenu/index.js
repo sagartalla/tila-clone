@@ -142,7 +142,7 @@ class MegaMenu extends Component {
                     >
                     <div>
                       {/* <Link route={`/category/${item.displayName}-${item.id}?categoryTree=true&isListed=false`}> */}
-                      <Link route={`/${country}/${language}/${this.getLandingPageLink(item.id)}`}>
+                      <Link route={`/${language}/${this.getLandingPageLink(item.id)}`}>
                         <a>{item.displayName}</a>
                       </Link>
                     </div>

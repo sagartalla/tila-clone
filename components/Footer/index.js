@@ -20,115 +20,115 @@ const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...s
 
 const f = [
   {
-    url: `/SAU/${lang}/search?q=Womens%20Clothing&language=en&isListed=false`,
+    url: `/${lang}/search?q=Womens%20Clothing&language=en&isListed=false`,
     title: FOOTER_PAGE.WOMEN_CLOTHING,
   },
 
   {
-    url: `/SAU/${lang}/search?q=Mens%20Clothing&language=en&isListed=false`,
+    url: `/${lang}/search?q=Mens%20Clothing&language=en&isListed=false`,
     title: FOOTER_PAGE.MEN_CLOTHING,
   },
 
   {
-    url: `/SAU/${lang}/search?q=Footwear&language=en&isListed=false`,
+    url: `/${lang}/search?q=Footwear&language=en&isListed=false`,
     title: FOOTER_PAGE.FOOT_WEAR,
   },
 
   {
-    url: `/SAU/${lang}/search?q=sunglass&language=en&isListed=false`,
+    url: `/${lang}/search?q=sunglass&language=en&isListed=false`,
     title: FOOTER_PAGE.SUNGLASSES,
   },
 
   {
-    url: `/SAU/${lang}/search?q=jewellery&language=en&isListed=false`,
+    url: `/${lang}/search?q=jewellery&language=en&isListed=false`,
     title: FOOTER_PAGE.JEWELLERY,
   },
 
   {
-    url: `/SAU/${lang}/search/watch?q=watches&language=en&isListed=false`,
+    url: `/${lang}/search/watch?q=watches&language=en&isListed=false`,
     title: FOOTER_PAGE.WATCHES,
   },
 ];
 
 const e = [
   {
-    url: `/SAU/${lang}/search?q=mobiles&language=en&isListed=false`,
+    url: `/${lang}/search?q=mobiles&language=en&isListed=false`,
     title: FOOTER_PAGE.MOBILES,
   },
 
   {
-    url: `/SAU/${lang}/search?q=laptops&language=en&isListed=false`,
+    url: `/${lang}/search?q=laptops&language=en&isListed=false`,
     title: FOOTER_PAGE.LAPTOPS,
   },
 
   {
-    url: `/SAU/${lang}/search?q=cameras&language=en&isListed=false`,
+    url: `/${lang}/search?q=cameras&language=en&isListed=false`,
     title: FOOTER_PAGE.CAMERAS,
   },
 
   {
-    url: `/SAU/${lang}/search?q=Televisions&language=en&isListed=false`,
+    url: `/${lang}/search?q=Televisions&language=en&isListed=false`,
     title: FOOTER_PAGE.TELEVISIONS,
   },
 
   {
-    url: `/SAU/${lang}/search?q=Storage%20Devices&language=en&isListed=false`,
+    url: `/${lang}/search?q=Storage%20Devices&language=en&isListed=false`,
     title: FOOTER_PAGE.STORAGE_DEVICES,
   },
 
   {
-    url: `/SAU/${lang}/srp/home-applaince?categoryTree=true&isListed=false&sid=932,935`,
+    url: `/${lang}/srp/home-applaince?categoryTree=true&isListed=false&sid=932,935`,
     title: FOOTER_PAGE.HOME_APLLIANCES,
   },
 ];
 
 const l = [
   {
-    url: `/SAU/${lang}/search?q=Beauty%20&%20Personal%20Care&language=en&isListed=false`,
+    url: `/${lang}/search?q=Beauty%20&%20Personal%20Care&language=en&isListed=false`,
     title: FOOTER_PAGE.BEAUTY_AND_PERSONAL_CARE,
   },
 
   {
-    url: `/SAU/${lang}/search?q=Home%20Furnishing&language=en&isListed=false`,
+    url: `/${lang}/search?q=Home%20Furnishing&language=en&isListed=false`,
     title: FOOTER_PAGE.HOME_FURNSHING,
   },
 
   {
-    url: `/SAU/${lang}/search?q=Home%20Appliances&language=en&isListed=false`,
+    url: `/${lang}/search?q=Home%20Appliances&language=en&isListed=false`,
     title: FOOTER_PAGE.HOME_APLLIANCES,
   },
   {
-    url: `/SAU/${lang}/search?q=Home%20Decor&language=en&isListed=false`,
+    url: `/${lang}/search?q=Home%20Decor&language=en&isListed=false`,
     title: FOOTER_PAGE.HOME_DECOR,
   },
   {
-    url: `/SAU/${lang}/search?q=Baby%20Care&language=en&isListed=false`,
+    url: `/${lang}/search?q=Baby%20Care&language=en&isListed=false`,
     title: FOOTER_PAGE.BABY_CARE,
   },
   {
-    url: `/SAU/${lang}/search?q=Health%20Care&language=en&isListed=false`,
+    url: `/${lang}/search?q=Health%20Care&language=en&isListed=false`,
     title: FOOTER_PAGE.HEALTH_CARE,
   },
 ];
 
 const t = [
   {
-    url: `/SAU/${lang}/search?q=apple&language=en&isListed=false`,
+    url: `/${lang}/search?q=apple&language=en&isListed=false`,
     title: '/static/img/bg-img/Apple.png',
   },
 
   {
-    url: `/SAU/${lang}/search?q=baseus&language=en&isListed=false`,
+    url: `/${lang}/search?q=baseus&language=en&isListed=false`,
     title: '/static/img/bg-img/Baseus.png',
   },
 
   {
-    url: `/SAU/${lang}/search?q=ray%20ban&language=en&isListed=false`,
+    url: `/${lang}/search?q=ray%20ban&language=en&isListed=false`,
     title: '/static/img/bg-img/RayBan.png',
   },
 
   {
-    url: `/SAU/${lang}/search?q=fossil&language=en&isListed=false`,
+    url: `/${lang}/search?q=fossil&language=en&isListed=false`,
     title: '/static/img/bg-img/Fossil.png',
   },
 ];
@@ -145,7 +145,7 @@ const FooterBar = props => (
             <span className={`${styles.flex} ${styles['quation-bar']}`}>
               <SVGComponent clsName={`${styles['quation-bar-inn']}`} src="icons/common-icon/quation" />
             </span>
-            <a href={`/${country}/${lang}/help/faq`} target="_blank" className={styles.black}>
+            <a href={`/${lang}/help/faq`} target="_blank" className={styles.black}>
               <div className={`${styles.flex} ${styles['flex-colum']} ${styles['pl-20']}`}>
                     <span className={`${styles.fontW600} ${styles['text-uppercase']}`}>{FOOTER_PAGE.GOT_QUESTION}</span>
                     <span className={styles['footer-suport-title']}>{`${FOOTER_PAGE.WE_CARE_TILA} | 900-66666`}</span>
@@ -315,13 +315,13 @@ const FooterBar = props => (
             <div className={styles['ipad-pr-0']}>
               <h4 className={`${styles.fontW600} ${styles['fs-16']} ${styles['black-color']}`}>{FOOTER_PAGE.POLICY}</h4>
               <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
-                <li><a href="/SAU/en/policy/user-terms-and-conditions" target="_blank">{FOOTER_PAGE.TERMS_CONDITION}</a></li>
-                <li><a href="/SAU/en/policy/cancellation-policy" target="_blank">{FOOTER_PAGE.CANCELLATION_POLICY}</a></li>
-                <li><a href="/SAU/en/policy/exchange-replacement-policy" target="_blank">{FOOTER_PAGE.EXCHANGE_REPLACEMENT_POLICY}</a></li>
-                <li><a href="/SAU/en/policy/return-refund-policy" target="_blank">{FOOTER_PAGE.REFUND_POLICY}</a></li>
-                <li><a href="/SAU/en/policy/warranty-policy" target="_blank">{FOOTER_PAGE.WARRENTY_POLICY}</a></li>
-                {/* <li><a href="/SAU/en/policy/sp" target="_blank">{FOOTER_PAGE.SHIPPING_POLICY}</a></li> */}
-                <li><a href="/SAU/en/policy/privacy-policy" target="_blank">{FOOTER_PAGE.PRIVACY_POLICY}</a></li>
+                <li><a href="/en/policy/user-terms-and-conditions" target="_blank">{FOOTER_PAGE.TERMS_CONDITION}</a></li>
+                <li><a href="/en/policy/cancellation-policy" target="_blank">{FOOTER_PAGE.CANCELLATION_POLICY}</a></li>
+                <li><a href="/en/policy/exchange-replacement-policy" target="_blank">{FOOTER_PAGE.EXCHANGE_REPLACEMENT_POLICY}</a></li>
+                <li><a href="/en/policy/return-refund-policy" target="_blank">{FOOTER_PAGE.REFUND_POLICY}</a></li>
+                <li><a href="/en/policy/warranty-policy" target="_blank">{FOOTER_PAGE.WARRENTY_POLICY}</a></li>
+                {/* <li><a href="/en/policy/sp" target="_blank">{FOOTER_PAGE.SHIPPING_POLICY}</a></li> */}
+                <li><a href="/en/policy/privacy-policy" target="_blank">{FOOTER_PAGE.PRIVACY_POLICY}</a></li>
               </ul>
             </div>
             {/* <Col md={2} sm={2} className={styles['ipad-pr-0']}>

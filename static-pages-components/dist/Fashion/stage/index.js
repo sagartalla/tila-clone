@@ -10,7 +10,7 @@ const Fashion = () => React.createElement(
       { className: `${styles['flex']} fashion-banner-main ${styles['relative']}` },
       React.createElement(
         'a',
-        { href: '/SAU/en/search?q=dress&isListed=false' },
+        { href: '/en/search?q=dress&isListed=false' },
         React.createElement('img', { src: `/static/img/landing-page-fashion/${lang === 'en' ? 'womens-clothing' : 'womens-clothing-ar'}.jpg`, className: 'img-responsive' })
       )
     )
