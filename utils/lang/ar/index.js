@@ -853,6 +853,7 @@ export const AR_KEYWORDS = {
     FEEDBACK_SURVEY_AND_PRODUCT_REVIEW_SUB: 'انشئ حسابك لتحصل على  خصومات خاصة بك وكوبونات',
     NOTE: 'ملاحظة :',
     YOU_WILL_BE_UNSUBSCRIBED: 'حتسير غير مشترك للإشعارات اللي في الأعلى لو ما شيكت على الصناديق ',
+    SAVE: 'Save',    
   },
   REVIEWS: {
     TITLE: 'My Reviews & Ratings',

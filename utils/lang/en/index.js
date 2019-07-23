@@ -861,6 +861,7 @@ export const EN_KEYWORDS = {
     FEEDBACK_SURVEY_AND_PRODUCT_REVIEW_SUB: 'Signup to receive personalized discounts and coupons',
     NOTE: 'Note :',
     YOU_WILL_BE_UNSUBSCRIBED: 'You will be unsubscribed for the above notifications if you uncheck the boxes.',
+    SAVE: 'Save',
   },
   REVIEWS: {
     TITLE: 'My Reviews & Ratings',
