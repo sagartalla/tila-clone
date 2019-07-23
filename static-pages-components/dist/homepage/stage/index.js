@@ -226,7 +226,7 @@ function SampleNextArrow(props) {
 }
 
 const b_d_b = {
-  Mobiles: 'SAU/en/srp/mobiles?categoryTree=true&isListed=false&sid=848,849',
+  Mobiles: '/en/srp/mobiles?categoryTree=true&isListed=false&sid=848,849',
   Clothing: '/en/search?q=Clothing&isListed=false',
   'Clothing Accessories': '/en/search?q=Clothing&isListed=false',
   Laptops: '/en/srp/laptops?categoryTree=true&isListed=false&sid=848,864',
