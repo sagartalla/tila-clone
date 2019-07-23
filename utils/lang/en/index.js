@@ -774,6 +774,7 @@ export const EN_KEYWORDS = {
     OTP_HAS: 'OTP has',
     OTP_EXPIRED: 'Expired',
     PLEASE_CLICK_ON_THE_LINK: 'Please click on the resend link below',
+    CLICK_LINK_ABOVE: 'Please click on the resend link above',
   },
   MESSAGES: {
     MESSAGES: 'Messages',
