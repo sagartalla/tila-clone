@@ -136,7 +136,7 @@ export const AR_KEYWORDS = {
     MAKE_DEFAULT: 'اجعله العنوان الرئيسي',
     DELETE: 'حذف',
     EDIT_ADDR: 'تعديل العنوان',
-    SAVE_ADDR: 'Save Address',
+    SAVE_ADDR: 'احفظ عنوانك',
     DELIVER_TO: 'التوصيل إلى',
     ADD_NEW_BTN: 'إضافة جديد',
     ADD_NEW_ADDR: 'إضافة عنوان جديد',
@@ -378,7 +378,7 @@ export const AR_KEYWORDS = {
     MOBILE: 'رقم جوالك',
     NOTIFY: 'خبرني',
     NEXT: 'التالي',
-    YOUR_PERSONAL :'Your personal information has been updated.'
+    YOUR_PERSONAL :'حدثنا معلوماتك الشخصية'
   },
   NOTITICATION_INFO: {
     HEADING: 'الإشعارات الجديدة',
@@ -571,8 +571,8 @@ export const AR_KEYWORDS = {
     MATCHING_ITEM: 'مطابقة المنتجات',
     MATCHING_PRODUCTS: 'مطابقة المنتجات',
     HELLO: 'هلا فيك',
-    MORE_ITEMS: 'more items',
-    GO_TO_WISHLIST: 'Go To Wishlist',
+    MORE_ITEMS: 'منتجات أكثر',
+    GO_TO_WISHLIST: 'روح  للقائمة المفضلة',
     MORE_ITEM: 'more item',
   },
   LOGIN_PAGE: {
@@ -741,10 +741,10 @@ export const AR_KEYWORDS = {
     EXPIRED_COUPONS: 'كوبونات منتهية الصلاحية',
     EXPIRED_ON: 'انتهت يوم ',
     HOW_TO_USE: 'طريقة الاستخدام',
-    EMPTY_COUPON_BOX: 'You have found an empty Coupon box',
+    EMPTY_COUPON_BOX: 'لقيت كوبون فاضي',
     NO_COUPONS_AVAILABLE: 'لا توجد كوبونات متاحة حاليًا',
-    CHECK_BACK_LATER: 'Please Check back later',
-    IS_INVALID: 'is invalid',
+    CHECK_BACK_LATER: 'من فضلك شيك بعد شوي يالطيب!',
+    IS_INVALID: 'غير صالح',
   },
   EMAIL_VERIFICATION: {
     VERIFY_YOUR_EMAIL: 'تفعيل  بريدك الالكتروني',
@@ -848,7 +848,7 @@ export const AR_KEYWORDS = {
     SALE_EVENT_AND_CAMPAIGN_UPDATE_SUB: 'انشئ حسابك لتحصل على تخفيضات فلاش وإطلاقاتنا الجديدة وأحدث الحملات',
     FEEDBACK_SURVEY_AND_PRODUCT_REVIEW_HEADING: 'استطلاعات الرأي وتقييم المنتجات',
     FEEDBACK_SURVEY_AND_PRODUCT_REVIEW_SUB: 'انشئ حسابك لتحصل على  خصومات خاصة بك وكوبونات',
-    NOTE: ': ملاحظة',
+    NOTE: 'ملاحظة',
     YOU_WILL_BE_UNSUBSCRIBED: 'حتسير غير مشترك للإشعارات اللي في الأعلى لو ما شيكت على الصناديق ',
   },
   REVIEWS: {
