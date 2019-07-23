@@ -66,7 +66,7 @@ const CartBody = ({
                 <h4 className={`${styles['mb-5']} ${styles['fs-26']}`}>{CART_PAGE.MY_CART_EMPTY}:(</h4>
                 <span className={`${styles['fs-10']} ${styles['pb-30']} ${styles['thick-gry-clr']}`}>{WISH_LIST_PAGE.DONT_WAIT}</span>
                 <div className={styles['flex']}>
-                  <a href={`/${country}/${language}`} className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-x-large']} ${styles['right-radius']} ${styles['text-uppercase']} ${styles.fontW600} ${styles['mt-40']}`}>{WISH_LIST_PAGE.START_SHOPPING}</a>
+                  <a href={`/${language}`} className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-x-large']} ${styles['right-radius']} ${styles['text-uppercase']} ${styles.fontW600} ${styles['mt-40']}`}>{WISH_LIST_PAGE.START_SHOPPING}</a>
                 </div>
               </div>
             </div>

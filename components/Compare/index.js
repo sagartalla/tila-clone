@@ -168,12 +168,12 @@ class Compare extends Component {
                 <Col md={3} key={product.id}>
                   <div className={`${styles['compare-dtls']} ${styles['compare-background']} ${styles.flex} ${styles['flex-colum']} ${styles['justify-between']} ${styles['ht-100per']}`}>
                     <div className={`${styles.pointer} ${styles['ht-290']} ${styles.flex} ${styles['justify-center']}`}>
-                      <Link route={`/${country}/${language}/product?productId=${product.id}${product.variant_id ? `&variantId=${product.variant_id}` : ''}&catalogId=${product.catalog_id}&itemType=${product.item_type}`}>
+                      <Link route={`/${language}/product?productId=${product.id}${product.variant_id ? `&variantId=${product.variant_id}` : ''}&catalogId=${product.catalog_id}&itemType=${product.item_type}`}>
                         <img alt={product.name} src={`${constants.mediaDomain}/${product.imgSrc}`} className={`img-responsive ${styles['object-scale-down']}`} />
                       </Link>
                     </div>
                     <div className={`${styles['compare-dtls-inn']} ${styles['pt-20']} ${styles['t-c']}`}>
-                      <Link route={`/${country}/${language}/product?productId=${product.id}${product.variant_id ? `&variantId=${product.variant_id}` : ''}&catalogId=${product.catalog_id}&itemType=${product.item_type}`}>
+                      <Link route={`/${language}/product?productId=${product.id}${product.variant_id ? `&variantId=${product.variant_id}` : ''}&catalogId=${product.catalog_id}&itemType=${product.item_type}`}>
                         <span className={`${styles.pointer}`}>
                           <span className={`${styles.fontW600} ${styles['fs-12']}`}>{product.brand}</span>{' - '}
                           <span className={`${styles['fs-12']} ${styles['thick-gry-clr']}`}>{product.name}</span>

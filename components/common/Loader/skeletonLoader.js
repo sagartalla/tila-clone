@@ -10,58 +10,41 @@ const country = cookies.get('country') || 'SAU';
 class SkeletonLoader extends Component {
   getPlaceHolder = (pathname) => {
     switch (pathname.split('?')[0]) {
-      case `/${country}/${language}/search`:
+      case `/${language}/search`:
         return searchPlaceHolder
-        break;
-      case `/${country}/${language}/product`:
+      case `/${language}/product`:
         return productPlaceHolder
-        break;
       case `/search`:
         return searchPlaceHolder
-        break;
-      case `/${country}/${language}/srp`:
+      case `/${language}/srp`:
         return searchPlaceHolder
-        break;
-      case `/${country}/${language}/cam/mycoupons`:
+      case `/${language}/customer/mycoupons`:
         return couponPlaceHolder
-        break;
       case `/product`:
         return productPlaceHolder
-        break;
-      case `/${country}/${language}/cart`:
+      case `/${language}/cart`:
         return cartPlaceHolder
-        break;
-      case `/${country}/${language}/payment`:
+      case `/${language}/payment`:
         return cartPlaceHolder
-        break;
-      case `/${country}/${language}/cam/profile`:
+      case `/${language}/customer/profile`:
         return camProfileHolder
-        break;
       case `/profile`:
           return camProfileHolder
-          break;
-      case `/cam`:
+      case `/customer`:
           return camProfileHolder
-          break;
       case `/cart`:
           return cartPlaceHolder
-          break;
-      case `/${country}/${language}`:
+      case `/${language}`:
         return homePageHolder
-        break;
-      case `/${country}/${language}/landing/electronics`:
+      case `/${language}/landing/electronics`:
         return homePageHolder
-        break;
-      case `/${country}/${language}/landing/fashion`:
+      case `/${language}/landing/fashion`:
         return homePageHolder
-        break;
-      case `/${country}/${language}/landing/lifestyle`:
+      case `/${language}/landing/lifestyle`:
         return homePageHolder
-        break;
       case `/`:
-          return homePageHolder
-          break;
-      // case `/${country}/${language}/cam/orders`:
+        return homePageHolder
+      // case `/${language}/customer/orders`:
       //   return camOrdersHolder
       //   break;
     }

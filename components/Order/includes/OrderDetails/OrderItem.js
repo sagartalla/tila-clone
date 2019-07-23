@@ -88,7 +88,7 @@ class OrderItem extends Component {
       orderId, orderItem, variantId, getOrderDetails,
     } = this.props;
     getOrderDetails({ orderId });
-    Router.pushRoute(`/${country}/${language}/cam/orders/${orderId}/issue/${OrderType}/item/${orderItem.id}/${variantId}`);
+    Router.pushRoute(`/${language}/customer/orders/${orderId}/issue/${OrderType}/item/${orderItem.id}/${variantId}`);
     // raiseOrderIssue({
     //   issueType: null,
     //   items: products,
@@ -156,7 +156,7 @@ class OrderItem extends Component {
                   <div key={product.id} className={`${styles['product-item']} ${styles.width100} ${styles.flex}`}>
                     <Col md={2} className={styles['p-0']}>
                       <div className={`${styles['img-wrap']} ${styles['flex-center']} ${styles['justify-center']}`}>
-                        <Link route={`/${country}/${language}/product?productId=${product.productId}${product.variantId ? `&variantId=${product.variantId}` : ''}&catalogId=${product.catalogId}&itemType=${product.itemType}`}>
+                        <Link route={`/${language}/product?productId=${product.productId}${product.variantId ? `&variantId=${product.variantId}` : ''}&catalogId=${product.catalogId}&itemType=${product.itemType}`}>
                           <a target="_blank" className={`${styles.width100} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
                             <img className={`${styles['order-item-img']}`} src={`${constants.mediaDomain}/${product.img}`} alt={product.img} />
                           </a>
@@ -169,7 +169,7 @@ class OrderItem extends Component {
                     </Col>
                     <Col md={10} className={`${styles['ipad-pr-0']} ${styles['pt-15']}`}>
                       <div className={`${styles['text-wrap']}`}>
-                        <Link route={`/${country}/${language}/product?productId=${product.productId}${product.variantId ? `&variantId=${product.variantId}` : ''}&catalogId=${product.catalogId}&itemType=${product.itemType}`}>
+                        <Link route={`/${language}/product?productId=${product.productId}${product.variantId ? `&variantId=${product.variantId}` : ''}&catalogId=${product.catalogId}&itemType=${product.itemType}`}>
                           <a target="_blank" className={`${styles.width100} ${styles['fs-14']} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
                             <span className={`${styles.fontW600}`}>{product.name}</span>
                           </a>
@@ -238,7 +238,7 @@ class OrderItem extends Component {
                     </Col>
                   </div>
                   {needHelp &&
-                  <a href={`/${country}/${language}/help/answers/orders#${orderId}`}>
+                  <a href={`/${language}/help/answers/orders#${orderId}`}>
                     <span className={`${styles['help-position']} ${styles.absolute} ${styles['black-color']} ${styles['p-5']} ${styles['flex-center']} ${styles['ml-10']} ${styles.border} ${styles['border-radius4']}`}>
                       <SVGComponent clsName={`${styles['help-icon']}`} src="icons/help-icon/help" />
                       &nbsp;&nbsp;{ORDERS.NEED_HELP}

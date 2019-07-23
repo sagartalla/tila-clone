@@ -122,7 +122,7 @@ class InstantCheckout extends Component {
     const params = {
       listing_ids: insnt_item_listing_id ? [insnt_item_listing_id] : [],
       payment_mode: creditDebitCard ? 'SAVED_CARD' : 'CASH_ON_DELIVERY',
-      redirect_url: `${window.location.origin}/${country}/${language}`,
+      redirect_url: `${window.location.origin}/${language}`,
     };
 
     if (creditDebitCard) {
@@ -170,7 +170,7 @@ class InstantCheckout extends Component {
     const params = {
       listing_ids: [],
       payment_mode: 'CASH_ON_DELIVERY',
-      redirect_url: `${window.location.origin}/${country}/${language}`,
+      redirect_url: `${window.location.origin}/${language}`,
       request_id: this.state.captcha_request_id
     };
     this.setState({

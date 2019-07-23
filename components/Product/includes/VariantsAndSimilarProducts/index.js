@@ -102,14 +102,14 @@ class VariantsAndSimilarProducts extends Component {
         size: 'LARGE',
       };
       let newQuery = window.location.search;
-      newQuery = newQuery.replace(productId, pid);
-      this.props.setSelectedProductData({ selectedProductData });
+      newQuery = newQuery.replace(productId, pid)
+      this.props.setSelectedProductData({selectedProductData});
       if (isSearchPreview) {
         this.props.getProduct(options);
         this.props.setProductId(pid);
-        window.open(`/${country}/${language}/product?productId=${pid}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${variantsAndSimilarProducts.catalogId}&itemType=${variantsAndSimilarProducts.itemtype}`);
+        window.open(`/${language}/product?productId=${pid}${variantId ? `&variantId=${variantId}`: ''}&catalogId=${VariantsAndSimilarProducts.catalogId}&itemType=${VariantsAndSimilarProducts.itemtype}`)
       } else {
-        Router.pushRoute(`/${country}/${language}/product${newQuery}`);
+        Router.pushRoute(`/${language}/product${newQuery}`);
       }
     });
   }
