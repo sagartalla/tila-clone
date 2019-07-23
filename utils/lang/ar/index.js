@@ -650,6 +650,7 @@ export const AR_KEYWORDS = {
     SHOW: 'أظهر',
     HIDE: 'اخفي',
     PASSWORD: 'كلمة السر',
+    ENTER_FOUR_DIGIT_OTP: 'Or Please enter 4 digit OTP sent to your e-mail.',  
   },
   ORDER_PAGE: {
     LOADING: 'تحميل',

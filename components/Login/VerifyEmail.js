@@ -114,7 +114,7 @@ class VerifyEmail extends Component {
             <div className={`${styles['flex-colum']}`}>
               <div className={`${styles['otp-expire']}`}>
               {seconds === 0 ? <div>{EMAIL_VERIFICATION.OTP_HAS} <span className={`${styles['thick-red']}`}>{EMAIL_VERIFICATION.OTP_EXPIRED}</span>, {EMAIL_VERIFICATION.PLEASE_CLICK_ON_THE_LINK}</div> : LOGIN_PAGE.OTP_EXPIRE_IN}&nbsp;
-              {seconds !== 0 && <span className={styles['black-color']}><Timer time={seconds} getSeconds={this.getSeconds} /></span>}
+              {seconds !== 0 && <span className={styles['black-color']}><Timer time={seconds} getSeconds={this.getSeconds} /><span>{LOGIN_PAGE.HURRY}</span></span>}
               </div>
               <div className={styles['t-c']}>
                 <span

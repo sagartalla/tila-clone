@@ -658,6 +658,7 @@ export const EN_KEYWORDS = {
     SHOW: 'Show',
     HIDE: 'Hide',
     PASSWORD: 'Password',
+    ENTER_FOUR_DIGIT_OTP: 'Or Please enter 4 digit OTP sent to your e-mail.',
   },
   ORDER_PAGE: {
     LOADING: 'Loading...',
