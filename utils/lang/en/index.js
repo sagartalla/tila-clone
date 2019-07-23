@@ -772,7 +772,7 @@ export const EN_KEYWORDS = {
     RESET_PASSWORD_LINK_SENT: 'Reset password link sent to your signed up email ID',
     OTP_HAS: 'OTP has',
     OTP_EXPIRED: 'Expired',
-    PLEASE_CLICK_ON_THE_LINK: 'Please click on the resend link below', 
+    PLEASE_CLICK_ON_THE_LINK: 'Please click on the resend link below',
   },
   MESSAGES: {
     MESSAGES: 'Messages',
