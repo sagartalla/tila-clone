@@ -35,10 +35,10 @@ class CategoriesAndFacets extends Component {
   onChangeHandle(facetName, facetType) {
     const { search, facets } = this.props;
     const curryHandler = (value, e) => {
-      // Router.pushRoute(`/${country}/${language}/srp?facets.${facetName}=${value.name}&search=${search.q}&${Object.entries(this.props.optionalParams).map(([key, val]) => `${key}=${val}`).join('&')}`);
+      // Router.pushRoute(`/${language}/srp?facets.${facetName}=${value.name}&search=${search.q}&${Object.entries(this.props.optionalParams).map(([key, val]) => `${key}=${val}`).join('&')}`);
       // const params = JSON.parse(decodeURIComponent(window.location.search.replace(new RegExp('^(?:.*[&\\?]' + encodeURIComponent('facets').replace(/[\.\+\*]/g, '\\$&') + '(?:\\=([^&]*))?)?.*$', 'i'), '$1')) || '{}');
       const params = facets;
-      // const params = `/${country}/${language}/srp?facets`;
+      // const params = `/${language}/srp?facets`;
       params[facetName] = params[facetName] || [];
       digitalData.filter.leftnavfilters = `${facetName}:${value.name}`;
       // if (facetType === 'PERCENTILE') {

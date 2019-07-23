@@ -19,7 +19,7 @@ const language = cookies.get('language') || 'en';
 const country = cookies.get('country') || 'SAU';
 
 const routeChange = (productId, catalogId, itemType) => {
-  Router.pushRoute(`/${country}/${language}/product?productId=${productId}&catalogId=${catalogId}&itemType=${itemType}`);
+  Router.pushRoute(`/${language}/product?productId=${productId}&catalogId=${catalogId}&itemType=${itemType}`);
 }
 
 const Card = ({ listing, isLoggedIn, addToCart }) => (

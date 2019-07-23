@@ -32,7 +32,7 @@ class CompareWidget extends React.Component {
   }
 
   showComparePage = () => {
-    Router.pushRoute(`/${country}/${language}/compare`);
+    Router.pushRoute(`/${language}/compare`);
   }
 
   render() {
@@ -56,7 +56,7 @@ class CompareWidget extends React.Component {
                       <img className={styles.image} src={data.src} alt="" />
                     </div>
                     <div className={styles['item-label']}>
-                      <a title={data.displayName} className={`${styles.ellips} ${styles.width100} ${styles['black-color']} ${styles['fs-12']}`} href={`/${country}/${language}/product?productId=${catalogObj.product_id}${catalogObj.variant_id ? `&variantId=${catalogObj.variant_id}` : ''}&catalogId=${catalogObj.catalog_id}&itemType=${cmpData.itemtype}`}>
+                      <a title={data.displayName} className={`${styles.ellips} ${styles.width100} ${styles['black-color']} ${styles['fs-12']}`} href={`/${language}/product?productId=${catalogObj.product_id}${catalogObj.variant_id ? `&variantId=${catalogObj.variant_id}` : ''}&catalogId=${catalogObj.catalog_id}&itemType=${cmpData.itemtype}`}>
                         {data.displayName}
                       </a>
                     </div>
