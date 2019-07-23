@@ -124,7 +124,7 @@ export const AR_KEYWORDS = {
     YOU_ARE_SIGNED_IN_AS: 'Logged in as',
     CHANGE: 'Change',
     SIGN_IN_AS_DIFF_USER: 'Signin as different User',
-    CONTINUE_TO_CHECKOUt: 'Continue To Checkout',    
+    CONTINUE_TO_CHECKOUt: 'Continue To Checkout',
   },
   DELIVERY_ADDR_PAGE: {
     DELIVERY_ADDR: 'عنوان التوصيل',
@@ -223,7 +223,7 @@ export const AR_KEYWORDS = {
     REVIEW_TITLE_PLACE: 'مراجعة العنوان ستكون هنا ',
     EASY_RETURN: 'إرجاع بسهولة',
     NO_SHIPPING_CITY: 'لا يشحن لمدينتك',
-    SELECT_YOUR_CITY: 'Select Your City',    
+    SELECT_YOUR_CITY: 'Select Your City',
     FREE_DELIVERY_BY: 'توصيل مجاني بواسطة',
     FREE_DELIVERY_IN: 'توصيل مجاني في',
     NON_RETURNABLE: 'غير قابل للأرجاع',
@@ -573,7 +573,7 @@ export const AR_KEYWORDS = {
     HELLO: 'هلا فيك',
     MORE_ITEMS: 'more items',
     GO_TO_WISHLIST: 'Go To Wishlist',
-    MORE_ITEM: 'more item',    
+    MORE_ITEM: 'more item',
   },
   LOGIN_PAGE: {
     SIGN_UP: 'انشاء حساب',
@@ -606,7 +606,7 @@ export const AR_KEYWORDS = {
     PRIVACY: 'privacy policies',
     REMEMBER_ME: 'Remember Me',
     BY_SIGNUP_I_AGREE_TO_TERMS: "By signing up, I understand and agree to Tila's",
-    BY_LOGIN_I_AGREE_TO_TERMS: "By logging in, I understand and agree to Tila's", 
+    BY_LOGIN_I_AGREE_TO_TERMS: "By logging in, I understand and agree to Tila's",
     AND: 'and',
     FIRST_NAME: 'الأسم الأول*',
     LAST_NAME: 'اسم العائلة*',
@@ -741,7 +741,7 @@ export const AR_KEYWORDS = {
     EMPTY_COUPON_BOX: 'You have found an empty Coupon box',
     NO_COUPONS_AVAILABLE: 'لا توجد كوبونات متاحة حاليًا',
     CHECK_BACK_LATER: 'Please Check back later',
-    IS_INVALID: 'is invalid',    
+    IS_INVALID: 'is invalid',
   },
   EMAIL_VERIFICATION: {
     VERIFY_YOUR_EMAIL: 'تفعيل  بريدك الالكتروني',
@@ -905,5 +905,22 @@ export const AR_KEYWORDS = {
     SELECT_ORDER_WITH_ISSUE: 'SELECT ORDER WITH ISSUE',
     MY_ORDERS: 'MY ORDERS',
     SIGN_IN_MSG: 'Please sign in to view your orders'
-  }
+  },
+  SEO_CONTENT: {
+    HOME_H1_CONTENT: 'Online Shopping Store in Saudi',
+    HOME_H2_CONTENT: 'Shop for the latest products online at Tila.com Saudi',
+    HOME_META_CONTENT: 'Tila.com is the best e-commerce site in the Middle East region. We have huge collections of electronics, fashion and lifestyle products at the best prices.',
+    HOME_TITLE: 'Tila Saudi - Best online shopping site | Electronics,fashion ,lifestyle accessories and many more at best prices at Tila',
+    LANDING_H2_CONTENT: 'Buy Latest',
+    LANDING_H2: 'online at best prices at Tila.com Saudi',
+    LANDING_META_CONTENT1: 'Shop latest Mobile Phones at the best prices and much more online in Riyadh, Jeddah and all SAUDI region (OR KSA) | enjoy 100 % Genuine products ✦ Free shipping across ✦ Cash On Delivery ✦ Superfast delivery',
+    PDP_H2: 'Buy',
+    PDP_H2_TITLE: 'online | TILA SAUDI',
+    PDP_META_CONTENT: 'Shop for',
+    PDP_META_CONTENT2: 'online in Riyadh, Jeddah and All SAUDI region (OR KSA) | enjoy 100 % Genuine products ✦ Free shipping across ✦ Cash On Delivery ✦ Superfast delivery.',
+    BRAND_H2: 'Shop for the latest',
+    BRAND_H2_TITLE: ' online at the best deals on TILA SAUDI',
+    BRAND_META_CONTENT: 'Get latest',
+    BRAND_META_CONTENT2: 'online at the best deals in Riyadh, Jeddah and All SAUDI region (OR KSA) | enjoy 100 % Genuine products ✦ Free shipping across ✦ Cash On Delivery ✦ Superfast delivery',
+  },
 };
