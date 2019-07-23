@@ -163,7 +163,7 @@ class ActionBar extends Component {
   logoutClick() {
     this.props.logout().then((res) => {
       if (res && res.value && res.value.status === 200) {
-        window.location = `${window.location.origin}/${cookies.get('country')}/${cookies.get('language')}`;
+        window.location = `${window.location.origin}/${cookies.get('language')}`;
       }
     });
   }
@@ -196,7 +196,6 @@ class ActionBar extends Component {
     const {
       isLoggedIn, cartResults, userInfo, wishListCount, getEditDetails, hideCountry, hideLogin, showLoginPage,
     } = this.props;
-    console.log('showLoginPage', showLoginPage);
     return (
       <div className={styles['actionbar-wrapper']}>
         <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']} ${styles['country-code']}`}>
