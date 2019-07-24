@@ -9,11 +9,11 @@ let sliderTBS,
 
 const tbs = [{
   img: `/static/img/landing-home/${lang === 'en' ? 'main-Armani' : 'main-Armani-ar'}.png`,
-  title: `${lang === 'en' ? 'Armani Sunglasses' : ' نظارات شمسية ارماني'}`,
+  title: `${lang === 'en' ? 'Armani' : 'راي بان'}`,
   key: 'Armani Sunglasses',
 }, {
   img: `/static/img/landing-home/${lang === 'en' ? 'main-Charger' : 'main-Charger-ar'}.png`,
-  title: `${lang === 'en' ? 'Baseus Charger' : 'شاحن باسيوس '}`,
+  title: `${lang === 'en' ? 'Baseus' : 'باسيوس'}`,
   key: 'Baseus Charger',
 }, {
   img: `/static/img/landing-home/${lang === 'en' ? 'main-Joyroom' : 'main-Joyroom-ar'}.png`,
@@ -46,7 +46,7 @@ const tie = [{
   key: 'Memory',
 }, {
   img: '/static/img/landing-home/cameras.png',
-  title: `${lang === 'en' ? 'Cameras' : 'كاميرات'}`,
+  title: `${lang === 'en' ? 'Cameras' : 'الكاميرات'}`,
   key: 'Cameras',
 }, {
   img: '/static/img/landing-home/television.png',
@@ -92,15 +92,15 @@ const tie = [{
 
 const hal = [{
   img: '/static/img/landing-home/womens-clothing.png',
-  title: `${lang === 'en' ? 'Women\'s Clothing' : 'ملابس نسائية'}`,
+  title: `${lang === 'en' ? 'Women\'s Clothing' : 'الملابس النسائية'}`,
   key: 'Womens Clothing',
 }, {
   img: '/static/img/landing-home/mens-clothing.png',
-  title: `${lang === 'en' ? 'Men\'s Clothing' : 'ملابس رجالية'}`,
+  title: `${lang === 'en' ? 'Men\'s Clothing' : 'الملابس الرجالية'}`,
   key: 'Mens Clothing',
 }, {
   img: '/static/img/landing-home/jewellery.png',
-  title: `${lang === 'en' ? 'Jewellery' : 'مجوهرات'}`,
+  title: `${lang === 'en' ? 'Jewellery' : 'المجوهرات'}`,
   key: 'Jewellery',
 }, {
   img: '/static/img/landing-home/watches.png',
@@ -415,7 +415,7 @@ const HomePage = () => (
       </div>
       <div className="ff-t-i">
         <div className="e">
-          <span className={`title ${styles['fs-20']}`}>{lang === 'en' ? 'TOP IN ELECTRONICS' : 'أعلى في الالكترونيات'}</span>
+          <span className={`title ${styles['fs-20']}`}>{lang === 'en' ? 'ELECTRONICS' : 'أفضل الإلكترونيات'}</span>
           <div className="home-slider">
           <Slider
             asNavFor={sliderTIE}
@@ -438,7 +438,7 @@ const HomePage = () => (
           </div>
         </div>
         <div className="h-a-l">
-          <span className={`title ${styles['fs-20']}`}> {lang === 'en' ? 'TOP IN FASHION' : 'أعلى في الموضة'} | {lang === 'en' ? 'LIFESTYLE' : 'لايف ستايل'}</span>
+          <span className={`title ${styles['fs-20']}`}> {lang === 'en' ? 'FASHION' : 'أعلى في الموضة'} &amp; {lang === 'en' ? 'LIFESTYLE' : 'اللايف ستايل'}</span>
           <div className="home-slider">
           <Slider
             asNavFor={sliderHAL}
@@ -462,7 +462,7 @@ const HomePage = () => (
         </div>
       </div>
       <div className="display-t-i-f">
-        <div className={`${styles['fs-20']} title`}>{lang === 'en' ? 'TOP IN FASHION' : 'أعلى في الموضة'}</div>
+        <div className={`${styles['fs-20']} title`}>{lang === 'en' ? 'Fashion Picks' : 'أفضل الأزياء'}</div>
         <div className="d1">
           <div>
             {/* <span className={styles['fs-16']}><span className="lite"> {lang === 'en' ? 'Kids Fashion' : 'ملابس أطفال\أطفال'}</span></span> */}
@@ -540,7 +540,7 @@ const HomePage = () => (
         ))}
       </Row>
       <div className="display-t-i-hl">
-        <div className={`${styles['fs-20']} title`}> {lang === 'en' ? 'BEST OF LIFESTYLE' : 'أفضل من لايف ستايل'}</div>
+        <div className={`${styles['fs-20']} title`}> {lang === 'en' ? 'Lifestyle Picks' : 'أفضل مختارات اللايف ستايل'}</div>
         <div className="d1">
           <div>
             {/* <span className={styles['fs-16']}><span className="lite">{lang === 'en' ? 'Kids Furniture' : 'أثاث الأطفال'}</span></span> */}
@@ -618,7 +618,7 @@ const HomePage = () => (
         ))}
       </Row>
       <div className="display-t-i-e">
-        <div className={`${styles['fs-20']} title`}>{lang === 'en' ? 'TOP IN ELECTRONICS' : 'أعلى في الالكترونيات'}</div>
+        <div className={`${styles['fs-20']} title`}>{lang === 'en' ? 'TOP IN ELECTRONICS' : 'أفضل الإلكترونيات'}</div>
         {/* <div className={`${styles['']}`}>
           <span>See more</span><SVGComponent clsName={`${styles['arrow']}`} src="icons/common-icon/arrow" />
         </div> */}
@@ -689,7 +689,7 @@ const HomePage = () => (
         </div>
         <div className={`${styles.breadcrums} ${styles['mt-10']} ${styles.pointer} bredcrums-part`}>
           <a href={`/${lang}/landing/electronics`}>
-            <span>{lang === 'en' ? 'Mobiles' : 'الجوالات'} &nbsp; | &nbsp; {lang === 'en' ? 'Laptops' : 'اللاب توبات'}  &nbsp; | &nbsp; {lang === 'en' ? 'Speakers' : 'مكبر الصوت'}  &nbsp; |  &nbsp; {lang === 'en' ? 'Cameras' : 'كاميرات'} &nbsp; | &nbsp; {lang === 'en' ? 'Microwave Ovens' : 'ميكرويفات '} &nbsp; | &nbsp; {lang === 'en' ? 'Smartwatches' : 'ساعات يد ذكية'} </span>
+            <span>{lang === 'en' ? 'Mobiles' : 'الجوالات'} &nbsp; | &nbsp; {lang === 'en' ? 'Laptops' : 'اللاب توبات'}  &nbsp; | &nbsp; {lang === 'en' ? 'Speakers' : 'مكبر الصوت'}  &nbsp; |  &nbsp; {lang === 'en' ? 'Cameras' : 'الكاميرات'} &nbsp; | &nbsp; {lang === 'en' ? 'Microwave Ovens' : 'ميكرويفات '} &nbsp; | &nbsp; {lang === 'en' ? 'Smartwatches' : 'ساعات يد ذكية'} </span>
           </a>
         </div>
       </div>
