@@ -136,7 +136,7 @@ export const AR_KEYWORDS = {
     MAKE_DEFAULT: 'اجعله العنوان الرئيسي',
     DELETE: 'حذف',
     EDIT_ADDR: 'تعديل العنوان',
-    SAVE_ADDR: 'Save Address',
+    SAVE_ADDR: 'احفظ عنوانك',
     DELIVER_TO: 'التوصيل إلى',
     ADD_NEW_BTN: 'إضافة جديد',
     ADD_NEW_ADDR: 'إضافة عنوان جديد',
@@ -297,7 +297,7 @@ export const AR_KEYWORDS = {
     NO_CART_LABEL: 'Where are all the saved Cards?',
     NO_CARD_LABEL: 'Save your cards for faster checkouts.',
     NO_VOCHER_LABEL: 'Save your cards for faster checkouts.',
-    CREDIT: 'Credit',
+    CREDIT: 'رصيدك',
   },
   // new page
   THANK_YOU_PAGE: {
@@ -378,7 +378,7 @@ export const AR_KEYWORDS = {
     MOBILE: 'رقم جوالك',
     NOTIFY: 'خبرني',
     NEXT: 'التالي',
-    YOUR_PERSONAL :'Your personal information has been updated.'
+    YOUR_PERSONAL :'حدثنا معلوماتك الشخصية'
   },
   NOTITICATION_INFO: {
     HEADING: 'الإشعارات الجديدة',
@@ -650,7 +650,7 @@ export const AR_KEYWORDS = {
     SHOW: 'أظهر',
     HIDE: 'اخفي',
     PASSWORD: 'كلمة السر',
-    ENTER_FOUR_DIGIT_OTP: 'Or Please enter 4 digit OTP sent to your e-mail.',  
+    ENTER_FOUR_DIGIT_OTP: 'أو من فضلك أدخل رمز السر المؤقت المكون من أربعة أرقام المرسل لإيميلك',  
   },
   ORDER_PAGE: {
     LOADING: 'تحميل',
@@ -767,6 +767,7 @@ export const AR_KEYWORDS = {
     OTP_HAS: 'رمز السر المؤقت أصبح',
     OTP_EXPIRED: 'غير صالح',
     PLEASE_CLICK_ON_THE_LINK: 'من فضلك اضغط على اللينك المعاد إرساله بالأسفل',
+    CLICK_LINK_ABOVE: 'من فضلك اضغط على اللينك المعاد إرساله بالأسفل',    
   },
   MESSAGES: {
     MESSAGES: 'الرسائل',
@@ -835,6 +836,7 @@ export const AR_KEYWORDS = {
     MY_COUPONS: 'قسائم بلدي',
     PREFERENCES: 'تفضيلات',
     REVIEWS_AND_RATINGS: 'بلدي الاستعراضات والتقييمات',
+    CHOOSE_PROFILE_PIC: 'اختار صورة ملفك الشخصي',
   },
   PREFERENCES: {
     PAGE_TITLE: 'الإشعارات والاتصال المفضل ',
