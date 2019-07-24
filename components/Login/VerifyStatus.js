@@ -32,6 +32,7 @@ class VerifyStatus extends React.Component {
         method: this.emptyValue,
         message: 'OTP should not be empty',
         validWhen: false,
+        resendClicked: false,
       },
     ]);
     this.state = {
@@ -58,6 +59,9 @@ class VerifyStatus extends React.Component {
     const body = {
       email: activeEmailId,
     };
+    this.setState({
+      resendClicked: true,
+    });
     if (value === 'email') {
       this.props.forgotPassword(body).then(() => {
         this.setState({
@@ -110,7 +114,7 @@ class VerifyStatus extends React.Component {
 
 
   render() {
-    const { validation, seconds } = this.state;
+    const { validation, seconds, resendClicked } = this.state;
     const {
       showEmailSuccess, showOtpSuccess, loadingStatus, userData, activeEmailId,
     } = this.props;
@@ -162,7 +166,7 @@ class VerifyStatus extends React.Component {
             </React.Fragment>}
           <div className={`${styles['flex-center']}`}>
               <span className={`${styles['otp-expire']} ${styles['fs-12']} ${styles['pl-10']}`}>{seconds === 0 ? <div>OTP has <span className={`${styles['thick-red']}`}>Expired</span>, Please click on the resend link above</div> : LOGIN_PAGE.OTP_EXPIRE_IN}&nbsp;</span>
-              {seconds !== 0 && <span className={styles['black-color']}><Timer time={seconds} getSeconds={this.getSeconds} /></span>}
+              {seconds !== 0 && <span className={styles['black-color']}><Timer time={seconds} getSeconds={this.getSeconds} resendClicked={resendClicked}/></span>}
             </div>
           <div className={`${styles['flex-center']} ${styles['mb-5']} ${styles['flex-colum']}`}>
             <OTPInput
