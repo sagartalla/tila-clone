@@ -147,6 +147,7 @@ class OrderItem extends Component {
       <div className={`${styles['shipment-wrap']} ${styles['mb-20']} ${styles['mt-20']} ${styles.flex}`}>
         <Col md={7} sm={7} className={`${styles['pl-0']} ${styles['pr-0']} ${styles.flex} ${styles['flex-colum']}`}>
           {orderItem.products.map((product) => {
+            const { catalogId, name, productId, variantId, listing_id } = product
             const {
               final_price = {}, gift_charge = {}, mrp = {}, offer_price = {}, shipping_fees = {}, discount = {},
             } = product.price;
@@ -156,21 +157,21 @@ class OrderItem extends Component {
                   <div key={product.id} className={`${styles['product-item']} ${styles.width100} ${styles.flex}`}>
                     <Col md={2} className={styles['p-0']}>
                       <div className={`${styles['img-wrap']} ${styles['flex-center']} ${styles['justify-center']}`}>
-                        <Link route={`/${language}/product?productId=${product.productId}${product.variantId ? `&variantId=${product.variantId}` : ''}&catalogId=${product.catalogId}&itemType=${product.itemType}`}>
-                          <a target="_blank" className={`${styles.width100} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
+                          <Link route={`/${language}/pdp/${name.split(' ').join('-').toLowerCase()}/c/${catalogId}/p/${productId}/l/${listing_id}/v/${variantId ? `${variantId}` : ''}`}>
+                          <a target="_blank" className={`${styles['width100']} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
                             <img className={`${styles['order-item-img']}`} src={`${constants.mediaDomain}/${product.img}`} alt={product.img} />
                           </a>
                         </Link>
                       </div>
                       {product.order_type === 'EXCHANGE' && product.order_item_type === 'DELIVERY' &&
-                      <div className={`${styles.flex} ${styles['justify-center']} ${styles['mt-15']}`}>
-                        <span className={styles['green-label']}>{ORDER_PAGE.EXCHANGE}</span>
-                      </div>}
+                        <div className={`${styles.flex} ${styles['justify-center']} ${styles['mt-15']}`}>
+                          <span className={styles['green-label']}>{ORDER_PAGE.EXCHANGE}</span>
+                        </div>}
                     </Col>
                     <Col md={10} className={`${styles['ipad-pr-0']} ${styles['pt-15']}`}>
                       <div className={`${styles['text-wrap']}`}>
-                        <Link route={`/${language}/product?productId=${product.productId}${product.variantId ? `&variantId=${product.variantId}` : ''}&catalogId=${product.catalogId}&itemType=${product.itemType}`}>
-                          <a target="_blank" className={`${styles.width100} ${styles['fs-14']} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
+                        <Link route={`/${language}/pdp/${name.split(' ').join('-').toLowerCase()}/c/${catalogId}/p/${productId}/l/${listing_id}/v/${variantId ? `${variantId}` : ''}`}>
+                          <a target="_blank" className={`${styles['width100']} ${styles['fs-14']} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
                             <span className={`${styles.fontW600}`}>{product.name}</span>
                           </a>
                         </Link>
@@ -238,13 +239,13 @@ class OrderItem extends Component {
                     </Col>
                   </div>
                   {needHelp &&
-                  <a href={`/${language}/help/answers/orders#${orderId}`}>
-                    <span className={`${styles['help-position']} ${styles.absolute} ${styles['black-color']} ${styles['p-5']} ${styles['flex-center']} ${styles['ml-10']} ${styles.border} ${styles['border-radius4']}`}>
-                      <SVGComponent clsName={`${styles['help-icon']}`} src="icons/help-icon/help" />
-                      &nbsp;&nbsp;{ORDERS.NEED_HELP}
-                    </span>
-                  </a>
-                    }
+                    <a href={`/${language}/help/answers/orders#${orderId}`}>
+                      <span className={`${styles['help-position']} ${styles.absolute} ${styles['black-color']} ${styles['p-5']} ${styles['flex-center']} ${styles['ml-10']} ${styles.border} ${styles['border-radius4']}`}>
+                        <SVGComponent clsName={`${styles['help-icon']}`} src="icons/help-icon/help" />
+                        &nbsp;&nbsp;{ORDERS.NEED_HELP}
+                      </span>
+                    </a>
+                  }
                 </div>
                 {product.order_type === 'EXCHANGE' && product.order_item_type === 'DELIVERY' &&
                   <div className={`${styles['pt-5']} ${styles['pb-5']} ${styles['pl-15']} ${styles['border-t']}`}>
@@ -267,18 +268,6 @@ class OrderItem extends Component {
                     <SVGComponent clsName={`${styles['help-icon']}`} src="icons/gift-blue" />
                     <span className={`${styles['ml-5']} ${styles.flex}`}>
                       {ORDER_PAGE.THIS_ORDER_CONTAINS_A_GIFT}
-                      {
-                        product.gift_info.gift_card_message &&
-                        <a>
-                          <span className={`${styles.relative} ${styles['tooltip']} ${styles['mr-10']} ${styles['tool-tip-parent']} ${styles['checkout-quat']} ${styles['fs-12']} ${styles['flex-center']} ${styles['justify-around']}`}>
-                            {'!'}
-                            <div className={`${styles['tool-tip']} ${styles.rightM15} ${styles['p-15']} ${styles['break-word']}`}>
-                              <div className={styles.fontW600}>{ORDER_PAGE.MESSAGE}:</div>
-                              {product.gift_info.gift_card_message}
-                            </div>
-                          </span>
-                        </a>
-                      }
                     </span>
                   </div>}
               </React.Fragment>
@@ -299,10 +288,10 @@ class OrderItem extends Component {
                       refundType="Cancel"
                     />}
                   {isReturnable === 'TRUE' &&
-                  <RenderButton
-                    callbackMethod={this.exchangeReturnOrder(ORDER_ISSUE_TYPES.RETURN)}
-                    refundType="Return"
-                  />}
+                    <RenderButton
+                      callbackMethod={this.exchangeReturnOrder(ORDER_ISSUE_TYPES.RETURN)}
+                      refundType="Return"
+                    />}
                   {isExchangable === 'TRUE' &&
                     <RenderButton
                       callbackMethod={this.exchangeReturnOrder(ORDER_ISSUE_TYPES.EXCHANGE)}

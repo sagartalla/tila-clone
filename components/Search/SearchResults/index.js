@@ -103,6 +103,8 @@ class SearchResults extends Component {
   }
   renderProductPage(options) {
     window.open(`/${language}/product?productId=${options.productId}${options.variantId ? `&variantId=${options.variantId}`: ''}&catalogId=${options.catalogId}&itemType=${options.itemType}`)
+    //changes will get reflected on quickview
+    // window.open(`/${country}/${language}/pdp/${name.split(' ').join('-').toLowerCase()}/c/${catalog_id}/p/${product_id}/l/${listing_id}/v/${variant_id ? `${variant_id}` : ''}`)
   }
   renderNext() {
     const { results } = this.props;

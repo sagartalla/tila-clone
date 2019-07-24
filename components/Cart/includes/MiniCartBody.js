@@ -31,7 +31,7 @@ const MiniCartBody = (props) => {
   const cnt = flag > 0 ? items.length : 0;
   const { CART_PAGE, DELIVERY_ADDR_PAGE } = languageDefinations();
   if(data.ui.loading) {
-    return <div>Please Wait Fetching Cart Items</div>
+    return <div className={`${styles['p-15']} ${styles['fontW600']} ${styles['thick-gry-clr']} ${styles['mb-0']}`}>Please Wait Fetching Cart Items</div>
   }
   return (
     <div>
@@ -48,12 +48,12 @@ const MiniCartBody = (props) => {
           {
             items.map((item, index) => {
               const { item_id, img, product_id, name, offer_price, cur,
-                variant_id, itemType, catalogId, shipping } = item;
+                variant_id, catalogId, shipping, listing_id } = item;
               return (
                 <div key={item_id} className={`${styles['flex']} ${styles['pt-15']} ${styles['pb-15']} ${styles['border-b']} ${styles['min-items-list']}`}>
                   <Col md={2} sm={2} xs={2} className={`${styles['pl-0']} ${styles['pr-0']}`}>
                     <div className={`${styles['cart-container-img']} ${styles['flex']} ${styles['justify-center']}`}>
-                      <Link route={`/${language}/product?productId=${product_id}${variant_id ? `&variantId=${variant_id}` : ''}&catalogId=${catalogId}&itemType=${itemType}`}>
+                    <Link route={`/${language}/pdp/${name.split(' ').join('-').toLowerCase()}/c/${catalogId}/p/${product_id}/l/${listing_id}/v/${variant_id ? `${variant_id}` : ''}`}>
                         <a className={`${styles['width100']} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
                           <img className={styles['img']} src={`${constants.mediaDomain}/${img}`} />
                         </a>
@@ -63,7 +63,7 @@ const MiniCartBody = (props) => {
                   <Col md={10} sm={10} xs={10} className={`${styles['pr-0']} ${styles['card-details-labels']}`}>
                     <div className={`${styles['flx-space-bw']}`}>
                       <h6 className={`${styles['m-0']} ${styles['card-details-name']}`}>
-                        <Link route={`/${language}/product?productId=${product_id}${variant_id ? `&variantId=${variant_id}` : ''}&catalogId=${catalogId}&itemType=${itemType}`}>
+                      <Link route={`/${language}/pdp/${name.split(' ').join('-').toLowerCase()}/c/${catalogId}/p/${product_id}/l/${listing_id}/v/${variant_id ? `${variant_id}` : ''}`}>
                           <a className={`${styles['width100']} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
                             {name}
                           </a>
