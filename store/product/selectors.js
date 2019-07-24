@@ -22,7 +22,12 @@ const getProduct = (store, variantId) => {
     return [...acc, ...val];
   }, []);
   listings = listings || [];
-  const catalogAttributeMap = product_details && product_details.catalog_details.attribute_map;
+  debugger;
+  let catalogAttributeMap = {
+    ...product_details.catalog_details.attribute_map,
+    ...product_details.product_details_vo.cached_product_details.attribute_map,
+    ...product_details.product_details_vo.cached_variant[variantId].attribute_map,
+  };
   const productAttributeMap = product_details && product_details.product_details_vo && product_details.product_details_vo.cached_product_details.attribute_map;
   // let activeCount = 0, listingInventryCount = 0;
   let priceInfo = listings ? listings.filter((listing) => {
