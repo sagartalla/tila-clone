@@ -63,7 +63,6 @@ class CategoriesAndFacets extends Component {
 
   render() {
     const { filters, facets, search } = this.props;
-    console.log('ihikd', filters, facets);
     return (
       <PanelGroup accordion id="categories-panel">
         {filters.category.map((filter, index) => (

@@ -37,15 +37,15 @@ class ProductPage extends Base {
     const shippingData = req ? req.universalCookies.get('shippingInfo') : cookies.get('shippingInfo');
     const { city: shippingCity, country: shippingCountry } = shippingData || {};
     const {
-      taskCode, itemType, productId, variantId,
+      productId,
     } = query;
-    if (taskCode) {
-      await store.dispatch(actionCreators.getPreview({
-        taskCode,
-        itemType,
-        accessToken: req.universalCookies.get('accessToken'),
-      }));
-    } else {
+    // if (taskCode) {
+    //   await store.dispatch(actionCreators.getPreview({
+    //     taskCode,
+    //     itemType,
+    //     accessToken: req.universalCookies.get('accessToken'),
+    //   }));
+    // } else {
       const options = {
         city_code: shippingCity,
         country_code: country || 'SAU',
@@ -80,7 +80,7 @@ class ProductPage extends Base {
         //   catalogId: query.catalogId
         // }))
       ]);
-    }
+    // }
     return { isServer };
   }
 

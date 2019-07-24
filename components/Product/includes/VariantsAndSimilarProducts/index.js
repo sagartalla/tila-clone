@@ -72,8 +72,8 @@ class VariantsAndSimilarProducts extends Component {
       },
     }, () => {
       const { selectedProductData } = this.state;
-      const { isSearchPreview, variantId, variantsAndSimilarProducts } = this.props;
-      const { productId } = variantsAndSimilarProducts;
+      const { isSearchPreview, variantId, VariantsAndSimilarProducts, listing_id } = this.props
+      const productId = VariantsAndSimilarProducts.productId;
       const pid = this.props.getSelectedPropductId({
         selectedProductData: this.state.selectedProductData,
         map: variantsAndSimilarProducts.similarProducts.map,
@@ -101,15 +101,15 @@ class VariantsAndSimilarProducts extends Component {
         ],
         size: 'LARGE',
       };
-      let newQuery = window.location.search;
+      let newQuery = window.location.href.split("pdp/")[1];
       newQuery = newQuery.replace(productId, pid)
       this.props.setSelectedProductData({selectedProductData});
-      if (isSearchPreview) {
-        this.props.getProduct(options);
-        this.props.setProductId(pid);
-        window.open(`/${language}/product?productId=${pid}${variantId ? `&variantId=${variantId}`: ''}&catalogId=${VariantsAndSimilarProducts.catalogId}&itemType=${VariantsAndSimilarProducts.itemtype}`)
+      if(isSearchPreview) {
+          this.props.getProduct(options);
+          this.props.setProductId(pid);
+          window.open(`/${language}/pdp/${name.split(' ').join('-').toLowerCase()}/c/${VariantsAndSimilarProducts.catalogId}/p/${pid}/l/${listing_id}/v/${variantId ? `${variantId}` : ''}`)
       } else {
-        Router.pushRoute(`/${language}/product${newQuery}`);
+        Router.pushRoute(`/${language}/pdp/${newQuery}`);
       }
     });
   }
