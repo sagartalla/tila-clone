@@ -67,7 +67,10 @@ class CompareWidget extends React.Component {
                 );
               })}
             </div>
-            <a onClick={removeAll} className={`${styles['fs-12']} ${styles['black-color']} ${styles['flex']} ${styles['justify-center']} ${styles['pt-15']}`}>Remove All</a>
+            {
+              cmpData.products.length > 1 &&
+              <a onClick={removeAll} className={`${styles['fs-12']} ${styles['black-color']} ${styles['flex']} ${styles['justify-center']} ${styles['pt-15']}`}>Remove All</a>
+            }
           </div>
         </div>
       </div>
