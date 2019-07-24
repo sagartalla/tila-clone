@@ -4,13 +4,13 @@ import HeaderBar from '../HeaderBar';
 import FooterBar from '../Footer';
 
 const url = {
-  tc: 'https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/policies-html/tnc/termsedited.html',
-  cp: 'https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/policies-html/policies/policies.html?#cancelationPolicy',
-  er: 'https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/policies-html/policies/policies.html?#exchangePolicy',
-  re: 'https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/policies-html/policies/policies.html?#returnPolicy',
-  wp: 'https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/policies-html/policies/policies.html?#warrantyPolicy',
+  'user-terms-and-conditions': 'https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/policies-html/tnc/termsedited.html',
+  'cancellation-policy': 'https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/policies-html/policies/policies.html?#cancelationPolicy',
+  'exchange-replacement-policy': 'https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/policies-html/policies/policies.html?#exchangePolicy',
+  'return-refund-policy': 'https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/policies-html/policies/policies.html?#returnPolicy',
+  'warranty-policy': 'https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/policies-html/policies/policies.html?#warrantyPolicy',
   // sp: '/static/docs/sp.pdf#toolbar=0&navpanes=0&view=FitH',
-  pp: 'https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/policies-html/privacy/Pravacylatest.html',
+  'privacy-policy': 'https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/policies-html/privacy/Pravacylatest.html',
 };
 
 const Policy = ({ query }) => (

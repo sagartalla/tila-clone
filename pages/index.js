@@ -20,7 +20,6 @@ import styles_ar from '../components/Product/product_ar.styl';
 
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
-
 const { SEO_CONTENT } = languageDefinations();
 class LandingPage extends Base {
   pageName = 'HOME';
@@ -29,14 +28,14 @@ class LandingPage extends Base {
     const setCountry = country || 'SAU'
     const setLanguage = language || 'en'
     await store.dispatch(MegamenuActionsCreators.getMegamenu())
-    if(!country || !language) {
+    if(!language) {
       if(res) {
         res.writeHead(302, {
-          Location: `/${setCountry}/${setLanguage}`
-        })
-        res.end();{}
+          Location: `/${setLanguage}`
+        });
+        res.end();
       } else {
-        Router.push(`/${setCountry}/${setLanguage}`)
+        Router.push(`/${setLanguage}`)
       }
     }
     return { isServer };

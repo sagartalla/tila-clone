@@ -100,9 +100,9 @@ class SignIn extends Component {
               <Button
                 className={`${styles['flex-center']} ${styles.width50} ${styles['fs-14']} ${styles['text-uppercase']} ${styles['button-radius']}`}
                 onClick={props.continueCheckout}
-                btnText={PAYMENT_PAGE.CONTINUE_TO_CHECKOUt}
+                btnText={PAYMENT_PAGE.CONTINUE_TO_CHECKOUT}
               />
-              <div className={`${styles['text-blue']} ${styles['m-30']} ${styles.pointer}`} onClick={props.logoutClicked}>{HEADER_PAGE.LOGOUT} &amp; {PAYMENT_PAGE.SIGN_IN_AS_DIFF_USER}</div>
+              <div className={`${styles['text-blue']} ${styles['m-20']} ${styles.pointer}`} onClick={props.logoutClicked}>{PAYMENT_PAGE.SIGN_IN_AS_DIFF_USER}</div>
               </div>
             </div>}
             {(props.showCheckoutLogin || !props.isLoggedIn) &&

@@ -63,9 +63,9 @@ const getProductComponent = (isPreview, taskCode) => {
       if (window.localStorage && !isPreview) {
         const { productData } = this.props;
         const {
-          offerInfo, titleInfo, imgUrls, shippingInfo,
+          offerInfo, titleInfo, imgUrls,
         } = productData;
-        digitalData.page.pageInfo.pageName = titleInfo.title.attribute_values[0].value;
+        digitalData.page.pageInfo.pageName = titleInfo && titleInfo.title && titleInfo.title.attribute_values[0] && titleInfo.title.attribute_values[0].value;
         digitalData.page.category = { primaryCategory: productData.categoryType };
         digitalData.page.pageInfo.breadCrumbs = productData.breadcrums ? productData.breadcrums.map(item => item.display_name_en) : [];
         this.props.track({
@@ -166,8 +166,8 @@ const getProductComponent = (isPreview, taskCode) => {
 
     handleScroll(event) {
       const scrollTop = event.currentTarget.pageYOffset;
-      const detailsRect = this.detailsRef.current.getBoundingClientRect();
-      const bottomRefRect = this.bottomRef.current.getBoundingClientRect();
+      const detailsRect = this.detailsRef.current && this.detailsRef.current.getBoundingClientRect();
+      const bottomRefRect = this.bottomRef.current && this.bottomRef.current.getBoundingClientRect();
       const { isSearchPreview } = this.props;
       if (!isSearchPreview && bottomRefRect.top <= window.innerHeight && this.state.stickyElements.details !== 'stateBottom') {
         this.setState({

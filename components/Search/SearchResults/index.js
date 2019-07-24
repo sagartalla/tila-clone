@@ -98,11 +98,11 @@ class SearchResults extends Component {
 
   componentWillReceiveProps(nextProps) {
     if(this.state.buyNow == true && (nextProps.isLastAddedToCartSuccess)){
-       Router.pushRoute(`/${country}/${language}/payment`);
+       Router.pushRoute(`/${language}/payment`);
     }
   }
   renderProductPage(options) {
-    window.open(`/${country}/${language}/product?productId=${options.productId}${options.variantId ? `&variantId=${options.variantId}`: ''}&catalogId=${options.catalogId}&itemType=${options.itemType}`)
+    window.open(`/${language}/product?productId=${options.productId}${options.variantId ? `&variantId=${options.variantId}`: ''}&catalogId=${options.catalogId}&itemType=${options.itemType}`)
   }
   renderNext() {
     const { results } = this.props;

@@ -241,16 +241,16 @@ class ShippingAddress extends Component {
   }
 
   mobileWithZeroValidation = (fieldValue) => {
-    if (Number(fieldValue[0]) === 0 && Number(fieldValue[1]) === 5 && fieldValue.length === 10) {
+    if (fieldValue && (Number(fieldValue[0]) === 0 && Number(fieldValue[1]) === 5 && fieldValue.length === 10)) {
       return false;
-    } else if (Number(fieldValue[0]) !== 0) {
+    } else if (fieldValue && Number(fieldValue[0]) !== 0) {
       return false;
     } return true;
   }
   mobileValidation = (fieldValue) => {
-    if (Number(fieldValue[0]) === 5 && fieldValue.length === 9) {
+    if (fieldValue && (Number(fieldValue[0]) === 5 && fieldValue.length === 9)) {
       return false;
-    } else if (Number(fieldValue[0]) === 0) {
+    } else if (fieldValue && Number(fieldValue[0]) === 0) {
       return false;
     } return true;
   }

@@ -176,7 +176,7 @@ class CartItem extends React.Component {
               <div
                 className={`${styles['flex-center']} ${styles['justify-center']} ${styles['pb-15']} ${styles['card-box-inn-img']}`}
               >
-                <Link route={`/${country}/${language}/product?productId=${product_id}${variant_id ? `&variantId=${variant_id}` : ''}&catalogId=${catalogId}&itemType=${itemType}`}>
+                <Link route={`/${language}/product?productId=${product_id}${variant_id ? `&variantId=${variant_id}` : ''}&catalogId=${catalogId}&itemType=${itemType}`}>
                   <a className={`${styles['width100']} ${styles['ht-100P']}`}>
                     <img className={styles.img} alt={img} src={`${constants.mediaDomain}/${img}`} />
                   </a>
@@ -197,7 +197,7 @@ class CartItem extends React.Component {
                 </Col>
                 <Col md={8} sm={8} className={`${styles['landscape-cart-details']} ${styles['pr-0']}`}>
                   <h4 className={`${styles['fontW600']} ${styles['m-fs-14']} ${styles['fs-16']}`}>
-                    <Link route={`/${country}/${language}/product?productId=${product_id}${variant_id ? `&variantId=${variant_id}` : ''}&catalogId=${catalogId}&itemType=${itemType}`}>
+                    <Link route={`/${language}/product?productId=${product_id}${variant_id ? `&variantId=${variant_id}` : ''}&catalogId=${catalogId}&itemType=${itemType}`}>
                       <a className={`${styles['width100']} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
                         {name}
                       </a>
@@ -247,7 +247,7 @@ class CartItem extends React.Component {
                           id={item_id}
                           cols="30"
                           rows="2"
-                          className={styles['resize-none']}
+                          className={`${styles['resize-none']} ${styles['outline-none']}`}
                           placeholder={CART_PAGE.GIFT_MESSAGE_OPTIONAL}
                           value={gift_card_message}
                           onChange={this.updateMsg}
