@@ -38,13 +38,14 @@ class SearchPage extends Base {
     const { facetFilters, facetFiltersCopyWithNames } = selectors.getFacetfilters(store.getState())(JSON.parse(facets || '{}'));
     const shippingData = req ? req.universalCookies.get('shippingInfo') : cookies.get('shippingInfo');
     const { city: shippingCity, country: shippingCountry } = shippingData || {};
+    debugger;
     const searchOptions = {
       categoryFilter,
       categoryFacet,
       country: country || undefined,
       pageSize: 25,
       query: q,
-      language: language || 'en',
+      language: language || global.APP_LANGUAGE,
       facetFilters,
       facetFiltersCopyWithNames,
       pageNum: 1,
@@ -57,7 +58,7 @@ class SearchPage extends Base {
     if (shippingCity) {
       searchOptions.shippingDetails = {
         shippingCity: shippingCity.toUpperCase(),
-        shippingCountry: (country || 'ARE').toUpperCase(),
+        shippingCountry: (shippingCountry || global.APP_COUNTRY).toUpperCase(),
       }
     } else {
       searchOptions.shippingDetails = undefined
