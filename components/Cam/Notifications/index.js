@@ -36,7 +36,7 @@ class Notifications extends Component {
       <div className={`${styles['notifications-container']} ${styles['ml-5']}`}>
         <h4 className={`${styles['mt-0']} ${styles['fontW600']} ${styles['mb-30']}`}>{MESSAGES.ALL_NOTIFICATIONS}</h4>
         <div className={`${styles['notification-inn']}`}>
-          <span className={`${styles['white-color']} ${styles['notification-data']} ${styles['mb-15']}`}>{MESSAGES.TODAy}</span>
+          <span className={`${styles['white-color']} ${styles['notification-data']} ${styles['mb-15']}`}>{MESSAGES.TODAY}</span>
 
           {
             results.length > 0 && results.map((res, index) => {

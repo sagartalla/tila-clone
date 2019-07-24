@@ -121,7 +121,7 @@ class NotificationPreferences extends React.Component {
                     <Button
                       id={k}
                       className={`${styles.flex} ${styles['preference-save']} ${styles.fontW600} ${styles['fs-10']} ${styles['text-uppercase']}`}
-                      btnText="SAVE"
+                      btnText={PREFERENCES.SAVE}
                       onClick={this.savePreferences}
                     />
                   </div>

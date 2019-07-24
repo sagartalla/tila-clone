@@ -49,14 +49,14 @@ class CompareWidget extends React.Component {
           <div className={styles['compare-items']}>
             <div style={{ width: `${cmpData.products.length * 160}px` }} className={`${styles['flex-center']} ${styles['justify-around']} ${styles['ht-210']}`}>
               {cmpData.products.map((data) => {
-                const { catalogObj = {} } = data;
+                const { catalogObj = {}, displayName } = data;
                 return (
                   <div className={styles.item} key={data.productId}>
                     <div className={styles['item-image']}>
                       <img className={styles.image} src={data.src} alt="" />
                     </div>
                     <div className={styles['item-label']}>
-                      <a title={data.displayName} className={`${styles.ellips} ${styles.width100} ${styles['black-color']} ${styles['fs-12']}`} href={`/${language}/product?productId=${catalogObj.product_id}${catalogObj.variant_id ? `&variantId=${catalogObj.variant_id}` : ''}&catalogId=${catalogObj.catalog_id}&itemType=${cmpData.itemtype}`}>
+                      <a title={data.displayName} className={`${styles.ellips} ${styles.width100} ${styles['black-color']} ${styles['fs-12']}`} href={`/${language}/pdp/${displayName.split(' ').join('-').toLowerCase()}/c/${catalogObj.catalog_id}/p/${catalogObj.product_id}/l/${catalogObj.listing_id}/v/${catalogObj.variant_id ? `${catalogObj.variant_id}` : ''}`}>
                         {data.displayName}
                       </a>
                     </div>
@@ -67,7 +67,10 @@ class CompareWidget extends React.Component {
                 );
               })}
             </div>
-            <a onClick={removeAll} className={`${styles['fs-12']} ${styles['black-color']} ${styles['flex']} ${styles['justify-center']} ${styles['pt-15']}`}>Remove All</a>
+            {
+              cmpData.products.length > 1 &&
+              <a onClick={removeAll} className={`${styles['fs-12']} ${styles['black-color']} ${styles['flex']} ${styles['justify-center']} ${styles['pt-15']}`}>Remove All</a>
+            }
           </div>
         </div>
       </div>

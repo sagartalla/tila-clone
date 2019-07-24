@@ -100,7 +100,7 @@ class Reason extends Component {
   saveAndGoNext() {
     const { goToNextStep, setReason, query, orderIssue, orderDetails } = this.props;
     const { orderId, returnExchangeType, issueType, selectedItem} = orderIssue;
-    const { reason, subReason, comment, selectedMode } = this.state
+    const { reason, subReason, comment, selectedMode, selectedVariant } = this.state
     let listingObj = orderDetails && orderDetails.order_items && orderDetails.order_items.find((order) => order.order_item_ids[0] === selectedItem.id);
     const params = {
       orderId,
@@ -136,12 +136,13 @@ class Reason extends Component {
         })
       }
       else {
+        const { listing_id, variant_id } = selectedVariant[0]
         this.props.setExchangeOrder({
           comments: comment,
           reason,
           sub_reason: subReason,
-          new_listing_id: listingObj.listing_id,
-          variant_id: listingObj.variant_id,
+          new_listing_id: listing_id,
+          variant_id: variant_id,
           order_item_id: query.orderItemId
         })
         goToNextStep();
