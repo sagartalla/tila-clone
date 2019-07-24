@@ -85,6 +85,7 @@ class OrderTracker extends React.Component {
                   <p className={`${styles.fontW600} ${styles['fs-16']}`}>{orderItem.price.final_price.display_value} {orderItem.currency_code}</p>
                 </Col>
               </div>
+              <div className={`${styles['p-5']} ${styles['pl-35']} ${styles['border-t']}`}>{ORDERS.TRACKING_ID}: {orderItem.trackingId}</div>
             </div>
             <div className={`${styles['border-b']} ${styles['p-20']} ${styles['pl-40']}`}>
               {showMsgAndDate}

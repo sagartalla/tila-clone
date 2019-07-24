@@ -52,8 +52,8 @@ const WishlistBody = (props) => {
     }
     return str;
   };
-  const routeChange = (variantId, productId, catalogId, itemType) => {
-    Router.push(`/${language}/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemType}`);
+  const routeChange = (variant_id, product_id, catalog_id, listing_id, name) => {
+    Router.push(`/${language}/pdp/${name.split(' ').join('-').toLowerCase()}/c/${catalog_id}/p/${product_id}/l/${listing_id}/v/${variant_id ? `${variant_id}` : ''}`);
   };
   return (data.length === 0 ?
     <div className={styles['no-wishlist-icon']}>
@@ -86,7 +86,7 @@ const WishlistBody = (props) => {
                   <Col md={2} xs={2} className={styles['m-p-0']}>
                     <div
                       className={`${styles['flex-center']} ${styles['justify-center']} ${styles.pointer} ${styles['mb-wishlist-part-img']}`}
-                      onClick={() => routeChange(variant_id, product_id, catalog_id, itemType)}
+                      onClick={() => routeChange(variant_id, product_id, catalog_id, listing_id, name)}
                     >
                       <img className={styles.img} src={`${constants.mediaDomain}/${img}`} />
                     </div>

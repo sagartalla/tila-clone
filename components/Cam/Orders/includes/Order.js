@@ -14,7 +14,7 @@ import main_ar from '../../../../layout/main/main_ar.styl';
 import styles_en from '../orders_en.styl';
 import styles_ar from '../orders_ar.styl';
 
-const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
 const { ORDERS } = languageDefinations();
 const cookies = new Cookies();
@@ -102,12 +102,12 @@ const Order = ({ order, getInvoice }) => {
           <div className={`${styles['flx-space-bw']}`}>
             <span className={`${styles.flex} ${styles.pointer}`}>
               {order.invoice_id &&
-              <span className={styles.flex} onClick={fetchInvoice}>
-                <span>{ORDERS.REQUEST_INVOICE}&nbsp;</span>
-                <span>
-                  <SVGComponent clsName={`${styles['down-arrow']}`} src="icons/down-arrow/down-arrow" />
+                <span className={styles.flex} onClick={fetchInvoice}>
+                  <span>{ORDERS.REQUEST_INVOICE}&nbsp;</span>
+                  <span>
+                    <SVGComponent clsName={`${styles['down-arrow']}`} src="icons/down-arrow/down-arrow" />
+                  </span>
                 </span>
-              </span>
               }
             </span>
             <span className={`${styles['ml-10']} ${styles['fs-16']}`}>
