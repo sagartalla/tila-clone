@@ -836,8 +836,8 @@ export const AR_KEYWORDS = {
     CREDIT_CARDS_VOUCHERS_REWARD_POINTS:'البطاقات المحفوظة ورصيد تيله',
     MY_COUPONS: 'كوبوناتي',
     PREFERENCES: 'تفضيلات',
-    CHOOSE_PROFILE_PIC: 'اختار صورة ملفك الشخصي',
     REVIEWS_AND_RATINGS: 'رأي و تقيماتي',
+    CHOOSE_PROFILE_PIC: 'اختار صورة ملفك الشخصي',
   },
   PREFERENCES: {
     PAGE_TITLE: 'الإشعارات والاتصال المفضل ',
