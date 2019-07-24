@@ -323,6 +323,9 @@
 [role=button]:focus {
     outline: none;
 }
-.slick-prev, .slick-next {
+.home-slider .slick-prev {
+    top: 35%;
+}
+.home-slider .slick-next {
     top: 35%;
 }
