@@ -43,10 +43,8 @@ const CartBody = ({
   const flag = data && items && items.length;
   const cnt = flag > 0 ? items.length : 0;
   const { CART_PAGE, WISH_LIST_PAGE} = languageDefinations();
-  if(data.ui.loading) {
-    return <div>Please Wait Fetching Cart Items</div>
-  }
   return (
+    data.ui.loading ? <Blocker message={"Please wait, fetching cart items"}/> : 
     <>
     <div className={styles['cart-container']}>
       {

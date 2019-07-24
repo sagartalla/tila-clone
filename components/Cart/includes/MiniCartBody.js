@@ -31,7 +31,7 @@ const MiniCartBody = (props) => {
   const cnt = flag > 0 ? items.length : 0;
   const { CART_PAGE, DELIVERY_ADDR_PAGE } = languageDefinations();
   if(data.ui.loading) {
-    return <div>Please Wait Fetching Cart Items</div>
+    return <div>Please wait, fetching cart items</div>
   }
   return (
     <div>
