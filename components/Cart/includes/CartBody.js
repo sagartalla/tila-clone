@@ -47,6 +47,7 @@ const CartBody = ({
     return <div className={`${styles['p-15']} ${styles['fontW600']} ${styles['thick-gry-clr']} ${styles['mb-0']}`}>Please Wait Fetching Cart Items</div>
   }
   return (
+    data.ui.loading ? <Blocker message={"Please wait, fetching cart items"}/> : 
     <>
     <div className={styles['cart-container']}>
       {

@@ -95,44 +95,19 @@ class CartItem extends React.Component {
     super(props);
     const { gift_info } = props.item;
     this.state = {
-      gift_card_message: gift_info ? gift_info.gift_card_message : '',
       checked: gift_info ? true : false,
-      showMessage: true,
     };
   }
 
   giftChecked = ({ currentTarget }) => {
     const { addOrRemoveGift } = this.props;
-    let { showMessage } = this.state;
     if (!currentTarget.checked) {
       addOrRemoveGift(currentTarget.getAttribute('data-id'), 'remove');
-    } else showMessage = false;
+    } else {
+      addOrRemoveGift(currentTarget.getAttribute('data-id'), 'add');
+    }
     this.setState({
       checked: currentTarget.checked,
-      showMessage,
-    });
-  }
-
-  toggleMessage = () => {
-    this.setState({
-      showMessage: false,
-    });
-  }
-
-  updateMsg = ({ target }) => {
-    this.setState({
-      gift_card_message: target.value,
-    });
-  }
-
-  sendGiftPack = ({ target }) => {
-    const { addOrRemoveGift } = this.props;
-    const { gift_card_message } = this.state;
-    this.setState({
-      showMessage: true,
-    })
-    addOrRemoveGift(target.getAttribute('data-id'), 'add', {
-      gift_card_message,
     });
   }
 
@@ -147,7 +122,7 @@ class CartItem extends React.Component {
       cartStepperInputHandler,
 
     } = this.props;
-    const { gift_card_message, checked, showMessage } = this.state;
+    const { checked } = this.state;
     const {
       item_id, img, name, offer_price, cur, quantity, max_limit, inventory, offerDiscounts,
       brand_name, gift_info, shipping, warranty_duration, total_amount, total_discount, listing_id,
@@ -234,33 +209,6 @@ class CartItem extends React.Component {
                       <input data-id={item_id} id={"gift" + item_id} type="checkbox" defaultChecked={checked} onClick={this.giftChecked} />
                       <label className={`${styles['fs-14']}`} htmlFor={"gift" + item_id}> {CART_PAGE.SEND_GIFT} {(gift_info && gift_info.gift_rate) ? "(" + gift_info.gift_rate + " " + cur + ")" : ''} </label>
                     </div>
-                    {checked && showMessage &&
-                      <div>
-                        <span className={styles.fontW600}>{CART_PAGE.MESSAGE}:&nbsp;</span><span className={styles['break-word']}>{gift_card_message}&nbsp;</span>
-                        <span>{'('}<a onClick={this.toggleMessage}>{CART_PAGE.EDIT}</a>{')'}</span>
-                      </div>
-                    }
-                    {!showMessage && checked &&
-                      <div className={styles['flex-center']}>
-                        <textarea
-                          name="msg"
-                          id={item_id}
-                          cols="30"
-                          rows="2"
-                          className={`${styles['resize-none']} ${styles['outline-none']}`}
-                          placeholder={CART_PAGE.GIFT_MESSAGE_OPTIONAL}
-                          value={gift_card_message}
-                          onChange={this.updateMsg}
-                          maxLength="150"
-                        />
-                        <button
-                          data-id={item_id}
-                          className={`${styles['ml-20']} ${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['right-radius']} ${styles['text-uppercase']}`}
-                          onClick={this.sendGiftPack}
-                        >
-                          {CART_PAGE.GIFT_PACK}
-                        </button>
-                      </div>}
                   </React.Fragment>
                   {
                     shipping !== null && (!shipping.shippable &&
