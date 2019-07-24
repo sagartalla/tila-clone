@@ -173,7 +173,7 @@ export const AR_KEYWORDS = {
     NO_WISHLIST_LABEL: 'So many products on Tila and yet you show no love :(',
     DONT_WAIT: 'Dont wait no more!',
     START_SHOPPING: 'Start shopping',
-    PRICE_DECRECED_BY: 'Price Decreased by',
+    PRICE_DECRECED_BY: 'انخفض السعر بنسبة',
     PRICE_INCREASED_BY: 'Price Increased by',
   },
   PDP_PAGE: {
@@ -572,7 +572,7 @@ export const AR_KEYWORDS = {
     MATCHING_PRODUCTS: 'مطابقة المنتجات',
     HELLO: 'هلا فيك',
     MORE_ITEMS: 'منتجات أكثر',
-    GO_TO_WISHLIST: 'أذهب للقائمة المفضلة',
+    GO_TO_WISHLIST: 'روح  للقائمة المفضلة',
     MORE_ITEM: 'more item',
   },
   LOGIN_PAGE: {
