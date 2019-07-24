@@ -180,7 +180,7 @@ class Coupon extends Component {
         </div>
         <div className={styles.errorStyle}>
           {!isCartLoading &&
-          (copuonAttempted ? (couponApplied ? '' : <span className={styles['error-msg']}>This {appliedCoupon} {COUPON_OFFERS.IS_INVALID}</span>) : errorMsg ? <span className={styles['error-msg']}>{errorMsg}</span> : '')
+          (copuonAttempted ? (couponApplied ? '' : <span className={styles['error-msg']}>{COUPON_OFFERS.THIS} {appliedCoupon} {COUPON_OFFERS.IS_INVALID}</span>) : errorMsg ? <span className={styles['error-msg']}>{errorMsg}</span> : '')
         }
         </div>
         <div className={`${styles.applyCoupon} ${styles.applyCouponMargin} ${styles.flex} ${styles['flex-colum']}`}>

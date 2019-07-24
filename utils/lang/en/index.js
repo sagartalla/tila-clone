@@ -658,6 +658,7 @@ export const EN_KEYWORDS = {
     SHOW: 'Show',
     HIDE: 'Hide',
     PASSWORD: 'Password',
+    ENTER_FOUR_DIGIT_OTP: 'Or Please enter 4 digit OTP sent to your e-mail.',
   },
   ORDER_PAGE: {
     LOADING: 'Loading...',
@@ -772,7 +773,8 @@ export const EN_KEYWORDS = {
     RESET_PASSWORD_LINK_SENT: 'Reset password link sent to your signed up email ID',
     OTP_HAS: 'OTP has',
     OTP_EXPIRED: 'Expired',
-    PLEASE_CLICK_ON_THE_LINK: 'Please click on the resend link below', 
+    PLEASE_CLICK_ON_THE_LINK: 'Please click on the resend link below',
+    CLICK_LINK_ABOVE: 'Please click on the resend link above',
   },
   MESSAGES: {
     MESSAGES: 'Messages',
@@ -861,6 +863,7 @@ export const EN_KEYWORDS = {
     FEEDBACK_SURVEY_AND_PRODUCT_REVIEW_SUB: 'Signup to receive personalized discounts and coupons',
     NOTE: 'Note :',
     YOU_WILL_BE_UNSUBSCRIBED: 'You will be unsubscribed for the above notifications if you uncheck the boxes.',
+    SAVE: 'Save',
   },
   REVIEWS: {
     TITLE: 'My Reviews & Ratings',
