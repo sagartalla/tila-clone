@@ -17,7 +17,8 @@ class Timer extends React.Component {
   }
 
   componentWillReceiveProps(newProps) {
-    if (this.secondsRemaining !== newProps.time) {
+    const { resendClicked } = this.props;
+    if (this.secondsRemaining !== newProps.time && resendClicked) {
       clearInterval(this.intervalHandle);
       this.intervalHandle = setInterval(this.tick, 1000);
       this.secondsRemaining = this.props.time;

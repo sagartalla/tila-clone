@@ -27,13 +27,13 @@ class LandingPage extends Base {
     const { country, language } = query;
     const setCountry = country || 'SAU'
     const setLanguage = language || 'en'
-    store.dispatch(MegamenuActionsCreators.getMegamenu())
+    await store.dispatch(MegamenuActionsCreators.getMegamenu())
     if(!language) {
       if(res) {
         res.writeHead(302, {
           Location: `/${setLanguage}`
-        })
-        res.end();{}
+        });
+        res.end();
       } else {
         Router.push(`/${setLanguage}`)
       }
