@@ -16,10 +16,11 @@ routes
   .add({ name: 'compare', pattern: '/:language/compare', page: 'compare' })
   .add({ name: 'policy', pattern: '/:language/policy/:name', page: 'policy' })
   .add({ name: 'resetpassword', pattern: '/:language/resetpassword', page: 'resetPassword' })
-  .add({ name: '3dsecure', pattern: '/:language/gateway/callback/:encryptedString', page: 'redirect' })
+  .add({ name: '3dsecure', pattern: '/:language/gateway/callback/:encryptedString', page: 'threeDRedirect' })
   .add({ name: 'help', pattern: '/:language/help/(.*)', page: 'help' })
   .add({ name: 'brand', pattern: '/:language/brand/:brandName', page: 'brand' })
   .add({ name: 'ftb', pattern: '/:language/ftb', page: 'ftb' })
+  .add({ name: 'redirect', pattern: '/:country/:language', page: 'homeRedirect' })
   .add({ name: 'default', pattern: '/:language?', page: 'index' });
 
 module.exports = routes;
