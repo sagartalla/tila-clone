@@ -20,7 +20,7 @@ const { PDP_PAGE } = languageDefinations();
 
 const ProductDetails = ({ details, keyfeatures, isPreview, productInfo,variantId,productId,isSearchPreview }) => {
   return (
-    <div className={`${styles['product-details-main']} ${styles['border-radius4']} ${styles['mb-5']} ${styles['box']}`}>
+    <div className={`${styles['product-details-main']} ${styles['border-radius4']} ${styles['mb-5']} ${styles.box}`}>
       {
         details
           ?
@@ -29,14 +29,14 @@ const ProductDetails = ({ details, keyfeatures, isPreview, productInfo,variantId
               <Panel eventKey="1">
                 <Panel.Heading>
                   <Panel.Title toggle className={styles['key-feature-inn']}>
-                    <h4 className={`${styles['fs-12']} ${styles['fontW600']} ${styles['mb-5']} ${styles['mt-0']} ${styles['flx-space-bw']}`}>
+                    <h4 className={`${styles['fs-12']} ${styles.fontW600} ${styles['mb-5']} ${styles['mt-0']} ${styles['flx-space-bw']}`}>
                       <span className={styles['text-uppercase']}>{PDP_PAGE.PRODUCT_DETAILS}</span>
                       <SVGCompoent clsName={`${styles['expand-icon']}`} src="icons/down-arrow/down-arrow" />
                     </h4>
                   </Panel.Title>
                 </Panel.Heading>
                 <Panel.Body collapsible>
-                  <p className={`${styles['fs-12']} ${styles['fontW300']} ${styles['sub-decryption']}`}>{details}</p>
+                  <p className={`${styles['fs-12']} ${styles.fontW300} ${styles['sub-decryption']}`}>{details}</p>
                 </Panel.Body>
               </Panel>
             </PanelGroup>
@@ -74,7 +74,7 @@ const ProductDetails = ({ details, keyfeatures, isPreview, productInfo,variantId
           <Panel eventKey="2">
             <Panel.Heading>
               <Panel.Title toggle className={styles['key-feature-inn']}>
-                <h4 className={`${styles['fs-12']} ${styles['fontW600']} ${styles['mb-5']} ${styles['mt-0']} ${styles['flx-space-bw']}`}>
+                <h4 className={`${styles['fs-12']} ${styles.fontW600} ${styles['mb-5']} ${styles['mt-0']} ${styles['flx-space-bw']}`}>
                   <span className={styles['text-uppercase']}>{PDP_PAGE.KEY_FEATURES}</span>
                   <SVGCompoent clsName={`${styles['expand-icon']}`} src="icons/down-arrow/down-arrow" />
                   {/* <span className={styles['fs-16']}>+</span> */}

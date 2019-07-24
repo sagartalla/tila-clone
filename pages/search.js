@@ -44,7 +44,7 @@ class SearchPage extends Base {
       country: country || undefined,
       pageSize: 25,
       query: q,
-      language: language || 'en',
+      language: language || global.APP_LANGUAGE,
       facetFilters,
       facetFiltersCopyWithNames,
       pageNum: 1,
@@ -57,7 +57,7 @@ class SearchPage extends Base {
     if (shippingCity) {
       searchOptions.shippingDetails = {
         shippingCity: shippingCity.toUpperCase(),
-        shippingCountry: (country || 'ARE').toUpperCase(),
+        shippingCountry: (shippingCountry || global.APP_COUNTRY).toUpperCase(),
       }
     } else {
       searchOptions.shippingDetails = undefined

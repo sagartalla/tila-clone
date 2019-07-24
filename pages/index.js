@@ -32,8 +32,8 @@ class LandingPage extends Base {
       if(res) {
         res.writeHead(302, {
           Location: `/${setLanguage}`
-        })
-        res.end();{}
+        });
+        res.end();
       } else {
         Router.push(`/${setLanguage}`)
       }
