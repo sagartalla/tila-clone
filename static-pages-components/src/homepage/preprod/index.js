@@ -42,57 +42,57 @@ const tie = [{
   key: 'Laptops',
 }, {
   img: '/static/img/landing-home/memory.png',
-  title: `${lang === 'en' ? 'Memory' : 'اللاب توبات'}`,
-  key: 'Laptops',
+  title: `${lang === 'en' ? 'Memory' : 'أجهزة التخزين'}`,
+  key: 'Memory',
 }, {
   img: '/static/img/landing-home/cameras.png',
   title: `${lang === 'en' ? 'Cameras' : 'كاميرات'}`,
   key: 'Cameras',
 }, {
   img: '/static/img/landing-home/television.png',
-  title: `${lang === 'en' ? 'TVs' : 'التلفزيونات'}`,
+  title: `${lang === 'en' ? 'Televisions' : 'التلفزيونات'}`,
   key: 'Televisions',
 }, {
   img: '/static/img/landing-home/mobileaccess.png',
-  title: `${lang === 'en' ? 'Mobile Accessories' : 'أجهزة التخزين'}`,
+  title: `${lang === 'en' ? 'Mobile Accessories' : 'اكسسوارات الجوالات'}`,
   key: 'Mobile Accessories',
 }, {
   img: '/static/img/landing-home/tablets.png',
-  title: `${lang === 'en' ? 'Tablets' : 'أجهزة التخزين'}`,
+  title: `${lang === 'en' ? 'Tablet & iPads' : 'اجهزة تابلت وايباد'}`,
   key: 'Tablets',
 }, {
   img: '/static/img/landing-home/Kitchen-appliances.png',
-  title: `${lang === 'en' ? 'Kitchen Appliances' : 'أجهزة التخزين'}`,
+  title: `${lang === 'en' ? 'Kitchen Appliances' : 'أجهزة المطبخ'}`,
   key: 'Kitchen Appliances',
 }, {
   img: '/static/img/landing-home/smartwatch.png',
-  title: `${lang === 'en' ? 'Smart Watch' : 'أجهزة المنزل'}`,
+  title: `${lang === 'en' ? 'Smart Watches' : 'ساعات ذكية مع إمكانية الإتصال'}`,
   key: 'Smart Watch',
 }, {
   img: '/static/img/landing-home/homeentertainment.png',
-  title: `${lang === 'en' ? 'Home Entertainment' : 'أجهزة التخزين'}`,
+  title: `${lang === 'en' ? 'Home Entertainment' : 'أجهزة ترفيهية'}`,
   key: 'Home Entertainment',
 }, {
   img: '/static/img/landing-home/routers.png',
-  title: `${lang === 'en' ? 'Routers' : 'أجهزة التخزين'}`,
+  title: `${lang === 'en' ? 'Routers' : 'راوترات'}`,
   key: 'Routers',
 }, {
   img: '/static/img/landing-home/computerperepherals.png',
-  title: `${lang === 'en' ? 'computer perepherals' : 'أجهزة التخزين'}`,
+  title: `${lang === 'en' ? 'Computer Peripherals' : 'ملحقات الكمبيوتر'}`,
   key: 'computer perepherals',
 }, {
   img: '/static/img/landing-home/printers_home.png',
-  title: `${lang === 'en' ? 'Printers' : 'أجهزة التخزين'}`,
+  title: `${lang === 'en' ? 'Printers' : 'طابعات'}`,
   key: 'Printers',
 }, {
   img: '/static/img/landing-home/Home_appliances.png',
-  title: `${lang === 'en' ? 'Home Appliances' : 'أجهزة التخزين'}`,
+  title: `${lang === 'en' ? 'Home Appliances' : 'أجهزة المنزل'}`,
   key: 'Home Appliances',
 }];
 
 const hal = [{
   img: '/static/img/landing-home/womens-clothing.png',
-  title: `${lang === 'en' ? 'Women\'s Clothing' : 'ملابس نسائية\نسائي'}`,
+  title: `${lang === 'en' ? 'Women\'s Clothing' : 'ملابس نسائية'}`,
   key: 'Womens Clothing',
 }, {
   img: '/static/img/landing-home/mens-clothing.png',
@@ -108,43 +108,43 @@ const hal = [{
   key: 'Watches',
 }, {
   img: '/static/img/landing-home/shoes_home.png',
-  title: `${lang === 'en' ? 'Footwear' : 'أزياءمستلزمات'}`,
-  key: 'Fashion Accessories',
-}, {
-  img: '/static/img/landing-home/sunglasse_home.png',
-  title: `${lang === 'en' ? 'Sunglasses' : 'أزياءمستلزمات'}`,
+  title: `${lang === 'en' ? 'Footwear' : 'أحذية'}`,
   key: 'Footwear',
 }, {
+  img: '/static/img/landing-home/sunglasse_home.png',
+  title: `${lang === 'en' ? 'Sunglasses' : 'نظارات شمسية'}`,
+  key: 'Sunglasses',
+}, {
   img: '/static/img/landing-home/sports_home.png',
-  title: `${lang === 'en' ? 'Sports' : 'أزياءمستلزمات'}`,
-  key: 'Sports',
+  title: `${lang === 'en' ? 'Sports & Outdoors' : 'الرياضات والخارج'}`,
+  key: 'Sports & Outdoors',
 }, {
   img: '/static/img/landing-home/fitness_home.png',
-  title: `${lang === 'en' ? 'Fitness' : 'عطور'}`,
-  key: 'Fitness',
+  title: `${lang === 'en' ? 'Exercise & Fitness' : ' تدريبات ولياقة'}`,
+  key: 'Exercise & Fitness',
 }, {
   img: '/static/img/landing-home/toys_home.png',
-  title: `${lang === 'en' ? 'Toys' : 'عطور'}`,
+  title: `${lang === 'en' ? 'Toys' : 'ألعاب'}`,
   key: 'Toys',
 }, {
   img: '/static/img/landing-home/beauty_and_health.png',
-  title: `${lang === 'en' ? 'Beauty & Health' : 'مجوهرات'}`,
-  key: 'Beauty & Health',
+  title: `${lang === 'en' ? 'Health & Beauty' : 'الصحة والجمال'}`,
+  key: 'Health & Beauty',
 }, {
   img: '/static/img/landing-home/cushion_squilts.png',
-  title: `${lang === 'en' ? 'Cushions & Quilts' : 'مجوهرات'}`,
-  key: 'Cushions & Quilts',
+  title: `${lang === 'en' ? 'Cushions & Covers' : 'اغطية وسادات'}`,
+  key: 'Cushions & Covers',
 }, {
   img: '/static/img/landing-home/home_sweet_home.png',
-  title: `${lang === 'en' ? 'Door Mats' : 'مجوهرات'}`,
+  title: `${lang === 'en' ? 'Door Mats' : 'دواسَّات للباب'}`,
   key: 'Door Mats',
 }, {
   img: '/static/img/landing-home/car_freshners.png',
-  title: `${lang === 'en' ? 'Car Freshner' : 'مجوهرات'}`,
-  key: 'Car Freshner',
+  title: `${lang === 'en' ? 'Air Freshner' : 'معطرات جو'}`,
+  key: 'Air Freshner',
 }, {
   img: '/static/img/landing-home/photo_frames.png',
-  title: `${lang === 'en' ? 'Photo Frames' : 'مجوهرات'}`,
+  title: `${lang === 'en' ? 'Photo Frames' : 'إطارات صور'}`,
   key: 'Photo Frames',
 }];
 
