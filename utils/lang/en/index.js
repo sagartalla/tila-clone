@@ -791,6 +791,7 @@ export const EN_KEYWORDS = {
     NO_WISHLIST_LABEL: 'You don’t have any orders yet',
     DONT_WAIT: 'Dont wait no more!',
     START_SHOPPING: 'Start shopping',
+    TRACKING_ID: 'Tracking Id',
   },
   BETA: {
     BETA: 'beta',
