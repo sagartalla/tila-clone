@@ -7,6 +7,7 @@ import { Row, Col } from 'react-bootstrap';
 import { actionCreators, selectors } from '../../../store/landing';
 
 import lang from '../../../utils/language';
+import PageData from '../../common/PageData';
 
 import main_en from '../../../layout/main/main_en.styl';
 import main_ar from '../../../layout/main/main_ar.styl';
@@ -16,7 +17,7 @@ import styles_ar from './brand_ar.styl';
 
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
-let sliderTBS;
+// let sliderTBS;
 
 // const tbs = [{
 //   img: `/static/img/landing-home/${lang === 'en' ? 'main-Armani' : 'main-Armani-ar'}.png`,
@@ -41,8 +42,8 @@ let sliderTBS;
 // }];
 
 const subTypes = {
-  CAROUSEL: 'carousel',
-  FLEX_3: 'flex-3',
+  CAROUSEL: 'CT1a',
+  FLEX_3: 'BT3',
 };
 
 
@@ -51,16 +52,18 @@ const Brand = ({ pageData }) => {
   return (
   <React.Fragment>
     <div>
-      <span className={`${styles['fs-30']} ${styles['fontW600']} ${styles['text-capitalize']}`}>{id_attribute}</span>
-      <span className={`${styles['fs-30']} ${styles['fontW300']}`}>&nbsp;Store</span>
+      <span className={`${styles['fs-30']} ${styles.fontW600} ${styles['text-capitalize']}`}>{id_attribute}</span>
+      <span className={`${styles['fs-30']} ${styles.fontW300}`}>&nbsp;Store</span>
     </div>
-    {page_content && page_content.map((item) => {
+    {page_content && page_content.map(content => <PageData key={content} content={content} />)}
+    {/* {
         if (!item.visible) {
           return (
             null
           );
         }
-        switch (item.sub_type) {
+        switch (item.layout_id) {
+          case 'CT1':
           case subTypes.CAROUSEL:
             return (
               <Slider
@@ -101,7 +104,7 @@ const Brand = ({ pageData }) => {
           default: return null;
         }
       })
-    }
+    } */}
   </React.Fragment>);
 };
 

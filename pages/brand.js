@@ -24,6 +24,7 @@ const cookies = new Cookies();
 
 const { SEO_CONTENT } = languageDefinations();
 
+let brandValue = '';
 
 class SearchPage extends Base {
   static async getInitialProps({
@@ -32,12 +33,16 @@ class SearchPage extends Base {
     const {
       country, language, brandName, facets,
     } = query;
+    if (brandName !== '<anonymous>') {
+      brandValue = brandName;
+      console.log("brand Name :", brandValue, query);
+    }
     const shippingData = req ? req.universalCookies.get('shippingInfo') : cookies.get('shippingInfo');
     const { city: shippingCity, country: shippingCountry } = shippingData || {};
     const searchOptions = {
       country: country || undefined,
       pageSize: 25,
-      query: brandName,
+      query: brandValue,
       language: language || 'en',
       pageNum: 1,
     };
@@ -48,11 +53,10 @@ class SearchPage extends Base {
       };
     }
 
-    // console.log("brand Name :", brandName);
 
     await Promise.all([
       store.dispatch(actionCreators.getSearchResults(searchOptions)),
-      store.dispatch(LandingactionCreators.getPage({ page: 'brandLandingPage', id: brandName })),
+      store.dispatch(LandingactionCreators.getPage({ page: 'brandLandingPage', id: brandValue })),
     ]);
     return { isServer };
   }
@@ -101,4 +105,4 @@ const mapDispatchToProps = dispatch =>
     dispatch,
   );
 
-export default withRedux(makeStore, null, mapDispatchToProps)(SearchPage);
+export default withRedux(makeStore, null, null)(SearchPage);

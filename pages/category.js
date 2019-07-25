@@ -24,7 +24,7 @@ const cookies = new Cookies();
 
 const { SEO_CONTENT } = languageDefinations();
 
-
+let categoryValue = '';
 class Category extends Base {
   static async getInitialProps({
     store, isServer, query, req,
@@ -32,12 +32,16 @@ class Category extends Base {
     const {
       country, language, category, facets,
     } = query;
+    if (category !== '<anonymous>') {
+      categoryValue = category;
+      console.log("brand Name :", categoryValue, query);
+    }
     const shippingData = req ? req.universalCookies.get('shippingInfo') : cookies.get('shippingInfo');
     const { city: shippingCity, country: shippingCountry } = shippingData || {};
     const searchOptions = {
       country: country || undefined,
       pageSize: 25,
-      query: category,
+      query: categoryValue,
       language: language || 'en',
       pageNum: 1,
     };
@@ -48,11 +52,11 @@ class Category extends Base {
       };
     }
 
-    console.log("brand Name :", category);
+    console.log("brand Name :", categoryValue);
 
     await Promise.all([
       store.dispatch(actionCreators.getSearchResults(searchOptions)),
-      store.dispatch(LandingactionCreators.getPage({ page: 'categotyIndividualPage', id: category })),
+      store.dispatch(LandingactionCreators.getPage({ page: 'categoryIndividualPage', id: categoryValue })),
     ]);
     return { isServer };
   }
