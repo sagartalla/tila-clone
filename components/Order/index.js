@@ -55,7 +55,7 @@ class Order extends Component {
             </div>
           )
         }
-        <LoaderBarContext.Consumer>
+      </LoaderBarContext.Consumer>
     );
   }
 }

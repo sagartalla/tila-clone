@@ -94,7 +94,7 @@ const WishlistBody = (props) => {
                   <Col md={10} xs={10}>
                     <Col md={8} xs={8} className={styles['pl-0']}>
                       <h5 className={`${styles['mt-0']} ${styles['mb-0']} ${styles['thick-blue']}`}>{brand_name}</h5>
-                      <h5 className={`${styles['lgt-gry-clr']} ${styles.pointer} ${styles['light-gry-clr']}`} onClick={() => routeChange(variant_id, product_id, catalog_id, itemType)}>{name}</h5>
+                      <h5 className={`${styles['lgt-gry-clr']} ${styles.pointer} ${styles['light-gry-clr']}`} onClick={() => routeChange(variant_id, product_id, catalog_id, itemType, name)}>{name}</h5>
                       <div className={`${styles['mt-30']} ${styles['m-t-0']} ${styles['m-fs-12']}`}>
                         {inventory_count > 0 ?
                           <button
