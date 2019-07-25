@@ -86,17 +86,19 @@ class PageData extends React.Component {
     super();
     this.state = {};
   }
-
+  // breadcrums are pending...
   getContent = () => {
     const { content } = this.props;
+    if (content.layout_id === 'CBT5b') {
+      console.log('cnjk', content);
+    }
     switch (content.layout_id) {
-      case 'BT2':
+      case 'CT1':
         return (
           <div className={`${styles['mb-40']} top-banner-slider`}>
             <h3>{content.data[lang].title}</h3>
             <Slider
               dots
-              autoplay
               asNavFor={sliderTBS}
               ref={(slider) => { sliderTBS = slider; }}
               lazyLoad={false}
@@ -107,7 +109,7 @@ class PageData extends React.Component {
                 <div key={i.display_name}>
                   <a href={i.link}>
                     <div className="item" key={i.display_name}>
-                      <img src={i.img} width={i.config.width} height={i.config.height} alt={i.display_name} />
+                      <img src={i.img} height={i.config.height} width={i.config.width} alt={i.display_name} />
                     </div>
                   </a>
                 </div>
@@ -158,6 +160,9 @@ class PageData extends React.Component {
             </div>
           </div>
         );
+      case 'BT2':
+      case 'BT3':
+      case 'BT4':
       case 'BT7': {
         const { banners, title } = content.data[lang];
         return (
@@ -168,7 +173,7 @@ class PageData extends React.Component {
               banners.map(banner => (
                 <Col xs={12 / banners.length} md={12 / banners.length} sm={12 / banners.length}>
                   <a href={banner.link} target="_blank">
-                    <img src={banner.img} className={styles['border-radius4']} width={banner.config.width} height={banner.config.height} alt={banner.display_name} />
+                    <img src={banner.img} className={styles['border-radius4']} width="100%" alt={banner.display_name} />
                   </a>
                 </Col>
               ))}
@@ -178,6 +183,58 @@ class PageData extends React.Component {
       case 'DT1':
         return (
           <DT content={content} />
+        );
+      case 'CBT5b':
+        return (
+          <div className={`${styles['display-t-i-f']}`}>
+            <div className={`${styles['fs-20']} ${styles.title}`}>{content.data[lang].title}</div>
+            <div className={styles.d1}>
+              <div>
+                <a href={content.data[lang].banners[0].link}>
+                  <div className={styles.shadow}>
+                    <img src={content.data[lang].banners[0].img} width={content.data[lang].banners[0].config.width} height={content.data[lang].banners[0].config.height} alt="" className={styles['img-responsive']} />
+                  </div>
+                </a>
+              </div>
+              <div>
+                <a href={content.data[lang].banners[1].link}>
+                  <div className={styles.shadow}>
+                    <img src={content.data[lang].banners[1].img} width={content.data[lang].banners[1].config.width} height={content.data[lang].banners[1].config.height} alt="" className={styles['img-responsive']} />
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div className={styles.d2}>
+              <div>
+                <a href={content.data[lang].banners[2].link}>
+                  <div className={styles.shadow}>
+                    <img src={content.data[lang].banners[2].img} width={content.data[lang].banners[2].config.width} height={content.data[lang].banners[2].config.height} alt="" className={styles['img-responsive']} />
+                  </div>
+                </a>
+              </div>
+              <div>
+                <a href={content.data[lang].banners[3].link}>
+                  <div className={styles.shadow}>
+                    <img src={content.data[lang].banners[3].img} width={content.data[lang].banners[3].config.width} height={content.data[lang].banners[3].config.height} alt="" className={styles['img-responsive']} />
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div className={`${styles.d3} ${styles.right0}`}>
+              <div>
+                <a href={content.data[lang].banners[4].link}>
+                  <div className={styles.shadow}>
+                    <img src={content.data[lang].banners[4].img} width={content.data[lang].banners[4].config.width} height={content.data[lang].banners[4].config.height} alt="" className={styles['img-responsive']} />
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div className={`${styles.breadcrums} ${styles['mt-10']} ${styles.pointer}`}>
+              <a href="https://storefront-stage.fptechscience.com/en/landing/fashion">
+                <span>Men's Clothing| Women's Clothing| Kids Clothing| Footwear| Jewellery| Eyewear & More…</span>
+              </a>
+            </div>
+          </div>
         );
       default: return null;
     }

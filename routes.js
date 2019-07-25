@@ -21,6 +21,6 @@ routes
   .add({ name: 'brand', pattern: '/:language/brand/:brandName', page: 'brand' })
   .add({ name: 'ftb', pattern: '/:language/ftb', page: 'ftb' })
   .add({ name: 'redirect', pattern: '/:country/:language', page: 'homeRedirect' })
-  .add({ name: 'default', pattern: '/:language?', page: 'index' });
+  .add({ name: 'home', pattern: '/:language?', page: 'index' });
 
 module.exports = routes;

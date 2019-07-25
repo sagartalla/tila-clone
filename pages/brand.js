@@ -24,8 +24,7 @@ const cookies = new Cookies();
 
 const { SEO_CONTENT } = languageDefinations();
 
-
-class SearchPage extends Base {
+class Brand extends Base {
   static async getInitialProps({
     store, isServer, query, req,
   }) {
@@ -57,29 +56,28 @@ class SearchPage extends Base {
     return { isServer };
   }
 
-  pageName = 'SEARCH';
+  pageName = 'brand';
 
   render() {
     return (
       <div>
         <SearchContext.Provider value="search">
-          <Head>
-            <meta property="og:title" content={`${this.props.url.query} ${SEO_CONTENT.LANDING_H2_CONTENT} ${this.props.url.query} ${SEO_CONTENT.BRAND_H2_TITLE}`} />
-            <meta property="og:site_name" content="Tila" />
-            <meta property="fb:app_id" content=" " />
-            <meta property="og:url" content={window.location.toString()} />
-            <meta property="og:description" content={`${SEO_CONTENT.BRAND_META_CONTENT} ${this.props.url.query} ${SEO_CONTENT.BRAND_META_CONTENT2}`} />
-            <meta property="og:locale:locale" content="en_SA" />
-            <meta property="og:locale:alternate" content="ar_SA" />
-            <meta property="og:type" content="website" />
-            <meta property="og:image" content=" logo image url" />
-            <meta name="description" content={`${SEO_CONTENT.BRAND_META_CONTENT} ${this.props.url.query} ${SEO_CONTENT.BRAND_META_CONTENT2}`} />
-            <title>{this.props.url.query} {SEO_CONTENT.LANDING_H2_CONTENT} {this.props.url.query} {SEO_CONTENT.BRAND_H2_TITLE}</title>
-          </Head>
-          <h1 className={`${styles.display_none}`}>{this.props.url.query}</h1>
-          <h2 className={`${styles.display_none}`}>{SEO_CONTENT.BRAND_H2} {this.props.url.query}</h2>
           <Layout>
-            <Search query={this.props.url.query} isBrandPage />
+            <Head>
+              <meta property="og:title" content={`${this.props.url.query.brandName} ${SEO_CONTENT.LANDING_H2_CONTENT} ${this.props.url.query.brandName} ${SEO_CONTENT.BRAND_H2_TITLE}`} />
+              <meta property="og:site_name" content="Tila" />
+              <meta property="fb:app_id" content=" " />
+              <meta property="og:description" content={`${SEO_CONTENT.BRAND_META_CONTENT} ${this.props.url.query.brandName} ${SEO_CONTENT.BRAND_META_CONTENT2}`} />
+              <meta property="og:locale:locale" content="en_SA" />
+              <meta property="og:locale:alternate" content="ar_SA" />
+              <meta property="og:type" content="website" />
+              <meta property="og:image" content=" logo image url" />
+              <meta name="description" content={`${SEO_CONTENT.BRAND_META_CONTENT} ${this.props.url.query.brandName} ${SEO_CONTENT.BRAND_META_CONTENT2}`} />
+              <title>{this.props.url.query.brandName} {SEO_CONTENT.LANDING_H2_CONTENT} {this.props.url.query.brandName} {SEO_CONTENT.BRAND_H2_TITLE}</title>
+            </Head>
+            <h1 className={`${styles.display_none}`}>{this.props.url.query.brandName}</h1>
+            <h2 className={`${styles.display_none}`}>{SEO_CONTENT.BRAND_H2} {this.props.url.query.brandName}</h2>
+            <Search query={this.props.url.query} loaderProps={this.props.loaderProps} isBrandPage />
           </Layout>
         </SearchContext.Provider>
       </div>
@@ -101,4 +99,4 @@ const mapDispatchToProps = dispatch =>
     dispatch,
   );
 
-export default withRedux(makeStore, mapStateToProps, mapDispatchToProps)(SearchPage);
+export default withRedux(makeStore, mapStateToProps, mapDispatchToProps)(Brand);
