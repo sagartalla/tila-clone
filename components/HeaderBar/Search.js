@@ -200,7 +200,7 @@ class Search extends Component {
               )}
               </SearchContext.Consumer>
             </Dropdown.Toggle>
-            <Dropdown.Menu className={`${styles.width100} ${styles['p-0']} ${styles['m-0']}`}>
+            <Dropdown.Menu className={`${styles.width100} ${styles['p-0']} ${styles['m-0']} ${(suggestions && suggestions.length > 0) ? styles['main-search-drp'] : null}`}>
               {suggestions.length > 0 &&
                 suggestions.map((s, index) => (
                   <MenuItem className={styles['search-suggestion']} onClick={this.setSearchText} data={s.data_edgengram} onFocus={this.mouseOver} index={index} eventKey={index + 1}>
