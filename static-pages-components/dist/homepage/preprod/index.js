@@ -580,7 +580,7 @@ const HomePage = () => React.createElement(
           { href: `/${lang}/landing/fashion` },
           React.createElement(
             'span',
-            null,
+            { className: `${styles['thick-gry-clr']}` },
             lang === 'en' ? 'Men\'s Clothing' : 'ملابس رجالية',
             ' \xA0 | \xA0 ',
             lang === 'en' ? 'Women\'s Clothing' : 'ملابس نسائية\نسائي',
@@ -683,7 +683,7 @@ const HomePage = () => React.createElement(
           { href: `/${lang}/landing/lifestyle` },
           React.createElement(
             'span',
-            null,
+            { className: `${styles['thick-gry-clr']}` },
             ' ',
             lang === 'en' ? 'Bedsheets' : 'غطاء\شرشف السرير',
             ' \xA0 | \xA0 ',
@@ -813,7 +813,7 @@ const HomePage = () => React.createElement(
           { href: `/${lang}/landing/electronics` },
           React.createElement(
             'span',
-            null,
+            { className: `${styles['thick-gry-clr']}` },
             lang === 'en' ? 'Mobiles' : 'الجوالات',
             ' \xA0 | \xA0 ',
             lang === 'en' ? 'Laptops' : 'اللاب توبات',

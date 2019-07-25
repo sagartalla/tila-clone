@@ -526,7 +526,7 @@ const HomePage = () => (
         </div>
         <div className={`${styles.breadcrums} ${styles['mt-10']} ${styles.pointer} bredcrums-part`}>
           <a href={`/${lang}/landing/fashion`}>
-            <span>{lang === 'en' ? 'Men\'s Clothing' : 'ملابس رجالية'} &nbsp; | &nbsp; {lang === 'en' ? 'Women\'s Clothing' : 'ملابس نسائية\نسائي'} &nbsp; | &nbsp; {lang === 'en' ? 'Kids Fashion' : 'ملابس أطفال\أطفال'} &nbsp; | &nbsp; {lang === 'en' ? 'Footwear' : 'أحذية'} &nbsp; | &nbsp; {lang === 'en' ? 'Jewellery' : 'مجوهرات'} &nbsp; | &nbsp; {lang === 'en' ? 'Eyewear' : 'نظارات'}</span>
+            <span className={`${styles['thick-gry-clr']}`}>{lang === 'en' ? 'Men\'s Clothing' : 'ملابس رجالية'} &nbsp; | &nbsp; {lang === 'en' ? 'Women\'s Clothing' : 'ملابس نسائية\نسائي'} &nbsp; | &nbsp; {lang === 'en' ? 'Kids Fashion' : 'ملابس أطفال\أطفال'} &nbsp; | &nbsp; {lang === 'en' ? 'Footwear' : 'أحذية'} &nbsp; | &nbsp; {lang === 'en' ? 'Jewellery' : 'مجوهرات'} &nbsp; | &nbsp; {lang === 'en' ? 'Eyewear' : 'نظارات'}</span>
           </a>
         </div>
       </div>
@@ -604,7 +604,7 @@ const HomePage = () => (
         </div>
         <div className={`${styles.breadcrums} ${styles['mt-10']} ${styles.pointer} bredcrums-part`}>
           <a href={`/${lang}/landing/lifestyle`}>
-            <span> {lang === 'en' ? 'Bedsheets' : 'غطاء\شرشف السرير'} &nbsp; | &nbsp; {lang === 'en' ? 'Furniture' : 'الأثاث'} &nbsp;| &nbsp; {lang === 'en' ? 'Cushions' : 'وسائد'} &nbsp; | &nbsp; {lang === 'en' ? 'Wall Decor' : '  جدار ديكورت'} &nbsp; | &nbsp; {lang === 'en' ? 'Lights' : 'الأنوار'} &nbsp; | &nbsp; {lang === 'en' ? 'Living Room Furniture' : 'غرفة المعيشة الأثاث'} &nbsp; | &nbsp; {lang === 'en' ? 'Photo Frames' : 'إطارات صور'} </span>
+            <span className={`${styles['thick-gry-clr']}`}> {lang === 'en' ? 'Bedsheets' : 'غطاء\شرشف السرير'} &nbsp; | &nbsp; {lang === 'en' ? 'Furniture' : 'الأثاث'} &nbsp;| &nbsp; {lang === 'en' ? 'Cushions' : 'وسائد'} &nbsp; | &nbsp; {lang === 'en' ? 'Wall Decor' : '  جدار ديكورت'} &nbsp; | &nbsp; {lang === 'en' ? 'Lights' : 'الأنوار'} &nbsp; | &nbsp; {lang === 'en' ? 'Living Room Furniture' : 'غرفة المعيشة الأثاث'} &nbsp; | &nbsp; {lang === 'en' ? 'Photo Frames' : 'إطارات صور'} </span>
           </a>
         </div>
       </div>
@@ -689,7 +689,7 @@ const HomePage = () => (
         </div>
         <div className={`${styles.breadcrums} ${styles['mt-10']} ${styles.pointer} bredcrums-part`}>
           <a href={`/${lang}/landing/electronics`}>
-            <span>{lang === 'en' ? 'Mobiles' : 'الجوالات'} &nbsp; | &nbsp; {lang === 'en' ? 'Laptops' : 'اللاب توبات'}  &nbsp; | &nbsp; {lang === 'en' ? 'Speakers' : 'مكبر الصوت'}  &nbsp; |  &nbsp; {lang === 'en' ? 'Cameras' : 'الكاميرات'} &nbsp; | &nbsp; {lang === 'en' ? 'Microwave Ovens' : 'ميكرويفات '} &nbsp; | &nbsp; {lang === 'en' ? 'Smartwatches' : 'ساعات يد ذكية'} </span>
+            <span className={`${styles['thick-gry-clr']}`}>{lang === 'en' ? 'Mobiles' : 'الجوالات'} &nbsp; | &nbsp; {lang === 'en' ? 'Laptops' : 'اللاب توبات'}  &nbsp; | &nbsp; {lang === 'en' ? 'Speakers' : 'مكبر الصوت'}  &nbsp; |  &nbsp; {lang === 'en' ? 'Cameras' : 'الكاميرات'} &nbsp; | &nbsp; {lang === 'en' ? 'Microwave Ovens' : 'ميكرويفات '} &nbsp; | &nbsp; {lang === 'en' ? 'Smartwatches' : 'ساعات يد ذكية'} </span>
           </a>
         </div>
       </div>
