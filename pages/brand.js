@@ -35,7 +35,6 @@ class SearchPage extends Base {
     } = query;
     if (brandName !== '<anonymous>') {
       brandValue = brandName;
-      console.log("brand Name :", brandValue, query);
     }
     const shippingData = req ? req.universalCookies.get('shippingInfo') : cookies.get('shippingInfo');
     const { city: shippingCity, country: shippingCountry } = shippingData || {};
@@ -52,7 +51,6 @@ class SearchPage extends Base {
         shippingCountry: (country || 'ARE').toUpperCase(),
       };
     }
-
 
     await Promise.all([
       store.dispatch(actionCreators.getSearchResults(searchOptions)),

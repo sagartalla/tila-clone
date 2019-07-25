@@ -34,7 +34,6 @@ class Category extends Base {
     } = query;
     if (category !== '<anonymous>') {
       categoryValue = category;
-      console.log("brand Name :", categoryValue, query);
     }
     const shippingData = req ? req.universalCookies.get('shippingInfo') : cookies.get('shippingInfo');
     const { city: shippingCity, country: shippingCountry } = shippingData || {};
@@ -51,8 +50,6 @@ class Category extends Base {
         shippingCountry: (country || 'ARE').toUpperCase(),
       };
     }
-
-    console.log("brand Name :", categoryValue);
 
     await Promise.all([
       store.dispatch(actionCreators.getSearchResults(searchOptions)),
