@@ -21,7 +21,7 @@ const { SEO_CONTENT } = languageDefinations();
 
 class SearchPage extends Base {
   static async getInitialProps({ store, isServer, query, req }) {
-    const { country, language, q, facets, category, subCategory, isListed, disableSpellCheck, sid } = query
+    const { country, language, q, facets, category, subCategory, isListed, disableSpellCheck, sid } = query;
     const categoryTree = query.categoryTree === 'true'; //TODO need better way to identify category tree
     const categoryFacet = query.categoryFacet === 'true';
     //TODO SF-37 better handling of country
@@ -58,14 +58,15 @@ class SearchPage extends Base {
       searchOptions.shippingDetails = {
         shippingCity: shippingCity.toUpperCase(),
         shippingCountry: (shippingCountry || global.APP_COUNTRY).toUpperCase(),
-      }
+      };
     } else {
-      searchOptions.shippingDetails = undefined
+      searchOptions.shippingDetails = undefined;
     }
+    console.log('udbuaw', query);
     await Promise.all([
       store.dispatch(actionCreators.getSearchResults(searchOptions)),
       store.dispatch(megamenuActionsCreators.getMegamenu())
-    ])
+    ]);
     return { isServer };
   }
 

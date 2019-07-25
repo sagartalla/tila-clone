@@ -54,7 +54,7 @@ const Brand = ({ pageData }) => {
       <span className={`${styles['fs-30']} ${styles['fontW600']} ${styles['text-capitalize']}`}>{id_attribute}</span>
       <span className={`${styles['fs-30']} ${styles['fontW300']}`}>&nbsp;Store</span>
     </div>
-    {page_content.map((item) => {
+    {page_content && page_content.map((item) => {
         if (!item.visible) {
           return (
             null

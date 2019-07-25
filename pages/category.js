@@ -25,19 +25,19 @@ const cookies = new Cookies();
 const { SEO_CONTENT } = languageDefinations();
 
 
-class SearchPage extends Base {
+class Category extends Base {
   static async getInitialProps({
     store, isServer, query, req,
   }) {
     const {
-      country, language, brandName, facets,
+      country, language, category, facets,
     } = query;
     const shippingData = req ? req.universalCookies.get('shippingInfo') : cookies.get('shippingInfo');
     const { city: shippingCity, country: shippingCountry } = shippingData || {};
     const searchOptions = {
       country: country || undefined,
       pageSize: 25,
-      query: brandName,
+      query: category,
       language: language || 'en',
       pageNum: 1,
     };
@@ -48,38 +48,39 @@ class SearchPage extends Base {
       };
     }
 
-    // console.log("brand Name :", brandName);
+    console.log("brand Name :", category);
 
     await Promise.all([
       store.dispatch(actionCreators.getSearchResults(searchOptions)),
-      store.dispatch(LandingactionCreators.getPage({ page: 'brandLandingPage', id: brandName })),
+      store.dispatch(LandingactionCreators.getPage({ page: 'categotyIndividualPage', id: category })),
     ]);
     return { isServer };
   }
 
-  pageName = 'SEARCH';
+  pageName = 'categotyIndividualPage';
 
   render() {
+    const { loaderProps, url } = this.props;
     return (
       <div>
         <SearchContext.Provider value="search">
           <Head>
-            <meta property="og:title" content={`${this.props.url.query.brandName} ${SEO_CONTENT.LANDING_H2_CONTENT} ${this.props.url.query.brandName} ${SEO_CONTENT.BRAND_H2_TITLE}`} />
+            <meta property="og:title" content={`${url.query.category} ${SEO_CONTENT.LANDING_H2_CONTENT} ${url.query.category} ${SEO_CONTENT.BRAND_H2_TITLE}`} />
             <meta property="og:site_name" content="Tila" />
             <meta property="fb:app_id" content=" " />
             {/* <meta property="og:url" content={window.location.toString()} /> */}
-            <meta property="og:description" content={`${SEO_CONTENT.BRAND_META_CONTENT} ${this.props.url.query.brandName} ${SEO_CONTENT.BRAND_META_CONTENT2}`} />
+            <meta property="og:description" content={`${SEO_CONTENT.BRAND_META_CONTENT} ${url.query.category} ${SEO_CONTENT.BRAND_META_CONTENT2}`} />
             <meta property="og:locale:locale" content="en_SA" />
             <meta property="og:locale:alternate" content="ar_SA" />
             <meta property="og:type" content="website" />
             <meta property="og:image" content=" logo image url" />
-            <meta name="description" content={`${SEO_CONTENT.BRAND_META_CONTENT} ${this.props.url.query.brandName} ${SEO_CONTENT.BRAND_META_CONTENT2}`} />
-            <title>{this.props.url.query.brandName} {SEO_CONTENT.LANDING_H2_CONTENT} {this.props.url.query.brandName} {SEO_CONTENT.BRAND_H2_TITLE}</title>
+            <meta name="description" content={`${SEO_CONTENT.BRAND_META_CONTENT} ${url.query.category} ${SEO_CONTENT.BRAND_META_CONTENT2}`} />
+            <title>{url.query.category} {SEO_CONTENT.LANDING_H2_CONTENT} {url.query.category} {SEO_CONTENT.BRAND_H2_TITLE}</title>
           </Head>
-          <h1 className={`${styles.display_none}`}>{this.props.url.query.brandName}</h1>
-          <h2 className={`${styles.display_none}`}>{SEO_CONTENT.BRAND_H2} {this.props.url.query.brandName}</h2>
+          <h1 className={`${styles.display_none}`}>{url.query.category}</h1>
+          <h2 className={`${styles.display_none}`}>{SEO_CONTENT.BRAND_H2} {url.query.category}</h2>
           <Layout>
-            <Search query={this.props.url.query.brandName} loaderProps={this.props.loaderProps} isBrandPage />
+            <Search query={url.query.category} loaderProps={loaderProps} isBrandPage />
           </Layout>
         </SearchContext.Provider>
       </div>
@@ -101,4 +102,4 @@ const mapDispatchToProps = dispatch =>
     dispatch,
   );
 
-export default withRedux(makeStore, null, mapDispatchToProps)(SearchPage);
+export default withRedux(makeStore, null, mapDispatchToProps)(Category);
