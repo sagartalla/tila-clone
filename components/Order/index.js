@@ -9,7 +9,8 @@ import OrderReturnExchange from './includes/OrderReturnExchange';
 
 import { selectors, actionCreators } from '../../store/order';
 import { languageDefinations } from '../../utils/lang';
-
+import LoadingBar from '../common/Loader/skeletonLoader';
+import LoaderBarContext from '../helpers/context/loaderBarContext';
 const { ORDER_PAGE } = languageDefinations();
 
 import lang from '../../utils/language';
@@ -26,26 +27,35 @@ class Order extends Component {
     const { query, getOrderDetails } = this.props;
     getOrderDetails({ orderId: query.orderId });
   }
-  
+
   render() {
     const { query, orderData, getInvoice } = this.props;
+    console.log('order', orderData);
     return (
-      <div className={styles['bg-color']}>
-        <HeaderBar />
+      <LoaderBarContext.Consumer>
         {
-          orderData.orderItems.length
-          ?
-          (
-            query.returnExchangeType
-            ?
-            <OrderReturnExchange query={query} orderData={orderData} />
-            :
-            <OrderDetails query={query} orderData={orderData} />)
-          :
-          `${ORDER_PAGE.LOADING}`
+          context => (
+            <div className={styles['bg-color']}>
+              <HeaderBar />
+                <LoadingBar loadComponent={context.loadComponent}
+                  pathname={context.pathname}>
+                  {
+                    orderData.orderItems.length
+                    ?
+                    (
+                      query.returnExchangeType
+                      ?
+                      <OrderReturnExchange query={query} orderData={orderData} />
+                      :
+                      <OrderDetails query={query} orderData={orderData} />)
+                    :
+                    `${ORDER_PAGE.LOADING}`
+                  }
+                </LoadingBar>
+            </div>
+          )
         }
-
-      </div>
+      </LoaderBarContext.Consumer>
     );
   }
 }

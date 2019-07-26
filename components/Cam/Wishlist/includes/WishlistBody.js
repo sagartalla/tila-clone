@@ -52,8 +52,8 @@ const WishlistBody = (props) => {
     }
     return str;
   };
-  const routeChange = (variantId, productId, catalogId, itemType) => {
-    Router.push(`/${language}/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemType}`);
+  const routeChange = (variant_id, product_id, catalog_id, listing_id, name) => {
+    Router.push(`/${language}/pdp/${name.split(' ').join('-').toLowerCase()}/c/${catalog_id}/p/${product_id}/l/${listing_id}/v/${variant_id ? `${variant_id}` : ''}`);
   };
   return (data.length === 0 ?
     <div className={styles['no-wishlist-icon']}>
@@ -86,7 +86,7 @@ const WishlistBody = (props) => {
                   <Col md={2} xs={2} className={styles['m-p-0']}>
                     <div
                       className={`${styles['flex-center']} ${styles['justify-center']} ${styles.pointer} ${styles['mb-wishlist-part-img']}`}
-                      onClick={() => routeChange(variant_id, product_id, catalog_id, itemType)}
+                      onClick={() => routeChange(variant_id, product_id, catalog_id, listing_id, name)}
                     >
                       <img className={styles.img} src={`${constants.mediaDomain}/${img}`} />
                     </div>
@@ -94,7 +94,7 @@ const WishlistBody = (props) => {
                   <Col md={10} xs={10}>
                     <Col md={8} xs={8} className={styles['pl-0']}>
                       <h5 className={`${styles['mt-0']} ${styles['mb-0']} ${styles['thick-blue']}`}>{brand_name}</h5>
-                      <h5 className={`${styles['lgt-gry-clr']} ${styles.pointer} ${styles['light-gry-clr']}`} onClick={() => routeChange(variant_id, product_id, catalog_id, itemType)}>{name}</h5>
+                      <h5 className={`${styles['lgt-gry-clr']} ${styles.pointer} ${styles['light-gry-clr']}`} onClick={() => routeChange(variant_id, product_id, catalog_id, itemType, name)}>{name}</h5>
                       <div className={`${styles['mt-30']} ${styles['m-t-0']} ${styles['m-fs-12']}`}>
                         {inventory_count > 0 ?
                           <button
@@ -130,8 +130,8 @@ const WishlistBody = (props) => {
                             <strike className={`${styles['label-gry-clr']} ${styles['fs-12']}`}>{mrp} {cur}</strike>
                           </span> : ''
                         }
-                        {wishlisted_price && wishlisted_price > 0 && price && cur && wishlisted_price.toString() !== price && getPriceAlert(price, wishlisted_price, cur)}
-                        {wishlisted_price && wishlisted_price > 0 && wishlisted_price.toString() !== price &&
+                        {price && cur && wishlisted_price && wishlisted_price > 0 && wishlisted_price.toString() !== price && getPriceAlert(price, wishlisted_price, cur)}
+                        {price && cur && wishlisted_price && wishlisted_price > 0 && wishlisted_price.toString() !== price &&
                         <span className={`${styles['thick-gry-clr']}`}>
                           {WISH_LIST_PAGE.ITEM_WAS} {wishlisted_price} {cur} {WISH_LIST_PAGE.WHEN_ADDED_TO_WISHLIST}
                         </span>}

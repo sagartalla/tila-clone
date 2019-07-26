@@ -18,15 +18,15 @@ const cookies = new Cookies();
 const language = cookies.get('language') || 'en';
 const country = cookies.get('country') || 'SAU';
 
-const routeChange = (productId, catalogId, itemType) => {
-  Router.pushRoute(`/${language}/product?productId=${productId}&catalogId=${catalogId}&itemType=${itemType}`);
+const routeChange = (product_id, catalog_id, name, listing_id, variant_id) => {
+  Router.pushRoute(`/${language}/pdp/${name.split(' ').join('-').toLowerCase()}/c/${catalog_id}/p/${product_id}/l/${listing_id}/v/${variant_id ? `${variant_id}` : ''}`);
 }
 
 const Card = ({ listing, isLoggedIn, addToCart }) => (
   <div key={listing.listingId} className={`${styles.flex}`} style={{ width: '20%' }}>
     <div
       className={`${styles.flex} ${styles['flex-colum']} ${styles.pointer} ${styles['m-5']} ${styles.relative} ${styles['l-item']}`}
-      onClick={() => routeChange(listing.productId, listing.catalogId, listing.itemType)}
+      onClick={() => routeChange(listing.productId, listing.catalogId, listing.name, listing.listingId, listing.variant_id)}
     >
       <div className={styles['l-img-container']}>
         <img src={`${constants.mediaDomain}/${listing.image}`} className={styles['l-img']} alt={listing.image} />

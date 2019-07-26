@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { Panel } from 'react-bootstrap';
-import { addUrlProps, UrlQueryParamTypes, pushInUrlQuery } from 'react-url-query';
+// import { addUrlProps, UrlQueryParamTypes } from 'react-url-query';
 import { Router } from '../../../../routes';
 import { languageDefinations } from '../../../../utils/lang';
-
 import ToggleBtn from '../../../common/ToggleBtn';
 
 import lang from '../../../../utils/language';
@@ -17,9 +16,9 @@ const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styl
 
 const { PDP_PAGE } = languageDefinations();
 
-const urlPropsQueryConfig = {
-  excludeOOS: { type: UrlQueryParamTypes.string, queryParam: 'isListed', }
-};
+// const urlPropsQueryConfig = {
+//   excludeOOS: { type: UrlQueryParamTypes.string, queryParam: 'isListed', }
+// };
 
 class ExcludeOOS extends Component {
   constructor(props) {
@@ -37,15 +36,18 @@ class ExcludeOOS extends Component {
   }
 
   render() {
+    let urlParams = new URLSearchParams(window.location.search);
+    let excludeOOS = urlParams.get('isListed')
     return (
       <Panel>
         <div className={`${styles['category-list-title']} ${styles['black-color']} ${styles['fontW600']} ${styles['flx-spacebw-alignc']}`}>
           <span>{PDP_PAGE.HIDE_OUT_OF_STOCK}</span>
-          <ToggleBtn handleClick={this.handleClick} checked={this.props.excludeOOS === 'true'}/>
+          <ToggleBtn handleClick={this.handleClick} checked={excludeOOS === 'true'}/>
         </div>
       </Panel>
     )
   }
 }
 
-export default addUrlProps({ urlPropsQueryConfig })(ExcludeOOS);
+// export default addUrlProps({ urlPropsQueryConfig })(ExcludeOOS);
+export default ExcludeOOS;

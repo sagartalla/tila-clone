@@ -44,9 +44,10 @@ const CartBody = ({
   const cnt = flag > 0 ? items.length : 0;
   const { CART_PAGE, WISH_LIST_PAGE} = languageDefinations();
   if(data.ui.loading) {
-    return <div>Please Wait Fetching Cart Items</div>
+    return <div className={`${styles['p-15']} ${styles['fontW600']} ${styles['thick-gry-clr']} ${styles['mb-0']}`}>Please Wait Fetching Cart Items</div>
   }
   return (
+    data.ui.loading ? <Blocker message={"Please wait, fetching cart items"}/> : 
     <>
     <div className={styles['cart-container']}>
       {
@@ -76,7 +77,7 @@ const CartBody = ({
         </Col>
       </Row>
       <Row className={styles['mr-0']}>
-        <Col md={`${items.length > 0 ? 9 : 12}`} sm={12} xs={12} className={styles['pr-5']}>
+        <Col md={items.length > 0 ? 9 : 12} sm={12} xs={12} className={styles['pr-5']}>
           <div>
             {items.map(item => (
               <CartItem

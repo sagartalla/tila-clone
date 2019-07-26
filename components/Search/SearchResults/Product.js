@@ -196,7 +196,7 @@ class Product extends Component {
 
   routeChange(productId, variantId, catalogId, itemtype, index, pageNum) {
     this.itemNumberClick(index, pageNum);
-    // Router.pushRoute(`/${language}/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemtype}`)
+    // Router.pushRoute(`/${language}/pdp/${displayName.split(' ').join('-').toLowerCase()}/c/${catalogId}/p/${productId}/l/${listing_id}/v/${variants.length > 0 && variants[selectedIndex].variantId ? `${variants[selectedIndex].variantId}` : ''}`)
   }
 
   preventDefaultClick(e) {
@@ -261,6 +261,7 @@ class Product extends Component {
       itemNum,
       media,
       isQuickView,
+      listing_id
     } = this.props;
     const { src } = this.state;
     const { showNotify, selectedIndex, showLoader } = this.state;
@@ -307,7 +308,7 @@ class Product extends Component {
           className={`${styles['product-items-main']} ${styles.relative} ${styles['p-0']} ${selectedProduct ? styles['active-product'] : ''}`}
           onClick={() => this.routeChange(productId, variantId, catalogId, itemtype, index, pageNum)}
         >
-          <Link route={`/${language}/product?productId=${productId}${variants.length > 0 && variants[selectedIndex].variantId ? `&variantId=${variants[selectedIndex].variantId}` : ''}&catalogId=${catalogId}&itemType=${itemtype}`}>
+          <Link route={`/${language}/pdp/${displayName.split(' ').join('-').toLowerCase()}/c/${catalogId}/p/${productId}/l/${listing_id}/v/${variants.length > 0 && variants[selectedIndex].variantId ? `${variants[selectedIndex].variantId}` : ''}`}>
             <a target="_blank">
               <div className={`${styles['product-items']}`} onMouseEnter={this.setImg} onMouseLeave={this.leaveImg}>
                 {showLoader ?
@@ -337,7 +338,7 @@ class Product extends Component {
                         pauseOnHover={false}
                       >
                         {media && media.slice(0, 5).map((image, index) => (
-                          <div>
+                          <div key={index}>
                             <img src={`${constants.mediaDomain}/${image}`} alt="imageURL" key={index} />
                           </div>
                         ))}
@@ -485,7 +486,6 @@ class Product extends Component {
 Product.propTypes = {
   media: PropTypes.array.isRequired,
   displayName: PropTypes.string.isRequired,
-  variants: PropTypes.object.isRequired,
 };
 
 Product.defaultProps = {

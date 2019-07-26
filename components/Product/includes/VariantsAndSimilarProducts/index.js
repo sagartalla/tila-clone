@@ -72,8 +72,8 @@ class VariantsAndSimilarProducts extends Component {
       },
     }, () => {
       const { selectedProductData } = this.state;
-      const { isSearchPreview, variantId, variantsAndSimilarProducts } = this.props;
-      const { productId } = variantsAndSimilarProducts;
+      const { isSearchPreview, variantId, variantsAndSimilarProducts, listing_id } = this.props
+      const productId = variantsAndSimilarProducts.productId;
       const pid = this.props.getSelectedPropductId({
         selectedProductData: this.state.selectedProductData,
         map: variantsAndSimilarProducts.similarProducts.map,
@@ -101,15 +101,15 @@ class VariantsAndSimilarProducts extends Component {
         ],
         size: 'LARGE',
       };
-      let newQuery = window.location.search;
+      let newQuery = window.location.href.split("pdp/")[1];
       newQuery = newQuery.replace(productId, pid)
       this.props.setSelectedProductData({selectedProductData});
-      if (isSearchPreview) {
-        this.props.getProduct(options);
-        this.props.setProductId(pid);
-        window.open(`/${language}/product?productId=${pid}${variantId ? `&variantId=${variantId}`: ''}&catalogId=${VariantsAndSimilarProducts.catalogId}&itemType=${VariantsAndSimilarProducts.itemtype}`)
+      if(isSearchPreview) {
+          this.props.getProduct(options);
+          this.props.setProductId(pid);
+          window.open(`/${language}/pdp/${name.split(' ').join('-').toLowerCase()}/c/${variantsAndSimilarProducts.catalogId}/p/${pid}/l/${listing_id}/v/${variantId ? `${variantId}` : ''}`)
       } else {
-        Router.pushRoute(`/${language}/product${newQuery}`);
+        Router.pushRoute(`/${language}/pdp/${newQuery}`);
       }
     });
   }
@@ -118,20 +118,27 @@ class VariantsAndSimilarProducts extends Component {
     const { variantsAndSimilarProducts, isSearchPreview } = this.props;
     const { variants, itemType, similarProducts } = variantsAndSimilarProducts;
     const { display: variantsDisplay } = variants;
-    const { display: similarProductsDisplay } = similarProducts;
+    const { display: similarProductsDisplay, order: similarProductsAttrOrder } = similarProducts;
     return (
       <div className={`${styles['flex-center']} ${styles['border-b']} ${styles['flex-wrp']}`}>
         {
-          _.map(variantsDisplay, (variantAttVal, variantAttKey) => (<Variant
-            onSelectVariant={this.onSelectVariant}
-            key={variantAttVal.displayName}
-            {...variantAttVal}
-            id={variantAttKey}
-          />))
+          _.map(similarProductsAttrOrder, (variantAttKey) => {
+              const variantAttVal = similarProductsDisplay[variantAttKey];
+              return variantAttVal.values.length ?
+                (<SimilarProducts
+                  onSelectProduct={this.onSelectProduct}
+                  key={variantAttVal.displayName}
+                  {...variantAttVal}
+                  id={variantAttKey}
+                />)
+                :
+                null
+            }
+          )
         }
         {
-          _.map(similarProductsDisplay, (variantAttVal, variantAttKey) => (<SimilarProducts
-            onSelectProduct={this.onSelectProduct}
+          _.map(variantsDisplay, (variantAttVal, variantAttKey) => (<Variant
+            onSelectVariant={this.onSelectVariant}
             key={variantAttVal.displayName}
             {...variantAttVal}
             id={variantAttKey}

@@ -120,7 +120,7 @@ class GeoWidget extends Component {
     this.setState({
       displayCity: null,
     });
-    this.props.removeCity().then(() => {    
+    this.props.removeCity().then(() => {
       Router.pushRoute(`${window.location.pathname}${window.location.search}`)
     });
   }
@@ -138,7 +138,6 @@ class GeoWidget extends Component {
               <span className={`${styles['flex-center']} ${styles['delivery-part']}`}>
                 <SVGCompoent clsName={`${styles['map-icon']}`} src="icons/common-icon/black-map-location" />
                 <span className={`${styles.fontW600} ${styles['pl-5']} ${styles['pr-5']}`}>{SEARCH_PAGE.DELIVER_TO}:</span>
-
               </span>
             :
             null
