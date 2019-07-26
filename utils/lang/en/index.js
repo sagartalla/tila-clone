@@ -942,4 +942,7 @@ export const EN_KEYWORDS = {
     BRAND_META_CONTENT: 'Get latest',
     BRAND_META_CONTENT2: 'online at the best deals in Riyadh, Jeddah and All SAUDI region (OR KSA) | enjoy 100 % Genuine products ✦ Free shipping across ✦ Cash On Delivery ✦ Superfast delivery',
   },
+  COMPARE_WIDGET: {
+    COMPARE: 'Compare',
+  },
 };
