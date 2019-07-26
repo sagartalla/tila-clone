@@ -102,7 +102,7 @@ class Search extends Component {
     input.setSelectionRange(query && query.length, query && query.length);
   }
   setSearchText(e) {
-    const searchPosition = e.target.getAttribute('index');
+    const searchPosition = e.currentTarget.getAttribute('index');
     this.setState({
       query: e.target.textContent,
       suggestions: [],
@@ -144,12 +144,12 @@ class Search extends Component {
     //   searchInput: false,
     // });
     window.scrollTo(0, 0);
-    Router.pushRoute(`/${language}/search?q=${encodeURIComponent(this.state.query.trim())}&qs=${this.state.query ? true : false}&POS=${searchPosition ? searchPosition : null}&${Object.entries(this.props.optionalParams).map(([key, val]) => `${key}=${val}`).join('&')}`);
+    Router.pushRoute(`/${language}/search?q=${encodeURIComponent(this.state.query.trim())}&qs=${searchPosition ? true : false}&POS=${searchPosition ? searchPosition : null}&${Object.entries(this.props.optionalParams).map(([key, val]) => `${key}=${val}`).join('&')}`);
   }
 
   imageSearch() {
     this.setState({ openImagesearch: true });
-  }
+  }ck
 
   handleHide() {
     this.setState({ openImagesearch: false });
