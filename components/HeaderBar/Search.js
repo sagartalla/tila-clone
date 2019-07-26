@@ -203,7 +203,7 @@ class Search extends Component {
             <Dropdown.Menu className={`${styles.width100} ${styles['p-0']} ${styles['m-0']} ${(suggestions && suggestions.length > 0) ? styles['main-search-drp'] : null}`}>
               {suggestions.length > 0 &&
                 suggestions.map((s, index) => (
-                  <MenuItem className={styles['search-suggestion']} onClick={this.setSearchText} data={s.data_edgengram} onFocus={this.mouseOver} index={index} eventKey={index + 1}>
+                  <MenuItem key={index} className={styles['search-suggestion']} onClick={this.setSearchText} data={s.data_edgengram} onFocus={this.mouseOver} index={index} eventKey={index + 1}>
                     <a className={`${styles['black-color']}`}>
                       <span>{s.data_edgengram}</span>
                     </a>
