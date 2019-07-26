@@ -30,14 +30,18 @@ class Category extends Base {
     store, isServer, query, req,
   }) {
     const {
-      country, language, category, facets,
+      country, language, category, facets, sid
     } = query;
     if (category !== '<anonymous>') {
       categoryValue = category;
     }
     const shippingData = req ? req.universalCookies.get('shippingInfo') : cookies.get('shippingInfo');
     const { city: shippingCity, country: shippingCountry } = shippingData || {};
+    const categoryFilter = {
+      id: sid ? sid.split(',').pop() : null,
+    };
     const searchOptions = {
+      categoryFilter,
       country: country || undefined,
       pageSize: 25,
       query: categoryValue,
@@ -50,7 +54,7 @@ class Category extends Base {
         shippingCountry: (country || 'ARE').toUpperCase(),
       };
     }
-
+    debugger;
     await Promise.all([
       store.dispatch(actionCreators.getSearchResults(searchOptions)),
       store.dispatch(LandingactionCreators.getPage({ page: 'categoryIndividualPage', id: categoryValue })),
