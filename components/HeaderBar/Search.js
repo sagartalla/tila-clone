@@ -102,7 +102,7 @@ class Search extends Component {
     input.setSelectionRange(query && query.length, query && query.length);
   }
   setSearchText(e) {
-    const searchPosition = e.target.getAttribute('index');
+    const searchPosition = e.currentTarget.getAttribute('index');
     this.setState({
       query: e.target.textContent,
       suggestions: [],
@@ -144,12 +144,12 @@ class Search extends Component {
     //   searchInput: false,
     // });
     window.scrollTo(0, 0);
-    Router.pushRoute(`/${language}/search?q=${encodeURIComponent(this.state.query.trim())}&qs=${this.state.query ? true : false}&POS=${searchPosition ? searchPosition : null}&${Object.entries(this.props.optionalParams).map(([key, val]) => `${key}=${val}`).join('&')}`);
+    Router.pushRoute(`/${language}/search?q=${encodeURIComponent(this.state.query.trim())}&qs=${searchPosition ? true : false}&POS=${searchPosition ? searchPosition : null}&${Object.entries(this.props.optionalParams).map(([key, val]) => `${key}=${val}`).join('&')}`);
   }
 
   imageSearch() {
     this.setState({ openImagesearch: true });
-  }
+  }ck
 
   handleHide() {
     this.setState({ openImagesearch: false });
@@ -200,10 +200,10 @@ class Search extends Component {
               )}
               </SearchContext.Consumer>
             </Dropdown.Toggle>
-            <Dropdown.Menu className={`${styles.width100} ${styles['p-0']} ${styles['m-0']}`}>
+            <Dropdown.Menu className={`${styles.width100} ${styles['p-0']} ${styles['m-0']} ${(suggestions && suggestions.length > 0) ? styles['main-search-drp'] : null}`}>
               {suggestions.length > 0 &&
                 suggestions.map((s, index) => (
-                  <MenuItem className={styles['search-suggestion']} onClick={this.setSearchText} data={s.data_edgengram} onFocus={this.mouseOver} index={index} eventKey={index + 1}>
+                  <MenuItem key={index} className={styles['search-suggestion']} onClick={this.setSearchText} data={s.data_edgengram} onFocus={this.mouseOver} index={index} eventKey={index + 1}>
                     <a className={`${styles['black-color']}`}>
                       <span>{s.data_edgengram}</span>
                     </a>

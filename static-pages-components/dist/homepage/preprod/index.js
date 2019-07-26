@@ -4,11 +4,11 @@ let sliderTBS, sliderTIE, sliderHAL, sliderDODAY, sliderBS, sliderRV;
 
 const tbs = [{
   img: `/static/img/landing-home/${lang === 'en' ? 'main-Armani' : 'main-Armani-ar'}.png`,
-  title: `${lang === 'en' ? 'Armani Sunglasses' : ' نظارات شمسية ارماني'}`,
+  title: `${lang === 'en' ? 'Armani' : 'راي بان'}`,
   key: 'Armani Sunglasses'
 }, {
   img: `/static/img/landing-home/${lang === 'en' ? 'main-Charger' : 'main-Charger-ar'}.png`,
-  title: `${lang === 'en' ? 'Baseus Charger' : 'شاحن باسيوس '}`,
+  title: `${lang === 'en' ? 'Baseus' : 'باسيوس'}`,
   key: 'Baseus Charger'
 }, {
   img: `/static/img/landing-home/${lang === 'en' ? 'main-Joyroom' : 'main-Joyroom-ar'}.png`,
@@ -41,7 +41,7 @@ const tie = [{
   key: 'Memory'
 }, {
   img: '/static/img/landing-home/cameras.png',
-  title: `${lang === 'en' ? 'Cameras' : 'كاميرات'}`,
+  title: `${lang === 'en' ? 'Cameras' : 'الكاميرات'}`,
   key: 'Cameras'
 }, {
   img: '/static/img/landing-home/television.png',
@@ -87,15 +87,15 @@ const tie = [{
 
 const hal = [{
   img: '/static/img/landing-home/womens-clothing.png',
-  title: `${lang === 'en' ? 'Women\'s Clothing' : 'ملابس نسائية'}`,
+  title: `${lang === 'en' ? 'Women\'s Clothing' : 'الملابس النسائية'}`,
   key: 'Womens Clothing'
 }, {
   img: '/static/img/landing-home/mens-clothing.png',
-  title: `${lang === 'en' ? 'Men\'s Clothing' : 'ملابس رجالية'}`,
+  title: `${lang === 'en' ? 'Men\'s Clothing' : 'الملابس الرجالية'}`,
   key: 'Mens Clothing'
 }, {
   img: '/static/img/landing-home/jewellery.png',
-  title: `${lang === 'en' ? 'Jewellery' : 'مجوهرات'}`,
+  title: `${lang === 'en' ? 'Jewellery' : 'المجوهرات'}`,
   key: 'Jewellery'
 }, {
   img: '/static/img/landing-home/watches.png',
@@ -407,7 +407,7 @@ const HomePage = () => React.createElement(
         React.createElement(
           'span',
           { className: `title ${styles['fs-20']}` },
-          lang === 'en' ? 'TOP IN ELECTRONICS' : 'أعلى في الالكترونيات'
+          lang === 'en' ? 'ELECTRONICS' : 'أفضل الإلكترونيات'
         ),
         React.createElement(
           'div',
@@ -449,9 +449,9 @@ const HomePage = () => React.createElement(
           'span',
           { className: `title ${styles['fs-20']}` },
           ' ',
-          lang === 'en' ? 'TOP IN FASHION' : 'أعلى في الموضة',
-          ' | ',
-          lang === 'en' ? 'LIFESTYLE' : 'لايف ستايل'
+          lang === 'en' ? 'FASHION' : 'أعلى في الموضة',
+          ' & ',
+          lang === 'en' ? 'LIFESTYLE' : 'اللايف ستايل'
         ),
         React.createElement(
           'div',
@@ -493,7 +493,7 @@ const HomePage = () => React.createElement(
       React.createElement(
         'div',
         { className: `${styles['fs-20']} title` },
-        lang === 'en' ? 'TOP IN FASHION' : 'أعلى في الموضة'
+        lang === 'en' ? 'Fashion Picks' : 'أفضل الأزياء'
       ),
       React.createElement(
         'div',
@@ -580,7 +580,7 @@ const HomePage = () => React.createElement(
           { href: `/${lang}/landing/fashion` },
           React.createElement(
             'span',
-            null,
+            { className: `${styles['thick-gry-clr']}` },
             lang === 'en' ? 'Men\'s Clothing' : 'ملابس رجالية',
             ' \xA0 | \xA0 ',
             lang === 'en' ? 'Women\'s Clothing' : 'ملابس نسائية\نسائي',
@@ -616,7 +616,7 @@ const HomePage = () => React.createElement(
         'div',
         { className: `${styles['fs-20']} title` },
         ' ',
-        lang === 'en' ? 'BEST OF LIFESTYLE' : 'أفضل من لايف ستايل'
+        lang === 'en' ? 'Lifestyle Picks' : 'أفضل مختارات اللايف ستايل'
       ),
       React.createElement(
         'div',
@@ -683,7 +683,7 @@ const HomePage = () => React.createElement(
           { href: `/${lang}/landing/lifestyle` },
           React.createElement(
             'span',
-            null,
+            { className: `${styles['thick-gry-clr']}` },
             ' ',
             lang === 'en' ? 'Bedsheets' : 'غطاء\شرشف السرير',
             ' \xA0 | \xA0 ',
@@ -722,7 +722,7 @@ const HomePage = () => React.createElement(
       React.createElement(
         'div',
         { className: `${styles['fs-20']} title` },
-        lang === 'en' ? 'TOP IN ELECTRONICS' : 'أعلى في الالكترونيات'
+        lang === 'en' ? 'TOP IN ELECTRONICS' : 'أفضل الإلكترونيات'
       ),
       React.createElement(
         'div',
@@ -813,14 +813,14 @@ const HomePage = () => React.createElement(
           { href: `/${lang}/landing/electronics` },
           React.createElement(
             'span',
-            null,
+            { className: `${styles['thick-gry-clr']}` },
             lang === 'en' ? 'Mobiles' : 'الجوالات',
             ' \xA0 | \xA0 ',
             lang === 'en' ? 'Laptops' : 'اللاب توبات',
             '  \xA0 | \xA0 ',
             lang === 'en' ? 'Speakers' : 'مكبر الصوت',
             '  \xA0 |  \xA0 ',
-            lang === 'en' ? 'Cameras' : 'كاميرات',
+            lang === 'en' ? 'Cameras' : 'الكاميرات',
             ' \xA0 | \xA0 ',
             lang === 'en' ? 'Microwave Ovens' : 'ميكرويفات ',
             ' \xA0 | \xA0 ',
