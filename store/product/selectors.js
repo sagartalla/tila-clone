@@ -240,8 +240,6 @@ const getVariantsAndSimilarProducts = (variantId, productId) => (store) => {
     };
   }, { display: {}, map: [] });
 
-
-
   const modifiedProducts = [];
   similar_products.forEach((product) => {
     if (product.listing.product_id === productId.trim()) {
@@ -261,17 +259,19 @@ const getVariantsAndSimilarProducts = (variantId, productId) => (store) => {
     };
     map[key] =  map[key] || {};
     _.forEach(product.product_details_vo.cached_product_details.attribute_map, (attVal, attKey) => {
+      const porder = attVal.primary_order || 1;
       if(attVal.attribute_group_name !== 'IDENTITY' || !attVal.searchable || !attVal.groupable) {
         return;
       }
+      attVal.primary_order = attVal.primary_order || 1;
+      acc.order[attVal.primary_order - 1] = attKey;
       if(!display[attKey]) {
         display[attKey] = {
           displayName: attVal.display_string,
           values: [],
         };
       }
-
-      display[attKey].values = _.uniq([...display[attKey].values, ...(attVal.attribute_values.map(i => `${i.value}${i.qualifier_unit ? ` ${i.qualifier_unit}` : ''}`))]);
+      display[attKey].values = porder === 1 ? _.uniq([...display[attKey].values, ...(attVal.attribute_values.map(i => `${i.value}${i.qualifier_unit ? ` ${i.qualifier_unit}` : ''}`))]) : [];
       if(!map[key][attKey]) {
         map[key][attKey] = [];
       }
@@ -285,7 +285,40 @@ const getVariantsAndSimilarProducts = (variantId, productId) => (store) => {
       display,
       map,
     };
-  }, { display: {}, map: [] }) : { display: {}, map: [] };
+  }, { display: {}, map: [], order: [] }) : { display: {}, map: [], order: [] };
+
+  // primaryAttrProducts = similarProducts.find((p) => { return p. });
+  const primaryValues =  attribute_map[similarProducts.order[0]].attribute_values.map((av) => av.value)
+  const shortList = _.reduce(similarProducts.map, (acc, attrs, pid) => {
+    if(primaryValues.indexOf(attrs[similarProducts.order[0]][0]) !== -1) {
+      acc[pid] = attrs;
+    }
+    return acc;
+  }, {});
+  _.forEach(shortList, (productValue, productId) => {
+    const key = productId;
+    const product = _.find(similar_products, (p) => {
+      return p.product_details_vo.cached_product_details.product_id === productId
+    });
+    if(!product) {
+      return;
+    }
+    _.forEach(product.product_details_vo.cached_product_details.attribute_map, (attVal, attKey) => {
+      const { display, map } = similarProducts;
+      const porder = attVal.primary_order || 1;
+      if(attVal.attribute_group_name !== 'IDENTITY' || !attVal.searchable || !attVal.groupable || porder === 1) {
+        return;
+      }
+      display[attKey].values = _.uniq([...display[attKey].values, ...(attVal.attribute_values.map(i => `${i.value}${i.qualifier_unit ? ` ${i.qualifier_unit}` : ''}`))]);
+      if(!map[key][attKey]) {
+        map[key][attKey] = [];
+      }
+      map[key] = {
+        ...map[key],
+        [attKey]: [...map[key][attKey], ...(attVal.attribute_values.map(i => `${i.value}${i.qualifier_unit ? ` ${i.qualifier_unit}` : ''}`))],
+      };
+    });
+  });
   return {
     variants, similarProducts, itemType, catalogId, productId,
   };
@@ -362,7 +395,7 @@ const getReviewResponse = (store) => {
 };
 const getSelectedPropductId = store => ({ selectedProductData, map }) => {
   const exisitingProductData = _.reduce(store.productReducer.data[0].product_details.product_details_vo.cached_product_details.attribute_map, (acc, val, key) => {
-    if (val.attribute_group_name !== 'IDENTITY' || !val.searchable) {
+    if (val.attribute_group_name !== 'IDENTITY' || !val.searchable || !val.groupable) {
       return acc;
     }
     return {

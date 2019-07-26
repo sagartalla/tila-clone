@@ -109,10 +109,10 @@ const AddressBody = (props) => {
               <span className={`${styles['flex-center']}`}>
                 <SVGComponent clsName={`${styles['pls-icon']}`} src="icons/common-icon/plus-icon" />
               </span>
-              <h4 className={`${styles['mb-10']} ${styles['mt-20']} ${styles['pb-20']}  ${styles['black-color']} ${styles['fs-14']} ${styles.fontW600} ${styles['flex-center']} ${styles.flex}`}>
+              <h4 className={`${styles['mb-10']} ${styles['mt-20']} ${styles['pb-5']}  ${styles['black-color']} ${styles['fs-14']} ${styles.fontW600} ${styles['flex-center']} ${styles.flex}`}>
                 <span className={styles['pl-10']}>{DELIVERY_ADDR_PAGE.ADD_NEW_ADDR}</span>
               </h4>
-              <p className={`${styles['fs-12']} ${styles['thick-gry-clr']}`}>{DELIVERY_ADDR_PAGE.ADD_NEW_ADDR_TAG}</p>
+              <p className={`${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['card-new-desb']}`}>{DELIVERY_ADDR_PAGE.ADD_NEW_ADDR_TAG}</p>
               {/* <p>
                 <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']} ${styles['left-radius']} ${styles['small-btn']}`} onClick={props.addAddressForm}>
                   {DELIVERY_ADDR_PAGE.ADD_NEW_BTN}
