@@ -9,11 +9,11 @@ let sliderTBS,
 
 const tbs = [{
   img: `/static/img/landing-home/${lang === 'en' ? 'main-Armani' : 'main-Armani-ar'}.png`,
-  title: `${lang === 'en' ? 'Armani Sunglasses' : ' نظارات شمسية ارماني'}`,
+  title: `${lang === 'en' ? 'Armani' : 'راي بان'}`,
   key: 'Armani Sunglasses',
 }, {
   img: `/static/img/landing-home/${lang === 'en' ? 'main-Charger' : 'main-Charger-ar'}.png`,
-  title: `${lang === 'en' ? 'Baseus Charger' : 'شاحن باسيوس '}`,
+  title: `${lang === 'en' ? 'Baseus' : 'باسيوس'}`,
   key: 'Baseus Charger',
 }, {
   img: `/static/img/landing-home/${lang === 'en' ? 'main-Joyroom' : 'main-Joyroom-ar'}.png`,
@@ -42,65 +42,65 @@ const tie = [{
   key: 'Laptops',
 }, {
   img: '/static/img/landing-home/memory.png',
-  title: `${lang === 'en' ? 'Memory' : 'اللاب توبات'}`,
-  key: 'Laptops',
+  title: `${lang === 'en' ? 'Memory' : 'أجهزة التخزين'}`,
+  key: 'Memory',
 }, {
   img: '/static/img/landing-home/cameras.png',
-  title: `${lang === 'en' ? 'Cameras' : 'كاميرات'}`,
+  title: `${lang === 'en' ? 'Cameras' : 'الكاميرات'}`,
   key: 'Cameras',
 }, {
   img: '/static/img/landing-home/television.png',
-  title: `${lang === 'en' ? 'TVs' : 'التلفزيونات'}`,
+  title: `${lang === 'en' ? 'Televisions' : 'التلفزيونات'}`,
   key: 'Televisions',
 }, {
   img: '/static/img/landing-home/mobileaccess.png',
-  title: `${lang === 'en' ? 'Mobile Accessories' : 'أجهزة التخزين'}`,
+  title: `${lang === 'en' ? 'Mobile Accessories' : 'اكسسوارات الجوالات'}`,
   key: 'Mobile Accessories',
 }, {
   img: '/static/img/landing-home/tablets.png',
-  title: `${lang === 'en' ? 'Tablets' : 'أجهزة التخزين'}`,
+  title: `${lang === 'en' ? 'Tablet & iPads' : 'اجهزة تابلت وايباد'}`,
   key: 'Tablets',
 }, {
   img: '/static/img/landing-home/Kitchen-appliances.png',
-  title: `${lang === 'en' ? 'Kitchen Appliances' : 'أجهزة التخزين'}`,
+  title: `${lang === 'en' ? 'Kitchen Appliances' : 'أجهزة المطبخ'}`,
   key: 'Kitchen Appliances',
 }, {
   img: '/static/img/landing-home/smartwatch.png',
-  title: `${lang === 'en' ? 'Smart Watch' : 'أجهزة المنزل'}`,
+  title: `${lang === 'en' ? 'Smart Watches' : 'ساعات ذكية مع إمكانية الإتصال'}`,
   key: 'Smart Watch',
 }, {
   img: '/static/img/landing-home/homeentertainment.png',
-  title: `${lang === 'en' ? 'Home Entertainment' : 'أجهزة التخزين'}`,
+  title: `${lang === 'en' ? 'Home Entertainment' : 'أجهزة ترفيهية'}`,
   key: 'Home Entertainment',
 }, {
   img: '/static/img/landing-home/routers.png',
-  title: `${lang === 'en' ? 'Routers' : 'أجهزة التخزين'}`,
+  title: `${lang === 'en' ? 'Routers' : 'راوترات'}`,
   key: 'Routers',
 }, {
   img: '/static/img/landing-home/computerperepherals.png',
-  title: `${lang === 'en' ? 'computer perepherals' : 'أجهزة التخزين'}`,
+  title: `${lang === 'en' ? 'Computer Peripherals' : 'ملحقات الكمبيوتر'}`,
   key: 'computer perepherals',
 }, {
   img: '/static/img/landing-home/printers_home.png',
-  title: `${lang === 'en' ? 'Printers' : 'أجهزة التخزين'}`,
+  title: `${lang === 'en' ? 'Printers' : 'طابعات'}`,
   key: 'Printers',
 }, {
   img: '/static/img/landing-home/Home_appliances.png',
-  title: `${lang === 'en' ? 'Home Appliances' : 'أجهزة التخزين'}`,
+  title: `${lang === 'en' ? 'Home Appliances' : 'أجهزة المنزل'}`,
   key: 'Home Appliances',
 }];
 
 const hal = [{
   img: '/static/img/landing-home/womens-clothing.png',
-  title: `${lang === 'en' ? 'Women\'s Clothing' : 'ملابس نسائية\نسائي'}`,
+  title: `${lang === 'en' ? 'Women\'s Clothing' : 'الملابس النسائية'}`,
   key: 'Womens Clothing',
 }, {
   img: '/static/img/landing-home/mens-clothing.png',
-  title: `${lang === 'en' ? 'Men\'s Clothing' : 'ملابس رجالية'}`,
+  title: `${lang === 'en' ? 'Men\'s Clothing' : 'الملابس الرجالية'}`,
   key: 'Mens Clothing',
 }, {
   img: '/static/img/landing-home/jewellery.png',
-  title: `${lang === 'en' ? 'Jewellery' : 'مجوهرات'}`,
+  title: `${lang === 'en' ? 'Jewellery' : 'المجوهرات'}`,
   key: 'Jewellery',
 }, {
   img: '/static/img/landing-home/watches.png',
@@ -108,43 +108,43 @@ const hal = [{
   key: 'Watches',
 }, {
   img: '/static/img/landing-home/shoes_home.png',
-  title: `${lang === 'en' ? 'Footwear' : 'أزياءمستلزمات'}`,
-  key: 'Fashion Accessories',
-}, {
-  img: '/static/img/landing-home/sunglasse_home.png',
-  title: `${lang === 'en' ? 'Sunglasses' : 'أزياءمستلزمات'}`,
+  title: `${lang === 'en' ? 'Footwear' : 'أحذية'}`,
   key: 'Footwear',
 }, {
+  img: '/static/img/landing-home/sunglasse_home.png',
+  title: `${lang === 'en' ? 'Sunglasses' : 'نظارات شمسية'}`,
+  key: 'Sunglasses',
+}, {
   img: '/static/img/landing-home/sports_home.png',
-  title: `${lang === 'en' ? 'Sports' : 'أزياءمستلزمات'}`,
-  key: 'Sports',
+  title: `${lang === 'en' ? 'Sports & Outdoors' : 'الرياضات والخارج'}`,
+  key: 'Sports & Outdoors',
 }, {
   img: '/static/img/landing-home/fitness_home.png',
-  title: `${lang === 'en' ? 'Fitness' : 'عطور'}`,
-  key: 'Fitness',
+  title: `${lang === 'en' ? 'Exercise & Fitness' : ' تدريبات ولياقة'}`,
+  key: 'Exercise & Fitness',
 }, {
   img: '/static/img/landing-home/toys_home.png',
-  title: `${lang === 'en' ? 'Toys' : 'عطور'}`,
+  title: `${lang === 'en' ? 'Toys' : 'ألعاب'}`,
   key: 'Toys',
 }, {
   img: '/static/img/landing-home/beauty_and_health.png',
-  title: `${lang === 'en' ? 'Beauty & Health' : 'مجوهرات'}`,
-  key: 'Beauty & Health',
+  title: `${lang === 'en' ? 'Health & Beauty' : 'الصحة والجمال'}`,
+  key: 'Health & Beauty',
 }, {
   img: '/static/img/landing-home/cushion_squilts.png',
-  title: `${lang === 'en' ? 'Cushions & Quilts' : 'مجوهرات'}`,
-  key: 'Cushions & Quilts',
+  title: `${lang === 'en' ? 'Cushions & Covers' : 'اغطية وسادات'}`,
+  key: 'Cushions & Covers',
 }, {
   img: '/static/img/landing-home/home_sweet_home.png',
-  title: `${lang === 'en' ? 'Door Mats' : 'مجوهرات'}`,
+  title: `${lang === 'en' ? 'Door Mats' : 'دواسَّات للباب'}`,
   key: 'Door Mats',
 }, {
   img: '/static/img/landing-home/car_freshners.png',
-  title: `${lang === 'en' ? 'Car Freshner' : 'مجوهرات'}`,
-  key: 'Car Freshner',
+  title: `${lang === 'en' ? 'Air Freshner' : 'معطرات جو'}`,
+  key: 'Air Freshner',
 }, {
   img: '/static/img/landing-home/photo_frames.png',
-  title: `${lang === 'en' ? 'Photo Frames' : 'مجوهرات'}`,
+  title: `${lang === 'en' ? 'Photo Frames' : 'إطارات صور'}`,
   key: 'Photo Frames',
 }];
 
@@ -415,7 +415,7 @@ const HomePage = () => (
       </div>
       <div className="ff-t-i">
         <div className="e">
-          <span className={`title ${styles['fs-20']}`}>{lang === 'en' ? 'TOP IN ELECTRONICS' : 'أعلى في الالكترونيات'}</span>
+          <span className={`title ${styles['fs-20']}`}>{lang === 'en' ? 'ELECTRONICS' : 'أفضل الإلكترونيات'}</span>
           <div className="home-slider">
           <Slider
             asNavFor={sliderTIE}
@@ -438,7 +438,7 @@ const HomePage = () => (
           </div>
         </div>
         <div className="h-a-l">
-          <span className={`title ${styles['fs-20']}`}> {lang === 'en' ? 'TOP IN FASHION' : 'أعلى في الموضة'} | {lang === 'en' ? 'LIFESTYLE' : 'لايف ستايل'}</span>
+          <span className={`title ${styles['fs-20']}`}> {lang === 'en' ? 'FASHION' : 'أعلى في الموضة'} &amp; {lang === 'en' ? 'LIFESTYLE' : 'اللايف ستايل'}</span>
           <div className="home-slider">
           <Slider
             asNavFor={sliderHAL}
@@ -462,7 +462,7 @@ const HomePage = () => (
         </div>
       </div>
       <div className="display-t-i-f">
-        <div className={`${styles['fs-20']} title`}>{lang === 'en' ? 'TOP IN FASHION' : 'أعلى في الموضة'}</div>
+        <div className={`${styles['fs-20']} title`}>{lang === 'en' ? 'Fashion Picks' : 'أفضل الأزياء'}</div>
         <div className="d1">
           <div>
             {/* <span className={styles['fs-16']}><span className="lite"> {lang === 'en' ? 'Kids Fashion' : 'ملابس أطفال\أطفال'}</span></span> */}
@@ -526,7 +526,7 @@ const HomePage = () => (
         </div>
         <div className={`${styles.breadcrums} ${styles['mt-10']} ${styles.pointer} bredcrums-part`}>
           <a href={`/${lang}/landing/fashion`}>
-            <span>{lang === 'en' ? 'Men\'s Clothing' : 'ملابس رجالية'} &nbsp; | &nbsp; {lang === 'en' ? 'Women\'s Clothing' : 'ملابس نسائية\نسائي'} &nbsp; | &nbsp; {lang === 'en' ? 'Kids Fashion' : 'ملابس أطفال\أطفال'} &nbsp; | &nbsp; {lang === 'en' ? 'Footwear' : 'أحذية'} &nbsp; | &nbsp; {lang === 'en' ? 'Jewellery' : 'مجوهرات'} &nbsp; | &nbsp; {lang === 'en' ? 'Eyewear' : 'نظارات'}</span>
+            <span className={`${styles['thick-gry-clr']}`}>{lang === 'en' ? 'Men\'s Clothing' : 'ملابس رجالية'} &nbsp; | &nbsp; {lang === 'en' ? 'Women\'s Clothing' : 'ملابس نسائية\نسائي'} &nbsp; | &nbsp; {lang === 'en' ? 'Kids Fashion' : 'ملابس أطفال\أطفال'} &nbsp; | &nbsp; {lang === 'en' ? 'Footwear' : 'أحذية'} &nbsp; | &nbsp; {lang === 'en' ? 'Jewellery' : 'مجوهرات'} &nbsp; | &nbsp; {lang === 'en' ? 'Eyewear' : 'نظارات'}</span>
           </a>
         </div>
       </div>
@@ -540,7 +540,7 @@ const HomePage = () => (
         ))}
       </Row>
       <div className="display-t-i-hl">
-        <div className={`${styles['fs-20']} title`}> {lang === 'en' ? 'BEST OF LIFESTYLE' : 'أفضل من لايف ستايل'}</div>
+        <div className={`${styles['fs-20']} title`}> {lang === 'en' ? 'Lifestyle Picks' : 'أفضل مختارات اللايف ستايل'}</div>
         <div className="d1">
           <div>
             {/* <span className={styles['fs-16']}><span className="lite">{lang === 'en' ? 'Kids Furniture' : 'أثاث الأطفال'}</span></span> */}
@@ -604,7 +604,7 @@ const HomePage = () => (
         </div>
         <div className={`${styles.breadcrums} ${styles['mt-10']} ${styles.pointer} bredcrums-part`}>
           <a href={`/${lang}/landing/lifestyle`}>
-            <span> {lang === 'en' ? 'Bedsheets' : 'غطاء\شرشف السرير'} &nbsp; | &nbsp; {lang === 'en' ? 'Furniture' : 'الأثاث'} &nbsp;| &nbsp; {lang === 'en' ? 'Cushions' : 'وسائد'} &nbsp; | &nbsp; {lang === 'en' ? 'Wall Decor' : '  جدار ديكورت'} &nbsp; | &nbsp; {lang === 'en' ? 'Lights' : 'الأنوار'} &nbsp; | &nbsp; {lang === 'en' ? 'Living Room Furniture' : 'غرفة المعيشة الأثاث'} &nbsp; | &nbsp; {lang === 'en' ? 'Photo Frames' : 'إطارات صور'} </span>
+            <span className={`${styles['thick-gry-clr']}`}> {lang === 'en' ? 'Bedsheets' : 'غطاء\شرشف السرير'} &nbsp; | &nbsp; {lang === 'en' ? 'Furniture' : 'الأثاث'} &nbsp;| &nbsp; {lang === 'en' ? 'Cushions' : 'وسائد'} &nbsp; | &nbsp; {lang === 'en' ? 'Wall Decor' : '  جدار ديكورت'} &nbsp; | &nbsp; {lang === 'en' ? 'Lights' : 'الأنوار'} &nbsp; | &nbsp; {lang === 'en' ? 'Living Room Furniture' : 'غرفة المعيشة الأثاث'} &nbsp; | &nbsp; {lang === 'en' ? 'Photo Frames' : 'إطارات صور'} </span>
           </a>
         </div>
       </div>
@@ -618,7 +618,7 @@ const HomePage = () => (
         ))}
       </Row>
       <div className="display-t-i-e">
-        <div className={`${styles['fs-20']} title`}>{lang === 'en' ? 'TOP IN ELECTRONICS' : 'أعلى في الالكترونيات'}</div>
+        <div className={`${styles['fs-20']} title`}>{lang === 'en' ? 'TOP IN ELECTRONICS' : 'أفضل الإلكترونيات'}</div>
         {/* <div className={`${styles['']}`}>
           <span>See more</span><SVGComponent clsName={`${styles['arrow']}`} src="icons/common-icon/arrow" />
         </div> */}
@@ -689,7 +689,7 @@ const HomePage = () => (
         </div>
         <div className={`${styles.breadcrums} ${styles['mt-10']} ${styles.pointer} bredcrums-part`}>
           <a href={`/${lang}/landing/electronics`}>
-            <span>{lang === 'en' ? 'Mobiles' : 'الجوالات'} &nbsp; | &nbsp; {lang === 'en' ? 'Laptops' : 'اللاب توبات'}  &nbsp; | &nbsp; {lang === 'en' ? 'Speakers' : 'مكبر الصوت'}  &nbsp; |  &nbsp; {lang === 'en' ? 'Cameras' : 'كاميرات'} &nbsp; | &nbsp; {lang === 'en' ? 'Microwave Ovens' : 'ميكرويفات '} &nbsp; | &nbsp; {lang === 'en' ? 'Smartwatches' : 'ساعات يد ذكية'} </span>
+            <span className={`${styles['thick-gry-clr']}`}>{lang === 'en' ? 'Mobiles' : 'الجوالات'} &nbsp; | &nbsp; {lang === 'en' ? 'Laptops' : 'اللاب توبات'}  &nbsp; | &nbsp; {lang === 'en' ? 'Speakers' : 'مكبر الصوت'}  &nbsp; |  &nbsp; {lang === 'en' ? 'Cameras' : 'الكاميرات'} &nbsp; | &nbsp; {lang === 'en' ? 'Microwave Ovens' : 'ميكرويفات '} &nbsp; | &nbsp; {lang === 'en' ? 'Smartwatches' : 'ساعات يد ذكية'} </span>
           </a>
         </div>
       </div>

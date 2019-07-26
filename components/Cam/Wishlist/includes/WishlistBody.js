@@ -130,8 +130,8 @@ const WishlistBody = (props) => {
                             <strike className={`${styles['label-gry-clr']} ${styles['fs-12']}`}>{mrp} {cur}</strike>
                           </span> : ''
                         }
-                        {wishlisted_price && wishlisted_price > 0 && price && cur && wishlisted_price.toString() !== price && getPriceAlert(price, wishlisted_price, cur)}
-                        {wishlisted_price && wishlisted_price > 0 && wishlisted_price.toString() !== price &&
+                        {price && cur && wishlisted_price && wishlisted_price > 0 && wishlisted_price.toString() !== price && getPriceAlert(price, wishlisted_price, cur)}
+                        {price && cur && wishlisted_price && wishlisted_price > 0 && wishlisted_price.toString() !== price &&
                         <span className={`${styles['thick-gry-clr']}`}>
                           {WISH_LIST_PAGE.ITEM_WAS} {wishlisted_price} {cur} {WISH_LIST_PAGE.WHEN_ADDED_TO_WISHLIST}
                         </span>}
