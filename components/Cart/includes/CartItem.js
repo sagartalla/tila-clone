@@ -1,7 +1,8 @@
 import React from 'react';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, PanelGroup, Panel } from 'react-bootstrap';
 import moment from 'moment';
 import Cookie from 'universal-cookie';
+import Button from '../../common/CommonButton';
 
 import { Link } from '../../../routes';
 import Warranty from '../../Product/includes/Warranty';
@@ -25,6 +26,8 @@ const cookies = new Cookie();
 
 const language = cookies.get('language') || 'en';
 const country = cookies.get('country') || 'SAU';
+
+const warrantyDetails = ['Damage Protection', 'Extended Warranty'];
 
 
 // const popover = ({
@@ -111,6 +114,14 @@ class CartItem extends React.Component {
     });
   }
 
+  addNewWarranty = (e) => {
+    const { showWarrantyOptions } = this.state;
+    const warrantyIndex = Number(e.target.getAttribute('data-index'));
+    this.setState({
+      warrantyIndex,
+    });
+  }
+
   render() {
     const {
       item,
@@ -122,7 +133,7 @@ class CartItem extends React.Component {
       cartStepperInputHandler,
 
     } = this.props;
-    const { checked } = this.state;
+    const { checked, showWarrantyOptions, warrantyIndex } = this.state;
     const {
       item_id, img, name, offer_price, cur, quantity, max_limit, inventory, offerDiscounts,
       brand_name, gift_info, shipping, warranty_duration, total_amount, total_discount, listing_id,
@@ -151,7 +162,7 @@ class CartItem extends React.Component {
               <div
                 className={`${styles['flex-center']} ${styles['justify-center']} ${styles['pb-15']} ${styles['card-box-inn-img']}`}
               >
-                <Link route={`/${language}/pdp/${name.split(' ').join('-').toLowerCase()}/c/${catalogId}/p/${product_id}/l/${listing_id}/v/${variant_id ? `${variant_id}` : ''}`}>
+                <Link route={`/${language}/pdp/${name && name.split(' ').join('-').toLowerCase()}/c/${catalogId}/p/${product_id}/l/${listing_id}/v/${variant_id ? `${variant_id}` : ''}`}>
                   <a className={`${styles['width100']} ${styles['ht-100P']}`}>
                     <img className={styles.img} alt={img} src={`${constants.mediaDomain}/${img}`} />
                   </a>
@@ -172,7 +183,7 @@ class CartItem extends React.Component {
                 </Col>
                 <Col md={8} sm={8} className={`${styles['landscape-cart-details']} ${styles['pr-0']}`}>
                   <h4 className={`${styles['fontW600']} ${styles['m-fs-14']} ${styles['fs-16']}`}>
-                  <Link route={`/${language}/pdp/${name.split(' ').join('-').toLowerCase()}/c/${catalogId}/p/${product_id}/l/${listing_id}/v/${variant_id ? `${variant_id}` : ''}`}>
+                  <Link route={`/${language}/pdp/${name && name.split(' ').join('-').toLowerCase()}/c/${catalogId}/p/${product_id}/l/${listing_id}/v/${variant_id ? `${variant_id}` : ''}`}>
                       <a className={`${styles['width100']} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
                         {name}
                       </a>
@@ -322,6 +333,62 @@ class CartItem extends React.Component {
                   } */}
                 </Col>
               </Row>
+              <PanelGroup accordion className={`${styles['panel-title']} ${styles['mt-30']}`}>
+                <Panel>
+                  <Panel.Heading className={`${styles['panel-heading']}`}>
+                    <Panel.Title toggle className={`${styles['black-color']} ${styles['panel-width']} ${styles['flx-spacebw-alignc']}`}>
+                      <div className={`${styles.flex} ${styles['justify-between']}`}>
+                            <div className={`${styles['fs-14']} ${styles.fontW600}`}>Tila Care Protection</div>
+                        <div className={`${styles.flex}`}>
+                          <SVGComponent clsName={`${styles['down-icon']}`} src="icons/common-icon/down-arrow" />
+                        </div>
+                      </div>
+                    </Panel.Title>
+                  </Panel.Heading>
+                  <Panel.Body collapsible>
+                    <div>
+                      {warrantyDetails.map((value, index) => (
+                        <React.Fragment>
+                        <div className={`${styles['panel-body-border']} ${styles['flex-center']} ${styles['justify-between']}`}>
+                        <div className={`${styles.flex}`}>
+                         <SVGComponent clsName={`${styles['down-icon']}`} src="icons/common-icon/down-arrow" />
+                        <div className={`${styles['warranty-values']} ${styles.fontW600}`}>{value}</div>
+                        <div className={`${styles['text-blue']}`}>View T &amp; C </div>
+                        </div>
+                         {warrantyIndex !== index &&
+                          <button data-index={index} className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['left-radius']} ${styles['add-warranty-btn']}`} onClick={this.addNewWarranty}> Add </button>
+                      }
+                        </div>
+                         <div className={`${styles['ml-50']}`}>
+                         {warrantyIndex === index ?
+                         <div>
+                         <div>Duration: 1 year</div>
+                      {[100, 200, 300].map(s => (
+                        <div
+                        >
+                          <input
+                            type="radio"
+                            name="warranty_check"
+                            className={`${styles['radio-btn']}`}
+                          />
+                          <label className={`${styles['fs-12']} ${styles['pl-10']} ${styles['pr-10']}`}>{s}</label>
+                          <span className={`${styles['warranty-radio-button']}`}></span>
+                          <label className={`${styles['fs-12']} ${styles['pl-10']}`}>{s}</label>                      
+                        </div>
+                      ))}
+                      <div className={`${styles.flex} ${styles['m-5']}`}>
+                      <div className={`${styles['text-blue']} ${styles.pointer} ${styles['pr-10']}`} onClick={this.editWarranty}>Edit</div>
+                      <span className={`${styles['warranty-radio-button']}`}></span>                      
+                      <div className={`${styles['text-blue']} ${styles.pointer} ${styles['pl-10']}`} onClick={this.deleteWarranty}>Delete</div>
+                      </div>
+                      </div>
+                      : ''}</div>
+                      </React.Fragment>
+                      ))}
+                    </div>
+                  </Panel.Body>
+                </Panel>
+            </PanelGroup>
             </Col>
           </Row>
         </div>
