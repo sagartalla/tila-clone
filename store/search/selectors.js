@@ -141,7 +141,7 @@ const getSearchResutls = (store) => {
             modifiedVaraintsCopy[key] = modifiedVaraintsCopy[key].concat(val);
           });
         } else {
-          modifiedVaraintsCopy.productSize = Object.values(v.attributes[product.flags.variant_id_attribute])[0];
+          modifiedVaraintsCopy.productSize = Object.values(v.attributes[product.flags.variant_id_attribute] || {})[0];
           modifiedVaraintsCopy.productAvailable = false;
           modifiedVaraintsCopy.variantId = v.id;
         }
