@@ -6,7 +6,7 @@ routes
   .add({ name: 'ORDER ISSUE', pattern: '/:language/customer/orders/:orderId/issue/:returnExchangeType/item/:orderItemId/:variantId', page: 'order' })
   .add({ name: 'ORDER', pattern: '/:language/customer/orders/:orderId', page: 'order' })
   .add({ name: 'CAM tabs', pattern: '/:language/customer/:tabDetails+', page: 'cam' })
-  .add({ name: 'product', pattern: '/:language/product', page: 'product' })
+  .add({ name: 'product', pattern: '/:language/pdp/:productName?/c/:catalogId/p/:productId/l/:listingId?/v/:variantId?', page: 'product' })
   .add({ name: 'Cart', pattern: '/:language/cart', page: 'cart' })
   .add({ name: 'payment', pattern: '/:language/payment', page: 'payment' })
   .add({ name: 'thankyou', pattern: '/:language/thankyou/:orderId/:status(SUCCESSFUL|FAILED)', page: 'thankyou' })

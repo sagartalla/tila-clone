@@ -1,6 +1,4 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Row, Col } from 'react-bootstrap';
+import React from 'react';
 import { languageDefinations } from '../../../utils/lang';
 
 import SVGComponent from '../SVGComponet';
@@ -52,7 +50,7 @@ const CaptchaContent = ({items,state,handleDrop,handleClick}) => {
               <div>
               <div className={`${styles['flex-center']} ${styles['captcha-icon-part']}`}>
                 {
-                  items.images ? items.images.slice(0,5).map((image) => { //.slice has to be removed as soon as backend rectifies the response from their end
+                  items.images ? items.images.map((image) => {
                     return <Box image={image} index={image.image_id} handleDrop={(id) => handleDrop(id)}/>
                   }):
                 <div>

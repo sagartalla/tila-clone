@@ -29,7 +29,6 @@ const Meta = (props) => (
     <meta name="viewport" content="width= " />
     <meta name="robots" content="index,follow" />
     <meta name="author" content="Tila" />
-    <link rel="icon" href="/favicon.png" />
   </NextHead>
 )
 
