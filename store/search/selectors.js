@@ -18,7 +18,6 @@ const filterVariants = (cartListingId, variants) => {
       return acc;
     }, []);
   }
-
   return variantList;
 };
 const addCartAndWishlistDetails = (store, results) => {
@@ -134,7 +133,7 @@ const getSearchResutls = (store) => {
           delete attributesData.type;
           delete attributesData.variantId;
           // modifiedVaraintsCopy = Object.assign(modifiedVaraints);
-          modifiedVaraintsCopy.productSize = Object.values(v.attributes)[0];
+          modifiedVaraintsCopy.productSize = v.attributes[product.flags.variant_id_attribute];
           modifiedVaraintsCopy.productAvailable = true;
           modifiedVaraintsCopy.variantId = v.id;
           _.forEach(attributesData, (val, key) => {
@@ -142,7 +141,7 @@ const getSearchResutls = (store) => {
             modifiedVaraintsCopy[key] = modifiedVaraintsCopy[key].concat(val);
           });
         } else {
-          modifiedVaraintsCopy.productSize = Object.values(v.attributes)[0];
+          modifiedVaraintsCopy.productSize = Object.values(v.attributes[product.flags.variant_id_attribute] || {})[0];
           modifiedVaraintsCopy.productAvailable = false;
           modifiedVaraintsCopy.variantId = v.id;
         }

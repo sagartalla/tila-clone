@@ -52,7 +52,7 @@ const getCartResults = (store) => {
           total_discount: listingInfo.pricing && listingInfo.pricing.total_discount_mrp.display_value,
           variantAttributes: listingInfo.variant_id && item.product_details && item.product_details.product_details_vo.cached_variant[listingInfo.variant_id].attribute_map ?
             Object.values(item.product_details.product_details_vo.cached_variant[listingInfo.variant_id].attribute_map)
-              .filter(attr => attr.visible) : [],
+              .filter(attr => attr.attribute_group_name === 'IDENTITY' && attr.visible) : [],
         };
       });
     }

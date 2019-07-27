@@ -102,13 +102,13 @@ class MegaMenu extends Component {
   }
 
   getLandingPageLink(id) {
-    if(id === 848) {
+    if(id === 'CWZ') {
       return 'landing/electronics';
     }
-    if(id === 892) {
+    if(id === 'GLS') {
       return 'landing/fashion';
     }
-    if(id === 932) {
+    if(id === 'JZG') {
       return 'landing/lifestyle';
     }
   }
@@ -142,7 +142,7 @@ class MegaMenu extends Component {
                     >
                     <div>
                       {/* <Link route={`/category/${item.displayName}-${item.id}?categoryTree=true&isListed=false`}> */}
-                      <Link route={`/${language}/${this.getLandingPageLink(item.id)}`}>
+                      <Link route={`/${language}/${this.getLandingPageLink(item.sid)}`}>
                         <a>{item.displayName}</a>
                       </Link>
                     </div>

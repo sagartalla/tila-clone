@@ -50,7 +50,7 @@ const getOrdersData = (store) => {
           refunds: i.refunds,
           gift_info: i.gift_info,
           variantAttributes: i.variant_info && i.variant_info.variant_details && i.variant_info.variant_details.attribute_map ?
-            Object.values(i.variant_info.variant_details.attribute_map).filter(attr => attr.visible) : [],
+            Object.values(i.variant_info.variant_details.attribute_map).filter(attr => attr.attribute_group_name === 'IDENTITY' && attr.visible) : [],
         })),
         _.filter(i => i.order_item_type === 'DELIVERY'),
       )(order_items);
