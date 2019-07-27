@@ -47,6 +47,7 @@ class Category extends Base {
       query: categoryValue,
       language: language || 'en',
       pageNum: 1,
+      choosenCategoryName: categoryValue,
     };
     if (shippingCity) {
       searchOptions.shippingDetails = {
