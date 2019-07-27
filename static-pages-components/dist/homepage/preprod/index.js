@@ -11,20 +11,28 @@ const tbs = [{
   title: `${lang === 'en' ? 'Adidas' : 'أديداس'}`,
   key: 'Adidas'
 }, {
+  img: `/static/img/landing-home/${lang === 'en' ? 'AGATHA' : 'AGATHA- AR'}.jpg`,
+  title: `${lang === 'en' ? 'Agatha' : 'أديداس'}`,
+  key: 'Agatha'
+}, {
+  img: `/static/img/landing-home/${lang === 'en' ? 'Sunglass - Michael Kors' : 'Michael kors- AR'}.jpg`,
+  title: `${lang === 'en' ? 'Michael Kors' : 'أديداس'}`,
+  key: 'Michael Kors'
+}, {
   img: `/static/img/landing-home/${lang === 'en' ? 'PHILIPS' : 'PHILIPS - AR'}.jpg`,
-  title: 'Joyroom',
+  title: 'Philips',
   title: `${lang === 'en' ? 'Philips' : 'فيليبس'}`,
   key: 'Philips'
 }, {
   img: `/static/img/landing-home/${lang === 'en' ? 'Samsung' : 'Samsung - AR'}.jpg`,
-  title: 'Ldnio',
+  title: 'Samsung',
   title: `${lang === 'en' ? 'Samsung' : 'سامسونج'}`,
   key: 'Samsung'
 }, {
   img: `/static/img/landing-home/${lang === 'en' ? 'Sunglass' : 'Sunglass - AR'}.jpg`,
   title: 'Rayban',
   title: `${lang === 'en' ? 'Ray-Ban' : 'راي بان'}`,
-  key: 'Sunglasses'
+  key: 'Sunglasses_raybon'
 }];
 
 const tie = [{
@@ -147,7 +155,7 @@ const d_tie = [`/static/img/landing-home/${lang === 'en' ? 'Electronics - Banner
 
 const d_tif = [`/static/img/landing-home/${lang === 'en' ? 'Fashion - Banner small 01' : 'Fashion - Banner small 01_AR'}.jpg`, `/static/img/landing-home/${lang === 'en' ? 'Fashion - Banner Medium 01' : 'Fashion - Banner Medium 01_AR'}.jpg`, `/static/img/landing-home/${lang === 'en' ? 'Fashion - Banner Medium 02' : 'Fashion - Banner Medium 02_AR'}.jpg`, `/static/img/landing-home/${lang === 'en' ? 'Fashion - Banner small 02' : 'Fashion - Banner small 02_AR'}.jpg`, `/static/img/landing-home/${lang === 'en' ? 'Fashion - Banner large_' : 'Fashion - Banner large_AR'}.jpg`];
 
-const d_tihl = [`/static/img/landing-home/${lang === 'en' ? 'Lifestyle - Banner small 01' : 'Lifestyle - Banner small 01_AR'}.jpg`, `/static/img/landing-home/${lang === 'en' ? 'Lifestyle - Banner Medium 01' : 'Lifestyle - Banner Medium 01_AR'}.jpg`, `/static/img/landing-home/${lang === 'en' ? 'Lifestyle - Banner Medium 02' : 'Lifestyle - Banner Medium 02_AR'}.jpg`, `/static/img/landing-home/${lang === 'en' ? 'Lifestyle - Banner small 01' : 'Lifestyle - Banner small 02_AR'}.jpg`, `/static/img/landing-home/${lang === 'en' ? 'Lifestyle - Banner Large' : 'Lifestyle - Banner Large_AR'}.jpg`];
+const d_tihl = [`/static/img/landing-home/${lang === 'en' ? 'Lifestyle - Banner small 01' : 'Lifestyle - Banner small 01_AR'}.jpg`, `/static/img/landing-home/${lang === 'en' ? 'Lifestyle - Banner Medium 01' : 'Lifestyle - Banner Medium 01_AR'}.jpg`, `/static/img/landing-home/${lang === 'en' ? 'Lifestyle - Banner Medium 02' : 'Lifestyle - Banner Medium 02_AR'}.jpg`, `/static/img/landing-home/${lang === 'en' ? 'Lifestyle - Banner small 02' : 'Lifestyle - Banner small 02_AR'}.jpg`, `/static/img/landing-home/${lang === 'en' ? 'Lifestyle - Banner Large' : 'Lifestyle - Banner Large_AR'}.jpg`];
 
 const d_o_day = [{
   img: '/static/img/landing-home/samsung.png',
@@ -229,7 +237,7 @@ const responsive = [{
 
 const twoCols = [{
   img: `/static/img/landing-home/${lang === 'en' ? 'Half Banners' : 'Half Banners-AR'}.jpg`,
-  link: `/${lang}/search?q=Hauwei`,
+  link: `/${lang}/search?q=Huawei%20Y5%20Lite`,
   title: 'HAUWEI'
 }, {
   img: `/static/img/landing-home/${lang === 'en' ? 'Half Banners 01' : 'Half Banners-AR01'}.jpg`,
@@ -239,22 +247,22 @@ const twoCols = [{
 
 const threeCols = [{
   img: `/static/img/landing-home/${lang === 'en' ? 'One third Banners' : 'One third Banners-AR'}.jpg`,
-  link: `/${lang}/search?q=Laptop%20stand&language=en&isListed=false`,
-  title: 'LAPTOP STAND'
+  link: `/${lang}/search?q=Best%20Life%20Laptop%20Bag`,
+  title: 'BEST LIFE'
 }, {
   img: `/static/img/landing-home/${lang === 'en' ? 'One third Banners 01' : 'One third Banners-AR01'}.jpg`,
-  link: `/${lang}/search?q=Smart%20Band&language=en&isListed=false`,
-  title: 'SMART BAND'
+  link: `/${lang}/search?q=Wiwu%20laptop%20Sleeve`,
+  title: 'WIWU'
 }, {
   img: `/static/img/landing-home/${lang === 'en' ? 'One third Banners 02' : 'One third Banners-AR02'}.jpg`,
-  link: `/${lang}/search?q=headphones&language=en&isListed=false`,
-  title: 'HEADPHONE'
+  link: `/${lang}/search/?q=MICROPACK`,
+  title: 'MICROPACK'
 }];
 
 const b_y_l = [{
   img: '/static/img/landing-home/huawei.jpg',
   title: 'huawei',
-  links: `/${lang}/search?q=Joyroom&language=en&isListed=false`
+  links: `/${lang}/search?q=Huawei`
 }, {
   img: '/static/img/landing-home/Ray_ban_new.jpg',
   title: 'Ray-Ban',
@@ -266,7 +274,7 @@ const b_y_l = [{
 }, {
   img: '/static/img/landing-home/canon.jpg',
   title: 'canon',
-  links: `/${lang}/search?q=LDNIO&language=en&isListed=false`
+  links: `/${lang}/search/?q=CANON`
 }];
 // {
 //   img: '/static/img/landing-home/levis-m.jpg',
@@ -321,7 +329,7 @@ const b_d_b = {
   Watches: `/${lang}/srp/watches?categoryTree=true&isListed=false&sid=892,2446`,
   Speakers: `/${lang}/search?q=Speakers&&isListed=false`,
   'Microwave Ovens': `/${lang}/search?q=Microwave%20Ovens&&isListed=false`,
-  'Smart Watch': `/${lang}/srp/${lang === 'en' ? 'Smart Watch' : 'ساعات ذكية'}/search?q=Men's%20Clothing`,
+  'Smart Watch': `/${lang}/srp/${lang === 'en' ? 'Smart Watch' : 'ساعات ذكية'}/search?q=smart%20watch`,
   "Kid's Fashion": `/${lang}/srp?search=Kid%27s%20Fashion&language=en&isListed=false`,
   Footwear: `/${lang}/srp/${lang === 'en' ? 'Footwear' : 'أحذية'}/search?q=Footwear`,
   "Men's Footwear": `/${lang}/srp/${lang === 'en' ? 'footwear' : 'حذاء'}?categoryTree=true&isListed=false&sid=892,907`,
@@ -334,8 +342,8 @@ const b_d_b = {
   Toys: `/${lang}/srp/${lang === 'en' ? 'Toys' : 'ألعاب'}/search?q=toys`,
   'Sports & Outdoors': `/${lang}/srp/${lang === 'en' ? 'Sports & Outdoor' : 'الرياضات والخارج'}/search?q=Sports`,
   'Exercise & Fitness': `/${lang}/srp/${lang === 'en' ? 'Exercise & Fitness' : 'تدريبات ولياقة'}/search?q=Fitness`,
-  'Health & Beauty': `/${lang}/srp/${lang === 'en' ? 'Health & Beauty' : 'الصحة والجمال'}/search?q=Beauty%20&%20Health`,
-  'Cushions & Covers': `/${lang}/srp/${lang === 'en' ? 'Cushions & Covers' : 'اغطية وسادات'}/search?q=Beauty%20&%20Health`,
+  'Health & Beauty': `/${lang}/srp/${lang === 'en' ? 'Health & Beauty' : 'الصحة والجمال'}/search?q=health%20and%20beauty`,
+  'Cushions & Covers': `/${lang}/srp/${lang === 'en' ? 'Cushions & Covers' : 'اغطية وسادات'}/search?q=cusion%20covers`,
   'Door Mats': `/${lang}/srp/${lang === 'en' ? 'Door Mats' : 'دواسَّات للباب'}/search?q=Door%20Mats`,
   'Air Freshner': `/${lang}/srp/${lang === 'en' ? 'Air Freshner' : 'معطرات جو'}/search?q=Car%20Freshener`,
   'Photo Frames': `/${lang}/srp/${lang === 'en' ? 'Photo Frames' : 'اغطية وسادات'}/search?q=Photo%20Frames`,
@@ -345,29 +353,31 @@ const b_d_b = {
   SHIRTS: `/${lang}/search?q=SHIRTS&&isListed=false`,
   Perfumes: `/${lang}/search?q=perfumes&language=en&isListed=false`,
   Shoes: `/${lang}/search?q=Shoes&&isListed=false`,
-  Lights: `/${lang}/search?q=light&language=en&isListed=false`,
-  lamps: `/${lang}/search?q=lamps&language=en&isListed=false`,
-  bedding: `/${lang}/search?q=bedding&language=en&isListed=false`,
-  furniture: `/${lang}/search?q=furniture&language=en&isListed=false`,
+  Lights: `/${lang}/search?q=Sports%20Essentials`,
+  lamps: `/${lang}/search?q=Health%20Beauty`,
+  bedding: `/${lang}/search?q=baby%20care`,
+  furniture: `/${lang}/search?q=Home%20Furnishing`,
   'HOME DECOR': `/${lang}/search?q=HOME%20DECOR&isListed=false`,
   LAPTOPS: `/${lang}/srp/${lang === 'en' ? 'laptops' : 'أجهزة-الكمبيوتر-المحمولة'}?categoryTree=true&isListed=false&sid=848,2352`,
   'MENS CLOTHING': `/${lang}/srp/${lang === 'en' ? 'clothing' : 'ملابس'}?categoryTree=true&isListed=false&sid=892,899`,
   'MOBILE ACCESSORIES': `/${lang}/srp/${lang === 'en' ? 'mobile-accessories' : 'ملحقات-الهاتف-المحمول'}?categoryTree=true&isListed=false&sid=848,850`,
   'PERFUMES FOR WOMEN': `/${lang}/search?q=perfumes&language=en&isListed=false`,
-  'Laptop stand': `/${lang}/search?q=Laptop%20stand&language=en&isListed=false`,
-  Headphones: `/${lang}/search?q=headphones&language=en&isListed=false`,
-  'Mobiles Cases': `/${lang}/search?q=Mobiles&language=en&isListed=false`,
-  'Smart Band': `/${lang}/search?q=Smart%20Band&language=en&isListed=false`,
-  'USB Hub': `/${lang}/search?q=USB%20Hub&language=en&isListed=false`,
+  'Go Smart': `/${lang}/search?q=go%20smart`,
+  Headphones: `/${lang}/search?q=yison`,
+  BASUES: `/${lang}/search?q=Baseus`,
+  CANON: `/${lang}/search/?q=Canon`,
+  LDNIO: `/${lang}/search/?q=ldnio`,
   Ella: `/${lang}/search?q=Ella`,
-  Guess_new: `/${lang}/sunglasses/?q=Guess`,
-  Armani: `/${lang}/search/sunglasses/?q=Emporio%20Armani`,
+  Guess_new: `/${lang}/search?q=Guess%20sunglasses `,
+  Armani: `/${lang}/search/sunglasses/?q=Emporio%20Armani sunglasses`,
   Summer: `/${lang}/search?q=Sunglasses`,
   Collections: `/${lang}/search?q=Designer%20Collections`,
   Philips: `/${lang}/srp/${lang === 'en' ? 'Philips' : 'فيليبس'}/search/home-kitchen-appliances/?q=Philips`,
-  Sunglasses: `/${lang}/srp/${lang === 'en' ? 'Sunglasses' : 'راي بان'}/search?q=rayban`,
+  Sunglasses_raybon: `/${lang}/srp/${lang === 'en' ? 'Sunglasses' : 'راي بان'}/search?q=rayban`,
   Apple: `/${lang}/srp/${lang === 'en' ? 'Apple' : 'ابل'}/search?q=Apple`,
   Adidas: `/${lang}/srp/${lang === 'en' ? 'Adidas' : 'أديداس'}/search/?q=Adidas`,
+  Agatha: `/${lang}/srp/${lang === 'en' ? 'Agatha' : 'أديداس'}/search/?q=Agatha`,
+  'Michael Kors': `/${lang}/srp/${lang === 'en' ? 'Michael Kors' : 'أديداس'}/search/?q=Michael%20Kors`,
   Samsung: `/${lang}/srp/${lang === 'en' ? 'Samsung' : 'سامسونج'}/search?q=Samsung%20Galaxy%20Note`
 };
 
@@ -749,7 +759,7 @@ const HomePage = () => React.createElement(
             null,
             React.createElement(
               'a',
-              { href: b_d_b['Laptop stand'] },
+              { href: b_d_b['Go Smart'] },
               React.createElement(
                 'div',
                 { className: 'd-sub' },
@@ -779,7 +789,7 @@ const HomePage = () => React.createElement(
             null,
             React.createElement(
               'a',
-              { href: b_d_b['Mobiles Cases'] },
+              { href: b_d_b['CANON'] },
               React.createElement(
                 'div',
                 { className: 'd-sub' },
@@ -792,7 +802,7 @@ const HomePage = () => React.createElement(
             null,
             React.createElement(
               'a',
-              { href: b_d_b['Smart Band'] },
+              { href: b_d_b['LDNIO'] },
               React.createElement(
                 'div',
                 { className: 'd-sub' },
@@ -809,7 +819,7 @@ const HomePage = () => React.createElement(
             null,
             React.createElement(
               'a',
-              { href: b_d_b['USB Hub'] },
+              { href: b_d_b['BASUES'] },
               React.createElement(
                 'div',
                 { className: 'd3-sub' },
