@@ -439,7 +439,7 @@ const HomePage = () => (
       </div>
       <div className="ff-t-i">
         <div className="e">
-          <span className={`title ${styles['fs-20']}`}>{lang === 'en' ? 'ELECTRONICS' : 'أفضل الإلكترونيات'}</span>
+          <span className={`title ${styles['fs-20']}`}>{lang === 'en' ? 'ELECTRONICS' : 'الكترونيات‎'}</span>
           <div className="home-slider">
           <Slider
             asNavFor={sliderTIE}
@@ -462,7 +462,7 @@ const HomePage = () => (
           </div>
         </div>
         <div className="h-a-l">
-          <span className={`title ${styles['fs-20']}`}> {lang === 'en' ? 'FASHION' : 'أعلى في الموضة'} &amp; {lang === 'en' ? 'LIFESTYLE' : 'اللايف ستايل'}</span>
+          <span className={`title ${styles['fs-20']}`}> {lang === 'en' ? 'FASHION & LIFESTYLE' : 'أزياء و لايف ستايل'}</span>
           <div className="home-slider">
           <Slider
             asNavFor={sliderHAL}

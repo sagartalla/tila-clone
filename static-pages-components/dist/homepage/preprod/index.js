@@ -431,7 +431,7 @@ const HomePage = () => React.createElement(
         React.createElement(
           'span',
           { className: `title ${styles['fs-20']}` },
-          lang === 'en' ? 'ELECTRONICS' : 'أفضل الإلكترونيات'
+          lang === 'en' ? 'ELECTRONICS' : 'الكترونيات‎'
         ),
         React.createElement(
           'div',
@@ -473,9 +473,7 @@ const HomePage = () => React.createElement(
           'span',
           { className: `title ${styles['fs-20']}` },
           ' ',
-          lang === 'en' ? 'FASHION' : 'أعلى في الموضة',
-          ' & ',
-          lang === 'en' ? 'LIFESTYLE' : 'اللايف ستايل'
+          lang === 'en' ? 'FASHION & LIFESTYLE' : 'أزياء و لايف ستايل'
         ),
         React.createElement(
           'div',

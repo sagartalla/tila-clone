@@ -94,8 +94,8 @@ const l = [
   },
 
   {
-    url: `/${lang}/search?q=Home%20Appliances&language=en&isListed=false`,
-    title: FOOTER_PAGE.HOME_APLLIANCES,
+    url: `/${lang}/search?q=dining`,
+    title: FOOTER_PAGE.KITCHEN_AND_DINING,
   },
   {
     url: `/${lang}/search?q=Home%20Decor&language=en&isListed=false`,
