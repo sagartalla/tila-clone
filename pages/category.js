@@ -35,6 +35,7 @@ class Category extends Base {
     if (category !== '<anonymous>') {
       categoryValue = category;
     }
+    const categoryTree = query.categoryTree === 'true';
     const shippingData = req ? req.universalCookies.get('shippingInfo') : cookies.get('shippingInfo');
     const { city: shippingCity, country: shippingCountry } = shippingData || {};
     const categoryFilter = {
@@ -48,6 +49,7 @@ class Category extends Base {
       language: language || 'en',
       pageNum: 1,
       choosenCategoryName: categoryValue,
+      categoryTree
     };
     if (shippingCity) {
       searchOptions.shippingDetails = {
