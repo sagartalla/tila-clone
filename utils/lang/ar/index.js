@@ -450,6 +450,7 @@ export const AR_KEYWORDS = {
     HEADPHONES: 'سماعات',
     VIDEO_GAMES: 'ألعاب الفيديو',
     HOME_APLLIANCES: 'أجهزة منزليه',
+    KITCHEN_AND_DINING: 'المطبخ والعشاء',
     CAMERA: 'كاميرات',
     PHOTO: 'صور',
     VIDEO: 'فيديوات',
