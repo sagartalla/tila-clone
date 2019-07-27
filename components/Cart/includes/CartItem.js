@@ -125,8 +125,8 @@ class CartItem extends React.Component {
     const { checked } = this.state;
     const {
       item_id, img, name, offer_price, cur, quantity, max_limit, inventory, offerDiscounts,
-      brand_name, gift_info, shipping, warranty_duration, total_amount, total_discount, listing_id,
-      product_id, variant_id, itemType, catalogId, discount, mrp, variantAttributes, selling_price,
+      brand_name, gift_info, shipping, warranty_duration, total_amount, total_discount, listing_id='',
+      product_id, variant_id='', itemType, catalogId: catalog_id, discount, mrp, variantAttributes, selling_price,
     } = item;
     return (
       <div key={item_id} className={`${styles['mb-20']} ${styles['box']}`}>
@@ -151,7 +151,7 @@ class CartItem extends React.Component {
               <div
                 className={`${styles['flex-center']} ${styles['justify-center']} ${styles['pb-15']} ${styles['card-box-inn-img']}`}
               >
-                <Link route={`/${language}/pdp/${name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/c/${catalogId}/p/${product_id}/l/${listing_id}/v/${variant_id ? `${variant_id}` : ''}`}>
+                <Link route={`/${language}/pdp/${name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${listing_id}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`}>
                   <a className={`${styles['width100']} ${styles['ht-100P']}`}>
                     <img className={styles.img} alt={img} src={`${constants.mediaDomain}/${img}`} />
                   </a>
@@ -172,7 +172,7 @@ class CartItem extends React.Component {
                 </Col>
                 <Col md={8} sm={8} className={`${styles['landscape-cart-details']} ${styles['pr-0']}`}>
                   <h4 className={`${styles['fontW600']} ${styles['m-fs-14']} ${styles['fs-16']}`}>
-                  <Link route={`/${language}/pdp/${name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/c/${catalogId}/p/${product_id}/l/${listing_id}/v/${variant_id ? `${variant_id}` : ''}`}>
+                  <Link route={`/${language}/pdp/${name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${listing_id}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`}>
                       <a className={`${styles['width100']} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
                         {name}
                       </a>

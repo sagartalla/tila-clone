@@ -52,13 +52,14 @@ class CompareWidget extends React.Component {
             <div style={{ width: `${cmpData.products.length * 160}px` }} className={`${styles['flex-center']} ${styles['justify-around']} ${styles['ht-210']}`}>
               {cmpData.products.map((data) => {
                 const { catalogObj = {}, displayName } = data;
+                const { catalog_id='', product_id, variant_id, listing_id=''} = catalogObj;
                 return (
                   <div className={styles.item} key={data.productId}>
                     <div className={styles['item-image']}>
                       <img className={styles.image} src={data.src} alt="" />
                     </div>
                     <div className={styles['item-label']}>
-                      <a title={data.displayName} className={`${styles.ellips} ${styles.width100} ${styles['black-color']} ${styles['fs-12']}`} href={`/${language}/pdp/${displayName.replace(/\//g, '').split(' ').join('-').toLowerCase()}/c/${catalogObj.catalog_id}/p/${catalogObj.product_id}/l/${catalogObj.listing_id}/v/${catalogObj.variant_id ? `${catalogObj.variant_id}` : ''}`}>
+                      <a title={data.displayName} className={`${styles.ellips} ${styles.width100} ${styles['black-color']} ${styles['fs-12']}`} href={`/${language}/pdp/${displayName.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${listing_id}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`}>
                         {data.displayName}
                       </a>
                     </div>
