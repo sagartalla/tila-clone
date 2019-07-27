@@ -77,14 +77,14 @@ const e = [
   },
 
   {
-    url: `/${lang}/srp/home-applaince?categoryTree=true&isListed=false&sid=932,935`,
+    url: `/${lang}/search?q=Home Appliances`,
     title: FOOTER_PAGE.HOME_APLLIANCES,
   },
 ];
 
 const l = [
   {
-    url: `/${lang}/search?q=Beauty%20&%20Personal%20Care&language=en&isListed=false`,
+    url: `/${lang}/search?q=health%20and%20beauty`,
     title: FOOTER_PAGE.BEAUTY_AND_PERSONAL_CARE,
   },
 
@@ -94,8 +94,8 @@ const l = [
   },
 
   {
-    url: `/${lang}/search?q=Home%20Appliances&language=en&isListed=false`,
-    title: FOOTER_PAGE.HOME_APLLIANCES,
+    url: `/${lang}/search?q=dining`,
+    title: FOOTER_PAGE.KITCHEN_AND_DINING,
   },
   {
     url: `/${lang}/search?q=Home%20Decor&language=en&isListed=false`,
