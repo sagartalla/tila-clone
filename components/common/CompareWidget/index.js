@@ -58,7 +58,7 @@ class CompareWidget extends React.Component {
                       <img className={styles.image} src={data.src} alt="" />
                     </div>
                     <div className={styles['item-label']}>
-                      <a title={data.displayName} className={`${styles.ellips} ${styles.width100} ${styles['black-color']} ${styles['fs-12']}`} href={`/${language}/pdp/${displayName.split(' ').join('-').toLowerCase()}/c/${catalogObj.catalog_id}/p/${catalogObj.product_id}/l/${catalogObj.listing_id}/v/${catalogObj.variant_id ? `${catalogObj.variant_id}` : ''}`}>
+                      <a title={data.displayName} className={`${styles.ellips} ${styles.width100} ${styles['black-color']} ${styles['fs-12']}`} href={`/${language}/pdp/${displayName.replace(/\//g, '').split(' ').join('-').toLowerCase()}/c/${catalogObj.catalog_id}/p/${catalogObj.product_id}/l/${catalogObj.listing_id}/v/${catalogObj.variant_id ? `${catalogObj.variant_id}` : ''}`}>
                         {data.displayName}
                       </a>
                     </div>

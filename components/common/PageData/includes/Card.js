@@ -19,7 +19,7 @@ const language = cookies.get('language') || 'en';
 const country = cookies.get('country') || 'SAU';
 
 const routeChange = (product_id, catalog_id, name, listing_id, variant_id) => {
-  Router.pushRoute(`/${language}/pdp/${name.split(' ').join('-').toLowerCase()}/c/${catalog_id}/p/${product_id}/l/${listing_id}/v/${variant_id ? `${variant_id}` : ''}`);
+  Router.pushRoute(`/${language}/pdp/${name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/c/${catalog_id}/p/${product_id}/l/${listing_id}/v/${variant_id ? `${variant_id}` : ''}`);
 }
 
 const Card = ({ listing, isLoggedIn, addToCart }) => (
