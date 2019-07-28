@@ -53,7 +53,10 @@ const getCartResults = (store) => {
           variantAttributes: listingInfo.variant_id && item.product_details && item.product_details.product_details_vo.cached_variant[listingInfo.variant_id].attribute_map ?
             Object.values(item.product_details.product_details_vo.cached_variant[listingInfo.variant_id].attribute_map)
               .filter(attr => attr.visible) : [],
+          tila_care_policy: listingInfo.tila_care_policy,
+          policies_applied: item.policies_applied,
         };
+        console.log('tila_care_policy', listingInfo.tila_care_policy);
       });
     }
 

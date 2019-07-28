@@ -2,8 +2,9 @@ import React from 'react';
 import { Row, Col, PanelGroup, Panel } from 'react-bootstrap';
 import moment from 'moment';
 import Cookie from 'universal-cookie';
-import Button from '../../common/CommonButton';
-
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { actionCreators } from '../../../store/cart';
 import { Link } from '../../../routes';
 import Warranty from '../../Product/includes/Warranty';
 import CartStepper from './CartStepper';
@@ -17,6 +18,7 @@ import main_en from '../../../layout/main/main_en.styl';
 import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from '../cart_en.styl';
 import styles_ar from '../cart_ar.styl';
+/* eslint-disable */
 
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
@@ -118,15 +120,24 @@ class CartItem extends React.Component {
   addNewWarranty = (e) => {
     const { showWarrantyOptions } = this.state;
     const warrantyIndex = Number(e.target.getAttribute('data-index'));
+  const warrantyName = e.target.getAttribute('data-name');    
     this.setState({
       warrantyIndex,
+      warrantyName,
       showWarrantyDetails: true,
     });
   }
 
   warrantyChange = (e) => {
-    const warrantyPrice = Number(e.target.getAttribute('data-cur'));
-    console.log('warrantyPrice', warrantyPrice);
+    const policyId = e.target.getAttribute('data_policy_id');
+    const policyName = e.target.getAttribute('policy_name');
+    const { item } = this.props;
+    this.props.addToCartAndFetch({
+      listing_id: item.listing_id,
+      product_id: item.product_id,
+      policy_id: policyId,
+      policy_name: policyName,
+    });
   }
 
   deleteWarranty = () => {
@@ -145,12 +156,13 @@ class CartItem extends React.Component {
       removeCartItem,
       cartStepperInputHandler,
     } = this.props;
-    const { checked, showWarrantyOptions, warrantyIndex, showWarrantyDetails, hideEdit } = this.state;
+    const { checked, showWarrantyOptions, warrantyIndex, showWarrantyDetails, hideEdit, warrantyName } = this.state;
     const {
       item_id, img, name, offer_price, cur, quantity, max_limit, inventory, offerDiscounts,
       brand_name, gift_info, shipping, warranty_duration, total_amount, total_discount, listing_id,
-      product_id, variant_id, itemType, catalogId, discount, mrp, variantAttributes, selling_price,
+      product_id, variant_id, itemType, catalogId, discount, mrp, variantAttributes, selling_price, policies_applied, tila_care_policy,
     } = item;
+    console.log('warrantyName', warrantyName);
     return (
       <div key={item_id} className={`${styles['mb-20']} ${styles['box']}`}>
         {
@@ -361,36 +373,46 @@ class CartItem extends React.Component {
                     <div>
                       {warrantyDetails.map((value, index) => (
                         <React.Fragment>
-                        <div className={`${styles['panel-body-border']} ${styles['flex-center']} ${styles['justify-between']}`}>
+                       {value === 'Damage Protection' && tila_care_policy && tila_care_policy.damage_protection !== null &&    
+                        <div className={`${styles['panel-body-border']} ${styles['flex-center']} ${styles['justify-between']}`}>                                         
                         <div className={`${styles['flex-center']}`}>
-                         <SVGComponent clsName={`${styles['warranty-icon']}`} src={value === 'Damage Protection' ? `icons/common-icon/damage-protection` : `icons/common-icon/extended-protection` }/>
-                        <div className={`${styles['warranty-values']} ${styles.fontW600}`}>{value}</div>
-                        <div className={`${styles['text-blue']} ${styles['fs-12']}`}>{CART_PAGE.VIEW_T_AND_C}</div>
+                         <SVGComponent clsName={`${styles['warranty-icon']}`} src={`icons/common-icon/damage-protection`}/>
+                         <div className={`${styles['warranty-values']} ${styles.fontW600}`}>{value}</div>
+                         <div className={`${styles['text-blue']} ${styles['fs-12']}`}>{CART_PAGE.VIEW_T_AND_C}</div>
                         </div>
-                         {(warrantyIndex !== index || (!showWarrantyDetails)) &&
-                          <button data-index={index} className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['left-radius']} ${styles['add-warranty-btn']}`} onClick={this.addNewWarranty}> + Add </button>
-                      }
-                        </div>
+                         {(policies_applied.length === 0 && warrantyName !== 'Damage Protection') &&
+                            <button data-index={index} data-name='Damage Protection' className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['left-radius']} ${styles['add-warranty-btn']}`} onClick={this.addNewWarranty}> + Add </button>}
+                          </div>}
+                          {value === 'Extended Warranty' && tila_care_policy.extended_warranty && tila_care_policy.extended_warranty !== null && <div className={`${styles['panel-body-border']} ${styles['flex-center']} ${styles['justify-between']}`}>                                         
+                          <div className={`${styles['flex-center']}`}>
+                           <SVGComponent clsName={`${styles['warranty-icon']}`} src={`icons/common-icon/extended-protection`}/>
+                           <div className={`${styles['warranty-values']} ${styles.fontW600}`}>{value}</div>
+                           <div className={`${styles['text-blue']} ${styles['fs-12']}`}>{CART_PAGE.VIEW_T_AND_C}</div>
+                          </div>
+                           {(policies_applied.length === 0 && warrantyName !== 'Extended Warranty') &&
+                            <button data-index={index} data-name='Extended Warranty' className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['left-radius']} ${styles['add-warranty-btn']}`} onClick={this.addNewWarranty}> + Add </button>}
+                            </div>}
                          <div className={`${styles['ml-65']}`}>
-                         {warrantyIndex === index && showWarrantyDetails ?
+                         {value === 'Damage Protection' ?
+                        tila_care_policy && tila_care_policy.damage_protection && tila_care_policy.damage_protection.length > 0 && tila_care_policy.damage_protection.map(val => (                         
+                         showWarrantyDetails && warrantyName === 'Damage Protection' &&
                          <React.Fragment>
-                         <div>{CART_PAGE.DURATION}: 1 year</div>                         
+                         <div>{CART_PAGE.DURATION}: {val.duration} {val.duration_unit}</div>                         
                          <div className={`${styles['warranty-margin']}`}>
-                      {[100, 200, 300].map(s => (
                         <div
                         >
                           <input
                             type="radio"
                             name="warranty_check"
+                            policy_name={val.policy_name}
+                            data_policy_id={val.policy_id}
                             className={`${styles['radio-btn']}`}
-                            data-cur={100}
                             onChange={this.warrantyChange}
                           />
-                          <label className={`${styles['fs-12']} ${styles['pl-10']} ${styles['pr-10']}`}>{s}</label>
+                          <label className={`${styles['fs-12']} ${styles['pl-10']} ${styles['pr-10']}`}>{val.duration} {val.duration_unit}</label>
                           <span className={`${styles['warranty-radio-button']}`}></span>
-                          <label className={`${styles['fs-12']} ${styles['pl-10']}`}>{s}</label>                      
+                          <label className={`${styles['fs-12']} ${styles['pl-10']}`}>{val.cost.display_value} {val.cost.currency_code}</label>                      
                         </div>
-                      ))}
                       </div>
                       <div className={`${styles.flex} ${styles['m-5']}`}>
                       {(!hideEdit) &&
@@ -402,7 +424,38 @@ class CartItem extends React.Component {
                       <div className={`${styles['text-blue']} ${styles.pointer} ${styles['pl-10']}`} onClick={this.deleteWarranty}>{DELIVERY_ADDR_PAGE.DELETE}</div>
                       </div>
                       </React.Fragment>
-                      : ''}</div>
+                      )) : tila_care_policy && tila_care_policy.extended_warranty && tila_care_policy.extended_warranty.length > 0 && tila_care_policy.extended_warranty.map(val => (                         
+                        showWarrantyDetails && warrantyName === 'Extended Warranty' &&
+                        <React.Fragment>
+                        <div>{CART_PAGE.DURATION}: {val.duration} {val.duration_unit}</div>                         
+                        <div className={`${styles['warranty-margin']}`}>
+                       <div
+                       >
+                         <input
+                           type="radio"
+                           name="warranty"
+                           policy_name={val.policy_name}
+                           data_policy_id={val.policy_id}
+                           className={`${styles['radio-btn']}`}
+                           data-cur={100}
+                           onChange={this.warrantyChange}
+                         />
+                         <label className={`${styles['fs-12']} ${styles['pl-10']} ${styles['pr-10']}`}>{val.duration} {val.duration_unit}</label>
+                         <span className={`${styles['warranty-radio-button']}`}></span>
+                         <label className={`${styles['fs-12']} ${styles['pl-10']}`}>{val.cost.display_value} {val.cost.currency_code}</label>                      
+                       </div>
+                     </div>
+                     <div className={`${styles.flex} ${styles['m-5']}`}>
+                     {(!hideEdit) &&
+                     <React.Fragment>                
+                     <div className={`${styles['text-blue']} ${styles.pointer} ${styles['pr-10']}`} onClick={this.editWarranty}>{DELIVERY_ADDR_PAGE.EDIT}</div>
+                     <span className={`${styles['warranty-radio-button']}`}></span>
+                     </React.Fragment> 
+                     }
+                     <div className={`${styles['text-blue']} ${styles.pointer} ${styles['pl-10']}`} onClick={this.deleteWarranty}>{DELIVERY_ADDR_PAGE.DELETE}</div>
+                     </div>
+                     </React.Fragment>
+                     ))}</div>
                       </React.Fragment>
                       ))}
                     </div>
@@ -445,4 +498,13 @@ class CartItem extends React.Component {
   }
 }
 
-export default CartItem;
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      addToCartAndFetch: actionCreators.addToCartAndFetch,
+    },
+    dispatch,
+  );
+
+export default connect(null, mapDispatchToProps)(CartItem);
