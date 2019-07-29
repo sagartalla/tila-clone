@@ -125,8 +125,8 @@ class CartItem extends React.Component {
     const { checked } = this.state;
     const {
       item_id, img, name, offer_price, cur, quantity, max_limit, inventory, offerDiscounts,
-      brand_name, gift_info, shipping, warranty_duration, total_amount, total_discount, listing_id='',
-      product_id, variant_id='', itemType, catalogId, discount, mrp, variantAttributes, selling_price,
+      brand_name, gift_info, shipping, warranty_duration, total_amount, total_discount, listing_id,
+      product_id, variant_id, itemType, catalogId, discount, mrp, variantAttributes, selling_price,
     } = item;
     return (
       <div key={item_id} className={`${styles['mb-20']} ${styles['box']}`}>

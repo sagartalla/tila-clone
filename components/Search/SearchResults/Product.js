@@ -261,7 +261,7 @@ class Product extends Component {
       itemNum,
       media,
       isQuickView,
-      listing_id=''
+      listing_id
     } = this.props;
     const { src } = this.state;
     const { showNotify, selectedIndex, showLoader } = this.state;

@@ -83,7 +83,7 @@ class OrderReturnExchange extends Component {
     } = this.props;
     const { orderId, selectedItem } = orderIssue;
     const { img, name, item = {} } = selectedItem || {};
-    const { variant_id='', variant_info = {}, listing_id='' } = item;
+    const { variant_id='', variant_info = {}, listing_id } = item;
     return (
       <div>
         <Grid>
@@ -114,14 +114,14 @@ class OrderReturnExchange extends Component {
                     <Col md={6}>
                       <div className={styles['product-wrap']}>
                         <Col md={2}>
-                          <Link route={`/${language}/pdp/${name && name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/c/${variant_info.catalog_id}/p/${variant_info.product_id}/l/${listing_id}/v/${variant_id ? `${variant_id}` : ''}`}>
+                          <Link route={`/${language}/pdp/${name && name.split(' ').join('-').toLowerCase()}/c/${variant_info.catalog_id}/p/${variant_info.product_id}/l/${listing_id}/v/${variant_id ? `${variant_id}` : ''}`}>
                             <a target="_blank">
                               <img src={`${constants.mediaDomain}/${img}`} alt="" />
                             </a>
                           </Link>
                         </Col>
                         <Col md={10}>
-                          <Link route={`/${language}/pdp/${name && name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/c/${variant_info.catalog_id}/p/${variant_info.product_id}/l/${listing_id}/v/${variant_id ? `${variant_id}` : ''}`}>
+                          <Link route={`/${language}/pdp/${name && name.split(' ').join('-').toLowerCase()}/c/${variant_info.catalog_id}/p/${variant_info.product_id}/l/${listing_id}/v/${variant_id ? `${variant_id}` : ''}`}>
                             <a target="_blank">
                               <h4 className={`${styles['fs-16']} ${styles['mt-0']} ${styles.fontW600} ${styles.pointer}`}>{name}</h4>
                             </a>
