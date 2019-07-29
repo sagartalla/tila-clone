@@ -129,7 +129,7 @@ const getCmpData = store => store.compareReducer.data.compareItems || {
   products: [],
 };
 
-const getCompareItemsCount = () => JSON.parse(localStorage.getItem('compare')) || {
+const getCompareItemsCount = () => () => JSON.parse(localStorage.getItem('compare')) || {
   products: [],
 };
 
