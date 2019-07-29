@@ -4,7 +4,9 @@ import withRedux from 'next-redux-wrapper';
 import Head from 'next/head';
 import makeStore from '../store';
 import lang from '../utils/language';
+import LoaderBarContext from '../components/helpers/context/loaderBarContext';
 import { languageDefinations } from '../utils/lang';
+import Base from './base';
 import Layout from '../layout/main';
 import Landing from '../components/Landing';
 import main_en from '../layout/main/main_en.styl';
@@ -15,7 +17,6 @@ import styles_ar from '../components/Product/product_ar.styl';
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const { SEO_CONTENT } = languageDefinations();
-const cookies = new Cookie();
 
 class LandingPage extends Base {
   pageName = 'HOME';
@@ -33,7 +34,6 @@ class LandingPage extends Base {
           <meta property="og:title" content={`${url.query.category} ${SEO_CONTENT.LANDING_H2_CONTENT} ${url.query.category} ${SEO_CONTENT.LANDING_H2}`} />
           <meta property="og:site_name" content="Tila" />
           <meta property="fb:app_id" content=" " />
-          <meta property="og:url" content={window.location.toString()} />
           <meta property="og:description" content={`${SEO_CONTENT.LANDING_META_CONTENT1}`} />
           <meta property="og:locale:locale" content="en_SA" />
           <meta property="og:locale:alternate" content="ar_SA" />
@@ -57,4 +57,4 @@ class LandingPage extends Base {
   }
 }
 
-export default React.memo(withRedux(makeStore, null, null)(LandingPage));
+export default withRedux(makeStore, null, null)(LandingPage);
