@@ -106,7 +106,7 @@ class PageData extends React.Component {
               {content.data[lang].banners.map(i => (
                 <div key={i.display_name}>
                   <a href={i.link}>
-                    <div className={`${styles.item} ${styles['slick-itm']}`} key={i.display_name}>
+                    <div className={`${styles['item']} ${styles['slick-itm']}`} key={i.display_name}>
                       <img src={i.img} alt={i.display_name} />
                     </div>
                   </a>
@@ -121,17 +121,18 @@ class PageData extends React.Component {
             <h3>{content.data[lang].title}</h3>
             <Slider
               dots
+              autoplay
               asNavFor={sliderTBS}
               ref={(slider) => { sliderTBS = slider; }}
               lazyLoad={false}
-              className={styles['ht-100per']}
+              className={styles['main-slider-part']}
               customPaging={i => <span className={`${styles['fs-10']}`}>{content.data[lang].banners[i].display_name}</span>}
             >
               {content.data[lang].banners.map(i => (
                 <div key={i.display_name}>
                   <a href={i.link}>
-                    <div className="item" key={i.display_name}>
-                      <img src={i.img} height={i.config.height} width={i.config.width} alt={i.display_name} />
+                    <div className={`${styles['item']} ${styles['slick-itm']}`} key={i.display_name}>
+                      <img src={i.img} alt={i.display_name} />
                     </div>
                   </a>
                 </div>
@@ -188,16 +189,18 @@ class PageData extends React.Component {
       case 'BT7': {
         const { banners, title } = content.data[lang];
         return (
-          <Row>
+          <Row className={styles['banner-prt-main']}>
             {/* {title &&
               <Col xs={12} md={12} sm={12}><h2 className={`${styles['fs-20']} ${styles.fontW600} ${styles['text-uppercase']} ${styles['mb-5']} ${styles['m-0']}`}>{title}</h2></Col>} */}
             {banners.length > 0 &&
               banners.map(banner => (
-                <Col xs={12 / banners.length} md={12 / banners.length} sm={12 / banners.length}>
-                  <a href={banner.link} target="_blank">
-                    <img src={banner.img} className={styles['border-radius4']} width="100%" alt={banner.display_name} />
-                  </a>
-                </Col>
+                <div className={styles['banner-inn-prt']} style={{ width: `${100 / banners.length}%` }}>
+                  <div className={styles['sub-banr-img']}>
+                    <a href={banner.link} target="_blank">
+                      <img src={banner.img} className={`${styles['border-radius4']} ${styles['inside-bnr']}`} alt={banner.display_name} />
+                    </a>
+                  </div>
+                </div>
               ))}
           </Row>
         );

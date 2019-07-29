@@ -68,7 +68,7 @@ class Menu extends Component {
               :
               null
             }
-            <Link route={`/${language}/search/${childItem.displayName.split(' ').join('-').toLowerCase()}?categoryTree=true&isListed=false&sid=${this.props.parentID},${childItem.id}`}>
+            <Link route={`/${language}/clp/${childItem.displayName.replace(/\//g, '').split(' ').join('-').toLowerCase()}?categoryTree=true&isListed=false&sid=${this.props.parentID},${childItem.id}`}>
               <a className={`${styles['level-1-item']} ${depth === 1 ? styles['fontW600'] : {}}`} style={{color: `${itemColor}`}}>{childItem.displayName}</a>
             </Link>
           </span>

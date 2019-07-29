@@ -44,6 +44,7 @@ class Brand extends Base {
       query: brandValue,
       language: language || 'en',
       pageNum: 1,
+      choosenCategoryName: brandValue,
     };
     if (shippingCity) {
       searchOptions.shippingDetails = {
