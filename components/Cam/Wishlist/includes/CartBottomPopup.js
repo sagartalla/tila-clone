@@ -47,7 +47,7 @@ class CartBottomPopup extends Component {
           <Slider {...settings} className={styles['cart-wishlist-popup-inn']}>
             {
               data.length > 0 && data.map((item, i) => {
-                const { product_id, wishlist_id, listing_id='', name, img, price, cur, inventory_count, buttonValue, variant_id='', catalog_id, itemType } = item;
+                const { product_id, wishlist_id, listing_id, name, img, price, cur, inventory_count, buttonValue, variant_id, catalog_id, itemType } = item;
                 return (
                   <div key={i} className={`${styles['item']} ${styles['flex']} ${styles['flex-colum']}`}>
                   <Link route={`/${language}/pdp/${name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/c/${catalog_id}/p/${product_id}/l/${listing_id}/v/${variant_id ? `${variant_id}` : ''}`}>

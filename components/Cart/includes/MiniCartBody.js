@@ -48,7 +48,7 @@ const MiniCartBody = (props) => {
           {
             items.map((item, index) => {
               const { item_id, img, product_id, name, offer_price, cur,
-                variant_id='', catalogId, shipping, listing_id='' } = item;
+                variant_id, catalogId, shipping, listing_id } = item;
               return (
                 <div key={item_id} className={`${styles['flex']} ${styles['pt-15']} ${styles['pb-15']} ${styles['border-b']} ${styles['min-items-list']}`}>
                   <Col md={2} sm={2} xs={2} className={`${styles['pl-0']} ${styles['pr-0']}`}>
