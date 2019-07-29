@@ -308,11 +308,7 @@ class Product extends Component {
           className={`${styles['product-items-main']} ${styles.relative} ${styles['p-0']} ${selectedProduct ? styles['active-product'] : ''}`}
           onClick={() => this.routeChange(productId, variantId, catalogId, itemtype, index, pageNum)}
         >
-<<<<<<< HEAD
-          <Link route={`/${language}/pdp/${displayName ? displayName.split(' ').join('-').toLowerCase(): ''}/c/${catalogId}/p/${productId}/l/${listing_id}/v/${variants.length > 0 && variants[selectedIndex].variantId ? `${variants[selectedIndex].variantId}` : ''}`}>
-=======
           <Link route={`/${language}/pdp/${displayName.replace(/\//g, '').split(' ').join('-').toLowerCase()}/c/${catalogId}/p/${productId}/l/${listing_id}/v/${variants.length > 0 && variants[selectedIndex].variantId ? `${variants[selectedIndex].variantId}` : ''}`}>
->>>>>>> 3d3d41727ef24585c9471bfce8f98dcb9f638e97
             <a target="_blank">
               <div className={`${styles['product-items']}`} onMouseEnter={this.setImg} onMouseLeave={this.leaveImg}>
                 {showLoader ?
