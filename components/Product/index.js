@@ -166,7 +166,7 @@ const getProductComponent = (isPreview, taskCode) => {
 
     handleScroll(event) {
       const scrollTop = event.currentTarget.pageYOffset;
-      const detailsRect = this.detailsRef.current && this.detailsRef.current.getBoundingClientRect();
+      const detailsRect = this.detailsRef.current && this.detailsRef.current.getBoundingClientRect() || {};
       const bottomRefRect = this.bottomRef.current && this.bottomRef.current.getBoundingClientRect() || {};
       const { isSearchPreview } = this.props;
       if (!isSearchPreview && bottomRefRect.top <= window.innerHeight && this.state.stickyElements.details !== 'stateBottom') {

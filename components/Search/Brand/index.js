@@ -51,10 +51,10 @@ const Brand = ({ pageData }) => {
   const { page_content, id_attribute } = pageData;
   return (
   <React.Fragment>
-    <div>
+    {/* <div>
       <span className={`${styles['fs-30']} ${styles.fontW600} ${styles['text-capitalize']}`}>{id_attribute}</span>
       <span className={`${styles['fs-30']} ${styles.fontW300}`}>&nbsp;Store</span>
-    </div>
+    </div> */}
     {page_content && page_content.map(content => <PageData key={content} content={content} />)}
     {/* {
         if (!item.visible) {
