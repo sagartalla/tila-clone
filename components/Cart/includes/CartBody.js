@@ -77,7 +77,7 @@ const CartBody = ({
         </Col>
       </Row>
       <Row className={styles['mr-0']}>
-        <Col md={`${items.length > 0 ? 9 : 12}`} sm={12} xs={12} className={styles['pr-5']}>
+        <Col md={items.length > 0 ? 9 : 12} sm={12} xs={12} className={styles['pr-5']}>
           <div>
             {items.map(item => (
               <CartItem

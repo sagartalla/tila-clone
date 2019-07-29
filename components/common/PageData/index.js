@@ -89,10 +89,32 @@ class PageData extends React.Component {
   // breadcrums are pending...
   getContent = () => {
     const { content } = this.props;
-    if (content.layout_id === 'CBT5b') {
-      console.log('cnjk', content);
-    }
     switch (content.layout_id) {
+      case 'CT1a':
+        return (
+          <div className={`${styles['mb-40']} top-banner-slider`}>
+            <h3>{content.data[lang].title}</h3>
+            <Slider
+              dots
+              autoplay
+              asNavFor={sliderTBS}
+              ref={(slider) => { sliderTBS = slider; }}
+              lazyLoad={false}
+              className={styles['main-slider-part']}
+              customPaging={i => <span className={`${styles['fs-10']}`}>{content.data[lang].banners[i].display_name}</span>}
+            >
+              {content.data[lang].banners.map(i => (
+                <div key={i.display_name}>
+                  <a href={i.link}>
+                    <div className={`${styles.item} ${styles['slick-itm']}`} key={i.display_name}>
+                      <img src={i.img} alt={i.display_name} />
+                    </div>
+                  </a>
+                </div>
+              ))}
+            </Slider>
+          </div>
+        );
       case 'CT1':
         return (
           <div className={`${styles['mb-40']} top-banner-slider`}>
@@ -151,7 +173,7 @@ class PageData extends React.Component {
                 {hal.map(i => (
                   <div className={styles.item} key={i}>
                     <a href={i.link}>
-                      <img src={i.img} />
+                      <img src={i.img} alt="" />
                     </a>
                     <span className={`${styles['fs-12']} ${styles['pt-10']} ${styles.flex} ${styles['justify-center']} ${styles['slider-elips']} ${styles['lne-ht1_2']}`}>{i.title}</span>
                   </div>
