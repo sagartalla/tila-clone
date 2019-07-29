@@ -99,19 +99,19 @@ const brandImages = {
     '#EF6079': [
       {
         value: 'Whey',
-        link: `/${lang}/search?q=Huawei%20Y5%20Lite`,
+        link: `/${lang}/brand/whey`,
       },
       {
         value: 'DavidOff',
-        link: `/${lang}/brand/DavidOff`,
+        link: `/${lang}/brand/davidoff`,
       },
       {
         value: 'Dermaroller',
-        link: `/${lang}/search?q=Huawei%20Y5%20Lite`,
+        link: `/${lang}/brand/dermarollere`,
       },
       {
         value: 'NYX',
-        link: `/${lang}/search?q=Huawei%20Y5%20Lite`,
+        link: `/${lang}/brand/nyx`,
       },
     ],
     '#888B8D': [
@@ -129,7 +129,7 @@ const brandImages = {
       },
       {
         value: 'JBW',
-        link: `/${lang}/search?q=Huawei%20Y5%20Lite`,
+        link: `/${lang}/brand/jbw`,
       },
     ],
   },
