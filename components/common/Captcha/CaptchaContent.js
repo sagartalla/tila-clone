@@ -29,12 +29,14 @@ const textObject = {
     <span className={`${styles['fs-12']} ${styles['pt-20']}`}>{PAYMENT_PAGE.DROP_THE_ANSWER_INTO_THE_BOX}</span>
   </div>,
   successtext:<span style={{color: '#99cc33'}} className={`${styles['fs-16']} ${styles['pt-20']}`}>&nbsp;{ORDER_PAGE.SUCCESS}</span>,
-  opentext:<span className={`${styles['fs-12']} ${styles['pt-20']}`}>{PAYMENT_PAGE.DROP_THE_ANSWER_INTO_THE_BOX}</span>
+  opentext:<span className={`${styles['fs-12']} ${styles['pt-20']}`}>{PAYMENT_PAGE.DROP_THE_ANSWER_INTO_THE_BOX}</span>,
+  tcText: <span>{PAYMENT_PAGE.COD_TC}</span>
 }
 const CaptchaContent = ({items,state,handleDrop,handleClick}) => {
   return (
     items
       ?
+      <div>
         <div className={`${styles['flx-spacebw-alignc']} ${styles['fw700']} ${styles['pt-30']} ${styles['pb-30']}`}>
             <div className={`${styles['pr-10']} ${styles['pb-20']}`}>
               {/* <ul className={`${styles['pl-0']} ${styles['m-0']} ${styles['cash-tab']}`}>
@@ -51,7 +53,7 @@ const CaptchaContent = ({items,state,handleDrop,handleClick}) => {
               <div className={`${styles['flex-center']} ${styles['captcha-icon-part']}`}>
                 {
                   items.images ? items.images.map((image) => {
-                    return <Box image={image} index={image.image_id} handleDrop={(id) => handleDrop(id)}/>
+                    return <Box image={image} index={image.image_id} handleDrop={(id) => handleDrop(id)} key={image.image_id}/>
                   }):
                 <div>
                   {PAYMENT_PAGE.LOADING_CAPTCHA}
@@ -64,8 +66,20 @@ const CaptchaContent = ({items,state,handleDrop,handleClick}) => {
             <Bin
             openBox={boxObject[state.openBox]}
             boxText={textObject[state.boxText]}
+            tcText={textObject['tcText']}
           />
          </div>
+          <div className={`${styles['terms']}`}>
+            <b>Terms and Conditions</b><br/><br/>
+              <div className={`${styles['terms-content']}`}>
+                Cash on Delivery will not be available if your order value exceeds 3000 SAR<br/><br/>
+
+                You are authorized Tila or its partners to collect, process, facilitate and remit payments and / or the Transaction Price electronically or through Cash on Delivery<br/><br/>
+
+                Cash on Delivery refunds will be processed to Tila Credit
+              </div>
+          </div>
+        </div>
       :
         null
   )

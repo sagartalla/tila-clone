@@ -107,7 +107,7 @@ class VariantsAndSimilarProducts extends Component {
       if(isSearchPreview) {
           this.props.getProduct(options);
           this.props.setProductId(pid);
-          window.open(`/${language}/pdp/${name.split(' ').join('-').toLowerCase()}/c/${variantsAndSimilarProducts.catalogId}/p/${pid}/l/${listing_id}/v/${variantId ? `${variantId}` : ''}`)
+          window.open(`/${language}/pdp/${name ? name.split(' ').join('-').toLowerCase(): ''}/c/${VariantsAndSimilarProducts.catalogId}/p/${pid}/l/${listing_id}/v/${variantId ? `${variantId}` : ''}`)
       } else {
         Router.pushRoute(`/${language}/pdp/${newQuery}`);
       }

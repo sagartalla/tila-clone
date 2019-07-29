@@ -196,7 +196,7 @@ class Product extends Component {
 
   routeChange(productId, variantId, catalogId, itemtype, index, pageNum) {
     this.itemNumberClick(index, pageNum);
-    // Router.pushRoute(`/${language}/pdp/${displayName.split(' ').join('-').toLowerCase()}/c/${catalogId}/p/${productId}/l/${listing_id}/v/${variants.length > 0 && variants[selectedIndex].variantId ? `${variants[selectedIndex].variantId}` : ''}`)
+    // Router.pushRoute(`/${language}/pdp/${displayName && displayName.split(' ').join('-').toLowerCase()}/c/${catalogId}/p/${productId}/l/${listing_id}/v/${variants.length > 0 && variants[selectedIndex].variantId ? `${variants[selectedIndex].variantId}` : ''}`)
   }
 
   preventDefaultClick(e) {
@@ -243,7 +243,7 @@ class Product extends Component {
       displayName,
       variants,
       productId,
-      variantId,
+      variantId='',
       catalogId,
       itemtype,
       currency,
@@ -261,7 +261,7 @@ class Product extends Component {
       itemNum,
       media,
       isQuickView,
-      listing_id
+      listing_id=''
     } = this.props;
     const { src } = this.state;
     const { showNotify, selectedIndex, showLoader } = this.state;
@@ -308,7 +308,7 @@ class Product extends Component {
           className={`${styles['product-items-main']} ${styles.relative} ${styles['p-0']} ${selectedProduct ? styles['active-product'] : ''}`}
           onClick={() => this.routeChange(productId, variantId, catalogId, itemtype, index, pageNum)}
         >
-          <Link route={`/${language}/pdp/${displayName.split(' ').join('-').toLowerCase()}/c/${catalogId}/p/${productId}/l/${listing_id}/v/${variants.length > 0 && variants[selectedIndex].variantId ? `${variants[selectedIndex].variantId}` : ''}`}>
+          <Link route={`/${language}/pdp/${displayName ? displayName.split(' ').join('-').toLowerCase(): ''}/c/${catalogId}/p/${productId}/l/${listing_id}/v/${variants.length > 0 && variants[selectedIndex].variantId ? `${variants[selectedIndex].variantId}` : ''}`}>
             <a target="_blank">
               <div className={`${styles['product-items']}`} onMouseEnter={this.setImg} onMouseLeave={this.leaveImg}>
                 {showLoader ?
