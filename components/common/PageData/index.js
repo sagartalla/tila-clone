@@ -90,7 +90,8 @@ class PageData extends React.Component {
   getContent = () => {
     const { content } = this.props;
     switch (content.layout_id) {
-      case 'BT2':
+      case 'CT1a':
+      case 'CT1':
         return (
           <div className={`${styles['mb-40']} top-banner-slider`}>
             <h3>{content.data[lang].title}</h3>
@@ -158,7 +159,9 @@ class PageData extends React.Component {
             </div>
           </div>
         );
-      case 'BT7': {
+      case 'BT3':
+      case 'BT4':
+      case 'BT2': {
         const { banners, title } = content.data[lang];
         return (
           <Row>

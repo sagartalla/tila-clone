@@ -65,7 +65,7 @@ class ActionBar extends Component {
 
   componentDidMount() {
     if (window.sessionStorage.getItem('TILuservisitcount') !== '1') {
-      this.props.displayLogin();
+      this.props.showLoginScreen();
     }
     this.props.getUserProfileInfo();
     this.props.getLoginInfo();

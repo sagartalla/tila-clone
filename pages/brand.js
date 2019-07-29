@@ -24,6 +24,7 @@ const cookies = new Cookies();
 
 const { SEO_CONTENT } = languageDefinations();
 
+let brandValue = '';
 
 class SearchPage extends Base {
   static async getInitialProps({
@@ -32,12 +33,15 @@ class SearchPage extends Base {
     const {
       country, language, brandName, facets,
     } = query;
+    if (brandName !== '<anonymous>') {
+      brandValue = brandName;
+    }
     const shippingData = req ? req.universalCookies.get('shippingInfo') : cookies.get('shippingInfo');
     const { city: shippingCity, country: shippingCountry } = shippingData || {};
     const searchOptions = {
       country: country || undefined,
       pageSize: 25,
-      query: brandName,
+      query: brandValue,
       language: language || 'en',
       pageNum: 1,
     };
@@ -48,11 +52,9 @@ class SearchPage extends Base {
       };
     }
 
-    // console.log("brand Name :", brandName);
-
     await Promise.all([
       store.dispatch(actionCreators.getSearchResults(searchOptions)),
-      store.dispatch(LandingactionCreators.getPage({ page: 'brandLandingPage', id: brandName })),
+      store.dispatch(LandingactionCreators.getPage({ page: 'brandLandingPage', id: brandValue })),
     ]);
     return { isServer };
   }
@@ -64,22 +66,22 @@ class SearchPage extends Base {
       <div>
         <SearchContext.Provider value="search">
           <Head>
-            <meta property="og:title" content={`${this.props.url.query} ${SEO_CONTENT.LANDING_H2_CONTENT} ${this.props.url.query} ${SEO_CONTENT.BRAND_H2_TITLE}`} />
+            <meta property="og:title" content={`${this.props.url.query.brandName} ${SEO_CONTENT.LANDING_H2_CONTENT} ${this.props.url.query.brandName} ${SEO_CONTENT.BRAND_H2_TITLE}`} />
             <meta property="og:site_name" content="Tila" />
             <meta property="fb:app_id" content=" " />
-            <meta property="og:url" content={window.location.toString()} />
-            <meta property="og:description" content={`${SEO_CONTENT.BRAND_META_CONTENT} ${this.props.url.query} ${SEO_CONTENT.BRAND_META_CONTENT2}`} />
+            {/* <meta property="og:url" content={window.location.toString()} /> */}
+            <meta property="og:description" content={`${SEO_CONTENT.BRAND_META_CONTENT} ${this.props.url.query.brandName} ${SEO_CONTENT.BRAND_META_CONTENT2}`} />
             <meta property="og:locale:locale" content="en_SA" />
             <meta property="og:locale:alternate" content="ar_SA" />
             <meta property="og:type" content="website" />
             <meta property="og:image" content=" logo image url" />
-            <meta name="description" content={`${SEO_CONTENT.BRAND_META_CONTENT} ${this.props.url.query} ${SEO_CONTENT.BRAND_META_CONTENT2}`} />
-            <title>{this.props.url.query} {SEO_CONTENT.LANDING_H2_CONTENT} {this.props.url.query} {SEO_CONTENT.BRAND_H2_TITLE}</title>
+            <meta name="description" content={`${SEO_CONTENT.BRAND_META_CONTENT} ${this.props.url.query.brandName} ${SEO_CONTENT.BRAND_META_CONTENT2}`} />
+            <title>{this.props.url.query.brandName} {SEO_CONTENT.LANDING_H2_CONTENT} {this.props.url.query.brandName} {SEO_CONTENT.BRAND_H2_TITLE}</title>
           </Head>
-          <h1 className={`${styles.display_none}`}>{this.props.url.query}</h1>
-          <h2 className={`${styles.display_none}`}>{SEO_CONTENT.BRAND_H2} {this.props.url.query}</h2>
+          <h1 className={`${styles.display_none}`}>{this.props.url.query.brandName}</h1>
+          <h2 className={`${styles.display_none}`}>{SEO_CONTENT.BRAND_H2} {this.props.url.query.brandName}</h2>
           <Layout>
-            <Search query={this.props.url.query} isBrandPage />
+            <Search query={this.props.url.query.brandName} loaderProps={this.props.loaderProps} isBrandPage />
           </Layout>
         </SearchContext.Provider>
       </div>
@@ -87,9 +89,9 @@ class SearchPage extends Base {
   }
 }
 
-const mapStateToProps = state => ({
-  allState: state,
-});
+// const mapStateToProps = state => ({
+//   allState: state,
+// });
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
@@ -101,4 +103,4 @@ const mapDispatchToProps = dispatch =>
     dispatch,
   );
 
-export default withRedux(makeStore, mapStateToProps, mapDispatchToProps)(SearchPage);
+export default withRedux(makeStore, null, null)(SearchPage);
