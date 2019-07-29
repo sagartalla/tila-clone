@@ -126,7 +126,7 @@ class LoginPage extends React.Component {
                   <input
                     type="text"
                     value={email}
-                    autoComplete={false}
+                    autoComplete="off"
                     className={styles['m-fs-16']}
                     onChange={this.onChangeField}
                     onBlur={this.handleValidation}
