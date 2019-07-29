@@ -34,8 +34,8 @@ const MiniWishlist = (props) => {
           {
             props.items.splice(0, 2).map((item, index) => {
                 const {
-                    wishlist_id, listing_id, brand_name, name, img, price, cur, inventory_count,
-                    wishlisted_price, mrp, variant_id, product_id, catalog_id, buttonValue,
+                    wishlist_id, listing_id='', brand_name, name, img, price, cur, inventory_count,
+                    wishlisted_price, mrp, variant_id='', product_id, catalog_id, buttonValue,
                   } = item;
               return (
                 <div key={wishlist_id} className={`${styles.flex} ${styles['pt-15']} ${styles['pb-15']} ${styles['border-b']} ${styles['min-items-list']}`}>

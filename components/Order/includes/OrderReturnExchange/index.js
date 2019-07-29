@@ -83,7 +83,7 @@ class OrderReturnExchange extends Component {
     } = this.props;
     const { orderId, selectedItem } = orderIssue;
     const { img, name, item = {} } = selectedItem || {};
-    const { variant_id, variant_info = {}, listing_id } = item;
+    const { variant_id='', variant_info = {}, listing_id='' } = item;
     return (
       <div>
         <Grid>
