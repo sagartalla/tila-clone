@@ -10,7 +10,7 @@ routes
   .add({ name: 'Cart', pattern: '/:language/cart', page: 'cart' })
   .add({ name: 'payment', pattern: '/:language/payment', page: 'payment' })
   .add({ name: 'thankyou', pattern: '/:language/thankyou/:orderId/:status(SUCCESSFUL|FAILED)', page: 'thankyou' })
-  .add({ name: 'landing', pattern: '/:language/landing/:category', page: 'landing' })
+  .add({ name: 'landing', pattern: '/:language/landing/:category', page: 'index' })
   .add({ name: 'srp', pattern: '/:language/srp/:category?/:subCategory?', page: 'search' })
   .add({ name: 'search', pattern: '/:language/search/:category?/:subCategory?', page: 'search' })
   .add({ name: 'compare', pattern: '/:language/compare', page: 'compare' })
