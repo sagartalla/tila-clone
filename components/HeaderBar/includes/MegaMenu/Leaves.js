@@ -48,7 +48,7 @@ class Leaves extends Component {
         {
           items.slice(0, maxRows).map(item => (item ? (
             <li key={item.id} className={`${styles['pt-5']} ${styles['pb-5']}`}>
-              <Link route={`/${language}/search/${item.displayName ? item.displayName.split(' ').join('-').toLowerCase(): ''}?categoryTree=true&isListed=false&sid=${parentID},${item.id}`}>
+              <Link route={`/${language}/search/${item.displayName.replace(/\//g, '').split(' ').join('-').toLowerCase()}?categoryTree=true&isListed=false&sid=${parentID},${item.id}`}>
                 <a className={`${styles['level-1-item']}`}>{item.displayName}</a>
               </Link>
             </li>
@@ -58,7 +58,7 @@ class Leaves extends Component {
           isMoreButtonRequired
           ?
             <li>
-              <Link route={`/${language}/search/${parent.displayName ? parent.displayName.split(' ').join('-').toLowerCase(): ''}?categoryTree=true&isListed=false&sid=${this.props.parentID}`}>
+              <Link route={`/${language}/search/${parent.displayName.replace(/\//g, '').split(' ').join('-').toLowerCase()}?categoryTree=true&isListed=false&sid=${this.props.parentID}`}>
                 <a className={`${styles['level-1-item']}`}>
                   {HEADER_PAGE.VIEW_ALL}
                 </a>

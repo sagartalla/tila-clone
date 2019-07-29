@@ -14,6 +14,8 @@ class SkeletonLoader extends Component {
         return searchPlaceHolder
       case `/${language}/product`:
         return productPlaceHolder
+      case /pdp/.test(`/${language}/pdp`):
+        return productPlaceHolder
       case `/search`:
         return searchPlaceHolder
       case `/${language}/srp`:
