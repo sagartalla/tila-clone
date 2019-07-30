@@ -12,6 +12,7 @@ const url = {
   // sp: '/static/docs/sp.pdf#toolbar=0&navpanes=0&view=FitH',
   'privacy-policy': `https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/policies/user/privacy/${lang}/UserPrivacyPolicy.html`,
   'cookie-policy': `https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/policies/user/cookie/${lang}/UserCookiePolicies.html`,
+  'customer-delivery': `https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/policies/user/delivery/${lang}/UserShippingDelivery.html`,
 };
 
 const Policy = ({ query }) => (
