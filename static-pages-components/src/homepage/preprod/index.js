@@ -336,7 +336,7 @@ function SampleNextArrow(props) {
 }
 
 const b_d_b = {
-  Mobiles: `/${lang}/srp/${lang === 'en' ? 'mobiles' : 'الهواتف-النقالة'}/clp/mobiles`,
+  Mobiles: `/${lang}/clp/${lang === 'en' ? 'mobiles' : 'الهواتف-النقالة'}`,
   Clothing: `/${lang}/search?q=Clothing?isListed=false`,
   'Clothing Accessories': `/${lang}/search?q=Clothing&isListed=false`,
   Laptops: `/${lang}/clp/${lang === 'en' ? 'laptops' : 'أجهزة-الكمبيوتر-المحمولة'}`,
