@@ -172,6 +172,10 @@ class ActionBar extends Component {
     digitalData.page.pageInfo.pageType = 'Login Page';
     digitalData.page.pageInfo.pageName = 'Login Page';
 
+    if (!window.sessionStorage.getItem('TILuservisitcount')) {
+      window.sessionStorage.setItem('TILuservisitcount', 1);
+    }
+
     this.props.showLoginScreen();
     // const state = {};
     // state.loginClicked = true;

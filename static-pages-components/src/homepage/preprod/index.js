@@ -400,7 +400,7 @@ const b_d_b = {
   Armani: `/${lang}/search/sunglasses/?q=Emporio%20Armani sunglasses`,
   Summer: `/${lang}/search?q=Sunglasses`,
   Collections: `/${lang}/search?q=Designer%20Collections`,
-  Philips: `/${lang}/srp/${lang === 'en' ? 'Philips' : 'فيليبس'}/search/home-kitchen-appliances/?q=Philips`,
+  Philips: `/${lang}/srp/${lang === 'en' ? 'Philips' : 'فيليبس'}/search/?q=kitchen-appliances%20Philips`,
   Sunglasses_raybon: `/${lang}/srp/${lang === 'en' ? 'Sunglasses' : 'راي بان'}/search?q=rayban`,
   Apple: `/${lang}/srp/${lang === 'en' ? 'Apple' : 'ابل'}/search?q=Apple`,
   Adidas: `/${lang}/srp/${lang === 'en' ? 'Adidas' : 'أديداس'}/search/?q=Adidas`,

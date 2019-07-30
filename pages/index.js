@@ -65,7 +65,7 @@ class LandingPage extends Base {
         <h2 className={`${styles.display_none}`}>{SEO_CONTENT.HOME_H2_CONTENT}</h2>
         <LoaderBarContext.Provider value={loaderProps}>
           <Layout>
-            <Landing query={url.query} />
+            <Landing query={url.query} key={url.query.category}/>
           </Layout>
         </LoaderBarContext.Provider>
       </div>

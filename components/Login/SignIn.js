@@ -145,7 +145,8 @@ class SignIn extends Component {
     v2PreviousPage();
   }
 
-  login = () => {
+  login = (e) => {
+    e.preventDefault();
     const {
       first_name, last_name, password, rememberMe, promotional_notification, email,
     } = this.state;
@@ -232,6 +233,7 @@ class SignIn extends Component {
         </div>
         {mode !== 'SOCIAL_LOGIN' &&
         <div className={mode === 'EXISTING_USER' ? `${styles['login-show']}` : `${styles['signup-show']}`}>
+        <form onSubmit={this.login}>
           <div className={`${styles['fp-input']} ${styles['mt-30']}`}>
             <input
               name="password"
@@ -254,6 +256,7 @@ class SignIn extends Component {
             }
             <ShowHidePassword hide={hide} hideToggle={this.hideToggle} />
           </div>
+          </form>
         </div>}
         {mode === 'SOCIAL_LOGIN' &&
           <div className={`${styles['fp-input']} ${styles['mt-30']}`}>

@@ -14,13 +14,13 @@ class OrderPage extends Base {
   render() {
     const { url, loaderProps } = this.props;
     return (
-      <LoaderBarContext value={loaderProps}>
+      <LoaderBarContext.Provider value={loaderProps}>
         <Layout>
           <NoSSR>
             <Order query={url.query} />
           </NoSSR>
         </Layout>
-      </LoaderBarContext>
+      </LoaderBarContext.Provider>
 
     );
   }

@@ -1,4 +1,5 @@
 import Base, { baseActions } from './base';
+import Router from 'next/router';
 
 class HomeRedirect extends Base {
   static async getInitialProps({ query, res }) {
