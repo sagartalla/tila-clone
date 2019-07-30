@@ -21,7 +21,7 @@ import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from '../product_en.styl';
 import styles_ar from '../product_ar.styl';
 
-const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
 const cookies = new Cookies();
 const language = cookies.get('language') || 'en';
@@ -71,6 +71,12 @@ class Display extends Component {
     }
   }
 
+  pauseVideo = () => {
+    const { product_id } = this.props;
+    const videos = Object.values(document.getElementsByClassName(`V_${product_id}`));
+    videos.map(video => video.stop());
+  }
+
   render() {
     const {
       imgs, extraOffers, breadcrums, isWishlisted, product_id,
@@ -99,18 +105,25 @@ class Display extends Component {
             ref={slider => (this.slider1 = slider)}
             lazyLoad
             className={`${styles['ht-100per']} ${styles.slick}`}
+            beforeChange={this.pauseVideo}
           >
             {imgs && imgs.map(({ url, type }) => (
               <div className={styles['selected-item-wrap']} key={url}>
-                {type === 'VIDEO' ?
-                  <iframe
-                    title={product_id}
-                    width="100%"
-                    height="100%"
-                    src={url}
-                  />
+                {type !== 'IMAGE' ?
+                  type === 'VIDEO' ?
+                    <video className={`V_${product_id}`} width="100%" height="100%" controls>
+                      <source src={`${constants.mediaDomain}/${url}`} type="video/mp4" />
+                      <source src={`${constants.mediaDomain}/${url}`} type="video/ogg" />
+                      <track />
+                    </video> :
+                    <iframe
+                      title={product_id}
+                      width="100%"
+                      height="100%"
+                      src={url}
+                    />
                   :
-                  <img src={`${constants.mediaDomain}/${url}`} alt="" />
+                    <img src={`${constants.mediaDomain}/${url}`} alt="" />
                 }
               </div>
             ))}
@@ -129,7 +142,7 @@ class Display extends Component {
             >
               {imgs && imgs.map(({ url, type }) => (
                 <div className={styles['carousel-item-wrap']} key={url}>
-                  {type !== 'VIDEO' ?
+                  {type === 'IMAGE' ?
                     <img src={`${constants.mediaDomain}/${url}`} alt="" /> :
                     <SVGComponent src="icons/play_video" />
                   }
@@ -177,7 +190,7 @@ Display.propTypes = {
 const mapStateToProps = store => ({
   loader: selectors.getLoader(store),
   isLoggedIn: authSelectors.getLoggedInStatus(store),
-})
+});
 
 const mapDispatchToProps = dispatch => bindActionCreators(
   {
