@@ -1,4 +1,8 @@
 'use strict'
+
+if(process.env.npm_package_config_ENV) {
+  process.env.ENV = process.env.npm_package_config_ENV;
+}
 /**
  * New Relic agent configuration.
  *
@@ -9,7 +13,7 @@ exports.config = {
   /**
    * Array of application names.
    */
-  app_name: ['storefront node'],
+  app_name: ['storefront-' + process.env.ENV],
   /**
    * Your New Relic license key.
    */
