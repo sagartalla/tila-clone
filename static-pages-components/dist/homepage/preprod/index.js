@@ -312,7 +312,7 @@ const b_d_b = {
   Clothing: `/${lang}/search?q=Clothing?isListed=false`,
   'Clothing Accessories': `/${lang}/search?q=Clothing&isListed=false`,
   Laptops: `/${lang}/clp/${lang === 'en' ? 'laptops' : 'أجهزة-الكمبيوتر-المحمولة'}`,
-  Memory: `/${lang}/clp/${lang === 'en' ? 'Memory' : 'أجهزة التخزين'}`,
+  Memory: `/${lang}/clp/${lang === 'en' ? 'storage devices' : 'أجهزة التخزين'}`,
   Cameras: `/${lang}/clp/${lang === 'en' ? 'camera' : 'الة-تصوير'}`,
   Televisions: `/${lang}/clp/${lang === 'en' ? 'televisions' : 'التلفزيونات'}`,
   'Mobile Accessories': `/${lang}/clp/${lang === 'en' ? 'mobile-accessories' : 'ملحقات-الهاتف-المحمول'}`,
