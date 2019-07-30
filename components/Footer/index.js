@@ -111,22 +111,22 @@ const l = [
 
 const t = [
   {
-    url: `/${lang}/search?q=apple&language=en&isListed=false`,
+    url: `/${lang}/brand/apple`,
     title: '/static/img/bg-img/Apple.png',
   },
 
   {
-    url: `/${lang}/search?q=baseus&language=en&isListed=false`,
+    url: `/${lang}/brand/baseus`,
     title: '/static/img/bg-img/Baseus.png',
   },
 
   {
-    url: `/${lang}/search?q=ray%20ban&language=en&isListed=false`,
+    url: `/${lang}/brand/ray%20ban`,
     title: '/static/img/bg-img/RayBan.png',
   },
 
   {
-    url: `/${lang}/search?q=fossil&language=en&isListed=false`,
+    url: `/${lang}/brand/fossil`,
     title: '/static/img/bg-img/Fossil.png',
   },
 ];
@@ -300,18 +300,18 @@ const FooterBar = props => (
       <Grid>
         <div className={styles['footer-social-list']}>
             <div className={styles['ipad-pr-0']}>
-              <h4 className={`${styles.fontW600} ${styles['fs-16']} ${styles['black-color']}`}>{FOOTER_PAGE.COMPANY}</h4>
+              <h4 className={`${styles.fontW600} ${styles['fs-16']} ${styles['black-color']}`}>{FOOTER_PAGE.TILA}</h4>
               <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
-                <li>{FOOTER_PAGE.ABOUT_US}</li>
-                <li>{FOOTER_PAGE.CORE_VALUES}</li>
-                <li>{FOOTER_PAGE.MISSION}</li>
-                <li>{FOOTER_PAGE.IN_NEWS}</li>
-                <li>{FOOTER_PAGE.CAREERS}</li>
-                <li>{FOOTER_PAGE.CONTACT_US}</li>
+                <li>{FOOTER_PAGE.WHO_WE_ARE}</li>
+                <li>{FOOTER_PAGE.OUR_VALUES}</li>
+                <li>{FOOTER_PAGE.OUR_MISSION}</li>
+                <li>{FOOTER_PAGE.PRESS_REALESES}</li>
+                <li>{FOOTER_PAGE.JOIN_OUR_TEAM}</li>
+                <li>{FOOTER_PAGE.CORPARATE_ADDRESS}</li>
               </ul>
             </div>
             <div className={styles['ipad-pr-0']}>
-              <h4 className={`${styles.fontW600} ${styles['fs-16']} ${styles['black-color']}`}>{FOOTER_PAGE.POLICY}</h4>
+              <h4 className={`${styles.fontW600} ${styles['fs-16']} ${styles['black-color']}`}>{FOOTER_PAGE.POLICIES}</h4>
               <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
                 <li><a href="/en/policy/user-terms-and-conditions" target="_blank">{FOOTER_PAGE.TERMS_CONDITION}</a></li>
                 <li><a href="/en/policy/cancellation-policy" target="_blank">{FOOTER_PAGE.CANCELLATION_POLICY}</a></li>
@@ -337,12 +337,12 @@ const FooterBar = props => (
             </Col> */}
             <div className={styles['ipad-pr-0']}>
               <div>
-                <h4 className={`${styles.fontW600} ${styles['fs-16']} ${styles['black-color']}`}>{FOOTER_PAGE.CUSTOMER_SERVICE}</h4>
+                <h4 className={`${styles.fontW600} ${styles['fs-16']} ${styles['black-color']}`}>{FOOTER_PAGE.HELP}</h4>
                 <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
-                  <li>{FOOTER_PAGE.DELIVERY}</li>
-                  <li>{FOOTER_PAGE.SIZE_GUIDE}</li>
-                  <li>{FOOTER_PAGE.PAY_METHOD}</li>
                   <li>{FOOTER_PAGE.CONSUMER_RIGHT}</li>
+                  <li>{FOOTER_PAGE.SHIPPING_AND_DELIVERY}</li>
+                  <li>{FOOTER_PAGE.FREQUENTLY_ASKED_QUESTIONS}</li>
+                  <li>{FOOTER_PAGE.CUSTOMER_CARE}</li>
                 </ul>
               </div>
             </div>
