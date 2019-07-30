@@ -24,7 +24,6 @@ const cookies = new Cookies();
 
 const { SEO_CONTENT } = languageDefinations();
 
-let categoryValue = '';
 class Category extends Base {
   static async getInitialProps({
     store, isServer, query, req,
@@ -32,15 +31,13 @@ class Category extends Base {
     const {
       country, language, category, facets, sid
     } = query;
-    if (category !== '<anonymous>') {
-      categoryValue = category;
-    }
     const categoryTree = query.categoryTree === 'true';
     const shippingData = req ? req.universalCookies.get('shippingInfo') : cookies.get('shippingInfo');
     const { city: shippingCity, country: shippingCountry } = shippingData || {};
     const categoryFilter = {
       id: sid ? sid.split(',').pop() : null,
     };
+    const categoryValue = query.category;
     const searchOptions = {
       categoryFilter,
       country: country || undefined,
