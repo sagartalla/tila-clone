@@ -226,8 +226,8 @@
     top auto
   .details-right-part-inn
     padding 10px 20px
-    height: 100%;
-    overflow: auto;
+    height calc(100% - 140px)
+    overflow auto
     .notifyme-input
       width 50%
     .notify_me_btn
@@ -782,7 +782,15 @@
    position relative
   .removeButton
     display none
-    position absolute
+    color thick-blue
+    // position absolute
+
+.tila-ext-wrny .tila-care-warty:last-child
+  padding-left 10px
+  border-left 1px solid light-brdr
+
+.tila-ext-wrny .tila-care-warty:first-child
+  padding-right 10px
 
 .activePolicy
     .removeButton
@@ -809,6 +817,14 @@
   position fixed
   bottom 0
   width 34%
+
+.tila-care-warty
+  width 50%
+
+.tila-care-warty
+  .activePolicy
+    label
+      color black
 
 @media screen and (min-device-width: 320px) and (max-device-width: 767px) and (orientation : portrait) {
   .details-right-part {

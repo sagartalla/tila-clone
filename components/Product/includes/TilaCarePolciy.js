@@ -4,6 +4,9 @@ import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from '../product_en.styl';
 import styles_ar from '../product_ar.styl';
 import lang from '../../../utils/language';
+import { languageDefinations } from '../../../utils/lang';
+
+const { WARRANTY_PAGE, CART_PAGE } = languageDefinations();
 
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
@@ -33,32 +36,36 @@ export default function TilaCarePolicy({data,setTilaPolicy,choosenPolicyData,sel
       //console.log('data', data[key]);
         if(Array.isArray(data[key])) {
           return (
-            <div key={`index+${i}`} className={`${styles['flex']}`}>
+            <div key={`index+${i}`} className={`${styles['flex']} ${styles['flex-colum']} ${styles['tila-care-warty']}`}>
+              <h5 className={`${styles['fontW600']}`}>{`Tila Care ${key.split('_').join(' ')}`}</h5>
             {
               data[key].map((item,i) => {
                 return (
                   <div
-                    className={`${state[key] === item.policy_id ? styles['activePolicy']:''}`}
+                    className={`${styles['flx-spacebw-alignc']} ${styles['flex-wrp']} ${state[key] === item.policy_id ? styles['activePolicy']:''}`}
                     key={'sub'+i}
                     data-id={item.policy_id}
                     data-name={key}
                     onChange={selectedInput}
-                   >
-                    <label>
+                  >
+                    <div>
                       <input
                         type='radio'
+                        className={`${styles['radio-btn']}`}
                         name={key}
                         value={item.policy_name}
                         checked={state[key] === item.policy_id}
                       />
+                      <label className={`${styles['pl-10']} ${styles['fontW300']} ${styles['fs-12']} ${styles['thick-gry-clr']}`}>
                         {item.policy_name} | {item.cost.display_value}
-                    </label>
+                      </label>
+                    </div>
                     <span
-                      className={`${styles['removeButton']}`}
+                      className={`${styles['removeButton']} ${styles['fs-10']}`}
                       onClick={removePolicy}
                       data-key={key}
                       >
-                      Remove
+                      {CART_PAGE.REMOVE}
                     </span>
                   </div>
                 )
@@ -82,8 +89,8 @@ export default function TilaCarePolicy({data,setTilaPolicy,choosenPolicyData,sel
          ${styles['free-delivery-part']}
          `}
       >
-      {fetchPolicyData(data)}
-      <div className={`${styles['flex']}`}>The extended warranty cost will be added to your cart</div>
+      <div className={`${styles['flex']} ${styles['pb-10']} ${styles['border-b']} ${styles['tila-ext-wrny']}`}>{fetchPolicyData(data)}</div>
+      <div className={`${styles['flex']} ${styles['thick-gry-clr']} ${styles['fs-12']} ${styles['pt-5']}`}>{WARRANTY_PAGE.WARRANTY_LABEL}</div>
     </div>
   )
 
