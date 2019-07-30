@@ -187,7 +187,7 @@ class PageData extends React.Component {
       case 'BT3':
       case 'BT4':
       case 'BT7': {
-        const { banners, title } = content.data[lang];
+        const { banners } = content.data[lang];
         return (
           <Row className={styles['banner-prt-main']}>
             {/* {title &&
@@ -209,58 +209,66 @@ class PageData extends React.Component {
         return (
           <DT content={content} />
         );
-      case 'CBT5b':
+      case 'CBT5b': {
+        const { banners, breadcrumb, title } = content.data[lang];
         return (
           <div className={`${styles['display-t-i-f']}`}>
-            <div className={`${styles['fs-20']} ${styles.title}`}>{content.data[lang].title}</div>
+            <div className={`${styles['fs-20']} ${styles.title}`}>{title}</div>
             <div className={styles.d1}>
               <div>
-                <a href={content.data[lang].banners[0].link}>
+                <a href={banners[0].link}>
                   <div className={styles.shadow}>
-                    <img src={content.data[lang].banners[0].img} width={content.data[lang].banners[0].config.width} height={content.data[lang].banners[0].config.height} alt="" className={styles['img-responsive']} />
+                    <img src={banners[0].img} width={banners[0].config.width} height={banners[0].config.height} alt="" className={styles['img-responsive']} />
                   </div>
                 </a>
               </div>
               <div>
-                <a href={content.data[lang].banners[1].link}>
+                <a href={banners[1].link}>
                   <div className={styles.shadow}>
-                    <img src={content.data[lang].banners[1].img} width={content.data[lang].banners[1].config.width} height={content.data[lang].banners[1].config.height} alt="" className={styles['img-responsive']} />
+                    <img src={banners[1].img} width={banners[1].config.width} height={banners[1].config.height} alt="" className={styles['img-responsive']} />
                   </div>
                 </a>
               </div>
             </div>
             <div className={styles.d2}>
               <div>
-                <a href={content.data[lang].banners[2].link}>
+                <a href={banners[2].link}>
                   <div className={styles.shadow}>
-                    <img src={content.data[lang].banners[2].img} width={content.data[lang].banners[2].config.width} height={content.data[lang].banners[2].config.height} alt="" className={styles['img-responsive']} />
+                    <img src={banners[2].img} width={banners[2].config.width} height={banners[2].config.height} alt="" className={styles['img-responsive']} />
                   </div>
                 </a>
               </div>
               <div>
-                <a href={content.data[lang].banners[3].link}>
+                <a href={banners[3].link}>
                   <div className={styles.shadow}>
-                    <img src={content.data[lang].banners[3].img} width={content.data[lang].banners[3].config.width} height={content.data[lang].banners[3].config.height} alt="" className={styles['img-responsive']} />
+                    <img src={banners[3].img} width={banners[3].config.width} height={banners[3].config.height} alt="" className={styles['img-responsive']} />
                   </div>
                 </a>
               </div>
             </div>
             <div className={`${styles.d3} ${styles.right0}`}>
               <div>
-                <a href={content.data[lang].banners[4].link}>
+                <a href={banners[4].link}>
                   <div className={styles.shadow}>
-                    <img src={content.data[lang].banners[4].img} width={content.data[lang].banners[4].config.width} height={content.data[lang].banners[4].config.height} alt="" className={styles['img-responsive']} />
+                    <img src={banners[4].img} width={banners[4].config.width} height={banners[4].config.height} alt="" className={styles['img-responsive']} />
                   </div>
                 </a>
               </div>
             </div>
             <div className={`${styles.breadcrums} ${styles['mt-10']} ${styles.pointer}`}>
-              <a href="https://storefront-stage.fptechscience.com/en/landing/fashion">
-                <span>Men's Clothing| Women's Clothing| Kids Clothing| Footwear| Jewellery| Eyewear & More…</span>
-              </a>
+              {breadcrumb.length > 0 &&
+                breadcrumb.map((bc, index) => (
+                  <React.Fragment>
+                    <a href={bc.link}>
+                      <span>{bc.display_name}</span>
+                    </a>
+                    {breadcrumb.length - 1 !== index && <span> | </span>}
+                  </React.Fragment>
+                ))}
             </div>
           </div>
         );
+      }
       default: return null;
     }
   }
