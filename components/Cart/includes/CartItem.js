@@ -11,7 +11,7 @@ import CartStepper from './CartStepper';
 import SVGComponent from '../../common/SVGComponet';
 import { languageDefinations } from '../../../utils/lang/';
 import constants from '../../../constants';
-import WarrantyPolicy from './WarrantyPolicy';
+import WarrantyPolicy from './warrantyPolicy';
 
 import lang from '../../../utils/language';
 
@@ -102,7 +102,7 @@ class CartItem extends React.Component {
       showWarrantyDetails: false,
       selectedPolicy: '',
       policies_selected: {
-        
+
       },
     };
     this.warrantyChange = this.warrantyChange.bind(this);
@@ -180,7 +180,7 @@ class CartItem extends React.Component {
       addToWishlist,
       removeCartItem,
       cartStepperInputHandler,
-    } = this.props;  
+    } = this.props;
     const { checked, showWarrantyDetails, warrantyName, policyName } = this.state;
     const {
       item_id, img, name, offer_price, cur, quantity, max_limit, inventory, offerDiscounts,
