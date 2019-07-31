@@ -242,7 +242,7 @@ const Fashion = () => React.createElement(
               { className: 'chinos-part' },
               React.createElement(
                 'a',
-                { href: `/${lang}/search?q=rainware&isListed=false` },
+                { href: `/${lang}/search?q=rainwear` },
                 React.createElement('img', { src: '/static/img/landing-page-fashion/rainwear.png', className: 'img-responsive' })
               ),
               React.createElement(
@@ -300,7 +300,7 @@ const Fashion = () => React.createElement(
               { className: `new-brands ${styles['pb-10']}` },
               React.createElement(
                 'a',
-                { href: `/${lang}/srp/sunglasses?categoryTree=true&isListed=false&sid=892,2439` },
+                { href: `/${lang}/clp/Sunglasses` },
                 React.createElement('img', { src: '/static/img/landing-page-fashion/what-new2.jpg', className: 'img-responsive' })
               ),
               React.createElement(

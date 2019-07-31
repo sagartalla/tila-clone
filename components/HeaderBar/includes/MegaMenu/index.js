@@ -39,7 +39,7 @@ class MegaMenu extends Component {
       viewAllMenu: false
     }
     this.onHoverCurry = this.onHoverCurry.bind(this);
-    // this.onHoverOut = this.onHoverOut.bind(this);
+    this.onHoverOut = this.onHoverOut.bind(this);
     this.onLinkClick = this.onLinkClick.bind(this);
     this.onHoverOutDelayed = this.onHoverOutDelayed.bind(this);
     this.onExpandedHover = this.onExpandedHover.bind(this);
@@ -75,15 +75,15 @@ class MegaMenu extends Component {
     this.expandedHover = false;
   }
 
-  // onHoverOut() {
-  //   this.setState({
-  //     selectedCategory: null,
-  //     viewAllMenu: false,
-  //     itemColor: null,
-  //     hoverItem: null
-  //   });
-  //   this.expandedHover = false;
-  // }
+  onHoverOut() {
+    this.setState({
+      selectedCategory: null,
+      viewAllMenu: false,
+      itemColor: null,
+      hoverItem: null
+    });
+    this.expandedHover = false;
+  }
 
   onHoverOutDelayed(id) {
     timeoutCount && clearTimeout(timeoutCount);
