@@ -251,8 +251,7 @@ class CartItem extends React.Component {
                             ${lang === 'en' ? '' : styles['flip-questionmark']}
                             `
                           }
-
-                          >  ? </span>
+                        >  ? </span>
                         <div className={`${styles['p-10']} ${styles['tool-tip']} ${styles['cart-tool-tip']}`}>
                                 <div className={`${styles['table']} ${styles['width100']}`}>
                                   <div className={`${styles['flx-space-bw']} ${styles['fs-12']}`}>
@@ -301,12 +300,11 @@ class CartItem extends React.Component {
                                     :
                                       null
                                   }
-
-                            <div className={` ${styles['flx-space-bw']} ${styles['total-amount']} ${styles['fs-12']}`}>
-                              <div>{ORDER_PAGE.TOTAL}</div>
-                              <div className={`${styles['t-rt']}`}>{total_amount} {cur}</div>
-                            </div>
-                          </div>
+                                  <div className={` ${styles['flx-space-bw']} ${styles['total-amount']} ${styles['fs-12']}`}>
+                                    <div>{ORDER_PAGE.TOTAL}</div>
+                                    <div className={`${styles['t-rt']}`}>{total_amount} {cur}</div>
+                                  </div>
+                                </div>
                           <div className={`${styles['p-5']} ${styles['mt-10']} ${styles['fs-12']} ${styles['overall-amount']}`}>{CART_PAGE.OVERALL_YOU_SAVE} {total_discount} {cur} {CART_PAGE.ON_THIS_PRODUCT}</div>
                         </div>
                       </div>
