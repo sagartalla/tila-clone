@@ -113,22 +113,22 @@ const l = [
 
 const t = [
   {
-    url: `/${lang}/search?q=apple&language=en&isListed=false`,
+    url: `/${lang}/brand/apple`,
     title: '/static/img/bg-img/Apple.png',
   },
 
   {
-    url: `/${lang}/search?q=baseus&language=en&isListed=false`,
+    url: `/${lang}/brand/baseus`,
     title: '/static/img/bg-img/Baseus.png',
   },
 
   {
-    url: `/${lang}/search?q=ray%20ban&language=en&isListed=false`,
+    url: `/${lang}/brand/ray%20ban`,
     title: '/static/img/bg-img/RayBan.png',
   },
 
   {
-    url: `/${lang}/search?q=fossil&language=en&isListed=false`,
+    url: `/${lang}/brand/fossil`,
     title: '/static/img/bg-img/Fossil.png',
   },
 ];
@@ -261,14 +261,16 @@ const FooterBar = props => (
       <Grid>
         <Row className={styles['footer-social-list']}>
           <Col md={3} sm={6} className={`${styles['footer-social-list']} ${styles['pr-0']}`}>
+          <a href="https://www.snapchat.com/add/tilasocial" target="_blank">
             <h4 className={styles['flex-center']}>
                 <span className={`${styles['footer-social-title']} ${styles['mr-10']}`}><img src="/static/img/bg-img/snapchat.png" className={styles['img-responsive']} /></span>
                 <span className={`${styles.fontW600}`}>{FOOTER_PAGE.ON_SNAP}</span>
                 <span className={`${styles['follow-sc-btn']} ${styles['fs-10']} ${styles['lne-ht2']}  ${styles['ml-10']} ${styles['pl-15']} ${styles['pr-15']}`}>{FOOTER_PAGE.FOLLOW}</span>
             </h4>
+          </a>
           </Col>
           <Col md={3} sm={6} className={`${styles['footer-social-list']} ${styles['pr-0']}`}>
-          <a href="https://twitter.com/TilaSocial" target="_blank">
+          <a href="https://www.twitter.com/tilasocial" target="_blank">
             <h4 className={styles['flex-center']}>
               <span className={`${styles['footer-social-title']} ${styles['mr-10']}`}><img src="/static/img/bg-img/bitmap-twitter.jpg" className={styles['img-responsive']} /></span>
               <span className={`${styles['twitter-clr']} ${styles.fontW600}`}>{FOOTER_PAGE.ON_TWITTER}</span>
@@ -286,7 +288,7 @@ const FooterBar = props => (
           </a>  
           </Col>
           <Col md={3} sm={6} className={`${styles['footer-social-list']} ${styles['pr-0']}`}>
-          <a href="https://www.facebook.com/TilaSocialKSA/" target="_blank">
+          <a href="https://www.facebook.com/tilasocial/" target="_blank">
             <h4 className={styles['flex-center']}>
               <span className={`${styles['footer-social-title']} ${styles['mr-10']}`}><img src="/static/img/bg-img/bitmap-social-fb.jpg" className={styles['img-responsive']} /></span>
               <span className={`${styles['lgt-blue']} ${styles.fontW600}`}>{FOOTER_PAGE.ON_FACEBOOK}</span>
@@ -341,7 +343,7 @@ const FooterBar = props => (
               <div>
                 <h4 className={`${styles.fontW600} ${styles['fs-16']} ${styles['black-color']}`}>{FOOTER_PAGE.CUSTOMER_SERVICE}</h4>
                 <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
-                  <li><a href={`/${lang}/delivery/customer-delivery`} target="_blank">{FOOTER_PAGE.DELIVERY}</a></li>
+                  <li><a href={`/${lang}/policy/customer-delivery`} target="_blank">{FOOTER_PAGE.DELIVERY}</a></li>
                   <li>{FOOTER_PAGE.SIZE_GUIDE}</li>
                   <li>{FOOTER_PAGE.PAY_METHOD}</li>
                   <li>{FOOTER_PAGE.CONSUMER_RIGHT}</li>
