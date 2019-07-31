@@ -1,14 +1,17 @@
 import React from 'react';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, PanelGroup, Panel } from 'react-bootstrap';
 import moment from 'moment';
 import Cookie from 'universal-cookie';
-
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { actionCreators } from '../../../store/cart';
 import { Link } from '../../../routes';
 import Warranty from '../../Product/includes/Warranty';
 import CartStepper from './CartStepper';
 import SVGComponent from '../../common/SVGComponet';
 import { languageDefinations } from '../../../utils/lang/';
 import constants from '../../../constants';
+import WarrantyPolicy from './WarrantyPolicy';
 
 import lang from '../../../utils/language';
 
@@ -16,6 +19,7 @@ import main_en from '../../../layout/main/main_en.styl';
 import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from '../cart_en.styl';
 import styles_ar from '../cart_ar.styl';
+/* eslint-disable */
 
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
@@ -25,7 +29,6 @@ const cookies = new Cookie();
 
 const language = cookies.get('language') || 'en';
 const country = cookies.get('country') || 'SAU';
-
 
 // const popover = ({
 //   mrp, offer_price, total_amount, cur, selling_price, offerDiscounts, total_discount, shipping,
@@ -96,7 +99,13 @@ class CartItem extends React.Component {
     const { gift_info } = props.item;
     this.state = {
       checked: gift_info ? true : false,
+      showWarrantyDetails: false,
+      selectedPolicy: '',
+      policies_selected: {
+        
+      },
     };
+    this.warrantyChange = this.warrantyChange.bind(this);
   }
 
   giftChecked = ({ currentTarget }) => {
@@ -111,6 +120,57 @@ class CartItem extends React.Component {
     });
   }
 
+  addNewWarranty = (e) => {
+    const warrantyName = e.target.getAttribute('data-name');
+    this.setState({
+      warrantyName,
+      showWarrantyDetails: true,
+      selectedPolicy: '',
+      policies_selected: {},
+    });
+  }
+
+  warrantyChange(e) {
+    const { item } = this.props;
+    let { policies_selected } = this.state;
+    const policyId = e.target.getAttribute('data_policy_id') || [];
+    const policyName = e.target.getAttribute('policy_name');
+    const warrantyName = e.target.getAttribute('data-name');
+    policies_selected[warrantyName] = policyId;
+    this.setState({
+      policyName,
+      warrantyName,
+      selectedPolicy: policyId,
+      policies_selected,
+    });
+  }
+
+  editWarranty = (e) => {
+    const warrantyName = e.target.getAttribute('data-name');
+    this.setState({
+      warrantyName,
+      showWarrantyDetails: true,
+    });
+  }
+  selectPolicy = (e) => {
+    const { item } = this.props;
+    const { selectedPolicy, policies_selected } = this.state;
+    let policyId1  = [];
+    Object.keys(item.policies_applied).length > 0 && Object.keys(item.policies_applied).map(newPolicy => {
+      Object.keys(policies_selected).map(selected => {
+        newPolicy !== selected &&
+          policyId1.push(item.policies_applied[newPolicy].policy_id);
+      })
+    })
+    if (policyId1 && (selectedPolicy.length > 0)) {
+      policyId1.push(selectedPolicy);
+    }
+    this.props.addToCartAndFetch({
+      listing_id: item.listing_id,
+      policies_applied: policyId1,
+    });
+  }
+
   render() {
     const {
       item,
@@ -120,13 +180,12 @@ class CartItem extends React.Component {
       addToWishlist,
       removeCartItem,
       cartStepperInputHandler,
-
-    } = this.props;
-    const { checked } = this.state;
+    } = this.props;  
+    const { checked, showWarrantyDetails, warrantyName, policyName } = this.state;
     const {
       item_id, img, name, offer_price, cur, quantity, max_limit, inventory, offerDiscounts,
       brand_name, gift_info, shipping, warranty_duration, total_amount, total_discount, listing_id,
-      product_id, variant_id, itemType, catalogId, discount, mrp, variantAttributes, selling_price,
+      product_id, variant_id, itemType, catalogId, discount, mrp, variantAttributes, selling_price, policies_applied, tila_care_policy,
     } = item;
     return (
       <div key={item_id} className={`${styles['mb-20']} ${styles['box']}`}>
@@ -322,6 +381,17 @@ class CartItem extends React.Component {
                   } */}
                 </Col>
               </Row>
+                  <WarrantyPolicy
+                   tila_care_policy={tila_care_policy}
+                   policies_applied={policies_applied}
+                   addNewWarranty={this.addNewWarranty}
+                   warrantyChange={this.warrantyChange}
+                   policyName={policyName}
+                   showWarrantyDetails={showWarrantyDetails}
+                   warrantyName={warrantyName}
+                   selectedPolicy={this.state.selectedPolicy}
+                   selectPolicy={this.selectPolicy}
+                  />
             </Col>
           </Row>
         </div>
@@ -358,4 +428,13 @@ class CartItem extends React.Component {
   }
 }
 
-export default CartItem;
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      addToCartAndFetch: actionCreators.addToCartAndFetch,
+    },
+    dispatch,
+  );
+
+export default connect(null, mapDispatchToProps)(CartItem);
