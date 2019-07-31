@@ -50,8 +50,8 @@ const brandImages = {
         link: `/${lang}/brand/Gucci`,
       },
       {
-        value: 'Omron',
-        link: `/${lang}/brand/Omron`,
+        value: 'Diesel',
+        link: `/${lang}/brand/diesel`,
       },
       {
         value: 'CalkinKlien',
@@ -98,16 +98,16 @@ const brandImages = {
     ],
     '#EF6079': [
       {
-        value: 'Whey',
-        link: `/${lang}/brand/whey`,
+        value: 'Bvlgari',
+        link: `/${lang}/brand/bvlgari`,
       },
       {
         value: 'DavidOff',
         link: `/${lang}/brand/davidoff`,
       },
       {
-        value: 'Dermaroller',
-        link: `/${lang}/brand/dermarollere`,
+        value: 'Prada',
+        link: `/${lang}/brand/prada`,
       },
       {
         value: 'NYX',
@@ -128,8 +128,8 @@ const brandImages = {
         link: `/${lang}/brand/Tomford`,
       },
       {
-        value: 'JBW',
-        link: `/${lang}/brand/jbw`,
+        value: 'Roberto Bianci',
+        link: `/${lang}/brand/roberto bianci`,
       },
     ],
   },

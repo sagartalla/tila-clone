@@ -3,7 +3,7 @@ const Lifestyle = () => (
   <div className="life-style-main">
     <Grid>
       <div className={`${styles['flex']} life-banner-inn ${styles['relative']}`}>
-        <a href="/en/search?q=home%20decor&isListed=false">
+        <a href={`/${lang}/clp/Home%20Furnishing`}>
           <img src={`/static/img/landing-page-lifestyle/${lang === 'en' ? 'furnitures' : 'furnitures-ar'}.jpg`} className="img-responsive" />
         </a>
         {/* <div className={`${styles['absolute']} ${styles['flex']} ${styles['flex-colum']} banner-label`}>
@@ -18,7 +18,7 @@ const Lifestyle = () => (
             <h5 className={`title ${styles['fs-16']} ${styles['fontW600']} ${styles['m-0']}`}>Home Furnishing</h5>
             <span className={`dec ${styles['fs-12']}`}>Cusion, Cushion covers, Vase, Lights, Tea table, Sofa sets & more…</span>
           </div>
-          <a href={`/${lang}/srp/home-furnishing?categoryTree=true&isListed=false&sid=932,941`}>
+          <a href={`/${lang}/clp/Home%20Furnishing`}>
             <img src="/static/img/landing-page-lifestyle/sub-banner1.jpg" className="img-responsive" />
           </a>
         </Col>
@@ -27,13 +27,13 @@ const Lifestyle = () => (
             <h5 className={`title ${styles['fs-16']} ${styles['fontW600']} ${styles['m-0']}`}>Home for your books</h5>
             <span className={`dec ${styles['fs-12']}`}>Book shelves, Racks, Folders, Bookmarks & more...</span>
           </div>
-          <a href={`/${lang}/srp/rack?categoryTree=true&isListed=false&sid=932,941,944`}>
+          <a href={`/${lang}/clp/Book%20shelves`}>
             <img src="/static/img/landing-page-lifestyle/sub-banner2.jpg" className="img-responsive" />
           </a>
         </Col>
       </div>
       {/* popular category start */}
-      <div className={`poular-cat ${styles['pt-30']} ${styles['pb-30']}`}>
+      {/* <div className={`poular-cat ${styles['pt-30']} ${styles['pb-30']}`}>
         <h5 className={`main-title ${styles['fs-16']} ${styles['fontW600']}`}>Popular Category</h5>
         <div className={`${styles['flex']} ${styles['poular-cat-inn']}`}>
           <Col md={1} className={`${styles['pl-0']} ${styles['pr-10']}`}>
@@ -133,24 +133,24 @@ const Lifestyle = () => (
             </a>
           </Col>
         </div>
-      </div>
+      </div> */}
       {/* essential start */}
       <div className={`sub-banner ${styles['flex']} ${styles['pt-40']} ${styles['pb-20']} ${styles['clear-b']}`}>
         <Col md={6} className={styles['pl-0']}>
           <div className={`sub-banner-title ${styles['pb-10']}`}>
-            <h5 className={`title ${styles['fs-16']} ${styles['fontW600']} ${styles['m-0']}`}>Home Furnishing</h5>
+            <h5 className={`title ${styles['fs-16']} ${styles['fontW600']} ${styles['m-0']}`}>TRAVEL AND LEISURE</h5>
             <span className={`dec ${styles['fs-12']}`}>Cusion, Cushion covers, Vase, Lights, Tea table, Sofa sets & more…</span>
           </div>
-          <a href={`/${lang}/srp/home-furnishing?categoryTree=true&isListed=false&sid=932,941`}>
+          <a href={`/${lang}/clp/travel and leisure`}>
             <img src="/static/img/landing-page-lifestyle/essental.jpg" className="img-responsive" />
           </a>
         </Col>
         <Col md={6} className={styles['pr-0']}>
           <div className={`sub-banner-title ${styles['pb-10']}`}>
-            <h5 className={`title ${styles['fs-16']} ${styles['fontW600']} ${styles['m-0']}`}>Home for your books</h5>
+            <h5 className={`title ${styles['fs-16']} ${styles['fontW600']} ${styles['m-0']}`}>HEALTH AND FITNESS</h5>
             <span className={`dec ${styles['fs-12']}`}>Book shelves, Racks, Folders, Bookmarks & more...</span>
           </div>
-          <a href={`/${lang}/srp/rack?categoryTree=true&isListed=false&sid=932,941,944`}>
+          <a href={`/${lang}/clp/fitness`}>
             <img src="/static/img/landing-page-lifestyle/essential1.jpg" className="img-responsive" />
           </a>
         </Col>
@@ -162,7 +162,7 @@ const Lifestyle = () => (
         <div className={`top-selling-part-inn ${styles['pt-10']} ${styles.flex}`}>
           <Col md={2} className={styles['pl-0']}>
             <div className={`top-selling-img ${styles['flex']}`}>
-              <a href={`/${lang}/search?q=Cutlery&language=en&isListed=false`}>
+              <a href={`/${lang}/clp/cutlery`}>
                 <img src="/static/img/landing-page-lifestyle/home-ess.jpg" className="img-responsive" />
               </a>
             </div>
@@ -173,7 +173,7 @@ const Lifestyle = () => (
           </Col>
           <Col md={2} className={styles['pl-0']}>
             <div className={`top-selling-img ${styles['flex']}`}>
-              <a href={`/${lang}/search?q=Tools%20and%20hardware&language=en&isListed=false`}>
+              <a href={`/${lang}/clp/Tools%20and%20Hardware`}>
                 <img src="/static/img/landing-page-lifestyle/home-ess1.jpg" className="img-responsive" />
               </a>
             </div>
@@ -184,7 +184,7 @@ const Lifestyle = () => (
           </Col>
           <Col md={2} className={styles['pl-0']}>
             <div className={`top-selling-img ${styles['flex']}`}>
-              <a href={`/${lang}/srp/beauty-&-personal-care?categoryTree=true&isListed=false&sid=932,958`}>
+              <a href={`/${lang}/clp/Healthcare`}>
                 <img src="/static/img/landing-page-lifestyle/home-ess2.jpg" className="img-responsive" />
               </a>
             </div>
@@ -206,7 +206,7 @@ const Lifestyle = () => (
           </Col>
           <Col md={2} className={styles['pl-0']}>
             <div className={`top-selling-img ${styles['flex']}`}>
-              <a href={`/${lang}/search?q=Grooming&language=en&isListed=false`}>
+              <a href={`/${lang}/clp/Men%27s%20Grooming`}>
                 <img src="/static/img/landing-page-lifestyle/home-ess4.jpg" className="img-responsive" />
               </a>
             </div>
@@ -217,7 +217,7 @@ const Lifestyle = () => (
           </Col>
           <Col md={2} className={styles['pl-0']}>
             <div className={`top-selling-img ${styles['flex']}`}>
-              <a href={`/${lang}/search?q=Home%20Cleaning&language=en&isListed=false`}>
+              <a href={`/${lang}/clp/Home%20Cleaninig`}>
                 <img src="/static/img/landing-page-lifestyle/home-ess5.jpg" className="img-responsive" />
               </a>
             </div>
@@ -229,7 +229,7 @@ const Lifestyle = () => (
         </div>
       </div>
       {/* sports start */}
-      <div className={`poular-cat ${styles['pt-30']} ${styles['pb-30']}`}>
+      {/* <div className={`poular-cat ${styles['pt-30']} ${styles['pb-30']}`}>
         <h5 className={`main-title ${styles['fs-16']} ${styles['fontW600']}`}>Sports Essentials</h5>
         <p>Soccer, Badminton, Table Tennis, Lawn Tennis, Cricket & more...</p>
         <div className={`${styles['flex']} ${styles['poular-cat-inn']}`}>
@@ -330,7 +330,7 @@ const Lifestyle = () => (
             </a>
           </Col>
         </div>
-      </div>
+      </div> */}
       <div className={`hobby-part ${styles['pt-20']} ${styles['pb-20']} ${styles['clear-b']}`}>
         <h5 className={`main-title ${styles['fs-16']} ${styles['fontW600']}  ${styles['mb-0']}`}>Hobby Shop</h5>
         <span className={`dec ${styles['fs-12']}`}>Coins, Toys, Photography frames, Antiques, Arts & Crafts, Books, Cooking, Scrapbook, Fabric sewing,  & more…</span>
@@ -350,7 +350,7 @@ const Lifestyle = () => (
           <Col md={2} className={styles['pl-0']}>
             <div className={`hobby-part-img ${styles['relative']}`}>
               <div className="hobby-part-img-inn">
-                <a href={`/${lang}/search?q=Crafts&language=en&isListed=false`}>
+                <a href={`/${lang}/clp/Art%20and%20Crafts`}>
                   <img src="/static/img/landing-page-lifestyle/hobby1.jpg" className="img-responsive" />
                 </a>
               </div>
@@ -425,7 +425,7 @@ const Lifestyle = () => (
             <h5 className={`main-title ${styles['fs-16']} ${styles['fontW600']} ${styles['m-0']}`}>Grooming Essentials</h5>
             <span className={`dec ${styles['fs-12']}`}>Beard Gel, Beard Shampoo, Face & Body Lotion, Trimmer &  more…</span>
           </div>
-            <a href={`/${lang}/search?q=Grooming&language=en&isListed=false`}>
+            <a href={`/${lang}/clp/Men%27s%20grooming`}>
             <img src="/static/img/landing-page-lifestyle/health-but1.jpg" className="img-responsive" />
           </a>
         </Col>
@@ -434,7 +434,7 @@ const Lifestyle = () => (
             <h5 className={`main-title ${styles['fs-16']} ${styles['fontW600']} ${styles['m-0']}`}>Kids Care</h5>
             <span className={`dec ${styles['fs-12']}`}>Knee guard, Wrist Guard, Elbow Guard & more…</span>
           </div>
-            <a href={`/${lang}/srp/baby-care?categoryTree=true&isListed=false&sid=932,955`}>
+            <a href={`/${lang}/clp/kids%20care`}>
             <img src="/static/img/landing-page-lifestyle/health-but2.jpg" className="img-responsive" />
           </a>
         </Col>
