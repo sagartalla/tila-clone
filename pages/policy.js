@@ -19,10 +19,10 @@ class PolicyPage extends Base {
     return (
       <div>
         <Layout>
-          <Policy query={url.query} />
+          <Policy query={url.query} key={url.query.name}/>
         </Layout>
       </div>
-    )
+    ) 
   }
 };
 
