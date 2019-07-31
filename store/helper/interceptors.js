@@ -103,6 +103,7 @@ const errorInterceptor = (err) => {
   return Promise.reject(err);
 }
 
+axios.defaults.timeout = 3000;
 axios.interceptors.request.use(_.compose(configModifer));
 axios.interceptors.response.use(null, _.compose(errorInterceptor));
 
