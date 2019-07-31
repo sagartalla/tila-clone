@@ -490,7 +490,7 @@ const Lifestyle = () => React.createElement(
         ),
         React.createElement(
           'a',
-          { href: `/${lang}/srp/beauty-&-personal-care?categoryTree=true&isListed=false&sid=932,958` },
+          { href: `/${lang}/srp/personal-care` },
           React.createElement('img', { src: '/static/img/landing-page-lifestyle/health-but.jpg', className: 'img-responsive' })
         )
       ),

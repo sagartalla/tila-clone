@@ -100,7 +100,7 @@ const Fashion = () => (
             </Col> */}
             <Col md={8} className={`${styles['p-0']} ${styles['mr-10']} ${styles['bg-white']}`}>
               <div className="chinos-part">
-                <a href={`/${lang}/search?q=rainware&isListed=false`}>
+                <a href={`/${lang}/search?q=rainwear`}>
                   <img src="/static/img/landing-page-fashion/rainwear.png" className="img-responsive" />
                 </a>
                 <div className={`${styles['bg-white']} chinos-part-inn what-new-inn`}>
@@ -124,7 +124,7 @@ const Fashion = () => (
           <Col md={6} className={`${styles['p-0']}`}>
             <Col md={4} className={`${styles['pl-0']} ${styles['pr-10']}`}>
               <div className={`new-brands ${styles['pb-10']}`}>
-                <a href={`/${lang}/srp/sunglasses?categoryTree=true&isListed=false&sid=892,2439`}>
+                <a href={`/${lang}/clp/Sunglasses`}>
                   <img src="/static/img/landing-page-fashion/what-new2.jpg" className="img-responsive" />
                 </a>
                 <div className={`${styles['bg-white']} chinos-part-inn`}>

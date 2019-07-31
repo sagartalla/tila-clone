@@ -416,7 +416,7 @@ const Lifestyle = () => (
             <h5 className={`main-title ${styles['fs-16']} ${styles['fontW600']} ${styles['m-0']}`}>Health & Beauty</h5>
             <span className={`dec ${styles['fs-12']}`}>Body lotion, Face cream, Massager & more…</span>
           </div>
-            <a href={`/${lang}/srp/beauty-&-personal-care?categoryTree=true&isListed=false&sid=932,958`}>
+            <a href={`/${lang}/srp/personal-care`}>
             <img src="/static/img/landing-page-lifestyle/health-but.jpg" className="img-responsive" />
           </a>
         </Col>
