@@ -156,7 +156,7 @@ const a = {
   },
   prod: {
     IMAGE_SEARCH_URL: 'https://apigateway.tila.com/image-search',
-    SEARCH_API_URL: 'https://apigateway.tila.com/search',
+    SEARCH_API_URL: 'https://search-api.tila.com',
     CATALOG_API_URL: 'http://http://apigatewayinternal-stage.fptsinternal.com/catalogapi',
     LISTING_API_URL: 'https://apigateway.tila.com/listing',
     PIM_API_URL: 'http://apigatewayinternal-preprod.fptsinternal.com/pim-service/pim',
@@ -181,7 +181,7 @@ const a = {
   },
   production: {
     IMAGE_SEARCH_URL: 'https://apigateway.tila.com/image-search',
-    SEARCH_API_URL: 'https://apigateway.tila.com/search',
+    SEARCH_API_URL: 'https://search-api.tila.com',
     CATALOG_API_URL: 'http://http://apigatewayinternal-stage.fptsinternal.com/catalogapi',
     LISTING_API_URL: 'https://apigateway.tila.com/listing',
     PIM_API_URL: 'http://apigatewayinternal-preprod.fptsinternal.com/pim-service/pim',
