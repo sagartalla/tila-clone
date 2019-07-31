@@ -26,7 +26,7 @@ const Fashion = () => React.createElement(
         { md: 3, className: styles['pl-0'] },
         React.createElement(
           'a',
-          { href: `/${lang}/search?q=shoe&language=en&isListed=false` },
+          { href: `/${lang}/clp/Men%27s%20Shoes` },
           React.createElement(
             'div',
             { className: `banner-sub-slider-inn ${styles['bg-white']} ${styles['p-10']} ${styles['flex-center']} ${styles['border-radius4']}` },
@@ -74,7 +74,7 @@ const Fashion = () => React.createElement(
         { md: 3, className: styles['pl-0'] },
         React.createElement(
           'a',
-          { href: `/${lang}/search?q=skirt&language=en&isListed=false` },
+          { href: `/${lang}/clp/Women%20dress` },
           React.createElement(
             'div',
             { className: `banner-sub-slider-inn ${styles['bg-white']} ${styles['p-10']} ${styles['flex-center']} ${styles['border-radius4']}` },
@@ -354,7 +354,7 @@ const Fashion = () => React.createElement(
               { className: `new-brands ${styles['pb-10']}` },
               React.createElement(
                 'a',
-                { href: `/${lang}/srp/fragrance?categoryTree=true&isListed=false&sid=932,958,964` },
+                { href: `/${lang}/clp/Perfumes` },
                 React.createElement('img', { src: '/static/img/landing-page-fashion/what-new4.jpg', className: 'img-responsive' })
               ),
               React.createElement(
@@ -482,7 +482,7 @@ const Fashion = () => React.createElement(
             { md: 8, className: `${styles['p-0']} ${styles['mr-10']} ${styles['bg-white']}` },
             React.createElement(
               'a',
-              { href: `/${lang}/search?q=men%20formal%20shirts&language=en&isListed=false` },
+              { href: `/${lang}/clp/Men%27s%20Formal%20Shirts` },
               React.createElement('img', { src: '/static/img/landing-page-fashion/getting-img.jpg', className: 'img-responsive' })
             ),
             React.createElement(
@@ -531,7 +531,7 @@ const Fashion = () => React.createElement(
               { className: `${styles['pb-10']} ${styles['bg-white']}` },
               React.createElement(
                 'a',
-                { href: `/${lang}/search?q=shoe&language=en&isListed=false` },
+                { href: `/${lang}/clp/Men%27s%20Formal%20Shoes` },
                 React.createElement('img', { src: '/static/img/landing-page-fashion/getting-img3.jpg', className: 'img-responsive' })
               ),
               React.createElement(
@@ -559,7 +559,7 @@ const Fashion = () => React.createElement(
             { md: 8, className: `${styles['p-0']} ${styles['mr-10']} ${styles['bg-white']}` },
             React.createElement(
               'a',
-              { href: `/${lang}/search?q=womens%20tops&language=en&isListed=false` },
+              { href: `/${lang}/clp/women%27s%20formal%20tops` },
               React.createElement('img', { src: '/static/img/landing-page-fashion/getting-img4.jpg', className: 'img-responsive' })
             ),
             React.createElement(
@@ -585,7 +585,7 @@ const Fashion = () => React.createElement(
               { className: `${styles['mb-10']} ${styles['bg-white']}` },
               React.createElement(
                 'a',
-                { href: `/${lang}/srp/footwear?categoryTree=true&isListed=false&sid=892,909,921` },
+                { href: `/${lang}/clp/Women%27s%20Formal%20Footwear` },
                 React.createElement('img', { src: '/static/img/landing-page-fashion/getting-img5.jpg', className: 'img-responsive' })
               ),
               React.createElement(
@@ -628,227 +628,6 @@ const Fashion = () => React.createElement(
             )
           )
         )
-      )
-    ),
-    React.createElement(
-      'div',
-      { className: `top-brand-part ${styles['clear-b']}` },
-      React.createElement(
-        'h3',
-        { className: `${styles['flex-center']} what-title ${styles['justify-center']} ${styles['relative']} lobster-family ${styles['pt-40']} ${styles['pb-20']}` },
-        React.createElement(
-          'span',
-          { className: `${styles['fs-36']} ${styles['lable']} ${styles['pl-10']} ${styles['pr-10']}` },
-          'Top Brands'
-        ),
-        ' ',
-        React.createElement('span', { className: `${styles['absolute']} border` })
-      ),
-      React.createElement(
-        'div',
-        { className: styles['flex'] },
-        React.createElement(Col, { md: 2, className: `${styles['pl-0']} ${styles['pr-10']}` }),
-        React.createElement(
-          Col,
-          { md: 2, className: `${styles['pl-0']} ${styles['pr-10']}` },
-          React.createElement(
-            'div',
-            { className: `${styles['flex-center']}  ${styles['flex-colum']} ${styles['bg-white']} top-brand-part-inn ${styles['border-radius4']}` },
-            React.createElement(
-              'div',
-              { className: `canvali-logo ${styles['flex-center']}` },
-              React.createElement(
-                'a',
-                { href: `/${lang}/search?q=just%20cavalli&isListed=false` },
-                React.createElement('img', { src: '/static/img/landing-page-fashion/top-brands1.jpg', className: 'img-responsive' })
-              )
-            ),
-            React.createElement(
-              'div',
-              { className: `${styles['pt-20']} ${styles['t-c']} top-brand-list` },
-              React.createElement(
-                'ul',
-                { className: styles['pl-0'] },
-                React.createElement(
-                  'li',
-                  null,
-                  'Shoes'
-                ),
-                React.createElement(
-                  'li',
-                  null,
-                  'Clothes'
-                ),
-                React.createElement(
-                  'li',
-                  null,
-                  'Track Suite'
-                ),
-                React.createElement(
-                  'li',
-                  null,
-                  'Sports'
-                ),
-                React.createElement(
-                  'li',
-                  null,
-                  'Clothing & Accessories'
-                )
-              )
-            )
-          )
-        ),
-        React.createElement(
-          Col,
-          { md: 2, className: `${styles['pl-0']} ${styles['pr-10']}` },
-          React.createElement(
-            'div',
-            { className: `${styles['flex-center']}  ${styles['flex-colum']} ${styles['bg-white']} top-brand-part-inn ${styles['border-radius4']}` },
-            React.createElement(
-              'div',
-              { className: `dg-logo ${styles['flex-center']}` },
-              React.createElement(
-                'a',
-                { href: `/${lang}/search?q=DOLCE%20&%20GABBANA&isListed=false` },
-                React.createElement('img', { src: '/static/img/landing-page-fashion/top-brands2.jpg', className: 'img-responsive' })
-              )
-            ),
-            React.createElement(
-              'div',
-              { className: `${styles['pt-20']} ${styles['t-c']} top-brand-list` },
-              React.createElement(
-                'ul',
-                { className: styles['pl-0'] },
-                React.createElement(
-                  'li',
-                  null,
-                  'Shoes'
-                ),
-                React.createElement(
-                  'li',
-                  null,
-                  'Clothes'
-                ),
-                React.createElement(
-                  'li',
-                  null,
-                  'Track Suite'
-                ),
-                React.createElement(
-                  'li',
-                  null,
-                  'Sports'
-                ),
-                React.createElement(
-                  'li',
-                  null,
-                  'Clothing & Accessories'
-                )
-              )
-            )
-          )
-        ),
-        React.createElement(
-          Col,
-          { md: 2, className: `${styles['pl-0']} ${styles['pr-10']}` },
-          React.createElement(
-            'div',
-            { className: `${styles['flex-center']}  ${styles['flex-colum']} ${styles['bg-white']} top-brand-part-inn ${styles['border-radius4']}` },
-            React.createElement(
-              'div',
-              { className: `dg-logo ${styles['flex-center']}` },
-              React.createElement(
-                'a',
-                { href: `/${lang}/search?q=gg&isListed=false` },
-                React.createElement('img', { src: '/static/img/landing-page-fashion/top-brands3.jpg', className: 'img-responsive' })
-              )
-            ),
-            React.createElement(
-              'div',
-              { className: `${styles['pt-20']} ${styles['t-c']} top-brand-list` },
-              React.createElement(
-                'ul',
-                { className: styles['pl-0'] },
-                React.createElement(
-                  'li',
-                  null,
-                  'Shoes'
-                ),
-                React.createElement(
-                  'li',
-                  null,
-                  'Clothes'
-                ),
-                React.createElement(
-                  'li',
-                  null,
-                  'Track Suite'
-                ),
-                React.createElement(
-                  'li',
-                  null,
-                  'Sports'
-                ),
-                React.createElement(
-                  'li',
-                  null,
-                  'Clothing & Accessories'
-                )
-              )
-            )
-          )
-        ),
-        React.createElement(
-          Col,
-          { md: 2, className: `${styles['pl-0']} ${styles['pr-10']}` },
-          React.createElement(
-            'div',
-            { className: `${styles['flex-center']}  ${styles['flex-colum']} ${styles['bg-white']} top-brand-part-inn ${styles['border-radius4']}` },
-            React.createElement(
-              'div',
-              { className: `guc-logo ${styles['flex-center']}` },
-              React.createElement(
-                'a',
-                { href: `/${lang}/search?q=gucci&isListed=false` },
-                React.createElement('img', { src: '/static/img/landing-page-fashion/top-brands5.jpg', className: 'img-responsive' })
-              )
-            ),
-            React.createElement(
-              'div',
-              { className: `${styles['pt-20']} ${styles['t-c']} top-brand-list` },
-              React.createElement(
-                'ul',
-                { className: styles['pl-0'] },
-                React.createElement(
-                  'li',
-                  null,
-                  'Shoes'
-                ),
-                React.createElement(
-                  'li',
-                  null,
-                  'Clothes'
-                ),
-                React.createElement(
-                  'li',
-                  null,
-                  'Track Suite'
-                ),
-                React.createElement(
-                  'li',
-                  null,
-                  'Sports'
-                ),
-                React.createElement(
-                  'li',
-                  null,
-                  'Clothing & Accessories'
-                )
-              )
-            )
-          )
-        ),
-        React.createElement(Col, { md: 2, className: `${styles['pl-0']} ${styles['pr-10']}` })
       )
     )
   )

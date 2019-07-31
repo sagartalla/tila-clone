@@ -15,113 +15,113 @@ const Electronics = () => (
           <div className={`${styles['flex']} popular-cat-part-sub ${styles['pt-20']} ${styles['pb-20']}`}>
             <div className={`popular-cat-part-inn ${styles['mr-35']}`}>
               <div className="popular-cat-inn-img">
-                <a href={`/${lang}/srp/mobiles?categoryTree=true&isListed=false&sid=848,2349`}>
+                <a href={`/${lang}/clp/${lang === 'en' ? 'mobiles' : 'الهواتف-النقالة'}`}>
                   <img src="/static/img/landing-page-tech-img/popular-cat.png" className="img-responsive" />
                 </a>
               </div>
               <div className={`${styles['flex-center']} ${styles['flex-colum']}`}>
                 <span className={styles['fs-12']}>Mobiles</span>
-                <span className={styles['fontW600']}>UP to 35% Off</span>
+                {/* <span className={styles['fontW600']}>UP to 35% Off</span> */}
               </div>
             </div>
             <div className={`popular-cat-part-inn-1 ${styles['mr-35']}`}>
               <div className="popular-cat-inn-img">
-                <a href={`/${lang}/srp/televisions?categoryTree=true&isListed=false&sid=848,2351`}>
+                <a href={`/${lang}/clp/${lang === 'en' ? 'televisions' : 'التلفزيونات'}`}>
                   <img src="/static/img/landing-page-tech-img/popular-cat1.png" className="img-responsive" />
                 </a>
               </div>
               <div className={`${styles['flex-center']} ${styles['flex-colum']}`}>
                 <span className={styles['fs-12']}>Televisions</span>
-                <span className={styles['fontW600']}>UP to 25% Off</span>
+                {/* <span className={styles['fontW600']}>UP to 25% Off</span> */}
               </div>
             </div>
             <div className={`popular-cat-part-inn
              ${styles['mr-35']}`}>
               <div className="popular-cat-inn-img">
-                <a href={`/${lang}/srp/laptops?categoryTree=true&isListed=false&sid=848,2352`}>
+                <a href={`/${lang}/clp/${lang === 'en' ? 'laptops' : 'أجهزة-الكمبيوتر-المحمولة'}`}>
                   <img src="/static/img/landing-page-tech-img/popular-cat2.png" className="img-responsive" />
                 </a>
               </div>
               <div className={`${styles['flex-center']} ${styles['flex-colum']}`}>
                 <span className={styles['fs-12']}>Laptop</span>
-                <span className={styles['fontW600']}>UP to 25% Off</span>
+                {/* <span className={styles['fontW600']}>UP to 25% Off</span> */}
               </div>
             </div>
             <div className={`popular-cat-part-inn ${styles['mr-35']}`}>
               <div className="popular-cat-inn-img">
-                <a href={`${lang}/srp/tablets?categoryTree=true&isListed=false&sid=848,2350`}>
+                <a href={`/${lang}/clp/${lang === 'en' ? 'Tablets' : 'اجهزة تابلت وايباد'}`}>
                   <img src="/static/img/landing-page-tech-img/popular-cat3.png" className="img-responsive" />
                 </a>
               </div>
               <div className={`${styles['flex-center']} ${styles['flex-colum']}`}>
                 <span className={styles['fs-12']}>Tablets</span>
-                <span className={styles['fontW600']}>UP to 15% Off</span>
+                {/* <span className={styles['fontW600']}>UP to 15% Off</span> */}
               </div>
             </div>
             <div className="popular-cat-part-inn">
               <div className="popular-cat-inn-img">
-                <a href={`${lang}/srp/camera?categoryTree=true&isListed=false&sid=848,882`}>
+                <a href={`/${lang}/clp/${lang === 'en' ? 'camera' : 'الة-تصوير'}`}>
                   <img src="/static/img/landing-page-tech-img/popular-cat4.png" className="img-responsive" />
                 </a>
               </div>
               <div className={`${styles['flex-center']} ${styles['flex-colum']}`}>
                 <span className={styles['fs-12']}>Cameras</span>
-                <span className={styles['fontW600']}>UP to 15% Off</span>
+                {/* <span className={styles['fontW600']}>UP to 15% Off</span> */}
               </div>
             </div>
             <div className={`popular-cat-part-inn ${styles['mr-35']}`}>
               <div className="popular-cat-inn-img">
-                <a href={`${lang}/search?q=Gaming&language=en&isListed=false`}>
+                <a href={`/${lang}/clp/${lang === 'en' ? 'gaming' : 'الة-تصوير'}`}>
                   <img src="/static/img/landing-page-tech-img/popular-cat5.png" className="img-responsive" />
                 </a>
               </div>
               <div className={`${styles['flex-center']} ${styles['flex-colum']}`}>
                 <span className={styles['fs-12']}>Gaming</span>
-                <span className={styles['fontW600']}>UP to 35% Off</span>
+                {/* <span className={styles['fontW600']}>UP to 35% Off</span> */}
               </div>
             </div>
             <div className={`popular-cat-part-inn ${styles['mr-35']}`}>
               <div className="popular-cat-inn-img">
-                <a href={`/${lang}/srp/mobile-accessories?categoryTree=true&isListed=false&sid=848,850`}>
+                <a href={`/${lang}/clp/${lang === 'en' ? 'mobile-accessories' : 'ملحقات-الهاتف-المحمول'}`}>
                   <img src="/static/img/landing-page-tech-img/popular-cat6.png" className="img-responsive" />
                 </a>
               </div>
               <div className={`${styles['flex-center']} ${styles['flex-colum']}`}>
                 <span className={styles['fs-12']}>Mobile Accessories</span>
-                <span className={styles['fontW600']}>UP to 35% Off</span>
+                {/* <span className={styles['fontW600']}>UP to 35% Off</span> */}
               </div>
             </div>
             <div className={`popular-cat-part-inn ${styles['mr-35']}`}>
               <div className="popular-cat-inn-img">
-                <a href={`/${lang}/srp/health-care?categoryTree=true&isListed=false&sid=932,972`}>
+                <a href={`/${lang}/clp/${lang === 'en' ? 'health-care' : 'ملحقات-الهاتف-المحمول'}`}>
                   <img src="/static/img/landing-page-tech-img/popular-cat7.png" className="img-responsive" />
                 </a>
               </div>
               <div className={`${styles['flex-center']} ${styles['flex-colum']}`}>
                 <span className={styles['fs-12']}>Personal &amp; Health Care</span>
-                <span className={styles['fontW600']}>UP to 35% Off</span>
+                {/* <span className={styles['fontW600']}>UP to 35% Off</span> */}
               </div>
             </div>
             <div className={`popular-cat-part-inn ${styles['mr-35']}`}>
               <div className="popular-cat-inn-img">
-                <a href={`/${lang}/srp/home-applaince?categoryTree=true&isListed=false&sid=932,935`}>
+                <a href={`/${lang}/clp/${lang === 'en' ? 'Home Appliances' : 'أجهزة المنزل'}`}>
                   <img src="/static/img/landing-page-tech-img/popular-cat8.png" className="img-responsive" />
                 </a>
               </div>
               <div className={`${styles['flex-center']} ${styles['flex-colum']}`}>
                 <span className={styles['fs-12']}>Home Appliances</span>
-                <span className={styles['fontW600']}>UP to 35% Off</span>
+                {/* <span className={styles['fontW600']}>UP to 35% Off</span> */}
               </div>
             </div>
             <div className="popular-cat-part-inn-1">
               <div className="popular-cat-inn-img">
-                <a href={`/${lang}/search?q=Home%20Entertainment&language=en&isListed=false`}>
+                <a href={`/${lang}/clp/${lang === 'en' ? 'Home Entertainment' : 'أجهزة ترفيهية'}`}>
                   <img src="/static/img/landing-page-tech-img/popular-cat9.png" className="img-responsive" />
                 </a>
               </div>
               <div className={`${styles['flex-center']} ${styles['flex-colum']}`}>
                 <span className={styles['fs-12']}>Home Entertainment</span>
-                <span className={styles['fontW600']}>UP to 35% Off</span>
+                {/* <span className={styles['fontW600']}>UP to 35% Off</span> */}
               </div>
             </div>
 
@@ -132,7 +132,7 @@ const Electronics = () => (
           <Col md={4} className={styles['pl-0']}>
             <h4 className={styles['fontW600']}><span className={`populat-cat-title ${styles['bdr-btm-green-color']}`}>NEW</span></h4>
             <div className={`${styles['mt-20']} ${styles['relative']} brand-part-inn`}>
-              <a href={`/${lang}/search?q=samsung&language=en&isListed=false`}>
+              <a href={`/${lang}/clp/Samsung%20Curve%20TV`}>
                 <img src="/static/img/landing-page-tech-img/samsung.jpg" className="img-responsive" />
               </a>
               <div className={`${styles['absolute']} price-details ${styles['flex']} ${styles['flex-colum']}`}>
@@ -144,7 +144,7 @@ const Electronics = () => (
           <Col md={4} className={styles['pl-0']}>
             <h4 className={`${styles['fontW600']} ${styles['text-uppercase']}`}><span className={`populat-cat-title ${styles['bdr-btm-green-color']}`}>Exclusive</span> </h4>
             <div className={`${styles['mt-20']} ${styles['relative']} brand-part-inn`}>
-              <a href={`/${lang}/search?q=MI%20A1&language=en&isListed=false`}>
+              <a href={`/${lang}/clp/MI%20A1`}>
                 <img src="/static/img/landing-page-tech-img/mi-brand-img.jpg" className="img-responsive" />
               </a>
               <div className={`${styles['absolute']} price-details ${styles['flex']} ${styles['flex-colum']} ${styles['white-color']}`}>
@@ -156,7 +156,7 @@ const Electronics = () => (
           <Col md={4} className={styles['pl-0']}>
             <h4 className={`${styles['fontW600']}`}><span className={`populat-cat-title ${styles['bdr-btm-green-color']} ${styles['text-uppercase']}`}>Apple</span>  - Its always a good idea!</h4>
             <div className={`${styles['mt-20']} ${styles['relative']} brand-part-inn`}>
-              <a href={`/${lang}/search?q=apple&language=en&isListed=false`}>
+              <a href={`/${lang}/srp/${lang === 'en' ? 'Apple' : 'ابل'}/search?q=Apple`}>
                 <img src="/static/img/landing-page-tech-img/apple-brand-img.jpg" className="img-responsive" />
               </a>
               <div className={`${styles['absolute']} price-details ${styles['flex']} ${styles['flex-colum']} ${styles['white-color']}`}>
@@ -171,7 +171,7 @@ const Electronics = () => (
           <Col md={6} className={styles['pl-0']}>
             <h4 className={`${styles['fontW600']} ${styles['text-uppercase']} ${styles['pb-10']}`}><span className={`populat-cat-title ${styles['bdr-btm-green-color']}`}>Gaming  </span>  Consoles</h4>
             <div>
-              <a href={`/${lang}/search?q=Gaming&language=en&isListed=false`}>
+              <a href={`/${lang}/clp/Gaming%20Console`}>
                 <img src="/static/img/landing-page-tech-img/gaming-img.jpg" className="img-responsive" />
               </a>
             </div>
@@ -179,7 +179,7 @@ const Electronics = () => (
           <Col md={6} className={styles['pr-0']}>
             <h4 className={`${styles['fontW600']} ${styles['text-uppercase']} ${styles['pb-10']}`}><span className={`populat-cat-title ${styles['bdr-btm-green-color']}`}>RC Toys</span> </h4>
             <div>
-              <a href={`/${lang}/search?q=gaming%20&%20accessories&language=en&isListed=false`}>
+              <a href={`/${lang}/clp/Remote%20Control%20Toys`}>
                 <img src="/static/img/landing-page-tech-img/gaming-img1.jpg" className="img-responsive" />
               </a>
             </div>
@@ -190,7 +190,7 @@ const Electronics = () => (
           <h4 className={`${styles['fontW600']} ${styles['text-uppercase']} ${styles['pb-10']}`}><span className={`populat-cat-title ${styles['bdr-btm-green-color']}`}>Home & Kitchen  </span>  Appliances</h4>
           <Col md={2} className={styles['pl-0']}>
             <div className={`${styles['mt-20']} ${styles['relative']} ${styles['home-kitchan-inn']}`}>
-              <a href={`/${lang}/search?q=Iron&language=en&isListed=false`}>
+              <a href={`/${lang}/clp/Iron%20box`}>
                 <img src="/static/img/landing-page-tech-img/home-kitchen1.jpg" className="img-responsive" />
               </a>
               <div className={`${styles['absolute']} home-price-details ${styles['white-color']} ${styles['flex']} ${styles['flex-colum']}`}>
@@ -214,7 +214,7 @@ const Electronics = () => (
           </Col>
           <Col md={2} className={styles['pl-0']}>
             <div className={`${styles['mt-20']} ${styles['relative']} ${styles['home-kitchan-inn']}`}>
-              <a href={`/${lang}/search?q=Mixer%20&%20Juicers&language=en&isListed=false`}>
+              <a href={`/${lang}/clp/Mixer%20and%20Juicer`}>
                 <img src="/static/img/landing-page-tech-img/home-kitchen2.jpg" className="img-responsive" />
               </a>
               <div className={`${styles['absolute']} home-price-details ${styles['white-color']} ${styles['flex']} ${styles['flex-colum']}`}>
@@ -250,7 +250,7 @@ const Electronics = () => (
           </Col>
           <Col md={2} className={styles['pl-0']}>
             <div className={`${styles['mt-20']} ${styles['relative']} ${styles['home-kitchan-inn']}`}>
-              <a href={`/${lang}/search?q=Iron&language=en&isListed=false`}>
+              <a href={`/${lang}/clp/Iron%20box`}>
                 <img src="/static/img/landing-page-tech-img/home-kitchen1.jpg" className="img-responsive" />
               </a>
               <div className={`${styles['absolute']} home-price-details ${styles['white-color']} ${styles['flex']} ${styles['flex-colum']}`}>
@@ -262,7 +262,7 @@ const Electronics = () => (
           </Col>
         </div>
         {/* brands you love start */}
-        <div className={`brands-love-part ${styles['pt-30']} ${styles['pb-30']} ${styles['clear-b']}`}>
+        {/* <div className={`brands-love-part ${styles['pt-30']} ${styles['pb-30']} ${styles['clear-b']}`}>
           <h4 className={`${styles['fontW600']} ${styles['text-uppercase']}`}><span className={`populat-cat-title ${styles['bdr-btm-green-color']}`}>Brands </span>  you love</h4>
           <div className={styles['mt-25']}>
             <Col md={2} className={styles['pl-0']}>
@@ -350,7 +350,7 @@ const Electronics = () => (
               </div>
             </Col>
           </div>
-        </div>
+        </div> */}
       </Row>
     </Grid>
   </div>
