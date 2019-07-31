@@ -45,7 +45,7 @@ class Display extends Component {
     });
   }
 
-  getUrl = crum => `/${language}/search/${crum.display_name_en.toLowerCase().split(' ').join('-')}?q=${crum.display_name_en}&isListed=false&sid=${crum.id}`
+  getUrl = crum => `/${language}/search/${crum.display_name_en.toLowerCase().replace(/\//g, '').split(' ').join('-')}?q=${crum.display_name_en}&isListed=false&sid=${crum.id}`
 
   addToWishlist(e) {
     e.stopPropagation();

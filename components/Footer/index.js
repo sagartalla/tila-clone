@@ -77,14 +77,14 @@ const e = [
   },
 
   {
-    url: `/${lang}/srp/home-applaince?categoryTree=true&isListed=false&sid=932,935`,
+    url: `/${lang}/search?q=Home Appliances`,
     title: FOOTER_PAGE.HOME_APLLIANCES,
   },
 ];
 
 const l = [
   {
-    url: `/${lang}/search?q=Beauty%20&%20Personal%20Care&language=en&isListed=false`,
+    url: `/${lang}/search?q=health%20and%20beauty`,
     title: FOOTER_PAGE.BEAUTY_AND_PERSONAL_CARE,
   },
 
@@ -94,8 +94,8 @@ const l = [
   },
 
   {
-    url: `/${lang}/search?q=Home%20Appliances&language=en&isListed=false`,
-    title: FOOTER_PAGE.HOME_APLLIANCES,
+    url: `/${lang}/search?q=dining`,
+    title: FOOTER_PAGE.KITCHEN_AND_DINING,
   },
   {
     url: `/${lang}/search?q=Home%20Decor&language=en&isListed=false`,
@@ -113,22 +113,22 @@ const l = [
 
 const t = [
   {
-    url: `/${lang}/search?q=apple&language=en&isListed=false`,
+    url: `/${lang}/brand/apple`,
     title: '/static/img/bg-img/Apple.png',
   },
 
   {
-    url: `/${lang}/search?q=baseus&language=en&isListed=false`,
+    url: `/${lang}/brand/baseus`,
     title: '/static/img/bg-img/Baseus.png',
   },
 
   {
-    url: `/${lang}/search?q=ray%20ban&language=en&isListed=false`,
+    url: `/${lang}/brand/ray%20ban`,
     title: '/static/img/bg-img/RayBan.png',
   },
 
   {
-    url: `/${lang}/search?q=fossil&language=en&isListed=false`,
+    url: `/${lang}/brand/fossil`,
     title: '/static/img/bg-img/Fossil.png',
   },
 ];
@@ -261,14 +261,16 @@ const FooterBar = props => (
       <Grid>
         <Row className={styles['footer-social-list']}>
           <Col md={3} sm={6} className={`${styles['footer-social-list']} ${styles['pr-0']}`}>
+          <a href="https://www.snapchat.com/add/tilasocial" target="_blank">
             <h4 className={styles['flex-center']}>
                 <span className={`${styles['footer-social-title']} ${styles['mr-10']}`}><img src="/static/img/bg-img/snapchat.png" className={styles['img-responsive']} /></span>
                 <span className={`${styles.fontW600}`}>{FOOTER_PAGE.ON_SNAP}</span>
                 <span className={`${styles['follow-sc-btn']} ${styles['fs-10']} ${styles['lne-ht2']}  ${styles['ml-10']} ${styles['pl-15']} ${styles['pr-15']}`}>{FOOTER_PAGE.FOLLOW}</span>
             </h4>
+          </a>
           </Col>
           <Col md={3} sm={6} className={`${styles['footer-social-list']} ${styles['pr-0']}`}>
-          <a href="https://twitter.com/TilaSocial" target="_blank">
+          <a href="https://www.twitter.com/tilasocial" target="_blank">
             <h4 className={styles['flex-center']}>
               <span className={`${styles['footer-social-title']} ${styles['mr-10']}`}><img src="/static/img/bg-img/bitmap-twitter.jpg" className={styles['img-responsive']} /></span>
               <span className={`${styles['twitter-clr']} ${styles.fontW600}`}>{FOOTER_PAGE.ON_TWITTER}</span>
@@ -286,7 +288,7 @@ const FooterBar = props => (
           </a>  
           </Col>
           <Col md={3} sm={6} className={`${styles['footer-social-list']} ${styles['pr-0']}`}>
-          <a href="https://www.facebook.com/TilaSocialKSA/" target="_blank">
+          <a href="https://www.facebook.com/tilasocial/" target="_blank">
             <h4 className={styles['flex-center']}>
               <span className={`${styles['footer-social-title']} ${styles['mr-10']}`}><img src="/static/img/bg-img/bitmap-social-fb.jpg" className={styles['img-responsive']} /></span>
               <span className={`${styles['lgt-blue']} ${styles.fontW600}`}>{FOOTER_PAGE.ON_FACEBOOK}</span>
@@ -315,13 +317,13 @@ const FooterBar = props => (
             <div className={styles['ipad-pr-0']}>
               <h4 className={`${styles.fontW600} ${styles['fs-16']} ${styles['black-color']}`}>{FOOTER_PAGE.POLICY}</h4>
               <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
-                <li><a href="/en/policy/user-terms-and-conditions" target="_blank">{FOOTER_PAGE.TERMS_CONDITION}</a></li>
-                <li><a href="/en/policy/cancellation-policy" target="_blank">{FOOTER_PAGE.CANCELLATION_POLICY}</a></li>
-                <li><a href="/en/policy/exchange-replacement-policy" target="_blank">{FOOTER_PAGE.EXCHANGE_REPLACEMENT_POLICY}</a></li>
-                <li><a href="/en/policy/return-refund-policy" target="_blank">{FOOTER_PAGE.REFUND_POLICY}</a></li>
-                <li><a href="/en/policy/warranty-policy" target="_blank">{FOOTER_PAGE.WARRENTY_POLICY}</a></li>
+                <li><a href={`/${lang}/policy/user-terms-and-conditions`} target="_blank">{FOOTER_PAGE.TERMS_CONDITION}</a></li>
+                <li><a href={`/${lang}/policy/cancellation-policy`} target="_blank">{FOOTER_PAGE.CANCELLATION_POLICY}</a></li>
+                <li><a href={`/${lang}/policy/exchange-replacement-policy`} target="_blank">{FOOTER_PAGE.EXCHANGE_REPLACEMENT_POLICY}</a></li>
+                <li><a href={`/${lang}/policy/return-refund-policy`} target="_blank">{FOOTER_PAGE.REFUND_POLICY}</a></li>
+                <li><a href={`/${lang}/policy/warranty-policy`} target="_blank">{FOOTER_PAGE.WARRENTY_POLICY}</a></li>
                 {/* <li><a href="/en/policy/sp" target="_blank">{FOOTER_PAGE.SHIPPING_POLICY}</a></li> */}
-                <li><a href="/en/policy/privacy-policy" target="_blank">{FOOTER_PAGE.PRIVACY_POLICY}</a></li>
+                <li><a href={`/${lang}/policy/privacy-policy`} target="_blank">{FOOTER_PAGE.PRIVACY_POLICY}</a></li>
               </ul>
             </div>
             {/* <Col md={2} sm={2} className={styles['ipad-pr-0']}>
@@ -341,7 +343,7 @@ const FooterBar = props => (
               <div>
                 <h4 className={`${styles.fontW600} ${styles['fs-16']} ${styles['black-color']}`}>{FOOTER_PAGE.CUSTOMER_SERVICE}</h4>
                 <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
-                  <li>{FOOTER_PAGE.DELIVERY}</li>
+                  <li><a href={`/${lang}/policy/customer-delivery`} target="_blank">{FOOTER_PAGE.DELIVERY}</a></li>
                   <li>{FOOTER_PAGE.SIZE_GUIDE}</li>
                   <li>{FOOTER_PAGE.PAY_METHOD}</li>
                   <li>{FOOTER_PAGE.CONSUMER_RIGHT}</li>

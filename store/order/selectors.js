@@ -60,7 +60,7 @@ const getOrderDetails = (store) => {
             i.warranty_policy.policies[i.warranty_policy.preferred_policy] : {},
           gift_info: i.gift_info,
           variantAttributes: i.variant_info && i.variant_info.variant_details && i.variant_info.variant_details.attribute_map ?
-            Object.values(i.variant_info.variant_details.attribute_map).filter(attr => attr.visible) : [],
+            Object.values(i.variant_info.variant_details.attribute_map).filter(attr =>  attr.attribute_group_name === 'IDENTITY' && attr.visible) : [],
         })),
       )(order_items),
     };

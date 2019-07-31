@@ -91,9 +91,33 @@ class PageData extends React.Component {
     const { content } = this.props;
     switch (content.layout_id) {
       case 'CT1a':
+        return (
+          <div className={`${styles['mb-20']} top-banner-slider slider-dots-part`}>
+            <h3 className={styles['mt-0']}>{content.data[lang].title}</h3>
+            <Slider
+              dots
+              autoplay
+              asNavFor={sliderTBS}
+              ref={(slider) => { sliderTBS = slider; }}
+              lazyLoad={false}
+              className={`${styles['main-slider-part']} ${styles['flex']} ${styles['flex-colum']}`}
+              customPaging={i => <span className={`${styles['fs-10']}`}>{content.data[lang].banners[i].display_name}</span>}
+            >
+              {content.data[lang].banners.map(i => (
+                <div key={i.display_name}>
+                  <a href={i.link}>
+                    <div className={`${styles['item']} ${styles['slick-itm']}`} key={i.display_name}>
+                      <img src={i.img} alt={i.display_name} />
+                    </div>
+                  </a>
+                </div>
+              ))}
+            </Slider>
+          </div>
+        );
       case 'CT1':
         return (
-          <div className={`${styles['mb-40']} top-banner-slider`}>
+          <div className={`${styles['mb-20']} top-banner-slider slider-dots-part`}>
             <h3>{content.data[lang].title}</h3>
             <Slider
               dots
@@ -101,14 +125,14 @@ class PageData extends React.Component {
               asNavFor={sliderTBS}
               ref={(slider) => { sliderTBS = slider; }}
               lazyLoad={false}
-              className={styles['ht-100per']}
+              className={`${styles['main-slider-part']} ${styles['flex']} ${styles['flex-colum']}`}
               customPaging={i => <span className={`${styles['fs-10']}`}>{content.data[lang].banners[i].display_name}</span>}
             >
               {content.data[lang].banners.map(i => (
                 <div key={i.display_name}>
                   <a href={i.link}>
-                    <div className="item" key={i.display_name}>
-                      <img src={i.img} width={i.config.width} height={i.config.height} alt={i.display_name} />
+                    <div className={`${styles['item']} ${styles['slick-itm']}`} key={i.display_name}>
+                      <img src={i.img} alt={i.display_name} />
                     </div>
                   </a>
                 </div>
@@ -164,16 +188,18 @@ class PageData extends React.Component {
       case 'BT2': {
         const { banners, title } = content.data[lang];
         return (
-          <Row>
+          <Row className={styles['banner-prt-main']}>
             {/* {title &&
               <Col xs={12} md={12} sm={12}><h2 className={`${styles['fs-20']} ${styles.fontW600} ${styles['text-uppercase']} ${styles['mb-5']} ${styles['m-0']}`}>{title}</h2></Col>} */}
             {banners.length > 0 &&
               banners.map(banner => (
-                <Col xs={12 / banners.length} md={12 / banners.length} sm={12 / banners.length}>
-                  <a href={banner.link} target="_blank">
-                    <img src={banner.img} className={styles['border-radius4']} width={banner.config.width} height={banner.config.height} alt={banner.display_name} />
-                  </a>
-                </Col>
+                <div className={styles['banner-inn-prt']} style={{ width: `${100 / banners.length}%` }}>
+                  <div className={styles['sub-banr-img']}>
+                    <a href={banner.link} target="_blank">
+                      <img src={banner.img} className={`${styles['border-radius4']} ${styles['inside-bnr']}`} alt={banner.display_name} />
+                    </a>
+                  </div>
+                </div>
               ))}
           </Row>
         );
