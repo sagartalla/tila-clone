@@ -315,13 +315,13 @@ const FooterBar = props => (
             <div className={styles['ipad-pr-0']}>
               <h4 className={`${styles.fontW600} ${styles['fs-16']} ${styles['black-color']}`}>{FOOTER_PAGE.POLICY}</h4>
               <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
-                <li><a href="/en/policy/user-terms-and-conditions" target="_blank">{FOOTER_PAGE.TERMS_CONDITION}</a></li>
-                <li><a href="/en/policy/cancellation-policy" target="_blank">{FOOTER_PAGE.CANCELLATION_POLICY}</a></li>
-                <li><a href="/en/policy/exchange-replacement-policy" target="_blank">{FOOTER_PAGE.EXCHANGE_REPLACEMENT_POLICY}</a></li>
-                <li><a href="/en/policy/return-refund-policy" target="_blank">{FOOTER_PAGE.REFUND_POLICY}</a></li>
-                <li><a href="/en/policy/warranty-policy" target="_blank">{FOOTER_PAGE.WARRENTY_POLICY}</a></li>
+                <li><a href={`/${lang}/policy/user-terms-and-conditions`} target="_blank">{FOOTER_PAGE.TERMS_CONDITION}</a></li>
+                <li><a href={`/${lang}/policy/cancellation-policy`} target="_blank">{FOOTER_PAGE.CANCELLATION_POLICY}</a></li>
+                <li><a href={`/${lang}/policy/exchange-replacement-policy`} target="_blank">{FOOTER_PAGE.EXCHANGE_REPLACEMENT_POLICY}</a></li>
+                <li><a href={`/${lang}/policy/return-refund-policy`} target="_blank">{FOOTER_PAGE.REFUND_POLICY}</a></li>
+                <li><a href={`/${lang}/policy/warranty-policy`} target="_blank">{FOOTER_PAGE.WARRENTY_POLICY}</a></li>
                 {/* <li><a href="/en/policy/sp" target="_blank">{FOOTER_PAGE.SHIPPING_POLICY}</a></li> */}
-                <li><a href="/en/policy/privacy-policy" target="_blank">{FOOTER_PAGE.PRIVACY_POLICY}</a></li>
+                <li><a href={`/${lang}/policy/privacy-policy`} target="_blank">{FOOTER_PAGE.PRIVACY_POLICY}</a></li>
               </ul>
             </div>
             {/* <Col md={2} sm={2} className={styles['ipad-pr-0']}>
@@ -341,7 +341,7 @@ const FooterBar = props => (
               <div>
                 <h4 className={`${styles.fontW600} ${styles['fs-16']} ${styles['black-color']}`}>{FOOTER_PAGE.CUSTOMER_SERVICE}</h4>
                 <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
-                  <li>{FOOTER_PAGE.DELIVERY}</li>
+                  <li><a href={`/${lang}/delivery/customer-delivery`} target="_blank">{FOOTER_PAGE.DELIVERY}</a></li>
                   <li>{FOOTER_PAGE.SIZE_GUIDE}</li>
                   <li>{FOOTER_PAGE.PAY_METHOD}</li>
                   <li>{FOOTER_PAGE.CONSUMER_RIGHT}</li>
