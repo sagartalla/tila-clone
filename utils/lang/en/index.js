@@ -123,6 +123,7 @@ export const EN_KEYWORDS = {
     PAYMENT_MODE: 'Net banking, credit card, vouchers and etc....',
     ON_DELIVERY: 'on delivery',
     DROP_THE_ANSWER_INTO_THE_BOX: 'Drop the answer icon into the box above',
+    COD_TC: 'By choosing correct image, I accept T&C and pay cash delivery',
     LOADING_CAPTCHA: 'Loading Captcha...',
     YOU_ARE_SIGNED_IN_AS: 'Logged in as',
     CHANGE: 'Change',
@@ -945,5 +946,8 @@ export const EN_KEYWORDS = {
   },
   COMPARE_WIDGET: {
     COMPARE: 'Compare',
+  },
+  WARRANTY_PAGE: {
+    WARRANTY_LABEL: '*The extended warranty cost will be added to your cart'
   },
 };
