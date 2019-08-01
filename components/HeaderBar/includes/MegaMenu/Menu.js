@@ -24,7 +24,7 @@ const brandImages = {
   topBrands: {
     '#00C7B1': [
       {
-        value: 'samsung',
+        value: 'Samsung',
         link: `/${lang}/brand/samsung`,
       },
       {
