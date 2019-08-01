@@ -126,6 +126,7 @@ export const EN_KEYWORDS = {
     PAYMENT_MODE: 'Net banking, credit card, vouchers and etc....',
     ON_DELIVERY: 'on delivery',
     DROP_THE_ANSWER_INTO_THE_BOX: 'Drop the answer icon into the box above',
+    COD_TC: 'By choosing correct image, I accept T&C and pay cash delivery',
     LOADING_CAPTCHA: 'Loading Captcha...',
     YOU_ARE_SIGNED_IN_AS: 'Logged in as',
     CHANGE: 'Change',
@@ -533,7 +534,7 @@ export const EN_KEYWORDS = {
     RETURN: 'Returns',
     CONSUMER_RIGHT: 'Consumer rights',
     DOWNLOAD_APP: 'Download the app',
-    TILA_RIGHTS: '2019 www.tila.com. All rights reserved',
+    TILA_RIGHTS: 'Tila.com. All rights reserved',
     SIZE_CHART: 'Size Chart',
     WOMEN_CLOTHING: 'Women\'s Clothing',
     MEN_CLOTHING: 'Men\'s Clothing',
@@ -794,7 +795,7 @@ export const EN_KEYWORDS = {
     ORDER_TOTAL: 'Order Total',
     NEED_HELP: 'Need Help',
     ORDER: 'ORDER #',
-    NO_WISHLIST_LABEL: 'You don’t have any orders yet',
+    NO_WISHLIST_LABEL: 'You don’t have any orders yet.',
     DONT_WAIT: 'Dont wait no more!',
     START_SHOPPING: 'Start shopping',
     TRACKING_ID: 'Tracking Id',
@@ -948,5 +949,8 @@ export const EN_KEYWORDS = {
   },
   COMPARE_WIDGET: {
     COMPARE: 'Compare',
+  },
+  WARRANTY_PAGE: {
+    WARRANTY_LABEL: '*The extended warranty cost will be added to your cart'
   },
 };

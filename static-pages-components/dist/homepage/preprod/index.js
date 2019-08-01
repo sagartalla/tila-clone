@@ -45,7 +45,7 @@ const tie = [{
   key: 'Laptops'
 }, {
   img: '/static/img/landing-home/memory.png',
-  title: `${lang === 'en' ? 'Memory' : 'أجهزة التخزين'}`,
+  title: `${lang === 'en' ? 'Memory Devices' : 'أجهزة التخزين'}`,
   key: 'Memory'
 }, {
   img: '/static/img/landing-home/cameras.png',
@@ -236,25 +236,25 @@ const responsive = [{
 }];
 
 const twoCols = [{
-  img: `/static/img/landing-home/${lang === 'en' ? 'Half Banners' : 'Half Banners-AR'}.jpg`,
+  img: `/static/img/landing-home/${lang === 'en' ? 'Half Banners' : 'Half Banners_AR_01'}.jpg`,
   link: `/${lang}/search?q=Huawei%20Y5%20Lite`,
   title: 'HAUWEI'
 }, {
-  img: `/static/img/landing-home/${lang === 'en' ? 'Half Banners 01' : 'Half Banners-AR01'}.jpg`,
+  img: `/static/img/landing-home/${lang === 'en' ? 'Half Banners 01' : 'Half Banners_AR_02'}.jpg`,
   link: `/${lang}/search?q=Baseus`,
   title: 'BASEUS'
 }];
 
 const threeCols = [{
-  img: `/static/img/landing-home/${lang === 'en' ? 'One third Banners' : 'One third Banners-AR'}.jpg`,
+  img: `/static/img/landing-home/${lang === 'en' ? 'One third Banners' : 'One third Banners_AR_01'}.jpg`,
   link: `/${lang}/search?q=Best%20Life%20Laptop%20Bag`,
   title: 'BEST LIFE'
 }, {
-  img: `/static/img/landing-home/${lang === 'en' ? 'One third Banners 01' : 'One third Banners-AR01'}.jpg`,
+  img: `/static/img/landing-home/${lang === 'en' ? 'One third Banners 01' : 'One third Banners_AR_02'}.jpg`,
   link: `/${lang}/search?q=Wiwu%20laptop%20Sleeve`,
   title: 'WIWU'
 }, {
-  img: `/static/img/landing-home/${lang === 'en' ? 'One third Banners 02' : 'One third Banners-AR02'}.jpg`,
+  img: `/static/img/landing-home/${lang === 'en' ? 'One third Banners 02' : 'One third Banners_AR_03'}.jpg`,
   link: `/${lang}/search/?q=MICROPACK`,
   title: 'MICROPACK'
 }];
@@ -515,7 +515,7 @@ const HomePage = () => React.createElement(
       React.createElement(
         'div',
         { className: `${styles['fs-20']} title` },
-        lang === 'en' ? 'Fashion Picks' : 'أفضل الأزياء'
+        lang === 'en' ? 'FASHION PICKS' : 'أفضل الأزياء'
       ),
       React.createElement(
         'div',
@@ -991,7 +991,17 @@ const HomePage = () => React.createElement(
     ),
     React.createElement(
       Row,
-      { className: `${styles['m-15']} ${styles['mt-40']} ${styles['mb-40']} brand-details-inn` },
+      { className: `${styles['m-15']} ${styles['mt-20']} ${styles['mb-40']} brand-details-inn` },
+      React.createElement(
+        'h4',
+        { className: `${styles['fontW600']} ${styles['ml-10']} ${styles['mb-20']} ${styles['text-uppercase']}` },
+        React.createElement(
+          'span',
+          { className: `populat-cat-title ${styles['bdr-btm-black-color']}` },
+          'Brands '
+        ),
+        '  you love'
+      ),
       b_y_l.map(col => React.createElement(
         Col,
         { md: 3, xs: 3, sm: 3, key: col.title, className: styles['pl-10'] },

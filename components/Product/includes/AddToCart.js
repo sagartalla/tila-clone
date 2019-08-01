@@ -56,11 +56,16 @@ class AddToCart extends Component {
 
   addToCart() {
     const { listingId } = this.props.offerInfo
-    const { productData } =this.props
-    this.props.addToCartAndFetch({
+    const { productData,tilaPolicy } =this.props
+    let options = {
       listing_id: listingId,
       product_id: productData,
-    });
+    }
+    if(tilaPolicy.length > 0) {
+      options['policies_applied'] = tilaPolicy
+    }
+    console.log('options', options);
+    this.props.addToCartAndFetch(options);
   }
 
   buyNow() {
