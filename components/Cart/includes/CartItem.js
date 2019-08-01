@@ -133,15 +133,17 @@ class CartItem extends React.Component {
   warrantyChange(e) {
     const { item } = this.props;
     let { policies_selected } = this.state;
-    const policyId = e.target.getAttribute('data_policy_id') || [];
+    const policyId = e.target.getAttribute('data_policy_id');
     const policyName = e.target.getAttribute('policy_name');
     const warrantyName = e.target.getAttribute('data-name');
+    const warrantyIndex = Number(e.target.getAttribute('data-index'));
     policies_selected[warrantyName] = policyId;
     this.setState({
       policyName,
       warrantyName,
       selectedPolicy: policyId,
       policies_selected,
+      warrantyIndex,
     });
   }
 
@@ -169,6 +171,29 @@ class CartItem extends React.Component {
       listing_id: item.listing_id,
       policies_applied: policyId1,
     });
+    document.getElementById('cart-container').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  removeWarranty = (e) => {
+    const { item } = this.props;
+    const policyId = e.currentTarget.getAttribute('data_policy_id');
+    const warrantyName = e.currentTarget.getAttribute('data-name');
+    const { selectedPolicy, policies_selected } = this.state;
+    policies_selected[warrantyName] = policyId;
+    let policyId1  = [];
+    Object.keys(item.policies_applied).length > 0 && Object.keys(item.policies_applied).map(newPolicy => {
+        policies_selected[newPolicy] !== item.policies_applied[newPolicy].policy_id &&
+          policyId1.push(item.policies_applied[newPolicy].policy_id);
+    })
+    this.setState({
+      policies_selected,
+      selectedPolicy: '',
+    });
+      this.props.addToCartAndFetch({
+        listing_id: item.listing_id,
+        policies_applied: policyId1,
+      });
+      document.getElementById('cart-container').scrollIntoView({ behavior: 'smooth' });
   }
 
   render() {
@@ -180,7 +205,7 @@ class CartItem extends React.Component {
       addToWishlist,
       removeCartItem,
       cartStepperInputHandler,
-    } = this.props;  
+    } = this.props;
     const { checked, showWarrantyDetails, warrantyName, policyName } = this.state;
     const {
       item_id, img, name, offer_price, cur, quantity, max_limit, inventory, offerDiscounts,
@@ -188,7 +213,7 @@ class CartItem extends React.Component {
       product_id, variant_id, itemType, catalogId, discount, mrp, variantAttributes, selling_price, policies_applied, tila_care_policy,
     } = item;
     return (
-      <div key={item_id} className={`${styles['mb-20']} ${styles['box']}`}>
+      <div key={item_id} className={`${styles['mb-20']} ${styles['box']}`} id="cart-container">
         {
           max_limit == quantity ?
             <div className={`${styles['p-10-22']} ${styles['alrt-message-bg']} ${styles['light-gry-clr']} ${styles['alrt-message-part']} ${styles['thick-border-btm']}`}><span>{CART_PAGE.MAX_PER_ORDER}</span></div>
@@ -386,11 +411,12 @@ class CartItem extends React.Component {
                    policies_applied={policies_applied}
                    addNewWarranty={this.addNewWarranty}
                    warrantyChange={this.warrantyChange}
-                   policyName={policyName}
                    showWarrantyDetails={showWarrantyDetails}
                    warrantyName={warrantyName}
                    selectedPolicy={this.state.selectedPolicy}
                    selectPolicy={this.selectPolicy}
+                   warrantyIndex={this.state.warrantyIndex}
+                   removeWarranty={this.removeWarranty}
                   />
             </Col>
           </Row>
