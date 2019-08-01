@@ -11,7 +11,7 @@ import CartStepper from './CartStepper';
 import SVGComponent from '../../common/SVGComponet';
 import { languageDefinations } from '../../../utils/lang/';
 import constants from '../../../constants';
-import WarrantyPolicy from './warrantyPolicy';
+import WarrantyPolicy from './WarrantyPolicy';
 
 import lang from '../../../utils/language';
 
