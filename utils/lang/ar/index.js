@@ -504,7 +504,7 @@ export const AR_KEYWORDS = {
     TERMS_CONDITION: 'شروط و أحكام المستخدم',
     REFUND_POLICY: 'قوانين الاسترجاع والاستبدال',
     CANCELLATION_POLICY: 'قوانين الإلغاء',
-    EXCHANGE_REPLACEMENT_POLICY: 'قوانين الاسترجاع والاستبدال',
+    EXCHANGE_REPLACEMENT_POLICY: 'قوانين الاسترجاع والاستبدال ',
     PRIVACY_POLICY: 'قوانين الخصوصية',
     WARRENTY_POLICY: 'قوانين الضمان',
     // TERMS_CONDITION: 'شروط وأحكام المستخدمين',
