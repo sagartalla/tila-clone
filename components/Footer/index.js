@@ -43,7 +43,7 @@ const f = [
     title: FOOTER_PAGE.WATCHES,
   },
   {
-    url: `/${lang}/search?q=jewellery&language=en&isListed=false`,
+    url: `/${lang}/clp/Fashion%20Accessories`,
     title: FOOTER_PAGE.FASHION_ACCESSORIES,
   },
 ];
@@ -82,29 +82,29 @@ const e = [
 
 const l = [
   {
-    url: `/${lang}/search?q=health%20and%20beauty`,
+    url: `/${lang}/clp/travel%20accessories`,
     title: FOOTER_PAGE.TRAVEL_ACCESSORIES,
   },
 
   {
-    url: `/${lang}/search?q=Home%20Furnishing&language=en&isListed=false`,
+    url: `/${lang}/clp/search?q=Sports`,
     title: FOOTER_PAGE.SPORTS_AND_OUTDOORS,
   },
 
   {
-    url: `/${lang}/search?q=dining`,
+    url: `/${lang}/clp/diaper`,
     title: FOOTER_PAGE.MUMS_AND_KIDS,
   },
   {
-    url: `/${lang}/search?q=Home%20Decor&language=en&isListed=false`,
-    title: FOOTER_PAGE.BEAUTY_AND_MAKEUP,
+    url: `/${lang}/clp/beauty%20and%20health`,
+    title: FOOTER_PAGE.BEAUTY_AND_HEALTH,
   },
   {
-    url: `/${lang}/search?q=Baby%20Care&language=en&isListed=false`,
+    url: `/${lang}/clp/perfumes`,
     title: FOOTER_PAGE.PERFUMES,
   },
   {
-    url: `/${lang}/search?q=Health%20Care&language=en&isListed=false`,
+    url: `/${lang}/clp/Home%20furnishing`,
     title: FOOTER_PAGE.HOME_FURNSHING,
   },
 ];
@@ -361,7 +361,7 @@ const FooterBar = props => (
                     </span>
                   </div>
                 </div>
-                <div className={styles['pt-30']}>
+                <div className={`${styles['pt-30']} ${styles['ml-20']}`}>
                   <span className={styles['fs-10']}>&copy;{FOOTER_PAGE.TILA_RIGHTS}</span>
                 </div>
               </div>
