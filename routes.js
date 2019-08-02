@@ -3,7 +3,7 @@ const routes = require('next-routes')();
 routes
   .add({ name: 'login', pattern: '/login', page: 'login' })
   .add({ name: 'CAM', pattern: '/:language/customer', page: 'cam' })
-  .add({ name: 'ORDER ISSUE', pattern: '/:language/customer/orders/:orderId/issue/:returnExchangeType/item/:orderItemId/:variantId', page: 'order' })
+  .add({ name: 'ORDER ISSUE', pattern: '/:language/customer/orders/:orderId/issue/:returnExchangeType/item/:orderItemId/:variantId/:listingId', page: 'order' })
   .add({ name: 'ORDER', pattern: '/:language/customer/orders/:orderId', page: 'order' })
   .add({ name: 'CAM tabs', pattern: '/:language/customer/:tabDetails+', page: 'cam' })
   .add({ name: 'product', pattern: '/:language/pdp/:productName?/c/:catalogId/p/:productId/l/:listingId?/v/:variantId?', page: 'product' })

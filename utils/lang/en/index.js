@@ -56,6 +56,9 @@ export const EN_KEYWORDS = {
     ITEMS_IN_YOUR_WISHLIST: 'items in Wishlist',
     MY_CART: 'My Cart',
     MY_CART_EMPTY: 'So many products on Tila and yet i Feel Empty',
+    TILA_CARE_PROTECTION: 'Tila Care Protection',
+    VIEW_T_AND_C: 'View T & C ',
+    DURATION: 'Duration',
   },
   PAYMENT_PAGE: {
     SECURE_CHECKOUT: 'Secure Checkout',
@@ -531,7 +534,7 @@ export const EN_KEYWORDS = {
     RETURN: 'Returns',
     CONSUMER_RIGHT: 'Consumer rights',
     DOWNLOAD_APP: 'Download the app',
-    TILA_RIGHTS: '2019 www.tila.com. All rights reserved',
+    TILA_RIGHTS: 'Tila.com. All rights reserved',
     SIZE_CHART: 'Size Chart',
     WOMEN_CLOTHING: 'Women\'s Clothing',
     MEN_CLOTHING: 'Men\'s Clothing',
@@ -625,7 +628,7 @@ export const EN_KEYWORDS = {
     ENTER_NEW_PASSWORD: 'Enter New Password*',
     NEXT: 'Next',
     OTP_EXPIRE_IN: 'OTP will expire in',
-    HURRY: 'Hurry!',    
+    HURRY: 'Hurry!',
     PLEASE_ENTER_FOUR_DIGIT_OTP: 'Please enter 4 digit OTP',
     RESEND_OTP: 'Resend OTP',
     ALMOST_DONE: 'Almost done!',
@@ -704,6 +707,9 @@ export const EN_KEYWORDS = {
     SELECT_SUB_REASON: 'Select a Sub Reason',
     REQ_RETURN: 'Your return request for order',
     REQ_SUCCESS: 'has been accepted successfully',
+    CLAIM_WARRANTY_MSG: 'has been noted for an warranty claim someone from tila will get in touch with you soon',
+    WARRANTY_CLAIM_REASON:'Please select a reason for availing warranty we\'ll be glad to help you out',
+    YOUR_ORDER:'Your order',
     REQ_EXCHANGE: 'Your exchange request for order',
     EXCHANGE: 'Exchange',
     RETURN: 'Return',
@@ -792,7 +798,7 @@ export const EN_KEYWORDS = {
     ORDER_TOTAL: 'Order Total',
     NEED_HELP: 'Need Help',
     ORDER: 'ORDER #',
-    NO_WISHLIST_LABEL: 'You don’t have any orders yet',
+    NO_WISHLIST_LABEL: 'You don’t have any orders yet.',
     DONT_WAIT: 'Dont wait no more!',
     START_SHOPPING: 'Start shopping',
     TRACKING_ID: 'Tracking Id',
@@ -946,5 +952,8 @@ export const EN_KEYWORDS = {
   },
   COMPARE_WIDGET: {
     COMPARE: 'Compare',
+  },
+  WARRANTY_PAGE: {
+    WARRANTY_LABEL: '*The extended warranty cost will be added to your cart'
   },
 };
