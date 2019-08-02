@@ -259,14 +259,16 @@ const FooterBar = props => (
       <Grid>
         <Row className={styles['footer-social-list']}>
           <Col md={3} sm={6} className={`${styles['footer-social-list']} ${styles['pr-0']}`}>
+          <a href="https://www.snapchat.com/add/tilasocial" target="_blank">
             <h4 className={styles['flex-center']}>
                 <span className={`${styles['footer-social-title']} ${styles['mr-10']}`}><img src="/static/img/bg-img/snapchat.png" className={styles['img-responsive']} /></span>
                 <span className={`${styles.fontW600}`}>{FOOTER_PAGE.ON_SNAP}</span>
                 <span className={`${styles['follow-sc-btn']} ${styles['fs-10']} ${styles['lne-ht2']}  ${styles['ml-10']} ${styles['pl-15']} ${styles['pr-15']}`}>{FOOTER_PAGE.FOLLOW}</span>
             </h4>
+          </a>
           </Col>
           <Col md={3} sm={6} className={`${styles['footer-social-list']} ${styles['pr-0']}`}>
-          <a href="https://twitter.com/TilaSocial" target="_blank">
+          <a href="https://www.twitter.com/tilasocial" target="_blank">
             <h4 className={styles['flex-center']}>
               <span className={`${styles['footer-social-title']} ${styles['mr-10']}`}><img src="/static/img/bg-img/bitmap-twitter.jpg" className={styles['img-responsive']} /></span>
               <span className={`${styles['twitter-clr']} ${styles.fontW600}`}>{FOOTER_PAGE.ON_TWITTER}</span>
@@ -284,7 +286,7 @@ const FooterBar = props => (
           </a>  
           </Col>
           <Col md={3} sm={6} className={`${styles['footer-social-list']} ${styles['pr-0']}`}>
-          <a href="https://www.facebook.com/TilaSocialKSA/" target="_blank">
+          <a href="https://www.facebook.com/tilasocial/" target="_blank">
             <h4 className={styles['flex-center']}>
               <span className={`${styles['footer-social-title']} ${styles['mr-10']}`}><img src="/static/img/bg-img/bitmap-social-fb.jpg" className={styles['img-responsive']} /></span>
               <span className={`${styles['lgt-blue']} ${styles.fontW600}`}>{FOOTER_PAGE.ON_FACEBOOK}</span>
@@ -313,13 +315,13 @@ const FooterBar = props => (
             <div className={styles['ipad-pr-0']}>
               <h4 className={`${styles.fontW600} ${styles['fs-16']} ${styles['black-color']}`}>{FOOTER_PAGE.POLICIES}</h4>
               <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
-                <li><a href="/en/policy/user-terms-and-conditions" target="_blank">{FOOTER_PAGE.TERMS_CONDITION}</a></li>
-                <li><a href="/en/policy/cancellation-policy" target="_blank">{FOOTER_PAGE.CANCELLATION_POLICY}</a></li>
-                <li><a href="/en/policy/exchange-replacement-policy" target="_blank">{FOOTER_PAGE.EXCHANGE_REPLACEMENT_POLICY}</a></li>
-                <li><a href="/en/policy/return-refund-policy" target="_blank">{FOOTER_PAGE.REFUND_POLICY}</a></li>
-                <li><a href="/en/policy/warranty-policy" target="_blank">{FOOTER_PAGE.WARRENTY_POLICY}</a></li>
+                <li><a href={`/${lang}/policy/user-terms-and-conditions`} target="_blank">{FOOTER_PAGE.TERMS_CONDITION}</a></li>
+                <li><a href={`/${lang}/policy/cancellation-policy`} target="_blank">{FOOTER_PAGE.CANCELLATION_POLICY}</a></li>
+                <li><a href={`/${lang}/policy/exchange-replacement-policy`} target="_blank">{FOOTER_PAGE.EXCHANGE_REPLACEMENT_POLICY}</a></li>
+                <li><a href={`/${lang}/policy/return-refund-policy`} target="_blank">{FOOTER_PAGE.REFUND_POLICY}</a></li>
+                <li><a href={`/${lang}/policy/warranty-policy`} target="_blank">{FOOTER_PAGE.WARRENTY_POLICY}</a></li>
                 {/* <li><a href="/en/policy/sp" target="_blank">{FOOTER_PAGE.SHIPPING_POLICY}</a></li> */}
-                <li><a href="/en/policy/privacy-policy" target="_blank">{FOOTER_PAGE.PRIVACY_POLICY}</a></li>
+                <li><a href={`/${lang}/policy/privacy-policy`} target="_blank">{FOOTER_PAGE.PRIVACY_POLICY}</a></li>
               </ul>
             </div>
             {/* <Col md={2} sm={2} className={styles['ipad-pr-0']}>

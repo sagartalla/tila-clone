@@ -243,7 +243,7 @@ class Product extends Component {
       displayName,
       variants,
       productId,
-      variantId,
+      variantId='',
       catalogId,
       itemtype,
       currency,

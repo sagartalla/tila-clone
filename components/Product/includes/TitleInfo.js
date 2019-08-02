@@ -126,7 +126,7 @@ class TitleInfo extends Component {
     return (
       <div className={styles['pb-10']}>
         <div className={`${styles.fontW300} ${styles['lgt-blue']} ${styles['flx-space-bw']}`}>
-          <span>{brand.attribute_values[0].value}</span>
+          <span></span>
           {/* eslint-disable-next-line no-nested-ternary */}
           {isPreview ? null : comparable ?
             <div className={`${styles['checkbox-material']} ${styles['add-to-compare']}`}>
@@ -155,7 +155,7 @@ class TitleInfo extends Component {
           {title.attribute_values && title.attribute_values.length > 0
             && title.attribute_values[0].value}
         </h1>
-        <h1 className={`${styles['fs-16']} ${styles.fontW700} ${styles['black-color']} ${styles['mt-5']} ${styles['mb-0']} ${!title.translation ? styles['direction-ir'] : ''}`}>
+        <h1 className={`${styles['fs-16']} ${styles.fontW300} ${styles['black-color']} ${styles['mt-5']} ${styles['mb-0']} ${!title.translation ? styles['direction-ir'] : ''}`}>
           {title.attribute_values && title.attribute_values.length > 1
             && title.attribute_values[1].value}
         </h1>

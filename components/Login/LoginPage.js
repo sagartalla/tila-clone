@@ -85,7 +85,7 @@ class LoginPage extends React.Component {
       <div className={`${styles['login-form']} ${styles['flx-space-bw']} ${styles['flex-colum']}`}>
         <div>
           <Row>
-            <Col md={12} xs={12} sm={5}>
+            <Col md={12} xs={12} sm={12}>
               <h2 className={`${styles['fs-18']} ${styles['t-c']} ${styles.fontW600}`}>{LOGIN_PAGE.LOGIN_SIGNUP}</h2>
             </Col>
             {/* <Col md={7} xs={12} sm={7}>
@@ -93,7 +93,7 @@ class LoginPage extends React.Component {
             </Col> */}
           </Row>
           <Row className={`${styles['pt-30']} ${styles.flex}`}>
-            <Col md={5} xs={12} sm={5} className={`${styles.relative} ${styles.flex} ${styles['flex-colum']} ${styles['justify-center']} ${styles['pr-30']} ${styles['border-rt']}`}>
+            <Col md={5} xs={6} sm={6} className={`${styles.relative} ${styles.flex} ${styles['flex-colum']} ${styles['justify-center']} ${styles['pr-30']} ${styles['border-rt']}`}>
               <SocialLogin>
                 {([handleSocialLogin]) => (
                   <NoSSR>
@@ -120,13 +120,13 @@ class LoginPage extends React.Component {
               </SocialLogin>
               <span className={`${styles.absolute} ${styles['bg-white']} ${styles.right0} ${styles['p-5']} ${styles['fs-10']} ${styles['border-lg']} ${styles['or-tag']}`} >OR</span>
             </Col>
-            <Col md={7} xs={12} sm={7} className={`${styles['pl-30']}`}>
+            <Col md={7} xs={6} sm={6} className={`${styles['pl-30']}`}>
               <form onSubmit={this.submit}>
                 <div className={`${styles['fp-input']} ${styles['pb-10']}`}>
                   <input
                     type="text"
                     value={email}
-                    autoComplete={false}
+                    autoComplete="off"
                     className={styles['m-fs-16']}
                     onChange={this.onChangeField}
                     onBlur={this.handleValidation}
