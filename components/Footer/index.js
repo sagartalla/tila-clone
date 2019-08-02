@@ -105,7 +105,7 @@ const l = [
   },
   {
     url: `/${lang}/clp/Home%20furnishing`,
-    title: FOOTER_PAGE.HOME_FURNSHING,
+    title: FOOTER_PAGE.MAKEUP,
   },
 ];
 
