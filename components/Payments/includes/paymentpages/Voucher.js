@@ -9,6 +9,7 @@ import { actionCreators, selectors } from '../../../../store/payments';
 import { languageDefinations } from '../../../../utils/lang/';
 
 import lang from '../../../../utils/language';
+import { Router } from '../../../../routes';
 
 import main_en from '../../../../layout/main/main_en.styl';
 import main_ar from '../../../../layout/main/main_ar.styl';
@@ -28,7 +29,7 @@ class Voucher extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.processData && nextProps.processData.redirect_url) {
-      window.location = nextProps.processData.redirect_url;
+      Router.pushRoute(nextProps.processData.redirect_url);
     }
   }
 

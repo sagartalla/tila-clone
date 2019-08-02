@@ -91,7 +91,7 @@ class CashOnDelivery extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.processData && nextProps.processData.redirect_url) {
-      window.location = nextProps.processData.redirect_url;
+      Router.pushRoute(nextProps.processData.redirect_url);
     }
   }
 

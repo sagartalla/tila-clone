@@ -10,6 +10,7 @@ import Voucher from './Voucher';
 import { languageDefinations } from '../../../../utils/lang/';
 
 import Button from '../../../common/CommonButton';
+import { Router } from '../../../../routes';
 
 import lang from '../../../../utils/language';
 
@@ -60,7 +61,7 @@ class SavedCards extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.processData && nextProps.processData.redirect_url) {
-      window.location = nextProps.processData.redirect_url;
+      Router.pushRoute(nextProps.processData.redirect_url);
     }
   }
 
