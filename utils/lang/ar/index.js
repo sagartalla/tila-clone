@@ -120,6 +120,7 @@ export const AR_KEYWORDS = {
     PAYMENT_MODE: 'الخدمات المصرفية والبطاقات الإئتمانية والقسائم الشرائيه',
     ON_DELIVERY: 'on delivery',
     DROP_THE_ANSWER_INTO_THE_BOX: 'حط إجابتك في  أعلى الصندوق',
+    COD_TC: 'By choosing correct image, I accept T&C and pay cash delivery',
     LOADING_CAPTCHA: 'Loading Captcha...',
     YOU_ARE_SIGNED_IN_AS: 'سجلت دخولك كا',
     CHANGE: 'غيّر',
@@ -500,7 +501,7 @@ export const AR_KEYWORDS = {
     TERMS_CONDITION: 'شروط و أحكام المستخدم',
     REFUND_POLICY: 'قوانين الاسترجاع والاستبدال',
     CANCELLATION_POLICY: 'قوانين الإلغاء',
-    EXCHANGE_REPLACEMENT_POLICY: 'قوانين الاسترجاع والاستبدال',
+    EXCHANGE_REPLACEMENT_POLICY: 'قوانين الاسترجاع والاستبدال ',
     PRIVACY_POLICY: 'قوانين الخصوصية',
     WARRENTY_POLICY: 'قوانين الضمان',
     // TERMS_CONDITION: 'شروط وأحكام المستخدمين',
@@ -651,7 +652,7 @@ export const AR_KEYWORDS = {
     SHOW: 'أظهر',
     HIDE: 'اخفي',
     PASSWORD: 'كلمة السر',
-    ENTER_FOUR_DIGIT_OTP: 'أو من فضلك أدخل رمز السر المؤقت المكون من أربعة أرقام المرسل لإيميلك',  
+    ENTER_FOUR_DIGIT_OTP: 'أو من فضلك أدخل رمز السر المؤقت المكون من أربعة أرقام المرسل لإيميلك',
   },
   ORDER_PAGE: {
     LOADING: 'تحميل',
@@ -768,7 +769,7 @@ export const AR_KEYWORDS = {
     OTP_HAS: 'رمز السر المؤقت أصبح',
     OTP_EXPIRED: 'غير صالح',
     PLEASE_CLICK_ON_THE_LINK: 'من فضلك اضغط على اللينك المعاد إرساله بالأسفل',
-    CLICK_LINK_ABOVE: 'من فضلك اضغط على اللينك المعاد إرساله بالأسفل',    
+    CLICK_LINK_ABOVE: 'من فضلك اضغط على اللينك المعاد إرساله بالأسفل',
   },
   MESSAGES: {
     MESSAGES: 'الرسائل',
@@ -857,7 +858,7 @@ export const AR_KEYWORDS = {
     FEEDBACK_SURVEY_AND_PRODUCT_REVIEW_SUB: 'انشئ حسابك لتحصل على  خصومات خاصة بك وكوبونات',
     NOTE: 'ملاحظة :',
     YOU_WILL_BE_UNSUBSCRIBED: 'حتسير غير مشترك للإشعارات اللي في الأعلى لو ما شيكت على الصناديق ',
-    SAVE: 'Save',    
+    SAVE: 'Save',
   },
   REVIEWS: {
     TITLE: 'My Reviews & Ratings',

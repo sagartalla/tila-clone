@@ -23,11 +23,12 @@ export class Bin extends React.Component {
   render() {
     const { connectDropTarget } = this.props;
     return connectDropTarget(
-      <div style={{textAlign: "center"}}>
+      <div style={{textAlign: "center", marginTop: "-40px"}}>
         <div className={`${styles['flex']} ${styles['justify-center']}`} >
           {this.props.openBox}
         </div><br/>
         {this.props.boxText}
+        <div>{this.props.tcText}</div>
       </div>
     );
   }

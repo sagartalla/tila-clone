@@ -10,7 +10,7 @@ const Lifestyle = () => React.createElement(
       { className: `${styles['flex']} life-banner-inn ${styles['relative']}` },
       React.createElement(
         'a',
-        { href: '/en/search?q=home%20decor&isListed=false' },
+        { href: `/${lang}/clp/Home%20Furnishing` },
         React.createElement('img', { src: `/static/img/landing-page-lifestyle/${lang === 'en' ? 'furnitures' : 'furnitures-ar'}.jpg`, className: 'img-responsive' })
       )
     ),
@@ -36,7 +36,7 @@ const Lifestyle = () => React.createElement(
         ),
         React.createElement(
           'a',
-          { href: `/${lang}/srp/home-furnishing?categoryTree=true&isListed=false&sid=932,941` },
+          { href: `/${lang}/clp/Home%20Furnishing` },
           React.createElement('img', { src: '/static/img/landing-page-lifestyle/sub-banner1.jpg', className: 'img-responsive' })
         )
       ),
@@ -59,237 +59,8 @@ const Lifestyle = () => React.createElement(
         ),
         React.createElement(
           'a',
-          { href: `/${lang}/srp/rack?categoryTree=true&isListed=false&sid=932,941,944` },
+          { href: `/${lang}/clp/Book%20shelves` },
           React.createElement('img', { src: '/static/img/landing-page-lifestyle/sub-banner2.jpg', className: 'img-responsive' })
-        )
-      )
-    ),
-    React.createElement(
-      'div',
-      { className: `poular-cat ${styles['pt-30']} ${styles['pb-30']}` },
-      React.createElement(
-        'h5',
-        { className: `main-title ${styles['fs-16']} ${styles['fontW600']}` },
-        'Popular Category'
-      ),
-      React.createElement(
-        'div',
-        { className: `${styles['flex']} ${styles['poular-cat-inn']}` },
-        React.createElement(
-          Col,
-          { md: 1, className: `${styles['pl-0']} ${styles['pr-10']}` },
-          React.createElement(
-            'a',
-            { href: `/${lang}/srp/home-furnishing?categoryTree=true&isListed=false&sid=932,941` },
-            React.createElement(
-              'div',
-              { className: `${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon` },
-              React.createElement(SVGComponent, { clsName: 'poular-cat', src: 'icons/landing-page-lifestyle/chair' }),
-              React.createElement(
-                'span',
-                { className: `${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}` },
-                'Furniture'
-              )
-            )
-          )
-        ),
-        React.createElement(
-          Col,
-          { md: 1, className: `${styles['pl-0']} ${styles['pr-10']}` },
-          React.createElement(
-            'a',
-            { href: `/${lang}/srp/kitchen-appliances?categoryTree=true&isListed=false&sid=932,945` },
-            React.createElement(
-              'div',
-              { className: `${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon` },
-              React.createElement(SVGComponent, { clsName: 'poular-cat', src: 'icons/landing-page-lifestyle/kichen' }),
-              React.createElement(
-                'span',
-                { className: `${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}` },
-                'Kitchen Tools'
-              )
-            )
-          )
-        ),
-        React.createElement(
-          Col,
-          { md: 1, className: `${styles['pl-0']} ${styles['pr-10']}` },
-          React.createElement(
-            'a',
-            { href: `/${lang}/srp/health-care?categoryTree=true&isListed=false&sid=932,972` },
-            React.createElement(
-              'div',
-              { className: `${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon` },
-              React.createElement(SVGComponent, { clsName: 'poular-cat', src: 'icons/landing-page-lifestyle/apple' }),
-              React.createElement(
-                'span',
-                { className: `${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}` },
-                'Health & Fitness'
-              )
-            )
-          )
-        ),
-        React.createElement(
-          Col,
-          { md: 1, className: `${styles['pl-0']} ${styles['pr-10']}` },
-          React.createElement(
-            'a',
-            { href: `/${lang}/search?q=Fitness&language=en&isListed=false` },
-            React.createElement(
-              'div',
-              { className: `${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon` },
-              React.createElement(SVGComponent, { clsName: 'poular-cat', src: 'icons/landing-page-lifestyle/sports' }),
-              React.createElement(
-                'span',
-                { className: `${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}` },
-                'Sports & Fitness'
-              )
-            )
-          )
-        ),
-        React.createElement(
-          Col,
-          { md: 1, className: `${styles['pl-0']} ${styles['pr-10']}` },
-          React.createElement(
-            'a',
-            { href: `/${lang}/srp/baby-care?categoryTree=true&isListed=false&sid=932,955` },
-            React.createElement(
-              'div',
-              { className: `${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon` },
-              React.createElement(SVGComponent, { clsName: 'poular-cat1', src: 'icons/landing-page-lifestyle/baby-care' }),
-              React.createElement(
-                'span',
-                { className: `${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}` },
-                'Baby Care'
-              )
-            )
-          )
-        ),
-        React.createElement(
-          Col,
-          { md: 1, className: `${styles['pl-0']} ${styles['pr-10']}` },
-          React.createElement(
-            'a',
-            { href: `/${lang}/srp/beauty-&-personal-care?categoryTree=true&isListed=false&sid=932,958` },
-            React.createElement(
-              'div',
-              { className: `${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon` },
-              React.createElement(SVGComponent, { clsName: 'poular-cat4', src: 'icons/landing-page-lifestyle/personal-care' }),
-              React.createElement(
-                'span',
-                { className: `${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}` },
-                'Personal Care'
-              )
-            )
-          )
-        ),
-        React.createElement(
-          Col,
-          { md: 1, className: `${styles['pl-0']} ${styles['pr-10']}` },
-          React.createElement(
-            'a',
-            { href: `/${lang}/search?q=sports&language=en&isListed=false` },
-            React.createElement(
-              'div',
-              { className: `${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon` },
-              React.createElement(SVGComponent, { clsName: 'poular-cat2', src: 'icons/landing-page-lifestyle/sports-gloves' }),
-              React.createElement(
-                'span',
-                { className: `${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}` },
-                'Sports'
-              )
-            )
-          )
-        ),
-        React.createElement(
-          Col,
-          { md: 1, className: `${styles['pl-0']} ${styles['pr-10']}` },
-          React.createElement(
-            'a',
-            { href: `/${lang}/search?q=Gardening&language=en&isListed=false` },
-            React.createElement(
-              'div',
-              { className: `${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon` },
-              React.createElement(SVGComponent, { clsName: 'poular-cat3', src: 'icons/landing-page-lifestyle/gardening' }),
-              React.createElement(
-                'span',
-                { className: `${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}` },
-                'Gardening'
-              )
-            )
-          )
-        ),
-        React.createElement(
-          Col,
-          { md: 1, className: `${styles['pl-0']} ${styles['pr-10']}` },
-          React.createElement(
-            'a',
-            { href: `/${lang}/search?q=Daily%20Needs&language=en&isListed=false` },
-            React.createElement(
-              'div',
-              { className: `${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon` },
-              React.createElement(SVGComponent, { clsName: 'popular-cat5', src: 'icons/landing-page-lifestyle/daily-needs' }),
-              React.createElement(
-                'span',
-                { className: `${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}` },
-                'Daily Needs'
-              )
-            )
-          )
-        ),
-        React.createElement(
-          Col,
-          { md: 1, className: `${styles['pl-0']} ${styles['pr-10']}` },
-          React.createElement(
-            'a',
-            { href: `/${lang}/srp/health-care?categoryTree=true&isListed=false&sid=932,972` },
-            React.createElement(
-              'div',
-              { className: `${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon` },
-              React.createElement(SVGComponent, { clsName: 'poular-cat', src: 'icons/landing-page-lifestyle/kitchen-dining' }),
-              React.createElement(
-                'span',
-                { className: `${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}` },
-                'kitchen & dining'
-              )
-            )
-          )
-        ),
-        React.createElement(
-          Col,
-          { md: 1, className: `${styles['pl-0']} ${styles['pr-10']}` },
-          React.createElement(
-            'a',
-            { href: `/${lang}/srp/office-supplies?categoryTree=true&isListed=false&sid=932,979` },
-            React.createElement(
-              'div',
-              { className: `${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon` },
-              React.createElement(SVGComponent, { clsName: 'poular-cat', src: 'icons/landing-page-lifestyle/satinary' }),
-              React.createElement(
-                'span',
-                { className: `${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}` },
-                'Stationary'
-              )
-            )
-          )
-        ),
-        React.createElement(
-          Col,
-          { md: 1, className: `${styles['pl-0']} ${styles['pr-10']}` },
-          React.createElement(
-            'a',
-            { href: `/${lang}/srp/home-applaince?categoryTree=true&isListed=false&sid=932,935` },
-            React.createElement(
-              'div',
-              { className: `${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon` },
-              React.createElement(SVGComponent, { clsName: 'poular-cat', src: 'icons/landing-page-lifestyle/home-application' }),
-              React.createElement(
-                'span',
-                { className: `${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}` },
-                'Home Appliances'
-              )
-            )
-          )
         )
       )
     ),
@@ -305,7 +76,7 @@ const Lifestyle = () => React.createElement(
           React.createElement(
             'h5',
             { className: `title ${styles['fs-16']} ${styles['fontW600']} ${styles['m-0']}` },
-            'Home Furnishing'
+            'TRAVEL AND LEISURE'
           ),
           React.createElement(
             'span',
@@ -315,7 +86,7 @@ const Lifestyle = () => React.createElement(
         ),
         React.createElement(
           'a',
-          { href: `/${lang}/srp/home-furnishing?categoryTree=true&isListed=false&sid=932,941` },
+          { href: `/${lang}/clp/travel and leisure` },
           React.createElement('img', { src: '/static/img/landing-page-lifestyle/essental.jpg', className: 'img-responsive' })
         )
       ),
@@ -328,7 +99,7 @@ const Lifestyle = () => React.createElement(
           React.createElement(
             'h5',
             { className: `title ${styles['fs-16']} ${styles['fontW600']} ${styles['m-0']}` },
-            'Home for your books'
+            'HEALTH AND FITNESS'
           ),
           React.createElement(
             'span',
@@ -338,7 +109,7 @@ const Lifestyle = () => React.createElement(
         ),
         React.createElement(
           'a',
-          { href: `/${lang}/srp/rack?categoryTree=true&isListed=false&sid=932,941,944` },
+          { href: `/${lang}/clp/fitness` },
           React.createElement('img', { src: '/static/img/landing-page-lifestyle/essential1.jpg', className: 'img-responsive' })
         )
       )
@@ -367,7 +138,7 @@ const Lifestyle = () => React.createElement(
             { className: `top-selling-img ${styles['flex']}` },
             React.createElement(
               'a',
-              { href: `/${lang}/search?q=Cutlery&language=en&isListed=false` },
+              { href: `/${lang}/clp/cutlery` },
               React.createElement('img', { src: '/static/img/landing-page-lifestyle/home-ess.jpg', className: 'img-responsive' })
             )
           ),
@@ -394,7 +165,7 @@ const Lifestyle = () => React.createElement(
             { className: `top-selling-img ${styles['flex']}` },
             React.createElement(
               'a',
-              { href: `/${lang}/search?q=Tools%20and%20hardware&language=en&isListed=false` },
+              { href: `/${lang}/clp/Tools%20and%20Hardware` },
               React.createElement('img', { src: '/static/img/landing-page-lifestyle/home-ess1.jpg', className: 'img-responsive' })
             )
           ),
@@ -421,7 +192,7 @@ const Lifestyle = () => React.createElement(
             { className: `top-selling-img ${styles['flex']}` },
             React.createElement(
               'a',
-              { href: `/${lang}/srp/beauty-&-personal-care?categoryTree=true&isListed=false&sid=932,958` },
+              { href: `/${lang}/clp/Healthcare` },
               React.createElement('img', { src: '/static/img/landing-page-lifestyle/home-ess2.jpg', className: 'img-responsive' })
             )
           ),
@@ -475,7 +246,7 @@ const Lifestyle = () => React.createElement(
             { className: `top-selling-img ${styles['flex']}` },
             React.createElement(
               'a',
-              { href: `/${lang}/search?q=Grooming&language=en&isListed=false` },
+              { href: `/${lang}/clp/Men%27s%20Grooming` },
               React.createElement('img', { src: '/static/img/landing-page-lifestyle/home-ess4.jpg', className: 'img-responsive' })
             )
           ),
@@ -502,7 +273,7 @@ const Lifestyle = () => React.createElement(
             { className: `top-selling-img ${styles['flex']}` },
             React.createElement(
               'a',
-              { href: `/${lang}/search?q=Home%20Cleaning&language=en&isListed=false` },
+              { href: `/${lang}/clp/Home%20Cleaninig` },
               React.createElement('img', { src: '/static/img/landing-page-lifestyle/home-ess5.jpg', className: 'img-responsive' })
             )
           ),
@@ -518,240 +289,6 @@ const Lifestyle = () => React.createElement(
               'span',
               { className: `${styles['fontW600']} ${styles['fs-12']}` },
               'UPTO 40% OFF'
-            )
-          )
-        )
-      )
-    ),
-    React.createElement(
-      'div',
-      { className: `poular-cat ${styles['pt-30']} ${styles['pb-30']}` },
-      React.createElement(
-        'h5',
-        { className: `main-title ${styles['fs-16']} ${styles['fontW600']}` },
-        'Sports Essentials'
-      ),
-      React.createElement(
-        'p',
-        null,
-        'Soccer, Badminton, Table Tennis, Lawn Tennis, Cricket & more...'
-      ),
-      React.createElement(
-        'div',
-        { className: `${styles['flex']} ${styles['poular-cat-inn']}` },
-        React.createElement(
-          Col,
-          { md: 1, className: `${styles['pl-0']} ${styles['pr-10']}` },
-          React.createElement(
-            'a',
-            { href: `/${lang}/srp/home-furnishing?categoryTree=true&isListed=false&sid=932,941` },
-            React.createElement(
-              'div',
-              { className: `${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon` },
-              React.createElement(SVGComponent, { clsName: 'poular-cat', src: 'icons/landing-page-lifestyle/soccer' }),
-              React.createElement(
-                'span',
-                { className: `${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}` },
-                'Soccer'
-              )
-            )
-          )
-        ),
-        React.createElement(
-          Col,
-          { md: 1, className: `${styles['pl-0']} ${styles['pr-10']}` },
-          React.createElement(
-            'a',
-            { href: `/${lang}/srp/kitchen-appliances?categoryTree=true&isListed=false&sid=932,945` },
-            React.createElement(
-              'div',
-              { className: `${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon` },
-              React.createElement(SVGComponent, { clsName: 'popular-cat6', src: 'icons/landing-page-lifestyle/badminton' }),
-              React.createElement(
-                'span',
-                { className: `${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}` },
-                'Badminton'
-              )
-            )
-          )
-        ),
-        React.createElement(
-          Col,
-          { md: 1, className: `${styles['pl-0']} ${styles['pr-10']}` },
-          React.createElement(
-            'a',
-            { href: `/${lang}/srp/health-care?categoryTree=true&isListed=false&sid=932,972` },
-            React.createElement(
-              'div',
-              { className: `${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon` },
-              React.createElement(SVGComponent, { clsName: 'poular-cat', src: 'icons/landing-page-lifestyle/tabletennis' }),
-              React.createElement(
-                'span',
-                { className: `${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}` },
-                'Table Tennis'
-              )
-            )
-          )
-        ),
-        React.createElement(
-          Col,
-          { md: 1, className: `${styles['pl-0']} ${styles['pr-10']}` },
-          React.createElement(
-            'a',
-            { href: `/${lang}/search?q=Fitness&language=en&isListed=false` },
-            React.createElement(
-              'div',
-              { className: `${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon` },
-              React.createElement(SVGComponent, { clsName: 'popular-cat7', src: 'icons/landing-page-lifestyle/tennis' }),
-              React.createElement(
-                'span',
-                { className: `${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}` },
-                'Lawn Tennis'
-              )
-            )
-          )
-        ),
-        React.createElement(
-          Col,
-          { md: 1, className: `${styles['pl-0']} ${styles['pr-10']}` },
-          React.createElement(
-            'a',
-            { href: `/${lang}/srp/baby-care?categoryTree=true&isListed=false&sid=932,955` },
-            React.createElement(
-              'div',
-              { className: `${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon` },
-              React.createElement(SVGComponent, { clsName: 'popular-cat7', src: 'icons/landing-page-lifestyle/cricket' }),
-              React.createElement(
-                'span',
-                { className: `${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}` },
-                'Cricket'
-              )
-            )
-          )
-        ),
-        React.createElement(
-          Col,
-          { md: 1, className: `${styles['pl-0']} ${styles['pr-10']}` },
-          React.createElement(
-            'a',
-            { href: `/${lang}/srp/beauty-&-personal-care?categoryTree=true&isListed=false&sid=932,958` },
-            React.createElement(
-              'div',
-              { className: `${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon` },
-              React.createElement(SVGComponent, { clsName: 'popular-cat8', src: 'icons/landing-page-lifestyle/basketball' }),
-              React.createElement(
-                'span',
-                { className: `${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}` },
-                'Basketball'
-              )
-            )
-          )
-        ),
-        React.createElement(
-          Col,
-          { md: 1, className: `${styles['pl-0']} ${styles['pr-10']}` },
-          React.createElement(
-            'a',
-            { href: `/${lang}/search?q=sports&language=en&isListed=false` },
-            React.createElement(
-              'div',
-              { className: `${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon` },
-              React.createElement(SVGComponent, { clsName: 'poular-cat2', src: 'icons/landing-page-lifestyle/baseball' }),
-              React.createElement(
-                'span',
-                { className: `${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}` },
-                'Baseball'
-              )
-            )
-          )
-        ),
-        React.createElement(
-          Col,
-          { md: 1, className: `${styles['pl-0']} ${styles['pr-10']}` },
-          React.createElement(
-            'a',
-            { href: `/${lang}/search?q=Gardening&language=en&isListed=false` },
-            React.createElement(
-              'div',
-              { className: `${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon` },
-              React.createElement(SVGComponent, { clsName: 'poular-cat3', src: 'icons/landing-page-lifestyle/swimming' }),
-              React.createElement(
-                'span',
-                { className: `${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}` },
-                'Swimming'
-              )
-            )
-          )
-        ),
-        React.createElement(
-          Col,
-          { md: 1, className: `${styles['pl-0']} ${styles['pr-10']}` },
-          React.createElement(
-            'a',
-            { href: `/${lang}/search?q=Daily%20Needs&language=en&isListed=false` },
-            React.createElement(
-              'div',
-              { className: `${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon` },
-              React.createElement(SVGComponent, { clsName: 'popular-cat5', src: 'icons/landing-page-lifestyle/cycling' }),
-              React.createElement(
-                'span',
-                { className: `${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}` },
-                'Cycling'
-              )
-            )
-          )
-        ),
-        React.createElement(
-          Col,
-          { md: 1, className: `${styles['pl-0']} ${styles['pr-10']}` },
-          React.createElement(
-            'a',
-            { href: `/${lang}/srp/health-care?categoryTree=true&isListed=false&sid=932,972` },
-            React.createElement(
-              'div',
-              { className: `${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon` },
-              React.createElement(SVGComponent, { clsName: 'poular-cat', src: 'icons/landing-page-lifestyle/riverrafting' }),
-              React.createElement(
-                'span',
-                { className: `${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}` },
-                'River Rafting'
-              )
-            )
-          )
-        ),
-        React.createElement(
-          Col,
-          { md: 1, className: `${styles['pl-0']} ${styles['pr-10']}` },
-          React.createElement(
-            'a',
-            { href: `/${lang}/srp/office-supplies?categoryTree=true&isListed=false&sid=932,979` },
-            React.createElement(
-              'div',
-              { className: `${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon` },
-              React.createElement(SVGComponent, { clsName: 'poular-cat', src: 'icons/landing-page-lifestyle/snorkeling' }),
-              React.createElement(
-                'span',
-                { className: `${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}` },
-                'Snorkeling'
-              )
-            )
-          )
-        ),
-        React.createElement(
-          Col,
-          { md: 1, className: `${styles['pl-0']} ${styles['pr-10']}` },
-          React.createElement(
-            'a',
-            { href: `/${lang}/srp/home-applaince?categoryTree=true&isListed=false&sid=932,935` },
-            React.createElement(
-              'div',
-              { className: `${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon` },
-              React.createElement(SVGComponent, { clsName: 'poular-cat', src: 'icons/landing-page-lifestyle/boxing' }),
-              React.createElement(
-                'span',
-                { className: `${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}` },
-                'Boxing'
-              )
             )
           )
         )
@@ -810,7 +347,7 @@ const Lifestyle = () => React.createElement(
               { className: 'hobby-part-img-inn' },
               React.createElement(
                 'a',
-                { href: `/${lang}/search?q=Crafts&language=en&isListed=false` },
+                { href: `/${lang}/clp/Art%20and%20Crafts` },
                 React.createElement('img', { src: '/static/img/landing-page-lifestyle/hobby1.jpg', className: 'img-responsive' })
               )
             ),
@@ -953,7 +490,7 @@ const Lifestyle = () => React.createElement(
         ),
         React.createElement(
           'a',
-          { href: `/${lang}/srp/beauty-&-personal-care?categoryTree=true&isListed=false&sid=932,958` },
+          { href: `/${lang}/srp/personal-care` },
           React.createElement('img', { src: '/static/img/landing-page-lifestyle/health-but.jpg', className: 'img-responsive' })
         )
       ),
@@ -976,7 +513,7 @@ const Lifestyle = () => React.createElement(
         ),
         React.createElement(
           'a',
-          { href: `/${lang}/search?q=Grooming&language=en&isListed=false` },
+          { href: `/${lang}/clp/Men%27s%20grooming` },
           React.createElement('img', { src: '/static/img/landing-page-lifestyle/health-but1.jpg', className: 'img-responsive' })
         )
       ),
@@ -999,7 +536,7 @@ const Lifestyle = () => React.createElement(
         ),
         React.createElement(
           'a',
-          { href: `/${lang}/srp/baby-care?categoryTree=true&isListed=false&sid=932,955` },
+          { href: `/${lang}/clp/kids%20care` },
           React.createElement('img', { src: '/static/img/landing-page-lifestyle/health-but2.jpg', className: 'img-responsive' })
         )
       )
