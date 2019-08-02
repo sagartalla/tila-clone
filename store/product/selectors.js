@@ -214,7 +214,7 @@ const getVariantsAndSimilarProducts = (variantId, productId) => (store) => {
     };
     map[key] = map[key] || {};
     _.forEach(value.attribute_map, (attVal, attKey) => {
-      if (attVal.attribute_group_name !== 'IDENTITY' || !attVal.searchable || !attVal.groupable) {
+      if (attVal.attribute_group_name !== 'IDENTITY' || !attVal.searchable) {
         return;
       }
       if (!display[attKey]) {
@@ -254,7 +254,7 @@ const getVariantsAndSimilarProducts = (variantId, productId) => (store) => {
     }
   });
   const similarProducts = similar_products ? _.reduce([product_details, ...modifiedProducts], (acc, product) => {
-    if (availableSimilarProducts && !availableSimilarProducts[product.product_details_vo.cached_product_details.product_id]) return acc;
+    // if (similar_products && !similar_products[product.product_details_vo.cached_product_details.product_id]) return acc;
     const key = product.product_details_vo.cached_product_details.product_id;
     const display = {
       ...acc.display,
@@ -291,7 +291,7 @@ const getVariantsAndSimilarProducts = (variantId, productId) => (store) => {
       map,
     };
   }, { display: {}, map: [], order: [] }) : { display: {}, map: [], order: [] };
-  if(similar_products.length) {
+  if(similar_products.length && similarProducts.order[0]) {
     const primaryValues = attribute_map[similarProducts.order[0]].attribute_values.map((av) => av.value)
     const shortList = _.reduce(similarProducts.map, (acc, attrs, pid) => {
       if(primaryValues.indexOf(attrs[similarProducts.order[0]][0]) !== -1) {
