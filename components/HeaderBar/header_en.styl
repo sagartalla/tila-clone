@@ -1,1 +1,34 @@
 @import './header.styl'
+
+.actionbar-wrapper
+  display flex
+  justify-content flex-end
+  .action-item
+    float left
+    position relative
+    &:last-child
+      border-right 0
+      padding-left 15px
+
+   .cart-inn
+    .cart-item
+      right: -65px;
+      left: auto;
+      &:before
+        right: 21%;
+
+   .account-inn
+    .account-item
+      right: -7px;
+      left: auto;
+      &:before
+        right: 6%;
+
+   .wishlist-inn
+    .wishlist-item
+      right: -65px;
+      left: auto;   
+      &:before
+        right: 21%;
+.megamenu-icon
+  left -10px

@@ -163,7 +163,7 @@ class CashOnDelivery extends React.Component {
         this.state.showPayBtn &&
             (
               <Button
-                className={`${styles['fs-16']} ${styles['fontW600']} ${styles['new-card-btn']} ${styles['border-radius']} ${styles['ht-40']} ${styles.width70}`}
+                className={`${styles['fs-16']} ${styles['fontW600']} ${styles['new-card-btn']} ${styles['border-radius']} ${styles['ht-40']} ${styles.width70} ${styles['text-uppercase']}`}
                 onClick={this.proceedToPayment}
                 btnText={PAYMENT_PAGE.PAY + ' ' + data.amount_to_pay.display_value + ' ' + data.amount_to_pay.currency_code + ' ' + PAYMENT_PAGE.ON_DELIVERY}
                 hoverClassName="hoverBlueBackground"
