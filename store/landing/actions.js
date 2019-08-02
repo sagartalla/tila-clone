@@ -10,9 +10,9 @@ const actionCreators = {
     type: actions.GET_PAGE,
     payload: api.getPage(params),
   }),
-  getListings: params => ({
+  getListings: (params, index) => ({
     type: actions.GET_LISTINGS_DETAILS,
-    payload: api.getListings(params),
+    payload: api.getListings(params, index),
   }),
 };
 
