@@ -27,33 +27,33 @@ const client = require('./utils/tcpConnection');
 const io = require('socket.io')(server);
 
 /******* Tcp client *******/
-client.on('data',(data)=>{
-  try{
-      console.log('Data recieved from tcp server :- ');
-      var str = data.toString('utf8');
-      var jobj =  JSON.parse(str);
-      // var unflattened =  Object.unflatten(jobj);
-      //console.log(Object.unflatten(JSON.parse(data.toString('utf8'))));
-      //console.log(JSON.stringify(unflattened));
-      io.emit('pagedataupdate', {data:JSON.stringify(jobj)});
-  }
-  catch(e){
-      console.log('err :', e);
-  }
-})
+// client.on('data',(data)=>{
+//   try{
+//       console.log('Data recieved from tcp server :- ');
+//       var str = data.toString('utf8');
+//       var jobj =  JSON.parse(str);
+//       // var unflattened =  Object.unflatten(jobj);
+//       //console.log(Object.unflatten(JSON.parse(data.toString('utf8'))));
+//       //console.log(JSON.stringify(unflattened));
+//       io.emit('pagedataupdate', {data:JSON.stringify(jobj)});
+//   }
+//   catch(e){
+//       console.log('err :', e);
+//   }
+// })
 
 /******** Connection ping from browser ********/
-io.on('connection', function(sock) {
-  console.log('Browser Client connected ...');
-  sock.on('join', function (data) {
-      console.log(data);
-      io.emit('connectionSuccess', {message:`Socket Connected :count :${io.engine.clientsCount}, length: ${Object.keys(io.sockets.connected).length}`});
-  });
+// io.on('connection', function(sock) {
+//   console.log('Browser Client connected ...');
+//   sock.on('join', function (data) {
+//       console.log(data);
+//       io.emit('connectionSuccess', {message:`Socket Connected :count :${io.engine.clientsCount}, length: ${Object.keys(io.sockets.connected).length}`});
+//   });
 
-  sock.on('disconnect', function () {
-      io.emit('userdisconnected',{message:`Socket Disconnected  :count :${io.engine.clientsCount}, length: ${Object.keys(io.sockets.connected).length}`});
-  });
-});
+//   sock.on('disconnect', function () {
+//       io.emit('userdisconnected',{message:`Socket Disconnected  :count :${io.engine.clientsCount}, length: ${Object.keys(io.sockets.connected).length}`});
+//   });
+// });
 
 function sessionCookie(req, res, next) {
   const htmlPage =
