@@ -131,7 +131,7 @@ class Display extends Component {
                 <div className={styles['carousel-item-wrap']} key={url}>
                   {type !== 'VIDEO' ?
                     <img src={`${constants.mediaDomain}/${url}`} alt="" /> :
-                    <SVGComponent src="icons/play_video" />
+                    <SVGComponent clsName={styles['carousel-item-wrap-inn']} src="icons/play_video" />
                   }
                 </div>
               ))

@@ -73,10 +73,11 @@
   height 26px
 
 .display-t-i-e, .display-t-i-f, .display-t-i-hl
-  width calc(100% - 40px)
+  width calc(100% - 10px)
   position relative
   margin auto
   margin-top: 5%;
+  margin-bottom 2%
   .title
     color: #00c7b1;
     top: -5%;
@@ -209,3 +210,71 @@
 
 .wth
   width 100%
+
+.leftArrow
+  width 45px
+  position absolute
+  z-index 9
+  top 32%
+  left -20px
+  opacity 0.6
+
+.rightArrow
+  width 45px
+  position absolute
+  z-index 9
+  top 32%
+  right -20px
+  opacity 0.2
+
+.ft_card
+  border 1px solid light-gray-color
+  border-bottom-right-radius 16px
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.04);
+  min-height 345px
+  background white
+  margin 0 5px
+  display flex !important
+  width auto !important
+  .ft_card_img
+    height 250px
+    img
+      width 100%
+      height 100%
+      object-fit scale-down
+  .ft_card_btns
+    display none
+    .ft_card_btn
+      width 120px
+      padding 8px 0
+
+.ft_card
+  &:hover .ft_card_title
+    display none
+
+.ft_card
+  &:hover .ft_card_btns
+    display flex
+
+.deals-title
+  display inline-block
+  overflow hidden
+  position relative
+  line-height 1.2em
+  height 28px !important
+  text-align justify
+  margin-right -1em
+  padding-right 1em
+  &:before
+    content '...'
+    position absolute
+    right 0
+    bottom -5px
+  &:after
+    content ''
+    position absolute
+    right 0
+    width 1em
+    height 1.9em
+    margin-top 0.2em
+    background white

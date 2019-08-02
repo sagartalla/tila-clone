@@ -28,7 +28,7 @@ class FTB extends React.Component {
         <HeaderBar />
         <div className={`${styles['pl-20']} ${styles['pr-20']} container-fluid`}>
           {pageData && pageData.page_content.length > 0 &&
-            pageData.page_content.map(content => <PageData key={content} content={content} />)}
+            pageData.page_content.map((content, index) => <PageData key={content} index={index} content={content} />)}
         </div>
         <FooterBar />
       </div>

@@ -27,9 +27,9 @@ class DT extends React.Component {
   }
 
   componentDidMount() {
-    const { content, getListings } = this.props;
+    const { content, getListings, index } = this.props;
     if (content.data && content.data.listing_ids) {
-      getListings(content.data.listing_ids[lang]);
+      getListings(content.data.listing_ids[lang], index);
     }
   }
 
@@ -81,8 +81,8 @@ class DT extends React.Component {
   }
 }
 
-const mapStateToProps = store => ({
-  listingsData: selectors.getListings(store),
+const mapStateToProps = (store, ownProps) => ({
+  listingsData: selectors.getListings(store, ownProps),
   isListingLoading: selectors.getIsListingLoading(store),
   isLoggedIn: authSelectors.getLoggedInStatus(store),
 });
