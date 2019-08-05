@@ -99,7 +99,7 @@ class Product extends Component {
     e.stopPropagation();
     e.preventDefault();
     const {
-      productId: product_id, catalogId: catalog_id, variantId: variant_id,
+      productId: product_id, catalogId: catalog_id,
       variants, currency, addToWishlistAndFetch, wishlistId, deleteWishlist, userDetails,
     } = this.props;
     const { selectedIndex } = this.state;
@@ -111,7 +111,7 @@ class Product extends Component {
       addToWishlistAndFetch({
         catalog_id,
         product_id,
-        variant_id,
+        variant_id: variants[selectedIndex].variantId,
         wishlisted_price: variants && variants[selectedIndex] && variants[selectedIndex].sellingPrice && variants[selectedIndex].sellingPrice[0],
         wishlisted_currency: currency,
       });
@@ -214,8 +214,9 @@ class Product extends Component {
   }
   addToCompare(checked) {
     const {
-      productId, itemtype, media, displayName, categoryId, addToCompare, removeCompareData, catalogId: catalog_id, variantId: variant_id,
+      productId, itemtype, media, displayName, categoryId, addToCompare, removeCompareData, catalogId: catalog_id, variants,
     } = this.props;
+    const { selectedIndex } = this.state;    
     const src = `${constants.mediaDomain}/${media[0]}`;
     if (!checked) {
       addToCompare({
@@ -227,7 +228,7 @@ class Product extends Component {
         catalogObj: {
           product_id: productId,
           catalog_id,
-          variant_id,
+          variant_id: variants[selectedIndex].variantId,
         },
       });
     } else removeCompareData(productId);
@@ -243,7 +244,7 @@ class Product extends Component {
       displayName,
       variants,
       productId,
-      variantId,
+      variantId='',
       catalogId,
       itemtype,
       currency,

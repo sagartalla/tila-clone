@@ -62,7 +62,6 @@ class SearchPage extends Base {
     } else {
       searchOptions.shippingDetails = undefined;
     }
-    console.log('udbuaw', query);
     await Promise.all([
       store.dispatch(actionCreators.getSearchResults(searchOptions)),
       store.dispatch(megamenuActionsCreators.getMegamenu())

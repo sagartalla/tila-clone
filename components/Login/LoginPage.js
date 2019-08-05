@@ -85,7 +85,7 @@ class LoginPage extends React.Component {
       <div className={`${styles['login-form']} ${styles['flx-space-bw']} ${styles['flex-colum']}`}>
         <div>
           <Row>
-            <Col md={12} xs={12} sm={5}>
+            <Col md={12} xs={12} sm={12}>
               <h2 className={`${styles['fs-18']} ${styles['t-c']} ${styles.fontW600}`}>{LOGIN_PAGE.LOGIN_SIGNUP}</h2>
             </Col>
             {/* <Col md={7} xs={12} sm={7}>
@@ -93,16 +93,10 @@ class LoginPage extends React.Component {
             </Col> */}
           </Row>
           <Row className={`${styles['pt-30']} ${styles.flex}`}>
-            <Col md={5} xs={12} sm={5} className={`${styles.relative} ${styles.flex} ${styles['flex-colum']} ${styles['justify-center']} ${styles['pr-30']} ${styles['border-rt']}`}>
+            <Col md={5} xs={6} sm={6} className={`${styles.relative} ${styles.flex} ${styles['flex-colum']} ${styles['justify-center']} ${styles['pr-30']} ${styles['border-rt']}`}>
               <SocialLogin>
                 {([handleSocialLogin]) => (
                   <NoSSR>
-                    <div onClick={handleSocialLogin('facebook')} className={`${styles['flex-center']} ${styles.pointer} ${styles['border-lg']} ${styles['border-radius4']} ${styles['mb-5']} ${styles['p-5']}`}>
-                      <a className={`${styles.flex} ${styles['ml-15']}`}>
-                        <SVGComponent clsName={`${styles['bg-FB-icon']} ${styles['mr-10']}`} src="icons/social-icons/bg-facebook" />
-                      </a>
-                      {LOGIN_PAGE.FACEBOOK}
-                    </div>
                     <div onClick={handleSocialLogin('google')} className={`${styles['flex-center']} ${styles.pointer} ${styles['border-lg']} ${styles['border-radius4']} ${styles['mb-5']} ${styles['p-5']}`}>
                       <a className={`${styles.flex} ${styles['ml-15']}`}>
                         <SVGComponent clsName={`${styles['bg-GOOGLE-icon']} ${styles['mr-10']}`} src="icons/social-icons/bg-google" />
@@ -115,18 +109,24 @@ class LoginPage extends React.Component {
                       </a>
                       {LOGIN_PAGE.INSTAGRAM}
                     </div>
+                    <div onClick={handleSocialLogin('facebook')} className={`${styles['flex-center']} ${styles.pointer} ${styles['border-lg']} ${styles['border-radius4']} ${styles['mb-5']} ${styles['p-5']}`}>
+                      <a className={`${styles.flex} ${styles['ml-15']}`}>
+                        <SVGComponent clsName={`${styles['bg-FB-icon']} ${styles['mr-10']}`} src="icons/social-icons/bg-facebook" />
+                      </a>
+                      {LOGIN_PAGE.FACEBOOK}
+                    </div>
                   </NoSSR>
                 )}
               </SocialLogin>
               <span className={`${styles.absolute} ${styles['bg-white']} ${styles.right0} ${styles['p-5']} ${styles['fs-10']} ${styles['border-lg']} ${styles['or-tag']}`} >OR</span>
             </Col>
-            <Col md={7} xs={12} sm={7} className={`${styles['pl-30']}`}>
+            <Col md={7} xs={6} sm={6} className={`${styles['pl-30']}`}>
               <form onSubmit={this.submit}>
                 <div className={`${styles['fp-input']} ${styles['pb-10']}`}>
                   <input
                     type="text"
                     value={email}
-                    autoComplete={false}
+                    autoComplete="off"
                     className={styles['m-fs-16']}
                     onChange={this.onChangeField}
                     onBlur={this.handleValidation}

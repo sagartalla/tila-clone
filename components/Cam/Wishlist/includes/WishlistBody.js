@@ -30,23 +30,22 @@ const WishlistBody = (props) => {
   } = props;
   const { WISH_LIST_PAGE, PDP_PAGE } = languageDefinations();
 
-  const getPriceAlert = (a, b, cur) => {
-    if (a === b) return null;
+  const getPriceAlert = (status, wishlisted_price, changed_price, cur) => {
     let str = null;
-    const percent = percentage(a, b);
-    let priceVal = a - b;
-    if (percent > 0) {
+    if (status === 'SAME') return str;
+    const priceVal = wishlisted_price > changed_price ? wishlisted_price - changed_price : changed_price - wishlisted_price;
+    if (status === 'INCREASED') {
       str = (
         <span className={`${styles['thick-red-clr']} ${styles.flex}`}>
           <SVGComponent clsName={`${styles['alert-icon']}`} src="icons/increase/increase" />
-          {`${WISH_LIST_PAGE.PRICE_INCREASED_BY} ${priceVal.toFixed(2)} ${cur} (${percent}%)`}
+          {`${WISH_LIST_PAGE.PRICE_INCREASED_BY} ${priceVal.toFixed(2)} ${cur}`}
         </span>
       );
-    } else if (percent < 0) {
+    } else {
       str = (
         <span className={`${styles['success-green']} ${styles.flex}`}>
           <SVGComponent clsName={`${styles['alert-icon']}`}src="icons/decrease/decrease" />
-          {`${WISH_LIST_PAGE.PRICE_DECRECED_BY} ${priceVal.toFixed(2)} ${cur} (${percent}%)`}
+          {`${WISH_LIST_PAGE.PRICE_DECRECED_BY} ${priceVal.toFixed(2)} ${cur}`}
         </span>
       );
     }
@@ -60,7 +59,6 @@ const WishlistBody = (props) => {
       <div className={`${styles.flex} ${styles['no-wishlist-icon-inn']}`}>
         <SVGComponent clsName={`${styles['deleno-wish-list-icon']}`} src="icons/wish-list/no-wishlist" />
         <h4 className={`${styles['fs-26']} ${styles['t-c']} ${styles['pt-40']}`}>{WISH_LIST_PAGE.NO_WISHLIST_LABEL}</h4>
-        <span className={styles['thick-gry-clr']}>{WISH_LIST_PAGE.DONT_WAIT}</span>
         <a href={`/${language}`} className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-x-large']} ${styles['right-radius']} ${styles['text-uppercase']} ${styles.fontW600} ${styles['mt-40']}`}>{WISH_LIST_PAGE.START_SHOPPING}</a>
       </div>
     </div>
@@ -77,8 +75,8 @@ const WishlistBody = (props) => {
         {
           data.length > 0 && data.map((item, index) => {
             const {
-              wishlist_id, listing_id, brand_name, name, img, price, cur, inventory_count,
-              wishlisted_price, mrp, variant_id, product_id, catalog_id, itemType, buttonValue
+              wishlist_id, listing_id, brand_name, name, img, price, cur, inventory_count, changed_percentage, changed_price,
+              changed_status, wishlisted_price, mrp, variant_id, product_id, catalog_id, itemType, buttonValue
             } = item;
             return (
               <div key={index} className={`${styles['thick-border-btm']} ${styles['p-30-20']} ${styles['mb-wishlist-part']}`}>
@@ -123,14 +121,13 @@ const WishlistBody = (props) => {
                           <SVGComponent clsName={`${styles['delete-icon']}`} src="icons/delete-icon/delete-icon" />
                         </span>
                         <h4 className={`${styles.fontW600} ${styles['light-gry-clr']} ${styles['mt-25']} ${styles['ff-b']}`}><span className={`${styles['fs-20']} ${styles['m-fs-18']}`}>{price} {cur}</span></h4>
-                        {
-                          variant_id && percentage(price, mrp) > 5 ?
-                            <span className={`${styles.flex} ${styles['flex-center']}`}>
+                        {variant_id && percentage(price, mrp) > 5 ?
+                          <span className={`${styles.flex} ${styles['flex-center']}`}>
                             <span className={`${styles['success-green']} ${styles.flex}`}>{percentage(price, mrp)}%</span>&nbsp;&nbsp;&nbsp;
                             <strike className={`${styles['label-gry-clr']} ${styles['fs-12']}`}>{mrp} {cur}</strike>
                           </span> : ''
                         }
-                        {price && cur && wishlisted_price && wishlisted_price > 0 && wishlisted_price.toString() !== price && getPriceAlert(price, wishlisted_price, cur)}
+                        {getPriceAlert(changed_status, wishlisted_price, changed_price, cur)}
                         {price && cur && wishlisted_price && wishlisted_price > 0 && wishlisted_price.toString() !== price &&
                         <span className={`${styles['thick-gry-clr']}`}>
                           {WISH_LIST_PAGE.ITEM_WAS} {wishlisted_price} {cur} {WISH_LIST_PAGE.WHEN_ADDED_TO_WISHLIST}

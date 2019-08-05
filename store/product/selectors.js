@@ -27,6 +27,7 @@ const getProduct = (store, variantId) => {
     ...product_details.product_details_vo.cached_product_details.attribute_map,
     ...product_details.product_details_vo.cached_variant[computedVariantId].attribute_map,
   };
+  const tila_care_policy = listings[0].tila_care_policy || {}
   const productAttributeMap = product_details && product_details.product_details_vo && product_details.product_details_vo.cached_product_details.attribute_map;
   // let activeCount = 0, listingInventryCount = 0;
   let priceInfo = listings ? listings.filter((listing) => {
@@ -133,6 +134,7 @@ const getProduct = (store, variantId) => {
       showSizeChart,
       sizeChartImgName,
     },
+    tila_care_policy,
     breadcrums: tree.breadcrumb,
     warranty,
     categoryType: tree.finance ? tree.finance[0].display_name_en : '',
@@ -141,6 +143,9 @@ const getProduct = (store, variantId) => {
     wishlistId,
   };
 };
+const getTilaPolicy = (store) => {
+  return store.productReducer.tilaPolicy
+}
 const isProductLoaded = (store) => {
   //console.log('productdetails', store.productReducer.data[0]);
   return { isProductLoaded:store.productReducer.data[0],
@@ -209,7 +214,7 @@ const getVariantsAndSimilarProducts = (variantId, productId) => (store) => {
     };
     map[key] = map[key] || {};
     _.forEach(value.attribute_map, (attVal, attKey) => {
-      if (attVal.attribute_group_name !== 'IDENTITY' || !attVal.searchable || !attVal.groupable) {
+      if (attVal.attribute_group_name !== 'IDENTITY' || !attVal.searchable) {
         return;
       }
       if (!display[attKey]) {
@@ -249,7 +254,7 @@ const getVariantsAndSimilarProducts = (variantId, productId) => (store) => {
     }
   });
   const similarProducts = similar_products ? _.reduce([product_details, ...modifiedProducts], (acc, product) => {
-    if (availableSimilarProducts && !availableSimilarProducts[product.product_details_vo.cached_product_details.product_id]) return acc;
+    // if (similar_products && !similar_products[product.product_details_vo.cached_product_details.product_id]) return acc;
     const key = product.product_details_vo.cached_product_details.product_id;
     const display = {
       ...acc.display,
@@ -286,7 +291,7 @@ const getVariantsAndSimilarProducts = (variantId, productId) => (store) => {
       map,
     };
   }, { display: {}, map: [], order: [] }) : { display: {}, map: [], order: [] };
-  if(similar_products.length) {
+  if(similar_products.length && similarProducts.order[0]) {
     const primaryValues = attribute_map[similarProducts.order[0]].attribute_values.map((av) => av.value)
     const shortList = _.reduce(similarProducts.map, (acc, attrs, pid) => {
       if(primaryValues.indexOf(attrs[similarProducts.order[0]][0]) !== -1) {
@@ -454,5 +459,5 @@ const getAllCountries = (store) => {
 export {
   getProduct, getPreview, getSelectedVariantId, getReviewRatings, getReviewResponse,
   getVariantsAndSimilarProducts, getSelectedPropductId, getSelectedVariantData, getAllCities, getAllCountries,
-  getLoadingStatus, getErrorMessage, isProductLoaded, getProductId, getVariantId,
+  getLoadingStatus, getErrorMessage, isProductLoaded, getProductId, getVariantId,getTilaPolicy
 };

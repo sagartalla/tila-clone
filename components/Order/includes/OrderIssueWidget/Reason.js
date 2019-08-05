@@ -26,8 +26,7 @@ class Reason extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedMode: ORDER_ISSUE_TYPES.RETURN === props.orderIssue.returnExchangeType ?
-        'Return' : ORDER_ISSUE_TYPES.EXCHANGE ===  props.orderIssue.returnExchangeType ? 'Exchange' : 'Cancel',
+      selectedMode: this.getSelectedMode(props.orderIssue.issueType),
       selectedVariant: [],
       displaySizeError: false,
       showError: true,
@@ -45,6 +44,7 @@ class Reason extends Component {
     const orderId = {
       orderItemId: this.props.orderIssue.selectedItem.id,
     };
+    const { query } = this.props;
     let reasonType;
     switch(this.props.orderIssue.issueType) {
       case 'RETURN' :
@@ -56,12 +56,31 @@ class Reason extends Component {
       case 'EXCHANGE' :
         reasonType = 'exchange'
         break;
+      case 'CLAIMWARRANTY' :
+        reasonType = 'claimWarranty'
+        break;
+      case 'DAMAGEWARRANTY' :
+        reasonType = 'claimWarranty'
+        break;
       default:
        reasonType = 'return'
     }
-    this.props.getReasons(orderId,reasonType);
-    this.props.getExchangeVariants(orderId);
-    this.props.getOrderDetails({ orderId:this.props.orderIssue.orderId });
+
+      reasonType === 'claimWarranty' ?
+      this.props.getReasons(query.listingId,reasonType) : this.props.getReasons(orderId,reasonType);
+
+      this.props.getExchangeVariants(orderId);
+      this.props.getOrderDetails({ orderId:this.props.orderIssue.orderId });
+
+  }
+  getSelectedMode(mode) {
+    return {
+      RETURN:'Return',
+      CANCEL:'Cancel',
+      EXCHANGE:'Exchange',
+      CLAIMWARRANTY:'Claim Warranty',
+      DAMAGEWARRANTY:'Claim Warranty'
+    }[mode]
   }
   onOptionChange = (e) => {
     this.setState({
@@ -110,7 +129,14 @@ class Reason extends Component {
     };
 
     setReason(this.state);
+    const warrantyReasonParams = {
+      reason,
+      comment,
+      order_item_id: orderIssue.selectedItem.id,
+      warranty_claim_type: issueType === 'CLAIMWARRANTY' ? 'NORMAL' : 'DAMAGED',
+      address_id: orderDetails && orderDetails.address.address_id,
 
+    }
     const reasonParams = {
       reason,
       sub_reason: subReason,
@@ -126,6 +152,10 @@ class Reason extends Component {
       this.props.setAddressData(reasonParams);
       this.props.refundOptions(orderIssue.selectedItem.id, orderIssue.issueType);
       goToNextStep();
+    }
+    else if(selectedMode === 'Claim Warranty'){
+      this.props.setAddressData(warrantyReasonParams);
+      this.props.setOrderIssueData(params)
     }
     else if (
       this.state.selectedMode === 'Exchange'
@@ -201,11 +231,13 @@ class Reason extends Component {
     const { selectedItem: itemData, reasons, returnExchangeType, issueType } = orderIssue;
     const { img, name } = itemData;
     const { selectedMode, displaySizeError, showError } = this.state;
-    const selectedReason = reasons.filter(reason => reason.name === this.state.reason)[0]
+    let reasonItems = (typeof reasons === 'object' && (!Array.isArray(reasons) && Object.keys(reasons).length > 0))  ? reasons.reasons  : reasons
+    const selectedReason
+     = reasonItems.filter(reason => reason.name === this.state.reason)[0]
     const issueType_small = issueType.toLowerCase();
     return (
       <div className={`${styles['reason-item-main']} ${styles['width100']}`}>
-        <h4 className={`${styles['fs-20']} ${styles['fontW300']} ${styles['ml-20']} ${styles['mr-20']}`}>{ORDER_PAGE.WHY_DO_YOU_WANT_TO} {issueType_small} {ORDER_PAGE.THIS_ITEM}</h4>
+        <h4 className={`${styles['fs-20']} ${styles['fontW300']} ${styles['ml-20']} ${styles['mr-20']}`}>{(issueType === 'CLAIMWARRANTY' || issueType === 'DAMAGEWARRANTY') ? `${ORDER_PAGE.WHY_DO_YOU_WANT_TO} Claim Warranty` :  `${ORDER_PAGE.WHY_DO_YOU_WANT_TO} ${issueType_small} ${ORDER_PAGE.THIS_ITEM}`}</h4>
         {returnExchangeType ? null : (
           <div
             className={`${styles['flx-spacebw-alignc']} ${styles['pb-20']} ${
@@ -243,16 +275,17 @@ class Reason extends Component {
                     ? ORDER_PAGE.LOADING
                     : ORDER_PAGE.SELECT_REASON}
                 </option>
-                {reasons.map((reason, index) => (
-                  <option key={index} value={reason.name}>
-                    {reason.name}
+                {reasonItems.map((reason, index) => (
+                  <option key={index} value={reason.name || reason}>
+                    {reason.name || reason}
                   </option>
                 ))}
               </select>
               <span className={styles['select-highlight']} />
               <span className={styles['select-bar']} />
             </div>
-            {this.state.reason && selectedReason.sub_reasons ? (
+            { (this.state.reason && (selectedReason && selectedReason.sub_reasons))
+               ? (
               <div
                 className={`${styles.select} ${styles['mt-20']} ${
                   styles['mb-10']
@@ -297,8 +330,12 @@ class Reason extends Component {
 
           }
           {
-            ORDER_ISSUE_TYPES.RETURN === returnExchangeType ?
+            ORDER_ISSUE_TYPES.RETURN === returnExchangeType
+            || (issueType === 'CLAIMWARRANTY' || issueType === 'DAMAGEWARRANTY') ?
               <div className={styles['comment-cont']}>
+                {(issueType === 'CLAIMWARRANTY' || issueType === 'DAMAGEWARRANTY') &&
+                  <span className={`${styles['fs-12']}`}>{ORDER_PAGE.WARRANTY_CLAIM_REASON}</span>
+                }
                 <textarea
                   style={{ width: '410px' }}
                   onChange={this.updateComment}
@@ -369,7 +406,8 @@ const mapDispatchToProps = dispatch =>
       setExchangeOrder: actionCreators.setExchangeOrder,
       setAddressData: actionCreators.setAddressData,
       refundOptions:actionCreators.getRefundOptions,
-      getOrderDetails:actionCreators.getOrderDetails
+      getOrderDetails:actionCreators.getOrderDetails,
+      getWarrantyReason:actionCreators.getWarrantyReason,
     },
     dispatch,
   );

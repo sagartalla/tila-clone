@@ -149,7 +149,7 @@ class Search extends Component {
 
   imageSearch() {
     this.setState({ openImagesearch: true });
-  }ck
+  }
 
   handleHide() {
     this.setState({ openImagesearch: false });

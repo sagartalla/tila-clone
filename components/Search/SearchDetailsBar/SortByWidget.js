@@ -72,7 +72,7 @@ class SortByWidget extends Component {
           </select> */}
 
           <Dropdown id="sort-toggle" className={`${styles.width100}`}>
-            <Dropdown.Toggle id="dropdown-custom-components">
+            <Dropdown.Toggle id="dropdown-custom-components" className={styles['pl-0']}>
               <span>{this.state.sortValue}</span>
             </Dropdown.Toggle>
             <Dropdown.Menu className={`${styles.width100} ${styles['p-0']} ${styles['m-0']} ${styles['sort-drop-down']}`}>
