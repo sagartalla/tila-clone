@@ -19,7 +19,7 @@ const getMessage = (statusCode) => {
 }
 
 const Error = ({ statusCode, messege }) => {
-  messege = messege || 'Something went wrong';
+  messege = messege || 'SOMETHING WENT WRONG';
   return (
     <div className={`${styles['errors-main']}`}>
       <div className={`${styles['errors-main-inn']}`}>
