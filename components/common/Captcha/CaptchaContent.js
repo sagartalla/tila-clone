@@ -13,6 +13,7 @@ import main_en from '../../../layout/main/main_en.styl';
 import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from './captcha_en.styl';
 import styles_ar from './captcha_ar.styl';
+import TcContent from './TcContent';
 
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
@@ -33,15 +34,24 @@ const textObject = {
   tcText: <span>{PAYMENT_PAGE.COD_TC}</span>
 }
 const CaptchaContent = ({items,state,handleDrop,handleClick}) => {
+  if(items && items.status==='SUCCESS'){
+    return (
+      <div style={{ marginTop: "40px"}}>
+        <Bin
+          openBox={boxObject[state.openBox]}
+          boxText={textObject[state.boxText]}
+          tcText={textObject['tcText']}
+        />
+        <TcContent/>
+      </div>
+    );
+  }
   return (
     items
       ?
       <div>
         <div className={`${styles['flx-spacebw-alignc']} ${styles['fw700']} ${styles['pt-30']} ${styles['pb-30']}`}>
             <div className={`${styles['pr-10']} ${styles['pb-20']}`}>
-              {/* <ul className={`${styles['pl-0']} ${styles['m-0']} ${styles['cash-tab']}`}>
-                <li>Visual</li>
-              </ul> */}
               <div className={`${styles['captch-inn']} ${styles['p-20']}`}>
                 <span className={`${styles['flx-spacebw-alignc']} ${styles['refresh-part']} ${styles['pb-20']}`}>
                   <span className={styles['fs-14']}>{items.question}</span>
@@ -69,16 +79,7 @@ const CaptchaContent = ({items,state,handleDrop,handleClick}) => {
             tcText={textObject['tcText']}
           />
          </div>
-          <div className={`${styles['terms']}`}>
-            <b>Terms and Conditions</b><br/><br/>
-              <div className={`${styles['terms-content']}`}>
-                Cash on Delivery will not be available if your order value exceeds 3000 SAR<br/><br/>
-
-                You are authorized Tila or its partners to collect, process, facilitate and remit payments and / or the Transaction Price electronically or through Cash on Delivery<br/><br/>
-
-                Cash on Delivery refunds will be processed to Tila Credit
-              </div>
-          </div>
+          <TcContent/>
         </div>
       :
         null

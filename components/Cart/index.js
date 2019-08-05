@@ -84,7 +84,7 @@ class Cart extends Component {
     document.getElementsByTagName('BODY')[0].style.overflow = 'hidden';
     this.setState({
       showSlider: true,
-    });{}
+    });
   }
   closeSlider = () => {
     document.getElementsByTagName('BODY')[0].style.overflow = 'auto';
@@ -141,16 +141,16 @@ class Cart extends Component {
 
   addToWishlist(e) {
     const { cartData } = this.props;
-    const listing_id = e.currentTarget.getAttribute('data-id');
-    const item = cartData.items.filter(_item => listing_id == _item.item_id)[0];
+    const cart_id = e.currentTarget.getAttribute('data-id');
+    const item = cartData.items.filter(_item => cart_id === _item.item_id)[0];
     this.props.addToWishlistAndFetch({
       catalog_id: item.item_id,
       product_id: item.product_id,
       variant_id: item.variant_id,
-      wishlisted_price: item.price,
+      wishlisted_price: item.offer_price,
       wishlisted_currency: item.cur,
     });
-    this.props.removeCartItem(listing_id, {
+    this.props.removeCartItem(cart_id, {
       showToast: false,
     });
   }

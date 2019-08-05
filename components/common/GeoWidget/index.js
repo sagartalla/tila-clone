@@ -29,6 +29,7 @@ class GeoWidget extends Component {
       ...props.geoShippingData,
       ...shippingInfo,
       showCitiesData: false,
+      displayCity: '',
     };
     this.deriveCity = this.deriveCity.bind(this);
     this.onChangeCity = this.onChangeCity.bind(this);
@@ -118,7 +119,7 @@ class GeoWidget extends Component {
   }
   deleteCity() {
     this.setState({
-      displayCity: null,
+      displayCity: '',
     });
     this.props.removeCity().then(() => {
       Router.pushRoute(`${window.location.pathname}${window.location.search}`)
@@ -131,7 +132,7 @@ class GeoWidget extends Component {
     } = this.props;
     const { showCitiesData } = this.state;
     return (
-      <div className={`${styles['flex-center']} ${styles['delovery-inn']}`}>
+      <div className={`${styles['flex-center']} ${styles['delovery-inn']} ${styles['pr-5']}`}>
         {
           (!hideLabel)
             ?
@@ -143,7 +144,7 @@ class GeoWidget extends Component {
             null
         }
         <div
-          className={`${styles['auto-suggestions-wrap']}`}
+          className={`${styles['auto-suggestions-wrap']} ${styles['flex']} ${styles['justify-flex-end']}`}
           ref={(el) => { this.filterRef = el; }}
         >
           <Dropdown id="search-toggle">
@@ -152,7 +153,10 @@ class GeoWidget extends Component {
                 type="text"
                 value={this.state.displayCity}
                 className={`${styles['fs-14']} ${styles['delivery-input']} ${isPdp ? styles['pdp-border-btm'] : ''}`}
+                // onInput={this.onChangeCity}
                 onChange={this.onChangeCity}
+                style={{ width: `${this.state.displayCity.length * 8}px` }}
+                contentEditable
               />
             </Dropdown.Toggle>
             <Dropdown.Menu className={`${styles['p-0']} ${styles['m-0']} ${styles['auto-suggestions-list']}`}>
@@ -168,7 +172,9 @@ class GeoWidget extends Component {
           {
             this.state.displayCity
               &&
-                <div onClick={this.deleteCity} className={styles['delete-btn']}>x</div>
+                <div onClick={this.deleteCity} className={styles['delete-btn']}>
+                  <img className={styles['img-responsive']} src={"/static/img/bg-img/delivery-remove-icon.png"} />
+                </div>
           }
         </div>
       </div>
