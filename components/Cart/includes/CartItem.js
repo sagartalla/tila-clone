@@ -129,7 +129,7 @@ class CartItem extends React.Component {
       product_id, variant_id='', itemType, catalogId: catalog_id, discount, mrp, variantAttributes, selling_price,
     } = item;
     return (
-      <div key={item_id} className={`${styles['mb-20']} ${styles['box']}`}>
+      <div key={item_id} className={`${styles['mb-20']} ${styles.box}`}>
         {
           max_limit == quantity ?
             <div className={`${styles['p-10-22']} ${styles['alrt-message-bg']} ${styles['light-gry-clr']} ${styles['alrt-message-part']} ${styles['thick-border-btm']}`}><span>{CART_PAGE.MAX_PER_ORDER}</span></div>
@@ -138,7 +138,7 @@ class CartItem extends React.Component {
         <div className={`${styles['cart-box']} ${styles['p-20']}`}>
           {
             inventory <= 0 ?
-              <div className={`${styles['out-of-stock']} ${styles['text-center']} ${styles['absolute']} ${styles['bg-white']}`}>
+              <div className={`${styles['out-of-stock']} ${styles['text-center']} ${styles.absolute} ${styles['bg-white']}`}>
                 <h3>{CART_PAGE.UH_OH}</h3>
                 <p>
                   {CART_PAGE.ITEM_OUT_OF_STOCK_MESSAGE} <br /> {CART_PAGE.CONTINUE_TO_WISHLIST}
@@ -187,7 +187,7 @@ class CartItem extends React.Component {
                     ))}
                   <React.Fragment>
                     <div className={`${styles['warranty-part']} ${styles['p-10']} ${styles['black-color']}`}>
-                      <div className={`${styles['mb-0']} ${styles['flex']} ${styles['pb-5']}`}>
+                      <div className={`${styles['mb-0']} ${styles.flex} ${styles['pb-5']}`}>
                         <span className={`${styles['thick-gry-clr']} ${styles['fs-12']}`}>Warranty : </span>
                         <span className={`${styles['pl-10']} ${styles['fs-15']} ${styles['pr-10']}`}>
                           {(warranty_duration && Object.keys(warranty_duration).length > 0) && warranty_duration.duration !== 0 ?
@@ -223,7 +223,7 @@ class CartItem extends React.Component {
                 </Col>
                 <Col md={4} sm={4} className={`${styles['pr-5']} ${styles['landscape-cart-price']}`}>
                   {Math.floor(discount) > 5 &&
-                    <p className={`${styles['mb-0']} ${styles['fs-12']} ${styles['flex']} ${styles['justify-end']}`}>
+                    <p className={`${styles['mb-0']} ${styles['fs-12']} ${styles.flex} ${styles['justify-end']}`}>
                       <span className={styles['success-green']}>{`${Math.floor(discount)}% ${PDP_PAGE.OFF}`}</span>
                       <span className={`${styles['cross-strike']} ${styles.relative} ${styles['ml-5']}`}>
                         <span className={styles['label-light-grey']}>
@@ -238,7 +238,7 @@ class CartItem extends React.Component {
                     {/* <span className={`${styles['fs-12']} ${styles['pr-5']}`}>
                         <SVGComponent clsName={`${styles['secure-icon']} ${styles['mr-10']} ${styles['pointer']}`} src="icons/common-icon/trust-secure" />
                       </span> */}
-                    <div className={`${styles['relative']} ${styles['cart-price-toltp']}`}>
+                    <div className={`${styles.relative} ${styles['cart-price-toltp']}`}>
                       <span
                         className={
                           `${styles.question}
@@ -254,7 +254,7 @@ class CartItem extends React.Component {
 
                       >  ? </span>
                       <div className={`${styles['p-10']} ${styles['tool-tip']} ${styles['cart-tool-tip']}`}>
-                        <div className={`${styles['table']} ${styles['width100']}`}>
+                        <div className={`${styles.table} ${styles.width100}`}>
                           <div className={`${styles['flx-space-bw']} ${styles['fs-12']}`}>
                             <div className={`${styles['pb-10']}`}>
                               <div className={styles['thick-gry-clr']}>{CART_PAGE.MAXIMUM_RETAIL_PRICE}</div>
@@ -292,7 +292,7 @@ class CartItem extends React.Component {
                                 <div className={`${styles['pb-10']}`}>
                                   <div className={styles['thick-gry-clr']}>{CART_PAGE.DELIVERY_CHARGES}</div>
                                 </div>
-                                <div className={`${styles['t-rt']} ${styles['flex']}`}>
+                                <div className={`${styles['t-rt']} ${styles.flex}`}>
                                   {shipping.shipping_fees ?
                                     `${shipping.shipping_fees.display_value} ${cur}`
                                     : <SVGComponent clsName={`${styles['ship-icon']}`} src={lang === 'en' ? "icons/free-shipping" : "icons/Arabic-Freeshipping"} />}
@@ -325,31 +325,31 @@ class CartItem extends React.Component {
             </Col>
           </Row>
         </div>
-        <div className={`${styles['cart-box-btm']} ${styles['flex']} ${styles['p-14-22']}`}>
-          <Col md={8} sm={8} xs={8} className={`${styles['flex']} ${styles['m-pd-r-0']}`}>
-            <span className={styles['width21']}>
+        <div className={`${styles['cart-box-btm']} ${styles.flex} ${styles['p-14-22']}`}>
+          <Col md={8} sm={8} xs={8} className={`${styles.flex} ${styles['m-pd-r-0']}`}>
+            <span className={styles.width21}>
               {
                 inventory <= 10 && inventory != 0 ?
-                  <span className={`${styles['fontW600']} ${styles['thick-red']} ${styles['pr-20']}`}>{CART_PAGE.ONLY + ' ' + inventory + ' ' + CART_PAGE.UNITS_LEFT} </span>
+                  <span className={`${styles.fontW600} ${styles['thick-red']} ${styles['pr-20']}`}>{CART_PAGE.ONLY + ' ' + inventory + ' ' + CART_PAGE.UNITS_LEFT} </span>
                   : ''
               }
               {
                 inventory <= 0 ?
-                  <span className={`${styles['fontW600']} ${styles['thick-red']} ${styles['pr-20']}`}>{CART_PAGE.OUT_OF_STOCK} </span>
+                  <span className={`${styles.fontW600} ${styles['thick-red']} ${styles['pr-20']}`}>{CART_PAGE.OUT_OF_STOCK} </span>
                   : ''
               }
             </span>
-            <span data-id={item_id} onClick={addToWishlist} className={`${styles['flex-center']} ${styles['move-to-wishlist']} ${styles['pr-20']} ${styles['pointer']}`}>
+            <span data-id={item_id} onClick={addToWishlist} className={`${styles['flex-center']} ${styles['move-to-wishlist']} ${styles['pr-20']} ${styles.pointer}`}>
               <SVGComponent clsName={`${styles['wish-list-icon']}`} src="icons/wish-list/wish-list-icon" />
               <span className={styles['pl-10']}>{CART_PAGE.MOVE_TO_WISHLIST}</span>
             </span>
-            <span id={item_id} onClick={removeCartItem} className={`${styles['flex-center']} ${styles['cart-remove-icon']} ${styles['pl-20']} ${styles['pointer']}`}>
+            <span id={item_id} onClick={removeCartItem} className={`${styles['flex-center']} ${styles['cart-remove-icon']} ${styles['pl-20']} ${styles.pointer}`}>
               <SVGComponent clsName={`${styles['delete-icon']}`} src="icons/delete-icon/delete-icon" />
               <span className={styles['pl-10']}>{CART_PAGE.REMOVE}</span>
             </span>
           </Col>
           <Col md={4} sm={4} xs={4} className={`${styles['t-rt']} ${styles['pr-0']} ${styles['m-pad-5']}`}>
-            <span>{ORDER_PAGE.TOTAL} : </span><span className={`${styles['fs-16']} ${styles['fontW600']}`}>{total_amount + ' ' + cur}</span>
+            <span>{ORDER_PAGE.TOTAL} : </span><span className={`${styles['fs-16']} ${styles.fontW600}`}>{total_amount + ' ' + cur}</span>
           </Col>
         </div>
 

@@ -33,7 +33,7 @@ class LandingPage extends Base {
           <meta property="og:title" content={`${url.query.category} ${SEO_CONTENT.LANDING_H2_CONTENT} ${url.query.category} ${SEO_CONTENT.LANDING_H2}`} />
           <meta property="og:site_name" content="Tila" />
           <meta property="fb:app_id" content=" " />
-          <meta property="og:url" content={window.location.toString()} />
+          {/* <meta property="og:url" content={window.location.toString()} /> */}
           <meta property="og:description" content={`${SEO_CONTENT.LANDING_META_CONTENT1}`} />
           <meta property="og:locale:locale" content="en_SA" />
           <meta property="og:locale:alternate" content="ar_SA" />

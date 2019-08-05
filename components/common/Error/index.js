@@ -9,8 +9,15 @@ import styles_ar from './error_ar.styl';
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const getMessage = (statusCode) => {
-  return 'SOMETHING WENT WRONG';
+  switch (statusCode) {
+    case 404:
+      return 'PAGE NOT FOUND';
+      break;
+    default:
+      return 'SOMETHING WENT WRONG';
+  }
 }
+
 const Error = ({ statusCode, messege }) => {
   messege = messege || 'SOMETHING WENT WRONG';
   return (
@@ -19,7 +26,7 @@ const Error = ({ statusCode, messege }) => {
         <div className={`${styles['erros-inn-img']}`}>
           <img className={styles['']} src={"/static/img/errors-img/404tila.png"} />
         </div>
-        <span className={styles['label-not']}>SOMETHING WENT WRONG</span>
+        <span className={styles['label-not']}>{getMessage(statusCode)}</span>
       </div>
     </div>
   );

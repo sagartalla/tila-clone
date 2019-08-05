@@ -63,9 +63,9 @@ class Captcha extends React.Component{
       this.setState({
         openBox:'successbox',
         boxText:'successtext'
-      },() => this.props.onCaptchaSuccess({
+      },() => setTimeout(() => this.props.onCaptchaSuccess({
         captcha_request_id: items.request_id
-      }))
+      }), 2000))
     }else{
       return;
     }
@@ -80,7 +80,6 @@ class Captcha extends React.Component{
 
   render() {
     const items = this.props.getCaptcha;
-
     const captchaOptions = [items,this.state,this.handleClick,this.handleDrop]
 
     return (
