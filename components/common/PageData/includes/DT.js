@@ -27,9 +27,9 @@ class DT extends React.Component {
   }
 
   componentDidMount() {
-    const { content, getListings } = this.props;
+    const { content, getListings, index } = this.props;
     if (content.data && content.data.listing_ids) {
-      getListings(content.data.listing_ids[lang]);
+      getListings(content.data.listing_ids[lang], index);
     }
   }
 
@@ -59,7 +59,7 @@ class DT extends React.Component {
         {isListingLoading && listingsData.length === 0 ? ftbSkeletonLoader : ''}
         {!isLoggedIn &&
           <div className={`${styles['mb-20']} ${styles['mt-20']} ${styles.width100} ${styles.pointer}`} onClick={showLoginScreen}>
-            <img src="/static/img/icons/login-ftb.png" alt="" width="100%" />
+            <img src="/static/img/icons/login-ftb.gif" alt="" width="100%" />
           </div>}
         {listingsArr.length > 0 && listingsArr.map((listings, index) => {
           return (
@@ -81,8 +81,8 @@ class DT extends React.Component {
   }
 }
 
-const mapStateToProps = store => ({
-  listingsData: selectors.getListings(store),
+const mapStateToProps = (store, ownProps) => ({
+  listingsData: selectors.getListings(store, ownProps),
   isListingLoading: selectors.getIsListingLoading(store),
   isLoggedIn: authSelectors.getLoggedInStatus(store),
 });

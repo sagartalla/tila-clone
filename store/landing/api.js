@@ -8,7 +8,7 @@ const cookies = new Cookies();
 // const getPage = ({page, id}) => axios.get(`${constants.PCM_URL}/cms/${page}`);
 const getPage = ({ page, id, published = true }) => axios.get(`${constants.PCM_URL}/cms/${page}?id_attribute=${id}&published=${published}`);
 
-const getListings = (params) => {
+const getListings = (params, index) => {
 
   const shippingData = cookies.get('shippingInfo');
   const { city: shippingCity } = shippingData || {};
@@ -26,7 +26,10 @@ const getListings = (params) => {
       shipping: true,
     },
   };
-  return axios.post(`${constants.LISTING_API_URL}/api/v1/listing/`, options);
+  return axios.post(`${constants.LISTING_API_URL}/api/v1/listing/`, options).then(res => ({
+    res,
+    index,
+  }));
 };
 
 export default {
