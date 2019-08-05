@@ -288,11 +288,6 @@
     border-bottom: 1px solid #101820;
 }
 
-.slider-dots-part .slick-dots {
-    position: relative;
-    bottom: auto;
-}
-
 .srp-slider .slick-dots li button:before {
     content: '';
 }

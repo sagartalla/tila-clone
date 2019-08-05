@@ -39,7 +39,7 @@ const country = cookies.get('country') || 'SAU';
 const RenderButton = ({ callbackMethod, refundType }) => (
   <div className={styles['ml-5']}>
     <button
-      className={`${styles['mini-btn']} ${styles['link-text']} ${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']} ${styles['left-radius']} ${(refundType === 'DAMAGE PROTECTION' || 'CLAIM WARRANTY') ? styles['fs-10'] :styles['fs-12']}`}
+      className={`${styles['mini-btn']} ${styles['link-text']} ${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']} ${styles['left-radius']} ${styles['fs-12']}`}
       onClick={callbackMethod}
     >
       {refundType}
@@ -54,7 +54,6 @@ class OrderItem extends Component {
     this.state = {
       showToolTip: false,
     };
-    
   }
 
   getDate = (estimates) => {
@@ -64,6 +63,7 @@ class OrderItem extends Component {
       return t[0].actual_time ? moment(t[0].actual_time).format('ddd, MMM Do') : '';
     } return '';
   }
+
   showToolTip = () => {
     this.setState({ showToolTip: true });
   }
@@ -85,10 +85,10 @@ class OrderItem extends Component {
 
   exchangeReturnOrder = OrderType => () => {
     const {
-      orderId, orderItem, variantId, getOrderDetails,listingId
+      orderId, orderItem, variantId, getOrderDetails,
     } = this.props;
     getOrderDetails({ orderId });
-    Router.pushRoute(`/${language}/customer/orders/${orderId}/issue/${OrderType}/item/${orderItem.id}/${variantId}/${listingId}`);
+    Router.pushRoute(`/${language}/customer/orders/${orderId}/issue/${OrderType}/item/${orderItem.id}/${variantId}`);
     // raiseOrderIssue({
     //   issueType: null,
     //   items: products,
@@ -100,12 +100,8 @@ class OrderItem extends Component {
   render() {
     const {
       payments = [{}], orderItem, orderId, thankyouPage, isCancelable,
-      isReturnable, isExchangable, needHelp, showPriceInfo,isDamageProtectionAvailable,
-      isWarrantyAvailable
+      isReturnable, isExchangable, needHelp, showPriceInfo,
     } = this.props;
-    console.log('isDamageProtectionAvailable',isDamageProtectionAvailable);
-    console.log('isWarrantyAvailable',isWarrantyAvailable);
-    console.log('orderItem',orderItem);
     const { showToolTip } = this.state;
     const btnType = (() => {
       if (['PLACED', 'SHIPPED', 'PROCESSING'].indexOf(orderItem.status) !== -1) {
@@ -301,20 +297,6 @@ class OrderItem extends Component {
                       callbackMethod={this.exchangeReturnOrder(ORDER_ISSUE_TYPES.EXCHANGE)}
                       refundType="Exchange"
                     />
-                  }
-                  {
-                    isDamageProtectionAvailable === 'VALID' &&
-                      <RenderButton
-                        callbackMethod={this.exchangeReturnOrder(ORDER_ISSUE_TYPES.DAMAGEWARRANTY)}
-                        refundType="DAMAGE PROTECTION"
-                      />
-                  }
-                  {
-                    isWarrantyAvailable === 'VALID' &&
-                      <RenderButton
-                        callbackMethod={this.exchangeReturnOrder(ORDER_ISSUE_TYPES.CLAIMWARRANTY)}
-                        refundType="CLAIM WARRANTY"
-                      />
                   }
                 </div>
               </div>

@@ -8,7 +8,7 @@ import GeoWidget from '../../common/GeoWidget';
 import { languageDefinations } from '../../../utils/lang';
 import SVGCompoent from '../../common/SVGComponet';
 import Warranty from './Warranty';
-//import TilaCarePolicy from './TilaCarePolciy'
+
 import lang from '../../../utils/language';
 
 import main_en from '../../../layout/main/main_en.styl';
@@ -24,7 +24,7 @@ const { PDP_PAGE } = languageDefinations();
 const Shipping = (props) => {
   const shippingData = cookies.get('shippingInfo') || {};
 
-  const { shippingInfo, offerInfo, returnInfo} = props;
+  const { shippingInfo, offerInfo, returnInfo } = props;
   // const {
   //   shipping_days, shippable, isPreview,
   // } = shippingInfo;
