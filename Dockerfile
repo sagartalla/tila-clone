@@ -1,23 +1,41 @@
 FROM ubuntu:16.04
+
+ARG CACHEBUST=0
+
+
+RUN rm /bin/sh && \
+	ln -s /bin/bash /bin/sh && \
+	mkdir -p /root/.nvm
+
+ENV NVM_DIR /root/.nvm
+ENV NODE_VERSION 12.7.0
+
 RUN apt-get update && apt-get install -y \
 	curl \
 	python \
 	make \
 	g++
-RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
-RUN apt-get update && apt-get install -y \
-	nodejs
-RUN apt-get install -y build-essential
-RUN apt-get install -y apache2-utils
-RUN apt-get update && apt-get install -y \
-  nginx
 
+RUN apt-get update --fix-missing && \
+	apt-get install -y curl python make g++&& \
+	##############################################################################
+	# Install: nvm, node and npm
+	# @see: http://stackoverflow.com/questions/25899912/install-nvm-in-docker
+	##############################################################################
+	curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash && \
+	source $NVM_DIR/nvm.sh && \
+	nvm install $NODE_VERSION && \
+	nvm cache clear && \
+	apt-get remove -y curl && \
+	rm -rf /var/lib/apt/lists/*
+
+ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
+
+RUN whereis node
 
 RUN mkdir /app
 WORKDIR /app
 COPY . .
-
-ARG version
 
 RUN npm install
 RUN echo $version
