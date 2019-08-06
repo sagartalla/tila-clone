@@ -94,7 +94,7 @@
       .checkout-instantly
         .checkout-instant-btn
           padding 5px 17px
-           
+
     .addto-cart
       background-color white
       padding 12px 35px
@@ -203,7 +203,7 @@
 
 .break-word
   word-break: break-all
-  
+
 .details-right-part
   background-color rgba(255, 255, 255, 0.7)
   box-shadow 0 0 7px 0 rgba(225,225,225,0.5)
@@ -226,8 +226,8 @@
     top auto
   .details-right-part-inn
     padding 10px 20px
-    height: 100%;
-    overflow: auto;
+    height calc(100% - 140px)
+    overflow auto
     .notifyme-input
       width 50%
     .notify_me_btn
@@ -781,6 +781,23 @@
 .hideDiv
   display none
 
+.activePolicy
+   position relative
+  .removeButton
+    display none
+    color thick-blue
+    // position absolute
+
+.tila-ext-wrny .tila-care-warty:last-child
+  padding-left 10px
+  border-left 1px solid light-brdr
+
+.tila-ext-wrny .tila-care-warty:first-child
+  padding-right 10px
+
+.activePolicy
+    .removeButton
+      display block
 
 @keyframes slideOpen {
   from {right: -800px;}
@@ -803,6 +820,14 @@
   position fixed
   bottom 0
   width 34%
+
+.tila-care-warty
+  width 50%
+
+.tila-care-warty
+  .activePolicy
+    label
+      color black
 
 @media screen and (min-device-width: 320px) and (max-device-width: 767px) and (orientation : portrait) {
   .details-right-part {

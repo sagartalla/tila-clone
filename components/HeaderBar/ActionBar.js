@@ -165,6 +165,7 @@ class ActionBar extends Component {
     this.props.logout().then((res) => {
       if (res && res.value && res.value.status === 200) {
         window.location = `${window.location.origin}/${cookies.get('language')}`;
+        localStorage.clear();
       }
     });
   }
@@ -178,6 +179,10 @@ class ActionBar extends Component {
     }
 
     this.props.showLoginScreen();
+
+    if (!window.sessionStorage.getItem('TILuservisitcount')) {
+      window.sessionStorage.setItem('TILuservisitcount', 1);
+    }
     // const state = {};
     // state.loginClicked = true;
     // if (e.currentTarget.getAttribute('data-mode') === 'sign-up') {

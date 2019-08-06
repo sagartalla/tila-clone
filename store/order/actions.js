@@ -24,6 +24,7 @@ const actions = {
   THANKYOU_PAGE_TRACK: 'THANKYOU_PAGE_TRACK',
   SET_CANCEL_REFUNDMODE: 'SET_CANCEL_REFUNDMODE',
   GET_INVOICE_DETAILS: 'GET_INVOICE_DETAILS',
+  SUBMIT_CLAIM_WARRANTY: 'SUBMIT_CLAIM_WARRANTY',
 };
 
 const actionCreators = {
@@ -118,6 +119,10 @@ const actionCreators = {
         returnExchangeType: params.returnExchangeType,
       },
     },
+  }),
+  submitClaimWarranty: params => ({
+    type:actions.SUBMIT_CLAIM_WARRANTY,
+    payload:api.submitClaimWarranty(params),
   }),
   setOrderIssueData: params => ({
     type: actions.SET_ORDER_ISSUE_DATA,

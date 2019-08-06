@@ -37,7 +37,7 @@ class ProductPage extends Base {
     const shippingData = req ? req.universalCookies.get('shippingInfo') : cookies.get('shippingInfo');
     const { city: shippingCity, country: shippingCountry } = shippingData || {};
     const {
-      productId,
+      productId,variantId
     } = query;
     // if (taskCode) {
     //   await store.dispatch(actionCreators.getPreview({

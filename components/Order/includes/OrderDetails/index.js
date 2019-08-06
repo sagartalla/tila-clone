@@ -71,6 +71,9 @@ const OrderDetails = ({ query, orderData, thankyouPage }) => {
                   isCancelable={item.isCancelable}
                   isReturnable={item.isReturnable}
                   isExchangable={item.isExchangable}
+                  isDamageProtectionAvailable={item.isDamageProtectionAvailable}
+                  isWarrantyAvailable={item.isWarrantyAvailable}
+                  listingId={item.listingId}
                 />
               ))}
             </div>

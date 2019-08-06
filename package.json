@@ -2,9 +2,9 @@
   "name": "storefront",
   "scripts": {
     "dev": "LOCAL=true ENV=stage node server.js",
-    "build": "version=$version node ./node_modules/next/dist/bin/next build",
+    "build": "version=$version next build",
     "start": "NODE_ENV=production ENV=dev node server.js",
-    "start:ecs": "NODE_ENV=production node --max-old-space-size=2048 server.js",
+    "start:ecs": "NODE_ENV=production node server.js",
     "start:stage": "PORT=3000 NODE_ENV=production ENV=stage node --inspect server.js",
     "start:preprod": "PORT=3000 NODE_ENV=production ENV=preprod node server.js",
     "start:prod": "NODE_ENV=production ENV=production node server.js"
