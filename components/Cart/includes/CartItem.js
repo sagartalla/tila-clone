@@ -126,7 +126,7 @@ class CartItem extends React.Component {
     const {
       item_id, img, name, offer_price, cur, quantity, max_limit, inventory, offerDiscounts,
       brand_name, gift_info, shipping, warranty_duration, total_amount, total_discount, listing_id,
-      product_id, variant_id, itemType, catalogId, discount, mrp, variantAttributes, selling_price,
+      product_id, variant_id, itemType, catalogId, discount, mrp, variantAttributes, selling_price, policies_applied, tila_care_policy, tila_care_charges,
     } = item;
     return (
       <div key={item_id} className={`${styles['mb-20']} ${styles['box']}`} id="cart-container">
@@ -300,6 +300,18 @@ class CartItem extends React.Component {
                               </div>
                               :
                               null
+                          }
+                           {
+                            tila_care_charges !== null &&
+                              <div className={`${styles['flx-space-bw']} ${styles['fs-12']}`}>
+                                <div className={`${styles['pb-10']}`}>
+                                  <div className={styles['thick-gry-clr']}>{CART_PAGE.TILA_CARE_PROTECTION}</div>
+                                </div>
+                                <div className={`${styles['t-rt']} ${styles['flex']}`}>
+                                  {tila_care_charges &&
+                                    `${tila_care_charges.display_value} ${tila_care_charges.currency_code}`}
+                                </div>
+                              </div>
                           }
 
                           <div className={` ${styles['flx-space-bw']} ${styles['total-amount']} ${styles['fs-12']}`}>
