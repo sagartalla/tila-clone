@@ -7,23 +7,36 @@ import { bindActionCreators } from 'redux';
 import PersonalInfo from './PersonalInfo';
 import ContactInfo from './ContactInfo';
 import { actionCreators } from '../../../../store/cam/personalDetails';
-import { mergeCss } from '../../../../utils/cssUtil';
 import { languageDefinations } from '../../../../utils/lang';
 
-const styles = mergeCss('components/Cam/PersonelDetails/profile');
+import lang from '../../../../utils/language';
+
+import main_en from '../../../../layout/main/main_en.styl';
+import main_ar from '../../../../layout/main/main_ar.styl';
+import styles_en from '../profile_en.styl';
+import styles_ar from '../profile_ar.styl';
+
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+
+
 const { CONTACT_INFO_MODAL } = languageDefinations();
 
 const UserData = ({
   getUserProfileInfo,
   deactivateUserProfile,
   useractive,
+  getUserInfo,
 }) => {
   if (!useractive) {
     window.location.href = '/';
   }
+  const deactiveProfile = () => {
+    confirm('Do you really want to deactivate the account?') ?
+          deactivateUserProfile() : null
+  }
   getUserProfileInfo();
   return (
-    <div className={`${styles.box} ${styles['mb-20']} ${styles['ipad-mb-15']}`}>
+    <div className={`${styles.box} ${styles['mb-20']} ${styles['ipad-mb-15']} ${styles['right-part-cam']}`}>
       <Row className={`${styles['p-30']} ${styles['m-0']}`}>
         <Col xs={12} md={7}>
           <PersonalInfo />
@@ -32,7 +45,7 @@ const UserData = ({
       </Row>
       <span
         className={`${styles.flex} ${styles.pointer} ${styles['thick-red-clr']} ${styles['deactive-account-lable']} ${styles['p-10-40']} ${styles['bg-light-gray']}`}
-        onClick={deactivateUserProfile}
+        onClick={deactiveProfile}
       >
         {CONTACT_INFO_MODAL.DEACTIVATE_ACCOUNT}
       </span>

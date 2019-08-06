@@ -4,9 +4,12 @@ import { actions } from './actions';
 const initialState = {
   ui: {
     loading: false,
+    notifyLoading: false,
   },
   data: [],
+  products: [],
   error: '',
+  paginationData: {},
 };
 
 const wishlistReducer = typeToReducer({
@@ -18,7 +21,7 @@ const wishlistReducer = typeToReducer({
       return Object.assign({}, state, { error: action.payload.message, ui: { loading: false } })
     },
     FULFILLED: (state, action) => {
-      return Object.assign({}, state, { data: action.payload.data, ui: { loading: false } });
+      return Object.assign({}, state, { paginationData: action.payload.data, data: action.payload.data.content,  ui: { loading: false } });
     },
   },
   [actions.ADD_TO_WISHLIST]: {
@@ -40,13 +43,27 @@ const wishlistReducer = typeToReducer({
       return Object.assign({}, state, { error: action.payload.message, ui: { loading: false } })
     },
     FULFILLED: (state, action) => {
-      return Object.assign({}, state, { removeToWishlist: action.payload.data, data: [...action.payload.data], ui: { loading: false } });
+      return Object.assign({}, state, { paginationData: action.payload.data,removeToWishlist: action.payload.data.content, data: [...action.payload.data.content], ui: { loading: false } });
     },
   },
   [actions.NOTIFY_ME]: {
-    PENDING: state => state,
-    FULFILLED: state => state,
-    REJECTED: state => state,
+    PENDING: (state) => {
+      return Object.assign({}, state, { ui: { notifyLoading: true } });
+    },
+    REJECTED: (state) => {
+      return Object.assign({}, state, { ui: { notifyLoading: false } });
+    },
+    FULFILLED: (state) => {
+      return Object.assign({}, state, { ui: { notifyLoading: false } });
+    },
+  },
+  [actions.WISHLIST_PRODUCTS]: {
+    PENDING: state => Object.assign({}, state, { ui: { loading: true } }),
+    REJECTED: state => Object.assign({}, state, { ui: { loading: false } }),
+    FULFILLED: (state, action) => Object.assign({}, state, {
+      ui: { loading: false },
+      products: action.payload && action.payload.data,
+    }),
   },
 }, initialState);
 

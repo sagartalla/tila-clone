@@ -7,8 +7,14 @@ import { selectors, actionCreators } from '../../../../store/order';
 import {languageDefinations} from '../../../../utils/lang'
 const {ORDER_PAGE} = languageDefinations()
 
-import { mergeCss } from '../../../../utils/cssUtil';
-const styles = mergeCss('components/Order/includes/OrderIssueWidget/orderIssue');
+import lang from '../../../../utils/language';
+
+import main_en from '../../../../layout/main/main_en.styl';
+import main_ar from '../../../../layout/main/main_ar.styl';
+import styles_en from './orderIssue_en.styl';
+import styles_ar from './orderIssue_ar.styl';
+
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 class CancelComplete extends Component {
 
@@ -20,6 +26,7 @@ class CancelComplete extends Component {
       reason: selectedReasons.reason,
       comment: selectedReasons.comment,
       subReason: selectedReasons.subReason,
+      refund_mode:orderIssue.cancelRefundMode
     });
   }
 
@@ -27,7 +34,7 @@ class CancelComplete extends Component {
     const { orderIssue, loadingStatus, errorMessege, goToNextStep } = this.props;
     const { selectedItem } = orderIssue;
     return (
-      <div>
+      <div className={styles['width100']}>
       {
         loadingStatus
         ?
@@ -38,7 +45,7 @@ class CancelComplete extends Component {
             {
               errorMessege
               ?
-              errorMessege
+              <span className={`${styles['p-20']} ${styles['flex']}`}>{errorMessege}</span>
               :
               <div>
                 {/* insert image here */}
@@ -47,14 +54,14 @@ class CancelComplete extends Component {
                     <img src="/static/img/bg-img/cancel-sucessfull.jpg" className={styles['img-responsive']}/>
                   </div>
                   <div className={`${styles['pt-20']} ${styles['t-c']} ${styles['cancel-success-label']}`}>
-                    <span className={styles['fs-12']}>{ORDER_PAGE.YOUR_ORDER}<span className={styles['fontW600']}>{selectedItem.name}</span>{ORDER_PAGE.SUCCESSFULL_CANCEL}</span>
+                    <span className={styles['fs-12']}>{ORDER_PAGE.YOUR_ORDER}&nbsp;<span className={styles['fontW600']}>{selectedItem.name}</span>&nbsp;{ORDER_PAGE.SUCCESSFULL_CANCEL}</span>
                   </div>
                 </div>
                 {/* <div>
                   <span>has been Cancelled Successfully</span>
                 </div> */}
                 <div className={`${styles['mt-20']} ${styles['pt-10']} ${styles['pb-10']} ${styles['t-c']} ${styles['cancel-success-text']}`}>
-                  <i className={styles['fs-12']}>{ORDER_PAGE.CANCEL_MESSAGE}</i>
+                  <span className={styles['fs-12']}>{ORDER_PAGE.CANCEL_REFUND_MSG}</span>
                 </div>
               </div>
             }

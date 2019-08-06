@@ -7,8 +7,14 @@ import InputComponent from '../../../common/InputComponent';
 import SVGComponent from '../../../common/SVGComponet';
 import { languageDefinations } from '../../../../utils/lang/';
 
-import { mergeCss } from '../../../../utils/cssUtil';
-const styles = mergeCss('components/Cam/UserVault/uservault');
+import lang from '../../../../utils/language';
+
+import main_en from '../../../../layout/main/main_en.styl';
+import main_ar from '../../../../layout/main/main_ar.styl';
+import styles_en from '../uservault_en.styl';
+import styles_ar from '../uservault_ar.styl';
+
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const { VAULT_PAGE } = languageDefinations();
 const dateoptions = [...Array(13)].map((number, index) => {
@@ -124,7 +130,7 @@ class VaultAddNewCard extends Component {
               <Col md={5}>
                 <Col md={12} sm={12} xs={12} className={styles['pl-0']}>
                   <InputComponent
-                    labelTxt='Card Number*'
+                    labelTxt={VAULT_PAGE.CARD_NUMBER}
                     inputName='card_number'
                     onChangeFunc={this.cardChk}
                     error={card_number_error}
@@ -132,7 +138,7 @@ class VaultAddNewCard extends Component {
                 </Col>
                 <Col md={12} sm={12} xs={12} className={styles['pl-0']}>
                   <InputComponent
-                    labelTxt='Name on Card*'
+                    labelTxt={VAULT_PAGE.NAME_ON_CARD}
                     inputName='user_name'
                     onChangeFunc={this.nameChk}
                     error={nm_error}
@@ -141,7 +147,7 @@ class VaultAddNewCard extends Component {
                 <Col md={6} sm={12} xs={12} className={styles['pl-0']}>
                   <div className={styles['select']}>
                     <select name="exp_mm" className={styles['select-text']} onChange={this.expMonthChk} required>
-                      <option value="0">Expiry Month</option>
+                      <option value="0">{VAULT_PAGE.EXPIRY_MONTH}</option>
                       {dateoptions}
                     </select>
                     <span className={styles['select-highlight']}></span>
@@ -152,7 +158,7 @@ class VaultAddNewCard extends Component {
                 <Col md={6} sm={12} xs={12} className={styles['pl-0']}>
                   <div className={styles['select']}>
                     <select name="exp_yr" className={styles['select-text']} onChange={this.expYearChk} required>
-                      <option value="0">Expiry Year</option>
+                      <option value="0">{VAULT_PAGE.EXPIRY_YEAR}</option>
                       {yearoptions}
                     </select>
                     <span className={styles['select-highlight']}></span>
@@ -163,7 +169,7 @@ class VaultAddNewCard extends Component {
                 <Col md={12} className={styles['pl-0']}>
                   <div className={`${styles['checkbox-material']} ${styles['flex-center']} ${styles['pb-30']} ${styles['mt-30']}`}>
                     <input id="card-check" type="checkbox" onClick={setAsDefaultCard} defaultChecked={checked} />
-                    <label for="card-check" className={styles['fs-12']}> {VAULT_PAGE.SAVE_CARD_MSG}</label>
+                    <label htmlFor="card-check" className={styles['fs-12']}> {VAULT_PAGE.SAVE_CARD_MSG}</label>
                   </div>
                 </Col>
               </Col>

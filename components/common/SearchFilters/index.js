@@ -1,7 +1,15 @@
 import React, {Fragment} from 'react';
-import { mergeCss } from '../../../utils/cssUtil';
 import { languageDefinations } from '../../../utils/lang';
-const styles = mergeCss('components/common/SearchFilters/searchFitler');
+
+import lang from '../../../utils/language';
+
+import main_en from '../../../layout/main/main_en.styl';
+import main_ar from '../../../layout/main/main_ar.styl';
+import styles_en from './searchFilter_en.styl';
+import styles_ar from './searchFilter_ar.styl';
+
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+
 const { SEARCH_PAGE } = languageDefinations();
 
 const SearchFilters = () => (

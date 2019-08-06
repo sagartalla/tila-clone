@@ -1,4 +1,5 @@
 import apis from './api';
+import { actionCreators as cartActionCreators } from '../../cart';
 
 const actions = {
   GET_SHIPPING_ADDR_RESULTS: 'GET_SHIPPING_ADDR_RESULTS',
@@ -6,6 +7,8 @@ const actions = {
   DELETE_ADDRESS: 'DELETE_ADDRESS',
   MAKE_DEFAULT_ADDR: 'MAKE_DEFAULT_ADDR',
   EDIT_ADDR_DETAILS: 'EDIT_ADDR_DETAILS',
+  SELECT_DELIVER_TO_ADDRESS: 'SELECT_DELIVER_TO_ADDRESS',
+  CHANGE_STORE: 'CHANGE_STORE',
 };
 
 const actionCreators = {
@@ -20,6 +23,8 @@ const actionCreators = {
     return dispatch({
       type: actions.SEND_NEW_ADDR_DETAILS,
       payload: apis.sendNewAddressDetailsApi(addressDetails)
+    }).then(() => {
+      dispatch(cartActionCreators.getCartResults())
     })
   },
 
@@ -27,6 +32,8 @@ const actionCreators = {
     return dispatch({
       type: actions.EDIT_ADDR_DETAILS,
       payload: apis.editAddressDetailsApi(addressDetails)
+    }).then(() => {
+      dispatch(cartActionCreators.getCartResults())
     })
   },
 
@@ -34,6 +41,8 @@ const actionCreators = {
     return dispatch({
       type: actions.DELETE_ADDRESS,
       payload: apis.deleteAddressApi(addrId)
+    }).then(() => {
+      dispatch(cartActionCreators.getCartResults())
     })
   },
 
@@ -41,7 +50,25 @@ const actionCreators = {
     return dispatch({
       type: actions.MAKE_DEFAULT_ADDR,
       payload: apis.makeDefaultAddressApi(addrId)
+    }).then(() => {
+      dispatch(cartActionCreators.getCartResults())
     })
+  },
+
+  selectDeliverToAddress: (addId) => (dispatch, getState) =>  {
+    dispatch({
+      type: actions.SELECT_DELIVER_TO_ADDRESS,
+      payload: addId
+    })
+    dispatch(cartActionCreators.getCartResults({
+      address_id: addId
+    }));
+  },
+
+  changeState: () => {
+    return {
+      type: actions.CHANGE_STORE,
+    };
   }
 };
 

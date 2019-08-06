@@ -2,18 +2,34 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Dropdown, MenuItem } from 'react-bootstrap';
 
-import { mergeCss } from '../../../utils/cssUtil';
 import { languageDefinations } from '../../../utils/lang';
 import { actionCreators } from '../../../store/search';
+import SVGComponent from '../../common/SVGComponet';
 
-const styles = mergeCss('components/Search/search');
+import lang from '../../../utils/language';
+
+import main_en from '../../../layout/main/main_en.styl';
+import main_ar from '../../../layout/main/main_ar.styl';
+import styles_en from '../search_en.styl';
+import styles_ar from '../search_ar.styl';
+
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+
 const { SEARCH_PAGE } = languageDefinations();
+
+const sortValues = [{ value: 0, text: SEARCH_PAGE.BEST_MATCH },
+  { value: 1, text: SEARCH_PAGE.PRICE_LOW_TO_HIGH },
+  { value: 2, text: SEARCH_PAGE.PRICE_HIGH_TO_LOW }];
+
 
 class SortByWidget extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      sortValue: SEARCH_PAGE.BEST_MATCH,
+    };
     this.sortSelect = this.sortSelect.bind(this);
   }
   fireAnalyticEvent = (value) => {
@@ -22,35 +38,53 @@ class SortByWidget extends Component {
     document.dispatchEvent(event);
   }
   sortSelect(e) {
+    const data = e.currentTarget.getAttribute('data');
+    const index = e.currentTarget.getAttribute('value');
     this.setState({
-      value: e.target.value
-    },() => this.fireAnalyticEvent(this.state.value));
+      sortValue: data,
+    }, () => this.fireAnalyticEvent(this.state.sortValue));
     this.props.getSearchResults({
-      sort: this.getSortParam(e.target.value)
+      sort: this.getSortParam(index),
     });
   }
 
   getSortParam(selectedValue) {
     return {
-        selling_price_hi_to_lo: {'sellingPrice': 'desc'},
-        selling_price_lo_to_hi: {'sellingPrice': 'asc'},
+      2: { 'sellingPrice': 'desc' },
+      1: { 'sellingPrice': 'asc' },
     }[selectedValue];
   }
 
   render() {
     return (
-      <div className={`${styles['flex-center']} ${styles['sort-part-inn']}`}>
-        <label className={`${styles['mb-0']} ${styles['fontW600']}`}>{SEARCH_PAGE.SORT_BY} : </label>
-        <div className={styles['select']}>
-          <select className={styles['select-text']} required value={this.state.value} onChange={this.sortSelect}>
+      <div className={`${styles['flex-center']} ${styles['sort-part-inn']} ${styles['pl-15']}`}>
+        <span className={`${styles['mb-0']} ${styles['fontW600']} ${styles['flex-center']}`}>
+          <SVGComponent clsName={`${styles['sort-arrow']}`} src="icons/common-icon/sort" />
+          <span className={`${styles['pl-5']} ${styles['pr-5']}`}>{SEARCH_PAGE.SORT_BY}: </span>
+        </span>
+        <div className={styles['select-mn']}>
+          {/* <select className={styles['select-text']} required value={this.state.value} onChange={this.sortSelect}> */}
             {/*<option value="1">{SEARCH_PAGE.BEST_MATCH}</option>
           <option value="2">{SEARCH_PAGE.BEST_OFFERS}</option>*/}
-            <option value="best_match">{SEARCH_PAGE.BEST_MATCH}</option>
+            {/* <option value="best_match">{SEARCH_PAGE.BEST_MATCH}</option>
             <option value="selling_price_lo_to_hi">{SEARCH_PAGE.PRICE_LOW_TO_HIGH}</option>
             <option value="selling_price_hi_to_lo">{SEARCH_PAGE.PRICE_HIGH_TO_LOW}</option>
-          </select>
-          <span className={styles['select-highlight']}></span>
-          <span className={styles['select-bar']}></span>
+          </select> */}
+
+          <Dropdown id="sort-toggle" className={`${styles.width100}`}>
+            <Dropdown.Toggle id="dropdown-custom-components" className={styles['pl-0']}>
+              <span>{this.state.sortValue}</span>
+            </Dropdown.Toggle>
+            <Dropdown.Menu className={`${styles.width100} ${styles['p-0']} ${styles['m-0']} ${styles['sort-drop-down']}`}>
+              {sortValues.map((value, index) => (
+                  <MenuItem className={styles['search-suggestion']} data={value.text} value={value.value} onClick={this.sortSelect} eventKey={index + 1} key={value.value}>
+                    <a className={`${styles['black-color']}`}>
+                      <span>{value.text}</span>
+                    </a>
+                  </MenuItem>))
+              }
+            </Dropdown.Menu>
+          </Dropdown>
         </div>
       </div>
     );

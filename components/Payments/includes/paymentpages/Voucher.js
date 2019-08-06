@@ -8,8 +8,15 @@ import { actionCreators, selectors } from '../../../../store/payments';
 
 import { languageDefinations } from '../../../../utils/lang/';
 
-import { mergeCss } from '../../../../utils/cssUtil';
-const styles = mergeCss('components/Payments/payment');
+import lang from '../../../../utils/language';
+
+import main_en from '../../../../layout/main/main_en.styl';
+import main_ar from '../../../../layout/main/main_ar.styl';
+import styles_en from '../../payment_en.styl';
+import styles_ar from '../../payment_ar.styl';
+
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+
 const { PAYMENT_PAGE } = languageDefinations();
 
 
@@ -20,62 +27,63 @@ class Voucher extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.processData && nextProps.processData.redirect_url) {
-        window.location = nextProps.processData.redirect_url;
+    if (nextProps.processData && nextProps.processData.redirect_url) {
+      window.location = nextProps.processData.redirect_url;
     }
   }
 
   proceedToPayment() {
-    const { data, makeProcessRequest } = this.props;
+    const { voucherData, makeProcessRequest } = this.props;
     makeProcessRequest({
       payment_details: [{
-        payment_mode: data.type,
+        payment_mode: voucherData.type,
       }]
     });
   }
 
   render() {
-    const {props} = this;
+    const { props } = this;
     const { voucherData, isOnlyVocuher } = props;
-    const { balance, amount_to_pay, currency_code, remaining_amount } = voucherData;
+    const { balance, total_amount, amount_to_pay, currency_code, remaining_amount } = voucherData;
     return (
       <div className={`${styles['voucher']} ${styles['p-10']}`}>
-        <div>Tila Credit Used</div>
+        <h3 className={`${styles['lgt-blue']} ${styles['fs-20']} ${styles['pb-10']} ${styles['fontW300']} ${styles['m-0']}`}>{PAYMENT_PAGE.TILA_CREDIT_USED}</h3>
         {
           isOnlyVocuher
             ?
-              <div>All other payment methods have been disabled as you have enough tila credit in your Wallet to purchace this item. Enjoy your purchase :)</div>
+            <div className={`${styles['pb-15']} ${styles['fs-14']}`}>{PAYMENT_PAGE.ALL_OTHER_PAYMENT_METHODS_ARE_DISABLED} :)</div>
             :
-              null
+            null
         }
-        <div className={`${styles['flex']} ${styles['justify-between']}`}> 
-          <div>
-            <div>Money in Wallet</div>
-            <div>{balance} {currency_code}</div>
+        <div className={`${styles.flex} ${styles['justify-between']}`}>
+          <div className={`${styles.paymentBorder}`}>
+            <span className={`${styles['success-green']} ${styles['fs-12']}`}>{PAYMENT_PAGE.TOTAL_AMOUNT_TO_PAY}</span>
+            <b className={`${styles['pt-5']} ${styles['fs-16']}`}>{total_amount.display_value} {total_amount.currency_code}</b>
           </div>
-          <div>
+          <div className={`${styles.flex} ${styles['align-center']} ${styles['thick-red-clr']}`}>
             <span>-</span>
           </div>
-          <div>
-            <div>Total Amount To Pay</div>
-            <div>{amount_to_pay} {currency_code}</div>
+          <div className={`${styles.paymentBorder}`}>
+            <span className={balance.money_value < amount_to_pay.money_value ? `${styles['thick-red-clr']} ${styles['fs-12']}` : `${styles['success-green']} ${styles['fs-12']}`}>{PAYMENT_PAGE.MONEY_IN_WALLET}</span>
+            <b className={`${styles['pt-5']} ${styles['fs-16']}`}>{balance.display_value} {balance.currency_code}</b>
           </div>
-          <div>
+          <div className={`${styles.flex} ${styles['align-center']}`}>
             <span>=</span>
           </div>
-          <div>
-            <div>Remaining amount to pay</div>
-            <div>{remaining_amount} {currency_code}</div>
+          <div className={`${styles.paymentBorder}`}>
+            <span className={balance.money_value >= amount_to_pay.money_value ? `${styles['success-green']} ${styles['fs-12']}` : `${styles['thick-red-clr']} ${styles['fs-12']}`}>{PAYMENT_PAGE.REMAINING_AMOUNT_TO_PAY}</span>
+            <b className={`${styles['pt-5']} ${styles['fs-16']}`}>{remaining_amount.display_value} {remaining_amount.currency_code}</b>
           </div>
+
         </div>
         {
           isOnlyVocuher
             ?
-              <div>
-                <button onClick={this.proceedToPayment} className={`${styles['fp-btn-primary']} ${styles['fp-btn']}`}>PAY USING TILA CREDIT</button>
-              </div>
+            <div className={styles['mt-20']}>
+              <button onClick={this.proceedToPayment} className={`${styles['fp-btn-primary']} ${styles['fp-btn']} ${styles['border-radius']} ${styles['fp-btn-x-large']}`}>{PAYMENT_PAGE.PAY_USING_TILA_CREDIT}</button>
+            </div>
             :
-             null
+            null
         }
 
       </div>

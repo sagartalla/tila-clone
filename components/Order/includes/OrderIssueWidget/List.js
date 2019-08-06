@@ -8,8 +8,16 @@ import { selectors, actionCreators } from '../../../../store/order';
 import constants from '../../../../constants'
 import {languageDefinations} from '../../../../utils/lang'
 
-import { mergeCss } from '../../../../utils/cssUtil';
-const styles = mergeCss('components/Order/includes/OrderIssueWidget/orderIssue');
+import lang from '../../../../utils/language';
+
+import main_en from '../../../../layout/main/main_en.styl';
+import main_ar from '../../../../layout/main/main_ar.styl';
+import styles_en from './orderIssue_en.styl';
+import styles_ar from './orderIssue_ar.styl';
+
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+
+
 const {ORDER_PAGE} = languageDefinations()
 const List = ({ orderIssue, goToNextStep, setSelectedItem }) => {
   const { items } = orderIssue
@@ -19,9 +27,18 @@ const List = ({ orderIssue, goToNextStep, setSelectedItem }) => {
       selectedItem: _.find(orderIssue.items, { id: e.target.value })
     });
   }
-
+  // this condition is to take user directly to reason page if given item length
+  // equals to one
+  
+  if(items.length === 1) {
+    setSelectedItem({
+      selectedItem: items[0]
+    });
+    goToNextStep();
+    return null;
+  }
   return (
-    <div>
+    <div className={`${styles['width100']}`}>
       <div className={styles['widget-body']}>
       {
         items.map((item) => {

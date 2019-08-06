@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { mergeCss } from '../../../../utils/cssUtil';
-const styles = mergeCss('components/Product/product');
+import lang from '../../../../utils/language';
+
+import main_en from '../../../../layout/main/main_en.styl';
+import main_ar from '../../../../layout/main/main_ar.styl';
+import styles_en from '../../product_en.styl';
+import styles_ar from '../../product_ar.styl';
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 class Variant extends Component {
   constructor(props) {
@@ -19,7 +24,7 @@ class Variant extends Component {
   render() {
     const { displayName, values, onSelectProduct, id } = this.props;
     return (
-      <div className={`${styles['pt-10']} ${styles['pb-10']} ${styles['pr-15']}`}>
+      <div className={`${styles['pt-5']} ${styles['pb-5']} ${styles['pr-15']}`}>
         <div className={`${styles['flex-center']}`}>
           <span className={`${styles['fs-12']} ${styles['fontW600']} ${styles['pr-15']}`}>{displayName}</span>
           <div className={`${styles['flex-center']} ${styles['size-btn-main']}`}>

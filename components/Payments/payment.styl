@@ -4,9 +4,11 @@
   background-color body-color
   min-height 100vh
 
-  .payment-signup, .delivery-adress-prt, .pay-loyalty-main, .payment-mode-prt, .pay-offers-discounts
+  .payment-signup, .delivery-adress-prt, .pay-loyalty-main, .pay-offers-discounts
     padding 15px 35px
 
+  .payment-mode-prt
+    padding 0 35px
 
   .sign-part
     width 70%
@@ -35,12 +37,19 @@
       cursor pointer
     .active
       background-color white
-      box-shadow -4px 0 8px rgba(204, 204, 204, 0.8)
-      border-right 5px solid #45689a
+      box-shadow -5px 0 4px 0 rgba(0, 0, 0, 0.06)
+      border-right 5px solid tila-blk
       color black-color
+    .payment-lists
+      .make-paymrnt-icon
+        width: 24px;
+        height: 17px;
+      &.disabled
+        opacity: 0.4;
+        pointer-events: none;
 
   .right-bar
-    font-size font-size-14
+    font-size 14px
     .offer
       background-color black
       color white
@@ -66,16 +75,19 @@
     position absolute
     left -20px
     width-height-radius(40px, 40px, 0)
+    top 15px
     // & .done
     //     .icon-bg-fill
     //       fill generic-green-color
 
+.payment-edit
+  height 35px
 .default-logo
   width 74px
   height 34px
 
 .saved-card-item
-  padding 8px
+  padding 15px
   border 1px solid #aaa
 
 .card-label
@@ -90,11 +102,6 @@
   height: 77px;
   img
     width 100%
-
-.payment-lists
-  .make-paymrnt-icon
-    width: 24px;
-    height: 17px;
 
 .pay-loyalty-main
   .pay-loyalty-inn
@@ -141,7 +148,8 @@
 .offers-bottom
   box-shadow: 0 -4px 5px 0 rgba(0, 0, 0, 0.02);
 
-
+.user-login-name
+  border-right 2px solid light-brdr
 
 .netbanking-part
   .pay-loyalty-inn
@@ -156,28 +164,28 @@
     .refresh-part-inn
       box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.12);
       border-radius: 4px;
-      .refresh-icon
-        width 17px
-        height 17px
+  .refresh-icon
+    width 17px
+    height 17px
   .captcha-icon-part
     span
       padding 5px
       border 1px dotted generic-gray-color
       border-radius 7px
       margin-right 15px
+
+
+.captch-inn
+  border-bottom-left-radius: 4px
+  border-bottom-right-radius: 4px
+  box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.07)
+  border 1px solid tila-blk
+  .captcha-icon-part span
+    border 1px solid light-brdr
+    margin 10px
     .captcha-icon
-      width: 47px;
-      height: 43px;
-
-    .car-icon
-      width 30px
-      height 30px
-
-  .captch-inn
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.07);
-    border: solid 0.5px navy-blue;
+      width 47px
+      height 43px
 
   .cash-tab
     li
@@ -201,9 +209,56 @@
   width: 118px;
   height: 99px;
 
+.error_box-icon
+  width: 118px;
+  height: 99px;
+
+.success_box-icon
+  width: 82px;
+  height: 85px;
+
 .img-responsive
   max-width 100%
   max-height 100%
+
+.saved-cards
+  .saved-cards-part
+    .saved-card-item
+      // box-shadow 0 3px 3px 0 rgba(0, 0, 0, 0.07)
+      border 1px solid light-brdr
+      border-radius 4px
+      .card-no
+        letter-spacing 2px
+      .vault-card
+        width 34px
+        height 20px
+        margin 0 15px
+  .pay-btn
+    // padding 10px 70px
+
+.saved-cards-part .saved-card-item.card-active
+  box-shadow 0 3px 3px 0 rgba(0, 0, 0, 0.07)
+  border 1px solid tila-blk
+
+.voucher
+  padding 20px 40px
+
+.new-card-btn
+  min-width 55%
+  padding 7px 15px
+  // padding 10px 30px
+  // background-color navy-blue
+
+
+.button-radius
+    border-bottom-left-radius 16px
+
+.continue-checkout
+    min-height 200px
+    display flex
+    justify-content space-between
+    flex-direction column
+    margin-bottom 0 !important
 
 @media screen and (min-device-width: 320px) and (max-device-width: 736px) and (orientation : portrait){
   .payment-header {
@@ -369,9 +424,6 @@
     height 86px
     margin-top 20px
   }
-
-
-
 }
 
 @media screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation : portrait){
@@ -404,3 +456,34 @@
     padding-right 0
   }
 }
+
+.voucher
+  background rgba(187, 210, 241, 0.09)
+
+.paymentBorder
+  border 1px solid border-color
+  background white
+  width 28%
+  display flex
+  flex-direction column
+  border-radius 4px
+  padding 10px
+  box-shadow 0 2px 4px 0 rgba(0, 0, 0, 0.08)
+
+.border-radius
+     border-bottom-right-radius 25px;
+
+.sidebar-payment
+   position sticky !important
+   top 80px
+
+.user-login-name
+  border-right 2px solid light-brdr
+
+
+@media screen and (min-width: 900px) and (max-width: 1200px){
+  .captch-inn .captcha-icon-part {
+    flex-wrap: wrap;
+  }
+}
+

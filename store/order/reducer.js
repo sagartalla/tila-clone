@@ -7,14 +7,21 @@ const initialState = {
     },
     data: {
 			orderDetails: {},
+      claimWarranty:{},
 			orderIssue: {
         items: [],
         reasons: [],
         cancelStatus: {},
         exchangeVariants: [],
+        selectedReasons:{},
+        refundOptions:{},
+        exchangeId:{},
+        refundInitiated:false,
+        cancelRefundMode:{},
       },
-    },
-    error: '',
+    orderTracker: {},
+  },
+  error: '',
 };
 
 const productReducer = typeToReducer({
@@ -37,6 +44,26 @@ const productReducer = typeToReducer({
     REJECTED: (state, action) => {
       return Object.assign({}, state, { error: action.payload.message, ui: { loading: false } })
     },
+  },
+  [actions.SUBMIT_CLAIM_WARRANTY] : {
+    PENDING: state => {
+      return Object.assign({}, state, { ui: { loading: true }});
+    },
+    FULFILLED: (state, action) => {
+      return Object.assign ( {}, state, {
+        data:{
+        ...state.data,
+        claimWarranty: {
+          ...state.data.claimWarranty,
+          ...action.payload.data
+        }
+      },
+      ui: { loading: false }
+    });
+  },
+    REJECTED: (state, action) => {
+      return Object.assign({}, state, { error: action.payload.message, ui:{ loading: false } })
+    }
   },
   [actions.RAISE_ORDER_ISSUE]: (state, action) => {
     return {
@@ -67,6 +94,64 @@ const productReducer = typeToReducer({
       }
     }
   },
+  [actions.GET_REFUND_OPTIONS]: {
+    PENDING: state => {
+      return Object.assign({},state,{ ui: { loading: true }})
+    },
+    FULFILLED: (state,action) => {
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          orderIssue: {
+            ...state.data.orderIssue,
+            refundOptions: action.payload.data,
+          }
+        }
+      }
+    },
+    REJECTED: (state,action) => {
+      return Object.assign({}, state, { error: action.payload.response.data.message, ui: { loading: false } })
+    },
+  },
+  [actions.SET_EXCHANGE_ORDER]: {
+    PENDING: state => {
+      return Object.assign({},state,{ ui: { loading: true }})
+    },
+    FULFILLED: (state,action) => {
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          orderIssue: {
+            ...state.data.orderIssue,
+            exchangeId: action.payload.data
+          }
+        },
+        ui: { loading: false }
+      }
+    },
+    REJECTED: (state,action) => {
+      return Object.assign(
+        {},
+        state,
+        { error: action.payload.response.data.message,
+        ui: { loading: false }})
+    },
+  },
+  [actions.SET_ADDRESS_DATA]: (state,action) => {
+    return {
+      ...state,
+      data: {
+        ...state.data,
+        orderIssue: {
+          ...state.data.orderIssue,
+          selectedReasons: action.payload.data
+
+        }
+      }
+    }
+  },
   [actions.SET_SELECTED_ITEM]: (state, action) => {
     return {
       ...state,
@@ -75,6 +160,18 @@ const productReducer = typeToReducer({
         orderIssue: {
           ...state.data.orderIssue,
           selectedItem: action.payload.data.selectedItem
+        }
+      }
+    }
+  },
+  [actions.SET_CANCEL_REFUNDMODE] : (state,action) => {
+    return {
+      ...state,
+      data:{
+        ...state.data,
+        orderIssue:{
+          ...state.data.orderIssue,
+          cancelRefundMode:action.payload.data
         }
       }
     }
@@ -189,7 +286,8 @@ const productReducer = typeToReducer({
           ...state.data,
           orderIssue: {
             ...state.data.orderIssue,
-            returnStatus: action.payload.data
+            returnStatus: action.payload.data,
+            refundInitiated:true
           }
         },
         ui: { loading: false }
@@ -233,7 +331,24 @@ const productReducer = typeToReducer({
         }
       }
     };
-  }
+  },
+  [actions.GET_TRACKING_DETAILS]: {
+    PENDING: state => Object.assign({}, state, { ui: { loading: true } }),
+    FULFILLED: (state, action) => {
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          orderTracker: {
+            ...action.payload.data,
+          },
+        },
+      };
+    },
+    REJECTED: (state, action) => {
+      return Object.assign({}, state, { error: action.payload.message, ui: { loading: false } })
+    },
+  },
 }, initialState);
 
 export default productReducer;

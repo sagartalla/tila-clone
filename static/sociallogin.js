@@ -1,7 +1,7 @@
 /*eslint-disable*/
 var googleAuth2 = '';
 const instagramAppID = 'e75178e4dcd24b18a6cd5e650c73d9d8';
-const facebookAppID = '258606608345622';
+const facebookAppID = '1978888652213386';
 const googleAppID = '289717607267-r4ij4arfmkdhshvfd93thqedb71nbojn.apps.googleusercontent.com';
 
 const instaLoginURL = `https://api.instagram.com/oauth/authorize/?client_id=${instagramAppID}&redirect_uri=${window.location.origin}&response_type=code`;
@@ -31,7 +31,7 @@ window.fbAsyncInit = function() {
     xfbml      : true,
     version    : 'v3.2'
   });
-  FB.AppEvents.logPageView();   
+  FB.AppEvents.logPageView();
 };
 
 function initialSocialLogin() {
@@ -65,7 +65,8 @@ function getSearchObj(queryString) {
   const queryArray = queryString.replace('?', '').split('&');
   const queryObj = queryArray.reduce((a,v,i) => {
     const [key, value] = v.split('=');
-    return {...a, [key]: value}
+    a[key] = value;
+    return a;
   }, {})
   return queryObj;
 }

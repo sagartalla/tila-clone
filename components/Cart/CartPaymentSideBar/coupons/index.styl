@@ -1,175 +1,94 @@
 @import '../../../../layout/main/executables.styl';
 
-.couponDiv
-   border: solid 0.9px border-color;
-   height 200px
-   width: 350px;
-   margin-top: 30px;
-   box-shadow: 0 5px 9px 0 rgba(0, 0, 0, 0.05);
-   border-radius: 5px;
-   display: flex;
-   flex-direction: column;
-   justify-content: space-between;
-
-.couponApply
-    position: fixed;
-    top: 10%;
-    border-radius: 2px;
-    box-shadow: 0 3px 9px 0 rgba(0, 0, 0, 0.07);
-    background-color: white;
-    border-bottom: 0;
-    display flex
-    align-items center
-    z-index 5;
-    left: 15%
-
-.couponCodeListing
-    padding: 7px;
-    border-top-right-radius: 7px;
-    border-bottom-right-radius: 7px;
-    width: 40%;
-    border-right: 0 !important;
-    margin-top: 10px;
-    height: 33px;
-    text-align: center;
-    left: -10px;
-    position: relative;
-    border: solid 1px listing-border;
-    background-color: listing-background-color;
-
-
-.couponCodeListing:after {
-    content: '';
-    display: block;
-    position: relative;
-    left: -8px;
-    width: 0;
-    border-bottom: 10px solid listing-triangle-color;
-    border-left: 10px solid transparent;
-    top: 27%;
-    transform: rotate(-90deg);
+.applyCoupon {
+    width: 100%;
+    overflow: auto;
+    align-items: center;
+      .couponDiv {
+        border: solid 0.9px border-color;
+        min-height 170px;
+        width: 340px;
+        margin-top: 30px;
+        box-shadow: 0 5px 9px 0 rgba(0, 0, 0, 0.05);
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        }
 }
-.couponCodeCategory
-    padding: 7px;
-    border-top-right-radius: 7px;
-    border-bottom-right-radius: 7px;
-    width: 40%;
-    border-right: 0 !important;
-    margin-top: 10px;
-    height: 33px;
-    text-align: center;
-    left: -10px;
-    position: relative;
-    border: solid 1.3px category-border;
-    background-color: category-background-color;
-
-
-.couponCodeCategory:after {
-    content: '';
-    display: block;
-    position: relative;
-    left: -8px;
-    width: 0;
-    border-bottom: 10px solid category-triangle;
-    border-left: 10px solid transparent;
-    top: 27%;
-    transform: rotate(-90deg);
-}
-
-.couponCodeBank
-    padding: 7px;
-    border-top-right-radius: 7px;
-    border-bottom-right-radius: 7px;
-    width: 40%;
-    border-right: 0 !important;
-    margin-top: 10px;
-    height: 33px;
-    text-align: center;
-    left: -10px;
-    position: relative;
-    border: solid 1.3px bank-border;
-    background-color: bank-background-color;
-
-.couponCodeBank:after {
-    content: '';
-    display: block;
-    position: relative;
-    left: -8px;
-    width: 0;
-    border-bottom: 10px solid bank-triangle;
-    border-left: 10px solid transparent;
-    top: 27%;
-    transform: rotate(-90deg);
-}
-
-.couponOffer
-    padding: 7px;
-    border-top-left-radius: 7px;
-    border-bottom-left-radius: 7px;
-    width: 40%;
-    border-left: 0 !important;
-    margin-top: 10px;
-    text-align: center;
-    left: -10px;
-    position: relative;
-    height: 33px;
-
+  
 .listingColor
     border: solid 1px listing-border;
     background-color: listing-background-color;
 
 .categoryColor
    border: solid 1.3px category-border;
-   background-color: category-background-color;
+   background-color: popup-header;
 
 .bankColor
    border: solid 1.3px bank-border;
    background-color: bank-background-color;
 
-
 .modalClassName
    position absolute
-   top 35%
+   top 10%
 
 .applied 
-   color: green-applied;
+   color: generic-green-color;
    
 .buttonStyle
    left: 55%;
    bottom: 0%;
+   height: 68%;
    position: absolute;
+   border: 1px solid thick-blue;
+   border-radius: 5px;
 
 .wordBreak
    word-break: break-all;
 
-.input
-  width 350px !important
-  height 60px
-  border 0 !important
+.apply-btn
+    color #000
+    border 1px solid #c8c7cc
+    padding 6px 20px
+    background-color #fff
+    border-radius: 5px;
 
-.overflow
-  overflow: auto;
-  max-height: 200px;
+.copy-btn
+    color tila-blk
+    border 1px solid tila-blk
+    padding 6px 20px
+    border-bottom-left-radius 14px
 
-.border
-  border-right: 1px dotted;
-  margin-left: 30px;
 
-.ellipsis {
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-  max-width: 100px;
-}
+.coupon-result
+    height 400px
+  .coupon-img
+       width 135px
+       height 140px
+.loader-div
+    width 50px
+    height 50px
+    z-index 14
+  .loader-styl
+    svg
+      animation rotate 1.4s linear infinite
+      -webkit-animation rotate 1.4s linear infinite;
+      -moz-animation rotate 1.4s linear infinite;
+      @keyframes rotate {
+        to {
+          transform rotate(360deg);
+        }
+      }
 
-.applyCoupon {
-    position: absolute;
-    left: 15%;
-    top: 20%;
-}
+      @-webkit-keyframes rotate {
+        to {
+          -webkit-transform rotate(360deg);
+        }
+      }
 
-.errorStyle {
-    position: absolute
-    top: 20%
-    left: 15%;    
-}
+      @-moz-keyframes rotate {
+        to {
+          transform rotate(360deg);
+        }
+      }

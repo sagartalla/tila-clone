@@ -1,28 +1,36 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import _ from 'lodash';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Row, Col, Dropdown } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
+import Cookie from 'universal-cookie';
 
+import { Link } from '../../routes';
 import constants from '../../constants';
 import HeaderBar from '../HeaderBar';
 import FooterBar from '../Footer';
-import SVGCompoent from '../common/SVGComponet';
 import { actionCreators, selectors } from '../../store/compare';
 import { actionCreators as cartActionCreators } from '../../store/cart';
+import { selectors as cartSelectors } from '../../store/search';
 import { languageDefinations } from '../../utils/lang';
-import { mergeCss } from '../../utils/cssUtil';
+import Button from '../common/CommonButton';
+import SVGComponent from '../common/SVGComponet';
 
-const styles = mergeCss('components/Compare/compare');
-const { COMPARE } = languageDefinations();
+import lang from '../../utils/language';
 
-const ICONS = {
-  screenSize: '/icons/common-icon/display-screen',
-  camera: 'icons/common-icon/camera-icon',
-  processor: 'icons/common-icon/processor-icon',
-  batteryPower: 'icons/common-icon/battery',
-};
+import main_en from '../../layout/main/main_en.styl';
+import main_ar from '../../layout/main/main_ar.styl';
+import styles_en from './compare_en.styl';
+import styles_ar from './compare_ar.styl';
+
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+
+const { COMPARE, PDP_PAGE } = languageDefinations();
+
+const cookies = new Cookie();
+
+const language = cookies.get('language') || 'en';
+const country = cookies.get('country') || 'SAU';
+
 
 class Compare extends Component {
   constructor(props) {
@@ -59,7 +67,7 @@ class Compare extends Component {
   addToCart = ({ currentTarget }) => {
     const { addToCartAndFetch } = this.props;
     addToCartAndFetch({
-      listing_id: currentTarget.getAttribute('data-listing-id'),
+      listing_id: currentTarget.getAttribute('id'),
     });
   }
 
@@ -78,6 +86,16 @@ class Compare extends Component {
     const { selectedGroups } = this.state;
     Object.keys(selectedGroups).forEach((feature) => {
       selectedGroups[feature] = false;
+    });
+    this.setState({
+      selectedGroups,
+    });
+  }
+
+  selectAllChecks = () => {
+    const { selectedGroups } = this.state;
+    Object.keys(selectedGroups).forEach((feature) => {
+      selectedGroups[feature] = true;
     });
     this.setState({
       selectedGroups,
@@ -115,29 +133,30 @@ class Compare extends Component {
   }
 
   render() {
-    const { compareInfo = {}, brands = [], productList = [] } = this.props;
+    const { compareInfo = {}, brands = [], productList = [], cartButtonLoaders } = this.props;
     const {
-      compareCount = 0, features = [], products = [], productsFeatures = [], 
+      compareCount = 0, features = [], products = [], productsFeatures = [],
     } = compareInfo;
     const { selectedBrand } = this.state;
     return (
       <div>
         <HeaderBar />
         <div className={`${styles['compare-main']} ${styles['p-25']}`}>
-          <h4 className={`${styles['fs-16']} ${styles.fontW600}`}>{COMPARE.TILA_COMPARE_1}{compareCount} {COMPARE.TILA_COMPARE_2}</h4>
+          <h4 className={`${styles['fs-22']} ${styles.fontW600}`}>{COMPARE.TILA_COMPARE_1}{compareCount} {COMPARE.TILA_COMPARE_2}</h4>
           <Row className={styles.flex}>
             <Col md={3}>
               <div className={styles['compare-product']}>
                 <div className={styles['compare-product-inn']}>
                   <h5 className={`${styles['flx-space-bw']}`}>
-                    <span className={styles.fontW600}>{COMPARE.FEATUERS}</span>
+                    <span className={`${styles.fontW600} ${styles['fs-16']}`}>{COMPARE.FEATUERS}</span>
+                    <span className={`${styles['lgt-blue']} ${styles.pointer}`} onClick={this.selectAllChecks}>Select All</span>
                     <span className={`${styles['lgt-blue']} ${styles.pointer}`} onClick={this.clearAllChecks}>{COMPARE.CLEAR_ALL}</span>
                   </h5>
                   {
                     features.map(feature => (
-                      <div key={feature.key} className={styles['checkbox-material']}>
+                      <div key={feature.key} className={`${styles['checkbox-material']} ${styles['flex-center']}`}>
                         <input id={feature.key} type="checkbox" onClick={this.selectGroup} checked={this.state.selectedGroups[feature.key]} />
-                        <label htmlFor={feature.key}>{feature.value} </label>
+                        <label htmlFor={feature.key} className={`${styles['fs-12']} ${styles['thick-gry-clr']}`}>{feature.value} </label>
                       </div>
                     ))
                   }
@@ -147,33 +166,40 @@ class Compare extends Component {
             {
               products.map(product => (
                 <Col md={3} key={product.id}>
-                  <div className={`${styles['compare-dtls']} ${styles['ht-100per']}`}>
-                    <div className={`${styles['ht-290']} ${styles.flex} ${styles['justify-center']}`}>
-                      <img alt={product.name} src={`${constants.mediaDomain}/${product.imgSrc}`} className={`img-responsive ${styles['object-scale-down']}`} />
+                  <div className={`${styles['compare-dtls']} ${styles['compare-background']} ${styles.flex} ${styles['flex-colum']} ${styles['justify-between']} ${styles['ht-100per']}`}>
+                    <div className={`${styles.pointer} ${styles['ht-290']} ${styles.flex} ${styles['justify-center']}`}>
+                      <Link route={`/${language}/pdp/${product.name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/c/${product.catalog_id}/p/${product.id}/l/${product.listing_id}/v/${product.variant_id ? `${product.variant_id}` : ''}`}>
+                        <img alt={product.name} src={`${constants.mediaDomain}/${product.imgSrc}`} className={`img-responsive ${styles['object-scale-down']}`} />
+                      </Link>
                     </div>
                     <div className={`${styles['compare-dtls-inn']} ${styles['pt-20']} ${styles['t-c']}`}>
-                      <span className={`${styles['fs-12']} ${styles['lgt-blue']}`}>{product.brand}</span>
+                      <Link route={`/${language}/pdp/${product.name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/c/${product.catalog_id}/p/${product.id}/l/${product.listing_id}/v/${product.variant_id ? `${product.variant_id}` : ''}`}>
+                        <span className={`${styles.pointer}`}>
+                          <span className={`${styles.fontW600} ${styles['fs-12']}`}>{product.brand}</span>{' - '}
+                          <span className={`${styles['fs-12']} ${styles['thick-gry-clr']}`}>{product.name}</span>
+                        </span>
+                      </Link>
                       <div>
-                        <span className={styles.fontW600}>{product.price} {product.currency}</span>
-                        <span className={`${styles['fs-12']} ${styles['google-clr']}`}>{product.offer}</span>
+                        <span className={styles.fontW600}>{product && product.price && product.price.display_value} {product && product.price && product.price.currency_code}</span>
+                        {/* <span className={`${styles['fs-12']} ${styles['google-clr']}`}>{product.offer}</span> */}
                       </div>
-                      <span className={`${styles['fs-10']} ${styles['thick-gry-clr']}`}>{product.name}</span>
                     </div>
                     <div className={`${styles.flex} ${styles['justify-center']}`}>
-                      {product.addedToCart ?
-                      <a className={`${styles['p-10']} ${styles['flex-center']} ${styles['added-btn']}`}>
-                        <span className={styles.flex}>
-                          <SVGCompoent clsName={styles['cart-list']} src="icons/cart/added-cart-icon" />
-                          In Cart
-                        </span>
-                      </a>
-                      :
-                      <a className={`${styles['p-10']} ${styles['flex-center']} ${styles['added-btn']}`} data-listing-id={product.listing_id} onClick={this.addToCart}>
-                        <span className={styles.flex}>
-                          <SVGCompoent clsName={styles['cart-list']} src="icons/cart/blue-cart-icon" />
-                          Add To Cart
-                        </span>
-                      </a>}
+                      {
+                        product.listing_id
+                        ?
+                          <Button
+                            className={product.addedToCart ? `${styles['p-10']} ${styles['flex-center']} ${styles['added-btn']}` : `${styles['p-10']} ${styles['flex-center']} ${styles['cart-btn']}`}
+                            id={product.listing_id}
+                            onClick={product.addedToCart ? () => {} : this.addToCart}
+                            btnText={product.addedToCart ? PDP_PAGE.ADDED_TO_CART : PDP_PAGE.ADD_TO_CART}
+                            showImage={product.addedToCart && 'icons/cart/added-cart-icon'}
+                            btnLoading={cartButtonLoaders && cartButtonLoaders[product.listing_id]}
+                            hoverClassName="hoverBlueBackground"
+                          />
+                        :
+                          <span>Out of Stock</span>
+                      }
                     </div>
                     {compareCount > 1 && <span className={`${styles['close-item']} ${styles.pointer}`} data-prod-id={product.id} onClick={this.removeItem}>x</span>}
                   </div>
@@ -182,11 +208,11 @@ class Compare extends Component {
             }
             {compareCount < 5 &&
             <Col md={3}>
-              <div className={`${styles['flex-center']} ${styles['ht-100per']} ${styles['bg-white']} ${styles['justify-center']} ${styles['flex-colum']}`}>
-                <div className={styles['add-icon']}>+</div>
+              <div className={` ${styles['compare-background']} ${styles['flex-center']} ${styles['ht-100per']} ${styles['bg-white']} ${styles['justify-center']} ${styles['flex-colum']}`}>
+                <SVGComponent clsName={`${styles['add-icon']}`} src="icons/common-icon/plus" />
                 <div className={`${styles.width100} ${styles['p-10-40']}`}>
-                  <select className={styles.width100} value={selectedBrand} onChange={this.selectBrand}>
-                    <option value="">Select Brand</option>
+                  <select className={`${styles.width100} ${styles['compare-selct']}`} value={selectedBrand} onChange={this.selectBrand}>
+                    <option value="">{COMPARE.SELECT_BRAND}</option>
                     {brands.length > 0 &&
                     brands.map(brand => (
                       <option key={brand.Param} value={brand.Param}>{brand.attributeValue}</option>
@@ -195,8 +221,8 @@ class Compare extends Component {
                 </div>
                 {productList.length > 0 &&
                 <div className={`${styles.width100} ${styles['p-10-40']}`}>
-                  <select className={styles.width100} onChange={this.selectProduct}>
-                    <option value="">Select Product</option>
+                  <select className={`${styles.width100} ${styles['compare-selct']}`} onChange={this.selectProduct}>
+                    <option value="">{COMPARE.SELECT_PRODUCT}</option>
                     {productList.length > 0 &&
                       productList.map(product => (
                         <option key={product.id} value={JSON.stringify(product)}>{product.displayName}</option>
@@ -213,22 +239,22 @@ class Compare extends Component {
                   <div id={productFeature.key} key={productFeature.key}>
                     <Row>
                       <Col md={12}>
-                        <h3>{productFeature.name}</h3>
+                        <div className={`${styles.featureTitle} ${styles['fs-24']} ${styles['mt-25']} ${styles['mb-25']}`}>{productFeature.name}</div>
                       </Col>
                     </Row>
                     {
                       productFeature.attributes.map(attr => (
-                        <Row key={attr.name} className={`${styles['compare-product-spficication']} ${styles['flex-center']} ${styles['pt-5']} ${styles['pb-5']}`}>
-                          <Col md={3}>
-                            <div className={`${styles['flex-center']} ${styles['flex-colum']} ${styles['dispy-screen']}`}>
+                        <Row key={attr.name} className={`${styles.flex} ${styles.parentBackground}`}>
+                          <Col md={3} className={`${styles.childBackground} ${styles['flex-center']} ${styles['p-15']}`}>
+                            <div className={`${styles['flex']} ${styles['flex-colum']} ${styles.fontW700}`}>
                               {/* <SVGCompoent clsName={`${styles['screen-icon']}`} src={ICONS[item.id]} /> */}
-                              <span className={`${styles['fs-10']} ${styles['thick-gry-clr']} ${styles['pt-10']}`}>{attr.name}</span>
+                              <span className={`${styles['fs-14']} ${styles['thick-gry-clr']}`}>{attr.name}</span>
                             </div>
                           </Col>
                           {
                             attr.items.map(item => (
-                              <Col key={item.id} md={3}>
-                                <div className={`${styles['compare-product-spficication-inn']} ${styles['flex-center']} ${styles['flex-colum']} ${styles['fs-12']} ${styles.fontW600}`}>
+                              <Col key={item.id} md={3} className={`${styles.childBackground} ${styles['p-15']} ${styles['flex-center']} ${styles['justify-center']} `}>
+                                <div className={`${styles['flex-center']} ${styles['flex-colum']} ${styles.fontW600} ${styles['fs-14']}`}>
                                   <span>{item.value.map(i => i.value).join(' ')} {item.value[0].qualifier_unit}</span>
                                 </div>
                               </Col>
@@ -253,6 +279,7 @@ const mapStateToProps = store => ({
   compareInfo: selectors.getCompareInfo(store),
   brands: selectors.getBrandsInfo(store),
   productList: selectors.getProductList(store),
+  cartButtonLoaders: cartSelectors.getCartButtonLoaders(store),
 });
 
 const mapDispatchToProps = dispatch =>

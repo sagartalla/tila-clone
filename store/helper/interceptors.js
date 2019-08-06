@@ -7,6 +7,8 @@ import constants from './constants';
 import { pimServiceInstance } from './services';
 import Cookie from 'universal-cookie';
 import { toast } from 'react-toastify';
+import ToastContent from '../../components/common/ToastContent';
+import Sentry from '../../utils/sentryUtil';
 
 const config = getConfig()
 const env = config.publicRuntimeConfig.env;
@@ -37,7 +39,7 @@ export const sessionId = () => {
 
 export const authToken = () => {
   const auth =  cookies.get('auth');
-  return auth ? auth.access_token : undefined;
+  return auth ? auth.access_token : '';
 }
 
 export const country = () => {
@@ -50,27 +52,22 @@ const getServiceName = (url) => {
   }, Object.values(constants))];
 }
 
-const apmReqInterceptor = (config) => {
-  const serviceName = getServiceName(config.url);
-  if(env === 'local') return config;
-  // config.transaction = apm.startTransaction(`${serviceName} Service`, 'custom')
-  // config.httpSpan = config.transaction ? config.transaction.startSpan(`FETCH ${JSON.stringify(config)}`, 'http') : null;
-  return config;
-}
-
-const apmResInterceptor = (response) => {
-  const serviceName = getServiceName(response.config.url);
-  // if (env === 'local') return response;
-  // const { httpSpan, transaction } = response.config;
-  // httpSpan && httpSpan.end();
-  // transaction && transaction.end();
-  return response;
-}
+const notifySentry = (err) => {
+  Sentry.configureScope((scope) => {
+      scope.setTag(`api`, true);
+      scope.setExtra(`url`, err.config.url);
+      scope.setExtra(`reqData`, err.config.data);
+      scope.setExtra(`resData`, err.response.data);
+      scope.setExtra(`statusCode`, err.response.status);
+      scope.setExtra(`reqHeaders`, err.config.headers);
+      scope.setExtra(`resHeaders`, err.response.headers);
+  });
+  Sentry.captureException(err);
+};
 
 const errorInterceptor = (err) => {
   try {
-    if (err.response && err.response.status) {
-      if (err.response.status == '401') {
+    if (err.response && err.response.status && err.response.status == '401') {
         const { refresh_token } =  cookies.get('auth') || {};
         if(refresh_token) {
           return axios.post(`/api/refresh`, {
@@ -84,10 +81,21 @@ const errorInterceptor = (err) => {
         } else {
           cookies.remove('auth');
         }
-      } else {
+    } else {
+      if (err.response.status === '403') {
         cookies.remove('auth');
-        toast.error(`${err.response.data.message}`);
       }
+      const subMessege = err.response.data.sub_errors && err.response.data.sub_errors.map(e => e.message).join(' ')
+      const msg = `${err.response.data.message || ''} ${subMessege ? `: ${subMessege}` : ''}`.trim();
+      if(msg) {
+        toast(
+          <ToastContent
+            msg={msg}
+            msgType='error'
+          />
+        )
+      }
+      notifySentry(err);
     }
   } catch (e) {
     console.log(e);
@@ -95,6 +103,7 @@ const errorInterceptor = (err) => {
   return Promise.reject(err);
 }
 
+axios.defaults.timeout = 60000;
 axios.interceptors.request.use(_.compose(configModifer));
 axios.interceptors.response.use(null, _.compose(errorInterceptor));
 

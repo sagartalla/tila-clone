@@ -3,11 +3,18 @@ import Cookie from 'universal-cookie';
 
 import routes, { Link } from '../../../../routes';
 import { selectors, actionCreators } from '../../../../store/megamenu';
-import { mergeCss } from '../../../../utils/cssUtil';
-const styles = mergeCss('components/HeaderBar/header');
+import lang from '../../../../utils/language';
+
+import main_en from '../../../../layout/main/main_en.styl';
+import main_ar from '../../../../layout/main/main_ar.styl';
+import styles_en from '../../header_en.styl';
+import styles_ar from '../../header_ar.styl';
+
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+
 import {languageDefinations} from '../../../../utils/lang'
 const {HEADER_PAGE}=languageDefinations()
-const MaxItems = 5;
+const MaxItems = 4;
 
 const cookies = new Cookie();
 
@@ -41,7 +48,7 @@ class Leaves extends Component {
         {
           items.slice(0, maxRows).map(item => (item ? (
             <li key={item.id} className={`${styles['pt-5']} ${styles['pb-5']}`}>
-              <Link route={`/${country}/${language}/srp/${item.displayName.split(' ').join('-').toLowerCase()}?categoryTree=true&isListed=false&sid=${parentID},${item.id}`}>
+              <Link route={`/${language}/search/${item.displayName.replace(/\//g, '').split(' ').join('-').toLowerCase()}?categoryTree=true&isListed=false&sid=${parentID},${item.id}`}>
                 <a className={`${styles['level-1-item']}`}>{item.displayName}</a>
               </Link>
             </li>
@@ -51,9 +58,11 @@ class Leaves extends Component {
           isMoreButtonRequired
           ?
             <li>
-                <a className={`${styles['level-1-item']}`} onClick={this.toggleItems}>
-                  {maxRows === MaxItems ? HEADER_PAGE.VIEW_ALL : HEADER_PAGE.VIEW_LESS}
+              <Link route={`/${language}/search/${parent.displayName.replace(/\//g, '').split(' ').join('-').toLowerCase()}?categoryTree=true&isListed=false&sid=${this.props.parentID}`}>
+                <a className={`${styles['level-1-item']}`}>
+                  {HEADER_PAGE.VIEW_ALL}
                 </a>
+              </Link>
             </li>
           :
           null

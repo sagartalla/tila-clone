@@ -20,7 +20,7 @@
 </svg>
 <style>
 .payment-active .icon-bg-fill {
-    fill: #45689a;
+    fill: #101820;
 }
 
 .payment-active .icon-fill {

@@ -2,8 +2,14 @@ import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import SVGComponent from '../../common/SVGComponet';
 import { languageDefinations } from '../../../utils/lang/';
-import { mergeCss } from '../../../utils/cssUtil';
-const styles = mergeCss('components/Cam/PersonelDetails/profile');
+import lang from '../../../utils/language';
+
+import main_en from '../../../layout/main/main_en.styl';
+import main_ar from '../../../layout/main/main_ar.styl';
+import styles_en from './profile_en.styl';
+import styles_ar from './profile_ar.styl';
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+
 const { LINK_TO_SOCIAL_MEDIA } = languageDefinations();
 const SocialMedia = () => (
   <div className={`${styles['box']}`}>
@@ -42,7 +48,7 @@ const SocialMedia = () => (
           </span>
         </a>
       </div>
-      <span className={`${styles['fs-10']}`}>{LINK_TO_SOCIAL_MEDIA.NOTE} <a href="#">(Unlink Now)</a></span>
+      <span className={`${styles['fs-10']}`}>{LINK_TO_SOCIAL_MEDIA.NOTE} <a href="#">({LINK_TO_SOCIAL_MEDIA.UN_LINK})</a></span>
     </div>
   </div>
 );

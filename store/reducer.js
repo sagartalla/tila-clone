@@ -17,8 +17,12 @@ import { reducer as messagesReducer } from './cam/messages';
 import { reducer as reviewRatingReducer } from './ratingReviews';
 import { reducer as compareReducer } from './compare';
 import { reducer as instantCheckoutReducer } from './common/instantCheckout';
-import { reducer as listingCartReducer } from './listingCart';
 import { reducer as landingReducer } from './landing';
+import { reducer as captchaReducer } from './captcha';
+import { reducer as helpSupportReducer } from './helpsupport';
+import { reducer as listingCartReducer } from './listingCart';
+import { reducer as preferencesReducer } from './cam/preferences';
+import { reducer as commonReducer } from './common';
 
 export default combineReducers({
   searchReducer,
@@ -34,11 +38,15 @@ export default combineReducers({
   wishlistReducer,
   notificationsReducer,
   vaultReducer,
+  preferencesReducer,
   messagesReducer,
   reviewRatingReducer,
   compareReducer,
   instantCheckoutReducer,
-  listingCartReducer,
   landingReducer,
+  captchaReducer,
   couponOffersData,
+  helpSupportReducer,
+  listingCartReducer,
+  commonReducer,
 });

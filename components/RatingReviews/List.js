@@ -10,8 +10,16 @@ import { selectors, actionCreators } from '../../store/ratingReviews';
 import { TABS } from './constants';
 import { languageDefinations } from '../../utils/lang';
 
-import { mergeCss } from '../../utils/cssUtil';
-const styles = mergeCss('components/RatingReviews/ratingReviews');
+import lang from '../../utils/language';
+
+import main_en from '../../layout/main/main_en.styl';
+import main_ar from '../../layout/main/main_ar.styl';
+import styles_en from './ratingReviews_en.styl';
+import styles_ar from './ratingReviews_ar.styl';
+
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+
+
 const { PDP_PAGE } = languageDefinations();
 
 class List extends Component {
@@ -59,11 +67,11 @@ class List extends Component {
           </div>
           <div className={styles['float-r']}>
             <div className={styles['p-10']}>
-              <label for="rating-filter" >{PDP_PAGE.FILTER_BY}</label>
+              <label htmlFor="rating-filter" >{PDP_PAGE.FILTER_BY}</label>
               <select id="rating-filter" onChange={this.selectRating}>
                 <option>{PDP_PAGE.ALL_STARTS}</option>
                 {
-                  [1, 2, 3, 4, 5].map((n) => <option value={n}> {n} PDP_PAGE.STAR</option>)
+                  [1, 2, 3, 4, 5].map((n) => <option value={n}> {n} {PDP_PAGE.STAR}</option>)
                 }
               </select>
             </div>
@@ -85,7 +93,7 @@ class List extends Component {
                       {
                         userReview.certifiedBuyer
                         ?
-                        <div>PDP_PAGE.CERTIFIED_BUYER</div>
+                        <div>{PDP_PAGE.CERTIFIED_BUYER}</div>
                         :
                         null
                       }
@@ -95,8 +103,8 @@ class List extends Component {
                       <div>{userReview.comment}</div>
                     </Col>
                     <Col md={2}>
-                      <div>{userReview.likes} PDP_PAGE.LIKE</div>
-                      <div>{userReview.dislikes} PDP_PAGE.DISLIKE</div>
+                      <div>{userReview.likes} {PDP_PAGE.LIKE}</div>
+                      <div>{userReview.dislikes} {PDP_PAGE.DISLIKE}</div>
                     </Col>
                   </Row>
                 )

@@ -1,12 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import _ from 'lodash';
 import { Row, Col } from 'react-bootstrap';
 
 import MyGoogleMap from './GoogleMap';
+import { actionCreators } from '../../../../store/auth';
 
-import { mergeCss } from '../../../../utils/cssUtil';
-const styles = mergeCss('components/Cam/ShippingAddress/address');
+import lang from '../../../../utils/language';
+
+import main_en from '../../../../layout/main/main_en.styl';
+import main_ar from '../../../../layout/main/main_ar.styl';
+import styles_en from '../address_en.styl';
+import styles_ar from '../address_ar.styl';
+
+
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const refs = {};
 class MyGMap extends React.Component {
@@ -16,11 +26,12 @@ class MyGMap extends React.Component {
     this.state = {
       bounds: null,
       center: {
-        lat: 41.9, lng: -87.624
+        lat: 24.7135517, lng: 46.6752957, // TODO: fetch from Browser
       },
-      markers: []
-    }
-
+      defaultZoom: 15,
+      markers: [],
+    };
+    this.locateMe = this.locateMe.bind(this);
     this.onMapMounted = this.onMapMounted.bind(this);
     this.markerLatlng = this.markerLatlng.bind(this);
     this.onPlacesChanged = this.onPlacesChanged.bind(this);
@@ -29,8 +40,8 @@ class MyGMap extends React.Component {
   }
 
   // TODO locate me is pending SF-27
-  //https://developers.google.com/maps/documentation/javascript/examples/geocoding-reverse
-  //https://github.com/tomchentw/react-google-maps/issues/324
+  // https://developers.google.com/maps/documentation/javascript/examples/geocoding-reverse
+  // https://github.com/tomchentw/react-google-maps/issues/324
   // geocodeLatLng( lat, lng) {
   //   // let map  = new window.google.maps.Geocoder();
   //   let geocoder = new google.maps.Geocoder;
@@ -56,7 +67,7 @@ class MyGMap extends React.Component {
   //   });
   // }
 
-  //http://maps.googleapis.com/maps/api/geocode/json?latlng=44.4647452,7.3553838&sensor=true
+  // http://maps.googleapis.com/maps/api/geocode/json?latlng=44.4647452,7.3553838&sensor=true
   onGetLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((location) => {
@@ -65,23 +76,21 @@ class MyGMap extends React.Component {
     }
   }
 
-  onMapMounted(ref) {
+  onMapMounted = (ref) => {
     refs.map = ref;
   }
 
-  //if we remove debounce, map drag wont work as expected.
+  // if we remove debounce, map drag wont work as expected.
   onBoundsChanged() {
-    _.debounce(
-      () => {
-        this.setState({
-          bounds: refs.map.getBounds(),
-          center: refs.map.getCenter()
-        })
-      }, 100, { maxWait: 500 }
-    )
+    _.debounce(() => {
+      this.setState({
+        bounds: refs.map.getBounds(),
+        center: refs.map.getCenter(),
+      });
+    }, 100, { maxWait: 500 });
   }
 
-  onSearchBoxMounted(ref) {
+  onSearchBoxMounted = (ref) => {
     refs.searchBox = ref;
   }
 
@@ -92,10 +101,10 @@ class MyGMap extends React.Component {
     const places = refs.searchBox.getPlaces();
     const _bounds = new google.maps.LatLngBounds();
 
-    const lat = places[0].geometry.location.lat()
-    const lng = places[0].geometry.location.lng()
+    const lat = places[0].geometry.location.lat();
+    const lng = places[0].geometry.location.lng();
 
-    const cityCountryObj = this.fetchCountryName(places[0].address_components) 
+    const cityCountryObj = this.fetchCountryName(places[0].address_components);
 
     cityCountryObj.address = places[0].formatted_address;
 
@@ -105,9 +114,9 @@ class MyGMap extends React.Component {
 
     places.forEach((place) => {
       if (place.geometry.viewport) {
-        _bounds.union(place.geometry.viewport)
+        _bounds.union(place.geometry.viewport);
       } else {
-        _bounds.extend(place.geometry.location)
+        _bounds.extend(place.geometry.location);
       }
     });
     const nextMarkers = places.map(place => ({
@@ -123,13 +132,13 @@ class MyGMap extends React.Component {
 
   fetchCountryName = data => data.reduce((obj, curr) => {
     if (curr.types.includes('country')) {
-      obj.country = curr.long_name;
+      obj.country = curr;
     }
     if (curr.types.includes('locality')) {
       obj.city = curr.long_name;
     }
     if (curr.types.includes('postal_code')) {
-      obj.po_box = curr.long_name;
+      obj.postal_code = curr.long_name;
     }
     return obj;
   }, {});
@@ -141,7 +150,7 @@ class MyGMap extends React.Component {
     const lat = marker.latLng.lat();
     const lng = marker.latLng.lng();
     const places = refs.searchBox.getPlaces();
-    const cityCountryObj = this.fetchCountryName(places[0].address_components) 
+    const cityCountryObj = this.fetchCountryName(places[0].address_components);
 
     cityCountryObj.address = places[0].formatted_address;
     getDataFromMap({
@@ -149,33 +158,87 @@ class MyGMap extends React.Component {
     });
   }
 
-  // <button onClick={this.onGetLocation.bind(this)}>LOCATE ME</button>
+  deriveCityFromLatLng = (lng, lat) => {
+    const { deriveCity, getDataFromMap } = this.props;
+    deriveCity({
+      longitude: lng,
+      latitude: lat,
+      api: '/geocode/json',
+    }).then((res) => {
+      if (res.value) {
+        const cityCountryObj = this.fetchCountryName(res.value.address_components);
+
+        cityCountryObj.address = res.value.formatted_address;
+
+        getDataFromMap({
+          lat, lng, cityCountryObj,
+        });
+        this.setState({
+          markers: [{
+            position: {
+              lat,
+              lng,
+            },
+          }],
+        });
+      }
+    });
+  }
+
+  onMapClick = (marker) => {
+    const lng = marker.latLng.lng();
+    const lat = marker.latLng.lat();
+    this.deriveCityFromLatLng(lng, lat);
+  }
+
+  locateMe = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        const lat = position.coords.latitude;
+        const lng = position.coords.longitude;
+        this.setState({
+          center: {
+            lat, lng,
+          },
+        });
+        this.deriveCityFromLatLng(lng, lat);
+      }, (error) => {
+        console.log(error);
+      });
+    } else {
+      alert('Browser does not support');
+    }
+  }
+
   render() {
-    let { refs, bounds, center, markers } = this.state;
+    const {
+      refs, bounds, center, markers, defaultZoom,
+    } = this.state;
     const { clsName } = this.props;
     return (
       <div>
-
         <MyGoogleMap
           refs={refs}
           bounds={bounds}
           center={center}
           markers={markers}
+          defaultZoom={defaultZoom}
+          onMapClick={this.onMapClick}
           onMapMounted={this.onMapMounted}
           onBoundsChanged={this.onBoundsChanged}
           onSearchBoxMounted={this.onSearchBoxMounted}
           onPlacesChanged={this.onPlacesChanged}
           markerLatlng={this.markerLatlng}
-
+          locateMe={this.locateMe}
           isMarkerShown
           googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDrVNKZshUspEprFsNnQD-sos6tvgFdijg&v=3.exp&libraries=geometry,drawing,places"
-          loadingElement={<div style={{ height: `100%` }} />}
+          loadingElement={<div style={{ height: '100%' }} />}
           containerElement={<div className={`${styles[clsName]}`} />}
-          mapElement={<div style={{ height: `100%` }} />}
+          mapElement={<div style={{ height: '100%' }} />}
         />
       </div>
 
-    )
+    );
   }
 }
 
@@ -187,4 +250,13 @@ MyGoogleMap.defaultProps = {
 
 };
 
-export default MyGMap;
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      deriveCity: actionCreators.deriveCity,
+    },
+    dispatch,
+  );
+
+export default connect(null, mapDispatchToProps)(MyGMap);

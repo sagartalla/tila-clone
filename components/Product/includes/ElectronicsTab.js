@@ -1,20 +1,23 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import { Tabs, Tab } from 'react-bootstrap';
 import Review from './Reviews';
 import OverView from './ElectronicsOverView';
 import Description from './ElectronicsDescription';
-import Specification from './ElectronicsSpecifications';
 // import Compare from './ElectronicsCompare';
-import SVGCompoent from '../../common/SVGComponet';
 
-import { mergeCss } from '../../../utils/cssUtil';
-const styles = mergeCss('components/Product/product');
+import lang from '../../../utils/language';
 
-const ElectronicsTab = ({ catalog, productDescription, catalogObj }) => {
+import main_en from '../../../layout/main/main_en.styl';
+import main_ar from '../../../layout/main/main_ar.styl';
+import styles_en from '../product_en.styl';
+import styles_ar from '../product_ar.styl';
+
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+
+const ElectronicsTab = ({ catalog, productDescription, catalogObj, isPreview, titleInfo }) => {
   return (
     <div>
-      <Tabs defaultActiveKey={1}>
+      <Tabs defaultActiveKey={1} id="electronics-tab">
         <Tab eventKey={1} title="Overview">
           <OverView  catalog={catalog}/>
         </Tab>
@@ -29,9 +32,11 @@ const ElectronicsTab = ({ catalog, productDescription, catalogObj }) => {
         <Tab eventKey={3} title="Specifications">
           <Specification />
         </Tab>*/}
-        <Tab eventKey={4} title="Reviews">
-          <Review catalogObj={catalogObj} />
-        </Tab>
+        {isPreview ? null :
+          <Tab eventKey={4} title="Reviews">
+            <Review catalogObj={catalogObj} titleInfo={titleInfo} />
+          </Tab>
+        }
         {/* <Tab eventKey={5} title="Compare">
           <Compare />
         </Tab> */}

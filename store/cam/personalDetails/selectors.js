@@ -18,8 +18,8 @@ const getUserInfo = (store) => {
         contactInfo.phoneNum=phoneNum;
       }
       if (contactInfo.pwd_updated_at) {
-        const lastUpdated = contactInfo.pwd_updated_at.split('[')[0];
-        const msg = moment(lastUpdated).subtract(new Date().getTimezoneOffset(), 'minutes').fromNow();
+        const lastUpdated = contactInfo.pwd_updated_at;
+        const msg = moment(lastUpdated).subtract(new Date().getTimezoneOffset()).fromNow();
         contactInfo.lastUpdated = `Last updated ${msg}`;
       }
       else
@@ -27,7 +27,7 @@ const getUserInfo = (store) => {
 
     }
     let personalInfo = {}
-    if(store.personalDetailsReducer.data.personalInfo != "" && store.personalDetailsReducer.data.personalInfo && Object.keys(store.personalDetailsReducer.data.personalInfo).length > 0) 
+    if(store.personalDetailsReducer.data.personalInfo != "" && store.personalDetailsReducer.data.personalInfo && Object.keys(store.personalDetailsReducer.data.personalInfo).length > 0)
     {
       personalInfo=store.personalDetailsReducer.data.personalInfo;
       personalInfo.user_name=personalInfo.first_name+" "+personalInfo.last_name;
@@ -51,10 +51,28 @@ const getEditPersonalInfoStatus = (store) => {
   return {};
 }
 
+const getImageSource = (store) => {
+  if(store.personalDetailsReducer.data.downloadPic){
+    return store.personalDetailsReducer.data.downloadPic
+  }
+}
+
+const getPictureDocumentId = (store) => {
+  if(store.personalDetailsReducer.data.uploadPicStatus) {
+    return store.personalDetailsReducer.data.uploadPicStatus.documentId;
+  }
+  return null;
+}
+
 const getErrorMessege = (store) => {
   return store.personalDetailsReducer.error ? store.personalDetailsReducer.error : "";
 }
-
+const getLoadingStatus = (store) => {
+  return store.personalDetailsReducer.ui.loading
+}
+const getOtpData = (store) => {
+  return store.personalDetailsReducer.otpData
+}
 const resetPasswordStatus =(store) => {
 return store.personalDetailsReducer;
 }
@@ -68,4 +86,4 @@ const forgotPasswordStatus = (store) => {
 }
 
 
-export { getUserInfo, getPasswordResetStatus, getErrorMessege, getEditPersonalInfoStatus , forgotPasswordStatus, resetPasswordStatus};
+export { getUserInfo, getPasswordResetStatus, getLoadingStatus, getPictureDocumentId, getErrorMessege, getEditPersonalInfoStatus , getImageSource, forgotPasswordStatus, resetPasswordStatus, getOtpData};

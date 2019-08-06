@@ -1,120 +1,414 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import Btn from '../../../common/Button';
-import Input from '../../../common/Input';
-
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { toast } from 'react-toastify';
+import Cookies from 'universal-cookie';
 import { actionCreators, selectors } from '../../../../store/cam/personalDetails';
+import { languageDefinations } from '../../../../utils/lang';
+import CountryDialCode from '../../../../constants/CountryDialCode';
+import FormValidator from '../../../common/FormValidator';
+import SVGCompoent from '../../../common/SVGComponet';
+import countriesData from '../../../../constants/countries';
+import ToastContent from '../../../common/ToastContent';
+import lang from '../../../../utils/language';
 
-import { mergeCss } from '../../../../utils/cssUtil';
-import {languageDefinations} from '../../../../utils/lang';
-const styles = mergeCss('components/Cam/PersonelDetails/profile');
-const {CONTACT_INFO_MODAL} = languageDefinations();
-class EditPhone  extends React.Component {
-  state = {
-    phoneNumber: "",
-    otp: "",
-    error: "",
-    show: false
+import main_en from '../../../../layout/main/main_en.styl';
+import main_ar from '../../../../layout/main/main_ar.styl';
+import styles_en from '../profile_en.styl';
+import styles_ar from '../profile_ar.styl';
+
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+
+const { CONTACT_INFO_MODAL } = languageDefinations();
+const cookies = new Cookies();
+
+const language = cookies.get('language') || 'en';
+const country = cookies.get('country') || 'SAU';
+
+const MobileImage = () => (
+  <div>
+    <div className={`${styles['mobile-tick-icon']} ${styles['flex']} ${styles['justify-center']}`}>
+      <SVGCompoent
+        clsName={styles['mobiletick-icon-styl']}
+        src="icons/common-icon/mobile-tick-icon"
+      >
+      </SVGCompoent>
+    </div>
+  </div>
+)
+class EditPhone extends React.Component {
+  constructor(props) {
+    super(props);
+    this.validations = new FormValidator([
+      {
+        field: 'phoneNumber',
+        method: this.isEmptyString,
+        message: 'Phone number cannot be empty',
+        validWhen: false,
+      },
+      {
+        field: 'phoneNumber',
+        method: this.mobileValidation,
+        validWhen: false,
+        message: 'Enter valid mobile number',
+      },
+      {
+        field: 'phoneNumber',
+        method: this.mobileWithZeroValidation,
+        validWhen: false,
+        message: 'Enter valid mobile number',
+      },
+      {
+        field: 'otp',
+        method: this.isEmptyString,
+        message: 'otp cannot be empty',
+        validWhen: false,
+      },
+    ]);
+    this.state = {
+      phoneNumber: "" || (props.userData && props.userData.mobile_no),
+      otp: '',
+      error: "",
+      show: false,
+      // countryCode: CountryDialCode[country].data, //
+      otpResponse: null,
+      validation: this.validations.valid(),
+      otpCount: 0,
+      mobile_country_code: '966',
+    };
+    this.otpTimer = () => {}
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleClose = this.handleClose.bind(this)
+    // this.optionChange = this.optionChange.bind(this)
+    this.fetchOtp = this.fetchOtp.bind(this)
+    this.handlePhoneNumberChange = this.handlePhoneNumberChange.bind(this)
+    this.handleOTPChange = this.handleOTPChange.bind(this)
+    this.handleValidation = this.handleValidation.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.userInfo.contactInfo && Object.keys(nextProps.userInfo.contactInfo).length > 0 && nextProps.element && this.state.element == "" && this.state.phoneNumber == "") {
-      this.setState({
-        phoneNumber: nextProps.userInfo.contactInfo.mobile_no,
-        otp: "",
-        show: nextProps.show
-      })
-    }
+    const { afterSuccessOtpVerification } = this.props;
+
     if (this.state.show == true && nextProps.errorMessege != this.state.error) {
       this.setState({
-        error: nextProps.errorMessege
+        error: nextProps.errorMessege,
+        otpResponse:'RESET'
       });
     }
-  }
 
-  handleClose = () => {
+    if (nextProps.otpData.error) {
+      //show error
+      this.setState({
+        otpResponse: 'FAILURE'
+      })
+    } else if (Object.keys(nextProps.otpData).length > 0) {
+      this.setState({
+        otpResponse: nextProps.otpData.Response
+      }, () => {
+        ((afterSuccessOtpVerification && nextProps.otpData.Response === 'SUCCESS') && afterSuccessOtpVerification());
+      })
+    }
+
+  }
+  // optionChange(e) {
+  //   this.setState({ countryCode: e.target.value })
+  // }
+  isEmptyString = (fieldValue) => {
+    if (fieldValue === '') {
+      return true
+    }
+    return false
+  }
+  mobileWithZeroValidation = (fieldValue) => {
+    if (Number(fieldValue[0]) === 0 && Number(fieldValue[1]) === 5 && fieldValue.length === 10) {
+      return false;
+    } else if (Number(fieldValue[0]) !== 0) {
+      return false;
+    } return true;
+  }
+  mobileValidation = (fieldValue) => {
+    if (Number(fieldValue[0]) === 5 && fieldValue.length === 9) {
+      return false;
+    } else if (Number(fieldValue[0]) === 0) {
+      return false;
+    } return true;
+  }
+  fetchOtp() {
+    const { countryCode, phoneNumber, otpCount, mobile_country_code, validation } = this.state
+    // let validation = this.validations.validate(this.state)
+    // this.setState({ validation })
+    if (validation.isValid) {
+      if (phoneNumber && phoneNumber.length > 0) {
+        const params = {
+          mobile_country_code,
+          mobile_no: phoneNumber,
+        };
+        this.setState({
+          otpCount: otpCount + 1,
+        }, () => this.props.otpUserUpdate(params));
+      } else {
+        toast(
+        <ToastContent
+          msg='Phone number is required for OTP'
+          msgType='error'
+        />
+        )
+      }}
+  }
+  handleClose() {
     this.setState({
       show: false,
       phoneNumber: "",
       otp: "",
-      error: ""
+      error: "",
+      otpResponse: null
     });
     this.props.handleShow(false, '')();
   }
 
-  handlePhoneNumberChange = (e) => {
-    this.setState({ phoneNumber: e.target.value });
+  handlePhoneNumberChange({ target }) {
+    if (/^[0-9]*$/gm.test(target.value)) {
+      this.setState({ phoneNumber: target.value });
+    } else {
+      this.setState({ phoneNumber: '' });
+    }
   }
 
-  handleOTPChange = (e) => {
+  handleValidation({ target }) {
+    const validation = this.validations.validateOnBlur({[target.name]: target.value});
+    this.setState({ validation });
+  }
+  handleOTPChange(e) {
+    if (/^[0-9]*$/gm.test(e.target.value)) {
       this.setState({ otp: e.target.value });
+    }
   }
-
-  handleResendOtp = () => {
-    // TODO: handle action for OTP
-    console.log('handleResendOtp');
-  }
-
-  handleSubmit = () => {
+  handleSubmit(e) {
     // TODO : handle action for phone number edit
-    console.log('submit');
+    e.preventDefault()
+    let validation = this.validations.validate(this.state)
+    this.setState({ validation })
+    const { otp } = this.state;
+    let toNumber = Number(otp)
+    if (validation.isValid) {
+      this.props.verifyOtp({ otp: toNumber })
+    }
   }
 
-  render(){
-  const {phoneNumber, error, otp} = this.state;
-  return (
-    <div className={styles['editProfileModal']}>
-    <Row>
-      <Col xs={11} md={11}>
-        <h3>{CONTACT_INFO_MODAL.EDIT_PHONE_NUMBER}</h3>
-      </Col>
-      <Col xs={1} md={1} onClick={this.handleClose}><a>
-        X</a>
-      </Col>
-    </Row>
-    <div>
-    <Row>
-      <Col xs={4} md={4} />
-      <Col xs={4} md={4}>
-        <div className={styles['image-block-style']} />
-      </Col>
-      <Col xs={4} md={4} />
-    </Row>
-    <Row className={`${styles['m-5']} ${styles['mt-20']}`}>
-      <Col xs={12} md={12} className={styles['box']}>
-        <div>{CONTACT_INFO_MODAL.PHONE_NUMBER}</div>
-        <Input placeholder={`${CONTACT_INFO_MODAL.ENTER} ${CONTACT_INFO_MODAL.PHONE_NUMBER}`} type="number" val={phoneNumber} onChange={this.handlePhoneNumberChange} />
-      </Col>
-      <Col xs={12} md={12} className={styles['box']}>
-        <div>{CONTACT_INFO_MODAL.ENTER} {CONTACT_INFO_MODAL.OTP}</div>
-        <Row>
-          <Col xs={8} md={8}>
-            <Input placeholder={`${CONTACT_INFO_MODAL.ENTER} ${CONTACT_INFO_MODAL.OTP}`}  val={otp} onChange={this.handleOTPChange} />
-          </Col>
-          <Col xs={4} md={4}>
-            <span><a onClick={this.handleResendOtp}>{CONTACT_INFO_MODAL.RESEND} {CONTACT_INFO_MODAL.OTP}</a></span>
-          </Col>
-        </Row>
-      </Col>
-    </Row>
-    <Row>
-      <Col xs={12} md={12} className={`${styles['t-c']}`}>
-        <Btn btnWidth="95%" backGround="#034e94" color="#fff" btnText="Verify Mobile Number" onClick={this.handleSubmit} />
-      </Col>
-    </Row>
-  </div>
-  </div>
-  );
-}
+  render() {
+    const { phoneNumber, error, otp, countryCode, validation, otpResponse, otpCount, mobile_country_code } = this.state;
+    const { isLoading, isPopup, mobileVerified } = this.props;
+    if (otpResponse === 'SUCCESS') {
+      return (
+        <div className={styles['edit-mobile-no-succ']}>
+          {
+            isPopup && (
+              // <Row>
+              //   <Col xs={1} md={1} onClick={this.handleClose}><a>
+              //     X</a>
+              //   </Col>
+              // </Row>
+              <h4 className={`${styles['flx-spacebw-alignc']} ${styles['m-0']} ${styles['p-20']}`}>
+                <span className={styles['lgt-blue']}>{CONTACT_INFO_MODAL.EDIT_PHONE_NUMBER}</span>
+                <span onClick={this.handleClose} className={styles['fs-24']}>X</span>
+              </h4>
+            )
+          }
+          {
+            isPopup
+              ?
+              <MobileImage />
+              :
+              null
+          }
+          <div className={`${styles['thank-you-part']} ${styles['p-40']} ${styles['flex-center']} ${styles['flex-colum']}`}>
+            <h4 className={`${styles['m-0']} ${styles['pb-20']}`}>{CONTACT_INFO_MODAL.THANK_YOU}</h4>
+            <p className={`${styles['fs-12']} ${styles['thick-gry-clr']}`}> {CONTACT_INFO_MODAL.YOUR_PHONE_NUMBER_VERIFIED} </p>
+            {
+              isPopup && <button className={`${styles['verify-no-btn']} ${styles['mt-20']}`} variant="primary" onClick={this.handleClose}>{CONTACT_INFO_MODAL.DONE}</button>
+            }
+          </div>
+        </div>
+      )
+    }
+    return (
+      <div className={styles['edit-mobile-no']}>
+        {
+          isPopup && (
+            // <Row>
+            //   <Col xs={1} md={1} onClick={this.handleClose}><a>
+            //     X</a>
+            //   </Col>
+            // </Row>
+            <h4 className={`${styles['flx-spacebw-alignc']} ${styles['m-0']} ${styles['p-20']} ${styles['fs-18']}`}>
+              <span>{CONTACT_INFO_MODAL.EDIT_PHONE_NUMBER}</span>
+              <span onClick={this.handleClose} className={`${styles['fs-22']} ${styles.pointer} ${styles['black-color']} `}>X</span>
+            </h4>
+          )
+        }
+        {
+          isPopup
+            ?
+            <span className={`${styles['flex-center']} ${styles['flex-colum']}`}>
+              <MobileImage />
+              <span className={`${styles['thick-gry-clr']} ${styles['fs-14']} ${styles['pt-20']}`}>{CONTACT_INFO_MODAL.VERIFY_PHONE}</span>
+            </span>
+
+            :
+            null
+        }
+        {!mobileVerified ?
+        <div className={styles['editProfileModal']}>
+          {
+            isLoading ?
+              <div className={styles['loader-div']}>
+                <SVGCompoent
+                  clsName={styles['loader-styl']}
+                  src="icons/common-icon/circleLoader"
+                >
+                </SVGCompoent>
+              </div> : null
+          }
+          <div className={styles['mobile-otp-part']}>
+            <Row>
+              {/* <label>Mobile number</label> */}
+              <Col xs={3} md={3} >
+                <div>
+                  <div className={styles['country-code']}>
+                  <div className={`${styles['flex-center']} ${styles['country-dropdown']}`}>
+                <img src={countriesData.SAU.img} alt="SAU FLAG" />
+                <input
+                  type="text"
+                  value={`+${mobile_country_code}`}
+                  readOnly
+                  style={{ width: '40px', border: 'none' }}
+                  className={`${styles['fs-14']} ${styles['ml-5']}`}
+                />
+              </div>
+                  </div>
+                  {/* <select onChange={this.optionChange}>
+                    {
+                      Object.keys(CountryDialCode).map(
+                        (value, index) => (<option
+                          key={CountryDialCode[value].code}
+                          value={CountryDialCode[value].code}>
+                          <img src={CountryDialCode[value].img} />{CountryDialCode[value].code}
+                        </option>
+                        ))
+                    }
+                  </select> */}
+                </div>
+              </Col>
+              <Col xs={9} md={9}>
+                <div className={`${styles['phoneInpt']} ${styles['relative']}`}>
+                  <div className={styles['fp-input']}>
+                    <input
+                      type="text"
+                      name="phoneNumber"
+                      required
+                      value={phoneNumber}
+                      onChange={this.handlePhoneNumberChange}
+                      onBlur={this.handleValidation}
+                    />
+                    <span className={styles['highlight']}></span>
+                    <span className={styles['bar']}></span>
+                    <label>{`${CONTACT_INFO_MODAL.ENTER} ${CONTACT_INFO_MODAL.PHONE_NUMBER}`}</label>
+                    {
+                      validation.phoneNumber.isInValid ?
+                        <span className={`${styles['error']} ${styles['fs-12']}`}>{validation.phoneNumber.message}</span>
+                        : null
+                    }
+                    {/* <span className={styles['error']}>error message</span> */}
+                    {/* {((Number(phoneNumber && phoneNumber[0]) === 5 && phoneNumber.length === 9) || (Number(phoneNumber && phoneNumber[0]) === 0 && Number(phoneNumber[1]) === 5 && phoneNumber.length === 10)) ? */}
+                      <a className={`${styles['show-otp']} ${styles['fs-12']} ${styles['thick-blue']}`} onClick={this.fetchOtp}>
+                       {otpCount ? `${CONTACT_INFO_MODAL.RESEND} ${CONTACT_INFO_MODAL.OTP}` : CONTACT_INFO_MODAL.SEND_OTP}
+                      </a>
+                  </div>
+                  {/* <Input
+                    placeholder={`${CONTACT_INFO_MODAL.ENTER} ${CONTACT_INFO_MODAL.PHONE_NUMBER}`}
+                    type="text"
+                    val={phoneNumber}
+                    onChange={this.handlePhoneNumberChange}
+                  /> */}
+
+                  {/* {
+                    validation.phoneNumber.isInValid ?
+                      <div className={`${styles['fs-12']}`}>
+                        <span>{validation.phoneNumber.message}</span>
+                      </div> : null
+                  } */}
+                </div>
+              </Col>
+              {otpCount ?
+                <Col xs={12} md={12} className={styles['pt-20']}>
+                <div className={`${styles['request-opt']} ${styles['relative']}`}>
+                  {/* <Input type='number' placeholder={`${CONTACT_INFO_MODAL.ENTER} ${CONTACT_INFO_MODAL.OTP}`} val={otp} onChange={this.handleOTPChange} /> */}
+                  <div className={styles['fp-input']}>
+                    <input
+                      type="text"
+                      value={otp}
+                      className={styles['width100']}
+                      onChange={this.handleOTPChange}
+                      required
+                    />
+                    <span className={styles['highlight']}></span>
+                    <span className={styles['bar']}></span>
+                    <label>{`${CONTACT_INFO_MODAL.ENTER} ${CONTACT_INFO_MODAL.OTP}`}</label>
+                    {
+                      validation && validation.otp && validation.otp.isInValid ?
+                        <span className={`${styles['error']} ${styles['fs-12']}`}>{validation.otp.message}</span>
+                        : null
+                    }
+                    {/* <span className={styles['error']}>error message</span> */}
+
+                  </div>
+                </div>
+                {/* {
+                      validation.otp.isInValid ?
+                        <div className={`${styles['fs-12']}`}>
+                          <span>{validation.otp.message}</span>
+                        </div> : null
+                    } */}
+              </Col>
+              : null}
+            </Row>
+            <Row>
+              <Col xs={12} md={12} className={`${styles['t-c']}`}>
+                <button disabled={!otp} className={`${!otp ? styles['verify-no-btn-disabled'] : styles['verify-no-btn']} ${styles['mt-20']}`} onClick={this.handleSubmit}>{this.props.buttonText}</button>
+              </Col>
+            </Row>
+            <div>
+              {{
+                FAILURE: <div className={`${styles['thick-red']} ${styles['fs-12']}`}>{CONTACT_INFO_MODAL.ENTER_VALID_OTP}</div>,
+                SUCCESS: '',
+                RESET:''
+              }[otpResponse]}
+            </div>
+          </div>
+        </div> :
+       <div className={`${styles['success-green']} ${styles['mb-25']}`}>{CONTACT_INFO_MODAL.PLEASE_CONFIRM_YOUR_ORDER}</div>
+      }
+      </div>
+
+    );
+  }
 }
 
 const mapStateToProps = (store) => ({
   errorMessege: selectors.getErrorMessege(store),
-  userInfo: selectors.getUserInfo(store)
+  userInfo: selectors.getUserInfo(store),
+  isLoading: selectors.getLoadingStatus(store),
+  otpData: selectors.getOtpData(store)
 });
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    otpUserUpdate: actionCreators.otpUserUpdate,
+    verifyOtp: actionCreators.verifyOtp
+  }, dispatch)
+}
 
 EditPhone.propTypes = {
   show: PropTypes.bool,
@@ -122,5 +416,8 @@ EditPhone.propTypes = {
   errorMessege: PropTypes.string,
   userInfo: PropTypes.object
 };
+EditPhone.defaultProps = {
+  buttonText:CONTACT_INFO_MODAL.VERIFY_MOBILE_NUMBER
+}
 
-export default connect(mapStateToProps)(EditPhone);
+export default connect(mapStateToProps, mapDispatchToProps)(EditPhone);

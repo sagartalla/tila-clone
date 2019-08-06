@@ -10,9 +10,16 @@ import { selectors, actionCreators } from '../../../../store/megamenu';
 import SVGComponent from '../../../common/SVGComponet';
 import Menu from './Menu';
 import SubMenu from './SubMenu';
-import { mergeCss } from '../../../../utils/cssUtil';
+
 import {languageDefinations} from '../../../../utils/lang';
-const styles = mergeCss('components/HeaderBar/header');
+import lang from '../../../../utils/language';
+
+import main_en from '../../../../layout/main/main_en.styl';
+import main_ar from '../../../../layout/main/main_ar.styl';
+import styles_en from '../../header_en.styl';
+import styles_ar from '../../header_ar.styl';
+
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const cookies = new Cookie();
 
@@ -21,6 +28,8 @@ const country = cookies.get('country') || 'SAU';
 
 const {HEADER_PAGE} = languageDefinations()
 //TODO make it SEO friendly
+
+let timeoutCount = null;
 
 class MegaMenu extends Component {
   constructor(props) {
@@ -41,13 +50,16 @@ class MegaMenu extends Component {
     this.props.getMegamenu();
   }
 
-  onHoverCurry(item) {
-    return () => {
-      this.setState({
-        ...this.state,
-        selectedCategory: item.id,
-        colorScheme: (item.displayName || '').split(' ').join('').toLowerCase().replace('&', '-'),
-      });
+  onHoverCurry = item => () => {
+    if(this.state.selectedCategory !== item.id) {
+      timeoutCount = setTimeout(() => {
+        this.setState({
+          ...this.state,
+          selectedCategory: item.id,
+          itemColor: item.itemColor,
+          hoverItem: item.id,
+        });
+      }, 300);
     }
   }
 
@@ -58,7 +70,7 @@ class MegaMenu extends Component {
   onLinkClick() {
     this.setState({
       selectedCategory: null,
-      viewAllMenu: false
+      viewAllMenu: false,
     });
     this.expandedHover = false;
   }
@@ -66,30 +78,37 @@ class MegaMenu extends Component {
   onHoverOut() {
     this.setState({
       selectedCategory: null,
-      viewAllMenu: false
+      viewAllMenu: false,
+      itemColor: null,
+      hoverItem: null
     });
     this.expandedHover = false;
   }
 
-  onHoverOutDelayed() {
-    setTimeout(() => {
-      if(!this.expandedHover){
-        this.setState({
-          selectedCategory: null,
-          viewAllMenu: false
-        })
-      }
-    });
+  onHoverOutDelayed(id) {
+    timeoutCount && clearTimeout(timeoutCount);
+    return () => {
+      setTimeout(() => {
+        if(!this.expandedHover){
+          this.setState({
+            selectedCategory: null,
+            viewAllMenu: false,
+            itemColor: null,
+            hoverItem: null,
+          })
+        }
+      });
+    }
   }
 
-  getLandingPageLink(name) {
-    if(name === 'Electronics') {
+  getLandingPageLink(id) {
+    if(id === 'CWZ') {
       return 'landing/electronics';
     }
-    if(name === 'Fashion') {
+    if(id === 'GLS') {
       return 'landing/fashion';
     }
-    if(name === 'Lifestyle' || name === 'Home & Living') {
+    if(id === 'JZG') {
       return 'landing/lifestyle';
     }
   }
@@ -97,23 +116,33 @@ class MegaMenu extends Component {
   render() {
     const { megamenu, query={} } = this.props;
     const { category } = query;
-    const { selectedCategory } = this.state;
+    const {
+      selectedCategory,
+      itemColor,
+      hoverItem,
+    } = this.state;
     // const selectedCategory = 3245;
     // const selectedCategory = 3234;
+    // const selectedCategory = 848;
     const selectedCategoryTree = _.find(megamenu, { id: selectedCategory });
 
     return (
       <div>
         <Grid className={`${styles['pl-0']}`}>
-        <nav className={`${styles['megamenu-wrapper']} ${styles['flx-spacebw-alignc']} ${styles[this.state.colorScheme]}`}>
-          <ul className={styles['mb-0']}>
+        <nav className={`${styles['megamenu-wrapper']} ${styles['flx-spacebw-alignc']}`}>
+          <ul className={`${styles['mb-0']} ${styles.flex}`}>
             {
               _.map(megamenu, (item) => {
                 return (
-                  <li key={item.id} onMouseOver={this.onHoverCurry(item)} onMouseLeave={this.onHoverOutDelayed} className={`${styles[`${(item.displayName || '').split(' ').join('').toLowerCase().replace('&', '-')}-item`]} ${(!selectedCategoryTree && this.getLandingPageLink(item.displayName)) === `/landing/${category}` ? styles['active-menu-item']: {}}`}>
+                  <li key={item.id}
+                    onMouseEnter={this.onHoverCurry(item)}
+                    onMouseLeave={this.onHoverOutDelayed(item.id)}
+                    className={`${(hoverItem === item.id) ? styles['active-menu-item'] : ''}`}
+                    style={ (itemColor && hoverItem === item.id) ? { borderBottom: `4px solid ${itemColor}` } : {} }
+                    >
                     <div>
                       {/* <Link route={`/category/${item.displayName}-${item.id}?categoryTree=true&isListed=false`}> */}
-                      <Link route={`/${country}/${language}/${this.getLandingPageLink(item.displayName)}`}>
+                      <Link route={`/${language}/${this.getLandingPageLink(item.sid)}`}>
                         <a>{item.displayName}</a>
                       </Link>
                     </div>
@@ -133,25 +162,16 @@ class MegaMenu extends Component {
           selectedCategoryTree
             ?
             <div
-              className={`${styles['megamenu-event-wrapper']} ${styles['pb-40']}`}
+              className={`${styles['megamenu-event-wrapper']}`}
               onMouseOver={this.onExpandedHover}
               onMouseLeave={this.onHoverOut}
             >
             {
-              selectedCategoryTree.displayName === "Fashion"
-                ?
-                <SubMenu
-                  subMenuItems={selectedCategoryTree.childCategories}
-                  onLinkClick={this.onLinkClick}
-                  colorScheme={this.state.colorScheme}
-                  parentID={selectedCategory}
-                />
-                :
                 <Grid className={styles['megamenu-event-container']}>
                   <Menu
                     selectedCategoryTree={selectedCategoryTree}
                     parentID={selectedCategory}
-                    colorScheme={this.state.colorScheme}
+                    itemColor={itemColor}
                     onLinkClick={this.onLinkClick}
                   />
                 </Grid>

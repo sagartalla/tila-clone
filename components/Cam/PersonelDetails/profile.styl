@@ -1,5 +1,7 @@
 @import '../../../layout/main/executables.styl';
 .profile-main-part
+  .right-part-cam
+    box-shadow 0 0 35px 0 rgba(0, 0, 0, 0.06)
 
   .deactive-account-lable
     border-top 1px solid rgba(215, 215, 215, 0.3)
@@ -48,17 +50,22 @@
     line-height 1.22
   .notfy-footer, .social-media-main
     padding 15px 30px
-    
+
 .editProfileModal
   padding 40px
+  max-height 100vh
+  overflow auto
   .personal-info-img
     padding 40px 0
     .personal-info-img-icon
       width 90px
+    .personal-info-set-img-icon
+      width 195px
+      height 175px
   .personal-info-main
     p
       width 60%
-  
+
   .gender-select-main
     .gender-or
       width 24px
@@ -74,16 +81,15 @@
         height 64px
 
   .update-profile-input
-    .fp-input
-      .user-name
-        box-shadow none
+    .user-name
+      box-shadow none
 
   .date-dob-caldr
     input
       border-style solid
       border-width 0 0 1px 0
       border-color suggest-label-gray
-      width 100% 
+      width 100%
 
   .update-profile-btn
     border-radius 0
@@ -106,6 +112,18 @@
 
   .gender-unselect>span
     color base-font
+
+  .mobile-otp-part
+    .country-code
+       position relative
+    img
+      width 20px
+    .country-dropdown
+      border-bottom 1px solid light-border !important
+      border-radius 0  
+
+.profile-dts
+  font-size 12px
 
 .modalContainer
   height 100%
@@ -145,8 +163,74 @@
   animation-name slideClose
   animation-duration 0.2s
   animation-fill-mode both
+.phoneInpt
+  .show-otp
+    opacity 1
+    position: absolute;
+    right: 0;
+    top: 8px;
+.loader-div
+  width 20px
+  position absolute
+  z-index 14
+  top 170px
+  left 202px
+  .loader-styl
+    width 40px
+    height 40px
+    svg
+      animation rotate 1.4s linear infinite;
+      -webkit-animation rotate 1.4s linear infinite;
+      -moz-animation rotate 1.4s linear infinite;
+      @keyframes rotate {
+        to {
+          transform rotate(360deg);
+        }
+      }
 
+      @-webkit-keyframes rotate {
+        to {
+          -webkit-transform rotate(360deg);
+        }
+      }
 
+      @-moz-keyframes rotate {
+        to {
+          transform rotate(360deg);
+        }
+      }
+.request-opt
+  .request-opt-inn
+    position absolute
+    right 0
+    top 10px
+    font-size 12px
+.verify-no-btn
+    border-bottom-right-radius 26px
+    box-shadow 0 2px 7px 0 rgba(0, 0, 0, 0.08)
+    background-color tila-blk
+    color white
+    padding 10px
+    border 0
+    width 100%
+    text-transform uppercase
+.verify-no-btn-disabled
+  border-bottom-right-radius 26px
+  box-shadow 0 2px 7px 0 rgba(0, 0, 0, 0.08)
+  background-color #cccccc
+  color white
+  padding 10px
+  border 0
+  width 100%
+  cursor not-allowed
+  text-transform uppercase
+.mobile-tick-icon
+  .mobiletick-icon-styl
+    width 101px
+    height 146px
+  .setpasword-mobiletick-icon-styl
+     width 195px
+     height 175px
 @keyframes slideOpen {
   from {right: -800px;}
   to {right: 0;}
@@ -161,3 +245,29 @@
 
 .hideDiv
   display none
+
+.set-password-toltp
+  .question
+    width-height-radius(20px, 20px, 50%)
+    border 0.25px solid generic-gray-color
+  .setpassword-tool-tip
+      right -115px
+      display none
+      text-align left
+      .table
+        line-height 1.6
+      &:before
+          right 117px
+          left auto
+    &:hover
+        .setpassword-tool-tip
+          display flex
+
+
+.bg-FB-icon
+  width 10px
+  height 16px
+
+.bg-GOOGLE-icon
+  width 16px
+  height 16px

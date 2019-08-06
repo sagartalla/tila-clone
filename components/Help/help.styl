@@ -1,0 +1,656 @@
+.flex
+  display flex
+.flexWrap
+  flex-wrap wrap
+.flex-grow
+  flex-grow 1
+.flexCenterContainer
+  display flex
+  align-items center
+  justify-content center
+
+.facp
+  display flex
+  align-items center
+  cursor pointer 
+
+.fa
+  display flex
+  align-items center
+
+.incidentIcon
+  height 100px
+  width 100px
+  padding 20px 10px 
+  margin 0px 10px
+
+.answerArrowIcon
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  right: 25px;
+  top: 20px;
+  cursor: pointer
+
+.faqIcon
+  height 100px
+  width 100px
+  padding 20px 10px 
+  margin 0px 0px
+
+.viewMoreBtn
+  padding 10px 20px
+  color #000
+  border-radius 0px 0px 0px 14px;
+  border solid 1px #101820
+  background-color #ffffff
+
+.as-flex-end
+  align-self flex-end
+
+.openBGColor
+  background linear-gradient(90deg, #000 0.5%, #FFF 0%);
+  box-shadow 0px 0px 15px -5px #ccc
+  padding: 10px 25px 20px 25px !important;
+  margin-top: -10px;
+
+.openBGColorAr
+  @extends .openBGColor
+  background linear-gradient(90deg, #fff 99.5%, #000 0.5%)
+
+.openBGColor2
+  background linear-gradient(90deg, #000 1%, #FFF 0%);
+.openBGColor2Ar
+  background linear-gradient(90deg, #fff 99%, #000 1%)
+
+.selectedBG
+  background-color #000
+.whiteBG
+  background-color  #ffffff
+.fwBolder
+  font-weight 800
+
+.whiteColor
+  color #ffffff
+.blackColor
+  color #000000
+.highlightColor
+  color #000
+.greyColor
+  color #848484
+
+.overflow-hidden
+  overflow hidden
+.overflow-auto
+  overflow auto
+
+.ht-auto
+  height auto
+.ht-0
+  height 0
+.ht-45
+  height 45px
+.ht-110
+  height 110px
+.ht-175
+  height 175px
+.ht-185
+  height 185px
+.ht-300
+  height 300px
+
+.wh-250
+  width 250px
+.wh-200
+  width 200px
+
+.fs-11p
+  font-size 11px
+.fs-10p
+  font-size 10px
+.fs-12p
+  font-size 12px
+.fs-13p
+  font-size 13px
+.fs-14p
+  font-size 14px
+
+.bT
+ border-top 1px solid #efeff4
+.bB
+ border-bottom 1px solid #efeff4
+.bR
+ border-right 1px solid #efeff4
+.bL
+ border-left 1px solid #efeff4
+
+.flexColCenterContainer
+  @extend .flexCenterContainer
+  flex-direction column
+
+.helpContainer
+  height 100%
+  overflow hidden
+
+.helpContentCont
+  height 100%
+  overflow auto
+
+.helpHeroContainer 
+  height 310px
+  background-color #EFFCFF
+  position relative
+  background-image url("/static/img/helpsupport/help_sf_hero.png");
+  background-size: contain;
+
+.boxContainer 
+  border-radius 3px
+  display flex
+  max-width 600px
+  width 100%
+  background-color #fff
+  box-shadow 0px 0px 15px -5px #ccc
+
+.searchContainer
+  @extends .boxContainer 
+  height 40px
+  overflow hidden
+
+.searchForm
+  width 100%
+  height 100%
+
+.searchInput
+  border none
+  outline none
+  width 100%
+  height 100%
+  padding 0px 10px !important
+  border none !important
+  font-size 14px !important
+
+.contactContainer
+  @extends .boxContainer 
+  height 65px
+  position absolute
+  bottom -30px
+
+.contactContainer2
+  @extends .contactContainer
+  background-color #F9F9F9
+  border 1px solid #ccc
+  box-shadow none
+  font-size 14px !important
+
+
+.helpContentContainer 
+  margin auto
+  padding 60px 20px
+  min-height 600px
+  max-width 1300px
+  width 100%
+
+.topicContainer
+  height 400px
+  width 350px
+  border-radius 8px;
+  border solid 0.5px rgba(0,0,0,0.25);
+  overflow hidden;
+  margin 20px 0px
+  padding 20px
+  display flex
+  flex-direction column
+  justify-content space-between
+
+.incidentContainer 
+  padding 20px
+  display flex
+  height 120px
+  width 100%
+  border-radius 8px;
+  border solid 0.5px rgba(0,0,0,0.25);
+  justify-content space-between
+  align-items center
+  margin 20px 0px
+
+.categoryValue
+  display flex
+  justify-content space-between
+  align-items center 
+  font-size 14px 
+  padding 0px 10px 
+  height 55px 
+
+.categoryWithChild
+   cursor pointer
+   display flex
+   justify-content space-between
+   width 100%
+
+.categoryContainer
+  margin 0px 1px
+  width 25%
+  height 100%
+  overflow auto
+  border 1px solid #efeff4
+  
+
+.answersContainer
+  width 75%
+  overflow auto
+  padding 10px 20px
+
+.showDiv
+  display block
+
+.hideDiv
+  display none
+
+.modalContainer
+  height 100%
+  width 100%
+  top 0
+  left 0
+  .disabled
+    height 100%
+    width 100%
+    position fixed
+    top 0
+    left 0
+    z-index 2000
+    background-color grey
+    opacity 0.8
+
+.modal
+  height 100%
+  width 30%
+  position fixed
+  top 0
+  right 0
+  z-index 2001
+  background-color white
+  transition all 0.3s;
+
+.closeModal
+  height 100%
+  width 30%
+  position fixed
+  top 0
+  right 0
+  transform translateX(800px)
+  z-index 2001
+  background-color white
+  animation-name slideClose
+  animation-duration 0.3s
+  animation-fill-mode both
+
+.showModal
+  transform translateX(0px)
+
+.hideModal
+  transform translateX(800px)
+
+.contentContainer
+  display flex
+  padding 10px 0px
+  max-height 800px
+  height 100%
+
+.questionBox
+  cursor pointer
+  font-size 14px
+  height 40px
+  overflow hidden
+  display flex
+  align-items center
+
+.questionBox-open
+  @extend .questionBox
+  color #000
+  font-weight 800
+  border-bottom 0
+  font-size: 16px
+  margin-bottom: 10px
+
+.questionBox-close
+  @extend .questionBox
+  color #000000
+  font-weight 500
+  border-bottom 1px solid #efeff4
+
+.orderImgContainer
+  flex-shrink 0
+  width 75px
+  height 95px
+  padding 5px
+  border-radius 5px
+  border 0.5px solid #f2f2f2
+
+.imgContain
+  width 100%
+  height 100%
+  object-fit contain
+
+.formLabel
+  font-size 12px
+  color #8C8C92
+
+.dropDownInput
+  @extends .facp
+  width 100%
+  min-height 35px
+  border-bottom 1px solid #c8c6cc
+  position relative
+  outline 0
+
+.dropDownBox
+  border-radius 5px
+  padding 10px
+  position absolute
+  width 100%
+  margin 10px 0px
+  box-shadow 0px 0px 15px -5px #ccc
+  transition all 0.25s
+  background-color #fff
+  z-index 5
+  max-height: 400px
+  overflow: auto
+
+.dropDownBox-open
+  @extends .dropDownBox
+  visibility visible
+  opacity 1
+  top 0px
+
+.dropDownBox-close
+  @extends .dropDownBox
+  visibility hidden
+  opacity 0
+  top -10px
+
+.textAreaBox
+  width 100%
+  border-radius 5px
+  border-color #d2d2d2
+  outline 0
+  font-size 14px
+  padding 10px
+  resize vertical
+  
+
+.ModalTextArea
+  @extends .textAreaBox
+  margin 10px 0px
+  min-height 120px
+
+.MsgTextArea
+  @extends .textAreaBox
+  min-height 100px
+
+.modalFormButton
+  margin-top 20px
+  margin-bottom 10px
+  text-align center
+  cursor pointer
+  padding 10px 25px
+  background-color #000000
+  color #ffffff
+  border-bottom-right-radius 25px
+
+.MsgBoxContainer
+  display flex
+  justify-content space-between
+  font-size 13px
+  margin 20px 0px
+
+.UploadButton
+  position relative
+  overflow hidden
+  cursor pointer
+  padding 5px 10px
+  border 1px solid #000000
+  color #000000
+  border-radius 5px
+
+.SendMsgButton
+  cursor pointer
+  padding 5px 25px
+  background-color #000000
+  color #ffffff
+  border-bottom-right-radius 25px
+
+.disabledButton
+  @extend .SendMsgButton
+  background-color #ccc
+
+.SelectIssueButton
+   height 30px
+   width 150px
+   margin 10px
+   display flex
+   justify-content center
+   align-items center
+   font-size 14px
+   padding 10px 20px
+   color #000000
+   border 0.5px solid #f2f2f2
+   border-radius 3
+
+.TktTitleContainer
+  line-height 1.5
+  cursor pointer
+  padding 0px 20px
+  height 90px
+  display flex
+  flex-direction column
+  justify-content center
+  border-top 0.5px solid #f2f2f2
+
+.userProfile
+  width 40px
+  height 40px
+  border-radius 50%
+  background-color #CFCFCF
+  margin 10px 10px 10px 0px
+
+.SupportBoxContainer
+  height 150px
+  display flex
+  flex-direction column
+  justify-content space-evenly
+
+.ansContainer
+  padding 10px 25px
+  position relative
+  transition all 0.15s
+
+.answers
+  font-size 13px
+  border-bottom 0
+  overflow hidden
+  height 0
+
+.openedAnswers
+  height auto
+  color #333
+
+.openedAnswers ul li
+  list-style initial
+
+.modalCont
+  padding 20px
+  font-size 14px
+  display flex
+  flex-direction column
+  height 100%
+
+.modalTitleContainer
+  display flex
+  width 100%
+  justify-content space-between
+
+.categoryCont
+  overflow hidden
+  transition all 0.25s
+
+.myOrderBtn
+  height 30px
+  display flex
+  justify-content center
+  align-items center
+  font-size 12px
+  padding 5px 20px
+  color #ffffff
+  background-color #000000
+  border-radius 3px
+
+.ordersContentContainer
+  height 100%
+  overflow auto
+
+.orderContents
+  display flex
+  justify-content space-between
+  width 100%
+  border-bottom 0.5px solid #f2f2f2
+  padding-bottom 10px
+
+.orderItemContainer
+  @extend .facp 
+  min-height 110px
+  padding 10px
+
+.orderItemTitle
+  display flex
+  font-size 14px
+  flex-grow 1
+  padding 10px 20px
+
+.orderIssueContainer
+  display flex
+  flex-direction column
+  align-items center
+
+.orderIssueListContainer
+  padding 10px 0px 0px 0px
+  margin 10px 0px 10px 100px
+
+.backHelp
+  margin 1px
+  font-size 13px
+  width: 25%
+
+.dropDownArrow
+  position absolute
+  color #c8c6cc
+  right 0
+  top 25%
+  font-size 12px
+
+.answerNavContainer
+  display flex
+  align-items: flex-end
+
+.searchResultsTitleContainer
+  width: 75%
+  padding: 0px 25px
+
+.searchResultsTitle
+  font-weight: 800
+  font-size: 16px
+  padding: 5px 0px
+
+.searchResultsSummary
+  font-size: 14px
+  color: #333
+
+.fileNameCont
+  width 90%
+  overflow hidden
+  text-overflow ellipsis
+  white-space nowrap
+
+.fileNameDelete
+  width 10%
+  margin 0px 10px
+  cursor pointer
+
+.fileInput
+  opacity 0
+  position absolute
+  top 0
+  right 0
+  width 100%
+  height 100%
+  cursor pointer
+
+.tktClmCont
+  max-height 600px
+  overflow auto
+
+.threadContainer
+  display flex
+  align-items center
+  font-size 14px
+  justify-content space-between
+
+.tktContainer
+  width 100%
+  display flex
+
+.contactIcon
+  margin 10px
+  width 35px
+  height 35px
+  border-radius 50%
+  background-color #FFFFFF
+
+.modalFill
+  height 100%
+  width 100%
+  overflow auto
+
+.fileUploadInputCont
+  width 175px
+  position relative
+
+.fileAttachIcon
+  width 20px
+  height auto
+  margin 5px
+
+.loader-div
+          width 20px
+          height 20px
+          margin auto
+          .loader-styl
+            svg
+              animation rotate 1.4s linear infinite;
+              -webkit-animation rotate 1.4s linear infinite;
+              -moz-animation rotate 1.4s linear infinite;
+              @keyframes rotate {
+                to {
+                  transform rotate(360deg);
+                }
+              }
+
+              @-webkit-keyframes rotate {
+                to {
+                  -webkit-transform rotate(360deg);
+                }
+              }
+
+              @-moz-keyframes rotate {
+                to {
+                  transform rotate(360deg);
+                }
+              }
+
+@keyframes slideOpen {
+  from {transform: translateX(800px)}
+  to {transform: translateX(0px)}
+}
+@keyframes slideClose {
+  from {transform: translateX(0px)}
+  to {transform: translateX(800px)}
+}

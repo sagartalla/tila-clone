@@ -1,35 +1,58 @@
 @import '../../layout/main/executables.styl';
 
 .image-placeholder
-  min-height: 436px;
-  background: #ccc;
+  width 100%
+  height 100%
   .img-responsive
-    max-height 100%
-    max-width 100%
+    height 100%
+    width 100%
 
-.tickmark-part
-  .tickmark-icon 
+.reset-part
+  .reset-icon
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 50%
-    width-height-radius(100px, 100px, 0)
+    width: 438px;
+    height: 208px;
 
 .text-center
   text-align: center;
 
 .forgot-password
-  font-weight: bold;
   margin-left: 20px;
   margin-right: 20px;
   text-align: justify;
+  min-height: 355px;
+  .disabled-button
+   &:disabled
+      color white
+      background-color suggest-label-gray
+      border suggest-label-gray 
+  .radio-buttons
+   min-height: 150px;
+  .border
+    border: 0.5px solid thck-gry-clr
   .reset-link
-    background-color: light-card-green;
-    border: 1px solid generic-green-color;
+    background-color: light-gray-color;
     padding: 10px;
-    font-size: large;
     display: flex;
     justify-content: space-between;
+    flex-direction: column;
+  .reset-link-mobile
+    background-color: light-gray-color;
+    padding: 10px;
+  .inputOTP
+    border: none;
+    border-bottom: 1px solid;
+    width: 40px;
+    outline: none;
+    text-align: center;
+  .email-success-icon
+    width 73px
+    height 69px
+    position absolute
+    top -40px
+    right -21px
   .bg-light-gray
     color: dark-gray;
   .invalid-email
@@ -37,118 +60,180 @@
     border: 1px solid thick-red-arrow;
     padding: 10px;
     font-size: large;
-
+.passwordeye
+  cursor pointer
+  display flex
+  position absolute
+  top 13px
+  font-size 9px
+  color #45689a
+  .password-eye-icon
+    margin-top -1px
+    width 12px
+    height 14px
 .login-form
   // overflow hidden
   min-height 360px
   // .fp-input
     // margin-bottom 20px
-  .termes-label 
+  .termes-label
     color register-policy-gray
-  .sign-in-btn
-    background navy-blue
-    width 100%
-    color white
-    border 0
-    height 40px
-    border-bottom-right-radius 16px
 
   .login-social-icon
     clear both
-    .bg-social-icon
-      width 58px
-      height 58px
 
-  /* form starting stylings ------------------------------- */
-  // .group {
-  //   position:relative;
-  //   margin-bottom:33px;
-  // }
+.login-reg-modal
+  background-color login-bg-gray !important
 
-  // input 				{
-  //   font-size:14px;
-  //   padding:10px 10px 10px 5px;
-  //   display:block;
-  //   width:300px;
-  //   border:none;
-  //   border-bottom:1px solid #757575;
-  // }
-  // input:focus 		{ outline:none; }
+.background-transparent
+   background transparent !important
+   
+.sign-in-btn
+  background tila-blk
+  width 100%
+  color white
+  border 0
+  height 40px
+  border-bottom-left-radius 16px
+  &:focus
+    outline none
 
-  /* LABEL ======================================= */
-  // label 				 {
-  //   color:#999;
-  //   font-size:14px;
-  //   font-weight:normal;
-  //   position:absolute;
-  //   pointer-events:none;
-  //   left:0;
-  //   top:10px;
-  //   transition:0.2s ease all;
-  //   -moz-transition:0.2s ease all;
-  //   -webkit-transition:0.2s ease all;
-  // }
+.login-logo
+  width 250px
+  height 385px
 
-  /* active state */
-  // input:focus ~ label, input:valid ~ label 		{
-  //   top:-20px;
-  //   font-size:14px;
-  //   color:#5264AE;
-  // }
+.bg-FB-icon
+  width 10px
+  height 16px
 
-  /* BOTTOM BARS ================================= */
-  // .bar 	{ position:relative; display:block; width: 100%; }
-  // .bar:before, .bar:after 	{
-  //   content:'';
-  //   height:2px;
-  //   width:0;
-  //   bottom:0;
-  //   position:absolute;
-  //   background:#5264AE;
-  //   transition:0.2s ease all;
-  //   -moz-transition:0.2s ease all;
-  //   -webkit-transition:0.2s ease all;
-  // }
-  // .bar:before {
-  //   left:50%;
-  // }
-  // .bar:after {
-  //   right:50%;
-  // }
+.bg-GOOGLE-icon
+  width 16px
+  height 16px
 
-  /* active state */
-  // input:focus ~ .bar:before, input:focus ~ .bar:after {
-  //   width:50%;
-  // }
+.bg-social-icon
+  width 58px
+  height 58px
 
-  /* HIGHLIGHTER ================================== */
-  // .highlight {
-  //   position:absolute;
-  //   height:60%;
-  //   width:100%;
-  //   top:25%;
-  //   left:0;
-  //   pointer-events:none;
-  //   opacity:0.5;
-  // }
+.or-tag-base
+  top 50%
+  border-radius 50%
 
-  /* active state */
-  // input:focus ~ .highlight {
-  //   -webkit-animation:inputHighlighter 0.3s ease;
-  //   -moz-animation:inputHighlighter 0.3s ease;
-  //   animation:inputHighlighter 0.3s ease;
-  // }
+.email-form
+       min-height: 360px
+.otp-expire
+    color: border-gry-color;
 
-  /* ANIMATIONS ================ */
-  // @-webkit-keyframes inputHighlighter {
-  //   from { background:#5264AE; }
-  //   to 	{ width:0; background:transparent; }
-  // }
-  // @-moz-keyframes inputHighlighter {
-  //   from { background:#5264AE; }
-  //   to 	{ width:0; background:transparent; }
-  // }
-  // @keyframes inputHighlighter {
-  //   from { background:#5264AE; }
-  //   to 	{ width:0; background:transparent; }
-  // }
+.button-radius
+    border-bottom-right-radius: 16px;
+
+.cross-icon
+     width: 16px;
+     height: 16px;
+
+.otp-input
+  margin 15px
+  text-align center
+  letter-spacing 2px
+
+.reset-password
+  border: 1px solid white;
+  background: white;
+  padding: 20px;
+  border-radius 10px
+  min-height 355px
+  .reset-main
+   background light-brdr
+   border-radius 2px
+  .reset-password-icon
+   width 73px
+   height 71px
+  .light-gray
+    color dark-gray
+
+.verify-email
+    background-color: rgba(25, 197, 150, 0.08);
+    border: 1px solid #19c596;
+    .tickmark-icon
+      width 16px
+      height 16px
+ .main-signin
+  min-height 400px     
+.complete-login
+  min-height 430px
+  .img-responsive
+    width 32px
+  .gender-select-main
+    .gender-or
+      width 24px
+      height 24px
+      border-radius 50%
+      background popup-header
+      color cam-lgt-gray
+    a
+      display flex
+      flex-direction column
+      .gender-select-inn
+        width 64px
+        height 64px
+      .gender-select-signin
+        width 45px
+        height 45px
+  .country-code
+    position relative
+    img
+      width 20px
+      
+  .auto-suggestions-list
+      max-height 135px
+      overflow auto
+      overflow-x hidden
+      
+  .country-dropdown
+      border-bottom 1px solid light-border !important
+      border-radius 0      
+
+.otpInput
+  outline none
+  border none
+  border-bottom 2px solid black
+
+.success-text
+  top 50%
+  left 50%
+  transform translate(-50%, -50%)
+  width 30%
+
+.city-toggle
+  button
+    width 100%
+
+.mobile-input
+  color light-gray-clr
+  letter-spacing 2px
+  
+.logo-icon
+  width 60px
+
+.edit-button
+  border-right 2px solid light-brdr
+
+@media screen and (min-device-width: 320px) and (max-device-width: 736px) and (orientation : portrait){
+  .login-form {
+    margin 20px 0 20px 0
+    min-height auto
+
+    .login-social-icon .bg-social-icon {
+      width 45px
+      height 45px
+    }
+
+    .social-icons {
+      padding-top 10px
+      justify-content center
+    }
+  }
+
+  .sign-in-btn {
+    font-size 16px
+  }
+}

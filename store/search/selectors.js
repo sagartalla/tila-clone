@@ -1,31 +1,28 @@
 import shortid from 'shortid';
 import _ from 'lodash';
 
-const filterVariants = (cartListingId,variants) => {
-
+const filterVariants = (cartListingId, variants) => {
   // if(!variants.length > 1) {
   //   return cartListingIds.indexOf(variants.listingId[0]) !== -1
   // }
-    let variantList;
-    if(variants.length === 0) {
-      return variants
-    }
-    if(variants.length >= 1) {
-        variantList = variants.reduce((acc,curr) => {
-          if(curr.productAvailable) {
-            curr['addedToCart'] = cartListingId.indexOf(curr.listingId[0]) !== -1
-          }
-          acc.push(curr);
-          return acc
-        },[])
-    }
-
-  return variantList
-
-}
+  let variantList;
+  if (variants.length === 0) {
+    return variants;
+  }
+  if (variants.length >= 1) {
+    variantList = variants.reduce((acc, curr) => {
+      if (curr.productAvailable) {
+        curr.addedToCart = cartListingId.indexOf(curr.listingId[0]) !== -1;
+      }
+      acc.push(curr);
+      return acc;
+    }, []);
+  }
+  return variantList;
+};
 const addCartAndWishlistDetails = (store, results) => {
   const { items = [] } = store.cartReducer.data;
-  const { data = [] } = store.wishlistReducer;
+  const { products = [] } = store.wishlistReducer;
 
   if (items === null) {
     return results;
@@ -37,16 +34,21 @@ const addCartAndWishlistDetails = (store, results) => {
   //   return resutls;
   // }
   const cartListingIds = items.map(i => i.listing_id) || [];
-  const wishListProductIds = data.map(w => w.product_id) || [];
+  const wishListProductIds = products && products.length > 0 && (products.map(w => w.product_id) || []);
+
+  const wishlistItems = {};
+  products.forEach((p) => {
+    wishlistItems[p.product_id] = p.wishlist_id;
+  });
+
   return {
     ...results,
-    items: results.items.map((i) => {
-      return ({
+    items: results.items.map((i) => ({
         ...i,
-        variants:filterVariants(cartListingIds,i.variants),
-        addedToWishlist: wishListProductIds.indexOf(i.productId) !== -1,
-      });
-    }),
+        wishlistId: wishlistItems[i.productId] || '',
+        variants: filterVariants(cartListingIds, i.variants),
+        addedToWishlist: wishListProductIds && wishListProductIds.indexOf(i.productId) !== -1,
+      })),
   };
 };
 
@@ -64,24 +66,24 @@ const getSearchFilters = (store) => {
       children: _.reduce(nodes, (acc, value, key) => [
         ...acc,
         {
-          canonicalId: _.kebabCase(key),
+          canonicalId: _.kebabCase(value.name),
           children: _.reduce(value.child, (acc, value, key) => [
             ...acc,
             {
-              canonicalId: _.kebabCase(key),
+              canonicalId: _.kebabCase(value.name),
               id: value.id,
-              name: key,
+              name: value.name,
               children: _.reduce(value.child, (acc, value, key) => [
                 ...acc,
                 {
-                  canonicalId: _.kebabCase(key),
+                  canonicalId: _.kebabCase(value.name),
                   id: value.id,
-                  name: key,
+                  name: value.name,
                 },
               ], []),
             }], []),
           id: value.id,
-          name: key,
+          name: value.name,
         },
       ], []),
     }];
@@ -102,7 +104,7 @@ const getSearchFilters = (store) => {
         // if (item.Type === 'PERCENTILE') {
         //   attrObj.values = value.attributeValue;
         // } else {
-          attrObj.name = value.attributeValue;
+        attrObj.name = value.attributeValue;
         // }
         return attrObj;
       }),
@@ -119,39 +121,41 @@ const getSearchResutls = (store) => {
   let isNotifyMe;
   if (store.searchReducer.data.productResponse) {
     resutls.totalCount = store.searchReducer.data.productResponse.noOfProducts;
-    resutls.items = store.searchReducer.data.productResponse.products.map((product,prodIndex) => {
-      isNotifyMe = true
-      let variantInfo = product.variantAdapters.reduce((modifiedVaraints, v) => {
-        let modifiedVaraintsCopy = {}
-        let { listingAdapters } = v;
+    resutls.items = store.searchReducer.data.productResponse.products.map((product) => {
+      isNotifyMe = true;
+      let variantInfo = (product.variantAdapters || []).reduce((modifiedVaraints, v) => {
+        const modifiedVaraintsCopy = {};
+        const { listingAdapters } = v;
         if (listingAdapters.length > 0) {
-          isNotifyMe = !(listingAdapters[0].attributes.isActive && listingAdapters[0].attributes.inStock)
-          const attributesData = {...listingAdapters[0].attributes};
+          const activeInStockListing = _.find(listingAdapters, l => l.attributes.isActive && l.attributes.inStock);
+          isNotifyMe = typeof activeInStockListing === 'undefined' && isNotifyMe;
+          const attributesData = { ...listingAdapters[0].attributes };
           delete attributesData.type;
           delete attributesData.variantId;
-           // modifiedVaraintsCopy = Object.assign(modifiedVaraints);
-          modifiedVaraintsCopy['productSize'] = Object.values(v.attributes)[0]
-          modifiedVaraintsCopy['productAvailable'] = true
+          // modifiedVaraintsCopy = Object.assign(modifiedVaraints);
+          modifiedVaraintsCopy.productSize = v.attributes[product.flags.variant_id_attribute];
+          modifiedVaraintsCopy.productAvailable = true;
+          modifiedVaraintsCopy.variantId = v.id;
           _.forEach(attributesData, (val, key) => {
             modifiedVaraintsCopy[key] = modifiedVaraintsCopy[key] || [];
             modifiedVaraintsCopy[key] = modifiedVaraintsCopy[key].concat(val);
           });
         } else {
-          modifiedVaraintsCopy['productSize'] = Object.values(v.attributes)[0]
-          modifiedVaraintsCopy['productAvailable'] = false
+          modifiedVaraintsCopy.productSize = Object.values(v.attributes[product.flags.variant_id_attribute] || {})[0];
+          modifiedVaraintsCopy.productAvailable = false;
+          modifiedVaraintsCopy.variantId = v.id;
         }
 
-        modifiedVaraints.push(modifiedVaraintsCopy)
+        modifiedVaraints.push(modifiedVaraintsCopy);
 
         return modifiedVaraints;
-    }, []);
-
-      if(isNotifyMe) {
-        variantInfo = []
+      }, []);
+      if (isNotifyMe) {
+        variantInfo = [];
       }
       // const priceInfo = product.variantAdapters[0].listingAdapters.map((vla) => vla.attributes.sellingPrice);
       // const offers = product.variantAdapters[0].listingAdapters.map((vla) => vla.attributes.discount);
-      let currency = product.variantAdapters[0].listingAdapters || '';
+      let currency = product.variantAdapters ? product.variantAdapters[0].listingAdapters || '' : '';
       currency = currency[0] || '';
       currency = currency.attributes || '';
       currency = currency.currency || '';
@@ -174,13 +178,13 @@ const getSearchResutls = (store) => {
         productId: product.attributes.productId,
         catalogId: product.attributes.catalogId,
         itemtype: product.attributes.itemType,
-        displayName: product.attributes.calculated_display_name.join(','),
+        displayName: (product.attributes.calculated_display_name || []).join(','),
         brand: brand ? brand[0] : '',
-        variants: variantInfo,
+        variants: variantInfo.sort((a, b) => a.productSize[0] - b.productSize[0]),
         // priceRange,
         currency,
         categoryId,
-        flags: product.flags
+        flags: product.flags,
       };
     });
   }
@@ -216,16 +220,53 @@ const optionParams = (store) => {
     isListed,
   };
 };
-
-const getFacetfilters = () => (queryObject) => {
-  const facetFilters = _.reduce(queryObject, (facetFilters, fitlerTypeValues, fitlerTypeKey) => {
-    facetFilters[fitlerTypeKey] = fitlerTypeValues.map(fitlerTypeValue => fitlerTypeValue.param);
-    return facetFilters;
-  }, {});
-  const facetFiltersCopyWithNames = _.reduce(queryObject, (facetFilters, fitlerTypeValues, fitlerTypeKey) => {
-    facetFilters[fitlerTypeKey] = fitlerTypeValues;
-    return facetFilters;
-  }, {});
+/* eslint-disable */
+const getFacetfilters = store => (queryObject) => {
+  const facetFilters = {};
+  const res = [];
+  const facetFiltersCopyWithNames = {};
+  const storeValue = store && store.searchReducer && store.searchReducer.data && store.searchReducer.data.facetResponse && store.searchReducer.data.facetResponse.facets;
+    storeValue && Object.keys(queryObject).forEach(attributeName => {
+      const filtered = storeValue.find(facet => facet.attributeName === attributeName);
+      filtered && filtered.Values && filtered.Values.length > 0 && filtered.Values.forEach(param => {
+        if (queryObject[attributeName].includes(param.attributeValue)) {
+          res.push(param);
+          if (!facetFilters[attributeName] || !facetFiltersCopyWithNames[attributeName]) {
+            facetFilters[attributeName] = [];
+            facetFiltersCopyWithNames[attributeName] = [];
+          }
+          facetFilters[attributeName].push(param.Param);
+          facetFiltersCopyWithNames[attributeName].push({name: param.attributeValue, params: param.Param});
+        }
+      })
+    })
+  // store && store.searchReducer && store.searchReducer.data && store.searchReducer.data.facetResponse && store.searchReducer.data.facetResponse.facets.map(storeValue => {
+  //   Object.keys(queryObject).map((queryKey, index) => {
+  //     if (storeValue.attributeName === queryKey) {
+  //       console.log('storeValue', storeValue);
+  //       storeValue.Values.map(val => {
+  //         queryObject[queryKey].map((item, index) => {
+  //             if (val.attributeValue === item) {
+  //               debugger;
+  //               facetFilters[queryKey] = facetFilters[queryKey] || [];
+  //               facetFilters[queryKey].push(val.Param);
+  //               facetFiltersCopyWithNames[queryKey] = facetFiltersCopyWithNames[queryKey] || [];
+  //               facetFiltersCopyWithNames[queryKey].push({name: val.attributeValue, params: val.Param});
+  //             }
+  //         })
+  //       });
+  //     }
+  //   })
+  // })
+  // const facetFilters = _.reduce(queryObject, (facetFilters, fitlerTypeValues, fitlerTypeKey) => {
+  //   facetFilters[fitlerTypeKey] = fitlerTypeValues.map(fitlerTypeValue => fitlerTypeValue.param);
+  //   return facetFilters;
+  // }, {});
+  // const facetFiltersCopyWithNames = _.reduce(queryObject, (facetFilters, fitlerTypeValues, fitlerTypeKey) => {
+  //   facetFilters[fitlerTypeKey] = fitlerTypeValues;
+  //   console.log('fitlerTypeValues', fitlerTypeValues);
+  //   return facetFilters;
+  // }, {});
   return { facetFilters, facetFiltersCopyWithNames };
 };
 
@@ -247,7 +288,9 @@ const getSuggestions = store => store.searchReducer.data.suggestions;
 const getCartButtonLoaders = store => store.cartReducer.data.cartButtonLoaders || {};
 
 export {
-  getSearchFilters, getSearchResutls, getPaginationDetails, getUIState, getCategoryId, getQuery, getCategorySearchQuery,
-  getFacetfilters, optionParams, getSearchBarFilterState, addCartAndWishlistDetails, getIsCategoryTree, getChoosenCategoryName,
-  getAppliedFitlers, getSuggestions, getSpellCheckResponse, getUserDetails, getCartButtonLoaders,
+  getSearchFilters, getSearchResutls, getPaginationDetails, getUIState,
+  getCategoryId, getQuery, getCategorySearchQuery, getChoosenCategoryName,
+  getFacetfilters, optionParams, getSearchBarFilterState, addCartAndWishlistDetails,
+  getIsCategoryTree, getAppliedFitlers, getSuggestions, getSpellCheckResponse,
+  getUserDetails, getCartButtonLoaders,
 };

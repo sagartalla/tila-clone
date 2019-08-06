@@ -1,67 +1,187 @@
+import React from 'react';
 import PropTypes from 'prop-types';
-import { Grid, Row, Col } from 'react-bootstrap';
-
+import { Row, Col } from 'react-bootstrap';
+import { connect } from 'react-redux';
 import { languageDefinations } from '../../../../utils/lang/';
 import SVGComponent from '../../../common/SVGComponet';
-import { mergeCss } from '../../../../utils/cssUtil';
-const styles = mergeCss('components/Payments/payment');
+import { actionCreators, selectors } from '../../../../store/captcha';
+import { actionCreators as paymentsActionCreators, selectors as paymentsSelectors } from '../../../../store/payments';
+import { actionCreators as camActionCreators, selectors as camSelectors } from '../../../../store/cam/personalDetails';
+import { bindActionCreators } from 'redux';
+import { Router } from '../../../../routes';
+
+import Captcha from '../../../common/Captcha';
+import CaptchaContent from '../../../common/Captcha/CaptchaContent'
+import dynamic from 'next/dynamic';
+//import EditPhone from '../../../Cam/PersonelDetails/UserData/EditPhone';
+import Button from '../../../common/CommonButton';
+
 const { PAYMENT_PAGE } = languageDefinations();
 
-const CashOnDelivery = props => {
-  const { PAYMENT_PAGE } = languageDefinations();
-  return (
-    <div className={`${styles['cash-on-dly-points']}`}>
-      <Row className={`${styles['pl-40']} ${styles['m-pd-l-10']}`}>
-        <Col md={12}>
-          <h4 className={`${styles['fontW300']} ${styles['fs-20']} ${styles['lgt-blue']} ${styles['mt-0']} ${styles['pb-10']}`}>Pay on Delivery</h4>
-          <div className={styles['checkbox-material']}>
-            <input id="pay-delivery" type="checkbox" />
-            <label for="pay-delivery"> I agree to pay cash on delivery </label>
-          </div>
-          <div className={`${styles['flx-spacebw-alignc']} ${styles['capcha-pay']} ${styles['pt-30']} ${styles['pb-30']}`}>
-            <div>
-              <ul className={`${styles['pl-0']} ${styles['m-0']} ${styles['cash-tab']}`}>
-                <li>Visual</li>
-              </ul>
-              <div className={`${styles['captch-inn']} ${styles['p-20']}`}>
-                <span className={`${styles['flx-spacebw-alignc']} ${styles['refresh-part']} ${styles['pb-20']}`}>
-                  <span className={styles['fs-12']}>Drag and drop the Car into the box</span>
-                  <span className={`${styles['flex']} ${styles['refresh-part-inn']} ${styles['p-5']}`}><SVGComponent clsName={`${styles['refresh-icon']}`} src="icons/captcha-icons-list/refresh-icon" /></span>
-                </span>
-                <div>
-                  <div className={`${styles['flex-center']} ${styles['captcha-icon-part']}`}>
-                    <span className={styles['flex']}><SVGComponent clsName={`${styles['captcha-icon']}`} src="icons/captcha-icons-list/cat-icon" /></span>
-                    <span className={styles['flex']}><SVGComponent clsName={`${styles['captcha-icon']}`} src="icons/captcha-icons-list/ball-icon" /></span>
-                    <span className={styles['flex']}><SVGComponent clsName={`${styles['captcha-icon']}`} src="icons/captcha-icons-list/flower-icon" /></span>
-                    <span className={styles['flex']}><SVGComponent clsName={`${styles['car-icon']}`} src="icons/captcha-icons-list/car-icon" /></span>
-                    <span className={styles['flex']}><SVGComponent clsName={`${styles['captcha-icon']}`} src="icons/captcha-icons-list/chair-icon" /></span>
-                  </div>
+import lang from '../../../../utils/language';
 
-                </div>
-              </div>
-            </div>
-            <div>
-              <div className={`${styles['flex']} ${styles['justify-center']}`}>
-              <SVGComponent clsName={`${styles['drop-box-icon']}`} src="icons/captcha-icons-list/box-icon" />
-              </div>
-              <span className={`${styles['fs-12']} ${styles['pt-20']}`}>Drop the Car icon into the box Above</span>
-            </div>
-          </div>
-        </Col>
-        <Col md={6} sm={12} xs={12}>
-          <button className={`${styles['fp-btn']} ${styles['fs-16']} ${styles['fontW600']} ${styles['fp-btn-primary']} ${styles['fp-btn-large']}`} onClick={props.makePayment}>Pay {props.orderRes.data.amount} {props.orderRes.data.currency}</button>
-        </Col>
-      </Row>
-    </div>
-  );
+import main_en from '../../../../layout/main/main_en.styl';
+import main_ar from '../../../../layout/main/main_ar.styl';
+import styles_en from '../../payment_en.styl';
+import styles_ar from '../../payment_ar.styl';
+
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+const EditPhone = dynamic(import('../../../Cam/PersonelDetails/UserData/EditPhone'));
+
+class CashOnDelivery extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      showContinueButton: false,
+      showPayBtn: false,
+      nextStep: 'captcha',
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.onCaptchaSuccess = this.onCaptchaSuccess.bind(this);
+    this.onContinueHandle = this.onContinueHandle.bind(this);
+    this.afterSuccessOtpVerification = this.afterSuccessOtpVerification.bind(this);
+    this.proceedToPayment = this.proceedToPayment.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.getUserProfileInfo();
+  }
+  handleChange() {
+    const {data} = this.props;
+    this.props.disableAllOthers({
+      except: data.type
+    });
+  }
+
+  onCaptchaSuccess({captcha_request_id}) {
+    const { profileInfo } = this.props;
+    this.setState({
+      nextStep: this.state.nextStep === 'captcha' ? 'mobileVerification' : 'captcha',
+      captcha_request_id,
+      // showContinueButton: this.state.nextStep !== 'captcha'
+    }, () => {
+      if (profileInfo.contactInfo.mobile_verified === 'V') {
+        this.setState({
+          showPayBtn: true,
+        });
+      }
+    });
+    // this.setState({
+    //   showContinueButton: true,
+    //   captcha_request_id,
+    // });
+  }
+
+  onContinueHandle() {
+    this.setState({
+      nextStep: this.state.nextStep === 'captcha' ? 'mobileVerification' : 'captcha',
+      showContinueButton: this.state.nextStep !== 'captcha'
+    });
+  }
+
+  afterSuccessOtpVerification() {
+    this.setState({
+        showPayBtn: true,
+      });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.processData && nextProps.processData.redirect_url) {
+      window.location = nextProps.processData.redirect_url;
+    }
+  }
+
+  proceedToPayment() {
+    const { data, makeProcessRequest } = this.props;
+    makeProcessRequest({
+      payment_details: [{
+        payment_mode: data.type,
+        request_id: this.state.captcha_request_id,
+      }]
+    });
+  }
+  render() {
+    const { data, showLoading, profileInfo } = this.props;
+    return <div>
+        <div className={`${styles['cash-on-dly-points']} ${styles['pt-25']} ${styles['pb-15']}`}>
+    <Row className={styles['pl-40']}>
+      <Col md={12}>
+        <h4 className={`${styles['fontW300']} ${styles['fs-20']} ${styles['lgt-blue']} ${styles['mt-0']} ${styles['pb-10']}`}>{PAYMENT_PAGE.PAY_ON_DELIVERY}</h4>
+    {
+          {
+            captcha:  <Captcha
+              onCaptchaSuccess={this.onCaptchaSuccess}
+              txnId={this.props.transactionId}
+              render={([items,state,handleClick,handleDrop]) =>
+                <CaptchaContent
+                  items={items}
+                  state={state}
+                  handleClick={handleClick}
+                  handleDrop={handleDrop}
+                />
+              }
+              />,
+            mobileVerification:
+            <EditPhone
+            afterSuccessOtpVerification={this.afterSuccessOtpVerification}
+            mobileVerified = {profileInfo.contactInfo.mobile_verified === 'V'}
+            userData = {profileInfo.contactInfo}
+            />
+          }[this.state.nextStep]
+    }
+    </Col>
+    <Col md={10} sm={12} xs={12}>
+      {
+        this.state.showContinueButton &&
+           (
+           <Button
+              className={`${styles['fs-16']} ${styles['fontW600']} ${styles.width55} ${styles['new-card-btn']}`}
+              onClick={this.onContinueHandle}
+              btnText={PAYMENT_PAGE.CONTINUE}
+              hoverClassName="hoverBlueBackground"
+
+           />
+          )
+      }
+      {
+        this.state.showPayBtn &&
+            (
+              <Button
+                className={`${styles['fs-16']} ${styles['fontW600']} ${styles['new-card-btn']} ${styles['border-radius']} ${styles['ht-40']} ${styles.width70}`}
+                onClick={this.proceedToPayment}
+                btnText={PAYMENT_PAGE.PAY + ' ' + data.amount_to_pay.display_value + ' ' + data.amount_to_pay.currency_code + ' ' + PAYMENT_PAGE.ON_DELIVERY}
+                hoverClassName="hoverBlueBackground"
+                btnLoading={showLoading}
+
+              />
+          )
+      }
+    </Col>
+    </Row>
+  </div>
+  </div>;
+  }
 }
 
 CashOnDelivery.propTypes = {
   makePayment: PropTypes.func.isRequired,
 }
 
-CashOnDelivery.defaultProps = {
 
-}
+const mapStateToProps = store => ({
+  getCaptcha: selectors.getCaptcha(store),
+  getVerification: selectors.getVerification(store),
+  processData: paymentsSelectors.getProcessData(store),
+  profileInfo: camSelectors.getUserInfo(store),
+  showLoading: paymentsSelectors.getLoader(store),
+});
 
-export default CashOnDelivery;
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({
+    verifyCaptcha: actionCreators.verifyCaptcha,
+    captchaQuestion: actionCreators.captchaQuestion,
+    makeProcessRequest: paymentsActionCreators.makeProcessRequest,
+    getUserProfileInfo: camActionCreators.getUserProfileInfo,
+  }, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(CashOnDelivery);

@@ -3,20 +3,21 @@ import constants from '../../constants';
 
 const getListingCartResults = (store) => {
   if (store.listingCartReducer.data) {
-    const data = store.listingCartReducer.data;
-    const ui = store.listingCartReducer.ui
+    const { data, ui } = store.listingCartReducer;
     const img_url = constants.mediaDomain;
+
     const newData = { items: [], total_price: 0, ui };
 
     if (data.items) {
-      newData.total_price = data.total_price;
-      newData.total_offer_price = data.total_offer_price;
-      newData.total_discount = data.total_discount;
-      newData.total_shipping = data.total_shipping;
+      newData.total_price = data.total_price || {};
+      newData.total_offer_price = data.total_offer_price || {};
+      newData.total_discount = data.total_discount || {};
+      newData.total_shipping = data.total_shipping || {};
+      newData.total_gift_charges = data.total_gift_charges || {};
       newData.tax = 0;
       newData.item_cnt = data.items.length;
       newData.currency = data.items[0].listing_info.selling_price_currency;
-      data.items.map((item, index) => {
+      data.items.forEach((item, index) => {
         newData.items[index] = {
           item_id: item.cart_item_id,
           product_id: item.listing_info.product_id,
@@ -34,16 +35,14 @@ const getListingCartResults = (store) => {
           gift_info: item.gift_info,
           shipping: item.listing_info.shipping,
           warranty: _.groupBy(item.listing_info.warranty_details, 'type')['MANUFACTURER'],
-        }
-      })
+        };
+      });
     }
 
     newData.items = newData.items.reverse();
     return newData;
   }
   return {};
-}
-
-
+};
 
 export { getListingCartResults }

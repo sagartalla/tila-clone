@@ -10,10 +10,17 @@ import Cookie from 'universal-cookie';
 import { selectors, actionCreators } from '../../../store/cart';
 import { Link } from '../../../routes';
 
-import { mergeCss } from '../../../utils/cssUtil';
+
 import {languageDefinations} from '../../../utils/lang'
 const {PDP_PAGE} = languageDefinations()
-const styles = mergeCss('components/Product/product');
+import lang from '../../../utils/language';
+
+import main_en from '../../../layout/main/main_en.styl';
+import main_ar from '../../../layout/main/main_ar.styl';
+import styles_en from '../product_en.styl';
+import styles_ar from '../product_ar.styl';
+
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const cookies = new Cookie();
 
@@ -56,7 +63,7 @@ class Offers extends Component {
                 isAddedToCart
                 ?
                 <Button>
-                  <Link route={`/${country}/${language}/cart`}><a>{PDP_PAGE.GO_TO_CART}</a></Link>
+                  <Link route={`/${language}/cart`}><a>{PDP_PAGE.GO_TO_CART}</a></Link>
                 </Button>
                 :
                 null
@@ -84,7 +91,7 @@ class Offers extends Component {
               <li>
                 <h5 className={`${styles['ff-b']} ${styles['black-color']}`}>{PDP_PAGE.OFFERS}</h5>
                 <ul className={`${styles['pl-15']} ${styles['no-list-blt']}`}>
-                  <li>No offers </li>
+                  <li>{PDP_PAGE.NO_OFFERS} </li>
                 </ul>
               </li>
               <li>

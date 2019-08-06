@@ -1,4 +1,5 @@
 @import './product.styl'
+
 .page-details-slider
   .details-right-part
     left 0
@@ -7,9 +8,35 @@
 .recentview-main
   .recent-title
     span
-      border-right 4px solid border-pink
+      border-right 4px solid tila-blk
       border-left 0
 
 .bottom-slider .copon-code
   border-right 5px solid  border-gry-color
   border-left 0
+
+.modal
+  left 0
+  right auto
+
+.showModal
+  transform translateX(0px)
+
+.hideModal
+  transform translateX(-800px)
+
+.addto-cart-lang
+  left 0
+
+.product-details-main .kf-list li::after
+  content "\2022"
+  color thck-gry-clr
+  display inline-block
+  width 10px
+  font-weight 600
+  font-size 20px
+  height 0px
+
+.slick
+  right: 4%;
+  width: 93%;

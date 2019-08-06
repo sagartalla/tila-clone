@@ -15,11 +15,19 @@ const getPaymentUrl = (store) => {
 }
 
 const getDefaultAddress = (store) => {
+  let defaultAdd;
   if (store.shippingAddrReducer.data && store.shippingAddrReducer.data.length > 0) {
-    return _.filter(store.shippingAddrReducer.data, function (value, key) { return value.default; });
+    defaultAdd = [_.find(store.shippingAddrReducer.data, value => value.default)];
   }
-  return {};
-}
+  if(!defaultAdd) {
+    if(store.shippingAddrReducer.data && store.shippingAddrReducer.data.length > 0) {
+      defaultAdd = [store.shippingAddrReducer.data[0]];
+    } else {
+      defaultAdd = [{}];
+    }
+  }
+  return defaultAdd;
+};
 
 const getPaymentModesData = (store) => {
   /*
@@ -29,24 +37,28 @@ const getPaymentModesData = (store) => {
       transaction_id
     }
   */
+
   if(store.paymentsReducer.data.data) {
     const paymentModesData = store.paymentsReducer.data.data.payment_options_available.reduce((acc, val, key) => {
-      if(val.type === "VOUCHER") {
-        acc.voucherData = val;
+      if (val.type === 'VOUCHER') {
+        acc.voucherData = {
+          ...val,
+          total_amount: store.paymentsReducer.data.data.amount,
+        };
       } else {
         acc.paymentModes[val.type] = val;
       }
       return acc;
     }, {
       voucherData: null,
-      paymentModes: {}
+      paymentModes: {},
     });
     paymentModesData.transaction_id = store.paymentsReducer.data.data.transaction_id;
     return paymentModesData;
   }
   return {
     voucherData: {},
-    paymentModes: {}
+    paymentModes: {},
   }
 }
 
@@ -54,8 +66,29 @@ const getProcessData = (store) => {
   return store.paymentsReducer.data.processData;
 }
 
-const get3dSecureRedirectionUrl = () => {
-  return store.paymentTypeNames.data.redirect3dSecureData.redirect_url;
+
+const getLoader = (store) => {
+  return store.paymentsReducer.ui.loading;
 }
 
-export { getPaymentOptions, getPaymentUrl, getDefaultAddress, getPaymentModesData, getProcessData, get3dSecureRedirectionUrl };
+
+const get3dSecureRedirectionUrl = (store) => {
+  const { redirect3dSecureData } = store.paymentsReducer.data;
+  if(redirect3dSecureData) {
+    return redirect3dSecureData.redirect_url;
+  }
+}
+
+const getSelectedAddress = (store) => {
+  let selectedAddress;
+  if (store.shippingAddrReducer.data && store.shippingAddrReducer.data.length > 0) {
+    selectedAddress =  _.find(store.shippingAddrReducer.data, value => value.address_id === store.shippingAddrReducer.deliverToAddress);
+  }
+  if(!selectedAddress) {
+    selectedAddress = getDefaultAddress(store)[0];
+  }
+  return selectedAddress
+}
+
+
+export { getPaymentOptions, getPaymentUrl, getDefaultAddress, getPaymentModesData, getProcessData, get3dSecureRedirectionUrl, getLoader, getSelectedAddress };

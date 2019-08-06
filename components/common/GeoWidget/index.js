@@ -1,16 +1,22 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Dropdown, MenuItem } from 'react-bootstrap';
 import { bindActionCreators } from 'redux';
+import { Router } from '../../../routes';
 import _ from 'lodash';
 import Cookie from 'universal-cookie';
-
+import { selectors as productSelectors, actionCreators as productActionCreators } from '../../../store/product';
 import { actionCreators, selectors } from '../../../store/auth';
 import SVGCompoent from '../SVGComponet';
 import { languageDefinations } from '../../../utils/lang';
+import lang from '../../../utils/language';
+import main_en from '../../../layout/main/main_en.styl';
+import main_ar from '../../../layout/main/main_ar.styl';
+import styles_en from './geoWidget_en.styl';
+import styles_ar from './geoWidget_ar.styl';
 
-import { mergeCss } from '../../../utils/cssUtil';
-const styles = mergeCss('components/common/GeoWidget/geoWidget');
+const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
 const { SEARCH_PAGE } = languageDefinations();
 const cookies = new Cookie();
@@ -22,43 +28,43 @@ class GeoWidget extends Component {
     this.state = {
       ...props.geoShippingData,
       ...shippingInfo,
-    }
+      showCitiesData: false,
+      displayCity: '',
+    };
     this.deriveCity = this.deriveCity.bind(this);
     this.onChangeCity = this.onChangeCity.bind(this);
-    this.autoCompleteCity = _.debounce(this.autoCompleteCity.bind(this), 300);
     this.selectCityFromSuggesstions = this.selectCityFromSuggesstions.bind(this);
     this.deleteCity = this.deleteCity.bind(this);
-    this.locateMe = this.locateMe.bind(this);
+    // this.locateMe = this.locateMe.bind(this);
+    this.handleOutsideClick = this.handleOutsideClick.bind(this);
   }
 
-  locateMe() {
-    const shippingInfo = cookies.get('shippingInfo')
-    if (navigator.geolocation && !shippingInfo) {
-      navigator.geolocation.getCurrentPosition(this.deriveCity);
-    }
+  componentDidMount() {
+    const { getCitiesByCountryCode } = this.props;
+    getCitiesByCountryCode(cookies.get('country'));
+    document.addEventListener('click', this.handleOutsideClick, false);
   }
 
   componentWillReceiveProps(nextProps) {
     const { geoShippingData } = nextProps;
-    if (!this.state.displayCity && geoShippingData) {
+    if (this.props.geoShippingData.city !== geoShippingData.city) {
       this.setState({
-        displayCity: geoShippingData.displayCity
-      },() => location.reload())
+        displayCity: geoShippingData.displayCity,
+      });
     }
   }
 
+  componentWillUnmount() {
+    document.removeEventListener('click', this.handleOutsideClick, false);
+  }
   onChangeCity(e) {
+    const { autoCompleteCity, getAllCities } = this.props;
     const displayCity = e.target.value;
     this.setState({
-      displayCity
+      displayCity,
+      showCitiesData: true,
     });
-    this.autoCompleteCity(displayCity);
-  }
-
-  autoCompleteCity(city) {
-    this.props.autoCompleteCity({
-      input: city
-    });
+    autoCompleteCity(e.target.value);
   }
 
   setCity(city, country, displayCity) {
@@ -66,8 +72,23 @@ class GeoWidget extends Component {
       city,
       country,
       displayCity,
+    }).then(() => {
+      Router.pushRoute(`${window.location.pathname}${window.location.search}`)
     });
   }
+
+  mouseOver = (e) => {
+    const searchValue = e.target.getAttribute('data-id');
+    this.setState({
+      displayCity: searchValue,
+    });
+  }
+  // locateMe() {
+  //   const shippingInfo = cookies.get('shippingInfo');
+  //   if (navigator.geolocation && !shippingInfo) {
+  //     navigator.geolocation.getCurrentPosition(this.deriveCity);
+  //   }
+  // }
 
   deriveCity(position) {
     const { longitude, latitude } = position.coords;
@@ -79,63 +100,91 @@ class GeoWidget extends Component {
   }
 
   selectCityFromSuggesstions(e) {
-    const { autoCompleteCityData, resetAutoCompleteData } = this.props;
-    const selectedCity = _.find(autoCompleteCityData, { displayCity: e.target.getAttribute('data-id') });
-    const { city, country, displayCity } = selectedCity;
-    resetAutoCompleteData();
+    const city = e.currentTarget.getAttribute('data-code');
+    const displayCity = e.currentTarget.getAttribute('data-id');
+    const country = cookies.get('country');
     this.setState({
-      displayCity: selectedCity.displayCity
+      displayCity,
+      showCitiesData: false,
     });
     this.setCity(city, country, displayCity);
   }
-
+  handleOutsideClick(event) {
+    const { target } = event;
+    if (this.filterRef && target !== this.filterRef && !this.filterRef.contains(target)) {
+      this.setState({
+        showCitiesData: false,
+      });
+    }
+  }
   deleteCity() {
     this.setState({
-      displayCity: null
+      displayCity: '',
     });
-    this.props.removeCity();
+    this.props.removeCity().then(() => {
+      Router.pushRoute(`${window.location.pathname}${window.location.search}`)
+    });
   }
 
   render() {
-    const { autoCompleteCityData, geoShippingData, hideLabel } = this.props;
-    // const { displayCity } = geoShippingData;
-    // const { displayCity: stateDisplayCity } = this.state;
+    const {
+      geoShippingData, hideLabel, getAllCities, isPdp,
+    } = this.props;
+    const { showCitiesData } = this.state;
     return (
-      <div className={`${styles['flex-center']} ${styles['delovery-inn']}`}>
+      <div className={`${styles['flex-center']} ${styles['delovery-inn']} ${styles['pr-5']}`}>
         {
           (!hideLabel)
             ?
-            <span className={`${styles['flex-center']} ${styles['delivery-part']}`}>
-              <SVGCompoent clsName={`${styles['map-icon']}`} src="icons/common-icon/black-map-location" />
-              <span className={`${styles['fontW600']} ${styles['pl-5']} ${styles['pr-10']}`}>{SEARCH_PAGE.DELIVER_TO} :</span>
-
-            </span>
+              <span className={`${styles['flex-center']} ${styles['delivery-part']}`}>
+                <SVGCompoent clsName={`${styles['map-icon']}`} src="icons/common-icon/black-map-location" />
+                <span className={`${styles.fontW600} ${styles['pl-5']} ${styles['pr-5']}`}>{SEARCH_PAGE.DELIVER_TO}:</span>
+              </span>
             :
             null
         }
-        <div className={styles['auto-suggestions-wrap']}>
-          <input type="text" value={this.state.displayCity} className={styles['fs-12']} onChange={this.onChangeCity} />
-          {
-            autoCompleteCityData.map((result) => <div key={result.displayCity} className={`${styles['auto-suggestions']} ${styles['p-10']} ${styles['bg-white']}`}><div data-id={result.displayCity} onClick={this.selectCityFromSuggesstions} className={`${styles['item']} ${styles['fs-12']}`}>{result.displayCity}</div></div>)
-          }
+        <div
+          className={`${styles['auto-suggestions-wrap']} ${styles['flex']} ${styles['justify-flex-end']}`}
+          ref={(el) => { this.filterRef = el; }}
+        >
+          <Dropdown id="search-toggle">
+            <Dropdown.Toggle id="dropdown-custom-components">
+              <input
+                type="text"
+                value={this.state.displayCity}
+                className={`${styles['fs-14']} ${styles['delivery-input']} ${isPdp ? styles['pdp-border-btm'] : ''}`}
+                // onInput={this.onChangeCity}
+                onChange={this.onChangeCity}
+                style={{ width: `${this.state.displayCity.length * 8}px` }}
+                contentEditable
+              />
+            </Dropdown.Toggle>
+            <Dropdown.Menu className={`${styles['p-0']} ${styles['m-0']} ${styles['auto-suggestions-list']}`}>
+              {showCitiesData && getAllCities.map((value, index) => (
+                <MenuItem data-id={value.city_name} data-code={value.city_code} onClick={this.selectCityFromSuggesstions} onFocus={this.mouseOver} eventKey={index + 1} key={value.city_name}>
+                  <a className={`${styles['black-color']}`}>
+                      <span>{value.city_name}</span>
+                    </a>
+                </MenuItem>))
+              }
+            </Dropdown.Menu>
+          </Dropdown>
           {
             this.state.displayCity
-              ?
-              <div onClick={this.deleteCity} className={styles['delete-btn']}>x</div>
-              :
-              <div onClick={this.locateMe} className={styles['delete-btn']}>
-                <SVGCompoent clsName={`${styles['map-icon']}`} src="icons/locate-me" />
-              </div>
+              &&
+                <div onClick={this.deleteCity} className={styles['delete-btn']}>
+                  <img className={styles['img-responsive']} src={"/static/img/bg-img/delivery-remove-icon.png"} />
+                </div>
           }
         </div>
       </div>
-    )
+    );
   }
 }
 
-const mapStateToProps = (store) => ({
+const mapStateToProps = store => ({
   geoShippingData: selectors.getDeliveryCity(store),
-  autoCompleteCityData: selectors.getAutoCompleteCityData(store)
+  getAllCities: productSelectors.getAllCities(store),
 });
 
 const mapDispatchToProps = dispatch =>
@@ -143,8 +192,8 @@ const mapDispatchToProps = dispatch =>
     {
       deriveCity: actionCreators.deriveCity,
       setCity: actionCreators.setCity,
-      autoCompleteCity: actionCreators.autoCompleteCity,
-      resetAutoCompleteData: actionCreators.resetAutoCompleteData,
+      autoCompleteCity: productActionCreators.autoCompleteCity,
+      getCitiesByCountryCode: productActionCreators.getCitiesByCountryCode,
       removeCity: actionCreators.removeCity,
     },
     dispatch,

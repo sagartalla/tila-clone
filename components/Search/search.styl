@@ -1,29 +1,53 @@
-@import '/static/vendor/css/react-input-range.css';
-@import '/static/vendor/css/react-input-range-override.css';
 @import '../../layout/main/executables.styl';
 
 .filter-panel
-  float left
-  width 17%
-  margin-right 20px
-  border 1px solid border-gray
-  box-shadow 0 2px 7px 0 rgba(0,0,0,0.03)
-  position sticky
-  top 65px;
+  // width: 215px;
+  border: 1px solid #e5e5e5;
+  box-shadow: 0 2px 7px 0 rgba(0,0,0,0.03);
+  overflow: auto;
+  max-height: calc(100vh - 150px);
+  position: sticky !important;
+  top: 120px;
+  .bottom-absolute
+    position absolute
+    bottom 0
   li
     list-style none
 
 .search-main-part
-  min-height 530px
+  min-height 500px
+
+.search-main-part .product-items-main:nth-child(4) {
+  margin-right 0
+}
+
+.search-container-wrap 
+  margin 0 auto
+  min-width 978px
+  max-width 1680px
+  width 100% !important
 
 .search-results
-  float left
-  width calc(82% - 20px)
+  // width calc(82% - 20px)
+  padding 0 0 0 15px
+  .no-search
+    width 300px
+    text-align center
+    margin auto
   .no-results
-    height 400px
+    text-align center
+  .caption
+    background white
   .product-items-main
-    width 276px
-    padding-bottom 20px
+    width 25%
+    padding-bottom 4px
+    border-right 1px solid light-brdr
+    border-bottom 1px solid light-brdr
+    a
+      text-decoration none
+      position relative
+      float left
+      width 100%
     .loader-div
        width 20px
        height 20px
@@ -126,35 +150,48 @@
     left 0
     border-radius 12px
     // bottom -20%
+
     &.active-product,&.display-buttons
         display block
         z-index 9
         // transform scale(1.1)
         // padding 4px
-        border-bottom-left-radius 10px
-        border-bottom-right-radius: 10px
+        border-bottom-left-radius 14px
+        border-bottom-right-radius: 14px
         background-color white
-        box-shadow 0 2px 10px 0 rgba(0, 0, 0, 0.1)
+        // box-shadow 0 2px 10px 0 rgba(0, 0, 0, 0.1)
         z-index 11
         position absolute
-        width 276px
+        width 100%
 
     .quick-view
       // background-color label-light
       // padding 10px 0
-      width 92%
+      width 90%
       margin 0 auto
       .add-to-crt
-        border: 1px solid navy-blue
-        border-bottom-left-radius: 16px
-        color navy-blue
+        border: 1px solid tila-blk
+        border-bottom-left-radius: 14px
+        background-color white
+        color tila-blk
+        width 50%
+        height 35px
         .cart-list
           margin-right 8px
+        i
+          width: 13px
+          height: 11px
+          margin-right: 5px
+          color tila-blk
       .buy-now-btn
-        background-color navy-blue
         border-bottom-right-radius 16px
         color white
-        padding-left 14px
+        width 50%
+        height 35px
+        i
+          width: 18px
+          height: 14px
+          margin-right: 5px
         .cart-list
           height 20px
           width 20px
@@ -164,14 +201,15 @@
         width 50%
         text-align center
         padding 6px 0 6px 15px
+        align-items flex-end
         .cart-list
-          width 15px
+          width 14px
           height 16px
         // &:first-child
         //   border-right 1px solid white
 
     .brand-price-details
-      padding 0 15px
+      padding 0 10px
 
       .prdt-name
         line-height 19px
@@ -181,23 +219,71 @@
         margin-right 2px
 
     .wish-list-part
-      margin 10px 15px
-      // border-bottom: 1px solid cam-border-gray
-      // padding-bottom: 10px;
+      margin 10px 8px
       .wish-list
         width 15px
         height 15px
+      .add-to-compare
+        // input[type="checkbox"]
+        //   margin-right 8px
+        input[type="checkbox"]:checked + label:after
+          width 10px
+          height 6px
+          top 3px
+        label:before
+          width 15px
+          height 15px
+          top 0px
 
   .items-list-show
-    align-items flex-end
+    // .search-val-part
+    //   width 45%
     .deliver-to-main
-      width 50%
-      .delovery-inn
-        width 60%
+      // width 55%
+      // justify-content flex-end
+      // align-items center
       .sort-part-inn
-        width 50%
-        label
-          width 40%
+        display flex
+        
+        .sort-arrow
+          width 12px
+          height 12px
+
+        .select-mn
+          position relative
+          .sort-drop-down
+            left auto
+            right 0
+            border-radius inherit
+            box-shadow 0 0 5px rgba(0,0,0,0.1)
+            transition all 0.5s ease-in
+            list-style none
+            // opacity 0
+            right 0
+            border 0
+            &:before
+              content: ""
+              width 0
+              height 0
+              position absolute
+              bottom 100%
+              right 15px
+              border-width 0 6px 6px 6px
+              border-style solid
+              border-color white transparent
+
+
+          .select-text
+            border 0
+            background-color transparent
+            position relative
+            // &:after
+            //   content ''
+            //   position absolute
+
+
+        .select-mn .select-text:focus
+          outline none
 
   .suggested-tags-main
     .suggest-sublist
@@ -208,7 +294,7 @@
         margin-left 10px
 
     .sugest-tag
-      border-left 1px solid border-gray
+      border-left 1px solid light-brdr
 
   .delivery-part
     .map-icon
@@ -216,28 +302,58 @@
       height 16px
 
   .applied-tags
-    justify-content space-between
+    .applied-tags-i
+      max-width 70%
     .applied-tags-inn
-      background: linear-gradient(to left, gray-light, white)
+      background linear-gradient(to left, gray-light, white)
       border-radius: 15px
       margin 5px
-      border: 0.5px solid rgba(192, 192, 192, 0.3)
+      padding 5px
+      border 0.5px solid rgba(192, 192, 192, 0.3)
+      .close-part
+        display none
+        height 14px
+        align-items center
+      &:hover
+        .close-part
+          display flex
       .title
-        padding: 0px 10px
+        padding 0px 10px
       .close-part
         cursor pointer
-        padding: 2px 10px
-        box-sizing: border-box
-        border-left: 0.5px solid rgba(192, 192, 192, 0.3)
+        padding 2px 10px
+        box-sizing border-box
+        border-left 0.5px solid rgba(192, 192, 192, 0.3)
 .justify-spacebetween
   justify-content space-between
 .product-items
-  // transform: scale(1)
-  transition: all .5s ease
+  // transform scale(1)
+  transition all .5s ease
   position relative
+  height 530px
   // padding 4px
   // width 100%
   // transition: width 2s;
+  .notify-me-part
+    position absolute
+    border-bottom-right-radius 10px
+    box-shadow 0 2px 6px 0 rgba(189, 189, 189, 0.5)
+    border solid 1px lgt-black-clr
+    background-color white
+    z-index 5
+    top 10px
+    left 0
+    // top 0
+    // bottom 0
+    // background rgba(255, 255, 255, 0.6)
+    // right 0
+    // left 0
+    // z-index 14
+    // display flex
+    // flex-direction column
+    // align-items center
+    // justify-content center
+
   .desc-cont
     .prdt-name
       width 100%
@@ -254,17 +370,23 @@
     // top 5px
     // right 10px
     padding: 6px 10px;
-    border-bottom-left-radius 20px
+    border-bottom-left-radius 14px
     // border-top-right-radius 12px
     &:hover
+      background-color rgba(255,255,255,0.8)
       .fullfilled-label
         display block
+      .fulfill-img
+        background-color transparent
 
     .fulfill-img
-      background url(/static/img/icons/common-icon/icon-fullfilled.svg) no-repeat
-      width 24px
-      height 20px
+      background: rgba(255,255,255,0.5) url(/static/img/icons/common-icon/icon-fullfilled.svg) no-repeat center;
+      width 35px
+      height 35px
+      border-radius 50%
       display inline-flex
+      background-position center
+
         // position absolute
     .fullfilled-label
       color rgba(0, 0, 0, 0.5)
@@ -273,16 +395,16 @@
     z-index 9
     // transform scale(1.1)
     // padding 4px
-    border-bottom-left-radius 10px
-    border-bottom-right-radius: 10px
+    border-bottom-left-radius 14px
+    border-bottom-right-radius: 14px
     background-color white
     box-shadow 0 2px 10px 0 rgba(0, 0, 0, 0.1)
     z-index 11
-    position absolute
-    width 276px
+    // position absolute
+    // width 25%
 
     .fullfill-main
-      background-color: rgba(216, 216, 216, 0.8)
+      // background-color: rgba(216, 216, 216, 0.8)
     // .fullfilled-label
     //   display block
     .image-div
@@ -293,25 +415,55 @@
     .desc-cont
       display none
     .hover-show-date
-      display block
+      display flex
+      flex-direction column
   .discount-main
     position absolute
     top 0
     left 0
     padding 7px 18px
+
+.search-results .product-items-main a.notify-part-inn
+  display flex
+  align-items center
+  justify-content center
+  text-transform uppercase
+  margin-bottom 5px
+  width 80%
+  margin 0 auto
+
 .category-sub-list-inn
   .select-check-mate
     display flex
     width 100%
     .category-label
       display flex
-      width 88%
+      width 84%
       .category-span
         overflow hidden
         white-space nowrap
         o-text-overflow ellipsis
         text-overflow ellipsis
         width 80%
+
+// .select-mn select
+//   -webkit-box-sizing: border-box;
+//   -moz-box-sizing: border-box;
+//   box-sizing: border-box;
+//   -webkit-appearance: none;
+//   -moz-appearance: none;
+
+// .select-mn:after
+//   content ''
+//   background url(/static/img/icons/down-arrow/down-arrow.svg) no-repeat center
+//   height 10px
+//   width 10px
+//   background-position center
+//   background-color transparent
+//   top 4px
+//   position absolute
+//   right 0
+
 
 .quick-view
   .add-loader
@@ -337,11 +489,10 @@
 .grid-cont
   // overflow hidden
   position relative
-  border 1px solid border-gray
+  border 1px solid rgba(151, 151, 151, 0.2)
   box-shadow 0 2px 7px 0 rgba(0,0,0,0.03)
   background-color white
   border-radius 10px
-
   .img-cont
     height 398px
     display flex
@@ -354,29 +505,19 @@
       height 22px
       top 20px
       left 20px
-      // position absolute
     .offer-tag
-      // position: absolute;
       top: 0
       left: 0
-      padding: 6px 10px;
-      border-bottom-right-radius 26px
-      border-top-left-radius 10px
+      padding: 6px 10px
+      border-bottom-right-radius 14px
+      // border-top-left-radius 10px
       color white
-      // .down-arrow
-      //   width 0
-      //   height 0
-      //   border-left 10px solid transparent
-      //   border-right 10px solid transparent
-      //   // border-top: 10px solid red;
-      //   // position absolute
-      //   top -16px
       &.green
-        background generic-green-color
+        background thick-red-arrow
       &.yellow
-        background yellow-color
+        background thick-red-arrow
       &.orange
-        background orange
+        background thick-red-arrow
       &.red
         background thick-red-arrow
     .variants-main
@@ -391,28 +532,39 @@
       width 100%
       height 100%
       overflow hidden
-      display flex
-      justify-content center
-      align-items center
       img
         max-height 100%
         max-width 100%
-        object-fit scale-down
+        object-fit contain
+        display block
+        margin 0 auto
+        width 100%
+        height 100%
+
+.category-list-title
+  padding 10px 15px
+
+.category-list-title
+  a[aria-expanded=true] .expand-icon
+    transform rotate(-180deg)
 
 .category-list
-  border-bottom 0.5px solid border-gray
-  // padding-bottom 10px
+  border-bottom 0.5px solid light-brdr
+  .category-list-head
+    .category-list-title
+      // border-bottom 0.5px solid light-brdr
+      a
+        display flex
+        justify-content space-between
+        width 100%
+        font-size 13px
+        align-items center
+        .expand-icon
+          width 16px
+          height 16px
 
-  .category-list-title
-    border-bottom 0.5px solid border-gray
-    a
-      display: flex;
-      justify-content: space-between;
-      width: 100%;
-      align-items: center;
-      .expand-icon
-        width 16px
-        height 16px
+.category-list-title span
+  font-size 13px
 
 .category-sub-list
   // padding 10px 0 0 20px
@@ -420,10 +572,9 @@
   .main-sub-list > a
     color black
     font-family ProximaNova-Bold
-    font-size 12px
 
 .category-sub-list-inn a
-  color-fontsize-fontW(black, 12px, ProximaNova-Light)
+  color black
   &:hover
     font-weight 600
 
@@ -436,7 +587,7 @@
   width 50%
   border 0
   background transparent
-  border-bottom 1px solid light-gray
+  border-bottom 1px solid light-brdr
   border-radius 0
   -webkit-appearance none
   -moz-appearance none
@@ -448,6 +599,9 @@
   padding 5px 15px
   border 1px solid #ffc600
   border-radius 4px
+
+.margin
+ margin-bottom -3px
 
 @media screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation : portrait){
   .filter-panel {
@@ -476,8 +630,46 @@
   }
 }
 
-@media screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation : landscape){
-  .search-results .product-items-main {
-    width 245px
-  }
+.fixed-bottom {
+  position fixed !important
+  bottom 0 !important
 }
+
+.footer-bottom {
+  position absolute !important
+  bottom 0 !important
+}
+
+.fixed-top {
+  position: fixed !important
+  top: 80px !important
+}
+
+.sticky-top {
+  position sticky !important
+  top 80px !important
+}
+.indication {
+  z-index 9
+  left calc(50% - 8px)
+  bottom -12px
+  width: 0;
+  height: 0;
+  border-left: 13px solid transparent;
+  border-right: 13px solid transparent;
+  border-bottom: 13px solid #f1f2f4;
+}
+.search-header
+  width 84%
+  margin-left 18px
+  position relative
+  .icon-search {
+    width 12px
+    height 12px
+    position absolute
+    left 0
+    top 10px
+  }
+  .pl-18 {
+    padding-left 18px
+  }

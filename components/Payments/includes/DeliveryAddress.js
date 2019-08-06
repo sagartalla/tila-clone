@@ -6,37 +6,42 @@ import SVGComponent from '../../common/SVGComponet';
 import ShippingAddress from '../../Cam/ShippingAddress';
 import { languageDefinations } from '../../../utils/lang/';
 
-import { mergeCss } from '../../../utils/cssUtil';
-const styles = mergeCss('components/Payments/payment');
+import lang from '../../../utils/language';
+
+import main_en from '../../../layout/main/main_en.styl';
+import main_ar from '../../../layout/main/main_ar.styl';
+import styles_en from '../payment_en.styl';
+import styles_ar from '../payment_ar.styl';
+
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+
 const { DELIVERY_ADDR_PAGE } = languageDefinations();
 
 const DeliveryAddress = props => {
-  const { configJson, defaultAddress, handleShippingAddressContinue, editAddressTab } = props;
-  
+  const { configJson, selectedAddress, handleShippingAddressContinue, editAddressTab, showNonShippable } = props;
+
   return (
     <div className={`${styles['delivery-adress-prt']} ${styles['box']} ${styles['mb-20']} ${styles['relative']}`}>
       <SVGComponent clsName={`${styles['map-address']} ${configJson.done ? 'done' : ''} ${configJson.progress ? 'payment-active' : ''}`} src="icons/map/address" />
-      <Row className={`${configJson.basic || configJson.done ? '' : 'hide'}`}>
+      <Row className={`${configJson.basic || configJson.done ? '' : 'hide'} ${styles['flex']}`}>
         <Col md={6} sm={12} xs={12}>
-          <h4 className={styles['m-0']}>{DELIVERY_ADDR_PAGE.DELIVERY_ADDR}</h4>
+          <h4 className={`${styles['m-0']}`}>{DELIVERY_ADDR_PAGE.DELIVERY_ADDR}</h4>
           <p className={`${styles['mb-0']}`}>
-            <small>{DELIVERY_ADDR_PAGE.SUB_TAG}</small>
+            <small className={styles['thick-gry-clr']}>{DELIVERY_ADDR_PAGE.SUB_TAG}</small>
           </p>
         </Col>
-        <Col md={4} sm={12} xs={7} className={`${configJson.done ? '' : 'hide'} ${styles['t-rt']} ${styles['m-tn-l']} ${styles['thin-border-right']}`}>
+        <Col md={6} sm={12} xs={7} className={`${configJson.done ? '' : 'hide'} ${styles['t-rt']} ${styles['flex']} ${styles['justify-flex-end']} ${styles['align-center']} ${styles['m-tn-l']} ${styles['p-0']}`}>
           {
-            defaultAddress && defaultAddress.length > 0 ?
-              <div>
-                <div className={`${styles['light-gry-clr']} ${styles['fontW600']}`}>{defaultAddress[0].first_name + ' ' + defaultAddress[0].last_name} </div>
-                <small>
-                  {defaultAddress[0].address_line_1 + ', ' + defaultAddress[0].address_line_2 + ', ' + defaultAddress[0].city}
+            selectedAddress ?
+              <div className={`${styles['thin-border-right']} ${styles['pr-15']} ${styles['flex']} ${styles['flex-colum']}`}>
+                <div className={`${styles['fontW600']} ${styles['light-gry-clr']}`}>{selectedAddress.first_name + ' ' + selectedAddress.last_name} </div>
+                <small className={styles['thick-gry-clr']}>
+                  {selectedAddress.address_line_1 + ', ' + selectedAddress.address_line_2 + ', ' + selectedAddress.city}
                 </small>
               </div>
               : null
           }
-        </Col>
-        <Col md={2} sm={12} xs={5} className={`${configJson.done ? '' : 'hide'} ${styles['t-rt']} ${styles['pl-0']}`}>
-          <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']}`} onClick={editAddressTab}>
+          <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['payment-edit']}  ${styles['ml-15']} ${styles['left-radius']} ${styles['text-uppercase']}`} onClick={editAddressTab}>
             {DELIVERY_ADDR_PAGE.EDIT}
           </button>
         </Col>
@@ -44,9 +49,12 @@ const DeliveryAddress = props => {
       {
         configJson.progress ?
           <div className={`${styles['pb-5']} ${styles['pt-5']}`}>
-            <h4 className={`${styles['mb-20']} ${styles['mt-0']}`}>{DELIVERY_ADDR_PAGE.DELIVERY_ADDR}</h4>
+            <h4 className={`${styles['mb-20']} ${styles['mt-0']} ${styles['fontW600']}`}>{DELIVERY_ADDR_PAGE.DELIVERY_ADDR}</h4>
             <ShippingAddress
+              showNonShippable={showNonShippable}
+              selectedAddress={selectedAddress}
               handleShippingAddressContinue={handleShippingAddressContinue}
+              isPaymentPage
             />
           </div>
           : null
@@ -60,7 +68,6 @@ DeliveryAddress.propTypes = {
   handleShippingAddressContinue: PropTypes.func.isRequired,
   editAddressTab: PropTypes.func.isRequired,
   configJson: PropTypes.object.isRequired,
-  // defaultAddress: propTypes.object
 }
 
 DeliveryAddress.defaultProps = {
@@ -68,4 +75,3 @@ DeliveryAddress.defaultProps = {
 }
 
 export default DeliveryAddress;
-

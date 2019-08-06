@@ -1,6 +1,13 @@
 import Document, { Head, Main, NextScript } from 'next/document';
+import getConfig from 'next/config';
+
 import Meta from '../components/helpers/Meta';
 import Script from '../components/helpers/Script';
+import adobeTags from '../constants/adobeLinks';
+import newrelicTags from '../constants/newrelicLinks'
+
+const config = getConfig();
+const env = config.publicRuntimeConfig.env;
 
 export default class MyDocument extends Document {
   render() {
@@ -12,32 +19,68 @@ export default class MyDocument extends Document {
           <script src="/static/scripts/googleTagManager.js"></script>
           {/*<!-- End Google Tag Manager -->*/}
           {/*<!-- Adobe Launch Tags -->*/}
-          <script src="//assets.adobedtm.com/launch-ENc0358fe6617e4066a1c1c0ecff96f2e5-development.min.js" async></script>
-          {/*<!-- End Adobe Launch Tags -->*/}
           {
-            props.__NEXT_DATA__.query.language === 'ar'
+            newrelicTags[env]
               ?
-              <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-rtl/3.4.0/css/bootstrap-rtl.css" />
+              <script src={newrelicTags[env]} ></script>
               :
               null
           }
-          {/*<script type='text/javascript' src='//service.maxymiser.net/api/eu/fptechscience.com/3a077f/mmapi.js'> </script>*/}
-          {/* <script type='text/javascript' src='/static/fb.js'></script> */}
-          <script type='text/javascript' src='/static/sociallogin.js'></script>
+          <script src={adobeTags[env]} async></script>
+          {
+            props.__NEXT_DATA__.query.language === 'ar'
+              ?
+                <link rel="stylesheet" href="/static/css/fonts_ar.css" />
+              :
+                <link rel="stylesheet" href="/static/css/fonts_en.css" />
+          }
+          <script type="text/javascript" src="/static/sociallogin.js" />
           <Meta />
-          <script src="/static/scripts/dataLayer.js"></script>
-
-          <script src="//assets.adobedtm.com/launch-ENf3bacf30d8974e6a81eeec612ff12c02-development.min.js" async></script>
+          <script src="/static/scripts/dataLayer.js" />
+          <link rel="alternate" hrefLang="ar-SA" href="https://www.tila.com/ar/" />
+          <link rel="alternate" hrefLang="en-SA" href="https://www.tila.com/en/" />
+          <meta httpEquiv="Content-type" content="text/html; charset=utf-8" />
+          <meta name="robots" content="noodp" />
+          <meta httpEquiv="X-UA-Compatible" content="IE=Edge" />
         </Head>
         <body>
-          {/*<!-- Google Tag Manager (noscript) -->*/}
-          <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M68MT36"
-          height="0" width="0" style={{display:'none', visibility:'hidden'}}></iframe></noscript>
-          {/*<!-- End Google Tag Manager (noscript) -->*/}
+          {
+            props.__NEXT_DATA__.query.language === 'ar'
+              ?
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-rtl/3.4.0/css/bootstrap-rtl.css" />
+              :
+              null
+          }
+          {/* <!-- Google Tag Manager (noscript) --> */}
+          <noscript>
+            <iframe
+                src="https://www.googletagmanager.com/ns.html?id=GTM-M68MT36"
+                height="0"
+                width="0"
+                style={{ display: 'none', visibility: 'hidden' }}
+              >
+            </iframe>
+          </noscript>
+          {/* <!-- End Google Tag Manager (noscript) --> */}
           <Main />
           <NextScript />
+          <inlay-oracle-chat-embedded
+            class="inlay"
+            id="chatInlay"
+            site-url="fptsuae.widget.custhelp.com"
+            inlay-hidden="true"
+          />
+          <script
+            id="oit-loader"
+            src="https://tila-en.custhelp.com/s/oit/latest/common/v0/libs/oit/loader.js"
+            data-oit-theme-url="https://tila-en.custhelp.com/s/oit/latest/themes/oracle/midnight/web/theme.css"
+            data-oit-increment="true"
+            data-oit-group=""
+            async
+          />
+          <script type="application/ld+json" src="/static/scripts/seoScript.js"/>
         </body>
       </html>
-    )
+    );
   }
 }

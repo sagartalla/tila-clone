@@ -2,12 +2,14 @@ import _ from 'lodash';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
 import { toast } from 'react-toastify';
-
+import ToastContent from '../../components/common/ToastContent'
 import constants from '../helper/constants';
+import { languageDefinations } from '../../utils/lang/';
 
+const { API_TEXT } = languageDefinations();
 const cookies = new Cookies();
 
-const maxEle = 5;
+const maxEle = 4;
 
 const itemFormat = {
   categoryId: '',
@@ -27,12 +29,17 @@ const getCompareCount = () => {
 };
 
 const addToCompare = ({
-  itemtype, productId, src, displayName, categoryId,
+  itemtype, productId, src, displayName, categoryId, catalogObj,
 }) => {
   const compareItems = getItem();
   const index = _.findIndex(compareItems.products, item => item.productId === productId);
   if (index > -1) {
-    toast.error('Same item cannot be added to compare');
+    toast(
+      <ToastContent
+        msg={API_TEXT.SAME_ITEM_CANNOT_BE_ADDED_TO_COMPARE}
+        msgType='error'
+      />
+    )
     return {
       count: compareItems.products.length,
       compareItems,
@@ -45,30 +52,51 @@ const addToCompare = ({
       productId,
       src,
       displayName,
+      catalogObj,
     }],
   };
   if (compareItems.products.length) {
     if (compareItems.itemtype === itemtype && compareItems.products.length < maxEle) {
       setItem(product);
-      toast.success('Item added to compare');
+      toast(
+        <ToastContent
+          msg={API_TEXT.ITEM_ADDED_TO_COMPARE}
+          msgType='success'
+        />
+      )
       return {
         count: product.products.length,
         compareItems: product,
       };
     } else if (compareItems.products.length >= maxEle) {
-      toast.error('Only five items can be compared at a time');
+      toast(
+        <ToastContent
+          msg={API_TEXT.ONLY_FIVE_ITEMS_CAN_BE_COMPARED}
+          msgType='error'
+        />
+      )
       return {
         count: maxEle,
         compareItems,
       };
     }
-    toast.error('Only similar item types can be compared');
+    toast(
+      <ToastContent
+        msg={API_TEXT.ONLY_SIMILAR_ITEM_TYPES_CAN_BE_COMPARED}
+        msgType='error'
+      />
+    )
     return {
       count: compareItems.products.length,
       compareItems,
     };
   }
-  toast.success('Item added to compare');
+  toast(
+    <ToastContent
+      msg={API_TEXT.ITEM_ADDED_TO_COMPARE}
+      msgType='success'
+    />
+  )
   setItem(product);
   return {
     count: 1,
@@ -115,7 +143,12 @@ const removeCompareData = (id) => {
   if (compareItems.products.length === 0) {
     compareItems = itemFormat;
   }
-  toast.success('Item removed from compare');
+  toast(
+    <ToastContent
+      msg={API_TEXT.ITEM_REMOVED_FROM_COMPARE}
+      msgType='success'
+    />
+  )
   setItem(compareItems);
   return {
     count: compareItems.length,
@@ -157,12 +190,34 @@ const getProducts = (brand = '') => {
 
   return axios.get(`${constants.SEARCH_API_URL}/search?query=${escape(JSON.stringify(options))}`);
 };
+const track = (params) => {
+  window.appEventData.push({
+    event: params.eventName,
+    product: [
+      {
+        productInfo: {
+          productID: params.params && params.params.productId,
+        },
+      },
+    ],
+  });
+};
+
+const removeAllCompareItems = () => {
+  setItem(itemFormat);
+  return {
+    count: 0,
+    compareItems: itemFormat,
+  };
+};
 
 export default {
   addToCompare,
   getCompareItemsData,
   getCompareCount,
   removeCompareData,
+  removeAllCompareItems,
   getBrands,
   getProducts,
+  track,
 };

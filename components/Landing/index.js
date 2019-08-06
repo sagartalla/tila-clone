@@ -1,5 +1,4 @@
 import React, { Component,Fragment } from 'react';
-import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { Grid, Row, Col } from 'react-bootstrap';
 import getConfig from 'next/config';
@@ -9,16 +8,23 @@ import NoSSR from 'react-no-ssr';
 import HeaderBar from '../HeaderBar';
 import FooterBar from '../Footer';
 import RemoteComponent from '../common/RemoteComponent';
-
-
 import SVGComponent from '../common/SVGComponet';
-import { mergeCss } from '../../utils/cssUtil';
 
-const config = getConfig()
+import lang from '../../utils/language';
+
+import main_en from '../../layout/main/main_en.styl';
+import main_ar from '../../layout/main/main_ar.styl';
+import styles_en from './index_en.styl';
+import styles_ar from './index_ar.styl';
+import Theme from '../helpers/context/theme';
+import LoadingBar from '../common/Loader/skeletonLoader';
+import LoaderBarContext from '../helpers/context/loaderBarContext';
+const allStyles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+
+const config = getConfig();
 const isLocal = config.publicRuntimeConfig.isLocal;
-
-const allStyles = mergeCss('components/Landing/index');
-
+const env = config.publicRuntimeConfig.env
+const random = Math.floor(Math.random()*100);
 
 /*
 import Fashion from './includes/Fashion';
@@ -41,24 +47,80 @@ RemoteComponent.loadRemoteComponents(remoteComponents)
   console.log("Something went wrong: " + err);
 });
 */
+const getURl = (page) => {
+  switch (page) {
+    case 'Fashion':
+        switch(env) {
+          case 'stage':
+          case 'staging':
+          case 'preprod':
+          default:
+              return {
+                JS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/fashion/preprod/index.js?r=' + random,
+                CSS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/fashion/preprod/style.css?r=' + random,
+              };
+        }
+        break;
+    case 'Electronics':
+        switch(env) {
+          case 'stage':
+          case 'staging':
+          case 'preprod':
+          default:
+              return {
+                JS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/electronics/preprod/index.js?r=' + random,
+                CSS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/electronics/preprod/style.css?r=' + random,
+              };
+        }
+        break;
+    case 'Lifestyle':
+        switch(env) {
+          case 'stage':
+          case 'staging':
+          case 'preprod':
+          default:
+              return {
+                JS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/lifestyle/preprod/index.js?r=' + random,
+                CSS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/lifestyle/preprod/style.css?r=' + random,
+              };
+        }
+        break;
+    case 'HomePage':
+        switch(env) {
+          case 'stage':
+          case 'staging':
+          case 'preprod':
+          default:
+              return {
+                JS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/homepage/preprod/index.js?r=' + random,
+                CSS: 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/homepage/preprod/style.css?r=' + random,
+              };
+        }
+
+        break;
+  }
+}
+
 let remoteComponents = {
   fashion: {
     name: 'Fashion',
-    src: isLocal ? 'http://localhost:8000/Fashion/index.js' : 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/fashion/index.js',
-    styles: isLocal ? 'http://localhost:8000/Fashion/style.css' : 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/fashion/style.css',
+    src: isLocal ? 'http://localhost:8000/Fashion/preprod/index.js' : getURl('Fashion').JS,
+    styles: isLocal ? 'http://localhost:8000/Fashion/preprod/style.css' : getURl('Fashion').CSS,
     context: {
       React,
       Grid,
       Row,
       Col,
+      Slider,
       SVGComponent,
       styles: allStyles,
+      lang
     },
   },
   electronics: {
     name: 'Electronics',
-    src: isLocal ? 'http://localhost:8000/Electronics/index.js' : 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/electronics/index.js',
-    styles: isLocal ? 'http://localhost:8000/Electronics/style.css' : 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/electronics/style.css',
+    src: isLocal ? 'http://localhost:8000/Electronics/preprod/index.js' : getURl('Electronics').JS,
+    styles: isLocal ? 'http://localhost:8000/Electronics/preprod/style.css' : getURl('Electronics').CSS,
     context: {
       React,
       Grid,
@@ -66,24 +128,26 @@ let remoteComponents = {
       Col,
       SVGComponent,
       styles: allStyles,
+      lang
     },
   },
   lifestyle: {
     name: 'Lifestyle',
-    src: isLocal ? 'http://localhost:8000/Lifestyle/index.js' : 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/lifestyle/index.js',
-    styles: isLocal ? 'http://localhost:8000/Lifestyle/style.css' : 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/lifestyle/style.css',
+    src: isLocal ? 'http://localhost:8000/Lifestyle/preprod/index.js' : getURl('Lifestyle').JS,
+    styles: isLocal ? 'http://localhost:8000/Lifestyle/preprod/style.css' : getURl('Lifestyle').CSS,
     context: {
       React,
       Grid,
       Col,
       SVGComponent,
       styles: allStyles,
+      lang
     },
   },
   homepage: {
     name: 'HomePage',
-    src: isLocal ? 'http://localhost:8000/homepage/index.js' : 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/homepage/index.js',
-    styles: isLocal ? 'http://localhost:8000/homepage/style.css' : 'https://s3.ap-south-1.amazonaws.com/dev-catalog-imgs/tila-static-pages/homepage/style.css',
+    src: isLocal ? 'http://localhost:8000/homepage/preprod/index.js' : getURl('HomePage').JS,
+    styles: isLocal ? 'http://localhost:8000/homepage/preprod/style.css' : getURl('HomePage').CSS,
     context: {
       React,
       Grid,
@@ -93,6 +157,7 @@ let remoteComponents = {
       NoSSR,
       SVGComponent,
       styles: allStyles,
+      lang
     },
   },
 };
@@ -102,8 +167,8 @@ class Landing extends Component {
     super(props);
     this.state = {};
   }
-  componentWillReceiveProps(newProps) {
-    const { category } = newProps.query;
+  componentDidMount() {
+    const { category } = this.props.query;
     RemoteComponent.loadRemoteComponents([remoteComponents[category || 'homepage']])
       .then((children) => {
         this.setState({
@@ -116,15 +181,26 @@ class Landing extends Component {
   }
   render() {
     const { query } = this.props;
-    const { category } = query;
     return (
-      <Fragment>
-        <HeaderBar query={query} />
-        {
-          _.map(this.state.children, (child, index) => React.createElement(child.name, _.merge(child.props, {key: index})))
-        }
-        <FooterBar />
-      </Fragment>
+      <Theme.Provider value={query && query.category && query.category.toLowerCase()}>
+        <LoaderBarContext.Consumer>
+          {
+            (context) => {
+              return (
+              <Fragment>
+                <HeaderBar query={query} />
+                <LoadingBar loadComponent={context.loadComponent}
+                  pathname={context.pathname}>
+                  {
+                    _.map(this.state.children, (child, index) => React.createElement(child.name, _.merge(child.props, {key: index })))
+                  }
+                  <FooterBar />
+                </LoadingBar>
+              </Fragment>
+            )}
+          }
+        </LoaderBarContext.Consumer>
+      </Theme.Provider>
     );
   }
 }

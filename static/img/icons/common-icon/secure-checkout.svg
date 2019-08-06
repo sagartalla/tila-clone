@@ -1,18 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="22" height="26" viewBox="0 0 22 26">
-    <defs>
-        <filter id="a" width="106.4%" height="104%" x="-3.2%" y="-1.5%" filterUnits="objectBoundingBox">
-            <feOffset dy="3" in="SourceAlpha" result="shadowOffsetOuter1"/>
-            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="1.5"/>
-            <feColorMatrix in="shadowBlurOuter1" result="shadowMatrixOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.0738507699 0"/>
-            <feMerge>
-                <feMergeNode in="shadowMatrixOuter1"/>
-                <feMergeNode in="SourceGraphic"/>
-            </feMerge>
-        </filter>
-    </defs>
-    <g fill="#FFF" fill-rule="nonzero" filter="url(#a)" transform="translate(-73 -156)">
-        <path stroke="#FFF" d="M88.255 174.795h-8.51a2.612 2.612 0 0 1-2.609-2.609v-6a2.612 2.612 0 0 1 2.609-2.608h8.51a2.612 2.612 0 0 1 2.609 2.609v6a2.612 2.612 0 0 1-2.609 2.608zm-8.51-10.467a1.861 1.861 0 0 0-1.859 1.859v6c0 1.025.834 1.859 1.859 1.859h8.51a1.861 1.861 0 0 0 1.859-1.86v-6a1.861 1.861 0 0 0-1.859-1.858h-8.51z"/>
-        <path d="M83.137 170.935l-1.825-1.825a.375.375 0 1 1 .53-.53l1.295 1.295 3.02-3.021a.375.375 0 0 1 .53.53l-3.55 3.551z"/>
-        <path stroke="#FFF" d="M88.738 163.61h-.65v-2.133A4.093 4.093 0 0 0 84 157.39a4.093 4.093 0 0 0-4.089 4.088v2.134h-.649v-2.134A4.743 4.743 0 0 1 84 156.74a4.743 4.743 0 0 1 4.738 4.737v2.134z"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="20" viewBox="0 0 16 20">
+    <g fill="#FFF" fill-rule="nonzero">
+        <path stroke="#FFF" d="M12.255 18.795h-8.51a2.612 2.612 0 0 1-2.609-2.609v-6a2.612 2.612 0 0 1 2.609-2.608h8.51a2.612 2.612 0 0 1 2.609 2.609v6a2.612 2.612 0 0 1-2.609 2.608zM3.745 8.328a1.861 1.861 0 0 0-1.859 1.859v6c0 1.024.834 1.858 1.859 1.858h8.51a1.861 1.861 0 0 0 1.859-1.859v-6a1.861 1.861 0 0 0-1.859-1.858h-8.51z"/>
+        <path d="M7.137 14.935L5.312 13.11a.375.375 0 1 1 .53-.53l1.295 1.295 3.02-3.021a.375.375 0 0 1 .53.53l-3.55 3.552z"/>
+        <path stroke="#FFF" d="M12.738 7.61h-.65V5.478A4.093 4.093 0 0 0 8 1.39a4.093 4.093 0 0 0-4.089 4.088v2.134h-.649V5.477A4.743 4.743 0 0 1 8 .74a4.743 4.743 0 0 1 4.738 4.737v2.134z"/>
     </g>
 </svg>

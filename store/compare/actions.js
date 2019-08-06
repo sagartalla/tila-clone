@@ -8,13 +8,20 @@ const actions = {
   GET_BRANDS: 'GET_BRANDS',
   GET_PRODUCTS_TO_COMPARE: 'GET_PRODUCTS_TO_COMPARE',
   ADD_PRODUCT_TO_COMPARE: 'ADD_PRODUCT_TO_COMPARE',
+  COMPARE_TRACK: 'COMPARE_TRACK',
+  REMOVE_ALL_ITEMS: 'REMOVE_ALL_ITEMS',
 };
 
 const actionCreators = {
-  addToCompare: params => ({
-    type: actions.CRUD_COMPARE,
-    payload: api.addToCompare(params),
-  }),
+  addToCompare: params => (dispatch) => {
+    dispatch({
+      type: actions.CRUD_COMPARE,
+      payload: api.addToCompare(params),
+    });
+    dispatch(actionCreators.track({
+      eventName: 'AddTo Compare', params,
+    }));
+  },
   getCompareCount: () => ({
     type: actions.CRUD_COMPARE,
     payload: api.getCompareCount(),
@@ -27,10 +34,17 @@ const actionCreators = {
     type: actions.GET_PRODUCTS_TO_COMPARE,
     payload: api.getProducts(param),
   }),
-  getCompareItemsData: (product) => ({
-    type: actions.GET_COMPARE_ITEM_DATA,
-    payload: api.getCompareItemsData(product),
-  }),
+  getCompareItemsData: product => (dispatch) => {
+    dispatch({
+      type: actions.GET_COMPARE_ITEM_DATA,
+      payload: api.getCompareItemsData(product),
+    });
+    if (product) {
+      dispatch(actionCreators.track({
+        eventName: 'AddTo Compare', params: product,
+      }));
+    }
+  },
   removeCompareData: id => ({
     type: actions.CRUD_COMPARE,
     payload: api.removeCompareData(id),
@@ -39,6 +53,18 @@ const actionCreators = {
     type: actions.REMOVE_COMPARE_ITEM,
     payload: api.removeCompareData(id),
   }),
+  removeAll: () => ({
+    type: actions.REMOVE_ALL_ITEMS,
+    payload: api.removeAllCompareItems(),
+  }),
+  track: params => (dispatch, getState) => {
+    const state = getState();
+    params.postResult = state.cartReducer.data.items;
+    return {
+      type: actions.COMPARE_TRACK,
+      payload: api.track(params),
+    };
+  },
 };
 
 export { actions, actionCreators };

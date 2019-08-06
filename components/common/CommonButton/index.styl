@@ -1,0 +1,49 @@
+@import '../../../layout/main/executables.styl';
+
+
+.button-styl
+   background-color tila-blk
+   color white
+   display flex
+   justify-content center
+   align-items center
+   border 1px solid tila-blk
+   padding 7px
+
+.button-hoverstyl
+    display flex
+    justify-content center
+    align-items center
+    border 1px solid tila-blk
+    padding 7px
+    color white
+
+ .loader-div
+          width 20px
+          height 20px
+          .loader-styl
+            svg
+              animation rotate 1.4s linear infinite;
+              -webkit-animation rotate 1.4s linear infinite;
+              -moz-animation rotate 1.4s linear infinite;
+              @keyframes rotate {
+                to {
+                  transform rotate(360deg);
+                }
+              }
+
+              @-webkit-keyframes rotate {
+                to {
+                  -webkit-transform rotate(360deg);
+                }
+              }
+
+              @-moz-keyframes rotate {
+                to {
+                  transform rotate(360deg);
+                }
+              }
+
+.image-icon
+  width  14px
+  height 14px

@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from 'react';
-import Proptypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators, selectors } from '../../../store/auth';
@@ -13,12 +12,15 @@ class AuthWrapper extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {  
-    if(!nextProps.isLoginShown){
-      this.props.popupClosed && this.props.popupClosed();
-    } else {
-      this.props.popupOpened && this.props.popupOpened();
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.isLoginShown === this.props.isLoginShown) {
+      return;
     }
+    // if (!nextProps.isLoginShown) {
+    //   this.props.popupClosed && this.props.popupClosed();
+    // } else {   
+    //   this.props.popupOpened && this.props.popupOpened();
+    // }
   }
 
   render () {

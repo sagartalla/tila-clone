@@ -9,30 +9,32 @@ import { ORDER_ISSUE_STEPS as STEPS, ORDER_ISSUE_TYPES } from '../../constants';
 
 import { selectors, actionCreators } from '../../../../store/order';
 
-import { mergeCss } from '../../../../utils/cssUtil';
-const styles = mergeCss('components/Order/includes/OrderIssueWidget/orderIssue');
+import lang from '../../../../utils/language';
+
+import main_en from '../../../../layout/main/main_en.styl';
+import main_ar from '../../../../layout/main/main_ar.styl';
+import styles_en from './orderIssue_en.styl';
+import styles_ar from './orderIssue_ar.styl';
+
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const OrderIssueWidget = ({orderIssue, resetOrderIssue}) => {
-  const { step } = orderIssue;
+  const { step,issueType } = orderIssue;
 
   const getTitle = (step) => {
       const { issueType } = orderIssue;
       switch(step) {
         case STEPS.LIST: {
-          return `Choose an order to ${issueType ? 'Cancel': 'Return/Exchange'}`;
-          break;
+          return `Choose an order to ${issueType ? 'cancel': 'Return/Exchange'}`;
         }
         case STEPS.REASONS: {
           return 'Choose a reason';
-          break;
         }
         case STEPS.CANCEL_COMPLETE: {
           return 'Cancellation Status';
-          break;
         }
         case STEPS.CHOOSE_RETURN_EXCHANGE: {
           return 'Chose Return or Exchange';
-          break;
         }
       }
     }
@@ -44,7 +46,7 @@ const OrderIssueWidget = ({orderIssue, resetOrderIssue}) => {
   return (
     <div className={styles['order-issue-wrap']}>
     {
-      step
+      step && issueType === 'CANCEL'
       ?
       <div className={styles['back-drop']}>
         <div className={`${styles['widget-cont']} ${styles['box']} ${styles['p-0']} ${styles['middle']} ${styles['center']}`}>

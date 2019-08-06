@@ -1,13 +1,23 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
+import Cookies from 'universal-cookie';
 
 import SVGComponent from '../../../common/SVGComponet';
 import { languageDefinations } from '../../../../utils/lang/';
+import lang from '../../../../utils/language';
 
-import { mergeCss } from '../../../../utils/cssUtil';
-const styles = mergeCss('components/Cam/UserVault/uservault');
+import main_en from '../../../../layout/main/main_en.styl';
+import main_ar from '../../../../layout/main/main_ar.styl';
+import styles_en from '../uservault_en.styl';
+import styles_ar from '../uservault_ar.styl';
 
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+
+const cookies = new Cookies();
+
+const language = cookies.get('language') || 'en';
+const country = cookies.get('country') || 'SAU';
 class VaultBody extends Component {
 
   makeCardDefault(token) {
@@ -15,7 +25,9 @@ class VaultBody extends Component {
   }
 
   deleteCard(token) {
-    this.props.deleteCard(token);
+    let confirmCardDelete = confirm("Are you sure you want to delete this card?");
+    confirmCardDelete ?
+    this.props.deleteCard(token) : null;
   }
 
   paymentCardIcon(provider_type) {
@@ -31,8 +43,17 @@ class VaultBody extends Component {
 
   render() {
     const { VAULT_PAGE } = languageDefinations();
-    const { data, toggleAddCardBlock } = this.props;
-    return (
+    const { data } = this.props;
+    return (data.length === 0 ?
+      (
+        <div className={styles['no-vocher-icon']}>
+          <div className={`${styles['flex']} ${styles['no-wishlist-icon-inn']}`}>
+            <SVGComponent clsName={`${styles['no-cards-list-icon']}`} src="icons/common-icon/no-cars-vocher" />
+            <h4 className={`${styles['fs-26']} ${styles['t-c']} ${styles['pt-40']}`}>{VAULT_PAGE.NO_CART_LABEL}</h4>
+            <span className={`${styles['thick-gry-clr']} ${styles['pb-30']}`}>{VAULT_PAGE.NO_CARD_LABEL}</span>
+          </div>
+        </div>
+      ) :
       <div className={`${styles['vault-card-body']} ${styles['p-20-40']}`}>
         <h4 className={`${styles['pb-5']} ${styles['fontW300']} ${styles['lgt-blue']}`}>{VAULT_PAGE.MANAGE_SAVED_CARDS}</h4>
         <Row className={styles['mr-0']}>
@@ -47,7 +68,7 @@ class VaultBody extends Component {
                     </span>
                     <div className={`${styles['flex']} ${styles['flex-colum']} ${styles['vault-card-item-inn']}`}>
                       <span>{bank_name}</span>
-                      <span className={`${styles['pt-25']} ${styles['pb-25']} ${styles['fs-18']}`}>{masked_number.replace(/(.{4})/g, '$1 ')}</span>
+                      <span className={`${styles['pt-25']} ${styles['pb-25']} ${styles['fs-18']} ${styles['card-number']}`}>{masked_number.replace(/(.{4})/g, '$1 ')}</span>
                       <div className={`${styles['flx-space-bw']}`}>
                         <span className={`${styles['flex']} ${styles['flex-colum']}`}>
                           <span className={`${styles['fs-12']}`}>{VAULT_PAGE.NAME}: {holder_name}</span>
@@ -67,7 +88,7 @@ class VaultBody extends Component {
                         card.default ?
                           <div>
                             <label className={`${styles['fs-12']} ${styles['pr-5']}`}> {VAULT_PAGE.DEFAULT} </label>
-                            <input type="radio" className={`${styles['tickmark-radio']}`} name="make-default" checked="checked" onClick={this.makeCardDefault.bind(this, card_token)} />
+                            <input type="radio" className={styles['tickmark-radio']} name="make-default" defaultChecked="checked" onClick={this.makeCardDefault.bind(this, card_token)} />
                           </div>
                           :
                           <span>
@@ -83,7 +104,7 @@ class VaultBody extends Component {
             })
           }
 
-          {/* 
+          {/*
             **
             DON'T REMOVE THIS CODE - Add new card button. Enable this coded when we do PCD-IS
             **
@@ -102,7 +123,7 @@ class VaultBody extends Component {
                 </p>
               </div>
             </div>
-          </Col> 
+          </Col>
           */}
         </Row>
       </div>

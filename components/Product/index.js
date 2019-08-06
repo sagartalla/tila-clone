@@ -5,27 +5,39 @@ import { Grid, Row, Col, Tabs, Tab } from 'react-bootstrap';
 import NoSSR from 'react-no-ssr';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import { selectors } from '../../store/product';
+import { languageDefinations } from '../../utils/lang';
 import HeaderBar from '../HeaderBar/index';
-import Dispalay from './includes/Display';
+import Display from './includes/Display';
 import TitleInfo from './includes/TitleInfo';
 import Shipping from './includes/Shipping';
+import TilaCarePolicy from './includes/TilaCarePolciy'
 
 import AddToCart from './includes/AddToCart';
 import RecentView from './includes/RecentView';
-import Review from './includes/Reviews';
-import ReviewsTab from './includes/ReviewTab';
 import ElectronicsTab from './includes/ElectronicsTab';
 import ProductDetails from './includes/ProductDetails';
-import ReviewRatingList from '../RatingReviews/List';
+import { actionCreators as userVaultActionCreators, selectors as userVaultSelectors } from '../../store/cam/userVault';
 import FooterBar from '../Footer/index';
 import Theme from '../helpers/context/theme';
 import CompareWidget from '../common/CompareWidget';
-import { actionCreators as wishlistActionCreators } from '../../store/cam/wishlist';
+import { actionCreators, selectors } from '../../store/product';
+import { actionCreators as wishlistActionCreators, selectors as wishListSelectors } from '../../store/cam/wishlist';
+import { actionCreators as addressActionCreators, selectors as addressSelectors } from '../../store/cam/address';
+import { actionCreators as paymentActionCreators } from '../../store/payments';
+import Button from '../common/CommonButton';
+import LoadingBar from '../common/Loader/skeletonLoader';
+import lang from '../../utils/language';
 
-import { mergeCss } from '../../utils/cssUtil';
+import main_en from '../../layout/main/main_en.styl';
+import main_ar from '../../layout/main/main_ar.styl';
+import styles_en from './product_en.styl';
+import styles_ar from './product_ar.styl';
 
-const styles = mergeCss('components/Product/product');
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+
+const { PDP_PAGE } = languageDefinations();
+let btnY = null;
+let skipScroll = false;
 
 const getProductComponent = (isPreview, taskCode) => {
   class Product extends Component {
@@ -39,53 +51,71 @@ const getProductComponent = (isPreview, taskCode) => {
         recentlyViewed: [],
         notifyEmail: null,
         emailErr: '',
+        tilaPolicy:[],
+        choosenPolicyData:props.selectedTilaPolicy,
+        // positionStyle: 'fixed-style'
       };
       this.detailsRef = React.createRef();
       this.bottomRef = React.createRef();
       this.onChangeField = this.onChangeField.bind(this);
       this.handleScroll = this.handleScroll.bind(this);
       this.notify = this.notify.bind(this);
+      this.setTilaPolicy = this.setTilaPolicy.bind(this)
     }
 
     componentDidMount() {
       if (window.localStorage && !isPreview) {
         const { productData } = this.props;
         const {
-          offerInfo, titleInfo, imgUrls, shippingInfo,
+          offerInfo, titleInfo, imgUrls,
         } = productData;
-        digitalData.page.pageInfo.pageName = titleInfo.title;
+        digitalData.page.pageInfo.pageName = titleInfo && titleInfo.title && titleInfo.title.attribute_values[0] && titleInfo.title.attribute_values[0].value;
         digitalData.page.category = { primaryCategory: productData.categoryType };
-        digitalData.page.pageInfo.breadCrumbs = productData.breadcrums.map(item => item.display_name_en);
-        if (offerInfo.price) {
-          const pr = offerInfo.price.split(' ');
+        digitalData.page.pageInfo.breadCrumbs = productData.breadcrums ? productData.breadcrums.map(item => item.display_name_en) : [];
+        this.props.track({
+          eventName: 'Product Viewed',
+          ProductData: productData,
+        });
+        if (offerInfo.offerPricing) {
+          const pr = offerInfo && offerInfo.offerPricing && offerInfo.offerPricing.sellingPrice && offerInfo.offerPricing.sellingPrice.display_value;
+          const cd = offerInfo && offerInfo.offerPricing && offerInfo.offerPricing.sellingPrice && offerInfo.offerPricing.sellingPrice.currency_code;
           const recentData = localStorage.getItem('rv');
           const arr = recentData ? JSON.parse(recentData) : [];
-          const index = _.findIndex(arr, (o) => o.id == shippingInfo.listing_id);
-
+          const index = _.findIndex(arr, o => o.id == offerInfo.listingId);
 
           // if (index > -1 && arr.length <= 5) {
           //   arr = arr.slice(index, 1);
           // } else
-          if (arr.length == 5) {
+          if (arr.length === 15) {
             arr.pop();
           }
 
-          if (index == -1) {
+          if (index === -1) {
             arr.unshift({
-              nm: titleInfo.title,
-              im: imgUrls[0].url,
-              pr: pr[0],
-              cd: pr[1],
+              nm: titleInfo.title.attribute_values[0].value,
+              im: imgUrls && imgUrls[0].url,
+              pr,
+              cd,
               uri: location.href,
-              id: shippingInfo.listing_id,
+              id: offerInfo.listingId,
             });
             localStorage.setItem('rv', JSON.stringify(arr));
           }
           this.setState({ recentlyViewed: arr });
         }
       }
-
+      this.props.getCardResults();
       window.addEventListener('scroll', this.handleScroll);
+      // setTimeout(() => {
+      //   debugger;
+      //   const shippingContainer = document.getElementById('shipping-cont');
+      //   const buttonsCont = document.getElementById('cart-btn-cont');
+      //   const [{height: shippingHeight, top: shippingY}, {height: btnHeight}] = [shippingContainer.getBoundingClientRect(), buttonsCont.getBoundingClientRect()];
+      //   skipScroll = (shippingHeight + shippingY) < (window.innerHeight - btnHeight);
+      //   this.setState({
+      //     defaultPosition: skipScroll ? 'absolute-style' : 'fixed-style'
+      //   });
+      // });
     }
 
     componentWillUnmount() {
@@ -97,12 +127,32 @@ const getProductComponent = (isPreview, taskCode) => {
         notifyEmail: target.value,
       });
     }
+    setTilaPolicy(data) {
+      this.setState({
+        choosenPolicyData:data,
+        tilaPolicy:Object.values(data)
+      }, () => this.props.setTilaPolicy(data))
+    }
+    handleScroll(e) {
+      if(skipScroll) {
+        return;
+      }
+      const shippingContainer = document.getElementById('shipping-cont');
+      const buttonsCont = document.getElementById('cart-btn-cont');
+      const [{height: shippingHeight, top: shippingY}] = [shippingContainer.getBoundingClientRect()];
+      btnY = btnY || document.getElementById('cart-btn-cont').getBoundingClientRect().top;
+      this.setState({
+        positionStyle: (shippingHeight + shippingY) < btnY ? 'absolute-style' : 'fixed-style',
+        positionTop: btnY
+      });
+    }
 
     notify() {
-      const { productData, userDetails, notifyMe } = this.props;
+      const { productData, userDetails, notifyMe, variantId } = this.props;
       let { emailErr, notifyEmail } = this.state;
       const params = {
         product_id: productData.product_id,
+        variant_id: variantId,
       };
       const emailReg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       if (!userDetails.isLoggedIn) {
@@ -112,7 +162,7 @@ const getProductComponent = (isPreview, taskCode) => {
           emailErr = '';
           notifyEmail = '';
         } else {
-          emailErr = 'Enter Valid EmailID';
+          emailErr = PDP_PAGE.ENTER_VALID_EMAIL;
         }
       } else {
         notifyMe(params);
@@ -125,9 +175,10 @@ const getProductComponent = (isPreview, taskCode) => {
 
     handleScroll(event) {
       const scrollTop = event.currentTarget.pageYOffset;
-      const detailsRect = this.detailsRef.current.getBoundingClientRect();
-      const bottomRefRect = this.bottomRef.current.getBoundingClientRect();
-      if (bottomRefRect.top <= window.innerHeight && this.state.stickyElements.details !== 'stateBottom') {
+      const detailsRect = this.detailsRef.current && this.detailsRef.current.getBoundingClientRect() || {};
+      const bottomRefRect = this.bottomRef.current && this.bottomRef.current.getBoundingClientRect() || {};
+      const { isSearchPreview } = this.props;
+      if (!isSearchPreview && bottomRefRect.top <= window.innerHeight && this.state.stickyElements.details !== 'stateBottom') {
         this.setState({
           stickyElements: {
             ...this.state.stickyElements,
@@ -136,7 +187,7 @@ const getProductComponent = (isPreview, taskCode) => {
         });
         return;
       }
-      if (bottomRefRect.top > window.innerHeight && detailsRect.top <= 61 && this.state.stickyElements.details !== 'stateMiddle') {
+      if (!isSearchPreview && bottomRefRect.top > window.innerHeight && detailsRect.top <= 108 && this.state.stickyElements.details !== 'stateMiddle') {
         this.setState({
           stickyElements: {
             ...this.state.stickyElements,
@@ -145,7 +196,7 @@ const getProductComponent = (isPreview, taskCode) => {
         });
         return;
       }
-      if (detailsRect.top > 61) {
+      if (detailsRect.top > 108) {
         this.setState({
           stickyElements: {
             ...this.state.stickyElements,
@@ -154,20 +205,26 @@ const getProductComponent = (isPreview, taskCode) => {
         });
       }
     }
-
+/* eslint-disable */
     render() {
-      const { productData, userDetails } = this.props;
+      const { productData, userDetails, showLoading, query,variantId,productId, isSearchPreview, savedCardsData,loaderProps,selectedTilaPolicy } = this.props;
       const {
-        catalog, titleInfo, keyfeatures, extraOffers, imgUrls, offerInfo, shippingInfo, returnInfo, details, productDescription, catalogObj, categoryType = '', warranty, breadcrums
+        catalog, titleInfo, keyfeatures, extraOffers, imgUrls, offerInfo, shippingInfo, isWishlisted, returnInfo,
+        details, productDescription, catalogObj, categoryType = '', warranty, breadcrums, product_id, wishlistId,
+        tila_care_policy,
       } = productData;
+      const { offerPricing } = offerInfo;
       const {
-        stickyElements, recentlyViewed, notifyEmail, emailErr,
+        stickyElements, recentlyViewed, notifyEmail, emailErr, positionStyle, positionTop, defaultPosition,tilaPolicy
       } = this.state;
+      const { loadComponent, pathname } = loaderProps;
       return (
         <Theme.Provider value={categoryType.toLowerCase()}>
           <div className={`${styles['pdp-wrap']} ${categoryType.toLowerCase()} ${styles[categoryType.toLowerCase()]}`}>
             {
-              isPreview ? null : <HeaderBar />
+              isPreview || isSearchPreview ? null :
+                <HeaderBar
+                />
             }
             <LoadingBar loadComponent={loadComponent} pathname={pathname}>
               <div className={`${styles.relative}`}>
@@ -260,59 +317,37 @@ const getProductComponent = (isPreview, taskCode) => {
                           } */}
                         </div>
                       </div>
-                      <div className={`${styles['ipad-details']} ${styles['bdr-lt']} ${styles['ipad-pl-15']}`}>
-                        {
-                          isPreview ? null : <Shipping shippingInfo={shippingInfo} offerInfo={offerInfo} warranty={warranty} />
-                        }
-                        {
-                          isPreview ? null : <AddToCart offerInfo={offerInfo} />
-                        }
-                        {
-                          (offerInfo.stockError || offerInfo.availabilityError) &&
-                          <div className={`${styles['flx-space-bw']} ${styles['align-baseline']}`}>
-                            {!userDetails.isLoggedIn &&
-                            <div className={`${styles['mb-0']} ${styles['fp-input']} ${styles['pb-10']}`}>
-                              <input onChange={this.onChangeField} name="notify" type="text" value={notifyEmail} required />
-                              <label>GetNotified</label>
-                              {emailErr &&
-                                <span className={styles['error-msg']}>{emailErr}</span>
-                              }
-                            </div>}
-                            <a className={`${styles['flex-center']} ${styles.notify_me_btn}`} onClick={this.notify}>
-                              <span className={`${styles['p-10-40']} ${styles['fs-20']}`}>Notify Me</span>
-                            </a>
-                          </div>
-                        }
-                      </div>
-                    </div>
-
-                  </Col>
-                </Row>
-              </div>
-              <div className={styles['bg-white']}>
-                <Grid>
-                  <Row>
-                    <Col md={8}>
-                      {
-                        isPreview ? null : <NoSSR> <RecentView recentlyViewed={recentlyViewed} shippingInfo={shippingInfo} /> </NoSSR>
-                      }
-                    </Col>
-                    {/* <Col md={8}>
-                    {
-                      isPreview ? null : <ReviewsTab />
-                    }
-                    </Col> */}
-                    <Col md={8}>
-                      <ElectronicsTab catalog={catalog} catalogObj={catalogObj} productDescription={productDescription} />
                     </Col>
                   </Row>
-                </Grid>
+                </div>
+                {
+                  isSearchPreview ? null :
+                  <div className={`${styles['bg-white']} ${styles['mt-30']}`}>
+                    <Grid>
+                      <Row>
+                        <Col md={8}>
+                          {
+                            isPreview ? null : <NoSSR> <RecentView recentlyViewed={recentlyViewed} shippingInfo={shippingInfo} /> </NoSSR>
+                          }
+                        </Col>
+                        {/* <Col md={8}>
+                        {
+                          isPreview ? null : <ReviewsTab />
+                        }
+                      </Col> */}
+                      <Col md={8}>
+                        <ElectronicsTab titleInfo={titleInfo} isPreview={isPreview} catalog={catalog} catalogObj={catalogObj} productDescription={productDescription} />
+                      </Col>
+                    </Row>
+                  </Grid>
+                </div>
+              }
+                <div className={styles['pdp-bottom-ref']} ref={this.bottomRef} />
               </div>
-              <div className={styles['pdp-bottom-ref']} ref={this.bottomRef} />
-            </div>
+            </LoadingBar>
             <div className={`${styles['border-b']} ${styles['border-t']} ${styles['pb-30']} ${styles['pt-30']}`}>
               {
-                isPreview ? null : <FooterBar />
+                isPreview || isSearchPreview ? null : <FooterBar />
               }
             </div>
           </div>
@@ -325,19 +360,32 @@ const getProductComponent = (isPreview, taskCode) => {
   const mapStateToProps = store => ({
     productData: taskCode ? selectors.getPreview(store) : selectors.getProduct(store),
     userDetails: store.authReducer.data,
+    showLoading: wishListSelectors.getNotifyLoading(store),
+    selectedAddress: addressSelectors.getSelectedAddress(store),
+    savedCardsData: userVaultSelectors.getCardResults(store),
+    selectedTilaPolicy:selectors.getTilaPolicy(store),
   });
 
   const mapDispatchToProps = dispatch =>
     bindActionCreators(
       {
         notifyMe: wishlistActionCreators.notifyMe,
+        track: actionCreators.track,
+        getShippingAddressResults: addressActionCreators.getShippingAddressResults,
+        createOrder: paymentActionCreators.createOrder,
+        getCardResults: userVaultActionCreators.getCardResults,
+        setTilaPolicy:actionCreators.setTilaPolicy,
       },
       dispatch,
     );
 
   Product.propTypes = {
     productData: PropTypes.object.isRequired,
+    isSearchPreview: PropTypes.bool
   };
+  Product.defaultProps = {
+    isSearchPreview:false
+  }
 
   return connect(mapStateToProps, mapDispatchToProps)(Product);
 };

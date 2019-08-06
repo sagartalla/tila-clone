@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { mergeCss } from '../../../../utils/cssUtil';
+import { languageDefinations } from '../../../../utils/lang/';
 import Slider from '../../../common/slider';
 
-const styles = mergeCss('components/Product/product');
+import lang from '../../../../utils/language';
+
+import main_en from '../../../../layout/main/main_en.styl';
+import main_ar from '../../../../layout/main/main_ar.styl';
+import styles_en from '../../product_en.styl';
+import styles_ar from '../../product_ar.styl';
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+
+const { FOOTER_PAGE } = languageDefinations();
 
 class SizeChart extends Component {
   constructor(props) {
@@ -23,25 +31,28 @@ class SizeChart extends Component {
   }
 
   openSlider = () => {
+    document.getElementsByTagName('BODY')[0].style.overflow = 'hidden';
     this.setState({
       showSlider: true,
     });
   }
 
   closeSlider = () => {
+    document.getElementsByTagName('BODY')[0].style.overflow = 'auto';
     this.setState({
       showSlider: false,
     });
   }
+
   render() {
     const { productInfo } = this.props;
     const { showSlider } = this.state;
     return (
-      <div className={`${styles['pt-10']} ${styles['pb-10']} ${styles['pr-15']}`}>
+      <div>
         <div className={`${styles['flex-center']}`}>
           {productInfo.sizeChart.showSizeChart &&
-          <div>
-            <span>Try our&nbsp;</span><span className={`${styles['lgt-blue']} ${styles.pointer}`} onClick={this.openSlider}>Size Chart</span>
+          <div className={`${styles['pt-10']} ${styles['pb-10']} ${styles['pr-15']}`}>
+            <span>Try our&nbsp;</span><span className={`${styles['lgt-blue']} ${styles.pointer}`} onClick={this.openSlider}>{FOOTER_PAGE.SIZE_CHART}</span>
           </div>
         }
         </div>
@@ -49,13 +60,14 @@ class SizeChart extends Component {
           <Slider
             closeSlider={this.closeSlider}
             isOpen={showSlider}
+            width="580px"
             label={
               <div className={`${styles['black-color']}`}>
-                {`${productInfo.sizeChart.sizeChartImgName}` + ' Size Guide'}
+                {`${productInfo.sizeChart.sizeChartImgName}` + ' ' + FOOTER_PAGE.SIZE_GUIDE}
               </div>}
           >
             <div className={`${styles['size-chart-image']}`}>
-              <img src={this.imageUrl[productInfo.sizeChart.sizeChartImgName]} alt="image" />
+              <img src={this.imageUrl[productInfo.sizeChart.sizeChartImgName]} alt="image" style={{ width: '100%'}}/>
             </div>
           </Slider>
         }

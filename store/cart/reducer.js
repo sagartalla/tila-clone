@@ -3,7 +3,7 @@ import { actions } from './actions';
 
 const initialState = {
   ui: {
-    loading: false,
+    loading: true,
     btnLoading: false,
   },
   data: {
@@ -12,6 +12,7 @@ const initialState = {
     cartButtonLoaders: {},
   },
   error: '',
+  editDetails: true
 };
 
 const cartReducer = typeToReducer({
@@ -41,7 +42,8 @@ const cartReducer = typeToReducer({
         btnLoading: true,
       },
     }),
-    FULFILLED: (state, action) => Object.assign({}, state, {
+    FULFILLED: (state, action) => {
+      return Object.assign({}, state, {
       ...state,
       data: {
         ...state.data,
@@ -49,15 +51,15 @@ const cartReducer = typeToReducer({
       },
       ui: {
         loading: false,
-        btnLoading: true,
+        btnLoading: false,
       },
-    }),
+    })},
     REJECTED: (state, action) => Object.assign({}, state, {
       ...state,
       error: action.payload.response ? action.payload.response.data.message : action.payload.message,
       ui: {
         loading: false,
-        btnLoading: true,
+        btnLoading: false,
       },
     }),
   },
@@ -82,6 +84,11 @@ const cartReducer = typeToReducer({
         }
       });
     },
+  },
+  [actions.GET_CART_EDIT_DETAILS]: (state,action) => {
+    return {
+      ...state, editDetails:action.payload
+    }
   },
   [actions.CART_ITEM_COUNT]: {
     PENDING: state => Object.assign({}, state, {

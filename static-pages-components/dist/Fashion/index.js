@@ -63,12 +63,12 @@ const Fashion = () => React.createElement(
               { className: `${styles['flex']} ${styles['flex-colum']}` },
               React.createElement(
                 'span',
-                { className: `lobster-family ${styles['fs-24']}` },
-                'Mens Shoes'
+                { className: `${styles['fs-20']} ${styles['black-color']}` },
+                'Men\'s Shoes'
               ),
               React.createElement(
                 'span',
-                { className: styles['fs-12'] },
+                { className: `${styles['fs-12']} ${styles['black-color']} ${styles.fontW300}` },
                 'They lift you physically & emotionally.'
               ),
               React.createElement(
@@ -76,7 +76,7 @@ const Fashion = () => React.createElement(
                 { className: `${styles['pt-25']} shop-now-btn` },
                 React.createElement(
                   'a',
-                  { className: `${styles['fs-12']} ${styles['fontW600']} ${styles['border-radius4']}` },
+                  { className: `${styles['fs-12']} ${styles.fontW600} ${styles['border-bt-left-radius']}` },
                   'Buy NOW'
                 )
               )
@@ -107,12 +107,12 @@ const Fashion = () => React.createElement(
               { className: `${styles['flex']} ${styles['flex-colum']}` },
               React.createElement(
                 'span',
-                { className: `lobster-family ${styles['fs-24']}` },
+                { className: `${styles['fs-20']} ${styles['black-color']}` },
                 'Women\u2019s Dress'
               ),
               React.createElement(
                 'span',
-                { className: styles['fs-12'] },
+                { className: `${styles['fs-12']} ${styles['black-color']} ${styles.fontW300}` },
                 'When in doubt, wear red.'
               ),
               React.createElement(
@@ -120,7 +120,7 @@ const Fashion = () => React.createElement(
                 { className: `${styles['pt-25']} shop-now-btn` },
                 React.createElement(
                   'a',
-                  { className: `${styles['fs-12']} ${styles['fontW600']} ${styles['border-radius4']}` },
+                  { className: `${styles['fs-12']} ${styles.fontW600} ${styles['border-bt-left-radius']}` },
                   'Buy NOW'
                 )
               )
@@ -151,12 +151,12 @@ const Fashion = () => React.createElement(
               { className: `${styles['flex']} ${styles['flex-colum']}` },
               React.createElement(
                 'span',
-                { className: `lobster-family ${styles['fs-24']}` },
+                { className: `${styles['fs-20']} ${styles['black-color']}` },
                 'Fitness & Sports'
               ),
               React.createElement(
                 'span',
-                { className: styles['fs-12'] },
+                { className: `${styles['fs-12']} ${styles['black-color']} ${styles.fontW300}` },
                 'Take care of your body.'
               ),
               React.createElement(
@@ -164,7 +164,7 @@ const Fashion = () => React.createElement(
                 { className: `${styles['pt-25']} shop-now-btn` },
                 React.createElement(
                   'a',
-                  { className: `${styles['fs-12']} ${styles['fontW600']} ${styles['border-radius4']}` },
+                  { className: `${styles['fs-12']} ${styles.fontW600} ${styles['border-bt-left-radius']}` },
                   'Buy NOW'
                 )
               )
@@ -195,12 +195,12 @@ const Fashion = () => React.createElement(
               { className: `${styles['flex']} ${styles['flex-colum']}` },
               React.createElement(
                 'span',
-                { className: `lobster-family ${styles['fs-24']}` },
+                { className: `${styles['fs-20']} ${styles['black-color']}` },
                 'Upto 50% Off on Watches'
               ),
               React.createElement(
                 'span',
-                { className: styles['fs-12'] },
+                { className: `${styles['fs-12']} ${styles['black-color']} ${styles.fontW300}` },
                 'They lift you physically & emotionally.'
               ),
               React.createElement(
@@ -208,7 +208,7 @@ const Fashion = () => React.createElement(
                 { className: `${styles['pt-25']} shop-now-btn` },
                 React.createElement(
                   'a',
-                  { className: `${styles['fs-12']} ${styles['fontW600']} ${styles['border-radius4']}` },
+                  { className: `${styles['fs-12']} ${styles.fontW600} ${styles['border-bt-left-radius']}` },
                   'Buy NOW'
                 )
               )
@@ -305,7 +305,7 @@ const Fashion = () => React.createElement(
                 React.createElement(
                   'h6',
                   { className: `${styles['m-0']} ${styles['fs-14']} ${styles['fontW600']}` },
-                  'Kids Wear'
+                  'Kids\' Wear'
                 ),
                 React.createElement(
                   'span',
@@ -584,7 +584,7 @@ const Fashion = () => React.createElement(
                 React.createElement(
                   'h6',
                   { className: `${styles['m-0']} ${styles['fs-14']} ${styles['fontW600']}` },
-                  'Womens Formal Shoes'
+                  'Women\'s Formal Shoes'
                 ),
                 React.createElement(
                   'span',

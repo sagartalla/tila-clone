@@ -1,64 +1,78 @@
 import React from 'react';
 import { languageDefinations } from '../../../utils/lang';
 import SVGCompoent from '../../common/SVGComponet';
-import { mergeCss } from '../../../utils/cssUtil';
+
 import Slider from '../../common/slider';
 
-const styles = mergeCss('components/Product/product');
-const { PDP_PAGE } = languageDefinations();
+import lang from '../../../utils/language';
+
+import main_en from '../../../layout/main/main_en.styl';
+import main_ar from '../../../layout/main/main_ar.styl';
+import styles_en from '../product_en.styl';
+import styles_ar from '../product_ar.styl';
+
+const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+
+const { PDP_PAGE, CART_PAGE } = languageDefinations();
 
 
 class Warranty extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
-      slider: false
-    }
+      slider: false,
+    };
   }
 
   openSlider = () => {
+    document.getElementsByTagName('BODY')[0].style.overflow = 'hidden';
     this.setState({
-      slider: true
-    })
+      slider: true,
+    });
   }
 
   closeSlider = () => {
+    document.getElementsByTagName('BODY')[0].style.overflow = 'auto';
     this.setState({
       slider: false,
     });
   }
 
-  render(){
-    const {warranty} = this.props;
-    const warranty_display = warranty.duration + " " + warranty.duration_unit + " " + PDP_PAGE.WARRANTY
+  render() {
+    const warranty = this.props.warranty || {};
+    const warranty_display = `${warranty.duration} ${_.startCase(_.toLower(warranty.duration_unit))} ${PDP_PAGE.WARRANTY}`;
+    const warranty_time = warranty.duration;
     return (
-    <div className={`${styles['flex-center']} ${styles['display-inline']}`}>
-      <span >{warranty_display}</span>{this.props.break ? <br/> : null}
-      <a className={`${styles['fontW600']} ${styles['ml-20']}`} onClick={this.openSlider}>View More</a>
-      {this.state.slider && <Slider label="Warranty" isOpen={this.state.slider} closeSlider={this.closeSlider}>
-        <div className={`${styles['warranty-modal']}`}>
-        <hr/>
-            <div className={`${styles['fs-20']} ${styles['ml-20']}`}>Warranty Summary
-              <ul>
+      <div className={`${styles['flex-center']} ${styles['warranty-part']}  ${styles.relative} ${styles.pointer}`}>
+        <span className={`${styles['flex-center']}`}><span>{warranty_display}</span></span>
+        <a className={`${styles.fontW600} ${styles['ml-20']} ${styles['view-more-label']} ${styles['fs-12']}`} onClick={this.openSlider}>{warranty_time > 0 ? CART_PAGE.VIEW_MORE : ''}</a>
+        {this.state.slider &&
+        <Slider label="Warranty" isOpen={this.state.slider} closeSlider={this.closeSlider}>
+          <div className={`${styles['warranty-modal']}`}>
+            {warranty.summary &&
+            <div className={`${styles['fs-16']}`}>{PDP_PAGE.WARRANTY_SUMMARY}
+              <ul className={`${styles['mt-5']}`}>
                 <li>{warranty.summary}</li>
               </ul>
-            </div>
-            <hr/>
-            <div className={`${styles['fs-20']} ${styles['ml-20']}`}>Covered in Warranty
-              <ul>
+            </div>}
+            <hr />
+            {warranty.covered &&
+            <div className={`${styles['fs-16']}`}>{PDP_PAGE.COVERED_IN_WARRANTY}
+              <ul className={`${styles['mt-5']}`}>
                 <li>{warranty.covered}</li>
               </ul>
-            </div>
-            <hr/>
-            <div className={`${styles['fs-20']} ${styles['ml-20']}`}>Not Covered in Warranty
-              <ul>
+            </div>}
+            <hr />
+            {warranty.not_covered &&
+            <div className={`${styles['fs-16']}`}>{PDP_PAGE.NOT_COVERED_IN_WARRANTY}
+              <ul className={`${styles['mt-5']}`}>
                 <li>{warranty.not_covered}</li>
               </ul>
-            </div>
-        </div>
-      </Slider>}
-  </div>);
+            </div>}
+          </div>
+        </Slider>}
+      </div>);
   }
 }
 
-export default Warranty
+export default Warranty;

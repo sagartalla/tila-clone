@@ -20,7 +20,7 @@ const transactionApi = (orderRes) => {
     //       payment_mode: 'PAY_ONLINE',
     //     },
     //   ],
-    //   redirect_url: `${window.location.origin}/${country}/${language}`,
+    //   redirect_url: `${window.location.origin}/${language}`,
     //   transaction_id: data.transaction_id,
     // };
     // return axios.post(`${constants.TRANSACTIONS_API_URL}/fpts/transaction/process`, params).then(({ data: payData }) => {
@@ -40,9 +40,7 @@ const createOrder = () => {
 
 //Create Order First step.
 const createOrderApi = (defaultAddrId) => {
-  return axios.put(`${constants.CART_API_URL}/api/v1/cart/view`, { address_id: defaultAddrId }).then(({ data }) => {
-    return createOrder(data);
-  });
+  return createOrder();
 };
 
 const doPaymentApi = (params) => {
@@ -52,7 +50,7 @@ const doPaymentApi = (params) => {
 }
 
 const getRedirectApi = (params) => {
-  return axois.get(`${constants.TRANSACTIONS_API_URL}/fpts/transaction/gateway/callback/${params.encryptedString}`)
+  return axios.get(`${constants.TRANSACTIONS_API_URL}/fpts/transaction/gateway/callback/${params.encryptedString}`).then(({data}) => data)
 }
 
 const saveCardApi = (params) => {
@@ -62,7 +60,7 @@ const saveCardApi = (params) => {
 }
 
 const makeProcessRequest = (params) => {
-  params.redirect_url = `${window.location.origin}/${country}/${language}`;
+  params.redirect_url = `${window.location.origin}/${language}`;
   return axios.post(`${constants.TRANSACTIONS_API_URL}/fpts/transaction/process`, params).then(({data}) => data);
 }
 

@@ -1,19 +1,7 @@
-const readURLParams = (name, url) => {
-  try {
-    if (!url) url = location.href;
-    name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
-    var regexS = "[\\?&]" + name + "=([^&#]*)";
-    var regex = new RegExp(regexS);
-    var results = regex.exec(url);
-    return results == null ? null : results[1];
-  } catch (e) {
-
-  }
-}
-
+import lang from '../language';
 export const languageDefinations = (() => {
   let obj = {};
-  switch (readURLParams('language')) {
+  switch (lang) {
     case 'ar':
       const ar = require('./ar');
       obj = ar.AR_KEYWORDS;
