@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 
 ARG CACHEBUST=0
 
@@ -39,7 +39,7 @@ COPY . .
 
 RUN npm install
 RUN echo $version
-RUN version=$version npm run build
+RUN version=$version node --expose-gc --max-old-space-size=8096 ./node_modules/next/dist/bin/next build
 
 COPY deploy/nginx.conf /etc/nginx/nginx.conf
 COPY deploy/nginx-default /etc/nginx/sites-enabled/default
