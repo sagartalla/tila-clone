@@ -39,7 +39,7 @@ COPY . .
 
 RUN npm install
 RUN echo $version
-RUN version=$version node --expose-gc --max-old-space-size=8096 ./node_modules/next/dist/bin/next build
+RUN version=$version node --expose-gc --max-old-space-size=14999 ./node_modules/next/dist/bin/next build
 
 COPY deploy/nginx.conf /etc/nginx/nginx.conf
 COPY deploy/nginx-default /etc/nginx/sites-enabled/default

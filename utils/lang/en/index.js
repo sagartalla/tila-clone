@@ -954,10 +954,7 @@ export const EN_KEYWORDS = {
   COMPARE_WIDGET: {
     COMPARE: 'Compare',
   },
-<<<<<<< HEAD
-=======
   WARRANTY_PAGE: {
     WARRANTY_LABEL: '*The extended warranty cost will be added to your cart'
   },
->>>>>>> parent of 26214593... Revert "Merge branch 'CAM-1189' into 'master'"
 };
