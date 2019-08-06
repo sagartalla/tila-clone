@@ -216,7 +216,7 @@ class Product extends Component {
     const {
       productId, itemtype, media, displayName, categoryId, addToCompare, removeCompareData, catalogId: catalog_id, variants,
     } = this.props;
-    const { selectedIndex } = this.state;    
+    const { selectedIndex } = this.state;
     const src = `${constants.mediaDomain}/${media[0]}`;
     if (!checked) {
       addToCompare({
@@ -314,7 +314,7 @@ class Product extends Component {
           className={`${styles['product-items-main']} ${styles.relative} ${styles['p-0']} ${selectedProduct ? styles['active-product'] : ''}`}
           onClick={() => this.routeChange(productId, variantId, catalogId, itemtype, index, pageNum)}
         >
-          <Link route={`/${language}/pdp/${displayName.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${tuinId}/${listing_id}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`}>
+          <Link route={`/${language}/pdp/${displayName.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${tuinId ? `${tuinId}/`: '' }${listing_id ? `${listing_id}/`: ''}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`}>
             <a target="_blank">
               <div className={`${styles['product-items']}`} onMouseEnter={this.setImg} onMouseLeave={this.leaveImg}>
                 {showLoader ?

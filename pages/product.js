@@ -33,13 +33,14 @@ class ProductPage extends Base {
   static async getInitialProps({
     store, query, isServer, req,
   }) {
+    debugger;
     const { country, language } = query;
     const shippingData = req ? req.universalCookies.get('shippingInfo') : cookies.get('shippingInfo');
     const { city: shippingCity, country: shippingCountry } = shippingData || {};
     const {
-      productId,variantId
+      pid, vid, cid
     } = query;
-    const pid = productId;
+    const productId = pid;
     // if (taskCode) {
     //   await store.dispatch(actionCreators.getPreview({
     //     taskCode,

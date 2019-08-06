@@ -27,7 +27,7 @@ const getProduct = (store, variantId) => {
     ...product_details.product_details_vo.cached_product_details.attribute_map,
     ...product_details.product_details_vo.cached_variant[computedVariantId].attribute_map,
   };
-  const tila_care_policy = listings[0].tila_care_policy || {}
+  const tila_care_policy = (listings[0] ? listings[0].tila_care_policy : null) || {}
   const productAttributeMap = product_details && product_details.product_details_vo && product_details.product_details_vo.cached_product_details.attribute_map;
   // let activeCount = 0, listingInventryCount = 0;
   let priceInfo = listings ? listings.filter((listing) => {
