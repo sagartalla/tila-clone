@@ -53,6 +53,9 @@ export const AR_KEYWORDS = {
     ITEMS_IN_YOUR_WISHLIST: 'المنتج في قائمك المفضلة',
     MY_CART: 'عربة التسوق',
     MY_CART_EMPTY: 'So many products on Tila and yet i Feel Empty',
+    TILA_CARE_PROTECTION: 'Tila Care Protection',
+    VIEW_T_AND_C: 'View T & C ',
+    DURATION: 'Duration',
   },
   PAYMENT_PAGE: {
     SECURE_CHECKOUT: 'عملية خروج آمنة',
@@ -791,7 +794,7 @@ export const AR_KEYWORDS = {
     TRACKING_ID: 'Tracking Id',
   },
   BETA: {
-    BETA: 'فترة تجريبية',
+    BETA: 'بيتا',
   },
   DRAG_DROP: {
     DRAG_AND_DROP: '  أرفق الملفات أو أسحبهم وضعهم',

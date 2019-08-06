@@ -111,7 +111,7 @@ class Product extends Component {
       addToWishlistAndFetch({
         catalog_id,
         product_id,
-        variant_id: variants[selectedIndex].variantId,
+        variant_id: (variants && variants.length > 0 && variants[selectedIndex].variantId) || '',
         wishlisted_price: variants && variants[selectedIndex] && variants[selectedIndex].sellingPrice && variants[selectedIndex].sellingPrice[0],
         wishlisted_currency: currency,
       });
@@ -228,8 +228,8 @@ class Product extends Component {
         catalogObj: {
           product_id: productId,
           catalog_id,
-          variant_id: variants[selectedIndex].variantId,
           tuin: variants[selectedIndex].tuin[0],
+          variant_id: (variants && variants.length > 0 && variants[selectedIndex].variantId) || '',
         },
       });
     } else removeCompareData(productId);

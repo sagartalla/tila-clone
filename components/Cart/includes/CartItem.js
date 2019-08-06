@@ -126,10 +126,10 @@ class CartItem extends React.Component {
     const {
       item_id, img, name, offer_price, cur, quantity, max_limit, inventory, offerDiscounts, tuin_id,
       brand_name, gift_info, shipping, warranty_duration, total_amount, total_discount, listing_id='',
-      product_id, variant_id='', itemType, catalogId: catalog_id, discount, mrp, variantAttributes, selling_price,
+      product_id, variant_id='', itemType, catalogId: catalog_id, discount, mrp, variantAttributes, selling_price, policies_applied, tila_care_policy, tila_care_charges,
     } = item;
     return (
-      <div key={item_id} className={`${styles['mb-20']} ${styles.box}`}>
+      <div key={item_id} className={`${styles['mb-20']} ${styles['box']}`} id="cart-container">
         {
           max_limit == quantity ?
             <div className={`${styles['p-10-22']} ${styles['alrt-message-bg']} ${styles['light-gry-clr']} ${styles['alrt-message-part']} ${styles['thick-border-btm']}`}><span>{CART_PAGE.MAX_PER_ORDER}</span></div>
@@ -300,6 +300,18 @@ class CartItem extends React.Component {
                               </div>
                               :
                               null
+                          }
+                           {
+                            tila_care_charges !== null &&
+                              <div className={`${styles['flx-space-bw']} ${styles['fs-12']}`}>
+                                <div className={`${styles['pb-10']}`}>
+                                  <div className={styles['thick-gry-clr']}>{CART_PAGE.TILA_CARE_PROTECTION}</div>
+                                </div>
+                                <div className={`${styles['t-rt']} ${styles['flex']}`}>
+                                  {tila_care_charges &&
+                                    `${tila_care_charges.display_value} ${tila_care_charges.currency_code}`}
+                                </div>
+                              </div>
                           }
 
                           <div className={` ${styles['flx-space-bw']} ${styles['total-amount']} ${styles['fs-12']}`}>
