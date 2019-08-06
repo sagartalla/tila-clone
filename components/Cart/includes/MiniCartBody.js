@@ -26,7 +26,7 @@ const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styl
 
 const MiniCartBody = (props) => {
   const { showBlocker, increaseItemCnt, decreaseItemCnt, data, removeCartItem, editCartDetails, showCheckOutBtn, checkoutBtnHandler } = props;
-  const { items, error, total_offer_price, currency } = data;  
+  const { items, error, total_offer_price, currency } = data;
   const flag = data && items && items.length;
   const cnt = flag > 0 ? items.length : 0;
   const { CART_PAGE, DELIVERY_ADDR_PAGE } = languageDefinations();
@@ -48,12 +48,12 @@ const MiniCartBody = (props) => {
           {
             items.map((item, index) => {
               const { item_id, img, product_id, name, offer_price, cur,
-                variant_id, catalogId, shipping, listing_id } = item;
+                variant_id='', catalogId: catalog_id, shipping, listing_id='', tuin_id } = item;
               return (
                 <div key={item_id} className={`${styles['flex']} ${styles['pt-15']} ${styles['pb-15']} ${styles['border-b']} ${styles['min-items-list']}`}>
                   <Col md={2} sm={2} xs={2} className={`${styles['pl-0']} ${styles['pr-0']}`}>
                     <div className={`${styles['cart-container-img']} ${styles['flex']} ${styles['justify-center']}`}>
-                    <Link route={`/${language}/pdp/${name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/c/${catalogId}/p/${product_id}/l/${listing_id}/v/${variant_id ? `${variant_id}` : ''}`}>
+                    <Link route={`/${language}/pdp/${name && name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${tuin_id}/${listing_id}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`}>
                         <a className={`${styles['width100']} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
                           <img className={styles['img']} src={`${constants.mediaDomain}/${img}`} />
                         </a>
@@ -63,7 +63,7 @@ const MiniCartBody = (props) => {
                   <Col md={10} sm={10} xs={10} className={`${styles['pr-0']} ${styles['card-details-labels']}`}>
                     <div className={`${styles['flx-space-bw']}`}>
                       <h6 className={`${styles['m-0']} ${styles['card-details-name']}`}>
-                      <Link route={`/${language}/pdp/${name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/c/${catalogId}/p/${product_id}/l/${listing_id}/v/${variant_id ? `${variant_id}` : ''}`}>
+                      <Link route={`/${language}/pdp/${name && name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${tuin_id}/${listing_id}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`}>
                           <a className={`${styles['width100']} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
                             {name}
                           </a>

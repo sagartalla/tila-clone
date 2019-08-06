@@ -54,7 +54,6 @@ class Category extends Base {
         shippingCountry: (country || 'ARE').toUpperCase(),
       };
     }
-    debugger;
     await Promise.all([
       store.dispatch(actionCreators.getSearchResults(searchOptions)),
       store.dispatch(LandingactionCreators.getPage({ page: 'categoryIndividualPage', id: categoryValue })),

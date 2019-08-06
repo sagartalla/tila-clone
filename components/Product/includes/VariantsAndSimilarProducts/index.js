@@ -49,12 +49,13 @@ class VariantsAndSimilarProducts extends Component {
       },
     }, () => {
       const { selectedVariantData } = this.state;
-      const { itemType, catalogId, variants } = this.props.variantsAndSimilarProducts;
+      const { itemType, catalogId: catalog_id, variants } = this.props.variantsAndSimilarProducts;
       const variantId = this.props.getSelectedVariantId({
         selectedVariantData: this.state.selectedVariantData,
         map: variants.map,
         lastSelectionAttribute: key,
       });
+      const variant_id = variantId || '';
       this.props.setSelectedVariant({
         selectedVariantData, itemType, catalogId, variantId,
       });
@@ -72,13 +73,14 @@ class VariantsAndSimilarProducts extends Component {
       },
     }, () => {
       const { selectedProductData } = this.state;
-      const { isSearchPreview, variantId, variantsAndSimilarProducts, listing_id } = this.props
+      const { isSearchPreview, variantId, variantsAndSimilarProducts, listing_id='' } = this.props
       const productId = variantsAndSimilarProducts.productId;
       const pid = this.props.getSelectedPropductId({
         selectedProductData: this.state.selectedProductData,
         map: variantsAndSimilarProducts.similarProducts.map,
         lastSelectionAttribute: key,
       });
+      const product_id = pid;
       if (!pid) {
         toast.warn('product not available!');
         return;
@@ -101,13 +103,14 @@ class VariantsAndSimilarProducts extends Component {
         ],
         size: 'LARGE',
       };
+      const { catalogId:catalog_id } = variantsAndSimilarProducts;
       let newQuery = window.location.href.split("pdp/")[1];
       newQuery = newQuery.replace(productId, pid)
       this.props.setSelectedProductData({selectedProductData});
       if(isSearchPreview) {
           this.props.getProduct(options);
           this.props.setProductId(pid);
-          window.open(`/${language}/pdp/${name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/c/${variantsAndSimilarProducts.catalogId}/p/${pid}/l/${listing_id}/v/${variantId ? `${variantId}` : ''}`)
+          window.open(`/${language}/pdp/${name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${listing_id}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`)
       } else {
         Router.pushRoute(`/${language}/pdp/${newQuery}`);
       }
