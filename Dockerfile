@@ -38,6 +38,7 @@ WORKDIR /app
 COPY . .
 
 RUN npm install
+RUN npm install newrelic --no-optional
 RUN echo $version
 RUN version=$version node --expose-gc --max-old-space-size=14999 ./node_modules/next/dist/bin/next build
 
