@@ -55,6 +55,7 @@ const getCartResults = (store) => {
             .filter(attr => attr.attribute_group_name === 'IDENTITY' && attr.visible) : [],
           tila_care_policy: listingInfo.tila_care_policy,
           policies_applied: item.policies_applied || [],
+          tila_care_charges: item.tila_care_charges || null,
         };
       });
     }

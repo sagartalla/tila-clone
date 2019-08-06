@@ -56,6 +56,7 @@ export const AR_KEYWORDS = {
     TILA_CARE_PROTECTION: 'Tila Care Protection',
     VIEW_T_AND_C: 'View T & C ',
     DURATION: 'Duration',
+    TILA_CARE_PROTECTION: 'Tila Care Protection',
   },
   PAYMENT_PAGE: {
     SECURE_CHECKOUT: 'عملية خروج آمنة',

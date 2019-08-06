@@ -209,7 +209,7 @@ class Compare extends Component {
             {compareCount < 5 &&
             <Col md={3}>
               <div className={` ${styles['compare-background']} ${styles['flex-center']} ${styles['ht-100per']} ${styles['bg-white']} ${styles['justify-center']} ${styles['flex-colum']}`}>
-                <SVGComponent clsName={`${styles['add-icon']}`} src="icons/common-icon/plus" />
+                <SVGComponent clsName={`${styles['add-to-compare-plus']} ${styles['mb-30']}`} src="icons/common-icon/add-to-compare-plus" />
                 <div className={`${styles.width100} ${styles['p-10-40']}`}>
                   <select className={`${styles.width100} ${styles['compare-selct']}`} value={selectedBrand} onChange={this.selectBrand}>
                     <option value="">{COMPARE.SELECT_BRAND}</option>
