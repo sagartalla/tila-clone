@@ -39,7 +39,7 @@ class ProductPage extends Base {
     const {
       productId,variantId
     } = query;
-    const pid = productId,
+    const pid = productId;
     // if (taskCode) {
     //   await store.dispatch(actionCreators.getPreview({
     //     taskCode,
