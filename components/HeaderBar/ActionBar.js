@@ -165,6 +165,7 @@ class ActionBar extends Component {
     this.props.logout().then((res) => {
       if (res && res.value && res.value.status === 200) {
         window.location = `${window.location.origin}/${cookies.get('language')}`;
+        localStorage.clear();
       }
     });
   }
