@@ -88,15 +88,15 @@ class PageData extends React.Component {
     switch (content.layout_id) {
       case 'CT1a':
         return (
-          <div className={`${styles['mb-40']} top-banner-slider`}>
-            <h3>{content.data[lang].title}</h3>
+          <div className={`${styles['mb-20']} top-banner-slider slider-dots-part`}>
+            <h3 className={styles['mt-0']}>{content.data[lang].title}</h3>
             <Slider
               dots
               autoplay
               asNavFor={sliderTBS}
               ref={(slider) => { sliderTBS = slider; }}
               lazyLoad={false}
-              className={styles['main-slider-part']}
+              className={`${styles['main-slider-part']} ${styles['flex']} ${styles['flex-colum']}`}
               customPaging={i => <span className={`${styles['fs-10']}`}>{content.data[lang].banners[i].display_name}</span>}
             >
               {content.data[lang].banners.map(i => (
@@ -113,7 +113,7 @@ class PageData extends React.Component {
         );
       case 'CT1':
         return (
-          <div className={`${styles['mb-40']} top-banner-slider`}>
+          <div className={`${styles['mb-20']} top-banner-slider slider-dots-part`}>
             <h3>{content.data[lang].title}</h3>
             <Slider
               dots
@@ -121,7 +121,7 @@ class PageData extends React.Component {
               asNavFor={sliderTBS}
               ref={(slider) => { sliderTBS = slider; }}
               lazyLoad={false}
-              className={styles['main-slider-part']}
+              className={`${styles['main-slider-part']} ${styles['flex']} ${styles['flex-colum']}`}
               customPaging={i => <span className={`${styles['fs-10']}`}>{content.data[lang].banners[i].display_name}</span>}
             >
               {content.data[lang].banners.map(i => (

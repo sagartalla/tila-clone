@@ -944,4 +944,7 @@ export const AR_KEYWORDS = {
   COMPARE_WIDGET: {
     COMPARE: 'Compare',
   },
+  WARRANTY_PAGE: {
+    WARRANTY_LABEL: '*The extended warranty cost will be added to your cart'
+  }
 };
