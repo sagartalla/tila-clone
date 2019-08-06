@@ -14,7 +14,10 @@ RUN apt-get update && apt-get install -y \
 	curl \
 	python \
 	make \
-	g++
+	g++ \
+	build-essential \
+	apache2-utils \
+	nginx \
 
 RUN apt-get update --fix-missing && \
 	apt-get install -y curl python make g++&& \
