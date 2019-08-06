@@ -11,8 +11,13 @@ const getCartStatus = (store, listingId) => {
 
 const getListings = (store, ownProps) => {
   if (store.landingReducer.listings[ownProps.index]) {
-    return store.landingReducer.listings[ownProps.index].map((product) => {
+    let listings = [];
+    store.landingReducer.listings[ownProps.index].forEach((product) => {
       const { product_details, listing_info } = product;
+      if (listing_info === null || product_details === null) {
+        listings = [];
+        return;
+      }
       const {
         pricing, listing_id: listingId, product_id: productId,
       } = listing_info;
@@ -21,7 +26,7 @@ const getListings = (store, ownProps) => {
       } = pricing;
       const { catalog_details } = product_details;
       const { cached_product_details } = product_details.product_details_vo;
-      return {
+      listings.push({
         mrp,
         listingId,
         productId,
@@ -33,8 +38,9 @@ const getListings = (store, ownProps) => {
         brand: catalog_details && catalog_details.attribute_map.brand.attribute_values[0].value,
         name: cached_product_details.attribute_map.calculated_display_name.attribute_values[0].value,
         isAddedToCart: getCartStatus(store, listingId),
-      };
+      });
     });
+    return listings;
   }
   return [];
 };

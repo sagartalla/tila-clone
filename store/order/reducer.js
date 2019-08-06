@@ -7,6 +7,7 @@ const initialState = {
     },
     data: {
 			orderDetails: {},
+      claimWarranty:{},
 			orderIssue: {
         items: [],
         reasons: [],
@@ -16,7 +17,7 @@ const initialState = {
         refundOptions:{},
         exchangeId:{},
         refundInitiated:false,
-        cancelRefundMode:{}
+        cancelRefundMode:{},
       },
     orderTracker: {},
   },
@@ -43,6 +44,26 @@ const productReducer = typeToReducer({
     REJECTED: (state, action) => {
       return Object.assign({}, state, { error: action.payload.message, ui: { loading: false } })
     },
+  },
+  [actions.SUBMIT_CLAIM_WARRANTY] : {
+    PENDING: state => {
+      return Object.assign({}, state, { ui: { loading: true }});
+    },
+    FULFILLED: (state, action) => {
+      return Object.assign ( {}, state, {
+        data:{
+        ...state.data,
+        claimWarranty: {
+          ...state.data.claimWarranty,
+          ...action.payload.data
+        }
+      },
+      ui: { loading: false }
+    });
+  },
+    REJECTED: (state, action) => {
+      return Object.assign({}, state, { error: action.payload.message, ui:{ loading: false } })
+    }
   },
   [actions.RAISE_ORDER_ISSUE]: (state, action) => {
     return {

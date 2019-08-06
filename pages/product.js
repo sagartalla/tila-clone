@@ -38,6 +38,7 @@ class ProductPage extends Base {
     const { city: shippingCity, country: shippingCountry } = shippingData || {};
     const {
       pid: productId,
+      productId,variantId
     } = query;
     // if (taskCode) {
     //   await store.dispatch(actionCreators.getPreview({

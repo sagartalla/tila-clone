@@ -31,7 +31,8 @@ const a = {
     COUPONS_URL: 'http://192.168.0.180:9090/dip/fpts',
     CAPTCHA_URL: 'https://apigateway-stage.tila.com/transformers/api/v1/captcha',
     HNS_URL: 'https://apigateway-stage.tila.com/hns/api/v1',
-    PCM_URL: 'https://apigateway-stage.tila.com/pcm/api/v1'
+    PCM_URL: 'https://apigateway-stage.tila.com/pcm/api/v1',
+    REASON_URL:'https://apigateway-stage.tila.com/policy/api/v1/reason',
   },
   dev: {
     IMAGE_SEARCH_URL: 'https://apigateway-stage.tila.com/image-search',
@@ -56,7 +57,8 @@ const a = {
     CAPTCHA_URL: 'https://apigateway-stage.tila.com/transformers/api/v1/captcha',
     HNS_URL: 'https://apigateway-stage.tila.com/hns/api/v1',
     LOGISTICS_URL: 'https://apigateway-stage.tila.com/logistics',
-    PCM_URL: 'https://apigateway-stage.tila.com/pcm/api/v1'
+    PCM_URL: 'https://apigateway-stage.tila.com/pcm/api/v1',
+    REASON_URL:'https://apigateway-stage.tila.com/policy/api/v1/reason',
     // IMAGE_SEARCH_URL: 'https://apigateway-dev.tila.com/image-search',
     // SEARCH_API_URL: 'https://apigateway-dev.tila.com/search',
     // CATALOG_API_URL: 'https://catalogapis-dev.fptechscience.com',
@@ -102,7 +104,8 @@ const a = {
     CAPTCHA_URL: 'https://apigateway-stage.tila.com/transformers/api/v1/captcha',
     HNS_URL: 'https://apigateway-stage.tila.com/hns/api/v1',
     LOGISTICS_URL: 'https://apigateway-stage.tila.com/logistics',
-    PCM_URL: 'https://apigateway-stage.tila.com/pcm/api/v1'
+    PCM_URL: 'https://apigateway-stage.tila.com/pcm/api/v1',
+    REASON_URL:'https://apigateway-stage.tila.com/policy/api/v1/reason',
   },
   stage: {
     IMAGE_SEARCH_URL: 'https://apigateway-stage.tila.com/image-search',
@@ -127,7 +130,8 @@ const a = {
     CAPTCHA_URL: 'https://apigateway-stage.tila.com/transformers/api/v1/captcha',
     HNS_URL: 'https://apigateway-stage.tila.com/hns/api/v1',
     LOGISTICS_URL: 'https://apigateway-stage.tila.com/logistics',
-    PCM_URL: 'https://apigateway-stage.tila.com/pcm/api/v1'
+    PCM_URL: 'https://apigateway-stage.tila.com/pcm/api/v1',
+    REASON_URL:'https://apigateway-stage.tila.com/policy/api/v1/reason',
   },
   preprod: {
     IMAGE_SEARCH_URL: 'https://apigateway-preprod.tila.com/image-search',
@@ -152,7 +156,8 @@ const a = {
     COUPONS_URL: 'https://apigateway-preprod.tila.com/dip/fpts',
     CAPTCHA_URL: 'https://apigateway-preprod.tila.com/transformers/api/v1/captcha',
     LOGISTICS_URL: 'https://apigateway-preprod.tila.com/logistics',
-    PCM_URL: 'https://apigateway-preprod.tila.com/pcm/api/v1'
+    PCM_URL: 'https://apigateway-preprod.tila.com/pcm/api/v1',
+    REASON_URL:'https://apigateway-preprod.tila.com/policy/api/v1/reason',
   },
   prod: {
     IMAGE_SEARCH_URL: 'https://apigateway.tila.com/image-search',
@@ -177,7 +182,8 @@ const a = {
     COUPONS_URL: 'https://apigateway.tila.com/dip/fpts',
     CAPTCHA_URL: 'https://apigateway.tila.com/transformers/api/v1/captcha',
     LOGISTICS_URL: 'https://apigateway.tila.com/logistics',
-    PCM_URL: 'https://apigateway.tila.com/pcm/api/v1'
+    PCM_URL: 'https://apigateway.tila.com/pcm/api/v1',
+    REASON_URL:'https://apigateway.tila.com/policy/api/v1/reason',
   },
   production: {
     IMAGE_SEARCH_URL: 'https://apigateway.tila.com/image-search',
@@ -202,7 +208,8 @@ const a = {
     COUPONS_URL: 'https://apigateway.tila.com/dip/fpts',
     CAPTCHA_URL: 'https://apigateway.tila.com/transformers/api/v1/captcha',
     LOGISTICS_URL: 'https://apigateway.tila.com/logistics',
-    PCM_URL: 'https://apigateway.tila.com/pcm/api/v1'
+    PCM_URL: 'https://apigateway.tila.com/pcm/api/v1',
+    REASON_URL:'https://apigateway.tila.com/policy/api/v1/reason',
   }
 };
 // console.log('constants.js 2', a);

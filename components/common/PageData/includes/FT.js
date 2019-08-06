@@ -105,6 +105,9 @@ class FT extends React.Component {
       listingsData = [], content, isLoggedIn, showLoginScreen, isListingLoading,
     } = this.props;
     const { data } = content;
+
+    if (listingsData.length === 0) return null;
+
     return (
       <div className={styles['mt-20']}>
         {isListingLoading && listingsData.length === 0 ? ftbSkeletonLoader : ''}
@@ -129,7 +132,7 @@ class FT extends React.Component {
                     </div>
                     <div className={`${styles['p-10']} ${styles.ft_card_title}`}>
                       <div className={`${styles['deals-title']}`}>
-                        <span className={styles.fontW600}>{listing.brand}</span> - 
+                        <span className={styles.fontW600}>{listing.brand}</span> -
                         <span className={`${styles['slider-elips']} ${styles['lne-ht1_2']}`}>{listing.name}</span>
                       </div>
                       <div>

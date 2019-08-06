@@ -14,7 +14,7 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
-      - docker build --build-arg version=$IMAGE_TAG --cache-from $REPOSITORY_URI:latest --tag $REPOSITORY_URI:$IMAGE_TAG --tag $REPOSITORY_URI:latest .
+      - docker build -m=15g --build-arg version=$IMAGE_TAG --cache-from $REPOSITORY_URI:latest --tag $REPOSITORY_URI:$IMAGE_TAG --tag $REPOSITORY_URI:latest .
       - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
   post_build:
     commands:
@@ -32,9 +32,8 @@ phases:
       - printf '[{"name":"ecs-storefront-app-container-prod","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions-prod.json
       - cat imagedefinitions-prod.json
 artifacts:
-    files: 
+    files:
       - imagedefinitions-dev.json
       - imagedefinitions-stage.json
       - imagedefinitions-preprod.json
       - imagedefinitions-prod.json
-    
