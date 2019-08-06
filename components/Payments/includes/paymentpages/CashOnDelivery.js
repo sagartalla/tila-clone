@@ -32,7 +32,6 @@ class CashOnDelivery extends React.Component {
   constructor() {
     super();
     this.state = {
-      checked: false,
       showContinueButton: false,
       showPayBtn: false,
       nextStep: 'captcha',
@@ -49,9 +48,6 @@ class CashOnDelivery extends React.Component {
   }
   handleChange() {
     const {data} = this.props;
-    this.setState({
-      checked: !this.state.checked
-    })
     this.props.disableAllOthers({
       except: data.type
     });
@@ -112,16 +108,6 @@ class CashOnDelivery extends React.Component {
       <Col md={12}>
         <h4 className={`${styles['fontW300']} ${styles['fs-20']} ${styles['lgt-blue']} ${styles['mt-0']} ${styles['pb-10']}`}>{PAYMENT_PAGE.PAY_ON_DELIVERY}</h4>
     {
-      this.state.nextStep === 'captcha' && (
-        <div className={styles['checkbox-material']}>
-          <input id="cod-delivery" type="checkbox" onChange={ this.handleChange } checked={ this.state.checked }/>&nbsp;
-          <label htmlFor="cod-delivery"> {PAYMENT_PAGE.I_AGREE_TO_PAY_COD} </label>
-        </div>
-      )
-    }
-    {
-      this.state.checked
-        ?
           {
             captcha:  <Captcha
               onCaptchaSuccess={this.onCaptchaSuccess}
@@ -142,8 +128,6 @@ class CashOnDelivery extends React.Component {
             userData = {profileInfo.contactInfo}
             />
           }[this.state.nextStep]
-        :
-          null
     }
     </Col>
     <Col md={10} sm={12} xs={12}>

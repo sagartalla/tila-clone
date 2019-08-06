@@ -143,8 +143,8 @@ const hal = [{
   key: 'Door Mats'
 }, {
   img: '/static/img/landing-home/car_freshners.png',
-  title: `${lang === 'en' ? 'Air Freshner' : 'معطرات جو'}`,
-  key: 'Air Freshner'
+  title: `${lang === 'en' ? 'Car Freshener' : 'معطرات جو'}`,
+  key: 'Car Freshener'
 }, {
   img: '/static/img/landing-home/photo_frames.png',
   title: `${lang === 'en' ? 'Photo Frames' : 'إطارات صور'}`,
@@ -345,7 +345,7 @@ const b_d_b = {
   'Health & Beauty': `/${lang}/clp/${lang === 'en' ? 'Health & Beauty' : 'الصحة والجمال'}`,
   'Cushions & Covers': `/${lang}/clp/${lang === 'en' ? 'Cushions & Covers' : 'اغطية وسادات'}`,
   'Door Mats': `/${lang}/clp/${lang === 'en' ? 'Door Mats' : 'دواسَّات للباب'}`,
-  'Air Freshner': `/${lang}/clp/${lang === 'en' ? 'Air Freshner' : 'معطرات جو'}`,
+  'Car Freshener': `/${lang}/clp/${lang === 'en' ? 'Car Freshener' : 'معطرات جو'}`,
   'Photo Frames': `/${lang}/clp/${lang === 'en' ? 'Photo Frames' : 'اغطية وسادات'}`,
   GUESS: `/${lang}/search?q=GUESS&language=en&isListed=false`,
   FENDI: `/${lang}/search?q=FENDI&language=en&isListed=false`,

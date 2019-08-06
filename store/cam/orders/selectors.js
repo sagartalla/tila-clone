@@ -4,7 +4,6 @@ import shortid from 'shortid';
 
 const getOrdersData = (store) => {
   const { orders } = store.ordersReducer.data;
-
   if (orders && orders.length) {
     return orders.map((order) => {
       const {
@@ -27,15 +26,11 @@ const getOrdersData = (store) => {
           isCancelable: val.isCancelable,
           isReturnable: val.isReturnable,
           isExchangable: val.isExchangable,
-          isDamageProtectionAvailable:val.isDamageProtectionAvailable,
-          isWarrantyAvailable:val.isWarrantyAvailable,
-          listingId:val.listingId,
         }), []),
         _.map(i => ({
           id: i.order_item_ids[0],
           img: i.variant_info.image_url,
           name: i.variant_info.title,
-          listingId:i.listing_id,
           itemType: i.variant_info.item_type,
           productId: i.variant_info.product_id,
           catalogId: i.variant_info.catalog_id,
@@ -47,8 +42,6 @@ const getOrdersData = (store) => {
           orderIds: i.order_item_ids,
           price: i.price,
           isCancelable: i.cancelable,
-          isDamageProtectionAvailable:i.is_damage_protection_available,
-          isWarrantyAvailable:i.is_warranty_available,
           isReturnable: i.returnable,
           isExchangable: i.exchangeable,
           order_type: i.order_type,

@@ -98,7 +98,7 @@ const brandImages = {
     ],
     '#EF6079': [
       {
-        value: 'Bvlgari',
+        value: 'Bvlgari-img',
         link: `/${lang}/brand/bvlgari`,
       },
       {
