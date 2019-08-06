@@ -102,11 +102,11 @@ class SearchResults extends Component {
     }
   }
   renderProductPage(options) {
-    const {productId: product_id, variantId: variant_id, catalogId: catalog_id, listing_id=''} = options;
+    const {productId: product_id, variantId: variant_id, catalogId: catalog_id, listing_id='', tuinId} = options;
     // window.open(`/${language}/product?productId=${options.productId}${options.variantId ? `&variantId=${options.variantId}`: ''}&catalogId=${options.catalogId}&itemType=${options.itemType}`)
     //changes will get reflected on quickview
     // window.open(`/${country}/${language}/pdp/${name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/c/${catalog_id}/p/${product_id}/l/${listing_id}/v/${variant_id ? `${variant_id}` : ''}`)
-    window.open(`/${language}/pdp/${name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${listing_id}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`);
+    window.open(`/${language}/pdp/${name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${tuinId}/${listing_id}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`);
   }
   renderNext() {
     const { results } = this.props;

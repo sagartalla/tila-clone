@@ -71,6 +71,7 @@ const OrderDetails = ({ query, orderData, thankyouPage }) => {
                   isCancelable={item.isCancelable}
                   isReturnable={item.isReturnable}
                   isExchangable={item.isExchangable}
+                  tuinId={item.tuinId}
                 />
               ))}
             </div>

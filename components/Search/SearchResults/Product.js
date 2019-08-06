@@ -229,6 +229,7 @@ class Product extends Component {
           product_id: productId,
           catalog_id,
           variant_id: variants[selectedIndex].variantId,
+          tuin: variants[selectedIndex].tuin[0],
         },
       });
     } else removeCompareData(productId);
@@ -262,7 +263,6 @@ class Product extends Component {
       itemNum,
       media,
       isQuickView,
-      listing_id=''
     } = this.props;
     const { src } = this.state;
     const product_id = productId;
@@ -272,6 +272,8 @@ class Product extends Component {
     const selectedProduct = selectedID.length > 0 && selectedID.includes(productId);
     const discountValue = variants.length > 0 &&
       variants[selectedIndex].discount && Math.floor(variants[selectedIndex].discount[0]);
+    const tuinId = variants.length > 0 && variants[selectedIndex].tuin && variants[selectedIndex].tuin[0];
+    const listing_id = variants.length > 0 && variants[selectedIndex].listingId[0];
     const popover = (
       <Popover id={productId}>
         {variants.length > 0 && variants[selectedIndex].offersApplied &&
@@ -312,7 +314,7 @@ class Product extends Component {
           className={`${styles['product-items-main']} ${styles.relative} ${styles['p-0']} ${selectedProduct ? styles['active-product'] : ''}`}
           onClick={() => this.routeChange(productId, variantId, catalogId, itemtype, index, pageNum)}
         >
-          <Link route={`/${language}/pdp/${displayName.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${listing_id}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`}>
+          <Link route={`/${language}/pdp/${displayName.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${tuinId}/${listing_id}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`}>
             <a target="_blank">
               <div className={`${styles['product-items']}`} onMouseEnter={this.setImg} onMouseLeave={this.leaveImg}>
                 {showLoader ?

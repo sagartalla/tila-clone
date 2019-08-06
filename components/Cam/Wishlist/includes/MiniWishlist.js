@@ -35,13 +35,13 @@ const MiniWishlist = (props) => {
             props.items.splice(0, 2).map((item, index) => {
                 const {
                     wishlist_id, listing_id='', brand_name, name, img, price, cur, inventory_count,
-                    wishlisted_price, mrp, variant_id='', product_id, catalog_id, buttonValue,
+                    wishlisted_price, mrp, variant_id='', product_id, catalog_id, buttonValue, tuin_id
                   } = item;
               return (
                 <div key={wishlist_id} className={`${styles.flex} ${styles['pt-15']} ${styles['pb-15']} ${styles['border-b']} ${styles['min-items-list']}`}>
                   <Col md={2} sm={2} xs={2} className={`${styles['pl-0']} ${styles['pr-0']}`}>
                     <div className={`${styles['wishlist-container-img']} ${styles.flex} ${styles['justify-center']}`}>
-                    <Link route={`/${language}/pdp/${name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${listing_id}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`}>
+                    <Link route={`/${language}/pdp/${name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${tuin_id}/${listing_id}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`}>
                         <a className={`${styles.width100} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
                           <img className={styles.img} src={`${constants.mediaDomain}/${img}`} />
                         </a>
@@ -51,7 +51,7 @@ const MiniWishlist = (props) => {
                   <Col md={10} sm={10} xs={10} className={`${styles['pr-0']} ${styles['wishlist-details-labels']} ${styles.flex} ${styles['justify-between']} ${styles['flex-colum']}`}>
                     <div className={`${styles['flx-space-bw']}`}>
                       <h6 className={`${styles['m-0']} ${styles['wishlist-details-name']} ${styles.flex}`}>
-                      <Link route={`/${language}/pdp/${name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${listing_id}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`}>
+                      <Link route={`/${language}/pdp/${name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${tuin_id}/${listing_id}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`}>
                           <a className={`${styles.width100} ${styles['ht-100P']} ${styles['fs-12']} ${styles['light-gry-clr']}`}>
                             {name}
                           </a>

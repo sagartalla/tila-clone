@@ -15,7 +15,7 @@ import styles_en from './compareWidget_en.styl';
 import styles_ar from './compareWidget_ar.styl';
 import { languageDefinations } from '../../../utils/lang/';
 
-const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
 const cookies = new Cookies();
 
@@ -52,14 +52,14 @@ class CompareWidget extends React.Component {
             <div style={{ width: `${cmpData.products.length * 160}px` }} className={`${styles['flex-center']} ${styles['justify-around']} ${styles['ht-210']}`}>
               {cmpData.products.map((data) => {
                 const { catalogObj = {}, displayName } = data;
-                const { catalog_id='', product_id, variant_id, listing_id=''} = catalogObj;
+                const { catalog_id = '', product_id, variant_id, listing_id = '', tuin } = catalogObj;
                 return (
                   <div className={styles.item} key={data.productId}>
                     <div className={styles['item-image']}>
                       <img className={styles.image} src={data.src} alt="" />
                     </div>
                     <div className={styles['item-label']}>
-                      <a title={data.displayName} className={`${styles.ellips} ${styles.width100} ${styles['black-color']} ${styles['fs-12']}`} href={`/${language}/pdp/${displayName.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${listing_id}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`}>
+                      <a title={data.displayName} className={`${styles.ellips} ${styles.width100} ${styles['black-color']} ${styles['fs-12']}`} href={`/${language}/pdp/${displayName.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${tuin}/${listing_id}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`}>
                         {data.displayName}
                       </a>
                     </div>
@@ -72,7 +72,7 @@ class CompareWidget extends React.Component {
             </div>
             {
               cmpData.products.length > 1 &&
-              <a onClick={removeAll} className={`${styles['fs-12']} ${styles['black-color']} ${styles['flex']} ${styles['justify-center']} ${styles['pt-15']}`}>{ CART_PAGE.REMOVE }</a>
+              <a onClick={removeAll} className={`${styles['fs-12']} ${styles['black-color']} ${styles['flex']} ${styles['justify-center']} ${styles['pt-15']}`}>{CART_PAGE.REMOVE}</a>
             }
           </div>
         </div>
