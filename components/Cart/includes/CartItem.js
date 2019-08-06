@@ -129,7 +129,7 @@ class CartItem extends React.Component {
       product_id, variant_id, itemType, catalogId, discount, mrp, variantAttributes, selling_price,
     } = item;
     return (
-      <div key={item_id} className={`${styles['mb-20']} ${styles.box}`}>
+      <div key={item_id} className={`${styles['mb-20']} ${styles['box']}`} id="cart-container">
         {
           max_limit == quantity ?
             <div className={`${styles['p-10-22']} ${styles['alrt-message-bg']} ${styles['light-gry-clr']} ${styles['alrt-message-part']} ${styles['thick-border-btm']}`}><span>{CART_PAGE.MAX_PER_ORDER}</span></div>
