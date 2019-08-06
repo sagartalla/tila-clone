@@ -83,7 +83,7 @@ const paymentsReducer = typeToReducer({
           ...state.data,
           processData: action.payload,
         },
-        ui: { loading: false },
+        ui: { loading: true },
       });
     },
   },
