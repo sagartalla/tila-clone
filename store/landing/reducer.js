@@ -22,19 +22,24 @@ const productReducer = typeToReducer({
   },
   [actions.GET_LISTINGS_DETAILS]: {
     PENDING: state => Object.assign({}, state, { ui: { loading: true, isListingLoading: true } }),
-    FULFILLED: (state, action) => {
-      return Object.assign({}, state, {
-        listings: {
-          ...state.listings,
-          [action.payload.index]: action.payload.res.data,
-        },
-        ui: {
-          loading: false,
-          isListingLoading: false,
-        },
-      });
-    },
-    REJECTED: (state, action) => Object.assign({}, state, { error: action.payload.message, ui: { loading: false, isListingLoading: true } }),
+    FULFILLED: (state, action) => Object.assign({}, state, {
+      listings: {
+        ...state.listings,
+        [action.payload.index]: action.payload.res.data,
+      },
+      ui: {
+        loading: false,
+        isListingLoading: false,
+      },
+    }),
+    REJECTED: (state, action) => Object.assign({}, state, {
+      error: action.payload.message,
+      ui: { loading: false, isListingLoading: false },
+      listings: {
+        ...state.listings,
+        [action.payload.index]: [],
+      },
+    }),
   },
 }, initialState);
 
