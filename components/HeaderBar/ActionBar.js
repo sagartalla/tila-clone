@@ -35,6 +35,7 @@ const cookies = new Cookie();
 
 const language = cookies.get('language') || 'en';
 const country = cookies.get('country') || 'SAU';
+const auth = cookies.get('auth');
 
 const snMetaObj = {
   google: {
@@ -64,7 +65,7 @@ class ActionBar extends Component {
   }
 
   componentDidMount() {
-    if (window.sessionStorage.getItem('TILuservisitcount') !== '1') {
+    if (window.sessionStorage.getItem('TILuservisitcount') !== '1' && !auth) {
       this.props.showLoginScreen();
     }
     this.props.getUserProfileInfo();
@@ -177,10 +178,6 @@ class ActionBar extends Component {
     }
 
     this.props.showLoginScreen();
-
-    if (!window.sessionStorage.getItem('TILuservisitcount')) {
-      window.sessionStorage.setItem('TILuservisitcount', 1);
-    }
     // const state = {};
     // state.loginClicked = true;
     // if (e.currentTarget.getAttribute('data-mode') === 'sign-up') {

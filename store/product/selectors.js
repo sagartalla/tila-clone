@@ -27,7 +27,6 @@ const getProduct = (store, variantId) => {
     ...product_details.product_details_vo.cached_product_details.attribute_map,
     ...product_details.product_details_vo.cached_variant[computedVariantId].attribute_map,
   };
-  const tila_care_policy = listings[0].tila_care_policy || {}
   const productAttributeMap = product_details && product_details.product_details_vo && product_details.product_details_vo.cached_product_details.attribute_map;
   // let activeCount = 0, listingInventryCount = 0;
   let priceInfo = listings ? listings.filter((listing) => {
@@ -134,7 +133,6 @@ const getProduct = (store, variantId) => {
       showSizeChart,
       sizeChartImgName,
     },
-    tila_care_policy,
     breadcrums: tree.breadcrumb,
     warranty,
     categoryType: tree.finance ? tree.finance[0].display_name_en : '',
@@ -143,9 +141,6 @@ const getProduct = (store, variantId) => {
     wishlistId,
   };
 };
-const getTilaPolicy = (store) => {
-  return store.productReducer.tilaPolicy
-}
 const isProductLoaded = (store) => {
   //console.log('productdetails', store.productReducer.data[0]);
   return { isProductLoaded:store.productReducer.data[0],
@@ -459,5 +454,5 @@ const getAllCountries = (store) => {
 export {
   getProduct, getPreview, getSelectedVariantId, getReviewRatings, getReviewResponse,
   getVariantsAndSimilarProducts, getSelectedPropductId, getSelectedVariantData, getAllCities, getAllCountries,
-  getLoadingStatus, getErrorMessage, isProductLoaded, getProductId, getVariantId,getTilaPolicy
+  getLoadingStatus, getErrorMessage, isProductLoaded, getProductId, getVariantId,
 };

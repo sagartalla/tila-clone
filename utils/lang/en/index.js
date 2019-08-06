@@ -629,7 +629,7 @@ export const EN_KEYWORDS = {
     ENTER_NEW_PASSWORD: 'Enter New Password*',
     NEXT: 'Next',
     OTP_EXPIRE_IN: 'OTP will expire in',
-    HURRY: 'Hurry!',
+    HURRY: 'Hurry!',    
     PLEASE_ENTER_FOUR_DIGIT_OTP: 'Please enter 4 digit OTP',
     RESEND_OTP: 'Resend OTP',
     ALMOST_DONE: 'Almost done!',
@@ -708,9 +708,6 @@ export const EN_KEYWORDS = {
     SELECT_SUB_REASON: 'Select a Sub Reason',
     REQ_RETURN: 'Your return request for order',
     REQ_SUCCESS: 'has been accepted successfully',
-    CLAIM_WARRANTY_MSG: 'has been noted for an warranty claim someone from tila will get in touch with you soon',
-    WARRANTY_CLAIM_REASON:'Please select a reason for availing warranty we\'ll be glad to help you out',
-    YOUR_ORDER:'Your order',
     REQ_EXCHANGE: 'Your exchange request for order',
     EXCHANGE: 'Exchange',
     RETURN: 'Return',
@@ -953,8 +950,5 @@ export const EN_KEYWORDS = {
   },
   COMPARE_WIDGET: {
     COMPARE: 'Compare',
-  },
-  WARRANTY_PAGE: {
-    WARRANTY_LABEL: '*The extended warranty cost will be added to your cart'
   },
 };
