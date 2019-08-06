@@ -10,7 +10,6 @@ import HeaderBar from '../HeaderBar/index';
 import Display from './includes/Display';
 import TitleInfo from './includes/TitleInfo';
 import Shipping from './includes/Shipping';
-import TilaCarePolicy from './includes/TilaCarePolciy'
 
 import AddToCart from './includes/AddToCart';
 import RecentView from './includes/RecentView';
@@ -51,8 +50,6 @@ const getProductComponent = (isPreview, taskCode) => {
         recentlyViewed: [],
         notifyEmail: null,
         emailErr: '',
-        tilaPolicy:[],
-        choosenPolicyData:props.selectedTilaPolicy,
         // positionStyle: 'fixed-style'
       };
       this.detailsRef = React.createRef();
@@ -60,7 +57,6 @@ const getProductComponent = (isPreview, taskCode) => {
       this.onChangeField = this.onChangeField.bind(this);
       this.handleScroll = this.handleScroll.bind(this);
       this.notify = this.notify.bind(this);
-      this.setTilaPolicy = this.setTilaPolicy.bind(this)
     }
 
     componentDidMount() {
@@ -127,12 +123,7 @@ const getProductComponent = (isPreview, taskCode) => {
         notifyEmail: target.value,
       });
     }
-    setTilaPolicy(data) {
-      this.setState({
-        choosenPolicyData:data,
-        tilaPolicy:Object.values(data)
-      }, () => this.props.setTilaPolicy(data))
-    }
+
     handleScroll(e) {
       if(skipScroll) {
         return;
@@ -207,15 +198,14 @@ const getProductComponent = (isPreview, taskCode) => {
     }
 /* eslint-disable */
     render() {
-      const { productData, userDetails, showLoading, query,variantId,productId, isSearchPreview, savedCardsData,loaderProps,selectedTilaPolicy } = this.props;
+      const { productData, userDetails, showLoading, query,variantId,productId, isSearchPreview, savedCardsData,loaderProps } = this.props;
       const {
         catalog, titleInfo, keyfeatures, extraOffers, imgUrls, offerInfo, shippingInfo, isWishlisted, returnInfo,
         details, productDescription, catalogObj, categoryType = '', warranty, breadcrums, product_id, wishlistId,
-        tila_care_policy,
       } = productData;
       const { offerPricing } = offerInfo;
       const {
-        stickyElements, recentlyViewed, notifyEmail, emailErr, positionStyle, positionTop, defaultPosition,tilaPolicy
+        stickyElements, recentlyViewed, notifyEmail, emailErr, positionStyle, positionTop, defaultPosition
       } = this.state;
       const { loadComponent, pathname } = loaderProps;
       return (
@@ -261,22 +251,7 @@ const getProductComponent = (isPreview, taskCode) => {
                         </div>
                         <div className={`${styles['ipad-details']} ${styles['bdr-lt']} ${styles['ipad-pl-15']}`}>
                           {
-                            isPreview ? null : <Shipping
-                                                  shippingInfo={shippingInfo}
-                                                  returnInfo={returnInfo}
-                                                  offerInfo={offerInfo}
-                                                  warranty={warranty}
-                                                />
-                          }
-                          {
-                            Object.keys(tila_care_policy).length > 0
-                            &&
-                            <TilaCarePolicy
-                              data={tila_care_policy}
-                              setTilaPolicy={this.setTilaPolicy}
-                              choosenPolicyData={this.state.choosenPolicyData}
-                              selectedTilaPolicy={selectedTilaPolicy}
-                            />
+                            isPreview ? null : <Shipping shippingInfo={shippingInfo} returnInfo={returnInfo} offerInfo={offerInfo} warranty={warranty} />
                           }
                           {isPreview ? null :
                             (shippingInfo === null || shippingInfo.shippable)
@@ -292,7 +267,6 @@ const getProductComponent = (isPreview, taskCode) => {
                                 notify={this.notify}
                                 showLoading={showLoading}
                                 onChangeField={this.onChangeField}
-                                tilaPolicy={tilaPolicy}
                               />
                               :
                               null
@@ -367,7 +341,6 @@ const getProductComponent = (isPreview, taskCode) => {
     showLoading: wishListSelectors.getNotifyLoading(store),
     selectedAddress: addressSelectors.getSelectedAddress(store),
     savedCardsData: userVaultSelectors.getCardResults(store),
-    selectedTilaPolicy:selectors.getTilaPolicy(store),
   });
 
   const mapDispatchToProps = dispatch =>
@@ -378,7 +351,7 @@ const getProductComponent = (isPreview, taskCode) => {
         getShippingAddressResults: addressActionCreators.getShippingAddressResults,
         createOrder: paymentActionCreators.createOrder,
         getCardResults: userVaultActionCreators.getCardResults,
-        setTilaPolicy:actionCreators.setTilaPolicy,
+
       },
       dispatch,
     );

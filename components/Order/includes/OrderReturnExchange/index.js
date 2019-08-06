@@ -47,7 +47,6 @@ class OrderReturnExchange extends Component {
       step: STEPS.REASONS,
       returnExchangeType,
     };
-
     if (orderIssue.orderId !== orderId) {
       getOrderDetails({ orderId });
     } else {

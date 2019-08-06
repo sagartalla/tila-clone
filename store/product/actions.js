@@ -13,18 +13,13 @@ const actions = {
   AUTOCOMPLETE_COUNTRY: 'AUTOCOMPLETE_COUNTRY',
   PDP_TRACK: 'PDP_TRACK',
   SET_PRODUCTID: 'SET_PRODUCTID',
-  SET_VARIANTID: 'SET_VARIANTID',
-  SET_TILA_POLICY: 'GET_SELECTED_TILA_POLICY',
+  SET_VARIANTID: 'SET_VARIANTID'
 };
 
 const actionCreators = {
   getProduct: params => ({
     type: actions.GET_PRODUCT,
     payload: api.getProduct(params),
-  }),
-  setTilaPolicy: data => ({
-    type:actions.SET_TILA_POLICY,
-    data,
   }),
   getPreview: params => ({
     type: actions.GET_PREVIEW,
