@@ -6,7 +6,7 @@ routes
   .add({ name: 'ORDER ISSUE', pattern: '/:language(en|ar)/customer/orders/:orderId/issue/:returnExchangeType/item/:orderItemId/:variantId', page: 'order' })
   .add({ name: 'ORDER', pattern: '/:language(en|ar)/customer/orders/:orderId', page: 'order' })
   .add({ name: 'CAM tabs', pattern: '/:language(en|ar)/customer/:tabDetails+', page: 'cam' })
-  .add({ name: 'product', pattern: '/:language(en|ar)/pdp/:productName?/c/:catalogId/p/:productId/l/:listingId?/v/:variantId?', page: 'product' })
+  .add({ name: 'product', pattern: '/:language(en|ar)/pdp/:productName/:tuinId?/:listingId?', page: 'product' })
   .add({ name: 'Cart', pattern: '/:language(en|ar)/cart', page: 'cart' })
   .add({ name: 'payment', pattern: '/:language(en|ar)/payment', page: 'payment' })
   .add({ name: 'thankyou', pattern: '/:language(en|ar)/thankyou/:orderId/:status(SUCCESSFUL|FAILED)', page: 'thankyou' })
@@ -21,7 +21,9 @@ routes
   .add({ name: 'brand', pattern: '/:language(en|ar)/brand/:brandName', page: 'brand' })
   .add({ name: 'ftb', pattern: '/:language(en|ar)/ftb', page: 'ftb' })
   .add({ name: 'redirect', pattern: '/:country/:language(en|ar)', page: 'homeRedirect' })
-  .add({ name: 'home', pattern: '/:language(en|ar)?', page: 'index' })
-  .add({ name: 'category', pattern: '/:language(en|ar)/clp/:category', page: 'category' });
+  .add({ name: 'categoryLanding', pattern: '/:language(en|ar)/:category(electronics|fashion|lifestyle)', page: 'index' })
+  .add({ name: 'category', pattern: '/:language(en|ar)/clp/:category', page: 'category' })
+  .add({ name: 'default', pattern: '/:language(en|ar)?', page: 'index' })
+  ;
 
 module.exports = routes;

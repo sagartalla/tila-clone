@@ -31,10 +31,15 @@ const getOrderDetails = (store) => {
             isCancelable: val.isCancelable,
             isReturnable: val.isReturnable,
             isExchangable: val.isExchangable,
+            isDamageProtectionAvailable:val.isDamageProtectionAvailable,
+            isWarrantyAvailable:val.isWarrantyAvailable,
+            listingId:val.listingId,
+            tuinId: val.tuinId,
           });
         }, []),
         _.map(i => ({
           id: i.order_item_ids[0],
+          listingId:i.listing_id,
           img: i.variant_info.image_url,
           name: i.variant_info.title,
           itemType: i.variant_info.item_type,
@@ -48,6 +53,8 @@ const getOrderDetails = (store) => {
           offers: i.offers || [],
           variantId: i.variant_id,
           promisedDeliveryDate: i.promised_delivery_date,
+          isDamageProtectionAvailable:i.is_damage_protection_available,
+          isWarrantyAvailable:i.is_warranty_available,
           isCancelable: i.cancelable,
           isReturnable: i.returnable,
           isExchangable: i.exchangeable,
@@ -60,7 +67,9 @@ const getOrderDetails = (store) => {
             i.warranty_policy.policies[i.warranty_policy.preferred_policy] : {},
           gift_info: i.gift_info,
           variantAttributes: i.variant_info && i.variant_info.variant_details && i.variant_info.variant_details.attribute_map ?
-            Object.values(i.variant_info.variant_details.attribute_map).filter(attr =>  attr.attribute_group_name === 'IDENTITY' && attr.visible) : [],
+            Object.values(i.variant_info.variant_details.attribute_map).filter(attr => attr.attribute_group_name === 'IDENTITY' && attr.visible) : [],
+          tuinId: i.variant_info && i.variant_info.variant_details && i.variant_info.variant_details.attribute_map && i.variant_info.variant_details.attribute_map.tuin ?
+            i.variant_info.variant_details.attribute_map.tuin.attribute_values[0].value : null,
         })),
       )(order_items),
     };

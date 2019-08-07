@@ -174,7 +174,7 @@ const authReducer = typeToReducer({
           showCheckoutLogin: !!(action.payload && action.payload.data.email_verified === 'NV'),
           showLoginScreen: currentFlow === 'existing_user_login' ?
             false : currentFlow === 'not_accessable_social_user' ? true:
-            window.location.href.split('/')[5] === 'payment' ? false :
+            window.location.pathname.indexOf('/payment') > -1 ? false :
             currentFlow === 'new_user_register' ? true : !!(action.payload && action.payload.data.email_verified === 'NV'),  
           // Dont show verify for existing_user_login after login, show verify for new_user_register after signup
         },

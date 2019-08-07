@@ -3,7 +3,7 @@ const withStylus = require('@zeit/next-stylus');
 const withCSS = require('@zeit/next-css');
 // const commonsChunkConfig = require('@zeit/next-css/commons-chunk-config');
 const path = require('path');
-const git = require('git-rev-sync');
+// const git = require('git-rev-sync');
 const webpack = require('webpack');
 const withSourceMaps = require('@zeit/next-source-maps');
 const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
@@ -12,7 +12,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 if (process.env.npm_package_config_ENV) {
   process.env.ENV = process.env.npm_package_config_ENV;
 }
-const version = process.env.version || git.short();
+const version = process.env.version;
 
 const files = [];
 
@@ -28,10 +28,10 @@ module.exports = withSourceMaps(withStylus(withCSS({
   publicRuntimeConfig: {
     env: process.env.ENV || 'preprod',
     isLocal: process.env.LOCAL === 'true',
-    version,
+    // version,
     SENTRY_DSN: 'https://f330056a5bc44dc1bb2561bbd0929d9a@sentry.fptechscience.com/2',
   },
-  generateBuildId: async () => version,
+  // generateBuildId: async () => version,
   webpack: (config, { dev, isServer, buildId }) => {
     // Fixes npm packages that depend on `fs` module
     config.node = {
