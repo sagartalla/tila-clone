@@ -24,7 +24,7 @@ const Meta = (props) => (
     <meta property="og:image" content={props.ogImage || defaultOGImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+    <meta httpEquiv="Content-type" content="text/html; charset=utf-8"/>
     <meta name="robots" content="noodp" />
     <meta name="viewport" content="width= " />
     <meta name="robots" content="index,follow" />

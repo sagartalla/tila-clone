@@ -92,11 +92,11 @@ export default function TilaCarePolicy({
         null
       }
       {
-        (Object.values(data)[0] !== null && Object.values(data)[1] !== null) && 
-        <>
-        <div className={`${styles.flex} ${styles['pb-10']} ${styles['border-b']} ${styles['border-t']} ${styles['tila-ext-wrny']}`}>{fetchPolicyData(data)}</div>
-        <div className={`${styles.flex} ${styles['thick-gry-clr']} ${styles['fs-12']} ${styles['pt-5']}`}>{WARRANTY_PAGE.WARRANTY_LABEL}</div>
-        </>
+        Object.keys(data).length > 0  && 
+          <>
+            <div className={`${styles.flex} ${styles['pb-10']} ${styles['border-b']} ${styles['border-t']} ${styles['tila-ext-wrny']}`}>{fetchPolicyData(data)}</div>
+            <div className={`${styles.flex} ${styles['thick-gry-clr']} ${styles['fs-12']} ${styles['pt-5']}`}>{WARRANTY_PAGE.WARRANTY_LABEL}</div>
+          </>
       }      
     </div>
   );

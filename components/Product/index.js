@@ -268,15 +268,15 @@ const getProductComponent = (isPreview, taskCode) => {
                               warranty={warranty}
                             />
                           }
-                          
-                           
+                          {Object.keys(warranty).length > 0 &&
                             <TilaCarePolicy
-                            data={tila_care_policy}
-                            warranty={warranty}
-                            setTilaPolicy={this.setTilaPolicy}
-                            choosenPolicyData={this.state.choosenPolicyData}
-                            selectedTilaPolicy={selectedTilaPolicy}
-                          />
+                              data={tila_care_policy}
+                              warranty={warranty}
+                              setTilaPolicy={this.setTilaPolicy}
+                              choosenPolicyData={this.state.choosenPolicyData}
+                              selectedTilaPolicy={selectedTilaPolicy}
+                            />
+                          }
                         
                          
                           {isPreview ? null :
