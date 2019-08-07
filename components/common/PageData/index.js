@@ -114,7 +114,7 @@ class PageData extends React.Component {
       case 'CT1':
         return (
           <div className={`${styles['mb-20']} top-banner-slider slider-dots-part`}>
-            <h3>{content.data[lang].title}</h3>
+            {content.data[lang].title && <h3 className={styles['mt-0']}>{content.data[lang].title}</h3>}
             <Slider
               dots
               autoplay

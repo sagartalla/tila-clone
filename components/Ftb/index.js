@@ -182,7 +182,7 @@ class FTB extends React.Component {
                   <div className={styles['ff-t-i']}>
                     <div className={styles.e}>
                       <span className={`${styles.title} ${styles['fs-20']}`}>{lang === 'en' ? 'ELECTRONICS' : 'الكترونيات‎'}</span>
-                      <div className={styles['home-slider']}>
+                      <div className="home-slider">
                         <Slider
                           asNavFor={sliderTIE}
                           ref={slider => (sliderTIE = slider)}
