@@ -24,11 +24,14 @@ const getCartResults = (store) => {
       newData.applyCouponRequestCount = data.applyCouponRequestCount;
       data.items.map((item, index) => {
         const listingInfo = item.listing_info || {};
+        const variant_key = item && item.product_details && item.product_details.product_details_vo.cached_variant ? Object.keys(item.product_details.product_details_vo.cached_variant)[0] : null;
+        const tuinId = item && item.product_details && item.product_details.product_details_vo.cached_variant ? item.product_details.product_details_vo.cached_variant[variant_key].attribute_map.tuin.attribute_values[0].value : null
         newData.items[index] = {
           item_id: item.cart_item_id,
           product_id: listingInfo.product_id,
           variant_id: listingInfo.variant_id,
           listing_id: listingInfo.listing_id,
+          tuin_id: tuinId,
           cart_item_id: item.cart_item_id,
           name: item.product_details && item.product_details.product_details_vo.cached_product_details.attribute_map.calculated_display_name.attribute_values[0].value,
           offer_price: listingInfo.pricing && listingInfo.pricing.offer_price.display_value,

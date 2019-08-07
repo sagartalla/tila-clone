@@ -56,7 +56,6 @@ export const AR_KEYWORDS = {
     TILA_CARE_PROTECTION: 'Tila Care Protection',
     VIEW_T_AND_C: 'View T & C ',
     DURATION: 'Duration',
-    TILA_CARE_PROTECTION: 'Tila Care Protection',
   },
   PAYMENT_PAGE: {
     SECURE_CHECKOUT: 'عملية خروج آمنة',
@@ -944,4 +943,7 @@ export const AR_KEYWORDS = {
   COMPARE_WIDGET: {
     COMPARE: 'Compare',
   },
+  WARRANTY_PAGE: {
+    WARRANTY_LABEL: '*The extended warranty cost will be added to your cart'
+  }
 };

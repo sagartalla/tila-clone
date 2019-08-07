@@ -65,7 +65,10 @@ class ActionBar extends Component {
   }
 
   componentDidMount() {
-    if (window.sessionStorage.getItem('TILuservisitcount') !== '1' && !auth) {
+    if (window.location.pathname.indexOf('resetpassword') === -1 && window.sessionStorage.getItem('TILuservisitcount') !== '1' && !auth) {
+      if (!window.sessionStorage.getItem('TILuservisitcount')) {
+        window.sessionStorage.setItem('TILuservisitcount', 1);
+      }
       this.props.showLoginScreen();
     }
     this.props.getUserProfileInfo();
@@ -174,11 +177,11 @@ class ActionBar extends Component {
     digitalData.page.pageInfo.pageType = 'Login Page';
     digitalData.page.pageInfo.pageName = 'Login Page';
 
+    this.props.showLoginScreen();
+
     if (!window.sessionStorage.getItem('TILuservisitcount')) {
       window.sessionStorage.setItem('TILuservisitcount', 1);
     }
-
-    this.props.showLoginScreen();
     // const state = {};
     // state.loginClicked = true;
     // if (e.currentTarget.getAttribute('data-mode') === 'sign-up') {

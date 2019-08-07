@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 
 ARG CACHEBUST=0
 
@@ -14,7 +14,10 @@ RUN apt-get update && apt-get install -y \
 	curl \
 	python \
 	make \
-	g++
+	g++ \
+	build-essential \
+	apache2-utils \
+	nginx
 
 RUN apt-get update --fix-missing && \
 	apt-get install -y curl python make g++&& \
@@ -38,8 +41,9 @@ WORKDIR /app
 COPY . .
 
 RUN npm install
+RUN npm install newrelic --no-optional
 RUN echo $version
-RUN version=$version npm run build
+RUN version=$version node --expose-gc --max-old-space-size=14999 ./node_modules/next/dist/bin/next build
 
 COPY deploy/nginx.conf /etc/nginx/nginx.conf
 COPY deploy/nginx-default /etc/nginx/sites-enabled/default

@@ -76,6 +76,10 @@ const Order = ({ order, getInvoice }) => {
               isCancelable={orderItem.isCancelable}
               isReturnable={orderItem.isReturnable}
               isExchangable={orderItem.isExchangable}
+              isDamageProtectionAvailable={orderItem.isDamageProtectionAvailable}
+              isWarrantyAvailable={orderItem.isWarrantyAvailable}
+              listingId={orderItem.listingId}
+              tuinId={orderItem.tuinId}
             />
           ))}
         </Col>

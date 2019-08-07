@@ -16,6 +16,10 @@ const initialState = {
   countriesData: [],
   productId:null,
   varaintId:null,
+  tilaPolicy:{
+    extended_warranty: '',
+    damage_protection: '',
+  }
 };
 const productReducer = typeToReducer({
   [actions.GET_PRODUCT]: {
@@ -106,6 +110,9 @@ const productReducer = typeToReducer({
     }),
     REJECTED: state => Object.assign({}, state, { ui: { ...state.ui, loading: false } }),
   },
+  [actions.SET_TILA_POLICY]: (state,action) => Object.assign({}, state, {
+    tilaPolicy:action.data
+  }),
   [actions.SET_PRODUCTID]:(state,action) => Object.assign({}, state, {
     productId:action.id,
   }),

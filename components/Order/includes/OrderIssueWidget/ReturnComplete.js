@@ -20,6 +20,22 @@ const { ORDER_PAGE } = languageDefinations();
 
 class ReturnComplete extends Component {
 
+  getExchangeType = (issueType) => (
+    {
+      RETURN:ORDER_PAGE.REQ_RETURN,
+      EXCHANGE:ORDER_PAGE.REQ_EXCHANGE,
+      CLAIMWARRANTY: ORDER_PAGE.YOUR_ORDER,
+      DAMAGEWARRANTY:ORDER_PAGE.YOUR_ORDER,
+    }[issueType]
+  )
+  getSuccessMessageType = (issueType) => (
+    {
+      RETURN:ORDER_PAGE.REQ_SUCCESS,
+      EXCHANGE:ORDER_PAGE.REQ_SUCCESS,
+      CLAIMWARRANTY: ORDER_PAGE.CLAIM_WARRANTY_MSG,
+      DAMAGEWARRANTY:ORDER_PAGE.CLAIM_WARRANTY_MSG,
+    }[issueType]
+  )
   render() {
 
     const { orderIssue, loadingStatus, errorMessege, goToNextStep, query } = this.props;
@@ -48,12 +64,10 @@ class ReturnComplete extends Component {
                         <span>
                           <span>
                             {
-                              query.returnExchangeType === 'RETURN' ?
-                                ORDER_PAGE.REQ_RETURN :
-                                ORDER_PAGE.REQ_EXCHANGE
+                              this.getExchangeType(orderIssue.issueType)                              
                             }
                           </span>
-                          <span className={styles['fontW600']}> {selectedItem.name} {ORDER_PAGE.REQ_SUCCESS}</span>
+                          <span className={styles['fontW600']}> {selectedItem.name} {this.getSuccessMessageType(orderIssue.issueType)}</span>
                         </span>
                       </div>
                       <div>
