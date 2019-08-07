@@ -51,7 +51,7 @@ class Category extends Base {
     if (shippingCity) {
       searchOptions.shippingDetails = {
         shippingCity: shippingCity.toUpperCase(),
-        shippingCountry: (country || 'ARE').toUpperCase(),
+        shippingCountry: (country || 'SAU').toUpperCase(),
       };
     }
     await Promise.all([
