@@ -796,7 +796,7 @@ export const AR_KEYWORDS = {
     TRACKING_ID: 'Tracking Id',
   },
   BETA: {
-    BETA: 'فترة تجريبية',
+    BETA: 'بيتا',
   },
   DRAG_DROP: {
     DRAG_AND_DROP: '  أرفق الملفات أو أسحبهم وضعهم',

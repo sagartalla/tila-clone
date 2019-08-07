@@ -33,12 +33,14 @@ class ProductPage extends Base {
   static async getInitialProps({
     store, query, isServer, req,
   }) {
+    debugger;
     const { country, language } = query;
     const shippingData = req ? req.universalCookies.get('shippingInfo') : cookies.get('shippingInfo');
     const { city: shippingCity, country: shippingCountry } = shippingData || {};
     const {
-      productId,variantId
+      pid, vid, cid
     } = query;
+    const productId = pid;
     // if (taskCode) {
     //   await store.dispatch(actionCreators.getPreview({
     //     taskCode,
@@ -89,6 +91,7 @@ class ProductPage extends Base {
   render() {
     const Product = this.product;
     const { url, loaderProps, allState } = this.props;
+    const { pid: productId, vid: variantId } = url.query;
     return (
       <div>
         <Head>
@@ -107,8 +110,8 @@ class ProductPage extends Base {
         <h1 className={`${styles.display_none}`}>{allState.productReducer && allState.productReducer.data && allState.productReducer.data[0].product_details && allState.productReducer.data[0].product_details.product_details_vo && allState.productReducer.data[0].product_details.product_details_vo.cached_product_details.attribute_map.calculated_display_name.attribute_values[0].value}</h1>
         <Layout>
           <Product
-            variantId={url.query.variantId}
-            productId={url.query.productId}
+            variantId={variantId}
+            productId={productId}
             loaderProps={loaderProps}
           />
         </Layout>

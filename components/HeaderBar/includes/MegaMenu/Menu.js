@@ -98,7 +98,7 @@ const brandImages = {
     ],
     '#EF6079': [
       {
-        value: 'Bvlgari-1',
+        value: 'Bvlgari-img',
         link: `/${lang}/brand/bvlgari`,
       },
       {
@@ -187,8 +187,6 @@ class Menu extends Component {
 
   render() {
     const { selectedCategoryTree, itemColor, parentID } = this.props;
-    console.log('item color : ', itemColor);
-    console.log('brandImages  : ', brandImages);
     return (
       <div
         className={`${styles['pt-20']} ${styles['megamenu-dropdown']} ${this.state.viewAllMenu ? {} : styles['max-height']}`}

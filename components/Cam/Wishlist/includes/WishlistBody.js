@@ -51,8 +51,8 @@ const WishlistBody = (props) => {
     }
     return str;
   };
-  const routeChange = (variant_id, product_id, catalog_id, listing_id, name) => {
-    Router.push(`/${language}/pdp/${name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/c/${catalog_id}/p/${product_id}/l/${listing_id}/v/${variant_id ? `${variant_id}` : ''}`);
+  const routeChange = (variant_id='', product_id, catalog_id, listing_id='', name, tuin_id) => {
+    Router.push(`/${language}/pdp/${name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${tuin_id}/${listing_id}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`);
   };
   return (data.length === 0 ?
     <div className={styles['no-wishlist-icon']}>
@@ -76,7 +76,7 @@ const WishlistBody = (props) => {
           data.length > 0 && data.map((item, index) => {
             const {
               wishlist_id, listing_id, brand_name, name, img, price, cur, inventory_count, changed_percentage, changed_price,
-              changed_status, wishlisted_price, mrp, variant_id, product_id, catalog_id, itemType, buttonValue
+              changed_status, wishlisted_price, mrp, variant_id, product_id, catalog_id, itemType, buttonValue, tuin_id,
             } = item;
             return (
               <div key={index} className={`${styles['thick-border-btm']} ${styles['p-30-20']} ${styles['mb-wishlist-part']}`}>
@@ -84,7 +84,7 @@ const WishlistBody = (props) => {
                   <Col md={2} xs={2} className={styles['m-p-0']}>
                     <div
                       className={`${styles['flex-center']} ${styles['justify-center']} ${styles.pointer} ${styles['mb-wishlist-part-img']}`}
-                      onClick={() => routeChange(variant_id, product_id, catalog_id, listing_id, name)}
+                      onClick={() => routeChange(variant_id, product_id, catalog_id, listing_id, name, tuin_id)}
                     >
                       <img className={styles.img} src={`${constants.mediaDomain}/${img}`} />
                     </div>
@@ -92,7 +92,7 @@ const WishlistBody = (props) => {
                   <Col md={10} xs={10}>
                     <Col md={8} xs={8} className={styles['pl-0']}>
                       <h5 className={`${styles['mt-0']} ${styles['mb-0']} ${styles['thick-blue']}`}>{brand_name}</h5>
-                      <h5 className={`${styles['lgt-gry-clr']} ${styles.pointer} ${styles['light-gry-clr']}`} onClick={() => routeChange(variant_id, product_id, catalog_id, itemType, name)}>{name}</h5>
+                      <h5 className={`${styles['lgt-gry-clr']} ${styles.pointer} ${styles['light-gry-clr']}`} onClick={() => routeChange(variant_id, product_id, catalog_id, itemType, name, tuin_id)}>{name}</h5>
                       <div className={`${styles['mt-30']} ${styles['m-t-0']} ${styles['m-fs-12']}`}>
                         {inventory_count > 0 ?
                           <button

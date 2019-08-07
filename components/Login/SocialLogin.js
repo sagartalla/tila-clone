@@ -37,9 +37,9 @@ class SocialLogin extends Component {
   }
 
   componentDidMount() {
-    window.onload = () => {
-      this.getTokenCall('instagram', location.search.code);
-    }
+    // window.onload = () => {
+    //   this.getTokenCall('instagram', location.search.code);
+    // }
   }
 
   handleSocialLogin = (socialNetwork) => (e) => {
@@ -49,13 +49,6 @@ class SocialLogin extends Component {
       case 'instagram': this.instaLogin(); break;
       default: console.log(socialNetwork)
     }
-    // const { v2CurrentFlow } = this.props;
-    // // showUserInfo(activeEmailId).then((res) => {
-    // //   if (res.value.status === 200) {
-    //     const data = { currentFlow: 'not_accessable_social_user', nextPage: 'social_login' };
-    //     v2CurrentFlow(data);
-    //   }
-    // });
   }
 
   getTokenCall = (socialNetwork, token) => {
