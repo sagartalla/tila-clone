@@ -229,6 +229,7 @@ export const AR_KEYWORDS = {
     NO_SHIPPING_CITY: 'لا يشحن لمدينتك',
     SELECT_YOUR_CITY: 'اختر مدينتك',
     FREE_DELIVERY_BY: 'توصيل مجاني بواسطة',
+    DELIVERY_BY: 'Delivery By',
     FREE_DELIVERY_IN: 'توصيل مجاني في',
     NON_RETURNABLE: 'غير قابل للأرجاع',
     DAY: 'يوم',
@@ -269,6 +270,7 @@ export const AR_KEYWORDS = {
     OUT_OF_STOCK: 'نفذت الكمية',
     THANKS_DESCRIPTION: 'Thanks for taking your time to rate the product, this will help millions of users like you to make better purchase judgement',
     MAX_LENGTH: 'الحد الأقصى',
+    ITEM_LOCATION: 'Item Location',
   },
   VAULT_PAGE: {
     MANAGE_VAULT_HDR: 'التحكّم بالبطاقات والقسائم الشرائيه والمزيد',
@@ -944,6 +946,6 @@ export const AR_KEYWORDS = {
     COMPARE: 'Compare',
   },
   WARRANTY_PAGE: {
-    WARRANTY_LABEL: '*The extended warranty cost will be added to your cart'
+    WARRANTY_LABEL: '*Tila Care cost will be added to you cart'
   }
 };

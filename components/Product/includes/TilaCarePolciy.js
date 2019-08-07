@@ -57,11 +57,11 @@ export default function TilaCarePolicy({
                   </label>
                 </div>
                 <span
-                  className={`${styles.removeButton} ${styles['fs-10']}`}
+                  className={`${styles.removeButton} ${styles['fs-10']}`} 
                   onClick={removePolicy}
                   data-key={key}
                 >
-                  {CART_PAGE.REMOVE}
+                  <img className={styles['img-responsive']} src={"/static/img/bg-img/delivery-remove-icon.png"} />
                 </span>
               </div>
               ))
@@ -84,18 +84,20 @@ export default function TilaCarePolicy({
          `}
     >
       {Object.keys(warranty).length > 0 ?
-        <div className={`${styles['flex-center']} ${styles['warenty-part-inn']} ${styles['warenty-part-single']}`}>
-          <SVGCompoent clsName={`${styles['trust-icon']} ${styles['mr-10']}`} src="icons/common-icon/non-warnty" />
+        <div className={`${styles['flex-center']} ${styles['warenty-part-inn']} ${styles['pb-10']} ${styles['warenty-part-single']}`}>
+          <span className={styles['warnty-trust-img']}><img className={styles['']} src={"/static/img/bg-img/trust-without-border.png"} alt="" /></span>
           <Warranty warranty={warranty} break />
         </div>
         :
-        <div className={`${styles['flex-center']} ${styles['warenty-part-inn']}`}>
-          <span className={styles['fs-10']}>{PDP_PAGE.NO_WARRANTY}</span>
-        </div>
+        null
       }
-      {Object.keys(data).length > 0 &&
-        <div className={`${styles.flex} ${styles['pb-10']} ${styles['border-b']} ${styles['tila-ext-wrny']}`}>{fetchPolicyData(data)}</div>}
-      <div className={`${styles.flex} ${styles['thick-gry-clr']} ${styles['fs-12']} ${styles['pt-5']}`}>{WARRANTY_PAGE.WARRANTY_LABEL}</div>
+      {
+        (Object.values(data)[0] !== null && Object.values(data)[1] !== null) && 
+        <>
+        <div className={`${styles.flex} ${styles['pb-10']} ${styles['border-b']} ${styles['border-t']} ${styles['tila-ext-wrny']}`}>{fetchPolicyData(data)}</div>
+        <div className={`${styles.flex} ${styles['thick-gry-clr']} ${styles['fs-12']} ${styles['pt-5']}`}>{WARRANTY_PAGE.WARRANTY_LABEL}</div>
+        </>
+      }      
     </div>
   );
 }

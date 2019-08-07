@@ -15,12 +15,15 @@ const url = {
   'customer-delivery': `https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/policies/user/delivery/${lang}/UserShippingDelivery.html`,
 };
 
-const Policy = ({ query }) => (
-  <Fragment>
-    <HeaderBar />
-    <iframe src={url[query.name]} title={query.name} style={{ height: '100vh', width: '100%', border: '0' }} />
-    <FooterBar />
-  </Fragment>
-);
+const Policy = ({ query }) => {
+  console.log(query);
+  return (
+    <Fragment>
+      <HeaderBar />
+      <iframe src={url[query.name]} title={query.name} style={{ height: '100vh', width: '100%', border: '0' }} />
+      <FooterBar />
+    </Fragment>
+  );
+};
 
 export default Policy;

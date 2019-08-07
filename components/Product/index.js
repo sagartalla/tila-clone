@@ -268,13 +268,17 @@ const getProductComponent = (isPreview, taskCode) => {
                               warranty={warranty}
                             />
                           }
-                          <TilaCarePolicy
+                          
+                           
+                            <TilaCarePolicy
                             data={tila_care_policy}
                             warranty={warranty}
                             setTilaPolicy={this.setTilaPolicy}
                             choosenPolicyData={this.state.choosenPolicyData}
                             selectedTilaPolicy={selectedTilaPolicy}
                           />
+                        
+                         
                           {isPreview ? null :
                             (shippingInfo === null || shippingInfo.shippable)
                               ?

@@ -44,6 +44,7 @@ const actions = {
   SHIPPING_ACCOUNT: 'SHIPPING_ACCOUNT',
   V2_PREVIOUS_PAGE: 'V2_PREVIOUS_PAGE',
   SKIP_AND_CONTINUE: 'SKIP_AND_CONTINUE',
+  GET_GEO_SHIPPING_DETAILS: 'GET_GEO_SHIPPING_DETAILS',
 };
 
 const actionCreators = {
@@ -191,6 +192,9 @@ const actionCreators = {
       }));
     });
   },
+  getGeoShippingData: () => ({
+    type: actions.GET_GEO_SHIPPING_DETAILS
+  }),
   //new actions for registration flow
   v2UserLogin: email => ({
     type: actions.V2_USER_LOGIN,

@@ -1,6 +1,6 @@
 import React from 'react';
 import { languageDefinations } from '../../../utils/lang';
-import SVGCompoent from '../../common/SVGComponet';
+import SVGComponent from '../../common/SVGComponet';
 
 import Slider from '../../common/slider';
 
@@ -44,7 +44,9 @@ class Warranty extends React.Component {
     const warranty_time = warranty.duration;
     return (
       <div className={`${styles['flex-center']} ${styles['warranty-part']}  ${styles.relative} ${styles.pointer}`}>
-        <span className={`${styles['flex-center']}`}><span>{warranty_display}</span></span>
+        <span className={`${styles['flex-center']}`}>
+          <span>{warranty_display}</span>
+        </span>
         <a className={`${styles.fontW600} ${styles['ml-20']} ${styles['view-more-label']} ${styles['fs-12']}`} onClick={this.openSlider}>{warranty_time > 0 ? CART_PAGE.VIEW_MORE : ''}</a>
         {this.state.slider &&
         <Slider label="Warranty" isOpen={this.state.slider} closeSlider={this.closeSlider}>

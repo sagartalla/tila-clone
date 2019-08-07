@@ -234,6 +234,7 @@ export const EN_KEYWORDS = {
     NO_SHIPPING_CITY: 'Currently not shipping to your city',
     SELECT_YOUR_CITY: 'Select Your City',
     FREE_DELIVERY_BY: 'FREE Delivery By',
+    DELIVERY_BY: 'Delivery By',
     FREE_DELIVERY_IN: 'Free delivery in',
     NON_RETURNABLE: 'Non returnable',
     DAY: 'Day',
@@ -275,6 +276,7 @@ export const EN_KEYWORDS = {
     THANKS_FOR_RATING: 'Thanks for Rating',
     THANKS_DESCRIPTION: 'Thanks for taking your time to rate the product, this will help millions of users like you to make better purchase judgement',
     MAX_LENGTH: 'Max Length',
+    ITEM_LOCATION: 'Item Location',
   },
   VAULT_PAGE: {
     VOUCHER_HISTORY: 'Your gift voucher transaction history',
@@ -954,6 +956,6 @@ export const EN_KEYWORDS = {
     COMPARE: 'Compare',
   },
   WARRANTY_PAGE: {
-    WARRANTY_LABEL: '*The extended warranty cost will be added to your cart'
+    WARRANTY_LABEL: '*Tila Care cost will be added to you cart'
   },
 };
