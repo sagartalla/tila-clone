@@ -855,6 +855,9 @@ export const EN_KEYWORDS = {
     CHOOSE_PROFILE_PIC: 'Choose a profile picture',
   },
   PREFERENCES: {
+    PUSH_NOTIFICATIONS: 'Push notifications',
+    EMAIL_NOTIFICATIONS: 'Email notifications',
+    SMS_NOTIFICATIONS: 'SMS notifications',
     PAGE_TITLE: 'Notification and communication preferences',
     SELECT_OPTION: 'Choose the notifications you want to receive.',
     NOTIFICATION_PREFERENCES: 'Notification preferences',
