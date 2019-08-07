@@ -30,12 +30,12 @@ const MiniCartBody = (props) => {
   const flag = data && items && items.length;
   const cnt = flag > 0 ? items.length : 0;
   const { CART_PAGE, DELIVERY_ADDR_PAGE } = languageDefinations();
-  if(data.ui.loading) {
-    return <div className={`${styles['p-15']} ${styles['fontW600']} ${styles['thick-gry-clr']} ${styles['mb-0']}`}>Please Wait Fetching Cart Items</div>
-  }
+  // if(data.ui.loading) {
+  //   return <div className={`${styles['p-15']} ${styles['fontW600']} ${styles['thick-gry-clr']} ${styles['mb-0']}`}>Please Wait Fetching Cart Items</div>
+  // }
   return (
     <div>
-      <div className={`${styles['cart-container']} ${styles['mini-cart']} ${styles['border-t']}`}>
+      <div className={`${styles['cart-container']} ${styles['mini-cart']} ${styles['border-t']}`} id="cart-container">
         {
           showBlocker ? <Blocker /> : ''
         }
