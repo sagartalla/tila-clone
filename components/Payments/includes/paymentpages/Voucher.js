@@ -9,6 +9,8 @@ import { actionCreators, selectors } from '../../../../store/payments';
 import { languageDefinations } from '../../../../utils/lang/';
 
 import lang from '../../../../utils/language';
+import { Router } from '../../../../routes';
+import Button from '../../../common/CommonButton';
 
 import main_en from '../../../../layout/main/main_en.styl';
 import main_ar from '../../../../layout/main/main_ar.styl';
@@ -28,7 +30,7 @@ class Voucher extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.processData && nextProps.processData.redirect_url) {
-      window.location = nextProps.processData.redirect_url;
+      Router.pushRoute(nextProps.processData.redirect_url);
     }
   }
 
@@ -43,7 +45,7 @@ class Voucher extends Component {
 
   render() {
     const { props } = this;
-    const { voucherData, isOnlyVocuher } = props;
+    const { voucherData, isOnlyVocuher, btnLoading } = props;
     const { balance, total_amount, amount_to_pay, currency_code, remaining_amount } = voucherData;
     return (
       <div className={`${styles['voucher']} ${styles['p-10']}`}>
@@ -80,7 +82,12 @@ class Voucher extends Component {
           isOnlyVocuher
             ?
             <div className={styles['mt-20']}>
-              <button onClick={this.proceedToPayment} className={`${styles['fp-btn-primary']} ${styles['fp-btn']} ${styles['border-radius']} ${styles['fp-btn-x-large']}`}>{PAYMENT_PAGE.PAY_USING_TILA_CREDIT}</button>
+            <Button
+                className={`${styles.flex} ${styles.width33} ${styles['border-radius']} ${styles.fontW600} ${styles['text-uppercase']}`}
+                onClick={this.proceedToPayment}
+                btnLoading={btnLoading}
+                btnText={PAYMENT_PAGE.PAY_USING_TILA_CREDIT}
+            />
             </div>
             :
             null
@@ -92,7 +99,8 @@ class Voucher extends Component {
 }
 
 const mapStateToprops = (store) => ({
-  processData: selectors.getProcessData(store)
+  processData: selectors.getProcessData(store),
+  btnLoading: selectors.getLoader(store),
 });
 
 const mapDispatchToProps = (dispatch) =>

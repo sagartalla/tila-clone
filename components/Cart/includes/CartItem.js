@@ -208,9 +208,9 @@ class CartItem extends React.Component {
     } = this.props;
     const { checked, showWarrantyDetails, warrantyName, policyName } = this.state;
     const {
-      item_id, img, name, offer_price, cur, quantity, max_limit, inventory, offerDiscounts,
-      brand_name, gift_info, shipping, warranty_duration, total_amount, total_discount, listing_id,
-      product_id, variant_id, itemType, catalogId, discount, mrp, variantAttributes, selling_price, policies_applied, tila_care_policy,
+      item_id, img, name, offer_price, cur, quantity, max_limit, inventory, offerDiscounts, tuin_id,
+      brand_name, gift_info, shipping, warranty_duration, total_amount, total_discount, listing_id='',
+      product_id, variant_id='', itemType, catalogId: catalog_id, discount, mrp, variantAttributes, selling_price, policies_applied, tila_care_policy, tila_care_charges,
     } = item;
     return (
       <div key={item_id} className={`${styles['mb-20']} ${styles['box']}`} id="cart-container">
@@ -235,8 +235,8 @@ class CartItem extends React.Component {
               <div
                 className={`${styles['flex-center']} ${styles['justify-center']} ${styles['pb-15']} ${styles['card-box-inn-img']}`}
               >
-                <Link route={`/${language}/pdp/${name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/c/${catalogId}/p/${product_id}/l/${listing_id}/v/${variant_id ? `${variant_id}` : ''}`}>
-                  <a className={`${styles.width100} ${styles['ht-100P']}`}>
+                <Link route={`/${language}/pdp/${name && name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${tuin_id}/${listing_id}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`}>
+                  <a className={`${styles['width100']} ${styles['ht-100P']}`}>
                     <img className={styles.img} alt={img} src={`${constants.mediaDomain}/${img}`} />
                   </a>
                 </Link>
@@ -255,9 +255,9 @@ class CartItem extends React.Component {
                   <h5 className={`${styles['mt-0']} ${styles['mb-0']}`}>{brand_name}</h5>
                 </Col>
                 <Col md={8} sm={8} className={`${styles['landscape-cart-details']} ${styles['pr-0']}`}>
-                  <h4 className={`${styles.fontW600} ${styles['m-fs-14']} ${styles['fs-16']}`}>
-                  <Link route={`/${language}/pdp/${name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/c/${catalogId}/p/${product_id}/l/${listing_id}/v/${variant_id ? `${variant_id}` : ''}`}>
-                      <a className={`${styles.width100} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
+                  <h4 className={`${styles['fontW600']} ${styles['m-fs-14']} ${styles['fs-16']}`}>
+                  <Link route={`/${language}/pdp/${name && name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${tuin_id}/${listing_id}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`}>
+                      <a className={`${styles['width100']} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
                         {name}
                       </a>
                     </Link>
@@ -384,6 +384,18 @@ class CartItem extends React.Component {
                               </div>
                               :
                               null
+                          }
+                           {
+                            tila_care_charges !== null &&
+                              <div className={`${styles['flx-space-bw']} ${styles['fs-12']}`}>
+                                <div className={`${styles['pb-10']}`}>
+                                  <div className={styles['thick-gry-clr']}>{CART_PAGE.TILA_CARE_PROTECTION}</div>
+                                </div>
+                                <div className={`${styles['t-rt']} ${styles['flex']}`}>
+                                  {tila_care_charges &&
+                                    `${tila_care_charges.display_value} ${tila_care_charges.currency_code}`}
+                                </div>
+                              </div>
                           }
 
                           <div className={` ${styles['flx-space-bw']} ${styles['total-amount']} ${styles['fs-12']}`}>

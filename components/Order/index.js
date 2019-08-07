@@ -30,7 +30,6 @@ class Order extends Component {
 
   render() {
     const { query, orderData, getInvoice } = this.props;
-    console.log('order', orderData);
     return (
       <LoaderBarContext.Consumer>
         {

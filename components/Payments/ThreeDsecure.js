@@ -2,12 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+import { Router } from '../../routes';
+
 import { actionCreators, selectors } from '../../store/payments';
 
 class Redirect extends Component {
   componentWillReceiveProps(nextProps) {
     if(nextProps.redirect3dSecureUrl) {
-      window.location = nextProps.redirect3dSecureUrl;
+      // window.location = nextProps.redirect3dSecureUrl;
+      Router.pushRoute(nextProps.redirect3dSecureUrl);
     }
   }
   componentDidMount() {

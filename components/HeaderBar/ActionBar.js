@@ -35,6 +35,7 @@ const cookies = new Cookie();
 
 const language = cookies.get('language') || 'en';
 const country = cookies.get('country') || 'SAU';
+const auth = cookies.get('auth');
 
 const snMetaObj = {
   google: {
@@ -64,7 +65,10 @@ class ActionBar extends Component {
   }
 
   componentDidMount() {
-    if (window.sessionStorage.getItem('TILuservisitcount') !== '1') {
+    if (window.location.pathname.indexOf('resetpassword') === -1 && window.sessionStorage.getItem('TILuservisitcount') !== '1' && !auth) {
+      if (!window.sessionStorage.getItem('TILuservisitcount')) {
+        window.sessionStorage.setItem('TILuservisitcount', 1);
+      }
       this.props.showLoginScreen();
     }
     this.props.getUserProfileInfo();
@@ -164,6 +168,7 @@ class ActionBar extends Component {
     this.props.logout().then((res) => {
       if (res && res.value && res.value.status === 200) {
         window.location = `${window.location.origin}/${cookies.get('language')}`;
+        localStorage.clear();
       }
     });
   }
@@ -171,10 +176,6 @@ class ActionBar extends Component {
   loginClick(e) {
     digitalData.page.pageInfo.pageType = 'Login Page';
     digitalData.page.pageInfo.pageName = 'Login Page';
-
-    if (!window.sessionStorage.getItem('TILuservisitcount')) {
-      window.sessionStorage.setItem('TILuservisitcount', 1);
-    }
 
     this.props.showLoginScreen();
 
