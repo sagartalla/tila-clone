@@ -65,7 +65,7 @@ class ActionBar extends Component {
   }
 
   componentDidMount() {
-    if (window.sessionStorage.getItem('TILuservisitcount') !== '1' && !auth) {
+    if (window.location.pathname.indexOf('resetpassword') === -1 && window.sessionStorage.getItem('TILuservisitcount') !== '1' && !auth) {
       this.props.showLoginScreen();
     }
     this.props.getUserProfileInfo();
