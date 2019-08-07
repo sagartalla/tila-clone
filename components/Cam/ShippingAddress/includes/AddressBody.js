@@ -68,7 +68,7 @@ const AddressBody = (props) => {
                       {`${val.address_line_1}, ${val.address_line_2}, ${val.city}, ${val.country_name}, ${val.postal_code}`}
                     </address>
                     <span className={`${styles['address-card-phone']} ${styles['flx-space-bw']} ${styles['align-center']}`}>
-                      <span>{`${val.mobile_country_code} ${val.mobile_no}`}</span>
+                      <span style={{direction: 'ltr'}}>{`${val.mobile_country_code} ${val.mobile_no}`}</span>
                           <span className={`${styles['work-list']}`}>{`${val.address_type}`}</span>
                     </span>
                   </div>
