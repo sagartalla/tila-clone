@@ -20,94 +20,92 @@ const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...s
 
 const f = [
   {
-    url: `/${lang}/search?q=Womens%20Clothing&language=en&isListed=false`,
+    url: `/${lang}/clp/${lang === 'en' ? 'Women\'s Clothing' : 'ملابس نسائية'}`,
     title: FOOTER_PAGE.WOMEN_CLOTHING,
   },
 
   {
-    url: `/${lang}/search?q=Mens%20Clothing&language=en&isListed=false`,
+    url: `/${lang}/clp/${lang === 'en' ? 'Men\'s Clothing' : 'ملابس رجالية'}`,
     title: FOOTER_PAGE.MEN_CLOTHING,
   },
 
   {
-    url: `/${lang}/search?q=Footwear&language=en&isListed=false`,
+    url: `/${lang}/clp/${lang === 'en' ? 'Footwear' : 'أحذية'}`,
     title: FOOTER_PAGE.FOOT_WEAR,
   },
 
   {
-    url: `/${lang}/search?q=sunglass&language=en&isListed=false`,
+    url: `/${lang}/clp/${lang === 'en' ? 'Sunglasses' : 'نظارات شمسية'}`,
     title: FOOTER_PAGE.SUNGLASSES,
   },
-
   {
-    url: `/${lang}/search?q=jewellery&language=en&isListed=false`,
-    title: FOOTER_PAGE.JEWELLERY,
-  },
-
-  {
-    url: `/${lang}/search/watch?q=watches&language=en&isListed=false`,
+    url: `/${lang}/clp/${lang === 'en' ? 'Watches' : 'ساعات اليد'}`,
     title: FOOTER_PAGE.WATCHES,
+  },
+  {
+    url: `/${lang}/clp/Fashion%20Accessories`,
+    title: FOOTER_PAGE.FASHION_ACCESSORIES,
   },
 ];
 
 const e = [
   {
-    url: `/${lang}/search?q=mobiles&language=en&isListed=false`,
+    url: `/${lang}/clp/${lang === 'en' ? 'mobiles' : 'الهواتف-النقالة'}`,
     title: FOOTER_PAGE.MOBILES,
   },
 
   {
-    url: `/${lang}/search?q=laptops&language=en&isListed=false`,
+    url: `/${lang}/clp/${lang === 'en' ? 'laptops' : 'أجهزة-الكمبيوتر-المحمولة'}`,
     title: FOOTER_PAGE.LAPTOPS,
   },
 
   {
-    url: `/${lang}/search?q=cameras&language=en&isListed=false`,
+    url: `/${lang}/clp/${lang === 'en' ? 'camera' : 'الة-تصوير'}`,
     title: FOOTER_PAGE.CAMERAS,
   },
 
   {
-    url: `/${lang}/search?q=Televisions&language=en&isListed=false`,
+    url: `/${lang}/clp/${lang === 'en' ? 'televisions' : 'التلفزيونات'}`,
     title: FOOTER_PAGE.TELEVISIONS,
   },
 
   {
-    url: `/${lang}/search?q=Storage%20Devices&language=en&isListed=false`,
+    url: `/${lang}/clp/${lang === 'en' ? 'storage devices' : 'أجهزة التخزين'}`,
     title: FOOTER_PAGE.STORAGE_DEVICES,
   },
 
   {
-    url: `/${lang}/search?q=Home Appliances`,
-    title: FOOTER_PAGE.HOME_APLLIANCES,
+    url: `/${lang}/clp/${lang === 'en' ? 'mobile-accessories' : 'ملحقات-الهاتف-المحمول'}`,
+    title: FOOTER_PAGE.MOBILE_ACCESSORIES,
   },
 ];
 
 const l = [
   {
-    url: `/${lang}/search?q=health%20and%20beauty`,
-    title: FOOTER_PAGE.BEAUTY_AND_PERSONAL_CARE,
+    url: `/${lang}/clp/travel%20accessories`,
+    title: FOOTER_PAGE.TRAVEL_ACCESSORIES,
   },
 
   {
-    url: `/${lang}/search?q=Home%20Furnishing&language=en&isListed=false`,
-    title: FOOTER_PAGE.HOME_FURNSHING,
+    url: `/${lang}/clp/search?q=Sports`,
+    title: FOOTER_PAGE.SPORTS_AND_OUTDOORS,
   },
 
   {
-    url: `/${lang}/search?q=dining`,
-    title: FOOTER_PAGE.KITCHEN_AND_DINING,
+    url: `/${lang}/clp/diaper`,
+    title: FOOTER_PAGE.MUMS_AND_KIDS,
   },
   {
-    url: `/${lang}/search?q=Home%20Decor&language=en&isListed=false`,
-    title: FOOTER_PAGE.HOME_DECOR,
+    url: `/${lang}/clp/beauty%20and%20health`,
+    title: FOOTER_PAGE.BEAUTY_AND_HEALTH,
   },
   {
-    url: `/${lang}/search?q=Baby%20Care&language=en&isListed=false`,
-    title: FOOTER_PAGE.BABY_CARE,
+    url: `/${lang}/clp/perfumes`,
+    title: FOOTER_PAGE.PERFUMES,
   },
   {
-    url: `/${lang}/search?q=Health%20Care&language=en&isListed=false`,
-    title: FOOTER_PAGE.HEALTH_CARE,
+    url: `/${lang}/clp/Home%20furnishing`,
+    title: FOOTER_PAGE.MAKEUP,
   },
 ];
 
@@ -304,18 +302,18 @@ const FooterBar = props => (
       <Grid>
         <div className={styles['footer-social-list']}>
             <div className={styles['ipad-pr-0']}>
-              <h4 className={`${styles.fontW600} ${styles['fs-16']} ${styles['black-color']}`}>{FOOTER_PAGE.COMPANY}</h4>
+              <h4 className={`${styles.fontW600} ${styles['fs-16']} ${styles['black-color']}`}>{FOOTER_PAGE.TILA}</h4>
               <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
-                <li>{FOOTER_PAGE.ABOUT_US}</li>
-                <li>{FOOTER_PAGE.CORE_VALUES}</li>
-                <li>{FOOTER_PAGE.MISSION}</li>
-                <li>{FOOTER_PAGE.IN_NEWS}</li>
-                <li>{FOOTER_PAGE.CAREERS}</li>
-                <li>{FOOTER_PAGE.CONTACT_US}</li>
+                <li>{FOOTER_PAGE.WHO_WE_ARE}</li>
+                <li>{FOOTER_PAGE.OUR_VALUES}</li>
+                <li>{FOOTER_PAGE.OUR_MISSION}</li>
+                <li>{FOOTER_PAGE.PRESS_REALESES}</li>
+                <li>{FOOTER_PAGE.JOIN_OUR_TEAM}</li>
+                <li>{FOOTER_PAGE.CORPARATE_ADDRESS}</li>
               </ul>
             </div>
             <div className={styles['ipad-pr-0']}>
-              <h4 className={`${styles.fontW600} ${styles['fs-16']} ${styles['black-color']}`}>{FOOTER_PAGE.POLICY}</h4>
+              <h4 className={`${styles.fontW600} ${styles['fs-16']} ${styles['black-color']}`}>{FOOTER_PAGE.POLICIES}</h4>
               <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
                 <li><a href={`/${lang}/policy/user-terms-and-conditions`} target="_blank">{FOOTER_PAGE.TERMS_CONDITION}</a></li>
                 <li><a href={`/${lang}/policy/cancellation-policy`} target="_blank">{FOOTER_PAGE.CANCELLATION_POLICY}</a></li>
@@ -341,12 +339,12 @@ const FooterBar = props => (
             </Col> */}
             <div className={styles['ipad-pr-0']}>
               <div>
-                <h4 className={`${styles.fontW600} ${styles['fs-16']} ${styles['black-color']}`}>{FOOTER_PAGE.CUSTOMER_SERVICE}</h4>
+                <h4 className={`${styles.fontW600} ${styles['fs-16']} ${styles['black-color']}`}>{FOOTER_PAGE.HELP}</h4>
                 <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
-                  <li><a href={`/${lang}/policy/customer-delivery`} target="_blank">{FOOTER_PAGE.DELIVERY}</a></li>
-                  <li>{FOOTER_PAGE.SIZE_GUIDE}</li>
-                  <li>{FOOTER_PAGE.PAY_METHOD}</li>
                   <li>{FOOTER_PAGE.CONSUMER_RIGHT}</li>
+                  <li>{FOOTER_PAGE.SHIPPING_AND_DELIVERY}</li>
+                  <li>{FOOTER_PAGE.FREQUENTLY_ASKED_QUESTIONS}</li>
+                  <li>{FOOTER_PAGE.CUSTOMER_CARE}</li>
                 </ul>
               </div>
             </div>
@@ -363,7 +361,7 @@ const FooterBar = props => (
                     </span>
                   </div>
                 </div>
-                <div className={styles['pt-30']}>
+                <div className={`${styles['pt-30']} ${styles['ml-20']}`}>
                   <span className={styles['fs-10']}>&copy;{FOOTER_PAGE.TILA_RIGHTS}</span>
                 </div>
               </div>

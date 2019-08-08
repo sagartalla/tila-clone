@@ -244,6 +244,7 @@ class CartItem extends React.Component {
               <CartStepper
                 count={count}
                 item={item}
+                data_scrollId="cart-container"
                 decreaseItemCnt={decreaseItemCnt}
                 increaseItemCnt={increaseItemCnt}
                 cartStepperInputHandler={cartStepperInputHandler}
@@ -447,11 +448,11 @@ class CartItem extends React.Component {
                   : ''
               }
             </span>
-            <span data-id={item_id} onClick={addToWishlist} className={`${styles['flex-center']} ${styles['move-to-wishlist']} ${styles['pr-20']} ${styles.pointer}`}>
+            <span data-id={item_id} data_scrollId="cart-container" onClick={addToWishlist} className={`${styles['flex-center']} ${styles['move-to-wishlist']} ${styles['pr-20']} ${styles.pointer}`}>
               <SVGComponent clsName={`${styles['wish-list-icon']}`} src="icons/wish-list/wish-list-icon" />
               <span className={styles['pl-10']}>{CART_PAGE.MOVE_TO_WISHLIST}</span>
             </span>
-            <span id={item_id} onClick={removeCartItem} className={`${styles['flex-center']} ${styles['cart-remove-icon']} ${styles['pl-20']} ${styles.pointer}`}>
+            <span id={item_id} data_scrollId="cart-container" onClick={removeCartItem} className={`${styles['flex-center']} ${styles['cart-remove-icon']} ${styles['pl-20']} ${styles.pointer}`}>
               <SVGComponent clsName={`${styles['delete-icon']}`} src="icons/delete-icon/delete-icon" />
               <span className={styles['pl-10']}>{CART_PAGE.REMOVE}</span>
             </span>
