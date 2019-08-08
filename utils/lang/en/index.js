@@ -234,6 +234,7 @@ export const EN_KEYWORDS = {
     NO_SHIPPING_CITY: 'Currently not shipping to your city',
     SELECT_YOUR_CITY: 'Select Your City',
     FREE_DELIVERY_BY: 'FREE Delivery By',
+    DELIVERY_BY: 'Delivery By',
     FREE_DELIVERY_IN: 'Free delivery in',
     NON_RETURNABLE: 'Non returnable',
     DAY: 'Day',
@@ -274,7 +275,8 @@ export const EN_KEYWORDS = {
     OUT_OF_STOCK: 'Out of stock',
     THANKS_FOR_RATING: 'Thanks for Rating',
     THANKS_DESCRIPTION: 'Thanks for taking your time to rate the product, this will help millions of users like you to make better purchase judgement',
-    MAX_LENGTH: 'Characters left :',
+    MAX_LENGTH: 'Max Length',
+    ITEM_LOCATION: 'Item Location',
   },
   VAULT_PAGE: {
     VOUCHER_HISTORY: 'Your gift voucher transaction history',
@@ -949,7 +951,7 @@ export const EN_KEYWORDS = {
     HOME_TITLE: 'Tila Saudi - Best online shopping site | Electronics,fashion ,lifestyle accessories and many more at best prices at Tila',
     LANDING_H2_CONTENT: 'Buy the latest',
     LANDING_H2: 'online at best prices at Tila.com Saudi',
-    LANDING_META_CONTENT: 'Shop latest', 
+    LANDING_META_CONTENT: 'Shop latest',
     LANDING_META_CONTENT1: 'at the best prices and much more online in Riyadh, Jeddah and all SAUDI Region - Enjoy 100 % Genuine Products ✦ Free Shipping ✦ Cash On Delivery ✦ Superfast Delivery.',
     PDP_H2: 'Buy',
     PDP_H2_TITLE: 'online | TILA SAUDI',
@@ -964,6 +966,6 @@ export const EN_KEYWORDS = {
     COMPARE: 'Compare',
   },
   WARRANTY_PAGE: {
-    WARRANTY_LABEL: '*The extended warranty cost will be added to your cart'
+    WARRANTY_LABEL: '*Tila Care cost will be added to you cart'
   },
 };

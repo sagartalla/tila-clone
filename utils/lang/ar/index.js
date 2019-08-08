@@ -229,6 +229,7 @@ export const AR_KEYWORDS = {
     NO_SHIPPING_CITY: 'لا يشحن لمدينتك',
     SELECT_YOUR_CITY: 'اختر مدينتك',
     FREE_DELIVERY_BY: 'توصيل مجاني بواسطة',
+    DELIVERY_BY: 'Delivery By',
     FREE_DELIVERY_IN: 'توصيل مجاني في',
     NON_RETURNABLE: 'غير قابل للأرجاع',
     DAY: 'يوم',
@@ -268,7 +269,8 @@ export const AR_KEYWORDS = {
     PDP_DONE: 'Done',
     OUT_OF_STOCK: 'نفذت الكمية',
     THANKS_DESCRIPTION: 'Thanks for taking your time to rate the product, this will help millions of users like you to make better purchase judgement',
-    MAX_LENGTH: 'Characters left :',
+    MAX_LENGTH: 'الحد الأقصى',
+    ITEM_LOCATION: 'Item Location',
   },
   VAULT_PAGE: {
     MANAGE_VAULT_HDR: 'التحكّم بالبطاقات والقسائم الشرائيه والمزيد',
@@ -950,7 +952,7 @@ export const AR_KEYWORDS = {
     HOME_TITLE: 'تسوق عبر الانترنت | اكترونيات، ازياء ولايف ستايل واكثر اون لاين | تيله.كوم السعودية',
     LANDING_H2_CONTENT: 'احدث',
     LANDING_H2: 'اون لاين | تيله السعودية / احدث جوالات وهواتف محموله اون لاين | تيله السعودية',
-    LANDING_META_CONTENT: 'تسوقوا واحصلوا علي احدث انواع', 
+    LANDING_META_CONTENT: 'تسوقوا واحصلوا علي احدث انواع',
     LANDING_META_CONTENT1: 'بافضل الاسعار وغيرها عبر الانترنت في الرياض وجدة وجميع انحاء السعودية - ✦ توصيل مجاني ✦ الدفع النقدي',
     PDP_H2: 'تفقدوا الان',
     PDP_H2_TITLE: 'اون لاين | تيله السعودية',
@@ -965,6 +967,6 @@ export const AR_KEYWORDS = {
     COMPARE: 'Compare',
   },
   WARRANTY_PAGE: {
-    WARRANTY_LABEL: '*The extended warranty cost will be added to your cart'
+    WARRANTY_LABEL: '*Tila Care cost will be added to you cart'
   }
 };

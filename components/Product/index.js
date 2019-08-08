@@ -260,24 +260,25 @@ const getProductComponent = (isPreview, taskCode) => {
                           />
                         </div>
                         <div className={`${styles['ipad-details']} ${styles['bdr-lt']} ${styles['ipad-pl-15']}`}>
-                          {
-                            isPreview ? null : <Shipping
-                                                  shippingInfo={shippingInfo}
-                                                  returnInfo={returnInfo}
-                                                  offerInfo={offerInfo}
-                                                  warranty={warranty}
-                                                />
+                          {isPreview ? null :
+                            <Shipping
+                              shippingInfo={shippingInfo}
+                              returnInfo={returnInfo}
+                              offerInfo={offerInfo}
+                              warranty={warranty}
+                            />
                           }
-                          {
-                            Object.keys(tila_care_policy).length > 0
-                            &&
+                          {Object.keys(warranty).length > 0 &&
                             <TilaCarePolicy
                               data={tila_care_policy}
+                              warranty={warranty}
                               setTilaPolicy={this.setTilaPolicy}
                               choosenPolicyData={this.state.choosenPolicyData}
                               selectedTilaPolicy={selectedTilaPolicy}
                             />
                           }
+                        
+                         
                           {isPreview ? null :
                             (shippingInfo === null || shippingInfo.shippable)
                               ?
@@ -320,7 +321,6 @@ const getProductComponent = (isPreview, taskCode) => {
                           } */}
                         </div>
                       </div>
-
                     </Col>
                   </Row>
                 </div>
