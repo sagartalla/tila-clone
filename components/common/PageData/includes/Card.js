@@ -18,9 +18,9 @@ const cookies = new Cookies();
 const language = cookies.get('language') || 'en';
 const country = cookies.get('country') || 'SAU';
 
-const routeChange = (product_id, catalog_id, name, listing_id, variant_id) => {
+const routeChange = (product_id, catalog_id, name, listing_id='', variant_id) => {
   //This route has to change, once tuin is available in this component's reducer.
-  Router.pushRoute(`/${language}/pdp/${name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${listing_id ? `${listing_id}`: ''}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`);
+  Router.pushRoute(`/${language}/pdp/${name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${listing_id}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`);
 }
 
 const Card = ({ listing, isLoggedIn, addToCart }) => (

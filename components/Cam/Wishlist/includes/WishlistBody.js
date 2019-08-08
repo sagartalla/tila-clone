@@ -51,8 +51,8 @@ const WishlistBody = (props) => {
     }
     return str;
   };
-  const routeChange = (variant_id='', product_id, catalog_id, listing_id, name, tuin_id) => {
-    Router.push(`/${language}/pdp/${name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${tuin_id ? `${tuin_id}/`: '' }${listing_id ? `${listing_id}`: ''}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`);
+  const routeChange = (variant_id='', product_id, catalog_id, listing_id='', name, tuin_id) => {
+    Router.push(`/${language}/pdp/${name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${tuin_id ? `${tuin_id}/`: '' }${listing_id}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`);
   };
   return (data.length === 0 ?
     <div className={styles['no-wishlist-icon']}>
