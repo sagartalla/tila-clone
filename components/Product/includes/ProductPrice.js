@@ -70,7 +70,7 @@ const ProductPrice = ({
                             <div className={styles['fs-12']}>({CART_PAGE.INCL_OF_ALL_TAXES})</div>
                           </div>
                           <div className={styles['t-cell']}>
-                            <span className={styles['fs-12']}>{`${mrp.display_value} ${mrp.currency_code || currency}`}</span>
+                            <span className={styles['fs-12']}>{`${mrp.currency_code || currency} ${mrp.display_value}`}</span>
                           </div>
                         </div>
                         <div className={styles['t-row']}>
@@ -78,7 +78,7 @@ const ProductPrice = ({
                             <div className={styles['fs-12']}>{CART_PAGE.SELLING_PRICE}</div>
                           </div>
                           <div className={styles['t-cell']}>
-                            <span className={styles['fs-12']}>{`${sp.display_value} ${sp.currency_code || currency}`}</span>
+                            <span className={styles['fs-12']}>{`${sp.currency_code || currency} ${sp.display_value}`}</span>
                           </div>
                         </div>
                         {
@@ -89,7 +89,7 @@ const ProductPrice = ({
                                   <div className={styles['fs-12']}>{od.description}</div>
                                 </div>
                                 <div className={styles['t-cell']}>
-                                  <span className={styles['fs-12']}>{`${od.discount.display_value} ${od.discount.currency_code || currency}`}</span>
+                                  <span className={styles['fs-12']}>{`${od.discount.currency_code || currency} ${od.discount.display_value}`}</span>
                                 </div>
                               </div>
                             );
@@ -105,11 +105,11 @@ const ProductPrice = ({
                         </div>
                         <div className={`${styles['t-row']} ${styles['total-amount']}`}>
                           <div className={`${styles['t-cell']} ${styles['fs-12']}`}>{ORDER_PAGE.TOTAL}</div>
-                          <div className={`${styles['t-cell']} ${styles['fs-12']}`}>{`${total.display_value} ${total.currency_code || currency}`}</div>
+                          <div className={`${styles['t-cell']} ${styles['fs-12']}`}>{`${total.currency_code || currency} ${total.display_value}`}</div>
                         </div>
                       </div>
                       <div>
-                        <div className={`${styles['p-5']} ${styles['mt-5']} ${styles['fs-12']} ${styles['overall-amount']}`}>{CART_PAGE.OVERALL_YOU_SAVE} {discountMrp && discountMrp.display_value && `${discountMrp.display_value} ${currency}`} {CART_PAGE.ON_THIS_PRODUCT}</div>
+                        <div className={`${styles['p-5']} ${styles['mt-5']} ${styles['fs-12']} ${styles['overall-amount']}`}>{CART_PAGE.OVERALL_YOU_SAVE} {discountMrp && discountMrp.display_value && `${currency} ${discountMrp.display_value}`} {CART_PAGE.ON_THIS_PRODUCT}</div>
                       </div>
                     </div>
                         : null
