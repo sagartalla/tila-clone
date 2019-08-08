@@ -7,6 +7,7 @@ import { selectors, actionCreators } from '../../store/order';
 import PaymentStatus from './includes/PaymentStatus';
 import OrderDetails from '../Order/includes/OrderDetails';
 import HeaderBar from '../HeaderBar';
+import { Router } from '../../routes';
 
 import lang from '../../utils/language';
 
@@ -47,7 +48,7 @@ class Thankyou extends Component {
 
   componentWillReceiveProps(nextProps) {
     if ((nextProps.orderData.status && nextProps.orderData.status !== 'CONFIRMED') && (window.location.href.indexOf('FAILED') === -1)) {
-      window.location = window.location.href.replace('SUCCESSFUL', 'FAILED');
+      Router.pushRoute(window.location.href.replace('SUCCESSFUL', 'FAILED'));
     }
   }
 

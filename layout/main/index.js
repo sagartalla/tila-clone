@@ -10,6 +10,7 @@ import ErrorComp from '../../components/common/Error';
 // const cookies = new Cookie();
 
 import lang from '../../utils/language';
+import NoSSR from 'react-no-ssr';
 
 import styles_en from './main_en.styl';
 import styles_ar from './main_ar.styl';
@@ -18,7 +19,9 @@ const styles = lang === 'en' ? styles_en : styles_ar;
 
 const Layout = ({ children, isApiResponseInvalid }) => (
   <div>
-    <Betalogo />
+    <NoSSR>
+      <Betalogo />
+    </NoSSR>
     <div className={styles['main-layout']}>
       {
         isApiResponseInvalid

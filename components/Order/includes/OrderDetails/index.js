@@ -74,6 +74,7 @@ const OrderDetails = ({ query, orderData, thankyouPage }) => {
                   isDamageProtectionAvailable={item.isDamageProtectionAvailable}
                   isWarrantyAvailable={item.isWarrantyAvailable}
                   listingId={item.listingId}
+                  tuinId={item.tuinId}
                 />
               ))}
             </div>
