@@ -272,8 +272,8 @@ class Product extends Component {
     const selectedProduct = selectedID.length > 0 && selectedID.includes(productId);
     const discountValue = variants.length > 0 &&
       variants[selectedIndex].discount && Math.floor(variants[selectedIndex].discount[0]);
-    const tuinId = variants.length > 0 && variants[selectedIndex].tuin && variants[selectedIndex].tuin[0];
-    const listing_id = variants.length > 0 && variants[selectedIndex].listingId && variants[selectedIndex].listingId[0];
+    const tuinId = variants && variants.length > 0 && variants[selectedIndex].tuin && variants[selectedIndex].tuin[0];
+    const listing_id = variants && variants.length > 0 && variants[selectedIndex] && variants[selectedIndex].listingId && variants[selectedIndex].listingId[0];
     const popover = (
       <Popover id={productId}>
         {variants.length > 0 && variants[selectedIndex].offersApplied &&

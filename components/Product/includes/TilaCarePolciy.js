@@ -53,11 +53,11 @@ export default function TilaCarePolicy({
                     checked={state[key] === item.policy_id}
                   />
                   <label className={`${styles['pl-10']} ${styles.fontW300} ${styles['fs-12']} ${styles['thick-gry-clr']}`}>
-                    {item.policy_name} | {item.cost.display_value}
+                    {item.policy_name} | {item.cost.currency_code} {item.cost.display_value}
                   </label>
                 </div>
                 <span
-                  className={`${styles.removeButton} ${styles['fs-10']}`} 
+                  className={`${styles.removeButton} ${styles['fs-10']}`}
                   onClick={removePolicy}
                   data-key={key}
                 >
@@ -65,6 +65,7 @@ export default function TilaCarePolicy({
                 </span>
               </div>
               ))
+
             }
           </div>
         );
@@ -92,12 +93,12 @@ export default function TilaCarePolicy({
         null
       }
       {
-        Object.keys(data).length > 0  && 
+        Object.keys(data).length > 0  &&
           <>
             <div className={`${styles.flex} ${styles['pb-10']} ${styles['border-b']} ${styles['border-t']} ${styles['tila-ext-wrny']}`}>{fetchPolicyData(data)}</div>
             <div className={`${styles.flex} ${styles['thick-gry-clr']} ${styles['fs-12']} ${styles['pt-5']}`}>{WARRANTY_PAGE.WARRANTY_LABEL}</div>
           </>
-      }      
+      }
     </div>
   );
 }
