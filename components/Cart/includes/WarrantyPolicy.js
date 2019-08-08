@@ -42,7 +42,7 @@ class WarrantyPolicy extends React.Component {
       addNewWarranty, warrantyChange, deleteWarranty, editWarranty, showWarrantyDetails, warrantyName, selectPolicy,
     } = this.props;
     let isWarrantyExists = false;
-    Object.keys(tila_care_policy).length > 0 && Object.keys(tila_care_policy).map(policyVal => {
+    tila_care_policy && Object.keys(tila_care_policy).length > 0 && Object.keys(tila_care_policy).map(policyVal => {
       if (((tila_care_policy[policyVal] === null) || (tila_care_policy[policyVal] === 0)) ||  (tila_care_policy[policyVal] && tila_care_policy[policyVal].length === 0)) {
         isWarrantyExists = false;
       } else {
