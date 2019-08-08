@@ -862,6 +862,9 @@ export const AR_KEYWORDS = {
     CHOOSE_PROFILE_PIC: 'اختار صورة ملفك الشخصي',
   },
   PREFERENCES: {
+    PUSH_NOTIFICATIONS: 'أرسل تنبهات',
+    EMAIL_NOTIFICATIONS: 'تنبيهات الإيميل',
+    SMS_NOTIFICATIONS: 'تنبيهات الرسائل النصية',
     PAGE_TITLE: 'الإشعارات والاتصال المفضل ',
     SELECT_OPTION: 'اختار نوع الإشعارالذي تود أن يصلك',
     NOTIFICATION_PREFERENCES: 'الإشعارات المفضلة',
