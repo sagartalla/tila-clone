@@ -33,7 +33,6 @@ export default function TilaCarePolicy({data,setTilaPolicy,choosenPolicyData,sel
   const fetchPolicyData = (data) => {
 
     let result = Object.keys(data).map((key,i) => {
-      //console.log('data', data[key]);
         if(Array.isArray(data[key])) {
           return (
             <div key={`index+${i}`} className={`${styles['flex']} ${styles['flex-colum']} ${styles['tila-care-warty']}`}>
@@ -57,7 +56,7 @@ export default function TilaCarePolicy({data,setTilaPolicy,choosenPolicyData,sel
                         checked={state[key] === item.policy_id}
                       />
                       <label className={`${styles['pl-10']} ${styles['fontW300']} ${styles['fs-12']} ${styles['thick-gry-clr']}`}>
-                        {item.policy_name} | {item.cost.display_value}
+                        {item.policy_name} | {item.cost.currency_code} {item.cost.display_value}
                       </label>
                     </div>
                     <span

@@ -144,7 +144,7 @@ const getSearchResutls = (store) => {
           modifiedVaraintsCopy.productSize = Object.values(v.attributes[product.flags.variant_id_attribute] || {})[0];
           modifiedVaraintsCopy.productAvailable = false;
           modifiedVaraintsCopy.variantId = v.id;
-          modifiedVaraintsCopy.tuinId = v.attributes.tuin[0];
+          modifiedVaraintsCopy.tuinId = v && v.attributes && v.attributes.tuin && v.attributes.tuin[0];
         }
 
         modifiedVaraints.push(modifiedVaraintsCopy);

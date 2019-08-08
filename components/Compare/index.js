@@ -180,7 +180,7 @@ class Compare extends Component {
                         </span>
                       </Link>
                       <div>
-                        <span className={styles.fontW600}>{product && product.price && product.price.display_value} {product && product.price && product.price.currency_code}</span>
+                        <span className={styles.fontW600}>{product && product.price && product.price.currency_code} {product && product.price && product.price.display_value}</span>
                         {/* <span className={`${styles['fs-12']} ${styles['google-clr']}`}>{product.offer}</span> */}
                       </div>
                     </div>
