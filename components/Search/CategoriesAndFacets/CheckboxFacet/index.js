@@ -75,10 +75,12 @@ class CheckboxFacet extends Component {
 
   toggleMore() {
     const { filter } = this.props;
-
     this.setState({
       maxRows: this.state.maxRows === filter.children.length ? MaxItems : filter.children.length,
       filterItems:this.sortSelectedItems(this.state.selectedItems)
+    }, () => {
+      this.state.maxRows > 10 &&
+      this.props.showBrandsModal(this.state.filterItems);
     });
   }
 
@@ -97,6 +99,7 @@ class CheckboxFacet extends Component {
     const { filter, index, facets } = this.props;
     const { selectedItems, maxRows, filterItems } = this.state;
     return (
+      <React.Fragment>
       <Panel eventKey={`${index + 'c'}`} key={filter.id}>
         <div className={`${styles['category-list']}`}>
           <Panel.Heading className={styles['category-list-head']}>
@@ -106,7 +109,7 @@ class CheckboxFacet extends Component {
             </Panel.Title>
           </Panel.Heading>
           <Panel.Body collapsible className={`${styles['border-b']}`}>
-            { maxRows > 8  ?
+            { maxRows > 8 && maxRows < 11 ?
               <RenderFilterBar
                 onFilterData={this.onFilterData}
                 placeName={`Search ${filter.name}`}
@@ -115,7 +118,7 @@ class CheckboxFacet extends Component {
             }
             <ul className={`${styles['category-sub-list']} ${styles['pl-20']} ${styles['pt-15']}`}>
               {
-                filterItems.slice(0, maxRows).map(childFitler => (
+                filterItems.slice(0, maxRows < 11 ? maxRows : 10).map(childFitler => (
                   <li key={childFitler.id} className={styles['category-sub-list-inn']}>
                     <div className={`${styles['checkbox-material']} ${styles['select-check-mate']}`}>
                       <input id={childFitler.param} type="checkbox" onChange={this.onChangeItem({ name: childFitler.name, param: childFitler.param })} checked={selectedItems.indexOf(childFitler.name) !== -1} />
@@ -125,12 +128,13 @@ class CheckboxFacet extends Component {
                 ))
               }
               {
-                this.state.isMoreButtonRequired ? <li onClick={this.toggleMore}><a>{maxRows === filter.children.length ? `-${SEARCH_PAGE.SHOW_LESS}` : `+ ${SEARCH_PAGE.SHOW_MORE}`}</a></li> : null
+                this.state.isMoreButtonRequired ? <li onClick={this.toggleMore}><a>{maxRows < 11 && (maxRows === filter.children.length) ? `-${SEARCH_PAGE.SHOW_LESS}` : `+ ${SEARCH_PAGE.SHOW_MORE}`}</a></li> : null
               }
             </ul>
           </Panel.Body>
         </div>
       </Panel>
+      </React.Fragment>
     );
   }
 }

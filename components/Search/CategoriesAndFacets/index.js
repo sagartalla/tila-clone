@@ -64,7 +64,7 @@ class CategoriesAndFacets extends Component {
   render() {
     const { filters, facets, search } = this.props;
     return (
-      <PanelGroup accordion id="categories-panel">
+      <PanelGroup accordion id="categories-panel" className={`${styles['relative']}`}>
         {filters.category.map((filter, index) => (
           filter.children.length ? <Panel eventKey={`${`${index}l`}`} key={filter.id}><LinkFacet filter={filter} /></Panel> : null
         ))}
@@ -85,6 +85,7 @@ class CategoriesAndFacets extends Component {
               selectedFilters={selectedFilters}
               index={index}
               key={filter.id}
+              showBrandsModal={this.props.showBrandsModal}
             />
             : null;
         })
