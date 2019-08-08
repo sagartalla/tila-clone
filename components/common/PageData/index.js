@@ -205,6 +205,173 @@ class PageData extends React.Component {
           </Row>
         );
       }
+
+
+
+      case 'CBT6a':{
+        const { banners, breadcrumb, title } = content.data[lang];
+
+        return(
+          <div className={`${styles['display-t-i-cb']} ${styles['flex']}`} >
+          
+            <div className={`${styles['mr-10']} ${styles['flex']}`} style={{width:'33.7%'}}>
+               <a href={banners[0].link}>
+                  <div className={styles.shadow}>
+                    <img src={banners[0].img} width={banners[0].config.width} height={banners[0].config.height}  alt="" className={styles['img-responsive']} />
+                  </div>
+                </a>
+            </div>
+
+            <div className={`${styles['mr-10']}`} style={{width:'24.91%'}}>
+
+                  <div className={`${styles['mb-10']} ${styles['flex']}`}>
+                    <a href={banners[1].link}>
+                        <div className={styles.shadow}>
+                          <img src={banners[1].img} width={banners[1].config.width} height={banners[1].config.height}  alt="" className={styles['img-responsive']} />
+                        </div>
+                      </a>
+                  </div>
+
+                  <div className={`${styles['flex']}`}>
+                    <a href={banners[2].link}>
+                        <div className={styles.shadow}>
+                          <img src={banners[2].img} width={banners[2].config.width} height={banners[2].config.height}  alt="" className={styles['img-responsive']} />
+                        </div>
+                      </a>
+                  </div>
+
+            </div>
+
+            <div className={`${styles['mr-10']} ${styles['flex']}`} style={{width:'16.48%'}}>
+               <a href={banners[3].link}>
+                  <div className={styles.shadow}>
+                    <img src={banners[3].img} width={banners[3].config.width} height={banners[3].config.height}  alt="" className={styles['img-responsive']} />
+                  </div>
+                </a>
+            </div>
+
+
+            <div style={{width:'24.91%'}}>
+
+                  <div className={`${styles['mb-10']} ${styles['flex']}`}>
+                    <a href={banners[4].link}>
+                        <div className={styles.shadow}>
+                          <img src={banners[4].img} width={banners[4].config.width} height={banners[4].config.height}   alt="" className={styles['img-responsive']} />
+                        </div>
+                      </a>
+                  </div>
+
+                  <div className={`${styles['flex']}`}>
+                    <a href={banners[5].link}>
+                        <div className={styles.shadow}>
+                          <img src={banners[5].img} width={banners[5].config.width} height={banners[5].config.height}   alt="" className={styles['img-responsive']} />
+                        </div>
+                      </a>
+                  </div>
+
+            </div>
+
+            <div className={`${styles['thick-gry-clr']} ${styles['fs-14']} ${styles['mt-10']} ${styles.pointer}`}>
+              {breadcrumb && breadcrumb.length > 0 &&
+                breadcrumb.map((bc, idx) => (
+                  <React.Fragment>
+                    <a className={styles['thick-gry-clr']} href={bc.link}>
+                      <span>{bc.display_name}</span>
+                    </a>
+                    {breadcrumb.length - 1 !== idx && <span className={`${styles['ml-5']} ${styles['mr-5']}`}>|</span>}
+                  </React.Fragment>
+                ))}
+            </div>
+
+
+          </div>
+        );
+      }
+
+
+      case 'CBT6b':{
+        const { banners, breadcrumb, title } = content.data[lang];
+
+        return(
+          <div className={`${styles['display-t-i-cb']} ${styles['flex']}`} >
+            
+            <div className={`${styles['mr-10']} ${styles['flex']}`} style={{width:'33.7%'}}>
+               <a href={banners[0].link}>
+                  <div className={styles.shadow}>
+                    <img src={banners[0].img} width={banners[0].config.width} height={banners[0].config.height}  alt="" className={styles['img-responsive']} />
+                  </div>
+                </a>
+            </div>
+
+            <div className={`${styles['mr-10']}`} style={{width:'16.48%'}}>
+
+                  <div className={`${styles['mb-10']} ${styles['flex']}`}>
+                    <a href={banners[1].link}>
+                        <div className={styles.shadow}>
+                          <img src={banners[1].img} width={banners[1].config.width} height={banners[1].config.height}  alt="" className={styles['img-responsive']} />
+                        </div>
+                      </a>
+                  </div>
+
+                  <div className={`${styles['flex']}`}>
+                    <a href={banners[2].link}>
+                        <div className={styles.shadow}>
+                          <img src={banners[2].img} width={banners[2].config.width} height={banners[2].config.height}  alt="" className={styles['img-responsive']} />
+                        </div>
+                      </a>
+                  </div>
+
+            </div>
+
+            <div className={`${styles['mr-10']} ${styles['flex']}`} style={{width:'33.7%'}}>
+               <a href={banners[3].link}>
+                  <div className={styles.shadow}>
+                    <img src={banners[3].img} width={banners[3].config.width} height={banners[3].config.height}  alt="" className={styles['img-responsive']} />
+                  </div>
+                </a>
+            </div>
+
+
+            <div style={{width:'16.48%'}}>
+
+                  <div className={`${styles['mb-10']} ${styles['flex']}`}>
+                    <a href={banners[4].link}>
+                        <div className={styles.shadow}>
+                          <img src={banners[4].img} width={banners[4].config.width} height={banners[4].config.height}   alt="" className={styles['img-responsive']} />
+                        </div>
+                      </a>
+                  </div>
+
+                  <div className={`${styles['flex']}`}>
+                    <a href={banners[5].link}>
+                        <div className={styles.shadow}>
+                          <img src={banners[5].img} width={banners[5].config.width} height={banners[5].config.height}   alt="" className={styles['img-responsive']} />
+                        </div>
+                      </a>
+                  </div>
+
+            </div>
+
+            <div className={`${styles['thick-gry-clr']} ${styles['fs-14']} ${styles['mt-10']} ${styles.pointer}`}>
+              {breadcrumb && breadcrumb.length > 0 &&
+                breadcrumb.map((bc, idx) => (
+                  <React.Fragment>
+                    <a className={styles['thick-gry-clr']} href={bc.link}>
+                      <span>{bc.display_name}</span>
+                    </a>
+                    {breadcrumb.length - 1 !== idx && <span className={`${styles['ml-5']} ${styles['mr-5']}`}>|</span>}
+                  </React.Fragment>
+                ))}
+            </div>
+
+
+          </div>
+        );
+      } 
+
+
+
+
       case 'DT1':
         return (
           <DT content={content} index={`${content.layout_id}${index}`} />
