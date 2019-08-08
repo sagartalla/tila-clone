@@ -108,7 +108,8 @@ class EmailModal extends Component {
       incidentCreated: false,
       referenceNumber: '',
       incidentId: '',
-      files: {}
+      files: {},
+      issueSearchQuery: ''
     }
     this.state.selectedIssue && this.state.selectedIssue.orderRelated && this.getOrders();
     props.getAllIssues();
@@ -146,10 +147,11 @@ class EmailModal extends Component {
       selectedIssue: issue,
       showDropDown: false,
       dropDownType: '',
-      selectedOrder: issue.orderRelated ? this.state.selectedOrder : ''
+      selectedOrder: issue.orderRelated ? this.state.selectedOrder : '',
+      issueSearchQuery: issue.q
     }, () => {
       if (issue.orderRelated && !this.state.orders.length) {
-        this.getOrders();
+        this.props.isLoggedIn && this.getOrders();
       }
     })
   }
@@ -191,6 +193,39 @@ class EmailModal extends Component {
     this.setState({
       files
     })
+  }
+
+  focusIssueSearch = (e) => {
+    this.setState({
+      issueSearchQuery: '',
+      showDropDown: true,
+      dropDownType: 'issue'
+    })
+  }
+
+  handleIssueSearch = (e) => {
+    this.setState({
+      issueSearchQuery: e.target.value,
+      ...(!!!e.target.value || (this.state.selectedIssue && this.state.selectedIssue.q.trim() !== e.target.value) && {selectedIssue: '', showDropDown: true, dropDownType: 'issue'}),
+    })
+  }
+
+  handleIssueSelectSearch = (issueArr) => (e) => {
+    if (e.keyCode === 13) {
+      const [id, q, catId, parentId, orderRelated] = this.props.allIssueData[issueArr[0]];
+      const issueObj = { id, q, catId, parentId, orderRelated };
+      this.handleIssueSelect(issueObj)(e);
+    }
+    if (e.type === 'blur') {
+      if(this.state.issueSearchQuery) {
+        this.handleIssueSelectSearch(issueArr)({keyCode: 13});
+      } else {
+        this.setState({
+          issueSearchQuery: this.state.selectedIssue.q.trim()
+        })
+      }
+    }
+    
   }
 
   createIncident = () => {
@@ -258,7 +293,7 @@ class EmailModal extends Component {
     const issueObj = { id, q, catId, parentId, orderRelated };
     const isSelected = this.state.selectedIssue.id === id;
     return (
-      <div onClick={this.handleIssueSelect(issueObj)} key={id}
+      <div onMouseDown={this.handleIssueSelect(issueObj)} key={id}
         className={`${styles['facp']} ${styles['ht-45']} ${index !== 0 && styles['bT']} ${isSelected && styles['highlightColor']}`}
         dangerouslySetInnerHTML={{ __html: q }}
       />
@@ -294,7 +329,9 @@ class EmailModal extends Component {
   render() {
     const { dropDownType, orders, selectedOrder, selectedIssue, email, incidentCreated, referenceNumber, firstname, lastname } = this.state;
     const { allIssueData } = this.props;
-    const issues = Object.keys(allIssueData).sort(sort)
+    const allIssues = Object.keys(allIssueData).sort(sort);
+    const allIssuesVal = Object.values(allIssueData);
+    const searchIssues = this.state.issueSearchQuery ? allIssuesVal.filter(iss => iss[1].toLowerCase().includes(this.state.issueSearchQuery.toLowerCase()) || iss[1] === 'Others').map(iss => iss[0]) : allIssues;
     return (
       <div className={styles['modalCont']}>
         {!incidentCreated ?
@@ -323,15 +360,24 @@ class EmailModal extends Component {
               <div className={styles['pV-20']}>
                 <div className={styles['formLabel']}>{languageLabel['HNS']['SELECT_ISSUE']}</div>
                 <div className={styles['relative']}>
-                  <div tabIndex={0} onBlur={this.handleDropDown('')} onClick={this.handleDropDown('issue')}
+                  <div tabIndex={0} onBlur={this.handleDropDown('')}
                     className={styles['dropDownInput']}
                   >
+                    <input type="text" 
+                      className={styles['searchInputIssue']} 
+                      placeholder={selectedIssue ? selectedIssue.q.trim() : ''} 
+                      value={this.state.issueSearchQuery} 
+                      onChange={this.handleIssueSearch}
+                      onFocus={this.focusIssueSearch}
+                      onBlur={this.handleIssueSelectSearch(searchIssues)} 
+                      onKeyUp={this.handleIssueSelectSearch(searchIssues)}
+                    />
                     <div className={styles['dropDownArrow']}>v</div>
-                    <div dangerouslySetInnerHTML={{ __html: selectedIssue ? selectedIssue.q : '' }} />
+                    {/* <div dangerouslySetInnerHTML={{ __html: selectedIssue ? selectedIssue.q : '' }} /> */}
                   </div>
                   <div className={dropDownType !== 'issue' ? styles['dropDownBox-close'] : styles['dropDownBox-open']}
                   >
-                    {issues.map(this.renderIssues)}
+                    {searchIssues.map(this.renderIssues)}
                   </div>
                 </div>
               </div>
