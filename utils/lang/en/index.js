@@ -274,7 +274,7 @@ export const EN_KEYWORDS = {
     OUT_OF_STOCK: 'Out of stock',
     THANKS_FOR_RATING: 'Thanks for Rating',
     THANKS_DESCRIPTION: 'Thanks for taking your time to rate the product, this will help millions of users like you to make better purchase judgement',
-    MAX_LENGTH: 'Max Length',
+    MAX_LENGTH: 'Characters left :',
   },
   VAULT_PAGE: {
     VOUCHER_HISTORY: 'Your gift voucher transaction history',
