@@ -220,7 +220,7 @@ class EmailModal extends Component {
       if(this.state.issueSearchQuery) {
         this.handleIssueSelectSearch(issueArr)({keyCode: 13});
       } else {
-        this.setState({
+        this.state.selectedIssue && this.setState({
           issueSearchQuery: this.state.selectedIssue.q.trim()
         })
       }
