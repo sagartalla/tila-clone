@@ -15,7 +15,6 @@ import styles_ar from '../components/Product/product_ar.styl';
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const { SEO_CONTENT } = languageDefinations();
-const cookies = new Cookie();
 
 class LandingPage extends Base {
   pageName = 'HOME';
