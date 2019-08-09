@@ -33,7 +33,10 @@ class Help extends Component {
       modalType: '',
       selectedOrder: '',
       selectedIssue: '',
+      fixCatContainer: false,
+      fetchPaginatedRes: 1
     }
+    this.scrollTimeout = '';
     this.props.getCategories();
   }
   componentDidMount() {
@@ -61,12 +64,21 @@ class Help extends Component {
     e.preventDefault();
     const { pathname } = window.location;
     const url = pathname.replace(this.props.query[0], `answers?search=${this.state.searchQuery}`);
-    Router.pushRoute(url);
+    window.location.assign(url)
+    //Router.pushRoute(url);
   }
   handleQueryChange = ({target: {name, value}}) => {
     this.setState({
       [name]: value
     })
+  }
+  handleParentScroll = (e) => {
+    clearTimeout(this.scrollTimeout)
+    const { scrollHeight, scrollTop, offsetHeight } = e.target;
+    if ((scrollTop + 10 + offsetHeight) > scrollHeight) {
+      this.scrollTimeout = setTimeout(this.setState({ fetchPaginatedRes: this.state.fetchPaginatedRes + 1}), 100)
+    }
+    e.target.scrollTop > (this.props.isLoggedIn ? 390 : 420) ? !this.state.fixCatContainer && this.setState({ fixCatContainer: true }) : this.state.fixCatContainer && this.setState({ fixCatContainer : false })
   }
   renderModal = (isLoggedIn) => (
     {
@@ -94,7 +106,7 @@ class Help extends Component {
       !!isCategoryLoaded ?
       <div className={styles['helpContainer']}>
         <HeaderBar />
-        <div className={styles['helpContentCont']}>
+        <div onScroll={this.handleParentScroll} className={styles['helpContentCont']}>
           <div>
             <div className={`${styles['flexCenterContainer']} ${styles['helpHeroContainer']}`}>
               <div className={`${styles['flexColCenterContainer']}`} style={{width: '100%'}}>
@@ -111,7 +123,7 @@ class Help extends Component {
             </div>
             <div className={styles['whiteBG']}>
               <div className={styles['helpContentContainer']}>
-                {helpComponents(type)(url, categoryData, query[0], isLoggedIn, this.renderContactCard, this.handleContactClick)}
+                {helpComponents(type)(url, categoryData, query[0], isLoggedIn, this.renderContactCard, this.handleContactClick, this.state.fixCatContainer, this.state.fetchPaginatedRes)}
               </div>
             </div>
           </div>

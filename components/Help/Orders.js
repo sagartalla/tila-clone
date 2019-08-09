@@ -59,6 +59,9 @@ class Orders extends Component {
         orders: [nextProps.ordersDetailData]
       })
     }
+    if(this.props.fetchPaginatedRes !== nextProps.fetchPaginatedRes) {
+      this.getOrders();
+    }
   }
   getOrders = () => {
     this.state.currentOrderPage < this.state.totalOrderPages && this.props.getOrderHistory(this.state.currentOrderPage);

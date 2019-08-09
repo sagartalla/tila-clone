@@ -109,7 +109,7 @@ class EmailModal extends Component {
       referenceNumber: '',
       incidentId: '',
       files: {},
-      issueSearchQuery: ''
+      issueSearchQuery: props.selectedIssue ? props.selectedIssue.q.trim() : ''
     }
     this.state.selectedIssue && this.state.selectedIssue.orderRelated && this.getOrders();
     props.getAllIssues();
