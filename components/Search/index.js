@@ -131,6 +131,13 @@ class Search extends Component {
     });
   }
 
+  selectedCheckbox = (selectedValues) => () => {
+    console.log('iam here', selectedValues);
+    this.setState({
+      selectedItems: selectedValues || [],
+    });
+  }
+
   closePopup = () => {
     this.setState({
       showModal: false,
@@ -158,7 +165,7 @@ class Search extends Component {
     const {
       query, optionalParams, isBrandPage, loaderProps,
     } = this.props;
-    const { sideBarPositionClass, containerStyle, showModal, filteredItems } = this.state;
+    const { sideBarPositionClass, containerStyle, showModal, filteredItems, selectedItems } = this.state;
     const { loadComponent, pathname } = loaderProps;
     return (
       <div>
@@ -176,11 +183,11 @@ class Search extends Component {
           <Grid id="search-container" className={`${styles['pt-20']} ${styles.relative} ${styles['search-container-wrap']}`}>
             <Col md={2} id="sidebar-position" className={`${styles['filter-panel']} ${styles['float-l']} ${styles['border-radius4']} ${styles['bg-white']} ${styles['p-0']} ${styles[sideBarPositionClass]}`} style={containerStyle}>
               <NoSSR>
-                <CategoriesAndFacets search={query} showBrandsModal={this.showBrandsModal} />
+                <CategoriesAndFacets search={query} showBrandsModal={this.showBrandsModal} selectedCheckbox={this.selectedCheckbox} />
               </NoSSR>
             </Col>
             <div className={`${styles.absolute} ${styles['bg-white']} ${styles.brandsmodal} `}>
-              {showModal && <SelectBrands showPopup={showModal} closePopup={this.closePopup} filteredItems={filteredItems} />}
+              {showModal && <SelectBrands showPopup={showModal} closePopup={this.closePopup} filteredItems={filteredItems} selectedItems={selectedItems} />}
             </div>
             <Col md={10} className={`${styles['search-results']} ${styles['fl-rt']} ${styles['pr-0']}`}>
               <SearchDetailsBar optionalParams={optionalParams} />

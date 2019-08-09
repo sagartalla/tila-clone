@@ -1,20 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Checkbox, Modal } from 'react-bootstrap';
+import { Checkbox, Modal, Col } from 'react-bootstrap';
 import Button from '../../../common/CommonButton';
 import lang from '../../../../utils/language';
+import RenderFilterBar from './searchInput';
 import main_en from '../../../../layout/main/main_en.styl';
 import main_ar from '../../../../layout/main/main_ar.styl';
 import styles_en from '../../search_en.styl';
 import styles_ar from '../../search_ar.styl';
 
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
-
-// import Images from '../../Images/index';
-
-const brandsList = ['123', 'Ashok', 'Add', 'Balu', 'C', 'D', 'E',
-  'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S',
-  'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 
 const alphabetList = ['#', 'A', 'B', 'C', 'D', 'E', 'F', 'G',
   'H', 'I', 'J', 'K', 'L', 'M',
@@ -23,27 +18,16 @@ class SelectBrand extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      checked: false,
-      showPopup: false,
-      active: false,
-      searchValue: '',
-      selectedAlphabet: '#',
+      selectedAlphabet: '',
       selectedIndex: 0,
       alphabets: alphabetList,
     };
   }
 
-  setSelectedAlphabet = ({ target }) => {
+  setSelectedAlphabet = (e) => {
     this.setState({
-      selectedAlphabet: target.text,
+      selectedAlphabet: e.target.innerText,
       searchValue: '',
-    });
-  }
-
-  cancelSearch = () => {
-    this.setState({
-      selectedAlphabet: '',
-      searchValue: null,
     });
   }
 
@@ -65,149 +49,110 @@ class SelectBrand extends Component {
     });
   };
 
-  handleDataNext = () => {
-    const { selectedIndex, alphabets } = this.state;
-    if (alphabets.length !== selectedIndex + 1) {
-      this.setState({
-        selectedAlphabet: alphabets[selectedIndex + 1],
-        selectedIndex: selectedIndex + 1,
-      });
-    }
-  };
-
-  handleDataPrev = () => {
-    const { selectedIndex, alphabets } = this.state;
-    if (selectedIndex !== 0) {
-      this.setState({
-        selectedAlphabet: alphabets[selectedIndex - 1],
-        selectedIndex: selectedIndex - 1,
-      });
-    }
-  };
-
-  handleChange = (event) => {
-    this.setState({ checked: event.target.checked, active: false });
-  };
-
   showBrandsData = () => {
     this.setState({
       active: true,
     });
   }
 
-  disableBrandsData = () => {
-    this.setState({
-      active: false,
-    });
+  resetSelectedFilters = () => {
+    alert('as');
   }
 
   render() {
     const {
       showPopup,
       filteredItems,
+      selectedItems,
     } = this.props;
     const {
       selectedAlphabet,
       alphabets,
-      data,
     } = this.state;
-    console.log('filteredItems', filteredItems);
     return (
-      <div className={`${styles['mb-0']} ${styles['mt-20']}`}>
-        {/* <Title title="Select Brands" /> */}
-        <div className={`${styles.flex} ${styles['align-center']}`}>
-          <div>
-            {showPopup &&
-            <div className={`${styles.width100}`}>
-            {/* <div className={`${styles['mb-20']}`}>
-                  <div>asasasa</div>
-                </div>
-                <div>
-                  <div className={`${styles.brandlist}`}>
-                    {data.map(listedBrands =>
-                      (
-                        <span className={`${styles.brands}`}>
-                          {<span>{listedBrands}</span>}
-                        </span>
-                      ))}
-                  </div>
-                </div> */}
-            <div className={` ${styles['mt-20']} ${styles.width100}`}>
-                  <div container className={styles.brandsdata}>
+      <div className={`${styles.flex} ${styles['align-center']}`}>
+        {showPopup &&
+          <div className={`${styles.width100}`}>
               <div className={`${styles['m-25']}`}>
-                  <div>
-                    <div className={`${styles['flex-center']} ${styles['main-popup']} ${styles['justify-between']}`}>
-                      <input
-                        type="text"
-                        placeholder=" Search brands here"
-                        style={{
-                        width: '200px',
-                        border: '1px solid #c8c7cc',
-                        boxShadow: 'none',
-                        borderRadius: '0px',
-                      }}
-                        onChange={this.filterItems}
-                        onCancelSearch={this.cancelSearch}
-                      />
-                      <div className={`${styles.flex} ${styles['align-center']}`}>
-                        {alphabets.map(alphabet => (
-                          <div className={`${styles['ml-5']}`}>
-                            <div
-                              href="javascript: void(0);"
-                              onClick={this.setSelectedAlphabet}
-                              className={`${selectedAlphabet === alphabet && styles.active}`}
-                            >
-                              {alphabet}
-                            </div>
-                          </div>
-                      ))}
-                      </div>
-                      <Button
-                        btnText="Apply Filters"
-                        onClick={this.props.closePopup}
-                        className={`${styles['border-left']}`}
-                      />
-                      <span className={`${styles['fs-30']} ${styles.pointer}`} onClick={this.props.closePopup}>&times;</span>
-                    </div>
+                <div>
+                  <div className={`${styles['flex-center']} ${styles['main-popup']} ${styles['justify-between']}`}>
+                    <RenderFilterBar
+                      onFilterData={this.onFilterData}
+                      placeName="Search brands here"
+                    />
                     <div className={`${styles.flex} ${styles['align-center']}`}>
-                      <div>
-                        <a
-                          href="javascript: void(0);"
-                          onClick={this.handleDataPrev}
-                        >
-                          {/* <img src={Images.CHEVRONPREV} alt="PREV" /> */}
-                        </a>
-                      </div>
-                      <div className={`${styles['m-40']}`}>
-                        {
-                filteredItems.map(childFitler => (
-                  <div className={styles['category-sub-list-inn']}>
-                    <div className={`${styles['checkbox-material']} ${styles['select-check-mate']}`}>
-                      <input id={childFitler.param} type="checkbox" />
-                      <label htmlFor={childFitler.param} className={`${styles['fs-12']} ${styles['category-label']}`}> <span className={styles['category-span']}>{childFitler.name}</span> <span className={styles['thick-gry-clr']}>{childFitler.count ? `${childFitler.count}` : ''}</span> </label>
+                      {alphabets.map(alphabet => (
+                        <div className={`${styles['ml-5']} ${styles['label-gry-clr']} ${styles.fontW600}`}>
+                          <div
+                            href="javascript: void(0);"
+                            onClick={this.setSelectedAlphabet}
+                            className={`${selectedAlphabet === alphabet && styles.active}`}
+                          >
+                            {alphabet}
+                          </div>
+                        </div>
+                      ))}
                     </div>
+                    <Button
+                      btnText="Apply Filters"
+                      onClick={this.props.closePopup}
+                      className={`${styles['border-left']}`}
+                    />
+                    <span className={`${styles['fs-30']} ${styles.pointer}`} onClick={this.props.closePopup}>&times;</span>
                   </div>
-                ))
-              }
-                      </div>
-                      <div>
-                        <a
-                          href="javascript: void(0);"
-                          className={`${styles['c-p']}`}
-                          onClick={this.handleDataNext}
-                        >
-                          {/* <img src={Images.CHEVRONNEXT} alt="PREV" /> */}
-                        </a>
-                      </div>
+                  <div>
+                    <a
+                      href="javascript: void(0);"
+                      onClick={this.handleDataPrev}
+                    >
+                      {/* <img src={Images.CHEVRONPREV} alt="PREV" /> */}
+                    </a>
+                  </div>
+                  <div className={`${styles['brands-list']}`}>
+                    <div className={`${styles['select-checkbox-width']}`}>
+                      {selectedItems && selectedItems.length > 0 &&
+                      <span>
+                        <span className={`${styles.fontW800} ${styles['fs-12']}`}>MY SELECTIONS</span>
+                        <span className={`${styles.fontW600} ${styles['ml-30']} ${styles['text-blue']} ${styles['fs-12']}`} onClick={this.resetSelectedFilters}>RESET</span>
+                      </span>
+                          }
                     </div>
-                  </div>
-                </div>
-            </div>
-                </div>
+                    <React.Fragment >
+                      {selectedItems && selectedItems.length > 0 && selectedItems.map(val => (
+                        <React.Fragment>
+                          <div className={`${styles['checkbox-material']} ${styles['select-check-mate']} ${styles['mt-10']} ${styles['select-checkbox-width']}`}>
+                            <input id={val} type="checkbox" checked />
+                            <label className={`${styles['fs-12']} ${styles['category-label']}`}>
+                                  <span className={`${styles['category-span']} ${styles.fontW700}`}>{val}
+                                    </span>
+                                </label>
+                          </div>
 
+                        </React.Fragment>
+                                ))}
+                      {
+                          filteredItems.map(childFitler => (
+                              alphabets.map(alphabet => (
+                                  (alphabet === (childFitler.name.startsWith(alphabet) ? alphabet : childFitler.name.match(/^\d/) ? '#' : '')) &&
+                                  <React.Fragment>
+                                    <div className={`${styles['label-gry-clr']} ${styles.fontW600} ${styles['select-checkbox-width']}`}>{alphabet}</div>
+                                    <div className={`${styles['checkbox-material']} ${styles['select-check-mate']} ${styles['select-checkbox-width']}`}>
+                                      <input id={childFitler.param} type="checkbox" checked={selectedItems && selectedItems.length > 0 && selectedItems.indexOf(childFitler.name) !== -1} />
+                                      <label htmlFor={childFitler.param} className={`${styles['fs-12']} ${styles['category-label']}`}>
+                                        <span className={(childFitler.name.startsWith(selectedAlphabet !== '' && selectedAlphabet)) || (selectedAlphabet === '#' && childFitler.name.match(/^\d/)) ? `${styles.fontW800} ${styles['category-span']}` : `${styles['category-span']} ${styles.fontW700}`}>{childFitler.name}
+                                          <span className={styles['thick-gry-clr']}>{childFitler.count ? `(${childFitler.count})` : ''}</span>
+                                        </span>
+                                      </label>
+                                    </div>
+                                  </React.Fragment>
+                               ))
+                          ))
+                        }
+                    </React.Fragment>
+                  </div>
+                </div>
+              </div>
           </div>}
-          </div>
-        </div>
       </div>
     );
   }

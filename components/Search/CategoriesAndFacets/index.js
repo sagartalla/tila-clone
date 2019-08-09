@@ -86,6 +86,7 @@ class CategoriesAndFacets extends Component {
               index={index}
               key={filter.id}
               showBrandsModal={this.props.showBrandsModal}
+              selectedCheckbox={this.props.selectedCheckbox}
             />
             : null;
         })

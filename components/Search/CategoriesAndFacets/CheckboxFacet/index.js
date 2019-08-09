@@ -52,13 +52,14 @@ class CheckboxFacet extends Component {
   onFilterData(value) {
     const { filter } = this.props;
     let items = filter.children.filter((item) => {
-      return item.name.toLowerCase().indexOf(value) !== -1
+      return item.name.toLowerCase().indexOf(value) > -1
     })
     this.setState({
       filterItems:items
     })
   }
   onChangeItem(value) {
+    console.log('this.props', this.props);
     return (e) => {
       const newSelectedItem = [...this.state.selectedItems];
       if (e.target.checked) {
@@ -68,6 +69,9 @@ class CheckboxFacet extends Component {
       }
       this.setState({
         selectedItems: newSelectedItem,
+      }, () => {
+        // this.state.maxRows > 10 &&
+        this.props.selectedCheckbox(this.state.selectedItems)();
       });
       this.props.onChangeHandle(value, e);
     };
@@ -79,9 +83,10 @@ class CheckboxFacet extends Component {
       maxRows: this.state.maxRows === filter.children.length ? MaxItems : filter.children.length,
       filterItems:this.sortSelectedItems(this.state.selectedItems)
     }, () => {
-      this.state.maxRows > 10 &&
+      // this.state.maxRows > 10 &&
       this.props.showBrandsModal(this.state.filterItems);
     });
+    this.props.selectedCheckbox(this.state.selectedItems)();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -113,6 +118,7 @@ class CheckboxFacet extends Component {
               <RenderFilterBar
                 onFilterData={this.onFilterData}
                 placeName={`Search ${filter.name}`}
+                className={`${styles['ml-20']}`}                
               /> :
               null
             }
@@ -122,7 +128,7 @@ class CheckboxFacet extends Component {
                   <li key={childFitler.id} className={styles['category-sub-list-inn']}>
                     <div className={`${styles['checkbox-material']} ${styles['select-check-mate']}`}>
                       <input id={childFitler.param} type="checkbox" onChange={this.onChangeItem({ name: childFitler.name, param: childFitler.param })} checked={selectedItems.indexOf(childFitler.name) !== -1} />
-                      <label htmlFor={childFitler.param} className={`${styles['fs-12']} ${styles['category-label']}`}> <span className={styles['category-span']}>{childFitler.name}</span> <span className={styles['thick-gry-clr']}>{childFitler.count ? `${childFitler.count}` : ''}</span> </label>
+                      <label htmlFor={childFitler.param} className={`${styles['fs-12']} ${styles.flex} ${styles['category-label']}`}> <span className={styles['category-span']}>{childFitler.name}</span> <span className={styles['thick-gry-clr']}>{childFitler.count ? `${childFitler.count}` : ''}</span> </label>
                     </div>
                   </li>
                 ))
