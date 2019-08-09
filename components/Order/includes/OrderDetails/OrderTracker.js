@@ -82,7 +82,7 @@ class OrderTracker extends React.Component {
                       <span>{orderItem.orderIds.length}</span>
                     </span>
                   </div>
-                  <p className={`${styles.fontW600} ${styles['fs-16']}`}>{orderItem.price.final_price.display_value} {orderItem.currency_code}</p>
+                  <p className={`${styles.fontW600} ${styles['fs-16']}`}>{orderItem.currency_code} {orderItem.price.final_price.display_value}</p>
                 </Col>
               </div>
               <div className={`${styles['p-5']} ${styles['pl-35']} ${styles['border-t']}`}>{ORDERS.TRACKING_ID}: {orderItem.trackingId}</div>

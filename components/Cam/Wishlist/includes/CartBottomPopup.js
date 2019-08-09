@@ -56,7 +56,7 @@ class CartBottomPopup extends Component {
                       <Link route={`/${language}/pdp/${name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${tuin_id}/${listing_id}?pid=${product_id}&vid=${variant_id ? `${variant_id}` : ''}&cid=${catalog_id}`}>
                         <h5 className={`${styles['label-gry-clr']} ${styles['fs-12']} ${styles['t-c']} ${styles['cart-wishlist-title']}`}>{name}</h5></Link>
                       <span className={`${styles['light-gry-clr']} ${styles['t-c']}`}>
-                        <span className={styles['fs-20']}>{price}</span> <span className={styles['fs-14']}> {cur}</span>
+                        <span className={styles['fs-14']}> {cur}</span> <span className={styles['fs-20']}>{price}</span>
                       </span>
                     </div>
                     <div className={`${styles['t-c']} ${styles['add-cart-btn']}`}>

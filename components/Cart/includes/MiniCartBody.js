@@ -30,12 +30,12 @@ const MiniCartBody = (props) => {
   const flag = data && items && items.length;
   const cnt = flag > 0 ? items.length : 0;
   const { CART_PAGE, DELIVERY_ADDR_PAGE } = languageDefinations();
-  if(data.ui.loading) {
-    return <div className={`${styles['p-15']} ${styles['fontW600']} ${styles['thick-gry-clr']} ${styles['mb-0']}`}>Please Wait Fetching Cart Items</div>
-  }
+  // if(data.ui.loading) {
+  //   return <div className={`${styles['p-15']} ${styles['fontW600']} ${styles['thick-gry-clr']} ${styles['mb-0']}`}>Please Wait Fetching Cart Items</div>
+  // }
   return (
     <div>
-      <div className={`${styles['cart-container']} ${styles['mini-cart']} ${styles['border-t']}`}>
+      <div className={`${styles['cart-container']} ${styles['mini-cart']} ${styles['border-t']}`} id="cart-container">
         {
           showBlocker ? <Blocker /> : ''
         }
@@ -82,7 +82,11 @@ const MiniCartBody = (props) => {
                     </div>
                     {(shipping === null || (shipping !== null && shipping.shippable)) ?
                       <div className={`${styles['flx-space-bw']} ${styles['pt-10']} ${styles['price-stepper-part']}`}>
-                        <span className={styles['fontW600']}>{offer_price + ' ' + cur}</span>
+                        <span className={styles['fontW600']}>
+                        <span>{cur}</span>&nbsp;
+                        <span>{offer_price}</span>
+                        {/* {offer_price + ' ' + cur} */}
+                        </span>
                         <span>
                           {
                             editCartDetails ?
@@ -115,7 +119,10 @@ const MiniCartBody = (props) => {
         cnt > 0 && showCheckOutBtn ?
           <div className={`${styles['p-20']} ${styles['instant-checkout-btn-part']}`}>
             <div className={`${styles['flx-spacebw-alignc']} ${styles['pb-10']}`}>
-              <span className={styles['fontW600']}>{CART_PAGE.TOTAL_AMOUNT} :</span><span className={`${styles['fs-16']} ${styles['fontW600']}`}> {total_offer_price.display_value + ' ' + currency}</span>
+              <span className={styles['fontW600']}>{CART_PAGE.TOTAL_AMOUNT} :</span><span className={`${styles['fs-16']} ${styles['fontW600']}`}>
+              <span>{currency}</span>&nbsp;
+              <span>{total_offer_price.display_value }</span>
+              </span>
             </div>
             <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['right-radius']} ${styles['fp-btn-large']} ${styles['fs-18']} ${styles['flex-center']} ${styles['justify-center']}`} onClick={checkoutBtnHandler}>
               <SVGComponent clsName={`${styles['secure-checkout']}`} src="icons/common-icon/secure-checkout" />

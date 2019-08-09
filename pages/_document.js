@@ -1,7 +1,6 @@
 import Document, { Head, Main, NextScript } from 'next/document';
 import getConfig from 'next/config';
 
-import Meta from '../components/helpers/Meta';
 import Script from '../components/helpers/Script';
 import adobeTags from '../constants/adobeLinks';
 import newrelicTags from '../constants/newrelicLinks'
@@ -35,13 +34,18 @@ export default class MyDocument extends Document {
                 <link rel="stylesheet" href="/static/css/fonts_en.css" />
           }
           <script type="text/javascript" src="/static/sociallogin.js" />
-          <Meta />
           <script src="/static/scripts/dataLayer.js" />
           <link rel="alternate" hrefLang="ar-SA" href="https://www.tila.com/ar/" />
           <link rel="alternate" hrefLang="en-SA" href="https://www.tila.com/en/" />
           <meta httpEquiv="Content-type" content="text/html; charset=utf-8" />
           <meta name="robots" content="noodp" />
           <meta httpEquiv="X-UA-Compatible" content="IE=Edge" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <link rel="icon" href="/static/favicon.ico" />
+          <meta name="robots" content="noodp" />
+          <meta name="viewport" content="width= " />
+          <meta name="robots" content="index,follow" />
+          <meta name="author" content="Tila" />
         </Head>
         <body>
           {

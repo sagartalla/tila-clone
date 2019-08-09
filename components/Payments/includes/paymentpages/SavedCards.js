@@ -125,7 +125,7 @@ class SavedCards extends Component {
         <Button
           className={`${styles['fs-16']} ${styles['text-uppercase']} ${styles['pay-btn']} ${styles['border-radius']} ${styles.width33} ${styles['ht-40']} ${styles['new-card-btn']}`}
           onClick={this.proceedToPayment}
-          btnText={PAYMENT_PAGE.PAY + ' ' + data.amount_to_pay.display_value + ' ' + data.amount_to_pay.currency_code}
+          btnText={PAYMENT_PAGE.PAY + ' ' + data.amount_to_pay.currency_code + ' ' + data.amount_to_pay.display_value}
           hoverClassName="hoverBlueBackground"
           btnLoading={showLoading}
         />
