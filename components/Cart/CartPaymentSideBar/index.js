@@ -46,7 +46,7 @@ class CartAndPaymentSideBar extends Component {
 
     const {
       items, total_price, total_offer_price, total_gift_charges,
-      total_discount, total_shipping, tax, item_cnt, currency,
+      total_discount, total_shipping, tax, item_cnt, currency, total_tila_care_charges,
     } = data;
     return (
       <div className={`${styles['right-bar']}`}>
@@ -149,6 +149,16 @@ class CartAndPaymentSideBar extends Component {
                 <span className={styles['thick-gry-clr']}>{CART_PAGE.TAXES}</span>
                 <span>{currency}</span>
               </li> : null
+            }
+            {
+              total_tila_care_charges !== null &&
+              <li>
+                <span className={styles['thick-gry-clr']}>{CART_PAGE.TILA_CARE_PROTECTION}</span>
+                <span>
+                  {total_tila_care_charges &&
+                    `${total_tila_care_charges.currency_code} ${total_tila_care_charges.display_value}`}
+                </span>
+              </li>
             }
             <li className={`${styles['mt-20']} ${styles['fs-16']} ${styles['light-gry-clr']}`}>
               <b>{CART_PAGE.TOTAL_AMOUNT}</b>
