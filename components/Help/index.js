@@ -113,7 +113,7 @@ class Help extends Component {
                 <h3>Hi, How can we help you today ?</h3>
                 <div className={styles['searchContainer']}>
                   <form className={styles['searchForm']} onSubmit={this.handleSearch}>
-                    <input className={styles['searchInput']} name="searchQuery" type='search' value={this.state.searchQuery} onChange={this.handleQueryChange} placeholder={HNS['SEARCH_PLACEHOLDER']} />
+                    <input dir="auto" className={styles['searchInput']} name="searchQuery" type='search' value={this.state.searchQuery} onChange={this.handleQueryChange} placeholder={HNS['SEARCH_PLACEHOLDER']} />
                   </form>
                 </div>
               </div>

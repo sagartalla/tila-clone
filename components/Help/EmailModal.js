@@ -343,18 +343,18 @@ class EmailModal extends Component {
             <div className={styles['pV-40']}>
               <div className={styles['pV-10']}>
                 <div className={styles['formLabel']}>{languageLabel['HNS']['ENTER_EMAIL']}</div>
-                <input type="text" name="email" value={email} onChange={this.handleUserInfoChange} />
+                <input type="text" dir="auto" name="email" value={email} onChange={this.handleUserInfoChange} />
               </div>
               {this.props.type === 'chat' &&
                 <div className={styles['pV-10']}>
                   <div className={styles['formLabel']}>{languageLabel['HNS']['ENTER_FIRSTNAME']}</div>
-                  <input type="text" name="firstname" value={firstname} onChange={this.handleUserInfoChange} />
+                  <input type="text" dir="auto" name="firstname" value={firstname} onChange={this.handleUserInfoChange} />
                 </div>
               }
               {this.props.type === 'chat' &&
                 <div className={styles['pV-10']}>
                   <div className={styles['formLabel']}>{languageLabel['HNS']['ENTER_LASTNAME']}</div>
-                  <input type="text" name="lastname" value={lastname} onChange={this.handleUserInfoChange} />
+                  <input type="text" dir="auto" name="lastname" value={lastname} onChange={this.handleUserInfoChange} />
                 </div>
               }
               <div className={styles['pV-20']}>
@@ -363,7 +363,8 @@ class EmailModal extends Component {
                   <div tabIndex={0} onBlur={this.handleDropDown('')}
                     className={styles['dropDownInput']}
                   >
-                    <input type="text" 
+                    <input type="text"
+                      dir="auto" 
                       className={styles['searchInputIssue']} 
                       placeholder={selectedIssue ? selectedIssue.q.trim() : ''} 
                       value={this.state.issueSearchQuery} 
@@ -403,6 +404,7 @@ class EmailModal extends Component {
                 <div className={styles['pV-20']}>
                   <div className={styles['formLabel']}>{languageLabel['HNS']['WRITE_MSG']}</div>
                   <textarea
+                    dir="auto"
                     value={this.state.msg}
                     onChange={this.handleMsg}
                     className={styles['ModalTextArea']}
