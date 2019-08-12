@@ -34,6 +34,7 @@ const getOrderDetails = (store) => {
             isDamageProtectionAvailable:val.isDamageProtectionAvailable,
             isWarrantyAvailable:val.isWarrantyAvailable,
             listingId:val.listingId,
+            tilaPolicy: val.tilaPolicy,
             tuinId: val.tuinId,
           });
         }, []),
@@ -61,6 +62,7 @@ const getOrderDetails = (store) => {
           order_type: i.order_type,
           order_item_type: i.order_item_type,
           order_status: i.status,
+          tilaPolicy:i.tila_care_policies || [],
           refunds: i.refunds,
           trackingId: i.item_tracking_id || null,
           warranty_duration: i.warranty_policy && i.warranty_policy.preferred_policy ?

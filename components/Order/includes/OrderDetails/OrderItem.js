@@ -54,9 +54,34 @@ class OrderItem extends Component {
     this.state = {
       showToolTip: false,
     };
-
+    this.fetchpolicyDetails = this.fetchpolicyDetails.bind(this);
+    this.getCurrencyValue = this.getCurrencyValue.bind(this);
+    this.getWarrantyDuration = this.getWarrantyDuration.bind(this)
   }
-
+  getCurrencyValue(finalPrice,offerPrice) {
+    const {isDamageProtectionAvailable,isWarrantyAvailable } = this.props
+    if(isDamageProtectionAvailable !== 'NA' || isWarrantyAvailable !== 'NA') {
+      return `${offerPrice.display_value} ${offerPrice.currency_code}`
+    }
+    return `${finalPrice.display_value} ${finalPrice.currency_code}`
+  }
+  getWarrantyDuration(product) {
+    const {
+      isDamageProtectionAvailable,
+      isWarrantyAvailable,
+      tilaPolicy,
+      warranty_duration
+    } = product;
+    let warrantyInfo = warranty_duration;
+    if(isDamageProtectionAvailable !== 'NA' || isWarrantyAvailable !== 'NA') {
+      tilaPolicy.forEach((item) => {
+        if(item.policy_type === 'EXTENDED' && item.valid_upto !== null) {
+            warrantyInfo = moment(item.valid_upto).format("MMM Do YY")
+        }
+      })
+    }
+    return warrantyInfo
+  }
   getDate = (estimates) => {
     const { orderItem } = this.props;
     const t = estimates.filter(state => state.status === orderItem.status);
@@ -71,7 +96,23 @@ class OrderItem extends Component {
   hideToolTip = () => {
     this.setState({ showToolTip: false });
   }
-
+  fetchpolicyDetails(policyData,price) {
+    let data = [];
+    policyData.forEach((item) => {
+      if(item.policy_type !== 'NORMAL') {
+        data.push (
+          <div className={`${styles['warranty-block']}`}>
+            <div className={`${styles['flex']} ${styles['align-end']}`}>
+              <div className={`${styles['warranty-sub-block']}`}>{`${item.policy_type == 'EXTENDED' ? 'Extended Warranty' : 'Damage Protection' }` }</div>
+              <div className={`${styles['width22']} ${styles['font-weight600']}`}>{item.cost.display_value} {item.cost.currency_code}</div>
+            </div>
+            <div className={`${styles['fs-12']} ${styles['ml-10']} ${styles['lgt-black']}`}>{`Duration: ${item.duration}`}</div>
+          </div>
+        )
+      }
+    })
+    return data
+  }
   cancelOrder = () => {
     const { raiseOrderIssue, orderItem, orderId } = this.props;
     const { products } = orderItem;
@@ -101,7 +142,7 @@ class OrderItem extends Component {
     const {
       payments = [{}], orderItem, orderId, thankyouPage, isCancelable,
       isReturnable, isExchangable, needHelp, showPriceInfo,isDamageProtectionAvailable,
-      isWarrantyAvailable, tuinId
+      isWarrantyAvailable,tilaPolicy, tuinId
     } = this.props;
     console.log('isDamageProtectionAvailable',isDamageProtectionAvailable);
     console.log('isWarrantyAvailable',isWarrantyAvailable);
@@ -204,7 +245,7 @@ class OrderItem extends Component {
                             <Col md={5} sm={5} className={`${styles['ipad-pr-0']}`}>
                               {product.price &&
                               <span className={`${styles['justify-end']} ${styles['flex-center']} ${styles['fs-16']} ${styles.fontW600}`}>
-                                {product.orderIds.length} x {final_price.currency_code} {final_price.display_value}
+                                {product.orderIds.length} x {this.getCurrencyValue(final_price,offer_price)}
                                 <span onMouseOver={this.showToolTip} onMouseLeave={this.hideToolTip} className={`${styles.relative} ${styles['tool-tip-parent']} ${styles['checkout-quat']} ${styles['fs-12']} ${styles['flex-center']} ${styles['justify-around']}`}>
                                   <span className={`${lang === 'en' ? '' : styles['flip-questionmark']}`}>?</span>
                                   {showToolTip &&
@@ -235,7 +276,7 @@ class OrderItem extends Component {
                           <div className={`${styles['mb-0']} ${styles['fs-12']} ${styles.flex}`}>
                             <span className={`${styles.flex} ${styles['p-10']} ${styles.lable}`}>
                               <span>{CART_PAGE.WARRENTY} : </span>
-                              <span className={`${styles['pl-10']} ${styles['pr-10']}`}><Warranty warranty={product.warranty_duration} /></span>
+                              <span className={`${styles['pl-10']} ${styles['pr-10']}`}><Warranty warranty={this.getWarrantyDuration(product)} /></span>
                             </span>
                           </div>
                           : null}
@@ -274,6 +315,28 @@ class OrderItem extends Component {
                       {ORDER_PAGE.THIS_ORDER_CONTAINS_A_GIFT}
                     </span>
                   </div>}
+                  {
+                    (product.isDamageProtectionAvailable !== 'NA' || product.isWarrantyAvailable !== 'NA') &&
+                     <div>
+                       <Col md={2}></Col>
+                       <Col md={10}>
+                         <div>{this.fetchpolicyDetails(product.tilaPolicy)}</div>
+                         <div
+                           className=
+                           {`
+                             ${styles['warranty-block']}
+                             ${styles['flex']}
+                             ${styles['align-end']}
+                             ${styles['padding-all']}
+                             `
+                           }
+                           >
+                           <div className={`${styles['width78']} ${styles['font-weight600']}`}>Total:</div>
+                           <div className={`${styles['width22']} ${styles['font-weight600']}`}>{final_price.display_value} {final_price.currency_code}</div>
+                         </div>
+                       </Col>
+                     </div>
+                  }
               </React.Fragment>
             );
           })}
