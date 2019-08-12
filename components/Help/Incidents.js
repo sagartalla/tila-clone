@@ -67,7 +67,7 @@ const ReplyBox = (props) => {
   )
   return(
     <div className={styles['pV-10']}>
-      <textarea disabled={props.loading} className={styles['MsgTextArea']} placeholder='Reply to this message' value={msg} onChange={handleMsg} />
+      <textarea dir="auto" disabled={props.loading} className={styles['MsgTextArea']} placeholder='Reply to this message' value={msg} onChange={handleMsg} />
       <div className={styles['MsgBoxContainer']}>
         <div className={styles['UploadButton']}>
           {HNS['UPLOAD']}

@@ -19,8 +19,8 @@ const helpComponents = (type) => {
       return (url, categoriesObj, query, isLoggedIn, renderContactCard, handleContactClick) => 
         <Faq url={url} categoriesObj={categoriesObj} query={query} isLoggedIn={isLoggedIn}/>
     case 'answers': 
-      return (url, categoriesObj, query, isLoggedIn, renderContactCard, handleContactClick) => 
-        <Answers url={url} categoriesObj={categoriesObj} query={query} isLoggedIn={isLoggedIn} renderContactCard={renderContactCard} handleContactClick={handleContactClick}/>
+      return (url, categoriesObj, query, isLoggedIn, renderContactCard, handleContactClick, fixCatContainer, fetchPaginatedRes) => 
+        <Answers url={url} fixCatContainer={fixCatContainer} fetchPaginatedRes={fetchPaginatedRes} categoriesObj={categoriesObj} query={query} isLoggedIn={isLoggedIn} renderContactCard={renderContactCard} handleContactClick={handleContactClick}/>
     case 'incidents': 
       return (url, categoriesObj, query, isLoggedIn, renderContactCard, handleContactClick) => 
         <Incidents query={query} />

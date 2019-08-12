@@ -24,11 +24,10 @@ const { PDP_PAGE } = languageDefinations();
 const Shipping = (props) => {
   const shippingData = cookies.get('shippingInfo') || {};
 
-  const { shippingInfo, offerInfo, returnInfo} = props;
+  const { shippingInfo, offerInfo, returnInfo, itemLocation = {}, } = props;
   // const {
   //   shipping_days, shippable, isPreview,
   // } = shippingInfo;
-
   const {
     acceptsReturns, maxDaysToReturn,
   } = returnInfo;
@@ -36,69 +35,74 @@ const Shipping = (props) => {
   const { availabilityError } = offerInfo;
 
   return (
-    <div id="shipping-cont" className={`${styles.box} ${styles['border-radius4']} ${styles['mt-5']} ${styles['mb-10']} ${styles['ipad-delivery-address-part']} ${styles['free-delivery-part']}`}>
-      <div className={`${styles['free-delivery-list']} ${styles.flex}`}>
-        <div className={styles['pdp-deliver-list']}>
+    <div id="shipping-cont" className={`${styles['ipad-delivery-address-part']}`}>
+      <div className={`${styles['free-delivery-list']} ${styles['flex-colum']} ${styles.flex} ${styles.box} ${styles['mt-5']} ${styles['mb-10']} ${styles['free-delivery-part']} ${styles['border-radius4']}`}>
+        <div className={`${styles['pdp-deliver-list']} ${styles['flex']}`}>
           <GeoWidget isPdp />
+          { itemLocation.display_name ? <span className={`${styles['pdp-del-prt']} ${styles['pl-10']} ${styles['ml-5']} ${styles['thick-border-left']}`}><span className={styles['thick-gry-clr']}>{PDP_PAGE.ITEM_LOCATION}: </span><span className={styles['fontW600']}>{itemLocation.display_name}</span></span> : null}
         </div>
         {
           shippingInfo && shippingInfo.shipping_days
             ?
-              <span className={`${styles['fs-12']} ${styles['pl-20']}`}>{PDP_PAGE.FREE_DELIVERY_BY} <span className={styles.fontW600}>{moment().add(shippingInfo.shipping_days, 'days').format('ddd, hA')}</span> </span>
+              <span className={`${styles['t-c']} ${styles['pt-10']}`}>
+                <span className={`${styles['fs-12']} ${styles['pt-5']} ${styles['pr-5']}`}>{shippingInfo.shipping_fees && shippingInfo.shipping_fees.money_value ? PDP_PAGE.DELIVERY_BY : PDP_PAGE.FREE_DELIVERY_BY} <span className={styles.fontW600}>{moment().add(shippingInfo.shipping_days, 'days').format('DD MMM, dddd')}</span> </span>
+                {shippingInfo.shipping_fees && <span className={`${styles['pl-10']} ${styles['thick-border-left']}`}><span>{shippingInfo.shipping_fees.currency_code}</span><span className={styles['pl-10']}>{parseFloat(shippingInfo.shipping_fees.display_value).toFixed(shippingInfo.shipping_fees.display_value.split('.')[1] === '00' ? 0 : 2)}</span></span>}
+              </span>
             :
             null
         }
       </div>
-      <div>
-        {shippingInfo && shippingInfo.shippable ?
-          <div>
-            <div className={`${styles['flx-spacebw-alignc']} ${styles.fontW600} ${styles['pt-15']} ${styles['pb-15']} ${styles['fs-12']} ${styles['warrenty-part']}`}>
-              <div className={`${styles['flex-center']}`}>
-                <SVGCompoent clsName={`${styles['return-icon']} ${styles['mr-10']}`} src="icons/common-icon/guarantee" />
-                <span>{PDP_PAGE.HUNDRED_PER_ORIGINAL}</span>
-              </div>
-              <div className={`${styles['flex-center']} ${styles['warenty-part-inn']}`}>
-                <SVGCompoent clsName={`${styles['return-icon']} ${styles['mr-10']}`} src="icons/common-icon/non-return" />
-                {
-                acceptsReturns
-                  ?
-                    <span>{maxDaysToReturn} {PDP_PAGE.DAYS} {PDP_PAGE.EASY_RETURN}</span>
-                  :
-                  `${PDP_PAGE.NON_RETURNABLE}`
-              }
-              </div>
-              {Object.keys(props.warranty).length > 0 ?
-                <div className={`${styles['flex-center']} ${styles['warenty-part-inn']} ${styles['warenty-part-single']}`}>
-                  <SVGCompoent clsName={`${styles['trust-icon']} ${styles['mr-10']}`} src="icons/common-icon/non-warnty" />
-                  <Warranty warranty={props.warranty} break />
-                </div>
-              :
-                <div className={`${styles['flex-center']} ${styles['warenty-part-inn']}`}>
-                  <span className={styles['fs-10']}>{PDP_PAGE.NO_WARRANTY}</span>
-                </div>
+      <div className={`${styles.box} ${styles['mt-5']} ${styles['mb-10']} ${styles['free-delivery-part']} ${styles['border-radius4']}`}>
+        <div>
+          <div className={`${styles['flex-center']} ${styles.fontW600} ${styles['pt-5']} ${styles['pb-5']} ${styles['fs-12']} ${styles['warrenty-part']}`}>
+            <div className={`${styles['flex-center']} ${styles['warnty-and-garanty']}`}>
+              <SVGCompoent clsName={`${styles['return-icon']} ${styles['mr-10']}`} src="icons/common-icon/guarantee" />
+              <span>{PDP_PAGE.HUNDRED_PER_ORIGINAL}</span>
+            </div>
+            <div className={`${styles['flex-center']} ${styles['warenty-part-inn']} ${styles['warnty-and-garanty']}`}>
+              <SVGCompoent clsName={`${styles['return-icon']} ${styles['mr-10']}`} src="icons/common-icon/non-return" />
+              {
+              acceptsReturns
+                ?
+                  <span>{maxDaysToReturn} {PDP_PAGE.DAYS} {PDP_PAGE.EASY_RETURN}</span>
+                :
+                `${PDP_PAGE.NON_RETURNABLE}`
             }
             </div>
+            {/* {Object.keys(props.warranty).length > 0 ?
+              <div className={`${styles['flex-center']} ${styles['warenty-part-inn']} ${styles['warenty-part-single']}`}>
+                <SVGCompoent clsName={`${styles['trust-icon']} ${styles['mr-10']}`} src="icons/common-icon/non-warnty" />
+                <Warranty warranty={props.warranty} break />
+              </div>
+            :
+              <div className={`${styles['flex-center']} ${styles['warenty-part-inn']}`}>
+                <span className={styles['fs-10']}>{PDP_PAGE.NO_WARRANTY}</span>
+              </div>
+          } */}
           </div>
-          :
+        </div>
+        {/* {!(shippingInfo && shippingInfo.shippable) &&
           <p className={`${styles.flex} ${styles['pt-15']} ${styles['justify-center']}`}>
             {availabilityError
               ?
               null
               :
-              shippingInfo && shippingInfo.shippable === false ?  PDP_PAGE.NO_SHIPPING_CITY : PDP_PAGE.SELECT_YOUR_CITY
+              shippingInfo && shippingInfo.shippable === false ? PDP_PAGE.NO_SHIPPING_CITY : PDP_PAGE.SELECT_YOUR_CITY
             }
           </p>
-        }
+        } */}
       </div>
     </div>
   );
 };
 
-// const mapStateToProps = store => ({});
+const mapStateToProps = store => ({
+  itemLocation: store.productReducer.policyLocation,
+});
 
 const mapDispatchToProps = dispatch => bindActionCreators(
   {},
   dispatch,
 );
 
-export default connect(null, mapDispatchToProps)(Shipping);
+export default connect(mapStateToProps, mapDispatchToProps)(Shipping);

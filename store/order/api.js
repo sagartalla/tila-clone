@@ -15,7 +15,7 @@ const getReasons = (params, reasonType='return') => {
   return axios.get(`${constants.ORDERS_API_URL}/api/v1/${reasonType}/reasons?order_item_id=${params.orderItemId}`);
 }
 const getWarrantyReason = params => {
-  return axios.get(`${constants.REASON_URL}/?listing_id=${params}`)
+  return axios.get(`${constants.POLICY_URL}/reason/?listing_id=${params}`)
 }
 const getExchangeReasons = (params) => axios.get(`${constants.ORDERS_API_URL}/api/v1/return/exchange_reasons?order_item_id=${params.orderItemId}`)
 

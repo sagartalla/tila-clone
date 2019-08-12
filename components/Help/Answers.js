@@ -42,7 +42,6 @@ class Answers extends Component {
       totalPages: 1,
       loading: true
     }
-    this.scrollTimeout = '';
     parentCategoryId !== 'orders' && !!!this.searchQuery ? 
       props.getAnswers(getIds(this.state.selectedCategory, props.categoriesObj[this.state.selectedCategory] ? props.categoriesObj[this.state.selectedCategory].child : []))
       : 
@@ -75,6 +74,9 @@ class Answers extends Component {
         loading: false
       })
     }
+    if(nextProps.fetchPaginatedRes !== this.props.fetchPaginatedRes){
+      this.getAnswerByKeyword();
+    }
   }
   openCategory = (categoryId) => (e) => {
     this.setState({
@@ -92,13 +94,6 @@ class Answers extends Component {
       return pathname.replace(this.props.query, `answers/${categoryId}/${childId ? childId : ''}`);
     }
     return pathname.replace(this.props.query, `answers/${parentId}/${categoryId}`);
-  }
-  handleScroll = (e) => {
-    clearTimeout(this.scrollTimeout)
-    const { scrollHeight, scrollTop, offsetHeight } = e.target;
-    if ((scrollTop + 10 + offsetHeight) > scrollHeight) {
-      this.scrollTimeout = setTimeout(this.getAnswerByKeyword, 100)
-    }
   }
   renderCategories = (fromParent, parentId) => (categoryId, index) => {
     const categoryObj = this.props.categoriesObj[categoryId];
@@ -187,11 +182,12 @@ class Answers extends Component {
           : null}
         </div>
         <div className={styles['contentContainer']}>
-          <div className={styles['categoryContainer']}>
+          <div className={this.props.fixCatContainer ? styles['categoryContainer'] : styles['d-none']} />
+          <div className={this.props.fixCatContainer ? styles['categoryContainerFixed'] : styles['categoryContainer']}>
             {this.renderRecentOrderTab()}
             {Object.keys(this.props.categoriesObj).sort(sort).map(this.renderCategories(true, null))}
           </div>
-          <div className={styles['answersContainer']} onScroll={this.handleScroll}>
+          <div className={styles['answersContainer']}>
           { this.state.selectedCategory !== 'orders'
             ? answerKeys.length > 0 ? 
               <div>
@@ -205,7 +201,7 @@ class Answers extends Component {
             : <div>{this.state.loading ? languageLabel['HNS']['LOADING'] : languageLabel['HNS']['NO_Q_AVAILABLE']}</div>
             :
               <div className={styles['ht-100P']}>
-                <Orders query={this.props.query} isLoggedIn={this.props.isLoggedIn} renderContactCard={this.props.renderContactCard} handleContactClick={this.props.handleContactClick}/>
+                <Orders fetchPaginatedRes={this.props.fetchPaginatedRes} query={this.props.query} isLoggedIn={this.props.isLoggedIn} renderContactCard={this.props.renderContactCard} handleContactClick={this.props.handleContactClick}/>
               </div>
           }
           </div>

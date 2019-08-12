@@ -79,6 +79,7 @@ const Order = ({ order, getInvoice }) => {
               isDamageProtectionAvailable={orderItem.isDamageProtectionAvailable}
               isWarrantyAvailable={orderItem.isWarrantyAvailable}
               listingId={orderItem.listingId}
+              tilaPolicy={orderItem.tilaPolicy}
               tuinId={orderItem.tuinId}
             />
           ))}

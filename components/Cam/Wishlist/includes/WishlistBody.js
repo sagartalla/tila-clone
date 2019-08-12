@@ -38,21 +38,21 @@ const WishlistBody = (props) => {
       str = (
         <span className={`${styles['thick-red-clr']} ${styles.flex}`}>
           <SVGComponent clsName={`${styles['alert-icon']}`} src="icons/increase/increase" />
-          {`${WISH_LIST_PAGE.PRICE_INCREASED_BY} ${priceVal.toFixed(2)} ${cur}`}
+          {`${WISH_LIST_PAGE.PRICE_INCREASED_BY} ${cur} ${priceVal.toFixed(2)}`}
         </span>
       );
     } else {
       str = (
         <span className={`${styles['success-green']} ${styles.flex}`}>
           <SVGComponent clsName={`${styles['alert-icon']}`}src="icons/decrease/decrease" />
-          {`${WISH_LIST_PAGE.PRICE_DECRECED_BY} ${priceVal.toFixed(2)} ${cur}`}
+          {`${WISH_LIST_PAGE.PRICE_DECRECED_BY} ${cur} ${priceVal.toFixed(2)}`}
         </span>
       );
     }
     return str;
   };
   const routeChange = (variant_id='', product_id, catalog_id, listing_id='', name, tuin_id) => {
-    Router.push(`/${language}/pdp/${name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${tuin_id}/${listing_id}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`);
+    Router.push(`/${language}/pdp/${name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${tuin_id ? `${tuin_id}/`: '' }${listing_id}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`);
   };
   return (data.length === 0 ?
     <div className={styles['no-wishlist-icon']}>
@@ -120,17 +120,17 @@ const WishlistBody = (props) => {
                         <span id={wishlist_id} className={`${styles.absolute} ${styles['delete-icon-part']}`} onClick={deleteItem}>
                           <SVGComponent clsName={`${styles['delete-icon']}`} src="icons/delete-icon/delete-icon" />
                         </span>
-                        <h4 className={`${styles.fontW600} ${styles['light-gry-clr']} ${styles['mt-25']} ${styles['ff-b']}`}><span className={`${styles['fs-20']} ${styles['m-fs-18']}`}>{price} {cur}</span></h4>
+                        <h4 className={`${styles.fontW600} ${styles['light-gry-clr']} ${styles['mt-25']} ${styles['ff-b']}`}><span className={`${styles['fs-20']} ${styles['m-fs-18']}`}>{cur} {price}</span></h4>
                         {variant_id && percentage(price, mrp) > 5 ?
                           <span className={`${styles.flex} ${styles['flex-center']}`}>
                             <span className={`${styles['success-green']} ${styles.flex}`}>{percentage(price, mrp)}%</span>&nbsp;&nbsp;&nbsp;
-                            <strike className={`${styles['label-gry-clr']} ${styles['fs-12']}`}>{mrp} {cur}</strike>
+                            <strike className={`${styles['label-gry-clr']} ${styles['fs-12']}`}>{cur} {mrp}</strike>
                           </span> : ''
                         }
                         {getPriceAlert(changed_status, wishlisted_price, changed_price, cur)}
                         {price && cur && wishlisted_price && wishlisted_price > 0 && wishlisted_price.toString() !== price &&
                         <span className={`${styles['thick-gry-clr']}`}>
-                          {WISH_LIST_PAGE.ITEM_WAS} {wishlisted_price} {cur} {WISH_LIST_PAGE.WHEN_ADDED_TO_WISHLIST}
+                          {WISH_LIST_PAGE.ITEM_WAS} {cur} {wishlisted_price} {WISH_LIST_PAGE.WHEN_ADDED_TO_WISHLIST}
                         </span>}
                       </div>
                     </Col>

@@ -235,7 +235,7 @@ class CartItem extends React.Component {
               <div
                 className={`${styles['flex-center']} ${styles['justify-center']} ${styles['pb-15']} ${styles['card-box-inn-img']}`}
               >
-                <Link route={`/${language}/pdp/${name && name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${tuin_id}/${listing_id}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`}>
+                <Link route={`/${language}/pdp/${name && name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${tuin_id ? `${tuin_id}/`: '' }${listing_id}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`}>
                   <a className={`${styles['width100']} ${styles['ht-100P']}`}>
                     <img className={styles.img} alt={img} src={`${constants.mediaDomain}/${img}`} />
                   </a>
@@ -244,6 +244,7 @@ class CartItem extends React.Component {
               <CartStepper
                 count={count}
                 item={item}
+                data_scrollId="cart-container"
                 decreaseItemCnt={decreaseItemCnt}
                 increaseItemCnt={increaseItemCnt}
                 cartStepperInputHandler={cartStepperInputHandler}
@@ -256,7 +257,7 @@ class CartItem extends React.Component {
                 </Col>
                 <Col md={8} sm={8} className={`${styles['landscape-cart-details']} ${styles['pr-0']}`}>
                   <h4 className={`${styles['fontW600']} ${styles['m-fs-14']} ${styles['fs-16']}`}>
-                  <Link route={`/${language}/pdp/${name && name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${tuin_id}/${listing_id}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`}>
+                  <Link route={`/${language}/pdp/${name && name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${tuin_id ? `${tuin_id}/`: '' }${listing_id}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`}>
                       <a className={`${styles['width100']} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
                         {name}
                       </a>
@@ -283,7 +284,7 @@ class CartItem extends React.Component {
                         shipping !== null && (shipping.shippable && (
                           <p className={`${styles['mb-0']}`}>
                             <span className={`${styles['thick-gry-clr']} ${styles['fs-12']}`}>{CART_PAGE.SHIPPING} :</span>
-                            <span className={`${styles['pl-10']} ${styles['pr-10']} ${styles['fs-14']}`}>{CART_PAGE.REGULAR_SHIPPING} {shipping && shipping.shipping_fees && shipping.shipping_fees.display_value && shipping.shipping_fees.display_value ? `(${shipping.shipping_fees.display_value} ${cur})` : ''} - <span className={`${styles['fs-12']} ${styles['base-font']}`}>{CART_PAGE.ETA_DELIVERY_BY} {moment().add(shipping.shipping_days, 'days').format('LL')}</span>
+                            <span className={`${styles['pl-10']} ${styles['pr-10']} ${styles['fs-14']}`}>{CART_PAGE.REGULAR_SHIPPING} {shipping && shipping.shipping_fees && shipping.shipping_fees.display_value && shipping.shipping_fees.display_value ? `(${cur} ${shipping.shipping_fees.display_value})` : ''} - <span className={`${styles['fs-12']} ${styles['base-font']}`}>{CART_PAGE.ETA_DELIVERY_BY} {moment().add(shipping.shipping_days, 'days').format('LL')}</span>
                             </span>
                           </p>
                         ))
@@ -311,13 +312,14 @@ class CartItem extends React.Component {
                       <span className={styles['success-green']}>{`${Math.floor(discount)}% ${PDP_PAGE.OFF}`}</span>
                       <span className={`${styles['cross-strike']} ${styles.relative} ${styles['ml-5']}`}>
                         <span className={styles['label-light-grey']}>
-                          <span>{mrp}&nbsp;</span>
-                          <span>{cur}</span>
+                          <span>{cur}&nbsp;</span>
+                          <span>{mrp}</span>
                         </span>
                       </span>
                     </p>}
                   <h4 className={`${styles.fontW600} ${styles['justify-flex-end']} ${styles['cart-price-label']} ${styles['fs-16']} ${styles['light-gry-clr']} ${styles['flex-center']} ${styles['mt-10']} ${styles['t-rt']}`}>
-                    {`${offer_price} ${cur}`}
+                       <span>{cur}&nbsp;</span>
+                        <span>{offer_price}</span>
                     {/* <OverlayTrigger trigger="click" placement="bottom" overlay={popover(item)}> */}
                     {/* <span className={`${styles['fs-12']} ${styles['pr-5']}`}>
                         <SVGComponent clsName={`${styles['secure-icon']} ${styles['mr-10']} ${styles['pointer']}`} src="icons/common-icon/trust-secure" />
@@ -345,7 +347,7 @@ class CartItem extends React.Component {
                               <div className={`${styles['fs-10']} ${styles['label-light-grey']}`}>({CART_PAGE.INCL_OF_ALL_TAXES})</div>
                             </div>
                             <div className={`${styles['t-rt']}`}>
-                              {`${mrp} ${cur}`}
+                              {`${cur} ${mrp}`}
                             </div>
                           </div>
                           <div className={`${styles['flx-space-bw']} ${styles['fs-12']}`}>
@@ -353,7 +355,7 @@ class CartItem extends React.Component {
                               <div className={styles['thick-gry-clr']}>{CART_PAGE.SELLING_PRICE}</div>
                             </div>
                             <div className={`${styles['t-rt']}`}>
-                              {`${selling_price} ${cur}`}
+                              {`${cur} ${selling_price}`}
                             </div>
                           </div>
                           {offerDiscounts.length > 0 &&
@@ -364,7 +366,7 @@ class CartItem extends React.Component {
                                     <div className={styles['thick-gry-clr']}>{od.description}</div>
                                   </div>
                                   <div className={`${styles['t-rt']}`}>
-                                    {`${od.discount.display_value} ${cur}`}
+                                    {`${cur} ${od.discount.display_value}`}
                                   </div>
                                 </div>
                               );
@@ -378,7 +380,7 @@ class CartItem extends React.Component {
                                 </div>
                                 <div className={`${styles['t-rt']} ${styles.flex}`}>
                                   {shipping.shipping_fees ?
-                                    `${shipping.shipping_fees.display_value} ${cur}`
+                                    `${cur} ${shipping.shipping_fees.display_value}`
                                     : <SVGComponent clsName={`${styles['ship-icon']}`} src={lang === 'en' ? "icons/free-shipping" : "icons/Arabic-Freeshipping"} />}
                                 </div>
                               </div>
@@ -393,17 +395,17 @@ class CartItem extends React.Component {
                                 </div>
                                 <div className={`${styles['t-rt']} ${styles['flex']}`}>
                                   {tila_care_charges &&
-                                    `${tila_care_charges.display_value} ${tila_care_charges.currency_code}`}
+                                    `${tila_care_charges.currency_code} ${tila_care_charges.display_value}`}
                                 </div>
                               </div>
                           }
 
                           <div className={` ${styles['flx-space-bw']} ${styles['total-amount']} ${styles['fs-12']}`}>
                             <div>{ORDER_PAGE.TOTAL}</div>
-                            <div className={`${styles['t-rt']}`}>{total_amount} {cur}</div>
+                            <div className={`${styles['t-rt']}`}>{cur} {total_amount}</div>
                           </div>
                         </div>
-                        <div className={`${styles['p-5']} ${styles['mt-10']} ${styles['fs-12']} ${styles['overall-amount']}`}>{CART_PAGE.OVERALL_YOU_SAVE} {total_discount} {cur} {CART_PAGE.ON_THIS_PRODUCT}</div>
+                        <div className={`${styles['p-5']} ${styles['mt-10']} ${styles['fs-12']} ${styles['overall-amount']}`}>{CART_PAGE.OVERALL_YOU_SAVE} {cur} {total_discount} {CART_PAGE.ON_THIS_PRODUCT}</div>
                       </div>
                     </div>
 
@@ -447,17 +449,21 @@ class CartItem extends React.Component {
                   : ''
               }
             </span>
-            <span data-id={item_id} onClick={addToWishlist} className={`${styles['flex-center']} ${styles['move-to-wishlist']} ${styles['pr-20']} ${styles.pointer}`}>
+            <span data-id={item_id} data_scrollId="cart-container" onClick={addToWishlist} className={`${styles['flex-center']} ${styles['move-to-wishlist']} ${styles['pr-20']} ${styles.pointer}`}>
               <SVGComponent clsName={`${styles['wish-list-icon']}`} src="icons/wish-list/wish-list-icon" />
               <span className={styles['pl-10']}>{CART_PAGE.MOVE_TO_WISHLIST}</span>
             </span>
-            <span id={item_id} onClick={removeCartItem} className={`${styles['flex-center']} ${styles['cart-remove-icon']} ${styles['pl-20']} ${styles.pointer}`}>
+            <span id={item_id} data_scrollId="cart-container" onClick={removeCartItem} className={`${styles['flex-center']} ${styles['cart-remove-icon']} ${styles['pl-20']} ${styles.pointer}`}>
               <SVGComponent clsName={`${styles['delete-icon']}`} src="icons/delete-icon/delete-icon" />
               <span className={styles['pl-10']}>{CART_PAGE.REMOVE}</span>
             </span>
           </Col>
           <Col md={4} sm={4} xs={4} className={`${styles['t-rt']} ${styles['pr-0']} ${styles['m-pad-5']}`}>
-            <span>{ORDER_PAGE.TOTAL} : </span><span className={`${styles['fs-16']} ${styles.fontW600}`}>{total_amount + ' ' + cur}</span>
+            <span>{ORDER_PAGE.TOTAL} : </span><span className={`${styles['fs-16']} ${styles.fontW600}`}>
+            <span>{cur}</span>&nbsp;
+            <span>{total_amount}</span>
+            {/* {total_amount + ' ' + cur} */}
+            </span>
           </Col>
         </div>
 

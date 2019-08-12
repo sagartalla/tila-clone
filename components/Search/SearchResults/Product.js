@@ -272,8 +272,8 @@ class Product extends Component {
     const selectedProduct = selectedID.length > 0 && selectedID.includes(productId);
     const discountValue = variants.length > 0 &&
       variants[selectedIndex].discount && Math.floor(variants[selectedIndex].discount[0]);
-    const tuinId = variants.length > 0 && variants[selectedIndex].tuin && variants[selectedIndex].tuin[0];
-    const listing_id = variants.length > 0 && variants[selectedIndex].listingId[0];
+    const tuinId = variants && variants.length > 0 && variants[selectedIndex].tuin && variants[selectedIndex].tuin[0];
+    const listing_id = variants && variants.length > 0 && variants[selectedIndex] && variants[selectedIndex].listingId && variants[selectedIndex].listingId[0];
     const popover = (
       <Popover id={productId}>
         {variants.length > 0 && variants[selectedIndex].offersApplied &&
@@ -314,7 +314,7 @@ class Product extends Component {
           className={`${styles['product-items-main']} ${styles.relative} ${styles['p-0']} ${selectedProduct ? styles['active-product'] : ''}`}
           onClick={() => this.routeChange(productId, variantId, catalogId, itemtype, index, pageNum)}
         >
-          <Link route={`/${language}/pdp/${displayName.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${tuinId ? `${tuinId}/`: '' }${listing_id ? `${listing_id}/`: ''}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`}>
+          <Link route={`/${language}/pdp/${displayName.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${tuinId ? `${tuinId}/`: '' }${listing_id ? `${listing_id}`: ''}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`}>
             <a target="_blank">
               <div className={`${styles['product-items']}`} onMouseEnter={this.setImg} onMouseLeave={this.leaveImg}>
                 {showLoader ?
