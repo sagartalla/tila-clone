@@ -68,7 +68,7 @@ const getOrderDetails = (store) => {
           warranty_duration: i.warranty_policy && i.warranty_policy.preferred_policy ?
             i.warranty_policy.policies[i.warranty_policy.preferred_policy] : {},
           gift_info: i.gift_info,
-          variantAttributes: i.variant_info && i.variant_info.variant_details && i.variant_info.variant_details.attribute_map ?
+          variantAttributes: i && i.variant_info && i.variant_info.variant_details && i.variant_info.variant_details.attribute_map ?
             Object.values(i.variant_info.variant_details.attribute_map).filter(attr => attr.attribute_group_name === 'IDENTITY' && attr.visible) : [],
           tuinId: i.variant_info && i.variant_info.variant_details && i.variant_info.variant_details.attribute_map && i.variant_info.variant_details.attribute_map.tuin ?
             i.variant_info.variant_details.attribute_map.tuin.attribute_values[0].value : null,

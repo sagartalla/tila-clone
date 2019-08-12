@@ -235,7 +235,7 @@ class CartItem extends React.Component {
               <div
                 className={`${styles['flex-center']} ${styles['justify-center']} ${styles['pb-15']} ${styles['card-box-inn-img']}`}
               >
-                <Link route={`/${language}/pdp/${name && name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${tuin_id}/${listing_id}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`}>
+                <Link route={`/${language}/pdp/${name && name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${tuin_id ? `${tuin_id}/`: '' }${listing_id}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`}>
                   <a className={`${styles['width100']} ${styles['ht-100P']}`}>
                     <img className={styles.img} alt={img} src={`${constants.mediaDomain}/${img}`} />
                   </a>
@@ -257,7 +257,7 @@ class CartItem extends React.Component {
                 </Col>
                 <Col md={8} sm={8} className={`${styles['landscape-cart-details']} ${styles['pr-0']}`}>
                   <h4 className={`${styles['fontW600']} ${styles['m-fs-14']} ${styles['fs-16']}`}>
-                  <Link route={`/${language}/pdp/${name && name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${tuin_id}/${listing_id}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`}>
+                  <Link route={`/${language}/pdp/${name && name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${tuin_id ? `${tuin_id}/`: '' }${listing_id}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`}>
                       <a className={`${styles['width100']} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
                         {name}
                       </a>
