@@ -122,7 +122,7 @@ class Incidents extends Component {
   componentDidUpdate(){
     this.props.tktDetailData && this.props.tktDetailData.threadTiLaList && this.props.tktDetailData.threadTiLaList.forEach((val, index) => {
       const node = document.getElementById(`incidentTA-${index}`);
-      node.setAttribute('style', 'height:' + (node.scrollHeight) + 'px');
+      node.setAttribute(`style`, `height:${node.scrollHeight}px`);
     })
   }
   initiateApiCalls = () => {
