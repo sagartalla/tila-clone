@@ -257,7 +257,7 @@ export const AR_KEYWORDS = {
     SHARE_YOUR_EXPERIENCE: 'شاركنا تجربتك',
     ALL_REVIEWS: 'جميع التعليقات',
     EXPERT_REVIEWS: 'تعليقات الخبراء',
-    HUNDRED_PER_ORIGINAL: '100% أصلي',
+    HUNDRED_PER_ORIGINAL: '100% Genuine',
     WARRANTY_SUMMARY: 'ملخص الضمان',
     COVERED_IN_WARRANTY: 'شامل الضمان',
     NOT_COVERED_IN_WARRANTY: 'غير شامل الضمان',

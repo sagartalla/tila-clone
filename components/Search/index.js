@@ -11,7 +11,7 @@ import SearchDetailsBar from './SearchDetailsBar';
 import SearchResults from './SearchResults';
 import Brand from './Brand';
 import dynamic from 'next/dynamic';
-//import CompareWidget from '../common/CompareWidget';
+// import CompareWidget from '../common/CompareWidget';
 import lang from '../../utils/language';
 
 import LoadingBar from '../common/Loader/skeletonLoader';
@@ -25,7 +25,7 @@ const CompareWidget = dynamic(import('../common/CompareWidget'));
 
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
-let oldY = 0;
+const oldY = 0;
 let tempSideBarTop = null;
 let tempContainerTop = null;
 let relativeTop = null;
@@ -50,7 +50,7 @@ class Search extends Component {
 
     this.state = {
       sideBarPositionClass: '',
-      containerStyle: {}
+      containerStyle: {},
     };
     this.handleScroll = this.handleScroll.bind(this);
     this.upScroll = this.upScroll.bind(this);
@@ -74,9 +74,9 @@ class Search extends Component {
     const sidebarBottom = sideBarTop + sideBarHeight;
     tempSideBarTop = null;
     tempContainerTop = null;
-    if(relativeTop) {
+    if (relativeTop) {
       this.setState({
-        containerStyle: {}
+        containerStyle: {},
       });
       relativeTop = null;
     }
@@ -94,31 +94,31 @@ class Search extends Component {
   downScroll() {
     searchContainer = searchContainer || document.getElementById('search-container');
     sidebarPosition = sidebarPosition || document.getElementById('sidebar-position');
-    const {top: containerTop} = searchContainer.getBoundingClientRect();
-    if(!tempSideBarTop) {
+    const { top: containerTop } = searchContainer.getBoundingClientRect();
+    if (!tempSideBarTop) {
       tempSideBarTop = parseInt(sidebarPosition.getBoundingClientRect().top);
     }
-    if(!tempContainerTop) {
+    if (!tempContainerTop) {
       tempContainerTop = containerTop;
     }
     if (!relativeTop) {
       relativeTop = parseInt(Math.abs(tempSideBarTop - containerTop));
       this.setState({
-        containerStyle: {top: relativeTop - 25},
-        sideBarPositionClass: 'relative'
+        containerStyle: { top: relativeTop - 25 },
+        sideBarPositionClass: 'relative',
       });
     }
-    if(containerTop >= 0) {
+    if (containerTop >= 0) {
       this.setState({
         containerStyle: {},
-        sideBarPositionClass: ''
+        sideBarPositionClass: '',
       });
       return;
     }
     if (parseInt(Math.abs(containerTop - tempContainerTop)) > (parseInt(Math.abs(tempSideBarTop)))) {
       this.setState({
         containerStyle: {},
-        sideBarPositionClass: 'fixed-top'
+        sideBarPositionClass: 'fixed-top',
       });
     }
   }
@@ -141,7 +141,9 @@ class Search extends Component {
     // oldY = window.scrollY;
   }
   render() {
-    const { query, optionalParams, isBrandPage, loaderProps } = this.props;
+    const {
+ query, optionalParams, isBrandPage, loaderProps 
+} = this.props;
     const { sideBarPositionClass, containerStyle } = this.state;
     const { loadComponent, pathname } = loaderProps;
     return (
@@ -159,7 +161,9 @@ class Search extends Component {
             <Col md={2} id="sidebar-position" className={`${styles['filter-panel']} ${styles['float-l']} ${styles['border-radius4']} ${styles['bg-white']} ${styles['p-0']} ${styles[sideBarPositionClass]}`} style={containerStyle}>
               <NoSSR>
                 <CategoriesAndFacets search={query} />
+                <div className={styles['cover-bar']} />
               </NoSSR>
+
             </Col>
             <Col md={10} className={`${styles['search-results']} ${styles['fl-rt']} ${styles['pr-0']}`}>
               <SearchDetailsBar optionalParams={optionalParams} />

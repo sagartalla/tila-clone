@@ -263,7 +263,7 @@ export const EN_KEYWORDS = {
     SHARE_YOUR_EXPERIENCE: 'Share your Experience',
     ALL_REVIEWS: 'All Reviews',
     EXPERT_REVIEWS: 'Expert Reviews',
-    HUNDRED_PER_ORIGINAL: '100% Orginal',
+    HUNDRED_PER_ORIGINAL: '100% Genuine',
     WARRANTY_SUMMARY: 'Warranty Summary',
     COVERED_IN_WARRANTY: 'Covered in Warranty',
     NOT_COVERED_IN_WARRANTY: 'Not Covered in Warranty',
