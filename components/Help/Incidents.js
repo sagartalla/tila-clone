@@ -119,6 +119,12 @@ class Incidents extends Component {
       }
     }
   }
+  componentDidUpdate(){
+    this.props.tktDetailData && this.props.tktDetailData.threadTiLaList && this.props.tktDetailData.threadTiLaList.forEach((val, index) => {
+      const node = document.getElementById(`incidentTA-${index}`);
+      node.setAttribute('style', 'height:' + (node.scrollHeight) + 'px');
+    })
+  }
   initiateApiCalls = () => {
     const { username : emailId } = userCredentials;
     this.props.getAllTickets({emailId})
@@ -228,7 +234,9 @@ class Incidents extends Component {
             <div>{new Date(createdTs).toLocaleTimeString()}</div>
           </div>
         </div>
-        <div className={`${styles['fs-13p']} ${styles['greyColor']}`} dangerouslySetInnerHTML={{__html: msg}} />
+        <textarea id={`incidentTA-${index}`} ref={node => {this.taRef = node}} dir="auto" disabled className={`${styles['fs-13p']} ${styles['greyColor']} ${styles['incidentRenderInput']}`}>{msg}</textarea>
+        {/* <input dir="auto" disabled className={`${styles['fs-13p']} ${styles['greyColor']} ${styles['incidentRenderInput']}`} value={msg}/> */}
+        {/* <div className={`${styles['fs-13p']} ${styles['greyColor']}`} dangerouslySetInnerHTML={{__html: msg}} /> */}
         {index === 0 ? 
           <ReplyBox updateIncident={this.updateIncident} loading={this.state.loading}/>
 
