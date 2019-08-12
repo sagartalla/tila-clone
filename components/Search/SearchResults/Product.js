@@ -10,7 +10,7 @@ import { Link } from '../../../routes';
 import Waypoint from 'react-waypoint';
 import { OverlayTrigger, Modal, Popover } from 'react-bootstrap';
 import constants from '../../../constants';
-import { actionCreators } from '../../../store/cam/wishlist';
+import { actionCreators, selectors as wishListSelectors } from '../../../store/cam/wishlist';
 import { actionCreators as authActionCreators } from '../../../store/auth';
 import { actionCreators as compareActions } from '../../../store/compare/actions';
 import SVGCompoent from '../../common/SVGComponet';
@@ -29,7 +29,7 @@ import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from '../search_en.styl';
 import styles_ar from '../search_ar.styl';
 
-const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
 const { PDP_PAGE } = languageDefinations();
 
@@ -47,6 +47,7 @@ class Product extends Component {
       selectedIndex: 0,
       showLoader: false,
       btnType: '',
+      showNotifyMeMsg: false,
     };
     this.setImg = this.setImg.bind(this);
     this.addToWishlist = this.addToWishlist.bind(this);
@@ -59,7 +60,7 @@ class Product extends Component {
     this.closeVariantTab = this.closeVariantTab.bind(this);
     this.showVariants = this.showVariants.bind(this);
     this.preventDefaultClick = this.preventDefaultClick.bind(this);
-    this.renderQuickView = this.renderQuickView.bind(this)
+    this.renderQuickView = this.renderQuickView.bind(this);
     this.leaveImg = this.leaveImg.bind(this);
   }
   componentWillReceiveProps() {
@@ -121,7 +122,9 @@ class Product extends Component {
   notify(e) {
     e.stopPropagation();
     e.preventDefault();
-    const { userDetails, productId, notifyMe, variantId } = this.props;
+    const {
+ userDetails, productId, notifyMe, variantId 
+} = this.props;
     if (userDetails.isLoggedIn) {
       notifyMe({
         product_id: productId,
@@ -185,12 +188,12 @@ class Product extends Component {
   }
 
   itemNumberClick = (index, pageNum) => {
-    let productInfo = {
+    const productInfo = {
       pageFragmentation: pageNum,
-      itemPosition: index
+      itemPosition: index,
     };
     digitalData.product.push(productInfo);
-    var event = new CustomEvent('event-pageItem-click');
+    let event = new CustomEvent('event-pageItem-click');
     document.dispatchEvent(event);
   }
 
@@ -207,10 +210,12 @@ class Product extends Component {
   }
   renderQuickView(e) {
     e.preventDefault();
-    const { selectedIndex } = this.state
-    const { row, itemNum, showQuickView, variants } = this.props
-    let vId = (variants.length > 0 && variants[selectedIndex].variantId)
-    showQuickView(itemNum, row, vId)
+    const { selectedIndex } = this.state;
+    const {
+ row, itemNum, showQuickView, variants 
+} = this.props;
+    const vId = (variants.length > 0 && variants[selectedIndex].variantId);
+    showQuickView(itemNum, row, vId);
   }
   addToCompare(checked) {
     const {
@@ -240,12 +245,20 @@ class Product extends Component {
     e.preventDefault();
   }
 
+  showNotifyMeMsg = () => {
+    this.setState({
+      showNotifyMeMsg: true,
+    }, () => setTimeout(() => {
+      this.setState({ showNotifyMeMsg: false });
+    }, 5000));
+  }
+
   render() {
     const {
       displayName,
       variants,
       productId,
-      variantId='',
+      variantId = '',
       catalogId,
       itemtype,
       currency,
@@ -264,7 +277,7 @@ class Product extends Component {
       media,
       isQuickView,
     } = this.props;
-    const { src } = this.state;
+    const { src, showNotifyMeMsg } = this.state;
     const product_id = productId;
     const variant_id = variantId || '';
     const catalog_id = catalogId;
@@ -292,7 +305,7 @@ class Product extends Component {
         {discountValue > 5 &&
           <React.Fragment>
             <span className={`${styles['ml-5']} ${styles['label-gry-clr']} ${styles['fs-12']}`}>
-              <s><StrickedPriceFormat showPrice={variants[selectedIndex].sellingPrice[0].toString()} strickedPrice={variants[selectedIndex].mrp[0].toString()}/></s>
+              <s><StrickedPriceFormat showPrice={variants[selectedIndex].sellingPrice[0].toString()} strickedPrice={variants[selectedIndex].mrp[0].toString()} /></s>
             </span>
             {variants[selectedIndex].offersApplied &&
               variants[selectedIndex].offersApplied.length > 0 &&
@@ -314,7 +327,7 @@ class Product extends Component {
           className={`${styles['product-items-main']} ${styles.relative} ${styles['p-0']} ${selectedProduct ? styles['active-product'] : ''}`}
           onClick={() => this.routeChange(productId, variantId, catalogId, itemtype, index, pageNum)}
         >
-          <Link route={`/${language}/pdp/${displayName.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${tuinId ? `${tuinId}/`: '' }${listing_id ? `${listing_id}/`: ''}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`}>
+          <Link route={`/${language}/pdp/${displayName.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${tuinId ? `${tuinId}/` : ''}${listing_id ? `${listing_id}/` : ''}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`}>
             <a target="_blank">
               <div className={`${styles['product-items']}`} onMouseEnter={this.setImg} onMouseLeave={this.leaveImg}>
                 {showLoader ?
@@ -372,6 +385,7 @@ class Product extends Component {
                     />
                   }
                 </div>
+                {showNotifyMeMsg && <div className={`${styles['notifyme-msg']} ${styles['flex-center']} ${styles['justify-center']}`}>We will notify you once this is in stock.</div>}
                 <div className={styles['desc-cont']}>
                   <div className={`${styles['pb-20']} ${styles['pl-20']} ${styles['pr-20']} ${styles.flex} ${styles['flex-colum']}`}>
                     <h5 className={`${styles['prdt-name']} ${styles['pt-15']} ${styles['pb-5']}  ${styles['m-0']}`}>
@@ -405,7 +419,7 @@ class Product extends Component {
                         />
                       </div>
                       :
-                      <a className={`${styles['flex-center']} ${styles['notify-part-inn']} ${styles['white-color']} ${styles['fp-btn']} ${styles['left-radius']} ${styles['fp-btn-primary']}`} onClick={this.notify}>
+                      !showNotifyMeMsg && <a className={`${styles['flex-center']} ${styles['notify-part-inn']} ${styles['white-color']} ${styles['fp-btn']} ${styles['left-radius']} ${styles['fp-btn-primary']}`} onClick={this.notify}>
                         <span className={styles['pl-5']}>{PDP_PAGE.NOTIFY_ME}</span>
                       </a>
                       // <div className={`${styles['flex']} ${styles['justify-around']} ${styles['quick-view']} ${styles['border-radius4']}`}>
@@ -417,7 +431,7 @@ class Product extends Component {
                   <div className={`${styles['wish-list-part']} ${styles['flx-space-bw']}`}>
                     <span className={styles.flex}>
                       <a className={styles['flex-center']} onClick={this.addToWishlist}>
-                        <SVGCompoent clsName={`${styles['wish-list']}`} src={addedToWishlist ? "icons/wish-list/wish-list-icon-red" : "icons/wish-list/wish-list-icon"} />
+                        <SVGCompoent clsName={`${styles['wish-list']}`} src={addedToWishlist ? 'icons/wish-list/wish-list-icon-red' : 'icons/wish-list/wish-list-icon'} />
                         <span className={`${styles['pl-5']} ${styles['fs-12']}`} disabled={addedToWishlist}>{addedToWishlist ? `${PDP_PAGE.ADDED_TO_WISHLIST}` : `${PDP_PAGE.ADD_TO_WISHLIST}`}</span>
                       </a>
                     </span>
@@ -481,6 +495,7 @@ class Product extends Component {
               pId={productId}
               closeNotify={this.closeNotify}
               variantId={variantId}
+              showNotifyMeMsg={this.showNotifyMeMsg}
             />
           </Modal.Body>
         </Modal>
@@ -498,14 +513,12 @@ Product.defaultProps = {
 };
 
 
-const mapStateToProps = (store) => {
-  return ({
+const mapStateToProps = (store) => ({
     btnLoading: cartSelector.getBtnLoaders(store),
     cmpData: compareSelectors.getCmpData(store),
+    getNotifyLoading: wishListSelectors.getNotifyLoading(store),
   });
-};
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators(
+const mapDispatchToProps = (dispatch) => bindActionCreators(
     {
       addToWishlistAndFetch: actionCreators.addToWishlistAndFetch,
       addToCompare: compareActions.addToCompare,
@@ -515,10 +528,8 @@ const mapDispatchToProps = (dispatch) => {
     },
     dispatch,
   );
-};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Product);
 
 
-
-  // variants[selectedIndex].addedToCart ? <span className={styles['flex']}><SVGCompoent clsName={styles['cart-list']} src="icons/cart/added-cart-icon" />{PDP_PAGE.ADDED_TO_CART}</span> :
+// variants[selectedIndex].addedToCart ? <span className={styles['flex']}><SVGCompoent clsName={styles['cart-list']} src="icons/cart/added-cart-icon" />{PDP_PAGE.ADDED_TO_CART}</span> :

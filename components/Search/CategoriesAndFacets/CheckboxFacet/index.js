@@ -50,16 +50,20 @@ class CheckboxFacet extends Component {
     return selectedChildren.concat(unSelectedChildren)
   }
   onFilterData(value) {
-    const { filter } = this.props;
+    const { filter, showPopup } = this.props;
     let items = filter.children.filter((item) => {
-      return item.name.toLowerCase().indexOf(value) > -1
-    })
+      return item.name.toLowerCase().indexOf(value) > -1;
+    });
     this.setState({
-      filterItems:items
-    })
+      filterItems: items,
+    }, () => {
+      console.log('filterItems', this.state.filterItems);
+      showPopup && this.props.showBrandsModal(this.state.filterItems)();
+      // this.props.clearSelectedItem();
+    });
   }
+
   onChangeItem(value) {
-    console.log('this.props', this.props);
     return (e) => {
       const newSelectedItem = [...this.state.selectedItems];
       if (e.target.checked) {
@@ -81,10 +85,10 @@ class CheckboxFacet extends Component {
     const { filter } = this.props;
     this.setState({
       maxRows: this.state.maxRows === filter.children.length ? MaxItems : filter.children.length,
-      filterItems:this.sortSelectedItems(this.state.selectedItems)
+      filterItems: this.sortSelectedItems(this.state.selectedItems),
     }, () => {
       // this.state.maxRows > 10 &&
-      this.props.showBrandsModal(this.state.filterItems);
+      this.props.showBrandsModal(this.state.filterItems)();
     });
     this.props.selectedCheckbox(this.state.selectedItems)();
   }
@@ -97,12 +101,17 @@ class CheckboxFacet extends Component {
       selectedItems: (facets[attributeName] || []).map(f => f),
       filterItems: nextProps.selectedFilters.length > 0 ?
         this.sortSelectedItems(nextProps.selectedFilters) : filter.children,
+    }, () => {
+      // this.props.showBrandsModal(this.state.filterItems)();
     });
   }
 
   render() {
-    const { filter, index, facets } = this.props;
+    const { filter, index, facets, selectedVal } = this.props;
     const { selectedItems, maxRows, filterItems } = this.state;
+    if (selectedVal) {
+      this.onFilterData(selectedVal);
+    }
     return (
       <React.Fragment>
       <Panel eventKey={`${index + 'c'}`} key={filter.id}>
@@ -114,7 +123,7 @@ class CheckboxFacet extends Component {
             </Panel.Title>
           </Panel.Heading>
           <Panel.Body collapsible className={`${styles['border-b']}`}>
-            { maxRows > 8 && maxRows < 11 ?
+            { maxRows > 9 && maxRows < 11 ?
               <RenderFilterBar
                 onFilterData={this.onFilterData}
                 placeName={`Search ${filter.name}`}
@@ -149,10 +158,12 @@ CheckboxFacet.propTypes = {
   selectedFilters: PropTypes.array,
   onChangeHandle: PropTypes.func.isRequired,
   filter: PropTypes.object.isRequired,
+  showBrandsModal: PropTypes.func,
 };
 
 CheckboxFacet.defaultProps = {
   selectedFilters: [],
+  showBrandsModal: f => f,
 };
 
 export default CheckboxFacet;

@@ -62,7 +62,7 @@ class CategoriesAndFacets extends Component {
   }
 
   render() {
-    const { filters, facets, search } = this.props;
+    const { filters, facets, search, selectedVal } = this.props;
     return (
       <PanelGroup accordion id="categories-panel" className={`${styles['relative']}`}>
         {filters.category.map((filter, index) => (
@@ -87,6 +87,9 @@ class CategoriesAndFacets extends Component {
               key={filter.id}
               showBrandsModal={this.props.showBrandsModal}
               selectedCheckbox={this.props.selectedCheckbox}
+              selectedVal={selectedVal}
+              showPopup={this.props.showPopup}
+              clearSelectedItem={this.props.clearSelectedItem}
             />
             : null;
         })
