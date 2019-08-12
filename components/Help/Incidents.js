@@ -234,7 +234,7 @@ class Incidents extends Component {
             <div>{new Date(createdTs).toLocaleTimeString()}</div>
           </div>
         </div>
-        <textarea id={`incidentTA-${index}`} ref={node => {this.taRef = node}} dir="auto" disabled className={`${styles['fs-13p']} ${styles['greyColor']} ${styles['incidentRenderInput']}`}>{msg}</textarea>
+        <textarea id={`incidentTA-${index}`} dir="auto" disabled className={`${styles['fs-13p']} ${styles['greyColor']} ${styles['incidentRenderInput']}`}>{msg}</textarea>
         {/* <input dir="auto" disabled className={`${styles['fs-13p']} ${styles['greyColor']} ${styles['incidentRenderInput']}`} value={msg}/> */}
         {/* <div className={`${styles['fs-13p']} ${styles['greyColor']}`} dangerouslySetInnerHTML={{__html: msg}} /> */}
         {index === 0 ? 
