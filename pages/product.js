@@ -9,6 +9,7 @@ import Base, { baseActions } from './base';
 import makeStore from '../store';
 import { actionCreators } from '../store/product';
 import { actionCreators as MegamenuActionsCreators } from '../store/megamenu';
+import { actionCreators as wishlistActionsCreators } from '../store/cam/wishlist';
 // import { actionCreators as reviewRatingActionCreators } from '../store/ratingReviews';
 
 import Layout from '../layout/main';
@@ -48,24 +49,24 @@ class ProductPage extends Base {
     //     accessToken: req.universalCookies.get('accessToken'),
     //   }));
     // } else {
-      const options = {
-        city_code: shippingCity,
-        country_code: country || 'SAU',
-        flags: {
-          catalog_details: true,
-          category_tree_bread_crumb: true,
-          category_tree_finance: true,
-          include_offers: true,
-          include_policies: true,
-          include_related_products: true,
-          shipping: true,
-        },
-        language,
-        product_ids: [
-          productId,
-        ],
-        size: 'LARGE',
-      };
+    const options = {
+      city_code: shippingCity,
+      country_code: country || 'SAU',
+      flags: {
+        catalog_details: true,
+        category_tree_bread_crumb: true,
+        category_tree_finance: true,
+        include_offers: true,
+        include_policies: true,
+        include_related_products: true,
+        shipping: true,
+      },
+      language,
+      product_ids: [
+        productId,
+      ],
+      size: 'LARGE',
+    };
 
       // if (variantId) {
       //   options.variant_ids = [
@@ -73,15 +74,15 @@ class ProductPage extends Base {
       //   ];
       // }
 
-      await Promise.all([
-        store.dispatch(actionCreators.getProduct(options)),
-        store.dispatch(MegamenuActionsCreators.getMegamenu()),
-        // TODO  SF-96
-        // await store.dispatch(reviewRatingActionCreators.getRatingsAndReviews({
-        //   itemType: query.itemType,
-        //   catalogId: query.catalogId
-        // }))
-      ]);
+    await Promise.all([
+      store.dispatch(actionCreators.getProduct(options)),
+      store.dispatch(MegamenuActionsCreators.getMegamenu()),
+      // TODO  SF-96
+      // await store.dispatch(reviewRatingActionCreators.getRatingsAndReviews({
+      //   itemType: query.itemType,
+      //   catalogId: query.catalogId
+      // }))
+    ]);
     // }
     return { isServer };
   }

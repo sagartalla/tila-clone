@@ -27,6 +27,7 @@ const settings = {
 
 const RecentView = (props) => {
   const { recentlyViewed } = props;
+  if (recentlyViewed.length === 0) return null;
   return (
     <div className={`${styles['recentview-main']} ${styles['pb-25']}`}>
       <h6 className={`${styles['recent-title']} ${styles['pt-15']} ${styles['pb-15']} ${styles['pl-15']} ${styles['fontW600']}`}><span className={styles['pl-15']}>{PDP_PAGE.RECENTLY_VIEWED}</span></h6>
@@ -35,7 +36,7 @@ const RecentView = (props) => {
           {
             recentlyViewed.map(item => (
               <Col md={2} className={`${styles['pl-0']}`} key={item.id}>
-                <a href={item.uri}>
+                <a href={`/${lang}/pdp/${item.nm.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${item.tuinId ? `${item.tuinId}/`: '' }${item.id ? `${item.id}/`: ''}?pid=${item.pid}&vid=${item.vid}&cid=${item.cid}`}>
                   <div className={`${styles['recentview-main-inn']} ${styles['flex']} ${styles['flex-colum']}`}>
                     <div className={styles['recentview-main-inn-img']}><img src={`${constants.mediaDomain}/${item.im}`} className="img-responsive" /></div>
                     <div>

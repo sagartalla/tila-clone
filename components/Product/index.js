@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Grid, Row, Col, Tabs, Tab } from 'react-bootstrap';
+import { Grid, Row, Col } from 'react-bootstrap';
 import NoSSR from 'react-no-ssr';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
@@ -10,7 +10,7 @@ import HeaderBar from '../HeaderBar/index';
 import Display from './includes/Display';
 import TitleInfo from './includes/TitleInfo';
 import Shipping from './includes/Shipping';
-import TilaCarePolicy from './includes/TilaCarePolciy'
+import TilaCarePolicy from './includes/TilaCarePolciy';
 
 import AddToCart from './includes/AddToCart';
 import RecentView from './includes/RecentView';
@@ -24,7 +24,7 @@ import { actionCreators, selectors } from '../../store/product';
 import { actionCreators as wishlistActionCreators, selectors as wishListSelectors } from '../../store/cam/wishlist';
 import { actionCreators as addressActionCreators, selectors as addressSelectors } from '../../store/cam/address';
 import { actionCreators as paymentActionCreators } from '../../store/payments';
-import Button from '../common/CommonButton';
+import { selectors as authSelectors } from '../../store/auth';
 import LoadingBar from '../common/Loader/skeletonLoader';
 import lang from '../../utils/language';
 
@@ -33,7 +33,7 @@ import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './product_en.styl';
 import styles_ar from './product_ar.styl';
 
-const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
 const { PDP_PAGE } = languageDefinations();
 let btnY = null;
@@ -51,8 +51,8 @@ const getProductComponent = (isPreview, taskCode) => {
         recentlyViewed: [],
         notifyEmail: null,
         emailErr: '',
-        tilaPolicy:[],
-        choosenPolicyData:props.selectedTilaPolicy,
+        tilaPolicy: [],
+        choosenPolicyData: props.selectedTilaPolicy,
         // positionStyle: 'fixed-style'
       };
       this.detailsRef = React.createRef();
@@ -60,12 +60,15 @@ const getProductComponent = (isPreview, taskCode) => {
       this.onChangeField = this.onChangeField.bind(this);
       this.handleScroll = this.handleScroll.bind(this);
       this.notify = this.notify.bind(this);
-      this.setTilaPolicy = this.setTilaPolicy.bind(this)
+      this.setTilaPolicy = this.setTilaPolicy.bind(this);
     }
 
     componentDidMount() {
+      const {
+        productData, getCardResults, getRecentlyViewed,
+        variantId, isLoggedIn, addProductToRV,
+      } = this.props;
       if (window.localStorage && !isPreview) {
-        const { productData } = this.props;
         const {
           offerInfo, titleInfo, imgUrls,
         } = productData;
@@ -104,18 +107,24 @@ const getProductComponent = (isPreview, taskCode) => {
           this.setState({ recentlyViewed: arr });
         }
       }
-      this.props.getCardResults();
+      getCardResults();
+      if (isLoggedIn) {
+        console.log('asgudkajs', variantId);
+        if (productData.catalogObj.variant_id) addProductToRV(variantId);
+        getRecentlyViewed();
+      }
       window.addEventListener('scroll', this.handleScroll);
-      // setTimeout(() => {
-      //   debugger;
-      //   const shippingContainer = document.getElementById('shipping-cont');
-      //   const buttonsCont = document.getElementById('cart-btn-cont');
-      //   const [{height: shippingHeight, top: shippingY}, {height: btnHeight}] = [shippingContainer.getBoundingClientRect(), buttonsCont.getBoundingClientRect()];
-      //   skipScroll = (shippingHeight + shippingY) < (window.innerHeight - btnHeight);
-      //   this.setState({
-      //     defaultPosition: skipScroll ? 'absolute-style' : 'fixed-style'
-      //   });
-      // });
+    }
+
+    componentWillReceiveProps(nextProps) {
+      const {
+        getRecentlyViewed, productData, addProductToRV, isLoggedIn,
+      } = this.props;
+      if (isLoggedIn !== nextProps.isLoggedIn) {
+        console.log('asgudkajs', productData, this.props);
+        if (productData.catalogObj.variant_id) addProductToRV(productData.catalogObj.variant_id);
+        getRecentlyViewed();
+      }
     }
 
     componentWillUnmount() {
@@ -129,26 +138,28 @@ const getProductComponent = (isPreview, taskCode) => {
     }
     setTilaPolicy(data) {
       this.setState({
-        choosenPolicyData:data,
-        tilaPolicy:Object.values(data)
-      }, () => this.props.setTilaPolicy(data))
+        choosenPolicyData: data,
+        tilaPolicy: Object.values(data),
+      }, () => this.props.setTilaPolicy(data));
     }
     handleScroll(e) {
-      if(skipScroll) {
+      if (skipScroll) {
         return;
       }
       const shippingContainer = document.getElementById('shipping-cont');
       const buttonsCont = document.getElementById('cart-btn-cont');
-      const [{height: shippingHeight, top: shippingY}] = [shippingContainer.getBoundingClientRect()];
+      const [{ height: shippingHeight, top: shippingY }] = [shippingContainer.getBoundingClientRect()];
       btnY = btnY || document.getElementById('cart-btn-cont').getBoundingClientRect().top;
       this.setState({
         positionStyle: (shippingHeight + shippingY) < btnY ? 'absolute-style' : 'fixed-style',
-        positionTop: btnY
+        positionTop: btnY,
       });
     }
 
     notify() {
-      const { productData, userDetails, notifyMe, variantId } = this.props;
+      const {
+        productData, userDetails, notifyMe, variantId,
+      } = this.props;
       let { emailErr, notifyEmail } = this.state;
       const params = {
         product_id: productData.product_id,
@@ -205,9 +216,11 @@ const getProductComponent = (isPreview, taskCode) => {
         });
       }
     }
-/* eslint-disable */
     render() {
-      const { productData, userDetails, showLoading, query,variantId,productId, isSearchPreview, savedCardsData,loaderProps,selectedTilaPolicy } = this.props;
+      const {
+        productData, userDetails, showLoading, query, variantId, productId,
+        isSearchPreview, savedCardsData, loaderProps, selectedTilaPolicy, recentlyViewed,
+      } = this.props;
       const {
         catalog, titleInfo, keyfeatures, extraOffers, imgUrls, offerInfo, shippingInfo, isWishlisted, returnInfo,
         details, productDescription, catalogObj, categoryType = '', warranty, breadcrums, product_id, wishlistId,
@@ -215,16 +228,14 @@ const getProductComponent = (isPreview, taskCode) => {
       } = productData;
       const { offerPricing } = offerInfo;
       const {
-        stickyElements, recentlyViewed, notifyEmail, emailErr, positionStyle, positionTop, defaultPosition,tilaPolicy
+        stickyElements, notifyEmail, emailErr, positionStyle, positionTop, defaultPosition, tilaPolicy,
       } = this.state;
       const { loadComponent, pathname } = loaderProps;
       return (
         <Theme.Provider value={categoryType.toLowerCase()}>
           <div className={`${styles['pdp-wrap']} ${categoryType.toLowerCase()} ${styles[categoryType.toLowerCase()]}`}>
-            {
-              isPreview || isSearchPreview ? null :
-                <HeaderBar
-                />
+            {isPreview || isSearchPreview ? null :
+            <HeaderBar />
             }
             <LoadingBar loadComponent={loadComponent} pathname={pathname}>
               <div className={`${styles.relative}`}>
@@ -248,7 +259,7 @@ const getProductComponent = (isPreview, taskCode) => {
                     <Col sm={12} className={`${styles['details-right-part']} ${styles[stickyElements.details]}`}>
                       <div className={`${styles['details-right-part-inn']}`}>
                         <div className={`${styles['ipad-details']} ${styles['ipad-pr-15']}`}>
-                          <TitleInfo {...titleInfo} isPreview={isPreview} offerInfo={offerInfo} shippingInfo={shippingInfo} savedCardsData={savedCardsData}/>
+                          <TitleInfo {...titleInfo} isPreview={isPreview} offerInfo={offerInfo} shippingInfo={shippingInfo} savedCardsData={savedCardsData} />
                           <ProductDetails
                             details={details}
                             keyfeatures={keyfeatures}
@@ -260,17 +271,15 @@ const getProductComponent = (isPreview, taskCode) => {
                           />
                         </div>
                         <div className={`${styles['ipad-details']} ${styles['bdr-lt']} ${styles['ipad-pl-15']}`}>
-                          {
-                            isPreview ? null : <Shipping
-                                                  shippingInfo={shippingInfo}
-                                                  returnInfo={returnInfo}
-                                                  offerInfo={offerInfo}
-                                                  warranty={warranty}
-                                                />
+                          {isPreview ? null :
+                          <Shipping
+                            shippingInfo={shippingInfo}
+                            returnInfo={returnInfo}
+                            offerInfo={offerInfo}
+                            warranty={warranty}
+                          />
                           }
-                          {
-                            Object.keys(tila_care_policy).length > 0
-                            &&
+                          {Object.keys(tila_care_policy).length > 0 &&
                             <TilaCarePolicy
                               data={tila_care_policy}
                               setTilaPolicy={this.setTilaPolicy}
@@ -278,26 +287,25 @@ const getProductComponent = (isPreview, taskCode) => {
                               selectedTilaPolicy={selectedTilaPolicy}
                             />
                           }
-                          {isPreview ? null :
+                          {!isPreview &&
                             (shippingInfo === null || shippingInfo.shippable)
                               ?
-                              <AddToCart
-                                offerInfo={offerInfo}
-                                productData={productData.product_id}
-                                shippingInfo={shippingInfo}
-                                isPreview={isPreview}
-                                emailErr={emailErr}
-                                userDetails={userDetails}
-                                notifyEmail={notifyEmail}
-                                notify={this.notify}
-                                showLoading={showLoading}
-                                onChangeField={this.onChangeField}
-                                tilaPolicy={tilaPolicy}
-                              />
+                                <AddToCart
+                                  offerInfo={offerInfo}
+                                  productData={productData.product_id}
+                                  shippingInfo={shippingInfo}
+                                  isPreview={isPreview}
+                                  emailErr={emailErr}
+                                  userDetails={userDetails}
+                                  notifyEmail={notifyEmail}
+                                  notify={this.notify}
+                                  showLoading={showLoading}
+                                  onChangeField={this.onChangeField}
+                                  tilaPolicy={tilaPolicy}
+                                />
                               :
                               null
                           }
-
                           {/* {isPreview ? null :
                             (offerInfo.stockError || offerInfo.availabilityError) && ((shippingInfo && Object.keys(shippingInfo).length === 0) || (shippingInfo === null || shippingInfo.shippable)) &&
                             <div className={`${styles['flx-space-bw']} ${styles['align-baseline']}`}>
@@ -320,7 +328,6 @@ const getProductComponent = (isPreview, taskCode) => {
                           } */}
                         </div>
                       </div>
-
                     </Col>
                   </Row>
                 </div>
@@ -339,12 +346,12 @@ const getProductComponent = (isPreview, taskCode) => {
                           isPreview ? null : <ReviewsTab />
                         }
                       </Col> */}
-                      <Col md={8}>
-                        <ElectronicsTab titleInfo={titleInfo} isPreview={isPreview} catalog={catalog} catalogObj={catalogObj} productDescription={productDescription} />
-                      </Col>
-                    </Row>
-                  </Grid>
-                </div>
+                        <Col md={8}>
+                          <ElectronicsTab titleInfo={titleInfo} isPreview={isPreview} catalog={catalog} catalogObj={catalogObj} productDescription={productDescription} />
+                        </Col>
+                      </Row>
+                    </Grid>
+                  </div>
               }
                 <div className={styles['pdp-bottom-ref']} ref={this.bottomRef} />
               </div>
@@ -367,29 +374,33 @@ const getProductComponent = (isPreview, taskCode) => {
     showLoading: wishListSelectors.getNotifyLoading(store),
     selectedAddress: addressSelectors.getSelectedAddress(store),
     savedCardsData: userVaultSelectors.getCardResults(store),
-    selectedTilaPolicy:selectors.getTilaPolicy(store),
+    selectedTilaPolicy: selectors.getTilaPolicy(store),
+    isLoggedIn: authSelectors.getLoggedInStatus(store),
+    recentlyViewed: wishListSelectors.recentlyViewed(store),
   });
 
   const mapDispatchToProps = dispatch =>
     bindActionCreators(
       {
         notifyMe: wishlistActionCreators.notifyMe,
+        addProductToRV: wishlistActionCreators.addProductToRV,
+        getRecentlyViewed: wishlistActionCreators.getRecentlyViewed,
         track: actionCreators.track,
         getShippingAddressResults: addressActionCreators.getShippingAddressResults,
         createOrder: paymentActionCreators.createOrder,
         getCardResults: userVaultActionCreators.getCardResults,
-        setTilaPolicy:actionCreators.setTilaPolicy,
+        setTilaPolicy: actionCreators.setTilaPolicy,
       },
       dispatch,
     );
 
   Product.propTypes = {
     productData: PropTypes.object.isRequired,
-    isSearchPreview: PropTypes.bool
+    isSearchPreview: PropTypes.bool,
   };
   Product.defaultProps = {
-    isSearchPreview:false
-  }
+    isSearchPreview: false,
+  };
 
   return connect(mapStateToProps, mapDispatchToProps)(Product);
 };

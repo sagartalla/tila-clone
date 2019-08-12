@@ -37,7 +37,7 @@ const getWishListResults = (store) => {
       });
     });
 
-    return newData
+    return newData;
   }
   return [];
 };
@@ -66,8 +66,29 @@ const getNotifyLoading = (store) => {
   if (store.wishlistReducer.ui.notifyLoading) {
     return store.wishlistReducer.ui.notifyLoading;
   }
-}
+};
+
+const recentlyViewed = store => store.wishlistReducer.recentlyViewed.map((rv) => {
+  const { variant_preferred_listings, variant_id } = rv;
+  const { cached_product_details = {}, cached_variant = {} } = rv.product_details.product_details_vo;
+  const variantAttributes = cached_variant[variant_id].attribute_map;
+  const variantDetails = variant_preferred_listings[variant_id][0];
+  return {
+    nm: cached_product_details.attribute_map.calculated_display_name.attribute_values[0].value,
+    im: cached_product_details.media.gallery_media[0].url,
+    pr: variantDetails.pricing.offer_price.display_value,
+    cd: variantDetails.pricing.offer_price.currency_code,
+    tuin: variantAttributes.tuin.attribute_values[0].value,
+    id: variantDetails.listing_id,
+    pid: rv.product_details.product_id,
+    vid: rv.variant_id,
+    cid: rv.product_details.catalog_details.catalog_id,
+  };
+});
 
 const getProductsDetails = store => store.wishlistReducer.products;
 
-export { getWishListResults, getPaginationDetails, getLoader, getProductsDetails, getNotifyLoading };
+export {
+  getWishListResults, getPaginationDetails, getLoader,
+  getProductsDetails, getNotifyLoading, recentlyViewed,
+};
