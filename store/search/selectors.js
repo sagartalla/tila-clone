@@ -92,7 +92,7 @@ const getSearchFilters = (store) => {
     filters.facets = store.searchReducer.data.facetResponse.facets.reduce((filters, item) => filters.concat({
       name: item.attributeDisplayName,
       id: item.Id,
-      queryParamName: _.camelCase(item.attributeDisplayName),
+      queryParamName: _.camelCase(item.attributeDisplayName), 
       attributeName: item.attributeName,
       type: item.Type,
       children: item.Values.map((value) => {
@@ -144,7 +144,7 @@ const getSearchResutls = (store) => {
           modifiedVaraintsCopy.productSize = Object.values(v.attributes[product.flags.variant_id_attribute] || {})[0];
           modifiedVaraintsCopy.productAvailable = false;
           modifiedVaraintsCopy.variantId = v.id;
-          modifiedVaraintsCopy.tuinId = v.attributes.tuin[0] || null;
+          modifiedVaraintsCopy.tuinId = v && v.attributes && v.attributes.tuin && v.attributes.tuin[0];
         }
 
         modifiedVaraints.push(modifiedVaraintsCopy);
@@ -237,7 +237,7 @@ const getFacetfilters = store => (queryObject) => {
             facetFiltersCopyWithNames[attributeName] = [];
           }
           facetFilters[attributeName].push(param.Param);
-          facetFiltersCopyWithNames[attributeName].push({name: param.attributeValue, params: param.Param});
+          facetFiltersCopyWithNames[attributeName].push({name: param.attributeValue, params: param.Param, attributeDisplayName: filtered.attributeDisplayName});
         }
       })
     })
@@ -279,7 +279,7 @@ const getChoosenCategoryName = store => store.searchReducer.data.searchDetails.c
 
 const getAppliedFitlers = (store) => {
   const { facetFiltersCopyWithNames = {} } = store.searchReducer.data.searchDetails;
-  return _.reduce(facetFiltersCopyWithNames, (acc, ff, parentKey) => [...acc, ...ff.map(f => ({ displayName: f.name, parentKey, key: f.param }))], []);
+  return _.reduce(facetFiltersCopyWithNames, (acc, ff, parentKey) => [...acc, ...ff.map(f => ({ displayName: f.name, parentKey, key: f.param, attributeDisplayName: f.attributeDisplayName, }))], []);
 };
 
 const getUserDetails = store => store.authReducer.data;

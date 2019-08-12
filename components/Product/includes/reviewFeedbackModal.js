@@ -37,12 +37,11 @@ export default class FeedbackModal extends Component {
         validWhen: false,
       },
     ]);
-
     this.state = {
       textValue: props.comment || '',
       rating: props.rating || 0,
       validation: this.validations.valid(),
-      charsLeft: 300,
+      charsLeft: (300 - (props && props.comment && props.comment.length)) || 300,
     };
     this.handleTextChange = this.handleTextChange.bind(this);
     this.retrieveRating = this.retrieveRating.bind(this);

@@ -26,10 +26,10 @@ class GeoWidget extends Component {
     const shippingInfo = cookies.get('shippingInfo');
     super(props);
     this.state = {
+      displayCity: '',
+      showCitiesData: false,
       ...props.geoShippingData,
       ...shippingInfo,
-      showCitiesData: false,
-      displayCity: '',
     };
     this.deriveCity = this.deriveCity.bind(this);
     this.onChangeCity = this.onChangeCity.bind(this);
@@ -40,14 +40,22 @@ class GeoWidget extends Component {
   }
 
   componentDidMount() {
-    const { getCitiesByCountryCode } = this.props;
+    const { getGeoShippingData, getCitiesByCountryCode } = this.props;
     getCitiesByCountryCode(cookies.get('country'));
+    getGeoShippingData();
     document.addEventListener('click', this.handleOutsideClick, false);
   }
 
   componentWillReceiveProps(nextProps) {
     const { geoShippingData } = nextProps;
+    const { isPdp, getPolicyLocation } = this.props;
     if (this.props.geoShippingData.city !== geoShippingData.city) {
+      if (isPdp) {
+        getPolicyLocation({
+          city_code: geoShippingData.city,
+          county_code: geoShippingData.country,
+        });
+      }
       this.setState({
         displayCity: geoShippingData.displayCity,
       });
@@ -132,7 +140,7 @@ class GeoWidget extends Component {
     } = this.props;
     const { showCitiesData } = this.state;
     return (
-      <div className={`${styles['flex-center']} ${styles['delovery-inn']} ${styles['pr-5']}`}>
+      <div className={`${styles['flex-center']} ${styles['delovery-inn']} ${styles['pr-5']} ${isPdp ? styles['width50'] : ''}`}>
         {
           (!hideLabel)
             ?
@@ -195,6 +203,8 @@ const mapDispatchToProps = dispatch =>
       autoCompleteCity: productActionCreators.autoCompleteCity,
       getCitiesByCountryCode: productActionCreators.getCitiesByCountryCode,
       removeCity: actionCreators.removeCity,
+      getPolicyLocation: productActionCreators.getPolicyLocation,
+      getGeoShippingData: actionCreators.getGeoShippingData,
     },
     dispatch,
   );

@@ -4,7 +4,7 @@ import VariantsAndSimilarProducts from './VariantsAndSimilarProducts';
 import KeyFeatures from './KeyFeatures';
 import SVGCompoent from '../../common/SVGComponet';
 import { languageDefinations } from '../../../utils/lang';
-import SizeChart from '../includes/SizeChart/index';
+// import SizeChart from '../includes/SizeChart/index';
 import { PanelGroup, Panel } from 'react-bootstrap';
 import lang from '../../../utils/language';
 
@@ -54,9 +54,9 @@ const ProductDetails = ({ details, keyfeatures, isPreview, productInfo,variantId
           />
         }
       </NoSSR>
-      {<SizeChart
+      {/* {<SizeChart
         productInfo={productInfo}
-      />}
+      />} */}
       {/*
         <div className={`${styles['flex']} ${styles['pt-10']} ${styles['pb-10']} ${styles['border-b']}`}>
           <span className={`${styles['fontW600']} ${styles['pr-20']}`}>

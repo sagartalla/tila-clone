@@ -15,6 +15,7 @@ const actions = {
   SET_PRODUCTID: 'SET_PRODUCTID',
   SET_VARIANTID: 'SET_VARIANTID',
   SET_TILA_POLICY: 'GET_SELECTED_TILA_POLICY',
+  GET_POLICY_LOCATION: 'GET_POLICY_LOCATION',
 };
 
 const actionCreators = {
@@ -77,6 +78,10 @@ const actionCreators = {
   autoCompleteCoutry: searchKeyWord => ({
     type: actions.AUTOCOMPLETE_COUNTRY,
     searchKeyWord,
+  }),
+  getPolicyLocation: params => ({
+    type: actions.GET_POLICY_LOCATION,
+    payload: api.getPolicyLocation(params),
   }),
 };
 
