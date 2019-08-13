@@ -1,5 +1,7 @@
 .flex
   display flex
+.d-none
+  display: none
 .flexWrap
   flex-wrap wrap
 .flex-grow
@@ -235,15 +237,24 @@
 
 .categoryContainer
   margin 0px 1px
-  width 25%
+  width 315px
   height 100%
   overflow auto
   border 1px solid #efeff4
-  
+  background white
+
+
+.categoryContainerFixed
+  margin 0px 1px  
+  border 1px solid #efeff4
+  position fixed
+  height auto
+  top 125px
+  z-index 999
+  width 315px
 
 .answersContainer
   width 75%
-  overflow auto
   padding 10px 20px
 
 .showDiv
@@ -299,7 +310,6 @@
 .contentContainer
   display flex
   padding 10px 0px
-  max-height 800px
   height 100%
 
 .questionBox
@@ -479,6 +489,7 @@
 .openedAnswers
   height auto
   color #333
+  line-height: 1.85
 
 .openedAnswers ul li
   list-style initial

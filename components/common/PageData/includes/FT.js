@@ -123,8 +123,7 @@ class FT extends React.Component {
             prevArrow={<SamplePrevArrow />}
           >
             {listingsData.length > 0 && listingsData.map(listing => (
-              //This Link route has to change, once tuin is available in this component's reducer.
-              <Link route={`/${lang}/pdp/${listing.name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/c/${listing.catalogId}/p/${listing.productId}/l/${listing.listingId}/v/${listing.variantId ? `${listing.variantId}` : ''}`}>
+              <Link route={`/${lang}/pdp/${listing.name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${listing.listingId ? `${listing.listingId}`: ''}?pid=${listing.productId}&vid=${listing.variantId}&cid=${listing.catalogId}`}>
                 <div className={styles.ft_card} key={listing.listingId}>
                   <div className={`${styles.flex} ${styles['flex-colum']} ${styles.width100}`}>
                     <div className={`${styles.flex} ${styles.ft_card_img}`}>

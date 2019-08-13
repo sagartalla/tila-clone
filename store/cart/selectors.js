@@ -25,7 +25,7 @@ const getCartResults = (store) => {
       data.items.map((item, index) => {
         const listingInfo = item.listing_info || {};
         const variant_key = item && item.product_details && item.product_details.product_details_vo.cached_variant ? Object.keys(item.product_details.product_details_vo.cached_variant)[0] : null;
-        const tuinId = item && item.product_details && item.product_details.product_details_vo.cached_variant ? item.product_details.product_details_vo.cached_variant[variant_key].attribute_map.tuin.attribute_values[0].value : null
+        const tuinId = item && item.product_details && item.product_details.product_details_vo && item.product_details.product_details_vo.cached_variant && item.product_details.product_details_vo.cached_variant.length > 0 ? item.product_details.product_details_vo.cached_variant[variant_key].attribute_map.tuin.attribute_values[0].value : null
         newData.items[index] = {
           item_id: item.cart_item_id,
           product_id: listingInfo.product_id,

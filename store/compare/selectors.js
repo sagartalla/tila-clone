@@ -81,8 +81,8 @@ const getCompareInfo = (store) => {
     products: _.map(compareInfo, (product) => {
       const variant = product.variant_preferred_listings ? Object.keys(product.variant_preferred_listings)[0] : [];
       const variant_info = product.variant_preferred_listings ? product.variant_preferred_listings[variant][0] : {};
-      const variant_key = product && product.product_details && product.product_details.product_details_vo.cached_variant ? Object.keys(product.product_details.product_details_vo.cached_variant)[0] : null;
-      const tuinId = product && product.product_details && product.product_details.product_details_vo.cached_variant ? product.product_details.product_details_vo.cached_variant[variant_key].attribute_map.tuin.attribute_values[0].value : null
+      const variant_key = product && product.product_details && product.product_details.product_details_vo && product.product_details.product_details_vo.cached_variant && product.product_details.product_details_vo.cached_variant.length > 0  ? Object.keys(product.product_details.product_details_vo.cached_variant)[0] : null;
+      const tuinId = product && product.product_details && product.product_details.product_details_vo && product.product_details.product_details_vo.cached_variant && product.product_details.product_details_vo.cached_variant.length > 0 ? product.product_details.product_details_vo.cached_variant[variant_key].attribute_map.tuin.attribute_values[0].value : null
       return {
         id: product.product_id,
         listing_id: variant_info.listing_id,

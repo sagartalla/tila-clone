@@ -14,8 +14,9 @@ const getWishListResults = (store) => {
       // const variant_info = item.variant_preferred_listings[variant][0];
       const variant = item.variant_preferred_listings ? Object.keys(item.variant_preferred_listings)[0] : '';
       const variant_info = item.variant_preferred_listings ? item.variant_preferred_listings[variant][0] : {};
-      const variant_key = Object.keys(item.product_details.product_details_vo.cached_variant)[0];
-      const tuinId = item && item.product_details && item.product_details.product_details_vo.cached_variant ? item.product_details.product_details_vo.cached_variant[variant_key].attribute_map && item.product_details.product_details_vo.cached_variant[variant_key].attribute_map.tuin.attribute_values[0].value : null;
+      const variant_key = item && item.product_details && item.product_details.product_details_vo && item.product_details.product_details_vo.cached_variant && item.product_details.product_details_vo.cached_variant.length > 0 && Object.keys(item.product_details.product_details_vo.cached_variant)[0];
+      const tuinId = item && item.product_details && item.product_details.product_details_vo && item.product_details.product_details_vo.cached_variant && item.product_details.product_details_vo.cached_variant.length > 0
+      ? item.product_details.product_details_vo.cached_variant[variant_key].attribute_map && item.product_details.product_details_vo.cached_variant[variant_key].attribute_map.tuin.attribute_values[0].value : null;
       const values = store.cartReducer && store.cartReducer.data && store.cartReducer.data.items && store.cartReducer.data.items.length > 0 && store.cartReducer.data.items.map(e => e.product_details && e.product_details.product_id).indexOf(item.product_id);
       newData.push({
         wishlist_id: item.wishlist_id,

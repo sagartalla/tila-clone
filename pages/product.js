@@ -1,7 +1,7 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
+import { NextSeo } from 'next-seo';
 import withRedux from 'next-redux-wrapper';
-import Head from 'next/head';
 import Cookies from 'universal-cookie';
 import lang from '../utils/language';
 import { languageDefinations } from '../utils/lang';
@@ -19,7 +19,7 @@ import main_ar from '../layout/main/main_ar.styl';
 import styles_en from '../components/Product/product_en.styl';
 import styles_ar from '../components/Product/product_ar.styl';
 
-const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
 const { SEO_CONTENT } = languageDefinations();
 
@@ -33,12 +33,12 @@ class ProductPage extends Base {
   static async getInitialProps({
     store, query, isServer, req,
   }) {
-    debugger;
+    
     const { country, language } = query;
     const shippingData = req ? req.universalCookies.get('shippingInfo') : cookies.get('shippingInfo');
     const { city: shippingCity, country: shippingCountry } = shippingData || {};
     const {
-      pid, vid, cid
+      pid, vid, cid,
     } = query;
     const productId = pid;
     // if (taskCode) {
@@ -48,24 +48,24 @@ class ProductPage extends Base {
     //     accessToken: req.universalCookies.get('accessToken'),
     //   }));
     // } else {
-      const options = {
-        city_code: shippingCity,
-        country_code: country || 'SAU',
-        flags: {
-          catalog_details: true,
-          category_tree_bread_crumb: true,
-          category_tree_finance: true,
-          include_offers: true,
-          include_policies: true,
-          include_related_products: true,
-          shipping: true,
-        },
-        language,
-        product_ids: [
-          productId,
-        ],
-        size: 'LARGE',
-      };
+    const options = {
+      city_code: shippingCity,
+      country_code: country || 'SAU',
+      flags: {
+        catalog_details: true,
+        category_tree_bread_crumb: true,
+        category_tree_finance: true,
+        include_offers: true,
+        include_policies: true,
+        include_related_products: true,
+        shipping: true,
+      },
+      language,
+      product_ids: [
+        productId,
+      ],
+      size: 'LARGE',
+    };
 
       // if (variantId) {
       //   options.variant_ids = [
@@ -73,15 +73,15 @@ class ProductPage extends Base {
       //   ];
       // }
 
-      await Promise.all([
-        store.dispatch(actionCreators.getProduct(options)),
-        store.dispatch(MegamenuActionsCreators.getMegamenu()),
-        // TODO  SF-96
-        // await store.dispatch(reviewRatingActionCreators.getRatingsAndReviews({
-        //   itemType: query.itemType,
-        //   catalogId: query.catalogId
-        // }))
-      ]);
+    await Promise.all([
+      store.dispatch(actionCreators.getProduct(options)),
+      store.dispatch(MegamenuActionsCreators.getMegamenu()),
+      // TODO  SF-96
+      // await store.dispatch(reviewRatingActionCreators.getRatingsAndReviews({
+      //   itemType: query.itemType,
+      //   catalogId: query.catalogId
+      // }))
+    ]);
     // }
     return { isServer };
   }
@@ -94,19 +94,20 @@ class ProductPage extends Base {
     const { pid: productId, vid: variantId } = url.query;
     return (
       <div>
-        <Head>
-          <meta property="og:title" content={`${SEO_CONTENT.PDP_H2} ${allState.productReducer && allState.productReducer.data && allState.productReducer.data[0].product_details && allState.productReducer.data[0].product_details.product_details_vo && allState.productReducer.data[0].product_details.product_details_vo.cached_product_details.attribute_map.calculated_display_name.attribute_values[0].value} ${SEO_CONTENT.PDP_H2_TITLE}`} />
-          <meta property="og:site_name" content="Tila" />
-          <meta property="fb:app_id" content=" " />
-          {/* <meta property="og:url" content={window.location.toString()} /> */}
-          <meta property="og:description" content={`${SEO_CONTENT.PDP_META_CONTENT} ${allState.productReducer && allState.productReducer.data && allState.productReducer.data[0].product_details && allState.productReducer.data[0].product_details.product_details_vo && allState.productReducer.data[0].product_details.product_details_vo.cached_product_details.attribute_map.calculated_display_name.attribute_values[0].value} ${SEO_CONTENT.PDP_META_CONTENT2}`} />
-          <meta property="og:locale:locale" content="en_SA" />
-          <meta property="og:locale:alternate" content="ar_SA" />
-          <meta property="og:type" content="website" />
-          <meta property="og:image" content=" logo image url" />
-          <title>{SEO_CONTENT.PDP_H2} {allState.productReducer && allState.productReducer.data && allState.productReducer.data[0].product_details && allState.productReducer.data[0].product_details.product_details_vo && allState.productReducer.data[0].product_details.product_details_vo.cached_product_details.attribute_map.calculated_display_name.attribute_values[0].value} {SEO_CONTENT.PDP_H2_TITLE}</title>
-          <meta name="description" content={`${allState.productReducer && allState.productReducer.data && allState.productReducer.data[0].product_details && allState.productReducer.data[0].product_details.product_details_vo && allState.productReducer.data[0].product_details.product_details_vo.cached_product_details.attribute_map.calculated_display_name.attribute_values[0].value} ${SEO_CONTENT.PDP_META_CONTENT} ${SEO_CONTENT.PDP_META_CONTENT2}`} />
-        </Head>
+        <NextSeo
+          title={`${SEO_CONTENT.PDP_H2} ${allState.productReducer && allState.productReducer.data && allState.productReducer.data[0].product_details && allState.productReducer.data[0].product_details.product_details_vo && allState.productReducer.data[0].product_details.product_details_vo.cached_product_details.attribute_map.calculated_display_name.attribute_values[0].value} ${SEO_CONTENT.PDP_H2_TITLE}`}
+          description={`${allState.productReducer && allState.productReducer.data && allState.productReducer.data[0].product_details && allState.productReducer.data[0].product_details.product_details_vo && allState.productReducer.data[0].product_details.product_details_vo.cached_product_details.attribute_map.calculated_display_name.attribute_values[0].value} ${SEO_CONTENT.PDP_META_CONTENT} ${SEO_CONTENT.PDP_META_CONTENT2}`}
+          openGraph={{
+            title: `${SEO_CONTENT.PDP_H2}``${allState.productReducer && allState.productReducer.data && allState.productReducer.data[0].product_details && allState.productReducer.data[0].product_details.product_details_vo && allState.productReducer.data[0].product_details.product_details_vo.cached_product_details.attribute_map.calculated_display_name.attribute_values[0].value}``${SEO_CONTENT.PDP_H2_TITLE}`,
+            site_name: 'Tila',
+            description: `${SEO_CONTENT.PDP_META_CONTENT}``${allState.productReducer && allState.productReducer.data && allState.productReducer.data[0].product_details && allState.productReducer.data[0].product_details.product_details_vo && allState.productReducer.data[0].product_details.product_details_vo.cached_product_details.attribute_map.calculated_display_name.attribute_values[0].value}``${SEO_CONTENT.PDP_META_CONTENT2}`,
+            fb_app_id: '',
+            locale: 'en_SA',
+            locale_ar: 'ar_SA',
+            type: 'website',
+            image: 'logo image url',
+          }}
+        />
         <h1 className={`${styles.display_none}`}>{allState.productReducer && allState.productReducer.data && allState.productReducer.data[0].product_details && allState.productReducer.data[0].product_details.product_details_vo && allState.productReducer.data[0].product_details.product_details_vo.cached_product_details.attribute_map.calculated_display_name.attribute_values[0].value}</h1>
         <Layout>
           <Product
