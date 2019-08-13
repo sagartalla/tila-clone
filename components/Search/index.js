@@ -150,9 +150,7 @@ class Search extends Component {
         {
           isBrandPage
           ?
-            <Grid className={`${styles['pt-20']} ${styles.relative}`}>
-              <Brand />
-            </Grid>
+            <Brand />
           :
            null
         }

@@ -100,7 +100,7 @@ class Product extends Component {
     e.preventDefault();
     const {
       productId: product_id, catalogId: catalog_id,
-      variants, currency, addToWishlistAndFetch, wishlistId, deleteWishlist, userDetails,
+      variants, currency, addToWishlistAndFetch, wishlistId, deleteWishlist, userDetails, firstVarintId
     } = this.props;
     const { selectedIndex } = this.state;
     if (!userDetails.isLoggedIn) {
@@ -108,13 +108,20 @@ class Product extends Component {
     } else if (wishlistId) {
       deleteWishlist(wishlistId);
     } else {
-      addToWishlistAndFetch({
+      const data = {
         catalog_id,
         product_id,
-        variant_id: variants[selectedIndex].variantId,
-        wishlisted_price: variants && variants[selectedIndex] && variants[selectedIndex].sellingPrice && variants[selectedIndex].sellingPrice[0],
-        wishlisted_currency: currency,
-      });
+      }
+      if(variants && variants.length) {
+        data.variant_id = variants[selectedIndex].variantId;
+        if(variants[selectedIndex] && variants[selectedIndex].sellingPrice) {
+          data.wishlisted_price = variants[selectedIndex].sellingPrice[0]
+        }
+      } else {
+        data.variant_id = firstVarintId;
+      }
+      data.wishlisted_currency = currency;
+      addToWishlistAndFetch(data);
     }
   }
 
@@ -228,8 +235,8 @@ class Product extends Component {
         catalogObj: {
           product_id: productId,
           catalog_id,
-          tuin: variants[selectedIndex].tuin[0],
-          variant_id: variants[selectedIndex].variantId,
+          tuin: variants[selectedIndex] && variants[selectedIndex].tuin[0],
+          variant_id: variants[selectedIndex] && variants[selectedIndex].variantId,
         },
       });
     } else removeCompareData(productId);

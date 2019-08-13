@@ -31,9 +31,10 @@ const WishlistBody = (props) => {
   const { WISH_LIST_PAGE, PDP_PAGE } = languageDefinations();
 
   const getPriceAlert = (status, wishlisted_price, changed_price, cur) => {
-    let str = null;
+    let str = '';
     if (status === 'SAME') return str;
-    const priceVal = wishlisted_price > changed_price ? wishlisted_price - changed_price : changed_price - wishlisted_price;
+    const priceVal = Math.abs(wishlisted_price - changed_price);
+    if(priceVal == 0) return str;
     if (status === 'INCREASED') {
       str = (
         <span className={`${styles['thick-red-clr']} ${styles.flex}`}>
