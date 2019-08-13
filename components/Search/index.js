@@ -54,13 +54,14 @@ class Search extends Component {
       sideBarPositionClass: '',
       containerStyle: {},
       showModal: false,
-      selectedVal: null,
     };
     this.handleScroll = this.handleScroll.bind(this);
     this.upScroll = this.upScroll.bind(this);
     this.downScroll = this.downScroll.bind(this);
     this.showBrandsModal = this.showBrandsModal.bind(this);
     this.onChangeFilter = this.onChangeFilter.bind(this);
+    this.onChangeHandle = this.onChangeHandle.bind(this);
+    this.onFilterData = this.onFilterData.bind(this);
   }
   componentDidMount() {
     window.addEventListener('scroll', this.handleScroll);
@@ -133,7 +134,6 @@ class Search extends Component {
     this.setState({
       showModal: true,
       filteredItems: filterItems,
-      selectedVal: null,
       filter,
       selectedItems,
     });
@@ -146,13 +146,14 @@ class Search extends Component {
   }
 
   closePopup = () => {
+    let { selectedItems } = this.state;
     this.setState({
       showModal: false,
+      selectedItems: [],
     });
   }
 
   applyFilters = () => {
-    debugger;
     const { submitQuery } = this.state;
     this.submitQuery(submitQuery);
     this.closePopup();
@@ -162,16 +163,10 @@ class Search extends Component {
     this.props.getSearchResults(this.props.getFacetfilters(params));
   }
 
-  searchBrands = (value) => () => {
-    this.setState({
-      selectedVal: value,
-    });
-  }
   
   onChangeFilter = (value) => (e) => {
     const { filter } = this.state;
     console.log(value);
-    debugger;
       const newSelectedItem = [...this.state.selectedItems];
       if (e.target.checked) {
         newSelectedItem.push(value.name);
@@ -184,15 +179,12 @@ class Search extends Component {
       this.onChangeHandle(value, e, filter);
   }
 
-  onChangeHandle = (value, e, filter) => () => {
-    debugger;
+  onChangeHandle(value, e, filter) {
     const { facets } = this.props;
-      debugger;
       const params = facets;
       params[filter.attributeName] = params[filter.attributeName] || [];
       digitalData.filter.leftnavfilters = `${filter.attributeName}:${value.name}`;
       if (e.target.checked) {
-        debugger;
         params[filter.attributeName].push(value.name);
       } else {
         params[filter.attributeName] = params[filter.attributeName].filter((item) => item !== value.name)
@@ -203,6 +195,16 @@ class Search extends Component {
       });
       this.props.onChangeFacets(params);
     };
+
+    onFilterData(value) {
+      const { filter } = this.state;
+      let items = filter.children.filter((item) => {
+        return item.name.toLowerCase().indexOf(value) > -1;
+      });
+      this.setState({
+        filteredItems: items,
+      });
+    }
 
 
   handleScroll(e) {
@@ -226,10 +228,9 @@ class Search extends Component {
     const {
       query, optionalParams, isBrandPage, loaderProps,
     } = this.props;
-    const { sideBarPositionClass, containerStyle, showModal, filteredItems, selectedItems, selectedVal } = this.state;
+    const { sideBarPositionClass, containerStyle, showModal, filteredItems, selectedItems } = this.state;
     const { loadComponent, pathname } = loaderProps;
-
-    console.log('submitQuery', this.state.submitQuery);
+    console.log('submitQuery', this.state.filteredItems);
 
     return (
       <div>
@@ -247,11 +248,11 @@ class Search extends Component {
           <Grid id="search-container" className={`${styles['pt-20']} ${styles.relative} ${styles['search-container-wrap']}`}>
             <Col md={2} id="sidebar-position" className={`${styles['filter-panel']} ${styles['float-l']} ${styles['border-radius4']} ${styles['bg-white']} ${styles['p-0']} ${styles[sideBarPositionClass]}`} style={containerStyle}>
               <NoSSR>
-                <CategoriesAndFacets search={query} showPopup={showModal} showBrandsModal={this.showBrandsModal} selectedCheckbox={this.selectedCheckbox} selectedVal={selectedVal} clearSelectedItem={this.clearSelectedItem} />
+                <CategoriesAndFacets search={query} showPopup={showModal} showBrandsModal={this.showBrandsModal} selectedCheckbox={this.selectedCheckbox} clearSelectedItem={this.clearSelectedItem} />
               </NoSSR>
             </Col>
             <div className={`${styles.absolute} ${styles['bg-white']} ${styles.brandsmodal} `}>
-              {showModal && <SelectBrands showPopup={showModal} closePopup={this.closePopup} filteredItems={filteredItems} selectedItems={selectedItems} onFilterData={this.searchBrands} onChangeFilter={this.onChangeFilter} applyFilters={this.applyFilters} />}
+              {showModal && <SelectBrands showPopup={showModal} closePopup={this.closePopup} filteredItems={filteredItems} selectedItems={selectedItems} onFilterData={this.onFilterData} onChangeFilter={this.onChangeFilter} applyFilters={this.applyFilters} />}
             </div>
             <Col md={10} className={`${styles['search-results']} ${styles['fl-rt']} ${styles['pr-0']}`}>
               <SearchDetailsBar optionalParams={optionalParams} />

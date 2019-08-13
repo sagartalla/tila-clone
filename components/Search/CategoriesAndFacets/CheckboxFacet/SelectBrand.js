@@ -31,6 +31,7 @@ class SelectBrand extends Component {
       newFilteredList: [],
       requiredData: {},
     };
+    this.resetSelectedFilters = this.resetSelectedFilters.bind(this);
   }
 
   componentDidMount() {
@@ -84,23 +85,27 @@ class SelectBrand extends Component {
     this.props.getSearchResults(this.props.getFacetfilters(params));
   }
 
-  resetSelectedFilters = () => {
+  resetSelectedFilters() {
     const { appliedFilters } = this.props;
-    appliedFilters && appliedFilters.forEach(childfilter => (
-      this.setState({
-        filterParam: childfilter.parentKey,
-        filterName: childfilter.displayName,
-      }, () => {
-        const { filterParam, filterName } = this.state;
-        const { facets } = this.props;
-        const params = facets || {};
-        params[filterParam] = [];
-        if (!params[filterParam].length) { delete params[filterParam]; }
-        this.props.onChangeFacets(params);
-        this.submitQuery(params);
-        this.props.closePopup();
-      })
-    ));
+    if (appliedFilters && appliedFilters.length > 0) {
+      appliedFilters && appliedFilters.forEach(childfilter => (
+        this.setState({
+          filterParam: childfilter.parentKey,
+          filterName: childfilter.displayName,
+        }, () => {
+          const { filterParam, filterName } = this.state;
+          const { facets } = this.props;
+          const params = facets || {};
+          params[filterParam] = [];
+          if (!params[filterParam].length) { delete params[filterParam]; }
+          this.props.onChangeFacets(params);
+          this.submitQuery(params);
+          this.props.closePopup();     
+        })
+      ));
+    } else {
+      this.props.closePopup();   
+    }
   }
 
   render() {
@@ -161,8 +166,8 @@ class SelectBrand extends Component {
                         <React.Fragment>
                           {filteredItems.length > 0 && filteredItems.map(childfilter => (
                             childfilter.name === val &&
-                            <div className={`${styles['checkbox-material']} ${styles['select-check-mate']} ${styles['mt-10']} ${styles['select-checkbox-width']}`}>
-                              <input type="checkbox" checked={selectedItems && selectedItems.length > 0 && selectedItems.indexOf(childfilter.name) !== -1} />
+                            <div className={`${styles['select-check-mate']} ${styles['mt-10']}`}>
+                              <input type="checkbox" onChange={this.props.onChangeFilter({ name: childfilter.name, param: childfilter.param })} checked={selectedItems && selectedItems.length > 0 && selectedItems.indexOf(childfilter.name) !== -1} />
                               <label className={`${styles['fs-12']} ${styles['category-label']}`}>
                                 <span className={`${styles['category-span']} ${styles.fontW700}`}>{val}
                               </span>

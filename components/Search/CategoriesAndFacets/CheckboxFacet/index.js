@@ -50,16 +50,12 @@ class CheckboxFacet extends Component {
     return selectedChildren.concat(unSelectedChildren)
   }
   onFilterData(value) {
-    const { filter, showPopup } = this.props;
+    const { filter } = this.props;
     let items = filter.children.filter((item) => {
       return item.name.toLowerCase().indexOf(value) > -1;
     });
     this.setState({
       filterItems: items,
-    }, () => {
-      console.log('filterItems', this.state.filterItems);
-      showPopup && this.props.showBrandsModal(this.state.filterItems)();
-      // this.props.clearSelectedItem();
     });
   }
 
@@ -108,11 +104,9 @@ class CheckboxFacet extends Component {
   }
 
   render() {
-    const { filter, index, facets, selectedVal } = this.props;
+    const { filter, index, facets, showPopup } = this.props;
     const { selectedItems, maxRows, filterItems } = this.state;
-    if (selectedVal) {
-      this.onFilterData(selectedVal);
-    }
+
     return (
       <React.Fragment>
       <Panel eventKey={`${index + 'c'}`} key={filter.id}>
