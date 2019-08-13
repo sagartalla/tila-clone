@@ -52,7 +52,14 @@ const actionCreators = {
       payload: apis.getRedirectApi(params)
     }
   },
-
+  refreshTransaction: (useWallet) => (dispatch, getState) => {
+    const state = getState();
+    const { paymentsReducer } = state;
+    return {
+      type: actions.CREATE_ORDER,
+      payload: apis.refreshTransactionApi(paymentsReducer.data.transactionUrl, useWallet),
+    }
+  }
 };
 
 export { actions, actionCreators };
