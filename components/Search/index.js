@@ -3,6 +3,7 @@ import { Grid, Col } from 'react-bootstrap';
 import NoSSR from 'react-no-ssr';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { decode, encode, addUrlProps, replaceInUrlQuery } from 'react-url-query';
 import { actionCreators, selectors } from '../../store/search';
 import HeaderBar from '../HeaderBar/index';
 import FooterBar from '../Footer/index';
@@ -52,10 +53,14 @@ class Search extends Component {
     this.state = {
       sideBarPositionClass: '',
       containerStyle: {},
+      showModal: false,
+      selectedVal: null,
     };
     this.handleScroll = this.handleScroll.bind(this);
     this.upScroll = this.upScroll.bind(this);
     this.downScroll = this.downScroll.bind(this);
+    this.showBrandsModal = this.showBrandsModal.bind(this);
+    this.onChangeFilter = this.onChangeFilter.bind(this);
   }
   componentDidMount() {
     window.addEventListener('scroll', this.handleScroll);
@@ -124,15 +129,17 @@ class Search extends Component {
     }
   }
 
-  showBrandsModal = (filterItems) => {
+  showBrandsModal = (filter, filterItems, selectedItems) => () => {
     this.setState({
       showModal: true,
       filteredItems: filterItems,
+      selectedVal: null,
+      filter,
+      selectedItems,
     });
   }
 
   selectedCheckbox = (selectedValues) => () => {
-    console.log('iam here', selectedValues);
     this.setState({
       selectedItems: selectedValues || [],
     });
@@ -143,6 +150,60 @@ class Search extends Component {
       showModal: false,
     });
   }
+
+  applyFilters = () => {
+    debugger;
+    const { submitQuery } = this.state;
+    this.submitQuery(submitQuery);
+    this.closePopup();
+  }
+
+  submitQuery(params) {
+    this.props.getSearchResults(this.props.getFacetfilters(params));
+  }
+
+  searchBrands = (value) => () => {
+    this.setState({
+      selectedVal: value,
+    });
+  }
+  
+  onChangeFilter = (value) => (e) => {
+    const { filter } = this.state;
+    console.log(value);
+    debugger;
+      const newSelectedItem = [...this.state.selectedItems];
+      if (e.target.checked) {
+        newSelectedItem.push(value.name);
+      } else {
+        newSelectedItem.splice(newSelectedItem.indexOf(value.name), 1);
+      }
+      this.setState({
+        selectedItems: newSelectedItem,
+      });
+      this.onChangeHandle(value, e, filter);
+  }
+
+  onChangeHandle = (value, e, filter) => () => {
+    debugger;
+    const { facets } = this.props;
+      debugger;
+      const params = facets;
+      params[filter.attributeName] = params[filter.attributeName] || [];
+      digitalData.filter.leftnavfilters = `${filter.attributeName}:${value.name}`;
+      if (e.target.checked) {
+        debugger;
+        params[filter.attributeName].push(value.name);
+      } else {
+        params[filter.attributeName] = params[filter.attributeName].filter((item) => item !== value.name)
+        if (!params[filter.attributeName].length) { delete params[filter.attributeName]; }
+      }
+      this.setState({
+        submitQuery: params,
+      });
+      this.props.onChangeFacets(params);
+    };
+
 
   handleScroll(e) {
     // sidebarPosition = sidebarPosition || document.getElementById('sidebar-position');
@@ -165,8 +226,11 @@ class Search extends Component {
     const {
       query, optionalParams, isBrandPage, loaderProps,
     } = this.props;
-    const { sideBarPositionClass, containerStyle, showModal, filteredItems, selectedItems } = this.state;
+    const { sideBarPositionClass, containerStyle, showModal, filteredItems, selectedItems, selectedVal } = this.state;
     const { loadComponent, pathname } = loaderProps;
+
+    console.log('submitQuery', this.state.submitQuery);
+
     return (
       <div>
         <HeaderBar />
@@ -183,11 +247,11 @@ class Search extends Component {
           <Grid id="search-container" className={`${styles['pt-20']} ${styles.relative} ${styles['search-container-wrap']}`}>
             <Col md={2} id="sidebar-position" className={`${styles['filter-panel']} ${styles['float-l']} ${styles['border-radius4']} ${styles['bg-white']} ${styles['p-0']} ${styles[sideBarPositionClass]}`} style={containerStyle}>
               <NoSSR>
-                <CategoriesAndFacets search={query} showBrandsModal={this.showBrandsModal} selectedCheckbox={this.selectedCheckbox} />
+                <CategoriesAndFacets search={query} showPopup={showModal} showBrandsModal={this.showBrandsModal} selectedCheckbox={this.selectedCheckbox} selectedVal={selectedVal} clearSelectedItem={this.clearSelectedItem} />
               </NoSSR>
             </Col>
             <div className={`${styles.absolute} ${styles['bg-white']} ${styles.brandsmodal} `}>
-              {showModal && <SelectBrands showPopup={showModal} closePopup={this.closePopup} filteredItems={filteredItems} selectedItems={selectedItems} />}
+              {showModal && <SelectBrands showPopup={showModal} closePopup={this.closePopup} filteredItems={filteredItems} selectedItems={selectedItems} onFilterData={this.searchBrands} onChangeFilter={this.onChangeFilter} applyFilters={this.applyFilters} />}
             </div>
             <Col md={10} className={`${styles['search-results']} ${styles['fl-rt']} ${styles['pr-0']}`}>
               <SearchDetailsBar optionalParams={optionalParams} />
@@ -205,13 +269,26 @@ class Search extends Component {
 const mapStateToProps = store => ({
   spellCheckResp: selectors.getSpellCheckResponse(store),
   optionalParams: selectors.optionParams(store),
+  getFacetfilters: selectors.getFacetfilters(store),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(
   {
     hideSearchBarFitlers: actionCreators.hideSearchBarFitlers,
+    getSearchResults: actionCreators.getSearchResults,  
   },
   dispatch,
 );
 
-export default connect(mapStateToProps, mapDispatchToProps)(Search);
+function mapUrlToProps(url, props) {
+  return {
+    facets: decode(d => JSON.parse(d || '{}'), url.facets),
+  };
+}
+
+const mapUrlChangeHandlersToProps = props => ({
+  onChangeFacets: value => replaceInUrlQuery('facets', encode((e) => JSON.stringify(e || {}), value)),
+});
+
+export default addUrlProps({ mapUrlToProps, mapUrlChangeHandlersToProps })(connect(mapStateToProps, mapDispatchToProps)(Search));
+

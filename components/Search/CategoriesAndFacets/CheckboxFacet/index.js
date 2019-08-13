@@ -83,12 +83,13 @@ class CheckboxFacet extends Component {
 
   toggleMore() {
     const { filter } = this.props;
+    const { selectedFilters } = this.props;
     this.setState({
       maxRows: this.state.maxRows === filter.children.length ? MaxItems : filter.children.length,
       filterItems: this.sortSelectedItems(this.state.selectedItems),
     }, () => {
       // this.state.maxRows > 10 &&
-      this.props.showBrandsModal(this.state.filterItems)();
+      this.props.showBrandsModal(filter, this.state.filterItems, selectedFilters)();
     });
     this.props.selectedCheckbox(this.state.selectedItems)();
   }
