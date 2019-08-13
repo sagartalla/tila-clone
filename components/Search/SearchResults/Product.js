@@ -235,8 +235,8 @@ class Product extends Component {
         catalogObj: {
           product_id: productId,
           catalog_id,
-          tuin: variants[selectedIndex].tuin[0],
-          variant_id: variants[selectedIndex].variantId,
+          tuin: variants[selectedIndex] && variants[selectedIndex].tuin[0],
+          variant_id: variants[selectedIndex] && variants[selectedIndex].variantId,
         },
       });
     } else removeCompareData(productId);
