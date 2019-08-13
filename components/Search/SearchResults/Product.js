@@ -100,7 +100,7 @@ class Product extends Component {
     e.preventDefault();
     const {
       productId: product_id, catalogId: catalog_id,
-      variants, currency, addToWishlistAndFetch, wishlistId, deleteWishlist, userDetails,
+      variants, currency, addToWishlistAndFetch, wishlistId, deleteWishlist, userDetails, firstVarintId
     } = this.props;
     const { selectedIndex } = this.state;
     if (!userDetails.isLoggedIn) {
@@ -108,13 +108,20 @@ class Product extends Component {
     } else if (wishlistId) {
       deleteWishlist(wishlistId);
     } else {
-      addToWishlistAndFetch({
+      const data = {
         catalog_id,
         product_id,
-        variant_id: variants[selectedIndex].variantId,
-        wishlisted_price: variants && variants[selectedIndex] && variants[selectedIndex].sellingPrice && variants[selectedIndex].sellingPrice[0],
-        wishlisted_currency: currency,
-      });
+      }
+      if(variants && variants.length) {
+        data.variant_id = variants[selectedIndex].variantId;
+        if(variants[selectedIndex] && variants[selectedIndex].sellingPrice) {
+          data.wishlisted_price = variants[selectedIndex].sellingPrice[0]
+        }
+      } else {
+        data.variant_id = firstVarintId;
+      }
+      data.wishlisted_currency = currency;
+      addToWishlistAndFetch(data);
     }
   }
 
@@ -228,8 +235,8 @@ class Product extends Component {
         catalogObj: {
           product_id: productId,
           catalog_id,
-          tuin: variants[selectedIndex].tuin[0],
-          variant_id: variants[selectedIndex].variantId,
+          tuin: variants[selectedIndex] && variants[selectedIndex].tuin[0],
+          variant_id: variants[selectedIndex] && variants[selectedIndex].variantId,
         },
       });
     } else removeCompareData(productId);
@@ -272,8 +279,8 @@ class Product extends Component {
     const selectedProduct = selectedID.length > 0 && selectedID.includes(productId);
     const discountValue = variants.length > 0 &&
       variants[selectedIndex].discount && Math.floor(variants[selectedIndex].discount[0]);
-    const tuinId = variants.length > 0 && variants[selectedIndex].tuin && variants[selectedIndex].tuin[0];
-    const listing_id = variants.length > 0 && variants[selectedIndex].listingId[0];
+    const tuinId = variants && variants.length > 0 && variants[selectedIndex].tuin && variants[selectedIndex].tuin[0];
+    const listing_id = variants && variants.length > 0 && variants[selectedIndex] && variants[selectedIndex].listingId && variants[selectedIndex].listingId[0];
     const popover = (
       <Popover id={productId}>
         {variants.length > 0 && variants[selectedIndex].offersApplied &&
@@ -314,7 +321,7 @@ class Product extends Component {
           className={`${styles['product-items-main']} ${styles.relative} ${styles['p-0']} ${selectedProduct ? styles['active-product'] : ''}`}
           onClick={() => this.routeChange(productId, variantId, catalogId, itemtype, index, pageNum)}
         >
-          <Link route={`/${language}/pdp/${displayName.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${tuinId ? `${tuinId}/`: '' }${listing_id ? `${listing_id}/`: ''}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`}>
+          <Link route={`/${language}/pdp/${displayName.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${tuinId ? `${tuinId}/`: '' }${listing_id ? `${listing_id}`: ''}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`}>
             <a target="_blank">
               <div className={`${styles['product-items']}`} onMouseEnter={this.setImg} onMouseLeave={this.leaveImg}>
                 {showLoader ?
