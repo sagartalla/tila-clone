@@ -10,7 +10,7 @@ import PayOnline from './paymentpages/PayOnline';
 import CashOnDelivery from './paymentpages/CashOnDelivery';
 import SavedCards from './paymentpages/SavedCards';
 
-import { selectors } from '../../../store/payments';
+import { actionCreators, selectors } from '../../../store/payments';
 
 import {languageDefinations} from '../../../utils/lang'
 
@@ -52,7 +52,8 @@ class PaymentMode extends Component {
   showPaymentType(e) {
     this.setState({
       showTab: e.currentTarget.id
-    })
+    });
+    this.props.refreshTransaction(false);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -152,7 +153,7 @@ const mapStateToprops = (store) => ({
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-
+      refreshTransaction: actionCreators.refreshTransaction,
     },
     dispatch,
   );

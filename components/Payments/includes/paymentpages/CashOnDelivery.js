@@ -50,9 +50,9 @@ class CashOnDelivery extends React.Component {
   }
   handleChange() {
     const {data} = this.props;
-    this.props.disableAllOthers({
-      except: data.type
-    });
+    // this.props.disableAllOthers({
+    //   except: data.type
+    // });
   }
 
   onCaptchaSuccess({captcha_request_id}) {

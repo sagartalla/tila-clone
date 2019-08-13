@@ -105,6 +105,27 @@ const paymentsReducer = typeToReducer({
       });
     },
   },
+  [actions.REFRESH_TRANSACTION]: {
+    PENDING: state => Object.assign({}, state, {
+      ui: {
+        loading: true,
+      },
+    }),
+    REJECTED: (state, action) => Object.assign({}, state, {
+      error: action.payload.message,
+      ui: { loading: false },
+    }),
+    FULFILLED: (state, action) => {
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          data: action.payload.data
+        },
+        ui: { loading: false },
+      };
+    },
+  }
 }, initialState);
 
 export default paymentsReducer;

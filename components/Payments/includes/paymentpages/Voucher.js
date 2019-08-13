@@ -61,7 +61,7 @@ class Voucher extends Component {
       <div className={`${styles['voucher']} ${styles['p-10']}`}>
         <h3 className={`${styles['lgt-blue']} ${styles['fs-20']} ${styles['fontW300']} ${styles['m-0']}`}>
           <div className={styles['checkbox-material']}>
-            <input id="include-wallet" type="checkbox" onChange={this.includeWallet} checked={includeWallet}/>
+            <input id="include-wallet" type="checkbox" onChange={this.includeWallet} checked={includeWallet || isOnlyVocuher}/>
             <label for="include-wallet" className={styles['include-wallet-label']}>
               {PAYMENT_PAGE.TILA_CREDIT_USED}
             </label>
@@ -75,7 +75,7 @@ class Voucher extends Component {
             null
         }
         {
-          includeWallet
+          includeWallet || isOnlyVocuher
             ?
             <div className={`${styles.flex} ${styles['justify-between']} ${styles['pt-10']}`}>
               <div className={`${styles.paymentBorder}`}>
