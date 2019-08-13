@@ -71,9 +71,9 @@ class Brand extends Base {
               title={`${this.props.url.query.brandName} ${SEO_CONTENT.LANDING_H2_CONTENT} ${this.props.url.query.brandName} ${SEO_CONTENT.BRAND_H2_TITLE}`}
               description={`${SEO_CONTENT.BRAND_META_CONTENT} ${this.props.url.query.brandName} ${SEO_CONTENT.BRAND_META_CONTENT2}`}
               openGraph={{
-                title: `${this.props.url.query.brandName}``${SEO_CONTENT.LANDING_H2_CONTENT}``${this.props.url.query.brandName}``${SEO_CONTENT.BRAND_H2_TITLE}`,
+                title:`${this.props.url.query.brandName} ${SEO_CONTENT.BRAND_H2_TITLE}`,
                 site_name: 'Tila',
-                description: `${SEO_CONTENT.BRAND_META_CONTENT}``${this.props.url.query.brandName}``${SEO_CONTENT.BRAND_META_CONTENT2}`,
+                description: `${SEO_CONTENT.BRAND_META_CONTENT} ${this.props.url.query.brandName} ${SEO_CONTENT.BRAND_META_CONTENT2}`,
                 fb_app_id: '',
                 locale: 'en_SA',
                 locale_ar: 'ar_SA',
