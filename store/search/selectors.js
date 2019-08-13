@@ -92,7 +92,7 @@ const getSearchFilters = (store) => {
     filters.facets = store.searchReducer.data.facetResponse.facets.reduce((filters, item) => filters.concat({
       name: item.attributeDisplayName,
       id: item.Id,
-      queryParamName: _.camelCase(item.attributeDisplayName), 
+      queryParamName: _.camelCase(item.attributeDisplayName),
       attributeName: item.attributeName,
       type: item.Type,
       children: item.Values.map((value) => {
@@ -160,6 +160,8 @@ const getSearchResutls = (store) => {
       currency = currency[0] || '';
       currency = currency.attributes || '';
       currency = currency.currency || '';
+
+      const firstVarintId = product.variantAdapters ? product.variantAdapters[0].id : null ;
       // let priceRange = '';
       // if (priceInfo.length > 2) {
       //   priceRange = [Math.min.apply(null, priceInfo), Math.max.apply(null, priceInfo)].join(' - ');
@@ -182,7 +184,7 @@ const getSearchResutls = (store) => {
         displayName: (product.attributes.calculated_display_name || []).join(','),
         brand: brand ? brand[0] : '',
         variants: variantInfo.sort((a, b) => a.productSize[0] - b.productSize[0]),
-        // priceRange,
+        firstVarintId,
         currency,
         categoryId,
         flags: product.flags,
