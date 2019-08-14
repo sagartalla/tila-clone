@@ -161,7 +161,6 @@ class Search extends Component {
             <Col md={2} id="sidebar-position" className={`${styles['filter-panel']} ${styles['float-l']} ${styles['border-radius4']} ${styles['bg-white']} ${styles['p-0']} ${styles[sideBarPositionClass]}`} style={containerStyle}>
               <NoSSR>
                 <CategoriesAndFacets search={query} />
-                <div className={styles['cover-bar']} />
               </NoSSR>
 
             </Col>

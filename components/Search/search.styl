@@ -1,18 +1,5 @@
 @import '../../layout/main/executables.styl';
 
-.filter-panel::-webkit-scrollbar,
-.filter-panel::-webkit-scrollbar-thumb 
-  overflow:visible;
-  border-radius: 4px;
-
-.filter-panel::-webkit-scrollbar-thumb 
-  background: rgba(0,0,0,.2); 
-
-.filter-panel:hover .cover-bar {
-   opacity: 0;
-  -webkit-transition: all .5s;
-}
-
 .filter-panel
   // width: 215px;
   border: 1px solid #e5e5e5;
@@ -22,22 +9,13 @@
   position: sticky !important;
   top 120px
 
-  .cover-bar
-    position absolute
-    background #fff
-    height 100%  
-    top 0
-    right 0
-    width .4em
-    -webkit-transition all .5s
-    opacity 1
 
   .filter-sub-panel
     width 100%
     max-height calc(100vh - 150px)
-    overflow auto
-  // &:hover
-  //   overflow auto
+    overflow hidden
+    &:hover
+      overflow overlay
 
   .bottom-absolute
     position absolute
