@@ -245,9 +245,7 @@ class Search extends Component {
         {
           isBrandPage
           ?
-            <Grid className={`${styles['pt-20']} ${styles.relative}`}>
-              <Brand />
-            </Grid>
+            <Brand />
           :
            null
         }
@@ -257,6 +255,7 @@ class Search extends Component {
               <NoSSR>
                 <CategoriesAndFacets search={query} showPopup={showModal} showBrandsModal={this.showBrandsModal} selectedCheckbox={this.selectedCheckbox} clearSelectedItem={this.clearSelectedItem} />
               </NoSSR>
+
             </Col>
             <div className={`${styles.absolute} ${styles['bg-white']} ${styles.brandsmodal} `}>
               {showModal && <SelectBrands showPopup={showModal} closePopup={this.closePopup} filteredItems={filteredItems} selectedItems={selectedItems} onFilterData={this.onFilterData} onChangeCheckbox={this.onChangeCheckbox} applyFilters={this.applyFilters} resetSelectedFilters={this.resetSelectedFilters} filter={filter}/>}

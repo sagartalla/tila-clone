@@ -331,6 +331,17 @@ const authReducer = typeToReducer({
       },
     }),
   },
+  [actions.GET_GEO_SHIPPING_DETAILS]: (state) => {
+    const shippingInfo = cookies.get('shippingInfo');
+    return Object.assign({}, state, {
+      data: {
+        ...state.data,
+        geoShippingDetails: {
+          ...shippingInfo,
+        },
+      },
+    });
+  },
   [actions.REMOVE_CITY]: {
     PENDING: state => Object.assign({}, state, {
       error: '',

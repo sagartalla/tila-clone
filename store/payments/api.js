@@ -10,26 +10,22 @@ const country = cookies.get('country') || 'SAU';
 
 //Create Order Third step.
 const transactionApi = (orderRes) => {
-
-  return axios.get(orderRes.redirect_url).then(({ data }) => {
-    // const params = {
-    //   payment_details: [
-    //     {
-    //       amount: data.amount,
-    //       currency: data.currency,
-    //       payment_mode: 'PAY_ONLINE',
-    //     },
-    //   ],
-    //   redirect_url: `${window.location.origin}/${language}`,
-    //   transaction_id: data.transaction_id,
-    // };
-    // return axios.post(`${constants.TRANSACTIONS_API_URL}/fpts/transaction/process`, params).then(({ data: payData }) => {
-    //
-    //   return { orderRes, data, payData }
-    // });
-    return { orderRes, data };
+  return axios.get(`${orderRes.redirect_url}?use_wallet=false`).then(({ data }) => {
+    return {
+      orderRes,
+      data,
+      transactionUrl: orderRes.redirect_url
+    };
   });
 };
+
+const refreshTransactionApi = (url, useWallet) => {
+  return axios.get(`${url}?use_wallet=${useWallet}`).then(({ data }) => {
+    return {
+      data
+    };
+  });
+}
 
 //Create Order Second step.
 const createOrder = () => {
@@ -64,4 +60,4 @@ const makeProcessRequest = (params) => {
   return axios.post(`${constants.TRANSACTIONS_API_URL}/fpts/transaction/process`, params).then(({data}) => data);
 }
 
-export default { createOrderApi, doPaymentApi, saveCardApi, makeProcessRequest, getRedirectApi };
+export default { refreshTransactionApi, createOrderApi, doPaymentApi, saveCardApi, makeProcessRequest, getRedirectApi };
