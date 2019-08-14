@@ -28,6 +28,7 @@ const getCartResults = (store) => {
         const variant_key = item && item.product_details && item.product_details.product_details_vo.cached_variant ? Object.keys(item.product_details.product_details_vo.cached_variant)[0] : null;
         const tuinId = item && item.product_details && item.product_details.product_details_vo && item.product_details.product_details_vo.cached_variant && item.product_details.product_details_vo.cached_variant.length > 0 ? item.product_details.product_details_vo.cached_variant[variant_key].attribute_map.tuin.attribute_values[0].value : null
         newData.items[index] = {
+          active: listingInfo.active,
           item_id: item.cart_item_id,
           product_id: listingInfo.product_id,
           variant_id: listingInfo.variant_id,

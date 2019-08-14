@@ -25,6 +25,7 @@
   .cart-box
     margin-bottom 0
     border-radius 4px 4px 0 0
+    position relative
     .cart-price-toltp
       .cart-tool-tip
         right -8px
@@ -41,7 +42,7 @@
     .out-of-stock
       z-index 1
       width 96%
-      height 176px
+      height calc(100% - 30px)
       background: rgba(255, 255, 255, 0.8);
     .card-box-inn-img
       width: 100%;
@@ -89,7 +90,7 @@
 
   .break-word
     word-wrap break-word
-  
+
   .warranty-part
     background-color: rgba(249, 249, 249, 0.8);
 
@@ -206,7 +207,7 @@
 
 .warranty-values
  padding 4px 15px
-  
+
 .panel-body-border
   border-top 1px solid generic-gray-color
   padding 7px 15px !important
