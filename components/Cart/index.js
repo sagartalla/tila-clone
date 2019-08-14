@@ -108,12 +108,15 @@ class Cart extends Component {
 
   removeCartItem(e) {
     const productId = e.currentTarget.getAttribute('data-productId');
+    const cart_scroll_id = e.currentTarget.getAttribute('data_scrollId'); 
     digitalData.cart.item = digitalData.cart.item.filter((item) => item.productInfo.productID !== productId);
     this.props.removeCartItem(e.currentTarget.id, { showToast: true });
+    document.getElementById(cart_scroll_id).scrollIntoView({ behavior: 'smooth' });    
   }
 
   increaseItemCnt(e) {
     const productId = e.target.getAttribute('data-productid');
+    const cart_scroll_id = e.currentTarget.getAttribute('data_scrollId');
     digitalData.cart.item = digitalData.cart.item.map((item) => {
       if (item.productInfo.productID === productId) {
         item.quantity++;
@@ -122,16 +125,19 @@ class Cart extends Component {
       return item;
     });
     this.cartItemCount(e.target.getAttribute('data-id'), 'add', this.props.cartData.items);
+    document.getElementById(cart_scroll_id).scrollIntoView({ behavior: 'smooth' });
   }
 
   decreaseItemCnt(e) {
     const productId = e.target.getAttribute('data-productid');
+    const cart_scroll_id = e.currentTarget.getAttribute('data_scrollId');        
     digitalData.cart.item.forEach((item) => {
       if (item.productInfo.productID === productId) {
         item.quantity--;
       }
     });
     this.cartItemCount(e.target.getAttribute('data-id'), 'remove', this.props.cartData.items);
+    document.getElementById(cart_scroll_id).scrollIntoView({ behavior: 'smooth' });
   }
 
   cartItemCount(id, typ) {
@@ -142,6 +148,7 @@ class Cart extends Component {
   addToWishlist(e) {
     const { cartData } = this.props;
     const cart_id = e.currentTarget.getAttribute('data-id');
+    const cart_scroll_id = e.currentTarget.getAttribute('data_scrollId');
     const item = cartData.items.filter(_item => cart_id === _item.item_id)[0];
     this.props.addToWishlistAndFetch({
       catalog_id: item.item_id,
@@ -153,6 +160,7 @@ class Cart extends Component {
     this.props.removeCartItem(cart_id, {
       showToast: false,
     });
+    document.getElementById(cart_scroll_id).scrollIntoView({ behavior: 'smooth' });
   }
 
   addOrRemoveGift(id, val, params) {

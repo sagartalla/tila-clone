@@ -72,7 +72,7 @@ const getProduct = (store, variantId) => {
     reviews: {
       count: '',
     },
-    price: priceInfo ? priceInfo.selling_price ? `${priceInfo.selling_price.display_value} ${priceInfo.selling_price.currency}` : priceInfo.selling_price : 'Price Not available',
+    price: priceInfo ? priceInfo.selling_price ? `${priceInfo.selling_price.currency} ${priceInfo.selling_price.display_value}` : priceInfo.selling_price : 'Price Not available',
     originalPrice: '',
     discountPercent: '',
     listingId: priceInfo ? priceInfo.listing_id : 'No Listing',

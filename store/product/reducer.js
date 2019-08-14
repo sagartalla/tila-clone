@@ -6,20 +6,21 @@ const initialState = {
     loading: false,
   },
   data: {},
-  reviews:[],
-  reviewResponse:{},
+  reviews: [],
+  reviewResponse: {},
   variantsData: {},
   error: null,
   searchCityKeyWord: '',
   searchCountryKeyWord: '',
   allCitiesData: [],
   countriesData: [],
-  productId:null,
-  varaintId:null,
-  tilaPolicy:{
+  productId: null,
+  varaintId: null,
+  tilaPolicy: {
     extended_warranty: '',
     damage_protection: '',
-  }
+  },
+  policyLocation: {},
 };
 const productReducer = typeToReducer({
   [actions.GET_PRODUCT]: {
@@ -30,7 +31,7 @@ const productReducer = typeToReducer({
       return Object.assign({}, state, {
         data: action.payload.data,
         variantsData: {
-          selectedVariantId: Object.keys(action.payload.data[0].variant_preferred_listings || {})[0]
+          selectedVariantId: Object.keys(action.payload.data[0].variant_preferred_listings || {})[0],
         },
         ui: { loading: false, error: null },
       });
@@ -54,34 +55,34 @@ const productReducer = typeToReducer({
     PENDING: state => {
       return Object.assign({}, state, { ui: { loading: true }});
     },
-    FULFILLED: (state,action) => {
+    FULFILLED: (state, action) => {
       return Object.assign({}, state, { reviews: action.payload.data, ui: { loading: false } });
     },
-    REJECTED: (state,action) => {
+    REJECTED: (state, action) => {
       return Object.assign({}, state, { error: action.payload.message, ui: {loading: false }} )
-    }
+    },
   },
   [actions.SUBMIT_USER_REVIEW]: {
     PENDING: state => {
       return Object.assign({}, state, { ui: { loading: true }});
     },
-    FULFILLED: (state,action) => {
+    FULFILLED: (state, action) => {
       return Object.assign({}, state, { reviewResponse: action.payload.data, ui: { loading: false } });
     },
-    REJECTED: (state,action) => {
+    REJECTED: (state, action) => {
       return Object.assign({}, state, { error: action.payload.message, ui: {loading: false }} )
-    }
+    },
   },
   [actions.SET_SELECTED_VARIANT]: {
     PENDING: state => {
       return Object.assign({}, state, { ui: { loading: true }});
     },
-    FULFILLED: (state,action) => {
+    FULFILLED: (state, action) => {
       return Object.assign({}, state, { variantsData: action.payload, ui: { loading: false } });
     },
-    REJECTED: (state,action) => {
+    REJECTED: (state, action) => {
       return Object.assign({}, state, { error: action.payload.message, ui: {loading: false }});
-    }
+    },
   },
   [actions.SET_SELECTED_PRODUCT_DATA]: (state, action) => {
     return state;
@@ -110,14 +111,29 @@ const productReducer = typeToReducer({
     }),
     REJECTED: state => Object.assign({}, state, { ui: { ...state.ui, loading: false } }),
   },
-  [actions.SET_TILA_POLICY]: (state,action) => Object.assign({}, state, {
-    tilaPolicy:action.data
+  [actions.GET_POLICY_LOCATION]: {
+    PENDING: state => Object.assign({}, state, { ui: { ...state.ui, loading: true } }),
+    FULFILLED: (state, action) => {
+      return Object.assign({}, state, {
+        ui: {
+          ...state.ui,
+          loading: false,
+        },
+        policyLocation: {
+          ...action.payload.data,
+        },
+      });
+    },
+    REJECTED: state => Object.assign({}, state, { ui: { ...state.ui, loading: false } }),
+  },
+  [actions.SET_TILA_POLICY]: (state, action) => Object.assign({}, state, {
+    tilaPolicy: action.data,
   }),
-  [actions.SET_PRODUCTID]:(state,action) => Object.assign({}, state, {
-    productId:action.id,
+  [actions.SET_PRODUCTID]: (state, action) => Object.assign({}, state, {
+    productId: action.id,
   }),
-  [actions.SET_VARIANTID]:(state,action) => Object.assign({}, state, {
-    variantId:action.id
+  [actions.SET_VARIANTID]: (state, action) => Object.assign({}, state, {
+    variantId: action.id,
   }),
   [actions.AUTOCOMPLETE_CITY]: (state, action) => Object.assign({}, state, {
     searchCityKeyWord: action.searchKeyWord,

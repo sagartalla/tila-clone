@@ -1,5 +1,7 @@
 .flex
   display flex
+.d-none
+  display: none
 .flexWrap
   flex-wrap wrap
 .flex-grow
@@ -169,6 +171,12 @@
   border none !important
   font-size 14px !important
 
+.searchInputIssue
+  @extends .searchInput 
+  top 0
+  bottom 0
+  position absolute
+
 .contactContainer
   @extends .boxContainer 
   height 65px
@@ -229,15 +237,24 @@
 
 .categoryContainer
   margin 0px 1px
-  width 25%
+  width 315px
   height 100%
   overflow auto
   border 1px solid #efeff4
-  
+  background white
+
+
+.categoryContainerFixed
+  margin 0px 1px  
+  border 1px solid #efeff4
+  position fixed
+  height auto
+  top 125px
+  z-index 999
+  width 315px
 
 .answersContainer
   width 75%
-  overflow auto
   padding 10px 20px
 
 .showDiv
@@ -293,7 +310,6 @@
 .contentContainer
   display flex
   padding 10px 0px
-  max-height 800px
   height 100%
 
 .questionBox
@@ -360,7 +376,7 @@
   @extends .dropDownBox
   visibility visible
   opacity 1
-  top 0px
+  top 20px
 
 .dropDownBox-close
   @extends .dropDownBox
@@ -473,6 +489,7 @@
 .openedAnswers
   height auto
   color #333
+  line-height: 1.85
 
 .openedAnswers ul li
   list-style initial
@@ -618,6 +635,14 @@
   width 20px
   height auto
   margin 5px
+
+.incidentRenderInput
+  width 100%
+  overflow hidden
+  text-overflow ellipsis
+  outline 0
+  border 0
+  resize none
 
 .loader-div
           width 20px

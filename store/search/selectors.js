@@ -144,7 +144,7 @@ const getSearchResutls = (store) => {
           modifiedVaraintsCopy.productSize = Object.values(v.attributes[product.flags.variant_id_attribute] || {})[0];
           modifiedVaraintsCopy.productAvailable = false;
           modifiedVaraintsCopy.variantId = v.id;
-          modifiedVaraintsCopy.tuinId = v.attributes.tuin[0];
+          modifiedVaraintsCopy.tuinId = v && v.attributes && v.attributes.tuin && v.attributes.tuin[0];
         }
 
         modifiedVaraints.push(modifiedVaraintsCopy);
@@ -160,6 +160,8 @@ const getSearchResutls = (store) => {
       currency = currency[0] || '';
       currency = currency.attributes || '';
       currency = currency.currency || '';
+
+      const firstVarintId = product.variantAdapters ? product.variantAdapters[0].id : null ;
       // let priceRange = '';
       // if (priceInfo.length > 2) {
       //   priceRange = [Math.min.apply(null, priceInfo), Math.max.apply(null, priceInfo)].join(' - ');
@@ -182,7 +184,7 @@ const getSearchResutls = (store) => {
         displayName: (product.attributes.calculated_display_name || []).join(','),
         brand: brand ? brand[0] : '',
         variants: variantInfo.sort((a, b) => a.productSize[0] - b.productSize[0]),
-        // priceRange,
+        firstVarintId,
         currency,
         categoryId,
         flags: product.flags,
@@ -237,7 +239,7 @@ const getFacetfilters = store => (queryObject) => {
             facetFiltersCopyWithNames[attributeName] = [];
           }
           facetFilters[attributeName].push(param.Param);
-          facetFiltersCopyWithNames[attributeName].push({name: param.attributeValue, params: param.Param});
+          facetFiltersCopyWithNames[attributeName].push({name: param.attributeValue, params: param.Param, attributeDisplayName: filtered.attributeDisplayName});
         }
       })
     })
@@ -279,7 +281,7 @@ const getChoosenCategoryName = store => store.searchReducer.data.searchDetails.c
 
 const getAppliedFitlers = (store) => {
   const { facetFiltersCopyWithNames = {} } = store.searchReducer.data.searchDetails;
-  return _.reduce(facetFiltersCopyWithNames, (acc, ff, parentKey) => [...acc, ...ff.map(f => ({ displayName: f.name, parentKey, key: f.param }))], []);
+  return _.reduce(facetFiltersCopyWithNames, (acc, ff, parentKey) => [...acc, ...ff.map(f => ({ displayName: f.name, parentKey, key: f.param, attributeDisplayName: f.attributeDisplayName, }))], []);
 };
 
 const getUserDetails = store => store.authReducer.data;

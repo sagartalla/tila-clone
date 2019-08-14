@@ -67,7 +67,7 @@ const ReplyBox = (props) => {
   )
   return(
     <div className={styles['pV-10']}>
-      <textarea disabled={props.loading} className={styles['MsgTextArea']} placeholder='Reply to this message' value={msg} onChange={handleMsg} />
+      <textarea dir="auto" disabled={props.loading} className={styles['MsgTextArea']} placeholder='Reply to this message' value={msg} onChange={handleMsg} />
       <div className={styles['MsgBoxContainer']}>
         <div className={styles['UploadButton']}>
           {HNS['UPLOAD']}
@@ -118,6 +118,12 @@ class Incidents extends Component {
         })
       }
     }
+  }
+  componentDidUpdate(){
+    this.props.tktDetailData && this.props.tktDetailData.threadTiLaList && this.props.tktDetailData.threadTiLaList.forEach((val, index) => {
+      const node = document.getElementById(`incidentTA-${index}`);
+      node.setAttribute(`style`, `height:${node.scrollHeight}px`);
+    })
   }
   initiateApiCalls = () => {
     const { username : emailId } = userCredentials;
@@ -228,7 +234,9 @@ class Incidents extends Component {
             <div>{new Date(createdTs).toLocaleTimeString()}</div>
           </div>
         </div>
-        <div className={`${styles['fs-13p']} ${styles['greyColor']}`} dangerouslySetInnerHTML={{__html: msg}} />
+        <textarea id={`incidentTA-${index}`} dir="auto" disabled className={`${styles['fs-13p']} ${styles['greyColor']} ${styles['incidentRenderInput']}`}>{msg}</textarea>
+        {/* <input dir="auto" disabled className={`${styles['fs-13p']} ${styles['greyColor']} ${styles['incidentRenderInput']}`} value={msg}/> */}
+        {/* <div className={`${styles['fs-13p']} ${styles['greyColor']}`} dangerouslySetInnerHTML={{__html: msg}} /> */}
         {index === 0 ? 
           <ReplyBox updateIncident={this.updateIncident} loading={this.state.loading}/>
 

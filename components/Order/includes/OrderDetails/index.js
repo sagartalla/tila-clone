@@ -74,6 +74,7 @@ const OrderDetails = ({ query, orderData, thankyouPage }) => {
                   isDamageProtectionAvailable={item.isDamageProtectionAvailable}
                   isWarrantyAvailable={item.isWarrantyAvailable}
                   listingId={item.listingId}
+                  tilaPolicy={item.tilaPolicy}
                   tuinId={item.tuinId}
                 />
               ))}

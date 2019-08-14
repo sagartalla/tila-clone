@@ -30,6 +30,7 @@ const getOrdersData = (store) => {
           isDamageProtectionAvailable:val.isDamageProtectionAvailable,
           isWarrantyAvailable:val.isWarrantyAvailable,
           listingId:val.listingId,
+          tilaPolicy:val.tilaPolicy,
           tuinId: val.tuinId,
         }), []),
         _.map(i => ({
@@ -56,6 +57,7 @@ const getOrdersData = (store) => {
           order_item_type: i.order_item_type,
           order_status: i.status,
           refunds: i.refunds,
+          tilaPolicy:i.tila_care_policies || [],
           gift_info: i.gift_info,
           variantAttributes: i.variant_info && i.variant_info.variant_details && i.variant_info.variant_details.attribute_map ?
             Object.values(i.variant_info.variant_details.attribute_map).filter(attr => attr.attribute_group_name === 'IDENTITY' && attr.visible) : [],
@@ -72,7 +74,7 @@ const getOrdersData = (store) => {
           phone: address ? `${address.mobile_country_code} ${address.mobile_no}` : 'No phone number',
         },
         orderDate: moment(created_at).format('MMMM DD, YYYY'),
-        orderTotal: `${total_amount.display_value} ${total_amount.currency_code}`,
+        orderTotal: `${total_amount.currency_code} ${total_amount.display_value}`,
         orderItems,
         order_type,
         invoice_id: order_items.find(x => x.invoice_id !== '').invoice_id,

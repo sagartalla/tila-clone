@@ -168,19 +168,19 @@ class Compare extends Component {
                 <Col md={3} key={product.id}>
                   <div className={`${styles['compare-dtls']} ${styles['compare-background']} ${styles.flex} ${styles['flex-colum']} ${styles['justify-between']} ${styles['ht-100per']}`}>
                     <div className={`${styles.pointer} ${styles['ht-290']} ${styles.flex} ${styles['justify-center']}`}>
-                      <Link route={`/${language}/pdp/${product.name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${product.tuin}/${product.listing_id}?pid=${product.id}&vid=${product.variant_id}&cid=${product.catalog_id}`}>
+                      <Link route={`/${language}/pdp/${product.name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${product.tuin ? `${product.tuin}/`: '' }${product.listing_id ? `${product.listing_id}`: ''}?pid=${product.id}&vid=${product.variant_id}&cid=${product.catalog_id}`}>
                         <img alt={product.name} src={`${constants.mediaDomain}/${product.imgSrc}`} className={`img-responsive ${styles['object-scale-down']}`} />
                       </Link>
                     </div>
                     <div className={`${styles['compare-dtls-inn']} ${styles['pt-20']} ${styles['t-c']}`}>
-                      <Link route={`/${language}/pdp/${product.name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${product.tuin}/${product.listing_id}?pid=${product.id}&vid=${product.variant_id}&cid=${product.catalog_id}`}>
+                      <Link route={`/${language}/pdp/${product.name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${product.tuin ? `${product.tuin}/`: '' }${product.listing_id ? `${product.listing_id}`: ''}?pid=${product.id}&vid=${product.variant_id}&cid=${product.catalog_id}`}>
                         <span className={`${styles.pointer}`}>
                           <span className={`${styles.fontW600} ${styles['fs-12']}`}>{product.brand}</span>{' - '}
                           <span className={`${styles['fs-12']} ${styles['thick-gry-clr']}`}>{product.name}</span>
                         </span>
                       </Link>
                       <div>
-                        <span className={styles.fontW600}>{product && product.price && product.price.display_value} {product && product.price && product.price.currency_code}</span>
+                        <span className={styles.fontW600}>{product && product.price && product.price.currency_code} {product && product.price && product.price.display_value}</span>
                         {/* <span className={`${styles['fs-12']} ${styles['google-clr']}`}>{product.offer}</span> */}
                       </div>
                     </div>
