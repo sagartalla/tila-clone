@@ -77,14 +77,12 @@ const actionCreators = {
     payload: apis.getWishlistProducts(),
   })),
   getRecentlyViewed: loginReq(() => (dispatch) => {
-    console.log('test getRecentlyViewed')
     dispatch({
       type: actions.GET_RECENTLY_VIEWED,
       payload: apis.getRecentlyViewed(),
     });
   }),
   addProductToRV: loginReq(variantId => (dispatch) => {
-    console.log('asgudkajswcw', variantId);
     dispatch({
       type: actions.ADD_TO_RECENTLY_VIEWED,
       payload: apis.addProductToRV(variantId),
