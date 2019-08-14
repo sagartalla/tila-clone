@@ -22,7 +22,6 @@ class Home extends Base {
     if (query.category) {
       params.page = 'mainCategoryPage';
       params.id = query.category;
-      params.published = false;
     }
 
     await Promise.all([
