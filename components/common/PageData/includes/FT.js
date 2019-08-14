@@ -109,7 +109,7 @@ class FT extends React.Component {
     if (listingsData.length === 0) return null;
 
     return (
-      <div className={styles['mt-20']}>
+      <div className={`${styles['mt-20']} ${styles['mb-20']}`}>
         {isListingLoading && listingsData.length === 0 ? ftbSkeletonLoader : ''}
         <Row className={styles['m-5']}>
           <h3 className={`${styles['fs-20']} ${styles.fontW600}`}>{data[lang].title}</h3>

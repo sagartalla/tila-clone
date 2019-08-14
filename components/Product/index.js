@@ -25,6 +25,7 @@ import { actionCreators as wishlistActionCreators, selectors as wishListSelector
 import { actionCreators as addressActionCreators, selectors as addressSelectors } from '../../store/cam/address';
 import { actionCreators as paymentActionCreators } from '../../store/payments';
 import { selectors as authSelectors } from '../../store/auth';
+import { selectors as cartSelectors } from '../../store/cart';
 import LoadingBar from '../common/Loader/skeletonLoader';
 import lang from '../../utils/language';
 
@@ -48,7 +49,7 @@ const getProductComponent = (isPreview, taskCode) => {
           details: 'stateTop',
           slidebar: 'stateTop',
         },
-        recentlyViewed: [],
+        rv: [],
         notifyEmail: null,
         emailErr: '',
         tilaPolicy: [],
@@ -66,12 +67,12 @@ const getProductComponent = (isPreview, taskCode) => {
     componentDidMount() {
       const {
         productData, getCardResults, getRecentlyViewed,
-        variantId, isLoggedIn, addProductToRV,
+        variantId, isLoggedIn, addProductToRV, isAddedToCart,
       } = this.props;
+      const {
+        offerInfo, titleInfo, imgUrls, tuin, product_id, catalogObj,
+      } = productData;
       if (window.localStorage && !isPreview) {
-        const {
-          offerInfo, titleInfo, imgUrls,
-        } = productData;
         digitalData.page.pageInfo.pageName = titleInfo && titleInfo.title && titleInfo.title.attribute_values[0] && titleInfo.title.attribute_values[0].value;
         digitalData.page.category = { primaryCategory: productData.categoryType };
         digitalData.page.pageInfo.breadCrumbs = productData.breadcrums ? productData.breadcrums.map(item => item.display_name_en) : [];
@@ -79,49 +80,54 @@ const getProductComponent = (isPreview, taskCode) => {
           eventName: 'Product Viewed',
           ProductData: productData,
         });
-        if (offerInfo.offerPricing) {
-          const pr = offerInfo && offerInfo.offerPricing && offerInfo.offerPricing.sellingPrice && offerInfo.offerPricing.sellingPrice.display_value;
-          const cd = offerInfo && offerInfo.offerPricing && offerInfo.offerPricing.sellingPrice && offerInfo.offerPricing.sellingPrice.currency_code;
-          const recentData = localStorage.getItem('rv');
-          const arr = recentData ? JSON.parse(recentData) : [];
-          const index = _.findIndex(arr, o => o.id == offerInfo.listingId);
-
-          // if (index > -1 && arr.length <= 5) {
-          //   arr = arr.slice(index, 1);
-          // } else
-          if (arr.length === 15) {
-            arr.pop();
-          }
-
-          if (index === -1) {
-            arr.unshift({
-              nm: titleInfo.title.attribute_values[0].value,
-              im: imgUrls && imgUrls[0].url,
-              pr,
-              cd,
-              uri: location.href,
-              id: offerInfo.listingId,
-            });
-            localStorage.setItem('rv', JSON.stringify(arr));
-          }
-          this.setState({ recentlyViewed: arr });
-        }
       }
       getCardResults();
       if (isLoggedIn) {
-        console.log('asgudkajs', variantId);
         if (productData.catalogObj.variant_id) addProductToRV(variantId);
         getRecentlyViewed();
+      } else if (offerInfo.offerPricing) {
+        const pr = offerInfo && offerInfo.offerPricing && offerInfo.offerPricing.sellingPrice &&
+          offerInfo.offerPricing.sellingPrice.display_value;
+        const cd = offerInfo && offerInfo.offerPricing && offerInfo.offerPricing.sellingPrice &&
+          offerInfo.offerPricing.sellingPrice.currency_code;
+        const mrp = offerInfo && offerInfo.offerPricing && offerInfo.offerPricing.strickedPrice &&
+        offerInfo.offerPricing.strickedPrice.display_value;
+        const recentData = localStorage.getItem('rv');
+        const arr = recentData ? JSON.parse(recentData) : [];
+        const index = _.findIndex(arr, o => o.id === offerInfo.listingId);
+
+        if (arr.length === 15) {
+          arr.pop();
+        }
+        if (index === -1) {
+          arr.unshift({
+            nm: titleInfo.title.attribute_values[0].value,
+            br: titleInfo.brand.attribute_values[0].value,
+            im: imgUrls && imgUrls[0].url,
+            pr,
+            cd,
+            mrp,
+            uri: location.href,
+            id: offerInfo.listingId,
+            tuin,
+            pid: product_id,
+            vid: variantId,
+            cid: catalogObj.catalog_id,
+          });
+          localStorage.setItem('rv', JSON.stringify(arr));
+        }
+        this.setState({ rv: arr });
       }
       window.addEventListener('scroll', this.handleScroll);
     }
 
     componentWillReceiveProps(nextProps) {
       const {
-        getRecentlyViewed, productData, addProductToRV, isLoggedIn,
+        getRecentlyViewed, productData,
+        addProductToRV, isLoggedIn, isAddedToCart,
       } = this.props;
+      const { rv } = this.state;
       if (isLoggedIn !== nextProps.isLoggedIn) {
-        console.log('asgudkajs', productData, this.props);
         if (productData.catalogObj.variant_id) addProductToRV(productData.catalogObj.variant_id);
         getRecentlyViewed();
       }
@@ -218,8 +224,8 @@ const getProductComponent = (isPreview, taskCode) => {
     }
     render() {
       const {
-        productData, userDetails, showLoading, query, variantId, productId,
-        isSearchPreview, savedCardsData, loaderProps, selectedTilaPolicy, recentlyViewed,
+        productData, userDetails, showLoading, query, variantId, productId, isLoggedIn,
+        isSearchPreview, savedCardsData, loaderProps, selectedTilaPolicy, recentlyViewed, isAddedToCart,
       } = this.props;
       const {
         catalog, titleInfo, keyfeatures, extraOffers, imgUrls, offerInfo, shippingInfo, isWishlisted, returnInfo,
@@ -228,7 +234,7 @@ const getProductComponent = (isPreview, taskCode) => {
       } = productData;
       const { offerPricing } = offerInfo;
       const {
-        stickyElements, notifyEmail, emailErr, positionStyle, positionTop, defaultPosition, tilaPolicy,
+        stickyElements, notifyEmail, emailErr, positionStyle, positionTop, defaultPosition, tilaPolicy, rv,
       } = this.state;
       const { loadComponent, pathname } = loaderProps;
       return (
@@ -338,7 +344,16 @@ const getProductComponent = (isPreview, taskCode) => {
                       <Row>
                         <Col md={8}>
                           {
-                            isPreview ? null : <NoSSR> <RecentView recentlyViewed={recentlyViewed} shippingInfo={shippingInfo} /> </NoSSR>
+                            isPreview ? null :
+                            <NoSSR>
+                              <RecentView
+                                shippingInfo={shippingInfo}
+                                recentlyViewed={isLoggedIn ? recentlyViewed : rv.map((item) => {
+                                  item.isAddedToCart = isAddedToCart(item.id);
+                                  return item;
+                                })}
+                              />
+                            </NoSSR>
                           }
                         </Col>
                         {/* <Col md={8}>
@@ -376,6 +391,7 @@ const getProductComponent = (isPreview, taskCode) => {
     savedCardsData: userVaultSelectors.getCardResults(store),
     selectedTilaPolicy: selectors.getTilaPolicy(store),
     isLoggedIn: authSelectors.getLoggedInStatus(store),
+    isAddedToCart: listingId => wishListSelectors.getCartStatus(store, listingId),
     recentlyViewed: wishListSelectors.recentlyViewed(store),
   });
 

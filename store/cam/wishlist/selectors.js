@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import constants from '../../../constants';
 
 const getWishListResults = (store) => {
@@ -68,6 +69,11 @@ const getNotifyLoading = (store) => {
   }
 };
 
+const getCartStatus = (store, listingId) => {
+  const selectedCartItem = _.find(store.cartReducer.data.items, ({ listing_id }) => listingId === listing_id);
+  return !!selectedCartItem;
+};
+
 const recentlyViewed = store => store.wishlistReducer.recentlyViewed.map((rv) => {
   const { variant_preferred_listings, variant_id } = rv;
   const { cached_product_details = {}, cached_variant = {} } = rv.product_details.product_details_vo;
@@ -75,14 +81,17 @@ const recentlyViewed = store => store.wishlistReducer.recentlyViewed.map((rv) =>
   const variantDetails = variant_preferred_listings[variant_id][0];
   return {
     nm: cached_product_details.attribute_map.calculated_display_name.attribute_values[0].value,
+    br: rv.product_details.catalog_details.attribute_map.brand.attribute_values[0].value,
     im: cached_product_details.media.gallery_media[0].url,
     pr: variantDetails.pricing.offer_price.display_value,
     cd: variantDetails.pricing.offer_price.currency_code,
+    mrp: variantDetails.pricing.mrp.display_value,
     tuin: variantAttributes.tuin.attribute_values[0].value,
     id: variantDetails.listing_id,
     pid: rv.product_details.product_id,
     vid: rv.variant_id,
     cid: rv.product_details.catalog_details.catalog_id,
+    isAddedToCart: getCartStatus(store, variantDetails.listing_id),
   };
 });
 
@@ -90,5 +99,5 @@ const getProductsDetails = store => store.wishlistReducer.products;
 
 export {
   getWishListResults, getPaginationDetails, getLoader,
-  getProductsDetails, getNotifyLoading, recentlyViewed,
+  getProductsDetails, getNotifyLoading, recentlyViewed, getCartStatus,
 };
