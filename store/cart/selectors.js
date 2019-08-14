@@ -22,6 +22,7 @@ const getCartResults = (store) => {
       newData.cart_shippable = data.cart_shippable;
       newData.address = data.address;
       newData.applyCouponRequestCount = data.applyCouponRequestCount;
+      newData.total_tila_care_charges = data.total_tila_care_charges;
       data.items.map((item, index) => {
         const listingInfo = item.listing_info || {};
         const variant_key = item && item.product_details && item.product_details.product_details_vo.cached_variant ? Object.keys(item.product_details.product_details_vo.cached_variant)[0] : null;
