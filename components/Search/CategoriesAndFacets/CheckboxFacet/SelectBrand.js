@@ -31,7 +31,6 @@ class SelectBrand extends Component {
       newFilteredList: [],
       requiredData: {},
     };
-    this.resetSelectedFilters = this.resetSelectedFilters.bind(this);
   }
 
   componentDidMount() {
@@ -39,12 +38,12 @@ class SelectBrand extends Component {
     const { filteredItems } = this.props;
     const { alphabets, requiredData } = this.state;
       filteredItems.length > 0 && filteredItems.forEach(childfilter => {
-          if (childfilter.name.match(/^\d/)) {
-            requiredData['#'] = [childfilter];
-          } else if (childfilter.name[0].toUpperCase()) {
-            requiredData[childfilter.name[0]] = [childfilter];
-          }
-        })
+        const letter = childfilter.name.match(/^\d/) ? '#' : childfilter.name[0].toUpperCase()
+        if (!requiredData[letter]) {
+          requiredData[letter] = [];
+        }
+        requiredData[letter].push(childfilter);
+      });
       this.setState({
         requiredData,
       });
@@ -57,12 +56,12 @@ class SelectBrand extends Component {
       const { filteredItems } = this.props;
       const { alphabets, requiredData } = this.state;
         filteredItems.length > 0 && filteredItems.forEach(childfilter => {
-            if (childfilter.name.match(/^\d/)) {
-              requiredData['#'] = [childfilter];
-            } else if (childfilter.name[0].toUpperCase()) {
-              requiredData[childfilter.name[0]] = [childfilter];
-            }
-          })
+          const letter = childfilter.name.match(/^\d/) ? '#' : childfilter.name[0].toUpperCase()
+          if (!requiredData[letter]) {
+            requiredData[letter] = [];
+          }
+          requiredData[letter].push(childfilter);
+        });
         this.setState({
           requiredData,
         });
@@ -85,34 +84,12 @@ class SelectBrand extends Component {
     this.props.getSearchResults(this.props.getFacetfilters(params));
   }
 
-  resetSelectedFilters() {
-    const { appliedFilters } = this.props;
-    if (appliedFilters && appliedFilters.length > 0) {
-      appliedFilters && appliedFilters.forEach(childfilter => (
-        this.setState({
-          filterParam: childfilter.parentKey,
-          filterName: childfilter.displayName,
-        }, () => {
-          const { filterParam, filterName } = this.state;
-          const { facets } = this.props;
-          const params = facets || {};
-          params[filterParam] = [];
-          if (!params[filterParam].length) { delete params[filterParam]; }
-          this.props.onChangeFacets(params);
-          this.submitQuery(params);
-          this.props.closePopup();     
-        })
-      ));
-    } else {
-      this.props.closePopup();   
-    }
-  }
-
   render() {
     const {
       showPopup,
       filteredItems,
       selectedItems,
+      filter,
     } = this.props;
     const {
       selectedAlphabet,
@@ -120,7 +97,6 @@ class SelectBrand extends Component {
       filterParam,
       requiredData,
     } = this.state;
-    console.log('newFilteredList', this.state.requiredData);
     return (
       <div className={`${styles.flex} ${styles['align-center']}`}>
         {showPopup &&
@@ -130,7 +106,7 @@ class SelectBrand extends Component {
                   <div className={`${styles['flex-center']} ${styles['main-popup']} ${styles['justify-between']}`}>
                     <RenderFilterBar
                       onFilterData={this.props.onFilterData}
-                      placeName="Search brands here"
+                      placeName={`Search ${filter.name}`}
                     />
                     <div className={`${styles.flex} ${styles['align-center']}`}>
                       {alphabets.map(alphabet => (
@@ -157,18 +133,18 @@ class SelectBrand extends Component {
                       {showPopup && selectedItems && selectedItems.length > 0 &&
                       <span>
                         <span className={selectedItems && selectedItems.length > 0 && `${styles.fontW800} ${styles['fs-12']}`}>MY SELECTIONS</span>
-                        <span param={filterParam} className={`${styles.fontW600} ${styles['ml-30']} ${styles['text-blue']} ${styles['fs-12']}`} onClick={this.resetSelectedFilters}>RESET</span>
+                        <span param={filterParam} className={`${styles.fontW600} ${styles['ml-30']} ${styles['text-blue']} ${styles['fs-12']}`} onClick={this.props.resetSelectedFilters}>RESET</span>
                       </span>
                           }
                     </div>
                     <React.Fragment >
                       {showPopup && selectedItems && selectedItems.length > 0 && selectedItems.map(val => (
                         <React.Fragment>
-                          {filteredItems.length > 0 && filteredItems.map(childfilter => (
+                          {filteredItems.length > 0 && filteredItems.map((childfilter, index) => (
                             childfilter.name === val &&
-                            <div className={`${styles['select-check-mate']} ${styles['mt-10']}`}>
-                              <input type="checkbox" onChange={this.props.onChangeFilter({ name: childfilter.name, param: childfilter.param })} checked={selectedItems && selectedItems.length > 0 && selectedItems.indexOf(childfilter.name) !== -1} />
-                              <label className={`${styles['fs-12']} ${styles['category-label']}`}>
+                            <div className={`${styles['checkbox-material']} ${styles['select-check-mate']} ${styles['select-checkbox-width']} ${styles['mt-10']}`}>
+                              <input id={childfilter.name} type="checkbox" onChange={this.props.onChangeCheckbox({ name: childfilter.name, param: childfilter.param })} checked={selectedItems && selectedItems.length > 0 && selectedItems.indexOf(childfilter.name) !== -1} />
+                              <label htmlFor={childfilter.name} className={`${styles['fs-12']} ${styles['category-label']}`}>
                                 <span className={`${styles['category-span']} ${styles.fontW700}`}>{val}
                               </span>
                               </label>
@@ -180,17 +156,17 @@ class SelectBrand extends Component {
                       {
                           Object.keys(requiredData).map(val => (
                             <React.Fragment>
-                            <div className={`${styles['label-gry-clr']} ${styles.fontW600} ${styles['select-checkbox-width']}`}>{val}</div>
-                            {requiredData[val].map(newVal => (
-                              <div className={`${styles['select-check-mate']} ${styles['select-checkbox-width']}`}>
-                              <input type="checkbox" onChange={this.props.onChangeFilter({ name: newVal.name, param: newVal.param })} checked={selectedItems && selectedItems.length > 0 && selectedItems.indexOf(newVal.name) !== -1} />
-                              <label className={`${styles['fs-12']} ${styles['category-label']}`}>
+                            <div className={selectedAlphabet === val ? `${styles['mt-10']} ${styles['select-checkbox-width']} ${styles.fontW800}` : `${styles['mt-10']} ${styles['label-gry-clr']} ${styles['select-checkbox-width']} ${styles.fontW600}`}>{val}</div>
+                            {requiredData[val].map((newVal, index) => (
+                              <div className={`${styles['mt-10']} ${styles['checkbox-material']} ${styles['select-check-mate']} ${styles['select-checkbox-width']}`}>
+                              <input id={newVal.name} type="checkbox" onChange={this.props.onChangeCheckbox({ name: newVal.name, param: newVal.param })} checked={selectedItems && selectedItems.length > 0 && selectedItems.indexOf(newVal.name) !== -1} />
+                              <label htmlFor={newVal.name} className={`${styles['fs-12']} ${styles['category-label']}`}>
                                 <span className={(newVal.name.startsWith(selectedAlphabet !== '' && selectedAlphabet)) || (selectedAlphabet === '#' && newVal.name.match(/^\d/)) ? `${styles.fontW800} ${styles['category-span']}` : `${styles['category-span']} ${styles.fontW700}`}>{newVal.name}
                                   <span className={styles['thick-gry-clr']}>{newVal.count ? `(${newVal.count})` : ''}</span>
                                 </span>
                               </label>
                               </div>
-                            ))}                         
+                            ))}                        
                           </React.Fragment>
                           ))
                         }
@@ -207,7 +183,6 @@ class SelectBrand extends Component {
 
 const mapStateToProps = store => ({
   facetData: selectors.facetData(store),
-  appliedFilters: selectors.getAppliedFitlers(store),
   getFacetfilters: selectors.getFacetfilters(store),
 });
 

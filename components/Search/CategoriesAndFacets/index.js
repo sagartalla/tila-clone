@@ -33,7 +33,6 @@ class CategoriesAndFacets extends Component {
   }
 
   onChangeHandle(facetName, facetType) {
-    debugger;
     const { search, facets } = this.props;
     const curryHandler = (value, e) => {
       // Router.pushRoute(`/${language}/srp?facets.${facetName}=${value.name}&search=${search.q}&${Object.entries(this.props.optionalParams).map(([key, val]) => `${key}=${val}`).join('&')}`);

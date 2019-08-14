@@ -21,6 +21,7 @@ const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styl
 
 class CheckboxFacet extends Component {
   constructor(props) {
+    debugger;
     super(props);
     const { filter } = props;
     this.state = {
@@ -70,24 +71,25 @@ class CheckboxFacet extends Component {
       this.setState({
         selectedItems: newSelectedItem,
       }, () => {
-        // this.state.maxRows > 10 &&
         this.props.selectedCheckbox(this.state.selectedItems)();
       });
       this.props.onChangeHandle(value, e);
     };
   }
 
-  toggleMore() {
+  toggleMore(e) {
+    const showHide = e.currentTarget.id;
     const { filter } = this.props;
     const { selectedFilters } = this.props;
+    const { attributeName } = this.state;
     this.setState({
       maxRows: this.state.maxRows === filter.children.length ? MaxItems : filter.children.length,
       filterItems: this.sortSelectedItems(this.state.selectedItems),
     }, () => {
-      // this.state.maxRows > 10 &&
-      this.props.showBrandsModal(filter, this.state.filterItems, selectedFilters)();
+      // this.state.maxRows > 20 &&
+      this.props.showBrandsModal(filter, this.state.filterItems, selectedFilters, attributeName)();
     });
-    this.props.selectedCheckbox(this.state.selectedItems)();
+    this.props.selectedCheckbox(this.state.selectedFilters)();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -96,17 +98,15 @@ class CheckboxFacet extends Component {
     this.setState({
       isMoreButtonRequired: filter.children.length > MaxItems,
       selectedItems: (facets[attributeName] || []).map(f => f),
+      attributeName,
       filterItems: nextProps.selectedFilters.length > 0 ?
         this.sortSelectedItems(nextProps.selectedFilters) : filter.children,
-    }, () => {
-      // this.props.showBrandsModal(this.state.filterItems)();
     });
   }
 
   render() {
     const { filter, index, facets, showPopup } = this.props;
     const { selectedItems, maxRows, filterItems } = this.state;
-
     return (
       <React.Fragment>
       <Panel eventKey={`${index + 'c'}`} key={filter.id}>
@@ -118,17 +118,17 @@ class CheckboxFacet extends Component {
             </Panel.Title>
           </Panel.Heading>
           <Panel.Body collapsible className={`${styles['border-b']}`}>
-            { maxRows > 9 && maxRows < 11 ?
+            { maxRows > 10 ?
               <RenderFilterBar
                 onFilterData={this.onFilterData}
                 placeName={`Search ${filter.name}`}
-                className={`${styles['ml-20']}`}                
+                className={`${styles['ml-20']}`}               
               /> :
               null
             }
             <ul className={`${styles['category-sub-list']} ${styles['pl-20']} ${styles['pt-15']}`}>
               {
-                filterItems.slice(0, maxRows < 11 ? maxRows : 10).map(childFitler => (
+                filterItems.slice(0, maxRows > 10 ? 10 : maxRows).map(childFitler => (
                   <li key={childFitler.id} className={styles['category-sub-list-inn']}>
                     <div className={`${styles['checkbox-material']} ${styles['select-check-mate']}`}>
                       <input id={childFitler.param} type="checkbox" onChange={this.onChangeItem({ name: childFitler.name, param: childFitler.param })} checked={selectedItems.indexOf(childFitler.name) !== -1} />
@@ -138,7 +138,7 @@ class CheckboxFacet extends Component {
                 ))
               }
               {
-                this.state.isMoreButtonRequired ? <li onClick={this.toggleMore}><a>{maxRows < 11 && (maxRows === filter.children.length) ? `-${SEARCH_PAGE.SHOW_LESS}` : `+ ${SEARCH_PAGE.SHOW_MORE}`}</a></li> : null
+                this.state.isMoreButtonRequired ? <li onClick={this.toggleMore}><a>{maxRows < 21 && (maxRows === filter.children.length) ? `-${SEARCH_PAGE.SHOW_LESS}` : `+ ${SEARCH_PAGE.SHOW_MORE}`}</a></li> : null
               }
             </ul>
           </Panel.Body>
