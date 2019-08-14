@@ -449,23 +449,96 @@ export const homePageHolder = (
     {/* <div className={`${styles.container}`} /> */}
 
     <div className={`${styles['p-0']} col-md-12 col-sm-12`}>
-      <div className={`${styles['grid-cont']} ${styles['mt-20']} ${styles['flex-wrp']} ${styles.flx} result-box`} >
-        <div style={{ height: '200px' }} className={`${styles.couponHeader} ${styles['p-25']}`}>
+      <div className={`${styles['grid-cont']} ${styles['mt-20']} ${styles['flex-wrp']} ${styles.flx} result-box`} style={{ height: '350px' }} >
+        <div style={{ height: '300px' }} className={`${styles.couponHeader} ${styles['p-25']}`}>
         </div>
       </div>
-      <div className={`${styles['grid-cont']} ${styles['mt-20']} ${styles.flx} result-box`}>
-        <div style={{ height: '200px', width: '45%'}} className={`${styles.couponHeader} ${styles['p-25']}`}>
+      <div className={`${styles['mt-20']} ${styles['justify-around']} ${styles.flx} result-box`}>
+        <div style={{ height: '140px', width: '48%'}} className={`${styles['grid-cont']} ${styles.flx}`}>
+          <div>
+            <div style={{ height: '100%' }} className={`${styles.couponHeader} ${styles['p-40']}`}></div>
+          </div>
+          <div>
+            <div style={{ height: '100%' }} className={`${styles.couponHeader} ${styles['p-40']}`}></div>
+          </div>
+          <div>
+            <div style={{ height: '100%' }} className={`${styles.couponHeader} ${styles['p-40']}`}></div>
+          </div>
+          <div>
+            <div style={{ height: '100%' }} className={`${styles.couponHeader} ${styles['p-40']}`}></div>
+          </div>
+          <div>
+            <div style={{ height: '100%' }} className={`${styles.couponHeader} ${styles['p-40']}`}></div>
+          </div>
+          <div>
+            <div style={{ height: '100%' }} className={`${styles.couponHeader} ${styles['p-40']}`}></div>
+          </div>
+          <div>
+            <div style={{ height: '100%' }} className={`${styles.couponHeader} ${styles['p-40']}`}></div>
+          </div>
+          <div>
+            <div style={{ height: '100%' }} className={`${styles.couponHeader} ${styles['p-40']}`}></div>
+          </div>
+          <div>
+            <div style={{ height: '100%' }} className={`${styles.couponHeader} ${styles['p-40']}`}></div>
+          </div>
+          <div>
+            <div style={{ height: '100%' }} className={`${styles.couponHeader} ${styles['p-40']}`}></div>
+          </div>
         </div>
-        <div style={{ height: '200px', width: '45%'}} className={`${styles.couponHeader} ${styles['p-25']}`}>
+        <div style={{ height: '140px', width: '48%'}} className={`${styles['grid-cont']} ${styles.flx}`}>
+          <div>
+            <div style={{ height: '100%' }} className={`${styles.couponHeader} ${styles['p-40']}`}></div>
+          </div>
+          <div>
+            <div style={{ height: '100%' }} className={`${styles.couponHeader} ${styles['p-40']}`}></div>
+          </div>
+          <div>
+            <div style={{ height: '100%' }} className={`${styles.couponHeader} ${styles['p-40']}`}></div>
+          </div>
+          <div>
+            <div style={{ height: '100%' }} className={`${styles.couponHeader} ${styles['p-40']}`}></div>
+          </div>
+          <div>
+            <div style={{ height: '100%' }} className={`${styles.couponHeader} ${styles['p-40']}`}></div>
+          </div>
+          <div>
+            <div style={{ height: '100%' }} className={`${styles.couponHeader} ${styles['p-40']}`}></div>
+          </div>
+          <div>
+            <div style={{ height: '100%' }} className={`${styles.couponHeader} ${styles['p-40']}`}></div>
+          </div>
+          <div>
+            <div style={{ height: '100%' }} className={`${styles.couponHeader} ${styles['p-40']}`}></div>
+          </div>
+          <div>
+            <div style={{ height: '100%' }} className={`${styles.couponHeader} ${styles['p-40']}`}></div>
+          </div>
+          <div>
+            <div style={{ height: '100%' }} className={`${styles.couponHeader} ${styles['p-40']}`}></div>
+          </div>
         </div>
+        {/* <div style={{ height: '150px', width: '45%'}} className={`${styles.couponHeader} ${styles['p-25']} ${styles['grid-cont']}`}>
+        </div> */}
       </div>
-      <div className={`${styles['grid-cont']} ${styles['mt-20']} ${styles.flx} result-box`}>
-        <div style={{ height: '200px', width: '30%'}} className={`${styles.couponHeader} ${styles['p-25']}`}>
+      <div className={`${styles['mt-20']} ${styles.flx} ${styles['justify-around']} result-box`}>
+        <div style={{ height: '200px', width: '31.5%'}} className={`${styles['grid-cont']} ${styles.flx}`}>
+          <div style={{ height: '160px'}} className={`${styles.couponHeader} ${styles['p-25']}`}>
+          </div>
+        </div>
+        <div style={{ height: '200px', width: '31.5%'}} className={`${styles['grid-cont']} ${styles.flx}`}>
+          <div style={{ height: '160px'}} className={`${styles.couponHeader} ${styles['p-25']}`}>
+          </div>
+        </div>
+        <div style={{ height: '200px', width: '31.5%'}} className={`${styles['grid-cont']} ${styles.flx}`}>
+          <div style={{ height: '160px'}} className={`${styles.couponHeader} ${styles['p-25']}`}>
+          </div>
+        </div>
+       
+        {/* <div style={{ height: '200px', width: '30%'}} className={`${styles.couponHeader} ${styles['p-25']}`}>
         </div>
         <div style={{ height: '200px', width: '30%'}} className={`${styles.couponHeader} ${styles['p-25']}`}>
-        </div>
-        <div style={{ height: '200px', width: '30%'}} className={`${styles.couponHeader} ${styles['p-25']}`}>
-        </div>
+        </div> */}
       </div>
     </div>
   </div>
