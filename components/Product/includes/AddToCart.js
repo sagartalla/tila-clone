@@ -132,7 +132,7 @@ const mapStateToProps = (store) => {
     btnLoading: selectors.getBtnLoaders(store),
     isLoading: selectors.getLoadingStatus(store),
     error: selectors.getErrorMessege(store),
-    isAddedToCart: selectors.isAddedToCart(store)
+    isAddedToCart: selectors.isAddedToCart(store),
   });
 };
 

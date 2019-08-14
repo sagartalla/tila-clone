@@ -103,13 +103,13 @@ class MegaMenu extends Component {
 
   getLandingPageLink(id) {
     if(id === 'CWZ') {
-      return 'landing/electronics';
+      return 'electronics';
     }
     if(id === 'GLS') {
-      return 'landing/fashion';
+      return 'fashion';
     }
     if(id === 'JZG') {
-      return 'landing/lifestyle';
+      return 'lifestyle';
     }
   }
 
