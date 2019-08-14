@@ -343,7 +343,7 @@ class EmailModal extends Component {
             <div className={styles['pV-40']}>
               <div className={styles['pV-10']}>
                 <div className={styles['formLabel']}>{languageLabel['HNS']['ENTER_EMAIL']}</div>
-                <input type="text" dir="auto" name="email" value={email} onChange={this.handleUserInfoChange} />
+                <input disabled={this.props.isLoggedIn} type="text" dir="auto" name="email" value={email} onChange={this.handleUserInfoChange} />
               </div>
               {this.props.type === 'chat' &&
                 <div className={styles['pV-10']}>
