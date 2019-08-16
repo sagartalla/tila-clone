@@ -13,6 +13,12 @@
   -webkit-transition: all .5s;
 }
 
+.brands-list::-webkit-scrollbar,
+.brands-list::-webkit-scrollbar-thumb 
+  overflow:visible;
+  border-radius: 4px;
+  background: rgba(0,0,0,.2);
+
 .filter-panel
   // width: 215px;
   border: 1px solid #e5e5e5;
@@ -710,10 +716,10 @@
     height 12px
     position absolute
     left 0
-    top 10px
+    top 8px
   }
-  .pl-18 {
-    padding-left 18px
+  .pl-25 {
+    padding-left 25px
   }
 
 .border-left
@@ -723,17 +729,14 @@
   width 760px
 
 .brands-list
-  overflow-x: auto;
-  white-space: nowrap;
-  border-radius: 2px;
-  height: 400px;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  margin: 30px 0px;
+  overflow-x auto
+  white-space nowrap
+  border-radius 2px
+  height 400px
+  display flex
+  flex-wrap wrap
+  flex-direction column
+  margin 10px 0
 
 .active
   color black
@@ -741,7 +744,7 @@
   border-bottom 2px solid
 
 .select-checkbox-width
-  width 200px
+  width 240px
 
 .notifyme-msg
   background black

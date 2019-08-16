@@ -29,7 +29,7 @@ const RenderFilterBar = ({ onFilterData, placeName, className }) => {
           width: '180px',
           border: '1px solid #c8c7cc',
     }}
-        className={`${styles['pl-18']}`}
+        className={`${styles['pl-25']}`}
       />
     </div>
   )

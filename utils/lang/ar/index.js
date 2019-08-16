@@ -269,7 +269,7 @@ export const AR_KEYWORDS = {
     PDP_DONE: 'Done',
     OUT_OF_STOCK: 'نفذت الكمية',
     THANKS_DESCRIPTION: 'Thanks for taking your time to rate the product, this will help millions of users like you to make better purchase judgement',
-    MAX_LENGTH: 'الحد الأقصى',
+    MAX_LENGTH: 'characters left',
     ITEM_LOCATION: 'Item Location',
   },
   VAULT_PAGE: {

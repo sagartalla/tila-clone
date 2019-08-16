@@ -59,10 +59,7 @@ class Search extends Component {
     this.upScroll = this.upScroll.bind(this);
     this.downScroll = this.downScroll.bind(this);
     this.showBrandsModal = this.showBrandsModal.bind(this);
-    this.onChangeCheckbox = this.onChangeCheckbox.bind(this);
-    this.onHandleChange = this.onHandleChange.bind(this);
     this.onFilterData = this.onFilterData.bind(this);
-    this.resetSelectedFilters = this.resetSelectedFilters.bind(this);
   }
   componentDidMount() {
     window.addEventListener('scroll', this.handleScroll);
@@ -131,13 +128,12 @@ class Search extends Component {
     }
   }
 
-  showBrandsModal = (filter, filterItems, selectedItems, attributeName) => () => {
+  showBrandsModal = (filter, filterItems, selectedItems) => () => {
     this.setState({
       showModal: true,
       filteredItems: filterItems,
       filter,
       selectedItems,
-      attributeName,
     });
   }
 
@@ -154,66 +150,15 @@ class Search extends Component {
     });
   }
 
-  applyFilters = () => {
-    const { submitQuery } = this.state;
-    this.submitQuery(submitQuery);
-    this.props.onChangeFacets(submitQuery);
-    this.closePopup();
-  }
-
-  submitQuery(params) {
-    this.props.getSearchResults(this.props.getFacetfilters(params));
-  }
-
-  
-  onChangeCheckbox = (value) => (e) => {
+  onFilterData(value) {
     const { filter } = this.state;
-      const newSelectedItem = [...this.state.selectedItems];
-      if (e.target.checked) {
-        newSelectedItem.push(value.name);
-      } else {
-        newSelectedItem.splice(newSelectedItem.indexOf(value.name), 1);
-      }
-      this.setState({
-        selectedItems: newSelectedItem,
-      });
-      this.onHandleChange(value, e, filter);
+    let items = filter.children.filter((item) => {
+      return item.name.toLowerCase().indexOf(value) > -1;
+    });
+    this.setState({
+      filteredItems: items,
+    });
   }
-
-  onHandleChange(value, e, filter) {
-    const { facets } = this.props;
-      const params = facets;
-      params[filter.attributeName] = params[filter.attributeName] || [];
-      digitalData.filter.leftnavfilters = `${filter.attributeName}:${value.name}`;
-      if (e.target.checked) {
-        params[filter.attributeName].push(value.name);
-      } else {
-        params[filter.attributeName] = params[filter.attributeName].filter((item) => item !== value.name)
-        if (!params[filter.attributeName].length) { delete params[filter.attributeName]; }
-      }
-      this.setState({
-        submitQuery: params,
-      });
-    };
-
-    onFilterData(value) {
-      const { filter } = this.state;
-      let items = filter.children.filter((item) => {
-        return item.name.toLowerCase().indexOf(value) > -1;
-      });
-      this.setState({
-        filteredItems: items,
-      });
-    }
-
-    resetSelectedFilters() {
-      const { appliedFilters, facets } = this.props;
-      const { attributeName } = this.state;
-      const params = facets || {}
-          params[attributeName] = [];
-          this.submitQuery(params);
-          this.closePopup();
-    }
 
 
   handleScroll(e) {
@@ -257,8 +202,11 @@ class Search extends Component {
               </NoSSR>
 
             </Col>
-            <div className={`${styles.absolute} ${styles['bg-white']} ${styles.brandsmodal} `}>
-              {showModal && <SelectBrands showPopup={showModal} closePopup={this.closePopup} filteredItems={filteredItems} selectedItems={selectedItems} onFilterData={this.onFilterData} onChangeCheckbox={this.onChangeCheckbox} applyFilters={this.applyFilters} resetSelectedFilters={this.resetSelectedFilters} filter={filter}/>}
+            <div
+            className={`${styles.absolute} ${styles['bg-white']} ${styles.brandsmodal} `}
+            ref={(el) => { this.filterRef = el; }}
+            >
+              {showModal && <SelectBrands showPopup={showModal} closePopup={this.closePopup} filteredItems={filteredItems} selectedItems={selectedItems} onFilterData={this.onFilterData} filter={filter}/>}
             </div>
             <Col md={10} className={`${styles['search-results']} ${styles['fl-rt']} ${styles['pr-0']}`}>
               <SearchDetailsBar optionalParams={optionalParams} />
@@ -277,7 +225,6 @@ const mapStateToProps = store => ({
   spellCheckResp: selectors.getSpellCheckResponse(store),
   optionalParams: selectors.optionParams(store),
   getFacetfilters: selectors.getFacetfilters(store),
-  appliedFilters: selectors.getAppliedFitlers(store),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(
@@ -288,15 +235,5 @@ const mapDispatchToProps = dispatch => bindActionCreators(
   dispatch,
 );
 
-function mapUrlToProps(url, props) {
-  return {
-    facets: decode(d => JSON.parse(d || '{}'), url.facets),
-  };
-}
-
-const mapUrlChangeHandlersToProps = props => ({
-  onChangeFacets: value => replaceInUrlQuery('facets', encode((e) => JSON.stringify(e || {}), value)),
-});
-
-export default addUrlProps({ mapUrlToProps, mapUrlChangeHandlersToProps })(connect(mapStateToProps, mapDispatchToProps)(Search));
+export default connect(mapStateToProps, mapDispatchToProps)(Search);
 
