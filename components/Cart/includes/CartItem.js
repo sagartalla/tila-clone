@@ -208,7 +208,7 @@ class CartItem extends React.Component {
     } = this.props;
     const { checked, showWarrantyDetails, warrantyName, policyName } = this.state;
     const {
-      item_id, img, name, offer_price, cur, quantity, max_limit, inventory, offerDiscounts, tuin_id,
+      item_id, img, name, offer_price, cur, quantity, max_limit, inventory, active, offerDiscounts, tuin_id,
       brand_name, gift_info, shipping, warranty_duration, total_amount, total_discount, listing_id='',
       product_id, variant_id='', itemType, catalogId: catalog_id, discount, mrp, variantAttributes, selling_price, policies_applied, tila_care_policy, tila_care_charges,
     } = item;
@@ -216,12 +216,12 @@ class CartItem extends React.Component {
       <div key={item_id} className={`${styles['mb-20']} ${styles['box']}`} id="cart-container">
         {
           max_limit == quantity ?
-            <div className={`${styles['p-10-22']} ${styles['alrt-message-bg']} ${styles['light-gry-clr']} ${styles['alrt-message-part']} ${styles['thick-border-btm']}`}><span>{CART_PAGE.MAX_PER_ORDER}</span></div>
+            inventory <= 0 || !active ? null : <div className={`${styles['p-10-22']} ${styles['alrt-message-bg']} ${styles['light-gry-clr']} ${styles['alrt-message-part']} ${styles['thick-border-btm']}`}><span>{CART_PAGE.MAX_PER_ORDER}</span></div>
             : ''
         }
         <div className={`${styles['cart-box']} ${styles['p-20']}`}>
           {
-            inventory <= 0 ?
+            inventory <= 0 || !active ?
               <div className={`${styles['out-of-stock']} ${styles['text-center']} ${styles.absolute} ${styles['bg-white']}`}>
                 <h3>{CART_PAGE.UH_OH}</h3>
                 <p>
@@ -440,7 +440,7 @@ class CartItem extends React.Component {
             <span className={styles.width21}>
               {
                 inventory <= 10 && inventory != 0 ?
-                  <span className={`${styles.fontW600} ${styles['thick-red']} ${styles['pr-20']}`}>{CART_PAGE.ONLY + ' ' + inventory + ' ' + CART_PAGE.UNITS_LEFT} </span>
+                  inventory <= 0 || !active ? null : <span className={`${styles.fontW600} ${styles['thick-red']} ${styles['pr-20']}`}>{CART_PAGE.ONLY + ' ' + inventory + ' ' + CART_PAGE.UNITS_LEFT} </span>
                   : ''
               }
               {

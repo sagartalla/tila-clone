@@ -141,6 +141,7 @@ const getProduct = (store, variantId) => {
     catalog: _.groupBy(_.filter(catalogAttributeMap, val => val.visible), attrMap => attrMap.attribute_category_name),
     isWishlisted: wishListProductIds && wishListProductIds.indexOf(product_details.product_id) !== -1,
     wishlistId,
+    tuin: catalogAttributeMap.tuin ? catalogAttributeMap.tuin.attribute_values[0].value : '',
   };
 };
 const getTilaPolicy = (store) => {
