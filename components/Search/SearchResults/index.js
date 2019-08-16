@@ -232,7 +232,7 @@ class SearchResults extends Component {
 
   render() {
     const { search, isCategoryTree, choosenCategoryName } = this.props;
-    let finalQuery = search ? search : isCategoryTree ? choosenCategoryName : '';
+    let finalQuery = search || choosenCategoryName;
     finalQuery = finalQuery.split('-').join(' ');
     const {
       results, pagiantionDetails,
