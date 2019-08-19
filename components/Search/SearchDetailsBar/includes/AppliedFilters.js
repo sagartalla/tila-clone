@@ -67,7 +67,7 @@ class AppliedFilters extends Component {
               appliedFilters.map(af => (
                 <div key={af.key} className={`${styles['flex-center']} ${styles['applied-tags-inn']} ${styles['ml-10']}`}>
                   <div className={`${styles['filter-tooltp']} ${styles.absolute} ${styles['fs-12']}`}>{af.attributeDisplayName}</div>
-                  <span className={`${styles.title} ${styles['fs-12']}`} title={af.attributeDisplayName}>{af.displayName}</span>
+                  <span className={`${styles.title} ${styles['fs-12']}`}>{af.displayName}</span>
                   <span onClick={this.removeFilter} data-name={af.displayName} data-parentKey={af.parentKey} data-key={af.key} className={`${styles['close-part']}`}>x</span>
                 </div>
               ))
