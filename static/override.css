@@ -334,3 +334,7 @@
 .home-slider .slick-next {
     top: 35%;
 }
+
+.facets-brands-modal .modal-content {
+   border: none !important;
+}

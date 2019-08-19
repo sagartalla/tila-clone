@@ -73,7 +73,7 @@ class UserVault extends Component {
   makeDefault(card_token) {
     const { toggleMiniVault } = this.props;
     if (toggleMiniVault) toggleMiniVault();
-    this.props.makeCardDefault(card_token);
+    this.props.selectedSavedCard(card_token);
   }
 
   deleteCard(card_token) {
@@ -150,7 +150,7 @@ class UserVault extends Component {
 }
 
 const mapStateToProps = (store) => ({
-  results: selectors.getCardResults(store),
+  results: selectors.getSavedCardDetails(store),
   transactions: selectors.getTransactions(store),
   tilaCredit: selectors.getTilaCredit(store),
 });
@@ -161,6 +161,7 @@ const mapDispatchToProps = (dispatch) =>
     addCard: actionCreators.addCard,
     deleteCard: actionCreators.deleteCard,
     makeCardDefault: actionCreators.makeCardDefault,
+    selectedSavedCard:actionCreators.selectedSavedCard,
     getWalletTransactions: actionCreators.getWalletTransactions,
   }, dispatch);
 
