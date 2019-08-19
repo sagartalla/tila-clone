@@ -519,6 +519,70 @@ class PageData extends React.Component {
           </div>
         );
       }
+
+
+      case 'CBT3a' : {
+        const { banners, breadcrumb, title } = content.data[lang];
+        return (
+          <div className={`${styles['display-t-i-f']} ${styles['flex-prop']}`} >
+            <div className={`${styles['fs-20']} ${styles.title}`}>{title}</div>
+            <div className = {styles.cbt3a}>
+              <div className={styles.heading}>
+                <h1>Just Arrived</h1>
+                <p style={{color: "#666666"}}>Go with trend</p>
+              </div>
+              <div className={styles.wrapper}>
+                <div className={styles.img1}>
+                  <a href={banners[0].link}>
+                    <img src={banners[0].img} width={banners[0].config.width} height={banners[0].config.height}/>
+                  </a>
+                </div>
+                <div className={styles.img2}>
+                  <a href={banners[1].link}>
+                    <img src={banners[1].img} width={banners[0].config.width} height={banners[0].config.height} />
+                  </a>
+                </div>
+                <div className={styles.img3}>
+                  <a href={banners[2].link}>
+                    <img src={banners[2].img} width={banners[0].config.width} height={banners[0].config.height}/>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      case 'CBT2a': {
+        const { banners, breadcrumb, title } = content.data[lang];
+        return (
+          <div className={`${styles['display-t-i-f']}`} >
+            <div className={`${styles['fs-20']} ${styles.title}`}>{title}</div>
+            <div className={styles.cbt2aBanner}>
+                <div className={styles.cbt2aBG}>
+                    <a href={banners[0].link}>
+                      <div>
+                        <img src={banners[0].img} width={banners[0].config.width} height={banners[0].config.height}/>
+                      </div>
+                    </a>
+                  </div>
+                <div className={styles.setWidth1}>
+                  <div className={styles.trendingImg}>
+                      <a href={banners[3].link}>
+                        <div>
+                          <img src={banners[1].img} width={banners[0].config.width} height={banners[0].config.height}/>
+                        </div>
+                      </a>
+                  </div>
+                </div>
+            </div>
+
+
+          </div>
+          )
+      }
+
+
       default: return null;
     }
   }
