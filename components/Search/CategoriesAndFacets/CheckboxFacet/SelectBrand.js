@@ -73,6 +73,14 @@ class SelectBrand extends Component {
   }
 
   setSelectedAlphabet = (e) => {
+    let hashval = e.target.getAttribute('href');
+    let target = document.querySelector(hashval);
+    target !== null && target.scrollIntoView({
+      behavior: 'auto',
+      block: 'nearest',
+    })
+    history.pushState(null, null, hashval);
+    e.preventDefault();
     this.setState({
       selectedAlphabet: e.target.innerText,
     });
@@ -149,7 +157,6 @@ class SelectBrand extends Component {
       requiredData,
       selectedItems,      
     } = this.state;
-    console.log('facets', this.props.facets, this.state.submitQuery);
     return (
       <div className={`${styles.flex} ${styles['align-center']}`}>
         {showPopup &&
@@ -164,14 +171,14 @@ class SelectBrand extends Component {
                     <div className={`${styles.flex} ${styles['align-center']}`}>
                       {alphabets.map(alphabet => (
                         <div className={`${styles['ml-5']} ${styles['label-gry-clr']} ${styles.fontW600}`}>
-                          <div
-                            href="javascript: void(0);"
-                            id={alphabet}
+                          <a
+                            href={`#${alphabet === '#' ? 'A' : alphabet}`}
+                            style={{ 'text-decoration': 'none', color: '#666' }}
                             onClick={this.setSelectedAlphabet}
                             className={`${selectedAlphabet === alphabet && styles.active}`}
                           >
                             {alphabet}
-                          </div>
+                          </a>
                         </div>
                       ))}
                     </div>
@@ -210,12 +217,12 @@ class SelectBrand extends Component {
                       {
                           Object.keys(requiredData).map(val => (
                             <React.Fragment>
-                            <div id={val} onClick={val === selectedAlphabet && this.scrollIntoView} className={selectedAlphabet === val ? `${styles['mt-10']} ${styles['select-checkbox-width']} ${styles.fontW800}` : `${styles['mt-10']} ${styles['select-checkbox-width']} ${styles['thick-gry-clr']} ${styles.fontW600}` }>{val}</div>
+                            <div id={`${val === '#' ? 'A' : val}`} className={selectedAlphabet === val ? `${styles['mt-10']} ${styles['select-checkbox-width']} ${styles.fontW800}` : `${styles['mt-10']} ${styles['select-checkbox-width']} ${styles['thick-gry-clr']} ${styles.fontW600}` }>{val}</div>
                             {requiredData[val].map((newVal, index) => (
                               <div className={`${styles['mt-10']} ${styles['checkbox-material']} ${styles['select-check-mate']} ${styles['select-checkbox-width']}`}>
                               <input id={newVal.name} type="checkbox" onChange={this.onChangeCheckbox({ name: newVal.name, param: newVal.param })} checked={selectedItems && selectedItems.length > 0 && selectedItems.indexOf(newVal.name) !== -1} />
                               <label htmlFor={newVal.name} className={`${styles['fs-12']} ${styles['category-label']}`}>
-                                <span className={(newVal.name.startsWith(selectedAlphabet !== '' && selectedAlphabet)) || (selectedAlphabet === '#' && newVal.name.match(/^\d/)) ? `${styles.fontW800} ${styles['category-span']}` : `${styles['category-span']} ${styles['thick-gry-clr']} ${styles.fontW700}`}>{newVal.name}
+                                <span className={(newVal.name.toLowerCase().startsWith(selectedAlphabet !== '' && selectedAlphabet.toLowerCase())) || (selectedAlphabet === '#' && newVal.name.match(/^\d/)) ? `${styles.fontW800} ${styles['category-span']}` : `${styles['category-span']} ${styles['thick-gry-clr']} ${styles.fontW700}`}>{newVal.name}
                                   <span className={styles['thick-gry-clr']}>{newVal.count ? `(${newVal.count})` : ''}</span>
                                 </span>
                               </label>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Col } from 'react-bootstrap';
+import { Grid, Col, Modal } from 'react-bootstrap';
 import NoSSR from 'react-no-ssr';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -137,14 +137,14 @@ class Search extends Component {
     });
   }
 
-  selectedCheckbox = (selectedValues) => () => {
+  selectedCheckbox = selectedValues => () => {
     this.setState({
       selectedItems: selectedValues || [],
     });
   }
 
   closePopup = () => {
-    let { selectedItems } = this.state;
+    const { selectedItems } = this.state;
     this.setState({
       showModal: false,
     });
@@ -152,9 +152,7 @@ class Search extends Component {
 
   onFilterData(value) {
     const { filter } = this.state;
-    let items = filter.children.filter((item) => {
-      return item.name.toLowerCase().indexOf(value) > -1;
-    });
+    const items = filter.children.filter(item => item.name.toLowerCase().indexOf(value) > -1);
     this.setState({
       filteredItems: items,
     });
@@ -182,7 +180,9 @@ class Search extends Component {
     const {
       query, optionalParams, isBrandPage, loaderProps,
     } = this.props;
-    const { sideBarPositionClass, containerStyle, showModal, filteredItems, selectedItems, filter } = this.state;
+    const {
+      sideBarPositionClass, containerStyle, showModal, filteredItems, selectedItems, filter,
+    } = this.state;
     const { loadComponent, pathname } = loaderProps;
     return (
       <div>
@@ -202,11 +202,20 @@ class Search extends Component {
               </NoSSR>
 
             </Col>
-            <div
-            className={`${styles.absolute} ${styles['bg-white']} ${styles.brandsmodal} `}
-            ref={(el) => { this.filterRef = el; }}
-            >
-              {showModal && <SelectBrands showPopup={showModal} closePopup={this.closePopup} filteredItems={filteredItems} selectedItems={selectedItems} onFilterData={this.onFilterData} filter={filter}/>}
+            <div>
+              <Modal
+                show={showModal}
+                onHide={this.closePopup}
+                dialogClassName="custom-modal"
+                className="facets-brands-modal"
+                backdropStyle={{ opacity: 0 }}
+              >
+                <div
+                  className={`${styles.absolute} ${styles['bg-white']} ${styles.brandsmodal} `}
+                >
+                  {showModal && <SelectBrands showPopup={showModal} closePopup={this.closePopup} filteredItems={filteredItems} selectedItems={selectedItems} onFilterData={this.onFilterData} filter={filter} />}
+                </div>
+              </Modal>
             </div>
             <Col md={10} className={`${styles['search-results']} ${styles['fl-rt']} ${styles['pr-0']}`}>
               <SearchDetailsBar optionalParams={optionalParams} />
