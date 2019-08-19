@@ -427,6 +427,7 @@ export const AR_KEYWORDS = {
     MAXIMUN_TEXT_EXCEEDED: 'لقد تخطيت الحد الأقصى للنص المسموح به للبحث',
     YOUR_ENTERED: 'تم تسجيل دخولك',
     AUTO_CORRECTED: 'تصحيح تلقائي',
+    APPLY_FILTERS: 'Apply Filters',
   },
   // adding new page content
   FOOTER_PAGE: {

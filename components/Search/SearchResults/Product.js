@@ -391,8 +391,8 @@ class Product extends Component {
                       OncloseVariant={this.closeVariantTab}
                     />
                   }
+                  {showNotifyMeMsg && <div className={`${styles['notifyme-msg']} ${styles['flex-center']} ${styles['justify-center']}`}>We will notify you once this is in stock.</div>}
                 </div>
-                {showNotifyMeMsg && <div className={`${styles['notifyme-msg']} ${styles['flex-center']} ${styles['justify-center']}`}>We will notify you once this is in stock.</div>}
                 <div className={styles['desc-cont']}>
                   <div className={`${styles['pb-20']} ${styles['pl-20']} ${styles['pr-20']} ${styles.flex} ${styles['flex-colum']}`}>
                     <h5 className={`${styles['prdt-name']} ${styles['pt-15']} ${styles['pb-5']}  ${styles['m-0']}`}>
@@ -404,7 +404,7 @@ class Product extends Component {
                     </span>
                   </div>
                 </div>
-                <div className={`${selectedProduct ? `${styles['display-buttons']} ${styles['active-product']}` : ''}  ${styles['hover-show-date']} ${styles['pb-10']} ${styles.relative}`}>
+                <div className={`${selectedProduct ? `${styles['display-buttons']} ${styles['active-product']}` : ''} ${styles['hover-show-date']} ${styles['pb-10']} ${styles.relative}`}>
                   {
                     variants.length > 0 ?
                       <div className={`${styles.flex} ${styles['justify-around']} ${styles['quick-view']} ${styles['border-radius4']}`}>

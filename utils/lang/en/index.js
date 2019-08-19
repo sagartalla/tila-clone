@@ -438,6 +438,7 @@ export const EN_KEYWORDS = {
     MAXIMUN_TEXT_EXCEEDED: 'Maximum search text exceeded',
     YOUR_ENTERED: 'You entered',
     AUTO_CORRECTED: 'Auto corrected',
+    APPLY_FILTERS: 'Apply Filters',
   },
   // adding new page content
   FOOTER_PAGE: {

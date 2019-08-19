@@ -13,6 +13,9 @@ import main_en from '../../../../layout/main/main_en.styl';
 import main_ar from '../../../../layout/main/main_ar.styl';
 import styles_en from '../../search_en.styl';
 import styles_ar from '../../search_ar.styl';
+import { languageDefinations } from '../../../../utils/lang';
+
+const { SEARCH_PAGE } = languageDefinations();
 
 /* eslint-disable */
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
@@ -183,7 +186,7 @@ class SelectBrand extends Component {
                       ))}
                     </div>
                     <Button
-                      btnText="Apply Filters"
+                      btnText={SEARCH_PAGE.APPLY_FILTERS}
                       onClick={this.applyFilters}
                       className={`${styles['border-left']}`}
                     />
