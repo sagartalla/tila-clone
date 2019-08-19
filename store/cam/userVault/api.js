@@ -6,7 +6,9 @@ const getCardResultsApi = () => {
     return { data };
   });
 };
-
+const getCheckoutOptionsApi = params => {
+  return axios.post(`${constants.TRANSACTIONS_API_URL}/fpts/transaction/instant_checkout_options`, params)
+};
 const getWalletTransactions = () => {
   return axios.get(`${constants.VAULT_API_URL}/api/v1/user/wallet/transactions?page=0&size=10`).then(({data}) => {
     return data;
@@ -35,4 +37,4 @@ const deleteCardApi = (card_token) => {
   });
 }
 
-export default { getCardResultsApi, addCardDetailsApi, makeCardDefaultApi, deleteCardApi, getWalletTransactions };
+export default { getCardResultsApi, addCardDetailsApi, makeCardDefaultApi, deleteCardApi, getWalletTransactions, getCheckoutOptionsApi };
