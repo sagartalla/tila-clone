@@ -73,7 +73,7 @@ const brandImages = {
       },
       {
         value: 'Fossil',
-        link: `/${lang}brand/fossil`,
+        link: `/${lang}/brand/fossil`,
       },
     ],
   },

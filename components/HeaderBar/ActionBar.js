@@ -104,6 +104,7 @@ class ActionBar extends Component {
     if (nextProps && nextProps.activeObj && nextProps.activeObj.nextPage === null) {
       setTimeout(() => {
         closeThankYouScreen();
+        Router.pushRoute(`${window.location.origin}/${cookies.get('language')}`);
       }, 3000);
     }
 

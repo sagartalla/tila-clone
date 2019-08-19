@@ -43,12 +43,12 @@ const addCartAndWishlistDetails = (store, results) => {
 
   return {
     ...results,
-    items: results.items.map((i) => ({
-        ...i,
-        wishlistId: wishlistItems[i.productId] || '',
-        variants: filterVariants(cartListingIds, i.variants),
-        addedToWishlist: wishListProductIds && wishListProductIds.indexOf(i.productId) !== -1,
-      })),
+    items: results.items.map(i => ({
+      ...i,
+      wishlistId: wishlistItems[i.productId] || '',
+      variants: filterVariants(cartListingIds, i.variants),
+      addedToWishlist: wishListProductIds && wishListProductIds.indexOf(i.productId) !== -1,
+    })),
   };
 };
 
@@ -273,6 +273,11 @@ const getFacetfilters = store => (queryObject) => {
   return { facetFilters, facetFiltersCopyWithNames };
 };
 
+const facetData = store => {
+  console.log('store.searchReducer.data.facetResponse.facets', store.searchReducer.data.facetResponse.facets);
+  return store.searchReducer.data.facetResponse.facets;
+}
+
 const getSearchBarFilterState = state => state.searchReducer.ui.showFilters;
 
 const getIsCategoryTree = store => store.searchReducer.data.searchDetails.categoryTree;
@@ -295,5 +300,5 @@ export {
   getCategoryId, getQuery, getCategorySearchQuery, getChoosenCategoryName,
   getFacetfilters, optionParams, getSearchBarFilterState, addCartAndWishlistDetails,
   getIsCategoryTree, getAppliedFitlers, getSuggestions, getSpellCheckResponse,
-  getUserDetails, getCartButtonLoaders,
+  getUserDetails, getCartButtonLoaders, facetData,
 };
