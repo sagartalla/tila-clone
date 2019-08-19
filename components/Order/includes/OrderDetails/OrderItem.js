@@ -61,9 +61,9 @@ class OrderItem extends Component {
   getCurrencyValue(finalPrice,offerPrice) {
     const {isDamageProtectionAvailable,isWarrantyAvailable } = this.props
     if(isDamageProtectionAvailable !== 'NA' || isWarrantyAvailable !== 'NA') {
-      return `${offerPrice.display_value} ${offerPrice.currency_code}`
+    return <span><span className={`${styles['fs-12']}`}>&nbsp;{offerPrice.currency_code}</span>&nbsp;<span>{offerPrice.display_value}</span></span>
     }
-    return `${finalPrice.display_value} ${finalPrice.currency_code}`
+    return <span><span className={`${styles['fs-12']}`}>&nbsp;{finalPrice.currency_code}</span>&nbsp;<span>{finalPrice.display_value}</span></span>
   }
   getWarrantyDuration(product) {
     const {
@@ -104,7 +104,10 @@ class OrderItem extends Component {
           <div className={`${styles['warranty-block']}`}>
             <div className={`${styles['flex']} ${styles['align-end']}`}>
               <div className={`${styles['warranty-sub-block']}`}>{`${item.policy_type == 'EXTENDED' ? 'Extended Warranty' : 'Damage Protection' }` }</div>
-              <div className={`${styles['width22']} ${styles['font-weight600']}`}>{item.cost.display_value} {item.cost.currency_code}</div>
+              <div className={`${styles['width22']} ${styles['font-weight600']}`}>
+              <span className={`${styles['fs-12']}`}>{item.cost.currency_code}</span>&nbsp;
+              {item.cost.display_value}
+              </div>
             </div>
             <div className={`${styles['fs-12']} ${styles['ml-10']} ${styles['lgt-black']}`}>{`Duration: ${item.duration}`}</div>
           </div>
@@ -332,7 +335,9 @@ class OrderItem extends Component {
                            }
                            >
                            <div className={`${styles['width78']} ${styles['font-weight600']}`}>Total:</div>
-                           <div className={`${styles['width22']} ${styles['font-weight600']}`}>{final_price.display_value} {final_price.currency_code}</div>
+                           <div className={`${styles['width22']} ${styles['font-weight600']}`}>
+                           <span className={`${styles['fs-12']}`}>{final_price.currency_code}</span>&nbsp;
+                           <span>{final_price.display_value}</span></div>
                          </div>
                        </Col>
                      </div>

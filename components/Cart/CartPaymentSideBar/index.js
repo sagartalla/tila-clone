@@ -118,7 +118,12 @@ class CartAndPaymentSideBar extends Component {
                 {CART_PAGE.ORDER_SUMMARY}
               </h5>
             </li>
-            <li><span className={styles['thick-gry-clr']}>{CART_PAGE.PRICE} ({`${item_cnt} ${CART_PAGE.ITEMS}`})</span><span> {`${total_offer_price.currency_code || currency} ${total_offer_price.display_value}`}</span></li>
+            <li><span className={styles['thick-gry-clr']}>{CART_PAGE.PRICE} ({`${item_cnt} ${CART_PAGE.ITEMS}`})</span>
+             <span>
+               <span className={`${styles['fs-12']}`}>{total_offer_price.currency_code || currency}</span>&nbsp;
+               <span className={`${styles['fs-14']}`}>{total_offer_price.display_value}</span>
+               </span>
+            </li>
             {showStepper ?
               <li>
                 <span className={styles['thick-gry-clr']}>{CART_PAGE.QUANTITY}</span>
@@ -134,14 +139,20 @@ class CartAndPaymentSideBar extends Component {
             <li>
               <span className={styles['thick-gry-clr']}>{CART_PAGE.DELIVERY_CHARGES}</span>
               {total_shipping.money_value > 0 ?
-                <span>{total_shipping.currency_code || currency} {total_shipping.display_value || 0}</span> :
+                <span>
+                <span className={`${styles['fs-12']}`}>{total_shipping.currency_code || currency}</span>&nbsp;
+                <span className={`${styles['fs-14']}`}>{total_shipping.display_value || 0}</span>
+                </span> :
                 <span className={`${styles.flex}`}><SVGComponent clsName={styles['ship-icon']} src={lang === 'en' ? "icons/free-shipping" : "icons/Arabic-Freeshipping" }/></span>
               }
             </li>
             {total_gift_charges.display_value &&
             <li>
               <span className={styles['thick-gry-clr']}>{CART_PAGE.GIFT_CHARGES}</span>
-              <span>{total_gift_charges.currency_code || currency} {total_gift_charges.display_value}</span>
+              <span>
+              <span className={`${styles['fs-12']}`}>{total_gift_charges.currency_code || currency}</span>&nbsp;
+              <span className={`${styles['fs-14']}`}>{total_gift_charges.display_value}</span>
+              </span>
             </li>}
             {
             tax !== 0 ?
@@ -156,20 +167,29 @@ class CartAndPaymentSideBar extends Component {
                 <span className={styles['thick-gry-clr']}>{CART_PAGE.TILA_CARE_PROTECTION}</span>
                 <span>
                   {total_tila_care_charges &&
-                    `${total_tila_care_charges.currency_code} ${total_tila_care_charges.display_value}`}
+                  <span>
+                    <span className={`${styles['fs-12']}`}>{total_tila_care_charges.currency_code}</span>&nbsp;
+                    <span className={`${styles['fs-14']}`}>{total_tila_care_charges.display_value}</span>
+                    </span>
+                    }
                 </span>
               </li>
             }
             <li className={`${styles['mt-20']} ${styles['fs-16']} ${styles['light-gry-clr']}`}>
               <b>{CART_PAGE.TOTAL_AMOUNT}</b>
               <span className={`${styles.flex} ${styles['flex-colum']} ${styles['t-rt']}`}>
-                <span className={styles.fontW600}>{`${total_price.currency_code || currency} ${total_price.display_value}`}</span>
-                {total_discount.money_value > 0 ?
-                  <span className={`${styles['fs-12']} ${styles['thick-red']} ${styles['t-rt']}`}>{CART_PAGE.YOU_SAVED} {total_discount.currency_code || currency} {total_discount.display_value}</span>
-                  : null
-                }
+                <span className={styles.fontW600}>
+                <span className={`${styles['fs-12']}`}>{total_price.currency_code || currency}</span>&nbsp;
+                <span>{total_price.display_value}</span>
+                </span>
               </span>
             </li>
+            {total_discount.money_value > 0 ?
+                  <span className={`${styles['fs-12']} ${styles['display-block']} ${styles['thick-red-clr']} ${styles['t-rt']}`}>{CART_PAGE.YOU_SAVED}&nbsp;
+                  <span className={`${styles['fs-12']}`}>{total_discount.currency_code || currency}</span>&nbsp;
+                  <span>{total_discount.display_value}</span></span>
+                  : null
+                }
           </ul>
         </div>
       </div>
