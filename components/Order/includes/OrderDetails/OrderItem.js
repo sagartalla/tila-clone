@@ -101,7 +101,7 @@ class OrderItem extends Component {
     policyData.forEach((item) => {
       if(item.policy_type !== 'NORMAL') {
         data.push (
-          <div className={`${styles['warranty-block']}`}>
+          <div className={`${styles['warranty-block']}   ${styles['m-10']}`}>
             <div className={`${styles['flex']} ${styles['align-end']}`}>
               <div className={`${styles['warranty-sub-block']}`}>{`${item.policy_type == 'EXTENDED' ? 'Extended Warranty' : 'Damage Protection' }` }</div>
               <div className={`${styles['width22']} ${styles['font-weight600']}`}>{item.cost.display_value} {item.cost.currency_code}</div>
@@ -259,12 +259,10 @@ class OrderItem extends Component {
                                       }
                                       {offer_price &&
                                       <li className={`${styles['flx-space-bw']}`}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.PRICE} :</span><span> {offer_price.currency_code} {offer_price.display_value}</span></li>}
-                                      {shipping_fees &&
-                                      <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.SHIPPING} : </span><span className={styles.flex}>{shipping_fees.display_value ? `(+) ${shipping_fees.currency_code} ${shipping_fees.display_value}` : <SVGComponent clsName={`${styles['ship-icon']}`} src={lang === 'en' ? 'icons/free-shipping' : 'icons/Arabic-Freeshipping'} />}</span></li>}
                                       {product.gift_info && gift_charge &&
                                         <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.GIFT_CHARGES} : </span><span>{gift_charge.display_value ? `(+) ${gift_charge.currency_code} ${gift_charge.display_value}` : 'FREE'}</span></li>}
-                                      {final_price &&
-                                      <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.TOTAL} : </span><span className={styles.fontW600}> {final_price.currency_code} {final_price.display_value}</span></li>}
+                                      {/* {final_price &&
+                                      <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.TOTAL} : </span><span className={styles.fontW600}> {final_price.currency_code} {final_price.display_value}</span></li>} */}
                                     </ul>
                                   </div>}
                                 </span>
@@ -315,29 +313,68 @@ class OrderItem extends Component {
                       {ORDER_PAGE.THIS_ORDER_CONTAINS_A_GIFT}
                     </span>
                   </div>}
+                  {shipping_fees &&
+                    <div>
+                      <Col md={2}></Col>
+                      <Col md={10}>
+                        <div className=
+                          {`
+                            ${styles['warranty-block']}
+                            ${styles['flex']}
+                            ${styles['align-end']}
+                            ${styles['padding-all']}
+                            ${styles[`mb-0`]}
+                            ${styles[`mt-10`]}
+                            ${styles[`mr-10`]}
+                            ${styles[`ml-10`]}
+                            `
+                          }
+                        >
+                          <div className={`${styles['width78']} ${styles['font-weight600']}`}>{ORDER_PAGE.SHIPPING}</div>
+                          <div className={`${styles['width22']} ${styles['font-weight600']}`}>
+                            {shipping_fees.display_value ? `(+) ${shipping_fees.currency_code} ${shipping_fees.display_value}` :
+                            <SVGComponent clsName={`${styles['ship-icon']}`} src={lang === 'en' ? 'icons/free-shipping' : 'icons/Arabic-Freeshipping'} />}
+                            </div>
+                          </div>
+                      </Col>
+                    </div>
+                  }
                   {
                     (product.isDamageProtectionAvailable !== 'NA' || product.isWarrantyAvailable !== 'NA') &&
                      <div>
                        <Col md={2}></Col>
                        <Col md={10}>
                          <div>{this.fetchpolicyDetails(product.tilaPolicy)}</div>
-                         <div
-                           className=
-                           {`
-                             ${styles['warranty-block']}
-                             ${styles['flex']}
-                             ${styles['align-end']}
-                             ${styles['padding-all']}
-                             `
-                           }
-                           >
-                           <div className={`${styles['width78']} ${styles['font-weight600']}`}>Total:</div>
-                           <div className={`${styles['width22']} ${styles['font-weight600']}`}>{final_price.display_value} {final_price.currency_code}</div>
-                         </div>
                        </Col>
                      </div>
                   }
+                  {
+                    <div>
+                      <Col md={2}></Col>
+                      <Col md={10}>
+                        <div
+                          className=
+                          {`
+                            ${styles['warranty-block']}
+                            ${styles['flex']}
+                            ${styles['align-end']}
+                            ${styles['padding-all']}
+                            ${styles[`mt-0`]}
+                            ${styles[`mb-10`]}
+                            ${styles[`mr-10`]}
+                            ${styles[`ml-10`]}
+                            `
+                          }
+                          >
+                          <div className={`${styles['width78']} ${styles['font-weight600']}`}>Total:</div>
+                          <div className={`${styles['width22']} ${styles['font-weight600']}`}>{final_price.display_value} {final_price.currency_code}</div>
+                        </div>
+                      </Col>
+                    </div>
+                  }
+
               </React.Fragment>
+
             );
           })}
         </Col>
