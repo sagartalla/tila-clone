@@ -192,7 +192,7 @@ class PageData extends React.Component {
       case 'BT7': {
         const { banners } = content.data[lang];
         return (
-          <Row className={`${styles['mt-15']} ${styles['mb-15']} ${styles['ml-0']} ${styles['mr-0']}`}>
+          <Row className={`${styles['mt-15']} ${styles['mb-15']} ${styles['ml-0']} ${styles['mr-0']} ${styles.bannerSpacing}`}>
             {content.data[lang].title &&
               <h3 className={`${styles['thick-gry-clr']} ${styles['fs-20']} ${styles['mt-0']} ${styles['pl-10']} ${styles['pr-10']}`}>{content.data[lang].title}</h3>}
             <div className={`${styles['banner-prt-main']}`}>
@@ -273,7 +273,7 @@ class PageData extends React.Component {
 
             </div>
 
-            <div className={`${styles['thick-gry-clr']} ${styles['fs-14']} ${styles['mt-10']} ${styles.pointer}`}>
+            <div className={`${styles['thick-gry-clr']} ${styles['fs-14']} ${styles['mt-10']} ${styles.pointer} ${styles.breadcrumbML}`}>
               {breadcrumb && breadcrumb.length > 0 &&
                 breadcrumb.map((bc, idx) => (
                   <React.Fragment>
@@ -381,14 +381,14 @@ class PageData extends React.Component {
               <div>
                 <a href={banners[0].link}>
                   <div className={styles.shadow}>
-                    <img src={banners[0].img} width={banners[0].config.width} height={banners[0].config.height} alt="" className={styles['img-responsive']}  />
+                    <img src={banners[0].img} alt="" className={styles['img-responsive']}  />
                   </div>
                 </a>
               </div>
               <div>
                 <a href={banners[1].link}>
                   <div className={styles.shadow}>
-                    <img src={banners[1].img} width={banners[1].config.width} height={banners[1].config.height} alt="" className={styles['img-responsive']} />
+                    <img src={banners[1].img} alt="" className={styles['img-responsive']} />
                   </div>
                 </a>
               </div>
@@ -397,14 +397,14 @@ class PageData extends React.Component {
               <div>
                 <a href={banners[2].link}>
                   <div className={styles.shadow}>
-                    <img src={banners[2].img} width={banners[2].config.width} height={banners[2].config.height} alt="" className={styles['img-responsive']} />
+                    <img src={banners[2].img} alt="" className={styles['img-responsive']} />
                   </div>
                 </a>
               </div>
               <div>
                 <a href={banners[3].link}>
                   <div className={styles.shadow}>
-                    <img src={banners[3].img} width={banners[3].config.width} height={banners[3].config.height} alt="" className={styles['img-responsive']} />
+                    <img src={banners[3].img} alt="" className={styles['img-responsive']} />
                   </div>
                 </a>
               </div>
@@ -413,12 +413,12 @@ class PageData extends React.Component {
               <div>
                 <a href={banners[4].link}>
                   <div className={styles.shadow}>
-                    <img src={banners[4].img} width={banners[4].config.width} height={banners[4].config.height} alt="" className={styles['img-responsive']} />
+                    <img src={banners[4].img}  alt="" className={styles['img-responsive']} />
                   </div>
                 </a>
               </div>
             </div>
-            <div className={`${styles['thick-gry-clr']} ${styles['fs-14']} ${styles['mt-10']} ${styles.pointer}`}>
+            <div className={`${styles['thick-gry-clr']} ${styles['fs-14']} ${styles['mt-10']} ${styles.pointer} ${styles.breadcrumbML}`}>
               {breadcrumb && breadcrumb.length > 0 &&
                 breadcrumb.map((bc, idx) => (
                   <React.Fragment>
@@ -440,7 +440,7 @@ class PageData extends React.Component {
               <div className= {styles.d11}>
                 <a href={banners[0].link}>
                   <div>
-                    <img src={banners[0].img} width={banners[0].config.width} height={banners[0].config.height} alt="" className = {`${styles['img-responsive']} ${styles['border-radius4']}`}  />
+                    <img src={banners[0].img}  alt="" className = {`${styles['img-responsive']} ${styles['border-radius4']}`}  />
                   </div>
                 </a>
               </div>
@@ -448,7 +448,7 @@ class PageData extends React.Component {
               <div className= {styles.d12}>
                 <a href={banners[1].link}>
                   <div>
-                    <img src={banners[1].img} width={banners[1].config.width} height={banners[1].config.height} alt="" className = {`${styles['img-responsive']} ${styles['border-radius4']}`} />
+                    <img src={banners[1].img}   alt="" className = {`${styles['img-responsive']} ${styles['border-radius4']}`} />
                   </div>
                 </a>
               </div>
@@ -458,21 +458,21 @@ class PageData extends React.Component {
                 <div>
                   <a href={banners[2].link}>
                     <div>
-                      <img src={banners[2].img} width={banners[2].config.width} height={banners[2].config.height} alt="" className = {`${styles['img-responsive']} ${styles['border-radius4']}`} />
+                      <img src={banners[2].img}   alt="" className = {`${styles['img-responsive']} ${styles['border-radius4']}`} />
                     </div>
                   </a>
                 </div>
                 <div>
                   <a href={banners[3].link}>
                     <div>
-                      <img src={banners[3].img} width={banners[3].config.width} height={banners[3].config.height} alt="" className = {`${styles['img-responsive']} ${styles['border-radius4']}`} />
+                      <img src={banners[3].img}  alt="" className = {`${styles['img-responsive']} ${styles['border-radius4']}`} />
                     </div>
                   </a>
                 </div>
                 <div>
                   <a href={banners[4].link}>
                     <div>
-                      <img src={banners[4].img} width={banners[4].config.width} height={banners[4].config.height} alt="" className = {`${styles['img-responsive']} ${styles['border-radius4']}`} />
+                      <img src={banners[4].img}   alt="" className = {`${styles['img-responsive']} ${styles['border-radius4']}`} />
                     </div>
                   </a>
                 </div>
@@ -482,38 +482,26 @@ class PageData extends React.Component {
                 <div>
                   <a href={banners[5].link}>
                     <div>
-                      <img src={banners[5].img} width={banners[5].config.width} height={banners[5].config.height} alt="" className = {`${styles['img-responsive']} ${styles['border-radius4']}`} />
+                      <img src={banners[5].img}  alt="" className = {`${styles['img-responsive']} ${styles['border-radius4']}`} />
                     </div>
                   </a>
                 </div>
                 <div>
                   <a href={banners[6].link}>
                     <div>
-                      <img src={banners[6].img} width={banners[6].config.width} height={banners[6].config.height} alt="" className = {`${styles['img-responsive']} ${styles['border-radius4']}`} />
+                      <img src={banners[6].img}  alt="" className = {`${styles['img-responsive']} ${styles['border-radius4']}`} />
                     </div>
                   </a>
                 </div>
                 <div>
                   <a href={banners[7].link}>
                     <div>
-                      <img src={banners[7].img} width={banners[7].config.width} height={banners[7].config.height} alt="" className = {`${styles['img-responsive']} ${styles['border-radius4']}`} />
+                      <img src={banners[7].img}  alt="" className = {`${styles['img-responsive']} ${styles['border-radius4']}`} />
                     </div>
                   </a>
                 </div>
               </div>
 
-            </div>
-
-              <div className={`${styles['thick-gry-clr']} ${styles['fs-14']} ${styles['mt-10']} ${styles.pointer}`}>
-              {breadcrumb && breadcrumb.length > 0 &&
-                breadcrumb.map((bc, idx) => (
-                  <React.Fragment>
-                    <a className={styles['thick-gry-clr']} href={bc.link}>
-                      <span>{bc.display_name}</span>
-                    </a>
-                    {breadcrumb.length - 1 !== idx && <span className={`${styles['ml-5']} ${styles['mr-5']}`}>|</span>}
-                  </React.Fragment>
-                ))}
             </div>
 
           </div>
@@ -529,7 +517,7 @@ class PageData extends React.Component {
             <div className = {styles.cbt3a}>
               <div className={styles.heading}>
                 <h1>Just Arrived</h1>
-                <p style={{color: "#666666"}}>Go with trend</p>
+                <p style={{color: "#666666", fontSize: '16px'}}>Go with trend</p>
               </div>
               <div className={styles.wrapper}>
                 <div className={styles.img1}>
@@ -559,25 +547,23 @@ class PageData extends React.Component {
           <div className={`${styles['display-t-i-f']}`} >
             <div className={`${styles['fs-20']} ${styles.title}`}>{title}</div>
             <div className={styles.cbt2aBanner}>
-                <div className={styles.cbt2aBG}>
+                <div className={styles.F1banner}>
                     <a href={banners[0].link}>
                       <div>
-                        <img src={banners[0].img} width={banners[0].config.width} height={banners[0].config.height}/>
+                        <img src={banners[0].img}/>
                       </div>
                     </a>
                   </div>
-                <div className={styles.setWidth1}>
-                  <div className={styles.trendingImg}>
-                      <a href={banners[3].link}>
+                <div className={styles.F2banner}>
+                  <div>
+                      <a href={banners[1].link}>
                         <div>
-                          <img src={banners[1].img} width={banners[0].config.width} height={banners[0].config.height}/>
+                          <img src={banners[1].img} />
                         </div>
                       </a>
                   </div>
                 </div>
             </div>
-
-
           </div>
           )
       }
