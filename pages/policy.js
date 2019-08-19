@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import NoSSR from 'react-no-ssr';
 import { bindActionCreators } from 'redux';
 import withRedux from 'next-redux-wrapper';
 import makeStore from '../store';
@@ -19,10 +20,12 @@ class PolicyPage extends Base {
     return (
       <div>
         <Layout>
-          <Policy query={url.query} key={url.query.name}/>
+          <NoSSR>
+            <Policy query={url.query} key={url.query.name}/>
+          </NoSSR>
         </Layout>
       </div>
-    ) 
+    )
   }
 };
 
