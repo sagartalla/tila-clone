@@ -107,8 +107,7 @@ const Tabs = ({ children, onCallback,value }) => {
   )
 }
 const InstaCheckoutDetails = ({ details, selectedAddr,addressResults,showMiniAddress,isPdp,...props }) => {
- const [value,setValue] = useState(0)
-
+ const [value,setValue] = useState(details.payment_options_available.length === 1 && details.payment_options_available[0].type === 'VOUCHER' ? 'VOUCHER' : 'SAVED_CARD');
  const getCheckValue = (data) => {
    let filteredData = data.payment_options_available.filter((item) => item.type === 'VOUCHER')
    if(filteredData.length > 0) {
@@ -122,22 +121,24 @@ const InstaCheckoutDetails = ({ details, selectedAddr,addressResults,showMiniAdd
  const [checkValue,setCheckValue] = useState(getCheckValue(details))
 
  const checkTilaCreditValue = (e) => {
-
-   props.selectedTilaCredit(e.target.checked)
-   return setCheckValue(e.target.checked)
+   props.selectedTilaCredit(e.target.checked);
+   setValue(e.target.checked ? ( details.payment_options_available.length === 1 && details.payment_options_available[0].type === 'VOUCHER' ? 'VOUCHER' : 'SAVED_CARD' ) : 'SAVED_CARD');
+   return setCheckValue(e.target.checked);
  }
  const getCurrentTabValue = (e,value) => {
 
    return setValue(value)
  }
  const getTabPanelData = (data) => {
-   let filteredData = data.payment_options_available.filter((item) => {
-     return item.type !== 'VOUCHER'
-   })
+   let filteredData = data.payment_options_available;
+   let savedCards = data.payment_options_available.filter((item) => {
+     return item.type === 'SAVED_CARD'
+   })[0] || {};
+   savedCards = savedCards.cards_list;
    if(filteredData.length > 0) {
      return filteredData.map((item,index) => {
        return (
-         <TabPanel value={value} index={index}>
+         <TabPanel value={value} index={item.type}>
            <div
              className={
                `${styles['border']}
@@ -168,12 +169,12 @@ const InstaCheckoutDetails = ({ details, selectedAddr,addressResults,showMiniAdd
                  : null
              }
              {
-               item.type === 'SAVED_CARD' && item.cards_list.length > 0 ?
+               (item.type === 'SAVED_CARD' || item.type === 'VOUCHER') && savedCards && savedCards.length > 0 ?
                  <Fragment>
                    <VaultCard
                      defaultCard={props.getSelectedCard[0]}
                      updateCVV={props.updateCVV}
-                     vaultResults={item.cards_list}
+                     vaultResults={savedCards}
                      toggleMiniVault={props.toggleMiniVault}
                    />
                    {
@@ -190,7 +191,7 @@ const InstaCheckoutDetails = ({ details, selectedAddr,addressResults,showMiniAdd
                  : null
              }
              {
-               item.type === 'SAVED_CARD' ?
+               item.type !== 'CASH_ON_DELIVERY' ?
                <div
                  className={`${styles['flex']} ${styles['justify-center']}`}
                >
@@ -261,9 +262,9 @@ const InstaCheckoutDetails = ({ details, selectedAddr,addressResults,showMiniAdd
                 return (
                   <Tab
                     label={`${item.type === 'SAVED_CARD' ? 'Credit/Debit Card' : 'COD'}`}
-                    value={index}
+                    value={item.type}
                     name={item.type}
-                    tabType='radioInput'
+                    tabType={item.type === 'VOUCHER' ? 'checkbox' : 'radioInput'}
                   />
                 )
               })
@@ -385,17 +386,17 @@ class InstantCheckout extends Component {
     const {
       creditDebitCard, cntryCode, phoneNumber,
     } = this.state;
-    const { defaultCard, insnt_item_listing_id, doInstantCheckout, getCardDetails,getSelectedCard } = this.props;
-    const { transaction_id } = getCardDetails;
+    const { defaultCard, insnt_item_listing_id, doInstantCheckout, getCardDetails, getSelectedCard, details } = this.props;
+    const { transaction_id, payment_options_available } = getCardDetails;
 
     const params = {
       listing_ids: insnt_item_listing_id ? [insnt_item_listing_id] : [],
-      payment_mode: creditDebitCard ? 'SAVED_CARD' : 'CASH_ON_DELIVERY',
+      payment_mode: (payment_options_available.length === 1 && payment_options_available[0].type === 'VOUCHER') ? 'VOUCHER' : (creditDebitCard ? 'SAVED_CARD' : 'CASH_ON_DELIVERY'),
       redirect_url: `${window.location.origin}/${language}`,
       transaction_id
     };
 
-    if (creditDebitCard) {
+    if (!(payment_options_available.length === 1 && payment_options_available[0].type === 'VOUCHER') && creditDebitCard) {
       params.card_token = getSelectedCard[0].card_token;
     } else params.phone_number = phoneNumber ? `${cntryCode} ${phoneNumber}` : '';
 
