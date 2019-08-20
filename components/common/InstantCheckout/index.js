@@ -306,6 +306,7 @@ class InstantCheckout extends Component {
       nextStep: 'captcha',
       btnLoader: false,
       iframe_url: '',
+      isIframeLoaded:false,
     }
 
     this.updateCVV = this.updateCVV.bind(this);
@@ -322,6 +323,7 @@ class InstantCheckout extends Component {
     this.afterSuccessOtpVerification = this.afterSuccessOtpVerification.bind(this)
     this.callInstantCheckout = this.callInstantCheckout.bind(this)
     this.selectedTilaCredit = this.selectedTilaCredit.bind(this)
+    this.hideIframe = this.hideIframe.bind(this)
   }
 
   componentDidMount() {
@@ -337,6 +339,12 @@ class InstantCheckout extends Component {
     }
     this.props.getCheckoutOptions(params)
     this.props.getUserProfileInfo();
+  }
+  hideIframe() {
+    this.setState({
+      isIframeLoaded:false
+    })
+
   }
   selectedTilaCredit(value){
     const { currency, moneyValue,getCardDetails } = this.props;
@@ -355,7 +363,7 @@ class InstantCheckout extends Component {
       location.href = nextProps.getInstantCheckoutdata.redirect_url;
     }
     if(nextProps.getInstantCheckoutdata && nextProps.getInstantCheckoutdata.iframe_url) {
-      this.setState({ iframe_url:nextProps.getInstantCheckoutdata.iframe_url })
+      this.setState({ iframe_url:nextProps.getInstantCheckoutdata.iframe_url,isIframeLoaded: true })
     }
   }
   closeModal() {
@@ -485,8 +493,19 @@ class InstantCheckout extends Component {
     return (
       <div className={`${styles['instant-checkout']} ${styles['p-10']}`}>
         {
-          iframe_url ?
-          <iframe sandbox="allow-forms allow-modals allow-popups-to-escape-sandbox allow-popups allow-scripts allow-top-navigation allow-same-origin" src={iframe_url} style={{ height: '426px', width: '500px', border: '0' }} class="h-200 desktop:h-376 w-full"></iframe>
+          iframe_url ? 
+            {
+              true:<iframe sandbox="allow-forms allow-modals allow-popups-to-escape-sandbox allow-popups allow-scripts allow-top-navigation allow-same-origin" src={iframe_url} style={{ height: '426px', width: '500px', border: '0' }} class="h-200 desktop:h-376 w-full"></iframe>,
+              false:<Modal
+                show={this.state.isIframeLoaded}
+                onHide={this.hideIframe}
+                dialogClassName="custom-modal"
+              >
+              <Modal.Body>
+                <iframe sandbox="allow-forms allow-modals allow-popups-to-escape-sandbox allow-popups allow-scripts allow-top-navigation allow-same-origin" src={iframe_url} style={{ height: '426px', width: '500px', border: '0' }} class="h-200 desktop:h-376 w-full"></iframe>
+              </Modal.Body>
+            </Modal>,
+            }[isPdp]
           :
           <div className={`${styles['pr-10']} ${styles['pl-10']}`}>
              {
@@ -618,7 +637,7 @@ InstantCheckout.propTypes = {
 };
 
 InstantCheckout.defaultProps = {
-
+  isPdp:false
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(InstantCheckout);
