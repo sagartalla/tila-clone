@@ -276,7 +276,7 @@ export const EN_KEYWORDS = {
     OUT_OF_STOCK: 'Out of stock',
     THANKS_FOR_RATING: 'Thanks for Rating',
     THANKS_DESCRIPTION: 'Thanks for taking your time to rate the product, this will help millions of users like you to make better purchase judgement',
-    MAX_LENGTH: 'Max Length',
+    MAX_LENGTH: 'characters left',
     ITEM_LOCATION: 'Item Location',
   },
   VAULT_PAGE: {
@@ -439,6 +439,7 @@ export const EN_KEYWORDS = {
     MAXIMUN_TEXT_EXCEEDED: 'Maximum search text exceeded',
     YOUR_ENTERED: 'You entered',
     AUTO_CORRECTED: 'Auto corrected',
+    APPLY_FILTERS: 'Apply Filters',
   },
   // adding new page content
   FOOTER_PAGE: {

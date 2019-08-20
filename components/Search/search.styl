@@ -1,5 +1,24 @@
 @import '../../layout/main/executables.styl';
 
+.filter-panel::-webkit-scrollbar,
+.filter-panel::-webkit-scrollbar-thumb 
+  overflow:visible;
+  border-radius: 4px;
+
+.filter-panel::-webkit-scrollbar-thumb 
+  background: rgba(0,0,0,.2); 
+
+.filter-panel:hover .cover-bar {
+   opacity: 0;
+  -webkit-transition: all .5s;
+}
+
+.brands-list::-webkit-scrollbar,
+.brands-list::-webkit-scrollbar-thumb 
+  overflow:visible;
+  border-radius: 4px;
+  background: rgba(0,0,0,.2);
+
 .filter-panel
   // width: 215px;
   border: 1px solid #e5e5e5;
@@ -52,11 +71,14 @@
     padding-bottom 4px
     border-right 1px solid light-brdr
     border-bottom 1px solid light-brdr
+    outline none
+    position relative
     a
       text-decoration none
       position relative
       float left
       width 100%
+      outline none      
     .loader-div
        width 20px
        height 20px
@@ -457,7 +479,6 @@
     display flex
     width 100%
     .category-label
-      display flex
       width 84%
       .category-span
         overflow hidden
@@ -680,16 +701,49 @@
   border-bottom: 13px solid #f1f2f4;
 }
 .search-header
-  width 84%
-  margin-left 18px
   position relative
   .icon-search {
     width 12px
     height 12px
     position absolute
     left 0
-    top 10px
+    top 8px
   }
-  .pl-18 {
-    padding-left 18px
+  .pl-25 {
+    padding-left 25px
   }
+
+.border-left
+  border-bottom-left-radius 16px
+
+.main-popup
+  width 760px
+
+.brands-list
+  overflow-x auto
+  white-space nowrap
+  border-radius 2px
+  height 400px
+  display flex
+  flex-wrap wrap
+  flex-direction column
+  margin 10px 0
+
+.active
+  color black !important
+  font-family ProximaNova-Bold
+  border-bottom 2px solid
+
+.select-checkbox-width
+  width 250px
+
+.notifyme-msg
+  background black
+  color white
+  border-radius 3px
+  border solid 1px #979797
+  position absolute
+  width 100%
+  bottom 0
+  height 35px
+
