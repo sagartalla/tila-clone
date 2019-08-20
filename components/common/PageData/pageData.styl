@@ -290,7 +290,10 @@
     object-fit contain    
 
 
-.display-t-i-f
+.flex-prop
+  display flex
+  width 100%
+
   .d12
     width 16.7%;
     padding 0 5px
@@ -311,14 +314,6 @@
       width 33.3%
       padding 0 5px
 
-.flex-prop
-  display flex
-  width 100%
-  div 
-    img.img-responsive
-      max-width 100%
-      max-height 100%
-
 .cbt3a
   width 100%
   .heading 
@@ -330,17 +325,17 @@
     display flex
 
     .img1 
-      width 27.62%
+      width 27.75%
       display flex
       padding 0 5px
     
     .img2 
-      width 30.23%
+      width 30.3%
       padding 0 5px
       display flex
   
   .img3 
-      width 42.15%
+      width 41.96%
       display flex
       padding 0 5px
   
@@ -352,17 +347,34 @@
   padding-left 5px
 
 .cbt2aBanner
-  width calc(100% - 26px)
-  margin auto
   display flex
-
+  img 
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
   .F1banner
-    width 60.6%
-    padding 0 34px 0 0 
-    img
-      width 100%
+    width 58.52%
+    padding 5px
+
   .F2banner
-    width 39.4%
-    padding 0 0 0 34px
-    img 
-      width 100%
+    width 41.62%
+    padding 5px
+
+.fashionBanners   
+  padding 0 5px
+  .fBanners2
+    display flex
+    justify-content center
+    width 71.08%
+    margin auto
+    margin-top -10%
+
+.imgResolution
+  max-width 100%
+  max-height 100%
+
+.bannerSpacing
+  margin 30px 0
+
+
+

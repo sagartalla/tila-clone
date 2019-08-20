@@ -136,6 +136,9 @@ class PageData extends React.Component {
             </Slider>
           </div>
         );
+
+
+
       // case 'BT9':
       //   return (
       //     <div className={styles['ff-t-i']}>
@@ -435,12 +438,12 @@ class PageData extends React.Component {
       case 'CBT8a': {
         const { banners, breadcrumb, title } = content.data[lang];
         return (
-          <div className={`${styles['display-t-i-f']} ${styles['flex-prop']}`} >
+          <div className={`${styles['flex-prop']} ${styles['bannerSpacing']}`} >
             <div className={`${styles['fs-20']} ${styles.title}`}>{title}</div>
               <div className= {styles.d11}>
                 <a href={banners[0].link}>
                   <div>
-                    <img src={banners[0].img}  alt="" className = {`${styles['img-responsive']} ${styles['border-radius4']}`}  />
+                    <img src={banners[0].img}  alt="" className = {`${styles['img-responsive']} ${styles.imgResolution} ${styles['border-radius4']}`}  />
                   </div>
                 </a>
               </div>
@@ -448,7 +451,7 @@ class PageData extends React.Component {
               <div className= {styles.d12}>
                 <a href={banners[1].link}>
                   <div>
-                    <img src={banners[1].img}   alt="" className = {`${styles['img-responsive']} ${styles['border-radius4']}`} />
+                    <img src={banners[1].img}   alt="" className = {`${styles['img-responsive']} ${styles.imgResolution} ${styles['border-radius4']}`} />
                   </div>
                 </a>
               </div>
@@ -458,21 +461,21 @@ class PageData extends React.Component {
                 <div>
                   <a href={banners[2].link}>
                     <div>
-                      <img src={banners[2].img}   alt="" className = {`${styles['img-responsive']} ${styles['border-radius4']}`} />
+                      <img src={banners[2].img}   alt="" className = {`${styles['img-responsive']} ${styles.imgResolution} ${styles['border-radius4']}`} />
                     </div>
                   </a>
                 </div>
                 <div>
                   <a href={banners[3].link}>
                     <div>
-                      <img src={banners[3].img}  alt="" className = {`${styles['img-responsive']} ${styles['border-radius4']}`} />
+                      <img src={banners[3].img}  alt="" className = {`${styles['img-responsive']} ${styles.imgResolution} ${styles['border-radius4']}`} />
                     </div>
                   </a>
                 </div>
                 <div>
                   <a href={banners[4].link}>
                     <div>
-                      <img src={banners[4].img}   alt="" className = {`${styles['img-responsive']} ${styles['border-radius4']}`} />
+                      <img src={banners[4].img}   alt="" className = {`${styles['img-responsive']} ${styles.imgResolution} ${styles['border-radius4']}`} />
                     </div>
                   </a>
                 </div>
@@ -482,21 +485,21 @@ class PageData extends React.Component {
                 <div>
                   <a href={banners[5].link}>
                     <div>
-                      <img src={banners[5].img}  alt="" className = {`${styles['img-responsive']} ${styles['border-radius4']}`} />
+                      <img src={banners[5].img}  alt="" className = {`${styles['img-responsive']} ${styles.imgResolution} ${styles['border-radius4']}`} />
                     </div>
                   </a>
                 </div>
                 <div>
                   <a href={banners[6].link}>
                     <div>
-                      <img src={banners[6].img}  alt="" className = {`${styles['img-responsive']} ${styles['border-radius4']}`} />
+                      <img src={banners[6].img}  alt="" className = {`${styles['img-responsive']} ${styles.imgResolution} ${styles['border-radius4']}`} />
                     </div>
                   </a>
                 </div>
                 <div>
                   <a href={banners[7].link}>
                     <div>
-                      <img src={banners[7].img}  alt="" className = {`${styles['img-responsive']} ${styles['border-radius4']}`} />
+                      <img src={banners[7].img}  alt="" className = {`${styles['img-responsive']} ${styles.imgResolution} ${styles['border-radius4']}`} />
                     </div>
                   </a>
                 </div>
@@ -512,7 +515,7 @@ class PageData extends React.Component {
       case 'CBT3a' : {
         const { banners, breadcrumb, title } = content.data[lang];
         return (
-          <div className={`${styles['display-t-i-f']} ${styles['flex-prop']}`} >
+          <div className={`${styles['flex-prop']} ${styles['bannerSpacing']}`} >
             <div className={`${styles['fs-20']} ${styles.title}`}>{title}</div>
             <div className = {styles.cbt3a}>
               <div className={styles.heading}>
@@ -544,7 +547,7 @@ class PageData extends React.Component {
       case 'CBT2a': {
         const { banners, breadcrumb, title } = content.data[lang];
         return (
-          <div className={`${styles['display-t-i-f']}`} >
+          <div className={styles.bannerSpacing}>
             <div className={`${styles['fs-20']} ${styles.title}`}>{title}</div>
             <div className={styles.cbt2aBanner}>
                 <div className={styles.F1banner}>
@@ -566,6 +569,63 @@ class PageData extends React.Component {
             </div>
           </div>
           )
+      }
+
+
+
+      case 'CBT6c': {
+        const { banners, breadcrumb, title } = content.data[lang];
+        return(
+          <div className={`${styles.fashionBanners} ${styles['bannerSpacing']}`}>
+            <div className={styles.fBanners1} style={{display: 'flex'}}>
+              <div className={styles.fb3} style={{width: '33.33%'}}>
+                <a href={banners[0].link}>
+                  <div>
+                   <img src={banners[0].img} alt="" className={styles.imgResolution} />
+                  </div>
+                </a>
+              </div>
+              <div className={styles.fb3} style={{width: '33.33%'}}>
+                <a href={banners[1].img}>
+                  <div>
+                   <img src={banners[1].img} alt="" className={styles.imgResolution}/>
+                  </div>
+                </a>
+              </div>
+              <div className={styles.fb3} style={{width: '33.33%'}}>
+                <a href={banners[2].link}>
+                  <div>
+                   <img src={banners[2].img} alt="" className={styles.imgResolution} />
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <div className={styles.fBanners2}>
+              <div className={styles.fb2}>
+                <a href={banners[3].link}>
+                  <div>
+                   <img src={banners[3].img} alt="" className={styles.imgResolution} />
+                  </div>
+                </a>
+              </div>
+              <div className={styles.fb1}>
+                <a href={banners[4].link}>
+                  <div>
+                   <img src={banners[4].img} alt="" className={styles.imgResolution} />
+                  </div>
+                </a>
+              </div>
+              <div className={styles.fb2}>
+                <a href={banners[5].link}>
+                  <div>
+                   <img src={banners[5].img} alt="" className={styles.imgResolution} />
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        )
       }
 
 
