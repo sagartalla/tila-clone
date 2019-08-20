@@ -184,6 +184,7 @@ export const EN_KEYWORDS = {
     PRICE_INCREASED_BY: 'Price Increased by',
   },
   PDP_PAGE: {
+    ITEM_IN_CART: 'Item in Cart',
     LOADING_REVIEWS: 'Loading Reviews...',
     REVIEW_ALL_TAB: 'All Reviews',
     REVIEW_EXPERT_TAB: 'Expert Reviews',

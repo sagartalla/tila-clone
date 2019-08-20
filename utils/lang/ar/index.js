@@ -181,6 +181,7 @@ export const AR_KEYWORDS = {
     PRICE_INCREASED_BY: 'Price Increased by',
   },
   PDP_PAGE: {
+    ITEM_IN_CART: 'Item in Cart',
     LOADING_REVIEWS: 'تحميل تعليقات المستخدم',
     REVIEW_ALL_TAB: 'جميع التعليقات',
     REVIEW_EXPERT_TAB: 'تعليقات الخبراء',

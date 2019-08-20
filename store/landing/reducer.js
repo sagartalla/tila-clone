@@ -9,6 +9,9 @@ const initialState = {
   data: {},
   listings: {},
   error: {},
+  items: {
+    content: [],
+  },
 };
 const productReducer = typeToReducer({
   [actions.GET_PAGE]: {
@@ -39,6 +42,15 @@ const productReducer = typeToReducer({
         ...state.listings,
         [action.payload.index]: [],
       },
+    }),
+  },
+  [actions.GET_ALL_ZONE_ITEMS]: {
+    PENDING: state => Object.assign({}, state, { ui: { loading: true } }),
+    FULFILLED: (state, action) => Object.assign({}, state, {
+      items: action.payload.data, ui: { loading: true },
+    }),
+    REJECTED: (state, action) => Object.assign({}, state, {
+      error: action.payload.message, ui: { loading: false },
     }),
   },
 }, initialState);
