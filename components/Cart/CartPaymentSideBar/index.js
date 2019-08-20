@@ -183,24 +183,7 @@ class CartAndPaymentSideBar extends Component {
                 <li>
                   <span className={styles['thick-gry-clr']}>{CART_PAGE.GIFT_CHARGES}</span>
                   <span>{total_gift_charges.display_value} {total_gift_charges.currency_code || currency}</span>
-                </li>}
-                {
-                tax !== 0 ?
-                  <li>
-                    <span className={styles['thick-gry-clr']}>{CART_PAGE.TAXES}</span>
-                    <span>{currency}</span>
-                  </li> : null
-                }
-                <li className={`${styles['mt-20']} ${styles['fs-16']} ${styles['light-gry-clr']}`}>
-                  <b>{CART_PAGE.TOTAL_AMOUNT}</b>
-                  <span className={`${styles.flex} ${styles['flex-colum']} ${styles['t-rt']}`}>
-                    <span className={styles.fontW600}>{`${total_price.display_value} ${total_price.currency_code || currency}`}</span>
-                    {total_discount.money_value > 0 ?
-                      <span className={`${styles['fs-12']} ${styles['thick-red']} ${styles['t-rt']}`}>{CART_PAGE.YOU_SAVED} {total_discount.display_value} {total_discount.currency_code || currency}</span>
-                      : null
-                    }
-                  </span>
-                </li>
+                </li>}                
               </ul>
             </div> : null
         }
