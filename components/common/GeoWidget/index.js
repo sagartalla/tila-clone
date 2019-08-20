@@ -26,10 +26,10 @@ class GeoWidget extends Component {
     const shippingInfo = cookies.get('shippingInfo');
     super(props);
     this.state = {
+      displayCity: '',
       ...props.geoShippingData,
       ...shippingInfo,
       showCitiesData: false,
-      displayCity: '',
     };
     this.deriveCity = this.deriveCity.bind(this);
     this.onChangeCity = this.onChangeCity.bind(this);
