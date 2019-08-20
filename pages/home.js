@@ -8,15 +8,24 @@ import makeStore from '../store';
 import Layout from '../layout/main';
 import FTB from '../components/Ftb';
 import Base, { baseActions } from './base';
-import { actionCreators as LandingactionCreators } from '../store/landing';
+import { actionCreators as landingactionCreators } from '../store/landing';
 
 class Home extends Base {
   pageName = 'HOME_PAGE'
   static async getInitialProps({
-    store, isServer,
+    store, isServer, query,
   }) {
+    const params = {
+      page: 'homePage',
+      id: 'home_page',
+    };
+    if (query.category) {
+      params.page = 'mainCategoryPage';
+      params.id = query.category;
+    }
+
     await Promise.all([
-      store.dispatch(LandingactionCreators.getPage({ page: 'homePage', id: 'home_page' })),
+      store.dispatch(landingactionCreators.getPage(params)),
     ]);
     return { isServer };
   }

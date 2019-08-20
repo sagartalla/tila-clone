@@ -6,8 +6,8 @@ import SVGCompoent from '../../../common/SVGComponet';
 import {languageDefinations} from '../../../../utils/lang';
 import RenderFilterBar from './searchInput';
 
-const {SEARCH_PAGE} = languageDefinations()
-const MaxItems = 3;
+const {SEARCH_PAGE} = languageDefinations();
+const MaxItems = 6;
 
 import lang from '../../../../utils/language';
 
@@ -52,12 +52,13 @@ class CheckboxFacet extends Component {
   onFilterData(value) {
     const { filter } = this.props;
     let items = filter.children.filter((item) => {
-      return item.name.toLowerCase().indexOf(value) !== -1
-    })
+      return item.name.toLowerCase().indexOf(value) > -1;
+    });
     this.setState({
-      filterItems:items
-    })
+      filterItems: items,
+    });
   }
+
   onChangeItem(value) {
     return (e) => {
       const newSelectedItem = [...this.state.selectedItems];
@@ -68,18 +69,25 @@ class CheckboxFacet extends Component {
       }
       this.setState({
         selectedItems: newSelectedItem,
+      }, () => {
+        this.props.selectedCheckbox(this.state.selectedItems)();
       });
       this.props.onChangeHandle(value, e);
     };
   }
 
-  toggleMore() {
+  toggleMore(e) {
     const { filter } = this.props;
-
+    const { selectedFilters } = this.props;
+    const { attributeName } = this.state;
     this.setState({
       maxRows: this.state.maxRows === filter.children.length ? MaxItems : filter.children.length,
-      filterItems:this.sortSelectedItems(this.state.selectedItems)
+      filterItems: this.sortSelectedItems(this.state.selectedItems),
+    }, () => {
+      this.state.filterItems.length > 20 &&
+      this.props.showBrandsModal(filter, this.state.filterItems, selectedFilters, attributeName)();
     });
+    this.props.selectedCheckbox(this.state.selectedFilters)();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -88,15 +96,17 @@ class CheckboxFacet extends Component {
     this.setState({
       isMoreButtonRequired: filter.children.length > MaxItems,
       selectedItems: (facets[attributeName] || []).map(f => f),
+      attributeName,
       filterItems: nextProps.selectedFilters.length > 0 ?
         this.sortSelectedItems(nextProps.selectedFilters) : filter.children,
     });
   }
 
   render() {
-    const { filter, index, facets } = this.props;
+    const { filter, index, facets, showPopup } = this.props;
     const { selectedItems, maxRows, filterItems } = this.state;
     return (
+      <React.Fragment>
       <Panel eventKey={`${index + 'c'}`} key={filter.id}>
         <div className={`${styles['category-list']}`}>
           <Panel.Heading className={styles['category-list-head']}>
@@ -106,31 +116,33 @@ class CheckboxFacet extends Component {
             </Panel.Title>
           </Panel.Heading>
           <Panel.Body collapsible className={`${styles['border-b']}`}>
-            { maxRows > 8  ?
+            { maxRows > 10 && maxRows < 20 ?
               <RenderFilterBar
                 onFilterData={this.onFilterData}
                 placeName={`Search ${filter.name}`}
+                className={`${styles['ml-20']}`}               
               /> :
               null
             }
             <ul className={`${styles['category-sub-list']} ${styles['pl-20']} ${styles['pt-15']}`}>
               {
-                filterItems.slice(0, maxRows).map(childFitler => (
+                filterItems.slice(0, maxRows > 20 ? 6 : maxRows).map(childFitler => (
                   <li key={childFitler.id} className={styles['category-sub-list-inn']}>
                     <div className={`${styles['checkbox-material']} ${styles['select-check-mate']}`}>
                       <input id={childFitler.param} type="checkbox" onChange={this.onChangeItem({ name: childFitler.name, param: childFitler.param })} checked={selectedItems.indexOf(childFitler.name) !== -1} />
-                      <label htmlFor={childFitler.param} className={`${styles['fs-12']} ${styles['category-label']}`}> <span className={styles['category-span']}>{childFitler.name}</span> <span className={styles['thick-gry-clr']}>{childFitler.count ? `${childFitler.count}` : ''}</span> </label>
+                      <label htmlFor={childFitler.param} className={`${styles['fs-12']} ${styles.flex} ${styles['category-label']}`}> <span className={styles['category-span']}>{childFitler.name}</span> <span className={styles['thick-gry-clr']}>{childFitler.count ? `${childFitler.count}` : ''}</span> </label>
                     </div>
                   </li>
                 ))
               }
               {
-                this.state.isMoreButtonRequired ? <li onClick={this.toggleMore}><a>{maxRows === filter.children.length ? `-${SEARCH_PAGE.SHOW_LESS}` : `+ ${SEARCH_PAGE.SHOW_MORE}`}</a></li> : null
+                this.state.isMoreButtonRequired ? <li onClick={this.toggleMore}><a>{(maxRows < 21 && maxRows === filter.children.length) ? `-${SEARCH_PAGE.SHOW_LESS}` : `+ ${SEARCH_PAGE.SHOW_MORE}`}</a></li> : null
               }
             </ul>
           </Panel.Body>
         </div>
       </Panel>
+      </React.Fragment>
     );
   }
 }
@@ -139,10 +151,12 @@ CheckboxFacet.propTypes = {
   selectedFilters: PropTypes.array,
   onChangeHandle: PropTypes.func.isRequired,
   filter: PropTypes.object.isRequired,
+  showBrandsModal: PropTypes.func,
 };
 
 CheckboxFacet.defaultProps = {
   selectedFilters: [],
+  showBrandsModal: f => f,
 };
 
 export default CheckboxFacet;

@@ -72,7 +72,7 @@
   width 23px
   height 26px
 
-.display-t-i-e, .display-t-i-f, .display-t-i-hl
+.display-t-i-e, .display-t-i-f, .display-t-i-hl, .display-t-i-cb
   width calc(100% - 10px)
   position relative
   margin auto
@@ -93,11 +93,11 @@
     width 66.56%
     display inline-block
     &>div
-      padding 2px 5px
+      padding 5px
       // height 324px
   .d3
     &>div
-      padding 1px 5px
+      padding 5px
     .d-sub
       // height 324px
   .d3 .d3-sub
@@ -178,7 +178,7 @@
       .btn
         height: 6%;
         width: 30%;
-.display-t-i-f
+.display-t-i-f,.display-t-i-cb
   .title
     color #888b8d
   .d1, .d2, .d3
@@ -279,6 +279,13 @@
     margin-top 0.2em
     background white
 
+.display-t-i-cb
+  .img-responsive
+    width 100%
+    height auto
+    object-fit contain    
+    object-fit contain    
+
 
 .display-t-i-f
   .d12
@@ -310,3 +317,31 @@
       height auto
       object-fit contain
 
+
+.cbt3a
+  width 100%
+  .heading 
+    text-align center
+    h1 
+      font-size 48px  
+  .wrapper
+    display flex
+
+    .img1 
+      width 27.62%
+      display flex
+      padding 0 5px
+    
+    .img2 
+      width 30.23%
+      padding 0 5px
+      display flex
+  
+  .img3 
+      width 42.15%
+      display flex
+      padding 0 5px
+  
+.cbt3a img 
+  width 100%
+  object-fit contain

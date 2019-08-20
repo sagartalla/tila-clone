@@ -16,6 +16,10 @@
   outline: none !important;
 }
 
+#chatInlay {
+    right: -1000px;
+}
+
 @media (min-width: 1440px){
     .container {
         width: 1410px;
@@ -333,4 +337,8 @@
 }
 .home-slider .slick-next {
     top: 35%;
+}
+
+.facets-brands-modal .modal-content {
+   border: none !important;
 }

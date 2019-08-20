@@ -4,9 +4,9 @@ import Slider from 'react-slick';
 import Cookies from 'universal-cookie';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Col } from 'react-bootstrap';
 
 import { Link } from '../../../routes';
-import { Col } from 'react-bootstrap';
 import constants from '../../../constants';
 import SVGComponent from '../../common/SVGComponet';
 // import userAgent from '../../../utils/user-agent';
@@ -74,7 +74,7 @@ class Display extends Component {
   pauseVideo = () => {
     const { product_id } = this.props;
     const videos = Object.values(document.getElementsByClassName(`V_${product_id}`));
-    videos.map(video => video.stop());
+    videos.map(video => video.pause());
   }
 
   render() {

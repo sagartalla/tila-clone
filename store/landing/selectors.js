@@ -3,9 +3,7 @@ import _ from 'lodash';
 const getPage = store => store.landingReducer.data;
 
 const getCartStatus = (store, listingId) => {
-  const selectedCartItem = _.find(store.cartReducer.data.items, ({ listing_id }) => {
-    return listingId === listing_id;
-  });
+  const selectedCartItem = _.find(store.cartReducer.data.items, ({ listing_id }) => listingId === listing_id);
   return !!selectedCartItem;
 };
 

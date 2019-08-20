@@ -1,19 +1,21 @@
+import Cookies from 'universal-cookie';
 import { actionCreators } from '../auth';
+
+const cookies = new Cookies();
 
 const loginReq = (fn) => {
   return (...args) => (dispatch, getState) => {
     const state = getState();
     const ret = fn(...args);
-    if(state.authReducer.data.isLoggedIn){
-      if(typeof ret === 'function') {
+    const isLoggedIn = !!cookies.get('auth') || state.authReducer.data.isLoggedIn;
+    if (isLoggedIn) {
+      if (typeof ret === 'function') {
         return ret(dispatch, getState);
-      } else {
-        return dispatch(ret);
       }
-    } else {
-      dispatch(actionCreators.storePostLoginActionInfo(ret));
-      return dispatch(actionCreators.showLogin());
+      return dispatch(ret);
     }
+    dispatch(actionCreators.storePostLoginActionInfo(ret));
+    return dispatch(actionCreators.showLogin());
   };
 };
 

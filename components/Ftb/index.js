@@ -174,11 +174,11 @@ class FTB extends React.Component {
     return (
       <div>
         <HeaderBar />
-        <div className={`${styles['p-0']} container-fluid`}>
+        <div className={`${styles['p-0']} ${styles['land-page-mn-wdt']} container-fluid`}>
           {pageData && pageData.page_content.length > 0 &&
             pageData.page_content.map((content, index) => (
               <React.Fragment>
-                {index === 1 &&
+                {index === 1 && pageData.page_type === 'homePage' &&
                   <div className={styles['ff-t-i']}>
                     <div className={styles.e}>
                       <span className={`${styles.title} ${styles['fs-20']}`}>{lang === 'en' ? 'ELECTRONICS' : 'الكترونيات‎'}</span>
