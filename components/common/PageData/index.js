@@ -215,7 +215,7 @@ class PageData extends React.Component {
             <div className={`${styles['mr-10']} ${styles['flex']}`} style={{width:'33.7%'}}>
                <a href={banners[0].link}>
                   <div className={styles.shadow}>
-                    <img src={banners[0].img} width={banners[0].config.width} height={banners[0].config.height}  alt="" className={styles['img-responsive']} />
+                    <img src={banners[0].img}   alt="" className={styles['img-responsive']} />
                   </div>
                 </a>
             </div>
@@ -225,7 +225,7 @@ class PageData extends React.Component {
                   <div className={`${styles['mb-10']} ${styles['flex']}`}>
                     <a href={banners[1].link}>
                         <div className={styles.shadow}>
-                          <img src={banners[1].img} width={banners[1].config.width} height={banners[1].config.height}  alt="" className={styles['img-responsive']} />
+                          <img src={banners[1].img}   alt="" className={styles['img-responsive']} />
                         </div>
                       </a>
                   </div>
@@ -233,7 +233,7 @@ class PageData extends React.Component {
                   <div className={`${styles['flex']}`}>
                     <a href={banners[2].link}>
                         <div className={styles.shadow}>
-                          <img src={banners[2].img} width={banners[2].config.width} height={banners[2].config.height}  alt="" className={styles['img-responsive']} />
+                          <img src={banners[2].img}   alt="" className={styles['img-responsive']} />
                         </div>
                       </a>
                   </div>
@@ -243,7 +243,7 @@ class PageData extends React.Component {
             <div className={`${styles['mr-10']} ${styles['flex']}`} style={{width:'16.48%'}}>
                <a href={banners[3].link}>
                   <div className={styles.shadow}>
-                    <img src={banners[3].img} width={banners[3].config.width} height={banners[3].config.height}  alt="" className={styles['img-responsive']} />
+                    <img src={banners[3].img}   alt="" className={styles['img-responsive']} />
                   </div>
                 </a>
             </div>
@@ -254,7 +254,7 @@ class PageData extends React.Component {
                   <div className={`${styles['mb-10']} ${styles['flex']}`}>
                     <a href={banners[4].link}>
                         <div className={styles.shadow}>
-                          <img src={banners[4].img} width={banners[4].config.width} height={banners[4].config.height}   alt="" className={styles['img-responsive']} />
+                          <img src={banners[4].img}   alt="" className={styles['img-responsive']} />
                         </div>
                       </a>
                   </div>
@@ -262,7 +262,7 @@ class PageData extends React.Component {
                   <div className={`${styles['flex']}`}>
                     <a href={banners[5].link}>
                         <div className={styles.shadow}>
-                          <img src={banners[5].img} width={banners[5].config.width} height={banners[5].config.height}   alt="" className={styles['img-responsive']} />
+                          <img src={banners[5].img}   alt="" className={styles['img-responsive']} />
                         </div>
                       </a>
                   </div>
@@ -293,7 +293,7 @@ class PageData extends React.Component {
             <div className={`${styles['mr-10']} ${styles['flex']}`} style={{width:'33.7%'}}>
                <a href={banners[0].link}>
                   <div className={styles.shadow}>
-                    <img src={banners[0].img} width={banners[0].config.width} height={banners[0].config.height}  alt="" className={styles['img-responsive']} />
+                    <img src={banners[0].img}   alt="" className={styles['img-responsive']} />
                   </div>
                 </a>
             </div>
@@ -303,7 +303,7 @@ class PageData extends React.Component {
                   <div className={`${styles['mb-10']} ${styles['flex']}`}>
                     <a href={banners[1].link}>
                         <div className={styles.shadow}>
-                          <img src={banners[1].img} width={banners[1].config.width} height={banners[1].config.height}  alt="" className={styles['img-responsive']} />
+                          <img src={banners[1].img}   alt="" className={styles['img-responsive']} />
                         </div>
                       </a>
                   </div>
@@ -311,7 +311,7 @@ class PageData extends React.Component {
                   <div className={`${styles['flex']}`}>
                     <a href={banners[2].link}>
                         <div className={styles.shadow}>
-                          <img src={banners[2].img} width={banners[2].config.width} height={banners[2].config.height}  alt="" className={styles['img-responsive']} />
+                          <img src={banners[2].img}  alt="" className={styles['img-responsive']} />
                         </div>
                       </a>
                   </div>
@@ -321,7 +321,7 @@ class PageData extends React.Component {
             <div className={`${styles['mr-10']} ${styles['flex']}`} style={{width:'33.7%'}}>
                <a href={banners[3].link}>
                   <div className={styles.shadow}>
-                    <img src={banners[3].img} width={banners[3].config.width} height={banners[3].config.height}  alt="" className={styles['img-responsive']} />
+                    <img src={banners[3].img}   alt="" className={styles['img-responsive']} />
                   </div>
                 </a>
             </div>
@@ -332,7 +332,7 @@ class PageData extends React.Component {
                   <div className={`${styles['mb-10']} ${styles['flex']}`}>
                     <a href={banners[4].link}>
                         <div className={styles.shadow}>
-                          <img src={banners[4].img} width={banners[4].config.width} height={banners[4].config.height}   alt="" className={styles['img-responsive']} />
+                          <img src={banners[4].img} alt="" className={styles['img-responsive']} />
                         </div>
                       </a>
                   </div>
@@ -340,7 +340,7 @@ class PageData extends React.Component {
                   <div className={`${styles['flex']}`}>
                     <a href={banners[5].link}>
                         <div className={styles.shadow}>
-                          <img src={banners[5].img} width={banners[5].config.width} height={banners[5].config.height}   alt="" className={styles['img-responsive']} />
+                          <img src={banners[5].img} alt="" className={styles['img-responsive']} />
                         </div>
                       </a>
                   </div>
@@ -515,6 +515,195 @@ class PageData extends React.Component {
           </div>
         );
       }
+
+    case 'CBT12' : {
+
+      const {banners,title} = content.data[lang];
+      return(
+        <div className={`${styles['display-t-i-cb']}`} >
+              <div className={`${styles['flex']}`}>
+                <div style={{width:'33.57%',paddingBottom:'10px',paddingRight:'10px'}}>
+                   <a href={banners[0].link}>
+                    <div>
+                    <img src={banners[0].img}  alt="" className={styles['img-responsive']} />
+                    </div>
+                    </a>
+                </div>
+                <div style={{width:'33.57%',paddingBottom:'10px',paddingRight:'10px'}}>
+                <a href={banners[1].link}>
+                    <div>
+                    <img src={banners[1].img}  alt="" className={styles['img-responsive']} />
+                    </div>
+                    </a>
+                </div>
+                <div style={{width:'33.57%',paddingBottom:'10px',paddingRight:'10px'}}>
+                <a href={banners[2].link}>
+                    <div>
+                    <img src={banners[2].img}  alt="" className={styles['img-responsive']} />
+                    </div>
+                    </a>
+                </div>
+              </div>
+              <div className={`${styles['flex']}`}>
+                <div style={{width:"11.43%",paddingRight:"10px"}}>
+                <a href={banners[3].link}>
+                    <div>
+                    <img src={banners[3].img}  alt="" className={styles['img-responsive']} />
+                    </div>
+                    </a>
+                </div>
+                <div style={{width:"11.43%",paddingRight:"10px"}}>
+                <a href={banners[4].link}>
+                    <div>
+                    <img src={banners[4].img}  alt="" className={styles['img-responsive']} />
+                    </div>
+                </a>
+                </div>
+                <div style={{width:"11.43%",paddingRight:"10px"}}>
+                <a href={banners[5].link}>
+                    <div>
+                    <img src={banners[5].img}  alt="" className={styles['img-responsive']} />
+                    </div>
+                </a>
+                </div>
+                <div style={{width:"11.43%",paddingRight:"10px"}}>
+                <a href={banners[6].link}>
+                    <div>
+                    <img src={banners[6].img}  alt="" className={styles['img-responsive']} />
+                    </div>
+                </a>
+                </div>
+                <div style={{width:"11.43%",paddingRight:"10px"}}>
+                <a href={banners[7].link}>
+                    <div>
+                    <img src={banners[7].img}  alt="" className={styles['img-responsive']} />
+                    </div>
+                </a>
+                </div>
+                <div style={{width:"11.43%",paddingRight:"10px"}}>
+                <a href={banners[8].link}>
+                    <div>
+                    <img src={banners[8].img}  alt="" className={styles['img-responsive']} />
+                    </div>
+                </a>
+                </div>
+                <div style={{width:"11.43%",paddingRight:"10px"}}>
+                <a href={banners[9].link}>
+                    <div>
+                    <img src={banners[9].img}  alt="" className={styles['img-responsive']} />
+                    </div>
+                </a>
+                </div>
+                <div style={{width:"11.43%",paddingRight:"10px"}}>
+                <a href={banners[10].link}>
+                    <div>
+                    <img src={banners[10].img}  alt="" className={styles['img-responsive']} />
+                    </div>
+                </a>
+                </div>
+                <div style={{width:"11.43%",paddingRight:"10px"}}>
+                <a href={banners[11].link}>
+                    <div>
+                    <img src={banners[11].img}  alt="" className={styles['img-responsive']} />
+                    </div>
+                </a>
+                </div>
+                </div>
+              </div>
+
+
+     );
+
+    }  
+
+    case 'CBT12a' : {
+
+      const {banners,title} = content.data[lang];
+      return(<div>
+
+        <div className={`${styles['display-t-i-cb']}`} >
+          <div className={`${styles['flex']}`}>
+            <div style={{paddingRight:'10px',paddingBottom:'10px',width:"16.64%"}}>
+              <a href={banners[0].link}>
+              <div>
+                    <img src={banners[0].img}  alt="" className={styles['img-responsive']} />
+                    </div>
+              </a>
+            </div>
+            <div style={{paddingRight:'10px',paddingBottom:'10px',width:"33.27%"}}>
+            <a href={banners[1].link}>
+              <div>
+                    <img src={banners[1].img}  alt="" className={styles['img-responsive']} />
+                    </div>
+              </a>
+            </div>
+            <div style={{paddingRight:'10px',paddingBottom:'10px',width:"16.64%"}}>
+            <a href={banners[2].link}>
+              <div>
+                    <img src={banners[2].img}  alt="" className={styles['img-responsive']} />
+                    </div>
+              </a>
+            </div>
+            <div style={{paddingRight:'10px',paddingBottom:'10px',width:"16.64%"}}>
+            <a href={banners[3].link}>
+              <div>
+                    <img src={banners[3].img}  alt="" className={styles['img-responsive']} />
+                    </div>
+              </a>
+            </div>
+            <div style={{paddingBottom:'10px',width:"16.64%",paddingRight:'10px'}}>
+            <a href={banners[4].link}>
+              <div>
+                    <img src={banners[4].img}  alt="" className={styles['img-responsive']} />
+                    </div>
+              </a>
+            </div>
+          </div>
+          <div className={`${styles['flex']}`}>
+          <div style={{paddingRight:'10px',paddingBottom:'10px',width:"16.64%"}}>
+              <a href={banners[5].link}>
+              <div>
+                    <img src={banners[5].img}  alt="" className={styles['img-responsive']} />
+                    </div>
+              </a>
+            </div>
+            <div style={{paddingRight:'10px',paddingBottom:'10px',width:"16.64%"}}>
+            <a href={banners[6].link}>
+              <div>
+                    <img src={banners[6].img}  alt="" className={styles['img-responsive']} />
+                    </div>
+              </a>
+            </div>
+            <div style={{paddingRight:'10px',paddingBottom:'10px',width:"16.64%"}}>
+            <a href={banners[7].link}>
+              <div>
+                    <img src={banners[7].img}  alt="" className={styles['img-responsive']} />
+                    </div>
+              </a>
+            </div>
+            <div style={{paddingRight:'10px',paddingBottom:'10px',width:"16.64%"}}>
+            <a href={banners[8].link}>
+              <div>
+                    <img src={banners[8].img}  alt="" className={styles['img-responsive']} />
+                    </div>
+              </a>
+            </div>
+            <div style={{paddingBottom:'10px',width:"33.27%",paddingRight:'10px'}}>
+            <a href={banners[9].link}>
+              <div>
+                    <img src={banners[9].img}  alt="" className={styles['img-responsive']} />
+                    </div>
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+      </div>);
+    }
+
+
+
       default: return null;
     }
   }
