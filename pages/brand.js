@@ -1,6 +1,6 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
-import Head from 'next/head';
+import { NextSeo } from 'next-seo';
 import withRedux from 'next-redux-wrapper';
 import Cookies from 'universal-cookie';
 import Base, { baseActions } from './base';
@@ -49,7 +49,7 @@ class Brand extends Base {
     if (shippingCity) {
       searchOptions.shippingDetails = {
         shippingCity: shippingCity.toUpperCase(),
-        shippingCountry: (country || 'ARE').toUpperCase(),
+        shippingCountry: (country || 'SAU').toUpperCase(),
       };
     }
 
@@ -67,18 +67,20 @@ class Brand extends Base {
       <div>
         <SearchContext.Provider value="search">
           <Layout>
-            <Head>
-              <meta property="og:title" content={`${this.props.url.query.brandName} ${SEO_CONTENT.LANDING_H2_CONTENT} ${this.props.url.query.brandName} ${SEO_CONTENT.BRAND_H2_TITLE}`} />
-              <meta property="og:site_name" content="Tila" />
-              <meta property="fb:app_id" content=" " />
-              <meta property="og:description" content={`${SEO_CONTENT.BRAND_META_CONTENT} ${this.props.url.query.brandName} ${SEO_CONTENT.BRAND_META_CONTENT2}`} />
-              <meta property="og:locale:locale" content="en_SA" />
-              <meta property="og:locale:alternate" content="ar_SA" />
-              <meta property="og:type" content="website" />
-              <meta property="og:image" content=" logo image url" />
-              <meta name="description" content={`${SEO_CONTENT.BRAND_META_CONTENT} ${this.props.url.query.brandName} ${SEO_CONTENT.BRAND_META_CONTENT2}`} />
-              <title>{this.props.url.query.brandName} {SEO_CONTENT.LANDING_H2_CONTENT} {this.props.url.query.brandName} {SEO_CONTENT.BRAND_H2_TITLE}</title>
-            </Head>
+            <NextSeo
+              title={`${this.props.url.query.brandName} ${SEO_CONTENT.LANDING_H2_CONTENT} ${this.props.url.query.brandName} ${SEO_CONTENT.BRAND_H2_TITLE}`}
+              description={`${SEO_CONTENT.BRAND_META_CONTENT} ${this.props.url.query.brandName} ${SEO_CONTENT.BRAND_META_CONTENT2}`}
+              openGraph={{
+                title:`${this.props.url.query.brandName} ${SEO_CONTENT.BRAND_H2_TITLE}`,
+                site_name: 'Tila',
+                description: `${SEO_CONTENT.BRAND_META_CONTENT} ${this.props.url.query.brandName} ${SEO_CONTENT.BRAND_META_CONTENT2}`,
+                fb_app_id: '',
+                locale: 'en_SA',
+                locale_ar: 'ar_SA',
+                type: 'website',
+                image: 'logo image url',
+              }}
+            />
             <h1 className={`${styles.display_none}`}>{this.props.url.query.brandName}</h1>
             <h2 className={`${styles.display_none}`}>{SEO_CONTENT.BRAND_H2} {this.props.url.query.brandName}</h2>
             <Search query={this.props.url.query} loaderProps={this.props.loaderProps} isBrandPage />

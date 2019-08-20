@@ -3,7 +3,7 @@ const routes = require('next-routes')();
 routes
   .add({ name: 'login', pattern: '/login', page: 'login' })
   .add({ name: 'CAM', pattern: '/:language(en|ar)/customer', page: 'cam' })
-  .add({ name: 'ORDER ISSUE', pattern: '/:language(en|ar)/customer/orders/:orderId/issue/:returnExchangeType/item/:orderItemId/:variantId', page: 'order' })
+  .add({ name: 'ORDER ISSUE', pattern: '/:language(en|ar)/customer/orders/:orderId/issue/:returnExchangeType/item/:orderItemId/:variantId/:listingId', page: 'order' })
   .add({ name: 'ORDER', pattern: '/:language(en|ar)/customer/orders/:orderId', page: 'order' })
   .add({ name: 'CAM tabs', pattern: '/:language(en|ar)/customer/:tabDetails+', page: 'cam' })
   .add({ name: 'product', pattern: '/:language(en|ar)/pdp/:productName/:tuinId?/:listingId?', page: 'product' })
@@ -21,9 +21,8 @@ routes
   .add({ name: 'brand', pattern: '/:language(en|ar)/brand/:brandName', page: 'brand' })
   .add({ name: 'ftb', pattern: '/:language(en|ar)/ftb', page: 'ftb' })
   .add({ name: 'redirect', pattern: '/:country/:language(en|ar)', page: 'homeRedirect' })
-  .add({ name: 'categoryLanding', pattern: '/:language(en|ar)/:category(electronics|fashion|lifestyle)', page: 'index' })
+  .add({ name: 'categoryLanding', pattern: '/:language(en|ar)/:category(electronics|fashion|lifestyle)', page: 'home' })
   .add({ name: 'category', pattern: '/:language(en|ar)/clp/:category', page: 'category' })
-  .add({ name: 'default', pattern: '/:language(en|ar)?', page: 'index' })
-  ;
+  .add({ name: 'default', pattern: '/:language(en|ar)?', page: 'home' });
 
 module.exports = routes;

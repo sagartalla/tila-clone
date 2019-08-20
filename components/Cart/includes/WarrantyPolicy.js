@@ -42,7 +42,7 @@ class WarrantyPolicy extends React.Component {
       addNewWarranty, warrantyChange, deleteWarranty, editWarranty, showWarrantyDetails, warrantyName, selectPolicy,
     } = this.props;
     let isWarrantyExists = false;
-    Object.keys(tila_care_policy).length > 0 && Object.keys(tila_care_policy).map(policyVal => {
+    tila_care_policy && Object.keys(tila_care_policy).length > 0 && Object.keys(tila_care_policy).map(policyVal => {
       if (((tila_care_policy[policyVal] === null) || (tila_care_policy[policyVal] === 0)) ||  (tila_care_policy[policyVal] && tila_care_policy[policyVal].length === 0)) {
         isWarrantyExists = false;
       } else {
@@ -112,7 +112,7 @@ class WarrantyPolicy extends React.Component {
                                   <div style={{ width: '150px' }}>
                                     <label className={`${styles['fs-12']} ${styles['pl-10']} ${styles['mb-0']} ${styles['pr-10']}`}>{policyVal.policy_name}</label>
                                     <span className={`${styles['warranty-radio-button']}`} />
-                                    <label className={`${styles['fs-12']} ${styles['pl-10']} ${styles.fontW600} ${styles['mb-0']}`}>{policyVal.cost.display_value} {policyVal.cost.currency_code}</label>
+                                    <label className={`${styles['fs-12']} ${styles['pl-10']} ${styles.fontW600} ${styles['mb-0']}`}>{policyVal.cost.currency_code} {policyVal.cost.display_value}</label>
                                   </div>
                                   <div className={`${styles['ml-20']}`}>
                                   {((selectedPolicy !== '' && warrantyName === newVal && warrantyIndex === index) || (Object.keys(policies_applied).length > 0 && policies_applied[newVal] && policies_applied[newVal].policy_id === policyVal.policy_id)) ?

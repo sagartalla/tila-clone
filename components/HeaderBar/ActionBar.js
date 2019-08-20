@@ -104,6 +104,7 @@ class ActionBar extends Component {
     if (nextProps && nextProps.activeObj && nextProps.activeObj.nextPage === null) {
       setTimeout(() => {
         closeThankYouScreen();
+        Router.pushRoute(`${window.location.origin}/${cookies.get('language')}`);
       }, 3000);
     }
 
@@ -277,8 +278,8 @@ class ActionBar extends Component {
                       <span className={`${styles['hello-text-clr']}`}>{HEADER_PAGE.HELLO}</span>
                       {userInfo.personalInfo.first_name ?
                         <span>
-                          <span className={`${styles['user-name']}`}>{userInfo.personalInfo.first_name}</span> &nbsp;
-                          <span>{userInfo.personalInfo.first_name.length < 15 && userInfo.personalInfo.last_name.charAt(0)}</span>
+                          <span className={`${styles['user-name']} ${styles['mr-5']}`}>{userInfo.personalInfo.first_name}</span>
+                          {userInfo.personalInfo.first_name.length < 15 && <span className={`${styles['mr-5']}`}>{userInfo.personalInfo.last_name.charAt(0)}</span>}
                         </span> : <span>{`${HEADER_PAGE.TILA_CUSTOMER}` }</span>}
                     </span>
                   </div>

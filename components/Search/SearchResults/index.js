@@ -106,7 +106,7 @@ class SearchResults extends Component {
     // window.open(`/${language}/product?productId=${options.productId}${options.variantId ? `&variantId=${options.variantId}`: ''}&catalogId=${options.catalogId}&itemType=${options.itemType}`)
     //changes will get reflected on quickview
     // window.open(`/${country}/${language}/pdp/${name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/c/${catalog_id}/p/${product_id}/l/${listing_id}/v/${variant_id ? `${variant_id}` : ''}`)
-    window.open(`/${language}/pdp/${name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${tuinId}/${listing_id}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`);
+    window.open(`/${language}/pdp/${name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${tuinId ? `${tuinId}/`: '' }${listing_id}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`);
   }
   renderNext() {
     const { results } = this.props;
@@ -232,7 +232,7 @@ class SearchResults extends Component {
 
   render() {
     const { search, isCategoryTree, choosenCategoryName } = this.props;
-    let finalQuery = search ? search : isCategoryTree ? choosenCategoryName : '';
+    let finalQuery = search || choosenCategoryName;
     finalQuery = finalQuery.split('-').join(' ');
     const {
       results, pagiantionDetails,

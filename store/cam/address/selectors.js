@@ -36,6 +36,7 @@ const getDefaultAddress = (store) => {
       defaultAdd = [store.shippingAddrReducer.data[0]];
     }
   }
+
   return defaultAdd;
 };
 
@@ -46,6 +47,9 @@ const getSelectedAddress = (store) => {
   }
   if(!selectedAddress) {
     selectedAddress = getDefaultAddress(store)[0];
+  }
+  if(store.shippingAddrReducer.data.length > 0 && !selectedAddress) {
+    selectedAddress = store.shippingAddrReducer.data[0]
   }
   return selectedAddress || {};
 }

@@ -16,6 +16,8 @@ import dynamic from 'next/dynamic';
 //import EditPhone from '../../../Cam/PersonelDetails/UserData/EditPhone';
 import Button from '../../../common/CommonButton';
 
+import Voucher from './Voucher';
+
 const { PAYMENT_PAGE } = languageDefinations();
 
 import lang from '../../../../utils/language';
@@ -48,9 +50,9 @@ class CashOnDelivery extends React.Component {
   }
   handleChange() {
     const {data} = this.props;
-    this.props.disableAllOthers({
-      except: data.type
-    });
+    // this.props.disableAllOthers({
+    //   except: data.type
+    // });
   }
 
   onCaptchaSuccess({captcha_request_id}) {
@@ -101,8 +103,9 @@ class CashOnDelivery extends React.Component {
     });
   }
   render() {
-    const { data, showLoading, profileInfo } = this.props;
+    const { data, showLoading, profileInfo, voucherData } = this.props;
     return <div>
+    <Voucher voucherData={voucherData} />
         <div className={`${styles['cash-on-dly-points']} ${styles['pt-25']} ${styles['pb-15']}`}>
     <Row className={styles['pl-40']}>
       <Col md={12}>
@@ -149,7 +152,7 @@ class CashOnDelivery extends React.Component {
               <Button
                 className={`${styles['fs-16']} ${styles['fontW600']} ${styles['new-card-btn']} ${styles['border-radius']} ${styles['ht-40']} ${styles.width70} ${styles['text-uppercase']}`}
                 onClick={this.proceedToPayment}
-                btnText={PAYMENT_PAGE.PAY + ' ' + data.amount_to_pay.display_value + ' ' + data.amount_to_pay.currency_code + ' ' + PAYMENT_PAGE.ON_DELIVERY}
+                btnText={PAYMENT_PAGE.PAY + ' ' + data.amount_to_pay.currency_code + ' ' + data.amount_to_pay.display_value + ' ' + PAYMENT_PAGE.ON_DELIVERY}
                 hoverClassName="hoverBlueBackground"
                 btnLoading={showLoading}
 

@@ -29,7 +29,7 @@ class Category extends Base {
     store, isServer, query, req,
   }) {
     const {
-      country, language, category, facets, sid
+      country, language, category, facets, sid,
     } = query;
     const categoryTree = query.categoryTree === 'true';
     const shippingData = req ? req.universalCookies.get('shippingInfo') : cookies.get('shippingInfo');
@@ -51,7 +51,7 @@ class Category extends Base {
     if (shippingCity) {
       searchOptions.shippingDetails = {
         shippingCity: shippingCity.toUpperCase(),
-        shippingCountry: (country || 'ARE').toUpperCase(),
+        shippingCountry: (country || 'SAU').toUpperCase(),
       };
     }
     await Promise.all([

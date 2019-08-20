@@ -12,11 +12,11 @@ const tbs = [{
   key: 'Adidas'
 }, {
   img: `/static/img/landing-home/${lang === 'en' ? 'AGATHA' : 'AGATHA- AR'}.jpg`,
-  title: `${lang === 'en' ? 'Agatha' : 'أديداس'}`,
+  title: `${lang === 'en' ? 'Agatha' : 'أجاثا'}`,
   key: 'Agatha'
 }, {
   img: `/static/img/landing-home/${lang === 'en' ? 'Sunglass - Michael Kors' : 'Michael kors- AR'}.jpg`,
-  title: `${lang === 'en' ? 'Michael Kors' : 'أديداس'}`,
+  title: `${lang === 'en' ? 'Michael Kors' : 'مايكل كورس'}`,
   key: 'Michael Kors'
 }, {
   img: `/static/img/landing-home/${lang === 'en' ? 'PHILIPS' : 'PHILIPS - AR'}.jpg`,
@@ -376,8 +376,8 @@ const b_d_b = {
   Sunglasses_raybon: `/${lang}/srp/${lang === 'en' ? 'Sunglasses' : 'راي بان'}/search?q=rayban`,
   Apple: `/${lang}/srp/${lang === 'en' ? 'Apple' : 'ابل'}/search?q=Apple`,
   Adidas: `/${lang}/srp/${lang === 'en' ? 'Adidas' : 'أديداس'}/search/?q=Adidas`,
-  Agatha: `/${lang}/srp/${lang === 'en' ? 'Agatha' : 'أديداس'}/search/?q=Agatha`,
-  'Michael Kors': `/${lang}/srp/${lang === 'en' ? 'Michael Kors' : 'أديداس'}/search/?q=Michael%20Kors`,
+  Agatha: `/${lang}/srp/${lang === 'en' ? 'Agatha' : 'أجاثا'}/search/?q=Agatha`,
+  'Michael Kors': `/${lang}/srp/${lang === 'en' ? 'Michael Kors' : 'مايكل كورس'}/search/?q=Michael%20Kors`,
   Samsung: `/${lang}/srp/${lang === 'en' ? 'Samsung' : 'سامسونج'}/search?q=Samsung%20Galaxy%20Note`
 };
 

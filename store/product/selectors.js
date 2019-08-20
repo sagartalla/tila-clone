@@ -72,7 +72,7 @@ const getProduct = (store, variantId) => {
     reviews: {
       count: '',
     },
-    price: priceInfo ? priceInfo.selling_price ? `${priceInfo.selling_price.display_value} ${priceInfo.selling_price.currency}` : priceInfo.selling_price : 'Price Not available',
+    price: priceInfo ? priceInfo.selling_price ? `${priceInfo.selling_price.currency} ${priceInfo.selling_price.display_value}` : priceInfo.selling_price : 'Price Not available',
     originalPrice: '',
     discountPercent: '',
     listingId: priceInfo ? priceInfo.listing_id : 'No Listing',
@@ -141,6 +141,7 @@ const getProduct = (store, variantId) => {
     catalog: _.groupBy(_.filter(catalogAttributeMap, val => val.visible), attrMap => attrMap.attribute_category_name),
     isWishlisted: wishListProductIds && wishListProductIds.indexOf(product_details.product_id) !== -1,
     wishlistId,
+    tuin: catalogAttributeMap.tuin ? catalogAttributeMap.tuin.attribute_values[0].value : '',
   };
 };
 const getTilaPolicy = (store) => {

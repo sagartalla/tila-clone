@@ -21,6 +21,35 @@ body
 
 // }
 
+*{
+  scrollbar-color: #8a8a8f transparent;
+  scrollbar-width: thin;
+}
+
+*::-webkit-scrollbar
+{
+	width: 5px;
+	background-color: rgb(249, 249, 249);
+}
+
+*::-webkit-scrollbar-track
+{
+/* 	-webkit-box-shadow: inset 0 0 6px #f06292 ; */
+/* 	border-radius: 10px; */
+	background-color: rgb(249, 249, 249);
+  border-left: 1px solid transparent;
+  border-right: 1px solid transparent;
+
+}
+
+*::-webkit-scrollbar-thumb
+{
+	border-radius: 20px;
+	-webkit-box-shadow: inset 0 0 px #8a8a8f;
+	background-color: #8a8a8f;
+
+}
+
 button:focus
   outline none
 
@@ -199,6 +228,9 @@ for i in range(10px, 46px,  2)
 .lgt-blue
   color navy-blue
 
+.blue-color
+  color #45689A
+
 .dottes-gry-clr
   color dottes-gry-clr
 
@@ -219,7 +251,7 @@ for i in range(10px, 46px,  2)
 
 .register-policy-gray
   color register-policy-gray
-  
+
 .facebook-clr
   color facebook-color
 
@@ -278,7 +310,8 @@ for i in range(10px, 46px,  2)
 
 .width63
   width 63%
-
+.width78
+  width 78%
 .width50
   width 50%
 
@@ -296,12 +329,13 @@ for i in range(10px, 46px,  2)
 
 .width21
   width 21%
-
+.width22
+  width 22%
 .width18
   width 18%
 
 .width70
-  width 70% 
+  width 70%
 
 .border-none
   border none
@@ -315,6 +349,12 @@ for i in range(10px, 46px,  2)
 
 .border-b
   border-bottom 1px solid light-brdr
+
+.border-r
+  border-right 1px solid light-brdr
+
+.border-l
+  border-left 1px solid light-brdr
 
 .border-lg
   border 1px solid light-brdr
@@ -372,11 +412,11 @@ for i in range(10px, 46px,  2)
   border-bottom 3px solid elct-green-color
 
 .bdr-btm-black-color
-  border-bottom 3px solid elct-black-color  
+  border-bottom 3px solid elct-black-color
 
 .text-lgt-gray
   color label-light
-  
+
 //list style
 .no-lst
   list-style-type none
@@ -526,7 +566,7 @@ for i in range(10px, 46px,  2)
   overflow-y auto
 
 .display_none
-  display none  
+  display none
 
 
 .ellipsis {

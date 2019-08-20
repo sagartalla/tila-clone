@@ -60,12 +60,13 @@ class AppliedFilters extends Component {
     return (
       appliedFilters.length !== 0
         ?
-          <div className={`${styles['applied-tags']} ${styles['flex-center']} ${styles['pb-20']}`}>
+        <div className={`${styles['applied-tags']} ${styles['flex-center']} ${styles['pb-20']}`}>
           <span>{SEARCH_PAGE.APPLIED_FILTERS_TAGS} : </span>
           <div className={`${styles.flex} ${styles['flex-wrp']} ${styles['applied-tags-i']}`}>
             {
               appliedFilters.map(af => (
                 <div key={af.key} className={`${styles['flex-center']} ${styles['applied-tags-inn']} ${styles['ml-10']}`}>
+                  <div className={`${styles['filter-tooltp']} ${styles.absolute} ${styles['fs-12']}`}>{af.attributeDisplayName}</div>
                   <span className={`${styles.title} ${styles['fs-12']}`}>{af.displayName}</span>
                   <span onClick={this.removeFilter} data-name={af.displayName} data-parentKey={af.parentKey} data-key={af.key} className={`${styles['close-part']}`}>x</span>
                 </div>
@@ -86,11 +87,11 @@ const mapStateToProps = store => ({
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(
-    {
-      getSearchResults: actionCreators.getSearchResults
-    },
-    dispatch,
-  );
+  {
+    getSearchResults: actionCreators.getSearchResults
+  },
+  dispatch,
+);
 
 function mapUrlToProps(url, props) {
   return {
@@ -99,9 +100,9 @@ function mapUrlToProps(url, props) {
 }
 
 const mapUrlChangeHandlersToProps = (props) => ({
-    onChangeFacets: (value) => replaceInUrlQuery('facets', encode((e) => {
-      return JSON.stringify(e || {})
-    }, value))
-  });
+  onChangeFacets: (value) => replaceInUrlQuery('facets', encode((e) => {
+    return JSON.stringify(e || {})
+  }, value))
+});
 
 export default addUrlProps({ mapUrlToProps, mapUrlChangeHandlersToProps })(connect(mapStateToProps, mapDispatchToProps)(AppliedFilters));

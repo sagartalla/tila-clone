@@ -49,7 +49,7 @@ class VariantsAndSimilarProducts extends Component {
       },
     }, () => {
       const { selectedVariantData } = this.state;
-      const { itemType, catalogId: catalog_id, variants } = this.props.variantsAndSimilarProducts;
+      const { itemType, catalogId, variants } = this.props.variantsAndSimilarProducts;
       const variantId = this.props.getSelectedVariantId({
         selectedVariantData: this.state.selectedVariantData,
         map: variants.map,
@@ -65,7 +65,6 @@ class VariantsAndSimilarProducts extends Component {
 
   onSelectProduct(e) {
     const [key, val] = [e.target.id, e.target.value];
-
     this.setState({
       selectedProductData: {
         ...this.state.selectedProductData,
@@ -103,7 +102,7 @@ class VariantsAndSimilarProducts extends Component {
         ],
         size: 'LARGE',
       };
-      const { catalogId:catalog_id } = variantsAndSimilarProducts;
+      const { catalogId: catalog_id } = variantsAndSimilarProducts;
       let newQuery = window.location.href.split("pdp/")[1];
       newQuery = newQuery.replace(productId, pid)
       this.props.setSelectedProductData({selectedProductData});

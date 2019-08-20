@@ -109,7 +109,7 @@ class FT extends React.Component {
     if (listingsData.length === 0) return null;
 
     return (
-      <div className={styles['mt-20']}>
+      <div className={`${styles['mt-20']} ${styles['mb-20']}`}>
         {isListingLoading && listingsData.length === 0 ? ftbSkeletonLoader : ''}
         <Row className={styles['m-5']}>
           <h3 className={`${styles['fs-20']} ${styles.fontW600}`}>{data[lang].title}</h3>
@@ -123,8 +123,7 @@ class FT extends React.Component {
             prevArrow={<SamplePrevArrow />}
           >
             {listingsData.length > 0 && listingsData.map(listing => (
-              //This Link route has to change, once tuin is available in this component's reducer.
-              <Link route={`/${lang}/pdp/${listing.name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/c/${listing.catalogId}/p/${listing.productId}/l/${listing.listingId}/v/${listing.variantId ? `${listing.variantId}` : ''}`}>
+              <Link route={`/${lang}/pdp/${listing.name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${listing.listingId ? `${listing.listingId}`: ''}?pid=${listing.productId}&vid=${listing.variantId}&cid=${listing.catalogId}`}>
                 <div className={styles.ft_card} key={listing.listingId}>
                   <div className={`${styles.flex} ${styles['flex-colum']} ${styles.width100}`}>
                     <div className={`${styles.flex} ${styles.ft_card_img}`}>
