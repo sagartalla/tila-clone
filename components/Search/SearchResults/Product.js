@@ -138,6 +138,7 @@ class Product extends Component {
         variant_id: variantId,
         email: userDetails.userCreds && userDetails.userCreds.username,
       });
+      this.showNotifyMeMsg();
     } else {
       this.setState({
         showNotify: true,

@@ -99,11 +99,11 @@ class SelectBrand extends Component {
     const { submitQuery } = this.state;
     this.props.onChangeFacets(submitQuery);
     this.submitQuery(submitQuery);
+    this.props.closePopup();    
   }
 
   submitQuery(params) {
     this.props.getSearchResults(this.props.getFacetfilters(params));
-    this.props.closePopup();
   }
 
   
@@ -143,8 +143,10 @@ class SelectBrand extends Component {
     const { filter } = this.props;
     const params = facets || {};
     delete params[filter.attributeName];
-    this.props.onChangeFacets(params);
-    this.submitQuery(params);
+    this.setState({
+      submitQuery: params,
+      selectedItems: [],
+    });
   }
 
   render() {
@@ -188,7 +190,7 @@ class SelectBrand extends Component {
                     <Button
                       btnText={SEARCH_PAGE.APPLY_FILTERS}
                       onClick={this.applyFilters}
-                      className={`${styles['border-left']}`}
+                      className={`${styles['border-left']} ${styles['width15']}`}
                     />
                     <span className={`${styles['fs-30']} ${styles.pointer}`} onClick={this.props.closePopup}>&times;</span>
                   </div>
@@ -208,7 +210,7 @@ class SelectBrand extends Component {
                             childfilter.name === val &&
                             <div className={`${styles['checkbox-material']} ${styles['select-check-mate']} ${styles['select-checkbox-width']} ${styles['mt-10']}`}>
                               <input id={childfilter.name} type="checkbox" onChange={this.onChangeCheckbox({ name: childfilter.name, param: childfilter.param })} checked={selectedItems && selectedItems.length > 0 && selectedItems.indexOf(childfilter.name) !== -1} />
-                              <label htmlFor={childfilter.name} className={`${styles['fs-12']} ${styles['category-label']}`}>
+                              <label htmlFor={childfilter.name} className={`${styles['fs-12']} ${styles['category-label']} ${styles['label-ellipsis']}`} title={childfilter.name}>
                                 <span className={`${styles['category-span']} ${styles.fontW700}`}>{val}
                               </span>
                               </label>
@@ -224,7 +226,7 @@ class SelectBrand extends Component {
                             {requiredData[val].map((newVal, index) => (
                               <div className={`${styles['mt-10']} ${styles['checkbox-material']} ${styles['select-check-mate']} ${styles['select-checkbox-width']}`}>
                               <input id={newVal.name} type="checkbox" onChange={this.onChangeCheckbox({ name: newVal.name, param: newVal.param })} checked={selectedItems && selectedItems.length > 0 && selectedItems.indexOf(newVal.name) !== -1} />
-                              <label htmlFor={newVal.name} className={`${styles['fs-12']} ${styles['category-label']}`}>
+                              <label htmlFor={newVal.name} className={`${styles['fs-12']} ${styles['category-label']} ${styles['label-ellipsis']}`} title={newVal.name}>
                                 <span className={(newVal.name.toLowerCase().startsWith(selectedAlphabet !== '' && selectedAlphabet.toLowerCase())) || (selectedAlphabet === '#' && newVal.name.match(/^\d/)) ? `${styles.fontW800} ${styles['category-span']}` : `${styles['category-span']} ${styles['thick-gry-clr']} ${styles.fontW700}`}>{newVal.name}
                                   <span className={styles['thick-gry-clr']}>{newVal.count ? `(${newVal.count})` : ''}</span>
                                 </span>

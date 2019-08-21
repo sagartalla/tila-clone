@@ -778,7 +778,7 @@ export const EN_KEYWORDS = {
   EMAIL_VERIFICATION: {
     VERIFY_YOUR_EMAIL: 'Verify your email address',
     OTP_SENT: 'An OTP has been sent to',
-    ENTER_OTP: 'Please enter the OTP to verify your email address.',
+    ENTER_OTP: 'Please enter the OTP or Click on the email verification link to verify your email address.',
     RESEND: 'Resend',
     VERIFY: 'Verify',
     PLEASE_ENTER_OTP_SENT: 'Please enter OTP sent to your mail id',

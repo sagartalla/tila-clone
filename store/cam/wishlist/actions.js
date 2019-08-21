@@ -15,19 +15,23 @@ const actions = {
 };
 
 const actionCreators = {
-  getWishlist: loginReq((currentPage, size) => dispatch => dispatch({
-    type: actions.GET_WISHLIST,
-    payload: apis.getWishlistApi(currentPage, size),
-  })),
+  getWishlist: loginReq((currentPage, size) => (dispatch, getState) => {
+    const state = getState();
+    dispatch({
+      type: actions.GET_WISHLIST,
+      payload: apis.getWishlistApi(currentPage || state.currentPage, size)
+    });
+  }),
   addToWishlist: loginReq(params => dispatch => dispatch({
     type: actions.ADD_TO_WISHLIST,
     payload: apis.addToWishlistApi(params),
   }).then(() => dispatch(actionCreators.getWishlist()))),
-  deleteWishlist: loginReq((wishlist_id, showToast, currentPage) => (dispatch) => {
+  deleteWishlist: loginReq((wishlist_id, showToast, currentPage) => (dispatch, getState) => {
+    const state = getState().wishlistReducer;
     dispatch(actionCreators.track({ eventName: 'WishList Remove', wishlistId: wishlist_id }));
     return dispatch({
       type: actions.DELETE_TO_WISHLIST,
-      payload: apis.deleteWishlistApi(wishlist_id, showToast, currentPage),
+      payload: apis.deleteWishlistApi(wishlist_id, showToast, currentPage || state.currentPage),
     }).then(() => dispatch(actionCreators.getWishlistProducts()));
   }),
   addToCart: (params, wishlist_id, getCartData) => (dispatch, getState) => dispatch(cartActionCreators.addToCart(params)).then(() => {

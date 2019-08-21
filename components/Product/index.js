@@ -26,6 +26,7 @@ import { actionCreators as addressActionCreators, selectors as addressSelectors 
 import { actionCreators as paymentActionCreators } from '../../store/payments';
 import { selectors as authSelectors } from '../../store/auth';
 import { selectors as cartSelectors } from '../../store/cart';
+import { selectors as listingCartSelectors } from '../../store/listingCart'
 import LoadingBar from '../common/Loader/skeletonLoader';
 import lang from '../../utils/language';
 
@@ -72,6 +73,7 @@ const getProductComponent = (isPreview, taskCode) => {
       const {
         offerInfo, titleInfo, imgUrls, tuin, product_id, catalogObj,
       } = productData;
+
       if (window.localStorage && !isPreview) {
         digitalData.page.pageInfo.pageName = titleInfo && titleInfo.title && titleInfo.title.attribute_values[0] && titleInfo.title.attribute_values[0].value;
         digitalData.page.category = { primaryCategory: productData.categoryType };
