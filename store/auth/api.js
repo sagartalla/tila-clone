@@ -158,12 +158,13 @@ const sendOtpToEmailId = showToast => axios.post(`${constants.CMS_API_URL}/api/v
   return { data };
 });
 
-const verifyEmailByLink = (token) => axios.post(`${constants.CMS_API_URL}/api/v1/user/email/verify?token=${token}`, null, {
-   headers: { } }).then(({ data }) => {
-    <ToastContent
+const verifyEmailByLink = token => axios.get(`${constants.CMS_API_URL}/api/v1/user/email/verify?token=${token}`, null, {
+  headers: { } }).then(({ data }) => {
+  toast(<ToastContent
       msg={API_TEXT.YOUR_EMAIL_IS_VERIFIED}
       msgType='success'
-    />;
+    />,);
+  return { data };
 });
 
 // return axios.put(`${constants.AUTH_API_URL}/api/v1/sls/lo`, null, {
@@ -220,16 +221,16 @@ const resetPassword = (body) => {
 };
 
 const forgotPassword = (body) => axios.post(`${constants.CMS_API_URL}/api/v1/user/password/forgot/email`, body).then(({data}) => {
-    toast(
+  toast(
       <ToastContent
         msg={API_TEXT.OTP_SENT_TO_YOUR_MAIL_ID}
         msgType='success'
       />
-    )
-    return data;
-  }).catch((error) => {
-    return error.response.data;
-  });
+  )
+  return data;
+}).catch((error) => {
+  return error.response.data;
+});
 
 const getMobileOtp = (email) => {
   const encodeEmail = encodeURIComponent(email);
@@ -243,37 +244,37 @@ const getMobileOtp = (email) => {
 };
 
 const verifyResetOtp = (body) => axios.post(`${constants.CMS_API_URL}/api/v1/user/password/forgot/verify`, body).then((data) => {
-    return data;
-  }).catch((error) => {
-    return error.response.data;
-  });
+  return data;
+}).catch((error) => {
+  return error.response.data;
+});
 
 const shippingAccount = body => axios.put(`${constants.CMS_API_URL}/api/v1/user/account/edit`, body).then(({ data }) => ({ data }));
 
 
 export default {
   userLogin,
-userLogout,
-getLoginInfo,
-setCountry,
-setSessionID,
-deriveCity,
-setCity,
-getDomainCountries,
+  userLogout,
+  getLoginInfo,
+  setCountry,
+  setSessionID,
+  deriveCity,
+  setCity,
+  getDomainCountries,
   removeCity,
-setLanguage,
-savePtaToken,
-verifyEmail,
-sendOtpToEmailId,
-getUserInfo,
-setVerfied,
-track,
+  setLanguage,
+  savePtaToken,
+  verifyEmail,
+  sendOtpToEmailId,
+  getUserInfo,
+  setVerfied,
+  track,
   v2UserLogin,
-resetPassword,
-forgotPassword,
-showUserInfo,
-getMobileOtp,
-verifyResetOtp,
-shippingAccount,
-verifyEmailByLink,
+  resetPassword,
+  forgotPassword,
+  showUserInfo,
+  getMobileOtp,
+  verifyResetOtp,
+  shippingAccount,
+  verifyEmailByLink,
 };

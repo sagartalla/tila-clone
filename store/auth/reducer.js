@@ -11,7 +11,7 @@ const initialState = {
     loginLoading: false,
     showLogin: false,
     showCheckoutLogin: true,
-    showEmailVerificationScreen: false,
+    showEmailVerifySuccess: false,
   },
   data: {
     isLoggedIn: false,
@@ -114,7 +114,6 @@ const authReducer = typeToReducer({
       ui: {
         ...state.ui,
         loading: true,
-        showEmailVerificationScreen: false,
       },
     }),
     FULFILLED: (state, action) => {
@@ -132,7 +131,6 @@ const authReducer = typeToReducer({
         ui: {
           ...state.ui,
           loading: false,
-          showEmailVerificationScreen: !!(action.payload && action.payload.data.email_verified === 'NV'),
           showCheckoutLogin: !!(action.payload && action.payload.data.email_verified === 'NV'),
         },
         data: {
@@ -148,7 +146,7 @@ const authReducer = typeToReducer({
       });
     },
     REJECTED: state =>
-      Object.assign({}, state, { ui: { ...state.ui, loading: false, showEmailVerificationScreen: false } }),
+      Object.assign({}, state, { ui: { ...state.ui, loading: false } }),
   },
   [actions.USER_LOGIN]: {
     PENDING: state => Object.assign({}, state, {
@@ -471,7 +469,7 @@ const authReducer = typeToReducer({
     }),
   },
   [actions.VERIFY_EMAIL]: {
-    PENDING: state => Object.assign({}, state, { ui: { ...state.ui, loading: true, showEmailVerificationScreen: true } }),
+    PENDING: state => Object.assign({}, state, { ui: { ...state.ui, loading: true } }),
     FULFILLED: (state, action) => {
       const { v2, ui } = state;
       if (action && action.payload && action.payload.data && action.payload.data.Response === 'SUCCESS') {
@@ -498,15 +496,14 @@ const authReducer = typeToReducer({
       });
     },
     REJECTED: state =>
-      Object.assign({}, state, { ui: { ...state.ui, loading: false, showEmailVerificationScreen: true } }),
+      Object.assign({}, state, { ui: { ...state.ui, loading: false } }),
   },
   [actions.VERIFY_EMAIL_BY_LINK]: {
-    PENDING: state => Object.assign({}, state, { ui: { ...state.ui, loading: true, showEmailVerificationScreen: true } }),
+    PENDING: state => Object.assign({}, state, { ui: { ...state.ui, loading: true  } }),
     FULFILLED: (state, action) => {
       const { v2, ui } = state;
       if (action && action.payload && action.payload.data && action.payload.data.Response === 'SUCCESS') {
-        v2.active = pageFlows[state.v2.currentFlow][state.v2.active.nextPage];
-        ui.showCheckoutLogin = state.v2.active.nextPage === null ? false : true;
+        ui.showEmailVerifySuccess = true;
       }
       return Object.assign({}, state, {
         data: {
@@ -528,19 +525,19 @@ const authReducer = typeToReducer({
       });
     },
     REJECTED: state =>
-      Object.assign({}, state, { ui: { ...state.ui, loading: false, showEmailVerificationScreen: true } }),
+      Object.assign({}, state, { ui: { ...state.ui, loading: false } }),
   },
   [actions.VERIFY_RESEND_EMAIL]: {
-    PENDING: state => Object.assign({}, state, { ui: { ...state.ui, loading: true, showEmailVerificationScreen: true } }),
+    PENDING: state => Object.assign({}, state, { ui: { ...state.ui, loading: true } }),
     FULFILLED: (state, action) => Object.assign({}, state, {
       data: {
         ...state.data,
         ...action.payload,
       },
-      ui: { ...state.ui, loading: false, showEmailVerificationScreen: true },
+      ui: { ...state.ui, loading: false },
     }),
     REJECTED: state =>
-      Object.assign({}, state, { ui: { ...state.ui, loading: false, showEmailVerificationScreen: true } }),
+      Object.assign({}, state, { ui: { ...state.ui, loading: false } }),
   },
   [actions.GET_DOMAIN_COUNTRIES]: {
     PENDING: state => state,

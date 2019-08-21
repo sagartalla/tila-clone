@@ -17,7 +17,6 @@ class VerifyEmail extends Base {
   }
   pageName = 'VERIFYEMAIL';
   componentDidMount() {
-    debugger;
     Base.prototype.componentDidMount();
     let token = this.props.url.query.token;
     this.props.verifyEmailByLink(token);

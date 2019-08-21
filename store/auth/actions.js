@@ -258,8 +258,7 @@ const actionCreators = {
       type: actions.SKIP_AND_CONTINUE,
     });
   },
-  verifyEmailByLink: token => (dispatch, getState) => {
-    debugger;
+  verifyEmailByLink: token => (dispatch) => {
     dispatch({
       type: actions.VERIFY_EMAIL_BY_LINK,
       payload: api.verifyEmailByLink(token),
