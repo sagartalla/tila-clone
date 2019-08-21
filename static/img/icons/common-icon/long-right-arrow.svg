@@ -1,17 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="18px" height="30px" viewBox="0 0 18 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 51.2 (57519) - http://www.bohemiancoding.com/sketch -->
-    
-    
-    <defs></defs>
-    <g id="Desktop_vip2thankyou" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.449999988" stroke-linecap="round" stroke-linejoin="round">
-        <g id="4-Shopping-Cart-loggedin-wishlist" transform="translate(-1612.000000, -800.000000)" stroke="#979797" stroke-width="4.15999991">
-            <g id="Group-2" transform="translate(-3.000000, 590.000000)">
-                <g id="Group-26-Copy" transform="translate(1623.500000, 225.000000) scale(-1, 1) translate(-1623.500000, -225.000000) translate(1617.000000, 212.000000)">
-                    <path d="M12.4090909,0.65 L0.531965175,12.4148383" id="Line"></path>
-                    <path d="M11.9780205,25.8718872 L0,13" id="Line-Copy-2"></path>
-                </g>
-            </g>
-        </g>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="17" height="32" viewBox="0 0 17 32">
+    <defs>
+        <path id="b" d="M686 642l15 15.036L686 672"/>
+        <filter id="a" width="112.3%" height="108.8%" x="-6.2%" y="-2.4%" filterUnits="objectBoundingBox">
+            <feMorphology in="SourceAlpha" operator="dilate" radius=".3" result="shadowSpreadOuter1"/>
+            <feOffset dy="1" in="shadowSpreadOuter1" result="shadowOffsetOuter1"/>
+            <feMorphology in="SourceAlpha" radius="1" result="shadowInner"/>
+            <feOffset dy="1" in="shadowInner" result="shadowInner"/>
+            <feComposite in="shadowOffsetOuter1" in2="shadowInner" operator="out" result="shadowOffsetOuter1"/>
+            <feColorMatrix in="shadowOffsetOuter1" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.118206522 0"/>
+        </filter>
+    </defs>
+    <g fill="none" fill-rule="evenodd" transform="translate(-685 -642)">
+        <use fill="#000" filter="url(#a)" xlink:href="#b"/>
+        <use stroke="#121212" stroke-width=".6" xlink:href="#b"/>
     </g>
 </svg>

@@ -33,7 +33,7 @@ class NotifyMe extends React.Component {
   }
 
   notify = () => {
-    const { pId, notifyMe, closeNotify, variantId } = this.props;
+    const { pId, notifyMe, closeNotify, variantId, showNotifyMeMsg } = this.props;
     let {
       email, mobile, emailErr, mobileErr,
     } = this.state;
@@ -48,6 +48,7 @@ class NotifyMe extends React.Component {
         params.email = email;
         notifyMe(params);
         closeNotify();
+        showNotifyMeMsg();
       } else {
         emailErr = 'Enter Valid EmailId';
       }

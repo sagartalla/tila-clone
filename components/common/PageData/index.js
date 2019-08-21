@@ -192,17 +192,21 @@ class PageData extends React.Component {
       case 'BT7': {
         const { banners } = content.data[lang];
         return (
-          <Row className={`${styles['banner-prt-main']} ${styles['m-0']} ${styles['display-t-i-f']}`}>
-            {banners.length > 0 &&
-              banners.map(banner => (
-                <div className={styles['banner-inn-prt']} style={{ width: `${100 / banners.length}%` }}>
-                  <div className={styles['sub-banr-img']}>
-                    <a href={banner.link} rel="noopener noreferrer" target="_blank">
-                      <img src={banner.img} className={`${styles['border-radius4']} ${styles['inside-bnr']}`} alt={banner.display_name} />
-                    </a>
+          <Row className={`${styles['mt-15']} ${styles['mb-15']} ${styles['ml-0']} ${styles['mr-0']}`}>
+            {content.data[lang].title &&
+              <h3 className={`${styles['thick-gry-clr']} ${styles['fs-20']} ${styles['mt-0']} ${styles['pl-10']} ${styles['pr-10']}`}>{content.data[lang].title}</h3>}
+            <div className={`${styles['banner-prt-main']}`}>
+              {banners.length > 0 &&
+                banners.map(banner => (
+                  <div className={styles['banner-inn-prt']} style={{ width: `${100 / banners.length}%` }}>
+                    <div className={styles['sub-banr-img']}>
+                      <a href={banner.link} rel="noopener noreferrer" target="_blank">
+                        <img src={banner.img} className={`${styles['border-radius4']} ${styles['inside-bnr']}`} alt={banner.display_name} />
+                      </a>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+            </div>
           </Row>
         );
       }
@@ -688,7 +692,7 @@ class PageData extends React.Component {
                     </div>
               </a>
             </div>
-            <div style={{paddingBottom:'10px',width:"33.27%",paddingRight:'10px'}}>
+            <div style={{width:"33.27%",paddingRight:'10px'}}>
             <a href={banners[9].link}>
               <div>
                     <img src={banners[9].img}  alt="" className={styles['img-responsive']} />
@@ -702,6 +706,95 @@ class PageData extends React.Component {
       </div>);
     }
 
+
+      case 'CBT3a' : {
+        const { banners, breadcrumb, title } = content.data[lang];
+        return (
+          <div className={`${styles['display-t-i-f']} ${styles['flex-prop']}`} >
+            <div className={`${styles['fs-20']} ${styles.title}`}>{title}</div>
+            <div className = {styles.cbt3a}>
+              <div className={styles.heading}>
+                <h1>Just Arrived</h1>
+                <p style={{color: "#666666"}}>Go with trend</p>
+              </div>
+              <div className={styles.wrapper}>
+                <div className={styles.img1}>
+                  <a href={banners[0].link}>
+                    <img src={banners[0].img} width={banners[0].config.width} height={banners[0].config.height}/>
+                  </a>
+                </div>
+                <div className={styles.img2}>
+                  <a href={banners[1].link}>
+                    <img src={banners[1].img} width={banners[0].config.width} height={banners[0].config.height} />
+                  </a>
+                </div>
+                <div className={styles.img3}>
+                  <a href={banners[2].link}>
+                    <img src={banners[2].img} width={banners[0].config.width} height={banners[0].config.height}/>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      case 'CBT2a': {
+        const { banners, breadcrumb, title } = content.data[lang];
+        return (
+          <div className={`${styles['display-t-i-f']}`} >
+            <div className={`${styles['fs-20']} ${styles.title}`}>{title}</div>
+            <div className={styles.cbt2aBanner}>
+                <div className={styles.cbt2aBG}>
+                    <a href={banners[0].link}>
+                      <div>
+                        <img src={banners[0].img} width={banners[0].config.width} height={banners[0].config.height}/>
+                      </div>
+                    </a>
+                  </div>
+                <div className={styles.setWidth1}>
+                  <div className={styles.trendingImg}>
+                      <a href={banners[3].link}>
+                        <div>
+                          <img src={banners[1].img} width={banners[0].config.width} height={banners[0].config.height}/>
+                        </div>
+                      </a>
+                  </div>
+                </div>
+            </div>
+
+
+          </div>
+          )
+      }
+
+      case 'BT2a':{
+
+          const{banners,breadcrumb, title} = content.data[lang];
+
+          return(
+            <div>
+              <div className={`${styles['display-t-i-cb']} ${styles['flex']}`} >
+              <div className={`${styles['fs-20']} ${styles.title}`}>{title}</div>
+              <div style={{paddingRight:'10px',width:"50%"}}>
+                <a href={banners[0].link}>
+                  <div>
+                        <img src={banners[0].img}  alt="" className={styles['img-responsive']} />
+                  </div>
+                </a>
+              </div>
+              <div style={{width:"50%"}}>
+                <a href={banners[1].link}>
+                  <div>
+                        <img src={banners[1].img}  alt="" className={styles['img-responsive']} />
+                  </div>
+                </a>
+              </div>
+              </div>
+            </div>
+          );
+
+      }
 
 
       default: return null;

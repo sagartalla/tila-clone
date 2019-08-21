@@ -80,7 +80,7 @@ class SignIn extends Component {
       email: '',
       first_name: props && props.loginResponse && props.loginResponse.data ? props.loginResponse.data.first_name : '',
       last_name: props && props.loginResponse && props.loginResponse.data ? props.loginResponse.data.last_name : '',
-      promotional_notification: false,
+      opted_for_deals: false,
       // rememberMe: !!localStorage.getItem('remember'),
       validation: this.validations.valid(),
     };
@@ -148,7 +148,7 @@ class SignIn extends Component {
   login = (e) => {
     e.preventDefault();
     const {
-      first_name, last_name, password, rememberMe, promotional_notification, email,
+      first_name, last_name, password, rememberMe, opted_for_deals, email,
     } = this.state;
     const {
       activeEmailId, userLogin, mode, v2NextPage, loginResponse,
@@ -162,7 +162,7 @@ class SignIn extends Component {
           metadata: {
             username: activeEmailId,
             password,
-            promotional_notification,
+            opted_for_deals,
           },
           rememberMe: false,
         };
@@ -184,7 +184,7 @@ class SignIn extends Component {
             last_name,
             mobile_no: '',
             mobile_country_code: '',
-            promotional_notification,
+            opted_for_deals,
           },
           rememberMe: false,
         };
@@ -213,7 +213,7 @@ class SignIn extends Component {
   // 3. User signup through social login
   render() {
     const {
-      hide, promotional_notification, password, rememberMe, passwordErr, first_name, last_name, validation, email,
+      hide, opted_for_deals, password, rememberMe, passwordErr, first_name, last_name, validation, email,
     } = this.state;
     const { showForgotPassword, mode, activeEmailId, loadingStatus, getActiveUser, loginResponse } = this.props;
     return (
@@ -338,7 +338,7 @@ class SignIn extends Component {
         <Col md={12} className={`${styles['p-0']} ${styles['mt-20']}  ${styles['mb-10']}`}>
           {
             <div className={`${styles['checkbox-material']} ${styles.flex} ${styles['p-0']}`}>
-              <input id="deals-offers-reg" name="promotional_notification" type="checkbox" onChange={this.handleCheck} checked={promotional_notification} />
+              <input id="deals-offers-reg" name="opted_for_deals" type="checkbox" onChange={this.handleCheck} checked={opted_for_deals} />
               <label htmlFor="deals-offers-reg">
                 <span className={`${styles['light-gry-clr']} ${styles['fs-12']}`}><span>{LOGIN_PAGE.I_WOULD_LIKE_TO_RECEIVE}</span><span className={`${styles['yellow-clr']}`}>&nbsp;{LOGIN_PAGE.DEALS_OFFERS}</span></span>
               </label>

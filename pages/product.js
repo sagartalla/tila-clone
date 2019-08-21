@@ -9,6 +9,7 @@ import Base, { baseActions } from './base';
 import makeStore from '../store';
 import { actionCreators } from '../store/product';
 import { actionCreators as MegamenuActionsCreators } from '../store/megamenu';
+import { actionCreators as wishlistActionsCreators } from '../store/cam/wishlist';
 // import { actionCreators as reviewRatingActionCreators } from '../store/ratingReviews';
 
 import Layout from '../layout/main';

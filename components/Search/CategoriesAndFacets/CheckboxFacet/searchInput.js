@@ -8,24 +8,28 @@ import SVGCompoent from '../../../common/SVGComponet';
 
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
-const RenderFilterBar = ({ onFilterData, placeName }) => {
+const RenderFilterBar = ({ onFilterData, placeName, className }) => {
   const[inputVal,handleChange] = useState('')
   const onChangeData = (e) => {
     handleChange(e.currentTarget.value)
-    onFilterData(inputVal)
+    onFilterData(e.currentTarget.value)
   }
   return (
-    <div className={`${styles['search-header']} ${styles['flex']}`}>
+    <div className={`${styles['search-header']} ${className} ${styles['flex']}`}>
       <SVGCompoent
         src="icons/search/search-icon"
-        clsName={`${styles['icon-search']}`}
+        clsName={`${styles['icon-search']} ${styles['ml-5']}`}
       />
       <input
         type='text'
         onChange={onChangeData}
         placeholder={placeName}
         value={inputVal}
-        className={`${styles['pl-18']}`}
+        style={{
+          width: '180px',
+          border: '1px solid #c8c7cc',
+    }}
+        className={`${styles['pl-25']}`}
       />
     </div>
   )

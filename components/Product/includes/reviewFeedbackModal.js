@@ -41,7 +41,7 @@ export default class FeedbackModal extends Component {
       textValue: props.comment || '',
       rating: props.rating || 0,
       validation: this.validations.valid(),
-      charsLeft: (300 - (props && props.comment && props.comment.length)) || 300,
+      charsLeft: props && props.comment === undefined ? 300 : (300 - (props && props.comment && props.comment.length)) < 0 ? 300 : (300 - (props && props.comment && props.comment.length)),
     };
     this.handleTextChange = this.handleTextChange.bind(this);
     this.retrieveRating = this.retrieveRating.bind(this);
