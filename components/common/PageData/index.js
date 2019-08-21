@@ -80,11 +80,37 @@ let sliderTBS = '';
 class PageData extends React.Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      currentViewPortWidth:0
+    };
   }
+
+  componentDidMount() {
+    this.setState({
+    currentViewPortWidth: window.innerWidth
+    });
+    window.addEventListener("resize", this.update);
+   }
+    
+   update = () => {
+    this.setState({
+    currentViewPortWidth: window.innerWidth
+    });
+   };
+    
+   componentWillUnmount() {
+    window.removeEventListener('resize', this.update);
+   }
+    
+   getWidth = (bannerData, index) => {
+     const { currentViewPortWidth } = this.state;
+    return ((currentViewPortWidth * bannerData[index].config.width / 1440) + 10)
+   }
+
   // breadcrums are pending...
   getContent = () => {
     const { content, index } = this.props;
+    const { currentViewPortWidth } = this.state;
     switch (content.layout_id) {
       case 'CT1a':
         return (
@@ -137,6 +163,43 @@ class PageData extends React.Component {
           </div>
         );
 
+
+       //ST1a slider
+       case 'ST1a': {
+        
+        const settings = {
+          dots: false,
+          infinite: false,
+          speed: 500,
+          slidesToShow: 8,
+          slidesToScroll: 1
+        };
+       
+        return(
+            <div className={styles.fashionBannerSpacing}>
+              
+              <Slider {...settings} 
+                asNavFor={sliderTBS}
+                ref={(slider) => { sliderTBS = slider; }}
+                lazyLoad={false}
+                className={`${styles.flex} ${styles['fashion-main-slider']} ${styles['flex-colum']}`}
+                customPaging={i => <span className={`${styles['fs-10']}`}>{content.data[lang].banners[i].display_name}</span>}
+              >
+                {content.data[lang].banners.map(i => (
+                  <div className={styles.fSlider} key={i.display_name}>
+                    <a href={i.link}>
+                      <div className={`${styles.item} ${styles['slick-itm']}`} key={i.display_name}>
+                        <img src={i.img} alt={i.display_name} className={styles.imageRounded}/>
+                      </div>
+                    </a>
+                    <span className={`${styles['fs-12']} ${styles['pt-10']} ${styles['justify-center']} ${styles['slider-elips']} ${styles['lne-ht1_2']}`} style={{textAlign: 'center', display: 'inline-block'}} >{i.display_name}</span>
+                  </div>
+                ))}
+              </Slider>
+            </div>
+        )
+      }
+      
 
 
       // case 'BT9':
@@ -436,11 +499,10 @@ class PageData extends React.Component {
         );
       }
       case 'CBT8a': {
-        const { banners, breadcrumb, title } = content.data[lang];
+        const { banners, title } = content.data[lang];
         return (
           <div className={`${styles['flex-prop']} ${styles['bannerSpacing']}`} >
-            <div className={`${styles['fs-20']} ${styles.title}`}>{title}</div>
-              <div className= {styles.d11}>
+              <div className= {styles.d11} style={{width: this.getWidth(banners, 0)}}>
                 <a href={banners[0].link}>
                   <div>
                     <img src={banners[0].img}  alt="" className = {`${styles['img-responsive']} ${styles.imgResolution} ${styles['border-radius4']}`}  />
@@ -448,7 +510,7 @@ class PageData extends React.Component {
                 </a>
               </div>
 
-              <div className= {styles.d12}>
+              <div className= {styles.d12} style={{width: this.getWidth(banners, 1)}}>
                 <a href={banners[1].link}>
                   <div>
                     <img src={banners[1].img}   alt="" className = {`${styles['img-responsive']} ${styles.imgResolution} ${styles['border-radius4']}`} />
@@ -458,21 +520,21 @@ class PageData extends React.Component {
 
             <div className={styles.rightBanner}>
               <div className= {styles.d13}>
-                <div>
+                <div style={{width: this.getWidth(banners, 2)}}>
                   <a href={banners[2].link}>
                     <div>
                       <img src={banners[2].img}   alt="" className = {`${styles['img-responsive']} ${styles.imgResolution} ${styles['border-radius4']}`} />
                     </div>
                   </a>
                 </div>
-                <div>
+                <div style={{width: this.getWidth(banners, 3)}}>
                   <a href={banners[3].link}>
                     <div>
                       <img src={banners[3].img}  alt="" className = {`${styles['img-responsive']} ${styles.imgResolution} ${styles['border-radius4']}`} />
                     </div>
                   </a>
                 </div>
-                <div>
+                <div style={{width: this.getWidth(banners, 4)}}>
                   <a href={banners[4].link}>
                     <div>
                       <img src={banners[4].img}   alt="" className = {`${styles['img-responsive']} ${styles.imgResolution} ${styles['border-radius4']}`} />
@@ -482,21 +544,21 @@ class PageData extends React.Component {
               </div>
 
               <div className= {styles.d14}>
-                <div>
+                <div style={{width: this.getWidth(banners, 5)}}>
                   <a href={banners[5].link}>
                     <div>
                       <img src={banners[5].img}  alt="" className = {`${styles['img-responsive']} ${styles.imgResolution} ${styles['border-radius4']}`} />
                     </div>
                   </a>
                 </div>
-                <div>
+                <div style={{width: this.getWidth(banners, 6)}}>
                   <a href={banners[6].link}>
                     <div>
                       <img src={banners[6].img}  alt="" className = {`${styles['img-responsive']} ${styles.imgResolution} ${styles['border-radius4']}`} />
                     </div>
                   </a>
                 </div>
-                <div>
+                <div style={{width: this.getWidth(banners, 7)}}>
                   <a href={banners[7].link}>
                     <div>
                       <img src={banners[7].img}  alt="" className = {`${styles['img-responsive']} ${styles.imgResolution} ${styles['border-radius4']}`} />
@@ -513,55 +575,64 @@ class PageData extends React.Component {
 
 
       case 'CBT3a' : {
-        const { banners, breadcrumb, title } = content.data[lang];
+        const { banners, title, description } = content.data[lang];
         return (
-          <div className={`${styles['flex-prop']} ${styles['bannerSpacing']}`} >
-            <div className={`${styles['fs-20']} ${styles.title}`}>{title}</div>
+          <div className={` ${styles['fashionBannerSpacing']}`} >
+            <div className={`${styles['fs-20']} ${styles.title}`}>
+              <div className={styles.pdL}>
+                <h1 className={styles.fHeading} style={{textAlign: 'center'}}>{title}</h1>
+                <span>{description}</span>
+              </div>
+            </div>
+           <div className={`${styles['flex-prop']}`}>
             <div className = {styles.cbt3a}>
-              <div className={styles.heading}>
-                <h1>Just Arrived</h1>
-                <p style={{color: "#666666", fontSize: '16px'}}>Go with trend</p>
-              </div>
+             
               <div className={styles.wrapper}>
-                <div className={styles.img1}>
+                <div className={styles.img1} style={{width: this.getWidth(banners, 0)}}>
                   <a href={banners[0].link}>
-                    <img src={banners[0].img} width={banners[0].config.width} height={banners[0].config.height}/>
+                    <img src={banners[0].img} height={banners[0].config.height}/>
                   </a>
                 </div>
-                <div className={styles.img2}>
+                <div className={styles.img2} style={{width: this.getWidth(banners, 1)}}>
                   <a href={banners[1].link}>
-                    <img src={banners[1].img} width={banners[0].config.width} height={banners[0].config.height} />
+                    <img src={banners[1].img} height={banners[1].config.height} />
                   </a>
                 </div>
-                <div className={styles.img3}>
+                <div className={styles.img3} style={{width: this.getWidth(banners, 2)}}>
                   <a href={banners[2].link}>
-                    <img src={banners[2].img} width={banners[0].config.width} height={banners[0].config.height}/>
+                    <img src={banners[2].img} height={banners[2].config.height}/>
                   </a>
                 </div>
               </div>
+            </div>
             </div>
           </div>
         );
       }
 
       case 'CBT2a': {
-        const { banners, breadcrumb, title } = content.data[lang];
+        const { banners, title, description } = content.data[lang];
         return (
-          <div className={styles.bannerSpacing}>
-            <div className={`${styles['fs-20']} ${styles.title}`}>{title}</div>
+          <div className={styles.fashionBannerSpacing}>
+            <div className={`${styles['fs-20']} ${styles.title}`}>
+              <div className={styles.pdL} style={{paddingLeft: '102px'}}>
+                <h1 className={styles.fHeading}  style={{textAlign: 'left'}}>{title}</h1>
+                <span>{description}</span>
+              </div>
+            </div>
             <div className={styles.cbt2aBanner}>
-                <div className={styles.F1banner}>
+                <div className={styles.F1banner} style={{width: this.getWidth(banners, 0)}}>
                     <a href={banners[0].link}>
                       <div>
-                        <img src={banners[0].img}/>
+                        <img src={banners[0].img} className={styles.imgResolution} />
                       </div>
                     </a>
                   </div>
-                <div className={styles.F2banner}>
+                <div className={styles.F2banner} style={{width: this.getWidth(banners, 1)}}>
                   <div>
                       <a href={banners[1].link}>
                         <div>
-                          <img src={banners[1].img} />
+                          <img src={banners[1].img} className={styles.imgResolution} />
                         </div>
                       </a>
                   </div>
@@ -574,25 +645,25 @@ class PageData extends React.Component {
 
 
       case 'CBT6c': {
-        const { banners, breadcrumb, title } = content.data[lang];
+        const { banners, title } = content.data[lang];
         return(
-          <div className={`${styles.fashionBanners} ${styles['bannerSpacing']}`}>
+          <div className={`${styles.fashionBanners} ${styles['fashionBannerSpacing']}`}>
             <div className={styles.fBanners1} style={{display: 'flex'}}>
-              <div className={styles.fb3} style={{width: '33.33%'}}>
+              <div className={styles.fb3} style={{width: this.getWidth(banners, 0)}}>
                 <a href={banners[0].link}>
                   <div>
                    <img src={banners[0].img} alt="" className={styles.imgResolution} />
                   </div>
                 </a>
               </div>
-              <div className={styles.fb3} style={{width: '33.33%'}}>
+              <div className={styles.fb3} style={{width: this.getWidth(banners, 1)}}>
                 <a href={banners[1].img}>
                   <div>
                    <img src={banners[1].img} alt="" className={styles.imgResolution}/>
                   </div>
                 </a>
               </div>
-              <div className={styles.fb3} style={{width: '33.33%'}}>
+              <div className={styles.fb3} style={{width: this.getWidth(banners, 2)}}>
                 <a href={banners[2].link}>
                   <div>
                    <img src={banners[2].img} alt="" className={styles.imgResolution} />
@@ -602,21 +673,21 @@ class PageData extends React.Component {
             </div>
 
             <div className={styles.fBanners2}>
-              <div className={styles.fb2}>
+              <div className={styles.fb2} style={{width: this.getWidth(banners, 3)}}>
                 <a href={banners[3].link}>
                   <div>
                    <img src={banners[3].img} alt="" className={styles.imgResolution} />
                   </div>
                 </a>
               </div>
-              <div className={styles.fb1}>
+              <div className={styles.fb1} style={{width: this.getWidth(banners, 4)}}>
                 <a href={banners[4].link}>
                   <div>
                    <img src={banners[4].img} alt="" className={styles.imgResolution} />
                   </div>
                 </a>
               </div>
-              <div className={styles.fb2}>
+              <div className={styles.fb2} style={{width: this.getWidth(banners, 5)}}>
                 <a href={banners[5].link}>
                   <div>
                    <img src={banners[5].img} alt="" className={styles.imgResolution} />
@@ -635,7 +706,7 @@ class PageData extends React.Component {
 
   render() {
     const { content } = this.props;
-
+console.log('content', content)
     if (!content.visible) return null;
 
     return this.getContent();
