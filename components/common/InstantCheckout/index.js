@@ -107,8 +107,7 @@ const Tabs = ({ children, onCallback,value }) => {
   )
 }
 const InstaCheckoutDetails = ({ details, selectedAddr,addressResults,showMiniAddress,isPdp,...props }) => {
- const [value,setValue] = useState(0)
-
+ const [value,setValue] = useState(details.payment_options_available.length === 1 && details.payment_options_available[0].type === 'VOUCHER' ? 'VOUCHER' : 'SAVED_CARD');
  const getCheckValue = (data) => {
    let filteredData = data.payment_options_available.filter((item) => item.type === 'VOUCHER')
    if(filteredData.length > 0) {
@@ -122,22 +121,24 @@ const InstaCheckoutDetails = ({ details, selectedAddr,addressResults,showMiniAdd
  const [checkValue,setCheckValue] = useState(getCheckValue(details))
 
  const checkTilaCreditValue = (e) => {
-
-   props.selectedTilaCredit(e.target.checked)
-   return setCheckValue(e.target.checked)
+   props.selectedTilaCredit(e.target.checked);
+   setValue(e.target.checked ? ( details.payment_options_available.length === 1 && details.payment_options_available[0].type === 'VOUCHER' ? 'VOUCHER' : 'SAVED_CARD' ) : 'SAVED_CARD');
+   return setCheckValue(e.target.checked);
  }
  const getCurrentTabValue = (e,value) => {
 
    return setValue(value)
  }
  const getTabPanelData = (data) => {
-   let filteredData = data.payment_options_available.filter((item) => {
-     return item.type !== 'VOUCHER'
-   })
+   let filteredData = data.payment_options_available;
+   let savedCards = data.payment_options_available.filter((item) => {
+     return item.type === 'SAVED_CARD'
+   })[0] || {};
+   savedCards = savedCards.cards_list;
    if(filteredData.length > 0) {
      return filteredData.map((item,index) => {
        return (
-         <TabPanel value={value} index={index}>
+         <TabPanel value={value} index={item.type}>
            <div
              className={
                `${styles['border']}
@@ -168,12 +169,12 @@ const InstaCheckoutDetails = ({ details, selectedAddr,addressResults,showMiniAdd
                  : null
              }
              {
-               item.type === 'SAVED_CARD' && item.cards_list.length > 0 ?
+               (item.type === 'SAVED_CARD' || item.type === 'VOUCHER') && savedCards && savedCards.length > 0 ?
                  <Fragment>
                    <VaultCard
                      defaultCard={props.getSelectedCard[0]}
                      updateCVV={props.updateCVV}
-                     vaultResults={item.cards_list}
+                     vaultResults={savedCards}
                      toggleMiniVault={props.toggleMiniVault}
                    />
                    {
@@ -190,7 +191,7 @@ const InstaCheckoutDetails = ({ details, selectedAddr,addressResults,showMiniAdd
                  : null
              }
              {
-               item.type === 'SAVED_CARD' ?
+               item.type !== 'CASH_ON_DELIVERY' ?
                <div
                  className={`${styles['flex']} ${styles['justify-center']}`}
                >
@@ -261,9 +262,9 @@ const InstaCheckoutDetails = ({ details, selectedAddr,addressResults,showMiniAdd
                 return (
                   <Tab
                     label={`${item.type === 'SAVED_CARD' ? 'Credit/Debit Card' : 'COD'}`}
-                    value={index}
+                    value={item.type}
                     name={item.type}
-                    tabType='radioInput'
+                    tabType={item.type === 'VOUCHER' ? 'checkbox' : 'radioInput'}
                   />
                 )
               })
@@ -305,6 +306,7 @@ class InstantCheckout extends Component {
       nextStep: 'captcha',
       btnLoader: false,
       iframe_url: '',
+      isIframeLoaded:false,
     }
 
     this.updateCVV = this.updateCVV.bind(this);
@@ -321,6 +323,7 @@ class InstantCheckout extends Component {
     this.afterSuccessOtpVerification = this.afterSuccessOtpVerification.bind(this)
     this.callInstantCheckout = this.callInstantCheckout.bind(this)
     this.selectedTilaCredit = this.selectedTilaCredit.bind(this)
+    this.hideIframe = this.hideIframe.bind(this)
   }
 
   componentDidMount() {
@@ -336,6 +339,12 @@ class InstantCheckout extends Component {
     }
     this.props.getCheckoutOptions(params)
     this.props.getUserProfileInfo();
+  }
+  hideIframe() {
+    this.setState({
+      isIframeLoaded:false
+    })
+
   }
   selectedTilaCredit(value){
     const { currency, moneyValue,getCardDetails } = this.props;
@@ -354,7 +363,7 @@ class InstantCheckout extends Component {
       location.href = nextProps.getInstantCheckoutdata.redirect_url;
     }
     if(nextProps.getInstantCheckoutdata && nextProps.getInstantCheckoutdata.iframe_url) {
-      this.setState({ iframe_url:nextProps.getInstantCheckoutdata.iframe_url })
+      this.setState({ iframe_url:nextProps.getInstantCheckoutdata.iframe_url,isIframeLoaded: true })
     }
   }
   closeModal() {
@@ -385,17 +394,17 @@ class InstantCheckout extends Component {
     const {
       creditDebitCard, cntryCode, phoneNumber,
     } = this.state;
-    const { defaultCard, insnt_item_listing_id, doInstantCheckout, getCardDetails,getSelectedCard } = this.props;
-    const { transaction_id } = getCardDetails;
+    const { defaultCard, insnt_item_listing_id, doInstantCheckout, getCardDetails, getSelectedCard, details } = this.props;
+    const { transaction_id, payment_options_available } = getCardDetails;
 
     const params = {
       listing_ids: insnt_item_listing_id ? [insnt_item_listing_id] : [],
-      payment_mode: creditDebitCard ? 'SAVED_CARD' : 'CASH_ON_DELIVERY',
+      payment_mode: (payment_options_available.length === 1 && payment_options_available[0].type === 'VOUCHER') ? 'VOUCHER' : (creditDebitCard ? 'SAVED_CARD' : 'CASH_ON_DELIVERY'),
       redirect_url: `${window.location.origin}/${language}`,
       transaction_id
     };
 
-    if (creditDebitCard) {
+    if (!(payment_options_available.length === 1 && payment_options_available[0].type === 'VOUCHER') && creditDebitCard) {
       params.card_token = getSelectedCard[0].card_token;
     } else params.phone_number = phoneNumber ? `${cntryCode} ${phoneNumber}` : '';
 
@@ -484,8 +493,19 @@ class InstantCheckout extends Component {
     return (
       <div className={`${styles['instant-checkout']} ${styles['p-10']}`}>
         {
-          iframe_url ?
-          <iframe sandbox="allow-forms allow-modals allow-popups-to-escape-sandbox allow-popups allow-scripts allow-top-navigation allow-same-origin" src={iframe_url} style={{ height: '426px', width: '500px', border: '0' }} class="h-200 desktop:h-376 w-full"></iframe>
+          iframe_url ? 
+            {
+              true:<iframe sandbox="allow-forms allow-modals allow-popups-to-escape-sandbox allow-popups allow-scripts allow-top-navigation allow-same-origin" src={iframe_url} style={{ height: '426px', width: '500px', border: '0' }} class="h-200 desktop:h-376 w-full"></iframe>,
+              false:<Modal
+                show={this.state.isIframeLoaded}
+                onHide={this.hideIframe}
+                dialogClassName="custom-modal"
+              >
+              <Modal.Body>
+                <iframe sandbox="allow-forms allow-modals allow-popups-to-escape-sandbox allow-popups allow-scripts allow-top-navigation allow-same-origin" src={iframe_url} style={{ height: '426px', width: '500px', border: '0' }} class="h-200 desktop:h-376 w-full"></iframe>
+              </Modal.Body>
+            </Modal>,
+            }[isPdp]
           :
           <div className={`${styles['pr-10']} ${styles['pl-10']}`}>
              {
@@ -617,7 +637,7 @@ InstantCheckout.propTypes = {
 };
 
 InstantCheckout.defaultProps = {
-
+  isPdp:false
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(InstantCheckout);
