@@ -36,7 +36,7 @@ const getSelectedCard = (store) => {
     selectedCard = store.vaultReducer.data.cardDetails.payment_options_available.filter((item) => item.type === 'SAVED_CARD')
     .reduce((acc, item) => [...acc, ...item.cards_list], [])
     filteredCard = selectedCard.filter((item) => item.card_token === store.vaultReducer.selectedCard )
-    selectedCard = filteredCard.length > 0 ? filteredCard : [selectedCard[0]]
+    selectedCard = filteredCard.length > 0 ? filteredCard : selectedCard.filter((value) => value.default)
   }
   return selectedCard;
 }
