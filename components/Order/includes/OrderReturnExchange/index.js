@@ -87,7 +87,6 @@ class OrderReturnExchange extends Component {
     const { variant_id = '', variant_info = {}, listing_id='' } = item;
     const { product_id, catalog_id, variant_details } = variant_info;
     const tuin = variant_details && variant_details.attribute_map && variant_details.attribute_map.tuin && variant_details.attribute_map.tuin.attribute_values[0].value;
-    debugger;
     return (
       <div>
         <Grid>
