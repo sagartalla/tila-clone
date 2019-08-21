@@ -33,6 +33,7 @@ const getWishListResults = (store) => {
         mrp: variant_info.mrp && variant_info.mrp.display_value,
         wishlisted_price: item.wishlisted_price,
         changed_price: item.changed_price,
+        changed_status: item.changed_status,
         catalog_id: item && item.product_details && item.product_details.catalog_details.catalog_id,
         itemType: item && item.product_details && item.product_details.catalog_details.item_type_name,
         inventory_count: variant_info.total_inventory_count,
