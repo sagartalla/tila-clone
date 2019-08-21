@@ -223,6 +223,8 @@ const optionParams = (store) => {
     isListed,
   };
 };
+
+const sortValue = store => store.searchReducer.data.searchDetails.sort;
 /* eslint-disable */
 const getFacetfilters = store => (queryObject) => {
   const facetFilters = {};
@@ -300,5 +302,5 @@ export {
   getCategoryId, getQuery, getCategorySearchQuery, getChoosenCategoryName,
   getFacetfilters, optionParams, getSearchBarFilterState, addCartAndWishlistDetails,
   getIsCategoryTree, getAppliedFitlers, getSuggestions, getSpellCheckResponse,
-  getUserDetails, getCartButtonLoaders, facetData,
+  getUserDetails, getCartButtonLoaders, facetData, sortValue,
 };
