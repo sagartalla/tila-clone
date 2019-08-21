@@ -21,6 +21,7 @@ const wishlistReducer = typeToReducer({
     FULFILLED: (state, action) => Object.assign({}, state, {
       paginationData: action.payload.data,
       data: action.payload.data.content,
+      currentPage: action.payload.currentPage,
       ui: { loading: false },
     }),
   },

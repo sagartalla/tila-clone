@@ -90,7 +90,7 @@ class RangeFitler extends Component {
             <SVGCompoent clsName={`${styles['expand-icon']}`} src="icons/common-icon/down-arrow-circle" />
           </Panel.Title> */}
         <Panel.Title toggle className={`${styles['category-list-title']} ${styles['black-color']} ${styles['fontW600']} ${styles['flx-spacebw-alignc']}`}>
-          {filter.name}
+          <span className={styles['flt-lbl']}>{filter.name}</span>
           <SVGCompoent clsName={`${styles['expand-icon']}`} src="icons/common-icon/down-arrow-circle" />
         </Panel.Title>
         </Panel.Heading>

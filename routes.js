@@ -21,8 +21,10 @@ routes
   .add({ name: 'brand', pattern: '/:language(en|ar)/brand/:brandName', page: 'brand' })
   .add({ name: 'ftb', pattern: '/:language(en|ar)/ftb', page: 'ftb' })
   .add({ name: 'redirect', pattern: '/:country/:language(en|ar)', page: 'homeRedirect' })
-  .add({ name: 'categoryLanding', pattern: '/:language(en|ar)/:category(electronics|fashion|lifestyle)', page: 'home' })
+  .add({ name: 'categoryLanding', pattern: '/:language(en|ar)/:category(electronics|fashion|lifestyle)', page: 'index' })
   .add({ name: 'category', pattern: '/:language(en|ar)/clp/:category', page: 'category' })
-  .add({ name: 'default', pattern: '/:language(en|ar)?', page: 'home' });
+  .add({ name: 'default', pattern: '/:language(en|ar)?', page: 'home' })
+  .add({ name: 'items-zone', pattern: '/:language(en|ar)/items-zone/:zone', page: 'itemsZone' })
+  .add({ name: 'verifyemail', pattern: '/:language(en|ar)/email/verify', page: 'verifyEmail' });
 
 module.exports = routes;

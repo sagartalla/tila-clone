@@ -181,6 +181,7 @@ export const AR_KEYWORDS = {
     PRICE_INCREASED_BY: 'Price Increased by',
   },
   PDP_PAGE: {
+    ITEM_IN_CART: 'Item in Cart',
     LOADING_REVIEWS: 'تحميل تعليقات المستخدم',
     REVIEW_ALL_TAB: 'جميع التعليقات',
     REVIEW_EXPERT_TAB: 'تعليقات الخبراء',
@@ -777,7 +778,7 @@ export const AR_KEYWORDS = {
   EMAIL_VERIFICATION: {
     VERIFY_YOUR_EMAIL: 'تفعيل  بريدك الالكتروني',
     OTP_SENT: 'تم إرسال كلمة السر المؤقتة إليك',
-    ENTER_OTP: 'يرجى ادخال كلمة السر المؤقتة لتفعيل بريدك الالكتروني',
+    ENTER_OTP: 'Please enter the OTP or Click on the email verification link to verify your email address.',
     TWENTY_FOUR_HOURS: '٢٤ ساعة',
     RESEND: 'إعادة الإرسال',
     VERIFY: 'التفعيل',

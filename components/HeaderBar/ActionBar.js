@@ -101,11 +101,11 @@ class ActionBar extends Component {
       loginClicked: false,
     });
 
-    if (nextProps && nextProps.activeObj && nextProps.activeObj.nextPage === null) {
+    if ((nextProps && nextProps.activeObj && nextProps.activeObj.nextPage === null) || nextProps.showEmailVerifySuccess) {
       setTimeout(() => {
         closeThankYouScreen();
         Router.pushRoute(`${window.location.origin}/${cookies.get('language')}`);
-      }, 3000);
+      }, 2000);
     }
 
     if (nextProps.isLoggedIn) {
@@ -363,7 +363,7 @@ const mapStateToProps = store => ({
   showLogin: selectors.getShowLogin(store),
   ptaToken: selectors.getPTAToken(store),
   wishListCount: wishListSelectors.getProductsDetails(store).length,
-  showEmailVerificationScreen: selectors.showEmailVerificationScreen(store),
+  showEmailVerifySuccess: selectors.showEmailVerifySuccess(store),
   getEditDetails: cartSelectors.getEditDetails(store),
   imgSource: personalSelectors.getImageSource(store),
   activeObj: selectors.getActive(store),
