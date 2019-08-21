@@ -1,8 +1,10 @@
 import api from './api';
+import loginReq from '../helper/loginReq';
 
 const actions = {
   GET_PAGE: 'GET_PAGE',
   GET_LISTINGS_DETAILS: 'GET_LISTINGS_DETAILS',
+  GET_ALL_ZONE_ITEMS: 'GET_ALL_ZONE_ITEMS',
 };
 
 const actionCreators = {
@@ -13,6 +15,12 @@ const actionCreators = {
   getListings: (params, index) => ({
     type: actions.GET_LISTINGS_DETAILS,
     payload: api.getListings(params, index),
+  }),
+  getRecentlyViewedAll: loginReq(() => (dispatch) => {
+    dispatch({
+      type: actions.GET_ALL_ZONE_ITEMS,
+      payload: api.getRecentlyViewedAll(),
+    });
   }),
 };
 

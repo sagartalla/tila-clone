@@ -9,9 +9,8 @@ const cookies = new Cookies();
 const getPage = ({ page, id, published = true }) => axios.get(`${constants.PCM_URL}/cms/${page}?id_attribute=${id}&published=${published}`);
 
 const getListings = (params, index) => {
-
-  const shippingData = cookies.get('shippingInfo');
-  const { city: shippingCity } = shippingData || {};
+  // const shippingData = cookies.get('shippingInfo');
+  // const { city: shippingCity } = shippingData || {};
 
   const options = {
     language: cookies.get('language'),
@@ -32,7 +31,10 @@ const getListings = (params, index) => {
   }));
 };
 
+const getRecentlyViewedAll = () => axios.get(`${constants.WISHLIST_API_URL}/api/v1/recently/viewed/item/getAll?page=0&size=20`);
+
 export default {
   getPage,
   getListings,
+  getRecentlyViewedAll,
 };
