@@ -16,6 +16,10 @@
   outline: none !important;
 }
 
+#chatInlay {
+    right: -1000px;
+}
+
 @media (min-width: 1440px){
     .container {
         width: 1410px;

@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { languageDefinations } from '../../../utils/lang/';
 import SVGComponent from '../../common/SVGComponet';
 import { actionCreators } from '../../../store/coupons';
+import { selectors as instantCheckoutSelectors } from '../../../store/common/instantCheckout'
 import InstantCheckout from '../../common/InstantCheckout';
 import { actionCreators as cartActioncreators } from '../../../store/cart';
 
@@ -27,6 +28,7 @@ class CartAndPaymentSideBar extends Component {
     super(props);
 
     this.state = {
+      iframe_url:''
     };
   }
   removeCoupon = () => {
@@ -36,6 +38,11 @@ class CartAndPaymentSideBar extends Component {
     getCartResults({
       remove_coupon: true,
     });
+  }
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.getInstantCheckoutdata && nextProps.getInstantCheckoutdata.iframe_url) {
+      this.setState({ iframe_url:nextProps.getInstantCheckoutdata.iframe_url })
+    }
   }
   render() {
     const {
@@ -48,6 +55,7 @@ class CartAndPaymentSideBar extends Component {
       items, total_price, total_offer_price, total_gift_charges,
       total_discount, total_shipping, tax, item_cnt, currency, total_tila_care_charges,
     } = data;
+    const { iframe_url} = this.state;
     return (
       <div className={`${styles['right-bar']}`}>
         <div className={`${styles['coupon-code-main']}`}>
@@ -87,6 +95,7 @@ class CartAndPaymentSideBar extends Component {
               isPdp={isPdp}
               // isFromCart={isFromCart}
               totalPrice={total_price.display_value}
+              moneyValue={total_price.money_value}
               currency={currency}
               isMounted={false}
             />
@@ -110,7 +119,7 @@ class CartAndPaymentSideBar extends Component {
           <span className={`${styles['fs-12']}`}>Buy for 500 AED more and get 10% Off on your total purchase. <a className={styles['fs-14']}>View your wishlist</a></span>
         </div>
       */}
-
+      { !iframe_url ?
         <div className={styles['p-10-20']}>
           <ul className={`${styles['m-0']} ${styles['p-0']} ${styles['fs-12']}`}>
             <li>
@@ -157,12 +166,13 @@ class CartAndPaymentSideBar extends Component {
             {
             tax !== 0 ?
               <li>
-                <span className={styles['thick-gry-clr']}>{CART_PAGE.TAXES}</span>
-                <span>{currency}</span>
-              </li> : null
-            }
-            {
-              total_tila_care_charges !== null &&
+                <span className={styles['thick-gry-clr']}>{CART_PAGE.DELIVERY_CHARGES}</span>
+                {total_shipping.money_value > 0 ?
+                  <span>{total_shipping.currency_code || currency} {total_shipping.display_value || 0}</span> :
+                  <span className={`${styles.flex}`}><SVGComponent clsName={styles['ship-icon']} src={lang === 'en' ? "icons/free-shipping" : "icons/Arabic-Freeshipping" }/></span>
+                }
+              </li> : null}
+              {total_tila_care_charges !== null &&
               <li>
                 <span className={styles['thick-gry-clr']}>{CART_PAGE.TILA_CARE_PROTECTION}</span>
                 <span>
@@ -191,7 +201,7 @@ class CartAndPaymentSideBar extends Component {
                   : null
                 }
           </ul>
-        </div>
+        </div> : null}
       </div>
     );
   }
@@ -216,7 +226,11 @@ CartAndPaymentSideBar.defaultProps = {
   openSlider: f => f,
   getCartResults: f => f,
 };
-
+const mapStateToProps = (store) => {
+  return {
+    getInstantCheckoutdata: instantCheckoutSelectors.getInstantCheckoutResData(store),
+  }
+}
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
@@ -226,4 +240,4 @@ const mapDispatchToProps = dispatch =>
     dispatch,
   );
 
-export default connect(null, mapDispatchToProps)(CartAndPaymentSideBar);
+export default connect(mapStateToProps, mapDispatchToProps)(CartAndPaymentSideBar);
