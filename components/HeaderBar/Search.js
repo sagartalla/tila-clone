@@ -181,7 +181,7 @@ class Search extends Component {
     return (
       <div className={styles['search-wrapper']}>
         <form onSubmit={this.submitQuery}>
-          <Dropdown id="search-toggle" className={`${styles['cart-inn']} ${styles.width100}`}>
+          <Dropdown id="search-toggle" className={`${styles['cart-inn']} ${styles.width93}`}>
             <Dropdown.Toggle id="dropdown-custom-components">
               <div className={styles.overlap} tabIndex="0" onFocus={this.setSelectionRange}>
                 {(query && query.length) < 2 ? '' : (autoSearchValue || (suggestions.length > 0 && query.toLowerCase() === suggestions[0].data_edgengram.slice(0, query.length).toLowerCase() ? (query.concat(suggestions[0].data_edgengram.substring(query.length))) : ''))}
