@@ -83,7 +83,7 @@ const MiniCartBody = (props) => {
                     {(shipping === null || (shipping !== null && shipping.shippable)) ?
                       <div className={`${styles['flx-space-bw']} ${styles['pt-10']} ${styles['price-stepper-part']}`}>
                         <span className={styles['fontW600']}>
-                        <span>{cur}</span>&nbsp;
+                        <span className={`${styles['fs-12']}`}>{cur}</span>&nbsp;
                         <span>{offer_price}</span>
                         {/* {offer_price + ' ' + cur} */}
                         </span>
@@ -120,7 +120,7 @@ const MiniCartBody = (props) => {
           <div className={`${styles['p-20']} ${styles['instant-checkout-btn-part']}`}>
             <div className={`${styles['flx-spacebw-alignc']} ${styles['pb-10']}`}>
               <span className={styles['fontW600']}>{CART_PAGE.TOTAL_AMOUNT} :</span><span className={`${styles['fs-16']} ${styles['fontW600']}`}>
-              <span>{currency}</span>&nbsp;
+              <span className={`${styles['fs-14']}`}>{currency}</span>&nbsp;
               <span>{total_offer_price.display_value }</span>
               </span>
             </div>

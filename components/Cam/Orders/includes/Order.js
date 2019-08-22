@@ -116,7 +116,10 @@ const Order = ({ order, getInvoice }) => {
               }
             </span>
             <span className={`${styles['ml-10']} ${styles['fs-16']}`}>
-              <span>{ORDERS.ORDER_TOTAL}:</span> <span className={`${styles.fontW600} ${styles['light-gry-clr']}`}>{order.orderTotal}</span>
+              <span className={`${styles['thick-gry-clr']}`}>{ORDERS.ORDER_TOTAL} :</span> <span>
+              <span className={`${styles['fs-14']} ${styles['thick-gry-clr']}`}>{order.orderCurrency}</span>&nbsp;
+              <span className={`${styles.fontW600}`}>{order.orderAmount}</span>
+              </span>
             </span>
           </div>
         </Col>
