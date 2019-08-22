@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Cookies from 'universal-cookie';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import _ from 'lodash';
 import { selectors, actionCreators } from '../../../../store/order';
 import { languageDefinations } from '../../../../utils/lang';
+import { Router } from '../../../../routes';
 
 import lang from '../../../../utils/language';
 
@@ -15,6 +17,8 @@ import styles_ar from './orderIssue_ar.styl';
 
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
+const cookies = new Cookies();
+const language = cookies.get('language') || 'en';
 
 const { ORDER_PAGE } = languageDefinations();
 
@@ -60,7 +64,8 @@ class ChooseVariant extends Component {
       this.props.productNotAvailable()
     })
   }
-  choosedVariant = (listing) => () => {
+  choosedVariant = (listing, orderIssue) => () => {
+    debugger;
     const {listing_id,variant_id } = listing
 
     this.setState({
@@ -69,6 +74,11 @@ class ChooseVariant extends Component {
     }, () => {
       this.props.selectedVariant({listing_id,variant_id})
     })
+    const {
+      orderId, orderItem, variantId, getOrderDetails,listingId, tuinId
+    } = this.props;
+    // getOrderDetails(orderIssue.orderId);
+    Router.pushRoute(`/${language}/customer/orders/${orderIssue.orderId}/issue/RETURN/item/${orderIssue.selectedItem.id}/${variant_id}/${listing_id}`);
   }
   selectedSize(variantId,exchangeVariants) {
     const data = exchangeVariants.filter((el,index) => {
@@ -76,13 +86,13 @@ class ChooseVariant extends Component {
     })
     return  data[0].variant_details.attribute_map.size.attribute_values[0].value
   }
-  renderExchangeVariants(variants) {
+  renderExchangeVariants(variants, orderIssue) {
     const { activeListing } = this.state
     const data = variants.map((el,index) => {
       if(el.listing.total_inventory_count > 0) {
         return <li key={'variant_'+index}
           className={`${el.listing.total_inventory_count > 0 ? styles['productSize-Button'] : styles['product-StrikeButton']} ${activeListing === el.listing.listing_id ? styles['active-variant']: ''}`}
-          onClick={el.listing.total_inventory_count > 0 ? this.choosedVariant(el.listing) : this.sizeNotAvailable}
+          onClick={el.listing.total_inventory_count > 0 ? this.choosedVariant(el.listing, orderIssue) : this.sizeNotAvailable}
           >
           {el.variant_details.attribute_map && el.variant_details.attribute_map.size && el.variant_details.attribute_map.size.attribute_values[0].value}
         </li>
@@ -107,7 +117,7 @@ class ChooseVariant extends Component {
         {
           Object.keys(exchangeVariants[0].variant_details.attribute_map).length > 0 &&
           <ul className={`${styles['flex']} ${styles['product-sizeContainer']}`}>
-            { this.renderExchangeVariants(exchangeVariants) }
+            { this.renderExchangeVariants(exchangeVariants, orderIssue) }
           </ul>
         }
         <div>
@@ -141,7 +151,8 @@ const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators(
 		{
       getExchangeVariants: actionCreators.getExchangeVariants,
-      setVariantOption: actionCreators.setVariantOption
+      setVariantOption: actionCreators.setVariantOption,
+      getOrderDetails: actionCreators.getOrderDetails,
     },
 		dispatch,
 	);
