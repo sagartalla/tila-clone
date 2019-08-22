@@ -51,7 +51,7 @@ const MiniCartBody = (props) => {
                 variant_id='', catalogId: catalog_id, shipping, listing_id='', tuin_id } = item;
               return (
                 <div key={item_id} className={`${styles['flex']} ${styles['pt-15']} ${styles['pb-15']} ${styles['border-b']} ${styles['min-items-list']}`}>
-                  <Col md={2} sm={2} xs={2} className={`${styles['pl-0']} ${styles['pr-0']}`}>
+                  <Col md={2} sm={2} xs={2} className={`${styles['pl-0']} ${styles['pr-0']} ${styles['arbic-pad-re']}`}>
                     <div className={`${styles['cart-container-img']} ${styles['flex']} ${styles['justify-center']}`}>
                     <Link route={`/${language}/pdp/${name && name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${tuin_id ? `${tuin_id}/`: '' }${listing_id}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`}>
                         <a className={`${styles['width100']} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
