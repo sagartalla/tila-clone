@@ -267,6 +267,21 @@
     color: transparent !important;
 }
 
+.fashion-slick-slider .slick-prev:before {
+    content: '';
+    background: url(/static/img/icons/common-icon/left-arrow.png) no-repeat;
+    display: flex;
+    height: 20px;
+    background-size: cover;
+}
+.fashion-slick-slider .slick-next:before {
+    content: '';
+    background: url(/static/img/icons/common-icon/right-arrow.png) no-repeat;
+    display: flex;
+    height: 20px;
+    background-size: cover;
+}
+
 @media screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation : portrait){
     .slick-next, .slick-prev {
         display: none !important;
