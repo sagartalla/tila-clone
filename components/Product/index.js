@@ -350,6 +350,7 @@ const getProductComponent = (isPreview, taskCode) => {
                             isPreview ? null :
                             <NoSSR>
                               <RecentView
+                                isLoggedIn={isLoggedIn}
                                 shippingInfo={shippingInfo}
                                 recentlyViewed={isLoggedIn ? recentlyViewed : rv.map((item) => {
                                   item.isAddedToCart = isAddedToCart(item.id);

@@ -104,7 +104,7 @@ class VerifyEmail extends Component {
             <div className={`${styles['ff-b']} ${styles['fs-16']} ${styles.ellipsis} ${styles['ml-25']}`} title={activeEmailId} >{(userInfoData && userInfoData.email) || activeEmailId || (profileInfo && profileInfo.contactInfo && profileInfo.contactInfo.email)}</div>
           </div>
           <div className={`${styles.flex} ${styles['align-center']} ${styles['flex-col']}`}>
-            <div>{EMAIL_VERIFICATION.ENTER_OTP}</div>
+            <div className={`${styles['t-c']}`}>{EMAIL_VERIFICATION.ENTER_OTP}</div>
             <Input
               type="text"
               autoFocus

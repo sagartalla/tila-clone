@@ -45,6 +45,7 @@ const actions = {
   V2_PREVIOUS_PAGE: 'V2_PREVIOUS_PAGE',
   SKIP_AND_CONTINUE: 'SKIP_AND_CONTINUE',
   GET_GEO_SHIPPING_DETAILS: 'GET_GEO_SHIPPING_DETAILS',
+  VERIFY_EMAIL_BY_LINK: 'VERIFY_EMAIL_BY_LINK',
 };
 
 const actionCreators = {
@@ -255,6 +256,16 @@ const actionCreators = {
   skipAndContinue: () => {
     return ({
       type: actions.SKIP_AND_CONTINUE,
+    });
+  },
+  verifyEmailByLink: token => (dispatch) => {
+    dispatch({
+      type: actions.VERIFY_EMAIL_BY_LINK,
+      payload: api.verifyEmailByLink(token),
+    }).then(() => {
+      dispatch(actionCreators.setVerfied(true));
+    }, () => {
+      dispatch(actionCreators.setVerfied(false));
     });
   },
 
