@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import Slider from 'react-slick';
 
 import HeaderBar from '../HeaderBar';
@@ -7,6 +8,9 @@ import PageData from '../common/PageData';
 import FooterBar from '../Footer/index';
 import { selectors } from '../../store/landing';
 import lang from '../../utils/language';
+import { actionCreators as wishlistActionCreators, selectors as wishListSelectors } from '../../store/cam/wishlist';
+import { selectors as authSelectors } from '../../store/auth';
+import RecentView from '../Product/includes/RecentView';
 
 import main_en from '../../layout/main/main_en.styl';
 import main_ar from '../../layout/main/main_ar.styl';
@@ -165,11 +169,32 @@ const tie = [{
 class FTB extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      rv: JSON.parse(localStorage.getItem('rv')) || [],
+    };
+  }
+
+  componentDidMount() {
+    const { getRecentlyViewed, isLoggedIn } = this.props;
+    if (isLoggedIn) getRecentlyViewed();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const {
+      getRecentlyViewed, isLoggedIn,
+    } = this.props;
+    if (isLoggedIn !== nextProps.isLoggedIn) {
+      getRecentlyViewed();
+    }
   }
 
   render() {
-    const { pageData } = this.props;
+    const {
+      pageData, isAddedToCart, isLoggedIn, recentlyViewed,
+    } = this.props;
+    const {
+      rv,
+    } = this.state;
     return (
       <div>
         <HeaderBar />
@@ -217,7 +242,7 @@ class FTB extends React.Component {
                             <div>
                               <div className={styles.item} key={i}>
                                 <a href={i.link}>
-                                  <img src={i.img} />
+                                  <img src={i.img} alt="" />
                                 </a>
                                 <span className={`${styles['fs-10']} ${styles['pt-10']} ${styles['justify-center']} ${styles['slider-elips']} ${styles['lne-ht1_2']}`}>{i.title}</span>
                               </div>
@@ -228,8 +253,21 @@ class FTB extends React.Component {
                     </div>
                   </div>}
                 <PageData key={content} index={index} content={content} />
+                
               </React.Fragment>
             ))}
+          {pageData.page_type === 'homePage' &&
+          <div className={`${styles['bg-white']} ${styles.flex}`}>
+            <RecentView
+              homePage
+              isLoggedIn={isLoggedIn}
+              recentlyViewed={isLoggedIn ? recentlyViewed : rv.map((item) => {
+                item.isAddedToCart = isAddedToCart(item.id);
+                return item;
+              })}
+            />
+          </div>
+        }
         </div>}
         <FooterBar />
       </div>
@@ -239,6 +277,13 @@ class FTB extends React.Component {
 
 const mapStateToProps = store => ({
   pageData: selectors.getPage(store),
+  isLoggedIn: authSelectors.getLoggedInStatus(store),
+  recentlyViewed: wishListSelectors.recentlyViewed(store),
+  isAddedToCart: listingId => wishListSelectors.getCartStatus(store, listingId),
 });
 
-export default connect(mapStateToProps, null)(FTB);
+const mapDispatchToProps = dispatch => bindActionCreators({
+  getRecentlyViewed: wishlistActionCreators.getRecentlyViewed,
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(FTB);
