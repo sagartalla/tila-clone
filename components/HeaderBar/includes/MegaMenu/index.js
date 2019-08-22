@@ -52,6 +52,7 @@ class MegaMenu extends Component {
 
   onHoverCurry = item => () => {
     if(this.state.selectedCategory !== item.id) {
+      timeoutCount && clearTimeout(timeoutCount);
       timeoutCount = setTimeout(() => {
         this.setState({
           ...this.state,
@@ -86,9 +87,9 @@ class MegaMenu extends Component {
   }
 
   onHoverOutDelayed(id) {
-    timeoutCount && clearTimeout(timeoutCount);
     return () => {
-      setTimeout(() => {
+      timeoutCount && clearTimeout(timeoutCount);
+      timeoutCount = setTimeout(() => {
         if(!this.expandedHover){
           this.setState({
             selectedCategory: null,
@@ -97,7 +98,7 @@ class MegaMenu extends Component {
             hoverItem: null,
           })
         }
-      });
+      }, 600);
     }
   }
 

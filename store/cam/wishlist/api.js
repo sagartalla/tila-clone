@@ -7,9 +7,11 @@ import ToastContent from '../../../components/common/ToastContent'
 
 const { API_TEXT } = languageDefinations();
 
-const getWishlistApi = (currentPage = 0, size = 10) => axios.get(`${constants.WISHLIST_API_URL}/api/v1/wishlist/getWishlist?size=${size}&page=${currentPage}`).then(({ data }) => {
-  return { data };
-});
+const getWishlistApi = (currentPage = 0, size = 10) => {
+  return axios.get(`${constants.WISHLIST_API_URL}/api/v1/wishlist/getWishlist?size=${size}&page=${currentPage}`).then(({ data }) => {
+    return { data, currentPage };
+  })
+};
 
 const getWishlistProducts = () => axios.get(`${constants.WISHLIST_API_URL}/api/v1/wishlist/productIds`);
 

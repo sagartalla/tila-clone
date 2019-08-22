@@ -34,7 +34,7 @@ const WishlistBody = (props) => {
     let str = '';
     if (status === 'SAME') return str;
     const priceVal = Math.abs(wishlisted_price - changed_price);
-    if(priceVal == 0) return str;
+    if (priceVal === 0) return str;
     if (status === 'INCREASED') {
       str = (
         <span className={`${styles['thick-red-clr']} ${styles.flex}`}>
@@ -52,8 +52,8 @@ const WishlistBody = (props) => {
     }
     return str;
   };
-  const routeChange = (variant_id='', product_id, catalog_id, listing_id='', name, tuin_id) => {
-    Router.push(`/${language}/pdp/${name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${tuin_id ? `${tuin_id}/`: '' }${listing_id}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`);
+  const routeChange = (variant_id = '', product_id, catalog_id, listing_id = '', name, tuin_id) => {
+    Router.push(`/${language}/pdp/${name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${tuin_id ? `${tuin_id}/` : ''}${listing_id}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`);
   };
   return (data.length === 0 ?
     <div className={styles['no-wishlist-icon']}>
@@ -98,7 +98,7 @@ const WishlistBody = (props) => {
                         {inventory_count > 0 ?
                           <button
                             id={listing_id}
-                            data-cart-res={true}
+                            data-cart-res
                             data-wish-id={wishlist_id}
                             className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['left-radius']} ${styles['add-to-btn']}`}
                             onClick={buttonValue ? addToCart : () => {}}

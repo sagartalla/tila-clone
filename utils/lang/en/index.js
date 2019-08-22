@@ -184,6 +184,7 @@ export const EN_KEYWORDS = {
     PRICE_INCREASED_BY: 'Price Increased by',
   },
   PDP_PAGE: {
+    ITEM_IN_CART: 'Item in Cart',
     LOADING_REVIEWS: 'Loading Reviews...',
     REVIEW_ALL_TAB: 'All Reviews',
     REVIEW_EXPERT_TAB: 'Expert Reviews',
@@ -777,7 +778,7 @@ export const EN_KEYWORDS = {
   EMAIL_VERIFICATION: {
     VERIFY_YOUR_EMAIL: 'Verify your email address',
     OTP_SENT: 'An OTP has been sent to',
-    ENTER_OTP: 'Please enter the OTP to verify your email address.',
+    ENTER_OTP: 'Please enter the OTP or Click on the email verification link to verify your email address.',
     RESEND: 'Resend',
     VERIFY: 'Verify',
     PLEASE_ENTER_OTP_SENT: 'Please enter OTP sent to your mail id',

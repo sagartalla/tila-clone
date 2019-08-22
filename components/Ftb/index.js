@@ -170,11 +170,11 @@ class FTB extends React.Component {
 
   render() {
     const { pageData } = this.props;
-    if (pageData.device !== 'desktop') return null;
     return (
       <div>
         <HeaderBar />
-        <div className={`${styles['p-0']} ${styles['land-page-mn-wdt']} container-fluid`}>
+        {pageData.device !== 'desktop' ? null :
+        <div className={`${styles['p-0']} container-fluid`}>
           {pageData && pageData.page_content.length > 0 &&
             pageData.page_content.map((content, index) => (
               <React.Fragment>
@@ -230,7 +230,7 @@ class FTB extends React.Component {
                 <PageData key={content} index={index} content={content} />
               </React.Fragment>
             ))}
-        </div>
+        </div>}
         <FooterBar />
       </div>
     );
