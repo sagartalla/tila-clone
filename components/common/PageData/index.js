@@ -80,11 +80,37 @@ let sliderTBS = '';
 class PageData extends React.Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      currentViewPortWidth:0
+    };
   }
+
+  componentDidMount() {
+    this.setState({
+    currentViewPortWidth: window.innerWidth
+    });
+    window.addEventListener("resize", this.update);
+   }
+    
+   update = () => {
+    this.setState({
+    currentViewPortWidth: window.innerWidth
+    });
+   };
+    
+   componentWillUnmount() {
+    window.removeEventListener('resize', this.update);
+   }
+    
+   getWidth = (bannerData, index) => {
+     const { currentViewPortWidth } = this.state;
+    return ((currentViewPortWidth * bannerData[index].config.width / 1440) + 10)
+   }
+
   // breadcrums are pending...
   getContent = () => {
     const { content, index } = this.props;
+    const { currentViewPortWidth } = this.state;
     switch (content.layout_id) {
       case 'CT1a':
         return (
@@ -136,6 +162,46 @@ class PageData extends React.Component {
             </Slider>
           </div>
         );
+
+
+       //ST1a slider
+       case 'ST1a': {
+        
+        const settings = {
+          dots: false,
+          infinite: false,
+          speed: 500,
+          slidesToShow: 8,
+          slidesToScroll: 1
+        };
+       
+        return(
+            <div className={styles.fashionBannerSpacing}>
+              
+              <Slider {...settings} 
+                asNavFor={sliderTBS}
+                ref={(slider) => { sliderTBS = slider; }}
+                lazyLoad={false}
+                className={`${styles.flex} ${styles['fashion-main-slider']} ${styles['flex-colum']}`}
+                customPaging={i => <span className={`${styles['fs-10']}`}>{content.data[lang].banners[i].display_name}</span>}
+              >
+                {content.data[lang].banners.map(i => (
+                  <div className={styles.fSlider} key={i.display_name}>
+                    <a href={i.link}>
+                      <div className={`${styles.item} ${styles['slick-itm']}`} key={i.display_name}>
+                        <img src={i.img} alt={i.display_name} className={styles.imageRounded}/>
+                      </div>
+                    </a>
+                    <span className={`${styles['fs-12']} ${styles['pt-10']} ${styles['justify-center']} ${styles['slider-elips']} ${styles['lne-ht1_2']}`} style={{textAlign: 'center', display: 'inline-block'}} >{i.display_name}</span>
+                  </div>
+                ))}
+              </Slider>
+            </div>
+        )
+      }
+      
+
+
       // case 'BT9':
       //   return (
       //     <div className={styles['ff-t-i']}>
@@ -192,7 +258,7 @@ class PageData extends React.Component {
       case 'BT7': {
         const { banners } = content.data[lang];
         return (
-          <Row className={`${styles['mt-15']} ${styles['mb-15']} ${styles['ml-0']} ${styles['mr-0']}`}>
+          <Row className={`${styles['mt-15']} ${styles['mb-15']} ${styles['ml-0']} ${styles['mr-0']} ${styles.bannerSpacing}`}>
             {content.data[lang].title &&
               <h3 className={`${styles['thick-gry-clr']} ${styles['fs-20']} ${styles['mt-0']} ${styles['pl-10']} ${styles['pr-10']}`}>{content.data[lang].title}</h3>}
             <div className={`${styles['banner-prt-main']}`}>
@@ -273,7 +339,7 @@ class PageData extends React.Component {
 
             </div>
 
-            <div className={`${styles['thick-gry-clr']} ${styles['fs-14']} ${styles['mt-10']} ${styles.pointer}`}>
+            <div className={`${styles['thick-gry-clr']} ${styles['fs-14']} ${styles['mt-10']} ${styles.pointer} ${styles.breadcrumbML}`}>
               {breadcrumb && breadcrumb.length > 0 &&
                 breadcrumb.map((bc, idx) => (
                   <React.Fragment>
@@ -381,14 +447,14 @@ class PageData extends React.Component {
               <div>
                 <a href={banners[0].link}>
                   <div className={styles.shadow}>
-                    <img src={banners[0].img} width={banners[0].config.width} height={banners[0].config.height} alt="" className={styles['img-responsive']}  />
+                    <img src={banners[0].img} alt="" className={styles['img-responsive']}  />
                   </div>
                 </a>
               </div>
               <div>
                 <a href={banners[1].link}>
                   <div className={styles.shadow}>
-                    <img src={banners[1].img} width={banners[1].config.width} height={banners[1].config.height} alt="" className={styles['img-responsive']} />
+                    <img src={banners[1].img} alt="" className={styles['img-responsive']} />
                   </div>
                 </a>
               </div>
@@ -397,14 +463,14 @@ class PageData extends React.Component {
               <div>
                 <a href={banners[2].link}>
                   <div className={styles.shadow}>
-                    <img src={banners[2].img} width={banners[2].config.width} height={banners[2].config.height} alt="" className={styles['img-responsive']} />
+                    <img src={banners[2].img} alt="" className={styles['img-responsive']} />
                   </div>
                 </a>
               </div>
               <div>
                 <a href={banners[3].link}>
                   <div className={styles.shadow}>
-                    <img src={banners[3].img} width={banners[3].config.width} height={banners[3].config.height} alt="" className={styles['img-responsive']} />
+                    <img src={banners[3].img} alt="" className={styles['img-responsive']} />
                   </div>
                 </a>
               </div>
@@ -413,12 +479,12 @@ class PageData extends React.Component {
               <div>
                 <a href={banners[4].link}>
                   <div className={styles.shadow}>
-                    <img src={banners[4].img} width={banners[4].config.width} height={banners[4].config.height} alt="" className={styles['img-responsive']} />
+                    <img src={banners[4].img}  alt="" className={styles['img-responsive']} />
                   </div>
                 </a>
               </div>
             </div>
-            <div className={`${styles['thick-gry-clr']} ${styles['fs-14']} ${styles['mt-10']} ${styles.pointer}`}>
+            <div className={`${styles['thick-gry-clr']} ${styles['fs-14']} ${styles['mt-10']} ${styles.pointer} ${styles.breadcrumbML}`}>
               {breadcrumb && breadcrumb.length > 0 &&
                 breadcrumb.map((bc, idx) => (
                   <React.Fragment>
@@ -433,87 +499,74 @@ class PageData extends React.Component {
         );
       }
       case 'CBT8a': {
-        const { banners, breadcrumb, title } = content.data[lang];
+        const { banners, title } = content.data[lang];
         return (
-          <div className={`${styles['display-t-i-f']} ${styles['flex-prop']}`} >
-            <div className={`${styles['fs-20']} ${styles.title}`}>{title}</div>
-              <div className= {styles.d11}>
+          <div className={`${styles['flex-prop']} ${styles['bannerSpacing']}`} >
+              <div className= {styles.d11} style={{width: this.getWidth(banners, 0)}}>
                 <a href={banners[0].link}>
                   <div>
-                    <img src={banners[0].img} width={banners[0].config.width} height={banners[0].config.height} alt="" className = {`${styles['img-responsive']} ${styles['border-radius4']}`}  />
+                    <img src={banners[0].img}  alt="" className = {`${styles['img-responsive']} ${styles.imgResolution} ${styles['border-radius4']}`}  />
                   </div>
                 </a>
               </div>
 
-              <div className= {styles.d12}>
+              <div className= {styles.d12} style={{width: this.getWidth(banners, 1)}}>
                 <a href={banners[1].link}>
                   <div>
-                    <img src={banners[1].img} width={banners[1].config.width} height={banners[1].config.height} alt="" className = {`${styles['img-responsive']} ${styles['border-radius4']}`} />
+                    <img src={banners[1].img}   alt="" className = {`${styles['img-responsive']} ${styles.imgResolution} ${styles['border-radius4']}`} />
                   </div>
                 </a>
               </div>
 
             <div className={styles.rightBanner}>
               <div className= {styles.d13}>
-                <div>
+                <div style={{width: this.getWidth(banners, 2)}}>
                   <a href={banners[2].link}>
                     <div>
-                      <img src={banners[2].img} width={banners[2].config.width} height={banners[2].config.height} alt="" className = {`${styles['img-responsive']} ${styles['border-radius4']}`} />
+                      <img src={banners[2].img}   alt="" className = {`${styles['img-responsive']} ${styles.imgResolution} ${styles['border-radius4']}`} />
                     </div>
                   </a>
                 </div>
-                <div>
+                <div style={{width: this.getWidth(banners, 3)}}>
                   <a href={banners[3].link}>
                     <div>
-                      <img src={banners[3].img} width={banners[3].config.width} height={banners[3].config.height} alt="" className = {`${styles['img-responsive']} ${styles['border-radius4']}`} />
+                      <img src={banners[3].img}  alt="" className = {`${styles['img-responsive']} ${styles.imgResolution} ${styles['border-radius4']}`} />
                     </div>
                   </a>
                 </div>
-                <div>
+                <div style={{width: this.getWidth(banners, 4)}}>
                   <a href={banners[4].link}>
                     <div>
-                      <img src={banners[4].img} width={banners[4].config.width} height={banners[4].config.height} alt="" className = {`${styles['img-responsive']} ${styles['border-radius4']}`} />
+                      <img src={banners[4].img}   alt="" className = {`${styles['img-responsive']} ${styles.imgResolution} ${styles['border-radius4']}`} />
                     </div>
                   </a>
                 </div>
               </div>
 
               <div className= {styles.d14}>
-                <div>
+                <div style={{width: this.getWidth(banners, 5)}}>
                   <a href={banners[5].link}>
                     <div>
-                      <img src={banners[5].img} width={banners[5].config.width} height={banners[5].config.height} alt="" className = {`${styles['img-responsive']} ${styles['border-radius4']}`} />
+                      <img src={banners[5].img}  alt="" className = {`${styles['img-responsive']} ${styles.imgResolution} ${styles['border-radius4']}`} />
                     </div>
                   </a>
                 </div>
-                <div>
+                <div style={{width: this.getWidth(banners, 6)}}>
                   <a href={banners[6].link}>
                     <div>
-                      <img src={banners[6].img} width={banners[6].config.width} height={banners[6].config.height} alt="" className = {`${styles['img-responsive']} ${styles['border-radius4']}`} />
+                      <img src={banners[6].img}  alt="" className = {`${styles['img-responsive']} ${styles.imgResolution} ${styles['border-radius4']}`} />
                     </div>
                   </a>
                 </div>
-                <div>
+                <div style={{width: this.getWidth(banners, 7)}}>
                   <a href={banners[7].link}>
                     <div>
-                      <img src={banners[7].img} width={banners[7].config.width} height={banners[7].config.height} alt="" className = {`${styles['img-responsive']} ${styles['border-radius4']}`} />
+                      <img src={banners[7].img}  alt="" className = {`${styles['img-responsive']} ${styles.imgResolution} ${styles['border-radius4']}`} />
                     </div>
                   </a>
                 </div>
               </div>
 
-            </div>
-
-              <div className={`${styles['thick-gry-clr']} ${styles['fs-14']} ${styles['mt-10']} ${styles.pointer}`}>
-              {breadcrumb && breadcrumb.length > 0 &&
-                breadcrumb.map((bc, idx) => (
-                  <React.Fragment>
-                    <a className={styles['thick-gry-clr']} href={bc.link}>
-                      <span>{bc.display_name}</span>
-                    </a>
-                    {breadcrumb.length - 1 !== idx && <span className={`${styles['ml-5']} ${styles['mr-5']}`}>|</span>}
-                  </React.Fragment>
-                ))}
             </div>
 
           </div>
@@ -522,64 +575,128 @@ class PageData extends React.Component {
 
 
       case 'CBT3a' : {
-        const { banners, breadcrumb, title } = content.data[lang];
+        const { banners, title, description } = content.data[lang];
         return (
-          <div className={`${styles['display-t-i-f']} ${styles['flex-prop']}`} >
-            <div className={`${styles['fs-20']} ${styles.title}`}>{title}</div>
+          <div className={` ${styles['fashionBannerSpacing']}`} >
+            <div className={`${styles['fs-20']} ${styles.title}`}>
+              <div className={styles.pdL}>
+                <h1 className={styles.fHeading} style={{textAlign: 'center'}}>{title}</h1>
+                <span>{description}</span>
+              </div>
+            </div>
+           <div className={`${styles['flex-prop']}`}>
             <div className = {styles.cbt3a}>
-              <div className={styles.heading}>
-                <h1>Just Arrived</h1>
-                <p style={{color: "#666666"}}>Go with trend</p>
-              </div>
+             
               <div className={styles.wrapper}>
-                <div className={styles.img1}>
+                <div className={styles.img1} style={{width: this.getWidth(banners, 0)}}>
                   <a href={banners[0].link}>
-                    <img src={banners[0].img} width={banners[0].config.width} height={banners[0].config.height}/>
+                    <img src={banners[0].img} height={banners[0].config.height}/>
                   </a>
                 </div>
-                <div className={styles.img2}>
+                <div className={styles.img2} style={{width: this.getWidth(banners, 1)}}>
                   <a href={banners[1].link}>
-                    <img src={banners[1].img} width={banners[0].config.width} height={banners[0].config.height} />
+                    <img src={banners[1].img} height={banners[1].config.height} />
                   </a>
                 </div>
-                <div className={styles.img3}>
+                <div className={styles.img3} style={{width: this.getWidth(banners, 2)}}>
                   <a href={banners[2].link}>
-                    <img src={banners[2].img} width={banners[0].config.width} height={banners[0].config.height}/>
+                    <img src={banners[2].img} height={banners[2].config.height}/>
                   </a>
                 </div>
               </div>
+            </div>
             </div>
           </div>
         );
       }
 
       case 'CBT2a': {
-        const { banners, breadcrumb, title } = content.data[lang];
+        const { banners, title, description } = content.data[lang];
         return (
-          <div className={`${styles['display-t-i-f']}`} >
-            <div className={`${styles['fs-20']} ${styles.title}`}>{title}</div>
+          <div className={styles.fashionBannerSpacing}>
+            <div className={`${styles['fs-20']} ${styles.title}`}>
+              <div className={styles.pdL} style={{paddingLeft: '102px'}}>
+                <h1 className={styles.fHeading}  style={{textAlign: 'left'}}>{title}</h1>
+                <span>{description}</span>
+              </div>
+            </div>
             <div className={styles.cbt2aBanner}>
-                <div className={styles.cbt2aBG}>
+                <div className={styles.F1banner} style={{width: this.getWidth(banners, 0)}}>
                     <a href={banners[0].link}>
                       <div>
-                        <img src={banners[0].img} width={banners[0].config.width} height={banners[0].config.height}/>
+                        <img src={banners[0].img} className={styles.imgResolution} />
                       </div>
                     </a>
                   </div>
-                <div className={styles.setWidth1}>
-                  <div className={styles.trendingImg}>
-                      <a href={banners[3].link}>
+                <div className={styles.F2banner} style={{width: this.getWidth(banners, 1)}}>
+                  <div>
+                      <a href={banners[1].link}>
                         <div>
-                          <img src={banners[1].img} width={banners[0].config.width} height={banners[0].config.height}/>
+                          <img src={banners[1].img} className={styles.imgResolution} />
                         </div>
                       </a>
                   </div>
                 </div>
             </div>
-
-
           </div>
           )
+      }
+
+
+
+      case 'CBT6c': {
+        const { banners, title } = content.data[lang];
+        return(
+          <div className={`${styles.fashionBanners} ${styles['fashionBannerSpacing']}`}>
+            <div className={styles.fBanners1} style={{display: 'flex'}}>
+              <div className={styles.fb3} style={{width: this.getWidth(banners, 0)}}>
+                <a href={banners[0].link}>
+                  <div>
+                   <img src={banners[0].img} alt="" className={styles.imgResolution} />
+                  </div>
+                </a>
+              </div>
+              <div className={styles.fb3} style={{width: this.getWidth(banners, 1)}}>
+                <a href={banners[1].img}>
+                  <div>
+                   <img src={banners[1].img} alt="" className={styles.imgResolution}/>
+                  </div>
+                </a>
+              </div>
+              <div className={styles.fb3} style={{width: this.getWidth(banners, 2)}}>
+                <a href={banners[2].link}>
+                  <div>
+                   <img src={banners[2].img} alt="" className={styles.imgResolution} />
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <div className={styles.fBanners2}>
+              <div className={styles.fb2} style={{width: this.getWidth(banners, 3)}}>
+                <a href={banners[3].link}>
+                  <div>
+                   <img src={banners[3].img} alt="" className={styles.imgResolution} />
+                  </div>
+                </a>
+              </div>
+              <div className={styles.fb1} style={{width: this.getWidth(banners, 4)}}>
+                <a href={banners[4].link}>
+                  <div>
+                   <img src={banners[4].img} alt="" className={styles.imgResolution} />
+                  </div>
+                </a>
+              </div>
+              <div className={styles.fb2} style={{width: this.getWidth(banners, 5)}}>
+                <a href={banners[5].link}>
+                  <div>
+                   <img src={banners[5].img} alt="" className={styles.imgResolution} />
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        )
       }
 
 
@@ -589,7 +706,7 @@ class PageData extends React.Component {
 
   render() {
     const { content } = this.props;
-
+console.log('content', content)
     if (!content.visible) return null;
 
     return this.getContent();
