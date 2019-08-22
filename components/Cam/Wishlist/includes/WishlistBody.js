@@ -34,7 +34,7 @@ const WishlistBody = (props) => {
     let str = '';
     if (status === 'SAME') return str;
     const priceVal = Math.abs(wishlisted_price - changed_price);
-    if(priceVal == 0) return str;
+    if (priceVal === 0) return str;
     if (status === 'INCREASED') {
       str = (
         <span className={`${styles['thick-red-clr']} ${styles.flex}`}>
@@ -52,8 +52,8 @@ const WishlistBody = (props) => {
     }
     return str;
   };
-  const routeChange = (variant_id='', product_id, catalog_id, listing_id='', name, tuin_id) => {
-    Router.push(`/${language}/pdp/${name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${tuin_id ? `${tuin_id}/`: '' }${listing_id}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`);
+  const routeChange = (variant_id = '', product_id, catalog_id, listing_id = '', name, tuin_id) => {
+    Router.push(`/${language}/pdp/${name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${tuin_id ? `${tuin_id}/` : ''}${listing_id}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`);
   };
   return (data.length === 0 ?
     <div className={styles['no-wishlist-icon']}>
@@ -98,7 +98,7 @@ const WishlistBody = (props) => {
                         {inventory_count > 0 ?
                           <button
                             id={listing_id}
-                            data-cart-res={true}
+                            data-cart-res
                             data-wish-id={wishlist_id}
                             className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['left-radius']} ${styles['add-to-btn']}`}
                             onClick={buttonValue ? addToCart : () => {}}
@@ -121,7 +121,10 @@ const WishlistBody = (props) => {
                         <span id={wishlist_id} className={`${styles.absolute} ${styles['delete-icon-part']}`} onClick={deleteItem}>
                           <SVGComponent clsName={`${styles['delete-icon']}`} src="icons/delete-icon/delete-icon" />
                         </span>
-                        <h4 className={`${styles.fontW600} ${styles['light-gry-clr']} ${styles['mt-25']} ${styles['ff-b']}`}><span className={`${styles['fs-20']} ${styles['m-fs-18']}`}>{cur} {price}</span></h4>
+                        <h4 className={`${styles.fontW600} ${styles['light-gry-clr']} ${styles['mt-25']} ${styles['ff-b']}`}><span className={`${styles['fs-20']} ${styles['m-fs-18']}`}>
+                        <span className={`${styles['fs-14']}`}>{cur}</span>&nbsp;
+                        <span>{price}</span>
+                        </span></h4>
                         {variant_id && percentage(price, mrp) > 5 ?
                           <span className={`${styles.flex} ${styles['flex-center']}`}>
                             <span className={`${styles['success-green']} ${styles.flex}`}>{percentage(price, mrp)}%</span>&nbsp;&nbsp;&nbsp;

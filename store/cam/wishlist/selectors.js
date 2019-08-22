@@ -33,6 +33,7 @@ const getWishListResults = (store) => {
         mrp: variant_info.mrp && variant_info.mrp.display_value,
         wishlisted_price: item.wishlisted_price,
         changed_price: item.changed_price,
+        changed_status: item.changed_status,
         catalog_id: item && item.product_details && item.product_details.catalog_details.catalog_id,
         itemType: item && item.product_details && item.product_details.catalog_details.item_type_name,
         inventory_count: variant_info.total_inventory_count,
@@ -77,6 +78,16 @@ const getCartStatus = (store, listingId) => {
 };
 
 const recentlyViewed = store => store.wishlistReducer.recentlyViewed.map((rv) => {
+  const { products = [] } = store.wishlistReducer;
+  const wishListProductIds = products && products.length > 0 &&
+    (products.map(w => w.product_id) || []);
+
+  let wishlistId = '';
+  products.forEach((p) => {
+    if (p.product_id === rv.product_details.product_id) {
+      wishlistId = p.wishlist_id;
+    }
+  });
   const { variant_preferred_listings, variant_id } = rv;
   const { cached_product_details = {}, cached_variant = {} } = rv.product_details.product_details_vo;
   const variantAttributes = cached_variant[variant_id].attribute_map;
@@ -93,6 +104,8 @@ const recentlyViewed = store => store.wishlistReducer.recentlyViewed.map((rv) =>
     pid: rv.product_details.product_id,
     vid: rv.variant_id,
     cid: rv.product_details.catalog_details.catalog_id,
+    wishlistId,
+    isWishlisted: wishListProductIds && wishListProductIds.indexOf(rv.product_details.product_id) !== -1,
     isAddedToCart: getCartStatus(store, variantDetails.listing_id),
   };
 });

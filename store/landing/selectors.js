@@ -43,10 +43,45 @@ const getListings = (store, ownProps) => {
   return [];
 };
 
+const getZonedItems = store => store.landingReducer.items.content.map((rv) => {
+  const { products = [] } = store.wishlistReducer;
+  const wishListProductIds = products && products.length > 0 &&
+    (products.map(w => w.product_id) || []);
+
+  let wishlistId = '';
+  products.forEach((p) => {
+    if (p.product_id === rv.product_details.product_id) {
+      wishlistId = p.wishlist_id;
+    }
+  });
+
+  const { variant_preferred_listings, variant_id } = rv;
+  const { cached_product_details = {}, cached_variant = {} } = rv.product_details.product_details_vo;
+  const variantAttributes = cached_variant[variant_id].attribute_map;
+  const variantDetails = variant_preferred_listings[variant_id][0];
+  return {
+    nm: cached_product_details.attribute_map.calculated_display_name.attribute_values[0].value,
+    br: rv.product_details.catalog_details.attribute_map.brand.attribute_values[0].value,
+    im: cached_product_details.media.gallery_media[0].url,
+    pr: variantDetails.pricing.offer_price.display_value,
+    cd: variantDetails.pricing.offer_price.currency_code,
+    mrp: variantDetails.pricing.mrp.display_value,
+    tuin: variantAttributes.tuin.attribute_values[0].value,
+    id: variantDetails.listing_id,
+    pid: rv.product_details.product_id,
+    vid: rv.variant_id,
+    cid: rv.product_details.catalog_details.catalog_id,
+    wishlistId,
+    isWishlisted: wishListProductIds && wishListProductIds.indexOf(rv.product_details.product_id) !== -1,
+    isAddedToCart: getCartStatus(store, variantDetails.listing_id),
+  };
+}) || [];
+
 const getIsListingLoading = store => store.landingReducer.ui.isListingLoading;
 
 export {
   getPage,
   getListings,
+  getZonedItems,
   getIsListingLoading,
 };

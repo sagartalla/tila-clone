@@ -20,7 +20,6 @@ const getUserProfileInfo = () => {
 };
 
 const downloadPic = (imageId) => {
-  return
   return generateURL(imageId).then((data)=>{
     return data;
   })
