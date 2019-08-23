@@ -126,7 +126,7 @@ class OrderHeader extends Component {
                     </div>
                     <div className={`${styles['flex-center']} ${styles['fs-14']}`}>
                       <Col md={6} sm={6} className={styles['thick-gry-clr']}>{ORDER_PAGE.ITEM_TOTAL}</Col>
-                      {price && <Col md={6} sm={6}><span>{total_offer_price.currency_code}</span> <span>{total_offer_price.display_value}</span></Col>}
+                      {price && <Col md={6} sm={6}><span className={`${styles['fs-12']}`}>{total_offer_price.currency_code}</span> <span>{total_offer_price.display_value}</span></Col>}
                     </div>
                     {/* <p className={`${styles['flex-center']}`}>
                       <Col md={6} sm={6}>{ORDER_PAGE.SHIPPING}</Col>
@@ -162,7 +162,7 @@ class OrderHeader extends Component {
                       <Fragment key={index}>
                         <div className={`${styles['lne-ht2']} ${styles['fs-14']}`}>
                           <Col className={`${styles['thick-gry-clr']} ${styles['text-capitalize']}`} md={6}>{p.payment_mode_display_name.replace('_', ' ')}</Col>
-                          <Col md={6}> {`${p.currency_code} ${p.amount.display_value}`}</Col>
+                          <Col md={6}><span className={`${styles['fs-12']}`}>{p.currency_code}</span>&nbsp;<span>{p.amount.display_value}</span></Col>
                         </div>
                         {p.card_type &&
                           <div className={`${styles['lne-ht2']} ${styles['fs-14']}`}>
@@ -215,7 +215,7 @@ class OrderHeader extends Component {
                 {price &&
                 <Col md={6} sm={6} className={styles['tool-tip-style']}>
                   <span className={`${styles.fontW600} ${styles['light-gry-clr']} ${styles['flex-center']} ${styles['fs-14']}`}>
-                  {total_price.currency_code}&nbsp;{total_price.display_value}
+                  <span className={styles['align-baseline']}><span className={`${styles['fs-12']}`}>{total_price.currency_code}</span>&nbsp;<span>{total_price.display_value}</span></span>
                     {/* (<a onMouseOver={this.showToolTip} onMouseLeave={this.hideToolTip}>i</a>) */}
                     <span
                       onMouseOver={this.showToolTip}
