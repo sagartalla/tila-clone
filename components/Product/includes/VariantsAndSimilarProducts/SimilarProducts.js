@@ -27,7 +27,7 @@ class Variant extends Component {
       <div className={`${styles['pt-5']} ${styles['pb-5']} ${styles['pr-15']}`}>
         <div className={`${styles['flex-center']}`}>
           <span className={`${styles['fs-12']} ${styles['fontW600']} ${styles['pr-15']}`}>{displayName}</span>
-          <div className={`${styles['flex-center']} ${styles['size-btn-main']}`}>
+          <div className={values.length < 2 ? `${styles['flex-center']}` : `${styles['flex-center']} ${styles['size-btn-main']}`}>
           <select id={id} data-key={id} onChange={this.onSelectProduct} className={`${styles['varient-select-part']} ${styles['fs-12']} ${styles['p-5']}`}>
           {
             values.map((option) => (

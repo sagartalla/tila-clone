@@ -209,7 +209,7 @@ export const cartPlaceHolder = (
   <div className={`${styles.flex} ${styles.relative}`} style={{
       //position: 'fixed',
       zIndex: 26,
-      width: '100vw',
+      width: '100%',
       height: '100vh',
       top: 0,
       left: 0,
