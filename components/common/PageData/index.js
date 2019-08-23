@@ -82,6 +82,26 @@ class PageData extends React.Component {
     super();
     this.state = {};
   }
+
+  returnBanner = (index,banners) =>{
+
+    const{breadcrumb} = banners[index];
+    const{data} = breadcrumb;
+    return(<div className={`${styles['thick-gry-clr']} ${styles['fs-14']} ${styles['mt-10']} ${styles.pointer}`}>
+              
+    {banners[index].breadcrumb && banners[index].breadcrumb.data && banners[index].breadcrumb.data.length > 0 &&
+      banners[index].breadcrumb.data.map((bc, idx) => (
+        <React.Fragment>
+          <a className={styles['thick-gry-clr']} href={bc.link}>
+            <span>{bc.display_name}</span>
+          </a>
+          {banners[index].breadcrumb.data.length - 1 !== idx && <span className={`${styles['ml-5']} ${styles['mr-5']}`}>{banners[index].breadcrumb.seperator}</span>}
+        </React.Fragment>
+      ))}
+  </div>)
+    
+    
+  }
   // breadcrums are pending...
   getContent = () => {
     const { content, index } = this.props;
@@ -273,18 +293,7 @@ class PageData extends React.Component {
 
             </div>
 
-            <div className={`${styles['thick-gry-clr']} ${styles['fs-14']} ${styles['mt-10']} ${styles.pointer}`}>
-              {breadcrumb && breadcrumb.length > 0 &&
-                breadcrumb.map((bc, idx) => (
-                  <React.Fragment>
-                    <a className={styles['thick-gry-clr']} href={bc.link}>
-                      <span>{bc.display_name}</span>
-                    </a>
-                    {breadcrumb.length - 1 !== idx && <span className={`${styles['ml-5']} ${styles['mr-5']}`}>|</span>}
-                  </React.Fragment>
-                ))}
-            </div>
-
+            
 
           </div>
         );
@@ -351,17 +360,7 @@ class PageData extends React.Component {
 
             </div>
 
-            <div className={`${styles['thick-gry-clr']} ${styles['fs-14']} ${styles['mt-10']} ${styles.pointer}`}>
-              {breadcrumb && breadcrumb.length > 0 &&
-                breadcrumb.map((bc, idx) => (
-                  <React.Fragment>
-                    <a className={styles['thick-gry-clr']} href={bc.link}>
-                      <span>{bc.display_name}</span>
-                    </a>
-                    {breadcrumb.length - 1 !== idx && <span className={`${styles['ml-5']} ${styles['mr-5']}`}>|</span>}
-                  </React.Fragment>
-                ))}
-            </div>
+            
 
 
           </div>
@@ -526,21 +525,21 @@ class PageData extends React.Component {
       return(
         <div className={`${styles['display-t-i-cb']}`} >
               <div className={`${styles['flex']}`}>
-                <div style={{width:'33.57%',paddingBottom:'10px',paddingRight:'10px'}}>
+                <div style={{width:'33.57%'}} className={`${styles['pr-10']} ${styles['pb-10']}`}>
                    <a href={banners[0].link}>
                     <div>
                     <img src={banners[0].img}  alt="" className={styles['img-responsive']} />
                     </div>
                     </a>
                 </div>
-                <div style={{width:'33.57%',paddingBottom:'10px',paddingRight:'10px'}}>
+                <div style={{width:'33.57%'}} className={`${styles['pr-10']} ${styles['pb-10']}`}>
                 <a href={banners[1].link}>
                     <div>
                     <img src={banners[1].img}  alt="" className={styles['img-responsive']} />
                     </div>
                     </a>
                 </div>
-                <div style={{width:'33.57%',paddingBottom:'10px',paddingRight:'10px'}}>
+                <div style={{width:'33.57%'}} className={`${styles['pr-10']} ${styles['pb-10']}`}>
                 <a href={banners[2].link}>
                     <div>
                     <img src={banners[2].img}  alt="" className={styles['img-responsive']} />
@@ -549,63 +548,63 @@ class PageData extends React.Component {
                 </div>
               </div>
               <div className={`${styles['flex']}`}>
-                <div style={{width:"11.43%",paddingRight:"10px"}}>
+                <div style={{width:"11.43%"}} className={`${styles['pr-10']}`}>
                 <a href={banners[3].link}>
                     <div>
                     <img src={banners[3].img}  alt="" className={styles['img-responsive']} />
                     </div>
                     </a>
                 </div>
-                <div style={{width:"11.43%",paddingRight:"10px"}}>
+                <div style={{width:"11.43%"}} className={`${styles['pr-10']}`}>
                 <a href={banners[4].link}>
                     <div>
                     <img src={banners[4].img}  alt="" className={styles['img-responsive']} />
                     </div>
                 </a>
                 </div>
-                <div style={{width:"11.43%",paddingRight:"10px"}}>
+                <div style={{width:"11.43%"}} className={`${styles['pr-10']}`}>
                 <a href={banners[5].link}>
                     <div>
                     <img src={banners[5].img}  alt="" className={styles['img-responsive']} />
                     </div>
                 </a>
                 </div>
-                <div style={{width:"11.43%",paddingRight:"10px"}}>
+                <div style={{width:"11.43%"}} className={`${styles['pr-10']}`}>
                 <a href={banners[6].link}>
                     <div>
                     <img src={banners[6].img}  alt="" className={styles['img-responsive']} />
                     </div>
                 </a>
                 </div>
-                <div style={{width:"11.43%",paddingRight:"10px"}}>
+                <div style={{width:"11.43%"}} className={`${styles['pr-10']}`}>
                 <a href={banners[7].link}>
                     <div>
                     <img src={banners[7].img}  alt="" className={styles['img-responsive']} />
                     </div>
                 </a>
                 </div>
-                <div style={{width:"11.43%",paddingRight:"10px"}}>
+                <div style={{width:"11.43%"}} className={`${styles['pr-10']}`}>
                 <a href={banners[8].link}>
                     <div>
                     <img src={banners[8].img}  alt="" className={styles['img-responsive']} />
                     </div>
                 </a>
                 </div>
-                <div style={{width:"11.43%",paddingRight:"10px"}}>
+                <div style={{width:"11.43%"}} className={`${styles['pr-10']}`}>
                 <a href={banners[9].link}>
                     <div>
                     <img src={banners[9].img}  alt="" className={styles['img-responsive']} />
                     </div>
                 </a>
                 </div>
-                <div style={{width:"11.43%",paddingRight:"10px"}}>
+                <div style={{width:"11.43%"}} className={`${styles['pr-10']}`}>
                 <a href={banners[10].link}>
                     <div>
                     <img src={banners[10].img}  alt="" className={styles['img-responsive']} />
                     </div>
                 </a>
                 </div>
-                <div style={{width:"11.43%",paddingRight:"10px"}}>
+                <div style={{width:"11.43%"}} className={`${styles['pr-10']}`}>
                 <a href={banners[11].link}>
                     <div>
                     <img src={banners[11].img}  alt="" className={styles['img-responsive']} />
@@ -627,35 +626,35 @@ class PageData extends React.Component {
 
         <div className={`${styles['display-t-i-cb']}`} >
           <div className={`${styles['flex']}`}>
-            <div style={{paddingRight:'10px',paddingBottom:'10px',width:"16.64%"}}>
+            <div style={{width:"16.64%"}} className={`${styles['pr-10']} ${styles['pb-10']}`}>
               <a href={banners[0].link}>
               <div>
                     <img src={banners[0].img}  alt="" className={styles['img-responsive']} />
                     </div>
               </a>
             </div>
-            <div style={{paddingRight:'10px',paddingBottom:'10px',width:"33.27%"}}>
+            <div style={{width:"33.27%"}} className={`${styles['pr-10']} ${styles['pb-10']}`}>
             <a href={banners[1].link}>
               <div>
                     <img src={banners[1].img}  alt="" className={styles['img-responsive']} />
                     </div>
               </a>
             </div>
-            <div style={{paddingRight:'10px',paddingBottom:'10px',width:"16.64%"}}>
+            <div style={{width:"16.64%"}} className={`${styles['pr-10']} ${styles['pb-10']}`}>
             <a href={banners[2].link}>
               <div>
                     <img src={banners[2].img}  alt="" className={styles['img-responsive']} />
                     </div>
               </a>
             </div>
-            <div style={{paddingRight:'10px',paddingBottom:'10px',width:"16.64%"}}>
+            <div style={{width:"16.64%"}} className={`${styles['pr-10']} ${styles['pb-10']}`}>
             <a href={banners[3].link}>
               <div>
                     <img src={banners[3].img}  alt="" className={styles['img-responsive']} />
                     </div>
               </a>
             </div>
-            <div style={{paddingBottom:'10px',width:"16.64%",paddingRight:'10px'}}>
+            <div style={{width:"16.64%"}} className={`${styles['pr-10']} ${styles['pb-10']}`}>
             <a href={banners[4].link}>
               <div>
                     <img src={banners[4].img}  alt="" className={styles['img-responsive']} />
@@ -664,35 +663,35 @@ class PageData extends React.Component {
             </div>
           </div>
           <div className={`${styles['flex']}`}>
-          <div style={{paddingRight:'10px',paddingBottom:'10px',width:"16.64%"}}>
+          <div style={{width:"16.64%"}} className={`${styles['pr-10']} ${styles['pb-10']}`}>
               <a href={banners[5].link}>
               <div>
                     <img src={banners[5].img}  alt="" className={styles['img-responsive']} />
                     </div>
               </a>
             </div>
-            <div style={{paddingRight:'10px',paddingBottom:'10px',width:"16.64%"}}>
+            <div style={{width:"16.64%"}} className={`${styles['pr-10']} ${styles['pb-10']}`}>
             <a href={banners[6].link}>
               <div>
                     <img src={banners[6].img}  alt="" className={styles['img-responsive']} />
                     </div>
               </a>
             </div>
-            <div style={{paddingRight:'10px',paddingBottom:'10px',width:"16.64%"}}>
+            <div style={{width:"16.64%"}} className={`${styles['pr-10']} ${styles['pb-10']}`}>
             <a href={banners[7].link}>
               <div>
                     <img src={banners[7].img}  alt="" className={styles['img-responsive']} />
                     </div>
               </a>
             </div>
-            <div style={{paddingRight:'10px',paddingBottom:'10px',width:"16.64%"}}>
+            <div style={{width:"16.64%"}} className={`${styles['pr-10']} ${styles['pb-10']}`}>
             <a href={banners[8].link}>
               <div>
                     <img src={banners[8].img}  alt="" className={styles['img-responsive']} />
                     </div>
               </a>
             </div>
-            <div style={{width:"33.27%",paddingRight:'10px'}}>
+            <div style={{width:"33.27%"}} className={`${styles['pr-10']}`}>
             <a href={banners[9].link}>
               <div>
                     <img src={banners[9].img}  alt="" className={styles['img-responsive']} />
@@ -754,9 +753,9 @@ class PageData extends React.Component {
                   </div>
                 <div className={styles.setWidth1}>
                   <div className={styles.trendingImg}>
-                      <a href={banners[3].link}>
+                      <a href={banners[1].link}>
                         <div>
-                          <img src={banners[1].img} width={banners[0].config.width} height={banners[0].config.height}/>
+                          <img src={banners[1].img} width={banners[1].config.width} height={banners[1].config.height}/>
                         </div>
                       </a>
                   </div>
@@ -770,31 +769,94 @@ class PageData extends React.Component {
 
       case 'BT2a':{
 
-          const{banners,breadcrumb, title} = content.data[lang];
+        const{banners,breadcrumb, title} = content.data[lang];
 
-          return(
-            <div>
-              <div className={`${styles['display-t-i-cb']} ${styles['flex']}`} >
-              <div className={`${styles['fs-20']} ${styles.title}`}>{title}</div>
-              <div style={{paddingRight:'10px',width:"50%"}}>
-                <a href={banners[0].link}>
-                  <div>
-                        <img src={banners[0].img}  alt="" className={styles['img-responsive']} />
-                  </div>
-                </a>
-              </div>
-              <div style={{width:"50%"}}>
-                <a href={banners[1].link}>
-                  <div>
-                        <img src={banners[1].img}  alt="" className={styles['img-responsive']} />
-                  </div>
-                </a>
-              </div>
+        return(
+          <div>
+            <div className={`${styles['display-t-i-cb']} ${styles['flex']}`} >
+            <div className={`${styles['fs-20']} ${styles.title}`}>{title}</div>
+            <div style={{width:"50%"}} className={`${styles['pr-5']}`}>
+            <div className={`${styles['mb-5']} ${styles['fs-18']} ${styles['fontW800']} ${styles['error-color']}`}>{content.data[lang].banners[0].title}</div>
+              <a href={banners[0].link}>
+                <div>
+                      <img src={banners[0].img}  alt="" className={styles['img-responsive']} />
+                </div>
+              </a>
+              <div className={`${styles['thick-gry-clr']} ${styles['fs-14']} ${styles['mt-10']} ${styles.pointer}`}> 
+                  {this.returnBanner(0,banners)}
               </div>
             </div>
-          );
+            <div style={{width:"50%"}} className={`${styles['pl-5']}`}>
+            <div className={`${styles['mb-5']} ${styles['fs-18']} ${styles['fontW800']} ${styles['error-color']}`}>{content.data[lang].banners[1].title}</div>
+              <a href={banners[1].link}>
+                <div>
+                      <img src={banners[1].img}  alt="" className={styles['img-responsive']} />
+                </div>
+              </a>
+              <div className={`${styles['thick-gry-clr']} ${styles['fs-14']} ${styles['mt-10']} ${styles.pointer}`}>
+              {this.returnBanner(1,banners)}
+            
+          </div>
+            </div>
+            
+            
+            </div>
+          </div>
+        );
 
-      }
+    }
+
+    case 'BT3a':{
+
+      const{banners,breadcrumb, title} = content.data[lang];
+
+      return(
+        <div>
+          <div className={`${styles['display-t-i-cb']} ${styles['flex']}`} >
+          <div className={`${styles['fs-20']} ${styles.title}`}>{title}</div>
+          <div style={{ width:"33.33%" }} className={`${styles['p-0-5']}`}>
+          <div className={`${styles['mb-5']} ${styles['fs-18']} ${styles['fontW800']} ${styles['error-color']}`}>{content.data[lang].banners[0].title}</div>
+            <a href={banners[0].link}>
+              <div>
+                    <img src={banners[0].img}  alt="" className={styles['img-responsive']} />
+              </div>
+            </a>
+            <div className={`${styles['thick-gry-clr']} ${styles['fs-14']} ${styles['mt-10']} ${styles.pointer}`}> 
+                {this.returnBanner(0,banners)}
+            </div>
+          </div>
+          
+          <div style={{width:"33.33%" }} className={`${styles['p-0-5']}`}>
+          <div className={`${styles['mb-5']} ${styles['fs-18']} ${styles['fontW800']} ${styles['error-color']}`}>{content.data[lang].banners[1].title}</div>
+            <a href={banners[1].link}>
+              <div>
+                    <img src={banners[1].img}  alt="" className={styles['img-responsive']} />
+              </div>
+            </a>
+            <div className={`${styles['thick-gry-clr']} ${styles['fs-14']} ${styles['mt-10']} ${styles.pointer}`}>
+            {this.returnBanner(1,banners)}
+            </div>
+          </div>
+
+          <div style={{ width:"33.33%" }} className={`${styles['p-0-5']}`}>
+          <div className={`${styles['mb-5']} ${styles['fs-18']} ${styles['fontW800']} ${styles['error-color']}`}>{content.data[lang].banners[2].title}</div>
+            <a href={banners[2].link}>
+              <div>
+                    <img src={banners[2].img}  alt="" className={styles['img-responsive']} />
+              </div>
+            </a>
+            <div className={`${styles['thick-gry-clr']} ${styles['fs-14']} ${styles['mt-10']} ${styles.pointer}`}>
+            {this.returnBanner(2,banners)}
+            </div>
+          </div>
+          
+          
+          </div>
+        </div>
+      );
+
+
+    }
 
 
       default: return null;
