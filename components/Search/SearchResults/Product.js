@@ -130,7 +130,7 @@ class Product extends Component {
     e.stopPropagation();
     e.preventDefault();
     const {
- userDetails, productId, notifyMe, variantId 
+ userDetails, productId, notifyMe, variantId
 } = this.props;
     if (userDetails.isLoggedIn) {
       notifyMe({
@@ -220,7 +220,7 @@ class Product extends Component {
     e.preventDefault();
     const { selectedIndex } = this.state;
     const {
- row, itemNum, showQuickView, variants 
+ row, itemNum, showQuickView, variants
 } = this.props;
     const vId = (variants.length > 0 && variants[selectedIndex].variantId);
     showQuickView(itemNum, row, vId);
@@ -301,7 +301,8 @@ class Product extends Component {
           variants[selectedIndex].offersApplied.map((offer, index) => <div key={`${offer}${index}`}>{offer}</div>)}
       </Popover>
     );
-
+    let title = displayName.replace(brand, '');
+    title = title.substring(0, title.substring(0, 55).lastIndexOf(' '));
     const getPriceAndOffer = () => (
       <span>
         <span className={`${styles['fs-10']} ${styles['black-color']}`}>{currency}</span>&nbsp;
@@ -397,11 +398,10 @@ class Product extends Component {
                 <div className={styles['desc-cont']}>
                   <div className={`${styles['pb-20']} ${styles['pl-20']} ${styles['pr-20']} ${styles.flex} ${styles['flex-colum']}`}>
                     <h5 className={`${styles['prdt-name']} ${styles['pt-15']} ${styles['pb-5']}  ${styles['m-0']}`}>
-                      <span className={`${styles.fontW600} ${styles['black-color']}`}>{brand}</span> <span className={`${styles['thick-gry-clr']} ${styles.fontW300}`}>{displayName.replace(brand, '').substr(0, 55).trim()}</span>
+                      <span className={`${styles.fontW600} ${styles['black-color']}`}>{brand}</span> <span className={`${styles['thick-gry-clr']} ${styles.fontW300}`}>{title}</span>
                     </h5>
                     <span>
                       <span className={`${styles['pr-5']}`}>{variants.length > 0 && variants[selectedIndex].sellingPrice && getPriceAndOffer()}</span>
-                      {/* <span className={`${styles['fs-12']} ${styles['black-color']}`}>{currency}</span> */}
                     </span>
                   </div>
                 </div>
@@ -430,11 +430,6 @@ class Product extends Component {
                       !showNotifyMeMsg && <a className={`${styles['flex-center']} ${styles['notify-part-inn']} ${styles['white-color']} ${styles['fp-btn']} ${styles['left-radius']} ${styles['fp-btn-primary']}`} onClick={this.notify}>
                         <span className={styles['pl-5']}>{PDP_PAGE.NOTIFY_ME}</span>
                       </a>
-                      // <div className={`${styles['flex']} ${styles['justify-around']} ${styles['quick-view']} ${styles['border-radius4']}`}>
-                      //   <a className={`${styles['flex-center']} ${styles['buy-now-btn']} ${styles['notifyBackground']}`} onClick={this.notify}>
-                      //     <span className={styles['pl-5']}>{PDP_PAGE.NOTIFY_ME}</span>
-                      //   </a>
-                      // </div>
                   }
                   <div className={`${styles['wish-list-part']} ${styles['flx-space-bw']}`}>
                     <span className={styles.flex}>
@@ -463,29 +458,7 @@ class Product extends Component {
                     <span className={`${styles['pr-5']}`}>{variants.length > 0 && variants[selectedIndex].sellingPrice &&
                       getPriceAndOffer()}
                     </span>
-                    {/* <span className={`${styles['fs-12']} ${styles['black-color']}`}>{currency}</span> */}
-                    {/* <div className={`${styles['flex']} ${styles['pt-5']}`}>
-                      <span className={styles['flex']}>
-                        <SVGCompoent clsName={`${styles['star-raing']}`} src="icons/common-icon/star-full-yellow" />
-                        <SVGCompoent clsName={`${styles['star-raing']}`} src="icons/common-icon/star-full-yellow" />
-                        <SVGCompoent clsName={`${styles['star-raing']}`} src="icons/common-icon/star-full-yellow" />
-                        <SVGCompoent clsName={`${styles['star-raing']}`} src="icons/common-icon/star-full-yellow" />
-                        <SVGCompoent clsName={`${styles['star-raing']}`} src="icons/common-icon/star-full-yellow" />
-                      </span>
-                      <span className={`${styles['label-gry-clr']} ${styles['pl-5']}`}>(153) </span>
-                    </div> */}
                   </div>
-                  {/* <div className={styles['desc-cont']}>
-                <div className={`${styles['prdt-name']} ${styles['fs-12']} ${styles['pt-15']} ${styles['pb-5']}`}>
-                  <a href="#">{displayName}</a>
-                </div>
-                <div>{priceRange}</div>
-                <div className={styles['variant-info']}>
-                  {
-                    _.map(variants, (variantValues, key) => <div key={key}>{`${key} : ${variantValues.join(', ')}`}</div>)
-                  }
-                </div>
-              </div> */}
                 </div>
               </div>
             </a>

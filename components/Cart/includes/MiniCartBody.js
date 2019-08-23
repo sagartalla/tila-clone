@@ -51,7 +51,7 @@ const MiniCartBody = (props) => {
                 variant_id='', catalogId: catalog_id, shipping, listing_id='', tuin_id } = item;
               return (
                 <div key={item_id} className={`${styles['flex']} ${styles['pt-15']} ${styles['pb-15']} ${styles['border-b']} ${styles['min-items-list']}`}>
-                  <Col md={2} sm={2} xs={2} className={`${styles['pl-0']} ${styles['pr-0']}`}>
+                  <Col md={2} sm={2} xs={2} className={`${styles['pl-0']} ${styles['pr-0']} ${styles['arbic-pad-re']}`}>
                     <div className={`${styles['cart-container-img']} ${styles['flex']} ${styles['justify-center']}`}>
                     <Link route={`/${language}/pdp/${name && name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${tuin_id ? `${tuin_id}/`: '' }${listing_id}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`}>
                         <a className={`${styles['width100']} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
@@ -83,7 +83,7 @@ const MiniCartBody = (props) => {
                     {(shipping === null || (shipping !== null && shipping.shippable)) ?
                       <div className={`${styles['flx-space-bw']} ${styles['pt-10']} ${styles['price-stepper-part']}`}>
                         <span className={styles['fontW600']}>
-                        <span>{cur}</span>&nbsp;
+                        <span className={`${styles['fs-12']}`}>{cur}</span>&nbsp;
                         <span>{offer_price}</span>
                         {/* {offer_price + ' ' + cur} */}
                         </span>
@@ -120,7 +120,7 @@ const MiniCartBody = (props) => {
           <div className={`${styles['p-20']} ${styles['instant-checkout-btn-part']}`}>
             <div className={`${styles['flx-spacebw-alignc']} ${styles['pb-10']}`}>
               <span className={styles['fontW600']}>{CART_PAGE.TOTAL_AMOUNT} :</span><span className={`${styles['fs-16']} ${styles['fontW600']}`}>
-              <span>{currency}</span>&nbsp;
+              <span className={`${styles['fs-14']}`}>{currency}</span>&nbsp;
               <span>{total_offer_price.display_value }</span>
               </span>
             </div>

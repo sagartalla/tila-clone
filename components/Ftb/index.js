@@ -238,7 +238,8 @@ class FTB extends React.Component {
 }
 
 const mapStateToProps = store => ({
-  pageData: selectors.getPage(store),
+  pageData: selectors.getPage(store).page,
+  
 });
 
 export default connect(mapStateToProps, null)(FTB);
