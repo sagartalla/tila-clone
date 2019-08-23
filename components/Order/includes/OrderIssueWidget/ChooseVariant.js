@@ -56,29 +56,23 @@ class ChooseVariant extends Component {
     //   orderItemId: selectedItem.id
     // });
   }
-  sizeNotAvailable() {
+  sizeNotAvailable = (value) => () => {
     this.setState({
-      message:'errorMsg',
+      message: value ? '' : 'errorMsg',
       activeListing:''
     },() => {
-      this.props.productNotAvailable()
+      this.props.productNotAvailable(value);
     })
   }
   choosedVariant = (listing, orderIssue) => () => {
-    debugger;
     const {listing_id,variant_id } = listing
-
+    this.sizeNotAvailable(true)();
     this.setState({
       message:'successMsg',
       activeListing:listing_id
     }, () => {
       this.props.selectedVariant({listing_id,variant_id})
     })
-    const {
-      orderId, orderItem, variantId, getOrderDetails,listingId, tuinId
-    } = this.props;
-    // getOrderDetails(orderIssue.orderId);
-    Router.pushRoute(`/${language}/customer/orders/${orderIssue.orderId}/issue/RETURN/item/${orderIssue.selectedItem.id}/${variant_id}/${listing_id}`);
   }
   selectedSize(variantId,exchangeVariants) {
     const data = exchangeVariants.filter((el,index) => {
@@ -89,14 +83,12 @@ class ChooseVariant extends Component {
   renderExchangeVariants(variants, orderIssue) {
     const { activeListing } = this.state
     const data = variants.map((el,index) => {
-      if(el.listing.total_inventory_count > 0) {
         return <li key={'variant_'+index}
-          className={`${el.listing.total_inventory_count > 0 ? styles['productSize-Button'] : styles['product-StrikeButton']} ${activeListing === el.listing.listing_id ? styles['active-variant']: ''}`}
-          onClick={el.listing.total_inventory_count > 0 ? this.choosedVariant(el.listing, orderIssue) : this.sizeNotAvailable}
+          className={`${el.listing !== null && el.listing.total_inventory_count > 0 ? styles['productSize-Button'] : styles['product-StrikeButton']} ${activeListing === (el.listing !== null && el.listing.listing_id) ? styles['active-variant']: ''}`}
+          onClick={(el.listing !== null && el.listing.total_inventory_count > 0) ? this.choosedVariant(el.listing, orderIssue) : this.sizeNotAvailable(false)}
           >
           {el.variant_details.attribute_map && el.variant_details.attribute_map.size && el.variant_details.attribute_map.size.attribute_values[0].value}
         </li>
-      }
     })
 
     return data;
