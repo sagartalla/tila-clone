@@ -253,7 +253,6 @@ class FTB extends React.Component {
                     </div>
                   </div>}
                 <PageData key={content} index={index} content={content} />
-                
               </React.Fragment>
             ))}
           {pageData.page_type === 'homePage' &&
@@ -276,10 +275,10 @@ class FTB extends React.Component {
 }
 
 const mapStateToProps = store => ({
-  pageData: selectors.getPage(store),
   isLoggedIn: authSelectors.getLoggedInStatus(store),
   recentlyViewed: wishListSelectors.recentlyViewed(store),
   isAddedToCart: listingId => wishListSelectors.getCartStatus(store, listingId),
+  pageData: selectors.getPage(store).page,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
