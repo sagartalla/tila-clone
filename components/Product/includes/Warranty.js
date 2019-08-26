@@ -42,7 +42,6 @@ class Warranty extends React.Component {
     const warranty = this.props.warranty || {};
     const warranty_display = `${warranty.duration} ${_.startCase(_.toLower(warranty.duration_unit))} ${PDP_PAGE.WARRANTY}`;
     const warranty_time = warranty.duration;
-    console.log('slider', this.state.slider);
     return (
       <div className={`${styles['flex-center']} ${styles['warranty-part']}  ${styles.relative} ${styles.pointer}`}>
         <span className={`${styles['flex-center']}`}>

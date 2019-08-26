@@ -156,7 +156,7 @@ class CartItem extends React.Component {
   }
   selectPolicy = (e) => {
     const { item } = this.props;
-    const { selectedPolicy, policies_selected } = this.state;
+    const { selectedPolicy, policies_selected, warrantyName } = this.state;
     let policyId1  = [];
     Object.keys(item.policies_applied).length > 0 && Object.keys(item.policies_applied).map(newPolicy => {
       Object.keys(policies_selected).map(selected => {
@@ -170,29 +170,37 @@ class CartItem extends React.Component {
     this.props.addToCartAndFetch({
       listing_id: item.listing_id,
       policies_applied: policyId1,
+      changeAddWarranty: true,
+      warrantyName,
     });
     document.getElementById('cart-container').scrollIntoView({ behavior: 'smooth' });
   }
 
   removeWarranty = (e) => {
+    debugger;
     const { item } = this.props;
     const policyId = e.currentTarget.getAttribute('data_policy_id');
     const warrantyName = e.currentTarget.getAttribute('data-name');
     const { selectedPolicy, policies_selected } = this.state;
     policies_selected[warrantyName] = policyId;
     let policyId1  = [];
+    let isMakeApi = false;
     Object.keys(item.policies_applied).length > 0 && Object.keys(item.policies_applied).map(newPolicy => {
-        policies_selected[newPolicy] !== item.policies_applied[newPolicy].policy_id &&
+      debugger;
+      policies_selected[newPolicy] !== item.policies_applied[newPolicy].policy_id &&
           policyId1.push(item.policies_applied[newPolicy].policy_id);
+          isMakeApi = true;
     })
+    isMakeApi && this.props.addToCartAndFetch({
+      listing_id: item.listing_id,
+      policies_applied: policyId1,
+      changeRemoveWarranty: true,
+      warrantyName,
+    });
     this.setState({
       policies_selected,
       selectedPolicy: '',
     });
-      this.props.addToCartAndFetch({
-        listing_id: item.listing_id,
-        policies_applied: policyId1,
-      });
       document.getElementById('cart-container').scrollIntoView({ behavior: 'smooth' });
   }
 
