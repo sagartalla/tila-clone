@@ -238,6 +238,9 @@ class FTB extends React.Component {
 }
 
 const mapStateToProps = store => ({
+  isLoggedIn: authSelectors.getLoggedInStatus(store),
+  recentlyViewed: wishListSelectors.recentlyViewed(store),
+  isAddedToCart: listingId => wishListSelectors.getCartStatus(store, listingId),
   pageData: selectors.getPage(store),
 });
 

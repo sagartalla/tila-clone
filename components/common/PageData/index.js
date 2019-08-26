@@ -175,7 +175,7 @@ class PageData extends React.Component {
               asNavFor={sliderTBS}
               ref={(slider) => { sliderTBS = slider; }}
               lazyLoad={false}
-              className={`${styles.flex} ${styles['fashion-main-slider']} ${styles['flex-colum']}`}
+              className={`${styles.flex} ${styles['fashion-main-slider']} ${styles['flex-colum']} fashion-slick-slider`}
               customPaging={i => <span className={`${styles['fs-10']}`}>{content.data[lang].banners[i].display_name}</span>}
             >
               {content.data[lang].banners.map(i => (
@@ -729,48 +729,48 @@ class PageData extends React.Component {
         return (
           <div className={`${styles.fashionBanners} ${styles.fashionBannerSpacing}`}>
             <div className={styles.fBanners1} style={{ display: 'flex' }}>
-              <div className={styles.fb3} style={{ width: this.getWidth(banners, 0) }}>
+              <div className={styles.fb3} >
                 <a href={banners[0].link}>
-                  <div>
-                    <img src={banners[0].img} alt="" className={styles.imgResolution} />
+                  <div className={`${styles['width100']}`}>
+                    <img src={banners[0].img} alt="" className={styles.imgResolution} className={`${styles['width100']}`} />
                   </div>
                 </a>
               </div>
-              <div className={styles.fb3} style={{ width: this.getWidth(banners, 1) }}>
+              <div className={styles.fb3} >
                 <a href={banners[1].img}>
-                  <div>
-                   <img src={banners[1].img} className={styles.imgResolution}/>
+                  <div className={`${styles['width100']}`}>
+                   <img src={banners[1].img} className={`${styles['width100']} ${styles.imgResolution}`} />
                   </div>
                 </a>
               </div>
-              <div className={styles.fb3} style={{ width: this.getWidth(banners, 2) }}>
+              <div className={styles.fb3}>
                 <a href={banners[2].link}>
-                  <div>
-                   <img src={banners[2].img} className={styles.imgResolution} />
+                  <div className={`${styles['width100']}`}>
+                   <img src={banners[2].img} className={`${styles['width100']} ${styles.imgResolution}`} />
                   </div>
                 </a>
               </div>
             </div>
 
             <div className={styles.fBanners2}>
-              <div className={styles.fb2} style={{ width: this.getWidth(banners, 3) }}>
+              <div className={styles.fb2} >
                 <a href={banners[3].link}>
-                  <div>
-                   <img src={banners[3].img} className={styles.imgResolution} />
+                  <div className={`${styles['width100']}`}>
+                   <img src={banners[3].img} className={`${styles['width100']} ${styles.imgResolution}`} />
                   </div>
                 </a>
               </div>
-              <div className={styles.fb1} style={{ width: this.getWidth(banners, 4) }}>
+              <div className={styles.fb1}>
                 <a href={banners[4].link}>
-                  <div>
-                   <img src={banners[4].img} className={styles.imgResolution} />
+                  <div className={`${styles['width100']}`}>
+                   <img src={banners[4].img} className={`${styles['width100']} ${styles.imgResolution}`} />
                   </div>
                 </a>
               </div>
-              <div className={styles.fb2} style={{ width: this.getWidth(banners, 5) }}>
+              <div className={styles.fb2}>
                 <a href={banners[5].link}>
-                  <div>
-                   <img src={banners[5].img} className={styles.imgResolution} />
+                  <div className={`${styles['width100']}`}>
+                   <img src={banners[5].img} className={`${styles['width100']} ${styles.imgResolution}`} />
                   </div>
                 </a>
                 <div className={`${styles['thick-gry-clr']} ${styles['fs-14']} ${styles['mt-10']} ${styles.pointer}`}>
@@ -791,21 +791,21 @@ class PageData extends React.Component {
           slidesToScroll: 1,
           autoplay: false,
         };
-       
+        console.log('hello');
         return(
-            <div className={styles.fashionBannerSpacing}>
+            <div className={`${styles.fashionBannerSpacing}`} >
               
               <Slider {...settings} 
                 asNavFor={sliderFTBS}
                 lazyLoad={false}
-                className={`${styles.flex} ${styles['fashion-main-slider']} ${styles['flex-colum']} fashion-slick-slider`}
+                className={`${styles.flex} ${styles['fashion-main-slider']} ${styles['flex-colum']}`}
                 customPaging={i => <span className={`${styles['fs-10']}`}>{content.data[lang].banners[i].display_name}</span>}
               >
                 {content.data[lang].banners.map(i => (
                   <div className={styles.fSlider} key={i.display_name}>
                     <a href={i.link}>
-                      <div className={`${styles.item} ${styles['slick-itm']}`} key={i.display_name}>
-                        <img src={i.img} alt={i.display_name} className={styles.imageRounded}/>
+                      <div className={`${styles.item} ${styles['slick-itm']} ${styles['width100']}`} key={i.display_name}>
+                        <img src={i.img} alt={i.display_name} className={`${styles['width100']} ${styles.imgResolution}`}/>
                       </div>
                     </a>
                     <span className={`${styles['fs-12']} ${styles['pt-10']} ${styles['justify-center']} ${styles['slider-elips']} ${styles['lne-ht1_2']}`} style={{textAlign: 'center', display: 'inline-block'}} >{i.display_name}</span>
@@ -827,18 +827,18 @@ class PageData extends React.Component {
               </div>
             </div>
             <div className={styles.cbt2aBanner}>
-                <div className={styles.F1banner} style={{width: this.getWidth(banners, 0)}}>
+                <div className={styles.F1banner}>
                     <a href={banners[0].link}>
-                      <div>
-                        <img src={banners[0].img} className={styles.imgResolution} />
+                      <div className={`${styles['width100']}`}>
+                        <img src={banners[0].img} className={`${styles['width100']} ${styles.imgResolution}`}/>
                       </div>
                     </a>
                   </div>
-                <div className={styles.F2banner} style={{width: this.getWidth(banners, 1)}}>
+                <div className={styles.F2banner}>
                   <div>
                       <a href={banners[1].link}>
-                        <div>
-                          <img src={banners[1].img} className={styles.imgResolution} />
+                        <div className={`${styles['width100']}`}>
+                          <img src={banners[1].img} className={`${styles['width100']} ${styles.imgResolution}`} />
                         </div>
                       </a>
                   </div>

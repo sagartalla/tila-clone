@@ -1,5 +1,6 @@
 import axios from 'axios';
 import constants from '../helper/constants';
+import { toast } from 'react-toastify';
 const captchaDisplay = ({txnId}) => {
   let headers = {
     headers: {
@@ -17,6 +18,8 @@ const captchaDisplay = ({txnId}) => {
 const captchaVerify = (options) => {
   return axios.post(`${constants.CAPTCHA_URL}/verify`, options).then(({data}) => {
     return data;
+  }).catch(() => {
+    toast("Maximum attempts reached, Please refresh the page");
   })
 }
 
