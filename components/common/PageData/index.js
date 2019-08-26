@@ -14,6 +14,7 @@ import styles_ar from './pageData_ar.styl';
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
 let sliderTBS = '';
+let sliderFTBS = '';
 // let sliderTIE = '';
 // let sliderHAL = '';
 
@@ -607,8 +608,7 @@ class PageData extends React.Component {
             <div className={styles.fashionBannerSpacing}>
               
               <Slider {...settings} 
-                asNavFor={sliderTBS}
-                // ref={(slider) => { sliderTBS = slider; }}
+                asNavFor={sliderFTBS}
                 lazyLoad={false}
                 className={`${styles.flex} ${styles['fashion-main-slider']} ${styles['flex-colum']} fashion-slick-slider`}
                 customPaging={i => <span className={`${styles['fs-10']}`}>{content.data[lang].banners[i].display_name}</span>}
