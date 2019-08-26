@@ -1,5 +1,5 @@
 import React from 'react';
-import NoSSR from 'react-no-ssr';
+//import NoSSR from 'react-no-ssr';
 import withRedux from 'next-redux-wrapper';
 import { bindActionCreators } from 'redux';
 
@@ -8,6 +8,7 @@ import Layout from '../layout/main';
 import FTB from '../components/Ftb';
 import Base, { baseActions } from './base';
 import { actionCreators as landingactionCreators } from '../store/landing';
+import LoaderBarContext from '../components/helpers/context/loaderBarContext'
 
 class Home extends Base {
   pageName = 'HOME_PAGE'
@@ -28,12 +29,13 @@ class Home extends Base {
     return { isServer };
   }
   render() {
+    const { loaderProps } = this.props;
     return (
-      <NoSSR>
-        <Layout>
-          <FTB />
-        </Layout>
-      </NoSSR>
+        <LoaderBarContext.Provider value={loaderProps}>
+          <Layout>
+            <FTB />
+          </Layout>
+        </LoaderBarContext.Provider>
     );
   }
 }
