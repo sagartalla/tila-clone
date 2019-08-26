@@ -18,32 +18,56 @@ const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...s
 
 const { PDP_PAGE, HEADER_PAGE } = languageDefinations();
 
+function SamplePrevArrow(props) {
+  const { onClick } = props;
+  return (
+    <div
+      className={styles.leftArrow}
+      onClick={onClick}
+    >
+      <img src="/static/img/landing-home/c-left.svg" alt="left" />
+    </div>
+  );
+}
+
+function SampleNextArrow(props) {
+  const { onClick } = props;
+  return (
+    <div
+      className={styles.rightArrow}
+      onClick={onClick}
+    >
+      <img src="/static/img/landing-home/c-right.svg" alt="right" />
+    </div>
+  );
+}
+
 const settings = {
   infinite: false,
-  speed: 500,
-  slidesToShow: 4,
   slidesToScroll: 1,
+  nextArrow: <SampleNextArrow />,
+  prevArrow: <SamplePrevArrow />,
 };
 
 const RecentView = (props) => {
-  const { recentlyViewed, isLoggedIn } = props;
+  const { recentlyViewed, isLoggedIn, homePage } = props;
   if (recentlyViewed.length === 0) return null;
   return (
-    <div className={`${styles['recentview-main']} ${styles['pb-25']}`}>
+    <div className={`${styles['recentview-main']}`}>
       <div className={`${styles['flx-spacebw-alignc']} ${styles['pb-10']} ${styles['pt-10']}`}>
         <h6 className={`${styles['fs-16']} ${styles['pt-15']} ${styles['pb-15']} ${styles['m-0']} ${styles.fontW600}`}>
           <span className={`${styles['pl-15']}`}>{PDP_PAGE.RECENTLY_VIEWED}</span>
         </h6>
         <Link to={`/${lang}/items-zone/recently-viewed`}>
           <a
-            className={`${styles['r-viewall']} ${styles.fontW600} ${styles['fp-btn']} ${styles['left-radius']} ${styles['fp-btn-default']} ${styles.ft_card_btn}`}
+            className={`${styles['r-viewall']} ${styles.fontW600} ${styles['mr-15']} ${styles['fp-btn']} ${styles['left-radius']} ${styles['fp-btn-default']} ${styles.ft_card_btn}`}
           >
             {HEADER_PAGE.VIEW_ALL}
           </a>
         </Link>
       </div>
       <div className={`${styles['border-b']} ${styles['border-t']}`}>
-        <Slider {...settings}>
+        <Slider {...settings} slidesToShow={homePage ? 6 : 4}>
           {recentlyViewed.map(item => (
             <RecentlyViewItem item={item} isLoggedIn={isLoggedIn} />
           ))}

@@ -312,13 +312,13 @@ class CartItem extends React.Component {
                       <span className={styles['success-green']}>{`${Math.floor(discount)}% ${PDP_PAGE.OFF}`}</span>
                       <span className={`${styles['cross-strike']} ${styles.relative} ${styles['ml-5']}`}>
                         <span className={styles['label-light-grey']}>
-                          <span>{cur}&nbsp;</span>
+                          <span className={`${styles['fs-12']}`}>{cur}&nbsp;</span>
                           <span>{mrp}</span>
                         </span>
                       </span>
                     </p>}
-                  <h4 className={`${styles.fontW600} ${styles['justify-flex-end']} ${styles['cart-price-label']} ${styles['fs-16']} ${styles['light-gry-clr']} ${styles['flex-center']} ${styles['mt-10']} ${styles['t-rt']}`}>
-                       <span>{cur}&nbsp;</span>
+                  <h4 className={`${styles.fontW600} ${styles['justify-flex-end']} ${styles['cart-price-label']} ${styles['fs-16']} ${styles['light-gry-clr']} ${styles['flex-center']} ${styles['mt-10']} ${styles['t-rt']} ${styles['align-baseline']}`}>
+                       <span className={`${styles['fs-12']}`}>{cur}&nbsp;</span>
                         <span>{offer_price}</span>
                     {/* <OverlayTrigger trigger="click" placement="bottom" overlay={popover(item)}> */}
                     {/* <span className={`${styles['fs-12']} ${styles['pr-5']}`}>
@@ -402,7 +402,12 @@ class CartItem extends React.Component {
 
                           <div className={` ${styles['flx-space-bw']} ${styles['total-amount']} ${styles['fs-12']}`}>
                             <div>{ORDER_PAGE.TOTAL}</div>
-                            <div className={`${styles['t-rt']}`}>{cur} {total_amount}</div>
+                            <div className={`${styles['t-rt']}`}>
+                            <span className={`${styles['flex']} ${styles['align-baseline']}`}>
+                            <span>{cur}</span>&nbsp;
+                            <span>{total_amount}</span>
+                            </span>
+                            </div>
                           </div>
                         </div>
                         <div className={`${styles['p-5']} ${styles['mt-10']} ${styles['fs-12']} ${styles['overall-amount']}`}>{CART_PAGE.OVERALL_YOU_SAVE} {cur} {total_discount} {CART_PAGE.ON_THIS_PRODUCT}</div>
@@ -460,7 +465,7 @@ class CartItem extends React.Component {
           </Col>
           <Col md={4} sm={4} xs={4} className={`${styles['t-rt']} ${styles['pr-0']} ${styles['m-pad-5']}`}>
             <span>{ORDER_PAGE.TOTAL} : </span><span className={`${styles['fs-16']} ${styles.fontW600}`}>
-            <span>{cur}</span>&nbsp;
+            <span className={`${styles['fs-12']}`}>{cur}</span>&nbsp;
             <span>{total_amount}</span>
             {/* {total_amount + ' ' + cur} */}
             </span>

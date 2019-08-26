@@ -17,7 +17,7 @@ const ShowHidePassword = (props) => {
     return (
             <div onClick={hideToggle} className={`${styles.passwordeye}`}>
                 <div className={`${styles['password-eye-icon']}`}>
-                    <SVGComponent src={hide ? "icons/profile/eye-show" : "icons/profile/eye-hide"}/>
+                    <SVGComponent src={hide ? "icons/profile/eye-hide" : "icons/profile/eye-show"}/>
                 </div>&nbsp;
                 <span>{hideContent ? '' : `${hide ? LOGIN_PAGE.SHOW : LOGIN_PAGE.HIDE} ${LOGIN_PAGE.PASSWORD}`}</span>
             </div>
