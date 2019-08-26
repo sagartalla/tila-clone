@@ -54,7 +54,7 @@ class OrderTracker extends React.Component {
     const { orderItem, showMsgAndDate, orderTracker } = this.props;
     return (
       <div className={`${styles['p-10']} ${styles['bg-light-gray']} ${styles['flex-center']} ${styles.relative} ${styles.pointer}`}>
-        <div>{ORDER_PAGE.YOUR_ITEM_IS_OUT_FOR_DELIVERY}</div>
+        <div>{orderItem.status === 'DELIVERED' ? ORDER_PAGE.YOUR_ITEM_IS_DELIVERED : ORDER_PAGE.YOUR_ITEM_IS_OUT_FOR_DELIVERY}</div>
         <a className={`${styles.fontW600} ${styles['ml-10']} ${styles['view-more-label']} ${styles['fs-12']}`} onClick={this.openSlider}>{CART_PAGE.VIEW_MORE}</a>
         {this.state.slider &&
         <Slider label="Order Tracking" isOpen={this.state.slider} closeSlider={this.closeSlider}>

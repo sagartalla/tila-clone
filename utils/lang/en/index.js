@@ -747,6 +747,7 @@ export const EN_KEYWORDS = {
     TO_VIEW_PARENT_ORDER: 'To view parent order please',
     CLICK_HERE: 'Click here',
     YOUR_ITEM_IS_OUT_FOR_DELIVERY: 'Your Item is out for delivery',
+    YOUR_ITEM_IS_DELIVERED: 'Your Item is delivered',
     REPLACE: 'Replace',
     REFUND_TO: 'Refund to',
     COMPLETED: 'Completed',

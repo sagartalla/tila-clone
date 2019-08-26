@@ -742,6 +742,7 @@ export const AR_KEYWORDS = {
     TO_VIEW_PARENT_ORDER: 'To view parent order please',
     CLICK_HERE: 'Click here',
     YOUR_ITEM_IS_OUT_FOR_DELIVERY: 'البند الخاص بك هو خارج للتسليم',
+    YOUR_ITEM_IS_DELIVERED: 'يتم تسليم البند الخاص بك',
     REPLACE: 'Replace',
     REFUND_TO: 'Refund to',
     COMPLETED: 'Completed',
