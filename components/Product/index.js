@@ -126,9 +126,8 @@ const getProductComponent = (isPreview, taskCode) => {
     componentWillReceiveProps(nextProps) {
       const {
         getRecentlyViewed, productData,
-        addProductToRV, isLoggedIn, isAddedToCart,
+        addProductToRV, isLoggedIn,
       } = this.props;
-      const { rv } = this.state;
       if (isLoggedIn !== nextProps.isLoggedIn) {
         if (productData.catalogObj.variant_id) addProductToRV(productData.catalogObj.variant_id);
         getRecentlyViewed();
@@ -345,13 +344,12 @@ const getProductComponent = (isPreview, taskCode) => {
                   <div className={`${styles['bg-white']} ${styles['mt-30']}`}>
                     <Grid>
                       <Row>
-                        <Col md={8}>
+                        <Col md={8} className={styles['pb-25']}>
                           {
                             isPreview ? null :
                             <NoSSR>
                               <RecentView
                                 isLoggedIn={isLoggedIn}
-                                shippingInfo={shippingInfo}
                                 recentlyViewed={isLoggedIn ? recentlyViewed : rv.map((item) => {
                                   item.isAddedToCart = isAddedToCart(item.id);
                                   return item;

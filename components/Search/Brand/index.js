@@ -43,7 +43,7 @@ const Brand = ({ pageData }) => {
 
 
 const mapStateToProps = store => ({
-  pageData: selectors.getPage(store),
+  pageData: selectors.getPage(store).page,
 });
 
 
