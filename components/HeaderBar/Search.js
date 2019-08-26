@@ -196,6 +196,7 @@ class Search extends Component {
                     onChange={this.onChangeSearchInput}
                     value={(context === 'search') || searchInput ? query : ''}
                     onKeyDown={this.handleSearch}
+                    maxLength={80}
                   />
               )}
               </SearchContext.Consumer>
