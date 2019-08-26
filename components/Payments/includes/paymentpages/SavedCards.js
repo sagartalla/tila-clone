@@ -60,7 +60,6 @@ class SavedCards extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    debugger;
     if (nextProps.processData && nextProps.processData.iframe_url) {
       this.setState({
         iframe_url: nextProps.processData.iframe_url

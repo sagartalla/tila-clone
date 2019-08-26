@@ -75,6 +75,8 @@ const getOrdersData = (store) => {
         },
         orderDate: moment(created_at).format('MMMM DD, YYYY'),
         orderTotal: `${total_amount.currency_code} ${total_amount.display_value}`,
+        orderCurrency: `${total_amount.currency_code}`,
+        orderAmount: `${total_amount.display_value}`,       
         orderItems,
         order_type,
         invoice_id: order_items.find(x => x.invoice_id !== '').invoice_id,
