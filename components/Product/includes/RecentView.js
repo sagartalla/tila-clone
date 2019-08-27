@@ -1,17 +1,14 @@
 import React from 'react';
 import Slider from 'react-slick';
 
-import constants from '../../../constants';
-
+import RecentlyViewItem from './RecentlyViewItem';
 import { languageDefinations } from '../../../utils/lang';
-
 import lang from '../../../utils/language';
 
 import main_en from '../../../layout/main/main_en.styl';
 import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from '../product_en.styl';
 import styles_ar from '../product_ar.styl';
-import RecentlyViewItem from './RecentlyViewItem';
 
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
@@ -37,6 +34,7 @@ const RecentView = (props) => {
           className={`${styles['r-viewall']} ${styles.fontW600} ${styles['mr-15']} ${styles['fp-btn']} ${styles['left-radius']} ${styles['fp-btn-default']} ${styles.ft_card_btn}`}
           href={`/${lang}/items-zone/recently-viewed`}
           target="_blank"
+          rel="noopener noreferrer"
         >
           {HEADER_PAGE.VIEW_ALL}
         </a>
