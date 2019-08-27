@@ -23,8 +23,9 @@ routes
   .add({ name: 'redirect', pattern: '/:country/:language(en|ar)', page: 'homeRedirect' })
   .add({ name: 'categoryLanding', pattern: '/:language(en|ar)/:category(electronics|fashion|lifestyle)', page: 'home' })
   .add({ name: 'category', pattern: '/:language(en|ar)/clp/:category', page: 'category' })
-  .add({ name: 'default', pattern: '/:language(en|ar)?', page: 'home' })
   .add({ name: 'items-zone', pattern: '/:language(en|ar)/items-zone/:zone', page: 'itemsZone' })
-  .add({ name: 'verifyemail', pattern: '/:language(en|ar)/email/verify', page: 'verifyEmail' });
+  .add({ name: 'verifyemail', pattern: '/:language(en|ar)/email/verify', page: 'verifyEmail' })
+  .add({ name: 'default', pattern: '/:language(en|ar)?', page: 'home' })
+;
 
 module.exports = routes;
