@@ -10,58 +10,55 @@ import styles_ar from '../pageData_ar.styl';
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
 
-const CBT8a = ({content}) => {
+const CBT8a = ({ content }) => {
+  const returnBanner = (index, banners) => (
+    <a href={banners[index].link} className={styles.width100}>
+      <div className={`${styles.width100}`}>
+        <img src={banners[index].img} className={`${styles.width100}`} />
+      </div>
+    </a>
+  );
 
-    const returnBanner = (index, banners) => {
-        return(
-            <a href={banners[index].img} className={styles.width100}>
-                <div className={`${styles['width100']}`}>
-                    <img src={banners[index].img} className={`${styles['width100']}`} />
-                </div>
-            </a>
-        );
-    }
-
-    const { banners } = content.data[lang];
-    return (
-        <div className={`${styles['flex-prop']} ${styles['bannerSpacing']}`} >
-            <div className={`${styles['flex']} ${styles['width50']}`} >
-                <div className= {styles.d11}>
-                    {returnBanner(0, banners)}
-                </div>
-
-                <div className= {styles.d12}>
-                    {returnBanner(1, banners)}
-                </div>
-            </div>
-
-            <div className={styles.rightBanner}>
-                <div className= {styles.d13}>
-                    <div>
-                        {returnBanner(2, banners)}
-                    </div>
-                    <div >
-                        {returnBanner(3, banners)}
-                    </div>
-                    <div >
-                        {returnBanner(4, banners)}
-                    </div>
-                </div>
-
-                <div className= {styles.d14}>
-                    <div >
-                        {returnBanner(5, banners)}
-                    </div>
-                    <div >
-                        {returnBanner(6, banners)}
-                    </div>
-                    <div >
-                        {returnBanner(7, banners)}
-                    </div>
-                </div>
-            </div>
+  const { banners } = content.data[lang];
+  return (
+    <div className={`${styles['flex-prop']} ${styles.bannerSpacing}`} >
+      <div className={`${styles.flex} ${styles.width50}`} >
+        <div className={styles.d11}>
+          {returnBanner(0, banners)}
         </div>
-    );
-}
+
+        <div className={styles.d12}>
+          {returnBanner(1, banners)}
+        </div>
+      </div>
+
+      <div className={styles.rightBanner}>
+        <div className={styles.d13}>
+          <div>
+            {returnBanner(2, banners)}
+          </div>
+          <div >
+            {returnBanner(3, banners)}
+          </div>
+          <div >
+            {returnBanner(4, banners)}
+          </div>
+        </div>
+
+        <div className={styles.d14}>
+          <div >
+            {returnBanner(5, banners)}
+          </div>
+          <div >
+            {returnBanner(6, banners)}
+          </div>
+          <div >
+            {returnBanner(7, banners)}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default CBT8a;
