@@ -24,7 +24,6 @@ class CBT6a extends Component{
 
         return(<div>
             <div className={`${styles['display-t-i-cb']} ${styles.flex}`} >
-
                 <div className={`${styles['p-0-5']} ${styles.flex}`} style={{ width: '33.5%' }}>
                 <a href={banners[0].link} style={{width:'100%'}}>
                     <div className={styles.shadow} className={`${styles['width100']}`}>
@@ -81,8 +80,6 @@ class CBT6a extends Component{
                 </div>
 
                 </div>
-
-
        </div>
         </div>);
     }
