@@ -189,7 +189,7 @@ class OrderItem extends Component {
       <div className={`${styles['shipment-wrap']} ${styles['mb-20']} ${styles['mt-20']} ${styles.flex}`}>
         <Col md={7} sm={7} className={`${styles['pl-0']} ${styles['pr-0']} ${styles.flex} ${styles['flex-colum']}`}>
           {orderItem.products.map((product) => {
-            const { catalogId: catalog_id, name, productId: product_id, variantId, listing_id='' } = product;
+            const { catalogId: catalog_id, name, productId: product_id, variantId, listing_id='oos' } = product;
             const {
               final_price = {}, gift_charge = {}, mrp = {}, offer_price = {}, shipping_fees = {}, discount = {},
             } = product.price;
