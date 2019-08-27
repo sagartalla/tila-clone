@@ -77,7 +77,7 @@ class WarrantyPolicy extends React.Component {
                                 <div className={`${styles.fontW600} ${styles['warranty-values']}`}>{warrantyKeys[newVal]}</div>
                                 <div className={`${styles['text-blue']} ${styles['fs-12']}`}><a href="/en/policy/warranty-policy" target="_blank">{CART_PAGE.VIEW_T_AND_C}</a></div>
                               </div>
-                              {selectedPolicy === '' && policies_applied[newVal] && policies_applied[newVal].policy_type.toLowerCase() === newVal && <div className={`${styles.fontW600} ${styles['flex-center']}`}><div className={`${styles['fs-12']}`}>{policies_applied[newVal].cost && policies_applied[newVal].cost.currency_code}</div>
+                              {warrantyName !== newVal && policies_applied[newVal] && policies_applied[newVal].policy_type.toLowerCase() === newVal && <div className={`${styles.fontW600} ${styles['flex-center']}`}><div className={`${styles['fs-12']}`}>{policies_applied[newVal].cost && policies_applied[newVal].cost.currency_code}</div>
                               <div className={`${styles['fs-14']} ${styles['ml-5']}`}>
                               {policies_applied[newVal].cost && policies_applied[newVal].cost.display_value}
                               </div>

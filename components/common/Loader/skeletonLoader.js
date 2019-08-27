@@ -8,7 +8,7 @@ const language = cookies.get('language') || 'en';
 const country = cookies.get('country') || 'SAU';
 
 class SkeletonLoader extends Component {
-  getPlaceHolder = (pathname) => {
+  getPlaceHolder = (pathname) => {    
     switch (pathname.split('?')[0]) {
       case `/${language}/search`:
         return searchPlaceHolder

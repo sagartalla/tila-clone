@@ -2,7 +2,6 @@ import React from 'react';
 import Slider from 'react-slick';
 
 import constants from '../../../constants';
-import { Link } from '../../../routes';
 
 import { languageDefinations } from '../../../utils/lang';
 
@@ -58,13 +57,13 @@ const RecentView = (props) => {
         <h6 className={`${styles['fs-16']} ${styles['pt-15']} ${styles['pb-15']} ${styles['m-0']} ${styles.fontW600}`}>
           <span className={`${styles['pl-15']}`}>{PDP_PAGE.RECENTLY_VIEWED}</span>
         </h6>
-        <Link to={`/${lang}/items-zone/recently-viewed`}>
-          <a
-            className={`${styles['r-viewall']} ${styles.fontW600} ${styles['mr-15']} ${styles['fp-btn']} ${styles['left-radius']} ${styles['fp-btn-default']} ${styles.ft_card_btn}`}
-          >
-            {HEADER_PAGE.VIEW_ALL}
-          </a>
-        </Link>
+        <a
+          className={`${styles['r-viewall']} ${styles.fontW600} ${styles['mr-15']} ${styles['fp-btn']} ${styles['left-radius']} ${styles['fp-btn-default']} ${styles.ft_card_btn}`}
+          href={`/${lang}/items-zone/recently-viewed`}
+          target="_blank"
+        >
+          {HEADER_PAGE.VIEW_ALL}
+        </a>
       </div>
       <div className={`${styles['border-b']} ${styles['border-t']}`}>
         <Slider {...settings} slidesToShow={homePage ? 6 : 4}>
