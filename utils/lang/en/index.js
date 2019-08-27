@@ -751,6 +751,7 @@ export const EN_KEYWORDS = {
     COMPLETED: 'Completed',
     IN_PROGRESS: 'In Progress',
     MESSAGE: 'Message',
+    REFUND: 'Refund',
   },
   COUPON_OFFERS: {
     VIEW_TERMS: 'Terms & Conditions',

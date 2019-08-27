@@ -748,6 +748,7 @@ export const AR_KEYWORDS = {
     COMPLETED: 'Completed',
     IN_PROGRESS: 'In Progress',
     MESSAGE: 'رسالة',
+    REFUND: 'Refund',    
   },
   COUPON_OFFERS: {
     VIEW_TERMS: 'استعرض الشروط والأحكام',
