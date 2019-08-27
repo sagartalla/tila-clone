@@ -29,7 +29,7 @@ const VaultHeader = (props) => {
             <div className={`${styles['tila-credit-wrap']} ${styles['flex']} ${styles['align-center']}`}>
               <div className={styles['label']}>{VAULT_PAGE.YOUR_TILA_CREDIT_BALANCE_IS} &nbsp; &nbsp;</div>
               <div className={styles['amount-wrap']}>
-                <div className={`${styles['currency']} ${styles['fs-12']}`}>{props.tilaCredit.currency_code} &nbsp;</div>
+                {/* <div className={`${styles['currency']} ${styles['fs-12']}`}>{props.tilaCredit.currency_code} &nbsp;</div> */}
                 <div className={`${styles['amount']} ${styles['fs-30']}`}>{props.tilaCredit.display_value}</div>
               </div>
             </div>
@@ -43,7 +43,7 @@ const VaultHeader = (props) => {
             <Tab eventKey={1} title={VAULT_PAGE.SAVED_CARDS} className={`${styles['pointer']} ${styles['p-10']} ${styles['thick-gry-clr']}`}>
               {props.children}
             </Tab>
-            <Tab eventKey={2} title={`${VAULT_PAGE.TILA_GIFT} ${VAULT_PAGE.VOUCHER}`} className={`${styles['pointer']} ${styles['thick-gry-clr']}`}>
+            <Tab eventKey={2} title={`${VAULT_PAGE.TILA_GIFT}`} className={`${styles['pointer']} ${styles['thick-gry-clr']}`}>
               <TilaVoucher transactions={props.transactions}/>
             </Tab>
           </Tabs>

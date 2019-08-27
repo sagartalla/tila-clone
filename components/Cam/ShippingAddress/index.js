@@ -58,13 +58,13 @@ class ShippingAddress extends Component {
       {
         field: 'first_name',
         method: this.validateNames,
-        message: 'Should be between 3 to 20 characters',
+        message: 'Minimum 3 characters required',
         validWhen: false,
       },
       {
         field: 'last_name',
         method: this.validateNames,
-        message: 'Should be between 3 to 20 characters',
+        message: 'Minimum 3 characters required',
         validWhen: false,
       },
       {
@@ -76,7 +76,7 @@ class ShippingAddress extends Component {
       {
         field: 'shipping_country_code',
         method: this.validate,
-        message: 'Select Country from list',
+        message: 'Select country from list',
         validWhen: false,
       },
       {
@@ -101,7 +101,7 @@ class ShippingAddress extends Component {
         field: 'mobile_no',
         method: this.validate,
         validWhen: false,
-        message: 'Phone Number cannot be empty',
+        message: 'Phone number cannot be empty',
       },
       {
         field: 'mobile_no',

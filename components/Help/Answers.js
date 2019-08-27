@@ -59,8 +59,8 @@ class Answers extends Component {
   handlePageCount = (currentPage) => (res) => {
     !!!currentPage ?
       this.setState({
-        count: res.value.data.items[0].count,
-        totalPages: Math.ceil(res.value.data.items[0].count/this.state.size),
+        count: res && res.value && res.value.data && res.value.data.items && res.value.data.items[0].count,
+        totalPages: Math.ceil(res && res.value && res.value.data && res.value.data.items && res.value.data.items[0].count/this.state.size),
         currentPage: this.state.currentPage + 1
       })
     : this.setState({
