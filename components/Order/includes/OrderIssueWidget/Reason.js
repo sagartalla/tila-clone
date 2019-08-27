@@ -18,6 +18,7 @@ import main_ar from '../../../../layout/main/main_ar.styl';
 import styles_en from './orderIssue_en.styl';
 import styles_ar from './orderIssue_ar.styl';
 
+
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 
@@ -90,8 +91,8 @@ class Reason extends Component {
   getReplaceData = (exchangeVariant) => {
     const { query } = this.props;
     const findData = exchangeVariant && exchangeVariant.filter(el =>
-      el.listing.variant_id === query.variantId &&
-      el.listing.total_inventory_count > 0);
+      el.listing !== null && (el.listing.variant_id === query.variantId &&
+      el.listing.total_inventory_count > 0));
 
     if (findData.length > 0) {
       return [
@@ -145,18 +146,22 @@ class Reason extends Component {
       address_id: orderDetails && orderDetails.address.address_id,
     }
 
-    if (
-      (selectedMode === 'Return' || selectedMode === 'Cancel')
-    ) {
-      this.props.setOrderIssueData(params);
+    if (selectedMode === 'Return') {
+      const returnParam = Object.assign({}, params, { issueType: 'RETURN' });
+      this.props.setOrderIssueData(returnParam);
       this.props.setAddressData(reasonParams);
-      this.props.refundOptions(orderIssue.selectedItem.id, orderIssue.issueType);
+      this.props.refundOptions(orderIssue.selectedItem.id, ORDER_ISSUE_TYPES.RETURN);
       goToNextStep();
-    }
-    else if(selectedMode === 'Claim Warranty'){
-      this.props.setAddressData(warrantyReasonParams);
-      this.props.setOrderIssueData(params)
-    }
+      } else if (selectedMode === 'Cancel') {
+        this.props.setOrderIssueData(params);
+        this.props.setAddressData(reasonParams);
+        this.props.refundOptions(orderIssue.selectedItem.id, orderIssue.issueType);
+        goToNextStep();
+      }
+      else if(selectedMode === 'Claim Warranty'){
+        this.props.setAddressData(warrantyReasonParams);
+        this.props.setOrderIssueData(params)
+      }
     else if (
       this.state.selectedMode === 'Exchange'
     ) {
@@ -193,19 +198,19 @@ class Reason extends Component {
     }
 
   }
-  productNotAvailable() {
+  productNotAvailable(value) {
     this.setState({
-      selectedMode: 'Return',
+      selectedMode: value ? 'Exchange' : 'Return',
       selectedVariant: [],
       variantId: '',
-      displaySizeError: false
-    })
+      displaySizeError: false,
+    });
   }
   selectedVariant(listing) {
     this.setState({
       selectedVariant: [listing],
-      displaySizeError: false
-    })
+      displaySizeError: false,
+    });
   }
   selectReason(e) {
     this.setState({
@@ -326,7 +331,7 @@ class Reason extends Component {
               />
             ) : null}
           {displaySizeError ?
-            <p>{ORDER_PAGE.PLEASE_SELECT_SIZE_TO_CONTINUE}</p> : null
+            <p className={`${styles['error-msg']}`}>{ORDER_PAGE.PLEASE_SELECT_SIZE_TO_CONTINUE}</p> : null
 
           }
           {
