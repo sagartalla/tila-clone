@@ -172,7 +172,7 @@ class FTB extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      rv: []
+      rv: [],
     };
   }
 
@@ -180,8 +180,8 @@ class FTB extends React.Component {
     const { getRecentlyViewed, isLoggedIn } = this.props;
     if (isLoggedIn) getRecentlyViewed();
     this.setState({
-      rv:localStorage.getItem('rv') ? JSON.parse(localStorage.getItem('rv')) : [],
-    })
+      rv: localStorage.getItem('rv') ? JSON.parse(localStorage.getItem('rv')) : [],
+    });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -203,87 +203,87 @@ class FTB extends React.Component {
     return (
       <LoaderBarContext.Consumer>
         {
-          (context) => {
-            return (
-              <div>
-                <HeaderBar />
-                  <LoadingBar loadComponent={context.loadComponent}
-                    pathname={context.pathname}>
-                    {pageData.device !== 'desktop' ? null :
-                    <div className={`${styles['p-0']} container-fluid`}>
-                      {pageData && pageData.page_content.length > 0 &&
-                        pageData.page_content.map((content, index) => (
-                          <React.Fragment>
-                            {index === 1 && pageData.page_type === 'homePage' &&
-                              <div className={styles['ff-t-i']}>
-                                <div className={styles.e}>
-                                  <span className={`${styles.title} ${styles['fs-20']}`}>{lang === 'en' ? 'ELECTRONICS' : 'الكترونيات‎'}</span>
-                                  <div className="home-slider">
-                                    <Slider
-                                      asNavFor={sliderTIE}
-                                      ref={slider => (sliderTIE = slider)}
-                                      lazyLoad
-                                      className={`${styles['ht-100per']}`}
-                                      slidesToShow={10}
-                                    >
-                                      {tie.map(i => (
-                                        <div>
-                                          <div className={styles.item} key={i}>
-                                            <a href={i.link}>
-                                              <img src={i.img} alt={i.title} />
-                                            </a>
-                                            <span className={`${styles['fs-10']} ${styles['pt-10']} ${styles.flex} ${styles['justify-center']} ${styles['slider-elips']} ${styles['lne-ht1_2']}`}>{i.title}</span>
-                                          </div>
-                                        </div>
-                                        ))}
-                                    </Slider>
+          context => (
+            <div>
+              <HeaderBar />
+              <LoadingBar
+                loadComponent={context.loadComponent}
+                pathname={context.pathname}
+              >
+                {pageData.device !== 'desktop' ? null :
+                <div className={`${styles['p-0']} container-fluid`}>
+                  {pageData && pageData.page_content.length > 0 &&
+                  pageData.page_content.map((content, index) => (
+                    <React.Fragment>
+                      {index === 1 && pageData.page_type === 'homePage' &&
+                        <div className={styles['ff-t-i']}>
+                          <div className={styles.e}>
+                            <span className={`${styles.title} ${styles['fs-20']}`}>{lang === 'en' ? 'ELECTRONICS' : 'الكترونيات‎'}</span>
+                            <div className="home-slider">
+                              <Slider
+                                asNavFor={sliderTIE}
+                                ref={slider => (sliderTIE = slider)}
+                                lazyLoad
+                                className={`${styles['ht-100per']}`}
+                                slidesToShow={10}
+                              >
+                                {tie.map(i => (
+                                  <div>
+                                    <div className={styles.item} key={i}>
+                                      <a href={i.link}>
+                                        <img src={i.img} alt={i.title} />
+                                      </a>
+                                      <span className={`${styles['fs-10']} ${styles['pt-10']} ${styles.flex} ${styles['justify-center']} ${styles['slider-elips']} ${styles['lne-ht1_2']}`}>{i.title}</span>
+                                    </div>
                                   </div>
-                                </div>
-                                <div className={styles['h-a-l']}>
-                                  <span className={`${styles.title} ${styles['fs-20']}`}> {lang === 'en' ? 'FASHION & LIFESTYLE' : 'أزياء و لايف ستايل'}</span>
-                                  <div className="home-slider">
-                                    <Slider
-                                      asNavFor={sliderHAL}
-                                      ref={slider => (sliderHAL = slider)}
-                                      lazyLoad
-                                      className={styles['ht-100per']}
-                                      slidesToShow={10}
-                                    >
-                                      {hal.map(i => (
-                                        <div>
-                                          <div className={styles.item} key={i}>
-                                            <a href={i.link}>
-                                              <img src={i.img} />
-                                            </a>
-                                            <span className={`${styles['fs-10']} ${styles['pt-10']} ${styles['justify-center']} ${styles['slider-elips']} ${styles['lne-ht1_2']}`}>{i.title}</span>
-                                          </div>
-                                        </div>
-                                      ))}
-                                    </Slider>
+                                  ))}
+                              </Slider>
+                            </div>
+                          </div>
+                          <div className={styles['h-a-l']}>
+                            <span className={`${styles.title} ${styles['fs-20']}`}> {lang === 'en' ? 'FASHION & LIFESTYLE' : 'أزياء و لايف ستايل'}</span>
+                            <div className="home-slider">
+                              <Slider
+                                asNavFor={sliderHAL}
+                                ref={slider => (sliderHAL = slider)}
+                                lazyLoad
+                                className={styles['ht-100per']}
+                                slidesToShow={10}
+                              >
+                                {hal.map(i => (
+                                  <div>
+                                    <div className={styles.item} key={i}>
+                                      <a href={i.link}>
+                                        <img src={i.img} />
+                                      </a>
+                                      <span className={`${styles['fs-10']} ${styles['pt-10']} ${styles['justify-center']} ${styles['slider-elips']} ${styles['lne-ht1_2']}`}>{i.title}</span>
+                                    </div>
                                   </div>
-                                </div>
-                              </div>}
-                            <PageData key={content} index={index} content={content} />
-                          </React.Fragment>
-                        ))}
-                        {pageData.page_type === 'homePage' &&
-                        <div className={`${styles['bg-white']} ${styles.flex}`}>
-                          <RecentView
-                            homePage
-                            isLoggedIn={isLoggedIn}
-                            recentlyViewed={isLoggedIn ? recentlyViewed : rv.map((item) => {
-                              item.isAddedToCart = isAddedToCart(item.id);
-                              return item;
-                            })}
-                          />
-                        </div>
+                                ))}
+                              </Slider>
+                            </div>
+                          </div>
+                        </div>}
+                      <PageData key={content} index={index} content={content} />
+                    </React.Fragment>
+                  ))}
+                  {pageData.page_type === 'homePage' &&
+                    <div className={`${styles['bg-white']} ${styles.flex}`}>
+                      <RecentView
+                        homePage
+                        isLoggedIn={isLoggedIn}
+                        recentlyViewed={isLoggedIn ? recentlyViewed : rv.map((item) => {
+                          item.isAddedToCart = isAddedToCart(item.id);
+                          return item;
+                        })}
+                      />
+                    </div>
                       }
-                    </div>}
-                    <FooterBar />
-                  </LoadingBar>
-              </div>
+                </div>}
+                <FooterBar />
+              </LoadingBar>
+            </div>
             )
-          }
         }
       </LoaderBarContext.Consumer>
     );

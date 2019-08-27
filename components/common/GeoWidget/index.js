@@ -48,14 +48,7 @@ class GeoWidget extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { geoShippingData } = nextProps;
-    const { isPdp, getPolicyLocation } = this.props;
     if (this.props.geoShippingData.city !== geoShippingData.city) {
-      if (isPdp) {
-        getPolicyLocation({
-          city_code: geoShippingData.city,
-          county_code: geoShippingData.country,
-        });
-      }
       this.setState({
         displayCity: geoShippingData.displayCity,
       });
@@ -203,7 +196,6 @@ const mapDispatchToProps = dispatch =>
       autoCompleteCity: productActionCreators.autoCompleteCity,
       getCitiesByCountryCode: productActionCreators.getCitiesByCountryCode,
       removeCity: actionCreators.removeCity,
-      getPolicyLocation: productActionCreators.getPolicyLocation,
       getGeoShippingData: actionCreators.getGeoShippingData,
     },
     dispatch,
