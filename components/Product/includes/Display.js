@@ -129,7 +129,7 @@ class Display extends Component {
             ))}
           </Slider>
         </div>
-        <div className={`${styles['bottom-slider']} ${styles.flex} ${styles['border-t']}`}>
+        <div className={`bottom-sliderDiv ${styles['bottom-slider']} ${styles.flex} ${styles['border-t']}`}>
           <Col md={4} sm={4}>
             <Slider
               asNavFor={this.state.nav1}

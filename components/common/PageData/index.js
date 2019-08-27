@@ -14,7 +14,7 @@ import styles_ar from './pageData_ar.styl';
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
 let sliderTBS = '';
-
+let sliderFTBS = '';
 // let sliderTIE = '';
 // let sliderHAL = '';
 
@@ -157,7 +157,6 @@ class PageData extends React.Component {
           </div>
         );
 
-
         // ST1a slider
       case 'ST1a': {
         const settings = {
@@ -176,7 +175,7 @@ class PageData extends React.Component {
               asNavFor={sliderTBS}
               ref={(slider) => { sliderTBS = slider; }}
               lazyLoad={false}
-              className={`${styles.flex} ${styles['fashion-main-slider']} ${styles['flex-colum']}`}
+              className={`${styles.flex} ${styles['fashion-main-slider']} ${styles['flex-colum']} fashion-slick-slider`}
               customPaging={i => <span className={`${styles['fs-10']}`}>{content.data[lang].banners[i].display_name}</span>}
             >
               {content.data[lang].banners.map(i => (
@@ -251,7 +250,7 @@ class PageData extends React.Component {
       case 'BT7': {
         const { banners } = content.data[lang];
         return (
-          <Row className={`${styles['mt-15']} ${styles['mb-15']} ${styles['ml-0']} ${styles['mr-0']} ${styles.bannerSpacing}`}>
+          <Row className={`${styles['mt-15']} ${styles['mb-15']} ${styles['ml-5']} ${styles['mr-5']} `}>
             {content.data[lang].title &&
               <h3 className={`${styles['thick-gry-clr']} ${styles['fs-20']} ${styles['mt-0']} ${styles['pl-10']} ${styles['pr-10']}`}>{content.data[lang].title}</h3>}
             <div className={`${styles['banner-prt-main']}`}>
@@ -260,7 +259,7 @@ class PageData extends React.Component {
                   <div className={styles['banner-inn-prt']} style={{ width: `${100 / banners.length}%` }}>
                     <div className={styles['sub-banr-img']}>
                       <a href={banner.link} rel="noopener noreferrer" target="_blank">
-                        <img src={banner.img} className={`${styles['border-radius4']} ${styles['inside-bnr']}`} alt={banner.display_name} />
+                        <img src={banner.img} className={`${styles['inside-bnr']}`} alt={banner.display_name} />
                       </a>
                     </div>
                   </div>
@@ -470,67 +469,68 @@ class PageData extends React.Component {
       case 'CBT8a': {
         const { banners } = content.data[lang];
         return (
-          <div className={`${styles['flex-prop']} ${styles.bannerSpacing}`} >
-            <div className={styles.d11} style={{ width: this.getWidth(banners, 0) }}>
-              <a href={banners[0].link}>
-                <div>
-                  <img src={banners[0].img} alt="" className={`${styles['img-responsive']} ${styles.imgResolution} ${styles['border-radius4']}`} />
-                </div>
-              </a>
-            </div>
+<div className={`${styles['flex-prop']} ${styles['bannerSpacing']}`} >
+            <div className={`${styles['flex']} ${styles['width50']}`} >
+              <div className= {styles.d11} style={{width: this.getWidth(banners, 0)}}>
+                <a href={banners[0].link}>
+                  <div>
+                    <img src={banners[0].img} className = {`${styles.imgResolution}`}  />
+                  </div>
+                </a>
+              </div>
 
-            <div className={styles.d12} style={{ width: this.getWidth(banners, 1) }}>
-              <a href={banners[1].link}>
-                <div>
-                  <img src={banners[1].img} alt="" className={`${styles['img-responsive']} ${styles.imgResolution} ${styles['border-radius4']}`} />
-                </div>
-              </a>
+              <div className= {styles.d12} style={{width: this.getWidth(banners, 1)}}>
+                <a href={banners[1].link}>
+                  <div>
+                    <img src={banners[1].img} className = {`${styles.imgResolution}`} />
+                  </div>
+                </a>
+              </div>
             </div>
-
             <div className={styles.rightBanner}>
-              <div className={styles.d13}>
-                <div style={{ width: this.getWidth(banners, 2) }}>
+              <div className= {styles.d13}>
+                <div style={{width: this.getWidth(banners, 2)}}>
                   <a href={banners[2].link}>
                     <div>
-                      <img src={banners[2].img} alt="" className={`${styles['img-responsive']} ${styles.imgResolution} ${styles['border-radius4']}`} />
+                      <img src={banners[2].img} className = {`${styles.imgResolution}`} />
                     </div>
                   </a>
                 </div>
-                <div style={{ width: this.getWidth(banners, 3) }}>
+                <div style={{width: this.getWidth(banners, 3)}}>
                   <a href={banners[3].link}>
                     <div>
-                      <img src={banners[3].img} alt="" className={`${styles['img-responsive']} ${styles.imgResolution} ${styles['border-radius4']}`} />
+                      <img src={banners[3].img} className = {`${styles.imgResolution}`} />
                     </div>
                   </a>
                 </div>
-                <div style={{ width: this.getWidth(banners, 4) }}>
+                <div style={{width: this.getWidth(banners, 4)}}>
                   <a href={banners[4].link}>
                     <div>
-                      <img src={banners[4].img} alt="" className={`${styles['img-responsive']} ${styles.imgResolution} ${styles['border-radius4']}`} />
+                      <img src={banners[4].img} className = {`${styles.imgResolution}`} />
                     </div>
                   </a>
                 </div>
               </div>
 
-              <div className={styles.d14}>
-                <div style={{ width: this.getWidth(banners, 5) }}>
+              <div className= {styles.d14}>
+                <div style={{width: this.getWidth(banners, 5)}}>
                   <a href={banners[5].link}>
                     <div>
-                      <img src={banners[5].img} alt="" className={`${styles['img-responsive']} ${styles.imgResolution} ${styles['border-radius4']}`} />
+                      <img src={banners[5].img} className = {`${styles.imgResolution}`} />
                     </div>
                   </a>
                 </div>
-                <div style={{ width: this.getWidth(banners, 6) }}>
+                <div style={{width: this.getWidth(banners, 6)}}>
                   <a href={banners[6].link}>
                     <div>
-                      <img src={banners[6].img} alt="" className={`${styles['img-responsive']} ${styles.imgResolution} ${styles['border-radius4']}`} />
+                      <img src={banners[6].img} className = {`${styles.imgResolution}`} />
                     </div>
                   </a>
                 </div>
-                <div style={{ width: this.getWidth(banners, 7) }}>
+                <div style={{width: this.getWidth(banners, 7)}}>
                   <a href={banners[7].link}>
                     <div>
-                      <img src={banners[7].img} alt="" className={`${styles['img-responsive']} ${styles.imgResolution} ${styles['border-radius4']}`} />
+                      <img src={banners[7].img} className = {`${styles.imgResolution}`} />
                     </div>
                   </a>
                 </div>
@@ -541,221 +541,279 @@ class PageData extends React.Component {
           </div>
         );
       }
-
       case 'CBT12': {
         const { banners } = content.data[lang];
         return (
-          <div className={`${styles['display-t-i-cb']}`} >
-            <div className={`${styles.flex}`}>
-              <div style={{ width: '33.57%' }} className={`${styles['pr-10']} ${styles['pb-10']}`}>
-                <a href={banners[0].link}>
-                  <div>
-                    <img src={banners[0].img} alt="" className={styles['img-responsive']} />
-                  </div>
-                </a>
-              </div>
-              <div style={{ width: '33.57%' }} className={`${styles['pr-10']} ${styles['pb-10']}`}>
+<div className={`${styles['display-t-i-cb']}`} >
+              <div className={`${styles['flex']}`}>
+                <div style={{width:'33.57%'}} className={`${styles['pr-10']} ${styles['pb-10']}`}>
+                   <a href={banners[0].link}>
+                    <div>
+                    <img src={banners[0].img}  alt="" className={styles['img-responsive']} />
+                    </div>
+                    </a>
+                </div>
+                <div style={{width:'33.57%'}} className={`${styles['pr-10']} ${styles['pb-10']}`}>
                 <a href={banners[1].link}>
-                  <div>
-                    <img src={banners[1].img} alt="" className={styles['img-responsive']} />
-                  </div>
-                </a>
-              </div>
-              <div style={{ width: '33.57%' }} className={`${styles['pr-10']} ${styles['pb-10']}`}>
+                    <div>
+                    <img src={banners[1].img}  alt="" className={styles['img-responsive']} />
+                    </div>
+                    </a>
+                </div>
+                <div style={{width:'33.57%'}} className={`${styles['pr-10']} ${styles['pb-10']}`}>
                 <a href={banners[2].link}>
-                  <div>
-                    <img src={banners[2].img} alt="" className={styles['img-responsive']} />
-                  </div>
-                </a>
+                    <div>
+                    <img src={banners[2].img}  alt="" className={styles['img-responsive']} />
+                    </div>
+                    </a>
+                </div>
               </div>
-            </div>
-            <div className={`${styles.flex}`}>
-              <div style={{ width: '11.43%' }} className={`${styles['pr-10']}`}>
+              <div className={`${styles['flex']}`}>
+                <div style={{width:"11.43%"}} className={`${styles['pr-10']}`}>
                 <a href={banners[3].link}>
-                  <div>
-                    <img src={banners[3].img} alt="" className={styles['img-responsive']} />
-                  </div>
-                </a>
-              </div>
-              <div style={{ width: '11.43%' }} className={`${styles['pr-10']}`}>
+                    <div>
+                    <img src={banners[3].img}  alt="" className={styles['img-responsive']} />
+                    </div>
+                    </a>
+                </div>
+                <div style={{width:"11.43%"}} className={`${styles['pr-10']}`}>
                 <a href={banners[4].link}>
-                  <div>
-                    <img src={banners[4].img} alt="" className={styles['img-responsive']} />
-                  </div>
+                    <div>
+                    <img src={banners[4].img}  alt="" className={styles['img-responsive']} />
+                    </div>
                 </a>
-              </div>
-              <div style={{ width: '11.43%' }} className={`${styles['pr-10']}`}>
+                </div>
+                <div style={{width:"11.43%"}} className={`${styles['pr-10']}`}>
                 <a href={banners[5].link}>
-                  <div>
-                    <img src={banners[5].img} alt="" className={styles['img-responsive']} />
-                  </div>
+                    <div>
+                    <img src={banners[5].img}  alt="" className={styles['img-responsive']} />
+                    </div>
                 </a>
-              </div>
-              <div style={{ width: '11.43%' }} className={`${styles['pr-10']}`}>
+                </div>
+                <div style={{width:"11.43%"}} className={`${styles['pr-10']}`}>
                 <a href={banners[6].link}>
-                  <div>
-                    <img src={banners[6].img} alt="" className={styles['img-responsive']} />
-                  </div>
+                    <div>
+                    <img src={banners[6].img}  alt="" className={styles['img-responsive']} />
+                    </div>
                 </a>
-              </div>
-              <div style={{ width: '11.43%' }} className={`${styles['pr-10']}`}>
+                </div>
+                <div style={{width:"11.43%"}} className={`${styles['pr-10']}`}>
                 <a href={banners[7].link}>
-                  <div>
-                    <img src={banners[7].img} alt="" className={styles['img-responsive']} />
-                  </div>
+                    <div>
+                    <img src={banners[7].img}  alt="" className={styles['img-responsive']} />
+                    </div>
                 </a>
-              </div>
-              <div style={{ width: '11.43%' }} className={`${styles['pr-10']}`}>
+                </div>
+                <div style={{width:"11.43%"}} className={`${styles['pr-10']}`}>
                 <a href={banners[8].link}>
-                  <div>
-                    <img src={banners[8].img} alt="" className={styles['img-responsive']} />
-                  </div>
+                    <div>
+                    <img src={banners[8].img}  alt="" className={styles['img-responsive']} />
+                    </div>
                 </a>
-              </div>
-              <div style={{ width: '11.43%' }} className={`${styles['pr-10']}`}>
+                </div>
+                <div style={{width:"11.43%"}} className={`${styles['pr-10']}`}>
                 <a href={banners[9].link}>
-                  <div>
-                    <img src={banners[9].img} alt="" className={styles['img-responsive']} />
-                  </div>
+                    <div>
+                    <img src={banners[9].img}  alt="" className={styles['img-responsive']} />
+                    </div>
                 </a>
-              </div>
-              <div style={{ width: '11.43%' }} className={`${styles['pr-10']}`}>
+                </div>
+                <div style={{width:"11.43%"}} className={`${styles['pr-10']}`}>
                 <a href={banners[10].link}>
-                  <div>
-                    <img src={banners[10].img} alt="" className={styles['img-responsive']} />
-                  </div>
+                    <div>
+                    <img src={banners[10].img}  alt="" className={styles['img-responsive']} />
+                    </div>
                 </a>
-              </div>
-              <div style={{ width: '11.43%' }} className={`${styles['pr-10']}`}>
+                </div>
+                <div style={{width:"11.43%"}} className={`${styles['pr-10']}`}>
                 <a href={banners[11].link}>
-                  <div>
-                    <img src={banners[11].img} alt="" className={styles['img-responsive']} />
-                  </div>
+                    <div>
+                    <img src={banners[11].img}  alt="" className={styles['img-responsive']} />
+                    </div>
                 </a>
+                </div>
+                </div>
               </div>
-            </div>
-          </div>
         );
       }
 
       case 'CBT12a': {
         const { banners } = content.data[lang];
         return (
-          <div>
-            <div className={`${styles['display-t-i-cb']}`} >
-              <div className={`${styles.flex}`}>
-                <div style={{ width: '16.64%' }} className={`${styles['pr-10']} ${styles['pb-10']}`}>
-                  <a href={banners[0].link}>
-                    <div>
-                      <img src={banners[0].img} alt="" className={styles['img-responsive']} />
-                    </div>
-                  </a>
-                </div>
-                <div style={{ width: '33.27%' }} className={`${styles['pr-10']} ${styles['pb-10']}`}>
-                  <a href={banners[1].link}>
-                    <div>
-                      <img src={banners[1].img} alt="" className={styles['img-responsive']} />
-                    </div>
-                  </a>
-                </div>
-                <div style={{ width: '16.64%' }} className={`${styles['pr-10']} ${styles['pb-10']}`}>
-                  <a href={banners[2].link}>
-                    <div>
-                      <img src={banners[2].img} alt="" className={styles['img-responsive']} />
-                    </div>
-                  </a>
-                </div>
-                <div style={{ width: '16.64%' }} className={`${styles['pr-10']} ${styles['pb-10']}`}>
-                  <a href={banners[3].link}>
-                    <div>
-                      <img src={banners[3].img} alt="" className={styles['img-responsive']} />
-                    </div>
-                  </a>
-                </div>
-                <div style={{ width: '16.64%' }} className={`${styles['pr-10']} ${styles['pb-10']}`}>
-                  <a href={banners[4].link}>
-                    <div>
-                      <img src={banners[4].img} alt="" className={styles['img-responsive']} />
-                    </div>
-                  </a>
-                </div>
+<div>
+
+<div className={`${styles['display-t-i-cb']}`} >
+  <div className={`${styles['flex']}`}>
+    <div style={{width:"16.64%"}} className={`${styles['pr-10']} ${styles['pb-10']}`}>
+      <a href={banners[0].link}>
+      <div>
+            <img src={banners[0].img}  alt="" className={styles['img-responsive']} />
+            </div>
+      </a>
+    </div>
+    <div style={{width:"33.27%"}} className={`${styles['pr-10']} ${styles['pb-10']}`}>
+    <a href={banners[1].link}>
+      <div>
+            <img src={banners[1].img}  alt="" className={styles['img-responsive']} />
+            </div>
+      </a>
+    </div>
+    <div style={{width:"16.64%"}} className={`${styles['pr-10']} ${styles['pb-10']}`}>
+    <a href={banners[2].link}>
+      <div>
+            <img src={banners[2].img}  alt="" className={styles['img-responsive']} />
+            </div>
+      </a>
+    </div>
+    <div style={{width:"16.64%"}} className={`${styles['pr-10']} ${styles['pb-10']}`}>
+    <a href={banners[3].link}>
+      <div>
+            <img src={banners[3].img}  alt="" className={styles['img-responsive']} />
+            </div>
+      </a>
+    </div>
+    <div style={{width:"16.64%"}} className={`${styles['pr-10']} ${styles['pb-10']}`}>
+    <a href={banners[4].link}>
+      <div>
+            <img src={banners[4].img}  alt="" className={styles['img-responsive']} />
+            </div>
+      </a>
+    </div>
+  </div>
+  <div className={`${styles['flex']}`}>
+  <div style={{width:"16.64%"}} className={`${styles['pr-10']} ${styles['pb-10']}`}>
+      <a href={banners[5].link}>
+      <div>
+            <img src={banners[5].img}  alt="" className={styles['img-responsive']} />
+            </div>
+      </a>
+    </div>
+    <div style={{width:"16.64%"}} className={`${styles['pr-10']} ${styles['pb-10']}`}>
+    <a href={banners[6].link}>
+      <div>
+            <img src={banners[6].img}  alt="" className={styles['img-responsive']} />
+            </div>
+      </a>
+    </div>
+    <div style={{width:"16.64%"}} className={`${styles['pr-10']} ${styles['pb-10']}`}>
+    <a href={banners[7].link}>
+      <div>
+            <img src={banners[7].img}  alt="" className={styles['img-responsive']} />
+            </div>
+      </a>
+    </div>
+    <div style={{width:"16.64%"}} className={`${styles['pr-10']} ${styles['pb-10']}`}>
+    <a href={banners[8].link}>
+      <div>
+            <img src={banners[8].img}  alt="" className={styles['img-responsive']} />
+            </div>
+      </a>
+    </div>
+    <div style={{width:"33.27%"}} className={`${styles['pr-10']}`}>
+    <a href={banners[9].link}>
+      <div>
+            <img src={banners[9].img}  alt="" className={styles['img-responsive']} />
+            </div>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+</div> 
+       );
+      }
+
+      case 'CBT6c': {
+        const { banners } = content.data[lang];
+        return (
+          <div className={`${styles.fashionBanners} ${styles.fashionBannerSpacing}`}>
+            <div className={styles.fBanners1} style={{ display: 'flex' }}>
+              <div className={styles.fb3} >
+                <a href={banners[0].link}>
+                  <div className={`${styles['width100']}`}>
+                    <img src={banners[0].img} alt="" className={styles.imgResolution} className={`${styles['width100']}`} />
+                  </div>
+                </a>
               </div>
-              <div className={`${styles.flex}`}>
-                <div style={{ width: '16.64%' }} className={`${styles['pr-10']} ${styles['pb-10']}`}>
-                  <a href={banners[5].link}>
-                    <div>
-                      <img src={banners[5].img} alt="" className={styles['img-responsive']} />
-                    </div>
-                  </a>
-                </div>
-                <div style={{ width: '16.64%' }} className={`${styles['pr-10']} ${styles['pb-10']}`}>
-                  <a href={banners[6].link}>
-                    <div>
-                      <img src={banners[6].img} alt="" className={styles['img-responsive']} />
-                    </div>
-                  </a>
-                </div>
-                <div style={{ width: '16.64%' }} className={`${styles['pr-10']} ${styles['pb-10']}`}>
-                  <a href={banners[7].link}>
-                    <div>
-                      <img src={banners[7].img} alt="" className={styles['img-responsive']} />
-                    </div>
-                  </a>
-                </div>
-                <div style={{ width: '16.64%' }} className={`${styles['pr-10']} ${styles['pb-10']}`}>
-                  <a href={banners[8].link}>
-                    <div>
-                      <img src={banners[8].img} alt="" className={styles['img-responsive']} />
-                    </div>
-                  </a>
-                </div>
-                <div style={{ width: '33.27%' }} className={`${styles['pr-10']}`}>
-                  <a href={banners[9].link}>
-                    <div>
-                      <img src={banners[9].img} alt="" className={styles['img-responsive']} />
-                    </div>
-                  </a>
+              <div className={styles.fb3} >
+                <a href={banners[1].img}>
+                  <div className={`${styles['width100']}`}>
+                   <img src={banners[1].img} className={`${styles['width100']} ${styles.imgResolution}`} />
+                  </div>
+                </a>
+              </div>
+              <div className={styles.fb3}>
+                <a href={banners[2].link}>
+                  <div className={`${styles['width100']}`}>
+                   <img src={banners[2].img} className={`${styles['width100']} ${styles.imgResolution}`} />
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <div className={styles.fBanners2}>
+              <div className={styles.fb2} >
+                <a href={banners[3].link}>
+                  <div className={`${styles['width100']}`}>
+                   <img src={banners[3].img} className={`${styles['width100']} ${styles.imgResolution}`} />
+                  </div>
+                </a>
+              </div>
+              <div className={styles.fb1}>
+                <a href={banners[4].link}>
+                  <div className={`${styles['width100']}`}>
+                   <img src={banners[4].img} className={`${styles['width100']} ${styles.imgResolution}`} />
+                  </div>
+                </a>
+              </div>
+              <div className={styles.fb2}>
+                <a href={banners[5].link}>
+                  <div className={`${styles['width100']}`}>
+                   <img src={banners[5].img} className={`${styles['width100']} ${styles.imgResolution}`} />
+                  </div>
+                </a>
+                <div className={`${styles['thick-gry-clr']} ${styles['fs-14']} ${styles['mt-10']} ${styles.pointer}`}>
+                  {this.returnBanner(0, banners)}
                 </div>
               </div>
             </div>
           </div>
         );
       }
-
-
-      case 'CBT3a': {
-        const { banners, title, description } = content.data[lang];
-        return (
-          <div className={` ${styles.fashionBannerSpacing}`} >
-            <div className={`${styles['fs-20']} ${styles.title}`}>
-              <div className={styles.pdL}>
-                <h1 className={styles.fHeading} style={{ textAlign: 'center' }}>{title}</h1>
-                <span>{description}</span>
-              </div>
+      
+      case 'ST1a': {
+        const settings = {
+          dots: false,
+          infinite: true,
+          speed: 500,
+          slidesToShow: 8,
+          slidesToScroll: 1,
+          autoplay: false,
+        };
+        console.log('hello');
+        return(
+            <div className={`${styles.fashionBannerSpacing}`} >
+              
+              <Slider {...settings} 
+                asNavFor={sliderFTBS}
+                lazyLoad={false}
+                className={`${styles.flex} ${styles['fashion-main-slider']} ${styles['flex-colum']}`}
+                customPaging={i => <span className={`${styles['fs-10']}`}>{content.data[lang].banners[i].display_name}</span>}
+              >
+                {content.data[lang].banners.map(i => (
+                  <div className={styles.fSlider} key={i.display_name}>
+                    <a href={i.link}>
+                      <div className={`${styles.item} ${styles['slick-itm']} ${styles['width100']}`} key={i.display_name}>
+                        <img src={i.img} alt={i.display_name} className={`${styles['width100']} ${styles.imgResolution}`}/>
+                      </div>
+                    </a>
+                    <span className={`${styles['fs-12']} ${styles['pt-10']} ${styles['justify-center']} ${styles['slider-elips']} ${styles['lne-ht1_2']}`} style={{textAlign: 'center', display: 'inline-block'}} >{i.display_name}</span>
+                  </div>
+                ))}
+              </Slider>
             </div>
-            <div className={`${styles['flex-prop']}`}>
-              <div className={styles.cbt3a}>
-                <div className={styles.wrapper}>
-                  <div className={styles.img1} style={{ width: this.getWidth(banners, 0) }}>
-                    <a href={banners[0].link}>
-                      <img src={banners[0].img} alt="" height={banners[0].config.height} />
-                    </a>
-                  </div>
-                  <div className={styles.img2} style={{ width: this.getWidth(banners, 1) }}>
-                    <a href={banners[1].link}>
-                      <img src={banners[1].img} alt="" height={banners[1].config.height} />
-                    </a>
-                  </div>
-                  <div className={styles.img3} style={{ width: this.getWidth(banners, 2) }}>
-                    <a href={banners[2].link}>
-                      <img src={banners[2].img} alt="" height={banners[2].config.height} />
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        );
+        )
       }
 
       case 'CBT2a': {
@@ -763,118 +821,102 @@ class PageData extends React.Component {
         return (
           <div className={styles.fashionBannerSpacing}>
             <div className={`${styles['fs-20']} ${styles.title}`}>
-              <div className={styles.pdL} style={{ paddingLeft: '102px' }}>
-                <h1 className={styles.fHeading} style={{ textAlign: 'left' }}>{title}</h1>
+              <div className={`${styles.pdL} ${styles['t-l']}`} style={{paddingLeft: '102px'}}>
+                <h1 className={styles.fHeading}>{title}</h1>
                 <span>{description}</span>
               </div>
             </div>
             <div className={styles.cbt2aBanner}>
-              <div className={styles.F1banner} style={{ width: this.getWidth(banners, 0) }}>
-                <a href={banners[0].link}>
-                  <div>
-                    <img src={banners[0].img} alt="" className={styles.imgResolution} />
+                <div className={styles.F1banner}>
+                    <a href={banners[0].link}>
+                      <div className={`${styles['width100']}`}>
+                        <img src={banners[0].img} className={`${styles['width100']} ${styles.imgResolution}`}/>
+                      </div>
+                    </a>
                   </div>
-                </a>
-              </div>
-              <div className={styles.F2banner} style={{ width: this.getWidth(banners, 1) }}>
+                <div className={styles.F2banner}>
+                  <div>
+                      <a href={banners[1].link}>
+                        <div className={`${styles['width100']}`}>
+                          <img src={banners[1].img} className={`${styles['width100']} ${styles.imgResolution}`} />
+                        </div>
+                      </a>
+                  </div>
+                </div>
+            </div>
+          </div>
+          )
+      }
+
+      case 'BT2a':{
+
+        const{banners,breadcrumb, title} = content.data[lang];
+
+        return(
+          <div>
+            <div className={`${styles['display-t-i-cb']} ${styles['flex']}`} >
+            <div className={`${styles['fs-20']} ${styles.title}`}>{title}</div>
+            <div style={{width:"50%"}} className={`${styles['pr-5']}`}>
+            <div className={`${styles['mb-5']} ${styles['fs-18']} ${styles['fontW800']} ${styles['error-color']}`}>{content.data[lang].banners[0].title}</div>
+              <a href={banners[0].link}>
                 <div>
+                      <img src={banners[0].img}  alt="" className={styles['img-responsive']} />
+                </div>
+              </a>
+              <div className={`${styles['thick-gry-clr']} ${styles['fs-14']} ${styles['mt-10']} ${styles.pointer}`}> 
+                  {this.returnBanner(0,banners)}
+              </div>
+            </div>
+            <div style={{width:"50%"}} className={`${styles['pl-5']}`}>
+            <div className={`${styles['mb-5']} ${styles['fs-18']} ${styles['fontW800']} ${styles['error-color']}`}>{content.data[lang].banners[1].title}</div>
+              <a href={banners[1].link}>
+                <div>
+                      <img src={banners[1].img}  alt="" className={styles['img-responsive']} />
+                </div>
+              </a>
+              <div className={`${styles['thick-gry-clr']} ${styles['fs-14']} ${styles['mt-10']} ${styles.pointer}`}>
+              {this.returnBanner(1,banners)}
+            
+          </div>
+            </div>
+            
+            
+            </div>
+          </div>
+        );
+
+    }
+      case 'CBT3a' : {
+        const { banners, title, description } = content.data[lang];
+        return (
+          <div className={` ${styles['fashionBannerSpacing']}`} >
+            <div className={`${styles['fs-20']} ${styles.title}`}>
+              <div className={`${styles.pdL} ${styles['t-c']}`}>
+                {title && <h1 className={styles.fHeading}>{title}</h1>}
+                {description && <span>{description}</span>}
+              </div>
+            </div>
+           <div className={`${styles['flex-prop']}`}>
+            <div className = {styles.cbt3a}>
+             
+              <div className={styles.wrapper}>
+                <div className={styles.img1} style={{width: this.getWidth(banners, 0)}}>
+                  <a href={banners[0].link}>
+                    <img src={banners[0].img}/>
+                  </a>
+                </div>
+                <div className={styles.img2} style={{width: this.getWidth(banners, 1)}}>
                   <a href={banners[1].link}>
-                    <div>
-                      <img src={banners[1].img} alt="" className={styles.imgResolution} />
-                    </div>
+                    <img src={banners[1].img} />
+                  </a>
+                </div>
+                <div className={styles.img3} style={{width: this.getWidth(banners, 2)}}>
+                  <a href={banners[2].link}>
+                    <img src={banners[2].img}/>
                   </a>
                 </div>
               </div>
             </div>
-          </div>
-        );
-      }
-
-
-      case 'CBT6c': {
-        const { banners } = content.data[lang];
-        return (
-          <div className={`${styles.fashionBanners} ${styles.fashionBannerSpacing}`}>
-            <div className={styles.fBanners1} style={{ display: 'flex' }}>
-              <div className={styles.fb3} style={{ width: this.getWidth(banners, 0) }}>
-                <a href={banners[0].link}>
-                  <div>
-                    <img src={banners[0].img} alt="" className={styles.imgResolution} />
-                  </div>
-                </a>
-              </div>
-              <div className={styles.fb3} style={{ width: this.getWidth(banners, 1) }}>
-                <a href={banners[1].img}>
-                  <div>
-                    <img src={banners[1].img} alt="" className={styles.imgResolution} />
-                  </div>
-                </a>
-              </div>
-              <div className={styles.fb3} style={{ width: this.getWidth(banners, 2) }}>
-                <a href={banners[2].link}>
-                  <div>
-                    <img src={banners[2].img} alt="" className={styles.imgResolution} />
-                  </div>
-                </a>
-              </div>
-            </div>
-
-            <div className={styles.fBanners2}>
-              <div className={styles.fb2} style={{ width: this.getWidth(banners, 3) }}>
-                <a href={banners[3].link}>
-                  <div>
-                    <img src={banners[3].img} alt="" className={styles.imgResolution} />
-                  </div>
-                </a>
-              </div>
-              <div className={styles.fb1} style={{ width: this.getWidth(banners, 4) }}>
-                <a href={banners[4].link}>
-                  <div>
-                    <img src={banners[4].img} alt="" className={styles.imgResolution} />
-                  </div>
-                </a>
-              </div>
-              <div className={styles.fb2} style={{ width: this.getWidth(banners, 5) }}>
-                <a href={banners[5].link}>
-                  <div>
-                    <img src={banners[5].img} alt="" className={styles.imgResolution} />
-                  </div>
-                </a>
-              </div>
-            </div>
-          </div>
-        );
-      }
-
-      case 'BT2a': {
-        const { banners, title } = content.data[lang];
-
-        return (
-          <div>
-            <div className={`${styles['display-t-i-cb']} ${styles.flex}`} >
-              <div className={`${styles['fs-20']} ${styles.title}`}>{title}</div>
-              <div style={{ width: '50%' }} className={`${styles['pr-5']}`}>
-                <div className={`${styles['mb-5']} ${styles['fs-18']} ${styles.fontW800} ${styles['error-color']}`}>{content.data[lang].banners[0].title}</div>
-                <a href={banners[0].link}>
-                  <div>
-                    <img src={banners[0].img} alt="" className={styles['img-responsive']} />
-                  </div>
-                </a>
-                <div className={`${styles['thick-gry-clr']} ${styles['fs-14']} ${styles['mt-10']} ${styles.pointer}`}>
-                  {this.returnBanner(0, banners)}
-                </div>
-              </div>
-              <div style={{ width: '50%' }} className={`${styles['pl-5']}`}>
-                <div className={`${styles['mb-5']} ${styles['fs-18']} ${styles.fontW800} ${styles['error-color']}`}>{content.data[lang].banners[1].title}</div>
-                <a href={banners[1].link}>
-                  <div>
-                    <img src={banners[1].img} alt="" className={styles['img-responsive']} />
-                  </div>
-                </a>
-                <div className={`${styles['thick-gry-clr']} ${styles['fs-14']} ${styles['mt-10']} ${styles.pointer}`}>
-                  {this.returnBanner(1, banners)}
-                </div>
-              </div>
             </div>
           </div>
         );

@@ -322,67 +322,74 @@ class Reason extends Component {
               </div>
             ) : null}
           </div>
-          {returnExchangeType === ORDER_ISSUE_TYPES.EXCHANGE
-            && orderIssue.exchangeVariants &&
-            orderIssue.exchangeVariants.length > 0 ? (
-              <ChooseVariant
-                variantId={query.variantId}
-                selectedVariant={this.selectedVariant}
-                productNotAvailable={this.productNotAvailable}
-              />
-            ) : null}
-          {displaySizeError ?
-            <p className={`${styles['error-msg']}`}>{ORDER_PAGE.PLEASE_SELECT_SIZE_TO_CONTINUE}</p> : null
-
-          }
           {
-            ORDER_ISSUE_TYPES.RETURN === returnExchangeType
-            || (issueType === 'CLAIMWARRANTY' || issueType === 'DAMAGEWARRANTY') ?
-              <div className={styles['comment-cont']}>
-                {(issueType === 'CLAIMWARRANTY' || issueType === 'DAMAGEWARRANTY') &&
-                  <span className={`${styles['fs-12']}`}>{ORDER_PAGE.WARRANTY_CLAIM_REASON}</span>
-                }
-                <textarea
-                  style={{ width: '410px' }}
-                  onChange={this.updateComment}
-                />
-              </div> : null
-          }
-          <div className={`${styles['flex']} ${styles['align-center']}`}>
-            {ORDER_ISSUE_TYPES.RETURN === returnExchangeType ? (
-              <React.Fragment>
-                <div className={`${styles['pt-10']} ${styles['pb-10']} ${styles['pr-20']}`}>
-                  <input
-                    className={styles['radio-btn']}
-                    type="radio"
-                    value="Return"
-                    onChange={this.onOptionChange}
-                    checked={
-                      selectedMode === 'Return'
-                    }
+            this.state.reason ?
+            <div>
+              {returnExchangeType === ORDER_ISSUE_TYPES.EXCHANGE
+                && orderIssue.exchangeVariants &&
+                orderIssue.exchangeVariants.length > 0 ? (
+                  <ChooseVariant
+                    variantId={query.variantId}
+                    selectedVariant={this.selectedVariant}
+                    productNotAvailable={this.productNotAvailable}
                   />
-                  <label className={styles['pl-10']}>{ORDER_PAGE.RETURN}</label>
-                </div>
-                {orderIssue.exchangeVariants &&
-                  orderIssue.exchangeVariants.length > 0 ? (
-                    <div>{this.getReplaceData(orderIssue.exchangeVariants)}</div>
-                  ) : null}
-              </React.Fragment>
-            ) : null}
-          </div>
-        </div>
-        <div
-          className={`${styles['widget-footer']} ${styles['flex-center']} ${
-            styles['justify-center']
-            }`}
-        >
-          <button
-            onClick={this.saveAndGoNext}
-            className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['retun-btn-part']}`}
-            disabled={loadingStatus || !this.state.reason}
-          >
-            {`${selectedMode}`}
-          </button>
+                ) : null}
+              {displaySizeError ?
+                <p className={`${styles['error-msg']}`}>{ORDER_PAGE.PLEASE_SELECT_SIZE_TO_CONTINUE}</p> : null
+
+              }
+              {
+                ORDER_ISSUE_TYPES.RETURN === returnExchangeType
+                || (issueType === 'CLAIMWARRANTY' || issueType === 'DAMAGEWARRANTY') ?
+                  <div className={styles['comment-cont']}>
+                    {(issueType === 'CLAIMWARRANTY' || issueType === 'DAMAGEWARRANTY') &&
+                      <span className={`${styles['fs-12']}`}>{ORDER_PAGE.WARRANTY_CLAIM_REASON}</span>
+                    }
+                    <textarea
+                      style={{ width: '410px' }}
+                      onChange={this.updateComment}
+                    />
+                  </div> : null
+              }
+              <>
+              <div className={`${styles['flex']} ${styles['align-center']}`}>
+                {ORDER_ISSUE_TYPES.RETURN === returnExchangeType ? (
+                  <React.Fragment>
+                    <div className={`${styles['pt-10']} ${styles['pb-10']} ${styles['pr-20']}`}>
+                      <input
+                        className={styles['radio-btn']}
+                        type="radio"
+                        value="Return"
+                        onChange={this.onOptionChange}
+                        checked={
+                          selectedMode === 'Return'
+                        }
+                      />
+                      <label className={styles['pl-10']}>{ORDER_PAGE.RETURN}</label>
+                    </div>
+                    {orderIssue.exchangeVariants &&
+                      orderIssue.exchangeVariants.length > 0 ? (
+                        <div>{this.getReplaceData(orderIssue.exchangeVariants)}</div>
+                      ) : null}
+                  </React.Fragment>
+                ) : null}
+              </div>
+            <div
+              className={`${styles['widget-footer']} ${styles['flex-center']} ${
+                styles['justify-center']
+                }`}
+                >
+              <button
+                onClick={this.saveAndGoNext}
+                className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['retun-btn-part']}`}
+                disabled={loadingStatus || !this.state.reason}
+              >
+                {`${selectedMode}`}
+              </button>
+            </div>
+            </>
+          </div> : null
+          }
         </div>
       </div>
     );

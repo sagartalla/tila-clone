@@ -1,6 +1,6 @@
 import React from 'react';
+
 import Router from 'next/router';
-import NoSSR from 'react-no-ssr';
 import { NextSeo } from 'next-seo';
 import withRedux from 'next-redux-wrapper';
 import { bindActionCreators } from 'redux';
@@ -16,6 +16,7 @@ import { actionCreators as MegamenuActionsCreators } from '../store/megamenu';
 import { actionCreators as PersonalActionCreator } from '../store/cam/personalDetails';
 
 const { SEO_CONTENT } = languageDefinations();
+
 
 class Home extends Base {
   pageName = 'HOME_PAGE'
@@ -75,11 +76,9 @@ class Home extends Base {
           }}
         />
         <LoaderBarContext.Provider value={loaderProps}>
-          <NoSSR>
             <Layout>
               <FTB />
             </Layout>
-          </NoSSR>
         </LoaderBarContext.Provider>
       </div>
     );
