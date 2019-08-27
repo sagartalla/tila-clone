@@ -61,6 +61,7 @@ const RecentView = (props) => {
           className={`${styles['r-viewall']} ${styles.fontW600} ${styles['mr-15']} ${styles['fp-btn']} ${styles['left-radius']} ${styles['fp-btn-default']} ${styles.ft_card_btn}`}
           href={`/${lang}/items-zone/recently-viewed`}
           target="_blank"
+          rel="noopener noreferrer"
         >
           {HEADER_PAGE.VIEW_ALL}
         </a>

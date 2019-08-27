@@ -748,11 +748,6 @@ export const AR_KEYWORDS = {
     COMPLETED: 'Completed',
     IN_PROGRESS: 'In Progress',
     MESSAGE: 'رسالة',
-    RETURN_ORDER_MSG: 'Keep the item ready for pickup and we will update you once it is scheduled.',
-    RETURN_ORDER_MSG_NOTE: 'Note: Refund will be processed once the return product is QC approved.',
-    REPLACE_ORDER_MSG_NOTE: 'Note: Replacement will be processed once the return product is QC completed and approved.',
-    REQ_RETURN: 'Your return request for order ',
-    REQ_SUCCESS: 'is intiated.',
   },
   COUPON_OFFERS: {
     VIEW_TERMS: 'استعرض الشروط والأحكام',
