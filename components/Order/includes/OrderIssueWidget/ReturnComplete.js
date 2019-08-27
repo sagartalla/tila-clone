@@ -36,6 +36,12 @@ class ReturnComplete extends Component {
       DAMAGEWARRANTY:ORDER_PAGE.CLAIM_WARRANTY_MSG,
     }[issueType]
   )
+  getExchangeMsgType = (issueType) => (
+    {
+      RETURN:ORDER_PAGE.RETURN_ORDER_MSG,
+      EXCHANGE:ORDER_PAGE.EXCHANGE_ORDER_MSG_NOTE,
+    }[issueType]   
+  )
   render() {
 
     const { orderIssue, loadingStatus, errorMessege, goToNextStep, query } = this.props;
@@ -73,8 +79,15 @@ class ReturnComplete extends Component {
                       <div>
                         <span>
                           {
-                            query.returnExchangeType === 'RETURN' ?
-                              ORDER_PAGE.RETURN_ORDER_MSG : ''
+                            <div>{this.getExchangeMsgType(orderIssue.issueType)}</div>
+                          }
+                          {
+                            orderIssue.issueType === 'REPLACE' ?
+                            <div>
+                              <div>{ORDER_PAGE.RETURN_ORDER_MSG}</div>
+                              <div>{ORDER_PAGE.REPLACE_ORDER_MSG_NOTE}</div>
+                            </div>
+                              : ''
 
                           }
                         </span>
@@ -85,7 +98,7 @@ class ReturnComplete extends Component {
             </div>
         }
         <div className={`${styles['widget-footer']} ${styles['pt-25']}`}>
-          <button onClick={goToNextStep} className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['retun-btn-part']}`} disabled={loadingStatus}>{ORDER_PAGE.DONE}</button>
+          <button onClick={goToNextStep} className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['retun-btn-part']}`} disabled={loadingStatus}>{ORDER_PAGE.CONTINUE_SHOPPING}</button>
         </div>
       </div>
     );
