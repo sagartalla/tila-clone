@@ -13,9 +13,9 @@ const bodyParser = require('body-parser');
 const cookiesMiddleware = require('universal-cookie-express');
 const routes = require('./routes');
 const apiRoutes = require('./apiRoutes');
-const uuidv4 = require('uuid/v4')
+const staticRoutes = require('./staticRoutes');
+const uuidv4 = require('uuid/v4');
 //require('./utils/error-handle');
-
 const myapp = express();
 const server = require('http').Server(myapp);
 
@@ -55,6 +55,7 @@ const dev = process.env.NODE_ENV !== 'production';
 //   });
 // });
 
+
 function sessionCookie(req, res, next) {
   const htmlPage =
     !req.path.match(/^\/(_next|static)/) &&
@@ -88,16 +89,16 @@ const sourcemapsForSentryOnly = token => (req, res, next) => {
   if (!dev && !!token && req.headers['x-sentry-token'] !== token) {
     res
       .status(401)
-      .send('Authentication access token is required to access the source map.')
-    return
+      .send('Authentication access token is required to access the source map.');
+    return;
   }
-  next()
-}
+  next();
+};
 
-const app = next({ dev: process.env.NODE_ENV !== 'production' })
+const app = next({ dev: process.env.NODE_ENV !== 'production' });
 
 const handler = routes.getRequestHandler(app, ({ req, res, route, query }) => {
-  app.render(req, res, route.page, query)
+  app.render(req, res, route.page, query);
 });
 
 app.prepare().then(() => {
@@ -105,7 +106,7 @@ app.prepare().then(() => {
   myapp
     // .use(Sentry.Handlers.requestHandler())
     .use(bodyParser.urlencoded({
-      extended: true
+      extended: true,
     }))
     .use(bodyParser.json())
     // .use(cookieParser())
@@ -113,13 +114,14 @@ app.prepare().then(() => {
     .use(sessionCookie)
     // .get(/\.map$/, sourcemapsForSentryOnly(process.env.SENTRY_TOKEN))
     .use('/api', apiRoutes)
-    .use(handler)
+    .use('*policy*', staticRoutes)
+    .use(handler);
     // .use(Sentry.Handlers.errorHandler())
     server
     .listen(port, err => {
       if (err) {
-        throw err
+        throw err;
       }
-      console.log(`> Ready on http://localhost:${port}`)
+      console.log(`> Ready on http://localhost:${port}`);
     });
 });

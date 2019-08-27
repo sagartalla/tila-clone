@@ -69,11 +69,11 @@ class SearchDetailsBar extends Component {
                     {
                       spellCheckResp ?
                       <a href="javascript: void(0)" onClick={this.querySearch} className={`${styles['black-color']} ${styles['fontW600']}`} data-querysearch={spellCheckResp[query]}>
-                        <b className={styles['fs-14']}>{`${spellCheckResp[query]}`}</b>
+                        <b className={`${styles['fs-14']} ${styles['search-ellipsis']}`}>{`${spellCheckResp[query]}`}</b>
                         <span className={`${styles['fs-10']} ${styles['textColor']}`}>({ SEARCH_PAGE.AUTO_CORRECTED }):</span>
                       </a>
                       :
-                      <div className={`${styles['no-h1']} ${styles['fs-14']}`}>{finalQuery && this.capitalize(finalQuery.split('-').join(' '))}<span className={styles['fontW300']}>:</span> </div>
+                      <div className={`${styles['no-h1']} ${styles['fs-14']} ${styles['search-ellipsis']}`} title={finalQuery}>{finalQuery && this.capitalize(finalQuery.split('-').join(' '))}<span className={styles['fontW300']}>:</span></div>
                     }
                     <span className={`${styles['pl-5']} ${styles['fs-14']}`}>{ results.totalCount.toLocaleString('en') } { SEARCH_PAGE.SEARCH_ITEMS }</span>
                   </h4>

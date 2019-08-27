@@ -6,6 +6,7 @@ import { actionCreators as helpActions } from '../../store/helpsupport';
 import { selectors as orderSelectors, actionCreators as orderActions } from '../../store/cam/orders';
 import { selectors as authSelectors } from '../../store/auth';
 import { countryLanguageHelpCode as clCode } from './helpConstants';
+import FormValidator from '../common/FormValidator';
 
 import lang from '../../utils/language';
 
@@ -94,6 +95,32 @@ class EmailModal extends Component {
 
   constructor(props) {
     super(props);
+    this.validations = new FormValidator([
+      {
+        field: 'email',
+        method:this.emptyValue,
+        message: 'Please enter email Id',
+        validWhen: false,
+      },
+      {
+        field: 'email',
+        method: this.checkEmailValidation,
+        message: 'Please enter correct email Id',
+        validWhen: false,
+      },
+      {
+        field: 'issue',
+        method: this.emptyValue,
+        message: 'Please select issue',
+        validWhen: false,
+      },
+      {
+        field: 'message',
+        method: this.emptyValue,
+        validWhen: false,
+        message: 'Please enter message',
+      },
+    ]);
     this.state = {
       showDropDown: false,
       dropDownType: '',
@@ -139,7 +166,7 @@ class EmailModal extends Component {
   }
   handleMsg = (e) => {
     this.setState({
-      msg: e.target.value
+      [e.target.name]: e.target.value
     })
   }
   handleIssueSelect = (issue) => (e) => {
@@ -210,6 +237,19 @@ class EmailModal extends Component {
     })
   }
 
+  emptyValue = fieldValue => (fieldValue === '' || fieldValue === undefined);
+
+  checkEmailValidation = (fieldValue) => {
+    const emailReg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (emailReg.test(fieldValue)) return false;
+    return true;
+  }
+
+  handleValidation = ({ target }) => {
+    const validation = this.validations.validateOnBlur({ [target.name]: target.value });
+    this.setState({ validation });
+  }
+
   handleIssueSelectSearch = (issueArr) => (e) => {
     if (e.keyCode === 13) {
       const [id, q, catId, parentId, orderRelated] = this.props.allIssueData[issueArr[0]];
@@ -229,10 +269,7 @@ class EmailModal extends Component {
   }
 
   createIncident = () => {
-    if (!this.state.email || !this.state.selectedIssue) {
-      alert(languageLabel['HNS']['EMAIL_ISSUE_MANDATORY']);
-      return
-    }
+    const validation = this.validations.validate(this.state);
     const param = {
       "emailId": this.state.email
     }
@@ -250,7 +287,7 @@ class EmailModal extends Component {
         "entryType": {
           "id": 3
         },
-        "text": this.state.msg
+        "text": this.state.message
       },
       "channel": { "id": 9 },
       ...(this.state.selectedIssue.catId && { "category": { "id": Number(this.state.selectedIssue.catId) } }),
@@ -269,7 +306,7 @@ class EmailModal extends Component {
         },
       })
     }
-    this.props.raiseTicket(param, serverData).then(res => {
+    validation.isValid && this.props.raiseTicket(param, serverData).then(res => {
       const { pathname } = window.location;
       const incidentsURL = pathname.replace(this.props.query, `incidents#${this.state.incidentId}`)
       this.setState({
@@ -287,6 +324,7 @@ class EmailModal extends Component {
         )
       })
     });
+    this.setState({ validation });
   }
   renderIssues = (issue, index) => {
     const [id, q, catId, parentId, orderRelated] = this.props.allIssueData[issue];
@@ -327,11 +365,12 @@ class EmailModal extends Component {
     )
   }
   render() {
-    const { dropDownType, orders, selectedOrder, selectedIssue, email, incidentCreated, referenceNumber, firstname, lastname } = this.state;
+    const { dropDownType, orders, selectedOrder, selectedIssue, email, incidentCreated, referenceNumber, firstname, lastname, validation } = this.state;
     const { allIssueData } = this.props;
     const allIssues = Object.keys(allIssueData).sort(sort);
     const allIssuesVal = Object.values(allIssueData);
     const searchIssues = this.state.issueSearchQuery ? allIssuesVal.filter(iss => iss[1].toLowerCase().includes(this.state.issueSearchQuery.toLowerCase()) || iss[1] === 'Others').map(iss => iss[0]) : allIssues;
+    console.log('validation', validation);
     return (
       <div className={styles['modalCont']}>
         {!incidentCreated ?
@@ -343,7 +382,13 @@ class EmailModal extends Component {
             <div className={styles['pV-40']}>
               <div className={styles['pV-10']}>
                 <div className={styles['formLabel']}>{languageLabel['HNS']['ENTER_EMAIL']}</div>
-                <input disabled={this.props.isLoggedIn} type="text" dir="auto" name="email" value={email} onChange={this.handleUserInfoChange} />
+                <input disabled={this.props.isLoggedIn} type="text" dir="auto" name="email" value={email} onChange={this.handleUserInfoChange} onBlur={this.handleValidation}/>
+                {
+                  validation && validation.email && validation.email.isInValid ?
+                    <div>
+                      <span className={`${styles['error-msg']}`}>{validation.email.message}</span>
+                    </div> : null
+                }
               </div>
               {this.props.type === 'chat' &&
                 <div className={styles['pV-10']}>
@@ -358,13 +403,14 @@ class EmailModal extends Component {
                 </div>
               }
               <div className={styles['pV-20']}>
-                <div className={styles['formLabel']}>{languageLabel['HNS']['SELECT_ISSUE']}</div>
+                <div className={styles['formLabel']}>{languageLabel['HNS']['SELECT_ISSUE_MODAL']}</div>
                 <div className={styles['relative']}>
                   <div tabIndex={0} onBlur={this.handleDropDown('')}
                     className={styles['dropDownInput']}
                   >
                     <input type="text"
                       dir="auto" 
+                      name="issue"
                       className={styles['searchInputIssue']} 
                       placeholder={selectedIssue ? selectedIssue.q.trim() : ''} 
                       value={this.state.issueSearchQuery} 
@@ -372,6 +418,7 @@ class EmailModal extends Component {
                       onFocus={this.focusIssueSearch}
                       onBlur={this.handleIssueSelectSearch(searchIssues)} 
                       onKeyUp={this.handleIssueSelectSearch(searchIssues)}
+                      onBlur={this.handleValidation}
                     />
                     <div className={styles['dropDownArrow']}>v</div>
                     {/* <div dangerouslySetInnerHTML={{ __html: selectedIssue ? selectedIssue.q : '' }} /> */}
@@ -381,6 +428,12 @@ class EmailModal extends Component {
                     {searchIssues.map(this.renderIssues)}
                   </div>
                 </div>
+                {
+                  validation && validation.issue && validation.issue.isInValid ?
+                    <div>
+                      <span className={`${styles['error-msg']}`}>{validation.issue.message}</span>
+                    </div> : null
+                }
               </div>
               {selectedIssue && selectedIssue.orderRelated && this.props.isLoggedIn ?
                 <div className={styles['pV-20']}>
@@ -405,10 +458,17 @@ class EmailModal extends Component {
                   <div className={styles['formLabel']}>{languageLabel['HNS']['WRITE_MSG']}</div>
                   <textarea
                     dir="auto"
-                    value={this.state.msg}
+                    name="message"
+                    value={this.state.message}
                     onChange={this.handleMsg}
                     className={styles['ModalTextArea']}
                   />
+                  {
+                  validation && validation.message && validation.message.isInValid ?
+                    <div>
+                      <span className={`${styles['error-msg']}`}>{validation.message.message}</span>
+                    </div> : null
+                }
                 </div>
                 : null
               }
