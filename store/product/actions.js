@@ -79,10 +79,6 @@ const actionCreators = {
     type: actions.AUTOCOMPLETE_COUNTRY,
     searchKeyWord,
   }),
-  getPolicyLocation: params => ({
-    type: actions.GET_POLICY_LOCATION,
-    payload: api.getPolicyLocation(params),
-  }),
 };
 
 export { actions, actionCreators };
