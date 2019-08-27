@@ -61,7 +61,7 @@ export default function TilaCarePolicy({
                   onClick={removePolicy}
                   data-key={key}
                 >
-                  <img className={styles['img-responsive']} src={"/static/img/bg-img/delivery-remove-icon.png"} />
+                  <img className={styles['img-responsive']} src="/static/img/bg-img/delivery-remove-icon.png" />
                 </span>
               </div>
               ))
@@ -84,21 +84,16 @@ export default function TilaCarePolicy({
          ${styles['free-delivery-part']}
          `}
     >
-      {Object.keys(warranty).length > 0 ?
-        <div className={`${styles['flex-center']} ${styles['warenty-part-inn']} ${styles['pb-10']} ${styles['warenty-part-single']}`}>
-          <span className={styles['warnty-trust-img']}><img className={styles['']} src={"/static/img/bg-img/trust-without-border.png"} alt="" /></span>
-          <Warranty warranty={warranty} break />
-        </div>
-        :
-        null
-      }
-      {
-        Object.keys(data).length > 0  &&
-          <>
-            <div className={`${styles.flex} ${styles['pb-10']} ${styles['border-b']} ${styles['border-t']} ${styles['tila-ext-wrny']}`}>{fetchPolicyData(data)}</div>
-            <div className={`${styles.flex} ${styles['thick-gry-clr']} ${styles['fs-12']} ${styles['pt-5']}`}>{WARRANTY_PAGE.WARRANTY_LABEL}</div>
-          </>
-      }
+      {Object.keys(warranty).length > 0 &&
+      <div className={`${styles['flex-center']} ${styles['warenty-part-inn']} ${styles['pb-10']} ${styles['warenty-part-single']}`}>
+        <span className={styles['warnty-trust-img']}><img className={styles['']} src="/static/img/bg-img/trust-without-border.png" alt="" /></span>
+        <Warranty warranty={warranty} break />
+      </div>}
+      {Object.keys(data).length > 0 &&
+      <React.Fragment>
+        <div className={`${styles.flex} ${styles['pb-10']} ${styles['border-b']} ${styles['border-t']} ${styles['tila-ext-wrny']}`}>{fetchPolicyData(data)}</div>
+        <div className={`${styles.flex} ${styles['thick-gry-clr']} ${styles['fs-12']} ${styles['pt-5']}`}>{WARRANTY_PAGE.WARRANTY_LABEL}</div>
+      </React.Fragment>}
     </div>
   );
 }

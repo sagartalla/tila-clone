@@ -1,6 +1,5 @@
 import React from 'react';
-import Cookies from 'universal-cookie';
-import NoSSR from 'react-no-ssr';
+import { NextSeo } from 'next-seo';
 import withRedux from 'next-redux-wrapper';
 import { bindActionCreators } from 'redux';
 
@@ -8,7 +7,11 @@ import makeStore from '../store';
 import Layout from '../layout/main';
 import FTB from '../components/Ftb';
 import Base, { baseActions } from './base';
+import { languageDefinations } from '../utils/lang';
 import { actionCreators as LandingactionCreators } from '../store/landing';
+import LoaderBarContext from '../components/helpers/context/loaderBarContext';
+
+const { SEO_CONTENT } = languageDefinations();
 
 class FirstTimeBuyer extends Base {
   pageName = 'FIRST_TIME_BUYER'
@@ -21,12 +24,29 @@ class FirstTimeBuyer extends Base {
     return { isServer };
   }
   render() {
+    const { loaderProps } = this.props;
     return (
-      <NoSSR>
-        <Layout>
-          <FTB />
-        </Layout>
-      </NoSSR>
+      <React.Fragment>
+        <NextSeo
+          title={SEO_CONTENT.HOME_TITLE}
+          description={SEO_CONTENT.HOME_META_CONTENT}
+          openGraph={{
+            title: SEO_CONTENT.HOME_TITLE,
+            site_name: 'Tila',
+            description: SEO_CONTENT.HOME_META_CONTENT,
+            fb_app_id: '',
+            locale: 'en_SA',
+            locale_ar: 'ar_SA',
+            type: 'website',
+            image: 'logo image url',
+          }}
+        />
+        <LoaderBarContext.Provider value={loaderProps}>
+          <Layout>
+            <FTB />
+          </Layout>
+        </LoaderBarContext.Provider>
+      </React.Fragment>
     );
   }
 }

@@ -17,23 +17,14 @@ import styles_ar from './brand_ar.styl';
 
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
-const subTypes = {
-  CAROUSEL: 'CT1a',
-  FLEX_3: 'BT3',
-};
-
 const Brand = ({ pageData }) => {
   const { page_content, id_attribute } = pageData;
   return (
     <Fragment>
-      {
-        page_content
-          ?
-          <Grid className={`${styles['pt-20']} ${styles.relative}`}>
-            {
-              page_content && page_content.map(content => <PageData key={content} content={content} />)
-            }
-          </Grid>
+      {page_content ?
+        <div className={`${styles['pt-20']} ${styles['land-page-mn-wdt']} container-fluid ${styles.relative}`}>
+          {page_content && page_content.map(content => <PageData key={content} content={content} />)}
+        </div>
           :
           null
       }
