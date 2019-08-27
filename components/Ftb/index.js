@@ -294,8 +294,7 @@ const mapStateToProps = store => ({
   isLoggedIn: authSelectors.getLoggedInStatus(store),
   recentlyViewed: wishListSelectors.recentlyViewed(store),
   isAddedToCart: listingId => wishListSelectors.getCartStatus(store, listingId),
-  pageData: selectors.getPage(store).page,
-
+  pageData: selectors.getPage(store),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
