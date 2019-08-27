@@ -86,9 +86,7 @@ const getCities = (code) => {
 
 const getCountries = () => axios.get(`${constants.TRANSFORMER_API_URL}/fpts/geolocation/country`);
 
-const getPolicyLocation = params => axios.post(`${constants.POLICY_URL}/policy/location`, params);
-
 export default {
   getProduct, getPreview, getReviewRatings, submitUserReview,
-  setSelectedVariant, getCities, track, getCountries, getPolicyLocation,
+  setSelectedVariant, getCities, track, getCountries,
 };

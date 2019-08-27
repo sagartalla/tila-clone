@@ -27,7 +27,7 @@ const getProduct = (store, variantId) => {
     ...product_details.product_details_vo.cached_product_details.attribute_map,
     ...product_details.product_details_vo.cached_variant[computedVariantId].attribute_map,
   };
-  const tila_care_policy = (listings[0] ? listings[0].tila_care_policy : null) || {}
+  const tila_care_policy = (listings[0] ? listings[0].tila_care_policy : null) || {};
   const productAttributeMap = product_details && product_details.product_details_vo && product_details.product_details_vo.cached_product_details.attribute_map;
   // let activeCount = 0, listingInventryCount = 0;
   let priceInfo = listings ? listings.filter((listing) => {
@@ -145,15 +145,16 @@ const getProduct = (store, variantId) => {
   };
 };
 const getTilaPolicy = (store) => {
-  return store.productReducer.tilaPolicy
-}
-const isProductLoaded = (store) => {
-  //console.log('productdetails', store.productReducer.data[0]);
-  return { isProductLoaded:store.productReducer.data[0],
-           productDetails: store.productReducer.data[0],
-          };
-
+  return store.productReducer.tilaPolicy;
 };
+const isProductLoaded = (store) => {
+  // console.log('productdetails', store.productReducer.data[0]);
+  return {
+    isProductLoaded: store.productReducer.data[0],
+    productDetails: store.productReducer.data[0],
+  };
+};
+
 const getLoadingStatus = (store) => {
   return store.productReducer.ui.loading;
 };
@@ -167,7 +168,7 @@ const getErrorMessage = (store) => {
   return store.productReducer.error;
 };
 
-const getVariantsAndSimilarProducts = (variantId, productId) => (store) => {
+const getVariantsAndSimilarProducts = variantId => (store) => {
   const { variantsData } = store.productReducer;
   const { availableSimilarProducts } = variantsData || {};
   const { similar_products, product_details, variant_preferred_listings } = store.productReducer.data[0];
@@ -263,22 +264,22 @@ const getVariantsAndSimilarProducts = (variantId, productId) => (store) => {
     const map = {
       ...acc.map,
     };
-    map[key] =  map[key] || {};
+    map[key] = map[key] || {};
     _.forEach(product.product_details_vo.cached_product_details.attribute_map, (attVal, attKey) => {
       const porder = attVal.primary_order || 1;
-      if(attVal.attribute_group_name !== 'IDENTITY' || !attVal.searchable || !attVal.groupable) {
+      if (attVal.attribute_group_name !== 'IDENTITY' || !attVal.searchable || !attVal.groupable) {
         return;
       }
       attVal.primary_order = attVal.primary_order || 1;
       acc.order[attVal.primary_order - 1] = attKey;
-      if(!display[attKey]) {
+      if (!display[attKey]) {
         display[attKey] = {
           displayName: attVal.display_string,
           values: [],
         };
       }
       display[attKey].values = porder === 1 ? _.uniq([...display[attKey].values, ...(attVal.attribute_values.map(i => `${i.value}${i.qualifier_unit ? ` ${i.qualifier_unit}` : ''}`))]) : [];
-      if(!map[key][attKey]) {
+      if (!map[key][attKey]) {
         map[key][attKey] = [];
       }
       map[key] = {
@@ -292,10 +293,10 @@ const getVariantsAndSimilarProducts = (variantId, productId) => (store) => {
       map,
     };
   }, { display: {}, map: [], order: [] }) : { display: {}, map: [], order: [] };
-  if(similar_products.length && similarProducts.order[0]) {
-    const primaryValues = attribute_map[similarProducts.order[0]].attribute_values.map((av) => av.value)
+  if (similar_products.length && similarProducts.order[0]) {
+    const primaryValues = attribute_map[similarProducts.order[0]].attribute_values.map(av => av.value);
     const shortList = _.reduce(similarProducts.map, (acc, attrs, pid) => {
-      if(primaryValues.indexOf(attrs[similarProducts.order[0]][0]) !== -1) {
+      if (primaryValues.indexOf(attrs[similarProducts.order[0]][0]) !== -1) {
         acc[pid] = attrs;
       }
       return acc;
@@ -303,20 +304,20 @@ const getVariantsAndSimilarProducts = (variantId, productId) => (store) => {
     _.forEach(shortList, (productValue, productId) => {
       const key = productId;
       const product = _.find([product_details, ...similar_products], (p) => {
-        return p.product_details_vo.cached_product_details.product_id === productId
+        return p.product_details_vo.cached_product_details.product_id === productId;
       });
-      if(!product) {
+      if (!product) {
         return;
       }
       _.forEach(product.product_details_vo.cached_product_details.attribute_map, (attVal, attKey) => {
         const { display, map } = similarProducts;
         const porder = attVal.primary_order || 1;
-        if(attVal.attribute_group_name !== 'IDENTITY' || !attVal.searchable || !attVal.groupable || porder === 1) {
+        if (attVal.attribute_group_name !== 'IDENTITY' || !attVal.searchable || !attVal.groupable || porder === 1) {
           return;
         }
         // console.log('attribute_map', attribute_map[attKey].attribute_values.map((i) => i.value))
-        display[attKey].values = _.uniq([...attribute_map[attKey].attribute_values.map((i) => i.value), ...display[attKey].values, ...(attVal.attribute_values.map(i => `${i.value}${i.qualifier_unit ? ` ${i.qualifier_unit}` : ''}`))]);
-        if(!map[key][attKey]) {
+        display[attKey].values = _.uniq([...attribute_map[attKey].attribute_values.map(i => i.value), ...display[attKey].values, ...(attVal.attribute_values.map(i => `${i.value}${i.qualifier_unit ? ` ${i.qualifier_unit}` : ''}`))]);
+        if (!map[key][attKey]) {
           map[key][attKey] = [];
         }
         map[key] = {
@@ -361,7 +362,7 @@ const getPreview = (store) => {
     const cItem = _.find(catalogData, { attributeName: attrKey });
     if (cItem) {
       const groupName = cItem.attributeCategoryName;
-      const isVisible = cItem.isVisible;
+      const { isVisible } = cItem;
       if (isVisible) {
         acc[groupName] = acc[groupName] || [];
         acc[groupName].push({
@@ -383,11 +384,11 @@ const getPreview = (store) => {
 
 const getSelectedVariantId = ({selectedVariantData, map}) => {
   let match, matchVid;
-   _.forEach(map, (mapValues, vid) => {
+  _.forEach(map, (mapValues, vid) => {
     match = _.reduce(selectedVariantData, (acc, selectedValue, selectedKey) => {
       return acc && (mapValues[selectedKey] && mapValues[selectedKey].indexOf(selectedValue) !== -1);
     }, true);
-    if(match) {
+    if (match) {
       matchVid = vid;
     }
   });
@@ -460,5 +461,5 @@ const getAllCountries = (store) => {
 export {
   getProduct, getPreview, getSelectedVariantId, getReviewRatings, getReviewResponse,
   getVariantsAndSimilarProducts, getSelectedPropductId, getSelectedVariantData, getAllCities, getAllCountries,
-  getLoadingStatus, getErrorMessage, isProductLoaded, getProductId, getVariantId,getTilaPolicy
+  getLoadingStatus, getErrorMessage, isProductLoaded, getProductId, getVariantId, getTilaPolicy,
 };

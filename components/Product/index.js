@@ -284,6 +284,7 @@ const getProductComponent = (isPreview, taskCode) => {
                               shippingInfo={shippingInfo}
                               returnInfo={returnInfo}
                               offerInfo={offerInfo}
+                              tila_care_policy={tila_care_policy}
                               warranty={warranty}
                             />
                           }
