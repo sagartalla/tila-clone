@@ -17,10 +17,16 @@ import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from './pageData_en.styl';
 import styles_ar from './pageData_ar.styl';
 
+import CBT2a from './includes/CBT2a';
+import CBT6c from './includes/CBT6c';
+import CBT3a from './includes/CBT3a';
+import CBT8a from './includes/CBT8a';
+import ST1a from './includes/ST1a';
+import CBT5b from './includes/CBT5b';
+
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
 let sliderTBS = '';
-let sliderFTBS = '';
 // let sliderTIE = '';
 // let sliderHAL = '';
 
@@ -87,26 +93,8 @@ let sliderFTBS = '';
 class PageData extends React.Component {
   constructor() {
     super();
-    this.state = {
-      currentViewPortWidth: 0,
-    };
+    this.state = {};
   }
-
-  componentDidMount() {
-    this.setState({
-      currentViewPortWidth: window.innerWidth,
-    });
-    window.addEventListener('resize', this.update);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.update);
-  }
-
-   getWidth = (bannerData, index) => {
-     const { currentViewPortWidth } = this.state;
-     return ((currentViewPortWidth * bannerData[index].config.width / 1440) + 10);
-   }
 
   // breadcrums are pending...
   getContent = () => {
@@ -137,6 +125,7 @@ class PageData extends React.Component {
             </Slider>
           </div>
         );
+        
       case 'CT1':
         return (
           <div className={`${styles['mb-20']} top-banner-slider slider-dots-part`}>
@@ -163,42 +152,7 @@ class PageData extends React.Component {
           </div>
         );
 
-        // ST1a slider
-      case 'ST1a': {
-        const settings = {
-          dots: false,
-          infinite: false,
-          speed: 500,
-          slidesToShow: 8,
-          slidesToScroll: 1,
-        };
-
-        return (
-          <div className={styles.fashionBannerSpacing}>
-
-            <Slider
-              {...settings}
-              asNavFor={sliderTBS}
-              ref={(slider) => { sliderTBS = slider; }}
-              lazyLoad={false}
-              className={`${styles.flex} ${styles['fashion-main-slider']} ${styles['flex-colum']} fashion-slick-slider`}
-              customPaging={i => <span className={`${styles['fs-10']}`}>{content.data[lang].banners[i].display_name}</span>}
-            >
-              {content.data[lang].banners.map(i => (
-                <div className={styles.fSlider} key={i.display_name}>
-                  <a href={i.link}>
-                    <div className={`${styles.item} ${styles['slick-itm']}`} key={i.display_name}>
-                      <img src={i.img} alt={i.display_name} className={styles.imageRounded} />
-                    </div>
-                  </a>
-                  <span className={`${styles['fs-12']} ${styles['pt-10']} ${styles['justify-center']} ${styles['slider-elips']} ${styles['lne-ht1_2']}`} style={{ textAlign: 'center', display: 'inline-block' }} >{i.display_name}</span>
-                </div>
-                ))}
-            </Slider>
-          </div>
-        );
-      }
-
+      
 
       // case 'BT9':
       //   return (
@@ -256,7 +210,7 @@ class PageData extends React.Component {
       case 'BT7': {
         const { banners } = content.data[lang];
         return (
-          <Row className={`${styles['mt-15']} ${styles['mb-15']} ${styles['ml-5']} ${styles['mr-5']} `}>
+          <div className={`${styles['display-banner-i']} `}>
             {content.data[lang].title &&
               <h3 className={`${styles['thick-gry-clr']} ${styles['fs-20']} ${styles['mt-0']} ${styles['pl-10']} ${styles['pr-10']}`}>{content.data[lang].title}</h3>}
             <div className={`${styles['banner-prt-main']}`}>
@@ -271,7 +225,7 @@ class PageData extends React.Component {
                   </div>
                 ))}
             </div>
-          </Row>
+          </div>
         );
       }
       case 'CBT6a': {
@@ -292,141 +246,7 @@ class PageData extends React.Component {
           <DT content={content} index={`${content.layout_id}${index}`} />
         );
       case 'FT1': return <FT content={content} index={`${content.layout_id}${index}`} />;
-      case 'CBT5b': {
-        const { banners, breadcrumb, title } = content.data[lang];
-        return (
-          <div className={`${styles['display-t-i-f']}`}>
-            <div className={`${styles['fs-20']} ${styles.title}`}>{title}</div>
-            <div className={styles.d1}>
-              <div>
-                <a href={banners[0].link}>
-                  <div className={styles.shadow}>
-                    <img src={banners[0].img} alt="" className={styles['img-responsive']} />
-                  </div>
-                </a>
-              </div>
-              <div>
-                <a href={banners[1].link}>
-                  <div className={styles.shadow}>
-                    <img src={banners[1].img} alt="" className={styles['img-responsive']} />
-                  </div>
-                </a>
-              </div>
-            </div>
-            <div className={styles.d2}>
-              <div>
-                <a href={banners[2].link}>
-                  <div className={styles.shadow}>
-                    <img src={banners[2].img} alt="" className={styles['img-responsive']} />
-                  </div>
-                </a>
-              </div>
-              <div>
-                <a href={banners[3].link}>
-                  <div className={styles.shadow}>
-                    <img src={banners[3].img} alt="" className={styles['img-responsive']} />
-                  </div>
-                </a>
-              </div>
-            </div>
-            <div className={`${styles.d3} ${styles.right0}`}>
-              <div>
-                <a href={banners[4].link}>
-                  <div className={styles.shadow}>
-                    <img src={banners[4].img} alt="" className={styles['img-responsive']} />
-                  </div>
-                </a>
-              </div>
-            </div>
-            <div className={`${styles['thick-gry-clr']} ${styles['fs-14']} ${styles['mt-10']} ${styles.pointer} ${styles.breadcrumbML}`}>
-              {breadcrumb && breadcrumb.length > 0 &&
-                breadcrumb.map((bc, idx) => (
-                  <React.Fragment>
-                    <a className={styles['thick-gry-clr']} href={bc.link}>
-                      <span>{bc.display_name}</span>
-                    </a>
-                    {breadcrumb.length - 1 !== idx && <span className={`${styles['ml-5']} ${styles['mr-5']}`}>|</span>}
-                  </React.Fragment>
-                ))}
-            </div>
-          </div>
-        );
-      }
-      case 'CBT8a': {
-        const { banners } = content.data[lang];
-        return (
-<div className={`${styles['flex-prop']} ${styles['bannerSpacing']}`} >
-            <div className={`${styles['flex']} ${styles['width50']}`} >
-              <div className= {styles.d11} style={{width: this.getWidth(banners, 0)}}>
-                <a href={banners[0].link}>
-                  <div>
-                    <img src={banners[0].img} className = {`${styles.imgResolution}`}  />
-                  </div>
-                </a>
-              </div>
 
-              <div className= {styles.d12} style={{width: this.getWidth(banners, 1)}}>
-                <a href={banners[1].link}>
-                  <div>
-                    <img src={banners[1].img} className = {`${styles.imgResolution}`} />
-                  </div>
-                </a>
-              </div>
-            </div>
-            <div className={styles.rightBanner}>
-              <div className= {styles.d13}>
-                <div style={{width: this.getWidth(banners, 2)}}>
-                  <a href={banners[2].link}>
-                    <div>
-                      <img src={banners[2].img} className = {`${styles.imgResolution}`} />
-                    </div>
-                  </a>
-                </div>
-                <div style={{width: this.getWidth(banners, 3)}}>
-                  <a href={banners[3].link}>
-                    <div>
-                      <img src={banners[3].img} className = {`${styles.imgResolution}`} />
-                    </div>
-                  </a>
-                </div>
-                <div style={{width: this.getWidth(banners, 4)}}>
-                  <a href={banners[4].link}>
-                    <div>
-                      <img src={banners[4].img} className = {`${styles.imgResolution}`} />
-                    </div>
-                  </a>
-                </div>
-              </div>
-
-              <div className= {styles.d14}>
-                <div style={{width: this.getWidth(banners, 5)}}>
-                  <a href={banners[5].link}>
-                    <div>
-                      <img src={banners[5].img} className = {`${styles.imgResolution}`} />
-                    </div>
-                  </a>
-                </div>
-                <div style={{width: this.getWidth(banners, 6)}}>
-                  <a href={banners[6].link}>
-                    <div>
-                      <img src={banners[6].img} className = {`${styles.imgResolution}`} />
-                    </div>
-                  </a>
-                </div>
-                <div style={{width: this.getWidth(banners, 7)}}>
-                  <a href={banners[7].link}>
-                    <div>
-                      <img src={banners[7].img} className = {`${styles.imgResolution}`} />
-                    </div>
-                  </a>
-                </div>
-              </div>
-
-            </div>
-
-          </div>
-        );
-      }
       case 'CBT12': {
         
         return (
@@ -441,129 +261,32 @@ class PageData extends React.Component {
        );
       }
 
-      case 'CBT6c': {
-        const { banners } = content.data[lang];
-        return (
-          <div className={`${styles.fashionBanners} ${styles.fashionBannerSpacing}`}>
-            <div className={styles.fBanners1} style={{ display: 'flex' }}>
-              <div className={styles.fb3} >
-                <a href={banners[0].link}>
-                  <div className={`${styles['width100']}`}>
-                    <img src={banners[0].img} alt="" className={styles.imgResolution} className={`${styles['width100']}`} />
-                  </div>
-                </a>
-              </div>
-              <div className={styles.fb3} >
-                <a href={banners[1].img}>
-                  <div className={`${styles['width100']}`}>
-                   <img src={banners[1].img} className={`${styles['width100']} ${styles.imgResolution}`} />
-                  </div>
-                </a>
-              </div>
-              <div className={styles.fb3}>
-                <a href={banners[2].link}>
-                  <div className={`${styles['width100']}`}>
-                   <img src={banners[2].img} className={`${styles['width100']} ${styles.imgResolution}`} />
-                  </div>
-                </a>
-              </div>
-            </div>
+      case 'CBT5b': {
+        return <CBT5b content = { content } />
+      }
 
-            <div className={styles.fBanners2}>
-              <div className={styles.fb2} >
-                <a href={banners[3].link}>
-                  <div className={`${styles['width100']}`}>
-                   <img src={banners[3].img} className={`${styles['width100']} ${styles.imgResolution}`} />
-                  </div>
-                </a>
-              </div>
-              <div className={styles.fb1}>
-                <a href={banners[4].link}>
-                  <div className={`${styles['width100']}`}>
-                   <img src={banners[4].img} className={`${styles['width100']} ${styles.imgResolution}`} />
-                  </div>
-                </a>
-              </div>
-              <div className={styles.fb2}>
-                <a href={banners[5].link}>
-                  <div className={`${styles['width100']}`}>
-                   <img src={banners[5].img} className={`${styles['width100']} ${styles.imgResolution}`} />
-                  </div>
-                </a>
-                <div className={`${styles['thick-gry-clr']} ${styles['fs-14']} ${styles['mt-10']} ${styles.pointer}`}>
-                  {this.returnBanner(0, banners)}
-                </div>
-              </div>
-            </div>
-          </div>
-        );
+      case 'CBT6c': {
+        return <CBT6c content = { content } />
       }
       
       case 'ST1a': {
-        const settings = {
-          dots: false,
-          infinite: true,
-          speed: 500,
-          slidesToShow: 8,
-          slidesToScroll: 1,
-          autoplay: false,
-        };
-        console.log('hello');
-        return(
-            <div className={`${styles.fashionBannerSpacing}`} >
-              
-              <Slider {...settings} 
-                asNavFor={sliderFTBS}
-                lazyLoad={false}
-                className={`${styles.flex} ${styles['fashion-main-slider']} ${styles['flex-colum']}`}
-                customPaging={i => <span className={`${styles['fs-10']}`}>{content.data[lang].banners[i].display_name}</span>}
-              >
-                {content.data[lang].banners.map(i => (
-                  <div className={styles.fSlider} key={i.display_name}>
-                    <a href={i.link}>
-                      <div className={`${styles.item} ${styles['slick-itm']} ${styles['width100']}`} key={i.display_name}>
-                        <img src={i.img} alt={i.display_name} className={`${styles['width100']} ${styles.imgResolution}`}/>
-                      </div>
-                    </a>
-                    <span className={`${styles['fs-12']} ${styles['pt-10']} ${styles['justify-center']} ${styles['slider-elips']} ${styles['lne-ht1_2']}`} style={{textAlign: 'center', display: 'inline-block'}} >{i.display_name}</span>
-                  </div>
-                ))}
-              </Slider>
-            </div>
-        )
+        return <ST1a content = {content} />
       }
 
       case 'CBT2a': {
-        const { banners, title, description } = content.data[lang];
-        return (
-          <div className={styles.fashionBannerSpacing}>
-            <div className={`${styles['fs-20']} ${styles.title}`}>
-              <div className={`${styles.pdL} ${styles['t-l']}`} style={{paddingLeft: '102px'}}>
-                <h1 className={styles.fHeading}>{title}</h1>
-                <span>{description}</span>
-              </div>
-            </div>
-            <div className={styles.cbt2aBanner}>
-                <div className={styles.F1banner}>
-                    <a href={banners[0].link}>
-                      <div className={`${styles['width100']}`}>
-                        <img src={banners[0].img} className={`${styles['width100']} ${styles.imgResolution}`}/>
-                      </div>
-                    </a>
-                  </div>
-                <div className={styles.F2banner}>
-                  <div>
-                      <a href={banners[1].link}>
-                        <div className={`${styles['width100']}`}>
-                          <img src={banners[1].img} className={`${styles['width100']} ${styles.imgResolution}`} />
-                        </div>
-                      </a>
-                  </div>
-                </div>
-            </div>
-          </div>
-          )
+        
+        return <CBT2a content = { content }/>
       }
+
+      case 'CBT3a' : {
+        return <CBT3a content = { content }/>
+      }
+
+      case 'CBT8a': {
+        return <CBT8a content = { content }/>
+        
+      }
+
 
       case 'BT2a':{
 
@@ -573,42 +296,7 @@ class PageData extends React.Component {
         );
 
     }
-      case 'CBT3a' : {
-        const { banners, title, description } = content.data[lang];
-        return (
-          <div className={` ${styles['fashionBannerSpacing']}`} >
-            <div className={`${styles['fs-20']} ${styles.title}`}>
-              <div className={`${styles.pdL} ${styles['t-c']}`}>
-                {title && <h1 className={styles.fHeading}>{title}</h1>}
-                {description && <span>{description}</span>}
-              </div>
-            </div>
-           <div className={`${styles['flex-prop']}`}>
-            <div className = {styles.cbt3a}>
-             
-              <div className={styles.wrapper}>
-                <div className={styles.img1} style={{width: this.getWidth(banners, 0)}}>
-                  <a href={banners[0].link}>
-                    <img src={banners[0].img}/>
-                  </a>
-                </div>
-                <div className={styles.img2} style={{width: this.getWidth(banners, 1)}}>
-                  <a href={banners[1].link}>
-                    <img src={banners[1].img} />
-                  </a>
-                </div>
-                <div className={styles.img3} style={{width: this.getWidth(banners, 2)}}>
-                  <a href={banners[2].link}>
-                    <img src={banners[2].img}/>
-                  </a>
-                </div>
-              </div>
-            </div>
-            </div>
-          </div>
-        );
-      }
-
+     
       case 'BT3a': {
         
 
