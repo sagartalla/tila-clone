@@ -46,7 +46,9 @@
 .slick-slider.sub-slider .slick-slide {
     width: 70px !important;
 }
-
+.bottom-sliderDiv .slick-slider .slick-active.slick-current {
+  border: 2px solid #cdcdcd;
+}
 .progress {
     display: flex;
     width: 65%;
