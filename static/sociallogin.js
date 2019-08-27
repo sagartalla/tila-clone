@@ -4,7 +4,7 @@ const instagramAppID = 'e75178e4dcd24b18a6cd5e650c73d9d8';
 const facebookAppID = '1978888652213386';
 const googleAppID = '289717607267-r4ij4arfmkdhshvfd93thqedb71nbojn.apps.googleusercontent.com';
 
-const instaLoginURL = `https://api.instagram.com/oauth/authorize/?client_id=${instagramAppID}&redirect_uri=${window.location.origin}&response_type=code`;
+const instaLoginURL = 'https://api.instagram.com/oauth/authorize/?client_id=' + instagramAppID + '&redirect_uri=${window.location.origin}&response_type=code';
 
 initialSocialLogin();
 
