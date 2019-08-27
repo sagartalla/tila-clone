@@ -101,9 +101,7 @@ class CartItem extends React.Component {
       checked: gift_info ? true : false,
       showWarrantyDetails: false,
       selectedPolicy: '',
-      policies_selected: {
-
-      },
+      policies_selected: {},
     };
     this.warrantyChange = this.warrantyChange.bind(this);
   }
@@ -177,7 +175,6 @@ class CartItem extends React.Component {
   }
 
   removeWarranty = (e) => {
-    debugger;
     const { item } = this.props;
     const policyId = e.currentTarget.getAttribute('data_policy_id');
     const warrantyName = e.currentTarget.getAttribute('data-name');
@@ -186,7 +183,6 @@ class CartItem extends React.Component {
     let policyId1  = [];
     let isMakeApi = false;
     Object.keys(item.policies_applied).length > 0 && Object.keys(item.policies_applied).map(newPolicy => {
-      debugger;
       policies_selected[newPolicy] !== item.policies_applied[newPolicy].policy_id &&
           policyId1.push(item.policies_applied[newPolicy].policy_id);
           isMakeApi = true;

@@ -81,8 +81,8 @@ class ChooseVariant extends Component {
     const data = variants.map((el,index) => {
       if(el.listing.total_inventory_count > 0) {
         return <li key={'variant_'+index}
-          className={`${el.listing.total_inventory_count > 0 ? styles['productSize-Button'] : styles['product-StrikeButton']} ${activeListing === el.listing.listing_id ? styles['active-variant']: ''}`}
-          onClick={el.listing.total_inventory_count > 0 ? this.choosedVariant(el.listing) : this.sizeNotAvailable}
+          className={`${el.listing !== null && el.listing.total_inventory_count > 0 ? styles['productSize-Button'] : styles['product-StrikeButton']} ${activeListing === (el.listing !== null && el.listing.listing_id) ? styles['active-variant']: ''}`}
+          onClick={(el.listing !== null && el.listing.total_inventory_count > 0) ? this.choosedVariant(el.listing) : this.sizeNotAvailable(false)}
           >
           {el.variant_details.attribute_map && el.variant_details.attribute_map.size && el.variant_details.attribute_map.size.attribute_values[0].value}
         </li>
