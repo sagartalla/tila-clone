@@ -123,7 +123,7 @@ export const EN_KEYWORDS = {
     MONEY_IN_WALLET: 'In wallet',
     REMAINING_AMOUNT_TO_PAY: 'Amount to pay',
     PAY_USING_TILA_CREDIT: 'PAY USING TILA CREDIT',
-    PAYMENT_MODE: 'Net banking, credit card, vouchers and etc....',
+    PAYMENT_MODE: 'Net banking, credit card, vouchers etc....',
     ON_DELIVERY: 'on delivery',
     DROP_THE_ANSWER_INTO_THE_BOX: 'Drop the answer icon into the box above',
     COD_TC: 'By choosing correct image, I accept T&C and pay cash delivery',
