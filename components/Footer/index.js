@@ -104,7 +104,7 @@ const l = [
     title: FOOTER_PAGE.PERFUMES,
   },
   {
-    url: `/${lang}/clp/Home%20furnishing`,
+    url: `/${lang}/clp/make%20up`,
     title: FOOTER_PAGE.MAKEUP,
   },
 ];
