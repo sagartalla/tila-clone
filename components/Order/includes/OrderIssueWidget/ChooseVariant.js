@@ -114,9 +114,9 @@ class ChooseVariant extends Component {
         }
         <div>
           {{
-            errorMsg: <p className={`${styles['error-msg']} ${styles['fs-12']}`}>{ORDER_PAGE.SELECTED_SIZE_NOT_AVAILABLE}
+            errorMsg: <p className={`${styles['error-msg']} ${styles['selected-size']} ${styles['fs-12']} ${styles['flex-center']} ${styles['justify-center']}`}>{ORDER_PAGE.SELECTED_SIZE_NOT_AVAILABLE}
           </p>,
-          successMsg : <p className={`${styles['success-msg']} ${styles['fs-12']}`}>
+          successMsg : <p className={`${styles['success-msg']} ${styles['fs-12']} ${styles['selected-size']} ${styles['fs-12']} ${styles['flex-center']} ${styles['justify-center']}`}>
             {ORDER_PAGE.SELECTED_SIZE_AVAILABLE_FOR_EXCHANGE}
           </p>,
           emptyMsg: '',

@@ -756,6 +756,7 @@ export const AR_KEYWORDS = {
     COMPLETED: 'Completed',
     IN_PROGRESS: 'In Progress',
     MESSAGE: 'رسالة',
+    REFUND: 'Refund',    
     RETURN_ORDER_MSG: 'Keep the item ready for pickup and we will update you once it is scheduled.',
     RETURN_ORDER_MSG_NOTE: 'Note: Refund will be processed once the return product is QC approved.',
     REPLACE_ORDER_MSG_NOTE: 'Note: Replacement will be processed once the return product is QC completed and approved.',

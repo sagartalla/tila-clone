@@ -27,10 +27,11 @@ class Reason extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedMode: this.getSelectedMode(props.orderIssue.issueType),
+      selectedMode: '',
       selectedVariant: [],
       displaySizeError: false,
       showError: true,
+      agree_terms: false,
     };
     this.selectReason = this.selectReason.bind(this);
     this.updateComment = this.updateComment.bind(this);
@@ -74,9 +75,16 @@ class Reason extends Component {
       this.props.getOrderDetails({ orderId:this.props.orderIssue.orderId });
 
   }
+
+  componentWillReceiveProps(newProps) {
+    this.setState({
+      selectedMode: this.getSelectedMode(newProps.orderIssue.issueType),
+    });
+  }
   getSelectedMode(mode) {
+    debugger;
     return {
-      RETURN:'Return',
+      RETURN:'Refund',
       CANCEL:'Cancel',
       EXCHANGE:'Exchange',
       CLAIMWARRANTY:'Claim Warranty',
@@ -146,7 +154,7 @@ class Reason extends Component {
       address_id: orderDetails && orderDetails.address.address_id,
     }
 
-    if (selectedMode === 'Return') {
+    if (selectedMode === 'Refund') {
       const returnParam = Object.assign({}, params, { issueType: 'RETURN', returnExchangeType: 'RETURN' });
       this.props.setOrderIssueData(returnParam);
       this.props.setAddressData(reasonParams);
@@ -200,7 +208,7 @@ class Reason extends Component {
   }
   productNotAvailable(value) {
     this.setState({
-      selectedMode: value ? 'Exchange' : 'Return',
+      selectedMode: value ? 'Exchange' : 'Refund',
       selectedVariant: [],
       variantId: '',
       displaySizeError: false,
@@ -231,11 +239,17 @@ class Reason extends Component {
     });
   }
 
+  handleCheck = ({ target }) => {
+    this.setState({
+      [target.name]: target.checked,
+    });
+  }
+
   render() {
     const { orderIssue, loadingStatus, query } = this.props;
     const { selectedItem: itemData, reasons, returnExchangeType, issueType } = orderIssue;
     const { img, name } = itemData;
-    const { selectedMode, displaySizeError, showError } = this.state;
+    const { selectedMode, displaySizeError, showError, agree_terms } = this.state;
     let reasonItems = (typeof reasons === 'object' && (!Array.isArray(reasons) && Object.keys(reasons).length > 0))  ? reasons.reasons  : reasons
     const selectedReason
      = reasonItems.filter(reason => reason.name === this.state.reason)[0]
@@ -268,7 +282,7 @@ class Reason extends Component {
             {showError ? (issueType_small==='cancel' ? ORDER_PAGE.SELECT_CANCEL_REASON : (issueType_small==='return' ? ORDER_PAGE.SELECT_RETURN_REASON : ORDER_PAGE.SELECT_EXCHANGE_REASON)): ''}
           </span>
           <div className={`${styles['dd-cont']}`}>
-            <div className={`${styles['ml-5']}`}>{ORDER_PAGE.SELECT_AN_OPTION}</div>          
+            <div className={`${styles['ml-5']}`}>{ORDER_PAGE.SELECT_AN_OPTION}</div>
             <div className={`${styles.select} ${styles['mt-10']} ${styles['pb-10']}`}>
               <select
                 className={styles['select-text']}
@@ -359,13 +373,13 @@ class Reason extends Component {
                       <input
                         className={styles['radio-btn']}
                         type="radio"
-                        value="Return"
+                        value="Refund"
                         onChange={this.onOptionChange}
                         checked={
-                          selectedMode === 'Return'
+                          selectedMode === 'Refund'
                         }
                       />
-                      <label className={styles['pl-10']}>{ORDER_PAGE.RETURN}</label>
+                      <label className={styles['pl-10']}>{ORDER_PAGE.REFUND}</label>
                     </div>
                     {orderIssue.exchangeVariants &&
                       orderIssue.exchangeVariants.length > 0 ? (
@@ -374,6 +388,32 @@ class Reason extends Component {
                   </React.Fragment>
                 ) : null}
               </div>
+              {(selectedMode === 'Refund' || selectedMode === 'Replace' || selectedMode === 'Exchange') &&
+              <React.Fragment>
+              {/* <div className={`${styles['things-to-note']}`}>
+              <div className={`${styles['fs-16']} ${styles.fontW600} ${styles['p-10']}`}>Things to Note</div>
+              <div className={`${styles['fs-12']} ${styles['p-10']}`}>
+              <div>
+              • The products are in its original manufacturer box (retail packaging - sealed/closed box as applicable) and is not damaged or tampered in any condition. The seal of the product needs to be intact including all accessories / freebies received along with the order.
+              </div>
+              <div>
+              • In case of Electronics Serial number should match
+              </div>
+              <div>
+              • For clothing & other fashion products, the product needs to be unused placed in the original packaging with all the original tags/ labels attached to the product.
+              </div>
+              </div>
+              </div> */}
+              <div className={`${styles['pt-10']} ${styles['pb-10']}`}>
+              <div className={`${styles['checkbox-material']} ${styles.flex} ${styles['p-0']}`}>
+              <input id="deals-offers-reg" name="agree_terms" type="checkbox" onChange={this.handleCheck} checked={this.state.agree_terms} />
+              <label htmlFor="deals-offers-reg">
+                <span className={`${styles['light-gry-clr']} ${styles['fs-12']}`}><span>I Agree to the <a href="/en/policy/user-terms-and-conditions" target="_blank" className={`${styles.fontW600}`}>Terms and Conditions</a></span></span>
+              </label>
+            </div>
+              </div>
+              </React.Fragment>
+              }
             <div
               className={`${styles['widget-footer']} ${styles['flex-center']} ${
                 styles['justify-center']
@@ -381,8 +421,8 @@ class Reason extends Component {
                 >
               <button
                 onClick={this.saveAndGoNext}
-                className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['retun-btn-part']}`}
-                disabled={loadingStatus || !this.state.reason}
+                className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['retun-btn-part']} ${styles['text-uppercase']}`}
+                disabled={(selectedMode === 'Refund' || selectedMode === 'Replace' || selectedMode === 'Exchange') ? !agree_terms : (loadingStatus || !this.state.reason)}
               >
                 {`${selectedMode}`}
               </button>
