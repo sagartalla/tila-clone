@@ -373,7 +373,7 @@ class OrderItem extends Component {
         </Col>
         <Col md={5} sm={5} className={`${styles['thick-border-left']} ${styles['p-0']}`}>
           {payments && payments.length > 0 && payments[0].transaction_status === 'FAILED' ?
-            <div>{ORDER_PAGE.ORDER_UNSUCCESSFUL}</div>
+            <div className={`${styles['unsuccessful-mesg']}`}>{ORDER_PAGE.ORDER_UNSUCCESSFUL}</div>
             :
             <React.Fragment>
               <div className={`${styles['p-15']} ${styles['ipad-pl-0']} ${styles['ipad-pr-0']} ${styles['flx-space-bw']}`}>
