@@ -5,7 +5,7 @@ import ToastContent from '../../components/common/ToastContent'
 import constants from '../helper/constants';
 import { languageDefinations } from '../../utils/lang/';
 
-const { API_TEXT } = languageDefinations();
+const { API_TEXT, CART_PAGE } = languageDefinations();
 
 const getCartDetailsApi = (params = {}) => {
   return axios.put(`${constants.CART_API_URL}/api/v1/cart/view`, params).then(({ data }) => {
@@ -18,12 +18,16 @@ const getCartDetailsApi = (params = {}) => {
 
 const addToCart = (params) => {
   return axios.post(`${constants.CART_API_URL}/api/v1/cart/add`, params).then((res) => {
-    toast(
-      <ToastContent
-        msg={API_TEXT.ITEM_ADDED_TO_CART}
-        msgType='success'
-      />
-    )
+    params.changeRemoveWarranty ? toast(<ToastContent
+      msg={`${params.warrantyName !== '' && (params.warrantyName === 'extended_warranty' ? CART_PAGE.EXTENDED_WARRANTY + ' ' + API_TEXT.WARRANTY_REMOVED_FROM_CART_ITEM : CART_PAGE.DAMAGE_PROTECTION + ' ' + API_TEXT.WARRANTY_REMOVED_FROM_CART_ITEM)}`}
+      msgType="success"
+    />) :  params.changeAddWarranty ? toast(<ToastContent
+      msg={`${params.warrantyName !== '' && (params.warrantyName === 'extended_warranty' ? CART_PAGE.EXTENDED_WARRANTY + ' ' + API_TEXT.WARRANTY_ADDED_CART_ITEM : CART_PAGE.DAMAGE_PROTECTION + ' ' + API_TEXT.WARRANTY_ADDED_CART_ITEM)}`}
+      msgType="success"
+    />) : toast(<ToastContent
+      msg={API_TEXT.ITEM_ADDED_TO_CART}
+      msgType="success"
+    />);
     return res;
   });
 }

@@ -244,7 +244,7 @@ const InstaCheckoutDetails = ({ details, selectedAddr,addressResults,showMiniAdd
             onChange={checkTilaCreditValue}
           />
         <label>
-          {`Wallet Balance Used (${filteredData[0].amount_to_pay.display_value} ${filteredData[0].amount_to_pay.currency_code})`}
+          {`Wallet Balance Used (${filteredData[0].amount_to_pay.currency_code} ${filteredData[0].amount_to_pay.display_value})`}
         </label>
        </div>
      )
