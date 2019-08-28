@@ -317,7 +317,7 @@ const FooterBar = props => (
               <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
                 <li><a href={`/${lang}/policy/user-terms-and-conditions`} target="_blank">{FOOTER_PAGE.TERMS_CONDITION}</a></li>
                 <li><a href={`/${lang}/policy/cancellation-policy`} target="_blank">{FOOTER_PAGE.CANCELLATION_POLICY}</a></li>
-                <li><a href={`/${lang}/policy/exchange-replacement-policy`} target="_blank">{FOOTER_PAGE.EXCHANGE_REPLACEMENT_POLICY}</a></li>
+                <li><a href={`/${lang}/policy/return-and-exchange-policy`} target="_blank">{FOOTER_PAGE.EXCHANGE_REPLACEMENT_POLICY}</a></li>
                 <li><a href={`/${lang}/policy/return-refund-policy`} target="_blank">{FOOTER_PAGE.REFUND_POLICY}</a></li>
                 <li><a href={`/${lang}/policy/warranty-policy`} target="_blank">{FOOTER_PAGE.WARRENTY_POLICY}</a></li>
                 {/* <li><a href="/en/policy/sp" target="_blank">{FOOTER_PAGE.SHIPPING_POLICY}</a></li> */}
