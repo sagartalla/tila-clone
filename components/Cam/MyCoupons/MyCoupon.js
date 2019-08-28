@@ -53,7 +53,7 @@ class MyCoupons extends React.Component {
                 <small className={`${styles['label-gry-clr']}`}>{COUPON_OFFERS.WE_BELIEVE_IN_THE_POWER}</small>
               </div>
             </div>
-            <div className={`${styles['ml-55']}`}>
+            <div>
               <Tabs defaultActiveKey={1} onSelect={this.handleSelect} id="coupons">
                 <Tab eventKey={1} id="Active Coupons" title={COUPON_OFFERS.ACTIVE_COUPONS}>
                   <ActiveCoupons />

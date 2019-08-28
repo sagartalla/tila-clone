@@ -7,17 +7,21 @@ import { bindActionCreators } from 'redux';
 import Base, { baseActions } from './base';
 import Layout from '../layout/main';
 import Order from '../components/Order';
+import LoaderBarContext from '../components/helpers/context/loaderBarContext'
 
 class OrderPage extends Base {
   pageName = 'ORDER';
   render() {
-    const { url } = this.props;
+    const { url, loaderProps } = this.props;
     return (
-      <Layout>
-        <NoSSR>
-          <Order query={url.query} />
-        </NoSSR>
-      </Layout>
+      <LoaderBarContext.Provider value={loaderProps}>
+        <Layout>
+          <NoSSR>
+            <Order query={url.query} />
+          </NoSSR>
+        </Layout>
+      </LoaderBarContext.Provider>
+
     );
   }
 }

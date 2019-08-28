@@ -20,6 +20,9 @@ const instantCheckoutReducer = typeToReducer({
     REJECTED: (state, action) => {
       return Object.assign({}, state, { error: action.payload.message, ui: { loading: false } })
     },
+  },
+  [actions.CLEAR_INSTANT_CHECKOUT] : (state,action) => {
+    return {...state,data:{}}
   }
 }, initialState);
 

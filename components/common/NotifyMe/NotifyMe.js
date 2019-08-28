@@ -33,7 +33,7 @@ class NotifyMe extends React.Component {
   }
 
   notify = () => {
-    const { pId, notifyMe, closeNotify } = this.props;
+    const { pId, notifyMe, closeNotify, variantId, showNotifyMeMsg } = this.props;
     let {
       email, mobile, emailErr, mobileErr,
     } = this.state;
@@ -41,12 +41,14 @@ class NotifyMe extends React.Component {
     const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     let params = {
       product_id: pId,
+      variant_id: variantId,
     };
     if (email) {
       if (emailRegex.test(email)) {
         params.email = email;
         notifyMe(params);
         closeNotify();
+        showNotifyMeMsg();
       } else {
         emailErr = 'Enter Valid EmailId';
       }

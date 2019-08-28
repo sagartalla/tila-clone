@@ -8,7 +8,7 @@ import constants from '../helper/constants';
 const cookies = new Cookies();
 
 const getProduct = (options) => {
-  return axios.post(`${constants.LISTING_API_URL}/api/v1/listing/`,options);
+  return axios.post(`${constants.LISTING_API_URL}/api/v1/listing/`, options);
 };
 
 const getPreview = (options) => {
@@ -87,5 +87,6 @@ const getCities = (code) => {
 const getCountries = () => axios.get(`${constants.TRANSFORMER_API_URL}/fpts/geolocation/country`);
 
 export default {
-  getProduct, getPreview, getReviewRatings,submitUserReview, setSelectedVariant, getCities, track, getCountries,
+  getProduct, getPreview, getReviewRatings, submitUserReview,
+  setSelectedVariant, getCities, track, getCountries,
 };

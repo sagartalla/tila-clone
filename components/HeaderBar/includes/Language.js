@@ -43,7 +43,7 @@ class Language extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.language !== this.state.selectedItem) {
       const currentURl = window.location.href;
-      window.location.href = currentURl.replace(`/${this.state.selectedItem}`, `/${nextProps.language}`);
+      window.location.replace(currentURl.replace(`/${this.state.selectedItem}`, `/${nextProps.language}`));
     }
   }
 
@@ -59,7 +59,7 @@ class Language extends Component {
   render() {
     const { name, id } = languageData[this.state.selectedItem];
     return (
-      <div className={`${styles.pointer} ${styles['pr-20']} ${styles['pl-20']} ${styles['border-rt']}`} onClick={this.changeLanguage} data-id={id}>
+      <div className={`${styles.pointer} ${styles['pr-20']}`} onClick={this.changeLanguage} data-id={id}>
         <span>{name}</span>
       </div>
     );

@@ -5,6 +5,7 @@ import refStore from '../helper/refHandler';
 import { actionCreators as cartActionCreators } from '../cart';
 // import { actionCreators as cartActionCreators } from './';
 import { actionCreators as shippingActionCreators } from '../cam/address'
+import { actionCreators as personalDetailsActionCreator } from '../cam/personalDetails'
 const cookies = new Cookies();
 
 const actions = {
@@ -40,6 +41,11 @@ const actions = {
   CHANGE_CURRENT_FLOW: 'CHANGE_CURRENT_FLOW',
   GET_MOBILE_OTP: 'GET_MOBILE_OTP',
   VERIFY_RESET_OTP: 'VERIFY_RESET_OTP',
+  SHIPPING_ACCOUNT: 'SHIPPING_ACCOUNT',
+  V2_PREVIOUS_PAGE: 'V2_PREVIOUS_PAGE',
+  SKIP_AND_CONTINUE: 'SKIP_AND_CONTINUE',
+  GET_GEO_SHIPPING_DETAILS: 'GET_GEO_SHIPPING_DETAILS',
+  VERIFY_EMAIL_BY_LINK: 'VERIFY_EMAIL_BY_LINK',
 };
 
 const actionCreators = {
@@ -51,6 +57,9 @@ const actionCreators = {
   v2NextPage: () => ({
     type: actions.V2_SHOW_NEXT_PAGE,
   }),
+  v2PreviousPage: () => ({
+    type: actions.V2_PREVIOUS_PAGE,
+  }),
   v2CurrentFlow: data => ({
     type: actions.CHANGE_CURRENT_FLOW,
     payload: data,
@@ -61,6 +70,7 @@ const actionCreators = {
     type: actions.USER_LOGIN,
     payload: api.userLogin(params),
   }).then(() => {
+    dispatch(personalDetailsActionCreator.getUserProfileInfo())
     dispatch(cartActionCreators.getCartResults());
     dispatch(shippingActionCreators.getShippingAddressResults());
 
@@ -70,24 +80,29 @@ const actionCreators = {
       dispatch(refStore.postLoginRef);
       dispatch(actions.DELETE_POST_LOGIN_ACTION_INFO);
     }
-    dispatch(actionCreators.getUserInfoData({initiateEmailVerification: params.channel === 'BASIC_REGISTER'})).then((res) => {
-      if(params.channel !== 'BASIC_REGISTER') {
+    dispatch(actionCreators.getUserInfoData()).then((res) => {
+      // if(params.channel !== 'BASIC_REGISTER') {
         if (res && res.value && res.value.data && res.value.data.email_verified === 'NV') {
           dispatch(actionCreators.setVerfied(false));
         } else {
           dispatch(actionCreators.setVerfied(true));
-        }
+        // }
       }
       return res;
     });
   }),
-  userLogout: () => (dispatch) => {
+  // userLogout: () => (dispatch) => {
+  //   dispatch(cartActionCreators.getCartResults());
+  //   dispatch({
+  //     type: actions.USER_LOGOUT,
+  //     payload: api.userLogout(),
+  //   });
+  // },
+  userLogout: () => ({
     // dispatch(cartActionCreators.getCartResults());
-    dispatch({
-      type: actions.USER_LOGOUT,
-      payload: api.userLogout(),
-    });
-  },
+    type: actions.USER_LOGOUT,
+    payload: api.userLogout(),
+  }),
   getLoginInfo: params => ({
     type: actions.USER_LOGIN_INFO,
     payload: api.getLoginInfo(params),
@@ -146,7 +161,7 @@ const actionCreators = {
       dispatch(actionCreators.setVerfied(true));
     }, () => {
       dispatch(actionCreators.setVerfied(false));
-    })
+    });
   },
   sendOtpToEmailId: (status = true) => ({
     type: actions.VERIFY_RESEND_EMAIL,
@@ -178,6 +193,9 @@ const actionCreators = {
       }));
     });
   },
+  getGeoShippingData: () => ({
+    type: actions.GET_GEO_SHIPPING_DETAILS
+  }),
   //new actions for registration flow
   v2UserLogin: email => ({
     type: actions.V2_USER_LOGIN,
@@ -225,6 +243,29 @@ const actionCreators = {
     return ({
       type: actions.VERIFY_RESET_OTP,
       payload: api.verifyResetOtp(body),
+    });
+  },
+
+  shippingAccount: (body) => {
+    return ({
+      type: actions.SHIPPING_ACCOUNT,
+      payload: api.shippingAccount(body),
+    });
+  },
+
+  skipAndContinue: () => {
+    return ({
+      type: actions.SKIP_AND_CONTINUE,
+    });
+  },
+  verifyEmailByLink: token => (dispatch) => {
+    dispatch({
+      type: actions.VERIFY_EMAIL_BY_LINK,
+      payload: api.verifyEmailByLink(token),
+    }).then(() => {
+      dispatch(actionCreators.setVerfied(true));
+    }, () => {
+      dispatch(actionCreators.setVerfied(false));
     });
   },
 

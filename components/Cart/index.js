@@ -15,7 +15,8 @@ import MiniCartBody from './includes/MiniCartBody';
 import FooterBar from '../Footer/index';
 import Slider from '../common/slider';
 import Coupon from '../Cart/CartPaymentSideBar/coupons';
-
+import LoadingBar from '../common/Loader/skeletonLoader';
+import LoaderBarContext from '../helpers/context/loaderBarContext';
 import lang from '../../utils/language';
 
 import main_en from '../../layout/main/main_en.styl';
@@ -80,11 +81,13 @@ class Cart extends Component {
     this.props.cartItemInputCount(id, 'add', selelecItem.max_limit < count ? selelecItem.max_limit : count);
   }
   openSlider = () => {
+    document.getElementsByTagName('BODY')[0].style.overflow = 'hidden';
     this.setState({
       showSlider: true,
     });
   }
   closeSlider = () => {
+    document.getElementsByTagName('BODY')[0].style.overflow = 'auto';
     this.setState({
       showSlider: false,
     });
@@ -99,18 +102,21 @@ class Cart extends Component {
       this.props.track({
         eventName: 'Checkout Started',
       });
-      Router.pushRoute(`/${country}/${language}/payment`);
+      Router.pushRoute(`/${language}/payment`);
     }
   }
 
   removeCartItem(e) {
     const productId = e.currentTarget.getAttribute('data-productId');
+    const cart_scroll_id = e.currentTarget.getAttribute('data_scrollId'); 
     digitalData.cart.item = digitalData.cart.item.filter((item) => item.productInfo.productID !== productId);
     this.props.removeCartItem(e.currentTarget.id, { showToast: true });
+    document.getElementById(cart_scroll_id).scrollIntoView({ behavior: 'smooth' });    
   }
 
   increaseItemCnt(e) {
     const productId = e.target.getAttribute('data-productid');
+    const cart_scroll_id = e.currentTarget.getAttribute('data_scrollId');
     digitalData.cart.item = digitalData.cart.item.map((item) => {
       if (item.productInfo.productID === productId) {
         item.quantity++;
@@ -119,16 +125,19 @@ class Cart extends Component {
       return item;
     });
     this.cartItemCount(e.target.getAttribute('data-id'), 'add', this.props.cartData.items);
+    document.getElementById(cart_scroll_id).scrollIntoView({ behavior: 'smooth' });
   }
 
   decreaseItemCnt(e) {
     const productId = e.target.getAttribute('data-productid');
+    const cart_scroll_id = e.currentTarget.getAttribute('data_scrollId');        
     digitalData.cart.item.forEach((item) => {
       if (item.productInfo.productID === productId) {
         item.quantity--;
       }
     });
     this.cartItemCount(e.target.getAttribute('data-id'), 'remove', this.props.cartData.items);
+    document.getElementById(cart_scroll_id).scrollIntoView({ behavior: 'smooth' });
   }
 
   cartItemCount(id, typ) {
@@ -138,18 +147,20 @@ class Cart extends Component {
 
   addToWishlist(e) {
     const { cartData } = this.props;
-    const listing_id = e.currentTarget.getAttribute('data-id');
-    const item = cartData.items.filter(_item => listing_id == _item.item_id)[0];
+    const cart_id = e.currentTarget.getAttribute('data-id');
+    const cart_scroll_id = e.currentTarget.getAttribute('data_scrollId');
+    const item = cartData.items.filter(_item => cart_id === _item.item_id)[0];
     this.props.addToWishlistAndFetch({
       catalog_id: item.item_id,
       product_id: item.product_id,
       variant_id: item.variant_id,
-      wishlisted_price: item.price,
+      wishlisted_price: item.offer_price,
       wishlisted_currency: item.cur,
     });
-    this.props.removeCartItem(listing_id, {
+    this.props.removeCartItem(cart_id, {
       showToast: false,
     });
+    document.getElementById(cart_scroll_id).scrollIntoView({ behavior: 'smooth' });
   }
 
   addOrRemoveGift(id, val, params) {
@@ -164,6 +175,8 @@ class Cart extends Component {
       cartData, editCartDetails, showCheckOutBtn, isLoading, couponData, getCartResults,
     } = this.props;
     return (
+      <LoaderBarContext.Consumer>
+        {context => (
       <div>
         {
           this.props.showMiniCart
@@ -183,22 +196,26 @@ class Cart extends Component {
             :
               <Fragment>
                 <HeaderBar />
-                <Grid>
-                  <CartBody
-                    count={count}
-                    data={cartData}
-                    showBlocker={showBlocker}
-                    isLoading={isLoading}
-                    addToWishlist={this.addToWishlist}
-                    openSlider={this.openSlider}
-                    removeCartItem={this.removeCartItem}
-                    increaseItemCnt={this.increaseItemCnt}
-                    decreaseItemCnt={this.decreaseItemCnt}
-                    addOrRemoveGift={this.addOrRemoveGift}
-                    checkoutBtnHandler={this.checkoutBtnHandler}
-                    cartStepperInputHandler={this.cartStepperInputHandler}
-                  />
-                </Grid>
+                    <LoadingBar loadComponent={context.loadComponent}
+                      pathname={context.pathname}
+                    >
+                      <Grid>
+                        <CartBody
+                          count={count}
+                          data={cartData}
+                          showBlocker={showBlocker}
+                          isLoading={isLoading}
+                          addToWishlist={this.addToWishlist}
+                          openSlider={this.openSlider}
+                          removeCartItem={this.removeCartItem}
+                          increaseItemCnt={this.increaseItemCnt}
+                          decreaseItemCnt={this.decreaseItemCnt}
+                          addOrRemoveGift={this.addOrRemoveGift}
+                          checkoutBtnHandler={this.checkoutBtnHandler}
+                          cartStepperInputHandler={this.cartStepperInputHandler}
+                        />
+                      </Grid>
+                  </LoadingBar>
                 <FooterBar />
               </Fragment>
         }
@@ -215,6 +232,8 @@ class Cart extends Component {
           </Slider>
         }
       </div>
+      )}
+      </LoaderBarContext.Consumer>
     );
   }
 }

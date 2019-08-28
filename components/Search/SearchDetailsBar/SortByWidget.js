@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { Dropdown, MenuItem } from 'react-bootstrap';
 
 import { languageDefinations } from '../../../utils/lang';
-import { actionCreators } from '../../../store/search';
+import { actionCreators, selectors } from '../../../store/search';
 import SVGComponent from '../../common/SVGComponet';
 
 import lang from '../../../utils/language';
@@ -28,7 +28,7 @@ class SortByWidget extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      sortValue: SEARCH_PAGE.BEST_MATCH,
+      sortValue: props && props.sortValue && props.sortValue.sellingPrice && props.sortValue.sellingPrice === 'desc' ? SEARCH_PAGE.PRICE_HIGH_TO_LOW : props && props.sortValue && props.sortValue.sellingPrice && props.sortValue.sellingPrice === 'asc' ? SEARCH_PAGE.PRICE_LOW_TO_HIGH : SEARCH_PAGE.BEST_MATCH,
     };
     this.sortSelect = this.sortSelect.bind(this);
   }
@@ -72,7 +72,7 @@ class SortByWidget extends Component {
           </select> */}
 
           <Dropdown id="sort-toggle" className={`${styles.width100}`}>
-            <Dropdown.Toggle id="dropdown-custom-components">
+            <Dropdown.Toggle id="dropdown-custom-components" className={styles['pl-0']}>
               <span>{this.state.sortValue}</span>
             </Dropdown.Toggle>
             <Dropdown.Menu className={`${styles.width100} ${styles['p-0']} ${styles['m-0']} ${styles['sort-drop-down']}`}>
@@ -95,6 +95,10 @@ SortByWidget.propTypes = {
   getSearchResults: PropTypes.func.isRequired,
 }
 
+const mapStateToProps = store => ({
+  sortValue: selectors.sortValue(store),
+});
+
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
@@ -103,4 +107,4 @@ const mapDispatchToProps = dispatch =>
     dispatch,
   );
 
-export default connect(null, mapDispatchToProps)(SortByWidget);
+export default connect(mapStateToProps, mapDispatchToProps)(SortByWidget);

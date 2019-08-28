@@ -10,7 +10,7 @@ const Lifestyle = () => React.createElement(
       { className: `${styles['flex']} life-banner-inn ${styles['relative']}` },
       React.createElement(
         'a',
-        { href: '/SAU/en/srp?search=home%20decor&isListed=false' },
+        { href: '/en/search?q=home%20decor&isListed=false' },
         React.createElement('img', { src: `/static/img/landing-page-lifestyle/${lang === 'en' ? 'furnitures' : 'furnitures-ar'}.jpg`, className: 'img-responsive' })
       )
     ),
@@ -157,7 +157,7 @@ const Lifestyle = () => React.createElement(
           React.createElement(
             'div',
             { className: `${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon` },
-            React.createElement(SVGComponent, { clsName: 'poular-cat2', src: 'icons/landing-page-lifestyle/sports-ball' }),
+            React.createElement(SVGComponent, { clsName: 'poular-cat2', src: 'icons/landing-page-lifestyle/sports-gloves' }),
             React.createElement(
               'span',
               { className: `${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}` },
@@ -199,11 +199,11 @@ const Lifestyle = () => React.createElement(
           React.createElement(
             'div',
             { className: `${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon` },
-            React.createElement(SVGComponent, { clsName: 'poular-cat', src: 'icons/landing-page-lifestyle/health' }),
+            React.createElement(SVGComponent, { clsName: 'poular-cat', src: 'icons/landing-page-lifestyle/kitchen-dining' }),
             React.createElement(
               'span',
               { className: `${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}` },
-              'Health Care'
+              'kitchen & dining'
             )
           )
         ),
@@ -248,7 +248,7 @@ const Lifestyle = () => React.createElement(
       React.createElement(
         'span',
         { className: `dec ${styles['fs-12']}` },
-        'Trolley bags, Shoes, Perfumes, Makeup kit, Grooming kit, Trimmers, Slippers, & more\u2026 '
+        'Trolley bags, Shoes, Perfumes, Make-up kit, Grooming kit, Trimmers, Slippers, & more\u2026 '
       ),
       React.createElement(
         'div',

@@ -39,10 +39,11 @@
 .home-style-main .ff-t-i .h-a-l {
   width: calc(50% - 30px);
   display: inline-block;
-  padding: 17px 35px;
+  padding: 0px 35px;
   border-radius: 2px;
   box-shadow: 0 2px 4px 0 rgba(0,0,0,0.04);
   background-color: #fff;
+  padding-bottom: 10px;
   margin: 7px;
 }
 .home-style-main .ff-t-i .e .title,
@@ -52,6 +53,8 @@
   margin-bottom: 17px;
   display: block;
   text-align: left;
+  margin: 0px;
+  padding-top: 7px;
 }
 .home-style-main .ff-t-i .item {
   margin: 0 auto;
@@ -183,7 +186,7 @@
 .home-style-main .display-t-i-e .bredcrums-part a,
 .home-style-main .display-t-i-f .bredcrums-part a,
 .home-style-main .display-t-i-hl .bredcrums-part a {
-  color: initial;
+  color: #666;
 }
 .home-style-main .display-t-i-e .d1,
 .home-style-main .display-t-i-f .d1,
@@ -447,10 +450,6 @@
 }
 .slider-elips {
   width: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-  o-text-overflow: ellipsis;
-  text-overflow: ellipsis;
   float: left;
   display: inline-block;
 }

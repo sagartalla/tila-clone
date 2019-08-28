@@ -68,7 +68,7 @@ const Lifestyle = () => (
           </Col>
           <Col md={1} className={`${styles['pl-0']} ${styles['pr-10']}`}>
             <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon`}>
-              <SVGComponent clsName="poular-cat2" src="icons/landing-page-lifestyle/sports-ball" />
+              <SVGComponent clsName="poular-cat2" src="icons/landing-page-lifestyle/sports-gloves" />
               <span className={`${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}`}>Sports</span>
             </div>
           </Col>
@@ -86,8 +86,8 @@ const Lifestyle = () => (
           </Col>
           <Col md={1} className={`${styles['pl-0']} ${styles['pr-10']}`}>
             <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']} ${styles['bg-white']} ${styles['pt-15']} ${styles['pb-15']} poular-icon`}>
-              <SVGComponent clsName="poular-cat" src="icons/landing-page-lifestyle/health" />
-              <span className={`${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}`}>Health Care</span>
+              <SVGComponent clsName="poular-cat" src="icons/landing-page-lifestyle/kitchen-dining" />
+              <span className={`${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['pop-title']} ${styles['pt-5']}`}>kitchen & dining</span>
             </div>
           </Col>
           <Col md={1} className={`${styles['pl-0']} ${styles['pr-10']}`}>
@@ -107,7 +107,7 @@ const Lifestyle = () => (
       {/* top selling start */}
       <div className={`top-selling-part ${styles['pt-10']}`}>
         <h5 className={`main-title ${styles['fs-16']} ${styles['fontW600']}  ${styles['mb-0']}`}>Top Selling Furniture</h5>
-        <span className={`dec ${styles['fs-12']}`}>Trolley bags, Shoes, Perfumes, Makeup kit, Grooming kit, Trimmers, Slippers, &amp; more… </span>
+        <span className={`dec ${styles['fs-12']}`}>Trolley bags, Shoes, Perfumes, Make-up kit, Grooming kit, Trimmers, Slippers, &amp; more… </span>
         <div className={`top-selling-part-inn ${styles['pt-10']}`}>
           <Col md={2} className={styles['pl-0']}>
             <div className={`top-selling-img ${styles['flex']}`}>

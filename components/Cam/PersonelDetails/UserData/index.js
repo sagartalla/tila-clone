@@ -25,6 +25,7 @@ const UserData = ({
   getUserProfileInfo,
   deactivateUserProfile,
   useractive,
+  getUserInfo,
 }) => {
   if (!useractive) {
     window.location.href = '/';
@@ -35,7 +36,7 @@ const UserData = ({
   }
   getUserProfileInfo();
   return (
-    <div className={`${styles.box} ${styles['mb-20']} ${styles['ipad-mb-15']}`}>
+    <div className={`${styles.box} ${styles['mb-20']} ${styles['ipad-mb-15']} ${styles['right-part-cam']}`}>
       <Row className={`${styles['p-30']} ${styles['m-0']}`}>
         <Col xs={12} md={7}>
           <PersonalInfo />

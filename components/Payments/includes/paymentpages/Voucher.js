@@ -9,6 +9,8 @@ import { actionCreators, selectors } from '../../../../store/payments';
 import { languageDefinations } from '../../../../utils/lang/';
 
 import lang from '../../../../utils/language';
+import { Router } from '../../../../routes';
+import Button from '../../../common/CommonButton';
 
 import main_en from '../../../../layout/main/main_en.styl';
 import main_ar from '../../../../layout/main/main_ar.styl';
@@ -23,12 +25,14 @@ const { PAYMENT_PAGE } = languageDefinations();
 class Voucher extends Component {
   constructor(props) {
     super(props);
+    this.state = {};
     this.proceedToPayment = this.proceedToPayment.bind(this);
+    this.includeWallet = this.includeWallet.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.processData && nextProps.processData.redirect_url) {
-      window.location = nextProps.processData.redirect_url;
+      Router.pushRoute(nextProps.processData.redirect_url);
     }
   }
 
@@ -41,13 +45,28 @@ class Voucher extends Component {
     });
   }
 
+  includeWallet(e) {
+    this.setState({
+      includeWallet: e.target.checked
+    });
+    this.props.refreshTransaction(e.target.checked);
+  }
+
   render() {
-    const { props } = this;
-    const { voucherData, isOnlyVocuher } = props;
+    const { props, state } = this;
+    const { voucherData, isOnlyVocuher, btnLoading } = props;
+    const { includeWallet } = state;
     const { balance, total_amount, amount_to_pay, currency_code, remaining_amount } = voucherData;
     return (
       <div className={`${styles['voucher']} ${styles['p-10']}`}>
-        <h3 className={`${styles['lgt-blue']} ${styles['fs-20']} ${styles['pb-10']} ${styles['fontW300']} ${styles['m-0']}`}>{PAYMENT_PAGE.TILA_CREDIT_USED}</h3>
+        <h3 className={`${styles['lgt-blue']} ${styles['fs-20']} ${styles['fontW300']} ${styles['m-0']}`}>
+          <div className={styles['checkbox-material']}>
+            <input id="include-wallet" type="checkbox" onChange={this.includeWallet} checked={includeWallet || isOnlyVocuher}/>
+            <label for="include-wallet" className={styles['include-wallet-label']}>
+              {PAYMENT_PAGE.TILA_CREDIT_USED}
+            </label>
+          </div>
+        </h3>
         {
           isOnlyVocuher
             ?
@@ -55,32 +74,42 @@ class Voucher extends Component {
             :
             null
         }
-        <div className={`${styles.flex} ${styles['justify-between']}`}>
-          <div className={`${styles.paymentBorder}`}>
-            <span className={`${styles['success-green']} ${styles['fs-12']}`}>{PAYMENT_PAGE.TOTAL_AMOUNT_TO_PAY}</span>
-            <b className={`${styles['pt-5']} ${styles['fs-16']}`}>{total_amount.display_value} {total_amount.currency_code}</b>
-          </div>
-          <div className={`${styles.flex} ${styles['align-center']} ${styles['thick-red-clr']}`}>
-            <span>-</span>
-          </div>
-          <div className={`${styles.paymentBorder}`}>
-            <span className={balance.money_value < amount_to_pay.money_value ? `${styles['thick-red-clr']} ${styles['fs-12']}` : `${styles['success-green']} ${styles['fs-12']}`}>{PAYMENT_PAGE.MONEY_IN_WALLET}</span>
-            <b className={`${styles['pt-5']} ${styles['fs-16']}`}>{balance.display_value} {balance.currency_code}</b>
-          </div>
-          <div className={`${styles.flex} ${styles['align-center']}`}>
-            <span>=</span>
-          </div>
-          <div className={`${styles.paymentBorder}`}>
-            <span className={balance.money_value >= amount_to_pay.money_value ? `${styles['success-green']} ${styles['fs-12']}` : `${styles['thick-red-clr']} ${styles['fs-12']}`}>{PAYMENT_PAGE.REMAINING_AMOUNT_TO_PAY}</span>
-            <b className={`${styles['pt-5']} ${styles['fs-16']}`}>{remaining_amount.display_value} {remaining_amount.currency_code}</b>
-          </div>
-
-        </div>
+        {
+          includeWallet || isOnlyVocuher
+            ?
+            <div className={`${styles.flex} ${styles['justify-between']} ${styles['pt-10']}`}>
+              <div className={`${styles.paymentBorder}`}>
+                <span className={`${styles['success-green']} ${styles['fs-12']}`}>{PAYMENT_PAGE.TOTAL_AMOUNT_TO_PAY}</span>
+                <b className={`${styles['pt-5']} ${styles['fs-16']}`}>{total_amount.currency_code} {total_amount.display_value}</b>
+              </div>
+              <div className={`${styles.flex} ${styles['align-center']} ${styles['thick-red-clr']}`}>
+                <span>-</span>
+              </div>
+              <div className={`${styles.paymentBorder}`}>
+                <span className={balance.money_value < amount_to_pay.money_value ? `${styles['thick-red-clr']} ${styles['fs-12']}` : `${styles['success-green']} ${styles['fs-12']}`}>{PAYMENT_PAGE.MONEY_IN_WALLET}</span>
+                <b className={`${styles['pt-5']} ${styles['fs-16']}`}>{balance.currency_code} {balance.display_value}</b>
+              </div>
+              <div className={`${styles.flex} ${styles['align-center']}`}>
+                <span>=</span>
+              </div>
+              <div className={`${styles.paymentBorder}`}>
+                <span className={balance.money_value >= amount_to_pay.money_value ? `${styles['success-green']} ${styles['fs-12']}` : `${styles['thick-red-clr']} ${styles['fs-12']}`}>{PAYMENT_PAGE.REMAINING_AMOUNT_TO_PAY}</span>
+                <b className={`${styles['pt-5']} ${styles['fs-16']}`}>{remaining_amount.currency_code} {remaining_amount.display_value}</b>
+              </div>
+            </div>
+            :
+            null
+        }
         {
           isOnlyVocuher
             ?
             <div className={styles['mt-20']}>
-              <button onClick={this.proceedToPayment} className={`${styles['fp-btn-primary']} ${styles['fp-btn']} ${styles['border-radius']} ${styles['fp-btn-x-large']}`}>{PAYMENT_PAGE.PAY_USING_TILA_CREDIT}</button>
+            <Button
+                className={`${styles.flex} ${styles.width33} ${styles['border-radius']} ${styles.fontW600} ${styles['text-uppercase']}`}
+                onClick={this.proceedToPayment}
+                btnLoading={btnLoading}
+                btnText={PAYMENT_PAGE.PAY_USING_TILA_CREDIT}
+            />
             </div>
             :
             null
@@ -92,13 +121,15 @@ class Voucher extends Component {
 }
 
 const mapStateToprops = (store) => ({
-  processData: selectors.getProcessData(store)
+  processData: selectors.getProcessData(store),
+  btnLoading: selectors.getLoader(store)
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      makeProcessRequest: actionCreators.makeProcessRequest
+      makeProcessRequest: actionCreators.makeProcessRequest,
+      refreshTransaction: actionCreators.refreshTransaction,
     },
     dispatch,
   );

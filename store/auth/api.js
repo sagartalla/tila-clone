@@ -11,7 +11,7 @@ const { API_TEXT } = languageDefinations();
 
 const cookies = new Cookies();
 
-const getUserInfo = ({ initiateEmailVerification }) => axios.post(`${constants.CMS_API_URL}/api/v1/user/info?initiateEmailVerification=${initiateEmailVerification}`);
+const getUserInfo = ({ initiateEmailVerification }) => axios.post(`${constants.CMS_API_URL}/api/v1/user/info?initiateEmailVerification=${initiateEmailVerification || false}`);
 
 const track = (event, status) => {
   window.appEventData.push({
@@ -35,7 +35,7 @@ const userLogin = params =>
     client_type: 'WEB',
   })).then(({ data, status }) => {
     // cart merge
-    if (status === 200) {
+    if (status === 200 || status === 202) {
       const { username } = params.metadata;
       if (params.channel === 'BASIC_REGISTER') {
         track('SignUp', 'Success');
@@ -51,9 +51,9 @@ const userLogin = params =>
       };
       axios.post('/api/setCookie', {
         data: {
-          auth:cookies.get('auth')
-        }
-      })
+          auth: cookies.get('auth'),
+        },
+      });
       axios.put(`${constants.CART_API_URL}/api/v1/cart/merge`);
       let inputString = '';
       for (const key in PTA_PARAMS) {
@@ -74,6 +74,7 @@ const userLogin = params =>
         return data;
       });
     }
+    // return data;
   })
   // .catch((err) => {
   //   err.response && alert(err.response.data.data.error.message);
@@ -81,20 +82,13 @@ const userLogin = params =>
   // });
 ;
 
-const userLogout = () => {
-  axios.post('/api/logout')
-  .then((res) => {
-    if (res.status === 200) {
-      window.location = `${window.location.origin}/${cookies.get('country')}/${cookies.get('language')}`;
-    }
-  });
-};
+const userLogout = () => axios.post('/api/logout');
 
 const getLoginInfo = () => {
   const userCreds = cookies.get('userCreds');
   return {
     userCreds: userCreds || null,
-    isLoggedIn: !!cookies.get('auth') && (cookies.get('isVerified') === 'true'),
+    isLoggedIn: !!cookies.get('auth'),
     ...(!cookies.get('auth') && { instagramCode: window.localStorage.getItem('instagramCode') || null }),
     isVerified: cookies.get('isVerified') === 'true',
   };
@@ -137,8 +131,8 @@ const removeCity = () => {
     data: {
       shippingInfo: {
         country: shippingInfo.country,
-      }
-    }
+      },
+    },
   });
 };
 
@@ -149,24 +143,37 @@ const savePtaToken = ptaToken => axios.post('/api/setCookie', {
 }).then(() => ptaToken);
 
 const verifyEmail = body => axios.put(`${constants.CMS_API_URL}/api/v1/verification/email/otp`, body).then(({ data }) => {
-  toast(
-    <ToastContent
+  toast(<ToastContent
       msg={API_TEXT.YOUR_EMAIL_IS_VERIFIED}
-      msgType='success'
-    />
-  )
+      msgType="success"
+    />,);
   return { data };
 });
 
 const sendOtpToEmailId = showToast => axios.post(`${constants.CMS_API_URL}/api/v1/verification/email`).then(({ data }) => {
-  if (showToast ? toast(
-    <ToastContent
+  if (showToast ? toast(<ToastContent
       msg={API_TEXT.OTP_SENT_TO_YOUR_MAIL_ID}
-      msgType='success'
-    />
-  ) : '');
+      msgType="success"
+    />,) : '');
   return { data };
 });
+
+const verifyEmailByLink = token => axios.get(`${constants.CMS_API_URL}/api/v1/user/email/verify?token=${token}`, null, {
+  headers: { } }).then(({ data }) => {
+  toast(<ToastContent
+      msg={API_TEXT.YOUR_EMAIL_IS_VERIFIED}
+      msgType='success'
+    />,);
+  return { data };
+});
+
+// return axios.put(`${constants.AUTH_API_URL}/api/v1/sls/lo`, null, {
+//   headers: { 'x-access-token': req.headers['x-access-token'] || '' }
+// }).then((response) => {
+//   if (response && response.status === 200) {
+//     return removeCookies(req,res)
+//   }
+// });
 
 const setVerfied = isVerified => axios.post('/api/setCookie', {
   data: {
@@ -179,54 +186,95 @@ const getDomainCountries = () => axios.get(`${constants.TRANSFORMER_API_URL}/fpt
 
 // New Registration Flow API's
 
-const v2UserLogin = email => axios.get(`${constants.CMS_API_URL}/api/v1/user?email=${email}`).then(res => Object.assign({}, res, {
-  data: {
-    ...res.data,
-    email,
-  },
-}));
+const v2UserLogin = (email) => {
+  const encodeEmail = encodeURIComponent(email);
+  return axios.get(`${constants.CMS_API_URL}/api/v1/user/check?email=${encodeEmail}`).then(res => Object.assign({}, res, {
+    data: {
+      ...res.data,
+      email,
+    },
+  }));
+};
 
 const showUserInfo = (param) => {
-  return axios.get(`${constants.CMS_API_URL}/api/v1/user/password/forgot?email=${param}`);
+  const encodeEmail = encodeURIComponent(param);
+  return axios.get(`${constants.CMS_API_URL}/api/v1/user/password/forgot?email=${encodeEmail}`);
 };
 
 const resetPassword = (body) => {
-  return axios.post(`${constants.CMS_API_URL}/api/v1/user/password/reset`, body).then((data) => {
+  body = {
+    ...body,
+    channel: 'BASIC_REGISTER',
+    client_type: 'WEB',
+    tenant: 'CUSTOMER',
+  };
+  return axios.post(`${constants.AUTH_API_URL}/api/v1/password/reset`, body).then((data) => {
+    if (data.status === 200) {
+      axios.post('/api/setCookie', {
+        data: {
+          auth: data.data,
+        },
+      });
+    }
     return data;
-  }).catch((error) => {
-    return error.response.data;
-  })
-}
+  }).catch((error) => error.response.data);
+};
 
-const forgotPassword = (body) => {
-  return axios.post(`${constants.CMS_API_URL}/api/v1/user/password/forgot`, body).then(({data}) => {
-    toast.success(API_TEXT.OTP_SENT_TO_YOUR_MAIL_ID)
-    return data;
-  }).catch((error) => {
-    return error.response.data;
-  });
-}
+const forgotPassword = (body) => axios.post(`${constants.CMS_API_URL}/api/v1/user/password/forgot/email`, body).then(({data}) => {
+  toast(
+      <ToastContent
+        msg={API_TEXT.OTP_SENT_TO_YOUR_MAIL_ID}
+        msgType='success'
+      />
+  )
+  return data;
+}).catch((error) => {
+  return error.response.data;
+});
 
-const getMobileOtp = ( email ) => {
-  return axios.get(`${constants.CMS_API_URL}/api/v1/user/password/forgot/mobile/otp?email=${email}`).then((data) => {
-    toast.success('OTP sent to your mobile number');
+const getMobileOtp = (email) => {
+  const encodeEmail = encodeURIComponent(email);
+  return axios.get(`${constants.CMS_API_URL}/api/v1/user/password/forgot/mobile/otp?email=${encodeEmail}`).then((data) => {
+    toast(<ToastContent
+        msg="OTP sent to your mobile number"
+        msgType="success"
+      />,);
     return data;
-  }).catch((error) => {
-    return error.response.data;
-  });
-}
+  }).catch((error) => error.response.data);
+};
 
-const verifyResetOtp = (body) => {
-  return axios.post(`${constants.CMS_API_URL}/api/v1/user/password/forgot/mobile/otp`, body).then((data) => {
-    return data;
-  }).catch((error) => {
-    return error.response.data;
-  });
-}
+const verifyResetOtp = (body) => axios.post(`${constants.CMS_API_URL}/api/v1/user/password/forgot/verify`, body).then((data) => {
+  return data;
+}).catch((error) => {
+  return error.response.data;
+});
+
+const shippingAccount = body => axios.put(`${constants.CMS_API_URL}/api/v1/user/account/edit`, body).then(({ data }) => ({ data }));
 
 
 export default {
-  userLogin, userLogout, getLoginInfo, setCountry, setSessionID, deriveCity, setCity, getDomainCountries,
-  removeCity, setLanguage, savePtaToken, verifyEmail, sendOtpToEmailId, getUserInfo, setVerfied, track,
-  v2UserLogin, resetPassword, forgotPassword, showUserInfo, getMobileOtp, verifyResetOtp,
+  userLogin,
+  userLogout,
+  getLoginInfo,
+  setCountry,
+  setSessionID,
+  deriveCity,
+  setCity,
+  getDomainCountries,
+  removeCity,
+  setLanguage,
+  savePtaToken,
+  verifyEmail,
+  sendOtpToEmailId,
+  getUserInfo,
+  setVerfied,
+  track,
+  v2UserLogin,
+  resetPassword,
+  forgotPassword,
+  showUserInfo,
+  getMobileOtp,
+  verifyResetOtp,
+  shippingAccount,
+  verifyEmailByLink,
 };

@@ -3,8 +3,11 @@ import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
 import { languageDefinations } from '../../../../utils/lang';
 import EditPassword from './EditPassword';
-import EditPhone from './EditPhone';
+import SetPassword from './SetPassword';
+import dynamic from 'next/dynamic';
+//import EditPhone from './EditPhone';
 
+const EditPhone = dynamic(import('./EditPhone'));
 const { CONTACT_INFO_MODAL } = languageDefinations();
 const UpdateContactInfoModal = (props) => {
   const { element } = props || "";
@@ -12,7 +15,9 @@ const UpdateContactInfoModal = (props) => {
     <div>
       {
         element == "password" ?
-          <EditPassword {...props} />
+          <EditPassword {...props} /> :
+          element == "setPassword" ?
+          <SetPassword {...props} />
           : element == "phone" ?
             <EditPhone
               {...props}

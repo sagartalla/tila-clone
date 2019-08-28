@@ -1,0 +1,407 @@
+@import '../../../layout/main/executables.styl';
+
+  .ff-t-i
+    text-align center
+    .e, .h-a-l
+      width calc(50% - 6px)
+      display inline-block
+      padding 17px 35px
+      border-radius 2px
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.04);
+      background-color white
+      .title
+        font-family ProximaNova-SBold
+        color #101820
+        margin-bottom 17px
+        display block
+        text-align left
+    .item
+      width 100px
+      margin 0 auto
+      .slider-elips
+        width 100%
+        white-space nowrap
+        overflow hidden
+        o-text-overflow ellipsis
+        text-overflow ellipsis
+        float left
+        display inline-block
+      img
+        width 87px
+        height 87px
+        margin 0 auto
+.l-item
+  box-shadow 0 2px 4px 0 rgba(0, 0, 0, 0.04)
+  background-color #ffffff
+  border-bottom-right-radius 14px
+
+.l-img-container
+  width 100%
+  height 392px
+  overflow hidden
+.l-img
+  max-height 100%
+  max-width 100%
+  object-fit contain
+  margin 0 auto
+  width 100%
+  height 100%
+.l-title
+  overflow hidden
+  position relative
+  line-height 1.2em
+  max-height 2.4em 
+  text-align justify
+  padding-right 1em
+  &:before
+    content '...'
+    position absolute
+    right 12px
+    bottom 0
+    background white
+  &:after
+    content ''
+    position absolute
+    right 12px
+    width 1em
+    height 1em
+    margin-top 0.2em
+    background white
+
+.img-icon
+  width 23px
+  height 26px
+
+.display-t-i-e, .display-t-i-f, .display-t-i-hl, .display-t-i-cb
+  width calc(100% - 10px)
+  position relative
+  margin auto
+  margin-top: 5%;
+  margin-bottom 2%
+  .title
+    color: #00c7b1;
+    top: -5%;
+    position absolute
+    font-weight 600
+    padding 5px
+  .bredcrums-part
+    color #6f5d5d
+    padding 5px
+    a
+      color: initial;
+  .d1, .d2
+    width 66.56%
+    display inline-block
+    &>div
+      padding 5px
+      // height 324px
+  .d3
+    &>div
+      padding 5px
+    .d-sub
+      // height 324px
+  .d3 .d3-sub
+    // height 662px
+    img
+      object-fit fill
+  .d1, .d2, .d3
+    position relative
+    display inline-flex
+    img
+      width 100%
+      height 100%
+      object-fit fill
+    .shadow::after
+      position absolute
+      width calc(100% - 10px)
+      height 35%
+      top 5px
+      left 5px
+      background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.66), rgba(0, 0, 0, 0));
+      content ''
+    &>div
+      display inline-block
+      // padding 2px 5px
+      position relative
+      &>span
+        color #fff
+        position absolute
+        top 15px;
+        left 25px;
+        z-index 1
+        font-weight 600
+        &>span:nth-child(1)
+          display block
+      .btn
+        border-radius 26px 0 26px 0
+        background-color #41bc98
+        position absolute
+        right 5px
+        bottom 5px
+        color #fff
+        font-family: ProximaNova-Thin;
+        width: 36%;
+        height: 10%;
+        padding: 0.6em 1.1em;
+        border-radius: 0 0 1.5em 0;
+        cursor pointer
+        display: flex
+        justify-content center
+        font-weight 600
+        .arrow
+          position: absolute;
+          width: 10%;
+          top: 28%;
+          right: 14%;
+      .lite
+        font-family ProximaNova-Thin
+  .d1
+    &>div:nth-child(1)
+      width 37.9%
+    &>div:nth-child(2)
+      width 62.1%
+      .btn
+        width 24%;
+  .d2
+    &>div:nth-child(2)
+      width 37.9%
+    &>div:nth-child(1)
+      width 62.1%
+      .btn
+        width 24%;
+  .d3
+    position absolute
+    top 0
+    width 33.45%
+    &>div
+      width: 100%;
+      .btn
+        height: 6%;
+        width: 30%;
+.display-t-i-f,.display-t-i-cb
+  .title
+    color #888b8d
+  .d1, .d2, .d3
+    .shadow::after
+      content none
+    &>div
+      &>span
+        color #5c5b5b
+      .btn
+        background-color #5c5b5b
+.main-slider-part
+  width 100%
+
+.slick-itm
+  width 100%
+  img
+    width 100%
+
+.inside-bnr
+  object-fit contain
+
+.banner-prt-main
+  display flex
+  .banner-inn-prt
+    padding 0 5px
+    display flex
+    .sub-banr-img 
+      width 100%
+      img
+        width 100%
+.bannerSpacing
+  margin 0 5px
+.wth
+  width 100%
+
+.leftArrow
+  width 45px
+  position absolute
+  z-index 9
+  top 32%
+  left -20px
+  opacity 0.6
+
+.rightArrow
+  width 45px
+  position absolute
+  z-index 9
+  top 32%
+  right -20px
+  opacity 0.2
+
+.ft_card
+  border 1px solid light-gray-color
+  border-bottom-right-radius 16px
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.04);
+  min-height 345px
+  background white
+  margin 0 5px
+  display flex !important
+  width auto !important
+  .ft_card_img
+    height 250px
+    img
+      width 100%
+      height 100%
+      object-fit scale-down
+  .ft_card_btns
+    display none
+    .ft_card_btn
+      width 120px
+      padding 8px 0
+
+.ft_card
+  &:hover .ft_card_title
+    display none
+
+.ft_card
+  &:hover .ft_card_btns
+    display flex
+
+.deals-title
+  display inline-block
+  overflow hidden
+  position relative
+  line-height 1.2em
+  height 28px !important
+  text-align justify
+  margin-right -1em
+  padding-right 1em
+  &:before
+    content '...'
+    position absolute
+    right 0
+    bottom -5px
+  &:after
+    content ''
+    position absolute
+    right 0
+    width 1em
+    height 1.9em
+    margin-top 0.2em
+    background white
+
+.display-t-i-cb
+  .img-responsive
+    max-width 100%
+    max-height 100%
+    object-fit contain    
+
+
+.flex-prop
+  display flex
+  width 100%
+
+  .d12
+    width 33.3%
+    padding 0 5px
+
+  .d11
+    display flex
+    width 66.7%
+    padding 0 5px
+
+  .rightBanner
+    width 50%
+
+    .d13, .d14
+      display flex
+    .d13
+      padding-bottom 10px
+    .d13 > div, .d14 > div
+      width 33.3%
+      padding 0 5px
+
+.cbt3a
+  width 100%
+  .heading 
+    text-align center
+    h1 
+      font-size 48px  
+      font-weight 600
+  .wrapper
+    display flex
+
+    .img1 
+      width 27.75%
+      display flex
+      padding 0 5px
+    
+    .img2 
+      width 30.3%
+      padding 0 5px
+      display flex
+  
+    .img3 
+      width 41.96%
+      display flex
+      padding 0 5px
+  
+.cbt3a img 
+  width 100%
+  object-fit contain
+
+.breadcrumbML
+  padding-left 5px
+
+.cbt2aBanner
+  display flex
+  img 
+    object-fit contain
+  .F1banner
+    width 58.5%
+    padding 0 5px
+
+  .F2banner
+    width 41.62%
+    padding 0 5px
+
+.fashionBanners   
+  padding 0 5px
+  .fBanners1
+    .fb3
+      width 33.3%
+  .fBanners2
+    display flex
+    justify-content center
+    width 71.08%
+    margin auto
+    margin-top -10%
+    .fb2, .fb1
+      padding 0 5px
+
+.bannerSpacing
+  margin 30px 0
+  .fHeading
+    font-size 48px
+    font-weight 600
+
+.imageRounded
+  border-radius 50%
+
+.fashionBannerSpacing
+  margin 60px 0
+  .pdL
+    padding-bottom 20px
+    .fHeading
+      font-size 48px
+      font-weight 600
+      line-height 0.46
+    span
+      color #666666
+      font-size 16px
+    
+
+.fashion-main-slider
+  margin 0 80px
+  .fSlider 
+    text-align center
+    .slick-itm
+      padding 0px 12.5px
+
+.display-banner-i
+  width calc(100% - 10px)
+  position relative
+  margin auto
+  margin-bottom 2%

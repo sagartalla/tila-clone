@@ -3,12 +3,16 @@ import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Cookie from 'universal-cookie';
 import { actionCreators, selectors } from '../../../store/cam/wishlist';
+import { selectors as cartSelectors } from '../../../store/auth';
 import SVGComponent from '../../common/SVGComponet';
 import WishlistBody from './includes/WishlistBody';
 import CartBottomPopup from './includes/CartBottomPopup';
 import CartMiniWishList from './includes/CartMiniWishList';
 import Pagination from '../../common/Pagination';
+import MiniWishlist from './includes/MiniWishlist';
+import { Link, Router } from '../../../routes';
 
 // import { isAddedToCart } from '../../../store/cart/selectors';
 import lang from '../../../utils/language';
@@ -18,7 +22,12 @@ import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from './wishlist_en.styl';
 import styles_ar from './wishlist_ar.styl';
 
-const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+const cookies = new Cookie();
+
+const language = cookies.get('language') || 'en';
+const country = cookies.get('country') || 'SAU';
+
+const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
 class Wishlist extends Component {
   constructor(props) {
@@ -89,14 +98,30 @@ class Wishlist extends Component {
     notifyMe(target.getAttribute('data-wish-id'));
   }
 
+  moveToWishlist = () => {
+    const { isLoggedIn } = this.props;
+    if (isLoggedIn) {
+      Router.push(`/${language}/customer/wishlist`);
+    }
+  }
+
   render() {
     const {
-      results, cartMiniWishList, getPageDetails, wishListCount, showLoader,
+      results, cartMiniWishList, getPageDetails, wishListCount, showLoader, showMiniWishlist,
     } = this.props;
     const { showCartPageBtmPopup, currentPage } = this.state;
     return (
-      <div className={`${styles.wishlist} ${styles['pl-5']}`}>
+      <div className={`${styles.wishlist}`}>
         {
+          showMiniWishlist ?
+            <MiniWishlist
+              items={results}
+              addToCart={this.addToCart}
+              wishListCount={wishListCount}
+              moveToWishlist={this.moveToWishlist} 
+              deleteItem={this.deleteItem}
+              notifyMe={this.notify}                                                     
+            /> :
           cartMiniWishList ?
             <Fragment>
               <CartMiniWishList
@@ -117,13 +142,12 @@ class Wishlist extends Component {
             </Fragment>
             :
             showLoader ?
-            <div className={`${styles['wishlist-result']} ${styles['flex-center']} ${styles['justify-center']} ${styles.width100}`}>
-            <div className={`${styles['loader-div']} ${styles['align-center']}`}>
+              <div className={`${styles['wishlist-result']} ${styles['flex-center']} ${styles['justify-center']} ${styles.width100}`}>
+              <div className={`${styles['loader-div']} ${styles['align-center']}`}>
               <SVGComponent
                 clsName={styles['loader-styl']}
                 src="icons/common-icon/circleLoader"
-              >
-              </SVGComponent>
+               />
             </div>
             </div> :
             <WishlistBody
@@ -135,14 +159,13 @@ class Wishlist extends Component {
             />
         }
         {
-          !cartMiniWishList &&
+          !cartMiniWishList && !showMiniWishlist &&
           <Pagination
-            totalSize={getPageDetails.total_pages > 1 ? (getPageDetails.total_pages - 1): 0}
+            totalSize={getPageDetails.total_pages > 1 ? (getPageDetails.total_pages - 1) : 0}
             pageNeighbours={0}
-            onPageChanged = {this.onPageChanged}
+            onPageChanged= {this.onPageChanged}
             currentPage={currentPage}
-          >
-          </Pagination>
+           />
         }
       </div>
     );
@@ -154,6 +177,7 @@ const mapStateToProps = store => ({
   getPageDetails: selectors.getPaginationDetails(store),
   wishListCount: selectors.getProductsDetails(store).length,
   showLoader: selectors.getLoader(store),
+  isLoggedIn: cartSelectors.getLoggedInStatus(store),
 });
 
 const mapDispatchToProps = dispatch =>

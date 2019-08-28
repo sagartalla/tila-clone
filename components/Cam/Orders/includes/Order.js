@@ -14,7 +14,7 @@ import main_ar from '../../../../layout/main/main_ar.styl';
 import styles_en from '../orders_en.styl';
 import styles_ar from '../orders_ar.styl';
 
-const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
 const { ORDERS } = languageDefinations();
 const cookies = new Cookies();
@@ -36,7 +36,7 @@ const Order = ({ order, getInvoice }) => {
   const fetchInvoice = () => getInvoice(order.id);
 
   const routeChange = () => {
-    Router.push(`/${country}/${language}/cam/orders/${order.id}`);
+    Router.push(`/${language}/customer/orders/${order.id}`);
   }
   return (
     <div className={`${styles['order-item-wrap']} ${styles['box-shadow']} ${styles['mt-20']} ${styles['mb-20']} ${styles['p-20']}`}>
@@ -59,7 +59,7 @@ const Order = ({ order, getInvoice }) => {
           </div>
         </div>
         <div>
-          <a href={`/${country}/${language}/cam/orders/${order.id}`} className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['left-radius']} ${styles['text-uppercase']}`}>
+          <a href={`/${language}/customer/orders/${order.id}`} className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['left-radius']} ${styles['text-uppercase']}`}>
             {ORDERS.TRACK_ORDER}
           </a>
         </div>
@@ -76,6 +76,11 @@ const Order = ({ order, getInvoice }) => {
               isCancelable={orderItem.isCancelable}
               isReturnable={orderItem.isReturnable}
               isExchangable={orderItem.isExchangable}
+              isDamageProtectionAvailable={orderItem.isDamageProtectionAvailable}
+              isWarrantyAvailable={orderItem.isWarrantyAvailable}
+              listingId={orderItem.listingId}
+              tilaPolicy={orderItem.tilaPolicy}
+              tuinId={orderItem.tuinId}
             />
           ))}
         </Col>
@@ -90,10 +95,10 @@ const Order = ({ order, getInvoice }) => {
               {order.orderDate}
             </span>
           </div>
-          <a href={`/${country}/${language}/help/answers/orders#${order.id}`}>
+          <a href={`/${language}/help/answers/orders#${order.id}`}>
             <span className={`${styles['p-5']} ${styles['black-color']} ${styles['flex-center']} ${styles['ml-10']}`}>
               <SVGComponent clsName={`${styles['help-icon']}`} src="icons/help-icon/help" />
-              &nbsp;&nbsp;{ORDERS.NEED_HELP}?
+              &nbsp;&nbsp;{ORDERS.NEED_HELP} <span className={`${lang === 'en' ? '' : styles['flip-questionmark']}`}>?</span>
             </span>
           </a>
 
@@ -102,16 +107,19 @@ const Order = ({ order, getInvoice }) => {
           <div className={`${styles['flx-space-bw']}`}>
             <span className={`${styles.flex} ${styles.pointer}`}>
               {order.invoice_id &&
-              <span className={styles.flex} onClick={fetchInvoice}>
-                <span>{ORDERS.REQUEST_INVOICE}&nbsp;</span>
-                <span>
-                  <SVGComponent clsName={`${styles['down-arrow']}`} src="icons/down-arrow/down-arrow" />
+                <span className={styles.flex} onClick={fetchInvoice}>
+                  <span>{ORDERS.REQUEST_INVOICE}&nbsp;</span>
+                  <span>
+                    <SVGComponent clsName={`${styles['down-arrow']}`} src="icons/down-arrow/down-arrow" />
+                  </span>
                 </span>
-              </span>
               }
             </span>
             <span className={`${styles['ml-10']} ${styles['fs-16']}`}>
-              <span>{ORDERS.ORDER_TOTAL}:</span> <span className={`${styles.fontW600} ${styles['light-gry-clr']}`}>{order.orderTotal}</span>
+              <span className={`${styles['thick-gry-clr']}`}>{ORDERS.ORDER_TOTAL} :</span> <span>
+              <span className={`${styles['fs-14']} ${styles['thick-gry-clr']}`}>{order.orderCurrency}</span>&nbsp;
+              <span className={`${styles.fontW600}`}>{order.orderAmount}</span>
+              </span>
             </span>
           </div>
         </Col>

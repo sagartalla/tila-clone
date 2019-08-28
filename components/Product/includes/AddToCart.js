@@ -50,17 +50,22 @@ class AddToCart extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (this.state.buyNow == true && nextProps.isAddedToCart) {
-      Router.pushRoute(`/${country}/${language}/payment`);
+      Router.pushRoute(`/${language}/payment`);
     }
   }
 
   addToCart() {
     const { listingId } = this.props.offerInfo
-    const { productData } =this.props
-    this.props.addToCartAndFetch({
+    const { productData,tilaPolicy } =this.props
+    let options = {
       listing_id: listingId,
       product_id: productData,
-    });
+    }
+    if(tilaPolicy.length > 0) {
+      options['policies_applied'] = tilaPolicy
+    }
+    console.log('options', options);
+    this.props.addToCartAndFetch(options);
   }
 
   buyNow() {
@@ -102,7 +107,7 @@ class AddToCart extends Component {
               <Button
                 className={`${styles['fs-16']} ${styles['ipad-fs-14']} ${styles['add-to-card-btn']} ${styles['text-uppercase']} ${styles['flex']}`}
                 disabled={isLoading || isAddedToCart}
-                onClick={isAddedToCart === false && this.addToCart}
+                onClick={isAddedToCart === false ? this.addToCart : undefined}
                 btnLoading={btnLoading}
                 btnText={isAddedToCart ? '' : PDP_PAGE.ADD_TO_CART}
                 showImage={isAddedToCart && 'icons/cart/added-cart-icon'}
@@ -127,7 +132,7 @@ const mapStateToProps = (store) => {
     btnLoading: selectors.getBtnLoaders(store),
     isLoading: selectors.getLoadingStatus(store),
     error: selectors.getErrorMessege(store),
-    isAddedToCart: selectors.isAddedToCart(store)
+    isAddedToCart: selectors.isAddedToCart(store),
   });
 };
 

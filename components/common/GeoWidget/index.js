@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Dropdown, MenuItem } from 'react-bootstrap';
 import { bindActionCreators } from 'redux';
+import { Router } from '../../../routes';
 import _ from 'lodash';
 import Cookie from 'universal-cookie';
 import { selectors as productSelectors, actionCreators as productActionCreators } from '../../../store/product';
@@ -25,9 +26,10 @@ class GeoWidget extends Component {
     const shippingInfo = cookies.get('shippingInfo');
     super(props);
     this.state = {
+      displayCity: '',
+      showCitiesData: false,
       ...props.geoShippingData,
       ...shippingInfo,
-      showCitiesData: false,
     };
     this.deriveCity = this.deriveCity.bind(this);
     this.onChangeCity = this.onChangeCity.bind(this);
@@ -38,8 +40,9 @@ class GeoWidget extends Component {
   }
 
   componentDidMount() {
-    const { getCitiesByCountryCode } = this.props;
+    const { getGeoShippingData, getCitiesByCountryCode } = this.props;
     getCitiesByCountryCode(cookies.get('country'));
+    getGeoShippingData();
     document.addEventListener('click', this.handleOutsideClick, false);
   }
 
@@ -71,7 +74,7 @@ class GeoWidget extends Component {
       country,
       displayCity,
     }).then(() => {
-      location.reload();
+      Router.pushRoute(`${window.location.pathname}${window.location.search}`)
     });
   }
 
@@ -117,10 +120,10 @@ class GeoWidget extends Component {
   }
   deleteCity() {
     this.setState({
-      displayCity: null,
+      displayCity: '',
     });
     this.props.removeCity().then(() => {
-      location.reload();
+      Router.pushRoute(`${window.location.pathname}${window.location.search}`)
     });
   }
 
@@ -130,20 +133,19 @@ class GeoWidget extends Component {
     } = this.props;
     const { showCitiesData } = this.state;
     return (
-      <div className={`${styles['flex-center']} ${styles['delovery-inn']}`}>
+      <div className={`${styles['flex-center']} ${styles['delovery-inn']} ${styles['pr-5']} ${isPdp ? styles['width50'] : ''}`}>
         {
           (!hideLabel)
             ?
               <span className={`${styles['flex-center']} ${styles['delivery-part']}`}>
                 <SVGCompoent clsName={`${styles['map-icon']}`} src="icons/common-icon/black-map-location" />
                 <span className={`${styles.fontW600} ${styles['pl-5']} ${styles['pr-5']}`}>{SEARCH_PAGE.DELIVER_TO}:</span>
-
               </span>
             :
             null
         }
         <div
-          className={`${styles['auto-suggestions-wrap']}`}
+          className={`${styles['auto-suggestions-wrap']} ${styles['flex']} ${styles['justify-flex-end']}`}
           ref={(el) => { this.filterRef = el; }}
         >
           <Dropdown id="search-toggle">
@@ -152,7 +154,10 @@ class GeoWidget extends Component {
                 type="text"
                 value={this.state.displayCity}
                 className={`${styles['fs-14']} ${styles['delivery-input']} ${isPdp ? styles['pdp-border-btm'] : ''}`}
+                // onInput={this.onChangeCity}
                 onChange={this.onChangeCity}
+                style={{ width: `${this.state.displayCity.length * 8}px` }}
+                contentEditable
               />
             </Dropdown.Toggle>
             <Dropdown.Menu className={`${styles['p-0']} ${styles['m-0']} ${styles['auto-suggestions-list']}`}>
@@ -168,7 +173,9 @@ class GeoWidget extends Component {
           {
             this.state.displayCity
               &&
-                <div onClick={this.deleteCity} className={styles['delete-btn']}>x</div>
+                <div onClick={this.deleteCity} className={styles['delete-btn']}>
+                  <img className={styles['img-responsive']} src={"/static/img/bg-img/delivery-remove-icon.png"} />
+                </div>
           }
         </div>
       </div>
@@ -189,6 +196,7 @@ const mapDispatchToProps = dispatch =>
       autoCompleteCity: productActionCreators.autoCompleteCity,
       getCitiesByCountryCode: productActionCreators.getCitiesByCountryCode,
       removeCity: actionCreators.removeCity,
+      getGeoShippingData: actionCreators.getGeoShippingData,
     },
     dispatch,
   );

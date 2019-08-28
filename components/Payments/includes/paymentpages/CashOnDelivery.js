@@ -12,9 +12,11 @@ import { Router } from '../../../../routes';
 
 import Captcha from '../../../common/Captcha';
 import CaptchaContent from '../../../common/Captcha/CaptchaContent'
-
-import EditPhone from '../../../Cam/PersonelDetails/UserData/EditPhone';
+import dynamic from 'next/dynamic';
+//import EditPhone from '../../../Cam/PersonelDetails/UserData/EditPhone';
 import Button from '../../../common/CommonButton';
+
+import Voucher from './Voucher';
 
 const { PAYMENT_PAGE } = languageDefinations();
 
@@ -26,12 +28,12 @@ import styles_en from '../../payment_en.styl';
 import styles_ar from '../../payment_ar.styl';
 
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+const EditPhone = dynamic(import('../../../Cam/PersonelDetails/UserData/EditPhone'));
 
 class CashOnDelivery extends React.Component {
   constructor() {
     super();
     this.state = {
-      checked: false,
       showContinueButton: false,
       showPayBtn: false,
       nextStep: 'captcha',
@@ -48,12 +50,9 @@ class CashOnDelivery extends React.Component {
   }
   handleChange() {
     const {data} = this.props;
-    this.setState({
-      checked: !this.state.checked
-    })
-    this.props.disableAllOthers({
-      except: data.type
-    });
+    // this.props.disableAllOthers({
+    //   except: data.type
+    // });
   }
 
   onCaptchaSuccess({captcha_request_id}) {
@@ -90,7 +89,7 @@ class CashOnDelivery extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.processData && nextProps.processData.redirect_url) {
-      window.location = nextProps.processData.redirect_url;
+      Router.pushRoute(nextProps.processData.redirect_url);
     }
   }
 
@@ -104,23 +103,14 @@ class CashOnDelivery extends React.Component {
     });
   }
   render() {
-    const { data, showLoading, profileInfo } = this.props;
+    const { data, showLoading, profileInfo, voucherData } = this.props;
     return <div>
-        <div className={`${styles['cash-on-dly-points']}`}>
+    <Voucher voucherData={voucherData} />
+        <div className={`${styles['cash-on-dly-points']} ${styles['pt-25']} ${styles['pb-15']}`}>
     <Row className={styles['pl-40']}>
       <Col md={12}>
         <h4 className={`${styles['fontW300']} ${styles['fs-20']} ${styles['lgt-blue']} ${styles['mt-0']} ${styles['pb-10']}`}>{PAYMENT_PAGE.PAY_ON_DELIVERY}</h4>
     {
-      this.state.nextStep === 'captcha' && (
-        <div className={styles['checkbox-material']}>
-          <input id="pay-delivery" type="checkbox" onChange={ this.handleChange } checked={ this.state.checked }/>&nbsp;
-          <label htmlFor="pay-delivery"> {PAYMENT_PAGE.I_AGREE_TO_PAY_COD} </label>
-        </div>
-      )
-    }
-    {
-      this.state.checked
-        ?
           {
             captcha:  <Captcha
               onCaptchaSuccess={this.onCaptchaSuccess}
@@ -141,8 +131,6 @@ class CashOnDelivery extends React.Component {
             userData = {profileInfo.contactInfo}
             />
           }[this.state.nextStep]
-        :
-          null
     }
     </Col>
     <Col md={10} sm={12} xs={12}>
@@ -162,9 +150,9 @@ class CashOnDelivery extends React.Component {
         this.state.showPayBtn &&
             (
               <Button
-                className={`${styles['fs-16']} ${styles['fontW600']} ${styles['new-card-btn']} ${styles['border-radius']} ${styles['ht-40']} ${styles.width70}`}
+                className={`${styles['fs-16']} ${styles['fontW600']} ${styles['new-card-btn']} ${styles['border-radius']} ${styles['ht-40']} ${styles.width70} ${styles['text-uppercase']}`}
                 onClick={this.proceedToPayment}
-                btnText={PAYMENT_PAGE.PAY + ' ' + data.amount_to_pay.display_value + ' ' + data.amount_to_pay.currency_code + ' ' + PAYMENT_PAGE.ON_DELIVERY}
+                btnText={PAYMENT_PAGE.PAY + ' ' + data.amount_to_pay.currency_code + ' ' + data.amount_to_pay.display_value + ' ' + PAYMENT_PAGE.ON_DELIVERY}
                 hoverClassName="hoverBlueBackground"
                 btnLoading={showLoading}
 

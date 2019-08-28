@@ -1,5 +1,7 @@
 @import '../../../layout/main/executables.styl';
 .profile-main-part
+  .right-part-cam
+    box-shadow 0 0 35px 0 rgba(0, 0, 0, 0.06)
 
   .deactive-account-lable
     border-top 1px solid rgba(215, 215, 215, 0.3)
@@ -57,6 +59,9 @@
     padding 40px 0
     .personal-info-img-icon
       width 90px
+    .personal-info-set-img-icon
+      width 195px
+      height 175px
   .personal-info-main
     p
       width 60%
@@ -89,7 +94,6 @@
   .update-profile-btn
     border-radius 0
     border-bottom-right-radius 20px
-    text-transform uppercase
 
   .personal-info-upadate-main
     width 90%
@@ -108,6 +112,15 @@
 
   .gender-unselect>span
     color base-font
+
+  .mobile-otp-part
+    .country-code
+       position relative
+    img
+      width 20px
+    .country-dropdown
+      border-bottom 1px solid light-border !important
+      border-radius 0  
 
 .profile-dts
   font-size 12px
@@ -215,6 +228,9 @@
   .mobiletick-icon-styl
     width 101px
     height 146px
+  .setpasword-mobiletick-icon-styl
+     width 195px
+     height 175px
 @keyframes slideOpen {
   from {right: -800px;}
   to {right: 0;}
@@ -229,3 +245,29 @@
 
 .hideDiv
   display none
+
+.set-password-toltp
+  .question
+    width-height-radius(20px, 20px, 50%)
+    border 0.25px solid generic-gray-color
+  .setpassword-tool-tip
+      right -115px
+      display none
+      text-align left
+      .table
+        line-height 1.6
+      &:before
+          right 117px
+          left auto
+    &:hover
+        .setpassword-tool-tip
+          display flex
+
+
+.bg-FB-icon
+  width 10px
+  height 16px
+
+.bg-GOOGLE-icon
+  width 16px
+  height 16px

@@ -36,16 +36,16 @@ const getCompareInfo = (store) => {
   }
 
   const b = _.uniq(compareInfo.reduce((acc, map) => {
-      return [...acc, ...Object.keys((map.product_details.catalog_details.attribute_map))];
-    }, [])).filter((attrName) => {
-      let include = true;
-      let attValue;
-      for (const index in compareInfo) {
-        attValue = compareInfo[index].product_details.catalog_details.attribute_map[attrName];
-        include = include && (attValue ? attValue.visible : true);
-      }
-      return include;
-    }).map((attrName) => {
+    return [...acc, ...Object.keys((map.product_details.catalog_details.attribute_map))];
+  }, [])).filter((attrName) => {
+    let include = true;
+    let attValue;
+    for (const index in compareInfo) {
+      attValue = compareInfo[index].product_details.catalog_details.attribute_map[attrName];
+      include = include && (attValue ? attValue.visible : true);
+    }
+    return include;
+  }).map((attrName) => {
     let attributeCategoryName = '';
     let displayString = '';
     for (const index in compareInfo) {
@@ -62,7 +62,7 @@ const getCompareInfo = (store) => {
     return {
       name: displayString,
       items: compareInfo.map((map) => {
-        const { attribute_values, name} = map.product_details.catalog_details.attribute_map[attrName] || {};
+        const { attribute_values, name } = map.product_details.catalog_details.attribute_map[attrName] || {};
         return ({
           id: (name || '') + shortid.generate(),
           value: attribute_values || [{ value: 'N/A' }],
@@ -75,11 +75,14 @@ const getCompareInfo = (store) => {
     compareCount: compareInfo.length,
     features: _.uniqBy(_.map(compareInfo[0].product_details.catalog_details.attribute_map, (attr, key) => ({
       key: attr.attribute_category_name.split(' ').join('_').toLowerCase(),
-      value: attr.attribute_category_name
-    })), 'value'),
+      value: attr.attribute_category_name,
+      visible: attr.visible,
+    })).filter((a) => a.visible), 'value'),
     products: _.map(compareInfo, (product) => {
       const variant = product.variant_preferred_listings ? Object.keys(product.variant_preferred_listings)[0] : [];
       const variant_info = product.variant_preferred_listings ? product.variant_preferred_listings[variant][0] : {};
+      const variant_key = product && product.product_details && product.product_details.product_details_vo && product.product_details.product_details_vo.cached_variant && product.product_details.product_details_vo.cached_variant.length > 0  ? Object.keys(product.product_details.product_details_vo.cached_variant)[0] : null;
+      const tuinId = product && product.product_details && product.product_details.product_details_vo && product.product_details.product_details_vo.cached_variant && product.product_details.product_details_vo.cached_variant.length > 0 ? product.product_details.product_details_vo.cached_variant[variant_key].attribute_map.tuin.attribute_values[0].value : null
       return {
         id: product.product_id,
         listing_id: variant_info.listing_id,
@@ -92,10 +95,11 @@ const getCompareInfo = (store) => {
         currency: variant_info.selling_price_currency,
         offer: 0,
         name: product.product_details.product_details_vo.cached_product_details.attribute_map.calculated_display_name.attribute_values[0].value,
+        tuin: tuinId,
       };
     }),
     productsFeatures: fp.compose(
-      fp.map.convert({'cap': false })((productFeature, key) => {
+      fp.map.convert({ 'cap': false })((productFeature, key) => {
         return ({
           key: key.split(' ').join('_').toLowerCase(),
           name: key,
@@ -128,7 +132,7 @@ const getCmpData = store => store.compareReducer.data.compareItems || {
   products: [],
 };
 
-const getCompareItemsCount = () => JSON.parse(localStorage.getItem('compare')) || {
+const getCompareItemsCount = () => () => JSON.parse(localStorage.getItem('compare')) || {
   products: [],
 };
 

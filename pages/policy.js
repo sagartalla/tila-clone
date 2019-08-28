@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import NoSSR from 'react-no-ssr';
 import { bindActionCreators } from 'redux';
 import withRedux from 'next-redux-wrapper';
 import makeStore from '../store';
 import Layout from '../layout/main'
 import Policy from '../components/Policy';
 import Base, { baseActions } from './base';
-import { actionCreators, selectors } from '../store/landing';
 
 class PolicyPage extends Base {
   pageName = 'POLICY';
   static async getInitialProps({ store, query, isServer, req }) {
-    // await store.dispatch(actionCreators.getPages());
+    // await store.dispatch(actionCreators.getPage());
     return { isServer };
   }
 
@@ -20,7 +20,9 @@ class PolicyPage extends Base {
     return (
       <div>
         <Layout>
-          <Policy query={url.query} />
+          <NoSSR>
+            <Policy query={url.query} key={url.query.name}/>
+          </NoSSR>
         </Layout>
       </div>
     )
@@ -38,7 +40,6 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       ...baseActions,
-      getPages: actionCreators.getPages,
     },
     dispatch,
   )

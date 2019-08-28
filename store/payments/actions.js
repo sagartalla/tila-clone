@@ -7,6 +7,7 @@ const actions = {
   EMPTY_PAYMENT_PAYLOAD: 'EMPTY_PAYMENT_PAYLOAD',
   MAKE_PROCESS_REQUEST: 'MAKE_PROCESS_REQUEST',
   GET_REDIRECT: 'GET_REDIRECT',
+  REFRESH_TRANSACTION: 'REFRESH_TRANSACTION',
 };
 
 const actionCreators = {
@@ -51,8 +52,15 @@ const actionCreators = {
       type: actions.GET_REDIRECT,
       payload: apis.getRedirectApi(params)
     }
+  },
+  refreshTransaction: (useWallet) => (dispatch, getState) => {
+    const state = getState();
+    const { paymentsReducer } = state;
+    return dispatch({
+      type: actions.REFRESH_TRANSACTION,
+      payload: apis.refreshTransactionApi(paymentsReducer.data.transactionUrl, useWallet),
+    })
   }
-
 };
 
 export { actions, actionCreators };

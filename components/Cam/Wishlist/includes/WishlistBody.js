@@ -22,7 +22,7 @@ const cookies = new Cookies();
 const language = cookies.get('language') || 'en';
 const country = cookies.get('country') || 'SAU';
 
-const percentage = (a, b) => Math.floor(((a - b) / b) * 100);
+const percentage = (a, b) => Math.floor(((b - a) / b) * 100);
 
 const WishlistBody = (props) => {
   const {
@@ -30,42 +30,41 @@ const WishlistBody = (props) => {
   } = props;
   const { WISH_LIST_PAGE, PDP_PAGE } = languageDefinations();
 
-  const getPriceAlert = (a, b, cur) => {
-    if (a === b) return null;
-    let str = null;
-    const percent = percentage(a, b);
-    let priceVal = a - b;
-    if (percent > 0) {
+  const getPriceAlert = (status, wishlisted_price, changed_price, cur) => {
+    let str = '';
+    if (status === 'SAME') return str;
+    const priceVal = Math.abs(wishlisted_price - changed_price);
+    if (priceVal === 0) return str;
+    if (status === 'INCREASED') {
       str = (
         <span className={`${styles['thick-red-clr']} ${styles.flex}`}>
           <SVGComponent clsName={`${styles['alert-icon']}`} src="icons/increase/increase" />
-          {`${WISH_LIST_PAGE.PRICE_INCREASED_BY} ${priceVal.toFixed(2)} ${cur} (${percent}%)`}
+          {`${WISH_LIST_PAGE.PRICE_INCREASED_BY} ${cur} ${priceVal.toFixed(2)}`}
         </span>
       );
-    } else if (percent < 0) {
+    } else {
       str = (
         <span className={`${styles['success-green']} ${styles.flex}`}>
           <SVGComponent clsName={`${styles['alert-icon']}`}src="icons/decrease/decrease" />
-          {`${WISH_LIST_PAGE.PRICE_DECRECED_BY} ${priceVal.toFixed(2)} ${cur} (${percent}%)`}
+          {`${WISH_LIST_PAGE.PRICE_DECRECED_BY} ${cur} ${priceVal.toFixed(2)}`}
         </span>
       );
     }
     return str;
   };
-  const routeChange = (variantId, productId, catalogId, itemType) => {
-    Router.push(`/${country}/${language}/product?productId=${productId}${variantId ? `&variantId=${variantId}` : ''}&catalogId=${catalogId}&itemType=${itemType}`);
+  const routeChange = (variant_id = '', product_id, catalog_id, listing_id = '', name, tuin_id) => {
+    Router.push(`/${language}/pdp/${name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${tuin_id ? `${tuin_id}/` : ''}${listing_id}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`);
   };
   return (data.length === 0 ?
     <div className={styles['no-wishlist-icon']}>
       <div className={`${styles.flex} ${styles['no-wishlist-icon-inn']}`}>
         <SVGComponent clsName={`${styles['deleno-wish-list-icon']}`} src="icons/wish-list/no-wishlist" />
         <h4 className={`${styles['fs-26']} ${styles['t-c']} ${styles['pt-40']}`}>{WISH_LIST_PAGE.NO_WISHLIST_LABEL}</h4>
-        <span className={styles['thick-gry-clr']}>{WISH_LIST_PAGE.DONT_WAIT}</span>
-        <a href={`/${country}/${language}`} className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-x-large']} ${styles['right-radius']} ${styles['text-uppercase']} ${styles.fontW600} ${styles['mt-40']}`}>{WISH_LIST_PAGE.START_SHOPPING}</a>
+        <a href={`/${language}`} className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-x-large']} ${styles['right-radius']} ${styles['text-uppercase']} ${styles.fontW600} ${styles['mt-40']}`}>{WISH_LIST_PAGE.START_SHOPPING}</a>
       </div>
     </div>
     :
-    <div>
+    <div className={`${styles['pl-5']}`}>
       <div className={`${styles.flex}`}>
         <Col md={12} sm={12} xs={12} className={`${styles['pl-0']}`}>
           <h4 className={`${styles['mt-0']} ${styles['mb-20']} ${styles.fontW300}}`}>
@@ -77,8 +76,8 @@ const WishlistBody = (props) => {
         {
           data.length > 0 && data.map((item, index) => {
             const {
-              wishlist_id, listing_id, brand_name, name, img, price, cur, inventory_count,
-              wishlisted_price, mrp, variant_id, product_id, catalog_id, itemType, buttonValue
+              wishlist_id, listing_id, brand_name, name, img, price, cur, inventory_count, changed_percentage, changed_price,
+              changed_status, wishlisted_price, mrp, variant_id, product_id, catalog_id, itemType, buttonValue, tuin_id,
             } = item;
             return (
               <div key={index} className={`${styles['thick-border-btm']} ${styles['p-30-20']} ${styles['mb-wishlist-part']}`}>
@@ -86,7 +85,7 @@ const WishlistBody = (props) => {
                   <Col md={2} xs={2} className={styles['m-p-0']}>
                     <div
                       className={`${styles['flex-center']} ${styles['justify-center']} ${styles.pointer} ${styles['mb-wishlist-part-img']}`}
-                      onClick={() => routeChange(variant_id, product_id, catalog_id, itemType)}
+                      onClick={() => routeChange(variant_id, product_id, catalog_id, listing_id, name, tuin_id)}
                     >
                       <img className={styles.img} src={`${constants.mediaDomain}/${img}`} />
                     </div>
@@ -94,12 +93,12 @@ const WishlistBody = (props) => {
                   <Col md={10} xs={10}>
                     <Col md={8} xs={8} className={styles['pl-0']}>
                       <h5 className={`${styles['mt-0']} ${styles['mb-0']} ${styles['thick-blue']}`}>{brand_name}</h5>
-                      <h5 className={`${styles['lgt-gry-clr']} ${styles.pointer} ${styles['light-gry-clr']}`} onClick={() => routeChange(variant_id, product_id, catalog_id, itemType)}>{name}</h5>
+                      <h5 className={`${styles['lgt-gry-clr']} ${styles.pointer} ${styles['light-gry-clr']}`} onClick={() => routeChange(variant_id, product_id, catalog_id, itemType, name, tuin_id)}>{name}</h5>
                       <div className={`${styles['mt-30']} ${styles['m-t-0']} ${styles['m-fs-12']}`}>
                         {inventory_count > 0 ?
                           <button
                             id={listing_id}
-                            data-cart-res={true}
+                            data-cart-res
                             data-wish-id={wishlist_id}
                             className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['left-radius']} ${styles['add-to-btn']}`}
                             onClick={buttonValue ? addToCart : () => {}}
@@ -122,18 +121,20 @@ const WishlistBody = (props) => {
                         <span id={wishlist_id} className={`${styles.absolute} ${styles['delete-icon-part']}`} onClick={deleteItem}>
                           <SVGComponent clsName={`${styles['delete-icon']}`} src="icons/delete-icon/delete-icon" />
                         </span>
-                        <h4 className={`${styles.fontW600} ${styles['light-gry-clr']} ${styles['mt-25']} ${styles['ff-b']}`}><span className={`${styles['fs-20']} ${styles['m-fs-18']}`}>{price} {cur}</span></h4>
-                        {
-                          variant_id && percentage(price, mrp) <= -5 ?
-                            <span className={`${styles.flex} ${styles['flex-center']}`}>
+                        <h4 className={`${styles.fontW600} ${styles['light-gry-clr']} ${styles['mt-25']} ${styles['ff-b']}`}><span className={`${styles['fs-20']} ${styles['m-fs-18']}`}>
+                        <span className={`${styles['fs-14']}`}>{cur}</span>&nbsp;
+                        <span>{price}</span>
+                        </span></h4>
+                        {variant_id && percentage(price, mrp) > 5 ?
+                          <span className={`${styles.flex} ${styles['flex-center']}`}>
                             <span className={`${styles['success-green']} ${styles.flex}`}>{percentage(price, mrp)}%</span>&nbsp;&nbsp;&nbsp;
-                            <strike className={`${styles['label-gry-clr']} ${styles['fs-12']}`}>{mrp} {cur}</strike>
+                            <strike className={`${styles['label-gry-clr']} ${styles['fs-12']}`}>{cur} {mrp}</strike>
                           </span> : ''
                         }
-                        {wishlisted_price && wishlisted_price > 0 && price && cur && wishlisted_price.toString() !== price && getPriceAlert(price, wishlisted_price, cur)}
-                        {wishlisted_price && wishlisted_price > 0 && wishlisted_price.toString() !== price &&
+                        {getPriceAlert(changed_status, wishlisted_price, changed_price, cur)}
+                        {price && cur && wishlisted_price && wishlisted_price > 0 && wishlisted_price.toString() !== price &&
                         <span className={`${styles['thick-gry-clr']}`}>
-                          {WISH_LIST_PAGE.ITEM_WAS} {wishlisted_price} {cur} {WISH_LIST_PAGE.WHEN_ADDED_TO_WISHLIST}
+                          {WISH_LIST_PAGE.ITEM_WAS} {cur} {wishlisted_price} {WISH_LIST_PAGE.WHEN_ADDED_TO_WISHLIST}
                         </span>}
                       </div>
                     </Col>

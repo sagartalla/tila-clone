@@ -15,6 +15,9 @@ import main_en from '../../layout/main/main_en.styl';
 import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './help_en.styl';
 import styles_ar from './help_ar.styl';
+import { languageDefinations } from '../../utils/lang';
+
+const { HNS } = languageDefinations();
 
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
@@ -56,6 +59,9 @@ class Orders extends Component {
         orders: [nextProps.ordersDetailData]
       })
     }
+    if(this.props.fetchPaginatedRes !== nextProps.fetchPaginatedRes) {
+      this.getOrders();
+    }
   }
   getOrders = () => {
     this.state.currentOrderPage < this.state.totalOrderPages && this.props.getOrderHistory(this.state.currentOrderPage);
@@ -81,13 +87,13 @@ class Orders extends Component {
   renderSupportBox = () => (
     <div className={styles['SupportBoxContainer']}>
       <div className={`${styles['fwBolder']} ${styles['blackColor']}`}>
-        Issue still not resolved ?
+        {HNS['ISSUE_NOT_RESOLVED']}
       </div>
       <div>
-        Feel free to talk to us about any queries or feedback. Customer satisfaction is our highest priority.
+        {HNS['ISSUE_NOT_RESOLVED_MSG']}
       </div>
       <div>
-        <div className={styles['contactContainer']} style={{position: 'static'}}>
+        <div className={styles['contactContainer2']} style={{position: 'static'}}>
           {ContactTabs.map(this.props.renderContactCard(this.state.selectedOrder, this.state.selectedIssue))}
         </div>
       </div>
@@ -117,19 +123,19 @@ class Orders extends Component {
     const { title, image_url } = variant_info;
     const [order_item_id] = order_item_ids;
     const isSelected = this.state.selectedOrder ? this.state.selectedOrder.order_item_ids[0] === order_item_id : false;
-    const orderURL =`/${country}/${language}/cam/orders/${order_id}`
+    const orderURL =`/${language}/customer/orders/${order_id}`
     return (
       <div key={order_item_id} className={styles['bB']} onClick={this.selectOrder(orderItemObj)}>
         <div className={`${styles['facp']} ${styles['ht-110']} ${styles['p-10']}`}>
           <div className={styles['orderImgContainer']}><img className={styles['imgContain']} src={`${constants.mediaDomain}/${image_url}`} /></div>
           <div className={styles['orderItemTitle']}>{title}</div>
           <div className={styles['orderIssueContainer']}>
-            <div className={styles['SelectIssueButton']}>Select Issue</div>
-            <div className={`${styles['m-5']} ${styles['fs-12p']}`}>{`Order Status - ${status} - `}<a href={orderURL}>View detail</a></div>
+            <div className={styles['SelectIssueButton']}>{HNS['SELECT_ISSUE']}</div>
+            <div className={`${styles['m-5']} ${styles['fs-12p']}`}>{`${HNS['ORDER_STATUS']} - ${status} - `}<a href={orderURL}>{HNS['VIEW_DETAIL']}</a></div>
           </div>
         </div>
         <div className={`${isSelected ? `${styles['bT']} ${styles['ht-auto']}` : styles['ht-0']} ${styles['overflow-hidden']} ${styles['orderIssueListContainer']}`}>
-          <h5 className={styles['fwBolder']}>SELECT YOUR ISSUE</h5>
+          <h5 className={styles['fwBolder']}>{HNS['SELECT_YOUR_ISSUE']}</h5>
           {issueKeys.map(this.renderIssues(order_item_id))}
         </div>
       </div>
@@ -151,14 +157,14 @@ class Orders extends Component {
       isLoggedIn ?
         <div onScroll={this.handleOrdersScroll} className={styles['ordersContentContainer']}>
           <div className={styles['orderContents']}>
-            <h4>SELECT ORDER WITH ISSUE</h4>
-            <a href={`/${country}/${language}/cam/orders/`} className={styles['myOrderBtn']}>
-              My Orders
+            <h4>{HNS['SELECT_ORDER_WITH_ISSUE']}</h4>
+            <a href={`/${language}/customer/orders/`} className={styles['myOrderBtn']}>
+              {HNS['MY_ORDERS']}
             </a>
           </div>
           {this.state.orders.map(this.renderOrders)}
         </div>
-      : <div>Please Sign in to view your orders</div>
+      : <div>{HNS['SIGN_IN_MSG']}</div>
 
     )
   }

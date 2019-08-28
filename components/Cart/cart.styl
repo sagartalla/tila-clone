@@ -25,6 +25,7 @@
   .cart-box
     margin-bottom 0
     border-radius 4px 4px 0 0
+    position relative
     .cart-price-toltp
       .cart-tool-tip
         right -8px
@@ -41,7 +42,7 @@
     .out-of-stock
       z-index 1
       width 96%
-      height 176px
+      height calc(100% - 30px)
       background: rgba(255, 255, 255, 0.8);
     .card-box-inn-img
       width: 100%;
@@ -84,11 +85,11 @@
         width 16px
         height 16px
 
-    .move-to-wishlist
-      border-right 1px solid rgba(151,151,151,0.3);
-
   .alrt-message-part
     border-radius: 4px 4px 0 0;
+
+  .break-word
+    word-wrap break-word
 
   .warranty-part
     background-color: rgba(249, 249, 249, 0.8);
@@ -127,6 +128,10 @@
     color tila-blk
     width 45px
 
+.no-cart-icon-svg
+  .no-cart-img
+    width 175px
+
 .min-items-list
   &:hover
     .min-delete-icon
@@ -141,6 +146,7 @@
     .secure-checkout
       width 17px
       height 21px
+      margin-right: 7px
 
 .cross-strike::after
   content ''
@@ -168,6 +174,55 @@
 .sidebar-position
   position sticky !important
   top 80px
+
+.not-shippable {
+  border 1px solid thick-red-arrow
+  background-color light-red-color
+  border-radius 3px
+  .not-shipping-font {
+    font-size 12px
+  }
+}
+
+.down-icon
+  width 12px
+
+.warranty-icon
+   width 33px
+
+.cross-icon
+  display block
+  width 14px
+
+.panel-title
+  border 1px solid generic-gray-color
+
+.panel-heading
+  padding 7px 15px !important
+
+.panel-width
+ a
+  width 100%
+  text-decoration none
+
+.warranty-values
+ padding 4px 15px
+
+.panel-body-border
+  border-top 1px solid generic-gray-color
+  padding 7px 15px !important
+  padding-bottom 0 !important
+
+.add-warranty-btn
+  background white !important
+  color tila-blk !important
+  padding 2px 20px !important
+
+.warranty-radio-button
+  border-right 2px solid light-brdr
+
+.warranty-margin
+  margin 10px 0
 
 @media screen and (min-device-width: 320px) and (max-device-width: 766px) and (orientation : portrait){
   .cart-price-label {

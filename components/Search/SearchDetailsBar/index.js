@@ -41,7 +41,7 @@ class SearchDetailsBar extends Component {
 
   querySearch = (e) => {
     let dataSearchQuery = e.currentTarget.dataset.querysearch;
-    Router.pushRoute(`/${country}/${language}/srp?search=${dataSearchQuery}&disableSpellCheck=true&${Object.entries(this.props.optionalParams).map(([key, val]) => `${key}=${val}`).join('&')}`);
+    Router.pushRoute(`/${language}/search?q=${dataSearchQuery}&disableSpellCheck=true&${Object.entries(this.props.optionalParams).map(([key, val]) => `${key}=${val}`).join('&')}`);
   }
 
   handleWaypointEnter() {
@@ -62,18 +62,18 @@ class SearchDetailsBar extends Component {
     return (
       <Waypoint onEnter={this.handleWaypointEnter} onLeave={this.handleWaypointLeave}>
         <div className={styles['search-results-wrap']}>
-          <Fragment>
+          <div className={styles['details-inn-wrap']}>
               <div className={`${styles['flx-space-bw']} ${styles['pb-15']} ${styles['items-list-show']} ${styles['ipad-flex-clm']}`}>
                 <div className={`${styles['flex-center']} ${styles['search-val-part']}`}>
                   <h4 className={`${styles['meta-info']} ${styles['mt-0']} ${styles['mb-0']} ${styles['pr-10']} ${styles['fs-14']} ${styles['fontW300']}`}>
                     {
                       spellCheckResp ?
                       <a href="javascript: void(0)" onClick={this.querySearch} className={`${styles['black-color']} ${styles['fontW600']}`} data-querysearch={spellCheckResp[query]}>
-                        <b className={styles['fs-14']}>{`${spellCheckResp[query]}`}</b>
+                        <b className={`${styles['fs-14']} ${styles['search-ellipsis']}`}>{`${spellCheckResp[query]}`}</b>
                         <span className={`${styles['fs-10']} ${styles['textColor']}`}>({ SEARCH_PAGE.AUTO_CORRECTED }):</span>
                       </a>
                       :
-                      <div className={`${styles['no-h1']} ${styles['fs-14']}`}>{finalQuery && this.capitalize(finalQuery.split('-').join(' '))}<span className={styles['fontW300']}>:</span> </div>
+                      <div className={`${styles['no-h1']} ${styles['fs-14']} ${styles['search-ellipsis']}`} title={finalQuery}>{finalQuery && this.capitalize(finalQuery.split('-').join(' '))}<span className={styles['fontW300']}>:</span></div>
                     }
                     <span className={`${styles['pl-5']} ${styles['fs-14']}`}>{ results.totalCount.toLocaleString('en') } { SEARCH_PAGE.SEARCH_ITEMS }</span>
                   </h4>
@@ -107,7 +107,7 @@ class SearchDetailsBar extends Component {
               <NoSSR>
                 <AppliedFilters />
               </NoSSR>
-            </Fragment>
+            </div>
         </div>
       </Waypoint>
     );
@@ -116,7 +116,6 @@ class SearchDetailsBar extends Component {
 
 
 const mapStateToProps = (store) => ({
-  categoryId: selectors.getCategoryId(store),
   query: selectors.getQuery(store),
   categoryQuery:selectors.getCategorySearchQuery(store),
   results: selectors.getSearchResutls(store),

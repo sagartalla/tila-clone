@@ -23,9 +23,11 @@ const HeaderBar = props => (
   <div className={`${styles['header-container']}`}>
     <div className={`${styles['header-container-inn']} ${ props.showFitlers ? styles['faded'] : {} }`}>
       <Grid>
-        <Row className={`${styles['flex-center']} ${styles['pb-10']} ${styles['pt-10']} ${styles['border-b']}`}>
+        <Row className={`${styles['flex-center']} ${styles['pb-10']} ${styles['pt-10']} ${styles['border-b']} ${styles['header-inn-wrap']}`}>
           <Col md={1} sm={2}>
-            <Logo />
+            <NoSSR>
+              <Logo />
+            </NoSSR>              
           </Col>
           <Col md={7} sm={5}>
             {
@@ -50,7 +52,9 @@ const HeaderBar = props => (
             null
           } */}
           <Col md={4} sm={5}>
-            <ActionBar hideLogin={props.hideLogin} />
+            <NoSSR>
+              <ActionBar hideLogin={props.hideLogin} />
+            </NoSSR>
           </Col>
         </Row>
       </Grid>

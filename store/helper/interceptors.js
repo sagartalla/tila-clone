@@ -61,9 +61,6 @@ const notifySentry = (err) => {
       scope.setExtra(`statusCode`, err.response.status);
       scope.setExtra(`reqHeaders`, err.config.headers);
       scope.setExtra(`resHeaders`, err.response.headers);
-      if (req.user) {
-        scope.setUser({ id: req.user.id, email: req.user.email });
-      }
   });
   Sentry.captureException(err);
 };
@@ -88,12 +85,16 @@ const errorInterceptor = (err) => {
       if (err.response.status === '403') {
         cookies.remove('auth');
       }
-      toast(
-        <ToastContent
-          msg={err.response.data.message || err.response.data.data.error.message}
-          msgType='error'
-        />
-      )
+      const subMessege = err.response.data.sub_errors && err.response.data.sub_errors.map(e => e.message).join(' ')
+      const msg = `${err.response.data.message || ''} ${subMessege ? `: ${subMessege}` : ''}`.trim();
+      if(msg) {
+        toast(
+          <ToastContent
+            msg={msg}
+            msgType='error'
+          />
+        )
+      }
       notifySentry(err);
     }
   } catch (e) {
@@ -102,6 +103,7 @@ const errorInterceptor = (err) => {
   return Promise.reject(err);
 }
 
+axios.defaults.timeout = 60000;
 axios.interceptors.request.use(_.compose(configModifer));
 axios.interceptors.response.use(null, _.compose(errorInterceptor));
 

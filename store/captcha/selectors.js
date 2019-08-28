@@ -1,5 +1,5 @@
 const getCaptcha = (store) => {
-  if(store.captchaReducer.data.images){
+  if(store.captchaReducer.data && store.captchaReducer.data.images){
     return {
       ...store.captchaReducer.data,
       images: store.captchaReducer.data.images.map((a) => {
@@ -15,7 +15,7 @@ const getCaptcha = (store) => {
 }
 
 const getVerification = (store) => {
-  if(store.captchaReducer.data.status){
+  if(store.captchaReducer.data && store.captchaReducer.data.status){
     return store.captchaReducer.data.status;
   }else{
     return '';

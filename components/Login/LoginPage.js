@@ -21,14 +21,13 @@ const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...s
 const { LOGIN_PAGE, ORDER_PAGE } = languageDefinations();
 
 class LoginPage extends React.Component {
-  constructor() {
-    super();
-    const email = localStorage.getItem('remember') ? JSON.parse(localStorage.getItem('remember')).email : '';
+  constructor(props) {
+    super(props);
     this.validations = new FormValidator([
       {
         field: 'email',
         method: this.emptyEmail,
-        message: 'Please fill the email',
+        message: 'Please enter email ID',
         validWhen: false,
       },
       {
@@ -40,7 +39,7 @@ class LoginPage extends React.Component {
       },
     ]);
     this.state = {
-      email,
+      email: props.activeEmailId || '',
       validation: this.validations.valid(),
     };
   }
@@ -80,48 +79,54 @@ class LoginPage extends React.Component {
   }
 
   render() {
-    const { loadingStatus } = this.props;
+    const { loadingStatus, activeEmailId } = this.props;
     const { email, validation } = this.state;
     return (
       <div className={`${styles['login-form']} ${styles['flx-space-bw']} ${styles['flex-colum']}`}>
         <div>
           <Row>
-            <Col md={5} xs={12} sm={5}>
-              <h2 className={`${styles['fs-18']} ${styles.fontW600}`}>{LOGIN_PAGE.LOGIN}</h2>
+            <Col md={12} xs={12} sm={12}>
+              <h2 className={`${styles['fs-18']} ${styles['t-c']} ${styles.fontW600}`}>{LOGIN_PAGE.LOGIN_SIGNUP}</h2>
             </Col>
-            <Col md={7} xs={12} sm={7}>
+            {/* <Col md={7} xs={12} sm={7}>
               <h2 className={`${styles['fs-18']} ${styles.fontW600}`}>{LOGIN_PAGE.LOGIN_ENTER_EMAIL}</h2>
-            </Col>
+            </Col> */}
           </Row>
           <Row className={`${styles['pt-30']} ${styles.flex}`}>
-            <Col md={5} xs={12} sm={5} className={`${styles.relative} ${styles.flex} ${styles['flex-colum']} ${styles['justify-center']} ${styles['pr-20']} ${styles['border-rt']}`}>
+            <Col md={5} xs={6} sm={6} className={`${styles.relative} ${styles.flex} ${styles['flex-colum']} ${styles['justify-center']} ${styles['pr-30']} ${styles['border-rt']}`}>
               <SocialLogin>
                 {([handleSocialLogin]) => (
                   <NoSSR>
-                    <div onClick={handleSocialLogin('facebook')} className={`${styles['flex-center']} ${styles.pointer} ${styles['border-lg']} ${styles['border-radius4']} ${styles['mb-5']} ${styles['p-5']}`}>
-                      <a className={`${styles.flex} ${styles['ml-15']}`}>
-                        <SVGComponent clsName={`${styles['bg-FB-icon']} ${styles['mr-10']}`} src="icons/social-icons/bg-facebook" />
-                      </a>
-                      {LOGIN_PAGE.FACEBOOK}
-                    </div>
                     <div onClick={handleSocialLogin('google')} className={`${styles['flex-center']} ${styles.pointer} ${styles['border-lg']} ${styles['border-radius4']} ${styles['mb-5']} ${styles['p-5']}`}>
                       <a className={`${styles.flex} ${styles['ml-15']}`}>
                         <SVGComponent clsName={`${styles['bg-GOOGLE-icon']} ${styles['mr-10']}`} src="icons/social-icons/bg-google" />
                       </a>
                       {LOGIN_PAGE.GOOGLE}
                     </div>
+                    <div onClick={handleSocialLogin('instagram')} className={`${styles['flex-center']} ${styles.pointer} ${styles['border-lg']} ${styles['border-radius4']} ${styles['mb-5']} ${styles['p-5']}`}>
+                      <a className={`${styles.flex} ${styles['ml-15']} ${styles['pr-10']}`}>
+                        <img clsName={`${styles['bg-GOOGLE-icon']} ${styles['mr-10']}`} src="/static/img/bg-img/instagram.png" />
+                      </a>
+                      {LOGIN_PAGE.INSTAGRAM}
+                    </div>
+                    <div onClick={handleSocialLogin('facebook')} className={`${styles['flex-center']} ${styles.pointer} ${styles['border-lg']} ${styles['border-radius4']} ${styles['mb-5']} ${styles['p-5']}`}>
+                      <a className={`${styles.flex} ${styles['ml-15']}`}>
+                        <SVGComponent clsName={`${styles['bg-FB-icon']} ${styles['mr-10']}`} src="icons/social-icons/bg-facebook" />
+                      </a>
+                      {LOGIN_PAGE.FACEBOOK}
+                    </div>
                   </NoSSR>
                 )}
               </SocialLogin>
               <span className={`${styles.absolute} ${styles['bg-white']} ${styles.right0} ${styles['p-5']} ${styles['fs-10']} ${styles['border-lg']} ${styles['or-tag']}`} >OR</span>
             </Col>
-            <Col md={7} xs={12} sm={7} className={`${styles['pl-30']}`}>
+            <Col md={7} xs={6} sm={6} className={`${styles['pl-30']}`}>
               <form onSubmit={this.submit}>
                 <div className={`${styles['fp-input']} ${styles['pb-10']}`}>
                   <input
                     type="text"
                     value={email}
-                    autoComplete={false}
+                    autoComplete="off"
                     className={styles['m-fs-16']}
                     onChange={this.onChangeField}
                     onBlur={this.handleValidation}
@@ -147,7 +152,7 @@ class LoginPage extends React.Component {
             </Col>
           </Row>
         </div>
-        <div className={`${styles['termes-label']} ${styles['mb-15']} ${styles['mt-10']} ${styles['fs-12']} ${styles['t-c']}`}>{LOGIN_PAGE.BY_LOGIN_I_AGREE_TO_TERMS} <a href="">{LOGIN_PAGE.T_AND_C}, {LOGIN_PAGE.PRIVACY} {LOGIN_PAGE.AND} {LOGIN_PAGE.COOKIE_POLICY}</a></div>
+        <span className={`${styles['m-20']} ${styles['mt-0']} ${styles['t-c']} ${styles['fs-12']} ${styles['register-policy-gray']}`}>{LOGIN_PAGE.BY_SIGNUP_IN_I_AGREE_TO_TERMS } <span className={`${styles['text-blue']} ${styles.fontW600}`}><a href="/en/policy/user-terms-and-conditions" target="_blank">{LOGIN_PAGE.T_AND_C}</a></span>, <span className={`${styles['text-blue']} ${styles.fontW600}`}><a href="/en/policy/privacy-policy" target="_blank">{LOGIN_PAGE.PRIVACY}</a></span> {LOGIN_PAGE.AND} <span className={`${styles['text-blue']} ${styles.fontW600}`}><a href="/en/policy/cookie-policy" target="_blank">{LOGIN_PAGE.COOKIE_POLICY}</a></span> {LOGIN_PAGE.NAME_TILA}</span>
       </div>
     );
   }
@@ -156,11 +161,13 @@ class LoginPage extends React.Component {
 
 const mapStateToProps = store => ({
   loadingStatus: selectors.getLoadingStatus(store),
+  activeEmailId: selectors.getActiveEmailId(store),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(
   {
     userLogin: actionCreators.v2UserLogin,
+    v2CurrentFlow: actionCreators.v2CurrentFlow,
     // getLoginInfo: actionCreators.getLoginInfo,
     // resetLoginError: actionCreators.resetLoginError,
     // track: actionCreators.track,

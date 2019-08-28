@@ -22,7 +22,7 @@ import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './compare_en.styl';
 import styles_ar from './compare_ar.styl';
 
-const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
 const { COMPARE, PDP_PAGE } = languageDefinations();
 
@@ -92,6 +92,16 @@ class Compare extends Component {
     });
   }
 
+  selectAllChecks = () => {
+    const { selectedGroups } = this.state;
+    Object.keys(selectedGroups).forEach((feature) => {
+      selectedGroups[feature] = true;
+    });
+    this.setState({
+      selectedGroups,
+    });
+  }
+
   selectBrand = ({ target }) => {
     if (target.value) {
       this.setState({
@@ -139,6 +149,7 @@ class Compare extends Component {
                 <div className={styles['compare-product-inn']}>
                   <h5 className={`${styles['flx-space-bw']}`}>
                     <span className={`${styles.fontW600} ${styles['fs-16']}`}>{COMPARE.FEATUERS}</span>
+                    <span className={`${styles['lgt-blue']} ${styles.pointer}`} onClick={this.selectAllChecks}>Select All</span>
                     <span className={`${styles['lgt-blue']} ${styles.pointer}`} onClick={this.clearAllChecks}>{COMPARE.CLEAR_ALL}</span>
                   </h5>
                   {
@@ -157,36 +168,36 @@ class Compare extends Component {
                 <Col md={3} key={product.id}>
                   <div className={`${styles['compare-dtls']} ${styles['compare-background']} ${styles.flex} ${styles['flex-colum']} ${styles['justify-between']} ${styles['ht-100per']}`}>
                     <div className={`${styles.pointer} ${styles['ht-290']} ${styles.flex} ${styles['justify-center']}`}>
-                      <Link route={`/${country}/${language}/product?productId=${product.id}${product.variant_id ? `&variantId=${product.variant_id}` : ''}&catalogId=${product.catalog_id}&itemType=${product.item_type}`}>
+                      <Link route={`/${language}/pdp/${product.name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${product.tuin ? `${product.tuin}/`: '' }${product.listing_id ? `${product.listing_id}`: ''}?pid=${product.id}&vid=${product.variant_id}&cid=${product.catalog_id}`}>
                         <img alt={product.name} src={`${constants.mediaDomain}/${product.imgSrc}`} className={`img-responsive ${styles['object-scale-down']}`} />
                       </Link>
                     </div>
                     <div className={`${styles['compare-dtls-inn']} ${styles['pt-20']} ${styles['t-c']}`}>
-                      <Link route={`/${country}/${language}/product?productId=${product.id}${product.variant_id ? `&variantId=${product.variant_id}` : ''}&catalogId=${product.catalog_id}&itemType=${product.item_type}`}>
+                      <Link route={`/${language}/pdp/${product.name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${product.tuin ? `${product.tuin}/`: '' }${product.listing_id ? `${product.listing_id}`: ''}?pid=${product.id}&vid=${product.variant_id}&cid=${product.catalog_id}`}>
                         <span className={`${styles.pointer}`}>
                           <span className={`${styles.fontW600} ${styles['fs-12']}`}>{product.brand}</span>{' - '}
                           <span className={`${styles['fs-12']} ${styles['thick-gry-clr']}`}>{product.name}</span>
                         </span>
                       </Link>
                       <div>
-                        <span className={styles.fontW600}>{product && product.price && product.price.display_value} {product && product.price && product.price.currency_code}</span>
+                        <span className={styles.fontW600}>{product && product.price && product.price.currency_code} {product && product.price && product.price.display_value}</span>
                         {/* <span className={`${styles['fs-12']} ${styles['google-clr']}`}>{product.offer}</span> */}
                       </div>
                     </div>
                     <div className={`${styles.flex} ${styles['justify-center']}`}>
                       {
                         product.listing_id
-                        ?
+                          ?
                           <Button
                             className={product.addedToCart ? `${styles['p-10']} ${styles['flex-center']} ${styles['added-btn']}` : `${styles['p-10']} ${styles['flex-center']} ${styles['cart-btn']}`}
                             id={product.listing_id}
-                            onClick={product.addedToCart ? () => {} : this.addToCart}
+                            onClick={product.addedToCart ? () => { } : this.addToCart}
                             btnText={product.addedToCart ? PDP_PAGE.ADDED_TO_CART : PDP_PAGE.ADD_TO_CART}
                             showImage={product.addedToCart && 'icons/cart/added-cart-icon'}
                             btnLoading={cartButtonLoaders && cartButtonLoaders[product.listing_id]}
                             hoverClassName="hoverBlueBackground"
                           />
-                        :
+                          :
                           <span>Out of Stock</span>
                       }
                     </div>
@@ -196,30 +207,30 @@ class Compare extends Component {
               ))
             }
             {compareCount < 5 &&
-            <Col md={3}>
-              <div className={` ${styles['compare-background']} ${styles['flex-center']} ${styles['ht-100per']} ${styles['bg-white']} ${styles['justify-center']} ${styles['flex-colum']}`}>
-                <SVGComponent clsName={`${styles['add-icon']}`} src="icons/common-icon/plus" />
-                <div className={`${styles.width100} ${styles['p-10-40']}`}>
-                  <select className={`${styles.width100} ${styles['compare-selct']}`} value={selectedBrand} onChange={this.selectBrand}>
-                    <option value="">{COMPARE.SELECT_BRAND}</option>
-                    {brands.length > 0 &&
-                    brands.map(brand => (
-                      <option key={brand.Param} value={brand.Param}>{brand.attributeValue}</option>
-                    ))}
-                  </select>
+              <Col md={3}>
+                <div className={` ${styles['compare-background']} ${styles['flex-center']} ${styles['ht-100per']} ${styles['bg-white']} ${styles['justify-center']} ${styles['flex-colum']}`}>
+                  <SVGComponent clsName={`${styles['add-icon']}`} src="icons/common-icon/plus" />
+                  <div className={`${styles.width100} ${styles['p-10-40']}`}>
+                    <select className={`${styles.width100} ${styles['compare-selct']}`} value={selectedBrand} onChange={this.selectBrand}>
+                      <option value="">{COMPARE.SELECT_BRAND}</option>
+                      {brands.length > 0 &&
+                        brands.map(brand => (
+                          <option key={brand.Param} value={brand.Param}>{brand.attributeValue}</option>
+                        ))}
+                    </select>
+                  </div>
+                  {productList.length > 0 &&
+                    <div className={`${styles.width100} ${styles['p-10-40']}`}>
+                      <select className={`${styles.width100} ${styles['compare-selct']}`} onChange={this.selectProduct}>
+                        <option value="">{COMPARE.SELECT_PRODUCT}</option>
+                        {productList.length > 0 &&
+                          productList.map(product => (
+                            <option key={product.id} value={JSON.stringify(product)}>{product.displayName}</option>
+                          ))}
+                      </select>
+                    </div>}
                 </div>
-                {productList.length > 0 &&
-                <div className={`${styles.width100} ${styles['p-10-40']}`}>
-                  <select className={`${styles.width100} ${styles['compare-selct']}`} onChange={this.selectProduct}>
-                    <option value="">{COMPARE.SELECT_PRODUCT}</option>
-                    {productList.length > 0 &&
-                      productList.map(product => (
-                        <option key={product.id} value={JSON.stringify(product)}>{product.displayName}</option>
-                    ))}
-                  </select>
-                </div>}
-              </div>
-            </Col>}
+              </Col>}
           </Row>
           <div className={styles['compare-main-items']}>
             {

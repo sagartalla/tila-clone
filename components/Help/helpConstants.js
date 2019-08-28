@@ -3,11 +3,14 @@ import ErrorsPart from '../../components/common/Error'
 import Faq from './Faq';
 import Answers from './Answers';
 import Incidents from './Incidents';
+import { languageDefinations } from '../../utils/lang';
+
+const languageLabel = languageDefinations();
 
 const ContactTabs = [
-  { type: 'email', icon: '', text: ['Want to mail us ?', 'Email us now'], isClickable: true },
-  { type: 'chat', icon: '', text: ['Want to chat ?', 'Chat with us now'], isClickable: true },
-  { type: 'call', icon: '', text: ['Phone Support', 'Call us at 1800 0000'], isClickable: false }
+  { type: 'email', icon: '', text: [languageLabel['HNS']['CONTACT_MAIL_TITLE'], languageLabel['HNS']['CONTACT_MAIL_SUBTITLE']], isClickable: true },
+  { type: 'chat', icon: '', text: [languageLabel['HNS']['CONTACT_CHAT_TITLE'], languageLabel['HNS']['CONTACT_CHAT_SUBTITLE']], isClickable: true },
+  { type: 'call', icon: '', text: [languageLabel['HNS']['CONTACT_PHONE_TITLE'], `${languageLabel['HNS']['CONTACT_PHONE_SUBTITLE']} 1800 0000`], isClickable: false }
 ]
 
 const helpComponents = (type) => {
@@ -16,8 +19,8 @@ const helpComponents = (type) => {
       return (url, categoriesObj, query, isLoggedIn, renderContactCard, handleContactClick) => 
         <Faq url={url} categoriesObj={categoriesObj} query={query} isLoggedIn={isLoggedIn}/>
     case 'answers': 
-      return (url, categoriesObj, query, isLoggedIn, renderContactCard, handleContactClick) => 
-        <Answers url={url} categoriesObj={categoriesObj} query={query} isLoggedIn={isLoggedIn} renderContactCard={renderContactCard} handleContactClick={handleContactClick}/>
+      return (url, categoriesObj, query, isLoggedIn, renderContactCard, handleContactClick, fixCatContainer, fetchPaginatedRes) => 
+        <Answers url={url} fixCatContainer={fixCatContainer} fetchPaginatedRes={fetchPaginatedRes} categoriesObj={categoriesObj} query={query} isLoggedIn={isLoggedIn} renderContactCard={renderContactCard} handleContactClick={handleContactClick}/>
     case 'incidents': 
       return (url, categoriesObj, query, isLoggedIn, renderContactCard, handleContactClick) => 
         <Incidents query={query} />

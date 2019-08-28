@@ -48,6 +48,7 @@ class Search extends Component {
       suggestions: [],
       query: finalQuery,
       openImagesearch: false,
+      searchPosition: '',
     };
     this.submitQuery = this.submitQuery.bind(this);
     this.onChangeSearchInput = this.onChangeSearchInput.bind(this);
@@ -61,6 +62,11 @@ class Search extends Component {
   componentWillReceiveProps(nextProps) {
     const { isCategoryTree, choosenCategoryName, query: queryProp } = nextProps;
     const { query, searchInput } = this.state;
+    if (this.props.query !== nextProps.query) {
+      this.setState({
+        searchInput: false,
+      });
+    }
     const finalQuery = searchInput ? query : isCategoryTree ? choosenCategoryName : queryProp;
     this.setState({
       query: finalQuery ? finalQuery.split('-').join(' ') : '',
@@ -93,12 +99,14 @@ class Search extends Component {
     const { query } = this.state;
     const input = document.getElementById('text-box');
     input.focus();
-    input.setSelectionRange(query.length, query.length);
+    input.setSelectionRange(query && query.length, query && query.length);
   }
   setSearchText(e) {
+    const searchPosition = e.currentTarget.getAttribute('index');
     this.setState({
       query: e.target.textContent,
       suggestions: [],
+      searchPosition,
     }, () => {
       this.submitQuery(e);
     });
@@ -106,10 +114,10 @@ class Search extends Component {
 
 
   handleSearch = (e) => {
-    const { suggestions } = this.props;
+    const { suggestions, query } = this.props;
     if (e.keyCode === 9 || e.keyCode === 39) {
       this.setState({
-        query: suggestions && (suggestions.length > 0 && suggestions[0].data_edgengram),
+        query: suggestions && suggestions.length > 0 ? suggestions[0].data_edgengram : query,
       });
     }
   }
@@ -122,6 +130,7 @@ class Search extends Component {
   }
 
   submitQuery(e) {
+    const { searchPosition } = this.state;
     e && e.preventDefault();
     if (!this.state.query) return false;
     // const { isCategoryTree } = this.props;
@@ -131,11 +140,11 @@ class Search extends Component {
 
     this.fireCustomEventClick();
 
-    this.setState({
-      searchInput: false,
-    });
+    // this.setState({
+    //   searchInput: false,
+    // });
     window.scrollTo(0, 0);
-    Router.pushRoute(`/${country}/${language}/srp?search=${this.state.query}&${Object.entries(this.props.optionalParams).map(([key, val]) => `${key}=${val}`).join('&')}`);
+    Router.pushRoute(`/${language}/search?q=${encodeURIComponent(this.state.query.trim())}&qs=${searchPosition ? true : false}&POS=${searchPosition ? searchPosition : null}&${Object.entries(this.props.optionalParams).map(([key, val]) => `${key}=${val}`).join('&')}`);
   }
 
   imageSearch() {
@@ -157,7 +166,7 @@ class Search extends Component {
 
 
   fetchSuggestions() {
-    this.props.fetchSuggestions({ key: this.state.query.trim() });
+    this.props.fetchSuggestions({ key: this.state.query && this.state.query.trim() });
   }
 
   fireCustomEventClick = () => {
@@ -172,7 +181,7 @@ class Search extends Component {
     return (
       <div className={styles['search-wrapper']}>
         <form onSubmit={this.submitQuery}>
-          <Dropdown id="search-toggle" className={`${styles['cart-inn']} ${styles.width100}`}>
+          <Dropdown id="search-toggle" className={`${styles['cart-inn']} ${styles.width93}`}>
             <Dropdown.Toggle id="dropdown-custom-components">
               <div className={styles.overlap} tabIndex="0" onFocus={this.setSelectionRange}>
                 {(query && query.length) < 2 ? '' : (autoSearchValue || (suggestions.length > 0 && query.toLowerCase() === suggestions[0].data_edgengram.slice(0, query.length).toLowerCase() ? (query.concat(suggestions[0].data_edgengram.substring(query.length))) : ''))}
@@ -187,14 +196,15 @@ class Search extends Component {
                     onChange={this.onChangeSearchInput}
                     value={(context === 'search') || searchInput ? query : ''}
                     onKeyDown={this.handleSearch}
+                    maxLength={80}
                   />
               )}
               </SearchContext.Consumer>
             </Dropdown.Toggle>
-            <Dropdown.Menu className={`${styles.width100} ${styles['p-0']} ${styles['m-0']}`}>
+            <Dropdown.Menu className={`${styles.width100} ${styles['p-0']} ${styles['m-0']} ${(suggestions && suggestions.length > 0) ? styles['main-search-drp'] : null}`}>
               {suggestions.length > 0 &&
                 suggestions.map((s, index) => (
-                  <MenuItem className={styles['search-suggestion']} onClick={this.setSearchText} data={s.data_edgengram} onFocus={this.mouseOver} eventKey={index + 1}>
+                  <MenuItem key={index} className={styles['search-suggestion']} onClick={this.setSearchText} data={s.data_edgengram} onFocus={this.mouseOver} index={index} eventKey={index + 1}>
                     <a className={`${styles['black-color']}`}>
                       <span>{s.data_edgengram}</span>
                     </a>
@@ -204,9 +214,9 @@ class Search extends Component {
           </Dropdown>
 
           <div className={`${styles['search-btn-img']} ${styles['r-40']}`} onClick={this.imageSearch}>
-            <SVGComponent clsName={`${styles['searching-icon']}`} src="icons/camera"/>
+            <SVGComponent clsName={`${styles['searching-icon']}`} src="icons/camera" />
           </div>
-          <button type="submit" className={styles['search-btn']}><SVGComponent clsName={`${styles['searching-icon']}`} src="icons/search/search-white-icon" /></button>
+          <button type="submit" className={styles['search-btn']}><SVGComponent clsName={`${styles['searching-icon']}`} src="icons/search/header-search-icon" /></button>
         </form>
         <Modal
           {...this.props}

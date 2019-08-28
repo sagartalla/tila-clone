@@ -11,7 +11,7 @@ const Electronics = () => React.createElement(
       { className: "main-banner" },
       React.createElement(
         "a",
-        { href: `/SAU/${lang}/srp?search=electronics&isListed=false` },
+        { href: `/${lang}/search?q=electronics&isListed=false` },
         React.createElement("img", { src: `/static/img/landing-page-tech-img/${lang === 'en' ? 'appliances' : 'appliances-ar'}.jpg`, className: "img-responsive" })
       )
     ),
@@ -42,7 +42,7 @@ const Electronics = () => React.createElement(
               { className: "popular-cat-inn-img" },
               React.createElement(
                 "a",
-                { href: `/SAU/${lang}/srp/mobiles?categoryTree=true&isListed=false&sid=848,2349` },
+                { href: `/${lang}/clp/${lang === 'en' ? 'mobiles' : 'الهواتف-النقالة'}` },
                 React.createElement("img", { src: "/static/img/landing-page-tech-img/popular-cat.png", className: "img-responsive" })
               )
             ),
@@ -53,11 +53,6 @@ const Electronics = () => React.createElement(
                 "span",
                 { className: styles['fs-12'] },
                 "Mobiles"
-              ),
-              React.createElement(
-                "span",
-                { className: styles['fontW600'] },
-                "UP to 35% Off"
               )
             )
           ),
@@ -69,7 +64,7 @@ const Electronics = () => React.createElement(
               { className: "popular-cat-inn-img" },
               React.createElement(
                 "a",
-                { href: `/SAU/${lang}/srp/televisions?categoryTree=true&isListed=false&sid=848,2351` },
+                { href: `/${lang}/clp/${lang === 'en' ? 'televisions' : 'التلفزيونات'}` },
                 React.createElement("img", { src: "/static/img/landing-page-tech-img/popular-cat1.png", className: "img-responsive" })
               )
             ),
@@ -80,11 +75,6 @@ const Electronics = () => React.createElement(
                 "span",
                 { className: styles['fs-12'] },
                 "Televisions"
-              ),
-              React.createElement(
-                "span",
-                { className: styles['fontW600'] },
-                "UP to 25% Off"
               )
             )
           ),
@@ -97,7 +87,7 @@ const Electronics = () => React.createElement(
               { className: "popular-cat-inn-img" },
               React.createElement(
                 "a",
-                { href: `/SAU/${lang}/srp/laptops?categoryTree=true&isListed=false&sid=848,2352` },
+                { href: `/${lang}/clp/${lang === 'en' ? 'laptops' : 'أجهزة-الكمبيوتر-المحمولة'}` },
                 React.createElement("img", { src: "/static/img/landing-page-tech-img/popular-cat2.png", className: "img-responsive" })
               )
             ),
@@ -108,11 +98,6 @@ const Electronics = () => React.createElement(
                 "span",
                 { className: styles['fs-12'] },
                 "Laptop"
-              ),
-              React.createElement(
-                "span",
-                { className: styles['fontW600'] },
-                "UP to 25% Off"
               )
             )
           ),
@@ -124,7 +109,7 @@ const Electronics = () => React.createElement(
               { className: "popular-cat-inn-img" },
               React.createElement(
                 "a",
-                { href: `/SAU/${lang}/srp/tablets?categoryTree=true&isListed=false&sid=848,2350` },
+                { href: `/${lang}/clp/${lang === 'en' ? 'Tablets' : 'اجهزة تابلت وايباد'}` },
                 React.createElement("img", { src: "/static/img/landing-page-tech-img/popular-cat3.png", className: "img-responsive" })
               )
             ),
@@ -135,11 +120,6 @@ const Electronics = () => React.createElement(
                 "span",
                 { className: styles['fs-12'] },
                 "Tablets"
-              ),
-              React.createElement(
-                "span",
-                { className: styles['fontW600'] },
-                "UP to 15% Off"
               )
             )
           ),
@@ -151,7 +131,7 @@ const Electronics = () => React.createElement(
               { className: "popular-cat-inn-img" },
               React.createElement(
                 "a",
-                { href: `/SAU/${lang}/srp/camera?categoryTree=true&isListed=false&sid=848,882` },
+                { href: `/${lang}/clp/${lang === 'en' ? 'camera' : 'الة-تصوير'}` },
                 React.createElement("img", { src: "/static/img/landing-page-tech-img/popular-cat4.png", className: "img-responsive" })
               )
             ),
@@ -162,11 +142,6 @@ const Electronics = () => React.createElement(
                 "span",
                 { className: styles['fs-12'] },
                 "Cameras"
-              ),
-              React.createElement(
-                "span",
-                { className: styles['fontW600'] },
-                "UP to 15% Off"
               )
             )
           ),
@@ -178,7 +153,7 @@ const Electronics = () => React.createElement(
               { className: "popular-cat-inn-img" },
               React.createElement(
                 "a",
-                { href: `/SAU/${lang}/srp?search=Gaming&language=en&isListed=false` },
+                { href: `/${lang}/clp/${lang === 'en' ? 'gaming' : 'الة-تصوير'}` },
                 React.createElement("img", { src: "/static/img/landing-page-tech-img/popular-cat5.png", className: "img-responsive" })
               )
             ),
@@ -189,11 +164,6 @@ const Electronics = () => React.createElement(
                 "span",
                 { className: styles['fs-12'] },
                 "Gaming"
-              ),
-              React.createElement(
-                "span",
-                { className: styles['fontW600'] },
-                "UP to 35% Off"
               )
             )
           ),
@@ -205,7 +175,7 @@ const Electronics = () => React.createElement(
               { className: "popular-cat-inn-img" },
               React.createElement(
                 "a",
-                { href: `/SAU/${lang}/srp/mobile-accessories?categoryTree=true&isListed=false&sid=848,850` },
+                { href: `/${lang}/clp/${lang === 'en' ? 'mobile-accessories' : 'ملحقات-الهاتف-المحمول'}` },
                 React.createElement("img", { src: "/static/img/landing-page-tech-img/popular-cat6.png", className: "img-responsive" })
               )
             ),
@@ -216,11 +186,6 @@ const Electronics = () => React.createElement(
                 "span",
                 { className: styles['fs-12'] },
                 "Mobile Accessories"
-              ),
-              React.createElement(
-                "span",
-                { className: styles['fontW600'] },
-                "UP to 35% Off"
               )
             )
           ),
@@ -232,7 +197,7 @@ const Electronics = () => React.createElement(
               { className: "popular-cat-inn-img" },
               React.createElement(
                 "a",
-                { href: `/SAU/${lang}/srp/health-care?categoryTree=true&isListed=false&sid=932,972` },
+                { href: `/${lang}/clp/${lang === 'en' ? 'health-care' : 'ملحقات-الهاتف-المحمول'}` },
                 React.createElement("img", { src: "/static/img/landing-page-tech-img/popular-cat7.png", className: "img-responsive" })
               )
             ),
@@ -243,11 +208,6 @@ const Electronics = () => React.createElement(
                 "span",
                 { className: styles['fs-12'] },
                 "Personal & Health Care"
-              ),
-              React.createElement(
-                "span",
-                { className: styles['fontW600'] },
-                "UP to 35% Off"
               )
             )
           ),
@@ -259,7 +219,7 @@ const Electronics = () => React.createElement(
               { className: "popular-cat-inn-img" },
               React.createElement(
                 "a",
-                { href: `/SAU/${lang}/srp/home-applaince?categoryTree=true&isListed=false&sid=932,935` },
+                { href: `/${lang}/clp/${lang === 'en' ? 'Home Appliances' : 'أجهزة المنزل'}` },
                 React.createElement("img", { src: "/static/img/landing-page-tech-img/popular-cat8.png", className: "img-responsive" })
               )
             ),
@@ -270,11 +230,6 @@ const Electronics = () => React.createElement(
                 "span",
                 { className: styles['fs-12'] },
                 "Home Appliances"
-              ),
-              React.createElement(
-                "span",
-                { className: styles['fontW600'] },
-                "UP to 35% Off"
               )
             )
           ),
@@ -286,7 +241,7 @@ const Electronics = () => React.createElement(
               { className: "popular-cat-inn-img" },
               React.createElement(
                 "a",
-                { href: `/SAU/${lang}/srp?search=Home%20Entertainment&language=en&isListed=false` },
+                { href: `/${lang}/clp/${lang === 'en' ? 'Home Entertainment' : 'أجهزة ترفيهية'}` },
                 React.createElement("img", { src: "/static/img/landing-page-tech-img/popular-cat9.png", className: "img-responsive" })
               )
             ),
@@ -297,11 +252,6 @@ const Electronics = () => React.createElement(
                 "span",
                 { className: styles['fs-12'] },
                 "Home Entertainment"
-              ),
-              React.createElement(
-                "span",
-                { className: styles['fontW600'] },
-                "UP to 35% Off"
               )
             )
           )
@@ -327,7 +277,7 @@ const Electronics = () => React.createElement(
             { className: `${styles['mt-20']} ${styles['relative']} brand-part-inn` },
             React.createElement(
               "a",
-              { href: `/SAU/${lang}/srp?search=samsung&language=en&isListed=false` },
+              { href: `/${lang}/clp/Samsung%20Curve%20TV` },
               React.createElement("img", { src: "/static/img/landing-page-tech-img/samsung.jpg", className: "img-responsive" })
             ),
             React.createElement(
@@ -373,7 +323,7 @@ const Electronics = () => React.createElement(
             { className: `${styles['mt-20']} ${styles['relative']} brand-part-inn` },
             React.createElement(
               "a",
-              { href: `/SAU/${lang}/srp?search=MI%20A1&language=en&isListed=false` },
+              { href: `/${lang}/clp/MI%20A1` },
               React.createElement("img", { src: "/static/img/landing-page-tech-img/mi-brand-img.jpg", className: "img-responsive" })
             ),
             React.createElement(
@@ -419,7 +369,7 @@ const Electronics = () => React.createElement(
             { className: `${styles['mt-20']} ${styles['relative']} brand-part-inn` },
             React.createElement(
               "a",
-              { href: `/SAU/${lang}/srp?search=apple&language=en&isListed=false` },
+              { href: `/${lang}/srp/${lang === 'en' ? 'Apple' : 'ابل'}/search?q=Apple` },
               React.createElement("img", { src: "/static/img/landing-page-tech-img/apple-brand-img.jpg", className: "img-responsive" })
             ),
             React.createElement(
@@ -469,7 +419,7 @@ const Electronics = () => React.createElement(
             null,
             React.createElement(
               "a",
-              { href: `/SAU/${lang}/srp?search=Gaming&language=en&isListed=false` },
+              { href: `/${lang}/clp/Gaming%20Console` },
               React.createElement("img", { src: "/static/img/landing-page-tech-img/gaming-img.jpg", className: "img-responsive" })
             )
           )
@@ -492,7 +442,7 @@ const Electronics = () => React.createElement(
             null,
             React.createElement(
               "a",
-              { href: `/SAU/${lang}/srp?search=gaming%20&%20accessories&language=en&isListed=false` },
+              { href: `/${lang}/clp/Remote%20Control%20Toys` },
               React.createElement("img", { src: "/static/img/landing-page-tech-img/gaming-img1.jpg", className: "img-responsive" })
             )
           )
@@ -519,7 +469,7 @@ const Electronics = () => React.createElement(
             { className: `${styles['mt-20']} ${styles['relative']} ${styles['home-kitchan-inn']}` },
             React.createElement(
               "a",
-              { href: `/SAU/${lang}/srp?search=Iron&language=en&isListed=false` },
+              { href: `/${lang}/clp/Iron%20box` },
               React.createElement("img", { src: "/static/img/landing-page-tech-img/home-kitchen1.jpg", className: "img-responsive" })
             ),
             React.createElement(
@@ -551,7 +501,7 @@ const Electronics = () => React.createElement(
             { className: `${styles['mt-20']} ${styles['relative']} ${styles['home-kitchan-inn']}` },
             React.createElement(
               "a",
-              { href: `/SAU/${lang}/srp?search=Refrigerators&language=en&isListed=false` },
+              { href: `/${lang}/search?q=Refrigerators&language=en&isListed=false` },
               React.createElement("img", { src: "/static/img/landing-page-tech-img/home-kitchen.jpg", className: "img-responsive" })
             ),
             React.createElement(
@@ -583,7 +533,7 @@ const Electronics = () => React.createElement(
             { className: `${styles['mt-20']} ${styles['relative']} ${styles['home-kitchan-inn']}` },
             React.createElement(
               "a",
-              { href: `/SAU/${lang}/srp?search=Mixer%20&%20Juicers&language=en&isListed=false` },
+              { href: `/${lang}/clp/Mixer%20and%20Juicer` },
               React.createElement("img", { src: "/static/img/landing-page-tech-img/home-kitchen2.jpg", className: "img-responsive" })
             ),
             React.createElement(
@@ -615,7 +565,7 @@ const Electronics = () => React.createElement(
             { className: `${styles['mt-20']} ${styles['relative']} ${styles['home-kitchan-inn']}` },
             React.createElement(
               "a",
-              { href: `/SAU/${lang}/srp?search=washing%20Machines&language=en&isListed=false` },
+              { href: `/${lang}/search?q=washing%20Machines&language=en&isListed=false` },
               React.createElement("img", { src: "/static/img/landing-page-tech-img/home-kitchen3.jpg", className: "img-responsive" })
             ),
             React.createElement(
@@ -647,7 +597,7 @@ const Electronics = () => React.createElement(
             { className: `${styles['mt-20']} ${styles['relative']} ${styles['home-kitchan-inn']}` },
             React.createElement(
               "a",
-              { href: `/SAU/${lang}/srp?search=Vaccum%20Cleaners&language=en&isListed=false` },
+              { href: `/${lang}/search?q=Vaccum%20Cleaners&language=en&isListed=false` },
               React.createElement("img", { src: "/static/img/landing-page-tech-img/home-kitchen4.jpg", className: "img-responsive" })
             ),
             React.createElement(
@@ -679,7 +629,7 @@ const Electronics = () => React.createElement(
             { className: `${styles['mt-20']} ${styles['relative']} ${styles['home-kitchan-inn']}` },
             React.createElement(
               "a",
-              { href: `/SAU/${lang}/srp?search=Iron&language=en&isListed=false` },
+              { href: `/${lang}/clp/Iron%20box` },
               React.createElement("img", { src: "/static/img/landing-page-tech-img/home-kitchen1.jpg", className: "img-responsive" })
             ),
             React.createElement(
@@ -699,276 +649,6 @@ const Electronics = () => React.createElement(
                 "span",
                 { className: `${styles['fontW600']} ${styles['fs-12']}` },
                 "ONWARDS"
-              )
-            )
-          )
-        )
-      ),
-      React.createElement(
-        "div",
-        { className: `brands-love-part ${styles['pt-30']} ${styles['pb-30']} ${styles['clear-b']}` },
-        React.createElement(
-          "h4",
-          { className: `${styles['fontW600']} ${styles['text-uppercase']}` },
-          React.createElement(
-            "span",
-            { className: `populat-cat-title ${styles['bdr-btm-green-color']}` },
-            "Brands "
-          ),
-          "  you love"
-        ),
-        React.createElement(
-          "div",
-          { className: styles['mt-25'] },
-          React.createElement(
-            Col,
-            { md: 2, className: styles['pl-0'] },
-            React.createElement(
-              "div",
-              { className: `brands-inn ${styles['flex-center']} ${styles['justify-center']} ${styles['bg-white']}` },
-              React.createElement(
-                "a",
-                { href: `/SAU/${lang}/srp?search=apple&language=en&isListed=false` },
-                React.createElement("img", { src: "/static/img/landing-page-tech-img/brands5.jpg", className: "brand-apple" })
-              )
-            ),
-            React.createElement(
-              "div",
-              { className: `${styles['flex']} ${styles['flex-wrp']} brand-litem-list ${styles['fs-10']}` },
-              React.createElement(
-                "span",
-                null,
-                "Mac"
-              ),
-              React.createElement(
-                "span",
-                null,
-                "iPhone"
-              ),
-              React.createElement(
-                "span",
-                null,
-                "iPad"
-              ),
-              React.createElement(
-                "span",
-                null,
-                "Watch"
-              ),
-              React.createElement(
-                "span",
-                null,
-                "Tv"
-              )
-            )
-          ),
-          React.createElement(
-            Col,
-            { md: 2, className: styles['pl-0'] },
-            React.createElement(
-              "div",
-              { className: `brands-inn ${styles['flex-center']} ${styles['justify-center']} ${styles['bg-white']}` },
-              React.createElement(
-                "a",
-                { href: `/SAU/${lang}/srp?search=samsung&language=en&isListed=false` },
-                React.createElement("img", { src: "/static/img/landing-page-tech-img/brands.jpg", className: "brand-samsung" })
-              )
-            ),
-            React.createElement(
-              "div",
-              { className: `${styles['flex']} ${styles['flex-wrp']} brand-litem-list ${styles['fs-10']}` },
-              React.createElement(
-                "span",
-                null,
-                "Mobiles"
-              ),
-              React.createElement(
-                "span",
-                null,
-                "Tablets"
-              ),
-              React.createElement(
-                "span",
-                null,
-                "Audio & Video"
-              ),
-              React.createElement(
-                "span",
-                null,
-                "Watch"
-              ),
-              React.createElement(
-                "span",
-                null,
-                "Tv"
-              )
-            )
-          ),
-          React.createElement(
-            Col,
-            { md: 2, className: styles['pl-0'] },
-            React.createElement(
-              "div",
-              { className: `brands-inn ${styles['flex-center']} ${styles['justify-center']} ${styles['bg-white']}` },
-              React.createElement(
-                "a",
-                { href: `/SAU/${lang}/srp?search=sony&language=en&isListed=false` },
-                React.createElement("img", { src: "/static/img/landing-page-tech-img/brands1.jpg", className: "brand-samsung" })
-              )
-            ),
-            React.createElement(
-              "div",
-              { className: `${styles['flex']} ${styles['flex-wrp']} brand-litem-list ${styles['fs-10']}` },
-              React.createElement(
-                "span",
-                null,
-                "Mobiles"
-              ),
-              React.createElement(
-                "span",
-                null,
-                "Tablets"
-              ),
-              React.createElement(
-                "span",
-                null,
-                "Audio & Video"
-              ),
-              React.createElement(
-                "span",
-                null,
-                "Cameras"
-              ),
-              React.createElement(
-                "span",
-                null,
-                "Tv"
-              ),
-              React.createElement(
-                "span",
-                null,
-                "Laptops"
-              )
-            )
-          ),
-          React.createElement(
-            Col,
-            { md: 2, className: styles['pl-0'] },
-            React.createElement(
-              "div",
-              { className: `brands-inn ${styles['flex-center']} ${styles['justify-center']} ${styles['bg-white']}` },
-              React.createElement(
-                "a",
-                { href: `/SAU/${lang}/srp?search=LG&language=en&isListed=false` },
-                React.createElement("img", { src: "/static/img/landing-page-tech-img/brands2.jpg", className: "brand-lg" })
-              )
-            ),
-            React.createElement(
-              "div",
-              { className: `${styles['flex']} ${styles['flex-wrp']} brand-litem-list ${styles['fs-10']}` },
-              React.createElement(
-                "span",
-                null,
-                "Mobiles"
-              ),
-              React.createElement(
-                "span",
-                null,
-                "Tablets"
-              ),
-              React.createElement(
-                "span",
-                null,
-                "Audio & Video"
-              ),
-              React.createElement(
-                "span",
-                null,
-                "Cameras"
-              ),
-              React.createElement(
-                "span",
-                null,
-                "Tv"
-              ),
-              React.createElement(
-                "span",
-                null,
-                "Power Banks"
-              )
-            )
-          ),
-          React.createElement(
-            Col,
-            { md: 2, className: styles['pl-0'] },
-            React.createElement(
-              "div",
-              { className: `brands-inn ${styles['flex-center']} ${styles['justify-center']} ${styles['bg-white']}` },
-              React.createElement(
-                "a",
-                { href: `/SAU/${lang}/srp?search=dell&language=en&isListed=false` },
-                React.createElement("img", { src: "/static/img/landing-page-tech-img/brands3.jpg", className: "brand-dell" })
-              )
-            ),
-            React.createElement(
-              "div",
-              { className: `${styles['flex']} ${styles['flex-wrp']} brand-litem-list ${styles['fs-10']}` },
-              React.createElement(
-                "span",
-                null,
-                "Laptops"
-              ),
-              React.createElement(
-                "span",
-                null,
-                "Personal Computers"
-              )
-            )
-          ),
-          React.createElement(
-            Col,
-            { md: 2, className: styles['pl-0'] },
-            React.createElement(
-              "div",
-              { className: `brands-inn ${styles['flex-center']} ${styles['justify-center']} ${styles['bg-white']}` },
-              React.createElement(
-                "a",
-                { href: `/SAU/${lang}/srp?search=mi&language=en&isListed=false` },
-                React.createElement("img", { src: "/static/img/landing-page-tech-img/brands4.jpg", className: "brand-mi" })
-              )
-            ),
-            React.createElement(
-              "div",
-              { className: `${styles['flex']} ${styles['flex-wrp']} brand-litem-list ${styles['fs-10']}` },
-              React.createElement(
-                "span",
-                null,
-                "Mobiles"
-              ),
-              React.createElement(
-                "span",
-                null,
-                "Tablets"
-              ),
-              React.createElement(
-                "span",
-                null,
-                "Audio & Video"
-              ),
-              React.createElement(
-                "span",
-                null,
-                "Cameras"
-              ),
-              React.createElement(
-                "span",
-                null,
-                "Tv"
-              ),
-              React.createElement(
-                "span",
-                null,
-                "Power Banks"
               )
             )
           )

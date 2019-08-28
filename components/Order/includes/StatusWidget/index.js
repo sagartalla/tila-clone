@@ -15,7 +15,7 @@ const StatusWidget = ({ currentStatus }) => {
   const pivot = (100 / (len - 1));
   let barLen = 0;
   return (
-    <div className={`${styles['status-widget']} ${styles['pt-5']} ${styles['relative']}`}>
+    <div className={`${styles['status-widget']} ${styles['pt-5']} ${styles.relative}`}>
       <Row className={styles['m-0']}>
         <div className={`${styles['gray-line']} ${styles['flx-space-bw']}`}>
           {
@@ -26,15 +26,15 @@ const StatusWidget = ({ currentStatus }) => {
                 barLen = pivot * k;
               }
               return (
-                <div className={`${styles['relative']}`} key={k}>
-                  <span className={`${styles['point']} ${actual_time ? (i.status == 'CANCELLED' ? styles['cancelled'] : styles['active']) : ''} `} style={{ left: `${k == 0 ? '0' : (pivot * k)}%` }}></span>
-                  <span className={`${styles['pt-10']} ${styles['pb-10']} ${styles['flex']} ${styles['fs-12']}`}>{orderStatusAttributes[i.status]}</span>
+                <div className={`${styles.relative}`} key={k}>
+                  <span className={`${styles.point} ${actual_time && (i.status == 'CANCELLED' ? styles.cancelled : styles.active)} `} style={{ left: `${k == 0 ? '0' : (pivot * k)}%` }} />
+                  <span className={`${styles['pt-10']} ${styles['pb-10']} ${styles.flex} ${styles['fs-12']}`}>{orderStatusAttributes[i.status]}</span>
                 </div>
               );
             })
           }
         </div>
-        <div style={{ width: `${barLen}%` }} className={`${styles['green-line']} ${styles['absolute']}`} />
+        <div style={{ width: `${barLen}%` }} className={`${styles['green-line']} ${styles.absolute}`} />
       </Row>
     </div >
   );

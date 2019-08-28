@@ -42,8 +42,8 @@ const getShowLogin = (store) => {
   return store.authReducer.ui.showLogin;
 };
 
-const showEmailVerificationScreen = (store) => {
-  return store.authReducer.ui.showEmailVerificationScreen;
+const showEmailVerifySuccess = (store) => {
+  return store.authReducer.ui.showEmailVerifySuccess;
 };
 
 const getUserInfo = (store) => {
@@ -58,6 +58,8 @@ const getActive = store => store.authReducer.v2.active;
 
 
 const getActiveEmailId = store => store.authReducer.v2.data.email || '';
+
+const getActiveUser = store => store.authReducer.v2.data;
 
 const userData = store => store.authReducer.data.userData;
 
@@ -85,13 +87,34 @@ const showOtpSuccess = (store) => {
 
 const showLogin = store => store.authReducer.data.showLoginScreen;
 
+const showUserInfo = store => store.authReducer.data.showUserInfo;
+
 const resetToken = store => store.authReducer.data.resetToken;
-const getActiveText = store => store.authReducer.v2.active.text;
+const getActiveText = store => store.authReducer && store.authReducer.v2 && store.authReducer.v2.active && store.authReducer.v2.active.text;
 
 const getLastLogin = store => store.authReducer.v2.data.last_social_login_used;
 
+const showCheckoutLogin = store => {
+  return store.authReducer.ui.showCheckoutLogin;
+}
+
+const loginResponse = (store) => {
+  return store.authReducer.data.loginResponse;
+}
+
+const isVerified = store => store.authReducer.data.isVerified;
+
+const userInfo = store => {
+  return store.authReducer.data.userInfo;
+}
+
+const currentFlow = store => {
+  return store.authReducer.v2.currentFlow;
+}
+
 export {
   getErrorMessege, getCountry, getLoggedInStatus, getInstaCode, getUserCreds, getDeliveryCity, getDomainCountries,
-  getLoginProgressStatus, getShowLogin, getPTAToken, showEmailVerificationScreen, getLanguage, getLoadingStatus, getUserInfo,
-  getActive, getActiveEmailId, forgotPasswordStatus, showEmailSuccess, showLogin, userData, showOtpSuccess, resetToken, getActiveText, getLastLogin, showResetScreen,
+  getLoginProgressStatus, getShowLogin, getPTAToken, showEmailVerifySuccess, getLanguage, getLoadingStatus, getUserInfo,
+  getActive, getActiveEmailId, forgotPasswordStatus, showEmailSuccess, showLogin, userData, showOtpSuccess, resetToken, getActiveText,
+  getLastLogin, showResetScreen, getActiveUser, showCheckoutLogin, loginResponse, isVerified, userInfo, showUserInfo, currentFlow,
 };

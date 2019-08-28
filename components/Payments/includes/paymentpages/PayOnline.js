@@ -39,9 +39,9 @@ class PayOnline extends Component {
         payment_mode: data.type,
       }]
     });
-    this.props.disableAllOthers({
-      except: data.type
-    });
+    // this.props.disableAllOthers({
+    //   except: data.type
+    // });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -57,16 +57,16 @@ class PayOnline extends Component {
     const { disableSaveCard, iframe_url } = this.state;
 
     return (
-      <div className={`${styles['pay-online']}`}>
+      <div className={`${styles['pay-online']} ${styles['pb-10']}`}>
         <Voucher voucherData={voucherData} />
         <div>
           {
             iframe_url
               ?
               <div className={`${styles['pt-20']} ${styles['pb-20']}`}>
-                <iframe src={iframe_url} style={{ height: '426px', width: '500px', border: '0' }}></iframe>
+                <iframe sandbox="allow-forms allow-modals allow-popups-to-escape-sandbox allow-popups allow-scripts allow-top-navigation allow-same-origin" src={iframe_url} style={{ height: '426px', width: '500px', border: '0' }} class="h-200 desktop:h-376 w-full"></iframe>
                 <div className={styles['checkbox-material']}>
-                  <input id="save-card" type="checkbox" onClick={this.saveCardHandler} disabled={disableSaveCard} />
+                  <input id="save-card" type="checkbox" onClick={this.saveCardHandler} disabled={disableSaveCard} />&nbsp;
                   <label htmlFor="save-card"> {PAYMENT_PAGE.SAVE_THIS_CARD} </label>
                 </div>
               </div>
@@ -74,9 +74,9 @@ class PayOnline extends Component {
               <div className={`${styles['pt-30']} ${styles['pb-30']}`}>
                 <p className={`${styles['mb-25']} `}>{PAYMENT_PAGE.ONCE_YOU_CLICK_ON_ADD_NEW_CARD_THERE_IS_NO_GOING_BACK}</p>
                 <Button
-                  className={`${styles['text-uppercase']} ${styles['new-card-btn']} ${styles['fs-16']} ${styles['border-radius']} ${styles['ht-40']} ${styles.width55}`}
+                  className={`${styles['text-uppercase']} ${styles['new-card-btn']} ${styles['fs-16']} ${styles['border-radius']}`}
                   onClick={this.fetchIframe}
-                  btnText={PAYMENT_PAGE.PAY + ' ' + data.amount_to_pay.display_value + ' ' + data.amount_to_pay.currency_code + ' ' + PAYMENT_PAGE.USING_NEW_CARD}
+                  btnText={PAYMENT_PAGE.PAY + ' ' + data.amount_to_pay.currency_code + ' ' + data.amount_to_pay.display_value + ' ' + PAYMENT_PAGE.USING_NEW_CARD}
                   hoverClassName="hoverBlueBackground"
                   btnLoading={showLoading}
                 />

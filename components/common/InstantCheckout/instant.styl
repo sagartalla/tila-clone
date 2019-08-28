@@ -1,8 +1,9 @@
+@import '../../../layout/main/executables.styl'
+
 .instant-checkout
   background-color #fbfbfb
   position relative
   .instant-check-list-inn
-    position relative
     &:after
       content ''
       position absolute
@@ -16,12 +17,18 @@
     color: #fff;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
-    border-bottom-right-radius: 30px;
+    border-bottom-right-radius: 14px;
     width 100%
+    padding 10px 0
     i
      width 17px
      height 20px
      margin-right 7px
+    &:disabled
+      color white
+      background-color suggest-label-gray
+      border suggest-label-gray
+
 
   .blocker
     position absolute
@@ -30,3 +37,7 @@
     width: 100%;
     height: 100%;
     z-index: 1;
+.hideBlock
+  display none
+.displayBlock
+  display block

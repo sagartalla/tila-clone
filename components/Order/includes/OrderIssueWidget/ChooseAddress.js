@@ -49,7 +49,10 @@ class ChooseAddress extends Component {
   saveAndgoToNextStep() {
     //selectAddressForReturnExchange,
     //addresses
-    const { goToNextStep } = this.props;
+    const { goToNextStep, orderIssue } = this.props;
+    if(orderIssue.issueType === 'CLAIMWARRANTY' || orderIssue.issueType === 'DAMAGEWARRANTY') {
+      this.props.submitClaimWarranty(orderIssue.selectedReasons)
+    }
     // selectAddressForReturnExchange({
     //   addressId: this.state.choosenAddress || addresses[0].id
     // });
@@ -57,8 +60,9 @@ class ChooseAddress extends Component {
   }
 
   render() {
-    const { addresses,orderDetails } = this.props;
+    const { addresses,orderDetails,orderIssue } = this.props;
     const { choosenAddress } = this.state;
+
     return (
       <div>
         <h4 className={`${styles['fs-20']} ${styles['fontW400']} ${styles['pb-15']}`}>{ORDER_PAGE.ADDRESS_PICKUP}</h4>
@@ -68,7 +72,7 @@ class ChooseAddress extends Component {
           <span className={`${styles['fs-14']} ${styles['fontW400']} ${styles['thick-gry-clr']}`}>{orderDetails.address.account_mobile_number}</span>
         </div>
         <div className={`${styles['widget-footer']} ${styles['pt-15']}`}>
-          <button onClick={this.saveAndgoToNextStep} className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['retun-btn-part']}`} >{ORDER_PAGE.CONTINUE}</button>
+          <button onClick={this.saveAndgoToNextStep} className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['retun-btn-part']}`} >{(orderIssue.issueType === 'CLAIMWARRANTY' || orderIssue.issueType === 'DAMAGEWARRANTY') ? 'Claim Warranty' : ORDER_PAGE.CONTINUE}</button>
         </div>
       </div>
     );
@@ -94,7 +98,8 @@ const mapDispatchToProps = (dispatch) => {
     {
       getShippingAddressResults: addressActionCreators.getShippingAddressResults,
       selectAddressForReturnExchange: actionCreators.selectAddressForReturnExchange,
-      getOrderDetails:actionCreators.getOrderDetails
+      getOrderDetails:actionCreators.getOrderDetails,
+      submitClaimWarranty:actionCreators.submitClaimWarranty,
     },
     dispatch,
   );

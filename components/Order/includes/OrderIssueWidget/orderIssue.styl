@@ -49,7 +49,7 @@
         width 395px
         color white
         text-transform uppercase
-        border-bottom-left-radius 20px
+        border-bottom-left-radius 14px
         &:disabled
           background-color suggest-label-gray
 
@@ -72,18 +72,19 @@
     background-color head-gray
 .product-sizeContainer
   padding 10px 0 10px 0
-  overflow-x auto
   max-height 118px
   box-sizing border-box
+  flex-wrap wrap
   .productSize-Button
     border-radius 20px
-    margin-right 10px
-    min-width 40px
-    min-height 40px
+    margin 5px
+    min-width 34px
+    min-height 34px
     background-color white
     border 1px solid light-gray
     outline none
     display flex
+    padding 5px
     align-items center
     justify-content center
     cursor pointer
@@ -94,13 +95,13 @@
     min-height 34px
     background-color white
     border 1px solid #BFC0C6
-    padding 8px
+    padding 5px
     display inline-block
     text-align center
     outline none
     background-color #f7f6f6
-    pointer-events none
     position relative
+    cursor pointer
     &::after
       content ''
       display block

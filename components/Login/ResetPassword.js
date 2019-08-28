@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Row, Col } from 'react-bootstrap';
@@ -6,7 +6,7 @@ import { Modal } from 'react-router-modal';
 import { languageDefinations } from '../../utils/lang';
 import { actionCreators, selectors } from '../../store/auth';
 import SVGComponent from '../common/SVGComponet';
-import Button from '../common/CommonButton';
+
 import lang from '../../utils/language';
 import ShowHidePassword from './ShowHidePassword';
 import ResetPasswordMain from './ResetpasswordMain';
@@ -41,7 +41,7 @@ class ResetPassword extends Component {
           <div className={`${styles.flex}`}>
             <Col md={4} xs={12} sm={4} className={`${styles['pl-0']} ${styles['pr-10']} ${styles['m-hdn']}`}>
               <div className={`${styles.flex} ${styles['image-placeholder']}`}>
-                <img src="../../static/img/icons/login-logo.png" className={`${styles['img-responsive']}`} alt="" />
+                <img src={lang === 'en' ? '/static/img/icons/login-logo-en.png' : '/static/img/icons/login-logo-ar.png'} className={`${styles['img-responsive']}`} alt="" />
               </div>
             </Col>
             <Col md={8} xs={12} sm={8} className={`${styles['bg-white']} ${styles['border-radius4']} ${styles['pl-25']} ${styles['pr-25']}`}>

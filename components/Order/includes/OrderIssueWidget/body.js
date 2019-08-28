@@ -100,7 +100,7 @@ class Body extends Component {
 
   goToNextStep() {
     const { goToNextStep, resetOrderIssue, orderIssue, getOrderDetails, query } = this.props;
-    const { exchangeId } = orderIssue
+    const { exchangeId, orderId } = orderIssue
     const {
       step: currentStep,
       issueType,
@@ -123,7 +123,7 @@ class Body extends Component {
       }
       case STEPS.CANCEL_COMPLETE: {
         nextStep = null;
-        window.location.reload();
+        Router.pushRoute(`/${language}/customer/orders/${orderId}`)
         break;
       }
       case STEPS.CHOOSE_RETURN_EXCHANGE: {
@@ -140,8 +140,8 @@ class Body extends Component {
       }
       case STEPS.RETURN_COMPLETE: {
         nextStep = null;
-        issueType == 'EXCHANGE' ? Router.pushRoute(`/${country}/${language}/cam/orders/${exchangeId.order_id}`):
-                      Router.pushRoute(`/${country}/${language}/cam/orders`)
+        issueType == 'EXCHANGE' ? Router.pushRoute(`/${language}/customer/orders/${exchangeId.order_id}`):
+                      Router.pushRoute(`/${language}/customer/orders`)
         break;
       }
       default:

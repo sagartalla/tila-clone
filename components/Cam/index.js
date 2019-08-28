@@ -18,7 +18,8 @@ import FooterBar from '../Footer';
 import Preferences from './Preferences';
 import Reviews from './Reviews';
 import AuthWrapper from '../common/AuthWrapper';
-
+import LoadingBar from '../common/Loader/skeletonLoader';
+import LoaderBarContext from '../helpers/context/loaderBarContext';
 import lang from '../../utils/language';
 
 import main_en from '../../layout/main/main_en.styl';
@@ -70,24 +71,34 @@ class Cam extends React.Component {
       }
     })(tab);
     return (
-      <div>
-        <div className={styles['bg-color']}>
-          <HeaderBar />
-          <AuthWrapper>
-            <Grid>
-              <Row className={styles['pt-30']}>
-                <Col xs={12} md={3} sm={3} className={`${styles['pr-0']} ${styles['sidebar-position']} ${styles['cam-left-sidebar']}`}>
-                  <Sidebar query={query} imgUrl={this.props.imgSource}/>
-                </Col>
-                <Col xs={12} md={9} sm={9}>
-                  {camComponent}
-                </Col>
-              </Row>
-            </Grid>
-          </AuthWrapper>
-          <FooterBar />
-        </div>
-      </div>
+      <LoaderBarContext.Consumer>
+        {
+          context => (
+            <div>
+              <div className={styles['bg-color']}>
+                <HeaderBar />
+                  <LoadingBar loadComponent={context.loadComponent}
+                    pathname={context.pathname}>
+                    <AuthWrapper>
+                      <Grid>
+                        <Row className={styles['pt-30']}>
+                          <Col xs={12} md={3} sm={3} className={`${styles['pr-0']} ${styles['sidebar-position']} ${styles['cam-left-sidebar']}`}>
+                            <Sidebar query={query} imgUrl={this.props.imgSource}/>
+                          </Col>
+                          <Col xs={12} md={9} sm={9}>
+                            {camComponent}
+                          </Col>
+                        </Row>
+                      </Grid>
+                    </AuthWrapper>
+                    <FooterBar />
+                  </LoadingBar>
+              </div>
+            </div>
+          )
+        }
+      </LoaderBarContext.Consumer>
+
     );
   }
 }

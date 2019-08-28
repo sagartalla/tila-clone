@@ -48,14 +48,18 @@ class Tree extends Component {
           filter
             ?
             filter.children.slice(0, this.state.maxRows).map((category) => {
+              queryString = queryString.replace(/facets=.*?\&/, '');
               if(queryString.indexOf('sid') !== -1) {
                 queryString = queryString.replace(/sid=.*/, `sid=${category.id}`);
               } else {
                 queryString = `${queryString}&sid=${category.id}`;
               }
+              if(queryString.indexOf('categoryFacet') === -1) {
+                queryString = `${queryString}&categoryFacet=true`;
+              }
               return (
                 <li key={category.id} className={ first ? styles['main-sub-list'] : styles['category-sub-list-inn']}>
-                  <Link route={`/${country}/${language}/srp/${category.canonicalId}/${queryString}&categoryFacet=true`}><a className={`${styles['fs-12']}`}>{category.name}</a></Link>
+                  <Link route={`/${language}/search/${category.canonicalId}/${queryString}`}><a className={`${styles['fs-12']}`}>{category.name}</a></Link>
                   {/*<ul className={`${styles['category-sub-order-list']} ${styles['pl-15']}`}>
                     {
                       category.children.map((subcategory) => {

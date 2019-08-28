@@ -36,9 +36,9 @@ const OrderDetails = ({ query, orderData, thankyouPage }) => {
               {
                 thankyouPage ? '' :
                 <Fragment>
-                  <span><a className={`${styles['black-color']}`} onClick={() => routeChange(`/${country}/${language}/cam/profile`)}>{ORDER_PAGE.MY_ACCOUNT}</a></span>
+                  <span><a className={`${styles['black-color']}`} onClick={() => routeChange(`/${language}/customer/profile`)}>{ORDER_PAGE.MY_ACCOUNT}</a></span>
                   <span> > </span>
-                  <span ><a className={`${styles['black-color']}`} onClick={() => routeChange(`/${country}/${language}/cam/orders`)}>{ORDER_PAGE.ORDERS}</a></span>
+                  <span ><a className={`${styles['black-color']}`} onClick={() => routeChange(`/${language}/customer/orders`)}>{ORDER_PAGE.ORDERS}</a></span>
                   <span> > </span>
                   <span>{query.orderId}</span>
                 </Fragment>
@@ -57,7 +57,7 @@ const OrderDetails = ({ query, orderData, thankyouPage }) => {
         </Row>
         <Row className={`${styles['m-0']} ${styles['mb-40']}`}>
           <Col md={12}>
-            <div className={`${styles.box} ${styles['p-20']} ${styles['mt-20']}`}>
+            <div className={`${styles.box} ${styles['p-20']} ${styles['mt-20']} ${styles['order-conf-part']}`}>
               {orderData.orderItems.map(item => (
                 <OrderItem
                   key={item.id}
@@ -71,6 +71,11 @@ const OrderDetails = ({ query, orderData, thankyouPage }) => {
                   isCancelable={item.isCancelable}
                   isReturnable={item.isReturnable}
                   isExchangable={item.isExchangable}
+                  isDamageProtectionAvailable={item.isDamageProtectionAvailable}
+                  isWarrantyAvailable={item.isWarrantyAvailable}
+                  listingId={item.listingId}
+                  tilaPolicy={item.tilaPolicy}
+                  tuinId={item.tuinId}
                 />
               ))}
             </div>

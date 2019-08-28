@@ -8,8 +8,11 @@ import constants from '../../../constants';
 import { actionCreators as cartActionCreators, selectors as cartSelectors } from '../../../store/listingCart';
 import { actionCreators as compareActions, selectors } from '../../../store/compare';
 import { selectors as authSelectors } from '../../../store/auth';
+import { actionCreators as instantCheckoutActionCreators } from '../../../store/common/instantCheckout'
 import { languageDefinations } from '../../../utils/lang';
 import lang from '../../../utils/language';
+import { actionCreators, selectors as paymentSelectors } from '../../../store/payments';
+import { selectors as vaultSelectors } from '../../../store/cam/userVault';
 
 import main_en from '../../../layout/main/main_en.styl';
 import main_ar from '../../../layout/main/main_ar.styl';
@@ -42,6 +45,7 @@ class TitleInfo extends Component {
     super(props);
     this.state = {
       showCheckoutModal: false,
+      isCheckoutLoaded: false
     };
     this.addToCart = this.addToCart.bind(this);
     this.addToCompare = this.addToCompare.bind(this);
@@ -55,20 +59,21 @@ class TitleInfo extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    let { showCheckoutModal } = this.state;
-    if (nextProps && nextProps.listingCartData.ui.loader) {
-      showCheckoutModal = true;
+    let { showCheckoutModal, isCheckoutLoaded } = this.state;
+    if (nextProps && (nextProps.listingCartData.ui.loader && !isCheckoutLoaded)) {
+        this.setState({ showCheckoutModal:true, isCheckoutLoaded:true });
     }
-    if (nextProps && nextProps.listingCartData.ui.hideLoader) {
-      showCheckoutModal = false;
-    }
-    this.setState({ showCheckoutModal });
+    // if (nextProps && nextProps.listingCartData.ui.hideLoader) {
+    //   showCheckoutModal = false;
+    // }
+
   }
 
   addToCart() {
     const { listingId, getCartResults } = this.props;
     this.props.addToCart({
       listing_id: listingId,
+      instant_checkout: true,
     }, listingId).then(() => {
       document.getElementsByTagName('BODY')[0].style.overflow = 'hidden';
     });
@@ -76,7 +81,7 @@ class TitleInfo extends Component {
 
   addToCompare({ target }) {
     const {
-      addToCompare, product_id, itemtype, media, title, categoryId, removeCompareData, catalogObj,
+      addToCompare, product_id, itemtype, media, title, categoryId, removeCompareData, catalogObj,getSavedCardDetails
     } = this.props;
     const src = `${constants.mediaDomain}/${media}`;
     if (target.checked) {
@@ -84,7 +89,7 @@ class TitleInfo extends Component {
         itemtype,
         productId: product_id,
         src,
-        displayName: title,
+        displayName: title.attribute_values[0].value,
         categoryId,
         catalogObj,
       });
@@ -93,14 +98,24 @@ class TitleInfo extends Component {
 
   checkoutInstantHandler() {
     const { showCheckoutModal } = this.state;
-    const { listingCartData, removeCartItem } = this.props;
+    let { isCheckoutLoaded } = this.state;
+
+    const { listingCartData, removeCartItem, clearInstantCheckout } = this.props;
 
     if (!showCheckoutModal) { // adding item to cart
-      this.addToCart();
+        if(isCheckoutLoaded) {
+          isCheckoutLoaded = false;
+        }
+        this.addToCart()
+
     } else { // removing item from cart.
       document.getElementsByTagName('BODY')[0].style.overflow = 'auto';
-      removeCartItem(listingCartData.items[0].cart_item_id);
+      this.setState(
+        {showCheckoutModal:false}
+      ,() => clearInstantCheckout())
+      //removeCartItem(listingCartData.items[0].cart_item_id);
     }
+    this.setState({ isCheckoutLoaded })
   }
 
   increaseItemCnt(e) {
@@ -117,14 +132,15 @@ class TitleInfo extends Component {
 
   render() {
     const {
-      brand, title, rating, product_id,
-      totalInventoryCount, isPreview, listingCartData, comparable, cmpData, isLoggedIn,
+      brand, title, rating, product_id, shippingInfo,
+      totalInventoryCount, isPreview, listingCartData, comparable, cmpData, isLoggedIn, savedCardsData,
+      getSavedCardDetails
     } = this.props;
     const { showCheckoutModal } = this.state;
     return (
       <div className={styles['pb-10']}>
         <div className={`${styles.fontW300} ${styles['lgt-blue']} ${styles['flx-space-bw']}`}>
-          <span>{brand}</span>
+          <span></span>
           {/* eslint-disable-next-line no-nested-ternary */}
           {isPreview ? null : comparable ?
             <div className={`${styles['checkbox-material']} ${styles['add-to-compare']}`}>
@@ -149,7 +165,14 @@ class TitleInfo extends Component {
             ))
           } */}
         </div>
-        <h1 className={`${styles['fs-18']} ${styles.fontW700} ${styles['black-color']} ${styles['mt-0']} ${styles['mb-0']}`}>{title}</h1>
+        <h1 className={`${styles['fs-18']} ${styles.fontW700} ${styles['black-color']} ${styles['mt-0']} ${styles['mb-0']} ${!title.translation ? styles['direction-ir'] : ''}`}>
+          {title.attribute_values && title.attribute_values.length > 0
+            && title.attribute_values[0].value}
+        </h1>
+        <h1 className={`${styles['fs-16']} ${styles.fontW300} ${styles['black-color']} ${styles['mt-5']} ${styles['mb-0']} ${!title.translation ? styles['direction-ir'] : ''}`}>
+          {title.attribute_values && title.attribute_values.length > 1
+            && title.attribute_values[1].value}
+        </h1>
         {
           isPreview
             ?
@@ -169,7 +192,9 @@ class TitleInfo extends Component {
             <div className={`${styles['flex-center']} ${styles['checkout-instantly']} ${styles['pt-5']}`}>
               <div className={`${styles.flex}`}>
                 {totalInventoryCount > 0 && isLoggedIn &&
-                  <a className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['fs-14']} ${styles['mr-10']} ${styles['small-btn']} ${styles['checkout-instant-btn']}`} onClick={this.checkoutInstantHandler}>{PDP_PAGE.CHECKOUT_INSTANT}</a>}
+                ((savedCardsData && savedCardsData.length > 0) || (getSavedCardDetails && getSavedCardDetails.length > 0))&& shippingInfo && shippingInfo.shippable &&
+                    <a className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['fs-14']} ${styles['mr-10']} ${styles['small-btn']} ${styles['checkout-instant-btn']} ${styles['left-radius']}`} onClick={this.checkoutInstantHandler}>{PDP_PAGE.CHECKOUT_INSTANT}</a>
+                }
               </div>
               <div className={styles['flex']}>
                 {
@@ -223,8 +248,8 @@ class TitleInfo extends Component {
 }
 
 TitleInfo.propTypes = {
-  brand: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
+  brand: PropTypes.object.isRequired,
+  title: PropTypes.object.isRequired,
   rating: PropTypes.object.isRequired,
   reviews: PropTypes.object.isRequired,
   price: PropTypes.string.isRequired,
@@ -236,6 +261,8 @@ const mapStateToProps = store => ({
   listingCartData: cartSelectors.getListingCartResults(store),
   isLoggedIn: authSelectors.getLoggedInStatus(store),
   cmpData: selectors.getCmpData(store),
+  getSavedCardDetails:vaultSelectors.getSavedCardDetails(store)
+
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
@@ -246,6 +273,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   addToCompare: compareActions.addToCompare,
   getCompareCount: compareActions.getCompareCount,
   removeCompareData: compareActions.removeCompareData,
+  clearInstantCheckout:instantCheckoutActionCreators.clearInstantCheckout
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(TitleInfo);

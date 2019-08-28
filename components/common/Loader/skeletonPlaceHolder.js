@@ -14,7 +14,7 @@ import styles_ar from './loader_ar.styl';
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 export const searchPlaceHolder = (
-  <div>
+  <div className={`${styles.flex}`}>
     {/* <div className={`${styles.container}`} /> */}
     <div
       className={
@@ -23,14 +23,14 @@ export const searchPlaceHolder = (
       }
     >
       <Input style={{ height: 80 }} />
-      <div style={{ borderBottom: '1px solid #f7f5f5', marginBottom: '5px' }} />
+      <div style={{ marginBottom: '5px' }} />
       {
           [0, 1, 2, 3, 4, 5, 6, 7].map((el, i) => (
             <div>
               <div key={`rect_${i}`}>
                 <Input />
               </div>
-              <div style={{ borderBottom: '1px solid #f7f5f5', marginBottom: '5px' }} />
+              <div style={{marginBottom: '5px' }} />
             </div>
               ))
           }
@@ -140,29 +140,41 @@ export const productPlaceHolder = (
       >
         {
           [0, 1, 2].map((el, i) => (
-            <Input
-              key={`rect_${i}`}
-              style={{
-                    height: '3em', width: '50%', marginRight: '20px',
-                }}
-            />
+            <div style={{
+                height: '3em', width: '50%', padding: '10px', backgroundColor: '#fff', marginRight: '20px',
+            }}
+            >
+              <Input
+                key={`rect_${i}`}
+                style={{
+                      height: '1.5em', width: '100%', backgroundColor: '#f7f5f5',
+                  }}
+              />
+            </div>
               ))
           }
       </div>
-      <Rectangle
-        style={{
-                  width: '100%', height: '85%',
-                  }}
-      />
+      <div style={{width: '100%', height: '85%', backgroundColor: '#fff', padding: '20px'}}>
+        <Rectangle
+          style={{
+                    width: '100%', height: '100%', backgroundColor: '#f7f5f5',
+                    }}
+        />
+      </div>
       <div className={`${styles.flx} ${styles['align-center']}`}>
         {
           [0, 1, 2].map((el, i) => (
-            <Rectangle
-              key={`rect_${i}`}
-              style={{
-                  width: 400, marginBottom: 20, marginRight: 20, height: 76, marginTop: 20,
-             }}
-            />
+            <div style={{
+              width: 400, marginBottom: 20, marginRight: 20, height: 76, marginTop: 20, padding: 10, backgroundColor: '#fff',
+            }}
+            >
+              <Rectangle
+                key={`rect_${i}`}
+                style={{
+                    width: '100%', height: '100%', backgroundColor: '#f7f5f5',
+              }}
+              />
+            </div>
               ))
           }
       </div>
@@ -174,12 +186,17 @@ export const productPlaceHolder = (
       >
         {
           [0, 1, 2].map((el, i) => (
-            <Rectangle
-              key={`rect_${i}`}
-              style={{
-                  width: '400px', height: '200px',
-                  }}
-            />
+            <div style={{
+              width: 400, height: '200px', backgroundColor: '#fff', padding: '20px',
+            }}
+            >
+              <Rectangle
+                key={`rect_${i}`}
+                style={{
+                    width: '360px', height: '160px', backgroundColor: '#f7f5f5',
+                    }}
+              />
+            </div>
               ))
           }
       </div>
@@ -189,38 +206,54 @@ export const productPlaceHolder = (
 
 
 export const cartPlaceHolder = (
-  <div className={`${styles.flex} ${styles['pt-40']} ${styles.relative}`} style={{
-      position: 'fixed',
+  <div className={`${styles.flex} ${styles.relative}`} style={{
+      //position: 'fixed',
       zIndex: 26,
-      width: '100vw',
+      width: '100%',
       height: '100vh',
       top: 0,
       left: 0,
-      background: '#fff',
-      paddingTop: '130px',
+      // background: '#fff',
+      // paddingTop: '130px',
     }}>
     {/* <div className={`${styles.container}`} /> */}
     <div className={`${styles.flex} ${styles['p-20']} ${styles.width100}`}>
       <div style={{ width: '75%' }} className={`${styles.flex} ${styles['flex-colum']} ${styles.width63} ${styles['mr-20']}`}>
-        <Rectangle
-          style={{
-            width: '100%',
-            height: '300px',
-            marginBottom: '20px',
+        <div style={{
+              width: '100%', height: '300px', backgroundColor: '#fff', padding: '20px', marginBottom: '20px',
           }}
-        />
+        >
+          <Rectangle
+            style={{
+              width: '100%',
+              height: '100%',
+              backgroundColor: '#f7f5f5',
+            }}
+          />
+        </div>
+        <div style={{
+              width: '100%', height: '100px', backgroundColor: '#fff', padding: '20px', marginBottom: '20px',
+          }}
+        >
+          <Rectangle
+            style={{
+              width: '100%',
+              height: '100%',
+              backgroundColor: '#f7f5f5',
+            }}
+          />
+        </div>
+      </div>
+      <div style={{
+              width: '25%', height: '600px', backgroundColor: '#fff', padding: '20px', marginBottom: '20px',
+          }}
+      >
         <Rectangle
           style={{
-            width: '100%',
-            height: '100px',
+            width: '100%', height: '100%', backgroundColor: '#f7f5f5',
           }}
         />
       </div>
-      <Rectangle
-        style={{
-          width: '25%', height: '600px',
-        }}
-      />
     </div>
   </div>
 );
@@ -247,7 +280,7 @@ export const couponPlaceHolder = (
               <div key={`rect_${i}`}>
                 <Input style={{ height: 40 }} />
               </div>
-              <div style={{ borderBottom: '1px solid #f7f5f5', marginBottom: '5px' }} />
+              <div style={{marginBottom: '5px' }} />
             </div>
               ))
           }
@@ -279,6 +312,233 @@ export const couponPlaceHolder = (
             </div>
               )))
           }
+      </div>
+    </div>
+  </div>
+);
+
+export const ftbSkeletonLoader = (
+  <div className={`${styles['grid-cont']} ${styles['flex-wrp']} ${styles.flx} result-box`} >
+    {[0, 1, 2, 3].map(() => [0, 1, 2, 3].map((el, i) => (
+      <div key={`rect_${i}`}>
+        <Rectangle />
+        <Input
+          style={{
+            marginTop: 0, marginBottom: 5, marginLeft: 5, height: '2em', width: '86%',
+          }}
+        />
+        <Input
+          style={{
+            marginTop: 0, marginBottom: 35, marginLeft: 5, width: '75%',
+          }}
+        />
+      </div>
+        )))
+    }
+  </div>
+);
+
+export const camProfileHolder = (
+  <div className={`${styles.flex}`} style={{ overflow: 'hidden', maxHeight: '800px', }}>
+    {/* <div className={`${styles.container}`} /> */}
+    <div
+      className={
+        `${styles['filter-panel']} ${styles['border-radius4']}
+          ${styles['bg-white']} col-md-2 col-sm-4`
+      }
+    >
+      <div className={`${styles.flex} ${styles['flex-center']} ${styles['m-5']}`}>
+        <Round />
+        <div className={`${styles['flex-colum']} ${styles['ml-10']}`}>
+          <Input style={{ height: 15, width: '100px' }} />
+          <Input style={{ height: 15, width: '100px' }} />
+        </div>
+      </div>
+      {
+          [0, 1, 2, 3, 4, 5].map((el, i) => (
+            <div>
+              <div key={`rect_${i}`}>
+                <Input style={{ height: 40 }} />
+              </div>
+              <div style={{marginBottom: '5px' }} />
+            </div>
+              ))
+          }
+    </div>
+    <div className={`${styles['search-results']} ${styles['p-0']} col-md-10 col-sm-8`}>
+      <div className={`${styles['grid-cont']} ${styles['mt-15']} ${styles['flex-wrp']} ${styles.flx} result-box`} >
+        <div style={{ height: '100%' }} className={`${styles.couponHeader} ${styles['p-25']}`}>
+          <div className={`${styles['flex-center']} ${styles.flex} ${styles['m-5']}`}>
+            <Round style={{ backgroundColor: '#fff' }} />
+            <div className={`${styles['flex-colum']} ${styles['ml-10']}`}>
+              <Input style={{ height: 20, width: '300px', backgroundColor: '#fff' }} />
+              <Input style={{ height: 20, width: '300px', backgroundColor: '#fff' }} />
+            </div>
+          </div>
+          <div className={`${styles.flex} ${styles['mt-40']}`}>
+            <Input style={{ height: 30, width: '150px', backgroundColor: '#fff', marginRight: '10px' }} />
+            <Input style={{ height: 30, width: '150px', backgroundColor: '#fff' }} />
+          </div>
+          <div className={`${styles.flex} ${styles['mt-40']}`}>
+            <Input style={{ height: 30, width: '150px', backgroundColor: '#fff', marginRight: '10px' }} />
+            <Input style={{ height: 30, width: '150px', backgroundColor: '#fff' }} />
+          </div>
+          <div className={`${styles.flex} ${styles['mt-40']}`}>
+            <Input style={{ height: 30, width: '150px', backgroundColor: '#fff', marginRight: '10px' }} />
+            <Input style={{ height: 30, width: '150px', backgroundColor: '#fff' }} />
+          </div>
+          <div className={`${styles.flex} ${styles['mt-40']}`}>
+            <Input style={{ height: 30, width: '150px', backgroundColor: '#fff', marginRight: '10px' }} />
+            <Input style={{ height: 30, width: '150px', backgroundColor: '#fff' }} />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
+export const camOrdersHolder = (
+  <div style={{ overflow: 'hidden', maxHeight: '800px' }}>
+    {/* <div className={`${styles.container}`} /> */}
+    <div
+      className={
+        `${styles['filter-panel']} ${styles['border-radius4']}
+          ${styles['bg-white']} col-md-2 col-sm-4`
+      }
+    >
+      <div className={`${styles.flex} ${styles['flex-center']} ${styles['m-5']}`}>
+        <Round />
+        <div className={`${styles['flex-colum']} ${styles['ml-10']}`}>
+          <Input style={{ height: 15, width: '100px' }} />
+          <Input style={{ height: 15, width: '100px' }} />
+        </div>
+      </div>
+      {
+          [0, 1, 2, 3, 4, 5].map((el, i) => (
+            <div>
+              <div key={`rect_${i}`}>
+                <Input style={{ height: 40 }} />
+              </div>
+              <div style={{ marginBottom: '5px' }} />
+            </div>
+              ))
+          }
+    </div>
+    <div className={`${styles['search-results']} ${styles['p-0']} col-md-10 col-sm-8`}>
+      <div className={`${styles['grid-cont']} ${styles['mt-15']} ${styles['flex-colum']} ${styles.flx} result-box`} >
+        {/* <div style={{ height: '100%' }} className={`${styles.couponHeader} ${styles['p-25']}`}> */}
+          {
+            [0, 1, 2].map(() => [0, 1, 2].map((el, i) => (
+              <div key={`rect_${i}`}>
+                <Rectangle style={{
+                 width: '100%',
+                 height: '170px',
+               }}
+                />
+              </div>
+            )))
+          }
+        {/* </div> */}
+      </div>
+    </div>
+  </div>
+);
+
+export const homePageHolder = (
+  <div style={{ overflow: 'hidden', maxHeight: '800px' }}>
+    {/* <div className={`${styles.container}`} /> */}
+
+    <div className={`${styles['p-0']} col-md-12 col-sm-12`}>
+      <div className={`${styles['grid-cont']} ${styles['mt-20']} ${styles['flex-wrp']} ${styles.flx} result-box`} style={{ height: '350px' }} >
+        <div style={{ height: '300px' }} className={`${styles.couponHeader} ${styles['p-25']}`}>
+        </div>
+      </div>
+      <div className={`${styles['mt-20']} ${styles['justify-around']} ${styles.flx} result-box`}>
+        <div style={{ height: '140px', width: '48%'}} className={`${styles['grid-cont']} ${styles.flx}`}>
+          <div>
+            <div style={{ height: '100%' }} className={`${styles.couponHeader} ${styles['p-40']}`}></div>
+          </div>
+          <div>
+            <div style={{ height: '100%' }} className={`${styles.couponHeader} ${styles['p-40']}`}></div>
+          </div>
+          <div>
+            <div style={{ height: '100%' }} className={`${styles.couponHeader} ${styles['p-40']}`}></div>
+          </div>
+          <div>
+            <div style={{ height: '100%' }} className={`${styles.couponHeader} ${styles['p-40']}`}></div>
+          </div>
+          <div>
+            <div style={{ height: '100%' }} className={`${styles.couponHeader} ${styles['p-40']}`}></div>
+          </div>
+          <div>
+            <div style={{ height: '100%' }} className={`${styles.couponHeader} ${styles['p-40']}`}></div>
+          </div>
+          <div>
+            <div style={{ height: '100%' }} className={`${styles.couponHeader} ${styles['p-40']}`}></div>
+          </div>
+          <div>
+            <div style={{ height: '100%' }} className={`${styles.couponHeader} ${styles['p-40']}`}></div>
+          </div>
+          <div>
+            <div style={{ height: '100%' }} className={`${styles.couponHeader} ${styles['p-40']}`}></div>
+          </div>
+          <div>
+            <div style={{ height: '100%' }} className={`${styles.couponHeader} ${styles['p-40']}`}></div>
+          </div>
+        </div>
+        <div style={{ height: '140px', width: '48%'}} className={`${styles['grid-cont']} ${styles.flx}`}>
+          <div>
+            <div style={{ height: '100%' }} className={`${styles.couponHeader} ${styles['p-40']}`}></div>
+          </div>
+          <div>
+            <div style={{ height: '100%' }} className={`${styles.couponHeader} ${styles['p-40']}`}></div>
+          </div>
+          <div>
+            <div style={{ height: '100%' }} className={`${styles.couponHeader} ${styles['p-40']}`}></div>
+          </div>
+          <div>
+            <div style={{ height: '100%' }} className={`${styles.couponHeader} ${styles['p-40']}`}></div>
+          </div>
+          <div>
+            <div style={{ height: '100%' }} className={`${styles.couponHeader} ${styles['p-40']}`}></div>
+          </div>
+          <div>
+            <div style={{ height: '100%' }} className={`${styles.couponHeader} ${styles['p-40']}`}></div>
+          </div>
+          <div>
+            <div style={{ height: '100%' }} className={`${styles.couponHeader} ${styles['p-40']}`}></div>
+          </div>
+          <div>
+            <div style={{ height: '100%' }} className={`${styles.couponHeader} ${styles['p-40']}`}></div>
+          </div>
+          <div>
+            <div style={{ height: '100%' }} className={`${styles.couponHeader} ${styles['p-40']}`}></div>
+          </div>
+          <div>
+            <div style={{ height: '100%' }} className={`${styles.couponHeader} ${styles['p-40']}`}></div>
+          </div>
+        </div>
+        {/* <div style={{ height: '150px', width: '45%'}} className={`${styles.couponHeader} ${styles['p-25']} ${styles['grid-cont']}`}>
+        </div> */}
+      </div>
+      <div className={`${styles['mt-20']} ${styles.flx} ${styles['justify-around']} result-box`}>
+        <div style={{ height: '200px', width: '31.5%'}} className={`${styles['grid-cont']} ${styles.flx}`}>
+          <div style={{ height: '160px'}} className={`${styles.couponHeader} ${styles['p-25']}`}>
+          </div>
+        </div>
+        <div style={{ height: '200px', width: '31.5%'}} className={`${styles['grid-cont']} ${styles.flx}`}>
+          <div style={{ height: '160px'}} className={`${styles.couponHeader} ${styles['p-25']}`}>
+          </div>
+        </div>
+        <div style={{ height: '200px', width: '31.5%'}} className={`${styles['grid-cont']} ${styles.flx}`}>
+          <div style={{ height: '160px'}} className={`${styles.couponHeader} ${styles['p-25']}`}>
+          </div>
+        </div>
+       
+        {/* <div style={{ height: '200px', width: '30%'}} className={`${styles.couponHeader} ${styles['p-25']}`}>
+        </div>
+        <div style={{ height: '200px', width: '30%'}} className={`${styles.couponHeader} ${styles['p-25']}`}>
+        </div> */}
       </div>
     </div>
   </div>

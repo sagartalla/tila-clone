@@ -1,22 +1,24 @@
 @import '../../layout/main/executables.styl';
 
 .header-container
-  display block
-  // margin-bottom 10px
-  box-shadow 0 0 12px 0 rgba(0,0,0,.1)
+  display: block;
+  box-shadow: 0 0 12px 0 rgba(0,0,0,0.1);
+  position: fixed;
+  top: 0;
+  z-index: 99;
+  background: #fff;
+  width 100%
   .header-container-inn
     background-color white
-    position fixed
     width 100%
-    z-index 99
-    top 0
     &.faded
       background-color rgba(255,255,255, 0.95)
+    .header-inn-wrap
+      height 60px
 
   .header-megamenu
     box-shadow 0 3px 4px 0 rgba(0, 0, 0, 0.09)
     position relative
-    margin-top 61px
     // z-index 99
     .header-megamenu-inn
       box-shadow 0 1px 1px 0 rgba(0, 0, 0, 0.09)
@@ -53,12 +55,19 @@
 .profile-part
 
   .ple-icon
-    padding: 10px 20px;
+    padding: 10px 24px;
     border-bottom: 1px solid #efeff4
     .profile-name
       display flex
       flex-direction column
-      word-break break-all
+    .hello-text-clr
+      color label-light
+    .user-name
+      max-width 130px
+      text-overflow ellipsis
+      overflow hidden
+      white-space nowrap
+      float left
     .icon
       width 40px
       height 40px
@@ -73,7 +82,7 @@
       &:hover
         background-color white
         font-weight bold
-        border-left 2px solid thick-red-arrow
+        border-left 2px solid tila-blk
       a span
         color #000
     .profile-icon
@@ -88,15 +97,18 @@
 
 .search-wrapper
   position relative
+  border 1px solid border-gray
+  border-radius 4px
   .search-input
     height 40px
     width 100%
     // background #eee
-    border-radius 4px
+    // border-radius 4px
     outline none
     padding 10px 20px
     font-size 16px
-    border 1px solid border-gray
+    border none
+    // border 1px solid border-gray
     // background light-gray-color
     &[contenteditable=true]
       color #ccc
@@ -131,13 +143,13 @@
     width 30px
     height: 30px;
     top 4px
-    border-radius 4px
+    // border-radius 4px
     display flex
     align-items center
     justify-content center
-    background suggest-label-gray
     border 0
     bottom 4px
+    background-color transparent
     .searching-icon
       position absolute
       // right 0
@@ -150,43 +162,29 @@
   display flex
   justify-content flex-end
   .action-item
-    // width 46px
-    // height 46px
-    // border-radius 50%
     float left
-    // box-shadow 0 2px 4px 0 rgba(0,0,0,0.1)
-    // margin 0 5px
     position relative
-    // padding 0 15px
-    // cursor pointer
-    // border-right 1px solid border-gray
-    &:last-child
-      border-right 0
-      padding-left 15px
-
     > span
       padding 0 15px
       border-right 1px solid border-gray
 
     .cart-count
-      right -12px
+      right -23px
       top -8px
-      background pink-color
-      padding 0 4px
-      border-radius 4px
-
+      background generic-green-color 
+      border-radius 8px
+      width 26px
+      height 18px
+      border 1px solid white
+    
   .cart-inn
-    border-right: 1px solid #e5e5e5;
-    border-radius: 0;
-    margin: 0px 0 0 22px;
+    // border-right: 1px solid #e5e5e5;
     .cart-item
       padding: 0;
       box-shadow: 0 0 7px 1px rgba(0,0,0,0.07);
-      right: -5%;
       border: 0;
       width: 340px;
-      left: auto;
-      top: 27px;
+      top: 38px;
       margin: 0;
       &:before
         content ''
@@ -194,8 +192,7 @@
         height: 15px;
         width: 15px;
         position: absolute;
-        right: 7%;
-        top: -8px;
+        top: -7px;
         transform: rotate(45deg);
         border: 1px solid border-gray;
         border-bottom: 0;
@@ -206,24 +203,20 @@
     &:hover .cart-item
       display block
 
-  .profile-login
-    .item
+  .account-inn
+    .account-item
       padding: 0;
-      box-shadow: 0 0 7px 1px rgba(0, 0, 0, 0.07);
-      min-width auto
-      right -5%
-      border 0
-      width 230px
-      left auto
-      top 32px
-      // border: 1px solid border-gray;
+      box-shadow: 0 0 7px 1px rgba(0,0,0,0.07);
+      border: 0;
+      width: 230px;
+      top: 39px;
+      margin: 0;
       &:before
         content ''
         background-color: white;
         height: 15px;
         width: 15px;
         position: absolute;
-        right: 7%;
         top: -8px;
         transform: rotate(45deg);
         border: 1px solid border-gray;
@@ -232,13 +225,36 @@
         border-left: 1px solid border-gray;
         border-top: 1px solid border-gray;
 
-      // .login-details-inn
-      //   border: 1px solid border-gray;
-      //   padding: 7px 15px;
+    &:hover .account-item
+      display block
 
-      .logout-icon, .login-icon
-        width 16px
-        height 34px
+    .logout-icon, .login-icon
+      width 16px
+      height 34px
+  .wishlist-inn
+    .wishlist-item
+      padding: 0;
+      box-shadow: 0 0 7px 1px rgba(0,0,0,0.07);
+      border: 0;
+      width: 340px;
+      top: 38px;
+      margin: 0;     
+      &:before
+        content ''
+        background-color: white;
+        height: 15px;
+        width: 15px;
+        position: absolute;
+        top: -7px;
+        transform: rotate(45deg);
+        border: 1px solid border-gray;
+        border-bottom: 0;
+        border-right: 0;
+        border-left: 1px solid border-gray;
+        border-top: 1px solid border-gray;
+
+    &:hover .wishlist-item
+      display block
 
     .profile-edit
       position absolute
@@ -256,7 +272,12 @@
         border-right 9px solid transparent
         border-bottom 12px solid white
         top -10px
-
+.round-shape
+    border-radius: 50%;
+    border: 1px solid #dddddd;
+    width: 30px;
+    height: 30px;
+  
   .profile-icon-main
     .profile-icon
       width 16px
@@ -273,6 +294,21 @@
       z-index 8
       img
         height 15px
+
+.main-search-drp
+  top 50px
+  border-radius 2px
+  padding 10px 0
+  &:before
+    content ''
+    background-color #fff
+    height 15px
+    width 15px
+    position absolute
+    left 18px
+    top -5px
+    transform: rotate(135deg);
+    box-shadow: -3px 3px 5px 0 rgba(166, 159, 159, 0.1)
 
 .login-reg-modal
   width 50%
@@ -409,6 +445,7 @@ nav
     width 16px
     height 20px
 
+
 .logos-part
   .default-logo
     width 74px
@@ -418,7 +455,6 @@ nav
   width 20px
   height 20px
   position relative
-  left -10px
   svg
     width 100%
     height 100%

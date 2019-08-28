@@ -10,6 +10,7 @@ import Voucher from './Voucher';
 import { languageDefinations } from '../../../../utils/lang/';
 
 import Button from '../../../common/CommonButton';
+import { Router } from '../../../../routes';
 
 import lang from '../../../../utils/language';
 
@@ -59,8 +60,10 @@ class SavedCards extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.processData && nextProps.processData.redirect_url) {
-      window.location = nextProps.processData.redirect_url;
+    if (nextProps.processData && nextProps.processData.iframe_url) {
+      this.setState({
+        iframe_url: nextProps.processData.iframe_url
+      });
     }
   }
 
@@ -87,8 +90,9 @@ class SavedCards extends Component {
 
   render() {
     const { data, voucherData, showLoading } = this.props;
+    const { iframe_url } = this.state;
     return (
-      <div className={`${styles['saved-cards']}`}>
+      <div className={`${styles['saved-cards']} ${styles['pb-40']}`}>
         <Voucher voucherData={voucherData} />
         <h4 className={`${styles['lgt-blue']} ${styles['fontW300']} ${styles['fs-20']} ${styles['pt-25']}`}>{PAYMENT_PAGE.YOUR_SAVED_CREDIT_AND_DEBIT_CARDS}</h4>
         <ul className={`${styles['saved-cards-part']} ${styles['pl-0']}`}>
@@ -121,13 +125,19 @@ class SavedCards extends Component {
             })
           }
         </ul>
-        <Button
-          className={`${styles['fs-16']} ${styles['text-uppercase']} ${styles['pay-btn']} ${styles['border-radius']} ${styles.width33} ${styles['ht-40']} ${styles['new-card-btn']}`}
-          onClick={this.proceedToPayment}
-          btnText={PAYMENT_PAGE.PAY + ' ' + data.amount_to_pay.display_value + ' ' + data.amount_to_pay.currency_code}
-          hoverClassName="hoverBlueBackground"
-          btnLoading={showLoading}
-        />
+        {
+          iframe_url
+            ?
+            <iframe sandbox="allow-forms allow-modals allow-popups-to-escape-sandbox allow-popups allow-scripts allow-top-navigation allow-same-origin" src={iframe_url} style={{ height: '426px', width: '500px', border: '0' }} class="h-200 desktop:h-376 w-full"></iframe>
+            :
+            <Button
+              className={`${styles['fs-16']} ${styles['text-uppercase']} ${styles['pay-btn']} ${styles['border-radius']} ${styles.width33} ${styles['ht-40']} ${styles['new-card-btn']}`}
+              onClick={this.proceedToPayment}
+              btnText={PAYMENT_PAGE.PAY + ' ' + data.amount_to_pay.currency_code + ' ' + data.amount_to_pay.display_value}
+              hoverClassName="hoverBlueBackground"
+              btnLoading={showLoading}
+            />
+        }
       </div>
     );
   }

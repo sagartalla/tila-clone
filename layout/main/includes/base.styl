@@ -21,6 +21,36 @@ body
 
 // }
 
+*{
+  scrollbar-color: #8a8a8f transparent;
+  scrollbar-width: thin;
+}
+
+*::-webkit-scrollbar
+{
+	width: 5px;
+  height 5px
+	background-color: rgb(249, 249, 249);
+}
+
+*::-webkit-scrollbar-track
+{
+/* 	-webkit-box-shadow: inset 0 0 6px #f06292 ; */
+/* 	border-radius: 10px; */
+	background-color: rgb(249, 249, 249);
+  border-left: 1px solid transparent;
+  border-right: 1px solid transparent;
+
+}
+
+*::-webkit-scrollbar-thumb
+{
+	border-radius: 20px;
+	-webkit-box-shadow: inset 0 0 px #8a8a8f;
+	background-color: #8a8a8f;
+
+}
+
 button:focus
   outline none
 
@@ -35,6 +65,9 @@ a
 
 a:hover
   text-decoration none
+
+video:focus
+  outline none
 
 // heading tags
 h1
@@ -59,7 +92,7 @@ input[type=number]::-webkit-outer-spin-button
     margin 0
 /* font sizes */
 // it will generate fonts from fs-10, fs-12, fs-14, ...., to fs-40.
-for i in range(10px, 46px, 2)
+for i in range(10px, 46px,  2)
   .fs-{i}
     font-size (i)
 
@@ -85,6 +118,8 @@ for i in range(10px, 46px, 2)
 .p-10-40
   padding 10px 40px
 
+.p-0-5
+  padding 0px 5px
 
 //height
 .ht-100P
@@ -120,6 +155,7 @@ for i in range(10px, 46px, 2)
 .main-layout
   min-height 100vh
   height 100px
+  padding-top 108px
 
 .ht-100vh
   height: 100vh
@@ -130,6 +166,9 @@ for i in range(10px, 46px, 2)
 .t-c
   text-align center
 
+.t-l
+  text-align left
+
 .align-start
   align-items start
 
@@ -138,15 +177,12 @@ for i in range(10px, 46px, 2)
 
 .align-end
   align-items flex-end
-
 .justify-around
    justify-content space-around
 
 .justify-between
    justify-content space-between
 
-.justify-end
-   justify-content flex-end
 
 .justify-center
   justify-content center
@@ -154,7 +190,6 @@ for i in range(10px, 46px, 2)
 
 .justify-evenly
    justify-content space-evenly
-
 
 .flex-col
    flex-direction column
@@ -194,6 +229,9 @@ for i in range(10px, 46px, 2)
 .lgt-blue
   color navy-blue
 
+.blue-color
+  color #45689A
+
 .dottes-gry-clr
   color dottes-gry-clr
 
@@ -227,6 +265,9 @@ for i in range(10px, 46px, 2)
 .google-clr
  color google-red
 
+.google-bg-clr
+  background google-red
+
 .success-green
   color generic-green-color
 
@@ -239,11 +280,14 @@ for i in range(10px, 46px, 2)
 .label-gry-clr
   color label-light
 
+.yellow-clr
+  color yellow-clr
+
 .twitter-clr
   color twitter-color
 
-.yellow-clr
-  color yellow-clr
+.dark-gray
+  color dark-gray
 
 //font-weight
 .fontW300
@@ -261,13 +305,15 @@ for i in range(10px, 46px, 2)
 //width list
 .width100
   width 100%
-
+.width93
+  width 93%
 .width55
   width 55%
 
 .width63
   width 63%
-
+.width78
+  width 78%
 .width50
   width 50%
 
@@ -285,9 +331,13 @@ for i in range(10px, 46px, 2)
 
 .width21
   width 21%
-
+.width22
+  width 22%
 .width18
   width 18%
+
+.width15
+  width 15%
 
 .width70
   width 70%
@@ -305,11 +355,18 @@ for i in range(10px, 46px, 2)
 .border-b
   border-bottom 1px solid light-brdr
 
+.border-r
+  border-right 1px solid light-brdr
+
+.border-l
+  border-left 1px solid light-brdr
+
 .border-lg
   border 1px solid light-brdr
 
-.border-lt
-  border-left 1px solid light-brdr
+
+// .border-lt
+//   border-left 1px solid light-brdr
 
 .border-lt-green
   border-left 1px solid generic-green-color
@@ -359,6 +416,12 @@ for i in range(10px, 46px, 2)
 .bdr-btm-green-color
   border-bottom 3px solid elct-green-color
 
+.bdr-btm-black-color
+  border-bottom 3px solid elct-black-color
+
+.text-lgt-gray
+  color label-light
+
 //list style
 .no-lst
   list-style-type none
@@ -372,6 +435,9 @@ for i in range(10px, 46px, 2)
 
 .border-radius4
   border-radius 4px
+
+.border-bt-left-radius
+  border-bottom-left-radius: 12px;
 
 .border-radius12
   border-radius 12px
@@ -426,7 +492,8 @@ for i in range(10px, 46px, 2)
 
 .textColor
     color: ash-color
-
+.black-color
+    color tila-blk
 .object-scale-down
   object-fit scale-down;
 
@@ -438,10 +505,13 @@ for i in range(10px, 46px, 2)
   border-top 1px solid thick-red-arrow
   width 100%
   position absolute
-  transform rotateZ(-4deg)
+  transform rotateZ(-20deg)
   transform-origin center center
-  top 8px
+  top 15px
   left -2px
+.flip-questionmark
+  transform scale(-1, 1)
+  z-index 1
 
 .table
   display table
@@ -468,7 +538,7 @@ for i in range(10px, 46px, 2)
 
 .checkout-quat
   background white
-  box-shadow 0 0.5px 0.5px rgba(0,0,0,0.5)
+  box-shadow 0 1px 1px rgba(0,0,0,0.5)
   padding 5px
   border-radius 17px
   height 17px
@@ -500,6 +570,9 @@ for i in range(10px, 46px, 2)
 .overflow-y-auto
   overflow-y auto
 
+.display_none
+  display none
+
 
 .ellipsis {
   text-overflow: ellipsis;
@@ -513,6 +586,12 @@ for i in range(10px, 46px, 2)
 
 .background-transparant
   background transparant
+
+.outline-none
+  outline none
+
+.display-block
+  display block
 
 @media screen and (min-device-width: 1900px) and (max-device-width: 1024px) and (orientation : landscape){
   h1 {

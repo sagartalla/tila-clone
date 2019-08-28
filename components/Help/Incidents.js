@@ -12,7 +12,7 @@ import constants from '../../constants';
 //import { mergeCss } from '../../utils/cssUtil';
 import { languageDefinations } from '../../utils/lang';
 
-const { HEADER_PAGE } = languageDefinations();
+const { HEADER_PAGE, HNS } = languageDefinations();
 
 
 const cookies = new Cookies();
@@ -48,7 +48,7 @@ const ReplyBox = (props) => {
         reader.onerror = (error) => { console.log('Error: ', error) };
         reader.readAsDataURL(file);
       } else {
-        alert('File size limit is 10MB')
+        alert(HNS['FILE_SIZE_LIMIT'])
       }
     }
   }
@@ -67,17 +67,17 @@ const ReplyBox = (props) => {
   )
   return(
     <div className={styles['pV-10']}>
-      <textarea disabled={props.loading} className={styles['MsgTextArea']} placeholder='Reply to this message' value={msg} onChange={handleMsg} />
+      <textarea dir="auto" disabled={props.loading} className={styles['MsgTextArea']} placeholder='Reply to this message' value={msg} onChange={handleMsg} />
       <div className={styles['MsgBoxContainer']}>
         <div className={styles['UploadButton']}>
-          UPLOAD
+          {HNS['UPLOAD']}
           <input type='file' disabled={props.loading} onChange={handleAttachements} className={styles['fileInput']} />
         </div>
-        <div onClick={props.updateIncident(msg, files)} className={props.loading ? styles['disabledButton'] : styles['SendMsgButton']}>SEND MESSAGE</div>
+        <div onClick={props.updateIncident(msg, files)} className={props.loading ? styles['disabledButton'] : styles['SendMsgButton']}>{HNS['SEND_MESSAGE']}</div>
       </div>
       {Object.keys(files).length ?
             <div className={styles['fs-12p']}>
-              <div>{`Attachments (${Object.keys(files).length})`}</div>
+              <div>{`${HNS['ATTACHMENTS']} (${Object.keys(files).length})`}</div>
                 {Object.keys(files).map(renderFiles)}
             </div>
           : null}
@@ -107,7 +107,7 @@ class Incidents extends Component {
         const [orderId, orderItemId] = orderNumberTiLa.split('-');
         this.props.getOrderDetails({orderId}).then(res => {
           const {data} = res.value;
-          const orderObj = data.order_items.filter(order => order.order_item_ids[0] === orderNumberTiLa)[0];
+          const orderObj = data && data.order_items ? data.order_items.filter(order => order.order_item_ids[0] === orderNumberTiLa)[0] : '';
           this.setState({
             tktOrder: orderObj
           })
@@ -118,6 +118,12 @@ class Incidents extends Component {
         })
       }
     }
+  }
+  componentDidUpdate(){
+    this.props.tktDetailData && this.props.tktDetailData.threadTiLaList && this.props.tktDetailData.threadTiLaList.forEach((val, index) => {
+      const node = document.getElementById(`incidentTA-${index}`);
+      node.setAttribute(`style`, `height:${node.scrollHeight}px`);
+    })
   }
   initiateApiCalls = () => {
     const { username : emailId } = userCredentials;
@@ -192,7 +198,7 @@ class Incidents extends Component {
     const {id, createdTime, referenceNumber, subject, statusTiLa} = tkt;
     const isSelected = id === this.state.selectedIncident;
     return (
-      <div key={id} onClick={this.selectTicket(id)} className={`${styles['TktTitleContainer']} ${isSelected && styles['openBGColor']}`}>
+      <div key={id} onClick={this.selectTicket(id)} className={`${styles['TktTitleContainer']} ${isSelected && styles[ language === 'en' ? 'openBGColor2' : 'openBGColor2Ar']}`}>
         <div className={styles['fs-14p']} dangerouslySetInnerHTML={{__html: subject}} />
         <div className={`${styles['fs-13p']} ${styles['greyColor']}`}>{referenceNumber}</div>
         <div className={`${styles['fs-12p']} ${styles['greyColor']} ${styles['flex']} ${styles['justify-between']}`}>
@@ -206,9 +212,9 @@ class Incidents extends Component {
     const {tktData} = this.props;
     return (
       <div>
-        <h4 className={styles['pH-20']}>MY TICKETS</h4>
+        <h4 className={styles['pH-20']}>{HNS['MY_TICKETS']}</h4>
         <div className={styles['tktClmCont']}>
-          {tktData.length ? tktData.map(this.renderTktTitle) : <div className={styles['pH-20']}>No Incidents Available</div>}
+          {tktData.length ? tktData.map(this.renderTktTitle) : <div className={styles['pH-20']}>{HNS['NO_INCIDENTS']}</div>}
         </div>
       </div>
     )
@@ -228,7 +234,9 @@ class Incidents extends Component {
             <div>{new Date(createdTs).toLocaleTimeString()}</div>
           </div>
         </div>
-        <div className={`${styles['fs-13p']} ${styles['greyColor']}`} dangerouslySetInnerHTML={{__html: msg}} />
+        <textarea id={`incidentTA-${index}`} dir="auto" disabled className={`${styles['fs-13p']} ${styles['greyColor']} ${styles['incidentRenderInput']}`}>{msg}</textarea>
+        {/* <input dir="auto" disabled className={`${styles['fs-13p']} ${styles['greyColor']} ${styles['incidentRenderInput']}`} value={msg}/> */}
+        {/* <div className={`${styles['fs-13p']} ${styles['greyColor']}`} dangerouslySetInnerHTML={{__html: msg}} /> */}
         {index === 0 ? 
           <ReplyBox updateIncident={this.updateIncident} loading={this.state.loading}/>
 
@@ -248,14 +256,14 @@ class Incidents extends Component {
     const {order_item_ids, status, variant_info, order_id} = orderItemObj;
     const { title, image_url } = variant_info;
     const [order_item_id] = order_item_ids;
-    const orderURL =`/${country}/${language}/cam/orders/${order_id}`
+    const orderURL =`/${language}/customer/orders/${order_id}`
     return (
       <div key={order_item_id} className={`${styles['bB']} ${styles['bT']}`}>
         <div className={`${styles['facp']} ${styles['ht-110']} ${styles['p-10']}`}>
           <div className={styles['orderImgContainer']}><img className={styles['imgContain']} src={`${constants.mediaDomain}/${image_url}`} /></div>
           <div className={styles['orderItemTitle']}>{title}</div>
           <div className={styles['orderIssueContainer']}>
-            <div className={`${styles['m-5']} ${styles['fs-12p']}`}>{`Order Status - ${status} - `}<a href={orderURL}>View detail</a></div>
+            <div className={`${styles['m-5']} ${styles['fs-12p']}`}>{`Order Status - ${status} - `}<a href={orderURL}>{HNS['VIEW_DETAIL']}</a></div>
           </div>
         </div>
       </div>
@@ -274,11 +282,11 @@ class Incidents extends Component {
     return(
       <div>
         <div className={styles['pV-10']} dangerouslySetInnerHTML={{__html: subject}} />
-        {orderNumberTiLa && (this.state.tktOrder ? this.renderOrderItems(this.state.tktOrder) : <div>Getting order details of {orderNumberTiLa}</div>)}
+        {orderNumberTiLa && (this.state.tktOrder ? this.renderOrderItems(this.state.tktOrder) : <div>{HNS['GET_ORDER_DETAIL']} {orderNumberTiLa}</div>)}
         <div>{threadIds.map(this.renderThread(threads))}</div>
         {fileIds.length ?
           <div className={`${styles['pV-10']} ${styles['fs-14p']}`}>
-            <div>{`All Attachments (${fileIds.length})`}</div>
+            <div>{`${HNS['ALL_ATTACHMENTS']} (${fileIds.length})`}</div>
             <div>{fileIds.map(this.renderFile(fileAttachments, id))}</div>
           </div>
         : null}
@@ -292,12 +300,12 @@ class Incidents extends Component {
     return(
       <div>
         <div className={`${styles['mV-10']} ${styles['mH-5']} ${styles['fs-13p']}`}>
-          <a href={helpCenterUrl}>Back to Help Center</a>
+          <a href={helpCenterUrl}>{HNS['BACK_TO_HELP']}</a>
         </div>
         <div className={styles['tktContainer']}>
           <div className={styles['categoryContainer']}>{this.renderTicketColumn()}</div>
           <div className={styles['answersContainer']}>{this.renderTicketDetail()}</div>
-          <div><a href='https://fptsuae.custhelp.com/app/chat/chat_landing' target="_blank" /></div>
+          <div><a href={lang === 'en' ? 'https://tila-en.custhelp.com/app/chat/chat_landing' : 'https://tila-ar.custhelp.com/app/chat/chat_landing'} target="_blank" /></div>
         </div>
       </div>
     )

@@ -37,12 +37,11 @@ export default class FeedbackModal extends Component {
         validWhen: false,
       },
     ]);
-
     this.state = {
       textValue: props.comment || '',
       rating: props.rating || 0,
       validation: this.validations.valid(),
-      charsLeft: 300,
+      charsLeft: props && props.comment === undefined ? 300 : (300 - (props && props.comment && props.comment.length)) < 0 ? 300 : (300 - (props && props.comment && props.comment.length)),
     };
     this.handleTextChange = this.handleTextChange.bind(this);
     this.retrieveRating = this.retrieveRating.bind(this);
@@ -108,7 +107,7 @@ export default class FeedbackModal extends Component {
             <div className={`${styles['share-review-img']} ${styles.flex}`}>
               <img src={`${constants.mediaDomain}/${media}`} />
             </div>
-            <h4 className={`${styles['fs-14']} ${styles.fontW600} ${styles['t-c']} ${styles['mb-15']}`}>{title}</h4>
+            <h4 className={`${styles['fs-14']} ${styles.fontW600} ${styles['t-c']} ${styles['mb-15']}`}>{title && title.attribute_values ? title.attribute_values[0].value : title}</h4>
             <div
               className={`${styles.flex} ${styles['review-start']} ${styles['justify-center']} ${styles['mt-5']}
                ${styles['max-ht100']} ${styles['ht-25']}`}

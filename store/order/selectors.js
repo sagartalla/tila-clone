@@ -31,10 +31,16 @@ const getOrderDetails = (store) => {
             isCancelable: val.isCancelable,
             isReturnable: val.isReturnable,
             isExchangable: val.isExchangable,
+            isDamageProtectionAvailable:val.isDamageProtectionAvailable,
+            isWarrantyAvailable:val.isWarrantyAvailable,
+            listingId:val.listingId,
+            tilaPolicy: val.tilaPolicy,
+            tuinId: val.tuinId,
           });
         }, []),
         _.map(i => ({
           id: i.order_item_ids[0],
+          listingId:i.listing_id,
           img: i.variant_info.image_url,
           name: i.variant_info.title,
           itemType: i.variant_info.item_type,
@@ -48,19 +54,24 @@ const getOrderDetails = (store) => {
           offers: i.offers || [],
           variantId: i.variant_id,
           promisedDeliveryDate: i.promised_delivery_date,
+          isDamageProtectionAvailable:i.is_damage_protection_available,
+          isWarrantyAvailable:i.is_warranty_available,
           isCancelable: i.cancelable,
           isReturnable: i.returnable,
           isExchangable: i.exchangeable,
           order_type: i.order_type,
           order_item_type: i.order_item_type,
           order_status: i.status,
+          tilaPolicy:i.tila_care_policies || [],
           refunds: i.refunds,
           trackingId: i.item_tracking_id || null,
           warranty_duration: i.warranty_policy && i.warranty_policy.preferred_policy ?
             i.warranty_policy.policies[i.warranty_policy.preferred_policy] : {},
           gift_info: i.gift_info,
-          variantAttributes: i.variant_info && i.variant_info.variant_details && i.variant_info.variant_details.attribute_map ?
-            Object.values(i.variant_info.variant_details.attribute_map).filter(attr => attr.visible) : [],
+          variantAttributes: i && i.variant_info && i.variant_info.variant_details && i.variant_info.variant_details.attribute_map ?
+            Object.values(i.variant_info.variant_details.attribute_map).filter(attr => attr.attribute_group_name === 'IDENTITY' && attr.visible) : [],
+          tuinId: i.variant_info && i.variant_info.variant_details && i.variant_info.variant_details.attribute_map && i.variant_info.variant_details.attribute_map.tuin ?
+            i.variant_info.variant_details.attribute_map.tuin.attribute_values[0].value : null,
         })),
       )(order_items),
     };
@@ -73,42 +84,47 @@ const getOrderDetails = (store) => {
 
 const getOrderIssue = (store) => {
   return store.singleOrderReducer.data.orderIssue;
-}
+};
 const getOrderInfo = (store) => {
-  return store.singleOrderReducer.data.orderDetails
-}
+  return store.singleOrderReducer.data.orderDetails;
+};
 const getCancelStatus = (store) => {
   return store.singleOrderReducer.data.orderIssue.cancelStatus;
-}
+};
 
 const getErrorMessege = (store) => {
   return store.singleOrderReducer.error;
-}
+};
 
 const getLoadingStatus = (store) => {
   return store.singleOrderReducer.ui.loading;
-}
+};
 
-const getSelectedOrder = (store) => (orderItemId) => {
-  const item = store.singleOrderReducer.data.orderDetails.order_items.find((el,key) => {
-    return el.order_item_ids[0] === orderItemId
-  })
-  // const item = _.find([ 'order_item_ids',orderItemId ], store.singleOrderReducer.data.orderDetails.order_items);
-
-  var itemObj = {
+const getSelectedOrder = store => (orderItemId) => {
+  const item = store.singleOrderReducer.data.orderDetails.order_items.find((el) => {
+    return el.order_item_ids[0] === orderItemId;
+  });
+  const itemObj = {
     id: item.order_item_ids[0],
     img: item.variant_info.image_url,
     name: item.variant_info.title,
     item_tracking_id: item.item_tracking_id || shortid.generate(),
-    status: item.external_status
-  }
-  return itemObj
+    status: item.external_status,
+    item,
+  };
+  return itemObj;
+};
 
-}
+// const getSelectedOrderItem = store => (orderItemId) => {
+//   const item = store.singleOrderReducer.data.orderDetails.order_items.find((el) => {
+//     return el.order_item_ids[0] === orderItemId;
+//   });
+// }
+
 
 const getReturnStatus = (store) => {
   return store.singleOrderReducer.data.orderIssue.returnStatus;
-}
+};
 
 const getExchangeOptions = (store) => {
   const orderData = store.singleOrderReducer.data.orderIssue;
@@ -144,7 +160,7 @@ const getExchangeOptions = (store) => {
           name: displayString,
           attrValues: newValues,
         }
-      }
+      };
     }, attributeMap);
     return acc;
   }, {});

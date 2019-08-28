@@ -1,10 +1,44 @@
 @import '../../layout/main/executables.styl';
 
+.filter-panel::-webkit-scrollbar,
+.filter-panel::-webkit-scrollbar-thumb 
+  overflow:visible;
+  border-radius: 4px;
+
+.filter-panel::-webkit-scrollbar-thumb 
+  background: rgba(0,0,0,.2); 
+
+.filter-panel:hover .cover-bar {
+   opacity: 0;
+  -webkit-transition: all .5s;
+}
+
+.brands-list::-webkit-scrollbar,
+.brands-list::-webkit-scrollbar-thumb 
+  overflow:visible;
+  border-radius: 4px;
+  background: rgba(0,0,0,.2);
+
 .filter-panel
-  width: 215px;
+  // width: 215px;
   border: 1px solid #e5e5e5;
-  box-shadow: 0 2px 7px 0 rgba(0,0,0,0.03);
-  position: relative;
+  box-shadow 0 2px 7px 0 rgba(0,0,0,0.03)
+  overflow hidden
+  max-height calc(100vh - 150px)
+  position: sticky !important;
+  top 120px
+
+
+  .filter-sub-panel
+    width 100%
+    max-height calc(100vh - 150px)
+    overflow hidden
+    &:hover
+      overflow overlay
+
+  .bottom-absolute
+    position absolute
+    bottom 0
   li
     list-style none
 
@@ -15,9 +49,15 @@
   margin-right 0
 }
 
+.search-container-wrap 
+  margin 0 auto
+  min-width 978px
+  max-width 1680px
+  width 100% !important
+
 .search-results
-  width calc(82% - 20px)
-  padding 0 0 0 10px
+  // width calc(82% - 20px)
+  padding 0 0 0 15px
   .no-search
     width 300px
     text-align center
@@ -30,11 +70,15 @@
     width 25%
     padding-bottom 4px
     border-right 1px solid light-brdr
+    border-bottom 1px solid light-brdr
+    outline none
+    position relative
     a
       text-decoration none
       position relative
       float left
       width 100%
+      outline none      
     .loader-div
        width 20px
        height 20px
@@ -143,8 +187,8 @@
         z-index 9
         // transform scale(1.1)
         // padding 4px
-        border-bottom-left-radius 10px
-        border-bottom-right-radius: 10px
+        border-bottom-left-radius 14px
+        border-bottom-right-radius: 14px
         background-color white
         // box-shadow 0 2px 10px 0 rgba(0, 0, 0, 0.1)
         z-index 11
@@ -154,11 +198,11 @@
     .quick-view
       // background-color label-light
       // padding 10px 0
-      width 96%
+      width 90%
       margin 0 auto
       .add-to-crt
         border: 1px solid tila-blk
-        border-bottom-left-radius: 16px
+        border-bottom-left-radius: 14px
         background-color white
         color tila-blk
         width 50%
@@ -211,8 +255,8 @@
         width 15px
         height 15px
       .add-to-compare
-        input[type="checkbox"]
-          margin-right 8px
+        // input[type="checkbox"]
+        //   margin-right 8px
         input[type="checkbox"]:checked + label:after
           width 10px
           height 6px
@@ -222,20 +266,16 @@
           height 15px
           top 0px
 
-
   .items-list-show
-    align-items center
-    .search-val-part
-      width 45%
-    .sple-check-prt
-      border-left 1px solid lht-bdr
+    // .search-val-part
+    //   width 45%
     .deliver-to-main
-      width 55%
-      justify-content flex-end
-      align-items center
+      // width 55%
+      // justify-content flex-end
+      // align-items center
       .sort-part-inn
         display flex
-        border-left 1px solid light-brdr
+        
         .sort-arrow
           width 12px
           height 12px
@@ -299,7 +339,26 @@
       background linear-gradient(to left, gray-light, white)
       border-radius: 15px
       margin 5px
+      padding 5px
       border 0.5px solid rgba(192, 192, 192, 0.3)
+      .filter-tooltp
+        display none
+        align-items center
+        border-radius 10px
+        padding 5px
+        color white
+        background-color #666666
+        border solid 1px #8a8a8f
+        top 20px
+      .close-part
+        display none
+        height 14px
+        align-items center
+      &:hover
+        .close-part
+          display flex
+        .filter-tooltp
+          display block
       .title
         padding 0px 10px
       .close-part
@@ -319,20 +378,24 @@
   // transition: width 2s;
   .notify-me-part
     position absolute
-    top 0
-    bottom 0
-    background rgba(255, 255, 255, 0.6)
-    right 0
+    border-bottom-right-radius 10px
+    box-shadow 0 2px 6px 0 rgba(189, 189, 189, 0.5)
+    border solid 1px lgt-black-clr
+    background-color white
+    z-index 5
+    top 10px
     left 0
-    z-index 14
-    display flex
-    flex-direction column
-    align-items center
-    justify-content center
-    .notify-part-inn
-      width 50%
-      justify-content center
-      text-transform uppercase
+    // top 0
+    // bottom 0
+    // background rgba(255, 255, 255, 0.6)
+    // right 0
+    // left 0
+    // z-index 14
+    // display flex
+    // flex-direction column
+    // align-items center
+    // justify-content center
+
   .desc-cont
     .prdt-name
       width 100%
@@ -349,7 +412,7 @@
     // top 5px
     // right 10px
     padding: 6px 10px;
-    border-bottom-left-radius 20px
+    border-bottom-left-radius 14px
     // border-top-right-radius 12px
     &:hover
       background-color rgba(255,255,255,0.8)
@@ -374,8 +437,8 @@
     z-index 9
     // transform scale(1.1)
     // padding 4px
-    border-bottom-left-radius 10px
-    border-bottom-right-radius: 10px
+    border-bottom-left-radius 14px
+    border-bottom-right-radius: 14px
     background-color white
     box-shadow 0 2px 10px 0 rgba(0, 0, 0, 0.1)
     z-index 11
@@ -394,18 +457,28 @@
     .desc-cont
       display none
     .hover-show-date
-      display block
+      display flex
+      flex-direction column
   .discount-main
     position absolute
     top 0
     left 0
     padding 7px 18px
+
+.search-results .product-items-main a.notify-part-inn
+  display flex
+  align-items center
+  justify-content center
+  text-transform uppercase
+  margin-bottom 5px
+  width 80%
+  margin 0 auto
+
 .category-sub-list-inn
   .select-check-mate
     display flex
     width 100%
     .category-label
-      display flex
       width 84%
       .category-span
         overflow hidden
@@ -414,6 +487,12 @@
         text-overflow ellipsis
         width 80%
 
+.search-ellipsis
+  max-width 150vh
+  overflow hidden
+  white-space nowrap
+  text-overflow ellipsis
+  float left
 // .select-mn select
 //   -webkit-box-sizing: border-box;
 //   -moz-box-sizing: border-box;
@@ -461,7 +540,6 @@
   box-shadow 0 2px 7px 0 rgba(0,0,0,0.03)
   background-color white
   border-radius 10px
-
   .img-cont
     height 398px
     display flex
@@ -477,16 +555,16 @@
     .offer-tag
       top: 0
       left: 0
-      padding: 6px 10px;
-      border-bottom-right-radius 26px
-      border-top-left-radius 10px
+      padding: 6px 10px
+      border-bottom-right-radius 14px
+      // border-top-left-radius 10px
       color white
       &.green
-        background generic-green-color
+        background thick-red-arrow
       &.yellow
-        background yellow-color
+        background thick-red-arrow
       &.orange
-        background orange
+        background thick-red-arrow
       &.red
         background thick-red-arrow
     .variants-main
@@ -512,10 +590,12 @@
 
 .category-list-title
   padding 10px 15px
+  .flt-lbl
+    width 91%
 
 .category-list-title
   a[aria-expanded=true] .expand-icon
-    transform rotate(-90deg)
+    transform rotate(-180deg)
 
 .category-list
   border-bottom 0.5px solid light-brdr
@@ -619,26 +699,66 @@
   top 80px !important
 }
 .indication {
-  z-index 99999
+  z-index 9
   left calc(50% - 8px)
-  bottom -14px
+  bottom -12px
   width: 0;
   height: 0;
-  border-left: 16px solid transparent;
-  border-right: 16px solid transparent;
-  border-bottom: 16px solid #f1f2f4;
+  border-left: 13px solid transparent;
+  border-right: 13px solid transparent;
+  border-bottom: 13px solid #f1f2f4;
 }
 .search-header
-  width 84%
-  margin-left 18px
   position relative
   .icon-search {
     width 12px
     height 12px
     position absolute
     left 0
-    top 10px
+    top 8px
   }
-  .pl-18 {
-    padding-left 18px
+  .pl-25 {
+    padding-left 25px
   }
+
+.border-left
+  border-bottom-left-radius 16px
+
+.main-popup
+  width 760px
+
+.brands-list
+  overflow-x auto
+  white-space nowrap
+  border-radius 2px
+  height 350px
+  display flex
+  flex-wrap wrap
+  flex-direction column
+  margin 10px 0
+
+.active
+  color black !important
+  font-family ProximaNova-Bold
+  border-bottom 2px solid
+
+.select-checkbox-width
+  width 200px
+
+.notifyme-msg
+  background black
+  color white
+  border-radius 3px
+  border solid 1px #979797
+  position absolute
+  width 100%
+  bottom 0
+  height 35px
+
+
+.label-ellipsis
+  text-overflow ellipsis
+  overflow hidden
+  white-space nowrap
+  max-width 150px
+

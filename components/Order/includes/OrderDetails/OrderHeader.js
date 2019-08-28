@@ -22,7 +22,7 @@ import lang from '../../../../utils/language';
 import main_en from '../../../../layout/main/main_en.styl';
 import main_ar from '../../../../layout/main/main_ar.styl';
 import styles_en from '../../order_en.styl';
-import styles_ar from '../../order_en.styl';
+import styles_ar from '../../order_ar.styl';
 
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
@@ -126,7 +126,7 @@ class OrderHeader extends Component {
                     </div>
                     <div className={`${styles['flex-center']} ${styles['fs-14']}`}>
                       <Col md={6} sm={6} className={styles['thick-gry-clr']}>{ORDER_PAGE.ITEM_TOTAL}</Col>
-                      {price && <Col md={6} sm={6}><span>{total_offer_price.display_value}</span> <span>{total_offer_price.currency_code}</span></Col>}
+                      {price && <Col md={6} sm={6}><span className={`${styles['fs-12']}`}>{total_offer_price.currency_code}</span> <span>{total_offer_price.display_value}</span></Col>}
                     </div>
                     {/* <p className={`${styles['flex-center']}`}>
                       <Col md={6} sm={6}>{ORDER_PAGE.SHIPPING}</Col>
@@ -162,14 +162,14 @@ class OrderHeader extends Component {
                       <Fragment key={index}>
                         <div className={`${styles['lne-ht2']} ${styles['fs-14']}`}>
                           <Col className={`${styles['thick-gry-clr']} ${styles['text-capitalize']}`} md={6}>{p.payment_mode_display_name.replace('_', ' ')}</Col>
-                          <Col md={6}> {`${p.amount.display_value} ${p.currency_code}`}</Col>
+                          <Col md={6}><span className={`${styles['fs-12']}`}>{p.currency_code}</span>&nbsp;<span>{p.amount.display_value}</span></Col>
                         </div>
                         {p.card_type &&
                           <div className={`${styles['lne-ht2']} ${styles['fs-14']}`}>
                             <Col className={`${styles['thick-gry-clr']}`} md={6}>{p.card_type}</Col>
                             {/* { p.amount && p.amount.display_value && */}
                               <Col md={6}>
-                                {`${p.masked_card_first6}******${p.masked_card_last4}`}
+                                <div className={`${styles['card-number']}`}>{`${p.masked_card_first6}******${p.masked_card_last4}`}</div>
                                 {/* {p.amount.display_value} {p.amount.currency_code} */}
                               </Col>
                             {/* } */}
@@ -213,28 +213,31 @@ class OrderHeader extends Component {
               <Col md={5} xs={6} sm={5}>
                 <Col md={6} sm={6}><span className={`${styles['thick-gry-clr']} ${styles['fs-14']}`}>{ORDER_PAGE.GRAND_TOTAL}</span></Col>
                 {price &&
-                <Col md={6} sm={6}>
+                <Col md={6} sm={6} className={styles['tool-tip-style']}>
                   <span className={`${styles.fontW600} ${styles['light-gry-clr']} ${styles['flex-center']} ${styles['fs-14']}`}>
-                    {total_price.display_value}&nbsp;{total_price.currency_code}
+                  <span className={styles['align-baseline']}><span className={`${styles['fs-12']}`}>{total_price.currency_code}</span>&nbsp;<span>{total_price.display_value}</span></span>
                     {/* (<a onMouseOver={this.showToolTip} onMouseLeave={this.hideToolTip}>i</a>) */}
-                    <span onMouseOver={this.showToolTip} onMouseLeave={this.hideToolTip} className={`${styles.relative} ${styles['checkout-quat']} ${styles['fs-12']} ${styles['flex-center']} ${styles['justify-around']}`}>
-                      {'?'}
+                    <span
+                      onMouseOver={this.showToolTip}
+                      onMouseLeave={this.hideToolTip}
+                      className={`${styles.relative} ${styles['checkout-quat']} ${styles['fs-12']} ${styles['flex-center']} ${styles['justify-around']}`}>
+                      <span className={`${lang === 'en' ? '' : styles['flip-questionmark']}`}>?</span>
                       {
                       showToolTip ?
                         <div className={styles['tool-tip']}>
                           <ul>
                             {total_mrp &&
-                            <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.T_MRP} : </span><span> {total_mrp.display_value} {total_mrp.currency_code}</span></li>}
+                            <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.T_MRP} : </span><span> {total_mrp.currency_code} {total_mrp.display_value}</span></li>}
                             {total_discount &&
-                            <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.T_DISCOUNT} : </span><span>{'(-)'} {total_discount.display_value} {total_discount.currency_code}</span></li>}
+                            <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.T_DISCOUNT} : </span><span>{'(-)'} {total_discount.currency_code} {total_discount.display_value}</span></li>}
                             {total_offer_price &&
-                            <li className={`${styles['flx-space-bw']} ${styles['b-t']}`}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.T_PRICE} : </span><span> {total_offer_price.display_value} {total_offer_price.currency_code}</span></li>}
+                            <li className={`${styles['flx-space-bw']}`}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.T_PRICE} : </span><span> {total_offer_price.currency_code} {total_offer_price.display_value}</span></li>}
                             {total_shipping &&
-                            <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.T_SHIPPING} : </span><span className={styles.flex}>{total_shipping.money_value ? `(+) ${total_shipping.display_value} ${total_shipping.currency_code}` : <SVGComponent clsName={`${styles['ship-icon']}`} src="icons/free-shipping" />}</span></li>}
+                            <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.T_SHIPPING} : </span><span className={styles.flex}>{total_shipping.money_value ? `(+) ${total_shipping.currency_code} ${total_shipping.display_value}` : <SVGComponent clsName={`${styles['ship-icon']}`} src={lang === 'en' ? "icons/free-shipping" : "icons/Arabic-Freeshipping" } />}</span></li>}
                             {total_gift_charges && total_gift_charges.money_value > 0 &&
-                              <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.T_GIFT_CHARGES} : </span><span>{total_gift_charges.display_value ? `(+) ${total_gift_charges.display_value} ${total_gift_charges.currency_code}` : 'FREE'}</span></li>}
+                              <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.T_GIFT_CHARGES} : </span><span>{total_gift_charges.display_value ? `(+) ${total_gift_charges.currency_code} ${total_gift_charges.display_value}` : 'FREE'}</span></li>}
                             {total_price &&
-                            <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.TOTAL} : </span><span className={styles.fontW600}>{total_price.display_value} {total_price.currency_code}</span></li>}
+                            <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.TOTAL} : </span><span className={styles.fontW600}>{total_price.currency_code} {total_price.display_value}</span></li>}
                           </ul>
                         </div>
                         : null

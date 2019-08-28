@@ -22,8 +22,8 @@ const personalDetailsReducer = typeToReducer({
       },
       ui: { loading: false },
     }),
-    REJECTED: (state, action) =>
-      Object.assign({}, state, { error: action.payload.message, ui: { loading: false } }),
+    REJECTED: (state, action) =>{    
+      return Object.assign({}, state, { error: action.payload.message, ui: { loading: false } })},
   },
   [actions.CHANGE_PASSWORD]: {
     PENDING: state => Object.assign({}, state, { ui: { loading: true } }),
@@ -143,7 +143,7 @@ const personalDetailsReducer = typeToReducer({
         ...passResetStatus,
       },
       ui: {
-        loading: true,
+        loading: false,
       },
     };
     return newState;

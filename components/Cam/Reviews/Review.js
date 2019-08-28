@@ -43,17 +43,22 @@ const Review = ({ rev, deleteReview, submitUserReview }) => {
   };
 
   const closeModal = () => {
+    document.getElementsByTagName('BODY')[0].style.overflow = 'auto';
     setModal(false);
     setReviews(true);
-  }
-  const showModal = () => setModal(true);
+  };
+
+  const showModal = () => {
+    document.getElementsByTagName('BODY')[0].style.overflow = 'hidden';
+    setModal(true);
+  };
 
   return (
     <div key={rev.review_id} className={`${styles.relative} ${styles.review} ${styles['pl-15']} ${styles['pr-15']} ${styles['pt-15']} ${styles['flex-center']}`}>
       <div>
         <img className={styles.icon} alt="" src={`${constants.mediaDomain}/${rev.product_image_url}`} />
       </div>
-      <div className={`${styles['pl-15']} ${styles['pr-15']} ${styles['pt-15']} ${styles['pb-30']} ${styles['border-b']} ${styles.width100}`}>
+      <div className={`${styles['pl-15']} ${styles['pr-15']} ${styles['pt-15']} ${styles['pb-30']} ${styles['border-b']}`}>
         <div className={`${styles['pb-10']} ${styles['fs-14']} ${styles.fontW600}`}>{rev.title}</div>
         <StarRating
           interactive={false}
@@ -61,7 +66,7 @@ const Review = ({ rev, deleteReview, submitUserReview }) => {
           rating={rev.ratings}
           clsStyl={{ width: '15px', marginRight: '5px' }}
         />
-        <div className={`${styles['pt-10']} ${styles['fs-12']} ${styles['dottes-gry-clr']}`}>{rev.comment}</div>
+        <div className={`${styles['pt-10']} ${styles['fs-12']} ${styles['dottes-gry-clr']} ${styles['cam-reviw']}`}>{rev.comment}</div>
         {!rev.comment &&
           <Button
             id={rev.review_id}
@@ -110,6 +115,6 @@ const Review = ({ rev, deleteReview, submitUserReview }) => {
       </div>
     </div>
   );
-}
+};
 
 export default Review;

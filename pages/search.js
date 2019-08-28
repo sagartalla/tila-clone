@@ -6,8 +6,10 @@ import Cookies from 'universal-cookie';
 import createHistory from 'history/createBrowserHistory';
 import Base, { baseActions } from './base';
 import makeStore from '../store';
+import { languageDefinations } from '../utils/lang';
 import { actionCreators, selectors } from '../store/search';
 import { actionCreators as authActionsCreators, selectors as authSelectors } from '../store/auth';
+import { actionCreators as megamenuActionsCreators } from '../store/megamenu';
 import Layout from '../layout/main';
 import Search from '../components/Search';
 
@@ -15,9 +17,11 @@ import SearchContext from '../components/helpers/context/search';
 
 const cookies = new Cookies();
 
+const { SEO_CONTENT } = languageDefinations();
+
 class SearchPage extends Base {
   static async getInitialProps({ store, isServer, query, req }) {
-    const { country, language, search, facets, category, subCategory, isListed, disableSpellCheck, sid } = query
+    const { country, language, q, facets, category, subCategory, isListed, disableSpellCheck, sid } = query;
     const categoryTree = query.categoryTree === 'true'; //TODO need better way to identify category tree
     const categoryFacet = query.categoryFacet === 'true';
     //TODO SF-37 better handling of country
@@ -32,15 +36,15 @@ class SearchPage extends Base {
       id: sid ? sid.split(',').pop() : null,
     };
     const { facetFilters, facetFiltersCopyWithNames } = selectors.getFacetfilters(store.getState())(JSON.parse(facets || '{}'));
-    const shippingData = req ? req.universalCookies.get('shippingInfo') : cookies.get('shippingInfo');;
+    const shippingData = req ? req.universalCookies.get('shippingInfo') : cookies.get('shippingInfo');
     const { city: shippingCity, country: shippingCountry } = shippingData || {};
     const searchOptions = {
       categoryFilter,
       categoryFacet,
       country: country || undefined,
       pageSize: 25,
-      query: search,
-      language: language || 'en',
+      query: q,
+      language: language || global.APP_LANGUAGE,
       facetFilters,
       facetFiltersCopyWithNames,
       pageNum: 1,
@@ -49,24 +53,31 @@ class SearchPage extends Base {
       disableSpellCheck,
       choosenCategoryName: category || subCategory,
     };
+
     if (shippingCity) {
       searchOptions.shippingDetails = {
         shippingCity: shippingCity.toUpperCase(),
-        shippingCountry: (country || 'ARE').toUpperCase(),
-      }
+        shippingCountry: (shippingCountry || global.APP_COUNTRY).toUpperCase(),
+      };
+    } else {
+      searchOptions.shippingDetails = undefined;
     }
-    await store.dispatch(actionCreators.getSearchResults(searchOptions))
+    await Promise.all([
+      store.dispatch(actionCreators.getSearchResults(searchOptions)),
+      store.dispatch(megamenuActionsCreators.getMegamenu())
+    ]);
     return { isServer };
   }
 
   pageName = 'SEARCH';
 
   render() {
+    const {url, loaderProps} = this.props;
     return (
       <div>
         <SearchContext.Provider value="search">
           <Layout>
-            <Search query={this.props.url.query} />
+            <Search query={url.query} loaderProps={loaderProps}/>
           </Layout>
         </SearchContext.Provider>
       </div>
@@ -88,5 +99,4 @@ const mapDispatchToProps = dispatch =>
     dispatch,
   );
 
-export default withRedux(makeStore, mapStateToProps, mapDispatchToProps)(SearchPage);
-
+export default withRedux(makeStore, null, mapDispatchToProps)(SearchPage);

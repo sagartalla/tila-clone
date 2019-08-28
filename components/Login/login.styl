@@ -18,24 +18,32 @@
 .text-center
   text-align: center;
 
+input::-webkit-credentials-auto-fill-button 
+  visibility hidden;
+  display none !important;
+
 .forgot-password
   margin-left: 20px;
   margin-right: 20px;
   text-align: justify;
   min-height: 355px;
-  
+  .disabled-button
+   &:disabled
+      color white
+      background-color suggest-label-gray
+      border suggest-label-gray 
   .radio-buttons
    min-height: 150px;
   .border
     border: 0.5px solid thck-gry-clr
   .reset-link
-    background-color: light-card-green;
+    background-color: light-gray-color;
     padding: 10px;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
   .reset-link-mobile
-    background-color: light-card-green;
+    background-color: light-gray-color;
     padding: 10px;
   .inputOTP
     border: none;
@@ -44,8 +52,11 @@
     outline: none;
     text-align: center;
   .email-success-icon
-    width: 73px;
-    height: 69px;
+    width 73px
+    height 69px
+    position absolute
+    top -40px
+    right -21px
   .bg-light-gray
     color: dark-gray;
   .invalid-email
@@ -76,10 +87,10 @@
     clear both
 
 .login-reg-modal
-  background-color login-bg-gray
+  background-color login-bg-gray !important
 
 .background-transparent
-   background transparent
+   background transparent !important
    
 .sign-in-btn
   background tila-blk
@@ -168,6 +179,9 @@
       .gender-select-inn
         width 64px
         height 64px
+      .gender-select-signin
+        width 45px
+        height 45px
   .country-code
     position relative
     img
@@ -184,6 +198,7 @@
 
 .otpInput
   outline none
+  border none
   border-bottom 2px solid black
 
 .success-text
@@ -202,6 +217,9 @@
   
 .logo-icon
   width 60px
+
+.edit-button
+  border-right 2px solid light-brdr
 
 @media screen and (min-device-width: 320px) and (max-device-width: 736px) and (orientation : portrait){
   .login-form {

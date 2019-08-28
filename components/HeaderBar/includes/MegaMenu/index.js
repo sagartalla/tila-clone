@@ -52,6 +52,7 @@ class MegaMenu extends Component {
 
   onHoverCurry = item => () => {
     if(this.state.selectedCategory !== item.id) {
+      timeoutCount && clearTimeout(timeoutCount);
       timeoutCount = setTimeout(() => {
         this.setState({
           ...this.state,
@@ -95,9 +96,9 @@ class MegaMenu extends Component {
   }
 
   onHoverOutDelayed(id) {
-    timeoutCount && clearTimeout(timeoutCount);
     return () => {
-      setTimeout(() => {
+      timeoutCount && clearTimeout(timeoutCount);
+      timeoutCount = setTimeout(() => {
         if(!this.expandedHover){
           this.setState({
             selectedCategory: null,
@@ -106,19 +107,19 @@ class MegaMenu extends Component {
             hoverItem: null,
           })
         }
-      });
+      }, 600);
     }
   }
 
   getLandingPageLink(id) {
-    if(id === 848) {
-      return 'landing/electronics';
+    if(id === 'CWZ') {
+      return 'electronics';
     }
-    if(id === 892) {
-      return 'landing/fashion';
+    if(id === 'GLS') {
+      return 'fashion';
     }
-    if(id === 932) {
-      return 'landing/lifestyle';
+    if(id === 'JZG') {
+      return 'lifestyle';
     }
   }
 
@@ -139,19 +140,19 @@ class MegaMenu extends Component {
       <div>
         <Grid className={`${styles['pl-0']}`}>
         <nav className={`${styles['megamenu-wrapper']} ${styles['flx-spacebw-alignc']}`}>
-          <ul className={styles['mb-0']}>
+          <ul className={`${styles['mb-0']} ${styles.flex}`}>
             {
               _.map(megamenu, (item) => {
                 return (
                   <li key={item.id}
                     onMouseEnter={this.onHoverCurry(item)}
                     onMouseLeave={this.onHoverOutDelayed(item.id)}
-                    className={`${(hoverItem === item.id) ? styles['active-menu-item']: {}}`}
+                    className={`${(hoverItem === item.id) ? styles['active-menu-item'] : ''}`}
                     style={ (itemColor && hoverItem === item.id) ? { borderBottom: `4px solid ${itemColor}` } : {} }
                     >
                     <div>
                       {/* <Link route={`/category/${item.displayName}-${item.id}?categoryTree=true&isListed=false`}> */}
-                      <Link route={`/${country}/${language}/${this.getLandingPageLink(item.id)}`}>
+                      <Link route={`/${language}/${this.getLandingPageLink(item.sid)}`}>
                         <a>{item.displayName}</a>
                       </Link>
                     </div>

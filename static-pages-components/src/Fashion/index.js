@@ -22,9 +22,9 @@ const Fashion = () => (
             </Col>
             <Col md={6} className={styles['p-0']}>
               <div className={`${styles['flex']} ${styles['flex-colum']}`}>
-                <span className={`lobster-family ${styles['fs-24']}`}>Men's Shoes</span>
-                <span className={styles['fs-12']}>They lift you physically & emotionally.</span>
-                <span className={`${styles['pt-25']} shop-now-btn`}><a className={`${styles['fs-12']} ${styles['fontW600']} ${styles['border-radius4']}`}>Buy NOW</a></span>
+              <span className={`${styles['fs-20']} ${styles['black-color']}`}>Men's Shoes</span>
+              <span className={`${styles['fs-12']} ${styles['black-color']} ${styles.fontW300}`}>They lift you physically & emotionally.</span>
+              <span className={`${styles['pt-25']} shop-now-btn`}><a className={`${styles['fs-12']} ${styles.fontW600} ${styles['border-bt-left-radius']}`}>Buy NOW</a></span>
               </div>
             </Col>
           </div>
@@ -38,9 +38,9 @@ const Fashion = () => (
             </Col>
             <Col md={6} className={styles['p-0']}>
               <div className={`${styles['flex']} ${styles['flex-colum']}`}>
-                <span className={`lobster-family ${styles['fs-24']}`}>Women’s Dress</span>
-                <span className={styles['fs-12']}>When in doubt, wear red.</span>
-                <span className={`${styles['pt-25']} shop-now-btn`}><a className={`${styles['fs-12']} ${styles['fontW600']} ${styles['border-radius4']}`}>Buy NOW</a></span>
+              <span className={`${styles['fs-20']} ${styles['black-color']}`}>Women’s Dress</span>
+              <span className={`${styles['fs-12']} ${styles['black-color']} ${styles.fontW300}`}>When in doubt, wear red.</span>
+              <span className={`${styles['pt-25']} shop-now-btn`}><a className={`${styles['fs-12']} ${styles.fontW600} ${styles['border-bt-left-radius']}`}>Buy NOW</a></span>
               </div>
             </Col>
           </div>
@@ -54,9 +54,9 @@ const Fashion = () => (
             </Col>
             <Col md={6} className={styles['p-0']}>
               <div className={`${styles['flex']} ${styles['flex-colum']}`}>
-                <span className={`lobster-family ${styles['fs-24']}`}>Fitness & Sports</span>
-                <span className={styles['fs-12']}>Take care of your body.</span>
-                <span className={`${styles['pt-25']} shop-now-btn`}><a className={`${styles['fs-12']} ${styles['fontW600']} ${styles['border-radius4']}`}>Buy NOW</a></span>
+              <span className={`${styles['fs-20']} ${styles['black-color']}`}>Fitness & Sports</span>
+              <span className={`${styles['fs-12']} ${styles['black-color']} ${styles.fontW300}`}>Take care of your body.</span>
+              <span className={`${styles['pt-25']} shop-now-btn`}><a className={`${styles['fs-12']} ${styles.fontW600} ${styles['border-bt-left-radius']}`}>Buy NOW</a></span>
               </div>
             </Col>
           </div>
@@ -70,9 +70,9 @@ const Fashion = () => (
             </Col>
             <Col md={6} className={styles['p-0']}>
               <div className={`${styles['flex']} ${styles['flex-colum']}`}>
-                <span className={`lobster-family ${styles['fs-24']}`}>Upto 50% Off on Watches</span>
-                <span className={styles['fs-12']}>They lift you physically & emotionally.</span>
-                <span className={`${styles['pt-25']} shop-now-btn`}><a className={`${styles['fs-12']} ${styles['fontW600']} ${styles['border-radius4']}`}>Buy NOW</a></span>
+              <span className={`${styles['fs-20']} ${styles['black-color']}`}>Upto 50% Off on Watches</span>
+              <span className={`${styles['fs-12']} ${styles['black-color']} ${styles.fontW300}`}>They lift you physically & emotionally.</span>
+              <span className={`${styles['pt-25']} shop-now-btn`}><a className={`${styles['fs-12']} ${styles.fontW600} ${styles['border-bt-left-radius']}`}>Buy NOW</a></span>
               </div>
             </Col>
           </div>
@@ -110,7 +110,7 @@ const Fashion = () => (
               <div className={`new-brands ${styles['pb-10']}`}>
                 <img src="/static/img/landing-page-fashion/what-new3.jpg" className="img-responsive" />
                 <div className={`${styles['bg-white']} chinos-part-inn`}>
-                  <h6 className={`${styles['m-0']} ${styles['fs-14']} ${styles['fontW600']}`}>Kids Wear</h6>
+                  <h6 className={`${styles['m-0']} ${styles['fs-14']} ${styles['fontW600']}`}>Kids' Wear</h6>
                   <span className="disc">Up to 50% Off</span>
                 </div>
               </div>

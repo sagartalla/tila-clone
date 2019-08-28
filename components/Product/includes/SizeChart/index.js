@@ -31,16 +31,19 @@ class SizeChart extends Component {
   }
 
   openSlider = () => {
+    document.getElementsByTagName('BODY')[0].style.overflow = 'hidden';
     this.setState({
       showSlider: true,
     });
   }
 
   closeSlider = () => {
+    document.getElementsByTagName('BODY')[0].style.overflow = 'auto';
     this.setState({
       showSlider: false,
     });
   }
+
   render() {
     const { productInfo } = this.props;
     const { showSlider } = this.state;

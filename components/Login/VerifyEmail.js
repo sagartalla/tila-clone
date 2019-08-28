@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators, selectors } from '../../store/auth';
+import { selectors as camSelectors } from '../../store/cam/personalDetails';
 import Input from '../common/Input';
 import Timer from '../common/Timer';
 import Button from '../common/CommonButton';
@@ -18,7 +19,7 @@ import styles_ar from './login_ar.styl';
 
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
-const { EMAIL_VERIFICATION } = languageDefinations();
+const { EMAIL_VERIFICATION, LOGIN_PAGE } = languageDefinations();
 
 class VerifyEmail extends Component {
   constructor(props) {
@@ -26,9 +27,18 @@ class VerifyEmail extends Component {
     this.state = {
       value: '',
       otpError: false,
+      seconds: 30 * 60,
+      resendClicked: false,
     };
   }
 
+  getSeconds = (sec) => {
+    if (sec === 0) {
+      this.setState({
+        seconds: sec,
+      });
+    }
+  }
   enterOtp = (e) => {
     let { otpError, value } = this.state;
     if (e.target.value) {
@@ -50,6 +60,7 @@ class VerifyEmail extends Component {
     }
   }
   verifyEmail = () => {
+    const { v2NextPage } = this.props;
     const { value } = this.state;
     if (value === '') {
       this.setState({
@@ -66,27 +77,34 @@ class VerifyEmail extends Component {
 
   sendOtpToEmailId = () => {
     const { sendOtpToEmailId } = this.props;
-    sendOtpToEmailId();
+    sendOtpToEmailId().then(() => {
+      this.setState({
+        seconds: 30 * 60,
+      });
+    });
+    this.setState({
+      resendClicked: true,
+    });
   }
 
   render() {
-    const { activeEmailId, onBackdropClick, loadingStatus } = this.props;
-    const { value, otpError } = this.state;
+    const { activeEmailId, loadingStatus, userInfoData, profileInfo } = this.props;
+    const { value, otpError, seconds, resendClicked } = this.state;
     return (
       <div className={`${styles.width100}`}>
-        <div className={`${styles.flex} ${styles['align-center']} ${styles['justify-between']}  ${styles['mt-15']}`}>
+        <div className={`${styles.flex} ${styles['align-center']} ${styles['justify-between']}`}>
           <div className={`${styles['ff-b']} ${styles['fs-20']}`}>{EMAIL_VERIFICATION.VERIFY_YOUR_EMAIL}</div>
         </div>
-        <div className={`${styles.flex} ${styles['justify-between']} ${styles['flex-col']} ${styles['email-form']} ${styles['mt-20']}`}>
+        <div className={`${styles.flex} ${styles['justify-between']} ${styles['flex-col']} ${styles['email-form']} ${styles['mt-20']} ${styles['mb-20']}`}>
           <div className={`${styles['verify-email']} ${styles['p-10']}`}>
             <div className={`${styles.flex} ${styles['align-center']}`}>
               <SVGComponent clsName={`${styles['tickmark-icon']}`} src="icons/common-icon/blue-tick" />
               <div className={`${styles['ml-10']}`}>{EMAIL_VERIFICATION.OTP_SENT}</div>
             </div>
-            <div className={`${styles['ff-b']} ${styles['fs-16']} ${styles.ellipsis} ${styles['ml-25']}`} title={activeEmailId} >{activeEmailId}</div>
+            <div className={`${styles['ff-b']} ${styles['fs-16']} ${styles.ellipsis} ${styles['ml-25']}`} title={activeEmailId} >{(userInfoData && userInfoData.email) || activeEmailId || (profileInfo && profileInfo.contactInfo && profileInfo.contactInfo.email)}</div>
           </div>
           <div className={`${styles.flex} ${styles['align-center']} ${styles['flex-col']}`}>
-            <div>{EMAIL_VERIFICATION.ENTER_OTP}</div>
+            <div className={`${styles['t-c']}`}>{EMAIL_VERIFICATION.ENTER_OTP}</div>
             <Input
               type="text"
               autoFocus
@@ -99,12 +117,12 @@ class VerifyEmail extends Component {
             {otpError ? <div className={`${styles['thick-red-clr']}`}>{EMAIL_VERIFICATION.PLEASE_ENTER_OTP_SENT}</div> : ''}
             <div className={`${styles['flex-colum']}`}>
               <div className={`${styles['otp-expire']}`}>
-                {EMAIL_VERIFICATION.OTP_EXPIRE_IN}&nbsp;
-                <span className={styles['black-color']}><Timer time={30} /></span>
+              {seconds === 0 ? <div>{EMAIL_VERIFICATION.OTP_HAS} <span className={`${styles['thick-red']}`}>{EMAIL_VERIFICATION.OTP_EXPIRED}</span>, {EMAIL_VERIFICATION.PLEASE_CLICK_ON_THE_LINK}</div> : LOGIN_PAGE.OTP_EXPIRE_IN}&nbsp;
+              {seconds !== 0 && <span className={styles['black-color']}><Timer time={seconds} getSeconds={this.getSeconds} resendClicked={resendClicked}/><span className={`${styles['otp-expire']} ${styles['fs-12']} ${styles['pl-5']}`}>{LOGIN_PAGE.HURRY}</span></span>}
               </div>
               <div className={styles['t-c']}>
                 <span
-                  className={`${styles['lgt-blue']} ${styles.fontW600} ${styles.pointer}`}
+                  className={`${styles['text-blue']} ${styles.fontW600} ${styles.pointer}`}
                   onClick={this.sendOtpToEmailId}
                 >
                   {EMAIL_VERIFICATION.RESEND}
@@ -127,12 +145,16 @@ class VerifyEmail extends Component {
 
 const mapStateToProps = store => ({
   activeEmailId: selectors.getActiveEmailId(store),
+  loadingStatus: selectors.getLoadingStatus(store),
+  userInfoData: selectors.getUserInfo(store),
+  profileInfo: camSelectors.getUserInfo(store),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(
   {
     verifyEmailId: actionCreators.verifyEmailId,
     sendOtpToEmailId: actionCreators.sendOtpToEmailId,
+    v2NextPage: actionCreators.v2NextPage,
   },
   dispatch,
 );

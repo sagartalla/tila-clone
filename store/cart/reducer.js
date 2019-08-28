@@ -3,7 +3,7 @@ import { actions } from './actions';
 
 const initialState = {
   ui: {
-    loading: false,
+    loading: true,
     btnLoading: false,
   },
   data: {
@@ -42,7 +42,8 @@ const cartReducer = typeToReducer({
         btnLoading: true,
       },
     }),
-    FULFILLED: (state, action) => Object.assign({}, state, {
+    FULFILLED: (state, action) => {
+      return Object.assign({}, state, {
       ...state,
       data: {
         ...state.data,
@@ -52,7 +53,7 @@ const cartReducer = typeToReducer({
         loading: false,
         btnLoading: false,
       },
-    }),
+    })},
     REJECTED: (state, action) => Object.assign({}, state, {
       ...state,
       error: action.payload.response ? action.payload.response.data.message : action.payload.message,

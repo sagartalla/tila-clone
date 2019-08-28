@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import Button from '../common/CommonButton';
+import { Col } from 'react-bootstrap';
+import Button  from '../common/CommonButton';
 import { languageDefinations } from '../../utils/lang';
 import { selectors, actionCreators } from '../../store/auth';
 
@@ -16,8 +17,6 @@ import styles_ar from './login_ar.styl';
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
 const { LOGIN_PAGE } = languageDefinations();
-
-/* eslint- disable */
 
 class ForgotPassword extends Component {
   constructor(props) {
@@ -86,8 +85,8 @@ class ForgotPassword extends Component {
                   <input name="addr_checkbox" type="radio" className={`${styles['radio-btn']}`} data-id="otp" onChange={this.handleChange} />
                   <span className={`${styles['ml-10']}`}>
                     <div className={radioValue === 'otp' ? `${styles['fs-12']} ${styles.fontW600}` : `${styles['fs-12']}`}>{LOGIN_PAGE.RESET_PASSWORD_BY_MOBILE}</div>
-                    <div className={radioValue === 'otp' ? `${styles.fontW600} ${styles.flex} ${styles['justify-between']}` : `${styles.flex} ${styles['justify-between']}`}>
-                      <div className={`${styles['fashion-color']} ${styles['fs-14']}`}>{userData && (`+${userData.mobile_country_code}`)}</div>
+                    <div className={radioValue === 'otp' ? `${styles.fontW600} ${styles.width50} ${styles.flex} ${styles['justify-between']}` : `${styles.flex} ${styles.width50} ${styles['justify-between']}`}>
+                      <div className={`${styles['fashion-color']} ${styles['fs-14']}`}>{userData && (userData.mobile_country_code)}</div>
                       <div className={`${styles['fs-14']}`}>{userData && userData.mobile_no}</div>
                     </div>
                   </span>
@@ -97,7 +96,7 @@ class ForgotPassword extends Component {
             }
           </span>
           <Button
-            className={`${styles['flex-center']}  ${styles.width100} ${styles['fs-14']} ${styles['text-uppercase']} ${styles['button-radius']}`}
+            className={`${styles['flex-center']}  ${styles.width100} ${styles['fs-14']} ${styles['text-uppercase']} ${styles['button-radius']} ${styles['disabled-button']}`}
             disabled={radioValue === ''}
             onClick={this.sendLink}
             btnLoading={loadingStatus}

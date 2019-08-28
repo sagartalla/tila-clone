@@ -16,7 +16,7 @@ const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styl
 const cookies = new Cookies();
 const language = cookies.get('language') || 'en';
 const country = cookies.get('country') || 'SAU';
-const { CAM } = languageDefinations();
+const { CAM, PERSONAL_INFO_MODAL } = languageDefinations();
 
 class UserProfile extends React.Component {
   constructor(props) {
@@ -86,13 +86,13 @@ class UserProfile extends React.Component {
         <label className={`${styles['file-upload']}`} onMouseOver={this.handleMouseOver} onMouseOut={this.handleMouseOut}>
           <input title={`${CAM.CHOOSE_PROFILE_PIC}`} type='file' className={`${styles['display-pic']}`} onChange={this.handleChange} />
         </label>
-        <Link route={`/${country}/${language}/cam/profile`}>
+        <Link route={`/${language}/customer/profile`}>
           <a style={{ display: 'block' }}>
-            <div className={`${`/${country}/${language}/cam/profile` === `/${country}/${language}/cam/${tab}` ? styles['active'] : {}} ${styles['user-profile']} ${styles['p-10-20']}  ${styles['align-center']} ${styles['flex']}`}>
+            <div className={`${`/${language}/cam/profile` === `/${language}/cam/${tab}` ? styles['active'] : {}} ${styles['user-profile']} ${styles['p-10-20']}  ${styles['align-center']} ${styles['flex']}`}>
                   <ProfilePic loader={this.state.loader} userInfo={userInfo} imgUrl={imgUrl} mouseOver={this.state.mouseOver}/>
               <div className={styles['profile-details']}>
-                <span className={`${styles['fs-12']} ${styles['light-gry-clr']}`}>Hello,</span>
-                <div>{name}</div>
+                <span className={`${styles['fs-12']} ${styles['light-gry-clr']}`}>{PERSONAL_INFO_MODAL.HELLO}</span>
+                <div className={`${styles['profile-name']} ${styles['fontW600']}`}>{name}</div>
               </div>
             </div>
           </a>

@@ -21,7 +21,7 @@ const TilaVoucher = (props) => {
             {transactions.length > 0 ?
             <div>
                 <div className={`${styles['broad']}`}>
-                    <span>
+                    <span className={styles['pl-15']}>
                         <strong>
                             {VAULT_PAGE.VOUCHER_HISTORY}
                         </strong>
@@ -32,7 +32,7 @@ const TilaVoucher = (props) => {
                         </button>
                     </div> */}
                 </div>
-                <Row className={`${styles['titleRow']}`} >
+                <Row className={`${styles['titleRow']} ${styles['m-0']}`} >
                     <Col md={3}>
                         Date
                     </Col>
@@ -56,7 +56,7 @@ const TilaVoucher = (props) => {
                     const time = moment(date_arr).format('hh:mm A')
                     return (
                         <div className={styles['bodyRow']} key={index}>
-                            <Row>
+                            <Row className={`${styles['m-0']}`}>
                                 <Col md={3}>
                                     {`${date}, ${time}`}
                                 </Col>
@@ -84,7 +84,7 @@ const TilaVoucher = (props) => {
             <div className={`${styles['no-vocher-icon']} ${styles['align-center']} ${styles['flex-col']} ${styles['black-color']}`}>
                 <div className={`${styles['no-wishlist-icon-inn']} ${styles['flex']}`}>
                     <SVGComponent clsName={`${styles['no-cards-list-icon']}`} src="icons/common-icon/no-cars-vocher" />
-                    <h3 className={`${styles['fs-26']} ${styles['t-c']} ${styles['pt-40']}`}>{VAULT_PAGE.NO_VOCHER_LABEL}</h3>
+                    {/* <h3 className={`${styles['fs-26']} ${styles['t-c']} ${styles['pt-40']}`}>{VAULT_PAGE.NO_VOCHER_LABEL}</h3> */}
                 </div>
             </div>
             }

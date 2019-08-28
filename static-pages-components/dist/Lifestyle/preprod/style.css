@@ -6,7 +6,7 @@
   color: #f26b6b;
 }
 .life-style-main .life-banner-inn {
-  height: 370px;
+  height: 340px;
 }
 .life-style-main .life-banner-inn .banner-label {
   color: #68462d;
@@ -31,6 +31,7 @@
   border-bottom: 2px solid transparent;
   min-height: 120px;
   text-align: center;
+  height: 52px;
 }
 .life-style-main .poular-cat .poular-icon:hover {
   box-shadow: 0 2px 7px 0 rgba(0,0,0,0.08);
@@ -48,11 +49,30 @@
   width: 47px;
 }
 .life-style-main .poular-cat .poular-icon .poular-cat2 {
-  width: 30px;
-  height: 50px;
+  width: 41px;
 }
 .life-style-main .poular-cat .poular-icon .poular-cat3 {
   width: 39px;
+  height: 50px;
+}
+.life-style-main .poular-cat .poular-icon .poular-cat4 {
+  width: 22.5px;
+  height: 45px;
+}
+.life-style-main .poular-cat .poular-icon .popular-cat5 {
+  width: 36px;
+  height: 45px;
+}
+.life-style-main .poular-cat .poular-icon .popular-cat6 {
+  width: 26px;
+  height: 50px;
+}
+.life-style-main .poular-cat .poular-icon .popular-cat7 {
+  width: 37px;
+  height: 50px;
+}
+.life-style-main .poular-cat .poular-icon .popular-cat8 {
+  width: 52px;
   height: 50px;
 }
 .life-style-main .top-selling-part .top-selling-img {

@@ -49,6 +49,17 @@ const compareReducer = typeToReducer({
       products: {},
     },
   }),
+  [actions.REMOVE_ALL_ITEMS]: state => Object.assign({}, state, {
+    data: {
+      ...state.data,
+      compareItemsCount: 0,
+      compareInfo: [],
+      compareItems: {
+        products: [],
+      },
+      products: {},
+    },
+  }),
   [actions.GET_COMPARE_ITEM_DATA]: {
     PENDING: state => Object.assign({}, state, { ui: { loading: true } }),
     FULFILLED: (state, action) => ({

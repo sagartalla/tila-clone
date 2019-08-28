@@ -13,7 +13,7 @@ import main_ar from '../../../../layout/main/main_ar.styl';
 import styles_en from '../wishlist_en.styl';
 import styles_ar from '../wishlist_ar.styl';
 
-const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
 const { WISH_LIST_PAGE, PDP_PAGE } = languageDefinations();
 const cookies = new Cookie();
@@ -35,9 +35,9 @@ class CartBottomPopup extends Component {
     return (
       <div className={`${styles['cart-wishlist-popup']} ${styles['mr-15']}`}>
         <Grid>
-          <div className={`${styles['flx-spacebw-alignc']}`}>
+          <div className={`${styles['flx-space-bw']} ${styles['align-baseline']}`}>
             <div className={`${styles.width100}`}>
-              <h4 className={`${styles['cart-wishlist-popup-title']} ${styles['fs-30']} ${styles['flex-center']} ${styles['justify-center']} ${styles['lgt-blue']} ${styles['mt-5']} ${styles['mb-15']} ${styles['fontW300']}`}>
+              <h4 className={`${styles['cart-wishlist-popup-title']} ${styles['fs-20']} ${styles['flex-center']} ${styles['justify-center']} ${styles['lgt-blue']} ${styles['mt-5']} ${styles['mb-15']} ${styles['fontW300']}`}>
                 <span className={`${styles['bg-white']} ${styles['title-label']}`}>{WISH_LIST_PAGE.FROM_YOUR_WISHLIST} </span>
                 <span className={styles['title-border']}></span>
               </h4>
@@ -47,16 +47,16 @@ class CartBottomPopup extends Component {
           <Slider {...settings} className={styles['cart-wishlist-popup-inn']}>
             {
               data.length > 0 && data.map((item, i) => {
-                const { product_id, wishlist_id, listing_id, name, img, price, cur, inventory_count, buttonValue, variant_id, catalogId, itemType } = item;
+                const { product_id, wishlist_id, listing_id='', name, img, price, cur, inventory_count, buttonValue, variant_id, catalog_id, tuin_id } = item;
                 return (
                   <div key={i} className={`${styles['item']} ${styles['flex']} ${styles['flex-colum']}`}>
-                  <Link route={`/${country}/${language}/product?productId=${product_id}${variant_id ? `&variantId=${variant_id}` : ''}&catalogId=${catalogId}&itemType=${itemType}`}>
-                    <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles['wish-pop-img']}`}><img className={styles['img']} src={`${constants.mediaDomain}/${img}`} /></div></Link>
+                    <Link route={`/${language}/pdp/${name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${tuin_id ? `${tuin_id}/`: '' }${listing_id}?pid=${product_id}&vid=${variant_id ? `${variant_id}` : ''}&cid=${catalog_id}`}>
+                      <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles['wish-pop-img']}`}><img className={styles['img']} src={`${constants.mediaDomain}/${img}`} /></div></Link>
                     <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']}`}>
-                    <Link route={`/${country}/${language}/product?productId=${product_id}${variant_id ? `&variantId=${variant_id}` : ''}&catalogId=${catalogId}&itemType=${itemType}`}>
-                      <h5 className={`${styles['label-gry-clr']} ${styles['fs-12']} ${styles['t-c']} ${styles['cart-wishlist-title']}`}>{name}</h5></Link>
+                      <Link route={`/${language}/pdp/${name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${tuin_id ? `${tuin_id}/`: '' }${listing_id}?pid=${product_id}&vid=${variant_id ? `${variant_id}` : ''}&cid=${catalog_id}`}>
+                        <h5 className={`${styles['label-gry-clr']} ${styles['fs-12']} ${styles['t-c']} ${styles['cart-wishlist-title']}`}>{name}</h5></Link>
                       <span className={`${styles['light-gry-clr']} ${styles['t-c']}`}>
-                        <span className={styles['fs-20']}>{price}</span> <span className={styles['fs-14']}> {cur}</span>
+                        <span className={styles['fs-14']}> {cur}</span> <span className={styles['fs-20']}>{price}</span>
                       </span>
                     </div>
                     <div className={`${styles['t-c']} ${styles['add-cart-btn']}`}>

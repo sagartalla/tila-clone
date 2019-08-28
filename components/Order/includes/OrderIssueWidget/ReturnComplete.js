@@ -20,6 +20,28 @@ const { ORDER_PAGE } = languageDefinations();
 
 class ReturnComplete extends Component {
 
+  getExchangeType = (issueType) => (
+    {
+      RETURN:ORDER_PAGE.REQ_RETURN,
+      EXCHANGE:ORDER_PAGE.REQ_EXCHANGE,
+      CLAIMWARRANTY: ORDER_PAGE.YOUR_ORDER,
+      DAMAGEWARRANTY:ORDER_PAGE.YOUR_ORDER,
+    }[issueType]
+  )
+  getSuccessMessageType = (issueType) => (
+    {
+      RETURN:ORDER_PAGE.REQ_SUCCESS,
+      EXCHANGE:ORDER_PAGE.REQ_SUCCESS,
+      CLAIMWARRANTY: ORDER_PAGE.CLAIM_WARRANTY_MSG,
+      DAMAGEWARRANTY:ORDER_PAGE.CLAIM_WARRANTY_MSG,
+    }[issueType]
+  )
+  getExchangeMsgType = (issueType) => (
+    {
+      RETURN:ORDER_PAGE.RETURN_ORDER_MSG,
+      EXCHANGE:ORDER_PAGE.EXCHANGE_ORDER_MSG_NOTE,
+    }[issueType]   
+  )
   render() {
 
     const { orderIssue, loadingStatus, errorMessege, goToNextStep, query } = this.props;
@@ -48,19 +70,24 @@ class ReturnComplete extends Component {
                         <span>
                           <span>
                             {
-                              query.returnExchangeType === 'RETURN' ?
-                                ORDER_PAGE.REQ_RETURN :
-                                ORDER_PAGE.REQ_EXCHANGE
+                              this.getExchangeType(orderIssue.issueType)                              
                             }
                           </span>
-                          <span className={styles['fontW600']}> {selectedItem.name} {ORDER_PAGE.REQ_SUCCESS}</span>
+                          <span className={styles['fontW600']}> {selectedItem.name} {this.getSuccessMessageType(orderIssue.issueType)}</span>
                         </span>
                       </div>
                       <div>
                         <span>
                           {
-                            query.returnExchangeType === 'RETURN' ?
-                              ORDER_PAGE.INCONVENIENCE : ''
+                            <div>{this.getExchangeMsgType(orderIssue.issueType)}</div>
+                          }
+                          {
+                            orderIssue.issueType === 'REPLACE' ?
+                            <div>
+                              <div>{ORDER_PAGE.RETURN_ORDER_MSG}</div>
+                              <div>{ORDER_PAGE.REPLACE_ORDER_MSG_NOTE}</div>
+                            </div>
+                              : ''
 
                           }
                         </span>
@@ -71,7 +98,7 @@ class ReturnComplete extends Component {
             </div>
         }
         <div className={`${styles['widget-footer']} ${styles['pt-25']}`}>
-          <button onClick={goToNextStep} className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['retun-btn-part']}`} disabled={loadingStatus}>{ORDER_PAGE.DONE}</button>
+          <button onClick={goToNextStep} className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['retun-btn-part']}`} disabled={loadingStatus}>{ORDER_PAGE.CONTINUE_SHOPPING}</button>
         </div>
       </div>
     );

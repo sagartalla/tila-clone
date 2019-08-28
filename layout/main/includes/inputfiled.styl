@@ -13,6 +13,9 @@
 **/
 @import '../executables.styl';
 
+input::-webkit-credentials-auto-fill-button 
+  visibility hidden
+
 .fp-input
   position:relative; 
   margin-bottom:15px;
@@ -34,7 +37,7 @@
     font-weight normal
     position absolute
     pointer-events none
-    left 0
+    // left 0
     top 10px
     transition 0.2s ease all 
     -moz-transition 0.2s ease all 

@@ -1,8 +1,6 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
-import { Col } from 'react-bootstrap';
 import Slider from 'react-slick';
-// import constants from '../../../constants';
+
 import constants from '../../../constants';
 
 import { languageDefinations } from '../../../utils/lang';
@@ -13,44 +11,70 @@ import main_en from '../../../layout/main/main_en.styl';
 import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from '../product_en.styl';
 import styles_ar from '../product_ar.styl';
+import RecentlyViewItem from './RecentlyViewItem';
 
-const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
-const { PDP_PAGE } = languageDefinations();
+const { PDP_PAGE, HEADER_PAGE } = languageDefinations();
+
+function SamplePrevArrow(props) {
+  const { onClick } = props;
+  return (
+    <div
+      className={styles.leftArrow}
+      onClick={onClick}
+    >
+      <img src="/static/img/landing-home/c-left.svg" alt="left" />
+    </div>
+  );
+}
+
+function SampleNextArrow(props) {
+  const { onClick } = props;
+  return (
+    <div
+      className={styles.rightArrow}
+      onClick={onClick}
+    >
+      <img src="/static/img/landing-home/c-right.svg" alt="right" />
+    </div>
+  );
+}
 
 const settings = {
   infinite: false,
-  speed: 500,
-  slidesToShow: 5,
   slidesToScroll: 1,
+  nextArrow: <SampleNextArrow />,
+  prevArrow: <SamplePrevArrow />,
 };
 
 const RecentView = (props) => {
-  const { recentlyViewed } = props;
+  const { recentlyViewed, isLoggedIn, homePage } = props;
+  if (recentlyViewed.length === 0) return null;
   return (
-    <div className={`${styles['recentview-main']} ${styles['pb-25']}`}>
-      <h6 className={`${styles['recent-title']} ${styles['pt-15']} ${styles['pb-15']} ${styles['pl-15']} ${styles['fontW600']}`}><span className={styles['pl-15']}>{PDP_PAGE.RECENTLY_VIEWED}</span></h6>
-      <div>
-        <Slider {...settings}>
-          {
-            recentlyViewed.map(item => (
-              <Col md={2} className={`${styles['pl-0']}`} key={item.id}>
-                <a href={item.uri}>
-                  <div className={`${styles['recentview-main-inn']} ${styles['flex']} ${styles['flex-colum']}`}>
-                    <div className={styles['recentview-main-inn-img']}><img src={`${constants.mediaDomain}/${item.im}`} className="img-responsive" /></div>
-                    <div>
-                      <h6 className={`${styles['fs-10']} ${styles['mb-0']} ${styles['thick-gry-clr']} ${styles['elipsis']}`}>{item.nm}</h6>
-                      <span className={`${styles['fs-12']} ${styles['thick-gry-clr']}`}><span className={styles['fontW600']}>{item.pr} </span><span>{item.cd}</span></span>
-                    </div>
-                  </div>
-                </a>
-              </Col>
-            ))
-          }
+    <div className={`${styles['recentview-main']}`}>
+      <div className={`${styles['flx-spacebw-alignc']} ${styles['pb-10']} ${styles['pt-10']}`}>
+        <h6 className={`${styles['fs-16']} ${styles['pt-15']} ${styles['pb-15']} ${styles['m-0']} ${styles.fontW600}`}>
+          <span className={`${styles['pl-15']}`}>{PDP_PAGE.RECENTLY_VIEWED}</span>
+        </h6>
+        <a
+          className={`${styles['r-viewall']} ${styles.fontW600} ${styles['mr-15']} ${styles['fp-btn']} ${styles['left-radius']} ${styles['fp-btn-default']} ${styles.ft_card_btn}`}
+          href={`/${lang}/items-zone/recently-viewed`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {HEADER_PAGE.VIEW_ALL}
+        </a>
+      </div>
+      <div className={`${styles['border-b']} ${styles['border-t']}`}>
+        <Slider {...settings} slidesToShow={homePage ? 6 : 4}>
+          {recentlyViewed.map(item => (
+            <RecentlyViewItem item={item} isLoggedIn={isLoggedIn} />
+          ))}
         </Slider>
       </div>
     </div>
   );
-}
+};
 
 export default RecentView;

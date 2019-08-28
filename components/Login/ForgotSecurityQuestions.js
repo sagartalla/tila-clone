@@ -27,6 +27,7 @@ class ForgotSecurityQuestions extends Component {
     };
   }
 
+
   showForgotPassword = () => {
     const { activeObj, showUserInfo, activeEmailId } = this.props;
     showUserInfo(activeEmailId).then((res) => {
@@ -36,6 +37,7 @@ class ForgotSecurityQuestions extends Component {
       }
     });
   }
+
 
   render() {
     const { loadingStatus } = this.props;
@@ -61,6 +63,7 @@ class ForgotSecurityQuestions extends Component {
             btnText={LOGIN_PAGE.NEXT}
             btnLoading={loadingStatus}
             onClick={this.showForgotPassword}
+
           />
         </React.Fragment>
       </div>
