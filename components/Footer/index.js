@@ -20,91 +20,91 @@ const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...s
 
 const f = [
   {
-    url: `/${lang}/clp/${lang === 'en' ? 'Women\'s Clothing' : 'ملابس نسائية'}`,
+    url: `/${lang}/${lang === 'en' ? 'Women\'s Clothing' : 'ملابس نسائية'}/clp`,
     title: FOOTER_PAGE.WOMEN_CLOTHING,
   },
 
   {
-    url: `/${lang}/clp/${lang === 'en' ? 'Men\'s Clothing' : 'ملابس رجالية'}`,
+    url: `/${lang}/${lang === 'en' ? 'Men\'s Clothing' : 'ملابس رجالية'}/clp`,
     title: FOOTER_PAGE.MEN_CLOTHING,
   },
 
   {
-    url: `/${lang}/clp/${lang === 'en' ? 'Footwear' : 'أحذية'}`,
+    url: `/${lang}/${lang === 'en' ? 'Footwear' : 'أحذية'}/clp`,
     title: FOOTER_PAGE.FOOT_WEAR,
   },
 
   {
-    url: `/${lang}/clp/${lang === 'en' ? 'Sunglasses' : 'نظارات شمسية'}`,
+    url: `/${lang}/${lang === 'en' ? 'Sunglasses' : 'نظارات شمسية'}/clp`,
     title: FOOTER_PAGE.SUNGLASSES,
   },
   {
-    url: `/${lang}/clp/${lang === 'en' ? 'Watches' : 'ساعات اليد'}`,
+    url: `/${lang}/${lang === 'en' ? 'Watches' : 'ساعات اليد'}/clp`,
     title: FOOTER_PAGE.WATCHES,
   },
   {
-    url: `/${lang}/clp/Fashion%20Accessories`,
+    url: `/${lang}/Fashion%20Accessories/clp`,
     title: FOOTER_PAGE.FASHION_ACCESSORIES,
   },
 ];
 
 const e = [
   {
-    url: `/${lang}/clp/${lang === 'en' ? 'mobiles' : 'الهواتف-النقالة'}`,
+    url: `/${lang}/${lang === 'en' ? 'mobiles' : 'الهواتف-النقالة'}/clp`,
     title: FOOTER_PAGE.MOBILES,
   },
 
   {
-    url: `/${lang}/clp/${lang === 'en' ? 'laptops' : 'أجهزة-الكمبيوتر-المحمولة'}`,
+    url: `/${lang}/${lang === 'en' ? 'laptops' : 'أجهزة-الكمبيوتر-المحمولة'}/clp`,
     title: FOOTER_PAGE.LAPTOPS,
   },
 
   {
-    url: `/${lang}/clp/${lang === 'en' ? 'camera' : 'الة-تصوير'}`,
+    url: `/${lang}/${lang === 'en' ? 'camera' : 'الة-تصوير'}/clp`,
     title: FOOTER_PAGE.CAMERAS,
   },
 
   {
-    url: `/${lang}/clp/${lang === 'en' ? 'televisions' : 'التلفزيونات'}`,
+    url: `/${lang}/${lang === 'en' ? 'televisions' : 'التلفزيونات'}/clp`,
     title: FOOTER_PAGE.TELEVISIONS,
   },
 
   {
-    url: `/${lang}/clp/${lang === 'en' ? 'storage devices' : 'أجهزة التخزين'}`,
+    url: `/${lang}/${lang === 'en' ? 'storage devices' : 'أجهزة التخزين'}/clp`,
     title: FOOTER_PAGE.STORAGE_DEVICES,
   },
 
   {
-    url: `/${lang}/clp/${lang === 'en' ? 'mobile-accessories' : 'ملحقات-الهاتف-المحمول'}`,
+    url: `/${lang}/${lang === 'en' ? 'mobile-accessories' : 'ملحقات-الهاتف-المحمول'}/clp`,
     title: FOOTER_PAGE.MOBILE_ACCESSORIES,
   },
 ];
 
 const l = [
   {
-    url: `/${lang}/clp/travel%20accessories`,
+    url: `/${lang}/travel%20accessories/clp`,
     title: FOOTER_PAGE.TRAVEL_ACCESSORIES,
   },
 
   {
-    url: `/${lang}/clp/search?q=Sports`,
+    url: `/${lang}/search?q=Sports/clp`,
     title: FOOTER_PAGE.SPORTS_AND_OUTDOORS,
   },
 
   {
-    url: `/${lang}/clp/diaper`,
+    url: `/${lang}/diaper/clp`,
     title: FOOTER_PAGE.MUMS_AND_KIDS,
   },
   {
-    url: `/${lang}/clp/beauty%20and%20health`,
+    url: `/${lang}/beauty%20and%20health/clp`,
     title: FOOTER_PAGE.BEAUTY_AND_HEALTH,
   },
   {
-    url: `/${lang}/clp/perfumes`,
+    url: `/${lang}/perfumes/clp`,
     title: FOOTER_PAGE.PERFUMES,
   },
   {
-    url: `/${lang}/clp/Home%20furnishing`,
+    url: `/${lang}/Home%20furnishing/clp`,
     title: FOOTER_PAGE.MAKEUP,
   },
 ];
