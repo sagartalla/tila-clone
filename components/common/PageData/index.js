@@ -23,10 +23,12 @@ import CBT3a from './includes/CBT3a';
 import CBT8a from './includes/CBT8a';
 import ST1a from './includes/ST1a';
 import CBT5b from './includes/CBT5b';
+import BT_23467 from './includes/BT23467';
+import CT1 from './includes/CT1';
+import CT1a from './includes/CT1a';
 
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
-let sliderTBS = '';
 // let sliderTIE = '';
 // let sliderHAL = '';
 
@@ -100,59 +102,12 @@ class PageData extends React.Component {
   getContent = () => {
     const { content, index } = this.props;
     switch (content.layout_id) {
+
       case 'CT1a':
-        return (
-          <div className={`${styles['mb-20']} top-banner-slider slider-dots-part`}>
-            {content.data[lang].title && <h3 className={styles['mt-0']}>{content.data[lang].title}</h3>}
-            <Slider
-              dots
-              autoplay
-              asNavFor={sliderTBS}
-              ref={(slider) => { sliderTBS = slider; }}
-              lazyLoad={false}
-              className={`${styles['main-slider-part']} ${styles.flex} ${styles['flex-colum']}`}
-              customPaging={i => <span className={`${styles['fs-10']}`}>{content.data[lang].banners[i].display_name}</span>}
-            >
-              {content.data[lang].banners.map(i => (
-                <div key={i.display_name}>
-                  <a href={i.link}>
-                    <div className={`${styles.item} ${styles['slick-itm']}`} key={i.display_name}>
-                      <img src={i.img} alt={i.display_name} />
-                    </div>
-                  </a>
-                </div>
-              ))}
-            </Slider>
-          </div>
-        );
+        return <CT1a content = { content }/>
         
       case 'CT1':
-        return (
-          <div className={`${styles['mb-20']} top-banner-slider slider-dots-part`}>
-            {content.data[lang].title && <h3 className={styles['mt-0']}>{content.data[lang].title}</h3>}
-            <Slider
-              dots
-              autoplay
-              asNavFor={sliderTBS}
-              ref={(slider) => { sliderTBS = slider; }}
-              lazyLoad={false}
-              className={`${styles['main-slider-part']} ${styles.flex} ${styles['flex-colum']}`}
-              customPaging={i => <span className={`${styles['fs-10']}`}>{content.data[lang].banners[i].display_name}</span>}
-            >
-              {content.data[lang].banners.map(i => (
-                <div key={i.display_name}>
-                  <a href={i.link}>
-                    <div className={`${styles.item} ${styles['slick-itm']}`} key={i.display_name}>
-                      <img src={i.img} alt={i.display_name} />
-                    </div>
-                  </a>
-                </div>
-              ))}
-            </Slider>
-          </div>
-        );
-
-      
+        return <CT1 content = { content }/>
 
       // case 'BT9':
       //   return (
@@ -208,25 +163,7 @@ class PageData extends React.Component {
       case 'BT4':
       case 'BT6':
       case 'BT7': {
-        const { banners } = content.data[lang];
-        return (
-          <div className={`${styles['display-banner-i']} `}>
-            {content.data[lang].title &&
-              <h3 className={`${styles['thick-gry-clr']} ${styles['fs-20']} ${styles['mt-0']} ${styles['pl-10']} ${styles['pr-10']}`}>{content.data[lang].title}</h3>}
-            <div className={`${styles['banner-prt-main']}`}>
-              {banners.length > 0 &&
-                banners.map(banner => (
-                  <div className={styles['banner-inn-prt']} style={{ width: `${100 / banners.length}%` }}>
-                    <div className={styles['sub-banr-img']}>
-                      <a href={banner.link} rel="noopener noreferrer" target="_blank">
-                        <img src={banner.img} className={`${styles['inside-bnr']}`} alt={banner.display_name} />
-                      </a>
-                    </div>
-                  </div>
-                ))}
-            </div>
-          </div>
-        );
+        return <BT_23467 content = {content}/>
       }
       case 'CBT6a': {
         

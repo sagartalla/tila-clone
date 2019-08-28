@@ -26,7 +26,7 @@ const CBT2a = ({content}) => {
     return (
         <div className={styles.fashionBannerSpacing}>
             <div className={`${styles['fs-20']} ${styles.title}`}>
-                <div className={`${styles.pdL} ${styles['t-l']}`} style={{paddingLeft: '102px'}}>
+                <div className={`${styles.pdL} ${styles['t-l']} ${styles.pLeft}`}>
                     <h1 className={styles.fHeading}>{title}</h1>
                     <span>{description}</span>
                 </div>
