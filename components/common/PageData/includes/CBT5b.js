@@ -13,7 +13,7 @@ const CBT5b = ({content}) => {
 
     const returnBanner = (index, banners) => {
         return(
-            <a href={banners[index].img}>
+            <a href={banners[index].link}>
                 <div className={`${styles['width100']} ${styles.shadow}`}>
                     <img src={banners[index].img} className={`${styles['width100']} ${styles['img-responsive']}`}/>
                 </div>
