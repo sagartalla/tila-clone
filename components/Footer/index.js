@@ -87,7 +87,7 @@ const l = [
   },
 
   {
-    url: `/${lang}/clp/search?q=Sports`,
+    url: `/${lang}/clp/Sports`,
     title: FOOTER_PAGE.SPORTS_AND_OUTDOORS,
   },
 
