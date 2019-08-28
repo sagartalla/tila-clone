@@ -705,6 +705,10 @@ export const EN_KEYWORDS = {
     YOUR_ORDER: 'Your Order',
     CANCEL_REFUND_MSG: 'We have cancelled your order. Your refund amount (if any) is being processed.',
     RETURN_ORDER_MSG: 'We have received your return request. Your refund amount will be processed once we receive the item.',
+    RETURN_ORDER_MSG: 'Keep the item ready for pickup and we will update you once it is scheduled.',
+    RETURN_ORDER_MSG_NOTE: 'Note: Refund will be processed once the return product is QC approved.',
+    EXCHANGE_ORDER_MSG_NOTE:'Note: Exchange will be processed once the return product is QC approved.',
+    REPLACE_ORDER_MSG_NOTE: 'Note: Replacement will be processed once the return product is QC completed and approved.',
     DONE: 'Done',
     CONTINUE: 'Continue',
     ADDRESS_PICKUP: 'Address for pick up',
@@ -752,6 +756,7 @@ export const EN_KEYWORDS = {
     IN_PROGRESS: 'In Progress',
     MESSAGE: 'Message',
     REFUND: 'Refund',
+    CONTINUE_SHOPPING: 'CONTINUE SHOPPING',
   },
   COUPON_OFFERS: {
     VIEW_TERMS: 'Terms & Conditions',

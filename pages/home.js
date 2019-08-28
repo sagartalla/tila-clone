@@ -76,9 +76,9 @@ class Home extends Base {
           }}
         />
         <LoaderBarContext.Provider value={loaderProps}>
-            <Layout>
-              <FTB />
-            </Layout>
+          <Layout>
+            <FTB />
+          </Layout>
         </LoaderBarContext.Provider>
       </div>
     );

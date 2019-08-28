@@ -76,11 +76,11 @@ class CartAndPaymentSideBar extends Component {
               </span>
             </span>
           :
-            <span className={`${styles['flex-center']} ${styles['justify-center']} ${styles['pt-5']} ${styles['pb-5']} ${styles['pr-10']} ${styles['pl-10']} ${styles.flex} ${styles['m-20']} ${styles['apply-coupon']} ${styles.pointer}`} onClick={this.props.openSlider}>
-              <SVGComponent clsName={`${styles['coupon-code']}`} src="icons/common-icon/coupon-code" />
+            <span className={`${styles['flex-center']} ${styles['justify-center']} ${styles['pt-5']} ${styles['pb-5']} ${styles['pr-10']} ${styles['pl-10']} ${styles.flex} ${styles['m-10']} ${styles['apply-coupon']} ${styles.pointer}`} onClick={this.props.openSlider}>
+              {lang === 'en' ? <SVGComponent clsName={`${styles['coupon-code']}`} src="icons/common-icon/coupon-code-border" /> : <SVGComponent clsName={`${styles['coupon-code']}`} src="icons/common-icon/coupon-code-border-ar" /> }
               <div className={`${styles.noCoupon} ${styles['ml-5']}`}>
                 <span className={`${styles['text-uppercase']} ${styles['pl-5']}`}>
-                  <div className={styles['fs-14']}>{COUPON_OFFERS.APPLY_COUPON}</div>
+                  <div className={`${styles['fs-14']} ${styles['coupon-text']}`}>{COUPON_OFFERS.APPLY_COUPON}</div>
                 </span>
               </div>
             </span>

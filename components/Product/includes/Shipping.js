@@ -24,7 +24,7 @@ const { PDP_PAGE } = languageDefinations();
 const Shipping = (props) => {
   const shippingData = cookies.get('shippingInfo') || {};
 
-  const { shippingInfo, offerInfo, returnInfo, itemLocation = {}, } = props;
+  const { shippingInfo, offerInfo, returnInfo, itemLocation = {}, tila_care_policy } = props;
   // const {
   //   shipping_days, shippable, isPreview,
   // } = shippingInfo;
@@ -39,7 +39,7 @@ const Shipping = (props) => {
       <div className={`${styles['free-delivery-list']} ${styles['flex-colum']} ${styles.flex} ${styles.box} ${styles['mt-5']} ${styles['mb-10']} ${styles['free-delivery-part']} ${styles['border-radius4']}`}>
         <div className={`${styles['pdp-deliver-list']} ${styles['flex']}`}>
           <GeoWidget isPdp />
-          { itemLocation.display_name ? <span className={`${styles['pdp-del-prt']} ${styles['pl-10']} ${styles['ml-5']} ${styles['thick-border-left']}`}><span className={styles['thick-gry-clr']}>{PDP_PAGE.ITEM_LOCATION}: </span><span className={styles['fontW600']}>{itemLocation.display_name}</span></span> : null}
+          {tila_care_policy.display_item_location ? <span className={`${styles['pdp-del-prt']} ${styles['pl-10']} ${styles['ml-5']} ${styles['thick-border-left']}`}><span className={styles['thick-gry-clr']}>{PDP_PAGE.ITEM_LOCATION}: </span><span className={styles['fontW600']}>{tila_care_policy.display_item_location}</span></span> : null}
         </div>
         {
           shippingInfo && shippingInfo.shipping_days
@@ -96,13 +96,4 @@ const Shipping = (props) => {
   );
 };
 
-const mapStateToProps = store => ({
-  itemLocation: store.productReducer.policyLocation,
-});
-
-const mapDispatchToProps = dispatch => bindActionCreators(
-  {},
-  dispatch,
-);
-
-export default connect(mapStateToProps, mapDispatchToProps)(Shipping);
+export default Shipping;
