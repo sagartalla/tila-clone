@@ -87,7 +87,7 @@ const l = [
   },
 
   {
-    url: `/${lang}/search?q=Sports/clp`,
+    url: `/${lang}/Sports/clp`,
     title: FOOTER_PAGE.SPORTS_AND_OUTDOORS,
   },
 
@@ -104,7 +104,7 @@ const l = [
     title: FOOTER_PAGE.PERFUMES,
   },
   {
-    url: `/${lang}/Home%20furnishing/clp`,
+    url: `/${lang}/Make%20Up/clp`,
     title: FOOTER_PAGE.MAKEUP,
   },
 ];
@@ -283,7 +283,7 @@ const FooterBar = props => (
               <span className={`${styles.fontW600}`}>{FOOTER_PAGE.ON_INSTAGRAM}</span>
               <span className={`${styles['follow-inst-btn']} ${styles['fs-10']} ${styles['lne-ht2']} ${styles['white-color']} ${styles['ml-10']} ${styles['pl-15']} ${styles['pr-15']}`}>{FOOTER_PAGE.FOLLOW}</span>
             </h4>
-          </a>  
+          </a>
           </Col>
           <Col md={3} sm={6} className={`${styles['footer-social-list']} ${styles['pr-0']}`}>
           <a href="https://www.facebook.com/tilasocial/" target="_blank">
@@ -292,7 +292,7 @@ const FooterBar = props => (
               <span className={`${styles['lgt-blue']} ${styles.fontW600}`}>{FOOTER_PAGE.ON_FACEBOOK}</span>
               <span className={`${styles['follow-fb-btn']} ${styles['fs-10']} ${styles['lne-ht2']} ${styles['white-color']} ${styles['ml-10']} ${styles['pl-15']} ${styles['pr-15']}`}>{FOOTER_PAGE.FOLLOW}</span>
             </h4>
-          </a>  
+          </a>
           </Col>
         </Row>
       </Grid>
@@ -317,8 +317,8 @@ const FooterBar = props => (
               <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
                 <li><a href={`/${lang}/policy/user-terms-and-conditions`} target="_blank">{FOOTER_PAGE.TERMS_CONDITION}</a></li>
                 <li><a href={`/${lang}/policy/cancellation-policy`} target="_blank">{FOOTER_PAGE.CANCELLATION_POLICY}</a></li>
-                <li><a href={`/${lang}/policy/exchange-replacement-policy`} target="_blank">{FOOTER_PAGE.EXCHANGE_REPLACEMENT_POLICY}</a></li>
-                <li><a href={`/${lang}/policy/return-refund-policy`} target="_blank">{FOOTER_PAGE.REFUND_POLICY}</a></li>
+                <li><a href={`/${lang}/policy/return-and-exchange-policy`} target="_blank">{FOOTER_PAGE.EXCHANGE_REPLACEMENT_POLICY}</a></li>
+                <li><a href={`/${lang}/policy/return-and-refund-policy`} target="_blank">{FOOTER_PAGE.REFUND_POLICY}</a></li>
                 <li><a href={`/${lang}/policy/warranty-policy`} target="_blank">{FOOTER_PAGE.WARRENTY_POLICY}</a></li>
                 {/* <li><a href="/en/policy/sp" target="_blank">{FOOTER_PAGE.SHIPPING_POLICY}</a></li> */}
                 <li><a href={`/${lang}/policy/privacy-policy`} target="_blank">{FOOTER_PAGE.PRIVACY_POLICY}</a></li>

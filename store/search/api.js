@@ -86,6 +86,19 @@ const fetchImageSearchApi = (file) => {
     data: body,
   });
 };
+const track = ({ event, searchData }) => {
+  window.appEventData.push({
+    event,
+    internalSearch: {
+      key: searchData,
+    },
+  });
+};
+
+export default {
+  getSearchResultsApi, fetchSuggestions, fetchImageSearchApi, track,
+};
+
 // return axios.request({
 //   url: `${URL.UPLOAD_SERVICE_URL}/fpts/document-service/upload?public=${isPublic}&directory=${directory}`,
 //   method: 'POST',
@@ -97,4 +110,3 @@ const fetchImageSearchApi = (file) => {
 //   },
 //   data: body,
 //   })
-export default { getSearchResultsApi, fetchSuggestions, fetchImageSearchApi };

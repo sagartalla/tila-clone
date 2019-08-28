@@ -4,8 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { selectors, actionCreators } from '../../../../store/order';
-import {languageDefinations} from '../../../../utils/lang'
-const {ORDER_PAGE} = languageDefinations()
+import { languageDefinations } from '../../../../utils/lang';
 
 import lang from '../../../../utils/language';
 
@@ -14,10 +13,11 @@ import main_ar from '../../../../layout/main/main_ar.styl';
 import styles_en from './orderIssue_en.styl';
 import styles_ar from './orderIssue_ar.styl';
 
-const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+const { ORDER_PAGE } = languageDefinations();
+
+const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
 class CancelComplete extends Component {
-
   componentDidMount() {
     const { orderIssue, submitCancelRequest } = this.props;
     const { selectedItem, selectedReasons } = orderIssue;
@@ -26,7 +26,11 @@ class CancelComplete extends Component {
       reason: selectedReasons.reason,
       comment: selectedReasons.comment,
       subReason: selectedReasons.subReason,
-      refund_mode:orderIssue.cancelRefundMode
+      refund_mode: orderIssue.cancelRefundMode,
+    });
+    this.props.track({
+      event: 'CANCEL_ORDER',
+      orderData: this.props,
     });
   }
 
@@ -74,7 +78,6 @@ class CancelComplete extends Component {
       </div>
     );
   }
-
 }
 
 CancelComplete.propTypes = {
@@ -82,7 +85,7 @@ CancelComplete.propTypes = {
   loadingStatus: PropTypes.bool.isRequired,
   errorMessege: PropTypes.string.isRequired,
   goToNextStep: PropTypes.func.isRequired,
-}
+};
 
 const mapStateToProps = (store) => {
   return ({
@@ -90,16 +93,17 @@ const mapStateToProps = (store) => {
     errorMessege: selectors.getErrorMessege(store),
     loadingStatus: selectors.getLoadingStatus(store),
     orderIssue: selectors.getOrderIssue(store),
-  })
+  });
 };
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
-      submitCancelRequest: actionCreators.submitCancelRequest
+      track: actionCreators.track,
+      submitCancelRequest: actionCreators.submitCancelRequest,
     },
     dispatch,
   );
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(CancelComplete);

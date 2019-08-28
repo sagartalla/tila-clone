@@ -161,26 +161,26 @@ class Menu extends Component {
     }
     return _.map(childCategory ? childCategory.childCategories : {}, childItem => (
       <li className={`${styles['megamenu-sub-list']} ${depth === 2 ? styles['pl-20'] : null}`} key={childItem.id} onClick={this.props.onLinkClick}>
-          <span className={`${styles.flex}`}>
-            {
-              isFirst
-              ?
-                <SVGComponent clsName={`${styles.flex} ${styles['megamenu-icon']}`} src="icons/messages" />
-              :
-              null
-            }
-            <Link route={`/${language}/${childItem.displayName.replace(/\//g, '').split(' ').join('-').toLowerCase()}/clp?categoryTree=true&isListed=false&sid=${this.props.parentID},${childItem.id}`}>
-              <a className={`${styles['level-1-item']} ${depth === 1 ? styles['fontW600'] : {}}`} style={{color: `${itemColor}`}}>{childItem.displayName}</a>
-            </Link>
-          </span>
+        <span className={`${styles.flex}`}>
           {
-            childItem.childCategories
+            isFirst
             ?
-              <Leaves items={childItem.childCategories} parent={childItem} parentID={`${this.props.parentID},${childItem.id}`} />
+              <SVGComponent clsName={`${styles.flex} ${styles['megamenu-icon']}`} src="icons/messages" />
             :
             null
           }
-        </li>
+          <Link route={`/${language}/${childItem.displayName.replace(/\//g, '').split(' ').join('-').toLowerCase()}/clp?categoryTree=true&isListed=false&sid=${this.props.parentID},${childItem.id}`}>
+            <a className={`${styles['level-1-item']} ${depth === 1 ? styles['fontW600'] : {}}`} style={{color: `${itemColor}`}}>{childItem.displayName}</a>
+          </Link>
+        </span>
+        {
+          childItem.childCategories
+          ?
+            <Leaves items={childItem.childCategories} parent={childItem} parentID={`${this.props.parentID},${childItem.id}`} />
+          :
+          null
+        }
+      </li>
     ));
   }
 

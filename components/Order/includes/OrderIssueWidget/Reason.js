@@ -155,7 +155,7 @@ class Reason extends Component {
     }
 
     if (selectedMode === 'Refund') {
-      const returnParam = Object.assign({}, params, { issueType: 'RETURN' });
+      const returnParam = Object.assign({}, params, { issueType: 'RETURN', returnExchangeType: 'RETURN' });
       this.props.setOrderIssueData(returnParam);
       this.props.setAddressData(reasonParams);
       this.props.refundOptions(orderIssue.selectedItem.id, ORDER_ISSUE_TYPES.RETURN);
@@ -282,6 +282,7 @@ class Reason extends Component {
             {showError ? (issueType_small==='cancel' ? ORDER_PAGE.SELECT_CANCEL_REASON : (issueType_small==='return' ? ORDER_PAGE.SELECT_RETURN_REASON : ORDER_PAGE.SELECT_EXCHANGE_REASON)): ''}
           </span>
           <div className={`${styles['dd-cont']}`}>
+            <div className={`${styles['ml-5']}`}>{ORDER_PAGE.SELECT_AN_OPTION}</div>
             <div className={`${styles.select} ${styles['mt-10']} ${styles['pb-10']}`}>
               <select
                 className={styles['select-text']}
@@ -292,7 +293,7 @@ class Reason extends Component {
                 <option value="default" style={{ display: 'none' }}>
                   {loadingStatus
                     ? ORDER_PAGE.LOADING
-                    : ORDER_PAGE.SELECT_REASON}
+                    : issueType_small==='cancel' ? ORDER_PAGE.SELECT_REASON_CANCEL : issueType_small==='return' ? ORDER_PAGE.SELECT_REASON_RETURN : ORDER_PAGE.SELECT_REASON_EXCHANGE}
                 </option>
                 {reasonItems.map((reason, index) => (
                   <option key={index} value={reason.name || reason}>
@@ -348,7 +349,7 @@ class Reason extends Component {
                   />
                 ) : null}
               {displaySizeError ?
-                <p>{ORDER_PAGE.PLEASE_SELECT_SIZE_TO_CONTINUE}</p> : null
+                <p className={`${styles['error-msg']}`}>{ORDER_PAGE.PLEASE_SELECT_SIZE_TO_CONTINUE}</p> : null
 
               }
               {
