@@ -1,6 +1,7 @@
 import apis from './api';
 
 const actions = {
+  SEARCH_QUERY: 'SEARCH_QUERY',
   GET_SEARCH_RESULTS: 'GET_SEARCH_RESULTS',
   GET_MORE_RESULTS: 'GET_MORE_RESULTS',
   SEARCHBAR_FITLERS: 'SEARCHBAR_FITLERS',
@@ -54,7 +55,15 @@ const actionCreators = {
       type:actions.GET_IMAGE_QUERY,
       payload:apis.fetchImageSearchApi(params)
     })
-  }
+  },
+  track: (event, params) => {
+    return {
+      type: actions.SEARCH_QUERY,
+      payload: apis.track(event, params),
+    };
+  },
+
+
 };
 
 export { actions, actionCreators };
