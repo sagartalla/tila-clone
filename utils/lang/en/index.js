@@ -61,6 +61,8 @@ export const EN_KEYWORDS = {
     DURATION: 'Duration',
     EXTENDED_WARRANTY: 'Extended Warranty',
     DAMAGE_PROTECTION: 'Damage Protection',
+    DONE: 'Done',
+    ADD: 'Add',
   },
   PAYMENT_PAGE: {
     SECURE_CHECKOUT: 'Secure Checkout',
@@ -93,6 +95,7 @@ export const EN_KEYWORDS = {
     TC: 'T & C',
     PRIVACY_POLICY: 'Privacy Policy',
     AGREE_TO: 'I agree to the',
+    TERMS_AND_CONDITIONS: 'Terms and Conditions',
     CLOSE: 'CLOSE',
     VISA: 'VISA',
     MASTER: 'MASTER',
@@ -763,6 +766,7 @@ export const EN_KEYWORDS = {
     MESSAGE: 'Message',
     REFUND: 'Refund',
     CONTINUE_SHOPPING: 'CONTINUE SHOPPING',
+    ADD_COMMENT: 'Add a comment(optional)',
   },
   COUPON_OFFERS: {
     VIEW_TERMS: 'Terms & Conditions',

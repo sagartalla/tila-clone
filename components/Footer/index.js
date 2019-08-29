@@ -342,7 +342,7 @@ const FooterBar = props => (
                 <h4 className={`${styles.fontW600} ${styles['fs-16']} ${styles['black-color']}`}>{FOOTER_PAGE.HELP}</h4>
                 <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
                   <li>{FOOTER_PAGE.CONSUMER_RIGHT}</li>
-                  <li>{FOOTER_PAGE.SHIPPING_AND_DELIVERY}</li>
+                  <li><a href={`/${lang}/policy/customer-delivery`} target="_blank">{FOOTER_PAGE.SHIPPING_AND_DELIVERY}</a></li>
                   <li>{FOOTER_PAGE.FREQUENTLY_ASKED_QUESTIONS}</li>
                   <li>{FOOTER_PAGE.CUSTOMER_CARE}</li>
                 </ul>
