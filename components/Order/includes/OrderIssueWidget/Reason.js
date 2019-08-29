@@ -82,7 +82,6 @@ class Reason extends Component {
     });
   }
   getSelectedMode(mode) {
-    debugger;
     return {
       RETURN:'Refund',
       CANCEL:'Cancel',

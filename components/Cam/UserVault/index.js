@@ -113,7 +113,6 @@ class UserVault extends Component {
   render() {
     const { results, miniVault } = this.props;
     const { addNewCardBlock } = this.state;
-    console.log(this.props, 'fihidn');
     return (
       <div className={`${styles['vault-container']}`}>
         {

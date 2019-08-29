@@ -35,7 +35,6 @@ class WarrantyPolicy extends React.Component {
   }
 
   render() {
-    debugger;
     const {
       tila_care_policy, policies_applied, selectedPolicy, warrantyIndex, removeWarranty, hideRadio,
       addNewWarranty, warrantyChange, deleteWarranty, editWarranty, showWarrantyDetails, warrantyName, selectPolicy,
