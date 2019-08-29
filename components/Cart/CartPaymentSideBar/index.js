@@ -72,12 +72,14 @@ class CartAndPaymentSideBar extends Component {
                     <div className={`${styles.applied} ${styles['fs-10']}`}>{COUPON_OFFERS.OFFER_APPLIED}</div>
                     <div className={styles['fs-12']}>{data.coupon_code}</div>
                   </div>
-                  <div className={`${styles.pointer} ${styles['lgt-blue']} ${styles['fs-12']}`} onClick={this.removeCoupon}>{COUPON_OFFERS.REMOVE}</div>
+                  <div className={`${styles.pointer} ${styles['lgt-blue']} ${styles['fs-12']}`} onClick={this.removeCoupon}>X</div>
                 </span>
               </span>
               :
               <span className={`${styles['flex-center']} ${styles['justify-center']} ${styles['pt-5']} ${styles['pb-5']} ${styles['pr-10']} ${styles['pl-10']} ${styles.flex} ${styles['m-10']} ${styles['apply-coupon']} ${styles.pointer}`} onClick={this.props.openSlider}>
-                {lang === 'en' ? <SVGComponent clsName={`${styles['coupon-code-blank']}`} src="icons/common-icon/coupon-code-border" /> : <SVGComponent clsName={`${styles['coupon-code-blank']}`} src="icons/common-icon/coupon-code-border-ar" />}
+                {lang === 'en' ? 
+                  <img src="/static/img/icons/common-icon/coupon-layout-en.png" className={styles['coupon-code-blank']}/>
+                   : <SVGComponent clsName={`${styles['coupon-code-blank']}`} src="icons/common-icon/coupon-code-border-ar" />}
                 <div className={`${styles.noCoupon} ${styles['ml-5']}`}>
                   <span className={`${styles['text-uppercase']} ${styles['pl-5']}`}>
                     <div className={`${styles['fs-14']}`}>{COUPON_OFFERS.APPLY_COUPON}</div>

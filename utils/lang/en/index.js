@@ -777,9 +777,9 @@ export const EN_KEYWORDS = {
     ACTIVE_COUPONS: 'Active Coupons',
     EXPIRED_COUPONS: 'Expired Coupons',
     EXPIRED_ON: 'Expired on',
-    EMPTY_COUPON_BOX: 'You have found an empty coupon box',
+    EMPTY_COUPON_BOX: 'You have found an empty coupon box.',
     NO_COUPONS_AVAILABLE: 'Currently, no coupons are available.',
-    CHECK_BACK_LATER: 'Please check later',
+    CHECK_BACK_LATER: 'Please check later.',
   },
   EMAIL_VERIFICATION: {
     VERIFY_YOUR_EMAIL: 'Verify your email address',
