@@ -158,7 +158,7 @@ const InstaCheckoutDetails = ({ details, selectedAddr,addressResults,showMiniAdd
                    {
                      showMiniAddress ?
                        <ShippingAddress
-                         miniAddress={true}
+                         miniAddress
                          isPdp={isPdp}
                          // isFromCart={isFromCart}
                          toggleMiniAddress={props.toggleMiniAddress}
@@ -181,8 +181,9 @@ const InstaCheckoutDetails = ({ details, selectedAddr,addressResults,showMiniAdd
                      props.showMiniVault ?
                        <div>
                          <UserVault
-                           miniVault={true}
+                           miniVault
                            toggleMiniVault={props.toggleMiniVault}
+                           isInstantCheckout
                          />
                        </div>
                        : null

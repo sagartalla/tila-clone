@@ -19,7 +19,7 @@ routes
   .add({ name: '3dsecure', pattern: '/:language(en|ar)/gateway/callback/:encryptedString', page: 'threeDRedirect' })
   .add({ name: 'help', pattern: '/:language(en|ar)/help/(.*)', page: 'help' })
   .add({ name: 'brand', pattern: '/:language(en|ar)/brand/:brandName', page: 'brand' })
-  .add({ name: 'ftb', pattern: '/:language(en|ar)/ftb', page: 'ftb' })
+  .add({ name: 'ftb', pattern: '/:language(en|ar)/new-user', page: 'ftb' })
   .add({ name: 'redirect', pattern: '/:country/:language(en|ar)', page: 'homeRedirect' })
   .add({ name: 'categoryLanding', pattern: '/:language(en|ar)/:category(electronics|fashion|lifestyle)', page: 'home' })
   .add({ name: 'category', pattern: '/:language(en|ar)/:category/clp', page: 'category' })
