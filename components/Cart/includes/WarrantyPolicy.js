@@ -35,7 +35,6 @@ class WarrantyPolicy extends React.Component {
   }
 
   render() {
-    debugger;
     const {
       tila_care_policy, policies_applied, selectedPolicy, warrantyIndex, removeWarranty, hideRadio,
       addNewWarranty, warrantyChange, deleteWarranty, editWarranty, showWarrantyDetails, warrantyName, selectPolicy,
@@ -83,11 +82,11 @@ class WarrantyPolicy extends React.Component {
                               </div>}
                               {
                                 warrantyName !== newVal && Object.keys(policies_applied).length === 0 ?
-                                  <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['left-radius']} ${styles['add-warranty-btn']}`} data-name={newVal} onClick={addNewWarranty}> + Add </button>
-                                  : (warrantyName !== newVal && (((policies_applied[newVal]) === undefined ? true : policies_applied[newVal].policy_type.toLowerCase() !== newVal))) && <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['left-radius']} ${styles['add-warranty-btn']}`} data-name={newVal} onClick={addNewWarranty}> + Add</button>
+                                  <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['left-radius']} ${styles['add-warranty-btn']}`} data-name={newVal} onClick={addNewWarranty}> + {CART_PAGE.ADD} </button>
+                                  : (warrantyName !== newVal && (((policies_applied[newVal]) === undefined ? true : policies_applied[newVal].policy_type.toLowerCase() !== newVal))) && <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['left-radius']} ${styles['add-warranty-btn']}`} data-name={newVal} onClick={addNewWarranty}> + {CART_PAGE.ADD}</button>
                               }
                               {selectedPolicy && warrantyName === newVal &&
-                              <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['left-radius']} ${styles['add-warranty-btn']}`} data-name={newVal} onClick={selectPolicy}> Done </button>}
+                              <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['left-radius']} ${styles['add-warranty-btn']}`} data-name={newVal} onClick={selectPolicy}> {CART_PAGE.DONE} </button>}
                             </div>
                             <div>
                               {policies_applied[newVal] && policies_applied[newVal].policy_type.toLowerCase() === newVal && <div className={`${styles['ml-60']} ${styles['mb-10']}`}>{CART_PAGE.DURATION}: {policies_applied[newVal].policy_name}</div>}
