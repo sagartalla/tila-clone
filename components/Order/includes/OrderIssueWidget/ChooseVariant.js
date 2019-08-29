@@ -76,9 +76,20 @@ class ChooseVariant extends Component {
   }
   selectedSize(variantId,exchangeVariants) {
     const data = exchangeVariants.filter((el,index) => {
-      return el.listing.variant_id === variantId
+      if(el.listing) {
+        return el.listing.variant_id === variantId
+      }
+      return false
+
     })
-    return  data[0].variant_details.attribute_map.size.attribute_values[0].value
+    if(data.length > 0) {
+      return (
+        <span className={`${styles['fontW600']} ${styles['pt-15']} ${styles['pb-15']} ${styles['flex']}`}>
+          {`Your Orderd Size: ${data[0].variant_details.attribute_map.size.attribute_values[0].value}`}
+        </span>
+     )
+   }
+    return null
   }
   renderExchangeVariants(variants, orderIssue) {
     const { activeListing } = this.state
@@ -99,7 +110,10 @@ class ChooseVariant extends Component {
     const { message } = this.state;
     return (
       <div className={styles['exchange-items']}>
-
+        {
+          Object.keys(exchangeVariants[0].variant_details.attribute_map).length > 0 ?
+          this.selectedSize(variantId,exchangeVariants) : null
+        }
         <div className={styles['pb-10']}>
           <h5 className={`${styles['fontW600']} ${styles['m-0']}`}>{ORDER_PAGE.SIZE_TO_EXCHANGE} :</h5>
           <span className={`${styles['fs-12']} ${styles['textColor']}`}>
