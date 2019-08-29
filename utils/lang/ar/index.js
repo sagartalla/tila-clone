@@ -58,6 +58,8 @@ export const AR_KEYWORDS = {
     DURATION: 'Duration',
     EXTENDED_WARRANTY: 'Extended Warranty',
     DAMAGE_PROTECTION: 'Damage Protection',
+    DONE: 'Done',
+    ADD: 'Add',
   },
   PAYMENT_PAGE: {
     SECURE_CHECKOUT: 'عملية خروج آمنة',
@@ -90,6 +92,7 @@ export const AR_KEYWORDS = {
     TC: 'الشروط والأحكام',
     PRIVACY_POLICY: 'سياسة الخصوصية',
     AGREE_TO: 'أنا موافق على',
+    TERMS_AND_CONDITIONS: 'Terms and Conditions',    
     CLOSE: 'قفّل',
     VISA: 'الفيزا',
     MASTER: 'الماستر',
@@ -764,6 +767,7 @@ export const AR_KEYWORDS = {
     REQ_RETURN: 'Your return request for order ',
     REQ_SUCCESS: 'is intiated.',
     CONTINUE_SHOPPING: 'CONTINUE SHOPPING',
+    ADD_COMMENT: 'Add a comment(optional)',    
   },
   COUPON_OFFERS: {
     VIEW_TERMS: 'استعرض الشروط والأحكام',

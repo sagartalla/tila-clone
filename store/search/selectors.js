@@ -219,7 +219,7 @@ const optionParams = (store) => {
   isListed = isListed ? isListed.isListed : false;
   isListed = isListed || false;
   return {
-    language: store.searchReducer.data.geoDetails ? store.searchReducer.data.geoDetails.language : 'en',
+    // language: store.searchReducer.data.geoDetails ? store.searchReducer.data.geoDetails.language : 'en',
     isListed,
   };
 };

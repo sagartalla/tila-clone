@@ -22,7 +22,7 @@ import styles_ar from './orderIssue_ar.styl';
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 
-const { ORDER_PAGE } = languageDefinations();
+const { ORDER_PAGE, PAYMENT_PAGE } = languageDefinations();
 class Reason extends Component {
   constructor(props) {
     super(props);
@@ -82,7 +82,6 @@ class Reason extends Component {
     });
   }
   getSelectedMode(mode) {
-    debugger;
     return {
       RETURN:'Refund',
       CANCEL:'Cancel',
@@ -282,7 +281,7 @@ class Reason extends Component {
             {showError ? (issueType_small==='cancel' ? ORDER_PAGE.SELECT_CANCEL_REASON : (issueType_small==='return' ? ORDER_PAGE.SELECT_RETURN_REASON : ORDER_PAGE.SELECT_EXCHANGE_REASON)): ''}
           </span>
           <div className={`${styles['dd-cont']}`}>
-            <div className={`${styles['ml-5']}`}>{ORDER_PAGE.SELECT_AN_OPTION}</div>
+            <div className={`${styles['ml-5']} ${styles['label-gry-clr']}`}>{ORDER_PAGE.SELECT_AN_OPTION}</div>
             <div className={`${styles.select} ${styles['mt-10']} ${styles['pb-10']}`}>
               <select
                 className={styles['select-text']}
@@ -343,7 +342,7 @@ class Reason extends Component {
                 && orderIssue.exchangeVariants &&
                 orderIssue.exchangeVariants.length > 0 ? (
                   <ChooseVariant
-                    variantId={query.variantId}
+                    variantId={query && query.variantId}
                     selectedVariant={this.selectedVariant}
                     productNotAvailable={this.productNotAvailable}
                   />
@@ -355,12 +354,13 @@ class Reason extends Component {
               {
                 ORDER_ISSUE_TYPES.RETURN === returnExchangeType
                 || (issueType === 'CLAIMWARRANTY' || issueType === 'DAMAGEWARRANTY') ?
-                  <div className={styles['comment-cont']}>
+                  <div className={`${styles['comment-cont']} ${styles['mt-25']}`}>
+                   <div className={`${styles['label-gry-clr']}`}>{ORDER_PAGE.ADD_COMMENT}</div>
                     {(issueType === 'CLAIMWARRANTY' || issueType === 'DAMAGEWARRANTY') &&
                       <span className={`${styles['fs-12']}`}>{ORDER_PAGE.WARRANTY_CLAIM_REASON}</span>
                     }
                     <textarea
-                      style={{ width: '410px' }}
+                      className={`${styles.width100}`}
                       onChange={this.updateComment}
                     />
                   </div> : null
@@ -408,7 +408,7 @@ class Reason extends Component {
               <div className={`${styles['checkbox-material']} ${styles.flex} ${styles['p-0']}`}>
               <input id="deals-offers-reg" name="agree_terms" type="checkbox" onChange={this.handleCheck} checked={this.state.agree_terms} />
               <label htmlFor="deals-offers-reg">
-                <span className={`${styles['light-gry-clr']} ${styles['fs-12']}`}><span>I Agree to the <a href="/en/policy/user-terms-and-conditions" target="_blank" className={`${styles.fontW600}`}>Terms and Conditions</a></span></span>
+                <span className={`${styles['light-gry-clr']} ${styles['fs-12']}`}><span>{PAYMENT_PAGE.AGREE_TO} <a href="/en/policy/user-terms-and-conditions" target="_blank" className={`${styles.fontW600}`}>{PAYMENT_PAGE.TERMS_AND_CONDITIONS}</a></span></span>
               </label>
             </div>
               </div>
