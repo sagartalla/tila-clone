@@ -408,7 +408,7 @@ class Reason extends Component {
               <div className={`${styles['checkbox-material']} ${styles.flex} ${styles['p-0']}`}>
               <input id="deals-offers-reg" name="agree_terms" type="checkbox" onChange={this.handleCheck} checked={this.state.agree_terms} />
               <label htmlFor="deals-offers-reg">
-                <span className={`${styles['light-gry-clr']} ${styles['fs-12']}`}><span>{PAYMENT_PAGE.AGREE_TO} <a href="/en/policy/user-terms-and-conditions" target="_blank" className={`${styles.fontW600}`}>{PAYMENT_PAGE.TERMS_AND_CONDITIONS}</a></span></span>
+                <span className={`${styles['light-gry-clr']} ${styles['fs-12']}`}><span>{PAYMENT_PAGE.AGREE_TO} <a href="/en/policy/user-terms" target="_blank" className={`${styles.fontW600}`}>{PAYMENT_PAGE.TERMS_AND_CONDITIONS}</a></span></span>
               </label>
             </div>
               </div>
