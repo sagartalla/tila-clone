@@ -791,7 +791,7 @@ export const AR_KEYWORDS = {
     "ORDER_TOTAL": "مجموع طلبك",
     "NEED_HELP": "تحتاج مساعدة؟",
     "ORDER": "ORDER #",
-    "NO_WISHLIST_LABEL": "Looks like you have no orders yet",
+    "NO_WISHLIST_LABEL": "Looks like you have no orders yet.",
     "START_SHOPPING_TO_MAKE_KITTEN_HAPPY": 'Start shopping to make the kitten happy.',
     "START_SHOPPING": "ابدأ التسوق",
     "TRACKING_ID": "Tracking Id"
