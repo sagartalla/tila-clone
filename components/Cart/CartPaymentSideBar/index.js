@@ -147,6 +147,28 @@ class CartAndPaymentSideBar extends Component {
                   </span>
                 </li> : null
               }
+              </li> : null
+            }
+            <li>
+              <span className={styles['thick-gry-clr']}>{CART_PAGE.DELIVERY_CHARGES}</span>
+              {total_shipping.money_value > 0 ?
+                <span>
+                <span className={`${styles['fs-10']}`}>{total_shipping.currency_code || currency}</span>&nbsp;
+                <span className={`${styles['fs-12']}`}>{total_shipping.display_value || 0}</span>
+                </span> :
+                <span className={`${styles.flex}`}><SVGComponent clsName={styles['ship-icon']} src={lang === 'en' ? "icons/free-shipping" : "icons/Arabic-Freeshipping" }/></span>
+              }
+            </li>
+            {total_gift_charges.display_value &&
+            <li>
+              <span className={styles['thick-gry-clr']}>{CART_PAGE.GIFT_CHARGES}</span>
+              <span>
+              <span className={`${styles['fs-10']}`}>{total_gift_charges.currency_code || currency}</span>&nbsp;
+              <span className={`${styles['fs-12']}`}>{total_gift_charges.display_value}</span>
+              </span>
+            </li>}
+            {
+            tax !== 0 ?
               <li>
                 <span className={styles['thick-gry-clr']}>{CART_PAGE.DELIVERY_CHARGES}</span>
                 {total_shipping.money_value > 0 ?
@@ -177,7 +199,6 @@ class CartAndPaymentSideBar extends Component {
               {total_tila_care_charges !== null &&
                 <li>
                   <span className={styles['thick-gry-clr']}>{CART_PAGE.TILA_CARE_PROTECTION}</span>
-                  <span>
                     {total_tila_care_charges &&
                       <span>
                         <span className={`${styles['fs-12']}`}>{total_tila_care_charges.currency_code}</span>&nbsp;

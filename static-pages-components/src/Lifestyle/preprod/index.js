@@ -3,7 +3,7 @@ const Lifestyle = () => (
   <div className="life-style-main">
     <Grid>
       <div className={`${styles['flex']} life-banner-inn ${styles['relative']}`}>
-        <a href={`/${lang}/clp/Home%20Furnishing`}>
+        <a href={`/${lang}/Home%20Furnishing/clp`}>
           <img src={`/static/img/landing-page-lifestyle/${lang === 'en' ? 'furnitures' : 'furnitures-ar'}.jpg`} className="img-responsive" />
         </a>
         {/* <div className={`${styles['absolute']} ${styles['flex']} ${styles['flex-colum']} banner-label`}>
@@ -18,7 +18,7 @@ const Lifestyle = () => (
             <h5 className={`title ${styles['fs-16']} ${styles['fontW600']} ${styles['m-0']}`}>Home Furnishing</h5>
             <span className={`dec ${styles['fs-12']}`}>Cusion, Cushion covers, Vase, Lights, Tea table, Sofa sets & more…</span>
           </div>
-          <a href={`/${lang}/clp/Home%20Furnishing`}>
+          <a href={`/${lang}/Home%20Furnishing/clp`}>
             <img src="/static/img/landing-page-lifestyle/sub-banner1.jpg" className="img-responsive" />
           </a>
         </Col>
@@ -27,7 +27,7 @@ const Lifestyle = () => (
             <h5 className={`title ${styles['fs-16']} ${styles['fontW600']} ${styles['m-0']}`}>Home for your books</h5>
             <span className={`dec ${styles['fs-12']}`}>Book shelves, Racks, Folders, Bookmarks & more...</span>
           </div>
-          <a href={`/${lang}/clp/Book%20shelves`}>
+          <a href={`/${lang}/Book%20shelves/clp`}>
             <img src="/static/img/landing-page-lifestyle/sub-banner2.jpg" className="img-responsive" />
           </a>
         </Col>
@@ -141,7 +141,7 @@ const Lifestyle = () => (
             <h5 className={`title ${styles['fs-16']} ${styles['fontW600']} ${styles['m-0']}`}>TRAVEL AND LEISURE</h5>
             <span className={`dec ${styles['fs-12']}`}>Cusion, Cushion covers, Vase, Lights, Tea table, Sofa sets & more…</span>
           </div>
-          <a href={`/${lang}/clp/travel and leisure`}>
+          <a href={`/${lang}/travel and leisure/clp`}>
             <img src="/static/img/landing-page-lifestyle/essental.jpg" className="img-responsive" />
           </a>
         </Col>
@@ -150,7 +150,7 @@ const Lifestyle = () => (
             <h5 className={`title ${styles['fs-16']} ${styles['fontW600']} ${styles['m-0']}`}>HEALTH AND FITNESS</h5>
             <span className={`dec ${styles['fs-12']}`}>Book shelves, Racks, Folders, Bookmarks & more...</span>
           </div>
-          <a href={`/${lang}/clp/fitness`}>
+          <a href={`/${lang}/fitness/clp`}>
             <img src="/static/img/landing-page-lifestyle/essential1.jpg" className="img-responsive" />
           </a>
         </Col>
@@ -162,7 +162,7 @@ const Lifestyle = () => (
         <div className={`top-selling-part-inn ${styles['pt-10']} ${styles.flex}`}>
           <Col md={2} className={styles['pl-0']}>
             <div className={`top-selling-img ${styles['flex']}`}>
-              <a href={`/${lang}/clp/cutlery`}>
+              <a href={`/${lang}/cutlery/clp`}>
                 <img src="/static/img/landing-page-lifestyle/home-ess.jpg" className="img-responsive" />
               </a>
             </div>
@@ -173,7 +173,7 @@ const Lifestyle = () => (
           </Col>
           <Col md={2} className={styles['pl-0']}>
             <div className={`top-selling-img ${styles['flex']}`}>
-              <a href={`/${lang}/clp/Tools%20and%20Hardware`}>
+              <a href={`/${lang}/Tools%20and%20Hardware/clp`}>
                 <img src="/static/img/landing-page-lifestyle/home-ess1.jpg" className="img-responsive" />
               </a>
             </div>
@@ -184,7 +184,7 @@ const Lifestyle = () => (
           </Col>
           <Col md={2} className={styles['pl-0']}>
             <div className={`top-selling-img ${styles['flex']}`}>
-              <a href={`/${lang}/clp/Healthcare`}>
+              <a href={`/${lang}/Healthcare/clp`}>
                 <img src="/static/img/landing-page-lifestyle/home-ess2.jpg" className="img-responsive" />
               </a>
             </div>
@@ -195,7 +195,7 @@ const Lifestyle = () => (
           </Col>
           <Col md={2} className={styles['pl-0']}>
             <div className={`top-selling-img ${styles['flex']}`}>
-              <a href={`/${lang}/search?q=Gardening%20Tools&language=en&isListed=false`}>
+              <a href={`/${lang}/search?q=Gardening%20Tools&isListed=false`}>
                 <img src="/static/img/landing-page-lifestyle/home-ess3.jpg" className="img-responsive" />
               </a>
             </div>
@@ -206,7 +206,7 @@ const Lifestyle = () => (
           </Col>
           <Col md={2} className={styles['pl-0']}>
             <div className={`top-selling-img ${styles['flex']}`}>
-              <a href={`/${lang}/clp/Men%27s%20Grooming`}>
+              <a href={`/${lang}/Men%27s%20Grooming/clp`}>
                 <img src="/static/img/landing-page-lifestyle/home-ess4.jpg" className="img-responsive" />
               </a>
             </div>
@@ -217,7 +217,7 @@ const Lifestyle = () => (
           </Col>
           <Col md={2} className={styles['pl-0']}>
             <div className={`top-selling-img ${styles['flex']}`}>
-              <a href={`/${lang}/clp/Home%20Cleaninig`}>
+              <a href={`/${lang}/Home%20Cleaninig/clp`}>
                 <img src="/static/img/landing-page-lifestyle/home-ess5.jpg" className="img-responsive" />
               </a>
             </div>
@@ -338,7 +338,7 @@ const Lifestyle = () => (
           <Col md={2} className={styles['pl-0']}>
             <div className={`hobby-part-img ${styles['relative']}`}>
               <div className="hobby-part-img-inn">
-                <a href={`/${lang}/search?q=coins&language=en&isListed=false`}>
+                <a href={`/${lang}/search?q=coins&isListed=false`}>
                   <img src="/static/img/landing-page-lifestyle/hobby5.jpg" className="img-responsive" />
                 </a>
               </div>
@@ -350,7 +350,7 @@ const Lifestyle = () => (
           <Col md={2} className={styles['pl-0']}>
             <div className={`hobby-part-img ${styles['relative']}`}>
               <div className="hobby-part-img-inn">
-                <a href={`/${lang}/clp/Art%20and%20Crafts`}>
+                <a href={`/${lang}/Art%20and%20Crafts/clp`}>
                   <img src="/static/img/landing-page-lifestyle/hobby1.jpg" className="img-responsive" />
                 </a>
               </div>
@@ -362,7 +362,7 @@ const Lifestyle = () => (
           <Col md={2} className={styles['pl-0']}>
             <div className={`hobby-part-img ${styles['relative']}`}>
               <div className="hobby-part-img-inn">
-                <a href={`/${lang}/search?q=Sewing&language=en&isListed=false`}>
+                <a href={`/${lang}/search?q=Sewing&isListed=false`}>
                   <img src="/static/img/landing-page-lifestyle/hobby2.jpg" className="img-responsive" />
                 </a>
               </div>
@@ -374,7 +374,7 @@ const Lifestyle = () => (
           <Col md={2} className={styles['pl-0']}>
             <div className={`hobby-part-img ${styles['relative']}`}>
               <div className="hobby-part-img-inn">
-                <a href={`/${lang}/search?q=Antiques&language=en&isListed=false`}>
+                <a href={`/${lang}/search?q=Antiques&isListed=false`}>
                   <img src="/static/img/landing-page-lifestyle/hobby3.jpg" className="img-responsive" />
                 </a>
               </div>
@@ -386,7 +386,7 @@ const Lifestyle = () => (
           <Col md={2} className={styles['pl-0']}>
             <div className={`hobby-part-img ${styles['relative']}`}>
               <div className="hobby-part-img-inn">
-                <a href={`/${lang}/search?q=Toys&language=en&isListed=false`}>
+                <a href={`/${lang}/search?q=Toys&isListed=false`}>
                   <img src="/static/img/landing-page-lifestyle/hobby4.jpg" className="img-responsive" />
                 </a>
               </div>
@@ -398,7 +398,7 @@ const Lifestyle = () => (
           <Col md={2} className={styles['pl-0']}>
             <div className={`hobby-part-img ${styles['relative']}`}>
               <div className="hobby-part-img-inn">
-                <a href={`/${lang}/search?q=Photography&language=en&isListed=false`}>
+                <a href={`/${lang}/search?q=Photography&isListed=false`}>
                   <img src="/static/img/landing-page-lifestyle/hobby5.jpg" className="img-responsive" />
                 </a>
               </div>
@@ -425,7 +425,7 @@ const Lifestyle = () => (
             <h5 className={`main-title ${styles['fs-16']} ${styles['fontW600']} ${styles['m-0']}`}>Grooming Essentials</h5>
             <span className={`dec ${styles['fs-12']}`}>Beard Gel, Beard Shampoo, Face & Body Lotion, Trimmer &  more…</span>
           </div>
-            <a href={`/${lang}/clp/Men%27s%20grooming`}>
+            <a href={`/${lang}/Men%27s%20grooming/clp`}>
             <img src="/static/img/landing-page-lifestyle/health-but1.jpg" className="img-responsive" />
           </a>
         </Col>
@@ -434,7 +434,7 @@ const Lifestyle = () => (
             <h5 className={`main-title ${styles['fs-16']} ${styles['fontW600']} ${styles['m-0']}`}>Kids Care</h5>
             <span className={`dec ${styles['fs-12']}`}>Knee guard, Wrist Guard, Elbow Guard & more…</span>
           </div>
-            <a href={`/${lang}/clp/kids%20care`}>
+            <a href={`/${lang}/kids%20care/clp`}>
             <img src="/static/img/landing-page-lifestyle/health-but2.jpg" className="img-responsive" />
           </a>
         </Col>
@@ -446,42 +446,42 @@ const Lifestyle = () => (
         <div className={`hobby-part-inn ${styles['pt-10']} ${styles['flex']}`}>
           <Col md={2} className={styles['pl-0']}>
             <div className={`hobby-part-img ${styles['relative']}`}>
-              <a href={`/${lang}/search?q=shoe%20mart&language=en&isListed=false`}>
+              <a href={`/${lang}/search?q=shoe%20mart&isListed=false`}>
                 <img src="/static/img/landing-page-lifestyle/popular5.jpg" className="img-responsive" />
               </a>
             </div>
           </Col>
           <Col md={2} className={styles['pl-0']}>
             <div className={`hobby-part-img ${styles['relative']}`}>
-              <a href={`/${lang}/search?q=babyshop&language=en&isListed=false`}>
+              <a href={`/${lang}/search?q=babyshop&isListed=false`}>
                 <img src="/static/img/landing-page-lifestyle/popular1.jpg" className="img-responsive" />
               </a>
             </div>
           </Col>
           <Col md={2} className={styles['pl-0']}>
             <div className={`hobby-part-img ${styles['relative']}`}>
-              <a href={`/${lang}/search?q=max&language=en&isListed=false`}>
+              <a href={`/${lang}/search?q=max&isListed=false`}>
                 <img src="/static/img/landing-page-lifestyle/popular2.jpg" className="img-responsive" />
               </a>
             </div>
           </Col>
           <Col md={2} className={styles['pl-0']}>
             <div className={`hobby-part-img ${styles['relative']}`}>
-              <a href={`/${lang}/search?q=splash&language=en&isListed=false`}>
+              <a href={`/${lang}/search?q=splash&isListed=false`}>
                 <img src="/static/img/landing-page-lifestyle/popular3.jpg" className="img-responsive" />
               </a>
             </div>
           </Col>
           <Col md={2} className={styles['pl-0']}>
             <div className={`hobby-part-img ${styles['relative']}`}>
-              <a href={`/${lang}/search?q=centrepoint&language=en&isListed=false`}>
+              <a href={`/${lang}/search?q=centrepoint&isListed=false`}>
                 <img src="/static/img/landing-page-lifestyle/popular4.jpg" className="img-responsive" />
               </a>
             </div>
           </Col>
           <Col md={2} className={styles['pl-0']}>
             <div className={`hobby-part-img ${styles['relative']}`}>
-              <a href={`/${lang}/search?q=shoe%20mart&language=en&isListed=false`}>
+              <a href={`/${lang}/search?q=shoe%20mart&isListed=false`}>
                 <img src="/static/img/landing-page-lifestyle/popular5.jpg" className="img-responsive" />
               </a>
             </div>

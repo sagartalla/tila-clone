@@ -17,7 +17,7 @@ import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from './uservault_en.styl';
 import styles_ar from './uservault_ar.styl';
 
-const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
 const initialVaultCardObj = {
   card_number: '',
@@ -26,10 +26,9 @@ const initialVaultCardObj = {
   exp_yr: '',
   default: true,
   addNewCardBlock: false,
-}
+};
 
 class UserVault extends Component {
-
   constructor(props) {
     super(props);
     this.state = initialVaultCardObj;
@@ -40,51 +39,50 @@ class UserVault extends Component {
     this.setAsDefaultCard = this.setAsDefaultCard.bind(this);
     this.addBtnClickHandler = this.addBtnClickHandler.bind(this);
     this.state = {
-      transactions: []
-    }
+      transactions: [],
+    };
   }
 
   componentWillMount() {
     this.props.getWalletTransactions();
   }
 
+  componentDidMount() {
+    if (!this.props.miniVault) this.props.getCardResults();
+  }
+
   componentWillReceiveProps(nextProps) {
-    if(nextProps.transactions.length>0) {
+    if (nextProps.transactions.length > 0) {
       this.setState({
-        transactions: nextProps.transactions
-      })
+        transactions: nextProps.transactions,
+      });
     }
   }
 
-  componentDidMount() {
-    if (!this.props.miniVault)
-      this.props.getCardResults();
+  setAsDefaultCard(e) {
+    this.setState({
+      ...this.state,
+      default: e.target.checked,
+    });
   }
 
   inputChange(e) {
     this.setState({
       ...this.state,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
 
     // console.log(this.state);
   }
 
   makeDefault(card_token) {
-    const { toggleMiniVault } = this.props;
+    const { toggleMiniVault, selectedSavedCard } = this.props;
     if (toggleMiniVault) toggleMiniVault();
-    this.props.selectedSavedCard(card_token);
+    selectedSavedCard(card_token);
   }
 
   deleteCard(card_token) {
     this.props.deleteCard(card_token);
-  }
-
-  setAsDefaultCard(e) {
-    this.setState({
-      ...this.state,
-      default: e.target.checked
-    });
   }
 
   toggleAddCardBlock() {
@@ -92,21 +90,23 @@ class UserVault extends Component {
   }
 
   addBtnClickHandler() {
-    const { card_number, user_name, exp_mm, exp_yr } = this.state;
+    const {
+ card_number, user_name, exp_mm, exp_yr 
+} = this.state;
     this.props.addCard({
-      "bank_name": "HDFC",
-      "card_number": card_number,
-      "card_type": "DEBIT",
-      "def_currency_code": "KSA",
-      "expiry_month": exp_mm,
-      "expiry_year": exp_yr,
-      "holder_name": user_name,
-      "provider_type": "VISA",
-      "default": this.state.default
+      bank_name: 'HDFC',
+      card_number,
+      card_type: 'DEBIT',
+      def_currency_code: 'KSA',
+      expiry_month: exp_mm,
+      expiry_year: exp_yr,
+      holder_name: user_name,
+      provider_type: 'VISA',
+      default: this.state.default,
     });
     this.toggleAddCardBlock();
     this.state = {
-      initialVaultCardObj
+      initialVaultCardObj,
     };
   }
 
@@ -123,7 +123,7 @@ class UserVault extends Component {
               toggleAddCardBlock={this.toggleAddCardBlock}
             />
             :
-            <div className={`${styles['box']} ${styles['ml-5']}`}>
+            <div className={`${styles.box} ${styles['ml-5']}`}>
               <VaultHeader transactions={this.state.transactions}>
                 <VaultBody
                   data={results}
@@ -145,23 +145,23 @@ class UserVault extends Component {
             </div>
         }
       </div>
-    )
+    );
   }
 }
 
-const mapStateToProps = (store) => ({
-  results: selectors.getSavedCardDetails(store),
+const mapStateToProps = (store, ownProps) => ({
+  results: ownProps.isInstantCheckout ? selectors.getSavedCardDetails(store) : selectors.getCardResults(store),
   transactions: selectors.getTransactions(store),
   tilaCredit: selectors.getTilaCredit(store),
 });
 
-const mapDispatchToProps = (dispatch) =>
+const mapDispatchToProps = dispatch =>
   bindActionCreators({
     getCardResults: actionCreators.getCardResults,
     addCard: actionCreators.addCard,
     deleteCard: actionCreators.deleteCard,
     makeCardDefault: actionCreators.makeCardDefault,
-    selectedSavedCard:actionCreators.selectedSavedCard,
+    selectedSavedCard: actionCreators.selectedSavedCard,
     getWalletTransactions: actionCreators.getWalletTransactions,
   }, dispatch);
 
@@ -169,8 +169,5 @@ UserVault.propTypes = {
 
 };
 
-UserVault.defaultProps = {
-
-};
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserVault);
