@@ -145,7 +145,6 @@ class CartAndPaymentSideBar extends Component {
                   </span>
                 </li> : null
               }
-              </li> : null
             }
             <li>
               <span className={styles['thick-gry-clr']}>{CART_PAGE.DELIVERY_CHARGES}</span>
