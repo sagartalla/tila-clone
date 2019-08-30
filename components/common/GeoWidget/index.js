@@ -156,7 +156,7 @@ class GeoWidget extends Component {
                 className={`${styles['fs-14']} ${styles['delivery-input']} ${isPdp ? styles['pdp-border-btm'] : ''}`}
                 // onInput={this.onChangeCity}
                 onChange={this.onChangeCity}
-                style={{ width: `${this.state.displayCity.length * 8}px` }}
+                style={{ width: `${this.state.displayCity && this.state.displayCity.length * 8}px` }}
                 contentEditable
               />
             </Dropdown.Toggle>
