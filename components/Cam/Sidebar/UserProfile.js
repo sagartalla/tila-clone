@@ -32,7 +32,7 @@ class UserProfile extends React.Component {
     const file = e.target.files[0];
     const formData = new FormData();
     formData.append('file', file);
-    this.props.uploadProfilePic(formData);
+    this.props.uploadProfilePic(formData, this.props.userInfo.contactInfo.user_account_id);
   }
 
   handleMouseOver = () => {

@@ -85,7 +85,7 @@ class ChooseVariant extends Component {
     const data = variants.map((el,index) => {
         return <li key={'variant_'+index}
           className={`${el.listing !== null && el.listing.total_inventory_count > 0 ? styles['productSize-Button'] : styles['product-StrikeButton']} ${activeListing === (el.listing !== null && el.listing.listing_id) ? styles['active-variant']: ''}`}
-          onClick={(el.listing !== null && el.listing.total_inventory_count > 0) ? this.choosedVariant(el.listing, orderIssue) : this.sizeNotAvailable(false)}
+          onClick={(el.listing !== null && el.listing.total_inventory_count > 0) ? this.choosedVariant(el.listing) : this.sizeNotAvailable(false)}
           >
           {el.variant_details.attribute_map && el.variant_details.attribute_map.size && el.variant_details.attribute_map.size.attribute_values[0].value}
         </li>
@@ -114,9 +114,9 @@ class ChooseVariant extends Component {
         }
         <div>
           {{
-            errorMsg: <p className={`${styles['error-msg']} ${styles['fs-12']}`}>{ORDER_PAGE.SELECTED_SIZE_NOT_AVAILABLE}
+            errorMsg: <p className={`${styles['error-msg']} ${styles['selected-size']} ${styles['fs-12']} ${styles['flex-center']} ${styles['justify-center']}`}>{ORDER_PAGE.SELECTED_SIZE_NOT_AVAILABLE}
           </p>,
-          successMsg : <p className={`${styles['success-msg']} ${styles['fs-12']}`}>
+          successMsg : <p className={`${styles['success-msg']} ${styles['fs-12']} ${styles['selected-size']} ${styles['fs-12']} ${styles['flex-center']} ${styles['justify-center']}`}>
             {ORDER_PAGE.SELECTED_SIZE_AVAILABLE_FOR_EXCHANGE}
           </p>,
           emptyMsg: '',

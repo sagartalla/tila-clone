@@ -5,8 +5,8 @@ const staticRoutes = (req, res) => {
   const urlObj = {
     'user-terms-and-conditions': `https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/policies/user/tnc/${lang}/UserTermsAndConditions.html`,
     'cancellation-policy': `https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/policies/user/basic_policies/${lang}/UserBasicPolicies.html?#cancelationPolicy`,
-    'exchange-replacement-policy': `https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/policies/user/basic_policies/${lang}/UserBasicPolicies.html?#exchangePolicy`,
-    'return-refund-policy': `https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/policies/user/basic_policies/${lang}/UserBasicPolicies.html?#returnPolicy`,
+    'return-and-exchange-policy': `https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/policies/user/basic_policies/${lang}/UserBasicPolicies.html?#exchangePolicy`,
+    'return-and-refund-policy': `https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/policies/user/basic_policies/${lang}/UserBasicPolicies.html?#returnPolicy`,
     'warranty-policy': `https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/policies/user/basic_policies/${lang}/UserBasicPolicies.html?#warrantyPolicy`,
     'privacy-policy': `https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/policies/user/privacy/${lang}/UserPrivacyPolicy.html`,
     'cookie-policy': `https://dev-catalog-imgs.s3.ap-south-1.amazonaws.com/policies/user/cookie/${lang}/UserCookiePolicies.html`,

@@ -72,7 +72,7 @@ const MiniCartBody = (props) => {
                       {
                         editCartDetails
                           ?
-                          <span id={item_id} data-productid={product_id} onClick={removeCartItem} className={`${styles['flex']} ${styles['min-delete-icon']}`}>
+                          <span id={item_id} data-productid={product_id} onClick={removeCartItem} data_scrollId="cart-container" className={`${styles['flex']} ${styles['min-delete-icon']}`}>
                             <a className={styles['flex']}>
                               <SVGComponent clsName={`${styles['delete-icon']}`} src="icons/delete-icon/delete-icon" />
                             </a>
