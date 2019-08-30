@@ -695,6 +695,8 @@ export const AR_KEYWORDS = {
     "SELECT_REASON_RETURN": "Select a reason for return",
     "SELECT_REASON_EXCHANGE": "Select a reason for exchange",
     "SELECT_REASON_CANCEL": "Select a reason for cancel",
+    "SELECT_CLAIM_WARRANTY": 'Select a reason for availing warranty',
+    "SELECT_WARRANTY_CLAIM": 'Please select a reason for availing warranty',        
     "SELECT_EXCHANGE_REASON": "Please select a reason for exchanging this item.",
     "SELECT_AN_OPTION": "Select an Option*",
     "SELECT_REASON": "اختار سبب",
@@ -708,7 +710,7 @@ export const AR_KEYWORDS = {
     "PAYMENT_FAILED": "فشلت عملية الدفع",
     "CHOOSE_YOUR_MODE_OF_PAYMENT": "اختار طريقة الدفع اللي تفضَّلها",
     "SIZE_TO_EXCHANGE": "استبدال المقاس",
-    "SIZE_NOT_AVALABLE": "المقاس غير متوفر؟ اضغط على المقاس الغير متوفر لإرجاع المنتج",
+    "SIZE_NOT_AVALABLE": "Size not available? Click on the unavailable size to return the item",
     "SELECTED_SIZE_NOT_AVAILABLE": "المقاس الذي اخترته غير متوفر حالياً، ولكن يمكنك إرجاع المنتج واسترداد كامل المبلغ",
     "SELECTED_SIZE_AVAILABLE_FOR_EXCHANGE": "المقاس المختار متوفر للاستبدال",
     "WHY_DO_YOU_WANT_TO": "ليش تبي ت.. ",
@@ -732,7 +734,9 @@ export const AR_KEYWORDS = {
     "IN_PROGRESS": "In Progress",
     "MESSAGE": "رسالة",
     "REFUND": "Refund",
-    "CONTINUE_SHOPPING": "CONTINUE SHOPPING"
+    "CONTINUE_SHOPPING": "CONTINUE SHOPPING",
+    "ADD_COMMENT": 'Add a comment(optional)',  
+    
   },
   "COUPON_OFFERS": {
     "VIEW_TERMS": "الشروط والأحكام",
