@@ -76,6 +76,7 @@ const OrderDetails = ({ query, orderData, thankyouPage }) => {
                   listingId={item.listingId}
                   tilaPolicy={item.tilaPolicy}
                   tuinId={item.tuinId}
+                  isOrderDetailsPage={true}
                 />
               ))}
             </div>

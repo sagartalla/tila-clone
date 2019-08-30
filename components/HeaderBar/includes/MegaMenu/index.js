@@ -68,7 +68,16 @@ class MegaMenu extends Component {
     this.expandedHover = true;
   }
 
-  onLinkClick() {
+  onLinkClick(e) {
+    // console.log(e.currentTarget.getAttribute('displayName'));
+    // console.log(e, this.state, this.props, 'gsfs');
+    console.log(this.props);
+    console.log(this.props.colorScheme);
+
+    this.props.track({
+      eventName: 'MEGA_MENU',
+      tree: e.currentTarget.getAttribute('displayName')+"|"+this.props.colorScheme,
+    }),
     this.setState({
       selectedCategory: null,
       viewAllMenu: false,
@@ -197,6 +206,7 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       getMegamenu: actionCreators.getMegamenu,
+      track: actionCreators.track,
     },
     dispatch,
   );
