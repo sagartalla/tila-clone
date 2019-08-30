@@ -56,21 +56,21 @@ class Review extends Component {
           openModal: !prevState.openModal,
           showReviews: true,
         }));
-      }, 3001);
+      }, 2000);
     }
   }
   toggleReviewModal = () => {
     const { openModal } = this.state;
-    const { isLoggedIn, userInfoData, v2CurrentFlow, userInfo } = this.props;  
+    const { isLoggedIn, userInfoData, v2CurrentFlow, userInfo } = this.props;
     if (!isLoggedIn) {
       this.props.showLoginScreen();
-    } else if (isLoggedIn && (cookies.get('isVerified') === 'false')) {
+    } else if (isLoggedIn && (userInfoData.email_verified === 'NV' && userInfo.contactInfo.email_verified === 'NV')) {
       this.props.getUserInfoData({ initiateEmailVerification: true });
       this.props.showLoginScreen();
       const data = { currentFlow: 'existing_user_login', nextPage: 'verify_email' };
       const { v2CurrentFlow } = this.props;
       v2CurrentFlow(data);
-    } else if (isLoggedIn && (cookies.get('isVerified') === 'true')) {
+    } else if (isLoggedIn && (userInfoData.email_verified === 'V' || userInfo.contactInfo.email_verified === 'V')) {
       this.setState(prevState => ({
         openModal: !prevState.openModal,
         showReviews: true,

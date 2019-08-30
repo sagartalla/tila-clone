@@ -316,7 +316,13 @@ class OrderItem extends Component {
                     <div className={`${styles['bg-white']} ${styles['fs-12']} ${styles.absolute} ${styles['p-5']} ${styles['border-lg']} ${styles['refund-label']}`}>{ORDER_PAGE.REFUND_STATUS}</div>
                     {product.refunds.map(refund => (
                       <div className={`${styles['flex-center']} ${styles['fs-12']}`}>
-                        <span className={styles['thick-gry-clr']}>{ORDER_PAGE.REFUND_TO}:<span className={`${styles['black-color']} ${styles['ml-10']}`}>{refund.refund_mode === 'WALLET' ? 'Tila Wallet' : 'Card'}</span></span>
+                        <span className={`${styles['thick-gry-clr']} ${styles.flex}`}>{ORDER_PAGE.REFUND_TO}:
+                        <span className={`${styles['black-color']} ${styles['ml-10']} ${styles['ml-10']}`}>
+                        {refund && refund.refund_payment_info && refund.refund_payment_info.length > 0 && refund.refund_payment_info.map(refundVal => (
+                          <div>{refundVal.payment_mode_display_name}</div>
+                        ))}
+                        </span>
+                        </span>
                         {refundStatus(refund)}
                         <span>{refund.amount.display_value} {refund.amount.currency_code}</span>
                       </div>
@@ -342,7 +348,7 @@ class OrderItem extends Component {
         </Col>
         <Col md={5} sm={5} className={`${styles['thick-border-left']} ${styles['p-0']}`}>
           {payments && payments.length > 0 && payments[0].transaction_status === 'FAILED' ?
-            <div>{ORDER_PAGE.ORDER_UNSUCCESSFUL}</div>
+            <div className={`${styles['unsuccessful-mesg']}`}>{ORDER_PAGE.ORDER_UNSUCCESSFUL}</div>
             :
             <React.Fragment>
               <div className={`${styles['p-15']} ${styles['ipad-pl-0']} ${styles['ipad-pr-0']} ${styles['flx-space-bw']}`}>

@@ -183,9 +183,16 @@ class CartItem extends React.Component {
     let policyId1  = [];
     let isMakeApi = false;
     Object.keys(item.policies_applied).length > 0 && Object.keys(item.policies_applied).map(newPolicy => {
-      policies_selected[newPolicy] !== item.policies_applied[newPolicy].policy_id &&
-          policyId1.push(item.policies_applied[newPolicy].policy_id);
+      if (policies_selected[newPolicy] === undefined && policies_selected[newPolicy] !== item.policies_applied[newPolicy].policy_id) {
+        isMakeApi = false;
+      }
+      if (Object.keys(item.policies_applied).length === 1 && policies_selected[newPolicy] === item.policies_applied[newPolicy].policy_id) {
+          policyId1 = [];
           isMakeApi = true;
+      } else if (Object.keys(item.policies_applied).length > 1 && policies_selected[newPolicy] !== item.policies_applied[newPolicy].policy_id) {
+        policyId1.push(item.policies_applied[newPolicy].policy_id);
+        isMakeApi = true;
+      }
     })
     isMakeApi && this.props.addToCartAndFetch({
       listing_id: item.listing_id,

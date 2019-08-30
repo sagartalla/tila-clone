@@ -20,91 +20,91 @@ const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...s
 
 const f = [
   {
-    url: `/${lang}/clp/${lang === 'en' ? 'Women\'s Clothing' : 'ملابس نسائية'}`,
+    url: `/${lang}/${lang === 'en' ? 'Women\'s Clothing' : 'ملابس نسائية'}/clp`,
     title: FOOTER_PAGE.WOMEN_CLOTHING,
   },
 
   {
-    url: `/${lang}/clp/${lang === 'en' ? 'Men\'s Clothing' : 'ملابس رجالية'}`,
+    url: `/${lang}/${lang === 'en' ? 'Men\'s Clothing' : 'ملابس رجالية'}/clp`,
     title: FOOTER_PAGE.MEN_CLOTHING,
   },
 
   {
-    url: `/${lang}/clp/${lang === 'en' ? 'Footwear' : 'أحذية'}`,
+    url: `/${lang}/${lang === 'en' ? 'Footwear' : 'أحذية'}/clp`,
     title: FOOTER_PAGE.FOOT_WEAR,
   },
 
   {
-    url: `/${lang}/clp/${lang === 'en' ? 'Sunglasses' : 'نظارات شمسية'}`,
+    url: `/${lang}/${lang === 'en' ? 'Sunglasses' : 'نظارات شمسية'}/clp`,
     title: FOOTER_PAGE.SUNGLASSES,
   },
   {
-    url: `/${lang}/clp/${lang === 'en' ? 'Watches' : 'ساعات اليد'}`,
+    url: `/${lang}/${lang === 'en' ? 'Watches' : 'ساعات اليد'}/clp`,
     title: FOOTER_PAGE.WATCHES,
   },
   {
-    url: `/${lang}/clp/Fashion%20Accessories`,
+    url: `/${lang}/Fashion%20Accessories/clp`,
     title: FOOTER_PAGE.FASHION_ACCESSORIES,
   },
 ];
 
 const e = [
   {
-    url: `/${lang}/clp/${lang === 'en' ? 'mobiles' : 'الهواتف-النقالة'}`,
+    url: `/${lang}/${lang === 'en' ? 'mobiles' : 'الهواتف-النقالة'}/clp`,
     title: FOOTER_PAGE.MOBILES,
   },
 
   {
-    url: `/${lang}/clp/${lang === 'en' ? 'laptops' : 'أجهزة-الكمبيوتر-المحمولة'}`,
+    url: `/${lang}/${lang === 'en' ? 'laptops' : 'أجهزة-الكمبيوتر-المحمولة'}/clp`,
     title: FOOTER_PAGE.LAPTOPS,
   },
 
   {
-    url: `/${lang}/clp/${lang === 'en' ? 'camera' : 'الة-تصوير'}`,
+    url: `/${lang}/${lang === 'en' ? 'camera' : 'الة-تصوير'}/clp`,
     title: FOOTER_PAGE.CAMERAS,
   },
 
   {
-    url: `/${lang}/clp/${lang === 'en' ? 'televisions' : 'التلفزيونات'}`,
+    url: `/${lang}/${lang === 'en' ? 'televisions' : 'التلفزيونات'}/clp`,
     title: FOOTER_PAGE.TELEVISIONS,
   },
 
   {
-    url: `/${lang}/clp/${lang === 'en' ? 'storage devices' : 'أجهزة التخزين'}`,
+    url: `/${lang}/${lang === 'en' ? 'storage devices' : 'أجهزة التخزين'}/clp`,
     title: FOOTER_PAGE.STORAGE_DEVICES,
   },
 
   {
-    url: `/${lang}/clp/${lang === 'en' ? 'mobile-accessories' : 'ملحقات-الهاتف-المحمول'}`,
+    url: `/${lang}/${lang === 'en' ? 'mobile-accessories' : 'ملحقات-الهاتف-المحمول'}/clp`,
     title: FOOTER_PAGE.MOBILE_ACCESSORIES,
   },
 ];
 
 const l = [
   {
-    url: `/${lang}/clp/travel%20accessories`,
+    url: `/${lang}/travel%20accessories/clp`,
     title: FOOTER_PAGE.TRAVEL_ACCESSORIES,
   },
 
   {
-    url: `/${lang}/clp/Sports`,
+    url: `/${lang}/Sports/clp`,
     title: FOOTER_PAGE.SPORTS_AND_OUTDOORS,
   },
 
   {
-    url: `/${lang}/clp/diaper`,
+    url: `/${lang}/diaper/clp`,
     title: FOOTER_PAGE.MUMS_AND_KIDS,
   },
   {
-    url: `/${lang}/clp/beauty%20and%20health`,
+    url: `/${lang}/beauty%20and%20health/clp`,
     title: FOOTER_PAGE.BEAUTY_AND_HEALTH,
   },
   {
-    url: `/${lang}/clp/perfumes`,
+    url: `/${lang}/perfumes/clp`,
     title: FOOTER_PAGE.PERFUMES,
   },
   {
-    url: `/${lang}/clp/make%20up`,
+    url: `/${lang}/Make%20Up/clp`,
     title: FOOTER_PAGE.MAKEUP,
   },
 ];
@@ -283,7 +283,7 @@ const FooterBar = props => (
               <span className={`${styles.fontW600}`}>{FOOTER_PAGE.ON_INSTAGRAM}</span>
               <span className={`${styles['follow-inst-btn']} ${styles['fs-10']} ${styles['lne-ht2']} ${styles['white-color']} ${styles['ml-10']} ${styles['pl-15']} ${styles['pr-15']}`}>{FOOTER_PAGE.FOLLOW}</span>
             </h4>
-          </a>  
+          </a>
           </Col>
           <Col md={3} sm={6} className={`${styles['footer-social-list']} ${styles['pr-0']}`}>
           <a href="https://www.facebook.com/tilasocial/" target="_blank">
@@ -292,7 +292,7 @@ const FooterBar = props => (
               <span className={`${styles['lgt-blue']} ${styles.fontW600}`}>{FOOTER_PAGE.ON_FACEBOOK}</span>
               <span className={`${styles['follow-fb-btn']} ${styles['fs-10']} ${styles['lne-ht2']} ${styles['white-color']} ${styles['ml-10']} ${styles['pl-15']} ${styles['pr-15']}`}>{FOOTER_PAGE.FOLLOW}</span>
             </h4>
-          </a>  
+          </a>
           </Col>
         </Row>
       </Grid>
@@ -315,7 +315,7 @@ const FooterBar = props => (
             <div className={styles['ipad-pr-0']}>
               <h4 className={`${styles.fontW600} ${styles['fs-16']} ${styles['black-color']}`}>{FOOTER_PAGE.POLICIES}</h4>
               <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
-                <li><a href={`/${lang}/policy/user-terms-and-conditions`} target="_blank">{FOOTER_PAGE.TERMS_CONDITION}</a></li>
+                <li><a href={`/${lang}/policy/user-terms`} target="_blank">{FOOTER_PAGE.TERMS_CONDITION}</a></li>
                 <li><a href={`/${lang}/policy/cancellation-policy`} target="_blank">{FOOTER_PAGE.CANCELLATION_POLICY}</a></li>
                 <li><a href={`/${lang}/policy/return-and-exchange-policy`} target="_blank">{FOOTER_PAGE.EXCHANGE_REPLACEMENT_POLICY}</a></li>
                 <li><a href={`/${lang}/policy/return-and-refund-policy`} target="_blank">{FOOTER_PAGE.REFUND_POLICY}</a></li>
@@ -342,7 +342,7 @@ const FooterBar = props => (
                 <h4 className={`${styles.fontW600} ${styles['fs-16']} ${styles['black-color']}`}>{FOOTER_PAGE.HELP}</h4>
                 <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
                   <li>{FOOTER_PAGE.CONSUMER_RIGHT}</li>
-                  <li>{FOOTER_PAGE.SHIPPING_AND_DELIVERY}</li>
+                  <li><a href={`/${lang}/policy/customer-delivery`} target="_blank">{FOOTER_PAGE.SHIPPING_AND_DELIVERY}</a></li>
                   <li>{FOOTER_PAGE.FREQUENTLY_ASKED_QUESTIONS}</li>
                   <li>{FOOTER_PAGE.CUSTOMER_CARE}</li>
                 </ul>

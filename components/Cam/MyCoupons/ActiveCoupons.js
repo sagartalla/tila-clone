@@ -118,7 +118,7 @@ class ActiveCoupons extends Component {
               </Tabs>
             </Modal.Body>
             <div className={`${styles['justify-end']} ${styles['p-30']} ${styles.flex}`}>
-              <button className="btn btn-primary" style={{ backgroundColor: '#45689a', width: '15%' }} onClick={this.closeTerms}>
+              <button className="btn btn-primary" style={{ backgroundColor: '#101820', width: '15%' }} onClick={this.closeTerms}>
                 {COUPON_OFFERS.OK}
               </button>
             </div>

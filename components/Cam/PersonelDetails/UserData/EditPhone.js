@@ -68,7 +68,7 @@ class EditPhone extends React.Component {
       },
     ]);
     this.state = {
-      phoneNumber: "" || (props.userData && props.userData.mobile_no),
+      phoneNumber: "" || (props.userInfo && props.userInfo.contactInfo && props.userInfo.contactInfo.mobile_verified === 'V' ? props.userInfo.contactInfo.mobile_no : ''),
       otp: '',
       error: "",
       show: false,
@@ -303,7 +303,7 @@ class EditPhone extends React.Component {
               </Col>
               <Col xs={9} md={9}>
                 <div className={`${styles['phoneInpt']} ${styles['relative']}`}>
-                  <div className={styles['fp-input']}>
+                  <div className={`${styles['fp-input']}`}>
                     <input
                       type="text"
                       name="phoneNumber"
