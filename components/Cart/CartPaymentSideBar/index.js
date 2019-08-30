@@ -82,7 +82,7 @@ class CartAndPaymentSideBar extends Component {
                    : <SVGComponent clsName={`${styles['coupon-code-blank']}`} src="icons/common-icon/coupon-code-border-ar" />}
                 <div className={`${styles.noCoupon} ${styles['ml-5']}`}>
                   <span className={`${styles['text-uppercase']} ${styles['pl-5']}`}>
-                    <div className={`${styles['fs-14']} ${styles['coupon-text']}`}>{COUPON_OFFERS.APPLY_COUPON}</div>
+                    <div className={`${styles['fs-14']}`}>{COUPON_OFFERS.APPLY_COUPON}</div>
                   </span>
                 </div>
               </span>
@@ -147,47 +147,44 @@ class CartAndPaymentSideBar extends Component {
                   </span>
                 </li> : null
               }
-            }
-            <li>
-              <span className={styles['thick-gry-clr']}>{CART_PAGE.DELIVERY_CHARGES}</span>
-              {total_shipping.money_value > 0 ?
-                <span>
-                <span className={`${styles['fs-10']}`}>{total_shipping.currency_code || currency}</span>&nbsp;
-                <span className={`${styles['fs-12']}`}>{total_shipping.display_value || 0}</span>
-                </span> :
-                <span className={`${styles.flex}`}><SVGComponent clsName={styles['ship-icon']} src={lang === 'en' ? "icons/free-shipping" : "icons/Arabic-Freeshipping" }/></span>
-              }
-            </li>
-            {total_gift_charges.display_value &&
-            <li>
-              <span className={styles['thick-gry-clr']}>{CART_PAGE.GIFT_CHARGES}</span>
-              <span>
-              <span className={`${styles['fs-10']}`}>{total_gift_charges.currency_code || currency}</span>&nbsp;
-              <span className={`${styles['fs-12']}`}>{total_gift_charges.display_value}</span>
-              </span>
-            </li>}
-            {
-            tax !== 0 ?
               <li>
                 <span className={styles['thick-gry-clr']}>{CART_PAGE.DELIVERY_CHARGES}</span>
                 {total_shipping.money_value > 0 ?
                   <span>
-                    <span className={`${styles['fs-12']}`}>{total_shipping.currency_code || currency}</span>&nbsp;
-                <span className={`${styles['fs-14']}`}>{total_shipping.display_value || 0}</span>
+                    <span className={`${styles['fs-10']}`}>{total_shipping.currency_code || currency}</span>&nbsp;
+                <span className={`${styles['fs-12']}`}>{total_shipping.display_value || 0}</span>
                   </span> :
                   <span className={`${styles.flex}`}><SVGComponent clsName={styles['ship-icon']} src={lang === 'en' ? "icons/free-shipping" : "icons/Arabic-Freeshipping"} /></span>
                 }
               </li>
-              : null}
+              {total_gift_charges.display_value &&
+                <li>
+                  <span className={styles['thick-gry-clr']}>{CART_PAGE.GIFT_CHARGES}</span>
+                  <span>
+                    <span className={`${styles['fs-10']}`}>{total_gift_charges.currency_code || currency}</span>&nbsp;
+              <span className={`${styles['fs-12']}`}>{total_gift_charges.display_value}</span>
+                  </span>
+                </li>}
+              {
+                tax !== 0 ?
+                  <li>
+                    <span className={styles['thick-gry-clr']}>{CART_PAGE.DELIVERY_CHARGES}</span>
+                    {total_shipping.money_value > 0 ?
+                      <span>{total_shipping.currency_code || currency} {total_shipping.display_value || 0}</span> :
+                      <span className={`${styles.flex}`}><SVGComponent clsName={styles['ship-icon']} src={lang === 'en' ? "icons/free-shipping" : "icons/Arabic-Freeshipping"} /></span>
+                    }
+                  </li> : null}
               {total_tila_care_charges !== null &&
                 <li>
                   <span className={styles['thick-gry-clr']}>{CART_PAGE.TILA_CARE_PROTECTION}</span>
+                  <span>
                     {total_tila_care_charges &&
                       <span>
-                        <span className={`${styles['fs-10']}`}>{total_tila_care_charges.currency_code}</span>&nbsp;
-                        <span className={`${styles['fs-12']}`}>{total_tila_care_charges.display_value}</span>
+                        <span className={`${styles['fs-12']}`}>{total_tila_care_charges.currency_code}</span>&nbsp;
+                    <span className={`${styles['fs-14']}`}>{total_tila_care_charges.display_value}</span>
                       </span>
                     }
+                  </span>
                 </li>
               }
               <li className={`${styles['mt-20']} ${styles['fs-16']} ${styles['light-gry-clr']}`}>
