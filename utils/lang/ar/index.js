@@ -135,7 +135,7 @@ export const AR_KEYWORDS = {
     "EDIT": "عدّل",
     "SUB_TAG": "عدل أو امسح  عنوانك للتوصيل الموجود أو ضيف عنوانك الجديد",
     "CONTINUE": "كمل",
-    "MANAGE_SHIP_ADDR": "التحكّم بعناوينك للشحن",
+    "MANAGE_SHIP_ADDR": "إدارة عناوين التوصيل",
     "DEFAULT_ADDR": "عنوانك الأساسي",
     "MAKE_DEFAULT": "خليه عنوانك الأساسي",
     "DELETE": "امسح",
@@ -174,9 +174,9 @@ export const AR_KEYWORDS = {
     "FROM_YOUR_WISHLIST": "من قائمة المفضلة",
     "WHEN_ADDED_TO_WISHLIST": "لمن ينضاف للقائمة المفضلة",
     "ITEM_WAS": "منتجك كان",
-    "NO_WISHLIST_LABEL": "So many products on Tila and yet you show no love :(",
-    "DONT_WAIT": "Dont wait no more!",
-    "START_SHOPPING": "Start shopping",
+    "NO_WISHLIST_LABEL": "): منتجات على كيف كيفك في تيله ولا شي حبيته معقولة؟",
+    "DONT_WAIT_NO_MORE": 'لاتستنى أكثر من كذا',
+    "START_SHOPPING": "ابدأ التسوق",
     "PRICE_DECRECED_BY": "انخفض السعر بنسبة",
     "PRICE_INCREASED_BY": "Price Increased by"
   },
@@ -299,9 +299,9 @@ export const AR_KEYWORDS = {
     "EXPIRY_MONTH": "شهر الإنتهاء",
     "EXPIRY_YEAR": "عام الانتهاء",
     "YOUR_TILA_CREDIT_BALANCE_IS": "رصيدك الباقي لحساب تيله هو",
-    "NO_CART_LABEL": "Where are all the saved cards?",
-    "NO_CARD_LABEL": "Save your cards for faster checkouts.",
-    "NO_VOCHER_LABEL": "Save your cards for faster checkouts.",
+    "NO_CART_LABEL": "وين كل البطاقات المحفوظة؟",
+    "NO_CARD_LABEL": "احفظ بطاقاتك لإنهاء عملية الشراء بسرعة",
+    "NO_VOCHER_LABEL": "احفظ بطاقاتك لإنهاء عملية الشراء بسرعة",
     "CREDIT": "رصيدك"
   },
   "THANK_YOU_PAGE": {
@@ -349,7 +349,7 @@ export const AR_KEYWORDS = {
     "ENTER_NEW_PASSWORD_MESSAGE": "أدخل كلمة السر الجديدة",
     "RE_ENTER_PASSWORD_MESSAGE": "إعادة إدخال كلمة السر الجديدة",
     "SUBMIT_BUTTON": "غيّر كلمة السر",
-    "PASSWORD_LENGTH_MESSAGE": "Your password should be atleast 8 characters in length and should not be same as your old password.",
+    "PASSWORD_LENGTH_MESSAGE": "كلمة السر لازم تكون ٨ أحرف و مختلفة عن كلمة السر القديمة",
     "PASSWORD_LENGTH": "كلمة السر يجب أن تكون ٨ أحرف على الأقل",
     "SAME_PASSWORD_MESSAGE": "يرجى التأكد من أن كلمة السر الجديدة وأنها تختلف عن كلمة السر السابقة التي استعملتها",
     "THANK_YOU": "Thank You!",
@@ -755,8 +755,8 @@ export const AR_KEYWORDS = {
     "EXPIRED_COUPONS": "كوبونات منتهية الصلاحية",
     "EXPIRED_ON": "انتهت يوم ",
     "EMPTY_COUPON_BOX": "لقيت كوبون فاضي",
-    "NO_COUPONS_AVAILABLE": "لا توجد كوبونات متاحة حاليًا",
-    "CHECK_BACK_LATER": "من فضلك راجع مره أخرى لاحقاً"
+    "NO_COUPONS_AVAILABLE": "حالياً، مافي كوبونات متوفرة",
+    "CHECK_BACK_LATER": "من فضلك راجع مره ثانيه بعدين",
   },
   "EMAIL_VERIFICATION": {
     "VERIFY_YOUR_EMAIL": "فعّل  ايميلك",
@@ -791,9 +791,9 @@ export const AR_KEYWORDS = {
     "ORDER_TOTAL": "مجموع طلبك",
     "NEED_HELP": "تحتاج مساعدة؟",
     "ORDER": "ORDER #",
-    "NO_WISHLIST_LABEL": "You don’t have any orders yet",
-    "DONT_WAIT": "Dont wait no more!",
-    "START_SHOPPING": "Start shopping",
+    "NO_WISHLIST_LABEL": "Looks like you have no orders yet.",
+    "START_SHOPPING_TO_MAKE_KITTEN_HAPPY": 'Start shopping to make the kitten happy.',
+    "START_SHOPPING": "ابدأ التسوق",
     "TRACKING_ID": "Tracking Id"
   },
   "BETA": {
@@ -877,8 +877,8 @@ export const AR_KEYWORDS = {
     "RATED_REVIEWS": "You have Rated & Reviewed",
     "ITEMS": "منتجاتك",
     "WRITE_A_REVIEW": "أكتب تعليقك",
-    "NO_REVIEW_TITLE": "Nothing here but me :(",
-    "NO_REVIEW_LABEL": "No reviews yet. Check back later"
+    "NO_REVIEW_TITLE": "): مافي شي غيري هنا",
+    "NO_REVIEW_LABEL": "لا توجد تقييمات للعرض إلى الآن."
   },
   "HNS": {
     "BACK_TO_HELP": "الرجوع  للمساعدة",

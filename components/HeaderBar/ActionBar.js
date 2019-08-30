@@ -101,10 +101,10 @@ class ActionBar extends Component {
       loginClicked: false,
     });
 
-    if ((nextProps && nextProps.activeObj && nextProps.activeObj.nextPage === null) || nextProps.showEmailVerifySuccess) {
+    if ((nextProps && nextProps.activeObj && nextProps.activeObj.nextPage === null) || (nextProps.showEmailVerifySuccess && (this.props.showEmailVerifySuccess !== nextProps.showEmailVerifySuccess))) {
       setTimeout(() => {
         closeThankYouScreen();
-        Router.pushRoute(`${window.location.origin}/${cookies.get('language')}`);
+        nextProps.showEmailVerifySuccess && Router.pushRoute(`${window.location.origin}/${cookies.get('language')}`);
       }, 2000);
     }
 
