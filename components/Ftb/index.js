@@ -211,7 +211,7 @@ class FTB extends React.Component {
                 pathname={context.pathname}
               >
                 {pageData.device !== 'desktop' ? null :
-                <div className={`${styles['p-0']} container-fluid`}>
+                <div className={`${styles['p-0']} ${styles['land-page-mn-wdt']} container-fluid`}>
                   {pageData && pageData.page_content.length > 0 &&
                   pageData.page_content.map((content, index) => (
                     <React.Fragment>
