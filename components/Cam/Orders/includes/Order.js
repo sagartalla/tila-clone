@@ -51,14 +51,14 @@ const Order = ({ order, getInvoice }) => {
             <span className={`${styles['fontW600']} ${styles['fs-12']}`}> {totalOrderPrice.total_offer_price.currency_code} {totalOrderPrice.total_offer_price.display_value}</span>
           </li>
           {
-            totalOrderPrice.total_discount.money_value > 0 &&
+            totalOrderPrice && totalOrderPrice.total_discount && totalOrderPrice.total_discount.money_value && totalOrderPrice.total_discount.money_value > 0 &&
             <li className={`${styles['flx-space-bw']}`}>
               <span className={`${styles['fs-12']} ${styles['thick-gry-clr']}`}>{ORDER_PAGE.DISCOUNT} : </span>
               <span className={`${styles['fontW600']} ${styles['fs-12']}`}> {totalOrderPrice.total_discount.currency_code} {totalOrderPrice.total_discount.display_value}</span>
             </li>
           }
           {
-            totalOrderPrice.total_gift_charges.money_value > 0 &&
+            totalOrderPrice && totalOrderPrice.total_gift_charges && totalOrderPrice.total_gift_charges.money_value && totalOrderPrice.total_gift_charges.money_value > 0 &&
             <li className={`${styles['flx-space-bw']}`}>
               <span className={`${styles['fs-12']} ${styles['thick-gry-clr']}`}>{ORDER_PAGE.GIFT_CHARGES} : </span>
               <span className={`${styles['fontW600']} ${styles['fs-12']}`}> {totalOrderPrice.total_gift_charges.currency_code} {totalOrderPrice.total_gift_charges.display_value}</span>
@@ -178,7 +178,7 @@ const Order = ({ order, getInvoice }) => {
             </span>
             <span className={`${styles['ml-10']} ${styles['fs-16']} ${styles.flex}`}>
               <span className={`${styles['thick-gry-clr']}`}>{ORDERS.ORDER_TOTAL} :</span>
-              <span className={`${styles.flex}`}>
+              <span className={`${styles.flex} ${styles['align-baseline']}`}>
                 <span className={`${styles['fs-14']} ${styles['thick-gry-clr']}`}>{order.orderCurrency}</span>&nbsp;
                 <span className={`${styles.fontW600}`}>{order.orderAmount}</span>
                 <OverlayTrigger
