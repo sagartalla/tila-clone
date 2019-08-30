@@ -251,7 +251,7 @@ class Reason extends Component {
     const { selectedMode, displaySizeError, showError, agree_terms } = this.state;
     let reasonItems = (typeof reasons === 'object' && (!Array.isArray(reasons) && Object.keys(reasons).length > 0))  ? reasons.reasons  : reasons
     const selectedReason
-     = reasonItems.filter(reason => reason.name === this.state.reason)[0]
+     = reasonItems && reasonItems.filter(reason => reason.name === this.state.reason)[0]
     const issueType_small = issueType.toLowerCase();
     return (
       <div className={`${styles['reason-item-main']} ${styles['width100']}`}>
@@ -278,7 +278,7 @@ class Reason extends Component {
         )}
         <div className={`${styles['reason-cont']} ${styles['pb-15']} ${styles['ml-20']} ${styles['mr-20']}`}>
           <span className={`${styles['instruction-txt']} ${styles['pb-20']} ${styles['pt-20']} ${styles['flex']} ${styles['fs-12']} ${styles['google-clr']}`}>
-            {showError ? (issueType_small==='cancel' ? ORDER_PAGE.SELECT_CANCEL_REASON : (issueType_small==='return' ? ORDER_PAGE.SELECT_RETURN_REASON : ORDER_PAGE.SELECT_EXCHANGE_REASON)): ''}
+            {showError ? (issueType_small==='cancel' ? ORDER_PAGE.SELECT_CANCEL_REASON : (issueType_small==='return' ? ORDER_PAGE.SELECT_RETURN_REASON : issueType_small === 'exchange' ? ORDER_PAGE.SELECT_EXCHANGE_REASON : ORDER_PAGE.SELECT_WARRANTY_CLAIM)): ''}
           </span>
           <div className={`${styles['dd-cont']}`}>
             <div className={`${styles['ml-5']} ${styles['label-gry-clr']}`}>{ORDER_PAGE.SELECT_AN_OPTION}</div>
@@ -292,7 +292,7 @@ class Reason extends Component {
                 <option value="default" style={{ display: 'none' }}>
                   {loadingStatus
                     ? ORDER_PAGE.LOADING
-                    : issueType_small==='cancel' ? ORDER_PAGE.SELECT_REASON_CANCEL : issueType_small==='return' ? ORDER_PAGE.SELECT_REASON_RETURN : ORDER_PAGE.SELECT_REASON_EXCHANGE}
+                    : issueType_small==='cancel' ? ORDER_PAGE.SELECT_REASON_CANCEL : issueType_small==='return' ? ORDER_PAGE.SELECT_REASON_RETURN : issueType_small==='exchange' ? ORDER_PAGE.SELECT_REASON_EXCHANGE : ORDER_PAGE.SELECT_CLAIM_WARRANTY}
                 </option>
                 {reasonItems.map((reason, index) => (
                   <option key={index} value={reason.name || reason}>
@@ -388,7 +388,7 @@ class Reason extends Component {
                   </React.Fragment>
                 ) : null}
               </div>
-              {(selectedMode === 'Refund' || selectedMode === 'Replace' || selectedMode === 'Exchange') &&
+              {(selectedMode === 'Refund' || selectedMode === 'Replace' || selectedMode === 'Exchange' || selectedMode === 'Claim Warranty') &&
               <React.Fragment>
               {/* <div className={`${styles['things-to-note']}`}>
               <div className={`${styles['fs-16']} ${styles.fontW600} ${styles['p-10']}`}>Things to Note</div>
@@ -408,7 +408,7 @@ class Reason extends Component {
               <div className={`${styles['checkbox-material']} ${styles.flex} ${styles['p-0']}`}>
               <input id="deals-offers-reg" name="agree_terms" type="checkbox" onChange={this.handleCheck} checked={this.state.agree_terms} />
               <label htmlFor="deals-offers-reg">
-                <span className={`${styles['light-gry-clr']} ${styles['fs-12']}`}><span>{PAYMENT_PAGE.AGREE_TO} <a href="/en/policy/user-terms-and-conditions" target="_blank" className={`${styles.fontW600}`}>{PAYMENT_PAGE.TERMS_AND_CONDITIONS}</a></span></span>
+                <span className={`${styles['light-gry-clr']} ${styles['fs-12']}`}><span>{PAYMENT_PAGE.AGREE_TO} <a href="/en/policy/user-terms" target="_blank" className={`${styles.fontW600}`}>{PAYMENT_PAGE.TERMS_AND_CONDITIONS}</a></span></span>
               </label>
             </div>
               </div>
@@ -422,7 +422,7 @@ class Reason extends Component {
               <button
                 onClick={this.saveAndGoNext}
                 className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['retun-btn-part']} ${styles['text-uppercase']}`}
-                disabled={(selectedMode === 'Refund' || selectedMode === 'Replace' || selectedMode === 'Exchange') ? !agree_terms : (loadingStatus || !this.state.reason)}
+                disabled={(selectedMode === 'Refund' || selectedMode === 'Replace' || selectedMode === 'Exchange' || selectedMode === 'Claim Warranty') ? !agree_terms : (loadingStatus || !this.state.reason)}
               >
                 {`${selectedMode}`}
               </button>

@@ -486,7 +486,7 @@ const HomePage = () => (
         </div>
       </div>
       <div className="display-t-i-f">
-        <div className={`${styles['fs-20']} title`}>{lang === 'en' ? 'FASHION PICKS' : 'أفضل الأزياء'}</div>
+        <div className={`${styles['fs-20']} title`}>{lang === 'en' ? 'FASHION PICKS' : 'اختيارات الأزياء'}</div>
         <div className="d1">
           <div>
             {/* <span className={styles['fs-16']}><span className="lite"> {lang === 'en' ? 'Kids Fashion' : 'ملابس أطفال\أطفال'}</span></span> */}
@@ -569,7 +569,7 @@ const HomePage = () => (
         ))}
       </Row>
       <div className="display-t-i-hl">
-        <div className={`${styles['fs-20']} title`}> {lang === 'en' ? 'Lifestyle Picks' : 'أفضل مختارات اللايف ستايل'}</div>
+        <div className={`${styles['fs-20']} title`}> {lang === 'en' ? 'Lifestyle Picks' : 'اختيارات اللايف ستايل'}</div>
         <div className="d1">
           <div>
             {/* <span className={styles['fs-16']}><span className="lite">{lang === 'en' ? 'Kids Furniture' : 'أثاث الأطفال'}</span></span> */}
