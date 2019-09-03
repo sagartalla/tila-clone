@@ -33,6 +33,7 @@ class OrderTracker extends React.Component {
 
   componentDidMount() {
     const { orderItem, getTrackingDetails } = this.props;
+    console.log('orderItem', orderItem);
     getTrackingDetails(orderItem.trackingId);
   }
 

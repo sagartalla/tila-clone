@@ -17,7 +17,7 @@ const initialState = {
         refundOptions:{},
         exchangeId:{},
         refundInitiated:false,
-        cancelRefundMode:{},
+        cancelRefundMode: '',
       },
     orderTracker: {},
   },
@@ -30,12 +30,13 @@ const productReducer = typeToReducer({
       return Object.assign({}, state, { ui: { loading: true } });
     },
     FULFILLED: (state, action) => {
+      debugger;
       return Object.assign({}, state, {
         data: {
           ...state.data,
           orderDetails: {
             ...state.data.orderDetails,
-            ...action.payload.data
+            ...action.payload.data,
           }
         },
         ui: { loading: false }
