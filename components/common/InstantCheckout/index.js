@@ -158,7 +158,7 @@ const InstaCheckoutDetails = ({ details, selectedAddr,addressResults,showMiniAdd
                    {
                      showMiniAddress ?
                        <ShippingAddress
-                         miniAddress={true}
+                         miniAddress
                          isPdp={isPdp}
                          // isFromCart={isFromCart}
                          toggleMiniAddress={props.toggleMiniAddress}
@@ -181,8 +181,9 @@ const InstaCheckoutDetails = ({ details, selectedAddr,addressResults,showMiniAdd
                      props.showMiniVault ?
                        <div>
                          <UserVault
-                           miniVault={true}
+                           miniVault
                            toggleMiniVault={props.toggleMiniVault}
+                           isInstantCheckout
                          />
                        </div>
                        : null
@@ -244,7 +245,7 @@ const InstaCheckoutDetails = ({ details, selectedAddr,addressResults,showMiniAdd
             onChange={checkTilaCreditValue}
           />
         <label>
-          {`Wallet Balance Used (${filteredData[0].amount_to_pay.display_value} ${filteredData[0].amount_to_pay.currency_code})`}
+          {`Wallet Balance Used (${filteredData[0].amount_to_pay.currency_code} ${filteredData[0].amount_to_pay.display_value})`}
         </label>
        </div>
      )

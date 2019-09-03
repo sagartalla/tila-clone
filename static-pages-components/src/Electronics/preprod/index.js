@@ -15,7 +15,7 @@ const Electronics = () => (
           <div className={`${styles['flex']} popular-cat-part-sub ${styles['pt-20']} ${styles['pb-20']}`}>
             <div className={`popular-cat-part-inn ${styles['mr-35']}`}>
               <div className="popular-cat-inn-img">
-                <a href={`/${lang}/clp/${lang === 'en' ? 'mobiles' : 'الهواتف-النقالة'}`}>
+                <a href={`/${lang}/${lang === 'en' ? 'mobiles' : 'الهواتف-النقالة'}/clp`}>
                   <img src="/static/img/landing-page-tech-img/popular-cat.png" className="img-responsive" />
                 </a>
               </div>
@@ -26,7 +26,7 @@ const Electronics = () => (
             </div>
             <div className={`popular-cat-part-inn-1 ${styles['mr-35']}`}>
               <div className="popular-cat-inn-img">
-                <a href={`/${lang}/clp/${lang === 'en' ? 'televisions' : 'التلفزيونات'}`}>
+                <a href={`/${lang}/${lang === 'en' ? 'televisions' : 'التلفزيونات'}/clp`}>
                   <img src="/static/img/landing-page-tech-img/popular-cat1.png" className="img-responsive" />
                 </a>
               </div>
@@ -38,7 +38,7 @@ const Electronics = () => (
             <div className={`popular-cat-part-inn
              ${styles['mr-35']}`}>
               <div className="popular-cat-inn-img">
-                <a href={`/${lang}/clp/${lang === 'en' ? 'laptops' : 'أجهزة-الكمبيوتر-المحمولة'}`}>
+                <a href={`/${lang}/${lang === 'en' ? 'laptops' : 'أجهزة-الكمبيوتر-المحمولة'}/clp`}>
                   <img src="/static/img/landing-page-tech-img/popular-cat2.png" className="img-responsive" />
                 </a>
               </div>
@@ -49,7 +49,7 @@ const Electronics = () => (
             </div>
             <div className={`popular-cat-part-inn ${styles['mr-35']}`}>
               <div className="popular-cat-inn-img">
-                <a href={`/${lang}/clp/${lang === 'en' ? 'Tablets' : 'اجهزة تابلت وايباد'}`}>
+                <a href={`/${lang}/${lang === 'en' ? 'Tablets' : 'اجهزة تابلت وايباد'}/clp`}>
                   <img src="/static/img/landing-page-tech-img/popular-cat3.png" className="img-responsive" />
                 </a>
               </div>
@@ -60,7 +60,7 @@ const Electronics = () => (
             </div>
             <div className="popular-cat-part-inn">
               <div className="popular-cat-inn-img">
-                <a href={`/${lang}/clp/${lang === 'en' ? 'camera' : 'الة-تصوير'}`}>
+                <a href={`/${lang}/${lang === 'en' ? 'camera' : 'الة-تصوير'}/clp`}>
                   <img src="/static/img/landing-page-tech-img/popular-cat4.png" className="img-responsive" />
                 </a>
               </div>
@@ -71,7 +71,7 @@ const Electronics = () => (
             </div>
             <div className={`popular-cat-part-inn ${styles['mr-35']}`}>
               <div className="popular-cat-inn-img">
-                <a href={`/${lang}/clp/${lang === 'en' ? 'gaming' : 'الة-تصوير'}`}>
+                <a href={`/${lang}/${lang === 'en' ? 'gaming' : 'الة-تصوير'}/clp`}>
                   <img src="/static/img/landing-page-tech-img/popular-cat5.png" className="img-responsive" />
                 </a>
               </div>
@@ -82,7 +82,7 @@ const Electronics = () => (
             </div>
             <div className={`popular-cat-part-inn ${styles['mr-35']}`}>
               <div className="popular-cat-inn-img">
-                <a href={`/${lang}/clp/${lang === 'en' ? 'mobile-accessories' : 'ملحقات-الهاتف-المحمول'}`}>
+                <a href={`/${lang}/${lang === 'en' ? 'mobile-accessories' : 'ملحقات-الهاتف-المحمول'}/clp`}>
                   <img src="/static/img/landing-page-tech-img/popular-cat6.png" className="img-responsive" />
                 </a>
               </div>
@@ -93,7 +93,7 @@ const Electronics = () => (
             </div>
             <div className={`popular-cat-part-inn ${styles['mr-35']}`}>
               <div className="popular-cat-inn-img">
-                <a href={`/${lang}/clp/${lang === 'en' ? 'health-care' : 'ملحقات-الهاتف-المحمول'}`}>
+                <a href={`/${lang}/${lang === 'en' ? 'health-care' : 'ملحقات-الهاتف-المحمول'}/clp`}>
                   <img src="/static/img/landing-page-tech-img/popular-cat7.png" className="img-responsive" />
                 </a>
               </div>
@@ -104,7 +104,7 @@ const Electronics = () => (
             </div>
             <div className={`popular-cat-part-inn ${styles['mr-35']}`}>
               <div className="popular-cat-inn-img">
-                <a href={`/${lang}/clp/${lang === 'en' ? 'Home Appliances' : 'أجهزة المنزل'}`}>
+                <a href={`/${lang}/${lang === 'en' ? 'Home Appliances' : 'أجهزة المنزل'}/clp`}>
                   <img src="/static/img/landing-page-tech-img/popular-cat8.png" className="img-responsive" />
                 </a>
               </div>
@@ -115,7 +115,7 @@ const Electronics = () => (
             </div>
             <div className="popular-cat-part-inn-1">
               <div className="popular-cat-inn-img">
-                <a href={`/${lang}/clp/${lang === 'en' ? 'Home Entertainment' : 'أجهزة ترفيهية'}`}>
+                <a href={`/${lang}/${lang === 'en' ? 'Home Entertainment' : 'أجهزة ترفيهية'}/clp`}>
                   <img src="/static/img/landing-page-tech-img/popular-cat9.png" className="img-responsive" />
                 </a>
               </div>
@@ -132,7 +132,7 @@ const Electronics = () => (
           <Col md={4} className={styles['pl-0']}>
             <h4 className={styles['fontW600']}><span className={`populat-cat-title ${styles['bdr-btm-green-color']}`}>NEW</span></h4>
             <div className={`${styles['mt-20']} ${styles['relative']} brand-part-inn`}>
-              <a href={`/${lang}/clp/Samsung%20Curve%20TV`}>
+              <a href={`/${lang}/Samsung%20Curve%20TV/clp`}>
                 <img src="/static/img/landing-page-tech-img/samsung.jpg" className="img-responsive" />
               </a>
               <div className={`${styles['absolute']} price-details ${styles['flex']} ${styles['flex-colum']}`}>
@@ -144,7 +144,7 @@ const Electronics = () => (
           <Col md={4} className={styles['pl-0']}>
             <h4 className={`${styles['fontW600']} ${styles['text-uppercase']}`}><span className={`populat-cat-title ${styles['bdr-btm-green-color']}`}>Exclusive</span> </h4>
             <div className={`${styles['mt-20']} ${styles['relative']} brand-part-inn`}>
-              <a href={`/${lang}/clp/MI%20A1`}>
+              <a href={`/${lang}/MI%20A1/clp`}>
                 <img src="/static/img/landing-page-tech-img/mi-brand-img.jpg" className="img-responsive" />
               </a>
               <div className={`${styles['absolute']} price-details ${styles['flex']} ${styles['flex-colum']} ${styles['white-color']}`}>
@@ -171,7 +171,7 @@ const Electronics = () => (
           <Col md={6} className={styles['pl-0']}>
             <h4 className={`${styles['fontW600']} ${styles['text-uppercase']} ${styles['pb-10']}`}><span className={`populat-cat-title ${styles['bdr-btm-green-color']}`}>Gaming  </span>  Consoles</h4>
             <div>
-              <a href={`/${lang}/clp/Gaming%20Console`}>
+              <a href={`/${lang}/Gaming%20Console/clp`}>
                 <img src="/static/img/landing-page-tech-img/gaming-img.jpg" className="img-responsive" />
               </a>
             </div>
@@ -179,7 +179,7 @@ const Electronics = () => (
           <Col md={6} className={styles['pr-0']}>
             <h4 className={`${styles['fontW600']} ${styles['text-uppercase']} ${styles['pb-10']}`}><span className={`populat-cat-title ${styles['bdr-btm-green-color']}`}>RC Toys</span> </h4>
             <div>
-              <a href={`/${lang}/clp/Remote%20Control%20Toys`}>
+              <a href={`/${lang}/Remote%20Control%20Toys/clp`}>
                 <img src="/static/img/landing-page-tech-img/gaming-img1.jpg" className="img-responsive" />
               </a>
             </div>
@@ -190,7 +190,7 @@ const Electronics = () => (
           <h4 className={`${styles['fontW600']} ${styles['text-uppercase']} ${styles['pb-10']}`}><span className={`populat-cat-title ${styles['bdr-btm-green-color']}`}>Home & Kitchen  </span>  Appliances</h4>
           <Col md={2} className={styles['pl-0']}>
             <div className={`${styles['mt-20']} ${styles['relative']} ${styles['home-kitchan-inn']}`}>
-              <a href={`/${lang}/clp/Iron%20box`}>
+              <a href={`/${lang}/Iron%20box/clp`}>
                 <img src="/static/img/landing-page-tech-img/home-kitchen1.jpg" className="img-responsive" />
               </a>
               <div className={`${styles['absolute']} home-price-details ${styles['white-color']} ${styles['flex']} ${styles['flex-colum']}`}>
@@ -202,7 +202,7 @@ const Electronics = () => (
           </Col>
           <Col md={2} className={styles['pl-0']}>
             <div className={`${styles['mt-20']} ${styles['relative']} ${styles['home-kitchan-inn']}`}>
-              <a href={`/${lang}/search?q=Refrigerators&language=en&isListed=false`}>
+              <a href={`/${lang}/search?q=Refrigerators&isListed=false`}>
                 <img src="/static/img/landing-page-tech-img/home-kitchen.jpg" className="img-responsive" />
               </a>
               <div className={`${styles['absolute']} home-price-details ${styles['white-color']} ${styles['flex']} ${styles['flex-colum']}`}>
@@ -214,7 +214,7 @@ const Electronics = () => (
           </Col>
           <Col md={2} className={styles['pl-0']}>
             <div className={`${styles['mt-20']} ${styles['relative']} ${styles['home-kitchan-inn']}`}>
-              <a href={`/${lang}/clp/Mixer%20and%20Juicer`}>
+              <a href={`/${lang}/Mixer%20and%20Juicer/clp`}>
                 <img src="/static/img/landing-page-tech-img/home-kitchen2.jpg" className="img-responsive" />
               </a>
               <div className={`${styles['absolute']} home-price-details ${styles['white-color']} ${styles['flex']} ${styles['flex-colum']}`}>
@@ -226,7 +226,7 @@ const Electronics = () => (
           </Col>
           <Col md={2} className={styles['pl-0']}>
             <div className={`${styles['mt-20']} ${styles['relative']} ${styles['home-kitchan-inn']}`}>
-              <a href={`/${lang}/search?q=washing%20Machines&language=en&isListed=false`}>
+              <a href={`/${lang}/search?q=washing%20Machines&isListed=false`}>
                 <img src="/static/img/landing-page-tech-img/home-kitchen3.jpg" className="img-responsive" />
               </a>
               <div className={`${styles['absolute']} home-price-details ${styles['white-color']} ${styles['flex']} ${styles['flex-colum']}`}>
@@ -238,7 +238,7 @@ const Electronics = () => (
           </Col>
           <Col md={2} className={styles['pl-0']}>
             <div className={`${styles['mt-20']} ${styles['relative']} ${styles['home-kitchan-inn']}`}>
-              <a href={`/${lang}/search?q=Vaccum%20Cleaners&language=en&isListed=false`}>
+              <a href={`/${lang}/search?q=Vaccum%20Cleaners&isListed=false`}>
                 <img src="/static/img/landing-page-tech-img/home-kitchen4.jpg" className="img-responsive" />
               </a>
               <div className={`${styles['absolute']} home-price-details ${styles['white-color']} ${styles['flex']} ${styles['flex-colum']}`}>
@@ -250,7 +250,7 @@ const Electronics = () => (
           </Col>
           <Col md={2} className={styles['pl-0']}>
             <div className={`${styles['mt-20']} ${styles['relative']} ${styles['home-kitchan-inn']}`}>
-              <a href={`/${lang}/clp/Iron%20box`}>
+              <a href={`/${lang}/Iron%20box/clp`}>
                 <img src="/static/img/landing-page-tech-img/home-kitchen1.jpg" className="img-responsive" />
               </a>
               <div className={`${styles['absolute']} home-price-details ${styles['white-color']} ${styles['flex']} ${styles['flex-colum']}`}>

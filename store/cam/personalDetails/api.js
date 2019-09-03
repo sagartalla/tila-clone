@@ -25,10 +25,10 @@ const downloadPic = (imageId) => {
   })
 }
 
-const uploadProfilePic = (body) => {
+const uploadProfilePic = (body, cid) => {
   return axios.request({
     method: 'POST',
-    url: `${constants.TRANSFORMER_API_URL}/fpts/document-service/upload`,
+    url: `${constants.TRANSFORMER_API_URL}/fpts/document-service/upload?directory=${cid}`,
     data: body,
     headers: {
       'tenant': 'profile-service',

@@ -68,7 +68,12 @@ class SearchPage extends Base {
     ]);
     return { isServer };
   }
-
+  componentDidMount() {
+    this.props.track({
+      event: 'INTERNAL_SEARCH',
+      searchData: this.props,
+    });
+  }
   pageName = 'SEARCH';
 
   render() {
@@ -85,15 +90,16 @@ class SearchPage extends Base {
   }
 }
 
-const mapStateToProps = state => ({
-  allState: state,
-});
+// const mapStateToProps = state => ({
+//   allState: state,
+// });
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       ...baseActions,
       getSearchResults: actionCreators.getSearchResults,
+      track: actionCreators.track,
       // setSessionID: authActionsCreators.setSessionID,
     },
     dispatch,

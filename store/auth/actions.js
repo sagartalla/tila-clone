@@ -85,6 +85,10 @@ const actionCreators = {
       if (res && res.value && res.value.data && res.value.data.email_verified === 'NV') {
         dispatch(actionCreators.setVerfied(false));
       } else {
+        dispatch(actionCreators.track({
+          event: 'CUSTOMER_ID',
+          loginType: res,
+        }));
         dispatch(actionCreators.setVerfied(true));
         // }
       }

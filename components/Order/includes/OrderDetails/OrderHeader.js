@@ -94,6 +94,7 @@ class OrderHeader extends Component {
     const {
       total_mrp = {}, total_shipping = {}, total_offer_price = {}, total_price = {}, total_gift_charges = {}, total_discount = {},
     } = price;
+    console.log('gyhv', this.props.orderDetails);
     return (
       <div className={`${styles.box} ${styles['addres-dtls']}`}>
         <Row className={styles['m-0']}>
@@ -247,10 +248,16 @@ class OrderHeader extends Component {
                 </Col>}
               </Col>
               <Col md={4} xs={6} sm={4}>
-                {/* <span className={`${styles['flex-center']} ${styles['share-cont']}`}>
-                  <SVGComponent clsName={`${styles['share-icon']}`} src="icons/share-icon/share-icon" />
-                  <span className={`${styles['pl-10']}`}><a>{ payments[0].transaction_status == "FAILED" ? ORDER_PAGE.PAYMENT_FAILED:  ORDER_PAGE.SOCIALIZE }</a></span>
-                </span> */}
+                {
+                  payments[0].transaction_status === 'FAILED' ?
+                    <span className={`${styles['flex-center']} ${styles['share-cont']}`}>
+                      <SVGComponent clsName={`${styles['share-icon']}`} src="icons/common-icon/erroralert" />
+                      <span className={`${styles['pl-5']} ${styles['google-clr']}`}>{ORDER_PAGE.PAYMENT_FAILED }</span>
+                    </span>
+                  :
+                  ''
+                }
+              
               </Col>
             </Col>}
           {/* </Col > */}
