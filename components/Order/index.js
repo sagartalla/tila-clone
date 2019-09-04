@@ -11,6 +11,7 @@ import { selectors, actionCreators } from '../../store/order';
 import { languageDefinations } from '../../utils/lang';
 import LoadingBar from '../common/Loader/skeletonLoader';
 import LoaderBarContext from '../helpers/context/loaderBarContext';
+import { Router } from '../../routes';
 const { ORDER_PAGE } = languageDefinations();
 
 import lang from '../../utils/language';
@@ -25,7 +26,9 @@ const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styl
 class Order extends Component {
   componentDidMount() {
     const { query, getOrderDetails } = this.props;
-    getOrderDetails({ orderId: query.orderId });
+    getOrderDetails({ orderId: query.orderId }).catch(() => {
+      Router.pushRoute(`/${lang}/customer/orders`)
+    });
   }
 
   render() {
