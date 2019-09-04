@@ -106,6 +106,7 @@ const Tabs = ({ children, onCallback,value }) => {
     </div>
   )
 }
+
 const InstaCheckoutDetails = ({ details, selectedAddr,addressResults,showMiniAddress,isPdp,...props }) => {
  const [value,setValue] = useState(details.payment_options_available.length === 1 && details.payment_options_available[0].type === 'VOUCHER' ? 'VOUCHER' : 'SAVED_CARD');
  const getCheckValue = (data) => {
@@ -229,6 +230,8 @@ const InstaCheckoutDetails = ({ details, selectedAddr,addressResults,showMiniAdd
    }
 
  }
+
+ 
  const getTilaCredit = (data) => {
    let filteredData = data.payment_options_available.filter((item) => {
      return item.type === 'VOUCHER'
@@ -376,6 +379,7 @@ class InstantCheckout extends Component {
     this.setState(prevstate => ({
       checked: !prevstate.checked
     }))
+    this.getNewFilteredResult();
   }
   toggleMiniAddress() {
     this.setState({ showMiniAddress: !this.state.showMiniAddress, showMiniVault: false });
@@ -390,6 +394,15 @@ class InstantCheckout extends Component {
       nextStep: 'checkoutBtn'
     })
   }
+
+getNewFilteredResult = () => {
+  const { getCardDetails } = this.props;
+  let newFilteredData = getCardDetails.payment_options_available.filter((item) => item.type === 'VOUCHER');
+  this.setState({
+    newFilteredData: newFilteredData[0].amount_to_pay,
+    walletSelected: newFilteredData[0].selected,
+  })
+ }
 
   doInstantCheckout() {
     const {
@@ -478,6 +491,7 @@ class InstantCheckout extends Component {
       moneyValue,
       getCardDetails,
       getSelectedCard,
+      details,
     } = this.props;
     const {
       showMiniAddress,
@@ -489,6 +503,8 @@ class InstantCheckout extends Component {
       checked,
       checkoutBtn,
       iframe_url,
+      newFilteredData,
+      walletSelected,
     } = this.state;
 
     return (
@@ -582,7 +598,7 @@ class InstantCheckout extends Component {
                         <Button
                           className={`${styles['fp-btn']} ${styles['fp-btn-sucess']} ${styles['fontW600']} ${styles['instant-btn']} ${styles.width45}`}
                           onClick={this.callInstantCheckout}
-                          btnText={PAYMENT_PAGE.PAY + ' ' + totalPrice + ' ' + currency + ' ' + PAYMENT_PAGE.ON_DELIVERY}
+                          btnText={walletSelected ? PAYMENT_PAGE.PAY + ' ' + (totalPrice - newFilteredData.display_value) + ' ' + currency + ' ' + PAYMENT_PAGE.ON_DELIVERY : PAYMENT_PAGE.PAY + ' ' + totalPrice + ' ' + currency + ' ' + PAYMENT_PAGE.ON_DELIVERY}
                           disabled={btnLoader}
                           btnLoading={btnLoader}
                         />

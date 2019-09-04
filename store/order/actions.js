@@ -25,6 +25,7 @@ const actions = {
   SET_CANCEL_REFUNDMODE: 'SET_CANCEL_REFUNDMODE',
   GET_INVOICE_DETAILS: 'GET_INVOICE_DETAILS',
   SUBMIT_CLAIM_WARRANTY: 'SUBMIT_CLAIM_WARRANTY',
+  SET_REPLACE_ORDER: 'SET_REPLACE_ORDER',
 };
 
 const actionCreators = {
@@ -54,6 +55,14 @@ const actionCreators = {
       payload: api.setExchangeOrder(params),
     }
   ),
+
+  setReplaceOrder: params => (
+    {
+      type: actions.SET_REPLACE_ORDER,
+      payload: api.setReplaceOrder(params),
+    }
+  ),
+  
   goToNextStep: (params) => {
     const { nextStep } = params;
     return ({

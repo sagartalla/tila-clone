@@ -683,10 +683,7 @@ export const AR_KEYWORDS = {
     "ITEM_TOTAL": "مجموع منتجاتك",
     "SUCCESSFULL_CANCEL": "تم الإلغاء بنجاح",
     "YOUR_ORDER": "طلبك",
-    "RETURN_ORDER_MSG": "Keep the item ready for pickup and we will update you once it is scheduled.",
-    "RETURN_ORDER_MSG_NOTE": "Note: Refund will be processed once the return product is QC approved.",
     "EXCHANGE_ORDER_MSG_NOTE": "Note: Exchange will be processed once the return product is QC approved.",
-    "REPLACE_ORDER_MSG_NOTE": "Note: Replacement will be processed once the return product is QC completed and approved.",
     "DONE": "انتهى",
     "CONTINUE": "كمل",
     "ADDRESS_PICKUP": "يرجى اختيار عنوان للاستلام",
@@ -722,6 +719,7 @@ export const AR_KEYWORDS = {
     "SUCCESS": "نجاح",
     "ORDER_DETAILS_SUMMERY": "ملخص الطلب",
     "THERE_IS_AN_EXCHANGE_ORDER": "This is an exchange order on the item you have requested for exchange.",
+    "THERE_IS_AN_REPLACE_ORDER": "This is an replace order on the item you have requested for replace.",   
     "REFUND_INITIATED": "Refund Initiated.",
     "THIS_ORDER_CONTAINS_A_GIFT": "هذا الطلب يحتوي على هدية",
     "VIEW_DETAILS": "View details",
@@ -747,6 +745,7 @@ export const AR_KEYWORDS = {
     "REPLACE_ORDER_MSG_NOTE": 'Note: Replacement will be processed once the return product is QC completed and approved.',
     "REQ_RETURN": 'Your return request for order ',
     "REQ_SUCCESS": 'is intiated.',
+    "REPLACEMENT": 'Replacement',
   },
   "COUPON_OFFERS": {
     "VIEW_TERMS": "الشروط والأحكام",
@@ -944,7 +943,8 @@ export const AR_KEYWORDS = {
     "SELECT_YOUR_ISSUE": '!اختار مشكلتك ، ماعليك تعب',
     "SELECT_ORDER_WITH_ISSUE": '.اختار الطلب  المتواجد فيه المشكلة',
     "MY_ORDERS": 'طلباتي',
-    "SIGN_IN_MSG": 'من فضلك سجّل دخولك لستعرض طلباتك'
+    "SIGN_IN_MSG": 'من فضلك سجّل دخولك لستعرض طلباتك',
+    "GREETING": 'هلا والله كيف أقدر أساعدك؟',
   },
   "SEO_CONTENT": {
     "HOME_H1_CONTENT": "موقع تيله للتسوق عبر الانترنت",
