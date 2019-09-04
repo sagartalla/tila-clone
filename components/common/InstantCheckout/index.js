@@ -68,9 +68,9 @@ const Tab = ({ value, tabType, label,selected, name,onCallback }) => {
             checked={selected}
             className={styles['radio-btn']}
           />
-        <label>
-          {label}
-        </label>
+          <label className={styles['pl-5']}>
+            {label}
+          </label>
         </div>
       )
     }
@@ -239,15 +239,16 @@ const InstaCheckoutDetails = ({ details, selectedAddr,addressResults,showMiniAdd
 
    if(filteredData.length > 0) {
      return (
-       <div>
+       <div className={styles['checkbox-material']}>
          <input
+            id="wallet-balance"
             type='checkbox'
             name={filteredData[0].display_name}
             value={filteredData[0].remaining_amount.display_value}
             checked={checkValue}
             onChange={checkTilaCreditValue}
           />
-        <label>
+        <label htmlFor="wallet-balance">
           {`Wallet Balance Used (${filteredData[0].amount_to_pay.currency_code} ${filteredData[0].amount_to_pay.display_value})`}
         </label>
        </div>
