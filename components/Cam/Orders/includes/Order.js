@@ -39,7 +39,7 @@ const Order = ({ order, getInvoice }) => {
     </Popover>
   );
   const pricePopover = (
-    <Popover id="popover-positioned-left">
+    <Popover id="popover-positioned-left" className={styles['popover-post-lft']}>
       <div className={`${styles['price-tooltip']}`}>
         <ul>
           <li className={`${styles['flx-space-bw']}`}>
@@ -185,7 +185,7 @@ const Order = ({ order, getInvoice }) => {
                   placement="bottom"
                   overlay={pricePopover}
                  >
-                  <span className={`${styles['pl-5']}`}>
+                  <span className={`${styles['pl-5']} ${styles['flex']}`}>
                     <SVGComponent clsName={`${styles['down-arrow']}`} src="icons/down-arrow/down-arrow" />
                   </span>
                 </OverlayTrigger>
