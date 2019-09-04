@@ -126,7 +126,7 @@ class UserVault extends Component {
             <div className={`${styles.box} ${styles['ml-5']}`}>
               <VaultHeader transactions={this.state.transactions}>
                 <VaultBody
-                  data={results.savedCards}
+                  data={results}
                   makeDefault={this.makeDefault}
                   deleteCard={this.deleteCard}
                   toggleAddCardBlock={this.toggleAddCardBlock}
