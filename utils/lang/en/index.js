@@ -751,6 +751,7 @@ export const EN_KEYWORDS = {
     SUCCESS: 'Success',
     ORDER_DETAILS_SUMMERY: 'Order Summary',
     THERE_IS_AN_EXCHANGE_ORDER: 'This is an exchange order on the item you have requested for exchange.',
+    THERE_IS_AN_REPLACE_ORDER: "This is an replace order on the item you have requested for replace.",       
     REFUND_INITIATED: 'Refund Initiated.',
     THIS_ORDER_CONTAINS_A_GIFT: 'This order contains gift.',
     VIEW_DETAILS: 'View details',
@@ -768,6 +769,7 @@ export const EN_KEYWORDS = {
     REFUND: 'Refund',
     CONTINUE_SHOPPING: 'CONTINUE SHOPPING',
     ADD_COMMENT: 'Add a comment(optional)',
+    REPLACEMENT: 'Replacement',
   },
   COUPON_OFFERS: {
     VIEW_TERMS: 'Terms & Conditions',
@@ -965,7 +967,8 @@ export const EN_KEYWORDS = {
     SELECT_YOUR_ISSUE: 'SELECT YOUR ISSUE',
     SELECT_ORDER_WITH_ISSUE: 'SELECT THE ORDER WITH THE ISSUE',
     MY_ORDERS: 'MY ORDERS',
-    SIGN_IN_MSG: 'Please sign in to view your orders'
+    SIGN_IN_MSG: 'Please sign in to view your orders',
+    GREETING: 'Hi, How can we help you today ?',
   },
   SEO_CONTENT: {
     HOME_H1_CONTENT: 'Online Shopping Store in Saudi',
