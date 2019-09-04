@@ -696,7 +696,7 @@ export const AR_KEYWORDS = {
     "SELECT_REASON_EXCHANGE": "Select a reason for exchange",
     "SELECT_REASON_CANCEL": "Select a reason for cancel",
     "SELECT_CLAIM_WARRANTY": 'Select a reason for availing warranty',
-    "SELECT_WARRANTY_CLAIM": 'Please select a reason for availing warranty',        
+    "SELECT_WARRANTY_CLAIM": 'Please select a reason for availing warranty',
     "SELECT_EXCHANGE_REASON": "Please select a reason for exchanging this item.",
     "SELECT_AN_OPTION": "Select an Option*",
     "SELECT_REASON": "اختار سبب",
@@ -735,8 +735,12 @@ export const AR_KEYWORDS = {
     "MESSAGE": "رسالة",
     "REFUND": "Refund",
     "CONTINUE_SHOPPING": "CONTINUE SHOPPING",
-    "ADD_COMMENT": 'Add a comment(optional)',  
-    
+    "ADD_COMMENT": 'Add a comment(optional)',
+    "RETURN_ORDER_MSG": 'Keep the item ready for pickup and we will update you once it is scheduled.',
+    "RETURN_ORDER_MSG_NOTE": 'Note: Refund will be processed once the return product is QC approved.',
+    "REPLACE_ORDER_MSG_NOTE": 'Note: Replacement will be processed once the return product is QC completed and approved.',
+    "REQ_RETURN": 'Your return request for order ',
+    "REQ_SUCCESS": 'is intiated.',
   },
   "COUPON_OFFERS": {
     "VIEW_TERMS": "الشروط والأحكام",

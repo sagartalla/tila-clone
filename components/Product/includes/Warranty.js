@@ -1,5 +1,6 @@
 import React from 'react';
 import { languageDefinations } from '../../../utils/lang';
+import { Modal } from 'react-bootstrap';
 import SVGComponent from '../../common/SVGComponet';
 
 import Slider from '../../common/slider';
@@ -32,10 +33,9 @@ class Warranty extends React.Component {
   }
 
   closeSlider = () => {
-    document.getElementsByTagName('BODY')[0].style.overflow = 'auto';
     this.setState({
       slider: false,
-    });
+    }, () => document.getElementsByTagName('BODY')[0].style.overflow = 'scroll');
   }
 
   render() {
@@ -49,8 +49,16 @@ class Warranty extends React.Component {
         </span>
         <a className={`${styles.fontW600} ${styles['ml-20']} ${styles['view-more-label']} ${styles['fs-12']}`} onClick={this.openSlider}>{warranty_time > 0 ? CART_PAGE.VIEW_MORE : ''}</a>
         {this.state.slider &&
-        <Slider label="Warranty" isOpen={this.state.slider} closeSlider={this.closeSlider}>
-          <div className={`${styles['warranty-modal']}`}>
+        <Modal
+         show={this.state.slider}
+         onHide={this.closeSlider}
+         className="warranty-class-name"
+       >
+          <div className={`${styles['m-15']} ${styles['flex-center']} ${styles['justify-between']}`}>
+            <div ><Modal.Title>Warranty</Modal.Title></div>
+              <div className={`${styles['fs-18']}`} onClick={this.closeSlider}>X</div>
+            </div>
+      <div className={`${styles['warranty-modal']}`}>
             {warranty.summary &&
             <div className={`${styles['fs-16']}`}>{PDP_PAGE.WARRANTY_SUMMARY}
               <ul className={`${styles['mt-5']}`}>
@@ -72,7 +80,8 @@ class Warranty extends React.Component {
               </ul>
             </div>}
           </div>
-        </Slider>}
+       </Modal>
+      }
       </div>);
   }
 }
