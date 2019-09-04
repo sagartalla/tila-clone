@@ -133,7 +133,7 @@ class GeoWidget extends Component {
     } = this.props;
     const { showCitiesData } = this.state;
     return (
-      <div className={`${styles['flex-center']} ${styles['delovery-inn']} ${styles['pr-5']} ${isPdp ? styles['width50'] : ''}`}>
+      <div className={`${styles['flex-center']} ${styles['delovery-inn']} ${styles['pr-5']}`}>
         {
           (!hideLabel)
             ?
