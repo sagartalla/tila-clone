@@ -179,6 +179,8 @@ class OrderItem extends Component {
         return 'Return in progress';
       } else if (orderItem.status === 'EXCHANGE_IN_PROGRESS') {
         return 'Exchange in progress';
+      } else if (orderItem.status === 'REPLACEMENT_IN_PROGRESS') {
+        return 'Replace in progress';
       } return '';
     };
 

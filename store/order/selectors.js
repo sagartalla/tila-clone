@@ -5,7 +5,6 @@ const getOrderDetails = (store) => {
   const {
     created_by, customer_account_id, status, address, order_id, created_at, order_items, price, invoice_id, total_shipping, currency_code, payments, order_type,
   } = store.singleOrderReducer.data.orderDetails;
-  console.log('store.singleOrderReducer.data.orderDetails', store.singleOrderReducer.data.orderDetails);
   if (order_id) {
     return {
       name: address ? `${address.first_name} ${address.last_name}` : 'No Name',
@@ -24,7 +23,6 @@ const getOrderDetails = (store) => {
       //TODO move compose to common util
       orderItems: _.compose(
         _.reduce.convert({ 'cap': false })((acc, val, key) => {
-          debugger;
           return acc.concat({
             id: val.id,
             products: [val],
@@ -74,7 +72,7 @@ const getOrderDetails = (store) => {
             Object.values(i.variant_info.variant_details.attribute_map).filter(attr => attr.attribute_group_name === 'IDENTITY' && attr.visible) : [],
           tuinId: i.variant_info && i.variant_info.variant_details && i.variant_info.variant_details.attribute_map && i.variant_info.variant_details.attribute_map.tuin ?
             i.variant_info.variant_details.attribute_map.tuin.attribute_values[0].value : null,
-          return_tracking: i.return_exchange_orders && i.return_exchange_orders.length > 0 && i.return_exchange_orders[0].exchange_return_order_items,
+          return_tracking: i.return_exchange_orders && i.return_exchange_orders.length > 0 && i.return_exchange_orders[0].exchange_return_order_items[0].order_item_tracking_id,
         })),
       )(order_items),
     };

@@ -30,7 +30,6 @@ const productReducer = typeToReducer({
       return Object.assign({}, state, { ui: { loading: true } });
     },
     FULFILLED: (state, action) => {
-      debugger;
       return Object.assign({}, state, {
         data: {
           ...state.data,
@@ -127,6 +126,31 @@ const productReducer = typeToReducer({
           orderIssue: {
             ...state.data.orderIssue,
             exchangeId: action.payload.data
+          }
+        },
+        ui: { loading: false }
+      }
+    },
+    REJECTED: (state,action) => {
+      return Object.assign(
+        {},
+        state,
+        { error: action.payload.response.data.message,
+        ui: { loading: false }})
+    },
+  },
+  [actions.SET_RETURN_ORDER]: {
+    PENDING: state => {
+      return Object.assign({},state,{ ui: { loading: true }})
+    },
+    FULFILLED: (state,action) => {
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          orderIssue: {
+            ...state.data.orderIssue,
+            replacementId: action.payload.data,
           }
         },
         ui: { loading: false }
