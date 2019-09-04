@@ -55,7 +55,7 @@ export const EN_KEYWORDS = {
     ITEM_IN_YOUR_WISHLIST: 'item in Wishlist',
     ITEMS_IN_YOUR_WISHLIST: 'items in Wishlist',
     MY_CART: 'My Cart',
-    MY_CART_EMPTY: 'So many products on Tila and yet i Feel Empty',
+    MY_CART_EMPTY: 'So many products on Tila and yet, I feel empty!',
     TILA_CARE_PROTECTION: 'Tila Care Protection',
     VIEW_T_AND_C: 'View T & C ',
     DURATION: 'Duration',
@@ -398,7 +398,9 @@ export const EN_KEYWORDS = {
     MOBILE: 'Mobile',
     NOTIFY: 'Notify',
     NEXT: 'Next',
-    YOUR_PERSONAL :'Your personal information has been updated.'
+    YOUR_PERSONAL :'Your personal information has been updated.',
+    LAST_UPDATED: 'Last updated',
+    NOT_AVAILABLE: 'Not Available',   
   },
   NOTITICATION_INFO: {
     HEADING: 'New Notifications',
@@ -770,6 +772,9 @@ export const EN_KEYWORDS = {
     CONTINUE_SHOPPING: 'CONTINUE SHOPPING',
     ADD_COMMENT: 'Add a comment(optional)',
     REPLACEMENT: 'Replacement',
+    ORDERED_ON: 'Ordered on',
+    INCLUSIVE_OF_ALL_TAXES: '*inclusive of all taxes',
+    TILA_CARE_SERVICE_FEE: 'Tila Care Service Fee :',
   },
   COUPON_OFFERS: {
     VIEW_TERMS: 'Terms & Conditions',

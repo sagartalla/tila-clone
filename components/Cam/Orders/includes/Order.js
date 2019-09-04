@@ -39,7 +39,7 @@ const Order = ({ order, getInvoice }) => {
     </Popover>
   );
   const pricePopover = (
-    <Popover id="popover-positioned-left">
+    <Popover id="popover-positioned-left" className={styles['popover-post-lft']}>
       <div className={`${styles['price-tooltip']}`}>
         <ul>
           <li className={`${styles['flx-space-bw']}`}>
@@ -67,7 +67,7 @@ const Order = ({ order, getInvoice }) => {
           {
             (totalOrderPrice.total_tila_care_charges && totalOrderPrice.total_tila_care_charges.money_value > 0) &&
             <li className={`${styles['flx-space-bw']}`}>
-              <span className={`${styles['fs-12']} ${styles['thick-gry-clr']}`}>Tila Care Service Fee : </span>
+              <span className={`${styles['fs-12']} ${styles['thick-gry-clr']}`}>{ORDER_PAGE.TILA_CARE_SERVICE_FEE} </span>
               <span className={`${styles['fontW600']} ${styles['fs-12']}`}> {totalOrderPrice.total_tila_care_charges.currency_code} {totalOrderPrice.total_tila_care_charges.display_value}</span>
             </li>
           }
@@ -87,7 +87,7 @@ const Order = ({ order, getInvoice }) => {
             <span className={`${styles['fontW600']} ${styles['fs-12']}`}>{ORDER_PAGE.TOTAL} : </span>
             <span className={`${styles['fontW600']} ${styles['fs-12']}`}> {totalOrderPrice.total_price.currency_code} {totalOrderPrice.total_price.display_value}</span>
           </li>
-          <li className={`${styles['fs-12']} ${styles['thick-gry-clr']}`}> *inclusive of all taxes</li>
+          <li className={`${styles['fs-12']} ${styles['thick-gry-clr']}`}> {ORDER_PAGE.INCLUSIVE_OF_ALL_TAXES}</li>
         </ul>
 
       </div>
@@ -150,7 +150,7 @@ const Order = ({ order, getInvoice }) => {
         <Col md={7} className={styles['flex-center']}>
           <div className={`${styles['pr-10']} ${styles['thck-gry-rt-border']}`}>
             <span>
-              Ordered on{' '}
+            {ORDER_PAGE.ORDERED_ON}{' '}
             </span>
             <span className={`${styles.fontW600} ${styles['light-gry-clr']}`}>
               {order.orderDate}
@@ -185,7 +185,7 @@ const Order = ({ order, getInvoice }) => {
                   placement="bottom"
                   overlay={pricePopover}
                  >
-                  <span className={`${styles['pl-5']}`}>
+                  <span className={`${styles['pl-5']} ${styles['flex']}`}>
                     <SVGComponent clsName={`${styles['down-arrow']}`} src="icons/down-arrow/down-arrow" />
                   </span>
                 </OverlayTrigger>
