@@ -37,7 +37,7 @@ const Shipping = (props) => {
   return (
     <div id="shipping-cont" className={`${styles['ipad-delivery-address-part']}`}>
       <div className={`${styles['free-delivery-list']} ${styles['flex-colum']} ${styles.flex} ${styles.box} ${styles['mt-5']} ${styles['mb-10']} ${styles['free-delivery-part']} ${styles['border-radius4']}`}>
-        <div className={`${styles['pdp-deliver-list']} ${styles['flex']}`}>
+        <div className={`${styles['pdp-deliver-list']} ${styles['flex']} ${styles['flex-wrp']}`}>
           <GeoWidget isPdp />
           {tila_care_policy.display_item_location ? <span className={`${styles['pdp-del-prt']} ${styles['pl-10']} ${styles['ml-5']} ${styles['thick-border-left']}`}><span className={styles['thick-gry-clr']}>{PDP_PAGE.ITEM_LOCATION}: </span><span className={styles['fontW600']}>{tila_care_policy.display_item_location}</span></span> : null}
         </div>
