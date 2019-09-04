@@ -22,6 +22,7 @@ const initialState = {
     orderTracker: {},
   },
   error: '',
+  error_code: ''
 };
 
 const productReducer = typeToReducer({
@@ -42,7 +43,7 @@ const productReducer = typeToReducer({
       });
     },
     REJECTED: (state, action) => {
-      return Object.assign({}, state, { error: action.payload.message, ui: { loading: false } })
+      return Object.assign({}, state, { error: action.payload.message, error_code: action.payload.response.status, ui: { loading: false } })
     },
   },
   [actions.SUBMIT_CLAIM_WARRANTY] : {
