@@ -5,7 +5,7 @@
 
 @font-face {
   font-family: "ProximaNova-SBold";
-  src: url("/static/vendor/fonts_ar/Neo_Sans_Bold.ttf");
+  src: url("/static/vendor/fonts_ar/NeoSansArabic-Medium.ttf");
 }
 
 @font-face {
@@ -15,7 +15,7 @@
 
 @font-face {
   font-family: "ProximaNova";
-  src: url("/static/vendor/fonts_ar/NeoSansArabic-Medium.ttf");
+  src: url("/static/vendor/fonts_ar/NeoSansArabicRegular.otf");
 }
 
 @font-face {
