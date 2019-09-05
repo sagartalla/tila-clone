@@ -1,11 +1,11 @@
 @font-face {
   font-family:"ProximaNova-Bold";
-  src: url("/static/vendor/fonts_ar/NeoSansArabic-Black.ttf");
+  src: url("/static/vendor/fonts_ar/Neo_Sans_Bold.ttf");
 }
 
 @font-face {
   font-family: "ProximaNova-SBold";
-  src: url("/static/vendor/fonts_ar/NeoSansArabic-Black.ttf");
+  src: url("/static/vendor/fonts_ar/Neo_Sans_Bold.ttf");
 }
 
 @font-face {
