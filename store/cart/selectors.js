@@ -8,7 +8,7 @@ const getCartResults = (store) => {
     const img_url = constants.mediaDomain;
     const newData = { items:[], total_price: 0, ui };
 
-    if (data.items !== null && data.items.length) {
+    if (data.items !== null && data.items.length) {      
       newData.total_price = data.total_price || {};
       newData.total_offer_price = data.total_offer_price || {};
       newData.total_discount = data.total_discount || {};
@@ -16,7 +16,7 @@ const getCartResults = (store) => {
       newData.total_gift_charges = data.total_gift_charges || {};
       newData.tax = 0;
       newData.item_cnt = data.items.length;
-      newData.currency = data.items[0].listing_info ? data.items[0].listing_info.selling_price_currency : '';
+      newData.currency = data.items[0].listing_info ? data.items[0].listing_info.selling_price.currency_code : '';
       newData.coupon_code = data.coupon_code;
       newData.coupon_applied = data.coupon_applied;
       newData.cart_shippable = data.cart_shippable;

@@ -24,7 +24,7 @@ import CaptchaContent from '../Captcha/CaptchaContent';
 import AddrCard from './includes/AddrCard';
 import VaultCard from './includes/VaultCard';
 import CodCard from './includes/CodCard';
-
+import { Tabs, Tab, TabPanel } from '../CustomTab'
 import lang from '../../../utils/language';
 
 import main_en from '../../../layout/main/main_en.styl';
@@ -43,69 +43,6 @@ const cookies = new Cookies();
 
 const language = cookies.get('language') || 'en';
 const country = cookies.get('country') || 'SAU';
-const TabPanel = ({value,index,children, ...other}) => {
-  return (
-    <div className={`${ value !== index ? `${styles['hideBlock']}` : `${styles['displayBlock']}`}`}>
-      {children}
-    </div>
-  )
-}
-const Tab = ({ value, tabType, label,selected, name,onCallback }) => {
-  const onInputChange = (e) => {
-    if(onCallback) {
-      onCallback(e, value)
-    }
-  }
-  const renderTabType = () => {
-    if(tabType === 'radioInput') {
-      return (
-        <div className={`${styles['fs-12']} ${styles['pr-30']}`}>
-          <input
-            type='radio'
-            name={name}
-            onChange={onInputChange}
-            value={value}
-            checked={selected}
-            className={styles['radio-btn']}
-          />
-          <label className={styles['pl-5']}>
-            {label}
-          </label>
-        </div>
-      )
-    }
-  }
-  return (
-    <div>
-      {renderTabType()}
-    </div>
-  )
-}
-const Tabs = ({ children, onCallback,value }) => {
-  let childIndex = 0;
-  const childrenProp = React.Children.map(children, child => {
-    if(!React.isValidElement(child)){
-      return null
-    }
-    const childValue = child.props.value === undefined ? childIndex : child.props.value
-    const selected = childValue === value
-
-    childIndex += 1
-
-    return React.cloneElement(child, {
-      selected,
-      onCallback,
-      value:childValue
-    })
-  })
-  return (
-    <div className={`${styles['flex']} ${styles['pt-5']} ${styles['pb-5']}`}>
-      {
-        childrenProp
-      }
-    </div>
-  )
-}
 
 const InstaCheckoutDetails = ({ details, selectedAddr,addressResults,showMiniAddress,isPdp,...props }) => {
  const [value,setValue] = useState(details.payment_options_available.length === 1 && details.payment_options_available[0].type === 'VOUCHER' ? 'VOUCHER' : 'SAVED_CARD');
@@ -139,7 +76,12 @@ const InstaCheckoutDetails = ({ details, selectedAddr,addressResults,showMiniAdd
    if(filteredData.length > 0) {
      return filteredData.map((item,index) => {
        return (
-         <TabPanel value={value} index={item.type}>
+         <TabPanel
+           value={value}
+           index={item.type}
+           activeTabPanel={`${styles['displayBlock']}`}
+           nonactiveTabPanel={`${styles['hideBlock']}`}
+          >
            <div
              className={
                `${styles['border']}
@@ -231,7 +173,7 @@ const InstaCheckoutDetails = ({ details, selectedAddr,addressResults,showMiniAdd
 
  }
 
- 
+
  const getTilaCredit = (data) => {
    let filteredData = data.payment_options_available.filter((item) => {
      return item.type === 'VOUCHER'
@@ -261,14 +203,19 @@ const InstaCheckoutDetails = ({ details, selectedAddr,addressResults,showMiniAdd
    })
    if(filteredData.length > 0) {
      return (
-       <Tabs value={value} onCallback={getCurrentTabValue}>
+       <Tabs
+         value={value}
+         onCallback={getCurrentTabValue}
+         tabsClass={`${styles['flex']} ${styles['pt-5']} ${styles['pb-5']}`}>
           {
               filteredData.map((item,index) => {
                 return (
                   <Tab
+                    tabClass={`${styles['fs-12']} ${styles['pr-30']}`}
                     label={`${item.type === 'SAVED_CARD' ? 'Credit/Debit Card' : 'COD'}`}
                     value={item.type}
                     name={item.type}
+                    btnStyle={styles['radio-btn']}
                     tabType={item.type === 'VOUCHER' ? 'checkbox' : 'radioInput'}
                   />
                 )
@@ -511,7 +458,7 @@ getNewFilteredResult = () => {
     return (
       <div className={`${styles['instant-checkout']} ${styles['p-10']}`}>
         {
-          iframe_url ? 
+          iframe_url ?
             {
               true:<iframe sandbox="allow-forms allow-modals allow-popups-to-escape-sandbox allow-popups allow-scripts allow-top-navigation allow-same-origin" src={iframe_url} style={{ height: '426px', width: '500px', border: '0' }} class="h-200 desktop:h-376 w-full"></iframe>,
               false:<Modal
