@@ -583,7 +583,7 @@ const mapDispatchToProps = dispatch =>
       autoCompleteCoutry: productActionCreators.autoCompleteCoutry,
       getCitiesByCountryCode: productActionCreators.getCitiesByCountryCode,
       getCountries: productActionCreators.getCountries,
-      selectDeliverToAddress: actionCreators.selectDeliverToAddress
+      selectDeliverToAddress: actionCreators.selectDeliverToAddress,
     },
     dispatch,
   );
