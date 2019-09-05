@@ -1,4 +1,6 @@
 import moment from 'moment';
+import { languageDefinations } from '../../../utils/lang';
+const { PERSONAL_INFO_MODAL } = languageDefinations();
 
 const getUserInfo = (store) => {
   if (store.personalDetailsReducer.data) {
@@ -20,10 +22,10 @@ const getUserInfo = (store) => {
       if (contactInfo.pwd_updated_at) {
         const lastUpdated = contactInfo.pwd_updated_at;
         const msg = moment(lastUpdated).subtract(new Date().getTimezoneOffset()).fromNow();
-        contactInfo.lastUpdated = `Last updated ${msg}`;
+        contactInfo.lastUpdated = `${PERSONAL_INFO_MODAL.LAST_UPDATED} ${msg}`;
       }
       else
-        contactInfo.lastUpdated = 'Not Available';
+        contactInfo.lastUpdated = PERSONAL_INFO_MODAL.NOT_AVAILABLE;
 
     }
     let personalInfo = {}

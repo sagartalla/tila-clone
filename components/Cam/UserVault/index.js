@@ -91,7 +91,7 @@ class UserVault extends Component {
 
   addBtnClickHandler() {
     const {
- card_number, user_name, exp_mm, exp_yr 
+ card_number, user_name, exp_mm, exp_yr
 } = this.state;
     this.props.addCard({
       bank_name: 'HDFC',
@@ -152,7 +152,6 @@ class UserVault extends Component {
 const mapStateToProps = (store, ownProps) => ({
   results: ownProps.isInstantCheckout ? selectors.getSavedCardDetails(store) : selectors.getCardResults(store),
   transactions: selectors.getTransactions(store),
-  tilaCredit: selectors.getTilaCredit(store),
 });
 
 const mapDispatchToProps = dispatch =>

@@ -71,3 +71,41 @@
   border-radius: 5px;
   border: 1px solid #777;
 }
+
+.warranty-class-name .modal-content {
+  border: 1px solid #fff;
+  z-index: 9999;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.5);
+  background-color: #fff;
+  height: 100vh;
+  width: 440px;
+  right: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  left: auto;
+  border-radius: 0;
+  animation-name: slideOpen;
+  animation-duration: 0.7s;
+  animation-fill-mode: both;
+}
+
+.warranty-class-name .modal-dialog {
+ margin: 0;
+}
+
+.warranty-class-name {
+  right: 0;
+  left: auto;
+  width: 440px;
+  padding: 0 !important;
+}
+
+
+@keyframes slideOpen {
+from {right: -800px;}
+to {right: 0;}
+}
+@keyframes slideClose {
+from {right: 0px;}
+to {right: -800px;}
+}

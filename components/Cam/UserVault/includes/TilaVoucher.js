@@ -64,20 +64,20 @@ const TilaVoucher = (props) => {
                                     {transaction_description}
                                 </Col>
                                 <Col md={2}>
-                                    {transaction_type === 'CREDIT' ? amount : ''}
+                                    {transaction_type === 'CREDIT' ? amount.display_value : ''}
                                 </Col>
                                 <Col md={2}>
-                                    {transaction_type === 'DEBIT' ? amount : ''}
+                                    {transaction_type === 'DEBIT' ? amount.display_value : ''}
                                 </Col>
                                 <Col md={2}>
-                                    {balance}
+                                    {balance.display_value}
                                 </Col>
                             </Row>
                         </div>
                     );
                 }) }
-            </div> 
-            : 
+            </div>
+            :
             // <div className={`${styles['vault-card-body']} ${styles['p-20-40']}`}>
             //     <h4 className={`${styles['pb-5']} ${styles['fontW300']} ${styles['lgt-blue']}`}>No voucher history</h4>
             // </div>

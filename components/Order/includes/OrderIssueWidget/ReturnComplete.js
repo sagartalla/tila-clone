@@ -22,8 +22,9 @@ class ReturnComplete extends Component {
 
   getExchangeType = (issueType) => (
     {
-      RETURN:ORDER_PAGE.REQ_RETURN,
-      EXCHANGE:ORDER_PAGE.REQ_EXCHANGE,
+      RETURN: ORDER_PAGE.REQ_RETURN,
+      REPLACE: ORDER_PAGE.REQ_RETURN,
+      EXCHANGE: ORDER_PAGE.REQ_EXCHANGE,
       CLAIMWARRANTY: ORDER_PAGE.YOUR_ORDER,
       DAMAGEWARRANTY:ORDER_PAGE.YOUR_ORDER,
     }[issueType]
@@ -31,6 +32,7 @@ class ReturnComplete extends Component {
   getSuccessMessageType = (issueType) => (
     {
       RETURN:ORDER_PAGE.REQ_SUCCESS,
+      REPLACE: ORDER_PAGE.REQ_SUCCESS,
       EXCHANGE:ORDER_PAGE.REQ_SUCCESS,
       CLAIMWARRANTY: ORDER_PAGE.CLAIM_WARRANTY_MSG,
       DAMAGEWARRANTY:ORDER_PAGE.CLAIM_WARRANTY_MSG,
@@ -39,8 +41,8 @@ class ReturnComplete extends Component {
   getExchangeMsgType = (issueType) => (
     {
       RETURN:ORDER_PAGE.RETURN_ORDER_MSG,
-      EXCHANGE:ORDER_PAGE.EXCHANGE_ORDER_MSG_NOTE,
-    }[issueType]   
+      EXCHANGE:ORDER_PAGE.RETURN_ORDER_MSG,
+    }[issueType]
   )
   render() {
 
@@ -70,16 +72,28 @@ class ReturnComplete extends Component {
                         <span>
                           <span>
                             {
-                              this.getExchangeType(orderIssue.issueType)                              
+                              this.getExchangeType(orderIssue.issueType)
                             }
                           </span>
-                          <span className={styles['fontW600']}> {selectedItem.name} {this.getSuccessMessageType(orderIssue.issueType)}</span>
+                          <span><span className={styles['fontW600']}>{selectedItem.name}</span> {this.getSuccessMessageType(orderIssue.issueType)}</span>
                         </span>
                       </div>
                       <div>
                         <span>
+                          <div>{this.getExchangeMsgType(orderIssue.issueType)}</div>
                           {
-                            <div>{this.getExchangeMsgType(orderIssue.issueType)}</div>
+                            orderIssue.issueType === 'RETURN' ?
+                            <div>
+                              <div>{ORDER_PAGE.RETURN_ORDER_MSG_NOTE}</div>
+                            </div>
+                              : ''
+                          }
+                          {
+                            orderIssue.issueType === 'EXCHANGE' ?
+                            <div>
+                              <div>{ORDER_PAGE.EXCHANGE_ORDER_MSG_NOTE}</div>
+                            </div>
+                              : ''
                           }
                           {
                             orderIssue.issueType === 'REPLACE' ?

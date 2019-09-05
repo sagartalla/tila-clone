@@ -6,6 +6,7 @@ import DT from './includes/DT';
 import FT from './includes/FT';
 import BT2a from './includes/BT2a';
 import BT3a from './includes/BT3a';
+import BT6a from './includes/BT6a';
 import CBT6a from './includes/CBT6a';
 import CBT6b from './includes/CBT6b';
 import CBT12 from './includes/CBT12';
@@ -303,6 +304,15 @@ class PageData extends React.Component {
         return (
           
           <BT3a content={content} index={`${content.layout_id}${index}`}/>
+        );
+      }
+
+      case 'BT6a': {
+        
+
+        return (
+          
+          <BT6a content={content} index={`${content.layout_id}${index}`}/>
         );
       }
       default: return null;

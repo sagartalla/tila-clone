@@ -36,7 +36,7 @@ const PaymentStatus = props => {
         </Col>
         <Col md={10} xs={9} sm={9}>
           <div className={`${styles['flx-spacebw-alignc']}`}>
-            <h3 className={`${styles['mt-0']} ${styles['light-gry-clr']} ${styles['fontW600']}`}>{message}</h3>
+            <h3 className={`${styles['mt-0']} ${props.status == "SUCCESSFUL" ? styles['light-gry-clr'] : styles['google-clr']}  ${styles['fontW600']}`}>{message}</h3>
             {
               props.status == "SUCCESSFUL" ?
                 <a href={`/${language}/customer/orders`} className={styles['mb-20']}>
