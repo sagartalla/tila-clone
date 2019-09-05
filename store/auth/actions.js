@@ -135,7 +135,7 @@ const actionCreators = {
     type: actions.RESET_LOGIN_ERROR,
   }),
   showLogin: () => ({
-    type: actions.SHOW_LOGIN,
+    type: actions.SHOW_LOGIN_SCREEN,
   }),
   storePostLoginActionInfo: ret => ({
     type: actions.STORE_POST_LOGIN_ACTION_INFO,
@@ -171,7 +171,7 @@ const actionCreators = {
     type: actions.VERIFY_RESEND_EMAIL,
     payload: api.sendOtpToEmailId(status),
   }),
-  getUserInfoData: (params={}) => ({
+  getUserInfoData: (params = {}) => ({
     type: actions.GET_USER_INFO,
     payload: api.getUserInfo(params),
   }),
@@ -188,8 +188,8 @@ const actionCreators = {
       type: actions.GET_DOMAIN_COUNTRIES,
       payload: api.getDomainCountries(),
     }).then((data) => {
-      if(shippingInfo) { return; }
-      const {city_name, code} = data.value.data.filter(function(i) { return i.country.code3 === currentCountry })[0].city
+      if (shippingInfo) { return; }
+      const { city_name, code } = data.value.data.filter(function (i) { return i.country.code3 === currentCountry })[0].city
       dispatch(actionCreators.setCity({
         "country": currentCountry,
         "city": code,
@@ -216,7 +216,7 @@ const actionCreators = {
   closeThankYouScreen: () => ({
     type: actions.ClOSE_THANKYOU_SCREEN,
   }),
-  
+
   forgotPassword: (body) => {
     return ({
       type: actions.FORGOT_PASSWORD,
