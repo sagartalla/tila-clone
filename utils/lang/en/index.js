@@ -55,7 +55,7 @@ export const EN_KEYWORDS = {
     ITEM_IN_YOUR_WISHLIST: 'item in Wishlist',
     ITEMS_IN_YOUR_WISHLIST: 'items in Wishlist',
     MY_CART: 'My Cart',
-    MY_CART_EMPTY: 'So many products on Tila and yet i Feel Empty',
+    MY_CART_EMPTY: 'So many products on Tila and yet, I feel empty!',
     TILA_CARE_PROTECTION: 'Tila Care Protection',
     VIEW_T_AND_C: 'View T & C ',
     DURATION: 'Duration',
@@ -398,7 +398,9 @@ export const EN_KEYWORDS = {
     MOBILE: 'Mobile',
     NOTIFY: 'Notify',
     NEXT: 'Next',
-    YOUR_PERSONAL :'Your personal information has been updated.'
+    YOUR_PERSONAL :'Your personal information has been updated.',
+    LAST_UPDATED: 'Last updated',
+    NOT_AVAILABLE: 'Not Available',   
   },
   NOTITICATION_INFO: {
     HEADING: 'New Notifications',
@@ -547,7 +549,7 @@ export const EN_KEYWORDS = {
     RETURN: 'Returns',
     CONSUMER_RIGHT: 'Consumer Rights',
     DOWNLOAD_APP: 'Download the app',
-    TILA_RIGHTS: 'Tila.com. All rights reserved',
+    TILA_RIGHTS: 'Tila.com. All rights reserved 2019',
     SIZE_CHART: 'Size Chart',
     WOMEN_CLOTHING: 'Women\'s Clothing',
     MEN_CLOTHING: 'Men\'s Clothing',
@@ -751,6 +753,7 @@ export const EN_KEYWORDS = {
     SUCCESS: 'Success',
     ORDER_DETAILS_SUMMERY: 'Order Summary',
     THERE_IS_AN_EXCHANGE_ORDER: 'This is an exchange order on the item you have requested for exchange.',
+    THERE_IS_AN_REPLACE_ORDER: "This is an replace order on the item you have requested for replace.",       
     REFUND_INITIATED: 'Refund Initiated.',
     THIS_ORDER_CONTAINS_A_GIFT: 'This order contains gift.',
     VIEW_DETAILS: 'View details',
@@ -768,6 +771,10 @@ export const EN_KEYWORDS = {
     REFUND: 'Refund',
     CONTINUE_SHOPPING: 'CONTINUE SHOPPING',
     ADD_COMMENT: 'Add a comment(optional)',
+    REPLACEMENT: 'Replacement',
+    ORDERED_ON: 'Ordered on',
+    INCLUSIVE_OF_ALL_TAXES: '*inclusive of all taxes',
+    TILA_CARE_SERVICE_FEE: 'Tila Care Service Fee :',
   },
   COUPON_OFFERS: {
     VIEW_TERMS: 'Terms & Conditions',
@@ -965,7 +972,8 @@ export const EN_KEYWORDS = {
     SELECT_YOUR_ISSUE: 'SELECT YOUR ISSUE',
     SELECT_ORDER_WITH_ISSUE: 'SELECT THE ORDER WITH THE ISSUE',
     MY_ORDERS: 'MY ORDERS',
-    SIGN_IN_MSG: 'Please sign in to view your orders'
+    SIGN_IN_MSG: 'Please sign in to view your orders',
+    GREETING: 'Hi, How can we help you today ?',
   },
   SEO_CONTENT: {
     HOME_H1_CONTENT: 'Online Shopping Store in Saudi',

@@ -34,6 +34,7 @@ const sendMapDataApi = (order_id, params) => axios.post(`${constants.ORDERS_API_
 const getRefundOptions = (orderItemId, issueType) => axios.get(`${constants.ORDERS_API_URL}/api/v1/order_item/${orderItemId}/refunds_options/${issueType}`);
 
 const setExchangeOrder = params => axios.post(`${constants.ORDERS_API_URL}/api/v1/order/exchange`, params);
+const setReplaceOrder = params => axios.post(`${constants.ORDERS_API_URL}/api/v1/order/replace`, params);
 
 const track = ({
   event,
@@ -96,4 +97,5 @@ export default {
   getInvoice,
   track,
   submitClaimWarranty,
+  setReplaceOrder,
 };

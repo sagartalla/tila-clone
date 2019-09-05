@@ -169,9 +169,7 @@ class Reason extends Component {
         this.props.setAddressData(warrantyReasonParams);
         this.props.setOrderIssueData(params)
       }
-    else if (
-      this.state.selectedMode === 'Exchange'
-    ) {
+    else if (this.state.selectedMode === 'Exchange') {
       if (this.state.selectedVariant.length <= 0) {
         this.setState({
           displaySizeError: true
@@ -193,12 +191,10 @@ class Reason extends Component {
     else {
       let paramObject = Object.assign({},params,{issueType:'REPLACE'})
       this.props.setOrderIssueData(paramObject)
-      this.props.setExchangeOrder({
+      this.props.setReplaceOrder({
         comments: comment,
         reason,
         sub_reason: subReason,
-        new_listing_id: listingObj.listing_id,
-        variant_id: listingObj.variant_id,
         order_item_id: query.orderItemId
       })
       goToNextStep();
@@ -461,6 +457,7 @@ const mapDispatchToProps = dispatch =>
       refundOptions:actionCreators.getRefundOptions,
       getOrderDetails:actionCreators.getOrderDetails,
       getWarrantyReason:actionCreators.getWarrantyReason,
+      setReplaceOrder: actionCreators.setReplaceOrder,
     },
     dispatch,
   );

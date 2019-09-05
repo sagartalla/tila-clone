@@ -22,7 +22,7 @@ class ForgotPassword extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      radioValue: '',
+      radioValue: 'email',
     };
     this.sendLink = this.sendLink.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -71,7 +71,7 @@ class ForgotPassword extends Component {
         <React.Fragment>
           <span className={`${styles['radio-buttons']} ${styles.flex} ${styles['flex-colum']} ${styles['justify-around']}`}>
             <div className={`${styles.flex}`}>
-              <input name="addr_checkbox" type="radio" className={`${styles['radio-btn']} ${styles['radio-margin']}`} data-id="email" onChange={this.handleChange} />
+              <input name="addr_checkbox" type="radio" className={`${styles['radio-btn']} ${styles['radio-margin']}`} data-id="email" checked={radioValue === 'email'} onChange={this.handleChange} />
               <span className={`${styles['ml-10']}`}>
                 <div className={radioValue === 'email' ? `${styles['fs-12']} ${styles.fontW600}` : `${styles['fs-12']}`}>{LOGIN_PAGE.RESET_PASSWORD_BY_EMAIL}</div>
                 <div className={radioValue === 'email' ? `${styles['fs-14']} ${styles.fontW600}` : `${styles['fs-14']}`}>{userData && userData.email}</div>
@@ -82,11 +82,11 @@ class ForgotPassword extends Component {
               <div className={`${styles.border}`} />
               <span>
                 <div className={`${styles.flex}`}>
-                  <input name="addr_checkbox" type="radio" className={`${styles['radio-btn']}`} data-id="otp" onChange={this.handleChange} />
+                  <input name="addr_checkbox" type="radio" className={`${styles['radio-btn']}`} data-id="otp" checked={radioValue === 'otp'} onChange={this.handleChange} />
                   <span className={`${styles['ml-10']}`}>
                     <div className={radioValue === 'otp' ? `${styles['fs-12']} ${styles.fontW600}` : `${styles['fs-12']}`}>{LOGIN_PAGE.RESET_PASSWORD_BY_MOBILE}</div>
                     <div className={radioValue === 'otp' ? `${styles.fontW600} ${styles.width50} ${styles.flex} ${styles['justify-between']}` : `${styles.flex} ${styles.width50} ${styles['justify-between']}`}>
-                      <div className={`${styles['fashion-color']} ${styles['fs-14']}`}>{userData && (userData.mobile_country_code)}</div>
+                      <div className={`${styles['fashion-color']} ${styles['fs-14']}`}>{userData && ('+' + '' + userData.mobile_country_code)}</div>
                       <div className={`${styles['fs-14']}`}>{userData && userData.mobile_no}</div>
                     </div>
                   </span>
